@@ -1,0 +1,42 @@
+
+BODY {
+	font-size: 12px;
+	font-family: Verdana, Helvetica, Sans-Serif;
+	font-weight: normal;
+}
+
+/* Titres de chapitres : */
+H1 {
+	font-size: 18px;
+	font-family: Bookman Old Style, Times, Serif;
+	font-weight: bold;
+}
+
+/* En-tete haut cache */
+.navheader {
+	position: absolute;
+	visibility: hidden;
+}
+
+/* En-tete bas : petite police */
+.navfooter td, .navfooter {
+	font-size: 10px;
+	font-family: Verdana, Helvetica, Sans-Serif;
+}
+
+/* Police standard pour le code */
+.literal, .programlisting, .screen {
+	font-size: 12px;
+}
+
+/* Listes a puce pour la table des matieres : */
+.toc {
+	list-style-image: url(tiret.gif);
+	padding-left: 4px;
+	margin-left: 2px;
+}
+.toc2 {
+	list-style-image: url(plus.gif);
+        padding-left: 4px;
+        margin-left: 2px;
+}

@@ -1,0 +1,283 @@
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: admin.po,v 1.4 2006/02/09 20:12:23 benjamin Exp $
+msgid ""
+msgstr ""
+"Project-Id-Version: $Id: admin.po,v 1.4 2006/02/09 20:12:23 benjamin Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+
+msgid "err_admin_1"
+msgstr "-- Only administrators can access this page !! --"
+
+msgid "err_admin_2"
+msgstr "Account not found"
+
+msgid "err_admin_3"
+msgstr "This login already exists"
+
+msgid "err_admin_4"
+msgstr "-- I cannot create this account --"
+
+msgid "err_admin_5"
+msgstr "Please enter a valid email address"
+
+msgid "err_admin_6"
+msgstr "All fields are mandatory"
+
+msgid "err_admin_7"
+msgstr "You can ask for your password only once a day !"
+
+msgid "err_admin_8"
+msgstr "This account is ALREADY an administrator account"
+
+msgid "err_admin_9"
+msgstr "This account is NOT an administrator account !"
+
+msgid "err_admin_10"
+msgstr "Login can only contains characters a-z, 0-9 and -"
+
+msgid "err_admin_11"
+msgstr "This TLD does not exist"
+
+msgid "err_admin_12"
+msgstr "This TLD already exists"
+
+msgid "err_admin_13"
+msgstr "The login is too long (16 chars max)"
+
+msgid "This page is restricted to authorized staff"
+msgstr "This page is restricted to authorized staff"
+
+msgid "New member"
+msgstr "New member"
+
+msgid "Initial password"
+msgstr "Initial password"
+
+msgid "Surname"
+msgstr "Surname"
+
+msgid "First Name"
+msgstr "First Name"
+
+msgid "Email address"
+msgstr "Email address"
+
+msgid "Create a new member"
+msgstr "Create a new member"
+
+msgid "The new member has been successfully created"
+msgstr "The new member has been successfully created"
+
+msgid "Click here to continue"
+msgstr "Click here to continue"
+
+msgid "Member '%s' does not exist"
+msgstr "Member '%s' does not exist"
+
+msgid "Member %s successfully deleted"
+msgstr "Member %s successfully deleted"
+
+msgid "Member Edition"
+msgstr "Member Edition"
+
+msgid "The member has been successfully edited"
+msgstr "The member has been successfully edited"
+
+msgid "Account Enabled ?"
+msgstr "Account Enabled ?"
+
+msgid "Edit this account"
+msgstr "Edit this account"
+
+msgid "Member list"
+msgstr "Member list"
+
+msgid "Here is the list of hosted members"
+msgstr "Here is the list of hosted members"
+
+msgid "Edit"
+msgstr "Edit"
+
+msgid "Quotas"
+msgstr "Quotas"
+
+msgid "Connect as"
+msgstr "Connect as"
+
+msgid "Delete checked accounts"
+msgstr "Delete checked accounts"
+
+msgid "Editing the quotas of a member"
+msgstr "Editing the quotas of a member"
+
+msgid "The quotas has been successfully edited"
+msgstr "The quotas has been successfully edited"
+
+msgid "Quota"
+msgstr "Quota"
+
+msgid "Total"
+msgstr "Total"
+
+msgid "Used"
+msgstr "Used"
+
+msgid "Description"
+msgstr "Description"
+
+msgid "Edit the quotas"
+msgstr "Edit the quotas"
+
+msgid "Recalculate the quotas of the account"
+msgstr "Recalculate the quotas of the account"
+
+msgid "The user has no database"
+msgstr "The user has no database"
+
+msgid "Enable the database"
+msgstr "Enable the database"
+
+msgid "The user has a MySQL database"
+msgstr "The user has a MySQL database"
+
+msgid "Disable the database"
+msgstr "Disable the database"
+
+msgid "There is only one administrator account, you cannot turn this account back to normal"
+msgstr "There is only one administrator account, you cannot turn this account back to normal"
+
+msgid "This account is a super-admin account"
+msgstr "This account is a super-admin account"
+
+msgid "Turn this account back to normal"
+msgstr "Turn this account back to normal"
+
+msgid "Make this account a super admin one"
+msgstr "Make this account a super admin one"
+
+msgid "Disk space (in KB)"
+msgstr "Disk space (in KB)"
+
+msgid "Number of email accounts"
+msgstr "Number of email accounts"
+
+msgid "Number of mailing-lists"
+msgstr "Number of mailing-lists"
+
+msgid "Number of domains"
+msgstr "Number of domains"
+
+msgid "Number of FTP accounts"
+msgstr "Number of FTP accounts"
+
+msgid "Number of web statistics"
+msgstr "Number of web statistics"
+
+msgid "Some TLD cannot be deleted..."
+msgstr "Some TLD cannot be deleted..."
+
+msgid "The requested TLD has been deleted"
+msgstr "The requested TLD has been deleted"
+
+msgid "Manage allowed domains (TLD)"
+msgstr "Manage allowed domains (TLD)"
+
+msgid "Here is the list of the TLD allowed on this server. Each TLD can be allowed or denied after some checks (whois, ns, domain exists...)"
+msgstr "Here is the list of the TLD allowed on this server. Each TLD can be allowed or denied after some checks (whois, ns, domain exists...)"
+
+msgid "TLD"
+msgstr "TLD"
+
+msgid "Allowed Mode"
+msgstr "Allowed Mode"
+
+msgid "Delete the checked TLD"
+msgstr "Delete the checked TLD"
+
+msgid "Add a new TLD"
+msgstr "Add a new TLD"
+
+msgid "The TLD has been successfully added"
+msgstr "The TLD has been successfully added"
+
+msgid "Enter the new TLD (without the first dot) and choose what check should be done."
+msgstr "Enter the new TLD (without the first dot) and choose what check should be done."
+
+msgid "Warning : only some final tld are known in the whois function of AlternC, please check m_domains.php accordingly."
+msgstr "Warning : only some final tld are known in the whois function of AlternC, please check m_domains.php accordingly."
+
+msgid "Edit a TLD"
+msgstr "Edit a TLD"
+
+msgid "Edit this TLD"
+msgstr "Edit this TLD"
+
+msgid "The TLD has been successfully edited"
+msgstr "The TLD has been successfully edited"
+
+msgid "Change the default quotas"
+msgstr "Change the default quotas"
+
+msgid "This TLD is forbidden"
+msgstr "This TLD is forbidden"
+
+msgid "primary DNS is checked in WHOIS db"
+msgstr "primary DNS is checked in WHOIS db"
+
+msgid "primary & secondary DNS are checked in WHOIS db"
+msgstr "primary & secondary DNS are checked in WHOIS db"
+
+msgid "Domain must exist, but don't do any DNS check"
+msgstr "Domain must exist, but don't do any DNS check"
+
+msgid "Domain can be installed, no check at all"
+msgstr "Domain can be installed, no check at all"
+
+msgid "Domain can be installed, force NO DNS hosting"
+msgstr "Domain can be installed, force NO DNS hosting"
+
+msgid "Manage the members"
+msgstr "Manage the members"
+
+msgid "Admin Control Panel"
+msgstr "Admin Control Panel"
+
+msgid "General SQL Admin"
+msgstr "General SQL Admin"
+
+msgid "Default quotas successfully changed"
+msgstr "Default quotas successfully changed"
+
+msgid "Can he change its password"
+msgstr "Can he change its password"
+
+msgid "Account created by %s"
+msgstr "Account created by %s"
+
+msgid "Locked Account"
+msgstr "Locked Account"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

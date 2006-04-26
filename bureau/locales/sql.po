@@ -1,0 +1,215 @@
+# AlternC's Translation
+# Copyright (C) 2006 AlternC's translation team <i18n@alternc.org>
+# This file is distributed under the same license as the AlternC's package.
+# AlternC's translation team <i18n@alternc.org>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"$id$\n"
+"Report-Msgid-Bugs-To: i18n@alternc.org\n"
+"POT-Creation-Date: 2006-02-22 04:22+0000\n"
+"PO-Revision-Date: 2006-02-22 04:22 UTC\n"
+"Last-Translator: Team AlternC <i18n@alternc.org>\n"
+"Language-Team: Team AlternC <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: admin/menu_sql.php:35
+msgid "Databases"
+msgstr ""
+
+#: admin/menu_sql.php:36 admin/sql_admin.php:47
+msgid "SQL Admin"
+msgstr ""
+
+#: admin/sql_addmain.php:35
+msgid "Your database has been successfully created"
+msgstr ""
+
+#: admin/sql_add.php:34 admin/sql_doadd.php:34
+msgid "err_mysql_1"
+msgstr ""
+
+#: admin/sql_add.php:41 admin/sql_list.php:82
+msgid "Create a new database"
+msgstr ""
+
+#: admin/sql_add.php:53 admin/sql_getparam.php:52 admin/sql_list.php:53
+#: admin/sql_list.php:99 admin/sql_passchg.php:54
+msgid "Database"
+msgstr ""
+
+#: admin/sql_add.php:56
+msgid "Create this new database."
+msgstr ""
+
+#: admin/sql_bck.php:40 admin/sql_del.php:53 admin/sql_dorestore.php:39
+#: admin/sql_getparam.php:40 admin/sql_list.php:40 admin/sql_passchg.php:40
+#: admin/sql_restore.php:40
+msgid "MySQL Databases"
+msgstr ""
+
+#: admin/sql_bck.php:48
+#, php-format
+msgid "Manage the SQL backup for database %s"
+msgstr ""
+
+#: admin/sql_bck.php:53
+msgid "Do sql backup?"
+msgstr ""
+
+#: admin/sql_bck.php:57
+msgid "No backup"
+msgstr ""
+
+#: admin/sql_bck.php:58
+msgid "Weekly backup"
+msgstr ""
+
+#: admin/sql_bck.php:59
+msgid "Daily backup"
+msgstr ""
+
+#: admin/sql_bck.php:63
+msgid "How many backup should be kept?"
+msgstr ""
+
+#: admin/sql_bck.php:75
+msgid "Compress the backups? (gzip)"
+msgstr ""
+
+#: admin/sql_bck.php:77 admin/sql_del.php:69
+msgid "No"
+msgstr ""
+
+#: admin/sql_bck.php:78 admin/sql_del.php:69
+msgid "Yes"
+msgstr ""
+
+#: admin/sql_bck.php:82
+msgid "In which folder do you want to store the backups?"
+msgstr ""
+
+#: admin/sql_bck.php:92
+msgid "Change the SQL backup parameters"
+msgstr ""
+
+#: admin/sql_bck.php:101 admin/sql_dorestore.php:55 admin/sql_restore.php:69
+msgid "You currently have no database defined"
+msgstr ""
+
+#: admin/sql_del.php:41
+#, php-format
+msgid "The database %s has been successfully deleted"
+msgstr ""
+
+#: admin/sql_del.php:54
+msgid "WARNING"
+msgstr ""
+
+#: admin/sql_del.php:54
+msgid "Confirm the deletion of the following SQL databases"
+msgstr ""
+
+#: admin/sql_del.php:55
+msgid "This will delete all the tables currently in those db."
+msgstr ""
+
+#: admin/sql_dobck.php:37
+msgid "Your backup parameters has been successfully changed."
+msgstr ""
+
+#: admin/sql_dorestore.php:43
+msgid "Restore a SQL backup"
+msgstr ""
+
+#: admin/sql_dorestore.php:49
+msgid ""
+"Your database has been restored, check out the previous text for error "
+"messages."
+msgstr ""
+
+#: admin/sql_getparam.php:47
+msgid "Your current settings are"
+msgstr ""
+
+#: admin/sql_getparam.php:49 admin/sql_list.php:96 admin/sql_passchg.php:51
+msgid "Username"
+msgstr ""
+
+#: admin/sql_getparam.php:50 admin/sql_list.php:97 admin/sql_passchg.php:52
+msgid "Password"
+msgstr ""
+
+#: admin/sql_getparam.php:51 admin/sql_list.php:98 admin/sql_passchg.php:53
+msgid "SQL Server"
+msgstr ""
+
+#: admin/sql_list.php:48
+msgid "help_sql_list_ok"
+msgstr ""
+
+#: admin/sql_list.php:53 admin/sql_list.php:64
+msgid "Backup"
+msgstr ""
+
+#: admin/sql_list.php:53 admin/sql_list.php:65
+msgid "Restore"
+msgstr ""
+
+#: admin/sql_list.php:53
+msgid "Size"
+msgstr ""
+
+#: admin/sql_list.php:74
+msgid "Delete the checked databases"
+msgstr ""
+
+#: admin/sql_list.php:84
+msgid "Change the SQL password"
+msgstr ""
+
+#: admin/sql_list.php:85
+msgid "Get the current SQL parameters"
+msgstr ""
+
+#: admin/sql_list.php:91
+msgid "help_sql_list_no"
+msgstr ""
+
+#: admin/sql_list.php:100
+msgid "Create my main database"
+msgstr ""
+
+#: admin/sql_passchg.php:46
+msgid ""
+"Enter the new password of your SQL database and click 'change the password' "
+"to change it"
+msgstr ""
+
+#: admin/sql_passchg.php:55
+msgid "Change the password"
+msgstr ""
+
+#: admin/sql_pass.php:36
+msgid "Your password has been successfully changed."
+msgstr ""
+
+#: admin/sql_restore.php:48
+#, php-format
+msgid "Restore a SQL backup for database %s"
+msgstr ""
+
+#: admin/sql_restore.php:54
+msgid "Please enter the filename containing SQL data to be restored."
+msgstr ""
+
+#: admin/sql_restore.php:58
+msgid "Restore my database"
+msgstr ""
+
+#: admin/sql_restore.php:64
+msgid "Note: If the filename ends with .gz, it will be uncompressed before."
+msgstr ""

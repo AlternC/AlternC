@@ -1,0 +1,160 @@
+alternc (0.9.4) stable; urgency=low
+
+  * maintenance release to fix packaging and security bugs
+  * see https://dev.alternc.org/trac/alternc/milestone/0.9.4 for milestone
+  * changelog at https://dev.alternc.org/trac/alternc/query?status=closed&milestone=0.9.4
+  However, this version contains mainly : 
+  * Integration of Globenet patchs (replacement of do_domains.sh by update_domains.sh and others)
+  * Changing mysql database creation from uid to login name
+  * Major improvements in FHS compliance
+  * Major improvements in config file management and debconf idempotency
+
+ -- Benjamin Sonntag <benjamin@alternc.org>  Wed, 29 Mar 2006 19:34:41 +0200
+
+alternc (0.9.3.1) testing; urgency=low
+
+  * maintenance release to fix packaging and security bugs
+  * see http://mantis.alternc.org/view.php?id=436 for milestones
+  * full changelog at: http://mantis.alternc.org/changelog_page.php
+  * Arch: all to have this package available in all architectures
+  * take over maintainership
+  * release sponsored by Koumbit.net
+
+ -- Antoine Beaupre <anarcat@koumbit.org>  Thu, 19 Jan 2006 20:48:45 +0000
+
+alternc (0.9.3.9-globenet10) stable; urgency=low
+
+  * Fix typo in sqlbackup.sh.
+  * Another fix for empty host in update_domains.sh.
+  * Fix database name spliting in the bureau.
+  * Fix zone reload and php overrides bugs in update_domains.sh.
+  * Don't try to generate php override file for IP hosts.
+  * Redirect apache reload output to the log file in update_domains.sh.
+  * Fix sendmail wrapper behaviour w.r.t. Sender header.
+  * Correct Section and Maintainer field for the Debian package.
+
+ -- Lunar <lunar@anargeek.net>  Sat, 15 Oct 2005 02:43:37 +0200
+
+alternc (0.9.3.9-globenet9) unstable; urgency=low
+
+  * Fix deletion of empty host in update_domains.sh.
+  * Fix DNS zone serial generation.
+
+ -- Lunar <lunar@anargeek.net>  Thu, 22 Sep 2005 00:26:15 +0200
+
+alternc (0.9.3.9-globenet8) unstable; urgency=low
+
+  * Finally fix empty host handling in update_domains.sh. 
+
+ -- Lunar <lunar@anargeek.net>  Wed, 21 Sep 2005 23:45:06 +0200
+
+alternc (0.9.3.9-globenet7) unstable; urgency=low
+
+  * Fix menulist.txt symlink target.
+
+ -- Lunar <lunar@anargeek.net>  Wed, 21 Sep 2005 21:26:02 +0200
+
+alternc (0.9.3.9-globenet6) unstable; urgency=low
+
+  * Create menulist.txt symbolic link in debian/rules
+  * Make menulist.txt migration more likely to happen
+
+ -- Lunar <lunar@anargeek.net>  Wed, 21 Sep 2005 21:08:08 +0200
+
+alternc (0.9.3.9-globenet5) unstable; urgency=low
+
+  * Rewrite sqlbackup.sh, enabling non-local MySQL server
+  * allow mysql users connection from the web server (jonathan)
+  * Move menulist.txt to /etc/alternc
+  * Fix update_domains.sh not working with empty hostnames
+
+ -- Lunar <lunar@anargeek.net>  Wed, 21 Sep 2005 19:57:59 +0200
+
+alternc (0.9.3.9-globenet4) unstable; urgency=low
+
+  * named.template now points to the correct directory..
+
+ -- Lunar <lunar@anargeek.net>  Thu, 15 Sep 2005 00:00:37 +0200
+
+alternc (0.9.3.9-globenet3) unstable; urgency=low
+
+  * Fix mail not sent from PHP scripts
+  * Actually exit update_domains.sh when killed
+  * Fix templates warning
+  * Fix reverse DNS test for BIND_INTERNAL
+
+ -- Lunar <lunar@anargeek.net>  Wed, 14 Sep 2005 23:54:23 +0200
+
+alternc (0.9.3.9-globenet2) unstable; urgency=low
+
+  * Fix alternc.install failling when unable to backup an unecessary file.
+
+ -- Lunar <lunar@anargeek.net>  Tue,  6 Sep 2005 23:18:56 +0200
+
+alternc (0.9.3.9-globenet1) unstable; urgency=low
+
+  * Major overhaul of configuration and install system:
+      - /etc/alternc/alternc.conf is no more and /etc/alternc/local.sh
+        is used by everyone else.
+      - alternc.install was rewritten.
+      - configuration templates now lies in /etc/alternc/templates,
+        tagged as conffiles.
+      - alternc.install will now check if you have changed a configuration
+        file without modifying the template and calling alternc.install
+        again.
+      - alternc.install now determines which configuration files it needs
+        based on what is currently installed, thus it's easier to build
+        custom Debian package with lower deps.
+  * BIND interaction mostly rewritten:
+      - do_domaines.sh is no more and replaced by update_domains.sh
+      - templates used to build automatic.conf and zone files are now in
+        /etc/bind/templates once installed
+      - automatic.conf and slaveip.conf are now generated in /var/alternc/bind
+      - zone files are now generated in /var/alternc/bind/zones.
+      - the secondary feature and /usr/lib/alternc/bind2 are gone
+  * Small things:
+      - Striped the second reject_unauth_destination from postfix main.cf.
+      - Fixed debconf dependency.
+      - Add support for quota on NFS partitions.
+      - Disk usage calculation disabled for directories in browser.
+      - bind_internal is now used in named.conf template.
+      - Fixed phpmyadmin server list bug.
+
+ -- Lunar <lunar@anargeek.net>  Tue,  6 Sep 2005 20:34:53 +0200
+
+alternc (0.9.3) testing; urgency=low
+
+  * Upstream update : many bugfixes, see the bugs related to
+    http://mantis.alternc.org/view.php?id=246 for details
+
+ -- Benjamin Sonntag <benjamin@alternc.org>  Wed, 10 Nov 2004 00:00:00 +0200
+
+alternc (0.9.2-2) testing; urgency=low
+
+  * Upstream update : many bugfixes (http://mantis.alternc.org)
+
+ -- Benjamin Sonntag <benjamin@alternc.org>  Wed, 09 Sep 2004 23:04:26 +0200
+
+alternc (0.9.2-1) testing; urgency=low
+
+  * Upstream update
+
+ -- Benjamin Sonntag <benjamin@alternc.org>  Fri, 27 Aug 2004 18:04:26 +0200
+
+alternc (0.9.1-1) testing; urgency=low
+
+  * Upstream update
+
+ -- Benjamin Sonntag <benjamin@alternc.org>  Fri, 04 Jun 2004 19:31:26 +0200
+
+alternc (0.9-1) testing; urgency=low
+
+  * Initial Release.
+
+ -- Benjamin Sonntag <benjamin@alternc.org>  Tue, 27 Aug 2002 19:31:26 +0200
+
+Local variables:
+mode: debian-changelog
+End:
+
+	

@@ -1,0 +1,58 @@
+.TH TOP_HTTP_USERS 8 "26 novembre 2003"
+.SH NOM
+top_http_users \- statistiques Apache pour AlternC
+.SH SYNOPSIS
+.B top_http_users 
+.RI [ options ] " nombre"
+.SH DESCRIPTION
+Cette page de manuel documente brièvement la commande
+.B top_http_users.
+.PP
+\fBtop_http_users\fP est un programme qui donne de brèves statistiques sur l'usage d'apache en parcourant ses logs.
+.TP
+Les résultats sont triés par :
+* nombre d'occurences dans les logs, par domaine
+.br
+* Taille des données transférées, par domaine
+.br
+* temps d'exécution, par domaine
+.br
+* nombre d'occurences dans les logs, par compte AlternC
+.br
+* Taille des données transférées, par compte AlternC
+.br
+* temps d'exécution, par compte AlternC
+.PP
+Dans la mesure où le fait de parcourir des logs, si ils sont de grande taille, peut emmener à une consomation de ressources importante, il est conseillé d'utiliser l'option -n avec une valeur faible, et ce de manière à avoir des résultats plus rapidement, mais moins précis.
+.PP
+\fBtop_http_users\fP doit être lancé en tant que root.
+.SH OPTIONS
+Ce programme suit la syntaxe des lignes de commande GNU, avec des options longues commencant par deux tirets (`-'). Un résumé de ces options est inclut ci-dessous.
+.TP
+.B \-h, \-\-help
+Affiche un court message d'aide.
+.TP
+.B \-v, \-\-version
+Affiche la version de top_http_users.
+.TP
+.B \-z, \-\-use-gz-logs
+Parcourt les logs gzippés, ainsi que les logs en .1, .2, ... ,.n au lieu de parcourir le log courant.
+.br
+Cette option n'est pas compatible avec l'option \-n.
+.TP
+.B \-s, \-\-ssl
+Parcourt les logs de l'apache-ssl au lieu des logs de l'apache non ssl.
+.TP
+.B \-n, \-\-number=NOMBRE
+Parcourt les NOMBRE dernières lignes du log courant.
+.br
+Cette option n'est pas compatible avec l'option \-z.
+.SH NOMBRE
+Affiche le résultat pour
+.IR nombre
+utilisateurs.
+.SH VOIR AUSSI
+.BR top_mysql_users (8),
+.BR top_ftp_users (8),
+.BR alternc-admintools (8).
+.br

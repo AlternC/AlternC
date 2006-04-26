@@ -1,0 +1,90 @@
+# French AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: sta2.po,v 1.5 2005/04/09 22:04:37 chantal Exp $
+msgid ""
+msgstr ""
+"Project-Id-Version: $Id: sta2.po,v 1.5 2005/04/09 22:04:37 chantal Exp $\n"
+"Report-Msgid-Bugs-To: i18n@alternc.org\n"
+"POT-Creation-Date: 2004-05-24 19:34+0200\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: French <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+
+#: admin/menu_sta2.php:37
+msgid "Raw web statistics"
+msgstr "Statistiques web brutes"
+
+#: admin/sta2_add_raw.php:33
+msgid "You cannot add any new statistics, your quota is over."
+msgstr "Vous ne pouvez plus créer de statistiques, votre quota est atteint."
+
+#: admin/sta2_add_raw.php:40
+msgid "New Raw Statistics (apache)"
+msgstr "Nouvelles statistiques brutes (apache)"
+
+#: admin/sta2_add_raw.php:50 admin/sta2_edit_raw.php:55 admin/sta2_list.php:57
+msgid "Domain name"
+msgstr "Nom de domaine"
+
+#: admin/sta2_add_raw.php:53 admin/sta2_edit_raw.php:58 admin/sta2_list.php:57
+msgid "Folder"
+msgstr "Répertoire"
+
+#: admin/sta2_add_raw.php:60
+msgid "Create those raw statistics"
+msgstr "Créer ce jeu de statistiques brutes"
+
+#: admin/sta2_del_raw.php:42
+#, php-format
+msgid ""
+"The statistics %s has been successfully deleted (the stats files must be "
+"manually deleted)"
+msgstr ""
+"Le jeu de statistiques %s a été supprimé avec succès (les fichiers de stats "
+"doivent etre supprimés manuellement)"
+
+#: admin/sta2_doadd_raw.php:38
+msgid "The statistics has been successfully created"
+msgstr "Le jeu de statistiques a été créé avec succès"
+
+#: admin/sta2_doedit_raw.php:33 admin/sta2_edit_raw.php:33
+msgid "No Statistics selected!"
+msgstr "Aucun jeu de sélectionné !"
+
+#: admin/sta2_doedit_raw.php:41
+msgid "The Statistics has been successfully changed"
+msgstr "Le jeu de statistiques a été modifié avec succès"
+
+#: admin/sta2_edit_raw.php:45
+msgid "Change the Raw Statistics"
+msgstr "Modifier ce jeu de stats brutes."
+
+#: admin/sta2_edit_raw.php:65
+msgid "Change those Raw Statistics."
+msgstr "Modifier ce jeu de stats brutes."
+
+#: admin/sta2_list.php:36
+msgid "Statistics List"
+msgstr "Liste des jeux de statistiques"
+
+#: admin/sta2_list.php:40
+msgid "Create new Raw Statistics (apache)"
+msgstr "Créer un nouveau jeu de statistiques brutes (apache)"
+
+#: admin/sta2_list.php:57 admin/sta2_list.php:71
+msgid "View"
+msgstr "Voir"
+
+#: admin/sta2_list.php:67
+msgid "Edit"
+msgstr "Modifier"
+
+#: admin/sta2_list.php:79
+msgid "Delete the checked Raw Statistics (apache)"
+msgstr "Effacer les jeux de stats brutes cochees"
+

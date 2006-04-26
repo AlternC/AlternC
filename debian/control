@@ -1,0 +1,24 @@
+Source: alternc
+Section: admin
+Priority: optional
+Maintainer: Benjamin Sonntag <benjamin@alternc.org>
+Build-Depends: debhelper (>= 4.0.2), findutils (>= 4.1.7), gcc (>= 2:2.95.4), gettext (>= 0.10.40-5)
+Standards-Version: 3.6.2.2
+
+Package: alternc
+Architecture: any
+Depends: debianutils (>= 1.13.1), debconf (>= 0.5.00) | debconf-2.0, libapache-mod-php4 | libapache-mod-php5, apache, apache-ssl, courier-ssl, courier-imap-ssl, courier-pop-ssl, mysql-server, php5-mysql | php4-mysql, phpmyadmin, proftpd-mysql, squirrelmail, postfix, postfix-tls, bind9, wget, libapache-mod-gzip, rsync, quota, courier-authmysql, ca-certificates, locales, perl-suid, perl, postfix-mysql, wwwconfig-common, sasl2-bin, libsasl2-modules, php4-cli | php5-cli, php4-mysql | php5-mysql, lockfile-progs (>= 0.1.9), gettext (>= 0.10.40-5), pdksh (>= 5.2.14-6)
+Conflicts: alternc-admintools, alternc-awstats (<= 0.3.2), alternc-webalizer (<= 0.9.4)
+Provides: alternc-admintools
+Replaces: alternc-admintools
+Suggests: alternc-awstats, alternc-mailman, alternc-changepass, pop-before-smtp
+Description: hosting software managment suite for Debian
+ Hosting software suite based on Valentin Lacambre's altern.org French hosting
+ service. It uses Apache, Postfix, Sympa, MySQL and PHP to allow a web-based
+ managment of services, such as web hosting, mail hosting, mailing lists,
+ virtual hosts, and so on.
+ .
+ AlternC is mainly a PHP based administration interface and some conf files
+ for the softwares used by it. More information at http://www.alternc.org/
+ .
+ Homepage: http://www.alternc.org/

@@ -1,0 +1,375 @@
+# Spanish AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# Bruno Marmier <bruno@marmier.net>, 2003
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: admin2\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2003-09-30 16:42+0200\n"
+"Last-Translator: Bruno Marmier <bruno@marmier.net>\n"
+"Language-Team:  <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.0.1\n"# m_membre
+msgid "err_admin_1"
+msgstr "-- ¡¡Solo los administradores tienen acceso a estas páginas!! -- "
+
+msgid "err_admin_2"
+msgstr "No se puede conseguir el miembro"
+
+msgid "err_admin_3"
+msgstr "¡Este login ya existe!"
+
+msgid "err_admin_4"
+msgstr "--Imposible crear la cuenta--"
+
+msgid "err_admin_5"
+msgstr "Por favor, entre un email válido."
+
+msgid "err_admin_6"
+msgstr "Los campos login, contraseña y correo son obligatorios."
+
+msgid "err_admin_7"
+msgstr "¡Solo puede pedir su contraseña una vez por día!"
+
+msgid "err_admin_8"
+msgstr "¡El usuario señalado YA es administrador!"
+
+msgid "err_admin_9"
+msgstr "¡El usuario señalado NO es administrador!"
+
+# m_membre
+msgid "err_admin_10"
+msgstr "Los únicos caracteres autorizados son a-z 0-9 y -."
+
+# m_membre
+msgid "err_admin_11"
+msgstr "Este TLD no existe"
+
+msgid "err_admin_12"
+msgstr "Este TLD ya existe."
+
+
+msgid "err_bro_1"
+msgstr "¡Carpeta o archivo incorrecto!"
+
+msgid "err_bro_2"
+msgstr "¡No se puede desplazar un archivo en la misma carpeta!"
+
+
+msgid "quota_dom"
+msgstr "Nombres de dominio"
+
+msgid "err_dom_1"
+msgstr "El dominio '%s' no existe."
+
+msgid "err_dom_2"
+msgstr "El dominio '%s' no le pertenece."
+
+msgid "err_dom_3"
+msgstr "--- Error de programación --- ¡Ningún Lock en los dominios!"
+
+msgid "err_dom_4"
+msgstr "El nombre de dominio es demasiado largo."
+
+msgid "err_dom_5"
+msgstr "Uno de los miembros del nombre de dominio es demasiado largo."
+
+msgid "err_dom_6"
+msgstr ""
+"Hay caracteres prohibidos en el nombre de dominio (solo A-Z 0-9 y - son "
+"autorizados)."
+
+msgid "err_dom_7"
+msgstr ""
+"El último miembro del dominio es incorrecto o no se puede hospedar en este "
+"servidor"
+
+msgid "err_dom_8"
+msgstr "El dominio ya existe."
+
+msgid "err_dom_9"
+msgstr "El dominio ha sido borrado hace menos de 5 minutos, intente más tarde."
+
+msgid "err_dom_10"
+msgstr "Ha llegado al limite de su cuota de dominios, no se puede crear más."
+
+msgid "err_dom_11"
+msgstr "¡Conexión a la base Whois imposible!"
+
+msgid "err_dom_12"
+msgstr "Dominio imposible de conseguir en la base Whois"
+
+msgid "err_dom_13"
+msgstr ""
+"El dominio a sido modificado hace menos de 5 minutos, intente más tarde."
+
+msgid "err_dom_14"
+msgstr "El subdominio no existe."
+
+msgid "err_dom_15"
+msgstr "No se ha pedido ninguna modificación..."
+
+msgid "err_dom_16"
+msgstr "El subdominio ya existe."
+
+msgid "err_dom_17"
+msgstr "--- Error de programación --- ¡Lock sobre los dominios ya obtenidos!"
+
+msgid "err_dom_18"
+msgstr "¡Este dominio pertenece al servidor! No puede instalarlo en su cuenta."
+
+msgid "err_dom_19"
+msgstr "La dirección IP es incorrecta."
+
+msgid "err_dom_20"
+msgstr "El URL es incorrecto. "
+
+msgid "err_dom_21"
+msgstr "La carpeta especificada es incorrecta o no existe."
+
+msgid "err_dom_22"
+msgstr ""
+"El dominio pedido se encuentra prohibido en este servidor, contacte el "
+"administrador."
+
+msgid "err_dom_23"
+msgstr ""
+"Los DNS de este dominio no coinciden con aquellos del servidor. Tiene que "
+"modificar los DNS del dominio (y a veces esperar 24 horas) antes de poder "
+"instalarlo."
+
+
+msgid "err_err_0"
+msgstr "OK"
+
+msgid "err_err_1"
+msgstr "El mensaje de error no existe (%s)"
+
+
+msgid "quota_ftp"
+msgstr "Cuentas FTP"
+
+msgid "err_ftp_1"
+msgstr "No se consiguió ninguna cuenta ftp"
+
+msgid "err_ftp_2"
+msgstr "Esta cuenta ftp no existe"
+
+msgid "err_ftp_3"
+msgstr "El prefijo escogido no es autorizado"
+
+msgid "err_ftp_4"
+msgstr "¡Esta cuenta ftp ya existe!"
+
+msgid "err_ftp_5"
+msgstr "Ha llegado al limite de su cuota de cuenta ftp, no se puede crear más."
+
+msgid "err_ftp_6"
+msgstr "Imposible crear la carpeta."
+
+
+msgid "err_hta_1"
+msgstr "Un archivo .htaccess incompatible se encuentra en este directorio."
+
+msgid "err_hta_2"
+msgstr ".htaccess reconocido y sintaxis correcta, un .htpasswd a sido creado."
+
+msgid "err_hta_3"
+msgstr ".htaccess reconocido y sintaxis correcta, .htpasswd ya existe"
+
+msgid "err_hta_4"
+msgstr "No hay ninguna carpeta protegida"
+
+msgid "err_hta_5"
+msgstr "Imposible suprimir el archivo '%s'/.htaccess"
+
+msgid "err_hta_6"
+msgstr "Imposible suprimir el archivo '%s'/.htpasswd"
+
+msgid "err_hta_7"
+msgstr "El archivo .htaccess no existe"
+
+msgid "err_hta_8"
+msgstr "La carpeta '%s' no existe"
+
+msgid "err_hta_9"
+msgstr "El archivo '%s' no es válido"
+
+msgid "err_hta_10"
+msgstr "El usuario '%s' ya está relacionado con esta carpeta"
+
+msgid "err_hta_11"
+msgstr "Por favor entre un nombre de usuario válido"
+
+
+
+msgid "quota_mail"
+msgstr "Cuentas de correos"
+
+msgid "err_mail_1"
+msgstr "Conexión ldap imposible. Intente más tarde."
+
+msgid "err_mail_2"
+msgstr "Ninguna cuenta de correo en el dominio '%s'."
+
+msgid "err_mail_3"
+msgstr "La cuenta '%s' no existe."
+
+msgid "err_mail_4"
+msgstr ""
+"Por favor marque 'cuenta pop' y entre una contraseña pop <b>o</b> entre "
+"direcciones para redirigir <b>o</o> ambas cosas."
+
+msgid "err_mail_5"
+msgstr "-- Error Servidor--- Parámetro incorrecto (%s)"
+
+msgid "err_mail_6"
+msgstr "El dominio '%s' no existe."
+
+msgid "err_mail_7"
+msgstr "El correo '%s' ya existe."
+
+msgid "err_mail_8"
+msgstr ""
+"Ha llegado al limite de su cuota de cuenta de correo, no se puede crear más."
+
+msgid "err_mail_9"
+msgstr "El dominio '%s' ya existe."
+
+msgid "err_mail_10"
+msgstr "-- Error de programación -- el cuota Mail no existe."
+
+msgid "err_mail_11"
+msgstr "Entre una dirección de correo."
+
+msgid "err_mail_12"
+msgstr "Entre una contraseña pop"
+
+msgid "err_mail_13"
+msgstr "Entre una dirección de correo válida."
+
+msgid "err_mail_14"
+msgstr "Una o más correos para la redirección no son válidos."
+
+msgid "err_mail_15"
+msgstr ""
+"Esta cuenta no es una cuenta pop. ¡Es imposible cambiarle la contraseña!"
+
+
+msgid "quota_web"
+msgstr "Espace disque"
+
+
+msgid "err_mem_1"
+msgstr "Usuario o contraseña incorrecta."
+
+msgid "err_mem_2"
+msgstr "Cuenta bloqueada, contacte el administrador."
+
+msgid "err_mem_3"
+msgstr "Cookie incorrecto, acepte los cookies."
+
+msgid "err_mem_4"
+msgstr "Sesión inexistente, contacte el administrador."
+
+msgid "err_mem_5"
+msgstr "IP incorrecta, contacte el administrador."
+
+msgid "err_mem_6"
+msgstr "La antigua contraseña es incorrecta."
+
+msgid "err_mem_7"
+msgstr "Las dos nuevas contraseñas son distintas."
+
+msgid "err_mem_8"
+msgstr "Una contraseña debe estar compuesta por lo menos de 3 carácteres."
+
+msgid "err_mem_9"
+msgstr "Los datos proporcionados son incorrectos."
+
+msgid "err_mem_11"
+msgstr "No puede cambiar su contraseña."
+
+msgid "err_mem_12"
+msgstr "Debe ser administrador para cambiar las preferencias de Administrador."
+
+
+msgid "quota_mysql"
+msgstr "Bases de datos MySQL"
+
+# #################################################################
+# m_webaccess
+msgid "err_mysql_1"
+msgstr "No tiene ninguna base de datos disponible."
+
+msgid "err_mysql_2"
+msgstr ""
+"El nombre de la base de datos solo puede contener cifras y letras minúsculas."
+
+msgid "err_mysql_3"
+msgstr "Esta base de datos ya existe, utilice otro nombre."
+
+msgid "err_mysql_4"
+msgstr "¡Esta base de datos no existe!"
+
+msgid "err_mysql_5"
+msgstr "¡El número de copia de seguridad es incorrecto!"
+
+msgid "err_mysql_6"
+msgstr "¡La carpeta es incorrecta!"
+
+msgid "err_mysql_7"
+msgstr "No tiene ninguna base de datos, no puede cambiar la contraseña."
+
+msgid "err_mysql_8"
+msgstr "La contraseña es demasiado larga (16 caracteres máximum)."
+
+msgid "err_mysql_9"
+msgstr "El archivo especificado no existe o es incorrecto."
+
+# #################################################################
+# m_webaccess
+msgid "err_mysql_10"
+msgstr "Error: Ud, no puede crear su base principal. ¡Le queda otras bases!"
+
+# #################################################################
+# m_webaccess
+msgid "err_mysql_11"
+msgstr ""
+"No tiene ninguna base de datos disponible. Haga clic en «Bases de datos» "
+"para crear una."
+
+
+msgid "quota_stats"
+msgstr "Estadísticas Web"
+
+# #################################################################
+# m_webaccess
+msgid "err_stats_1"
+msgstr "No hay ningún juego de estadísticas."
+
+msgid "err_stats_2"
+msgstr "Este juego de estadísticas no existe."
+
+msgid "err_stats_3"
+msgstr "El prefijo escogido no está permitido."
+
+msgid "err_stats_4"
+msgstr "¡Este juego de estadísticas ya existe!"
+
+msgid "err_stats_5"
+msgstr ""
+"Ha llegado al limite de su cuota de juego de estadísticas, no se puede crear "
+"más."
+
+msgid "err_stats_6"
+msgstr "Este idioma no está soportado."
+
+msgid "err_stats_7"
+msgstr "No hay ningún juego de estadísticas brutas."
+
+

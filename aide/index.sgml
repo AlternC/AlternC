@@ -1,0 +1,42 @@
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook V3.1//EN" [
+
+<!ENTITY chap1 SYSTEM "sommaire.sgml">
+<!ENTITY hlpftp SYSTEM "ftp.sgml">
+<!ENTITY hlpdomain SYSTEM "domain.sgml">
+<!ENTITY hlpbrouteur SYSTEM "brouteur.sgml">
+<!ENTITY hlpstats SYSTEM "stats.sgml">
+
+
+]>
+<book lang="fr">
+<bookinfo>
+<title>AlternC, Documentation Utilisateur</title>
+
+<authorgroup>
+	<author>
+		<firstname></firstname><surname>AlternC Development Team</surname>
+		<affiliation><address><email>tech@alternc.org</email></address> </affiliation>
+	</author>
+</authorgroup>
+
+<date>2002-06-11</date>
+<releaseinfo>0.1</releaseinfo>
+
+<abstract>
+<para>Bienvenue dans l'aide en ligne d'AlternC.</para>
+</abstract>
+
+<keywordset>
+<keyword>AlternC</keyword>
+<keyword>Hébergement</keyword>
+</keywordset>
+</bookinfo>
+
+&chap1;
+
+&hlpdomain;
+&hlpftp;
+&hlpbrouteur;
+&hlpstats;
+
+</book>

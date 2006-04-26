@@ -1,0 +1,15 @@
+class/m_mysql.php
+admin/menu_sql.php
+admin/sql_addmain.php
+admin/sql_add.php
+admin/sql_admin.php
+admin/sql_bck.php
+admin/sql_del.php
+admin/sql_doadd.php
+admin/sql_dobck.php
+admin/sql_dorestore.php
+admin/sql_getparam.php
+admin/sql_list.php
+admin/sql_passchg.php
+admin/sql_pass.php
+admin/sql_restore.php

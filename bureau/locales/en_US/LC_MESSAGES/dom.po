@@ -1,0 +1,236 @@
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: dom.po,v 1.4 2005/05/24 15:30:53 arnaud-lb Exp $
+msgid ""
+msgstr ""
+"Project-Id-Version: $Id: dom.po,v 1.4 2005/05/24 15:30:53 arnaud-lb Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+
+msgid "quota_dom"
+msgstr "Domain names"
+
+msgid "err_dom_1"
+msgstr "Domain '%s' not found."
+
+msgid "err_dom_2"
+msgstr "The domaine '%s' does not belong to you."
+
+msgid "err_dom_3"
+msgstr "--- Programm error --- No lock on the domains !"
+
+msgid "err_dom_4"
+msgstr "The domain name is too long."
+
+msgid "err_dom_5"
+msgstr "One of the domain name member is too long."
+
+msgid "err_dom_6"
+msgstr "There is some forbidden characters in the domain name (only A-Z 0-9 and - are allowed)."
+
+msgid "err_dom_7"
+msgstr "The last member of the domain name is incorrect or cannot be hosted in that server."
+
+msgid "err_dom_8"
+msgstr "The domain already exists."
+
+msgid "err_dom_9"
+msgstr "The domain has been deleted less than 5 minutes ago, please try again later."
+
+msgid "err_dom_10"
+msgstr  "Your domain quota is over, you cannot create more domain names."
+
+msgid "err_dom_11"
+msgstr "The Whois database is unavailable, please try again later."
+
+msgid "err_dom_12"
+msgstr "The domain cannot be found in the whois database."
+
+msgid "err_dom_13"
+msgstr  "The domain has been changed less than 5 minutes ago. Please try again in a few minutes."
+
+msgid "err_dom_14"
+msgstr "The sub-domain does not exist."
+
+msgid "err_dom_15"
+msgstr  "No change has been requested..."
+
+msgid "err_dom_16"
+msgstr "The sub-domain already exists."
+
+msgid "err_dom_17"
+msgstr  "--- Programm error --- Lock already obtained !"
+
+msgid "err_dom_18"
+msgstr "This domain is the server's domain !!! You cannot host it on your account !"
+
+msgid "err_dom_19"
+msgstr "The IP address you entered is incorrect."
+
+msgid "err_dom_20"
+msgstr "The URL you entered is incorrect."
+
+msgid "err_dom_21"
+msgstr "The folder you entered is incorrect or does not exist."
+
+msgid "err_dom_22"
+msgstr "The requested domain is forbidden in this server, please contact the administrator"
+
+msgid "err_dom_23"
+msgstr "The DNS of this domain do not match the server's DNS. Please change your domain's "
+"DNS (and eventually wait 1 day) before you install it again."
+
+msgid "err_dom_24"
+msgstr "There is some forbidden characters in the sub domain (only A-Z 0-9 and - are allowed)."
+
+msgid "help_dns_mx %s %s"
+msgstr ""
+"If we manage your DNS <br />"
+"You can manage your mails elsewhere if you want (MX field).<br />"
+"Write <b><code>%s</code></b> in this field if your mail must be managed by %s<br />"
+"or put the IP address or name of the mail server used to manage your mails."
+"<small>Warning : if you put nothing in this field, your mails will be unavailable</small>"
+
+msgid "help_dns_mail"
+msgstr ""
+"If we don't manage the DNS for this domain <br />"
+"do we manage your mails?"
+
+msgid "help_domain_del %s"
+msgstr "If you want to delete the domain %s, click the button below."
+"Warning : this delete all the ftp, mails, mailing-lists ... associated with this"
+"domain and all its subdomains!"
+
+msgid "hlp_add_domain"
+msgstr ""
+"- Entrez le nom du domaine que vous souhaitez héberger. Le nom de domaine doit être complet, mais <b>sans le www.</b><br /> "
+"IMPORTANT : Si vous voulez un hébergement réel de domaine, il faut que les DNS de votre domaine pointent vers nos serveurs DNS. Contacter votre hébergeur pour plus d'information.<br /> "
+"Exemples : globenet.org / demo.com / test.eu.org etc.<br />"
+"Plus d'info sur la gestion des domaines dans l'aide en ligne HELPID_200<br />"
+
+msgid "hlp_add_domain_2"
+msgstr ""
+"Cliquez sur le lien ci-dessus. "
+"Vous pourrez ensuite accéder aux paremètres du domaine dans le menu à gauche."
+"2 liens vont apparaitre : <br />"
+"- un premier pour modifier les paramètres d'hébergement du domaine (sous-domaines, redirections, hébergement mails ...) <br />"
+"- un second pour gérer les comptes emails du domaine (si vous souhaitez créer des boites aux lettres).<br />"
+"Plus d'info sur la gestion des domaines dans l'aide en ligne HELPID_200<br />"
+
+msgid "hlp_del_domain"
+msgstr ""
+"Le domaine a été effacé, mais les fichiers de votre site n'ont pas été détruits.<br />"
+"Si vous souhaitez détruire les fichiers du site web, utilisez le Gestionnaire de Fichier<br />"
+"Plus d'info sur la gestion des domaines dans l'aide en ligne HELPID_200<br />"
+
+msgid "hlp_edit_domain"
+msgstr ""
+"Cette zone vous permet de modifier les paramètres de votre domaine, ainsi que des sous-domaines installés<br />"
+"Vous pouvez créer un nouveau sous-domaine et choisir, soit de le rediriger vers votre espace disque, "
+"vers une autre adresse Internet, ou vers une adresse IP (utilisateurs avancés)<br />"
+"Plus d'info sur la gestion des domaines dans l'aide en ligne HELPID_200<br />"
+
+
+msgid "Domain hosting"
+msgstr "Domain hosting"
+
+msgid "You cannot add any new domain, your quota is over."
+msgstr "You cannot add any new domain, your quota is over."
+
+msgid "Contact your administrator for more information."
+msgstr "Contact your administrator for more information."
+
+msgid "Domain name"
+msgstr "Domain name"
+
+msgid "If you don't want to host in our server the DNS of your domain, don't check the box 'host my dns here'. If you don't know what it mean, leave it checked."
+msgstr "If you don't want to host in our server the DNS of your domain, don't check the box 'host my dns here'. If you don't know what it mean, leave it checked."
+
+msgid "host my dns here"
+msgstr "host my dns here"
+
+msgid "Add a domain"
+msgstr "Add a domain"
+
+msgid "Add this domain"
+msgstr "Add this domain"
+
+msgid "Your new domain %s has been successfully installed"
+msgstr "Your new domain %s has been successfully installed"
+
+msgid "Whois result on the domain"
+msgstr "Whois result on the domain"
+
+msgid "Confirm the deletion of domain %s"
+msgstr "Confirm the deletion of domain %s"
+
+msgid "This will delete the related sub-domains too."
+msgstr "This will delete the related sub-domains too."
+
+msgid "Domain %s deleted"
+msgstr "Domain %s deleted"
+
+msgid "The domain %s has been successfully deleted."
+msgstr "The domain %s has been successfully deleted."
+
+msgid "Editing domain %s"
+msgstr "Editing domain %s"
+
+msgid "Subdomains"
+msgstr "Subdomains"
+
+msgid "Domains"
+msgstr "Domains"
+
+msgid "Add a subdomain"
+msgstr "Add a subdomain"
+
+msgid "Locally managed"
+msgstr "Locally managed"
+
+msgid "URL redirection"
+msgstr "URL redirection"
+
+msgid "IP redirection"
+msgstr "IP redirection"
+
+msgid "Webmail access"
+msgstr "Webmail access"
+
+msgid "DNS parameters"
+msgstr "DNS parameters"
+
+msgid "Manage the DNS on the server ?"
+msgstr "Manage the DNS on the server ?"
+
+msgid "MX Field"
+msgstr "MX Field"
+
+msgid "Submit the changes"
+msgstr "Submit the changes"
+
+msgid "Delete %s"
+msgstr "Delete %s"
+
+msgid "The domain %s has been changed. The modifications will take effect in 5 minutes."
+msgstr "The domain %s has been changed. The modifications will take effect in 5 minutes."
+
+msgid "Deleting subdomain %s"
+msgstr "Deleting subdomain %s"
+
+msgid "WARNING : Confirm the deletion of the subdomain"
+msgstr "WARNING : Confirm the deletion of the subdomain"
+
+msgid "Editing subdomain %s"
+msgstr "Editing subdomain %s"
+
+msgid "The modifications will take effect in 5 minutes."
+msgstr "The modifications will take effect in 5 minutes."
+

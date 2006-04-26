@@ -1,0 +1,48 @@
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: mem.po,v 1.2 2003/06/09 14:36:09 root Exp $
+msgid ""
+msgstr ""
+"Project-Id-Version: $Id: mem.po,v 1.2 2003/06/09 14:36:09 root Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+
+msgid "err_mem_1"
+msgstr "User or password incorrect"
+
+msgid "err_mem_2"
+msgstr "This account is locked, contact the administrator"
+
+msgid "err_mem_3"
+msgstr "Cookie incorrect, please accept the session cookie"
+
+msgid "err_mem_4"
+msgstr "Session unknown, contact the administrator"
+
+msgid "err_mem_5"
+msgstr "IP address incorrect, please contact the administrator"
+
+# PROBLEME : il y avait 2 fois le 5, les autres messages doivent surement etre décalés (TODO)
+
+msgid "err_mem_6"
+msgstr "The old password is incorrect"
+
+msgid "err_mem_7"
+msgstr "The new passwords are differents, please retry"
+
+msgid "err_mem_8"
+msgstr "A password must be at least 3 characters long."
+
+msgid "err_mem_9"
+msgstr "The information you entered is incorrect"
+
+msgid "Help"
+msgstr "Help"
+

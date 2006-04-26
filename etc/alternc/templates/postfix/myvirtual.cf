@@ -1,0 +1,12 @@
+#
+# %%warning_message%%
+#
+
+user = %%dbuser%%
+password = %%dbpwd%%
+hosts =%%dbhost%%
+dbname = %%dbname%%
+table = mail_users
+select_field = path
+where_field = alias
+

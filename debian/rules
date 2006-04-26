@@ -1,0 +1,137 @@
+#!/usr/bin/make -f
+# Sample debian/rules that uses debhelper.
+# This file is public domain software, originally written by Joey Hess.
+#
+# This version is for a multibinary package. It also allows you to build any
+# of the binary packages independantly, via binary-<package> targets.
+
+# Uncomment this to turn on verbose mode. 
+export DH_VERBOSE=1
+export VERSION=`head -1 debian/changelog | sed -e 's/^[^(]*(\([^)]*\)).*/\1/'`
+
+ifneq (,$(findstring debug,$(DEB_BUILD_OPTIONS)))
+	CFLAGS += -g
+endif
+ifeq (,$(findstring nostrip,$(DEB_BUILD_OPTIONS)))
+	INSTALL_PROGRAM += -s
+endif
+
+# This has to be exported to make some magic below work.
+export DH_OPTIONS
+
+build: build-stamp
+build-stamp:
+	dh_testdir
+	(cd src && $(MAKE))
+	/usr/bin/msgfmt po/alternc-admintools.fr.po -o alternc-admintools.mo
+	touch build-stamp
+
+clean:
+	dh_testdir
+	dh_testroot
+	rm -f build-stamp
+	(cd src/ && $(MAKE) clean)
+	dh_clean
+
+install: DH_OPTIONS=
+install: build
+	dh_testdir
+	dh_testroot
+	dh_clean -k
+	dh_installdirs
+
+	# Install
+	cp -r etc/* debian/alternc/etc
+	cp -r install/* debian/alternc/usr/share/alternc/install
+	cp -r bureau/* debian/alternc/var/alternc/bureau
+	(cd src && $(MAKE) install DESTDIR=$(CURDIR)/debian/alternc)
+
+	# Fix permisions
+	chmod 755 debian/alternc/etc/alternc
+	chmod 644 debian/alternc/etc/alternc/phpmyadmin.inc.php
+	chown -R root:www-data debian/alternc/var/alternc/bureau
+	chmod -R 644 debian/alternc/var/alternc/bureau
+	chmod -R a+X debian/alternc/var/alternc/bureau
+	chown -R www-data:www-data debian/alternc/var/alternc/dns
+	chown -R www-data:www-data debian/alternc/var/alternc/html
+	chown -R www-data:www-data debian/alternc/var/run/alternc
+	chown -R www-data:www-data debian/alternc/var/log/alternc
+
+	chmod a+x debian/alternc/usr/share/alternc/install/alternc.install
+	chmod a+x debian/alternc/usr/share/alternc/install/dopo.sh
+	chmod a+x debian/alternc/usr/share/alternc/install/mysql.sh
+	chmod a+x debian/alternc/usr/share/alternc/install/newone.php
+	chmod a+x debian/alternc/usr/share/alternc/install/reset_root.php
+	chmod a+x debian/alternc/usr/share/alternc/install/upgrade_check.sh
+	chmod a+x debian/alternc/usr/share/alternc/install/upgrades/*.php
+	chmod a+x debian/alternc/usr/share/alternc/install/upgrades/*.sh
+	# Ex old alternc-admintools
+	install tools/top_http_users debian/alternc/usr/bin
+	install tools/top_mysql_users debian/alternc/usr/bin
+	install tools/top_ftp_users debian/alternc/usr/bin
+	install tools/get_domains_by_account debian/alternc/usr/bin
+	install tools/get_account_by_domain debian/alternc/usr/bin
+	install -m 644 alternc-admintools.mo debian/alternc/usr/share/locale/fr/LC_MESSAGES
+
+	# Remove helpers files from l18n dir
+	find debian/alternc/var/alternc/bureau/locales/ \
+		-maxdepth 1 -type f -exec rm -f {} \;
+	# Remove CVS directories
+	/usr/bin/find debian/alternc -depth -type d -name CVS -exec rm {} -rf \;
+	/usr/bin/find debian/alternc -depth -type d -name .svn -exec rm {} -rf \;
+	cp debian/lintian-override \
+		debian/alternc/usr/share/lintian/overrides/alternc
+
+# This single target is used to build all the packages, all at once, or
+# one at a time. So keep in mind: any options passed to commands here will
+# affect _all_ packages. Anything you want to only affect one package
+# should be put in another target, such as the install target.
+
+binary-common: build install
+	dh_testdir
+	dh_testroot
+	dh_installchangelogs
+	dh_installdocs
+#	dh_installexamples
+#	dh_installmenu
+	dh_installdebconf
+	dh_installlogrotate
+#	dh_installemacsen
+#	dh_installpam
+#	dh_installmime
+#	dh_installinit
+	dh_installman man/*
+	dh_installcron
+#	dh_installinfo
+	dh_strip
+	dh_link
+	dh_compress
+#we handle our own perms
+#	dh_fixperms
+#	dh_makeshlibs
+	dh_installdeb
+	dh_perl
+	dh_shlibdeps
+	dh_gencontrol -- -cdebian/control
+	dh_md5sums
+	dh_builddeb
+
+# Build architecture independant packages using the common target.
+binary-indep: build install binary-common
+# (Uncomment this next line if you have such packages.)
+#	 $(MAKE) -f debian/rules DH_OPTIONS=-i binary-common
+
+# Build architecture dependant packages using the common target.
+binary-arch: build install binary-common
+#	$(MAKE) -f debian/rules DH_OPTIONS=-a binary-common
+
+# Any other binary targets build just one binary package at a time.
+# binary-%: build install
+#	make -f debian/rules binary-common DH_OPTIONS=-p$*
+
+# binary: binary-indep binary-arch
+# .PHONY: build clean binary-indep binary-arch binary install
+
+binary: binary-common
+
+.PHONY: build clean binary install

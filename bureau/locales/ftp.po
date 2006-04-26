@@ -1,0 +1,94 @@
+# AlternC's Translation
+# Copyright (C) 2006 AlternC's translation team <i18n@alternc.org>
+# This file is distributed under the same license as the AlternC's package.
+# AlternC's translation team <i18n@alternc.org>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"$id$\n"
+"Report-Msgid-Bugs-To: i18n@alternc.org\n"
+"POT-Creation-Date: 2006-02-22 04:22+0000\n"
+"PO-Revision-Date: 2006-02-22 04:22 UTC\n"
+"Last-Translator: Team AlternC <i18n@alternc.org>\n"
+"Language-Team: Team AlternC <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: admin/menu_ftp.php:36
+msgid "FTP accounts"
+msgstr ""
+
+#: admin/ftp_add.php:33
+msgid "You cannot add any new ftp account, your quota is over."
+msgstr ""
+
+#: admin/ftp_add.php:40 admin/ftp_list.php:47 admin/ftp_list.php:84
+msgid "Create a new ftp account"
+msgstr ""
+
+#: admin/ftp_add.php:53 admin/ftp_edit.php:55 admin/ftp_list.php:60
+msgid "Username"
+msgstr ""
+
+#: admin/ftp_add.php:56 admin/ftp_edit.php:58 admin/ftp_list.php:60
+msgid "Password"
+msgstr ""
+
+#: admin/ftp_add.php:57 admin/ftp_edit.php:59
+msgid "Confirm password"
+msgstr ""
+
+#: admin/ftp_add.php:58 admin/ftp_edit.php:60 admin/ftp_list.php:60
+msgid "Folder"
+msgstr ""
+
+#: admin/ftp_add.php:65
+msgid "Create this new FTP account."
+msgstr ""
+
+#: admin/ftp_del.php:42
+#, php-format
+msgid "The ftp account %s has been successfully deleted"
+msgstr ""
+
+#: admin/ftp_doadd.php:33 admin/ftp_doedit.php:36
+msgid "Passwords do not match"
+msgstr ""
+
+#: admin/ftp_doadd.php:44
+msgid "The FTP account has been successfully created"
+msgstr ""
+
+#: admin/ftp_doedit.php:33 admin/ftp_edit.php:33
+msgid "No account selected!"
+msgstr ""
+
+#: admin/ftp_doedit.php:47
+msgid "The ftp account has been successfully changed"
+msgstr ""
+
+#: admin/ftp_doedit.php:57 admin/ftp_edit.php:45
+msgid "Editing an FTP account"
+msgstr ""
+
+#: admin/ftp_edit.php:69
+msgid "Change this FTP account"
+msgstr ""
+
+#: admin/ftp_list.php:42
+msgid "FTP accounts list"
+msgstr ""
+
+#: admin/ftp_list.php:70
+msgid "Edit"
+msgstr ""
+
+#: admin/ftp_list.php:72
+msgid "<-No Password->"
+msgstr ""
+
+#: admin/ftp_list.php:78
+msgid "Delete checked accounts"
+msgstr ""

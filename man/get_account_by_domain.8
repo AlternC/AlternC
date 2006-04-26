@@ -1,0 +1,30 @@
+.TH GET_ACCOUNT_BY_DOMAIN 8
+.SH NAME
+get_account_by_domain \- AlternC helper function that query which account is owning a domain
+.SH SYNOPSIS
+.B get_account_by_domain
+.RI <domain|subdomain>
+.SH DESCRIPTION
+This manual page documents briefly the
+.B get_account_by_domain
+command.
+.PP
+\fBget_account_by_domain\fP is a program that returns the AlternC account name and email owning a domain name on an AlternC server.
+.TP
+This function takes one parameter, the domain (or subdomain) that should be queried on AlternC installation.
+.PP
+\fBget_account_by_domain\fP has to be run as root or www-data
+.SH OPTIONS
+This program follow the usual GNU command line syntax, with long
+options starting with two dashes (`-').
+A summary of options is included below.
+.TP
+.B \-h, \-\-help
+Show summary of options.
+.TP
+.B <domain|subdomain>
+The searched domain or subdomain in the AlternC account list
+.SH SEE ALSO
+.BR get_domains_by_account (8),
+.BR alternc-admintools (8).
+.br

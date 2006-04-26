@@ -1,0 +1,110 @@
+# French AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: admin_manual.po,v 1.3 2006/02/09 20:12:23 benjamin Exp $
+msgid ""
+msgstr ""
+"Project-Id-Version: $Id: admin_manual.po,v 1.3 2006/02/09 20:12:23 benjamin Exp $\n"
+"Report-Msgid-Bugs-To: i18n@alternc.org\n"
+"POT-Creation-Date: 2004-05-24 19:34+0200\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: French <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+
+msgid "err_admin_1"
+msgstr "-- Seuls les administrateurs ont accès à ces pages !! --"
+
+msgid "err_admin_2"
+msgstr "Membre introuvable"
+
+msgid "err_admin_3"
+msgstr "Le login existe déja !"
+
+msgid "err_admin_4"
+msgstr "--Impossible de créer le compte--"
+
+msgid "err_admin_5"
+msgstr "Veuillez entrer un email valide"
+
+msgid "err_admin_6"
+msgstr "Les champs login, pass et email sont obligatoires"
+
+msgid "err_admin_7"
+msgstr ""
+"Vous ne pouvez demander votre mot de passe qu'une seule fois par jour !"
+
+msgid "err_admin_8"
+msgstr "L'utilisateur spécifié est DEJA administrateur !"
+
+msgid "err_admin_9"
+msgstr "L'utilisateur spécifié n'est PAS administrateur !"
+
+msgid "err_admin_10"
+msgstr "Les seuls caractères autorisés pour le login sont a-z 0-9 et -"
+
+msgid "err_admin_11"
+msgstr "Ce TLD n'existe pas"
+
+msgid "err_admin_12"
+msgstr "Ce TLD existe déjà"
+
+msgid "err_admin_13"
+msgstr "Le login est trop long (16< caractères maximum)"
+
+msgid "Click here to continue"
+msgstr "Cliquer ici pour continuer"
+
+msgid "Description"
+msgstr "Description"
+
+msgid "The user has no database"
+msgstr "L'utilisateur n'a pas de base de données active"
+
+msgid "Enable the database"
+msgstr "Activer la base MySQL"
+
+msgid "The user has a MySQL database"
+msgstr "L'utilisateur dispose d'une base MySQL"
+
+msgid "Disable the database"
+msgstr "Désactiver la base MySQL"
+
+msgid "Disk space (in KB)"
+msgstr "Espace disque (en Ko)"
+
+msgid "Number of email accounts"
+msgstr "Nombre de comptes email"
+
+msgid "Number of mailing-lists"
+msgstr "Nombre de listes de discussion"
+
+msgid "Number of domains"
+msgstr "Nombre de domaines"
+
+msgid "Number of FTP accounts"
+msgstr "Nombre de comptes FTP"
+
+msgid "Number of web statistics"
+msgstr "Nombre de jeux de statistiques"
+
+msgid "This TLD is forbidden"
+msgstr "Ce TLD est interdit"
+
+msgid "primary DNS is checked in WHOIS db"
+msgstr "le DNS primaire est vérifié dans le WHOIS"
+
+msgid "primary & secondary DNS are checked in WHOIS db"
+msgstr "les DNS primaire ET secondaire sont vérifiés dans le WHOIS"
+
+msgid "Domain must exist, but don't do any DNS check"
+msgstr "Le domaine doit exister, mais aucun contrôle DNS n'est effectué"
+
+msgid "Domain can be installed, no check at all"
+msgstr "Le domaine peut être installé sans aucun contrôle"
+
+msgid "Domain can be installed, force NO DNS hosting"
+msgstr "Le domaine peut être installé, force la case 'PAS DE DNS'"

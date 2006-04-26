@@ -1,0 +1,30 @@
+.TH GET_DOMAINS_BY_ACCOUNT 8
+.SH NAME
+get_domains_by_account \- AlternC helper function that returns the domains installed in an AlternC account
+.SH SYNOPSIS
+.B get_domains_by_account
+.RI <account>
+.SH DESCRIPTION
+This manual page documents briefly the
+.B get_domains_by_account
+command.
+.PP
+\fBget_domains_by_account\fP is a program that returns the domains installed in an AlternC account
+.TP
+This function takes one parameter: the AlternC account name. 
+.PP
+\fBget_domains_by_account\fP has to be run as root or www-data
+.SH OPTIONS
+This program follow the usual GNU command line syntax, with long
+options starting with two dashes (`-').
+A summary of options is included below.
+.TP
+.B \-h, \-\-help
+Show summary of options.
+.TP
+.B <account>
+The searched AlternC account
+.SH SEE ALSO
+.BR get_account_by_domain (8),
+.BR alternc-admintools (8).
+.br
