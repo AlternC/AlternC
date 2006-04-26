@@ -254,7 +254,7 @@ class m_admin {
       $err->raise("admin",10);
       return false;
     }
-    $pass=stripslashes($pass);
+    //$pass=stripslashes($pass);
     $pass=_md5cr($pass);
     $db=new DB_System();
     // vérification de l'inexistence du membre dans system.membres

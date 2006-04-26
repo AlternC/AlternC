@@ -71,7 +71,6 @@ class m_mem {
     $err->log("mem","login",$username);
     //    $username=addslashes($username);
     //    $password=addslashes($password);
-    $password=stripslashes($password);
     $db->query("select * from membres where login='$username';");
     if ($db->num_rows()==0) {
       $err->raise("mem",1);
@@ -82,7 +81,7 @@ class m_mem {
       $db->query("UPDATE membres SET lastfail=lastfail+1 WHERE uid='".$db->f("uid")."';");
       $err->raise("mem",1);
       return false;
-    }
+    } 
     if (!$db->f("enabled")) {
       $err->raise("mem",2);
       return false;
