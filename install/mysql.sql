@@ -421,7 +421,7 @@ If this is set to 0 or a "false" string, it will be ignored.');
 -- Table structure for table `dbusers`
 --
 
-CREATE TABLE `dbusers` (
+CREATE TABLE IF NOT EXISTS `dbusers` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `uid` int(10) unsigned NOT NULL default '0',
   `name` varchar(16) NOT NULL default '',
