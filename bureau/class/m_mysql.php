@@ -298,7 +298,7 @@ class m_mysql {
    */
   function restore($file,$stdout,$id) {
     global $err,$bro,$mem,$L_MYSQL_HOST;
-    if (!$r=$mysql->get_mysql_details($id)) {
+    if (!$r=$this->get_mysql_details($id)) {
       return false;
     }
     if (!($fi=$bro->convertabsolute($file,0))) {

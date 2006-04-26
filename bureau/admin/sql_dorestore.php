@@ -43,7 +43,7 @@ if ($r["enabled"]) {
 <h3><?php __("Restore a SQL backup"); ?></h3>
 <p>
 <?php
-if (!$mysql->restore($restfile,true,$r))  {
+if (!$mysql->restore($restfile,true,$id))  {
 	$error=$err->errstr();
 } else {
 	$error=_("Your database has been restored, check out the previous text for error messages.");

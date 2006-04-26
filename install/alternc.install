@@ -182,7 +182,7 @@ ln -nsf /var/alternc/bureau /var/alternc/dns/$FQDN_LETTER/$FQDN
 # Bind stuff
 touch /var/alternc/bind/automatic.conf /var/alternc/bind/slaveip.conf
 chown root:bind /var/alternc/bind/automatic.conf /var/alternc/bind/slaveip.conf
-chmod 640 /var/alternc/bind/automatic.conf /var/alternc/bind/slaveip.conf
+chmod 640 /var/alternc/bind/automatic.conf /var/alternc/bind/slaveip.conf 
 touch /var/run/alternc/refresh_slave
 /usr/lib/alternc/slave_dns
 
@@ -205,6 +205,10 @@ fi
 if [ -e /etc/courier/authmysqlrc ] ; then
     chown root:root /etc/courier/authmysqlrc
     chmod 640 /etc/courier/authmysqlrc
+fi
+
+if [ -e /etc/proftpd.conf ] ; then
+    chmod 640 /etc/proftpd.conf
 fi
 
 #######################################################################
