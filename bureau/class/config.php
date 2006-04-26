@@ -78,13 +78,6 @@ require_once($root."class/db_mysql.php");
 require_once($root."class/functions.php");
 require_once($root."class/variables.php");
 
-if (!$_SERVER["HTTPS"]) {
-  $conf=variable_init();
-  if ($conf["force_https"]) {
-    header("Location: https://".$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"]);
-  }
-}
-
 // Classe héritée de la classe db de la phplib.
 /**
 * Class for MySQL management in the bureau 
@@ -112,6 +105,13 @@ $db= new DB_system();
 
 // Current User ID = the user whose commands are made on behalf of.
 $cuid=0;
+
+if (!$_SERVER["HTTPS"]) {
+  $conf=variable_init();
+  if ($conf["force_https"]) {
+    header("Location: https://".$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"]);
+  }
+}
 
 $classes=array();
 /* CLASSES PHP4 : automatic include : */
