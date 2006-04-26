@@ -295,17 +295,23 @@ class m_mysql {
 
   /* ----------------------------------------------------------------- */
   /** Restore a sql backup script on a user's database.
-   * <b>TODO : </b> Add a parameter to choose which database to restore.
    */
-  function restore($file,$stdout,$r) {
+  function restore($file,$stdout,$id) {
     global $err,$bro,$mem,$L_MYSQL_HOST;
+    if (!$r=$mysql->get_mysql_details($id)) {
+      return false;
+    }
     if (!($fi=$bro->convertabsolute($file,0))) {
       $err->raise("mysql",9);
+      return false;
     }
     if (substr($fi,-3)==".gz") {
-      $exe="/bin/gzip -d -c <\"$fi\" | /usr/bin/mysql -h".$L_MYSQL_HOST." -u".$r["login"]." -p".$r["pass"]." ".$r["db"];
+      $exe="/bin/gzip -d -c <".escapeshellarg($fi)." | /usr/bin/mysql -h".escapeshellarg($L_MYSQL_HOST)." -u".escapeshellarg($r["login"])." -p".escapeshellarg($r["pass"])." ".escapeshellarg($r["db"]);
+    } elseif (substr($fi,-4)==".bz2") {
+      $exe="/bin/bunzip2 -d -c <".escapeshellarg($fi)." | /usr/bin/mysql -h".escapeshellarg($L_MYSQL_HOST)." -u".escapeshellarg($r["login"])." -p".escapeshellarg($r["pass"])." ".escapeshellarg($r["db"]);
     } else {
-      $exe="/usr/bin/mysql -h".$L_MYSQL_HOST." -u".$r["login"]." -p".$r["pass"]." ".$r["db"]." <".$fi;
+ {
+      $exe="/usr/bin/mysql -h".escapeshellarg($L_MYSQL_HOST)." -u".escapeshellarg($r["login"])." -p".escapeshellarg($r["pass"])." ".escapeshellarg($r["db"])." <".escapeshellarg($fi);
     }
     $exe .= " 2>&1";
     
