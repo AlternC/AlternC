@@ -1,0 +1,462 @@
+# French AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: admin.po,v 1.10 2004/11/01 15:55:44 anonymous Exp $
+msgid ""
+msgstr ""
+"Project-Id-Version: $Id: admin.po,v 1.10 2004/11/01 15:55:44 anonymous Exp $\n"
+"Report-Msgid-Bugs-To: i18n@alternc.org\n"
+"POT-Creation-Date: 2004-11-01 16:18+0100\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: French <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+
+#: admin/adm_add.php:33 admin/adm_defquotas.php:33 admin/adm_doadd.php:33
+#: admin/adm_dodefquotas.php:33 admin/adm_dodel.php:33 admin/adm_dodel.php:45
+#: admin/adm_doedit.php:33 admin/adm_doedit.php:37 admin/adm_domlock.php:33
+#: admin/adm_doms.php:33 admin/adm_donosu.php:33 admin/adm_dosu.php:33
+#: admin/adm_edit.php:33 admin/adm_edit.php:37 admin/adm_list2.php:34
+#: admin/adm_list.php:34 admin/adm_login.php:33 admin/adm_panel.php:33
+#: admin/adm_quotadoedit.php:33 admin/adm_quotaedit.php:33
+#: admin/adm_tldadd.php:33 admin/adm_tlddoadd.php:33
+#: admin/adm_tlddoedit.php:33 admin/adm_tldedit.php:33 admin/adm_tld.php:33
+#: admin/adm_slaveaccount.php:33 admin/adm_slaveip.php:33
+msgid "This page is restricted to authorized staff"
+msgstr "Cette page est réservée aux administrateurs"
+
+#: admin/adm_add.php:44
+msgid "New member"
+msgstr "Ajout d'un membre"
+
+#: admin/adm_add.php:52 admin/adm_edit.php:59 admin/adm_list2.php:65
+#: admin/adm_list2.php:103 admin/adm_list2.php:105 admin/adm_list2.php:107
+#: admin/adm_list.php:74 admin/adm_list.php:112 admin/adm_list.php:114
+#: admin/adm_list.php:116 admin/adm_quotaedit.php:60
+msgid "Username"
+msgstr "Nom"
+
+#: admin/adm_add.php:56
+msgid "Initial password"
+msgstr "Mot de passe initial"
+
+#: admin/adm_add.php:60 admin/adm_edit.php:80
+msgid "Can he change its password"
+msgstr "Peut-il changer de mot de passe ?"
+
+#: admin/adm_add.php:72 admin/adm_edit.php:92 admin/adm_list2.php:65
+#: admin/adm_list.php:74
+msgid "Surname"
+msgstr "Nom"
+
+#: admin/adm_add.php:72 admin/adm_edit.php:92 admin/adm_list2.php:65
+#: admin/adm_list.php:74
+msgid "First Name"
+msgstr "Prénom"
+
+#: admin/adm_add.php:76 admin/adm_edit.php:96 admin/adm_list2.php:65
+#: admin/adm_list.php:74
+msgid "Email address"
+msgstr "Adresse Email"
+
+#: admin/adm_add.php:80 admin/adm_list2.php:55 admin/adm_list.php:58
+msgid "Create a new member"
+msgstr "Créer un nouveau membre"
+
+#: admin/adm_defquotas.php:41 admin/adm_panel.php:51
+msgid "Change the default quotas"
+msgstr "Changer les quotas par défaut"
+
+#: admin/adm_defquotas.php:49
+msgid ""
+"Here is the list of the quotas on the server for the new accounts. If you "
+"want to change them, enter new values"
+msgstr ""
+"Voici la liste des quotas par défaut sur ce serveur pour les nouveaux "
+"comptes."
+
+#: admin/adm_defquotas.php:54 admin/adm_list2.php:80 admin/adm_list.php:89
+msgid "Quotas"
+msgstr "Quotas"
+
+#: admin/adm_defquotas.php:54
+msgid "Default Value"
+msgstr "Valeur par défaut"
+
+#: admin/adm_defquotas.php:70
+msgid "Edit the default quotas"
+msgstr "Modifier les quotas par défaut"
+
+#: admin/adm_doadd.php:48
+msgid "The new member has been successfully created"
+msgstr "Le membre a été ajouté avec succès"
+
+#: admin/adm_dodefquotas.php:47
+msgid "Default quotas successfully changed"
+msgstr "Les quotas par défaut ont été modifiés avec succès"
+
+#: admin/adm_dodel.php:49
+#, php-format
+msgid "Member '%s' does not exist"
+msgstr "Le membre '%s' n'existe pas"
+
+#: admin/adm_dodel.php:51
+#, php-format
+msgid "Member %s successfully deleted"
+msgstr "Le membre '%s' a été effacé avec succès"
+
+#: admin/adm_doedit.php:46
+msgid "The member has been successfully edited"
+msgstr "Le compte a été modifié avec succès"
+
+#: admin/adm_doms.php:41 admin/adm_panel.php:52
+msgid "Manage installed domains"
+msgstr "Liste des domaines installés"
+
+#: admin/adm_doms.php:51
+msgid ""
+"Here is the list of the domains installed on this server. You can remove a "
+"domain if it does not exist or does not point to our server anymore. You can "
+"also set the 'Lock' flag on a domain so that the user will not be able to "
+"change any DNS parameter or delete this domain from his account."
+msgstr "Voici la liste des domaines installés sur ce serveur. Vous pouvez "
+"Supprimer un domaine s'il n'existe plus, ou s'il ne pointe plus vers ce serveur. "
+"Vous pouvez aussi 'Verrouiller' un domaine afin que l'utilisateur ne puisse "
+"plus modifier les paramètres DNS de ce domaine ou l'effacer."
+
+#: admin/adm_doms.php:56 admin/adm_tld.php:68 admin/adm_slaveaccount.php:71
+#: admin/adm_slaveip.php:73
+msgid "Action"
+msgstr "Action"
+
+#: admin/adm_doms.php:56
+msgid "Domain"
+msgstr "Domaine"
+
+#: admin/adm_doms.php:56
+msgid "Member"
+msgstr "Membre"
+
+#: admin/adm_doms.php:65
+msgid "Unlock"
+msgstr "Déverrouiller"
+
+#: admin/adm_doms.php:65
+msgid "Lock"
+msgstr "Verrouiller"
+
+#: admin/adm_doms.php:69
+msgid "Locked Domain"
+msgstr "Domaine verrouillé"
+
+#: admin/adm_edit.php:49
+msgid "Member Edition"
+msgstr "Modification d'un membre"
+
+#: admin/adm_edit.php:63
+msgid "Account Enabled ?"
+msgstr "Compte Actif ? "
+
+#: admin/adm_edit.php:68
+msgid "No"
+msgstr "Non"
+
+#: admin/adm_edit.php:71
+msgid "Yes"
+msgstr "Oui"
+
+#: admin/adm_edit.php:76 admin/adm_slaveaccount.php:71
+#: admin/adm_slaveaccount.php:91
+msgid "Password"
+msgstr "Mot de passe"
+
+#: admin/adm_edit.php:100
+msgid "Edit this account"
+msgstr "Modifier le compte"
+
+#: admin/adm_edit.php:111
+msgid "This account is a super-admin account"
+msgstr "Ce compte est un compte d'administrateur"
+
+#: admin/adm_edit.php:113
+msgid ""
+"There is only one administrator account, you cannot turn this account back "
+"to normal"
+msgstr ""
+"Il n'y a qu'un seul compte administrateur, vous ne pouvez pas transformer ce "
+"compte Administrateur en compte Normal"
+
+#: admin/adm_edit.php:116
+msgid "Turn this account back to normal"
+msgstr "Transformer ce compte Administrateur en compte Normal"
+
+#: admin/adm_edit.php:119
+msgid "Make this account a super admin one"
+msgstr "Transformer ce compte en compte d'Administrateur"
+
+#: admin/adm_edit.php:127
+#, php-format
+msgid "Account created by %s"
+msgstr "Compte créé par %s"
+
+#: admin/adm_edit.php:130
+msgid "Back to the account list"
+msgstr "Retour à la liste des comptes"
+
+#: admin/adm_list2.php:45 admin/adm_list.php:45
+msgid "Member list"
+msgstr "Liste des membres"
+
+#: admin/adm_list2.php:52 admin/adm_list.php:52
+msgid "Here is the list of hosted members"
+msgstr "Voici la liste des membres hébergés"
+
+#: admin/adm_list2.php:79 admin/adm_list.php:88 admin/adm_tld.php:76
+msgid "Edit"
+msgstr "Modifier"
+
+#: admin/adm_list2.php:83 admin/adm_list2.php:128 admin/adm_list2.php:149
+#: admin/adm_list2.php:171 admin/adm_list.php:92 admin/adm_list.php:137
+#: admin/adm_list.php:158 admin/adm_list.php:180
+msgid "Locked Account"
+msgstr "Compte verrouillé"
+
+#: admin/adm_list2.php:86 admin/adm_list.php:95
+msgid "Connect as"
+msgstr "Connecter"
+
+#: admin/adm_list2.php:124 admin/adm_list2.php:145 admin/adm_list2.php:167
+#: admin/adm_list.php:133 admin/adm_list.php:154 admin/adm_list.php:176
+msgid "E"
+msgstr "M"
+
+#: admin/adm_list2.php:125 admin/adm_list2.php:146 admin/adm_list2.php:168
+#: admin/adm_list.php:134 admin/adm_list.php:155 admin/adm_list.php:177
+msgid "Q"
+msgstr "Q"
+
+#: admin/adm_list2.php:131 admin/adm_list2.php:152 admin/adm_list2.php:174
+#: admin/adm_list.php:140 admin/adm_list.php:161 admin/adm_list.php:183
+msgid "C"
+msgstr "C"
+
+#: admin/adm_list2.php:186 admin/adm_list.php:195
+msgid "Delete checked accounts"
+msgstr "Supprimer les comptes cochés"
+
+#: admin/adm_list.php:62
+msgid "No account defined for now"
+msgstr "Aucun compte n'existe pour l'instant"
+
+#: admin/adm_login.php:57
+msgid "AlternC Desktop"
+msgstr "Bureau AlternC"
+
+#: admin/adm_login.php:81
+msgid "Member login"
+msgstr "Nom d'utilisateur du membre"
+
+#: admin/adm_panel.php:41 admin/menu_adm.php:40
+msgid "Admin Control Panel"
+msgstr "Panneau Administrateur"
+
+#: admin/adm_panel.php:50 admin/adm_tldadd.php:41 admin/adm_tldedit.php:48
+#: admin/adm_tld.php:52 admin/adm_tld.php:61
+msgid "Manage allowed domains (TLD)"
+msgstr "Gestion des TLD autorisés"
+
+#: admin/adm_panel.php:53 admin/adm_slaveip.php:57
+msgid "Manage allowed ip for slave zone transfers"
+msgstr "Gérer les ip autorisés à faire des transferts de zone esclave DNS"
+
+#: admin/adm_panel.php:54 admin/adm_slaveaccount.php:55
+msgid "Manage allowed accounts for slave zone transfers"
+msgstr "Gérer les comptes autorisés pour les transferts de zone esclave DNS"
+
+#: admin/adm_quotadoedit.php:48
+msgid "The quotas has been successfully edited"
+msgstr "Les quotas ont été modifiés avec succès"
+
+#: admin/adm_quotaedit.php:50
+msgid "Editing the quotas of a member"
+msgstr "Modification des quotas d'un compte"
+
+#: admin/adm_quotaedit.php:61
+msgid "Quota"
+msgstr "Quotas"
+
+#: admin/adm_quotaedit.php:61
+msgid "Total"
+msgstr "Total"
+
+#: admin/adm_quotaedit.php:61
+msgid "Used"
+msgstr "Utilisé"
+
+#: admin/adm_quotaedit.php:69
+msgid "quota_"
+msgstr "quota_"
+
+#: admin/adm_quotaedit.php:76
+msgid "Edit the quotas"
+msgstr "Modifier les quotas"
+
+#: admin/adm_tldadd.php:49 admin/adm_tldadd.php:62 admin/adm_tld.php:86
+msgid "Add a new TLD"
+msgstr "Créer un nouveau TLD"
+
+#: admin/adm_tldadd.php:51
+msgid ""
+"Enter the new TLD (without the first dot) and choose what check should be "
+"done."
+msgstr ""
+"Entrez le nouveau TLD (sans le point initial) et choisissez quel contrôle "
+"doit être effectué."
+
+#: admin/adm_tldadd.php:52
+msgid ""
+"Warning : only some final tld are known in the whois function of AlternC, "
+"please check m_domains.php accordingly."
+msgstr ""
+"Attention : Seuls certains tld sont connus dans la fonction whois d'AlternC, "
+"merci de vérifier le fichier m_domains.php."
+
+#: admin/adm_tldadd.php:58 admin/adm_tldedit.php:58 admin/adm_tld.php:68
+msgid "TLD"
+msgstr "TLD"
+
+#: admin/adm_tldadd.php:59 admin/adm_tldedit.php:59 admin/adm_tld.php:68
+msgid "Allowed Mode"
+msgstr "Contrôle effectué"
+
+#: admin/adm_tlddoadd.php:42
+msgid "The TLD has been successfully added"
+msgstr "Le TLD a été ajouté avec succès"
+
+#: admin/adm_tlddoedit.php:42
+msgid "The TLD has been successfully edited"
+msgstr "Le TLD a été modifié avec succès"
+
+#: admin/adm_tldedit.php:54
+msgid "Edit a TLD"
+msgstr "Modification d'un TLD"
+
+#: admin/adm_tldedit.php:62
+msgid "Edit this TLD"
+msgstr "Modifier ce TLD"
+
+#: admin/adm_tld.php:41
+msgid "Some TLD cannot be deleted..."
+msgstr "Des TLD ne peuvent pas être effacés..."
+
+#: admin/adm_tld.php:44
+msgid "The requested TLD has been deleted"
+msgstr "Les TLD ont été effacés avec succès"
+
+#: admin/adm_tld.php:63
+msgid ""
+"Here is the list of the TLD allowed on this server. Each TLD can be allowed "
+"or denied after some checks (whois, ns, domain exists...)"
+msgstr ""
+"Voici la liste des TLD autorisés sur le serveur. Chaque TLD peut être "
+"autorisé ou interdit selon certains critères (whois, ns, domaine existe...)"
+
+#: admin/adm_tld.php:78
+msgid "mode"
+msgstr "mode"
+
+#: admin/adm_tld.php:83
+msgid "Delete the checked TLD"
+msgstr "Effacer les TLD cochés"
+
+#: admin/menu_adm.php:39
+msgid "Manage the members"
+msgstr "Gérer les membres"
+
+#: admin/menu_adm.php:41
+msgid "General SQL Admin"
+msgstr "Admin SQL Général"
+
+#: admin/adm_slaveaccount.php:40
+msgid "The requested account has been deleted. It is now denied."
+msgstr "Le compte esclave a été effacé. Il est maintenant interdit."
+
+#: admin/adm_slaveaccount.php:46
+msgid "The requested account address has been created. It is now allowed."
+msgstr "Le compte esclave a été créé. Il est maintenant autorisé."
+
+#: admin/adm_slaveaccount.php:67
+msgid ""
+"Here is the list of the allowed accounts for slave dns synchronization. You "
+"can configure the alternc-slavedns package on your slave server and give him "
+"the login/pass that will grant him access to your server's domain list. "
+msgstr "Voici la liste des comptes ayant le droit de synchroniser la liste des "
+"domaines hébergés. Vous pouvez utiliser le paquet alternc-slavedns sur votre "
+"serveur esclave en lui donnant le login/pass pour lui donner accès à ce serveur."
+
+#: admin/adm_slaveaccount.php:71 admin/adm_slaveaccount.php:91
+msgid "Login"
+msgstr "Nom d'utilisateur"
+
+#: admin/adm_slaveaccount.php:79 admin/adm_slaveip.php:81
+msgid "Delete"
+msgstr "Effacer"
+
+#: admin/adm_slaveaccount.php:88
+msgid ""
+"If you want to allow a new server to access your domain list, give him an "
+"account."
+msgstr "Si vous voulez autoriser un compte à synchroniser la liste des domaines, "
+"créez-lui un compte."
+
+#: admin/adm_slaveaccount.php:97
+msgid "Add this account to the allowed list"
+msgstr "Ajouter ce compte à la liste des autorisés."
+
+#: admin/adm_slaveip.php:40
+msgid ""
+"The requested ip address has been deleted. It will be denied in one hour."
+msgstr "L'adresse ip a été supprimée. L'accès sera coupé sous une heure."
+
+#: admin/adm_slaveip.php:46
+msgid ""
+"The requested ip address has been added to the list. It will be allowed in "
+"one hour."
+msgstr "L'adresse ip a été ajoutée. Son accès sera possible dans une heure."
+
+#: admin/adm_slaveip.php:69
+msgid ""
+"Here is the list of the allowed ip or ip class for slave dns zone transfer "
+"requests (AXFR). You must add the ip address of all the slave DNS you have "
+"so that those slaves will be allowed to transfer the zone files. There is "
+"also some defaults ip from DNS checks made by some third-party technical "
+"offices such as afnic (for .fr domains)"
+msgstr "Voici la liste des ip ou classes d'ip autorisées à effectuer "
+"des transferts de zone DNS (AXFR). Vous devez ajouter ici les adresses ip "
+"des esclaves DNS afin que ceux-ci puissent synchroniser leurs zones. Il y "
+"a aussi quelques ip par défaut correspondants à des organismes officiels "
+" ou des sociétés comme l'Afnic (pour les .fr) ou Gandi"
+
+#: admin/adm_slaveip.php:73 admin/adm_slaveip.php:92
+msgid "IP Address"
+msgstr "Adresse IP"
+
+#: admin/adm_slaveip.php:89
+msgid ""
+"If you want to allow an ip address or class to connect to your dns server, "
+"enter it here. Choose 32 as a prefix for single ip address."
+msgstr "Si vous voulez autoriser une adresse ip ou une classe d'adresses ip "
+"à se connecter à votre serveur DNS, entrez-la ici. Choisissez 32 comme préfixe "
+"s'il s'agit d'une adresse ip seule."
+
+#: admin/adm_slaveip.php:92
+msgid "Prefix"
+msgstr "Préfixe"
+
+#: admin/adm_slaveip.php:98
+msgid "Add this ip to the slave list"
+msgstr "Ajouter cette adresse/class à la liste des esclaves DNS."
+

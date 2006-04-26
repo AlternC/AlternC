@@ -1,0 +1,117 @@
+Modularisation d'AlternC
+========================
+
+- Chaque classe a un nom en lettres (pas trop long).
+- Chaque classe fournit :
+	* Un fichier m_<classname>.php contenant la déclaration de la classe php
+	* Une classe qui s'appelle "m_<classname>"
+	* La variable globale instanciant la classe est $<classname>, elle est créée automatiquement par config_real.php
+	* Un fichier .pot dans locales/<classname>.po (et eventuellement <classname>_manual.po pour les entrees non détectées par gettext
+	* Les messages d'erreur sont du type "err_<classname>_<errno>" ou <errno> est un entier positif. 0 pour "OK"
+	* Une classe PEUT présenter un fichier "menu_<classname>.php" dans admin/
+
+- Une classe peut présenter les fonctions particulières suivantes :
+	* alternc_add_domain($domain) qui est appellée quand un domaine est créé sur le compte membre courant
+	* alternc_del_domain($domain) qui est appellée quand un domaine est supprimé sur le compte membre courant
+	* alternc_add_member($uid) quand un membre est créé
+	* alternc_del_member($uid) quand un membre est détruit
+	* alternc_quota_check($uid) pour recalculer le quota utilisé par un membre
+	* alternc_quota_names() qui retourne une chaine ou un tableau avec le(s) noms des quota(s) gérés par cette classe.
+	si elle ne les contient pas, ces fonctions ne seront pas appellées...
+
+
+AlternC est fourni en standard avec les classes :
+- domain (installation domaines / dns / mx)
+- ftp (maintenance des comptes ftp)
+- mail (maintenance des emails pop/alias)
+- quota (gestion globale des quotas de service et de disques)
+- bro (navigateur dans le système de fichier)
+- admin (panneau administrateur)
+- mem (connexion et préférences membre)
+- mysql (maintenance de bdd mysql)
+- err (gestion des erreurs) 
+- sta2 (demande de sortie de logs bruts apache)
+- hta (protection de dossiers web par htaccess/htpasswd)
+
+Les modules additionnels dispo : 
+- alternc-webinstaller (cette classe particulière permet l'intégration facile d'outils (dmanager, spip, forum, chat ...) )
+- alternc-mailman (gestion de listes sous mailman)
+- alternc-sympa (gestion de listes sous sympa)
+- alternc-webalizer (gestion de stats webalizer)
+- procmail_builder (plugin spécial pour squirrelmail)
+
+Donc, pour s'installer, une classe a besoin de :
+- Créer les éventuelles structures de données nécessaires (mysql)
+- Copier le fichier m_<classname> dans bureau/class/
+- Copier l'eventuel fichier menu_<classname>.php
+- Copier les éventuels autres fichiers dans bureau/admin, bureau/locales/* ...
+
+Quotas
+------
+
+Le système de quota est simple : la classe peut appeler
+	$quota->inc dec ...
+pour le membre donné, sur le nom de quota utilisé par celle-ci,
+(utiliser <classname> est conseillé ;)
+
+Quand un nouveau membre est créé, la valeur par défaut choisi par
+l'admin lui est associé, et cette valeur vaut 0 par défaut.
+
+Autres
+------
+
+Il est conseillé que chaque classe non standard fournisse un dossier
+dans /bureau/admin/ dans lequel elle stocke les pages web
+correspondantes, ceci afin de ne pas alourdir le dossier bureau/admin...
+
+Ajout à l'API :
+- La variable globale "$classes" contient un tableau avec le nom des
+  classes disponibles (nom court sans m_  =>mail, quota, err...)
+
+Hooks ou "events" AlternC
+=========================
+
+Liste des fonctions "events" appellées lorsqu'un évènement particulier a lieu
+sur un compte, tel que l'ajout d'un domaine, la suppression d'un domaine etc.
+
+- Ces fonctions commencent TOUJOURS par "alternc_"
+- SEULES ces fonctions ont le droit d'utiliser le prefixe alternc_ dans les 
+classes
+- Les fonctions ne peuvent apparaitre que dans les classes d'AlternC, ayant
+pour nom m_<nom du module>
+- Chaque fonction est prototypée ci-dessous et son évènement est expliqué en 
+détail
+
+
+
+alternc_del_domain($dom)
+	fonction appellée lorsqu'un domaine est effacé d'un compte AlternC.
+	$dom est le nom de domaine concerné.
+
+alternc_add_domain($dom)
+	fonction appellée lorsqu'un domaine est installé sur un compte AlternC.
+	$dom est le nom de domaine concerné.
+
+alternc_quota_check($id)
+	fonction appellée afin de recalculer le quota d'un membre pour le service correspondant.
+	$id est le numéro unique du membre concerné.
+
+alternc_add_member($id)
+	fonction appellée lorsqu'un compte membre est créé sur le serveur AlternC.
+	$id est le numéro unique du membre concerné, qui a déjà été créé dans les tables principales.
+
+alternc_del_member($id)
+	fonction appellée lorsqu'un compte membre est supprimé sur le serveur AlternC.
+	$id est le numéro unique du membre concerné, qui sera détruit après l'appel.
+
+alternc_add_mx_domain($dom)
+	fonction appellée lorsqu'un domaine déjà hébergé mais n'ayant pas le mx pointant vers nous voit son mx
+	pointer vers nous. Pour les classes sensible au mail, cela équivaut bien souvent à add_domain
+
+alternc_del_mx_domain($dom)
+	fonction appellée lorsqu'un domaine déjà hébergé et ayant son mx pointant vers nous voit son mx
+	nous quitter. Pour les classes sensible au mail, cela équivaut bien souvent à del_domain
+
+alternc_description()
+	retourne la chaine ou la liste de chaine de description du module, traduit par gettext.
+	permet de savoir à quoi sert un module ou les éléments d'un module.

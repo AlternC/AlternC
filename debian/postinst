@@ -1,0 +1,187 @@
+#!/bin/sh
+
+set -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+CONFIGFILE="/etc/alternc/local.sh"
+
+update_var() {
+    local question="$1"
+    local var="$2"
+    db_get "$question"
+    if [ ! -z "$RET" ]; then
+        grep -Eq "^ *$var=" $CONFIGFILE || echo "$var=" >> $CONFIGFILE
+        SED_SCRIPT="$SED_SCRIPT;s\\^ *$var=.*\\$var=\"$RET\"\\"
+    fi
+}
+
+# summary of how this script can be called:
+#        * <postinst> `configure' <most-recently-configured-version>
+#        * <old-postinst> `abort-upgrade' <new version>
+#        * <conflictor's-postinst> `abort-remove' `in-favour' <package>
+#          <new-version>
+#        * <deconfigured's-postinst> `abort-deconfigure' `in-favour'
+#          <failed-install-package> <version> `removing'
+#          <conflicting-package> <version>
+# for details, see http://www.debian.org/doc/debian-policy/ or
+# the debian-policy package
+#
+# quoting from the policy:
+#     Any necessary prompting should almost always be confined to the
+#     post-installation script, and should be protected with a conditional
+#     so that unnecessary prompting doesn't happen if a package's
+#     installation fails and the `postinst' is called with `abort-upgrade',
+#     `abort-remove' or `abort-deconfigure'.
+
+case "$1" in
+  configure)
+
+    # build local.sh if it does not exist
+    if [ ! -f $CONFIGFILE ]; then
+        cat > $CONFIGFILE <<EOF
+#!/bin/sh
+#
+# AlternC - Web Hosting System - Configuration
+# This file will be modified on package configuration
+# (e.g. upgrade or dpkg-reconfigure alternc)
+
+# Hosting service name
+HOSTING=""
+
+# Primary hostname for this box (will be used to access the management panel)
+FQDN=""
+
+# Public IP
+PUBLIC_IP=""
+
+# Internal IP
+# (most of the time, should be equal to PUBLIC_IP, unless you are behind
+# firewall doing address translation)
+INTERNAL_IP=""
+
+# Monitoring IP or network (will be allowed to access Apache status)
+MONITOR_IP=""
+
+# Primary DNS hostname
+NS1_HOSTNAME=""
+
+# Secondary DNS hostname
+NS2_HOSTNAME=""
+
+# IP that have privilegied access to the DNS server. Separated by ';'.
+BIND_INTERNAL=""
+
+# Mail server hostname
+DEFAULT_MX=""
+
+# MySQL configuration
+MYSQL_HOST=""
+MYSQL_DATABASE=""
+MYSQL_USER=""
+MYSQL_PASS=""
+# quels clients mysql sont permis (%, localhost, etc)
+MYSQL_CLIENT=""
+
+# Folder holding data (used for quota management)
+ALTERNC_LOC=""
+
+# Networks that SMTP should relay, separated with spaces
+SMTP_RELAY_NETWORKS=""
+EOF
+
+        chown root:www-data $CONFIGFILE
+        chmod 640 $CONFIGFILE
+    fi
+
+    # Update local.sh
+    # 1. use cp to keep permissions
+    # 2. add missing variable to local.sh
+    # 3. use sed to set variables with current values
+    echo "Updating $CONFIGFILE"
+    cp -a -f $CONFIGFILE $CONFIGFILE.tmp
+    # SED_SCRIPT will be modified by update_var
+    SED_SCRIPT=""
+    update_var alternc/hostingname HOSTING
+    update_var alternc/desktopname FQDN 
+    update_var alternc/public_ip PUBLIC_IP
+    update_var alternc/internal_ip INTERNAL_IP
+    update_var alternc/monitor_ip MONITOR_IP
+    update_var alternc/ns1 NS1_HOSTNAME
+    update_var alternc/ns2 NS2_HOSTNAME
+    update_var alternc/bind_internal BIND_INTERNAL
+    update_var alternc/default_mx DEFAULT_MX 
+    update_var alternc/mysql/host MYSQL_HOST 
+    update_var alternc/mysql/db MYSQL_DATABASE 
+    update_var alternc/mysql/user MYSQL_USER 
+    update_var alternc/mysql/password MYSQL_PASS 
+    update_var alternc/mysql/client MYSQL_CLIENT 
+    update_var alternc/alternc_location ALTERNC_LOC
+    update_var alternc/mynetwork SMTP_RELAY_NETWORKS
+    sed -e "$SED_SCRIPT" < $CONFIGFILE > $CONFIGFILE.tmp
+    mv -f $CONFIGFILE.tmp $CONFIGFILE
+
+    # forget the password
+    db_reset alternc/mysql/password || true
+    db_fset alternc/mysql/password "seen" "false" || true
+
+    if [ -e $CONFIGFILE ]; then
+      # source local.sh variables
+      . $CONFIGFILE
+    fi
+
+    # Erase all apacheconf file
+    # They will be regenerated without the bug by upgrade_check.sh below.
+    if dpkg --compare-versions "$2" le "0.9.3.9-globenet14"; then
+        rm -f /var/alternc/apacheconf/*/*
+        rm -f /var/alternc/apacheconf/override_php.conf
+    fi
+
+    echo "checking for upgrades"
+    /usr/share/alternc/install/upgrade_check.sh $2
+
+    echo "config phpmyadmin"
+    include_str='include_once("/etc/alternc/phpmyadmin.inc.php")'
+    pma_config=/etc/phpmyadmin/config.inc.php
+    if ! grep -e "$include_str" $pma_config > /dev/null 2>&1; then
+        echo "<?php $include_str ?>" >> $pma_config
+    fi
+
+    # important: postinst gele sans ca
+    db_stop
+
+    echo "running alternc.install"
+    alternc.install
+
+    if [ ! -h /etc/apache/conf.d/alternc-ssl.conf ]; then
+        ln -sf /etc/apache/conf.d/alternc-ssl.conf \
+            /etc/apache/conf.d/alternc-ssl.conf
+    fi
+
+    if [ ! -h /etc/apache/conf.d/alternc.conf ]; then
+        ln -sf /etc/apache/conf.d/alternc.conf \
+            /etc/apache/conf.d/alternc.conf
+    fi
+
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+
+esac
+
+# dh_installdeb will replace this with shell code automatically
+# generated by other debhelper scripts.
+
+#DEBHELPER#
+
+exit 0
+
+# vim: et sw=4

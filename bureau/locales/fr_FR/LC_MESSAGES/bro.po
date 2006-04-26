@@ -1,0 +1,203 @@
+# French AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: bro.po,v 1.10 2004/11/10 22:14:22 anonymous Exp $
+msgid ""
+msgstr ""
+"Project-Id-Version: $Id: bro.po,v 1.10 2004/11/10 22:14:22 anonymous Exp $\n"
+"Report-Msgid-Bugs-To: i18n@alternc.org\n"
+"POT-Creation-Date: 2004-05-24 19:34+0200\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: French <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+
+#: class/m_bro.php:218 class/m_bro.php:227 admin/bro_main.php:101
+msgid "File"
+msgstr "Fichier"
+
+#: admin/menu_brouteur.php:34 admin/bro_main.php:93
+msgid "File browser"
+msgstr "Gestionnaire de fichiers"
+
+#: admin/bro_editor.php:44 admin/bro_editor.php:50
+#, php-format
+msgid "Your file %s has been saved"
+msgstr "Votre fichier %s a été enregistré"
+
+#: admin/bro_editor.php:59
+msgid "File editing"
+msgstr "Edition de fichier"
+
+#: admin/bro_editor.php:68
+msgid "Save"
+msgstr "Enregistrer"
+
+#: admin/bro_editor.php:69
+msgid "Save &amp; Quit"
+msgstr "Enregistrer et Fermer"
+
+#: admin/bro_editor.php:70
+msgid "Quit"
+msgstr "Fermer"
+
+#: admin/bro_main.php:99
+msgid "Create"
+msgstr "Créer"
+
+#: admin/bro_main.php:102
+msgid "Folder"
+msgstr "Répertoire"
+
+#: admin/bro_main.php:118 admin/bro_main.php:124 admin/bro_main.php:144
+msgid "Rename"
+msgstr "Renommer"
+
+#: admin/bro_main.php:139
+msgid "all/none"
+msgstr "tous/aucun"
+
+#: admin/bro_main.php:142
+msgid "Delete"
+msgstr "Effacer"
+
+#: admin/bro_main.php:146
+msgid "Move"
+msgstr "Déplacer"
+
+#: admin/bro_main.php:181 admin/bro_main.php:352
+msgid "View"
+msgstr "Voir"
+
+#: admin/bro_main.php:224 admin/bro_main.php:254 admin/bro_main.php:291
+#: admin/bro_main.php:321
+msgid "V"
+msgstr "V"
+
+#: admin/bro_main.php:378
+msgid "No files in this folder"
+msgstr "Aucun fichier dans ce répertoire"
+
+#: admin/bro_main.php:390
+msgid "Import this file"
+msgstr "Importer ce fichier"
+
+#: admin/bro_main.php:392
+msgid "Send"
+msgstr "Envoyer"
+
+#: admin/bro_main.php:401
+msgid "There is an ftp account in this folder"
+msgstr "Il existe un compte ftp dans ce répertoire"
+
+#: admin/bro_main.php:401
+msgid "Click here to edit this ftp account."
+msgstr "Cliquez ici pour le modifier."
+
+#: admin/bro_main.php:404
+msgid "Click here to create an ftp account in this folder."
+msgstr "Cliquer ici pour créer un compte ftp dans ce répertoire."
+
+#: admin/bro_main.php:408
+msgid "This folder has restricted access"
+msgstr "Le répertoire est protégé"
+
+#: admin/bro_main.php:411
+msgid "Click here to protect this folder with login/password"
+msgstr "Cliquer ici pour protéger ce répertoire par un login / mot de passe"
+
+#: admin/bro_main.php:415
+msgid "Download"
+msgstr "Télécharger"
+
+#: admin/bro_main.php:415
+msgid "this folder and its subfolders as a compressed file"
+msgstr "ce répertoire dans un fichier compressé"
+
+#: admin/bro_main.php:416
+msgid "Configure the file browser"
+msgstr "Configurer le gestionnaire de fichiers"
+
+#: admin/bro_pref.php:34
+msgid "Your preferences have been updated."
+msgstr "Vos préférences ont été mises à jour."
+
+#: admin/bro_pref.php:45 admin/bro_pref.php:49
+msgid "File editor preferences"
+msgstr "Préférences du gestionnaire de fichiers"
+
+#: admin/bro_pref.php:50
+msgid "Horizontal window size"
+msgstr "Taille horizontale de la fenêtre"
+
+#: admin/bro_pref.php:58
+msgid "Vertical window size"
+msgstr "Taille verticale de la fenêtre"
+
+#: admin/bro_pref.php:66
+msgid "File editor font name"
+msgstr "Police de caractères de l'éditeur de fichiers"
+
+#: admin/bro_pref.php:74
+msgid "File editor font size"
+msgstr "Taille de la police de l'éditeur de fichiers"
+
+#: admin/bro_pref.php:86
+msgid "File browser preferences"
+msgstr "Préférences du gestionnaire de fichiers"
+
+#: admin/bro_pref.php:87
+msgid "File list view"
+msgstr "Mode d'affichage des fichiers"
+
+#: admin/bro_pref.php:95
+msgid "Downloading file format"
+msgstr "Format du téléchargement du site ? "
+
+#: admin/bro_pref.php:103
+msgid "What to do after creating a file"
+msgstr "Que faire après la création d'un fichier"
+
+#: admin/bro_pref.php:111
+msgid "Show icons?"
+msgstr "Afficher les icones ?"
+
+#: admin/bro_pref.php:119
+msgid "Show file types?"
+msgstr "Affichage les types de fichier ?"
+
+#: admin/bro_pref.php:127
+msgid "Remember last visited directory?"
+msgstr "Revenir au dernier répertoire visité ?"
+
+#: admin/bro_pref.php:137
+msgid "Change my settings"
+msgstr "Modifier mes préférences"
+
+#: admin/bro_pref.php:141
+msgid "Back to the file browser"
+msgstr "Retour au gestionnaire de fichiers"
+
+#: admin/browseforfolder.php:112
+msgid "Searching for a folder"
+msgstr "Recherche d'un répertoire"
+
+#: admin/browseforfolder.php:118
+msgid "Error, cannot find this folder"
+msgstr "Erreur, impossible de trouver ce répertoire"
+
+#: admin/browseforfolder.php:120
+msgid "Back to the root folder"
+msgstr "Retour au répertoire racine"
+
+#: admin/browseforfolder.php:132
+msgid "Select"
+msgstr "Sélectionner"
+
+#: admin/browseforfolder.php:133
+msgid "Cancel"
+msgstr "Annuler"
+

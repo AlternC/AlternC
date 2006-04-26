@@ -1,0 +1,13 @@
+class/m_dom.php
+admin/menu_dom.php
+admin/dom_add.php
+admin/dom_doadd.php
+admin/dom_dodel.php
+admin/dom_editdns.php
+admin/dom_edit.php
+admin/dom_subdel.php
+admin/dom_subdodel.php
+admin/dom_subdoedit.php
+admin/dom_subedit.php
+admin/adm_slaveip.php
+admin/adm_slaveaccount.php

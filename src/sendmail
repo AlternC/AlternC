@@ -1,0 +1,50 @@
+#!/usr/bin/perl
+
+# 1. On lit les en-têtes et on mémorise l'état.
+
+$fr="";
+$rt="";
+
+open(SM,"|/usr/sbin/sendmail -t -i");
+
+chomp($A=<STDIN>);
+while ($A ne "") {
+    print SM $A."\n";
+    if ($A=~/^From:(.*)/i) {
+	$fr=$1;
+    }
+    if ($A=~/^Reply-to:(.*)/i) {
+        $rt=$1;
+    }
+   chomp($A=<STDIN>);
+}
+
+$ENV{'PWD'}=~/^\/var\/alternc\/html\/.\/([^\/]*)/;
+$user=$1;
+
+if (!$fr) {
+    if (!$rt) {
+	print SM "From: ".$user."\n";
+    } else {
+	print SM "From: $rt\n";
+	print SM "X-RealFrom: ".$user."\n";
+    }
+} else {
+    if (!$rt) {
+	print SM "Reply-To: $fr\n";
+    }
+    print SM "X-RealFrom: ".$user."\n";
+}
+
+# 3. On ajoute la fameuse ligne vide :)
+print SM "\n";
+# 4. Et on repasse la suite sans traitement (cat)
+$A=<STDIN>;
+while ($A) {
+    print SM $A;
+    $A=<STDIN>;
+}
+close SM;
+
+
+

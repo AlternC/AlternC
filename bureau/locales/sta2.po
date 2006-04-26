@@ -1,0 +1,88 @@
+# AlternC's Translation
+# Copyright (C) 2006 AlternC's translation team <i18n@alternc.org>
+# This file is distributed under the same license as the AlternC's package.
+# AlternC's translation team <i18n@alternc.org>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"$id$\n"
+"Report-Msgid-Bugs-To: i18n@alternc.org\n"
+"POT-Creation-Date: 2006-04-02 03:58+0000\n"
+"PO-Revision-Date: 2006-04-02 03:58 UTC\n"
+"Last-Translator: Team AlternC <i18n@alternc.org>\n"
+"Language-Team: Team AlternC <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: admin/menu_sta2.php:37
+msgid "Raw web statistics"
+msgstr ""
+
+#: admin/sta2_add_raw.php:33
+msgid "You cannot add any new statistics, your quota is over."
+msgstr ""
+
+#: admin/sta2_add_raw.php:40
+msgid "New Raw Statistics (apache)"
+msgstr ""
+
+#: admin/sta2_add_raw.php:50 admin/sta2_edit_raw.php:55 admin/sta2_list.php:57
+msgid "Domain name"
+msgstr ""
+
+#: admin/sta2_add_raw.php:53 admin/sta2_edit_raw.php:58 admin/sta2_list.php:57
+msgid "Folder"
+msgstr ""
+
+#: admin/sta2_add_raw.php:60
+msgid "Create those raw statistics"
+msgstr ""
+
+#: admin/sta2_del_raw.php:42
+#, php-format
+msgid ""
+"The statistics %s has been successfully deleted (the stats files must be "
+"manually deleted)"
+msgstr ""
+
+#: admin/sta2_doadd_raw.php:38
+msgid "The statistics has been successfully created"
+msgstr ""
+
+#: admin/sta2_doedit_raw.php:33 admin/sta2_edit_raw.php:33
+msgid "No Statistics selected!"
+msgstr ""
+
+#: admin/sta2_doedit_raw.php:41
+msgid "The Statistics has been successfully changed"
+msgstr ""
+
+#: admin/sta2_edit_raw.php:45
+msgid "Change the Raw Statistics"
+msgstr ""
+
+#: admin/sta2_edit_raw.php:65
+msgid "Change those Raw Statistics."
+msgstr ""
+
+#: admin/sta2_list.php:36
+msgid "Statistics List"
+msgstr ""
+
+#: admin/sta2_list.php:40
+msgid "Create new Raw Statistics (apache)"
+msgstr ""
+
+#: admin/sta2_list.php:57 admin/sta2_list.php:71
+msgid "View"
+msgstr ""
+
+#: admin/sta2_list.php:67
+msgid "Edit"
+msgstr ""
+
+#: admin/sta2_list.php:79
+msgid "Delete the checked Raw Statistics (apache)"
+msgstr ""

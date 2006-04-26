@@ -1,0 +1,157 @@
+#! /bin/sh
+
+set -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+db_title AlternC
+
+# We don't reset the welcomeconfirm seen flag.
+#db_reset alternc/welcomeconfirm || true
+#db_fset alternc/welcomeconfirm "seen" "false" || true
+#db_set alternc/welcomeconfirm "true" || true
+db_input critical alternc/welcomeconfirm || true
+
+db_go
+# Check the answer.
+db_get alternc/welcomeconfirm || true
+
+if [ "$RET" = "false" ]; then
+	exit 1
+fi
+
+# default values for local.sh
+MYSQL_HOST=127.0.0.1
+MYSQL_DATABASE=alternc
+MYSQL_USER=sysusr
+MYSQL_PASS="`perl -e 'print map{("a".."z","A".."Z",0..9)[int(rand(62))]}(1..10)' `"
+MYSQL_CLIENT=localhost
+FQDN="`cat /etc/mailname 2>/dev/null || hostname -f`"
+INTERNAL_IP="`/sbin/ifconfig|grep "inet addr:" | grep -v 127.0.0.1| head -1 | sed -e 's/^.*addr:\([0-9\.]*\).*$/\1/' 2>/dev/null || hostname -f`"
+PUBLIC_IP="$INTERNAL_IP"
+DEFAULT_MX="`cat /etc/mailname 2>/dev/null || hostname -f`"
+ALTERNC_LOC=/var/alternc
+NS1_HOSTNAME="$FQDN"
+NS2_HOSTNAME="$FQDN"
+HOSTING="AlternC"
+
+if [ -r /etc/alternc/local.sh ]; then
+    # source the current config
+    . /etc/alternc/local.sh
+fi
+
+# mettre les valeurs de local.sh comme "default" pour debconf
+db_get alternc/hostingname
+if [ -z "$RET" ]
+    then
+    db_set alternc/hostingname "$HOSTING"
+fi
+
+db_get alternc/desktopname
+if [ -z "$RET" ]
+    then
+db_set alternc/desktopname "$FQDN"
+fi
+
+db_get alternc/public_ip
+if [ -z "$RET" ]
+    then
+db_set alternc/public_ip "$PUBLIC_IP"
+fi
+
+db_get alternc/internal_ip
+if [ -z "$RET" ]
+    then
+db_set alternc/internal_ip "$INTERNAL_IP"
+fi
+
+db_get alternc/monitor_ip
+if [ -z "$RET" ]
+    then
+db_set alternc/monitor_ip "$MONITOR_IP"
+fi
+
+db_get alternc/ns1
+if [ -z "$RET" ]
+    then
+db_set alternc/ns1 "$NS1_HOSTNAME"
+fi
+
+db_get alternc/ns2
+if [ -z "$RET" ]
+    then
+db_set alternc/ns2 "$NS2_HOSTNAME"
+fi
+
+db_get alternc/bind_internal
+if [ -z "$RET" ]
+    then
+db_set alternc/bind_internal "$BIND_INTERNAL"
+fi
+
+db_get alternc/default_mx
+if [ -z "$RET" ]
+    then
+db_set alternc/default_mx "$DEFAULT_MX"
+fi
+
+db_get alternc/mysql/host
+if [ -z "$RET" ]
+    then
+db_set alternc/mysql/host "$MYSQL_HOST"
+fi
+
+db_get alternc/mysql/db
+if [ -z "$RET" ]
+    then
+db_set alternc/mysql/db "$MYSQL_DATABASE"
+fi
+
+db_get alternc/mysql/user
+if [ -z "$RET" ]
+    then
+db_set alternc/mysql/user "$MYSQL_USER"
+fi
+
+db_get alternc/mysql/password
+if [ -z "$RET" ]
+    then
+db_set alternc/mysql/password "$MYSQL_PASS"
+fi
+
+db_get alternc/mysql/client
+if [ -z "$RET" ]
+    then
+db_set alternc/mysql/client "$MYSQL_CLIENT"
+fi
+
+db_get alternc/alternc_location
+if [ -z "$RET" ]
+    then
+db_set alternc/alternc_location "$ALTERNC_LOC"
+fi
+
+db_get alternc/mynetwork
+if [ -z "$RET" ]
+    then
+db_set alternc/mynetwork "$SMTP_RELAY_NETWORKS"
+fi
+
+db_input medium alternc/desktopname || true
+db_input medium alternc/hostingname || true
+db_input medium alternc/internal_ip || true
+db_input medium alternc/public_ip || true
+db_input medium alternc/default_mx || true
+db_input medium alternc/ns1 || true
+db_input medium alternc/ns2 || true
+db_input medium alternc/alternc_location || true
+db_input low alternc/mysql/host || true
+db_input low alternc/mysql/db || true
+db_input low alternc/mysql/user || true
+db_input low alternc/mysql/password || true
+db_input low alternc/monitor_ip || true
+db_input low alternc/bind_internal || true
+db_input low alternc/mynetwork || true
+db_go
+
+# vim: et sw=4

@@ -1,0 +1,128 @@
+body {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #000000;
+	background-color: white;
+}
+
+.hlp {
+	font-family: Helvetica, Tahoma, sans-serif;
+	font-size: 10px;
+	color: #202020;
+}
+
+td {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #000000;
+}
+
+th {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #007799;
+	font-weight: bold
+}
+
+h3 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	font-weight: bold;
+	color: #007777;
+	text-align: center;
+}
+
+h4 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	font-weight: bold;
+	color: #007777
+}
+
+hr {
+	color: #007799;
+	border-color:  #007799;
+}
+
+.inp {
+	/* Should not be use anymore !!! */
+	border-color: blue;
+	border-width: 5px;
+	backgorund-color: #500000;
+	color: white;
+}
+
+.inc, .inl {
+	background-color: #FFFFF0;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	border-style: none;
+	color: black;
+}
+
+.inb {
+	background-color: #FFFFF0;
+        font-family: Verdana, Arial, Helvetica, sans-serif;
+        font-size: 12px;
+	color: black;
+}
+
+.int {
+	background-color: #FFFFF0;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: black;
+	border-width: 1px;
+	border-color: black;
+	border-style: solid;
+}
+
+.lst1 {
+	background-color: #FFFFFF;
+}
+.lst2 {
+	background-color: #EEEEEE;
+}
+
+.dlogin {
+	text-align: center;
+}
+
+.login {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+img {
+	border: 0px;
+	vertical-align: middle;
+}
+
+.error {
+	color: red;
+	font-weight: bold;
+}
+
+/* Over quota class */
+.over {
+	color: red;
+}
+
+.code {
+	font-size: 16px;
+	font-face: Courier New, Fixed;
+	font-weight: bold;
+	text-align: center;
+}
+
+.exp1 {
+	background-color: #6284F3;
+}
+
+.exp2 {
+	background-color: #62F37A;
+}
+
+.exp3 {
+	background-color: #F36262;
+}

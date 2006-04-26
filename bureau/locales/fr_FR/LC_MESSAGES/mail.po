@@ -1,0 +1,144 @@
+# French AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: mail.po,v 1.8 2005/04/01 16:05:26 benjamin Exp $
+msgid ""
+msgstr ""
+"Project-Id-Version: $Id: mail.po,v 1.8 2005/04/01 16:05:26 benjamin Exp $\n"
+"Report-Msgid-Bugs-To: i18n@alternc.org\n"
+"POT-Creation-Date: 2004-05-24 19:34+0200\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: French <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+
+#: admin/menu_mail.php:37
+msgid "Mailboxes"
+msgstr "Comptes Mails"
+
+#: admin/mail_add.php:37
+#, php-format
+msgid "Add a mail to the domain %s"
+msgstr "Ajout d'un mail sur le domaine %s"
+
+#: admin/mail_add.php:48 admin/mail_list.php:74
+msgid "Email address"
+msgstr "Adresse Email"
+
+#: admin/mail_add.php:49 admin/mail_edit.php:58
+msgid "Is it a POP account?"
+msgstr "Compte POP ?"
+
+#: admin/mail_add.php:50 admin/mail_edit.php:59
+msgid "POP password"
+msgstr "Mot de passe POP"
+
+#: admin/mail_add.php:51 admin/mail_edit.php:60
+msgid "Other recipients"
+msgstr "Autres destinataires"
+
+#: admin/mail_add.php:51 admin/mail_edit.php:60
+msgid "One email per line"
+msgstr "un email par ligne"
+
+#: admin/mail_add.php:52
+msgid "Create this mailbox"
+msgstr "Ajouter cet email"
+
+#: admin/mail_add.php:56
+msgid "help_mail_add"
+msgstr ""
+"- Pour créer cet email<br /> * Si vous voulez stocker les emails recus et y "
+"accéder avec un logiciel de messagerie ou le webmail, cochez la case 'Compte "
+"pop'. Dans ce cas, entrez un mot de passe pour le compte pop.<br /> * Si "
+"vous souhaitez rediriger ce mail vers d'autres, entrer la liste des mails "
+"concernés, un mail par ligne (avec le @ dans tous les cas).<br /> Note : il "
+"faut soit cocher la case 'Creer un compte pop' soit entrer une redirection, "
+"soit les deux.<br /> * Pour accéder à la lecture du mail, utiliser l'adresse "
+"http://'votredomaine'/webmail/ ou un sous-domaine de type 'Accès au "
+"Webmail'<br /> Le nom d'utilisateur est l'adresse email (par exemple "
+"<code>login@votredomaine.com</code>) et le mot de passe est celui que "
+"vous avez entré dans ce formulaire. "
+
+#: admin/mail_doadd.php:40
+#, php-format
+msgid "The mailbox <b>%s</b> has been successfully created"
+msgstr "Le mail <b>%s</b> a été ajouté avec succès"
+
+#: admin/mail_dodel.php:39
+#, php-format
+msgid "The mailbox <b>%s</b> does not exist!"
+msgstr "Le mail <b>%s</b> n'existe pas"
+
+#: admin/mail_doedit.php:40
+#, php-format
+msgid "The mailbox <b>%s</b> has been successfully changed"
+msgstr "Le mail <b>%s</b> a été modifié avec succès"
+
+#: admin/mail_edit.php:41
+#, php-format
+msgid "Edit a mailbox of the domain %s"
+msgstr "Modification d'un email du domaine %s"
+
+#: admin/mail_edit.php:57
+#, php-format
+msgid "Edit the mailbox %s"
+msgstr "Modification du mail %s"
+
+#: admin/mail_edit.php:61
+msgid "Change this mailbox"
+msgstr "Modifier cet email"
+
+#: admin/mail_edit.php:65
+msgid "help_mail_edit"
+msgstr ""
+"- Pour modifier cet email<br /> * Si vous voulez stocker les emails recus et "
+"y accéder avec un logiciel de messagerie ou le webmail, cochez la case "
+"'Compte pop'.    Dans ce cas, entrez un mot de passe pour le compte pop.<br /"
+"> * Si vous souhaitez rediriger ce mail vers d'autres, entrer la liste des "
+"mails concernés, un mail par ligne (avec le @ dans tous les cas).<br /> "
+"Note : il faut soit cocher la case 'Creer un compte pop' soit entrer une "
+"redirection, soit les deux.<br /> * Si vous ne mettez rien dans la zone 'Mot "
+"de passe', celui-ci ne sera pas changé. Si vous voulez changer le mot de "
+"passe, entrez le nouveau mot de passe<br /> * Pour accéder à la lecture du "
+"mail, utiliser l'adresse http://'votredomaine'/webmail/ ou un sous-domaine "
+"du type 'Accès au Webmail'<br /> Le nom d'utilisateur est votre adresse email "
+"(par exemple <code>login@votredomaine.com</code> et le mot de passe est celui "
+"que vous avez entré dans ce formulaire. "
+
+#: admin/mail_list.php:43 admin/mail_list.php:60
+#, php-format
+msgid "Mailbox list of the domain %s"
+msgstr "Liste des emails du domaine %s"
+
+#: admin/mail_list.php:48 admin/mail_list.php:66
+#, php-format
+msgid "Add a mailbox on <b>%s</b>"
+msgstr "Ajouter un email sur <b>%s</b>"
+
+msgid "Add many mailboxes on <b>%s</b>"
+msgstr "Ajouter plusieurs emails sur <b>%s</b>"
+
+#: admin/mail_list.php:74
+msgid "Delete"
+msgstr "Effacer"
+
+#: admin/mail_list.php:74
+msgid "Action"
+msgstr "Action"
+
+#: admin/mail_list.php:74
+msgid "Size"
+msgstr "Taille"
+
+#: admin/mail_list.php:83
+msgid "Edit"
+msgstr "Modifier"
+
+#: admin/mail_list.php:93
+msgid "Delete the selected mailboxes"
+msgstr "Effacer les mails sélectionnés"
+

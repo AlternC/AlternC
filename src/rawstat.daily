@@ -1,0 +1,216 @@
+#!/usr/bin/php4 -q
+<?php
+/*
+ $Id: rawstat.daily,v 1.4 2005/05/11 15:39:34 arnaud-lb Exp $
+ ----------------------------------------------------------------------
+ AlternC - Web Hosting System
+ Copyright (C) 2002 by the AlternC Development Team.
+ http://alternc.org/
+ ----------------------------------------------------------------------
+ Based on:
+ Valentin Lacambre's web hosting softwares: http://altern.org/
+ ----------------------------------------------------------------------
+ LICENSE
+
+ This program is free software; you can redistribute it and/or
+ modify it under the terms of the GNU General Public License (GPL)
+ as published by the Free Software Foundation; either version 2
+ of the License, or (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ To read the license please visit http://www.gnu.org/copyleft/gpl.html
+ ----------------------------------------------------------------------
+ Original Author of file: Arnaud lb
+ Purpose of file: Provides raw statistics to members
+ ----------------------------------------------------------------------
+*/
+
+require("/var/alternc/bureau/class/local.php");
+$FILES_OWNER = 33;
+$APACHE_LOG = '/var/log/apache/access.log.1';
+umask(0177);
+$hosts = array();
+$nolog_hosts = array();
+$LOGS_SUFIX='.log';//For testing
+
+if (!mysql_connect($L_MYSQL_HOST,$L_MYSQL_LOGIN,$L_MYSQL_PWD)) {
+	echo "Cannot connect to Mysql !\n";
+	return 1;
+}
+
+if (!mysql_select_db($L_MYSQL_DATABASE)) {
+	echo "Cannot connect to Mysql database $L_MYSQL_DATABASE !\n";
+	return 1;
+}
+
+$query = "SELECT mid,folder,hostname FROM stats2 ORDER BY CHAR_LENGTH(hostname) ASC";
+$result = mysql_query($query);
+if (mysql_errno()) {
+	echo 'MySQL error: '.mysql_error()."\n";
+}
+
+//Fetch the list of raw stats, and caching some data
+while ($row = mysql_fetch_assoc($result)) {
+	$hosts[$row['hostname']] = array(
+		'mid'=>$row['mid'],
+		'log_files'=>array(
+			$row['folder'].'/'.$row['hostname'].$LOGS_SUFIX =>''
+		)
+	);
+	
+	//A log line with host.test.com should go to the test.com's log file too, if the member want logs for host.test.com and test.com.
+	$parent_host = $row['hostname'];
+	while ($pos = strpos($parent_host, '.')) {
+		$parent_host = substr($parent_host, $pos+1);
+		if (!isset($hosts[$parent_host])) {
+			continue;
+		}
+		//link the parent-hostnames's log-files in this host
+		$parent_log_files = array_keys($hosts[$parent_host]['log_files']);
+		foreach($parent_log_files as $parent_log_file) {
+			$hosts[$row['hostname']]['log_files'][$parent_log_file] = &$hosts[$parent_host]['log_files'][$parent_log_file];
+		}
+
+		break;
+	}
+}
+
+//Open apache log file
+if (!$apache_log_file = fopen($APACHE_LOG, 'r')) {
+	return 1;
+}
+
+//Parsing log file
+while ($line = fgets($apache_log_file)) {
+
+	//Get the hostname in this log line
+	//assume that hostname is at end of line and separated with a space
+	$host = substr($line, strrpos($line, ' ')+1, -1);
+
+	if (is_null($hosts[$host])) {
+		unset($hosts[$host]);
+		$nolog_hosts[$host]='';
+		continue;
+	}
+
+	if (isset($nolog_hosts[$host])) {
+		continue;
+	}
+
+	//If hostname is not listed in hostnames to log, link it to a listed parent if exists.
+	//Processed only one time by not listed hostname
+	if (!isset($hosts[$host])) {
+		$parent_host = $host;
+		while ($pos = strpos($parent_host, '.')) {
+			$parent_host = substr($parent_host, $pos+1);
+			if (isset($nolog_hosts[$parent_host])) {
+				$pos = false;
+				break;
+			}
+			if (is_null($hosts[$parent_host])) {
+				unset($hosts[$parent_host]);
+				$nolog_hosts[$parent_host]='';
+				$pos = false;
+				break;
+			}
+			if (isset($hosts[$parent_host])) {
+				//link this host to the parent hostname
+				$hosts[$host] = &$hosts[$parent_host];
+				break;
+			}
+		}
+		if ($pos === false) {
+			//We will not have to search again for this host
+			$nolog_hosts[$host]='';
+			continue;
+		}
+	}
+
+	$log_files = array_keys($hosts[$host]['log_files']);
+	if (count($log_files) < 1) {
+		$hosts[$host] = null;
+		unset($hosts[$host]);
+		$nolog_hosts[$host]='';
+		continue;
+	}
+
+	foreach($log_files as $log_file) {
+
+		if (is_null($hosts[$host]['log_files'][$log_file])) { 
+			// has been set to null throught a reference for a future unset
+			unset($hosts[$host]['log_files'][$log_file]);
+			continue;
+		}
+
+		//file isn't opened yet
+		if (!is_resource($hosts[$host]['log_files'][$log_file])) {
+	
+			//Log file doesn't exists, we create an empty one with good owner and perms
+			if (!file_exists($log_file)) {
+				if (!touch($log_file)) {
+					$hosts[$host]['log_files'][$log_file] = null;
+					unset($hosts[$host]['log_files'][$log_file]);
+					continue;
+				}
+				if (!chgrp($log_file, (int)$hosts[$host]['mid'])) {
+					unlink($log_file);
+					$hosts[$host]['log_files'][$log_file] = null;
+					unset($hosts[$host]['log_files'][$log_file]);
+					continue;
+				}
+				if (!chown($log_file, (int)$FILES_OWNER)) {
+					unlink($log_file);
+					$hosts[$host]['log_files'][$log_file] = null;
+					unset($hosts[$host]['log_files'][$log_file]);
+					continue;
+				}
+			}
+	
+			//Open the log file
+			if (!$hosts[$host]['log_files'][$log_file] = fopen($log_file, 'a')) {
+				$hosts[$host]['log_files'][$log_file] = null;
+				unset($hosts[$host]['log_files'][$log_file]);
+				continue;
+			}
+		}
+
+		//Write the log line
+		if (!fwrite($hosts[$host]['log_files'][$log_file], $line)) {
+			fclose($hosts[$host]['log_files'][$log_file]);
+			$hosts[$host]['log_files'][$log_file] = null;
+			unset($hosts[$host]['log_files'][$log_file]);
+		}
+	}
+}
+
+//Close all opened files
+$hostnames = array_keys($hosts);
+while ($host = array_pop($hostnames)) {
+	if (is_null($hosts[$hostname]['log_files'])) {
+		unset($hosts[$hostname]['log_files'][$log_file]);
+		continue;
+	}
+	$log_files = array_keys($hosts[$hostname]['log_files']);
+	while ($log_file = array_pop($log_files)) {
+		if (is_null($hosts[$hostname]['log_files'][$log_file])) {
+			unset($hosts[$hostname]['log_files'][$log_file]);
+			continue;
+		}
+		if (is_resource($hosts[$hostname]['log_files'][$log_file])) {
+			fclose($hosts[$hostname]['log_files'][$log_file]);
+			$hosts[$hostname]['log_files'][$log_file] = null;
+			unset($hosts[$hostname]['log_files'][$log_file]);
+		}
+	}
+	$hosts[$hostname] = null;
+	unset($hosts[$hostname]);
+}
+
+fclose($apache_log_file);
+
+return 0;
+?>

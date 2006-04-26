@@ -1,0 +1,112 @@
+############################################
+# m_webaccess
+msgid ""
+msgstr ""
+"Project-Id-Version: $Id: hta.po,v 1.8 2004/05/19 14:23:06 benjamin Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Bruno <bruno@alternc.org>\n"
+"Language-Team: Espanol <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+
+msgid "err_hta_1"
+msgstr "Un archivo .htaccess incompatible se encuentra en este directorio."
+
+msgid "err_hta_2"
+msgstr ".htaccess reconocido y sintaxis correcta, un .htpasswd a sido creado."
+
+msgid "err_hta_3"
+msgstr ".htaccess reconocido y sintaxis correcta, .htpasswd ya existe"
+
+msgid "err_hta_4"
+msgstr "No hay ninguna carpeta protegida"
+
+msgid "err_hta_5"
+msgstr "Imposible suprimir el archivo '%s'/.htaccess"
+
+msgid "err_hta_6"
+msgstr "Imposible suprimir el archivo '%s'/.htpasswd"
+
+msgid "err_hta_7"
+msgstr "El archivo .htaccess no existe"
+
+msgid "err_hta_8"
+msgstr "La carpeta '%s' no existe"
+
+msgid "err_hta_9"
+msgstr "El archivo '%s' no es válido"
+
+msgid "err_hta_10"
+msgstr "El usuario '%s' ya está relacionado con esta carpeta"
+
+msgid "err_hta_11"
+msgstr "Por favor entre un nombre de usuario válido"
+
+msgid "help_hta_list"
+msgstr "Aquí está la lista de las carpetas protegidas de su cuenta"
+
+msgid "Protect a folder"
+msgstr "Proteger una carpeta"
+
+msgid "The folder must exists."
+msgstr "La carpeta debe existir."
+
+msgid "Protect this folder"
+msgstr "Proteger esta carpeta"
+
+msgid "Adding a username in %s"
+msgstr "Añadir un usuario autorizado en %s"
+
+msgid "Add this user"
+msgstr "Añadir el usuario"
+
+msgid "The protected folder %s has been successfully unprotected"
+msgstr "La carpeta protegida %s ha sido desprotegida"
+
+msgid "Delete a protected folder"
+msgstr "Supresión de las carpetas protegidas"
+
+msgid "Please enter a password"
+msgstr "Por favor, entre una clave"
+
+msgid "Change the user %s in the protected folder %s"
+msgstr "Modificar usuario %s en la carpeta protegida %s"
+
+msgid "The password of the user %s has been successfully changed"
+msgstr "La clave del usuario %s a sido modificada con éxito"
+
+msgid "No folder selected!"
+msgstr "¡Ninguna carpeta seleccionada!"
+
+msgid "List of authorized user in folder %s"
+msgstr "Lista de los usuarios autorizados en la carpeta %s"
+
+msgid "No authorized user in %s"
+msgstr "Ningún usuario autorizado en %s"
+
+msgid "Add a username"
+msgstr "Añadir un usuario"
+
+msgid "Delete the checked users"
+msgstr "Suprimir los usuarios marcados"
+
+msgid "Editing user %s in the protected folder %s"
+msgstr "Modificar usuario %s en la carpeta protegida %s"
+
+msgid "New password"
+msgstr "Nueva clave"
+
+msgid "Change the password"
+msgstr "Modificar clave"
+
+msgid "Protected folders list"
+msgstr "Lista de carpetas protegidas"
+
+msgid "Unprotect the checked folders"
+msgstr "Quitar protección a las carpetas marcadas"
+
+msgid "Protected folders"
+msgstr "Carpetas protegidas"

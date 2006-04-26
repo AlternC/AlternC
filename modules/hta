@@ -1,0 +1,11 @@
+class/m_hta.php
+admin/hta_add.php
+admin/hta_adduser.php
+admin/hta_del.php
+admin/hta_doadd.php
+admin/hta_doadduser.php
+admin/hta_dodeluser.php
+admin/hta_doedituser.php
+admin/hta_edit.php
+admin/hta_edituser.php
+admin/hta_list.php

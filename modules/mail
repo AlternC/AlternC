@@ -1,0 +1,8 @@
+class/m_mail.php
+admin/menu_mail.php
+admin/mail_add.php
+admin/mail_doadd.php
+admin/mail_dodel.php
+admin/mail_doedit.php
+admin/mail_edit.php
+admin/mail_list.php

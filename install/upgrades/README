@@ -1,0 +1,53 @@
+Fonctionnement des scripts de mise-à-jour d'AlternC
+===================================================
+
+Il a été décidé que des mises-à-jour pourront être "accrochées" à
+certaines versions en les mettant dans le dossier upgrades. Lors de
+l'installation d'un paquet, un script (upggrade_check.sh) examine ce
+dossier et applique les mises-à-jour nécessaires, en se basant sur les
+numéros de version. Les scripts considérés sont ceux terminés par
+.sql, .sh ou .php, et sont interprétés avec mysql, /bin/sh ou php
+respectivement, et dans cet ordre.
+
+Pour être considéré, le script doit donc avoir un nom conforme,
+c'est-à-dire sous la forme \d(\.\d+)* (en expression régulière), par
+exemple: 0.9.1.sh, 1.0.php, etc. De plus, le fichier est considéré
+seulement si la version avec laquelle il est nommé tombe entre la
+version de départ et d'arrivée du package.
+
+Voir ci-bas pour des exemples.
+
+Description formelle du fonctionnement de upgrade_check.sh
+----------------------------------------------------------
+
+Soit un upgrade d'une version X à une version Y. Les fichiers du
+dossier d'upgrade sont examinés un à un. Pour chaque fichier dont le
+nom N.php, N.sh ou N.sql est X >= N <= Y, le fichier est exécuté ou
+passé à mysql, selon le cas approprié. Les versions sont comparées
+avec dpkg --compare-versions.  Les scripts sont exécutés dans cet
+ordre: *.sql *.sh *.php.
+
+Il est donc capital de nommer correctement ce fichier.
+
+Ces scripts devront être idempotents, car ils peuvent être exécutés à
+plusieurs reprises, comme tous les scripts postinst et config.
+
+(Note: en réalité, on ne vérifie pas la condition N <= Y. On assume que
+si le script est disponible, il est applicable à cette version. Ceci
+signifie qu'il ne faut pas "packager" un script d'upgrade N dans un
+package Y si N > Y. Exemple: ne pas inclure un script 1.0 dans un
+package 0.9, car il sera exécuté, même si la version installée est 1.0.)
+
+Pour plus de détails, consultez directement le script
+../upgrade_check.sh, qui gère ces upgrades.
+
+Mise en situation
+-----------------
+
+Exemple: 0.9.1 sera exécuté lors d'une mise à jour de 0.9 à 0.9.1 (ou
+1.0), mais pas d'une mise à jour de 0.9.1 à 1.0.
+
+Autre exemple: on procède à une mise à jour de alternc-0.9-20031009 vers
+alternc-0.9.1. On trouve le script upgrades/0.9.1.sh. Celui-ci est
+exécuté car 0.9-20031009 >= 0.9.1 <= 0.9.1. Il serait aussi exécuté pour
+une mise à jour vers 0.9.2, 1.0, etc.

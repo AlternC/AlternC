@@ -1,0 +1,8 @@
+class/m_ftp.php
+admin/menu_ftp.php
+admin/ftp_add.php
+admin/ftp_del.php
+admin/ftp_doadd.php
+admin/ftp_doedit.php
+admin/ftp_edit.php
+admin/ftp_list.php

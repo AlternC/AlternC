@@ -1,0 +1,1 @@
+ALTER TABLE `sessions` ADD `ts` TIMESTAMP NOT NULL ;

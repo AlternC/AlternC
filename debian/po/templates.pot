@@ -1,0 +1,359 @@
+#
+#    Translators, if you are not familiar with the PO format, gettext
+#    documentation is worth reading, especially sections dedicated to
+#    this format, e.g. by running:
+#         info -n '(gettext)PO Files'
+#         info -n '(gettext)Header Entry'
+#
+#    Some information specific to po-debconf are available at
+#            /usr/share/doc/po-debconf/README-trans
+#         or http://www.debian.org/intl/l10n/po-debconf/README-trans
+#
+#    Developers do not need to manually edit POT or PO files.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-04-26 11:16+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Type: boolean
+#. Description
+#: ../templates:4
+msgid "Do you REALLY want to install AlternC on this computer ?"
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../templates:4
+msgid ""
+"You are currently trying to install AlternC on your computer. Be aware that "
+"this package will overwrite critical system files, including but not limited "
+"to the config files of apache, bind, postfix, courier, proftpd and php."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../templates:4
+msgid ""
+"A backup of your old configuration will be stored in \"/var/backups/alternc/"
+"etc-original-`date`.tar.gz\"."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../templates:4
+msgid ""
+"If you still want to proceed with this installation, choose YES here, "
+"otherwise choose NO."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../templates:4
+msgid "YOU HAVE BEEN WARNED."
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../templates:20
+msgid "Fully qualified name of the desktop."
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../templates:20
+msgid ""
+"Please enter the fully qualified name of your server. This will be the "
+"domain part of the url you will use to access the virtual managment desktop. "
+"This (sub)domain MUST point to your server."
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../templates:20
+msgid "The default should be ok if your machine is correctly configured."
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../templates:29
+msgid "Name of your hosting service"
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../templates:29
+msgid ""
+"Please enter the name of your hosting service. It may be your company's name "
+"or your personnal name or whatever you want to ..."
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../templates:35
+msgid "Name of the primary domain name server."
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../templates:35
+msgid ""
+"Please enter the fully qualified name of your primary dns server. It can be "
+"this server since bind is installed and configured by AlternC. Anyway, if "
+"your hosting service is quite big, you may have an external primary name "
+"server that keep in sync with your alternc's server(s). . The default value "
+"should be good in most case."
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../templates:44
+msgid "Name of the secondary domain name server."
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../templates:44
+msgid ""
+"Please enter the fully qualified name of your secondary dns server. It can "
+"be this server since bind is installed and configured by AlternC. Anyway, "
+"you should have 2 separate DNS servers if you want to provide a high quality "
+"hosting service."
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../templates:44
+msgid ""
+"You may contact the AlternC's users mailing list if you want to exchange dns "
+"service with other AlternC's users."
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../templates:55
+msgid "Name of the mysql server."
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../templates:55
+msgid ""
+"Please enter the fully qualified name of your mysql server host. On small "
+"systems, it IS \"localhost\" since you may have installed a local mysql "
+"server. If you are a bigger hosting service, you may put your mysql service "
+"on a remote synchronized ring or equivalent. In that case, please enter the "
+"hostname of your mysql server. This server MUST be able to access the remote "
+"server at standard port (3306). It is recommended to use \"127.0.0.1\" "
+"instead of \"localhost\" if your postfix installation is configured in a "
+"chroot (which is the case, by default)."
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../templates:67
+msgid "AlternC's mysql system database"
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../templates:67
+msgid ""
+"AlternC will create a mysql database to store it's system data. Please "
+"choose the name of this database here. The default value should be good in "
+"most case."
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../templates:74
+msgid "AlternC's mysql account"
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../templates:74
+msgid ""
+"AlternC will create a mysql administrator account. Please choose it's "
+"username here. The default value should be good in most case."
+msgstr ""
+
+#. Type: password
+#. Description
+#: ../templates:80
+msgid "Password of the AlternC's mysql account"
+msgstr ""
+
+#. Type: password
+#. Description
+#: ../templates:80
+msgid ""
+"AlternC requires an administrator account on the mysql server. It will be "
+"created automatically during the install process. Please choose a password "
+"for this account."
+msgstr ""
+
+#. Type: password
+#. Description
+#: ../templates:80
+msgid ""
+"Please choose a quite complex password since it will have full access to the "
+"system database !!!"
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../templates:90
+msgid "The server to GRANT permissions to"
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../templates:90
+msgid ""
+"AlternC and MySQL can be installed on different servers. In order to have "
+"GRANT table properly created and manipulated, this parameter must be set to "
+"the hostname or IP the Apache server will appear as connecting from to the "
+"MySQL server."
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../templates:98
+msgid "the primary IP of this server"
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../templates:98
+msgid ""
+"AlternC will default the A records for domains it hosts to this IP. In other "
+"words, this is the IP everyone can reach to server at."
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../templates:104
+msgid "the internal IP of this server"
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../templates:104
+msgid ""
+"AlternC will configure Apache and other services to listen to this address. "
+"This is usually the same as the primary IP of the server, unless the server "
+"is sitting behind a NAT router."
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../templates:104
+msgid "In other words, this is the IP address of eth0."
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../templates:113
+msgid "the default MX to assign to new domains"
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../templates:113
+msgid ""
+"AlternC will assign this hostname as the MX record for all the domains it "
+"hosts. It is usually better be left alone."
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../templates:119
+msgid "The path where AlternC is installed"
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../templates:119
+msgid ""
+"Please enter the partition name where alternc is installed. This is used "
+"mainly for disk quotas."
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../templates:125
+msgid "monitoring server"
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../templates:125
+msgid ""
+"IP address (or ip/prefix) of the server(s) which we want to authorize ping "
+"to us and apache status pages. Completely optional."
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../templates:131
+msgid "trusted servers for bind"
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../templates:131
+msgid ""
+"IP address or prefix of machines within our trust for DNS transfers, "
+"delimited by ';', optional."
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../templates:137
+msgid "SMTP authorized networks"
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../templates:137
+msgid "IP addresses of the networks authorized in SMTP, space-delimited."
+msgstr ""
+
+#. Type: note
+#. Description
+#: ../templates:142
+msgid "POP Before SMTP deprecated"
+msgstr ""
+
+#. Type: note
+#. Description
+#: ../templates:142
+msgid ""
+"AlternC doesn't automatically configure the pop-before-smtp package anymore, "
+"since it is correctly configured for SASL authentification these days. If "
+"you wish to configure pop-before-smtp, simply find the lines preceded by:"
+msgstr ""
+
+#. Type: note
+#. Description
+#: ../templates:142
+msgid "# For Courier-POP3 and Courier-IMAP:"
+msgstr ""
+
+#. Type: note
+#. Description
+#: ../templates:142
+msgid ""
+"in the /etc/pop-before-smtp/pop-before-smtp.conf and uncomment it. hash:/var/"
+"lib/pop-before-smtp/hosts must also be added to the mynetworks directive of /"
+"etc/postfix/main.cf"
+msgstr ""

@@ -1,0 +1,4 @@
+/usr/share/alternc/install/alternc.install usr/sbin/alternc.install
+/etc/alternc/menulist.txt var/alternc/bureau/admin/menulist.txt
+fr_FR var/alternc/bureau/locales/fr_CA
+en_US var/alternc/bureau/locales/en_GB

@@ -1,0 +1,40 @@
+Le système de langue fonctionne ainsi : 
+
+dans bureau/locales/ on trouve un DOSSIER par langue sous la forme
+major_minor/
+exemple : fr_FR en_US ...
+dans lequel on a un sous-dossier LC_MESSAGES
+dans lequel on a des fichiers .po en vrac (normalement 1 ou 2 fichiers .po par module d'AlternC.)
+
+Le fichier alternc.mo est donc construit à partir de TOUS les fichiers .po d'une même langue.
+
+Howto translate AlternC in a new language
+=========================================
+
+This folder contains po and pot files, who are templates that allows you
+to translate AlternC in any language.
+
+1. How to add a language : 
+- create a folder with your iso language code (ex: de_DE for
+  German from Germany see `dpkg-reconfigure locales` for available codes.)
+- create a subfolder LC_MESSAGES in this folder
+- copy .po and .pot files and rename .pot to .po
+- Translate them ;) 
+- Send them to us so that we can add them to the next release or as a language pack.
+
+2. How to update language files.
+
+When the programm is updated, the po and pot files in locales/ are
+changed to reflect the new developped features.
+
+You can launch 
+
+./updatelang.sh <languagecode> 
+
+from "locales/" to update your language po files. New strings will have
+an empty "msgstr" value, and obsoletes one will be commented out with
+#~ 
+
+Example : 
+
+./updatelang.sh fr_FR

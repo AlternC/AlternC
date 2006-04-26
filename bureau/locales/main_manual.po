@@ -1,0 +1,96 @@
+# French AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: main_manual.po,v 1.2 2004/11/10 22:14:54 anonymous Exp $
+msgid ""
+msgstr ""
+"Project-Id-Version: $Id: main_manual.po,v 1.2 2004/11/10 22:14:54 anonymous Exp $\n"
+"Report-Msgid-Bugs-To: i18n@alternc.org\n"
+"POT-Creation-Date: 2004-05-24 19:34+0200\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: French <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+
+msgid "err_err_0"
+msgstr "OK"
+
+msgid "err_err_1"
+msgstr "Le message d'erreur n'existe pas (%s)"
+
+msgid "the %3$d-%2$d-%1$d at %4$d:%5$d"
+msgstr "le %1$d/%2$d/%3$d, à %4$dh%5$d"
+
+msgid "Yes"
+msgstr "Oui"
+
+msgid "No"
+msgstr "Non"
+
+msgid "err_mem_1"
+msgstr "Utilisateur ou mot de passe incorrect"
+
+msgid "err_mem_2"
+msgstr "Compte Verrouillé, contacter l'administrateur"
+
+msgid "err_mem_3"
+msgstr "Cookie incorrect, acceptez les cookies"
+
+msgid "err_mem_4"
+msgstr "Session inexistante, contacter l'administrateur"
+
+msgid "err_mem_5"
+msgstr "IP incorrecte, contacter l'administrateur"
+
+# PROBLEME : il y avait 2 fois le 5, les autres messages doivent surement etre décalés (TODO)
+msgid "err_mem_6"
+msgstr "L'ancien mot de passe est incorrect"
+
+msgid "err_mem_7"
+msgstr "Les deux nouveaux mots de passe sont différents"
+
+msgid "err_mem_8"
+msgstr "Un mot de passe doit faire au moins 3 caractères"
+
+msgid "err_mem_9"
+msgstr "Les données entrées sont incorrectes"
+
+msgid "err_mem_11"
+msgstr "Vous ne pouvez pas changer votre mot de passe"
+
+msgid "err_mem_12"
+msgstr ""
+"Vous devez être administrateur pour pouvoir modifier vos préférences "
+"administrateur."
+
+# Please do NOT translate those strings to each language. Use the country language instead
+msgid "fr_FR"
+msgstr "Français (France)"
+
+msgid "fr_CA"
+msgstr "Français (Canada)"
+
+msgid "en_US"
+msgstr "English (United States)"
+
+msgid "en_UK"
+msgstr "English (United Kingdom)"
+
+msgid "de_DE"
+msgstr "Deutsch (Germany)"
+
+msgid "es_ES"
+msgstr "Espanol"
+
+msgid "es_VE"
+msgstr "Espanol"
+
+msgid "err_quota_0"
+msgstr "OK"
+
+msgid "err_quota_1"
+msgstr "Disk quota are not enabled on this server"
+

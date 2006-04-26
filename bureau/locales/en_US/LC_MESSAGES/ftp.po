@@ -1,0 +1,101 @@
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: ftp.po,v 1.3 2003/06/10 05:49:36 root Exp $ 
+msgid ""
+msgstr ""
+"Project-Id-Version: $Id: ftp.po,v 1.3 2003/06/10 05:49:36 root Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+
+msgid "quota_ftp"
+msgstr "FTP Accounts"
+
+msgid "err_ftp_1"
+msgstr "No ftp account found"
+
+msgid "err_ftp_2"
+msgstr "This ftp account does not exist"
+
+msgid "err_ftp_3"
+msgstr "The chosen prefix is not allowed"
+
+msgid "err_ftp_4"
+msgstr "This ftp account already exists"
+
+msgid "err_ftp_5"
+msgstr "Your ftp account quota is over. You cannot create more ftp accounts."
+
+msgid "err_ftp_6"
+msgstr "The directory cannot be created."
+
+
+msgid "hlp_ftp_list"
+msgstr ""
+"Voici la liste des comptes ftp ayant accès à votre compte. "
+"Cliquez sur 'Modifier' pour changer le nom d'utilisateur, le mot de passe, ou le dossier racine.<br /> "
+"Pour supprimer un compte, cochez la case correspondante et cliquez sur le bouton 'Supprimer les comptes cochés'<br />"
+"Pour pouvoir accéder à vos fichiers avec un logiciel de ftp, vous devez créer au moins un compte. "
+"Chaque compte est associé à un dossier, et n'aura donc accès qu'aux fichiers situés dans ce dossier ou en dessous. <br />"
+"Plus d'info sur le FTP dans l'aide en ligne HELPID_100<br />"
+
+msgid "hlp_ftp_list_no"
+msgstr ""
+"Vous n'avez actuellement aucun Compte FTP de disponible. Cliquez sur 'Création d'un compte ftp' pour en créer un.<br />"
+"Pour pouvoir accéder à vos fichiers avec un logiciel de ftp, vous devez créer au moins un compte.  "
+"Chaque compte est associé à un dossier, et n'aura donc accès qu'aux fichiers situés dans ce dossier ou en dessous. <br />"
+"Plus d'info sur le FTP dans l'aide en ligne HELPID_100<br />"
+
+msgid "hlp_ftp_add"
+msgstr ""
+"Pour ajouter un compte ftp, vous devez choisir un Nom d'utilisateur, un mot de passe, et un répertoire racine<br />"
+"Le nom d'utilisateur commence toujours par votre nom de login ou le nom d'un de vos domaines.<br />"
+"Le répertoire racine, s'il n'existe pas, sera créé automatiquement.<br />"
+"Note : Le compte que vous créez ainsi aura accès en lecture et en écriture aux fichiers situés dans le répertoire et tous ses sous-répertoires.<br />"
+"Plus d'info sur le FTP dans l'aide en ligne HELPID_100<br />"
+
+msgid "You cannot add any new ftp account, your quota is over."
+msgstr "You cannot add any new ftp account, your quota is over."
+
+msgid "Create a new ftp account"
+msgstr "Create a new ftp account"
+
+msgid "Create this new FTP account."
+msgstr "Create this new FTP account."
+
+msgid "The ftp account %s has been successfully deleted"
+msgstr "The ftp account %s has been successfully deleted"
+
+msgid "Deleting an FTP account"
+msgstr "Deleting an FTP account"
+
+msgid "The FTP account has been successfully created"
+msgstr "The FTP account has been successfully created"
+
+msgid "No account selected!"
+msgstr "No account selected!"
+
+msgid "The ftp account has been successfully changed"
+msgstr "The ftp account has been successfully changed"
+
+msgid "Editing an FTP account"
+msgstr "Editing an FTP account"
+
+msgid "Change this FTP account"
+msgstr "Change this FTP account"
+
+msgid "FTP accounts list"
+msgstr "FTP accounts list"
+
+msgid "<-No Password->"
+msgstr "<-No Password->"
+
+msgid "FTP accounts"
+msgstr "FTP accounts"
+

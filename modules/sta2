@@ -1,0 +1,8 @@
+class/m_sta2.php
+admin/menu_sta2.php
+admin/sta2_add_raw.php
+admin/sta2_del_raw.php
+admin/sta2_doadd_raw.php
+admin/sta2_doedit_raw.php
+admin/sta2_edit_raw.php
+admin/sta2_list.php

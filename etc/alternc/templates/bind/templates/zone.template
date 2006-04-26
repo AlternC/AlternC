@@ -1,0 +1,14 @@
+$TTL 1D
+;
+; BIND data file for domain @@DOMAINE@@
+;
+@       IN SOA %%ns1%%. root.%%fqdn%%. (
+                @@SERIAL@@      ; serial
+                21600           ; refresh (6h)
+                3600            ; retry (1h)
+                604800          ; expiry (7d)
+                86400 ) ; RR TTL (24h)
+
+                IN      NS      %%ns1%%.
+                IN      NS      %%ns2%%.
+                IN      MX 5    %%mx%%.
