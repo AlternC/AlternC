@@ -161,7 +161,7 @@ function checkmail($mail) {
 
 /* Check that a domain name is fqdn compliant */
 function checkfqdn($fqdn) {
-  // (RFC 1035 http://www.cis.ohio-state.edu/cgi-bin/rfc/rfc1035.html)
+  // (RFC 1035 http://www.ietf.org/rfc/rfc1035.txt)
   // Retourne 0 si tout va bien, sinon, retourne un code erreur...
   // 1. Nom de domaine complet trop long.
   // 2. L'un des membres est trop long.
