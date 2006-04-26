@@ -334,6 +334,7 @@ debian/rules -text
 debian/templates -text
 etc/alternc/apache-ssl.conf -text
 etc/alternc/apache.conf -text
+etc/alternc/bureau.conf -text
 etc/alternc/menulist.txt -text
 etc/alternc/phpmyadmin.inc.php -text
 etc/alternc/templates/apache-ssl/httpd.conf -text
