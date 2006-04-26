@@ -250,7 +250,7 @@ class m_admin {
       return false;
     }
     // Il ne peut pas être égal au login ou au nom de base systeme ! 
-    if ($login==$L_MYSQL_DATABASE || $login==$L_MYSQL_LOGIN) {
+    if ($login==$L_MYSQL_DATABASE || $login==$L_MYSQL_LOGIN || $login=="mysql" || $login=="root") {
       $err->raise("admin",10);
       return false;
     }
