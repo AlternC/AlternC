@@ -154,9 +154,9 @@ EOF
     echo "running alternc.install"
     alternc.install
 
-    if [ ! -h /etc/apache/conf.d/alternc-ssl.conf ]; then
+    if [ ! -h /etc/apache-ssl/conf.d/alternc.conf ]; then
         ln -sf /etc/alternc/apache-ssl.conf \
-            /etc/apache/conf.d/alternc-ssl.conf
+            /etc/apache-ssl/conf.d/alternc.conf
     fi
 
     if [ ! -h /etc/apache/conf.d/alternc.conf ]; then
