@@ -37,15 +37,13 @@
   et mettez votre ip dans le IF pour que seule votre ip puisse accéder au bureau : 
 */
 
-/* // Uncomment the following lines and put your IP between the "" to put the dekstop in maintenance mode : 
+/*
 if (getenv("REMOTE_ADDR")!="81.56.98.108") {
   echo "Le bureau AlternC est en vacances jusqu'a minuit pour maintenance.<br>
 Merci de revenir plus tard.";
   exit();
 }
 */
-
-
 
 // 1. Get a semaphore id for the alternc magic number (18577)
 $alternc_sem = sem_get ( 18577 );
@@ -106,12 +104,6 @@ $db= new DB_system();
 // Current User ID = the user whose commands are made on behalf of.
 $cuid=0;
 
-if (!$_SERVER["HTTPS"]) {
-  $conf=variable_init();
-  if ($conf["force_https"]) {
-    header("Location: https://".$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"]);
-  }
-}
 
 $classes=array();
 /* CLASSES PHP4 : automatic include : */

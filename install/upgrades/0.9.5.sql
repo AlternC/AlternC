@@ -7,9 +7,6 @@ ALTER IGNORE TABLE membres ADD COLUMN duration int(4) default NULL AFTER renewed
 ALTER IGNORE TABLE ftpusers ADD COLUMN encrypted_password VARCHAR(32) default NULL AFTER password;
 UPDATE ftpusers SET encrypted_password=ENCRYPT(password) WHERE password!='';
 
--- Force le bureau https si voulu : 
-INSERT INTO variable SET name='force_https', value='0', comment='Shall we force the users to access the managment desktop through HTTPS only ? If this value is true, HTTPS access will be forced. ';
-
 -- --------------------------------------------------------
 -- TABLES de mémorisation de la taille des dossiers web/mail/db
 
