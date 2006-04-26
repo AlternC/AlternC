@@ -15,7 +15,8 @@ set -e
 TEMPLATE_DIR="/etc/alternc/templates"
 
 # Find needed configuration files (without the initial '/')
-CONFIG_FILES=""
+# replace this one unconditionnally
+CONFIG_FILES="etc/alternc/bureau.conf"
 
 if [ -e /etc/apache/httpd.conf ]; then
     CONFIG_FILES="$CONFIG_FILES etc/apache/httpd.conf"
@@ -51,10 +52,6 @@ fi
 
 if [ -e /etc/default/saslauthd ]; then
     CONFIG_FILES="$CONFIG_FILES etc/default/saslauthd"
-fi
-
-if [ -e /etc/alternc/bureau.conf ]; then
-    CONFIG_FILES="$CONFIG_FILES etc/alternc/bureau.conf"
 fi
 
 INSTALLED_CONFIG_TAR="/var/backups/alternc/etc-installed.tar.gz"
