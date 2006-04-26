@@ -16,6 +16,10 @@ msgstr ""
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: admin/menu_sql.php:34
+msgid "MySQL Users"
+msgstr ""
+
 #: admin/menu_sql.php:35
 msgid "Databases"
 msgstr ""
@@ -30,6 +34,10 @@ msgstr ""
 
 #: admin/sql_add.php:34 admin/sql_doadd.php:34
 msgid "err_mysql_1"
+msgstr ""
+
+#: admin/sql_users_add.php:34 admin/sql_users_doadd.php:34
+msgid "err_mysql_20"
 msgstr ""
 
 #: admin/sql_add.php:41 admin/sql_list.php:82
@@ -212,4 +220,44 @@ msgstr ""
 
 #: admin/sql_restore.php:64
 msgid "Note: If the filename ends with .gz, it will be uncompressed before."
+msgstr ""
+
+#: admin/sql_users_add.php:41
+msgid "Create a new MySQL user"
+msgstr ""
+
+#: admin/sql_users_add.php:66
+msgid "Create this new user"
+msgstr ""
+
+#: admin/sql_users_del.php:41
+msgid "The user %s has been successfully deleted"
+msgstr ""
+
+#: admin/sql_users_del.php:54
+msgid "Confirm the deletion of the following MySQL users"
+msgstr ""
+
+#: admin/sql_users_dorights.php:44
+msgid "The rights has been successfully applied to the user"
+msgstr ""
+
+#: admin/sql_users_list.php:48
+msgid "help_sql_users_list_ok"
+msgstr ""
+
+#: admin/sql_users_rights.php:46
+msgid "help_sql_users_rights_ok"
+msgstr ""
+
+#: admin/sql_users_list.php:53
+msgid "Rights"
+msgstr ""
+
+#: admin/sql_users_rights.php:38
+msgid "MySQL Rights for %s"
+msgstr ""
+
+#: admin/sql_users_rights.php:115
+msgid "Apply"
 msgstr ""

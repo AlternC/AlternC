@@ -416,3 +416,15 @@ the user creation dialog requesting the creator if he wants to create
 the domain "username.example.com".
 
 If this is set to 0 or a "false" string, it will be ignored.');
+
+--
+-- Table structure for table `dbusers`
+--
+
+CREATE TABLE `dbusers` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `uid` int(10) unsigned NOT NULL default '0',
+  `name` varchar(16) NOT NULL default '',
+  KEY `id` (`id`)
+) TYPE=MyISAM COMMENT='Utilisateurs MySQL des membres';
+

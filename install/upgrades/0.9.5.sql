@@ -40,3 +40,11 @@ CREATE TABLE IF NOT EXISTS `size_web` (
   KEY `ts` (`ts`)
 ) TYPE=MyISAM COMMENT='Web space used by accounts.';
 
+-- ajout d'une table pour la gestion des utilisateurs mysql
+CREATE TABLE `dbusers` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `uid` int(10) unsigned NOT NULL default '0',
+  `name` varchar(16) NOT NULL default '',
+  KEY `id` (`id`)
+) TYPE=MyISAM COMMENT='Utilisateurs MySQL des membres';
+

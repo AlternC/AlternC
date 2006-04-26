@@ -200,6 +200,12 @@ bureau/admin/sql_list.php -text
 bureau/admin/sql_pass.php -text
 bureau/admin/sql_passchg.php -text
 bureau/admin/sql_restore.php -text
+bureau/admin/sql_users_add.php -text
+bureau/admin/sql_users_del.php -text
+bureau/admin/sql_users_doadd.php -text
+bureau/admin/sql_users_dorights.php -text
+bureau/admin/sql_users_list.php -text
+bureau/admin/sql_users_rights.php -text
 bureau/admin/sta2_add_raw.php -text
 bureau/admin/sta2_del_raw.php -text
 bureau/admin/sta2_doadd_raw.php -text

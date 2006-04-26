@@ -1,6 +1,6 @@
 <?php
 /*
- $Id: menu_sql.php,v 1.2 2003/06/10 06:42:25 root Exp $
+ $Id: sql_users_doadd.php,v 1.2 2003/06/10 07:20:29 nahuel Exp $
  ----------------------------------------------------------------------
  AlternC - Web Hosting System
  Copyright (C) 2002 by the AlternC Development Team.
@@ -23,19 +23,25 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file:
+ Original Author of file: Nahuel ANGELINETTI
  Purpose of file:
  ----------------------------------------------------------------------
 */
-$r=$quota->getquota("mysql");
-if ($r["t"]) {
-?>
-<tr><td nowrap="nowrap">
-MySQL<br />
-	- <a href="sql_users_list.php"><?php __("MySQL Users") ?></a><br />
-	- <a href="sql_list.php"><?php __("Databases"); ?></a><br />
-	- <a target="_blank" href="sql_admin.php"><?php __("SQL Admin"); ?></a><br />
-</td></tr>
-<?php
-	}
+require_once("../class/config.php");
+
+
+if (!$quota->cancreate("mysql_users")) {
+//	$error=_("err_mysql_1");
+	include("sql_users_add.php");
+	exit;
+}
+
+if (!$mysql->add_user($usern,$password,$passconf)) {
+  $error=$err->errstr();
+  include("sql_users_add.php");
+  exit;
+}
+
+include("sql_users_list.php");
+
 ?>

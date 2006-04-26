@@ -18,6 +18,9 @@ msgstr ""
 msgid "quota_mysql"
 msgstr "Bases de données MySQL"
 
+msgid "quota_mysql_users"
+msgstr "Utilisateurs MySQL"
+
 msgid "err_mysql_2"
 msgstr ""
 "Le nom de la base de données ne peut contenir que des chiffres ou lettres "
@@ -56,6 +59,27 @@ msgstr ""
 
 msgid "err_mysql_12"
 msgstr "Le nom de la base de données est trop long (64 caractères maximum)"
+
+msgid "err_mysql_13"
+msgstr "Vous n'avez aucun utilisateur SQL autre que l'utilisateur principal"
+
+msgid "err_mysql_14"
+msgstr "Le nom de l'utilisateur ne peut contenir que des chiffres ou lettres minuscules."
+
+msgid "err_mysql_15"
+msgstr "Le nom d'utilisateur est trop long (16 caractères maximum)"
+
+msgid "err_mysql_16"
+msgstr "L'utilisateur existe déjà"
+
+msgid "err_mysql_17"
+msgstr "Les mots de passes ne correspondent pas"
+
+msgid "err_mysql_18"
+msgstr "Aucun utilisateur de ce nom n'existe"
+
+msgid "err_mysql_19"
+msgstr "Vous n'avez aucun utilisateur SQL autre que l'utilisateur principal"
 
 msgid "General SQL Admin"
 msgstr "Admin SQL Général"

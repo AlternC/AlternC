@@ -1,6 +1,6 @@
 <?php
 /*
- $Id: menu_sql.php,v 1.2 2003/06/10 06:42:25 root Exp $
+ $Id: sql_users_rights.php,v 1.8 2006/02/16 16:26:28 nahuel Exp $
  ----------------------------------------------------------------------
  AlternC - Web Hosting System
  Copyright (C) 2002 by the AlternC Development Team.
@@ -23,19 +23,25 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file:
- Purpose of file:
+ Original Author of file: Nahuel ANGELINETTI
+ Purpose of file: Manage the MySQL users of a member
  ----------------------------------------------------------------------
 */
-$r=$quota->getquota("mysql");
-if ($r["t"]) {
-?>
-<tr><td nowrap="nowrap">
-MySQL<br />
-	- <a href="sql_users_list.php"><?php __("MySQL Users") ?></a><br />
-	- <a href="sql_list.php"><?php __("Databases"); ?></a><br />
-	- <a target="_blank" href="sql_admin.php"><?php __("SQL Admin"); ?></a><br />
-</td></tr>
-<?php
-	}
+require_once("../class/config.php");
+
+$keys=array_keys($_REQUEST);
+$dblist=$mysql->get_dblist();
+
+for( $i=0 ; $i<count($dblist) ; $i++ ) {
+  $rights=array();
+  for( $j=0 ; $j<count($keys) ; $j++ ) {
+      if( strpos( $keys[$j], $dblist[$i]["name"]."_" ) === 0 )
+        $rights[]=substr($keys[$j], strlen( $dblist[$i]["name"]."_" ));
+  }
+  $mysql->set_user_rights($id,$dblist[$i]["name"],$rights);
+}
+
+$error=_("The rights has been successfully applied to the user");
+include("sql_users_list.php");
+
 ?>

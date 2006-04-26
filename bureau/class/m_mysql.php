@@ -52,7 +52,7 @@ class m_mysql {
    * Quota name
    */
   function alternc_quota_names() {
-    return "mysql";
+    return array("mysql","mysql_users");
   }
 
   /*---------------------------------------------------------------------------*/
@@ -100,7 +100,6 @@ class m_mysql {
   function get_mysql_details($dbn) {
     global $db,$err,$bro,$mem,$cuid;
     $root="/var/alternc/html/".substr($mem->user["login"],0,1)."/".$mem->user["login"];
-    $root=realpath($root);
     $err->log("mysql","get_mysql_details");
     $dbname=$mem->user["login"].($dbn?"_":"").$dbn;
     $size=$this->get_db_size($dbname);
@@ -255,7 +254,7 @@ class m_mysql {
     $db->next_record();
     $login=$db->f("login");
 
-    if (strlen($password)>16 || strlen($password)<4 ) {
+    if (strlen($password)>16) {
       $err->raise("mysql",8);
       return false;
     }
@@ -273,7 +272,7 @@ class m_mysql {
   function new_mysql($password) {
     global $db,$err,$mem,$cuid;
     $err->log("mysql","new_mysql");
-    if (strlen($password)>16 || strlen($password)<4 ) {
+    if (strlen($password)>16) {
       $err->raise("mysql",8);
       return false;
     }
@@ -362,6 +361,13 @@ class m_mysql {
       } else {
 	return 0;
       }
+    } elseif ($name=="mysql_users") {
+      $err->log("mysql","alternc_get_quota");
+      $c=$this->get_userslist();
+      if(is_array($c))
+        return count($c);
+      else
+        return 0;
     } else return false;
   }
 
@@ -418,6 +424,160 @@ class m_mysql {
     return $str;
   }
 
+  function get_userslist() {
+    global $db,$err,$bro,$cuid;
+    $err->log("mysql","get_userslist");
+    $db->query("SELECT name FROM dbusers WHERE uid='$cuid';");
+    if (!$db->num_rows()) {
+      $err->raise("mysql",19);
+      return false;
+    }
+    $c=array();
+    while ($db->next_record()) {
+      $c[]=array("name"=>substr($db->f("name"),strpos($db->f("name"),"_")+1));
+    }
+
+    return $c;
+  }
+
+  function add_user($usern,$password,$passconf) {
+    global $db,$err,$quota,$mem,$cuid;
+    $err->log("mysql","add_user",$usern);
+    
+    $user=addslashes($mem->user["login"]."_$usern");
+    $pass=addslashes($password);
+        
+    if (!$quota->cancreate("mysql_users")) {
+      $err->raise("mysql",13);
+      return false;
+    }
+    if (!ereg("^[0-9a-z]",$usern)) {
+      $err->raise("mysql",14);
+      return false;
+    }
+    
+    if (strlen($user) > 16 || strlen($usern) == 0 ) {
+      $err->raise("mysql",15);
+      return false;
+    }
+    $db->query("SELECT * FROM dbusers WHERE name='$user';");
+    if ($db->num_rows()) {
+      $err->raise("mysql",16);
+      return false;
+    }
+    if ($password != $passconf || !$password) {
+      $err->raise("mysql",17);
+      return false;
+    }
+
+
+    // On créé l'utilisateur
+    $db->query("GRANT USAGE ON *.* TO '$user'@'$this->client' IDENTIFIED BY '$pass';");
+    // On le rajoute dans la table des utilisateurs
+    $db->query("INSERT INTO dbusers (uid,name) VALUES($cuid,'$user');");
+    return true;
+  }
+
+  function del_user($user) {
+    global $db,$err,$mem,$cuid,$L_MYSQL_DATABASE;
+    $err->log("mysql","del_user",$user);
+    if (!ereg("^[0-9a-z]",$user)) {
+      $err->raise("mysql",14);
+      return false;
+    }
+    $db->query("SELECT name FROM dbusers WHERE name='".$mem->user["login"]."_$user';");
+    if (!$db->num_rows()) {
+      $err->raise("mysql",18);
+      return false;
+    }
+    $db->next_record();
+    $login=$db->f("name");
+
+    // Ok, database exists and dbname is compliant. Let's proceed
+    $db->query("USE mysql");
+    $db->query("REVOKE ALL PRIVILEGES ON *.* FROM '".$mem->user["login"]."_$user'@'$this->client';");
+    $db->query("DELETE FROM db WHERE User='".$mem->user["login"]."_$user' AND Host='$this->client';");
+    $db->query("DELETE FROM user WHERE User='".$mem->user["login"]."_$user' AND Host='$this->client';");
+    $db->query("FLUSH PRIVILEGES");
+    $db->query("USE $L_MYSQL_DATABASE");
+    $db->query("DELETE FROM dbusers WHERE uid='$cuid' AND name='".$mem->user["login"]."_$user';");
+    return true;
+  }
+
+  function get_user_dblist($user) {
+    global $db,$err,$mem,$cuid,$L_MYSQL_DATABASE;
+    $err->log("mysql","get_user_dblist");
+
+    $r=array();
+    $dblist=$this->get_dblist();
+
+    $db->query("USE mysql;");
+    for ( $i=0 ; $i<count($dblist) ; $i++ ) {
+      $db->query("SELECT Db, Select_priv, Insert_priv, Update_priv, Delete_priv, Create_priv, Drop_priv, References_priv, Index_priv, Alter_priv, Create_tmp_table_priv, Lock_tables_priv FROM db WHERE User='".$mem->user["login"].($user?"_":"").$user."' AND Host='$this->client' AND Db='".$dblist[$i]["db"]."';");
+      if ($db->next_record())
+        $r[]=array("db"=>$dblist[$i]["name"], "select"=>$db->f("Select_priv"), "insert"=>$db->f("Insert_priv"),	"update"=>$db->f("Update_priv"), "delete"=>$db->f("Delete_priv"), "create"=>$db->f("Create_priv"), "drop"=>$db->f("Drop_priv"), "references"=>$db->f("References_priv"), "index"=>$db->f("Index_priv"), "alter"=>$db->f("Alter_priv"), "create_tmp"=>$db->f("Create_tmp_table_priv"), "lock"=>$db->f("Lock_tables_priv"));
+      else
+        $r[]=array("db"=>$dblist[$i]["name"], "select"=>"N", "insert"=>"N", "update"=>"N", "delete"=>"N", "create"=>"N", "drop"=>"N", "references"=>"N", "index"=>"N", "alter"=>"N", "Create_tmp"=>"N", "lock"=>"N" );
+    }
+    $db->query("FLUSH PRIVILEGES");
+    $db->query("USE $L_MYSQL_DATABASE");
+
+    return $r;
+  }
+
+  function set_user_rights($user,$dbn,$rights) {
+    global $mem, $db;
+
+    $usern=addslashes($mem->user["login"].($user?"_":"").$user);
+    $dbname=addslashes($mem->user["login"].($dbn?"_":"").$dbn);
+    // On génère les droits en fonction du tableau de droits
+    for( $i=0 ; $i<count($rights) ; $i++ ) {
+      switch ($rights[$i]) {
+        case "select":
+          $strrights.="SELECT,";
+          break;
+        case "insert":
+          $strrights.="INSERT,";
+          break;
+        case "update":
+          $strrights.="UPDATE,";
+          break;
+        case "delete":
+          $strrights.="DELETE,";
+          break;
+        case "create":
+          $strrights.="CREATE,";
+          break;
+        case "drop":
+          $strrights.="DROP,";
+          break;
+        case "references":
+          $strrights.="REFERENCES,";
+          break;
+        case "index":
+          $strrights.="INDEX,";
+          break;
+        case "alter":
+          $strrights.="ALTER,";
+          break;
+        case "create_tmp":
+          $strrights.="CREATE TEMPORARY TABLES,";
+          break;
+        case "lock":
+          $strrights.="LOCK TABLES,";
+          break;
+      }
+    }
+
+    
+    // On remet à zéro tous les droits de l'utilisateur
+    $db->query("REVOKE ALL PRIVILEGES ON *.* FROM '$usern'@'$this->client';");
+    if( $strrights ){
+      $strrights=substr($strrights,0,strlen($strrights)-1);
+      $db->query("GRANT $strrights ON $dbname.* TO '$usern'@'$this->client';");      
+    }
+    return TRUE;
+  }
 
 } /* Class m_mysql */
 

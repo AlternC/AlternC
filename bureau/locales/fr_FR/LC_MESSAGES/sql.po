@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: $Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp $\n"
 "Report-Msgid-Bugs-To: i18n@alternc.org\n"
-"POT-Creation-Date: 2004-11-01 16:18+0100\n"
+"POT-Creation-Date: 2006-04-02 03:58+0000\n"
 "PO-Revision-Date: 2002-06-16 13:50CEST\n"
 "Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
 "Language-Team: French <i18n@alternc.org>\n"
@@ -14,6 +14,10 @@ msgstr ""
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Emacs 21\n"
+
+#: admin/menu_sql.php:34
+msgid "MySQL Users"
+msgstr "Utilisateurs MySQL"
 
 #: admin/menu_sql.php:35
 msgid "Databases"
@@ -30,6 +34,11 @@ msgstr "Votre base de données a été créée avec succès"
 #: admin/sql_add.php:34 admin/sql_doadd.php:34
 msgid "err_mysql_1"
 msgstr "Vous avez atteint votre quota de bases, vous ne pouvez plus en créer."
+
+#: admin/sql_users_add.php:34 admin/sql_users_doadd.php:34
+msgid "err_mysql_20"
+msgstr ""
+"Vous avez atteint votre quota d'utilisateurs, vous ne pouvez plus en créer."
 
 #: admin/sql_add.php:41 admin/sql_list.php:82
 msgid "Create a new database"
@@ -95,7 +104,7 @@ msgstr "Où voulez-vous stocker les sauvegardes ?"
 msgid "Change the SQL backup parameters"
 msgstr "Changer les paramètres de sauvegarde SQL"
 
-#: admin/sql_bck.php:101 admin/sql_dorestore.php:55 admin/sql_restore.php:68
+#: admin/sql_bck.php:101 admin/sql_dorestore.php:55 admin/sql_restore.php:69
 msgid "You currently have no database defined"
 msgstr "Vous n'avez pas de base de données de définie"
 
@@ -201,7 +210,7 @@ msgstr ""
 msgid "Change the password"
 msgstr "Changement de mot de passe SQL"
 
-#: admin/sql_pass.php:36
+#: admin/sql_pass.php:38
 msgid "Your password has been successfully changed."
 msgstr "Votre mot de passe a été modifié avec succès"
 
@@ -210,16 +219,58 @@ msgstr "Votre mot de passe a été modifié avec succès"
 msgid "Restore a SQL backup for database %s"
 msgstr "Restaurer la sauvegarde SQL de la base %s"
 
-#: admin/sql_restore.php:53
+#: admin/sql_restore.php:54
 msgid "Please enter the filename containing SQL data to be restored."
 msgstr ""
 "Entrez le nom du fichier contenant des données SQL à restaurer dans la base."
 
-#: admin/sql_restore.php:57
+#: admin/sql_restore.php:58
 msgid "Restore my database"
 msgstr "Restaurer ma base de données"
 
-#: admin/sql_restore.php:63
+#: admin/sql_restore.php:64
 msgid "Note: If the filename ends with .gz, it will be uncompressed before."
 msgstr ""
 "Note : Si le nom du fichier se termine par .gz, il sera décompressé avant."
+
+#: admin/sql_users_add.php:41
+msgid "Create a new MySQL user"
+msgstr "Créer un nouvel utilisateur MySQL"
+
+#: admin/sql_users_add.php:66
+msgid "Create this new user"
+msgstr "Créer ce nouvel utilisateur"
+
+#: admin/sql_users_del.php:41
+msgid "The user %s has been successfully deleted"
+msgstr "L'utilisateur %s a été effacée avec succès"
+
+#: admin/sql_users_del.php:54
+msgid "Confirm the deletion of the following MySQL users"
+msgstr "Confirmez l'effacement des utilisateurs MySQL suivants"
+
+#: admin/sql_users_dorights.php:44
+msgid "The rights has been successfully applied to the user"
+msgstr "La droits ont été appliqués avec succès à l'utilisateur"
+
+#: admin/sql_users_list.php:48
+msgid "help_sql_users_list_ok"
+msgstr ""
+"Utilisez le tableau ci-dessous pour gérer vos utilisateurs MySQL : "
+
+#: admin/sql_users_rights.php:46
+msgid "help_sql_users_rights_ok"
+msgstr ""
+"Cochez les droits sur les bases dont vous voulez fournir à l'utilisateur : "
+
+#: admin/sql_users_list.php:53
+msgid "Rights"
+msgstr "Droits"
+
+#: admin/sql_users_rights.php:38
+msgid "MySQL Rights for %s"
+msgstr "Droits MySQL pour %s"
+
+#: admin/sql_users_rights.php:115
+msgid "Apply"
+msgstr "Appliquer"
