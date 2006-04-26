@@ -155,12 +155,12 @@ EOF
     alternc.install
 
     if [ ! -h /etc/apache/conf.d/alternc-ssl.conf ]; then
-        ln -sf /etc/apache/conf.d/alternc-ssl.conf \
+        ln -sf /etc/alternc/apache-sl.conf \
             /etc/apache/conf.d/alternc-ssl.conf
     fi
 
     if [ ! -h /etc/apache/conf.d/alternc.conf ]; then
-        ln -sf /etc/apache/conf.d/alternc.conf \
+        ln -sf /etc/alternc/apache.conf \
             /etc/apache/conf.d/alternc.conf
     fi
 
