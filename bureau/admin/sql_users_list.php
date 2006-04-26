@@ -51,14 +51,6 @@ echo "<p>"._("help_sql_users_list_ok")."</p>";
 <form method="post" action="sql_users_del.php">
 <table cellspacing="0" cellpadding="4">
    <tr><th>&nbsp;</th><th><?php __("User"); ?></th><th><?php __("Rights"); ?></th></tr>
-        <tr class="lst<?php echo $col; ?>">
-          <td align="center">
-            <input type="checkbox" class="inc" id="del_<?php echo $val["name"]; ?>" name="del_<?php echo $val["name"]; ?>" value="<?php echo $val["name"]; ?>" />
-          </td>
-          <td><label for="del_<?php echo $val["name"]; ?>"><?php echo $mem->user["login"]; ?></label></td>
-          <td><a href="sql_users_rights.php?id=<?php echo $val["name"] ?>"><?php __("Rights"); ?></a></td>
-        </tr>
-
 <?php
 $col=1;
 for($i=0;$i<count($r);$i++) {
