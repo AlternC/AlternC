@@ -310,7 +310,6 @@ class m_mysql {
     } elseif (substr($fi,-4)==".bz2") {
       $exe="/bin/bunzip2 -d -c <".escapeshellarg($fi)." | /usr/bin/mysql -h".escapeshellarg($L_MYSQL_HOST)." -u".escapeshellarg($r["login"])." -p".escapeshellarg($r["pass"])." ".escapeshellarg($r["db"]);
     } else {
- {
       $exe="/usr/bin/mysql -h".escapeshellarg($L_MYSQL_HOST)." -u".escapeshellarg($r["login"])." -p".escapeshellarg($r["pass"])." ".escapeshellarg($r["db"])." <".escapeshellarg($fi);
     }
     $exe .= " 2>&1";
@@ -337,7 +336,6 @@ class m_mysql {
    */
  function get_db_size($dbname) {
    global $db,$err;
-
    $db->query("SHOW TABLE STATUS FROM `$dbname`;");
    $size = 0;
    while ($db->next_record()) {
