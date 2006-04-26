@@ -294,22 +294,17 @@ class m_mysql {
 
   /* ----------------------------------------------------------------- */
   /** Restore a sql backup script on a user's database.
+   * <b>TODO : </b> Add a parameter to choose which database to restore.
    */
-  function restore($file,$stdout,$id) {
+  function restore($file,$stdout,$r) {
     global $err,$bro,$mem,$L_MYSQL_HOST;
-    if (!$r=$this->get_mysql_details($id)) {
-      return false;
-    }
     if (!($fi=$bro->convertabsolute($file,0))) {
       $err->raise("mysql",9);
-      return false;
     }
     if (substr($fi,-3)==".gz") {
-      $exe="/bin/gzip -d -c <".escapeshellarg($fi)." | /usr/bin/mysql -h".escapeshellarg($L_MYSQL_HOST)." -u".escapeshellarg($r["login"])." -p".escapeshellarg($r["pass"])." ".escapeshellarg($r["db"]);
-    } elseif (substr($fi,-4)==".bz2") {
-      $exe="/bin/bunzip2 -d -c <".escapeshellarg($fi)." | /usr/bin/mysql -h".escapeshellarg($L_MYSQL_HOST)." -u".escapeshellarg($r["login"])." -p".escapeshellarg($r["pass"])." ".escapeshellarg($r["db"]);
+      $exe="/bin/gzip -d -c <\"$fi\" | /usr/bin/mysql -h".$L_MYSQL_HOST." -u".$r["login"]." -p".$r["pass"]." ".$r["db"];
     } else {
-      $exe="/usr/bin/mysql -h".escapeshellarg($L_MYSQL_HOST)." -u".escapeshellarg($r["login"])." -p".escapeshellarg($r["pass"])." ".escapeshellarg($r["db"])." <".escapeshellarg($fi);
+      $exe="/usr/bin/mysql -h".$L_MYSQL_HOST." -u".$r["login"]." -p".$r["pass"]." ".$r["db"]." <".$fi;
     }
     $exe .= " 2>&1";
     
@@ -335,6 +330,7 @@ class m_mysql {
    */
  function get_db_size($dbname) {
    global $db,$err;
+
    $db->query("SHOW TABLE STATUS FROM `$dbname`;");
    $size = 0;
    while ($db->next_record()) {
@@ -494,12 +490,10 @@ class m_mysql {
     $login=$db->f("name");
 
     // Ok, database exists and dbname is compliant. Let's proceed
-    $db->query("USE mysql");
     $db->query("REVOKE ALL PRIVILEGES ON *.* FROM '".$mem->user["login"]."_$user'@'$this->client';");
-    $db->query("DELETE FROM db WHERE User='".$mem->user["login"]."_$user' AND Host='$this->client';");
-    $db->query("DELETE FROM user WHERE User='".$mem->user["login"]."_$user' AND Host='$this->client';");
+    $db->query("DELETE FROM mysql.db WHERE User='".$mem->user["login"]."_$user' AND Host='$this->client';");
+    $db->query("DELETE FROM mysql.user WHERE User='".$mem->user["login"]."_$user' AND Host='$this->client';");
     $db->query("FLUSH PRIVILEGES");
-    $db->query("USE $L_MYSQL_DATABASE");
     $db->query("DELETE FROM dbusers WHERE uid='$cuid' AND name='".$mem->user["login"]."_$user';");
     return true;
   }
@@ -511,16 +505,13 @@ class m_mysql {
     $r=array();
     $dblist=$this->get_dblist();
 
-    $db->query("USE mysql;");
     for ( $i=0 ; $i<count($dblist) ; $i++ ) {
-      $db->query("SELECT Db, Select_priv, Insert_priv, Update_priv, Delete_priv, Create_priv, Drop_priv, References_priv, Index_priv, Alter_priv, Create_tmp_table_priv, Lock_tables_priv FROM db WHERE User='".$mem->user["login"].($user?"_":"").$user."' AND Host='$this->client' AND Db='".$dblist[$i]["db"]."';");
+      $db->query("SELECT Db, Select_priv, Insert_priv, Update_priv, Delete_priv, Create_priv, Drop_priv, References_priv, Index_priv, Alter_priv, Create_tmp_table_priv, Lock_tables_priv FROM mysql.db WHERE User='".$mem->user["login"].($user?"_":"").$user."' AND Host='$this->client' AND Db='".$dblist[$i]["db"]."';");
       if ($db->next_record())
         $r[]=array("db"=>$dblist[$i]["name"], "select"=>$db->f("Select_priv"), "insert"=>$db->f("Insert_priv"),	"update"=>$db->f("Update_priv"), "delete"=>$db->f("Delete_priv"), "create"=>$db->f("Create_priv"), "drop"=>$db->f("Drop_priv"), "references"=>$db->f("References_priv"), "index"=>$db->f("Index_priv"), "alter"=>$db->f("Alter_priv"), "create_tmp"=>$db->f("Create_tmp_table_priv"), "lock"=>$db->f("Lock_tables_priv"));
       else
         $r[]=array("db"=>$dblist[$i]["name"], "select"=>"N", "insert"=>"N", "update"=>"N", "delete"=>"N", "create"=>"N", "drop"=>"N", "references"=>"N", "index"=>"N", "alter"=>"N", "Create_tmp"=>"N", "lock"=>"N" );
     }
-    $db->query("FLUSH PRIVILEGES");
-    $db->query("USE $L_MYSQL_DATABASE");
 
     return $r;
   }
@@ -571,11 +562,14 @@ class m_mysql {
 
     
     // On remet à zéro tous les droits de l'utilisateur
-    $db->query("REVOKE ALL PRIVILEGES ON *.* FROM '$usern'@'$this->client';");
+    $db->query("SELECT * FROM mysql.db WHERE User = '$usern' AND Db = '$dbname';");
+    if($db->num_rows())
+      $db->query("REVOKE ALL PRIVILEGES ON $dbname.* FROM '$usern'@'$this->client';");
     if( $strrights ){
       $strrights=substr($strrights,0,strlen($strrights)-1);
       $db->query("GRANT $strrights ON $dbname.* TO '$usern'@'$this->client';");      
     }
+    $db->query("FLUSH PRIVILEGES");
     return TRUE;
   }
 
