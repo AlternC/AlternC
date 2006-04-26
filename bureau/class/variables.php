@@ -40,7 +40,7 @@
  * with variable_set() as well as those explicitly specified in the configuration
  * file.
  */
-function variable_init() {
+function variable_init($conf = array()) {
   global $db;
   $result = $db->query('SELECT * FROM `variable`');
   while ($db->next_record($result)) {
