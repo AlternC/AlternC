@@ -428,6 +428,7 @@ src/quota_init -text
 src/rawstat.daily -text
 src/sendmail -text
 src/slave_dns -text
+src/spoolsize.php -text
 src/sqlbackup.sh -text
 src/update_domains.sh -text
 tools/get_account_by_domain -text

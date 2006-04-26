@@ -109,11 +109,10 @@ class m_mail {
     $res=array(); $i=0;
     while ($db->next_record()) {
       if ($db->f("pop")) { 
-	/*
-	$size=exec("/usr/lib/alternc/du.pl /var/alternc/mail/".substr($info[$i]["mail"][0],0,1)."/".str_replace("@","_",$info[$i]["mail"][0]));
-	$size=$size*1024;
-	*/
 	$size=0;
+        $r=mysql_query("SELECT size FROM size_mail WHERE alias='".str_replace("@","_",$db->f("mail"))."';");
+        list($size)=@mysql_fetch_array($r);
+        $size=$size*1024;
       } else $size=0;
       if ($db->f("pop")) {
 	$login=str_replace("@","_",$db->f("mail"));

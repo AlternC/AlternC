@@ -10,3 +10,7 @@
 
 # Every hour, check for slave_dns refreshes
 5 * * * *       root            /usr/lib/alternc/slave_dns
+
+# Every day at 2am, compute web, mail and db space usage per account.
+# You may put this computing every week only or on your filer on busy services.
+0 2 * * *       www-data 	/usr/lib/alternc/spoolsize.php

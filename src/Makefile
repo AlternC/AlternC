@@ -28,7 +28,7 @@
 CC?=cc
 CC+=$(CFLAGS)
 PROGS=mail_add mail_del quota_edit quota_get mem_add mem_del db_create 
-SCRIPTS=quota_edit.sh quota_get.sh basedir_prot.sh sqlbackup.sh rawstat.daily quota_init quota_delete update_domains.sh slave_dns sendmail
+SCRIPTS=quota_edit.sh quota_get.sh basedir_prot.sh sqlbackup.sh rawstat.daily quota_init quota_delete update_domains.sh slave_dns sendmail spoolsize.php
 BIN=$(DESTDIR)/usr/lib/alternc/
 
 all: $(PROGS)

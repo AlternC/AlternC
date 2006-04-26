@@ -126,7 +126,7 @@ class m_bro {
     if ($dir = @opendir($absolute)) {
       while (($file = readdir($dir)) !== false) {
 	if ($file!="." && $file!="..") {
-	  $c[]=array("name"=>$file, "size"=>$size, "date"=>filemtime($absolute."/".$file), "type"=> (!is_dir($absolute."/".$file)) );
+	  $c[]=array("name"=>$file, "size"=>$this->fsize($absolute."/".$file), "date"=>filemtime($absolute."/".$file), "type"=> (!is_dir($absolute."/".$file)) );
 	}
       }
       closedir($dir);
