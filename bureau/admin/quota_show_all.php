@@ -47,7 +47,7 @@ $class = ($class== 'lst1' ? 'lst2' : 'lst1');
 print "<table><tr class=\"$class\">";
 $ql = $quota->qlist();
 reset($ql);
-print "<td>User</td>";
+print "<td>"._("User")."</td>";
 $sequence = array();
 foreach ($ql as $key => $name) {
 	print "<td>$name</td>";

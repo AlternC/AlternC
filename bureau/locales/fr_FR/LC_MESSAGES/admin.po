@@ -460,3 +460,71 @@ msgstr "Préfixe"
 msgid "Add this ip to the slave list"
 msgstr "Ajouter cette adresse/class à la liste des esclaves DNS."
 
+msgid "List all the accounts"
+msgstr "Lister tous les comptes"
+
+msgid "Confirm password"
+msgstr "Confirmer le mot de passe"
+
+msgid "Account type"
+msgstr "Type de compte"
+
+msgid "Reset quotas to default ?"
+msgstr "Réinitialiser les quotas de ce compte ?"
+
+msgid "Period"
+msgstr "Périodicité de facturation"
+
+msgid "Not managed"
+msgstr "Non géré"
+
+msgid "1 month"
+msgstr "1 mois"
+
+msgid "2 months"
+msgstr "2 mois"
+
+msgid "3 months"
+msgstr "3 mois"
+
+msgid "4 months"
+msgstr "4 mois"
+
+msgid "6 months"
+msgstr "6 mois"
+
+msgid "1 year"
+msgstr "1 an"
+
+msgid "2 years"
+msgstr "2 ans"
+
+msgid "Configure AlternC variables"
+msgstr "Configurer les variables d'AlternC"
+
+msgid "Here are the internal AlternC variables that are currently being used."
+msgstr "Voici les variables internes de configurables dans AlternC."
+
+msgid "Names"
+msgstr "Noms"
+
+msgid "Value"
+msgstr "Valeur"
+
+msgid "Comment"
+msgstr "Commentaire"
+
+msgid "Save variables"
+msgstr "Sauver la configuration"
+
+msgid "Show all quotas"
+msgstr "Montrer tous les quotas"
+
+msgid "Delete account type"
+msgstr "Effacer ce type de compte"
+
+msgid "Add account type"
+msgstr "Ajouter ce type de compte"
+
+
+

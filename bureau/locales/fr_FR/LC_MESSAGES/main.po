@@ -305,3 +305,5 @@ msgstr "Aide"
 msgid "quota_"
 msgstr "quota_"
 
+msgid "Front page"
+msgstr "Accueil"
