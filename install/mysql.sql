@@ -180,6 +180,7 @@ CREATE TABLE IF NOT EXISTS ftpusers (
   id int(10) unsigned NOT NULL auto_increment,
   name varchar(64) NOT NULL default '',
   password varchar(32) NOT NULL default '',
+  encrypted_password VARCHAR(32) default NULL,
   homedir varchar(128) NOT NULL default '',
   uid int(10) unsigned NOT NULL default '0',
   PRIMARY KEY  (id),
