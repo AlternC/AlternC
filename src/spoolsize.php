@@ -1,3 +1,4 @@
+#!/usr/bin/php -q
 <?php
 
 require_once("/var/alternc/bureau/class/config_nochk.php");
