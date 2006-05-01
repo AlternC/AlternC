@@ -49,3 +49,6 @@ touch $DATA/apacheconf/override_php.conf
 mkdir -p /var/log/alternc
 chown www-data:www-data /var/log/alternc
 chgrp -R www-data /etc/alternc
+
+mkdir -p /var/spool/postfix/var/run/saslauthd
+chmod 710 /var/spool/postfix/var/run/saslauthd
