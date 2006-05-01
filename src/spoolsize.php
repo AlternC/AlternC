@@ -5,8 +5,6 @@ require_once("/var/alternc/bureau/class/config_nochk.php");
 // On déverrouile le bureau AlternC :) 
 alternc_shutdown();
 
-echo "<pre>";
-
 echo "---------------------------\n Generating size-cache for mail accounts\n\n";
 $r=mysql_query("SELECT * FROM mail_users WHERE alias NOT LIKE '%@%' AND alias LIKE '%\_%';");
 while ($c=mysql_fetch_array($r)) {
@@ -20,7 +18,7 @@ echo "---------------------------\n Generating size-cache for db accounts\n\n";
 $r=mysql_query("SELECT db FROM db;");
 while ($c=mysql_fetch_array($r)) {
   echo $c["db"]; flush();
-  $size=$mysql->get_db_size($c["db"]) {
+  $size=$mysql->get_db_size($c["db"]);
   mysql_query("REPLACE INTO size_db SET db='".addslashes($c["db"])."',size='$size';");
   echo " done ($size KB) \n"; flush();
 }
