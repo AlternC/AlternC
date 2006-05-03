@@ -526,5 +526,6 @@ msgstr "Effacer ce type de compte"
 msgid "Add account type"
 msgstr "Ajouter ce type de compte"
 
-
+msgid "List only my accounts"
+msgstr "Lister seulement mes comptes"
 

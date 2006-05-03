@@ -49,13 +49,13 @@ include("head.php");
 ?>
 <p><form method="post" action="adm_dodefquotas.php">
 <input type="hidden" name="action" value="add">
-<input type="text" name="type"></td>
+<input type="text" name="type" class="int"></td>
 <input type="submit" class="inb" value="<?php __("Add account type"); ?>" />
 </form></p>
 
 <p><form method="post" action="adm_dodefquotas.php">
 <input type="hidden" name="action" value="delete">
-<select name="type" id="type">
+<select name="type" id="type" class="inl">
 <?php
 $db->query("SELECT distinct(type) FROM defquotas WHERE TYPE != 'default' ORDER by type");
 while($db->next_record()) {

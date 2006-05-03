@@ -84,7 +84,7 @@ if ($error) {
 </tr>
 <tr>
 	<th><label for="type"><?php __("Account type"); ?></label></th>
-	<td><select name="type" id="type">
+	<td><select name="type" id="type" class="inl">
 	<?php
 	$db->query("SELECT distinct(type) FROM defquotas ORDER by type");
 	while($db->next_record()) {
