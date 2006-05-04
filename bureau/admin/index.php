@@ -72,7 +72,7 @@ foreach($locales as $l) {
 <?php } ?>
 </td>
 <td style="text-align: right">
-<p> <a href="http://alternc.org"><img src="alternc.png" width="120" height="82" border="0" alt="AlternC" /></a></p>
+<p> <a href="http://alternc.org"><img src="alternc.png" width="120" height="82" border="0" alt="<?php __("AlternC, Opensource hosting control panel"); ?>" title="<?php __("AlternC, Opensource hosting control panel"); ?>" /></a></p>
 </td>
 </tr>
 </table>

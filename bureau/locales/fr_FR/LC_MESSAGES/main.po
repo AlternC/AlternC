@@ -307,3 +307,6 @@ msgstr "quota_"
 
 msgid "Front page"
 msgstr "Accueil"
+
+msgid "AlternC, Opensource hosting control panel"
+msgstr "AlternC, Panneau de contrôle d'hébergement mutualisé opensource"
