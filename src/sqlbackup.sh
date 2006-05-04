@@ -53,11 +53,11 @@ function dobck {
         while [ "$i" -gt 1 ]; do
           next_i=$(($i - 1))
           mv -f "${target_dir}/${db}.sql.${next_i}${ext}" \
-                "${target_dir}/${db}.sql.${i}${ext}" 2>/dev/null
+                "${target_dir}/${db}.sql.${i}${ext}" 2>/dev/null && true 
           i=$next_i # loop should end here
         done
         mv -f "${target_dir}/${db}.sql${ext}" \
-              "${target_dir}/${db}.sql.${i}${ext}" 2>/dev/null
+              "${target_dir}/${db}.sql.${i}${ext}" 2>/dev/null && true 
         if [ "$compressed" -eq 1 ]; then
             mysqldump -h"$MYSQL_HOST" -u"$login" -p"$pass" "$db"  --add-drop-table --allow-keywords -Q -f -q -a -e |
                 gzip -c > "${target_dir}/${db}.sql${ext}"
