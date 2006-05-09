@@ -23,7 +23,7 @@ build: build-stamp
 build-stamp:
 	dh_testdir
 	(cd src && $(MAKE))
-	/usr/bin/msgfmt po/alternc-admintools.fr.po -o alternc-admintools.mo
+	/usr/bin/msgfmt po/fr/LC_MESSAGES/alternc-admintools.po -o po/fr/LC_MESSAGES/alternc-admintools.mo
 	touch build-stamp
 
 clean:
@@ -74,7 +74,7 @@ install: build
 	install tools/top_ftp_users debian/alternc/usr/bin
 	install tools/get_domains_by_account debian/alternc/usr/bin
 	install tools/get_account_by_domain debian/alternc/usr/bin
-	/usr/bin/msgfmt po/fr/LC_MESSAGES/alternc-admintools.po -o debian/alternc/usr/share/locale/fr/LC_MESSAGES/alternc-admintools.mo
+	install po/fr/LC_MESSAGES/alternc-admintools.mo -o debian/alternc/usr/share/locale/fr/LC_MESSAGES/
 
 	# Remove helpers files from l18n dir
 	find debian/alternc/var/alternc/bureau/locales/ \
