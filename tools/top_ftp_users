@@ -40,7 +40,6 @@ TMP_ROOT=$ALTERNC_ROOT/tmp
 RES_FILE=$TMP_ROOT/$PROG_NAME.res.$$
 INTERMEDIATE_FILE=$TMP_ROOT/$PROG_NAME.int.$$
 LOCK_FILE=/var/run/$PROG_NAME
-#export TEXTDOMAINDIR=/root/tmp/jmo/tools/alternc-admintools-0.1.0/po
 export TEXTDOMAIN=alternc-admintools
 YES=yes
 NO=no

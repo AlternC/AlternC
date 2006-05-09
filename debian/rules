@@ -74,7 +74,7 @@ install: build
 	install tools/top_ftp_users debian/alternc/usr/bin
 	install tools/get_domains_by_account debian/alternc/usr/bin
 	install tools/get_account_by_domain debian/alternc/usr/bin
-	install -m 644 alternc-admintools.mo debian/alternc/usr/share/locale/fr/LC_MESSAGES
+	/usr/bin/msgfmt po/fr/LC_MESSAGES/alternc-admintools.po -o debian/alternc/usr/share/locale/fr/LC_MESSAGES/alternc-admintools.mo
 
 	# Remove helpers files from l18n dir
 	find debian/alternc/var/alternc/bureau/locales/ \

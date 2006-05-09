@@ -1,1 +1,0 @@
-/usr/bin/msgfmt ./alternc-admintools.fr.po -o ./fr/LC_MESSAGES/alternc-admintools.mo
