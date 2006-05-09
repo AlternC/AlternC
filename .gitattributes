@@ -345,8 +345,8 @@ man/top_http_users.8 -text
 man/top_http_users.fr.8 -text
 man/top_mysql_users.8 -text
 man/top_mysql_users.fr.8 -text
-po/alternc-admintools.fr.pot -text
-po/fr/LC_MESSAGES/alternc-admintools.fr.po -text
+po/alternc-admintools.pot -text
+po/fr/LC_MESSAGES/alternc-admintools.po -text
 /quota_delete -text
 /quota_init -text
 src/.cvsignore -text
