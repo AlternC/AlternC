@@ -6,14 +6,17 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: admin2\n"
-"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"Report-Msgid-Bugs-To: i18n@alternc.org\n"
+"POT-Creation-Date: 2004-05-24 19:34+0200\n"
 "PO-Revision-Date: 2003-09-30 16:42+0200\n"
 "Last-Translator: Bruno Marmier <bruno@marmier.net>\n"
 "Language-Team:  <i18n@alternc.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.0.1\n"# m_membre
+"X-Generator: KBabel 1.0.1\n"
+
+# m_membre
 msgid "err_admin_1"
 msgstr "-- ¡¡Solo los administradores tienen acceso a estas páginas!! -- "
 
@@ -52,13 +55,64 @@ msgstr "Este TLD no existe"
 msgid "err_admin_12"
 msgstr "Este TLD ya existe."
 
+# m_membre
+#, fuzzy
+msgid "err_admin_13"
+msgstr "-- ¡¡Solo los administradores tienen acceso a estas páginas!! -- "
 
-msgid "err_bro_1"
-msgstr "¡Carpeta o archivo incorrecto!"
+msgid "Click here to continue"
+msgstr "Cliquer ici pour continuer"
 
-msgid "err_bro_2"
-msgstr "¡No se puede desplazar un archivo en la misma carpeta!"
+msgid "Description"
+msgstr "Description"
 
+msgid "The user has no database"
+msgstr "L'utilisateur n'a pas de base de données active"
+
+msgid "Enable the database"
+msgstr "Activer la base MySQL"
+
+msgid "The user has a MySQL database"
+msgstr "L'utilisateur dispose d'une base MySQL"
+
+msgid "Disable the database"
+msgstr "Désactiver la base MySQL"
+
+msgid "Disk space (in KB)"
+msgstr "Espace disque (en Ko)"
+
+msgid "Number of email accounts"
+msgstr "Nombre de comptes email"
+
+msgid "Number of mailing-lists"
+msgstr "Nombre de listes de discussion"
+
+msgid "Number of domains"
+msgstr "Nombre de domaines"
+
+msgid "Number of FTP accounts"
+msgstr "Nombre de comptes FTP"
+
+msgid "Number of web statistics"
+msgstr "Nombre de jeux de statistiques"
+
+msgid "This TLD is forbidden"
+msgstr "Ce TLD est interdit"
+
+msgid "primary DNS is checked in WHOIS db"
+msgstr "le DNS primaire est vérifié dans le WHOIS"
+
+msgid "primary & secondary DNS are checked in WHOIS db"
+msgstr "les DNS primaire ET secondaire sont vérifiés dans le WHOIS"
+
+msgid "Domain must exist, but don't do any DNS check"
+msgstr "Le domaine doit exister, mais aucun contrôle DNS n'est effectué"
+
+msgid "Domain can be installed, no check at all"
+msgstr "Le domaine peut être installé sans aucun contrôle"
+
+msgid "Domain can be installed, force NO DNS hosting"
+msgstr "Le domaine peut être installé, force la case 'PAS DE DNS'"
 
 msgid "quota_dom"
 msgstr "Nombres de dominio"
@@ -142,13 +196,49 @@ msgstr ""
 "modificar los DNS del dominio (y a veces esperar 24 horas) antes de poder "
 "instalarlo."
 
+#, fuzzy
+msgid "err_dom_24"
+msgstr "El nombre de dominio es demasiado largo."
 
-msgid "err_err_0"
-msgstr "OK"
+msgid "Editing subdomain %s"
+msgstr "Edition du sous-domaine %s"
 
-msgid "err_err_1"
-msgstr "El mensaje de error no existe (%s)"
+msgid "hlp_add_domain"
+msgstr ""
+"- Entrez le nom du domaine que vous souhaitez héberger. Le nom de domaine "
+"doit être complet, mais <b>sans le www.</b><br /> IMPORTANT : Si vous voulez "
+"un hébergement réel de domaine, il faut que les DNS de votre domaine "
+"pointent vers nos serveurs DNS. Contacter votre hébergeur pour plus "
+"d'information.<br /> Exemples : globenet.org / demo.com / test.eu.org etc."
+"<br />Plus d'info sur la gestion des domaines dans l'aide en ligne "
+"HELPID_200<br />"
 
+msgid "hlp_add_domain_2"
+msgstr ""
+"Cliquez sur le lien ci-dessus. Vous pourrez ensuite accéder aux paremètres "
+"du domaine dans le menu à gauche.2 liens vont apparaitre : <br />- un "
+"premier pour modifier les paramètres d'hébergement du domaine (sous-"
+"domaines, redirections, hébergement mails ...) <br />- un second pour gérer "
+"les comptes emails du domaine (si vous souhaitez créer des boites aux "
+"lettres).<br />Plus d'info sur la gestion des domaines dans l'aide en ligne "
+"HELPID_200<br />"
+
+msgid "hlp_del_domain"
+msgstr ""
+"Le domaine a été effacé, mais les fichiers de votre site n'ont pas été "
+"détruits.<br />Si vous souhaitez détruire les fichiers du site web, utilisez "
+"le Gestionnaire de Fichier<br />Plus d'info sur la gestion des domaines dans "
+"l'aide en ligne HELPID_200<br />"
+
+msgid "hlp_edit_domain"
+msgstr ""
+"Cette zone vous permet de modifier les paramètres de votre domaine, ainsi "
+"que des sous-domaines installés<br />Vous pouvez créer un nouveau sous-"
+"domaine et choisir, soit de le rediriger vers votre espace disque, vers une "
+"autre adresse Internet, ou vers une adresse IP (utilisateurs avancés)<br /"
+">Vous pouvez aussi diriger un sous-domaine vers le webmail, vous permettant "
+"de lire votre mail par le web.<br />Plus d'info sur la gestion des domaines "
+"dans l'aide en ligne HELPID_200<br />"
 
 msgid "quota_ftp"
 msgstr "Cuentas FTP"
@@ -171,6 +261,35 @@ msgstr "Ha llegado al limite de su cuota de cuenta ftp, no se puede crear más."
 msgid "err_ftp_6"
 msgstr "Imposible crear la carpeta."
 
+msgid "hlp_ftp_list"
+msgstr ""
+"Voici la liste des comptes ftp ayant accès à votre compte. Cliquez sur "
+"'Modifier' pour changer le nom d'utilisateur, le mot de passe, ou le "
+"répertoire racine.<br /> Pour supprimer un compte, cochez la case "
+"correspondante et cliquez sur le bouton 'Supprimer les comptes cochés'<br /"
+">Pour pouvoir accéder à vos fichiers avec un logiciel de ftp, vous devez "
+"créer au moins un compte. Chaque compte est associé à un répertoire, et "
+"n'aura donc accès qu'aux fichiers situés dans ce répertoire ou en dessous. "
+"<br />Plus d'info sur le FTP dans l'aide en ligne HELPID_100<br />"
+
+msgid "hlp_ftp_list_no"
+msgstr ""
+"Vous n'avez actuellement aucun Compte FTP de disponible. Cliquez sur "
+"'Création d'un compte ftp' pour en créer un.<br />Pour pouvoir accéder à vos "
+"fichiers avec un logiciel de ftp, vous devez créer au moins un compte.  "
+"Chaque compte est associé à un répertoire, et n'aura donc accès qu'aux "
+"fichiers situés dans ce répertoire ou en dessous. <br />Plus d'info sur le "
+"FTP dans l'aide en ligne HELPID_100<br />"
+
+msgid "hlp_ftp_add"
+msgstr ""
+"Pour ajouter un compte ftp, vous devez choisir un Nom d'utilisateur, un mot "
+"de passe, et un répertoire racine<br />Le nom d'utilisateur commence "
+"toujours par votre nom de login ou le nom d'un de vos domaines.<br />Le "
+"répertoire racine, s'il n'existe pas, sera créé automatiquement.<br />Note : "
+"Le compte que vous créez ainsi aura accès en lecture et en écriture aux "
+"fichiers situés dans le répertoire et tous ses sous-répertoires.<br />Plus "
+"d'info sur le FTP dans l'aide en ligne HELPID_100<br />"
 
 msgid "err_hta_1"
 msgstr "Un archivo .htaccess incompatible se encuentra en este directorio."
@@ -204,8 +323,6 @@ msgstr "El usuario '%s' ya está relacionado con esta carpeta"
 
 msgid "err_hta_11"
 msgstr "Por favor entre un nombre de usuario válido"
-
-
 
 msgid "quota_mail"
 msgstr "Cuentas de correos"
@@ -259,10 +376,20 @@ msgid "err_mail_15"
 msgstr ""
 "Esta cuenta no es una cuenta pop. ¡Es imposible cambiarle la contraseña!"
 
+msgid "err_err_0"
+msgstr "OK"
 
-msgid "quota_web"
-msgstr "Espace disque"
+msgid "err_err_1"
+msgstr "El mensaje de error no existe (%s)"
 
+msgid "the %3$d-%2$d-%1$d at %4$d:%5$d"
+msgstr "le %1$d/%2$d/%3$d, à %4$dh%5$d"
+
+msgid "Yes"
+msgstr "Oui"
+
+msgid "No"
+msgstr "Non"
 
 msgid "err_mem_1"
 msgstr "Usuario o contraseña incorrecta."
@@ -297,14 +424,42 @@ msgstr "No puede cambiar su contraseña."
 msgid "err_mem_12"
 msgstr "Debe ser administrador para cambiar las preferencias de Administrador."
 
+# Please do NOT translate those strings to each language. Use the country language instead
+msgid "fr_FR"
+msgstr "Français (France)"
+
+msgid "fr_CA"
+msgstr "Français (Canada)"
+
+msgid "en_US"
+msgstr "English (United States)"
+
+msgid "en_UK"
+msgstr "English (United Kingdom)"
+
+msgid "de_DE"
+msgstr "Deutsch (Germany)"
+
+msgid "es_ES"
+msgstr "Espanol"
+
+msgid "es_VE"
+msgstr "Espanol"
+
+#, fuzzy
+msgid "err_quota_0"
+msgstr "El usuario '%s' ya está relacionado con esta carpeta"
+
+#, fuzzy
+msgid "err_quota_1"
+msgstr "Un archivo .htaccess incompatible se encuentra en este directorio."
 
 msgid "quota_mysql"
 msgstr "Bases de datos MySQL"
 
-# #################################################################
-# m_webaccess
-msgid "err_mysql_1"
-msgstr "No tiene ninguna base de datos disponible."
+#, fuzzy
+msgid "quota_mysql_users"
+msgstr "Bases de datos MySQL"
 
 msgid "err_mysql_2"
 msgstr ""
@@ -343,33 +498,211 @@ msgstr ""
 "No tiene ninguna base de datos disponible. Haga clic en «Bases de datos» "
 "para crear una."
 
+# #################################################################
+# m_webaccess
+#, fuzzy
+msgid "err_mysql_12"
+msgstr "No tiene ninguna base de datos disponible."
 
-msgid "quota_stats"
+# #################################################################
+# m_webaccess
+#, fuzzy
+msgid "err_mysql_13"
+msgstr "No tiene ninguna base de datos disponible."
+
+# #################################################################
+# m_webaccess
+#, fuzzy
+msgid "err_mysql_14"
+msgstr "No tiene ninguna base de datos disponible."
+
+# #################################################################
+# m_webaccess
+#, fuzzy
+msgid "err_mysql_15"
+msgstr "No tiene ninguna base de datos disponible."
+
+# #################################################################
+# m_webaccess
+#, fuzzy
+msgid "err_mysql_16"
+msgstr "No tiene ninguna base de datos disponible."
+
+# #################################################################
+# m_webaccess
+#, fuzzy
+msgid "err_mysql_17"
+msgstr "No tiene ninguna base de datos disponible."
+
+# #################################################################
+# m_webaccess
+#, fuzzy
+msgid "err_mysql_18"
+msgstr "No tiene ninguna base de datos disponible."
+
+# #################################################################
+# m_webaccess
+#, fuzzy
+msgid "err_mysql_19"
+msgstr "No tiene ninguna base de datos disponible."
+
+msgid "General SQL Admin"
+msgstr "Admin SQL Général"
+
+msgid "Delete my SQL database"
+msgstr "Effacer ma base de données SQL"
+
+msgid "Manage the SQL backup"
+msgstr "Gestion de la sauvegarde de MySQL"
+
+msgid "Destroy my database"
+msgstr "Détruire ma base de données"
+
+msgid "hlp_sql_bck"
+msgstr ""
+"Les sauvegardes de votre base MySQL sont stockées dans le répertoire choisi "
+"sous le nom <code>db.sql.1</code> à <code>db.sql.19</code><br /> où 'db' est "
+"remplacé par le nom de la base de données.<br />ATTENTION : si vous modifiez "
+"les paramètres de la sauvegarde (nombre de sauvegardes, compression ...) des "
+"vieilles sauvegardes peuvent rester dans le répertoire concerné. Vous pouvez "
+"les effacer dans le gestionnaire de fichier."
+
+#, fuzzy
+msgid "quota_sta2"
 msgstr "Estadísticas Web"
 
 # #################################################################
 # m_webaccess
-msgid "err_stats_1"
+#, fuzzy
+msgid "err_sta2_1"
 msgstr "No hay ningún juego de estadísticas."
 
-msgid "err_stats_2"
+#, fuzzy
+msgid "err_sta2_2"
 msgstr "Este juego de estadísticas no existe."
 
-msgid "err_stats_3"
+#, fuzzy
+msgid "err_sta2_3"
 msgstr "El prefijo escogido no está permitido."
 
-msgid "err_stats_4"
-msgstr "¡Este juego de estadísticas ya existe!"
-
-msgid "err_stats_5"
+msgid "CSS Stylesheet"
 msgstr ""
-"Ha llegado al limite de su cuota de juego de estadísticas, no se puede crear "
-"más."
 
-msgid "err_stats_6"
-msgstr "Este idioma no está soportado."
+msgid "Comma Separated Values data"
+msgstr ""
 
-msgid "err_stats_7"
-msgstr "No hay ningún juego de estadísticas brutas."
+msgid "DIA Diagram"
+msgstr ""
 
+msgid "Word Document"
+msgstr ""
 
+msgid "Word Document Template"
+msgstr ""
+
+msgid "Encapsulated Postscript"
+msgstr ""
+
+msgid "GIF Image"
+msgstr ""
+
+msgid "Macintosh Executable"
+msgstr ""
+
+msgid "HTML Document"
+msgstr ""
+
+msgid "JPEG Image"
+msgstr ""
+
+msgid "Music Playlist"
+msgstr ""
+
+msgid "MP3 Music File"
+msgstr ""
+
+msgid "Ogg Music File"
+msgstr ""
+
+msgid "Acrobat PDF"
+msgstr ""
+
+msgid "PHP Source"
+msgstr ""
+
+msgid "PNG Image"
+msgstr ""
+
+msgid "Powerpoint Slideshow"
+msgstr ""
+
+msgid "Postscript Document"
+msgstr ""
+
+msgid "Photoshop Image"
+msgstr ""
+
+msgid "Rar Compressed Files"
+msgstr ""
+
+msgid "Rich Text Document"
+msgstr ""
+
+msgid "OpenOffice Spreadsheet"
+msgstr ""
+
+msgid "OpenOffice Drawing"
+msgstr ""
+
+msgid "OpenOffice Presentation"
+msgstr ""
+
+msgid "OpenOffice Writer"
+msgstr ""
+
+msgid "TIFF Image"
+msgstr ""
+
+msgid "Text Document"
+msgstr ""
+
+msgid "Virtual Card"
+msgstr ""
+
+msgid "Gimp Image"
+msgstr ""
+
+msgid "Excel Spreadsheet"
+msgstr ""
+
+msgid "Zip Compressed Files"
+msgstr ""
+
+msgid "Real Media File"
+msgstr ""
+
+msgid "Flash Animation"
+msgstr ""
+
+#~ msgid "err_bro_1"
+#~ msgstr "¡Carpeta o archivo incorrecto!"
+
+#~ msgid "err_bro_2"
+#~ msgstr "¡No se puede desplazar un archivo en la misma carpeta!"
+
+#~ msgid "quota_web"
+#~ msgstr "Espace disque"
+
+#~ msgid "err_stats_4"
+#~ msgstr "¡Este juego de estadísticas ya existe!"
+
+#~ msgid "err_stats_5"
+#~ msgstr ""
+#~ "Ha llegado al limite de su cuota de juego de estadísticas, no se puede "
+#~ "crear más."
+
+#~ msgid "err_stats_6"
+#~ msgstr "Este idioma no está soportado."
+
+#~ msgid "err_stats_7"
+#~ msgstr "No hay ningún juego de estadísticas brutas."

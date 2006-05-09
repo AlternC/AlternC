@@ -110,34 +110,6 @@ msgstr "Le domaine peut être installé sans aucun contrôle"
 msgid "Domain can be installed, force NO DNS hosting"
 msgstr "Le domaine peut être installé, force la case 'PAS DE DNS'"
 
-# Date drawn in the 1 column mode file list : 
-msgid "%3$d-%2$d-%1$d %4$d:%5$d"
-msgstr "%1$d/%2$d/%3$d %4$dh%5$d"
-
-msgid "Copy"
-msgstr "Copier"
-
-msgid "1 column, detailed"
-msgstr "1 colonne, détaillé"
-
-msgid "2 columns, short"
-msgstr "2 colonnes, court"
-
-msgid "3 columns, short"
-msgstr "3 colonnes, court"
-
-msgid "Go back to the file manager"
-msgstr "Retourner au gestionnaire de fichier"
-
-msgid "Edit the newly created file"
-msgstr "Editer le fichier"
-
-msgid "err_bro_1"
-msgstr "Répertoire ou fichier incorrect !"
-
-msgid "err_bro_2"
-msgstr "Vous ne pouvez pas déplacer un fichier dans le même répertoire !"
-
 msgid "quota_dom"
 msgstr "Noms de domaines"
 
@@ -456,9 +428,6 @@ msgstr ""
 "Vous devez être administrateur pour pouvoir modifier vos préférences "
 "administrateur."
 
-msgid "quota_web"
-msgstr "Espace disque (Ko)"
-
 # Please do NOT translate those strings to each language. Use the country language instead
 msgid "fr_FR"
 msgstr "Français (France)"
@@ -592,3 +561,133 @@ msgstr "Aucune jeu de statistiques brutes"
 
 msgid "err_sta2_3"
 msgstr "Jeu de statistiques brutes non trouvé"
+
+msgid "CSS Stylesheet"
+msgstr ""
+
+msgid "Comma Separated Values data"
+msgstr ""
+
+msgid "DIA Diagram"
+msgstr ""
+
+msgid "Word Document"
+msgstr ""
+
+msgid "Word Document Template"
+msgstr ""
+
+msgid "Encapsulated Postscript"
+msgstr ""
+
+msgid "GIF Image"
+msgstr ""
+
+msgid "Macintosh Executable"
+msgstr ""
+
+msgid "HTML Document"
+msgstr ""
+
+msgid "JPEG Image"
+msgstr ""
+
+msgid "Music Playlist"
+msgstr ""
+
+msgid "MP3 Music File"
+msgstr ""
+
+msgid "Ogg Music File"
+msgstr ""
+
+msgid "Acrobat PDF"
+msgstr ""
+
+msgid "PHP Source"
+msgstr ""
+
+msgid "PNG Image"
+msgstr ""
+
+msgid "Powerpoint Slideshow"
+msgstr ""
+
+msgid "Postscript Document"
+msgstr ""
+
+msgid "Photoshop Image"
+msgstr ""
+
+msgid "Rar Compressed Files"
+msgstr ""
+
+msgid "Rich Text Document"
+msgstr ""
+
+msgid "OpenOffice Spreadsheet"
+msgstr ""
+
+msgid "OpenOffice Drawing"
+msgstr ""
+
+msgid "OpenOffice Presentation"
+msgstr ""
+
+msgid "OpenOffice Writer"
+msgstr ""
+
+msgid "TIFF Image"
+msgstr ""
+
+msgid "Text Document"
+msgstr ""
+
+msgid "Virtual Card"
+msgstr ""
+
+msgid "Gimp Image"
+msgstr ""
+
+msgid "Excel Spreadsheet"
+msgstr ""
+
+msgid "Zip Compressed Files"
+msgstr ""
+
+msgid "Real Media File"
+msgstr ""
+
+msgid "Flash Animation"
+msgstr ""
+
+# Date drawn in the 1 column mode file list : 
+#~ msgid "%3$d-%2$d-%1$d %4$d:%5$d"
+#~ msgstr "%1$d/%2$d/%3$d %4$dh%5$d"
+
+#~ msgid "Copy"
+#~ msgstr "Copier"
+
+#~ msgid "1 column, detailed"
+#~ msgstr "1 colonne, détaillé"
+
+#~ msgid "2 columns, short"
+#~ msgstr "2 colonnes, court"
+
+#~ msgid "3 columns, short"
+#~ msgstr "3 colonnes, court"
+
+#~ msgid "Go back to the file manager"
+#~ msgstr "Retourner au gestionnaire de fichier"
+
+#~ msgid "Edit the newly created file"
+#~ msgstr "Editer le fichier"
+
+#~ msgid "err_bro_1"
+#~ msgstr "Répertoire ou fichier incorrect !"
+
+#~ msgid "err_bro_2"
+#~ msgstr "Vous ne pouvez pas déplacer un fichier dans le même répertoire !"
+
+#~ msgid "quota_web"
+#~ msgstr "Espace disque (Ko)"

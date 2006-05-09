@@ -249,8 +249,8 @@ bureau/locales/es_VE/LC_MESSAGES/main.po -text
 bureau/locales/es_VE/LC_MESSAGES/main_manual.po -text
 bureau/locales/fr_FR/LC_MESSAGES/main.po -text
 bureau/locales/fr_FR/LC_MESSAGES/main_manual.po -text
-bureau/locales/main.po -text
-bureau/locales/main_manual.po -text
+bureau/locales/main.pot -text
+bureau/locales/main_manual.pot -text
 bureau/locales/updatelang.sh -text
 bureau/style.css -text
 debian/.cvsignore -text
