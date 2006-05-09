@@ -243,6 +243,7 @@ bureau/head.php -text
 bureau/index.php -text
 bureau/locales/README -text
 bureau/locales/de_DE/LC_MESSAGES/main.po -text
+bureau/locales/en_US/LC_MESSAGES/main_manual.po -text
 bureau/locales/es_ES/LC_MESSAGES/main.po -text
 bureau/locales/es_VE/LC_MESSAGES/main.po -text
 bureau/locales/es_VE/LC_MESSAGES/main_manual.po -text
