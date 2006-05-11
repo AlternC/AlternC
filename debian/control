@@ -3,12 +3,12 @@ Section: admin
 Priority: optional
 Maintainer: Benjamin Sonntag <benjamin@alternc.org>
 Uploader: Antoine Beaupre <anarcat@koumbit.org>
-Build-Depends: debhelper (>= 4.0.2), findutils (>= 4.1.7), gcc (>= 2:2.95.4), gettext (>= 0.10.40-5), po-debconf
-Standards-Version: 3.6.2.2
+Build-Depends-Indep: debhelper (>= 4.0.2), findutils (>= 4.1.7), gcc (>= 2:2.95.4), gettext (>= 0.10.40-5), po-debconf
+Standards-Version: 3.7.2.0
 
 Package: alternc
-Architecture: any
-Depends: debianutils (>= 1.13.1), debconf (>= 0.5.00) | debconf-2.0, libapache-mod-php4 | libapache-mod-php5, apache, apache-ssl, courier-ssl, courier-imap-ssl, courier-pop-ssl, mysql-server, php5-mysql | php4-mysql, phpmyadmin, proftpd-mysql, squirrelmail, postfix, postfix-tls, bind9, wget, libapache-mod-gzip, rsync, quota, courier-authmysql, ca-certificates, locales, perl-suid, perl, postfix-mysql, wwwconfig-common, sasl2-bin, libsasl2-modules, php4-cli | php5-cli, php4-mysql | php5-mysql, lockfile-progs (>= 0.1.9), gettext (>= 0.10.40-5), pdksh (>= 5.2.14-6), adduser
+Architecture: all
+Depends: debianutils (>= 1.13.1), debconf (>= 0.5.00) | debconf-2.0, libapache-mod-php4 | libapache-mod-php5, apache, apache-ssl, courier-ssl, courier-imap-ssl, courier-pop-ssl, mysql-server, php5-mysql | php4-mysql, phpmyadmin, proftpd-mysql, squirrelmail, postfix, postfix-tls, bind9, wget, libapache-mod-gzip, rsync, quota, courier-authmysql, ca-certificates, locales, perl-suid, perl, postfix-mysql, wwwconfig-common, sasl2-bin, libsasl2-modules, php4-cli | php5-cli, php4-mysql | php5-mysql, lockfile-progs (>= 0.1.9), gettext (>= 0.10.40-5), pdksh (>= 5.2.14-6), adduser, perl-suid
 Conflicts: alternc-admintools, alternc-awstats (<= 0.3.2), alternc-webalizer (<= 0.9.4)
 Provides: alternc-admintools
 Replaces: alternc-admintools

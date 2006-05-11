@@ -352,16 +352,9 @@ po/fr/LC_MESSAGES/alternc-admintools.po -text
 src/.cvsignore -text
 src/Makefile -text
 src/basedir_prot.sh -text
-src/db_create.c -text
 src/du.pl -text
-src/mail_add.c -text
-src/mail_del.c -text
-src/mem_add.c -text
-src/mem_del.c -text
 src/quota_delete -text
-src/quota_edit.c -text
 src/quota_edit.sh -text
-src/quota_get.c -text
 src/quota_get.sh -text
 src/quota_init -text
 src/rawstat.daily -text
