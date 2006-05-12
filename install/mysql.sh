@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/sh 
 #
 # $Id: mysql.sh,v 1.11 2006/01/11 22:51:28 anarcat Exp $
 # ----------------------------------------------------------------------
@@ -28,16 +28,23 @@
 # USAGE : "mysql.sh loginroot passroot systemdb"
 # ----------------------------------------------------------------------
 #
-rootlogin=$1
-rootpass=$2
-systemdb=$3
 
-mysql="mysql --defaults-file=/etc/mysql/debian.cnf"
+rootlogin="$1"
+rootpass="$2"
+systemdb="$3"
+
+if [ -z "$rootlogin" -o -z "$rootpass" -o -z "$systemdb" ]
+then
+    echo "Usage: mysql.sh <rootlogin> <rootpass> <systemdb>"
+    exit 1
+fi
+
+mysql="/usr/bin/mysql --defaults-file=/etc/mysql/debian.cnf"
 
 if ! $mysql mysql -e "SHOW TABLES" >/dev/null
 then
     # is this an upgrade then?
-    mysql="mysql -u $rootlogin -p$rootpass" 
+    mysql="/usr/bin/mysql -u$rootlogin -p$rootpass" 
     if ! $mysql mysql -e "SHOW TABLES" >/dev/null
     then
         echo "Can't get proper credentials, aborting"
@@ -45,12 +52,31 @@ then
     fi
 fi
 
-echo "Setting AlternC $systemdb system table and privileges "
+# The grant all is the most important right needed in this script.
+# If this call fail, we may be connected to a mysql-server version 5.0.
+echo "Granting users "
+    # In that case, change mysql parameters and retry. Use root / nopassword.
+$mysql -e "GRANT ALL ON *.* TO '$rootlogin'@'${MYSQL_CLIENT}' IDENTIFIED BY '$rootpass' WITH GRANT OPTION"
+if [ "$?" -ne "0" ]
+then
+    echo "You are using mysql 5.0, so we try with root account and no password since debian-sys-maint doesn't work."
+    mysql="/usr/bin/mysql -uroot "
+    echo "Granting users "
+    $mysql -e "GRANT ALL ON *.* TO '$rootlogin'@'${MYSQL_CLIENT}' IDENTIFIED BY '$rootpass' WITH GRANT OPTION"
+    if [ "$?" -ne "0" ] 
+	then 
+	echo "Can't grant system user $rootlogin, abording"; 
+	exit 1 
+    fi
+fi
+
+# Now we can use rootlogin and rootpass. 
+mysql="/usr/bin/mysql -u$rootlogin -p$rootpass" 
+
+echo "Setting AlternC '$systemdb' system table and privileges "
 $mysql -e "CREATE DATABASE IF NOT EXISTS $systemdb;" 
+
 echo "Installing AlternC schema "
 $mysql $systemdb < /usr/share/alternc/install/mysql.sql
 
-echo "Granting users "
-$mysql -e "GRANT ALL ON *.* TO '$rootlogin'@'${MYSQL_CLIENT}' IDENTIFIED BY '$rootpass' WITH GRANT OPTION" 
-
-mysql -u $rootlogin -p$rootpass $systemdb -e "SHOW TABLES" >/dev/null && echo "MYSQL.SH OK!" || echo "MYSQL.SH FAILED!"
+/usr/bin/mysql -u$rootlogin -p$rootpass $systemdb -e "SHOW TABLES" >/dev/null && echo "MYSQL.SH OK!" || echo "MYSQL.SH FAILED!"
