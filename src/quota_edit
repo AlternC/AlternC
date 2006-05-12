@@ -1,0 +1,33 @@
+#!/usr/bin/perl 
+
+use strict;
+
+my ($uid,$size) = @ARGV;
+
+if (!$size || !$uid) {
+    print "Usage: quota_edit <uid> <size>\n";
+    print " Edit the quota of the AlternC account having uid <uid> the the available space to <size>\n";
+    exit(1);
+}
+
+$ENV{PATH} = "";
+delete @ENV{'IFS', 'CDPATH', 'ENV', 'BASH_ENV'};
+
+if (!($uid =~ /^([0-9]+)$/)) {
+    die "uid is incorrect.";
+}
+$uid=$1;
+
+if (!($size =~ /^([0-9]+)$/)) {
+    die "size is incorrect.";
+}
+$size=$1;
+
+$< = $>;
+$( = $);
+
+my $PTH="/usr/lib/alternc/quota_edit.sh '".quotemeta($uid)."' '".quotemeta($size)."'";
+
+system($PTH);
+
+0;
