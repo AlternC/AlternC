@@ -250,7 +250,7 @@ bureau/locales/es_VE/LC_MESSAGES/manual.po -text
 bureau/locales/es_VE/LC_MESSAGES/messages.po -text
 bureau/locales/fr_FR/LC_MESSAGES/manual.po -text
 bureau/locales/fr_FR/LC_MESSAGES/messages.po -text
-bureau/locales/manual.po -text
+bureau/locales/manual.pot -text
 bureau/locales/messages.pot -text
 bureau/style.css -text
 debian/.cvsignore -text
