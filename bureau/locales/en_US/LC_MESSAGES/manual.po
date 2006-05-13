@@ -54,9 +54,6 @@ msgstr "This TLD already exists"
 msgid "err_admin_13"
 msgstr "The login is too long (16 chars max)"
 
-msgid "Click here to continue"
-msgstr "Click here to continue"
-
 msgid "Description"
 msgstr "Description"
 
@@ -383,12 +380,6 @@ msgstr "The error message does not exists (%s)"
 msgid "the %3$d-%2$d-%1$d at %4$d:%5$d"
 msgstr "%3$d/%1$d/%2$d, at %6$d:%5$d %7$s"
 
-msgid "Yes"
-msgstr "Yes"
-
-msgid "No"
-msgstr "No"
-
 msgid "err_mem_1"
 msgstr "User or password incorrect"
 
@@ -524,9 +515,6 @@ msgstr "You have no database available."
 msgid "err_mysql_19"
 msgstr "You have no database available."
 
-msgid "General SQL Admin"
-msgstr "General SQL Admin"
-
 msgid "Delete my SQL database"
 msgstr "Delete my SQL database"
 
@@ -658,6 +646,18 @@ msgstr ""
 
 msgid "Flash Animation"
 msgstr ""
+
+#~ msgid "Click here to continue"
+#~ msgstr "Click here to continue"
+
+#~ msgid "Yes"
+#~ msgstr "Yes"
+
+#~ msgid "No"
+#~ msgstr "No"
+
+#~ msgid "General SQL Admin"
+#~ msgstr "General SQL Admin"
 
 #~ msgid "This page is restricted to authorized staff"
 #~ msgstr "This page is restricted to authorized staff"

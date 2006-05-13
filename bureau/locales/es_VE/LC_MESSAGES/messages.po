@@ -2034,6 +2034,139 @@ msgstr "Ayuda"
 msgid "You can use a different language: "
 msgstr "Si desea cambiar de idioma, haga clic sobre una de las banderas"
 
+#: ../class/mime.php:135
+msgid "CSS Stylesheet"
+msgstr ""
+
+#: ../class/mime.php:136
+msgid "Comma Separated Values data"
+msgstr ""
+
+#: ../class/mime.php:137
+msgid "DIA Diagram"
+msgstr ""
+
+#: ../class/mime.php:138
+msgid "Word Document"
+msgstr ""
+
+#: ../class/mime.php:139
+msgid "Word Document Template"
+msgstr ""
+
+#: ../class/mime.php:140
+msgid "Encapsulated Postscript"
+msgstr ""
+
+#: ../class/mime.php:141
+msgid "GIF Image"
+msgstr ""
+
+#: ../class/mime.php:142
+msgid "Macintosh Executable"
+msgstr ""
+
+#: ../class/mime.php:143 ../class/mime.php:144
+msgid "HTML Document"
+msgstr ""
+
+#: ../class/mime.php:145 ../class/mime.php:146
+msgid "JPEG Image"
+msgstr ""
+
+#: ../class/mime.php:147
+msgid "Music Playlist"
+msgstr ""
+
+#: ../class/mime.php:148
+msgid "MP3 Music File"
+msgstr ""
+
+#: ../class/mime.php:149
+msgid "Ogg Music File"
+msgstr ""
+
+#: ../class/mime.php:150
+msgid "Acrobat PDF"
+msgstr ""
+
+#: ../class/mime.php:151
+msgid "PHP Source"
+msgstr ""
+
+#: ../class/mime.php:152
+#, fuzzy
+msgid "PNG Image"
+msgstr "Administrar localmente"
+
+#: ../class/mime.php:153 ../class/mime.php:154
+msgid "Powerpoint Slideshow"
+msgstr ""
+
+#: ../class/mime.php:155
+msgid "Postscript Document"
+msgstr ""
+
+#: ../class/mime.php:156
+msgid "Photoshop Image"
+msgstr ""
+
+#: ../class/mime.php:157
+msgid "Rar Compressed Files"
+msgstr ""
+
+#: ../class/mime.php:158
+msgid "Rich Text Document"
+msgstr ""
+
+#: ../class/mime.php:159
+msgid "OpenOffice Spreadsheet"
+msgstr ""
+
+#: ../class/mime.php:160
+msgid "OpenOffice Drawing"
+msgstr ""
+
+#: ../class/mime.php:161
+msgid "OpenOffice Presentation"
+msgstr ""
+
+#: ../class/mime.php:162
+msgid "OpenOffice Writer"
+msgstr ""
+
+#: ../class/mime.php:163 ../class/mime.php:164
+msgid "TIFF Image"
+msgstr ""
+
+#: ../class/mime.php:165
+msgid "Text Document"
+msgstr ""
+
+#: ../class/mime.php:166 ../class/mime.php:167
+msgid "Virtual Card"
+msgstr ""
+
+#: ../class/mime.php:168
+msgid "Gimp Image"
+msgstr ""
+
+#: ../class/mime.php:169
+msgid "Excel Spreadsheet"
+msgstr ""
+
+#: ../class/mime.php:170
+msgid "Zip Compressed Files"
+msgstr ""
+
+#: ../class/mime.php:171
+msgid "Flash Animation"
+msgstr ""
+
+#: ../class/mime.php:172 ../class/mime.php:173 ../class/mime.php:174
+msgid "Real Media File"
+msgstr ""
+
 #~ msgid "Recalculate the quotas of the account"
 #~ msgstr "Volver a calcular las cuotas de esta cuenta"
 

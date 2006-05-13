@@ -60,9 +60,6 @@ msgstr "Este TLD ya existe."
 msgid "err_admin_13"
 msgstr "-- ¡¡Solo los administradores tienen acceso a estas páginas!! -- "
 
-msgid "Click here to continue"
-msgstr "Cliquer ici pour continuer"
-
 msgid "Description"
 msgstr "Description"
 
@@ -385,12 +382,6 @@ msgstr "El mensaje de error no existe (%s)"
 msgid "the %3$d-%2$d-%1$d at %4$d:%5$d"
 msgstr "le %1$d/%2$d/%3$d, à %4$dh%5$d"
 
-msgid "Yes"
-msgstr "Oui"
-
-msgid "No"
-msgstr "Non"
-
 msgid "err_mem_1"
 msgstr "Usuario o contraseña incorrecta."
 
@@ -546,9 +537,6 @@ msgstr "No tiene ninguna base de datos disponible."
 msgid "err_mysql_19"
 msgstr "No tiene ninguna base de datos disponible."
 
-msgid "General SQL Admin"
-msgstr "Admin SQL Général"
-
 msgid "Delete my SQL database"
 msgstr "Effacer ma base de données SQL"
 
@@ -683,6 +671,18 @@ msgstr ""
 
 msgid "Flash Animation"
 msgstr ""
+
+#~ msgid "Click here to continue"
+#~ msgstr "Cliquer ici pour continuer"
+
+#~ msgid "Yes"
+#~ msgstr "Oui"
+
+#~ msgid "No"
+#~ msgstr "Non"
+
+#~ msgid "General SQL Admin"
+#~ msgstr "Admin SQL Général"
 
 #~ msgid "err_bro_1"
 #~ msgstr "¡Carpeta o archivo incorrecto!"

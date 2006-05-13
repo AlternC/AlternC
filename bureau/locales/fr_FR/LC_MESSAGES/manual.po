@@ -56,9 +56,6 @@ msgstr "Ce TLD existe déjà"
 msgid "err_admin_13"
 msgstr "Le login est trop long (16< caractères maximum)"
 
-msgid "Click here to continue"
-msgstr "Cliquer ici pour continuer"
-
 msgid "Description"
 msgstr "Description"
 
@@ -386,12 +383,6 @@ msgstr "Le message d'erreur n'existe pas (%s)"
 msgid "the %3$d-%2$d-%1$d at %4$d:%5$d"
 msgstr "le %1$d/%2$d/%3$d, à %4$dh%5$d"
 
-msgid "Yes"
-msgstr "Oui"
-
-msgid "No"
-msgstr "Non"
-
 msgid "err_mem_1"
 msgstr "Utilisateur ou mot de passe incorrect"
 
@@ -527,9 +518,6 @@ msgstr "L'utilisateur n'existe pas"
 msgid "err_mysql_19"
 msgstr "Le fichier entré n'existe pas ou est incorect."
 
-msgid "General SQL Admin"
-msgstr "Admin SQL Général"
-
 msgid "Delete my SQL database"
 msgstr "Effacer ma base de données SQL"
 
@@ -660,6 +648,18 @@ msgstr ""
 
 msgid "Flash Animation"
 msgstr ""
+
+#~ msgid "Click here to continue"
+#~ msgstr "Cliquer ici pour continuer"
+
+#~ msgid "Yes"
+#~ msgstr "Oui"
+
+#~ msgid "No"
+#~ msgstr "Non"
+
+#~ msgid "General SQL Admin"
+#~ msgstr "Admin SQL Général"
 
 # Date drawn in the 1 column mode file list : 
 #~ msgid "%3$d-%2$d-%1$d %4$d:%5$d"
