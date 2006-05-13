@@ -9,10 +9,10 @@ fi
 
 if [ -d $1/LC_MESSAGES ] 
 then
-    for i in *.pot 
+    for i in *.po
     do
       echo -n "Updating $i : "
-      msgmerge -v -U $1/LC_MESSAGES/`echo "$i"|sed -e 's/\.pot$/.po/'` $i
+      msgmerge -v -U $1/LC_MESSAGES/$i $i
       echo " Done."
     done
 else
