@@ -1,7 +1,7 @@
 all: messages.pot */LC_MESSAGES/messages.po */LC_MESSAGES/manual.po
 
 
-messages.po: ../*/*.php
+messages.pot: ../*/*.php
 	touch $@
 	xgettext --force-po --omit-header --keyword=__ --keyword=_  -L PHP --from-code iso-8859-1 -j $^
 
