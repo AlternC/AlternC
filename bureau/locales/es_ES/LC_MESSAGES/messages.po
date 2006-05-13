@@ -2186,6 +2186,31 @@ msgstr ""
 msgid "Real Media File"
 msgstr ""
 
+#: ../class/m_admin.php:53
+msgid "This TLD is forbidden"
+msgstr "This TLD is forbidden"
+
+#: ../class/m_admin.php:54
+msgid "primary DNS is checked in WHOIS db"
+msgstr "primary DNS is checked in WHOIS db"
+
+#: ../class/m_admin.php:55
+msgid "primary & secondary DNS are checked in WHOIS db"
+msgstr "primary & secondary DNS are checked in WHOIS db"
+
+#: ../class/m_admin.php:56
+msgid "Domain must exist, but don't do any DNS check"
+msgstr "Domain must exist, but don't do any DNS check"
+
+#: ../class/m_admin.php:57
+msgid "Domain can be installed, no check at all"
+msgstr "Domain can be installed, no check at all"
+
+#: ../class/m_admin.php:58
+#, fuzzy
+msgid "Domain can be installed, force NO DNS hosting)"
+msgstr "Domain can be installed, force NO DNS hosting"
+
 # #################################################################
 # m_membre
 #~ msgid "err_admin_1"
@@ -2270,24 +2295,6 @@ msgstr ""
 
 #~ msgid "Number of web statistics"
 #~ msgstr "Numero de juegos de estadísticas"
-
-#~ msgid "This TLD is forbidden"
-#~ msgstr "This TLD is forbidden"
-
-#~ msgid "primary DNS is checked in WHOIS db"
-#~ msgstr "primary DNS is checked in WHOIS db"
-
-#~ msgid "primary & secondary DNS are checked in WHOIS db"
-#~ msgstr "primary & secondary DNS are checked in WHOIS db"
-
-#~ msgid "Domain must exist, but don't do any DNS check"
-#~ msgstr "Domain must exist, but don't do any DNS check"
-
-#~ msgid "Domain can be installed, no check at all"
-#~ msgstr "Domain can be installed, no check at all"
-
-#~ msgid "Domain can be installed, force NO DNS hosting"
-#~ msgstr "Domain can be installed, force NO DNS hosting"
 
 #~ msgid "%3$d-%2$d-%1$d %4$d:%5$d"
 #~ msgstr "el %1$d/%2$d/%3$d, a las %4$dh%5$d"

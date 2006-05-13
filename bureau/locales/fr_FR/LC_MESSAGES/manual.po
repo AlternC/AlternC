@@ -59,24 +59,6 @@ msgstr "Le login est trop long (16< caractères maximum)"
 msgid "Description"
 msgstr "Description"
 
-msgid "The user has no database"
-msgstr "L'utilisateur n'a pas de base de données active"
-
-msgid "Enable the database"
-msgstr "Activer la base MySQL"
-
-msgid "The user has a MySQL database"
-msgstr "L'utilisateur dispose d'une base MySQL"
-
-msgid "Disable the database"
-msgstr "Désactiver la base MySQL"
-
-msgid "Disk space (in KB)"
-msgstr "Espace disque (en Ko)"
-
-msgid "Number of email accounts"
-msgstr "Nombre de comptes email"
-
 msgid "Number of mailing-lists"
 msgstr "Nombre de listes de discussion"
 
@@ -88,24 +70,6 @@ msgstr "Nombre de comptes FTP"
 
 msgid "Number of web statistics"
 msgstr "Nombre de jeux de statistiques"
-
-msgid "This TLD is forbidden"
-msgstr "Ce TLD est interdit"
-
-msgid "primary DNS is checked in WHOIS db"
-msgstr "le DNS primaire est vérifié dans le WHOIS"
-
-msgid "primary & secondary DNS are checked in WHOIS db"
-msgstr "les DNS primaire ET secondaire sont vérifiés dans le WHOIS"
-
-msgid "Domain must exist, but don't do any DNS check"
-msgstr "Le domaine doit exister, mais aucun contrôle DNS n'est effectué"
-
-msgid "Domain can be installed, no check at all"
-msgstr "Le domaine peut être installé sans aucun contrôle"
-
-msgid "Domain can be installed, force NO DNS hosting"
-msgstr "Le domaine peut être installé, force la case 'PAS DE DNS'"
 
 msgid "quota_dom"
 msgstr "Noms de domaines"
@@ -540,6 +504,42 @@ msgstr "Aucune jeu de statistiques brutes"
 
 msgid "err_sta2_3"
 msgstr "Jeu de statistiques brutes non trouvé"
+
+#~ msgid "Number of email accounts"
+#~ msgstr "Nombre de comptes email"
+
+#~ msgid "This TLD is forbidden"
+#~ msgstr "Ce TLD est interdit"
+
+#~ msgid "primary DNS is checked in WHOIS db"
+#~ msgstr "le DNS primaire est vérifié dans le WHOIS"
+
+#~ msgid "primary & secondary DNS are checked in WHOIS db"
+#~ msgstr "les DNS primaire ET secondaire sont vérifiés dans le WHOIS"
+
+#~ msgid "Domain must exist, but don't do any DNS check"
+#~ msgstr "Le domaine doit exister, mais aucun contrôle DNS n'est effectué"
+
+#~ msgid "Domain can be installed, no check at all"
+#~ msgstr "Le domaine peut être installé sans aucun contrôle"
+
+#~ msgid "Domain can be installed, force NO DNS hosting"
+#~ msgstr "Le domaine peut être installé, force la case 'PAS DE DNS'"
+
+#~ msgid "The user has no database"
+#~ msgstr "L'utilisateur n'a pas de base de données active"
+
+#~ msgid "Enable the database"
+#~ msgstr "Activer la base MySQL"
+
+#~ msgid "The user has a MySQL database"
+#~ msgstr "L'utilisateur dispose d'une base MySQL"
+
+#~ msgid "Disable the database"
+#~ msgstr "Désactiver la base MySQL"
+
+#~ msgid "Disk space (in KB)"
+#~ msgstr "Espace disque (en Ko)"
 
 #~ msgid "Delete my SQL database"
 #~ msgstr "Effacer ma base de données SQL"

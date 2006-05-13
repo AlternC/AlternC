@@ -57,24 +57,6 @@ msgstr "The login is too long (16 chars max)"
 msgid "Description"
 msgstr "Description"
 
-msgid "The user has no database"
-msgstr "The user has no database"
-
-msgid "Enable the database"
-msgstr "Enable the database"
-
-msgid "The user has a MySQL database"
-msgstr "The user has a MySQL database"
-
-msgid "Disable the database"
-msgstr "Disable the database"
-
-msgid "Disk space (in KB)"
-msgstr "Disk space (in KB)"
-
-msgid "Number of email accounts"
-msgstr "Number of email accounts"
-
 msgid "Number of mailing-lists"
 msgstr "Number of mailing-lists"
 
@@ -86,24 +68,6 @@ msgstr "Number of FTP accounts"
 
 msgid "Number of web statistics"
 msgstr "Number of web statistics"
-
-msgid "This TLD is forbidden"
-msgstr "This TLD is forbidden"
-
-msgid "primary DNS is checked in WHOIS db"
-msgstr "primary DNS is checked in WHOIS db"
-
-msgid "primary & secondary DNS are checked in WHOIS db"
-msgstr "primary & secondary DNS are checked in WHOIS db"
-
-msgid "Domain must exist, but don't do any DNS check"
-msgstr "Domain must exist, but don't do any DNS check"
-
-msgid "Domain can be installed, no check at all"
-msgstr "Domain can be installed, no check at all"
-
-msgid "Domain can be installed, force NO DNS hosting"
-msgstr "Domain can be installed, force NO DNS hosting"
 
 msgid "quota_dom"
 msgstr "Domain names"
@@ -538,6 +502,42 @@ msgstr "This statistic set does not exist."
 #, fuzzy
 msgid "err_sta2_3"
 msgstr "The chosen prefix is not allowed here"
+
+#~ msgid "Number of email accounts"
+#~ msgstr "Number of email accounts"
+
+#~ msgid "This TLD is forbidden"
+#~ msgstr "This TLD is forbidden"
+
+#~ msgid "primary DNS is checked in WHOIS db"
+#~ msgstr "primary DNS is checked in WHOIS db"
+
+#~ msgid "primary & secondary DNS are checked in WHOIS db"
+#~ msgstr "primary & secondary DNS are checked in WHOIS db"
+
+#~ msgid "Domain must exist, but don't do any DNS check"
+#~ msgstr "Domain must exist, but don't do any DNS check"
+
+#~ msgid "Domain can be installed, no check at all"
+#~ msgstr "Domain can be installed, no check at all"
+
+#~ msgid "Domain can be installed, force NO DNS hosting"
+#~ msgstr "Domain can be installed, force NO DNS hosting"
+
+#~ msgid "The user has no database"
+#~ msgstr "The user has no database"
+
+#~ msgid "Enable the database"
+#~ msgstr "Enable the database"
+
+#~ msgid "The user has a MySQL database"
+#~ msgstr "The user has a MySQL database"
+
+#~ msgid "Disable the database"
+#~ msgstr "Disable the database"
+
+#~ msgid "Disk space (in KB)"
+#~ msgstr "Disk space (in KB)"
 
 #~ msgid "Delete my SQL database"
 #~ msgstr "Delete my SQL database"

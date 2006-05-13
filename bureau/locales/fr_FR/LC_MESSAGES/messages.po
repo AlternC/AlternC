@@ -2160,6 +2160,30 @@ msgstr "Animation Flash"
 msgid "Real Media File"
 msgstr "Fichier Real Media"
 
+#: ../class/m_admin.php:53
+msgid "This TLD is forbidden"
+msgstr ""
+
+#: ../class/m_admin.php:54
+msgid "primary DNS is checked in WHOIS db"
+msgstr ""
+
+#: ../class/m_admin.php:55
+msgid "primary & secondary DNS are checked in WHOIS db"
+msgstr ""
+
+#: ../class/m_admin.php:56
+msgid "Domain must exist, but don't do any DNS check"
+msgstr ""
+
+#: ../class/m_admin.php:57
+msgid "Domain can be installed, no check at all"
+msgstr ""
+
+#: ../class/m_admin.php:58
+msgid "Domain can be installed, force NO DNS hosting)"
+msgstr ""
+
 #~ msgid "2 months"
 #~ msgstr "2 mois"
 
