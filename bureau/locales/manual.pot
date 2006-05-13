@@ -56,21 +56,6 @@ msgstr "Ce TLD existe déjà"
 msgid "err_admin_13"
 msgstr "Le login est trop long (60 caractères maximum)"
 
-msgid "Description"
-msgstr "Description"
-
-msgid "Number of mailing-lists"
-msgstr "Nombre de listes de discussion"
-
-msgid "Number of domains"
-msgstr "Nombre de domaines"
-
-msgid "Number of FTP accounts"
-msgstr "Nombre de comptes FTP"
-
-msgid "Number of web statistics"
-msgstr "Nombre de jeux de statistiques"
-
 msgid "quota_dom"
 msgstr "Noms de domaines"
 
