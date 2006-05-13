@@ -24,17 +24,14 @@ to translate AlternC in any language.
 
 2. How to update language files.
 
-When the programm is updated, the po and pot files in locales/ are
-changed to reflect the new developped features.
+When the programm is updated, the po files in locales/ are changed to
+reflect the new developped features.
 
-You can launch 
+You can just call the makefile to have the files regenerated:
 
-./updatelang.sh <languagecode> 
+cd admin/locales
+make
 
 from "locales/" to update your language po files. New strings will have
 an empty "msgstr" value, and obsoletes one will be commented out with
-#~ 
-
-Example : 
-
-./updatelang.sh fr_FR
+#~
