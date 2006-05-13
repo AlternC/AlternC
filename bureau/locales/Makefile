@@ -1,4 +1,4 @@
-all: messages.po */LC_MESSAGES/messages.po
+all: messages.po */LC_MESSAGES/messages.po */LC_MESSAGES/manual.po
 
 
 messages.po: ../*/*.php
