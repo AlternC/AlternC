@@ -252,7 +252,6 @@ bureau/locales/fr_FR/LC_MESSAGES/manual.po -text
 bureau/locales/fr_FR/LC_MESSAGES/messages.po -text
 bureau/locales/manual.po -text
 bureau/locales/messages.pot -text
-bureau/locales/updatelang.sh -text
 bureau/style.css -text
 debian/.cvsignore -text
 debian/README.Debian -text
