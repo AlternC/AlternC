@@ -50,12 +50,12 @@ class m_admin {
     */
 
   var $tldmode=array(
-		     0 => "This TLD is forbidden",
-		     1 => "primary DNS is checked in WHOIS db",
-		     2 => "primary & secondary DNS are checked in WHOIS db",
-		     3 => "Domain must exist, but don't do any DNS check",
-		     4 => "Domain can be installed, no check at all",
-		     5 => "Domain can be installed, force NO DNS hosting"
+		     0 => __("This TLD is forbidden"),
+		     1 => __("primary DNS is checked in WHOIS db"),
+		     2 => __("primary & secondary DNS are checked in WHOIS db"),
+		     3 => __("Domain must exist, but don't do any DNS check"),
+		     4 => __("Domain can be installed, no check at all"),
+		     5 => __("Domain can be installed, force NO DNS hosting)"
 		     );
 
   /* ----------------------------------------------------------------- */
