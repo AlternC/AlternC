@@ -1161,7 +1161,7 @@ msgstr ""
 "Si vous voulez utiliser une langue différente, cliquez l'un des drapeaux ci-"
 "dessous"
 
-#: ../admin/index.php:75
+#: ../admin/index.php:75 ../admin/index.php:74
 msgid "AlternC, Opensource hosting control panel"
 msgstr "AlternC, Panneau de contrôle d'hébergement mutualisé opensource"
 
@@ -2020,6 +2020,13 @@ msgstr ""
 #: ../class/m_mem.php:474
 msgid "Help"
 msgstr "Aide"
+
+#: ../admin/index.php:66
+#, fuzzy
+msgid "You can use a different language: "
+msgstr ""
+"Si vous voulez utiliser une langue différente, cliquez l'un des drapeaux ci-"
+"dessous"
 
 #~ msgid "2 months"
 #~ msgstr "2 mois"

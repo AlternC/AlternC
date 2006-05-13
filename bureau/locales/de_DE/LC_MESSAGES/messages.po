@@ -1104,7 +1104,7 @@ msgstr ""
 msgid "If you want to use a different language, click on the flag below"
 msgstr "Für eine andere Sprache, click über die Fahne"
 
-#: ../admin/index.php:75
+#: ../admin/index.php:75 ../admin/index.php:74
 msgid "AlternC, Opensource hosting control panel"
 msgstr ""
 
@@ -1886,6 +1886,11 @@ msgstr "_"
 #: ../class/m_mem.php:474
 msgid "Help"
 msgstr "Hilfe"
+
+#: ../admin/index.php:66
+#, fuzzy
+msgid "You can use a different language: "
+msgstr "Für eine andere Sprache, click über die Fahne"
 
 #~ msgid "lang"
 #~ msgstr "lang"

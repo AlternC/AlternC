@@ -1161,7 +1161,7 @@ msgstr "Debe aceptar el cookie de sesión para poder conectarse"
 msgid "If you want to use a different language, click on the flag below"
 msgstr "Si desea cambiar de idioma, haga clic sobre una de las banderas"
 
-#: ../admin/index.php:75
+#: ../admin/index.php:75 ../admin/index.php:74
 msgid "AlternC, Opensource hosting control panel"
 msgstr ""
 
@@ -2047,6 +2047,11 @@ msgstr ""
 #: ../class/m_mem.php:474
 msgid "Help"
 msgstr "Ayuda"
+
+#: ../admin/index.php:66
+#, fuzzy
+msgid "You can use a different language: "
+msgstr "Si desea cambiar de idioma, haga clic sobre una de las banderas"
 
 # #################################################################
 # m_membre

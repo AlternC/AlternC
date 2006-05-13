@@ -63,8 +63,7 @@ $H=getenv("HTTP_HOST");
 <tr><td style="text-align: left">
 <?php __("You must accept the session cookie to log-in"); ?>
 <br />
-<?php __("If you want to use a different language, click on the flag below"); ?>
-<br />
+<?php __("You can use a different language: "); ?>
 <?php 
 foreach($locales as $l) {
 ?>
