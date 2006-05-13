@@ -537,15 +537,6 @@ msgstr "No tiene ninguna base de datos disponible."
 msgid "err_mysql_19"
 msgstr "No tiene ninguna base de datos disponible."
 
-msgid "Delete my SQL database"
-msgstr "Effacer ma base de données SQL"
-
-msgid "Manage the SQL backup"
-msgstr "Gestion de la sauvegarde de MySQL"
-
-msgid "Destroy my database"
-msgstr "Détruire ma base de données"
-
 msgid "hlp_sql_bck"
 msgstr ""
 "Les sauvegardes de votre base MySQL sont stockées dans le répertoire choisi "
@@ -573,104 +564,14 @@ msgstr "Este juego de estadísticas no existe."
 msgid "err_sta2_3"
 msgstr "El prefijo escogido no está permitido."
 
-msgid "CSS Stylesheet"
-msgstr ""
+#~ msgid "Delete my SQL database"
+#~ msgstr "Effacer ma base de données SQL"
 
-msgid "Comma Separated Values data"
-msgstr ""
+#~ msgid "Manage the SQL backup"
+#~ msgstr "Gestion de la sauvegarde de MySQL"
 
-msgid "DIA Diagram"
-msgstr ""
-
-msgid "Word Document"
-msgstr ""
-
-msgid "Word Document Template"
-msgstr ""
-
-msgid "Encapsulated Postscript"
-msgstr ""
-
-msgid "GIF Image"
-msgstr ""
-
-msgid "Macintosh Executable"
-msgstr ""
-
-msgid "HTML Document"
-msgstr ""
-
-msgid "JPEG Image"
-msgstr ""
-
-msgid "Music Playlist"
-msgstr ""
-
-msgid "MP3 Music File"
-msgstr ""
-
-msgid "Ogg Music File"
-msgstr ""
-
-msgid "Acrobat PDF"
-msgstr ""
-
-msgid "PHP Source"
-msgstr ""
-
-msgid "PNG Image"
-msgstr ""
-
-msgid "Powerpoint Slideshow"
-msgstr ""
-
-msgid "Postscript Document"
-msgstr ""
-
-msgid "Photoshop Image"
-msgstr ""
-
-msgid "Rar Compressed Files"
-msgstr ""
-
-msgid "Rich Text Document"
-msgstr ""
-
-msgid "OpenOffice Spreadsheet"
-msgstr ""
-
-msgid "OpenOffice Drawing"
-msgstr ""
-
-msgid "OpenOffice Presentation"
-msgstr ""
-
-msgid "OpenOffice Writer"
-msgstr ""
-
-msgid "TIFF Image"
-msgstr ""
-
-msgid "Text Document"
-msgstr ""
-
-msgid "Virtual Card"
-msgstr ""
-
-msgid "Gimp Image"
-msgstr ""
-
-msgid "Excel Spreadsheet"
-msgstr ""
-
-msgid "Zip Compressed Files"
-msgstr ""
-
-msgid "Real Media File"
-msgstr ""
-
-msgid "Flash Animation"
-msgstr ""
+#~ msgid "Destroy my database"
+#~ msgstr "Détruire ma base de données"
 
 #~ msgid "Click here to continue"
 #~ msgstr "Cliquer ici pour continuer"

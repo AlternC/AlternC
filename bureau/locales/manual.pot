@@ -515,15 +515,6 @@ msgstr "Aucun utilisateur de ce nom n'existe"
 msgid "err_mysql_19"
 msgstr "Vous n'avez aucun utilisateur SQL autre que l'utilisateur principal"
 
-msgid "Delete my SQL database"
-msgstr "Effacer ma base de données SQL"
-
-msgid "Manage the SQL backup"
-msgstr "Gestion de la sauvegarde de MySQL"
-
-msgid "Destroy my database"
-msgstr "Détruire ma base de données"
-
 msgid "hlp_sql_bck"
 msgstr ""
 "Les sauvegardes de votre base MySQL sont stockées dans le répertoire choisi "

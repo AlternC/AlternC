@@ -515,15 +515,6 @@ msgstr "You have no database available."
 msgid "err_mysql_19"
 msgstr "You have no database available."
 
-msgid "Delete my SQL database"
-msgstr "Delete my SQL database"
-
-msgid "Manage the SQL backup"
-msgstr "Manage SQL backups"
-
-msgid "Destroy my database"
-msgstr "Destroy my database"
-
 msgid "hlp_sql_bck"
 msgstr ""
 "Your MySQL backups are stored in the chosen folder from <code>db.sql.1</"
@@ -548,104 +539,14 @@ msgstr "This statistic set does not exist."
 msgid "err_sta2_3"
 msgstr "The chosen prefix is not allowed here"
 
-msgid "CSS Stylesheet"
-msgstr ""
+#~ msgid "Delete my SQL database"
+#~ msgstr "Delete my SQL database"
 
-msgid "Comma Separated Values data"
-msgstr ""
+#~ msgid "Manage the SQL backup"
+#~ msgstr "Manage SQL backups"
 
-msgid "DIA Diagram"
-msgstr ""
-
-msgid "Word Document"
-msgstr ""
-
-msgid "Word Document Template"
-msgstr ""
-
-msgid "Encapsulated Postscript"
-msgstr ""
-
-msgid "GIF Image"
-msgstr ""
-
-msgid "Macintosh Executable"
-msgstr ""
-
-msgid "HTML Document"
-msgstr ""
-
-msgid "JPEG Image"
-msgstr ""
-
-msgid "Music Playlist"
-msgstr ""
-
-msgid "MP3 Music File"
-msgstr ""
-
-msgid "Ogg Music File"
-msgstr ""
-
-msgid "Acrobat PDF"
-msgstr ""
-
-msgid "PHP Source"
-msgstr ""
-
-msgid "PNG Image"
-msgstr ""
-
-msgid "Powerpoint Slideshow"
-msgstr ""
-
-msgid "Postscript Document"
-msgstr ""
-
-msgid "Photoshop Image"
-msgstr ""
-
-msgid "Rar Compressed Files"
-msgstr ""
-
-msgid "Rich Text Document"
-msgstr ""
-
-msgid "OpenOffice Spreadsheet"
-msgstr ""
-
-msgid "OpenOffice Drawing"
-msgstr ""
-
-msgid "OpenOffice Presentation"
-msgstr ""
-
-msgid "OpenOffice Writer"
-msgstr ""
-
-msgid "TIFF Image"
-msgstr ""
-
-msgid "Text Document"
-msgstr ""
-
-msgid "Virtual Card"
-msgstr ""
-
-msgid "Gimp Image"
-msgstr ""
-
-msgid "Excel Spreadsheet"
-msgstr ""
-
-msgid "Zip Compressed Files"
-msgstr ""
-
-msgid "Real Media File"
-msgstr ""
-
-msgid "Flash Animation"
-msgstr ""
+#~ msgid "Destroy my database"
+#~ msgstr "Destroy my database"
 
 #~ msgid "Click here to continue"
 #~ msgstr "Click here to continue"
