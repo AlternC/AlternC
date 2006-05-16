@@ -61,6 +61,10 @@ if (!get_magic_quotes_gpc()) {
   echo "MAGIC QUOTES GPC IS DISABLED ! It's a bug in your php4 configuration, please fix it !!";
   exit();
 }
+if (ini_get("safe_mode")) {
+  echo "SAFE MODE IS ENABLED for the web panel ! It's a bug in your php4 or apache configuration, please fix it !!";
+  exit();
+}
 
 
 
