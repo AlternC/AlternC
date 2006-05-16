@@ -84,22 +84,31 @@ while (list($key,$val)=each($r))
 	$col=3-$col;
 ?>
 	<tr class="lst<?php echo $col; ?>">
-<?php if ($val["su"]) { ?>
+
+<?php
+		  if($admin->checkcreator($val['uid'])) {
+ if ($val["su"]) { ?>
 			<td>&nbsp;</td>
 <?php } else { ?>
  <td align="center"><input type="checkbox" class="inc" name="d[]" value="<?php echo $val["uid"]; ?>" /></td>
-<?php } ?>
+<?php }
+ ?>
 		<td align="center"><a href="adm_edit.php?uid=<?php echo $val["uid"] ?>"><?php __("Edit"); ?></a></td>
 		<td align="center"><a href="adm_quotaedit.php?uid=<?php echo $val["uid"] ?>"><?php __("Quotas"); ?></a></td>
 		<td align="center"><?php
 		if (!$val["enabled"])
 			echo "<img src=\"icon/encrypted.png\" width=\"16\" height=\"16\" alt=\""._("Locked Account")."\" />";
 		else {
-		  if($admin->checkcreator($val['uid'])) {
 		?>
 			<a href="adm_login.php?id=<?php echo $val["uid"];?>" target="_parent"><?php __("Connect as"); ?></a>
-		<?php } } ?>
+		<?php } ?>
 		</td>
+		    <?php
+		    } else { 
+		      echo "<td colspan=\"4\"></td>"; 
+		    }
+ ?>
+
 		<td <?php if ($val["su"]) echo "style=\"color: red\""; ?>><?php echo $val["login"] ?></td>
 		<td><a href="mailto:<?php echo $val["mail"]; ?>"><?php echo $val["nom"]." ".$val["prenom"] ?></a>&nbsp;</td>
 		<td><?php echo $val["type"] ?></td>
