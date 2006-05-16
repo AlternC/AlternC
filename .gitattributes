@@ -317,7 +317,6 @@ install/domaines.template -text
 install/dopo.sh -text
 install/header_checks -text
 install/initrep.sh -text
-install/local.php -text
 install/mysql.sh -text
 install/mysql.sql -text
 install/newone.php -text
@@ -353,6 +352,7 @@ src/.cvsignore -text
 src/Makefile -text
 src/basedir_prot.sh -text
 src/du.pl -text
+src/fixperms.sh -text
 src/mail_add -text
 src/mail_del -text
 src/mem_add -text

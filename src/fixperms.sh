@@ -1,5 +1,7 @@
+#!/bin/sh -e
+
 #
-# $Id: Makefile,v 1.20 2005/05/21 16:07:32 arnaud-lb Exp $
+# $Id: fixperms.sh,v 1.1 2005/08/29 19:21:31 benjamin Exp $
 # ----------------------------------------------------------------------
 # AlternC - Web Hosting System
 # Copyright (C) 2002 by the AlternC Development Team.
@@ -22,15 +24,44 @@
 #
 # To read the license please visit http://www.gnu.org/copyleft/gpl.html
 # ----------------------------------------------------------------------
-# Purpose of file: Makefile des binaires de /usr/lib/alternc
+# Original Author of file: Benjamin Sonntag for Metaconsult
+# Purpose of file: Fix permission and ownership of html files
 # ----------------------------------------------------------------------
 #
-SETUID=mail_add mail_del quota_edit quota_get mem_add mem_del
-SCRIPTS=quota_edit.sh quota_get.sh basedir_prot.sh sqlbackup.sh rawstat.daily quota_init quota_delete update_domains.sh slave_dns sendmail spoolsize.php fixperms.sh
-BIN=$(DESTDIR)/usr/lib/alternc/
 
-install: all
-	chown root:www-data $(BIN)
-	chmod 755 $(BIN)
-	install -o root -g www-data -m4750 $(SETUID) du.pl $(BIN)
-	install -o root -g www-data -m0750 $(SCRIPTS) $(BIN)
+CONFIG_FILE="/etc/alternc/local.sh"
+
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+
+umask 022
+
+if [ ! -r "$CONFIG_FILE" ]; then
+    echo "Can't access $CONFIG_FILE."
+    exit 1
+fi
+
+if [ `id -u` -ne 0 ]; then
+    echo "fixperms.sh must be launched as root"
+    exit 1
+fi
+
+. "$CONFIG_FILE"
+
+function doone {
+    read GID LOGIN
+    while [ "$LOGIN" ] 
+      do
+      if [ "$DEBUG" ]; then
+	  echo "Setting rights and ownership for user $LOGIN having gid $GID"
+      fi
+      INITIALE=`echo $LOGIN |cut -c1`
+      REP="$ALTERNC_LOC/html/$INITIALE/$LOGIN"
+            
+      find $REP -type d -exec chmod g+s \{\} \;
+	  chown -R 33.$GID $REP
+	  read GID LOGIN
+    done
+}
+
+mysql -h"$MYSQL_HOST" -p"$MYSQL_PASS" -u"$MYSQL_USER" "$MYSQL_DATABASE" -B -e "select uid,login from membres" |grep -v ^uid|doone
+
