@@ -67,7 +67,6 @@ if (ini_get("safe_mode")) {
 }
 
 
-
 /* PHPLIB inclusions : */
 $root="/var/alternc/bureau/";
 /* Server Domain Name */
@@ -79,6 +78,12 @@ require_once($root."class/local.php");
 require_once($root."class/db_mysql.php");
 require_once($root."class/functions.php");
 require_once($root."class/variables.php");
+
+// Redirection si appel à https://(!fqdn)/
+if ($_SERVER["HTTPS"]=="on" && $host!=$L_FQDN) {
+  header("Location: https://$L_FQDN/");
+}
+
 
 // Classe héritée de la classe db de la phplib.
 /**
