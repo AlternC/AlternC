@@ -2184,6 +2184,21 @@ msgstr ""
 msgid "Domain can be installed, force NO DNS hosting)"
 msgstr ""
 
+msgid "The mailbox <b>%s</b> has been deleted!"
+msgstr "La boîte aux lettres <b>%s</b> a été effacée&nbsp;!"
+
+msgid "Deleting mail accounts"
+msgstr "Effacement des comptes email"
+
+msgid "Please confirm the deletion of the following mail accounts:"
+msgstr "Confirmez la suppression des comptes emails suivants&nbsp;:"
+
+msgid "Don't delete accounts and go back to the mail list"
+msgstr "Ne rien effacer, retourner à la liste des emails"
+
+msgid "Back to the mail account list"
+msgstr "Retour à la liste des emails"
+
 #~ msgid "2 months"
 #~ msgstr "2 mois"
 

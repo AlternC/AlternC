@@ -300,7 +300,7 @@ class m_hta {
     $errr=0;
     while (!feof($file) && !$errr) {
       $s=fgets($file,1024);
-      if (substr($s,0,14)!="ErrorDocument " && substr($s,0,12)!="RewriteRule " && substr($s,0,14)!="RewriteEngine " && trim($s)!="") {
+      if (substr($s,0,12)!="RewriteCond " && substr($s,0,14)!="ErrorDocument " && substr($s,0,12)!="RewriteRule " && substr($s,0,14)!="RewriteEngine " && trim($s)!="") {
 	$errr=1;
       }
       if (strtolower(trim($s))==strtolower("authuserfile $absolute/.htpasswd")) {

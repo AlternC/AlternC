@@ -160,6 +160,7 @@ bureau/admin/lst_downsub.php -text
 bureau/admin/lst_owner.php -text
 bureau/admin/lst_subscribers.php -text
 bureau/admin/mail_add.php -text
+bureau/admin/mail_del.php -text
 bureau/admin/mail_doadd.php -text
 bureau/admin/mail_dodel.php -text
 bureau/admin/mail_doedit.php -text

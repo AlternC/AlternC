@@ -33,31 +33,30 @@ if (!is_array($d)) {
         $d[]=$d;
 }
 
+reset($d);
+
 include("head.php");
 ?>
-
 </head>
 <body>
 <h3><?php __("Deleting mail accounts"); ?> : </h3>
+<p><?php __("Please confirm the deletion of the following mail accounts:"); ?></p>
+
+<form method="post" action="mail_dodel.php" id="main">
 
 <p>
 <?php
-reset($d);
+
 while (list($key,$val)=each($d)) {
-	if (!$mail->del_mail($val)) {
-		$error.=sprintf(_("The mailbox <b>%s</b> does not exist!")."<br />",$val); 
-		echo $error;
-	} else {
-		$error.=sprintf(_("The mailbox <b>%s</b> has been deleted!")."<br />",$val); 
-		echo $error;		
-	}
-list($ll,$dd)=explode("@",$val);
+  echo "<input type=\"hidden\" name=\"d[]\" value=\"$val\" />";
+  echo $val."<br />";
 }
 
 ?>
 </p>
-<p>
-<a href="mail_list.php?domain=<?php echo $dd; ?>"><?php __("Back to the mail account list"); ?></a>
+<p><input type="submit" class="inb" name="submit" value="<?php __("Delete the selected mailboxes"); ?>" /> - <input type="button" name="cancel" id="cancel" onclick="window.history.go(-1);" class="inb" value="<?php __("Don't delete accounts and go back to the mail list"); ?>"/>
 </p>
+
+</form>
 </body>
 </html>

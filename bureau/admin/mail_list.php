@@ -80,7 +80,7 @@ else{
 ?>
 
 
-<form method="post" action="mail_dodel.php" id="main">
+<form method="post" action="mail_del.php" id="main">
 
 <table cellspacing="0" cellpadding="4">
 
