@@ -60,16 +60,16 @@ include("head.php");
 <?php echo _("File editing")." <code>$R/<b>$file</b></code><br />"; ?>
 </p>
 <form action="bro_editor.php" method="post"><p>
-<div id="resizer" style="left: 0px; top: 0px; z-index: 54; width: 646px; height: 252px; cursor: auto;"><textarea class="int" style="font-family: <?php echo $p["editor_font"]; ?>; font-size: <?php echo $p["editor_size"]; ?>; width: 90%; height: 90%;" cols="<?php echo $p["editsizex"]; ?>" rows="<?php echo $p["editsizey"]; ?>" name="texte"><?php
+<div id="resizer" style="left: 0px; top: 0px; z-index: 54; width: <?php echo $p["editsizex"]*6; ?>px; height: <?php echo $p["editsizex"]*6; ?>px; cursor: auto;"><textarea class="int" style="width: 90%; height: 95%; font-family: <?php echo $p["editor_font"]; ?>; font-size: <?php echo $p["editor_size"]; ?>;" name="texte"><?php
 $bro->content($R,$file);
-?></textarea><img src="/admin/icon/winresize.gif" alt="shift+click and drag to resize textarea" title="shift+click and drag to resize textarea" height="20" width="20"></div><br />
-	<input type="hidden" name="file" value="<?php echo str_replace("\"","&quot;",$file); ?>" />
-	<input type="hidden" name="R" value="<?php echo str_replace("\"","&quot;",$R); ?>" />
+?></textarea><img src="/admin/icon/winresize.gif" alt="shift+click and drag to resize textarea" title="shift+click and drag to resize textarea" height="20" width="20"></div>
 
 	<input type="submit" class="inb" value="<?php __("Save"); ?>" name="save" />
 	<input type="submit" class="inb" value="<?php __("Save &amp; Quit"); ?>" name="saveret" /> 
 	<input type="submit" class="inb" value="<?php __("Quit"); ?>" name="cancel" />
 </p>
+<input type="hidden" name="file" value="<?php echo str_replace("\"","&quot;",$file); ?>" />
+<input type="hidden" name="R" value="<?php echo str_replace("\"","&quot;",$R); ?>" />
 <script type="text/javascript">
 <!--
 SET_DHTML("resizer"+RESIZABLE);
