@@ -552,7 +552,7 @@ if [ ! -z "$RELOAD_ZONES" ]; then
             rndc reload "$zone" || echo "Cannot reload bind for zone $zone" >> "$DOMAIN_LOG_FILE"
         done
     fi
-    apachectl graceful || echo "Cannot restart apache" >> "$DOMAIN_LOG_FILE"
+    apachectl graceful > /dev/null || echo "Cannot restart apache" >> "$DOMAIN_LOG_FILE"
 fi
 
 # Cleanup
