@@ -1,9 +1,7 @@
 * text=auto !eol
-/BUILD -text
 /COPYING -text
-/HACKING -text
-/README -text
-/TODO -text
+/README.en -text
+/README.fr -text
 aide/bin/build.sh -text
 aide/bin/frames.dsl -text
 aide/brouteur.sgml -text
@@ -305,13 +303,6 @@ etc/alternc/templates/postfix/sasl/smtpd.conf -text
 etc/alternc/templates/proftpd.conf -text
 etc/alternc/templates/squirrelmail/apache.conf -text
 etc/alternc/templates/welcome.msg -text
-flags/de_DE.png -text
-flags/en_UK.png -text
-flags/en_US.png -text
-flags/es_ES.png -text
-flags/es_VE.png -text
-flags/fr_CA.png -text
-flags/fr_FR.png -text
 install/alternc.install -text
 install/body_checks -text
 install/domaines.template -text

@@ -28,7 +28,7 @@ multilingue devrait arriver un jour ...
 
 AlternC est développé par les administrateurs système de l'Autre Net,
 les membres de l'Autre Net, ainsi que d'autres structures / développeurs
-parmis lesquels Globenet. 
+parmis lesquels Globenet, Neuronnexion ou Koumbit. 
 
 Installation
 ------------
@@ -40,3 +40,14 @@ suivantes dans votre fichier /etc/apt/sources.list
 
  deb http://debian.alternc.org debian/
  deb-src http://debian.alternc.org debian/
+
+lancez ensuite
+	aptitude update
+	aptitude install alternc
+
+Note: vous pouvez aussi installer les modules additionnels d'AlternC par
+la suite. Pour plus d'information, rendez-vous sur le serveur de 
+développement à l'adresse : 
+
+	https://dev.alternc.org/trac/alternc/
+
