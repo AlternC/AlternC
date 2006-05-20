@@ -105,7 +105,7 @@ class m_mail {
   function enum_doms_mails($dom,$sort=0,$letter="") {
     global $err,$cuid,$db;
     $err->log("mail","enum_doms_mails",$dom);
-    $db->query("SELECT mail,pop,alias FROM mail_domain WHERE mail LIKE '".addslashes($letter)."%@".addslashes($dom)."' AND uid='$cuid' AND type=0;");
+    $db->query("SELECT mail,pop,alias FROM mail_domain WHERE mail LIKE '".addslashes($letter)."%".addslashes($dom)."' AND uid='$cuid' AND type=0;");
     $res=array(); $i=0;
     while ($db->next_record()) {
       if ($db->f("pop")) { 
