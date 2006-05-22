@@ -1,6 +1,6 @@
 <?php
 /*
- $Id: lst_doedit.php,v 1.1.1.1 2003/03/26 17:41:29 root Exp $
+ $Id: mxlist.php,v 1.1 2004/06/02 13:23:45 anonymous Exp $
  ----------------------------------------------------------------------
  AlternC - Web Hosting System
  Copyright (C) 2002 by the AlternC Development Team.
@@ -23,35 +23,25 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file: Sylvain Louis.
- Purpose of file: Edit the config file of the mailing-list parameters.
+ Original Author of file: Benjamin Sonntag
+ Purpose of file: Returns the list of mx-hosted domains to a secondary mx 
  ----------------------------------------------------------------------
 */
-require_once("../class/config.php");
+require_once("../class/config_nochk.php");
 
-if(!$r=$sympa->get_ml($id)) {
-	$error=$err->errstr();
-} 
+// Check for the http authentication
+if (!isset($_SERVER['PHP_AUTH_USER'])) {
+ header('WWW-Authenticate: Basic realm="MX List Authentication"');
+ header('HTTP/1.0 401 Unauthorized');
+ exit;
+ } else {
+	if ($mail->check_slave_account($_SERVER['PHP_AUTH_USER'],$_SERVER['PHP_AUTH_PW'])) {
+		$mail->echo_domain_list();
+	} else {
+ header('WWW-Authenticate: Basic realm="MX List Authentication"');
+ header('HTTP/1.0 401 Unauthorized');
+ exit;
+	}
+  }
 
-$a=$sympa->edit_ml($id,$subscribe_mode,$unsubscribe_mode,$send_mode,$reply_to,$reply_to_email,$addsubject,$max_size,$review_mode);
-if (!$a) {
-	$error=$err->errstr();
-	include("lst_edit.php");
-	exit();
-} else {
-	$error=_("The list parameters has been successfully changed");
-	include("lst_edit.php");
-	exit();
-}
-
-include("head.php");
 ?>
-</head>
-<body>
-<div align="center"><h3><?php printf(_("Mailing list %s"),$r["list"]); ?></h3></div>
-<?php 
-	if ($error) 
-		echo "<br><font color=red>$error</font><br>";
-?>
-</body>
-</html>

@@ -51,6 +51,7 @@ include("head.php");
 <tr class="lst1"><td><a href="adm_doms.php"><?php __("Manage installed domains"); ?></a></td></tr>
 <tr class="lst2"><td><a href="adm_slaveip.php"><?php __("Manage allowed ip for slave zone transfers"); ?></a></td></tr>
 <tr class="lst1"><td><a href="adm_slaveaccount.php"><?php __("Manage allowed accounts for slave zone transfers"); ?></a></td></tr>
+<tr class="lst1"><td><a href="adm_mxaccount.php"><?php __("Manage allowed accounts for secondary mx"); ?></a></td></tr>
 <tr class="lst2"><td><a href="adm_variables.php"><?php __("Configure AlternC variables"); ?></a></td></tr>
 <tr class="lst1"><td><a href="quota_show_all.php"><?php __("Show all quotas"); ?></a></td></tr>
 <?php

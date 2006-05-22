@@ -49,7 +49,7 @@ include("head.php");
 <h3><?php __("Add a new TLD"); ?></h3>
 <p>
 <?php __("Enter the new TLD (without the first dot) and choose what check should be done."); ?><br />
-<small><?php __("Warning : only some final tld are known in the whois function of AlternC, please check m_domains.php accordingly."); ?></small>
+<small><?php __("Warning : only some final tld are known in the whois function of AlternC, please check m_dom.php accordingly."); ?></small>
 </p>
 
 <form method="post" action="adm_tlddoadd.php">

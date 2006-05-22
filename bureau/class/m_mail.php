@@ -439,6 +439,73 @@ class m_mail {
     return true;
   }
 
+
+  /* ----------------------------------------------------------------- */
+  /**
+   * Check for a slave account (secondary mx)
+   */
+  function check_slave_account($login,$pass) {
+	global $db,$err;
+	$db->query("SELECT * FROM mxaccount WHERE login='$login' AND pass='$pass';");
+	if ($db->next_record()) { 
+		return true;
+	}
+	return false;
+  }
+
+  /* ----------------------------------------------------------------- */
+  /**
+   * Out (echo) the complete mx-hosted domain list : 
+   */
+  function echo_domain_list() {
+	global $db,$err;
+	$db->query("SELECT domaine FROM domaines WHERE gesmx=1 ORDER BY domaine");
+	while ($db->next_record()) {
+		echo $db->f("domaine")."\n";
+	}
+	return true;
+  }
+
+  /* ----------------------------------------------------------------- */
+  /**
+   * Return the list of allowed slave accounts (secondary-mx)
+   */
+  function enum_slave_account() {
+	global $db,$err;
+	$db->query("SELECT * FROM mxaccount;");
+	$res=array();
+	while ($db->next_record()) {
+		$res[]=$db->Record;
+	}
+	if (!count($res)) return false;
+	return $res;
+  }
+
+  /* ----------------------------------------------------------------- */
+  /**
+   * Add a slave account that will be allowed to access the mxdomain list
+   */
+  function add_slave_account($login,$pass) {
+	global $db,$err;
+	$db->query("SELECT * FROM mxaccount WHERE login='$login'");
+	if ($db->next_record()) {
+	  $err->raise("err",23); // FIXME
+	  return false;
+	}
+	$db->query("INSERT INTO mxaccount (login,pass) VALUES ('$login','$pass')");
+	return true;
+  }
+
+  /* ----------------------------------------------------------------- */
+  /**
+   * Remove a slave account
+   */
+  function del_slave_account($login) {
+	global $db,$err;
+	$db->query("DELETE FROM mxaccount WHERE login='$login'");
+	return true;
+  }
+
   /* ----------------------------------------------------------------- */
   /** Crée le compte pop $mail@$dom, avec pour mot de passe $pass
    * @param string $mail Compte email à créer en pop

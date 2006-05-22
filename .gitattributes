@@ -26,6 +26,7 @@ bureau/admin/adm_dosu.php -text
 bureau/admin/adm_edit.php -text
 bureau/admin/adm_list.php -text
 bureau/admin/adm_login.php -text
+bureau/admin/adm_mxaccount.php -text
 bureau/admin/adm_panel.php -text
 bureau/admin/adm_quotadoedit.php -text
 bureau/admin/adm_quotaedit.php -text
@@ -144,19 +145,6 @@ bureau/admin/index.php -text
 bureau/admin/js/alternc.js -text
 bureau/admin/js/wz_dragdrop.js -text
 bureau/admin/login.php -text
-bureau/admin/lst_addown.php -text
-bureau/admin/lst_addsub.php -text
-bureau/admin/lst_addsub1.php -text
-bureau/admin/lst_affallsub.php -text
-bureau/admin/lst_affsub.php -text
-bureau/admin/lst_delown.php -text
-bureau/admin/lst_delsub.php -text
-bureau/admin/lst_doedit.php -text
-bureau/admin/lst_doeditsub.php -text
-bureau/admin/lst_doedittxt.php -text
-bureau/admin/lst_downsub.php -text
-bureau/admin/lst_owner.php -text
-bureau/admin/lst_subscribers.php -text
 bureau/admin/mail_add.php -text
 bureau/admin/mail_del.php -text
 bureau/admin/mail_doadd.php -text
@@ -184,6 +172,7 @@ bureau/admin/menu_quota.php -text
 bureau/admin/menu_sql.php -text
 bureau/admin/menu_sta2.php -text
 bureau/admin/menu_web.php -text
+bureau/admin/mxlist.php -text
 bureau/admin/quota_show.php -text
 bureau/admin/quota_show_all.php -text
 bureau/admin/sql_add.php -text
@@ -324,6 +313,7 @@ install/upgrades/0.9.3.sql -text
 install/upgrades/0.9.4.sql -text
 install/upgrades/0.9.5.sh -text
 install/upgrades/0.9.5.sql -text
+install/upgrades/0.9.6.sql -text
 install/upgrades/README -text
 man/alternc-admintools.8 -text
 man/alternc-admintools.fr.8 -text
@@ -366,4 +356,3 @@ tools/get_domains_by_account -text
 tools/top_ftp_users -text
 tools/top_http_users -text
 tools/top_mysql_users -text
-/updatepot.sh -text

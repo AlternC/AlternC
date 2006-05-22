@@ -54,21 +54,6 @@ msgstr "This TLD already exists"
 msgid "err_admin_13"
 msgstr "The login is too long (16 chars max)"
 
-msgid "Description"
-msgstr "Description"
-
-msgid "Number of mailing-lists"
-msgstr "Number of mailing-lists"
-
-msgid "Number of domains"
-msgstr "Number of domains"
-
-msgid "Number of FTP accounts"
-msgstr "Number of FTP accounts"
-
-msgid "Number of web statistics"
-msgstr "Number of web statistics"
-
 msgid "quota_dom"
 msgstr "Domain names"
 
@@ -502,6 +487,21 @@ msgstr "This statistic set does not exist."
 #, fuzzy
 msgid "err_sta2_3"
 msgstr "The chosen prefix is not allowed here"
+
+#~ msgid "Description"
+#~ msgstr "Description"
+
+#~ msgid "Number of mailing-lists"
+#~ msgstr "Number of mailing-lists"
+
+#~ msgid "Number of domains"
+#~ msgstr "Number of domains"
+
+#~ msgid "Number of FTP accounts"
+#~ msgstr "Number of FTP accounts"
+
+#~ msgid "Number of web statistics"
+#~ msgstr "Number of web statistics"
 
 #~ msgid "Number of email accounts"
 #~ msgstr "Number of email accounts"

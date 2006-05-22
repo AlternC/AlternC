@@ -99,7 +99,7 @@ if ($error) {
 <? if (variable_get('hosting_tld')) { ?>
 <tr>
 	<th colspan="2"><label><input type="checkbox" name="create_dom" value="1" />
-	<?php print _("Create the domain username.").variable_get('hosting_tld'); ?></label></th>
+	<?php printf(_("Create the domain <b>username.%s</b>"),variable_get('hosting_tld')); ?></label></th>
 	</tr>
 <tr>
 <? } ?>

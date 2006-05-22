@@ -60,21 +60,6 @@ msgstr "Este TLD ya existe."
 msgid "err_admin_13"
 msgstr "-- ¡¡Solo los administradores tienen acceso a estas páginas!! -- "
 
-msgid "Description"
-msgstr "Description"
-
-msgid "Number of mailing-lists"
-msgstr "Nombre de listes de discussion"
-
-msgid "Number of domains"
-msgstr "Nombre de domaines"
-
-msgid "Number of FTP accounts"
-msgstr "Nombre de comptes FTP"
-
-msgid "Number of web statistics"
-msgstr "Nombre de jeux de statistiques"
-
 msgid "quota_dom"
 msgstr "Nombres de dominio"
 
@@ -527,6 +512,21 @@ msgstr "Este juego de estadísticas no existe."
 #, fuzzy
 msgid "err_sta2_3"
 msgstr "El prefijo escogido no está permitido."
+
+#~ msgid "Description"
+#~ msgstr "Description"
+
+#~ msgid "Number of mailing-lists"
+#~ msgstr "Nombre de listes de discussion"
+
+#~ msgid "Number of domains"
+#~ msgstr "Nombre de domaines"
+
+#~ msgid "Number of FTP accounts"
+#~ msgstr "Nombre de comptes FTP"
+
+#~ msgid "Number of web statistics"
+#~ msgstr "Nombre de jeux de statistiques"
 
 #~ msgid "Number of email accounts"
 #~ msgstr "Nombre de comptes email"

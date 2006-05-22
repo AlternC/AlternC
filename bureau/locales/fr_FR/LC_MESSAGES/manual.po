@@ -56,21 +56,6 @@ msgstr "Ce TLD existe déjà"
 msgid "err_admin_13"
 msgstr "Le login est trop long (16< caractères maximum)"
 
-msgid "Description"
-msgstr "Description"
-
-msgid "Number of mailing-lists"
-msgstr "Nombre de listes de discussion"
-
-msgid "Number of domains"
-msgstr "Nombre de domaines"
-
-msgid "Number of FTP accounts"
-msgstr "Nombre de comptes FTP"
-
-msgid "Number of web statistics"
-msgstr "Nombre de jeux de statistiques"
-
 msgid "quota_dom"
 msgstr "Noms de domaines"
 
@@ -383,7 +368,7 @@ msgstr ""
 "Vous devez être administrateur pour pouvoir modifier vos préférences "
 "administrateur."
 
-# Please do NOT translate those strings to each language. Use the country language instead
+# Please do NOT translate those strings to each language. Use the original language instead
 msgid "fr_FR"
 msgstr "Français (France)"
 
@@ -505,90 +490,11 @@ msgstr "Aucune jeu de statistiques brutes"
 msgid "err_sta2_3"
 msgstr "Jeu de statistiques brutes non trouvé"
 
-#~ msgid "Number of email accounts"
-#~ msgstr "Nombre de comptes email"
+msgid "err_bro_1"
+msgstr "Répertoire ou fichier incorrect !"
 
-#~ msgid "This TLD is forbidden"
-#~ msgstr "Ce TLD est interdit"
+msgid "err_bro_2"
+msgstr "Vous ne pouvez pas déplacer un fichier dans le même répertoire !"
 
-#~ msgid "primary DNS is checked in WHOIS db"
-#~ msgstr "le DNS primaire est vérifié dans le WHOIS"
-
-#~ msgid "primary & secondary DNS are checked in WHOIS db"
-#~ msgstr "les DNS primaire ET secondaire sont vérifiés dans le WHOIS"
-
-#~ msgid "Domain must exist, but don't do any DNS check"
-#~ msgstr "Le domaine doit exister, mais aucun contrôle DNS n'est effectué"
-
-#~ msgid "Domain can be installed, no check at all"
-#~ msgstr "Le domaine peut être installé sans aucun contrôle"
-
-#~ msgid "Domain can be installed, force NO DNS hosting"
-#~ msgstr "Le domaine peut être installé, force la case 'PAS DE DNS'"
-
-#~ msgid "The user has no database"
-#~ msgstr "L'utilisateur n'a pas de base de données active"
-
-#~ msgid "Enable the database"
-#~ msgstr "Activer la base MySQL"
-
-#~ msgid "The user has a MySQL database"
-#~ msgstr "L'utilisateur dispose d'une base MySQL"
-
-#~ msgid "Disable the database"
-#~ msgstr "Désactiver la base MySQL"
-
-#~ msgid "Disk space (in KB)"
-#~ msgstr "Espace disque (en Ko)"
-
-#~ msgid "Delete my SQL database"
-#~ msgstr "Effacer ma base de données SQL"
-
-#~ msgid "Manage the SQL backup"
-#~ msgstr "Gestion de la sauvegarde de MySQL"
-
-#~ msgid "Destroy my database"
-#~ msgstr "Détruire ma base de données"
-
-#~ msgid "Click here to continue"
-#~ msgstr "Cliquer ici pour continuer"
-
-#~ msgid "Yes"
-#~ msgstr "Oui"
-
-#~ msgid "No"
-#~ msgstr "Non"
-
-#~ msgid "General SQL Admin"
-#~ msgstr "Admin SQL Général"
-
-# Date drawn in the 1 column mode file list : 
-#~ msgid "%3$d-%2$d-%1$d %4$d:%5$d"
-#~ msgstr "%1$d/%2$d/%3$d %4$dh%5$d"
-
-#~ msgid "Copy"
-#~ msgstr "Copier"
-
-#~ msgid "1 column, detailed"
-#~ msgstr "1 colonne, détaillé"
-
-#~ msgid "2 columns, short"
-#~ msgstr "2 colonnes, court"
-
-#~ msgid "3 columns, short"
-#~ msgstr "3 colonnes, court"
-
-#~ msgid "Go back to the file manager"
-#~ msgstr "Retourner au gestionnaire de fichier"
-
-#~ msgid "Edit the newly created file"
-#~ msgstr "Editer le fichier"
-
-#~ msgid "err_bro_1"
-#~ msgstr "Répertoire ou fichier incorrect !"
-
-#~ msgid "err_bro_2"
-#~ msgstr "Vous ne pouvez pas déplacer un fichier dans le même répertoire !"
-
-#~ msgid "quota_web"
-#~ msgstr "Espace disque (Ko)"
+msgid "quota_web"
+msgstr "Espace disque (Ko)"
