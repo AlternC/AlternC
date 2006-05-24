@@ -326,7 +326,6 @@ class m_admin {
     global $err,$db;
     global $cuid, $quota;
 
-    $cuid = $uid;
     $err->log("admin","update_mem",$uid);
     if (!$this->enabled) {
       $err->raise("admin",1);
