@@ -277,7 +277,8 @@ class m_quota {
     global $db;
     $qlist=$this->qlist();
     reset($qlist);
-    
+    if(empty($type))
+	return false;
     while (list($key,$val)=each($qlist)) {
       if(!$db->query("INSERT IGNORE INTO defquotas (quota,type) VALUES('$key', '$type');")
 	 || $db->affected_rows() == 0)
