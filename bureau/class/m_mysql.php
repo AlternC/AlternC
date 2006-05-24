@@ -156,7 +156,7 @@ class m_mysql {
     // give everything but GRANT on db.*
     // we assume there's already a user
     $db->query("GRANT ALL PRIVILEGES ON `".$dbname."`.* TO '".$lo."'@'$this->client'");
-    $db->query("CREATE DATABASE $dbname;");
+    $db->query("CREATE DATABASE `$dbname`;");
     return true;
   }
 
@@ -184,7 +184,7 @@ class m_mysql {
 
     // Ok, database exists and dbname is compliant. Let's proceed
     $db->query("DELETE FROM db WHERE uid='$cuid' AND db='$dbname';");
-    $db->query("DROP DATABASE $dbname;");
+    $db->query("DROP DATABASE `$dbname`;");
     $db->query("SELECT COUNT(*) AS cnt FROM db WHERE uid='$cuid';");
     $db->next_record();
     $db->query("REVOKE ALL PRIVILEGES ON `".$dbname."`.* FROM '".$login."'@'$this->client'");
@@ -287,7 +287,7 @@ class m_mysql {
     $db->query("INSERT INTO db (uid,login,pass,db) VALUES ('$cuid','".$login."','$password','".$dbname."');");
     // give everything but GRANT on $user.*
     $db->query("GRANT ALL PRIVILEGES ON `".$dbname."`.* TO '".$login."'@'$this->client' IDENTIFIED BY '".$password."'");
-    $db->query("CREATE DATABASE ".$dbname.";");
+    $db->query("CREATE DATABASE `".$dbname."`;");
     return true;
   }
 
