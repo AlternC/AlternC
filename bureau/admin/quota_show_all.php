@@ -35,6 +35,8 @@ include("head.php");
 <body>
 <h3><?php __("Quotas"); ?></h3>
 
+<p><a href="<?php echo $_SERVER["SCRIPT_NAME"]; ?>"><?php __("Update this page"); ?></a></p>
+
 <?php
 
 $quota_utilise = array();

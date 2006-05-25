@@ -51,15 +51,13 @@ include("head.php");
 ?>
 <p>
 <?php __("Here is the list of hosted members"); ?>
-&nbsp;
 <?php if($_REQUEST['show'] != 'all') {
-  echo '<a href="adm_list.php?show=all">' . _('List all the accounts') . '</a>';
+  echo '<br /><a href="adm_list.php?show=all">' . _('List all the accounts') . '</a>';
 } else {
-  echo '<a href="adm_list.php">' . _('List only my accounts') . '</a>';
+  echo '<br /><a href="adm_list.php">' . _('List only my accounts') . '</a>';
 } ?>
-</p>
-<p>
-<a href="adm_add.php"><?php __("Create a new member"); ?></a>
+  <br /><a href="adm_add.php"><?php __("Create a new member"); ?></a>
+  <br /><a href="<?php echo $_SERVER["SCRIPT_NAME"]; ?>"><?php __("Update this page"); ?></a>
 </p>
 <?php
 if (!is_array($r)) {

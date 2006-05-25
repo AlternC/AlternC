@@ -51,6 +51,8 @@ $c=$admin->dom_list();
 <?php __("Here is the list of the domains installed on this server. You can remove a domain if it does not exist or does not point to our server anymore. You can also set the 'Lock' flag on a domain so that the user will not be able to change any DNS parameter or delete this domain from his account."); ?>
 </p>
 
+<p><a href="<?php echo $_SERVER["SCRIPT_NAME"]; ?>"><?php __("Update this page"); ?></a></p>
+
 <form method="post" action="adm_dodom.php">
 <table border="0" cellpadding="4" cellspacing="0">
 <tr><th><?php __("Action"); ?></th><th><?php __("Domain"); ?></th><th><?php __("Member"); ?></th><th>Lock</th></tr>
