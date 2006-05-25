@@ -37,8 +37,8 @@ include("head.php");
 
 <?php
 
-$quota_utilise = 0;
-$tot = 0;
+$quota_utilise = array();
+$tot = array();
 
 if ($mem->user['uid'] == "2000")
   $user_list = $admin->get_list(1);
@@ -53,8 +53,8 @@ reset($ql);
 print "<td>"._("User")."</td>";
 $sequence = array();
 foreach ($ql as $key => $name) {
-	print "<td>$name</td>";
-	$sequence[] = $key;
+  print "<td>$name</td>";
+  $sequence[] = $key;
 }
 print "</tr>";
 $u = array();
@@ -63,30 +63,36 @@ foreach ($user_list as $user) {
 }
 asort($u);
 foreach ($u as $uid => $login) {
-$class = ($class== 'lst1' ? 'lst2' : 'lst1');
-print "<tr class=\"$class\"><td>";
-print $login.'('.$uid.")</td>";
-$mem->su($uid);
-if (!($quots = $quota->getquota())) {
-	$error = $err->errstr();
-}
-foreach($sequence as $key) {
-  $q = $quots[$key];
-  if ($q['u'] > $q['t']) {
-    $style = ' style="color: red"';
-  } else {
-    $style = '';
+  $class = ($class== 'lst1' ? 'lst2' : 'lst1');
+  print "<tr class=\"$class\"><td>";
+  print $login.'('.$uid.")</td>";
+  $mem->su($uid);
+  if (!($quots = $quota->getquota())) {
+    $error = $err->errstr();
   }
-  $quota_utilise = $quota_utilise + $q['u']; 
-  $tot = $tot + $q['t']; 
-  print "<td $style>".str_replace(" ", "&nbsp;", m_quota::display_val($key, $q['u']).'/'.m_quota::display_val($key, $q['t'])).'</td>';
-}
-print "</tr>";
-$mem->unsu();
+  foreach($sequence as $key) {
+    $q = $quots[$key];
+    if ($q['u'] > $q['t']) {
+      $style = ' style="color: red"';
+    } else {
+      $style = '';
+    }
+    $quota_utilise[$key] += $q['u']; 
+    $tot[$key]+= $q['t']; 
+    print "<td $style>".str_replace(" ", "&nbsp;", m_quota::display_val($key, $q['u']).'/'.m_quota::display_val($key, $q['t'])).'</td>';
+  }
+  print "</tr>";
+  $mem->unsu();
 }
 
-echo "<br><tr height=\"15\"></tr><tr><td>"._("Total")."</td><td $style>";
-echo format_size($quota_utilise)." / ".format_size($tot)."</td></tr>";
+echo "<tr>";
+echo "<td $style><b>"._("Total")."</b></td>";
+foreach($sequence as $key) {
+  echo "<td $style><b>";
+  echo $quota_utilise[$key]."/".$tot[$key];
+  echo "</b></td>";
+}
+echo "</tr>";
 
 print "</table>";
 
