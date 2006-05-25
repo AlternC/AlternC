@@ -78,6 +78,7 @@ if ($mem->user["admlist"]==0) { // Normal (large) mode
 <tr><th colspan="4">&nbsp;</th><th><?php __("Username"); ?></th><th><?php echo _("Surname")." "._("First Name")."<br />("._("Email address").")"; ?></th><th><?php __("Account type") ?></th><th><?php __("Last login"); ?></th><th><?php __("Last fail"); ?></th><th><?php __("Last ip"); ?><th><?php __('Expiry') ?></th></tr>
 <?php
 reset($r);
+
 $col=1;
 while (list($key,$val)=each($r))
 	{
@@ -218,6 +219,9 @@ if (is_array($val)) {
 <tr><td colspan="9"><input type="submit" class="inb" name="submit" value="<?php __("Delete checked accounts"); ?>" /></td></tr>
 </table>
 </form>
-   <?php } ?>
+<?php
+   printf("<p>".__("%s accounts")."</p>",count($r));
+ } 
+?>
 </body>
 </html>
