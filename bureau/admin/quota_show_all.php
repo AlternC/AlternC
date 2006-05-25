@@ -37,6 +37,9 @@ include("head.php");
 
 <?php
 
+$quota_utilise = 0;
+$tot = 0;
+
 if ($mem->user['uid'] == "2000")
   $user_list = $admin->get_list(1);
 else{
@@ -74,11 +77,17 @@ foreach($sequence as $key) {
   } else {
     $style = '';
   }
+  $quota_utilise = $quota_utilise + $q['u']; 
+  $tot = $tot + $q['t']; 
   print "<td $style>".str_replace(" ", "&nbsp;", m_quota::display_val($key, $q['u']).'/'.m_quota::display_val($key, $q['t'])).'</td>';
 }
 print "</tr>";
 $mem->unsu();
 }
+
+echo "<br><tr height=\"15\"></tr><tr><td>"._("Total")."</td><td $style>";
+echo format_size($quota_utilise)." / ".format_size($tot)."</td></tr>";
+
 print "</table>";
 
 ?>

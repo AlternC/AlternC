@@ -220,7 +220,7 @@ if (is_array($val)) {
 </table>
 </form>
 <?php
-   printf("<p>".__("%s accounts")."</p>",count($r));
+   printf("<p>"._("%s accounts")."</p>",count($r));
  } 
 ?>
 </body>
