@@ -29,7 +29,7 @@ SETUID=mail_add mail_del quota_edit quota_get mem_add mem_del
 SCRIPTS=quota_edit.sh quota_get.sh basedir_prot.sh sqlbackup.sh rawstat.daily quota_init quota_delete update_domains.sh slave_dns sendmail spoolsize.php fixperms.sh
 BIN=$(DESTDIR)/usr/lib/alternc/
 
-install: all
+install: 
 	chown root:www-data $(BIN)
 	chmod 755 $(BIN)
 	install -o root -g www-data -m4750 $(SETUID) du.pl $(BIN)
