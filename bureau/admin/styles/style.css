@@ -21,7 +21,7 @@ th {
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 12px;
 	color: #007799;
-	font-weight: bold
+	font-weight: bold;
 }
 
 h3 {
@@ -36,7 +36,7 @@ h4 {
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 16px;
 	font-weight: bold;
-	color: #007777
+	color: #007777;
 }
 
 hr {
@@ -110,7 +110,7 @@ img {
 
 .code {
 	font-size: 16px;
-	font-face: Courier New, Fixed;
+	font-family: Courier New;
 	font-weight: bold;
 	text-align: center;
 }
