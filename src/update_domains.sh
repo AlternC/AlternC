@@ -235,15 +235,15 @@ add_host() {
 	
     delete_host "$domain" "$host"
 
+    if [ "$host_type" = "$TYPE_IP" ]; then
+       ip="$value"
+    else
+       ip="$PUBLIC_IP"
+    fi
     if [ "$host" = "@" -o -z "$host" ]; then
-        change_host_ip "$domain" "$PUBLIC_IP" || true
+        change_host_ip "$domain" "$ip" || true
         fqdn="$domain"
     else
-        if [ "$host_type" = "$TYPE_IP" ]; then
-            ip="$value"
-        else
-            ip="$PUBLIC_IP"
-        fi
         change_host_ip "$domain" "$ip" "$host" || true
         fqdn="${host}.${domain}"
     fi
