@@ -235,7 +235,7 @@ add_host() {
 	
     delete_host "$domain" "$host"
 
-    if [ "$host" = "@" ]; then
+    if [ "$host" = "@" -o -z "$host" ]; then
         change_host_ip "$domain" "$PUBLIC_IP" || true
         fqdn="$domain"
     else
@@ -454,18 +454,8 @@ while read user domain mx are_we_dns are_we_mx action ; do
 
     case "$action" in
       $ACTION_INSERT)
-        # default symlinks
-        ln -snf "${HTML_HOME}/${USER_LETTER}/$user" \
-                "${HTTP_DNS}/${DOMAIN_LETTER}/$domain"
-        ln -snf "${HTML_HOME}/${USER_LETTER}/$user" \
-                "${HTTP_DNS}/${DOMAIN_LETTER}/www.$domain"
-        ln -snf "${WEBMAIL_DIR}" "${HTTP_DNS}/${DOMAIN_LETTER}/mail.$domain"
-                        
         if [ "$are_we_dns" = "$YES" ] ; then
             init_zone "$domain"
-            change_host_ip "$domain" "$PUBLIC_IP"
-            change_host_ip "$domain" "$PUBLIC_IP" www
-            change_host_ip "$domain" "$PUBLIC_IP" mail
         fi
         ;;
 
@@ -509,7 +499,7 @@ IFS="	"
 while read user domain host value type action; do
     IFS="$OLD_IFS"
 
-    if [ "$host" = "@" ]; then
+    if [ "$host" = "@" -o -z "$host" ]; then
         FQDN="$domain"
     else
         FQDN="$host.$domain"
