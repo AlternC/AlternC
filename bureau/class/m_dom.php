@@ -257,9 +257,9 @@ class m_dom {
     $db->query("insert into domaines (compte,domaine,mx,gesdns,gesmx,noerase) values ('$cuid','$domain','$L_MX','$dns','$mx','$noerase');");
     $db->query("insert into domaines_standby (compte,domaine,mx,gesdns,gesmx,action) values ('$cuid','$domain','$L_MX','$dns','$mx',0);"); // INSERT
     // Creation des 3 sous-domaines par défaut : Vide, www et mail
-    $db->query("insert into sub_domaines (compte,domaine,sub,valeur,type) values ('$cuid','$domain','','http://www.".$domain."',1);");
-    $db->query("insert into sub_domaines (compte,domaine,sub,valeur,type) values ('$cuid','$domain','www','/',0);");
-    $db->query("insert into sub_domaines (compte,domaine,sub,valeur,type) values ('$cuid','$domain','mail','',3);");
+    $this->set_sub_domain($domain, '',     $this->type_url,     'add', 'http://www.'.$domain);
+    $this->set_sub_domain($domain, 'www',  $this->type_local,   'add', '/');
+    $this->set_sub_domain($domain, 'mail', $this->type_webmail, 'add', '');
     // DEPENDANCE :
     // Lancement de add_dom sur les classes domain_sensitive :
      // Declenchons les autres classes.    
