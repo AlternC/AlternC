@@ -314,7 +314,7 @@ class m_dom {
       $serveur="whois.dns.be";
       break;
     case "eu":
-      $serveur="das.eu";
+      $serveur="195.234.53.193";
       break;
     case "info":
       $serveur="whois.afilias.net";
