@@ -20,3 +20,5 @@ alternc: non-standard-executable-perm usr/lib/alternc/quota_delete 0750 != 0755
 alternc: non-standard-executable-perm usr/lib/alternc/update_domains.sh 0750 != 0755
 alternc: non-standard-executable-perm usr/lib/alternc/slave_dns 0750 != 0755
 alternc: non-standard-executable-perm usr/lib/alternc/sendmail 0750 != 0755
+alternc: non-standard-executable-perm usr/lib/alternc/spoolsize.php 0750 != 0755
+alternc: non-standard-executable-perm usr/lib/alternc/fixperms.sh 0750 != 0755
