@@ -55,7 +55,7 @@ class m_admin {
 		     2 => __("primary & secondary DNS are checked in WHOIS db"),
 		     3 => __("Domain must exist, but don't do any DNS check"),
 		     4 => __("Domain can be installed, no check at all"),
-		     5 => __("Domain can be installed, force NO DNS hosting)"
+		     5 => __("Domain can be installed, force NO DNS hosting"),
 		     );
 
   /* ----------------------------------------------------------------- */
