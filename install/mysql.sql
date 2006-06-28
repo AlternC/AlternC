@@ -321,6 +321,7 @@ INSERT IGNORE INTO defquotas (quota,value) VALUES ('mail',10);
 INSERT IGNORE INTO defquotas (quota,value) VALUES ('ftp',2);
 INSERT IGNORE INTO defquotas (quota,value) VALUES ('stats',1);
 INSERT IGNORE INTO defquotas (quota,value) VALUES ('mysql',1);
+INSERT IGNORE INTO defquotas (quota,value) VALUES ('mysql_users',1);
 
 
 #
