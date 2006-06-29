@@ -46,14 +46,37 @@ if($_POST["action"] == "add") {
   }
   include("adm_defquotas.php");
 } else if($_POST["action"] == "delete") {
-  if($_POST['type']) {
-    if($quota->deltype($_POST['type'])) {
-      $error=_("Account type"). " \"$type\" "._("deleted");
-    } else {
-      $error=_("Account type"). " \"$type\" "._("could not be deleted");
+  if($_POST["del_confirm"] == "y"){
+    if($_POST['type']) {
+      if($quota->deltype($_POST['type'])) {
+        $error=_("Account type"). " \"$type\" "._("deleted");
+      } else {
+        $error=_("Account type"). " \"$type\" "._("could not be deleted");
+      }
     }
+    include("adm_defquotas.php");
+  }else{
+    include("head.php");
+    ?>
+    </head>
+    <body>
+    <h3><?php printf(_("Deleting quota %s"),$_POST["type"]); ?> : </h3>
+
+    <form action="adm_dodefquotas.php" method="post">
+      <input type="hidden" name="action" value="delete" />
+      <input type="hidden" name="type" value="<?php echo $_POST["type"] ?>" />
+      <input type="hidden" name="del_confirm" value="y" />
+      <p class="error"><?php __("WARNING : Confirm the deletion of the quota"); ?></p>
+      <p><?php echo $_POST["type"]; ?></p>
+      <blockquote>
+        <input type="submit" class="inb" name="confirm" value="<?php __("Yes"); ?>" />&nbsp;&nbsp;
+        <input type="button" class="inb" name="cancel" value="<?php __("No"); ?>" onclick="document.location='adm_defquotas.php';" />
+      </blockquote>
+    </form>
+    </body>
+    </html>
+    <?php
   }
-  include("adm_defquotas.php");
 } else if($_POST["action"] == "modify") {
   reset($_POST);
   $c=array();
