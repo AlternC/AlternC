@@ -415,7 +415,7 @@ class m_bro {
     for($i=0;$i<count($a);$i++) {
       if ($a[$i]) {
 	$R.=$a[$i]."/";
-	$c.="<a href=\"$action?R=$R\">".$a[$i]."</a>&nbsp;/&nbsp;";
+	$c.="<a href=\"$action?R=".urlencode($R)."\">".$a[$i]."</a>&nbsp;/&nbsp;";
       }
     }
     return $c;
