@@ -482,6 +482,49 @@ No match for "dronefdasfsa.ws".
 
   /* ----------------------------------------------------------------- */
   /**
+   *  vérifie la presence d'un champs mx valide sur un serveur DNS
+   *
+  */
+  
+  function checkmx($domaine,$mx) {
+    //initialise variables
+    $mxhosts = array();
+    
+    //récupére les champs mx
+    if (!getmxrr($domaine,$mxhosts)) {
+      //aucune hôte mx spécifié
+      return 1;
+    }
+    else {
+      //vérifie qu'un des hôtes est bien sur alternc
+      $bolmx = 0;
+      //décompose les différents champ MX coté alternc
+      $arrlocalmx = split(",",$mx)
+      //parcours les différents champ MX retournés
+      foreach($mxhosts as $mxhost) {
+        foreach($arrlocalmx as localmx) {
+          if ($mxhost==$localmx) {
+            $bolmx = 1;
+          }
+        }
+      }
+      //définition de l'erreur selon reponse du parcours de mxhosts
+      if ($bolmx == 0) {
+        //aucun des champs MX ne correspond au serveur
+        return 2;          
+      }
+      else {
+        //un champ mx correct a été trouvé
+        return 0;
+      }
+    }
+  } //checkmx
+
+
+
+
+  /* ----------------------------------------------------------------- */
+  /**
    *  retourne TOUTES les infos d'un domaine
    *
    * <b>Note</b> : si le domaine est en attente (présent dans
@@ -776,6 +819,19 @@ No match for "dronefdasfsa.ws".
       $gesmx="1";
     else
       $gesmx="0";
+      
+    //si gestion mx uniquement, vérification du dns externe
+    if ($dns=="0" && $gesmx=="1") {
+      $vmx = checkmx($dom,$mx) 
+      if ($vmx == 1) {
+        //aucun champ mx de spécifié sur le dns
+      }
+  
+      if ($vmx == 2) {
+        //serveur non spécifié parmi les champx mx
+      }
+    }
+      
     // OK, des modifs ont été faites, on valide :
     // DEPENDANCE :
     if ($gesmx && !$r["mail"]) { // on a associé le MX : on cree donc l'entree dans LDAP
