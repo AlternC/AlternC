@@ -151,13 +151,17 @@ class m_mysql {
       $lo=addslashes($db->f("login"));
       $pa=addslashes($db->f("pass"));
     }
-    // Ok, database does not exist, quota is ok and dbname is compliant. Let's proceed
-    $db->query("INSERT INTO db (uid,login,pass,db,bck_mode) VALUES ('$cuid','$lo','$pa','$dbname',0);");
-    // give everything but GRANT on db.*
-    // we assume there's already a user
-    $db->query("GRANT ALL PRIVILEGES ON `".$dbname."`.* TO '".$lo."'@'$this->client'");
-    $db->query("CREATE DATABASE `$dbname`;");
-    return true;
+    if ($db->query("CREATE DATABASE $dbname;")) {
+      // Ok, database does not exist, quota is ok and dbname is compliant. Let's proceed
+      $db->query("INSERT INTO db (uid,login,pass,db,bck_mode) VALUES ('$cuid','$lo','$pa','$dbname',0);");
+      // give everything but GRANT on db.*
+      // we assume there's already a user
+      $db->query("GRANT ALL PRIVILEGES ON `".$dbname."`.* TO '".$lo."'@'$this->client'");
+      return true;
+    } else {
+      $err->raise("mysql",3);
+      return false;
+    }
   }
 
   /*---------------------------------------------------------------------------*/
