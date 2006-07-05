@@ -6,10 +6,9 @@ set -e
 . /usr/share/debconf/confmodule
 db_title AlternC
 
-# We don't reset the welcomeconfirm seen flag.
-#db_reset alternc/welcomeconfirm || true
-#db_fset alternc/welcomeconfirm "seen" "false" || true
-#db_set alternc/welcomeconfirm "true" || true
+# reset the welcomeconfirm flag
+db_reset alternc/welcomeconfirm || true
+db_fset alternc/welcomeconfirm "seen" "false" || true
 db_input critical alternc/welcomeconfirm || true
 
 db_go
