@@ -34,24 +34,51 @@ if (!$admin->enabled) {
   exit();
 }
 
-
-if (!is_array($d)) {
-  $d[]=$d;
-}
-
-reset($d);
-while (list($key,$val)=each($d)) {
-  if (!$admin->checkcreator($val)) {
-    __("This page is restricted to authorized staff");
-    exit();
+if($_POST["del_confirm"] == "y"){
+  if (!is_array($d)) {
+    $d[]=$d;
   }
-  if (!($u=$admin->get($val)) || !$admin->del_mem($val)) {
-    $error.=sprintf(_("Member '%s' does not exist"),$val)."<br />";
-  } else {
-    $error.=sprintf(_("Member %s successfully deleted"),$u["login"])."<br />";
+
+  reset($d);
+  while (list($key,$val)=each($d)) {
+    if (!$admin->checkcreator($val)) {
+      __("This page is restricted to authorized staff");
+      exit();
+    }
+    if (!($u=$admin->get($val)) || !$admin->del_mem($val)) {
+      $error.=sprintf(_("Member '%s' does not exist"),$val)."<br />";
+    } else {
+      $error.=sprintf(_("Member %s successfully deleted"),$u["login"])."<br />";
+    }
   }
+  include("adm_list.php");
+  exit();
+}else{
+    include("head.php");
+    ?>
+    </head>
+    <body>
+    <h3><?php printf(_("Deleting users")); ?> : </h3>
+    <form action="adm_dodel.php" method="post">
+      <input type="hidden" name="action" value="delete" />
+      <input type="hidden" name="del_confirm" value="y" />
+      <p class="error"><?php __("WARNING : Confirm the deletion of the users"); ?></p>
+      <p>
+      <?php
+        foreach($d as $userid){
+          $membre=$admin->get($userid);
+          echo "<input type=\"hidden\" name=\"d[]\" value=\"$userid\" />".$membre['login']."<br/>";
+        }
+      ?>
+      </p>
+      <blockquote>
+        <input type="submit" class="inb" name="confirm" value="<?php __("Yes"); ?>" />&nbsp;&nbsp;
+        <input type="button" class="inb" name="cancel" value="<?php __("No"); ?>" onclick="document.location='adm_list.php';" />
+      </blockquote>
+    </form>
+    </body>
+    </html>
+    <?php  
 }
-include("adm_list.php");
-exit();
 
 ?>
