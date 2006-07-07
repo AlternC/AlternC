@@ -499,7 +499,7 @@ No match for "dronefdasfsa.ws".
       //vérifie qu'un des hôtes est bien sur alternc
       $bolmx = 0;
       //décompose les différents champ MX coté alternc
-      $arrlocalmx = split(",",$mx)
+      $arrlocalmx = split(",",$mx);
       //parcours les différents champ MX retournés
       foreach($mxhosts as $mxhost) {
         foreach($arrlocalmx as localmx) {
