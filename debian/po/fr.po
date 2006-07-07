@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AlternC 0.9.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-26 11:16+0200\n"
+"POT-Creation-Date: 2006-07-07 13:20+0200\n"
 "PO-Revision-Date: 2006-04-26 11:16+0200\n"
 "Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
 "Language-Team: Team AlternC <team@alternc.org>\n"
@@ -420,3 +420,51 @@ msgstr ""
 "dans le fichier /etc/pop-before-smtp/pop-before-smtp.conf et commentez-les. "
 "La chaîne hash:/var/lib/pop-before-smtp/hosts doit aussi être ajoutée à la "
 "directive mynetworks dans /etc/postfix/main.cf."
+
+#. Type: boolean
+#. Description
+#: ../templates:156
+msgid "Should I remove all databases (/var/alternc/db/) ?"
+msgstr "Les bases de données doivent elles être supprimés (/var/alternc/db) ?"
+
+#. Type: boolean
+#. Description
+#: ../templates:156
+msgid "All users databases will be trashed"
+msgstr "Toutes les bases de données des utilisateurs seront perdues"
+
+#. Type: boolean
+#. Description
+#: ../templates:161
+msgid "Should I remove users datas ?"
+msgstr "Les données des utilisateurs doivent elles êtres supprimés ?"
+
+#. Type: boolean
+#. Description
+#: ../templates:161
+msgid "The files and apache redirections created by users will be trashed"
+msgstr "Les fichiers et les redirections d'apache créés par les utilisateurs seront perdus"
+
+#. Type: boolean
+#. Description
+#: ../templates:166
+msgid "Should I remove bind zones ?"
+msgstr "Les zones de bind doivent elles être supprimés ?"
+
+#. Type: boolean
+#. Description
+#: ../templates:166
+msgid "It will delete all bind zones created by AlternC"
+msgstr "Cela supprimera toutes les zone de bind créées par AlternC"
+
+#. Type: boolean
+#. Description
+#: ../templates:171
+msgid "Should I remove bind mailboxes ?"
+msgstr "Les boites mails doivent elles être supprimés ?"
+
+#. Type: boolean
+#. Description
+#: ../templates:171
+msgid "If you accept all users e-mails will be deleted"
+msgstr "Si vous acceptez, toutes les e-mails des utilisateurs seront supprimés"

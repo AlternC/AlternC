@@ -150,3 +150,24 @@ _Description: POP Before SMTP deprecated
  in the /etc/pop-before-smtp/pop-before-smtp.conf and uncomment it.
  hash:/var/lib/pop-before-smtp/hosts must also be added to the mynetworks
  directive of /etc/postfix/main.cf
+
+Template: alternc/postrm_remove_databases
+Type: boolean
+_Description: Should I remove all databases (/var/alternc/db/) ?
+ All users databases will be trashed
+
+Template: alternc/postrm_remove_datafiles
+Type: boolean
+_Description: Should I remove users datas ?
+ The files and apache redirections created by users will be trashed
+
+Template: alternc/postrm_remove_bind
+Type: boolean
+_Description: Should I remove bind zones ?
+ It will delete all bind zones created by AlternC
+
+Template: alternc/postrm_remove_mailboxes
+Type: boolean
+_Description: Should I remove bind mailboxes ?
+ If you accept all users e-mails will be deleted
+

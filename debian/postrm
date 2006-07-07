@@ -2,6 +2,8 @@
 
 set -e
 
+. /usr/share/debconf/confmodule
+
 #     * postrm remove
 #     * postrm purge 
 #     * old-postrm upgrade new-version
@@ -13,14 +15,42 @@ set -e
 
 case "$1" in
   purge)
-    rm -f /etc/alternc/local.sh
+    rm -f /etc/alternc/local.sh /etc/alternc/bureau.conf
     rm -f /var/backups/alternc/etc-installed.tar.gz
+
     # Purge database?
-    #rm -rf /var/alternc/db
+    db_input high alternc/postrm_remove_databases || true
+    db_go
+    db_get alternc/postrm_remove_databases || true
+    if [ "$RET" = "true" ]; then
+      rm -rf /var/alternc/db
+    fi
+
     # Purge datafiles?
-    #rm -rf /var/alternc/dns
-    #rm -rf /var/alternc/html
-    rm -rf /var/alternc/apacheconf
+    db_input high alternc/postrm_remove_datafiles || true
+    db_go
+    db_get alternc/postrm_remove_datafiles || true
+    if [ "$RET" = "true" ]; then
+      rm -rf /var/backups/alternc /var/alternc/dns /var/alternc/html /var/alternc/redir
+    fi
+
+    # Purge bind zones
+    db_input high alternc/postrm_remove_bind || true
+    db_go
+    db_get alternc/postrm_remove_bind || true
+    if [ "$RET" = "true" ]; then
+      rm -rf /var/alternc/bind /etc/bind/templates
+    fi
+
+    # Purge mailboxes
+    db_input high alternc/postrm_remove_mailboxes || true
+    db_go
+    db_get alternc/postrm_remove_mailboxes || true
+    if [ "$RET" = "true" ]; then
+      rm -rf /var/alternc/mail
+    fi
+
+    rm -rf /var/alternc/apacheconf /var/alternc/cgi-bin /var/alternc/bureau /var/alternc/exec.usr /var/alternc/mla /var/alternc/redir /var/alternc/tmp /var/log/alternc
     ;;
   remove|upgrade|failed-upgrade|abort-install|abort-upgrade)
     rm -f /etc/apache/conf.d/override.php.conf /etc/apache/conf.d/alternc-ssl.conf /etc/apache/conf.d/alternc.conf
