@@ -21,7 +21,7 @@ class DB_Sql {
   /* public: configuration parameters */
   var $Auto_Free     = 0;     ## Set to 1 for automatic mysql_free_result()
   var $Debug         = 0;     ## Set to 1 for debugging messages.
-  var $Halt_On_Error = "yes"; ## "yes" (halt with message), "no" (ignore errors quietly), "report" (ignore errror, but spit a warning)
+  var $Halt_On_Error = "no"; ## "yes" (halt with message), "no" (ignore errors quietly), "report" (ignore errror, but spit a warning)
   var $Seq_Table     = "db_sequence";
 
   /* public: result array and current row number */
