@@ -173,11 +173,8 @@ class m_mysql {
   function del_db($dbn) {
     global $db,$err,$mem,$cuid;
     $err->log("mysql","del_db",$dbn);
-    if (!ereg("^[0-9a-z]*$",$dbn)) {
-      $err->raise("mysql",2);
-      return false;
-    }
-    $dbname=$mem->user["login"].($dbn?"_":"").$dbn;
+
+    $dbname=addslashes($mem->user["login"].($dbn?"_":"").$dbn);
     $db->query("SELECT login FROM db WHERE db='$dbname';");
     if (!$db->num_rows()) {
       $err->raise("mysql",4);
