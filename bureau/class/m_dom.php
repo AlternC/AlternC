@@ -502,7 +502,7 @@ No match for "dronefdasfsa.ws".
       $arrlocalmx = split(",",$mx);
       //parcours les différents champ MX retournés
       foreach($mxhosts as $mxhost) {
-        foreach($arrlocalmx as localmx) {
+        foreach($arrlocalmx as $localmx) {
           if ($mxhost==$localmx) {
             $bolmx = 1;
           }
@@ -822,7 +822,7 @@ No match for "dronefdasfsa.ws".
       
     //si gestion mx uniquement, vérification du dns externe
     if ($dns=="0" && $gesmx=="1") {
-      $vmx = checkmx($dom,$mx) 
+      $vmx = checkmx($dom,$mx);
       if ($vmx == 1) {
         //aucun champ mx de spécifié sur le dns
       }
