@@ -268,8 +268,6 @@ etc/alternc/apache.conf -text
 etc/alternc/menulist.txt -text
 etc/alternc/phpmyadmin.inc.php -text
 etc/alternc/templates/alternc/bureau.conf -text
-etc/alternc/templates/apache-ssl/httpd.conf -text
-etc/alternc/templates/apache/httpd.conf -text
 etc/alternc/templates/bind/automatic.conf -text
 etc/alternc/templates/bind/named.conf -text
 etc/alternc/templates/bind/slaveip.conf -text
