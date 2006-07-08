@@ -90,7 +90,8 @@ class m_bro {
     // Sauvegarde du chemin de base.
     $root_alternc = $root ;
     // Passage du root en chemin réel (différent avec un lien)
-    $root=realpath($root) ; $dir=realpath($root."/".$dir);
+    $root=realpath($root) ;
+    $dir=realpath($root."/".$dir);
 
     if (substr($dir,0,strlen($root))!=$root) {
       return false;
@@ -293,9 +294,10 @@ class m_bro {
    * @return boolean TRUE si les fichiers ont été effacés, FALSE si une erreur s'est produite.
    */
   function DeleteFile($file_list,$R) {
-    global $err;
+    global $err, $mem;
+    $root=realpath("/var/alternc/html/".substr($mem->user["login"],0,1)."/".$mem->user["login"]);
     $absolute=$this->convertabsolute($R,0);
-    if (!$absolute) {
+    if (!$absolute && strpos($root,$absolute) === 0 && strlen($absolute) > (strlen($root)+1) ) {
       $err->raise("bro",1);
       return false;
     }
