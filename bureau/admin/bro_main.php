@@ -53,7 +53,32 @@ if ($formu) {
     break;
   case 2:  // act vaut Supprimer Copier ou Renommer.
     if ($actdel) {
-      $bro->DeleteFile($d,$R);
+      if($del_confirm == "y")
+        $bro->DeleteFile($d,$R);
+      else{
+        include("head.php");
+?>
+</head>
+<body>
+  <h3><?php printf(_("Deleting files and/or directories")); ?> : </h3>
+  <form action="bro_main.php" method="post">  
+    <input type="hidden" name="del_confirm" value="y" />
+    <input type="hidden" name="formu" value="2" />
+    <p class="error"><?php __("WARNING : Confirm the deletion of this files"); ?></p>
+<?php foreach($d as $file){ ?>
+	<p><?php echo $file; ?></p>
+        <input type="hidden" name="d[]" value="<?php echo $file; ?>" />
+<?php } ?>
+    <blockquote>
+      <input type="submit" class="inb" name="actdel" value="<?php __("Yes"); ?>" />&nbsp;&nbsp;
+      <input type="button" class="inb" name="cancel" value="<?php __("No"); ?>" onclick="document.location='bro_main.php';" />
+    </blockquote>
+  </form>
+</body>
+</html>
+<?php
+        die();
+      }
     }
     if ($actmove) {
       $bro->MoveFile($d,$R,$actmoveto);
