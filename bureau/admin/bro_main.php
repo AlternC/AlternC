@@ -66,8 +66,8 @@ if ($formu) {
     <input type="hidden" name="formu" value="2" />
     <p class="error"><?php __("WARNING : Confirm the deletion of this files"); ?></p>
 <?php foreach($d as $file){ ?>
-	<p><?php echo $file; ?></p>
-        <input type="hidden" name="d[]" value="<?php echo $file; ?>" />
+	<p><?php echo stripslashes($file); ?></p>
+        <input type="hidden" name="d[]" value="<?php echo htmlentities(stripslashes($file)); ?>" />
 <?php } ?>
     <blockquote>
       <input type="submit" class="inb" name="actdel" value="<?php __("Yes"); ?>" />&nbsp;&nbsp;
@@ -185,7 +185,7 @@ for($i=0;$i<count($c);$i++) {
 $col=3-$col;
 echo "<tr class=\"lst$col\">\n";
 if ($c[$i]["type"]) {
-echo "	<td width=\"28\"><input type=\"checkbox\" class=\"inc\" name=\"d[]\" value=\"".$c[$i]["name"]."\" /></td>";
+echo "	<td width=\"28\"><input type=\"checkbox\" class=\"inc\" name=\"d[]\" value=\"".htmlentities($c[$i]["name"])."\" /></td>";
 if ($p["showicons"]) {
 echo "<td width=\"28\"><img src=\"icon/".$bro->icon($c[$i]["name"])."\" width=\"16\" height=\"16\" alt=\"\" /></td>";
 }
@@ -205,7 +205,7 @@ echo "<td>&nbsp;";
 }
 echo "</td>\n";
 } else {           // DOSSIER :
-echo "	<td width=\"28\"><input type=\"checkbox\" class=\"inc\" name=\"d[]\" value=\"".$c[$i]["name"]."\" /></td>";
+echo "	<td width=\"28\"><input type=\"checkbox\" class=\"inc\" name=\"d[]\" value=\"".htmlentities($c[$i]["name"])."\" /></td>";
 if ($p["showicons"]) {
 echo "<td width=\"28\"><img src=\"icon/folder.png\" width=\"16\" height=\"16\" alt=\"\" /></td>";
 }
