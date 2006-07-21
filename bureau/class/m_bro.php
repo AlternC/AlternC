@@ -281,6 +281,8 @@ class m_bro {
       return false;
     }
     $file=ssla($file);
+    //force la création au niveau de $dir uniquement
+    $file = dir_local($file);
     if (!file_exists($absolute."/".$file)) {
       touch($absolute."/".$file);
     }
