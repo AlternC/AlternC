@@ -384,8 +384,8 @@ function duration_list($name, $selected=0) {
  * @access private
  */
  function dir_local($file) {
-    //recherche la chaine commençant aprés ../ ou /
-    preg_match('`^(/|../)(.*)`',$file,$res);
+    //recherche la chaine commençant aprés ../ ou /  ceci n fois
+    preg_match('`^(/|../)*(.*)`',$file,$res);
     echo $file."<br/>"; 
     print_r($res);
     echo "<br/>";
