@@ -73,7 +73,7 @@ if (!is_array($r)) {
 if ($mem->user["admlist"]==0) { // Normal (large) mode
 ?>
 <table cellspacing="0" cellpadding="4">
-<tr><th colspan="4">&nbsp;</th><th><?php __("Username"); ?></th><th><?php echo _("Surname")." "._("First Name")."<br />("._("Email address").")"; ?></th><th><?php __("Account type") ?></th><th><?php __("Last login"); ?></th><th><?php __("Last fail"); ?></th><th><?php __("Last ip"); ?><th><?php __('Expiry') ?></th></tr>
+<tr><th colspan="5">&nbsp;</th><th><?php __("Username"); ?></th><th><?php echo _("Surname")." "._("First Name")."<br />("._("Email address").")"; ?></th><th><?php __("Account type") ?></th><th><?php __("Last login"); ?></th><th><?php __("Last fail"); ?></th><th><?php __("Last ip"); ?><th><?php __('Expiry') ?></th></tr>
 <?php
 reset($r);
 
@@ -94,6 +94,7 @@ while (list($key,$val)=each($r))
  ?>
 		<td align="center"><a href="adm_edit.php?uid=<?php echo $val["uid"] ?>"><?php __("Edit"); ?></a></td>
 		<td align="center"><a href="adm_quotaedit.php?uid=<?php echo $val["uid"] ?>"><?php __("Quotas"); ?></a></td>
+		<td align="center"><a href="adm_deactivate.php?uid=<?php echo $val["uid"] ?>"><?php __("Deactivate"); ?></a></td>
 		<td align="center"><?php
 		if (!$val["enabled"])
 			echo "<img src=\"icon/encrypted.png\" width=\"16\" height=\"16\" alt=\""._("Locked Account")."\" />";
@@ -104,7 +105,7 @@ while (list($key,$val)=each($r))
 		</td>
 		    <?php
 		    } else { 
-		      echo "<td colspan=\"4\"></td>"; 
+		      echo "<td colspan=\"5\"></td>"; 
 		    }
  ?>
 
