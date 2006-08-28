@@ -376,22 +376,5 @@ function duration_list($name, $selected=0) {
   return $res;
 }
 
-/* ----------------------------------------------------------------- */
-/** Remet un chemin en position locale
- * retire ../ ou / au besoin
- * @file string chemin du repertoire ou du fichier
- * @return string chemin du repertoir en position local
- * @access private
- */
- function dir_local($file) {
-    //recherche la chaine commençant aprés ../ ou /  ceci n fois
-    preg_match('`^(/|../)*(.*)`',$file,$res);
-    if ($res) {
-      return $res[2];
-    } else {
-      return $file;
-    } 
- }
-
 
 ?>
