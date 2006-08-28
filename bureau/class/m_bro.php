@@ -95,7 +95,8 @@ class m_bro {
 
     if (substr($dir,0,strlen($root))!=$root) {
       return false;
-    } if ($strip) {
+    } 
+    if ($strip) {
       $dir=substr($dir,strlen($root));
     } else {
       // si on ne strip pas, il faut enlever le chemin réel 
@@ -258,13 +259,17 @@ class m_bro {
    * @return boolean TRUE si le dossier a été créé, FALSE si une erreur s'est produite.
    */
   function CreateDir($dir,$file) {
-    global $db,$cuid;
-    $absolute=$this->convertabsolute($dir,0);
+    global $db,$cuid,$err;
     $file=ssla($file);
-    if (!file_exists($absolute."/".$file)) {
-      mkdir($absolute."/".$file,00777);
+    $absolute=$this->convertabsolute($dir."/".$file,0);
+    if ($absolute && !file_exists($absolute)) {
+      mkdir($absolute,00777);
+      $db->query("UPDATE browser SET crff=1 WHERE uid='$cuid';");
+      return true;
+    } else {
+      $err->raise("bro",1);
+      return false;
     }
-    $db->query("UPDATE browser SET crff=1 WHERE uid='$cuid';");
   }
 
   /* ----------------------------------------------------------------- */
@@ -275,18 +280,16 @@ class m_bro {
    */
   function CreateFile($dir,$file) {
     global $db,$err,$cuid;
-    $absolute=$this->convertabsolute($dir,0);
-    if (!$absolute) {
+    $file=ssla($file);
+    $absolute=$this->convertabsolute($dir."/".$file,0);
+    if ($absolute && !file_exists($absolute)) {
+      touch($absolute);
+      $db->query("UPDATE browser SET crff=0 WHERE uid='$cuid';");
+      return true;
+    } else {
       $err->raise("bro",1);
       return false;
     }
-    $file=ssla($file);
-    //force la création au niveau de $dir uniquement
-    $file = dir_local($file);
-    if (!file_exists($absolute."/".$file)) {
-      touch($absolute."/".$file);
-    }
-    $db->query("UPDATE browser SET crff=0 WHERE uid='$cuid';");
   }
 
   /* ----------------------------------------------------------------- */
