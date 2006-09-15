@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AlternC 0.9.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-07 13:20+0200\n"
+"POT-Creation-Date: 2006-09-15 17:03+0000\n"
 "PO-Revision-Date: 2006-04-26 11:16+0200\n"
 "Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
 "Language-Team: Team AlternC <team@alternc.org>\n"
@@ -333,6 +333,7 @@ msgstr "Emplacement d'AlternC"
 #. Type: string
 #. Description
 #: ../templates:119
+#, fuzzy
 msgid ""
 "Please enter the partition name where alternc is installed. This is used "
 "mainly for disk quotas."
@@ -342,13 +343,19 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:125
+#: ../templates:119
+msgid "Warning : Be careful ! It can generate some problems."
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../templates:127
 msgid "monitoring server"
 msgstr "serveur de surveillance"
 
 #. Type: string
 #. Description
-#: ../templates:125
+#: ../templates:127
 msgid ""
 "IP address (or ip/prefix) of the server(s) which we want to authorize ping "
 "to us and apache status pages. Completely optional."
@@ -358,13 +365,13 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:131
+#: ../templates:133
 msgid "trusted servers for bind"
 msgstr "serveurs de confiance pour bind"
 
 #. Type: string
 #. Description
-#: ../templates:131
+#: ../templates:133
 msgid ""
 "IP address or prefix of machines within our trust for DNS transfers, "
 "delimited by ';', optional."
@@ -374,26 +381,26 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:137
+#: ../templates:139
 msgid "SMTP authorized networks"
 msgstr "réseaux autorisés en SMTP"
 
 #. Type: string
 #. Description
-#: ../templates:137
+#: ../templates:139
 msgid "IP addresses of the networks authorized in SMTP, space-delimited."
 msgstr ""
 "Adresses ip des reseaux autorisés en SMTP (ou ip/prefixe) séparés par espace."
 
 #. Type: note
 #. Description
-#: ../templates:142
+#: ../templates:144
 msgid "POP Before SMTP deprecated"
 msgstr "POP Before SMTP déprécié"
 
 #. Type: note
 #. Description
-#: ../templates:142
+#: ../templates:144
 msgid ""
 "AlternC doesn't automatically configure the pop-before-smtp package anymore, "
 "since it is correctly configured for SASL authentification these days. If "
@@ -405,13 +412,13 @@ msgstr ""
 
 #. Type: note
 #. Description
-#: ../templates:142
+#: ../templates:144
 msgid "# For Courier-POP3 and Courier-IMAP:"
 msgstr "# For Courier-POP3 and Courier-IMAP:"
 
 #. Type: note
 #. Description
-#: ../templates:142
+#: ../templates:144
 msgid ""
 "in the /etc/pop-before-smtp/pop-before-smtp.conf and uncomment it. hash:/var/"
 "lib/pop-before-smtp/hosts must also be added to the mynetworks directive of /"
@@ -423,48 +430,50 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../templates:156
+#: ../templates:158
 msgid "Should I remove all databases (/var/alternc/db/) ?"
 msgstr "Les bases de données doivent elles être supprimés (/var/alternc/db) ?"
 
 #. Type: boolean
 #. Description
-#: ../templates:156
+#: ../templates:158
 msgid "All users databases will be trashed"
 msgstr "Toutes les bases de données des utilisateurs seront perdues"
 
 #. Type: boolean
 #. Description
-#: ../templates:161
+#: ../templates:163
 msgid "Should I remove users datas ?"
 msgstr "Les données des utilisateurs doivent elles êtres supprimés ?"
 
 #. Type: boolean
 #. Description
-#: ../templates:161
+#: ../templates:163
 msgid "The files and apache redirections created by users will be trashed"
-msgstr "Les fichiers et les redirections d'apache créés par les utilisateurs seront perdus"
+msgstr ""
+"Les fichiers et les redirections d'apache créés par les utilisateurs seront "
+"perdus"
 
 #. Type: boolean
 #. Description
-#: ../templates:166
+#: ../templates:168
 msgid "Should I remove bind zones ?"
 msgstr "Les zones de bind doivent elles être supprimés ?"
 
 #. Type: boolean
 #. Description
-#: ../templates:166
+#: ../templates:168
 msgid "It will delete all bind zones created by AlternC"
 msgstr "Cela supprimera toutes les zone de bind créées par AlternC"
 
 #. Type: boolean
 #. Description
-#: ../templates:171
+#: ../templates:173
 msgid "Should I remove bind mailboxes ?"
 msgstr "Les boites mails doivent elles être supprimés ?"
 
 #. Type: boolean
 #. Description
-#: ../templates:171
+#: ../templates:173
 msgid "If you accept all users e-mails will be deleted"
 msgstr "Si vous acceptez, toutes les e-mails des utilisateurs seront supprimés"

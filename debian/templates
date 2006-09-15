@@ -119,6 +119,8 @@ Type: string
 _Description: The path where AlternC is installed
  Please enter the partition name where alternc is installed. This is used
  mainly for disk quotas.
+ .
+ Warning : Be careful ! It can generate some problems.
 
 Template: alternc/monitor_ip
 Type: string

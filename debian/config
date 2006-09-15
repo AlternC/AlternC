@@ -143,7 +143,7 @@ db_input medium alternc/public_ip || true
 db_input medium alternc/default_mx || true
 db_input medium alternc/ns1 || true
 db_input medium alternc/ns2 || true
-db_input medium alternc/alternc_location || true
+db_input low alternc/alternc_location || true
 db_input low alternc/mysql/host || true
 db_input low alternc/mysql/db || true
 db_input low alternc/mysql/user || true
