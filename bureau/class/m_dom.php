@@ -666,7 +666,8 @@ No match for "dronefdasfsa.ws".
     $dest=trim($dest);
     $dom=strtolower($dom);
     $sub=strtolower($sub);
-    if ($sub != '*' && $sub != '' && preg_match('`[^a-z0-9-]`', $sub)) {
+
+    if (!(($sub == '*') || ($sub=="") || (preg_match('/([a-z0-9][\.\-a-z0-9]*)?[a-z0-9]/', $sub)))) {
       $err->raise("dom",24);
       return false;
     }
