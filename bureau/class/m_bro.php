@@ -282,7 +282,7 @@ class m_bro {
     global $db,$err,$cuid;
     $file=ssla($file);
     $absolute=$this->convertabsolute($dir."/".$file,0);
-    if ($absolute && !file_exists($absolute)) {
+    if ($absolute && !file_exists($absolute) && checkuserpath($absolute."/".$file) != 0) {
       touch($absolute);
       $db->query("UPDATE browser SET crff=0 WHERE uid='$cuid';");
       return true;
