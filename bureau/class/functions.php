@@ -195,11 +195,16 @@ function checkuserpath($path) {
   $usar=substr($user,0,1);
   if (substr($path,0,1)=="/")
     $path="/".$path;
-  if (is_dir("/var/alternc/html/$usar/$user$path")) {
-    return 1;
-  }
-  if (is_file("/var/alternc/html/$usar/$user$path")) {
-    return 2;
+
+  $rpath = realpath("/var/alternc/html/$usar/$user$path");
+  $userpath = realpath("/var/alternc/html/$usar/$user");
+  if(strpos($rpath,$userpath) === 0){
+    if (is_dir("/var/alternc/html/$usar/$user$path")) {
+        return 1;
+    }
+    if (is_file("/var/alternc/html/$usar/$user$path")) {
+      return 2;
+    }
   }
   return 0;
 }
