@@ -91,11 +91,16 @@ class m_bro {
     $root_alternc = $root ;
     // Passage du root en chemin réel (différent avec un lien)
     $root=realpath($root) ;
+    // separer le chemin entre le repertoire et le fichier
+    $file = basename($dir);
+    $dir = dirname($dir);
     $dir=realpath($root."/".$dir);
-
+    // verifier que le repertoire est dans le home de l'usgaer
     if (substr($dir,0,strlen($root))!=$root) {
       return false;
     } 
+    // recomposer le chemin
+    $dir = $dir . '/' . $file;
     if ($strip) {
       $dir=substr($dir,strlen($root));
     } else {
@@ -103,7 +108,8 @@ class m_bro {
       // et mettre la racine d'alternc pour éviter les
       // problèmes de lien depuis /var/alternc ! 
       $dir=$root_alternc . substr($dir,strlen($root));
-    } if (substr($dir,-1)=="/") {
+    }
+    if (substr($dir,-1)=="/") {
       return substr($dir,0,strlen($dir)-1);
     } else
       return $dir;
@@ -282,14 +288,15 @@ class m_bro {
     global $db,$err,$cuid;
     $file=ssla($file);
     $absolute=$this->convertabsolute($dir."/".$file,0);
-    if ($absolute && !file_exists($absolute) && checkuserpath($absolute."/".$file) != 0) {
-      touch($absolute);
-      $db->query("UPDATE browser SET crff=0 WHERE uid='$cuid';");
-      return true;
-    } else {
+    if (!$absolute) {
       $err->raise("bro",1);
       return false;
     }
+    if (!file_exists($absolute)) {
+      touch($absolute);
+    }
+    $db->query("UPDATE browser SET crff=0 WHERE uid='$cuid';");
+    return true;
   }
 
   /* ----------------------------------------------------------------- */
