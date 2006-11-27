@@ -18,12 +18,6 @@ TEMPLATE_DIR="/etc/alternc/templates"
 # replace this one unconditionnally
 CONFIG_FILES="etc/alternc/bureau.conf"
 
-if [ -e /etc/php4/apache/php.ini ]; then
-    CONFIG_FILES="$CONFIG_FILES etc/php4/apache/php.ini"
-fi
-if [ -e /etc/php4/cgi/php.ini ]; then
-    CONFIG_FILES="$CONFIG_FILES etc/php4/cgi/php.ini"
-fi
 if [ -e /etc/bind/named.conf ]; then
     CONFIG_FILES="$CONFIG_FILES etc/bind/templates/zone.template
                   etc/bind/templates/named.template etc/bind/named.conf"
