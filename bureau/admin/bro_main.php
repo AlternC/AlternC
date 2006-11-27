@@ -39,11 +39,15 @@ $R=$bro->convertabsolute($R,1);
 if ($formu) {
   switch ($formu) {
   case 1:  // Créer le répertoire $R.$nomfich
-    $bro->CreateDir($R,$nomfich);
+    if ($bro->CreateDir($R,$nomfich)) {
+      print $err->errstr();
+    }
     $p=$bro->GetPrefs();
     break;
   case 6: // Créer le fichier $R.$nomfich
-    $bro->CreateFile($R,$nomfich);
+    if (!$bro->CreateFile($R,$nomfich)) {
+      print $err->errstr();
+    }
     $p=$bro->GetPrefs();
     if ($p["createfile"]==1) {
       $file=$nomfich;
@@ -54,7 +58,9 @@ if ($formu) {
   case 2:  // act vaut Supprimer Copier ou Renommer.
     if ($actdel) {
       if($del_confirm == "y")
-        $bro->DeleteFile($d,$R);
+        if (!$bro->DeleteFile($d,$R)) {
+          print $err->errstr();
+        }
       else{
         include("head.php");
 ?>
@@ -81,14 +87,20 @@ if ($formu) {
       }
     }
     if ($actmove) {
-      $bro->MoveFile($d,$R,$actmoveto);
+      if (!$bro->MoveFile($d,$R,$actmoveto)) {
+        print $err->errstr();
+      }
     }
     break;
   case 4:  // Renommage Effectif...
-    $bro->RenameFile($R,$o,$d); // Rename $R (directory) $o (old) $d (new) names
+    if (!$bro->RenameFile($R,$o,$d)) { // Rename $R (directory) $o (old) $d (new) names
+      print $err->errstr();
+    }
     break;
   case 3:  // Upload de fichier...
-    $bro->UploadFile($R);
+    if (!$bro->UploadFile($R)) {
+      print $err->errstr();
+    }
     break;
   }
 }
