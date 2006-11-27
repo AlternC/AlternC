@@ -191,7 +191,7 @@ echo "<td width=\"28\"><img src=\"icon/".$bro->icon($c[$i]["name"])."\" width=\"
 }
 echo "<td><a href=\"";
 echo "bro_editor.php?file=".urlencode($c[$i]["name"])."&amp;R=".urlencode($R);
-echo "\">".$c[$i]["name"]."</a></td>\n";
+echo "\">".htmlentities($c[$i]["name"])."</a></td>\n";
 echo "	<td>".format_size($c[$i]["size"])."</td>";
 echo "<td>".format_date('%3$d-%2$d-%1$d %4$d:%5$d',date("Y-m-d H:i:s",$c[$i]["date"]))."<br /></td>";
 if ($p["showtype"]) {
@@ -211,7 +211,7 @@ echo "<td width=\"28\"><img src=\"icon/folder.png\" width=\"16\" height=\"16\" a
 }
 echo "<td><b><a href=\"";
 echo "bro_main.php?R=".urlencode($R."/".$c[$i]["name"]);
-echo "\">".$c[$i]["name"]."/</a></b></td>\n";
+echo "\">".htmlentities($c[$i]["name"])."/</a></b></td>\n";
 echo "	<td>".format_size($c[$i]["size"])."</td>";
 echo "<td>".format_date('%3$d-%2$d-%1$d %4$d:%5$d',date("Y-m-d h:i:s",$c[$i]["date"]))."<br /></td>";
 if ($p["showtype"]) {
@@ -238,7 +238,7 @@ echo "<tr class=\"lst$col\">\n";
 if ($c[$i]["type"]) {
 echo "	<td width=\"28\"><input type=\"checkbox\" class=\"inc\" name=\"d[]\" value=\"".$c[$i]["name"]."\" /></td><td><a href=\"";
 echo "bro_editor.php?file=".urlencode($c[$i]["name"])."&amp;R=".urlencode($R);
-echo "\">".$c[$i]["name"]."</a></td>\n";
+echo "\">".htmlentities($c[$i]["name"])."</a></td>\n";
 echo "	<td>".format_size($c[$i]["size"])."</td><td>";
 $vu=$bro->viewurl($R,$c[$i]["name"]);
 if ($vu) {
@@ -250,7 +250,7 @@ echo "</td>\n";
 } else {
 echo "	<td width=\"28\"><input TYPE=checkbox class=\"inc\" name=\"d[]\" value=\"".$c[$i]["name"]."\"></td><td><b><a href=\"";
 echo "bro_main.php?R=".urlencode($R."/".$c[$i]["name"]);
-echo "\">".$c[$i]["name"]."/</a></b></td>\n";
+echo "\">".htmlentities($c[$i]["name"])."/</a></b></td>\n";
 echo "	<td>".format_size($c[$i]["size"])."</td><td>";
 echo "&nbsp;";
 echo "</td>\n";
@@ -268,7 +268,7 @@ echo "<tr class=\"lst$col\">\n";
 if ($c[$i]["type"]) {
 echo "	<td width=\"28\"><input TYPE=checkbox class=\"inc\" name=\"d[]\" value=\"".$c[$i]["name"]."\"></td><td><a href=\"";
 echo "bro_editor.php?file=".urlencode($c[$i]["name"])."&amp;R=".urlencode($R);
-echo "\">".$c[$i]["name"]."</a></td>\n";
+echo "\">".htmlentities($c[$i]["name"])."</a></td>\n";
 echo "	<td>".format_size($c[$i]["size"])."</td><td>";
 $vu=$bro->viewurl($R,$c[$i]["name"]);
 if ($vu) {
@@ -280,7 +280,7 @@ echo "</td>\n";
 } else {
 echo "	<td width=\"28\"><input TYPE=checkbox class=\"inc\" name=\"d[]\" value=\"".$c[$i]["name"]."\"></td><td><b><a href=\"";
 echo "bro_main.php?R=".urlencode($R."/".$c[$i]["name"]);
-echo "\">".$c[$i]["name"]."/</a></b></td>\n";
+echo "\">".htmlentities($c[$i]["name"])."/</a></b></td>\n";
 echo "	<td>".format_size($c[$i]["size"])."</td><td>";
 echo "&nbsp;";
 echo "</td>\n";
@@ -305,7 +305,7 @@ echo "<tr class=\"lst$col\">\n";
 if ($c[$i]["type"]) {
 echo "	<td width=\"28\"><input TYPE=checkbox class=\"inc\" name=\"d[]\" value=\"".$c[$i]["name"]."\"></td><td><a href=\"";
 echo "bro_editor.php?file=".urlencode($c[$i]["name"])."&amp;R=".urlencode($R);
-echo "\">".$c[$i]["name"]."</a></td>\n";
+echo "\">".htmlentities($c[$i]["name"])."</a></td>\n";
 echo "	<td>".format_size($c[$i]["size"])."</td><td>";
 $vu=$bro->viewurl($R,$c[$i]["name"]);
 if ($vu) {
@@ -317,7 +317,7 @@ echo "</td>\n";
 } else {
 echo "	<td width=\"28\"><input TYPE=checkbox class=\"inc\" name=\"d[]\" value=\"".$c[$i]["name"]."\"></td><td><b><a href=\"";
 echo "bro_main.php?R=".urlencode($R."/".$c[$i]["name"]);
-echo "\">".$c[$i]["name"]."/</a></b></td>\n";
+echo "\">".htmlentities($c[$i]["name"])."/</a></b></td>\n";
 echo "	<td>".format_size($c[$i]["size"])."</td><td>";
 echo "&nbsp;";
 echo "</td>\n";
@@ -335,7 +335,7 @@ echo "<tr class=\"lst$col\">\n";
 if ($c[$i]["type"]) {
 echo "	<td width=\"28\"><input TYPE=checkbox class=\"inc\" name=\"d[]\" value=\"".$c[$i]["name"]."\"></td><td><a href=\"";
 echo "bro_editor.php?file=".urlencode($c[$i]["name"])."&amp;R=".urlencode($R);
-echo "\">".$c[$i]["name"]."</a></td>\n";
+echo "\">".htmlentities($c[$i]["name"])."</a></td>\n";
 echo "	<td>".format_size($c[$i]["size"])."</td><td>";
 $vu=$bro->viewurl($R,$c[$i]["name"]);
 if ($vu) {
@@ -348,7 +348,7 @@ echo "</td>\n";
 } else {
 echo "	<td width=\"28\"><input TYPE=checkbox class=\"inc\" name=\"d[]\" value=\"".$c[$i]["name"]."\"></td><td><b><a href=\"";
 echo "bro_main.php?R=".urlencode($R."/".$c[$i]["name"]);
-echo "\">".$c[$i]["name"]."/</a></b></td>\n";
+echo "\">".htmlentities($c[$i]["name"])."/</a></b></td>\n";
 echo "	<td>".format_size($c[$i]["size"])."</td><td>";
 echo "&nbsp;";
 echo "</td>\n";
@@ -366,7 +366,7 @@ echo "<tr class=\"lst$col\">\n";
 if ($c[$i]["type"]) {
 echo "	<td width=\"28\"><input TYPE=checkbox class=\"inc\" name=\"d[]\" value=\"".$c[$i]["name"]."\"></td><td><a href=\"";
 echo "bro_editor.php?file=".urlencode($c[$i]["name"])."&amp;R=".urlencode($R);
-echo "\">".$c[$i]["name"]."</a></td>\n";
+echo "\">".htmlentities($c[$i]["name"])."</a></td>\n";
 echo "	<td>".format_size($c[$i]["size"])."</td><td>";
 $vu=$bro->viewurl($R,$c[$i]["name"]);
 if ($vu) {
@@ -378,7 +378,7 @@ echo "</td>\n";
 } else {
 echo "	<td width=\"28\"><input TYPE=checkbox class=\"inc\"  name=\"d[]\" value=\"".$c[$i]["name"]."\"></td><td><b><a href=\"";
 echo "bro_main.php?R=".urlencode($R."/".$c[$i]["name"]);
-echo "\">".$c[$i]["name"]."/</a></b></td>\n";
+echo "\">".htmlentities($c[$i]["name"])."/</a></b></td>\n";
 echo "	<td>".format_size($c[$i]["size"])."</td><td>";
 echo "&nbsp;";
 echo "</td>\n";
