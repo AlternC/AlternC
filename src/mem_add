@@ -13,7 +13,7 @@ if (!$name || !$uid) {
 $ENV{PATH} = "";
 delete @ENV{'IFS', 'CDPATH', 'ENV', 'BASH_ENV'};
 
-if (!($name =~ /^([a-z0-9_\+\.-]+)$/)) {
+if (!($name =~ /^([a-z0-9]+)$/)) {
     die "Account name is incorrect.";
 }
 $name=$1;
@@ -28,8 +28,8 @@ $( = $);
 my $PTH="/var/alternc/html/".substr($name,0,1)."/".$name;
 
 mkdir($PTH);
-system("/bin/chown 33:$uid '".quotemeta($PTH)."'");
-system("/bin/chmod 02770 '".quotemeta($PTH)."'");
+system("/bin/chown 33:$uid '$PTH'");
+system("/bin/chmod 02770 '$PTH'");
 
 0;
 
