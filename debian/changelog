@@ -1,8 +1,13 @@
-alternc (0.9.6) stable; urgency=low
+alternc (0.9.6) stable; urgency=high
 
   * Replacing C setuid scripts by perl-suid one. AlternC is now arch-indep !
   * Do not overwrite httpd.conf anymore. Everything is now done through includes in the /etc/apache/conf.d/ directory
   * Fix security issues with file browser and domain management that allowed an attacker to inspect the filesystem, create files in other accounts and perform cross site scripting javascript attacks. Credit: thabob.
+  * #563: do not overwrite php.ini anymore. Everything is configured in the
+    apache config.
+  * All other bugs are postponed to 0.9.7 because of the security issue (hence
+    urgency=high). See https://dev.alternc.org/trac/alternc/milestone/0.9.6
+    for more information.
 
  -- Antoine Beaupré <anarcat@koumbit.org>  Mon, 27 Nov 2006 21:26:32 +0000
 
