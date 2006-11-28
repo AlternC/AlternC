@@ -57,11 +57,11 @@ if ($formu) {
     break;
   case 2:  // act vaut Supprimer Copier ou Renommer.
     if ($actdel) {
-      if($del_confirm == "y")
+      if($del_confirm == "y"){
         if (!$bro->DeleteFile($d,$R)) {
           print $err->errstr();
         }
-      else{
+      }else{
         include("head.php");
 ?>
 </head>
