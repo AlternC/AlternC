@@ -7,6 +7,7 @@ SED=/bin/sed
 MOUNT=/bin/mount
 QUOTA=/usr/bin/quota
 GREP=/bin/grep
+WC=/usr/bin/wc
 
 DATA_PART=`$DF ${ALTERNC_LOC} 2>/dev/null | $AWK '/^\// { print $1 }'`
 
@@ -20,7 +21,7 @@ fi
 
 # quota will split its display on two lines if QUOTA_PART is bigger than 15
 # characters. *sigh*
-PART_LEN=`echo -n "$QUOTA_PART" | wc -c`
+PART_LEN=`echo -n "$QUOTA_PART" | $WC -c`
 if [ "$PART_LEN" -gt 15 ]; then
     $QUOTA -g "$1" |
        $SED -n -e "\\;${QUOTA_PART};,+1s/ *\([0-9]*\) .*/\1/p" |
