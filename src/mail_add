@@ -13,7 +13,7 @@ if (!$mailname || !$uid) {
 $ENV{PATH} = "";
 delete @ENV{'IFS', 'CDPATH', 'ENV', 'BASH_ENV'};
 
-if (!($mailname =~ /^([a-z0-9_\+\.][a-z0-9_\+\.-]+\_[a-z0-9\.-]+)$/)) {
+if (!($mailname =~ /^([a-z0-9_\+-][a-z0-9_\+\.-]+\_[a-z0-9\.-]+)$/)) {
     die "Email is incorrect.";
 }
 $mailname=$1;
