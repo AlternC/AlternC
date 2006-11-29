@@ -13,7 +13,7 @@ if (!$mailname) {
 $ENV{PATH} = "";
 delete @ENV{'IFS', 'CDPATH', 'ENV', 'BASH_ENV'};
 
-if (!($mailname =~ /^([a-z0-9_\+\.-]+\_[a-z0-9\.-]+)$/)) {
+if (!($mailname =~ /^([a-z0-9_\+-][a-z0-9_\+\.-]+\_[a-z0-9\.-]+)$/)) {
     die "Email is incorrect.";
 }
 $mailname=$1;
@@ -21,7 +21,7 @@ $mailname=$1;
 $< = $>;
 $( = $);
 
-system("/bin/rm -rf '".quotemeta("/var/alternc/mail/".substr($mailname,0,1)."/".$mailname)."'");
+system("/bin/rm -rf '/var/alternc/mail/".substr($mailname,0,1)."/".$mailname."'");
 
 0;
 

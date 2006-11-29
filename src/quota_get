@@ -21,7 +21,7 @@ $uid=$1;
 $< = $>;
 $( = $);
 
-my $PTH="/usr/lib/alternc/quota_get.sh '".quotemeta($uid)."'";
+my $PTH="/usr/lib/alternc/quota_get.sh '$uid'";
 
 system($PTH);
 
