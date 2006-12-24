@@ -57,27 +57,28 @@ if ($formu) {
     break;
   case 2:  // act vaut Supprimer Copier ou Renommer.
     if ($actdel) {
-      if($del_confirm == "y"){
+      if($del_confirm == _("Yes")) {
         if (!$bro->DeleteFile($d,$R)) {
           print $err->errstr();
         }
-      }else{
+      } elseif(!$cancel){
         include("head.php");
 ?>
 </head>
 <body>
   <h3><?php printf(_("Deleting files and/or directories")); ?> : </h3>
   <form action="bro_main.php" method="post">  
-    <input type="hidden" name="del_confirm" value="y" />
     <input type="hidden" name="formu" value="2" />
+    <input type="hidden" name="actdel" value="1" />
+    <input type="hidden" name="R" value="<?php echo $R?>" />
     <p class="error"><?php __("WARNING : Confirm the deletion of this files"); ?></p>
 <?php foreach($d as $file){ ?>
 	<p><?php echo stripslashes($file); ?></p>
         <input type="hidden" name="d[]" value="<?php echo htmlentities(stripslashes($file)); ?>" />
 <?php } ?>
     <blockquote>
-      <input type="submit" class="inb" name="actdel" value="<?php __("Yes"); ?>" />&nbsp;&nbsp;
-      <input type="button" class="inb" name="cancel" value="<?php __("No"); ?>" onclick="document.location='bro_main.php';" />
+      <input type="submit" class="inb" name="del_confirm" value="<?php __("Yes"); ?>" />&nbsp;&nbsp;
+      <input type="button" class="inb" name="cancel" value="<?php __("No"); ?>" />
     </blockquote>
   </form>
 </body>
