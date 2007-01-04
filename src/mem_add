@@ -28,7 +28,7 @@ $( = $);
 my $PTH="/var/alternc/html/".substr($name,0,1)."/".$name;
 
 mkdir($PTH);
-system("/bin/chown 33:$uid '$PTH'");
+chown(33, $uid, $PTH);
 system("/bin/chmod 02770 '$PTH'");
 
 0;
