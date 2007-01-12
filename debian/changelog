@@ -6,7 +6,7 @@ alternc (0.9.6.1) stable; urgency=high
   * Make it possible to erase files and directories in file browser. Closes: #1002.
   * Fix mail accounts creation. Closes: #1003.
 
- -- Antoine Beaupré <anarcat@koumbit.org> Fri, 12 Jan 2007 15:59:42 -0500
+ -- Antoine Beaupré <anarcat@koumbit.org>  Fri, 12 Jan 2007 15:59:42 -0500
 
 alternc (0.9.6) stable; urgency=high
 
