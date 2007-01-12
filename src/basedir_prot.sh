@@ -93,11 +93,7 @@ if [ $# -gt 0 ]; then
 		    initial_domain=`init_dom_letter "$i"`
 		    dom="/var/alternc/dns/$initial_domain/$i"
 		fi
-		if [ -e "$dom" ]; then
-			doms="$doms $dom"
-		else
-			echo skipping non-existent domain "$dom" >&2
-		fi
+		doms="$doms $dom"
 	done
 else
 	doms=`find /var/alternc/dns -type l`

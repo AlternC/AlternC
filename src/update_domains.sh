@@ -123,11 +123,16 @@ print_user_letter() {
 
 add_to_php_override() {
     local fqdn="$1"
-    local escaped_fqdn=`echo "$fqdn" | sed 's/\([\*|\.]\)/\\\\\1/g'`
 
-    if ! grep -q "^${escaped_fqdn}$" "$CHANGED_PHP_OVERRIDES_TMP_FILE"; then
-        echo "$fqdn" >> "$CHANGED_PHP_OVERRIDES_TMP_FILE"
-    fi
+    /usr/lib/alternc/basedir_prot.sh "$fqdn" >> "$DOMAIN_LOG_FILE"
+}
+
+remove_php_override() {
+    local fqdn="$1"
+    local letter=`print_domain_letter $fqdn`
+
+    sed -i "/$fqdn/d" $APACHECONF_DIR/override_php.conf
+    rm -f $APACHECONF_DIR/$letter/$fqdn
 }
 
 add_to_named_reload() {
@@ -234,6 +239,15 @@ add_host() {
     local vhost_directory
 	
     delete_host "$domain" "$host"
+
+    if [ "$host" = "@" -o -z "$host" ]; then
+        FQDN="$domain"
+    else
+        FQDN="$host.$domain"
+    fi
+    if [ "$host_type" != "$TYPE_IP" ]; then
+        add_to_php_override "$FQDN"
+    fi
 
     if [ "$host_type" = "$TYPE_IP" ]; then
        ip="$value"
@@ -394,11 +408,10 @@ touch "$LOCK_FILE"
 DOMAINS_TMP_FILE=`mktemp -t alternc.update_domains.XXXXXX`
 HOSTS_TMP_FILE=`mktemp -t alternc.update_domains.XXXXXX`
 RELOAD_ZONES_TMP_FILE=`mktemp -t alternc.update_domains.XXXXXX`
-CHANGED_PHP_OVERRIDES_TMP_FILE=`mktemp -t alternc.update_domains.XXXXXX`
 
 cleanup() {
     rm -f "$LOCK_FILE" "$DOMAINS_TMP_FILE" "$HOSTS_TMP_FILE"
-    rm -f "$RELOAD_ZONES_TMP_FILE" "$CHANGED_PHP_OVERRIDES_TMP_FILE"
+    rm -f "$RELOAD_ZONES_TMP_FILE"
     exit 0
 }
 
@@ -449,9 +462,6 @@ while read user domain mx are_we_dns are_we_mx action ; do
     DOMAIN_LETTER=`print_domain_letter "$domain"`
     USER_LETTER=`print_user_letter "$user"`
 
-    add_to_php_override "$domain"
-    add_to_php_override "www.$domain"
-
     case "$action" in
       $ACTION_INSERT)
         if [ "$are_we_dns" = "$YES" ] ; then
@@ -499,15 +509,6 @@ IFS="	"
 while read user domain host value type action; do
     IFS="$OLD_IFS"
 
-    if [ "$host" = "@" -o -z "$host" ]; then
-        FQDN="$domain"
-    else
-        FQDN="$host.$domain"
-    fi
-    if [ "$type" != "$TYPE_IP" ]; then
-        add_to_php_override "$FQDN"
-    fi
-
     case "$action" in
       $ACTION_UPDATE | $ACTION_INSERT)
         add_host "$domain" "$type" "$host" "$value" "$user"
@@ -525,11 +526,6 @@ while read user domain host value type action; do
     IFS="	"
 done < "$HOSTS_TMP_FILE"
 IFS="$OLD_IFS"
-
-# Update PHP overrides (basedir protection)
-for domain in `cat "$CHANGED_PHP_OVERRIDES_TMP_FILE"`; do
-    /usr/lib/alternc/basedir_prot.sh "$domain" >> "$DOMAIN_LOG_FILE"
-done
 
 # Reload configuration for named and apache
 
