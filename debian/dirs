@@ -1,14 +1,9 @@
 etc/alternc
 etc/alternc/templates
-etc/apache
-etc/apache-ssl
 etc/bind
 etc/bind/templates
 etc/courier
 etc/cron.d
-etc/php4
-etc/php4/apache
-etc/php4/cgi
 etc/phpmyadmin
 etc/postfix
 etc/squirrelmail
