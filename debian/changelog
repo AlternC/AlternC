@@ -1,3 +1,13 @@
+alternc (0.9.6.2) stable; urgency=high
+
+  * repackage 0.9.6.1 properly: include all latest fixes, which didn't make it
+    to the package
+  * don't put postfix in pre-depends
+  * urgency=high because 0.9.6.1 doesn't include all the security fixes it
+    pretends
+
+ -- Antoine Beaupré <anarcat@koumbit.org>  Wed, 17 Jan 2007 15:58:39 -0500
+
 alternc (0.9.6.1) stable; urgency=high
 
   * Emergency release to fix issues with release 0.9.6.
