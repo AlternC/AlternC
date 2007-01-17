@@ -38,6 +38,9 @@ update_var() {
 case "$1" in
   configure)
 
+    # ajoute l'user postfix au groupe sasl
+    adduser --quiet postfix sasl
+
     # build local.sh if it does not exist
     if [ ! -f $CONFIGFILE ]; then
         cat > $CONFIGFILE <<EOF

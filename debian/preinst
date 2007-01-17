@@ -6,8 +6,6 @@ set -e
 
 case "$1" in
   install)
-    # ajoute l'user postfix au groupe sasl
-    adduser --quiet postfix sasl
     ;;
 
   upgrade)
