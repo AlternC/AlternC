@@ -823,7 +823,7 @@ No match for "dronefdasfsa.ws".
       
     //si gestion mx uniquement, vérification du dns externe
     if ($dns=="0" && $gesmx=="1") {
-      $vmx = checkmx($dom,$mx);
+      $vmx = $this->checkmx($dom,$mx);
       if ($vmx == 1) {
         //aucun champ mx de spécifié sur le dns
       }
