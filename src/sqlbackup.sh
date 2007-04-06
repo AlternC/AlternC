@@ -50,6 +50,10 @@ function dobck {
             ext=""
         fi
         i="$count"
+       if [ ! -d "$target_dir" ] ; then
+               echo "$target_dir is not a directory, skipping" >&2
+               continue
+       fi
         while [ "$i" -gt 1 ]; do
           next_i=$(($i - 1))
           mv -f "${target_dir}/${db}.sql.${next_i}${ext}" \
