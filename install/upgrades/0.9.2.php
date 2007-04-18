@@ -1,4 +1,4 @@
-#!/usr/bin/php4 -q
+#!/usr/bin/php -q
 <?php
 
 // Set the available memory to a large enough variable to be able to handle quite busy servers :) 

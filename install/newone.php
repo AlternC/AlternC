@@ -1,4 +1,4 @@
-#!/usr/bin/php4 -q
+#!/usr/bin/php -q
 <?php
 /*
  $Id: newone.php,v 1.6 2006/02/17 15:15:54 olivier Exp $

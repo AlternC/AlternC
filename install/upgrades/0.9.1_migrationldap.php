@@ -1,4 +1,4 @@
-#!/usr/bin/php4 -q
+#!/usr/bin/php -q
 <?php
 
 // Script de migration des données LDAP vers les bases MYSQL de mx/imap

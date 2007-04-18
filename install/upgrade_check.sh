@@ -49,7 +49,7 @@ do
 			< $file || true
 			;;
 		  php)
-		  	php4 -q $file || true
+		  	php -q $file || true
 			;;
 		  sh)
 		  	sh $file || true
