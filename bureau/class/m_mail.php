@@ -106,13 +106,13 @@ class m_mail {
     global $err,$cuid,$db;
     $err->log("mail","enum_doms_mails",$dom);
     if($letter == "@")
-	$letter = "";
+			$letter = "";
     else
-	$letter = "%$letter";
+			$letter .= "%";
     $db->query("SELECT mail,pop,alias FROM mail_domain WHERE mail LIKE '".addslashes($letter)."@".addslashes($dom)."' AND uid='$cuid' AND type=0;");
     $res=array(); $i=0;
     while ($db->next_record()) {
-      if ($db->f("pop")) { 
+      if ($db->f("pop")) {
 	$size=0;
         $r=mysql_query("SELECT size FROM size_mail WHERE alias='".str_replace("@","_",$db->f("mail"))."';");
         list($size)=@mysql_fetch_array($r);
@@ -120,11 +120,11 @@ class m_mail {
       } else $size=0;
       if ($db->f("pop")) {
 	$login=str_replace("@","_",$db->f("mail"));
-	$account=str_replace($login,"",$db->f("alias")); 
+	$account=str_replace($login,"",$db->f("alias"));
       } else {
 	$account=$db->f("alias");
       }
-      $res[]=array("mail" => $db->f("mail"), "pop" => $db->f("pop"), 
+      $res[]=array("mail" => $db->f("mail"), "pop" => $db->f("pop"),
 		   "alias"=>$account,"size"=>$size);
       $i++;
     }
@@ -172,14 +172,14 @@ class m_mail {
     global $err,$db,$cuid;
     $err->log("mail","get_mail_details",$mail);
     $db->query("SELECT mail,pop,alias FROM mail_domain WHERE mail='$mail' AND uid='$cuid';");
-    if (!$db->next_record()) { 
+    if (!$db->next_record()) {
       $err->raise("mail",3,$mail);
       return false;
     }
-    $pop=$db->f("pop"); 
+    $pop=$db->f("pop");
     if ($pop) {
       $login=str_replace("@","_",$db->f("mail"));
-      $account=str_replace($login,"",$db->f("alias")); 
+      $account=str_replace($login,"",$db->f("alias"));
     } else {
       $account=$db->f("alias");
     }
@@ -391,12 +391,12 @@ class m_mail {
     if (!$db->next_record()) {
       $err->raise("mail",6,$dom);
       return false;
-    }    
+    }
     $db->query("SELECT mail FROM mail_domain WHERE mail='".$mail."@".$dom."' AND uid='$cuid';");
     if ($db->next_record()) {
       $err->raise("mail",7,$mail."@".$dom);
       return false;
-    }    
+    }
 
     /* QuotaCheck */
     if (!$quota->cancreate("mail")) {
@@ -427,12 +427,12 @@ class m_mail {
     if (!$db->next_record()) {
       $err->raise("mail",3,$dom);
       return false;
-    }    
+    }
     /* Ok, le mail existe, on le detruit donc... */
     $t=explode("@",$mail);
     $mdom=$t[0]; $dom=$t[1];
     $pop=$db->f("pop");
-    
+
     $db->query("DELETE FROM mail_domain WHERE mail='$mail' AND uid='$cuid';");
 
     if ($pop=="1") {
@@ -451,7 +451,7 @@ class m_mail {
   function check_slave_account($login,$pass) {
 	global $db,$err;
 	$db->query("SELECT * FROM mxaccount WHERE login='$login' AND pass='$pass';");
-	if ($db->next_record()) { 
+	if ($db->next_record()) {
 		return true;
 	}
 	return false;
@@ -459,7 +459,7 @@ class m_mail {
 
   /* ----------------------------------------------------------------- */
   /**
-   * Out (echo) the complete mx-hosted domain list : 
+   * Out (echo) the complete mx-hosted domain list :
    */
   function echo_domain_list() {
 	global $db,$err;
@@ -596,7 +596,7 @@ class m_mail {
     if (!$db->next_record()) {
       $err->raise("mail",6,$dom);
       return false;
-    }    
+    }
     */
 
     /* Effacement de tous les mails de ce domaine : */
@@ -611,9 +611,9 @@ class m_mail {
       }
     }
     /* Effacement du domaine himself */
-    $db->query("DELETE FROM mail_domain WHERE mail LIKE '%@$dom';");     
-    $db->query("DELETE FROM mail_users WHERE alias LIKE '%@$dom' OR alias LIKE '%\\_$dom';");     
-    $db->query("DELETE FROM mail_alias WHERE mail LIKE '%\\_$dom';");     
+    $db->query("DELETE FROM mail_domain WHERE mail LIKE '%@$dom';");
+    $db->query("DELETE FROM mail_users WHERE alias LIKE '%@$dom' OR alias LIKE '%\\_$dom';");
+    $db->query("DELETE FROM mail_alias WHERE mail LIKE '%\\_$dom';");
     $db->query("DELETE FROM mail_domain WHERE mail='$dom';");
     return true;
   }
@@ -629,7 +629,7 @@ class m_mail {
     global $err,$cuid,$db,$mem;
     $err->log("mail","alternc_add_mx_domain",$dom);
     $db->query("INSERT INTO mail_domain (mail,alias) VALUES ('$dom','$dom');");
-    // Create the postmaster email for this new domain : 
+    // Create the postmaster email for this new domain :
     $this->add_mail($dom,"postmaster",0,"",$mem->user["mail"]);
     return true;
   }
@@ -656,7 +656,7 @@ class m_mail {
   /**
    * Exports all the mail related information for an account.
    * @access private
-   * EXPERIMENTAL 'sid' function ;) 
+   * EXPERIMENTAL 'sid' function ;)
    */
   function alternc_export($tmpdir) {
     global $db,$err;
@@ -691,14 +691,14 @@ class m_mail {
 	  }
 	  $str.="    </address>\n";
 	}
-      }     
+      }
       $str.="  </domain>\n";
     }
     $str.="</mail>\n";
     fclose($f);
     if ($onepop) {
-      // Now do the tarball of all pop accounts : 
-      exec("/bin/tar -czf ".escapeshellarg($tmpdir."/mail.tar.gz")." -T ".escapeshellarg($tmpfile)); 
+      // Now do the tarball of all pop accounts :
+      exec("/bin/tar -czf ".escapeshellarg($tmpdir."/mail.tar.gz")." -T ".escapeshellarg($tmpfile));
     }
     @unlink($tmpfile);
     return $str;
@@ -707,11 +707,11 @@ class m_mail {
 
   /* ----------------------------------------------------------------- */
   /**
-   * Returns the declaration of all xml rpc exportable functions 
+   * Returns the declaration of all xml rpc exportable functions
    * related to mail service. Each method is returned as an array
    * containing the function name, function, signature and docstring.
    * @access private
-   * EXPERIMENTAL 'sid' function ;) 
+   * EXPERIMENTAL 'sid' function ;)
    */
   function alternc_xmlrpc_server() {
   }
