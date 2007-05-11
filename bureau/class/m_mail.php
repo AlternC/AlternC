@@ -99,6 +99,7 @@ class m_mail {
    * $a["size"]=taille en octets de la boite s'il s'agit d'un compte pop.
    * @param string $dom Domaine dont on veut les mails
    * @param integer $sort Champs de tri (0 pour non trié (default), 1 pour email, 2 pour type)
+   * @param string $letter Première lettre des mails à retourner, ou "" pour les retourner tous
    * @return array Tableau de mails comme indiqué ci-dessus ou FALSE si une erreur
    *  s'est produite
    */
@@ -108,7 +109,7 @@ class m_mail {
     if($letter == "@")
 	$letter = "";
     else
-	$letter = "%$letter";
+	$letter .= "%";
     $db->query("SELECT mail,pop,alias FROM mail_domain WHERE mail LIKE '".addslashes($letter)."@".addslashes($dom)."' AND uid='$cuid' AND type=0;");
     $res=array(); $i=0;
     while ($db->next_record()) {

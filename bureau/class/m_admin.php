@@ -765,7 +765,7 @@ class m_admin {
     for($i=0;$i<count($this->tldmode);$i++) {
       echo "<option value=\"$i\"";
       if ($current==$i) echo " selected=\"selected\"";
-      echo ">".$this->tldmode[$i]."</option>\n";
+      echo ">"._($this->tldmode[$i])."</option>\n";
     }
   }
 
