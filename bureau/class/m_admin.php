@@ -72,7 +72,7 @@ class m_admin {
   /* ----------------------------------------------------------------- */
   /**
    * Returns the known information about a hosted account
-   *
+   * 
    * Returns all what we know about an account (contents of the tables
    *  <code>membres</code> et <code>local</code>)
    * Ckecks if the account is super-admin
@@ -81,12 +81,12 @@ class m_admin {
    * table <code>membres</code> and <code>local</code> of the corresponding account.
    * Returns FALSE if an error occurs.
    *
-   * Retourne tout ce que l'on sait sur un membre (contenu des tables <code>membres et local</code>)
+   * Retourne tout ce que l'on sait sur un membre (contenu des tables <code>membres et local</code>) 
    * vérifie que le compte appelant est super-admin
    * @param integer $uid Numéro de l'utilisateur dont on veut les informations.
    * @return array Retourne un tableau associatif contenant l'ensemble des champs des tables 'membres'
    *  et 'local' pour le membre demandé. Retourne FALSE si une erreur s'est produite.
-   *
+   * 
    */
   function get($uid) {
     global $err,$db;
@@ -115,7 +115,7 @@ class m_admin {
   }
 
   /* ----------------------------------------------------------------- */
-  /**
+  /** 
    * @return TRUE if there's only ONE admin account
    * Retourne true s'il n'existe qu'un seul compte administrateur
    */
@@ -130,7 +130,7 @@ class m_admin {
   /**
    * Returns the list of the hosted accounts
    * Retourne la liste des membres hébergés
-   *
+   * 
    * Returns all what we know about ALL the accounts (contents of the tables
    *  <code>membres</code> et <code>local</code>)
    * Check for super-admin accounts
@@ -141,10 +141,10 @@ class m_admin {
    *
    * Retourne tout ce que l'on sait sur LES membres (contenu de membres et local)
    * vérifie que le compte appelant est super-admin
-   * @return array Retourne un tableau indexé de tableaux associatifs contenant l'ensemble des
-   *  champs des tables 'membres' et 'local' pour les membre. Retourne FALSE si une erreur s'est
+   * @return array Retourne un tableau indexé de tableaux associatifs contenant l'ensemble des 
+   *  champs des tables 'membres' et 'local' pour les membre. Retourne FALSE si une erreur s'est 
    *  produite.
-   *
+   * 
    */
   function get_list($all=0) {
     // PATCHBEN pour ne voir que les comptes que l'on a créé (sauf admin)
@@ -195,7 +195,7 @@ class m_admin {
   /* ----------------------------------------------------------------- */
   /**
    * Creates a new hosted account
-   *
+   *  
    * Creates a new hosted account (in the tables <code>membres</code>
    * and <code>local</code>). Prevents any manipulation of the account if
    * the account $mid is not super-admin.
@@ -211,9 +211,9 @@ class m_admin {
    *
    *
    * Crée un nouveau membre hébergé
-   * Création d'un nouveau membre (dans membres et local) Refuse l'utilisation de l'objet
+   * Création d'un nouveau membre (dans membres et local) Refuse l'utilisation de l'objet 
    * si le compte $mid n'est pas super-admin
-   *
+   * 
    * @param $login Nom d'utilisateur, de la forme [a-z][a-z0-9]*
    * @param $pass Mot de passe, maxi 64 caractères
    * @param $nom Nom de la personne ou structure
@@ -249,7 +249,7 @@ class m_admin {
       $err->raise("admin",13);
       return false;
     }
-    // Il ne peut pas être égal au login ou au nom de base systeme !
+    // Il ne peut pas être égal au login ou au nom de base systeme ! 
     if ($login==$L_MYSQL_DATABASE || $login==$L_MYSQL_LOGIN || $login=="mysql" || $login=="root") {
       $err->raise("admin",10);
       return false;
@@ -291,7 +291,7 @@ class m_admin {
   /* ----------------------------------------------------------------- */
   /**
    * Modifies an account
-   *
+   *  
    * Modifies an account (in the tables <code>membres</code>
    * and <code>local</code>). Prevents any manipulation of the account if
    * the account $mid is not super-admin.
@@ -320,7 +320,7 @@ class m_admin {
    * @param $type string Nouveau type de compte
    * @param $duration integer Durée du compte en mois
    * @return boolean Retourne FALSE si une erreur s'est produite, TRUE sinon.
-   *
+   * 
    */
   function update_mem($uid, $mail, $nom, $prenom, $pass, $enabled, $canpass, $type='default', $duration=0) {
     global $err,$db;
@@ -333,7 +333,7 @@ class m_admin {
     }
     $db=new DB_System();
     if ($pass) {
-      // on modifie aussi le password :
+      // on modifie aussi le password : 
       $pass=_md5cr($pass);
       $ssq=" ,pass='$pass' ";
     } else {
@@ -419,7 +419,7 @@ class m_admin {
    *
    *
    * Efface un membre hébergé
-   *
+   * 
    * Supprime le membre spécifié. Refuse l'utilisation de l'objet si le compte $mid n'est pas super-admin
    * @param $uid Numéro du membre à supprimer.
    * @return Retourne FALSE si une erreur s'est produite, TRUE sinon.
@@ -435,14 +435,14 @@ class m_admin {
     }
     $db=new DB_System();
     $tt=$this->get($uid);
-
-    // On devient l'utilisateur :
+    
+    // On devient l'utilisateur : 
     $mem->su($uid);
 
     // WE MUST call m_dom before all others because of conflicts ...
     $dom->alternc_del_member();
 
-      // Send the event to the other classes :
+      // Send the event to the other classes : 
       foreach($classes as $c) {
 	if (method_exists($GLOBALS[$c],"alternc_del_member")) {
 	  $GLOBALS[$c]->alternc_del_member();
@@ -587,7 +587,7 @@ class m_admin {
     }
   }
 
-
+ 
 
   /* ----------------------------------------------------------------- */
   /**
@@ -610,7 +610,7 @@ class m_admin {
     if (!$db->next_record()) {
       $err->raise("admin",2);
       return false;
-    }
+    } 
     if ($db->Record["su"]!=0) {
       $err->raise("admin",8);
       return false;
@@ -631,7 +631,7 @@ class m_admin {
    * Transforme un membre Administrateur en membre Normal
    * @param integer $uid Numéro du compte à transformer
    * @return boolean Retourne FALSE si une erreur s'est produite.
-   *
+   * 
    */
   function su2normal($uid) {
     global $err,$db;
@@ -658,25 +658,25 @@ class m_admin {
    * containing the list of the TLDs authorized to be installed on the
    * server with the instructions to validate the installation of a
    * domain for each TLD (if necessary).
-   *
+   * 
    * @return array An associative array like $r["tld"], $r["mode"] where tld
    * is the tld and mode is the authorized mode.
+   * 
    *
-   *
-   * Liste des TLD autorisés
-   *
-   * Retourne la liste des tld autorisés, ainsi que la façon dont ils sont autorisés.
-   * Les tld sont le dernier membre (ou parfois les 2 derniers membres) d'un domaine.
-   * Par exemple "org" "com" etc. AlternC conserve une table "tld" qui contient la liste
-   * des TLD autorisés à être installé sur le serveur, accompagné des vérifications à effectuer
-   * pour chaque TLD. Par exemple, on peux vérifier que les DNS du domaine pointent bien vers
+   * Liste des TLD autorisés 
+   * 
+   * Retourne la liste des tld autorisés, ainsi que la façon dont ils sont autorisés. 
+   * Les tld sont le dernier membre (ou parfois les 2 derniers membres) d'un domaine. 
+   * Par exemple "org" "com" etc. AlternC conserve une table "tld" qui contient la liste 
+   * des TLD autorisés à être installé sur le serveur, accompagné des vérifications à effectuer 
+   * pour chaque TLD. Par exemple, on peux vérifier que les DNS du domaine pointent bien vers 
    * notre serveur, ou juste que le domaine existe etc.
    * <p><b>Note</b> : Il faudrait pouvoir effectuer une requete DNS, et pouvoir juste vérifier les DNS
    * via DIG et pas seulement via Whois</p>
-   *
-   * @return array Retourne un tableau de tableau associatif du type $r["tld"], $r["mode"].
+   * 
+   * @return array Retourne un tableau de tableau associatif du type $r["tld"], $r["mode"]. 
    *  TLD est le tld et MODE est le mode autorisé
-   *
+   * 
    */
   function listtld() {
     global $db;
@@ -690,7 +690,7 @@ class m_admin {
   /* ----------------------------------------------------------------- */
   /**
    * List the hosted domains on this server
-   *
+   * 
    * Return the list of hosted domains on this server, (an array of associative arrays)
    * @return array $r[$i] / [domaine][member][noerase][gesdns][gesmx]
    */
@@ -705,7 +705,7 @@ class m_admin {
 
   /* ----------------------------------------------------------------- */
   /**
-   * Lock / Unlock a domain
+   * Lock / Unlock a domain 
    *
    * Lock (or unlock) a domain, so that the member will be (not be) able to delete it
    * from its account
@@ -726,7 +726,7 @@ class m_admin {
 
   /* ----------------------------------------------------------------- */
   /**
-   * Add a new TLD to the list of the authorized TLDs
+   * Add a new TLD to the list of the authorized TLDs 
    *
    * @param $tld string top-level domain to add (org, com...)
    * @param $mode integer number of the authorized mode (0 to 5)
@@ -734,12 +734,12 @@ class m_admin {
    *
    *
    * Ajoute un nouveau TLD autorisé à la liste des tld autorisés.
-   *
+   * 
    * @param $tld Top-Level Domain à ajouter (org, com ...)
    * @param $mode Numéro du mode autorisé (0->5)
    * @return boolean True si le tld a bien été ajouté, False sinon.
-   *
-   */
+   * 
+   */ 
   function gettld($tld) {
     global $db,$err;
     $db->query("SELECT mode FROM tld WHERE tld='$tld';");
@@ -755,17 +755,17 @@ class m_admin {
    * Prints the list of the actually authorized TLDs
    *
    * @param $current integer Value to select in the list
-   *
-   * Affiche (echo) la liste déroulante des TLD actuellement autorisés.
-   *
+   * 
+   * Affiche (echo) la liste déroulante des TLD actuellement autorisés. 
+   * 
    * @param $current Valeur par défaut à sélectionner dans la liste
-   *
+   * 
    */
   function selecttldmode($current=false) {
     for($i=0;$i<count($this->tldmode);$i++) {
       echo "<option value=\"$i\"";
       if ($current==$i) echo " selected=\"selected\"";
-      echo ">"._($this->tldmode[$i])."</option>\n";
+      echo ">".$this->tldmode[$i]."</option>\n";
     }
   }
 
@@ -781,12 +781,12 @@ class m_admin {
    *
    *
    * Supprime le tld indiqué de la liste des TLD autorisés à l'installation
-   *
+   * 
    * <b>Note</b> : Cela ne supprime pas les domaines utilisant ce TLD !
-   *
+   * 
    * @param $tld TLD que l'on souhaite détruire
    * @return boolean retourne true si le TLD a bien été effacé, false sinon
-   *
+   * 
    */
   function deltld($tld) {
     global $db,$err;
@@ -815,13 +815,13 @@ class m_admin {
    *
    *
    * Ajoute un TLD à la liste des TLD autorisés à l'installation
-   *
-   * @param $tld TLD que l'on souhaite autoriser.
-   * @param $mode Contrôles à effectuer sur ce TLD. <b>Note : </b>
+   * 
+   * @param $tld TLD que l'on souhaite autoriser. 
+   * @param $mode Contrôles à effectuer sur ce TLD. <b>Note : </b> 
    *  Si vous demandez le controle dans le Whois, assurez-vous que m_domains
    *  connaisse bien comment appeler le whois du domaine correspondant !
    * @return boolean retourne true si le TLD a bien été ajouté, false sinon
-   *
+   * 
    */
   function addtld($tld,$mode) {
     global $db,$err;
@@ -843,7 +843,7 @@ class m_admin {
 
   /* ----------------------------------------------------------------- */
   /**
-   * Modify a TLD of the list of the authorized TLDs
+   * Modify a TLD of the list of the authorized TLDs 
    *
    * @param $tld string TLD we want to modify
    * @param $mode integer Controls to make on this TLD.
@@ -852,11 +852,11 @@ class m_admin {
    *
    *
    * Modifie un TLD autorisé de la liste des tld autorisés.
-   *
+   * 
    * @param $tld Top-Level Domain à modifier (org, com ...)
    * @param $mode Numéro du mode autorisé (0->5)
    * @return boolean True si le tld a bien été modifié, False sinon.
-   *
+   * 
    */
   function edittld($tld,$mode) {
     global $db,$err;
