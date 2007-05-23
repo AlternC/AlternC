@@ -54,6 +54,7 @@ include("head.php");
 <tr class="lst1"><td><a href="adm_mxaccount.php"><?php __("Manage allowed accounts for secondary mx"); ?></a></td></tr>
 <tr class="lst2"><td><a href="adm_variables.php"><?php __("Configure AlternC variables"); ?></a></td></tr>
 <tr class="lst1"><td><a href="quota_show_all.php"><?php __("Show all quotas"); ?></a></td></tr>
+<tr class="lst1"><td><a href="stats_members.php"><?php __("Account creation statistics"); ?></a></td></tr>
 <?php
 
 // here we include any "adminmenu_*" file content

@@ -201,6 +201,7 @@ bureau/admin/sta2_doadd_raw.php -text
 bureau/admin/sta2_doedit_raw.php -text
 bureau/admin/sta2_edit_raw.php -text
 bureau/admin/sta2_list.php -text
+bureau/admin/stats_members.php -text
 bureau/admin/styles/style.css -text
 bureau/admin/template.php -text
 bureau/admin/web_list.php -text
