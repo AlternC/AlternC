@@ -31,7 +31,7 @@ msgstr ""
 #: ../admin/adm_tldadd.php:33 ../admin/adm_tlddoadd.php:33
 #: ../admin/adm_tlddoedit.php:33 ../admin/adm_tldedit.php:33
 #: ../admin/adm_tld.php:33 ../admin/adm_variables.php:33
-#: ../class/reset_stats_conf.php:6
+#: ../class/reset_stats_conf.php:6 ../admin/adm_deactivate.php:11
 msgid "This page is restricted to authorized staff"
 msgstr "Cette page est réservée aux administrateurs"
 
@@ -46,7 +46,7 @@ msgstr "Ajout d'un membre"
 #: ../admin/hta_adduser.php:48 ../admin/hta_edit.php:59 ../admin/index.php:54
 #: ../admin/sql_getparam.php:49 ../admin/sql_list.php:96
 #: ../admin/sql_passchg.php:51 ../admin/sql_users_add.php:54
-#: ../admin/sql_users_list.php:95
+#: ../admin/sql_users_list.php:95 ../admin/adm_list.php:76
 msgid "Username"
 msgstr "Nom"
 
@@ -66,22 +66,25 @@ msgid "Can he change its password"
 msgstr "Peut-il changer de mot de passe ?"
 
 #: ../admin/adm_add.php:78 ../admin/adm_edit.php:98 ../admin/adm_list.php:78
+#: ../admin/adm_list.php:76
 msgid "Surname"
 msgstr "Nom"
 
 #: ../admin/adm_add.php:78 ../admin/adm_edit.php:98 ../admin/adm_list.php:78
+#: ../admin/adm_list.php:76
 msgid "First Name"
 msgstr "Prénom"
 
 #: ../admin/adm_add.php:82 ../admin/adm_edit.php:102 ../admin/adm_list.php:78
-#: ../admin/mail_add.php:48 ../admin/mail_list.php:88
+#: ../admin/mail_add.php:48 ../admin/mail_list.php:88 ../admin/adm_list.php:76
 msgid "Email address"
 msgstr "Adresse Email"
 
 #: ../admin/adm_add.php:86 ../admin/adm_dodefquotas.php:43
 #: ../admin/adm_dodefquotas.php:45 ../admin/adm_dodefquotas.php:51
 #: ../admin/adm_dodefquotas.php:53 ../admin/adm_edit.php:106
-#: ../admin/adm_list.php:78
+#: ../admin/adm_list.php:78 ../admin/adm_dodefquotas.php:52
+#: ../admin/adm_dodefquotas.php:54 ../admin/adm_list.php:76
 msgid "Account type"
 msgstr "Type de compte"
 
@@ -90,7 +93,7 @@ msgstr "Type de compte"
 msgid "Create the domain <b>username.%s</b>"
 msgstr "Installer le domaine <b>login.%s</b>"
 
-#: ../admin/adm_add.php:106 ../admin/adm_list.php:62
+#: ../admin/adm_add.php:106 ../admin/adm_list.php:62 ../admin/adm_list.php:59
 msgid "Create a new member"
 msgstr "Créer un nouveau membre"
 
@@ -114,20 +117,21 @@ msgstr ""
 "Voici la liste des quotas par défaut sur ce serveur pour les nouveaux "
 "comptes."
 
-#: ../admin/adm_defquotas.php:81
+#: ../admin/adm_defquotas.php:81 ../admin/adm_defquotas.php:84
 msgid "Accounts of type"
 msgstr "Type de compte"
 
 #: ../admin/adm_defquotas.php:83 ../admin/adm_list.php:97
-#: ../admin/quota_show_all.php:36
+#: ../admin/quota_show_all.php:36 ../admin/adm_defquotas.php:86
+#: ../admin/adm_list.php:96
 msgid "Quotas"
 msgstr "Quotas"
 
-#: ../admin/adm_defquotas.php:83
+#: ../admin/adm_defquotas.php:83 ../admin/adm_defquotas.php:86
 msgid "Default Value"
 msgstr "Valeur par défaut"
 
-#: ../admin/adm_defquotas.php:100
+#: ../admin/adm_defquotas.php:100 ../admin/adm_defquotas.php:109
 msgid "Edit the default quotas"
 msgstr "Modifier les quotas par défaut"
 
@@ -150,19 +154,19 @@ msgstr "ajouté"
 msgid "could not be added"
 msgstr "n'a pas pu être ajouté"
 
-#: ../admin/adm_dodefquotas.php:51
+#: ../admin/adm_dodefquotas.php:51 ../admin/adm_dodefquotas.php:52
 msgid "deleted"
 msgstr "effacé"
 
-#: ../admin/adm_dodefquotas.php:53
+#: ../admin/adm_dodefquotas.php:53 ../admin/adm_dodefquotas.php:54
 msgid "could not be deleted"
 msgstr "n'a pas pu être effacé"
 
-#: ../admin/adm_dodefquotas.php:69
+#: ../admin/adm_dodefquotas.php:69 ../admin/adm_dodefquotas.php:92
 msgid "Default quotas successfully changed"
 msgstr "Les quotas par défaut ont été modifiés avec succès"
 
-#: ../admin/adm_dodefquotas.php:71
+#: ../admin/adm_dodefquotas.php:71 ../admin/adm_dodefquotas.php:94
 msgid "Default quotas could not be set."
 msgstr "Les quotas par défaut n'ont pas pu être modifiés"
 
@@ -175,14 +179,6 @@ msgstr "Le membre '%s' n'existe pas"
 #, php-format
 msgid "Member %s successfully deleted"
 msgstr "Le membre '%s' a été effacé avec succès"
-
-#: ../admin/adm_dodel.php:61
-msgid "Deleting users"
-msgstr "Supprimer un utilisateur"
-
-#: ../admin/adm_dodel.php:65
-msgid "WARNING : Confirm the deletion of the users"
-msgstr "ATTENTION : Confirmez-vous la suppression de cette utilisateur"
 
 #: ../admin/adm_doedit.php:53
 msgid "The member has been successfully edited"
@@ -206,27 +202,27 @@ msgstr ""
 
 #: ../admin/adm_doms.php:56 ../admin/adm_mxaccount.php:71
 #: ../admin/adm_slaveaccount.php:71 ../admin/adm_slaveip.php:73
-#: ../admin/adm_tld.php:67 ../admin/mail_list.php:88
+#: ../admin/adm_tld.php:67 ../admin/mail_list.php:88 ../admin/adm_doms.php:58
 msgid "Action"
 msgstr "Action"
 
-#: ../admin/adm_doms.php:56
+#: ../admin/adm_doms.php:56 ../admin/adm_doms.php:58
 msgid "Domain"
 msgstr "Domaine"
 
-#: ../admin/adm_doms.php:56
+#: ../admin/adm_doms.php:56 ../admin/adm_doms.php:58
 msgid "Member"
 msgstr "Membre"
 
-#: ../admin/adm_doms.php:65
+#: ../admin/adm_doms.php:65 ../admin/adm_doms.php:67
 msgid "Unlock"
 msgstr "Déverrouiller"
 
-#: ../admin/adm_doms.php:65
+#: ../admin/adm_doms.php:65 ../admin/adm_doms.php:67
 msgid "Lock"
 msgstr "Verrouiller"
 
-#: ../admin/adm_doms.php:69
+#: ../admin/adm_doms.php:69 ../admin/adm_doms.php:71
 msgid "Locked Domain"
 msgstr "Domaine verrouillé"
 
@@ -245,14 +241,16 @@ msgstr "Compte Actif ? "
 #: ../admin/adm_edit.php:70 ../admin/dom_dodel.php:55
 #: ../admin/dom_edit.php:144 ../admin/dom_edit.php:156
 #: ../admin/dom_subdel.php:61 ../admin/sql_bck.php:77 ../admin/sql_del.php:69
-#: ../admin/sql_users_del.php:69
+#: ../admin/sql_users_del.php:69 ../admin/adm_dodefquotas.php:73
+#: ../admin/adm_dodel.php:76 ../admin/bro_main.php:81
 msgid "No"
 msgstr "Non"
 
 #: ../admin/adm_edit.php:73 ../admin/dom_dodel.php:55
 #: ../admin/dom_edit.php:143 ../admin/dom_edit.php:156
 #: ../admin/dom_subdel.php:60 ../admin/sql_bck.php:78 ../admin/sql_del.php:69
-#: ../admin/sql_users_del.php:69
+#: ../admin/sql_users_del.php:69 ../admin/adm_dodefquotas.php:72
+#: ../admin/adm_dodel.php:75 ../admin/bro_main.php:60 ../admin/bro_main.php:80
 msgid "Yes"
 msgstr "Oui"
 
@@ -327,37 +325,38 @@ msgstr "Liste des membres"
 msgid "Here is the list of hosted members"
 msgstr "Voici la liste des membres hébergés"
 
-#: ../admin/adm_list.php:56
+#: ../admin/adm_list.php:56 ../admin/adm_list.php:55
 msgid "List all the accounts"
 msgstr "Lister tous les comptes"
 
-#: ../admin/adm_list.php:58
+#: ../admin/adm_list.php:58 ../admin/adm_list.php:57
 msgid "List only my accounts"
 msgstr "Lister seulement mes comptes"
 
-#: ../admin/adm_list.php:66
+#: ../admin/adm_list.php:66 ../admin/adm_list.php:64
 msgid "No account defined for now"
 msgstr "Aucun compte n'existe pour l'instant"
 
-#: ../admin/adm_list.php:78
+#: ../admin/adm_list.php:78 ../admin/adm_list.php:76
 msgid "Last login"
 msgstr "Dernière connexion"
 
-#: ../admin/adm_list.php:78
+#: ../admin/adm_list.php:78 ../admin/adm_list.php:76
 msgid "Last fail"
 msgstr "Dernier échec"
 
-#: ../admin/adm_list.php:78
+#: ../admin/adm_list.php:78 ../admin/adm_list.php:76
 msgid "Last ip"
 msgstr "Dernière IP"
 
-#: ../admin/adm_list.php:78 ../admin/main.php:55
+#: ../admin/adm_list.php:78 ../admin/main.php:55 ../admin/adm_list.php:76
 msgid "Expiry"
 msgstr "Expiration"
 
 #: ../admin/adm_list.php:96 ../admin/adm_tld.php:75 ../admin/dom_edit.php:77
 #: ../admin/ftp_list.php:70 ../admin/hta_edit.php:68 ../admin/hta_list.php:76
 #: ../admin/mail_list.php:97 ../admin/sta2_list.php:67
+#: ../admin/adm_list.php:95
 msgid "Edit"
 msgstr "Modifier"
 
@@ -417,10 +416,9 @@ msgid ""
 "hosted domain list. "
 msgstr ""
 "Voici la liste des comptes ayant le droit de synchroniser la liste des "
-"domaines dont on héberge le mail. Vous pouvez utiliser le paquet "
-"alternc-secondarymx sur votre "
-"serveur mx secondaire en lui donnant le login/pass pour lui donner accès à ce "
-"serveur."
+"domaines dont on héberge le mail. Vous pouvez utiliser le paquet alternc-"
+"secondarymx sur votre serveur mx secondaire en lui donnant le login/pass "
+"pour lui donner accès à ce serveur."
 
 #: ../admin/adm_mxaccount.php:71 ../admin/adm_mxaccount.php:91
 #: ../admin/adm_slaveaccount.php:71 ../admin/adm_slaveaccount.php:91
@@ -430,6 +428,7 @@ msgstr "Nom d'utilisateur"
 #: ../admin/adm_mxaccount.php:79 ../admin/adm_slaveaccount.php:79
 #: ../admin/adm_slaveip.php:81 ../admin/bro_main.php:138
 #: ../admin/dom_edit.php:80 ../admin/mail_list.php:88
+#: ../admin/bro_main.php:176
 msgid "Delete"
 msgstr "Effacer"
 
@@ -438,8 +437,8 @@ msgid ""
 "If you want to allow a new server to access your mx-hosted domain list, give "
 "him an account."
 msgstr ""
-"Si vous voulez autoriser un compte à synchroniser la liste des domaines dont on "
-"héberge le mail, créez-lui un compte."
+"Si vous voulez autoriser un compte à synchroniser la liste des domaines dont "
+"on héberge le mail, créez-lui un compte."
 
 #: ../admin/adm_mxaccount.php:97 ../admin/adm_slaveaccount.php:97
 msgid "Add this account to the allowed list"
@@ -483,6 +482,7 @@ msgid "Quota"
 msgstr "Quotas"
 
 #: ../admin/adm_quotaedit.php:61 ../admin/quota_show.php:42
+#: ../admin/quota_show_all.php:91
 msgid "Total"
 msgstr "Total"
 
@@ -677,15 +677,16 @@ msgid "Quit"
 msgstr "Fermer"
 
 #: ../admin/bro_main.php:89 ../admin/hta_edit.php:50 ../admin/hta_edit.php:82
-#: ../admin/menu_brouteur.php:34
+#: ../admin/menu_brouteur.php:34 ../admin/bro_main.php:127
 msgid "File browser"
 msgstr "Gestionnaire de fichiers"
 
-#: ../admin/bro_main.php:95
+#: ../admin/bro_main.php:95 ../admin/bro_main.php:133
 msgid "Create"
 msgstr "Créer"
 
 #: ../admin/bro_main.php:97 ../class/m_bro.php:222 ../class/m_bro.php:231
+#: ../admin/bro_main.php:135 ../class/m_bro.php:230 ../class/m_bro.php:239
 msgid "File"
 msgstr "Fichier"
 
@@ -694,73 +695,78 @@ msgstr "Fichier"
 #: ../admin/hta_adduser.php:47 ../admin/hta_edituser.php:47
 #: ../admin/hta_list.php:66 ../admin/sta2_add_raw.php:53
 #: ../admin/sta2_edit_raw.php:58 ../admin/sta2_list.php:57
+#: ../admin/bro_main.php:136
 msgid "Folder"
 msgstr "Répertoire"
 
 #: ../admin/bro_main.php:114 ../admin/bro_main.php:120
-#: ../admin/bro_main.php:140
+#: ../admin/bro_main.php:140 ../admin/bro_main.php:152
+#: ../admin/bro_main.php:158 ../admin/bro_main.php:178
 msgid "Rename"
 msgstr "Renommer"
 
-#: ../admin/bro_main.php:135
+#: ../admin/bro_main.php:135 ../admin/bro_main.php:173
 msgid "all/none"
 msgstr "tous/aucun"
 
-#: ../admin/bro_main.php:142
+#: ../admin/bro_main.php:142 ../admin/bro_main.php:180
 msgid "Move"
 msgstr "Déplacer"
 
 #: ../admin/bro_main.php:177 ../admin/bro_main.php:348
 #: ../admin/sta2_list.php:57 ../admin/sta2_list.php:71
+#: ../admin/bro_main.php:215 ../admin/bro_main.php:386
 msgid "View"
 msgstr "Voir"
 
 #: ../admin/bro_main.php:220 ../admin/bro_main.php:250
 #: ../admin/bro_main.php:287 ../admin/bro_main.php:317
+#: ../admin/bro_main.php:258 ../admin/bro_main.php:288
+#: ../admin/bro_main.php:325 ../admin/bro_main.php:355
 msgid "V"
 msgstr "V"
 
-#: ../admin/bro_main.php:374
+#: ../admin/bro_main.php:374 ../admin/bro_main.php:412
 msgid "No files in this folder"
 msgstr "Aucun fichier dans ce répertoire"
 
-#: ../admin/bro_main.php:386
+#: ../admin/bro_main.php:386 ../admin/bro_main.php:424
 msgid "Import this file"
 msgstr "Importer ce fichier"
 
-#: ../admin/bro_main.php:388
+#: ../admin/bro_main.php:388 ../admin/bro_main.php:426
 msgid "Send"
 msgstr "Envoyer"
 
-#: ../admin/bro_main.php:397
+#: ../admin/bro_main.php:397 ../admin/bro_main.php:435
 msgid "There is an ftp account in this folder"
 msgstr "Il existe un compte ftp dans ce répertoire"
 
-#: ../admin/bro_main.php:397
+#: ../admin/bro_main.php:397 ../admin/bro_main.php:435
 msgid "Click here to edit this ftp account."
 msgstr "Cliquez ici pour le modifier."
 
-#: ../admin/bro_main.php:400
+#: ../admin/bro_main.php:400 ../admin/bro_main.php:438
 msgid "Click here to create an ftp account in this folder."
 msgstr "Cliquer ici pour créer un compte ftp dans ce répertoire."
 
-#: ../admin/bro_main.php:404
+#: ../admin/bro_main.php:404 ../admin/bro_main.php:442
 msgid "This folder has restricted access"
 msgstr "Le répertoire est protégé"
 
-#: ../admin/bro_main.php:407
+#: ../admin/bro_main.php:407 ../admin/bro_main.php:445
 msgid "Click here to protect this folder with login/password"
 msgstr "Cliquer ici pour protéger ce répertoire par un login / mot de passe"
 
-#: ../admin/bro_main.php:411
+#: ../admin/bro_main.php:411 ../admin/bro_main.php:449
 msgid "Download"
 msgstr "Télécharger"
 
-#: ../admin/bro_main.php:411
+#: ../admin/bro_main.php:411 ../admin/bro_main.php:449
 msgid "this folder and its subfolders as a compressed file"
 msgstr "ce répertoire dans un fichier compressé"
 
-#: ../admin/bro_main.php:412
+#: ../admin/bro_main.php:412 ../admin/bro_main.php:450
 msgid "Configure the file browser"
 msgstr "Configurer le gestionnaire de fichiers"
 
@@ -959,7 +965,7 @@ msgid "IP redirection"
 msgstr "Redirection vers une ip"
 
 #: ../admin/dom_edit.php:122 ../admin/dom_subedit.php:83
-#: ../class/m_dom.php:551
+#: ../class/m_dom.php:551 ../class/m_dom.php:594
 msgid "Webmail access"
 msgstr "Accès au webmail"
 
@@ -975,12 +981,12 @@ msgstr "Gère-t-on le DNS de ce domaine ?"
 #, php-format
 msgid "help_dns_mx %s %s"
 msgstr ""
-"Si l'on ne gère vos DNS : <br /> Vous pouvez choisir de faire gérer vos mails "
-"ailleurs (champ MX).<br /> Mettez <b><code>%s</code></b> dans ce champ pour "
-"gérer vos mails par %s<br /> Sinon mettez l'ip ou le nom du serveur que vous "
-"souhaitez utiliser pour gérer vos mails.\t<small>Attention : Si vous laissez "
-"ce champ vide, vous ne pourrez pas utiliser les mails de votre domaine !</"
-"small>"
+"Si l'on ne gère vos DNS : <br /> Vous pouvez choisir de faire gérer vos "
+"mails ailleurs (champ MX).<br /> Mettez <b><code>%s</code></b> dans ce champ "
+"pour gérer vos mails par %s<br /> Sinon mettez l'ip ou le nom du serveur que "
+"vous souhaitez utiliser pour gérer vos mails.\t<small>Attention : Si vous "
+"laissez ce champ vide, vous ne pourrez pas utiliser les mails de votre "
+"domaine !</small>"
 
 #: ../admin/dom_edit.php:151
 msgid "MX Field"
@@ -1131,7 +1137,7 @@ msgid "Editing user %s in the protected folder %s"
 msgstr "Modification de l'utilisateur %s dans le répertoire protégé %s"
 
 #: ../admin/hta_edituser.php:48 ../admin/quota_show_all.php:50
-#: ../admin/sql_users_list.php:53
+#: ../admin/sql_users_list.php:53 ../admin/quota_show_all.php:55
 msgid "User"
 msgstr "Utilisateur"
 
@@ -1626,7 +1632,7 @@ msgid "Change the SQL backup parameters"
 msgstr "Changer les paramètres de sauvegarde SQL"
 
 #: ../admin/sql_bck.php:101 ../admin/sql_dorestore.php:55
-#: ../admin/sql_restore.php:69
+#: ../admin/sql_restore.php:69 ../admin/sql_restore.php:97
 msgid "You currently have no database defined"
 msgstr "Vous n'avez pas de base de données de définie"
 
@@ -1718,16 +1724,17 @@ msgstr ""
 msgid "Restore a SQL backup for database %s"
 msgstr "Restaurer la sauvegarde SQL de la base %s"
 
-#: ../admin/sql_restore.php:54
+#: ../admin/sql_restore.php:54 ../admin/sql_restore.php:82
 msgid "Please enter the filename containing SQL data to be restored."
 msgstr ""
 "Entrez le nom du fichier contenant des données SQL à restaurer dans la base."
 
-#: ../admin/sql_restore.php:58
+#: ../admin/sql_restore.php:58 ../admin/sql_restore.php:73
+#: ../admin/sql_restore.php:86
 msgid "Restore my database"
 msgstr "Restaurer ma base de données"
 
-#: ../admin/sql_restore.php:64
+#: ../admin/sql_restore.php:64 ../admin/sql_restore.php:92
 msgid "Note: If the filename ends with .gz, it will be uncompressed before."
 msgstr ""
 "Note : Si le nom du fichier se termine par .gz, il sera décompressé avant."
@@ -1838,48 +1845,48 @@ msgid "Delete the checked Raw Statistics (apache)"
 msgstr "Effacer les jeux de stats brutes cochees"
 
 # Variables used in functions.php3
-#: ../class/functions.php:239
+#: ../class/functions.php:239 ../class/functions.php:260
 msgid "Bytes"
 msgstr "Octets"
 
 # Variables used in functions.php3
-#: ../class/functions.php:241
+#: ../class/functions.php:241 ../class/functions.php:262
 msgid "Byte"
 msgstr "Octets"
 
-#: ../class/functions.php:246
+#: ../class/functions.php:246 ../class/functions.php:267
 msgid "Kb"
 msgstr "Ko"
 
-#: ../class/functions.php:250
+#: ../class/functions.php:250 ../class/functions.php:271
 msgid "Mb"
 msgstr "Mo"
 
-#: ../class/functions.php:254
+#: ../class/functions.php:254 ../class/functions.php:275
 msgid "Gb"
 msgstr "Go"
 
-#: ../class/functions.php:256
+#: ../class/functions.php:256 ../class/functions.php:277
 msgid "Tb"
 msgstr "To"
 
-#: ../class/functions.php:343
+#: ../class/functions.php:343 ../class/functions.php:364
 msgid "years"
 msgstr "ans"
 
-#: ../class/functions.php:343
+#: ../class/functions.php:343 ../class/functions.php:364
 msgid "year"
 msgstr "an"
 
-#: ../class/functions.php:345
+#: ../class/functions.php:345 ../class/functions.php:366
 msgid "months"
 msgstr "mois"
 
-#: ../class/functions.php:345
+#: ../class/functions.php:345 ../class/functions.php:366
 msgid "month"
 msgstr "mois"
 
-#: ../class/functions.php:368
+#: ../class/functions.php:368 ../class/functions.php:389
 msgid "Not managed"
 msgstr "Non géré"
 
@@ -2052,6 +2059,127 @@ msgstr "Fichier Real Media"
 #: ../class/m_mem.php:474
 msgid "Help"
 msgstr "Aide"
+
+#: ../admin/adm_deactivate.php:7
+msgid "Missing uid"
+msgstr ""
+
+#: ../admin/adm_deactivate.php:16
+#, fuzzy
+msgid "User does not exist"
+msgstr "Le membre '%s' n'existe pas"
+
+#: ../admin/adm_deactivate.php:20 ../admin/adm_deactivate.php:28
+#, fuzzy
+msgid "Confirm"
+msgstr "Confirmer le mot de passe"
+
+#: ../admin/adm_deactivate.php:21
+msgid "WARNING: experimental feature, use at your own risk"
+msgstr ""
+
+#: ../admin/adm_deactivate.php:22
+msgid ""
+"The following domains will be deactivated and redirected to the URL entered "
+"in the following box. A backup of the domain configuration will be displayed "
+"as a serie of SQL request that you can run to restore the current "
+"configuration if you want. Click confirm if you are sure you want to "
+"deactivate all this user's domains."
+msgstr ""
+
+#: ../admin/adm_deactivate.php:27
+#, fuzzy
+msgid "Redirection URL:"
+msgstr "Redirection vers une url"
+
+#: ../admin/adm_deactivate.php:31
+msgid "Domains of user: "
+msgstr ""
+
+#: ../admin/adm_deactivate.php:34
+msgid "Missing redirect url."
+msgstr ""
+
+#: ../admin/adm_deactivate.php:53
+#, php-format
+msgid "-- Redirecting all domains and subdomains of the user %s to %s\n"
+msgstr ""
+
+#: ../admin/adm_dodefquotas.php:63
+#, fuzzy, php-format
+msgid "Deleting quota %s"
+msgstr "Suppression du sous-domaine %s"
+
+#: ../admin/adm_dodefquotas.php:69
+#, fuzzy
+msgid "WARNING : Confirm the deletion of the quota"
+msgstr "ATTENTION : Etes-vous sur de vouloir supprimer le sous-domaine suivant"
+
+#: ../admin/adm_dodel.php:61
+#, php-format
+msgid "Deleting users"
+msgstr "Supprimer un utilisateur"
+
+#: ../admin/adm_dodel.php:65
+msgid "WARNING : Confirm the deletion of the users"
+msgstr "ATTENTION : Confirmez-vous la suppression de cette utilisateur"
+
+#: ../admin/adm_doms.php:54 ../admin/adm_list.php:60
+#: ../admin/quota_show_all.php:38
+msgid "Update this page"
+msgstr ""
+
+#: ../admin/adm_list.php:97
+msgid "Deactivate"
+msgstr ""
+
+#: ../admin/adm_list.php:222
+#, fuzzy, php-format
+msgid "%s accounts"
+msgstr "Comptes FTP"
+
+#: ../admin/adm_panel.php:57
+#, fuzzy
+msgid "Account creation statistics"
+msgstr "Compte créé par %s"
+
+#: ../admin/bro_main.php:69
+#, php-format
+msgid "Deleting files and/or directories"
+msgstr ""
+
+#: ../admin/bro_main.php:74
+#, fuzzy
+msgid "WARNING : Confirm the deletion of this files"
+msgstr "ATTENTION : Confirmez-vous la suppression de cette utilisateur"
+
+#: ../admin/sql_restore.php:54
+#, fuzzy
+msgid "Please choose the filename containing SQL data to be restored."
+msgstr ""
+"Entrez le nom du fichier contenant des données SQL à restaurer dans la base."
+
+#: ../admin/sql_restore.php:77
+msgid "OR"
+msgstr ""
+
+#: ../admin/stats_members.php:32
+msgid ""
+"Image_Graph not installed. pear install Image_Graph-devel to see the graph."
+msgstr ""
+
+#: ../admin/stats_members.php:41
+#, fuzzy
+msgid "Account creation per month"
+msgstr "Compte créé par %s"
+
+#: ../admin/stats_members.php:54
+msgid "before the month"
+msgstr ""
+
+#: ../admin/stats_members.php:56
+msgid "during the month"
+msgstr ""
 
 #~ msgid "Create the domain username."
 #~ msgstr "Installer le domaine login."
