@@ -2062,7 +2062,7 @@ msgstr "Aide"
 
 #: ../admin/adm_deactivate.php:7
 msgid "Missing uid"
-msgstr ""
+msgstr "Utilisateur manquant"
 
 #: ../admin/adm_deactivate.php:16
 #, fuzzy
@@ -2076,7 +2076,7 @@ msgstr "Confirmer le mot de passe"
 
 #: ../admin/adm_deactivate.php:21
 msgid "WARNING: experimental feature, use at your own risk"
-msgstr ""
+msgstr "ATTENTION: fonctionalité expérimentale, utilisez à vos risques et périls"
 
 #: ../admin/adm_deactivate.php:22
 msgid ""
@@ -2085,7 +2085,7 @@ msgid ""
 "as a serie of SQL request that you can run to restore the current "
 "configuration if you want. Click confirm if you are sure you want to "
 "deactivate all this user's domains."
-msgstr ""
+msgstr "Les domaines suivants vont être désactivés et redirigés vers l'URL entré dans la boîte ci-bas. Une sauvegarde de votre configuration sera affichée comme une série de requêtes SQL que vous pouvez recharger pour restaurer la configuration actuelle. Cliquez confirmer si vous êtes certain que vous voulez désactiver tous les domaines de cet utilisateur."
 
 #: ../admin/adm_deactivate.php:27
 #, fuzzy
@@ -2094,16 +2094,16 @@ msgstr "Redirection vers une url"
 
 #: ../admin/adm_deactivate.php:31
 msgid "Domains of user: "
-msgstr ""
+msgstr "Domaines de l'utilisateur: "
 
 #: ../admin/adm_deactivate.php:34
 msgid "Missing redirect url."
-msgstr ""
+msgstr "URL de redirection manquant."
 
 #: ../admin/adm_deactivate.php:53
 #, php-format
 msgid "-- Redirecting all domains and subdomains of the user %s to %s\n"
-msgstr ""
+msgstr "-- Rediriger tous les domaines et sous-domaines de l'utilisateur %s vers %s\n"
 
 #: ../admin/adm_dodefquotas.php:63
 #, fuzzy, php-format
@@ -2127,11 +2127,11 @@ msgstr "ATTENTION : Confirmez-vous la suppression de cette utilisateur"
 #: ../admin/adm_doms.php:54 ../admin/adm_list.php:60
 #: ../admin/quota_show_all.php:38
 msgid "Update this page"
-msgstr ""
+msgstr "Recharger cette page"
 
 #: ../admin/adm_list.php:97
 msgid "Deactivate"
-msgstr ""
+msgstr "Désactiver"
 
 #: ../admin/adm_list.php:222
 #, fuzzy, php-format
@@ -2146,7 +2146,7 @@ msgstr "Compte créé par %s"
 #: ../admin/bro_main.php:69
 #, php-format
 msgid "Deleting files and/or directories"
-msgstr ""
+msgstr "Effacer des fichiers ou des répertoires"
 
 #: ../admin/bro_main.php:74
 #, fuzzy
@@ -2157,16 +2157,16 @@ msgstr "ATTENTION : Confirmez-vous la suppression de cette utilisateur"
 #, fuzzy
 msgid "Please choose the filename containing SQL data to be restored."
 msgstr ""
-"Entrez le nom du fichier contenant des données SQL à restaurer dans la base."
+"Choisissez le nom du fichier contenant des données SQL à restaurer dans la base."
 
 #: ../admin/sql_restore.php:77
 msgid "OR"
-msgstr ""
+msgstr "OU"
 
 #: ../admin/stats_members.php:32
 msgid ""
 "Image_Graph not installed. pear install Image_Graph-devel to see the graph."
-msgstr ""
+msgstr "Image_Graph n'est pas installé. pear install Image_Graph-devel pour voir ce graphique."
 
 #: ../admin/stats_members.php:41
 #, fuzzy
@@ -2175,11 +2175,11 @@ msgstr "Compte créé par %s"
 
 #: ../admin/stats_members.php:54
 msgid "before the month"
-msgstr ""
+msgstr "avant le mois"
 
 #: ../admin/stats_members.php:56
 msgid "during the month"
-msgstr ""
+msgstr "durant le mois"
 
 #~ msgid "Create the domain username."
 #~ msgstr "Installer le domaine login."
