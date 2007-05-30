@@ -51,6 +51,34 @@ if (is_array($r)) {
 <input type="hidden" name="id" value="<?php echo $id ?>" />
 <table cellspacing="0" cellpadding="4">
 <tr class="lst2">
+	<th><label for="restfile"><?php __("Please choose the filename containing SQL data to be restored."); ?></label></th>
+<td><select class="int" id="restfile" name="restfile">
+<?php
+// Open a known directory, and proceed to read its contents
+$dir = getuserpath(). $r['dir'];
+if (is_dir($dir)) {
+  if ($dh = opendir($dir)) {
+    while (($file = readdir($dh)) !== false) {
+      if (filetype($dir . '/' . $file) == 'file') {
+        echo '<option value="' . $r['dir'] . '/' . $file . '">'. $file . '</option>';
+      }
+    }
+    closedir($dh);
+  }
+}
+?>
+</select></td>
+</tr>
+<tr>
+<td colspan="2"><input class="inb" type="submit" name="submit" value="<?php __("Restore my database"); ?>" /></td>
+</tr>
+</table>
+</form>
+<?php __("OR");?>
+<form action="sql_dorestore.php" method="post">
+<input type="hidden" name="id" value="<?php echo $id ?>" />
+<table cellspacing="0" cellpadding="4">
+<tr class="lst2">
 	<th><label for="restfile"><?php __("Please enter the filename containing SQL data to be restored."); ?></label></th>
 	<td><input type="text" class="int" id="restfile" name="restfile" size="30" maxlength="255" value="" /></td>
 </tr>
