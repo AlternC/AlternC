@@ -209,6 +209,22 @@ function checkuserpath($path) {
   return 0;
 }
 
+/**
+ * get the home of the user
+ *
+ * @args string $user the username, if null will use the global $mem. no
+ * security checks performed on path
+ * @returns string the actual absolute path
+ * @see $L_ALTERNC_LOC
+ */
+function getuserpath($user = null) {
+  global $L_ALTERNC_LOC;
+  if (is_null($user)) {
+    global $mem;
+    $user = $mem->user['login'];
+  }
+  return $L_ALTERNC_LOC . "/html/".substr($user,0,1)."/".$user;
+}
 
 function cbox($test) {
   if ($test) echo (" checked=\"checked\"");
