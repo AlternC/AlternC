@@ -51,7 +51,7 @@ case "$1" in
     fi
 
     rm -rf /var/alternc/apacheconf /var/alternc/cgi-bin /var/alternc/bureau /var/alternc/exec.usr /var/alternc/mla /var/alternc/redir /var/alternc/tmp /var/log/alternc
-    rm -f /etc/apache/conf.d/override.php.conf /etc/apache/conf.d/alternc-ssl.conf /etc/apache/conf.d/alternc.conf
+    rm -f /etc/apache/conf.d/override_php.conf /etc/apache/conf.d/alternc-ssl.conf /etc/apache/conf.d/alternc.conf
     ;;
   remove|upgrade|failed-upgrade|abort-install|abort-upgrade)
     ;;
