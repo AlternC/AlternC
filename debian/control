@@ -1,7 +1,8 @@
 Source: alternc
 Section: admin
 Priority: optional
-Maintainer: Benjamin Sonntag <benjamin@alternc.org>
+Maintainer: Antoine Beaupré <anarcat@koumbit.org>
+Uploader: Benjamin Sonntag <benjamin@alternc.org>
 Build-Depends-Indep: debhelper (>= 4.0.2), findutils (>= 4.1.7), gcc (>= 2:2.95.4), gettext (>= 0.10.40-5), po-debconf
 Standards-Version: 3.7.2.1
 
