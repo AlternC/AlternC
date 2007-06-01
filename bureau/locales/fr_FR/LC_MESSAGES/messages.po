@@ -2154,7 +2154,6 @@ msgid "WARNING : Confirm the deletion of this files"
 msgstr "ATTENTION : Confirmez-vous la suppression de cette utilisateur"
 
 #: ../admin/sql_restore.php:54
-#, fuzzy
 msgid "Please choose the filename containing SQL data to be restored."
 msgstr ""
 "Choisissez le nom du fichier contenant des données SQL à restaurer dans la base."
