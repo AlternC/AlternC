@@ -1,9 +1,3 @@
-alternc (0.9.7) testing; urgency=low
-
-  * preparation of 0.9.7, this version will be etch compliant.
-
- -- Benjamin Sonntag <benjamin@sonntag.fr>  Thu, 31 May 2007 16:13:00 +0200
-
 alternc (0.9.6.3) stable; urgency=low
 
   * change dependency on courier-authmysql or courier-authlib-mysql for etch
@@ -11,6 +5,7 @@ alternc (0.9.6.3) stable; urgency=low
   * fix translations
   * php5 compatibility
   * fix checkmx (#1031)
+  * etch support
 
  -- Antoine Beaupré <anarcat@koumbit.org>  Fri, 11 May 2007 01:18:08 +0000
 
