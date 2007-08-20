@@ -438,3 +438,33 @@ PRIMARY KEY ( `login` )
 ) COMMENT = 'Allowed account for secondary mx managment';
 
 
+-- --------------------------------------------------------
+-- TABLES de mémorisation de la taille des dossiers web/mail/db
+
+CREATE TABLE IF NOT EXISTS `size_db` (
+  `db` varchar(255) NOT NULL default '',
+  `size` int(10) unsigned NOT NULL default '0',
+  `ts` timestamp(14) NOT NULL,
+  PRIMARY KEY  (`db`),
+  KEY `ts` (`ts`)
+) TYPE=MyISAM COMMENT='MySQL Database used space';
+
+
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `size_mail` (
+  `alias` varchar(255) NOT NULL default '',
+  `size` int(10) unsigned NOT NULL default '0',
+  `ts` timestamp(14) NOT NULL,
+  PRIMARY KEY  (`alias`),
+  KEY `ts` (`ts`)
+) TYPE=MyISAM COMMENT='Mail space used by pop accounts.';
+
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `size_web` (
+  `uid` int(10) unsigned NOT NULL default '0',
+  `size` int(10) unsigned NOT NULL default '0',
+  `ts` timestamp(14) NOT NULL,
+  PRIMARY KEY  (`uid`),
+  KEY `ts` (`ts`)
+) TYPE=MyISAM COMMENT='Web space used by accounts.';
+
