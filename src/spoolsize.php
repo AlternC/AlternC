@@ -14,15 +14,6 @@ while ($c=mysql_fetch_array($r)) {
   echo " done ($size KB)\n";  flush();
 }
 
-echo "---------------------------\n Generating size-cache for db accounts\n\n";
-$r=mysql_query("SELECT db FROM db;");
-while ($c=mysql_fetch_array($r)) {
-  echo $c["db"]; flush();
-  $size=$mysql->get_db_size($c["db"]);
-  mysql_query("REPLACE INTO size_db SET db='".addslashes($c["db"])."',size='$size';");
-  echo " done ($size KB) \n"; flush();
-}
-
 echo "---------------------------\n Generating size-cache for web accounts\n\n";
 $r=mysql_query("SELECT uid,login FROM membres;");
 while ($c=mysql_fetch_array($r)) {
