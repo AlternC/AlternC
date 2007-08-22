@@ -336,6 +336,7 @@ class m_dom {
       break;
     case "name":
       $serveur="whois.nic.name";
+      $egal="domain = ";
       break;
     case "ws":
       $serveur="whois.samoanic.ws";
@@ -392,7 +393,7 @@ class m_dom {
 	  break;
         case "eu":
 	case "be":
-          $ligne=ereg_replace(chr(10), "",ereg_replace(chr(13),"",ereg_replace(" ","", $ligne)));
+          $ligne=preg_replace("/^ *([^ ]*) \(.*\)$/","\\1",trim($ligne));
           if($found)
              $tmp = trim($ligne);
           if ($tmp)

@@ -351,6 +351,7 @@ src/slave_dns -text
 src/spoolsize.php -text
 src/sqlbackup.sh -text
 src/update_domains.sh -text
+tests/whois_test.php -text
 tools/get_account_by_domain -text
 tools/get_domains_by_account -text
 tools/top_ftp_users -text
