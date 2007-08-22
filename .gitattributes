@@ -287,6 +287,7 @@ etc/alternc/templates/postfix/mydomain.cf -text
 etc/alternc/templates/postfix/mygid.cf -text
 etc/alternc/templates/postfix/myvirtual.cf -text
 etc/alternc/templates/postfix/sasl/smtpd.conf -text
+etc/alternc/templates/proftpd/modules.conf -text
 etc/alternc/templates/proftpd/proftpd.conf -text
 etc/alternc/templates/proftpd/welcome.msg -text
 etc/alternc/templates/squirrelmail/apache.conf -text

@@ -31,8 +31,8 @@ if [ -e /etc/postfix/main.cf ]; then
                   etc/postfix/mydomain.cf etc/postfix/mygid.cf
                   etc/postfix/myvirtual.cf etc/postfix/sasl/smtpd.conf"
 fi
-if [ -e /etc/proftpd.conf ]; then
-    CONFIG_FILES="$CONFIG_FILES etc/proftpd.conf etc/welcome.msg"
+if [ -e /etc/proftpd/proftpd.conf ]; then
+    CONFIG_FILES="$CONFIG_FILES etc/proftpd/proftpd.conf etc/proftpd/welcome.msg etc/proftpd/modules.conf"
 fi
 if [ -e /etc/squirrelmail/apache.conf ]; then
     CONFIG_FILES="$CONFIG_FILES etc/squirrelmail/apache.conf"
@@ -201,7 +201,7 @@ if [ -e /etc/courier/authmysqlrc ] ; then
 fi
 
 if [ -e /etc/proftpd.conf ] ; then
-    chmod 640 /etc/proftpd.conf
+    chmod 640 /etc/proftpd/proftpd.conf
 fi
 
 #######################################################################
