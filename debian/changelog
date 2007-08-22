@@ -1,3 +1,8 @@
+alternc (0.9.6.4) stable; urgency=low
+  * change apache log format to a working one (using host request), also fix awstats issues.
+
+ -- Benjamin Sonntag <benjamin@alternc.org>  Tue, 23 May 2007 00:07:54 +0200
+
 alternc (0.9.6.3) stable; urgency=low
 
   * change dependency on courier-authmysql or courier-authlib-mysql for etch
