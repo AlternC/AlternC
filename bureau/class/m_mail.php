@@ -534,11 +534,18 @@ class m_mail {
     $db->query("INSERT INTO mail_alias (mail,alias) VALUES ('".$mail."_".$dom."','/var/alternc/mail/".$m."/".$mail."_".$dom."/Maildir/');");
 
     $f=fopen("/var/lib/squirrelmail/data/".$mail."_".$dom.".pref","wb");
+    $g=0; $g=@fopen("/etc/squirrelmail/default_pref","rb");
     fputs($f,"email_address=$mail@$dom\nchosen_theme=default_theme.php\n");
+    if ($g) {
+      while ($s=fgets($g,1024)) {
+	if (substr($s,0,14)!="email_address=" && substr($s,0,13)!="chosen_theme=") {
+	  fputs($f,$s);
+	}
+      }
+      fclose($g);
+    }
     fclose($f);
-    $f=fopen("/var/lib/squirrelmail/data/".$mail."@".$dom.".pref","wb");
-    fputs($f,"email_address=$mail@$dom\nchosen_theme=default_theme.php\n");
-    fclose($f);
+    @copy("/var/lib/squirrelmail/data/".$mail."_".$dom.".pref","/var/lib/squirrelmail/data/".$mail."@".$dom.".pref");
     exec("/usr/lib/alternc/mail_add ".$mail."_".$dom." ".$cuid);
     return true;
   }

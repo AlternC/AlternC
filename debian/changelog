@@ -1,5 +1,6 @@
 alternc (0.9.6.4) stable; urgency=low
 
+  * We copy /etc/squirrelmail/default_pref content for new accounts in _createpop (#1015)
   * we configure postfix even if main.cf don't currently exist (#1009)
   * Fixed the 'view' link issues (no urlencode) (#690)
   * Change "move" to "move to" (ergonomic) (#787)
