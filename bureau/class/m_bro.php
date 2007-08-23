@@ -481,6 +481,8 @@ class m_bro {
     // Is it in cache ?
     if (substr($dir,0,1)=="/") $dir=substr($dir,1);
     if (substr($dir,-1)=="/") $dir=substr($dir,0,-1);
+    $dir=str_replace("%2F", "/", urlencode($dir));
+    $name=urlencode($name);
     if (!$this->cacheurl["d".$dir]) {
       // On parcours $dir en remontant les /
       $end="";	$beg=$dir;	$tofind=true;

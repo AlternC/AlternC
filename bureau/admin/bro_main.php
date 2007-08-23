@@ -25,7 +25,6 @@
  ----------------------------------------------------------------------
  Original Author of file: Benjamin Sonntag, Remi
  Purpose of file: Online file Browser of AlternC
- TODO : Voir ??? + Déplacer / Copier
  ----------------------------------------------------------------------
 */
 require_once("../class/config.php");
