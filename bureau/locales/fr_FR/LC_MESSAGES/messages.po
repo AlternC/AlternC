@@ -710,8 +710,8 @@ msgid "all/none"
 msgstr "tous/aucun"
 
 #: ../admin/bro_main.php:142 ../admin/bro_main.php:180
-msgid "Move"
-msgstr "Déplacer"
+msgid "Move to"
+msgstr "Déplacer vers"
 
 #: ../admin/bro_main.php:177 ../admin/bro_main.php:348
 #: ../admin/sta2_list.php:57 ../admin/sta2_list.php:71

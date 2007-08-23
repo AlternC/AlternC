@@ -177,7 +177,7 @@ document.write("<input type=\"button\" value=\"<?php __("all/none"); ?>\" class=
 
 <input type="submit" class="inb" name="actrename" value="<?php __("Rename"); ?>" />
 &nbsp;&nbsp;&nbsp;
-<input type="submit" class="inb" name="actmove" value="<?php __("Move"); ?>" />&nbsp;:&nbsp;<input type="text" class="int" name="actmoveto" value="" />
+<input type="submit" class="inb" name="actmove" value="<?php __("Move to"); ?>" />&nbsp;:&nbsp;<input type="text" class="int" name="actmoveto" value="" />
 <script type="text/javascript">
 <!--
 document.write("<input type=\"button\" name=\"bff\" onclick=\"browseforfolder('main.actmoveto');\" value=\" ... \" class=\"inb\" />");

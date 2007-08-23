@@ -1,6 +1,7 @@
 alternc (0.9.6.4) stable; urgency=low
 
-  * Confirm file deletion in the browser (#1718)
+  * Change "move" to "move to" (ergonomic) (#787)
+  * Confirm file deletion in the browser (#659)
   * fixes dns install of internal hosting domains (#1056)
   * fixes profftp configuration for Etch (#1046)
   * fixes .eu.be.name whois issue (#571)
