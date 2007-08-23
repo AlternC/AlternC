@@ -1,4 +1,4 @@
-alternc (0.9.6.4-1) stable; urgency=low
+alternc (0.9.6.5) stable; urgency=low
 
   * Patch to install properly apache and apache-ssl modules
   * We copy /etc/squirrelmail/default_pref content for new accounts in _createpop (#1015)
