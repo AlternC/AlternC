@@ -1,7 +1,10 @@
 alternc (0.9.6.4) stable; urgency=low
-  * fixes profftp configuration for Etch
-  * fixes .eu.be.name whois issue
-  * change apache log format to a working one (using host request), also fix awstats issues.
+
+  * Confirm file deletion in the browser (#1718)
+  * fixes dns install of internal hosting domains (#1056)
+  * fixes profftp configuration for Etch (#1046)
+  * fixes .eu.be.name whois issue (#571)
+  * change apache log format to a working one (using host request), also fix awstats issues. 
 
  -- Benjamin Sonntag <benjamin@alternc.org>  Tue, 23 May 2007 00:07:54 +0200
 

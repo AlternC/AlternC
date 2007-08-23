@@ -57,11 +57,11 @@ if ($formu) {
     break;
   case 2:  // act vaut Supprimer Copier ou Renommer.
     if ($actdel) {
-      if($del_confirm == _("Yes")) {
+      if ($del_confirm != "") { 
         if (!$bro->DeleteFile($d,$R)) {
           print $err->errstr();
         }
-      } elseif(!$cancel){
+      } elseif (!$cancel){
         include("head.php");
 ?>
 </head>
@@ -71,7 +71,7 @@ if ($formu) {
     <input type="hidden" name="formu" value="2" />
     <input type="hidden" name="actdel" value="1" />
     <input type="hidden" name="R" value="<?php echo $R?>" />
-    <p class="error"><?php __("WARNING : Confirm the deletion of this files"); ?></p>
+    <p class="error"><?php __("WARNING: Confirm the deletion of this files"); ?></p>
 <?php foreach($d as $file){ ?>
 	<p><?php echo stripslashes($file); ?></p>
         <input type="hidden" name="d[]" value="<?php echo htmlentities(stripslashes($file)); ?>" />
@@ -84,7 +84,7 @@ if ($formu) {
 </body>
 </html>
 <?php
-        die();
+        exit();
       }
     }
     if ($actmove) {
