@@ -61,7 +61,7 @@ if ($formu) {
         if (!$bro->DeleteFile($d,$R)) {
           print $err->errstr();
         }
-      } elseif (!$cancel){
+      } elseif (!$cancel && is_array($d)) {
         include("head.php");
 ?>
 </head>
@@ -145,18 +145,17 @@ include("head.php");
 <?php
 /* Renommer / Copier / Déplacer les fichiers : */
 if ($formu==2 && $actrename && count($d)) {
-  echo "<table cellpadding=\"6\">\n";
   echo "<form action=\"bro_main.php\" method=\"post\">\n";
   echo "<input type=\"hidden\" name=\"R\" value=\"$R\" />\n";
   echo "<input type=\"hidden\" name=\"formu\" value=\"4\" />\n";
-  echo "<tr><th colspan=\"2\">"._("Rename")."</th></tr>";
+  echo "<p>"._("Rename")."</p>";
   for ($i=0;$i<count($d);$i++) {
     $d[$i]=ssla($d[$i]);
-    echo "<tr><td><input type=\"hidden\" name=\"o[$i]\" value=\"".$d[$i]."\" />".$d[$i]."</td>";
-    echo "<td><input type=\"text\" class=\"int\" name=\"d[$i]\" value=\"".$d[$i]."\" /></td></tr>";
+    echo "<p>"._("Old Name:")." <input type=\"hidden\" name=\"o[$i]\" value=\"".$d[$i]."\" />".$d[$i]."<br />";
+    echo _("New Name:")." <input type=\"text\" class=\"int\" style=\"width: 350px\" name=\"d[$i]\" value=\"".$d[$i]."\" /></p>";
   }
-  echo "<tr><td colspan=\"2\" align=\"center\"><input type=\"submit\" class=\"inb\" name=\"submit\" value=\""._("Rename")."\" /></td></tr>";
-  echo "</table></form>\n";
+  echo "<p><input type=\"submit\" class=\"inb\" name=\"submit\" value=\""._("Rename")."\" /></p>";
+  echo "</form>\n";
   echo "<hr />\n";
 }
 
