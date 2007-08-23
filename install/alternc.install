@@ -155,10 +155,10 @@ tar -zcf "$INSTALLED_CONFIG_TAR" -C / $CONFIG_FILES
 ######################################################################
 # Initialize database
 #
-if [ -e /usr/sbin/mysqld ]; then
+#if [ -e /usr/sbin/mysqld ]; then
     echo "Setup MySQL and database..."
-    /usr/share/alternc/install/mysql.sh "$MYSQL_USER" "$MYSQL_PASS" "$MYSQL_DATABASE"
-fi
+    /usr/share/alternc/install/mysql.sh "$MYSQL_HOST" "$MYSQL_USER" "$MYSQL_PASS" "$MYSQL_DATABASE"
+#fi
 
 ######################################################################## 
 # Ad-hoc fixes

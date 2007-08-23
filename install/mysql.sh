@@ -29,22 +29,23 @@
 # ----------------------------------------------------------------------
 #
 
-rootlogin="$1"
-rootpass="$2"
-systemdb="$3"
+sqlserver="$1"
+rootlogin="$2"
+rootpass="$3"
+systemdb="$4"
 
 if [ -z "$rootlogin" -o -z "$rootpass" -o -z "$systemdb" ]
 then
-    echo "Usage: mysql.sh <rootlogin> <rootpass> <systemdb>"
+    echo "Usage: mysql.sh <mysqlserver> <rootlogin> <rootpass> <systemdb>"
     exit 1
 fi
 
-mysql="/usr/bin/mysql --defaults-file=/etc/mysql/debian.cnf"
+mysql="/usr/bin/mysql --defaults-file=/etc/mysql/debian.cnf -h$sqlserver "
 
 if ! $mysql mysql -e "SHOW TABLES" >/dev/null
 then
     # is this an upgrade then?
-    mysql="/usr/bin/mysql -u$rootlogin -p$rootpass" 
+    mysql="/usr/bin/mysql -h$sqlserver -u$rootlogin -p$rootpass" 
     if ! $mysql mysql -e "SHOW TABLES" >/dev/null
     then
         echo "Can't get proper credentials, aborting"
@@ -60,7 +61,7 @@ $mysql -e "GRANT ALL ON *.* TO '$rootlogin'@'${MYSQL_CLIENT}' IDENTIFIED BY '$ro
 if [ "$?" -ne "0" ]
 then
     echo "You are using mysql 5.0, so we try with root account and no password since debian-sys-maint doesn't work."
-    mysql="/usr/bin/mysql -uroot "
+    mysql="/usr/bin/mysql -h$sqlserver -uroot "
     echo "Granting users "
     $mysql -e "GRANT ALL ON *.* TO '$rootlogin'@'${MYSQL_CLIENT}' IDENTIFIED BY '$rootpass' WITH GRANT OPTION"
     if [ "$?" -ne "0" ] 
@@ -71,7 +72,7 @@ then
 fi
 
 # Now we can use rootlogin and rootpass. 
-mysql="/usr/bin/mysql -u$rootlogin -p$rootpass" 
+mysql="/usr/bin/mysql -h$sqlserver -u$rootlogin -p$rootpass" 
 
 echo "Setting AlternC '$systemdb' system table and privileges "
 $mysql -e "CREATE DATABASE IF NOT EXISTS $systemdb;" 
@@ -79,4 +80,4 @@ $mysql -e "CREATE DATABASE IF NOT EXISTS $systemdb;"
 echo "Installing AlternC schema "
 $mysql $systemdb < /usr/share/alternc/install/mysql.sql
 
-/usr/bin/mysql -u$rootlogin -p$rootpass $systemdb -e "SHOW TABLES" >/dev/null && echo "MYSQL.SH OK!" || echo "MYSQL.SH FAILED!"
+/usr/bin/mysql -h$sqlserver -u$rootlogin -p$rootpass $systemdb -e "SHOW TABLES" >/dev/null && echo "MYSQL.SH OK!" || echo "MYSQL.SH FAILED!"
