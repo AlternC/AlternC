@@ -78,7 +78,7 @@ if ($formu) {
 <?php } ?>
     <blockquote>
       <input type="submit" class="inb" name="del_confirm" value="<?php __("Yes"); ?>" />&nbsp;&nbsp;
-      <input type="button" class="inb" name="cancel" value="<?php __("No"); ?>" />
+      <input type="submit" class="inb" name="cancel" value="<?php __("No"); ?>" />
     </blockquote>
   </form>
 </body>
