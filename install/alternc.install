@@ -26,7 +26,7 @@ if [ -e /etc/courier/authdaemonrc ]; then
     CONFIG_FILES="$CONFIG_FILES etc/courier/authdaemonrc
                   etc/courier/authmysqlrc"
 fi
-if [ -e /etc/postfix/main.cf ]; then
+if [ -d /etc/postfix ]; then
     CONFIG_FILES="$CONFIG_FILES etc/postfix/main.cf etc/postfix/myalias.cf
                   etc/postfix/mydomain.cf etc/postfix/mygid.cf
                   etc/postfix/myvirtual.cf etc/postfix/sasl/smtpd.conf"
