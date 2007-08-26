@@ -248,12 +248,12 @@ if [ -x /usr/sbin/locale-gen ] ; then
 fi
 
 #######################################################################
-# Restart services
+# Reload services
 #
 for service in apache apache-ssl postfix bind9 courier-authdaemon \
                courier-imap courier-imap-ssl courier-pop courier-pop-ssl \
                cron proftpd; do
-    test -x /etc/init.d/$service && invoke-rc.d $service restart || true
+    test -x /etc/init.d/$service && invoke-rc.d $service reload || true
 done
 
 #######################################################################
@@ -286,3 +286,7 @@ if [ "$HAS_ROOT" != "1" ]; then
     fi
 fi
 
+# We should restart apaches after all configuration stuff ...
+for service in apache apache-ssl ; do
+    test -x /etc/init.d/$service && invoke-rc.d $service restart || true
+done
