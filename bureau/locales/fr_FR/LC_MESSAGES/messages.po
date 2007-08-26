@@ -2207,3 +2207,7 @@ msgstr "Ancien nom : "
 
 msgid "New Name:"
 msgstr "Nouveau nom : "
+
+msgid "Image_Graph not installed. use 'aptitude install php-pear' then 'pear --alldeps install Image_Graph-devel' to see the graph."
+msgstr "Image_Graph n'est pas installée. Lancez 'aptitude install php-pear' puis 'pear --alldeps install Image_Graph-devel' pour voir le graphique."
+

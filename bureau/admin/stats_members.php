@@ -27,9 +27,9 @@
  Purpose of file:
  ----------------------------------------------------------------------
 */
-require_once("../class/config.php");
-if ((include_once 'Image/Graph.php') === FALSE) {
-  echo "<p class=\"error\">". _("Image_Graph not installed. pear install Image_Graph-devel to see the graph.")."</p>";
+@require_once("../class/config.php");
+if ((@include_once 'Image/Graph.php') === FALSE) {
+  echo "<p class=\"error\">". _("Image_Graph not installed. use 'aptitude install php-pear' then 'pear --alldeps install Image_Graph-devel' to see the graph.")."</p>";
   exit(0);
 }
 
