@@ -278,7 +278,7 @@ add_host() {
       $TYPE_URL)
         mkdir -p "$htaccess_directory"
         (echo "RewriteEngine on"
-         echo "RewriteRule (.*) ${value}/\$1 [R,L]"
+         echo "RewriteRule (.*) ${value}\$1 [R,L]"
         ) > "$htaccess_directory/.htaccess"
         ln -snf "$htaccess_directory" "$vhost_directory"
         ;;
