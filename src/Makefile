@@ -32,5 +32,5 @@ BIN=$(DESTDIR)/usr/lib/alternc/
 install: 
 	chown root:www-data $(BIN)
 	chmod 755 $(BIN)
-	install -o root -g www-data -m4750 $(SETUID) du.pl $(BIN)
-	install -o root -g www-data -m0750 $(SCRIPTS) $(BIN)
+	install -o root -g www-data -m4754 $(SETUID) du.pl $(BIN)
+	install -o root -g www-data -m0754 $(SCRIPTS) $(BIN)

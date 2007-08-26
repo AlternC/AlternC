@@ -17,7 +17,7 @@ _Description: Do you REALLY want to install AlternC on this computer ?
 
 Template: alternc/desktopname
 Type: string
-_Description: Fully qualified name of the desktop.
+_Description: Fully qualified name of the desktop:
  Please enter the fully qualified name of your server. This will be the
  domain part of the url you will use to access the virtual managment
  desktop. This (sub)domain MUST point to your server.
@@ -26,13 +26,13 @@ _Description: Fully qualified name of the desktop.
 
 Template: alternc/hostingname
 Type: string
-_Description: Name of your hosting service
+_Description: Name of your hosting service:
  Please enter the name of your hosting service. It may be your company's
  name or your personnal name or whatever you want to ...
 
 Template: alternc/ns1
 Type: string
-_Description: Name of the primary domain name server.
+_Description: Name of the primary domain name server:
  Please enter the fully qualified name of your primary dns server. It can
  be this server since bind is installed and configured by AlternC. Anyway,
  if your hosting service is quite big, you may have an external primary
@@ -41,7 +41,7 @@ _Description: Name of the primary domain name server.
 
 Template: alternc/ns2
 Type: string
-_Description: Name of the secondary domain name server.
+_Description: Name of the secondary domain name server:
  Please enter the fully qualified name of your secondary dns server. It can
  be this server since bind is installed and configured by AlternC. Anyway,
  you should have 2 separate DNS servers if you want to provide a high
@@ -52,7 +52,7 @@ _Description: Name of the secondary domain name server.
 
 Template: alternc/mysql/host
 Type: string
-_Description: Name of the mysql server.
+_Description: Name of the mysql server:
  Please enter the fully qualified name of your mysql server host. On small
  systems, it IS "localhost" since you may have installed a local mysql
  server. If you are a bigger hosting service, you may put your mysql
@@ -64,20 +64,20 @@ _Description: Name of the mysql server.
 
 Template: alternc/mysql/db
 Type: string
-_Description: AlternC's mysql system database
+_Description: AlternC's mysql system database:
  AlternC will create a mysql database to store it's system data. Please
  choose the name of this database here. The default value should be good in
  most case.
 
 Template: alternc/mysql/user
 Type: string
-_Description: AlternC's mysql account
+_Description: AlternC's mysql account:
  AlternC will create a mysql administrator account. Please choose it's
  username here. The default value should be good in most case.
 
 Template: alternc/mysql/password
 Type: password
-_Description: Password of the AlternC's mysql account
+_Description: Password of the AlternC's mysql account:
  AlternC requires an administrator account on the mysql server. It will be
  created automatically during the install process. Please choose a password
  for this account.
@@ -87,7 +87,7 @@ _Description: Password of the AlternC's mysql account
 
 Template: alternc/mysql/client
 Type: string
-_Description: The server to GRANT permissions to
+_Description: The server to GRANT permissions to:
  AlternC and MySQL can be installed on different servers. In order to have
  GRANT table properly created and manipulated, this parameter must be set
  to the hostname or IP the Apache server will appear as connecting from to
@@ -95,13 +95,13 @@ _Description: The server to GRANT permissions to
 
 Template: alternc/public_ip
 Type: string
-_Description: the primary IP of this server
+_Description: The primary IP of this server:
  AlternC will default the A records for domains it hosts to this IP. In
  other words, this is the IP everyone can reach to server at.
 
 Template: alternc/internal_ip
 Type: string
-_Description: the internal IP of this server
+_Description: The internal IP of this server:
  AlternC will configure Apache and other services to listen to this
  address. This is usually the same as the primary IP of the server, unless
  the server is sitting behind a NAT router.
@@ -110,13 +110,13 @@ _Description: the internal IP of this server
 
 Template: alternc/default_mx
 Type: string
-_Description: the default MX to assign to new domains
+_Description: The default MX to assign to new domains:
  AlternC will assign this hostname as the MX record for all the domains it
  hosts. It is usually better be left alone.
 
 Template: alternc/alternc_location
 Type: string
-_Description: The path where AlternC is installed
+_Description: The path where AlternC is installed:
  Please enter the partition name where alternc is installed. This is used
  mainly for disk quotas.
  .
@@ -124,7 +124,7 @@ _Description: The path where AlternC is installed
 
 Template: alternc/monitor_ip
 Type: string
-_Description: monitoring server
+_Description: The monitoring server:
  IP address (or ip/prefix) of the server(s) which we want to authorize ping
  to us and apache status pages. Completely optional.
 
@@ -136,7 +136,7 @@ _Description: trusted servers for bind
 
 Template: alternc/mynetwork
 Type: string
-_Description: SMTP authorized networks
+_Description: SMTP authorized networks:
  IP addresses of the networks authorized in SMTP, space-delimited.
 
 Template: alternc/pop_before_smtp_warning
@@ -155,21 +155,21 @@ _Description: POP Before SMTP deprecated
 
 Template: alternc/postrm_remove_databases
 Type: boolean
-_Description: Should I remove all databases (/var/alternc/db/) ?
+_Description: Should AlternC remove all databases (/var/lib/mysql/) ?
  All users databases will be trashed
 
 Template: alternc/postrm_remove_datafiles
 Type: boolean
-_Description: Should I remove users datas ?
+_Description: Should AlternC remove users datas ?
  The files and apache redirections created by users will be trashed
 
 Template: alternc/postrm_remove_bind
 Type: boolean
-_Description: Should I remove bind zones ?
+_Description: Should AlternC remove bind zones ?
  It will delete all bind zones created by AlternC
 
 Template: alternc/postrm_remove_mailboxes
 Type: boolean
-_Description: Should I remove bind mailboxes ?
+_Description: Should AlternC remove bind mailboxes ?
  If you accept all users e-mails will be deleted
 

@@ -11,12 +11,11 @@
 #
 #    Developers do not need to manually edit POT or PO files.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: AlternC 0.9.5\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-09-15 17:03+0000\n"
+"Report-Msgid-Bugs-To: anarcat@koumbit.org\n"
+"POT-Creation-Date: 2007-08-26 21:20+0200\n"
 "PO-Revision-Date: 2006-04-26 11:16+0200\n"
 "Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
 "Language-Team: Team AlternC <team@alternc.org>\n"
@@ -26,13 +25,13 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../templates:4
+#: ../templates:1001
 msgid "Do you REALLY want to install AlternC on this computer ?"
 msgstr "Etes-vous CERTAIN de vouloir installer AlternC sur cet ordinateur ?"
 
 #. Type: boolean
 #. Description
-#: ../templates:4
+#: ../templates:1001
 msgid ""
 "You are currently trying to install AlternC on your computer. Be aware that "
 "this package will overwrite critical system files, including but not limited "
@@ -44,7 +43,7 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../templates:4
+#: ../templates:1001
 msgid ""
 "A backup of your old configuration will be stored in \"/var/backups/alternc/"
 "etc-original-`date`.tar.gz\"."
@@ -54,7 +53,7 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../templates:4
+#: ../templates:1001
 msgid ""
 "If you still want to proceed with this installation, choose YES here, "
 "otherwise choose NO."
@@ -63,19 +62,19 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../templates:4
+#: ../templates:1001
 msgid "YOU HAVE BEEN WARNED."
 msgstr "VOUS AVEZ ETE PREVENU !"
 
 #. Type: string
 #. Description
-#: ../templates:20
-msgid "Fully qualified name of the desktop."
-msgstr "Nom de domaine du bureau."
+#: ../templates:2001
+msgid "Fully qualified name of the desktop:"
+msgstr "Nom de domaine du bureau :"
 
 #. Type: string
 #. Description
-#: ../templates:20
+#: ../templates:2001
 msgid ""
 "Please enter the fully qualified name of your server. This will be the "
 "domain part of the url you will use to access the virtual managment desktop. "
@@ -87,7 +86,7 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:20
+#: ../templates:2001
 msgid "The default should be ok if your machine is correctly configured."
 msgstr ""
 "La valeur par défaut doit convenir si votre machine est correctement "
@@ -95,13 +94,13 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:29
-msgid "Name of your hosting service"
-msgstr "Nom de votre service d'hébergement."
+#: ../templates:3001
+msgid "Name of your hosting service:"
+msgstr "Nom de votre service d'hébergement :"
 
 #. Type: string
 #. Description
-#: ../templates:29
+#: ../templates:3001
 msgid ""
 "Please enter the name of your hosting service. It may be your company's name "
 "or your personnal name or whatever you want to ..."
@@ -111,14 +110,13 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:35
-msgid "Name of the primary domain name server."
-msgstr "Nom de domaine du serveur de dns primaire."
+#: ../templates:4001
+msgid "Name of the primary domain name server:"
+msgstr "Nom de domaine du serveur de dns primaire :"
 
 #. Type: string
 #. Description
-#: ../templates:35
-#, fuzzy
+#: ../templates:4001
 msgid ""
 "Please enter the fully qualified name of your primary dns server. It can be "
 "this server since bind is installed and configured by AlternC. Anyway, if "
@@ -129,17 +127,18 @@ msgstr ""
 "Entrez le nom de domaine de votre serveur de dns primaire. Cela peut être "
 "votre serveur puisque bind est installé et configuré par AlternC. Cependant, "
 "si votre service d'hébergement est gros, vous pouvez dispoer d'un serveur "
-"dns primaire externe synchronisé avec vos serveurs sous AlternC."
+"dns primaire externe synchronisé avec vos serveurs sous AlternC. "
+"La valeur par défaut devrait convenir dans la plupart des cas."
 
 #. Type: string
 #. Description
-#: ../templates:44
-msgid "Name of the secondary domain name server."
-msgstr "Nom de domaine du serveur de dns secondaire."
+#: ../templates:5001
+msgid "Name of the secondary domain name server:"
+msgstr "Nom de domaine du serveur de dns secondaire :"
 
 #. Type: string
 #. Description
-#: ../templates:44
+#: ../templates:5001
 msgid ""
 "Please enter the fully qualified name of your secondary dns server. It can "
 "be this server since bind is installed and configured by AlternC. Anyway, "
@@ -153,7 +152,7 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:44
+#: ../templates:5001
 msgid ""
 "You may contact the AlternC's users mailing list if you want to exchange dns "
 "service with other AlternC's users."
@@ -164,13 +163,13 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:55
-msgid "Name of the mysql server."
-msgstr "Nom de domaine du serveur mysql."
+#: ../templates:6001
+msgid "Name of the mysql server:"
+msgstr "Nom de domaine du serveur mysql :"
 
 #. Type: string
 #. Description
-#: ../templates:55
+#: ../templates:6001
 msgid ""
 "Please enter the fully qualified name of your mysql server host. On small "
 "systems, it IS \"localhost\" since you may have installed a local mysql "
@@ -192,13 +191,13 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:67
-msgid "AlternC's mysql system database"
-msgstr "Base système mysql d'AlternC."
+#: ../templates:7001
+msgid "AlternC's mysql system database:"
+msgstr "Base système mysql d'AlternC : "
 
 #. Type: string
 #. Description
-#: ../templates:67
+#: ../templates:7001
 msgid ""
 "AlternC will create a mysql database to store it's system data. Please "
 "choose the name of this database here. The default value should be good in "
@@ -210,13 +209,13 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:74
-msgid "AlternC's mysql account"
-msgstr "Compte mysql d'AlternC."
+#: ../templates:8001
+msgid "AlternC's mysql account:"
+msgstr "Compte mysql d'AlternC : "
 
 #. Type: string
 #. Description
-#: ../templates:74
+#: ../templates:8001
 msgid ""
 "AlternC will create a mysql administrator account. Please choose it's "
 "username here. The default value should be good in most case."
@@ -227,13 +226,13 @@ msgstr ""
 
 #. Type: password
 #. Description
-#: ../templates:80
-msgid "Password of the AlternC's mysql account"
-msgstr "Mot de passe du compte mysql."
+#: ../templates:9001
+msgid "Password of the AlternC's mysql account:"
+msgstr "Mot de passe du compte mysql : "
 
 #. Type: password
 #. Description
-#: ../templates:80
+#: ../templates:9001
 msgid ""
 "AlternC requires an administrator account on the mysql server. It will be "
 "created automatically during the install process. Please choose a password "
@@ -243,7 +242,7 @@ msgstr ""
 
 #. Type: password
 #. Description
-#: ../templates:80
+#: ../templates:9001
 msgid ""
 "Please choose a quite complex password since it will have full access to the "
 "system database !!!"
@@ -253,13 +252,13 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:90
-msgid "The server to GRANT permissions to"
+#: ../templates:10001
+msgid "The server to GRANT permissions to:"
 msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:90
+#: ../templates:10001
 msgid ""
 "AlternC and MySQL can be installed on different servers. In order to have "
 "GRANT table properly created and manipulated, this parameter must be set to "
@@ -269,13 +268,13 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:98
-msgid "the primary IP of this server"
-msgstr "l'adresse IP principale de ce serveur"
+#: ../templates:11001
+msgid "The primary IP of this server:"
+msgstr "l'adresse IP principale de ce serveur : "
 
 #. Type: string
 #. Description
-#: ../templates:98
+#: ../templates:11001
 msgid ""
 "AlternC will default the A records for domains it hosts to this IP. In other "
 "words, this is the IP everyone can reach to server at."
@@ -286,13 +285,13 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:104
-msgid "the internal IP of this server"
-msgstr "l'adresse IP interne du serveur"
+#: ../templates:12001
+msgid "The internal IP of this server:"
+msgstr "l'adresse IP interne du serveur : "
 
 #. Type: string
 #. Description
-#: ../templates:104
+#: ../templates:12001
 msgid ""
 "AlternC will configure Apache and other services to listen to this address. "
 "This is usually the same as the primary IP of the server, unless the server "
@@ -304,19 +303,19 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:104
+#: ../templates:12001
 msgid "In other words, this is the IP address of eth0."
 msgstr "En d'autres mots, ceci est l'adresse assignée à eth0."
 
 #. Type: string
 #. Description
-#: ../templates:113
-msgid "the default MX to assign to new domains"
-msgstr "le MX à assigner aux nouveaux domaines"
+#: ../templates:13001
+msgid "The default MX to assign to new domains:"
+msgstr "le MX à assigner aux nouveaux domaines : "
 
 #. Type: string
 #. Description
-#: ../templates:113
+#: ../templates:13001
 msgid ""
 "AlternC will assign this hostname as the MX record for all the domains it "
 "hosts. It is usually better be left alone."
@@ -326,36 +325,35 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:119
-msgid "The path where AlternC is installed"
-msgstr "Emplacement d'AlternC"
+#: ../templates:14001
+msgid "The path where AlternC is installed:"
+msgstr "Emplacement d'AlternC : "
 
 #. Type: string
 #. Description
-#: ../templates:119
-#, fuzzy
+#: ../templates:14001
 msgid ""
 "Please enter the partition name where alternc is installed. This is used "
 "mainly for disk quotas."
 msgstr ""
-"Entrez le nom du chemein où AlternC est installe. Cela est nécessaire pour "
+"Entrez le nom du chemin où AlternC est installé. Cela est nécessaire pour "
 "la gestion des quotas d'espace disque."
 
 #. Type: string
 #. Description
-#: ../templates:119
+#: ../templates:14001
 msgid "Warning : Be careful ! It can generate some problems."
-msgstr ""
+msgstr "Attention : Prenez garde ! Cela peut entraîner quelques problèmes."
 
 #. Type: string
 #. Description
-#: ../templates:127
-msgid "monitoring server"
-msgstr "serveur de surveillance"
+#: ../templates:15001
+msgid "The monitoring server:"
+msgstr "serveur de surveillance : "
 
 #. Type: string
 #. Description
-#: ../templates:127
+#: ../templates:15001
 msgid ""
 "IP address (or ip/prefix) of the server(s) which we want to authorize ping "
 "to us and apache status pages. Completely optional."
@@ -365,13 +363,13 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:133
+#: ../templates:16001
 msgid "trusted servers for bind"
 msgstr "serveurs de confiance pour bind"
 
 #. Type: string
 #. Description
-#: ../templates:133
+#: ../templates:16001
 msgid ""
 "IP address or prefix of machines within our trust for DNS transfers, "
 "delimited by ';', optional."
@@ -381,26 +379,26 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:139
-msgid "SMTP authorized networks"
-msgstr "réseaux autorisés en SMTP"
+#: ../templates:17001
+msgid "SMTP authorized networks:"
+msgstr "réseaux autorisés en SMTP : "
 
 #. Type: string
 #. Description
-#: ../templates:139
+#: ../templates:17001
 msgid "IP addresses of the networks authorized in SMTP, space-delimited."
 msgstr ""
 "Adresses ip des reseaux autorisés en SMTP (ou ip/prefixe) séparés par espace."
 
 #. Type: note
 #. Description
-#: ../templates:144
+#: ../templates:18001
 msgid "POP Before SMTP deprecated"
 msgstr "POP Before SMTP déprécié"
 
 #. Type: note
 #. Description
-#: ../templates:144
+#: ../templates:18001
 msgid ""
 "AlternC doesn't automatically configure the pop-before-smtp package anymore, "
 "since it is correctly configured for SASL authentification these days. If "
@@ -412,13 +410,13 @@ msgstr ""
 
 #. Type: note
 #. Description
-#: ../templates:144
+#: ../templates:18001
 msgid "# For Courier-POP3 and Courier-IMAP:"
 msgstr "# For Courier-POP3 and Courier-IMAP:"
 
 #. Type: note
 #. Description
-#: ../templates:144
+#: ../templates:18001
 msgid ""
 "in the /etc/pop-before-smtp/pop-before-smtp.conf and uncomment it. hash:/var/"
 "lib/pop-before-smtp/hosts must also be added to the mynetworks directive of /"
@@ -430,25 +428,25 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../templates:158
-msgid "Should I remove all databases (/var/alternc/db/) ?"
-msgstr "Les bases de données doivent elles être supprimés (/var/alternc/db) ?"
+#: ../templates:19001
+msgid "Should AlternC remove all databases (/var/lib/mysql/) ?"
+msgstr "Les bases de données doivent elles être supprimés (/var/lib/mysql) ?"
 
 #. Type: boolean
 #. Description
-#: ../templates:158
+#: ../templates:19001
 msgid "All users databases will be trashed"
 msgstr "Toutes les bases de données des utilisateurs seront perdues"
 
 #. Type: boolean
 #. Description
-#: ../templates:163
-msgid "Should I remove users datas ?"
+#: ../templates:20001
+msgid "Should AlternC remove users datas ?"
 msgstr "Les données des utilisateurs doivent elles êtres supprimés ?"
 
 #. Type: boolean
 #. Description
-#: ../templates:163
+#: ../templates:20001
 msgid "The files and apache redirections created by users will be trashed"
 msgstr ""
 "Les fichiers et les redirections d'apache créés par les utilisateurs seront "
@@ -456,24 +454,24 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../templates:168
-msgid "Should I remove bind zones ?"
-msgstr "Les zones de bind doivent elles être supprimés ?"
+#: ../templates:21001
+msgid "Should AlternC remove bind zones ?"
+msgstr "Les zones de bind doivent elles être supprimées ?"
 
 #. Type: boolean
 #. Description
-#: ../templates:168
+#: ../templates:21001
 msgid "It will delete all bind zones created by AlternC"
 msgstr "Cela supprimera toutes les zone de bind créées par AlternC"
 
 #. Type: boolean
 #. Description
-#: ../templates:173
-msgid "Should I remove bind mailboxes ?"
-msgstr "Les boites mails doivent elles être supprimés ?"
+#: ../templates:22001
+msgid "Should AlternC remove bind mailboxes ?"
+msgstr "Les boites mails doivent elles être supprimées ?"
 
 #. Type: boolean
 #. Description
-#: ../templates:173
+#: ../templates:22001
 msgid "If you accept all users e-mails will be deleted"
-msgstr "Si vous acceptez, toutes les e-mails des utilisateurs seront supprimés"
+msgstr "Si vous acceptez, toutes les e-mails des utilisateurs seront supprimées"
