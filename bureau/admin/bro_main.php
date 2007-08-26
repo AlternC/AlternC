@@ -150,8 +150,10 @@ if ($formu==2 && $actrename && count($d)) {
   echo "<p>"._("Rename")."</p>";
   for ($i=0;$i<count($d);$i++) {
     $d[$i]=ssla($d[$i]);
-    echo "<p>"._("Old Name:")." <input type=\"hidden\" name=\"o[$i]\" value=\"".$d[$i]."\" />".$d[$i]."<br />";
-    echo _("New Name:")." <input type=\"text\" class=\"int\" style=\"width: 350px\" name=\"d[$i]\" value=\"".$d[$i]."\" /></p>";
+    echo "<table>";
+    echo "<tr><td>"._("Old Name:")."</td><td><input type=\"hidden\" name=\"o[$i]\" value=\"".$d[$i]."\" />".$d[$i]."</td></tr>";
+    echo "<tr><td>"._("New Name:")."</td><td><input type=\"text\" class=\"int\" style=\"width: 350px\" name=\"d[$i]\" value=\"".$d[$i]."\" /></td></tr>";
+    echo "</table>";
   }
   echo "<p><input type=\"submit\" class=\"inb\" name=\"submit\" value=\""._("Rename")."\" /></p>";
   echo "</form>\n";

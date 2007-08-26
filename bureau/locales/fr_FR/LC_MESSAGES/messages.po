@@ -2065,14 +2065,12 @@ msgid "Missing uid"
 msgstr "Utilisateur manquant"
 
 #: ../admin/adm_deactivate.php:16
-#, fuzzy
 msgid "User does not exist"
-msgstr "Le membre '%s' n'existe pas"
+msgstr "L'utilisateur n'existe pas"
 
 #: ../admin/adm_deactivate.php:20 ../admin/adm_deactivate.php:28
-#, fuzzy
 msgid "Confirm"
-msgstr "Confirmer le mot de passe"
+msgstr "Confirmer"
 
 #: ../admin/adm_deactivate.php:21
 msgid "WARNING: experimental feature, use at your own risk"
@@ -2088,9 +2086,8 @@ msgid ""
 msgstr "Les domaines suivants vont être désactivés et redirigés vers l'URL entré dans la boîte ci-bas. Une sauvegarde de votre configuration sera affichée comme une série de requêtes SQL que vous pouvez recharger pour restaurer la configuration actuelle. Cliquez confirmer si vous êtes certain que vous voulez désactiver tous les domaines de cet utilisateur."
 
 #: ../admin/adm_deactivate.php:27
-#, fuzzy
 msgid "Redirection URL:"
-msgstr "Redirection vers une url"
+msgstr "Redirection vers l'URL : "
 
 #: ../admin/adm_deactivate.php:31
 msgid "Domains of user: "
@@ -2106,14 +2103,13 @@ msgid "-- Redirecting all domains and subdomains of the user %s to %s\n"
 msgstr "-- Rediriger tous les domaines et sous-domaines de l'utilisateur %s vers %s\n"
 
 #: ../admin/adm_dodefquotas.php:63
-#, fuzzy, php-format
+#, php-format
 msgid "Deleting quota %s"
-msgstr "Suppression du sous-domaine %s"
+msgstr "Suppression du quota %s"
 
 #: ../admin/adm_dodefquotas.php:69
-#, fuzzy
 msgid "WARNING : Confirm the deletion of the quota"
-msgstr "ATTENTION : Etes-vous sur de vouloir supprimer le sous-domaine suivant"
+msgstr "ATTENTION : Etes-vous sur de vouloir supprimer le quota"
 
 #: ../admin/adm_dodel.php:61
 #, php-format
@@ -2134,14 +2130,13 @@ msgid "Deactivate"
 msgstr "Désactiver"
 
 #: ../admin/adm_list.php:222
-#, fuzzy, php-format
+#, php-format
 msgid "%s accounts"
-msgstr "Comptes FTP"
+msgstr "%s comptes"
 
 #: ../admin/adm_panel.php:57
-#, fuzzy
 msgid "Account creation statistics"
-msgstr "Compte créé par %s"
+msgstr "Statistiques de création des comptes"
 
 #: ../admin/bro_main.php:69
 #, php-format
@@ -2149,9 +2144,8 @@ msgid "Deleting files and/or directories"
 msgstr "Effacer des fichiers ou des répertoires"
 
 #: ../admin/bro_main.php:74
-#, fuzzy
 msgid "WARNING : Confirm the deletion of this files"
-msgstr "ATTENTION : Confirmez-vous la suppression de cette utilisateur"
+msgstr "ATTENTION : Confirmez-vous la suppression de ces fichiers"
 
 #: ../admin/sql_restore.php:54
 msgid "Please choose the filename containing SQL data to be restored."
@@ -2168,9 +2162,8 @@ msgid ""
 msgstr "Image_Graph n'est pas installé. pear install Image_Graph-devel pour voir ce graphique."
 
 #: ../admin/stats_members.php:41
-#, fuzzy
 msgid "Account creation per month"
-msgstr "Compte créé par %s"
+msgstr "Comptes créés par mois"
 
 #: ../admin/stats_members.php:54
 msgid "before the month"
@@ -2209,3 +2202,8 @@ msgstr "durant le mois"
 msgid "WARNING: Confirm the deletion of this files"
 msgstr "ATTENTION : Confirmez la suppression de ces fichiers"
 
+msgid "Old Name:"
+msgstr "Ancien nom : "
+
+msgid "New Name:"
+msgstr "Nouveau nom : "
