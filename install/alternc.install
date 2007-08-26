@@ -222,6 +222,30 @@ if [ -e /etc/proftpd.conf ] ; then
     chmod 640 /etc/proftpd/proftpd.conf
 fi
 
+if [ -e /etc/locale.gen ] ; then
+    LOCALECHANGED=""
+    # Add de_DE ISO-8859-1, en_US ISO-8859-1, es_ES ISO-8859-1, fr_FR ISO-8859-1 to the locales : 
+    if ! grep -q "^de_DE ISO-8859-1$" /etc/locale.gen ; then
+	echo "de_DE ISO-8859-1" >>/etc/locale.gen
+	LOCALECHANGED=1
+    fi
+    if ! grep -q "^en_US ISO-8859-1$" /etc/locale.gen ; then
+	echo "en_US ISO-8859-1" >>/etc/locale.gen
+	LOCALECHANGED=1
+    fi
+    if ! grep -q "^es_ES ISO-8859-1$" /etc/locale.gen ; then
+	echo "es_ES ISO-8859-1" >>/etc/locale.gen
+	LOCALECHANGED=1
+    fi
+    if ! grep -q "^fr_FR ISO-8859-1$" /etc/locale.gen ; then 
+	echo "fr_FR ISO-8859-1" >>/etc/locale.gen
+	LOCALECHANGED=1
+    fi
+    if [ "$LOCALECHANGED" ] ; then
+	locale-gen
+    fi
+fi
+
 #######################################################################
 # Restart services
 #
