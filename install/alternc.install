@@ -223,12 +223,12 @@ if [ -e /etc/proftpd.conf ] ; then
 fi
 
 #######################################################################
-# Reload services
+# Restart services
 #
 for service in apache apache-ssl postfix bind9 courier-authdaemon \
                courier-imap courier-imap-ssl courier-pop courier-pop-ssl \
                cron proftpd; do
-    test -x /etc/init.d/$service && invoke-rc.d $service reload || true
+    test -x /etc/init.d/$service && invoke-rc.d $service restart || true
 done
 
 #######################################################################
