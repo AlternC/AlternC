@@ -634,7 +634,8 @@ class m_dom {
     $dom=strtolower($dom);
     $sub=strtolower($sub);
 
-    if (!(($sub == '*') || ($sub=="") || (preg_match('/([a-z0-9][\.\-a-z0-9]*)?[a-z0-9]/', $sub)))) {
+    //    if (!(($sub == '*') || ($sub=="") || (preg_match('/([a-z0-9][\.\-a-z0-9]*)?[a-z0-9]/', $sub)))) {
+    if (($sub != '*') && checkfqdn($sub)) {
       $err->raise("dom",24);
       return false;
     }

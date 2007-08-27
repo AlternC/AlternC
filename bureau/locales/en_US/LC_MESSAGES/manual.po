@@ -324,7 +324,7 @@ msgid "err_err_0"
 msgstr "OK"
 
 msgid "err_err_1"
-msgstr "The error message does not exists (%s)"
+msgstr "The error message does not exist (%s)"
 
 msgid "the %3$d-%2$d-%1$d at %4$d:%5$d"
 msgstr "%3$d/%1$d/%2$d, at %6$d:%5$d %7$s"
