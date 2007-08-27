@@ -363,7 +363,7 @@ msgstr "You are not allowed to change your password."
 msgid "err_mem_12"
 msgstr "You must be a system administrator to do this"
 
-# Please do NOT translate those strings to each language. Use the country language instead
+# Please do NOT translate those strings to each language. Use the original language instead
 msgid "fr_FR"
 msgstr "Français (France)"
 
@@ -380,10 +380,10 @@ msgid "de_DE"
 msgstr "Deutsch (Germany)"
 
 msgid "es_ES"
-msgstr "Español"
+msgstr "Español (Spania)"
 
 msgid "es_VE"
-msgstr "Español"
+msgstr "Español (Venezuela)"
 
 msgid "err_quota_1"
 msgstr "Error writing the quota entry !"

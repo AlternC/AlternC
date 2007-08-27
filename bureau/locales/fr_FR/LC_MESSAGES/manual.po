@@ -385,10 +385,10 @@ msgid "de_DE"
 msgstr "Deutsch (Germany)"
 
 msgid "es_ES"
-msgstr "Espanol"
+msgstr "Español (Spania)"
 
 msgid "es_VE"
-msgstr "Espanol"
+msgstr "Español (Venezuela)"
 
 msgid "err_quota_0"
 msgstr "OK"

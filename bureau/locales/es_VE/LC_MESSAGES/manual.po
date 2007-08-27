@@ -364,7 +364,7 @@ msgstr "No puede cambiar su contraseña."
 msgid "err_mem_12"
 msgstr "Debe ser administrador para cambiar las preferencias de Administrador."
 
-# Please do NOT translate those strings to each language. Use the country language instead
+# Please do NOT translate those strings to each language. Use the original language instead
 msgid "fr_FR"
 msgstr "Français (France)"
 
@@ -381,10 +381,10 @@ msgid "de_DE"
 msgstr "Deutsch (Germany)"
 
 msgid "es_ES"
-msgstr "Espanol"
+msgstr "Español (Spania)"
 
 msgid "es_VE"
-msgstr "Espanol"
+msgstr "Español (Venezuela)"
 
 #, fuzzy
 msgid "err_quota_0"
