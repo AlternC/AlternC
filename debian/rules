@@ -57,6 +57,7 @@ install: build
 	chown -R www-data:www-data debian/alternc/var/alternc/html
 	chown -R www-data:www-data debian/alternc/var/run/alternc
 	chown -R www-data:www-data debian/alternc/var/log/alternc
+	chown -R www-data:www-data debian/alternc/var/alternc/tmp
 
 	chmod a+x debian/alternc/usr/share/alternc/install/alternc.install
 	chmod a+x debian/alternc/usr/share/alternc/install/dopo.sh
