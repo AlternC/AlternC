@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: anarcat@koumbit.org\n"
-"POT-Creation-Date: 2007-08-26 21:20+0200\n"
+"POT-Creation-Date: 2007-08-27 11:43+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -77,7 +77,7 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../templates:3001
-msgid "Name of your hosting service"
+msgid "Name of your hosting service:"
 msgstr ""
 
 #. Type: string
@@ -296,22 +296,22 @@ msgstr ""
 #. Description
 #: ../templates:15001
 msgid ""
-"IP address (or ip/prefix) of the server(s) which we want to authorize ping "
-"to us and apache status pages. Completely optional."
+"IP address (or ip/prefix) of the server(s) which must be authorized to  ping "
+"us and access apache status pages. Completely optional."
 msgstr ""
 
 #. Type: string
 #. Description
 #: ../templates:16001
-msgid "trusted servers for bind"
+msgid "trusted servers for bind:"
 msgstr ""
 
 #. Type: string
 #. Description
 #: ../templates:16001
 msgid ""
-"IP address or prefix of machines within our trust for DNS transfers, "
-"delimited by ';', optional."
+"IP address or prefix of trusted machines for DNS transfers, delimited by "
+"';', optional."
 msgstr ""
 
 #. Type: string

@@ -125,13 +125,13 @@ _Description: The path where AlternC is installed:
 Template: alternc/monitor_ip
 Type: string
 _Description: The monitoring server:
- IP address (or ip/prefix) of the server(s) which we want to authorize ping
- to us and apache status pages. Completely optional.
+ IP address (or ip/prefix) of the server(s) which must be authorized to 
+ ping us and access apache status pages. Completely optional.
 
 Template: alternc/bind_internal
 Type: string
-_Description: trusted servers for bind
- IP address or prefix of machines within our trust for DNS transfers,
+_Description: trusted servers for bind:
+ IP address or prefix of trusted machines for DNS transfers,
  delimited by ';', optional.
 
 Template: alternc/mynetwork

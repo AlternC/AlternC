@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AlternC 0.9.5\n"
 "Report-Msgid-Bugs-To: anarcat@koumbit.org\n"
-"POT-Creation-Date: 2007-08-26 21:20+0200\n"
+"POT-Creation-Date: 2007-08-27 11:43+0200\n"
 "PO-Revision-Date: 2006-04-26 11:16+0200\n"
 "Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
 "Language-Team: Team AlternC <team@alternc.org>\n"
@@ -127,8 +127,8 @@ msgstr ""
 "Entrez le nom de domaine de votre serveur de dns primaire. Cela peut être "
 "votre serveur puisque bind est installé et configuré par AlternC. Cependant, "
 "si votre service d'hébergement est gros, vous pouvez dispoer d'un serveur "
-"dns primaire externe synchronisé avec vos serveurs sous AlternC. "
-"La valeur par défaut devrait convenir dans la plupart des cas."
+"dns primaire externe synchronisé avec vos serveurs sous AlternC. La valeur "
+"par défaut devrait convenir dans la plupart des cas."
 
 #. Type: string
 #. Description
@@ -336,8 +336,8 @@ msgid ""
 "Please enter the partition name where alternc is installed. This is used "
 "mainly for disk quotas."
 msgstr ""
-"Entrez le nom du chemin où AlternC est installé. Cela est nécessaire pour "
-"la gestion des quotas d'espace disque."
+"Entrez le nom du chemin où AlternC est installé. Cela est nécessaire pour la "
+"gestion des quotas d'espace disque."
 
 #. Type: string
 #. Description
@@ -355,27 +355,27 @@ msgstr "serveur de surveillance : "
 #. Description
 #: ../templates:15001
 msgid ""
-"IP address (or ip/prefix) of the server(s) which we want to authorize ping "
-"to us and apache status pages. Completely optional."
+"IP address (or ip/prefix) of the server(s) which must be authorized to  ping "
+"us and access apache status pages. Completely optional."
 msgstr ""
-"Adresse IP (ou ip/prefixe) du(des) serveur(s) dont on veut autoriser le ping "
-"vers nous et le status apache (pour le monitoring de serveur). Facultatif."
+"Adresse IP (ou ip/prefixe) du(des) serveur(s) dont qui pourront pinguer et "
+"accéder au status apache (pour le monitoring de serveur). Facultatif."
 
 #. Type: string
 #. Description
 #: ../templates:16001
-msgid "trusted servers for bind"
-msgstr "serveurs de confiance pour bind"
+msgid "trusted servers for bind:"
+msgstr "serveurs de confiance pour bind : "
 
 #. Type: string
 #. Description
 #: ../templates:16001
 msgid ""
-"IP address or prefix of machines within our trust for DNS transfers, "
-"delimited by ';', optional."
+"IP address or prefix of trusted machines for DNS transfers, delimited by "
+"';', optional."
 msgstr ""
-"Adresse IP ou classe d'IP des machines à l'intérieur de notre réseau de "
-"confiance DNS, séparés par ';', facultatif."
+"Adresse IP ou classe d'IP des machines autorisées à utiliser le serveur DNS, "
+"séparées par ';', facultatif."
 
 #. Type: string
 #. Description
@@ -474,4 +474,5 @@ msgstr "Les boites mails doivent elles être supprimées ?"
 #. Description
 #: ../templates:22001
 msgid "If you accept all users e-mails will be deleted"
-msgstr "Si vous acceptez, toutes les e-mails des utilisateurs seront supprimées"
+msgstr ""
+"Si vous acceptez, toutes les e-mails des utilisateurs seront supprimées"
