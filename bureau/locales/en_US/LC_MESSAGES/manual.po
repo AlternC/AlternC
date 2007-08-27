@@ -385,6 +385,10 @@ msgstr "Español (Spania)"
 msgid "es_VE"
 msgstr "Español (Venezuela)"
 
+#, fuzzy
+msgid "err_quota_0"
+msgstr "Error writing the quota entry !"
+
 msgid "err_quota_1"
 msgstr "Error writing the quota entry !"
 
@@ -393,6 +397,9 @@ msgstr "MySQL Databases"
 
 msgid "quota_mysql_users"
 msgstr "MySQL Databases"
+
+msgid "quota_web"
+msgstr "Disk space"
 
 msgid "err_mysql_2"
 msgstr ""
@@ -468,6 +475,58 @@ msgstr "There is currently no raw statistic set."
 
 msgid "err_sta2_3"
 msgstr "The requested raw statistic set has not been found."
+
+msgid "err_bro_1"
+msgstr "File or folder name is incorrect"
+
+msgid "err_bro_2"
+msgstr "You cannot move or copy a file to the same folder"
+
+msgid "help_dns_mx %s %s"
+msgstr ""
+"If we manage your DNS <br />You can manage your mails elsewhere if you want "
+"(MX field).<br />Write <b><code>%s</code></b> in this field if your mail "
+"must be managed by %s<br />or put the IP address or name of the mail server "
+"used to manage your mails.<small>Warning : if you put nothing in this field, "
+"your mails will be unavailable</small>"
+
+msgid "help_dns_mail"
+msgstr ""
+"If we don't manage the DNS for this domain <br />do we manage your mails?"
+
+msgid "help_domain_del %s"
+msgstr ""
+"If you want to delete the domain %s, click the button below.Warning : this "
+"delete all the ftp, mails, mailing-lists ... associated with thisdomain and "
+"all its subdomains!"
+
+msgid "help_sql_list_ok"
+msgstr ""
+"You can create various databases<br />Click on 'SQL Admin' in the menu to "
+"manage them<br />or use the table below to backup, retrieve or delete them:"
+
+msgid "help_sql_list_no"
+msgstr ""
+"Your haven't created your main database yet, please enter a password to "
+"create it."
+
+msgid "err_stats_4"
+msgstr "This statistic set already exists !"
+
+msgid "err_stats_5"
+msgstr ""
+"Your statistic set quota is over. You cannot create more statistic sets."
+
+msgid "err_stats_6"
+msgstr "This language is not supported."
+
+msgid "err_stats_7"
+msgstr "Aucune jeu de statistiques brutes"
+
+# $d,$m,$y,$h,$i,$hh,$am
+#  1  2  3  4  5  6   7
+msgid "%3$d-%2$d-%1$d %4$d:%5$d"
+msgstr "%2$d/%1$d/%3$d %6$d:%5$d %7$d"
 
 #~ msgid "Description"
 #~ msgstr "Description"
@@ -851,32 +910,8 @@ msgstr "The requested raw statistic set has not been found."
 #~ msgid "all/none"
 #~ msgstr "all/none"
 
-#~ msgid "err_bro_1"
-#~ msgstr "File or folder name is incorrect"
-
-#~ msgid "err_bro_2"
-#~ msgstr "You cannot move or copy a file to the same folder"
-
 #~ msgid "No files in this folder"
 #~ msgstr "No files in this folder"
-
-msgid "help_dns_mx %s %s"
-msgstr ""
-"If we manage your DNS <br />You can manage your mails elsewhere if you "
-"want (MX field).<br />Write <b><code>%s</code></b> in this field if your "
-"mail must be managed by %s<br />or put the IP address or name of the mail "
-"server used to manage your mails.<small>Warning : if you put nothing in "
-"this field, your mails will be unavailable</small>"
-
-msgid "help_dns_mail"
-msgstr ""
-"If we don't manage the DNS for this domain <br />do we manage your mails?"
-
-msgid "help_domain_del %s"
-msgstr ""
-"If you want to delete the domain %s, click the button below.Warning : "
-"this delete all the ftp, mails, mailing-lists ... associated with "
-"thisdomain and all its subdomains!"
 
 #~ msgid "Domain hosting"
 #~ msgstr "Domain hosting"
@@ -1140,9 +1175,6 @@ msgstr ""
 #~ msgid "Mailboxes"
 #~ msgstr "Mailboxes"
 
-#~ msgid "quota_web"
-#~ msgstr "Disk space"
-
 #~ msgid ""
 #~ "Enter your username and your password to connect to the virtual desktop "
 #~ "interface"
@@ -1188,17 +1220,6 @@ msgstr ""
 
 #~ msgid "Help"
 #~ msgstr "Help"
-
-msgid "help_sql_list_ok"
-msgstr ""
-"You can create various databases<br />Click on 'SQL Admin' in the menu to "
-"manage them<br />or use the table below to backup, retrieve or delete "
-"them:"
-
-msgid "help_sql_list_no"
-msgstr ""
-"Your haven't created your main database yet, please enter a password to "
-"create it."
 
 #~ msgid "MySQL Databases"
 #~ msgstr "MySQL Databases"
@@ -1304,19 +1325,6 @@ msgstr ""
 #~ msgid "Restore"
 #~ msgstr "Restore"
 
-#~ msgid "err_stats_4"
-#~ msgstr "This statistic set already exists !"
-
-#~ msgid "err_stats_5"
-#~ msgstr ""
-#~ "Your statistic set quota is over. You cannot create more statistic sets."
-
-#~ msgid "err_stats_6"
-#~ msgstr "This language is not supported."
-
-#~ msgid "err_stats_7"
-#~ msgstr "Aucune jeu de statistiques brutes"
-
 #~ msgid "Web Statistics"
 #~ msgstr "Web Statistics"
 
@@ -1383,8 +1391,3 @@ msgstr ""
 
 #~ msgid "New Raw Statistics (apache)"
 #~ msgstr "New Raw Statistics (apache)"
-
-# $d,$m,$y,$h,$i,$hh,$am
-#  1  2  3  4  5  6   7
-msgid "%3$d-%2$d-%1$d %4$d:%5$d"
-msgstr "%2$d/%1$d/%3$d %6$d:%5$d %7$d"

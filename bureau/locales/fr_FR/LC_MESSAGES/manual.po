@@ -402,6 +402,9 @@ msgstr "Bases de données MySQL"
 msgid "quota_mysql_users"
 msgstr "Utilisateurs MySQL"
 
+msgid "quota_web"
+msgstr "Espace disque (Ko)"
+
 msgid "err_mysql_2"
 msgstr ""
 "Le nom de la base de données ne peut contenir que des chiffres ou lettres "
@@ -495,8 +498,71 @@ msgstr "Répertoire ou fichier incorrect !"
 msgid "err_bro_2"
 msgstr "Vous ne pouvez pas déplacer un fichier dans le même répertoire !"
 
-msgid "quota_web"
-msgstr "Espace disque (Ko)"
+msgid "help_dns_mx %s %s"
+msgstr ""
+"If we manage your DNS <br />You can manage your mails elsewhere if you want "
+"(MX field).<br />Write <b><code>%s</code></b> in this field if your mail "
+"must be managed by %s<br />or put the IP address or name of the mail server "
+"used to manage your mails.<small>Warning : if you put nothing in this field, "
+"your mails will be unavailable</small>"
+
+#, fuzzy
+msgid "help_dns_mail"
+msgstr ""
+"- Entrez le nom du domaine que vous souhaitez héberger. Le nom de domaine "
+"doit être complet, mais <b>sans le www.</b><br /> IMPORTANT : Si vous voulez "
+"un hébergement réel de domaine, il faut que les DNS de votre domaine "
+"pointent vers nos serveurs DNS. Contacter votre hébergeur pour plus "
+"d'information.<br /> Exemples : globenet.org / demo.com / test.eu.org etc."
+"<br />Plus d'info sur la gestion des domaines dans l'aide en ligne "
+"HELPID_200<br />"
+
+#, fuzzy
+msgid "help_domain_del %s"
+msgstr ""
+"Cliquez sur le lien ci-dessus. Vous pourrez ensuite accéder aux paremètres "
+"du domaine dans le menu à gauche.2 liens vont apparaitre : <br />- un "
+"premier pour modifier les paramètres d'hébergement du domaine (sous-"
+"domaines, redirections, hébergement mails ...) <br />- un second pour gérer "
+"les comptes emails du domaine (si vous souhaitez créer des boites aux "
+"lettres).<br />Plus d'info sur la gestion des domaines dans l'aide en ligne "
+"HELPID_200<br />"
+
+#, fuzzy
+msgid "help_sql_list_ok"
+msgstr ""
+"Vous n'avez actuellement aucun Compte FTP de disponible. Cliquez sur "
+"'Création d'un compte ftp' pour en créer un.<br />Pour pouvoir accéder à vos "
+"fichiers avec un logiciel de ftp, vous devez créer au moins un compte.  "
+"Chaque compte est associé à un répertoire, et n'aura donc accès qu'aux "
+"fichiers situés dans ce répertoire ou en dessous. <br />Plus d'info sur le "
+"FTP dans l'aide en ligne HELPID_100<br />"
+
+#, fuzzy
+msgid "help_sql_list_no"
+msgstr ""
+"Vous n'avez actuellement aucun Compte FTP de disponible. Cliquez sur "
+"'Création d'un compte ftp' pour en créer un.<br />Pour pouvoir accéder à vos "
+"fichiers avec un logiciel de ftp, vous devez créer au moins un compte.  "
+"Chaque compte est associé à un répertoire, et n'aura donc accès qu'aux "
+"fichiers situés dans ce répertoire ou en dessous. <br />Plus d'info sur le "
+"FTP dans l'aide en ligne HELPID_100<br />"
+
+#, fuzzy
+msgid "err_stats_4"
+msgstr "Aucun répertoire protégé"
+
+#, fuzzy
+msgid "err_stats_5"
+msgstr "Impossible de supprimer le fichier '%s'/.htaccess"
+
+#, fuzzy
+msgid "err_stats_6"
+msgstr "Impossible de supprimer le fichier '%s'/.htpasswd"
+
+#, fuzzy
+msgid "err_stats_7"
+msgstr "Le fichier .htaccess n'existe pas"
 
 # $d,$m,$y,$h,$i,$hh,$am
 #  1  2  3  4  5  6   7

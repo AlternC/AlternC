@@ -385,10 +385,10 @@ msgid "de_DE"
 msgstr "Deutsch (Germany)"
 
 msgid "es_ES"
-msgstr "Espanol"
+msgstr "Español (Spania)"
 
 msgid "es_VE"
-msgstr "Espanol"
+msgstr "Español (Venezuela)"
 
 msgid "err_quota_0"
 msgstr "OK"
@@ -401,6 +401,9 @@ msgstr "Bases de données MySQL"
 
 msgid "quota_mysql_users"
 msgstr "Utilisateurs MySQL"
+
+msgid "quota_web"
+msgstr "Disk space"
 
 msgid "err_mysql_2"
 msgstr ""
@@ -486,3 +489,58 @@ msgstr "Aucune jeu de statistiques brutes"
 
 msgid "err_sta2_3"
 msgstr "Jeu de statistiques brutes non trouvé"
+
+
+msgid "err_bro_1"
+msgstr "File or folder name is incorrect"
+
+msgid "err_bro_2"
+msgstr "You cannot move or copy a file to the same folder"
+
+msgid "help_dns_mx %s %s"
+msgstr ""
+"If we manage your DNS <br />You can manage your mails elsewhere if you "
+"want (MX field).<br />Write <b><code>%s</code></b> in this field if your "
+"mail must be managed by %s<br />or put the IP address or name of the mail "
+"server used to manage your mails.<small>Warning : if you put nothing in "
+"this field, your mails will be unavailable</small>"
+
+msgid "help_dns_mail"
+msgstr ""
+"If we don't manage the DNS for this domain <br />do we manage your mails?"
+
+msgid "help_domain_del %s"
+msgstr ""
+"If you want to delete the domain %s, click the button below.Warning : "
+"this delete all the ftp, mails, mailing-lists ... associated with "
+"thisdomain and all its subdomains!"
+
+msgid "help_sql_list_ok"
+msgstr ""
+"You can create various databases<br />Click on 'SQL Admin' in the menu to "
+"manage them<br />or use the table below to backup, retrieve or delete "
+"them:"
+
+msgid "help_sql_list_no"
+msgstr ""
+"Your haven't created your main database yet, please enter a password to "
+"create it."
+
+msgid "err_stats_4"
+msgstr "This statistic set already exists !"
+
+msgid "err_stats_5"
+msgstr ""
+"Your statistic set quota is over. You cannot create more statistic sets."
+
+msgid "err_stats_6"
+msgstr "This language is not supported."
+
+msgid "err_stats_7"
+msgstr "Aucune jeu de statistiques brutes"
+
+# $d,$m,$y,$h,$i,$hh,$am
+#  1  2  3  4  5  6   7
+msgid "%3$d-%2$d-%1$d %4$d:%5$d"
+msgstr "%2$d/%1$d/%3$d %6$d:%5$d %7$d"
+

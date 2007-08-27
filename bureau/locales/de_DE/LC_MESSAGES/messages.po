@@ -32,6 +32,7 @@ msgstr ""
 #: ../admin/adm_tlddoedit.php:33 ../admin/adm_tldedit.php:33
 #: ../admin/adm_tld.php:33 ../admin/adm_variables.php:33
 #: ../class/reset_stats_conf.php:6 ../admin/adm_deactivate.php:11
+#: ../admin/adm_deactivate.php:44
 msgid "This page is restricted to authorized staff"
 msgstr ""
 
@@ -236,7 +237,7 @@ msgstr ""
 #: ../admin/dom_edit.php:144 ../admin/dom_edit.php:156
 #: ../admin/dom_subdel.php:61 ../admin/sql_bck.php:77 ../admin/sql_del.php:69
 #: ../admin/sql_users_del.php:69 ../admin/adm_dodefquotas.php:73
-#: ../admin/adm_dodel.php:76 ../admin/bro_main.php:81
+#: ../admin/adm_dodel.php:76 ../admin/bro_main.php:81 ../admin/bro_main.php:80
 msgid "No"
 msgstr "Nein"
 
@@ -245,6 +246,7 @@ msgstr "Nein"
 #: ../admin/dom_subdel.php:60 ../admin/sql_bck.php:78 ../admin/sql_del.php:69
 #: ../admin/sql_users_del.php:69 ../admin/adm_dodefquotas.php:72
 #: ../admin/adm_dodel.php:75 ../admin/bro_main.php:60 ../admin/bro_main.php:80
+#: ../admin/bro_main.php:79
 msgid "Yes"
 msgstr "Ja"
 
@@ -644,15 +646,18 @@ msgstr ""
 
 #: ../admin/bro_main.php:89 ../admin/hta_edit.php:50 ../admin/hta_edit.php:82
 #: ../admin/menu_brouteur.php:34 ../admin/bro_main.php:127
+#: ../admin/bro_main.php:126
 msgid "File browser"
 msgstr "Dateimanager"
 
 #: ../admin/bro_main.php:95 ../admin/bro_main.php:133
+#: ../admin/bro_main.php:132
 msgid "Create"
 msgstr ""
 
 #: ../admin/bro_main.php:97 ../class/m_bro.php:222 ../class/m_bro.php:231
 #: ../admin/bro_main.php:135 ../class/m_bro.php:230 ../class/m_bro.php:239
+#: ../admin/bro_main.php:134
 msgid "File"
 msgstr "Datei"
 
@@ -661,13 +666,14 @@ msgstr "Datei"
 #: ../admin/hta_adduser.php:47 ../admin/hta_edituser.php:47
 #: ../admin/hta_list.php:66 ../admin/sta2_add_raw.php:53
 #: ../admin/sta2_edit_raw.php:58 ../admin/sta2_list.php:57
-#: ../admin/bro_main.php:136
+#: ../admin/bro_main.php:136 ../admin/bro_main.php:135
 msgid "Folder"
 msgstr ""
 
 #: ../admin/bro_main.php:114 ../admin/bro_main.php:120
 #: ../admin/bro_main.php:140 ../admin/bro_main.php:152
 #: ../admin/bro_main.php:158 ../admin/bro_main.php:178
+#: ../admin/bro_main.php:150
 msgid "Rename"
 msgstr ""
 
@@ -862,6 +868,7 @@ msgstr ""
 
 #: ../admin/dom_doadd.php:49 ../admin/dom_dodel.php:69
 #: ../admin/dom_editdns.php:57 ../admin/hta_doedituser.php:53
+#: ../admin/dom_subdodel.php:53
 msgid "Click here to continue"
 msgstr ""
 
@@ -926,7 +933,7 @@ msgid "IP redirection"
 msgstr ""
 
 #: ../admin/dom_edit.php:122 ../admin/dom_subedit.php:83
-#: ../class/m_dom.php:551 ../class/m_dom.php:594
+#: ../class/m_dom.php:551 ../class/m_dom.php:594 ../class/m_dom.php:559
 msgid "Webmail access"
 msgstr ""
 
@@ -1741,47 +1748,58 @@ msgid "Delete the checked Raw Statistics (apache)"
 msgstr ""
 
 #: ../class/functions.php:239 ../class/functions.php:260
+#: ../class/functions.php:258
 msgid "Bytes"
 msgstr "Bytes"
 
 #: ../class/functions.php:241 ../class/functions.php:262
+#: ../class/functions.php:260
 msgid "Byte"
 msgstr "Byte"
 
 #: ../class/functions.php:246 ../class/functions.php:267
+#: ../class/functions.php:265
 msgid "Kb"
 msgstr "Kb"
 
 #: ../class/functions.php:250 ../class/functions.php:271
+#: ../class/functions.php:269
 msgid "Mb"
 msgstr "Mb"
 
 #: ../class/functions.php:254 ../class/functions.php:275
+#: ../class/functions.php:273
 msgid "Gb"
 msgstr "Gb"
 
 #: ../class/functions.php:256 ../class/functions.php:277
+#: ../class/functions.php:275
 msgid "Tb"
 msgstr "Tb"
 
 #: ../class/functions.php:343 ../class/functions.php:364
+#: ../class/functions.php:362
 #, fuzzy
 msgid "years"
 msgstr "Bytes"
 
 #: ../class/functions.php:343 ../class/functions.php:364
+#: ../class/functions.php:362
 msgid "year"
 msgstr ""
 
 #: ../class/functions.php:345 ../class/functions.php:366
+#: ../class/functions.php:364
 msgid "months"
 msgstr ""
 
 #: ../class/functions.php:345 ../class/functions.php:366
+#: ../class/functions.php:364
 msgid "month"
 msgstr ""
 
 #: ../class/functions.php:368 ../class/functions.php:389
+#: ../class/functions.php:387
 msgid "Not managed"
 msgstr ""
 
@@ -1955,24 +1973,25 @@ msgstr ""
 msgid "Help"
 msgstr "Hilfe"
 
-#: ../admin/adm_deactivate.php:7
+#: ../admin/adm_deactivate.php:7 ../admin/adm_deactivate.php:39
 msgid "Missing uid"
 msgstr ""
 
-#: ../admin/adm_deactivate.php:16
+#: ../admin/adm_deactivate.php:16 ../admin/adm_deactivate.php:50
 #, fuzzy
 msgid "User does not exist"
 msgstr "Miglied '%s' existiert nicht"
 
 #: ../admin/adm_deactivate.php:20 ../admin/adm_deactivate.php:28
+#: ../admin/adm_deactivate.php:55 ../admin/adm_deactivate.php:63
 msgid "Confirm"
 msgstr ""
 
-#: ../admin/adm_deactivate.php:21
+#: ../admin/adm_deactivate.php:21 ../admin/adm_deactivate.php:56
 msgid "WARNING: experimental feature, use at your own risk"
 msgstr ""
 
-#: ../admin/adm_deactivate.php:22
+#: ../admin/adm_deactivate.php:22 ../admin/adm_deactivate.php:57
 msgid ""
 "The following domains will be deactivated and redirected to the URL entered "
 "in the following box. A backup of the domain configuration will be displayed "
@@ -1981,19 +2000,19 @@ msgid ""
 "deactivate all this user's domains."
 msgstr ""
 
-#: ../admin/adm_deactivate.php:27
+#: ../admin/adm_deactivate.php:27 ../admin/adm_deactivate.php:62
 msgid "Redirection URL:"
 msgstr ""
 
-#: ../admin/adm_deactivate.php:31
+#: ../admin/adm_deactivate.php:31 ../admin/adm_deactivate.php:66
 msgid "Domains of user: "
 msgstr ""
 
-#: ../admin/adm_deactivate.php:34
+#: ../admin/adm_deactivate.php:34 ../admin/adm_deactivate.php:69
 msgid "Missing redirect url."
 msgstr ""
 
-#: ../admin/adm_deactivate.php:53
+#: ../admin/adm_deactivate.php:53 ../admin/adm_deactivate.php:88
 #, php-format
 msgid "-- Redirecting all domains and subdomains of the user %s to %s\n"
 msgstr ""
@@ -2034,7 +2053,7 @@ msgstr ""
 msgid "Account creation statistics"
 msgstr ""
 
-#: ../admin/bro_main.php:69
+#: ../admin/bro_main.php:69 ../admin/bro_main.php:68
 #, php-format
 msgid "Deleting files and/or directories"
 msgstr ""
@@ -2066,6 +2085,38 @@ msgstr ""
 
 #: ../admin/stats_members.php:56
 msgid "during the month"
+msgstr ""
+
+#: ../admin/bro_main.php:73
+msgid "WARNING: Confirm the deletion of this files"
+msgstr ""
+
+#: ../admin/bro_main.php:154
+msgid "Old Name:"
+msgstr ""
+
+#: ../admin/bro_main.php:155
+#, fuzzy
+msgid "New Name:"
+msgstr "Neuer Mitglied"
+
+#: ../admin/bro_main.php:180
+msgid "Move to"
+msgstr ""
+
+#: ../admin/dom_subdodel.php:44
+#, php-format
+msgid "Deleting the subdomain %s:"
+msgstr ""
+
+#: ../admin/dom_subdodel.php:50
+msgid "The subdomain has been deleted. Changes will take place in 5 minutes."
+msgstr ""
+
+#: ../admin/stats_members.php:32
+msgid ""
+"Image_Graph not installed. use 'aptitude install php-pear' then 'pear --"
+"alldeps install Image_Graph-devel' to see the graph."
 msgstr ""
 
 #~ msgid "If you want to use a different language, click on the flag below"

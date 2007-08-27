@@ -401,6 +401,9 @@ msgstr "Bases de datos MySQL"
 msgid "quota_mysql_users"
 msgstr "Bases de datos MySQL"
 
+msgid "quota_web"
+msgstr "Espace disque"
+
 msgid "err_mysql_2"
 msgstr ""
 "El nombre de la base de datos solo puede contener cifras y letras minúsculas."
@@ -513,6 +516,80 @@ msgstr "Este juego de estadísticas no existe."
 msgid "err_sta2_3"
 msgstr "El prefijo escogido no está permitido."
 
+msgid "err_bro_1"
+msgstr "¡Carpeta o archivo incorrecto!"
+
+msgid "err_bro_2"
+msgstr "¡No se puede desplazar un archivo en la misma carpeta!"
+
+msgid "help_dns_mx %s %s"
+msgstr ""
+"If we manage your DNS <br />You can manage your mails elsewhere if you want "
+"(MX field).<br />Write <b><code>%s</code></b> in this field if your mail "
+"must be managed by %s<br />or put the IP address or name of the mail server "
+"used to manage your mails.<small>Warning : if you put nothing in this field, "
+"your mails will be unavailable</small>"
+
+#, fuzzy
+msgid "help_dns_mail"
+msgstr ""
+"- Entrez le nom du domaine que vous souhaitez héberger. Le nom de domaine "
+"doit être complet, mais <b>sans le www.</b><br /> IMPORTANT : Si vous voulez "
+"un hébergement réel de domaine, il faut que les DNS de votre domaine "
+"pointent vers nos serveurs DNS. Contacter votre hébergeur pour plus "
+"d'information.<br /> Exemples : globenet.org / demo.com / test.eu.org etc."
+"<br />Plus d'info sur la gestion des domaines dans l'aide en ligne "
+"HELPID_200<br />"
+
+#, fuzzy
+msgid "help_domain_del %s"
+msgstr ""
+"Cliquez sur le lien ci-dessus. Vous pourrez ensuite accéder aux paremètres "
+"du domaine dans le menu à gauche.2 liens vont apparaitre : <br />- un "
+"premier pour modifier les paramètres d'hébergement du domaine (sous-"
+"domaines, redirections, hébergement mails ...) <br />- un second pour gérer "
+"les comptes emails du domaine (si vous souhaitez créer des boites aux "
+"lettres).<br />Plus d'info sur la gestion des domaines dans l'aide en ligne "
+"HELPID_200<br />"
+
+#, fuzzy
+msgid "help_sql_list_ok"
+msgstr ""
+"Vous n'avez actuellement aucun Compte FTP de disponible. Cliquez sur "
+"'Création d'un compte ftp' pour en créer un.<br />Pour pouvoir accéder à vos "
+"fichiers avec un logiciel de ftp, vous devez créer au moins un compte.  "
+"Chaque compte est associé à un répertoire, et n'aura donc accès qu'aux "
+"fichiers situés dans ce répertoire ou en dessous. <br />Plus d'info sur le "
+"FTP dans l'aide en ligne HELPID_100<br />"
+
+#, fuzzy
+msgid "help_sql_list_no"
+msgstr ""
+"Vous n'avez actuellement aucun Compte FTP de disponible. Cliquez sur "
+"'Création d'un compte ftp' pour en créer un.<br />Pour pouvoir accéder à vos "
+"fichiers avec un logiciel de ftp, vous devez créer au moins un compte.  "
+"Chaque compte est associé à un répertoire, et n'aura donc accès qu'aux "
+"fichiers situés dans ce répertoire ou en dessous. <br />Plus d'info sur le "
+"FTP dans l'aide en ligne HELPID_100<br />"
+
+msgid "err_stats_4"
+msgstr "¡Este juego de estadísticas ya existe!"
+
+msgid "err_stats_5"
+msgstr ""
+"Ha llegado al limite de su cuota de juego de estadísticas, no se puede crear "
+"más."
+
+msgid "err_stats_6"
+msgstr "Este idioma no está soportado."
+
+msgid "err_stats_7"
+msgstr "No hay ningún juego de estadísticas brutas."
+
+#, fuzzy
+msgid "%3$d-%2$d-%1$d %4$d:%5$d"
+msgstr "le %1$d/%2$d/%3$d, à %4$dh%5$d"
+
 #~ msgid "Description"
 #~ msgstr "Description"
 
@@ -584,26 +661,3 @@ msgstr "El prefijo escogido no está permitido."
 
 #~ msgid "General SQL Admin"
 #~ msgstr "Admin SQL Général"
-
-#~ msgid "err_bro_1"
-#~ msgstr "¡Carpeta o archivo incorrecto!"
-
-#~ msgid "err_bro_2"
-#~ msgstr "¡No se puede desplazar un archivo en la misma carpeta!"
-
-#~ msgid "quota_web"
-#~ msgstr "Espace disque"
-
-#~ msgid "err_stats_4"
-#~ msgstr "¡Este juego de estadísticas ya existe!"
-
-#~ msgid "err_stats_5"
-#~ msgstr ""
-#~ "Ha llegado al limite de su cuota de juego de estadísticas, no se puede "
-#~ "crear más."
-
-#~ msgid "err_stats_6"
-#~ msgstr "Este idioma no está soportado."
-
-#~ msgid "err_stats_7"
-#~ msgstr "No hay ningún juego de estadísticas brutas."
