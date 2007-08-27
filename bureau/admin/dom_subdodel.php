@@ -41,15 +41,15 @@ include("head.php");
 ?>
 </head>
 <body>
-<h3>Suppression du sous-domaine http://<?php ecif($sub,$sub."."); echo $domain; ?> : </h3>
+<h3><?=sprintf(_("Deleting the subdomain %s:"),"http://".(($sub)?$sub.".":$sub).$domain); ?></h3>
 <?php
 	if ($error) {
 		echo "<p class=\"error\">$error</p></body></html>";
 		exit();
 	} else {
-		echo "<p class=\"error\">Le sous-domaine a ete supprime, les modifications seront prises en comptes dans 5 minutes.</p>";
+	  echo "<p class=\"error\">"._("The subdomain has been deleted. Changes will take place in 5 minutes.")."</p>";
 	}
 ?>
-<p><a href="dom_edit.php?domain=<?php echo urlencode($domain) ?>">Continuer</a></p>
+<p><a href="dom_edit.php?domain=<?php echo urlencode($domain) ?>"><?php __("Click here to continue"); ?></a></p>
 </body>
 </html>

@@ -165,23 +165,21 @@ function checkfqdn($fqdn) {
   // Retourne 0 si tout va bien, sinon, retourne un code erreur...
   // 1. Nom de domaine complet trop long.
   // 2. L'un des membres est trop long.
-  // 3. Caract?re interdit dans l'un des membres.
+  // 3. Caractere interdit dans l'un des membres.
+  // 4. Le fqdn ne fait qu'un seul membre (il n'est donc pas fq...)
   if (strlen($fqdn)>255)
     return 1;
   $members=explode(".", $fqdn);
-  if (count($members)>1) {
-    reset($members);
-    while (list ($key, $val) = each ($members)) {
-      if (strlen($val)>63)
-	return 2;
-      if (!eregi("^[a-z0-9][a-z0-9-]*[a-z0-9]$",$val)) {
-	/*"*/                  return 3;
-      }
+  if (count($members)>1) $ret=0; else $ret=4;
+  reset($members);
+  while (list ($key, $val) = each ($members)) {
+    if (strlen($val)>63)
+      return 2;
+    if (!eregi("^[a-z0-9][a-z0-9-]*[a-z0-9]$",$val)) {
+      /*"*/                  return 3;
     }
-  } else {
-    return 4;
   }
-  return 0;
+  return $ret;
 }
 
 function checkuserpath($path) {

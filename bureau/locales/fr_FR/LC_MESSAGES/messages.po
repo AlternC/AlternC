@@ -2211,3 +2211,8 @@ msgstr "Nouveau nom : "
 msgid "Image_Graph not installed. use 'aptitude install php-pear' then 'pear --alldeps install Image_Graph-devel' to see the graph."
 msgstr "Image_Graph n'est pas installée. Lancez 'aptitude install php-pear' puis 'pear --alldeps install Image_Graph-devel' pour voir le graphique."
 
+msgstr "The subdomain has been deleted. Changes will take place in 5 minutes."
+msgid "Le sous-domaine a ete supprime, les modifications seront prises en comptes dans 5 minutes."
+
+msgstr "Deleting the subdomain %s:"
+msgid "Effacement du sous-domaine %s : "

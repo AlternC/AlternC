@@ -631,11 +631,13 @@ class m_dom {
       return false;
     }
     $dest=trim($dest);
+    $sub=trim(trim($sub),".");
     $dom=strtolower($dom);
     $sub=strtolower($sub);
 
     //    if (!(($sub == '*') || ($sub=="") || (preg_match('/([a-z0-9][\.\-a-z0-9]*)?[a-z0-9]/', $sub)))) {
-    if (($sub != '*') && checkfqdn($sub)) {
+    $fqdn=checkfqdn($sub);
+    if (($sub != '*') && !($fqdn==0 || $fqdn==4)) {
       $err->raise("dom",24);
       return false;
     }

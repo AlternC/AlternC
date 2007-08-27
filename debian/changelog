@@ -1,5 +1,6 @@
 alternc (0.9.6.5) testing; urgency=low
 
+  * parameter checking in subdomain creation (#1037)
   * Changing ownership of /var/alternc/tmp, makes file upload work again (#1058)
   * Force the restart of apache & apache-ssl (#1000)
   * Redirect are now done on http://$url$1 base, not $url/$1 (#1054)
