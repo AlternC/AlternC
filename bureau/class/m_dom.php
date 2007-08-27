@@ -420,40 +420,6 @@ class m_dom {
           }
           break;
 	case "ws";
-/* e.g.
-Welcome to the .WS Whois Server
-
-Use of this service for any purpose other 
-than determining the availability of a domain 
-in the .WS TLD to be registered is strictly 
-prohibited.
-
-  Domain Name: DRONE.WS
-
-  Registrant: Registered through Go Daddy Software, Inc. (GoDaddy.com
-
-  Domain created on 2005-01-11 08:56:25
-  Domain last updated on 2005-01-11 08:56:25
-
-  Name servers:
-
-    ns2.koumbit.net
-    ns1.koumbit.net
-*/
-
-/*
-failure:
-
-Welcome to the .WS Whois Server
-
-Use of this service for any purpose other 
-than determining the availability of a domain 
-in the .WS TLD to be registered is strictly 
-prohibited.
-
-No match for "dronefdasfsa.ws".
-
-*/
 	  if (ereg('^[[:space:]]*Name servers:[[:space:]]*$', $ligne)) {
 	        // found the server
 	  	$state = 1;
@@ -520,8 +486,6 @@ No match for "dronefdasfsa.ws".
       }
     }
   } //checkmx
-
-
 
 
   /* ----------------------------------------------------------------- */
@@ -599,6 +563,7 @@ No match for "dronefdasfsa.ws".
     return $r;
   } // get_domain_all
 
+
   /* ----------------------------------------------------------------- */
   /**
    * Retourne TOUTES les infos d'un sous domaine du compte courant.
@@ -639,6 +604,7 @@ No match for "dronefdasfsa.ws".
     $db->free();
     return $r;
   } // get_sub_domain_all
+
 
   /* ----------------------------------------------------------------- */
   /**
