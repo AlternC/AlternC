@@ -47,7 +47,9 @@ if ($setlang && $lang) {
 }
 
 // User chose a non existent language, select the first available one 
-
+if ($lang == NULL) {
+  $lang = "en_US";
+}
 
 /* Language ok, set the locale environment */
 putenv("LC_MESSAGES=$lang");
