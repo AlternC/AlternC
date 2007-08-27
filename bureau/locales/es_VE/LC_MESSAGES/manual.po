@@ -146,9 +146,6 @@ msgstr ""
 msgid "err_dom_24"
 msgstr "El nombre de dominio es demasiado largo."
 
-msgid "Editing subdomain %s"
-msgstr "Edition du sous-domaine %s"
-
 msgid "hlp_add_domain"
 msgstr ""
 "- Entrez le nom du domaine que vous souhaitez héberger. Le nom de domaine "
@@ -572,23 +569,26 @@ msgstr ""
 "fichiers situés dans ce répertoire ou en dessous. <br />Plus d'info sur le "
 "FTP dans l'aide en ligne HELPID_100<br />"
 
-msgid "err_stats_4"
-msgstr "¡Este juego de estadísticas ya existe!"
-
-msgid "err_stats_5"
-msgstr ""
-"Ha llegado al limite de su cuota de juego de estadísticas, no se puede crear "
-"más."
-
-msgid "err_stats_6"
-msgstr "Este idioma no está soportado."
-
-msgid "err_stats_7"
-msgstr "No hay ningún juego de estadísticas brutas."
-
 #, fuzzy
 msgid "%3$d-%2$d-%1$d %4$d:%5$d"
 msgstr "le %1$d/%2$d/%3$d, à %4$dh%5$d"
+
+#~ msgid "Editing subdomain %s"
+#~ msgstr "Edition du sous-domaine %s"
+
+#~ msgid "err_stats_4"
+#~ msgstr "¡Este juego de estadísticas ya existe!"
+
+#~ msgid "err_stats_5"
+#~ msgstr ""
+#~ "Ha llegado al limite de su cuota de juego de estadísticas, no se puede "
+#~ "crear más."
+
+#~ msgid "err_stats_6"
+#~ msgstr "Este idioma no está soportado."
+
+#~ msgid "err_stats_7"
+#~ msgstr "No hay ningún juego de estadísticas brutas."
 
 #~ msgid "Description"
 #~ msgstr "Description"

@@ -143,9 +143,6 @@ msgstr ""
 "There is some forbidden characters in the sub domain (only A-Z 0-9 and - are "
 "allowed)."
 
-msgid "Editing subdomain %s"
-msgstr "Editing subdomain %s"
-
 msgid "hlp_add_domain"
 msgstr ""
 "- Entrez le nom du domaine que vous souhaitez héberger. Le nom de domaine "
@@ -510,23 +507,26 @@ msgstr ""
 "Your haven't created your main database yet, please enter a password to "
 "create it."
 
-msgid "err_stats_4"
-msgstr "This statistic set already exists !"
-
-msgid "err_stats_5"
-msgstr ""
-"Your statistic set quota is over. You cannot create more statistic sets."
-
-msgid "err_stats_6"
-msgstr "This language is not supported."
-
-msgid "err_stats_7"
-msgstr "Aucune jeu de statistiques brutes"
-
 # $d,$m,$y,$h,$i,$hh,$am
 #  1  2  3  4  5  6   7
 msgid "%3$d-%2$d-%1$d %4$d:%5$d"
 msgstr "%2$d/%1$d/%3$d %6$d:%5$d %7$d"
+
+#~ msgid "Editing subdomain %s"
+#~ msgstr "Editing subdomain %s"
+
+#~ msgid "err_stats_4"
+#~ msgstr "This statistic set already exists !"
+
+#~ msgid "err_stats_5"
+#~ msgstr ""
+#~ "Your statistic set quota is over. You cannot create more statistic sets."
+
+#~ msgid "err_stats_6"
+#~ msgstr "This language is not supported."
+
+#~ msgid "err_stats_7"
+#~ msgstr "Aucune jeu de statistiques brutes"
 
 #~ msgid "Description"
 #~ msgstr "Description"

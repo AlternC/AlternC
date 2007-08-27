@@ -145,9 +145,6 @@ msgstr ""
 "Il y a des caractères interdits dans le sous domaine (seuls A-Z 0-9 et - "
 "sont autorisés)."
 
-msgid "Editing subdomain %s"
-msgstr "Edition du sous-domaine %s"
-
 msgid "hlp_add_domain"
 msgstr ""
 "- Entrez le nom du domaine que vous souhaitez héberger. Le nom de domaine "
@@ -548,23 +545,26 @@ msgstr ""
 "fichiers situés dans ce répertoire ou en dessous. <br />Plus d'info sur le "
 "FTP dans l'aide en ligne HELPID_100<br />"
 
-#, fuzzy
-msgid "err_stats_4"
-msgstr "Aucun répertoire protégé"
-
-#, fuzzy
-msgid "err_stats_5"
-msgstr "Impossible de supprimer le fichier '%s'/.htaccess"
-
-#, fuzzy
-msgid "err_stats_6"
-msgstr "Impossible de supprimer le fichier '%s'/.htpasswd"
-
-#, fuzzy
-msgid "err_stats_7"
-msgstr "Le fichier .htaccess n'existe pas"
-
 # $d,$m,$y,$h,$i,$hh,$am
 #  1  2  3  4  5  6   7
 msgid "%3$d-%2$d-%1$d %4$d:%5$d"
 msgstr "%1$d/%2$d/%3$d %4$d:%5$d"
+
+#~ msgid "Editing subdomain %s"
+#~ msgstr "Edition du sous-domaine %s"
+
+#, fuzzy
+#~ msgid "err_stats_4"
+#~ msgstr "Aucun répertoire protégé"
+
+#, fuzzy
+#~ msgid "err_stats_5"
+#~ msgstr "Impossible de supprimer le fichier '%s'/.htaccess"
+
+#, fuzzy
+#~ msgid "err_stats_6"
+#~ msgstr "Impossible de supprimer le fichier '%s'/.htpasswd"
+
+#, fuzzy
+#~ msgid "err_stats_7"
+#~ msgstr "Le fichier .htaccess n'existe pas"
