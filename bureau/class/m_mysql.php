@@ -458,7 +458,7 @@ class m_mysql {
       return false;
     }
     
-    if (strlen($user) > 16 || strlen($usern) == 0 ) {
+    if (strlen($usern) > 16 || strlen($usern) == 0 ) {
       $err->raise("mysql",15);
       return false;
     }

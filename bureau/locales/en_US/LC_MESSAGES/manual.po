@@ -357,13 +357,11 @@ msgstr "A password must be at least 3 characters long."
 msgid "err_mem_9"
 msgstr "The information you entered is incorrect"
 
-#, fuzzy
 msgid "err_mem_11"
-msgstr "User or password incorrect"
+msgstr "You are not allowed to change your password."
 
-#, fuzzy
 msgid "err_mem_12"
-msgstr "This account is locked, contact the administrator"
+msgstr "You must be a system administrator to do this"
 
 # Please do NOT translate those strings to each language. Use the country language instead
 msgid "fr_FR"
@@ -382,23 +380,17 @@ msgid "de_DE"
 msgstr "Deutsch (Germany)"
 
 msgid "es_ES"
-msgstr "Espanol"
+msgstr "Español"
 
 msgid "es_VE"
-msgstr "Espanol"
+msgstr "Español"
 
-#, fuzzy
-msgid "err_quota_0"
-msgstr "The user '%s' already exist for this folder"
-
-#, fuzzy
 msgid "err_quota_1"
-msgstr "An incompatible .htaccess file exists in this folder."
+msgstr "Error writing the quota entry !"
 
 msgid "quota_mysql"
 msgstr "MySQL Databases"
 
-#, fuzzy
 msgid "quota_mysql_users"
 msgstr "MySQL Databases"
 
@@ -436,33 +428,26 @@ msgstr "You have no database, click on 'Databases' to create the first one"
 msgid "err_mysql_12"
 msgstr "The data base name is too long (64 chars max)"
 
-#, fuzzy
 msgid "err_mysql_13"
-msgstr "You have no database available."
+msgstr "You cannot create more MySQL users"
 
-#, fuzzy
 msgid "err_mysql_14"
-msgstr "You have no database available."
+msgstr "MySQL users can only have a-z and 0-9 characters."
 
-#, fuzzy
 msgid "err_mysql_15"
-msgstr "You have no database available."
+msgstr "MySQL users must be less than 16 characters long."
 
-#, fuzzy
 msgid "err_mysql_16"
-msgstr "You have no database available."
+msgstr "This MySQL user already exists."
 
-#, fuzzy
 msgid "err_mysql_17"
-msgstr "You have no database available."
+msgstr "Passwords do not match."
 
-#, fuzzy
 msgid "err_mysql_18"
-msgstr "You have no database available."
+msgstr "The requested MySQL user does not exist."
 
-#, fuzzy
 msgid "err_mysql_19"
-msgstr "You have no database available."
+msgstr "You have no MySQL users at the moment."
 
 msgid "hlp_sql_bck"
 msgstr ""
@@ -472,21 +457,17 @@ msgstr ""
 "backups may remain in the backup folder. Go to the file manager to delete "
 "them."
 
-#, fuzzy
 msgid "quota_sta2"
 msgstr "Web Statistics"
 
-#, fuzzy
 msgid "err_sta2_1"
-msgstr "No statistic set found."
+msgstr "You cannot create more raw statistic set."
 
-#, fuzzy
 msgid "err_sta2_2"
-msgstr "This statistic set does not exist."
+msgstr "There is currently no raw statistic set."
 
-#, fuzzy
 msgid "err_sta2_3"
-msgstr "The chosen prefix is not allowed here"
+msgstr "The requested raw statistic set has not been found."
 
 #~ msgid "Description"
 #~ msgstr "Description"
@@ -732,9 +713,6 @@ msgstr "The chosen prefix is not allowed here"
 #~ msgid "Locked Account"
 #~ msgstr "Locked Account"
 
-#~ msgid "%3$d-%2$d-%1$d %4$d:%5$d"
-#~ msgstr "%3$d/%1$d/%2$d %6$d:%5$d %7$s"
-
 #~ msgid "Your file %s has been saved"
 #~ msgstr "Your file %s has been saved"
 
@@ -882,19 +860,19 @@ msgstr "The chosen prefix is not allowed here"
 #~ msgid "No files in this folder"
 #~ msgstr "No files in this folder"
 
-#~ msgid "help_dns_mx %s %s"
-#~ msgstr ""
-#~ "If we manage your DNS <br />You can manage your mails elsewhere if you "
-#~ "want (MX field).<br />Write <b><code>%s</code></b> in this field if your "
-#~ "mail must be managed by %s<br />or put the IP address or name of the mail "
-#~ "server used to manage your mails.<small>Warning : if you put nothing in "
-#~ "this field, your mails will be unavailable</small>"
+msgid "help_dns_mx"
+msgstr ""
+"If we manage your DNS <br />You can manage your mails elsewhere if you "
+"want (MX field).<br />Write <b><code>%s</code></b> in this field if your "
+"mail must be managed by %s<br />or put the IP address or name of the mail "
+"server used to manage your mails.<small>Warning : if you put nothing in "
+"this field, your mails will be unavailable</small>"
 
-#~ msgid "help_dns_mail"
-#~ msgstr ""
-#~ "If we don't manage the DNS for this domain <br />do we manage your mails?"
+msgid "help_dns_mail"
+msgstr ""
+"If we don't manage the DNS for this domain <br />do we manage your mails?"
 
-#~ msgid "help_domain_del %s"
+#~ msgid "help_domain_del"
 #~ msgstr ""
 #~ "If you want to delete the domain %s, click the button below.Warning : "
 #~ "this delete all the ftp, mails, mailing-lists ... associated with "
@@ -1211,16 +1189,16 @@ msgstr "The chosen prefix is not allowed here"
 #~ msgid "Help"
 #~ msgstr "Help"
 
-#~ msgid "help_sql_list_ok"
-#~ msgstr ""
-#~ "You can create various databases<br />Click on 'SQL Admin' in the menu to "
-#~ "manage them<br />or use the table below to backup, retrieve or delete "
-#~ "them:"
+msgid "help_sql_list_ok"
+msgstr ""
+"You can create various databases<br />Click on 'SQL Admin' in the menu to "
+manage them<br />or use the table below to backup, retrieve or delete "
+"them:"
 
-#~ msgid "help_sql_list_no"
-#~ msgstr ""
-#~ "Your haven't created your main database yet, please enter a password to "
-#~ "create it."
+msgid "help_sql_list_no"
+msgstr ""
+"Your haven't created your main database yet, please enter a password to "
+"create it."
 
 #~ msgid "MySQL Databases"
 #~ msgstr "MySQL Databases"
