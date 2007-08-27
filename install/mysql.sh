@@ -42,32 +42,26 @@ fi
 
 mysql="/usr/bin/mysql --defaults-file=/etc/mysql/debian.cnf -h$sqlserver "
 
-if ! $mysql mysql -e "SHOW TABLES" >/dev/null
-then
-    # is this an upgrade then?
-    mysql="/usr/bin/mysql -h$sqlserver -u$rootlogin -p$rootpass" 
-    if ! $mysql mysql -e "SHOW TABLES" >/dev/null
-    then
-        echo "Can't get proper credentials, aborting"
-        exit 1
-    fi
-fi
-
 # The grant all is the most important right needed in this script.
 # If this call fail, we may be connected to a mysql-server version 5.0.
 echo "Granting users "
-    # In that case, change mysql parameters and retry. Use root / nopassword.
+# In that case, change mysql parameters and retry. Use root / nopassword.
 $mysql -e "GRANT ALL ON *.* TO '$rootlogin'@'${MYSQL_CLIENT}' IDENTIFIED BY '$rootpass' WITH GRANT OPTION"
 if [ "$?" -ne "0" ]
 then
-    echo "You are using mysql 5.0, so we try with root account and no password since debian-sys-maint doesn't work."
-    mysql="/usr/bin/mysql -h$sqlserver -uroot "
-    echo "Granting users "
+    echo "debian-sys-maintainer doesn't have the right credentials, assuming we're doing an upgrade"
+    mysql="/usr/bin/mysql -h$sqlserver -u$rootlogin -p$rootpass" 
     $mysql -e "GRANT ALL ON *.* TO '$rootlogin'@'${MYSQL_CLIENT}' IDENTIFIED BY '$rootpass' WITH GRANT OPTION"
     if [ "$?" -ne "0" ] 
 	then 
-	echo "Can't grant system user $rootlogin, abording"; 
-	exit 1 
+        echo "Still not working, assuming clean install and empty root password"
+        mysql="/usr/bin/mysql -h$sqlserver -uroot "
+        $mysql -e "GRANT ALL ON *.* TO '$rootlogin'@'${MYSQL_CLIENT}' IDENTIFIED BY '$rootpass' WITH GRANT OPTION"
+        if [ "$?" -ne "0" ] 
+        then 
+	    echo "Can't grant system user $rootlogin, abording"; 
+	    exit 1 
+	fi
     fi
 fi
 
