@@ -2,6 +2,10 @@
 # Copyright (c) 2002 the AlternC Development Team
 # <tech@alternc.org>
 # $Id: admin_manual.po,v 1.3 2006/02/09 20:12:23 benjamin Exp $
+#. Template for AlternC Translation
+#. Copyright (c) 2002 the AlternC Development Team
+#. <tech@alternc.org>
+#. $Id: admin.po,v 1.4 2006/02/09 20:12:23 benjamin Exp $
 msgid ""
 msgstr ""
 "Project-Id-Version: $Id: admin_manual.po,v 1.3 2006/02/09 20:12:23 benjamin "
@@ -16,135 +20,181 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Emacs 21\n"
 
+#. -- Only administrators can access this page !! --
 msgid "err_admin_1"
 msgstr "-- Seuls les administrateurs ont accès à ces pages !! --"
 
+#. Account not found
 msgid "err_admin_2"
 msgstr "Membre introuvable"
 
+#. This login already exists
 msgid "err_admin_3"
 msgstr "Le login existe déja !"
 
+#. -- I cannot create this account --
 msgid "err_admin_4"
 msgstr "--Impossible de créer le compte--"
 
+#. Please enter a valid email address
 msgid "err_admin_5"
 msgstr "Veuillez entrer un email valide"
 
+#. All fields are mandatory
 msgid "err_admin_6"
 msgstr "Les champs login, pass et email sont obligatoires"
 
+#. You can ask for your password only once a day !
 msgid "err_admin_7"
 msgstr ""
 "Vous ne pouvez demander votre mot de passe qu'une seule fois par jour !"
 
+#. This account is ALREADY an administrator account
 msgid "err_admin_8"
 msgstr "L'utilisateur spécifié est DEJA administrateur !"
 
+#. This account is NOT an administrator account !
 msgid "err_admin_9"
 msgstr "L'utilisateur spécifié n'est PAS administrateur !"
 
+#. Login can only contains characters a-z, 0-9 and -
 msgid "err_admin_10"
 msgstr "Les seuls caractères autorisés pour le login sont a-z 0-9 et -"
 
+#. This TLD does not exist
 msgid "err_admin_11"
 msgstr "Ce TLD n'existe pas"
 
+#. This TLD already exists
 msgid "err_admin_12"
 msgstr "Ce TLD existe déjà"
 
+#. The login is too long (16 chars max)
 msgid "err_admin_13"
 msgstr "Le login est trop long (16< caractères maximum)"
 
+#. Domain names
 msgid "quota_dom"
 msgstr "Noms de domaines"
 
+#. Domain '%s' not found.
 msgid "err_dom_1"
 msgstr "Le domaine '%s' n'existe pas."
 
+#. The domaine '%s' does not belong to you.
 msgid "err_dom_2"
 msgstr "Le domaine '%s' ne vous appartient pas."
 
+#. --- Programm error --- No lock on the domains !
 msgid "err_dom_3"
 msgstr "--- Erreur de programmation --- Aucun Lock sur les domaines !"
 
+#. The domain name is too long.
 msgid "err_dom_4"
 msgstr "Le nom de domaine est trop long."
 
+#. One of the domain name member is too long.
 msgid "err_dom_5"
 msgstr "L'un des membres du nom de domaine est trop long."
 
+#. There is some forbidden characters in the domain name (only A-Z 0-9 and - are allowed).
 msgid "err_dom_6"
 msgstr ""
 "Il y a des caractères interdits dans le nom de domaine (seuls A-Z 0-9 et - "
 "sont autorisés)."
 
+#. The last member of the domain name is incorrect or cannot be hosted in that server.
 msgid "err_dom_7"
 msgstr ""
 "Le dernier membre du domaine est incorrect ou non hébergeable sur ce serveur."
 
+#. The domain already exists.
 msgid "err_dom_8"
 msgstr "Le domaine existe deja."
 
+#. The domain has been deleted less than 5 minutes ago, please try again later.
 msgid "err_dom_9"
 msgstr ""
 "Le domaine a été effacé il y a moins de 5 minutes, réessayez ultérieurement."
 
+#. Your domain quota is over, you cannot create more domain names.
 msgid "err_dom_10"
 msgstr ""
 "Vous avez atteint votre quota de domaines, vous ne pouvez plus en créer."
 
+#. The Whois database is unavailable, please try again later.
 msgid "err_dom_11"
 msgstr "Impossible de se connecter a la base Whois"
 
+#. The domain cannot be found in the whois database.
 msgid "err_dom_12"
 msgstr "Domaine introuvable dans la base Whois"
 
+#. The domain has been changed less than 5 minutes ago. Please try again in a few minutes.
 msgid "err_dom_13"
 msgstr ""
 "Le domaine a été modifié il y a moins de 5 minutes, réessayez ultérieurement."
 
+#. The sub-domain does not exist.
 msgid "err_dom_14"
 msgstr "Le sous-domaine n'existe pas."
 
+#. No change has been requested...
 msgid "err_dom_15"
 msgstr "Aucune modification n'a été demandée ... "
 
+#. The sub-domain already exists.
 msgid "err_dom_16"
 msgstr "Le sous-domaine existe deja."
 
+#. --- Programm error --- Lock already obtained !
 msgid "err_dom_17"
 msgstr "--- Erreur de programmation --- Lock sur les domaines déjà obtenu !"
 
+#. This domain is the server's domain !!! You cannot host it on your account !
 msgid "err_dom_18"
 msgstr ""
 "Ce domaine est celui du serveur !!! Vous ne pouvez pas l'installer sur votre "
 "compte."
 
+#. The IP address you entered is incorrect.
 msgid "err_dom_19"
 msgstr "L'adresse IP entrée est incorrecte."
 
+#. The URL you entered is incorrect.
 msgid "err_dom_20"
 msgstr "L'url entrée est incorrecte."
 
+#. The folder you entered is incorrect or does not exist.
 msgid "err_dom_21"
 msgstr "Le répertoire entré est incorrect ou n'existe pas."
 
+#. The requested domain is forbidden in this server, please contact the administrator
 msgid "err_dom_22"
 msgstr ""
 "Le domaine demandé est interdit sur ce serveur, contactez l'administrateur"
 
+#. The DNS of this domain do not match the server's DNS. Please change your 
+#. domain's DNS (and eventually wait 1 day) before you install it again.
 msgid "err_dom_23"
 msgstr ""
 "Les DNS de ce domaine ne correspondent pas à ceux du serveur. Vous devez "
 "modifier les DNS du domaine (et, dans certains cas, attendre 24H) avant de "
 "pouvoir l'installer"
 
+#. There is some forbidden characters in the sub domain (only A-Z 0-9 and - are allowed).
 msgid "err_dom_24"
 msgstr ""
 "Il y a des caractères interdits dans le sous domaine (seuls A-Z 0-9 et - "
 "sont autorisés)."
 
+#. - Entrez le nom du domaine que vous souhaitez héberger. Le nom de domaine 
+#. doit être complet, mais <b>sans le www.</b><br /> IMPORTANT : Si vous voulez 
+#. un hébergement réel de domaine, il faut que les DNS de votre domaine 
+#. pointent vers nos serveurs DNS. Contacter votre hébergeur pour plus 
+#. d'information.<br /> Exemples : globenet.org / demo.com / test.eu.org etc.
+#. <br />Plus d'info sur la gestion des domaines dans l'aide en ligne 
+#. HELPID_200<br />
 msgid "hlp_add_domain"
 msgstr ""
 "- Entrez le nom du domaine que vous souhaitez héberger. Le nom de domaine "
@@ -155,6 +205,13 @@ msgstr ""
 "<br />Plus d'info sur la gestion des domaines dans l'aide en ligne "
 "HELPID_200<br />"
 
+#. Cliquez sur le lien ci-dessus. Vous pourrez ensuite accéder aux paremètres 
+#. du domaine dans le menu à gauche.2 liens vont apparaitre : <br />- un 
+#. premier pour modifier les paramètres d'hébergement du domaine (sous-
+#. domaines, redirections, hébergement mails ...) <br />- un second pour gérer 
+#. les comptes emails du domaine (si vous souhaitez créer des boites aux 
+#. lettres).<br />Plus d'info sur la gestion des domaines dans l'aide en ligne 
+#. HELPID_200<br />
 msgid "hlp_add_domain_2"
 msgstr ""
 "Cliquez sur le lien ci-dessus. Vous pourrez ensuite accéder aux paremètres "
@@ -165,6 +222,10 @@ msgstr ""
 "lettres).<br />Plus d'info sur la gestion des domaines dans l'aide en ligne "
 "HELPID_200<br />"
 
+#. Le domaine a été effacé, mais les fichiers de votre site n'ont pas été 
+#. détruits.<br />Si vous souhaitez détruire les fichiers du site web, utilisez 
+#. le Gestionnaire de Fichier<br />Plus d'info sur la gestion des domaines dans 
+#. l'aide en ligne HELPID_200<br />
 msgid "hlp_del_domain"
 msgstr ""
 "Le domaine a été effacé, mais les fichiers de votre site n'ont pas été "
@@ -172,6 +233,11 @@ msgstr ""
 "le Gestionnaire de Fichier<br />Plus d'info sur la gestion des domaines dans "
 "l'aide en ligne HELPID_200<br />"
 
+#. Cette zone vous permet de modifier les paramètres de votre domaine, ainsi 
+#. que des sous-domaines installés<br />Vous pouvez créer un nouveau sous-
+#. domaine et choisir, soit de le rediriger vers votre espace disque, vers une 
+#. autre adresse Internet, ou vers une adresse IP (utilisateurs avancés)<br />
+#. Plus d'info sur la gestion des domaines dans l'aide en ligne HELPID_200<br />
 msgid "hlp_edit_domain"
 msgstr ""
 "Cette zone vous permet de modifier les paramètres de votre domaine, ainsi "
@@ -182,28 +248,43 @@ msgstr ""
 "de lire votre mail par le web.<br />Plus d'info sur la gestion des domaines "
 "dans l'aide en ligne HELPID_200<br />"
 
+#. FTP Accounts
 msgid "quota_ftp"
 msgstr "Comptes FTP"
 
+#. No ftp account found
 msgid "err_ftp_1"
 msgstr "Aucun compte ftp de trouvé."
 
+#. This ftp account does not exist
 msgid "err_ftp_2"
 msgstr "Ce compte ftp n'existe pas."
 
+#. The chosen prefix is not allowed
 msgid "err_ftp_3"
 msgstr "Le préfixe choisi n'est pas autorisé"
 
+#. This ftp account already exists
 msgid "err_ftp_4"
 msgstr "Ce compte ftp existe déjà !"
 
+#. Your ftp account quota is over. You cannot create more ftp accounts.
 msgid "err_ftp_5"
 msgstr ""
 "Vous avez atteint votre quota de comptes ftp, vous ne pouvez plus en créer."
 
+#. The directory cannot be created.
 msgid "err_ftp_6"
 msgstr "Impossible de créer le répertoire."
 
+#. Voici la liste des comptes ftp ayant accès à votre compte. Cliquez sur 
+#. 'Modifier' pour changer le nom d'utilisateur, le mot de passe, ou le dossier 
+#. racine.<br /> Pour supprimer un compte, cochez la case correspondante et 
+#. cliquez sur le bouton 'Supprimer les comptes cochés'<br />Pour pouvoir 
+#. accéder à vos fichiers avec un logiciel de ftp, vous devez créer au moins un 
+#. compte. Chaque compte est associé à un dossier, et n'aura donc accès qu'aux 
+#. fichiers situés dans ce dossier ou en dessous. <br />Plus d'info sur le FTP 
+#. dans l'aide en ligne HELPID_100<br />
 msgid "hlp_ftp_list"
 msgstr ""
 "Voici la liste des comptes ftp ayant accès à votre compte. Cliquez sur "
@@ -215,6 +296,12 @@ msgstr ""
 "n'aura donc accès qu'aux fichiers situés dans ce répertoire ou en dessous. "
 "<br />Plus d'info sur le FTP dans l'aide en ligne HELPID_100<br />"
 
+#. Vous n'avez actuellement aucun Compte FTP de disponible. Cliquez sur 
+#. 'Création d'un compte ftp' pour en créer un.<br />Pour pouvoir accéder à vos 
+#. fichiers avec un logiciel de ftp, vous devez créer au moins un compte.  
+#. Chaque compte est associé à un dossier, et n'aura donc accès qu'aux fichiers 
+#. situés dans ce dossier ou en dessous. <br />Plus d'info sur le FTP dans 
+#. l'aide en ligne HELPID_100<br />
 msgid "hlp_ftp_list_no"
 msgstr ""
 "Vous n'avez actuellement aucun Compte FTP de disponible. Cliquez sur "
@@ -224,6 +311,13 @@ msgstr ""
 "fichiers situés dans ce répertoire ou en dessous. <br />Plus d'info sur le "
 "FTP dans l'aide en ligne HELPID_100<br />"
 
+#. Pour ajouter un compte ftp, vous devez choisir un Nom d'utilisateur, un mot 
+#. de passe, et un répertoire racine<br />Le nom d'utilisateur commence 
+#. toujours par votre nom de login ou le nom d'un de vos domaines.<br />Le 
+#. répertoire racine, s'il n'existe pas, sera créé automatiquement.<br />Note : 
+#. Le compte que vous créez ainsi aura accès en lecture et en écriture aux 
+#. fichiers situés dans le répertoire et tous ses sous-répertoires.<br />Plus 
+#. d'info sur le FTP dans l'aide en ligne HELPID_100<br />
 msgid "hlp_ftp_add"
 msgstr ""
 "Pour ajouter un compte ftp, vous devez choisir un Nom d'utilisateur, un mot "
@@ -234,238 +328,327 @@ msgstr ""
 "fichiers situés dans le répertoire et tous ses sous-répertoires.<br />Plus "
 "d'info sur le FTP dans l'aide en ligne HELPID_100<br />"
 
+#. An incompatible .htaccess file exists in this folder.
 msgid "err_hta_1"
 msgstr "Un fichier .htaccess incompatible est présent dans le répertoire."
 
+#. .htaccess parsed and syntaxically correct, a .htpassword file has been created.
 msgid "err_hta_2"
 msgstr ".htaccess reconnu et syntaxe correcte, un .htpassword à été créé."
 
+#. .htaccess parsed and syntaxically correct, a .htpasswd already exist.
 msgid "err_hta_3"
 msgstr ".htaccess reconnu et syntaxe correcte, .htpasswd existant."
 
+#. No protected folder
 msgid "err_hta_4"
 msgstr "Aucun répertoire protégé"
 
+#. I cannot delete the file '%s'/.htaccess
 msgid "err_hta_5"
 msgstr "Impossible de supprimer le fichier '%s'/.htaccess"
 
+#. I cannot delete the file '%s'/.htpasswd
 msgid "err_hta_6"
 msgstr "Impossible de supprimer le fichier '%s'/.htpasswd"
 
+#. The file .htaccess does not exist
 msgid "err_hta_7"
 msgstr "Le fichier .htaccess n'existe pas"
 
+#. The folder '%s' does not exist
 msgid "err_hta_8"
 msgstr "Le répertoire '%s' n'existe pas"
 
+#. The file '%s' is not correct
 msgid "err_hta_9"
 msgstr "Le fichier '%s' n'est pas valide"
 
+#. The user '%s' already exist for this folder
 msgid "err_hta_10"
 msgstr "L'utilisateur '%s' existe déja pour ce répertoire"
 
+#. Please enter a valid username
 msgid "err_hta_11"
 msgstr "Veuillez saisir un nom d'utilisateur valide"
 
+#. Email Accounts
 msgid "quota_mail"
 msgstr "Comptes emails"
 
+#. DB connection impossible, please try again later.
 msgid "err_mail_1"
 msgstr "Connection ldap impossible. Reessayez plus tard."
 
+#. No email on domain '%s'
 msgid "err_mail_2"
 msgstr "Aucun email sur le domaine '%s'"
 
+#. The email '%s' does not exist
 msgid "err_mail_3"
 msgstr "L'email '%s' n'existe pas."
 
+#. Please check 'pop account' and choose a password pop, or enter some
+#. redirections, or both
 msgid "err_mail_4"
 msgstr ""
 "Veuillez cocher 'compte pop' et choisir un mot de passe pop <b>ou</b> entrer "
 "des redirections <b>ou</b> les deux"
 
+#. -- Server error --- Parameter is incorrect (%s)
 msgid "err_mail_5"
 msgstr "-- Erreur Serveur --- Parametre incorrect (%s)"
 
+#. The domain '%s' does not exist.
 msgid "err_mail_6"
 msgstr "Le domaine '%s' n'existe pas."
 
+#. The email '%s' already exists.
 msgid "err_mail_7"
 msgstr "Le mail '%s' existe deja"
 
+#. Your mail account quota is over. You cannot create more email accounts.
 msgid "err_mail_8"
 msgstr ""
 "Vous avez atteint votre quota de comptes email, vous ne pouvez plus en créer."
 
+#. The domain '%s' does not exist.
 msgid "err_mail_9"
 msgstr "Le domaine '%s' existe deja."
 
+#. -- Programm error -- Mail quota does not exist
 msgid "err_mail_10"
 msgstr "-- Erreur de programmation -- Le quota Mail n'existe pas"
 
+#. Please enter an Email address
 msgid "err_mail_11"
 msgstr "Veuillez entrez un Email"
 
+#. Please enter a pop password
 msgid "err_mail_12"
 msgstr "Veuillez entrer un mot de passe pop"
 
+#. Please enter a valid email
 msgid "err_mail_13"
 msgstr "Veuillez entrer un Email valide"
 
+#. One or more email redirection are invalid
 msgid "err_mail_14"
 msgstr "Un ou plusieurs Email de redirection ne sont pas valides"
 
+#. This mail is not a pop account. It's impossible to change the password !
 msgid "err_mail_15"
 msgstr ""
 "Ce mail n'est pas un compte pop, il est impossible d'en changer le mot de "
 "passe !"
 
+#. OK
 msgid "err_err_0"
 msgstr "OK"
 
+#. The error message does not exist (%s)
 msgid "err_err_1"
 msgstr "Le message d'erreur n'existe pas (%s)"
 
+#. This is a date representation : parameters are the date as follow : 
+#. $d,$m,$y,$h,$i,$hh,$am
+#.  1  2  3  4  5  6   7
+#. hh is the hour in 12 hours format, and am is 'am' or 'pm'.
+#. eg: english : %3$d/%1$d/%2$d, at %6$d:%5$d %7$s
 msgid "the %3$d-%2$d-%1$d at %4$d:%5$d"
 msgstr "le %1$d/%2$d/%3$d, à %4$dh%5$d"
 
+#. User or password incorrect
 msgid "err_mem_1"
 msgstr "Utilisateur ou mot de passe incorrect"
 
+#. This account is locked, contact the administrator
 msgid "err_mem_2"
 msgstr "Compte Verrouillé, contacter l'administrateur"
 
+#. Cookie incorrect, please accept the session cookie
 msgid "err_mem_3"
 msgstr "Cookie incorrect, acceptez les cookies"
 
+#. Session unknown, contact the administrator
 msgid "err_mem_4"
 msgstr "Session inexistante, contacter l'administrateur"
 
+#. IP address incorrect, please contact the administrator
 msgid "err_mem_5"
 msgstr "IP incorrecte, contacter l'administrateur"
 
 # PROBLEME : il y avait 2 fois le 5, les autres messages doivent surement etre décalés (TODO)
+#. The old password is incorrect
+#. PROBLEME : il y avait 2 fois le 5, les autres messages doivent surement etre décalés (TODO)
 msgid "err_mem_6"
 msgstr "L'ancien mot de passe est incorrect"
 
+#. The new passwords are differents, please retry
 msgid "err_mem_7"
 msgstr "Les deux nouveaux mots de passe sont différents"
 
+#. A password must be at least 3 characters long.
 msgid "err_mem_8"
 msgstr "Un mot de passe doit faire au moins 3 caractères"
 
+#. The information you entered is incorrect
 msgid "err_mem_9"
 msgstr "Les données entrées sont incorrectes"
 
+#. You are not allowed to change your password.
 msgid "err_mem_11"
 msgstr "Vous ne pouvez pas changer votre mot de passe"
 
+#. You must be a system administrator to do this
 msgid "err_mem_12"
 msgstr ""
 "Vous devez être administrateur pour pouvoir modifier vos préférences "
 "administrateur."
 
 # Please do NOT translate those strings to each language. Use the original language instead
+#. Français (France)
+#. Please do NOT translate those strings to each language. Use the original language instead
 msgid "fr_FR"
 msgstr "Français (France)"
 
+#. Français (Canada)
+#. Please do NOT translate those strings to each language. Use the original language instead
 msgid "fr_CA"
 msgstr "Français (Canada)"
 
+#. English (United States)
+#. Please do NOT translate those strings to each language. Use the original language instead
 msgid "en_US"
 msgstr "English (United States)"
 
+#. English (United Kingdom)
+#. Please do NOT translate those strings to each language. Use the original language instead
 msgid "en_UK"
 msgstr "English (United Kingdom)"
 
+#. Deutsch (Germany)
+#. Please do NOT translate those strings to each language. Use the original language instead
 msgid "de_DE"
 msgstr "Deutsch (Germany)"
 
+#. Español (Spania)
+#. Please do NOT translate those strings to each language. Use the original language instead
 msgid "es_ES"
 msgstr "Español (Spania)"
 
+#. Español (Venezuela)
+#. Please do NOT translate those strings to each language. Use the original language instead
 msgid "es_VE"
 msgstr "Español (Venezuela)"
 
+#. OK
 msgid "err_quota_0"
 msgstr "OK"
 
+#. Error writing the quota entry !
 msgid "err_quota_1"
 msgstr "Les quotas disque ne sont pas activés sur le serveur"
 
+#. MySQL Databases
 msgid "quota_mysql"
 msgstr "Bases de données MySQL"
 
+#. MySQL Users
 msgid "quota_mysql_users"
 msgstr "Utilisateurs MySQL"
 
+#. Disk space
 msgid "quota_web"
 msgstr "Espace disque (Ko)"
 
+#. Data base name can contain only digits or lowercase alphabetic characters
 msgid "err_mysql_2"
 msgstr ""
 "Le nom de la base de données ne peut contenir que des chiffres ou lettres "
 "minuscules."
 
+#. The database does not exist, you'll get an access by creating it.
 msgid "err_mysql_3"
 msgstr "Cette base de données existe déjà, utilisez un autre nom."
 
+#. This database already exists!
 msgid "err_mysql_4"
 msgstr "Cette base de données n'existe pas."
 
+#. Your backup number is incorrect.
 msgid "err_mysql_5"
 msgstr "Le nombre de sauvegarde est incorrect."
 
+#. The folder is incorrect!
 msgid "err_mysql_6"
 msgstr "Le répertoire est incorrect !"
 
+#. The file name you chose does not exist or is incorrect.
 msgid "err_mysql_7"
 msgstr "Vous n'avez aucune base, vous ne pouvez pas changer le mot de passe"
 
+#. The password is too long (16 chars max)
 msgid "err_mysql_8"
 msgstr "Le mot de passe est trop long (16 caractères maximum)"
 
+#. The file is incorrect or does not exist.
 msgid "err_mysql_9"
 msgstr "Le fichier entré n'existe pas ou est incorect."
 
+#. Your cannot create your main database : you still have other dbs !
 msgid "err_mysql_10"
 msgstr ""
 "Erreur : vous ne pouvez créer votre base principale : il vous reste d'autres "
 "bases !"
 
+#. You have no database, click on 'Databases' to create the first one
 msgid "err_mysql_11"
 msgstr ""
 "Vous n'avez aucune base de données, cliquez sur 'Bases de données' pour en "
 "créer une"
 
+#. The data base name is too long (64 chars max)
 msgid "err_mysql_12"
 msgstr "Le nom de la base de données est trop long (64 caractères maximum)"
 
+#. You cannot create more MySQL users
 msgid "err_mysql_13"
 msgstr ""
 "Vous avez atteint votre quota d'utilisateurs SQL, vous ne pouvez plus en "
 "créer"
 
+#. MySQL users can only have a-z and 0-9 characters.
 msgid "err_mysql_14"
 msgstr ""
 "Le nom d'utilisateur ne peut contenir que des chiffres et/ou lettres "
 "minuscules"
 
+#. MySQL users must be less than 16 characters long.
 msgid "err_mysql_15"
 msgstr "Nom d'utilisateur trop long (16 caractères maximum)"
 
+#. This MySQL user already exists.
 msgid "err_mysql_16"
 msgstr "Un utilisateur du même nom existe déjà"
 
+#. Passwords do not match.
 msgid "err_mysql_17"
 msgstr "Les mot de passes ne correspondent pas"
 
+#. The requested MySQL user does not exist.
 msgid "err_mysql_18"
 msgstr "L'utilisateur n'existe pas"
 
+#. You have no MySQL users at the moment.
 msgid "err_mysql_19"
 msgstr "Aucun utilisateur n'est défini dans MySQL."
 
+#. Your MySQL backups are stored in the chosen folder from <code>db.sql.1</
+#. code> to <code>db.sql.19</code><br />your database name replaces 'db'.<br /
+#. >WARNING: If you modify backup settings (backups, compression...) previous 
+#. backups may remain in the backup folder. Go to the file manager to delete 
+#. them.
 msgid "hlp_sql_bck"
 msgstr ""
 "Les sauvegardes de votre base MySQL sont stockées dans le répertoire choisi "
@@ -475,26 +658,37 @@ msgstr ""
 "vieilles sauvegardes peuvent rester dans le répertoire concerné. Vous pouvez "
 "les effacer dans le gestionnaire de fichier."
 
+#. Web Statistics
 msgid "quota_sta2"
 msgstr "Statistiques Web Brutes"
 
+#. You cannot create more raw statistic set.
 msgid "err_sta2_1"
 msgstr ""
 "Vous avez atteint votre quota de jeux de statistiques, vous ne pouvez plus "
 "en créer."
 
+#. There is currently no raw statistic set.
 msgid "err_sta2_2"
 msgstr "Aucune jeu de statistiques brutes"
 
+#. The requested raw statistic set has not been found.
 msgid "err_sta2_3"
 msgstr "Jeu de statistiques brutes non trouvé"
 
+#. File or folder name is incorrect
 msgid "err_bro_1"
 msgstr "Répertoire ou fichier incorrect !"
 
+#. You cannot move or copy a file to the same folder
 msgid "err_bro_2"
 msgstr "Vous ne pouvez pas déplacer un fichier dans le même répertoire !"
 
+#. If we manage your DNS <br />You can manage your mails elsewhere if you want 
+#. (MX field).<br />Write <b><code>%s</code></b> in this field if your mail 
+#. must be managed by %s<br />or put the IP address or name of the mail server 
+#. used to manage your mails.<small>Warning : if you put nothing in this field, 
+#. your mails will be unavailable</small>
 msgid "help_dns_mx %s %s"
 msgstr ""
 "If we manage your DNS <br />You can manage your mails elsewhere if you want "
@@ -503,6 +697,7 @@ msgstr ""
 "used to manage your mails.<small>Warning : if you put nothing in this field, "
 "your mails will be unavailable</small>"
 
+#. If we don't manage the DNS for this domain <br />do we manage your mails?
 #, fuzzy
 msgid "help_dns_mail"
 msgstr ""
@@ -514,6 +709,9 @@ msgstr ""
 "<br />Plus d'info sur la gestion des domaines dans l'aide en ligne "
 "HELPID_200<br />"
 
+#. If you want to delete the domain %s, click the button below.Warning : this 
+#. delete all the ftp, mails, mailing-lists ... associated with thisdomain and 
+#. all its subdomains!
 #, fuzzy
 msgid "help_domain_del %s"
 msgstr ""
@@ -525,6 +723,8 @@ msgstr ""
 "lettres).<br />Plus d'info sur la gestion des domaines dans l'aide en ligne "
 "HELPID_200<br />"
 
+#. You can create various databases<br />Click on 'SQL Admin' in the menu to 
+#. manage them<br />or use the table below to backup, retrieve or delete them:
 #, fuzzy
 msgid "help_sql_list_ok"
 msgstr ""
@@ -535,6 +735,7 @@ msgstr ""
 "fichiers situés dans ce répertoire ou en dessous. <br />Plus d'info sur le "
 "FTP dans l'aide en ligne HELPID_100<br />"
 
+#. Your haven't created your main database yet, please enter a password to create it.
 #, fuzzy
 msgid "help_sql_list_no"
 msgstr ""
@@ -547,6 +748,11 @@ msgstr ""
 
 # $d,$m,$y,$h,$i,$hh,$am
 #  1  2  3  4  5  6   7
+#. This is a date representation : parameters are the date as follow :
+#. $d,$m,$y,$h,$i,$hh,$am
+#.  1  2  3  4  5  6   7
+#. hh is the hour in 12 hours format, and am is 'am' or 'pm'.
+#. eg: english : %3$d/%1$d/%2$d, at %6$d:%5$d %7$s
 msgid "%3$d-%2$d-%1$d %4$d:%5$d"
 msgstr "%1$d/%2$d/%3$d %4$d:%5$d"
 
