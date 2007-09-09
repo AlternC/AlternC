@@ -339,14 +339,3 @@ add_dom_entry() {
 	cp ${override_f}.new ${override_f} && \
 	rm ${override_f}.new
 }
-
-# la première lettre de l'avant-dernière partie du domaine (e.g.
-# www.alternc.org -> a)
-#
-# argument: le domaine
-# imprime: la lettre
-init_dom_letter() {
-    echo "$1" | awk '{z=split($NF, a, ".") ; print substr(a[z-1], 1, 1)}'
-}
-
-

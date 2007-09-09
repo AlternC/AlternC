@@ -37,7 +37,7 @@ if [ $# -gt 0 ]; then
 		if echo "$i" | grep -q /var/alternc/dns > /dev/null; then
 			dom="$i"
 		else
-		    initial_domain=`init_dom_letter "$i"`
+		    initial_domain=`print_domain_letter "$i"`
 		    dom="/var/alternc/dns/$initial_domain/$i"
 		fi
 		doms="$doms $dom"
@@ -62,9 +62,9 @@ do
 	fi
 	# la première lettre de l'avant-dernière partie du domaine (e.g.
 	# www.alternc.org -> a)
-	initial_domain=`init_dom_letter "$domain"`
+	initial_domain=`print_domain_letter "$domain"`
 	# la première lettre du username
-	initial_account=`echo "$account" | cut -c1`
+	initial_account=`print_user_letter "$account"`
 	path1="/var/alternc/dns/$initial_domain/$domain"
 	path2="/var/alternc/html/$initial_account/$account"
 
