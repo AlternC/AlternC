@@ -120,17 +120,10 @@ class m_quota {
    * @param string ressource to get quota of
    * @Return the quota used and total for this ressource (or for all ressource if unspecified)
    */
-  function getquota($ressource="",$force= false) {
+  function getquota($ressource="") {
     global $db,$err,$cuid;
     $err->log("quota","getquota",$ressource);
     $this->qlist(); // Generate the quota list.
-  	if ($force == false && $this->quotas) { 
-		if ($ressource) { 
-			return $this->quotas[$ressource]; 
-		} else { 
-			return $this->quotas; 
-		} 
-	}     
     $db->query("select * from quotas where uid='$cuid';");
     if ($db->num_rows()==0) {
       return array("t"=>0, "u"=>0);

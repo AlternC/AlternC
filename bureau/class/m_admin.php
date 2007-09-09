@@ -125,28 +125,8 @@ class m_admin {
     $db->next_record();
     return ($db->f("cnt")==1);
   }
-  
+
   /* ----------------------------------------------------------------- */
-  /** Retourne la liste des lettres pour lesquelles un utilisateur a 
-	* des membres 
-	* Retourne un tableau indexé où se trouvent les lettres 
-	* @return array Tableau de lettres ou FALSE si erreur 
-	*/ 
-  function get_letters() { 
-    global $err,$mem,$cuid,$db; 
-    $err->log("admin","get_letters"); 
-    if ($mem->user["uid"]==2000) 
-        $db->query("SELECT LEFT(login,1) as letter FROM membres GROUP BY letter ORDER BY letter;"); 
-    else 
-        $db->query("SELECT LEFT(login,1) as letter FROM membres WHERE creator='$cuid' GROUP BY letter ORDER BY letter;"); 
-	$res=array(); 
-	while($db->next_record()) { 
-		$res[]=$db->f("letter"); 
-	} 
-	Return $res; 
-  } 
- 
-  /* ----------------------------------------------------------------- */   
   /**
    * Returns the list of the hosted accounts
    * Retourne la liste des membres hébergés
@@ -166,7 +146,7 @@ class m_admin {
    *  produite.
    * 
    */
-  function get_list($all=0, $letter="") {
+  function get_list($all=0) {
     // PATCHBEN pour ne voir que les comptes que l'on a créé (sauf admin)
     global $err,$mem,$cuid;
     $err->log("admin","get_list");
@@ -175,14 +155,10 @@ class m_admin {
       return false;
     }
     $db=new DB_System();
-	$letterQuery = ""; 
-	$db->query("SELECT uid FROM membres ORDER BY login;");
-	if ($letter) 
-    	$letterQuery = "&& login LIKE '" . $letter . "%'"; 
-	if ($mem->user["uid"]==2000 || $all) { 
-		$db->query("SELECT uid FROM membres WHERE 1" . $letterQuery . " ORDER BY login;"); 
+    if ($mem->user[uid]==2000 || $all) {
+      $db->query("SELECT uid FROM membres ORDER BY login;");
     } else {
-      $db->query("SELECT uid FROM membres WHERE creator='".$cuid. "'" . $letterQuery." ORDER BY login;");
+      $db->query("SELECT uid FROM membres WHERE creator='".$cuid."' ORDER BY login;");
     }
     if ($db->num_rows()) {
       while ($db->next_record()) {
@@ -209,7 +185,7 @@ class m_admin {
     }
     $db->query("SELECT creator FROM membres WHERE uid='$uid';");
     $db->next_record();
-    if ($db->Record["creator"]!=$cuid) {
+    if ($db->Record[creator]!=$cuid) {
       $err->raise("admin",1);
       return false;
     }
