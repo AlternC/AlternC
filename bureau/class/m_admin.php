@@ -125,8 +125,28 @@ class m_admin {
     $db->next_record();
     return ($db->f("cnt")==1);
   }
-
+  
   /* ----------------------------------------------------------------- */
+  /** Retourne la liste des lettres pour lesquelles un utilisateur a 
+	* des membres 
+	* Retourne un tableau indexé où se trouvent les lettres 
+	* @return array Tableau de lettres ou FALSE si erreur 
+	*/ 
+  function get_letters() { 
+    global $err,$mem,$cuid,$db; 
+    $err->log("admin","get_letters"); 
+    if ($mem->user["uid"]==2000) 
+        $db->query("SELECT LEFT(login,1) as letter FROM membres GROUP BY letter ORDER BY letter;"); 
+    else 
+        $db->query("SELECT LEFT(login,1) as letter FROM membres WHERE creator='$cuid' GROUP BY letter ORDER BY letter;"); 
+	$res=array(); 
+	while($db->next_record()) { 
+		$res[]=$db->f("letter"); 
+	} 
+	Return $res; 
+  } 
+ 
+  /* ----------------------------------------------------------------- */   
   /**
    * Returns the list of the hosted accounts
    * Retourne la liste des membres hébergés
