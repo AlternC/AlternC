@@ -161,8 +161,8 @@ class m_mem {
    * @global string $username/password le login/pass de l'utilisateur
    * @return TRUE si la session est correcte, FALSE sinon.
    */
-  function checkid() {
-    global $db,$err,$session,$username,$password,$cuid,$restrictip;
+  function checkid($username, $password, $restrictip) {
+    global $db,$err,$session,$cuid;
     if ($username && $password) {
       return $this->login($username,$password,$restrictip);
     }

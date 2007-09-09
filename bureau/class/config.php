@@ -66,11 +66,16 @@ if (ini_get("safe_mode")) {
   exit();
 }
 
+$error = "";
 
 /* PHPLIB inclusions : */
 $root="/var/alternc/bureau/";
 /* Server Domain Name */
 $host=getenv("HTTP_HOST");
+
+/* Custom PHP debugger */ 
+require_once($root."class/error_handler.php"); 
+$queryCount = 0;
 
 /* Global variables (AlternC configuration) */
 require_once($root."class/local.php");
@@ -78,6 +83,8 @@ require_once($root."class/local.php");
 require_once($root."class/db_mysql.php");
 require_once($root."class/functions.php");
 require_once($root."class/variables.php");
+
+$tempsDebut = microtimeFloat(); 
 
 // Redirection si appel à https://(!fqdn)/
 if ($_SERVER["HTTPS"]=="on" && $host!=$L_FQDN) {
@@ -143,7 +150,14 @@ $err=new m_err();
 
 /* Check the User identity (if required) */
 if (!defined('NOCHECK')) {
-  if (!$mem->checkid()) {
+  $fields = array (
+	"username"  => array ("request", "string", ""), 
+	"password"  => array ("request", "string", ""), 
+	"restrictip" => array ("request", "integer", 0), 		
+  );
+  getFields($fields); 
+  
+  if (!$mem->checkid($username,$password,$restrictip)) {
     $error=$err->errstr();
     include("index.php");
     exit();
