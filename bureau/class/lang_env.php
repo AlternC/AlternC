@@ -24,7 +24,7 @@ $locales=array("fr_FR"=>"fr_FR","en_US"=>"en_US");
 // Create or update a locale.php file if it is outdated.
 update_locale();
 
-if (!(isset($lang)) {  // Use the browser first preferred language
+if (!(isset($lang))) {  // Use the browser first preferred language
   $lang=strtolower(substr(trim($_SERVER["HTTP_ACCEPT_LANGUAGE"]),0,5));
 }
 
