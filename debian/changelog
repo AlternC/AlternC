@@ -1,5 +1,6 @@
 alternc (0.9.6.5-12) testing; urgency=low
 
+  * Fixing MX check when hosting a mail (#1706)
   * Fixing dns / nodns issue (#772)
   * using apache-modconf again ...
   * Choose english as default language, (#1047)

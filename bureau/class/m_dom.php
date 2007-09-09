@@ -740,20 +740,21 @@ class m_dom {
    * @param integer $dns Vaut 1 ou 0 pour héberger ou pas le DNS du domaine
    * @param integer $mx Nom fqdn du serveur mx, si le mx local est précisé,
    *  on héberge alors les mails du domaine.
+   * @param boolean $force Faut-il passer les checks DNS ou MX ? (admin only)
    * @return boolean appelle $mail->add_dom ou $ma->del_dom si besoin, en
    *  fonction du champs MX. Retourne FALSE si une erreur s'est produite,
    *  TRUE sinon.
    *
    */
-  function edit_domain($dom,$dns,$mx) {
+  function edit_domain($dom,$dns,$mx,$force==0) {
     global $db,$err,$L_MX,$classes,$cuid;
     $err->log("dom","edit_domain",$dom);
     // Locked ?
-    if (!$this->islocked) {
+    if (!$this->islocked && !$force) {
       $err->raise("dom",3);
       return false;
     }
-    if ($dns == 1) {
+    if ($dns == 1 && !$force) {
       $this->dns=$this->whois($dom);
       $v=checkhostallow($dom,$this->dns);
       if ($v==-1) {
@@ -792,14 +793,18 @@ class m_dom {
       $gesmx="0";
       
     //si gestion mx uniquement, vérification du dns externe
-    if ($dns=="0" && $gesmx=="1") {
+    if ($dns=="0" && $gesmx=="1" && !$force) {
       $vmx = $this->checkmx($dom,$mx);
       if ($vmx == 1) {
-        //aucun champ mx de spécifié sur le dns
+        // Aucun champ mx de spécifié sur le dns
+	$err->raise("dom",25);
+	return false;
       }
   
       if ($vmx == 2) {
-        //serveur non spécifié parmi les champx mx
+        // Serveur non spécifié parmi les champx mx
+	$err->raise("dom",25);
+	return false;
       }
     }
       
