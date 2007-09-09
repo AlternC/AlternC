@@ -252,7 +252,7 @@ fi
 for service in $SERVICES postfix bind9 courier-authdaemon \
                courier-imap courier-imap-ssl courier-pop courier-pop-ssl \
                cron proftpd; do
-    test -x /etc/init.d/$service && invoke-rc.d $service reload || true
+    invoke-rc.d $service reload || true
 done
 
 #######################################################################
