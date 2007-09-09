@@ -395,5 +395,105 @@ function duration_list($name, $selected=0) {
   return $res;
 }
 
+/* ---------------------- */
+/** Fonctions necessaires au nouveau bureau */
+
+function getFields($fields, $requestOnly = false)
+{
+	$vars = array();
+	$methodType = array ("get", "post", "request", "files");
+
+	foreach ($fields AS $name => $options)
+	{
+		if (in_array($options[0], $methodType) === false)
+			die ("Illegal method type used for field " . $name . " : " . $options[0]);
+
+		if ($requestOnly === true)
+			$method = "_REQUEST";
+		else
+			$method = "_" . strtoupper($options[0]);
+
+		switch ($options[1])
+		{
+			case "integer":
+
+				$vars[$name] = (isset($GLOBALS[$method][$name]) && is_numeric($GLOBALS[$method][$name]) ? intval($GLOBALS[$method][$name]) : $options[2]);
+				break;
+
+			case "float":
+
+				$vars[$name] = (isset($GLOBALS[$method][$name]) && is_numeric($GLOBALS[$method][$name]) ? floatval($GLOBALS[$method][$name]) : $options[2]);
+				break;
+
+			case "string":
+
+				$vars[$name] = (isset($GLOBALS[$method][$name]) ? trim($GLOBALS[$method][$name]) : $options[2]);
+				break;
+
+			case "array":
+
+				$vars[$name] = (isset($GLOBALS[$method][$name]) && is_array($GLOBALS[$method][$name]) ? $GLOBALS[$method][$name] : $options[2]);
+				break;
+
+			case "boolean":
+
+				$vars[$name] = (isset($GLOBALS[$method][$name]) ? $GLOBALS[$method][$name] : $options[2]);
+				break;
+
+			case "file":
+
+				$vars[$name] = (isset($GLOBALS[$method][$name]) ? $GLOBALS[$method][$name] : $options[2]);
+				break;
+
+		   	default:
+    		    die ("Illegal method type used for field " . $name . " : " . $options[1]);
+		}
+	}
+
+	// Insert into $GLOBALS
+	foreach ($vars AS $var => $value)
+		$GLOBALS[$var] = $value;
+
+	return $vars;
+}
+
+function printVar($array)
+{
+	echo "<pre style=\"border: 1px solid black; text-align: left; font-size: 9px\">\n";
+	print_r($array);
+	echo "</pre>\n";
+}
+
+function startBox($boxClass)
+{
+	echo "<table class=\"" . $boxClass . "\">";
+	echo "<tr>";
+	echo "<td class=\"boxTopLeft\"></td>";
+	echo "<td class=\"boxTop\"></td>";
+	echo "<td class=\"boxTopRight\"></td>";
+	echo "</tr>";
+	echo "<tr>";
+	echo "<td class=\"boxLeft\"></td>";
+	echo "<td class=\"boxContent\">";
+}
+
+function endBox()
+{
+	echo "</td>";
+	echo "<td class=\"boxRight\"></td>";
+	echo "</tr>";
+	echo "<tr>";
+	echo "<td class=\"boxBottomLeft\"></td>";
+	echo "<td class=\"boxBottom\"></td>";
+	echo "<td class=\"boxBottomRight\"></td>";
+	echo "</tr>";
+	echo "</table>";
+}
+
+function microtimeFloat()
+{
+	return array_sum(explode(" ", microtime()));
+}
+
 
 ?>
