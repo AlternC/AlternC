@@ -9,8 +9,8 @@ Standards-Version: 3.7.2.1
 Package: alternc
 Architecture: all
 Pre-depends: debconf (>= 0.5.00) | debconf-2.0
-Depends: debianutils (>= 1.13.1), libapache-mod-php5 | libapache-mod-php4, apache, apache-ssl, courier-ssl, courier-imap-ssl, courier-pop-ssl, mysql-server, php5-mysql | php4-mysql, phpmyadmin, postfix, proftpd-mysql, squirrelmail, postfix-tls, bind9, wget, rsync, quota, courier-authmysql | courier-authlib-mysql, ca-certificates, locales, perl-suid, perl, postfix-mysql, wwwconfig-common, sasl2-bin, libsasl2-modules, php5-cli | php4-cli, lockfile-progs (>= 0.1.9), gettext (>= 0.10.40-5), pdksh (>= 5.2.14-6), adduser
-Recommends: libapache-mod-gzip
+Depends: debianutils (>= 1.13.1), libapache-mod-php5 | libapache2-mod-php5 | libapache-mod-php4 | libapache2-mod-php4, courier-ssl, courier-imap-ssl, courier-pop-ssl, mysql-server, php5-mysql | php4-mysql, phpmyadmin, postfix, proftpd-mysql, squirrelmail, postfix-tls, bind9, wget, rsync, quota, courier-authmysql | courier-authlib-mysql, ca-certificates, locales, perl-suid, perl, postfix-mysql, wwwconfig-common, sasl2-bin, libsasl2-modules, php5-cli | php4-cli, lockfile-progs (>= 0.1.9), gettext (>= 0.10.40-5), pdksh (>= 5.2.14-6), adduser
+Recommends: libapache-mod-gzip, apache-ssl
 Conflicts: alternc-admintools, alternc-awstats (<= 0.3.2), alternc-webalizer (<= 0.9.4)
 Provides: alternc-admintools
 Replaces: alternc-admintools

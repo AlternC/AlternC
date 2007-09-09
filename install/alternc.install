@@ -180,11 +180,22 @@ touch /var/run/alternc/refresh_slave
 
 # Apache will not start without this file
 touch /var/alternc/apacheconf/override_php.conf
-# Enable vhost_alias apache module at the right place (ie: BEFORE mod_alias, but apache knows this ... )
-# well, apache-modconf works like crap in a shell script ...
-apache-modconf apache enable mod_vhost_alias quiet </dev/null || true
-apache-modconf apache enable `dpkg -l libapache-mod-php*|grep ii | cut -f 3 -d ' '|cut -b 11-18|sed -e 's/-/_/'` quiet </dev/null|| true
-apache-modconf apache-ssl enable `dpkg -l libapache-mod-php*|grep ii | cut -f 3 -d ' '|cut -b 11-18|sed -e 's/-/_/'` quiet </dev/null|| true
+php=`dpkg -l libapache-mod-php* | grep ^ii | sed -e 's/^.*libapache.?-mod-php\(.\).*$/php\1/' | tail -1`
+if [ -x /usr/sbin/apache ]
+then
+    # Enable vhost_alias apache module at the right place (ie: BEFORE mod_alias)
+    if ! grep -q "vhost_alias_module" /etc/apache/modules.conf
+    then
+        sed -i -e 's/^\(LoadModule.*config_log.*\)$/LoadModule vhost_alias_module \/usr\/lib\/apache\/1.3\/mod_vhost_alias.so\n\1/' /etc/apache/modules.conf
+    fi
+    echo "LoadModule $php_module /usr/lib/apache/1.3/lib$php.so" | append_no_dupe /etc/apache/modules.conf
+    echo "LoadModule $php_module /usr/lib/apache/1.3/lib$php.so" | append_no_dupe /etc/apache-ssl/modules.conf
+fi
+if [ -x /usr/sbin/apache2 ]
+then
+    a2enmod vhost_alias
+    a2enmod $php
+fi
 
 # Copy postfix *_checks if they do not exist
 for file in body_checks header_checks; do
