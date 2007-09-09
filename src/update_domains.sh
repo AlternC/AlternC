@@ -130,7 +130,7 @@ trap cleanup 0 1 2 15
 $MYSQL_SELECT <<EOF | tail -n '+1' > "$DOMAINS_TMP_FILE"
 SELECT membres.login,
        domaines_standby.domaine,
-       domaines_standby.mx,
+       if (domaines_standby.mx = '', '@', domaines_standby.mx),
        domaines_standby.gesdns,
        domaines_standby.gesmx,
        domaines_standby.action

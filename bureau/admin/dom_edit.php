@@ -146,7 +146,9 @@ if (!$r[noerase]) {
 <tr>
 	<td width="65%" valign="top">
 	<p>
-<?php printf(_("help_dns_mx %s %s"),$L_MX,$L_HOSTING); ?>
+<?php printf(_("help_dns_mx %s %s"),$L_MX,$L_HOSTING); 
+ if (!$r["mx"] && !$r["dns"]) $r["mx"]=$L_MX;
+?>
 	</p>
 	<label for="mx"><?php __("MX Field"); ?> : </label><input type="text" class="int" name="mx" id="mx" value="<?php echo $r["mx"] ?>" <?php if (!$r["dns"]) echo "disabled=\"disabled\""; ?> />
 	</td>

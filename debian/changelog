@@ -1,5 +1,7 @@
-alternc (0.9.6.5) testing; urgency=low
+alternc (0.9.6.5-12) testing; urgency=low
 
+  * Fixing dns / nodns issue (#772)
+  * using apache-modconf again ...
   * Choose english as default language, (#1047)
   * parameter checking in subdomain creation (#1037)
   * Changing ownership of /var/alternc/tmp, makes file upload work again (#1058)

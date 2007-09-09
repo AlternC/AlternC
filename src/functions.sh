@@ -265,7 +265,7 @@ remove_zone() {
         #sed -e "/^zone \"$escaped_domain\"/,/^};/d" \
         # That's for one-line template
         grep -v "^zone \"$escaped_domain\"" \
-            < "$NAMED_CONF_FILE" > "$NAMED_CONF_FILE.$$"
+            < "$NAMED_CONF_FILE" > "$NAMED_CONF_FILE.$$" || true
         mv -f "$NAMED_CONF_FILE.$$" "$NAMED_CONF_FILE"
         add_to_named_reload "all"
     fi
