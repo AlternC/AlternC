@@ -335,6 +335,7 @@ src/Makefile -text
 src/basedir_prot.sh -text
 src/du.pl -text
 src/fixperms.sh -text
+src/functions.sh -text
 src/mail_add -text
 src/mail_del -text
 src/mem_add -text
