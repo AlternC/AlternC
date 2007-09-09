@@ -7,6 +7,8 @@
 
 set -e 
 
+. /usr/lib/alternc/functions.sh
+
 #######################################################################
 # Script configuration
 #
