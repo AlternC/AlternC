@@ -181,6 +181,14 @@ msgstr "Le membre '%s' n'existe pas"
 msgid "Member %s successfully deleted"
 msgstr "Le membre '%s' a été effacé avec succès"
 
+#: ../admin/adm_dodel.php:61
+msgid "Deleting users"
+msgstr "Supprimer un utilisateur"
+
+#: ../admin/adm_dodel.php:65
+msgid "WARNING : Confirm the deletion of the users"
+msgstr "ATTENTION : Confirmez-vous la suppression de cette utilisateur" 
+
 #: ../admin/adm_doedit.php:53
 msgid "The member has been successfully edited"
 msgstr "Le compte a été modifié avec succès"
