@@ -166,7 +166,7 @@ class m_admin {
    *  produite.
    * 
    */
-  function get_list($all=0) {
+  function get_list($all=0, $letter="") {
     // PATCHBEN pour ne voir que les comptes que l'on a créé (sauf admin)
     global $err,$mem,$cuid;
     $err->log("admin","get_list");
@@ -175,10 +175,14 @@ class m_admin {
       return false;
     }
     $db=new DB_System();
-    if ($mem->user[uid]==2000 || $all) {
-      $db->query("SELECT uid FROM membres ORDER BY login;");
+	$letterQuery = ""; 
+	$db->query("SELECT uid FROM membres ORDER BY login;");
+	if ($letter) 
+    	$letterQuery = "&& login LIKE '" . $letter . "%'"; 
+	if ($mem->user["uid"]==2000 || $all) { 
+		$db->query("SELECT uid FROM membres WHERE 1" . $letterQuery . " ORDER BY login;"); 
     } else {
-      $db->query("SELECT uid FROM membres WHERE creator='".$cuid."' ORDER BY login;");
+      $db->query("SELECT uid FROM membres WHERE creator='".$cuid. "'" . $letterQuery." ORDER BY login;");
     }
     if ($db->num_rows()) {
       while ($db->next_record()) {
@@ -205,7 +209,7 @@ class m_admin {
     }
     $db->query("SELECT creator FROM membres WHERE uid='$uid';");
     $db->next_record();
-    if ($db->Record[creator]!=$cuid) {
+    if ($db->Record["creator"]!=$cuid) {
       $err->raise("admin",1);
       return false;
     }
