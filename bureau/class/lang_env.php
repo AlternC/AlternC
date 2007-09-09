@@ -24,8 +24,8 @@ $locales=array("fr_FR"=>"fr_FR","en_US"=>"en_US");
 // Create or update a locale.php file if it is outdated.
 update_locale();
 
-if (!$lang) {  // Use the browser first preferred language
-  $lang=strtolower(substr(trim($HTTP_ACCEPT_LANGUAGE),0,5));
+if (!(isset($lang)) {  // Use the browser first preferred language
+  $lang=strtolower(substr(trim($_SERVER["HTTP_ACCEPT_LANGUAGE"]),0,5));
 }
 
 
@@ -40,9 +40,9 @@ if (!$locales[$lang]) { // Requested language not found in locales
   }
 }
 
-if (!$locales[$lang]) $lang=$locales[0]; 
+if (!isset($locales[$lang])) $lang=$locales[0]; 
 
-if ($setlang && $lang) {
+if (isset($setlang) && isset($lang)) {
   setcookie("lang",$lang);
 }
 
@@ -52,9 +52,9 @@ if ($lang == NULL) {
 }
 
 /* Language ok, set the locale environment */
-putenv("LC_MESSAGES=$lang");
-putenv("LANG=$lang");
-putenv("LANGUAGE=$lang");
+putenv("LC_MESSAGES=".$lang);
+putenv("LANG=".$lang);
+putenv("LANGUAGE=".$lang);
 // this locale MUST be selected in "dpkg-reconfigure locales"
 setlocale(LC_ALL,$lang); 
 textdomain("alternc");
