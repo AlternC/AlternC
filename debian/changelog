@@ -2,7 +2,6 @@ alternc (0.9.6.5-12) testing; urgency=low
 
   * Fixing MX check when hosting a mail (#1706)
   * Fixing dns / nodns issue (#772)
-  * using apache-modconf again ...
   * Choose english as default language, (#1047)
   * parameter checking in subdomain creation (#1037)
   * Changing ownership of /var/alternc/tmp, makes file upload work again (#1058)
@@ -18,6 +17,8 @@ alternc (0.9.6.5-12) testing; urgency=low
   * fixes profftp configuration for Etch (#1046)
   * fixes .eu.be.name whois issue (#571)
   * change apache log format to a working one (using host request), also fix awstats issues. 
+  * fix modules manipulation rules (#1062)
+  * try to support apache2, at least with the right dependencies
 
  -- Benjamin Sonntag <benjamin@alternc.org>  Tue, 23 May 2007 00:07:54 +0200
 
