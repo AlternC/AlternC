@@ -157,21 +157,33 @@ EOF
     echo "running alternc.install"
     alternc.install
 
-    if [ ! -h /etc/apache-ssl/conf.d/alternc.conf ]; then
-        ln -sf /etc/alternc/apache-ssl.conf \
-            /etc/apache-ssl/conf.d/alternc.conf
-    fi
+    if [ -x /usr/sbin/apache ]; then
+        if [ ! -h /etc/apache-ssl/conf.d/alternc.conf ]; then
+            ln -sf /etc/alternc/apache-ssl.conf \
+                /etc/apache-ssl/conf.d/alternc.conf
+        fi
 
-    if [ ! -h /etc/apache/conf.d/alternc.conf ]; then
-        ln -sf /etc/alternc/apache.conf \
-            /etc/apache/conf.d/alternc.conf
-    fi
+        if [ ! -h /etc/apache/conf.d/alternc.conf ]; then
+            ln -sf /etc/alternc/apache.conf \
+                /etc/apache/conf.d/alternc.conf
+        fi
 
-    if [ ! -h /etc/apache/conf.d/override_php.conf ]; then
-        ln -sf /var/alternc/apacheconf/override_php.conf \
-            /etc/apache/conf.d/override_php.conf
+        if [ ! -h /etc/apache/conf.d/override_php.conf ]; then
+            ln -sf /var/alternc/apacheconf/override_php.conf \
+                /etc/apache/conf.d/override_php.conf
+        fi
     fi
+    if [ -x /usr/sbin/apache2 ]; then
+        if [ ! -h /etc/apache2/conf.d/alternc.conf ]; then
+            ln -sf /etc/alternc/apache.conf \
+                /etc/apache/conf.d/alternc.conf
+        fi
+        if [ ! -h /etc/apache2/conf.d/override_php.conf ]; then
+            ln -sf /var/alternc/apacheconf/override_php.conf \
+                /etc/apache/conf.d/override_php.conf
+        fi
 
+    fi 
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
