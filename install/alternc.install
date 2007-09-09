@@ -180,7 +180,7 @@ touch /var/run/alternc/refresh_slave
 
 # Apache will not start without this file
 touch /var/alternc/apacheconf/override_php.conf
-php=`dpkg -l libapache-mod-php* | grep ^ii | sed -e 's/^.*libapache.?-mod-php\(.\).*$/php\1/' | tail -1`
+php=`dpkg -l libapache-mod-php* | grep ^ii | sed -e 's/^.*libapache.\?-mod-php\(.\).*$/php\1/' | tail -1`
 if [ -x /usr/sbin/apache ]
 then
     # Enable vhost_alias apache module at the right place (ie: BEFORE mod_alias)
