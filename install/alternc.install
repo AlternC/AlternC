@@ -188,8 +188,8 @@ then
     then
         sed -i -e 's/^\(LoadModule.*config_log.*\)$/LoadModule vhost_alias_module \/usr\/lib\/apache\/1.3\/mod_vhost_alias.so\n\1/' /etc/apache/modules.conf
     fi
-    echo "LoadModule $php_module /usr/lib/apache/1.3/lib$php.so" | append_no_dupe /etc/apache/modules.conf
-    echo "LoadModule $php_module /usr/lib/apache/1.3/lib$php.so" | append_no_dupe /etc/apache-ssl/modules.conf
+    echo "LoadModule ${php}_module /usr/lib/apache/1.3/lib$php.so" | append_no_dupe /etc/apache/modules.conf
+    echo "LoadModule ${php}_module /usr/lib/apache/1.3/lib$php.so" | append_no_dupe /etc/apache-ssl/modules.conf
     SERVICES="$SERVICES apache apache-ssl"
 fi
 if [ -x /usr/sbin/apache2 ]
