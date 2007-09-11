@@ -746,7 +746,7 @@ class m_dom {
    *  TRUE sinon.
    *
    */
-  function edit_domain($dom,$dns,$mx,$force==0) {
+  function edit_domain($dom,$dns,$mx,$force=0) {
     global $db,$err,$L_MX,$classes,$cuid;
     $err->log("dom","edit_domain",$dom);
     // Locked ?
