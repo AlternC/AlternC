@@ -637,7 +637,8 @@ class m_dom {
 
     //    if (!(($sub == '*') || ($sub=="") || (preg_match('/([a-z0-9][\.\-a-z0-9]*)?[a-z0-9]/', $sub)))) {
     $fqdn=checkfqdn($sub);
-    if (($sub != '*') && !($fqdn==0 || $fqdn==4)) {
+    // Special cases : * (all subdomains at once) and '' empty subdomain are allowed.
+    if (($sub != '*' && $sub!='') && !($fqdn==0 || $fqdn==4)) {
       $err->raise("dom",24);
       return false;
     }
