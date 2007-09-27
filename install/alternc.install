@@ -286,6 +286,9 @@ if [ "$HAS_ROOT" != "1" ]; then
 fi
 
 # We should restart apaches after all configuration stuff ...
-for service in apache apache-ssl ; do
-    test -x /etc/init.d/$service && invoke-rc.d $service restart || true
+for service in apache apache-ssl apache2 ; do
+    test -x /etc/init.d/$service && invoke-rc.d $service stop || true
+done
+for service in apache apache-ssl apache2 ; do
+    test -x /etc/init.d/$service && invoke-rc.d $service start || true
 done
