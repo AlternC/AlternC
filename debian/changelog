@@ -1,9 +1,9 @@
-alternc (0.9.6.5-12) testing; urgency=low
+alternc (0.9.6.5-13) testing; urgency=low
 
   * Fixing MX check when hosting a mail (#1706)
-  * Fixing dns / nodns issue (#772)
+  * Delete the zonefile properly when destroying a domain (#772)
   * Choose english as default language, (#1047)
-  * parameter checking in subdomain creation (#1037)
+  * Proper parameter checking in subdomain creation (#1037)
   * Changing ownership of /var/alternc/tmp, makes file upload work again (#1058)
   * Force the restart of apache & apache-ssl (#1000)
   * Redirect are now done on http://$url$1 base, not $url/$1 (#1054)
@@ -13,12 +13,14 @@ alternc (0.9.6.5-12) testing; urgency=low
   * Fixed the 'view' link issues (no urlencode) (#690)
   * Change "move" to "move to" (ergonomic) (#787)
   * Confirm file deletion in the browser (#659)
-  * fixes dns install of internal hosting domains (#1056)
-  * fixes profftp configuration for Etch (#1046)
-  * fixes .eu.be.name whois issue (#571)
+  * fix dns install of internal hosting domains (#1056)
+  * fix proftpd and saslauthd configuration for Etch (#1046, #1069)
+  * fix .eu, .be, .name whois issue (#571)
   * change apache log format to a working one (using host request), also fix awstats issues. 
   * fix modules manipulation rules (#1062)
   * try to support apache2, at least with the right dependencies
+  * end explicit mysql-server dependencies, which switches to Recommends,
+    since we can now configure remote mysql servers properly (#1014)
 
  -- Benjamin Sonntag <benjamin@alternc.org>  Tue, 23 May 2007 00:07:54 +0200
 
