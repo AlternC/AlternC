@@ -49,7 +49,7 @@ $mem->resetlast();
 if($admin->enabled) {
   $expiring = $admin->renew_get_expiring_accounts();
 
-  if(count($expiring) > 0) {
+  if(is_array($expiring) && count($expiring) > 0) {
     echo "<h2>" . _("Expired or about to expire accounts") . "</h2>\n";
     echo "<table cellspacing=\"2\" cellpadding=\"4\">\n";
     echo "<tr><th>"._("uid")."</th><th>"._("Last name, surname")."</th><th>"._("Expiry")."</th></tr>\n";
