@@ -52,3 +52,4 @@ chgrp -R www-data /etc/alternc
 
 mkdir -p /var/spool/postfix/var/run/saslauthd
 chmod 710 /var/spool/postfix/var/run/saslauthd
+chown root:sasl /var/spool/postfix/var/run/saslauthd
