@@ -238,6 +238,7 @@ msgstr ""
 #: ../admin/dom_subdel.php:61 ../admin/sql_bck.php:77 ../admin/sql_del.php:69
 #: ../admin/sql_users_del.php:69 ../admin/adm_dodefquotas.php:73
 #: ../admin/adm_dodel.php:76 ../admin/bro_main.php:81 ../admin/bro_main.php:80
+#: ../admin/dom_edit.php:158
 msgid "No"
 msgstr "Nein"
 
@@ -246,7 +247,7 @@ msgstr "Nein"
 #: ../admin/dom_subdel.php:60 ../admin/sql_bck.php:78 ../admin/sql_del.php:69
 #: ../admin/sql_users_del.php:69 ../admin/adm_dodefquotas.php:72
 #: ../admin/adm_dodel.php:75 ../admin/bro_main.php:60 ../admin/bro_main.php:80
-#: ../admin/bro_main.php:79
+#: ../admin/bro_main.php:79 ../admin/dom_edit.php:158
 msgid "Yes"
 msgstr "Ja"
 
@@ -950,24 +951,24 @@ msgstr ""
 msgid "help_dns_mx %s %s"
 msgstr ""
 
-#: ../admin/dom_edit.php:151
+#: ../admin/dom_edit.php:151 ../admin/dom_edit.php:153
 msgid "MX Field"
 msgstr ""
 
-#: ../admin/dom_edit.php:155
+#: ../admin/dom_edit.php:155 ../admin/dom_edit.php:157
 msgid "help_dns_mail"
 msgstr ""
 
-#: ../admin/dom_edit.php:159
+#: ../admin/dom_edit.php:159 ../admin/dom_edit.php:161
 msgid "Submit the changes"
 msgstr ""
 
-#: ../admin/dom_edit.php:167
+#: ../admin/dom_edit.php:167 ../admin/dom_edit.php:169
 #, php-format
 msgid "help_domain_del %s"
 msgstr ""
 
-#: ../admin/dom_edit.php:170
+#: ../admin/dom_edit.php:170 ../admin/dom_edit.php:172
 #, php-format
 msgid "Delete %s"
 msgstr ""

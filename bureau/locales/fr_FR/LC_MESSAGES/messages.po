@@ -181,14 +181,6 @@ msgstr "Le membre '%s' n'existe pas"
 msgid "Member %s successfully deleted"
 msgstr "Le membre '%s' a été effacé avec succès"
 
-#: ../admin/adm_dodel.php:61
-msgid "Deleting users"
-msgstr "Supprimer un utilisateur"
-
-#: ../admin/adm_dodel.php:65
-msgid "WARNING : Confirm the deletion of the users"
-msgstr "ATTENTION : Confirmez-vous la suppression de cette utilisateur" 
-
 #: ../admin/adm_doedit.php:53
 msgid "The member has been successfully edited"
 msgstr "Le compte a été modifié avec succès"
@@ -252,6 +244,7 @@ msgstr "Compte Actif ? "
 #: ../admin/dom_subdel.php:61 ../admin/sql_bck.php:77 ../admin/sql_del.php:69
 #: ../admin/sql_users_del.php:69 ../admin/adm_dodefquotas.php:73
 #: ../admin/adm_dodel.php:76 ../admin/bro_main.php:81 ../admin/bro_main.php:80
+#: ../admin/dom_edit.php:158
 msgid "No"
 msgstr "Non"
 
@@ -260,7 +253,7 @@ msgstr "Non"
 #: ../admin/dom_subdel.php:60 ../admin/sql_bck.php:78 ../admin/sql_del.php:69
 #: ../admin/sql_users_del.php:69 ../admin/adm_dodefquotas.php:72
 #: ../admin/adm_dodel.php:75 ../admin/bro_main.php:60 ../admin/bro_main.php:80
-#: ../admin/bro_main.php:79
+#: ../admin/bro_main.php:79 ../admin/dom_edit.php:158
 msgid "Yes"
 msgstr "Oui"
 
@@ -1004,19 +997,19 @@ msgstr ""
 "laissez ce champ vide, vous ne pourrez pas utiliser les mails de votre "
 "domaine !</small>"
 
-#: ../admin/dom_edit.php:151
+#: ../admin/dom_edit.php:151 ../admin/dom_edit.php:153
 msgid "MX Field"
 msgstr "Champs MX"
 
-#: ../admin/dom_edit.php:155
+#: ../admin/dom_edit.php:155 ../admin/dom_edit.php:157
 msgid "help_dns_mail"
 msgstr "Si l'on ne gère pas vos DNS : <br /> gère-t-on vos mails ?"
 
-#: ../admin/dom_edit.php:159
+#: ../admin/dom_edit.php:159 ../admin/dom_edit.php:161
 msgid "Submit the changes"
 msgstr "Valider les changements"
 
-#: ../admin/dom_edit.php:167
+#: ../admin/dom_edit.php:167 ../admin/dom_edit.php:169
 #, php-format
 msgid "help_domain_del %s"
 msgstr ""
@@ -1024,7 +1017,7 @@ msgstr ""
 "Attention, cela  supprime aussi tous les comptes ftp, email, listes de "
 "diffusions etc. associés à ce domaine et à tous ses sous-domaines !"
 
-#: ../admin/dom_edit.php:170
+#: ../admin/dom_edit.php:170 ../admin/dom_edit.php:172
 #, php-format
 msgid "Delete %s"
 msgstr "Effacer %s"
@@ -2145,6 +2138,15 @@ msgstr "Suppression du quota %s"
 #: ../admin/adm_dodefquotas.php:69
 msgid "WARNING : Confirm the deletion of the quota"
 msgstr "ATTENTION : Etes-vous sur de vouloir supprimer le quota"
+
+#: ../admin/adm_dodel.php:61
+#, php-format
+msgid "Deleting users"
+msgstr "Supprimer un utilisateur"
+
+#: ../admin/adm_dodel.php:65
+msgid "WARNING : Confirm the deletion of the users"
+msgstr "ATTENTION : Confirmez-vous la suppression de cette utilisateur"
 
 #: ../admin/adm_doms.php:54 ../admin/adm_list.php:60
 #: ../admin/quota_show_all.php:38

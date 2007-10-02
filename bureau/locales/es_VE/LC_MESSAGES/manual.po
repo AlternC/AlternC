@@ -189,6 +189,11 @@ msgstr ""
 msgid "err_dom_24"
 msgstr "El nombre de dominio es demasiado largo."
 
+#. There is no MX record pointing to this server, and you are asking us to host the Mail here 
+#, fuzzy
+msgid "err_dom_25"
+msgstr "El dominio '%s' no le pertenece."
+
 #. - Entrez le nom du domaine que vous souhaitez héberger. Le nom de domaine 
 #. doit être complet, mais <b>sans le www.</b><br /> IMPORTANT : Si vous voulez 
 #. un hébergement réel de domaine, il faut que les DNS de votre domaine 
