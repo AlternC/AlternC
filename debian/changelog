@@ -2,7 +2,7 @@ alternc (0.9.6.5-14) stable; urgency=low
 
   * upload test package to stable (etch)
 
- -- Antoine Beaupre <anarcat@builder.koumbit.net>  Wed,  3 Oct 2007 22:58:00 +0000
+ -- Antoine Beaupré <antoine@koumbit.org> Wed,  3 Oct 2007 22:58:00 +0000
 
 alternc (0.9.6.5-13) testing; urgency=low
 
