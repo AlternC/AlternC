@@ -240,10 +240,10 @@ IFS="$OLD_IFS"
 RELOAD_ZONES=`cat "$RELOAD_ZONES_TMP_FILE"`
 if [ ! -z "$RELOAD_ZONES" ]; then
     if [ "$RELOAD_ZONES" = "all" ]; then
-        rndc reload || echo "Cannot reload bind" >> "$DOMAIN_LOG_FILE"
+        rndc reload > /dev/null || echo "Cannot reload bind" >> "$DOMAIN_LOG_FILE"
     else
         for zone in $RELOAD_ZONES; do
-            rndc reload "$zone" || echo "Cannot reload bind for zone $zone" >> "$DOMAIN_LOG_FILE"
+            rndc reload "$zone" > /dev/null || echo "Cannot reload bind for zone $zone" >> "$DOMAIN_LOG_FILE"
         done
     fi
     apachectl graceful > /dev/null || echo "Cannot restart apache" >> "$DOMAIN_LOG_FILE"
