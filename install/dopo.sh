@@ -39,7 +39,7 @@ dolangs() {
 find /var/alternc/bureau/locales -maxdepth 1 -mindepth 1 -type d -name "*_*" | dolangs
 
 # Relance les apache pour qu'ils vident leur cache GetText
-# invoke-rc.d apache restart
-# invoke-rc.d apache-ssl restart
+invoke-rc.d apache restart
+invoke-rc.d apache-ssl restart
 
 exit 0
