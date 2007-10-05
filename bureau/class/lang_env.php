@@ -1,28 +1,28 @@
 <?php
 
-function update_locale() {
-  global $locales;
+function update_locale($langpath) {
+  $locales=array();
   $f=@fopen("/etc/locale.gen","rb");
   if ($f) {
-    $locales=array();
     while ($s=fgets($f,1024)) {
-      if (preg_match("/^([a-z][a-z]_[A-Z][A-Z])/",trim($s),$mat)) {
+      if (preg_match("/^([a-z][a-z]_[A-Z][A-Z])/",trim($s),$mat) && file_exists($langpath . '/' . $mat[1])) {
 	$locales[$mat[1]]=$mat[1];
       }
     }
     fclose($f);
   }
+  return $locales;
 }
-
 
 // setlang is on the link at the login page
 if (isset($_REQUEST["setlang"])) {
   $lang=$_REQUEST["setlang"];
 }
 
-$locales=array("fr_FR"=>"fr_FR","en_US"=>"en_US");
+$langpath = bindtextdomain("alternc", "/var/alternc/bureau/locales");
+
 // Create or update a locale.php file if it is outdated.
-update_locale();
+$locales = update_locale($langpath);
 
 if (!(isset($lang))) {  // Use the browser first preferred language
   $lang=strtolower(substr(trim($_SERVER["HTTP_ACCEPT_LANGUAGE"]),0,5));

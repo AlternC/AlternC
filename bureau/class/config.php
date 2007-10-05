@@ -132,11 +132,7 @@ closedir($c);
 
 
 /* Language */
-bindtextdomain("alternc", "/var/alternc/bureau/locales");
-
-if (!$do_not_set_lang_env) {
-  include("lang_env.php");
-}
+include_once("lang_env.php");
 
 $mem=new m_mem();
 $err=new m_err();
