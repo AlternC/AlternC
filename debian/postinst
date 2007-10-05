@@ -145,7 +145,7 @@ EOF
     /usr/share/alternc/install/upgrade_check.sh $2
 
     echo "config phpmyadmin"
-    include_str='include_once("/etc/alternc/phpmyadmin.inc.php")'
+    include_str='include("/etc/alternc/phpmyadmin.inc.php")'
     pma_config=/etc/phpmyadmin/config.inc.php
     if ! grep -e "$include_str" $pma_config > /dev/null 2>&1; then
         echo "<?php $include_str ?>" >> $pma_config
