@@ -50,7 +50,7 @@ include("head.php");
 	else {
 		echo "<p>".sprintf(_("The password of the user %s has been successfully changed"),$user)."</p>";
 	}
-	echo "<p><a href=\"hta_edit?dir=$dir\">"._("Click here to continue")."</a></p>";
+	echo "<p><a href=\"hta_edit.php?dir=$dir\">"._("Click here to continue")."</a></p>";
 ?>
 </body>
 </html>

@@ -439,7 +439,7 @@ echo "<a href=\"ftp_add.php?dir=".urlencode($R)."\">"._("Click here to create an
 }
 
 if ($hta->is_protected($R)) {
-echo "<a href=\"hta_edit?dir=$R\">"._("This folder has restricted access")."</a><br />";
+echo "<a href=\"hta_edit.php?dir=$R\">"._("This folder has restricted access")."</a><br />";
 }
 else {
 echo "<a href=\"hta_add.php?value=$R\">"._("Click here to protect this folder with login/password")."</a><br />";
