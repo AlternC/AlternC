@@ -55,8 +55,8 @@ include("head.php");
 <label for="login"><?php __("Username"); ?></label></th><td>
 	<select class="inl" name="prefixe"><?php $ftp->select_prefix_list($r["prefixe"]); ?></select>&nbsp;<b>_</b>&nbsp;<input type="text" class="int" name="login" id="login" value="<?php echo $r["login"]; ?>" size="20" maxlength="64" />
 </td></tr>
-<tr><th><label for="pass"><?php __("Password"); ?></label></th><td><input type="password" class="int" name="pass" id="pass" size="20" maxlength="64" value="********"/></td></tr>
-<tr><th><label for="passconf"><?php __("Confirm password"); ?></label></th><td><input type="password" class="int" name="passconf" id="passconf" size="20" maxlength="64" value="********"/></td></tr>
+<tr><th><label for="pass"><?php __("Password"); ?></label></th><td><input type="password" class="int" name="pass" id="pass" size="20" maxlength="64" value=""/></td></tr>
+<tr><th><label for="passconf"><?php __("Confirm password"); ?></label></th><td><input type="password" class="int" name="passconf" id="passconf" size="20" maxlength="64" value=""/></td></tr>
 <tr><th><label for="rep"><?php __("Folder"); ?></label></th><td><input type="text" class="int" name="rep" id="rep" value="<?php echo $r["dir"]; ?>" size="20" maxlength="64" />
 
 <script type="text/javascript">

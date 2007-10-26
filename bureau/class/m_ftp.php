@@ -186,7 +186,7 @@ class m_ftp {
       $err->raise("ftp",6);
       return false;
     }
-    if (trim($pass)!="********") {
+    if (trim($pass)) {
       $db->query("UPDATE ftpusers SET name='".$prefixe.$login."', password='', encrypted_password=ENCRYPT('$pass'), homedir='/var/alternc/html/$l/$lo/$dir', uid='$cuid' WHERE id='$id';");
     } else {
       $db->query("UPDATE ftpusers SET name='".$prefixe.$login."', homedir='/var/alternc/html/$l/$lo/$dir', uid='$cuid' WHERE id='$id';");
