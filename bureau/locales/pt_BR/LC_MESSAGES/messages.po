@@ -25,46 +25,46 @@ msgstr "Suprimir minha base de dados SQL"
 
 msgid "hlp_sql_bck"
 msgstr ""
-"Seu backup MySQL est√° salvado na pasta de <code>db.sql.1</code> a <code>db."
+"Seu backup MySQL est· salvado na pasta de <code>db.sql.1</code> a <code>db."
 "sql.19</code><br />seu nome da base de dados substitui 'db'.<br />AVISO: Se "
-"voc√™ muda os ajustes backup (backups, compress√£o...) os backups antigos "
-"podem ficar na pasta backup.Usar a administra√ß√£o de arquivos para suprimi-"
+"vocÍ muda os ajustes backup (backups, compress„o...) os backups antigos "
+"podem ficar na pasta backup.Usar a administraÁ„o de arquivos para suprimi-"
 "los."
 
 msgid "err_mysql_11"
 msgstr ""
-"Voc√™ n√£o tem nenhuma base de dados, clica sobre 'Base de Dados' para criar "
+"VocÍ n„o tem nenhuma base de dados, clica sobre 'Base de Dados' para criar "
 "a primeira"
 
 msgid "err_mysql_10"
 msgstr ""
-"Voc√™ n√£o pode criar sua base de dados principal : voc√™ ainda tem outras "
+"VocÍ n„o pode criar sua base de dados principal : vocÍ ainda tem outras "
 "base de dados !"
 
 msgid "err_mysql_9"
-msgstr "O arquivo √© incorreto ou n√£o existe."
+msgstr "O arquivo È incorreto ou n„o existe."
 
 msgid "err_mysql_8"
-msgstr "A senha √© demasiado longa (16 car√°teres max)"
+msgstr "A senha È demasiado longa (16 car·teres max)"
 
 msgid "err_mysql_7"
-msgstr "O nome de arquivo voc√™ escolheu n√£o existe ou √© incorreto."
+msgstr "O nome de arquivo vocÍ escolheu n„o existe ou È incorreto."
 
 msgid "err_mysql_6"
-msgstr "A pasta √© incorreta!"
+msgstr "A pasta È incorreta!"
 
 msgid "err_mysql_5"
-msgstr "seu n√∫mero backup est√° incorreto."
+msgstr "seu n˙mero backup est· incorreto."
 
 msgid "err_mysql_4"
-msgstr "Esta base de dados j√† existe!"
+msgstr "Esta base de dados j‡ existe!"
 
 msgid "err_mysql_3"
 msgstr ""
-"Sua base de dados n√£o existe, voc√™ pode come√ßar√° um acesso criando o."
+"Sua base de dados n„o existe, vocÍ pode comeÁar· um acesso criando o."
 
 msgid "err_mysql_2"
-msgstr "Sua senha √© demasiado longa (16 car√°teres max)"
+msgstr "Sua senha È demasiado longa (16 car·teres max)"
 
 msgid "quota_mysql"
 msgstr "MySQL Base de Dados"
@@ -73,32 +73,32 @@ msgid "Help"
 msgstr "Ajuda"
 
 msgid "err_mem_9"
-msgstr "A informa√ß√£o entrada √© incorreta"
+msgstr "A informaÁ„o entrada È incorreta"
 
 msgid "err_mem_8"
-msgstr "A senha deve ter pelo menos 3 car√°teres"
+msgstr "A senha deve ter pelo menos 3 car·teres"
 
 msgid "err_mem_7"
-msgstr "As novas senhas s√£o diferentes, por favor tentar de novo"
+msgstr "As novas senhas s„o diferentes, por favor tentar de novo"
 
-# PROBLEME : il y avait 2 fois le 5, les autres messages doivent surement etre d√©cal√©s (TODO)
+# PROBLEME : il y avait 2 fois le 5, les autres messages doivent surement etre dÈcalÈs (TODO)
 msgid "err_mem_6"
-msgstr "A senha antiga √© incorreta"
+msgstr "A senha antiga È incorreta"
 
 msgid "err_mem_5"
-msgstr "Endere√ßo IP incorreto, por favor contatar o administrador"
+msgstr "EndereÁo IP incorreto, por favor contatar o administrador"
 
 msgid "err_mem_4"
-msgstr "Sess√£o desconhecido, por favor contatar o administrador"
+msgstr "Sess„o desconhecido, por favor contatar o administrador"
 
 msgid "err_mem_3"
-msgstr "Cookie incorreto, por favor aceitar o cookie da sess√£o"
+msgstr "Cookie incorreto, por favor aceitar o cookie da sess„o"
 
 msgid "err_mem_2"
-msgstr "Esta conta est√° troncada, por favor chamar o administrador"
+msgstr "Esta conta est· troncada, por favor chamar o administrador"
 
 msgid "err_mem_1"
-msgstr "Us√∫ario ou senha incorreto"
+msgstr "Us˙ario ou senha incorreto"
 
 msgid "help_chg_mail"
 msgstr ""
@@ -119,54 +119,54 @@ msgid "from: <code> %1$s </code>"
 msgstr "do: <code> %1$s </code>"
 
 msgid "%1$d login failed since last login"
-msgstr "%1$d login falharam desde o √∫ltimo login"
+msgstr "%1$d login falharam desde o ˙ltimo login"
 
 msgid "the %3$d-%2$d-%1$d at %4$d:%5$d"
-msgstr "%3$d/%1$d/%2$d, √† %6$d:%5$d %7$s"
+msgstr "%3$d/%1$d/%2$d, ‡ %6$d:%5$d %7$s"
 
 msgid "Last Login: "
-msgstr "√öltimo Login: "
+msgstr "⁄ltimo Login: "
 
 msgid "AlternC Desktop"
 msgstr "Desktop AlternC"
 
 msgid "Administration of"
-msgstr "Administra√ß√£o do"
+msgstr "AdministraÁ„o do"
 
 msgid "You cannot change your password"
-msgstr "Voc√™ n√£o pode mudar sua senha"
+msgstr "VocÍ n„o pode mudar sua senha"
 
 msgid "If you want to use a different language, click on the flag below"
 msgstr ""
-"Se voc√™ quiser usar uma lingua diferente, clicar sobre a bandeira abaixo"
+"Se vocÍ quiser usar uma lingua diferente, clicar sobre a bandeira abaixo"
 
 msgid "You must accept the session cookie to log-in"
-msgstr "Voc√™ precisa aceitar o cookie da sess√£o para o login"
+msgstr "VocÍ precisa aceitar o cookie da sess„o para o login"
 
 msgid ""
 "Enter your username and your password to connect to the virtual desktop "
 "interface"
 msgstr ""
-"Entrar seu nome do us√∫ario e sua senha para conectar √† interface desktop "
+"Entrar seu nome do us˙ario e sua senha para conectar ‡ interface desktop "
 "virtual"
 
 msgid "quota_web"
-msgstr "Espa√ßo de Disco"
+msgstr "EspaÁo de Disco"
 
 msgid "Mailboxes"
 msgstr "Caixas e email"
 
 msgid "Add a mailbox on <b>%s</b>"
-msgstr "Adi√ßionar a caixa de email em <b>%s</b>"
+msgstr "AdiÁionar a caixa de email em <b>%s</b>"
 
 msgid "Delete the selected mailboxes"
 msgstr "Suprimir as caixas de email selecionados"
 
 msgid "Action"
-msgstr "A√ß√£o"
+msgstr "AÁ„o"
 
 msgid "Mailbox list of the domain %s"
-msgstr "Lista de caixas de email do dom√≠nio %s"
+msgstr "Lista de caixas de email do domÌnio %s"
 
 msgid "The mailbox %s has been successfully changed"
 msgstr "A caixa de email %s foi mudado com sucesso"
@@ -178,13 +178,13 @@ msgid "Edit the mailbox %s"
 msgstr "Editar a caixa e email %s"
 
 msgid "Edit a mailbox of the domain %s"
-msgstr "Editar a caixa de email do dom√≠nio %s"
+msgstr "Editar a caixa de email do domÌnio %s"
 
 msgid "The mailbox <b>%s</b> has been successfully changed"
 msgstr "A caixa de email <b>%s</b> foi mudado com sucesso"
 
 msgid "The mailbox <b>%s</b> does not exist!"
-msgstr "A caixa de email <b>%s</b> n√£o existe!"
+msgstr "A caixa de email <b>%s</b> n„o existe!"
 
 msgid "The mailbox <b>%s</b> has been successfully created"
 msgstr "A caixa de email <b>%s</b> foi criado com sucesso"
@@ -199,22 +199,22 @@ msgid "POP password"
 msgstr "Senha POP"
 
 msgid "Is it a POP account?"
-msgstr "√â uma conta POP?"
+msgstr "… uma conta POP?"
 
 msgid "Create this mailbox"
 msgstr "Criar uma caixa de email"
 
 msgid "Add a mail to the domain %s"
-msgstr "Adi√ßionar um email ao dom√≠nio %s"
+msgstr "AdiÁionar um email ao domÌnio %s"
 
 msgid "help_mail_add"
 msgstr ""
 
 msgid "err_mail_15"
-msgstr "Este email n√£o √© uma conta pop. √â imposs√≠vel mudar a senha !"
+msgstr "Este email n„o È uma conta pop. … impossÌvel mudar a senha !"
 
 msgid "err_mail_14"
-msgstr "Um ou mais redire√ß√µes de email s√£o invalidos"
+msgstr "Um ou mais redireÁıes de email s„o invalidos"
 
 msgid "err_mail_13"
 msgstr "Por favor entrar um email valido"
@@ -223,39 +223,39 @@ msgid "err_mail_12"
 msgstr "Por favor entrar uma senha pop"
 
 msgid "err_mail_11"
-msgstr "Por favor entrar um endere√ßo Email"
+msgstr "Por favor entrar um endereÁo Email"
 
 msgid "err_mail_10"
-msgstr "-- Erro de Programa -- Quota de Correios n√£o existe"
+msgstr "-- Erro de Programa -- Quota de Correios n„o existe"
 
 msgid "err_mail_9"
-msgstr "O dom√≠nio '%s' n√£o existe."
+msgstr "O domÌnio '%s' n„o existe."
 
 msgid "err_mail_8"
-msgstr "Sua quota email acabou. Voc√™ n√£o pode criar mais contas de email."
+msgstr "Sua quota email acabou. VocÍ n„o pode criar mais contas de email."
 
 msgid "err_mail_7"
-msgstr "O email '%s' j√† existe."
+msgstr "O email '%s' j‡ existe."
 
 msgid "err_mail_6"
-msgstr "O dom√≠nio '%s' n√£o existe."
+msgstr "O domÌnio '%s' n„o existe."
 
 msgid "err_mail_5"
-msgstr "-- Erro de Servidor --- Par√¢metro √© incorreto (%s)"
+msgstr "-- Erro de Servidor --- Par‚metro È incorreto (%s)"
 
 msgid "err_mail_4"
 msgstr ""
 "Por favor escolha 'conta pop' e escholha a senha pop, ou entra algumas "
-"redire√ß√µes, ou os dois"
+"redireÁıes, ou os dois"
 
 msgid "err_mail_3"
-msgstr "Este email '%s' n√£o existe"
+msgstr "Este email '%s' n„o existe"
 
 msgid "err_mail_2"
-msgstr "Nenhum email no dom√≠nio '%s'"
+msgstr "Nenhum email no domÌnio '%s'"
 
 msgid "err_mail_1"
-msgstr "conex√£o ldap imposs√≠vel, por favor tenta mais tarde."
+msgstr "conex„o ldap impossÌvel, por favor tenta mais tarde."
 
 msgid "quota_mail"
 msgstr "Contas de Email"
@@ -389,49 +389,49 @@ msgid "The ftp account %s has been successfully deleted"
 msgstr "Esta conta ftp %s foi suprimado com sucesso"
 
 msgid "Create this new FTP account."
-msgstr "Criar est√° nova conta FTP."
+msgstr "Criar est· nova conta FTP."
 
 msgid "Create a new ftp account"
 msgstr "Criar uma nova conta ftp"
 
 msgid "hlp_ftp_add"
-msgstr "Voc√™ n√£o pode adi√ßionar uma nova conta ftp. Sua conta est√° cheia."
+msgstr "VocÍ n„o pode adiÁionar uma nova conta ftp. Sua conta est· cheia."
 
 msgid "hlp_ftp_list_no"
 msgstr ""
-"Voc√™ n√£o tem nenhuma conta FTP dispon√≠vel. Clica sobre 'Criar uma conta "
+"VocÍ n„o tem nenhuma conta FTP disponÌvel. Clica sobre 'Criar uma conta "
 "ftp' para criar uma. <br />Para poder acessar seus arquivos com um programa "
-"ftp, voc√™ deve criar pelo menos uma conta. Cada conta √© associado com uma "
-"pasta, e n√£o pode acessar nada fora os arquivos e pastas nesta pasta'<br /"
-">Mais informa√ß√£o sobre o FTP em Ajuda Online HELPID_100<br />"
+"ftp, vocÍ deve criar pelo menos uma conta. Cada conta È associado com uma "
+"pasta, e n„o pode acessar nada fora os arquivos e pastas nesta pasta'<br /"
+">Mais informaÁ„o sobre o FTP em Ajuda Online HELPID_100<br />"
 
 msgid "hlp_ftp_list"
 msgstr ""
-"Aqui est√° a lista de contas ftp com acesso √† sua conta.Clica sobre "
-"'Modifi√ßar' para mudar o nome do us√∫ario, a senha ou o diret√≥rio de "
+"Aqui est· a lista de contas ftp com acesso ‡ sua conta.Clica sobre "
+"'ModifiÁar' para mudar o nome do us˙ario, a senha ou o diretÛrio de "
 "raizPara suprimir uma conta, seliciona a conta correspondante e clica sobre "
 "a tecla 'Suprimir as contas selecionadas'<br />Para poder acessar seus "
-"arquivos com um programa ftp, voc√™ deve criar pelo menos uma conta. Cada "
-"conta √© associado com uma pasta, e n√£o pode acessar nada fora os arquivos "
-"e pastas nesta pasta'<br />Mais informa√ß√£o sobre o FTP em Ajuda Online "
+"arquivos com um programa ftp, vocÍ deve criar pelo menos uma conta. Cada "
+"conta È associado com uma pasta, e n„o pode acessar nada fora os arquivos "
+"e pastas nesta pasta'<br />Mais informaÁ„o sobre o FTP em Ajuda Online "
 "HELPID_100<br />"
 
 msgid "err_ftp_6"
-msgstr "Esta pasta n√£o pode ser criada."
+msgstr "Esta pasta n„o pode ser criada."
 
 msgid "err_ftp_5"
 msgstr ""
-"Sua quota para a conta FTP est√° cheio. Voc√™ n√£o pode criar mais contas "
+"Sua quota para a conta FTP est· cheio. VocÍ n„o pode criar mais contas "
 "FTPs."
 
 msgid "err_ftp_4"
-msgstr "Esta conta FTP j√† existe"
+msgstr "Esta conta FTP j‡ existe"
 
 msgid "err_ftp_3"
-msgstr "O prefixo escolhido n√£o √© permitido"
+msgstr "O prefixo escolhido n„o È permitido"
 
 msgid "err_ftp_2"
-msgstr "Esta conta FTP n√£o existe"
+msgstr "Esta conta FTP n„o existe"
 
 msgid "err_ftp_1"
 msgstr "Nenhuma conta FTP achada"
@@ -440,35 +440,35 @@ msgid "quota_ftp"
 msgstr "Contas FTP"
 
 msgid "err_err_1"
-msgstr "Esta mesagem do erro n√£o existe (%s)"
+msgstr "Esta mesagem do erro n„o existe (%s)"
 
 msgid "err_err_0"
 msgstr "OK"
 
 msgid "The modifications will take effect in 5 minutes."
-msgstr "As modifica√ß√µes estaram actualizadas em 5 minutos."
+msgstr "As modificaÁıes estaram actualizadas em 5 minutos."
 
 msgid "Editing subdomain %s"
-msgstr "Editando o secund√°rio-dom√≠nio %s"
+msgstr "Editando o secund·rio-domÌnio %s"
 
 msgid "WARNING : Confirm the deletion of the subdomain"
-msgstr "AVISO : Confirmar o apagamento do secund√°rio-dom√≠nio"
+msgstr "AVISO : Confirmar o apagamento do secund·rio-domÌnio"
 
 msgid "Deleting subdomain %s"
-msgstr "Suprimando o secund√°rio-dom√≠nio %s"
+msgstr "Suprimando o secund·rio-domÌnio %s"
 
 msgid ""
 "The domain %s has been changed. The modifications will take effect in 5 "
 "minutes."
 msgstr ""
-"O dom√≠nio %s foi modificado. As modifica√ß√µes estar√£o atualizadas em 5 "
+"O domÌnio %s foi modificado. As modificaÁıes estar„o atualizadas em 5 "
 "minutos."
 
 msgid "Delete %s"
 msgstr "Deleter %s"
 
 msgid "Submit the changes"
-msgstr "Submeter as mudan√ßas"
+msgstr "Submeter as mudanÁas"
 
 msgid "MX Field"
 msgstr "Campo MX"
@@ -477,55 +477,55 @@ msgid "Manage the DNS on the server ?"
 msgstr "Administrar o DNS neste servidor ?"
 
 msgid "DNS parameters"
-msgstr "Par√¢metros DNS"
+msgstr "Par‚metros DNS"
 
 msgid "Webmail access"
 msgstr "Acesso Webmail"
 
 msgid "IP redirection"
-msgstr "Redire√ß√£o IP"
+msgstr "RedireÁ„o IP"
 
 msgid "URL redirection"
-msgstr "Redire√ß√£o URL"
+msgstr "RedireÁ„o URL"
 
 msgid "Locally managed"
 msgstr "Controlado localemente"
 
 msgid "Add a subdomain"
-msgstr "Adi√ßionar um secund√°rio-dom√≠nio"
+msgstr "AdiÁionar um secund·rio-domÌnio"
 
 msgid "Domains"
-msgstr "Dom√≠nios"
+msgstr "DomÌnios"
 
 msgid "Subdomains"
-msgstr "Secund√°rio-dom√≠nios"
+msgstr "Secund·rio-domÌnios"
 
 msgid "Editing domain %s"
-msgstr "Editando o dom√≠nio %s"
+msgstr "Editando o domÌnio %s"
 
 msgid "The domain %s has been successfully deleted."
-msgstr "O dom√≠nio %s foi suprimido com sucesso."
+msgstr "O domÌnio %s foi suprimido com sucesso."
 
 msgid "Domain %s deleted"
-msgstr "Dom√≠nio %s suprimido"
+msgstr "DomÌnio %s suprimido"
 
 msgid "This will delete the related sub-domains too."
-msgstr "Isto suprimir√° os secund√°rio-dom√≠nios relacionados tambem."
+msgstr "Isto suprimir· os secund·rio-domÌnios relacionados tambem."
 
 msgid "Confirm the deletion of domain %s"
-msgstr "Confirma o apagamento deste dom√≠nio %s"
+msgstr "Confirma o apagamento deste domÌnio %s"
 
 msgid "Whois result on the domain"
-msgstr "Resultado Whois deste dom√≠nio"
+msgstr "Resultado Whois deste domÌnio"
 
 msgid "Your new domain %s has been successfully installed"
-msgstr "Seu dom√≠nio %s foi instalado com sucesso"
+msgstr "Seu domÌnio %s foi instalado com sucesso"
 
 msgid "Add this domain"
-msgstr "Adi√ßionar este dom√≠nio"
+msgstr "AdiÁionar este domÌnio"
 
 msgid "Add a domain"
-msgstr "Adi√ßionar um dom√≠nio"
+msgstr "AdiÁionar um domÌnio"
 
 msgid "host my dns here"
 msgstr "hospedar meu DNS aqui"
@@ -534,169 +534,169 @@ msgid ""
 "If you don't want to host in our server the DNS of your domain, don't check "
 "the box 'host my dns here'. If you don't know what it mean, leave it checked."
 msgstr ""
-"Se voc√™ n√£o quiser hospedar o DNS em nosso servidor, n√£o seleciona a "
-"caixa 'hospedar meu DNS aqui'. Se voc√™ n√£o sabe o que significa, deix√°-lo "
+"Se vocÍ n„o quiser hospedar o DNS em nosso servidor, n„o seleciona a "
+"caixa 'hospedar meu DNS aqui'. Se vocÍ n„o sabe o que significa, deix·-lo "
 "selecionado."
 
 msgid "Domain name"
-msgstr "Nome do Dom√≠nio"
+msgstr "Nome do DomÌnio"
 
 msgid "Contact your administrator for more information."
-msgstr "Contatar seu administrador para mais informa√ß√£o."
+msgstr "Contatar seu administrador para mais informaÁ„o."
 
 msgid "You cannot add any new domain, your quota is over."
-msgstr "Voc√™ n√£o pode adi√ßionr mais dom√≠nios, sua quota acabou."
+msgstr "VocÍ n„o pode adiÁionr mais domÌnios, sua quota acabou."
 
 msgid "Domain hosting"
-msgstr "Hospedagem do Dom√≠nio"
+msgstr "Hospedagem do DomÌnio"
 
 msgid "hlp_edit_domain"
 msgstr ""
-"Esta zona permite as modifica√ß√µes de par√¢metros de seu dom√≠nio e dos "
-"secund√°rios-dom√≠nios instalados<br />Voc√™ pode criar um novo secund√°rio-"
-"dom√≠nio e escholer de re-dirigir a seu espa√ßo de disco, a um outro "
-"endere√ßo Internet, o a um endere√ßo IP (utiliza√ß√£o advancado)<br />Mais "
-"informa√ß√£o sobre a administra√ß√£o dos dom√≠nios na se√ß√£o de ajuda online "
+"Esta zona permite as modificaÁıes de par‚metros de seu domÌnio e dos "
+"secund·rios-domÌnios instalados<br />VocÍ pode criar um novo secund·rio-"
+"domÌnio e escholer de re-dirigir a seu espaÁo de disco, a um outro "
+"endereÁo Internet, o a um endereÁo IP (utilizaÁ„o advancado)<br />Mais "
+"informaÁ„o sobre a administraÁ„o dos domÌnios na seÁ„o de ajuda online "
 "HELPID_200<br />"
 
 msgid "hlp_del_domain"
 msgstr ""
-"O dom√≠nio foi suprimido, mais os arquivos do seu web-site n√£o foram destru√≠"
-"dos.<br />Se voc√™ quiser destruir os arquivos du web-site, usa a "
-"Administra√ß√£o de Arquivo<br />Mais informa√ß√£o sobre a administra√ß√£o "
-"dos dom√≠nios na se√ß√£o de ajuda online HELPID_200<br />"
+"O domÌnio foi suprimido, mais os arquivos do seu web-site n„o foram destruÌ"
+"dos.<br />Se vocÍ quiser destruir os arquivos du web-site, usa a "
+"AdministraÁ„o de Arquivo<br />Mais informaÁ„o sobre a administraÁ„o "
+"dos domÌnios na seÁ„o de ajuda online HELPID_200<br />"
 
 msgid "hlp_add_domain_2"
 msgstr ""
-"Clica sobre o link abaixo. Voc√™ pode acessar os par√¢metros do dom√≠nio no "
-"menu √† esquerda2 links aparecer√£o : <br /> - o primeiro para modificar os "
-"par√¢metros de hospedagem do dom√≠nio (secondario-dom√≠nios, redire√ß√µes, "
+"Clica sobre o link abaixo. VocÍ pode acessar os par‚metros do domÌnio no "
+"menu ‡ esquerda2 links aparecer„o : <br /> - o primeiro para modificar os "
+"par‚metros de hospedagem do domÌnio (secondario-domÌnios, redireÁıes, "
 "hospedagem do email ...) <br /> - o segundo para administrar as contas de "
-"email do dom√≠nio (se voc√™ quiser criar as caixas de email).<br />Mais "
-"informa√ß√£o sobre a administra√ß√£o dos dom√≠nios na se√ß√£o de ajuda online "
+"email do domÌnio (se vocÍ quiser criar as caixas de email).<br />Mais "
+"informaÁ„o sobre a administraÁ„o dos domÌnios na seÁ„o de ajuda online "
 "HELPID_200<br />"
 
 msgid "hlp_add_domain"
 msgstr ""
-" - Entrar o nome do dom√≠nio que voc√™ gostaria hospedar. O nome do dom√≠nio "
-"deve ser completo, mais <b>sem o www.</b><br /> IMPORTANTE: Se voc√™ "
-"gostaria uma hospedagem actual do dom√≠nio, o DNS do seu dom√≠nio deve apontar "
+" - Entrar o nome do domÌnio que vocÍ gostaria hospedar. O nome do domÌnio "
+"deve ser completo, mais <b>sem o www.</b><br /> IMPORTANTE: Se vocÍ "
+"gostaria uma hospedagem actual do domÌnio, o DNS do seu domÌnio deve apontar "
 "para nossos servidors DNS. Contatar sua companhia de hospedagem para mais "
-"informa√ß√£o.<br /> Exemplos : globonet.org / demo.com / test.eu.org etc."
-"<br />Mais informa√ß√£o sobre a administra√ß√£o dos dom√≠nios na se√ß√£o da "
+"informaÁ„o.<br /> Exemplos : globonet.org / demo.com / test.eu.org etc."
+"<br />Mais informaÁ„o sobre a administraÁ„o dos domÌnios na seÁ„o da "
 "ajuda online HELPID_200<br /> "
 
 msgid "help_domain_del %s"
 msgstr ""
-"Se voc√™ quiser suprimir o dom√≠nio %s, clica a tecla abaixo.Aviso : isto "
-"suprimir√° todo o ftp, correios, envi-listas ... associadas com estedom√≠nio "
-"e os s√©condarios dom√≠nios dele"
+"Se vocÍ quiser suprimir o domÌnio %s, clica a tecla abaixo.Aviso : isto "
+"suprimir· todo o ftp, correios, envi-listas ... associadas com estedomÌnio "
+"e os sÈcondarios domÌnios dele"
 
 msgid "help_dns_mail"
 msgstr ""
-"Se n√≥s n√£o controlamos o DNS deste dom√≠nio <br />controlamos seus correios?"
+"Se nÛs n„o controlamos o DNS deste domÌnio <br />controlamos seus correios?"
 
 msgid "help_dns_mx %s %s"
 msgstr ""
-"Se n√≥s controlamos seu DNS <br />Voc√™ pode controlar seu correios em outra "
-"parte se voc√™ quiser (campo MX).<br />Escreve <b><code>%s</code></b> neste "
+"Se nÛs controlamos seu DNS <br />VocÍ pode controlar seu correios em outra "
+"parte se vocÍ quiser (campo MX).<br />Escreve <b><code>%s</code></b> neste "
 "campo se seus correios devem ser controlados por %s<br />ou coloca o "
-"endere√ßo IP ou nome do servidor de email usado para controlar seus correios."
-"<small>Aviso: Se voc√™ n√£o coloca nada neste campo, seus correios ser√£o "
-"inacess√≠vels</small>"
+"endereÁo IP ou nome do servidor de email usado para controlar seus correios."
+"<small>Aviso: Se vocÍ n„o coloca nada neste campo, seus correios ser„o "
+"inacessÌvels</small>"
 
 msgid "err_dom_23DNS (and eventually wait 1 day) before you install it again."
 msgstr ""
-"O DNS deste dom√≠nio n√£o combina o DNS do servidor. Por favor mudar o DNS do "
-"seu dom√≠nio (e esperar 1 dia) antes de instalar-lo de novo."
+"O DNS deste domÌnio n„o combina o DNS do servidor. Por favor mudar o DNS do "
+"seu domÌnio (e esperar 1 dia) antes de instalar-lo de novo."
 
 msgid "err_dom_22"
 msgstr ""
-"O dom√≠nio pedido √© proibido neste servidor. Por favor contatar o "
+"O domÌnio pedido È proibido neste servidor. Por favor contatar o "
 "administrador"
 
 msgid "err_dom_21"
-msgstr "A pasta que voc√™ entrou √© incorreta ou n√£o existe."
+msgstr "A pasta que vocÍ entrou È incorreta ou n„o existe."
 
 msgid "err_dom_20"
-msgstr "O URL que voc√™ entrou √© incorreto."
+msgstr "O URL que vocÍ entrou È incorreto."
 
 msgid "err_dom_19"
-msgstr "O endere√ßo IP que voc√™ entrou √© incorreto."
+msgstr "O endereÁo IP que vocÍ entrou È incorreto."
 
 msgid "err_dom_18"
 msgstr ""
-"Este dom√≠nio √© o do servidor !!! Voc√™ n√£o pode hosped√°-lo em sua conta !"
+"Este domÌnio È o do servidor !!! VocÍ n„o pode hosped·-lo em sua conta !"
 
 msgid "err_dom_17"
-msgstr "--- Erro de Programa --- Fechamento obtido j√° !"
+msgstr "--- Erro de Programa --- Fechamento obtido j· !"
 
 msgid "err_dom_16"
-msgstr "O secund√°rio-dom√≠nio j√† existe."
+msgstr "O secund·rio-domÌnio j‡ existe."
 
 msgid "err_dom_15"
-msgstr "Nenhuma mudan√ßa foi pedida..."
+msgstr "Nenhuma mudanÁa foi pedida..."
 
 msgid "err_dom_14"
-msgstr "O secund√°rio-dom√≠nio n√£o existe."
+msgstr "O secund·rio-domÌnio n„o existe."
 
 msgid "err_dom_13"
 msgstr ""
-"O dom√≠nio mudou menos de 5 minutos h√°. Por favor tenta de novo em algums "
+"O domÌnio mudou menos de 5 minutos h·. Por favor tenta de novo em algums "
 "minutos."
 
 msgid "err_dom_12"
-msgstr "O dom√≠nio n√£o foi achado na base de dados Whois."
+msgstr "O domÌnio n„o foi achado na base de dados Whois."
 
 msgid "err_dom_11"
 msgstr ""
-"A base de dados Whois est√° inacess√≠vel, por favor tenta de novo mais tarde."
+"A base de dados Whois est· inacessÌvel, por favor tenta de novo mais tarde."
 
 msgid "err_dom_10"
-msgstr "Sua quota do dom√≠nio j√† acabou, voc√™ n√£o pode criar mais dom√≠nios."
+msgstr "Sua quota do domÌnio j‡ acabou, vocÍ n„o pode criar mais domÌnios."
 
 msgid "err_dom_9"
-msgstr "O dom√≠nio foi suprimido menos de 5 minutos h√°."
+msgstr "O domÌnio foi suprimido menos de 5 minutos h·."
 
 msgid "err_dom_8"
-msgstr "O dom√≠nio j√† existe."
+msgstr "O domÌnio j‡ existe."
 
 msgid "err_dom_7"
 msgstr ""
-"O ult√≠mo membro do dom√≠nio √© incorreto ou n√£o pode ser hospidado neste "
+"O ultÌmo membro do domÌnio È incorreto ou n„o pode ser hospidado neste "
 "servidor."
 
 msgid "err_dom_6"
 msgstr ""
-"H√° algums car√°teres proibidos no nome dom√≠nio (somente A-Z 0-9 e - s√£o "
+"H· algums car·teres proibidos no nome domÌnio (somente A-Z 0-9 e - s„o "
 "permitidos)."
 
 msgid "err_dom_5"
-msgstr "Um dos membros do dom√≠nio √© demasiado longo."
+msgstr "Um dos membros do domÌnio È demasiado longo."
 
 msgid "err_dom_4"
-msgstr "O nome do dom√≠nio √© demasiado longo"
+msgstr "O nome do domÌnio È demasiado longo"
 
 msgid "err_dom_3"
-msgstr "--- Erro de program --- Falta o fechamento nos dom√≠nios !"
+msgstr "--- Erro de program --- Falta o fechamento nos domÌnios !"
 
 msgid "err_dom_2"
-msgstr "O Dom√≠nio '%s' n√£o √© o seu"
+msgstr "O DomÌnio '%s' n„o È o seu"
 
 msgid "err_dom_1"
-msgstr "O Dom√≠nio '%s' n√£o foi achado"
+msgstr "O DomÌnio '%s' n„o foi achado"
 
 msgid "quota_dom"
-msgstr "Nome dos Dom√≠nios"
+msgstr "Nome dos DomÌnios"
 
 msgid "No files in this folder"
 msgstr "Nenhum arquivo nesta pasta"
 
 msgid "err_bro_2"
-msgstr "Voc√™ n√£o pode relocalizar ou copiar o arquivo a mesma pasta"
+msgstr "VocÍ n„o pode relocalizar ou copiar o arquivo a mesma pasta"
 
 msgid "err_bro_1"
-msgstr "Nome do arquivo ou a pasta √© incorreto"
+msgstr "Nome do arquivo ou a pasta È incorreto"
 
 msgid "all/none"
 msgstr "tudo/nada"
@@ -711,7 +711,7 @@ msgid "Save"
 msgstr "Salvar"
 
 msgid "Remember last visited directory?"
-msgstr "Recordar o √∫ltimo diret√≥rio visitado?"
+msgstr "Recordar o ˙ltimo diretÛrio visitado?"
 
 msgid "V"
 msgstr "V"
@@ -741,10 +741,10 @@ msgid "Show file types?"
 msgstr "Mostrar tipos e arquivos?"
 
 msgid "Show icons?"
-msgstr "Mostrar √≠cones?"
+msgstr "Mostrar Ìcones?"
 
 msgid "What to do after creating a file"
-msgstr "Que a fazer ap√≥s ter criado um arquivo"
+msgstr "Que a fazer apÛs ter criado um arquivo"
 
 msgid "Downloading file format"
 msgstr "Abaixando o formate de arquivo"
@@ -765,19 +765,19 @@ msgid "File editor font name"
 msgstr "Nome de fonte do navegador de arquivos"
 
 msgid "File browser preferences"
-msgstr "Prefer√™ncias do navegador de arquivos"
+msgstr "PreferÍncias do navegador de arquivos"
 
 msgid "File editor preferences"
-msgstr "Prefer√™ncias do editor de arquivos"
+msgstr "PreferÍncias do editor de arquivos"
 
 msgid "Your preferences have been updated."
-msgstr "Suas prefer√™ncias foram atualizadas."
+msgstr "Suas preferÍncias foram atualizadas."
 
 msgid "Configure the file browser"
 msgstr "Configurar o navegador de arquivo"
 
 msgid "this folder and its subfolders as a compressed file"
-msgstr "esta pasta e as second√°rias-pastas como um arquivo comprimido"
+msgstr "esta pasta e as second·rias-pastas como um arquivo comprimido"
 
 msgid "Download"
 msgstr "Abaixar"
@@ -795,7 +795,7 @@ msgid "click here to edit this ftp account"
 msgstr "clica aqui para editar esta conta ftp"
 
 msgid "There is an ftp account in this folder"
-msgstr "H√° uma conta ftp nesta pasta"
+msgstr "H· uma conta ftp nesta pasta"
 
 msgid "Send"
 msgstr "Mandar"
@@ -828,7 +828,7 @@ msgid "File browser"
 msgstr "Navegador de arquivos"
 
 msgid "File editing"
-msgstr "Edi√ß√£o de arquivo"
+msgstr "EdiÁ„o de arquivo"
 
 msgid "Back to the file browser"
 msgstr "Volta ao navegador de arquivos"
@@ -849,7 +849,7 @@ msgid "Can he change its password"
 msgstr "Pode mudar a senha"
 
 msgid "Default quotas successfully changed"
-msgstr "Quotas padr√µes foram mudados com sucesso"
+msgstr "Quotas padrıes foram mudados com sucesso"
 
 msgid "General SQL Admin"
 msgstr "Admin do SQL Geral"
@@ -861,25 +861,25 @@ msgid "Manage the members"
 msgstr "Controlar os membros"
 
 msgid "Domain can be installed, force NO DNS hosting"
-msgstr "O dom√≠nio pode ser instalado, for√ß√£ a hospedadem SEM DNS"
+msgstr "O domÌnio pode ser instalado, forÁ„ a hospedadem SEM DNS"
 
 msgid "Domain can be installed, no check at all"
-msgstr "O dom√≠nio pode ser instalado, mas n√£o faz nenhuma verifica√ß√£o"
+msgstr "O domÌnio pode ser instalado, mas n„o faz nenhuma verificaÁ„o"
 
 msgid "Domain must exist, but don't do any DNS check"
-msgstr "O dom√≠nio deve existir, mais n√£o faz a verifica√ß√£o DNS"
+msgstr "O domÌnio deve existir, mais n„o faz a verificaÁ„o DNS"
 
 msgid "primary & secondary DNS are checked in WHOIS db"
-msgstr "O DNS preliminar e secund√°rio estam selecionados em db WHOIS"
+msgstr "O DNS preliminar e secund·rio estam selecionados em db WHOIS"
 
 msgid "primary DNS is checked in WHOIS db"
-msgstr "O DNS preliminar est√° selecionado em db WHOIS"
+msgstr "O DNS preliminar est· selecionado em db WHOIS"
 
 msgid "This TLD is forbidden"
-msgstr "Este TLD √© proibido"
+msgstr "Este TLD È proibido"
 
 msgid "Change the default quotas"
-msgstr "Mudar os quotas padr√µes"
+msgstr "Mudar os quotas padrıes"
 
 msgid "The TLD has been successfully edited"
 msgstr "Este TLD foi editado com sucesso"
@@ -894,18 +894,18 @@ msgid ""
 "Warning : only some final tld are known in the whois function of AlternC, "
 "please check m_domains.php accordingly."
 msgstr ""
-"Aviso: somente algums tld estam conhecedos na fun√ß√£o whois do AlternC, por "
+"Aviso: somente algums tld estam conhecedos na funÁ„o whois do AlternC, por "
 "favor verificar em m_domains.php conformente."
 
 msgid ""
 "Enter the new TLD (without the first dot) and choose what check should be "
 "done."
 msgstr ""
-"Entrar um novo TLD (sem o primeiro ponto) e escolher que verifica√ß√£o deve "
+"Entrar um novo TLD (sem o primeiro ponto) e escolher que verificaÁ„o deve "
 "ser feita."
 
 msgid "The TLD has been successfully added"
-msgstr "O TLD foi adi√ßionado com sucesso"
+msgstr "O TLD foi adiÁionado com sucesso"
 
 msgid "Add a new TLD"
 msgstr "Adicionar um novo TLD"
@@ -923,44 +923,44 @@ msgid ""
 "Here is the list of the TLD allowed on this server. Each TLD can be allowed "
 "or denied after some checks (whois, ns, domain exists...)"
 msgstr ""
-"Aqui est√° a lista do TLD permitido neste servidor. Cada TLD pode ser "
-"permitido ou negado ap√≥s algumas verifca√ß√µes (whois, ns, dom√≠nio existir) "
+"Aqui est· a lista do TLD permitido neste servidor. Cada TLD pode ser "
+"permitido ou negado apÛs algumas verifcaÁıes (whois, ns, domÌnio existir) "
 
 msgid "Manage allowed domains (TLD)"
-msgstr "Controla dom√≠nios permitidos (TLD)"
+msgstr "Controla domÌnios permitidos (TLD)"
 
 msgid "The requested TLD has been deleted"
 msgstr "O TLD pedido foi suprimido"
 
 msgid "Some TLD cannot be deleted..."
-msgstr "Algums TLD n√£o pode ser suprimidos..."
+msgstr "Algums TLD n„o pode ser suprimidos..."
 
 msgid "Number of web statistics"
-msgstr "N√∫mero de statisticas Web"
+msgstr "N˙mero de statisticas Web"
 
 msgid "Number of FTP accounts"
-msgstr "N√∫mero de contas FTP"
+msgstr "N˙mero de contas FTP"
 
 msgid "Number of domains"
-msgstr "N√∫mero de dom√≠nios"
+msgstr "N˙mero de domÌnios"
 
 msgid "Number of mailing-lists"
-msgstr "N√∫mero de envi-listas"
+msgstr "N˙mero de envi-listas"
 
 msgid "Number of email accounts"
-msgstr "N√∫mero de contas do email"
+msgstr "N˙mero de contas do email"
 
 msgid "Disk space (in KB)"
 msgstr "Espaco Disco (em KB)"
 
 msgid "Make this account a super admin one"
-msgstr "Modificar esta conta √† uma conta do super admin"
+msgstr "Modificar esta conta ‡ uma conta do super admin"
 
 msgid "Turn this account back to normal"
-msgstr "Voltar esta conta √† normal"
+msgstr "Voltar esta conta ‡ normal"
 
 msgid "This account is a super-admin account"
-msgstr "Esta conta √© uma conta super-administrador"
+msgstr "Esta conta È uma conta super-administrador"
 
 # msgid "Disable the database"
 # msgstr "Incapa
@@ -968,17 +968,17 @@ msgid ""
 "There is only one administrator account, you cannot turn this account back "
 "to normal"
 msgstr ""
-"Voc√™ pode ter somente uma conta do administrador, voc√™ n√£o pode voltar "
+"VocÍ pode ter somente uma conta do administrador, vocÍ n„o pode voltar "
 "esta conta ao normal"
 
 msgid "The user has a MySQL database"
-msgstr "O usu√°rio tem uma base de dados MySQL"
+msgstr "O usu·rio tem uma base de dados MySQL"
 
 msgid "Enable the database"
 msgstr "Permitir a base de dados"
 
 msgid "The user has no database"
-msgstr "O usu√°rio n√£o tem nenhuma base de dados"
+msgstr "O usu·rio n„o tem nenhuma base de dados"
 
 msgid "Recalculate the quotas of the account"
 msgstr "Recalcular os quotas da conta"
@@ -987,7 +987,7 @@ msgid "Edit the quotas"
 msgstr "Editar os quotas"
 
 msgid "Description"
-msgstr "Desci√ß√£o"
+msgstr "DesciÁ„o"
 
 msgid "Used"
 msgstr "Usado(s)"
@@ -1017,7 +1017,7 @@ msgid "Edit"
 msgstr "Editar"
 
 msgid "Here is the list of hosted members"
-msgstr "Aqui est√° a lista de membros hospedados"
+msgstr "Aqui est· a lista de membros hospedados"
 
 msgid "Member list"
 msgstr "Lista dos membros"
@@ -1032,13 +1032,13 @@ msgid "The member has been successfully edited"
 msgstr "O membro foi editado com sucesso"
 
 msgid "Member Edition"
-msgstr "Edi√ß√£o do Membro"
+msgstr "EdiÁ„o do Membro"
 
 msgid "Member %s successfully deleted"
 msgstr "Membro %s foi suprimido com sucesso"
 
 msgid "Member '%s' does not exist"
-msgstr "Membro '%s' n√£o existe"
+msgstr "Membro '%s' n„o existe"
 
 msgid "Click here to continue"
 msgstr "Clicar aqui para continuar"
@@ -1050,7 +1050,7 @@ msgid "Create a new member"
 msgstr "Criar um membro novo"
 
 msgid "Email address"
-msgstr "Endere√ßo email"
+msgstr "EndereÁo email"
 
 msgid "First Name"
 msgstr "Nome"
@@ -1065,43 +1065,43 @@ msgid "New member"
 msgstr "Membro novo"
 
 msgid "This page is restricted to authorized staff"
-msgstr "Esta p√°gina √© restringida √† equipe de funcion√°rios autorizada"
+msgstr "Esta p·gina È restringida ‡ equipe de funcion·rios autorizada"
 
 msgid "err_admin_12"
-msgstr "Este TLD j√† existe"
+msgstr "Este TLD j‡ existe"
 
 msgid "err_admin_11"
-msgstr "Este TLD n√£o existe"
+msgstr "Este TLD n„o existe"
 
 msgid "err_admin_10"
-msgstr "Somente os carateres a-z, 0-9 e - s√£o permitidos no Login"
+msgstr "Somente os carateres a-z, 0-9 e - s„o permitidos no Login"
 
 msgid "err_admin_9"
-msgstr "Esta conta N√ÉO √© uma conta administrativa"
+msgstr "Esta conta N√O È uma conta administrativa"
 
 msgid "err_admin_8"
-msgstr "Esta conta J√Ä √© uma conta administrativa"
+msgstr "Esta conta J¿ È uma conta administrativa"
 
 msgid "err_admin_7"
-msgstr "Voc√™ pode me peder uma senha somente uma vez por dia !"
+msgstr "VocÍ pode me peder uma senha somente uma vez por dia !"
 
 msgid "err_admin_6"
-msgstr "Todos os campos s√£o obrigat√≥rios"
+msgstr "Todos os campos s„o obrigatÛrios"
 
 msgid "err_admin_5"
-msgstr "Por favor entrar um endre√ßo email v√°lido"
+msgstr "Por favor entrar um endreÁo email v·lido"
 
 msgid "err_admin_4"
-msgstr "-- N√£o posso criar esta conta --"
+msgstr "-- N„o posso criar esta conta --"
 
 msgid "err_admin_3"
-msgstr "Este login j√† existe"
+msgstr "Este login j‡ existe"
 
 msgid "err_admin_2"
-msgstr "Conta n√£o foi achado"
+msgstr "Conta n„o foi achado"
 
 msgid "err_admin_1"
-msgstr "-- Somente os administradores tem acceso √† essas paginas !! --"
+msgstr "-- Somente os administradores tem acceso ‡ essas paginas !! --"
 
 #: admin/menu_sql.php:35
 #, fuzzy
@@ -1119,7 +1119,7 @@ msgstr ""
 #, fuzzy
 msgid "err_mysql_1"
 msgstr ""
-"Sua quota est√° completo, voc√™ n√£o pode criar mais bases de dados."
+"Sua quota est· completo, vocÍ n„o pode criar mais bases de dados."
 
 #: admin/sql_add.php:41 admin/sql_list.php:82
 #, fuzzy
@@ -1171,7 +1171,7 @@ msgstr "Backup semanal"
 
 #: admin/sql_bck.php:59
 msgid "Daily backup"
-msgstr "Backup di√°rio"
+msgstr "Backup di·rio"
 
 #: admin/sql_bck.php:63
 #, fuzzy
@@ -1181,11 +1181,11 @@ msgstr ""
 
 #: admin/sql_bck.php:75
 msgid "Compress the backups? (gzip)"
-msgstr "Voc√™ quiser compresser os backups? (gzip)"
+msgstr "VocÍ quiser compresser os backups? (gzip)"
 
 #: admin/sql_bck.php:77 admin/sql_del.php:69
 msgid "No"
-msgstr "N√£o"
+msgstr "N„o"
 
 #: admin/sql_bck.php:78 admin/sql_del.php:69
 msgid "Yes"
@@ -1193,19 +1193,19 @@ msgstr "Sim"
 
 #: admin/sql_bck.php:82
 msgid "In which folder do you want to store the backups?"
-msgstr "Que pasta voc√™ quiser usar para salvar seus backups?"
+msgstr "Que pasta vocÍ quiser usar para salvar seus backups?"
 
 #: admin/sql_bck.php:92
 #, fuzzy
 msgid "Change the SQL backup parameters"
 msgstr ""
-"Mudar os par√¢metros SQL atuais"
+"Mudar os par‚metros SQL atuais"
 
 #: admin/sql_bck.php:101 admin/sql_dorestore.php:55 admin/sql_restore.php:68
 #, fuzzy
 msgid "You currently have no database defined"
 msgstr ""
-"Voc√™ n√£o tem nenhuma base de dados definida"
+"VocÍ n„o tem nenhuma base de dados definida"
 
 #: admin/sql_del.php:41
 #, fuzzy, php-format
@@ -1227,11 +1227,11 @@ msgstr "AVISO"
 #, fuzzy
 msgid "This will delete all the tables currently in those db."
 msgstr ""
-"Isto suprimir√° todas as tabelas atuais nestas bases de dados."
+"Isto suprimir· todas as tabelas atuais nestas bases de dados."
 
 #: admin/sql_dobck.php:37
 msgid "Your backup parameters has been successfully changed."
-msgstr "Seus par√¢metros de backup foram mudados com sucesso"
+msgstr "Seus par‚metros de backup foram mudados com sucesso"
 
 #: admin/sql_dorestore.php:43
 msgid "Restore a SQL backup"
@@ -1243,19 +1243,19 @@ msgid ""
 "messages."
 msgstr ""
 "Sua base de dados foi restaurado, verificar o texto precedente para ver se "
-"h√° mensagens de erro."
+"h· mensagens de erro."
 
 #: admin/sql_getparam.php:47
 #, fuzzy
 msgid "Your current settings are"
 msgstr ""
-"Aqui seus par√¢metros atua√≠s"
+"Aqui seus par‚metros atuaÌs"
 
 #: admin/sql_getparam.php:49 admin/sql_list.php:96 admin/sql_passchg.php:51
 #, fuzzy
 msgid "Username"
 msgstr ""
-"Nome de us√∫ario"
+"Nome de us˙ario"
 
 #: admin/sql_getparam.php:50 admin/sql_list.php:97 admin/sql_passchg.php:52
 msgid "Password"
@@ -1269,9 +1269,9 @@ msgstr "Servidor SQL"
 #, fuzzy
 msgid "help_sql_list_ok"
 msgstr ""
-"Voc√™ coloca para fora uma ou algumas bases de dados<br /> Clica sobre "
-"'Admin SQL'no menu para administr√°-los<br />Ou usa a tabela abaixo para "
-"administrar os backups / restaura√ß√µes,suprimir suas bases :"
+"VocÍ coloca para fora uma ou algumas bases de dados<br /> Clica sobre "
+"'Admin SQL'no menu para administr·-los<br />Ou usa a tabela abaixo para "
+"administrar os backups / restauraÁıes,suprimir suas bases :"
 
 #: admin/sql_list.php:53 admin/sql_list.php:64
 msgid "Backup"
@@ -1281,7 +1281,7 @@ msgstr "Backup"
 #, fuzzy
 msgid "Restore"
 msgstr ""
-"Restaura√ß√£o"
+"RestauraÁ„o"
 
 #: admin/sql_list.php:53
 msgid "Size"
@@ -1297,20 +1297,20 @@ msgstr ""
 #, fuzzy
 msgid "Change the SQL password"
 msgstr ""
-"Mudan√ßa de senha SQL"
+"MudanÁa de senha SQL"
 
 #: admin/sql_list.php:85
 #, fuzzy
 msgid "Get the current SQL parameters"
 msgstr ""
-"Mostrar os par√¢metros SQL atua√≠s"
+"Mostrar os par‚metros SQL atuaÌs"
 
 #: admin/sql_list.php:91
 #, fuzzy
 msgid "help_sql_list_no"
 msgstr ""
-"Voc√™ ainda n√£o criou sua base de dados principal, por favor entra a senha "
-"para cri√°-la.\n"
+"VocÍ ainda n„o criou sua base de dados principal, por favor entra a senha "
+"para cri·-la.\n"
 
 #: admin/sql_list.php:100
 msgid "Create my main database"
@@ -1326,14 +1326,14 @@ msgid ""
 "Enter the new password of your SQL database and click 'change the password' "
 "to change it"
 msgstr ""
-"Entrar sua nova senha de base de dados SQL e clica sobre 'Mudan√ßa de senha' "
+"Entrar sua nova senha de base de dados SQL e clica sobre 'MudanÁa de senha' "
 "para a mudar"
 
 #: admin/sql_passchg.php:55
 #, fuzzy
 msgid "Change the password"
 msgstr ""
-"Mudan√ßa da senha SQL"
+"MudanÁa da senha SQL"
 
 #: admin/sql_restore.php:48
 #, php-format
@@ -1355,5 +1355,5 @@ msgstr ""
 #: admin/sql_restore.php:63
 msgid "Note: If the filename ends with .gz, it will be uncompressed before."
 msgstr ""
-"Nota: Se o nome de arquivo termina com .gz, primeiramente ele ser√° de-"
+"Nota: Se o nome de arquivo termina com .gz, primeiramente ele ser· de-"
 "compressado."
