@@ -146,8 +146,8 @@ msgstr "Permitir a base de dados"
 msgid "The user has a MySQL database"
 msgstr "O usuário tem uma base de dados MySQL"
 
-msgid "Disable the database"
-msgstr "Incapa
+#msgid "Disable the database"
+#msgstr "Incapa
 
 msgid "There is only one administrator account, you cannot turn this account back to normal"
 msgstr "Você pode ter somente uma conta do administrador, você não pode voltar esta conta ao normal"
@@ -189,7 +189,7 @@ msgid "Manage allowed domains (TLD)"
 msgstr "Controla domínios permitidos (TLD)"
 
 msgid "Here is the list of the TLD allowed on this server. Each TLD can be allowed or denied after some checks (whois, ns, domain exists...)"
-msgstr "Aqui está a lista do TLD permitido neste servidor. Cada TLD pode ser permitido ou negado após algumas verifcações (whois, ns, domínio existir) 
+msgstr "Aqui está a lista do TLD permitido neste servidor. Cada TLD pode ser permitido ou negado após algumas verifcações (whois, ns, domínio existir) "
 
 msgid "TLD"
 msgstr "TLD"
