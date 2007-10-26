@@ -10,7 +10,7 @@ msgstr ""
 "Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
 "Language-Team: English <i18n@alternc.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf8\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Emacs 21\n"
 
