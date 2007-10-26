@@ -1,0 +1,165 @@
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: bro.po,v 1.3 2003/06/09 14:36:08 root Exp $ 
+msgid ""
+msgstr ""
+"Project-Id-Version: $Id: bro.po,v 1.3 2003/06/09 14:36:08 root Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+
+msgid "%3$d-%2$d-%1$d %4$d:%5$d"
+msgstr "%3$d/%1$d/%2$d %6$d:%5$d %7$s"
+
+msgid "Your file %s has been saved"
+msgstr "Seu arquivo %s foi salvado com sucesso"
+
+msgid "Back to the file browser"
+msgstr "Volta ao navegador de arquivos"
+
+msgid "File editing"
+msgstr "Edição de arquivo"
+
+msgid "File browser"
+msgstr "Navegador de arquivos"
+
+msgid "Rename"
+msgstr "Rebatizar"
+
+msgid "Delete"
+msgstr "Suprimir"
+
+msgid "Copy"
+msgstr "Copiar"
+
+msgid "Move"
+msgstr "Relocalizar"
+
+msgid "Create"
+msgstr "Criar"
+
+msgid "File"
+msgstr "Arquivo"
+
+msgid "Folder"
+msgstr "Pasta"
+
+msgid "Import this file"
+msgstr "Importar este arquivo"
+
+msgid "Send"
+msgstr "Mandar"
+
+msgid "There is an ftp account in this folder"
+msgstr "Há uma conta ftp nesta pasta" 
+
+msgid "click here to edit this ftp account"
+msgstr "clica aqui para editar esta conta ftp" 
+
+msgid "click here to create an ftp account in this folder"
+msgstr "clica aqui para criar uma conta ftp nesta pasta"
+
+msgid "This folder has restricted access"
+msgstr "Esta pasta tem o acesso limitado"
+
+msgid "Click here to protect this folder with login/password"
+msgstr "Clica aqui para proteger esta pasta com login/senha"
+
+msgid "Download"
+msgstr "Abaixar"
+
+msgid "this folder and its subfolders as a compressed file"
+msgstr "esta pasta e as secondárias-pastas como um arquivo comprimido"
+
+msgid "Configure the file browser"
+msgstr "Configurar o navegador de arquivo"
+
+msgid "Your preferences have been updated."
+msgstr "Suas preferências foram atualizadas."
+
+msgid "File editor preferences"
+msgstr "Preferências do editor de arquivos"
+
+msgid "File browser preferences"
+msgstr "Preferências do navegador de arquivos"
+
+msgid "File editor font name"
+msgstr "Nome de fonte do navegador de arquivos" 
+
+msgid "File editor font size"
+msgstr "Tamanho de fonte do navegador de arquivos"
+
+msgid "Horizontal window size"
+msgstr "Tamanho horizontal da janela"
+
+msgid "Vertical window size"
+msgstr "Tamanho vertical da janela"
+
+msgid "File list view"
+msgstr "Vista lista de arquivos"
+
+msgid "Downloading file format"
+msgstr "Abaixando o formate de arquivo"
+
+msgid "What to do after creating a file"
+msgstr "Que a fazer após ter criado um arquivo"
+
+msgid "Show icons?"
+msgstr "Mostrar ícones?"
+
+msgid "Show file types?"
+msgstr "Mostrar tipos e arquivos?"
+
+msgid "Change my settings"
+msgstr "Mudar meus ajustes"
+
+msgid "1 column, detailed"
+msgstr "1 coluna, detalhado"
+
+msgid "2 columns, short"
+msgstr "2 colunas, condensado"
+
+msgid "3 columns, short"
+msgstr "3 colunas, condensado"
+
+msgid "Go back to the file manager"
+msgstr "Volta ao navegador de arquivos"
+
+msgid "Edit the newly created file"
+msgstr "Editar o arquivo recentemente criada"
+
+msgid "View"
+msgstr "Vista"
+
+msgid "V"
+msgstr "V"
+
+msgid "Remember last visited directory?"
+msgstr "Recordar o último diretório visitado?"
+
+msgid "Save"
+msgstr "Salvar"
+
+msgid "Save &amp; Quit"
+msgstr "Salva &amp; Sair"
+
+msgid "Quit"
+msgstr "Sair"
+
+msgid "all/none"
+msgstr "tudo/nada"
+
+msgid "err_bro_1"
+msgstr "Nome do arquivo ou a pasta é incorreto"
+
+msgid "err_bro_2"
+msgstr "Você não pode relocalizar ou copiar o arquivo a mesma pasta"
+
+msgid "No files in this folder"
+msgstr "Nenhum arquivo nesta pasta"

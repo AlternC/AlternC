@@ -1,0 +1,124 @@
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: mail.po,v 1.2 2003/06/09 14:36:08 root Exp $
+msgid ""
+msgstr ""
+"Project-Id-Version: $Id: mail.po,v 1.2 2003/06/09 14:36:08 root Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+
+msgid "quota_mail"
+msgstr "Contas de Email"
+
+msgid "err_mail_1"
+msgstr "conexão ldap impossível, por favor tenta mais tarde."
+
+msgid "err_mail_2"
+msgstr "Nenhum email no domínio '%s'"
+
+msgid "err_mail_3"
+msgstr "Este email '%s' não existe"
+
+msgid "err_mail_4"
+msgstr "Por favor escolha 'conta pop' e escholha a senha pop, ou entra algumas redireções, ou os dois"
+
+msgid "err_mail_5"
+msgstr "-- Erro de Servidor --- Parâmetro é incorreto (%s)"
+
+msgid "err_mail_6"
+msgstr "O domínio '%s' não existe."
+
+msgid "err_mail_7"
+msgstr "O email '%s' jà existe."
+
+msgid "err_mail_8"
+msgstr "Sua quota email acabou. Você não pode criar mais contas de email."
+
+msgid "err_mail_9"
+msgstr "O domínio '%s' não existe."
+
+msgid "err_mail_10"
+msgstr "-- Erro de Programa -- Quota de Correios não existe"
+
+msgid "err_mail_11"
+msgstr "Por favor entrar um endereço Email"
+
+msgid "err_mail_12"
+msgstr "Por favor entrar uma senha pop"
+
+msgid "err_mail_13"
+msgstr "Por favor entrar um email valido"
+
+msgid "err_mail_14"
+msgstr "Um ou mais redireções de email são invalidos"
+
+msgid "err_mail_15"
+msgstr "Este email não é uma conta pop. É impossível mudar a senha !"
+
+msgid "help_mail_add"
+msgstr ""
+
+msgid "Add a mail to the domain %s"
+msgstr "Adiçionar um email ao domínio %s"
+
+msgid "Create this mailbox"
+msgstr "Criar uma caixa de email"
+
+msgid "Is it a POP account?"
+msgstr "É uma conta POP?"
+
+msgid "POP password"
+msgstr "Senha POP"
+
+msgid "Other recipients"
+msgstr "Outros receptores"
+
+msgid "One email per line"
+msgstr "Um email por linha"
+
+msgid "The mailbox <b>%s</b> has been successfully created"
+msgstr "A caixa de email <b>%s</b> foi criado com sucesso"
+
+msgid "The mailbox <b>%s</b> does not exist!"
+msgstr "A caixa de email <b>%s</b> não existe!"
+
+msgid "The mailbox <b>%s</b> has been successfully changed"
+msgstr "A caixa de email <b>%s</b> foi mudado com sucesso"
+
+msgid "Edit a mailbox of the domain %s"
+msgstr "Editar a caixa de email do domínio %s"
+
+msgid "Edit the mailbox %s"
+msgstr "Editar a caixa e email %s"
+
+msgid "Change this mailbox"
+msgstr "Mudar esta caixa de email"
+
+msgid "The mailbox %s has been successfully changed"
+msgstr "A caixa de email %s foi mudado com sucesso"
+
+msgid "Mailbox list of the domain %s"
+msgstr "Lista de caixas de email do domínio %s"
+
+msgid "Action"
+msgstr "Ação"
+
+msgid "Size"
+msgstr "Tamanho"
+
+msgid "Delete the selected mailboxes"
+msgstr "Suprimir as caixas de email selecionados"
+
+msgid "Add a mailbox on <b>%s</b>"
+msgstr "Adiçionar a caixa de email em <b>%s</b>"
+
+msgid "Mailboxes"
+msgstr "Caixas e email"
+

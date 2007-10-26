@@ -1,0 +1,47 @@
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: mem.po,v 1.2 2003/06/09 14:36:09 root Exp $
+msgid ""
+msgstr ""
+"Project-Id-Version: $Id: mem.po,v 1.2 2003/06/09 14:36:09 root Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+
+msgid "err_mem_1"
+msgstr "Usúario ou senha incorreto"
+
+msgid "err_mem_2"
+msgstr "Esta conta está troncada, por favor chamar o administrador"
+
+msgid "err_mem_3"
+msgstr "Cookie incorreto, por favor aceitar o cookie da sessão"
+
+msgid "err_mem_4"
+msgstr "Sessão desconhecido, por favor contatar o administrador"
+
+msgid "err_mem_5"
+msgstr "Endereço IP incorreto, por favor contatar o administrador"
+
+# PROBLEME : il y avait 2 fois le 5, les autres messages doivent surement etre décalés (TODO)
+
+msgid "err_mem_6"
+msgstr "A senha antiga é incorreta"
+
+msgid "err_mem_7"
+msgstr "As novas senhas são diferentes, por favor tentar de novo"
+
+msgid "err_mem_8"
+msgstr "A senha deve ter pelo menos 3 caráteres"
+
+msgid "err_mem_9"
+msgstr "A informação entrada é incorreta"
+
+msgid "Help"
+msgstr "Ajuda"

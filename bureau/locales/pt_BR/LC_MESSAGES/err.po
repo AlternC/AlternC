@@ -1,0 +1,22 @@
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: err.po,v 1.2 2003/06/09 14:36:08 root Exp $
+msgid ""
+msgstr ""
+"Project-Id-Version: $Id: err.po,v 1.2 2003/06/09 14:36:08 root Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+
+msgid "err_err_0"
+msgstr "OK"
+
+msgid "err_err_1"
+msgstr "Esta mesagem do erro não existe (%s)"
+
