@@ -1,0 +1,2528 @@
+# #-#-#-#-#  admin.po ($Id: admin.po,v 1.2 2003/06/09 14:36:08 root Exp $)  #-#-#-#-#
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: admin.po,v 1.2 2003/06/09 14:36:08 root Exp $
+# #-#-#-#-#  bro.po ($Id: bro.po,v 1.3 2003/06/09 14:36:08 root Exp $)  #-#-#-#-#
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: bro.po,v 1.3 2003/06/09 14:36:08 root Exp $ 
+# #-#-#-#-#  dom.po ($Id: dom.po,v 1.3 2003/06/10 05:49:36 root Exp $)  #-#-#-#-#
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: dom.po,v 1.3 2003/06/10 05:49:36 root Exp $
+# #-#-#-#-#  err.po ($Id: err.po,v 1.2 2003/06/09 14:36:08 root Exp $)  #-#-#-#-#
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: err.po,v 1.2 2003/06/09 14:36:08 root Exp $
+# #-#-#-#-#  foo.po ($Id: admin.po,v 1.2 2003/06/09 14:36:08 root Exp $)  #-#-#-#-#
+# #-#-#-#-#  admin.po ($Id: admin.po,v 1.2 2003/06/09 14:36:08 root Exp $)  #-#-#-#-#
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: admin.po,v 1.2 2003/06/09 14:36:08 root Exp $
+# #-#-#-#-#  bro.po ($Id: bro.po,v 1.3 2003/06/09 14:36:08 root Exp $)  #-#-#-#-#
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: bro.po,v 1.3 2003/06/09 14:36:08 root Exp $ 
+# #-#-#-#-#  changepass.po  #-#-#-#-#
+# AlternC's Translation
+# Copyright (C) 2004 AlternC's translation team <i18n@alternc.org>
+# This file is distributed under the same license as the AlternC's package.
+# AlternC's translation team <i18n@alternc.org>
+#
+# #-#-#-#-#  dom.po ($Id: dom.po,v 1.3 2003/06/10 05:49:36 root Exp $)  #-#-#-#-#
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: dom.po,v 1.3 2003/06/10 05:49:36 root Exp $
+# #-#-#-#-#  err.po ($Id: err.po,v 1.2 2003/06/09 14:36:08 root Exp $)  #-#-#-#-#
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: err.po,v 1.2 2003/06/09 14:36:08 root Exp $
+# #-#-#-#-#  ftp.po ($Id: ftp.po,v 1.3 2003/06/10 05:49:36 root Exp $)  #-#-#-#-#
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: ftp.po,v 1.3 2003/06/10 05:49:36 root Exp $ 
+# #-#-#-#-#  hta.po ($Id: hta.po,v 1.3 2003/06/09 14:36:08 root Exp $)  #-#-#-#-#
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: hta.po,v 1.3 2003/06/09 14:36:08 root Exp $
+# #-#-#-#-#  mailman.po ($Id: mailman.po,v 1.3 2003/06/15 18:58:03 root Exp $)  #-#-#-#-#
+# English AlternC Translation
+# Copyright (C)  2002 the AlternC Development Team
+# <tech@alternc.org>
+#
+# #-#-#-#-#  mail.po ($Id: mail.po,v 1.2 2003/06/09 14:36:08 root Exp $)  #-#-#-#-#
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: mail.po,v 1.2 2003/06/09 14:36:08 root Exp $
+# #-#-#-#-#  main.po ($Id: main.po,v 1.2 2003/06/09 14:36:09 root Exp $)  #-#-#-#-#
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: main.po,v 1.2 2003/06/09 14:36:09 root Exp $
+# #-#-#-#-#  mem.po ($Id: mem.po,v 1.2 2003/06/09 14:36:09 root Exp $)  #-#-#-#-#
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: mem.po,v 1.2 2003/06/09 14:36:09 root Exp $
+# #-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp $)  #-#-#-#-#
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp $
+# #-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp $)  #-#-#-#-#
+# French AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp $
+# #-#-#-#-#  sql.po  #-#-#-#-#
+# AlternC's Translation
+# Copyright (C) 2004 AlternC's translation team <i18n@alternc.org>
+# This file is distributed under the same license as the AlternC's package.
+# AlternC's translation team <i18n@alternc.org>
+#
+# #-#-#-#-#  ftp.po ($Id: ftp.po,v 1.3 2003/06/10 05:49:36 root Exp $)  #-#-#-#-#
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: ftp.po,v 1.3 2003/06/10 05:49:36 root Exp $ 
+# #-#-#-#-#  hta.po ($Id: hta.po,v 1.3 2003/06/09 14:36:08 root Exp $)  #-#-#-#-#
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: hta.po,v 1.3 2003/06/09 14:36:08 root Exp $
+# #-#-#-#-#  mail.po ($Id: mail.po,v 1.2 2003/06/09 14:36:08 root Exp $)  #-#-#-#-#
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: mail.po,v 1.2 2003/06/09 14:36:08 root Exp $
+# #-#-#-#-#  main.po ($Id: main.po,v 1.2 2003/06/09 14:36:09 root Exp $)  #-#-#-#-#
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: main.po,v 1.2 2003/06/09 14:36:09 root Exp $
+# #-#-#-#-#  mem.po ($Id: mem.po,v 1.2 2003/06/09 14:36:09 root Exp $)  #-#-#-#-#
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: mem.po,v 1.2 2003/06/09 14:36:09 root Exp $
+# #-#-#-#-#  messages.po ($Id: admin.po,v 1.2 2003/06/09 14:36:08 root Exp $)  #-#-#-#-#
+# #-#-#-#-#  admin.po ($Id: admin.po,v 1.2 2003/06/09 14:36:08 root Exp $)  #-#-#-#-#
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: admin.po,v 1.2 2003/06/09 14:36:08 root Exp $
+# #-#-#-#-#  bro.po ($Id: bro.po,v 1.3 2003/06/09 14:36:08 root Exp $)  #-#-#-#-#
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: bro.po,v 1.3 2003/06/09 14:36:08 root Exp $ 
+# #-#-#-#-#  dom.po ($Id: dom.po,v 1.3 2003/06/10 05:49:36 root Exp $)  #-#-#-#-#
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: dom.po,v 1.3 2003/06/10 05:49:36 root Exp $
+# #-#-#-#-#  err.po ($Id: err.po,v 1.2 2003/06/09 14:36:08 root Exp $)  #-#-#-#-#
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: err.po,v 1.2 2003/06/09 14:36:08 root Exp $
+# #-#-#-#-#  foo.po ($Id: admin.po,v 1.2 2003/06/09 14:36:08 root Exp $)  #-#-#-#-#
+# #-#-#-#-#  admin.po ($Id: admin.po,v 1.2 2003/06/09 14:36:08 root Exp $)  #-#-#-#-#
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: admin.po,v 1.2 2003/06/09 14:36:08 root Exp $
+# #-#-#-#-#  bro.po ($Id: bro.po,v 1.3 2003/06/09 14:36:08 root Exp $)  #-#-#-#-#
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: bro.po,v 1.3 2003/06/09 14:36:08 root Exp $ 
+# #-#-#-#-#  changepass.po  #-#-#-#-#
+# AlternC's Translation
+# Copyright (C) 2004 AlternC's translation team <i18n@alternc.org>
+# This file is distributed under the same license as the AlternC's package.
+# AlternC's translation team <i18n@alternc.org>
+#
+# #-#-#-#-#  dom.po ($Id: dom.po,v 1.3 2003/06/10 05:49:36 root Exp $)  #-#-#-#-#
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: dom.po,v 1.3 2003/06/10 05:49:36 root Exp $
+# #-#-#-#-#  err.po ($Id: err.po,v 1.2 2003/06/09 14:36:08 root Exp $)  #-#-#-#-#
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: err.po,v 1.2 2003/06/09 14:36:08 root Exp $
+# #-#-#-#-#  ftp.po ($Id: ftp.po,v 1.3 2003/06/10 05:49:36 root Exp $)  #-#-#-#-#
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: ftp.po,v 1.3 2003/06/10 05:49:36 root Exp $ 
+# #-#-#-#-#  hta.po ($Id: hta.po,v 1.3 2003/06/09 14:36:08 root Exp $)  #-#-#-#-#
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: hta.po,v 1.3 2003/06/09 14:36:08 root Exp $
+# #-#-#-#-#  mailman.po ($Id: mailman.po,v 1.3 2003/06/15 18:58:03 root Exp $)  #-#-#-#-#
+# English AlternC Translation
+# Copyright (C)  2002 the AlternC Development Team
+# <tech@alternc.org>
+#
+# #-#-#-#-#  mail.po ($Id: mail.po,v 1.2 2003/06/09 14:36:08 root Exp $)  #-#-#-#-#
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: mail.po,v 1.2 2003/06/09 14:36:08 root Exp $
+# #-#-#-#-#  main.po ($Id: main.po,v 1.2 2003/06/09 14:36:09 root Exp $)  #-#-#-#-#
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: main.po,v 1.2 2003/06/09 14:36:09 root Exp $
+# #-#-#-#-#  mem.po ($Id: mem.po,v 1.2 2003/06/09 14:36:09 root Exp $)  #-#-#-#-#
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: mem.po,v 1.2 2003/06/09 14:36:09 root Exp $
+# #-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp $)  #-#-#-#-#
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp $
+# #-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp $)  #-#-#-#-#
+# French AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp $
+# #-#-#-#-#  sql.po  #-#-#-#-#
+# AlternC's Translation
+# Copyright (C) 2004 AlternC's translation team <i18n@alternc.org>
+# This file is distributed under the same license as the AlternC's package.
+# AlternC's translation team <i18n@alternc.org>
+#
+# #-#-#-#-#  ftp.po ($Id: ftp.po,v 1.3 2003/06/10 05:49:36 root Exp $)  #-#-#-#-#
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: ftp.po,v 1.3 2003/06/10 05:49:36 root Exp $ 
+# #-#-#-#-#  hta.po ($Id: hta.po,v 1.3 2003/06/09 14:36:08 root Exp $)  #-#-#-#-#
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: hta.po,v 1.3 2003/06/09 14:36:08 root Exp $
+# #-#-#-#-#  mail.po ($Id: mail.po,v 1.2 2003/06/09 14:36:08 root Exp $)  #-#-#-#-#
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: mail.po,v 1.2 2003/06/09 14:36:08 root Exp $
+# #-#-#-#-#  main.po ($Id: main.po,v 1.2 2003/06/09 14:36:09 root Exp $)  #-#-#-#-#
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: main.po,v 1.2 2003/06/09 14:36:09 root Exp $
+# #-#-#-#-#  mem.po ($Id: mem.po,v 1.2 2003/06/09 14:36:09 root Exp $)  #-#-#-#-#
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: mem.po,v 1.2 2003/06/09 14:36:09 root Exp $
+# #-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp $)  #-#-#-#-#
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp $
+# #-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp $)  #-#-#-#-#
+# French AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp $
+# #-#-#-#-#  sql.po  #-#-#-#-#
+# AlternC's Translation
+# Copyright (C) 2004 AlternC's translation team <i18n@alternc.org>
+# This file is distributed under the same license as the AlternC's package.
+# AlternC's translation team <i18n@alternc.org>
+#
+# #-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp $)  #-#-#-#-#
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp $
+# #-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp $)  #-#-#-#-#
+# French AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp $
+# #-#-#-#-#  sql.po  #-#-#-#-#
+# AlternC's Translation
+# Copyright (C) 2004 AlternC's translation team <i18n@alternc.org>
+# This file is distributed under the same license as the AlternC's package.
+# AlternC's translation team <i18n@alternc.org>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"#-#-#-#-#  admin.po ($Id: admin.po,v 1.2 2003/06/09 14:36:08 root Exp $)  #-"
+"#-#-#-#\n"
+"Project-Id-Version: $Id: admin.po,v 1.2 2003/06/09 14:36:08 root Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+"#-#-#-#-#  bro.po ($Id: bro.po,v 1.3 2003/06/09 14:36:08 root Exp $)  #-#-#-"
+"#-#\n"
+"Project-Id-Version: $Id: bro.po,v 1.3 2003/06/09 14:36:08 root Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+"#-#-#-#-#  dom.po ($Id: dom.po,v 1.3 2003/06/10 05:49:36 root Exp $)  #-#-#-"
+"#-#\n"
+"Project-Id-Version: $Id: dom.po,v 1.3 2003/06/10 05:49:36 root Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+"#-#-#-#-#  err.po ($Id: err.po,v 1.2 2003/06/09 14:36:08 root Exp $)  #-#-#-"
+"#-#\n"
+"Project-Id-Version: $Id: err.po,v 1.2 2003/06/09 14:36:08 root Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+"#-#-#-#-#  foo.po ($Id: admin.po,v 1.2 2003/06/09 14:36:08 root Exp $)  #-#-"
+"#-#-#\n"
+"#-#-#-#-#  admin.po ($Id: admin.po,v 1.2 2003/06/09 14:36:08 root Exp $)  #-"
+"#-#-#-#\n"
+"Project-Id-Version: $Id: admin.po,v 1.2 2003/06/09 14:36:08 root Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+"#-#-#-#-#  bro.po ($Id: bro.po,v 1.3 2003/06/09 14:36:08 root Exp $)  #-#-#-"
+"#-#\n"
+"Project-Id-Version: $Id: bro.po,v 1.3 2003/06/09 14:36:08 root Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+"#-#-#-#-#  changepass.po  #-#-#-#-#\n"
+"$id$\n"
+"Report-Msgid-Bugs-To: i18n@alternc.org\n"
+"POT-Creation-Date: 2004-11-08 23:26+0100\n"
+"PO-Revision-Date: 2004-11-08 23:26 CET\n"
+"Last-Translator: Team AlternC <i18n@alternc.org>\n"
+"Language-Team: Team AlternC <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"#-#-#-#-#  dom.po ($Id: dom.po,v 1.3 2003/06/10 05:49:36 root Exp $)  #-#-#-"
+"#-#\n"
+"Project-Id-Version: $Id: dom.po,v 1.3 2003/06/10 05:49:36 root Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+"#-#-#-#-#  err.po ($Id: err.po,v 1.2 2003/06/09 14:36:08 root Exp $)  #-#-#-"
+"#-#\n"
+"Project-Id-Version: $Id: err.po,v 1.2 2003/06/09 14:36:08 root Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+"#-#-#-#-#  ftp.po ($Id: ftp.po,v 1.3 2003/06/10 05:49:36 root Exp $)  #-#-#-"
+"#-#\n"
+"Project-Id-Version: $Id: ftp.po,v 1.3 2003/06/10 05:49:36 root Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+"#-#-#-#-#  hta.po ($Id: hta.po,v 1.3 2003/06/09 14:36:08 root Exp $)  #-#-#-"
+"#-#\n"
+"Project-Id-Version: $Id: hta.po,v 1.3 2003/06/09 14:36:08 root Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+"#-#-#-#-#  mailman.po ($Id: mailman.po,v 1.3 2003/06/15 18:58:03 root Exp "
+"$)  #-#-#-#-#\n"
+"Project-Id-Version: $Id: mailman.po,v 1.3 2003/06/15 18:58:03 root Exp $\n"
+"PO-Revision-Date: 2003-02-03 08:16 +0000\n"
+"Last-Translator: Benjamin Sonntag <benjamin@octopuce.com>\n"
+"Language-Team: English <dev@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"#-#-#-#-#  mail.po ($Id: mail.po,v 1.2 2003/06/09 14:36:08 root Exp $)  #-#-"
+"#-#-#\n"
+"Project-Id-Version: $Id: mail.po,v 1.2 2003/06/09 14:36:08 root Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+"#-#-#-#-#  main.po ($Id: main.po,v 1.2 2003/06/09 14:36:09 root Exp $)  #-#-"
+"#-#-#\n"
+"Project-Id-Version: $Id: main.po,v 1.2 2003/06/09 14:36:09 root Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+"#-#-#-#-#  mem.po ($Id: mem.po,v 1.2 2003/06/09 14:36:09 root Exp $)  #-#-#-"
+"#-#\n"
+"Project-Id-Version: $Id: mem.po,v 1.2 2003/06/09 14:36:09 root Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
+"$)  #-#-#-#-#\n"
+"Project-Id-Version: $Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
+"$)  #-#-#-#-#\n"
+"Project-Id-Version: $Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp $\n"
+"Report-Msgid-Bugs-To: i18n@alternc.org\n"
+"POT-Creation-Date: 2004-11-01 16:18+0100\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: French <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+"#-#-#-#-#  sql.po  #-#-#-#-#\n"
+"$id$\n"
+"Report-Msgid-Bugs-To: i18n@alternc.org\n"
+"POT-Creation-Date: 2004-11-01 16:18+0100\n"
+"PO-Revision-Date: 2004-11-01 16:18 CET\n"
+"Last-Translator: Team AlternC <i18n@alternc.org>\n"
+"Language-Team: Team AlternC <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"#-#-#-#-#  ftp.po ($Id: ftp.po,v 1.3 2003/06/10 05:49:36 root Exp $)  #-#-#-"
+"#-#\n"
+"Project-Id-Version: $Id: ftp.po,v 1.3 2003/06/10 05:49:36 root Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+"#-#-#-#-#  hta.po ($Id: hta.po,v 1.3 2003/06/09 14:36:08 root Exp $)  #-#-#-"
+"#-#\n"
+"Project-Id-Version: $Id: hta.po,v 1.3 2003/06/09 14:36:08 root Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+"#-#-#-#-#  mail.po ($Id: mail.po,v 1.2 2003/06/09 14:36:08 root Exp $)  #-#-"
+"#-#-#\n"
+"Project-Id-Version: $Id: mail.po,v 1.2 2003/06/09 14:36:08 root Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+"#-#-#-#-#  main.po ($Id: main.po,v 1.2 2003/06/09 14:36:09 root Exp $)  #-#-"
+"#-#-#\n"
+"Project-Id-Version: $Id: main.po,v 1.2 2003/06/09 14:36:09 root Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+"#-#-#-#-#  mem.po ($Id: mem.po,v 1.2 2003/06/09 14:36:09 root Exp $)  #-#-#-"
+"#-#\n"
+"Project-Id-Version: $Id: mem.po,v 1.2 2003/06/09 14:36:09 root Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+"#-#-#-#-#  messages.po ($Id: admin.po,v 1.2 2003/06/09 14:36:08 root Exp $)  "
+"#-#-#-#-#\n"
+"#-#-#-#-#  admin.po ($Id: admin.po,v 1.2 2003/06/09 14:36:08 root Exp $)  #-"
+"#-#-#-#\n"
+"Project-Id-Version: $Id: admin.po,v 1.2 2003/06/09 14:36:08 root Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+"#-#-#-#-#  bro.po ($Id: bro.po,v 1.3 2003/06/09 14:36:08 root Exp $)  #-#-#-"
+"#-#\n"
+"Project-Id-Version: $Id: bro.po,v 1.3 2003/06/09 14:36:08 root Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+"#-#-#-#-#  dom.po ($Id: dom.po,v 1.3 2003/06/10 05:49:36 root Exp $)  #-#-#-"
+"#-#\n"
+"Project-Id-Version: $Id: dom.po,v 1.3 2003/06/10 05:49:36 root Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+"#-#-#-#-#  err.po ($Id: err.po,v 1.2 2003/06/09 14:36:08 root Exp $)  #-#-#-"
+"#-#\n"
+"Project-Id-Version: $Id: err.po,v 1.2 2003/06/09 14:36:08 root Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+"#-#-#-#-#  foo.po ($Id: admin.po,v 1.2 2003/06/09 14:36:08 root Exp $)  #-#-"
+"#-#-#\n"
+"#-#-#-#-#  admin.po ($Id: admin.po,v 1.2 2003/06/09 14:36:08 root Exp $)  #-"
+"#-#-#-#\n"
+"Project-Id-Version: $Id: admin.po,v 1.2 2003/06/09 14:36:08 root Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+"#-#-#-#-#  bro.po ($Id: bro.po,v 1.3 2003/06/09 14:36:08 root Exp $)  #-#-#-"
+"#-#\n"
+"Project-Id-Version: $Id: bro.po,v 1.3 2003/06/09 14:36:08 root Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+"#-#-#-#-#  changepass.po  #-#-#-#-#\n"
+"$id$\n"
+"Report-Msgid-Bugs-To: i18n@alternc.org\n"
+"POT-Creation-Date: 2004-11-08 23:26+0100\n"
+"PO-Revision-Date: 2004-11-08 23:26 CET\n"
+"Last-Translator: Team AlternC <i18n@alternc.org>\n"
+"Language-Team: Team AlternC <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"#-#-#-#-#  dom.po ($Id: dom.po,v 1.3 2003/06/10 05:49:36 root Exp $)  #-#-#-"
+"#-#\n"
+"Project-Id-Version: $Id: dom.po,v 1.3 2003/06/10 05:49:36 root Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+"#-#-#-#-#  err.po ($Id: err.po,v 1.2 2003/06/09 14:36:08 root Exp $)  #-#-#-"
+"#-#\n"
+"Project-Id-Version: $Id: err.po,v 1.2 2003/06/09 14:36:08 root Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+"#-#-#-#-#  ftp.po ($Id: ftp.po,v 1.3 2003/06/10 05:49:36 root Exp $)  #-#-#-"
+"#-#\n"
+"Project-Id-Version: $Id: ftp.po,v 1.3 2003/06/10 05:49:36 root Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+"#-#-#-#-#  hta.po ($Id: hta.po,v 1.3 2003/06/09 14:36:08 root Exp $)  #-#-#-"
+"#-#\n"
+"Project-Id-Version: $Id: hta.po,v 1.3 2003/06/09 14:36:08 root Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+"#-#-#-#-#  mailman.po ($Id: mailman.po,v 1.3 2003/06/15 18:58:03 root Exp "
+"$)  #-#-#-#-#\n"
+"Project-Id-Version: $Id: mailman.po,v 1.3 2003/06/15 18:58:03 root Exp $\n"
+"PO-Revision-Date: 2003-02-03 08:16 +0000\n"
+"Last-Translator: Benjamin Sonntag <benjamin@octopuce.com>\n"
+"Language-Team: English <dev@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"#-#-#-#-#  mail.po ($Id: mail.po,v 1.2 2003/06/09 14:36:08 root Exp $)  #-#-"
+"#-#-#\n"
+"Project-Id-Version: $Id: mail.po,v 1.2 2003/06/09 14:36:08 root Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+"#-#-#-#-#  main.po ($Id: main.po,v 1.2 2003/06/09 14:36:09 root Exp $)  #-#-"
+"#-#-#\n"
+"Project-Id-Version: $Id: main.po,v 1.2 2003/06/09 14:36:09 root Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+"#-#-#-#-#  mem.po ($Id: mem.po,v 1.2 2003/06/09 14:36:09 root Exp $)  #-#-#-"
+"#-#\n"
+"Project-Id-Version: $Id: mem.po,v 1.2 2003/06/09 14:36:09 root Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
+"$)  #-#-#-#-#\n"
+"Project-Id-Version: $Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
+"$)  #-#-#-#-#\n"
+"Project-Id-Version: $Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp $\n"
+"Report-Msgid-Bugs-To: i18n@alternc.org\n"
+"POT-Creation-Date: 2004-11-01 16:18+0100\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: French <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+"#-#-#-#-#  sql.po  #-#-#-#-#\n"
+"$id$\n"
+"Report-Msgid-Bugs-To: i18n@alternc.org\n"
+"POT-Creation-Date: 2004-11-01 16:18+0100\n"
+"PO-Revision-Date: 2004-11-01 16:18 CET\n"
+"Last-Translator: Team AlternC <i18n@alternc.org>\n"
+"Language-Team: Team AlternC <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"#-#-#-#-#  ftp.po ($Id: ftp.po,v 1.3 2003/06/10 05:49:36 root Exp $)  #-#-#-"
+"#-#\n"
+"Project-Id-Version: $Id: ftp.po,v 1.3 2003/06/10 05:49:36 root Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+"#-#-#-#-#  hta.po ($Id: hta.po,v 1.3 2003/06/09 14:36:08 root Exp $)  #-#-#-"
+"#-#\n"
+"Project-Id-Version: $Id: hta.po,v 1.3 2003/06/09 14:36:08 root Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+"#-#-#-#-#  mail.po ($Id: mail.po,v 1.2 2003/06/09 14:36:08 root Exp $)  #-#-"
+"#-#-#\n"
+"Project-Id-Version: $Id: mail.po,v 1.2 2003/06/09 14:36:08 root Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+"#-#-#-#-#  main.po ($Id: main.po,v 1.2 2003/06/09 14:36:09 root Exp $)  #-#-"
+"#-#-#\n"
+"Project-Id-Version: $Id: main.po,v 1.2 2003/06/09 14:36:09 root Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+"#-#-#-#-#  mem.po ($Id: mem.po,v 1.2 2003/06/09 14:36:09 root Exp $)  #-#-#-"
+"#-#\n"
+"Project-Id-Version: $Id: mem.po,v 1.2 2003/06/09 14:36:09 root Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
+"$)  #-#-#-#-#\n"
+"Project-Id-Version: $Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
+"$)  #-#-#-#-#\n"
+"Project-Id-Version: $Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp $\n"
+"Report-Msgid-Bugs-To: i18n@alternc.org\n"
+"POT-Creation-Date: 2004-11-01 16:18+0100\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: French <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+"#-#-#-#-#  sql.po  #-#-#-#-#\n"
+"$id$\n"
+"Report-Msgid-Bugs-To: i18n@alternc.org\n"
+"POT-Creation-Date: 2004-11-01 16:18+0100\n"
+"PO-Revision-Date: 2004-11-01 16:18 CET\n"
+"Last-Translator: Team AlternC <i18n@alternc.org>\n"
+"Language-Team: Team AlternC <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
+"$)  #-#-#-#-#\n"
+"Project-Id-Version: $Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
+"$)  #-#-#-#-#\n"
+"Project-Id-Version: $Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp $\n"
+"Report-Msgid-Bugs-To: i18n@alternc.org\n"
+"POT-Creation-Date: 2004-11-01 16:18+0100\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: French <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+"#-#-#-#-#  sql.po  #-#-#-#-#\n"
+"$id$\n"
+"Report-Msgid-Bugs-To: i18n@alternc.org\n"
+"POT-Creation-Date: 2004-11-01 16:18+0100\n"
+"PO-Revision-Date: 2004-11-01 16:18 CET\n"
+"Last-Translator: Team AlternC <i18n@alternc.org>\n"
+"Language-Team: Team AlternC <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "err_admin_1"
+msgstr "-- Somente os administradores tem acceso Ã  essas paginas !! --"
+
+msgid "err_admin_2"
+msgstr "Conta nÃ£o foi achado"
+
+msgid "err_admin_3"
+msgstr "Este login jÃ  existe"
+
+msgid "err_admin_4"
+msgstr "-- NÃ£o posso criar esta conta --"
+
+msgid "err_admin_5"
+msgstr "Por favor entrar um endreÃ§o email vÃ¡lido"
+
+msgid "err_admin_6"
+msgstr "Todos os campos sÃ£o obrigatÃ³rios"
+
+msgid "err_admin_7"
+msgstr "VocÃª pode me peder uma senha somente uma vez por dia !"
+
+msgid "err_admin_8"
+msgstr "Esta conta JÃ€ Ã© uma conta administrativa"
+
+msgid "err_admin_9"
+msgstr "Esta conta NÃƒO Ã© uma conta administrativa"
+
+msgid "err_admin_10"
+msgstr "Somente os carateres a-z, 0-9 e - sÃ£o permitidos no Login"
+
+msgid "err_admin_11"
+msgstr "Este TLD nÃ£o existe"
+
+msgid "err_admin_12"
+msgstr "Este TLD jÃ  existe"
+
+msgid "This page is restricted to authorized staff"
+msgstr "Esta pÃ¡gina Ã© restringida Ã  equipe de funcionÃ¡rios autorizada"
+
+msgid "New member"
+msgstr "Membro novo"
+
+msgid "Initial password"
+msgstr "Senha inicial"
+
+msgid "Surname"
+msgstr "Sobrenome"
+
+msgid "First Name"
+msgstr "Nome"
+
+msgid "Email address"
+msgstr "EndereÃ§o email"
+
+msgid "Create a new member"
+msgstr "Criar um membro novo"
+
+msgid "The new member has been successfully created"
+msgstr "O membro novo foi criado com sucesso"
+
+msgid "Click here to continue"
+msgstr "Clicar aqui para continuar"
+
+msgid "Member '%s' does not exist"
+msgstr "Membro '%s' nÃ£o existe"
+
+msgid "Member %s successfully deleted"
+msgstr "Membro %s foi suprimido com sucesso"
+
+msgid "Member Edition"
+msgstr "EdiÃ§Ã£o do Membro"
+
+msgid "The member has been successfully edited"
+msgstr "O membro foi editado com sucesso"
+
+msgid "Account Enabled ?"
+msgstr "Conta Permitiu ?"
+
+msgid "Edit this account"
+msgstr "Editar esta conta"
+
+msgid "Member list"
+msgstr "Lista dos membros"
+
+msgid "Here is the list of hosted members"
+msgstr "Aqui estÃ¡ a lista de membros hospedados"
+
+msgid "Edit"
+msgstr "Editar"
+
+msgid "Quotas"
+msgstr "Quotas"
+
+msgid "Connect as"
+msgstr "Conectar como"
+
+msgid "Delete checked accounts"
+msgstr "Deletar as contas selecionadas"
+
+msgid "Editing the quotas of a member"
+msgstr "Editando os quotas do membro"
+
+msgid "The quotas has been successfully edited"
+msgstr "Os quotas foram editados com sucesso"
+
+msgid "Quota"
+msgstr "Quota"
+
+msgid "Total"
+msgstr "Total"
+
+msgid "Used"
+msgstr "Usado(s)"
+
+msgid "Description"
+msgstr "DesciÃ§Ã£o"
+
+msgid "Edit the quotas"
+msgstr "Editar os quotas"
+
+msgid "Recalculate the quotas of the account"
+msgstr "Recalcular os quotas da conta"
+
+msgid "The user has no database"
+msgstr "O usuÃ¡rio nÃ£o tem nenhuma base de dados"
+
+msgid "Enable the database"
+msgstr "Permitir a base de dados"
+
+msgid "The user has a MySQL database"
+msgstr "O usuÃ¡rio tem uma base de dados MySQL"
+
+# #-#-#-#-#  admin.po ($Id: admin.po,v 1.2 2003/06/09 14:36:08 root Exp $)  #-#-#-#-#
+# msgid "Disable the database"
+# msgstr "Incapa
+# #-#-#-#-#  foo.po ($Id: admin.po,v 1.2 2003/06/09 14:36:08 root Exp $)  #-#-#-#-#
+# msgid "Disable the database"
+# msgstr "Incapa
+# #-#-#-#-#  messages.po ($Id: admin.po,v 1.2 2003/06/09 14:36:08 root Exp $)  #-#-#-#-#
+# #-#-#-#-#  admin.po ($Id: admin.po,v 1.2 2003/06/09 14:36:08 root Exp $)  #-#-#-#-#
+# msgid "Disable the database"
+# msgstr "Incapa
+# #-#-#-#-#  foo.po ($Id: admin.po,v 1.2 2003/06/09 14:36:08 root Exp $)  #-#-#-#-#
+# msgid "Disable the database"
+# msgstr "Incapa
+msgid ""
+"There is only one administrator account, you cannot turn this account back "
+"to normal"
+msgstr ""
+"VocÃª pode ter somente uma conta do administrador, vocÃª nÃ£o pode voltar "
+"esta conta ao normal"
+
+msgid "This account is a super-admin account"
+msgstr "Esta conta Ã© uma conta super-administrador"
+
+msgid "Turn this account back to normal"
+msgstr "Voltar esta conta Ã  normal"
+
+msgid "Make this account a super admin one"
+msgstr "Modificar esta conta Ã  uma conta do super admin"
+
+msgid "Disk space (in KB)"
+msgstr "Espaco Disco (em KB)"
+
+msgid "Number of email accounts"
+msgstr "NÃºmero de contas do email"
+
+msgid "Number of mailing-lists"
+msgstr "NÃºmero de envi-listas"
+
+msgid "Number of domains"
+msgstr "NÃºmero de domÃ­nios"
+
+msgid "Number of FTP accounts"
+msgstr "NÃºmero de contas FTP"
+
+msgid "Number of web statistics"
+msgstr "NÃºmero de statisticas Web"
+
+msgid "Some TLD cannot be deleted..."
+msgstr "Algums TLD nÃ£o pode ser suprimidos..."
+
+msgid "The requested TLD has been deleted"
+msgstr "O TLD pedido foi suprimido"
+
+msgid "Manage allowed domains (TLD)"
+msgstr "Controla domÃ­nios permitidos (TLD)"
+
+msgid ""
+"Here is the list of the TLD allowed on this server. Each TLD can be allowed "
+"or denied after some checks (whois, ns, domain exists...)"
+msgstr ""
+"Aqui estÃ¡ a lista do TLD permitido neste servidor. Cada TLD pode ser "
+"permitido ou negado apÃ³s algumas verifcaÃ§Ãµes (whois, ns, domÃ­nio existir) "
+
+msgid "TLD"
+msgstr "TLD"
+
+msgid "Allowed Mode"
+msgstr "Modalidade Permitida"
+
+msgid "Delete the checked TLD"
+msgstr "Suprimir o TLD selecionado"
+
+msgid "Add a new TLD"
+msgstr "Adicionar um novo TLD"
+
+msgid "The TLD has been successfully added"
+msgstr "O TLD foi adiÃ§ionado com sucesso"
+
+msgid ""
+"Enter the new TLD (without the first dot) and choose what check should be "
+"done."
+msgstr ""
+"Entrar um novo TLD (sem o primeiro ponto) e escolher que verificaÃ§Ã£o deve "
+"ser feita."
+
+msgid ""
+"Warning : only some final tld are known in the whois function of AlternC, "
+"please check m_domains.php accordingly."
+msgstr ""
+"Aviso: somente algums tld estam conhecedos na funÃ§Ã£o whois do AlternC, por "
+"favor verificar em m_domains.php conformente."
+
+msgid "Edit a TLD"
+msgstr "Editar um TLD"
+
+msgid "Edit this TLD"
+msgstr "Editar este TLD"
+
+msgid "The TLD has been successfully edited"
+msgstr "Este TLD foi editado com sucesso"
+
+msgid "Change the default quotas"
+msgstr "Mudar os quotas padrÃµes"
+
+msgid "This TLD is forbidden"
+msgstr "Este TLD Ã© proibido"
+
+msgid "primary DNS is checked in WHOIS db"
+msgstr "O DNS preliminar estÃ¡ selecionado em db WHOIS"
+
+msgid "primary & secondary DNS are checked in WHOIS db"
+msgstr "O DNS preliminar e secundÃ¡rio estam selecionados em db WHOIS"
+
+msgid "Domain must exist, but don't do any DNS check"
+msgstr "O domÃ­nio deve existir, mais nÃ£o faz a verificaÃ§Ã£o DNS"
+
+msgid "Domain can be installed, no check at all"
+msgstr "O domÃ­nio pode ser instalado, mas nÃ£o faz nenhuma verificaÃ§Ã£o"
+
+msgid "Domain can be installed, force NO DNS hosting"
+msgstr "O domÃ­nio pode ser instalado, forÃ§Ã£ a hospedadem SEM DNS"
+
+msgid "Manage the members"
+msgstr "Controlar os membros"
+
+msgid "Admin Control Panel"
+msgstr "Painel de controle do Administrador"
+
+msgid "General SQL Admin"
+msgstr "Admin do SQL Geral"
+
+msgid "Default quotas successfully changed"
+msgstr "Quotas padrÃµes foram mudados com sucesso"
+
+msgid "Can he change its password"
+msgstr "Pode mudar a senha"
+
+msgid "Account created by %s"
+msgstr "Conta foi criado por %s"
+
+msgid "Locked Account"
+msgstr "Conta Troncada"
+
+msgid "%3$d-%2$d-%1$d %4$d:%5$d"
+msgstr "%3$d/%1$d/%2$d %6$d:%5$d %7$s"
+
+msgid "Your file %s has been saved"
+msgstr "Seu arquivo %s foi salvado com sucesso"
+
+msgid "Back to the file browser"
+msgstr "Volta ao navegador de arquivos"
+
+msgid "File editing"
+msgstr "EdiÃ§Ã£o de arquivo"
+
+msgid "File browser"
+msgstr "Navegador de arquivos"
+
+msgid "Rename"
+msgstr "Rebatizar"
+
+msgid "Delete"
+msgstr "Suprimir"
+
+msgid "Copy"
+msgstr "Copiar"
+
+msgid "Move"
+msgstr "Relocalizar"
+
+msgid "Create"
+msgstr "Criar"
+
+msgid "File"
+msgstr "Arquivo"
+
+msgid "Folder"
+msgstr "Pasta"
+
+msgid "Import this file"
+msgstr "Importar este arquivo"
+
+msgid "Send"
+msgstr "Mandar"
+
+msgid "There is an ftp account in this folder"
+msgstr "HÃ¡ uma conta ftp nesta pasta"
+
+msgid "click here to edit this ftp account"
+msgstr "clica aqui para editar esta conta ftp"
+
+msgid "click here to create an ftp account in this folder"
+msgstr "clica aqui para criar uma conta ftp nesta pasta"
+
+msgid "This folder has restricted access"
+msgstr "Esta pasta tem o acesso limitado"
+
+msgid "Click here to protect this folder with login/password"
+msgstr "Clica aqui para proteger esta pasta com login/senha"
+
+msgid "Download"
+msgstr "Abaixar"
+
+msgid "this folder and its subfolders as a compressed file"
+msgstr "esta pasta e as secondÃ¡rias-pastas como um arquivo comprimido"
+
+msgid "Configure the file browser"
+msgstr "Configurar o navegador de arquivo"
+
+msgid "Your preferences have been updated."
+msgstr "Suas preferÃªncias foram atualizadas."
+
+msgid "File editor preferences"
+msgstr "PreferÃªncias do editor de arquivos"
+
+msgid "File browser preferences"
+msgstr "PreferÃªncias do navegador de arquivos"
+
+msgid "File editor font name"
+msgstr "Nome de fonte do navegador de arquivos"
+
+msgid "File editor font size"
+msgstr "Tamanho de fonte do navegador de arquivos"
+
+msgid "Horizontal window size"
+msgstr "Tamanho horizontal da janela"
+
+msgid "Vertical window size"
+msgstr "Tamanho vertical da janela"
+
+msgid "File list view"
+msgstr "Vista lista de arquivos"
+
+msgid "Downloading file format"
+msgstr "Abaixando o formate de arquivo"
+
+msgid "What to do after creating a file"
+msgstr "Que a fazer apÃ³s ter criado um arquivo"
+
+msgid "Show icons?"
+msgstr "Mostrar Ã­cones?"
+
+msgid "Show file types?"
+msgstr "Mostrar tipos e arquivos?"
+
+msgid "Change my settings"
+msgstr "Mudar meus ajustes"
+
+msgid "1 column, detailed"
+msgstr "1 coluna, detalhado"
+
+msgid "2 columns, short"
+msgstr "2 colunas, condensado"
+
+msgid "3 columns, short"
+msgstr "3 colunas, condensado"
+
+msgid "Go back to the file manager"
+msgstr "Volta ao navegador de arquivos"
+
+msgid "Edit the newly created file"
+msgstr "Editar o arquivo recentemente criada"
+
+msgid "View"
+msgstr "Vista"
+
+msgid "V"
+msgstr "V"
+
+msgid "Remember last visited directory?"
+msgstr "Recordar o Ãºltimo diretÃ³rio visitado?"
+
+msgid "Save"
+msgstr "Salvar"
+
+msgid "Save &amp; Quit"
+msgstr "Salva &amp; Sair"
+
+msgid "Quit"
+msgstr "Sair"
+
+msgid "all/none"
+msgstr "tudo/nada"
+
+msgid "err_bro_1"
+msgstr "Nome do arquivo ou a pasta Ã© incorreto"
+
+msgid "err_bro_2"
+msgstr "VocÃª nÃ£o pode relocalizar ou copiar o arquivo a mesma pasta"
+
+msgid "No files in this folder"
+msgstr "Nenhum arquivo nesta pasta"
+
+msgid "quota_dom"
+msgstr "Nome dos Domínios"
+
+msgid "err_dom_1"
+msgstr "O Domínio '%s' não foi achado"
+
+msgid "err_dom_2"
+msgstr "O Domínio '%s' não é o seu"
+
+msgid "err_dom_3"
+msgstr "--- Erro de program --- Falta o fechamento nos domínios !"
+
+msgid "err_dom_4"
+msgstr "O nome do domínio é demasiado longo"
+
+msgid "err_dom_5"
+msgstr "Um dos membros do domínio é demasiado longo."
+
+msgid "err_dom_6"
+msgstr ""
+"Há algums caráteres proibidos no nome domínio (somente A-Z 0-9 e - são "
+"permitidos)."
+
+msgid "err_dom_7"
+msgstr ""
+"O ultímo membro do domínio é incorreto ou não pode ser hospidado neste "
+"servidor."
+
+msgid "err_dom_8"
+msgstr "O domínio jà existe."
+
+msgid "err_dom_9"
+msgstr "O domínio foi suprimido menos de 5 minutos há."
+
+msgid "err_dom_10"
+msgstr "Sua quota do domínio jà acabou, você não pode criar mais domínios."
+
+msgid "err_dom_11"
+msgstr ""
+"A base de dados Whois está inacessível, por favor tenta de novo mais tarde."
+
+msgid "err_dom_12"
+msgstr "O domínio não foi achado na base de dados Whois."
+
+msgid "err_dom_13"
+msgstr ""
+"O domínio mudou menos de 5 minutos há. Por favor tenta de novo em algums "
+"minutos."
+
+msgid "err_dom_14"
+msgstr "O secundário-domínio não existe."
+
+msgid "err_dom_15"
+msgstr "Nenhuma mudança foi pedida..."
+
+msgid "err_dom_16"
+msgstr "O secundário-domínio jà existe."
+
+msgid "err_dom_17"
+msgstr "--- Erro de Programa --- Fechamento obtido já !"
+
+msgid "err_dom_18"
+msgstr ""
+"Este domínio é o do servidor !!! Você não pode hospedá-lo em sua conta !"
+
+msgid "err_dom_19"
+msgstr "O endereço IP que você entrou é incorreto."
+
+msgid "err_dom_20"
+msgstr "O URL que você entrou é incorreto."
+
+msgid "err_dom_21"
+msgstr "A pasta que você entrou é incorreta ou não existe."
+
+msgid "err_dom_22"
+msgstr ""
+"O domínio pedido é proibido neste servidor. Por favor contatar o "
+"administrador"
+
+msgid "err_dom_23DNS (and eventually wait 1 day) before you install it again."
+msgstr ""
+"O DNS deste domínio não combina o DNS do servidor. Por favor mudar o DNS do "
+"seu domínio (e esperar 1 dia) antes de instalar-lo de novo."
+
+msgid "help_dns_mx %s %s"
+msgstr ""
+"Se nós controlamos seu DNS <br />Você pode controlar seu correios em outra "
+"parte se você quiser (campo MX).<br />Escreve <b><code>%s</code></b> neste "
+"campo se seus correios devem ser controlados por %s<br />ou coloca o "
+"endereço IP ou nome do servidor de email usado para controlar seus correios."
+"<small>Aviso: Se você não coloca nada neste campo, seus correios serão "
+"inacessívels</small>"
+
+msgid "help_dns_mail"
+msgstr ""
+"Se nós não controlamos o DNS deste domínio <br />controlamos seus correios?"
+
+msgid "help_domain_del %s"
+msgstr ""
+"Se você quiser suprimir o domínio %s, clica a tecla abaixo.Aviso : isto "
+"suprimirá todo o ftp, correios, envi-listas ... associadas com estedomínio e "
+"os sécondarios domínios dele"
+
+msgid "hlp_add_domain"
+msgstr ""
+" - Entrar o nome do domínio que você gostaria hospedar. O nome do domínio "
+"deve ser completo, mais <b>sem o www.</b><br /> IMPORTANTE: Se você gostaria "
+"uma hospedagem actual do domínio, o DNS do seu domínio deve apontar para "
+"nossos servidors DNS. Contatar sua companhia de hospedagem para mais "
+"informação.<br /> Exemplos : globonet.org / demo.com / test.eu.org etc.<br /"
+">Mais informação sobre a administração dos domínios na seção da ajuda online "
+"HELPID_200<br /> "
+
+msgid "hlp_add_domain_2"
+msgstr ""
+"Clica sobre o link abaixo. Você pode acessar os parâmetros do domínio no "
+"menu à esquerda2 links aparecerão : <br /> - o primeiro para modificar os "
+"parâmetros de hospedagem do domínio (secondario-domínios, redireções, "
+"hospedagem do email ...) <br /> - o segundo para administrar as contas de "
+"email do domínio (se você quiser criar as caixas de email).<br />Mais "
+"informação sobre a administração dos domínios na seção de ajuda online "
+"HELPID_200<br />"
+
+msgid "hlp_del_domain"
+msgstr ""
+"O domínio foi suprimido, mais os arquivos do seu web-site não foram "
+"destruídos.<br />Se você quiser destruir os arquivos du web-site, usa a "
+"Administração de Arquivo<br />Mais informação sobre a administração dos "
+"domínios na seção de ajuda online HELPID_200<br />"
+
+msgid "hlp_edit_domain"
+msgstr ""
+"Esta zona permite as modificações de parâmetros de seu domínio e dos "
+"secundários-domínios instalados<br />Você pode criar um novo secundário-"
+"domínio e escholer de re-dirigir a seu espaço de disco, a um outro endereço "
+"Internet, o a um endereço IP (utilização advancado)<br />Mais informação "
+"sobre a administração dos domínios na seção de ajuda online HELPID_200<br />"
+
+msgid "Domain hosting"
+msgstr "Hospedagem do Domínio"
+
+msgid "You cannot add any new domain, your quota is over."
+msgstr "Você não pode adiçionr mais domínios, sua quota acabou."
+
+msgid "Contact your administrator for more information."
+msgstr "Contatar seu administrador para mais informação."
+
+msgid "Domain name"
+msgstr "Nome do Domínio"
+
+msgid ""
+"If you don't want to host in our server the DNS of your domain, don't check "
+"the box 'host my dns here'. If you don't know what it mean, leave it checked."
+msgstr ""
+"Se você não quiser hospedar o DNS em nosso servidor, não seleciona a caixa "
+"'hospedar meu DNS aqui'. Se você não sabe o que significa, deixá-lo "
+"selecionado."
+
+msgid "host my dns here"
+msgstr "hospedar meu DNS aqui"
+
+msgid "Add a domain"
+msgstr "Adiçionar um domínio"
+
+msgid "Add this domain"
+msgstr "Adiçionar este domínio"
+
+msgid "Your new domain %s has been successfully installed"
+msgstr "Seu domínio %s foi instalado com sucesso"
+
+msgid "Whois result on the domain"
+msgstr "Resultado Whois deste domínio"
+
+msgid "Confirm the deletion of domain %s"
+msgstr "Confirma o apagamento deste domínio %s"
+
+msgid "This will delete the related sub-domains too."
+msgstr "Isto suprimirá os secundário-domínios relacionados tambem."
+
+msgid "Domain %s deleted"
+msgstr "Domínio %s suprimido"
+
+msgid "The domain %s has been successfully deleted."
+msgstr "O domínio %s foi suprimido com sucesso."
+
+msgid "Editing domain %s"
+msgstr "Editando o domínio %s"
+
+msgid "Subdomains"
+msgstr "Secundário-domínios"
+
+msgid "Domains"
+msgstr "Domínios"
+
+msgid "Add a subdomain"
+msgstr "Adiçionar um secundário-domínio"
+
+msgid "Locally managed"
+msgstr "Controlado localemente"
+
+msgid "URL redirection"
+msgstr "Redireção URL"
+
+msgid "IP redirection"
+msgstr "Redireção IP"
+
+msgid "Webmail access"
+msgstr "Acesso Webmail"
+
+msgid "DNS parameters"
+msgstr "Parâmetros DNS"
+
+msgid "Manage the DNS on the server ?"
+msgstr "Administrar o DNS neste servidor ?"
+
+msgid "MX Field"
+msgstr "Campo MX"
+
+msgid "Submit the changes"
+msgstr "Submeter as mudanças"
+
+msgid "Delete %s"
+msgstr "Deleter %s"
+
+msgid ""
+"The domain %s has been changed. The modifications will take effect in 5 "
+"minutes."
+msgstr ""
+"O domínio %s foi modificado. As modificações estarão atualizadas em 5 "
+"minutos."
+
+msgid "Deleting subdomain %s"
+msgstr "Suprimando o secundário-domínio %s"
+
+msgid "WARNING : Confirm the deletion of the subdomain"
+msgstr "AVISO : Confirmar o apagamento do secundário-domínio"
+
+msgid "Editing subdomain %s"
+msgstr "Editando o secundário-domínio %s"
+
+msgid "The modifications will take effect in 5 minutes."
+msgstr "As modificações estaram actualizadas em 5 minutos."
+
+msgid "err_err_0"
+msgstr "OK"
+
+msgid "err_err_1"
+msgstr "Esta mesagem do erro nÃ£o existe (%s)"
+
+#: change.php:26
+msgid "Your new passwords are differents, pleasy try again."
+msgstr "As novas senhas sÃ£o diferentes. Por favor, tenta de novo"
+
+#: change.php:31
+msgid ""
+"Your account has not been found, please try again later or ask an "
+"administrator."
+msgstr ""
+"Sua conta nÃ£o foi achado. Por favor tenta de novo mais tarde ou pede o "
+"administrador"
+
+#: change.php:34
+msgid "Your current password is incorrect, please try again."
+msgstr "Sua senha atual estÃ¡ incorreta, por favor tenta de novo"
+
+#: change.php:55
+msgid ""
+"Your password has been successfully changed. Don't forget to change it in "
+"your mail software if you are using one (Outlook, Mozilla, Thunderbird, "
+"Eudora ...)"
+msgstr ""
+"Sua senha foi mudada com sucesso. NÃ£o se esquecer de mudÃ¡-lo em seu "
+"software do correio se vocÃª estiver\tusando um (Outlook, Mozilla, "
+"Thunderbird, "
+
+#: change.php:71
+msgid "Error:"
+msgstr "Erro:"
+
+#: change.php:76
+msgid "Changing your mail password"
+msgstr "Mudando sua senha de email"
+
+#: change.php:80
+msgid "Old Password:"
+msgstr "Senha Antiga"
+
+#: change.php:85
+msgid "New Password:"
+msgstr "Senha Nova"
+
+#: change.php:89
+msgid "Verify New Password:"
+msgstr "VerificaÃ§Ã£o da Nova Senha"
+
+#: change.php:94
+msgid "Change my mail password"
+msgstr "Mudar a senha de email"
+
+#: setup.php:16
+msgid "Change Password"
+msgstr "Mudar a Senha"
+
+#: setup.php:18
+msgid "This allow you to change your mail password."
+msgstr "Isto permite que vocÃª mude sua senha do correio."
+
+msgid "quota_ftp"
+msgstr "Contas FTP"
+
+msgid "err_ftp_1"
+msgstr "Nenhuma conta FTP achada"
+
+msgid "err_ftp_2"
+msgstr "Esta conta FTP não existe"
+
+msgid "err_ftp_3"
+msgstr "O prefixo escolhido não é permitido"
+
+msgid "err_ftp_4"
+msgstr "Esta conta FTP jà existe"
+
+msgid "err_ftp_5"
+msgstr ""
+"Sua quota para a conta FTP está cheio. Você não pode criar mais contas FTPs."
+
+msgid "err_ftp_6"
+msgstr "Esta pasta não pode ser criada."
+
+msgid "hlp_ftp_list"
+msgstr ""
+"Aqui está a lista de contas ftp com acesso à sua conta.Clica sobre "
+"'Modifiçar' para mudar o nome do usúario, a senha ou o diretório de raizPara "
+"suprimir uma conta, seliciona a conta correspondante e clica sobre a tecla "
+"'Suprimir as contas selecionadas'<br />Para poder acessar seus arquivos com "
+"um programa ftp, você deve criar pelo menos uma conta. Cada conta é "
+"associado com uma pasta, e não pode acessar nada fora os arquivos e pastas "
+"nesta pasta'<br />Mais informação sobre o FTP em Ajuda Online HELPID_100<br /"
+">"
+
+msgid "hlp_ftp_list_no"
+msgstr ""
+"Você não tem nenhuma conta FTP disponível. Clica sobre 'Criar uma conta ftp' "
+"para criar uma. <br />Para poder acessar seus arquivos com um programa ftp, "
+"você deve criar pelo menos uma conta. Cada conta é associado com uma pasta, "
+"e não pode acessar nada fora os arquivos e pastas nesta pasta'<br />Mais "
+"informação sobre o FTP em Ajuda Online HELPID_100<br />"
+
+msgid "hlp_ftp_add"
+msgstr "Você não pode adiçionar uma nova conta ftp. Sua conta está cheia."
+
+msgid "Create a new ftp account"
+msgstr "Criar uma nova conta ftp"
+
+msgid "Create this new FTP account."
+msgstr "Criar está nova conta FTP."
+
+msgid "The ftp account %s has been successfully deleted"
+msgstr "Esta conta ftp %s foi suprimado com sucesso"
+
+msgid "Deleting an FTP account"
+msgstr "Suprimir uma conta FTP"
+
+msgid "The FTP account has been successfully created"
+msgstr "A conta FTP foi criado com sucesso"
+
+msgid "No account selected!"
+msgstr "Nenhuma conta selecionada"
+
+msgid "The ftp account has been successfully changed"
+msgstr "A conta ftp foi mudado com sucesso"
+
+msgid "Editing an FTP account"
+msgstr "Editar uma conta FTP"
+
+msgid "Change this FTP account"
+msgstr "Mudar esta conta FTP"
+
+msgid "FTP accounts list"
+msgstr "Lista de contas FTP"
+
+msgid "<-No Password->"
+msgstr "<-Sem Senha->"
+
+msgid "FTP accounts"
+msgstr "Contas FTP"
+
+msgid "err_hta_1"
+msgstr "An incompatible .htaccess file exists in this folder."
+
+msgid "err_hta_2"
+msgstr ""
+".htaccess parsed and syntaxically correct, a .htpassword file has been "
+"created."
+
+msgid "err_hta_3"
+msgstr ".htaccess parsed and syntaxically correct, a .htpasswd already exist."
+
+msgid "err_hta_4"
+msgstr "No protected folder"
+
+msgid "err_hta_5"
+msgstr "I cannot delete the file '%s'/.htaccess"
+
+msgid "err_hta_6"
+msgstr "I cannot delete the file '%s'/.htpasswd"
+
+msgid "err_hta_7"
+msgstr "The file .htaccess does not exist"
+
+msgid "err_hta_8"
+msgstr "The folder '%s' does not exist"
+
+msgid "err_hta_9"
+msgstr "The file '%s' is not correct"
+
+msgid "err_hta_10"
+msgstr "The user '%s' already exist for this folder"
+
+msgid "err_hta_11"
+msgstr "Please enter a valid username"
+
+msgid "help_hta_list"
+msgstr ""
+
+msgid "Protect a folder"
+msgstr "Protect a folder"
+
+msgid "The folder must exists."
+msgstr "The folder must exists."
+
+msgid "Protect this folder"
+msgstr "Protect this folder"
+
+msgid "Adding a username in %s"
+msgstr "Adding a username in %s"
+
+msgid "Add this user"
+msgstr "Add this user"
+
+msgid "The protected folder %s has been successfully unprotected"
+msgstr "The protected folder %s has been successfully unprotected"
+
+msgid "Delete a protected folder"
+msgstr "Delete a protected folder"
+
+msgid "Please enter a password"
+msgstr "Please enter a password"
+
+msgid "Change the user %s in the protected folder %s"
+msgstr "Change the user %s in the protected folder %s"
+
+msgid "The password of the user %s has been successfully changed"
+msgstr "The password of the user %s has been successfully changed"
+
+msgid "No folder selected!"
+msgstr "No folder selected!"
+
+msgid "List of authorized user in folder %s"
+msgstr "List of authorized user in folder %s"
+
+msgid "No authorized user in %s"
+msgstr "No authorized user in %s"
+
+msgid "Add a username"
+msgstr "Add a username"
+
+msgid "Delete the checked users"
+msgstr "Delete the checked users"
+
+msgid "Editing user %s in the protected folder %s"
+msgstr "Editing user %s in the protected folder %s"
+
+msgid "New password"
+msgstr "New password"
+
+#: admin/sql_passchg.php:55
+#, fuzzy
+msgid "Change the password"
+msgstr ""
+"#-#-#-#-#  hta.po ($Id: hta.po,v 1.3 2003/06/09 14:36:08 root Exp $)  #-#-#-"
+"#-#\n"
+"Change the password\n"
+"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
+"$)  #-#-#-#-#\n"
+"Mudança da senha SQL"
+
+msgid "Protected folders list"
+msgstr "Protected folders list"
+
+msgid "Unprotect the checked folders"
+msgstr "Unprotect the checked folders"
+
+msgid "Protected folders"
+msgstr "Protected folders"
+
+msgid "quota_mailman"
+msgstr "Envi-listas (mailman)"
+
+msgid "Mailing lists"
+msgstr "Envi-listas"
+
+msgid "Owner"
+msgstr "Dono"
+
+msgid "Initial list password"
+msgstr "Senha inicial da lista"
+
+msgid "Create the list."
+msgstr "Criar a lista."
+
+msgid "The list %s has been successfully deleted."
+msgstr "A lista %s foi suprimido com sucesso."
+
+msgid "The mailing list has been successfully created."
+msgstr "A envi-lista foi criado com sucesso."
+
+msgid "List name"
+msgstr "Nome da lista"
+
+msgid "Public page"
+msgstr "PÃ¡gina publica"
+
+msgid "List admin"
+msgstr "Administrador da lista"
+
+msgid "Pending messages"
+msgstr "Mensagens faltando Ã¡ enviar"
+
+msgid "Delete the checked lists"
+msgstr "Suprimir as listas selecionadas"
+
+msgid "Create a list"
+msgstr "Criar a lista"
+
+msgid "(with mailman)"
+msgstr "(com mailman)"
+
+# #################################################################
+# m_mailman
+msgid "err_mailman_1"
+msgstr "A lista nÃ£o ainda definida"
+
+msgid "err_mailman_2"
+msgstr "O login (parte esquerda do @) Ã© obrigatorio"
+
+msgid "err_mailman_3"
+msgstr "O email do dono e a senha sÃ£o obrigatorios"
+
+msgid "err_mailman_4"
+msgstr "Este email estÃ¡ incorreto"
+
+msgid "err_mailman_5"
+msgstr "Este domÃ­nio nÃ£o existe."
+
+msgid "err_mailman_6"
+msgstr ""
+"Este endereÃ§o email (ou um da lista-subscrever, lista-desubscrever etc.) "
+"jÃ  foi usado."
+
+msgid "err_mailman_7"
+msgstr ""
+"Sua quota do envi-lista acabou, vocÃª nÃ£o pode criar mais envi-listas."
+
+msgid "err_mailman_9"
+msgstr "Esta lista nÃ£o existe"
+
+msgid "err_mailman_10"
+msgstr ""
+"A lista com o mesmo nome jÃ  existe no servidor. Por favor escholer um outro "
+"nome."
+
+msgid "quota_mail"
+msgstr "Contas de Email"
+
+msgid "err_mail_1"
+msgstr "conexÃ£o ldap impossÃ­vel, por favor tenta mais tarde."
+
+msgid "err_mail_2"
+msgstr "Nenhum email no domÃ­nio '%s'"
+
+msgid "err_mail_3"
+msgstr "Este email '%s' nÃ£o existe"
+
+msgid "err_mail_4"
+msgstr ""
+"Por favor escolha 'conta pop' e escholha a senha pop, ou entra algumas "
+"redireÃ§Ãµes, ou os dois"
+
+msgid "err_mail_5"
+msgstr "-- Erro de Servidor --- ParÃ¢metro Ã© incorreto (%s)"
+
+msgid "err_mail_6"
+msgstr "O domÃ­nio '%s' nÃ£o existe."
+
+msgid "err_mail_7"
+msgstr "O email '%s' jÃ  existe."
+
+msgid "err_mail_8"
+msgstr "Sua quota email acabou. VocÃª nÃ£o pode criar mais contas de email."
+
+msgid "err_mail_9"
+msgstr "O domÃ­nio '%s' nÃ£o existe."
+
+msgid "err_mail_10"
+msgstr "-- Erro de Programa -- Quota de Correios nÃ£o existe"
+
+msgid "err_mail_11"
+msgstr "Por favor entrar um endereÃ§o Email"
+
+msgid "err_mail_12"
+msgstr "Por favor entrar uma senha pop"
+
+msgid "err_mail_13"
+msgstr "Por favor entrar um email valido"
+
+msgid "err_mail_14"
+msgstr "Um ou mais redireÃ§Ãµes de email sÃ£o invalidos"
+
+msgid "err_mail_15"
+msgstr "Este email nÃ£o Ã© uma conta pop. Ã‰ impossÃ­vel mudar a senha !"
+
+msgid "help_mail_add"
+msgstr ""
+
+msgid "Add a mail to the domain %s"
+msgstr "AdiÃ§ionar um email ao domÃ­nio %s"
+
+msgid "Create this mailbox"
+msgstr "Criar uma caixa de email"
+
+msgid "Is it a POP account?"
+msgstr "Ã‰ uma conta POP?"
+
+msgid "POP password"
+msgstr "Senha POP"
+
+msgid "Other recipients"
+msgstr "Outros receptores"
+
+msgid "One email per line"
+msgstr "Um email por linha"
+
+msgid "The mailbox <b>%s</b> has been successfully created"
+msgstr "A caixa de email <b>%s</b> foi criado com sucesso"
+
+msgid "The mailbox <b>%s</b> does not exist!"
+msgstr "A caixa de email <b>%s</b> nÃ£o existe!"
+
+msgid "The mailbox <b>%s</b> has been successfully changed"
+msgstr "A caixa de email <b>%s</b> foi mudado com sucesso"
+
+msgid "Edit a mailbox of the domain %s"
+msgstr "Editar a caixa de email do domÃ­nio %s"
+
+msgid "Edit the mailbox %s"
+msgstr "Editar a caixa e email %s"
+
+msgid "Change this mailbox"
+msgstr "Mudar esta caixa de email"
+
+msgid "The mailbox %s has been successfully changed"
+msgstr "A caixa de email %s foi mudado com sucesso"
+
+msgid "Mailbox list of the domain %s"
+msgstr "Lista de caixas de email do domÃ­nio %s"
+
+msgid "Action"
+msgstr "AÃ§Ã£o"
+
+#: admin/sql_list.php:53
+msgid "Size"
+msgstr "Tamanho"
+
+msgid "Delete the selected mailboxes"
+msgstr "Suprimir as caixas de email selecionados"
+
+msgid "Add a mailbox on <b>%s</b>"
+msgstr "AdiÃ§ionar a caixa de email em <b>%s</b>"
+
+msgid "Mailboxes"
+msgstr "Caixas e email"
+
+msgid "quota_web"
+msgstr "EspaÃ§o de Disco"
+
+msgid ""
+"Enter your username and your password to connect to the virtual desktop "
+"interface"
+msgstr ""
+"Entrar seu nome do usÃºario e sua senha para conectar Ã  interface desktop "
+"virtual"
+
+msgid "You must accept the session cookie to log-in"
+msgstr "VocÃª precisa aceitar o cookie da sessÃ£o para o login"
+
+msgid "If you want to use a different language, click on the flag below"
+msgstr ""
+"Se vocÃª quiser usar uma lingua diferente, clicar sobre a bandeira abaixo"
+
+#: admin/sql_getparam.php:49 admin/sql_list.php:96 admin/sql_passchg.php:51
+#, fuzzy
+msgid "Username"
+msgstr ""
+"#-#-#-#-#  main.po ($Id: main.po,v 1.2 2003/06/09 14:36:09 root Exp $)  #-#-"
+"#-#-#\n"
+"Nome do usÃºario\n"
+"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
+"$)  #-#-#-#-#\n"
+"Nome de usúario"
+
+#: admin/sql_getparam.php:50 admin/sql_list.php:97 admin/sql_passchg.php:52
+msgid "Password"
+msgstr "Senha"
+
+msgid "You cannot change your password"
+msgstr "VocÃª nÃ£o pode mudar sua senha"
+
+msgid "Administration of"
+msgstr "AdministraÃ§Ã£o do"
+
+msgid "AlternC Desktop"
+msgstr "Desktop AlternC"
+
+msgid "Last Login: "
+msgstr "Ãšltimo Login: "
+
+msgid "the %3$d-%2$d-%1$d at %4$d:%5$d"
+msgstr "%3$d/%1$d/%2$d, Ã  %6$d:%5$d %7$s"
+
+msgid "%1$d login failed since last login"
+msgstr "%1$d login falharam desde o Ãºltimo login"
+
+msgid "from: <code> %1$s </code>"
+msgstr "do: <code> %1$s </code>"
+
+#: admin/sql_bck.php:78 admin/sql_del.php:69
+msgid "Yes"
+msgstr "Sim"
+
+#: admin/sql_bck.php:77 admin/sql_del.php:69
+#, fuzzy
+msgid "No"
+msgstr ""
+"#-#-#-#-#  main.po ($Id: main.po,v 1.2 2003/06/09 14:36:09 root Exp $)  #-#-"
+"#-#-#\n"
+"NÃ£o\n"
+"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
+"$)  #-#-#-#-#\n"
+"Não"
+
+msgid "Online help"
+msgstr "Ajuda online"
+
+msgid "Change the email of the account"
+msgstr "Mudar o email da sua conta"
+
+msgid "help_mem_chgmail %s"
+msgstr ""
+
+msgid "help_chg_passwd"
+msgstr ""
+
+msgid "help_chg_mail"
+msgstr ""
+
+msgid "err_mem_1"
+msgstr "Usúario ou senha incorreto"
+
+msgid "err_mem_2"
+msgstr "Esta conta está troncada, por favor chamar o administrador"
+
+msgid "err_mem_3"
+msgstr "Cookie incorreto, por favor aceitar o cookie da sessão"
+
+msgid "err_mem_4"
+msgstr "Sessão desconhecido, por favor contatar o administrador"
+
+msgid "err_mem_5"
+msgstr "Endereço IP incorreto, por favor contatar o administrador"
+
+# PROBLEME : il y avait 2 fois le 5, les autres messages doivent surement etre décalés (TODO)
+msgid "err_mem_6"
+msgstr "A senha antiga é incorreta"
+
+msgid "err_mem_7"
+msgstr "As novas senhas são diferentes, por favor tentar de novo"
+
+msgid "err_mem_8"
+msgstr "A senha deve ter pelo menos 3 caráteres"
+
+msgid "err_mem_9"
+msgstr "A informação entrada é incorreta"
+
+msgid "Help"
+msgstr "Ajuda"
+
+msgid "quota_mysql"
+msgstr "MySQL Base de Dados"
+
+#: admin/sql_add.php:34 admin/sql_doadd.php:34
+#, fuzzy
+msgid "err_mysql_1"
+msgstr ""
+"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
+"$)  #-#-#-#-#\n"
+"Nenhuma base de dados disponÃ­vel.\n"
+"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
+"$)  #-#-#-#-#\n"
+"Sua quota está completo, você não pode criar mais bases de dados.\n"
+"#-#-#-#-#  sql.po  #-#-#-#-#\n"
+"Sua quota estÃ¡ completo, vocÃª nÃ£o pode criar mais bases de dados."
+
+msgid "err_mysql_2"
+msgstr "Sua senha Ã© demasiado longa (16 carÃ¡teres max)"
+
+msgid "err_mysql_3"
+msgstr ""
+"Sua base de dados nÃ£o existe, vocÃª pode comeÃ§arÃ¡ um acesso criando o."
+
+msgid "err_mysql_4"
+msgstr "Esta base de dados jÃ  existe!"
+
+msgid "err_mysql_5"
+msgstr "seu nÃºmero backup estÃ¡ incorreto."
+
+msgid "err_mysql_6"
+msgstr "A pasta Ã© incorreta!"
+
+msgid "err_mysql_7"
+msgstr "O nome de arquivo vocÃª escolheu nÃ£o existe ou Ã© incorreto."
+
+msgid "err_mysql_8"
+msgstr "A senha Ã© demasiado longa (16 carÃ¡teres max)"
+
+msgid "err_mysql_9"
+msgstr "O arquivo Ã© incorreto ou nÃ£o existe."
+
+msgid "err_mysql_10"
+msgstr ""
+"VocÃª nÃ£o pode criar sua base de dados principal : vocÃª ainda tem outras "
+"base de dados !"
+
+msgid "err_mysql_11"
+msgstr ""
+"VocÃª nÃ£o tem nenhuma base de dados, clica sobre 'Base de Dados' para criar "
+"a primeira"
+
+#: admin/sql_list.php:48
+#, fuzzy
+msgid "help_sql_list_ok"
+msgstr ""
+"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
+"$)  #-#-#-#-#\n"
+"VocÃª pode criar vÃ¡rias bases de dados<br />Clica sobre 'SQL Admin' no menu "
+"para administrÃ¡-los<br />\n"
+"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
+"$)  #-#-#-#-#\n"
+"Você coloca para fora uma ou algumas bases de dados<br /> Clica sobre 'Admin "
+"SQL'no menu para administrá-los<br />Ou usa a tabela abaixo para administrar "
+"os backups / restaurações,suprimir suas bases :"
+
+#: admin/sql_list.php:91
+#, fuzzy
+msgid "help_sql_list_no"
+msgstr ""
+"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
+"$)  #-#-#-#-#\n"
+"VocÃª ainda nÃ£o criou sua base de dados principal, por favor entra a senha "
+"para criÃ¡-la.\n"
+"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
+"$)  #-#-#-#-#\n"
+"Votre base de données principale n'existe pas, entrez ici un mot de passe "
+"pour la créerSua base de dados principal ainda não existe, entra aqui uma "
+"senha para a criar"
+
+msgid "hlp_sql_bck"
+msgstr ""
+"Seu backup MySQL estÃ¡ salvado na pasta de <code>db.sql.1</code> a <code>db."
+"sql.19</code><br />seu nome da base de dados substitui 'db'.<br />AVISO: Se "
+"vocÃª muda os ajustes backup (backups, compressÃ£o...) os backups antigos "
+"podem ficar na pasta backup.Usar a administraÃ§Ã£o de arquivos para suprimi-"
+"los."
+
+#: admin/sql_bck.php:40 admin/sql_del.php:53 admin/sql_dorestore.php:39
+#: admin/sql_getparam.php:40 admin/sql_list.php:40 admin/sql_passchg.php:40
+#: admin/sql_restore.php:40
+#, fuzzy
+msgid "MySQL Databases"
+msgstr ""
+"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
+"$)  #-#-#-#-#\n"
+"Base de Dados MySQL\n"
+"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
+"$)  #-#-#-#-#\n"
+"Base de dados MySQL\n"
+"#-#-#-#-#  sql.po  #-#-#-#-#\n"
+"Bases de dados MySQL"
+
+#: admin/sql_getparam.php:51 admin/sql_list.php:98 admin/sql_passchg.php:53
+msgid "SQL Server"
+msgstr "Servidor SQL"
+
+#: admin/sql_add.php:53 admin/sql_getparam.php:52 admin/sql_list.php:53
+#: admin/sql_list.php:99 admin/sql_passchg.php:54
+msgid "Database"
+msgstr "Base de dados"
+
+msgid "Delete my SQL database"
+msgstr "Suprimir minha base de dados SQL"
+
+#: admin/sql_list.php:74
+#, fuzzy
+msgid "Delete the checked databases"
+msgstr ""
+"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
+"$)  #-#-#-#-#\n"
+"Suprimir as bases de dados selecionadas\n"
+"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
+"$)  #-#-#-#-#\n"
+"Suprimir as bases selecionadas"
+
+#: admin/sql_list.php:85
+#, fuzzy
+msgid "Get the current SQL parameters"
+msgstr ""
+"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
+"$)  #-#-#-#-#\n"
+"Procurar os ajustes atuais do SQL\n"
+"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
+"$)  #-#-#-#-#\n"
+"Mostrar os parâmetros SQL atuaís"
+
+#: admin/sql_del.php:54
+#, fuzzy
+msgid "Confirm the deletion of the following SQL databases"
+msgstr ""
+"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
+"$)  #-#-#-#-#\n"
+"Confirma o apagemento das bases de dados seguintes\n"
+"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
+"$)  #-#-#-#-#\n"
+"Confirma o apagamento das bases de dados SQL seguintes\n"
+"#-#-#-#-#  sql.po  #-#-#-#-#\n"
+"Confirma o apagamento das bases de dados SQL seguintes"
+
+#: admin/sql_del.php:55
+#, fuzzy
+msgid "This will delete all the tables currently in those db."
+msgstr ""
+"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
+"$)  #-#-#-#-#\n"
+"Isto suprimirÃ¡ todas as tabelas atualmente na base de dados.\n"
+"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
+"$)  #-#-#-#-#\n"
+"Isto suprimirá todas as tabelas atuais nestas bases de dados.\n"
+"#-#-#-#-#  sql.po  #-#-#-#-#\n"
+"Isto suprimirÃ¡ todas as tabelas atuais nestas bases de dados."
+
+#: admin/sql_del.php:41
+#, fuzzy, php-format
+msgid "The database %s has been successfully deleted"
+msgstr ""
+"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
+"$)  #-#-#-#-#\n"
+"A base de dados '%s' foi suprimido com sucesso\n"
+"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
+"$)  #-#-#-#-#\n"
+"A base de dados %s foi suprimido com sucesso\n"
+"#-#-#-#-#  sql.po  #-#-#-#-#\n"
+"A base de dados %s foi suprimido com sucesso"
+
+#: admin/sql_bck.php:101 admin/sql_dorestore.php:55 admin/sql_restore.php:68
+#, fuzzy
+msgid "You currently have no database defined"
+msgstr ""
+"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
+"$)  #-#-#-#-#\n"
+"VocÃª ainda nÃ£o tem nenhuma base de dados\n"
+"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
+"$)  #-#-#-#-#\n"
+"Você não tem nenhuma base de dados definida\n"
+"#-#-#-#-#  sql.po  #-#-#-#-#\n"
+"VocÃª nÃ£o tem nenhuma base de dados definida"
+
+#: admin/sql_dorestore.php:43
+msgid "Restore a SQL backup"
+msgstr "Restaurar o backup SQL"
+
+#: admin/sql_restore.php:53
+msgid "Please enter the filename containing SQL data to be restored."
+msgstr ""
+"Por favor entrar o nome de arquivo que contem os dados do SQL que precisam "
+"restaurar."
+
+#: admin/sql_restore.php:63
+#, fuzzy
+msgid "Note: If the filename ends with .gz, it will be uncompressed before."
+msgstr ""
+"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
+"$)  #-#-#-#-#\n"
+"Nota: Se o nome de arquivo termina com .gz, primeiramente ele serÃ¡ de-"
+"compressado.\n"
+"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
+"$)  #-#-#-#-#\n"
+"Nota: Se o nome de arquivo termina com .gz, primeiramente ele será de-"
+"compressado."
+
+#: admin/sql_restore.php:57
+#, fuzzy
+msgid "Restore my database"
+msgstr ""
+"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
+"$)  #-#-#-#-#\n"
+"Sua base de dados foi restaurado, verificar o texto precedente para ver se "
+"hÃ¡ mensagens de erro.\n"
+"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
+"$)  #-#-#-#-#\n"
+"Restaurar a base de dados"
+
+#: admin/sql_passchg.php:46
+#, fuzzy
+msgid ""
+"Enter the new password of your SQL database and click 'change the password' "
+"to change it"
+msgstr ""
+"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
+"$)  #-#-#-#-#\n"
+"Entrar sua nova senha de base de dados SQL\n"
+"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
+"$)  #-#-#-#-#\n"
+"Entrar sua nova senha de base de dados SQL e clica sobre 'Mudança de senha' "
+"para a mudar"
+
+msgid "Manage the SQL backup"
+msgstr "Administrar os backups SQL"
+
+#: admin/sql_bck.php:57
+msgid "No backup"
+msgstr "Nenhum backup"
+
+#: admin/sql_bck.php:58
+msgid "Weekly backup"
+msgstr "Backup semanal"
+
+#: admin/sql_bck.php:59
+#, fuzzy
+msgid "Daily backup"
+msgstr ""
+"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
+"$)  #-#-#-#-#\n"
+"Backup diÃ¡rio\n"
+"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
+"$)  #-#-#-#-#\n"
+"Backup diário\n"
+"#-#-#-#-#  sql.po  #-#-#-#-#\n"
+"Backup diÃ¡rio"
+
+#: admin/sql_list.php:84
+#, fuzzy
+msgid "Change the SQL password"
+msgstr ""
+"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
+"$)  #-#-#-#-#\n"
+"Mudar sua senha SQL\n"
+"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
+"$)  #-#-#-#-#\n"
+"Mudança de senha SQL"
+
+#: admin/sql_bck.php:53
+#, fuzzy
+msgid "Do sql backup?"
+msgstr ""
+"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
+"$)  #-#-#-#-#\n"
+"FrequÃªncia de Backup:\n"
+"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
+"$)  #-#-#-#-#\n"
+"Fazer backup SQL?\n"
+"#-#-#-#-#  sql.po  #-#-#-#-#\n"
+"Fazer backup SQL?"
+
+#: admin/sql_bck.php:92
+#, fuzzy
+msgid "Change the SQL backup parameters"
+msgstr ""
+"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
+"$)  #-#-#-#-#\n"
+"Modificar os ajustes de backup SQL\n"
+"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
+"$)  #-#-#-#-#\n"
+"Mudar os parâmetros SQL atuais\n"
+"#-#-#-#-#  sql.po  #-#-#-#-#\n"
+"Mudar os parÃ¢metros SQL atuais"
+
+#: admin/sql_bck.php:63
+#, fuzzy
+msgid "How many backup should be kept?"
+msgstr ""
+"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
+"$)  #-#-#-#-#\n"
+"Quanto tempo vocÃª quer os manter (dia/semanas)?\n"
+"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
+"$)  #-#-#-#-#\n"
+"Quantos backups devem ser mantidos?\n"
+"#-#-#-#-#  sql.po  #-#-#-#-#\n"
+"Quantos backups devem ser mantidos?"
+
+#: admin/sql_bck.php:75
+#, fuzzy
+msgid "Compress the backups? (gzip)"
+msgstr ""
+"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
+"$)  #-#-#-#-#\n"
+"VocÃª quiser compresser os backups? (gzip)\n"
+"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
+"$)  #-#-#-#-#\n"
+"Você quiser compresser os backups? (gzip)\n"
+"#-#-#-#-#  sql.po  #-#-#-#-#\n"
+"VocÃª quiser compresser os backups? (gzip)"
+
+#: admin/sql_bck.php:82
+#, fuzzy
+msgid "In which folder do you want to store the backups?"
+msgstr ""
+"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
+"$)  #-#-#-#-#\n"
+"Que pasta vocÃª quiser usar para salvar seus backups?\n"
+"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
+"$)  #-#-#-#-#\n"
+"Que pasta você quiser usar para salvar seus backups?\n"
+"#-#-#-#-#  sql.po  #-#-#-#-#\n"
+"Que pasta vocÃª quiser usar para salvar seus backups?"
+
+#: admin/sql_getparam.php:47
+#, fuzzy
+msgid "Your current settings are"
+msgstr ""
+"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
+"$)  #-#-#-#-#\n"
+"Seus ajustes atuaÃ­s estÃ£o:\n"
+"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
+"$)  #-#-#-#-#\n"
+"Aqui seus parâmetros atuaís"
+
+msgid "Destroy my database"
+msgstr "Destruir minha base de dados"
+
+#: admin/sql_list.php:100
+msgid "Create my main database"
+msgstr "Criar minha base de dados principal"
+
+#: admin/menu_sql.php:35
+#, fuzzy
+msgid "Databases"
+msgstr ""
+"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
+"$)  #-#-#-#-#\n"
+"Bases de Dados\n"
+"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
+"$)  #-#-#-#-#\n"
+"Bases de dados\n"
+"#-#-#-#-#  sql.po  #-#-#-#-#\n"
+"Bases de dados"
+
+#: admin/menu_sql.php:36 admin/sql_admin.php:47
+#, fuzzy
+msgid "SQL Admin"
+msgstr ""
+"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
+"$)  #-#-#-#-#\n"
+"SQL Admin\n"
+"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
+"$)  #-#-#-#-#\n"
+"Admin SQL\n"
+"#-#-#-#-#  sql.po  #-#-#-#-#\n"
+"Admin SQL"
+
+#: admin/sql_add.php:41 admin/sql_list.php:82
+#, fuzzy
+msgid "Create a new database"
+msgstr ""
+"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
+"$)  #-#-#-#-#\n"
+"Criar uma base de dados\n"
+"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
+"$)  #-#-#-#-#\n"
+"Criar uma nova base de dados\n"
+"#-#-#-#-#  sql.po  #-#-#-#-#\n"
+"Criar uma nova base de dados"
+
+#: admin/sql_add.php:56
+#, fuzzy
+msgid "Create this new database."
+msgstr ""
+"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
+"$)  #-#-#-#-#\n"
+"Criar esta base de dados\n"
+"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
+"$)  #-#-#-#-#\n"
+"Criar esta nova base de dados.\n"
+"#-#-#-#-#  sql.po  #-#-#-#-#\n"
+"Criar esta nova base de dados."
+
+#: admin/sql_list.php:53 admin/sql_list.php:64
+msgid "Backup"
+msgstr "Backup"
+
+#: admin/sql_list.php:53 admin/sql_list.php:65
+#, fuzzy
+msgid "Restore"
+msgstr ""
+"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
+"$)  #-#-#-#-#\n"
+"Restaurar\n"
+"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
+"$)  #-#-#-#-#\n"
+"Restauração"
+
+#: admin/sql_addmain.php:35
+msgid "Your database has been successfully created"
+msgstr "Sua base de dados foi criado com sucesso"
+
+#: admin/sql_bck.php:48
+#, php-format
+msgid "Manage the SQL backup for database %s"
+msgstr "Administrar o backup SQL para a base de dados %s"
+
+#: admin/sql_del.php:54
+msgid "WARNING"
+msgstr "AVISO"
+
+#: admin/sql_dobck.php:37
+#, fuzzy
+msgid "Your backup parameters has been successfully changed."
+msgstr ""
+"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
+"$)  #-#-#-#-#\n"
+"Seus parâmetros de backup foram mudados com sucesso\n"
+"#-#-#-#-#  sql.po  #-#-#-#-#\n"
+"Seus parÃ¢metros de backup foram mudados com sucesso"
+
+#: admin/sql_dorestore.php:49
+msgid ""
+"Your database has been restored, check out the previous text for error "
+"messages."
+msgstr ""
+"Sua base de dados foi restaurado, verificar o texto precedente para ver se "
+"há mensagens de erro."
+
+#: admin/sql_pass.php:36
+msgid "Your password has been successfully changed."
+msgstr "Sua senha foi mudado com sucesso."
+
+#: admin/sql_restore.php:48
+#, php-format
+msgid "Restore a SQL backup for database %s"
+msgstr "Restaurar o backup SQL para a base de dados %s"
