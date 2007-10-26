@@ -1,0 +1,363 @@
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: admin.po,v 1.2 2003/06/09 14:36:08 root Exp $
+msgid ""
+msgstr ""
+"Project-Id-Version: $Id: admin.po,v 1.2 2003/06/09 14:36:08 root Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+
+msgid "err_admin_1"
+msgstr "-- Only administrators can access this page !! --"
+msgstr "-- Somente os administradores tem acceso à essas paginas !! --"
+
+msgid "err_admin_2"
+msgstr "Account not found"
+msgstr "Conta não foi achado"
+
+msgid "err_admin_3"
+msgstr "This login already exists"
+msgstr "Este login jà existe"
+
+msgid "err_admin_4"
+msgstr "-- I cannot create this account --"
+msgstr "-- Não posso criar esta conta --"
+
+msgid "err_admin_5"
+msgstr "Please enter a valid email address"
+msgstr "Por favor entrar um endreço email válido"
+
+msgid "err_admin_6"
+msgstr "All fields are mandatory"
+msgstr "Todos os campos são obrigatórios"
+
+msgid "err_admin_7"
+msgstr "You can ask for your password only once a day !"
+msgstr "Você pode me peder uma senha somente uma vez por dia !"
+
+msgid "err_admin_8"
+msgstr "This account is ALREADY an administrator account"
+msgstr "Esta conta JÀ é uma conta administrativa"
+
+msgid "err_admin_9"
+msgstr "This account is NOT an administrator account !"
+msgstr "Esta conta NÃO é uma conta administrativa"
+
+msgid "err_admin_10"
+msgstr "Login can only contains characters a-z, 0-9 and -"
+msgstr "Somente os carateres a-z, 0-9 e - são permitidos no Login"
+
+msgid "err_admin_11"
+msgstr "This TLD does not exist"
+msgstr "Este TLD não existe"
+
+msgid "err_admin_12"
+msgstr "This TLD already exists"
+msgstr "Este TLD jà existe"
+
+msgid "This page is restricted to authorized staff"
+msgstr "This page is restricted to authorized staff"
+msgstr "Esta página é restringida à equipe de funcionários autorizada"
+
+msgid "New member"
+msgstr "New member"
+msgstr "Membro novo"
+
+msgid "Initial password"
+msgstr "Initial password"
+msgstr "Senha inicial"
+
+msgid "Surname"
+msgstr "Surname"
+msgstr "Sobrenome"
+
+msgid "First Name"
+msgstr "First Name"
+msgstr "Nome"
+
+msgid "Email address"
+msgstr "Email address"
+msgstr "Endereço email"
+
+msgid "Create a new member"
+msgstr "Create a new member"
+msgstr "Criar um membro novo"
+
+msgid "The new member has been successfully created"
+msgstr "The new member has been successfully created"
+msgstr "O membro novo foi criado com sucesso"
+
+msgid "Click here to continue"
+msgstr "Click here to continue"
+msgstr "Clicar aqui para continuar"
+
+msgid "Member '%s' does not exist"
+msgstr "Member '%s' does not exist"
+msgstr "Membro '%s' não existe"
+
+msgid "Member %s successfully deleted"
+msgstr "Member %s successfully deleted"
+msgstr "Membro %s foi suprimido com sucesso"
+
+msgid "Member Edition"
+msgstr "Member Edition"
+msgstr "Edição do Membro"
+
+msgid "The member has been successfully edited"
+msgstr "The member has been successfully edited"
+msgstr "O membro foi editado com sucesso"
+
+msgid "Account Enabled ?"
+msgstr "Account Enabled ?"
+msgstr "Conta Permitiu ?"
+
+msgid "Edit this account"
+msgstr "Edit this account"
+msgstr "Editar esta conta"
+
+msgid "Member list"
+msgstr "Member list"
+msgstr "Lista dos membros"
+
+msgid "Here is the list of hosted members"
+msgstr "Here is the list of hosted members"
+msgstr "Aqui está a lista de membros hospedados"
+
+msgid "Edit"
+msgstr "Edit"
+msgstr "Editar"
+
+msgid "Quotas"
+msgstr "Quotas"
+msgstr "Quotas"
+
+msgid "Connect as"
+msgstr "Connect as"
+msgstr "Conectar como"
+
+msgid "Delete checked accounts"
+msgstr "Delete checked accounts"
+msgstr "Deletar as contas selecionadas"
+
+msgid "Editing the quotas of a member"
+msgstr "Editing the quotas of a member"
+msgstr "Editando os quotas do membro"
+
+
+msgid "The quotas has been successfully edited"
+msgstr "The quotas has been successfully edited"
+msgstr "Os quotas foram editados com sucesso"
+
+msgid "Quota"
+msgstr "Quota"
+msgstr "Quota"
+
+msgid "Total"
+msgstr "Total"
+msgstr "Total"
+
+msgid "Used"
+msgstr "Used"
+msgstr "Usado(s)"
+
+msgid "Description"
+msgstr "Description"
+msgstr "Descição"
+
+msgid "Edit the quotas"
+msgstr "Edit the quotas"
+msgstr "Editar os quotas"
+
+msgid "Recalculate the quotas of the account"
+msgstr "Recalculate the quotas of the account"
+msgstr "Recalcular os quotas da conta"
+
+msgid "The user has no database"
+msgstr "The user has no database"
+msgstr "O usuário não tem nenhuma base de dados" 
+
+msgid "Enable the database"
+msgstr "Enable the database"
+msgstr "Permitir a base de dados"
+
+msgid "The user has a MySQL database"
+msgstr "The user has a MySQL database"
+msgstr "O usuário tem uma base de dados MySQL"
+
+msgid "Disable the database"
+msgstr "Disable the database"
+msgstr "Incapa
+
+msgid "There is only one administrator account, you cannot turn this account back to normal"
+msgstr "There is only one administrator account, you cannot turn this account back to normal"
+msgstr "Você pode ter somente uma conta do administrador, você não pode voltar esta conta ao normal"
+
+msgid "This account is a super-admin account"
+msgstr "This account is a super-admin account"
+msgstr "Esta conta é uma conta super-administrador"
+
+msgid "Turn this account back to normal"
+msgstr "Turn this account back to normal"
+msgstr "Voltar esta conta à normal"
+
+msgid "Make this account a super admin one"
+msgstr "Make this account a super admin one"
+msgstr "Modificar esta conta à uma conta do super admin"
+
+msgid "Disk space (in KB)"
+msgstr "Disk space (in KB)"
+msgstr "Espaco Disco (em KB)"
+
+msgid "Number of email accounts"
+msgstr "Number of email accounts"
+msgstr "Número de contas do email"
+
+msgid "Number of mailing-lists"
+msgstr "Number of mailing-lists"
+msgstr "Número de envi-listas" 
+
+msgid "Number of domains"
+msgstr "Number of domains"
+msgstr "Número de domínios"
+
+msgid "Number of FTP accounts"
+msgstr "Number of FTP accounts"
+msgstr "Número de contas FTP"
+
+msgid "Number of web statistics"
+msgstr "Number of web statistics"
+msgstr "Número de statisticas Web"
+
+msgid "Some TLD cannot be deleted..."
+msgstr "Some TLD cannot be deleted..."
+msgstr "Algums TLD não pode ser suprimidos..."
+
+msgid "The requested TLD has been deleted"
+msgstr "The requested TLD has been deleted"
+msgstr "O TLD pedido foi suprimido"
+
+msgid "Manage allowed domains (TLD)"
+msgstr "Manage allowed domains (TLD)"
+msgstr "Controla domínios permitidos (TLD)"
+
+msgid "Here is the list of the TLD allowed on this server. Each TLD can be allowed or denied after some checks (whois, ns, domain exists...)"
+msgstr "Here is the list of the TLD allowed on this server. Each TLD can be allowed or denied after some checks (whois, ns, domain exists...)"
+msgstr "Aqui está a lista do TLD permitido neste servidor. Cada TLD pode ser permitido ou negado após algumas verifcações (whois, ns, domínio existir) 
+
+msgid "TLD"
+msgstr "TLD"
+msgstr "TLD"
+
+msgid "Allowed Mode"
+msgstr "Allowed Mode"
+msgstr "Modalidade Permitida"
+
+msgid "Delete the checked TLD"
+msgstr "Delete the checked TLD"
+msgstr "Suprimir o TLD selecionado"
+
+msgid "Add a new TLD"
+msgstr "Add a new TLD"
+msgstr "Adicionar um novo TLD"
+
+msgid "The TLD has been successfully added"
+msgstr "The TLD has been successfully added"
+msgstr "O TLD foi adiçionado com sucesso"
+
+msgid "Enter the new TLD (without the first dot) and choose what check should be done."
+msgstr "Enter the new TLD (without the first dot) and choose what check should be done."
+msgstr "Entrar um novo TLD (sem o primeiro ponto) e escolher que verificação deve ser feita."
+
+msgid "Warning : only some final tld are known in the whois function of AlternC, please check m_domains.php accordingly."
+msgstr "Warning : only some final tld are known in the whois function of AlternC, please check m_domains.php accordingly."
+msgstr "Aviso: somente algums tld estam conhecedos na função whois do AlternC, por favor verificar em m_domains.php conformente."
+
+msgid "Edit a TLD"
+msgstr "Edit a TLD"
+msgstr "Editar um TLD"
+
+msgid "Edit this TLD"
+msgstr "Edit this TLD"
+msgstr "Editar este TLD"
+
+msgid "The TLD has been successfully edited"
+msgstr "The TLD has been successfully edited"
+msgstr "Este TLD foi editado com sucesso"
+
+msgid "Change the default quotas"
+msgstr "Change the default quotas"
+msgstr "Mudar os quotas padrões"
+
+msgid "This TLD is forbidden"
+msgstr "This TLD is forbidden"
+msgstr "Este TLD é proibido"
+
+msgid "primary DNS is checked in WHOIS db"
+msgstr "primary DNS is checked in WHOIS db"
+msgstr "O DNS preliminar está selecionado em db WHOIS"
+
+msgid "primary & secondary DNS are checked in WHOIS db"
+msgstr "primary & secondary DNS are checked in WHOIS db"
+msgstr "O DNS preliminar e secundário estam selecionados em db WHOIS"
+
+msgid "Domain must exist, but don't do any DNS check"
+msgstr "Domain must exist, but don't do any DNS check"
+msgstr "O domínio deve existir, mais não faz a verificação DNS"
+
+msgid "Domain can be installed, no check at all"
+msgstr "Domain can be installed, no check at all"
+msgstr "O domínio pode ser instalado, mas não faz nenhuma verificação"
+
+msgid "Domain can be installed, force NO DNS hosting"
+msgstr "Domain can be installed, force NO DNS hosting"
+msgstr "O domínio pode ser instalado, forçã a hospedadem SEM DNS"
+
+msgid "Manage the members"
+msgstr "Manage the members"
+msgstr "Controlar os membros"
+
+msgid "Admin Control Panel"
+msgstr "Admin Control Panel"
+msgstr "Painel de controle do Administrador" 
+
+msgid "General SQL Admin"
+msgstr "General SQL Admin"
+msgstr "Admin do SQL Geral"
+
+msgid "Default quotas successfully changed"
+msgstr "Default quotas successfully changed"
+msgstr "Quotas padrões foram mudados com sucesso"
+
+msgid "Can he change its password"
+msgstr "Can he change its password"
+msgstr "Pode mudar a senha"
+
+msgid "Account created by %s"
+msgstr "Account created by %s"
+msgstr "Conta foi criado por %s"
+
+msgid "Locked Account"
+msgstr "Locked Account"
+msgstr "Conta Troncada"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

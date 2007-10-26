@@ -1,0 +1,117 @@
+# English AlternC Translation
+# Copyright (C)  2002 the AlternC Development Team
+# <tech@alternc.org>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: $Id: mailman.po,v 1.3 2003/06/15 18:58:03 root Exp $\n"
+"PO-Revision-Date: 2003-02-03 08:16 +0000\n"
+"Last-Translator: Benjamin Sonntag <benjamin@octopuce.com>\n"
+"Language-Team: English <dev@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "quota_mailman"
+msgstr "Mailing lists (mailman)"
+msgstr "Envi-listas (mailman)"
+
+msgid "Mailing lists"
+msgstr "Mailing lists"
+msgstr "Envi-listas"
+
+msgid "Email address"
+msgstr "Email address"
+msgstr "Endereço Email"
+
+msgid "Owner"
+msgstr "Owner"
+msgstr "Dono"
+
+msgid "Initial list password"
+msgstr "Initial list password"
+msgstr "Senha inicial da lista"
+
+msgid "Create the list."
+msgstr "Create the list."
+msgstr "Criar a lista."
+
+msgid "The list %s has been successfully deleted."
+msgstr "The list %s has been successfully deleted."
+msgstr "A lista %s foi suprimido com sucesso."
+
+msgid "The mailing list has been successfully created."
+msgstr "The mailing list has been successfully created."
+msgstr "A envi-lista foi criado com sucesso."
+
+msgid "Delete"
+msgstr "Delete"
+msgstr "Suprimir"
+
+msgid "List name"
+msgstr "List name"
+msgstr "Nome da lista"
+
+msgid "Public page"
+msgstr "Public page"
+msgstr "Página publica"
+
+msgid "List admin"
+msgstr "List admin"
+msgstr "Administrador da lista"
+
+msgid "Pending messages"
+msgstr "Pending messages"
+msgstr "Mensagens faltando á enviar"
+
+msgid "Delete the checked lists"
+msgstr "Delete the checked lists"
+msgstr "Suprimir as listas selecionadas"
+
+msgid "Create a list"
+msgstr "Create a list"
+msgstr "Criar a lista"
+
+msgid "(with mailman)"
+msgstr "(with mailman)"
+msgstr "(com mailman)"
+
+##################################################################
+# m_mailman
+
+msgid "err_mailman_1"
+msgstr "No list defined yet"
+msgstr "A lista não ainda definida"
+
+msgid "err_mailman_2"
+msgstr "The login (left part of the @) is mandatory"
+msgstr "O login (parte esquerda do @) é obrigatorio"
+
+msgid "err_mailman_3"
+msgstr "The owner email and the password are mandatory"
+msgstr "O email do dono e a senha são obrigatorios"
+
+msgid "err_mailman_4"
+msgstr "This email is incorrect"
+msgstr "Este email está incorreto"
+
+msgid "err_mailman_5"
+msgstr "This domain does not exist."
+msgstr "Este domínio não existe."
+
+msgid "err_mailman_6"
+msgstr "This email address (or one of the list-subscribe, list-unsubscribe etc.) are already used."
+msgstr "Este endereço email (ou um da lista-subscrever, lista-desubscrever etc.) jà foi usado."
+
+msgid "err_mailman_7"
+msgstr "Your mailing-list quota is over, you cannot create more mailing-lists."
+msgstr "Sua quota do envi-lista acabou, você não pode criar mais envi-listas."
+
+msgid "err_mailman_9"
+msgstr "This list does not exist"
+msgstr "Esta lista não existe"
+
+msgid "err_mailman_10"
+msgstr "A list with the same name already exist on the server. Please choose another name."
+msgstr "A lista com o mesmo nome jà existe no servidor. Por favor escholer um outro nome."
+

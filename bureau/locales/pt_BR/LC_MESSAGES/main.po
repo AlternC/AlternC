@@ -1,0 +1,98 @@
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: main.po,v 1.2 2003/06/09 14:36:09 root Exp $
+msgid ""
+msgstr ""
+"Project-Id-Version: $Id: main.po,v 1.2 2003/06/09 14:36:09 root Exp $\n"
+"POT-Creation-Date: 2002-06-12 19:00CEST\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: English <i18n@alternc.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+
+msgid "quota_web"
+msgstr "Disk space"
+msgstr "Espaço de Disco"
+
+msgid "Enter your username and your password to connect to the virtual desktop interface" 
+msgstr "Enter your username and your password to connect to the virtual desktop interface" 
+msgstr "Entrar seu nome do usúario e sua senha para conectar à interface desktop virtual"
+
+msgid "You must accept the session cookie to log-in"
+msgstr "You must accept the session cookie to log-in"
+msgstr "Você precisa aceitar o cookie da sessão para o login"
+
+msgid "If you want to use a different language, click on the flag below"
+msgstr "If you want to use a different language, click on the flag below"
+msgstr "Se você quiser usar uma lingua diferente, clicar sobre a bandeira abaixo"
+
+msgid "Username" 
+msgstr "Username" 
+msgstr "Nome do usúario"
+
+msgid "Password" 
+msgstr "Password" 
+msgstr "Senha"
+
+msgid "You cannot change your password"
+msgstr "You cannot change your password"
+msgstr "Você não pode mudar sua senha"
+
+msgid "Administration of"
+msgstr "Administration of"
+msgstr "Administração do"
+
+msgid "AlternC Desktop"
+msgstr "AlternC Desktop"
+msgstr "Desktop AlternC"
+
+msgid "Last Login: "
+msgstr "Last Login: "
+msgstr "Último Login: "
+
+msgid "the %3$d-%2$d-%1$d at %4$d:%5$d"
+msgstr "%3$d/%1$d/%2$d, at %6$d:%5$d %7$s"
+msgstr "%3$d/%1$d/%2$d, à %6$d:%5$d %7$s
+
+msgid "%1$d login failed since last login"
+msgstr "%1$d login failed since last login"
+msgstr "%1$d login falharam desde o último login"
+
+msgid "from: <code> %1$s </code>"
+msgstr "from: <code> %1$s </code>"
+msgstr "do: <code> %1$s </code>"
+
+msgid "Yes"
+msgstr "Yes"
+msgstr "Sim"
+
+msgid "No"
+msgstr "No"
+msgstr "Não"
+
+msgid "Online help"
+msgstr "Online help"
+msgstr "Ajuda online"
+
+msgid "Change the email of the account"
+msgstr "Change the email of the account"
+msgstr "Mudar o email da sua conta"
+
+msgid "help_mem_chgmail %s"
+msgstr ""
+msgstr ""
+
+msgid "help_chg_passwd"
+msgstr ""
+msgstr ""
+
+msgid "help_chg_mail"
+msgstr ""
+
+msgid "help_help_settings"
+msgstr ""
+
