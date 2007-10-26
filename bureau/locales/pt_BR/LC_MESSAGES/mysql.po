@@ -138,7 +138,7 @@ msgid "Compress the backups? (gzip)"
 msgstr "Você quiser compresser os backups? (gzip)"
 
 msgid "In which folder do you want to store the backups?"
-msgstr "Que pasta você quiser usar para salvar seus backups? 
+msgstr "Que pasta você quiser usar para salvar seus backups?"
 
 msgid "Your current settings are"
 msgstr "Seus ajustes atuaís estão:" 

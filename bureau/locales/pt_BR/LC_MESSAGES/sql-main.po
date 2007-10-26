@@ -209,8 +209,6 @@ msgstr "Restaurar o backup SQL para a base de dados %s"
 
 #: admin/sql_restore.php:53
 msgid "Please enter the filename containing SQL data to be restored."
-msgstr ""
-"Entrez le nom du fichier contenant des données SQL à restaurer dans la base."
 msgstr "Por favor entrar o nome de arquivo que contem os dados do SQL que precisam restaurar."
 
 #: admin/sql_restore.php:57
@@ -219,6 +217,4 @@ msgstr "Restaurar a base de dados"
 
 #: admin/sql_restore.php:63
 msgid "Note: If the filename ends with .gz, it will be uncompressed before."
-msgstr ""
-"Note : Si le nom du fichier se termine par .gz, il sera décompressé avant."
 msgstr "Nota: Se o nome de arquivo termina com .gz, primeiramente ele será de-compressado."

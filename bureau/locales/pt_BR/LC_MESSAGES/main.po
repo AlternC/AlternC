@@ -45,7 +45,7 @@ msgid "Last Login: "
 msgstr "Último Login: "
 
 msgid "the %3$d-%2$d-%1$d at %4$d:%5$d"
-msgstr "%3$d/%1$d/%2$d, à %6$d:%5$d %7$s
+msgstr "%3$d/%1$d/%2$d, à %6$d:%5$d %7$s"
 
 msgid "%1$d login failed since last login"
 msgstr "%1$d login falharam desde o último login"
