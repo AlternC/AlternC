@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: $Id: admin.po,v 1.2 2003/06/09 14:36:08 root Exp $\n"
 "POT-Creation-Date: 2002-06-12 19:00CEST\n"
-"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"PO-Revision-Date: 2007-10-25 23:22-0400\n"
 "Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
 "Language-Team: English <i18n@alternc.org>\n"
 "MIME-Version: 1.0\n"
@@ -33,7 +33,7 @@ msgstr ""
 #: ../class/reset_stats_conf.php:6 ../admin/adm_deactivate.php:11
 #: ../admin/adm_deactivate.php:44
 msgid "This page is restricted to authorized staff"
-msgstr "Esta pÃ¡gina Ã© restringida Ã  equipe de funcionÃ¡rios autorizada"
+msgstr "Esta pÃ¡gina Ã© restringida Ã  equipe de funcionÃ¡rios autorizada"
 
 #: ../admin/adm_add.php:46
 msgid "New member"
@@ -49,19 +49,19 @@ msgstr "Membro novo"
 #: ../admin/sql_users_list.php:95 ../admin/adm_list.php:76
 msgid "Username"
 msgstr ""
-"Nome do usÃºario"
+"Nome do usÃºario"
 
 #: ../admin/adm_add.php:58
 msgid "Initial password"
 msgstr "Senha inicial"
 
-#: ../admin/adm_add.php:62 ../admin/adm_edit.php:82 ../admin/ftp_add.php:57
-#: ../admin/ftp_edit.php:59 ../admin/hta_adduser.php:50
-#: ../admin/hta_edituser.php:50 ../admin/mail_add.php:51
-#: ../admin/mail_edit.php:60 ../admin/sql_users_add.php:62
-#, fuzzy
-msgid "Confirm password"
-msgstr "Senha inicial"
+#~ #: ../admin/adm_add.php:62 ../admin/adm_edit.php:82 ../admin/ftp_add.php:57
+#~ #: ../admin/ftp_edit.php:59 ../admin/hta_adduser.php:50
+#~ #: ../admin/hta_edituser.php:50 ../admin/mail_add.php:51
+#~ #: ../admin/mail_edit.php:60 ../admin/sql_users_add.php:62
+#~ #, fuzzy
+#~ msgid "Confirm password"
+#~ msgstr "Senha inicial"
 
 #: ../admin/adm_add.php:66 ../admin/adm_edit.php:86
 msgid "Can he change its password"
@@ -80,21 +80,21 @@ msgstr "Nome"
 #: ../admin/adm_add.php:82 ../admin/adm_edit.php:102 ../admin/adm_list.php:78
 #: ../admin/mail_add.php:48 ../admin/mail_list.php:88 ../admin/adm_list.php:76
 msgid "Email address"
-msgstr "EndereÃ§o email"
+msgstr "EndereÃ§o email"
 
-#: ../admin/adm_add.php:86 ../admin/adm_dodefquotas.php:43
-#: ../admin/adm_dodefquotas.php:45 ../admin/adm_dodefquotas.php:51
-#: ../admin/adm_dodefquotas.php:53 ../admin/adm_edit.php:106
-#: ../admin/adm_list.php:78 ../admin/adm_dodefquotas.php:52
-#: ../admin/adm_dodefquotas.php:54 ../admin/adm_list.php:76
-#, fuzzy
-msgid "Account type"
-msgstr "Conta Permitiu ?"
+#~ #: ../admin/adm_add.php:86 ../admin/adm_dodefquotas.php:43
+#~ #: ../admin/adm_dodefquotas.php:45 ../admin/adm_dodefquotas.php:51
+#~ #: ../admin/adm_dodefquotas.php:53 ../admin/adm_edit.php:106
+#~ #: ../admin/adm_list.php:78 ../admin/adm_dodefquotas.php:52
+#~ #: ../admin/adm_dodefquotas.php:54 ../admin/adm_list.php:76
+#~ #, fuzzy
+#~ msgid "Account type"
+#~ msgstr "Conta Permitiu ?"
 
-#: ../admin/adm_add.php:102
-#, php-format
-msgid "Create the domain <b>username.%s</b>"
-msgstr ""
+#~ #: ../admin/adm_add.php:102
+#~ #, php-format
+#~ msgid "Create the domain <b>username.%s</b>"
+#~ msgstr ""
 
 #: ../admin/adm_add.php:106 ../admin/adm_list.php:62 ../admin/adm_list.php:59
 msgid "Create a new member"
@@ -102,27 +102,27 @@ msgstr "Criar um membro novo"
 
 #: ../admin/adm_defquotas.php:43 ../admin/adm_panel.php:50
 msgid "Change the default quotas"
-msgstr "Mudar os quotas padrÃµes"
+msgstr "Mudar os quotas padrÃµes"
 
-#: ../admin/adm_defquotas.php:53
-#, fuzzy
-msgid "Add account type"
-msgstr "Nenhuma conta selecionada"
+#~ #: ../admin/adm_defquotas.php:53
+#~ #, fuzzy
+#~ msgid "Add account type"
+#~ msgstr "Nenhuma conta selecionada"
 
 #: ../admin/adm_defquotas.php:66
 #, fuzzy
 msgid "Delete account type"
 msgstr "Deletar as contas selecionadas"
 
-#: ../admin/adm_defquotas.php:70
-msgid ""
-"Here is the list of the quotas on the server for the new accounts. If you "
-"want to change them, enter new values"
-msgstr ""
+#~ #: ../admin/adm_defquotas.php:70
+#~ msgid ""
+#~ "Here is the list of the quotas on the server for the new accounts. If you "
+#~ "want to change them, enter new values"
+#~ msgstr ""
 
-#: ../admin/adm_defquotas.php:81 ../admin/adm_defquotas.php:84
-msgid "Accounts of type"
-msgstr ""
+#~ #: ../admin/adm_defquotas.php:81 ../admin/adm_defquotas.php:84
+#~ msgid "Accounts of type"
+#~ msgstr ""
 
 #: ../admin/adm_defquotas.php:83 ../admin/adm_list.php:97
 #: ../admin/quota_show_all.php:36 ../admin/adm_defquotas.php:86
@@ -130,14 +130,14 @@ msgstr ""
 msgid "Quotas"
 msgstr "Quotas"
 
-#: ../admin/adm_defquotas.php:83 ../admin/adm_defquotas.php:86
-msgid "Default Value"
-msgstr ""
+#~ #: ../admin/adm_defquotas.php:83 ../admin/adm_defquotas.php:86
+#~ msgid "Default Value"
+#~ msgstr ""
 
 #: ../admin/adm_defquotas.php:100 ../admin/adm_defquotas.php:109
 #, fuzzy
 msgid "Edit the default quotas"
-msgstr "Mudar os quotas padrÃµes"
+msgstr "Mudar os quotas padrÃµes"
 
 #: ../admin/adm_doadd.php:40 ../admin/adm_doedit.php:44
 #: ../admin/ftp_doadd.php:33 ../admin/ftp_doedit.php:36
@@ -161,26 +161,26 @@ msgstr ""
 #: ../admin/adm_dodefquotas.php:51 ../admin/adm_dodefquotas.php:52
 #, fuzzy
 msgid "deleted"
-msgstr "Suprimir"
+msgstr "suprimir"
 
 #: ../admin/adm_dodefquotas.php:53 ../admin/adm_dodefquotas.php:54
 #, fuzzy
 msgid "could not be deleted"
-msgstr "Algums TLD nÃ£o pode ser suprimidos..."
+msgstr "algums TLD nÃ£o pode ser suprimidos..."
 
 #: ../admin/adm_dodefquotas.php:69 ../admin/adm_dodefquotas.php:92
 msgid "Default quotas successfully changed"
-msgstr "Quotas padrÃµes foram mudados com sucesso"
+msgstr "Quotas padrÃµes foram mudados com sucesso"
 
-#: ../admin/adm_dodefquotas.php:71 ../admin/adm_dodefquotas.php:94
-#, fuzzy
-msgid "Default quotas could not be set."
-msgstr "Quotas padrÃµes foram mudados com sucesso"
+#~ #: ../admin/adm_dodefquotas.php:71 ../admin/adm_dodefquotas.php:94
+#~ #, fuzzy
+#~ msgid "Default quotas could not be set."
+#~ msgstr "Quotas padrÃµes foram mudados com sucesso"
 
 #: ../admin/adm_dodel.php:49
 #, php-format
 msgid "Member '%s' does not exist"
-msgstr "Membro '%s' nÃ£o existe"
+msgstr "Membro '%s' nÃ£o existe"
 
 #: ../admin/adm_dodel.php:51
 #, php-format
@@ -191,10 +191,10 @@ msgstr "Membro %s foi suprimido com sucesso"
 msgid "The member has been successfully edited"
 msgstr "O membro foi editado com sucesso"
 
-#: ../admin/adm_doms.php:41 ../admin/adm_panel.php:51
-#, fuzzy
-msgid "Manage installed domains"
-msgstr "Controla domÃ­nios permitidos (TLD)"
+#~ #: ../admin/adm_doms.php:41 ../admin/adm_panel.php:51
+#~ #, fuzzy
+#~ msgid "Manage installed domains"
+#~ msgstr "Controla domÃ­nios permitidos (TLD)"
 
 #: ../admin/adm_doms.php:51
 msgid ""
@@ -208,12 +208,12 @@ msgstr ""
 #: ../admin/adm_slaveaccount.php:71 ../admin/adm_slaveip.php:73
 #: ../admin/adm_tld.php:67 ../admin/mail_list.php:88 ../admin/adm_doms.php:58
 msgid "Action"
-msgstr "AÃ§Ã£o"
+msgstr "AÃ§Ã£o"
 
 #: ../admin/adm_doms.php:56 ../admin/adm_doms.php:58
 #, fuzzy
 msgid "Domain"
-msgstr "Domínios"
+msgstr "Domínios"
 
 #: ../admin/adm_doms.php:56 ../admin/adm_doms.php:58
 #, fuzzy
@@ -240,7 +240,7 @@ msgstr "O membro foi editado com sucesso"
 
 #: ../admin/adm_edit.php:51
 msgid "Member Edition"
-msgstr "EdiÃ§Ã£o do Membro"
+msgstr "EdiÃ§Ã£o do Membro"
 
 #: ../admin/adm_edit.php:65
 msgid "Account Enabled ?"
@@ -254,8 +254,7 @@ msgstr "Conta Permitiu ?"
 #: ../admin/dom_edit.php:158
 #, fuzzy
 msgid "No"
-msgstr ""
-"NÃ£o\n"
+msgstr "NÃ£o"
 
 #: ../admin/adm_edit.php:73 ../admin/dom_dodel.php:55
 #: ../admin/dom_edit.php:143 ../admin/dom_edit.php:156
@@ -296,14 +295,14 @@ msgstr ""
 msgid "period(s)"
 msgstr ""
 
-#: ../admin/adm_edit.php:140
-#, fuzzy
-msgid "Renew"
-msgstr "Rebatizar"
+#~ #: ../admin/adm_edit.php:140
+#~ #, fuzzy
+#~ msgid "Renew"
+#~ msgstr "Rebatizar"
 
 #: ../admin/adm_edit.php:153
 msgid "This account is a super-admin account"
-msgstr "Esta conta Ã© uma conta super-administrador"
+msgstr "Esta conta Ã© uma conta super-administrador"
 
 # msgid "Disable the database"
 # msgstr "Incapa
@@ -312,16 +311,16 @@ msgid ""
 "There is only one administrator account, you cannot turn this account back "
 "to normal"
 msgstr ""
-"VocÃª pode ter somente uma conta do administrador, vocÃª nÃ£o pode voltar "
+"VocÃª pode ter somente uma conta do administrador, vocÃª nÃ£o pode voltar "
 "esta conta ao normal"
 
 #: ../admin/adm_edit.php:158
 msgid "Turn this account back to normal"
-msgstr "Voltar esta conta Ã  normal"
+msgstr "Voltar esta conta Ã  normal"
 
 #: ../admin/adm_edit.php:161
 msgid "Make this account a super admin one"
-msgstr "Modificar esta conta Ã  uma conta do super admin"
+msgstr "Modificar esta conta Ã  uma conta do super admin"
 
 #: ../admin/adm_edit.php:169
 #, php-format
@@ -339,7 +338,7 @@ msgstr "Lista dos membros"
 
 #: ../admin/adm_list.php:53
 msgid "Here is the list of hosted members"
-msgstr "Aqui estÃ¡ a lista de membros hospedados"
+msgstr "Aqui estÃ¡ a lista de membros hospedados"
 
 #: ../admin/adm_list.php:56 ../admin/adm_list.php:55
 #, fuzzy
@@ -359,17 +358,17 @@ msgstr "Nenhuma conta selecionada"
 #: ../admin/adm_list.php:78 ../admin/adm_list.php:76
 #, fuzzy
 msgid "Last login"
-msgstr "Ãšltimo Login: "
+msgstr "Ãšltimo Login: "
 
-#: ../admin/adm_list.php:78 ../admin/adm_list.php:76
-#, fuzzy
-msgid "Last fail"
-msgstr "Administrador da lista"
+#~ #: ../admin/adm_list.php:78 ../admin/adm_list.php:76
+#~ #, fuzzy
+#~ msgid "Last fail"
+#~ msgstr "Administrador da lista"
 
-#: ../admin/adm_list.php:78 ../admin/adm_list.php:76
-#, fuzzy
-msgid "Last ip"
-msgstr "Ãšltimo Login: "
+#~ #: ../admin/adm_list.php:78 ../admin/adm_list.php:76
+#~ #, fuzzy
+#~ msgid "Last ip"
+#~ msgstr "Ãšltimo Login: "
 
 #: ../admin/adm_list.php:78 ../admin/main.php:55 ../admin/adm_list.php:76
 msgid "Expiry"
@@ -394,17 +393,17 @@ msgstr "Conectar como"
 #: ../admin/adm_list.php:153 ../admin/adm_list.php:174
 #: ../admin/adm_list.php:199
 msgid "E"
-msgstr ""
+msgstr "E"
 
 #: ../admin/adm_list.php:154 ../admin/adm_list.php:175
 #: ../admin/adm_list.php:200
 msgid "Q"
-msgstr ""
+msgstr "Q"
 
 #: ../admin/adm_list.php:160 ../admin/adm_list.php:182
 #: ../admin/adm_list.php:206
 msgid "C"
-msgstr ""
+msgstr "C"
 
 #: ../admin/adm_list.php:218 ../admin/ftp_list.php:77
 msgid "Delete checked accounts"
@@ -469,7 +468,7 @@ msgstr "Painel de controle do Administrador"
 #: ../admin/adm_panel.php:49 ../admin/adm_tldadd.php:41
 #: ../admin/adm_tldedit.php:48 ../admin/adm_tld.php:52
 msgid "Manage allowed domains (TLD)"
-msgstr "Controla domÃ­nios permitidos (TLD)"
+msgstr "Controla domÃ­nios permitidos (TLD)"
 
 #: ../admin/adm_panel.php:52 ../admin/adm_slaveip.php:57
 msgid "Manage allowed ip for slave zone transfers"
@@ -513,7 +512,7 @@ msgstr "Usado(s)"
 #: ../class/m_quota.php:105 ../class/m_quota.php:109
 #, fuzzy
 msgid "quota_"
-msgstr "Nome dos Domínios"
+msgstr "Nome dos Domínios"
 
 #: ../admin/adm_quotaedit.php:76
 msgid "Edit the quotas"
@@ -552,10 +551,10 @@ msgid ""
 "offices such as afnic (for .fr domains)"
 msgstr ""
 
-#: ../admin/adm_slaveip.php:73 ../admin/adm_slaveip.php:92
-#, fuzzy
-msgid "IP Address"
-msgstr "EndereÃ§o email"
+#~ #: ../admin/adm_slaveip.php:73 ../admin/adm_slaveip.php:92
+#~ #, fuzzy
+#~ msgid "IP Address"
+#~ msgstr "EndereÃ§o email"
 
 #: ../admin/adm_slaveip.php:89
 msgid ""
@@ -570,7 +569,7 @@ msgstr ""
 #: ../admin/adm_slaveip.php:98
 #, fuzzy
 msgid "Add this ip to the slave list"
-msgstr "AdiÃ§ionar um email ao domÃ­nio %s"
+msgstr "AdiÃ§ionar um email ao domÃ­nio %s"
 
 #: ../admin/adm_tldadd.php:49 ../admin/adm_tldadd.php:62
 #: ../admin/adm_tld.php:85
@@ -582,7 +581,7 @@ msgid ""
 "Enter the new TLD (without the first dot) and choose what check should be "
 "done."
 msgstr ""
-"Entrar um novo TLD (sem o primeiro ponto) e escolher que verificaÃ§Ã£o deve "
+"Entrar um novo TLD (sem o primeiro ponto) e escolher que verificaÃ§Ã£o deve "
 "ser feita."
 
 #: ../admin/adm_tldadd.php:52
@@ -591,7 +590,7 @@ msgid ""
 "Warning : only some final tld are known in the whois function of AlternC, "
 "please check m_dom.php accordingly."
 msgstr ""
-"Aviso: somente algums tld estam conhecedos na funÃ§Ã£o whois do AlternC, por "
+"Aviso: somente algums tld estam conhecedos na funÃ§Ã£o whois do AlternC, por "
 "favor verificar em m_domains.php conformente."
 
 #: ../admin/adm_tldadd.php:58 ../admin/adm_tldedit.php:58
@@ -606,7 +605,7 @@ msgstr "Modalidade Permitida"
 
 #: ../admin/adm_tlddoadd.php:42
 msgid "The TLD has been successfully added"
-msgstr "O TLD foi adiÃ§ionado com sucesso"
+msgstr "O TLD foi adiÃ§ionado com sucesso"
 
 #: ../admin/adm_tlddoedit.php:42
 msgid "The TLD has been successfully edited"
@@ -622,7 +621,7 @@ msgstr "Editar este TLD"
 
 #: ../admin/adm_tld.php:41
 msgid "Some TLD cannot be deleted..."
-msgstr "Algums TLD nÃ£o pode ser suprimidos..."
+msgstr "Algums TLD nÃ£o pode ser suprimidos..."
 
 #: ../admin/adm_tld.php:44
 msgid "The requested TLD has been deleted"
@@ -633,8 +632,8 @@ msgid ""
 "Here is the list of the TLD allowed on this server. Each TLD can be allowed "
 "or denied after some checks (whois, ns, domain exists...)"
 msgstr ""
-"Aqui estÃ¡ a lista do TLD permitido neste servidor. Cada TLD pode ser "
-"permitido ou negado apÃ³s algumas verifcaÃ§Ãµes (whois, ns, domÃ­nio existir) "
+"Aqui estÃ¡ a lista do TLD permitido neste servidor. Cada TLD pode ser "
+"permitido ou negado apÃ³s algumas verifcaÃ§Ãµes (whois, ns, domÃ­nio existir) "
 
 #: ../admin/adm_tld.php:77
 #, fuzzy
@@ -672,7 +671,7 @@ msgstr "Seu arquivo %s foi salvado com sucesso"
 
 #: ../admin/bro_editor.php:60
 msgid "File editing"
-msgstr "EdiÃ§Ã£o de arquivo"
+msgstr "EdiÃ§Ã£o de arquivo"
 
 #: ../admin/bro_editor.php:67
 msgid "Save"
@@ -754,7 +753,7 @@ msgstr "Mandar"
 
 #: ../admin/bro_main.php:397 ../admin/bro_main.php:435
 msgid "There is an ftp account in this folder"
-msgstr "HÃ¡ uma conta ftp nesta pasta"
+msgstr "HÃ¡ uma conta ftp nesta pasta"
 
 #: ../admin/bro_main.php:397 ../admin/bro_main.php:435
 #, fuzzy
@@ -780,7 +779,7 @@ msgstr "Abaixar"
 
 #: ../admin/bro_main.php:411 ../admin/bro_main.php:449
 msgid "this folder and its subfolders as a compressed file"
-msgstr "esta pasta e as secondÃ¡rias-pastas como um arquivo comprimido"
+msgstr "esta pasta e as secondÃ¡rias-pastas como um arquivo comprimido"
 
 #: ../admin/bro_main.php:412 ../admin/bro_main.php:450
 msgid "Configure the file browser"
@@ -788,11 +787,11 @@ msgstr "Configurar o navegador de arquivo"
 
 #: ../admin/bro_pref.php:34
 msgid "Your preferences have been updated."
-msgstr "Suas preferÃªncias foram atualizadas."
+msgstr "Suas preferÃªncias foram atualizadas."
 
 #: ../admin/bro_pref.php:45 ../admin/bro_pref.php:49
 msgid "File editor preferences"
-msgstr "PreferÃªncias do editor de arquivos"
+msgstr "PreferÃªncias do editor de arquivos"
 
 #: ../admin/bro_pref.php:50
 msgid "Horizontal window size"
@@ -812,7 +811,7 @@ msgstr "Tamanho de fonte do navegador de arquivos"
 
 #: ../admin/bro_pref.php:86
 msgid "File browser preferences"
-msgstr "PreferÃªncias do navegador de arquivos"
+msgstr "PreferÃªncias do navegador de arquivos"
 
 #: ../admin/bro_pref.php:87
 msgid "File list view"
@@ -824,11 +823,11 @@ msgstr "Abaixando o formate de arquivo"
 
 #: ../admin/bro_pref.php:103
 msgid "What to do after creating a file"
-msgstr "Que a fazer apÃ³s ter criado um arquivo"
+msgstr "Que a fazer apÃ³s ter criado um arquivo"
 
 #: ../admin/bro_pref.php:111
 msgid "Show icons?"
-msgstr "Mostrar Ã­cones?"
+msgstr "Mostrar Ã­cones?"
 
 #: ../admin/bro_pref.php:119
 msgid "Show file types?"
@@ -836,7 +835,7 @@ msgstr "Mostrar tipos e arquivos?"
 
 #: ../admin/bro_pref.php:127
 msgid "Remember last visited directory?"
-msgstr "Recordar o Ãºltimo diretÃ³rio visitado?"
+msgstr "Recordar o Ãºltimo diretÃ³rio visitado?"
 
 #: ../admin/bro_pref.php:137
 msgid "Change my settings"
@@ -871,24 +870,24 @@ msgstr ""
 
 #: ../admin/dom_add.php:38
 msgid "Domain hosting"
-msgstr "Hospedagem do Domínio"
+msgstr "Hospedagem do Domínio"
 
 #: ../admin/dom_add.php:41
 msgid "You cannot add any new domain, your quota is over."
-msgstr "Você não pode adiçionr mais domínios, sua quota acabou."
+msgstr "Você não pode adiçionr mais domínios, sua quota acabou."
 
 #: ../admin/dom_add.php:41
 msgid "Contact your administrator for more information."
-msgstr "Contatar seu administrador para mais informação."
+msgstr "Contatar seu administrador para mais informação."
 
 #: ../admin/dom_add.php:49 ../admin/sta2_add_raw.php:50
 #: ../admin/sta2_edit_raw.php:55 ../admin/sta2_list.php:57
 msgid "Domain name"
-msgstr "Nome do Domínio"
+msgstr "Nome do Domínio"
 
 #: ../admin/dom_add.php:50
 msgid "Add this domain"
-msgstr "Adiçionar este domínio"
+msgstr "Adiçionar este domínio"
 
 #: ../admin/dom_add.php:54
 msgid "host my dns here"
@@ -899,22 +898,22 @@ msgid ""
 "If you don't want to host in our server the DNS of your domain, don't check "
 "the box 'host my dns here'. If you don't know what it mean, leave it checked."
 msgstr ""
-"Se você não quiser hospedar o DNS em nosso servidor, não seleciona a caixa "
-"'hospedar meu DNS aqui'. Se você não sabe o que significa, deixá-lo "
+"Se você não quiser hospedar o DNS em nosso servidor, não seleciona a caixa "
+"'hospedar meu DNS aqui'. Se você não sabe o que significa, deixá-lo "
 "selecionado."
 
 #: ../admin/dom_add.php:63 ../admin/dom_doadd.php:54
 msgid "Whois result on the domain"
-msgstr "Resultado Whois deste domínio"
+msgstr "Resultado Whois deste domínio"
 
 #: ../admin/dom_doadd.php:46 ../admin/menu_dom.php:38
 msgid "Add a domain"
-msgstr "Adiçionar um domínio"
+msgstr "Adiçionar um domínio"
 
 #: ../admin/dom_doadd.php:48
 #, php-format
 msgid "Your new domain %s has been successfully installed"
-msgstr "Seu domínio %s foi instalado com sucesso"
+msgstr "Seu domínio %s foi instalado com sucesso"
 
 #: ../admin/dom_doadd.php:49 ../admin/dom_dodel.php:69
 #: ../admin/dom_editdns.php:57 ../admin/hta_doedituser.php:53
@@ -925,7 +924,7 @@ msgstr "Clicar aqui para continuar"
 #: ../admin/dom_dodel.php:48 ../admin/dom_dodel.php:49
 #, php-format
 msgid "Confirm the deletion of domain %s"
-msgstr "Confirma o apagamento deste domínio %s"
+msgstr "Confirma o apagamento deste domínio %s"
 
 #: ../admin/dom_dodel.php:49 ../admin/sql_del.php:54
 #: ../admin/sql_users_del.php:54
@@ -934,22 +933,22 @@ msgstr "AVISO"
 
 #: ../admin/dom_dodel.php:50
 msgid "This will delete the related sub-domains too."
-msgstr "Isto suprimirá os secundário-domínios relacionados tambem."
+msgstr "Isto suprimirá os secundário-domínios relacionados tambem."
 
 #: ../admin/dom_dodel.php:66
 #, php-format
 msgid "Domain %s deleted"
-msgstr "Domínio %s suprimido"
+msgstr "Domínio %s suprimido"
 
 #: ../admin/dom_dodel.php:68
 #, php-format
 msgid "The domain %s has been successfully deleted."
-msgstr "O domínio %s foi suprimido com sucesso."
+msgstr "O domínio %s foi suprimido com sucesso."
 
 #: ../admin/dom_editdns.php:54 ../admin/dom_edit.php:58
 #, php-format
 msgid "Editing domain %s"
-msgstr "Editando o domínio %s"
+msgstr "Editando o domínio %s"
 
 #: ../admin/dom_editdns.php:56
 #, php-format
@@ -957,21 +956,21 @@ msgid ""
 "The domain %s has been changed. The modifications will take effect in 5 "
 "minutes."
 msgstr ""
-"O domínio %s foi modificado. As modificações estarão atualizadas em 5 "
+"O domínio %s foi modificado. As modificações estarão atualizadas em 5 "
 "minutos."
 
 #: ../admin/dom_edit.php:68
 msgid "Subdomains"
-msgstr "Secundário-domínios"
+msgstr "Secundário-domínios"
 
 #: ../admin/dom_edit.php:93
 #, fuzzy
 msgid "Create a subdomain:"
-msgstr "Adiçionar um secundário-domínio"
+msgstr "Adiçionar um secundário-domínio"
 
 #: ../admin/dom_edit.php:95
 msgid "Add a subdomain"
-msgstr "Adiçionar um secundário-domínio"
+msgstr "Adiçionar um secundário-domínio"
 
 #: ../admin/dom_edit.php:99 ../admin/dom_subedit.php:62
 msgid "Locally managed"
@@ -979,11 +978,11 @@ msgstr "Controlado localemente"
 
 #: ../admin/dom_edit.php:110 ../admin/dom_subedit.php:73
 msgid "URL redirection"
-msgstr "Redireção URL"
+msgstr "Redireção URL"
 
 #: ../admin/dom_edit.php:116 ../admin/dom_subedit.php:78
 msgid "IP redirection"
-msgstr "Redireção IP"
+msgstr "Redireção IP"
 
 #: ../admin/dom_edit.php:122 ../admin/dom_subedit.php:83
 #: ../class/m_dom.php:551 ../class/m_dom.php:594 ../class/m_dom.php:559
@@ -992,7 +991,7 @@ msgstr "Acesso Webmail"
 
 #: ../admin/dom_edit.php:138
 msgid "DNS parameters"
-msgstr "Parâmetros DNS"
+msgstr "Parâmetros DNS"
 
 #: ../admin/dom_edit.php:141
 msgid "Manage the DNS on the server ?"
@@ -1002,12 +1001,12 @@ msgstr "Administrar o DNS neste servidor ?"
 #, php-format
 msgid "help_dns_mx %s %s"
 msgstr ""
-"Se nós controlamos seu DNS <br />Você pode controlar seu correios em outra "
-"parte se você quiser (campo MX).<br />Escreve <b><code>%s</code></b> neste "
+"Se nós controlamos seu DNS <br />Você pode controlar seu correios em outra "
+"parte se você quiser (campo MX).<br />Escreve <b><code>%s</code></b> neste "
 "campo se seus correios devem ser controlados por %s<br />ou coloca o "
-"endereço IP ou nome do servidor de email usado para controlar seus correios."
-"<small>Aviso: Se você não coloca nada neste campo, seus correios serão "
-"inacessívels</small>"
+"endereço IP ou nome do servidor de email usado para controlar seus correios."
+"<small>Aviso: Se você não coloca nada neste campo, seus correios serão "
+"inacessívels</small>"
 
 #: ../admin/dom_edit.php:151 ../admin/dom_edit.php:153
 msgid "MX Field"
@@ -1016,19 +1015,19 @@ msgstr "Campo MX"
 #: ../admin/dom_edit.php:155 ../admin/dom_edit.php:157
 msgid "help_dns_mail"
 msgstr ""
-"Se nós não controlamos o DNS deste domínio <br />controlamos seus correios?"
+"Se nós não controlamos o DNS deste domínio <br />controlamos seus correios?"
 
 #: ../admin/dom_edit.php:159 ../admin/dom_edit.php:161
 msgid "Submit the changes"
-msgstr "Submeter as mudanças"
+msgstr "Submeter as mudanças"
 
 #: ../admin/dom_edit.php:167 ../admin/dom_edit.php:169
 #, php-format
 msgid "help_domain_del %s"
 msgstr ""
-"Se você quiser suprimir o domínio %s, clica a tecla abaixo.Aviso : isto "
-"suprimirá todo o ftp, correios, envi-listas ... associadas com estedomínio e "
-"os sécondarios domínios dele"
+"Se você quiser suprimir o domínio %s, clica a tecla abaixo.Aviso : isto "
+"suprimirá todo o ftp, correios, envi-listas ... associadas com estedomínio e "
+"os sécondarios domínios dele"
 
 #: ../admin/dom_edit.php:170 ../admin/dom_edit.php:172
 #, php-format
@@ -1038,20 +1037,20 @@ msgstr "Deleter %s"
 #: ../admin/dom_subdel.php:42
 #, php-format
 msgid "Deleting subdomain %s"
-msgstr "Suprimando o secundário-domínio %s"
+msgstr "Suprimando o secundário-domínio %s"
 
 #: ../admin/dom_subdel.php:57
 msgid "WARNING : Confirm the deletion of the subdomain"
-msgstr "AVISO : Confirmar o apagamento do secundário-domínio"
+msgstr "AVISO : Confirmar o apagamento do secundário-domínio"
 
 #: ../admin/dom_subdoedit.php:53
 msgid "The modifications will take effect in 5 minutes."
-msgstr "As modificações estaram actualizadas em 5 minutos."
+msgstr "As modificações estaram actualizadas em 5 minutos."
 
 #: ../admin/ftp_add.php:33
 #, fuzzy
 msgid "You cannot add any new ftp account, your quota is over."
-msgstr "Você não pode adiçionr mais domínios, sua quota acabou."
+msgstr "Você não pode adiçionr mais domínios, sua quota acabou."
 
 #: ../admin/ftp_add.php:40 ../admin/ftp_list.php:47 ../admin/ftp_list.php:83
 msgid "Create a new ftp account"
@@ -1059,7 +1058,7 @@ msgstr "Criar uma nova conta ftp"
 
 #: ../admin/ftp_add.php:65
 msgid "Create this new FTP account."
-msgstr "Criar está nova conta FTP."
+msgstr "Criar está nova conta FTP."
 
 #: ../admin/ftp_del.php:42
 #, php-format
@@ -1171,7 +1170,7 @@ msgstr "New password"
 
 #: ../admin/hta_edituser.php:51 ../admin/sql_passchg.php:55
 msgid "Change the password"
-msgstr "Mudança da senha SQL"
+msgstr "Mudança da senha SQL"
 
 #: ../admin/hta_list.php:43
 msgid "Protected folders list"
@@ -1187,13 +1186,13 @@ msgstr "Unprotect the checked folders"
 
 #: ../admin/index.php:48
 msgid "Administration of"
-msgstr "AdministraÃ§Ã£o do"
+msgstr "AdministraÃ§Ã£o do"
 
 #: ../admin/index.php:50
 #, fuzzy
 msgid "Enter your username and password to connect to the virtual desktop"
 msgstr ""
-"Entrar seu nome do usÃºario e sua senha para conectar Ã  interface desktop "
+"Entrar seu nome do usÃºario e sua senha para conectar Ã  interface desktop "
 "virtual"
 
 #: ../admin/index.php:56
@@ -1207,13 +1206,13 @@ msgstr ""
 
 #: ../admin/index.php:64
 msgid "You must accept the session cookie to log-in"
-msgstr "VocÃª precisa aceitar o cookie da sessÃ£o para o login"
+msgstr "VocÃª precisa aceitar o cookie da sessÃ£o para o login"
 
 #: ../admin/index.php:66
 #, fuzzy
 msgid "You can use a different language: "
 msgstr ""
-"Se vocÃª quiser usar uma lingua diferente, clicar sobre a bandeira abaixo"
+"Se vocÃª quiser usar uma lingua diferente, clicar sobre a bandeira abaixo"
 
 #: ../admin/index.php:74
 msgid "AlternC, Opensource hosting control panel"
@@ -1222,11 +1221,11 @@ msgstr ""
 #: ../admin/mail_add.php:37
 #, php-format
 msgid "Add a mail to the domain %s"
-msgstr "AdiÃ§ionar um email ao domÃ­nio %s"
+msgstr "AdiÃ§ionar um email ao domÃ­nio %s"
 
 #: ../admin/mail_add.php:49 ../admin/mail_edit.php:58
 msgid "Is it a POP account?"
-msgstr "Ã‰ uma conta POP?"
+msgstr "Ã‰ uma conta POP?"
 
 #: ../admin/mail_add.php:50 ../admin/mail_edit.php:59
 msgid "POP password"
@@ -1257,14 +1256,7 @@ msgstr "Suprimir uma conta FTP"
 #, fuzzy
 msgid "Please confirm the deletion of the following mail accounts:"
 msgstr ""
-"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
-"$)  #-#-#-#-#\n"
 "Confirma o apagemento das bases de dados seguintes\n"
-"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
-"$)  #-#-#-#-#\n"
-"Confirma o apagamento das bases de dados SQL seguintes\n"
-"#-#-#-#-#  sql.po  #-#-#-#-#\n"
-"Confirma o apagamento das bases de dados SQL seguintes"
 
 #: ../admin/mail_del.php:57 ../admin/mail_list.php:107
 msgid "Delete the selected mailboxes"
@@ -1282,7 +1274,7 @@ msgstr "A caixa de email <b>%s</b> foi criado com sucesso"
 #: ../admin/mail_dodel.php:48
 #, php-format
 msgid "The mailbox <b>%s</b> does not exist!"
-msgstr "A caixa de email <b>%s</b> nÃ£o existe!"
+msgstr "A caixa de email <b>%s</b> nÃ£o existe!"
 
 #: ../admin/mail_dodel.php:51
 #, fuzzy, php-format
@@ -1292,7 +1284,7 @@ msgstr "A caixa de email <b>%s</b> foi criado com sucesso"
 #: ../admin/mail_dodel.php:60
 #, fuzzy
 msgid "Back to the mail account list"
-msgstr "NÃºmero de contas do email"
+msgstr "NÃºmero de contas do email"
 
 #: ../admin/mail_doedit.php:46
 #, php-format
@@ -1302,7 +1294,7 @@ msgstr "A caixa de email <b>%s</b> foi mudado com sucesso"
 #: ../admin/mail_edit.php:41
 #, php-format
 msgid "Edit a mailbox of the domain %s"
-msgstr "Editar a caixa de email do domÃ­nio %s"
+msgstr "Editar a caixa de email do domÃ­nio %s"
 
 #: ../admin/mail_edit.php:57
 #, php-format
@@ -1317,22 +1309,22 @@ msgstr "Mudar esta caixa de email"
 #, fuzzy
 msgid "help_mail_edit"
 msgstr ""
-"Se nós não controlamos o DNS deste domínio <br />controlamos seus correios?"
+"Se nós não controlamos o DNS deste domínio <br />controlamos seus correios?"
 
 #: ../admin/mail_list.php:42 ../admin/mail_list.php:60
 #, php-format
 msgid "Mailbox list of the domain %s"
-msgstr "Lista de caixas de email do domÃ­nio %s"
+msgstr "Lista de caixas de email do domÃ­nio %s"
 
 #: ../admin/mail_list.php:47 ../admin/mail_list.php:66
 #, php-format
 msgid "Add a mailbox on <b>%s</b>"
-msgstr "AdiÃ§ionar a caixa de email em <b>%s</b>"
+msgstr "AdiÃ§ionar a caixa de email em <b>%s</b>"
 
 #: ../admin/mail_list.php:48 ../admin/mail_list.php:67
 #, fuzzy, php-format
 msgid "Add many mailboxes on <b>%s</b>"
-msgstr "AdiÃ§ionar a caixa de email em <b>%s</b>"
+msgstr "AdiÃ§ionar a caixa de email em <b>%s</b>"
 
 #: ../admin/mail_list.php:76
 #, php-format
@@ -1345,7 +1337,7 @@ msgstr "Tamanho"
 
 #: ../admin/main.php:38
 msgid "Last Login: "
-msgstr "Ãšltimo Login: "
+msgstr "Ãšltimo Login: "
 
 #: ../admin/main.php:41
 #, php-format
@@ -1355,7 +1347,7 @@ msgstr "do: <code> %1$s </code>"
 #: ../admin/main.php:44
 #, php-format
 msgid "%1$d login failed since last login"
-msgstr "%1$d login falharam desde o Ãºltimo login"
+msgstr "%1$d login falharam desde o Ãºltimo login"
 
 #: ../admin/main.php:53
 msgid "Expired or about to expire accounts"
@@ -1373,16 +1365,12 @@ msgstr ""
 #, fuzzy
 msgid "Your administrator preferences has been successfully changed."
 msgstr ""
-"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
-"$)  #-#-#-#-#\n"
-"Seus parâmetros de backup foram mudados com sucesso\n"
-"#-#-#-#-#  sql.po  #-#-#-#-#\n"
-"Seus parÃ¢metros de backup foram mudados com sucesso"
+"Seus parÃ¢metros de backup foram mudados com sucesso"
 
 #: ../admin/mem_admin.php:42 ../admin/mem_param.php:98
 #, fuzzy
 msgid "Admin preferences"
-msgstr "PreferÃªncias do editor de arquivos"
+msgstr "PreferÃªncias do editor de arquivos"
 
 #: ../admin/mem_chgmail.php:40 ../admin/mem_cm2.php:41 ../admin/mem_cm.php:37
 #: ../admin/mem_cm.php:47 ../admin/mem_param.php:75
@@ -1429,7 +1417,7 @@ msgstr "Clicar aqui para continuar"
 #: ../admin/mem_param.php:36
 #, fuzzy
 msgid "Your help setting has been updated."
-msgstr "Suas preferÃªncias foram atualizadas."
+msgstr "Suas preferÃªncias foram atualizadas."
 
 #: ../admin/mem_param.php:42
 #, fuzzy
@@ -1443,7 +1431,7 @@ msgstr "Senha"
 
 #: ../admin/mem_param.php:55
 msgid "You cannot change your password"
-msgstr "VocÃª nÃ£o pode mudar sua senha"
+msgstr "VocÃª nÃ£o pode mudar sua senha"
 
 #: ../admin/mem_param.php:60
 msgid "help_chg_passwd"
@@ -1512,7 +1500,7 @@ msgstr ""
 #: ../admin/mem_param.php:106
 #, fuzzy
 msgid "Change my admin preferences"
-msgstr "PreferÃªncias do editor de arquivos"
+msgstr "PreferÃªncias do editor de arquivos"
 
 #: ../admin/mem_passwd.php:35 ../admin/sql_pass.php:38
 msgid "Your password has been successfully changed."
@@ -1532,7 +1520,7 @@ msgstr "Ajuda online"
 
 #: ../admin/menu_dom.php:36
 msgid "Domains"
-msgstr "Domínios"
+msgstr "Domínios"
 
 #: ../admin/menu_ftp.php:36
 msgid "FTP accounts"
@@ -1563,45 +1551,23 @@ msgstr ""
 #, fuzzy
 msgid "MySQL Users"
 msgstr ""
-"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
-"$)  #-#-#-#-#\n"
-"Base de Dados MySQL\n"
-"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
-"$)  #-#-#-#-#\n"
-"Base de dados MySQL\n"
-"#-#-#-#-#  sql.po  #-#-#-#-#\n"
 "Bases de dados MySQL"
 
 #: ../admin/menu_sql.php:36
 #, fuzzy
 msgid "Databases"
 msgstr ""
-"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
-"$)  #-#-#-#-#\n"
-"Bases de Dados\n"
-"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
-"$)  #-#-#-#-#\n"
-"Bases de dados\n"
-"#-#-#-#-#  sql.po  #-#-#-#-#\n"
 "Bases de dados"
 
 #: ../admin/menu_sql.php:37 ../admin/sql_admin.php:47
 #, fuzzy
 msgid "SQL Admin"
-msgstr ""
-"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
-"$)  #-#-#-#-#\n"
-"SQL Admin\n"
-"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
-"$)  #-#-#-#-#\n"
-"Admin SQL\n"
-"#-#-#-#-#  sql.po  #-#-#-#-#\n"
-"Admin SQL"
+msgstr "Admin SQL"
 
 #: ../admin/menu_sta2.php:37
 #, fuzzy
 msgid "Raw web statistics"
-msgstr "NÃºmero de statisticas Web"
+msgstr "NÃºmero de statisticas Web"
 
 #: ../admin/menu_web.php:34
 msgid "Protected folders"
@@ -1623,26 +1589,12 @@ msgstr "Sua base de dados foi criado com sucesso"
 #, fuzzy
 msgid "err_mysql_1"
 msgstr ""
-"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
-"$)  #-#-#-#-#\n"
-"Nenhuma base de dados disponÃ­vel.\n"
-"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
-"$)  #-#-#-#-#\n"
-"Sua quota está completo, você não pode criar mais bases de dados.\n"
-"#-#-#-#-#  sql.po  #-#-#-#-#\n"
-"Sua quota estÃ¡ completo, vocÃª nÃ£o pode criar mais bases de dados."
+"Sua quota estÃ¡ completo, vocÃª nÃ£o pode criar mais bases de dados."
 
 #: ../admin/sql_add.php:41 ../admin/sql_list.php:82
 #, fuzzy
 msgid "Create a new database"
 msgstr ""
-"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
-"$)  #-#-#-#-#\n"
-"Criar uma base de dados\n"
-"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
-"$)  #-#-#-#-#\n"
-"Criar uma nova base de dados\n"
-"#-#-#-#-#  sql.po  #-#-#-#-#\n"
 "Criar uma nova base de dados"
 
 #: ../admin/sql_add.php:53 ../admin/sql_getparam.php:52
@@ -1655,13 +1607,6 @@ msgstr "Base de dados"
 #, fuzzy
 msgid "Create this new database."
 msgstr ""
-"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
-"$)  #-#-#-#-#\n"
-"Criar esta base de dados\n"
-"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
-"$)  #-#-#-#-#\n"
-"Criar esta nova base de dados.\n"
-"#-#-#-#-#  sql.po  #-#-#-#-#\n"
 "Criar esta nova base de dados."
 
 #: ../admin/sql_bck.php:40 ../admin/sql_del.php:53
@@ -1671,13 +1616,6 @@ msgstr ""
 #, fuzzy
 msgid "MySQL Databases"
 msgstr ""
-"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
-"$)  #-#-#-#-#\n"
-"Base de Dados MySQL\n"
-"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
-"$)  #-#-#-#-#\n"
-"Base de dados MySQL\n"
-"#-#-#-#-#  sql.po  #-#-#-#-#\n"
 "Bases de dados MySQL"
 
 #: ../admin/sql_bck.php:48
@@ -1689,13 +1627,6 @@ msgstr "Administrar o backup SQL para a base de dados %s"
 #, fuzzy
 msgid "Do sql backup?"
 msgstr ""
-"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
-"$)  #-#-#-#-#\n"
-"FrequÃªncia de Backup:\n"
-"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
-"$)  #-#-#-#-#\n"
-"Fazer backup SQL?\n"
-"#-#-#-#-#  sql.po  #-#-#-#-#\n"
 "Fazer backup SQL?"
 
 #: ../admin/sql_bck.php:57
@@ -1710,129 +1641,62 @@ msgstr "Backup semanal"
 #, fuzzy
 msgid "Daily backup"
 msgstr ""
-"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
-"$)  #-#-#-#-#\n"
-"Backup diÃ¡rio\n"
-"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
-"$)  #-#-#-#-#\n"
-"Backup diário\n"
-"#-#-#-#-#  sql.po  #-#-#-#-#\n"
-"Backup diÃ¡rio"
+"Backup diÃ¡rio"
 
 #: ../admin/sql_bck.php:63
 #, fuzzy
 msgid "How many backup should be kept?"
 msgstr ""
-"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
-"$)  #-#-#-#-#\n"
-"Quanto tempo vocÃª quer os manter (dia/semanas)?\n"
-"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
-"$)  #-#-#-#-#\n"
-"Quantos backups devem ser mantidos?\n"
-"#-#-#-#-#  sql.po  #-#-#-#-#\n"
 "Quantos backups devem ser mantidos?"
 
 #: ../admin/sql_bck.php:75
 #, fuzzy
 msgid "Compress the backups? (gzip)"
 msgstr ""
-"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
-"$)  #-#-#-#-#\n"
-"VocÃª quiser compresser os backups? (gzip)\n"
-"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
-"$)  #-#-#-#-#\n"
-"Você quiser compresser os backups? (gzip)\n"
-"#-#-#-#-#  sql.po  #-#-#-#-#\n"
-"VocÃª quiser compresser os backups? (gzip)"
+"VocÃª quiser compresser os backups? (gzip)"
 
 #: ../admin/sql_bck.php:82
 #, fuzzy
 msgid "In which folder do you want to store the backups?"
 msgstr ""
-"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
-"$)  #-#-#-#-#\n"
-"Que pasta vocÃª quiser usar para salvar seus backups?\n"
-"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
-"$)  #-#-#-#-#\n"
-"Que pasta você quiser usar para salvar seus backups?\n"
-"#-#-#-#-#  sql.po  #-#-#-#-#\n"
-"Que pasta vocÃª quiser usar para salvar seus backups?"
+"Que pasta vocÃª quiser usar para salvar seus backups?"
 
 #: ../admin/sql_bck.php:92
 #, fuzzy
 msgid "Change the SQL backup parameters"
 msgstr ""
-"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
-"$)  #-#-#-#-#\n"
-"Modificar os ajustes de backup SQL\n"
-"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
-"$)  #-#-#-#-#\n"
-"Mudar os parâmetros SQL atuais\n"
-"#-#-#-#-#  sql.po  #-#-#-#-#\n"
-"Mudar os parÃ¢metros SQL atuais"
+"Mudar os parÃ¢metros SQL atuais"
 
 #: ../admin/sql_bck.php:101 ../admin/sql_dorestore.php:55
 #: ../admin/sql_restore.php:69 ../admin/sql_restore.php:97
 #, fuzzy
 msgid "You currently have no database defined"
 msgstr ""
-"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
-"$)  #-#-#-#-#\n"
-"VocÃª ainda nÃ£o tem nenhuma base de dados\n"
-"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
-"$)  #-#-#-#-#\n"
-"Você não tem nenhuma base de dados definida\n"
-"#-#-#-#-#  sql.po  #-#-#-#-#\n"
-"VocÃª nÃ£o tem nenhuma base de dados definida"
+"VocÃª nÃ£o tem nenhuma base de dados definida"
 
 #: ../admin/sql_del.php:41
 #, fuzzy, php-format
 msgid "The database %s has been successfully deleted"
 msgstr ""
-"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
-"$)  #-#-#-#-#\n"
-"A base de dados '%s' foi suprimido com sucesso\n"
-"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
-"$)  #-#-#-#-#\n"
-"A base de dados %s foi suprimido com sucesso\n"
-"#-#-#-#-#  sql.po  #-#-#-#-#\n"
 "A base de dados %s foi suprimido com sucesso"
 
 #: ../admin/sql_del.php:54
 #, fuzzy
 msgid "Confirm the deletion of the following SQL databases"
 msgstr ""
-"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
-"$)  #-#-#-#-#\n"
-"Confirma o apagemento das bases de dados seguintes\n"
-"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
-"$)  #-#-#-#-#\n"
-"Confirma o apagamento das bases de dados SQL seguintes\n"
-"#-#-#-#-#  sql.po  #-#-#-#-#\n"
 "Confirma o apagamento das bases de dados SQL seguintes"
 
 #: ../admin/sql_del.php:55
 #, fuzzy
 msgid "This will delete all the tables currently in those db."
 msgstr ""
-"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
-"$)  #-#-#-#-#\n"
-"Isto suprimirÃ¡ todas as tabelas atualmente na base de dados.\n"
-"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
-"$)  #-#-#-#-#\n"
-"Isto suprimirá todas as tabelas atuais nestas bases de dados.\n"
-"#-#-#-#-#  sql.po  #-#-#-#-#\n"
-"Isto suprimirÃ¡ todas as tabelas atuais nestas bases de dados."
+"Isto suprimirÃ¡ todas as tabelas atuais nestas bases de dados."
 
 #: ../admin/sql_dobck.php:37
 #, fuzzy
 msgid "Your backup parameters has been successfully changed."
 msgstr ""
-"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
-"$)  #-#-#-#-#\n"
-"Seus parâmetros de backup foram mudados com sucesso\n"
-"#-#-#-#-#  sql.po  #-#-#-#-#\n"
-"Seus parÃ¢metros de backup foram mudados com sucesso"
+"Seus parÃ¢metros de backup foram mudados com sucesso"
 
 #: ../admin/sql_dorestore.php:43
 msgid "Restore a SQL backup"
@@ -1844,18 +1708,13 @@ msgid ""
 "messages."
 msgstr ""
 "Sua base de dados foi restaurado, verificar o texto precedente para ver se "
-"há mensagens de erro."
+"há mensagens de erro."
 
 #: ../admin/sql_getparam.php:47
 #, fuzzy
 msgid "Your current settings are"
 msgstr ""
-"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
-"$)  #-#-#-#-#\n"
-"Seus ajustes atuaÃ­s estÃ£o:\n"
-"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
-"$)  #-#-#-#-#\n"
-"Aqui seus parâmetros atuaís"
+"Seus ajustes atuaÃ­s estÃ£o:\n"
 
 #: ../admin/sql_getparam.php:51 ../admin/sql_list.php:98
 #: ../admin/sql_passchg.php:53 ../admin/sql_users_list.php:97
@@ -1866,15 +1725,8 @@ msgstr "Servidor SQL"
 #, fuzzy
 msgid "help_sql_list_ok"
 msgstr ""
-"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
-"$)  #-#-#-#-#\n"
-"VocÃª pode criar vÃ¡rias bases de dados<br />Clica sobre 'SQL Admin' no menu "
-"para administrÃ¡-los<br />\n"
-"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
-"$)  #-#-#-#-#\n"
-"Você coloca para fora uma ou algumas bases de dados<br /> Clica sobre 'Admin "
-"SQL'no menu para administrá-los<br />Ou usa a tabela abaixo para administrar "
-"os backups / restaurações,suprimir suas bases :"
+"VocÃª pode criar vÃ¡rias bases de dados<br />Clica sobre 'SQL Admin' no menu "
+"para administrÃ¡-los<br />\n"
 
 #: ../admin/sql_list.php:53 ../admin/sql_list.php:64
 msgid "Backup"
@@ -1884,58 +1736,34 @@ msgstr "Backup"
 #, fuzzy
 msgid "Restore"
 msgstr ""
-"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
-"$)  #-#-#-#-#\n"
-"Restaurar\n"
-"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
-"$)  #-#-#-#-#\n"
-"Restauração"
+"Restauração"
 
 #: ../admin/sql_list.php:74
 #, fuzzy
 msgid "Delete the checked databases"
 msgstr ""
-"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
-"$)  #-#-#-#-#\n"
-"Suprimir as bases de dados selecionadas\n"
-"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
-"$)  #-#-#-#-#\n"
-"Suprimir as bases selecionadas"
+"Suprimir as bases de dados selecionadas"
 
 #: ../admin/sql_list.php:84
 #, fuzzy
 msgid "Change the SQL password"
 msgstr ""
-"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
-"$)  #-#-#-#-#\n"
-"Mudar sua senha SQL\n"
-"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
-"$)  #-#-#-#-#\n"
-"Mudança de senha SQL"
+"Mudança de senha SQL"
 
 #: ../admin/sql_list.php:85
 #, fuzzy
 msgid "Get the current SQL parameters"
 msgstr ""
-"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
-"$)  #-#-#-#-#\n"
-"Procurar os ajustes atuais do SQL\n"
-"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
-"$)  #-#-#-#-#\n"
-"Mostrar os parâmetros SQL atuaís"
+"Mostrar os parâmetros SQL atuaís"
 
 #: ../admin/sql_list.php:91 ../admin/sql_users_list.php:90
 #, fuzzy
 msgid "help_sql_list_no"
 msgstr ""
-"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
-"$)  #-#-#-#-#\n"
-"VocÃª ainda nÃ£o criou sua base de dados principal, por favor entra a senha "
-"para criÃ¡-la.\n"
-"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
-"$)  #-#-#-#-#\n"
-"Votre base de données principale n'existe pas, entrez ici un mot de passe "
-"pour la créerSua base de dados principal ainda não existe, entra aqui uma "
+"VocÃª ainda nÃ£o criou sua base de dados principal, por favor entra a senha "
+"para criÃ¡-la.\n"
+"Votre base de données principale n'existe pas, entrez ici un mot de passe "
+"pour la créerSua base de dados principal ainda não existe, entra aqui uma "
 "senha para a criar"
 
 #: ../admin/sql_list.php:100 ../admin/sql_users_list.php:99
@@ -1948,12 +1776,7 @@ msgid ""
 "Enter the new password of your SQL database and click 'change the password' "
 "to change it"
 msgstr ""
-"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
-"$)  #-#-#-#-#\n"
-"Entrar sua nova senha de base de dados SQL\n"
-"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
-"$)  #-#-#-#-#\n"
-"Entrar sua nova senha de base de dados SQL e clica sobre 'Mudança de senha' "
+"Entrar sua nova senha de base de dados SQL e clica sobre 'Mudança de senha' "
 "para a mudar"
 
 #: ../admin/sql_restore.php:48
@@ -1972,31 +1795,19 @@ msgstr ""
 #, fuzzy
 msgid "Restore my database"
 msgstr ""
-"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
-"$)  #-#-#-#-#\n"
-"Sua base de dados foi restaurado, verificar o texto precedente para ver se "
-"hÃ¡ mensagens de erro.\n"
-"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
-"$)  #-#-#-#-#\n"
 "Restaurar a base de dados"
 
 #: ../admin/sql_restore.php:64 ../admin/sql_restore.php:92
 #, fuzzy
 msgid "Note: If the filename ends with .gz, it will be uncompressed before."
 msgstr ""
-"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
-"$)  #-#-#-#-#\n"
-"Nota: Se o nome de arquivo termina com .gz, primeiramente ele serÃ¡ de-"
+"Nota: Se o nome de arquivo termina com .gz, primeiramente ele serÃ¡ de-"
 "compressado.\n"
-"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
-"$)  #-#-#-#-#\n"
-"Nota: Se o nome de arquivo termina com .gz, primeiramente ele será de-"
-"compressado."
 
 #: ../admin/sql_users_add.php:34
 #, fuzzy
 msgid "err_mysql_20"
-msgstr "Sua senha Ã© demasiado longa (16 carÃ¡teres max)"
+msgstr "Sua senha Ã© demasiado longa (16 carÃ¡teres max)"
 
 #: ../admin/sql_users_add.php:41 ../admin/sql_users_list.php:86
 #, fuzzy
@@ -2007,13 +1818,6 @@ msgstr "Criar um membro novo"
 #, fuzzy
 msgid "Create this new user"
 msgstr ""
-"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
-"$)  #-#-#-#-#\n"
-"Criar esta base de dados\n"
-"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
-"$)  #-#-#-#-#\n"
-"Criar esta nova base de dados.\n"
-"#-#-#-#-#  sql.po  #-#-#-#-#\n"
 "Criar esta nova base de dados."
 
 #: ../admin/sql_users_del.php:41
@@ -2025,26 +1829,12 @@ msgstr "A lista %s foi suprimido com sucesso."
 #, fuzzy
 msgid "MySQL users"
 msgstr ""
-"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
-"$)  #-#-#-#-#\n"
-"Base de Dados MySQL\n"
-"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
-"$)  #-#-#-#-#\n"
-"Base de dados MySQL\n"
-"#-#-#-#-#  sql.po  #-#-#-#-#\n"
 "Bases de dados MySQL"
 
 #: ../admin/sql_users_del.php:54
 #, fuzzy
 msgid "Confirm the deletion of the following MySQL users"
 msgstr ""
-"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
-"$)  #-#-#-#-#\n"
-"Confirma o apagemento das bases de dados seguintes\n"
-"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
-"$)  #-#-#-#-#\n"
-"Confirma o apagamento das bases de dados SQL seguintes\n"
-"#-#-#-#-#  sql.po  #-#-#-#-#\n"
 "Confirma o apagamento das bases de dados SQL seguintes"
 
 #: ../admin/sql_users_dorights.php:44
@@ -2056,15 +1846,9 @@ msgstr "Os quotas foram editados com sucesso"
 #, fuzzy
 msgid "help_sql_users_list_ok"
 msgstr ""
-"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
-"$)  #-#-#-#-#\n"
-"VocÃª pode criar vÃ¡rias bases de dados<br />Clica sobre 'SQL Admin' no menu "
-"para administrÃ¡-los<br />\n"
-"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
-"$)  #-#-#-#-#\n"
-"Você coloca para fora uma ou algumas bases de dados<br /> Clica sobre 'Admin "
-"SQL'no menu para administrá-los<br />Ou usa a tabela abaixo para administrar "
-"os backups / restaurações,suprimir suas bases :"
+"Você coloca para fora uma ou algumas bases de dados<br /> Clica sobre 'Admin "
+"SQL'no menu para administrá-los<br />Ou usa a tabela abaixo para administrar "
+"os backups / restaurações,suprimir suas bases :"
 
 #: ../admin/sql_users_list.php:53 ../admin/sql_users_list.php:65
 msgid "Rights"
@@ -2079,15 +1863,9 @@ msgstr ""
 #, fuzzy
 msgid "help_sql_users_rights_ok"
 msgstr ""
-"#-#-#-#-#  mysql.po ($Id: mysql.po,v 1.7 2004/05/19 14:23:06 benjamin Exp "
-"$)  #-#-#-#-#\n"
-"VocÃª pode criar vÃ¡rias bases de dados<br />Clica sobre 'SQL Admin' no menu "
-"para administrÃ¡-los<br />\n"
-"#-#-#-#-#  sql-main.po ($Id: sql.po,v 1.6 2004/11/10 22:14:22 anonymous Exp "
-"$)  #-#-#-#-#\n"
-"Você coloca para fora uma ou algumas bases de dados<br /> Clica sobre 'Admin "
-"SQL'no menu para administrá-los<br />Ou usa a tabela abaixo para administrar "
-"os backups / restaurações,suprimir suas bases :"
+"Você coloca para fora uma ou algumas bases de dados<br /> Clica sobre 'Admin "
+"SQL'no menu para administrá-los<br />Ou usa a tabela abaixo para administrar "
+"os backups / restaurações,suprimir suas bases :"
 
 #: ../admin/sql_users_rights.php:115
 msgid "Apply"
@@ -2096,7 +1874,7 @@ msgstr ""
 #: ../admin/sta2_add_raw.php:33
 #, fuzzy
 msgid "You cannot add any new statistics, your quota is over."
-msgstr "Você não pode adiçionr mais domínios, sua quota acabou."
+msgstr "Você não pode adiçionr mais domínios, sua quota acabou."
 
 #: ../admin/sta2_add_raw.php:40
 msgid "New Raw Statistics (apache)"
@@ -2132,12 +1910,12 @@ msgstr "A caixa de email %s foi mudado com sucesso"
 #: ../admin/sta2_edit_raw.php:45
 #, fuzzy
 msgid "Change the Raw Statistics"
-msgstr "Mudar os quotas padrÃµes"
+msgstr "Mudar os quotas padrÃµes"
 
 #: ../admin/sta2_edit_raw.php:65
 #, fuzzy
 msgid "Change those Raw Statistics."
-msgstr "Mudar os quotas padrÃµes"
+msgstr "Mudar os quotas padrÃµes"
 
 #: ../admin/sta2_list.php:36
 msgid "Statistics List"
@@ -2210,33 +1988,33 @@ msgstr "Controlado localemente"
 
 #: ../class/m_admin.php:53
 msgid "This TLD is forbidden"
-msgstr "Este TLD Ã© proibido"
+msgstr "Este TLD Ã© proibido"
 
 #: ../class/m_admin.php:54
 msgid "primary DNS is checked in WHOIS db"
-msgstr "O DNS preliminar estÃ¡ selecionado em db WHOIS"
+msgstr "O DNS preliminar estÃ¡ selecionado em db WHOIS"
 
 #: ../class/m_admin.php:55
 msgid "primary & secondary DNS are checked in WHOIS db"
-msgstr "O DNS preliminar e secundÃ¡rio estam selecionados em db WHOIS"
+msgstr "O DNS preliminar e secundÃ¡rio estam selecionados em db WHOIS"
 
 #: ../class/m_admin.php:56
 msgid "Domain must exist, but don't do any DNS check"
-msgstr "O domÃ­nio deve existir, mais nÃ£o faz a verificaÃ§Ã£o DNS"
+msgstr "O domÃ­nio deve existir, mais nÃ£o faz a verificaÃ§Ã£o DNS"
 
 #: ../class/m_admin.php:57
 msgid "Domain can be installed, no check at all"
-msgstr "O domÃ­nio pode ser instalado, mas nÃ£o faz nenhuma verificaÃ§Ã£o"
+msgstr "O domÃ­nio pode ser instalado, mas nÃ£o faz nenhuma verificaÃ§Ã£o"
 
 #: ../class/m_admin.php:58
 #, fuzzy
 msgid "Domain can be installed, force NO DNS hosting)"
-msgstr "O domÃ­nio pode ser instalado, forÃ§Ã£ a hospedadem SEM DNS"
+msgstr "O domÃ­nio pode ser instalado, forÃ§Ã£ a hospedadem SEM DNS"
 
 #: ../class/m_err.php:64 ../class/m_err.php:90 ../class/m_err.php:107
 #, fuzzy, php-format
 msgid "err_"
-msgstr "Nome do arquivo ou a pasta Ã© incorreto"
+msgstr "Nome do arquivo ou a pasta Ã© incorreto"
 
 #: ../class/m_err.php:64 ../class/m_err.php:90 ../class/m_err.php:107
 #, php-format
@@ -2386,7 +2164,7 @@ msgstr ""
 #: ../admin/adm_deactivate.php:16 ../admin/adm_deactivate.php:50
 #, fuzzy
 msgid "User does not exist"
-msgstr "Membro '%s' nÃ£o existe"
+msgstr "Membro '%s' nÃ£o existe"
 
 #: ../admin/adm_deactivate.php:20 ../admin/adm_deactivate.php:28
 #: ../admin/adm_deactivate.php:55 ../admin/adm_deactivate.php:63
@@ -2409,7 +2187,7 @@ msgstr ""
 #: ../admin/adm_deactivate.php:27 ../admin/adm_deactivate.php:62
 #, fuzzy
 msgid "Redirection URL:"
-msgstr "Redireção URL"
+msgstr "Redireção URL"
 
 #: ../admin/adm_deactivate.php:31 ../admin/adm_deactivate.php:66
 msgid "Domains of user: "
@@ -2427,22 +2205,22 @@ msgstr ""
 #: ../admin/adm_dodefquotas.php:63
 #, fuzzy, php-format
 msgid "Deleting quota %s"
-msgstr "Suprimando o secundário-domínio %s"
+msgstr "Suprimando o secundário-domínio %s"
 
 #: ../admin/adm_dodefquotas.php:69
 #, fuzzy
 msgid "WARNING : Confirm the deletion of the quota"
-msgstr "AVISO : Confirmar o apagamento do secundário-domínio"
+msgstr "AVISO : Confirmar o apagamento do secundário-domínio"
 
 #: ../admin/adm_dodel.php:61
 #, fuzzy, php-format
 msgid "Deleting users"
-msgstr "Suprimando o secundário-domínio %s"
+msgstr "Suprimando o secundário-domínio %s"
 
 #: ../admin/adm_dodel.php:65
 #, fuzzy
 msgid "WARNING : Confirm the deletion of the users"
-msgstr "AVISO : Confirmar o apagamento do secundário-domínio"
+msgstr "AVISO : Confirmar o apagamento do secundário-domínio"
 
 #: ../admin/adm_doms.php:54 ../admin/adm_list.php:60
 #: ../admin/quota_show_all.php:38
@@ -2471,7 +2249,7 @@ msgstr ""
 #: ../admin/bro_main.php:74
 #, fuzzy
 msgid "WARNING : Confirm the deletion of this files"
-msgstr "AVISO : Confirmar o apagamento do secundário-domínio"
+msgstr "AVISO : Confirmar o apagamento do secundário-domínio"
 
 #: ../admin/sql_restore.php:54
 #, fuzzy
@@ -2505,7 +2283,7 @@ msgstr ""
 #: ../admin/bro_main.php:73
 #, fuzzy
 msgid "WARNING: Confirm the deletion of this files"
-msgstr "AVISO : Confirmar o apagamento do secundário-domínio"
+msgstr "AVISO : Confirmar o apagamento do secundário-domínio"
 
 #: ../admin/bro_main.php:154
 msgid "Old Name:"
@@ -2524,13 +2302,13 @@ msgstr "Relocalizar"
 #: ../admin/dom_subdodel.php:44
 #, fuzzy, php-format
 msgid "Deleting the subdomain %s:"
-msgstr "Suprimando o secundário-domínio %s"
+msgstr "Suprimando o secundário-domínio %s"
 
 #: ../admin/dom_subdodel.php:50
 #, fuzzy
 msgid "The subdomain has been deleted. Changes will take place in 5 minutes."
 msgstr ""
-"O domínio %s foi modificado. As modificações estarão atualizadas em 5 "
+"O domínio %s foi modificado. As modificações estarão atualizadas em 5 "
 "minutos."
 
 #: ../admin/stats_members.php:32
