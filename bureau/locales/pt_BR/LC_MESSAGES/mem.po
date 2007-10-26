@@ -15,33 +15,33 @@ msgstr ""
 "X-Generator: Emacs 21\n"
 
 msgid "err_mem_1"
-msgstr "Us˙ario ou senha incorreto"
+msgstr "Us√∫ario ou senha incorreto"
 
 msgid "err_mem_2"
-msgstr "Esta conta est· troncada, por favor chamar o administrador"
+msgstr "Esta conta est√° troncada, por favor chamar o administrador"
 
 msgid "err_mem_3"
-msgstr "Cookie incorreto, por favor aceitar o cookie da sess„o"
+msgstr "Cookie incorreto, por favor aceitar o cookie da sess√£o"
 
 msgid "err_mem_4"
-msgstr "Sess„o desconhecido, por favor contatar o administrador"
+msgstr "Sess√£o desconhecido, por favor contatar o administrador"
 
 msgid "err_mem_5"
-msgstr "EndereÁo IP incorreto, por favor contatar o administrador"
+msgstr "Endere√ßo IP incorreto, por favor contatar o administrador"
 
-# PROBLEME : il y avait 2 fois le 5, les autres messages doivent surement etre dÈcalÈs (TODO)
+# PROBLEME : il y avait 2 fois le 5, les autres messages doivent surement etre d√©cal√©s (TODO)
 
 msgid "err_mem_6"
-msgstr "A senha antiga È incorreta"
+msgstr "A senha antiga √© incorreta"
 
 msgid "err_mem_7"
-msgstr "As novas senhas s„o diferentes, por favor tentar de novo"
+msgstr "As novas senhas s√£o diferentes, por favor tentar de novo"
 
 msgid "err_mem_8"
-msgstr "A senha deve ter pelo menos 3 car·teres"
+msgstr "A senha deve ter pelo menos 3 car√°teres"
 
 msgid "err_mem_9"
-msgstr "A informaÁ„o entrada È incorreta"
+msgstr "A informa√ß√£o entrada √© incorreta"
 
 msgid "Help"
 msgstr "Ajuda"

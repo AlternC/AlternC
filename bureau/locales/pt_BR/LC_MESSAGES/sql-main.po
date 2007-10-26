@@ -29,7 +29,7 @@ msgstr "Sua base de dados foi criado com sucesso"
 
 #: admin/sql_add.php:34 admin/sql_doadd.php:34
 msgid "err_mysql_1"
-msgstr "Sua quota está completo, você não pode criar mais bases de dados."
+msgstr "Sua quota estÃ¡ completo, vocÃª nÃ£o pode criar mais bases de dados."
 
 #: admin/sql_add.php:41 admin/sql_list.php:82
 msgid "Create a new database"
@@ -69,7 +69,7 @@ msgstr "Backup semanal"
 
 #: admin/sql_bck.php:59
 msgid "Daily backup"
-msgstr "Backup diário"
+msgstr "Backup diÃ¡rio"
 
 #: admin/sql_bck.php:63
 msgid "How many backup should be kept?"
@@ -77,11 +77,11 @@ msgstr "Quantos backups devem ser mantidos?"
 
 #: admin/sql_bck.php:75
 msgid "Compress the backups? (gzip)"
-msgstr "Você quiser compresser os backups? (gzip)"
+msgstr "VocÃª quiser compresser os backups? (gzip)"
 
 #: admin/sql_bck.php:77 admin/sql_del.php:69
 msgid "No"
-msgstr "Não"
+msgstr "NÃ£o"
 
 #: admin/sql_bck.php:78 admin/sql_del.php:69
 msgid "Yes"
@@ -89,15 +89,15 @@ msgstr "Sim"
 
 #: admin/sql_bck.php:82
 msgid "In which folder do you want to store the backups?"
-msgstr "Que pasta você quiser usar para salvar seus backups?" 
+msgstr "Que pasta vocÃª quiser usar para salvar seus backups?" 
 
 #: admin/sql_bck.php:92
 msgid "Change the SQL backup parameters"
-msgstr "Mudar os parâmetros SQL atuais" 
+msgstr "Mudar os parÃ¢metros SQL atuais" 
 
 #: admin/sql_bck.php:101 admin/sql_dorestore.php:55 admin/sql_restore.php:68
 msgid "You currently have no database defined"
-msgstr "Você não tem nenhuma base de dados definida"
+msgstr "VocÃª nÃ£o tem nenhuma base de dados definida"
 
 #: admin/sql_del.php:41
 #, php-format
@@ -114,11 +114,11 @@ msgstr "Confirma o apagamento das bases de dados SQL seguintes"
 
 #: admin/sql_del.php:55
 msgid "This will delete all the tables currently in those db."
-msgstr "Isto suprimirá todas as tabelas atuais nestas bases de dados."
+msgstr "Isto suprimirÃ¡ todas as tabelas atuais nestas bases de dados."
 
 #: admin/sql_dobck.php:37
 msgid "Your backup parameters has been successfully changed."
-msgstr "Seus parâmetros de backup foram mudados com sucesso"
+msgstr "Seus parÃ¢metros de backup foram mudados com sucesso"
 
 #: admin/sql_dorestore.php:43
 msgid "Restore a SQL backup"
@@ -128,15 +128,15 @@ msgstr "Restaurar o backup SQL"
 msgid ""
 "Your database has been restored, check out the previous text for error "
 "messages."
-msgstr "Sua base de dados foi restaurado, verificar o texto precedente para ver se há mensagens de erro."
+msgstr "Sua base de dados foi restaurado, verificar o texto precedente para ver se hÃ¡ mensagens de erro."
 
 #: admin/sql_getparam.php:47
 msgid "Your current settings are"
-msgstr "Aqui seus parâmetros atuaís"
+msgstr "Aqui seus parÃ¢metros atuaÃ­s"
 
 #: admin/sql_getparam.php:49 admin/sql_list.php:96 admin/sql_passchg.php:51
 msgid "Username"
-msgstr "Nome de usúario"
+msgstr "Nome de usÃºario"
 
 #: admin/sql_getparam.php:50 admin/sql_list.php:97 admin/sql_passchg.php:52
 msgid "Password"
@@ -148,8 +148,8 @@ msgstr "Servidor SQL"
 
 #: admin/sql_list.php:48
 msgid "help_sql_list_ok"
-msgstr "Você coloca para fora uma ou algumas bases de dados<br /> Clica sobre 'Admin SQL'"
-"no menu para administrá-los<br />Ou usa a tabela abaixo para administrar os backups / restaurações,"
+msgstr "VocÃª coloca para fora uma ou algumas bases de dados<br /> Clica sobre 'Admin SQL'"
+"no menu para administrÃ¡-los<br />Ou usa a tabela abaixo para administrar os backups / restauraÃ§Ãµes,"
 "suprimir suas bases :"
 
 #: admin/sql_list.php:53 admin/sql_list.php:64
@@ -158,7 +158,7 @@ msgstr "Backup"
 
 #: admin/sql_list.php:53 admin/sql_list.php:65
 msgid "Restore"
-msgstr "Restauração"
+msgstr "RestauraÃ§Ã£o"
 
 #: admin/sql_list.php:53
 msgid "Size"
@@ -170,18 +170,18 @@ msgstr "Suprimir as bases selecionadas"
 
 #: admin/sql_list.php:84
 msgid "Change the SQL password"
-msgstr "Mudança de senha SQL"
+msgstr "MudanÃ§a de senha SQL"
 
 #: admin/sql_list.php:85
 msgid "Get the current SQL parameters"
-msgstr "Mostrar os parâmetros SQL atuaís" 
+msgstr "Mostrar os parÃ¢metros SQL atuaÃ­s" 
 
 #: admin/sql_list.php:91
 msgid "help_sql_list_no"
 msgstr ""
-"Votre base de données principale n'existe pas, entrez ici un mot de passe "
-"pour la créer"
-"Sua base de dados principal ainda não existe, entra aqui uma senha para a criar"
+"Votre base de donnÃ©es principale n'existe pas, entrez ici un mot de passe "
+"pour la crÃ©er"
+"Sua base de dados principal ainda nÃ£o existe, entra aqui uma senha para a criar"
 
 
 #: admin/sql_list.php:100
@@ -192,11 +192,11 @@ msgstr "Criar minha base de dados principal"
 msgid ""
 "Enter the new password of your SQL database and click 'change the password' "
 "to change it"
-msgstr "Entrar sua nova senha de base de dados SQL e clica sobre 'Mudança de senha' para a mudar"
+msgstr "Entrar sua nova senha de base de dados SQL e clica sobre 'MudanÃ§a de senha' para a mudar"
 
 #: admin/sql_passchg.php:55
 msgid "Change the password"
-msgstr "Mudança da senha SQL"
+msgstr "MudanÃ§a da senha SQL"
 
 #: admin/sql_pass.php:36
 msgid "Your password has been successfully changed."
@@ -217,4 +217,4 @@ msgstr "Restaurar a base de dados"
 
 #: admin/sql_restore.php:63
 msgid "Note: If the filename ends with .gz, it will be uncompressed before."
-msgstr "Nota: Se o nome de arquivo termina com .gz, primeiramente ele será de-compressado."
+msgstr "Nota: Se o nome de arquivo termina com .gz, primeiramente ele serÃ¡ de-compressado."

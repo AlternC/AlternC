@@ -21,50 +21,50 @@ msgid "err_ftp_1"
 msgstr "Nenhuma conta FTP achada"
 
 msgid "err_ftp_2"
-msgstr "Esta conta FTP n„o existe"
+msgstr "Esta conta FTP n√£o existe"
 
 msgid "err_ftp_3"
-msgstr "O prefixo escolhido n„o È permitido"
+msgstr "O prefixo escolhido n√£o √© permitido"
 
 msgid "err_ftp_4"
-msgstr "Esta conta FTP j‡ existe"
+msgstr "Esta conta FTP j√† existe"
 
 msgid "err_ftp_5"
-msgstr "Sua quota para a conta FTP est· cheio. VocÍ n„o pode criar mais contas FTPs."
+msgstr "Sua quota para a conta FTP est√° cheio. Voc√™ n√£o pode criar mais contas FTPs."
 
 msgid "err_ftp_6"
-msgstr "Esta pasta n„o pode ser criada."
+msgstr "Esta pasta n√£o pode ser criada."
 
 
 msgid "hlp_ftp_list"
 msgstr ""
-"Aqui est· a lista de contas ftp com acesso ‡ sua conta."
-"Clica sobre 'ModifiÁar' para mudar o nome do us˙ario, a senha ou o diretÛrio de raiz"
+"Aqui est√° a lista de contas ftp com acesso √† sua conta."
+"Clica sobre 'Modifi√ßar' para mudar o nome do us√∫ario, a senha ou o diret√≥rio de raiz"
 "Para suprimir uma conta, seliciona a conta correspondante e clica sobre a tecla 'Suprimir as contas selecionadas'<br />"
-"Para poder acessar seus arquivos com um programa ftp, vocÍ deve criar pelo menos uma conta. "
-"Cada conta È associado com uma pasta, e n„o pode acessar nada fora os arquivos e pastas nesta pasta'<br />"
-"Mais informaÁ„o sobre o FTP em Ajuda Online HELPID_100<br />"
+"Para poder acessar seus arquivos com um programa ftp, voc√™ deve criar pelo menos uma conta. "
+"Cada conta √© associado com uma pasta, e n√£o pode acessar nada fora os arquivos e pastas nesta pasta'<br />"
+"Mais informa√ß√£o sobre o FTP em Ajuda Online HELPID_100<br />"
 
 
 
 msgid "hlp_ftp_list_no"
 msgstr""
-"VocÍ n„o tem nenhuma conta FTP disponÌvel. Clica sobre 'Criar uma conta ftp' para criar uma. <br />"
-"Para poder acessar seus arquivos com um programa ftp, vocÍ deve criar pelo menos uma conta. "
-"Cada conta È associado com uma pasta, e n„o pode acessar nada fora os arquivos e pastas nesta pasta'<br />"
-"Mais informaÁ„o sobre o FTP em Ajuda Online HELPID_100<br />"
+"Voc√™ n√£o tem nenhuma conta FTP dispon√≠vel. Clica sobre 'Criar uma conta ftp' para criar uma. <br />"
+"Para poder acessar seus arquivos com um programa ftp, voc√™ deve criar pelo menos uma conta. "
+"Cada conta √© associado com uma pasta, e n√£o pode acessar nada fora os arquivos e pastas nesta pasta'<br />"
+"Mais informa√ß√£o sobre o FTP em Ajuda Online HELPID_100<br />"
 
 
 
 msgid "hlp_ftp_add"
-msgstr "VocÍ n„o pode adiÁionar uma nova conta ftp. Sua conta est· cheia."
+msgstr "Voc√™ n√£o pode adi√ßionar uma nova conta ftp. Sua conta est√° cheia."
 
 
 msgid "Create a new ftp account"
 msgstr "Criar uma nova conta ftp"
 
 msgid "Create this new FTP account."
-msgstr "Criar est· nova conta FTP."
+msgstr "Criar est√° nova conta FTP."
 
 msgid "The ftp account %s has been successfully deleted"
 msgstr "Esta conta ftp %s foi suprimado com sucesso"

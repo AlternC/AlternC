@@ -15,196 +15,196 @@ msgstr ""
 "X-Generator: Emacs 21\n"
 
 msgid "quota_dom"
-msgstr "Nome dos Domínios"
+msgstr "Nome dos DomÃ­nios"
 
 msgid "err_dom_1"
-msgstr "O Domínio '%s' não foi achado"
+msgstr "O DomÃ­nio '%s' nÃ£o foi achado"
 
 msgid "err_dom_2"
-msgstr "O Domínio '%s' não é o seu"
+msgstr "O DomÃ­nio '%s' nÃ£o Ã© o seu"
 
 msgid "err_dom_3"
-msgstr "--- Erro de program --- Falta o fechamento nos domínios !"
+msgstr "--- Erro de program --- Falta o fechamento nos domÃ­nios !"
 
 msgid "err_dom_4"
-msgstr "O nome do domínio é demasiado longo"
+msgstr "O nome do domÃ­nio Ã© demasiado longo"
 
 msgid "err_dom_5"
-msgstr "Um dos membros do domínio é demasiado longo."
+msgstr "Um dos membros do domÃ­nio Ã© demasiado longo."
 
 msgid "err_dom_6"
-msgstr "Há algums caráteres proibidos no nome domínio (somente A-Z 0-9 e - são permitidos)."
+msgstr "HÃ¡ algums carÃ¡teres proibidos no nome domÃ­nio (somente A-Z 0-9 e - sÃ£o permitidos)."
 
 msgid "err_dom_7"
-msgstr "O ultímo membro do domínio é incorreto ou não pode ser hospidado neste servidor."
+msgstr "O ultÃ­mo membro do domÃ­nio Ã© incorreto ou nÃ£o pode ser hospidado neste servidor."
 
 msgid "err_dom_8"
-msgstr "O domínio jà existe."
+msgstr "O domÃ­nio jÃ  existe."
 
 msgid "err_dom_9"
-msgstr "O domínio foi suprimido menos de 5 minutos há."
+msgstr "O domÃ­nio foi suprimido menos de 5 minutos hÃ¡."
 
 msgid "err_dom_10"
-msgstr "Sua quota do domínio jà acabou, você não pode criar mais domínios."
+msgstr "Sua quota do domÃ­nio jÃ  acabou, vocÃª nÃ£o pode criar mais domÃ­nios."
 
 msgid "err_dom_11"
-msgstr "A base de dados Whois está inacessível, por favor tenta de novo mais tarde."
+msgstr "A base de dados Whois estÃ¡ inacessÃ­vel, por favor tenta de novo mais tarde."
 
 msgid "err_dom_12"
-msgstr "O domínio não foi achado na base de dados Whois."
+msgstr "O domÃ­nio nÃ£o foi achado na base de dados Whois."
 
 msgid "err_dom_13"
-msgstr "O domínio mudou menos de 5 minutos há. Por favor tenta de novo em algums minutos."
+msgstr "O domÃ­nio mudou menos de 5 minutos hÃ¡. Por favor tenta de novo em algums minutos."
 
 msgid "err_dom_14"
-msgstr "O secundário-domínio não existe."
+msgstr "O secundÃ¡rio-domÃ­nio nÃ£o existe."
 
 msgid "err_dom_15"
-msgstr "Nenhuma mudança foi pedida..."
+msgstr "Nenhuma mudanÃ§a foi pedida..."
 
 msgid "err_dom_16"
-msgstr "O secundário-domínio jà existe."
+msgstr "O secundÃ¡rio-domÃ­nio jÃ  existe."
 
 msgid "err_dom_17"
-msgstr "--- Erro de Programa --- Fechamento obtido já !"
+msgstr "--- Erro de Programa --- Fechamento obtido jÃ¡ !"
 
 msgid "err_dom_18"
-msgstr "Este domínio é o do servidor !!! Você não pode hospedá-lo em sua conta !"
+msgstr "Este domÃ­nio Ã© o do servidor !!! VocÃª nÃ£o pode hospedÃ¡-lo em sua conta !"
 
 msgid "err_dom_19"
-msgstr "O endereço IP que você entrou é incorreto."
+msgstr "O endereÃ§o IP que vocÃª entrou Ã© incorreto."
 
 msgid "err_dom_20"
-msgstr "O URL que você entrou é incorreto."
+msgstr "O URL que vocÃª entrou Ã© incorreto."
 
 msgid "err_dom_21"
-msgstr "A pasta que você entrou é incorreta ou não existe."
+msgstr "A pasta que vocÃª entrou Ã© incorreta ou nÃ£o existe."
 
 msgid "err_dom_22"
-msgstr "O domínio pedido é proibido neste servidor. Por favor contatar o administrador"
+msgstr "O domÃ­nio pedido Ã© proibido neste servidor. Por favor contatar o administrador"
 
 msgid "err_dom_23"
 "DNS (and eventually wait 1 day) before you install it again."
-msgstr "O DNS deste domínio não combina o DNS do servidor. Por favor mudar o DNS do seu domínio (e esperar 1 dia) antes de instalar-lo de novo." 
+msgstr "O DNS deste domÃ­nio nÃ£o combina o DNS do servidor. Por favor mudar o DNS do seu domÃ­nio (e esperar 1 dia) antes de instalar-lo de novo." 
 
 msgid "help_dns_mx %s %s"
 msgstr ""
-"Se nós controlamos seu DNS <br />"
-"Você pode controlar seu correios em outra parte se você quiser (campo MX).<br />"
+"Se nÃ³s controlamos seu DNS <br />"
+"VocÃª pode controlar seu correios em outra parte se vocÃª quiser (campo MX).<br />"
 "Escreve <b><code>%s</code></b> neste campo se seus correios devem ser controlados por %s<br />"
-"ou coloca o endereço IP ou nome do servidor de email usado para controlar seus correios."
-"<small>Aviso: Se você não coloca nada neste campo, seus correios serão inacessívels</small>"
+"ou coloca o endereÃ§o IP ou nome do servidor de email usado para controlar seus correios."
+"<small>Aviso: Se vocÃª nÃ£o coloca nada neste campo, seus correios serÃ£o inacessÃ­vels</small>"
 
 msgid "help_dns_mail"
 msgstr ""
-"Se nós não controlamos o DNS deste domínio <br />"
+"Se nÃ³s nÃ£o controlamos o DNS deste domÃ­nio <br />"
 "controlamos seus correios?"
 
 msgid "help_domain_del %s"
-msgstr "Se você quiser suprimir o domínio %s, clica a tecla abaixo."
-"Aviso : isto suprimirá todo o ftp, correios, envi-listas ... associadas com este"
-"domínio e os sécondarios domínios dele" 
+msgstr "Se vocÃª quiser suprimir o domÃ­nio %s, clica a tecla abaixo."
+"Aviso : isto suprimirÃ¡ todo o ftp, correios, envi-listas ... associadas com este"
+"domÃ­nio e os sÃ©condarios domÃ­nios dele" 
 
 msgid "hlp_add_domain"
 msgstr ""
-" - Entrar o nome do domínio que você gostaria hospedar. O nome do domínio deve ser completo, mais <b>sem o www.</b><br /> "
-"IMPORTANTE: Se você gostaria uma hospedagem actual do domínio, o DNS do seu domínio deve apontar para nossos servidors DNS. Contatar sua companhia de hospedagem para mais informação.<br /> "
+" - Entrar o nome do domÃ­nio que vocÃª gostaria hospedar. O nome do domÃ­nio deve ser completo, mais <b>sem o www.</b><br /> "
+"IMPORTANTE: Se vocÃª gostaria uma hospedagem actual do domÃ­nio, o DNS do seu domÃ­nio deve apontar para nossos servidors DNS. Contatar sua companhia de hospedagem para mais informaÃ§Ã£o.<br /> "
 "Exemplos : globonet.org / demo.com / test.eu.org etc.<br />"
-"Mais informação sobre a administração dos domínios na seção da ajuda online HELPID_200<br /> "
+"Mais informaÃ§Ã£o sobre a administraÃ§Ã£o dos domÃ­nios na seÃ§Ã£o da ajuda online HELPID_200<br /> "
 
 
 msgid "hlp_add_domain_2"
 msgstr ""
 "Clica sobre o link abaixo. "
-"Você pode acessar os parâmetros do domínio no menu à esquerda"
-"2 links aparecerão : <br />"
-" - o primeiro para modificar os parâmetros de hospedagem do domínio (secondario-domínios, redireções, hospedagem do email ...) <br />"
-" - o segundo para administrar as contas de email do domínio (se você quiser criar as caixas de email).<br />"
-"Mais informação sobre a administração dos domínios na seção de ajuda online HELPID_200<br />"
+"VocÃª pode acessar os parÃ¢metros do domÃ­nio no menu Ã  esquerda"
+"2 links aparecerÃ£o : <br />"
+" - o primeiro para modificar os parÃ¢metros de hospedagem do domÃ­nio (secondario-domÃ­nios, redireÃ§Ãµes, hospedagem do email ...) <br />"
+" - o segundo para administrar as contas de email do domÃ­nio (se vocÃª quiser criar as caixas de email).<br />"
+"Mais informaÃ§Ã£o sobre a administraÃ§Ã£o dos domÃ­nios na seÃ§Ã£o de ajuda online HELPID_200<br />"
 
 msgid "hlp_del_domain"
 msgstr ""
-"O domínio foi suprimido, mais os arquivos do seu web-site não foram destruídos.<br />"
-"Se você quiser destruir os arquivos du web-site, usa a Administração de Arquivo<br />"
-"Mais informação sobre a administração dos domínios na seção de ajuda online HELPID_200<br />"
+"O domÃ­nio foi suprimido, mais os arquivos do seu web-site nÃ£o foram destruÃ­dos.<br />"
+"Se vocÃª quiser destruir os arquivos du web-site, usa a AdministraÃ§Ã£o de Arquivo<br />"
+"Mais informaÃ§Ã£o sobre a administraÃ§Ã£o dos domÃ­nios na seÃ§Ã£o de ajuda online HELPID_200<br />"
 
 
 msgid "hlp_edit_domain"
 msgstr ""
-"Esta zona permite as modificações de parâmetros de seu domínio e dos secundários-domínios instalados<br />"
-"Você pode criar um novo secundário-domínio e escholer de re-dirigir a seu espaço de disco, "
-"a um outro endereço Internet, o a um endereço IP (utilização advancado)<br />"
-"Mais informação sobre a administração dos domínios na seção de ajuda online HELPID_200<br />"
+"Esta zona permite as modificaÃ§Ãµes de parÃ¢metros de seu domÃ­nio e dos secundÃ¡rios-domÃ­nios instalados<br />"
+"VocÃª pode criar um novo secundÃ¡rio-domÃ­nio e escholer de re-dirigir a seu espaÃ§o de disco, "
+"a um outro endereÃ§o Internet, o a um endereÃ§o IP (utilizaÃ§Ã£o advancado)<br />"
+"Mais informaÃ§Ã£o sobre a administraÃ§Ã£o dos domÃ­nios na seÃ§Ã£o de ajuda online HELPID_200<br />"
 
 
 msgid "Domain hosting"
-msgstr "Hospedagem do Domínio"
+msgstr "Hospedagem do DomÃ­nio"
 
 msgid "You cannot add any new domain, your quota is over."
-msgstr "Você não pode adiçionr mais domínios, sua quota acabou."
+msgstr "VocÃª nÃ£o pode adiÃ§ionr mais domÃ­nios, sua quota acabou."
 
 msgid "Contact your administrator for more information."
-msgstr "Contatar seu administrador para mais informação."
+msgstr "Contatar seu administrador para mais informaÃ§Ã£o."
 
 msgid "Domain name"
-msgstr "Nome do Domínio"
+msgstr "Nome do DomÃ­nio"
 
 msgid "If you don't want to host in our server the DNS of your domain, don't check the box 'host my dns here'. If you don't know what it mean, leave it checked."
-msgstr "Se você não quiser hospedar o DNS em nosso servidor, não seleciona a caixa 'hospedar meu DNS aqui'. Se você não sabe o que significa, deixá-lo selecionado."
+msgstr "Se vocÃª nÃ£o quiser hospedar o DNS em nosso servidor, nÃ£o seleciona a caixa 'hospedar meu DNS aqui'. Se vocÃª nÃ£o sabe o que significa, deixÃ¡-lo selecionado."
 
 msgid "host my dns here"
 msgstr "hospedar meu DNS aqui"
 
 msgid "Add a domain"
-msgstr "Adiçionar um domínio"
+msgstr "AdiÃ§ionar um domÃ­nio"
 
 msgid "Add this domain"
-msgstr "Adiçionar este domínio"
+msgstr "AdiÃ§ionar este domÃ­nio"
 
 msgid "Your new domain %s has been successfully installed"
-msgstr "Seu domínio %s foi instalado com sucesso"
+msgstr "Seu domÃ­nio %s foi instalado com sucesso"
 
 msgid "Whois result on the domain"
-msgstr "Resultado Whois deste domínio"
+msgstr "Resultado Whois deste domÃ­nio"
 
 msgid "Confirm the deletion of domain %s"
-msgstr "Confirma o apagamento deste domínio %s"
+msgstr "Confirma o apagamento deste domÃ­nio %s"
 
 msgid "This will delete the related sub-domains too."
-msgstr "Isto suprimirá os secundário-domínios relacionados tambem." 
+msgstr "Isto suprimirÃ¡ os secundÃ¡rio-domÃ­nios relacionados tambem." 
 
 msgid "Domain %s deleted"
-msgstr "Domínio %s suprimido"
+msgstr "DomÃ­nio %s suprimido"
 
 msgid "The domain %s has been successfully deleted."
-msgstr "O domínio %s foi suprimido com sucesso."
+msgstr "O domÃ­nio %s foi suprimido com sucesso."
 
 msgid "Editing domain %s"
-msgstr "Editando o domínio %s"
+msgstr "Editando o domÃ­nio %s"
 
 msgid "Subdomains"
-msgstr "Secundário-domínios"
+msgstr "SecundÃ¡rio-domÃ­nios"
 
 msgid "Domains"
-msgstr "Domínios"
+msgstr "DomÃ­nios"
 
 msgid "Add a subdomain"
-msgstr "Adiçionar um secundário-domínio"
+msgstr "AdiÃ§ionar um secundÃ¡rio-domÃ­nio"
 
 msgid "Locally managed"
 msgstr "Controlado localemente"
 
 msgid "URL redirection"
-msgstr "Redireção URL"
+msgstr "RedireÃ§Ã£o URL"
 
 msgid "IP redirection"
-msgstr "Redireção IP"
+msgstr "RedireÃ§Ã£o IP"
 
 msgid "Webmail access"
 msgstr "Acesso Webmail"
 
 msgid "DNS parameters"
-msgstr "Parâmetros DNS"
+msgstr "ParÃ¢metros DNS"
 
 msgid "Manage the DNS on the server ?"
 msgstr "Administrar o DNS neste servidor ?"
@@ -213,23 +213,23 @@ msgid "MX Field"
 msgstr "Campo MX"
 
 msgid "Submit the changes"
-msgstr "Submeter as mudanças"
+msgstr "Submeter as mudanÃ§as"
 
 msgid "Delete %s"
 msgstr "Deleter %s"
 
 msgid "The domain %s has been changed. The modifications will take effect in 5 minutes."
-msgstr "O domínio %s foi modificado. As modificações estarão atualizadas em 5 minutos."
+msgstr "O domÃ­nio %s foi modificado. As modificaÃ§Ãµes estarÃ£o atualizadas em 5 minutos."
 
 msgid "Deleting subdomain %s"
-msgstr "Suprimando o secundário-domínio %s"
+msgstr "Suprimando o secundÃ¡rio-domÃ­nio %s"
 
 msgid "WARNING : Confirm the deletion of the subdomain"
-msgstr "AVISO : Confirmar o apagamento do secundário-domínio"
+msgstr "AVISO : Confirmar o apagamento do secundÃ¡rio-domÃ­nio"
 
 msgid "Editing subdomain %s"
-msgstr "Editando o secundário-domínio %s"
+msgstr "Editando o secundÃ¡rio-domÃ­nio %s"
 
 msgid "The modifications will take effect in 5 minutes."
-msgstr "As modificações estaram actualizadas em 5 minutos."
+msgstr "As modificaÃ§Ãµes estaram actualizadas em 5 minutos."
 
