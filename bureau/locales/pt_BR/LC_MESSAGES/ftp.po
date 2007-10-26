@@ -15,42 +15,28 @@ msgstr ""
 "X-Generator: Emacs 21\n"
 
 msgid "quota_ftp"
-msgstr "FTP Accounts"
 msgstr "Contas FTP"
 
 msgid "err_ftp_1"
-msgstr "No ftp account found"
 msgstr "Nenhuma conta FTP achada"
 
 msgid "err_ftp_2"
-msgstr "This ftp account does not exist"
 msgstr "Esta conta FTP não existe"
 
 msgid "err_ftp_3"
-msgstr "The chosen prefix is not allowed"
 msgstr "O prefixo escolhido não é permitido"
 
 msgid "err_ftp_4"
-msgstr "This ftp account already exists"
 msgstr "Esta conta FTP jà existe"
 
 msgid "err_ftp_5"
-msgstr "Your ftp account quota is over. You cannot create more ftp accounts."
 msgstr "Sua quota para a conta FTP está cheio. Você não pode criar mais contas FTPs."
 
 msgid "err_ftp_6"
-msgstr "The directory cannot be created."
 msgstr "Esta pasta não pode ser criada."
 
 
 msgid "hlp_ftp_list"
-msgstr ""
-"Voici la liste des comptes ftp ayant accès à votre compte. "
-"Cliquez sur 'Modifier' pour changer le nom d'utilisateur, le mot de passe, ou le dossier racine.<br /> "
-"Pour supprimer un compte, cochez la case correspondante et cliquez sur le bouton 'Supprimer les comptes cochés'<br />"
-"Pour pouvoir accéder à vos fichiers avec un logiciel de ftp, vous devez créer au moins un compte. "
-"Chaque compte est associé à un dossier, et n'aura donc accès qu'aux fichiers situés dans ce dossier ou en dessous. <br />"
-"Plus d'info sur le FTP dans l'aide en ligne HELPID_100<br />"
 msgstr ""
 "Aqui está a lista de contas ftp com acesso à sua conta."
 "Clica sobre 'Modifiçar' para mudar o nome do usúario, a senha ou o diretório de raiz"
@@ -62,11 +48,6 @@ msgstr ""
 
 
 msgid "hlp_ftp_list_no"
-msgstr ""
-"Vous n'avez actuellement aucun Compte FTP de disponible. Cliquez sur 'Création d'un compte ftp' pour en créer un.<br />"
-"Pour pouvoir accéder à vos fichiers avec un logiciel de ftp, vous devez créer au moins un compte.  "
-"Chaque compte est associé à un dossier, et n'aura donc accès qu'aux fichiers situés dans ce dossier ou en dessous. <br />"
-"Plus d'info sur le FTP dans l'aide en ligne HELPID_100<br />"
 msgstr""
 "Você não tem nenhuma conta FTP disponível. Clica sobre 'Criar uma conta ftp' para criar uma. <br />"
 "Para poder acessar seus arquivos com um programa ftp, você deve criar pelo menos uma conta. "
@@ -76,69 +57,41 @@ msgstr""
 
 
 msgid "hlp_ftp_add"
-msgstr ""
-"Pour ajouter un compte ftp, vous devez choisir un Nom d'utilisateur, un mot de passe, et un répertoire racine<br />"
-"Le nom d'utilisateur commence toujours par votre nom de login ou le nom d'un de vos domaines.<br />"
-"Le répertoire racine, s'il n'existe pas, sera créé automatiquement.<br />"
-"Note : Le compte que vous créez ainsi aura accès en lecture et en écriture aux fichiers situés dans le répertoire et tous ses sous-répertoires.<br />"
-"Plus d'info sur le FTP dans l'aide en ligne HELPID_100<br />"
-
-"Para adiçionar uma conta ftp, você deve escholer um nome do usúario, uma senha e uma pasta de raiz<br />"
-"O nome do usúario começa sempre com seu nome do login ou o nome de um dos seus domínios.<br />"
-"A pasta rais, se ela não ainda existe, sera criado automaticamente. <br />"
-"Aviso : A conta que você criou vai ter acesso de leitura e escritura aos arquivos na sua pasta e todas as pastas nesta pasta.<br />"
-"Mais informação sobre o FTP em Ajuda Online HELPID_100<br />"
-
-
-msgid "You cannot add any new ftp account, your quota is over."
-msgstr "You cannot add any new ftp account, your quota is over."
 msgstr "Você não pode adiçionar uma nova conta ftp. Sua conta está cheia."
 
 
 msgid "Create a new ftp account"
-msgstr "Create a new ftp account"
 msgstr "Criar uma nova conta ftp"
 
 msgid "Create this new FTP account."
-msgstr "Create this new FTP account."
 msgstr "Criar está nova conta FTP."
 
 msgid "The ftp account %s has been successfully deleted"
-msgstr "The ftp account %s has been successfully deleted"
 msgstr "Esta conta ftp %s foi suprimado com sucesso"
 
 msgid "Deleting an FTP account"
-msgstr "Deleting an FTP account"
 msgstr "Suprimir uma conta FTP"
 
 msgid "The FTP account has been successfully created"
-msgstr "The FTP account has been successfully created"
 msgstr "A conta FTP foi criado com sucesso"
 
 msgid "No account selected!"
-msgstr "No account selected!"
 msgstr "Nenhuma conta selecionada"
 
 msgid "The ftp account has been successfully changed"
-msgstr "The ftp account has been successfully changed"
 msgstr "A conta ftp foi mudado com sucesso"
 
 msgid "Editing an FTP account"
-msgstr "Editing an FTP account"
 msgstr "Editar uma conta FTP"
 
 msgid "Change this FTP account"
-msgstr "Change this FTP account"
 msgstr "Mudar esta conta FTP"
 
 msgid "FTP accounts list"
-msgstr "FTP accounts list"
 msgstr "Lista de contas FTP"
 
 msgid "<-No Password->"
-msgstr "<-No Password->"
 msgstr "<-Sem Senha->"
 
 msgid "FTP accounts"
-msgstr "FTP accounts"
 msgstr "Contas FTP"

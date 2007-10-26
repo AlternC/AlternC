@@ -15,43 +15,33 @@ msgstr ""
 "X-Generator: Emacs 21\n"
 
 msgid "err_mem_1"
-msgstr "User or password incorrect"
 msgstr "Usúario ou senha incorreto"
 
 msgid "err_mem_2"
-msgstr "This account is locked, contact the administrator"
 msgstr "Esta conta está troncada, por favor chamar o administrador"
 
 msgid "err_mem_3"
-msgstr "Cookie incorrect, please accept the session cookie"
 msgstr "Cookie incorreto, por favor aceitar o cookie da sessão"
 
 msgid "err_mem_4"
-msgstr "Session unknown, contact the administrator"
 msgstr "Sessão desconhecido, por favor contatar o administrador"
 
 msgid "err_mem_5"
-msgstr "IP address incorrect, please contact the administrator"
 msgstr "Endereço IP incorreto, por favor contatar o administrador"
 
 # PROBLEME : il y avait 2 fois le 5, les autres messages doivent surement etre décalés (TODO)
 
 msgid "err_mem_6"
-msgstr "The old password is incorrect"
 msgstr "A senha antiga é incorreta"
 
 msgid "err_mem_7"
-msgstr "The new passwords are differents, please retry"
 msgstr "As novas senhas são diferentes, por favor tentar de novo"
 
 msgid "err_mem_8"
-msgstr "A password must be at least 3 characters long."
 msgstr "A senha deve ter pelo menos 3 caráteres"
 
 msgid "err_mem_9"
-msgstr "The information you entered is incorrect"
 msgstr "A informação entrada é incorreta"
 
 msgid "Help"
-msgstr "Help"
 msgstr "Ajuda"

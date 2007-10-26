@@ -15,72 +15,50 @@ msgstr ""
 "X-Generator: Emacs 21\n"
 
 msgid "quota_mysql"
-msgstr "MySQL Databases"
 msgstr "MySQL Base de Dados"
 
 msgid "err_mysql_1"
-msgstr "You have no database available."
 msgstr "Nenhuma base de dados disponível."
 
 msgid "err_mysql_2"
-msgstr "Your password is too long (16 characters max)"
 msgstr "Sua senha é demasiado longa (16 caráteres max)"
 
 msgid "err_mysql_3"
-msgstr "The database does not exist, you'll get an access by creating it."
 msgstr "Sua base de dados não existe, você pode começará um acesso criando o." 
 
 msgid "err_mysql_4"
-msgstr "This database already exists!"
 msgstr "Esta base de dados jà existe!"
 
 msgid "err_mysql_5"
-msgstr "Your backup number is incorrect."
 msgstr "seu número backup está incorreto."  
 
 msgid "err_mysql_6"
-msgstr "The folder is incorrect!"
 msgstr "A pasta é incorreta!"
 
 msgid "err_mysql_7"
-msgstr "The file name you chose does not exist or is incorrect."
 msgstr "O nome de arquivo você escolheu não existe ou é incorreto."
 
 msgid "err_mysql_8"
-msgstr "The password is too long (16 chars max)"
 msgstr "A senha é demasiado longa (16 caráteres max)"
 
 msgid "err_mysql_9"
-msgstr "The file is incorrect or does not exist."
 msgstr "O arquivo é incorreto ou não existe."
 
 msgid "err_mysql_10"
-msgstr "Your cannot create your main database : you still have other dbs !"
 msgstr "Você não pode criar sua base de dados principal : você ainda tem outras base de dados !"
 
 msgid "err_mysql_11"
-msgstr "You have no database, vlick on 'Databases' to create the first one"
 msgstr "Você não tem nenhuma base de dados, clica sobre 'Base de Dados' para criar a primeira"	
 
 msgid "help_sql_list_ok"
-msgstr ""
-"You can create various databases<br />"
-"Click on 'SQL Admin' in the menu to manage them<br />"
-"or use the table below to backup, retrieve or delete them:"
 msgstr ""
 "Você pode criar várias bases de dados<br />"
 "Clica sobre 'SQL Admin' no menu para administrá-los<br />"
 
 msgid "help_sql_list_no"
-msgstr "Your haven't created your main database yet, please enter a password to create it."
 msgstr "Você ainda não criou sua base de dados principal, por favor entra a senha para criá-la."
 
 msgid "hlp_sql_bck"
-msgstr ""
-"Your MySQL backups are stored in the chosen folder from <code>db.sql.1</code> to <code>db.sql.19</code><br />"
-"your database name replaces 'db'.<br />"
-"WARNING: If you modify backup settings (backups, compression...) previous backups may remain in the backup folder. "
-"Go to the file manager to delete them."
 msgstr ""
 "Seu backup MySQL está salvado na pasta de <code>db.sql.1</code> a <code>db.sql.19</code><br />"
 "seu nome da base de dados substitui 'db'.<br />"
@@ -88,143 +66,105 @@ msgstr ""
 "Usar a administração de arquivos para suprimi-los."
 
 msgid "MySQL Databases"
-msgstr "MySQL Databases"
 msgstr "Base de Dados MySQL"
 
 msgid "SQL Server"
-msgstr "SQL Server"
 msgstr "Servidor SQL"
 
 msgid "Database"
-msgstr "Database"
 msgstr "Base de dados"
 
 msgid "Delete my SQL database"
-msgstr "Delete my SQL database"
 msgstr "Suprimir minha base de dados SQL"
 
 msgid "Delete the checked databases"
-msgstr "Delete the chosen databases"
 msgstr "Suprimir as bases de dados selecionadas"
 
 msgid "Get the current SQL parameters"
-msgstr "Get the current SQL settings"
 msgstr "Procurar os ajustes atuais do SQL"
 
 msgid "Confirm the deletion of the following SQL databases"
-msgstr "Confirm the deletion of the following SQL databases"
 msgstr "Confirma o apagemento das bases de dados seguintes"
 
 msgid "This will delete all the tables currently in those db."
-msgstr "This will delete all the tables in the database."
 msgstr "Isto suprimirá todas as tabelas atualmente na base de dados."
 
 msgid "The database %s has been successfully deleted"
-msgstr "The database '%s' has been successfully deleted"
 msgstr "A base de dados '%s' foi suprimido com sucesso"	
 
 msgid "You currently have no database defined"
-msgstr "Your don't have a database yet"
 msgstr "Você ainda não tem nenhuma base de dados"
 
 msgid "Restore a SQL backup"
-msgstr "Restore a SQL backup"
 msgstr "Restaurar o backup SQL"
 
 msgid "Please enter the filename containing SQL data to be restored."
-msgstr "Please enter the filename containing the SQL data that need restoring."
 msgstr "Por favor entrar o nome de arquivo que contem os dados do SQL que precisam restaurar."
 
 msgid "Note: If the filename ends with .gz, it will be uncompressed before."
-msgstr "Note: If the filename ends up with .gz, it will be uncompressed first."
 msgstr "Nota: Se o nome de arquivo termina com .gz, primeiramente ele será de-compressado."	
 
 msgid "Restore my database"
-msgstr "Restore a database"
-msgtsr "Restaurar a base de dados"
-
-msgid "Your database has been restored, check out the previous text for error messages."
-msgstr "Your database has been restored, check the previous text for error messages."
 msgstr "Sua base de dados foi restaurado, verificar o texto precedente para ver se há mensagens de erro."
 
 msgid "Enter the new password of your SQL database and click 'change the password' to change it"
-msgstr "Enter your new password to your SQL database"
 msgstr "Entrar sua nova senha de base de dados SQL"
 
 msgid "Manage the SQL backup"
-msgstr "Manage SQL backups"
 msgstr "Administrar os backups SQL"
 
 msgid "No backup"
-msgstr "No backup"
 msgstr "Nenhum backup"
 
 msgid "Weekly backup"
-msgstr "Weekly backup"
 msgstr "Backup semanal"
 
 msgid "Daily backup"
-msgstr "Daily backup"
 msgstr "Backup diário"
 
 msgid "Change the SQL password"
-msgstr "Change your SQL password"
 msgstr "Mudar sua senha SQL"
 
 msgid "Do sql backup?"
-msgstr "Backup frequency:"
 msgstr "Frequência de Backup:"
 
 msgid "Change the SQL backup parameters"
-msgstr "Modify SQL backup settings"
 msgstr "Modificar os ajustes de backup SQL"
 
 msgid "How many backup should be kept?"
-msgstr "How long do you want to keep them (days/weeks)?"
 msgstr "Quanto tempo você quer os manter (dia/semanas)?"
 
 msgid "Compress the backups? (gzip)"
-msgstr "Do you want to compress the backups? (gzip)"
 msgstr "Você quiser compresser os backups? (gzip)"
 
 msgid "In which folder do you want to store the backups?"
-msgstr "Which folder do you want to store the backups in?"
 msgstr "Que pasta você quiser usar para salvar seus backups? 
 
 msgid "Your current settings are"
-msgstr "Your current settings are:"
 msgstr "Seus ajustes atuaís estão:" 
 
 msgid "Destroy my database"
-msgstr "Destroy my database"
 msgstr "Destruir minha base de dados"
 
 msgid "Create my main database"
-msgstr "Create my main database"
 msgstr "Criar minha base de dados principal"
 
 msgid "Databases"
-msgstr "Databases"
 msgstr "Bases de Dados"
 
 msgid "SQL Admin"
 msgstr "SQL Admin"
-msgstr "SQL Admin"
 
 msgid "Create a new database"
-msgstr "Create a database"
 msgstr "Criar uma base de dados"
 
 msgid "Create this new database."
-msgstr "Create the database."
 msgstr "Criar esta base de dados"
 
 msgid "Backup"
 msgstr "Backup"
-msgstr "Backup"
 
 msgid "Restore"
-msgstr "Restore"
 msgstr "Restaurar"
 
 

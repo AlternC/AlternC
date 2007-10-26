@@ -16,9 +16,7 @@ msgstr ""
 
 msgid "err_err_0"
 msgstr "OK"
-msgstr "OK"
 
 msgid "err_err_1"
-msgstr "The error message does not exists (%s)"
 msgstr "Esta mesagem do erro não existe (%s)"
 

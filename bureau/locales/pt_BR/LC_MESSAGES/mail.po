@@ -15,148 +15,110 @@ msgstr ""
 "X-Generator: Emacs 21\n"
 
 msgid "quota_mail"
-msgstr "Email Accounts"
 msgstr "Contas de Email"
 
 msgid "err_mail_1"
-msgstr "ldap connexion impossible, please try again later."
 msgstr "conexão ldap impossível, por favor tenta mais tarde."
 
 msgid "err_mail_2"
-msgstr "No email on domain '%s'"
 msgstr "Nenhum email no domínio '%s'"
 
 msgid "err_mail_3"
-msgstr "The email '%s' does not exist"
 msgstr "Este email '%s' não existe"
 
 msgid "err_mail_4"
-msgstr "Please check 'pop account' and choose a password pop, or enter some redirections, or both"
 msgstr "Por favor escolha 'conta pop' e escholha a senha pop, ou entra algumas redireções, ou os dois"
 
 msgid "err_mail_5"
-msgstr "-- Server error --- Parameter is incorrect (%s)"
 msgstr "-- Erro de Servidor --- Parâmetro é incorreto (%s)"
 
 msgid "err_mail_6"
-msgstr "The domain '%s' does not exist."
 msgstr "O domínio '%s' não existe."
 
 msgid "err_mail_7"
-msgstr "The email '%s' already exists."
 msgstr "O email '%s' jà existe."
 
 msgid "err_mail_8"
-msgstr "Your mail account quota is over. You cannot create more email accounts."
 msgstr "Sua quota email acabou. Você não pode criar mais contas de email."
 
 msgid "err_mail_9"
-msgstr "The domain '%s' does not exist."
 msgstr "O domínio '%s' não existe."
 
 msgid "err_mail_10"
-msgstr "-- Programm error -- Mail quota does not exist"
 msgstr "-- Erro de Programa -- Quota de Correios não existe"
 
 msgid "err_mail_11"
-msgstr "Please enter an Email address"
 msgstr "Por favor entrar um endereço Email"
 
 msgid "err_mail_12"
-msgstr "Please enter a pop password"
 msgstr "Por favor entrar uma senha pop"
 
 msgid "err_mail_13"
-msgstr "Please enter a valid email"
 msgstr "Por favor entrar um email valido"
 
 msgid "err_mail_14"
-msgstr "One or more email redirection are invalid"
 msgstr "Um ou mais redireções de email são invalidos"
 
 msgid "err_mail_15"
-msgstr "This mail is not a pop account. It's impossible to change the password !"
 msgstr "Este email não é uma conta pop. É impossível mudar a senha !"
 
 msgid "help_mail_add"
 msgstr ""
 
-msgid "help_mail_edit"
-msgstr ""
-
 msgid "Add a mail to the domain %s"
-msgstr "Add a mail to the domain %s"
 msgstr "Adiçionar um email ao domínio %s"
 
 msgid "Create this mailbox"
-msgstr "Create this mailbox"
 msgstr "Criar uma caixa de email"
 
 msgid "Is it a POP account?"
-msgstr "Is it a POP account?"
 msgstr "É uma conta POP?"
 
 msgid "POP password"
-msgstr "POP password"
 msgstr "Senha POP"
 
 msgid "Other recipients"
-msgstr "Other recipients"
 msgstr "Outros receptores"
 
 msgid "One email per line"
-msgstr "One email per line"
 msgstr "Um email por linha"
 
 msgid "The mailbox <b>%s</b> has been successfully created"
-msgstr "The mailbox <b>%s</b> has been successfully created"
 msgstr "A caixa de email <b>%s</b> foi criado com sucesso"
 
 msgid "The mailbox <b>%s</b> does not exist!"
-msgstr "The mailbox <b>%s</b> does not exist!"
 msgstr "A caixa de email <b>%s</b> não existe!"
 
 msgid "The mailbox <b>%s</b> has been successfully changed"
-msgstr "The mailbox <b>%s</b> has been successfully changed"
 msgstr "A caixa de email <b>%s</b> foi mudado com sucesso"
 
 msgid "Edit a mailbox of the domain %s"
-msgstr "Edit a mailbox of the domain %s"
 msgstr "Editar a caixa de email do domínio %s"
 
 msgid "Edit the mailbox %s"
-msgstr "Edit the mailbox %s"
 msgstr "Editar a caixa e email %s"
 
 msgid "Change this mailbox"
-msgstr "Change this mailbox"
 msgstr "Mudar esta caixa de email"
 
 msgid "The mailbox %s has been successfully changed"
-msgstr "The mailbox %s has been successfully changed"
 msgstr "A caixa de email %s foi mudado com sucesso"
 
 msgid "Mailbox list of the domain %s"
-msgstr "Mailbox list of the domain %s"
 msgstr "Lista de caixas de email do domínio %s"
 
 msgid "Action"
-msgstr "Action"
 msgstr "Ação"
 
 msgid "Size"
-msgstr "Size"
 msgstr "Tamanho"
 
 msgid "Delete the selected mailboxes"
-msgstr "Delete the selected mailboxes"
 msgstr "Suprimir as caixas de email selecionados"
 
 msgid "Add a mailbox on <b>%s</b>"
-msgstr "Add a mailbox on <b>%s</b>"
 msgstr "Adiçionar a caixa de email em <b>%s</b>"
 
 msgid "Mailboxes"
-msgstr "Mailboxes"
 msgstr "Caixas e email"
 
