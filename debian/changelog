@@ -1,20 +1,6 @@
-alternc (0.9.6.5-r2039) UNRELEASED stable; urgency=low
+alternc (0.9.7) stable; urgency=low
 
-  * Non-maintainer upload.
-  * more bugfixes: #1052 and other misc bugfixes
-  * add portuguese translation
-  * see subversion changelog for more details
-
- -- The Anarcat <anarcat@mumia.anarcat.ath.cx>  Fri,  9 Nov 2007 17:01:45 -0500
-
-alternc (0.9.6.5-14) UNRELEASED stable; urgency=low
-
-  * upload test package to stable (etch)
-
- -- Antoine Beaupré <antoine@koumbit.org>  Wed,  3 Oct 2007 22:58:00 +0000
-
-alternc (0.9.6.5-13) UNRELEASED testing; urgency=low
-
+  * major release, closing more than 40 bugs, including...
   * Fixing MX check when hosting a mail (#1706)
   * Delete the zonefile properly when destroying a domain (#772)
   * Choose english as default language, (#1047)
@@ -36,8 +22,11 @@ alternc (0.9.6.5-13) UNRELEASED testing; urgency=low
   * try to support apache2, at least with the right dependencies
   * end explicit mysql-server dependencies, which switches to Recommends,
     since we can now configure remote mysql servers properly (#1014)
+  * fix our phpmyadmin config for etch (#1052)
+  * add portuguese translation
+  * see subversion changelog for more details
 
- -- Benjamin Sonntag <benjamin@alternc.org>  Tue, 23 May 2007 00:07:54 +0200
+ -- Antoine Beaupré <anarcat@koumbit.org>  Fri,  9 Nov 2007 18:40:50 -0500
 
 alternc (0.9.6.3) stable; urgency=low
 
