@@ -557,7 +557,7 @@ msgstr "MySQL Databases"
 
 #. MySQL Users
 msgid "quota_mysql_users"
-msgstr "MySQL Databases"
+msgstr "MySQL Users"
 
 #. Disk space
 msgid "quota_web"

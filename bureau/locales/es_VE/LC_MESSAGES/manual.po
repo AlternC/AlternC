@@ -560,7 +560,7 @@ msgstr "Bases de datos MySQL"
 #. MySQL Users
 #, fuzzy
 msgid "quota_mysql_users"
-msgstr "Bases de datos MySQL"
+msgstr "Usarios MySQL"
 
 #. Disk space
 msgid "quota_web"
