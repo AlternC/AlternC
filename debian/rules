@@ -29,6 +29,7 @@ clean:
 	dh_testdir
 	dh_testroot
 	rm -f build-stamp
+	debconf-updatepo
 	dh_clean
 
 install: DH_OPTIONS=

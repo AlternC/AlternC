@@ -96,8 +96,8 @@ _Description: The server to GRANT permissions to:
 Template: alternc/public_ip
 Type: string
 _Description: The primary IP of this server:
- AlternC will default the A records for domains it hosts to this IP. In
- other words, this is the IP everyone can reach to server at.
+ AlternC will default the A records for domains it hosts to this address. In
+ other words, this is the address everyone can reach to server at.
 
 Template: alternc/internal_ip
 Type: string
