@@ -1,3 +1,12 @@
+alternc (0.9.6.5-r2039) UNRELEASED stable; urgency=low
+
+  * Non-maintainer upload.
+  * more bugfixes: #1052 and other misc bugfixes
+  * add portuguese translation
+  * see subversion changelog for more details
+
+ -- The Anarcat <anarcat@mumia.anarcat.ath.cx>  Fri,  9 Nov 2007 17:01:45 -0500
+
 alternc (0.9.6.5-14) UNRELEASED stable; urgency=low
 
   * upload test package to stable (etch)
