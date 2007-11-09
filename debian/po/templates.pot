@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: anarcat@koumbit.org\n"
-"POT-Creation-Date: 2007-08-27 11:43+0200\n"
+"POT-Creation-Date: 2007-11-09 17:08-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -227,8 +227,8 @@ msgstr ""
 #. Description
 #: ../templates:11001
 msgid ""
-"AlternC will default the A records for domains it hosts to this IP. In other "
-"words, this is the IP everyone can reach to server at."
+"AlternC will default the A records for domains it hosts to this address. In "
+"other words, this is the address everyone can reach to server at."
 msgstr ""
 
 #. Type: string
@@ -296,8 +296,8 @@ msgstr ""
 #. Description
 #: ../templates:15001
 msgid ""
-"IP address (or ip/prefix) of the server(s) which must be authorized to  ping "
-"us and access apache status pages. Completely optional."
+"The IP address (or ip/prefix) of the server(s) which must be authorized to  "
+"ping us and access apache status pages. Completely optional."
 msgstr ""
 
 #. Type: string

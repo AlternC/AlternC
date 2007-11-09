@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AlternC 0.9.5\n"
 "Report-Msgid-Bugs-To: anarcat@koumbit.org\n"
-"POT-Creation-Date: 2007-08-27 11:43+0200\n"
+"POT-Creation-Date: 2007-11-09 17:08-0500\n"
 "PO-Revision-Date: 2006-04-26 11:16+0200\n"
 "Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
 "Language-Team: Team AlternC <team@alternc.org>\n"
@@ -275,9 +275,10 @@ msgstr "l'adresse IP principale de ce serveur : "
 #. Type: string
 #. Description
 #: ../templates:11001
+#, fuzzy
 msgid ""
-"AlternC will default the A records for domains it hosts to this IP. In other "
-"words, this is the IP everyone can reach to server at."
+"AlternC will default the A records for domains it hosts to this address. In "
+"other words, this is the address everyone can reach to server at."
 msgstr ""
 "AlternC va donner cette adresse pas défaut aux domaines qu'il héberge. "
 "Autrement dit, c'est l'adresse à laquelle tout le monde peut contacter le "
@@ -354,9 +355,10 @@ msgstr "serveur de surveillance : "
 #. Type: string
 #. Description
 #: ../templates:15001
+#, fuzzy
 msgid ""
-"IP address (or ip/prefix) of the server(s) which must be authorized to  ping "
-"us and access apache status pages. Completely optional."
+"The IP address (or ip/prefix) of the server(s) which must be authorized to  "
+"ping us and access apache status pages. Completely optional."
 msgstr ""
 "Adresse IP (ou ip/prefixe) du(des) serveur(s) dont qui pourront pinguer et "
 "accéder au status apache (pour le monitoring de serveur). Facultatif."
