@@ -18,7 +18,7 @@ include_once('/var/alternc/bureau/class/local.php');
 
 $i = 1;
 
-$cfg['Servers'][$i]['host']          = $L_MYSQL_HOST; // MySQL hostname or IP address
+$cfg['Servers'][$i]['host']          = $GLOBALS['L_MYSQL_HOST']; // MySQL hostname or IP address
 $cfg['Servers'][$i]['connect_type']  = 'tcp';    // How to connect to MySQL server ('tcp' or 'socket')
 $cfg['Servers'][$i]['auth_type']     = 'config';    // Authentication method (config, http or cookie based)?
 $cfg['Servers'][$i]['user']          = $_COOKIE["REMOTE_USER"];    ;      // MySQL user
@@ -28,7 +28,7 @@ $cfg['Servers'][$i]['password']      = $_COOKIE["REMOTE_PASSWORD"]; ;          /
 $i++;
 
 // Uncomment to override the default configuration
-$cfg['Servers'][$i]['host']          = $L_MYSQL_HOST; // MySQL hostname or IP address
+$cfg['Servers'][$i]['host']          = $GLOBALS['L_MYSQL_HOST']; // MySQL hostname or IP address
 $cfg['Servers'][$i]['connect_type']  = 'tcp';    // How to connect to MySQL server ('tcp' or 'socket')
 $cfg['Servers'][$i]['auth_type']     = 'cookie';    // Authentication method (config, http or cookie based)?
 
