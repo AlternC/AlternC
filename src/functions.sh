@@ -140,14 +140,14 @@ add_host() {
     else
         FQDN="$host.$domain"
     fi
-    if [ "$host_type" != "$TYPE_IP" ]; then
-        add_to_php_override "$FQDN"
-    fi
 
     if [ "$host_type" = "$TYPE_IP" ]; then
        ip="$value"
     else
        ip="$PUBLIC_IP"
+       if [ "$host_type" != "$TYPE_WEBMAIL" ]; then
+           add_to_php_override "$FQDN"
+       fi
     fi
     if [ "$host" = "@" -o -z "$host" ]; then
         change_host_ip "$domain" "$ip" || true
