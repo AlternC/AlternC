@@ -172,6 +172,10 @@ add_host() {
 
       $TYPE_URL)
         mkdir -p "$htaccess_directory"
+        # normalize the url provided to make sure the hostname part is
+        # followed by at least /
+        value=`echo $value | sed -e 's#\([^/:]*://\)\?\([^/]*\)/*\(.*\)#\1\2/\3#'`
+
         (echo "RewriteEngine on"
          echo "RewriteRule (.*) ${value}\$1 [R,L]"
         ) > "$htaccess_directory/.htaccess"
