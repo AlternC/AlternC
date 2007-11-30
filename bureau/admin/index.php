@@ -51,8 +51,8 @@ $H=getenv("HTTP_HOST");
 <form action="login.php" method="post" target="_top" id="fmain" name="fmain">
 <div class="dlogin">
 <table border="1" cellspacing="0" cellpadding="4" width="300" class="login">
-<tr><th align="right"><label for="username"><?php echo _("Username"); ?></label></th><td><input type="text" class="int" name="username" id="username" value="" maxlength="128" size="20" /></td></tr>
-<tr><th align="right"><label for="password"><?php echo _("Password"); ?></label></th><td><input type="password" class="int" name="password" id="password" value="" maxlength="128" size="20" /></td></tr>
+<tr><th align="right"><label for="username"><?php echo _("Username"); ?></label></th><td><input type="text" class="int" name="username" id="username" value="" maxlength="128" size="20" autocomplete="off" /></td></tr>
+<tr><th align="right"><label for="password"><?php echo _("Password"); ?></label></th><td><input type="password" class="int" name="password" id="password" value="" maxlength="128" size="20" autocomplete="off" /></td></tr>
 <tr><td colspan="2" align="center"><input type="submit" class="inb" name="submit" value="<?php __("Enter"); ?>" /></td></tr>
 <tr><td colspan="2" align="right"><label><input type="checkbox" class="inc" id="restrictip" name="restrictip" value="1" checked="checked"><?php __("Restrict this session to my ip address"); ?></label></td></tr>
 </table>
