@@ -53,8 +53,8 @@ fclose($tt);
 
 </table>
 
-<p> <a href="http://alternc.org"><img src="alternc.png" width="120" height="82" border="0" alt="AlternC" /></a>
-<?php echo "$L_VERSION"; ?>
+<p> <a href="http://alternc.org"><img src="alternc.png" width="120" height="82" border="0" alt="AlternC" /></a></p>
+<p><?php echo "$L_VERSION"; ?>
 </p>
 </body>
 </html>
