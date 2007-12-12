@@ -14,7 +14,7 @@ $compat = array('DEFAULT_MX' => 'MX',
 
 $config_file = fopen('/etc/alternc/local.sh', 'r');
 while (FALSE !== ($line = fgets($config_file))) {
-    if (ereg('([A-Z0-9_]*)="([^"]*)"', $line, $regs)) {
+    if (ereg('^([A-Z0-9_]*)="([^"]*)"', $line, $regs)) {
         $GLOBALS['L_'.$regs[1]] = $regs[2];
        if (isset($compat[$regs[1]])) {
            $GLOBALS['L_'.$compat[$regs[1]]] = $regs[2];
