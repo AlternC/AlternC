@@ -59,7 +59,7 @@ then
         $mysql -e "GRANT ALL ON *.* TO '$rootlogin'@'${MYSQL_CLIENT}' IDENTIFIED BY '$rootpass' WITH GRANT OPTION"
         if [ "$?" -ne "0" ] 
         then 
-	    echo "Can't grant system user $rootlogin, abording"; 
+	    echo "Can't grant system user $rootlogin, aborting"; 
 	    exit 1 
 	fi
     fi
