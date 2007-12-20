@@ -38,7 +38,7 @@ $R=$bro->convertabsolute($R,1);
 if ($formu) {
   switch ($formu) {
   case 1:  // Créer le répertoire $R.$nomfich
-    if ($bro->CreateDir($R,$nomfich)) {
+    if (!$bro->CreateDir($R,$nomfich)) {
       print $err->errstr();
     }
     $p=$bro->GetPrefs();
