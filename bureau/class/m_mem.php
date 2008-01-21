@@ -237,7 +237,7 @@ class m_mem {
    * @return boolean TRUE si la session a bien été détruite, FALSE sinon.
    */
   function del_session() {
-    global $db,$session,$user,$err,$cuid;
+    global $db,$session,$user,$err,$cuid,$classes;
     $err->log("mem","del_session");
     $session=addslashes($session);
     setcookie("session","",0,"/");
@@ -263,6 +263,13 @@ class m_mem {
     $cuid=$db->f("uid");
     $db->query("delete from sessions where sid='$session';");
     $err->error=0;
+    
+    # Invoker le logout dans toutes les autres classes
+    foreach($classes as $c) {
+      if (method_exists($GLOBALS[$c],"alternc_del_session")) {
+	    $GLOBALS[$c]->alternc_del_session($dom);
+      }
+    }
     return true;
   }
 

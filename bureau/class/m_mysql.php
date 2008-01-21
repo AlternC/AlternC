@@ -390,6 +390,14 @@ class m_mysql {
     return true;
   }
 
+  /* ----------------------------------------------------------------- */
+  /** Hook function called when a user is logged out.
+   * We just remove the cookie created in admin/sql_admin.php
+   */
+  function alternc_del_session() {
+      setcookie("REMOTE_USER","");
+      setcookie("REMOTE_PASSWORD","");
+  }
 
   /* ----------------------------------------------------------------- */
   /**
