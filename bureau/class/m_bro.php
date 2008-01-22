@@ -413,6 +413,143 @@ class m_bro {
     }
   }
 
+  /**
+   * Extract an archive by using GNU and non-GNU tools
+   * @param string $file is the full or relative path to the archive
+   * @param string $dest is the path of the extract destination
+   * @return boolean != 0 on error
+   */
+  function brouteur_extract($file, $dest="./")
+  {
+    static $i=0, $ret;
+    $file = addslashes($file);
+    $dest = addslashes($dest);
+    if ($i == 0) {
+#TODO new version of tar supports `tar xf ...` so there is no
+#     need to specify the compression format
+      exec("tar -xzf '$file' -C '$dest'", $void, $ret);
+    } else if ($i == 1) {
+      exec("tar -xjf '$file' -C '$dest'", $void, $ret);
+    } else if ($i == 2) {
+      exec("unzip '$file' -d '$dest'", $void, $ret);
+    } else if ($i == 3) {
+#FIXME I suck at extracting a rar archive to a specified directory
+#      but I think unrar just sucks <TM>
+      $rarfile = ereg_replace('[a-z0-9]+', '..', $dest)."/$file";
+      exec("mkdir -p '$dest'");
+      exec("cd '$dest' && unrar x -o+ '$rarfile'", $void, $ret);
+    } else {
+      return $ret;
+    }
+
+    if ($ret) {
+      $i++;
+      brouteur_extract($file, $dest);
+    }
+    return $ret;
+  }
+
+
+  /**
+   * Copy a source to a destination by either copying recursively a
+   * directory or by downloading a file with a URL (only http:// is
+   * supported)
+   * @param string $name is the application name
+   * @param string $src is the path or URL
+   * @param string $dest is the absolute path inside the users directory
+   * @return boolean false on error
+   */
+  function brouteur_copy($name, $src, $dest)
+  {
+    global $error, $db;
+
+    $ok = false;
+    @mkdir($dest, 0777);
+    @chmod($dest, 0777);
+    $f = @fopen("$dest/test.php", 'w');
+    if ($f) {
+      @fputs($f, '<?php $ok = true; ?>');
+      @fclose($f);
+      @chmod("$dest/test.php", 0777);
+      include("$dest/test.php");
+    }
+    @unlink("$dest/test.php");
+    @rmdir("$dest");
+    if (!$ok) {
+      $error = _("No write permissions in the destination directory");
+      return false;
+    }
+
+    if (substr($src, 0, 7) == "http://") {
+      $filename = basename($src);
+      $extractdir = tempnam("/tmp", "brouteur");
+      unlink($extractdir);
+      mkdir($extractdir);
+
+      if (!$http = @fopen($src, "rb")) {
+        // Try to get a handle on $http with fsockopen instead
+        ereg('^http://([^/]+)(/.*)$', $src, $eregs);
+        $hostname = $eregs[1];
+        $path = $eregs[2];
+        $http = @fsockopen($hostname, 80);
+        @fputs($http, "GET $path HTTP/1.1\nHost: $hostname\n\n");
+      }
+      if ($http) {
+        // Save the bits
+        $f = fopen("$extractdir/$filename", "wb");
+        while (!feof($http)) {
+          $bin = fgets($http, 16384);
+          fwrite($f, $bin);
+#FIXME if (!trim($bin)) break;
+        }
+        fclose($f);
+        fclose($http);
+      } else {
+        // Dammit, try with wget than
+        exec("wget -q '$src' -O '$extractdir/$filename'", $void, $ret);
+        if ($ret) {
+          $error = _("Unable to download the web application's package.");
+          return false;
+        }
+      }
+
+      // Now extract that package
+      if (!brouteur_extract("$extractdir/$filename", $extractdir)) {
+        $error = _("Unable to extract the files");
+        return false;
+      }
+      unlink("$extractdir/$filename");
+
+      // Corrupt $src since we want to copy $extractdir/packagename
+      $hd = opendir($extractdir);
+      while ($file = readdir($hd)) {
+        if ($file != "." && $file != "..") {
+          $src = "$extractdir/$file";
+          break;
+        }
+      }
+    }
+
+    // Last step // Copy -R
+    $src = addslashes($src);
+    $dest = addslashes($dest);
+    $array = explode('/', $dest);
+    $dir = "";
+    foreach ($array as $v) {
+      $dir .= "$v/";
+      @mkdir($dest);
+    }
+#TODO write a recursive copy function(?)
+    exec("cp -Rf '$src'/* '$dest'", $void, $ret);
+    if ($ret) {
+      $error = _("Errors happened while copying the source to destination.");
+      return false;
+    }
+
+    $error = _("The web application has been successfully installed.");
+    return true;
+  }
+
   /* ----------------------------------------------------------------- */
   /** Affiche le chemin et les liens de la racine au dossier $path
    * Affiche autant de liens HTML (anchor) que le chemin $path contient de
