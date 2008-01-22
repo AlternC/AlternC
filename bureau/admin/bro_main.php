@@ -103,13 +103,8 @@ if ($formu) {
     }
     break;
   case 3:  // Upload de fichier...
-    $target = $bro->UploadFile($R);
-    if (!$target) {
+    if (!$bro->UploadFile($R)) {
       print $err->errstr();
-    } elseif ($_POST['extract']) {
-      if (!$bro->ExtractFile($target)) {
-        print $err->errstr();
-      }
     }
     break;
   }
@@ -220,7 +215,7 @@ echo "\">".htmlentities($c[$i]["name"])."</a></td>\n";
 echo "	<td>".format_size($c[$i]["size"])."</td>";
 echo "<td>".format_date('%3$d-%2$d-%1$d %4$d:%5$d',date("Y-m-d H:i:s",$c[$i]["date"]))."<br /></td>";
 if ($p["showtype"]) {
-echo "<td>".$bro->mime($c[$i]["name"])."</td>";
+echo "<td>"._($bro->mime($c[$i]["name"]))."</td>";
 }
 $vu=$bro->viewurl($R,$c[$i]["name"]);
 if ($vu) {

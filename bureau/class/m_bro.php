@@ -227,7 +227,7 @@ class m_bro {
   function mime($file) {
     global $bro_type;
     if (!strpos($file,".") && substr($file,0,1)!=".") {
-      return _("File");
+      return "File";
     }
     $t=explode(".",$file);
     if (!is_array($t))
@@ -236,9 +236,9 @@ class m_bro {
       $ext=$t[count($t)-1];
     // Now seek the extension
     if (!$bro_type[$ext]) {
-	return _("File");
+	return "File";
     } else {
-	return _($bro_type[$ext]);
+	return $bro_type[$ext];
     }
   }
 
