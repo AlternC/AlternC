@@ -238,8 +238,6 @@ if ($e) {
 echo "<a href=\"bro_main.php?actextract=1&file=".urlencode($c[$i]["name"])."&amp;R=".urlencode($R)."\">";
 echo _("Extract");
 echo "</a>";
-} else {
-echo "not extracable";
 }
 
 echo "</td>\n";
