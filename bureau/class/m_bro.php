@@ -390,6 +390,7 @@ class m_bro {
    * Le champ file-upload originel doit s'appeler "userfile" et doit
    * bien être un fichier d'upload.
    * @param string $R Dossier dans lequel on upload le fichier
+   * @returns the path where the file resides or false if upload failed
    */
   function UploadFile($R) {
     global $_FILES,$err;
@@ -405,23 +406,30 @@ class m_bro {
         }
         move_uploaded_file($_FILES['userfile']['tmp_name'], $absolute."/".$_FILES['userfile']['name']);
       } else {
-	$err->log("bro","uploadfile","Tentative d'attaque : ".$_FILES['userfile']['tmp_name']);
+	    $err->log("bro","uploadfile","Tentative d'attaque : ".$_FILES['userfile']['tmp_name']);
+        return false;
       }
     }
+    return $absolute."/".$_FILES['userfile']['name'];
   }
 
   /**
    * Extract an archive by using GNU and non-GNU tools
    * @param string $file is the full or relative path to the archive
-   * @param string $dest is the path of the extract destination
+   * @param string $dest is the path of the extract destination, the
+   * same directory as the archive by default
    * @return boolean != 0 on error
    */
-  function ExtractFile($file, $dest="./")
+  function ExtractFile($file, $dest=null)
   {
     global $err;
     static $i=0, $ret;
     $file = $this->convertabsolute($file,0);
-    $dest = $this->convertabsolute($dest,0);
+    if (is_null($dest)) {
+      $dest = dirname($file);
+    } else {
+      $dest = $this->convertabsolute($dest,0);
+    }
     if (!$file || !$dest) {
       $err->raise("bro",1);
       return false;
