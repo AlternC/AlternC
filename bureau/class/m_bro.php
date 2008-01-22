@@ -419,11 +419,11 @@ class m_bro {
    * @param string $dest is the path of the extract destination
    * @return boolean != 0 on error
    */
-  function brouteur_extract($file, $dest="./")
+  function ExtractFile($file, $dest="./")
   {
     static $i=0, $ret;
-    $file = addslashes($file);
-    $dest = addslashes($dest);
+    $file = $this->convertabsolute($file,0);
+    $dest = $this->convertabsolute($dest,0);
     if ($i == 0) {
 #TODO new version of tar supports `tar xf ...` so there is no
 #     need to specify the compression format
@@ -432,19 +432,13 @@ class m_bro {
       exec("tar -xjf '$file' -C '$dest'", $void, $ret);
     } else if ($i == 2) {
       exec("unzip '$file' -d '$dest'", $void, $ret);
-    } else if ($i == 3) {
-#FIXME I suck at extracting a rar archive to a specified directory
-#      but I think unrar just sucks <TM>
-      $rarfile = ereg_replace('[a-z0-9]+', '..', $dest)."/$file";
-      exec("mkdir -p '$dest'");
-      exec("cd '$dest' && unrar x -o+ '$rarfile'", $void, $ret);
     } else {
       return $ret;
     }
 
     if ($ret) {
       $i++;
-      brouteur_extract($file, $dest);
+      $this->ExtractFile($file, $dest);
     }
     return $ret;
   }
@@ -459,7 +453,7 @@ class m_bro {
    * @param string $dest is the absolute path inside the users directory
    * @return boolean false on error
    */
-  function brouteur_copy($name, $src, $dest)
+  function CopyFile($name, $src, $dest)
   {
     global $error, $db;
 
