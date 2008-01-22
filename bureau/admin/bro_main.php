@@ -110,6 +110,16 @@ if ($formu) {
   }
 }
 
+if ($actextract) {
+  print _("extracting...");
+  if ($bro->ExtractFile($file, $R)) {
+    print $err->errstr();
+    print _("failed");
+  } else {
+    print _("done");
+  }
+}
+
 /* Creation de la liste des fichiers courants */
 $c=$bro->filelist($R);
 if ($c===false) $error=$err->errstr();
@@ -223,6 +233,15 @@ echo "<td><a href=\"$vu\">"._("View")."</a>";
 } else {
 echo "<td>&nbsp;";
 }
+$e = $bro->is_extractable($R,$c[$i]["name"]);
+if ($e) {
+echo "<a href=\"bro_main.php?actextract=1&file=".urlencode($c[$i]["name"])."&amp;R=".urlencode($R)."\">";
+echo _("Extract");
+echo "</a>";
+} else {
+echo "not extracable";
+}
+
 echo "</td>\n";
 } else {           // DOSSIER :
 echo "	<td width=\"28\"><input type=\"checkbox\" class=\"inc\" name=\"d[]\" value=\"".htmlentities($c[$i]["name"])."\" /></td>";
