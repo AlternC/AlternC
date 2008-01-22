@@ -103,8 +103,13 @@ if ($formu) {
     }
     break;
   case 3:  // Upload de fichier...
-    if (!$bro->UploadFile($R)) {
+    $target = $bro->UploadFile($R);
+    if (!$target) {
       print $err->errstr();
+    } elseif ($_POST['extract']) {
+      if (!$bro->ExtractFile($target)) {
+        print $err->errstr();
+      }
     }
     break;
   }
@@ -430,7 +435,8 @@ else {
      <hr />
      <?php __("Import this file"); ?>&nbsp;&nbsp;<input class="int" name="userfile" type="file" />
      <input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
-     <input type="submit" class="inb" value="<?php __("Send"); ?>" />
+     <input type="submit" class="inb" name="upload" value="<?php __("Send"); ?>" />
+     <input type="submit" class="inb" name="extract" value="<?php __("Send & Extract"); ?>" />
      <hr />
      </form>
      <p>&nbsp;</p>
