@@ -424,6 +424,10 @@ class m_bro {
     static $i=0, $ret;
     $file = $this->convertabsolute($file,0);
     $dest = $this->convertabsolute($dest,0);
+    if (!$file || !$dest) {
+      $err->raise("bro",1);
+      return false;
+    }
     if ($i == 0) {
 #TODO new version of tar supports `tar xf ...` so there is no
 #     need to specify the compression format
@@ -474,6 +478,10 @@ class m_bro {
       return false;
     }
 
+    /*
+     * XXX: Disabled functionality until audit is completed
+     */
+    /*
     if (substr($src, 0, 7) == "http://") {
       $filename = basename($src);
       $extractdir = tempnam("/tmp", "brouteur");
@@ -523,24 +531,29 @@ class m_bro {
         }
       }
     }
+    */
 
     // Last step // Copy -R
-    $src = addslashes($src);
-    $dest = addslashes($dest);
+    $src = escapeshellarg($this->convertabsolute($src));
+    $dest = escapeshellarg($this->convertabsolute($dest));
+    if (!$src || !$dest) {
+      $err->raise("bro",1);
+      return false;
+    }
+    /* XXX: UNIX-specific because of that slash */
     $array = explode('/', $dest);
     $dir = "";
     foreach ($array as $v) {
       $dir .= "$v/";
       @mkdir($dest);
     }
-#TODO write a recursive copy function(?)
-    exec("cp -Rf '$src'/* '$dest'", $void, $ret);
+    #TODO write a recursive copy function(?)
+    exec("cp -Rpf '$src'/* '$dest'", $void, $ret);
     if ($ret) {
-      $error = _("Errors happened while copying the source to destination.");
+      $err->raise("bro","Errors happened while copying the source to destination.");
       return false;
     }
 
-    $error = _("The web application has been successfully installed.");
     return true;
   }
 
