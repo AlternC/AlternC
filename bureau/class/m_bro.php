@@ -428,6 +428,8 @@ class m_bro {
       $err->raise("bro",1);
       return false;
     }
+    $file = escapeshellarg($file);
+    $dest = escapeshellarg($dest);
     if ($i == 0) {
 #TODO new version of tar supports `tar xf ...` so there is no
 #     need to specify the compression format
@@ -534,8 +536,10 @@ class m_bro {
     */
 
     // Last step // Copy -R
-    $src = escapeshellarg($this->convertabsolute($src));
-    $dest = escapeshellarg($this->convertabsolute($dest));
+    $src = $this->convertabsolute($src);
+    $dest = $this->convertabsolute($dest);
+    $src = escapeshellarg($src);
+    $dest = escapeshellarg($dest);
     if (!$src || !$dest) {
       $err->raise("bro",1);
       return false;
