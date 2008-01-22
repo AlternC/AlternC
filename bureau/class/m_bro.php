@@ -432,7 +432,7 @@ class m_bro {
     }
     if (!$file || !$dest) {
       $err->raise("bro",1);
-      return false;
+      return 1;
     }
     $file = escapeshellarg($file);
     $dest = escapeshellarg($dest);
@@ -445,12 +445,16 @@ class m_bro {
     } else if ($i == 2) {
       exec("unzip '$file' -d '$dest'", $void, $ret);
     } else {
+      $err->raise("bro","undefined extractiong error: %s", $ret);
       return $ret;
     }
 
     if ($ret) {
       $i++;
-      $this->ExtractFile($file, $dest);
+      $ret = $this->ExtractFile($file, $dest);
+      if ($ret) {
+        $err->raise("bro","could not find a way to extract file %s, unsupported format?", $file);
+      }
     }
     return $ret;
   }
@@ -666,6 +670,33 @@ class m_bro {
     } else {
       return false;
     }
+  }
+
+  /**
+   * Return a HTML snippet representing an extraction function only if the mimetype of $name is supported
+   */
+  function is_extractable($dir,$name) {
+    if ($parts = explode(".", $name)) {
+      $ext = array_pop($parts);
+      switch ($ext) {
+      case "gz":
+      case "bz":
+      case "bz2":
+	$ext = array_pop($parts) . $ext;
+	/* FALLTHROUGH */
+      case "tar.gz":
+      case "tar.bz":
+      case "tar.bz2":
+      case "tgz":
+      case "tbz":
+      case "tbz2":
+      case "tar":
+      case "Z":
+      case "zip":
+        return true;
+      }
+    }
+    return false;
   }
 
   function content_send($R,$file) {
