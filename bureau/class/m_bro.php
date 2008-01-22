@@ -522,23 +522,16 @@ class m_bro {
     // Last step // Copy -R
     $src = $this->convertabsolute($src);
     $dest = $this->convertabsolute($dest);
-    $src = escapeshellarg($src);
-    $dest = escapeshellarg($dest);
     if (!$src || !$dest) {
       $err->raise("bro",1);
       return false;
     }
-    /* XXX: UNIX-specific because of that slash */
-    $array = explode('/', $dest);
-    $dir = "";
-    foreach ($array as $v) {
-      $dir .= "$v/";
-      @mkdir($dest);
-    }
-    #TODO write a recursive copy function(?)
-    exec("cp -Rpf '$src'/* '$dest'", $void, $ret);
+    $src = escapeshellarg($src);
+    $dest = escapeshellarg($dest);
+    // TODO: write a recursive copy function(?)
+    exec("cp -Rpf '$src' '$dest'", $void, $ret);
     if ($ret) {
-      $err->raise("bro","Errors happened while copying the source to destination.");
+      $err->raise("bro","Errors happened while copying the source to destination. cp return value: %d", $ret);
       return false;
     }
 
