@@ -452,15 +452,44 @@ class m_bro {
 
 
   /**
+   * Copy many files from point A to point B
+   */
+  function CopyFile($d,$old,$new) {
+    global $err;
+    $old=$this->convertabsolute($old,0);
+    if (!$old) {
+      $err->raise("bro",1);
+      return false;
+    }
+    $new=$this->convertabsolute($new,0);
+    if (!$new) {
+      $err->raise("bro",1);
+      return false;
+    }
+    if ($old==$new) {
+      $err->raise("bro",2);
+      return false;
+    }
+    for ($i=0;$i<count($d);$i++) {
+      $d[$i]=ssla($d[$i]); // strip slashes if needed
+      if (!strpos($d[$i],"/") && file_exists($old."/".$d[$i]) && !file_exists($new."/".$d[$i])) {  
+        $this->CopyOneFile($old."/".$d[$i],$new);
+      }
+    }
+    return true;
+  }
+
+  /**
    * Copy a source to a destination by either copying recursively a
    * directory or by downloading a file with a URL (only http:// is
    * supported)
-   * @param string $name is the application name
    * @param string $src is the path or URL
    * @param string $dest is the absolute path inside the users directory
    * @return boolean false on error
+   *
+   * Note that we assume that the inputs have been convertabsolute()'d
    */
-  function CopyFile($name, $src, $dest)
+  function CopyOneFile($src, $dest)
   {
     global $err;
 
@@ -520,12 +549,6 @@ class m_bro {
     */
 
     // Last step // Copy -R
-    $src = $this->convertabsolute($src);
-    $dest = $this->convertabsolute($dest);
-    if (!$src || !$dest) {
-      $err->raise("bro",1);
-      return false;
-    }
     $src = escapeshellarg($src);
     $dest = escapeshellarg($dest);
     // TODO: write a recursive copy function(?)
