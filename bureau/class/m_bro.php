@@ -399,17 +399,14 @@ class m_bro {
       return false;
     }
     if (!strpos($_FILES['userfile']['name'],"/")) {
-      // move_uploaded_file($_FILES['userfile']['tmp_name'], $absolute."/".$_FILES['userfile']['name']);
       if (is_uploaded_file($_FILES['userfile']['tmp_name'])) {
         if (!file_exists($absolute."/".$_FILES['userfile']['name'])) {
           touch($absolute."/".$_FILES['userfile']['name']);
         }
-        copy($_FILES['userfile']['tmp_name'], $absolute."/".$_FILES['userfile']['name']);
+        move_uploaded_file($_FILES['userfile']['tmp_name'], $absolute."/".$_FILES['userfile']['name']);
       } else {
 	$err->log("bro","uploadfile","Tentative d'attaque : ".$_FILES['userfile']['tmp_name']);
       }
-      // TODO delete this if it works :) 
-      // move_uploaded_file($_FILES['userfile']['tmp_name'], $absolute."/".$_FILES['userfile']['name']);
     }
   }
 
