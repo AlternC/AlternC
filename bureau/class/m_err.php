@@ -61,7 +61,7 @@ class m_err {
    */
   function raise($clsid,$error,$param="") {
     /* Leve une exception. Si elle existe, sinon, stocke un message d'erreur sur erreur ...*/
-    if (_("err_".$clsid."_".$error)!="err_".$clsid."_".$error) {
+    if (_("err_".$clsid."_".$error)!="err_".$clsid."_".$error || is_string($error)) {
       $this->clsid=$clsid;
       $this->error=$error;
       $this->param=$param;
@@ -104,7 +104,12 @@ class m_err {
     if ($f) {
       fputs($f,date("d/m/Y H:i:s")." - ERROR - ");
       fputs($f,$mem->user["login"]." - ");
-      fputs($f,sprintf(_("err_".$this->clsid."_".$this->error)."\n",$this->param));
+      if (is_string($this->error)) {
+        $msg = sprintf(_("err_".$this->clsid."_generic: ")._($this->error)."\n",$this->param);
+      } else {
+        $msg = sprintf(_("err_".$this->clsid."_".$this->error)."\n",$this->param);
+      }
+      fputs($f,$msg);
       fclose($f);
     }
   }
@@ -136,5 +141,3 @@ class m_err {
   }
 
 }; /* Classe m_err */
-
-?>
