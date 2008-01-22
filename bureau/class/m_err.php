@@ -87,7 +87,12 @@ class m_err {
    *
    */
   function errstr() {
-    return sprintf(_("err_".$this->clsid."_".$this->error),$this->param);
+    if (is_string($this->error)) {
+      $msg = sprintf(_("err_".$this->clsid."_generic: ")._($this->error)."\n",$this->param);
+    } else {
+      $msg = sprintf(_("err_".$this->clsid."_".$this->error)."\n",$this->param);
+    }
+    return $msg;
   }
 
   /**
@@ -104,12 +109,7 @@ class m_err {
     if ($f) {
       fputs($f,date("d/m/Y H:i:s")." - ERROR - ");
       fputs($f,$mem->user["login"]." - ");
-      if (is_string($this->error)) {
-        $msg = sprintf(_("err_".$this->clsid."_generic: ")._($this->error)."\n",$this->param);
-      } else {
-        $msg = sprintf(_("err_".$this->clsid."_".$this->error)."\n",$this->param);
-      }
-      fputs($f,$msg);
+      fputs($f,$this->errstr());
       fclose($f);
     }
   }
