@@ -421,6 +421,7 @@ class m_bro {
    */
   function ExtractFile($file, $dest="./")
   {
+    global $err;
     static $i=0, $ret;
     $file = $this->convertabsolute($file,0);
     $dest = $this->convertabsolute($dest,0);
@@ -461,24 +462,7 @@ class m_bro {
    */
   function CopyFile($name, $src, $dest)
   {
-    global $error, $db;
-
-    $ok = false;
-    @mkdir($dest, 0777);
-    @chmod($dest, 0777);
-    $f = @fopen("$dest/test.php", 'w');
-    if ($f) {
-      @fputs($f, '<?php $ok = true; ?>');
-      @fclose($f);
-      @chmod("$dest/test.php", 0777);
-      include("$dest/test.php");
-    }
-    @unlink("$dest/test.php");
-    @rmdir("$dest");
-    if (!$ok) {
-      $error = _("No write permissions in the destination directory");
-      return false;
-    }
+    global $err;
 
     /*
      * XXX: Disabled functionality until audit is completed
