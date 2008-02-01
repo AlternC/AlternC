@@ -15,7 +15,7 @@ Recommends: libapache-mod-gzip, apache-ssl, mysql-server
 Conflicts: alternc-admintools, alternc-awstats (<= 0.3.2), alternc-webalizer (<= 0.9.4)
 Provides: alternc-admintools
 Replaces: alternc-admintools
-Suggests: alternc-awstats, alternc-mailman, alternc-changepass, pop-before-smtp
+Suggests: alternc-awstats, alternc-mailman, alternc-changepass, pop-before-smtp, magpierss
 Description: hosting software managment suite for Debian
  Hosting software suite based on Valentin Lacambre's altern.org French hosting
  service. It uses Apache, Postfix, Sympa, MySQL and PHP to allow a web-based
