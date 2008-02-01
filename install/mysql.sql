@@ -419,6 +419,9 @@ the domain "username.example.com".
 
 If this is set to 0 or a "false" string, it will be ignored.');
 
+INSERT IGNORE INTO `variable` (name, value, comment) VALUES ('rss_feed', 0,
+'This is an RSS feed that will be displayed on the users homepages when
+they log in. Set this to 0 or a "false" string to ignore.');
 --
 -- Table structure for table `dbusers`
 --

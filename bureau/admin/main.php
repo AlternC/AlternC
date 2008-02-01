@@ -46,6 +46,25 @@ if ($mem->user["lastfail"]) {
 
 $mem->resetlast();
 
+# use MagpieRSS to syndicate content from another site if available
+
+# this should work, since the debian package installs it in
+# /usr/share/php, which is in the include path
+if (include_once('magpierss/rss_fetch.inc')) {
+  $rss = fetch_rss( variable_get('rss_feed') );
+
+  if ($rss) {
+   echo "<h2>" . _("Latest news") . "</h2>";
+    foreach ($rss->items as $item) {
+      $href = $item['link'];
+      $title = $item['title'];
+      echo "<h3><a href=$href>$title</a></h3>";
+      echo $item['summary'];
+    }
+    echo "</ul>";
+  }
+}
+
 if($admin->enabled) {
   $expiring = $admin->renew_get_expiring_accounts();
 
