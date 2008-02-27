@@ -54,14 +54,15 @@ if (include_once('magpierss/rss_fetch.inc')) {
   $rss = fetch_rss( variable_get('rss_feed') );
 
   if ($rss) {
-   echo "<h2>" . _("Latest news") . "</h2>";
+    echo "<h2>" . _("Latest news") . "</h2>";
     foreach ($rss->items as $item) {
       $href = $item['link'];
       $title = $item['title'];
       echo "<h3><a href=$href>$title</a></h3>";
+      echo '<span class="date">'.$item['pubdate'] .'</span> - ';
+      echo '<span class="author">'.$item['dc']['creator'].'</span>';
       echo $item['summary'];
     }
-    echo "</ul>";
   }
 }
 
