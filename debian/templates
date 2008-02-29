@@ -1,6 +1,6 @@
 Template: alternc/welcomeconfirm
 Type: boolean
-Default: false
+Default: true
 _Description: Do you REALLY want to install AlternC on this computer ?
  You are currently trying to install AlternC on your computer. Be aware
  that this package will overwrite critical system files, including but not
