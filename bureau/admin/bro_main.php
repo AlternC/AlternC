@@ -448,7 +448,6 @@ else {
      <?php __("Import this file"); ?>&nbsp;&nbsp;<input class="int" name="userfile" type="file" />
      <input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
      <input type="submit" class="inb" name="upload" value="<?php __("Send"); ?>" />
-     <input type="submit" class="inb" name="extract" value="<?php __("Send & Extract"); ?>" />
      <hr />
      </form>
      <p>&nbsp;</p>
