@@ -423,7 +423,6 @@ class m_bro {
   function ExtractFile($file, $dest=null)
   {
     global $err;
-    static $i=0, $ret;
     $file = $this->convertabsolute($file,0);
     if (is_null($dest)) {
       $dest = dirname($file);
@@ -436,26 +435,22 @@ class m_bro {
     }
     $file = escapeshellarg($file);
     $dest = escapeshellarg($dest);
-    if ($i == 0) {
 #TODO new version of tar supports `tar xf ...` so there is no
 #     need to specify the compression format
-      exec("tar -xzf '$file' -C '$dest'", $void, $ret);
-    } else if ($i == 1) {
-      exec("tar -xjf '$file' -C '$dest'", $void, $ret);
-    } else if ($i == 2) {
-      exec("unzip '$file' -d '$dest'", $void, $ret);
-    } else {
-      $err->raise("bro","undefined extractiong error: %s", $ret);
-      return $ret;
+    exec("tar -xzf $file -C $dest", $void, $ret);
+    if ($ret) {
+      #print "tgz extraction failed, moving on to tbz\n";
+      exec("tar -xjf $file -C $dest", $void, $ret);
+    }
+    if ($ret) {
+      $cmd = "unzip -o $file -d $dest";
+      #print "tbz extraction failed, moving on to zip: $cmd\n";
+      exec($cmd, $void, $ret);
+    }
+    if ($ret) {
+      $err->raise("bro","could not find a way to extract file %s, unsupported format?", $file);
     }
 
-    if ($ret) {
-      $i++;
-      $ret = $this->ExtractFile($file, $dest);
-      if ($ret) {
-        $err->raise("bro","could not find a way to extract file %s, unsupported format?", $file);
-      }
-    }
     return $ret;
   }
 

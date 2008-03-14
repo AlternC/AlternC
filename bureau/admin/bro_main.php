@@ -112,7 +112,7 @@ if ($formu) {
 
 if ($actextract) {
   print _("extracting...");
-  if ($bro->ExtractFile($file, $R)) {
+  if ($bro->ExtractFile($R. '/' . $file, $R)) {
     print $err->errstr();
     print _("failed");
   } else {
