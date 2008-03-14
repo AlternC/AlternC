@@ -50,8 +50,10 @@ $mem->resetlast();
 
 # this should work, since the debian package installs it in
 # /usr/share/php, which is in the include path
-if (include_once('magpierss/rss_fetch.inc')) {
-  $rss = fetch_rss( variable_get('rss_feed') );
+$rss_url = variable_get('rss_feed');
+$inc = @include_once('magpierss/rss_fetch.inc');
+if ($inc && $rss_url) {
+  $rss = fetch_rss($rss_url);
 
   if ($rss) {
     echo "<h2>" . _("Latest news") . "</h2>";
