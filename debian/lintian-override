@@ -41,4 +41,4 @@ alternc: executable-is-not-world-readable usr/lib/alternc/quota_init 0750 != 075
 alternc: executable-is-not-world-readable usr/lib/alternc/basedir_prot.sh 0750 != 0755
 alternc: executable-is-not-world-readable usr/lib/alternc/spoolsize.php 0750 != 0755
 alternc: executable-is-not-world-readable usr/lib/alternc/rawstat.daily 0750 != 0755
-
+alternc: using-first-person-in-templates alternc/monitor_ip
