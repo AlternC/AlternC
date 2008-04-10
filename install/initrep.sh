@@ -50,4 +50,5 @@ mkdir -p /var/log/alternc
 chown www-data:www-data /var/log/alternc
 chgrp -R www-data /etc/alternc
 
+mkdir -p /var/spool/postfix/var/run/saslauthd
 dpkg-statoverride --quiet --update --add root sasl 710 /var/spool/postfix/var/run/saslauthd  || true
