@@ -32,17 +32,16 @@
 $q=$quota->getquota("dom");
 if ($q["t"]>0) { 
 ?>
-<tr><td nowrap="nowrap">
-<?php __("Domains"); ?><br />
+<dt><?php __("Domains"); ?></dt>
 	<?php if ($quota->cancreate("dom")) { ?>
-	- <a href="dom_add.php"><?php __("Add a domain"); ?></a><br />
+	<dd class="action"><a href="dom_add.php"><?php __("Add a domain"); ?></a></dd>
 	<?php }
 	/* Enumeration des domaines : */
 	$domain=$dom->enum_domains();
 	reset($domain);
 	while (list($key,$val)=each($domain)) {
 	?>
-	- <a href="dom_edit.php?domain=<?php echo urlencode($val) ?>"><?php echo $val ?></a><br />
+	<dd class="element"><a href="dom_edit.php?domain=<?php echo urlencode($val) ?>"><?php echo $val ?></a></dd>
 <?php    }    ?>
-</td></tr>
+</dd></dt>
 <?php   }   ?>

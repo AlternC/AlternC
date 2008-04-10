@@ -28,6 +28,5 @@
  ----------------------------------------------------------------------
 */
 ?>
-<tr><td nowrap="nowrap">
-<a href="quota_show.php"><?php __("Show my quotas"); ?></a><br />
-</td></tr>
+<dt id="quota"><?php __("Show my quotas"); ?></dt>
+<dd><a href="quota_show.php"><?php __("Show my quotas"); ?></a></dd>

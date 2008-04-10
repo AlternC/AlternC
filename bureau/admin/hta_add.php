@@ -56,7 +56,7 @@ include("head.php");
 //  -->
 </script></td>
 </tr>
-<tr><td colspan="2"><input type="submit" class="inb" value="<?php __("Protect this folder"); ?>" /></td></tr>
+<tr><td class="add" colspan="2"><input type="submit" class="inb" value="<?php __("Protect this folder"); ?>" /></td></tr>
 </table>
 </form>
 

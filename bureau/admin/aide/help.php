@@ -42,7 +42,7 @@ if (!$hlist[$hid]) {
 <html>
 <head>
 <title>Aide en ligne <?php echo $host ?></title>
-<link rel="stylesheet" href="styles/style.css" type="text/css">
+<link rel="stylesheet" href="/admin/styles/base.css" type="text/css">
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 </head>
 <frameset cols="30%,*" onload="window.focus(); return true;">
@@ -54,7 +54,3 @@ if (!$hlist[$hid]) {
 	Your browser must support frames
 </noframes>
 </html>
-ames
-</noframes>
-</html>
-

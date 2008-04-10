@@ -30,12 +30,10 @@
 $r=$quota->getquota("mysql");
 if ($r["t"]) {
 ?>
-<tr><td nowrap="nowrap">
-MySQL<br />
-	- <a href="sql_users_list.php"><?php __("MySQL Users") ?></a><br />
-	- <a href="sql_list.php"><?php __("Databases"); ?></a><br />
-	- <a target="_blank" href="sql_admin.php"><?php __("SQL Admin"); ?></a><br />
-</td></tr>
+<dt id="mysql">MySQL</dt>
+<dd><a href="sql_users_list.php"><?php __("MySQL Users") ?></a></dd>
+<dd><a href="sql_list.php"><?php __("Databases"); ?></a></dd>
+<dd><a target="_blank" href="sql_admin.php"><?php __("SQL Admin"); ?></a></dd>
 <?php
 	}
 ?>

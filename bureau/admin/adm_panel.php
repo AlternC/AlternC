@@ -44,17 +44,16 @@ include("head.php");
 		echo "<p class=\"error\">$error</p></body></html>";
 	}
 ?>
-<blockquote>
-<table border="0" cellpadding="4" cellspacing="0">
-<tr class="lst1"><td><a href="adm_tld.php"><?php __("Manage allowed domains (TLD)"); ?></a></td></tr>
-<tr class="lst2"><td><a href="adm_defquotas.php"><?php __("Change the default quotas"); ?></a></td></tr>
-<tr class="lst1"><td><a href="adm_doms.php"><?php __("Manage installed domains"); ?></a></td></tr>
-<tr class="lst2"><td><a href="adm_slaveip.php"><?php __("Manage allowed ip for slave zone transfers"); ?></a></td></tr>
-<tr class="lst1"><td><a href="adm_slaveaccount.php"><?php __("Manage allowed accounts for slave zone transfers"); ?></a></td></tr>
-<tr class="lst1"><td><a href="adm_mxaccount.php"><?php __("Manage allowed accounts for secondary mx"); ?></a></td></tr>
-<tr class="lst2"><td><a href="adm_variables.php"><?php __("Configure AlternC variables"); ?></a></td></tr>
-<tr class="lst1"><td><a href="quota_show_all.php"><?php __("Show all quotas"); ?></a></td></tr>
-<tr class="lst1"><td><a href="stats_members.php"><?php __("Account creation statistics"); ?></a></td></tr>
+<ul id="adm_panel">
+<li class="lst1"><a href="adm_tld.php"><?php __("Manage allowed domains (TLD)"); ?></a></li>
+<li class="lst2"><a href="adm_defquotas.php"><?php __("Change the default quotas"); ?></a></li>
+<li class="lst1"><a href="adm_doms.php"><?php __("Manage installed domains"); ?></a></li>
+<li class="lst2"><a href="adm_slaveip.php"><?php __("Manage allowed ip for slave zone transfers"); ?></a></li>
+<li class="lst1"><a href="adm_slaveaccount.php"><?php __("Manage allowed accounts for slave zone transfers"); ?></a></li>
+<li class="lst1"><a href="adm_mxaccount.php"><?php __("Manage allowed accounts for secondary mx"); ?></a></li>
+<li class="lst2"><a href="adm_variables.php"><?php __("Configure AlternC variables"); ?></a></li>
+<li class="lst1"><a href="quota_show_all.php"><?php __("Show all quotas"); ?></a></li>
+<li class="lst1"><a href="stats_members.php"><?php __("Account creation statistics"); ?></a></li>
 <?php
 
 // here we include any "adminmenu_*" file content
@@ -73,9 +72,7 @@ if ($d) {
 
 closedir($d);
 ?>
-
-</table>
-</blockquote>
+</ul>
 </body>
 </html>
 

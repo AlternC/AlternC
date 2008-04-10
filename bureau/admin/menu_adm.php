@@ -35,12 +35,10 @@
 if ($mem->checkRight())
 {    ?>
 
-<tr><td nowrap>
-   <a href="adm_list.php"><font color="red"><?php __("Manage the members"); ?></font></a><br>
-   <a href="adm_panel.php"><font color="red"><?php __("Admin Control Panel"); ?></font></a><br>
-   <a href="/admin/sql/?server=2"><font color="red"><?php __("General SQL Admin"); ?></font></a><br>
-
-</td></tr>
+<dt id="reseller">Reseller</dt>
+   <dd><a href="adm_list.php"><?php __("Manage the members"); ?></a></dd>
+   <dd><a href="adm_panel.php"><?php __("Admin Control Panel"); ?></a></dd>
+   <dd><a href="/admin/sql/?server=2"><?php __("General SQL Admin"); ?></a></dd>
 <?php
 	    }
 ?>

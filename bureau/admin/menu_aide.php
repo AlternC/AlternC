@@ -29,6 +29,5 @@
 */
 ?>
 
-<tr><td nowrap="nowrap">
-<a href="http://doc.alternc.org/user/" target="help"><?php __("Online help"); ?></a><br />
-</td></tr>
+<dt id="help"><?php __("Online help"); ?></dt>
+<dd><a href="http://doc.alternc.org/user/" target="help"><?php __("Online help"); ?></a></dd>

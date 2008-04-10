@@ -41,7 +41,8 @@ if (!$mem->checkid()) {
 <html>
 <head>
 <title>Administration de <?php echo $host ?></title>
-<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="stylesheet" href="styles/base.css" type="text/css" />
+<link rel="stylesheet" href="styles/custom.css" type="text/css" />
 </head>
 <frameset cols="225px,*">
 	<frame src="menu.php" name="left">

@@ -129,20 +129,18 @@ include("head.php");
 </head>
 <body>
 
-<table border="0" width="100%" cellspacing="0">
-<tr><td>
-
+<div id="browser">
+<h3><?php __("File browser"); ?></h3>
 <hr />
 <table width="100%"><tr><td valign="top">
 <a href="bro_main.php?R=/"><?php echo $mem->user["login"]; ?></a>&nbsp;/&nbsp;<?php echo $bro->PathList($R,"bro_main.php") ?><br />
 <small>
 <?php if ($error) echo "<font color=\"red\">$error</font>"; ?>
 </td><td valign="top" align="right">
-<h3><?php __("File browser"); ?></h3>
 
 <form action="bro_main.php" method="post" name="nn" id="nn">
 <input type="hidden" name="R" value="<?php echo $R; ?>" />
-<table><tr>
+<table id="add-file"><tr>
 <td><input type="text" class="int" name="nomfich" size="22" maxlength="255" /></td>
 <td><input type="submit" class="inb" value="<?php __("Create"); ?>" /></td>
 </tr><tr><td>

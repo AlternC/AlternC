@@ -41,39 +41,48 @@ $H=getenv("HTTP_HOST");
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
 <head>
 <title>AlternC Desktop</title>
-<link rel="stylesheet" href="styles/style.css" type="text/css" />
+<link rel="stylesheet" href="styles/base.css" type="text/css" />
+<link rel="stylesheet" href="styles/custom.css" type="text/css" />
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 </head>
-<body onload="document.forms['fmain'].username.focus();">
-<h1><?php echo _("Administration of")." ".$H ?></h1>
+<body class="login" onload="document.forms['fmain'].username.focus();">
 <?php if ($error) echo "<font color=red>$error</font>"; ?>
-<p><?php echo _("Enter your username and password to connect to the virtual desktop")." [ ".$H." ]" ?></p>
+    <p id="logo"><a href="http://alternc.org">
+  <img src="alternc.png" width="120" height="82" border="0" alt="<?php __("AlternC, Opensource hosting control panel"); ?>" title="<?php __("AlternC, Opensource hosting control panel"); ?>" /></a>
+    </p>
+<div id="wrapper">
 <form action="login.php" method="post" target="_top" id="fmain" name="fmain">
-<div class="dlogin">
-<table border="1" cellspacing="0" cellpadding="4" width="300" class="login">
-<tr><th align="right"><label for="username"><?php echo _("Username"); ?></label></th><td><input type="text" class="int" name="username" id="username" value="" maxlength="128" size="20" autocomplete="off" /></td></tr>
-<tr><th align="right"><label for="password"><?php echo _("Password"); ?></label></th><td><input type="password" class="int" name="password" id="password" value="" maxlength="128" size="20" autocomplete="off" /></td></tr>
-<tr><td colspan="2" align="center"><input type="submit" class="inb" name="submit" value="<?php __("Enter"); ?>" /></td></tr>
-<tr><td colspan="2" align="right"><label><input type="checkbox" class="inc" id="restrictip" name="restrictip" value="1" checked="checked"><?php __("Restrict this session to my ip address"); ?></label></td></tr>
-</table>
-</div>
-</form>
-<p>&nbsp;</p>
-<table width="100%" style="border: 0">
-<tr><td style="text-align: left">
-<?php __("You must accept the session cookie to log-in"); ?>
-<br />
-<?php __("You can use a different language: "); ?>
-<?php 
-foreach($locales as $l) {
-?>
-<a href="?setlang=<?php echo $l; ?>"><?php __($l); ?></a>&nbsp;
-<?php } ?>
-</td>
-<td style="text-align: right">
-<p> <a href="http://alternc.org"><img src="alternc.png" width="120" height="82" border="0" alt="<?php __("AlternC, Opensource hosting control panel"); ?>" title="<?php __("AlternC, Opensource hosting control panel"); ?>" /></a></p>
-</td>
+<table>
+<thead>
+    <tr><td colspan="2"><?php echo _("Administration of")." ".$H ?></td></tr>
+</thead>
+<tfoot>
+    <tr><td colspan="2">
+	<p><?php __("You must accept the session cookie to log-in"); ?></p>
+	<p><?php __("You can use a different language: "); ?>
+	    <?php 
+		foreach($locales as $l) {
+	    ?>
+	    <a href="?setlang=<?php echo $l; ?>"><?php __($l); ?></a>
+	    <?php } ?>
+	</p>
+    </td></tr>
+</tfoot>
+<tbody>
+<tr><td class="forminfo" colspan="2"><?php echo _("Enter your username and password to connect to the virtual desktop")."<br />[ ".$H." ]" ?></td></tr>
+<tr>
+    <td class="username"><label for="username"><?php echo _("Username"); ?></label></td>
+    <td class="input_username"><input type="text" class="int" name="username" id="username" value="" maxlength="128" size="20" /></td>
 </tr>
+<tr>
+    <td class="pass"><label for="password"><?php echo _("Password"); ?></label></td>
+    <td class="input_pass"><input type="password" class="int" name="password" id="password" value="" maxlength="128" size="20" /></td>
+</tr>
+<tr><td class="login" colspan="2"><input type="submit" class="inb" name="submit" value="<?php __("Enter"); ?>" /></td></tr>
+<tr><td class="cookie_ack" colspan="2"><label><input type="checkbox" class="inc" id="restrictip" name="restrictip" value="1" checked="checked" /><?php __("Restrict this session to my ip address"); ?></label></td></tr>
+</tbody>
 </table>
+</form>
+</div>
 </body>
 </html>

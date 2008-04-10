@@ -56,8 +56,7 @@ if ($error) {
 <p class="error"><?php echo $error ?></p>
 <?php } ?>
 <form method="post" action="ftp_del.php">
-<table cellspacing="0" cellpadding="4">
-<tr><th colspan="2">&nbsp;</th><th><?php __("Username"); ?></th><th><?php __("Folder"); ?></th></tr>
+
 <?php
 reset($r);
 $col=1;
@@ -65,25 +64,24 @@ while (list($key,$val)=each($r))
 	{
 	$col=3-$col;
 ?>
-	<tr class="lst<?php echo $col; ?>">
-		<td align="center"><input type="checkbox" class="inc" id="del_<?php echo $val["id"]; ?>" name="del_<?php echo $val["id"]; ?>" value="<?php echo $val["id"]; ?>" /></td>
-		<td><a href="ftp_edit.php?id=<?php echo $val["id"] ?>"><?php __("Edit"); ?></a></td>
-		<td><label for="del_<?php echo $val["id"]; ?>"><?php echo $val["login"] ?></label></td>
-		<td><code>/<?php echo $val["dir"] ?></code></td>
-	</tr>
+    <dl>
+      <dt><input type="checkbox" class="inc" id="del_<?php echo $val["id"]; ?>" name="del_<?php echo $val["id"]; ?>" value="<?php echo $val["id"]; ?>" /><strong><?php __("Username"); ?>:</strong> <label for="del_<?php echo $val["id"]; ?>"><?php echo $val["login"] ?></label></dt>
+        <dd><span><?php __("Folder"); ?></span> <code>/<?php echo $val["dir"] ?></code></dd>
+	<dd><a href="ftp_edit.php?id=<?php echo $val["id"] ?>"><?php __("Edit"); ?></a></dd>
+	<dd><span></span></dd>
+    </dl>
+
 <?php
 	}
 ?>
-<tr><td colspan="5"><input type="submit" name="submit" class="inb" value="<?php __("Delete checked accounts"); ?>" /></td></tr>
-</table>
+<div class="delete"><input type="submit" name="submit" class="inb" value="<?php __("Delete checked accounts"); ?>" /></div>
 </form>
 
 <?php if ($quota->cancreate("ftp")) { ?>
-<p>
+<p class="add">
 <a href="ftp_add.php"><?php __("Create a new ftp account"); ?></a>
 </p>
 <?php  	}
-
 $mem->show_help("ftp_list");
 ?>
 </body>

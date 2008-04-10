@@ -28,7 +28,7 @@
  ----------------------------------------------------------------------
 */
 ?>
-<tr><td nowrap="nowrap">
-<a href="mem_param.php"><?php __("Settings"); ?></a><br />
-<a href="mem_logout.php" target="_parent"><?php __("Logout"); ?></a><br />
-</td></tr>
+<dt id="settings"><?php __("Settings"); ?></dt>
+<dd><a href="mem_param.php"><?php __("Settings"); ?></a></dd>
+<dt id="logout"><?php __("Logout"); ?></dt>
+<dd><a href="mem_logout.php" target="_parent"><?php __("Logout"); ?></a></dd>

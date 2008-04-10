@@ -45,9 +45,16 @@ exit();
 if ($error) echo "<p class=\"error\">$error</p>";
 ?>
 <form method="post" action="dom_doadd.php" id="main">
-<table><tr><td>
-<b><label for="newdomain"><?php __("Domain name"); ?> : www.</label></b></td><td><input type="text" class="int" id="newdomain" name="newdomain" value="<?php echo $newdomain ?>" size="32" maxlength="255" />
-</td></tr><tr><td></td><td><input type="submit" class="inb" name="submit" value="<?php __("Add this domain"); ?>" /></td></tr>
+<table><thead><?php __("Domain hosting"); ?></thead><tbody>
+<tr>
+<th><label for="newdomain"><?php __("Domain name"); ?> : www.</label></th>
+<td><input type="text" class="int" id="newdomain" name="newdomain" value="<?php echo $newdomain ?>" size="32" maxlength="255" /></td>
+</tr>
+<tr>
+<th></th>
+<td><input type="submit" class="inb" name="submit" value="<?php __("Add this domain"); ?>" /></td>
+</tr>
+</tbody>
 </table>
 <p>
 <input type="checkbox" name="dns" class="inc" value="1" id="yndns" <?php if ($dns=="1") echo "checked=\"checked\""; ?> /><br />

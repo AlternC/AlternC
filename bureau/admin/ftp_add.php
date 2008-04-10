@@ -48,7 +48,8 @@ include("head.php");
 	}
 ?>
 <form method="post" action="ftp_doadd.php" name="main">
-<table border="1" cellspacing="0" cellpadding="4">
+<table><thead><?php __("Create a new ftp account"); ?></thead>
+<tbody>
 <tr><th><input type="hidden" name="id" value="<?php echo $id ?>" />
 <label for="login"><?php __("Username"); ?></label></th><td>
 	<select class="inl" name="prefixe"><?php $ftp->select_prefix_list($prefixe); ?></select>&nbsp;<b>_</b>&nbsp;<input type="text" class="int" name="login" id="login" value="<?php echo $login; ?>" size="20" maxlength="64" />
@@ -63,7 +64,7 @@ include("head.php");
 </script>
 </td></tr>
 <tr><td colspan="2"><input type="submit" class="inb" name="submit" value="<?php __("Create this new FTP account."); ?>" /></td></tr>
-</table>
+</tbody></table>
 </form>
 <?php $mem->show_help("ftp_add"); ?>
 </body>

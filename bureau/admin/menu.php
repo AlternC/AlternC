@@ -33,11 +33,14 @@ include("head.php");
 ?>
 <base target="right" />
 </head>
-<body>
+<body id="menu">
+<div id="alternc-logo"><a href="http://alternc.org"><!-- img src="alternc.png" width="120" height="82" border="0" alt="AlternC" / -->AlternC</a> 
+<span><?php echo "$L_VERSION"; ?></span>
+</div>
 <h3>Menu <?php echo $mem->user["login"]; ?></h3>
-
-<table border="1" cellspacing="0" cellpadding="4">
-<tr><td nowrap="nowrap"><a href="main.php"><?php __("Front page") ?></a><br/></td></tr>
+<dl id="menu-list">
+<dt id="home"><?php __("Front page") ?></dt>
+<dd class="link"><a href="main.php"><?php __("Front page") ?></a></dd>
 <?php
 $MENUPATH="/var/alternc/bureau/admin/";
 $tt=fopen("menulist.txt","rb");
@@ -51,10 +54,5 @@ fclose($tt);
 ?>
 
 
-</table>
-
-<p> <a href="http://alternc.org"><img src="alternc.png" width="120" height="82" border="0" alt="AlternC" /></a></p>
-<p><?php echo "$L_VERSION"; ?>
-</p>
 </body>
 </html>

@@ -1,3 +1,11 @@
+alternc (0.9.7+dev) stable; urgency=low UNRELEASED
+
+  * standardisation of the web interface, along with some esthetic changes, by
+    Marc Angles, sponsored by Koumbit
+  * styles can now be changed locally in admin/styles/base.css
+
+ -- Antoine Beaupré <anarcat@koumbit.org>  Thu, 10 Apr 2008 13:56:22 -0400
+
 alternc (0.9.7) stable; urgency=low
 
   * major release, closing more than 40 bugs, including...

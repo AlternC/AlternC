@@ -40,5 +40,5 @@
 sur serveurs mutualisés, né d'Altern.org et de Lautre Net" />
 <meta name="keywords" content="Hébergement, Logiciel d'hébergement, Altern, Lautre Net, GPL, Développement" />
 
-<link rel="stylesheet" href="/style.css" type="text/css" />
+<link rel="stylesheet" href="/admin/styles/base.css" type="text/css" />
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />

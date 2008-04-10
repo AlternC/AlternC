@@ -33,7 +33,6 @@ $q=$quota->getquota("sta2");
 $r=$quota->getquota("dom");
 if ($q["t"]>0 && $r["u"]>0) {
 ?>
-<tr><td nowrap="nowrap">
-<a href="sta2_list.php"><?php __("Raw web statistics"); ?></a><br />
-</td></tr>
+<dt id="stats"><?php __("Raw web statistics"); ?></dt>
+<dd><a href="sta2_list.php"><?php __("Raw web statistics"); ?></a></dd>
 <?php    }    ?>

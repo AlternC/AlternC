@@ -56,7 +56,8 @@ if (!$mem->setid($id)) {
 <html>
 <head>
 <title><?php __("AlternC Desktop"); ?></title>
-<link rel="stylesheet" href="styles/style.css" type="text/css" />
+<link rel="stylesheet" href="styles/base.css" type="text/css" />
+<link rel="stylesheet" href="styles/custom.css" type="text/css" />
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 </head>
 <frameset cols="225px,*">

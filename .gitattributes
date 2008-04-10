@@ -202,7 +202,7 @@ bureau/admin/sta2_doedit_raw.php -text
 bureau/admin/sta2_edit_raw.php -text
 bureau/admin/sta2_list.php -text
 bureau/admin/stats_members.php -text
-bureau/admin/styles/style.css -text
+bureau/admin/styles/base.css -text
 bureau/admin/template.php -text
 bureau/admin/web_list.php -text
 bureau/admin/webmail/.htaccess -text
@@ -243,7 +243,6 @@ bureau/locales/fr_FR/LC_MESSAGES/messages.po -text
 bureau/locales/manual.pot -text
 bureau/locales/messages.pot -text
 bureau/locales/pt_BR/LC_MESSAGES/messages.po -text
-bureau/style.css -text
 debian/.cvsignore -text
 debian/README.Debian -text
 debian/alternc.cron.d -text

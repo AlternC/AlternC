@@ -1,0 +1,285 @@
+body {
+  font-family: sans-serif;
+  font-size: 85%;
+}
+
+.hlp {
+	color: #202020;
+}
+
+td {
+	color: #000000;
+}
+
+th {
+/*	color: #007799;*/
+}
+
+h3 {
+	color: #CB781A;
+}
+
+h4 {
+	color: #007777;
+}
+
+hr {
+	border: none;
+	border-top: 1px solid #000;
+}
+
+.inp {
+	/* Should not be use anymore !!! */
+	border-color: blue;
+	border-width: 5px;
+	background-color: #500000;
+	color: white;
+}
+
+.inc, .inl {
+	border-style: none;
+	color: black;
+}
+
+.inb {
+        border: 1px solid #aaa;
+	color: black;
+}
+
+.int {
+        border: 1px solid #aaa;
+	color: black;
+
+}
+
+.lst1 {
+	background-color: #FFFFFF;
+}
+.lst2 {
+	background-color: #EEEEEE;
+}
+
+.dlogin {
+	text-align: center;
+}
+
+.login {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+img {
+	border: 0px;
+	vertical-align: middle;
+}
+
+.error {
+	color: red;
+	font-weight: bold;
+}
+
+/* Over quota class */
+.over {
+	color: red;
+}
+
+.code {
+	font-size: 16px;
+	font-family: Courier New, Fixed;
+	font-weight: bold;
+	text-align: center;
+}
+
+a {
+  color:#333;
+  }
+a:hover {
+  color:#CB781A;
+}
+a:visited {
+  color:#985B16;
+}
+
+body#menu {
+    border-right:1px solid #000;
+    font-size: .9em;
+    padding-bottom: 2em;
+    margin:0;
+    }
+body#menu img {
+    padding: 5px;
+    }
+body#menu h3 {
+    padding-left: 5px;
+    margin: .5em 0;
+    }
+#menu-list a {
+    display:block;
+    padding: 2px;
+    margin:0;
+    }
+#menu-list a:hover {
+    color: #000;
+    background-color: #EBE0D0;
+    }
+#menu dl {
+    margin: .5em 0;
+    }
+#menu-list dt {
+    font-weight:bold;
+    color:#777;
+    font-size:.9em;
+    /*margin: 4px 0 2px 0;*/
+    padding: 7px .1em 0 5px;
+    /*background-color: #ccc;*/
+    border-bottom: 2px solid #ccc;
+    }
+#menu-list dd {
+    padding:0;
+    margin:0;
+    font-size: 1em;
+    border-bottom: 1px solid #ccc;
+    }
+#alternc-logo {
+    padding: .5em ;
+    text-align: center;
+    background-color: #CB781A;
+    }
+#alternc-logo a {
+    color: #fff;
+    font-weight:bold;
+    }
+#menu-list dd a {
+    padding: 0 0 0 15px;
+    text-decoration: none;
+}
+
+
+
+/**** Login ****/
+
+body.login {
+  text-align:center;
+  margin: 2em 10em;
+}
+#wrapper {
+  margin: 0 auto;
+}
+body.login form {
+    
+}
+.login img {
+  padding: 3em 1em 1em;;
+}
+.login form table {
+  width: 100%;
+  border: 1px solid #CB781A;
+  border-collapse:collapse;
+}
+.login form table thead {
+  font-weight: bold;
+  font-size: 1.5em;
+  padding: 1em;
+  background-color:#CB781A;
+}
+.login form table thead td{
+  color: white;
+}
+.login form table td.forminfo {
+  padding: 1em;
+  border-top: 1px solid #CB781A;
+  border-bottom: 1px solid #CB781A;
+  font-size: 110%;
+}
+
+td.username,
+td.pass {
+  text-align: right;
+  padding: 0 0 0 .5em;
+  width: 50%;
+  font-weight: bold;
+  font-size: 1.2em;
+  letter-spacing: 2px;
+}
+td.input_username,
+td.input_pass {
+  text-align: left;
+  width: 50%;
+  padding: 0 1em;
+}
+td.input_username input,
+td.input_pass input {
+/*  width: 100%;*/
+  border-color:#CB781A;
+  font-family: Courrier New, fixed;
+  padding: 2px;
+  font-size: 110%;
+}
+td.input_username input:hover,
+td.input_pass input:hover {
+  background-color:yellow;
+}
+td.username,
+td.input_username {
+  padding-top: 1em;
+}
+td.pass,
+td.input_pass {
+  padding-bottom: 1em;
+}
+.cookie_ack {
+  font-size: 85%;
+  padding-bottom: 1em;
+  font-weight: bold;
+}
+.login form table tfoot {
+  background-color:#F4D9B9;
+  border-top: 1px solid #CB781A;
+  margin-top: 2em;
+  font-size: 85%;
+}
+.login form table tfoot p {
+  margin: .3em;
+}
+
+input.inb {
+  font-weight: bold;
+  font-size: 100%;
+  letter-spacing: 2px;
+  padding: 1px 1em;
+  background-color:#fff;
+}
+input.inb:hover {
+  background-color:yellow;
+}
+input.inb:active {
+  background-color:red;
+  color: #fff;
+}
+
+/** menu param (intend to be the style of all the tables) **/
+
+#mem_param table {
+    width: 70%;
+    border-collapse:collapse;
+    margin-bottom: 1em;
+    }
+#mem_param table thead {
+    background-color:#CB781A;
+    }
+#mem_param table thead td {
+    color: #fff;
+    font-weight: bold;
+    }
+#mem_param table th {
+    width: 50%;
+    text-align: right;
+    }
+#mem_param table input {
+    }
+#mem_param table input.inb {
+    float: right;
+    }
+#mem_param input.inb  {
+    font-size: .8em
+    } 

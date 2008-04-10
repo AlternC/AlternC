@@ -33,7 +33,10 @@ include("head.php");
 ?>
 </head>
 <body>
-<?php
+
+<h3>Ce bureau est un lieu de développement pour arranger minimalement alterc dans l'objectif d'y faire un "theme" plus joli et personnalisable</h3>
+
+<div id="info"><?php
 // Show last login information : 
 __("Last Login: ");
 
@@ -87,14 +90,8 @@ if($admin->enabled) {
   }
 }
 
-/*
-<h3>
-Le bureau AlternC de ce serveur est en travaux actuellement.<br />
-Il se peut que certaines parties du bureau soient inaccessibles ponctuellement.<br />
-Si une partie du bureau ne fonctionne pas pendant longtemps, n'hésitez pas, contactez le 
-mainteneur par mail : <a href="mailto:root@heberge.info">root@heberge.info</a>
-</h3>
-*/
-?>
+?></div>
+
+
 </body>
 </html>
