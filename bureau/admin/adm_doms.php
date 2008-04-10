@@ -65,7 +65,7 @@ for($i=0;$i<count($c);$i++) {
 <tr class="lst<?php echo $col; ?>">
 <td><a href="adm_domlock.php?domain=<?php echo urlencode($c[$i][domaine]); ?>"><?php 
    if ($c[$i][noerase]) __("Unlock"); else __("Lock");  ?></a></td>
-<td><?php echo $c[$i][domaine]; ?></td>
+<td><a href="http://<?php echo $c[$i][domaine]; ?>" target="_blank"><?php echo $c[$i][domaine]; ?></a></td>
 <td><?php echo $c[$i][login]; ?></td>
 				    <td><?php if ($c[$i][noerase]) {
 			echo "<img src=\"icon/encrypted.png\" width=\"16\" height=\"16\" alt=\""._("Locked Domain")."\" />";
