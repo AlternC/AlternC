@@ -60,14 +60,14 @@ install: build
 	chown -R www-data:www-data debian/alternc/var/log/alternc
 	chown -R www-data:www-data debian/alternc/var/alternc/tmp
 
-    for sub in dns dns/redir mail html apacheconf
-    do
-        for i in a b c d e f g h i j k l m n o p q r s t u v w x y z _ 0 1 2 3 4 5 6 7 8 9
-	    do
-            mkdir -p $DATA/$sub/$i
-            chown www-data $DATA/$sub/$i
-        done
-    done
+	for sub in dns dns/redir mail html apacheconf
+	do
+		for i in a b c d e f g h i j k l m n o p q r s t u v w x y z _ 0 1 2 3 4 5 6 7 8 9
+		do
+			mkdir -p $DATA/$sub/$i
+			chown www-data $DATA/$sub/$i
+		done
+	done
 
 	chmod a+x debian/alternc/usr/share/alternc/install/alternc.install
 	chmod a+x debian/alternc/usr/share/alternc/install/dopo.sh
