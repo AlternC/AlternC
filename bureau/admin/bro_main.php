@@ -107,6 +107,11 @@ if ($formu) {
       print $err->errstr();
     }
     break;
+  case 7:  // Changement de permissions [ML]
+    if (!$bro->ChangePermissions($R, $d, $perm)) {
+      print $err->errstr();
+    }
+    break;
   }
 }
 
@@ -173,6 +178,46 @@ if ($formu==2 && $actrename && count($d)) {
   echo "<hr />\n";
 }
 
+/* [ML] Changer les permissions : */
+if ($formu==2 && $_REQUEST['actperms'] && count($d)) {
+  echo "<form action=\"bro_main.php\" method=\"post\">\n";
+  echo "<input type=\"hidden\" name=\"R\" value=\"$R\" />\n";
+  echo "<input type=\"hidden\" name=\"formu\" value=\"7\" />\n";
+  echo "<p>"._("Permissions")."</p>";
+
+  $tmp_absdir = $bro->convertabsolute($R,0);
+
+  echo "<table border=\"1\">"; // FIXME, marco, ajouter classe css?
+  echo "<tr>";
+  // echo "<th>" . 'File' . "</th><th>&nbsp;</th><th>Owner</th><th>Group</th><th>Other</th>"; // FIXME , i18n
+  echo "<th>" . 'File' . "</th><th>Permissions</th>"; // FIXME, i18n
+  echo "</tr>";
+
+  for ($i=0;$i<count($d);$i++) {
+    $d[$i]=ssla($d[$i]);
+    $stats = stat($tmp_absdir . '/' . $d[$i]);
+    $modes = $stats[2];
+
+    echo "<tr>";
+    echo "<td>".$d[$i]."</td>";
+
+    // Owner
+    echo "<td>";
+    echo "<input type=\"hidden\" name=\"d[$i]\" value=\"".$d[$i]."\" />";
+    // echo "<label>read <input type=\"checkbox\" name=\"perm[$i][r]\" value=\"1\" ". (($modes & 0000400) ? 'checked="checked"' : '') ." />";
+    echo "<label>write <input type=\"checkbox\" name=\"perm[$i][w]\" value=\"1\" ". (($modes & 0000200) ? 'checked="checked"' : '') ." />";
+    echo "</td>";
+
+    echo "</tr>";
+  }
+
+  echo "</table>";
+
+  echo "<p><input type=\"submit\" class=\"inb\" name=\"submit\" value=\""._("Change permissions")."\" /></p>";
+  echo "</form>\n";
+  echo "<hr />\n";
+}
+
 /* We draw the file list and button bar only if there is files here ! */
 if (count($c)) {
 
@@ -189,6 +234,7 @@ document.write("<input type=\"button\" value=\"<?php __("all/none"); ?>\" class=
 <input type="submit" class="inb" name="actdel" value="<?php __("Delete"); ?>" />
 
 <input type="submit" class="inb" name="actrename" value="<?php __("Rename"); ?>" />
+<input type="submit" class="inb" name="actperms" value="<?php __("Permissions"); ?>" /> <!-- [ML] -->
 &nbsp;&nbsp;&nbsp;
 <input type="submit" class="inb" name="actcopy" value="<?php __("Copy to"); ?>" />
 

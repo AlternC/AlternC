@@ -386,6 +386,42 @@ class m_bro {
   }
 
   /* ----------------------------------------------------------------- */
+  /** Change les droits d'acces aux fichier de $d du dossier $R en $p
+   * @param string $R dossier dans lequel se trouve les fichiers à renommer.
+   * @param array of string $old Ancien nom des fichiers
+   * @param array of string $new Nouveau nom des fichiers
+   * @return boolean TRUE si les fichiers ont été renommés, FALSE si une erreur s'est produite.
+   */
+  function ChangePermissions($R,$d,$perm) {
+    global $err;
+    $absolute=$this->convertabsolute($R,0);
+    if (!$absolute) {
+      $err->raise("bro",1);
+      return false;
+    }
+    for ($i=0;$i<count($d);$i++) {
+      $d[$i]=ssla($d[$i]); // strip slashes if needed
+      if (!strpos($d[$i],"/")) {  // caractère / interdit dans le nom du fichier
+	// @rename($absolute."/".$old[$i],$absolute."/".$old[$i].$alea);
+	$m = fileperms($absolute."/". $d[$i]);
+
+	// pour l'instant on se limite a "write" pour owner, puisque c'est le seul
+	// cas interessant compte tenu de la conf de Apache pour AlternC..
+	if ($perm[$i]['w']) {
+	  $m = $m | 128;
+	} else {
+          $m = $m ^ 128;
+	}
+	$m = $m | ($perm[$i]['w'] ? 128 : 0); // 0600
+	chmod($absolute."/".$d[$i], $m);
+	echo "chmod " . sprintf('%o', $m) . " file, was " . sprintf('%o', fileperms($absolute."/". $d[$i])). " -- " . $perm[$i]['w'];
+      }
+    }
+
+    return true;
+  }
+
+  /* ----------------------------------------------------------------- */
   /** Recoit un champ file upload (Global) et le stocke dans le dossier $R
    * Le champ file-upload originel doit s'appeler "userfile" et doit
    * bien être un fichier d'upload.
