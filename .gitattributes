@@ -296,7 +296,6 @@ install/body_checks -text
 install/domaines.template -text
 install/dopo.sh -text
 install/header_checks -text
-install/initrep.sh -text
 install/mysql.sh -text
 install/mysql.sql -text
 install/newone.php -text

@@ -41,6 +41,10 @@ case "$1" in
     # ajoute l'user postfix au groupe sasl
     adduser --quiet postfix sasl
 
+    # corriger les permissions du chroot
+    mkdir -p /var/spool/postfix/var/run/saslauthd || true
+    dpkg-statoverride --quiet --update --add root sasl 710 /var/spool/postfix/var/run/saslauthd  || true
+
     # build local.sh if it does not exist
     if [ ! -f $CONFIGFILE ]; then
         cat > $CONFIGFILE <<EOF
