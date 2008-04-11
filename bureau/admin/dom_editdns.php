@@ -53,7 +53,14 @@ include("head.php");
 <body>
 <h3><?php printf(_("Editing domain %s"),$domain); ?></h3>
 <p>
-<?php printf(_("The domain %s has been changed. The modifications will take effect in 5 minutes."),$domain); ?><br />
+<?php
+  printf(_("The domain %s has been changed."),$domain);
+  # take the current time
+  $t = time();
+  # that modulo (%) there computes the time of the next cron job
+  # XXX: we assume the cron job is at every 5 minutes
+  print strtr(_("The modifications will take effect at %time.  Server time is %now."), array('%now' => %date('H:i:s', $t), '%time' => date('H:i:s', %($t-($t%300)+300)))); 
+?><br />
 <a href="login.php" target="_top"><?php __("Click here to continue"); ?></a>
 </p>
 </body>

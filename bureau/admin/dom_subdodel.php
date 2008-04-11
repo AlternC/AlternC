@@ -47,7 +47,12 @@ include("head.php");
 		echo "<p class=\"error\">$error</p></body></html>";
 		exit();
 	} else {
-	  echo "<p class=\"error\">"._("The subdomain has been deleted. Changes will take place in 5 minutes.")."</p>";
+        # take the current time
+        $t = time();
+        # that modulo (%) there computes the time of the next cron job
+        # XXX: we assume the cron job is at every 5 minutes
+        $error=strtr(_("The modifications will take effect at %time.  Server time is %now."), array('%now' => %date('H:i:s', $t), '%time' => date('H:i:s', %($t-($t%300)+300)))); 
+	    echo "<p class=\"error\">".$error."</p>";
 	}
 ?>
 <p><a href="dom_edit.php?domain=<?php echo urlencode($domain) ?>"><?php __("Click here to continue"); ?></a></p>
