@@ -51,6 +51,7 @@ msgstr "Añadir nuevo miembro"
 #: ../admin/sql_getparam.php:49 ../admin/sql_list.php:96
 #: ../admin/sql_passchg.php:51 ../admin/sql_users_add.php:54
 #: ../admin/sql_users_list.php:95 ../admin/adm_list.php:76
+#: ../admin/ftp_add.php:54 ../admin/ftp_list.php:68 ../admin/index.php:74
 msgid "Username"
 msgstr "Nombre de usuario"
 
@@ -64,6 +65,7 @@ msgstr "Contraseña inicial"
 #: ../admin/ftp_edit.php:59 ../admin/hta_adduser.php:50
 #: ../admin/hta_edituser.php:50 ../admin/mail_add.php:51
 #: ../admin/mail_edit.php:60 ../admin/sql_users_add.php:62
+#: ../admin/ftp_add.php:58
 #, fuzzy
 msgid "Confirm password"
 msgstr "Cambiar mi contraseña"
@@ -106,6 +108,7 @@ msgid "Create a new member"
 msgstr "Crear un nuevo miembro"
 
 #: ../admin/adm_defquotas.php:43 ../admin/adm_panel.php:50
+#: ../admin/adm_panel.php:49
 msgid "Change the default quotas"
 msgstr "Modificar las cuotas por defecto"
 
@@ -199,6 +202,7 @@ msgid "The member has been successfully edited"
 msgstr "La cuenta ha sido modificada con éxito"
 
 #: ../admin/adm_doms.php:41 ../admin/adm_panel.php:51
+#: ../admin/adm_panel.php:50
 msgid "Manage installed domains"
 msgstr "Administración de los dominios instalados"
 
@@ -273,7 +277,8 @@ msgstr "Si"
 #: ../admin/ftp_edit.php:58 ../admin/hta_adduser.php:49 ../admin/index.php:55
 #: ../admin/sql_getparam.php:50 ../admin/sql_list.php:97
 #: ../admin/sql_passchg.php:52 ../admin/sql_users_add.php:58
-#: ../admin/sql_users_list.php:96
+#: ../admin/sql_users_list.php:96 ../admin/ftp_add.php:57
+#: ../admin/index.php:78
 msgid "Password"
 msgstr "Contraseña"
 
@@ -370,6 +375,7 @@ msgid "Last ip"
 msgstr "Última conexión : "
 
 #: ../admin/adm_list.php:78 ../admin/main.php:55 ../admin/adm_list.php:76
+#: ../admin/main.php:80
 msgid "Expiry"
 msgstr ""
 
@@ -412,7 +418,7 @@ msgstr "Suprimir las cuentas marcadas"
 msgid "AlternC Desktop"
 msgstr "Bureau AlternC"
 
-#: ../admin/adm_login.php:82
+#: ../admin/adm_login.php:82 ../admin/adm_login.php:83
 msgid "Member login"
 msgstr "Login miembro"
 
@@ -426,6 +432,7 @@ msgid "The requested account address has been created. It is now allowed."
 msgstr ""
 
 #: ../admin/adm_mxaccount.php:55 ../admin/adm_panel.php:54
+#: ../admin/adm_panel.php:53
 msgid "Manage allowed accounts for secondary mx"
 msgstr ""
 
@@ -445,7 +452,7 @@ msgstr ""
 #: ../admin/adm_mxaccount.php:79 ../admin/adm_slaveaccount.php:79
 #: ../admin/adm_slaveip.php:81 ../admin/bro_main.php:138
 #: ../admin/dom_edit.php:80 ../admin/mail_list.php:88
-#: ../admin/bro_main.php:176
+#: ../admin/bro_main.php:176 ../admin/bro_main.php:234
 msgid "Delete"
 msgstr "Borrar"
 
@@ -465,23 +472,27 @@ msgstr "Panel de Control Administrador"
 
 #: ../admin/adm_panel.php:49 ../admin/adm_tldadd.php:41
 #: ../admin/adm_tldedit.php:48 ../admin/adm_tld.php:52
+#: ../admin/adm_panel.php:48
 msgid "Manage allowed domains (TLD)"
 msgstr "Administración de los dominios autorizados (TLD)"
 
 #: ../admin/adm_panel.php:52 ../admin/adm_slaveip.php:57
+#: ../admin/adm_panel.php:51
 msgid "Manage allowed ip for slave zone transfers"
 msgstr ""
 
 #: ../admin/adm_panel.php:53 ../admin/adm_slaveaccount.php:55
+#: ../admin/adm_panel.php:52
 msgid "Manage allowed accounts for slave zone transfers"
 msgstr ""
 
 #: ../admin/adm_panel.php:55 ../admin/adm_variables.php:48
+#: ../admin/adm_panel.php:54
 #, fuzzy
 msgid "Configure AlternC variables"
 msgstr "Configurar el manejador de archivos"
 
-#: ../admin/adm_panel.php:56
+#: ../admin/adm_panel.php:56 ../admin/adm_panel.php:55
 #, fuzzy
 msgid "Show all quotas"
 msgstr "Mostrar cuotas"
@@ -685,18 +696,19 @@ msgstr "Salir"
 
 #: ../admin/bro_main.php:89 ../admin/hta_edit.php:50 ../admin/hta_edit.php:82
 #: ../admin/menu_brouteur.php:34 ../admin/bro_main.php:127
-#: ../admin/bro_main.php:126
+#: ../admin/bro_main.php:126 ../admin/bro_main.php:138
+#: ../admin/menu_brouteur.php:33
 msgid "File browser"
 msgstr "Manejador de archivos"
 
 #: ../admin/bro_main.php:95 ../admin/bro_main.php:133
-#: ../admin/bro_main.php:132
+#: ../admin/bro_main.php:132 ../admin/bro_main.php:150
 msgid "Create"
 msgstr "Crear"
 
 #: ../admin/bro_main.php:97 ../class/m_bro.php:222 ../class/m_bro.php:231
 #: ../admin/bro_main.php:135 ../class/m_bro.php:230 ../class/m_bro.php:239
-#: ../admin/bro_main.php:134
+#: ../admin/bro_main.php:134 ../admin/bro_main.php:152
 msgid "File"
 msgstr "Archivo"
 
@@ -706,17 +718,20 @@ msgstr "Archivo"
 #: ../admin/hta_list.php:66 ../admin/sta2_add_raw.php:53
 #: ../admin/sta2_edit_raw.php:58 ../admin/sta2_list.php:57
 #: ../admin/bro_main.php:136 ../admin/bro_main.php:135
+#: ../admin/bro_main.php:153 ../admin/ftp_add.php:59 ../admin/ftp_list.php:69
 msgid "Folder"
 msgstr "Carpeta"
 
 #: ../admin/bro_main.php:114 ../admin/bro_main.php:120
 #: ../admin/bro_main.php:140 ../admin/bro_main.php:152
 #: ../admin/bro_main.php:158 ../admin/bro_main.php:178
-#: ../admin/bro_main.php:150
+#: ../admin/bro_main.php:150 ../admin/bro_main.php:168
+#: ../admin/bro_main.php:176 ../admin/bro_main.php:236
 msgid "Rename"
 msgstr "Cambiar nombre"
 
 #: ../admin/bro_main.php:135 ../admin/bro_main.php:173
+#: ../admin/bro_main.php:231
 msgid "all/none"
 msgstr "todos/ninguno"
 
@@ -727,6 +742,7 @@ msgstr "Mover"
 #: ../admin/bro_main.php:177 ../admin/bro_main.php:348
 #: ../admin/sta2_list.php:57 ../admin/sta2_list.php:71
 #: ../admin/bro_main.php:215 ../admin/bro_main.php:386
+#: ../admin/bro_main.php:276 ../admin/bro_main.php:454
 msgid "View"
 msgstr "Ver"
 
@@ -734,50 +750,63 @@ msgstr "Ver"
 #: ../admin/bro_main.php:287 ../admin/bro_main.php:317
 #: ../admin/bro_main.php:258 ../admin/bro_main.php:288
 #: ../admin/bro_main.php:325 ../admin/bro_main.php:355
+#: ../admin/bro_main.php:326 ../admin/bro_main.php:356
+#: ../admin/bro_main.php:393 ../admin/bro_main.php:423
 msgid "V"
 msgstr "V"
 
 #: ../admin/bro_main.php:374 ../admin/bro_main.php:412
+#: ../admin/bro_main.php:480
 msgid "No files in this folder"
 msgstr "No hay ningún archivo en esta carpeta"
 
 #: ../admin/bro_main.php:386 ../admin/bro_main.php:424
+#: ../admin/bro_main.php:492
 msgid "Import this file"
 msgstr "Importar este archivo"
 
 #: ../admin/bro_main.php:388 ../admin/bro_main.php:426
+#: ../admin/bro_main.php:494
 msgid "Send"
 msgstr "Mandar"
 
 #: ../admin/bro_main.php:397 ../admin/bro_main.php:435
+#: ../admin/bro_main.php:503
 msgid "There is an ftp account in this folder"
 msgstr "Existe una cuenta ftp en esta carpeta"
 
 #: ../admin/bro_main.php:397 ../admin/bro_main.php:435
+#: ../admin/bro_main.php:503
 msgid "Click here to edit this ftp account."
 msgstr "Haga clic aquí para modificar esta cuenta ftp."
 
 #: ../admin/bro_main.php:400 ../admin/bro_main.php:438
+#: ../admin/bro_main.php:506
 msgid "Click here to create an ftp account in this folder."
 msgstr "Haga clic aquí para crear una cuenta ftp en esta carpeta."
 
 #: ../admin/bro_main.php:404 ../admin/bro_main.php:442
+#: ../admin/bro_main.php:510
 msgid "This folder has restricted access"
 msgstr "La carpeta está protegida"
 
 #: ../admin/bro_main.php:407 ../admin/bro_main.php:445
+#: ../admin/bro_main.php:513
 msgid "Click here to protect this folder with login/password"
 msgstr "Haga clic aquí para proteger esta carpeta con un login / clave"
 
 #: ../admin/bro_main.php:411 ../admin/bro_main.php:449
+#: ../admin/bro_main.php:517
 msgid "Download"
 msgstr "Bajar"
 
 #: ../admin/bro_main.php:411 ../admin/bro_main.php:449
+#: ../admin/bro_main.php:517
 msgid "this folder and its subfolders as a compressed file"
 msgstr "esta carpeta dentro de un archivo comprimido"
 
 #: ../admin/bro_main.php:412 ../admin/bro_main.php:450
+#: ../admin/bro_main.php:518
 msgid "Configure the file browser"
 msgstr "Configurar el manejador de archivos"
 
@@ -841,27 +870,27 @@ msgstr "Modificar mis preferencias"
 msgid "Back to the file browser"
 msgstr "Regresar al manejador de archivos"
 
-#: ../admin/browseforfolder.php:115
+#: ../admin/browseforfolder.php:115 ../admin/browseforfolder.php:117
 msgid "Searching for a folder"
 msgstr "Búsqueda de una carpeta"
 
-#: ../admin/browseforfolder.php:121
+#: ../admin/browseforfolder.php:121 ../admin/browseforfolder.php:123
 msgid "Error, cannot find this folder"
 msgstr "Error, no se puede conseguir esta carpeta"
 
-#: ../admin/browseforfolder.php:123
+#: ../admin/browseforfolder.php:123 ../admin/browseforfolder.php:125
 msgid "Back to the root folder"
 msgstr "Regresar al directorio raíz"
 
-#: ../admin/browseforfolder.php:135
+#: ../admin/browseforfolder.php:135 ../admin/browseforfolder.php:137
 msgid "Select"
 msgstr "Seleccionar"
 
-#: ../admin/browseforfolder.php:136
+#: ../admin/browseforfolder.php:136 ../admin/browseforfolder.php:138
 msgid "Cancel"
 msgstr "Annuler"
 
-#: ../admin/dom_add.php:38
+#: ../admin/dom_add.php:38 ../admin/dom_add.php:48
 msgid "Domain hosting"
 msgstr "Hospedaje de dominio"
 
@@ -875,18 +904,19 @@ msgstr "Contacte el administrador para obtener más información."
 
 #: ../admin/dom_add.php:49 ../admin/sta2_add_raw.php:50
 #: ../admin/sta2_edit_raw.php:55 ../admin/sta2_list.php:57
+#: ../admin/dom_add.php:50
 msgid "Domain name"
 msgstr "Nombre de dominio"
 
-#: ../admin/dom_add.php:50
+#: ../admin/dom_add.php:50 ../admin/dom_add.php:55
 msgid "Add this domain"
 msgstr "Añadir este dominio"
 
-#: ../admin/dom_add.php:54
+#: ../admin/dom_add.php:54 ../admin/dom_add.php:61
 msgid "host my dns here"
 msgstr "Hospedar el DNS en el servidor"
 
-#: ../admin/dom_add.php:58
+#: ../admin/dom_add.php:58 ../admin/dom_add.php:65
 msgid ""
 "If you don't want to host in our server the DNS of your domain, don't check "
 "the box 'host my dns here'. If you don't know what it mean, leave it checked."
@@ -894,11 +924,11 @@ msgstr ""
 "Si no desea que hospedemos el DNS del dominio, quite la selección 'Hospedar "
 "el DNS en el servidor'. Si no entiende, deje la selección tal cual. "
 
-#: ../admin/dom_add.php:63 ../admin/dom_doadd.php:54
+#: ../admin/dom_add.php:63 ../admin/dom_doadd.php:54 ../admin/dom_add.php:70
 msgid "Whois result on the domain"
 msgstr "Resultado de la búsqueda Whois sobre el dominio"
 
-#: ../admin/dom_doadd.php:46 ../admin/menu_dom.php:38
+#: ../admin/dom_doadd.php:46 ../admin/menu_dom.php:38 ../admin/menu_dom.php:37
 msgid "Add a domain"
 msgstr "Hospedar un dominio"
 
@@ -909,7 +939,8 @@ msgstr "Su nuevo dominio %s ha sido instalado con éxito"
 
 #: ../admin/dom_doadd.php:49 ../admin/dom_dodel.php:69
 #: ../admin/dom_editdns.php:57 ../admin/hta_doedituser.php:53
-#: ../admin/dom_subdodel.php:53
+#: ../admin/dom_subdodel.php:53 ../admin/dom_editdns.php:64
+#: ../admin/dom_subdodel.php:58
 msgid "Click here to continue"
 msgstr "Haga clic aquí para seguir"
 
@@ -1043,10 +1074,11 @@ msgid "You cannot add any new ftp account, your quota is over."
 msgstr "Su cuota de cuentas ftp alcanzó su limite, no se puede crear más."
 
 #: ../admin/ftp_add.php:40 ../admin/ftp_list.php:47 ../admin/ftp_list.php:83
+#: ../admin/ftp_add.php:51 ../admin/ftp_list.php:82
 msgid "Create a new ftp account"
 msgstr "Crear una nueva cuenta ftp"
 
-#: ../admin/ftp_add.php:65
+#: ../admin/ftp_add.php:65 ../admin/ftp_add.php:66
 msgid "Create this new FTP account."
 msgstr "Crear la cuenta FTP."
 
@@ -1153,7 +1185,7 @@ msgid "User"
 msgstr "Usuario"
 
 #: ../admin/hta_edituser.php:49 ../admin/mem_param.php:65
-#: ../admin/mem_param.php:66
+#: ../admin/mem_param.php:66 ../admin/mem_param.php:64
 msgid "New password"
 msgstr "Nueva contraseña"
 
@@ -1173,34 +1205,34 @@ msgstr "Aquí está la lista de las carpetas protegidas de su cuenta"
 msgid "Unprotect the checked folders"
 msgstr "Quitar protección a las carpetas marcadas"
 
-#: ../admin/index.php:48
+#: ../admin/index.php:48 ../admin/index.php:57
 msgid "Administration of"
 msgstr "Administración de"
 
-#: ../admin/index.php:50
+#: ../admin/index.php:50 ../admin/index.php:72
 msgid "Enter your username and password to connect to the virtual desktop"
 msgstr ""
 "Entrar su nombre de usuario y su contraseña para conectarse a la interfaz de "
 "administración"
 
-#: ../admin/index.php:56
+#: ../admin/index.php:56 ../admin/index.php:81
 msgid "Enter"
 msgstr "Entrer"
 
-#: ../admin/index.php:57
+#: ../admin/index.php:57 ../admin/index.php:82
 msgid "Restrict this session to my ip address"
 msgstr ""
 
-#: ../admin/index.php:64
+#: ../admin/index.php:64 ../admin/index.php:61
 msgid "You must accept the session cookie to log-in"
 msgstr "Debe aceptar el cookie de sesión para poder conectarse"
 
-#: ../admin/index.php:66
+#: ../admin/index.php:66 ../admin/index.php:62
 #, fuzzy
 msgid "You can use a different language: "
 msgstr "Si desea cambiar de idioma, haga clic sobre una de las banderas"
 
-#: ../admin/index.php:74
+#: ../admin/index.php:74 ../admin/index.php:51
 msgid "AlternC, Opensource hosting control panel"
 msgstr ""
 
@@ -1338,29 +1370,29 @@ msgstr ""
 msgid "Size"
 msgstr "Tamaño"
 
-#: ../admin/main.php:38
+#: ../admin/main.php:38 ../admin/main.php:41
 msgid "Last Login: "
 msgstr "Última conexión : "
 
-#: ../admin/main.php:41
+#: ../admin/main.php:41 ../admin/main.php:44
 #, php-format
 msgid "from: <code> %1$s </code>"
 msgstr "desde <code> %1$s </code>"
 
-#: ../admin/main.php:44
+#: ../admin/main.php:44 ../admin/main.php:47
 #, php-format
 msgid "%1$d login failed since last login"
 msgstr "%1$d intentas fallidas desde la última conexión"
 
-#: ../admin/main.php:53
+#: ../admin/main.php:53 ../admin/main.php:78
 msgid "Expired or about to expire accounts"
 msgstr ""
 
-#: ../admin/main.php:55
+#: ../admin/main.php:55 ../admin/main.php:80
 msgid "uid"
 msgstr ""
 
-#: ../admin/main.php:55
+#: ../admin/main.php:55 ../admin/main.php:80
 msgid "Last name, surname"
 msgstr ""
 
@@ -1369,11 +1401,12 @@ msgid "Your administrator preferences has been successfully changed."
 msgstr "Sus preferencias de administrador han sido modificadas."
 
 #: ../admin/mem_admin.php:42 ../admin/mem_param.php:98
+#: ../admin/mem_param.php:93
 msgid "Admin preferences"
 msgstr "Preferencias de administrador"
 
 #: ../admin/mem_chgmail.php:40 ../admin/mem_cm2.php:41 ../admin/mem_cm.php:37
-#: ../admin/mem_cm.php:47 ../admin/mem_param.php:75
+#: ../admin/mem_cm.php:47 ../admin/mem_param.php:75 ../admin/mem_param.php:72
 msgid "Change the email of the account"
 msgstr "Cambiar la dirección de correo de la cuenta"
 
@@ -1406,14 +1439,15 @@ msgid "OK"
 msgstr "OK"
 
 #: ../admin/mem_logout.php:38 ../admin/mem_logout.php:43
+#: ../admin/mem_logout.php:44
 msgid "Disconnected"
 msgstr "Desconectado"
 
-#: ../admin/mem_logout.php:45
+#: ../admin/mem_logout.php:45 ../admin/mem_logout.php:46
 msgid "You have been logged out of your administration desktop."
 msgstr "Ha sido desconectado de la interfaz de administración."
 
-#: ../admin/mem_logout.php:46
+#: ../admin/mem_logout.php:46 ../admin/mem_logout.php:47
 msgid "Click here to log in"
 msgstr "Haga clic aquí para volver a conectarse"
 
@@ -1426,10 +1460,11 @@ msgid "Settings of your account"
 msgstr "Parámetros de su cuenta"
 
 #: ../admin/mem_param.php:51 ../admin/mem_passwd.php:42
+#: ../admin/mem_param.php:53
 msgid "Password change"
 msgstr "Cambio de contraseña"
 
-#: ../admin/mem_param.php:55
+#: ../admin/mem_param.php:55 ../admin/mem_param.php:57
 msgid "You cannot change your password"
 msgstr "Usted no puede cambiar su contraseña"
 
@@ -1440,67 +1475,67 @@ msgstr ""
 "pierda!<br> Entre aquí la contraseña actual, y luego la nueva contraseña "
 "(dos veces, por seguridad), y haga clic en 'Cambiar la contraseña''"
 
-#: ../admin/mem_param.php:64
+#: ../admin/mem_param.php:64 ../admin/mem_param.php:63
 msgid "Old password"
 msgstr "Antigua contraseña"
 
 # msgid "New password"
 # msgstr "Nueva contraseña"
-#: ../admin/mem_param.php:67
+#: ../admin/mem_param.php:67 ../admin/mem_param.php:66
 msgid "Change my password"
 msgstr "Cambiar mi contraseña"
 
-#: ../admin/mem_param.php:76
+#: ../admin/mem_param.php:76 ../admin/mem_param.php:73
 msgid "help_chg_mail"
 msgstr ""
 "Aquí puede modificar la dirección de correo relacionada a su cuenta.<br> "
 "Entre ahí la nueva dirección. Un correo será enviado a esta dirección para "
 "confirmar."
 
-#: ../admin/mem_param.php:77
+#: ../admin/mem_param.php:77 ../admin/mem_param.php:74
 msgid "Current mailbox"
 msgstr "Buzón actual"
 
-#: ../admin/mem_param.php:78
+#: ../admin/mem_param.php:78 ../admin/mem_param.php:75
 msgid "New mailbox"
 msgstr "Nuevo buzón"
 
-#: ../admin/mem_param.php:79
+#: ../admin/mem_param.php:79 ../admin/mem_param.php:76
 msgid "Change my mail"
 msgstr "Cambiar mi buzón"
 
-#: ../admin/mem_param.php:86
+#: ../admin/mem_param.php:86 ../admin/mem_param.php:81
 msgid "Online help settings"
 msgstr "Parámetros de la ayuda en linea"
 
-#: ../admin/mem_param.php:87
+#: ../admin/mem_param.php:87 ../admin/mem_param.php:82
 msgid "help_help_settings"
 msgstr ""
 "Cada página de la interfaz presenta información de ayuda resumida, "
 "acompañada por un enlace hacia la ayuda en línea<br> Para ver esta ayuda de "
 "manera automática, marquelo ahí debajo."
 
-#: ../admin/mem_param.php:88
+#: ../admin/mem_param.php:88 ../admin/mem_param.php:83
 msgid "Do you want to see the help texts and links on each page?"
 msgstr "¿Quiere ver los textos de ayuda y los enlaces en cada página?"
 
-#: ../admin/mem_param.php:89
+#: ../admin/mem_param.php:89 ../admin/mem_param.php:84
 msgid "Change these settings"
 msgstr "Modificar estos parámetros"
 
-#: ../admin/mem_param.php:102
+#: ../admin/mem_param.php:102 ../admin/mem_param.php:94
 msgid "Members list view"
 msgstr "Vista de la lista de miembros"
 
-#: ../admin/mem_param.php:103
+#: ../admin/mem_param.php:103 ../admin/mem_param.php:95
 msgid "Large view"
 msgstr "Vista amplia"
 
-#: ../admin/mem_param.php:104
+#: ../admin/mem_param.php:104 ../admin/mem_param.php:96
 msgid "Short view"
 msgstr "Vista reducida"
 
-#: ../admin/mem_param.php:106
+#: ../admin/mem_param.php:106 ../admin/mem_param.php:98
 msgid "Change my admin preferences"
 msgstr "Modificar mis preferencias de administrador"
 
@@ -1516,15 +1551,15 @@ msgstr "Administrar miembros"
 msgid "General SQL Admin"
 msgstr "Admin general SQL "
 
-#: ../admin/menu_aide.php:33
+#: ../admin/menu_aide.php:33 ../admin/menu_aide.php:32
 msgid "Online help"
 msgstr "Ayuda en linea"
 
-#: ../admin/menu_dom.php:36
+#: ../admin/menu_dom.php:36 ../admin/menu_dom.php:35
 msgid "Domains"
 msgstr "Dominios"
 
-#: ../admin/menu_ftp.php:36
+#: ../admin/menu_ftp.php:36 ../admin/menu_ftp.php:35
 msgid "FTP accounts"
 msgstr "Cuentas FTP"
 
@@ -1532,44 +1567,45 @@ msgstr "Cuentas FTP"
 msgid "Mailboxes"
 msgstr "Cuentas de correo"
 
-#: ../admin/menu_mem.php:32
+#: ../admin/menu_mem.php:32 ../admin/menu_mem.php:31
 msgid "Settings"
 msgstr "Configuración"
 
-#: ../admin/menu_mem.php:33
+#: ../admin/menu_mem.php:33 ../admin/menu_mem.php:34
 msgid "Logout"
 msgstr "Salir"
 
-#: ../admin/menu.php:40
+#: ../admin/menu.php:40 ../admin/menu.php:42 ../admin/menu.php:43
 #, fuzzy
 msgid "Front page"
 msgstr "Nombre"
 
-#: ../admin/menu_quota.php:32
+#: ../admin/menu_quota.php:32 ../admin/menu_quota.php:31
 msgid "Show my quotas"
 msgstr "Mostrar cuotas"
 
 # msgid "General SQL Admin"
 # msgstr "Admin general SQL "
 #: ../admin/menu_sql.php:35 ../admin/sql_users_list.php:40
+#: ../admin/menu_sql.php:34
 #, fuzzy
 msgid "MySQL Users"
 msgstr "Base de datos MySQL"
 
-#: ../admin/menu_sql.php:36
+#: ../admin/menu_sql.php:36 ../admin/menu_sql.php:35
 msgid "Databases"
 msgstr "Bases de datos"
 
-#: ../admin/menu_sql.php:37 ../admin/sql_admin.php:47
+#: ../admin/menu_sql.php:37 ../admin/sql_admin.php:47 ../admin/menu_sql.php:36
 msgid "SQL Admin"
 msgstr "Admin SQL"
 
-#: ../admin/menu_sta2.php:37
+#: ../admin/menu_sta2.php:37 ../admin/menu_sta2.php:36
 #, fuzzy
 msgid "Raw web statistics"
 msgstr "Estadísticas Web"
 
-#: ../admin/menu_web.php:34
+#: ../admin/menu_web.php:34 ../admin/menu_web.php:33
 msgid "Protected folders"
 msgstr "Carpetas protegidas"
 
@@ -1959,6 +1995,7 @@ msgid "Domain can be installed, force NO DNS hosting)"
 msgstr ""
 
 #: ../class/m_err.php:64 ../class/m_err.php:90 ../class/m_err.php:107
+#: ../class/m_err.php:91 ../class/m_err.php:93
 #, php-format
 msgid "err_"
 msgstr "err_"
@@ -2101,7 +2138,7 @@ msgstr ""
 msgid "Real Media File"
 msgstr ""
 
-#: ../class/m_mem.php:474
+#: ../class/m_mem.php:474 ../class/m_mem.php:481
 msgid "Help"
 msgstr "Ayuda"
 
@@ -2187,7 +2224,7 @@ msgstr ""
 msgid "%s accounts"
 msgstr "Cuentas FTP"
 
-#: ../admin/adm_panel.php:57
+#: ../admin/adm_panel.php:57 ../admin/adm_panel.php:56
 #, fuzzy
 msgid "Account creation statistics"
 msgstr "Crear estas estadísticas"
@@ -2236,17 +2273,17 @@ msgstr ""
 msgid "WARNING: Confirm the deletion of this files"
 msgstr "ADVERTENCIA : Confirme la supresión del subdominio siguiente"
 
-#: ../admin/bro_main.php:154
+#: ../admin/bro_main.php:154 ../admin/bro_main.php:172
 #, fuzzy
 msgid "Old Name:"
 msgstr "Cambiar nombre"
 
-#: ../admin/bro_main.php:155
+#: ../admin/bro_main.php:155 ../admin/bro_main.php:173
 #, fuzzy
 msgid "New Name:"
 msgstr "Añadir nuevo miembro"
 
-#: ../admin/bro_main.php:180
+#: ../admin/bro_main.php:180 ../admin/bro_main.php:241
 #, fuzzy
 msgid "Move to"
 msgstr "Mover"
@@ -2267,6 +2304,59 @@ msgstr ""
 msgid ""
 "Image_Graph not installed. use 'aptitude install php-pear' then 'pear --"
 "alldeps install Image_Graph-devel' to see the graph."
+msgstr ""
+
+#: ../admin/bro_main.php:119
+msgid "extracting..."
+msgstr ""
+
+#: ../admin/bro_main.php:122
+#, fuzzy
+msgid "failed"
+msgstr "Archivo"
+
+#: ../admin/bro_main.php:124
+msgid "done"
+msgstr ""
+
+#: ../admin/bro_main.php:186 ../admin/bro_main.php:237
+msgid "Permissions"
+msgstr ""
+
+#: ../admin/bro_main.php:216
+#, fuzzy
+msgid "Change permissions"
+msgstr "Modificar mis preferencias"
+
+#: ../admin/bro_main.php:239
+msgid "Copy to"
+msgstr ""
+
+#: ../admin/bro_main.php:283
+msgid "Extract"
+msgstr ""
+
+#: ../admin/dom_editdns.php:57
+#, fuzzy, php-format
+msgid "The domain %s has been changed."
+msgstr "El dominio %s ha sido borrado."
+
+#: ../admin/dom_editdns.php:62 ../admin/dom_subdodel.php:54
+#, fuzzy
+msgid "The modifications will take effect at %time.  Server time is %now."
+msgstr "Las modificaciones serán efectivas dentro de 5 minutos."
+
+#: ../admin/dom_subdoedit.php:57
+#, fuzzy
+msgid "The modifications will take effect at %time. Server time is %now."
+msgstr "Las modificaciones serán efectivas dentro de 5 minutos."
+
+#: ../admin/mail_edit.php:58
+msgid "WARNING: turning POP off will DELETE the mailbox and its content"
+msgstr ""
+
+#: ../admin/main.php:62
+msgid "Latest news"
 msgstr ""
 
 #, fuzzy
