@@ -4,14 +4,10 @@ Default: true
 _Description: Do you REALLY want to install AlternC on this computer ?
  You are currently trying to install AlternC on your computer. Be aware
  that this package will overwrite critical system files, including but not
- limited to the config files of apache, bind, postfix, courier, proftpd and
- php.
+ limited to the config files of bind, postfix, courier, squirrelmail and proftpd.
  .
  A backup of your old configuration will be stored in
  "/var/backups/alternc/etc-original-`date`.tar.gz".
- .
- If you still want to proceed with this installation, choose YES here,
- otherwise choose NO.
  .
  YOU HAVE BEEN WARNED.
 
