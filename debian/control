@@ -2,10 +2,10 @@ Source: alternc
 Section: admin
 Priority: optional
 Maintainer: Antoine Beaupré <anarcat@koumbit.org>
-Uploader: Benjamin Sonntag <benjamin@alternc.org>
+Uploaders: Benjamin Sonntag <benjamin@alternc.org>
 Build-Depends-Indep: findutils (>= 4.1.7), gcc (>= 2:2.95.4), gettext (>= 0.10.40-5)
 Build-Depends: debhelper (>= 4.0.2), po-debconf
-Standards-Version: 3.7.2.1
+Standards-Version: 3.7.2.3
 
 Package: alternc
 Architecture: all
@@ -24,5 +24,4 @@ Description: hosting software managment suite for Debian
  .
  AlternC is mainly a PHP based administration interface and some conf files
  for the softwares used by it. More information at http://www.alternc.org/
- .
- Homepage: http://www.alternc.org/
+Homepage: http://www.alternc.org/
