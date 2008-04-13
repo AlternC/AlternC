@@ -1,5 +1,6 @@
 alternc (0.9.7+dev) stable; urgency=low UNRELEASED
 
+  * upgrade to Debian standard 3.7.3 (from 3.7.2.1)
   * move mysql configuration into a valid MySQL configuration file
     (/etc/alternc/my.cnf). This fixes a serious security issue (#318)
     where the MySQL root password was passed on the commandline.  Those
