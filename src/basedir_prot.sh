@@ -18,11 +18,6 @@ extra_paths="/var/alternc/dns/redir:/usr/share/php/:/var/alternc/tmp/:/tmp/"
 . /etc/alternc/local.sh
 . /usr/lib/alternc/functions.sh
 
-if [ -z "$MYSQL_HOST" ]
-then
-    MYSQL_HOST="localhost"
-fi
-
 echo -n "adding open_base_dir protection for:"
 # boucle sur tous les domaines hébergés, ou sur les arguments de la
 # ligne de commande

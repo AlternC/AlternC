@@ -63,5 +63,5 @@ function doone {
     done
 }
 
-mysql -h"$MYSQL_HOST" -p"$MYSQL_PASS" -u"$MYSQL_USER" "$MYSQL_DATABASE" -B -e "select uid,login from membres" |grep -v ^uid|doone
+mysql --defaults-file=/etc/alternc/my.cnf -B -e "select uid,login from membres" |grep -v ^uid|doone
 

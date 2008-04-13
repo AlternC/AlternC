@@ -309,7 +309,7 @@ get_account_by_domain() {
 	else
 		# implantons localement ce que nous avons besoin, puisque admintools
 		# n'est pas là
-  		mysql -h$MYSQL_HOST -u$MYSQL_USER -p$MYSQL_PASS -D$MYSQL_DATABASE -B -N -e \
+  		mysql --defaults-file=/etc/alternc/my.cnf -B -N -e \
   		'SELECT a.login FROM membres a, sub_domaines b WHERE a.uid = b.compte AND \
   		CONCAT(IF(sub="", "", CONCAT(sub, ".")), domaine) = "'"$1"'" LIMIT 1;'
 	fi

@@ -15,7 +15,7 @@ set -e
 
 case "$1" in
   purge)
-    rm -f /etc/alternc/local.sh /etc/alternc/bureau.conf
+    rm -f /etc/alternc/local.sh /etc/alternc/my.cnf /etc/alternc/bureau.conf
     rm -f /var/backups/alternc/etc-installed.tar.gz
 
     # Purge database?

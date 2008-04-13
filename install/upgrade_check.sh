@@ -45,7 +45,7 @@ do
                   # run the proper program to interpret the upgrade script
 		  case "$ext" in
 		  sql)
-			mysql -f -h $MYSQL_HOST -u $MYSQL_USER -p$MYSQL_PASS $MYSQL_DATABASE \
+			mysql -f --defaults-file=/etc/alternc/my.cnf \
 			< $file || true
 			;;
 		  php)

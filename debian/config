@@ -38,6 +38,16 @@ if [ -r /etc/alternc/local.sh ]; then
     # source the current config
     . /etc/alternc/local.sh
 fi
+if [ -r /etc/alternc/my.cnf ]; then
+    # make mysql configuration available as shell variables
+    # to convert from .cnf to shell syntax, we:
+    # * match only lines with "equal" in them (/=/)
+    # * remove whitespace around the = and add a left quote operator ' (;s)
+    # * add a right quote operator at the end of line (;s)
+    # * convert mysql variables into our MYSQL_ naming convention (;s)
+    # * print the result (;p)
+    eval `sed -n -e "/=/{s/ *= */='/;s/\$/'/;s/host/MYSQL_HOST/;s/user/MYSQL_LOGIN/;s/password/MYSQL_PASS/;s/database/MYSQL_DATABASE/;p}" /etc/alternc/my.cnf`
+fi
 
 # mettre les valeurs de local.sh comme "default" pour debconf
 db_get alternc/hostingname

@@ -29,9 +29,6 @@
 
 set -e
 
-# Get mysql user and password : 
-. /etc/alternc/local.sh
-
 function dobck {
     local ext
     local i
@@ -63,10 +60,10 @@ function dobck {
         mv -f "${target_dir}/${db}.sql${ext}" \
               "${target_dir}/${db}.sql.${i}${ext}" 2>/dev/null || true 
         if [ "$compressed" -eq 1 ]; then
-            mysqldump -h"$MYSQL_HOST" -u"$login" -p"$pass" "$db"  --add-drop-table --allow-keywords -Q -f -q -a -e |
+            mysqldump --defaults-file=/etc/alternc/my.cnf --add-drop-table --allow-keywords -Q -f -q -a -e |
                 gzip -c > "${target_dir}/${db}.sql${ext}"
         else
-            mysqldump -h"$MYSQL_HOST" -u"$login" -p"$pass" "$db"  --add-drop-table --allow-keywords -Q -f -q -a -e \
+            mysqldump --defaults-file=/etc/alternc/my.cnf --add-drop-table --allow-keywords -Q -f -q -a -e \
                 > "${target_dir}/${db}.sql"
         fi
 
@@ -83,8 +80,7 @@ else
     mode=1
 fi
 
-/usr/bin/mysql -h"$MYSQL_HOST" -u"$MYSQL_USER" -p"$MYSQL_PASS" \
-    "$MYSQL_DATABASE" -B << EOF | tail -n '+2' | dobck
+/usr/bin/mysql --defaults-file=/etc/alternc/my.cnf -B << EOF | tail -n '+2' | dobck
 SELECT login, pass, db, bck_history, bck_gzip, bck_dir
   FROM db
  WHERE bck_mode=$mode;

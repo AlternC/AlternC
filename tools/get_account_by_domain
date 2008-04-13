@@ -75,12 +75,11 @@ MYSQL_UNREACHABLE_DATABASE=`$printf "$($gettext "Cannot access accounts database
 [ "$1" = "-h" ] || [ "$1" = "--help" ] && { echo $HELP ; echo $USAGE ; exit 0 ; }
 # Have to get AlternC conf file :
 ! [ -f "$ALTERNC_CONF_FILE" ] && { echo $MISSING_CONF_FILE ; exit 1 ; } || . $ALTERNC_CONF_FILE
-# Must have access to mysql to retreive accounts owning domains :
-[ -z "$MYSQL_HOST" ] && MYSQL_HOST=localhost
-$mysql -h$MYSQL_HOST -u$MYSQL_USER -p$MYSQL_PASS -D$MYSQL_DATABASE -e "select count(*) from domaines_standby;" > /dev/null 2>&1
-[ "$?" != 0 ] && { echo "$MYSQL_UNREACHABLE_DATABASE" ; exit 1 ; } || mysql="$mysql -h$MYSQL_HOST -u$MYSQL_USER -p$MYSQL_PASS -D$MYSQL_DATABASE -B -N -e "
+mysql="$mysql --defaults-file=/etc/alternc/my.cnf"
+$mysql -e "select count(*) from domaines_standby;" > /dev/null 2>&1
+[ "$?" != 0 ] && { echo "$MYSQL_UNREACHABLE_DATABASE" ; exit 1 ; }
 
 # Does the stuff
-$mysql "select concat(a.login, \" (\", a.mail, \")\") from membres a, sub_domaines b where a.uid = b.compte and concat(if(sub=\"\", \"\", concat(sub, \".\")), domaine)  = \"${1}\";"
+$mysql -B -N -e "select concat(a.login, \" (\", a.mail, \")\") from membres a, sub_domaines b where a.uid = b.compte and concat(if(sub=\"\", \"\", concat(sub, \".\")), domaine)  = \"${1}\";"
 
 

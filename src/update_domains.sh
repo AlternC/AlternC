@@ -74,8 +74,7 @@ fi
 
 . "$CONFIG_FILE"
 
-if [ -z "$MYSQL_HOST" -o -z "$MYSQL_DATABASE" -o -z "$MYSQL_USER" -o \
-     -z "$MYSQL_PASS" -o -z "$DEFAULT_MX" -o -z "$PUBLIC_IP" ]; then
+if [ -z "$DEFAULT_MX" -o -z "$PUBLIC_IP" ]; then
     echo "Bad configuration. Please use:"
     echo "   dpkg-reconfigure alternc"
     exit 1
@@ -96,10 +95,8 @@ LOCK_FILE="$DATA_ROOT/bureau/cron.lock"
 HTTP_DNS="$DATA_ROOT/dns"
 HTML_HOME="$DATA_ROOT/html"
 
-MYSQL_SELECT="mysql -h${MYSQL_HOST} -u${MYSQL_USER}
-                    -p${MYSQL_PASS} -Bs ${MYSQL_DATABASE}"
-MYSQL_DELETE="mysql -h${MYSQL_HOST} -u${MYSQL_USER}
-                    -p${MYSQL_PASS} ${MYSQL_DATABASE}"
+MYSQL_SELECT="mysql --defaults-file=/etc/alternc/my.cnf -Bs "
+MYSQL_DELETE="mysql --defaults-file=/etc/alternc/my.cnf "
 
 ########################################################################
 # Functions
