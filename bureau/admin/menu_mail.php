@@ -33,15 +33,14 @@ $q=$quota->getquota("mail");
 $r=$quota->getquota("dom");
 	if ($q["t"]>0 && $r["u"]>0) { 
 ?>
-<tr><td nowrap="nowrap">
-<?php __("Mailboxes"); ?><br />
+<dt><?php __("Mailboxes"); ?></dt>
 <?php
 		/* Enumeration des domaines en mail : */
         $domain=$mail->enum_domains();
         reset($domain);
         while (list($key,$val)=each($domain)) {
         ?>
-        - <a href="mail_list.php?domain=<?php echo urlencode($val) ?>"><?php echo $val ?></a><br />
+        <dd><a href="mail_list.php?domain=<?php echo urlencode($val)
+	  ?>"><?php echo $val ?></a></dd>
 <?php    }    ?>
-</td></tr>
 <?php    } ?>

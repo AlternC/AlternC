@@ -245,8 +245,7 @@ td.input_pass {
 input.inb {
   font-weight: bold;
   font-size: 100%;
-  letter-spacing: 2px;
-  padding: 1px 1em;
+  padding: 1px .1em;
   background-color:#fff;
 }
 input.inb:hover {
@@ -282,4 +281,57 @@ input.inb:active {
     }
 #mem_param input.inb  {
     font-size: .8em
-    } 
+    }
+
+/** ftp accounts list **/
+body#ftp-account-list input .inc {
+    clear:both;
+}
+body#ftp-account-list div.delete {
+    clear: both;
+    margin: 1em 0;
+    }
+body#ftp-account-list label {
+    font-weight: bold;
+    color: #CB781A;
+    font-size: 120%;
+}
+body#ftp-account-list dt {
+    border-bottom: 1px solid #ddd;
+    padding: .2em 0 .3em;
+    margin: 0 0 .3em
+}
+body#ftp-account-list dd {
+    margin-left: .3em;
+    font-size: 120%;
+    float: left;
+}
+body#ftp-account-list dd code {
+    margin-left: .3em;
+    color: #CB781A;
+}
+dl.ftp-account {
+    border: 1px solid #eee;
+    display: block;
+    float: left;
+    margin: 0 1em 1em 0;
+    padding: .4em;
+    background-color: #fdfcfc;
+    width: 45%;
+    }
+body#ftp-account-list .edit {
+    border: 1px solid #aaa;
+    color: black;
+    font-weight: bold;
+    font-size: 100%;
+    padding: 0 .2em;
+    background-color:#fff;
+    float: right;
+}
+body#ftp-account-list .edit:hover {
+    background-color:yellow;
+}
+body#ftp-account-list .edit:active {
+    background-color:red;
+    color: #fff;
+}

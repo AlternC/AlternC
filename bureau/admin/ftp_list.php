@@ -38,7 +38,7 @@ if (!$r=$ftp->get_list($domain)) {
 include("head.php");
 ?>
 </head>
-<body>
+<body id="ftp-account-list">
 <h3><?php __("FTP accounts list"); ?></h3>
 <?php
 	if ($noftp) {
@@ -55,6 +55,15 @@ if ($error) {
 ?>
 <p class="error"><?php echo $error ?></p>
 <?php } ?>
+<?php if ($quota->cancreate("ftp")) { ?>
+<p class="add">
+<a href="ftp_add.php"><?php __("Create a new ftp account"); ?></a>
+</p>
+<div id="help">
+<?php  	}
+$mem->show_help("ftp_list");
+?></div>
+<div class="delete"><input type="submit" name="submit" class="inb" value="<?php __("Delete checked accounts"); ?>" /></div>
 <form method="post" action="ftp_del.php">
 
 <?php
@@ -64,10 +73,14 @@ while (list($key,$val)=each($r))
 	{
 	$col=3-$col;
 ?>
-    <dl>
-      <dt><input type="checkbox" class="inc" id="del_<?php echo $val["id"]; ?>" name="del_<?php echo $val["id"]; ?>" value="<?php echo $val["id"]; ?>" /><strong><?php __("Username"); ?>:</strong> <label for="del_<?php echo $val["id"]; ?>"><?php echo $val["login"] ?></label></dt>
-        <dd><span><?php __("Folder"); ?></span> <code>/<?php echo $val["dir"] ?></code></dd>
-	<dd><a href="ftp_edit.php?id=<?php echo $val["id"] ?>"><?php __("Edit"); ?></a></dd>
+    <dl class="ftp-account">
+      <dt><input type="checkbox" class="inc" id="del_<?php echo
+      $val["id"]; ?>" name="del_<?php echo $val["id"]; ?>" value="<?php
+      echo $val["id"]; ?>" /><?php __("Username"); ?>:<strong> <label
+      for="del_<?php echo $val["id"]; ?>"><?php echo $val["login"]
+	  ?></label></strong></dt>
+        <dd><span><?php __("Folder"); ?>: <code>/<?php echo $val["dir"] ?></code></span</dd>
+	<dd class="edit"><a href="ftp_edit.php?id=<?php echo $val["id"] ?>"><?php __("Edit"); ?></a></dd>
 	<dd><span></span></dd>
     </dl>
 
@@ -76,13 +89,5 @@ while (list($key,$val)=each($r))
 ?>
 <div class="delete"><input type="submit" name="submit" class="inb" value="<?php __("Delete checked accounts"); ?>" /></div>
 </form>
-
-<?php if ($quota->cancreate("ftp")) { ?>
-<p class="add">
-<a href="ftp_add.php"><?php __("Create a new ftp account"); ?></a>
-</p>
-<?php  	}
-$mem->show_help("ftp_list");
-?>
 </body>
 </html>
