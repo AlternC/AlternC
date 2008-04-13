@@ -14,8 +14,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: AlternC 0.9.5\n"
-"Report-Msgid-Bugs-To: anarcat@koumbit.org\n"
-"POT-Creation-Date: 2007-11-09 17:08-0500\n"
+"Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
+"POT-Creation-Date: 2008-04-13 00:46-0400\n"
 "PO-Revision-Date: 2006-04-26 11:16+0200\n"
 "Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
 "Language-Team: Team AlternC <team@alternc.org>\n"
@@ -32,10 +32,16 @@ msgstr "Etes-vous CERTAIN de vouloir installer AlternC sur cet ordinateur ?"
 #. Type: boolean
 #. Description
 #: ../templates:1001
+#, fuzzy
+#| msgid ""
+#| "You are currently trying to install AlternC on your computer. Be aware "
+#| "that this package will overwrite critical system files, including but not "
+#| "limited to the config files of apache, bind, postfix, courier, proftpd "
+#| "and php."
 msgid ""
 "You are currently trying to install AlternC on your computer. Be aware that "
 "this package will overwrite critical system files, including but not limited "
-"to the config files of apache, bind, postfix, courier, proftpd and php."
+"to the config files of bind, postfix, courier, squirrelmail and proftpd."
 msgstr ""
 "Vous êtes en train d'installer AlternC sur cet ordinateur. Comprenez que ce "
 "paquetage va écraser plusieurs fichiers de configuration critiques, "
@@ -50,15 +56,6 @@ msgid ""
 msgstr ""
 "Une sauvegarde de votre ancienne configuration sera stockée dans /usr/lib/"
 "alternc/backups/system.`date +%Y%m%d-%H%M`."
-
-#. Type: boolean
-#. Description
-#: ../templates:1001
-msgid ""
-"If you still want to proceed with this installation, choose YES here, "
-"otherwise choose NO."
-msgstr ""
-"Si vous savez ce que vous faites, choisissez OUI, sinon, choisissez NON."
 
 #. Type: boolean
 #. Description
@@ -478,3 +475,9 @@ msgstr "Les boites mails doivent elles être supprimées ?"
 msgid "If you accept all users e-mails will be deleted"
 msgstr ""
 "Si vous acceptez, toutes les e-mails des utilisateurs seront supprimées"
+
+#~ msgid ""
+#~ "If you still want to proceed with this installation, choose YES here, "
+#~ "otherwise choose NO."
+#~ msgstr ""
+#~ "Si vous savez ce que vous faites, choisissez OUI, sinon, choisissez NON."

@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: anarcat@koumbit.org\n"
-"POT-Creation-Date: 2007-11-09 17:08-0500\n"
+"Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
+"POT-Creation-Date: 2008-04-13 00:46-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,7 +28,7 @@ msgstr ""
 msgid ""
 "You are currently trying to install AlternC on your computer. Be aware that "
 "this package will overwrite critical system files, including but not limited "
-"to the config files of apache, bind, postfix, courier, proftpd and php."
+"to the config files of bind, postfix, courier, squirrelmail and proftpd."
 msgstr ""
 
 #. Type: boolean
@@ -37,14 +37,6 @@ msgstr ""
 msgid ""
 "A backup of your old configuration will be stored in \"/var/backups/alternc/"
 "etc-original-`date`.tar.gz\"."
-msgstr ""
-
-#. Type: boolean
-#. Description
-#: ../templates:1001
-msgid ""
-"If you still want to proceed with this installation, choose YES here, "
-"otherwise choose NO."
 msgstr ""
 
 #. Type: boolean
