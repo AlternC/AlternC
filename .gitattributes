@@ -243,7 +243,6 @@ bureau/locales/fr_FR/LC_MESSAGES/messages.po -text
 bureau/locales/manual.pot -text
 bureau/locales/messages.pot -text
 bureau/locales/pt_BR/LC_MESSAGES/messages.po -text
-debian/.cvsignore -text
 debian/README.Debian -text
 debian/alternc.cron.d -text
 debian/alternc.links -text
