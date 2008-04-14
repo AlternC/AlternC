@@ -160,12 +160,15 @@ tar -zcf "$BACKUP_FILE" -C / $BACKUPS 2>/dev/null || true
 #######################################################################
 # Expand templates in the right place
 #
+echo -n "Expanding variables in configuration files:"
 for file in $CONFIG_FILES; do
     TEMPLATE="$TEMPLATE_DIR/${file##etc/}"
+    echo -n " $file"
     if [ -f "$TEMPLATE" ]; then
         sed -f "$SED_SCRIPT" < $TEMPLATE > /$file
     fi
 done
+echo "."
 rm -f $SED_SCRIPT
 
 #######################################################################
