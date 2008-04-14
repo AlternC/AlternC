@@ -34,7 +34,7 @@ include("head.php");
 </head>
 <body>
 
-<h3>Ce bureau est un lieu de développement pour arranger minimalement alterc dans l'objectif d'y faire un "theme" plus joli et personnalisable</h3>
+<h3>Bienvenue sur votre bureau AlternC.</h3>
 
 <div id="info"><?php
 // Show last login information : 
