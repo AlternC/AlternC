@@ -32,6 +32,5 @@
 $q=$quota->getquota("ftp");
 if ($q["t"]>0) { 
 ?>
-<dt id="ftp"><?php __("FTP accounts"); ?></dt>
 <dd><a href="ftp_list.php"><?php __("FTP accounts"); ?></a></dd>
 <?php    }    ?>

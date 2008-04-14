@@ -30,5 +30,4 @@
 
 /* ############# WEB ACCESS ############# */
 ?>
-<dt id="web-access"><?php __("Protected folders"); ?></dt>
 <dd><a href="hta_list.php"><?php __("Protected folders"); ?></a></dd>

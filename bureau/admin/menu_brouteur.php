@@ -30,5 +30,5 @@
 
 /* ############# BROUTEUR ############# */
 ?>
-<dt id="browser"><?php __("File browser"); ?></dt>
+<dt id="browser"><?php __("Files and directories"); ?></dt>
 <dd><a href="bro_main.php"><?php __("File browser"); ?></a></dd>
