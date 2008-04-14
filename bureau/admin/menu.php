@@ -50,7 +50,6 @@ while (!feof ($tt)) {
 }
 fclose($tt);
 ?>
-<dd><a href="main.php"><?php __("Messages") ?></a></dd>
 </dl>
 
 </body>
