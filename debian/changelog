@@ -1,15 +1,35 @@
-alternc (0.9.7+dev) stable; urgency=low UNRELEASED
+alternc (0.9.8) stable; urgency=high
 
-  * upgrade to Debian standard 3.7.3 (from 3.7.2.1)
-  * move mysql configuration into a valid MySQL configuration file
-    (/etc/alternc/my.cnf). This fixes a serious security issue (#318)
-    where the MySQL root password was passed on the commandline.  Those
-    changes are pretty invasive and might break upgrades, cron jobs and
-    your cat...
-  * standardisation of the web interface, along with some esthetic changes, by
-    Marc Angles, sponsored by Koumbit
-  * styles can now be changed locally in admin/styles/base.css
-  * crude implementation of a permission change interface in the file browser
+  This release is packed with minor enhancements and bugfixes. It also packages
+  security fixes. Not all targets of the milestone were accomplished but this
+  was released nevertheless because of the security issue.
+
+  * security:
+    * move mysql configuration into a valid MySQL configuration file
+      (/etc/alternc/my.cnf). This fixes a serious security issue (#318)
+      where the MySQL root password was passed on the commandline and could
+      therefore be visible to local users (and hosted members that don't have
+      safe_mode controls or can access the process table in some way).
+    * disable the autocomplete on frontal user/login
+  * various bugfixes
+    * upgrade to Debian standard 3.7.3 (from 3.7.2.1)
+    * added missing dependency on mysql-client
+    * fix display of errors on directory creation
+    * from Trac: #1012, #1082, #1077, #1109
+    * fix 0.9.7 regressions: #1079, #1080, #1099, #1076
+  * new features:
+    * starting with this release, the old warning signal defaults to "YES" which
+      means that AlternC can be automatically installed without preseeding.
+    * crude implementation of a permission change interface in the file browser
+      (partial implementation of #267)
+    * standardisation of the web interface, along with some esthetic changes, by
+      Marc Angles, sponsored by Koumbit (partial implementation of #37)
+    * styles can now be changed locally in admin/styles/custom.css
+    * allow arbitrary error strings in error handlers
+    * copy and archive extraction in the file browser (#1043)
+    * display at which time the DNS changes will take effect (#231)
+    * use timestamp for sql backups rather than rotating the files (#1063)
+    * other simple additions: #1043, #1097
 
  -- Antoine Beaupré <anarcat@koumbit.org>  Thu, 10 Apr 2008 13:56:22 -0400
 
