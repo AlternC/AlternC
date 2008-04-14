@@ -33,11 +33,6 @@ msgstr "Etes-vous CERTAIN de vouloir installer AlternC sur cet ordinateur ?"
 #. Description
 #: ../templates:1001
 #, fuzzy
-#| msgid ""
-#| "You are currently trying to install AlternC on your computer. Be aware "
-#| "that this package will overwrite critical system files, including but not "
-#| "limited to the config files of apache, bind, postfix, courier, proftpd "
-#| "and php."
 msgid ""
 "You are currently trying to install AlternC on your computer. Be aware that "
 "this package will overwrite critical system files, including but not limited "
@@ -45,7 +40,7 @@ msgid ""
 msgstr ""
 "Vous êtes en train d'installer AlternC sur cet ordinateur. Comprenez que ce "
 "paquetage va écraser plusieurs fichiers de configuration critiques, "
-"incluant, sans se limiter à: apache, postfix, bind, courier, proftpd et php."
+"incluant, sans se limiter à: postfix, bind, courier, squirrelmail, proftpd et php."
 
 #. Type: boolean
 #. Description
