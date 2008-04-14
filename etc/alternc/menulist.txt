@@ -1,9 +1,9 @@
 menu_dom.php
 menu_mail.php
-menu_ftp.php
 menu_brouteur.php
-menu_sta2.php
 menu_web.php
+menu_ftp.php
+menu_sta2.php
 menu_sql.php
 menu_quota.php
 menu_aide.php
