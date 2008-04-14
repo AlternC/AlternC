@@ -6,6 +6,7 @@ menu_ftp.php
 menu_sta2.php
 menu_sql.php
 menu_adm.php
+menu_lang.php
 menu_mem.php
 menu_quota.php
 menu_aide.php

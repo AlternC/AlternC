@@ -167,6 +167,7 @@ bureau/admin/menu_aide.php -text
 bureau/admin/menu_brouteur.php -text
 bureau/admin/menu_dom.php -text
 bureau/admin/menu_ftp.php -text
+bureau/admin/menu_lang.php -text
 bureau/admin/menu_mail.php -text
 bureau/admin/menu_mem.php -text
 bureau/admin/menu_quota.php -text
