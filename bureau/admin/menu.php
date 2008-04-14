@@ -39,8 +39,6 @@ include("head.php");
 </div>
 <h3>Menu <?php echo $mem->user["login"]; ?></h3>
 <dl id="menu-list">
-<dt id="home"><?php __("Front page") ?></dt>
-<dd class="link"><a href="main.php"><?php __("Front page") ?></a></dd>
 <?php
 $MENUPATH="/var/alternc/bureau/admin/";
 $tt=fopen("menulist.txt","rb");
@@ -52,7 +50,8 @@ while (!feof ($tt)) {
 }
 fclose($tt);
 ?>
-
+<dd><a href="main.php"><?php __("Messages") ?></a></dd>
+</dl>
 
 </body>
 </html>
