@@ -29,4 +29,4 @@
 */
 ?>
 
-<dd><a href="http://alternc.org/wiki/Documentation" target="help"><?php __("Online help"); ?></a></dd>
+<dd><a href="http://alternc.org/wiki/Documentation/Utilisateur" target="help"><?php __("Online help"); ?></a></dd>
