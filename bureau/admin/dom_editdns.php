@@ -59,7 +59,7 @@ include("head.php");
   $t = time();
   # that modulo (%) there computes the time of the next cron job
   # XXX: we assume the cron job is at every 5 minutes
-  print strtr(_("The modifications will take effect at %time.  Server time is %now."), array('%now' => %date('H:i:s', $t), '%time' => date('H:i:s', %($t-($t%300)+300)))); 
+  print strtr(_("The modifications will take effect at %time.  Server time is %now."), array('%now' => date('H:i:s', $t), '%time' => date('H:i:s', ($t-($t%300)+300)))); 
 ?><br />
 <a href="login.php" target="_top"><?php __("Click here to continue"); ?></a>
 </p>
