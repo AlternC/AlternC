@@ -151,5 +151,6 @@ binary: binary-common
 
 build-snapshot:
 	@echo "building a package based on the current snapshot (${VERSION})"
+	svn update || true
 	svn export . ../alternc-${VERSION}
-	cd ../alternc-${VERSION} && debchange -D UNRELEASED -v ${VERSION} "Automatic build of SVN version ${REV}" && debuild
+	cd ../alternc-${VERSION} && debchange -D UNRELEASED -v ${VERSION} && debuild
