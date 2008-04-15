@@ -48,7 +48,8 @@ install: build
 	cp -r bureau/* debian/alternc/var/alternc/bureau
 	(cd src && $(MAKE) install DESTDIR=$(CURDIR)/debian/alternc)
 
-	sed -i -e "s/@@REPLACED_DURING_BUILD@@/${VERSION}/" debian/alternc/var/alternc/bureau/class/local.php
+	# we don't use the full VERSION intepreted but only what's in the changelog
+	sed -i -e "s/@@REPLACED_DURING_BUILD@@/${MAJOR}/" debian/alternc/var/alternc/bureau/class/local.php
 
 	# Fix permisions
 	chmod 755 debian/alternc/etc/alternc
