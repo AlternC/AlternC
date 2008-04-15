@@ -9,7 +9,7 @@
 export DH_VERBOSE=1
 MAJOR=$(shell sed -ne 's/^[^(]*(\([^)]*\)).*/\1/;1p' debian/changelog)
 REV=$(shell LANG=C svn info --non-interactive | awk '/^Revision:/ { print $$2 }')
-VERSION="${MAJOR}.r${REV}"
+VERSION="${MAJOR}~svn${REV}"
 export VERSION
 
 ifneq (,$(findstring debug,$(DEB_BUILD_OPTIONS)))

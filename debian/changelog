@@ -1,3 +1,9 @@
+alternc (0.9.9) UNRELEASED; urgency=low
+
+  * development version
+
+ -- Antoine Beaupré <anarcat@koumbit.org>  Tue, 15 Apr 2008 11:52:56 -0400
+
 alternc (0.9.8) stable; urgency=high
 
   This release is packed with minor enhancements and bugfixes. It also packages
