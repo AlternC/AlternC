@@ -153,4 +153,4 @@ build-snapshot:
 	@echo "building a package based on the current snapshot (${VERSION})"
 	svn update || true
 	svn export . ../alternc-${VERSION}
-	cd ../alternc-${VERSION} && sed -i -e '0,/UNRELEASED/s/)/~svn${REV}/' debian/changelog && debuild
+	cd ../alternc-${VERSION} && sed -i -e '0,/UNRELEASED/s/)/~svn${REV})/' debian/changelog && debuild
