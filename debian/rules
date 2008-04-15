@@ -7,7 +7,10 @@
 
 # Uncomment this to turn on verbose mode. 
 export DH_VERBOSE=1
-export VERSION=`head -1 debian/changelog | sed -e 's/^[^(]*(\([^)]*\)).*/\1/'`
+MAJOR=$(shell sed -ne 's/^[^(]*(\([^)]*\)).*/\1/;1p' debian/changelog)
+REV=$(shell LANG=C svn info --non-interactive | awk '/^Revision:/ { print $$2 }')
+VERSION="${MAJOR}.r${REV}"
+export VERSION
 
 ifneq (,$(findstring debug,$(DEB_BUILD_OPTIONS)))
 	CFLAGS += -g
@@ -45,7 +48,6 @@ install: build
 	cp -r bureau/* debian/alternc/var/alternc/bureau
 	(cd src && $(MAKE) install DESTDIR=$(CURDIR)/debian/alternc)
 
-	VERSION=`sed -ne 's/^[^(]*(\([^)]*\)).*/\1/;1p' debian/changelog`
 	sed -i -e "s/@@REPLACED_DURING_BUILD@@/${VERSION}/" debian/alternc/var/alternc/bureau/class/local.php
 
 	# Fix permisions
@@ -145,3 +147,8 @@ binary-arch: build install binary-common
 binary: binary-common
 
 .PHONY: build clean binary install
+
+build-snapshot:
+	@echo "building a package based on the current snapshot (${VERSION})"
+	svn export . ../alternc-${VERSION}
+	cd ../alternc-${VERSION} && debchange -D UNRELEASED -v ${VERSION} "Automatic build of SVN version ${REV}" && debuild
