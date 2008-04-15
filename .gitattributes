@@ -329,7 +329,6 @@ po/alternc-admintools.pot -text
 po/fr/LC_MESSAGES/alternc-admintools.po -text
 /quota_delete -text
 /quota_init -text
-src/.cvsignore -text
 src/Makefile -text
 src/basedir_prot.sh -text
 src/du.pl -text
