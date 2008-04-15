@@ -34,6 +34,7 @@
 # * user
 # * password
 # * database
+# * MYSQL_CLIENT
 # 
 # XXX: the sed script should be generated here
 #
