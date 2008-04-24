@@ -90,9 +90,9 @@ class m_err {
    */
   function errstr() {
     if (is_string($this->error)) {
-      $msg = sprintf(_("err_".$this->clsid."_generic: ")._($this->error)."\n",$this->param);
+      $msg = strtr(_("err_".$this->clsid."_generic: ")._($this->error)."\n",$this->param);
     } else {
-      $msg = sprintf(_("err_".$this->clsid."_".$this->error)."\n",$this->param);
+      $msg = strtr(_("err_".$this->clsid."_".$this->error)."\n",$this->param);
     }
     return $msg;
   }
