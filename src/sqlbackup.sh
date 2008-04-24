@@ -29,7 +29,7 @@
 
 set -e
 
-function dobck {
+dobck {
     local ext
     local i
     local old_ifs

@@ -117,7 +117,7 @@ EOF
 fi
 
 # create a sed script to create/update the file
-function set_value() {
+set_value() {
     var=$1
     RET=$2
     grep -Eq "^ *$var=" $MYSQL_CONFIG || echo "$var=" >> $MYSQL_CONFIG
