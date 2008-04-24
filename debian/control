@@ -3,7 +3,7 @@ Section: admin
 Priority: optional
 Maintainer: Antoine Beaupré <anarcat@koumbit.org>
 Uploaders: Benjamin Sonntag <benjamin@alternc.org>
-Build-Depends-Indep: findutils (>= 4.1.7), gcc (>= 2:2.95.4), gettext (>= 0.10.40-5)
+Build-Depends-Indep: findutils (>= 4.1.7), gettext (>= 0.10.40-5)
 Build-Depends: debhelper (>= 4.0.2), po-debconf
 Standards-Version: 3.7.3
 
