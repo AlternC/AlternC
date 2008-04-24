@@ -47,7 +47,7 @@ fi
 
 . "$CONFIG_FILE"
 
-doone {
+doone() {
     read GID LOGIN
     while [ "$LOGIN" ] 
       do

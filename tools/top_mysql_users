@@ -73,7 +73,7 @@ done
 
 
 #-------------------------
-set_messages
+set_messages()
 #-------------------------
 {
 	# Language-dependent messages
@@ -93,7 +93,7 @@ set_messages
 
 
 #-------------------------
-trap_EXIT
+trap_EXIT()
 #-------------------------
 {
 	# Does some cleaning
