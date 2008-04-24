@@ -128,16 +128,18 @@ body#menu h3 {
 #menu-list dt {
     font-weight:bold;
     color:#777;
-    font-size:.9em;
+    font-size:.8em;
     /*margin: 4px 0 2px 0;*/
-    padding: 7px .1em 0 5px;
+    padding: 1px .1em 0 5px;
     /*background-color: #ccc;*/
-    border-bottom: 2px solid #ccc;
+    /*border-bottom: 2px solid #ccc;*/
+    background-color:#bbb;
+    color:white;
     }
 #menu-list dd {
     padding:0;
     margin:0;
-    font-size: 1em;
+    font-size: .9em;
     border-bottom: 1px solid #ccc;
     }
 #alternc-logo {
