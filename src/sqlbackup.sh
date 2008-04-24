@@ -60,10 +60,10 @@ function dobck {
         mv -f "${target_dir}/${db}.sql${ext}" \
               "${target_dir}/${db}.sql.${i}${ext}" 2>/dev/null || true 
         if [ "$compressed" -eq 1 ]; then
-            mysqldump --defaults-file=/etc/alternc/my.cnf --add-drop-table --allow-keywords -Q -f -q -a -e |
+            mysqldump --defaults-file=/etc/alternc/my.cnf ${db} --add-drop-table --allow-keywords -Q -f -q -a -e |
                 gzip -c > "${target_dir}/${db}.sql${ext}"
         else
-            mysqldump --defaults-file=/etc/alternc/my.cnf --add-drop-table --allow-keywords -Q -f -q -a -e \
+            mysqldump --defaults-file=/etc/alternc/my.cnf ${db} --add-drop-table --allow-keywords -Q -f -q -a -e \
                 > "${target_dir}/${db}.sql"
         fi
 
