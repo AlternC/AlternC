@@ -52,9 +52,11 @@ class m_err {
    * 
    * Cette fonction lance une erreur, l'ajoute dans les logs d'AlternC, 
    * et la met à disposition pour le bureau virtuel pour affichage ultérieur.
-   * 
+   *
+   * @todo ne plus utiliser $error de façon numérique, nulle part
+   *
    * @param integer $clsid Classe qui lève l'erreur
-   * @param integer $error Numéro de l'erreur
+   * @param mixed $error Numéro de l'erreur ou chaîne décrivant l'erreur
    * @param string $param Paramètre chaine associé à l'erreur (facultatif)
    * @return boolean TRUE si l'erreur est connue, FALSE sinon.
    *
