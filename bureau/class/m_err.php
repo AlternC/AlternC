@@ -66,7 +66,8 @@ class m_err {
     if (_("err_".$clsid."_".$error)!="err_".$clsid."_".$error || is_string($error)) {
       $this->clsid=$clsid;
       $this->error=$error;
-      $this->param=$param;
+      $args = func_get_args();
+      $this->param=array_slice($args, 2);
       $this->logerr();
       return true;
     } else {
@@ -90,10 +91,12 @@ class m_err {
    */
   function errstr() {
     if (is_string($this->error)) {
-      $msg = strtr(_("err_".$this->clsid."_generic: ")._($this->error)."\n",$this->param);
+      $str = _("err_".$this->clsid."_generic: ")._($this->error)."\n";
     } else {
-      $msg = strtr(_("err_".$this->clsid."_".$this->error)."\n",$this->param);
+      $str = _("err_".$this->clsid."_".$this->error)."\n";
     }
+    $args = array_unshift($this->param, $str);
+    $msg = call_user_func_array("sprintf", $args);
     return $msg;
   }
 
