@@ -37,4 +37,4 @@ $r=$quota->getquota("dom");
 if ($q["t"]>0 && $r["u"]>0) {
 ?>
 <dd><a href="sta2_list.php"><?php __("Raw web statistics"); ?></a></dd>
-<?php    }    ?>
+<?php    }
