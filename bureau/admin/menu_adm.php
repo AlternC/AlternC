@@ -33,8 +33,8 @@
 /* ############################# */
 
 if ($mem->checkRight()) { ?>
-<dt id="reseller"><?php __("Reseller"); ?></dt>
+<dt id="reseller"><?php __("Administration"); ?></dt>
    <dd><a href="adm_list.php"><?php __("Manage the members"); ?></a></dd>
-   <dd><a href="adm_panel.php"><?php __("Admin Control Panel"); ?></a></dd>
+   <dd><a href="adm_panel.php"><?php __("AlternC configuration"); ?></a></dd>
    <dd><a href="/admin/sql/?server=2"><?php __("General SQL Admin"); ?></a></dd>
 <?php }
