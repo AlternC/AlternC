@@ -52,6 +52,7 @@ msgstr "Añadir nuevo miembro"
 #: ../admin/sql_passchg.php:51 ../admin/sql_users_add.php:54
 #: ../admin/sql_users_list.php:95 ../admin/adm_list.php:76
 #: ../admin/ftp_add.php:54 ../admin/ftp_list.php:68 ../admin/index.php:74
+#: ../admin/ftp_list.php:79
 msgid "Username"
 msgstr "Nombre de usuario"
 
@@ -382,7 +383,7 @@ msgstr ""
 #: ../admin/adm_list.php:96 ../admin/adm_tld.php:75 ../admin/dom_edit.php:77
 #: ../admin/ftp_list.php:70 ../admin/hta_edit.php:68 ../admin/hta_list.php:76
 #: ../admin/mail_list.php:97 ../admin/sta2_list.php:67
-#: ../admin/adm_list.php:95
+#: ../admin/adm_list.php:95 ../admin/ftp_list.php:83
 msgid "Edit"
 msgstr "Modificar"
 
@@ -410,7 +411,8 @@ msgstr "Q"
 msgid "C"
 msgstr "C"
 
-#: ../admin/adm_list.php:218 ../admin/ftp_list.php:77
+#: ../admin/adm_list.php:218 ../admin/ftp_list.php:77 ../admin/ftp_list.php:66
+#: ../admin/ftp_list.php:90
 msgid "Delete checked accounts"
 msgstr "Suprimir las cuentas marcadas"
 
@@ -719,6 +721,7 @@ msgstr "Archivo"
 #: ../admin/sta2_edit_raw.php:58 ../admin/sta2_list.php:57
 #: ../admin/bro_main.php:136 ../admin/bro_main.php:135
 #: ../admin/bro_main.php:153 ../admin/ftp_add.php:59 ../admin/ftp_list.php:69
+#: ../admin/ftp_list.php:82
 msgid "Folder"
 msgstr "Carpeta"
 
@@ -1074,7 +1077,7 @@ msgid "You cannot add any new ftp account, your quota is over."
 msgstr "Su cuota de cuentas ftp alcanzó su limite, no se puede crear más."
 
 #: ../admin/ftp_add.php:40 ../admin/ftp_list.php:47 ../admin/ftp_list.php:83
-#: ../admin/ftp_add.php:51 ../admin/ftp_list.php:82
+#: ../admin/ftp_add.php:51 ../admin/ftp_list.php:82 ../admin/ftp_list.php:60
 msgid "Create a new ftp account"
 msgstr "Crear una nueva cuenta ftp"
 
@@ -1543,11 +1546,11 @@ msgstr "Modificar mis preferencias de administrador"
 msgid "Your password has been successfully changed."
 msgstr "La contraseña ha sido cambiada."
 
-#: ../admin/menu_adm.php:39
+#: ../admin/menu_adm.php:39 ../admin/menu_adm.php:37
 msgid "Manage the members"
 msgstr "Administrar miembros"
 
-#: ../admin/menu_adm.php:41
+#: ../admin/menu_adm.php:41 ../admin/menu_adm.php:39
 msgid "General SQL Admin"
 msgstr "Admin general SQL "
 
@@ -1563,7 +1566,7 @@ msgstr "Dominios"
 msgid "FTP accounts"
 msgstr "Cuentas FTP"
 
-#: ../admin/menu_mail.php:37
+#: ../admin/menu_mail.php:37 ../admin/menu_mail.php:36
 msgid "Mailboxes"
 msgstr "Cuentas de correo"
 
@@ -1571,7 +1574,7 @@ msgstr "Cuentas de correo"
 msgid "Settings"
 msgstr "Configuración"
 
-#: ../admin/menu_mem.php:33 ../admin/menu_mem.php:34
+#: ../admin/menu_mem.php:33 ../admin/menu_mem.php:34 ../admin/menu.php:53
 msgid "Logout"
 msgstr "Salir"
 
@@ -1592,7 +1595,7 @@ msgstr "Mostrar cuotas"
 msgid "MySQL Users"
 msgstr "Base de datos MySQL"
 
-#: ../admin/menu_sql.php:36 ../admin/menu_sql.php:35
+#: ../admin/menu_sql.php:36 ../admin/menu_sql.php:35 ../admin/menu_sql.php:34
 msgid "Databases"
 msgstr "Bases de datos"
 
@@ -1601,6 +1604,7 @@ msgid "SQL Admin"
 msgstr "Admin SQL"
 
 #: ../admin/menu_sta2.php:37 ../admin/menu_sta2.php:36
+#: ../admin/menu_sta2.php:39
 #, fuzzy
 msgid "Raw web statistics"
 msgstr "Estadísticas Web"
@@ -1995,7 +1999,8 @@ msgid "Domain can be installed, force NO DNS hosting)"
 msgstr ""
 
 #: ../class/m_err.php:64 ../class/m_err.php:90 ../class/m_err.php:107
-#: ../class/m_err.php:91 ../class/m_err.php:93
+#: ../class/m_err.php:91 ../class/m_err.php:93 ../class/m_err.php:66
+#: ../class/m_err.php:94 ../class/m_err.php:96
 #, php-format
 msgid "err_"
 msgstr "err_"
@@ -2359,6 +2364,43 @@ msgstr ""
 msgid "Latest news"
 msgstr ""
 
+#: ../admin/menu_adm.php:36
+#, fuzzy
+msgid "Administration"
+msgstr "Administración de"
+
+#: ../admin/menu_adm.php:38
+msgid "AlternC configuration"
+msgstr ""
+
+#: ../admin/menu_brouteur.php:33
+msgid "Files and directories"
+msgstr ""
+
+#: ../admin/menu_lang.php:31
+#, fuzzy
+msgid "Languages"
+msgstr "Idioma"
+
+#: ../admin/menu_mem.php:31
+#, fuzzy
+msgid "Other"
+msgstr "Entrer"
+
+#: ../admin/menu_mem.php:33
+msgid "Messages"
+msgstr ""
+
+#: ../admin/menu_sql.php:35
+#, fuzzy
+msgid "Users"
+msgstr "Usuario"
+
+#: ../admin/menu_sta2.php:32
+#, fuzzy
+msgid "Web statistics"
+msgstr "Estadísticas Web"
+
 #, fuzzy
 #~ msgid "Create the domain username."
 #~ msgstr "Crear esta nueva base de datos"
@@ -2437,9 +2479,6 @@ msgstr ""
 
 #~ msgid "New Statistics"
 #~ msgstr "Nuevo juega de estadísticas"
-
-#~ msgid "Language"
-#~ msgstr "Idioma"
 
 #~ msgid "Change the Statistics"
 #~ msgstr "Modificar un juego de estadísticas"

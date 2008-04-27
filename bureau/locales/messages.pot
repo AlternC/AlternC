@@ -31,6 +31,7 @@ msgstr ""
 #: ../admin/sql_passchg.php:51 ../admin/sql_users_add.php:54
 #: ../admin/sql_users_list.php:95 ../admin/adm_list.php:76
 #: ../admin/ftp_add.php:54 ../admin/ftp_list.php:68 ../admin/index.php:74
+#: ../admin/ftp_list.php:79
 msgid "Username"
 msgstr ""
 
@@ -339,7 +340,7 @@ msgstr ""
 #: ../admin/adm_list.php:96 ../admin/adm_tld.php:75 ../admin/dom_edit.php:77
 #: ../admin/ftp_list.php:70 ../admin/hta_edit.php:68 ../admin/hta_list.php:76
 #: ../admin/mail_list.php:97 ../admin/sta2_list.php:67
-#: ../admin/adm_list.php:95
+#: ../admin/adm_list.php:95 ../admin/ftp_list.php:83
 msgid "Edit"
 msgstr ""
 
@@ -367,7 +368,8 @@ msgstr ""
 msgid "C"
 msgstr ""
 
-#: ../admin/adm_list.php:218 ../admin/ftp_list.php:77
+#: ../admin/adm_list.php:218 ../admin/ftp_list.php:77 ../admin/ftp_list.php:66
+#: ../admin/ftp_list.php:90
 msgid "Delete checked accounts"
 msgstr ""
 
@@ -663,6 +665,7 @@ msgstr ""
 #: ../admin/sta2_edit_raw.php:58 ../admin/sta2_list.php:57
 #: ../admin/bro_main.php:136 ../admin/bro_main.php:135
 #: ../admin/bro_main.php:153 ../admin/ftp_add.php:59 ../admin/ftp_list.php:69
+#: ../admin/ftp_list.php:82
 msgid "Folder"
 msgstr ""
 
@@ -1004,7 +1007,7 @@ msgid "You cannot add any new ftp account, your quota is over."
 msgstr ""
 
 #: ../admin/ftp_add.php:40 ../admin/ftp_list.php:47 ../admin/ftp_list.php:83
-#: ../admin/ftp_add.php:51 ../admin/ftp_list.php:82
+#: ../admin/ftp_add.php:51 ../admin/ftp_list.php:82 ../admin/ftp_list.php:60
 msgid "Create a new ftp account"
 msgstr ""
 
@@ -1431,11 +1434,11 @@ msgstr ""
 msgid "Your password has been successfully changed."
 msgstr ""
 
-#: ../admin/menu_adm.php:39
+#: ../admin/menu_adm.php:39 ../admin/menu_adm.php:37
 msgid "Manage the members"
 msgstr ""
 
-#: ../admin/menu_adm.php:41
+#: ../admin/menu_adm.php:41 ../admin/menu_adm.php:39
 msgid "General SQL Admin"
 msgstr ""
 
@@ -1451,7 +1454,7 @@ msgstr ""
 msgid "FTP accounts"
 msgstr ""
 
-#: ../admin/menu_mail.php:37
+#: ../admin/menu_mail.php:37 ../admin/menu_mail.php:36
 msgid "Mailboxes"
 msgstr ""
 
@@ -1459,7 +1462,7 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: ../admin/menu_mem.php:33 ../admin/menu_mem.php:34
+#: ../admin/menu_mem.php:33 ../admin/menu_mem.php:34 ../admin/menu.php:53
 msgid "Logout"
 msgstr ""
 
@@ -1476,7 +1479,7 @@ msgstr ""
 msgid "MySQL Users"
 msgstr ""
 
-#: ../admin/menu_sql.php:36 ../admin/menu_sql.php:35
+#: ../admin/menu_sql.php:36 ../admin/menu_sql.php:35 ../admin/menu_sql.php:34
 msgid "Databases"
 msgstr ""
 
@@ -1485,6 +1488,7 @@ msgid "SQL Admin"
 msgstr ""
 
 #: ../admin/menu_sta2.php:37 ../admin/menu_sta2.php:36
+#: ../admin/menu_sta2.php:39
 msgid "Raw web statistics"
 msgstr ""
 
@@ -1844,7 +1848,8 @@ msgid "Domain can be installed, force NO DNS hosting)"
 msgstr ""
 
 #: ../class/m_err.php:64 ../class/m_err.php:90 ../class/m_err.php:107
-#: ../class/m_err.php:91 ../class/m_err.php:93
+#: ../class/m_err.php:91 ../class/m_err.php:93 ../class/m_err.php:66
+#: ../class/m_err.php:94 ../class/m_err.php:96
 #, php-format
 msgid "err_"
 msgstr ""
@@ -2181,4 +2186,36 @@ msgstr ""
 
 #: ../admin/main.php:62
 msgid "Latest news"
+msgstr ""
+
+#: ../admin/menu_adm.php:36
+msgid "Administration"
+msgstr ""
+
+#: ../admin/menu_adm.php:38
+msgid "AlternC configuration"
+msgstr ""
+
+#: ../admin/menu_brouteur.php:33
+msgid "Files and directories"
+msgstr ""
+
+#: ../admin/menu_lang.php:31
+msgid "Languages"
+msgstr ""
+
+#: ../admin/menu_mem.php:31
+msgid "Other"
+msgstr ""
+
+#: ../admin/menu_mem.php:33
+msgid "Messages"
+msgstr ""
+
+#: ../admin/menu_sql.php:35
+msgid "Users"
+msgstr ""
+
+#: ../admin/menu_sta2.php:32
+msgid "Web statistics"
 msgstr ""
