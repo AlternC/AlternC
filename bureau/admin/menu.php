@@ -50,6 +50,7 @@ while (!feof ($tt)) {
 }
 fclose($tt);
 ?>
+<dd><a href="mem_logout.php" target="_parent"><?php __("Logout"); ?></a></dd>
 </dl>
 
 </body>

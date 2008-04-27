@@ -29,6 +29,5 @@
 */
 ?>
 <dt id="settings"><?php __("Other"); ?></dt>
-<dd><a href="mem_logout.php" target="_parent"><?php __("Logout"); ?></a></dd>
 <dd><a href="mem_param.php"><?php __("Settings"); ?></a></dd>
 <dd><a href="main.php"><?php __("Messages"); ?></a></dd>
