@@ -34,6 +34,4 @@ if ($r["t"]) {
 <dd><a href="sql_list.php"><?php __("Databases"); ?></a></dd>
 <dd><a href="sql_users_list.php"><?php __("Users") ?></a></dd>
 <dd><a target="_blank" href="sql_admin.php"><?php __("SQL Admin"); ?></a></dd>
-<?php
-	}
-?>
+<?php }
