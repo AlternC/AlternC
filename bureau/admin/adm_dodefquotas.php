@@ -85,7 +85,7 @@ if($_POST["action"] == "add") {
       continue;
 
     list($type, $q) = explode(":", $key, 2);
-    $c[$type][$q] = abs(intval($val));
+    $c[$type][$q] = abs(floatval($val));
   }
 
   if($quota->setdefaults($c)) {
