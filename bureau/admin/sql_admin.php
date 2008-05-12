@@ -35,7 +35,7 @@ if (!$r=$mysql->get_dblist()) {
 } else {
 	setcookie("REMOTE_USER",$r[0]["login"]);
 	setcookie("REMOTE_PASSWORD",$r[0]["pass"]);
-	if ($lang) $l="&lang=".substr($lang,0,2);
+	if ($lang) $l="&lang=".substr($lang,0,2).'-utf-8';
 	// TODO : make it an absolute url ! (even in httpS :))
 	header("Location: /admin/sql/index.php?server=1$l");
 	exit();
