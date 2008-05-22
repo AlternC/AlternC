@@ -91,18 +91,31 @@ if ($error) {
 	  $type = $db->f("type");
 	  echo "<option value=\"$type\"";
 	  if($type == 'default')
-	    echo " selected";
+	    echo " selected=\"selected\"";
 	  echo ">$type</option>";
 	}
 ?></select>
+	</td>
 </tr>
-<? if (variable_get('hosting_tld')) { ?>
+
 <tr>
-	<th colspan="2"><label><input type="checkbox" name="create_dom" value="1" />
-	<?php printf(_("Create the domain <b>username.%s</b>"),variable_get('hosting_tld')); ?></label></th>
-	</tr>
+    <th colspan="2">
+        <input type="checkbox" name="create_dom" value="1" />
+        <label><?php printf(_("Create the domain <b>username.%s</b>"),""); ?></label>
+        <select name="create_dom_list">
+            <?php if (variable_get('hosting_tld')) { ?>
+                <option value="<?php echo variable_get('hosting_tld'); ?>" selected="selected"><?php echo variable_get('hosting_tld'); ?></option>
+            <?php } 
+            /* Enumeration des domaines : */
+            $domain=$dom->enum_domains();
+            reset($domain);
+            while (list($key,$val)=each($domain)) { ?>
+                <option value="<?php echo $val; ?>" > <?php echo $val?> </option>
+            <?php } ?>
+        </select>
+    </th>
+</tr>
 <tr>
-<? } ?>
 	<td colspan="2"><input type="submit" class="inb" name="submit" value="<?php __("Create a new member"); ?>" /></td>
 </tr>
 </table>

@@ -59,16 +59,14 @@ if (!($u=$admin->add_mem($login, $pass, $nom, $prenom, $nmail, $canpass, $type))
    *
    * 1 = force = ne tient pas compte du whois ou des droits de tld
    */
-  if ($create_dom) {
-    if (variable_get("hosting_tld")) {
+
+  if (($create_dom == 1)  && !is_null($create_dom_list)) {
       # make sure we don't have multiple dots there
       $dom->lock();
-      $dom->add_domain($login.".".preg_replace("/^\.\.*/", "", variable_get("hosting_tld")),1,1,1);
+      $dom->add_domain($login.".".preg_replace("/^\.\.*/", "", $create_dom_list),1,1,1);
       $dom->unlock();
-    } else {
-      $err->log("no 'hosting_tld' variable defined in `variables` table, not creating domain");
-    }
   }
+
   $ftp->add_ftp($login,"",$pass,"/");
   $mem->unsu();
  
