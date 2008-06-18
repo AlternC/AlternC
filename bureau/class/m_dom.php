@@ -381,16 +381,6 @@ class m_dom {
 	    $found = true;
 	  }
 	  break;
-	case "ca":
-	  $ligne=ereg_replace(chr(10), "",ereg_replace(chr(13),"",ereg_replace(" ","", $ligne)));
-	  if ($ligne=="Status:EXIST")
-	    $found=true;
-	  if (ereg("NS.-Hostname:", $ligne)) {
-	    $tmp=strtolower(ereg_replace("NS.-Hostname:","", $ligne));
-	    if ($tmp)
-	      $server[]=$tmp;
-	  }
-	  break;
         case "eu":
 	case "be":
           $ligne=preg_replace("/^ *([^ ]*) \(.*\)$/","\\1",trim($ligne));
@@ -419,12 +409,13 @@ class m_dom {
               $server[]=$tmp;
           }
           break;
+	case "ca":
 	case "ws";
 	  if (ereg('^[[:space:]]*Name servers:[[:space:]]*$', $ligne)) {
 	        // found the server
 	  	$state = 1;
 	  } elseif ($state) {
-	  	if ($ligne = ereg_replace('[[:space:]]', "", $ligne)) {
+	  	if (ereg('^[^%]', $ligne) && $ligne = ereg_replace('[[:space:]]', "", $ligne)) {
 		  // first non-whitespace line is considered to be the nameservers themselves
 		  $found = true;
 		  $server[] = $ligne;
