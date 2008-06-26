@@ -96,9 +96,11 @@ class m_err {
       $str = _("err_".$this->clsid."_".$this->error)."\n";
     }
     $args = $this->param;
-    array_unshift($args, $str);
-    $msg = call_user_func_array("sprintf", $args);
-    return $msg;
+    if (is_array($args)) {
+      array_unshift($args, $str);
+      $msg = call_user_func_array("sprintf", $args);
+      return $msg;
+    } else return "";
   }
 
   /**
