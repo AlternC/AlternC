@@ -100,7 +100,9 @@ class m_err {
       array_unshift($args, $str);
       $msg = call_user_func_array("sprintf", $args);
       return $msg;
-    } else return "";
+    } else {
+      return $args;
+    }
   }
 
   /**
