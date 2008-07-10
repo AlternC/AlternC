@@ -294,7 +294,7 @@ read_parameters() {
             -n|--name-methode) shift; SQLBACKUP_TYPE="$1";;
             -a|--allow-ovewrite) shift; SQLBACKUP_OVERWRITE="$1" ;;
             *)
-                error "invalide option -- $1" 
+                error "invalid option -- $1" 
                 error "Try \`sqlbackup.sh --help' for more information."
                 exit ;;
         esac
@@ -323,7 +323,7 @@ read_parameters() {
         error "Try \`sqlbackup.sh --help' for more information."
         exit
     else 
-        error "invalide argument: type -- $TYPE"
+        error "invalid argument: type -- $TYPE"
         error "Try \`sqlbackup.sh --help' for more information."
         exit
     fi
@@ -331,7 +331,7 @@ read_parameters() {
     if ! ( [ -z "$SQLBACKUP_TYPE" ] || 
            [ "$SQLBACKUP_TYPE" == "date" ] || 
            [ "$SQLBACKUP_TYPE" == "rotate" ] ) ; then
-        error "invalide argument: name-methode -- $SQLBACKUP_TYPE"
+        error "invalid argument: name-methode -- $SQLBACKUP_TYPE"
         error "Try \`sqlbackup.sh --help' for more information."
         exit
      fi
@@ -340,7 +340,7 @@ read_parameters() {
            [ "$SQLBACKUP_OVERWRITE" == "no" ] || 
            [ "$SQLBACKUP_OVERWRITE" == "rename" ] || 
            [ "$SQLBACKUP_OVERWRITE" == "overwrite" ] ); then
-        error "invalide argument: allow-ovewrite -- $SQLBACKUP_OVERWRITE"
+        error "invalid argument: allow-ovewrite -- $SQLBACKUP_OVERWRITE"
         error "Try \`sqlbackup.sh --help' for more information."
         exit
      fi
