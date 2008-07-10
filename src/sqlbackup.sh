@@ -236,17 +236,14 @@ function dobck() {
        #                     Allow script to backup other database if one of the have an error
        # --quick           : Don't buffer query, dump directly to stdout. 
        #                     optimisation option
-       # --all             : Include all MySQL specific create options.
-       #                     Permit keep information like type or comment
        # --extended-insert : Allows utilization of the new, much faster INSERT syntax.
        #                     optimization option
-       # (--add-locks       : Add locks around insert statements.)
-       # (--lock-tables     : Lock all tables for read.)
+       # --add-locks       : Add locks around insert statements.
+       # --lock-tables     : Lock all tables for read.
        #                      those 2 options avoid insert during dump which can create an unconsistent 
        #                      state of the database backup
-       #                      remove because lock is allow for alternc user 
        if [ "$DO_BACKUP" == "YES" ]; then
-           command="mysqldump --defaults-file=/etc/alternc/my.cnf --add-drop-table --allow-keywords --quote-names --force --quick --all --extended-insert $db"
+           command="mysqldump --defaults-file=/etc/alternc/my.cnf --add-drop-table --allow-keywords --quote-names --force --quick --add-locks --lock-tables --extended-insert $db"
            if [ "$compressed" -eq 1 ] ; then
                $command = "$command | gzip -c"
            fi
