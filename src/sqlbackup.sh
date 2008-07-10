@@ -38,7 +38,6 @@ set -e
 
 # Get mysql user and password : 
 . /etc/alternc/local.sh
-. /etc/alternc/sqlbackup.conf
 
 # get the date of the day
 DATE=`date +"%Y%m%d"`
@@ -88,7 +87,7 @@ print() {
             then
                 echo "$EXEC_CMD $log_level: $*"
             fi
-            echo "`date +"%b %d %T"` `hostname` $EXEC_CMD $log_level: $*" >> $F_LOG
+            logger -p local0.$log_level -t sqlbackup "$*"
         else
             if [ -z "$log_level" ];
             then
