@@ -173,6 +173,8 @@ db_input low alternc/mysql/db || true
 db_input low alternc/mysql/user || true
 db_input low alternc/mysql/password || true
 db_input low alternc/mysql/client || true
+db_input low alternc/sql/backup_type || true
+db_input low alternc/sql/overwrite || true
 db_input low alternc/monitor_ip || true
 db_input low alternc/bind_internal || true
 db_input low alternc/mynetwork || true

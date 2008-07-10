@@ -89,6 +89,24 @@ _Description: The server to GRANT permissions to:
  to the hostname or IP the Apache server will appear as connecting from to
  the MySQL server.
 
+Template: alternc/sql/backup_type
+Type: select
+Choices: rotate, date
+_Description: The way backup rotation is executated
+ AlternC enables users to configure their own backups, on demand, with
+ automatic rotation. This option determines how the backups are rotated.
+ .
+ rotate - backup.sql, backup.sql.0, backup.sql.1
+ date - backup.sql, backup.sql.20080709, backup.sql.20080708
+
+Template: alternc/sql/backup_overwrite
+Type: select
+Choices: no, rename, overwrite
+_Description: Behavior of the backup script when it encounters a unmanaged file
+ The SQL backups can rename or overwrite existing files it doesn't know
+ about when doing backups. The default behavior is to skip those files
+ and ignore it.
+
 Template: alternc/public_ip
 Type: string
 _Description: The primary IP of this server:
