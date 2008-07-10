@@ -403,9 +403,8 @@ debug end
 #
 # the "<< EOF" mean send data to the command until EOF (end of file)
 #
-debug /usr/bin/mysql -h"$MYSQL_HOST" -u"$MYSQL_USER" -p"XXXX" "$MYSQL_DATABASE" -B 
-/usr/bin/mysql -h"$MYSQL_HOST" -u"$MYSQL_USER" -p"$MYSQL_PASS" \
-"$MYSQL_DATABASE" --batch << EOF | tail -n '+2' | dobck
+debug /usr/bin/mysql --defaults-file=/etc/alternc/my.cnf --batch
+/usr/bin/mysql --defaults-file=/etc/alternc/my.cnf --batch << EOF | tail -n '+2' | dobck
 SELECT login, pass, db, bck_history, bck_gzip, bck_dir
   FROM db
  WHERE bck_mode=$mode;
