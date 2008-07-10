@@ -33,6 +33,8 @@ ALTERNC_LOC=/var/alternc
 NS1_HOSTNAME="$FQDN"
 NS2_HOSTNAME="$FQDN"
 HOSTING="AlternC"
+SQLBACKUP_TYPE="rotate"
+SQLBACKUP_OVERWRITE="no"
 
 if [ -r /etc/alternc/local.sh ]; then
     # source the current config
@@ -132,6 +134,18 @@ db_get alternc/mysql/client
 if [ -z "$RET" ]
     then
 db_set alternc/mysql/client "$MYSQL_CLIENT"
+fi
+
+db_get alternc/sql/backup_type
+if [ -z "$RET" ]
+    then
+db_set alternc/sql/backup_type "$SQLBACKUP_TYPE"
+fi
+
+db_get alternc/sql/backup_overwrite
+if [ -z "$RET" ]
+    then
+db_set alternc/sql/backup_overwrite "$SQLBACKUP_OVERWRITE"
 fi
 
 db_get alternc/alternc_location

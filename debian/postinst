@@ -93,6 +93,13 @@ ALTERNC_LOC=""
 
 # Networks that SMTP should relay, separated with spaces
 SMTP_RELAY_NETWORKS=""
+
+# the type of backup created by the sql backup script
+# valid options are "rotate" (newsyslog-style) or "date" (suffix is the date)
+SQLBACKUP_TYPE=""
+
+# overwrite existing files when backing up
+SQLBACKUP_OVERWRITE=""
 EOF
 
         chown root:www-data $CONFIGFILE
@@ -117,6 +124,8 @@ EOF
     update_var alternc/bind_internal BIND_INTERNAL
     update_var alternc/default_mx DEFAULT_MX 
     update_var alternc/mysql/client MYSQL_CLIENT 
+    update_var alternc/sql/backup_type SQLBACKUP_TYPE
+    update_var alternc/sql/backup_overwrite SQLBACKUP_OVERWRITE
     update_var alternc/alternc_location ALTERNC_LOC
     update_var alternc/mynetwork SMTP_RELAY_NETWORKS
     sed -e "$SED_SCRIPT" < $CONFIGFILE > $CONFIGFILE.tmp

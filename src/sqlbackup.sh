@@ -136,7 +136,7 @@ function dobck() {
             ext=""
         fi
 
-        # if $TYPE_NAME_BACKUP is set to "rotate" classical rotation files methode will be used
+        # if $SQLBACKUP_TYPE is set to "rotate" classical rotation files methode will be used
         # use incrementale number in the name of files where the highest number indicate
         # the oldest files
         # if the rotate type is not set or set to date, the name of the export file will contain the date
@@ -145,9 +145,9 @@ function dobck() {
         # rotate files which just change name
         #
         # ------------------------------------------------------------------ #
-        # the variable TYPE_NAME_BACKUP must be set in /etc/alternc/local.sh #
+        # the variable SQLBACKUP_TYPE must be set in /etc/alternc/local.sh #
         # ------------------------------------------------------------------ #
-        if [ $TYPE_NAME_BACKUP == "rotate" ]; then 
+        if [ $SQLBACKUP_TYPE == "rotate" ]; then 
             
             i="$count"
             
@@ -199,26 +199,26 @@ function dobck() {
             
        fi
       
-       # if the backup exite and ALLOW_OVERWRITE_BACKUP is set to NO, cancel backup
-       if [ -f "${target_dir}/${name_backup_file}.sql${ext}" ] && [ "$ALLOW_OVERWRITE_BACKUP"  == "no" ] ; then
+       # if the backup exite and SQLBACKUP_OVERWRITE is set to NO, cancel backup
+       if [ -f "${target_dir}/${name_backup_file}.sql${ext}" ] && [ "$SQLBACKUP_OVERWRITE"  == "no" ] ; then
            
            info "sqlbackup.sh: ${target_dir}/${name_backup_file}.sql${ext}: already exist"
-           info "              => no backup done as specify in allow-overwrite = $ALLOW_OVERWRITE_BACKUP"
+           info "              => no backup done as specify in allow-overwrite = $SQLBACKUP_OVERWRITE"
            DO_BACKUP="NO"
 
-        # if the backup exite and ALLOW_OVERWRITE_BACKUP is set to RENAME, add  
-        elif [ -f "${target_dir}/${name_backup_file}.sql${ext}" ] && [ "$ALLOW_OVERWRITE_BACKUP"  == "rename" ] ; then
+        # if the backup exite and SQLBACKUP_OVERWRITE is set to RENAME, add  
+        elif [ -f "${target_dir}/${name_backup_file}.sql${ext}" ] && [ "$SQLBACKUP_OVERWRITE"  == "rename" ] ; then
 
            info "sqlbackup.sh: ${target_dir}/${name_backup_file}.sql${ext}: already exist"
-           info "              => renaming the new file as specify in allow-overwrite = $ALLOW_OVERWRITE_BACKUP"
+           info "              => renaming the new file as specify in allow-overwrite = $SQLBACKUP_OVERWRITE"
            hours=`date +"%H%M"` 
            name_backup_file="${name_backup_file}.${hours}"
 
-        # if the backup exite and ALLOW_OVERWRITE_BACKUP is set OVERWRITE, add  
-        elif [ -f "${target_dir}/${name_backup_file}.sql${ext}" ] && [ "$ALLOW_OVERWRITE_BACKUP"  == "overwrite" ] ; then
+        # if the backup exite and SQLBACKUP_OVERWRITE is set OVERWRITE, add  
+        elif [ -f "${target_dir}/${name_backup_file}.sql${ext}" ] && [ "$SQLBACKUP_OVERWRITE"  == "overwrite" ] ; then
 
            info "sqlbackup.sh: ${target_dir}/${name_backup_file}.sql${ext}: already exist"
-           info "              => overwrite file as specify in allow-overwrite = $ALLOW_OVERWRITE_BACKUP"
+           info "              => overwrite file as specify in allow-overwrite = $SQLBACKUP_OVERWRITE"
            
        fi
 
@@ -291,8 +291,8 @@ read_parameters() {
             -v|--verbose) VERBOSE="ON" ;;
             -d|--debug) DEBUG="ON" ;;
             -t|--type) shift; TYPE="$1";;
-            -n|--name-methode) shift; TYPE_NAME_BACKUP="$1";;
-            -a|--allow-ovewrite) shift; ALLOW_OVERWRITE_BACKUP="$1" ;;
+            -n|--name-methode) shift; SQLBACKUP_TYPE="$1";;
+            -a|--allow-ovewrite) shift; SQLBACKUP_OVERWRITE="$1" ;;
             *)
                 error "invalide option -- $1" 
                 error "Try \`sqlbackup.sh --help' for more information."
@@ -305,8 +305,8 @@ read_parameters() {
     done
 
     debug "TYPE = $TYPE"
-    debug "TYPE_NAME_BACKUP = $TYPE_NAME_BACKUP"
-    debug "ALLOW_OVERWRITE_BACKUP = $ALLOW_OVERWRITE_BACKUP"
+    debug "SQLBACKUP_TYPE = $SQLBACKUP_TYPE"
+    debug "SQLBACKUP_OVERWRITE = $SQLBACKUP_OVERWRITE"
    
 
     # check options 
@@ -328,19 +328,19 @@ read_parameters() {
         exit
     fi
 
-    if ! ( [ -z "$TYPE_NAME_BACKUP" ] || 
-           [ "$TYPE_NAME_BACKUP" == "date" ] || 
-           [ "$TYPE_NAME_BACKUP" == "rotate" ] ) ; then
-        error "invalide argument: name-methode -- $TYPE_NAME_BACKUP"
+    if ! ( [ -z "$SQLBACKUP_TYPE" ] || 
+           [ "$SQLBACKUP_TYPE" == "date" ] || 
+           [ "$SQLBACKUP_TYPE" == "rotate" ] ) ; then
+        error "invalide argument: name-methode -- $SQLBACKUP_TYPE"
         error "Try \`sqlbackup.sh --help' for more information."
         exit
      fi
 
-    if ! ( [ -z  "$ALLOW_OVERWRITE_BACKUP" ] || 
-           [ "$ALLOW_OVERWRITE_BACKUP" == "no" ] || 
-           [ "$ALLOW_OVERWRITE_BACKUP" == "rename" ] || 
-           [ "$ALLOW_OVERWRITE_BACKUP" == "overwrite" ] ); then
-        error "invalide argument: allow-ovewrite -- $ALLOW_OVERWRITE_BACKUP"
+    if ! ( [ -z  "$SQLBACKUP_OVERWRITE" ] || 
+           [ "$SQLBACKUP_OVERWRITE" == "no" ] || 
+           [ "$SQLBACKUP_OVERWRITE" == "rename" ] || 
+           [ "$SQLBACKUP_OVERWRITE" == "overwrite" ] ); then
+        error "invalide argument: allow-ovewrite -- $SQLBACKUP_OVERWRITE"
         error "Try \`sqlbackup.sh --help' for more information."
         exit
      fi
