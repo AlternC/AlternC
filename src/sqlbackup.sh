@@ -245,33 +245,20 @@ function dobck() {
        #                      those 2 options avoid insert during dump which can create an unconsistent 
        #                      state of the database backup
        #                      remove because lock is allow for alternc user 
-       if [ "$compressed" -eq 1 ] && [ "$DO_BACKUP" == "YES" ]; then
-           debug "msqldump -h\"$MYSQL_HOST\" -u\"$login\" -p\"XXXX\" \"$db\" --add-drop-table --allow-keywords -Q -f -q -a -e \ "
-           debug "         | gzip -c > \"${target_dir}/${name_backup_file}.sql${ext}\""
-
-           mysqldump -h"$MYSQL_HOST" -u"$login" -p"$pass" "$db" \
+       if [ "$DO_BACKUP" == "YES" ]; then
+           $command = mysqldump -h"$MYSQL_HOST" -u"$login" -p"$pass" "$db" \
                         --add-drop-table \
                         --allow-keywords \
                         --quote-names \
                         --force \
                         --quick \
                         --all \
-                        --extended-insert \
-                        | gzip -c > "${target_dir}/${name_backup_file}.sql${ext}"
-
-       elif [ "$DO_BACKUP" == "YES" ] ; then
-            debug "mysqldump -h\"$MYSQL_HOST\" -u\"$login\" -p\"XXXX\" \"$db\" --add-drop-table --allow-keywords -Q -f -q -a -e \ "
-            debug "          > \"${target_dir}/${name_backup_file}.sql\""
-            
-            mysqldump -h"$MYSQL_HOST" -u"$login" -p"$pass" "$db" \
-                        --add-drop-table \
-                        --allow-keywords \
-                        --quote-names \
-                        --force \
-                        --quick \
-                        --all \
-                        --extended-insert \
-                        > "${target_dir}/${name_backup_file}.sql"
+                        --extended-insert
+           if [ "$compressed" -eq 1 ] ; then
+               $command = "$command | gzip -c"
+           fi
+           debug "$command > ${target_dir}/${name_backup_file}.sql${ext}"
+           $command > "${target_dir}/${name_backup_file}.sql${ext}"
         fi
 
         IFS="	"
