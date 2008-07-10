@@ -246,14 +246,7 @@ function dobck() {
        #                      state of the database backup
        #                      remove because lock is allow for alternc user 
        if [ "$DO_BACKUP" == "YES" ]; then
-           $command = mysqldump -h"$MYSQL_HOST" -u"$login" -p"$pass" "$db" \
-                        --add-drop-table \
-                        --allow-keywords \
-                        --quote-names \
-                        --force \
-                        --quick \
-                        --all \
-                        --extended-insert
+           command="mysqldump --defaults-file=/etc/alternc/my.cnf --add-drop-table --allow-keywords --quote-names --force --quick --all --extended-insert $db"
            if [ "$compressed" -eq 1 ] ; then
                $command = "$command | gzip -c"
            fi
