@@ -1,6 +1,8 @@
 alternc (0.9.9) UNRELEASED; urgency=low
 
   * development version
+  * FTP/TLS is now working properly (config is RSA not DSA, and key AND certif config 
+    must be BOTH populated)
 
  -- Antoine Beaupré <anarcat@koumbit.org>  Tue, 15 Apr 2008 11:52:56 -0400
 
