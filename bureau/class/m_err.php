@@ -140,7 +140,7 @@ class m_err {
     global $mem,$cuid;
     $f=@fopen($this->logfile,"ab");
     if ($f) {
-      fputs($f,date("d/m/Y H:i:s")." - CALL - ");
+      fputs($f,date("d/m/Y H:i:s")." - " . $_SERVER['REMOTE_ADDR'] . " - CALL - ");
       fputs($f,$mem->user["login"]." - ");
       fputs($f,$clsid." - ".$function." - ".$param."\n");
       fclose($f);
