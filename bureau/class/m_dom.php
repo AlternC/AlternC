@@ -304,7 +304,7 @@ class m_dom {
     switch($ext) {
     case "com":
     case "net":
-      $serveur="rs.internic.net";
+      $serveur="whois.crsnic.net";
       $egal="=";
       break;
     case "org":
