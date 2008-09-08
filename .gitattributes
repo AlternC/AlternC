@@ -236,6 +236,7 @@ bureau/locales/Makefile -text
 bureau/locales/README -text
 bureau/locales/de_DE/LC_MESSAGES/messages.po -text
 bureau/locales/en_US/LC_MESSAGES/manual.po -text
+bureau/locales/es_ES/LC_MESSAGES/manual.po -text
 bureau/locales/es_ES/LC_MESSAGES/messages.po -text
 bureau/locales/es_VE/LC_MESSAGES/manual.po -text
 bureau/locales/es_VE/LC_MESSAGES/messages.po -text
