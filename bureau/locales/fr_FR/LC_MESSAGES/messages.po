@@ -2305,11 +2305,11 @@ msgstr "Modifier mes préférences"
 
 #: ../admin/bro_main.php:239
 msgid "Copy to"
-msgstr ""
+msgstr "Copier vers"
 
 #: ../admin/bro_main.php:283
 msgid "Extract"
-msgstr ""
+msgstr "Extraire l\'archive"
 
 #: ../admin/dom_editdns.php:57
 #, fuzzy, php-format
