@@ -206,7 +206,6 @@ bureau/admin/stats_members.php -text
 bureau/admin/styles/base.css -text
 bureau/admin/template.php -text
 bureau/admin/web_list.php -text
-bureau/admin/webmail/.htaccess -text
 bureau/admin/webmail/index.php -text
 bureau/class/config.php -text
 bureau/class/config_nochk.php -text
