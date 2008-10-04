@@ -253,6 +253,7 @@ debian/alternc-slave.logrotate -text
 debian/alternc-slave.postinst -text
 debian/alternc-slave.postrm -text
 debian/alternc-slave.prerm -text
+debian/alternc-slave.templates -text
 debian/alternc.cron.d -text
 debian/alternc.dirs -text
 debian/alternc.links -text
@@ -262,6 +263,7 @@ debian/alternc.postinst -text
 debian/alternc.postrm -text
 debian/alternc.preinst -text
 debian/alternc.prerm -text
+debian/alternc.templates -text
 debian/changelog -text
 debian/compat -text
 debian/config -text
@@ -272,7 +274,6 @@ debian/po/POTFILES.in -text
 debian/po/fr.po -text
 debian/po/templates.pot -text
 debian/rules -text
-debian/templates -text
 etc/alternc/apache-ssl.conf -text
 etc/alternc/apache.conf -text
 etc/alternc/menulist.txt -text
