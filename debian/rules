@@ -81,7 +81,8 @@ install: build
 	# Remove CVS directories
 	/usr/bin/find debian/alternc -depth -type d -name CVS -exec rm {} -rf \;
 	/usr/bin/find debian/alternc -depth -type d -name .svn -exec rm {} -rf \;
-	cp debian/alternc-node.lintian debian/alternc/usr/share/lintian/overrides/alternc-slavedns
+	cp debian/alternc.lintian debian/alternc/usr/share/lintian/overrides/alternc
+	cp debian/alternc-slave.lintian debian/alternc/usr/share/lintian/overrides/alternc-slavedns
 
 # This single target is used to build all the packages, all at once, or
 # one at a time. So keep in mind: any options passed to commands here will

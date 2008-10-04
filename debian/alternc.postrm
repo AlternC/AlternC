@@ -15,6 +15,9 @@ set -e
 
 case "$1" in
   purge)
+    rm -f /etc/alternc/local.sh /etc/alternc/my.cnf /etc/alternc/bureau.conf
+    rm -f /var/backups/alternc/etc-installed.tar.gz
+
     # Purge database?
     db_input high alternc/postrm_remove_databases || true
     db_go
@@ -28,7 +31,7 @@ case "$1" in
     db_go
     db_get alternc/postrm_remove_datafiles || true
     if [ "$RET" = "true" ]; then
-      rm -rf /var/alternc/dns /var/alternc/html /var/alternc/redir
+      rm -rf /var/backups/alternc /var/alternc/dns /var/alternc/html /var/alternc/redir
     fi
 
     # Purge bind zones
@@ -48,6 +51,7 @@ case "$1" in
     fi
 
     rm -rf /var/alternc/apacheconf /var/alternc/cgi-bin /var/alternc/bureau /var/alternc/exec.usr /var/alternc/mla /var/alternc/redir /var/alternc/tmp /var/log/alternc
+    rm -f /etc/apache/conf.d/override_php.conf /etc/apache/conf.d/alternc-ssl.conf /etc/apache/conf.d/alternc.conf
     ;;
   remove|upgrade|failed-upgrade|abort-install|abort-upgrade)
     ;;

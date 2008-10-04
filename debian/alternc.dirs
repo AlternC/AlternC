@@ -1,3 +1,18 @@
+etc/alternc
+etc/alternc/templates
+etc/bind
+etc/bind/templates
+etc/courier
+etc/cron.d
+etc/phpmyadmin
+etc/postfix
+etc/squirrelmail
+usr/bin
+usr/lib/alternc
+usr/sbin
+usr/share/alternc/install
+usr/share/locale/fr/LC_MESSAGES
+usr/share/lintian/overrides/
 var/alternc/apacheconf
 var/alternc/apacheconf/_
 var/alternc/apacheconf/0
@@ -196,3 +211,6 @@ var/alternc/mail/z
 var/alternc/mla
 var/alternc/redir
 var/alternc/tmp
+var/backups/alternc
+var/log/alternc
+var/run/alternc
