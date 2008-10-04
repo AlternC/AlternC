@@ -1,4 +1,4 @@
-alternc (0.9.9) UNRELEASED; urgency=low
+alternc (0.9.9) stable; urgency=low
 
   * development version
   * FTP/TLS is now working properly (config is RSA not DSA, and key AND certif config 
