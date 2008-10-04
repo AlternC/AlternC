@@ -1,6 +1,8 @@
 alternc (0.9.9) stable; urgency=low
 
   * development version
+  * make a new alternc-slave package that eases installation on NFS-backed
+    frontend nodes
   * FTP/TLS is now working properly (config is RSA not DSA, and key AND certif config 
     must be BOTH populated)
 
