@@ -1,5 +1,3 @@
-etc/cron.d/alternc
-etc/logrotate.d/alternc
 usr/bin/*
 usr/lib/alternc/*
 usr/sbin/*
