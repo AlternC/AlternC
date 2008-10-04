@@ -261,6 +261,7 @@ debian/alternc-node.logrotate -text
 debian/alternc-node.postinst -text
 debian/alternc-node.postrm -text
 debian/alternc-node.prerm -text
+debian/alternc.install -text
 debian/changelog -text
 debian/compat -text
 debian/config -text
