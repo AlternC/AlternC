@@ -105,7 +105,7 @@ binary-common: build install
 	dh_installman man/*
 	dh_installcron
 #	dh_installinfo
-	dh_install
+	dh_install -i --sourcedir=$(CURDIR)/debian/alternc
 	dh_strip
 	dh_link
 	dh_compress
