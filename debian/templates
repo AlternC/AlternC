@@ -1,4 +1,4 @@
-Template: alternc/welcomeconfirm
+Template: alternc-node/welcomeconfirm
 Type: boolean
 Default: true
 _Description: Do you REALLY want to install AlternC on this computer ?
@@ -11,7 +11,7 @@ _Description: Do you REALLY want to install AlternC on this computer ?
  .
  YOU HAVE BEEN WARNED.
 
-Template: alternc/desktopname
+Template: alternc-node/desktopname
 Type: string
 _Description: Fully qualified name of the desktop:
  Please enter the fully qualified name of your server. This will be the
@@ -20,13 +20,13 @@ _Description: Fully qualified name of the desktop:
  .
  The default should be ok if your machine is correctly configured.
 
-Template: alternc/hostingname
+Template: alternc-node/hostingname
 Type: string
 _Description: Name of your hosting service:
  Please enter the name of your hosting service. It may be your company's
  name or your personnal name or whatever you want to ...
 
-Template: alternc/ns1
+Template: alternc-node/ns1
 Type: string
 _Description: Name of the primary domain name server:
  Please enter the fully qualified name of your primary dns server. It can
@@ -35,7 +35,7 @@ _Description: Name of the primary domain name server:
  name server that keep in sync with your alternc's server(s). . The default
  value should be good in most case.
 
-Template: alternc/ns2
+Template: alternc-node/ns2
 Type: string
 _Description: Name of the secondary domain name server:
  Please enter the fully qualified name of your secondary dns server. It can
@@ -46,7 +46,7 @@ _Description: Name of the secondary domain name server:
  You may contact the AlternC's users mailing list if you want to exchange
  dns service with other AlternC's users.
 
-Template: alternc/mysql/host
+Template: alternc-node/mysql/host
 Type: string
 _Description: Name of the mysql server:
  Please enter the fully qualified name of your mysql server host. On small
@@ -58,20 +58,20 @@ _Description: Name of the mysql server:
  "127.0.0.1" instead of "localhost" if your postfix installation is
  configured in a chroot (which is the case, by default).
 
-Template: alternc/mysql/db
+Template: alternc-node/mysql/db
 Type: string
 _Description: AlternC's mysql system database:
  AlternC will create a mysql database to store it's system data. Please
  choose the name of this database here. The default value should be good in
  most case.
 
-Template: alternc/mysql/user
+Template: alternc-node/mysql/user
 Type: string
 _Description: AlternC's mysql account:
  AlternC will create a mysql administrator account. Please choose it's
  username here. The default value should be good in most case.
 
-Template: alternc/mysql/password
+Template: alternc-node/mysql/password
 Type: password
 _Description: Password of the AlternC's mysql account:
  AlternC requires an administrator account on the mysql server. It will be
@@ -81,7 +81,7 @@ _Description: Password of the AlternC's mysql account:
  Please choose a quite complex password since it will have full access to
  the system database !!!
 
-Template: alternc/mysql/client
+Template: alternc-node/mysql/client
 Type: string
 _Description: The server to GRANT permissions to:
  AlternC and MySQL can be installed on different servers. In order to have
@@ -89,7 +89,7 @@ _Description: The server to GRANT permissions to:
  to the hostname or IP the Apache server will appear as connecting from to
  the MySQL server.
 
-Template: alternc/sql/backup_type
+Template: alternc-node/sql/backup_type
 Type: select
 Choices: rotate, date
 _Description: The way backup rotation is executated
@@ -99,7 +99,7 @@ _Description: The way backup rotation is executated
  rotate - backup.sql, backup.sql.0, backup.sql.1
  date - backup.sql, backup.sql.20080709, backup.sql.20080708
 
-Template: alternc/sql/backup_overwrite
+Template: alternc-node/sql/backup_overwrite
 Type: select
 Choices: no, rename, overwrite
 _Description: Behavior of the backup script when it encounters a unmanaged file
@@ -107,13 +107,13 @@ _Description: Behavior of the backup script when it encounters a unmanaged file
  about when doing backups. The default behavior is to skip those files
  and ignore it.
 
-Template: alternc/public_ip
+Template: alternc-node/public_ip
 Type: string
 _Description: The primary IP of this server:
  AlternC will default the A records for domains it hosts to this address. In
  other words, this is the address everyone can reach to server at.
 
-Template: alternc/internal_ip
+Template: alternc-node/internal_ip
 Type: string
 _Description: The internal IP of this server:
  AlternC will configure Apache and other services to listen to this
@@ -122,13 +122,13 @@ _Description: The internal IP of this server:
  .
  In other words, this is the IP address of eth0.
 
-Template: alternc/default_mx
+Template: alternc-node/default_mx
 Type: string
 _Description: The default MX to assign to new domains:
  AlternC will assign this hostname as the MX record for all the domains it
  hosts. It is usually better be left alone.
 
-Template: alternc/alternc_location
+Template: alternc-node/alternc_location
 Type: string
 _Description: The path where AlternC is installed:
  Please enter the partition name where alternc is installed. This is used
@@ -136,24 +136,24 @@ _Description: The path where AlternC is installed:
  .
  Warning : Be careful ! It can generate some problems.
 
-Template: alternc/monitor_ip
+Template: alternc-node/monitor_ip
 Type: string
 _Description: The monitoring server:
  The IP address (or ip/prefix) of the server(s) which must be authorized to 
  ping us and access apache status pages. Completely optional.
 
-Template: alternc/bind_internal
+Template: alternc-node/bind_internal
 Type: string
 _Description: trusted servers for bind:
  IP address or prefix of trusted machines for DNS transfers,
  delimited by ';', optional.
 
-Template: alternc/mynetwork
+Template: alternc-node/mynetwork
 Type: string
 _Description: SMTP authorized networks:
  IP addresses of the networks authorized in SMTP, space-delimited.
 
-Template: alternc/pop_before_smtp_warning
+Template: alternc-node/pop_before_smtp_warning
 Type: note
 _Description: POP Before SMTP deprecated
  AlternC doesn't automatically configure the pop-before-smtp package
@@ -167,22 +167,22 @@ _Description: POP Before SMTP deprecated
  hash:/var/lib/pop-before-smtp/hosts must also be added to the mynetworks
  directive of /etc/postfix/main.cf
 
-Template: alternc/postrm_remove_databases
+Template: alternc-node/postrm_remove_databases
 Type: boolean
 _Description: Should AlternC remove all databases (/var/lib/mysql/) ?
  All users databases will be trashed
 
-Template: alternc/postrm_remove_datafiles
+Template: alternc-node/postrm_remove_datafiles
 Type: boolean
 _Description: Should AlternC remove users datas ?
  The files and apache redirections created by users will be trashed
 
-Template: alternc/postrm_remove_bind
+Template: alternc-node/postrm_remove_bind
 Type: boolean
 _Description: Should AlternC remove bind zones ?
  It will delete all bind zones created by AlternC
 
-Template: alternc/postrm_remove_mailboxes
+Template: alternc-node/postrm_remove_mailboxes
 Type: boolean
 _Description: Should AlternC remove bind mailboxes ?
  If you accept all users e-mails will be deleted

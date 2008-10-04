@@ -5,9 +5,6 @@
 
 case "$1" in
 remove)
-    # remove postfix from the sasl group (might not be user will though...)
-    deluser --quiet postfix sasl || true
-
     . /etc/alternc/local.sh
 
     FQDN_LETTER="`echo $FQDN | sed -e 's/.*\.\([^\.]\)[^\.]*\.[^\.]*$/\1/'`"

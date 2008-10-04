@@ -17,8 +17,10 @@ alternc (0.9.9) stable; urgency=low
     * #1131: allow admins to make all list URLs be based on the FQDN
     * #1087: allow admins to create user subdomains according to hardcoded
       value or available domains
-    * make a new alternc-slave package that eases installation on NFS-backed
-      frontend nodes
+    * split alternc in multiple debian packages:
+      * alternc-bureau: the /var/alternc/bureau files
+      * alternc-node: everything but the /var/alternc directory and cronjobs
+      * alternc-misc: the backend scripts and everything else
 
  -- Antoine Beaupré <anarcat@koumbit.org>  Tue, 15 Apr 2008 11:52:56 -0400
 
