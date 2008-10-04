@@ -157,13 +157,6 @@ EOF
       . $CONFIGFILE
     fi
 
-    # Erase all apacheconf file
-    # They will be regenerated without the bug by upgrade_check.sh below.
-    if dpkg --compare-versions "$2" le "0.9.3.9-globenet14"; then
-        rm -f /var/alternc/apacheconf/*/*
-        rm -f /var/alternc/apacheconf/override_php.conf
-    fi
-
     echo "checking for upgrades"
     /usr/share/alternc/install/upgrade_check.sh $2
 
