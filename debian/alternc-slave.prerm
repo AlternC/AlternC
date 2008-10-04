@@ -1,0 +1,27 @@
+#!/bin/sh -e
+
+# Debian alternc prerm
+# Benjamin Sonntag <benjamin@alternc.org>
+
+case "$1" in
+remove)
+    # remove postfix from the sasl group (might not be user will though...)
+    deluser --quiet postfix sasl || true
+    ;;
+
+upgrade)
+    ;;
+
+purge)
+    ;;
+
+failed-upgrade|abort-install|abort-upgrade|disappear)
+    ;;
+
+*)
+    echo "postrm called with unknown argument '$1'" >&2
+    exit 1
+    ;;
+esac
+
+#DEBHELPER#
