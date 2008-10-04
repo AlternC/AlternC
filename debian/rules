@@ -105,6 +105,7 @@ binary-common: build install
 	dh_installman man/*
 	dh_installcron
 #	dh_installinfo
+	dh_install
 	dh_strip
 	dh_link
 	dh_compress
