@@ -8,8 +8,8 @@ alternc (0.9.9) stable; urgency=low
     * #708: remove '-' from the list of authorized usernames
     * put the logout button at the end of the left menu
     * #1124: fix database user configuration
-    * FTP/TLS is now working properly (config is RSA not DSA, and key AND certif config 
-      must be BOTH populated)
+    * FTP/TLS is now working properly (config is RSA not DSA, and key AND
+      certif config must be BOTH populated)
   * new features:
     * start logging IP addresses in logs
     * rework the sqlbackup script to allow for date-based backups instead of
