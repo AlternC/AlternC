@@ -8,8 +8,10 @@ set -e
 CONFIGFILE="/etc/alternc/local.sh"
 
 update_var() {
-    local question="$1"
-    local var="$2"
+    local question
+    local var
+    question="$1"
+    var="$2"
     db_get "$question"
     if [ ! -z "$RET" ]; then
         grep -Eq "^ *$var=" $CONFIGFILE || echo "$var=" >> $CONFIGFILE

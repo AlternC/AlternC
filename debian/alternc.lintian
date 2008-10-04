@@ -1,7 +1,6 @@
 alternc: non-standard-dir-in-var var/alternc/
 alternc: non-standard-dir-in-var var/backups/
 alternc: file-in-unusual-dir
-alternc: possible-bashism-in-maintainer-script
 alternc: setuid-binary usr/lib/alternc/mail_add 4750 root/www-data
 alternc: setuid-binary usr/lib/alternc/mail_del 4750 root/www-data
 alternc: setuid-binary usr/lib/alternc/quota_edit 4750 root/www-data
