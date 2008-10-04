@@ -58,6 +58,7 @@ install: build
 	chmod -R 644 debian/alternc/var/alternc/bureau
 	chmod -R a+X debian/alternc/var/alternc/bureau
 	chown -R www-data:www-data debian/alternc/var/alternc/dns debian/alternc/var/alternc/html debian/alternc/var/run/alternc debian/alternc/var/log/alternc debian/alternc/var/alternc/tmp
+	chmod a+x debian/alternc/usr/share/alternc/install/alternc.install debian/alternc/usr/share/alternc/install/dopo.sh debian/alternc/usr/share/alternc/install/mysql.sh debian/alternc/usr/share/alternc/install/newone.php debian/alternc/usr/share/alternc/install/reset_root.php debian/alternc/usr/share/alternc/install/upgrade_check.sh debian/alternc/usr/share/alternc/install/upgrades/*.php debian/alternc/usr/share/alternc/install/upgrades/*.sh
 
 	for sub in dns dns/redir mail html apacheconf; do \
 		for i in a b c d e f g h i j k l m n o p q r s t u v w x y z _ 0 1 2 3 4 5 6 7 8 9; do \
@@ -66,7 +67,6 @@ install: build
 		done ;\
 	done
 
-	chmod a+x debian/alternc/usr/share/alternc/install/alternc.install debian/alternc/usr/share/alternc/install/dopo.sh debian/alternc/usr/share/alternc/install/mysql.sh debian/alternc/usr/share/alternc/install/newone.php debian/alternc/usr/share/alternc/install/reset_root.php debian/alternc/usr/share/alternc/install/upgrade_check.sh debian/alternc/usr/share/alternc/install/upgrades/*.php debian/alternc/usr/share/alternc/install/upgrades/*.sh
 	# Ex old alternc-admintools
 	install tools/top_http_users debian/alternc/usr/bin
 	install tools/top_mysql_users debian/alternc/usr/bin
