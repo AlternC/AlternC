@@ -245,7 +245,10 @@ bureau/locales/manual.pot -text
 bureau/locales/messages.pot -text
 bureau/locales/pt_BR/LC_MESSAGES/messages.po -text
 debian/README.Debian -text
+debian/alternc-slave.dirs -text
+debian/alternc-slave.install -text
 debian/alternc.cron.d -text
+debian/alternc.dirs -text
 debian/alternc.links -text
 debian/alternc.logrotate -text
 debian/changelog -text
@@ -253,7 +256,6 @@ debian/compat -text
 debian/config -text
 debian/control -text
 debian/copyright -text
-debian/dirs -text
 debian/docs -text
 debian/lintian-override -text
 debian/po/POTFILES.in -text
