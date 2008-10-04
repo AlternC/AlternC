@@ -248,6 +248,7 @@ debian/README.Debian -text
 debian/alternc-slave.dirs -text
 debian/alternc-slave.install -text
 debian/alternc-slave.links -text
+debian/alternc-slave.lintian -text
 debian/alternc-slave.logrotate -text
 debian/alternc-slave.postinst -text
 debian/alternc-slave.postrm -text
@@ -255,6 +256,7 @@ debian/alternc-slave.prerm -text
 debian/alternc.cron.d -text
 debian/alternc.dirs -text
 debian/alternc.links -text
+debian/alternc.lintian -text
 debian/alternc.logrotate -text
 debian/alternc.postinst -text
 debian/alternc.postrm -text
@@ -266,7 +268,6 @@ debian/config -text
 debian/control -text
 debian/copyright -text
 debian/docs -text
-debian/lintian-override -text
 debian/po/POTFILES.in -text
 debian/po/fr.po -text
 debian/po/templates.pot -text
