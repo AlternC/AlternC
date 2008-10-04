@@ -261,9 +261,6 @@ done
 # Last touches
 #
 
-# Add basedir protection
-/usr/lib/alternc/basedir_prot.sh
-
 # Creating admin user if needed
 HAS_ROOT=`mysql --defaults-file=/etc/alternc/my.cnf -e "SELECT COUNT(*) FROM membres WHERE login = 'admin' OR login = 'root' and su = 1" | tail -1`
 if [ "$HAS_ROOT" != "1" ]; then

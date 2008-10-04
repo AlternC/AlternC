@@ -202,6 +202,9 @@ EOF
     echo "running alternc.install"
     alternc.install
 
+    # Add basedir protection
+    /usr/lib/alternc/basedir_prot.sh
+
     if [ -x /usr/sbin/apache ]; then
         if [ ! -h /etc/apache-ssl/conf.d/alternc.conf ]; then
             ln -sf /etc/alternc/apache-ssl.conf \
