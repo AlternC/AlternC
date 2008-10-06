@@ -283,6 +283,7 @@ etc/alternc/postfix.cf -text
 etc/alternc/templates/alternc/bureau.conf -text
 etc/alternc/templates/bind/automatic.conf -text
 etc/alternc/templates/bind/named.conf -text
+etc/alternc/templates/bind/named.conf.options -text
 etc/alternc/templates/bind/slaveip.conf -text
 etc/alternc/templates/bind/templates/mx.template -text
 etc/alternc/templates/bind/templates/named.template -text

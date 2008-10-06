@@ -28,6 +28,13 @@ alternc (0.9.9) stable; urgency=low
     * note that even though main.cf is not directly overwritten (#1029, as
       per Debian Policy), some settings are directly overwritten. those
       settings are configured in /etc/alternc/postfix.cf.
+    * simplify the bind configuration: do not overwrite named.conf, put
+      all changes in named.options. get rid of the bind_internal parameter
+      that is not recommended anyways (as it allows recursive queries on an
+      authoritative nameserver). Note that the 'internal' ACL can still be
+      changed in a template if required. named.conf is still deployed by
+      AlternC, but this will be the last release that does so. See #1025 and
+      #1104.
 
  -- Antoine Beaupré <anarcat@koumbit.org>  Tue, 15 Apr 2008 11:52:56 -0400
 

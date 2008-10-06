@@ -142,12 +142,6 @@ _Description: The monitoring server:
  The IP address (or ip/prefix) of the server(s) which must be authorized to 
  ping us and access apache status pages. Completely optional.
 
-Template:alternc-slave/bind_internal
-Type: string
-_Description: trusted servers for bind:
- IP address or prefix of trusted machines for DNS transfers,
- delimited by ';', optional.
-
 Template:alternc-slave/pop_before_smtp_warning
 Type: note
 _Description: POP Before SMTP deprecated

@@ -79,9 +79,6 @@ NS1_HOSTNAME=""
 # Secondary DNS hostname
 NS2_HOSTNAME=""
 
-# IP that have privilegied access to the DNS server. Separated by ';'.
-BIND_INTERNAL=""
-
 # Mail server hostname
 DEFAULT_MX=""
 
@@ -120,7 +117,6 @@ EOF
     update_var alternc/monitor_ip MONITOR_IP
     update_var alternc/ns1 NS1_HOSTNAME
     update_var alternc/ns2 NS2_HOSTNAME
-    update_var alternc/bind_internal BIND_INTERNAL
     update_var alternc/default_mx DEFAULT_MX 
     update_var alternc/mysql/client MYSQL_CLIENT 
     update_var alternc/sql/backup_type SQLBACKUP_TYPE

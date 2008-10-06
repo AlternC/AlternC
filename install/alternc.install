@@ -25,7 +25,7 @@ CONFIG_FILES="etc/alternc/bureau.conf"
 
 if [ -e /etc/bind/named.conf ]; then
     CONFIG_FILES="$CONFIG_FILES etc/bind/templates/zone.template
-                  etc/bind/templates/named.template etc/bind/named.conf"
+                  etc/bind/templates/named.template etc/bind/named.conf etc/bind/named.conf.options"
 fi
 if [ -e /etc/courier/authdaemonrc ]; then
     CONFIG_FILES="$CONFIG_FILES etc/courier/authdaemonrc
@@ -110,10 +110,6 @@ NS2_IP=`perl -e "\\$h = (gethostbyname(\"$NS2_HOSTNAME\"))[4];
                  @ip = unpack('C4', \\$h);
                  print join (\".\", @ip);"`
 
-if [ ! -z "$BIND_INTERNAL" ]; then
-    BIND_INTERNAL="$BIND_INTERNAL;"
-fi
-
 if [ -z "$MONITOR_IP" ]; then
     MONITOR_IP="127.0.0.1"
 fi
@@ -129,7 +125,6 @@ s\\%%internal_ip%%\\$INTERNAL_IP\\;
 s\\%%monitor_ip%%\\$MONITOR_IP\\;
 s\\%%ns1%%\\$NS1_HOSTNAME\\;
 s\\%%ns2%%\\$NS2_HOSTNAME\\;
-s\\%%bind_internal%%\\$BIND_INTERNAL\\;
 s\\%%mx%%\\$DEFAULT_MX\\;
 s\\%%dbhost%%\\$MYSQL_HOST\\;
 s\\%%dbname%%\\$MYSQL_DATABASE\\;
