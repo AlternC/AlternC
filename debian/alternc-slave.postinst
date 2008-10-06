@@ -93,9 +93,6 @@ MYSQL_CLIENT=""
 # Folder holding data (used for quota management)
 ALTERNC_LOC=""
 
-# Networks that SMTP should relay, separated with spaces
-SMTP_RELAY_NETWORKS=""
-
 # the type of backup created by the sql backup script
 # valid options are "rotate" (newsyslog-style) or "date" (suffix is the date)
 SQLBACKUP_TYPE=""
@@ -129,7 +126,6 @@ EOF
     update_var alternc/sql/backup_type SQLBACKUP_TYPE
     update_var alternc/sql/backup_overwrite SQLBACKUP_OVERWRITE
     update_var alternc/alternc_location ALTERNC_LOC
-    update_var alternc/mynetwork SMTP_RELAY_NETWORKS
     sed -e "$SED_SCRIPT" < $CONFIGFILE > $CONFIGFILE.tmp
     mv -f $CONFIGFILE.tmp $CONFIGFILE
 

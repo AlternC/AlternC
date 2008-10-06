@@ -148,11 +148,6 @@ _Description: trusted servers for bind:
  IP address or prefix of trusted machines for DNS transfers,
  delimited by ';', optional.
 
-Template: alternc/mynetwork
-Type: string
-_Description: SMTP authorized networks:
- IP addresses of the networks authorized in SMTP, space-delimited.
-
 Template: alternc/pop_before_smtp_warning
 Type: note
 _Description: POP Before SMTP deprecated
@@ -336,11 +331,6 @@ Type: string
 _Description: trusted servers for bind:
  IP address or prefix of trusted machines for DNS transfers,
  delimited by ';', optional.
-
-Template:alternc-slave/mynetwork
-Type: string
-_Description: SMTP authorized networks:
- IP addresses of the networks authorized in SMTP, space-delimited.
 
 Template:alternc-slave/pop_before_smtp_warning
 Type: note

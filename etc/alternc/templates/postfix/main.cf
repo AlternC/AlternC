@@ -23,7 +23,6 @@ default_destination_concurrency_limit = 10
 
 myhostname = %%fqdn%%
 myorigin = %%fqdn%%
-mynetworks = 127.0.0.1 %%mynetwork%%
 
 
 # Configuration TLS pour le serveur smtp : 

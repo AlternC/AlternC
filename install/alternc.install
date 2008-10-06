@@ -136,7 +136,6 @@ s\\%%dbname%%\\$MYSQL_DATABASE\\;
 s\\%%dbuser%%\\$MYSQL_USER\\;
 s\\%%dbpwd%%\\$MYSQL_PASS\\;
 s\\%%ALTERNC_LOC%%\\$ALTERNC_LOC\\;
-s\\%%mynetwork%%\\$SMTP_RELAY_NETWORKS\\;
 s\\%%warning_message%%\\$WARNING\\;
 s\\%%fqdn_lettre%%\\$FQDN_LETTER\\;
 s\\%%version%%\\$VERSION\\;

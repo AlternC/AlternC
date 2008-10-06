@@ -19,6 +19,9 @@ alternc (0.9.9) stable; urgency=low
       value or available domains
     * make a new alternc-slave package that eases installation on NFS-backed
       frontend nodes
+  * other changes:
+    * deprecate the mynetwork modification in Postfix, this is now left to the
+      admin
 
  -- Antoine Beaupré <anarcat@koumbit.org>  Tue, 15 Apr 2008 11:52:56 -0400
 
