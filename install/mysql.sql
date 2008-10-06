@@ -239,7 +239,7 @@ CREATE TABLE IF NOT EXISTS membres (
 CREATE TABLE IF NOT EXISTS quotas (
   uid int(10) unsigned NOT NULL default '0',		# Numéro GID du membre concerné
   name varchar(64) NOT NULL default '',			# Nom du quota
-  total int(11) NOT NULL default '0',			# Quota total (maximum autorisé)
+  total bigint(20) unsigned NOT NULL default '0',	# Quota total (maximum autorisé)
   PRIMARY KEY  (uid,name)
 ) TYPE=MyISAM COMMENT='Quotas des Membres';
 
