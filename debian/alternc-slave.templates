@@ -1,0 +1,368 @@
+Template: alternc/welcomeconfirm
+Type: boolean
+Default: true
+_Description: Do you REALLY want to install AlternC on this computer ?
+ You are currently trying to install AlternC on your computer. Be aware
+ that this package will overwrite critical system files, including but not
+ limited to the config files of bind, postfix, courier, squirrelmail and proftpd.
+ .
+ A backup of your old configuration will be stored in
+ "/var/backups/alternc/etc-original-`date`.tar.gz".
+ .
+ YOU HAVE BEEN WARNED.
+
+Template: alternc/desktopname
+Type: string
+_Description: Fully qualified name of the desktop:
+ Please enter the fully qualified name of your server. This will be the
+ domain part of the url you will use to access the virtual managment
+ desktop. This (sub)domain MUST point to your server.
+ .
+ The default should be ok if your machine is correctly configured.
+
+Template: alternc/hostingname
+Type: string
+_Description: Name of your hosting service:
+ Please enter the name of your hosting service. It may be your company's
+ name or your personnal name or whatever you want to ...
+
+Template: alternc/ns1
+Type: string
+_Description: Name of the primary domain name server:
+ Please enter the fully qualified name of your primary dns server. It can
+ be this server since bind is installed and configured by AlternC. Anyway,
+ if your hosting service is quite big, you may have an external primary
+ name server that keep in sync with your alternc's server(s). . The default
+ value should be good in most case.
+
+Template: alternc/ns2
+Type: string
+_Description: Name of the secondary domain name server:
+ Please enter the fully qualified name of your secondary dns server. It can
+ be this server since bind is installed and configured by AlternC. Anyway,
+ you should have 2 separate DNS servers if you want to provide a high
+ quality hosting service.
+ .
+ You may contact the AlternC's users mailing list if you want to exchange
+ dns service with other AlternC's users.
+
+Template: alternc/mysql/host
+Type: string
+_Description: Name of the mysql server:
+ Please enter the fully qualified name of your mysql server host. On small
+ systems, it IS "localhost" since you may have installed a local mysql
+ server. If you are a bigger hosting service, you may put your mysql
+ service on a remote synchronized ring or equivalent. In that case, please
+ enter the hostname of your mysql server. This server MUST be able to
+ access the remote server at standard port (3306). It is recommended to use
+ "127.0.0.1" instead of "localhost" if your postfix installation is
+ configured in a chroot (which is the case, by default).
+
+Template: alternc/mysql/db
+Type: string
+_Description: AlternC's mysql system database:
+ AlternC will create a mysql database to store it's system data. Please
+ choose the name of this database here. The default value should be good in
+ most case.
+
+Template: alternc/mysql/user
+Type: string
+_Description: AlternC's mysql account:
+ AlternC will create a mysql administrator account. Please choose it's
+ username here. The default value should be good in most case.
+
+Template: alternc/mysql/password
+Type: password
+_Description: Password of the AlternC's mysql account:
+ AlternC requires an administrator account on the mysql server. It will be
+ created automatically during the install process. Please choose a password
+ for this account.
+ .
+ Please choose a quite complex password since it will have full access to
+ the system database !!!
+
+Template: alternc/mysql/client
+Type: string
+_Description: The server to GRANT permissions to:
+ AlternC and MySQL can be installed on different servers. In order to have
+ GRANT table properly created and manipulated, this parameter must be set
+ to the hostname or IP the Apache server will appear as connecting from to
+ the MySQL server.
+
+Template: alternc/sql/backup_type
+Type: select
+Choices: rotate, date
+_Description: The way backup rotation is executated
+ AlternC enables users to configure their own backups, on demand, with
+ automatic rotation. This option determines how the backups are rotated.
+ .
+ rotate - backup.sql, backup.sql.0, backup.sql.1
+ date - backup.sql, backup.sql.20080709, backup.sql.20080708
+
+Template: alternc/sql/backup_overwrite
+Type: select
+Choices: no, rename, overwrite
+_Description: Behavior of the backup script when it encounters a unmanaged file
+ The SQL backups can rename or overwrite existing files it doesn't know
+ about when doing backups. The default behavior is to skip those files
+ and ignore it.
+
+Template: alternc/public_ip
+Type: string
+_Description: The primary IP of this server:
+ AlternC will default the A records for domains it hosts to this address. In
+ other words, this is the address everyone can reach to server at.
+
+Template: alternc/internal_ip
+Type: string
+_Description: The internal IP of this server:
+ AlternC will configure Apache and other services to listen to this
+ address. This is usually the same as the primary IP of the server, unless
+ the server is sitting behind a NAT router.
+ .
+ In other words, this is the IP address of eth0.
+
+Template: alternc/default_mx
+Type: string
+_Description: The default MX to assign to new domains:
+ AlternC will assign this hostname as the MX record for all the domains it
+ hosts. It is usually better be left alone.
+
+Template: alternc/alternc_location
+Type: string
+_Description: The path where AlternC is installed:
+ Please enter the partition name where alternc is installed. This is used
+ mainly for disk quotas.
+ .
+ Warning : Be careful ! It can generate some problems.
+
+Template: alternc/monitor_ip
+Type: string
+_Description: The monitoring server:
+ The IP address (or ip/prefix) of the server(s) which must be authorized to 
+ ping us and access apache status pages. Completely optional.
+
+Template: alternc/bind_internal
+Type: string
+_Description: trusted servers for bind:
+ IP address or prefix of trusted machines for DNS transfers,
+ delimited by ';', optional.
+
+Template: alternc/pop_before_smtp_warning
+Type: note
+_Description: POP Before SMTP deprecated
+ AlternC doesn't automatically configure the pop-before-smtp package
+ anymore, since it is correctly configured for SASL authentification these
+ days. If you wish to configure pop-before-smtp, simply find the lines
+ preceded by:
+ .
+ # For Courier-POP3 and Courier-IMAP:
+ .
+ in the /etc/pop-before-smtp/pop-before-smtp.conf and uncomment it.
+ hash:/var/lib/pop-before-smtp/hosts must also be added to the mynetworks
+ directive of /etc/postfix/main.cf
+
+Template: alternc/postrm_remove_databases
+Type: boolean
+_Description: Should AlternC remove all databases (/var/lib/mysql/) ?
+ All users databases will be trashed
+
+Template: alternc/postrm_remove_datafiles
+Type: boolean
+_Description: Should AlternC remove users datas ?
+ The files and apache redirections created by users will be trashed
+
+Template: alternc/postrm_remove_bind
+Type: boolean
+_Description: Should AlternC remove bind zones ?
+ It will delete all bind zones created by AlternC
+
+Template: alternc/postrm_remove_mailboxes
+Type: boolean
+_Description: Should AlternC remove bind mailboxes ?
+ If you accept all users e-mails will be deleted
+
+Template:alternc-slave/welcomeconfirm
+Type: boolean
+Default: true
+_Description: Do you REALLY want to install AlternC on this computer ?
+ You are currently trying to install AlternC on your computer. Be aware
+ that this package will overwrite critical system files, including but not
+ limited to the config files of bind, postfix, courier, squirrelmail and proftpd.
+ .
+ A backup of your old configuration will be stored in
+ "/var/backups/alternc/etc-original-`date`.tar.gz".
+ .
+ YOU HAVE BEEN WARNED.
+
+Template:alternc-slave/desktopname
+Type: string
+_Description: Fully qualified name of the desktop:
+ Please enter the fully qualified name of your server. This will be the
+ domain part of the url you will use to access the virtual managment
+ desktop. This (sub)domain MUST point to your server.
+ .
+ The default should be ok if your machine is correctly configured.
+
+Template:alternc-slave/hostingname
+Type: string
+_Description: Name of your hosting service:
+ Please enter the name of your hosting service. It may be your company's
+ name or your personnal name or whatever you want to ...
+
+Template:alternc-slave/ns1
+Type: string
+_Description: Name of the primary domain name server:
+ Please enter the fully qualified name of your primary dns server. It can
+ be this server since bind is installed and configured by AlternC. Anyway,
+ if your hosting service is quite big, you may have an external primary
+ name server that keep in sync with your alternc's server(s). . The default
+ value should be good in most case.
+
+Template:alternc-slave/ns2
+Type: string
+_Description: Name of the secondary domain name server:
+ Please enter the fully qualified name of your secondary dns server. It can
+ be this server since bind is installed and configured by AlternC. Anyway,
+ you should have 2 separate DNS servers if you want to provide a high
+ quality hosting service.
+ .
+ You may contact the AlternC's users mailing list if you want to exchange
+ dns service with other AlternC's users.
+
+Template:alternc-slave/mysql/host
+Type: string
+_Description: Name of the mysql server:
+ Please enter the fully qualified name of your mysql server host. On small
+ systems, it IS "localhost" since you may have installed a local mysql
+ server. If you are a bigger hosting service, you may put your mysql
+ service on a remote synchronized ring or equivalent. In that case, please
+ enter the hostname of your mysql server. This server MUST be able to
+ access the remote server at standard port (3306). It is recommended to use
+ "127.0.0.1" instead of "localhost" if your postfix installation is
+ configured in a chroot (which is the case, by default).
+
+Template:alternc-slave/mysql/db
+Type: string
+_Description: AlternC's mysql system database:
+ AlternC will create a mysql database to store it's system data. Please
+ choose the name of this database here. The default value should be good in
+ most case.
+
+Template:alternc-slave/mysql/user
+Type: string
+_Description: AlternC's mysql account:
+ AlternC will create a mysql administrator account. Please choose it's
+ username here. The default value should be good in most case.
+
+Template:alternc-slave/mysql/password
+Type: password
+_Description: Password of the AlternC's mysql account:
+ AlternC requires an administrator account on the mysql server. It will be
+ created automatically during the install process. Please choose a password
+ for this account.
+ .
+ Please choose a quite complex password since it will have full access to
+ the system database !!!
+
+Template:alternc-slave/mysql/client
+Type: string
+_Description: The server to GRANT permissions to:
+ AlternC and MySQL can be installed on different servers. In order to have
+ GRANT table properly created and manipulated, this parameter must be set
+ to the hostname or IP the Apache server will appear as connecting from to
+ the MySQL server.
+
+Template:alternc-slave/sql/backup_type
+Type: select
+Choices: rotate, date
+_Description: The way backup rotation is executated
+ AlternC enables users to configure their own backups, on demand, with
+ automatic rotation. This option determines how the backups are rotated.
+ .
+ rotate - backup.sql, backup.sql.0, backup.sql.1
+ date - backup.sql, backup.sql.20080709, backup.sql.20080708
+
+Template:alternc-slave/sql/backup_overwrite
+Type: select
+Choices: no, rename, overwrite
+_Description: Behavior of the backup script when it encounters a unmanaged file
+ The SQL backups can rename or overwrite existing files it doesn't know
+ about when doing backups. The default behavior is to skip those files
+ and ignore it.
+
+Template:alternc-slave/public_ip
+Type: string
+_Description: The primary IP of this server:
+ AlternC will default the A records for domains it hosts to this address. In
+ other words, this is the address everyone can reach to server at.
+
+Template:alternc-slave/internal_ip
+Type: string
+_Description: The internal IP of this server:
+ AlternC will configure Apache and other services to listen to this
+ address. This is usually the same as the primary IP of the server, unless
+ the server is sitting behind a NAT router.
+ .
+ In other words, this is the IP address of eth0.
+
+Template:alternc-slave/default_mx
+Type: string
+_Description: The default MX to assign to new domains:
+ AlternC will assign this hostname as the MX record for all the domains it
+ hosts. It is usually better be left alone.
+
+Template:alternc-slave/alternc_location
+Type: string
+_Description: The path where AlternC is installed:
+ Please enter the partition name where alternc is installed. This is used
+ mainly for disk quotas.
+ .
+ Warning : Be careful ! It can generate some problems.
+
+Template:alternc-slave/monitor_ip
+Type: string
+_Description: The monitoring server:
+ The IP address (or ip/prefix) of the server(s) which must be authorized to 
+ ping us and access apache status pages. Completely optional.
+
+Template:alternc-slave/bind_internal
+Type: string
+_Description: trusted servers for bind:
+ IP address or prefix of trusted machines for DNS transfers,
+ delimited by ';', optional.
+
+Template:alternc-slave/pop_before_smtp_warning
+Type: note
+_Description: POP Before SMTP deprecated
+ AlternC doesn't automatically configure the pop-before-smtp package
+ anymore, since it is correctly configured for SASL authentification these
+ days. If you wish to configure pop-before-smtp, simply find the lines
+ preceded by:
+ .
+ # For Courier-POP3 and Courier-IMAP:
+ .
+ in the /etc/pop-before-smtp/pop-before-smtp.conf and uncomment it.
+ hash:/var/lib/pop-before-smtp/hosts must also be added to the mynetworks
+ directive of /etc/postfix/main.cf
+
+Template:alternc-slave/postrm_remove_databases
+Type: boolean
+_Description: Should AlternC remove all databases (/var/lib/mysql/) ?
+ All users databases will be trashed
+
+Template:alternc-slave/postrm_remove_datafiles
+Type: boolean
+_Description: Should AlternC remove users datas ?
+ The files and apache redirections created by users will be trashed
+
+Template:alternc-slave/postrm_remove_bind
+Type: boolean
+_Description: Should AlternC remove bind zones ?
+ It will delete all bind zones created by AlternC
+
+Template:alternc-slave/postrm_remove_mailboxes
+Type: boolean
+_Description: Should AlternC remove bind mailboxes ?
+ If you accept all users e-mails will be deleted
+
