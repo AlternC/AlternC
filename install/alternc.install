@@ -156,6 +156,8 @@ for file in $CONFIG_FILES; do
     fi
 done
 
+# also backup main.cf since we're doing major changes to it
+BACKUPS="$BACKUPS etc/postfix/main.cf"
 tar -zcf "$BACKUP_FILE" -C / $BACKUPS 2>/dev/null || true
 
 #######################################################################
