@@ -53,8 +53,8 @@ INSTALLED_CONFIG_TAR="/var/backups/alternc/etc-installed.tar.gz"
 # Look for modified configuration files
 #
 if [ -f "$INSTALLED_CONFIG_TAR" ]; then
-    CHANGED="`env LANG=C tar -zdf "$INSTALLED_CONFIG_TAR" -C / 2> /dev/null |
-              grep -v 'Uid differs'|grep -v 'Gid differs'  |grep -v 'Mode differs' | 
+    CHANGED="`env LANG=C tar -zdf "$INSTALLED_CONFIG_TAR" -C / 2> /dev/null | 
+              grep -v 'postfix/main.cf' | grep -v 'Uid differs'|grep -v 'Gid differs'  |grep -v 'Mode differs' | 
               sed -e 's/^\([^:]*\).*/    \1/' | sort -u`"
     if [ ! -z "$CHANGED" ]; then
         echo "The following configuration files has changed since last AlternC"
