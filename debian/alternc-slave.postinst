@@ -113,33 +113,33 @@ EOF
     cp -a -f $CONFIGFILE $CONFIGFILE.tmp
     # SED_SCRIPT will be modified by update_var
     SED_SCRIPT=""
-    update_var alternc/hostingname HOSTING
-    update_var alternc/desktopname FQDN 
-    update_var alternc/public_ip PUBLIC_IP
-    update_var alternc/internal_ip INTERNAL_IP
-    update_var alternc/monitor_ip MONITOR_IP
-    update_var alternc/ns1 NS1_HOSTNAME
-    update_var alternc/ns2 NS2_HOSTNAME
-    update_var alternc/bind_internal BIND_INTERNAL
-    update_var alternc/default_mx DEFAULT_MX 
-    update_var alternc/mysql/client MYSQL_CLIENT 
-    update_var alternc/sql/backup_type SQLBACKUP_TYPE
-    update_var alternc/sql/backup_overwrite SQLBACKUP_OVERWRITE
-    update_var alternc/alternc_location ALTERNC_LOC
+    update_var alternc-slave/hostingname HOSTING
+    update_var alternc-slave/desktopname FQDN 
+    update_var alternc-slave/public_ip PUBLIC_IP
+    update_var alternc-slave/internal_ip INTERNAL_IP
+    update_var alternc-slave/monitor_ip MONITOR_IP
+    update_var alternc-slave/ns1 NS1_HOSTNAME
+    update_var alternc-slave/ns2 NS2_HOSTNAME
+    update_var alternc-slave/bind_internal BIND_INTERNAL
+    update_var alternc-slave/default_mx DEFAULT_MX 
+    update_var alternc-slave/mysql/client MYSQL_CLIENT 
+    update_var alternc-slave/sql/backup_type SQLBACKUP_TYPE
+    update_var alternc-slave/sql/backup_overwrite SQLBACKUP_OVERWRITE
+    update_var alternc-slave/alternc_location ALTERNC_LOC
     sed -e "$SED_SCRIPT" < $CONFIGFILE > $CONFIGFILE.tmp
     mv -f $CONFIGFILE.tmp $CONFIGFILE
 
     # Setup grants
-    db_get "alternc/mysql/host"
+    db_get "alternc-slave/mysql/host"
     MYSQL_HOST="$RET"
     if [ "$MYSQL_HOST" != "localhost" -o -e /usr/sbin/mysqld ]; then
         # compatibility shims with my.cnf
         host="$RET"
-        db_get "alternc/mysql/db"
+        db_get "alternc-slave/mysql/db"
         database="$RET"
-        db_get "alternc/mysql/user"
+        db_get "alternc-slave/mysql/user"
         user="$RET"
-        db_get "alternc/mysql/password"
+        db_get "alternc-slave/mysql/password"
         password="$RET"
         
         # we source (instead of forking) mysql.sh so that it gets the local environment above
@@ -147,8 +147,8 @@ EOF
     fi
 
     # forget the password
-    db_reset alternc/mysql/password || true
-    db_fset alternc/mysql/password "seen" "false" || true
+    db_reset alternc-slave/mysql/password || true
+    db_fset alternc-slave/mysql/password "seen" "false" || true
 
     if [ -e $CONFIGFILE ]; then
       # source local.sh variables
