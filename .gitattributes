@@ -279,6 +279,7 @@ etc/alternc/apache-ssl.conf -text
 etc/alternc/apache.conf -text
 etc/alternc/menulist.txt -text
 etc/alternc/phpmyadmin.inc.php -text
+etc/alternc/postfix.cf -text
 etc/alternc/templates/alternc/bureau.conf -text
 etc/alternc/templates/bind/automatic.conf -text
 etc/alternc/templates/bind/named.conf -text
@@ -291,7 +292,6 @@ etc/alternc/templates/courier/authdaemonrc -text
 etc/alternc/templates/courier/authmysqlrc -text
 etc/alternc/templates/default/saslauthd -text
 etc/alternc/templates/postfix/ca.der -text
-etc/alternc/templates/postfix/main.cf -text
 etc/alternc/templates/postfix/myalias.cf -text
 etc/alternc/templates/postfix/mydomain.cf -text
 etc/alternc/templates/postfix/mygid.cf -text

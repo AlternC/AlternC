@@ -1,31 +1,9 @@
-#
-# Fichier de configuration de Postfix pour AlternC
-# $Id: main.cf,v 1.17 2006/01/12 06:50:15 anarcat Exp $
-# 
-# %%warning_message%% 
-# pour postfix SARGE v2
-
-queue_directory = /var/spool/postfix
-command_directory = /usr/sbin
-daemon_directory = /usr/lib/postfix
-mail_owner = postfix
-# recipient_delimiter = +
-
 home_mailbox = Maildir/
-
 smtpd_banner = $myhostname ESMTP
-
 header_checks = regexp:/etc/postfix/header_checks
 body_checks = regexp:/etc/postfix/body_checks
-
 local_destination_concurrency_limit = 8
 default_destination_concurrency_limit = 10
-
-myhostname = %%fqdn%%
-myorigin = %%fqdn%%
-
-
-# Configuration TLS pour le serveur smtp : 
 smtpd_use_tls = yes
 smtpd_tls_dcert_file = /etc/courier/pop3d.pem
 smtpd_tls_dkey_file = $smtpd_tls_dcert_file
@@ -35,43 +13,22 @@ smtpd_tls_cert_file =  $smtpd_tls_dcert_file
 smtpd_tls_loglevel = 0
 smtpd_tls_received_header = yes
 smtpd_tls_session_cache_timeout = 3600s
-tls_random_source = dev:/dev/urandom
-
-# Configuration TLS pour le client smtp
 smtp_use_tls = yes
 smtp_tls_dcert_file = $smtpd_tls_dcert_file
 smtp_tls_dkey_file = $smtpd_tls_dcert_file
 smtp_tls_CApath = $smtpd_tls_CApath
-
-# Configuration SASL via sasldb (/etc/sasldb) uniquement en TLS.
-# Sinon le pass passe en clair et c'est mal !
 smtpd_tls_auth_only = yes
 smtpd_sasl_auth_enable = yes
 smtpd_sasl_local_domain = postfix
 smtpd_sasl_security_options = noanonymous
 enable_sasl_authentification = yes
 broken_sasl_auth_clients = yes
-
-#queue_directory = /var/spool/postfix
-#command_directory = /usr/sbin
-#daemon_directory = /usr/lib/postfix
-#mail_owner = postfix
-#recipient_delimiter = +
-
-# Pour éviter certains vieux spammeurs.
-disable_vrfy_command = yes
-
-# On autorise le relai à : les authentifiés en saslet nos domaines.
-smtpd_recipient_restrictions = permit_mynetworks, permit_sasl_authenticated, reject_invalid_hostname, reject_non_fqdn_hostname, reject_non_fqdn_sender, reject_non_fqdn_recipient, reject_unknown_sender_domain, reject_unknown_recipient_domain, reject_unauth_pipelining, reject_unauth_destination
-
 alias_maps = mysql:/etc/postfix/myalias.cf hash:/etc/aliases
 virtual_maps = proxy:mysql:/etc/postfix/mydomain.cf
 virtual_mailbox_maps = proxy:mysql:/etc/postfix/myvirtual.cf
-
 virtual_mailbox_base = /
 virtual_minimum_uid = 1000
 virtual_gid_maps = proxy:mysql:/etc/postfix/mygid.cf
 virtual_uid_maps = static:33
-
 default_privs = www-data
-program_directory = /usr/lib/postfix
+smtpd_recipient_restrictions = reject_unlisted_recipient, permit_mynetworks, permit_sasl_authenticated, reject_non_fqdn_recipient, reject_unauth_destination, check_policy_service inet:127.0.0.1:60000, reject_rbl_client zen.spamhaus.org

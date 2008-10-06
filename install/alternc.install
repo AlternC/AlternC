@@ -32,7 +32,7 @@ if [ -e /etc/courier/authdaemonrc ]; then
                   etc/courier/authmysqlrc"
 fi
 if [ -d /etc/postfix ]; then
-    CONFIG_FILES="$CONFIG_FILES etc/postfix/main.cf etc/postfix/myalias.cf
+    CONFIG_FILES="$CONFIG_FILES etc/postfix/myalias.cf
                   etc/postfix/mydomain.cf etc/postfix/mygid.cf
                   etc/postfix/myvirtual.cf etc/postfix/sasl/smtpd.conf"
 fi
@@ -212,6 +212,20 @@ if [ -e /etc/postfix/myalias.cf -o -e /etc/postfix/mydomain.cf -o -e /etc/postfi
     chown root:postfix /etc/postfix/my*
     chmod 640 /etc/postfix/my*
 fi
+
+# configure postfix appropriatly for our needs"
+while read line
+do
+   postconf -e $line
+done < /etc/alternc/postfix.cf
+
+while read line
+do
+   postconf -e $line
+done <<EOF
+myhostname = $FQDN
+myorigin = $FQDN
+EOF
 
 if [ -e /etc/courier/authmysqlrc ] ; then
     chown root:root /etc/courier/authmysqlrc
