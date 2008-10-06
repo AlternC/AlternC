@@ -218,12 +218,12 @@ fi
 # configure postfix appropriatly for our needs"
 while read line
 do
-   postconf -e $line
+   postconf -e "$line"
 done < /etc/alternc/postfix.cf
 
 while read line
 do
-   postconf -e $line
+   postconf -e "$line"
 done <<EOF
 myhostname = $FQDN
 myorigin = $FQDN
