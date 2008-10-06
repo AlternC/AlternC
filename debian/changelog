@@ -11,6 +11,7 @@ alternc (0.9.9) stable; urgency=low
     * FTP/TLS is now working properly (config is RSA not DSA, and key AND
       certif config must be BOTH populated)
     * #1029: do not overwrite the main.cf from postfix
+    * #1129: remove 2GB quota limit
   * new features:
     * start logging IP addresses in logs
     * rework the sqlbackup script to allow for date-based backups instead of
