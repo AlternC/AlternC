@@ -302,7 +302,7 @@ fi
 #######################################################################
 # Reload services
 #
-for service in $SERVICES postfix bind9 courier-authdaemon \
+for service in postfix bind9 courier-authdaemon \
                courier-imap courier-imap-ssl courier-pop courier-pop-ssl \
                cron proftpd; do
     invoke-rc.d $service reload || true
@@ -336,9 +336,9 @@ if [ "$HAS_ROOT" != "1" ]; then
 fi
 
 # We should restart apaches after all configuration stuff ...
-for service in apache apache-ssl apache2 ; do
+for service in $SERVICES; do
     test -x /etc/init.d/$service && invoke-rc.d $service stop || true
 done
-for service in apache apache-ssl apache2 ; do
+for service in $SERVICES; do
     test -x /etc/init.d/$service && invoke-rc.d $service start || true
 done
