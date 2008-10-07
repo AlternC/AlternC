@@ -211,10 +211,6 @@ if [ -x /usr/sbin/apache2 ]; then
         s="apache2"
     fi 
     if [ -e /etc/alternc/apache.pem ]; then
-        if ! grep '^Listen.*443$' /etc/apache2/ports.conf; then
-            echo "Listen 443" >> /etc/apache2/ports.conf
-            s="apache2"
-        fi
         if [ ! -h /etc/apache2/mods-enabled/ssl.load ] ; then
             a2enmod ssl
             s="apache2"
