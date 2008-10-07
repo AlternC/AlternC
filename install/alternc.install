@@ -220,7 +220,7 @@ if [ -x /usr/sbin/apache2 ]; then
             s="apache2"
         fi
         if [ ! -h /etc/apache2/conf.d/alternc-ssl.conf ] && [ -e /etc/apache2/conf.d/ ]; then
-            ln -sf /etc/alternc/apache-ssl.conf /etc/apache2/conf.d/alternc-ssl.conf
+            ln -sf /etc/alternc/apache2-ssl.conf /etc/apache2/conf.d/alternc-ssl.conf
             s="apache2"
         fi
     else
