@@ -2309,7 +2309,7 @@ msgstr "Copier vers"
 
 #: ../admin/bro_main.php:283
 msgid "Extract"
-msgstr "Extraire l\'archive"
+msgstr "Extraire l'archive"
 
 #: ../admin/dom_editdns.php:57
 #, fuzzy, php-format
