@@ -210,6 +210,18 @@ if [ -x /usr/sbin/apache2 ]; then
         a2enmod $php
         s="apache2"
     fi 
+    if ! grep '^Listen.*443$' /etc/apache2/ports.conf; then
+        echo "Listen 443" >> /etc/apache2/ports.conf
+        s="apache2"
+    fi
+    if [ ! -h /etc/apache2/mods-enabled/ssl.load ] ; then
+        a2enmod ssl
+        s="apache2"
+    fi
+    if [ ! -h /etc/apache2/conf.d/alternc-ssl.conf ] && [ -e /etc/apache2/conf.d/ ]; then
+        ln -sf /etc/alternc/apache-ssl.conf /etc/apache2/conf.d/alternc-ssl.conf
+        s="apache2"
+    fi
     if [ ! -h /etc/apache2/conf.d/alternc.conf ] && [ -e /etc/apache2/conf.d/ ]; then
         ln -sf /etc/alternc/apache2.conf /etc/apache2/conf.d/alternc.conf
         s="apache2"
