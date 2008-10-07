@@ -188,13 +188,37 @@ then
     fi
     echo "LoadModule ${php}_module /usr/lib/apache/1.3/lib${php}.so" | append_no_dupe /etc/apache/modules.conf
     echo "LoadModule ${php}_module /usr/lib/apache/1.3/lib${php}.so" | append_no_dupe /etc/apache-ssl/modules.conf
+
+    if [ ! -h /etc/apache-ssl/conf.d/alternc.conf ] && [ -e /etc/apache-ssl/conf.d/ ]; then
+            ln -sf /etc/alternc/apache-ssl.conf /etc/apache-ssl/conf.d/alternc.conf
+    fi
+
+    if [ ! -h /etc/apache/conf.d/alternc.conf ] && [ -e /etc/apache/conf.d/ ]; then
+            ln -sf /etc/alternc/apache.conf /etc/apache/conf.d/alternc.conf
+    fi
+
+    if [ ! -h /etc/apache/conf.d/override_php.conf ] && [ -e /etc/apache/conf.d/ ]; then
+            ln -sf /var/alternc/apacheconf/override_php.conf /etc/apache/conf.d/override_php.conf
+    fi
     SERVICES="$SERVICES apache apache-ssl"
 fi
-if [ -x /usr/sbin/apache2 ] &&  ! ( [ -L /etc/apache2/mods-enabled/vhost_alias.load ] && [ -L /etc/apache2/mods-enabled/$php.load ] )
-then
-    a2enmod vhost_alias
-    a2enmod $php
-    SERVICES="$SERVICES apache2"
+if [ -x /usr/sbin/apache2 ]; then
+    s=""
+    if ! ( [ -L /etc/apache2/mods-enabled/vhost_alias.load ] && [ -L /etc/apache2/mods-enabled/$php.load ] )
+    then
+        a2enmod vhost_alias
+        a2enmod $php
+        s="apache2"
+    fi 
+    if [ ! -h /etc/apache2/conf.d/alternc.conf ] && [ -e /etc/apache2/conf.d/ ]; then
+        ln -sf /etc/alternc/apache2.conf /etc/apache2/conf.d/alternc.conf
+        s="apache2"
+    fi
+    if [ ! -h /etc/apache2/conf.d/override_php.conf ] && [ -e /etc/apache2/conf.d/ ]; then
+        ln -sf /var/alternc/apacheconf/override_php.conf /etc/apache2/conf.d/override_php.conf
+        s="apache2"
+    fi
+    SERVICES="$SERVICES $s"
 fi
 
 # Copy postfix *_checks if they do not exist
