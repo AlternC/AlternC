@@ -12,10 +12,10 @@ remove)
 
     FQDN_LETTER="`echo $FQDN | sed -e 's/.*\.\([^\.]\)[^\.]*\.[^\.]*$/\1/'`"
 
-    rm -rf /var/alternc/bureau/locales
+    rm -rf /var/alternc/bureau/locales || true
     rmdir -p /var/alternc/bureau 2> /dev/null || true
-    rm -f /var/alternc/dns/bureau
-    rm -f /var/alternc/dns/$FQDN_LETTER/$FQDN
+    rm -f /var/alternc/dns/bureau || true
+    rm -f /var/alternc/dns/$FQDN_LETTER/$FQDN || true
     rmdir -p /var/alternc/html/a/admin 2> /dev/null || true
     rmdir -p /var/alternc/html/r/root 2> /dev/null || true
     ;;
