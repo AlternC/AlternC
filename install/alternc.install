@@ -218,6 +218,10 @@ if [ -x /usr/sbin/apache2 ]; then
         ln -sf /var/alternc/apacheconf/override_php.conf /etc/apache2/conf.d/override_php.conf
         s="apache2"
     fi
+    if [ -e /etc/apache2/sites-enabled/000-default ]; then
+        a2dissite default
+        s="apache2"
+    fi
     SERVICES="$SERVICES $s"
 fi
 
