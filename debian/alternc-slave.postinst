@@ -185,7 +185,7 @@ EOF
     fi
     if [ -x /usr/sbin/apache2 ]; then
         if [ ! -h /etc/apache2/conf.d/alternc.conf ] && [ -e /etc/apache2/conf.d/ ]; then
-            ln -sf /etc/alternc/apache.conf \
+            ln -sf /etc/alternc/apache2.conf \
                 /etc/apache2/conf.d/alternc.conf
         fi
         if [ ! -h /etc/apache2/conf.d/override_php.conf ] && [ -e /etc/apache2/conf.d/ ]; then
