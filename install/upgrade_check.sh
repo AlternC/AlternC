@@ -45,7 +45,7 @@ do
                   # run the proper program to interpret the upgrade script
 		  case "$ext" in
 		  sql)
-			mysql -f --defaults-file=/etc/alternc/my.cnf \
+			mysql --defaults-file=/etc/alternc/my.cnf -f \
 			< $file || true
 			;;
 		  php)
