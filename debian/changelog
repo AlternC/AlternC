@@ -24,9 +24,15 @@ alternc (0.9.9) stable; urgency=low
     * make a new alternc-slave package that eases installation on NFS-backed
       frontend nodes
     * builtin postgrey and Spamhaus blacklisting configuration
+    * #1017: complete apache2 support, although apache1 is still the "official"
+      platform for now. Use:
+        apt-get install apache2 libapache2-mod-php5 alternc
+      to install alternc with apache2.
   * other changes:
     * deprecate the mynetwork modification in Postfix, this is now left to the
       admin
+    * do not overwrite main.cf
+    * do not overwrite named.conf
     * note that even though main.cf is not directly overwritten (#1029, as
       per Debian Policy), some settings are directly overwritten. those
       settings are configured in /etc/alternc/postfix.cf.
