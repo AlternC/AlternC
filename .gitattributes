@@ -244,6 +244,7 @@ bureau/locales/fr_FR/LC_MESSAGES/messages.po -text
 bureau/locales/manual.pot -text
 bureau/locales/messages.pot -text
 bureau/locales/pt_BR/LC_MESSAGES/messages.po -text
+debian/NEWS -text
 debian/README.Debian -text
 debian/alternc-slave.config -text
 debian/alternc-slave.dirs -text
