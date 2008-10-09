@@ -39,7 +39,7 @@ include("head.php");
 ?>
 </head>
 <body>
-<h3>Edition du sous-domaine http://<?php ecif($sub,$sub."."); echo $domain; ?> : </h3>
+<h3><?php __("Edition du sous-domaine"); ?> http://<?php ecif($sub,$sub."."); echo $domain; ?> : </h3>
 <?php
 	if ($error) {
 		echo "<p class=\"erroe\">$error</p></body></html>";
@@ -50,7 +50,7 @@ include("head.php");
 <!-- *****************************************
 		 gestion du sous-domaine
  -->
-<h3>Sous-domaine http://<?php ecif($sub,$sub."."); echo $domain; ?></h3>
+<h3><?php __("Sous-domaine"); ?> http://<?php ecif($sub,$sub."."); echo $domain; ?></h3>
 <form action="dom_subdoedit.php" method="post" id="main" name="main">
 	<table border="0">
 	<tr> 
