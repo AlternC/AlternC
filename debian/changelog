@@ -26,6 +26,7 @@ alternc (0.9.9) stable; urgency=low
     * builtin postgrey and Spamhaus blacklisting configuration
     * #1017: complete apache2 support, although apache1 is still the "official"
       platform for now
+    * FTP+SSL support
   * other changes:
     * deprecate the mynetwork modification in Postfix, this is now left to the
       admin
