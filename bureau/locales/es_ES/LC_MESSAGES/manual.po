@@ -3,12 +3,12 @@
 # Copyright (c) 2002 the AlternC Development Team
 # <tech@alternc.org>
 #
+# Bruno Marmier <bruno@marmier.net>, 2003.
+# Daniel Viñar Ulriksen <dani@belil.net>, 2008.
 #. Template for AlternC Translation
 #. Copyright (c) 2002 the AlternC Development Team
 #. <tech@alternc.org>
 #. $Id: admin.po,v 1.4 2006/02/09 20:12:23 benjamin Exp $
-# Bruno Marmier <bruno@marmier.net>, 2003.
-# Daniel Viñar Ulriksen <dani@belil.net>, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: manual\n"
@@ -111,8 +111,8 @@ msgstr ""
 #. The last member of the domain name is incorrect or cannot be hosted in that server.
 msgid "err_dom_7"
 msgstr ""
-"El último componente (TLD) del dominio es incorrecto o no se puede hospedar en este "
-"servidor."
+"El último componente (TLD) del dominio es incorrecto o no se puede hospedar "
+"en este servidor."
 
 #. The domain already exists.
 msgid "err_dom_8"
@@ -176,7 +176,7 @@ msgstr ""
 "El dominio solicitado está prohibido en este servidor, contacta al "
 "administrador."
 
-#. The DNS of this domain do not match the server's DNS. Please change your
+#. The DNS of this domain do not match the server's DNS. Please change your 
 #. domain's DNS (and eventually wait 1 day) before you install it again.
 msgid "err_dom_23"
 msgstr ""
@@ -186,56 +186,73 @@ msgstr ""
 
 #. There is some forbidden characters in the sub domain (only A-Z 0-9 and - are allowed).
 msgid "err_dom_24"
-msgstr "Hay caracteres prohibidos en el sub-dominio (sólo A-Z a-z 0-9 y - están autorizados)."
+msgstr ""
+"Hay caracteres prohibidos en el sub-dominio (sólo A-Z a-z 0-9 y - están "
+"autorizados)."
 
-#. There is no MX record pointing to this server, and you are asking us to host the Mail here
+#. There is no MX record pointing to this server, and you are asking us to host the Mail here 
 msgid "err_dom_25"
 msgstr "El dominio '%s' no te pertenece."
 
-#. - Entrez le nom du domaine que vous souhaitez héberger. Le nom de domaine
-#. doit être complet, mais <b>sans le www.</b><br /> IMPORTANT : Si vous voulez
-#. un hébergement réel de domaine, il faut que les DNS de votre domaine
-#. pointent vers nos serveurs DNS. Contacter votre hébergeur pour plus
+#. - Entrez le nom du domaine que vous souhaitez héberger. Le nom de domaine 
+#. doit être complet, mais <b>sans le www.</b><br /> IMPORTANT : Si vous voulez 
+#. un hébergement réel de domaine, il faut que les DNS de votre domaine 
+#. pointent vers nos serveurs DNS. Contacter votre hébergeur pour plus 
 #. d'information.<br /> Exemples : globenet.org / demo.com / test.eu.org etc.
-#. <br />Plus d'info sur la gestion des domaines dans l'aide en ligne
+#. <br />Plus d'info sur la gestion des domaines dans l'aide en ligne 
 #. HELPID_200<br />
 msgid "hlp_add_domain"
 msgstr ""
-"- Entra el nombre de dominio que quieres hospedar. Debe estar completo pero <b>sin el www.</b><br /> IMPORTANTE: Si quieres un hospedaje efectivo del dominio, es necesario que los DNS de tu dominio apunten a los servidores DNS de este hospedaje. Contacta a tu hospedaje para mayor información.<br /> Ejemplos: globenet.org / demo.com / test.eu.org etc."
-"<br />Más información acerca de la gestión de dominios en la ayuda en línea HELPID_200<br />"
+"- Entra el nombre de dominio que quieres hospedar. Debe estar completo pero "
+"<b>sin el www.</b><br /> IMPORTANTE: Si quieres un hospedaje efectivo del "
+"dominio, es necesario que los DNS de tu dominio apunten a los servidores DNS "
+"de este hospedaje. Contacta a tu hospedaje para mayor información.<br /> "
+"Ejemplos: globenet.org / demo.com / test.eu.org etc.<br />Más información "
+"acerca de la gestión de dominios en la ayuda en línea HELPID_200<br />"
 
-#. Cliquez sur le lien ci-dessus. Vous pourrez ensuite accéder aux paremètres
-#. du domaine dans le menu à gauche.2 liens vont apparaitre : <br />- un
+#. Cliquez sur le lien ci-dessus. Vous pourrez ensuite accéder aux paremètres 
+#. du domaine dans le menu à gauche.2 liens vont apparaitre : <br />- un 
 #. premier pour modifier les paramètres d'hébergement du domaine (sous-
-#. domaines, redirections, hébergement mails ...) <br />- un second pour gérer
-#. les comptes emails du domaine (si vous souhaitez créer des boites aux
-#. lettres).<br />Plus d'info sur la gestion des domaines dans l'aide en ligne
+#. domaines, redirections, hébergement mails ...) <br />- un second pour gérer 
+#. les comptes emails du domaine (si vous souhaitez créer des boites aux 
+#. lettres).<br />Plus d'info sur la gestion des domaines dans l'aide en ligne 
 #. HELPID_200<br />
 msgid "hlp_add_domain_2"
 msgstr ""
-"Presiona sobre el enlace aquí abajo. Podrás entonces acceder a los parámetros del dominio en el menú de la izquierda. Aparecerán dos enlaces: <br /> "
-"- uno para modificar los paráetros de hospedaje del dominio (sub-dominios, redirecciones, hospedaje de correo, ...)<br /> "
-"- otro para manejar los buzones email del dominio (si deseas crear estos buzones).<br /> "
-"Más información acerca del manejo de dominios en la ayuda en línea "
+"Presiona sobre el enlace aquí abajo. Podrás entonces acceder a los "
+"parámetros del dominio en el menú de la izquierda. Aparecerán dos enlaces: "
+"<br /> - uno para modificar los paráetros de hospedaje del dominio (sub-"
+"dominios, redirecciones, hospedaje de correo, ...)<br /> - otro para manejar "
+"los buzones email del dominio (si deseas crear estos buzones).<br /> Más "
+"información acerca del manejo de dominios en la ayuda en línea "
 "HELPID_200<br />"
 
-#. Le domaine a été effacé, mais les fichiers de votre site n'ont pas été
-#. détruits.<br />Si vous souhaitez détruire les fichiers du site web, utilisez
-#. le Gestionnaire de Fichier<br />Plus d'info sur la gestion des domaines dans
+#. Le domaine a été effacé, mais les fichiers de votre site n'ont pas été 
+#. détruits.<br />Si vous souhaitez détruire les fichiers du site web, utilisez 
+#. le Gestionnaire de Fichier<br />Plus d'info sur la gestion des domaines dans 
 #. l'aide en ligne HELPID_200<br />
 msgid "hlp_del_domain"
-msgstr "El dominio fue borrado, pero los archivos de tu sitio no fueron destruídos. <br />Si quieres destruir los archivos del sitio (fuente de las pa?inas web) Utiliza el manejador de archivos.<br />Más información sobre el manejo de dominios en la ayuda en línea HELPID_200<br />"
+msgstr ""
+"El dominio fue borrado, pero los archivos de tu sitio no fueron destruídos. "
+"<br />Si quieres destruir los archivos del sitio (fuente de las pa?inas web) "
+"Utiliza el manejador de archivos.<br />Más información sobre el manejo de "
+"dominios en la ayuda en línea HELPID_200<br />"
 
-#. Cette zone vous permet de modifier les paramètres de votre domaine, ainsi
+#. Cette zone vous permet de modifier les paramètres de votre domaine, ainsi 
 #. que des sous-domaines installés<br />Vous pouvez créer un nouveau sous-
-#. domaine et choisir, soit de le rediriger vers votre espace disque, vers une
+#. domaine et choisir, soit de le rediriger vers votre espace disque, vers une 
 #. autre adresse Internet, ou vers une adresse IP (utilisateurs avancés)<br />
 #. Plus d'info sur la gestion des domaines dans l'aide en ligne HELPID_200<br />
 msgid "hlp_edit_domain"
 msgstr ""
-"Esta zona permite modificar los parámetros de tu dominio y los sub-dominios instalados. .<br /> "
-"Puedes crear un nuevo sub-dominio y elegir, ya sea que responda con archivos de tu espacio de disco en este servidor, ya sea redirigirlo hacia otra dirección internet o una dirección IP, ya sea hacia la interfaz de webmail en este servidor. Esta última opción permitirá a los usuarios de buzones email que puedas crear consultar su correo electrónico por una iterfaz web.<br /> "
-"Más información sobre el manejo de dominios en la ayuda en línea HELPID_200<br />"
+"Esta zona permite modificar los parámetros de tu dominio y los sub-dominios "
+"instalados. .<br /> Puedes crear un nuevo sub-dominio y elegir, ya sea que "
+"responda con archivos de tu espacio de disco en este servidor, ya sea "
+"redirigirlo hacia otra dirección internet o una dirección IP, ya sea hacia "
+"la interfaz de webmail en este servidor. Esta última opción permitirá a los "
+"usuarios de buzones email que puedas crear consultar su correo electrónico "
+"por una iterfaz web.<br /> Más información sobre el manejo de dominios en la "
+"ayuda en línea HELPID_200<br />"
 
 #. FTP Accounts
 msgid "quota_ftp"
@@ -259,54 +276,63 @@ msgstr "¡Esta cuenta FTP ya existe!"
 
 #. Your ftp account quota is over. You cannot create more ftp accounts.
 msgid "err_ftp_5"
-msgstr "Alcanzaste el limite de tu cuota de cuentas FTP, no se pueden crear más."
+msgstr ""
+"Alcanzaste el limite de tu cuota de cuentas FTP, no se pueden crear más."
 
 #. The directory cannot be created.
 msgid "err_ftp_6"
 msgstr "Imposible crear la carpeta."
 
-#. Voici la liste des comptes ftp ayant accès à votre compte. Cliquez sur
-#. 'Modifier' pour changer le nom d'utilisateur, le mot de passe, ou le dossier
-#. racine.<br /> Pour supprimer un compte, cochez la case correspondante et
-#. cliquez sur le bouton 'Supprimer les comptes cochés'<br />Pour pouvoir
-#. accéder à vos fichiers avec un logiciel de ftp, vous devez créer au moins un
-#. compte. Chaque compte est associé à un dossier, et n'aura donc accès qu'aux
-#. fichiers situés dans ce dossier ou en dessous. <br />Plus d'info sur le FTP
+#. Voici la liste des comptes ftp ayant accès à votre compte. Cliquez sur 
+#. 'Modifier' pour changer le nom d'utilisateur, le mot de passe, ou le dossier 
+#. racine.<br /> Pour supprimer un compte, cochez la case correspondante et 
+#. cliquez sur le bouton 'Supprimer les comptes cochés'<br />Pour pouvoir 
+#. accéder à vos fichiers avec un logiciel de ftp, vous devez créer au moins un 
+#. compte. Chaque compte est associé à un dossier, et n'aura donc accès qu'aux 
+#. fichiers situés dans ce dossier ou en dessous. <br />Plus d'info sur le FTP 
 #. dans l'aide en ligne HELPID_100<br />
 msgid "hlp_ftp_list"
 msgstr ""
 "He aquí la lista de cuentas FTP que tienen acceso a tu cuenta. Presiona en "
-"'Modificar' para cambiar el nombre de usuario, la contraseña, o la carpeta raíz. "
-"<br /> Para suprimir una cuenta, selecciona la casilla correspondiente y presiona el botón 'Suprimir las cuentas marcadas'"
-"<br /> Para acceder a tus archivos con una cuenta FTP, debes crear al menos una cuenta. Cada cuenta está asociada a una carpeta, y por ende sólo tendrá acceso a los archivos situados en ésta y en sub-carpetas. "
-"<br />Más información sobre el FTP en la ayuda en línea HELPID_100<br />"
+"'Modificar' para cambiar el nombre de usuario, la contraseña, o la carpeta "
+"raíz. <br /> Para suprimir una cuenta, selecciona la casilla correspondiente "
+"y presiona el botón 'Suprimir las cuentas marcadas'<br /> Para acceder a tus "
+"archivos con una cuenta FTP, debes crear al menos una cuenta. Cada cuenta "
+"está asociada a una carpeta, y por ende sólo tendrá acceso a los archivos "
+"situados en ésta y en sub-carpetas. <br />Más información sobre el FTP en la "
+"ayuda en línea HELPID_100<br />"
 
-#. Vous n'avez actuellement aucun Compte FTP de disponible. Cliquez sur
-#. 'Création d'un compte ftp' pour en créer un.<br />Pour pouvoir accéder à vos
-#. fichiers avec un logiciel de ftp, vous devez créer au moins un compte.
-#. Chaque compte est associé à un dossier, et n'aura donc accès qu'aux fichiers
-#. situés dans ce dossier ou en dessous. <br />Plus d'info sur le FTP dans
+#. Vous n'avez actuellement aucun Compte FTP de disponible. Cliquez sur 
+#. 'Création d'un compte ftp' pour en créer un.<br />Pour pouvoir accéder à vos 
+#. fichiers avec un logiciel de ftp, vous devez créer au moins un compte.  
+#. Chaque compte est associé à un dossier, et n'aura donc accès qu'aux fichiers 
+#. situés dans ce dossier ou en dessous. <br />Plus d'info sur le FTP dans 
 #. l'aide en ligne HELPID_100<br />
 msgid "hlp_ftp_list_no"
 msgstr ""
-"Actualmente no tienes ninguna cuenta FTP disponible. Si quieres una, presiona en 'Crear una nueva cuenta FTP'.<br /> "
-"Para acceder a tus archivos con un software cliente FTP, tendrás que crear al menos una cuenta. Cada cuenta está asociada a una carpeta, y por ende sólo tendrá acceso a los archivos situados en ésta y en sub-carpetas. "
-"<br />Más información sobre el FTP en la ayuda en línea HELPID_100<br />"
+"Actualmente no tienes ninguna cuenta FTP disponible. Si quieres una, "
+"presiona en 'Crear una nueva cuenta FTP'.<br /> Para acceder a tus archivos "
+"con un software cliente FTP, tendrás que crear al menos una cuenta. Cada "
+"cuenta está asociada a una carpeta, y por ende sólo tendrá acceso a los "
+"archivos situados en ésta y en sub-carpetas. <br />Más información sobre el "
+"FTP en la ayuda en línea HELPID_100<br />"
 
-#. Pour ajouter un compte ftp, vous devez choisir un Nom d'utilisateur, un mot
-#. de passe, et un répertoire racine<br />Le nom d'utilisateur commence
-#. toujours par votre nom de login ou le nom d'un de vos domaines.<br />Le
-#. répertoire racine, s'il n'existe pas, sera créé automatiquement.<br />Note :
-#. Le compte que vous créez ainsi aura accès en lecture et en écriture aux
-#. fichiers situés dans le répertoire et tous ses sous-répertoires.<br />Plus
+#. Pour ajouter un compte ftp, vous devez choisir un Nom d'utilisateur, un mot 
+#. de passe, et un répertoire racine<br />Le nom d'utilisateur commence 
+#. toujours par votre nom de login ou le nom d'un de vos domaines.<br />Le 
+#. répertoire racine, s'il n'existe pas, sera créé automatiquement.<br />Note : 
+#. Le compte que vous créez ainsi aura accès en lecture et en écriture aux 
+#. fichiers situés dans le répertoire et tous ses sous-répertoires.<br />Plus 
 #. d'info sur le FTP dans l'aide en ligne HELPID_100<br />
 msgid "hlp_ftp_add"
 msgstr ""
-"Para agregar una cuenta FTP. tines que elegir un login de conexión, una contraseña y una carpeta raíz. .<br /> "
-"El login de conexión empieza siempre por tu nombre de usuario o por uno de tus dominios.<br /> "
-"La carpeta raíz, si no existe, será creada automáticamente. <br /> "
-"Nota: La cuenta que creas así tendrá acceso en lectura y en escritura a los archivos situados en la carpeta raíz asociada y en sus sub-carpetas. "
-"<br />Plus d'info sur le FTP dans l'aide en ligne HELPID_100<br />"
+"Para agregar una cuenta FTP. tines que elegir un login de conexión, una "
+"contraseña y una carpeta raíz. .<br /> El login de conexión empieza siempre "
+"por tu nombre de usuario o por uno de tus dominios.<br /> La carpeta raíz, "
+"si no existe, será creada automáticamente. <br /> Nota: La cuenta que creas "
+"así tendrá acceso en lectura y en escritura a los archivos situados en la "
+"carpeta raíz asociada y en sus sub-carpetas. <br />Plus d'info sur le FTP "
+"dans l'aide en ligne HELPID_100<br />"
 
 #. An incompatible .htaccess file exists in this folder.
 msgid "err_hta_1"
@@ -389,7 +415,9 @@ msgstr "El buzón '%s' ya existe."
 
 #. Your mail account quota is over. You cannot create more email accounts.
 msgid "err_mail_8"
-msgstr "Alcanzaste el limite de tu cuota de buzones de correo, no se pueden crear más."
+msgstr ""
+"Alcanzaste el limite de tu cuota de buzones de correo, no se pueden crear "
+"más."
 
 #. The domain '%s' does not exist.
 msgid "err_mail_9"
@@ -417,7 +445,8 @@ msgstr "Una o más direcciones de correos para la redirección no son válidas."
 
 #. This mail is not a pop account. It's impossible to change the password !
 msgid "err_mail_15"
-msgstr "Esta cuenta no es una cuenta POP. ¡Es imposible cambiarle la contraseña!"
+msgstr ""
+"Esta cuenta no es una cuenta POP. ¡Es imposible cambiarle la contraseña!"
 
 #. OK
 msgid "err_err_0"
@@ -427,7 +456,7 @@ msgstr "OK"
 msgid "err_err_1"
 msgstr "El mensaje de error no existe (%s)"
 
-#. This is a date representation : parameters are the date as follow :
+#. This is a date representation : parameters are the date as follow : 
 #. $d,$m,$y,$h,$i,$hh,$am
 #.  1  2  3  4  5  6   7
 #. hh is the hour in 12 hours format, and am is 'am' or 'pm'.
@@ -478,7 +507,8 @@ msgstr "No estás autorizado a cambiar tu contraseña."
 
 #. You must be a system administrator to do this
 msgid "err_mem_12"
-msgstr "Debes ser administrador para cambiar las preferencias de Administrador."
+msgstr ""
+"Debes ser administrador para cambiar las preferencias de Administrador."
 
 # Please do NOT translate those strings to each language. Use the original language instead
 #. Français (France)
@@ -539,7 +569,8 @@ msgstr "Espacio disco (Ko)"
 
 #. Data base name can contain only digits or lowercase alphabetic characters
 msgid "err_mysql_2"
-msgstr "El nombre de la base de datos sólo puede contener cifras y letras minúsculas."
+msgstr ""
+"El nombre de la base de datos sólo puede contener cifras y letras minúsculas."
 
 #. The database does not exist, you'll get an access by creating it.
 msgid "err_mysql_3"
@@ -580,8 +611,8 @@ msgstr "Error: no puedes crear tu base principal. ¡Te quedan otras bases!"
 #. You have no database, click on 'Databases' to create the first one
 msgid "err_mysql_11"
 msgstr ""
-"No tienes ninguna base de datos disponible. Presiona en «Bases de datos» "
-"para crear una."
+"No tienes ninguna base de datos disponible. Presiona en «Bases de datos» para "
+"crear una."
 
 # #################################################################
 # m_webaccess
@@ -633,13 +664,17 @@ msgstr "Ningún usuario está definido en MySQL."
 
 #. Your MySQL backups are stored in the chosen folder from <code>db.sql.1</
 #. code> to <code>db.sql.19</code><br />your database name replaces 'db'.<br /
-#. >WARNING: If you modify backup settings (backups, compression...) previous
-#. backups may remain in the backup folder. Go to the file manager to delete
+#. >WARNING: If you modify backup settings (backups, compression...) previous 
+#. backups may remain in the backup folder. Go to the file manager to delete 
 #. them.
 msgid "hlp_sql_bck"
 msgstr ""
-"Los respaldos de tu base de datos MySQL se almacenan en la carpeta elegida con los nombres <code>db.sql.1</code> a <code>db.sql.19</code><br /> donde 'db' se remplaza por el nombre de la base de datos. <br /> "
-"CUIDADO: si modificas los parámetros de respaldo (número de respaldos, compresiones...) viejos respaldos pueden quedar en la carpta correspondiente. Los puedes borrar a través del manejador de archivos."
+"Los respaldos de tu base de datos MySQL se almacenan en la carpeta elegida "
+"con los nombres <code>db.sql.1</code> a <code>db.sql.19</code><br /> donde "
+"'db' se remplaza por el nombre de la base de datos. <br /> CUIDADO: si "
+"modificas los parámetros de respaldo (número de respaldos, compresiones...) "
+"viejos respaldos pueden quedar en la carpta correspondiente. Los puedes "
+"borrar a través del manejador de archivos."
 
 #. Web Statistics
 msgid "quota_sta2"
@@ -649,7 +684,8 @@ msgstr "Estadísticas Web en bruto"
 # m_webaccess
 #. You cannot create more raw statistic set.
 msgid "err_sta2_1"
-msgstr "Alcanzaste tu cuota de juegos de estadísticas, ya no puedes crear más. "
+msgstr ""
+"Alcanzaste tu cuota de juegos de estadísticas, ya no puedes crear más. "
 
 #. There is currently no raw statistic set.
 msgid "err_sta2_2"
@@ -667,36 +703,48 @@ msgstr "¡Carpeta o archivo incorrecto!"
 msgid "err_bro_2"
 msgstr "¡No se puede desplazar un archivo hacia la misma carpeta!"
 
-#. If we manage your DNS <br />You can manage your mails elsewhere if you want
-#. (MX field).<br />Write <b><code>%s</code></b> in this field if your mail
-#. must be managed by %s<br />or put the IP address or name of the mail server
-#. used to manage your mails.<small>Warning : if you put nothing in this field,
+#. If we manage your DNS <br />You can manage your mails elsewhere if you want 
+#. (MX field).<br />Write <b><code>%s</code></b> in this field if your mail 
+#. must be managed by %s<br />or put the IP address or name of the mail server 
+#. used to manage your mails.<small>Warning : if you put nothing in this field, 
 #. your mails will be unavailable</small>
 msgid "help_dns_mx %s %s"
 msgstr ""
-"Si este servidor maneja tu DNS:<br /> "
-"Si quieres, puedes manejar tus buzones de correo en otro lado (campo MX).<br /> "
-"Ingresa <b><code>%s</code></b> en este campo si tus buzones deben ser manejados por %s<br /> o ingresa la dirección IP o el nombre del servidor de mail utilizado para tus buzones "
-"<small>Cuidado: si no pones nada en este campo, tus direcciones de correo estarán indisponibles.</small>"
+"Si este servidor maneja tu DNS:<br /> Si quieres, puedes manejar tus buzones "
+"de correo en otro lado (campo MX).<br /> Ingresa <b><code>%s</code></b> en "
+"este campo si tus buzones deben ser manejados por %s<br /> o ingresa la "
+"dirección IP o el nombre del servidor de mail utilizado para tus buzones "
+"<small>Cuidado: si no pones nada en este campo, tus direcciones de correo "
+"estarán indisponibles.</small>"
 
 #. If we don't manage the DNS for this domain <br />do we manage your mails?
 msgid "help_dns_mail"
-msgstr "Si este servidor no maneja el DNS de este dominio <br />¿maneja sus buzones de correo?"
+msgstr ""
+"Si este servidor no maneja el DNS de este dominio <br />¿maneja sus buzones "
+"de correo?"
 
-#. If you want to delete the domain %s, click the button below.Warning : this
-#. delete all the ftp, mails, mailing-lists ... associated with thisdomain and
+#. If you want to delete the domain %s, click the button below.Warning : this 
+#. delete all the ftp, mails, mailing-lists ... associated with thisdomain and 
 #. all its subdomains!
 msgid "help_domain_del %s"
-msgstr "Si quieres borrar el dominio %s, presiona el botón aquí abajo. ¡Cuidado: esto borrará todas las cuentas FTP, los buzones, las listas de correo, ... asociadas con el dominio y todos sus subdominios!"
+msgstr ""
+"Si quieres borrar el dominio %s, presiona el botón aquí abajo. ¡Cuidado: "
+"esto borrará todas las cuentas FTP, los buzones, las listas de correo, ... "
+"asociadas con el dominio y todos sus subdominios!"
 
-#. You can create various databases<br />Click on 'SQL Admin' in the menu to
+#. You can create various databases<br />Click on 'SQL Admin' in the menu to 
 #. manage them<br />or use the table below to backup, retrieve or delete them:
 msgid "help_sql_list_ok"
-msgstr "Puedes crear varias bases de datos<br />Presiona en 'Admin SQL' en el menu para manejarlas<br />o utiliza el menú a continuación para respaldarlas, restaurarlas o borrarlas:"
+msgstr ""
+"Puedes crear varias bases de datos<br />Presiona en 'Admin SQL' en el menu "
+"para manejarlas<br />o utiliza el menú a continuación para respaldarlas, "
+"restaurarlas o borrarlas:"
 
 #. Your haven't created your main database yet, please enter a password to create it.
 msgid "help_sql_list_no"
-msgstr "Aún no has creado tu base de datos principal, por favor entra una contraseña para crearla."
+msgstr ""
+"Aún no has creado tu base de datos principal, por favor entra una contraseña "
+"para crearla."
 
 #. This is a date representation : parameters are the date as follow :
 #. $d,$m,$y,$h,$i,$hh,$am
@@ -705,4 +753,3 @@ msgstr "Aún no has creado tu base de datos principal, por favor entra una contra
 #. eg: english : %3$d/%1$d/%2$d, at %6$d:%5$d %7$s
 msgid "%3$d-%2$d-%1$d %4$d:%5$d"
 msgstr "%1$d/%2$d/%3$d %6$d:%5$d %7$d"
-
