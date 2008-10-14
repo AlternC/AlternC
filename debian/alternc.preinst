@@ -64,14 +64,6 @@ case "$1" in
         fi
     fi
 
-    # make sure we have a symlink for basedir_prot.sh
-    if [ ! -h /etc/apache/conf.d/override.php.conf ]; then
-        # make sur the file exists so that apache doesn't crash
-        touch /var/alternc/apacheconf/override_php.conf
-        ln -sf /var/alternc/apacheconf/override_php.conf \
-            /etc/apache/conf.d/override.php.conf
-    fi
-
     ;;
 
   abort-upgrade)
