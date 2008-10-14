@@ -1,3 +1,18 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Free Software Foundation, Inc.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"PO-Revision-Date: 2008-10-14 16:18-0400\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
 #: ../admin/adm_add.php:35 ../admin/adm_defquotas.php:35
 #: ../admin/adm_doadd.php:35 ../admin/adm_dodefquotas.php:35
 #: ../admin/adm_dodel.php:33 ../admin/adm_dodel.php:45
@@ -967,7 +982,7 @@ msgstr ""
 #: ../admin/dom_edit.php:149
 #, php-format
 msgid "help_dns_mx %s %s"
-msgstr ""
+msgstr "If we manage your DNS:<br />You can decide to manage your mails elsewhere (MX field).<br />Put <b><code>%s</code></b> in this field to manage your mails with %s<br /> Otherwise put the ip or the name of the server you want to use to manage your emails.\\t<small>Warning: if you leave this field empty, you will not be able to use emails on this domain.</small>"
 
 #: ../admin/dom_edit.php:151 ../admin/dom_edit.php:153
 msgid "MX Field"
@@ -975,7 +990,7 @@ msgstr ""
 
 #: ../admin/dom_edit.php:155 ../admin/dom_edit.php:157
 msgid "help_dns_mail"
-msgstr ""
+msgstr "If we do not manage your DNS:<br /> do we manage your emails?"
 
 #: ../admin/dom_edit.php:159 ../admin/dom_edit.php:161
 msgid "Submit the changes"
@@ -984,7 +999,7 @@ msgstr ""
 #: ../admin/dom_edit.php:167 ../admin/dom_edit.php:169
 #, php-format
 msgid "help_domain_del %s"
-msgstr ""
+msgstr "If you want to destroy the domain %s, click on the button below. Warning: this also deletes all FTP accounts, email, mailing lists associated with the domain and subdomains."
 
 #: ../admin/dom_edit.php:170 ../admin/dom_edit.php:172
 #, php-format
@@ -1134,7 +1149,7 @@ msgstr ""
 
 #: ../admin/hta_list.php:59
 msgid "help_hta_list"
-msgstr ""
+msgstr "Here is the list of protected directories in your account"
 
 #: ../admin/hta_list.php:82
 msgid "Unprotect the checked folders"
@@ -1195,7 +1210,7 @@ msgstr ""
 
 #: ../admin/mail_add.php:57
 msgid "help_mail_add"
-msgstr ""
+msgstr "- To create this email<br /> * If you want to store emails received and access with webmail or email software, check the box \"POP account'. In this case, choose a password for the POP account.<br /> * If you want to redirect this mail to other accounts, enter the list of emails, one email per line (with the @ in every case).<br />Note: you need to either check the box \"POP account\" or enter redirections, or both.<br /> * To access your emails, use the address http://<your domain>/webmail/ or any subdomain of type 'Webmail access'<br />The username is the email address in full (for example <code>login@example.com</code>) and the password is the one entered in this form."
 
 #: ../admin/mail_del.php:42 ../admin/mail_dodel.php:41
 msgid "Deleting mail accounts"
@@ -1253,7 +1268,7 @@ msgstr ""
 
 #: ../admin/mail_edit.php:66
 msgid "help_mail_edit"
-msgstr ""
+msgstr "- To modify this email<br /> * If you want to store emails received and access with webmail or email software, check the box \\\"POP account'. In this case, choose a password for the POP account.<br /> * If you want to redirect this mail to other accounts, enter the list of emails, one email per line (with the @ in every case).<br />Note: you need to either check the box \\\"POP account\\\" or enter redirections, or both.<br /> * To access your emails, use the address http://<your domain>/webmail/ or any subdomain of type 'Webmail access'<br />The username is the email address in full (for example <code>login@example.com</code>) and the password is the one entered in this form."
 
 #: ../admin/mail_list.php:42 ../admin/mail_list.php:60
 #, php-format
@@ -1322,7 +1337,7 @@ msgstr ""
 #: ../admin/mem_chgmail.php:46
 #, php-format
 msgid "help_mem_chgmail %s"
-msgstr ""
+msgstr "An email was sent to the address <big><code>%s</code></big> to confirm.<br />This email contains a link where you should go to confirm the modification.<br /> On this page, the following key will be requested from you : <br />"
 
 #: ../admin/mem_cm2.php:48
 msgid "The mailbox has been successfully changed."
@@ -1374,7 +1389,7 @@ msgstr ""
 
 #: ../admin/mem_param.php:60
 msgid "help_chg_passwd"
-msgstr ""
+msgstr "You can change here the password for this account. Do not forget it! <br/> Enter here your current password then a new password (twice for security reasons), then click on \"Change my password\"."
 
 #: ../admin/mem_param.php:64 ../admin/mem_param.php:63
 msgid "Old password"
@@ -1386,7 +1401,7 @@ msgstr ""
 
 #: ../admin/mem_param.php:76 ../admin/mem_param.php:73
 msgid "help_chg_mail"
-msgstr ""
+msgstr "You can modify here the email corresponding to your account. <br />Enter the new email here. A message is sent to this addresse for confirmation."
 
 #: ../admin/mem_param.php:77 ../admin/mem_param.php:74
 msgid "Current mailbox"
@@ -1406,7 +1421,7 @@ msgstr ""
 
 #: ../admin/mem_param.php:87 ../admin/mem_param.php:82
 msgid "help_help_settings"
-msgstr ""
+msgstr "Each page of the interface can present simple help, accompanied by a link to the online help system.<br />If you want this help system to be shown, check the box below."
 
 #: ../admin/mem_param.php:88 ../admin/mem_param.php:83
 msgid "Do you want to see the help texts and links on each page?"
@@ -1615,7 +1630,7 @@ msgstr ""
 
 #: ../admin/sql_list.php:48
 msgid "help_sql_list_ok"
-msgstr ""
+msgstr "You have one or many databases<br />Click on 'Admin SQL' in the administrator menu<br />Or use the table below to manage backups/restore, erase your databases :"
 
 #: ../admin/sql_list.php:53 ../admin/sql_list.php:64
 msgid "Backup"
@@ -1639,7 +1654,7 @@ msgstr ""
 
 #: ../admin/sql_list.php:91 ../admin/sql_users_list.php:90
 msgid "help_sql_list_no"
-msgstr ""
+msgstr "Your main database doesn't exist, enter a password here to create it."
 
 #: ../admin/sql_list.php:100 ../admin/sql_users_list.php:99
 msgid "Create my main database"
@@ -1700,7 +1715,7 @@ msgstr ""
 
 #: ../admin/sql_users_list.php:48
 msgid "help_sql_users_list_ok"
-msgstr ""
+msgstr "You have one or many databases.<br />Click on 'Admin SQL' on the menu for administrator<br />Or use the following table to manage your backups/restores, deletion of your databases :"
 
 #: ../admin/sql_users_list.php:53 ../admin/sql_users_list.php:65
 msgid "Rights"
@@ -1713,7 +1728,7 @@ msgstr ""
 
 #: ../admin/sql_users_rights.php:46
 msgid "help_sql_users_rights_ok"
-msgstr ""
+msgstr "Your main database doesn't exist, enter here a database password to create it."
 
 #: ../admin/sql_users_rights.php:115
 msgid "Apply"
