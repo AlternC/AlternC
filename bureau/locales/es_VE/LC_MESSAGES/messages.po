@@ -99,12 +99,13 @@ msgstr "Dirección de correo"
 msgid "Account type"
 msgstr "Cuotas de la cuenta"
 
-#: ../admin/adm_add.php:102
+#: ../admin/adm_add.php:102 ../admin/adm_add.php:104
 #, fuzzy, php-format
 msgid "Create the domain <b>username.%s</b>"
 msgstr "Crear esta nueva base de datos"
 
 #: ../admin/adm_add.php:106 ../admin/adm_list.php:62 ../admin/adm_list.php:59
+#: ../admin/adm_add.php:119
 msgid "Create a new member"
 msgstr "Crear un nuevo miembro"
 
@@ -157,7 +158,7 @@ msgstr "Modificar las cuotas por defecto"
 msgid "Passwords do not match"
 msgstr ""
 
-#: ../admin/adm_doadd.php:75
+#: ../admin/adm_doadd.php:75 ../admin/adm_doadd.php:73
 msgid "The new member has been successfully created"
 msgstr "El nuevo miembro a sido creado con éxito"
 
@@ -1013,6 +1014,7 @@ msgstr "Dirigir hacía una dirección IP"
 
 #: ../admin/dom_edit.php:122 ../admin/dom_subedit.php:83
 #: ../class/m_dom.php:551 ../class/m_dom.php:594 ../class/m_dom.php:559
+#: ../class/m_dom.php:550
 msgid "Webmail access"
 msgstr "Acceso Webmail"
 
@@ -2400,6 +2402,16 @@ msgstr "Usuario"
 #, fuzzy
 msgid "Web statistics"
 msgstr "Estadísticas Web"
+
+#: ../admin/dom_subedit.php:42
+#, fuzzy
+msgid "Edition du sous-domaine"
+msgstr "Modificar dominio %s"
+
+#: ../admin/dom_subedit.php:53
+#, fuzzy
+msgid "Sous-domaine"
+msgstr "Subdominios"
 
 #, fuzzy
 #~ msgid "Create the domain username."

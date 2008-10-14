@@ -92,12 +92,13 @@ msgstr "Adresse Email"
 msgid "Account type"
 msgstr "Type de compte"
 
-#: ../admin/adm_add.php:102
+#: ../admin/adm_add.php:102 ../admin/adm_add.php:104
 #, php-format
 msgid "Create the domain <b>username.%s</b>"
 msgstr "Installer le domaine <b>login.%s</b>"
 
 #: ../admin/adm_add.php:106 ../admin/adm_list.php:62 ../admin/adm_list.php:59
+#: ../admin/adm_add.php:119
 msgid "Create a new member"
 msgstr "Créer un nouveau membre"
 
@@ -147,7 +148,7 @@ msgstr "Modifier les quotas par défaut"
 msgid "Passwords do not match"
 msgstr "Les mots de passe ne correspondent pas"
 
-#: ../admin/adm_doadd.php:75
+#: ../admin/adm_doadd.php:75 ../admin/adm_doadd.php:73
 msgid "The new member has been successfully created"
 msgstr "Le membre a été ajouté avec succès"
 
@@ -1009,6 +1010,7 @@ msgstr "Redirection vers une ip"
 
 #: ../admin/dom_edit.php:122 ../admin/dom_subedit.php:83
 #: ../class/m_dom.php:551 ../class/m_dom.php:594 ../class/m_dom.php:559
+#: ../class/m_dom.php:550
 msgid "Webmail access"
 msgstr "Accès au webmail"
 
@@ -2370,6 +2372,16 @@ msgstr "Utilisateur"
 #, fuzzy
 msgid "Web statistics"
 msgstr "Statistiques web brutes"
+
+#: ../admin/dom_subedit.php:42
+#, fuzzy
+msgid "Edition du sous-domaine"
+msgstr "Edition du domaine %s"
+
+#: ../admin/dom_subedit.php:53
+#, fuzzy
+msgid "Sous-domaine"
+msgstr "Sous-domaines"
 
 #~ msgid "Create the domain username."
 #~ msgstr "Installer le domaine login."
