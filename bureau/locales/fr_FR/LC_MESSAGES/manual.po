@@ -689,19 +689,6 @@ msgstr "Répertoire ou fichier incorrect !"
 msgid "err_bro_2"
 msgstr "Vous ne pouvez pas déplacer un fichier dans le même répertoire !"
 
-#. If we manage your DNS <br />You can manage your mails elsewhere if you want 
-#. (MX field).<br />Write <b><code>%s</code></b> in this field if your mail 
-#. must be managed by %s<br />or put the IP address or name of the mail server 
-#. used to manage your mails.<small>Warning : if you put nothing in this field, 
-#. your mails will be unavailable</small>
-msgid "help_dns_mx %s %s"
-msgstr ""
-"If we manage your DNS <br />You can manage your mails elsewhere if you want "
-"(MX field).<br />Write <b><code>%s</code></b> in this field if your mail "
-"must be managed by %s<br />or put the IP address or name of the mail server "
-"used to manage your mails.<small>Warning : if you put nothing in this field, "
-"your mails will be unavailable</small>"
-
 #. If we don't manage the DNS for this domain <br />do we manage your mails?
 #, fuzzy
 msgid "help_dns_mail"
