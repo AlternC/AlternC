@@ -1614,9 +1614,8 @@ msgstr "Admin SQL"
 
 #: ../admin/menu_sta2.php:37 ../admin/menu_sta2.php:36
 #: ../admin/menu_sta2.php:39
-#, fuzzy
 msgid "Raw web statistics"
-msgstr "Estadísticas web"
+msgstr "Estadísticas web en bruto"
 
 #: ../admin/menu_web.php:34 ../admin/menu_web.php:33
 msgid "Protected folders"
@@ -2354,9 +2353,8 @@ msgid "Latest news"
 msgstr "Últimas noticias"
 
 #: ../admin/menu_adm.php:36
-#, fuzzy
 msgid "Administration"
-msgstr "Administración de"
+msgstr "Administración"
 
 #: ../admin/menu_adm.php:38
 msgid "AlternC configuration"
@@ -2383,16 +2381,13 @@ msgid "Users"
 msgstr "Usuarios"
 
 #: ../admin/menu_sta2.php:32
-#, fuzzy
 msgid "Web statistics"
 msgstr "Estadísticas Web"
 
 #: ../admin/dom_subedit.php:42
-#, fuzzy
 msgid "Edition du sous-domaine"
-msgstr "Modificar dominio %s"
+msgstr "Edición del sub-dominio"
 
 #: ../admin/dom_subedit.php:53
-#, fuzzy
 msgid "Sous-domaine"
-msgstr "Subdominios"
+msgstr "Sub-dominio"
