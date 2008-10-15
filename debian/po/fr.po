@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AlternC 0.9.5\n"
 "Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
-"POT-Creation-Date: 2008-10-04 11:47-0400\n"
+"POT-Creation-Date: 2008-10-14 19:57-0400\n"
 "PO-Revision-Date: 2006-04-26 11:16+0200\n"
 "Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
 "Language-Team: Team AlternC <team@alternc.org>\n"
@@ -393,44 +393,15 @@ msgstr ""
 "Adresse IP (ou ip/prefixe) du(des) serveur(s) dont qui pourront pinguer et "
 "accéder au status apache (pour le monitoring de serveur). Facultatif."
 
-#. Type: string
-#. Description
-#: ../templates:18001
-msgid "trusted servers for bind:"
-msgstr "serveurs de confiance pour bind : "
-
-#. Type: string
-#. Description
-#: ../templates:18001
-msgid ""
-"IP address or prefix of trusted machines for DNS transfers, delimited by "
-"';', optional."
-msgstr ""
-"Adresse IP ou classe d'IP des machines autorisées à utiliser le serveur DNS, "
-"séparées par ';', facultatif."
-
-#. Type: string
-#. Description
-#: ../templates:19001
-msgid "SMTP authorized networks:"
-msgstr "réseaux autorisés en SMTP : "
-
-#. Type: string
-#. Description
-#: ../templates:19001
-msgid "IP addresses of the networks authorized in SMTP, space-delimited."
-msgstr ""
-"Adresses ip des reseaux autorisés en SMTP (ou ip/prefixe) séparés par espace."
-
 #. Type: note
 #. Description
-#: ../templates:20001
+#: ../templates:18001
 msgid "POP Before SMTP deprecated"
 msgstr "POP Before SMTP déprécié"
 
 #. Type: note
 #. Description
-#: ../templates:20001
+#: ../templates:18001
 msgid ""
 "AlternC doesn't automatically configure the pop-before-smtp package anymore, "
 "since it is correctly configured for SASL authentification these days. If "
@@ -442,13 +413,13 @@ msgstr ""
 
 #. Type: note
 #. Description
-#: ../templates:20001
+#: ../templates:18001
 msgid "# For Courier-POP3 and Courier-IMAP:"
 msgstr "# For Courier-POP3 and Courier-IMAP:"
 
 #. Type: note
 #. Description
-#: ../templates:20001
+#: ../templates:18001
 msgid ""
 "in the /etc/pop-before-smtp/pop-before-smtp.conf and uncomment it. hash:/var/"
 "lib/pop-before-smtp/hosts must also be added to the mynetworks directive of /"
@@ -460,25 +431,25 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../templates:21001
+#: ../templates:19001
 msgid "Should AlternC remove all databases (/var/lib/mysql/) ?"
 msgstr "Les bases de données doivent elles être supprimés (/var/lib/mysql) ?"
 
 #. Type: boolean
 #. Description
-#: ../templates:21001
+#: ../templates:19001
 msgid "All users databases will be trashed"
 msgstr "Toutes les bases de données des utilisateurs seront perdues"
 
 #. Type: boolean
 #. Description
-#: ../templates:22001
+#: ../templates:20001
 msgid "Should AlternC remove users datas ?"
 msgstr "Les données des utilisateurs doivent elles êtres supprimés ?"
 
 #. Type: boolean
 #. Description
-#: ../templates:22001
+#: ../templates:20001
 msgid "The files and apache redirections created by users will be trashed"
 msgstr ""
 "Les fichiers et les redirections d'apache créés par les utilisateurs seront "
@@ -486,28 +457,46 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../templates:23001
+#: ../templates:21001
 msgid "Should AlternC remove bind zones ?"
 msgstr "Les zones de bind doivent elles être supprimées ?"
 
 #. Type: boolean
 #. Description
-#: ../templates:23001
+#: ../templates:21001
 msgid "It will delete all bind zones created by AlternC"
 msgstr "Cela supprimera toutes les zone de bind créées par AlternC"
 
 #. Type: boolean
 #. Description
-#: ../templates:24001
+#: ../templates:22001
 msgid "Should AlternC remove bind mailboxes ?"
 msgstr "Les boites mails doivent elles être supprimées ?"
 
 #. Type: boolean
 #. Description
-#: ../templates:24001
+#: ../templates:22001
 msgid "If you accept all users e-mails will be deleted"
 msgstr ""
 "Si vous acceptez, toutes les e-mails des utilisateurs seront supprimées"
+
+#~ msgid "trusted servers for bind:"
+#~ msgstr "serveurs de confiance pour bind : "
+
+#~ msgid ""
+#~ "IP address or prefix of trusted machines for DNS transfers, delimited by "
+#~ "';', optional."
+#~ msgstr ""
+#~ "Adresse IP ou classe d'IP des machines autorisées à utiliser le serveur "
+#~ "DNS, séparées par ';', facultatif."
+
+#~ msgid "SMTP authorized networks:"
+#~ msgstr "réseaux autorisés en SMTP : "
+
+#~ msgid "IP addresses of the networks authorized in SMTP, space-delimited."
+#~ msgstr ""
+#~ "Adresses ip des reseaux autorisés en SMTP (ou ip/prefixe) séparés par "
+#~ "espace."
 
 #~ msgid ""
 #~ "If you still want to proceed with this installation, choose YES here, "
