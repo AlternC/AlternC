@@ -43,6 +43,18 @@ case "$1" in
     # ajoute l'user postfix au groupe sasl
     adduser --quiet postfix sasl
 
+    db_get "alternc-slave/mergelog-key"
+    if [ "X$ret" != "" ]; then
+        echo "Creating alternc-mergelog account"
+        adduser --quiet --system --home /var/run/alternc-mergelog --shell /bin/false --ingroup adm alternc-mergelog
+        if [ ! grep -q "$ret" /var/run/alternc-mergelog/.ssh/authorized_keys ]; then
+            mkdir -p /var/run/alternc-mergelog/.ssh
+            echo "$ret" >> /var/run/alternc-mergelog/.ssh/authorized_keys
+            chown -R alternc-mergelog:adm /var/run/alternc-mergelog/.ssh
+            chmod -R og-rwx /var/run/alternc-mergelog/.ssh
+        fi
+    fi
+
     # corriger les permissions du chroot
     mkdir -p /var/spool/postfix/var/run/saslauthd || true
     dpkg-statoverride --quiet --update --add root sasl 710 /var/spool/postfix/var/run/saslauthd  || true
