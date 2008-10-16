@@ -47,7 +47,7 @@ case "$1" in
     if [ "X$ret" != "" ]; then
         echo "Creating alternc-mergelog account"
         adduser --quiet --system --home /var/run/alternc-mergelog --shell /bin/false --ingroup adm alternc-mergelog
-        if [ ! grep -q "$ret" /var/run/alternc-mergelog/.ssh/authorized_keys ]; then
+        if ! grep -q "$ret" /var/run/alternc-mergelog/.ssh/authorized_keys ; then
             mkdir -p /var/run/alternc-mergelog/.ssh
             echo "$ret" >> /var/run/alternc-mergelog/.ssh/authorized_keys
             chown -R alternc-mergelog:adm /var/run/alternc-mergelog/.ssh
