@@ -44,12 +44,14 @@ case "$1" in
     adduser --quiet postfix sasl
 
     db_get "alternc-slave/mergelog-key"
-    if [ "X$ret" != "" ]; then
+    key="$RET"
+    if [ "X$key" != "" ]; then
         echo "Creating alternc-mergelog account"
         adduser --quiet --system --home /var/run/alternc-mergelog --shell /bin/false --ingroup adm alternc-mergelog
-        if ! grep -q "$ret" /var/run/alternc-mergelog/.ssh/authorized_keys ; then
+        if ! grep -q "$key" /var/run/alternc-mergelog/.ssh/authorized_keys ; then
+            echo "Authorizing requested key to access alternc-mergelog account"
             mkdir -p /var/run/alternc-mergelog/.ssh
-            echo "$ret" >> /var/run/alternc-mergelog/.ssh/authorized_keys
+            echo "$key" >> /var/run/alternc-mergelog/.ssh/authorized_keys
             chown -R alternc-mergelog:adm /var/run/alternc-mergelog/.ssh
             chmod -R og-rwx /var/run/alternc-mergelog/.ssh
         fi
