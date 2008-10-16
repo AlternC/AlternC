@@ -179,7 +179,6 @@ _Description: Should AlternC remove bind mailboxes ?
 Template:alternc-slave/mergelog-key
 Type: string
 _Description: SSH key of the mergelog server:
-
  The slave nodes can be configured to accept connexions from a central
  server (the mergelog server) that will merge the apache logs from all
  the slave servers.
