@@ -63,8 +63,8 @@ if ($error) {
 <?php  	}
 $mem->show_help("ftp_list");
 ?></div>
-<div class="delete"><input type="submit" name="submit" class="inb" value="<?php __("Delete checked accounts"); ?>" /></div>
 <form method="post" action="ftp_del.php">
+<div class="delete"><input type="submit" name="submit" class="inb" value="<?php __("Delete checked accounts"); ?>" /></div>
 
 <?php
 reset($r);
