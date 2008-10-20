@@ -3,7 +3,6 @@ etc/alternc/templates
 etc/bind
 etc/bind/templates
 etc/courier
-etc/cron.d
 etc/phpmyadmin
 etc/postfix
 etc/squirrelmail
