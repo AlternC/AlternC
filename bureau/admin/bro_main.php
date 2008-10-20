@@ -500,7 +500,7 @@ else {
 
 
      if ($id=$ftp->is_ftp($R)) {
-echo _("There is an ftp account in this folder")." <a href=\"ftp_edit?id=".urlencode($id)."\">"._("Click here to edit this ftp account.")."</a><br />";
+echo _("There is an ftp account in this folder")." <a href=\"ftp_edit.php?id=".urlencode($id)."\">"._("Click here to edit this ftp account.")."</a><br />";
 }
 else {
 echo "<a href=\"ftp_add.php?dir=".urlencode($R)."\">"._("Click here to create an ftp account in this folder.")."</a><br />";
