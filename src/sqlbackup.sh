@@ -270,6 +270,7 @@ read_parameters() {
             -t|--type) shift; TYPE="$1";;
             -n|--name-methode) shift; SQLBACKUP_TYPE="$1";;
             -a|--allow-ovewrite) shift; SQLBACKUP_OVERWRITE="$1" ;;
+            daily|weekly); TYPE="$1";; # backwards compatibility
             *)
                 error "invalid option -- $1" 
                 error "Try \`sqlbackup.sh --help' for more information."
