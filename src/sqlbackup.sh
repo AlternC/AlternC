@@ -245,10 +245,12 @@ function dobck() {
        if [ "$DO_BACKUP" == "YES" ]; then
            command="mysqldump --defaults-file=/etc/alternc/my.cnf --add-drop-table --allow-keywords --quote-names --force --quick --add-locks --lock-tables --extended-insert $db"
            if [ "$compressed" -eq 1 ] ; then
-               $command = "$command | gzip -c"
+               debug "$command > ${target_dir}/${name_backup_file}.sql${ext}"
+               $command | gzip -c > "${target_dir}/${name_backup_file}.sql${ext}"
+           else
+               debug "$command > ${target_dir}/${name_backup_file}.sql${ext}"
+               $command > "${target_dir}/${name_backup_file}.sql${ext}"
            fi
-           debug "$command > ${target_dir}/${name_backup_file}.sql${ext}"
-           $command > "${target_dir}/${name_backup_file}.sql${ext}"
         fi
 
         IFS="	"
