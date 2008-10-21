@@ -314,7 +314,8 @@ class m_dom {
       $serveur="whois.dns.be";
       break;
     case "eu":
-      $serveur="195.234.53.193";
+      # source: http://www.iana.org/domains/root/db/eu.html
+      $serveur="whois.eu";
       break;
     case "info":
       $serveur="whois.afilias.net";
