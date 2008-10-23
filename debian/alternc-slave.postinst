@@ -179,7 +179,7 @@ EOF
     db_stop
 
     echo "running alternc.install"
-    alternc.install
+    alternc.install -s
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

@@ -283,6 +283,7 @@ etc/alternc/apache2-ssl.conf -text
 etc/alternc/apache2.conf -text
 etc/alternc/menulist.txt -text
 etc/alternc/phpmyadmin.inc.php -text
+etc/alternc/postfix-slave.cf -text
 etc/alternc/postfix.cf -text
 etc/alternc/templates/alternc/bureau.conf -text
 etc/alternc/templates/bind/automatic.conf -text
@@ -300,6 +301,7 @@ etc/alternc/templates/postfix/ca.der -text
 etc/alternc/templates/postfix/myalias.cf -text
 etc/alternc/templates/postfix/mydomain.cf -text
 etc/alternc/templates/postfix/mygid.cf -text
+etc/alternc/templates/postfix/myrelay.cf -text
 etc/alternc/templates/postfix/myvirtual.cf -text
 etc/alternc/templates/postfix/sasl/smtpd.conf -text
 etc/alternc/templates/proftpd/modules.conf -text

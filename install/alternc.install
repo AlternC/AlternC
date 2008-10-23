@@ -10,6 +10,24 @@
 
 set -e 
 
+opts=`getopt "sf" $*`
+if [ $? -ne 0 ]; then
+    echo invalid syntax: $?
+fi
+set -- $opts
+for i; do
+    case "$i" in
+        -f|--force)
+            force=1; shift;;
+        -s|--slave)
+            slave=1; shift;;
+        --)
+            break;;
+        *)
+            echo "unknown option $i"; shift;;
+    esac
+done
+
 . /usr/lib/alternc/functions.sh
 
 #######################################################################
@@ -32,7 +50,7 @@ if [ -e /etc/courier/authdaemonrc ]; then
                   etc/courier/authmysqlrc"
 fi
 if [ -d /etc/postfix ]; then
-    CONFIG_FILES="$CONFIG_FILES etc/postfix/myalias.cf
+    CONFIG_FILES="$CONFIG_FILES etc/postfix/myalias.cf etc/postfix/myrelay.cf
                   etc/postfix/mydomain.cf etc/postfix/mygid.cf
                   etc/postfix/myvirtual.cf etc/postfix/sasl/smtpd.conf"
 fi
@@ -56,12 +74,13 @@ if [ -f "$INSTALLED_CONFIG_TAR" ]; then
     CHANGED="`env LANG=C tar -zdf "$INSTALLED_CONFIG_TAR" -C / 2> /dev/null | 
               grep -v 'postfix/main.cf' | grep -v 'Uid differs'|grep -v 'Gid differs'  |grep -v 'Mode differs' | 
               sed -e 's/^\([^:]*\).*/    \1/' | sort -u`"
+    # " shutup emacs
     if [ ! -z "$CHANGED" ]; then
         echo "The following configuration files has changed since last AlternC"
         echo "installation :"
         echo "$CHANGED"
         echo ""
-        if [ "$1" = "force" ]; then
+        if [ "$force" = "1" ]; then
             echo "Replacing them as you requested."
         else
             echo "These configuration files should normally be modified by"
@@ -246,24 +265,21 @@ for file in body_checks header_checks; do
 done
 
 # Attribute the correct rights to critical postfix files
-if [ -e /etc/postfix/myalias.cf -o -e /etc/postfix/mydomain.cf -o -e /etc/postfix/mygid.cf -o -e /etc/postfix/myvirtual.cf ]; then
+if [ -e /etc/postfix/myalias.cf -o -e /etc/postfix/mydomain.cf -o -e /etc/postfix/mygid.cf -o -e /etc/postfix/myvirtual.cf -o -e /etc/postfix/myrelay.cf ]; then
     chown root:postfix /etc/postfix/my*
     chmod 640 /etc/postfix/my*
 fi
 
-# configure postfix appropriatly for our needs"
+# configure postfix appropriatly for our needs
+if [ "$slave" = "1" ]; then
+    postfix_conf=/etc/alternc/postfix-slave.cf
+else
+    postfix_conf=/etc/alternc/postfix.cf
+fi
 while read line
 do
    postconf -e "$line"
-done < /etc/alternc/postfix.cf
-
-while read line
-do
-   postconf -e "$line"
-done <<EOF
-myhostname = $FQDN
-myorigin = $FQDN
-EOF
+done < $postfix_conf
 
 if [ -e /etc/courier/authmysqlrc ] ; then
     chown root:root /etc/courier/authmysqlrc
