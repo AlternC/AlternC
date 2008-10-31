@@ -4,6 +4,8 @@ alternc (0.9.10) stable; urgency=low
     facilitate sharing sessions between NFS-mounted nodes. This overrides
     the default /var/lib/php5 and adds a cronjob that replicates the
     manual session garbage collection the PHP package is doing.
+    
+    Note that existing sessions are not migrated.
 
  -- Antoine Beaupré <anarcat@koumbit.org>  Fri, 31 Oct 2008 13:40:18 -0400
 
