@@ -210,6 +210,7 @@ var/alternc/mail/y
 var/alternc/mail/z
 var/alternc/mla
 var/alternc/redir
+var/alternc/sessions
 var/alternc/tmp
 var/backups/alternc
 var/log/alternc

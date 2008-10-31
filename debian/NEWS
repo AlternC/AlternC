@@ -1,3 +1,12 @@
+alternc (0.9.10) stable; urgency=low
+
+  * I have moved back the PHP sessions in the /var/alternc directory to
+    facilitate sharing sessions between NFS-mounted nodes. This overrides
+    the default /var/lib/php5 and adds a cronjob that replicates the
+    manual session garbage collection the PHP package is doing.
+
+ -- Antoine Beaupré <anarcat@koumbit.org>  Fri, 31 Oct 2008 13:40:18 -0400
+
 alternc (0.9.9) stable; urgency=low
 
     Starting with 0.9.9, we do not overwrite Postfix's main.cf directly

@@ -55,6 +55,7 @@ install: build
 	chmod 755 debian/alternc/etc/alternc
 	chmod 644 debian/alternc/etc/alternc/phpmyadmin.inc.php
 	chown -R root:www-data debian/alternc/var/alternc/bureau
+	chmod 1733 debian/alternc/var/alternc/sessions
 	chmod -R 644 debian/alternc/var/alternc/bureau
 	chmod -R a+X debian/alternc/var/alternc/bureau
 	chown -R www-data:www-data debian/alternc/var/alternc/dns debian/alternc/var/alternc/html debian/alternc/var/run/alternc debian/alternc/var/log/alternc debian/alternc/var/alternc/tmp

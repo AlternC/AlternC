@@ -198,6 +198,7 @@ tar -zcf "$INSTALLED_CONFIG_TAR" -C / $CONFIG_FILES
 #
 
 php="`ls /usr/lib/apache*/*/*php*.so | sed -e 's/^.*libphp\(.\)\.so$/php\1/' | tail -1`"
+ln -fs /etc/alternc/alternc.ini /etc/$php/conf.d/alternc.ini || true
 if [ -x /usr/sbin/apache ]
 then
     # Enable vhost_alias apache module at the right place (ie: BEFORE mod_alias)
