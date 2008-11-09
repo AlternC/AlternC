@@ -158,7 +158,7 @@ function dobck() {
             
               if [ -e "${target_dir}/${db}.sql.${next_i}${ext}" ]; then
                 mv -f "${target_dir}/${db}.sql.${next_i}${ext}" \
-                      "${target_dir}/${db}.sql.${i}${ext}" 2>/dev/null
+                      "${target_dir}/${db}.sql.${i}${ext}" 2>/dev/null || true
               fi
               i=$next_i # loop should end here
             done
@@ -166,7 +166,7 @@ function dobck() {
             # move most recently backup with a rotate file name
             if [ -e "${target_dir}/${db}.sql${ext}" ]; then
               mv -f "${target_dir}/${db}.sql${ext}" \
-                    "${target_dir}/${db}.sql.${i}${ext}" 2>/dev/null
+                    "${target_dir}/${db}.sql.${i}${ext}" 2>/dev/null || true
             fi
 
             name_backup_file="${db}" 
@@ -192,7 +192,7 @@ function dobck() {
             # -exec rm -f {} \;      : remove all files found
             # 
             debug "find ${target_dir} -name \"${db}.*sql${ext}\" -maxdepth 1 -mtime +$last2del -exec rm -f {} \; -ls"
-            find ${target_dir} -name "${db}.*sql${ext}" -maxdepth 1 -mtime +${last2del} -exec rm -f {} \; -ls
+            find ${target_dir} -name "${db}.*sql${ext}" -maxdepth 1 -mtime +${last2del} -exec rm -f {} \; -ls || true
             
             # set the name of the backup file with the date of the day
             name_backup_file="${db}.${DATE}"
@@ -246,10 +246,10 @@ function dobck() {
            command="mysqldump --defaults-file=/etc/alternc/my.cnf --add-drop-table --allow-keywords --quote-names --force --quick --add-locks --lock-tables --extended-insert $db"
            if [ "$compressed" -eq 1 ] ; then
                debug "$command > ${target_dir}/${name_backup_file}.sql${ext}"
-               $command | gzip -c > "${target_dir}/${name_backup_file}.sql${ext}"
+               $command | gzip -c > "${target_dir}/${name_backup_file}.sql${ext}" || echo "backup failed for ${name_backup_file}"
            else
                debug "$command > ${target_dir}/${name_backup_file}.sql${ext}"
-               $command > "${target_dir}/${name_backup_file}.sql${ext}"
+               $command > "${target_dir}/${name_backup_file}.sql${ext}" || echo "backup failed for ${name_backup_file}"
            fi
         fi
 
