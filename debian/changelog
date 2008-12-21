@@ -3,9 +3,11 @@ alternc (0.9.10) unstable; urgency=low
   * bugfixes:
     * #1163: fix sqlbackup script call routine to retain backwards
       compatibility
+    * fix usage of ISO8859-15 charset (that may NOT be defined in locales...) 
+      and add it to the correct url (%%fqdn_lettre%%...)
   * major changes:
     * PHP sessions are now stored in /var/alternc/sessions
-
+	
  -- Antoine Beaupré <anarcat@koumbit.org>  Mon, 20 Oct 2008 16:12:28 -0400
 
 alternc (0.9.9) stable; urgency=low
