@@ -13,7 +13,7 @@ set -e
 
 override_d=/var/alternc/apacheconf
 override_f=${override_d}/override_php.conf
-extra_paths="/var/alternc/dns/redir:/usr/share/php/:/var/alternc/tmp/:/tmp/"
+extra_paths="/var/alternc/dns/redir:/usr/share/php/:/var/alternc/tmp:/tmp"
 
 . /etc/alternc/local.sh
 . /usr/lib/alternc/functions.sh
