@@ -323,6 +323,9 @@ class m_dom {
     case "ca":
       $serveur="whois.cira.ca";
       break;
+    case "cc":
+      $serveur="ccwhois.verisign-grs.com";
+      break;
     case "cx":
       $serveur="whois.nic.cx";
       break;
@@ -341,6 +344,9 @@ class m_dom {
       break;
     case "ws":
       $serveur="whois.samoanic.ws";
+      break;
+    case "re":
+      $serveur="whois.nic.re";
       break;
     default:
       $err->raise("dom",7);
@@ -364,6 +370,7 @@ class m_dom {
 	case "info":
 	case "biz":
 	case "name":
+	case "cc":
 	  if (ereg("Name Server:", $ligne)) {
 	    $found = true;
 	    $tmp=strtolower(ereg_replace(chr(10), "",ereg_replace(chr(13),"",ereg_replace(" ","", ereg_replace("Name Server:","", $ligne)))));
@@ -403,6 +410,7 @@ class m_dom {
           }
           break;
 	case "fr":
+	case "re":
           if (ereg("nserver:", $ligne)) {
             $found=true;
             $tmp=strtolower(preg_replace("/nserver:\s*([^\s]*)\s*.*$/","\\1", $ligne));
