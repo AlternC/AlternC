@@ -7,7 +7,9 @@ alternc (0.9.10) unstable; urgency=low
       and add it to the correct url (%%fqdn_lettre%%...)
   * major changes:
     * PHP sessions are now stored in /var/alternc/sessions
-	
+  * new features:
+    * add support for .cc and .re domains.
+
  -- Antoine Beaupré <anarcat@koumbit.org>  Mon, 20 Oct 2008 16:12:28 -0400
 
 alternc (0.9.9) stable; urgency=low
