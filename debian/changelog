@@ -9,6 +9,10 @@ alternc (0.9.10) unstable; urgency=low
     * PHP sessions are now stored in /var/alternc/sessions
   * new features:
     * add support for .cc and .re domains.
+    * when creating new accounts, "www, stats, backups" directories are
+      automatically created in their accoutn.
+    * when adding a new domain to an account, a directory "www/example.net"
+      is automatically created and the domain points to it instead of /.
 
  -- Antoine Beaupré <anarcat@koumbit.org>  Mon, 20 Oct 2008 16:12:28 -0400
 
