@@ -256,9 +256,25 @@ class m_dom {
     if ($noerase) $noerase="1"; else $noerase="0";
     $db->query("insert into domaines (compte,domaine,mx,gesdns,gesmx,noerase) values ('$cuid','$domain','$L_MX','$dns','$mx','$noerase');");
     $db->query("insert into domaines_standby (compte,domaine,mx,gesdns,gesmx,action) values ('$cuid','$domain','$L_MX','$dns','$mx',0);"); // INSERT
+
+    // Creation du repertoire dans www
+    global $bro;
+    $dest_root = $bro->get_userid_root($cuid);
+    $dest_www = $dest_root . '/www';
+    $dest_www_domain = $dest_www . '/' . $domain;
+
+    if (! is_dir($dest_www)) {
+    	echo "A: $dest_www";
+      mkdir($dest_www);
+    }
+
+    if (! is_dir($dest_www_domain)) {
+      mkdir($dest_www_domain);
+    }
+
     // Creation des 3 sous-domaines par défaut : Vide, www et mail
     $this->set_sub_domain($domain, '',     $this->type_url,     'add', 'http://www.'.$domain);
-    $this->set_sub_domain($domain, 'www',  $this->type_local,   'add', '/');
+    $this->set_sub_domain($domain, 'www',  $this->type_local,   'add', '/www/' . $domain);
     $this->set_sub_domain($domain, 'mail', $this->type_webmail, 'add', '');
     // DEPENDANCE :
     // Lancement de add_dom sur les classes domain_sensitive :
