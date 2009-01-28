@@ -37,7 +37,9 @@ if (!$admin->enabled) {
 	exit();
 }
 
-$r=$admin->get_list($_REQUEST['show'] == 'all' ? 1 : 0);
+$creator_id = intval($_REQUEST['creator']);
+
+$r=$admin->get_list($_REQUEST['show'] == 'all' ? 1 : 0, $creator_id);
 
 include("head.php");
 ?>
@@ -53,6 +55,19 @@ include("head.php");
 <?php __("Here is the list of hosted members"); ?>
 <?php if($_REQUEST['show'] != 'all') {
   echo '<br /><a href="adm_list.php?show=all">' . _('List all the accounts') . '</a>';
+
+  if ($cuid == 2000) {
+    $list_creators = $admin->get_creator_list();
+    $infos_creators = array();
+
+    foreach ($list_creators as $key => $val) {
+      $infos_creators[] = '<a href="adm_list.php?show_all&creator=' . $val['uid'] . '">' . $val['login'] . '</a>';
+    }
+
+    if (count($infos_creators)) {
+      echo ' (' . implode(', ', $infos_creators) . ')';
+    }
+  }
 } else {
   echo '<br /><a href="adm_list.php">' . _('List only my accounts') . '</a>';
 } ?>

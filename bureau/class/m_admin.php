@@ -114,6 +114,49 @@ class m_admin {
     return $c;
   }
 
+  /**
+   * Returns the known information about a specific hosted account
+   * Similar to get_list() but for creators/resellers.
+   */
+  function get_creator($uid) {
+    global $err,$db;
+    //    $err->log("admin","get",$uid);
+    if (!$this->enabled) {
+      $err->raise("admin",1);
+      return false;
+    }
+
+    $db->query("SELECT m.*, parent.login as parentlogin FROM membres as m LEFT JOIN membres as parent ON (parent.uid = m.creator) WHERE m.uid='$uid';");
+
+    if ($db->num_rows()) {
+      $db->next_record();
+      $c=$db->Record;
+    } else {
+      $err->raise("admin",2);
+      return false;
+    }
+
+    $db->query("SELECT * FROM local WHERE uid='$uid';");
+    if ($db->num_rows()) {
+      $db->next_record();
+      reset($db->Record);
+      while (list($key,$val)=each($db->Record)) {
+	$c[$key]=$val;
+      }
+    }
+
+    $db->query("SELECT count(*) as nbcreated FROM membres WHERE creator='$uid';");
+    if ($db->num_rows()) {
+      $db->next_record();
+      reset($db->Record);
+      while (list($key,$val)=each($db->Record)) {
+	$c[$key]=$val;
+      }
+    }
+
+    return $c;
+  }
+
   /* ----------------------------------------------------------------- */
   /** 
    * @return TRUE if there's only ONE admin account
@@ -146,7 +189,7 @@ class m_admin {
    *  produite.
    * 
    */
-  function get_list($all=0) {
+  function get_list($all=0,$creator=0) {
     // PATCHBEN pour ne voir que les comptes que l'on a créé (sauf admin)
     global $err,$mem,$cuid;
     $err->log("admin","get_list");
@@ -155,7 +198,10 @@ class m_admin {
       return false;
     }
     $db=new DB_System();
-    if ($mem->user[uid]==2000 || $all) {
+    if ($mem->user['uid']==2000 && $creator) {
+      // Limit listing to a specific reseller
+      $db->query("SELECT uid FROM membres WHERE creator='".$creator."' ORDER BY login;");
+    } elseif ($mem->user['uid']==2000 || $all) {
       $db->query("SELECT uid FROM membres ORDER BY login;");
     } else {
       $db->query("SELECT uid FROM membres WHERE creator='".$cuid."' ORDER BY login;");
@@ -163,6 +209,38 @@ class m_admin {
     if ($db->num_rows()) {
       while ($db->next_record()) {
 	$c[]=$this->get($db->f("uid"));
+      }
+      return $c;
+    } else {
+      return false;
+    }
+  }
+
+  /**
+   * Returns the known information about resellers (uid, login, number of accounts)
+   * May only be called by the admin account (2000)
+   */
+  function get_creator_list() {
+    global $err,$mem,$cuid;
+
+    $err->log("admin","get_reseller_list");
+    if (!$this->enabled) {
+      $err->raise("admin",1);
+      return false;
+    }
+
+    if ($cuid != 2000) {
+      $err->raise("admin",1);
+      return false;
+    }
+
+    $db=new DB_System();
+
+    $db->query("SELECT distinct creator FROM membres WHERE creator <> 0 ORDER BY creator asc;");
+
+    if ($db->num_rows()) {
+      while ($db->next_record()) {
+	$c[]=$this->get_creator($db->f("creator"));
       }
       return $c;
     } else {
