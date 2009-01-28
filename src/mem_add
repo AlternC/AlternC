@@ -27,9 +27,13 @@ $( = $);
 
 my $PTH="/var/alternc/html/".substr($name,0,1)."/".$name;
 
-mkdir($PTH);
-chown(33, $uid, $PTH);
-system("/bin/chmod 02770 '$PTH'");
+my @create_paths = ($PTH, $PTH . '/www', $PTH . '/stats', $PTH . '/backups');
+
+for my $p (@create_paths) {
+    mkdir($p);
+    chown(33, $uid, $p);
+    system("/bin/chmod 02770 '$p'");
+}
 
 0;
 
