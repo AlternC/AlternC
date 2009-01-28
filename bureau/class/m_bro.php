@@ -86,7 +86,7 @@ class m_bro {
    */
   function convertabsolute($dir,$strip=1) {
     global $mem;
-    $root="/var/alternc/html/".substr($mem->user["login"],0,1)."/".$mem->user["login"];
+    $root=$this->get_user_root($mem->user["login"]);
     // Sauvegarde du chemin de base.
     $root_alternc = $root ;
     // Passage du root en chemin réel (différent avec un lien)
@@ -113,6 +113,37 @@ class m_bro {
       return substr($dir,0,strlen($dir)-1);
     } else
       return $dir;
+  }
+
+  /** Retourne le chemin complet vers la racine du repertoire de l'utilisateur.
+   *  Returns the complete path to the root of the user's directory.
+   *
+   * @param string $login Username
+   * @return string Returns the complete path to the root of the user's directory.
+   */
+  function get_user_root($login) {
+    return "/var/alternc/html/".substr($login,0,1)."/".$login;
+  }
+
+  /** Retourne le chemin complet vers la racine du repertoire de l'utilisateur.
+   *  Returns the complete path to the root of the user's directory.
+   *
+   * @param string $uid User id.
+   * @return string Returns the complete path to the root of the user's directory.
+   */
+  function get_userid_root($uid) {
+    global $admin;
+
+    // FIXME [ML] Comment faire ca correctement?
+    // C'est utilise' dans class/m_dom.php quand un utilisateur ajoute un domaine dans son compte
+    // et nous devons savoir quel est le chemin complet vers la racine de son compte..
+
+    $old_enabled = $admin->enabled;
+    $admin->enabled = true;
+    $member = $admin->get($uid);
+    $admin->enabled = $old_enabled;
+
+    return $this->get_user_root($member['login']);
   }
 
   /* ----------------------------------------------------------------- */
