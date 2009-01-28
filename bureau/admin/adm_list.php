@@ -73,7 +73,17 @@ if (!is_array($r)) {
 if ($mem->user["admlist"]==0) { // Normal (large) mode
 ?>
 <table cellspacing="0" cellpadding="4">
-<tr><th colspan="5">&nbsp;</th><th><?php __("Username"); ?></th><th><?php echo _("Surname")." "._("First Name")."<br />("._("Email address").")"; ?></th><th><?php __("Account type") ?></th><th><?php __("Last login"); ?></th><th><?php __("Last fail"); ?></th><th><?php __("Last ip"); ?><th><?php __('Expiry') ?></th></tr>
+<tr>
+<th colspan="5">&nbsp;</th>
+<th><?php __("Username"); ?></th>
+<th><?php echo _("Surname")." "._("First Name")."<br />("._("Email address").")"; ?></th>
+<th><?php __("Created by") ?></th>
+<th><?php __("Account type") ?></th>
+<th><?php __("Last login"); ?></th>
+<th><?php __("Last fail"); ?></th>
+<th><?php __("Last ip"); ?></th>
+<th><?php __('Expiry') ?></th>
+</tr>
 <?php
 reset($r);
 
@@ -111,6 +121,7 @@ while (list($key,$val)=each($r))
 
 		<td <?php if ($val["su"]) echo "style=\"color: red\""; ?>><?php echo $val["login"] ?></td>
 		<td><a href="mailto:<?php echo $val["mail"]; ?>"><?php echo $val["nom"]." ".$val["prenom"] ?></a>&nbsp;</td>
+		<td><?php echo $val["parentlogin"] ?></td>
 		<td><?php echo $val["type"] ?></td>
 		<td><?php echo $val["lastlogin"] ?></td>
 		<td><?php echo $val["lastfail"] ?></td>

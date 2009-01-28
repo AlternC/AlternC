@@ -95,7 +95,7 @@ class m_admin {
       $err->raise("admin",1);
       return false;
     }
-    $db->query("SELECT * FROM membres WHERE uid='$uid';");
+    $db->query("SELECT m.*, parent.login as parentlogin FROM membres as m LEFT JOIN membres as parent ON (parent.uid = m.creator) WHERE m.uid='$uid';");
     if ($db->num_rows()) {
       $db->next_record();
       $c=$db->Record;
