@@ -405,7 +405,7 @@ EOF;
 				  '%canpass' => $db->Record['canpass'],
 				  '%type' => $db->Record['type'],
 				  '%notes' => $db->Record['notes']));
-       if (mail($dest,"New account on $L_HOSTING",$mail,"From: postmaster@$L_FQDN")) {
+       if (mail($dest,"New account (" . .$db->Record['login']." from ".$db->Record['parentlogin'].") on $L_HOSTING",$mail,"From: postmaster@$L_FQDN")) {
          echo "Successfully sent email to $dest";
        } else {
          echo "Cannot send email to $dest";
