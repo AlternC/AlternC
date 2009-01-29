@@ -75,6 +75,10 @@ if ($error) {
 	</td>
 </tr>
 <tr>
+	<th><label for="notes"><?php __("Notes"); ?></label></th>
+	<td><textarea name="notes" id="notes" class="int" cols="32" rows="5"><?php echo $notes; ?></textarea></td>
+</tr>
+<tr>
 	<th><label for="nom"><?php echo _("Surname")."</label> / <label for=\"prenom\">"._("First Name"); ?></label></th>
 	<td><input class="int" type="text" id="nom" name="nom" value="<?php echo $nom; ?>" size="20" maxlength="128" />&nbsp;/&nbsp;<input type="text" name="prenom" id="prenom" value="<?php echo $prenom; ?>" class="int" size="20" maxlength="128" /></td>
 </tr>

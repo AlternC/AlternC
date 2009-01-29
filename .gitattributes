@@ -321,6 +321,7 @@ install/reset_root.php -text
 install/upgrade_check.sh -text
 install/upgrades/0.9.1.sh -text
 install/upgrades/0.9.1.sql -text
+install/upgrades/0.9.10.sql -text
 install/upgrades/0.9.1_migrationldap.php -text
 install/upgrades/0.9.2.php -text
 install/upgrades/0.9.2.sql -text

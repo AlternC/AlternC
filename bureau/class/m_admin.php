@@ -302,7 +302,7 @@ class m_admin {
    * @return boolean Retourne FALSE si une erreur s'est produite, TRUE sinon.
    *
    */
-  function add_mem($login, $pass, $nom, $prenom, $mail, $canpass=1, $type='default', $duration=0) {
+  function add_mem($login, $pass, $nom, $prenom, $mail, $canpass=1, $type='default', $duration=0, $notes = "") {
     global $err,$quota,$classes,$cuid,$mem,$L_MYSQL_DATABASE,$L_MYSQL_LOGIN;
     $err->log("admin","add_mem",$login."/".$mail);
     if (!$this->enabled) {
@@ -347,7 +347,7 @@ class m_admin {
 	if ($uid<=2000) $uid=2000;
       }
       // on le créé ensuite dans system.membres et system.local
-      $db->query("INSERT INTO membres (uid,login,pass,mail,creator,canpass,type,created) VALUES ('$uid','$login','$pass','$mail','$cuid','$canpass', '$type', NOW());");
+      $db->query("INSERT INTO membres (uid,login,pass,mail,creator,canpass,type,created, notes) VALUES ('$uid','$login','$pass','$mail','$cuid','$canpass', '$type', NOW(), '$notes');");
       $db->query("INSERT INTO local(uid,nom,prenom) VALUES('$uid','$nom','$prenom');");
       $this->renew_update($uid, $duration);
       exec("/usr/lib/alternc/mem_add ".$login." ".$uid);
@@ -400,7 +400,7 @@ class m_admin {
    * @return boolean Retourne FALSE si une erreur s'est produite, TRUE sinon.
    * 
    */
-  function update_mem($uid, $mail, $nom, $prenom, $pass, $enabled, $canpass, $type='default', $duration=0) {
+  function update_mem($uid, $mail, $nom, $prenom, $pass, $enabled, $canpass, $type='default', $duration=0, $notes = "") {
     global $err,$db;
     global $cuid, $quota;
 
@@ -418,7 +418,7 @@ class m_admin {
       $ssq="";
     }
     if (($db->query("UPDATE local SET nom='$nom', prenom='$prenom' WHERE uid='$uid';"))
-	&&($db->query("UPDATE membres SET mail='$mail', canpass='$canpass', enabled='$enabled', type='$type' $ssq WHERE uid='$uid';"))){
+	&&($db->query("UPDATE membres SET mail='$mail', canpass='$canpass', enabled='$enabled', type='$type', notes='$notes' $ssq WHERE uid='$uid';"))){
       if($_POST['reset_quotas'] == "on")
 	$quota->addquotas();
       $this->renew_update($uid, $duration);

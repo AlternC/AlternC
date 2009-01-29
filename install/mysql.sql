@@ -224,6 +224,7 @@ CREATE TABLE IF NOT EXISTS membres (
   warnfailed tinyint(4) default '0',			# TODO L'utilisateur veut-il recevoir un mail quand on tente de se logguer sur son compte ?
   admlist tinyint(4) default '0',			# Mode d'affichage de la liste des membres pour les super admins
   type varchar(128) default 'default',
+  notes TEXT NOT NULL,
   created datetime default NULL, 
   renewed datetime default NULL, 
   duration int(4) default NULL,

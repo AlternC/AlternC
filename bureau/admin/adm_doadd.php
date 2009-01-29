@@ -41,7 +41,7 @@ if ($pass != $passconf) {
 	include("adm_add.php");
 	exit();
 }
-if (!($u=$admin->add_mem($login, $pass, $nom, $prenom, $nmail, $canpass, $type))) {
+if (!($u=$admin->add_mem($login, $pass, $nom, $prenom, $nmail, $canpass, $type, 0, $notes))) {
 	$error=$err->errstr();
 	include ("adm_add.php");
 	exit;

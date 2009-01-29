@@ -46,7 +46,7 @@ if ($pass != $passconf) {
   exit();
 }
 
-if (!$admin->update_mem($uid, $nmail, $nom, $prenom, $pass, $enabled, $canpass, $type, $duration)){
+if (!$admin->update_mem($uid, $nmail, $nom, $prenom, $pass, $enabled, $canpass, $type, $duration, $notes)){
   $error=$err->errstr();
   include("adm_edit.php");
 } else {
