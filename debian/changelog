@@ -1,4 +1,4 @@
-alternc (0.9.10) unstable; urgency=low
+alternc (0.9.10) stable; urgency=low
 
   * bugfixes:
     * #1163: fix sqlbackup script call routine to retain backwards
