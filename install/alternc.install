@@ -87,7 +87,7 @@ if [ -f "$INSTALLED_CONFIG_TAR" ]; then
             echo "changing the template in $TEMPLATE_DIR and then calling"
             echo "$0 to perform the update."
             echo ""
-            echo "Please examine the situation closely and call '$0 force'"
+            echo "Please examine the situation closely and call '$0 --force'"
             echo "if you still want to actually overwrite these files."
             exit 1
         fi
