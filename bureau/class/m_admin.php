@@ -366,6 +366,55 @@ class m_admin {
     }
   }
 
+  /** 
+   * AlternC's standard function called when a user is created
+   *
+   * This sends an email if configured through the interface.
+   */
+  function alternc_add_member() {
+    global $cuid, $L_FQDN, $L_HOSTING;
+    $dest = variable_get('new_email');
+    if (!$dest) {
+      return false;
+    }
+    $db=new DB_System();
+    if (!$db->query("SELECT m.*, parent.login as parentlogin FROM membres m LEFT JOIN membres parent ON parent.uid=m.creator WHERE m.uid='$cuid'")) {
+      echo "query failed: " . $db->Error;
+      return false;
+    }
+    if ($db->next_record()) {
+      $mail = <<<EOF
+A new AlternC account was created on %fqdn by %creator.
+
+Account details
+---------------
+
+login: %login (%uid)
+email: %mail
+createor: %creator (%cuid)
+can change password: %canpass
+type: %type
+notes: %notes
+EOF;
+       $mail = strtr($mail, array('%fqdn' => $L_FQDN,
+       				  '%creator' => $db->Record['parentlogin'],
+				  '%uid' => $db->Record['uid'],
+				  '%login' => $db->Record['login'],
+				  '%mail' => $db->Record['mail'],
+				  '%cuid' => $db->Record['creator'],
+				  '%canpass' => $db->Record['canpass'],
+				  '%type' => $db->Record['type'],
+				  '%notes' => $db->Record['notes']));
+       if (mail($dest,"New account on $L_HOSTING",$mail,"From: postmaster@$L_FQDN")) {
+         echo "Successfully sent email to $dest";
+       } else {
+         echo "Cannot send email to $dest";
+       } 
+    } else {
+      echo "query failed: " . $db->Error;
+    }
+  }
+
   /* ----------------------------------------------------------------- */
   /**
    * Modifies an account

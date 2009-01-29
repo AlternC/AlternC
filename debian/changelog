@@ -14,8 +14,10 @@ alternc (0.9.10) unstable; urgency=low
     * when adding a new domain to an account, a directory "www/example.net"
       is automatically created and the domain points to it instead of /.
     * add new field to member form: 'notes' which is just a text field
+    * send an email on new account creation. the actual email needs to be
+      configured through the AlternC variables for this to work.
 
- -- Antoine Beaupré <anarcat@koumbit.org>  Mon, 20 Oct 2008 16:12:28 -0400
+ -- Antoine Beaupré <anarcat@koumbit.org>  Wed, 28 Jan 2009 19:52:46 -0500
 
 alternc (0.9.9) stable; urgency=low
 

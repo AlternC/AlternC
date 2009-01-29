@@ -423,6 +423,10 @@ If this is set to 0 or a "false" string, it will be ignored.');
 INSERT IGNORE INTO `variable` (name, value, comment) VALUES ('rss_feed', 0,
 'This is an RSS feed that will be displayed on the users homepages when
 they log in. Set this to 0 or a "false" string to ignore.');
+
+INSERT IGNORE INTO `variable` (name, value, comment) VALUES ('new_email', 0,
+'An email will be sent to this address when new accounts are created if set.');
+
 --
 -- Table structure for table `dbusers`
 --
