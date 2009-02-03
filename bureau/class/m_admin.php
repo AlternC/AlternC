@@ -217,8 +217,10 @@ class m_admin {
   }
 
   /**
-   * Returns the known information about resellers (uid, login, number of accounts)
+   * Returns an array with the known information about resellers (uid, login, number of accounts)
+   * Does not include account 2000 in the list.
    * May only be called by the admin account (2000)
+   * If there are no reseller accounts, returns an empty array.
    */
   function get_creator_list() {
     global $err,$mem,$cuid;
