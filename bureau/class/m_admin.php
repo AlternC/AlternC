@@ -223,6 +223,8 @@ class m_admin {
   function get_creator_list() {
     global $err,$mem,$cuid;
 
+    $creators = array();
+
     $err->log("admin","get_reseller_list");
     if (!$this->enabled) {
       $err->raise("admin",1);
@@ -231,7 +233,7 @@ class m_admin {
 
     if ($cuid != 2000) {
       $err->raise("admin",1);
-      return false;
+      return $creators;
     }
 
     $db=new DB_System();
@@ -240,12 +242,11 @@ class m_admin {
 
     if ($db->num_rows()) {
       while ($db->next_record()) {
-	$c[]=$this->get_creator($db->f("creator"));
+        $creators[] = $this->get_creator($db->f("creator"));
       }
-      return $c;
-    } else {
-      return false;
     }
+
+    return $creators;
   }
 
   /* ----------------------------------------------------------------- */
