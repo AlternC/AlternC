@@ -101,7 +101,7 @@ class m_dom {
   function enum_domains() {
     global $db,$err,$cuid;
     $err->log("dom","enum_domains");
-    $db->query("select * from domaines where compte='$cuid';");
+    $db->query("select * from domaines where compte='$cuid' order by domaine asc;");
     $this->domains=array();
     if ($db->num_rows()>0) {
       while ($db->next_record()) {
