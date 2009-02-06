@@ -61,7 +61,7 @@ class m_mail {
     global $db,$err,$cuid;
     $err->log("mail","enum_domains");
     if (!is_array($this->domains)) {
-      $db->query("select * from domaines where compte='$cuid' AND gesmx=1 order by domaines asc;");
+      $db->query("select * from domaines where compte='$cuid' AND gesmx=1 order by domaine asc;");
       $this->domains=array();
       if ($db->num_rows()>0) {
 	while ($db->next_record()) {
