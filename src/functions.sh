@@ -177,7 +177,7 @@ add_host() {
         value=`echo $value | sed -e 's#\([^/:]*://\)\?\([^/]*\)/*\(.*\)#\1\2/\3#'`
 
         (echo "RewriteEngine on"
-         echo "RewriteRule (.*) ${value}\$1 [R,L]"
+         echo "RewriteRule (.*) ${value}\$1 [R=permanent,L]"
         ) > "$htaccess_directory/.htaccess"
         ln -snf "$htaccess_directory" "$vhost_directory"
         ;;
