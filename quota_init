@@ -53,7 +53,7 @@ if (mysql_errno()) {
 while ($c=mysql_fetch_array($r)) {
 	$s=mysql_query("SELECT name FROM quotas WHERE uid='$c[uid]' AND name='$name';");
 	if (!mysql_num_rows($s)) {
-		mysql_query("INSERT INTO quotas (uid,name,total,used) VALUES ('$c[uid]','$name','$value',0);");
+		mysql_query("INSERT INTO quotas (uid,name,total) VALUES ('$c[uid]','$name','$value');");
 	}
 }
 
