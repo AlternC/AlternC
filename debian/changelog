@@ -16,6 +16,11 @@ alternc (0.9.10) stable; urgency=low
     * add new field to member form: 'notes' which is just a text field
     * send an email on new account creation. the actual email needs to be
       configured through the AlternC variables for this to work.
+  * API changes
+    * m_mysql->get_db_list() doesn't include size anymore because this
+      is a major performance hit on MySQL < 5.1.22 if there are > 1000
+      databases on the system. This speeds up the AlternC login by about
+      30 seconds on Koumbit.org.
 
  -- Antoine Beaupré <anarcat@koumbit.org>  Wed, 28 Jan 2009 19:52:46 -0500
 

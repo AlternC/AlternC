@@ -56,6 +56,7 @@ echo "<p>"._("help_sql_list_ok")."</p>";
 $col=1;
 for($i=0;$i<count($r);$i++) {
   $val=$r[$i];
+  $val['size'] = $mysql->get_db_size($val['db']);
  $col=3-$col;
 ?>
 	<tr  class="lst<?php echo $col; ?>">

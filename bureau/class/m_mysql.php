@@ -60,7 +60,6 @@ class m_mysql {
    * @return array returns an associative array as follow : <br>
    *  "db" => database name "bck" => backup mode for this db 
    *  "dir" => Backup folder.
-   *  "size" => Size of the database (in bytes)
    *  Returns FALSE if the user has no database.
    */
   function get_dblist() {
@@ -75,11 +74,6 @@ class m_mysql {
     while ($db->next_record()) {
       list($dbu,$dbn)=split_mysql_database_name($db->f("db"));
       $c[]=array("db"=>$db->f("db"), "name"=>$dbn,"bck"=>$db->f("bck_mode"), "dir"=>$db->f("bck_dir"), "login"=>$db->f("login"), "pass"=>$db->f("pass"));
-    }
-    
-    /* find the size of each database */
-    foreach ($c as $key => $val) {
-      $c[$key]['size'] = $this->get_db_size($c[$key]['db']);
     }
     return $c;
   }
