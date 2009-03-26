@@ -47,10 +47,16 @@ if (!is_array($q)) {
 		$col=3-$col;
 		echo "<tr class=\"lst$col\">";
 		echo "<td>";
-		if ($q[$key]["u"]==$q[$key]["t"]) echo "<font class=\"over\">";
+		if ($q[$key]["u"] >= $q[$key]["t"]) echo "<font class=\"over\">";
 		echo _($val);
-		if ($q[$key]["u"]==$q[$key]["t"]) echo "</font>";
-		echo "&nbsp;</td><td align=\"center\">".$q[$key]["u"]."&nbsp;</td><td align=\"center\">".$q[$key]["t"]."&nbsp;</td>";
+		if ($q[$key]["u"] >= $q[$key]["t"]) echo "</font>";
+
+		if ($val == 'quota_bw_web') {              
+			echo "&nbsp;</td><td align=\"center\">". format_size($q[$key]["u"]) ."&nbsp;</td><td align=\"center\">". format_size($q[$key]["t"]) ."&nbsp;</td>";
+		} else {
+			echo "&nbsp;</td><td align=\"center\">".$q[$key]["u"]."&nbsp;</td><td align=\"center\">".$q[$key]["t"]."&nbsp;</td>";
+		}
+
 		echo "</tr>";
 	}
 	echo "</table>";
