@@ -32,6 +32,7 @@ $q=$quota->getquota();
 
 $qlist=$quota->qlist();
 reset($qlist);
+$col=1;
 
 echo '<dt id="#quotas">' . _("Quotas") . '</dt>';
 echo '<dd><a href="quota_show.php">' . _("Show my quotas") . '</a></dd>';
@@ -51,10 +52,12 @@ while (list($key,$val)=each($qlist)) {
 
 		$usage_percent = (int) ($q[$key]["u"] / $q[$key]["t"] * 100);
 		$usage_color = ($q[$key]["u"] > $q[$key]["t"] ? '#f00' : '#0f0');
-		$usage_color = ((85 < $usage_percent && $usage_percent < 100) ? '#ff0' : $usage_color); // yellow if 85 < x < 100
+		$usage_color = ((85 < $usage_percent && $usage_percent < 100) ? '#ff0' : $usage_color); // yellow
+
+		$url = ($key == 'bw_web' ? 'stats_show_per_month.php' : 'quota_show.php');
 
 		echo "<dd>";
-		echo '<div><a href="quota_show.php">' . /* _($val) */  $key . ' ' . $usage_percent . '%' . ' (' . format_size($q[$key]["u"]) . ' / ' . format_size($q[$key]["t"]) . ')</a></div>';
+		echo '<div><a href="' . $url . '">' . /* _($val) */  $key . ' ' . $usage_percent . '%' . ' (' . format_size($q[$key]["u"]) . ' / ' . format_size($q[$key]["t"]) . ')</a></div>';
 		echo "</dd>";
 		echo "<dd>";
 		echo '<div style="width: 100%; background: #fff;">';
@@ -63,4 +66,5 @@ while (list($key,$val)=each($qlist)) {
 		echo "</dd>";
 	}
 }
+
 
