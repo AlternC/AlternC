@@ -27,5 +27,40 @@
  Purpose of file:
  ----------------------------------------------------------------------
 */
-?>
-<dd><a href="quota_show.php"><?php __("Show my quotas"); ?></a></dd>
+
+$q=$quota->getquota();
+
+$qlist=$quota->qlist();
+reset($qlist);
+
+echo '<dt id="#quotas">' . _("Quotas") . '</dt>';
+echo '<dd><a href="quota_show.php">' . _("Show my quotas") . '</a></dd>';
+
+if (!is_array($q)) {
+	// "No quotas for this account, or quotas currently unavailable
+	return;
+}
+
+while (list($key,$val)=each($qlist)) {
+	$col=3-$col;
+
+	if (($key == 'bw_web' || $key == 'web') && ($q[$key]["t"] > 0)) {
+		if ($key == 'web') {
+			$q[$key]["u"] = $q[$key]["u"] * 1024;
+		}
+
+		$usage_percent = (int) ($q[$key]["u"] / $q[$key]["t"] * 100);
+		$usage_color = ($q[$key]["u"] > $q[$key]["t"] ? '#f00' : '#0f0');
+		$usage_color = ((85 < $usage_percent && $usage_percent < 100) ? '#ff0' : $usage_color); // yellow if 85 < x < 100
+
+		echo "<dd>";
+		echo '<div><a href="quota_show.php">' . /* _($val) */  $key . ' ' . $usage_percent . '%' . ' (' . format_size($q[$key]["u"]) . ' / ' . format_size($q[$key]["t"]) . ')</a></div>';
+		echo "</dd>";
+		echo "<dd>";
+		echo '<div style="width: 100%; background: #fff;">';
+		echo '<div style="width: ' . ($usage_percent > 100 ? 100 : $usage_percent) . '%; background: ' . $usage_color . ';">&nbsp;</div>';
+		echo '</div>';
+		echo "</dd>";
+	}
+}
+

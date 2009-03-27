@@ -37,7 +37,7 @@ include("head.php");
 <div id="alternc-logo"><a href="http://alternc.org"><!-- img src="alternc.png" width="120" height="82" border="0" alt="AlternC" / -->AlternC</a> 
 <span><?php echo "$L_VERSION"; ?></span>
 </div>
-<h3>Menu <?php echo $mem->user["login"]; ?></h3>
+<h3><?php echo _("Menu") . ' ' . $mem->user["login"]; ?></h3>
 <dl id="menu-list">
 <?php
 $MENUPATH="/var/alternc/bureau/admin/";
@@ -50,6 +50,7 @@ while (!feof ($tt)) {
 }
 fclose($tt);
 ?>
+<dt id="session"><?php __("Session"); ?></dt>
 <dd><a href="mem_logout.php" target="_parent"><?php __("Logout"); ?></a></dd>
 </dl>
 
