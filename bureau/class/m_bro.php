@@ -158,14 +158,14 @@ class m_bro {
    * membre courant
    * @return array le tableau contenant les fichiers de $dir, et
    */
-  function filelist($dir="") {
+  function filelist($dir="", $showdirsize = false) {
     global $db,$cuid;
     $db->query("UPDATE browser SET lastdir='$dir' WHERE uid='$cuid';");
     $absolute=$this->convertabsolute($dir,0);
     if ($dir = @opendir($absolute)) {
       while (($file = readdir($dir)) !== false) {
 	if ($file!="." && $file!="..") {
-	  $c[]=array("name"=>$file, "size"=>$this->fsize($absolute."/".$file), "date"=>filemtime($absolute."/".$file), "type"=> (!is_dir($absolute."/".$file)) );
+	  $c[]=array("name"=>$file, "size"=>$this->fsize($absolute."/".$file, $showdirsize), "date"=>filemtime($absolute."/".$file), "type"=> (!is_dir($absolute."/".$file)) );
 	}
       }
       closedir($dir);
@@ -276,17 +276,48 @@ class m_bro {
   /* ----------------------------------------------------------------- */
   /** Retourne la taille du fichier $file
    * si $file est un dossier, retourne la taille de ce dossier et de tous
-   * ses sous dossiers.
+   * ses sous dossiers (mais seulement si l'utilisateur en a fait la demande).
    * @param string $file Fichier dont on souhaite connaitre la taille
    * @return integer Taille du fichier en octets.
    * TODO : create a du cache ...
    */
-  function fsize($file) {
+  function fsize($file, $showdirsize = false) {
     if (is_dir($file)) {
-      return "-";
+      if ($showdirsize) {
+        return $this->dirsize($file);
+      } else {
+        return "-";
+      }
     } else {
       return filesize($file);
     }
+  }
+
+  /* ----------------------------------------------------------------- */
+  /** Retourne la taille du repertoire $dir (fonction recursive)
+   * @param string $dir Repertoire dont on souhaite connaitre la taille
+   * @return integer Taille du repertoire en octets.
+   */
+  function dirsize($dir) {
+    $totalsize = 0;
+
+    if ($handle = opendir($dir)) {
+      while (false !== ($file = readdir($handle))) {
+        $nextpath = $dir . '/' . $file;
+
+	if ($file != '.' && $file != '..' && !is_link($nextpath)) {
+          if (is_dir($nextpath)) {
+            $totalsize += $this->dirsize($nextpath);
+          } elseif (is_file ($nextpath)) {
+            $totalsize += filesize($nextpath);
+          }
+        }
+      }
+
+      closedir($handle);
+    }
+
+    return $totalsize;
   }
 
   /* ----------------------------------------------------------------- */

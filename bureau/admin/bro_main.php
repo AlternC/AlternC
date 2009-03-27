@@ -126,7 +126,7 @@ if ($actextract) {
 }
 
 /* Creation de la liste des fichiers courants */
-$c=$bro->filelist($R);
+$c=$bro->filelist($R, $_REQUEST['showdirsize']);
 if ($c===false) $error=$err->errstr();
 
 include("head.php");
@@ -498,6 +498,7 @@ else {
 
      <?php
 
+echo '<a href="bro_main.php?R=' . $R . '&showdirsize=1">' . _("Show disk usage of directories (slow)") . '</a><br /><br />';
 
      if ($id=$ftp->is_ftp($R)) {
 echo _("There is an ftp account in this folder")." <a href=\"ftp_edit.php?id=".urlencode($id)."\">"._("Click here to edit this ftp account.")."</a><br />";
