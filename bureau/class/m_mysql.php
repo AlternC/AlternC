@@ -65,7 +65,7 @@ class m_mysql {
   function get_dblist() {
     global $db,$err,$bro,$cuid;
     $err->log("mysql","get_dblist");
-    $db->query("SELECT login,pass,db, bck_mode, bck_dir FROM db WHERE uid='$cuid';");
+    $db->query("SELECT login,pass,db, bck_mode, bck_dir FROM db WHERE uid='$cuid' ORDER BY db;");
     if (!$db->num_rows()) {
       $err->raise("mysql",11);
       return false;
