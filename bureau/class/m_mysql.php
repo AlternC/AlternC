@@ -145,7 +145,7 @@ class m_mysql {
       $lo=addslashes($db->f("login"));
       $pa=addslashes($db->f("pass"));
     }
-    if ($db->query("CREATE DATABASE $dbname;")) {
+    if ($db->query("CREATE DATABASE `$dbname`;")) {
       // Ok, database does not exist, quota is ok and dbname is compliant. Let's proceed
       $db->query("INSERT INTO db (uid,login,pass,db,bck_mode) VALUES ('$cuid','$lo','$pa','$dbname',0);");
       // give everything but GRANT on db.*

@@ -1,6 +1,7 @@
 alternc (0.9.10) stable; urgency=low
 
   * bugfixes:
+    * fix a "already exist" error when creating a database containing an hyphen (-)
     * #1163: fix sqlbackup script call routine to retain backwards
       compatibility
     * fix usage of ISO8859-15 charset (that may NOT be defined in locales...) 
