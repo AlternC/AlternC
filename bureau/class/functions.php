@@ -175,8 +175,10 @@ function checkfqdn($fqdn) {
   while (list ($key, $val) = each ($members)) {
     if (strlen($val)>63)
       return 2;
-    if (!eregi("^[a-z0-9][a-z0-9-]*[a-z0-9]$",$val)) {
-      /*"*/                  return 3;
+
+    // Note: a.foo.net is a valid domain
+    if (!eregi("^[a-z0-9]([a-z0-9-]*[a-z0-9])?$",$val)) {
+      return 3;
     }
   }
   return $ret;
