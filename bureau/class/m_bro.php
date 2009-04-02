@@ -276,7 +276,7 @@ class m_bro {
   /* ----------------------------------------------------------------- */
   /** Retourne la taille du fichier $file
    * si $file est un dossier, retourne la taille de ce dossier et de tous
-   * ses sous dossiers (mais seulement si l'utilisateur en a fait la demande).
+   * ses sous dossiers.
    * @param string $file Fichier dont on souhaite connaitre la taille
    * @return integer Taille du fichier en octets.
    * TODO : create a du cache ...
@@ -293,11 +293,6 @@ class m_bro {
     }
   }
 
-  /* ----------------------------------------------------------------- */
-  /** Retourne la taille du repertoire $dir (fonction recursive)
-   * @param string $dir Repertoire dont on souhaite connaitre la taille
-   * @return integer Taille du repertoire en octets.
-   */
   function dirsize($dir) {
     $totalsize = 0;
 
@@ -563,7 +558,15 @@ class m_bro {
       $err->raise("bro",1);
       return false;
     }
-    $new=$this->convertabsolute($new,0);
+
+    // If the destionation (new) doesn't have an absolute path, give it the prefix (old) from the first file found
+    if ($new[0] != '/') {
+      // Ex: settings.php will become /var/alternc/html/f/foo/www/example.org/drupal-6.10/sites/default/settings.php
+      $new = $old . '/' . $new;
+    } else {
+      $new = $this->convertabsolute($new,0);
+    }
+
     if (!$new) {
       $err->raise("bro",1);
       return false;
@@ -655,6 +658,7 @@ class m_bro {
     $dest = escapeshellarg($dest);
     // TODO: write a recursive copy function(?)
     exec("cp -Rpf '$src' '$dest'", $void, $ret);
+    echo "cp -Rpf '$src' '$dest'";
     if ($ret) {
       $err->raise("bro","Errors happened while copying the source to destination. cp return value: %d", $ret);
       return false;
