@@ -32,6 +32,7 @@
 require("/var/alternc/bureau/class/local.php");
 $FILES_OWNER = 33;
 $APACHE_LOG = '/var/log/apache/access.log.1';
+$APACHE2_LOG = '/var/log/apache2/access.log';
 umask(0177);
 $hosts = array();
 $nolog_hosts = array();
@@ -80,8 +81,11 @@ while ($row = mysql_fetch_assoc($result)) {
 }
 
 //Open apache log file
-if (!$apache_log_file = fopen($APACHE_LOG, 'r')) {
-	return 1;
+//Open apache log file
+if (!$apache_log_file = @fopen($APACHE_LOG, 'r')) {
+        if (!$apache_log_file = @fopen($APACHE2_LOG, 'r')) {
+                return 1;
+        }
 }
 
 //Parsing log file
