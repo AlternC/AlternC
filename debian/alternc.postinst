@@ -171,8 +171,14 @@ EOF
     echo "config phpmyadmin"
     include_str='include("/etc/alternc/phpmyadmin.inc.php")'
     pma_config=/etc/phpmyadmin/config.inc.php
+    # Mise à jour sur une configuration existante
+    # recherche la chaine include_str (avec les / echappées) et supprime les <?php ?>
+    sed 's/<?php \('"${include_str//\//\\/}"'\) ?>/\1;/g' $pma_config > $pma_config'_2'
+    mv $pma_config'_2' $pma_config  
+
+    # Sur une configuration vierge, inclure la configuration alternc
     if ! grep -e "$include_str" $pma_config > /dev/null 2>&1; then
-        echo "<?php $include_str ?>" >> $pma_config
+        echo "$include_str;" >> $pma_config
     fi
 
     # Add access to the management panel
