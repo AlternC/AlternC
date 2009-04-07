@@ -181,7 +181,10 @@ EOF
         echo "$include_str;" >> $pma_config
     fi
 
-    # Add access to the management panel
+    #clean old access to the management panel
+    find /var/alternc/dns/ -type l -lname /var/alternc/bureau -exec rm {} \;
+
+    # Add access to the management panel    
     ln -nsf /var/alternc/bureau /var/alternc/dns/$FQDN_LETTER/$FQDN
 
     # Bind stuff
