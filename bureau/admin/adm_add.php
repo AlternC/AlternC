@@ -102,6 +102,7 @@ if ($error) {
 	</td>
 </tr>
 
+<?php if (variable_get('hosting_tld') || $dom->enum_domains()) { ?>
 <tr>
     <th colspan="2">
         <input type="checkbox" name="create_dom" value="1" />
@@ -119,6 +120,7 @@ if ($error) {
         </select>
     </th>
 </tr>
+<?php } ?>
 <tr>
 	<td colspan="2"><input type="submit" class="inb" name="submit" value="<?php __("Create a new member"); ?>" /></td>
 </tr>
