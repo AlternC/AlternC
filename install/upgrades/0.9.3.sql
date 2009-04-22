@@ -1,6 +1,6 @@
 -- add support for .it
-INSERT IGNORE INTO tld VALUES ('it', 1);
-INSERT IGNORE INTO tld VALUES ('ws', 1);
+INSERT IGNORE INTO `tld` VALUES ('it', 1);
+INSERT IGNORE INTO `tld` VALUES ('ws', 1);
 
 -- remove the old "estelle" default mx in older tables
 ALTER TABLE `domaines` MODIFY `mx` varchar(64) DEFAULT NULL;
@@ -10,16 +10,15 @@ ALTER TABLE `domaines_standby` MODIFY `mx` varchar(64) DEFAULT NULL;
 --
 -- if comment is null, then the variable is internal and will not show
 -- up in the generic configuration panel
-CREATE TABLE IF NOT EXISTS variable (
-  name varchar(48) NOT NULL default '',
-  value longtext NOT NULL,
-  comment mediumtext NULL,
-  PRIMARY KEY  (name),
-  KEY name (name)
+CREATE TABLE IF NOT EXISTS `variable` (
+  `name` varchar(48) NOT NULL default '',
+  `value` longtext NOT NULL,
+  `comment` mediumtext NULL,
+  PRIMARY KEY  (`name`)
 ) TYPE=MyISAM;
 
 -- hosting_tld: only used, for now, in bureau/admin/adm_*add.php
-INSERT IGNORE INTO `variable` (name, value, comment) VALUES ('hosting_tld', 0,
+INSERT IGNORE INTO `variable` (`name`, `value`, `comment`) VALUES ('hosting_tld', 0,
 'This is a FQDN that designates the main hostname of the service.
 
 For example, hosting_tld determines in what TLD the "free" user domain
