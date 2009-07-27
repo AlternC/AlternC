@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
-"POT-Creation-Date: 2008-10-14 19:57-0400\n"
+"Report-Msgid-Bugs-To: anarcat@koumbit.org\n"
+"POT-Creation-Date: 2009-07-27 17:24-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -398,11 +398,27 @@ msgstr ""
 #. Type: boolean
 #. Description
 #: ../templates:22001
-msgid "Should AlternC remove bind mailboxes ?"
+msgid "Should AlternC remove mailboxes ?"
 msgstr ""
 
 #. Type: boolean
 #. Description
 #: ../templates:22001
 msgid "If you accept all users e-mails will be deleted"
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../templates:23001
+msgid "Slave servers"
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../templates:23001
+msgid ""
+"This is a space-separated list of servers that are \"slaves\" to the master "
+"server (this server). When writing apache configuration files, the master "
+"server will attempt to reload apache on those remote servers. The alternc-"
+"slave package correctly configures those machines to allow login and reload."
 msgstr ""
