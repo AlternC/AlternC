@@ -173,5 +173,5 @@ _Description: Should AlternC remove bind zones ?
 
 Template: alternc/postrm_remove_mailboxes
 Type: boolean
-_Description: Should AlternC remove bind mailboxes ?
+_Description: Should AlternC remove mailboxes ?
  If you accept all users e-mails will be deleted
