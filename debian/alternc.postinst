@@ -96,6 +96,9 @@ SQLBACKUP_TYPE=""
 
 # overwrite existing files when backing up
 SQLBACKUP_OVERWRITE=""
+
+# known slave servers, empty for none, localhost is special (no ssh)
+ALTERNC_SLAVES=""
 EOF
 
         chown root:www-data $CONFIGFILE
@@ -122,6 +125,7 @@ EOF
     update_var alternc/sql/backup_type SQLBACKUP_TYPE
     update_var alternc/sql/backup_overwrite SQLBACKUP_OVERWRITE
     update_var alternc/alternc_location ALTERNC_LOC
+    update_var alternc/slaves ALTERNC_SLAVES
     sed -e "$SED_SCRIPT" < $CONFIGFILE > $CONFIGFILE.tmp
     mv -f $CONFIGFILE.tmp $CONFIGFILE
 
@@ -149,6 +153,24 @@ EOF
     if [ -e $CONFIGFILE ]; then
       # source local.sh variables
       . $CONFIGFILE
+    fi
+
+    # multi-server configuration: we create an alternc account with
+    # authorized keys. since this is the master, we do not give him a
+    # valid shell, but we still need the user for proper perms
+    if [ ! -z "$ALTERNC_SLAVES" && "$ALTERNC_SLAVES" != "localhost" ] ; then
+        if ! grep -q alternc /etc/passwd ; then
+            echo "Creating alternc account"
+            adduser --quiet --system --uid 342 --home $ALTERNC_LOC --shell /bin/false --ingroup adm alternc
+        fi
+        key=`cat ~root/.ssh/id_dsa.pub`
+        if ! grep -q "$key" $ALTERNC_LOC/.ssh/authorized_keys ; then
+            echo "Authorizing root ssh key to access the common alternc account"
+            mkdir -p $ALTERNC_LOC/.ssh
+            echo "$key" >> $ALTERNC_LOC/.ssh/authorized_keys
+            chown -R alternc:adm $ALTERNC_LOC/.ssh
+            chmod -R og-rwx $ALTERNC_LOC/.ssh
+        fi
     fi
 
     # /var/alternc/dns/d/www.example.com

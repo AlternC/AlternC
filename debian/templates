@@ -175,3 +175,12 @@ Template: alternc/postrm_remove_mailboxes
 Type: boolean
 _Description: Should AlternC remove mailboxes ?
  If you accept all users e-mails will be deleted
+
+Template: alternc/slaves
+Type: string
+_Description: Slave servers
+ This is a space-separated list of servers that are "slaves" to the
+ master server (this server). When writing apache configuration files,
+ the master server will attempt to reload apache on those remote
+ servers. The alternc-slave package correctly configures those machines
+ to allow login and reload.

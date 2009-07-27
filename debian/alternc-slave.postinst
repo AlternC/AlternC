@@ -43,20 +43,6 @@ case "$1" in
     # ajoute l'user postfix au groupe sasl
     adduser --quiet postfix sasl
 
-    db_get "alternc-slave/mergelog-key"
-    key="$RET"
-    if [ "X$key" != "" ]; then
-        echo "Creating alternc-mergelog account"
-        adduser --quiet --system --home /var/run/alternc-mergelog --shell /usr/bin/scponly --ingroup adm alternc-mergelog
-        if ! grep -q "$key" /var/run/alternc-mergelog/.ssh/authorized_keys ; then
-            echo "Authorizing requested key to access alternc-mergelog account"
-            mkdir -p /var/run/alternc-mergelog/.ssh
-            echo "$key" >> /var/run/alternc-mergelog/.ssh/authorized_keys
-            chown -R alternc-mergelog:adm /var/run/alternc-mergelog/.ssh
-            chmod -R og-rwx /var/run/alternc-mergelog/.ssh
-        fi
-    fi
-
     # corriger les permissions du chroot
     mkdir -p /var/spool/postfix/var/run/saslauthd || true
     dpkg-statoverride --quiet --update --add root sasl 710 /var/spool/postfix/var/run/saslauthd  || true
@@ -165,6 +151,38 @@ EOF
       . $CONFIGFILE
     fi
 
+    # multi-server configuration
+    db_get "alternc-slave/master-key"
+    key="$RET"
+    if [ "X$key" != "" ]; then
+        if grep -q alternc-mergelog /etc/passwd ; then
+            echo "Reusing the alternc-mergelog account as a generic alternc account"
+            # the uid is ugly. we should request allocation from
+            # base-passwd instead
+            usermod --quiet --uid 342 --shell /usr/bin/rbash --login alternc alternc-mergelog
+            # this is a separate step otherwise usermod will look for
+            # files to chown in /var/alternc, which takes a long time
+            usermod --quiet --home $ALTERNC_LOC alternc
+        fi
+        if [ -d /var/run/alternc-mergelog/.ssh ]; then
+            echo "Cleaning up old alternc-mergelog home"
+            mv /var/run/alternc-mergelog/.ssh $ALTERNC_LOC/.ssh && rmdir /var/run/alternc-mergelog
+        fi
+        if ! grep -q alternc /etc/passwd ; then
+            echo "Creating alternc account"
+            # this uid is ugly. we should request allocation from
+            # base-password instead
+            adduser --quiet --system --uid 342 --home $ALTERNC_LOC --shell /usr/bin/rbash --ingroup adm alternc
+        fi
+        if ! grep -q "$key" $ALTERNC_LOC/.ssh/authorized_keys ; then
+            echo "Authorizing requested key to access alternc-mergelog account"
+            mkdir -p $ALTERNC_LOC/.ssh
+            echo "$key" >> $ALTERNC_LOC/.ssh/authorized_keys
+            chown -R alternc:adm $ALTERNC_LOC/.ssh
+            chmod -R og-rwx $ALTERNC_LOC/.ssh
+        fi
+    fi
+
     echo "checking for upgrades"
     /usr/share/alternc/install/upgrade_check.sh $2
 
@@ -173,6 +191,25 @@ EOF
     pma_config=/etc/phpmyadmin/config.inc.php
     if ! grep -e "$include_str" $pma_config > /dev/null 2>&1; then
         echo "<?php $include_str ?>" >> $pma_config
+    fi
+
+    if ! grep -q '## ALTERNC START' /etc/sudoers; then
+        # XXX: this is not proper locking
+        if [ -e /etc/sudoers.tmp ]; then
+            echo "sudoers file being edited, aborting"
+            exit 1
+        else
+            cp /etc/sudoers /etc/sudoers.tmp
+            cat >> /etc/sudoers.tmp <<EOF
+## ALTERNC START
+## do not change anything between those lines
+alternc ALL=NOPASSWD: /usr/sbin/invoke-rc.d apache reload
+alternc ALL=NOPASSWD: /usr/sbin/invoke-rc.d apache2 reload
+alternc ALL=NOPASSWD: /usr/sbin/rndc reload *
+## ALTERNC END
+EOF
+            mv /etc/sudoers.tmp /etc/sudoers
+        fi
     fi
 
     # important: postinst gele sans ca

@@ -351,6 +351,7 @@ po/fr/LC_MESSAGES/alternc-admintools.po -text
 /quota_delete -text
 /quota_init -text
 src/Makefile -text
+src/alternc_reload -text
 src/basedir_prot.sh -text
 src/du.pl -text
 src/fixperms.sh -text

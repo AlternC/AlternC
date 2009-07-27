@@ -86,6 +86,11 @@ if [ -f "$LOCK_FILE" ]; then
     exit 1
 fi
 
+# backward compatibility: single-server setup
+if [ -z "$ALTERNC_SLAVES" ] ; then
+    ALTERNC_SLAVES="localhost"
+fi
+
 NAMED_CONF_FILE="$DATA_ROOT/bind/automatic.conf"
 ZONES_DIR="$DATA_ROOT/bind/zones"
 APACHECONF_DIR="$DATA_ROOT/apacheconf"
@@ -235,21 +240,14 @@ IFS="$OLD_IFS"
 # Reload configuration for named and apache
 
 RELOAD_ZONES=`cat "$RELOAD_ZONES_TMP_FILE"`
-if [ ! -z "$RELOAD_ZONES" ]; then
-    if [ "$RELOAD_ZONES" = "all" ]; then
-        rndc reload > /dev/null || echo "Cannot reload bind" >> "$DOMAIN_LOG_FILE"
+
+for slave in $ALTERNC_SLAVES; do
+    if [ "$slave" = "localhost" ]; then
+        alternc_reload $RELOAD_ZONES
     else
-        for zone in $RELOAD_ZONES; do
-            rndc reload "$zone" > /dev/null || echo "Cannot reload bind for zone $zone" >> "$DOMAIN_LOG_FILE"
-        done
+        ssh alternc@$slave alternc_reload "$RELOAD_ZONES"
     fi
-    if [ -x /usr/sbin/apache ]; then
-        invoke-rc.d apache reload > /dev/null || echo "Cannot restart apache" >> "$DOMAIN_LOG_FILE"
-    fi
-    if [ -x /usr/sbin/apache2 ]; then
-        invoke-rc.d apache2 reload > /dev/null || echo "Cannot restart apache" >> "$DOMAIN_LOG_FILE"
-    fi
-fi
+done
 
 # Cleanup
 
