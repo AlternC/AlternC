@@ -48,6 +48,7 @@ while (list($key,$val)=each($qlist)) {
 	if (($key == 'bw_web' || $key == 'web') && ($q[$key]["t"] > 0)) {
 		if ($key == 'web') {
 			$q[$key]["u"] = $q[$key]["u"] * 1024;
+			$q[$key]["t"] = $q[$key]["t"] * 1024;
 		}
 
 		$usage_percent = (int) ($q[$key]["u"] / $q[$key]["t"] * 100);

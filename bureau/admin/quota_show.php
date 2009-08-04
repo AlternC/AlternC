@@ -54,7 +54,7 @@ if (!is_array($q)) {
 		if ($key == 'bw_web') {              
 			echo "&nbsp;</td><td align=\"center\">". format_size($q[$key]["u"]) ."&nbsp;</td><td align=\"center\">". format_size($q[$key]["t"]) ."&nbsp;</td>";
 		} elseif ($key == 'web') {
-			echo "&nbsp;</td><td align=\"center\">". format_size($q[$key]["u"] * 1024) . "&nbsp;</td><td align=\"center\">". format_size($q[$key]["t"]) ."&nbsp;</td>";
+			echo "&nbsp;</td><td align=\"center\">". format_size($q[$key]["u"] * 1024) . "&nbsp;</td><td align=\"center\">". format_size($q[$key]["t"] * 1024) ."&nbsp;</td>";
 		} else {
 			echo "&nbsp;</td><td align=\"center\">".$q[$key]["u"]."&nbsp;</td><td align=\"center\">".$q[$key]["t"]."&nbsp;</td>";
 		}
