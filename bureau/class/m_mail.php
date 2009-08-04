@@ -637,7 +637,7 @@ class m_mail {
   function alternc_add_mx_domain($dom) {
     global $err,$cuid,$db,$mem;
     $err->log("mail","alternc_add_mx_domain",$dom);
-    $db->query("INSERT INTO mail_domain (mail,alias) VALUES ('$dom','$dom');");
+    $db->query("INSERT INTO mail_domain (mail,alias,cuid) VALUES ('$dom','$dom', '$cuid');");
     // Create the postmaster email for this new domain : 
     $this->add_mail($dom,"postmaster",0,"",$mem->user["mail"]);
     return true;
