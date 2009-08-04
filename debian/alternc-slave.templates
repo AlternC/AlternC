@@ -176,14 +176,3 @@ Type: boolean
 _Description: Should AlternC remove bind mailboxes ?
  If you accept all users e-mails will be deleted
 
-Template:alternc-slave/master-key
-Type: string
-_Description: SSH key of the master server:
- The slave nodes can be configured to accept connexions from a central
- server (the master server) that will operate various maintenance tasks
- on the slave. This currently includes logfile centralisation and
- service reloading but may be expanded to other domains.
- .
- To configure this, the server needs to have an account created and a
- public key. Enter the public key here and the account will be created.
- If this field is left empty, no account will be created.

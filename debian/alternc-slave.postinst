@@ -151,36 +151,24 @@ EOF
       . $CONFIGFILE
     fi
 
-    # multi-server configuration
-    db_get "alternc-slave/master-key"
-    key="$RET"
-    if [ "X$key" != "" ]; then
-        if grep -q alternc-mergelog /etc/passwd ; then
-            echo "Reusing the alternc-mergelog account as a generic alternc account"
-            # the uid is ugly. we should request allocation from
-            # base-passwd instead
-            usermod --quiet --uid 342 --shell /usr/bin/rbash --login alternc alternc-mergelog
-            # this is a separate step otherwise usermod will look for
-            # files to chown in /var/alternc, which takes a long time
-            usermod --quiet --home $ALTERNC_LOC alternc
-        fi
-        if [ -d /var/run/alternc-mergelog/.ssh ]; then
-            echo "Cleaning up old alternc-mergelog home"
-            mv /var/run/alternc-mergelog/.ssh $ALTERNC_LOC/.ssh && rmdir /var/run/alternc-mergelog
-        fi
-        if ! grep -q alternc /etc/passwd ; then
-            echo "Creating alternc account"
-            # this uid is ugly. we should request allocation from
-            # base-password instead
-            adduser --quiet --system --uid 342 --home $ALTERNC_LOC --shell /usr/bin/rbash --ingroup adm alternc
-        fi
-        if ! grep -q "$key" $ALTERNC_LOC/.ssh/authorized_keys ; then
-            echo "Authorizing requested key to access alternc-mergelog account"
-            mkdir -p $ALTERNC_LOC/.ssh
-            echo "$key" >> $ALTERNC_LOC/.ssh/authorized_keys
-            chown -R alternc:adm $ALTERNC_LOC/.ssh
-            chmod -R og-rwx $ALTERNC_LOC/.ssh
-        fi
+    if grep -q alternc-mergelog /etc/passwd ; then
+        echo "Reusing the alternc-mergelog account as a generic alternc account"
+        # the uid is ugly. we should request allocation from
+        # base-passwd instead
+        usermod --quiet --uid 342 --shell /usr/bin/rbash --login alternc alternc-mergelog
+        # this is a separate step otherwise usermod will look for
+        # files to chown in /var/alternc, which takes a long time
+        usermod --quiet --home $ALTERNC_LOC alternc
+    fi
+    if [ -d /var/run/alternc-mergelog/.ssh ]; then
+        echo "Cleaning up old alternc-mergelog home"
+        mv /var/run/alternc-mergelog/.ssh $ALTERNC_LOC/.ssh && rmdir /var/run/alternc-mergelog
+    fi
+    if ! grep -q alternc /etc/passwd ; then
+        echo "Creating alternc account"
+        # this uid is ugly. we should request allocation from
+        # base-password instead
+        adduser --quiet --system --uid 342 --home $ALTERNC_LOC --shell /usr/bin/rbash --ingroup adm alternc
     fi
 
     echo "checking for upgrades"
