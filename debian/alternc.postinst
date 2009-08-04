@@ -163,6 +163,7 @@ EOF
             echo "Creating alternc account"
             adduser --quiet --system --uid 342 --home $ALTERNC_LOC --shell /bin/false --ingroup adm alternc
         fi
+        chown alternc /var/alternc
         if [ -r ~root/.ssh/id_dsa.pub ]; then
             key=`cat ~root/.ssh/id_dsa.pub`
             if ! grep -q "$key" $ALTERNC_LOC/.ssh/authorized_keys ; then
