@@ -245,7 +245,7 @@ for slave in $ALTERNC_SLAVES; do
     if [ "$slave" = "localhost" ]; then
         alternc_reload $RELOAD_ZONES
     else
-        ssh alternc@$slave alternc_reload "$RELOAD_ZONES"
+        ssh alternc@$slave /usr/sbin/alternc_reload "$RELOAD_ZONES"
     fi
 done
 
