@@ -579,6 +579,7 @@ class m_mail {
     $err->log("mail","_deletepop",$mail."@".$dom);
     $db->query("DELETE FROM mail_users WHERE uid='$cuid' AND (  alias='". $mail."_".$dom."' OR alias='". $mail."@".$dom."' ) ;");
     $db->query("DELETE FROM mail_alias WHERE mail='".$mail."_".$dom."';");
+    $db->query("DELETE FROM size_mail WHERE alias='".$mail."_".$dom."';");
     @unlink("/var/lib/squirrelmail/data/".$mail."_".$dom.".pref");
     @unlink("/var/lib/squirrelmail/data/".$mail."_".$dom.".abook");
     @unlink("/var/lib/squirrelmail/data/".$mail."@".$dom.".pref");
