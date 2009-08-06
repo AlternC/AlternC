@@ -155,10 +155,10 @@ EOF
         echo "Reusing the alternc-mergelog account as a generic alternc account"
         # the uid is ugly. we should request allocation from
         # base-passwd instead
-        usermod --quiet --uid 342 --shell /usr/bin/rbash --login alternc alternc-mergelog
+        usermod --uid 342 --shell /usr/bin/rbash --login alternc alternc-mergelog
         # this is a separate step otherwise usermod will look for
         # files to chown in /var/alternc, which takes a long time
-        usermod --quiet --home $ALTERNC_LOC alternc
+        usermod --home $ALTERNC_LOC alternc
     fi
     if [ -d /var/run/alternc-mergelog/.ssh ]; then
         echo "Cleaning up old alternc-mergelog home"
