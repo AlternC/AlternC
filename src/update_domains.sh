@@ -241,6 +241,7 @@ IFS="$OLD_IFS"
 
 RELOAD_ZONES=`cat "$RELOAD_ZONES_TMP_FILE"`
 
+# we assume we run apache and bind on the master
 alternc_reload $RELOAD_ZONES
 for slave in $ALTERNC_SLAVES; do
     if [ "$slave" != "localhost" ]; then
