@@ -241,11 +241,10 @@ IFS="$OLD_IFS"
 
 RELOAD_ZONES=`cat "$RELOAD_ZONES_TMP_FILE"`
 
+alternc_reload $RELOAD_ZONES
 for slave in $ALTERNC_SLAVES; do
-    if [ "$slave" = "localhost" ]; then
-        alternc_reload $RELOAD_ZONES
-    else
-        ssh alternc@$slave /usr/sbin/alternc_reload "$RELOAD_ZONES"
+    if [ "$slave" != "localhost" ]; then
+        ssh alternc@$slave alternc_reload "$RELOAD_ZONES"
     fi
 done
 
