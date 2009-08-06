@@ -155,7 +155,7 @@ EOF
         echo "Reusing the alternc-mergelog account as a generic alternc account"
         # the uid is ugly. we should request allocation from
         # base-passwd instead
-        usermod --uid 342 --shell /usr/bin/rbash --login alternc alternc-mergelog
+        usermod --uid 342 --shell /bin/rbash --login alternc alternc-mergelog
         # this is a separate step otherwise usermod will look for
         # files to chown in /var/alternc, which takes a long time
         usermod --home $ALTERNC_LOC alternc
@@ -168,7 +168,7 @@ EOF
         echo "Creating alternc account"
         # this uid is ugly. we should request allocation from
         # base-password instead
-        adduser --quiet --system --uid 342 --home $ALTERNC_LOC --shell /usr/bin/rbash --ingroup adm alternc
+        adduser --quiet --system --uid 342 --home $ALTERNC_LOC --shell /bin/rbash --ingroup adm alternc
     fi
 
     echo "config phpmyadmin"
