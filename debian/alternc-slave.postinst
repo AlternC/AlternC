@@ -171,9 +171,6 @@ EOF
         adduser --quiet --system --uid 342 --home $ALTERNC_LOC --shell /usr/bin/rbash --ingroup adm alternc
     fi
 
-    echo "checking for upgrades"
-    /usr/share/alternc/install/upgrade_check.sh $2
-
     echo "config phpmyadmin"
     include_str='include("/etc/alternc/phpmyadmin.inc.php")'
     pma_config=/etc/phpmyadmin/config.inc.php
