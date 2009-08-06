@@ -191,6 +191,7 @@ EOF
 alternc ALL=NOPASSWD: /usr/sbin/invoke-rc.d apache reload
 alternc ALL=NOPASSWD: /usr/sbin/invoke-rc.d apache2 reload
 alternc ALL=NOPASSWD: /usr/sbin/rndc reload *
+alternc ALL=NOPASSWD: /usr/sbin/rndc reload
 ## ALTERNC END
 EOF
             mv /etc/sudoers.tmp /etc/sudoers
