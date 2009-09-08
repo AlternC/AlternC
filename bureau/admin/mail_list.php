@@ -28,35 +28,37 @@
  ----------------------------------------------------------------------
 */
 require_once("../class/config.php");
+include_once("head.php");
 
-if(!$domain){
-exit();
+$fields = array (
+	"domain"    => array ("request", "string", ""),
+
+	"letter"    => array ("get", "string", ""),
+);
+getFields($fields);
+
+if(!$domain)
+{
+	include("main.php");
+	exit();
 }
-include("head.php");
 
 if(!$res=$mail->enum_doms_mails($domain,1,$letter)) {
   $error=$err->errstr();
 ?>
-</head>
-<body>
 <h3><?php printf(_("Mailbox list of the domain %s"),"http://$domain"); ?> : </h3>
-<?php 
+<?php
 if ($error) {
   echo "<p class=\"error\">$error</p>";
 }
 echo "<p><a href=\"mail_add.php?domain=$domain\">".sprintf(_("Add a mailbox on <b>%s</b>"),$domain)."</a><br />";
 echo "   <a href=\"mail_add.php?many=1&amp;domain=$domain\">".sprintf(_("Add many mailboxes on <b>%s</b>"),$domain)."</a></p>";
-?>
 
-</body>
-</html>
-<?php
 }
-else {
+else
+{
 
 ?>
-</head>
-<body>
 <h3><?php printf(_("Mailbox list of the domain %s"),"http://$domain"); ?> : </h3>
 <?php
 if ($error) {
@@ -76,10 +78,8 @@ else{
   echo "   <a href=\"mail_list.php?domain=$domain\">".sprintf(_("All"))."</a>";
 }
 
-
+ if ($res["count"]) {
 ?>
-
-
 <form method="post" action="mail_del.php" id="main">
 
 <table cellspacing="0" cellpadding="4">
@@ -94,7 +94,7 @@ for($i=0;$i<$res["count"];$i++) {
 	echo "<tr class=\"lst$col\">";
 	echo "<td align=\"center\"><input class=\"inc\" type=\"checkbox\" id=\"del_$i\" name=\"d[]\" value=\"".$val["mail"]."\" /></td>
 	<td><label for=\"del_$i\">".$val["mail"]."</label></td>
-	<td><a href=\"mail_edit.php?email=".urlencode($val["mail"])."&amp;domain=".urlencode($domain)."\">"._("Edit")."</a></td>";
+	<td class=\"center\"><a href=\"mail_edit.php?email=".urlencode($val["mail"])."&amp;domain=".urlencode($domain)."\"><img src=\"images/edit.png\" alt=\""._("Edit")."\" /></a></td>";
 	if ($val["pop"]) {
 		echo "<td>".format_size($val["size"])."</td>";
 	} else {
@@ -109,7 +109,7 @@ for($i=0;$i<$res["count"];$i++) {
 </form>
 
 <?php
+   }
 }
 ?>
-</body>
-</html>
+<?php include_once("foot.php"); ?>

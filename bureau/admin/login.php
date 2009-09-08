@@ -29,22 +29,25 @@
 */
 require_once("../class/config.php");
 
-if (!$mem->checkid()) {
-        $error=$err->errstr();
+if (!$mem->checkid())
+{
+	$error = $err->errstr();
 	include("index.php");
 	exit();
 }
+
+include("main.php");
+exit;
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
 <html>
 <head>
 <title><?php __("AlternC Desktop"); ?></title>
-<link rel="stylesheet" href="styles/base.css" type="text/css" />
-<link rel="stylesheet" href="styles/custom.css" type="text/css" />
+<link rel="stylesheet" href="styles/style.css" type="text/css" />
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 </head>
-<frameset frameborder="0" cols="225px,*">
+<frameset cols="225px,*">
 	<frame src="menu.php" name="left" />
 	<frame src="main.php" name="right" />
 <noframes>

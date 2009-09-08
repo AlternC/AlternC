@@ -460,7 +460,7 @@ class m_mysql {
       return false;
     }
     
-    if (strlen($user) > 16 || strlen($usern) == 0 ) {
+    if (strlen($usern) > 16 || strlen($usern) == 0 ) {
       $err->raise("mysql",15);
       return false;
     }
@@ -475,9 +475,9 @@ class m_mysql {
     }
 
 
-    // On créé l'utilisateur
-    $db->query("GRANT USAGE ON *.* TO '$user'@'$this->client' IDENTIFIED BY '$pass';");
-    // On le rajoute dans la table des utilisateurs
+    // We create the user account (the "file" right is the only one we need globally to be able to use load data into outfile)
+    $db->query("GRANT file ON *.* TO '$user'@'$this->client' IDENTIFIED BY '$pass';");
+    // We add him to the user table 
     $db->query("INSERT INTO dbusers (uid,name) VALUES($cuid,'$user');");
     return true;
   }

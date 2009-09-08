@@ -46,10 +46,9 @@ if ($confirm=="y") {
   exit();
 }
 
-include("head.php");
+include_once("head.php");
+
 ?>
-</head>
-<body>
 <h3><?php __("MySQL users"); ?></h3>
 <p class="error"><?php __("WARNING"); ?></big><br /><?php __("Confirm the deletion of the following MySQL users"); ?><br />
 </p>
@@ -69,5 +68,4 @@ while (list($key,$val)=each($_POST)) {
 <input type="submit" class="inb" name="sub" value="<?php __("Yes"); ?>" /> - <input type="button" class="inb" name="non" value="<?php __("No"); ?>" onclick="history.back()" />
 </p>
 </form>
-</body>
-</html>
+<?php include_once("foot.php"); ?>

@@ -29,26 +29,23 @@
 */
 require_once("../class/config.php");
 
-include("head.php");
-?>
-</head>
-<body>
-<?php
+include_once("head.php");
+
 $uid = $_GET['uid'];
 if (!$uid) {
 	__("Missing uid");
-	echo "</body></html>";
+	include_once("foot.php");
 	exit();
 }
 if (!$admin->enabled || !$admin->checkcreator($uid)) {
         __("This page is restricted to authorized staff");
-	echo "</body></html>";
+	include_once("foot.php");
 	exit();
 }
 
 if (!$r=$admin->get($uid)) {
 	__("User does not exist");
-	echo "</body></html>";
+	include_once("foot.php");
 	exit();
 }
 
@@ -67,6 +64,7 @@ if (! ($confirmed = ($_GET['submit'] == _("Confirm")) ) ) {
 } else {
   if (!$_GET['redirect']) {
     __("Missing redirect url.");
+    include_once("foot.php");
     exit();
   } else {
     $redirect = $_GET['redirect'];
@@ -138,7 +136,7 @@ if ($confirmed) {
 }
 $cuid = $old_cuid;
 
+include_once("foot.php");
+
 ?>
-</body>
-</html>
 

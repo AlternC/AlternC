@@ -27,11 +27,18 @@
  Purpose of file:
  ----------------------------------------------------------------------
 */
-$r=$quota->getquota("mysql");
-if ($r["t"]) {
+$q = $quota->getquota("mysql");
+if ($q["t"]) {
 ?>
-<dt id="mysql">MySQL</dt>
-<dd><a href="sql_list.php"><?php __("Databases"); ?></a></dd>
-<dd><a href="sql_users_list.php"><?php __("Users") ?></a></dd>
-<dd><a target="_blank" href="sql_admin.php"><?php __("SQL Admin"); ?></a></dd>
-<?php }
+<div class="menu-box">
+<div class="menu-title">
+<img src="images/mysql.png" alt="MySQL" />&nbsp;MySQL (<?= $q["u"]; ?>/<?= $q["t"]; ?>)</div>
+<div class="menu-content" id="menu-sql">
+<ul>
+<li><a href="sql_users_list.php"><?php __("MySQL Users") ?></a></li>
+<li><a href="sql_list.php"><?php __("Databases"); ?></a></li>
+<li><a target="_blank" href="sql_admin.php"><?php __("SQL Admin"); ?></a></li>
+</ul>
+</div>
+</div>
+<?php } ?>

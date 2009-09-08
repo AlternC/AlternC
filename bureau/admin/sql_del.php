@@ -28,6 +28,7 @@
  ----------------------------------------------------------------------
 */
 require_once("../class/config.php");
+include_once ("head.php");
 
 if ($confirm=="y") {
   reset($_POST);
@@ -46,10 +47,7 @@ if ($confirm=="y") {
   exit();
 }
 
-include("head.php");
 ?>
-</head>
-<body>
 <h3><?php __("MySQL Databases"); ?></h3>
 <p class="error"><?php __("WARNING"); ?></big><br /><?php __("Confirm the deletion of the following SQL databases"); ?><br />
 <?php __("This will delete all the tables currently in those db."); ?></p>
@@ -69,5 +67,4 @@ while (list($key,$val)=each($_POST)) {
 <input type="submit" class="inb" name="sub" value="<?php __("Yes"); ?>" /> - <input type="button" class="inb" name="non" value="<?php __("No"); ?>" onclick="history.back()" />
 </p>
 </form>
-</body>
-</html>
+<?php include_once("foot.php"); ?>

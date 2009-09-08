@@ -29,18 +29,29 @@
 */
 
 /* ############# MAILS ############# */
-$q=$quota->getquota("mail");
-$r=$quota->getquota("dom");
-	if ($q["t"]>0 && $r["u"]>0) { 
+
+$q = $quota->getquota("mail");
+$r = $quota->getquota("dom");
+if ($q["t"] > 0 && $r["u"] > 0) {
+
 ?>
-<dt><?php __("Mailboxes"); ?></dt>
+<div class="menu-box">
+<div class="menu-title">
+<img src="images/mail.png" alt="<?php __("Mailboxes"); ?>" />&nbsp;<?php __("Mailboxes"); ?> (<?= $q["u"]; ?>/<?= $q["t"]; ?>)</div>
+<div class="menu-content" id="menu-mail">
+<ul>
 <?php
-		/* Enumeration des domaines en mail : */
-        $domain=$mail->enum_domains();
-        reset($domain);
-        while (list($key,$val)=each($domain)) {
-        ?>
-        <dd><a href="mail_list.php?domain=<?php echo urlencode($val)
-	  ?>"><?php echo $val ?></a></dd>
-<?php    }    ?>
-<?php    } ?>
+	
+/* Enumeration des domlistes en mail : */
+$domlist = $mail->enum_domains();
+reset($domlist);
+while (list($key, $val) = each($domlist)) {
+$res = $mail->enum_doms_mails($val, 1);
+	
+?>
+	<li><a href="mail_list.php?domain=<?php echo urlencode($val) ?>"><?php echo $val ?> (<?= $res["count"]; ?>)</a></li>
+<?php } ?>
+</ul>
+</div>
+</div>
+<?php } ?>

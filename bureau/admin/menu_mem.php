@@ -28,6 +28,9 @@
  ----------------------------------------------------------------------
 */
 ?>
-<dt id="settings"><?php __("Other"); ?></dt>
-<dd><a href="mem_param.php"><?php __("Settings"); ?></a></dd>
-<dd><a href="main.php"><?php __("Messages"); ?></a></dd>
+<div class="menu-box">
+<div class="menu-title"><img src="images/config.png" alt="<?php __("Settings"); ?>" />&nbsp;<a href="mem_param.php"><?php __("Settings"); ?></a></div>
+</div>
+<div class="menu-box">
+<div class="menu-title"><img src="images/exit.png" alt="<?php __("Logout"); ?>" />&nbsp;<a href="mem_logout.php" target="_parent"><?php __("Logout"); ?></a></div>
+</div>

@@ -1,0 +1,55 @@
+#!/bin/sh
+
+# First check that we have a username as $1. If not, ask for the username
+if [ "$#" -eq 0 ]
+then
+	echo -n "Please enter the login : "
+	read LOGIN
+else
+	LOGIN="$1"
+fi
+
+# Check that the login exists : 
+MYSQL="mysql  --defaults-file=/etc/alternc/my.cnf --skip-column-name alternc -B -e "
+
+USERID="`$MYSQL "SELECT uid FROM membres WHERE login='${LOGIN}'"`"
+
+if [ ! "$USERID" ]
+then
+	echo "Login '$LOGIN' not found"
+	if [ "$LOGIN" = "admin" ]
+	then
+		echo "You may try 'root' instead (old alternc)"
+	fi	
+	if [ "$LOGIN" = "root" ]
+	then
+		echo "You may try 'admin' instead (new alternc)"
+	fi	
+	exit -1
+fi
+
+
+echo -n "Please enter the new password : "
+oldmodes=`stty -g` 
+stty -echo
+read PASS
+stty $oldmodes 
+echo 
+echo -n "Please confirm the new password : "
+oldmodes=`stty -g` 
+stty -echo
+read PASS2
+stty $oldmodes 
+echo
+if [ "$PASS" != "$PASS2" ]
+then
+	echo "Passwords are differents, aborting"
+	exit -2
+fi
+
+RND="`echo -n $RANDOM $RANDOM $RANDOM`"
+$MYSQL "UPDATE membres SET pass=ENCRYPT('$PASS',CONCAT('\$1\$',MD5('$RND'))) WHERE uid='$USERID'"
+if [ "$?" ]
+then
+	echo "Password changed successfully"
+fi

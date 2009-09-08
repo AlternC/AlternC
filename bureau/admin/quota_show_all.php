@@ -28,19 +28,12 @@
  ----------------------------------------------------------------------
 */
 require_once("../class/config.php");
+include_once("head.php");
 
-include("head.php");
 ?>
-</head>
-<body>
 <h3><?php __("Quotas"); ?></h3>
 
-<p><a href="<?php echo $_SERVER["SCRIPT_NAME"]; ?>"><?php __("Update this page"); ?></a></p>
-
 <?php
-
-$quota_utilise = array();
-$tot = array();
 
 if ($mem->user['uid'] == "2000")
   $user_list = $admin->get_list(1);
@@ -55,8 +48,8 @@ reset($ql);
 print "<td>"._("User")."</td>";
 $sequence = array();
 foreach ($ql as $key => $name) {
-  print "<td>$name</td>";
-  $sequence[] = $key;
+	print "<td>$name</td>";
+	$sequence[] = $key;
 }
 print "</tr>";
 $u = array();
@@ -94,10 +87,7 @@ foreach($sequence as $key) {
   echo $quota_utilise[$key]."/".$tot[$key];
   echo "</b></td>";
 }
-echo "</tr>";
-
 print "</table>";
 
 ?>
-</body>
-</html>
+<?php include_once("foot.php"); ?>

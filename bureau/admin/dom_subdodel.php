@@ -28,6 +28,13 @@
  ----------------------------------------------------------------------
 */
 require_once("../class/config.php");
+include_once("head.php");
+
+$fields = array (
+	"domain"    => array ("request", "string", ""),
+	"sub"       => array ("request", "string", ""),
+);
+getFields($fields);
 
 $dom->lock();
 
@@ -37,24 +44,19 @@ if (!$dom->del_sub_domain($domain,$sub)) {
 
 $dom->unlock();
 
-include("head.php");
 ?>
-</head>
-<body>
 <h3><?=sprintf(_("Deleting the subdomain %s:"),"http://".(($sub)?$sub.".":$sub).$domain); ?></h3>
 <?php
 	if ($error) {
-		echo "<p class=\"error\">$error</p></body></html>";
+		echo "<p class=\"error\">$error</p>";
+		include_once("foot.php");
 		exit();
 	} else {
-        # take the current time
         $t = time();
-        # that modulo (%) there computes the time of the next cron job
-        # XXX: we assume the cron job is at every 5 minutes
+	// XXX: we assume the cron job is at every 5 minutes
         $error=strtr(_("The modifications will take effect at %time.  Server time is %now."), array('%now' => date('H:i:s', $t), '%time' => date('H:i:s', ($t-($t%300)+300)))); 
 	    echo "<p class=\"error\">".$error."</p>";
 	}
 ?>
 <p><a href="dom_edit.php?domain=<?php echo urlencode($domain) ?>"><?php __("Click here to continue"); ?></a></p>
-</body>
-</html>
+<?php include_once("foot.php"); ?>

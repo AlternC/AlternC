@@ -28,11 +28,9 @@
  ----------------------------------------------------------------------
 */
 require_once("../class/config.php");
+include_once("head.php");
 
-include("head.php");
 ?>
-</head>
-<body>
 <h3><?php __("Account's quotas"); ?> : </h3>
 <?php
 $q=$quota->getquota();
@@ -43,12 +41,13 @@ if (!is_array($q)) {
 	$qlist=$quota->qlist();
 	reset($qlist);
 	$col=1;
-	while (list($key,$val)=each($qlist)) {
-		$col=3-$col;
-		echo "<tr class=\"lst$col\">";
-		echo "<td>";
+ 	while (list($key,$val)=each($qlist)) {
+		if (!$q[$key]["t"]) continue;
+ 		$col=3-$col;
+ 		echo "<tr class=\"lst$col\">";
+ 		echo "<td>";
 		if ($q[$key]["u"] >= $q[$key]["t"]) echo "<font class=\"over\">";
-		echo _($val);
+ 		echo _($val);
 		if ($q[$key]["u"] >= $q[$key]["t"]) echo "</font>";
 
 		if ($key == 'bw_web') {              
@@ -59,10 +58,9 @@ if (!is_array($q)) {
 			echo "&nbsp;</td><td align=\"center\">".$q[$key]["u"]."&nbsp;</td><td align=\"center\">".$q[$key]["t"]."&nbsp;</td>";
 		}
 
-		echo "</tr>";
-	}
+ 		echo "</tr>";
+ 	}
 	echo "</table>";
 }
 ?>
-</body>
-</html>
+<?php include_once("foot.php"); ?>

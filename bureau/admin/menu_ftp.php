@@ -29,8 +29,22 @@
 */
 
 /* ############# FTP ############# */
-$q=$quota->getquota("ftp");
-if ($q["t"]>0) { 
+
+$q = $quota->getquota("ftp");
+
+if ($q["t"] > 0) { 
+
 ?>
-<dd><a href="ftp_list.php"><?php __("FTP accounts"); ?></a></dd>
-<?php    }    ?>
+<div class="menu-box">
+<div class="menu-title">
+<img src="images/ftp.png" alt="<?php __("FTP accounts"); ?>" />&nbsp;<?php __("FTP accounts"); ?> <?php if (!$quota->cancreate("ftp")) { echo '<span class="full">'; } ?>(<?= $q["u"]; ?>/<?= $q["t"]; ?>)<?php if (!$quota->cancreate("ftp")) { echo '</span>'; } ?></div>
+<div class="menu-content" id="menu-ftp">
+<ul>
+<?php if ($quota->cancreate("ftp")) { ?>
+<li><a href="ftp_add.php"><img src="images/new.png" alt="<?php __("Create a new ftp account"); ?>" /><?php __("Create a new ftp account"); ?></a></li>
+<?php } ?>
+<li><a href="ftp_list.php"><?php __("FTP accounts list"); ?></a></li>
+</ul>
+</div>
+</div>
+<?php } ?>

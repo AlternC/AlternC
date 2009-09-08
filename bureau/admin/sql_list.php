@@ -28,15 +28,11 @@
  ----------------------------------------------------------------------
 */
 require_once("../class/config.php");
-
+include_once("head.php");
 
 $r=$mysql->get_dblist();
 
-
-include("head.php");
 ?>
-</head>
-<body>
 <h3><?php __("MySQL Databases"); ?></h3>
 <?php
 	if ($error) {
@@ -48,7 +44,7 @@ if ($r) {
 echo "<p>"._("help_sql_list_ok")."</p>";
 ?>
 
-<form method="post" action="sql_del.php">
+<form method="post" action="sql_del.php" name="main" id="main">
 <table cellspacing="0" cellpadding="4">
    <tr><th>&nbsp;</th><th><?php __("Database"); ?></th><th><?php __("Backup"); ?></th><th><?php __("Restore"); ?></th><th><?php __("Size"); ?></th></tr>
 
@@ -90,9 +86,9 @@ for($i=0;$i<count($r);$i++) {
 <?php
 	} else {
   echo "<p>"._("help_sql_list_no")."</p>";
- 
+
 ?>
-<form method="post" action="sql_addmain.php">
+<form method="post" action="sql_addmain.php" name="main" id="main">
 <table cellspacing="0" cellpadding="4">
 		<tr  class="lst2"><th><?php __("Username"); ?></th><td><code><?php echo $mem->user["login"]; ?></code></td></tr>
 		<tr  class="lst1"><th><label for="pass"><?php __("Password"); ?></label></th><td><code><input class="int" type="password" name="pass" id="pass" value="" /></code></td></tr>
@@ -101,9 +97,8 @@ for($i=0;$i<count($r);$i++) {
 	<tr><td><input type="submit" class="inb" name="submit" value="<?php __("Create my main database"); ?>" /></td></tr>
 </table>
 </form>
-<?php
-	}
-?>
-
-</body>
-</html>
+<?php } ?>
+<script type="text/javascript">
+document.forms['main'].pass.focus();
+</script>
+<?php include_once("foot.php"); ?>

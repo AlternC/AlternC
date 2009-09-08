@@ -34,14 +34,15 @@ if (!$admin->enabled) {
 	exit();
 }
 
-include("head.php");
+include_once("head.php");
+
 ?>
-</head>
-<body>
 <h3><?php __("Admin Control Panel"); ?></h3>
 <?php
 	if ($error) {
-		echo "<p class=\"error\">$error</p></body></html>";
+		echo "<p class=\"error\">$error</p>";
+		include_once("foot.php");
+		exit;
 	}
 ?>
 <ul id="adm_panel">
@@ -50,30 +51,28 @@ include("head.php");
 <li class="lst1"><a href="adm_doms.php"><?php __("Manage installed domains"); ?></a></li>
 <li class="lst2"><a href="adm_slaveip.php"><?php __("Manage allowed ip for slave zone transfers"); ?></a></li>
 <li class="lst1"><a href="adm_slaveaccount.php"><?php __("Manage allowed accounts for slave zone transfers"); ?></a></li>
-<li class="lst1"><a href="adm_mxaccount.php"><?php __("Manage allowed accounts for secondary mx"); ?></a></li>
-<li class="lst2"><a href="adm_variables.php"><?php __("Configure AlternC variables"); ?></a></li>
-<li class="lst1"><a href="quota_show_all.php"><?php __("Show all quotas"); ?></a></li>
+<li class="lst2"><a href="adm_mxaccount.php"><?php __("Manage allowed accounts for secondary mx"); ?></a></li>
+<li class="lst1"><a href="adm_variables.php"><?php __("Configure AlternC variables"); ?></a></li>
+<li class="lst2"><a href="quota_show_all.php"><?php __("Show all quotas"); ?></a></li>
 <li class="lst1"><a href="stats_members.php"><?php __("Account creation statistics"); ?></a></li>
 <?php
 
 // here we include any "adminmenu_*" file content
 $d=opendir(".");
-if ($d) { 
-  $lst=1;
+if ($d) {
+  $lst=2;
   while ($c=readdir($d)) {
     if (substr($c,0,10)=="adminmenu_") {
-      echo "<tr class=\"lst$lst\">";
+      echo "<li class=\"lst$lst\">";
       include($c);
-      echo "</tr>\n";
+      echo "</li>\n";
       $lst=3-$lst;
     }
-  } 
+  }
 }
 
 closedir($d);
 ?>
 </ul>
-</body>
-</html>
 
-
+<?php include_once("foot.php"); ?>

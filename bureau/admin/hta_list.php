@@ -28,6 +28,7 @@
  ----------------------------------------------------------------------
 */
 require_once("../class/config.php");
+include_once("head.php");
 
 if (!$r=$hta->ListDir()) {
 	$error=$err->errstr();
@@ -36,27 +37,25 @@ else {
 	reset($r);
 }
 
-include("head.php");
 ?>
-</head>
-<body>
 <h3><?php __("Protected folders list"); ?></h3>
 <?php
 	if ($error) {
-		echo "<p class=\"error\">$error</p></body></html>";
+		echo "<p class=\"error\">$error</p>";
 	}
 
 	if (!is_array($r)) {
 		echo "<p><a href=\"hta_add.php\">"._("Protect a folder")."</a><br />";
 		$mem->show_help("hta_list");
-		echo "</p></body></html>";
+		echo "</p>";
+		include_once("foot.php");
 		exit();
 	}
 
 ?>
 
 <p>
-<?php __("help_hta_list"); 
+<?php __("help_hta_list");
 $mem->show_help("hta_list2");
 ?>
 </p>
@@ -73,7 +72,7 @@ for($i=0;$i<count($r);$i++){
 ?>
 	<tr  class="lst<?php echo $col; ?>">
 		<td align="center"><input type="checkbox" class="inc" name="del_<?php echo $r[$i] ?>" value="<?php echo $r[$i] ?>" /></td>
-		<td><a href="hta_edit.php?dir=<?php echo $r[$i]?>"><?php __("Edit"); ?></a></td>
+		<td><a href="hta_edit.php?dir=<?php echo $r[$i]?>"><img src="images/edit.png" alt="<?php __("Edit"); ?>" /></a></td>
 		<td><code><?php echo "$r[$i]"?></code></td>
 	</tr>
     <?php
@@ -88,5 +87,4 @@ for($i=0;$i<count($r);$i++){
 <p>
 <?php $mem->show_help("hta_list"); ?>
 </p>
-</body>
-</html>
+<?php include_once("foot.php"); ?>

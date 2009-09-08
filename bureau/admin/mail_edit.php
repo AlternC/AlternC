@@ -28,16 +28,23 @@
  ----------------------------------------------------------------------
 */
 require_once("../class/config.php");
+include_once("head.php");
 
-if (!$res=$mail->get_mail_details($email)) {
-        $error=$err->errstr();
-        echo $error;
-}else{
+$fields = array (
+	"email"     => array ("request", "string", ""),
+	"domain"    => array ("request", "string", ""),
+);
+getFields($fields);
 
-include("head.php");
+if (!$res=$mail->get_mail_details($email))
+{
+	$error=$err->errstr();
+	echo $error;
+}
+else
+{
+
 ?>
-</head>
-<body>
 <h3><?php printf(_("Edit a mailbox of the domain %s"),"http://$domain"); ?> : </h3>
 <?php
 if ($error_edit) {
@@ -50,12 +57,12 @@ if ($error_edit) {
 	$alias=$res["alias"];
 } ?>
 
-<form action="mail_doedit.php" method="post">
+<form action="mail_doedit.php" method="post" name="main" id="main">
 <table border="1" cellspacing="0" cellpadding="4">
 	<tr><th colspan="2"><input type="hidden" name="email" value="<?php echo $email; ?>" />
 <input type="hidden" name="domain" value="<?php echo $domain; ?>" />
 <?php printf(_("Edit the mailbox %s"),$email); ?></th></tr>
-	<tr><td><label for="ispop"><?php __("Is it a POP account?"); ?></label></td><td><input id="ispop" type="checkbox" class="inc" name="pop" value="1" <?php if ($pop=="1") echo "checked=\"checked\""; ?> /><?php if ($pop) { __("WARNING: turning POP off will DELETE the mailbox and its content"); }?></td></tr>
+        <tr><td><label for="ispop"><?php __("Is it a POP account?"); ?></label></td><td><input id="ispop" type="checkbox" class="inc" name="pop" value="1" <?php if ($pop=="1") echo "checked=\"checked\""; ?> /><?php if ($pop) { __("WARNING: turning POP off will DELETE the mailbox and its content"); }?></td></tr>
 	<tr><td><label for="pass"><?php __("POP password"); ?></label></td><td><input type="password" class="int" name="pass" id="pass" value="<?php echo $pass; ?>" size="20" maxlength="32" /></td></tr>
 	<tr><td><label for="passconf"><?php __("Confirm password"); ?></label></td><td><input type="password" class="int" name="passconf" id="passconf" value="<?php echo $pass; ?>" size="20" maxlength="32" /></td></tr>
 	<tr><td><label for="alias"><?php __("Other recipients"); ?></label></td><td>(<?php __("One email per line"); ?>)<br /><textarea class="int" cols="32" rows="5" name="alias" id="alias"><?php echo $alias; ?></textarea></td></tr>
@@ -68,3 +75,7 @@ if ($error_edit) {
 <?php
 }
 ?>
+<script type="text/javascript">
+document.forms['main'].email.focus();
+</script>
+<?php include_once("foot.php"); ?>

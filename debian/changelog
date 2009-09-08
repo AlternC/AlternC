@@ -1,4 +1,4 @@
-alternc (0.9.10) stable; urgency=low
+alternc (0.9.10pre) stable; urgency=low
 
   * bugfixes:
     * fix a "already exist" error when creating a database containing an hyphen (-)
@@ -22,8 +22,11 @@ alternc (0.9.10) stable; urgency=low
       is a major performance hit on MySQL < 5.1.22 if there are > 1000
       databases on the system. This speeds up the AlternC login by about
       30 seconds on Koumbit.org.
-
- -- Antoine Beaupré <anarcat@koumbit.org>  Wed, 28 Jan 2009 19:52:46 -0500
+  * Major patch
+    * Blue desktop using only css, no frameset etc
+    * Sanitizing of get/request/post parameters
+	
+ -- Benjamin Sonntag <benjamin@alternc.org>  Sat, 12 May 2009 17:55:30 +0200
 
 alternc (0.9.9) stable; urgency=low
 

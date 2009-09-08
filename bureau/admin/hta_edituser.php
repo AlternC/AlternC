@@ -28,12 +28,15 @@
  ----------------------------------------------------------------------
 */
 require_once("../class/config.php");
+include_once ("head.php");
 
-include("head.php");
+$fields = array (
+	"user"     => array ("request", "string", ""),
+	"dir"      => array ("request", "string", ""),
+);
+getFields($fields);
+
 ?>
-
-</head>
-<body>
 <h3><?php printf(_("Editing user %s in the protected folder %s"),$user,$dir); ?></h3>
 <?php
 	if ($error) {
@@ -51,6 +54,4 @@ include("head.php");
 <tr><td colspan="2"><input type="submit" class="inb" value="<?php __("Change the password"); ?>" /></td></tr>
 </table>
 </form>
-</body>
-</html>
-
+<?php include_once("foot.php"); ?>

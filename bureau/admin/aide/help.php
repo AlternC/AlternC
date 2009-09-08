@@ -27,30 +27,9 @@
  Purpose of file:
  ----------------------------------------------------------------------
 */
-require_once("../../class/config.php");
+require_once("../../class/config_nochk.php");
 
-$hlist=array(
-	100=>"c26.html",
-	0=>"book1.html"
-	);
+header("Location: ".$help_baseurl."go?version=".urlencode($L_VERSION)."&hid=".$_REQUEST["hid"]);
 
-if (!$hlist[$hid]) {
-	$hid=0;
-}
+exit();
 
-?>
-<html>
-<head>
-<title>Aide en ligne <?php echo $host ?></title>
-<link rel="stylesheet" href="/admin/styles/base.css" type="text/css">
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-</head>
-<frameset cols="30%,*" onload="window.focus(); return true;">
-	<frame src="html/toc.htm" name="left">
-	<frame src="html/<?php echo $hlist[$hid]; ?>" name="right">
-</frameset>
-<noframes>
-	Votre navigateur doit supporter les cadres.<br />
-	Your browser must support frames
-</noframes>
-</html>

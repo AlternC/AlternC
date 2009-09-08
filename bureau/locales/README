@@ -8,6 +8,15 @@ dans lequel on a des fichiers .po en vrac (normalement 1 ou 2 fichiers .po par m
 
 Le fichier alternc.mo est donc construit à partir de TOUS les fichiers .po d'une même langue.
 
+Pour mettre a jour les fichiers .po a partir des sources : 
+
+cd bureau/locales
+make 
+
+puis allez voir les fichiers .po pour les mettre a jour (cherchez les fuzzy et les msgstr vide a remplir)
+
+une fois les modifications effectuees, lancer svn commit pour valider vos modifications dans les sources officielles d'AlternC.
+
 Howto translate AlternC in a new language
 =========================================
 
@@ -29,7 +38,7 @@ reflect the new developped features.
 
 You can just call the makefile to have the files regenerated:
 
-cd admin/locales
+cd bureau/locales
 make
 
 from "locales/" to update your language po files. New strings will have

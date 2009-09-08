@@ -27,20 +27,7 @@
  Purpose of file:
  ----------------------------------------------------------------------
 */
-
-global $lang;
-
-$doc_lang = substr($lang, 0, 2); // ex: get "fr" only, not "fr_CA"
-$doc_url  = 'http://alternc.org/wiki/Documentation/En/User';
-
-switch ($doc_lang) {
-  case 'fr':
-    $doc_url = 'http://alternc.org/wiki/Documentation/Fr/Utilisateur';
-    break;
-
-  case 'es':
-    $doc_url = 'http://alternc.org/wiki/Documentation/Es';
-    break;
-}
-
-echo '<dd><a href="' . $doc_url . '" target="help">' . _("Online help") . '</a></dd>';
+?>
+<div class="menu-box">
+<div class="menu-title"><img src="images/help.png" alt="<?php __("Online help"); ?>" />&nbsp;<a href="<?php echo $help_baseurl; ?>" target="help"><?php __("Online help"); ?></a></div>
+</div>

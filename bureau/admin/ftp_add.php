@@ -28,28 +28,26 @@
  ----------------------------------------------------------------------
 */
 require_once("../class/config.php");
+include_once("head.php");
 
 if (!$quota->cancreate("ftp")) {
 	$error=_("You cannot add any new ftp account, your quota is over.");
 	$fatal=1;
 }
-include("head.php");
+
 ?>
-</head>
-<body>
 <h3><?php __("Create a new ftp account"); ?></h3>
 <?php
 	if ($error) {
 		echo "<p class=\"error\">$error</p>";
-		if ($fatal) { 
-			echo "</body></html>";
-			exit();
+		if ($fatal) {
+		  include_once("foot.php");
+		  exit();
 		}
 	}
 ?>
-<form method="post" action="ftp_doadd.php" name="main">
+<form method="post" action="ftp_doadd.php" name="main" id="main">
 <table><thead><?php __("Create a new ftp account"); ?></thead>
-<tbody>
 <tr><th><input type="hidden" name="id" value="<?php echo $id ?>" />
 <label for="login"><?php __("Username"); ?></label></th><td>
 	<select class="inl" name="prefixe"><?php $ftp->select_prefix_list($prefixe); ?></select>&nbsp;<b>_</b>&nbsp;<input type="text" class="int" name="login" id="login" value="<?php echo $login; ?>" size="20" maxlength="64" />
@@ -64,8 +62,10 @@ include("head.php");
 </script>
 </td></tr>
 <tr><td colspan="2"><input type="submit" class="inb" name="submit" value="<?php __("Create this new FTP account."); ?>" /></td></tr>
-</tbody></table>
+</table>
 </form>
 <?php $mem->show_help("ftp_add"); ?>
-</body>
-</html>
+<script type="text/javascript">
+document.forms['main'].login.focus();
+</script>
+<?php include_once("foot.php"); ?>

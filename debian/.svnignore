@@ -1,0 +1,10 @@
+alternc
+alternc-slave.substvars
+files
+alternc-slave.debhelper.log
+alternc-slave.postrm.debhelper
+alternc.substvars
+.svnignore
+alternc-slave
+alternc.debhelper.log
+alternc.postrm.debhelper

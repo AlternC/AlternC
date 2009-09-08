@@ -29,19 +29,30 @@
 */
 
 		/* ############# DOMAINES ############# */
-$q=$quota->getquota("dom");
-if ($q["t"]>0) { 
+$q = $quota->getquota("dom");
+
+if ($q["t"] > 0)
+{
+
 ?>
-<dt><?php __("Domains"); ?></dt>
-	<?php if ($quota->cancreate("dom")) { ?>
-	<dd class="action"><a href="dom_add.php"><?php __("Add a domain"); ?></a></dd>
-	<?php }
-	/* Enumeration des domaines : */
-	$domain=$dom->enum_domains();
-	reset($domain);
-	while (list($key,$val)=each($domain)) {
-	?>
-	<dd class="element"><a href="dom_edit.php?domain=<?php echo urlencode($val) ?>"><?php echo $val ?></a></dd>
-<?php    }    ?>
-</dd></dt>
-<?php   }   ?>
+<div class="menu-box">
+<div class="menu-title" id="test">
+<img src="images/dom.png" alt="<?php __("Domains"); ?>" />&nbsp;<?php __("Domains"); ?> (<?= $q["u"]; ?>/<?= $q["t"]; ?>)</div>
+<div class="menu-content" id="menu-dom">
+<ul>
+<?php if ($quota->cancreate("dom")) { ?>
+	<li><a href="dom_add.php"><img src="images/new.png" alt="<?php __("Add a domain"); ?>" /><?php __("Add a domain"); ?></a></li>
+<?php }
+
+/* Enumeration des domaines : */
+$domlist = $dom->enum_domains();
+reset($domlist);
+while (list($key, $val) = each($domlist))
+{
+?>
+	<li><a href="dom_edit.php?domain=<?php echo urlencode($val) ?>"><?php echo $val ?></a></li>
+<?php } ?>
+</ul>
+</div>
+</div>
+<?php } ?>

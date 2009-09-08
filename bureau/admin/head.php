@@ -32,8 +32,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
 <head>
 <title>Bureau</title>
-<link rel="stylesheet" href="styles/base.css" type="text/css" />
-<link rel="stylesheet" href="styles/custom.css" type="text/css" />
+<link rel="stylesheet" href="styles/style.css" type="text/css" />
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<script type="text/javascript" language="javascript" src="/admin/js/alternc.js">
-</script>
+<script type="text/javascript" src="js/alternc.js"></script>
+<script type="text/javascript" src="js/wz_dragdrop.js"></script>
+</head>
+<body>
+<div id="global">
+<table>
+<tr>
+<td id="tdMenu"><div id="menu"><?php include_once("menu.php"); ?></div></td>
+<td id="tdContent"><div id="content">

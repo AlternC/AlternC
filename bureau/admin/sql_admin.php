@@ -28,25 +28,26 @@
  ----------------------------------------------------------------------
 */
 require_once("../class/config.php");
-
+// include_once ("head.php");
 
 if (!$r=$mysql->get_dblist()) {
 	$error=$err->errstr();
 } else {
-	setcookie("REMOTE_USER",$r[0]["login"]);
-	setcookie("REMOTE_PASSWORD",$r[0]["pass"]);
-	if ($lang) $l="&lang=".substr($lang,0,2).'-utf-8';
+	setcookie("REMOTE_USER",$r[0]["login"],0,"/");
+	setcookie("REMOTE_PASSWORD",$r[0]["pass"],0,"/");
+	if ($lang) $l="&lang=".substr($lang,0,2);
 	// TODO : make it an absolute url ! (even in httpS :))
-	header("Location: /admin/sql/index.php?server=1$l");
+	header("Location: /admin/sql/index.php?server=1");
 	exit();
 }
-include("head.php");
+
+include_once("head.php");
+
 ?>
-</head>
-<body>
 <h3><?php __("SQL Admin"); ?></h3>
 <?php
 	if ($error) {
-		echo "<p class=\"error\#>$error</p></body></html>";
+		echo "<p class=\"error\">$error</p>";
 	}
 ?>
+<?php include_once("foot.php"); ?>

@@ -34,18 +34,19 @@ if (!$mem->ChangeMail2($cookie,$cle,$usr)) {
 	$error=$err->errstr();
 }
 
-include("head.php");
+include_once("head.php");
+
 ?>
-</head>
-<body>
 <h3><?php __("Change the email of the account"); ?></h3>
 <?php
 	if ($error) {
-		echo "<p class=\"error\">$error</p></body></html>";
+		echo "<p class=\"error\">$error</p>";
+		include_once("foot.php");
 		exit();
 	}
 
 __("The mailbox has been successfully changed.");
+
+include_once("foot.php");
+
 ?>
-</body>
-</html>

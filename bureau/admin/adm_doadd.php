@@ -51,22 +51,20 @@ if (!($u=$admin->add_mem($login, $pass, $nom, $prenom, $nmail, $canpass, $type, 
   $mem->su($u);
   
   /*
-   * 0 = pas d'hébergement dns, en effet, pas besoin vu que les
-   * domaines *.koumbit.net sont bien sur le serveur
+   * 1 = hébergement dns, en effet, les
+   * domaines *.koumbit.net ne sont pas forcément sur le serveur
    *
    * 1 = noerase = empêche à l'utilisateur de modifier le dns ou de
    * supprimer le domaine
    *
    * 1 = force = ne tient pas compte du whois ou des droits de tld
    */
-
   if (($create_dom == 1)  && !is_null($create_dom_list)) {
-      # make sure we don't have multiple dots there
-      $dom->lock();
-      $dom->add_domain($login.".".preg_replace("/^\.\.*/", "", $create_dom_list),1,1,1);
-      $dom->unlock();
+    // make sure we don't have multiple dots there
+    $dom->lock();
+    $dom->add_domain($login.".".preg_replace("/^\.\.*/", "", $create_dom_list),1,1,1);
+    $dom->unlock();
   }
-
   $ftp->add_ftp($login,"",$pass,"/");
   $mem->unsu();
  

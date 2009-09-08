@@ -39,7 +39,7 @@ if ($submit) {
   $mem->su($uid);
   $qlist=$quota->qlist();
   reset($qlist);
-  
+
   while (list($key,$val)=each($qlist)) {
     $var="q_".$key;
     $quota->setquota($key,$$var);
@@ -48,8 +48,7 @@ if ($submit) {
   $error=_("The quotas has been successfully edited");
   include("adm_list.php");
   exit;
-  
-}
 
+}
 
 ?>

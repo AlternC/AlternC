@@ -28,15 +28,13 @@
  ----------------------------------------------------------------------
 */
 require_once("../class/config.php");
+include_once("head.php");
 
 if (!$r=$mysql->get_dblist()) {
 	$error=$err->errstr();
 }
 
-include("head.php");
 ?>
-</head>
-<body>
 <h3><?php __("MySQL Databases"); ?></h3>
 <?php
 	if ($error) {
@@ -46,11 +44,21 @@ include("head.php");
 ?>
 <p><?php __("Your current settings are"); ?> : </p>
 <table cellspacing="0" cellpadding="4">
-		<tr class="lst2"><th><?php __("Username"); ?></th><td><code><?php echo $mem->user["login"]; ?></code></td></tr>
-		<tr class="lst1"><th><?php __("Password"); ?></th><td><code><?php echo $r[0]["pass"]; ?></code></td></tr>
-		<tr class="lst2"><th><?php __("SQL Server"); ?></th><td><code><?php echo $mysql->server; ?></code></td></tr>
-		<tr class="lst1"><th><?php __("Database"); ?></th><td><code><?php echo $r[0]["db"]; ?></code></td></tr>
+	<tr class="lst2">
+		<th><?php __("Username"); ?></th>
+		<td><code><?php echo $mem->user["login"]; ?></code></td>
+	</tr>
+	<tr class="lst1">
+		<th><?php __("Password"); ?></th>
+		<td><code><?php echo $r[0]["pass"]; ?></code></td>
+	</tr>
+	<tr class="lst2">
+		<th><?php __("SQL Server"); ?></th>
+		<td><code><?php echo $mysql->server; ?></code></td>
+	</tr>
+	<tr class="lst1">
+		<th><?php __("Database"); ?></th>
+		<td><code><?php echo $r[0]["db"]; ?></code></td>
+	</tr>
 </table>
-
-</body>
-</html>
+<?php include_once("foot.php"); ?>

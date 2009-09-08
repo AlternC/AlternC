@@ -28,11 +28,18 @@
  ----------------------------------------------------------------------
 */
 require_once("../class/config.php");
+include_once("head.php");
 
 if (!$admin->enabled) {
 	__("This page is restricted to authorized staff");
+	include_once("foot.php");
 	exit();
 }
+
+$fields = array (
+	"uid"    => array ("request", "integer", 0),
+);
+getFields($fields);
 
 if (!$us=$admin->get($uid)) {
 	$error=$err->errstr();
@@ -43,14 +50,13 @@ if (!$r=$quota->getquota()) {
 	$error=$err->errstr();
 }
 $mem->unsu();
-include("head.php");
+
 ?>
-</head>
-<body>
 <h3><?php __("Editing the quotas of a member"); ?></h3>
 <?php
 	if ($error) {
 	  echo "<p class=\"error\">$error</p>";
+	  include_once("foot.php");
 	  exit();
 	}
 ?>
@@ -65,9 +71,10 @@ reset($ql);
 while (list($key,$val)=each($ql)) {
 	echo "<tr>";
 	echo "<td>";
-	if ($r[$key]["t"]==$r[$key]["u"] && $r[$key]["u"]) echo "<font color=red>";
-	echo _("quota_".$key)."</td>";
-	if ($r[$key]["t"]==$r[$key]["u"] && $r[$key]["u"]) echo "</font>";
+	if ($r[$key]["t"]==$r[$key]["u"] && $r[$key]["u"]) echo "<span style=\"color: red;\">";
+	echo "<label for=\"q_$key\">" . _("quota_".$key) . "</label>";
+	if ($r[$key]["t"]==$r[$key]["u"] && $r[$key]["u"]) echo "</span>";
+	echo "</td>";
 	echo "<td align=\"center\"><input type=\"text\" class=\"int\" style=\"text-align: right\" size=\"10\" maxlength=\"10\" value=\"".$r[$key]["t"]."\" name=\"q_".$key."\" id=\"q_".$key."\" /></td>";
 	echo "<td align=\"right\"><code><label for=\"q_$key\">".$r[$key]["u"]."</label></code>&nbsp;</td>";
 	echo "</tr>";
@@ -77,5 +84,4 @@ while (list($key,$val)=each($ql)) {
 </td></tr>
 </table>
 </form>
-</body>
-</html>
+<?php include_once("foot.php"); ?>

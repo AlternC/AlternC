@@ -29,12 +29,11 @@
 */
 require_once("../class/config.php");
 
-if (!isSet($dns)) $dns="1";
+include_once("head.php");
 
-include("head.php");
+if (!isset($dns)) $dns="1";
+
 ?>
-</head>
-<body onload="document.forms['main'].newdomain.focus();">
 <h3><?php __("Domain hosting"); ?></h3>
 <?php
 if (!$quota->cancreate("dom")) { ?>
@@ -45,16 +44,9 @@ exit();
 if ($error) echo "<p class=\"error\">$error</p>";
 ?>
 <form method="post" action="dom_doadd.php" id="main">
-<table><thead><?php __("Domain hosting"); ?></thead><tbody>
-<tr>
-<th><label for="newdomain"><?php __("Domain name"); ?> : www.</label></th>
-<td><input type="text" class="int" id="newdomain" name="newdomain" value="<?php echo $newdomain ?>" size="32" maxlength="255" /></td>
-</tr>
-<tr>
-<th></th>
-<td><input type="submit" class="inb" name="submit" value="<?php __("Add this domain"); ?>" /></td>
-</tr>
-</tbody>
+<table><tr><td>
+<b><label for="newdomain"><?php __("Domain name"); ?> : www.</label></b></td><td><input type="text" class="int" id="newdomain" name="newdomain" value="<?php echo $newdomain ?>" size="32" maxlength="255" />
+</td></tr><tr><td></td><td><input type="submit" class="inb" name="submit" value="<?php __("Add this domain"); ?>" /></td></tr>
 </table>
 <p>
 <input type="checkbox" name="dns" class="inc" value="1" id="yndns" <?php if ($dns=="1") echo "checked=\"checked\""; ?> /><br />
@@ -75,5 +67,7 @@ if ($error) echo "<p class=\"error\">$error</p>";
 		echo "</pre>";
 	}
 ?>
-</body>
-</html>
+<script type="text/javascript">
+document.forms['main'].newdomain.focus();
+</script>
+<?php include_once("foot.php"); ?>

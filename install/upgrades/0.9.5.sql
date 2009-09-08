@@ -1,11 +1,11 @@
 -- Pour les durées de comptes
-ALTER IGNORE TABLE `membres` ADD COLUMN `created` datetime default NULL AFTER `type`;
-ALTER IGNORE TABLE `membres` ADD COLUMN `renewed` datetime default NULL AFTER `created`;
-ALTER IGNORE TABLE `membres` ADD COLUMN `duration` int(4) default NULL AFTER `renewed`;
+ALTER IGNORE TABLE membres ADD COLUMN created datetime default NULL AFTER type;
+ALTER IGNORE TABLE membres ADD COLUMN renewed datetime default NULL AFTER created;
+ALTER IGNORE TABLE membres ADD COLUMN duration int(4) default NULL AFTER renewed;
 
 -- Pour l'encryptage des mots de passe ftp
-ALTER IGNORE TABLE `ftpusers` ADD COLUMN `encrypted_password` VARCHAR(32) default NULL AFTER `password`;
-UPDATE `ftpusers` SET `encrypted_password`=ENCRYPT(`password`) WHERE `password`!='';
+ALTER IGNORE TABLE ftpusers ADD COLUMN encrypted_password VARCHAR(32) default NULL AFTER password;
+UPDATE ftpusers SET encrypted_password=ENCRYPT(password) WHERE password!='';
 
 -- --------------------------------------------------------
 -- TABLES de mémorisation de la taille des dossiers web/mail/db

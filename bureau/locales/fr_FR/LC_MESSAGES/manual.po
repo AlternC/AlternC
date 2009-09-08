@@ -30,7 +30,7 @@ msgstr "Membre introuvable"
 
 #. This login already exists
 msgid "err_admin_3"
-msgstr "Le login existe déja !"
+msgstr "Le login existe déjà !"
 
 #. -- I cannot create this account --
 msgid "err_admin_4"
@@ -51,11 +51,11 @@ msgstr ""
 
 #. This account is ALREADY an administrator account
 msgid "err_admin_8"
-msgstr "L'utilisateur spécifié est DEJA administrateur !"
+msgstr "L'utilisateur spécifié est DÉJÀ Administrateur !"
 
 #. This account is NOT an administrator account !
 msgid "err_admin_9"
-msgstr "L'utilisateur spécifié n'est PAS administrateur !"
+msgstr "L'utilisateur spécifié n'est PAS Administrateur !"
 
 #. Login can only contains characters a-z, 0-9 and -
 msgid "err_admin_10"
@@ -71,7 +71,7 @@ msgstr "Ce TLD existe déjà"
 
 #. The login is too long (16 chars max)
 msgid "err_admin_13"
-msgstr "Le login est trop long (16< caractères maximum)"
+msgstr "Le login est trop long (16 caractères maximum)"
 
 #. Domain names
 msgid "quota_dom"
@@ -124,7 +124,7 @@ msgstr ""
 
 #. The Whois database is unavailable, please try again later.
 msgid "err_dom_11"
-msgstr "Impossible de se connecter a la base Whois"
+msgstr "Impossible de se connecter à la base Whois"
 
 #. The domain cannot be found in the whois database.
 msgid "err_dom_12"
@@ -145,7 +145,7 @@ msgstr "Aucune modification n'a été demandée ... "
 
 #. The sub-domain already exists.
 msgid "err_dom_16"
-msgstr "Le sous-domaine existe deja."
+msgstr "Le sous-domaine existe déjà."
 
 #. --- Programm error --- Lock already obtained !
 msgid "err_dom_17"
@@ -189,9 +189,10 @@ msgstr ""
 "sont autorisés)."
 
 #. There is no MX record pointing to this server, and you are asking us to host the Mail here 
-#, fuzzy
 msgid "err_dom_25"
-msgstr "Le domaine '%s' ne vous appartient pas."
+msgstr ""
+"Il n'y a pas de MX pointant vers ce serveur, alors que vous nous demandez "
+"d'héberger le mail ici."
 
 #. - Entrez le nom du domaine que vous souhaitez héberger. Le nom de domaine 
 #. doit être complet, mais <b>sans le www.</b><br /> IMPORTANT : Si vous voulez 
@@ -206,7 +207,7 @@ msgstr ""
 "doit être complet, mais <b>sans le www.</b><br /> IMPORTANT : Si vous voulez "
 "un hébergement réel de domaine, il faut que les DNS de votre domaine "
 "pointent vers nos serveurs DNS. Contacter votre hébergeur pour plus "
-"d'information.<br /> Exemples : globenet.org / demo.com / test.eu.org etc."
+"d'information."
 "<br />Plus d'info sur la gestion des domaines dans l'aide en ligne "
 "HELPID_200<br />"
 
@@ -219,8 +220,8 @@ msgstr ""
 #. HELPID_200<br />
 msgid "hlp_add_domain_2"
 msgstr ""
-"Cliquez sur le lien ci-dessus. Vous pourrez ensuite accéder aux paremètres "
-"du domaine dans le menu à gauche.2 liens vont apparaitre : <br />- un "
+"Cliquez sur le lien ci-dessus. Vous pourrez ensuite accéder aux paramètres "
+"du domaine dans le menu à gauche. 2 liens vont apparaitre&nbsp;: <br />- un "
 "premier pour modifier les paramètres d'hébergement du domaine (sous-"
 "domaines, redirections, hébergement mails ...) <br />- un second pour gérer "
 "les comptes emails du domaine (si vous souhaitez créer des boites aux "
@@ -235,7 +236,7 @@ msgid "hlp_del_domain"
 msgstr ""
 "Le domaine a été effacé, mais les fichiers de votre site n'ont pas été "
 "détruits.<br />Si vous souhaitez détruire les fichiers du site web, utilisez "
-"le Gestionnaire de Fichier<br />Plus d'info sur la gestion des domaines dans "
+"le Gestionnaire de Fichiers ou un compte FTP<br />Plus d'info sur la gestion des domaines dans "
 "l'aide en ligne HELPID_200<br />"
 
 #. Cette zone vous permet de modifier les paramètres de votre domaine, ainsi 
@@ -310,8 +311,8 @@ msgstr ""
 msgid "hlp_ftp_list_no"
 msgstr ""
 "Vous n'avez actuellement aucun Compte FTP de disponible. Cliquez sur "
-"'Création d'un compte ftp' pour en créer un.<br />Pour pouvoir accéder à vos "
-"fichiers avec un logiciel de ftp, vous devez créer au moins un compte.  "
+"'Création d'un compte FTP' pour en créer un.<br />Pour pouvoir accéder à vos "
+"fichiers avec un logiciel de FTP, vous devez créer au moins un compte.  "
 "Chaque compte est associé à un répertoire, et n'aura donc accès qu'aux "
 "fichiers situés dans ce répertoire ou en dessous. <br />Plus d'info sur le "
 "FTP dans l'aide en ligne HELPID_100<br />"
@@ -383,7 +384,7 @@ msgstr "Comptes emails"
 
 #. DB connection impossible, please try again later.
 msgid "err_mail_1"
-msgstr "Connection ldap impossible. Reessayez plus tard."
+msgstr "Connexion à la base de données impossible. Réessayez plus tard."
 
 #. No email on domain '%s'
 msgid "err_mail_2"
@@ -402,7 +403,7 @@ msgstr ""
 
 #. -- Server error --- Parameter is incorrect (%s)
 msgid "err_mail_5"
-msgstr "-- Erreur Serveur --- Parametre incorrect (%s)"
+msgstr "-- Erreur Serveur --- Paramètre incorrect (%s)"
 
 #. The domain '%s' does not exist.
 msgid "err_mail_6"
@@ -410,7 +411,7 @@ msgstr "Le domaine '%s' n'existe pas."
 
 #. The email '%s' already exists.
 msgid "err_mail_7"
-msgstr "Le mail '%s' existe deja"
+msgstr "Le mail '%s' existe déjà"
 
 #. Your mail account quota is over. You cannot create more email accounts.
 msgid "err_mail_8"
@@ -419,7 +420,7 @@ msgstr ""
 
 #. The domain '%s' does not exist.
 msgid "err_mail_9"
-msgstr "Le domaine '%s' existe deja."
+msgstr "Le domaine '%s' existe déjà."
 
 #. -- Programm error -- Mail quota does not exist
 msgid "err_mail_10"
@@ -446,6 +447,9 @@ msgid "err_mail_15"
 msgstr ""
 "Ce mail n'est pas un compte pop, il est impossible d'en changer le mot de "
 "passe !"
+
+msgid "err_mail_16"
+msgstr "Ce compte esclave MX existe déjà"
 
 #. OK
 msgid "err_err_0"
@@ -604,7 +608,7 @@ msgstr "Le fichier entré n'existe pas ou est incorect."
 #. Your cannot create your main database : you still have other dbs !
 msgid "err_mysql_10"
 msgstr ""
-"Erreur : vous ne pouvez créer votre base principale : il vous reste d'autres "
+"Erreur : vous ne pouvez créer votre base principale&nbsp;: il vous reste d'autres "
 "bases !"
 
 #. You have no database, click on 'Databases' to create the first one
@@ -661,7 +665,7 @@ msgstr ""
 "remplacé par le nom de la base de données.<br />ATTENTION : si vous modifiez "
 "les paramètres de la sauvegarde (nombre de sauvegardes, compression ...) des "
 "vieilles sauvegardes peuvent rester dans le répertoire concerné. Vous pouvez "
-"les effacer dans le gestionnaire de fichier."
+"les effacer dans le gestionnaire de fichiers."
 
 #. Web Statistics
 msgid "quota_sta2"
@@ -689,54 +693,32 @@ msgstr "Répertoire ou fichier incorrect !"
 msgid "err_bro_2"
 msgstr "Vous ne pouvez pas déplacer un fichier dans le même répertoire !"
 
+#. If we manage your DNS <br />You can manage your mails elsewhere if you want 
+#. (MX field).<br />Write <b><code>%s</code></b> in this field if your mail 
+#. must be managed by %s<br />or put the IP address or name of the mail server 
+#. used to manage your mails.<small>Warning : if you put nothing in this field, 
+#. your mails will be unavailable</small>
+msgid "help_dns_mx %s %s"
+msgstr ""
+
 #. If we don't manage the DNS for this domain <br />do we manage your mails?
-#, fuzzy
 msgid "help_dns_mail"
 msgstr ""
-"- Entrez le nom du domaine que vous souhaitez héberger. Le nom de domaine "
-"doit être complet, mais <b>sans le www.</b><br /> IMPORTANT : Si vous voulez "
-"un hébergement réel de domaine, il faut que les DNS de votre domaine "
-"pointent vers nos serveurs DNS. Contacter votre hébergeur pour plus "
-"d'information.<br /> Exemples : globenet.org / demo.com / test.eu.org etc."
-"<br />Plus d'info sur la gestion des domaines dans l'aide en ligne "
-"HELPID_200<br />"
 
 #. If you want to delete the domain %s, click the button below.Warning : this 
 #. delete all the ftp, mails, mailing-lists ... associated with thisdomain and 
 #. all its subdomains!
-#, fuzzy
 msgid "help_domain_del %s"
 msgstr ""
-"Cliquez sur le lien ci-dessus. Vous pourrez ensuite accéder aux paremètres "
-"du domaine dans le menu à gauche.2 liens vont apparaitre : <br />- un "
-"premier pour modifier les paramètres d'hébergement du domaine (sous-"
-"domaines, redirections, hébergement mails ...) <br />- un second pour gérer "
-"les comptes emails du domaine (si vous souhaitez créer des boites aux "
-"lettres).<br />Plus d'info sur la gestion des domaines dans l'aide en ligne "
-"HELPID_200<br />"
 
 #. You can create various databases<br />Click on 'SQL Admin' in the menu to 
 #. manage them<br />or use the table below to backup, retrieve or delete them:
-#, fuzzy
 msgid "help_sql_list_ok"
 msgstr ""
-"Vous n'avez actuellement aucun Compte FTP de disponible. Cliquez sur "
-"'Création d'un compte ftp' pour en créer un.<br />Pour pouvoir accéder à vos "
-"fichiers avec un logiciel de ftp, vous devez créer au moins un compte.  "
-"Chaque compte est associé à un répertoire, et n'aura donc accès qu'aux "
-"fichiers situés dans ce répertoire ou en dessous. <br />Plus d'info sur le "
-"FTP dans l'aide en ligne HELPID_100<br />"
 
 #. Your haven't created your main database yet, please enter a password to create it.
-#, fuzzy
 msgid "help_sql_list_no"
 msgstr ""
-"Vous n'avez actuellement aucun Compte FTP de disponible. Cliquez sur "
-"'Création d'un compte ftp' pour en créer un.<br />Pour pouvoir accéder à vos "
-"fichiers avec un logiciel de ftp, vous devez créer au moins un compte.  "
-"Chaque compte est associé à un répertoire, et n'aura donc accès qu'aux "
-"fichiers situés dans ce répertoire ou en dessous. <br />Plus d'info sur le "
-"FTP dans l'aide en ligne HELPID_100<br />"
 
 # $d,$m,$y,$h,$i,$hh,$am
 #  1  2  3  4  5  6   7
@@ -766,3 +748,23 @@ msgstr "%1$d/%2$d/%3$d %4$d:%5$d"
 #, fuzzy
 #~ msgid "err_stats_7"
 #~ msgstr "Le fichier .htaccess n'existe pas"
+
+#~ msgid "1 column, detailed"
+#~ msgstr "1 colonne, détaillée"
+
+#~ msgid "2 columns, short"
+#~ msgstr "2 colonnes, court"
+
+#~ msgid "3 columns, short"
+#~ msgstr "3 colonnes, court"
+
+#~ msgid "Go back to the file manager"
+#~ msgstr "Retourner au gestionnaire de fichiers"
+
+#~ msgid "Edit the newly created file"
+#~ msgstr "Editer le nouveau fichier"
+
+#~ msgid "hlp_login"
+#~ msgstr ""
+#~ "Vous pouvez aussi consulter l'aide en ligne sur l'accueil du panneau de "
+#~ "contrôle HELPID_300<br />"

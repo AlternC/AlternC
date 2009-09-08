@@ -36,10 +36,9 @@ if (!$admin->enabled) {
 	exit();
 }
 
-include("head.php");
+include_once ("head.php");
+
 ?>
-</head>
-<body>
 <h3><?php __("Change the default quotas"); ?></h3>
 <?php
 	if ($error) {
@@ -47,14 +46,17 @@ include("head.php");
 	}
 
 ?>
-<p><form method="post" action="adm_dodefquotas.php">
-<input type="hidden" name="action" value="add">
-<input type="text" name="type" class="int"></td>
+<form method="post" action="adm_dodefquotas.php">
+<p>
+<input type="hidden" name="action" value="add" />
+<input type="text" name="type" class="int" />
 <input type="submit" class="inb" value="<?php __("Add account type"); ?>" />
-</form></p>
+</p>
+</form>
 
-<p><form method="post" action="adm_dodefquotas.php">
-<input type="hidden" name="action" value="delete">
+<form method="post" action="adm_dodefquotas.php">
+<p>
+<input type="hidden" name="action" value="delete" />
 <select name="type" id="type" class="inl">
 <?php
 $db->query("SELECT distinct(type) FROM defquotas WHERE TYPE != 'default' ORDER by type");
@@ -64,50 +66,45 @@ while($db->next_record()) {
 }
 ?></select>
 <input type="submit" class="inb" value="<?php __("Delete account type"); ?>" />
-</form></p>
+</p>
+</form>
 
 <p>
 <?php __("Here is the list of the quotas on the server for the new accounts. If you want to change them, enter new values"); ?>
 </p>
 
 <form method="post" action="adm_dodefquotas.php">
-<input type="hidden" name="action" value="modify">
+<div>
+<input type="hidden" name="action" value="modify" />
 <?php
 $col=1;
+$qarray=$quota->qlist();
 $qlist=$quota->getdefaults();
-$aqlist = $quota->qlist();
 reset($qlist);
-foreach($qlist as $qname => $q)
-{
-
+foreach($qlist as $type => $q) {
 ?>
-<h4><?php echo _("Accounts of type"). " \"" . $qname . "\"" ?></h4>
+<div>
+<h4><?php echo _("Accounts of type"). " \"$type\"" ?></h4>
 <table border="0" cellpadding="4" cellspacing="0">
 <tr><th><?php __("Quotas") ?></th><th><?php __("Default Value"); ?></th></tr>
 <?php
-
-	foreach($aqlist as $aqtype => $aqname)
-	{
-		$key = $qname . ":" . $aqtype;
-		$col=3-$col;
-
+foreach($q as $name => $value) {
+	$key = $type . ":" . $name;
+	$col=3-$col;
 ?>
+
 <tr class="lst<?php echo $col; ?>">
-<td><label for="<?php echo $key; ?>"><?php echo $aqname; ?></label></td>
-<td><input type="text" class="int" size="16" maxlength="16" name="<?php echo $key; ?>" id="<?php echo $key; ?>" value="<?php echo $q[$aqtype]; ?>" /></td></tr>
+<td><label for="<?php echo $key; ?>"><?php echo $qarray[$name]; ?></label></td>
+<td><input type="text" class="int" size="16" maxlength="16" name="<?php echo $key; ?>" id="<?php echo $name; ?>" value="<?php echo $value; ?>" /></td></tr>
 <?php
-
-	}
-
+  }
 ?>
 </table>
+</div>
 <?php
-
 }
-
 ?>
 <input type="submit" class="inb" value="<?php __("Edit the default quotas"); ?>" />
+</div>
 </form>
-
-</body>
-</html>
+<?php include_once("foot.php"); ?>

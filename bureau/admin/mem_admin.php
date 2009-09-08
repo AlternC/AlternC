@@ -29,22 +29,24 @@
 */
 require_once("../class/config.php");
 
+$fields = array (
+	"admlist"    => array ("request", "string", ""),
+);
+getFields($fields);
+
 if (!$mem->adminpref($admlist)) {
 	$error=$err->errstr();
 } else {
 	$error=_("Your administrator preferences has been successfully changed.");
 }
 
-include("head.php");
+include_once("head.php");
+
 ?>
-</head>
-<body>
 <h3><?php __("Admin preferences"); ?></h3>
 <?php
 	if ($error) {
-		echo "<p class=\"error\">$error</p></body></html>";
-		exit();
+		echo "<p class=\"error\">$error</p>";
 	}
 ?>
-</body>
-</html>
+<?php include_once("foot.php"); ?>

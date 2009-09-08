@@ -34,60 +34,44 @@ if (!$admin->enabled) {
 	exit();
 }
 
-$id = $_GET['id'];
+$fields = array (
+	"id"    => array ("request", "integer", 0),
+);
+getFields($fields);
 
 if (!$admin->checkcreator($id)) {
   __("This page is restricted to authorized staff");
   exit();
 }
 
-if (!$r=$admin->get($id)) {
+if (!$r=$admin->get($id))
+{
 	$error=$err->errstr();
-} else {
+}
+else
+{
+	if (!$mem->setid($id))
+	{
+		$error=$err->errstr();
+		include("index.php");
+		exit();
+	}
 
-if (!$mem->setid($id)) {
-        $error=$err->errstr();
-	include("index.php");
+	include_once("main.php");
 	exit();
 }
 
+include_once("head.php");
+
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
-<html>
-<head>
-<title><?php __("AlternC Desktop"); ?></title>
-<link rel="stylesheet" href="styles/base.css" type="text/css" />
-<link rel="stylesheet" href="styles/custom.css" type="text/css" />
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-</head>
-<frameset cols="225px,*">
-	<frame src="menu.php" name="left" />
-	<frame src="main.php" name="right" />
-<noframes>
-<body>
-<p>
-	Votre navigateur doit supporter les cadres.<br />
-	Your browser must support frames
-</p>
-</body>
-</noframes>
-</frameset>
-</html>
-<?php
-					  exit();
-}
-include("head.php");
-?>
-</head>
-<body>
 <h3><?php __("Member login"); ?></h3>
 <?php
-	if ($error) {
-		echo "<p class=\"error\">$error</p></body></html>";
+
+	if ($error)
+	{
+		echo "<p class=\"error\">$error</p>";
+		include_once("foot.php");
 		exit();
 	}
 ?>
-</body>
-</html>
-
-
+<?php include_once("foot.php"); ?>

@@ -29,13 +29,12 @@
 */
 require_once("../class/config.php");
 
-include("head.php");
+include_once("head.php");
+
 if (!$r=$mysql->get_mysql_details($id)) {
         $error=$err->errstr();
 }
 ?>
-</head>
-<body>
 <h3><?php __("MySQL Databases"); ?></h3>
 <?php
 if ($r["enabled"]) {
@@ -57,5 +56,4 @@ __("You currently have no database defined");
 }
 ?>
 </p>
-</body>
-</html>
+<?php include_once("foot.php"); ?>

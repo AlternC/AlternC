@@ -50,4 +50,5 @@ if (!$mail->add_mail($domain,$email,$pop,$pass,$alias)) {
 	}
 	exit();
 }
+
 ?>

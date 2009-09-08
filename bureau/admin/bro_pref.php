@@ -37,19 +37,19 @@ if ($submit) {
 }
 $p=$bro->GetPrefs();
 
-include("head.php");
+include_once("head.php");
+
 ?>
-</head>
-<body>
 <?php if ($error) echo "<font color=\"red\">$error</font><br />"; ?>
-<h3><?php __("File editor preferences"); ?></h3>
+<h3><?php __("File browser preferences"); ?></h3>
 <form action="bro_pref.php" method="post">
 
+
 <table cellpadding="6" border="1" cellspacing="0">
-<tr><td colspan="2"><h4><?php __("File editor preferences"); ?></h4></td></tr>
+<tr><td colspan="2"><h4><?php __("File browser preferences"); ?></h4></td></tr>
 <tr><td><?php __("Horizontal window size"); ?></td><td><select class="inl" name="editsizex">
 <?php
-for($i=10;$i<=200;$i+=10) {
+for($i=50;$i<=200;$i+=10) {
 	echo "<option";
 	if ($p["editsizex"]==$i) echo " selected";
 	echo ">$i";
@@ -57,7 +57,7 @@ for($i=10;$i<=200;$i+=10) {
 ?></select></td></tr>
 <tr><td><?php __("Vertical window size"); ?></td><td><select class="inl" name="editsizey">
 <?php
-for($i=4;$i<=60;$i+=2) {
+for($i=4;$i<=80;$i+=2) {
 	echo "<option";
 	if ($p["editsizey"]==$i) echo " selected";
 	echo ">$i";
@@ -79,11 +79,6 @@ for($i=0;$i<count($bro->l_editor_size);$i++) {
 	echo ">"._($bro->l_editor_size[$i]);
 }
 ?></select></td></tr>
-</table>
-<p>&nbsp;</p>
-
-<table cellpadding="6" border="1" cellspacing="0">
-<tr><td colspan="2"><h4><?php __("File browser preferences"); ?></h4></td></tr>
 <tr><td><?php __("File list view"); ?></td><td><select class="inl" name="listmode">
 <?php
 for($i=0;$i<count($bro->l_mode);$i++) {
@@ -134,10 +129,9 @@ for($i=0;$i<count($bro->l_icons);$i++) {
 ?></select></td></tr>
 
 </table>
-<p><input type="submit" name="submit" class="inb" value="<?php __("Change my settings"); ?>"></p>
+<p><input type="submit" name="submit" class="inb" value="<?php __("Change my settings"); ?>" /></p>
 
 </form>
 <p>&nbsp;</p>
 <a href="bro_main.php"><?php __("Back to the file browser"); ?></a>
-</body>
-</html>
+<?php include_once("foot.php"); ?>

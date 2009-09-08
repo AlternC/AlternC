@@ -35,16 +35,15 @@ if (!$mem->passwd($oldpass,$newpass,$newpass2)) {
 	$error=_("Your password has been successfully changed.");
 }
 
-include("head.php");
+include_once("head.php");
+
 ?>
-</head>
-<body>
 <div align="center"><h3><?php __("Password change"); ?></h3></div>
 <?php
 	if ($error) {
-		echo "<font color=red>$error</font></body></html>";
+		echo "<font color=red>$error</font>";
+		include("foot.php");
 		exit();
 	}
 ?>
-</body>
-</html>
+<?php include_once("foot.php"); ?>

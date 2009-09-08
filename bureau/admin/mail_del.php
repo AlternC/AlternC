@@ -29,22 +29,44 @@
 */
 require_once("../class/config.php");
 
+
+$fields = array (
+	"d"    => array ("request", "array", ""),
+	"domain"  => array ("request", "string", ""),
+);
+getFields($fields);
+
 if (!is_array($d)) {
         $d[]=$d;
 }
 
 reset($d);
 
-include("head.php");
+include_once ("head.php");
+
+if ($confirm=="y") {
+
+while (list($key,$val)=each($d)) {
+	if (!$mail->del_mail($val)) {
+		$error.=sprintf(_("The mailbox <b>%s</b> does not exist!")."<br />",$val);
+	} else {
+		$error.=sprintf(_("The mailbox <b>%s</b> has been deleted!")."<br />",$val); 
+	}
+}
+include("mail_list.php");
+ exit();
+}
+
 ?>
 </head>
 <body>
 <h3><?php __("Deleting mail accounts"); ?> : </h3>
 <p><?php __("Please confirm the deletion of the following mail accounts:"); ?></p>
-
-<form method="post" action="mail_dodel.php" id="main">
-
+<form method="post" action="mail_del.php" id="main">
 <p>
+<input type="hidden" name="confirm" value="y" />
+<input type="hidden" name="domain" value="<?php echo $domain; ?>" />
+
 <?php
 
 while (list($key,$val)=each($d)) {
@@ -57,6 +79,11 @@ while (list($key,$val)=each($d)) {
 <p><input type="submit" class="inb" name="submit" value="<?php __("Delete the selected mailboxes"); ?>" /> - <input type="button" name="cancel" id="cancel" onclick="window.history.go(-1);" class="inb" value="<?php __("Don't delete accounts and go back to the mail list"); ?>"/>
 </p>
 
+<p>
+<?php __("Warning: Deleting a mailbox will destroy all the emails it contains! You will <b>NOT</b> be able to get it back!"); ?>
+</p>
+
 </form>
+<?php include_once("foot.php"); ?>
 </body>
 </html>

@@ -82,8 +82,7 @@ if ($select) {
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
 <head>
 <title>Browser for folder</title>
-<link rel="stylesheet" href="styles/base.css" type="text/css" />
-<link rel="stylesheet" href="styles/custom.css" type="text/css" />
+<link rel="stylesheet" href="styles/style.css" type="text/css" />
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 
 <?php
@@ -101,8 +100,7 @@ if ($select) {
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
 <head>
 <title>Recherche d'un dossier</title>
-<link rel="stylesheet" href="styles/base.css" type="text/css" />
-<link rel="stylesheet" href="styles/custom.css" type="text/css" />
+<link rel="stylesheet" href="styles/style.css" type="text/css" />
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <script type="text/javascript">
 /* Fonction appellée lors du lancement d'un popup Fichier : */

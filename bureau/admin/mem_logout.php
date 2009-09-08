@@ -36,14 +36,13 @@ $mem->del_session();
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
 <head>
 <title><?php __("Disconnected"); ?></title>
-<link rel="stylesheet" href="styles/base.css" type="text/css" />
-<link rel="stylesheet" href="styles/custom.css" type="text/css" />
+<link rel="stylesheet" href="styles/style.css" type="text/css" />
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 </head>
-<body>
+<body style="margin: 20px;">
 <h3 style="text-align: center"><?php __("Disconnected"); ?></h3>
 
 <?php __("You have been logged out of your administration desktop."); ?><br />
-<a href="index.php"><?php __("Click here to log in"); ?></a>
+<a href="../index.php"><?php __("Click here to log in"); ?></a>
 </body>
 </html>

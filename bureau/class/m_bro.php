@@ -278,8 +278,8 @@ class m_bro {
    * si $file est un dossier, retourne la taille de ce dossier et de tous
    * ses sous dossiers.
    * @param string $file Fichier dont on souhaite connaitre la taille
+   * @param boolean $showdirsize recursively compute the directory size.
    * @return integer Taille du fichier en octets.
-   * TODO : create a du cache ...
    */
   function fsize($file, $showdirsize = false) {
     if (is_dir($file)) {
@@ -293,6 +293,12 @@ class m_bro {
     }
   }
 
+
+  /* ----------------------------------------------------------------- */
+  /** Returns the size of a directory, by adding all it's files sizes
+   * @param string $dir the directory whose size we want to compute 
+   * @return integer the total size in bytes.
+   */
   function dirsize($dir) {
     $totalsize = 0;
 
@@ -308,10 +314,8 @@ class m_bro {
           }
         }
       }
-
       closedir($handle);
     }
-
     return $totalsize;
   }
 
@@ -335,6 +339,7 @@ class m_bro {
     }
   }
 
+
   /* ----------------------------------------------------------------- */
   /** Crée un fichier vide dans un dossier
    * @param string $dir Dossier dans lequel on crée le nouveau fichier
@@ -355,6 +360,7 @@ class m_bro {
     $db->query("UPDATE browser SET crff=0 WHERE uid='$cuid';");
     return true;
   }
+
 
   /* ----------------------------------------------------------------- */
   /** Efface les fichiers du tableau $file_list dans le dossier $R
@@ -378,6 +384,7 @@ class m_bro {
     }
     return true;
   }
+
 
   /* ----------------------------------------------------------------- */
   /** Renomme les fichier de $old du dossier $R en $new
@@ -410,6 +417,7 @@ class m_bro {
     return true;
   }
 
+
   /* ----------------------------------------------------------------- */
   /** Déplace les fichier de $d du dossier $old vers $new
    * @param array of string $d Liste des fichiers du dossier $old à déplacer
@@ -424,7 +432,16 @@ class m_bro {
       $err->raise("bro",1);
       return false;
     }
-    $new=$this->convertabsolute($new,0);
+
+    // FIXME: check that we don't have a huge security issue here ...
+    // If the destionation (new) doesn't have an absolute path, give it the prefix (old) from the first file found
+    if ($new[0] != '/') {
+      // Ex: settings.php will become /var/alternc/html/f/foo/www/example.org/drupal-6.10/sites/default/settings.php
+      $new = $old . '/' . $new;
+    } else {
+      $new = $this->convertabsolute($new,0);
+    }
+
     if (!$new) {
       $err->raise("bro",1);
       return false;
@@ -558,15 +575,7 @@ class m_bro {
       $err->raise("bro",1);
       return false;
     }
-
-    // If the destionation (new) doesn't have an absolute path, give it the prefix (old) from the first file found
-    if ($new[0] != '/') {
-      // Ex: settings.php will become /var/alternc/html/f/foo/www/example.org/drupal-6.10/sites/default/settings.php
-      $new = $old . '/' . $new;
-    } else {
-      $new = $this->convertabsolute($new,0);
-    }
-
+    $new=$this->convertabsolute($new,0);
     if (!$new) {
       $err->raise("bro",1);
       return false;
@@ -610,6 +619,7 @@ class m_bro {
 
       if (!$http = @fopen($src, "rb")) {
         // Try to get a handle on $http with fsockopen instead
+//FIXME we'd better use a real http getter function/class (such as Octopuce_Http_Client (ask Benjamin)
         ereg('^http://([^/]+)(/.*)$', $src, $eregs);
         $hostname = $eregs[1];
         $path = $eregs[2];
@@ -622,7 +632,7 @@ class m_bro {
         while (!feof($http)) {
           $bin = fgets($http, 16384);
           fwrite($f, $bin);
-#FIXME if (!trim($bin)) break;
+//FIXME if (!trim($bin)) break;
         }
         fclose($f);
         fclose($http);
@@ -656,9 +666,7 @@ class m_bro {
     // Last step // Copy -R
     $src = escapeshellarg($src);
     $dest = escapeshellarg($dest);
-    // TODO: write a recursive copy function(?)
-    exec("cp -Rpf '$src' '$dest'", $void, $ret);
-    echo "cp -Rpf '$src' '$dest'";
+    exec("cp -Rpf $src $dest", $void, $ret);
     if ($ret) {
       $err->raise("bro","Errors happened while copying the source to destination. cp return value: %d", $ret);
       return false;

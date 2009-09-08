@@ -29,22 +29,26 @@
 */
 require_once("../class/config.php");
 
+$fields = array (
+	"newmail"    => array ("request", "string", ""),
+);
+getFields($fields);
+
 if (!($cle=$mem->ChangeMail1($newmail))) {
 	$error=$err->errstr();
 }
 
-include("head.php");
+include_once("head.php");
+
 ?>
-</head>
-<body>
 <h3><?php __("Change the email of the account"); ?></h3>
 <?php
 	if ($error) {
-		echo "<p class=\"error\">$error</p></body></html>";
+		echo "<p class=\"error\">$error</p>";
+		include_once("foot.php");
 		exit();
 	}
 printf(_("help_mem_chgmail %s"),$newmail);
 ?>
 <p class="code"><?php echo $cle; ?></p>
-</body>
-</html>
+<?php include_once("foot.php"); ?>

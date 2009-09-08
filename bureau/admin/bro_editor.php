@@ -50,31 +50,28 @@ if ($save) {
 	$error=sprintf(_("Your file %s has been saved"),$file)." (".format_date('%3$d-%2$d-%1$d %4$d:%5$d',date("Y-m-d H:i:s")).")";
 }
 
-include("head.php");
+include_once("head.php");
+
 ?>
-<script src="/admin/js/wz_dragdrop.js" type="text/javascript"></script>
-</head>
-<body>
 <p>
 <?php if ($error) echo "<font color=\"red\">$error</font><br />"; ?>
 <?php echo _("File editing")." <code>$R/<b>$file</b></code><br />"; ?>
 </p>
-<form action="bro_editor.php" method="post"><p>
-<div id="resizer" style="left: 0px; top: 0px; z-index: 54; width: <?php echo $p["editsizex"]*6; ?>px; height: <?php echo $p["editsizex"]*6; ?>px; cursor: auto;"><textarea class="int" style="width: 90%; height: 95%; font-family: <?php echo $p["editor_font"]; ?>; font-size: <?php echo $p["editor_size"]; ?>;" name="texte"><?php
+<form action="bro_editor.php" method="post"><br />
+<div id="resizer" style="left: 0px; top: 0px; z-index: 54; width: <?php echo $p["editsizex"]*8; ?>px; height: <?php echo $p["editsizey"]*8; ?>px; cursor: auto;"><textarea class="int" style="font-family: <?php echo $p["editor_font"]; ?>; font-size: <?php echo $p["editor_size"]; ?>; width: 90%; height: 90%;" name="texte"><?php
 $bro->content($R,$file);
-?></textarea><img src="/admin/icon/winresize.gif" alt="shift+click and drag to resize textarea" title="shift+click and drag to resize textarea" height="20" width="20"></div>
+?></textarea><img src="/admin/icon/winresize.gif" alt="<?php __("ctrl+click or shift+click and drag to resize the editing zone"); ?>" title="<?php __("ctrl+click or shift+click and drag to resize the editing zone"); ?>" height="20" width="20" /></div><br />
+	<input type="hidden" name="file" value="<?php echo str_replace("\"","&quot;",$file); ?>" />
+	<input type="hidden" name="R" value="<?php echo str_replace("\"","&quot;",$R); ?>" />
 
 	<input type="submit" class="inb" value="<?php __("Save"); ?>" name="save" />
-	<input type="submit" class="inb" value="<?php __("Save &amp; Quit"); ?>" name="saveret" /> 
+	<input type="submit" class="inb" value="<?php __("Save &amp; Quit"); ?>" name="saveret" />
 	<input type="submit" class="inb" value="<?php __("Quit"); ?>" name="cancel" />
-</p>
-<input type="hidden" name="file" value="<?php echo str_replace("\"","&quot;",$file); ?>" />
-<input type="hidden" name="R" value="<?php echo str_replace("\"","&quot;",$R); ?>" />
+<br />
 <script type="text/javascript">
 <!--
 SET_DHTML("resizer"+RESIZABLE);
 //-->
 </script>
 </form>
-</body>
-</html>
+<?php include_once("foot.php"); ?>

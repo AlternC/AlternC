@@ -34,6 +34,14 @@ if (!$admin->enabled) {
 	exit();
 }
 
+$fields = array (
+	"delip"   => array ("request", "string", ""),
+
+	"newip"    => array ("request", "string", ""),
+	"newclass" => array ("request", "string", "32"),
+);
+getFields($fields);
+
 if ($delip) {
 	// Delete an ip address/class
 	if ($dom->del_slave_ip($delip)) {
@@ -48,12 +56,9 @@ if ($newip) {
 	}
 }
 
-if (!$newclass) $newclass=32;
+include_once("head.php");
 
-include("head.php");
 ?>
-</head>
-<body>
 <h3><?php __("Manage allowed ip for slave zone transfers"); ?></h3>
 <?php
 	if ($error) {
@@ -78,7 +83,7 @@ for($i=0;$i<count($c);$i++) {
 ?>
 
 <tr class="lst<?php echo $col; ?>">
-<td><a href="adm_slaveip.php?delip=<?php echo urlencode($c[$i][ip]); ?>"><?php __("Delete"); ?></a></td>
+<td class="center"><a href="adm_slaveip.php?delip=<?php echo urlencode($c[$i][ip]); ?>"><img src="images/delete.png" alt="<?php __("Delete"); ?>" /></a></td>
 <td><?php echo $c[$i]["ip"]."/".$c[$i]["class"]; ?></td>
 </tr>
 <?php
@@ -97,7 +102,5 @@ for($i=0;$i<count($c);$i++) {
 <tr><td colspan="2">
 	<input type="submit" value="<?php __("Add this ip to the slave list"); ?>" class="inb" />
 </table>
-
 </form>
-</body>
-</html>
+<?php include_once("foot.php"); ?>

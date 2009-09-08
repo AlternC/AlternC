@@ -28,12 +28,14 @@
  ----------------------------------------------------------------------
 */
 require_once("../class/config.php");
+include_once("head.php");
 
-include("head.php");
+$fields = array (
+	"dir"      => array ("request", "string", ""),
+);
+getFields($fields);
+
 ?>
-
-</head>
-<body>
 <h3><?php printf(_("Adding a username in %s"),$dir); ?></h3>
 <?php
 	if ($error) {
@@ -41,16 +43,30 @@ include("head.php");
 	}
 ?>
 
-<form method="post" action="hta_doadduser.php">
+<form method="post" action="hta_doadduser.php" name="main" id="main">
 <table border="1" cellspacing="0" cellpadding="4">
-<tr><td><input type="hidden" name="dir" value="<?php echo $dir ?>" />
-<?php __("Folder"); ?></td><td><code><?php echo $dir; ?></code></td></tr>
-<tr><td><label for="user"><?php __("Username"); ?></label></td><td><input type="text" class="int" name="user" id="user" value="" size="20" maxlength="64" /></td></tr>
-<tr><td><label for="password"><?php __("Password"); ?></label></td><td><input type="password" class="int" name="password" id="password" value="" size="20" maxlength="64" /></td></tr>
-<tr><td><label for="passwordconf"><?php __("Confirm password"); ?></label></td><td><input type="password" class="int" name="passwordconf" id="passwordconf" value="" size="20" maxlength="64" /></td></tr>
-<tr><td colspan="2"><input type="submit" class="inb" value="<?php __("Add this user"); ?>" /></td></tr>
+	<tr>
+		<td><input type="hidden" name="dir" value="<?php echo $dir ?>" /><?php __("Folder"); ?></td>
+		<td><code><?php echo $dir; ?></code></td>
+	</tr>
+	<tr>
+		<td><label for="user"><?php __("Username"); ?></label></td>
+		<td><input type="text" class="int" name="user" id="user" value="" size="20" maxlength="64" /></td>
+	</tr>
+	<tr>
+		<td><label for="password"><?php __("Password"); ?></label></td>
+		<td><input type="password" class="int" name="password" id="password" value="" size="20" maxlength="64" /></td>
+	</tr>
+	<tr>
+		<td><label for="passwordconf"><?php __("Confirm password"); ?></label></td>
+		<td><input type="password" class="int" name="passwordconf" id="passwordconf" value="" size="20" maxlength="64" /></td>
+	</tr>
+	<tr>
+		<td colspan="2"><input type="submit" class="inb" value="<?php __("Add this user"); ?>" /></td>
+	</tr>
 </table>
 </form>
-
-</body>
-</html>
+<script type="text/javascript">
+document.forms['main'].user.focus();
+</script>
+<?php include_once("foot.php"); ?>

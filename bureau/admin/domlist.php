@@ -23,8 +23,8 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file: Benjamin Sonntag
- Purpose of file: Return the list of hosted domains to a slave dns server
+ Original Author of file:
+ Purpose of file:
  ----------------------------------------------------------------------
 */
 require_once("../class/config_nochk.php");

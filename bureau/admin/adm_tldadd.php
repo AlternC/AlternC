@@ -34,10 +34,9 @@ if (!$admin->enabled) {
 	exit();
 }
 
-include("head.php");
+include_once ("head.php");
+
 ?>
-</head>
-<body>
 <h3><?php __("Manage allowed domains (TLD)"); ?></h3>
 <?php
 	if ($error) {
@@ -62,6 +61,4 @@ include("head.php");
 <tr><td colspan="2"><input type="submit" class="inb" value="<?php __("Add a new TLD"); ?>" /></td></tr>
 </table>
 </form>
-
-</body>
-</html>
+<?php include_once("foot.php"); ?>

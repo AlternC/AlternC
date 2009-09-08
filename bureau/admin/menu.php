@@ -29,17 +29,14 @@
 */
 require_once("../class/config.php");
 
-include("head.php");
 ?>
-<base target="right" />
-</head>
-<body id="menu">
-<div id="alternc-logo"><a href="http://alternc.org"><!-- img src="alternc.png" width="120" height="82" border="0" alt="AlternC" / -->AlternC</a> 
-<span><?php echo "$L_VERSION"; ?></span>
+<h3>Menu <?php echo $mem->user["login"]; ?></h3>
+
+<div class="menu-box">
+    <div class="menu-title"><img src="images/home.png" alt="<?php  __("Home / Information"); ?>" />&nbsp;<a href="main.php"><?php  __("Home / Information"); ?></a></div>
 </div>
-<h3><?php echo _("Menu") . ' ' . $mem->user["login"]; ?></h3>
-<dl id="menu-list">
 <?php
+
 $MENUPATH="/var/alternc/bureau/admin/";
 $tt=fopen("menulist.txt","rb");
 while (!feof ($tt)) {
@@ -49,10 +46,9 @@ while (!feof ($tt)) {
 	}
 }
 fclose($tt);
-?>
-<dt id="session"><?php __("Session"); ?></dt>
-<dd><a href="mem_logout.php" target="_parent"><?php __("Logout"); ?></a></dd>
-</dl>
 
-</body>
-</html>
+?>
+<p class="center"><a href="http://www.alternc.org" target="_blank"><img src="logo2.png" border="0" alt="" /></a>
+<br />
+<?php echo "$L_VERSION"; ?>
+</p>

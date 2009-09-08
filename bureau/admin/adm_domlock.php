@@ -34,9 +34,15 @@ if (!$admin->enabled) {
 	exit();
 }
 
+$fields = array (
+	"domain"    => array ("request", "string", ""),
+);
+getFields($fields);
+
 if (!$admin->dom_lock($domain)) {
   $error=$err->errstr();
 }
+
 include("adm_doms.php");
 exit;
 

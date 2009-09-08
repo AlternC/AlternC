@@ -28,13 +28,16 @@
  ----------------------------------------------------------------------
 */
 require_once("../class/config.php");
+include_once("head.php");
+
+$fields = array (
+	"id" => array ("request", "string", ""),
+);
+getFields($fields);
 
 $r=$mysql->get_user_dblist($id);
 
-include("head.php");
 ?>
-</head>
-<body>
 <h3><?php printf(_("MySQL Rights for %s"),$mem->user["login"]."_".$id) ?></h3>
 <?php
 	if ($error) {
@@ -73,37 +76,37 @@ for($i=0;$i<count($r);$i++) {
 	<tr class="lst<?php echo $col; ?>">
           <td><strong><?php echo $mem->user["login"].($val["db"]?"_":"").$val["db"] ?></strong></td>
 	  <td align="center">
-            <input type="checkbox" class="inc" id="<?php echo $val["db"]; ?>_select" name="<?php echo $val["db"]; ?>_select"<?php if($val["select"]=="Y") echo " checked"; ?> />
+            <input type="checkbox" class="inc" id="<?php echo $val["db"]; ?>_select" name="<?php echo $val["db"]; ?>_select"<?php if($val["select"]=="Y") echo " checked=\"checked\""; ?> />
           </td>
 	  <td align="center">
-            <input type="checkbox" class="inc" id="<?php echo $val["db"]; ?>_insert" name="<?php echo $val["db"]; ?>_insert""<?php if($val["insert"]=="Y") echo " checked"; ?> />
+            <input type="checkbox" class="inc" id="<?php echo $val["db"]; ?>_insert" name="<?php echo $val["db"]; ?>_insert"<?php if($val["insert"]=="Y") echo " checked=\"checked\""; ?> />
           </td>
 	  <td align="center">
-            <input type="checkbox" class="inc" id="<?php echo $val["db"]; ?>_update" name="<?php echo $val["db"]; ?>_update"<?php if($val["update"]=="Y") echo " checked"; ?> />
+            <input type="checkbox" class="inc" id="<?php echo $val["db"]; ?>_update" name="<?php echo $val["db"]; ?>_update"<?php if($val["update"]=="Y") echo " checked=\"checked\""; ?> />
           </td>
 	  <td align="center">
-            <input type="checkbox" class="inc" id="<?php echo $val["db"]; ?>_delete" name="<?php echo $val["db"]; ?>_delete"<?php if($val["delete"]=="Y") echo " checked"; ?> />
+            <input type="checkbox" class="inc" id="<?php echo $val["db"]; ?>_delete" name="<?php echo $val["db"]; ?>_delete"<?php if($val["delete"]=="Y") echo " checked=\"checked\""; ?> />
           </td>
 	  <td align="center">
-            <input type="checkbox" class="inc" id="<?php echo $val["db"]; ?>_create" name="<?php echo $val["db"]; ?>_create"<?php if($val["create"]=="Y") echo " checked"; ?> />
+            <input type="checkbox" class="inc" id="<?php echo $val["db"]; ?>_create" name="<?php echo $val["db"]; ?>_create"<?php if($val["create"]=="Y") echo " checked=\"checked\""; ?> />
           </td>
 	  <td align="center">
-            <input type="checkbox" class="inc" id="<?php echo $val["db"]; ?>_drop" name="<?php echo $val["db"]; ?>_drop"<?php if($val["drop"]=="Y") echo " checked"; ?> />
+            <input type="checkbox" class="inc" id="<?php echo $val["db"]; ?>_drop" name="<?php echo $val["db"]; ?>_drop"<?php if($val["drop"]=="Y") echo " checked=\"checked\""; ?> />
           </td>
 	  <td align="center">
-            <input type="checkbox" class="inc" id="<?php echo $val["db"]; ?>_references" name="<?php echo $val["db"]; ?>_references"<?php if($val["references"]=="Y") echo " checked"; ?> />
+            <input type="checkbox" class="inc" id="<?php echo $val["db"]; ?>_references" name="<?php echo $val["db"]; ?>_references"<?php if($val["references"]=="Y") echo " checked=\"checked\""; ?> />
           </td>
 	  <td align="center">
-            <input type="checkbox" class="inc" id="<?php echo $val["db"]; ?>_index" name="<?php echo $val["db"]; ?>_index"<?php if($val["index"]=="Y") echo " checked"; ?> />
+            <input type="checkbox" class="inc" id="<?php echo $val["db"]; ?>_index" name="<?php echo $val["db"]; ?>_index"<?php if($val["index"]=="Y") echo " checked=\"checked\""; ?> />
           </td>
 	  <td align="center">
-            <input type="checkbox" class="inc" id="<?php echo $val["db"]; ?>_alter" name="<?php echo $val["db"]; ?>_alter"<?php if($val["alter"]=="Y") echo " checked"; ?> />
+            <input type="checkbox" class="inc" id="<?php echo $val["db"]; ?>_alter" name="<?php echo $val["db"]; ?>_alter"<?php if($val["alter"]=="Y") echo " checked=\"checked\""; ?> />
           </td>
 	  <td align="center">
-            <input type="checkbox" class="inc" id="<?php echo $val["db"]; ?>_create_tmp" name="<?php echo $val["db"]; ?>_create_tmp"<?php if($val["create_tmp"]=="Y") echo " checked"; ?> />
+            <input type="checkbox" class="inc" id="<?php echo $val["db"]; ?>_create_tmp" name="<?php echo $val["db"]; ?>_create_tmp"<?php if($val["create_tmp"]=="Y") echo " checked=\"checked\""; ?> />
           </td>
 	  <td align="center">
-            <input type="checkbox" class="inc" id="<?php echo $val["db"]; ?>_lock" name="<?php echo $val["db"]; ?>_lock"<?php if($val["lock"]=="Y") echo " checked"; ?> />
+            <input type="checkbox" class="inc" id="<?php echo $val["db"]; ?>_lock" name="<?php echo $val["db"]; ?>_lock"<?php if($val["lock"]=="Y") echo " checked=\"checked\""; ?> />
           </td>
 	</tr>
 <?php
@@ -116,14 +119,6 @@ for($i=0;$i<count($r);$i++) {
 </td></tr>
 </table>
 </form>
-
 <p>&nbsp;</p>
-<p>
-<?php 
-}
-?>
-</p>
-
-
-</body>
-</html>
+<?php } ?>
+<?php include_once("foot.php"); ?>

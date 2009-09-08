@@ -28,6 +28,12 @@
  ----------------------------------------------------------------------
 */
 require_once("../class/config.php");
+include_once("head.php");
+
+$fields = array (
+	"domain"    => array ("request", "string", ""),
+);
+getFields($fields);
 
 $noftp=false;
 if (!$r=$ftp->get_list($domain)) {
@@ -35,10 +41,7 @@ if (!$r=$ftp->get_list($domain)) {
 	$error=$err->errstr();
 }
 
-include("head.php");
 ?>
-</head>
-<body id="ftp-account-list">
 <h3><?php __("FTP accounts list"); ?></h3>
 <?php
 	if ($noftp) {
@@ -46,8 +49,8 @@ include("head.php");
 	<p class="error"><?php echo $error ?></p>
 	<a href="ftp_add.php"><?php __("Create a new ftp account") ?></a><br />
 	<?php $mem->show_help("ftp_list_no"); ?>
-	</body></html>
 <?php
+		include_once("foot.php");
 		exit();
 	}
 
@@ -55,17 +58,9 @@ if ($error) {
 ?>
 <p class="error"><?php echo $error ?></p>
 <?php } ?>
-<?php if ($quota->cancreate("ftp")) { ?>
-<p class="add">
-<a href="ftp_add.php"><?php __("Create a new ftp account"); ?></a>
-</p>
-<div id="help">
-<?php  	}
-$mem->show_help("ftp_list");
-?></div>
 <form method="post" action="ftp_del.php">
-<div class="delete"><input type="submit" name="submit" class="inb" value="<?php __("Delete checked accounts"); ?>" /></div>
-
+<table cellspacing="0" cellpadding="4">
+<tr><th colspan="2">&nbsp;</th><th><?php __("Username"); ?></th><th><?php __("Folder"); ?></th></tr>
 <?php
 reset($r);
 $col=1;
@@ -73,21 +68,25 @@ while (list($key,$val)=each($r))
 	{
 	$col=3-$col;
 ?>
-    <dl class="ftp-account">
-      <dt><input type="checkbox" class="inc" id="del_<?php echo
-      $val["id"]; ?>" name="del_<?php echo $val["id"]; ?>" value="<?php
-      echo $val["id"]; ?>" /><?php __("Username"); ?>:<strong> <label
-      for="del_<?php echo $val["id"]; ?>"><?php echo $val["login"]
-	  ?></label></strong></dt>
-        <dd><span><?php __("Folder"); ?>: <code>/<?php echo $val["dir"] ?></code></span</dd>
-	<dd class="edit"><a href="ftp_edit.php?id=<?php echo $val["id"] ?>"><?php __("Edit"); ?></a></dd>
-	<dd><span></span></dd>
-    </dl>
-
+	<tr class="lst<?php echo $col; ?>">
+		<td align="center"><input type="checkbox" class="inc" id="del_<?php echo $val["id"]; ?>" name="del_<?php echo $val["id"]; ?>" value="<?php echo $val["id"]; ?>" /></td>
+		<td class="center"><a href="ftp_edit.php?id=<?php echo $val["id"] ?>"><img src="images/edit.png" alt="<?php __("Edit"); ?>" /></a></td>
+		<td><label for="del_<?php echo $val["id"]; ?>"><?php echo $val["login"] ?></label></td>
+		<td><code>/<?php echo $val["dir"] ?></code></td>
+	</tr>
 <?php
 	}
 ?>
-<div class="delete"><input type="submit" name="submit" class="inb" value="<?php __("Delete checked accounts"); ?>" /></div>
+<tr><td colspan="5"><input type="submit" name="submit" class="inb" value="<?php __("Delete checked accounts"); ?>" /></td></tr>
+</table>
 </form>
-</body>
-</html>
+
+<?php if ($quota->cancreate("ftp")) { ?>
+<p>
+<a href="ftp_add.php"><?php __("Create a new ftp account"); ?></a>
+</p>
+<?php  	}
+
+$mem->show_help("ftp_list");
+?>
+<?php include_once("foot.php"); ?>

@@ -34,6 +34,11 @@ if (!$admin->enabled) {
 	exit();
 }
 
+$fields = array (
+	"uid"    => array ("request", "integer", 0),
+);
+getFields($fields);
+
 if (!$admin->su2normal($uid)) {
 	$error=$err->errstr();
 }

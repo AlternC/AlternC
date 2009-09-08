@@ -1,0 +1,12 @@
+/build-stamp
+debian/.svnignore
+debian/alternc
+debian/alternc-slave
+debian/alternc-slave.debhelper.log
+debian/alternc-slave.postrm.debhelper
+debian/alternc-slave.substvars
+debian/alternc.debhelper.log
+debian/alternc.postrm.debhelper
+debian/alternc.substvars
+debian/files
+po/fr/LC_MESSAGES/alternc-admintools.mo

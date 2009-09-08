@@ -28,15 +28,13 @@
  ----------------------------------------------------------------------
 */
 require_once("../class/config.php");
+include_once("head.php");
 
 if (!$r=$mysql->get_dblist()) {
 	$error=$err->errstr();
 }
 
-include("head.php");
 ?>
-</head>
-<body>
 <h3><?php __("MySQL Databases"); ?></h3>
 <?php
 	if ($error) {
@@ -55,6 +53,4 @@ echo "<p>"._("Enter the new password of your SQL database and click 'change the 
 	<tr><td><input type="submit" class="inb" name="submit" value="<?php __("Change the password"); ?>" /></td></tr>
 </table>
 </form>
-
-</body>
-</html>
+<?php include_once("foot.php"); ?>

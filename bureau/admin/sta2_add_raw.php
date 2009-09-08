@@ -33,14 +33,13 @@ if (!$quota->cancreate("sta2")) {
 	$error=_("You cannot add any new statistics, your quota is over.");
 }
 
-include("head.php");
+include_once("head.php");
 ?>
-</head>
-<body>
 <h3><?php __("New Raw Statistics (apache)"); ?></h3>
 <?php
 	if ($error) {
-		echo "<p class=\"error\">$error</p></body></html>";
+		echo "<p class=\"error\">$error</p>";
+		include_once("foot.php");
 		exit();
 	}
 ?>
@@ -61,6 +60,4 @@ include("head.php");
 </table>
 </form>
 <?php $mem->show_help("sta2_add"); ?>
-
-</body>
-</html>
+<?php include_once("foot.php"); ?>

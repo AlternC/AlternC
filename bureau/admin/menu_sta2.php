@@ -28,13 +28,12 @@
  ----------------------------------------------------------------------
 */
 
-?>
-<dt id="stats"><?php __("Web statistics"); ?></dt>
-<?php
 /* ############# STATS ############# */
-$q=$quota->getquota("sta2");
-$r=$quota->getquota("dom");
-if ($q["t"]>0 && $r["u"]>0) {
+$q = $quota->getquota("sta2");
+$r = $quota->getquota("dom");
+if ($q["t"] > 0 && $r["u"] > 0) {
 ?>
-<dd><a href="sta2_list.php"><?php __("Raw web statistics"); ?></a></dd>
-<?php    }
+<div class="menu-box">
+<div class="menu-title"><img src="images/stat.png" alt="<?php __("Raw web statistics"); ?>" />&nbsp;<a href="sta2_list.php"><?php __("Raw web statistics"); ?></a> (<?= $q["u"]; ?>/<?= $q["t"]; ?>)</div>
+</div>
+<?php } ?>

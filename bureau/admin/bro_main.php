@@ -25,9 +25,11 @@
  ----------------------------------------------------------------------
  Original Author of file: Benjamin Sonntag, Remi
  Purpose of file: Online file Browser of AlternC
+ TODO : Voir ??? + Déplacer / Copier 
  ----------------------------------------------------------------------
 */
 require_once("../class/config.php");
+include_once ("head.php");
 
 $p=$bro->GetPrefs();
 if (!$R && $p["golastdir"]) {
@@ -61,10 +63,8 @@ if ($formu) {
           print $err->errstr();
         }
       } elseif (!$cancel && is_array($d)) {
-        include("head.php");
+        include_once("head.php");
 ?>
-</head>
-<body>
   <h3><?php printf(_("Deleting files and/or directories")); ?> : </h3>
   <form action="bro_main.php" method="post">  
     <input type="hidden" name="formu" value="2" />
@@ -100,7 +100,7 @@ if ($formu) {
   case 4:  // Renommage Effectif...
     if (!$bro->RenameFile($R,$o,$d)) { // Rename $R (directory) $o (old) $d (new) names
       print $err->errstr();
-    }
+    } 
     break;
   case 3:  // Upload de fichier...
     if (!$bro->UploadFile($R)) {
@@ -116,12 +116,12 @@ if ($formu) {
 }
 
 if ($actextract) {
-  print _("extracting...");
+  print _("extracting...")."<br />\n"; flush();
   if ($bro->ExtractFile($R. '/' . $file, $R)) {
     print $err->errstr();
-    print _("failed");
+    print _("failed")."<br />\n";
   } else {
-    print _("done");
+    print _("done")."<br />\n";
   }
 }
 
@@ -129,23 +129,20 @@ if ($actextract) {
 $c=$bro->filelist($R, $_REQUEST['showdirsize']);
 if ($c===false) $error=$err->errstr();
 
-include("head.php");
 ?>
-</head>
-<body>
-
-<div id="browser">
 <h3><?php __("File browser"); ?></h3>
+<table border="0" width="100%" cellspacing="0">
+<tr><td>
+
 <hr />
 <table width="100%"><tr><td valign="top">
 <a href="bro_main.php?R=/"><?php echo $mem->user["login"]; ?></a>&nbsp;/&nbsp;<?php echo $bro->PathList($R,"bro_main.php") ?><br />
-<small>
 <?php if ($error) echo "<font color=\"red\">$error</font>"; ?>
 </td><td valign="top" align="right">
 
 <form action="bro_main.php" method="post" name="nn" id="nn">
 <input type="hidden" name="R" value="<?php echo $R; ?>" />
-<table id="add-file"><tr>
+<table><tr>
 <td><input type="text" class="int" name="nomfich" size="22" maxlength="255" /></td>
 <td><input type="submit" class="inb" value="<?php __("Create"); ?>" /></td>
 </tr><tr><td>
@@ -162,19 +159,18 @@ include("head.php");
 <?php
 /* Renommer / Copier / Déplacer les fichiers : */
 if ($formu==2 && $actrename && count($d)) {
+  echo "<table cellpadding=\"6\">\n";
   echo "<form action=\"bro_main.php\" method=\"post\">\n";
   echo "<input type=\"hidden\" name=\"R\" value=\"$R\" />\n";
   echo "<input type=\"hidden\" name=\"formu\" value=\"4\" />\n";
-  echo "<p>"._("Rename")."</p>";
+  echo "<tr><th colspan=\"2\">"._("Rename")."</th></tr>";
   for ($i=0;$i<count($d);$i++) {
     $d[$i]=ssla($d[$i]);
-    echo "<table>";
-    echo "<tr><td>"._("Old Name:")."</td><td><input type=\"hidden\" name=\"o[$i]\" value=\"".$d[$i]."\" />".$d[$i]."</td></tr>";
-    echo "<tr><td>"._("New Name:")."</td><td><input type=\"text\" class=\"int\" style=\"width: 350px\" name=\"d[$i]\" value=\"".$d[$i]."\" /></td></tr>";
-    echo "</table>";
+    echo "<tr><td><input type=\"hidden\" name=\"o[$i]\" value=\"".$d[$i]."\" />".$d[$i]."</td>";
+    echo "<td><input type=\"text\" class=\"int\" name=\"d[$i]\" value=\"".$d[$i]."\" /></td></tr>";
   }
-  echo "<p><input type=\"submit\" class=\"inb\" name=\"submit\" value=\""._("Rename")."\" /></p>";
-  echo "</form>\n";
+  echo "<tr><td colspan=\"2\" align=\"center\"><input type=\"submit\" class=\"inb\" name=\"submit\" value=\""._("Rename")."\" /></td></tr>";
+  echo "</table></form>\n";
   echo "<hr />\n";
 }
 
@@ -187,10 +183,9 @@ if ($formu==2 && $_REQUEST['actperms'] && count($d)) {
 
   $tmp_absdir = $bro->convertabsolute($R,0);
 
-  echo "<table border=\"1\">"; // FIXME, marco, ajouter classe css?
+  echo "<table border=\"1\" cellpadding=\"4\" cellspacing=\"0\">";
   echo "<tr>";
-  // echo "<th>" . 'File' . "</th><th>&nbsp;</th><th>Owner</th><th>Group</th><th>Other</th>"; // FIXME , i18n
-  echo "<th>" . 'File' . "</th><th>Permissions</th>"; // FIXME, i18n
+  echo "<th>" . _("File") . "</th><th>"._("Permissions")."</th>"; 
   echo "</tr>";
 
   for ($i=0;$i<count($d);$i++) {
@@ -204,8 +199,7 @@ if ($formu==2 && $_REQUEST['actperms'] && count($d)) {
     // Owner
     echo "<td>";
     echo "<input type=\"hidden\" name=\"d[$i]\" value=\"".$d[$i]."\" />";
-    // echo "<label>read <input type=\"checkbox\" name=\"perm[$i][r]\" value=\"1\" ". (($modes & 0000400) ? 'checked="checked"' : '') ." />";
-    echo "<label>write <input type=\"checkbox\" name=\"perm[$i][w]\" value=\"1\" ". (($modes & 0000200) ? 'checked="checked"' : '') ." />";
+    echo "<label for=\"permw$i\">"._("write")."</label> <input type=\"checkbox\" id=\"permw$i\" name=\"perm[$i][w]\" value=\"1\" ". (($modes & 0000200) ? 'checked="checked"' : '') ." />";
     echo "</td>";
 
     echo "</tr>";
@@ -231,14 +225,14 @@ if (count($c)) {
 document.write("<input type=\"button\" value=\"<?php __("all/none"); ?>\" class=\"inb\" onclick=\"CheckAll();\" />");
 //  -->
 </script>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <input type="submit" class="inb" name="actdel" value="<?php __("Delete"); ?>" />
 
 <input type="submit" class="inb" name="actrename" value="<?php __("Rename"); ?>" />
 <input type="submit" class="inb" name="actperms" value="<?php __("Permissions"); ?>" /> <!-- [ML] -->
-&nbsp;&nbsp;&nbsp;
-<input type="submit" class="inb" name="actcopy" value="<?php __("Copy to"); ?>" />
-
-<input type="submit" class="inb" name="actmove" value="<?php __("Move to"); ?>" />&nbsp;:&nbsp;<input type="text" class="int" name="actmoveto" value="" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br /><br />
+<input type="submit" class="inb" name="actcopy" value="<?php __("Copy"); ?>" />
+<input type="submit" class="inb" name="actmove" value="<?php __("Move"); ?>" />&nbsp;:&nbsp;<input type="text" class="int" name="actmoveto" value="" />
 <script type="text/javascript">
 <!--
 document.write("<input type=\"button\" name=\"bff\" onclick=\"browseforfolder('main.actmoveto');\" value=\" ... \" class=\"inb\" />");
@@ -259,7 +253,7 @@ for($i=0;$i<count($c);$i++) {
 $col=3-$col;
 echo "<tr class=\"lst$col\">\n";
 if ($c[$i]["type"]) {
-echo "	<td width=\"28\"><input type=\"checkbox\" class=\"inc\" name=\"d[]\" value=\"".htmlentities($c[$i]["name"])."\" /></td>";
+echo "	<td width=\"28\"><input type=\"checkbox\" class=\"inc\" name=\"d[]\" value=\"".$c[$i]["name"]."\" /></td>";
 if ($p["showicons"]) {
 echo "<td width=\"28\"><img src=\"icon/".$bro->icon($c[$i]["name"])."\" width=\"16\" height=\"16\" alt=\"\" /></td>";
 }
@@ -279,9 +273,9 @@ echo "<td>&nbsp;";
 }
 $e = $bro->is_extractable($R,$c[$i]["name"]);
 if ($e) {
-echo "<a href=\"bro_main.php?actextract=1&file=".urlencode($c[$i]["name"])."&amp;R=".urlencode($R)."\">";
-echo _("Extract");
-echo "</a>";
+  echo "<a href=\"bro_main.php?actextract=1&file=".urlencode($c[$i]["name"])."&amp;R=".urlencode($R)."\">";
+  echo _("Extract");
+  echo "</a>";
 }
 
 echo "</td>\n";
@@ -474,7 +468,7 @@ break;
 }
 ?>
      </form>
-<?php 
+<?php
 	 } // is there any files here ?
 else {
   echo "<p class=\"error\">"._("No files in this folder")."</p>";
@@ -491,14 +485,14 @@ else {
      <hr />
      <?php __("Import this file"); ?>&nbsp;&nbsp;<input class="int" name="userfile" type="file" />
      <input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
-     <input type="submit" class="inb" name="upload" value="<?php __("Send"); ?>" />
+     <input type="submit" class="inb" value="<?php __("Send"); ?>" />
      <hr />
      </form>
      <p>&nbsp;</p>
 
      <?php
 
-echo '<a href="bro_main.php?R=' . $R . '&showdirsize=1">' . _("Show disk usage of directories (slow)") . '</a><br /><br />';
+     echo '<a href="bro_main.php?R=' . $R . '&showdirsize=1">' . _("Show disk usage of directories (slow)") . '</a><br /><br />';
 
      if ($id=$ftp->is_ftp($R)) {
 echo _("There is an ftp account in this folder")." <a href=\"ftp_edit.php?id=".urlencode($id)."\">"._("Click here to edit this ftp account.")."</a><br />";
@@ -519,6 +513,4 @@ echo "<a href=\"hta_add.php?value=$R\">"._("Click here to protect this folder wi
 <a href="bro_pref.php"><?php __("Configure the file browser"); ?></a><br />
 
 </td></tr></table>
-
-</body>
-</html>
+<?php include_once("foot.php"); ?>

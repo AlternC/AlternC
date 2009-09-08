@@ -29,19 +29,17 @@
 */
 require_once("../class/config.php");
 
-include("head.php");
-?>
-</head>
-<body>
+include_once("head.php");
 
-<h3>Bienvenue sur votre bureau AlternC.</h3>
+include_once("menu.php");
 
-<div id="info"><?php
-// Show last login information : 
+// Show last login information :
+echo "<p>";
 __("Last Login: ");
 
 echo format_date('the %3$d-%2$d-%1$d at %4$d:%5$d',$mem->user["lastlogin"]);
 printf("&nbsp;"._('from: <code> %1$s </code>')."<br />",$mem->user["lastip"]);
+echo "</p>";
 
 if ($mem->user["lastfail"]) {
 	printf(_("%1\$d login failed since last login")."<br />",$mem->user["lastfail"]);
@@ -49,10 +47,11 @@ if ($mem->user["lastfail"]) {
 
 $mem->resetlast();
 
-# use MagpieRSS to syndicate content from another site if available
-
-# this should work, since the debian package installs it in
-# /usr/share/php, which is in the include path
+/*
+ use MagpieRSS to syndicate content from another site if available
+ this should work, since the debian package installs it in
+ /usr/share/php, which is in the include path
+*/
 $rss_url = variable_get('rss_feed');
 $inc = @include_once('magpierss/rss_fetch.inc');
 if ($inc && $rss_url) {
@@ -62,23 +61,25 @@ if ($inc && $rss_url) {
     echo "<h2>" . _("Latest news") . "</h2>";
     foreach ($rss->items as $item) {
       $href = $item['link'];
-      $title = $item['title'];
+     $title = $item['title'];
       echo "<h3><a href=$href>$title</a></h3>";
       echo '<span class="date">'.$item['pubdate'] .'</span> - ';
       echo '<span class="author">'.$item['dc']['creator'].'</span>';
       echo $item['summary'];
     }
   }
-}
+ }
+
 
 if($admin->enabled) {
   $expiring = $admin->renew_get_expiring_accounts();
 
-  if(is_array($expiring) && count($expiring) > 0) {
+  if(count($expiring) > 0) {
     echo "<h2>" . _("Expired or about to expire accounts") . "</h2>\n";
     echo "<table cellspacing=\"2\" cellpadding=\"4\">\n";
     echo "<tr><th>"._("uid")."</th><th>"._("Last name, surname")."</th><th>"._("Expiry")."</th></tr>\n";
-    foreach($expiring as $account) {
+  if (is_array($expiring)) {
+	    foreach($expiring as $account) {
       echo "<tr class=\"exp{$account['status']}\"><td>{$account['uid']}</td>";
       if($admin->checkcreator($account['uid']))
 	echo "<td><a href=\"adm_edit.php?uid={$account['uid']}\">{$account['nom']}, {$account['prenom']}</a></td>";
@@ -86,12 +87,159 @@ if($admin->enabled) {
 	echo "<td>{$account['nom']}, {$account['prenom']}</td>";
       echo "<td>{$account['expiry']}</td></tr>\n";
     }
+}
     echo "</table>\n";
   }
 }
 
-?></div>
+$c=@mysql_fetch_array(mysql_query("SELECT * FROM membres WHERE uid='".$cuid."';"));
 
+?>
+<center>
+<?php
 
-</body>
-</html>
+	list($totalweb)=@mysql_fetch_array(mysql_query("SELECT SUM(size) FROM size_web WHERE uid = '" . $c["uid"] . "'"));
+
+	echo "<p>Espace WEB: ";
+	echo sprintf("%.1f", $totalweb / 1024)."&nbsp;Mo";
+	echo "</p>";
+
+?>
+<div style="width: 550px">
+<?php
+
+$s=mysql_query("SELECT * FROM domaines WHERE compte='".$c["uid"]."';");
+$totalmail=0;
+while ($d=mysql_fetch_array($s)) {
+	list($mstmp)=@mysql_fetch_array(mysql_query("SELECT SUM(size) FROM size_mail WHERE alias LIKE '%\_".$d["domaine"]."';"));
+	$totalmail+=$mstmp;
+}
+
+if ($totalmail)
+{
+
+?>
+<table cellspacing="0" cellpadding="4" border="1" width="550" style="border-collapse: collapse">
+<tr>
+    <th>Domaine</th>
+    <th>Mail</th>
+    <th>Espace</th>
+</tr>
+<?php
+
+  $s=mysql_query("SELECT * FROM domaines WHERE compte='".$c["uid"]."';");
+  while ($d=mysql_fetch_array($s)) {
+    $t=mysql_query("SELECT alias,size FROM size_mail WHERE alias LIKE '%\_".$d["domaine"]."';");
+    while ($e=mysql_fetch_array($t)) {
+      echo "<tr><td>".$d["domaine"]."</td>";
+      echo "<td>".str_replace("_","@",$e["alias"])."</td>";
+      echo "<td";
+      if ($mode!=2) echo " style=\"text-align: right\"";
+      echo ">";
+      $ms=$e["size"];
+			if ($totalmail)
+				$pc=intval(100*$ms/$totalmail);
+			else
+				$pc=0;
+      if ($mode==0) {
+	echo sprintf("%.1f", $ms / 1024)."&nbsp;Mo";
+      } elseif ($mode==1) {
+	echo sprintf("%.1f", $pc)."&nbsp;%";
+      } else {
+	echo "<img src=\"hippo_bleue.gif\" style=\"width: ".(2*$pc)."px; height: 16px\" alt=\"".$pc."%\" title=\"".$pc."\"/>";
+      }
+      echo "</td></tr>";
+    }
+  }
+?>
+</table>
+
+<p>&nbsp;</p>
+<?php
+
+}
+
+list($totaldb)=@mysql_fetch_array(mysql_query("SELECT SUM(size) FROM size_db WHERE db='".$c["login"]."' OR db LIKE '".$c["login"]."\_%';"));
+
+if ($totaldb)
+{
+
+?>
+<table cellspacing="0" cellpadding="4" border="1" width="550" style="border-collapse: collapse">
+<tr>
+    <th>DB</th>
+    <th>Espace</th>
+</tr>
+<?php
+
+    // Espace DB :
+    $s=mysql_query("SELECT db,size FROM size_db WHERE db='".$c["login"]."' OR db LIKE '".$c["login"]."\_%';");
+  while ($d=mysql_fetch_array($s)) {
+    echo "<tr><td>".$d["db"]."</td><td";
+    if ($mode!=2) echo " style=\"text-align: right\"";
+    echo ">";
+    $ds=$d["size"];
+		if ($totaldb)
+			$pc=intval(100*$ds/$totaldb);
+		else
+			$pc=0;
+    if ($mode==0) {
+      echo sprintf("%.1f", $ds / 1024/1024)."&nbsp;Mo";
+    } elseif ($mode==1) {
+      echo sprintf("%.1f", $pc)."&nbsp;%";
+    } else {
+      echo "<img src=\"hippo_bleue.gif\" style=\"width: ".(2*$pc)."px; height: 16px\" alt=\"".$pc."%\" title=\"".$pc."%\"/>";
+    }
+    echo "</td></tr>";
+  }
+?>
+</table>
+
+<p>&nbsp;</p>
+<?php
+
+}
+
+list($totallist)=@mysql_fetch_array(mysql_query("SELECT SUM(size) FROM size_mailman WHERE uid='".$c["uid"]."'"));
+
+if ($totallist)
+{
+
+?>
+<table cellspacing="0" cellpadding="4" border="1" width="550" style="border-collapse: collapse">
+<tr>
+    <th>Liste</th>
+    <th>Espace</th>
+</tr>
+<?php
+
+    // Espace Liste :
+    $s=mysql_query("SELECT list,size FROM size_mailman WHERE uid='".$c["uid"]."' ORDER BY list ASC");
+  while ($d=mysql_fetch_array($s)) {
+    echo "<tr><td>".$d["list"]."</td><td";
+    if ($mode!=2) echo " style=\"text-align: right\"";
+    echo ">";
+    $ds=$d["size"];
+		if ($totallist)
+			$pc=intval(100*$ds/$totallist);
+		else
+			$pc=0;
+    if ($mode==0) {
+      echo sprintf("%.1f", $ds / 1024)."&nbsp;Mo";
+    } elseif ($mode==1) {
+      echo sprintf("%.1f", $pc)."&nbsp;%";
+    } else {
+      echo "<img src=\"hippo_bleue.gif\" style=\"width: ".(2*$pc)."px; height: 16px\" alt=\"".$pc."%\" title=\"".$pc."%\"/>";
+    }
+    echo "</td></tr>";
+  }
+?>
+</table>
+<?php
+
+}
+
+?>
+</div>
+</center>
+<?php include_once("foot.php"); ?>

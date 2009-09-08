@@ -28,6 +28,14 @@
  ----------------------------------------------------------------------
 */
 require_once("../class/config.php");
+include_once("head.php");
+
+$fields = array (
+	"user"         => array ("request", "string", ""),
+	"dir"          => array ("request", "string", ""),
+	"newpass"      => array ("request", "string", ""),
+	"newpassconf"  => array ("request", "string", ""),
+);
 
 if ($newpass != $newpassconf) {
 	$error = _("Passwords do not match");
@@ -38,10 +46,8 @@ if ($newpass != $newpassconf) {
 if (!$hta->change_pass($user,$newpass,$dir)) {
 		$error=$err->errstr();
 }
-include("head.php");
+
 ?>
-</head>
-<body>
 <h3><?php printf(_("Change the user %s in the protected folder %s"),$user,$dir); ?></h3>
 <?php
 	if ($error) {
@@ -52,6 +58,4 @@ include("head.php");
 	}
 	echo "<p><a href=\"hta_edit.php?dir=$dir\">"._("Click here to continue")."</a></p>";
 ?>
-</body>
-</html>
-
+<?php include_once("foot.php"); ?>

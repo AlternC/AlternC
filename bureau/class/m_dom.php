@@ -264,7 +264,6 @@ class m_dom {
     $dest_www_domain = $dest_www . '/' . $domain;
 
     if (! is_dir($dest_www)) {
-    	echo "A: $dest_www";
       mkdir($dest_www);
     }
 

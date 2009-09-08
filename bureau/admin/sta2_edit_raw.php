@@ -29,6 +29,8 @@
 */
 require_once("../class/config.php");
 
+include_once("head.php");
+
 if (!$id) {
 	$error=_("No Statistics selected!");
 } else {
@@ -38,14 +40,12 @@ if (!$id) {
 	}
 }
 
-include("head.php");
 ?>
-</head>
-<body>
 <h3><?php __("Change the Raw Statistics"); ?></h3>
 <?php
 	if ($error) {
-		echo "<p class=\"error\">$error</p></body></html>";
+		echo "<p class=\"error\">$error</p>";
+		include_once("foot.php");
 		exit();
 	}
 ?>
@@ -65,6 +65,4 @@ include("head.php");
 <tr><td colspan="2"><input type="submit" class="inb" name="submit" value="<?php __("Change those Raw Statistics."); ?>" /></td></tr>
 </table>
 </form>
-
-</body>
-</html>
+<?php include_once("foot.php"); ?>

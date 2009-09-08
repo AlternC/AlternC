@@ -31,20 +31,28 @@
  ----------------------------------------------------------------------
 */
 require_once("../class/config.php");
+include_once("head.php");
 
 if (!$admin->enabled) {
 	__("This page is restricted to authorized staff");
 	exit();
 }
 
-$creator_id = intval($_REQUEST['creator']);
+$fields = array (
+	"show"    => array ("request", "string", ""),
+	"creator_id" => array("request", "integer", 2000),
+);
+getFields($fields);
 
-$r=$admin->get_list($_REQUEST['show'] == 'all' ? 1 : 0, $creator_id);
+if ($show && $cuid != 2000)
+{
+	__("This page is restricted to authorized staff");
+	exit();
+}
 
-include("head.php");
+$r=$admin->get_list($show == 'all' ? 1 : 0, $creator_id);
+
 ?>
-</head>
-<body>
 <h3><?php __("Member list"); ?></h3>
 <?php
 	if ($error) {
@@ -53,9 +61,9 @@ include("head.php");
 ?>
 <p>
 <?php __("Here is the list of hosted members"); ?>
+&nbsp;
 <?php if($_REQUEST['show'] != 'all') {
   echo '<br /><a href="adm_list.php?show=all">' . _('List all the accounts') . '</a>';
-
   if ($cuid == 2000) {
     $list_creators = $admin->get_creator_list();
     $infos_creators = array();
@@ -77,11 +85,11 @@ include("head.php");
 <?php
 if (!is_array($r)) {
   echo "<p class=\"error\">"._("No account defined for now")."</p>";
-} else { 
+} else {
 ?>
 
 <form method="post" action="adm_dodel.php">
-<?php 
+<?php
 
 // Depending on the admin's choice, let's show a short list or a long list.
 
@@ -108,15 +116,13 @@ while (list($key,$val)=each($r))
 	$col=3-$col;
 ?>
 	<tr class="lst<?php echo $col; ?>">
-
 <?php
 		  if($admin->checkcreator($val['uid'])) {
  if ($val["su"]) { ?>
 			<td>&nbsp;</td>
 <?php } else { ?>
  <td align="center"><input type="checkbox" class="inc" name="d[]" value="<?php echo $val["uid"]; ?>" /></td>
-<?php }
- ?>
+<?php } ?>
 		<td align="center"><a href="adm_edit.php?uid=<?php echo $val["uid"] ?>"><?php __("Edit"); ?></a></td>
 		<td align="center"><a href="adm_quotaedit.php?uid=<?php echo $val["uid"] ?>"><?php __("Quotas"); ?></a></td>
 		<td align="center"><a href="adm_deactivate.php?uid=<?php echo $val["uid"] ?>"><?php __("Deactivate"); ?></a></td>
@@ -124,16 +130,16 @@ while (list($key,$val)=each($r))
 		if (!$val["enabled"])
 			echo "<img src=\"icon/encrypted.png\" width=\"16\" height=\"16\" alt=\""._("Locked Account")."\" />";
 		else {
+		  if($admin->checkcreator($val['uid'])) {
 		?>
 			<a href="adm_login.php?id=<?php echo $val["uid"];?>" target="_parent"><?php __("Connect as"); ?></a>
-		<?php } ?>
+		<?php } } ?>
 		</td>
 		    <?php
 		    } else { 
 		      echo "<td colspan=\"5\"></td>"; 
 		    }
  ?>
-
 		<td <?php if ($val["su"]) echo "style=\"color: red\""; ?>><?php echo $val["login"] ?></td>
 		<td><a href="mailto:<?php echo $val["mail"]; ?>"><?php echo $val["nom"]." ".$val["prenom"] ?></a>&nbsp;</td>
 		<td><?php echo $val["parentlogin"] ?></td>
@@ -173,7 +179,7 @@ $val=$r[$z];
 <?php if ($val["su"]) { ?>
 			<td>&nbsp;</td>
 <?php } else { ?>
- <td align="center"><input type="checkbox" class="inc" name="d[]" value="<?php echo $val["uid"]; ?>"></td>
+ <td align="center"><input type="checkbox" class="inc" name="d[]" value="<?php echo $val["uid"]; ?>" /></td>
 <?php } ?>
 		<td align="center">
 		<a href="adm_edit.php?uid=<?php echo $val["uid"] ?>"><?php __("E"); ?></a>
@@ -248,5 +254,4 @@ if (is_array($val)) {
    printf("<p>"._("%s accounts")."</p>",count($r));
  } 
 ?>
-</body>
-</html>
+<?php include_once("foot.php"); ?>

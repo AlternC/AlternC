@@ -28,6 +28,13 @@
  ----------------------------------------------------------------------
 */
 require_once("../class/config.php");
+include_once("head.php");
+
+$fields = array (
+	"newdomain"    => array ("post", "string", ""),
+	"dns"          => array ("post", "string", ""),
+);
+getFields($fields);
 
 $dom->lock();
 
@@ -39,14 +46,11 @@ if (!$dom->add_domain($newdomain,$dns)) {
 
 $dom->unlock();
 
-include("head.php");
 ?>
-</head>
-<body>
 <h3><?php __("Add a domain"); ?></h3>
 <p>
 <?php printf(_("Your new domain %s has been successfully installed"),$newdomain); ?><br />
-<a href="login.php" target="_top"><?php __("Click here to continue"); ?></a><br />
+<a href="main.php" target="_top"><?php __("Click here to continue"); ?></a><br />
 <?php $mem->show_help("add_domain"); ?>
 <br />
 <?php
@@ -60,5 +64,4 @@ include("head.php");
 	}
 ?>
 </p>
-</body>
-</html>
+<?php include_once("foot.php"); ?>

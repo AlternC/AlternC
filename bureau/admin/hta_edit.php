@@ -28,6 +28,12 @@
  ----------------------------------------------------------------------
 */
 require_once("../class/config.php");
+include_once("head.php");
+
+$fields = array (
+	"dir"      => array ("request", "string", ""),
+);
+getFields($fields);
 
 if (!$dir) {
 	$error=_("No folder selected!");
@@ -38,16 +44,14 @@ if (!$dir) {
 	}
 }
 
-include("head.php");
 ?>
-</head>
-<body>
 <h3><?php printf(_("List of authorized user in folder %s"),$dir); ?></h3>
 <?php
 	if (!count($r)) {
 		echo "<p class=\"error\">".sprintf(_("No authorized user in %s"),$dir)."</p>";
 		echo "<a href=\"hta_adduser.php?dir=$dir\">"._("Add a username")."</a><br />";
-		echo "<br /><small><a href=\"bro_main.php?R=$dir\">"._("File browser")."</a><br /></small></body></html>";
+		echo "<br /><small><a href=\"bro_main.php?R=$dir\">"._("File browser")."</a><br /></small>";
+		include_once("foot.php");
 		exit();
 	}
 reset($r);
@@ -55,8 +59,10 @@ reset($r);
 ?>
 <form method="post" action="hta_dodeluser.php">
 <table cellspacing="0" cellpadding="4">
-<tr><th colspan="2" ><input type="hidden" name="dir" value="<?php echo $dir?>">
-&nbsp;</th><th><?php __("Username"); ?></th></tr>
+	<tr>
+		<th colspan="2" ><input type="hidden" name="dir" value="<?php echo $dir?>">&nbsp;</th>
+		<th><?php __("Username"); ?></th>
+	</tr>
 <?php
 $col=1;
 
@@ -65,7 +71,7 @@ for($i=0;$i<count($r);$i++){
 ?>
 	<tr class="lst<?php echo $col; ?>">
 		<td align="center"><input type="checkbox" class="inc" name="d[]"" value="<?php echo $r[$i]?>" /></td>
-		<td><a href="hta_edituser.php?user=<?php echo $r[$i]?>&amp;dir=<?php echo $dir?>"><?php __("Edit"); ?></a></td>
+		<td><a href="hta_edituser.php?user=<?php echo $r[$i]?>&amp;dir=<?php echo $dir?>"><img src="images/edit.png" alt="<?php __("Edit"); ?>" /></a></td>
 		<td><?php echo $r[$i]; ?></td>
 	</tr>
 <?php
@@ -81,5 +87,4 @@ for($i=0;$i<count($r);$i++){
 <p>
 <small><a href="bro_main.php?R=<?php echo $dir ?>"><?php __("File browser"); ?></a></small>
 </p>
-</body>
-</html>
+<?php include_once("foot.php"); ?>

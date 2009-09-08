@@ -30,7 +30,7 @@
  ----------------------------------------------------------------------
 */
 /*
-# Structure de la table `defquotas`
+# Structure of `defquotas` table
 CREATE TABLE `defquotas` (
   `quota` varchar(128) NOT NULL default '',
   `value` bigint(20) unsigned NOT NULL default '0'
@@ -59,8 +59,6 @@ CREATE TABLE `quotas` (
 * @copyright    AlternC-Team 2001-2005 http://alternc.org/
 *
 */
-
-
 class m_quota {
 
   var $disk=Array(  /* Liste des ressources disque soumises a quota */
@@ -69,6 +67,7 @@ class m_quota {
   var $quotas;
   var $clquota; // Which class manage which quota.
 
+
   /* ----------------------------------------------------------------- */
   /**
    * Constructor
@@ -76,14 +75,17 @@ class m_quota {
   function m_quota() {
   }
 
+
   /* ----------------------------------------------------------------- */
   /** Check if a user can use a ressource.
+   * @param string $ressource the ressource name (a named quota)
    * @Return TRUE if the user can create a ressource (= is there any quota left ?)
    */
   function cancreate($ressource="") {
     $t=$this->getquota($ressource);
     return $t["u"]<$t["t"];
   }
+
 
   /* ----------------------------------------------------------------- */
   /**
@@ -115,10 +117,11 @@ class m_quota {
     return $qlist;
   }
 
+
   /* ----------------------------------------------------------------- */
-  /**
-   * @param string ressource to get quota of
-   * @Return the quota used and total for this ressource (or for all ressource if unspecified)
+  /** Return a ressource usage (u) and total quota (t)
+   * @param string $ressource ressource to get quota of
+   * @Return array the quota used and total for this ressource (or for all ressource if unspecified)
    */
   function getquota($ressource="") {
     global $db,$err,$cuid;
@@ -153,9 +156,10 @@ class m_quota {
     }
   }
 
+
   /* ----------------------------------------------------------------- */
   /** Set the quota for a user (and for a ressource)
-   * @param string ressource to set quota of
+   * @param string $ressource ressource to set quota of
    * @param integer size of the quota (available or used)
    */
   function setquota($ressource,$size) {
@@ -182,38 +186,6 @@ class m_quota {
     return true;
   }
 
-  /* ----------------------------------------------------------------- */
-  /**
-   * Increment the resource usage for the named resource
-   * TODO : delete this function as it is useless... (and empty ;) )
-   */
-  function inc($ressource) {
-    global $db,$err,$cuid;
-    $err->log("quota","inc",$ressource);
-    return true;
-  }
-
-  /* ----------------------------------------------------------------- */
-  /**
-   * Decrement the resource usage for the named resource
-   * TODO : delete this function as it is useless... (and empty ;) )
-   */
-  function dec($ressource) {
-    global $db,$err,$cuid;
-    $err->log("quota","dec",$ressource);
-    return true;
-  }
-
-  /* ----------------------------------------------------------------- */
-  /**
-   * Check a user's quota: call a function for each class.
-   * TODO : delete this function as it is useless... (and empty ;) )
-   */
-  function checkquota() {
-    global $err,$classes,$cuid;
-    $err->log("quota","checkquota",$id);
-    return true;
-  }
 
   /* ----------------------------------------------------------------- */
   /**
@@ -225,6 +197,7 @@ class m_quota {
     $db->query("DELETE FROM quotas WHERE uid='$cuid';");
     return true;
   }
+
 
   /* ----------------------------------------------------------------- */
   /**
@@ -248,6 +221,7 @@ class m_quota {
     return $c;
   }
 
+
   /* ----------------------------------------------------------------- */
   /**
    * Set the default quotas
@@ -268,10 +242,12 @@ class m_quota {
     return true;
   }
 
+
   /* ----------------------------------------------------------------- */
   /**
    * Add an account type for quotas
-   * @param string account type to be added
+   * @param string $type account type to be added
+   * @return boolean true if all went ok
    */
   function addtype($type) {
     global $db;
@@ -287,10 +263,12 @@ class m_quota {
     return true;
   }
 
+
   /* ----------------------------------------------------------------- */
   /**
    * Delete an account type for quotas
-   * @param string account type to be deleted
+   * @param string $type account type to be deleted
+   * @return boolean true if all went ok
    */
   function deltype($type) {
     global $db;
@@ -305,9 +283,11 @@ class m_quota {
     }
   }
 
+
   /* ----------------------------------------------------------------- */
   /**
    * Create default quotas entries for a new user.
+   * The user we are talking about is in the global $cuid.
    */
   function addquotas() {
     global $db,$err,$cuid;
@@ -331,6 +311,7 @@ class m_quota {
     return true;
   }
 
+
   /* ----------------------------------------------------------------- */
   /** Return a quota value with its unit (when it is a space quota)
    * in MB, GB, TB ...
@@ -349,17 +330,19 @@ class m_quota {
     }
   }
 
+
   /* ----------------------------------------------------------------- */
-  /** Hook function called when a user is created
-   * This function initialize the user's quotas.
+  /** Hook function call when a user is deleted
+   * AlternC's standard function called when a user is deleted
    */
   function alternc_del_member() {
     $this->delquotas();
   }
 
+
   /* ----------------------------------------------------------------- */
-  /** Hook function call when a user is deleted
-   * AlternC's standard function called when a user is deleted
+  /** Hook function called when a user is created
+   * This function initialize the user's quotas.
    */
   function alternc_add_member() {
     $this->addquotas();

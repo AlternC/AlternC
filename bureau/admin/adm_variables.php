@@ -41,10 +41,9 @@ foreach ($conf as $name => $val) {
   }
 }
 
-include("head.php");
+include_once ("head.php");
+
 ?>
-</head>
-<body>
 <h3><?php __("Configure AlternC variables"); ?></h3>
 
 <p>
@@ -65,12 +64,11 @@ while ($db->next_record()) {
 
  <tr class="lst<?php echo $col; ?>">
  <td><?php echo $vars['name']; ?></td>
- <td><input type="text" name="<?php echo $vars['name']?>" value="<?php echo $vars['value']?>" ></td>
+ <td><input type="text" name="<?php echo $vars['name']?>" value="<?php echo $vars['value']?>" /></td>
  <td><?php echo $vars['comment']; ?></td>
  </tr>
 <? } ?>
 </table>
-<input type="submit" class="inb" value="<?php __("Save variables"); ?>" />
+<p><input type="submit" class="inb" value="<?php __("Save variables"); ?>" /></p>
 </form>
-</body>
-</html>
+<?php include_once("foot.php"); ?>

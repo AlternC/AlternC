@@ -34,6 +34,11 @@ if (!$admin->enabled) {
         exit();
 }
 
+$fields = array (
+	"tld"    => array ("request", "string", ""),
+);
+getFields($fields);
+
 $mode=$admin->gettld($tld);
 if ($mode===false) {
 	$error=$err->errstr();
@@ -41,10 +46,9 @@ if ($mode===false) {
 	exit();
 }
 
-include("head.php");
+include_once("head.php");
+
 ?>
-</head>
-<body>
 <h3><?php __("Manage allowed domains (TLD)"); ?></h3>
 <?php
         if ($error) {
@@ -62,6 +66,4 @@ include("head.php");
 <tr><td colspan="2"><input type="submit" class="inb" value="<?php __("Edit this TLD"); ?>" /></td></tr>
 </table>
 </form>
-
-</body>
-</html>
+<?php include_once("foot.php"); ?>

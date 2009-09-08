@@ -28,6 +28,12 @@
  ----------------------------------------------------------------------
 */
 require_once("../class/config.php");
+include_once("head.php");
+
+$fields = array (
+	"domain"    => array ("request", "string", ""),
+);
+getFields($fields);
 
 $dom->lock();
 if (!$r=$dom->get_domain_all($domain)) {
@@ -35,7 +41,6 @@ if (!$r=$dom->get_domain_all($domain)) {
 }
 $dom->unlock();
 
-include("head.php");
 ?>
 <script type="text/javascript">
 function dnson() {
@@ -53,9 +58,7 @@ function dnsoff() {
 		document.forms["dns"].mail.disabled=false;
 }
 </script>
-</head>
-<body>
-<h3><?php printf(_("Editing domain %s"),$domain); ?> : </h3>
+<h3><?php printf(_("Editing domain %s"),$domain); ?></h3>
 <?php
 	if ($error) {
 		echo "<p class=\"error\">$error</p>";
@@ -73,26 +76,23 @@ for($i=0;$i<$r["nsub"];$i++) {
 	$col=3-$col;
 ?>
 	<tr class="lst<?php echo $col; ?>">
-		<td align="center">
-			<a href="dom_subedit.php?domain=<?php echo urlencode($r["name"]) ?>&amp;sub=<?php  echo urlencode($r["sub"][$i]["name"]) ?>"><?php __("Edit"); ?></a>
-		&nbsp;
+		<td class="center">
+			<a href="dom_subedit.php?domain=<?php echo urlencode($r["name"]) ?>&amp;sub=<?php  echo urlencode($r["sub"][$i]["name"]) ?>"><img src="images/edit.png" alt="<?php __("Edit"); ?>" /></a>&nbsp;<a href="dom_subdel.php?domain=<?php echo urlencode($r["name"]) ?>&amp;sub=<?php  echo urlencode($r["sub"][$i]["name"]) ?>"><img src="images/delete.png" alt="<?php __("Delete"); ?>" /></a>
 		</td>
-		<td align="center"><a href="dom_subdel.php?domain=<?php echo urlencode($r["name"]) ?>&amp;sub=<?php  echo urlencode($r["sub"][$i]["name"]) ?>"><?php __("Delete"); ?></a></td>
 		<td><a href="http://<?php ecif($r["sub"][$i]["name"],$r["sub"][$i]["name"]."."); echo $r["name"] ?>" target="_blank"><?php ecif($r["sub"][$i]["name"],$r["sub"][$i]["name"]."."); echo $r["name"] ?></a></td>
 		<td><?php echo $r["sub"][$i]['type'] === '0' ? '<a href="bro_main.php?R='.urlencode($r["sub"][$i]["dest"]).'">'.htmlspecialchars($r["sub"][$i]["dest"]).'</a>' : htmlspecialchars($r["sub"][$i]["dest"]); ?>&nbsp;</td>
 	</tr>
 <?php } ?>
 </table>
 <br />
-<form action="dom_subdoedit.php?" method="post" name="main">
+<form action="dom_subdoedit.php?" method="post" name="main" id="main">
 	<table border="0">
 		<tr>
-			<td>
+			<td colspan="2">
 			<input type="hidden" name="domain" value="<?php echo $r["name"]; ?>" />
 			<input type="hidden" name="action" value="add" />
 <?php __("Create a subdomain:"); ?>
 <input type="text" class="int" name="sub" style="text-align:right" value="" size="22" id="sub" /><code>.<?php echo $domain; ?></code></td>
-			<td><input type="submit" class="inb" name="add" value="<?php __("Add a subdomain"); ?>" /></td>
 		</tr>
 		<tr>
 			<td><input type="radio" id="local" class="inc" name="type" value="<?php echo $dom->type_local; ?>" checked="checked" onclick="document.main.sub_local.focus();" />
@@ -122,6 +122,9 @@ for($i=0;$i<$r["nsub"];$i++) {
 				<label for="webmail"><?php __("Webmail access"); ?></label></td>
 			<td>&nbsp;</td>
 		</tr>
+		<tr>
+			<td colspan="2"><input type="submit" class="inb" name="add" value="<?php __("Add a subdomain"); ?>" /></td>
+		</tr>
 	</table>
 </form>
 <?php $mem->show_help("edit_domain"); ?>
@@ -146,9 +149,7 @@ if (!$r[noerase]) {
 <tr>
 	<td width="65%" valign="top">
 	<p>
-<?php printf(_("help_dns_mx %s %s"),$L_MX,$L_HOSTING); 
- if (!$r["mx"] && !$r["dns"]) $r["mx"]=$L_MX;
-?>
+<?php printf(_("help_dns_mx %s %s"),$L_MX,$L_HOSTING); ?>
 	</p>
 	<label for="mx"><?php __("MX Field"); ?> : </label><input type="text" class="int" name="mx" id="mx" value="<?php echo $r["mx"] ?>" <?php if (!$r["dns"]) echo "disabled=\"disabled\""; ?> />
 	</td>
@@ -173,6 +174,8 @@ if (!$r[noerase]) {
 </p>
 </form>
 <hr />
- <?php } // noerase ?>
-</body>
-</html>
+<?php } // noerase ?>
+<script type="text/javascript">
+document.forms['main'].sub.focus();
+</script>
+<?php include_once("foot.php"); ?>

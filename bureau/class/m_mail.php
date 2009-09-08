@@ -20,11 +20,11 @@
  Purpose of file: Manage Email accounts and aliases.
  ----------------------------------------------------------------------
 */
+
 /**
-* Classe de gestion des comptes mails de l'hébergé.
+* This class handle emails (pop and/or aliases and even wrapper for internal
+* classes) of hosted users.
 *
-* Cette classe permet de gérer les comptes pop, alias
-* mail des domaines d'un membre hébergé.<br />
 * Copyleft {@link http://alternc.net/ AlternC Team}
 *
 * @copyright    AlternC-Team 2002-11-01 http://alternc.net/
@@ -32,7 +32,7 @@
 */
 class m_mail {
 
-  /** Liste des domaines
+  /** domain list
    * @access private
    */
   var $domains;
@@ -40,22 +40,24 @@ class m_mail {
 
   /* ----------------------------------------------------------------- */
   /**
-   * Constructeur
+   * Constructor
    */
   function m_mail() {
   }
 
+
   /* ----------------------------------------------------------------- */
   /**
-   * Liste des quotas
+   * Quota list (hook for quota class)
    */
   function alternc_quota_names() {
     return "mail";
   }
 
+
   /* ----------------------------------------------------------------- */
-  /** Retourne la liste des domaines hébergés en mails sur le compte.
-   * @return array Tableau indexé des domaines hébergés en mail.
+  /** Returns the list of mail-hosted domains for a user
+   * @return array indexed array of hosted domains
    */
   function enum_domains() {
     global $db,$err,$cuid;
@@ -72,12 +74,11 @@ class m_mail {
     return $this->domains;
   }
 
+
   /* ----------------------------------------------------------------- */
-  /** Retourne la liste des lettres pour lesquelles un domaine $dom a
-   * des e-mails
-   * Retourne un tableau indexé où se trouvent les lettres
-   * @param string $dom Domaine dont on veut les premières lettres des mails
-  * @return array Tableau de lettres ou FALSE si erreur
+  /** Returns the first letters used as email for a domain
+   * @param string $dom Domain whose mail we want to search for
+  * @return array An indexed array of letters or false if something bad happened
    */
   function enum_doms_mails_letters($dom) {
     global $err,$cuid,$db;
@@ -89,6 +90,7 @@ class m_mail {
     }
     return $res;
   }
+
 
   /* ----------------------------------------------------------------- */
   /** Retourne la liste des mails du domaine $dom et si une lettre est
@@ -158,6 +160,7 @@ class m_mail {
       return ($al > $bl) ? +1 : -1;
     }
 
+
   /* ----------------------------------------------------------------- */
   /** Retourne les détails d'un mail
    * Le mail $mail est retourné sous la forme d'un tableaau associatif comme suit :
@@ -187,8 +190,12 @@ class m_mail {
     return array("mail" => $mail, "login" => $login, "alias" => $account, "pop" => $pop);
   }
 
-  /*****************************************************************************/
-  /** Tell if a mail is available or not */
+
+  /* ----------------------------------------------------------------- */
+  /** Tell if a mail is available or not 
+   * @param string $mail the email address (with its fqdn domain)
+   * @return boolean true if this email is available, false if it is already defined.
+   */
   function available($mail) {
     global $err,$db,$cuid;
     $err->log("mail","available",$mail);
@@ -200,13 +207,14 @@ class m_mail {
     }
   }
 
+
   /* ----------------------------------------------------------------- */
-  /** Crée un mail 'executeur' (wrapper) pour $login@$domain
-   * @param string $login partie gauche du @ pour le mail concerné
-   * @param string $domain partie droite du @ pour le mail concerné
-   * @param string $command Commande à exécuter, sans le | ni les "" (commande brute)
-   * @param string $type ignoré désormais (plus de ldap...) TODO : remplacer cela par une appropriation de wrapper par une classe (donc mettre dans ce champ le nom de la classe appelante ? )
-   * @return boolean TRUE si le wrapper a été créé, FALSE si une erreur s'est produite.
+  /** Create a wrapper for $login@$domain email
+   * @param string $login left part of the @ for the email creation
+   * @param string $domain domain-part of the email 
+   * @param string $command The command we want to execute, without " nor | (raw command)
+   * @param string $type now unused (was a ldap class name)
+   * @return boolean TRUE if the wrapper has been created, false if an error occurred.
    */
   function add_wrapper($login,$domain,$command,$type="") {
     global $err,$cuid,$db;
@@ -219,11 +227,12 @@ class m_mail {
     return true;
   }
 
+
   /* ----------------------------------------------------------------- */
-  /** Efface un mail 'executeur' (wrapper) pour $login@$domain
-   * @param string $login partie gauche du @ pour le mail concerné
-   * @param string $domain partie droite du @ pour le mail concerné
-   * @return boolean TRUE si le wrapper a été effacé, FALSE si une erreur s'est produite.
+  /** Delete a wrapper email
+   * @param string $login left part of the @ for the email creation
+   * @param string $domain domain-part of the email 
+   * @return boolean TRUE if the wrapper has been deleted, FALSE if an error occurred.
    */
   function del_wrapper($login,$domain) {
     global $err,$cuid,$db;
@@ -234,10 +243,10 @@ class m_mail {
 
 
   /* ----------------------------------------------------------------- */
-  /** Change le mot de passe du compte pop $mail
-   * @param string $mail Compte mail concerné
-   * @param string $pass Nouveau mot de passe
-   * @return boolean TRUE si le mot de passe a été changé, FALSE si une erreur s'est produite.
+  /** Change the password of the email account $mail
+   * @param string $mail Pop/Imap email account
+   * @param string $pass New password
+   * @return boolean TRUE if the password has been changed, FALSE if an error occurred.
    */
   function change_password($mail,$pass) {
     global $err,$db,$cuid;
@@ -260,6 +269,7 @@ class m_mail {
     return true;
   }
 
+
   /* ----------------------------------------------------------------- */
   /** Modifie les paramètres d'un compte email
    * Tout peut être modifié dans l'email (sauf l'adresse elle-même)
@@ -280,7 +290,7 @@ class m_mail {
     $account=array();
 
     if ($pop) $pop="1"; else $pop="0";
-    //vérifie si les champs obligatoires sont renseignés
+
     if ($pop=="0" && $alias=="") {
       $err->raise("mail",4);
       return false;
@@ -288,7 +298,7 @@ class m_mail {
     if ($pop=="1"){
       $account[]=$email."_".$dom;
     }
-    //vérifie la validité des alias :
+
     if ($alias){
       $a=explode("\n",$alias);
       if (count($a)>0) {
@@ -322,23 +332,24 @@ class m_mail {
 
     $db->query("UPDATE mail_domain SET alias='".implode("\n",$account)."', pop='$pop' WHERE mail='$mail';");
 
-    if ($pop=="1" && $oldpop!=1) { /* Creation du compte pop */
+    if ($pop=="1" && $oldpop!=1) { /* POP Creation */
       if (!$this->_createpop($email,$dom,$pass)) {
 	return false;
       }
     }
-    if ($pop!="1" && $oldpop==1) { /* Destruction du compte pop */
+    if ($pop!="1" && $oldpop==1) { /* POP Destruction */
       if (!$this->_deletepop($email,$dom)) {
 	return false;
       }
     }
-    if ($pop=="1" && $oldpop==1 && $pass!="") { /* Modification du compte pop */
+    if ($pop=="1" && $oldpop==1 && $pass!="") { /* POP Account Edition */
       if (!$this->_updatepop($email,$dom,$pass)) {
 	return false;
       }
     }
     return true;
   }
+
 
   /* ----------------------------------------------------------------- */
   /** Crée un compte email $mail sur le domaine $dom
@@ -355,13 +366,12 @@ class m_mail {
     $mail=strtolower($mail);
     if ($pop) $pop="1"; else $pop="0";
     if ($mail) {
-      //vérifie la validité du login mail
       if (!checkloginmail($mail)) {
 	$err->raise("mail",13);
 	return false;
       }
     }
-    //vérifie si les champs obligatoires sont renseignés
+
     if (($pop=="1" && $pass=="")||($pop!="1" && $alias=="")){
       $err->raise("mail",4);
       return false;
@@ -369,7 +379,7 @@ class m_mail {
     if ($pop=="1"){
       $account[]=$mail."_".$dom;
     }
-    //vérifie la validité des alias :
+
     if ($alias){
       $a=explode("\n",$alias);
       if (count($a)>0) {
@@ -387,7 +397,7 @@ class m_mail {
       }
     }
 
-    // check that the domains is a user's one ...
+    // check that the domain is a user's own ...
     $db->query("SELECT domaine FROM domaines WHERE compte='$cuid' AND domaine='$dom';");
     if (!$db->next_record()) {
       $err->raise("mail",6,$dom);
@@ -406,7 +416,6 @@ class m_mail {
     }
     $db->query("INSERT INTO mail_domain (mail,alias,uid,pop,type) VALUES ('".$mail."@".$dom."','".implode("\n",$account)."','$cuid','$pop',0);");
 
-    // Ajout du compte pop dans ldap-users
     if ($pop=="1") {
       if (!$this->_createpop($mail,$dom,$pass))
 	return false;
@@ -414,10 +423,11 @@ class m_mail {
     return true;
   }
 
+
   /* ----------------------------------------------------------------- */
-  /** Efface le compte mail $mail
-   * @param string $mail Email à effacer
-   * @return boolean TRUE si le compte mail a bien été détruit, FALSE si une erreur s'est produite.
+  /** Delete an email account (pop or alias) $mail
+   * @param string $mail Email to delete
+   * @return boolean TRUE if the email has been deleted, or FALSE if an error occurred
    */
   function del_mail($mail) {
     global $err,$cuid,$db;
@@ -429,7 +439,6 @@ class m_mail {
       $err->raise("mail",3,$dom);
       return false;
     }    
-    /* Ok, le mail existe, on le detruit donc... */
     $t=explode("@",$mail);
     $mdom=$t[0]; $dom=$t[1];
     $pop=$db->f("pop");
@@ -448,6 +457,9 @@ class m_mail {
   /* ----------------------------------------------------------------- */
   /**
    * Check for a slave account (secondary mx)
+   * @param string $login the login to check 
+   * @param string $pass the password to check
+   * @return boolean TRUE if the password is correct, or FALSE if an error occurred.
    */
   function check_slave_account($login,$pass) {
 	global $db,$err;
@@ -457,6 +469,7 @@ class m_mail {
 	}
 	return false;
   }
+
 
   /* ----------------------------------------------------------------- */
   /**
@@ -471,9 +484,11 @@ class m_mail {
 	return true;
   }
 
+
   /* ----------------------------------------------------------------- */
   /**
    * Return the list of allowed slave accounts (secondary-mx)
+   * @return array 
    */
   function enum_slave_account() {
 	global $db,$err;
@@ -486,30 +501,37 @@ class m_mail {
 	return $res;
   }
 
+
   /* ----------------------------------------------------------------- */
   /**
    * Add a slave account that will be allowed to access the mxdomain list
+   * @param string $login the login to add
+   * @param string $pass the password to add
+   * @return boolean TRUE if the account has been created, or FALSE if an error occurred.
    */
   function add_slave_account($login,$pass) {
 	global $db,$err;
 	$db->query("SELECT * FROM mxaccount WHERE login='$login'");
 	if ($db->next_record()) {
-	  $err->raise("err",23); // FIXME
+	  $err->raise("mail",16); 
 	  return false;
 	}
 	$db->query("INSERT INTO mxaccount (login,pass) VALUES ('$login','$pass')");
 	return true;
   }
 
+
   /* ----------------------------------------------------------------- */
   /**
    * Remove a slave account
+   * @param string $login the login to delete
    */
   function del_slave_account($login) {
 	global $db,$err;
 	$db->query("DELETE FROM mxaccount WHERE login='$login'");
 	return true;
   }
+
 
   /* ----------------------------------------------------------------- */
   /** Crée le compte pop $mail@$dom, avec pour mot de passe $pass
@@ -533,6 +555,7 @@ class m_mail {
     $db->query("INSERT INTO mail_users (uid,alias,path,password) VALUES ('$cuid','".$mail."@".$dom."','/var/alternc/mail/".$m."/".$mail."_".$dom."','"._md5cr($pass)."');");
     $db->query("INSERT INTO mail_alias (mail,alias) VALUES ('".$mail."_".$dom."','/var/alternc/mail/".$m."/".$mail."_".$dom."/Maildir/');");
 
+    // Webmail data (squirrelmail default preferences)
     $f=fopen("/var/lib/squirrelmail/data/".$mail."_".$dom.".pref","wb");
     $g=0; $g=@fopen("/etc/squirrelmail/default_pref","rb");
     fputs($f,"email_address=$mail@$dom\nchosen_theme=default_theme.php\n");
@@ -550,6 +573,7 @@ class m_mail {
     return true;
   }
 
+
   /* ----------------------------------------------------------------- */
   /** Met à jour un compte pop existant
    * @param string $mail mail à modifier
@@ -566,6 +590,7 @@ class m_mail {
     $db->query("UPDATE mail_users SET password='"._md5cr($pass)."' WHERE ( alias='". $mail."_".$dom."' OR alias='". $mail."@".$dom."' ) AND uid='$cuid';");
     return true;
   }
+
 
   /* ----------------------------------------------------------------- */
   /** Détruit le compte pop $mail@$dom.
@@ -588,6 +613,7 @@ class m_mail {
     return true;
   }
 
+
   /* ----------------------------------------------------------------- */
   /** Fonction appellée par domaines lorsqu'un domaine est effacé.
    * Cette fonction efface tous les comptes mails du domaine concerné.
@@ -600,7 +626,7 @@ class m_mail {
     $err->error=0;
     $err->log("mail","alternc_del_mx_domain",$dom);
 
-    /*
+    /* FIXME / Why on hell is it commented out ? 
     $db->query("SELECT domaine FROM domaines WHERE compte='$cuid' AND domaine='$dom';");
     if (!$db->next_record()) {
       $err->raise("mail",6,$dom);
@@ -627,21 +653,23 @@ class m_mail {
     return true;
   }
 
+
   /* ----------------------------------------------------------------- */
-  /** Fonction appellée par domaines lorsqu'un domaine est créé.
-   * Cette fonction crée les comptes par défaut du domaine concerné.
-   * @param string $dom Domaine à créer
-   * @return boolean TRUE si le domaine a bien été créé, FALSE si une erreur s'est produite.
+  /** hook function called by AlternC when a domain is created for 
+   * the current user account
+   * This function create default email accuonts (postmaster) for the newly hosted domain
+   * @param string $dom Domain that has just been created
+   * @return boolean TRUE if the domain has been successfully created in the email db or FALSE if an error occurred.
    * @access private
    */
   function alternc_add_mx_domain($dom) {
     global $err,$cuid,$db,$mem;
     $err->log("mail","alternc_add_mx_domain",$dom);
     $db->query("INSERT INTO mail_domain (mail,alias,uid) VALUES ('$dom','$dom', '$cuid');");
-    // Create the postmaster email for this new domain : 
     $this->add_mail($dom,"postmaster",0,"",$mem->user["mail"]);
     return true;
   }
+
 
   /* ----------------------------------------------------------------- */
   /**
@@ -711,18 +739,6 @@ class m_mail {
     }
     @unlink($tmpfile);
     return $str;
-  }
-
-
-  /* ----------------------------------------------------------------- */
-  /**
-   * Returns the declaration of all xml rpc exportable functions 
-   * related to mail service. Each method is returned as an array
-   * containing the function name, function, signature and docstring.
-   * @access private
-   * EXPERIMENTAL 'sid' function ;) 
-   */
-  function alternc_xmlrpc_server() {
   }
 
 

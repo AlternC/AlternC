@@ -30,11 +30,18 @@
  ----------------------------------------------------------------------
 */
 require_once("../class/config.php");
+include_once("head.php");
 
 if (!$admin->enabled) {
 	__("This page is restricted to authorized staff");
 	exit();
 }
+
+$fields = array (
+	"uid"    => array ("request", "integer", 0),
+);
+getFields($fields);
+
 if (!$admin->checkcreator($uid)) {
 	__("This page is restricted to authorized staff");
 	exit();
@@ -44,17 +51,14 @@ if (!$r=$admin->get($uid)) {
 	$error=$err->errstr();
 }
 
-include("head.php");
 ?>
-</head>
-<body>
 <h3><?php __("Member Edition"); ?></h3>
 <?php
 	if ($error) {
 		echo "<p class=\"error\">$error</p>";
 	}
 ?>
-<form method="post" action="adm_doedit.php">
+<form method="post" action="adm_doedit.php" name="main" id="main">
 <table border="1" cellspacing="0" cellpadding="4">
 <tr>
 	<th><input type="hidden" name="uid" value="<?php echo $uid ?>" />
@@ -85,7 +89,7 @@ include("head.php");
 <tr>
 	<th><label for="canpass"><?php __("Can he change its password"); ?></label></th>
 	<td><select class="inl" name="canpass" id="canpass">
-	<?php 
+	<?php
 	for($i=0;$i<count($bro->l_icons);$i++) {
 	  echo "<option";
 	  if ($r["canpass"]==$i) echo " selected=\"selected\"";
@@ -94,7 +98,7 @@ include("head.php");
 ?></select>
 	</td>
 </tr>
-<tr>
+ <tr>
 	<th><label for="notes"><?php __("Notes"); ?></label></th>
 	<td><textarea name="notes" id="notes" class="int" cols="32" rows="5"><?php echo $r['notes']; ?></textarea></td>
 </tr>
@@ -118,7 +122,7 @@ include("head.php");
 	    echo " selected";
 	  echo ">$type</option>";
 	}
-?></select><label for="reset_quotas"><?php __("Reset quotas to default ?") ?></label><input type="checkbox" name="reset_quotas" id="reset_quotas"></td>
+?></select><label for="reset_quotas"><?php __("Reset quotas to default ?") ?></label><input type="checkbox" name="reset_quotas" id="reset_quotas" /></td>
 </tr>
 <tr>
 	<th><label for="duration"><?php __("Period"); ?></label></th>
@@ -151,11 +155,11 @@ include("head.php");
 
 <p>
 <?php
-	if ($mem->user[uid]==2000) { // PATCHBEN only admin can change su/nosu :)  
+	if ($mem->user[uid]==2000) { // PATCHBEN only admin can change su/nosu :)
 if ($r["su"]) {
 ?>
 <b><?php __("This account is a super-admin account"); ?></b><br />
-<?php if ($admin->onesu()) { 
+<?php if ($admin->onesu()) {
   __("There is only one administrator account, you cannot turn this account back to normal");
 } else {
 ?>
@@ -167,12 +171,14 @@ if ($r["su"]) {
 </p>
 
 
-<p><?php 
+<p><?php
 	}
 $c=$admin->get($r["creator"]);
-printf(_("Account created by %s"),$c["login"]); 
+printf(_("Account created by %s"),$c["login"]);
 ?>
 </p>
 <p><a href="adm_list.php"><?php __("Back to the account list"); ?></a></p>
-</body>
-</html>
+<script type="text/javascript">
+document.forms['main'].pass.focus();
+</script>
+<?php include_once("foot.php"); ?>

@@ -28,6 +28,13 @@
  ----------------------------------------------------------------------
 */
 require_once("../class/config.php");
+include_once("head.php");
+
+$fields = array (
+	"domain"      => array ("request", "string", ""),
+	"del_confirm" => array ("post", "string", ""),
+);
+getFields($fields);
 
 $dom->lock();
 if ($del_confirm=="y")
@@ -41,10 +48,7 @@ if ($del_confirm=="y")
 $dom->unlock();
 if ($del_confirm!="y") {
 
-include("head.php");
 ?>
-</head>
-<body>
 <h3><?php printf(_("Confirm the deletion of domain %s"),$domain); ?></h3>
 <p class="error"><?php __("WARNING"); ?><br /><?php printf(_("Confirm the deletion of domain %s"),$domain); ?><br />
 <?php __("This will delete the related sub-domains too."); ?></p>
@@ -54,20 +58,15 @@ include("head.php");
 <input type="hidden" name="domain" value="<?php echo $domain ?>" />
 <input type="submit" class="inb" name="submit" value="<?php __("Yes"); ?>" /> - <input type="button" class="inb" name="non" value="<?php __("No"); ?>" onclick="history.back()" />
 </form>
-</body>
-</html>
+<?php include_once("foot.php"); ?>
 <?php
 	exit();
 	}
-include("head.php");
 ?>
-</head>
-<body bgcolor="#FFFFF0">
 <h3><?php printf(_("Domain %s deleted"),$domain); ?></h3>
 <p>
 <?php printf(_("The domain %s has been successfully deleted."),$domain); ?><br />
-<a href="login.php" target="_parent"><?php __("Click here to continue"); ?></a>
+<a href="main.php" target="_parent"><?php __("Click here to continue"); ?></a>
 <?php $mem->show_help("del_domain"); ?>
 </p>
-</body>
-</html>
+<?php include_once("foot.php"); ?>

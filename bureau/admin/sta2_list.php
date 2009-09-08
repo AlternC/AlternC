@@ -29,10 +29,9 @@
 */
 require_once("../class/config.php");
 
-include("head.php");
+include_once("head.php");
+
 ?>
-</head>
-<body>
 <h3><?php __("Statistics List"); ?></h3>
 <?php
 	if ($quota->cancreate("sta2")) { ?>
@@ -64,7 +63,7 @@ while (list($key,$val)=each($r))
 ?>
         <tr class="lst<?php echo $col; ?>">
                 <td><input type="checkbox" class="inc" name="del_<?php echo $val["id"]; ?>" value="<?php echo $val["id"]; ?>" /></td>
-                <td><a href="sta2_edit_raw.php?id=<?php echo $val["id"] ?>"><?php __("Edit"); ?></a></td>
+                <td><a href="sta2_edit_raw.php?id=<?php echo $val["id"] ?>"><img src="images/edit.png" alt="<?php __("Edit"); ?>" alt="<?php __("Edit"); ?>" /></a></td>
                 <td><?php echo $val["hostname"] ?></td>
                 <td><code>/<?php echo $val["folder"] ?></code></td>
                 <td><?php
@@ -73,7 +72,6 @@ while (list($key,$val)=each($r))
         </tr>
 <?php
         }
-
 ?>
 
 <tr><td colspan="5"><input type="submit" class="inb" name="submit" value="<?php __("Delete the checked Raw Statistics (apache)"); ?>" /></td></tr>
@@ -81,8 +79,5 @@ while (list($key,$val)=each($r))
 </form>
 
 
-<?php
-}
- ?>
-</body>
-</html>
+<?php } ?>
+<?php include_once("foot.php"); ?>

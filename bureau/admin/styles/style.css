@@ -1,0 +1,291 @@
+html, body {
+	margin: 0px;
+	padding: 0px;
+}
+
+body {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #000000;
+	background-color: #F0F0FA;
+/* 	background-color: cyan; */
+}
+
+body.light {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #000000;
+	background-color: #F0F0FA;
+/* 	background-color: cyan; */
+}
+
+.hlp {
+	font-family: Helvetica, Tahoma, sans-serif;
+	font-size: 10px;
+	color: #202020;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+td {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #000000;
+}
+
+th {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #007799;
+	font-weight: bold
+}
+
+h3 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	font-weight: bold;
+	color: #10507C;
+	text-align: center;
+	padding: 10px;
+	margin: 0px;
+}
+
+h4 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	font-weight: bold;
+	color: #007777
+}
+
+hr {
+	color: #007799;
+	height: 1px;
+	border: 1px solid #007799;
+}
+
+.inp {
+	/* Should not be use anymore !!! */
+	border-color: blue;
+	border-width: 5px;
+	backgorund-color: #500000;
+	color: white;
+}
+
+.inc, .inl {
+	border: 1px solid black;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	border-style: none;
+	color: black;
+}
+
+.inb {
+	border: 1px solid black;
+	background-color: white;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: black;
+}
+
+.int {
+	border: 1px dotted black;
+	background-color: white;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	padding-left: 2px;
+	padding-right: 2px;
+	color: black;
+}
+
+.lst1 {
+	background-color: #F1F8FD;
+}
+.lst2 {
+	background-color: #CFE3F1;
+}
+
+.dlogin {
+	text-align: center;
+}
+
+.login {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+img {
+	border: 0px;
+	vertical-align: middle;
+}
+
+.error {
+	color: red;
+	font-weight: bold;
+}
+
+/* Over quota class */
+.over {
+	color: red;
+}
+
+.code {
+	font-size: 16px;
+	font-family: Courier New, Fixed;
+	font-weight: bold;
+	text-align: center;
+}
+
+#global {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	width: 980px;
+	border: 5px solid #1D6A9F;
+	-moz-border-radius: 10px;
+	background-color: #F0F0FA;
+/* 	background: #F1F8FD url(/admin/images/bgborder.gif) repeat-y scroll top left; */
+}
+
+/* Main container */
+
+#tdMenu, #tdContent {
+	vertical-align: top;
+}
+
+#tdMenu {
+	border-right: 1px dotted #1D6A9F;
+}
+
+#content {
+	display: block;
+	width: 740px;
+	padding-left: 10px;
+	vertical-align: top;
+}
+
+/* Menu */
+
+#menu {
+	display: block;
+	float: left;
+	padding: 0px;
+	margin: 0px;
+	width: 200px;
+	padding-right: 10px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+}
+
+.menu-box {
+	margin-bottom: 10px;
+	font-size: 11px;
+}
+
+.menu-box .menu-title {
+	color: #000000;
+	border: 1px solid #1D6A9F;
+	background-color: #C0DCF0;
+	padding: 3px;
+	-moz-border-radius: 4px;
+}
+
+.menu-box .menu-content {
+	margin-top: 1px;
+}
+
+.menu-box ul {
+	margin: 0px;
+	padding: 0px;
+	list-style-type: none;
+}
+
+.menu-box a {
+	text-decoration: none;
+	color: #0D5689;
+}
+
+.menu-box a:hover {
+	text-decoration: underline;
+	color: #000000;
+}
+
+.menu-box li a {
+	display: block;
+	height: 18px;
+	color: #0D5689;
+	padding-left: 2px;
+	text-decoration: none;
+	border: 1px solid #F1F8FD;
+}
+
+.menu-box li a img {
+	float: left;
+	width: 16px;
+	height: 16px;
+	margin: 0px;
+	padding: 0px;
+	padding-top: 1px;
+}
+
+.menu-box li a:hover {
+	color: #000000;
+	height: 18px;
+	border: 1px solid #1D6A9F;
+	text-decoration: none;
+	background-color: #DFEEF8;
+}
+
+.menu-box .full {
+	color: red;
+}
+
+/* Bars */
+
+.barempty {
+	background-color: white;
+	border: 1px solid black;
+	height: 8px;
+	-moz-border-radius: 4px;
+}
+
+.barfill {
+	float: left;
+	background-color: red;
+	height: 8px;
+}
+
+/* Infos */
+#recap table {
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* Others */
+.center {
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+a {
+	text-decoration: none;
+	color: #0D5689;
+}
+
+a:hover {
+	text-decoration: underline;
+	color: #000000;
+}
+
+.border {
+	border: 1px solid #C0DCF0;
+}
+
+.bold {
+	font-weight: bold;
+}

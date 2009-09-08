@@ -27,25 +27,32 @@
  Purpose of file:
  ----------------------------------------------------------------------
 */
-
+?>
+<div class="menu-box">
+<div class="menu-title"><img src="images/quota.png" alt="<?php __("Show my quotas"); ?>" />&nbsp;<a href="quota_show.php"><?php __("Show my quotas"); ?></a>
+<?php
 $q=$quota->getquota();
 
 $qlist=$quota->qlist();
 reset($qlist);
 $col=1;
 
-echo '<dt id="#quotas">' . _("Quotas") . '</dt>';
-echo '<dd><a href="quota_show.php">' . _("Show my quotas") . '</a></dd>';
 
 if (!is_array($q)) {
 	// "No quotas for this account, or quotas currently unavailable
 	return;
 }
 
+$first=true;
 while (list($key,$val)=each($qlist)) {
 	$col=3-$col;
 
 	if (($key == 'bw_web' || $key == 'web') && ($q[$key]["t"] > 0)) {
+	  if ($first) {
+	    echo '<dt id="#quotas">' . _("Quotas") . '</dt>';
+	    $first=false;
+	  }
+
 		if ($key == 'web') {
 			$q[$key]["u"] = $q[$key]["u"] * 1024;
 			$q[$key]["t"] = $q[$key]["t"] * 1024;
@@ -67,5 +74,6 @@ while (list($key,$val)=each($qlist)) {
 		echo "</dd>";
 	}
 }
-
-
+?>
+</div>
+</div>

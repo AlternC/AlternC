@@ -28,6 +28,13 @@
  ----------------------------------------------------------------------
 */
 require_once("../class/config.php");
+include_once("head.php");
+
+$fields = array (
+	"domain"    => array ("request", "string", ""),
+	"sub"       => array ("request", "string", ""),
+);
+getFields($fields);
 
 $dom->lock();
 if (!$r=$dom->get_sub_domain_all($domain,$sub)) {
@@ -35,14 +42,12 @@ if (!$r=$dom->get_sub_domain_all($domain,$sub)) {
 }
 $dom->unlock();
 
-include("head.php");
 ?>
-</head>
-<body>
 <h3><?php printf(_("Deleting subdomain %s"),"http://".ife($sub,$sub.".").$domain); ?> : </h3>
 <?php
 	if ($error) {
-		echo "<p class=\"error\">$error</p></body></html>";
+		echo "<p class=\"error\">$error</p>";
+		include_once("foot.php");
 		exit();
 	}
 ?>
@@ -61,5 +66,4 @@ include("head.php");
 	<input type="button" class="inb" name="cancel" value="<?php __("No"); ?>" onclick="history.back();" />
 	</blockquote>
 </form>
-</body>
-</html>
+<?php include_once("foot.php"); ?>

@@ -34,6 +34,14 @@ if (!$admin->enabled) {
 	exit();
 }
 
+$fields = array (
+	"delaccount"   => array ("request", "string", ""),
+
+	"newlogin"   => array ("request", "string", ""),
+	"newpass"    => array ("request", "string", ""),
+);
+getFields($fields);
+
 if ($delaccount) {
 	// Delete an account
 	if ($dom->del_slave_account($delaccount)) {
@@ -42,16 +50,15 @@ if ($delaccount) {
 }
 if ($newlogin) {
 	// Add an account
-	if ($dom->add_slave_account($newlogin,$newpass)) { 
+	if ($dom->add_slave_account($newlogin,$newpass)) {
 		$error=_("The requested account address has been created. It is now allowed.");
 		unset($newlogin); unset($newpass);
 	}
 }
 
-include("head.php");
+include_once ("head.php");
+
 ?>
-</head>
-<body>
 <h3><?php __("Manage allowed accounts for slave zone transfers"); ?></h3>
 <?php
 	if ($error) {
@@ -76,7 +83,7 @@ for($i=0;$i<count($c);$i++) {
 ?>
 
 <tr class="lst<?php echo $col; ?>">
-<td><a href="adm_slaveaccount.php?delaccount=<?php echo urlencode($c[$i]["login"]); ?>"><?php __("Delete"); ?></a></td>
+<td class="center"><a href="adm_slaveaccount.php?delaccount=<?php echo urlencode($c[$i]["login"]); ?>"><img src="images/delete.png" alt="<?php __("Delete"); ?>" /></a></td>
 <td><?php echo $c[$i]["login"]; ?></td>
 <td><?php echo $c[$i]["pass"]; ?></td>
 </tr>
@@ -98,5 +105,4 @@ for($i=0;$i<count($c);$i++) {
 </table>
 
 </form>
-</body>
-</html>
+<?php include_once("foot.php"); ?>

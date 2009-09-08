@@ -44,11 +44,9 @@ if (is_array($sel)) {
 	if (!$error) $error=_("The requested TLD has been deleted");
 }
 
+include_once("head.php");
 
-include("head.php");
 ?>
-</head>
-<body>
 <h3><?php __("Manage allowed domains (TLD)"); ?></h3>
 <?php
 	if ($error) {
@@ -61,7 +59,7 @@ $c=$admin->listtld();
 <p>
 <?php __("Here is the list of the TLD allowed on this server. Each TLD can be allowed or denied after some checks (whois, ns, domain exists...)"); ?>
 </p>
-
+<p><a href="adm_tldadd.php"><?php __("Add a new TLD"); ?></a></p>
 <form method="post" action="adm_tld.php">
 <table border="0" cellpadding="4" cellspacing="0">
 <tr><th><?php __("Action"); ?></th><th><?php __("TLD"); ?></th><th><?php __("Allowed Mode"); ?></th></tr>
@@ -72,7 +70,7 @@ for($i=0;$i<count($c);$i++) {
 ?>
 
 <tr class="lst<?php echo $col; ?>">
-<td><input id="sel<?php echo $i; ?>" type="checkbox" name="sel[]" class="inc" value="<?php echo $c[$i]["tld"]; ?>" />&nbsp;<a href="adm_tldedit.php?tld=<?php echo urlencode($c[$i]["tld"]); ?>"><?php __("Edit"); ?></a></td>
+<td><input id="sel<?php echo $i; ?>" type="checkbox" name="sel[]" class="inc" value="<?php echo $c[$i]["tld"]; ?>" />&nbsp;<a href="adm_tldedit.php?tld=<?php echo urlencode($c[$i]["tld"]); ?>"><img style="padding-bottom: 5px" src="images/edit.png" alt="<?php __("Edit"); ?>" /></a></td>
 <td><label for="sel<?php echo $i; ?>"><?php echo $c[$i]["tld"]; ?></label></td>
 <td><?php __($admin->tldmode[$c[$i]["mode"]]); ?></td></tr>
 
@@ -82,6 +80,5 @@ for($i=0;$i<count($c);$i++) {
 <tr><td colspan="3"><input type="submit" class="inb" value="<?php __("Delete the checked TLD"); ?>" /></td></tr>
 </table>
 </form>
-<a href="adm_tldadd.php"><?php __("Add a new TLD"); ?></a>
-</body>
-</html>
+<p><a href="adm_tldadd.php"><?php __("Add a new TLD"); ?></a></p>
+<?php include_once("foot.php"); ?>

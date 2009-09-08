@@ -29,15 +29,14 @@
 */
 
 require_once("../class/config_nochk.php");
+include_once("head.php");
 
-include("head.php");
 ?>
-</head>
-<body>
 <h3><?php __("Change the email of the account"); ?></h3>
 <?php
 	if ($error) {
-		echo "<p class=\"error\">$error</p></body></html>";
+		echo "<p class=\"error\">$error</p>";
+		include_once("foot.php");
 		exit();
 	}
 ?>
@@ -50,5 +49,4 @@ include("head.php");
 		<tr><td align="center" colspan="3"><input type="submit" class="inb" name="submit" value="<?php __("OK"); ?>" /></td></tr>
 	</table>
 </form>
-</body>
-</html>
+<?php include_once("foot.php"); ?>

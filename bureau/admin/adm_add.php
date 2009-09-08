@@ -30,19 +30,19 @@
  ----------------------------------------------------------------------
 */
 require_once("../class/config.php");
+include_once("head.php");
 
 if (!$admin->enabled) {
 	__("This page is restricted to authorized staff");
 	exit();
 }
 
-if (!isset($canpass)) $canpass=1;
-
-include("head.php");
+$fields = array (
+	"canpass"   => array ("request", "integer", 1),
+);
+getFields($fields);
 
 ?>
-</head>
-<body>
 <h3><?php __("New member"); ?></h3>
 <?php
 if ($error) {
@@ -65,7 +65,7 @@ if ($error) {
 <tr>
 	<th><label for="canpass"><?php __("Can he change its password"); ?></label></th>
 	<td><select class="inl" name="canpass" id="canpass">
-	<?php 
+	<?php
 	for($i=0;$i<count($bro->l_icons);$i++) {
 	  echo "<option";
 	  if ($canpass==$i) echo " selected=\"selected\"";
@@ -75,11 +75,11 @@ if ($error) {
 	</td>
 </tr>
 <tr>
-	<th><label for="notes"><?php __("Notes"); ?></label></th>
-	<td><textarea name="notes" id="notes" class="int" cols="32" rows="5"><?php echo $notes; ?></textarea></td>
+       <th><label for="notes"><?php __("Notes"); ?></label></th>
+       <td><textarea name="notes" id="notes" class="int" cols="32" rows="5"><?php echo $notes; ?></textarea></td>
 </tr>
 <tr>
-	<th><label for="nom"><?php echo _("Surname")."</label> / <label for=\"prenom\">"._("First Name"); ?></label></th>
+        	<th><label for="nom"><?php echo _("Surname")."</label> / <label for=\"prenom\">"._("First Name"); ?></label></th>
 	<td><input class="int" type="text" id="nom" name="nom" value="<?php echo $nom; ?>" size="20" maxlength="128" />&nbsp;/&nbsp;<input type="text" name="prenom" id="prenom" value="<?php echo $prenom; ?>" class="int" size="20" maxlength="128" /></td>
 </tr>
 <tr>
@@ -99,9 +99,8 @@ if ($error) {
 	  echo ">$type</option>";
 	}
 ?></select>
-	</td>
+</td>
 </tr>
-
 <?php if (variable_get('hosting_tld') || $dom->enum_domains()) { ?>
 <tr>
     <th colspan="2">
@@ -109,23 +108,22 @@ if ($error) {
         <label><?php printf(_("Create the domain <b>username.%s</b>"),""); ?></label>
         <select name="create_dom_list">
             <?php if (variable_get('hosting_tld')) { ?>
-                <option value="<?php echo variable_get('hosting_tld'); ?>" selected="selected"><?php echo variable_get('hosting_tld'); ?></option>
-            <?php } 
+             <option value="<?php echo variable_get('hosting_tld'); ?>" selected="selected"><?php echo variable_get('hosting_tld'); ?></option>
+          <?php } 
             /* Enumeration des domaines : */
             $domain=$dom->enum_domains();
             reset($domain);
             while (list($key,$val)=each($domain)) { ?>
-                <option value="<?php echo $val; ?>" > <?php echo $val?> </option>
+               <option value="<?php echo $val; ?>" > <?php echo $val?> </option>
             <?php } ?>
         </select>
     </th>
 </tr>
-<?php } ?>
+ <?php } ?>
 <tr>
 	<td colspan="2"><input type="submit" class="inb" name="submit" value="<?php __("Create a new member"); ?>" /></td>
 </tr>
 </table>
 </form>
 
-</body>
-</html>
+<?php include_once("foot.php"); ?>

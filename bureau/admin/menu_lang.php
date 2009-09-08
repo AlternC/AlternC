@@ -28,8 +28,14 @@
  ----------------------------------------------------------------------
 */
 ?>
-<dt id="language"><?php __('Languages'); ?>
-<?php foreach($locales as $l) { ?>
-<dd><a href="login.php?setlang=<?php echo $l; ?>" target="_top"><?php __($l); ?></a></dd>
-<?php } ?>
-</dt>
+<div class="menu-box">
+ <div class="menu-title">
+  <img src="images/lang.png" alt="<?php __("Languages"); ?>" />&nbsp;<?php __("Languages"); ?></div>
+ <div class="menu-content" id="menu-lang">
+  <ul>
+   <?php foreach($locales as $l) { ?>
+    <li><a href="login.php?setlang=<?php echo $l; ?>" target="_top"><?php __($l); ?></a></li>
+   <?php } ?>
+  </ul>
+ </div>
+</div>

@@ -28,22 +28,20 @@
  ----------------------------------------------------------------------
 */
 require_once("../class/config.php");
-
+include_once("head.php");
 
 if (!$quota->cancreate("mysql")) {
 	$error=_("err_mysql_1");
 	$fatal=1;
 }
-include("head.php");
+
 ?>
-</head>
-<body>
 <h3><?php __("Create a new database"); ?></h3>
 <?php
 	if ($error) {
 		echo "<p class=\"error\">$error</p>";
-		if ($fatal) { 
-			echo "</body></html>";
+		if ($fatal) {
+			include_once("foot.php");
 			exit();
 		}
 	}
@@ -56,6 +54,4 @@ include("head.php");
 <tr><td colspan="2"><input type="submit" class="inb" name="submit" value="<?php __("Create this new database."); ?>" /></td></tr>
 </table>
 </form>
-
-</body>
-</html>
+<?php include_once("foot.php"); ?>
