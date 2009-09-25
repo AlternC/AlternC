@@ -344,6 +344,9 @@ class m_dom {
     case "cx":
       $serveur="whois.nic.cx";
       break;
+    case "im":
+      $serveur="whois.nic.im";
+      break;
     case "it":
       $serveur="whois.nic.it";
       break;
@@ -416,7 +419,17 @@ class m_dom {
             $found=true;
           }
           break;
-        case "it":
+    case "im":
+          if (preg_match('/Name Server:/', $ligne)) {
+            $found = true;
+            // weird regexp (trailing garbage after name server), but I could not make it work otherwise
+            $tmp = strtolower(preg_replace('/Name Server: ([^ ]+)\..$/',"\\1", $ligne));
+            $tmp = preg_replace('/[^-_a-z0-9\.]/', '', $tmp);
+            if ($tmp)
+              $server[]=$tmp;
+          }
+          break;
+    case "it":
           if (ereg("nserver:", $ligne)) {
             $found=true;
             $tmp=strtolower(preg_replace("/nserver:\s*[^ ]*\s*([^\s]*)$/","\\1", $ligne));
