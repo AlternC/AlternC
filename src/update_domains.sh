@@ -242,10 +242,10 @@ IFS="$OLD_IFS"
 RELOAD_ZONES=`cat "$RELOAD_ZONES_TMP_FILE"`
 
 # we assume we run apache and bind on the master
-alternc_reload $RELOAD_ZONES
+alternc_reload $RELOAD_ZONES || true
 for slave in $ALTERNC_SLAVES; do
     if [ "$slave" != "localhost" ]; then
-        ssh alternc@$slave alternc_reload "$RELOAD_ZONES"
+        ssh alternc@$slave alternc_reload "$RELOAD_ZONES" || true
     fi
 done
 
