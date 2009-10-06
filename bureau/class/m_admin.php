@@ -342,6 +342,9 @@ class m_admin {
     $db->query("SELECT count(*) AS cnt FROM membres WHERE login='$login';");
     $db->next_record();
     if (!$db->f("cnt")) {
+      // [ML] ATTENTION: ce code recycle les uid de comptes supprimes
+      // ne cause pas vraiment de bug, mais c'est une mauvaise pratique, et 
+      // risque que deux comptes aient le meme uid si crees exactement en meme temps
       $db->query("SELECT m.uid+1 as nextid FROM membres m LEFT JOIN membres n ON m.uid=n.uid-1 WHERE n.uid IS NULL ORDER BY 1 LIMIT 0,1");
       if (!$db->next_record()) {
 	$uid=2000;
