@@ -1,4 +1,4 @@
-alternc (0.9.10pre) stable; urgency=low
+alternc (0.9.10~rc1) stable; urgency=low
 
   * bugfixes:
     * fix a "already exist" error when creating a database containing an hyphen (-)
