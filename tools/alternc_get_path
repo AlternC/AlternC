@@ -4,7 +4,7 @@ path="$1"
 account=`echo "$path" | sed 's#/var/alternc/html/./##' | cut -d '/' -f 1`
 relpath=`echo "$path" | sed 's#/var/alternc/html/./[^/]*##'`
 
-request="SELECT membres.login AS user, CONCAT(s.sub, '.', s.domaine, s.valeur) AS fqdn FROM sub_domaines s INNER JOIN membres ON s.compte=uid WHERE login='$account' AND s.type = 0 AND '$relpath' LIKE CONCAT(s.valeur,'%') ORDER BY sub ASC;"
+request="SELECT membres.login AS user, CONCAT('http://', s.sub, '.', s.domaine, s.valeur) AS fqdn FROM sub_domaines s INNER JOIN membres ON s.compte=uid WHERE login='$account' AND s.type = 0 AND '$relpath' LIKE CONCAT(s.valeur,'%') ORDER BY sub ASC;"
 
 mysql --defaults-file=/etc/alternc/my.cnf -B -e "$request"
 
