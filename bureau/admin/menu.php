@@ -38,14 +38,16 @@ require_once("../class/config.php");
 <?php
 
 $MENUPATH="/var/alternc/bureau/admin/";
-$tt=fopen("menulist.txt","rb");
-while (!feof ($tt)) {
-	$c=trim(fgets($tt,4096));
-	if ($c && file_exists($MENUPATH.$c)) {
-		include($MENUPATH.$c);
-	}
+$tt=@fopen("menulist.txt","rb");
+if ($tt) {
+  while (!feof ($tt)) {
+    $c=trim(fgets($tt,4096));
+    if ($c && file_exists($MENUPATH.$c)) {
+      include($MENUPATH.$c);
+    }
+  }
+  fclose($tt);
 }
-fclose($tt);
 
 ?>
 <p class="center"><a href="http://www.alternc.org" target="_blank"><img src="logo2.png" border="0" alt="" /></a>
