@@ -162,7 +162,7 @@ class m_ftp {
    * @return boolean TRUE si le compte a été modifié, FALSE si une erreur est survenue.
    */
   function put_ftp_details($id,$prefixe,$login,$pass,$dir) {
-    global $mem,$db,$err,$bro,$cuid;
+    global $mem,$db,$err,$bro,$cuid,$admin;
     $err->log("ftp","put_ftp_details",$id);
     $db->query("SELECT count(*) AS cnt FROM ftpusers WHERE id='$id' and uid='$cuid';");
     $db->next_record();
@@ -197,12 +197,21 @@ class m_ftp {
       return false;
     }
     if (trim($pass)) {
+
+      // Check this password against the password policy using common API : 
+      if (is_callable(array($admin,"checkPolicy"))) {
+	if (!$admin->checkPolicy("ftp",$prefixe.$login,$pass)) {
+	  return false; // The error has been raised by checkPolicy()
+	}
+      }
+
       $db->query("UPDATE ftpusers SET name='".$prefixe.$login."', password='', encrypted_password=ENCRYPT('$pass'), homedir='/var/alternc/html/$l/$lo/$dir', uid='$cuid' WHERE id='$id';");
     } else {
       $db->query("UPDATE ftpusers SET name='".$prefixe.$login."', homedir='/var/alternc/html/$l/$lo/$dir', uid='$cuid' WHERE id='$id';");
     }
     return true;
   }
+
 
   /* ----------------------------------------------------------------- */
   /** Efface le compte ftp spécifié.
@@ -233,7 +242,7 @@ class m_ftp {
    *
    */
   function add_ftp($prefixe,$login,$pass,$dir) {
-    global $mem,$db,$err,$quota,$bro,$cuid;
+    global $mem,$db,$err,$quota,$bro,$cuid,$admin;
     $err->log("ftp","add_ftp",$prefixe."_".$login);
     $dir=$bro->convertabsolute($dir);
     if (substr($dir,0,1)=="/") {
@@ -263,6 +272,14 @@ class m_ftp {
       $err->raise("ftp",6);
       return false;
     }
+
+    // Check this password against the password policy using common API : 
+    if (is_callable(array($admin,"checkPolicy"))) {
+      if (!$admin->checkPolicy("ftp",$prefixe.$login,$pass)) {
+	return false; // The error has been raised by checkPolicy()
+      }
+    }
+
     if ($quota->cancreate("ftp")) {
       $db->query("INSERT INTO ftpusers (name,password, encrypted_password,homedir,uid) VALUES ('".$prefixe.$login."', '', ENCRYPT('$pass'), '/var/alternc/html/$l/$lo/$dir', '$cuid')");
       return true;

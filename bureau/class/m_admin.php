@@ -1104,8 +1104,64 @@ EOF;
    * 
    */
   function checkPolicy($policy,$login,$password) {
-    global $db;
-    
+    global $db,$err;
+    $pol=$this->listPasswordPolicies();
+    if (!$pol[$policy]) {
+      $err->raise("admin",14);
+      return false;
+    }
+    $pol=$pol[$policy];
+    // Ok, now let's check it : 
+    $plen=strlen($password);
+
+    if ($plen<$pol["minsize"]) {
+      $err->raise("admin",15);
+      return false;
+    }
+
+    if ($plen>$pol["maxsize"]) {
+      $err->raise("admin",16);
+      return false;
+    }
+
+    if (!$pol["allowlogin"]) {
+      // We do misc check on password versus login : 
+      $l2=str_replace("_","@",$l2);
+      $l2=str_replace(".","@",$l2);
+      $logins=explode("@",$login);
+      $logins[]=$login;
+      foreach($logins as $l) {
+	if (strpos($l,$password)!==false) {
+	  $err->raise("admin",17);
+	  return false;
+	}
+      }
+    }
+
+    if ($pol["classcount"]>0) {
+      $cls=array(0,0,0,0,0);
+      for($i=0;$i<strlen($password);$i++) {
+	$p=substr($password,$i,1);
+	if (strpos("abcdefghijklmnopqrstuvwxyz",$p)!==false) {
+	  $cls[0]=1;
+	} elseif (strpos("ABCDEFGHIJKLMNOPQRSTUVWXYZ",$p)!==false) {
+	  $cls[1]=1;
+	} elseif (strpos("0123456789",$p)!==false) {
+	  $cls[2]=1;
+	} elseif (strpos('!"#$%&\'()*+,-./:;<=>?@[\\]^_`',$p)!==false) {
+	  $cls[3]=1;
+	} else {
+	  $cls[4]=1;
+	}
+      } // foreach
+      $clc=array_sum($cls);
+      if ($clc<$pol["classcount"]) {
+	$err->raise("admin",18,$pol["classcount"],$clc);
+	return false;
+      }
+    }
+
+    return true; // congratulations ! 
   }
 
 

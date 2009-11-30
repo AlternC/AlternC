@@ -62,7 +62,7 @@ class m_mysql {
    * Password kind used in this class (hook for admin class)
    */
   function alternc_password_policy() {
-    return array("mysql_users"=>"MySQL users");
+    return array("mysql"=>"MySQL users");
   }
 
 
@@ -251,7 +251,7 @@ class m_mysql {
    * @return boolean TRUE if the password has been successfully changed, FALSE else.
    */
   function put_mysql_details($password) {
-    global $db,$err,$mem,$cuid;
+    global $db,$err,$mem,$cuid,$admin;
     $err->log("mysql","put_mysql_details");
     $db->query("SELECT * FROM db WHERE uid='$cuid';");
     if (!$db->num_rows()) {
@@ -265,6 +265,14 @@ class m_mysql {
       $err->raise("mysql",8);
       return false;
     }
+
+    // Check this password against the password policy using common API : 
+    if (is_callable(array($admin,"checkPolicy"))) {
+      if (!$admin->checkPolicy("mysql",$login,$password)) {
+	return false; // The error has been raised by checkPolicy()
+      }
+    }
+
     // Update all the "pass" fields for this user : 
     $db->query("UPDATE db SET pass='$password' WHERE uid='$cuid';");
     $db->query("SET PASSWORD FOR '$login'@'$this->client' = PASSWORD('$password')");
@@ -277,7 +285,7 @@ class m_mysql {
    * It also create the first database.
    */
   function new_mysql($password) {
-    global $db,$err,$mem,$cuid;
+    global $db,$err,$mem,$cuid,$admin;
     $err->log("mysql","new_mysql");
     if (strlen($password)>16) {
       $err->raise("mysql",8);
@@ -290,6 +298,14 @@ class m_mysql {
     }
     $login=$mem->user["login"];
     $dbname=$mem->user["login"];
+
+    // Check this password against the password policy using common API : 
+    if (is_callable(array($admin,"checkPolicy"))) {
+      if (!$admin->checkPolicy("mysql",$login,$password)) {
+	return false; // The error has been raised by checkPolicy()
+      }
+    }    
+
     // OK, creation now...
     $db->query("INSERT INTO db (uid,login,pass,db) VALUES ('$cuid','".$login."','$password','".$dbname."');");
     // give everything but GRANT on $user.*
@@ -456,8 +472,17 @@ class m_mysql {
     return $c;
   }
 
+
+  /* ------------------------------------------------------------ */
+  /** 
+   * Create a new user in MySQL rights tables
+   * @param $usern the username (we will add _[alternc-account] to it)
+   * @param $password The password for this username
+   * @param $passconf The password confirmation
+   * @return TRUE if the user has been created in MySQL or FALSE if an error occurred
+   **/
   function add_user($usern,$password,$passconf) {
-    global $db,$err,$quota,$mem,$cuid;
+    global $db,$err,$quota,$mem,$cuid,$admin;
     $err->log("mysql","add_user",$usern);
     
     $user=addslashes($mem->user["login"]."_$usern");
@@ -486,6 +511,12 @@ class m_mysql {
       return false;
     }
 
+    // Check this password against the password policy using common API : 
+    if (is_callable(array($admin,"checkPolicy"))) {
+      if (!$admin->checkPolicy("mysql",$user,$password)) {
+	return false; // The error has been raised by checkPolicy()
+      }
+    }
 
     // We create the user account (the "file" right is the only one we need globally to be able to use load data into outfile)
     $db->query("GRANT file ON *.* TO '$user'@'$this->client' IDENTIFIED BY '$pass';");
@@ -494,6 +525,14 @@ class m_mysql {
     return true;
   }
 
+
+
+  /* ------------------------------------------------------------ */
+  /** 
+   * Delete a new user in MySQL rights tables
+   * @param $user the username (we will add _[alternc-account] to it) to delete
+   * @return TRUE if the user has been deleted in MySQL or FALSE if an error occurred
+   **/
   function del_user($user) {
     global $db,$err,$mem,$cuid,$L_MYSQL_DATABASE;
     $err->log("mysql","del_user",$user);
@@ -518,6 +557,13 @@ class m_mysql {
     return true;
   }
 
+
+  /* ------------------------------------------------------------ */
+  /** 
+   * Return the list of the database rights of user $user
+   * @param $user the username 
+   * @return array An array of database name and rights
+   **/
   function get_user_dblist($user) {
     global $db,$err,$mem,$cuid,$L_MYSQL_DATABASE;
     $err->log("mysql","get_user_dblist");
@@ -536,6 +582,17 @@ class m_mysql {
     return $r;
   }
 
+
+
+  /* ------------------------------------------------------------ */
+  /** 
+   * Set the access rights of user $user to database $dbn to be rights $rights
+   * @param $user the username to give rights to
+   * @param $dbn The database to give rights to
+   * @param $rights The rights as an array of MySQL keywords (insert, select ...)
+   * @return boolean TRUE if the rights has been applied or FALSE if an error occurred
+   * 
+   **/
   function set_user_rights($user,$dbn,$rights) {
     global $mem, $db;
 
@@ -580,8 +637,7 @@ class m_mysql {
       }
     }
 
-    
-    // On remet à zéro tous les droits de l'utilisateur
+    // We reset all user rights on this DB : 
     $db->query("SELECT * FROM mysql.db WHERE User = '$usern' AND Db = '$dbname';");
     if($db->num_rows())
       $db->query("REVOKE ALL PRIVILEGES ON $dbname.* FROM '$usern'@'$this->client';");
@@ -592,6 +648,8 @@ class m_mysql {
     $db->query("FLUSH PRIVILEGES");
     return TRUE;
   }
+
+
 
 } /* Class m_mysql */
 

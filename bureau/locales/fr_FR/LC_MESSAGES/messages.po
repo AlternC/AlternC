@@ -2627,6 +2627,67 @@ msgstr "Valider les changements"
 msgid "User Quotas"
 msgstr "Quotas Utilisateurs"
 
+msgid "Password Policies"
+msgstr "Politiques de mot de passe"
+
+msgid "Manage Password Policy"
+msgstr "Gestion des politiques de mot de passe"
+
+msgid "Here is the list of the password policies for each place a password may be needed in AlternC's services. For each of those password kind, you can choose which policy will be applied to passwords. A policy is a minimum and maximum password size, and how many classes of characters must appear in the password. You can also forbid (or not) to use the login or part of it as a password."
+msgstr "Voici la liste de politiques de mot de passe pour chaque endroit où un mot de passe est requis dans les service d'AlternC. Pour chaque type de mot de passe, vous pouvez choisir quelle politique y sera appliquée. Une politique consiste en une taille minimale et maximale pour le mot de passe, et combien de classes de caractères différentes ce mot de passe doit contenir. Vous pouvez aussi interdire (ou pas) que le mot de passe ressemble au nom d'utilisateur."
+
+msgid "Password Kind"
+msgstr "Type de mot de passe"
+
+msgid "Password Policy"
+msgstr "Politique de mot de passe"
+
+msgid "Min Size"
+msgstr "Taille minimale"
+
+msgid "Max Size"
+msgstr "Taille maximale"
+
+msgid "Complexity"
+msgstr "Complexité"
+
+msgid "Allow Password=Login?"
+msgstr "Autorise Mot de passe=Login ?"
+
+msgid "Please choose which policy you want to apply to this password kind:"
+msgstr "Merci de choisir la politique à appliquer à ce type de mot de passe : "
+
+msgid "Minimum Password Size:"
+msgstr "Taille minimale du mot de passe :"
+
+msgid "Maximum Password Size:"
+msgstr "Taille maximale du mot de passe :"
+
+msgid "In how many classes of characters must be the password (at least):"
+msgstr "Dans combien de classes de caractères doit être ce mot de passe (au minimum) :"
+
+msgid "Do we allow the password to be like the login?"
+msgstr "Autorise-t-on le mot de passe à ressembler au nom d'utilisateur ?"
+
+msgid "Apply this password policy"
+msgstr "Appliquer cette politique de mot de passe"
+
+msgid "Cancel and go back to the policy list"
+msgstr "Annuler et revenir à la liste des politiques de mots de passe"
+
+msgid "The classes of characters are : <br />1. Low-case letters (a-z)<br />2. Upper-case letters (A-Z)<br />3. Figures (0-9)<br />4. Ascii symbols (!\"#$%&'()*+,-./:;<=>?@[\\]^_`)<br />5. Non-Ascii symbols (~éàâô...)"
+msgstr "Les classes de caractère sont : <br />1. Lettres minuscules (a-z)<br />2. Lettres majuscules (A-Z)<br />3. Chiffres (0-9)<br />4. Caractères Ascii (!\"#$%&'()*+,-./:;<=>?@[\\]^_`)<br />5. Caractères non-Ascii (~éàâô...)"
+
+msgid "Policy not found"
+msgstr "Politique non trouvée"
+
+msgid "Policy changed"
+msgstr "Politique de mot de passe modifiée"
+
+msgid "Cannot edit the policy, an error occurred"
+msgstr "Impossible de modifier la politique de mot de passe, une erreur est apparue"
+
+
 #~ msgid "Create the domain username."
 #~ msgstr "Installer le domaine login."
 

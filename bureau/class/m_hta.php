@@ -48,6 +48,14 @@ class m_hta {
   }
 
 
+  /**
+   * Password kind used in this class (hook for admin class)
+   */
+  function alternc_password_policy() {
+    return array("hta"=>"Protected folders passwords");
+  }
+
+
   /*---------------------------------------------------------------------------*/
   /**
    * Create a protected folder (.htaccess et .htpasswd)
@@ -194,7 +202,7 @@ class m_hta {
    * @return boolean TRUE if the user has been added, or FALSE if an error occurred
    */
   function add_user($user,$password,$dir) {
-    global $err, $bro;
+    global $err, $bro, $admin;
     $err->log("hta","add_user",$user."/".$dir);
     $absolute=$bro->convertabsolute($dir,0);
     if (!file_exists($absolute)) {
@@ -202,6 +210,13 @@ class m_hta {
       return false;
     }
     if (checkloginmail($user)){
+      // Check this password against the password policy using common API : 
+      if (is_callable(array($admin,"checkPolicy"))) {
+	if (!$admin->checkPolicy("hta",$user,$password)) {
+	  return false; // The error has been raised by checkPolicy()
+	}
+      }
+
       $file = @fopen("$absolute/.htpasswd","a+");
       if (!$file) {
 	$err->raise("hta",12);
@@ -279,13 +294,21 @@ class m_hta {
    * @return boolean TRUE if the password has been changed, or FALSE if an error occurred
    */
   function change_pass($user,$newpass,$dir) {
-    global $bro,$err;
+    global $bro,$err,$admin;
     $err->log("hta","change_pass",$user."/".$dir);
     $absolute=$bro->convertabsolute($dir,0);
     if (!file_exists($absolute)) {
       $err->raise("hta",8,$dir);
       return false;
     }
+
+    // Check this password against the password policy using common API : 
+    if (is_callable(array($admin,"checkPolicy"))) {
+      if (!$admin->checkPolicy("hta",$user,$password)) {
+	return false; // The error has been raised by checkPolicy()
+      }
+    }
+
     touch("$absolute/.htpasswd.new");
     $file = fopen("$absolute/.htpasswd","r");
     $newf = fopen("$absolute/.htpasswd.new","a");

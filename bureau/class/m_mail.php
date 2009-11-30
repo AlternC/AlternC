@@ -288,7 +288,7 @@ class m_mail {
    * @return boolean TRUE si l'email a bien été modifié, FALSE si une erreur s'est produite.
    */
   function put_mail_details($mail,$pop,$pass,$alias) {
-    global $err,$cuid,$db;
+    global $err,$cuid,$db,$admin;
     $err->log("mail","put_mail_details",$mail);
     $mail=strtolower($mail);
     $t=explode("@",$mail);
@@ -336,6 +336,12 @@ class m_mail {
 	$err->raise("mail",4);
 	return false;
       }
+      // Check this password against the password policy using common API : 
+      if (is_callable(array($admin,"checkPolicy"))) {
+	if (!$admin->checkPolicy("pop",$email."@".$dom,$pass)) {
+	  return false; // The error has been raised by checkPolicy()
+	}
+      }
     }
 
     $db->query("UPDATE mail_domain SET alias='".implode("\n",$account)."', pop='$pop' WHERE mail='$mail';");
@@ -368,7 +374,7 @@ class m_mail {
    * @return boolean TRUE si le compte a bien été créé, FALSE si une erreur s'est produite.
    */
   function add_mail($dom,$mail,$pop,$pass,$alias) {
-    global $quota,$err,$cuid,$db;
+    global $quota,$err,$cuid,$db,$admin;
     $err->log("mail","add_mail",$dom."/".$mail);
     $account=array();
     $mail=strtolower($mail);
@@ -384,6 +390,16 @@ class m_mail {
       $err->raise("mail",4);
       return false;
     }
+
+    if ($pop=="1") {
+      // Check this password against the password policy using common API : 
+      if (is_callable(array($admin,"checkPolicy"))) {
+	if (!$admin->checkPolicy("pop",$mail."@".$dom,$pass)) {
+	  return false; // The error has been raised by checkPolicy()
+	}
+      }
+    }
+
     if ($pop=="1"){
       $account[]=$mail."_".$dom;
     }

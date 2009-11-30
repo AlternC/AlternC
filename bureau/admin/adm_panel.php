@@ -55,6 +55,7 @@ include_once("head.php");
 <li class="lst1"><a href="adm_variables.php"><?php __("Configure AlternC variables"); ?></a></li>
 <li class="lst2"><a href="quota_show_all.php"><?php __("Show all quotas"); ?></a></li>
 <li class="lst1"><a href="stats_members.php"><?php __("Account creation statistics"); ?></a></li>
+<li class="lst2"><a href="adm_passpolicy.php"><?php __("Password Policies"); ?></a></li>
 <?php
 
 // here we include any "adminmenu_*" file content

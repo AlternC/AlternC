@@ -73,6 +73,27 @@ msgstr "Ce TLD existe déjà"
 msgid "err_admin_13"
 msgstr "Le login est trop long (16 caractères maximum)"
 
+#. There is no password policy available, this password has been denied (it's a coding error though...)
+msgid "err_admin_14"
+msgstr "La politique de mot de passe demandée n'a pas été trouvée, Ce password est refusé (c'est une erreur de programmation ...)"
+
+#. The password is too short according to your policy, please check it
+msgid "err_admin_15"
+msgstr "Le mot de passe est trop court selon votre politique de mot de passe, merci de vérifier"
+
+#. The password is too long according to your policy, please check it
+msgid "err_admin_16"
+msgstr "Le mot de passe est trop long selon votre politique de mot de passe, merci de vérifier"
+
+#. The password cannot be part of the login according to your policy, please check it
+msgid "err_admin_17"
+msgstr "Le mot de passe ne peut pas être le même que le nom d'utilisateur (ou quelque chose de similaire) selon votre politique de mot de passe, merci de vérifier"
+
+#. The password must contains characters from %s different classes according to your policy (it only contains %s classes), please check it
+msgid "err_admin_18"
+msgstr "Le mot de passe doit contenir des caractères de %s classes différentes selon votre politique de mot de passe (il n'en contient que %s), merci de vérifier"
+
+
 #. Domain names
 msgid "quota_dom"
 msgstr "Noms de domaines"
@@ -377,6 +398,10 @@ msgstr "L'utilisateur '%s' existe déja pour ce répertoire"
 #. Please enter a valid username
 msgid "err_hta_11"
 msgstr "Veuillez saisir un nom d'utilisateur valide"
+
+#. The file .htpasswd does not exist
+msgid "err_hta_12"
+msgstr "Le fichier .htpasswd n'existe pas"
 
 #. Email Accounts
 msgid "quota_mail"
@@ -729,6 +754,16 @@ msgstr ""
 #. eg: english : %3$d/%1$d/%2$d, at %6$d:%5$d %7$s
 msgid "%3$d-%2$d-%1$d %4$d:%5$d"
 msgstr "%1$d/%2$d/%3$d %4$d:%5$d"
+
+msgid "AlternC's account password"
+msgstr "Mots de passe des comptes AlternC"
+
+msgid "POP/IMAP account passwords"
+msgstr "Mots de passe des comptes POP/IMAP"
+
+msgid "Protected folders passwords"
+msgstr "Mots de passe des dossiers protégés"
+
 
 #~ msgid "Editing subdomain %s"
 #~ msgstr "Edition du sous-domaine %s"

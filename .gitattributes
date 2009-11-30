@@ -30,6 +30,7 @@ bureau/admin/adm_list.php -text
 bureau/admin/adm_login.php -text
 bureau/admin/adm_mxaccount.php -text
 bureau/admin/adm_panel.php -text
+bureau/admin/adm_passpolicy.php -text
 bureau/admin/adm_quotadoedit.php -text
 bureau/admin/adm_quotaedit.php -text
 bureau/admin/adm_slaveaccount.php -text
