@@ -17,6 +17,8 @@ alternc (0.9.10~rc1) stable; urgency=low
     * add new field to member form: 'notes' which is just a text field
     * send an email on new account creation. the actual email needs to be
       configured through the AlternC variables for this to work.
+    * added the password policy management module : you can choose which 
+      password complexity you want to force for each place a password is required.
   * API changes
     * m_mysql->get_db_list() doesn't include size anymore because this
       is a major performance hit on MySQL < 5.1.22 if there are > 1000
@@ -25,7 +27,7 @@ alternc (0.9.10~rc1) stable; urgency=low
   * Major patch
     * Blue desktop using only css, no frameset etc
     * Sanitizing of get/request/post parameters
-	
+
  -- Benjamin Sonntag <benjamin@alternc.org>  Sat, 12 May 2009 17:55:30 +0200
 
 alternc (0.9.9) stable; urgency=low
