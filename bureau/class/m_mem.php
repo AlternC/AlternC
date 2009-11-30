@@ -51,6 +51,15 @@ class m_mem {
   }
 
   /* ----------------------------------------------------------------- */
+  /**
+   * Password kind used in this class (hook for admin class)
+   */
+  function alternc_password_policy() {
+    return array("mem"=>"AlternC's account password");
+  }
+
+
+  /* ----------------------------------------------------------------- */
   /** Check that the current user is an admnistrator.
    * @return boolean TRUE if we are super user, or FALSE if we are not.
    */

@@ -27,30 +27,32 @@
  Purpose of file:
  ----------------------------------------------------------------------
 */
+
 /**
-* Classe de gestion des dossiers protégés par .htaccess apache
+* This class handle folder web restricted access through .htaccess/.htpassword
+* files.
 * 
-* Cette classe permet de gérer les dossiers protégés par login/pass
-* par le système .htaccess d'apache.
 * Copyleft {@link http://alternc.net/ AlternC Team}
 * 
-* @copyright    AlternC-Team 2002-11-01 http://alternc.net/
+* @copyright    AlternC-Team 2002-11-01 http://alternc.org/
 * 
 */
 class m_hta {
 
+
   /*---------------------------------------------------------------------------*/
   /**
-   * Constructeur de la classe m_webaccess, initialise le membre
+   * Constructor
    */
   function m_webaccess() {
   }
 
+
   /*---------------------------------------------------------------------------*/
   /**
-   * Crée un dossier à protéger (.htaccess et .htpasswd)
-   * @param string $dir Répertoire relatif au dossier de l'utilisateur 
-   * @return boolean TRUE si le dossier a été protégé avec succès, FALSE sinon
+   * Create a protected folder (.htaccess et .htpasswd)
+   * @param string $dir Folder to protect (relative to user root)
+   * @return boolean TRUE if the folder has been protected, or FALSE if an error occurred
    */
   function CreateDir($dir) {
     global $mem,$bro,$err;
@@ -78,10 +80,11 @@ class m_hta {
     return true;
   }
 
+
   /*---------------------------------------------------------------------------*/
   /**
-   * Retourne la liste de tous les dossiers de l'utilisateur contenant un .htpasswd
-   * @return array Tableau contenant la liste des dossiers protégés de l'utilisateur 
+   * Returns the list of all user folder currently protected by a .htpasswd file
+   * @return array Array containing user folder list
    */
   function ListDir() {
     global $err,$mem;
@@ -100,11 +103,12 @@ class m_hta {
     return $r;
   }
 
+
   /*---------------------------------------------------------------------------*/
   /**
-   * Retourne TRUE si le dossier paramètre est protégé.
-   * @param string $dir Dossier dont on souhaite vérifier la protection
-   * @return TRUE si le dossier est protégé, FALSE sinon
+   * Tells if a folder is protected.
+   * @param string $dir Folder to check
+   * @return TRUE if the folder is protected, or FALSE if it is not
    */
   function is_protected($dir){
     global $mem,$err;
@@ -119,11 +123,12 @@ class m_hta {
     }
   }
 
+
   /*---------------------------------------------------------------------------*/
   /**
-   * Retourne la liste des utilisateurs autorisés dans le dossier
-   * @param string $dir Dossier dont on souhaite obtenir la liste des user/pass
-   * @return array Tableau contenant la liste des logins du .htpasswd ou FALSE.
+   * Returns the list of login for a protected folder.
+   * @param string $dir The folder to lookup (relative to user root)
+   * @return array An array containing the list of logins from the .htpasswd file, or FALSE
    */
   function get_hta_detail($dir) {
     global $mem,$err;
@@ -134,10 +139,12 @@ class m_hta {
 			return false;
 			}
       */	}
-    $file = fopen("$absolute/.htpasswd","r");
+    $file = @fopen("$absolute/.htpasswd","r");
     $i=0;
     $res=array();
-    fseek($file,0);
+    if (!$file) {
+      return false;
+    }
     // TODO: Tester la validité du .htpasswd
     while (!feof($file)) {
       $s=fgets($file,1024);
@@ -151,11 +158,12 @@ class m_hta {
     return $res;
   }
 
+
   /*---------------------------------------------------------------------------*/
   /**
-   * Déprotège un dossier 
-   * @param string $dir Dossier à déprotéger
-   * @return boolean TRUE si le dossier a été déprotégé, FALSE sinon
+   * Unprotect a folder
+   * @param string $dir Folder to unprotect, relative to user root
+   * @return boolean TRUE if the folder has been unprotected, or FALSE if an error occurred
    */
   function DelDir($dir) {
     global $mem,$bro,$err;
@@ -176,13 +184,14 @@ class m_hta {
     return true;
   }
 
+
   /*---------------------------------------------------------------------------*/
   /**
-   * Ajoute un utilisateur à un dossier protégé. 
-   * @param string $login Utilisateur à ajouter
-   * @param string $password Mot de passe à ajouter (en clair)
-   * @param string $dir Dossier concerné 
-   * @return boolean TRUE si l'utilisateur a été ajouté avec succès, FALSE sinon
+   * Add a user to a protected folder
+   * @param string $login The user login to add
+   * @param string $password The password to add (cleartext)
+   * @param string $dir The folder we add it to (relative to user root).
+   * @return boolean TRUE if the user has been added, or FALSE if an error occurred
    */
   function add_user($user,$password,$dir) {
     global $err, $bro;
@@ -193,7 +202,11 @@ class m_hta {
       return false;
     }
     if (checkloginmail($user)){
-      $file = fopen("$absolute/.htpasswd","a+");
+      $file = @fopen("$absolute/.htpasswd","a+");
+      if (!$file) {
+	$err->raise("hta",12);
+	return false;
+      }
       fseek($file,0);
       while (!feof($file)) {
 	$s=fgets($file,1024);
@@ -216,12 +229,13 @@ class m_hta {
     }
   }
 
+
   /*---------------------------------------------------------------------------*/
   /**
-   * Supprime un ou plusieurs utilisateurs d'un dossier protégé.
-   * @param array $lst Tableau des logins à supprimer.
-   * @param string $dir Dossier dans lequel on souhaite supprimer des utilisateurs
-   * @return boolean TRUE si les utilisateurs ont été supprimés avec succès, FALSE sinon
+   * Delete a user from a protected folder.
+   * @param array $lst An array with login to delete.
+   * @param string $dir The folder, relative to user root, where we want to delete users.
+   * @return boolean TRUE if users has been deleted, or FALSE if an error occurred.
    */
   function del_user($lst,$dir) {
     global $bro,$err;
@@ -234,6 +248,10 @@ class m_hta {
     touch("$absolute/.htpasswd.new");
     $file = fopen("$absolute/.htpasswd","r");
     $newf = fopen("$absolute/.htpasswd.new","a");
+    if (!$file || !$newf) {
+      $err->raise("hta",12);
+      return false;
+    }
     reset($lst);
     fseek($file,0);
     while (!feof($file)) {
@@ -251,13 +269,14 @@ class m_hta {
     return true;
   }
 
+
   /*---------------------------------------------------------------------------*/
   /**
-   * Change le mot de passe d'un utilisateur d'un dossier protégé.
-   * @param string $user Utilisateur dont on souhaite changer le mot de passe 
-   * @param string $newpass Nouveau mot de passe de cet utilisateur
-   * @param string $dir Dossier protégé concerné
-   * @return boolean TRUE si le mot de passe a été changé avec succès, FALSE sinon
+   * Change the password of a user in a protected folder
+   * @param string $user The users whose password should be changed
+   * @param string $newpass The new password of this user
+   * @param string $dir The folder, relative to user root, in which we will change a password
+   * @return boolean TRUE if the password has been changed, or FALSE if an error occurred
    */
   function change_pass($user,$newpass,$dir) {
     global $bro,$err;
@@ -270,6 +289,10 @@ class m_hta {
     touch("$absolute/.htpasswd.new");
     $file = fopen("$absolute/.htpasswd","r");
     $newf = fopen("$absolute/.htpasswd.new","a");
+    if (!$file || !$newf) {
+      $err->raise("hta",12);
+      return false;
+    }
     while (!feof($file)) {
       $s=fgets($file,1024);
       $t=explode(":",$s);
@@ -285,11 +308,12 @@ class m_hta {
     return true;
   }
 
+
   /*---------------------------------------------------------------------------*/
   /**
-   * Vérifie la validité des lignes d'un .htaccess existant.
-   * @param string $absolute Dossier que l'on souhaite vérifier
-   * @return boolean TRUE si le dossier est correctement protégé par un .htaccess, FALSE sinon
+   * Check that a .htaccess file is valid (for authentication)
+   * @param string $absolute Folder we want to check (relative to user root)
+   * @return boolean TRUE is the .htaccess is protecting this folder, or FALSE else
    * @access private
    */
   function _reading_htaccess($absolute) {
@@ -298,6 +322,9 @@ class m_hta {
     $file = fopen("$absolute/.htaccess","r+");
     $lignes=array(1,1,1);
     $errr=0;
+    if (!$file) {
+      return false;
+    }
     while (!feof($file) && !$errr) {
       $s=fgets($file,1024);
       if (substr($s,0,12)!="RewriteCond " && substr($s,0,14)!="ErrorDocument " && substr($s,0,12)!="RewriteRule " && substr($s,0,14)!="RewriteEngine " && trim($s)!="") {
@@ -324,6 +351,8 @@ class m_hta {
     return true;
   } 
 
-} /* CLASS m_webaccess */
+} /* CLASS m_hta */
+
+
 
 ?>

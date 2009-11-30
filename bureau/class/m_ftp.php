@@ -46,6 +46,16 @@ class m_ftp {
     return "ftp";
   }
 
+
+  /* ----------------------------------------------------------------- */
+  /**
+   * Password kind used in this class (hook for admin class)
+   */
+  function alternc_password_policy() {
+    return array("ftp"=>"FTP accounts");
+  }
+
+
   /* ----------------------------------------------------------------- */
   /** Retourne la liste des comptes FTP du compte hébergé
    * Retourne la liste des comptes FTP sous forme de tableau indexé de

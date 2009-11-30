@@ -55,6 +55,18 @@ class m_mysql {
     return array("mysql","mysql_users");
   }
 
+
+
+  /* ----------------------------------------------------------------- */
+  /**
+   * Password kind used in this class (hook for admin class)
+   */
+  function alternc_password_policy() {
+    return array("mysql_users"=>"MySQL users");
+  }
+
+
+
   /*---------------------------------------------------------------------------*/
   /** Get the list of the database for the current user.
    * @return array returns an associative array as follow : <br>

@@ -190,7 +190,6 @@ class m_admin {
    * 
    */
   function get_list($all=0,$creator=0) {
-    // PATCHBEN pour ne voir que les comptes que l'on a créé (sauf admin)
     global $err,$mem,$cuid;
     $err->log("admin","get_list");
     if (!$this->enabled) {
@@ -259,7 +258,7 @@ class m_admin {
    */
   function checkcreator($uid) {
     global $err,$mem,$db,$cuid;
-    // DONE PATCHBEN Check that the current user is editing one of it's own account !
+    // Check that the current user is editing one of it's own account !
     // but ADMIN (always uid 2000) is almighty
     if ($cuid==2000) {
       return true;
@@ -342,9 +341,6 @@ class m_admin {
     $db->query("SELECT count(*) AS cnt FROM membres WHERE login='$login';");
     $db->next_record();
     if (!$db->f("cnt")) {
-      // [ML] ATTENTION: ce code recycle les uid de comptes supprimes
-      // ne cause pas vraiment de bug, mais c'est une mauvaise pratique, et 
-      // risque que deux comptes aient le meme uid si crees exactement en meme temps
       $db->query("SELECT m.uid+1 as nextid FROM membres m LEFT JOIN membres n ON m.uid=n.uid-1 WHERE n.uid IS NULL ORDER BY 1 LIMIT 0,1");
       if (!$db->next_record()) {
 	$uid=2000;
@@ -1018,6 +1014,100 @@ EOF;
     $db->next_record();
     return $db->f("login");
   }
+
+
+  /* ----------------------------------------------------------------- */
+  /**
+   * List the password policies currently installed in the policy table
+   * 
+   * @return array an indexed array of associative array from the MySQL "policy" table
+   * 
+   */
+  function listPasswordPolicies() {
+    global $db,$classes;
+    $tmp1=array();
+    $tmp2=array();
+    $policies=array();
+    $db->query("SELECT * FROM policy;");
+    while ($db->next_record()) {
+      $tmp1[$db->Record["name"]]=$db->Record;
+    }
+    foreach($classes as $c) {
+      if (method_exists($GLOBALS[$c],"alternc_password_policy")) {
+	$res=$GLOBALS[$c]->alternc_password_policy(); // returns an array
+	foreach($res as $k=>$v) {
+	  $tmp2[$k]=$v;
+	}
+      }
+    }
+    foreach($tmp2 as $k=>$v) {
+      if (!isset($tmp1[$k])) {
+	// Default policy : 
+	$db->query("INSERT INTO policy SET name='".addslashes($k)."', minsize=0, maxsize=64, classcount=0, allowlogin=0;");
+	$tmp1[$k]=array(
+			"minsize"=>0, "maxsize"=>64, "classcount"=>0, "allowlogin"=>0 
+			);
+      }
+      $policies[$k]=$tmp1[$k];
+      $policies[$k]["description"]=_($v);
+      unset($tmp1[$k]);
+    }
+    foreach ($tmp1 as $k=>$v) {
+      // Delete disabled modules :
+      $db->query("DELETE FROM policy WHERE name='".addslashes($k)."';");
+    }
+    return $policies;
+  }
+
+
+  /* ----------------------------------------------------------------- */
+  /**
+   * Change a password policy for one kind of password
+   * 
+   * @param $policy string Name of the policy to edit
+   * @param $minsize integer Minimum Password size
+   * @param $maxsize integer Maximum Password size
+   * @param $classcount integer How many class of characters must this password have
+   * @param $allowlogin boolean Do we allow the password to be like the login ? 
+   * @return boolean TRUE if the policy has been edited, or FALSE if an error occured.
+   * 
+   */
+  function editPolicy($policy,$minsize,$maxsize,$classcount,$allowlogin) {
+    global $db;
+    $minsize=intval($minsize);
+    $maxsize=intval($maxsize);
+    $classcount=intval($classcount);
+    $allowlogin=intval($allowlogin);
+
+    $db->query("SELECT * FROM policy WHERE name='".addslashes($policy)."';");
+    if (!$db->next_record()) {
+      return false; // Policy not found
+    }
+    if ($minsize<0 || $minsize>64 || $maxsize<0 || $maxsize>64 || $maxsize<$minsize || $classcount<0 || $classcount>4) {
+      return false; // Incorrect policy ...
+    }      
+    $allowlogin=($allowlogin)?1:0;
+    $db->query("UPDATE policy SET minsize=$minsize, maxsize=$maxsize, classcount=$classcount, allowlogin=$allowlogin WHERE name='".addslashes($policy)."';");
+    return true;
+
+  }
+
+
+  /* ----------------------------------------------------------------- */
+  /**
+   * Check a password and a login for a specific policy 
+   * 
+   * @param $policy string Name of the policy to check for
+   * @param $login The login that will be set
+   * @param $password The password we have to check
+   * @return boolean TRUE if the password if OK for this login and this policy, FALSE if it is not.
+   * 
+   */
+  function checkPolicy($policy,$login,$password) {
+    global $db;
+    
+  }
+
 
 } /* Classe ADMIN */
 

@@ -55,6 +55,14 @@ class m_mail {
   }
 
 
+  /**
+   * Password kind used in this class (hook for admin class)
+   */
+  function alternc_password_policy() {
+    return array("pop"=>"POP/IMAP account passwords");
+  }
+
+  
   /* ----------------------------------------------------------------- */
   /** Returns the list of mail-hosted domains for a user
    * @return array indexed array of hosted domains
