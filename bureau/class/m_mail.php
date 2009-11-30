@@ -290,9 +290,9 @@ class m_mail {
   function put_mail_details($mail,$pop,$pass,$alias) {
     global $err,$cuid,$db,$admin;
     $err->log("mail","put_mail_details",$mail);
-    $mail=strtolower($mail);
+    $mail=trim(strtolower($mail)); // remove spaces also
     $t=explode("@",$mail);
-    $email=$t[0];
+    $email=trim($t[0]); // remove spaces also
     $dom=$t[1];
 
     $account=array();
@@ -312,7 +312,7 @@ class m_mail {
       if (count($a)>0) {
 	reset($a);
 	for ($i=0;$i<count($a);$i++){
-	  $a[$i]=trim($a[$i]);
+	  $a[$i]=trim($a[$i]); // remove spaces
 	  if ($a[$i]){
 	    if(checkmail($a[$i])>1){
 	      $err->raise("mail",14);
@@ -377,7 +377,7 @@ class m_mail {
     global $quota,$err,$cuid,$db,$admin;
     $err->log("mail","add_mail",$dom."/".$mail);
     $account=array();
-    $mail=strtolower($mail);
+    $mail=trim(strtolower($mail)); // remove spaces also
     if ($pop) $pop="1"; else $pop="0";
     if ($mail) {
       if (!checkloginmail($mail)) {
