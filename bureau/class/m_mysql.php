@@ -38,6 +38,7 @@ class m_mysql {
   var $server;
   var $client;
 
+
   /*---------------------------------------------------------------------------*/
   /** Constructor
   * m_mysql([$mid]) Constructeur de la classe m_mysql, initialise le membre concerne
@@ -46,6 +47,7 @@ class m_mysql {
       $this->server = $GLOBALS['L_MYSQL_HOST'];
       $this->client = $GLOBALS['L_MYSQL_CLIENT'];
   }
+
 
   /* ----------------------------------------------------------------- */
   /** Hook called by m_quota to obtain the quota managed by this class.
@@ -56,7 +58,6 @@ class m_mysql {
   }
 
 
-
   /* ----------------------------------------------------------------- */
   /**
    * Password kind used in this class (hook for admin class)
@@ -64,7 +65,6 @@ class m_mysql {
   function alternc_password_policy() {
     return array("mysql"=>"MySQL users");
   }
-
 
 
   /*---------------------------------------------------------------------------*/
@@ -89,6 +89,7 @@ class m_mysql {
     }
     return $c;
   }
+
 
   /*---------------------------------------------------------------------------*/
   /** Returns the details of a user's database.
@@ -119,6 +120,7 @@ class m_mysql {
     list($dbu,$dbn)=split_mysql_database_name($db->f("db"));
     return array("enabled"=>true,"login"=>$db->f("login"),"db"=>$db->f("db"), "name"=>$dbn,"bck"=>$db->f("bck_mode"), "dir"=>substr($db->f("bck_dir"),strlen($root)), "size"=>$size, "pass"=>$db->f("pass"), "history"=>$db->f("bck_history"), "gzip"=>$db->f("bck_gzip"));
   }
+
 
   /*---------------------------------------------------------------------------*/
   /** Create a new database for the current user.
@@ -170,6 +172,7 @@ class m_mysql {
     }
   }
 
+
   /*---------------------------------------------------------------------------*/
   /** Delete a database for the current user.
    * @param $dbn string Name of the database to delete. The db name is $user_$dbn
@@ -202,6 +205,7 @@ class m_mysql {
     return true;
   }
   
+
   /*---------------------------------------------------------------------------*/
   /** Set the backup parameters for the database $db
    * @param $db string database name
@@ -245,6 +249,7 @@ class m_mysql {
     return true;
   }
 
+
   /*---------------------------------------------------------------------------*/
   /** Change the password of the user in MySQL
    * @param $password string new password (cleartext)
@@ -279,6 +284,7 @@ class m_mysql {
     return true;
   }
 
+
   /* ----------------------------------------------------------------- */
   /** Create a new mysql account for this user
    * @param string cleartext password for the new account
@@ -299,6 +305,12 @@ class m_mysql {
     $login=$mem->user["login"];
     $dbname=$mem->user["login"];
 
+    // Username cannot be longer than 16 characters
+    if (strlen($login)>16) {
+      $err->raise("mysql",15);
+      return false;
+    }
+
     // Check this password against the password policy using common API : 
     if (is_callable(array($admin,"checkPolicy"))) {
       if (!$admin->checkPolicy("mysql",$login,$password)) {
@@ -316,7 +328,11 @@ class m_mysql {
 
 
   /* ----------------------------------------------------------------- */
-  /** Restore a sql backup script on a user's database.
+  /** Restore a sql database.
+   * @param $file string The filename, relative to the user root dir, which contains a sql dump
+   * @param $stdout boolean shall-we dump the error to stdout ? 
+   * @param $id integer The ID of the database to dump to.
+   * @return boolean TRUE if the database has been restored, or FALSE if an error occurred
    */
   function restore($file,$stdout,$id) { 
     global $err,$bro,$mem,$L_MYSQL_HOST;
@@ -349,113 +365,31 @@ class m_mysql {
       return true ;
     }
   }
+
   
   /* ----------------------------------------------------------------- */
-  /** Get size of a database
+  /** Get the size of a database
    * @param $dbname name of the database
    * @return integer database size
    * @access private
    */
- function get_db_size($dbname) {
-   global $db,$err;
-
-   $db->query("SHOW TABLE STATUS FROM `$dbname`;");
-   $size = 0;
-   while ($db->next_record()) {
-     $size += $db->f('Data_length') + $db->f('Index_length')
-              + $db->f('Data_free');
-   }
-   return $size;
- }
+  function get_db_size($dbname) {
+    global $db,$err;
+    
+    $db->query("SHOW TABLE STATUS FROM `$dbname`;");
+    $size = 0;
+    while ($db->next_record()) {
+      $size += $db->f('Data_length') + $db->f('Index_length')
+	+ $db->f('Data_free');
+    }
+    return $size;
+  }
   
-  /* ----------------------------------------------------------------- */
-  /** Hook function called by the quota class to compute user used quota
-   * Returns the used quota for the $name service for the current user.
-   * @param $name string name of the quota
-   * @return integer the number of service used or false if an error occured
-   * @access private
-   */
-  function alternc_get_quota($name) {
-    global $err,$db,$cuid;
-    if ($name=="mysql") {
-      $err->log("mysql","alternc_get_quota");
-      $c=$this->get_dblist();
-      if (is_array($c)) {
-	return count($c);
-      } else {
-	return 0;
-      }
-    } elseif ($name=="mysql_users") {
-      $err->log("mysql","alternc_get_quota");
-      $c=$this->get_userslist();
-      if(is_array($c))
-        return count($c);
-      else
-        return 0;
-    } else return false;
-  }
-
-
-  /* ----------------------------------------------------------------- */
-  /** Hook function called when a user is deleted.
-   * AlternC's standard function that delete a member
-   */
-  function alternc_del_member() {
-    global $db,$err,$cuid;
-    $err->log("mysql","alternc_del_member");
-    $c=$this->get_dblist();
-    if (is_array($c)) {
-      for($i=0;$i<count($c);$i++) {
-	$this->del_db($c[$i]["name"]);
-      }
-    }
-    return true;
-  }
-
-  /* ----------------------------------------------------------------- */
-  /** Hook function called when a user is logged out.
-   * We just remove the cookie created in admin/sql_admin.php
-   */
-  function alternc_del_session() {
-      setcookie("REMOTE_USER","");
-      setcookie("REMOTE_PASSWORD","");
-  }
-
-  /* ----------------------------------------------------------------- */
-  /**
-   * Exporte toutes les informations mysql du compte.
-   * @access private
-   * EXPERIMENTAL 'sid' function ;) 
-   */
-  function alternc_export($tmpdir) {
-    global $db,$err,$cuid;
-    $err->log("mysql","export");
-    $db->query("SELECT login, pass, db, bck_mode, bck_dir, bck_history, bck_gzip FROM db WHERE uid='$cuid';");
-    if ($db->next_record()) {
-      $str="<mysql>\n";
-      $str.="  <login>".xml_entities($db->Record["login"])."</login>";
-      $str.="  <pass>".xml_entities($db->Record["pass"])."</pass>";
-      do {
-	// Do the dump : 
-	$filename=$tmpdir."/mysql.".$db->Record["db"].".sql.gz";
-	exec("/usr/bin/mysqldump --add-drop-table --allow-keywords -Q -f -q -a -e -u".escapeshellarg($db->Record["login"])." -p".escapeshellarg($db->Record["pass"])." ".escapeshellarg($db->Record["db"])." |/bin/gzip >".escapeshellarg($filename));
-	$str.="  <db>\n";
-	$str.="    <name>".xml_entities($db->Record["db"])."</name>\n";
-	if ($s["bck_mode"]!=0) {
-	  $str.="    <backup>\n";
-	  $str.="      <mode>".xml_entities($db->Record["bck_mode"])."</mode>\n";
-	  $str.="      <dir>".xml_entities($db->Record["bck_dir"])."</dir>\n";
-	  $str.="      <history>".xml_entities($db->Record["bck_history"])."</history>\n";
-	  $str.="      <gzip>".xml_entities($db->Record["bck_gzip"])."</gzip>\n";
-	  $str.="    </backup>\n";
-	}
-	$str.="  </db>\n";
-      } while ($db->next_record());
-      $str.="</mysql>\n";
-    }
-    return $str;
-  }
-
+  
+  /* ------------------------------------------------------------ */
+  /** 
+   * Returns the list of database users of an account
+   **/
   function get_userslist() {
     global $db,$err,$bro,$cuid;
     $err->log("mysql","get_userslist");
@@ -485,7 +419,7 @@ class m_mysql {
     global $db,$err,$quota,$mem,$cuid,$admin;
     $err->log("mysql","add_user",$usern);
     
-    $user=addslashes($mem->user["login"]."_$usern");
+    $user=addslashes($mem->user["login"]."_".$usern);
     $pass=addslashes($password);
         
     if (!$quota->cancreate("mysql_users")) {
@@ -497,7 +431,8 @@ class m_mysql {
       return false;
     }
     
-    if (strlen($usern) > 16 || strlen($usern) == 0 ) {
+    // We check the length of the COMPLETE username, not only the part after _
+    if (strlen($user) > 16 || strlen($usern) == 0 ) {
       $err->raise("mysql",15);
       return false;
     }
@@ -526,11 +461,10 @@ class m_mysql {
   }
 
 
-
   /* ------------------------------------------------------------ */
   /** 
-   * Delete a new user in MySQL rights tables
-   * @param $user the username (we will add _[alternc-account] to it) to delete
+   * Delete a user in MySQL rights tables
+   * @param $user the username (we will add "[alternc-account]_" to it) to delete
    * @return TRUE if the user has been deleted in MySQL or FALSE if an error occurred
    **/
   function del_user($user) {
@@ -581,7 +515,6 @@ class m_mysql {
 
     return $r;
   }
-
 
 
   /* ------------------------------------------------------------ */
@@ -649,6 +582,98 @@ class m_mysql {
     return TRUE;
   }
 
+
+  /* ----------------------------------------------------------------- */
+  /** Hook function called by the quota class to compute user used quota
+   * Returns the used quota for the $name service for the current user.
+   * @param $name string name of the quota
+   * @return integer the number of service used or false if an error occured
+   * @access private
+   */
+  function alternc_get_quota($name) {
+    global $err,$db,$cuid;
+    if ($name=="mysql") {
+      $err->log("mysql","alternc_get_quota");
+      $c=$this->get_dblist();
+      if (is_array($c)) {
+	return count($c);
+      } else {
+	return 0;
+      }
+    } elseif ($name=="mysql_users") {
+      $err->log("mysql","alternc_get_quota");
+      $c=$this->get_userslist();
+      if(is_array($c))
+        return count($c);
+      else
+        return 0;
+    } else return false;
+  }
+  
+  
+  /* ----------------------------------------------------------------- */
+  /** Hook function called when a user is deleted.
+   * AlternC's standard function that delete a member
+   * @access private
+   */
+  function alternc_del_member() {
+    global $db,$err,$cuid;
+    $err->log("mysql","alternc_del_member");
+    $c=$this->get_dblist();
+    if (is_array($c)) {
+      for($i=0;$i<count($c);$i++) {
+	$this->del_db($c[$i]["name"]);
+      }
+    }
+    return true;
+  }
+
+
+  /* ----------------------------------------------------------------- */
+  /** Hook function called when a user is logged out.
+   * We just remove the cookie created in admin/sql_admin.php
+   * @access private
+   */
+  function alternc_del_session() {
+    setcookie("REMOTE_USER","");
+    setcookie("REMOTE_PASSWORD","");
+  }
+
+  
+  /* ----------------------------------------------------------------- */
+  /**
+   * Exporte all the mysql information of an account
+   * @access private
+   * EXPERIMENTAL 'sid' function ;) 
+   */
+  function alternc_export($tmpdir) {
+    global $db,$err,$cuid;
+    $err->log("mysql","export");
+    $db->query("SELECT login, pass, db, bck_mode, bck_dir, bck_history, bck_gzip FROM db WHERE uid='$cuid';");
+    if ($db->next_record()) {
+      $str="<mysql>\n";
+      $str.="  <login>".xml_entities($db->Record["login"])."</login>";
+      $str.="  <pass>".xml_entities($db->Record["pass"])."</pass>";
+      do {
+	// Do the dump : 
+	$filename=$tmpdir."/mysql.".$db->Record["db"].".sql.gz";
+	exec("/usr/bin/mysqldump --add-drop-table --allow-keywords -Q -f -q -a -e -u".escapeshellarg($db->Record["login"])." -p".escapeshellarg($db->Record["pass"])." ".escapeshellarg($db->Record["db"])." |/bin/gzip >".escapeshellarg($filename));
+	$str.="  <db>\n";
+	$str.="    <name>".xml_entities($db->Record["db"])."</name>\n";
+	if ($s["bck_mode"]!=0) {
+	  $str.="    <backup>\n";
+	  $str.="      <mode>".xml_entities($db->Record["bck_mode"])."</mode>\n";
+	  $str.="      <dir>".xml_entities($db->Record["bck_dir"])."</dir>\n";
+	  $str.="      <history>".xml_entities($db->Record["bck_history"])."</history>\n";
+	  $str.="      <gzip>".xml_entities($db->Record["bck_gzip"])."</gzip>\n";
+	  $str.="    </backup>\n";
+	}
+	$str.="  </db>\n";
+      } while ($db->next_record());
+      $str.="</mysql>\n";
+    }
+    return $str;
+  }
 
 
 } /* Class m_mysql */
