@@ -856,7 +856,7 @@ class m_bro {
    */
  function DownloadZ($dir="") {
     global $mem;
-    header("Content-Disposition: attachment; filename=".$mem->user["login"].".tgz");
+    header("Content-Disposition: attachment; filename=".$mem->user["login"].".Z");
     header("Content-Type: application/x-Z");
     header("Content-Transfer-Encoding: binary");
     $d=escapeshellarg(".".$this->convertabsolute($dir,1));
@@ -887,7 +887,7 @@ class m_bro {
    */
  function DownloadTBZ($dir="") {
     global $mem;
-    header("Content-Disposition: attachment; filename=".$mem->user["login"].".tgz");
+    header("Content-Disposition: attachment; filename=".$mem->user["login"].".tar.bz2");
     header("Content-Type: application/x-bzip2");
     header("Content-Transfer-Encoding: binary");
     $d=escapeshellarg(".".$this->convertabsolute($dir,1));
@@ -902,7 +902,7 @@ class m_bro {
    */
  function DownloadZIP($dir="") {
     global $mem;
-    header("Content-Disposition: attachment; filename=".$mem->user["login"].".tgz");
+    header("Content-Disposition: attachment; filename=".$mem->user["login"].".zip");
     header("Content-Type: application/x-zip");
     header("Content-Transfer-Encoding: binary");
     $d=escapeshellarg($this->convertabsolute($dir,0));
