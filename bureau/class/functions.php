@@ -126,7 +126,7 @@ function checkip($ip) {
 
 /* Check a login mail */
 function checkloginmail($mail) {
-  if (!preg_match("/^[a-zA-Z0-9_\.:\+\-]+$/",$mail)) {
+  if (!preg_match("/^[a-zA-Z0-9_\.:\+\-]*[a-zA-Z0-9_]$/",$mail)) {
     return false;
   } else {
     return true;
