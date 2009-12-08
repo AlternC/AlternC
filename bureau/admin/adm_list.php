@@ -132,7 +132,7 @@ while (list($key,$val)=each($r))
 		else {
 		  if($admin->checkcreator($val['uid'])) {
 		?>
-			<a href="adm_login.php?id=<?php echo $val["uid"];?>" target="_parent"><?php __("Connect as"); ?></a>
+			<a href="adm_login.php?id=<?php echo $val["uid"];?>"><?php __("Connect as"); ?></a>
 		<?php } } ?>
 		</td>
 		    <?php

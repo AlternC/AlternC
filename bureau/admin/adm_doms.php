@@ -52,7 +52,7 @@ $c=$admin->dom_list();
 
 <form method="post" action="adm_dodom.php">
 <table border="0" cellpadding="4" cellspacing="0">
-<tr><th><?php __("Action"); ?></th><th><?php __("Domain"); ?></th><th><?php __("Member"); ?></th><th>Lock</th></tr>
+  <tr><th><?php __("Action"); ?></th><th><?php __("Domain"); ?></th><th><?php __("Member"); ?></th><th><?php __("Connect as"); ?><th>Lock</th></tr>
 <?php
 $col=1;
 for($i=0;$i<count($c);$i++) {
@@ -64,6 +64,12 @@ for($i=0;$i<count($c);$i++) {
    if ($c[$i]["noerase"]) __("Unlock"); else __("Lock");  ?></a></td>
 <td><a href="http://<?php echo $c[$i][domaine]; ?>" target="_blank"><?php echo $c[$i]["domaine"]; ?></a></td>
 <td><?php echo $c[$i]["login"]; ?></td>
+<td>
+<?php		  if($admin->checkcreator($c[$i]['uid'])) {
+		?>
+			<a href="adm_login.php?id=<?php echo $c[$i]["uid"];?>"><?php __("Connect as"); ?></a>
+		<?php } ?>
+</td>
 				    <td><?php if ($c[$i]["noerase"]) {
 			echo "<img src=\"icon/encrypted.png\" width=\"16\" height=\"16\" alt=\""._("Locked Domain")."\" />";
 				    } ?></td>
