@@ -341,7 +341,7 @@ class m_admin {
     $db->query("SELECT count(*) AS cnt FROM membres WHERE login='$login';");
     $db->next_record();
     if (!$db->f("cnt")) {
-      $db->query("SELECT m.uid+1 as nextid FROM membres m LEFT JOIN membres n ON m.uid=n.uid-1 WHERE n.uid IS NULL ORDER BY 1 LIMIT 0,1");
+      $db->query("SELECT max(m.uid)+1 as nextid FROM membres m");
       if (!$db->next_record()) {
 	$uid=2000;
       } else {
