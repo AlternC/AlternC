@@ -826,7 +826,7 @@ EOF;
    */
   function dom_list() {
     global $db;
-    $db->query("SELECT m.uid,m.login,d.domaine,d.gesdns,d.gesmx,d.noerase FROM domaines d LEFT JOIN membres m ON m.uid=d.compte ORDER BY domaine;");
+    $db->query("SELECT m.login,d.domaine,d.gesdns,d.gesmx,d.noerase FROM domaines d LEFT JOIN membres m ON m.uid=d.compte ORDER BY domaine;");
     while ($db->next_record()) {
       $c[]=$db->Record;
     }
@@ -1131,7 +1131,7 @@ EOF;
       $logins=explode("@",$login);
       $logins[]=$login;
       foreach($logins as $l) {
-	if (strpos($l,$password)!==false) {
+	if (strpos($password,$l)!==false) {
 	  $err->raise("admin",17);
 	  return false;
 	}

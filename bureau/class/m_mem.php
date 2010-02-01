@@ -290,7 +290,7 @@ class m_mem {
    * @return boolean TRUE si le mot de passe a été changé, FALSE sinon.
    */
   function passwd($oldpass,$newpass,$newpass2) {
-    global $db,$err,$cuid;
+    global $db,$err,$cuid,$admin;
     $err->log("mem","passwd");
     $oldpass=stripslashes($oldpass);
     $newpass=stripslashes($newpass);
@@ -310,6 +310,12 @@ class m_mem {
     if (strlen($newpass)<3) {
       $err->raise("mem",8);
       return false;
+    }
+    $db->query("SELECT login FROM membres WHERE uid='$cuid';");   
+    $db->next_record();
+    $login=$db->Record["login"];
+    if (!$admin->checkPolicy("mem",$login,$newpass)) {
+      return false; // The error has been raised by checkPolicy()
     }
     $newpass=_md5cr($newpass);
     $db->query("UPDATE membres SET pass='$newpass' WHERE uid='$cuid';");
