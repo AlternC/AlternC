@@ -135,16 +135,37 @@ if ($c===false) $error=$err->errstr();
 <tr><td>
 
 <hr />
-<table width="100%"><tr><td valign="top">
-<a href="bro_main.php?R=/"><?php echo $mem->user["login"]; ?></a>&nbsp;/&nbsp;<?php echo $bro->PathList($R,"bro_main.php") ?><br />
-<?php if ($error) echo "<font color=\"red\">$error</font>"; ?>
-</td><td valign="top" align="right">
+<p class="breadcrumb">
+ <?php __("Path"); ?> / <a href="bro_main.php?R=/"><?php echo $mem->user["login"]; ?></a>&nbsp;/&nbsp;<?php echo $bro->PathList($R,"bro_main.php") ?>
+</p>
 
+<?php if ($error) echo "<font color=\"red\">$error</font>"; ?>
+
+<table><tr>
+<td valign="top" style="border: 1px solid #aaa; padding: 10px">
+
+     <form action="bro_main.php" enctype="multipart/form-data" method="post">
+     <input type="hidden" name="R" value="<?php echo $R; ?>" />
+     <input type="hidden" name="formu" value="3" />
+
+     <?php __("Send one file:"); ?><br />
+<input class="int" name="userfile" type="file" />
+     <input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
+<br />
+     <input type="submit" id="sendthisfile" class="ina" value="<?php __("Send this file"); ?>" />
+
+     </form>
+
+</td>
+<td style="width: 20px">&nbsp;</td>
+<td valign="top" style="border: 1px solid #aaa; padding: 10px">
+
+<?php __("New file or folder:"); ?><br />
 <form action="bro_main.php" method="post" name="nn" id="nn">
 <input type="hidden" name="R" value="<?php echo $R; ?>" />
 <table><tr>
 <td><input type="text" class="int" name="nomfich" size="22" maxlength="255" /></td>
-<td><input type="submit" class="inb" value="<?php __("Create"); ?>" /></td>
+<td><input type="submit" class="ina" value="<?php __("Create"); ?>" /></td>
 </tr><tr><td>
 <input type="radio" class="inc" id="nfile" onclick="document.nn.nomfich.focus();" name="formu" value="6" <?php if (!$p["crff"]) echo "checked=\"checked\""; ?> /><label for="nfile">&nbsp;<?php __("File"); ?></label>
 <input type="radio" class="inc" id="nfold" onclick="document.nn.nomfich.focus();" name="formu" value="1" <?php if ($p["crff"]) echo "checked=\"checked\""; ?> /><label for="nfold">&nbsp;<?php __("Folder"); ?></label>
@@ -152,6 +173,7 @@ if ($c===false) $error=$err->errstr();
 </form>
 </td></tr>
 </table>
+
 
 </td></tr>
 <tr><td valign="top">
@@ -219,27 +241,30 @@ if (count($c)) {
 <form action="bro_main.php" method="post" name="main" id="main">
 <input type="hidden" name="R" value="<?php echo $R; ?>" />
 <input type="hidden" name="formu" value="2" />
-<hr />
+
+<br />
+
+
+<table width="100%" style="border: 0px">
+<tr><td class="lst2" style="padding: 4px 4px 8px 4px">
+
+<input type="submit" class="ina" name="actdel" value="<?php __("Delete"); ?>" />
+<input type="submit" class="ina" name="actrename" value="<?php __("Rename"); ?>" />
+<input type="submit" class="ina" name="actperms" value="<?php __("Permissions"); ?>" /> 
+&nbsp; |&nbsp;
+<input type="submit" class="ina" name="actcopy" value="<?php __("Copy"); ?>" />
+<input type="submit" class="ina" name="actmove" value="<?php __("Move"); ?>" />
+<?php __("To"); ?> 
+<input type="text" class="int" name="actmoveto" value="" />
 <script type="text/javascript">
 <!--
-document.write("<input type=\"button\" value=\"<?php __("all/none"); ?>\" class=\"inb\" onclick=\"CheckAll();\" />");
+document.write("<input type=\"button\" name=\"bff\" onclick=\"browseforfolder('main.actmoveto');\" value=\" Choisir un r&eacute;pertoire \" class=\"bff\" />");
 //  -->
 </script>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<input type="submit" class="inb" name="actdel" value="<?php __("Delete"); ?>" />
 
-<input type="submit" class="inb" name="actrename" value="<?php __("Rename"); ?>" />
-<input type="submit" class="inb" name="actperms" value="<?php __("Permissions"); ?>" /> <!-- [ML] -->
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br /><br />
-<input type="submit" class="inb" name="actcopy" value="<?php __("Copy"); ?>" />
-<input type="submit" class="inb" name="actmove" value="<?php __("Move"); ?>" />&nbsp;:&nbsp;<input type="text" class="int" name="actmoveto" value="" />
-<script type="text/javascript">
-<!--
-document.write("<input type=\"button\" name=\"bff\" onclick=\"browseforfolder('main.actmoveto');\" value=\" ... \" class=\"inb\" />");
-//  -->
-</script>
-     <hr />
+</td></tr>
 
+</table>
 
 
 <?php
@@ -247,7 +272,24 @@ document.write("<input type=\"button\" name=\"bff\" onclick=\"browseforfolder('m
 case 0:
 /* AFFICHE 1 COLONNE DETAILLEE */
 reset($c);
-echo "<table width=\"100%\" style=\"border: 0px\" cellpadding=\"0\" cellspacing=\"0\">";
+echo "<table width=\"100%\" style=\"border: 0px\" cellpadding=\"2\" cellspacing=\"0\">";
+?>
+<tr><th>
+<script type="text/javascript">
+<!--
+document.write("<input type=\"checkbox\" value=\"1\" class=\"inb\" onclick=\"CheckAll();\" />");
+//  -->
+</script>
+</th>
+<th></th>
+<th><?php __("Filename"); ?></th>
+<th><?php __("Size"); ?></th>
+<th><?php __("Last modification"); ?></th>
+<th><?php __("File Type"); ?></th>
+<th></th>
+</tr>
+<?php
+
 $col=1;
 for($i=0;$i<count($c);$i++) {
 $col=3-$col;
@@ -273,7 +315,7 @@ echo "<td>&nbsp;";
 }
 $e = $bro->is_extractable($R,$c[$i]["name"]);
 if ($e) {
-  echo "<a href=\"bro_main.php?actextract=1&file=".urlencode($c[$i]["name"])."&amp;R=".urlencode($R)."\">";
+  echo " <a href=\"bro_main.php?actextract=1&file=".urlencode($c[$i]["name"])."&amp;R=".urlencode($R)."\">";
   echo _("Extract");
   echo "</a>";
 }
@@ -476,23 +518,33 @@ else {
 ?>
 
      </td></tr>
-     <tr><td colspan="2">
+     <tr><td colspan="2" style="">
 
-
-     <form action="bro_main.php" enctype="multipart/form-data" method="post">
-     <input type="hidden" name="R" value="<?php echo $R; ?>" />
-     <input type="hidden" name="formu" value="3" />
-     <hr />
-     <?php __("Import this file"); ?>&nbsp;&nbsp;<input class="int" name="userfile" type="file" />
-     <input type="hidden" name="MAX_FILE_SIZE" value="10000000" />
-     <input type="submit" class="inb" value="<?php __("Send"); ?>" />
-     <hr />
-     </form>
      <p>&nbsp;</p>
 
+<p>
+<span class="ina"><a href="bro_main.php?R=<?php echo $R; ?>&showdirsize=1"><?php __("Show size of directories"); ?></a></span> <?php __("(slow)"); ?>
+</p><p>
+<span class="ina"><?php
+if ($hta->is_protected($R)) {
+echo "<a href=\"hta_edit.php?dir=$R\">"._("Edit this folder's restrictions")."</a>";
+}
+else {
+echo "<a href=\"hta_add.php?value=$R\">"._("Protect this folder")."</a>";
+}
+?></span> <?php __("with a login and a password"); ?>
+</p><p>
+<span class="ina">
+  <a href="bro_tgzdown.php?dir=<?php echo $R; ?>"><?php __("Download this folder"); ?></a>
+</span> &nbsp; 
+  <?php printf(_("as a %s file"),$bro->l_tgz[$p["downfmt"]]); ?>
+</span>
+</p><p>
+<span class="ina">
+  <a href="bro_pref.php"><?php __("File browser preferences"); ?></a>
+</span> 
+</p>	
      <?php
-
-     echo '<a href="bro_main.php?R=' . $R . '&showdirsize=1">' . _("Show disk usage of directories (slow)") . '</a><br /><br />';
 
      if ($id=$ftp->is_ftp($R)) {
 echo _("There is an ftp account in this folder")." <a href=\"ftp_edit.php?id=".urlencode($id)."\">"._("Click here to edit this ftp account.")."</a><br />";
@@ -501,16 +553,7 @@ else {
 echo "<a href=\"ftp_add.php?dir=".urlencode($R)."\">"._("Click here to create an ftp account in this folder.")."</a><br />";
 }
 
-if ($hta->is_protected($R)) {
-echo "<a href=\"hta_edit.php?dir=$R\">"._("This folder has restricted access")."</a><br />";
-}
-else {
-echo "<a href=\"hta_add.php?value=$R\">"._("Click here to protect this folder with login/password")."</a><br />";
-}
 ?>
-<br />
-<a href="bro_tgzdown.php?dir=<?php echo $R; ?>"><?php __("Download"); ?></a> <?php __("this folder and its subfolders as a compressed file"); ?> (<?php echo $bro->l_tgz[$p["downfmt"]]; ?>)<br />
-<a href="bro_pref.php"><?php __("Configure the file browser"); ?></a><br />
 
 </td></tr></table>
 <?php include_once("foot.php"); ?>

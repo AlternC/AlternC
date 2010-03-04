@@ -58,18 +58,19 @@ function dnsoff() {
 		document.forms["dns"].mail.disabled=false;
 }
 </script>
-<h3><?php printf(_("Editing domain %s"),$domain); ?></h3>
+<h3><?php printf(_("Editing subdomains of %s"),$domain); ?></h3>
 <?php
 	if ($error) {
 		echo "<p class=\"error\">$error</p>";
 	}
 ?>
 <hr />
+<br />
 <!-- *****************************************
 		 gestion des sous-domaines
  -->
-<h3><?php __("Subdomains"); ?></h3>
 <table cellspacing="0" cellpadding="3">
+<tr><th colspan="2"><?php __("Actions"); ?></th><th><?php __("Subdomain"); ?></th><th><?php __("Place"); ?></th></tr>
 <?php
 $col=1;
 for($i=0;$i<$r["nsub"];$i++) {
@@ -77,13 +78,17 @@ for($i=0;$i<$r["nsub"];$i++) {
 ?>
 	<tr class="lst<?php echo $col; ?>">
 		<td class="center">
-			<a href="dom_subedit.php?domain=<?php echo urlencode($r["name"]) ?>&amp;sub=<?php  echo urlencode($r["sub"][$i]["name"]) ?>"><img src="images/edit.png" alt="<?php __("Edit"); ?>" /></a>&nbsp;<a href="dom_subdel.php?domain=<?php echo urlencode($r["name"]) ?>&amp;sub=<?php  echo urlencode($r["sub"][$i]["name"]) ?>"><img src="images/delete.png" alt="<?php __("Delete"); ?>" /></a>
+			<div class="ina"><a href="dom_subedit.php?domain=<?php echo urlencode($r["name"]) ?>&amp;sub=<?php  echo urlencode($r["sub"][$i]["name"]) ?>"><img src="images/edit.png" alt="<?php __("Edit"); ?>" /><?php __("Edit"); ?></a></div>
+			</td><td class="center">
+			<div class="ina"><a href="dom_subdel.php?domain=<?php echo urlencode($r["name"]) ?>&amp;sub=<?php  echo urlencode($r["sub"][$i]["name"]) ?>"><img src="images/delete.png" alt="<?php __("Delete"); ?>" /><?php __("Delete"); ?></a></div>
 		</td>
 		<td><a href="http://<?php ecif($r["sub"][$i]["name"],$r["sub"][$i]["name"]."."); echo $r["name"] ?>" target="_blank"><?php ecif($r["sub"][$i]["name"],$r["sub"][$i]["name"]."."); echo $r["name"] ?></a></td>
 		<td><?php echo $r["sub"][$i]['type'] === '0' ? '<a href="bro_main.php?R='.urlencode($r["sub"][$i]["dest"]).'">'.htmlspecialchars($r["sub"][$i]["dest"]).'</a>' : htmlspecialchars($r["sub"][$i]["dest"]); ?>&nbsp;</td>
 	</tr>
 <?php } ?>
 </table>
+<br />
+<hr/>
 <br />
 <form action="dom_subdoedit.php?" method="post" name="main" id="main">
 	<table border="0">
@@ -97,10 +102,10 @@ for($i=0;$i<$r["nsub"];$i++) {
 		<tr>
 			<td><input type="radio" id="local" class="inc" name="type" value="<?php echo $dom->type_local; ?>" checked="checked" onclick="document.main.sub_local.focus();" />
 				<label for="local"><?php __("Locally managed"); ?></label></td>
-			<td><input type="text" class="int" name="sub_local" id="sub_local" value="/" size="40" />
+			<td><input type="text" class="int" name="sub_local" id="sub_local" value="/" size="28" />
 <script type="text/javascript">
 <!--
-  document.write("&nbsp;<input type=\"button\" name=\"bff\" onclick=\"browseforfolder('main.sub_local');\" value=\" ... \" class=\"inb\">");
+  document.write("&nbsp;<input type=\"button\" name=\"bff\" onclick=\"browseforfolder('main.sub_local');\" value=\" Choisir un r&eacute;pertoire... \" class=\"bff\">");
 //  -->
 </script>
 </td>
@@ -122,8 +127,8 @@ for($i=0;$i<$r["nsub"];$i++) {
 				<label for="webmail"><?php __("Webmail access"); ?></label></td>
 			<td>&nbsp;</td>
 		</tr>
-		<tr>
-			<td colspan="2"><input type="submit" class="inb" name="add" value="<?php __("Add a subdomain"); ?>" /></td>
+		<tr style="text-align: right">
+			<td colspan="2"><input type="submit" class="inb" name="add" value="<?php __("Add this subdomain"); ?>" /></td>
 		</tr>
 	</table>
 </form>
@@ -170,7 +175,7 @@ if (!$r[noerase]) {
 <?php printf(_("help_domain_del %s"),$domain); ?><br />
 <form action="dom_dodel.php?domain=<?php echo urlencode($domain) ?>" method="post">
 <p>
-<input type="submit" class="inb" name="detruire" value="<?php printf(_("Delete %s"),$domain); ?>" />
+<input type="submit" class="inb" name="detruire" value="<?php printf(_("Delete %s from this server"),$domain); ?>" />
 </p>
 </form>
 <hr />
