@@ -33,12 +33,14 @@ include_once("head.php");
 $fields = array (
 	"newdomain"    => array ("post", "string", ""),
 	"dns"          => array ("post", "string", ""),
+	"newisslave"   => array ("post", "integer" ,0), 
+	"slavedom"     => array ("post", "string" ,0), 
 );
 getFields($fields);
 
 $dom->lock();
 
-if (!$dom->add_domain($newdomain,$dns)) {
+if (!$dom->add_domain($newdomain,$dns,0,0,$newisslave,$slavedom)) {
 	$error=$err->errstr();
 	include("dom_add.php");
 	exit();

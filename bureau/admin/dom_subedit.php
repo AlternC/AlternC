@@ -43,7 +43,7 @@ if (!$r=$dom->get_sub_domain_all($domain,$sub)) {
 $dom->unlock();
 
 ?>
-<h3><?php __("Editing subdomain"); ?> http://<?php ecif($sub,$sub."."); echo $domain; ?> : </h3>
+<h3><?php __("Editing subdomain"); ?> http://<?php ecif($sub,$sub."."); echo $domain; ?></h3>
 <?php
 	if ($error) {
 		echo "<p class=\"erroe\">$error</p>";
@@ -52,10 +52,10 @@ $dom->unlock();
 	}
 ?>
 <hr />
+<br />
 <!-- *****************************************
 		 gestion du sous-domaine
  -->
-<h3><?php __("Sub-domain"); ?> http://<?php ecif($sub,$sub."."); echo $domain; ?></h3>
 <form action="dom_subdoedit.php" method="post" id="main" name="main">
 	<table border="0">
 	<tr>
@@ -68,7 +68,7 @@ $dom->unlock();
 		<td><input type="text" class="int" name="sub_local" id="sub_local" value="<?php ecif($r["type"]==0,$r["dest"],"/"); ?>" size="40" />
 <script type="text/javascript">
 <!--
-  document.write("&nbsp;<input type=\"button\" name=\"bff\" onclick=\"browseforfolder('main.sub_local');\" value=\" ... \" class=\"inb\">");
+  document.write("&nbsp;<input type=\"button\" name=\"bff\" onclick=\"browseforfolder('main.sub_local');\" value=\" <?php __("Choose a folder..."); ?> \" class=\"bff\">");
 //  -->
 </script>
 </td>
@@ -88,10 +88,9 @@ $dom->unlock();
 			<label for="webmail"><?php __("Webmail access"); ?></label></td>
 		<td>&nbsp;</td>
 	</tr>
-	<tr>
-		<td><input type="submit" class="inb" name="submit" value="<?php __("Validate this change"); ?>" /></td>
-		<td><input type="button" class="inb" name="back" value="<?php __("Cancel"); ?>" onclick="history.back();" /></td>
-	</tr>
 	</table>
+<br />
+<input type="submit" class="inb" name="submit" value="<?php __("Validate this change"); ?>" />
+<input type="button" class="inb" name="back" value="<?php __("Cancel"); ?>" onclick="history.back();" />
 </form>
 <?php include_once("foot.php"); ?>

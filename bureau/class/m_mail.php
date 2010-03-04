@@ -696,6 +696,22 @@ class m_mail {
 
 
   /* ----------------------------------------------------------------- */
+  /** hook function called by AlternC when a domain is created for 
+   * the current user account using the SLAVE DOMAIN feature
+   * This function create a CATCHALL to the master domain
+   * @param string $dom Domain that has just been created
+   * @param string $master Master domain
+   * @access private
+   */
+  function alternc_add_slave_domain($dom,$slave) {
+    global $err;
+    $err->log("mail","alternc_add_slave_domain",$dom);
+    $this->add_mail($dom,"",0,"","@".$slave);
+    return true;
+  }
+
+
+  /* ----------------------------------------------------------------- */
   /**
    * Returns the used quota for the $name service for the current user.
    * @param $name string name of the quota

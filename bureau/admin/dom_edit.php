@@ -97,7 +97,7 @@ for($i=0;$i<$r["nsub"];$i++) {
 			<input type="hidden" name="domain" value="<?php echo $r["name"]; ?>" />
 			<input type="hidden" name="action" value="add" />
 <?php __("Create a subdomain:"); ?>
-<input type="text" class="int" name="sub" style="text-align:right" value="" size="22" id="sub" /><code>.<?php echo $domain; ?></code></td>
+<input type="text" class="int" name="sub" style="text-align:right" value="" size="22" id="sub" /><span class="int" id="newsubname">.<?php echo $domain; ?></span></td>
 		</tr>
 		<tr>
 			<td><input type="radio" id="local" class="inc" name="type" value="<?php echo $dom->type_local; ?>" checked="checked" onclick="document.main.sub_local.focus();" />
@@ -105,7 +105,7 @@ for($i=0;$i<$r["nsub"];$i++) {
 			<td><input type="text" class="int" name="sub_local" id="sub_local" value="/" size="28" />
 <script type="text/javascript">
 <!--
-  document.write("&nbsp;<input type=\"button\" name=\"bff\" onclick=\"browseforfolder('main.sub_local');\" value=\" Choisir un r&eacute;pertoire... \" class=\"bff\">");
+  document.write("&nbsp;<input type=\"button\" name=\"bff\" onclick=\"browseforfolder('main.sub_local');\" value=\" <?php __("Choose a folder..."); ?> \" class=\"bff\">");
 //  -->
 </script>
 </td>

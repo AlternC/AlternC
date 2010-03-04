@@ -398,5 +398,19 @@ function duration_list($name, $selected=0) {
   return $res;
 }
 
+/* select_values($arr,$cur) echo des <option> du tableau $values ou de la table sql $values
+   selectionne $current par defaut. Par defaut prends les champs 0 comme id et 1 comme
+   donnees pour la table. sinon utilise $info[0] et $info[1].
+*/
+function eoption($values,$cur,$info="") {
+  if (is_array($values)) {
+    foreach ($values as $k=>$v) {
+      echo "<option value=\"$k\"";
+      if ($k==$cur) echo " selected=\"selected\"";
+      echo ">".$v."</option>";
+    }
+  }
+}
+
 
 ?>

@@ -178,7 +178,7 @@ class m_dom {
    *  force ne devrait être utilisé que par le super-admin.
    $ @return boolean Retourne FALSE si une erreur s'est produite, TRUE sinon.
   */
-  function add_domain($domain,$dns,$noerase=0,$force=0) {
+  function add_domain($domain,$dns,$noerase=0,$force=0,$isslave,$slavedom) {
     global $db,$err,$quota,$classes,$L_MX,$L_FQDN,$tld,$cuid,$bro;
     $err->log("dom","add_domain",$domain);
     $mx="1";
@@ -257,21 +257,36 @@ class m_dom {
     $db->query("insert into domaines (compte,domaine,mx,gesdns,gesmx,noerase) values ('$cuid','$domain','$L_MX','$dns','$mx','$noerase');");
     $db->query("insert into domaines_standby (compte,domaine,mx,gesdns,gesmx,action) values ('$cuid','$domain','$L_MX','$dns','$mx',0);"); // INSERT
 
-    // Creation du repertoire dans www
-    $dest_root = $bro->get_userid_root($cuid);
-    $domshort=str_replace("-","",str_replace(".","",$domain));
-
-    if (! is_dir($dest_root . "/". $domshort)) {
-      mkdir($dest_root . "/". $domshort);
+    if ($isslave) {
+      $isslave=true;
+      $db->query("SELECT domaine FROM domaines WHERE compte='$cuid' AND domaine='$slavedom';");
+      $db->next_record();
+      if (!$db->Record["domaine"]) {
+	$err->raise("dom",1,$slavedom);
+	$isslave=false;
+      }
+      // Point to the master domain : 
+      $this->set_sub_domain($domain, '',     $this->type_url,'add', 'http://www.'.$slavedom);
+      $this->set_sub_domain($domain, 'www',  $this->type_url,'add', 'http://www.'.$slavedom);
+      $this->set_sub_domain($domain, 'mail', $this->type_url,'add', 'http://mail.'.$slavedom);      
     }
-
-    // Creation des 3 sous-domaines par défaut : Vide, www et mail
-    $this->set_sub_domain($domain, '',     $this->type_url,     'add', 'http://www.'.$domain);
-    $this->set_sub_domain($domain, 'www',  $this->type_local,   'add', '/'. $domshort);
-    $this->set_sub_domain($domain, 'mail', $this->type_webmail, 'add', '');
+    if (!$isslave) {
+      // Creation du repertoire dans www
+      $dest_root = $bro->get_userid_root($cuid);
+      $domshort=str_replace("-","",str_replace(".","",$domain));
+      
+      if (! is_dir($dest_root . "/". $domshort)) {
+	mkdir($dest_root . "/". $domshort);
+      }
+      
+      // Creation des 3 sous-domaines par défaut : Vide, www et mail
+      $this->set_sub_domain($domain, '',     $this->type_url,     'add', 'http://www.'.$domain);
+      $this->set_sub_domain($domain, 'www',  $this->type_local,   'add', '/'. $domshort);
+      $this->set_sub_domain($domain, 'mail', $this->type_webmail, 'add', '');
+    }
     // DEPENDANCE :
     // Lancement de add_dom sur les classes domain_sensitive :
-     // Declenchons les autres classes.    
+    // Declenchons les autres classes.    
     foreach($classes as $c) {
       if (method_exists($GLOBALS[$c],"alternc_add_domain")) {
 	$GLOBALS[$c]->alternc_add_domain($domain);
@@ -282,7 +297,14 @@ class m_dom {
 	$GLOBALS[$c]->alternc_add_mx_domain($domain);
       }
     }
-   return true;
+    if ($isslave) {
+      foreach($classes as $c) {
+	if (method_exists($GLOBALS[$c],"alternc_add_slave_domain")) {
+	  $GLOBALS[$c]->alternc_add_slave_domain($domain,$slavedom);
+	}
+      } 
+    }
+    return true;
   }
 
   /* ----------------------------------------------------------------- */
@@ -947,6 +969,22 @@ class m_dom {
 	}
 	return true;
   }
+
+
+  /* ----------------------------------------------------------------- */
+  /**
+   * Returns the complete hosted domain list : 
+   */
+  function get_domain_list() {
+	global $db,$err;
+	$res=array();
+	$db->query("SELECT domaine FROM domaines WHERE gesdns=1 ORDER BY domaine");
+	while ($db->next_record()) {
+		$res[]=$db->f("domaine");
+	}
+	return $res;
+  }
+
 
   /* ----------------------------------------------------------------- */
   /**

@@ -95,6 +95,7 @@ hr {
 	color: black;
 	background-color: #CFE3F1;
 	cursor: pointer;
+	margin-right: 4px;
 }
 .inb:hover {
     background-color: #BFD3E1;
@@ -144,9 +145,8 @@ hr {
 	border: 1px dotted black;
 	background-color: white;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
-	font-size: 10px;
-	padding-left: 2px;
-	padding-right: 2px;
+	font-size: 11px;
+	padding: 2px;
 	color: black;
 }
 
@@ -213,8 +213,9 @@ img {
 
 #content {
 	display: block;
-	width: 740px;
+	width: 730px;
 	padding-left: 10px;
+	padding-right: 10px;
 	vertical-align: top;
 }
 
@@ -349,4 +350,21 @@ a:hover {
 .breadcrumb {
     font-size: 12px;
 
+}
+
+#newdomwww {
+    border-right: 0;
+    padding-right: 0;
+}
+#newdomain {
+    border-left: 0;
+    padding-left: 0;
+}
+#sub {
+    border-right: 0;
+    padding-right: 0;
+}
+#newsubname {
+    border-left: 0;
+    padding-left: 0;
 }
