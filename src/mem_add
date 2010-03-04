@@ -27,7 +27,7 @@ $( = $);
 
 my $PTH="/var/alternc/html/".substr($name,0,1)."/".$name;
 
-my @create_paths = ($PTH, $PTH . '/www', $PTH . '/stats', $PTH . '/backups');
+my @create_paths = ($PTH);
 
 for my $p (@create_paths) {
     mkdir($p);
