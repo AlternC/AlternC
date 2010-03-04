@@ -38,7 +38,7 @@ CONFIG_FILES="etc/alternc/bureau.conf"
 
 if [ -e /etc/bind/named.conf ]; then
     CONFIG_FILES="$CONFIG_FILES etc/bind/templates/zone.template
-                  etc/bind/templates/named.template etc/bind/named.conf etc/bind/named.conf.options"
+                  etc/bind/templates/named.template etc/bind/named.conf.options"
 fi
 if [ -e /etc/courier/authdaemonrc ]; then
     CONFIG_FILES="$CONFIG_FILES etc/courier/authdaemonrc
