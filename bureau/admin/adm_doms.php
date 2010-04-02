@@ -43,16 +43,24 @@ include_once ("head.php");
 	  echo "<p class=\"error\">$error</p>";
 	}
 
-$c=$admin->dom_list();
+// List the domains. If the first parameter is true, also check their DNS & other IPs actual parameters.
+// If the second parameter is true, check the domains whatever the dis cache is.
+$forcecheck=($_REQUEST["force"]!="");
+$c=$admin->dom_list(true,$forcecheck);
 
 ?>
 <p>
 <?php __("Here is the list of the domains installed on this server. You can remove a domain if it does not exist or does not point to our server anymore. You can also set the 'Lock' flag on a domain so that the user will not be able to change any DNS parameter or delete this domain from his account."); ?>
 </p>
-
+<p>
+<?php __("The domain OK column are green when the domain exists in the worldwide registry and has a proper NS,MX and IP depending on its configuration. It is red if we have serious doubts about its NS, MX or IP configuration"); ?>
+</p>
+<p>
+<?php __("If you want to force the check of NS, MX, IP on domains, click the link "); ?><a href="adm_doms.php?force=1"><?php __("Show domain list with refreshed checked NS, MX, IP information"); ?></a>
+</p>
 <form method="post" action="adm_dodom.php">
 <table border="0" cellpadding="4" cellspacing="0">
-  <tr><th><?php __("Action"); ?></th><th><?php __("Domain"); ?></th><th><?php __("Member"); ?></th><th><?php __("Connect as"); ?><th>Lock</th></tr>
+    <tr><th><?php __("Action"); ?></th><th><?php __("Domain"); ?></th><th><?php __("Member"); ?></th><th><?php __("Connect as"); ?><th><?php __("Lock"); ?></th><th><?php __("OK?"); ?></th><th><?php __("Status"); ?></th></tr>
 <?php
 $col=1;
 for($i=0;$i<count($c);$i++) {
@@ -73,6 +81,15 @@ for($i=0;$i<count($c);$i++) {
 				    <td><?php if ($c[$i]["noerase"]) {
 			echo "<img src=\"icon/encrypted.png\" width=\"16\" height=\"16\" alt=\""._("Locked Domain")."\" />";
 				    } ?></td>
+<td style="background: <?php 
+				       if ($c[$i]["errno"]==0) {
+					 echo "green";
+				       } else {
+					 echo  "red";
+				       }
+  ?>">&nbsp;
+</td>
+<td><?php echo nl2br($c[$i]["errstr"]); ?></td>
 </tr>
 <?php
 }

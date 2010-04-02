@@ -1,5 +1,8 @@
 alternc (0.9.10~rc1) stable; urgency=low
 
+  * new features:
+    * removed the dependency on postgrey, added dnsutils (for domain checks)
+    * added domain check (exists, ns, mx, ip) when listing domains in admin panel.
   * bugfixes:
     * fix a "already exist" error when creating a database containing an hyphen (-)
     * #1163: fix sqlbackup script call routine to retain backwards

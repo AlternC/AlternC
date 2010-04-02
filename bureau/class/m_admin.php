@@ -822,16 +822,101 @@ EOF;
    * List the hosted domains on this server
    * 
    * Return the list of hosted domains on this server, (an array of associative arrays)
+   * @param boolean $alsocheck Returns also errstr and errno telling the domains dig checks
+   * @param boolean $forcecheck Force the check of dig domain even if a cache exists.
    * @return array $r[$i] / [domaine][member][noerase][gesdns][gesmx]
    */
-  function dom_list() {
+  function dom_list($alsocheck=false,$forcecheck=false) {
     global $db;
+    $cachefile="/tmp/alternc_dig_check_cache";
+    $cachetime=3600; // The dns cache file can be up to 1H old
+    if ($alsocheck) {
+      if (!$forcecheck && file_exists($cachefile) && filemtime($cachefile)+$cachetime>time()) {
+	$checked=unserialize(file_get_contents($cachefile));
+      } else {
+	// TODO : do the check here (cf checkdom.php) and store it in $checked
+	$checked=$this->checkalldom();
+	file_put_contents($cachefile,serialize($checked));
+      }
+    }
     $db->query("SELECT m.login,d.domaine,d.gesdns,d.gesmx,d.noerase FROM domaines d LEFT JOIN membres m ON m.uid=d.compte ORDER BY domaine;");
     while ($db->next_record()) {
-      $c[]=$db->Record;
+      $tmp=$db->Record;
+      if ($alsocheck) {
+	$tmp["errstr"]=$checked[$tmp["domaine"]]["errstr"];
+	$tmp["errno"]=$checked[$tmp["domaine"]]["errno"];
+      }
+      $c[]=$tmp;
     }
     return $c;
   }
+
+  /** Check all the domains for their NS MX and IPs
+   */
+  function checkalldom() {
+    global $L_NS1,$L_NS2,$L_MX,$L_PUBLIC_IP;
+    $checked=array();
+    $r=$db->query("SELECT * FROM domaines ORDER BY domaine;");
+    $dl=array();
+    while ($db->next_record()) {
+      $dl[$db->Record["domaine"]]=$db->Record;
+    }
+    sort($dl);
+    foreach($dl as $c) {
+      // Pour chaque domaine on verifie son etat : 
+      $errno=0;
+      $errstr="";
+      $dontexist=false;
+      // Check du domaine
+      if ($c["gesdns"]==1) {
+	// Check du NS qui pointe chez nous 
+	$out=array();
+	exec("dig +short NS ".escapeshellarg($c["domaine"]),$out);
+	if (count($out)==0) {
+	  $dontexist=true;
+	} else {
+	  if (!in_array($L_NS1,$out) || !in_array($L_NS2,$out)) {
+	    $errno=1; $errstr.="NS for this domain are not $L_NS1 and $L_NS2 BUT ".implode(",",$out)."\n";
+	  }
+	}
+      }
+      if ($c["gesmx"]==1 && !$dontexist) {
+	$out=array();
+	exec("dig +short MX ".escapeshellarg($c["domaine"]),$out);
+	$out2=array();
+	foreach($out as $o) {
+	  list($t,$out2[])=explode(" ",$o);
+	}
+	if (!in_array($L_MX,$out2)) {
+	  $errno=1; $errstr.="MX is not $L_MX BUT ".implode(",",$out2)."\n";
+	}
+      }
+      if (!$dontexist) {
+	// On liste les sous-domaine et on verifie qu'ils pointent bien chez nous...
+	$db->query("SELECT * FROM sub_domaines WHERE domaine='".addslashes($c["domaine"])."' ORDER BY sub;");
+	while ($db->next_record()) {
+	  $d=$db->Record;
+	  if ($d["type"]==0) {
+	    // Check l'IP : 
+	    $out=array();
+	    exec("dig +short A ".escapeshellarg($d["sub"].(($d["sub"]!="")?".":"").$c["domaine"]),$out);
+	    if (!in_array($L_PUBLIC_IP,$out)) {
+	      $errstr.="subdomain '".$d["sub"]."' don't point to $L_PUBLIC_IP but to ".implode(",",$out)."\n";
+	      $errno=1;
+	    }
+	  }
+	}
+      }
+      if ($dontexist) {
+	$errno=2;
+	$errstr="Domain don't exist anymore !";
+      }
+      if ($errno==0) $errstr="OK";
+      $checked[$c["domaine"]]=array("errno"=>$errno, "errstr"=>$errstr); 
+    }
+    return $checked;
+  }
+
 
   /* ----------------------------------------------------------------- */
   /**
