@@ -23,7 +23,7 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file: Franck Missoum
+ Original Author of file: Franck Missoum, Benjamin Sonntag
  Purpose of file: Edit a protected folder
  ----------------------------------------------------------------------
 */
@@ -49,18 +49,14 @@ if (!$dir) {
 <?php
 	if (!count($r)) {
 		echo "<p class=\"error\">".sprintf(_("No authorized user in %s"),$dir)."</p>";
-		echo "<a href=\"hta_adduser.php?dir=$dir\">"._("Add a username")."</a><br />";
-		echo "<br /><small><a href=\"bro_main.php?R=$dir\">"._("File browser")."</a><br /></small>";
-		include_once("foot.php");
-		exit();
-	}
-reset($r);
-
+	} else {
+	  reset($r);
+	  
 ?>
 <form method="post" action="hta_dodeluser.php">
 <table cellspacing="0" cellpadding="4">
 	<tr>
-		<th colspan="2" ><input type="hidden" name="dir" value="<?php echo $dir?>">&nbsp;</th>
+   <th colspan="2" ><input type="hidden" name="dir" value="<?php echo $dir?>"><?php __("Actions"); ?></th>
 		<th><?php __("Username"); ?></th>
 	</tr>
 <?php
@@ -71,20 +67,53 @@ for($i=0;$i<count($r);$i++){
 ?>
 	<tr class="lst<?php echo $col; ?>">
 		<td align="center"><input type="checkbox" class="inc" name="d[]"" value="<?php echo $r[$i]?>" /></td>
-		<td><a href="hta_edituser.php?user=<?php echo $r[$i]?>&amp;dir=<?php echo $dir?>"><img src="images/edit.png" alt="<?php __("Edit"); ?>" /></a></td>
+		<td>
+<div class="ina"><a href="hta_edituser.php?user=<?php echo $r[$i]?>&amp;dir=<?php echo $dir?>"><img src="icon/encrypted.png" alt="<?php __("Change this user's password"); ?>" /><?php __("Change this user's password"); ?></a></div>
+</td>
 		<td><?php echo $r[$i]; ?></td>
 	</tr>
 <?php
 }
 ?>
-<tr><td colspan="3"><input type="submit" class="inb" name="submit" value="<?php __("Delete the checked users"); ?>" /></td></tr>
 </table>
+<br />
+<input type="submit" class="inb" name="submit" value="<?php __("Delete the checked users"); ?>" />
 </form>
 
+<?php } ?>
 <p>
-<a href="hta_adduser.php?dir=<?php echo $dir ?>"><?php __("Add a username"); ?></a>
+<span class="inb"><a href="bro_main.php?R=<?php echo $dir ?>"><?php __("Show this folder's content in the File Browser"); ?></a></span>
 </p>
-<p>
-<small><a href="bro_main.php?R=<?php echo $dir ?>"><?php __("File browser"); ?></a></small>
-</p>
+
+<p>&nbsp;</p>
+
+<hr />
+<p><?php __("Adding an authorized user"); ?></p>
+
+<form method="post" action="hta_doadduser.php" name="main" id="main">
+<table class="tedit">
+	<tr>
+		<td><input type="hidden" name="dir" value="<?php echo $dir ?>" /><?php __("Folder"); ?></td>
+		<td><code><?php echo $dir; ?></code></td>
+	</tr>
+	<tr>
+		<td><label for="user"><?php __("Username"); ?></label></td>
+		<td><input type="text" class="int" name="user" id="user" value="" size="20" maxlength="64" /></td>
+	</tr>
+	<tr>
+		<td><label for="password"><?php __("Password"); ?></label></td>
+		<td><input type="password" class="int" name="password" id="password" value="" size="20" maxlength="64" /></td>
+	</tr>
+	<tr>
+		<td><label for="passwordconf"><?php __("Confirm password"); ?></label></td>
+		<td><input type="password" class="int" name="passwordconf" id="passwordconf" value="" size="20" maxlength="64" /></td>
+	</tr>
+</table>
+<br />
+<input type="submit" class="inb" value="<?php __("Add this user"); ?>" />
+</form>
+<script type="text/javascript">
+document.forms['main'].user.focus();
+</script>
+
 <?php include_once("foot.php"); ?>

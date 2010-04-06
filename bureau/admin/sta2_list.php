@@ -36,7 +36,7 @@ include_once("head.php");
 <?php
 	if ($quota->cancreate("sta2")) { ?>
 <p>
-		- <a href="sta2_add_raw.php"><?php __("Create new Raw Statistics (apache)"); ?></a>
+<span class="ina"><a href="sta2_add_raw.php"><?php __("Create new Raw Statistics (apache)"); ?></a></span>
 </p>
 <?php  	}
 
@@ -52,8 +52,8 @@ if (!$r=$sta2->get_list_raw()) {
 ?>
 
 <form method="post" action="sta2_del_raw.php">
-<table cellspacing="0" cellpadding="4">
-<tr><th colspan="2">&nbsp;</th><th><?php __("Domain name"); ?></th><th><?php __("Folder"); ?></th><th><?php __("View"); ?></th></tr>
+<table class="tlist">
+    <tr><th colspan="2"><?php __("Actions"); ?></th><th><?php __("Domain name"); ?></th><th><?php __("Folder"); ?></th><th><?php __("View"); ?></th></tr>
 <?php
 reset($r);
 $col=1;
@@ -63,7 +63,7 @@ while (list($key,$val)=each($r))
 ?>
         <tr class="lst<?php echo $col; ?>">
                 <td><input type="checkbox" class="inc" name="del_<?php echo $val["id"]; ?>" value="<?php echo $val["id"]; ?>" /></td>
-                <td><a href="sta2_edit_raw.php?id=<?php echo $val["id"] ?>"><img src="images/edit.png" alt="<?php __("Edit"); ?>" alt="<?php __("Edit"); ?>" /></a></td>
+	   <td><div class="ina"><a href="sta2_edit_raw.php?id=<?php echo $val["id"] ?>"><img src="images/edit.png" alt="<?php __("Edit"); ?>" alt="<?php __("Edit"); ?>" /><?php __("Edit"); ?></a></div></td>
                 <td><?php echo $val["hostname"] ?></td>
                 <td><code>/<?php echo $val["folder"] ?></code></td>
                 <td><?php

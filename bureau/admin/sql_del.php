@@ -64,7 +64,7 @@ while (list($key,$val)=each($_POST)) {
 
 ?>
 <br />
-<input type="submit" class="inb" name="sub" value="<?php __("Yes"); ?>" /> - <input type="button" class="inb" name="non" value="<?php __("No"); ?>" onclick="history.back()" />
+<input type="submit" class="inb" name="sub" value="<?php __("Yes"); ?>" /> <input type="button" class="inb" name="non" value="<?php __("No"); ?>" onclick="history.back()" />
 </p>
 </form>
 <?php include_once("foot.php"); ?>

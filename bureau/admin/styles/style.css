@@ -194,7 +194,7 @@ img {
 	margin-right: auto;
 	margin-top: 20px;
 	margin-bottom: 20px;
-	width: 980px;
+	width: 1020px;
 	border: 5px solid #1D6A9F;
 	-moz-border-radius: 10px;
 	background-color: #F0F0FA;
@@ -213,7 +213,7 @@ img {
 
 #content {
 	display: block;
-	width: 730px;
+	width: 770px;
 	padding-left: 10px;
 	padding-right: 10px;
 	vertical-align: top;
@@ -368,3 +368,31 @@ a:hover {
     border-left: 0;
     padding-left: 0;
 }
+
+.tedit { 
+         border: 1px solid #aaa;
+         padding: 6px;
+         margin: 0;
+         border-collapse: collapse;
+ }
+.tedit td, .tedit th { 
+         border: 1px solid #aaa;
+         padding: 6px;
+         margin: 0;                       
+ }
+
+.formcell { 
+            vertical-align: top;
+            border: 1px solid #aaa; 
+            padding: 10px;
+ }
+
+.tlist, .tlist td, .tlist th { 
+         padding: 6px;
+         margin: 0;
+         border-collapse: collapse;
+ }
+
+input#dir, input#sub_local { 
+       width: 200px;
+ }

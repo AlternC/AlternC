@@ -61,7 +61,7 @@ msgstr "Ajout d'un membre"
 #: ../admin/sql_getparam.php:48 ../admin/sql_list.php:93
 #: ../admin/sql_passchg.php:49 ../admin/sql_users_list.php:92
 msgid "Username"
-msgstr "Nom"
+msgstr "Utilisateur"
 
 #: ../admin/adm_add.php:58
 msgid "Initial password"
@@ -1355,8 +1355,8 @@ msgstr "Ajout d'un mail sur le domaine %s"
 
 #: ../admin/mail_add.php:49 ../admin/mail_edit.php:58 ../admin/mail_add.php:52
 #: ../admin/mail_edit.php:65
-msgid "Is it a POP account?"
-msgstr "Compte POP ?"
+msgid "Is it a POP/IMAP account?"
+msgstr "Est-ce un compte POP/IMAP ?"
 
 #: ../admin/mail_add.php:50 ../admin/mail_edit.php:59 ../admin/mail_add.php:53
 #: ../admin/mail_edit.php:66
@@ -1443,8 +1443,8 @@ msgstr "Modification d'un email du domaine %s"
 
 #: ../admin/mail_edit.php:57 ../admin/mail_edit.php:64
 #, php-format
-msgid "Edit the mailbox %s"
-msgstr "Modification du mail %s"
+msgid "Edit the mailbox <b>%s</b>"
+msgstr "Modification du mail <b>%s</b>"
 
 #: ../admin/mail_edit.php:62 ../admin/mail_edit.php:69
 msgid "Change this mailbox"
@@ -1488,7 +1488,7 @@ msgstr "Ajouter plusieurs emails sur <b>%s</b>"
 #: ../admin/mail_list.php:76 ../admin/mail_list.php:78
 #, php-format
 msgid "All"
-msgstr "Tout"
+msgstr "Tous"
 
 #: ../admin/mail_list.php:88 ../admin/sql_list.php:53 ../admin/sql_list.php:49
 msgid "Size"
@@ -2713,3 +2713,88 @@ msgstr "Impossible de modifier la politique de mot de passe, une erreur est appa
 
 #~ msgid "<-No Password->"
 #~ msgstr "<-Aucun mot de passe->"
+
+msgid "Show this folder's content in the File Browser"
+msgstr "Afficher le contenu de ce dossier dans le Gestionnaire de Fichiers"
+
+msgid "Adding an authorized user"
+msgstr "Ajout d'un utilisateur autorisé"
+
+msgid "Change this user's password"
+msgstr "Changer le mot de passe de cet utilisateur"
+
+msgid "Do you want to point this domain to another domain already installed in your account?"
+msgstr "Voulez-vous pointer ce domaine sur un autre déjà installé sur votre compte ?"
+
+msgid "No: This domain will have its own folder."
+msgstr "Non : ce domaine aura son propre dossier."
+
+msgid "Yes, redirect this new domain to this one:"
+msgstr "Oui, redirigez ce nouveau domaine vers ce domaine existant :"
+
+msgid "-- Choose a domain --"
+msgstr "-- Choisir un nom de domaine --"
+
+msgid "Subdomain"
+msgstr "Sous-domaine"
+
+msgid "Place"
+msgstr "Emplacement"
+
+msgid "Add this subdomain"
+msgstr "Ajouter ce sous-domaine"
+
+msgid "Choose a folder..."
+msgstr "Choisir un répertoire ..."
+
+msgid "Send one file:"
+msgstr "Envoyer un fichier:"
+
+msgid "New file or folder:"
+msgstr "Créer un fichier ou un dossier:"
+
+msgid "Send this file"
+msgstr "Envoyer ce fichier"
+
+msgid "Filename"
+msgstr "Nom du fichier"
+
+msgid "To"
+msgstr "Vers"
+
+msgid "Last modification"
+msgstr "Dernière modification"
+
+msgid "File Type"
+msgstr "Type de fichier"
+
+msgid "Show size of directories"
+msgstr "Afficher la taille des répertoires"
+
+msgid "(slow)"
+msgstr "(lent)"
+
+msgid "Edit this folder's restrictions"
+msgstr "Modifier les restriction dans ce dossier"
+
+msgid "with a login and a password"
+msgstr "utilisant un nom d'utilisateur et un mot de passe"
+
+msgid "Download this folder"
+msgstr "Télécharger ce dossier"
+
+msgid "as a %s file"
+msgstr "comme fichier %s"
+
+msgid "Show only mail starting by:"
+msgstr "N'afficher que les mails commençant par :"
+
+
+msgid "Delete %s from this server"
+msgstr "Effacer le domaine %s de ce serveur"
+
+msgid "Folder where we will put the log file:"
+msgstr "Dossier qui accueillera vos logs :"
+
+msgid "Domain name:"
+msgstr "Nom de domaine :"

@@ -29,7 +29,13 @@
 */
 require_once("../class/config.php");
 
-$r=$sta2->add_stats_raw($hostname,$folder);
+$fields = array (
+	"hostname"    => array ("post", "string", ""),
+	"dir"          => array ("post", "string", ""),
+);
+getFields($fields);
+
+$r=$sta2->add_stats_raw($hostname,$dir);
 if (!$r) {
 	$error=$err->errstr();
 	include("sta2_add_raw.php");

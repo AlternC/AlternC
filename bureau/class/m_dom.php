@@ -389,7 +389,7 @@ class m_dom {
     }
     // pour ajouter un nouveau TLD, utiliser le code ci-dessous.
     //	echo "serveur : $serveur <br />";
-    if (($fp=fsockopen($serveur, 43))>0) {
+    if (($fp=@fsockopen($serveur, 43))>0) {
       fputs($fp, "$egal$domain\r\n");
       $found = false;
       $state=0;

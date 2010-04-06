@@ -142,7 +142,7 @@ if ($c===false) $error=$err->errstr();
 <?php if ($error) echo "<font color=\"red\">$error</font>"; ?>
 
 <table><tr>
-<td valign="top" style="border: 1px solid #aaa; padding: 10px">
+<td class="formcell">
 
      <form action="bro_main.php" enctype="multipart/form-data" method="post">
      <input type="hidden" name="R" value="<?php echo $R; ?>" />
@@ -158,7 +158,7 @@ if ($c===false) $error=$err->errstr();
 
 </td>
 <td style="width: 20px">&nbsp;</td>
-<td valign="top" style="border: 1px solid #aaa; padding: 10px">
+<td class="formcell">
 
 <?php __("New file or folder:"); ?><br />
 <form action="bro_main.php" method="post" name="nn" id="nn">
@@ -281,11 +281,15 @@ document.write("<input type=\"checkbox\" value=\"1\" class=\"inb\" onclick=\"Che
 //  -->
 </script>
 </th>
+<?php if ($p["showicons"]) { ?>
 <th></th>
+      <?php } ?>
 <th><?php __("Filename"); ?></th>
 <th><?php __("Size"); ?></th>
 <th><?php __("Last modification"); ?></th>
+<?php if ($p["showtype"]) { ?>
 <th><?php __("File Type"); ?></th>
+				 <?php } ?>
 <th></th>
 </tr>
 <?php
@@ -527,10 +531,10 @@ else {
 </p><p>
 <span class="ina"><?php
 if ($hta->is_protected($R)) {
-echo "<a href=\"hta_edit.php?dir=$R\">"._("Edit this folder's restrictions")."</a>";
+echo "<a href=\"hta_edit.php?dir=".(($R)?$R:"/")."\">"._("Edit this folder's restrictions")."</a>";
 }
 else {
-echo "<a href=\"hta_add.php?value=$R\">"._("Protect this folder")."</a>";
+  echo "<a href=\"hta_add.php?value=".(($R)?$R:"/")."\">"._("Protect this folder")."</a>";
 }
 ?></span> <?php __("with a login and a password"); ?>
 </p><p>

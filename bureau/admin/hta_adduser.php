@@ -23,7 +23,7 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file: Franck Missoum
+ Original Author of file: Franck Missoum, Benjamin Sonntag
  Purpose of file: Add a username to a protected folder
  ----------------------------------------------------------------------
 */
@@ -61,10 +61,10 @@ getFields($fields);
 		<td><label for="passwordconf"><?php __("Confirm password"); ?></label></td>
 		<td><input type="password" class="int" name="passwordconf" id="passwordconf" value="" size="20" maxlength="64" /></td>
 	</tr>
-	<tr>
-		<td colspan="2"><input type="submit" class="inb" value="<?php __("Add this user"); ?>" /></td>
-	</tr>
 </table>
+<br />
+<input type="submit" class="inb" value="<?php __("Add this user"); ?>" />
+  <input type="button" class="inb" value="<?php __("Cancel"); ?>" onclick="document.location='hta_edit.php?dir=<?php echo urlencode($dir);  ?>';" />
 </form>
 <script type="text/javascript">
 document.forms['main'].user.focus();

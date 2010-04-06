@@ -52,13 +52,13 @@ if (!$id) {
 <form method="post" action="sta2_doedit_raw.php" id="main" name="main">
 <table border="1" cellspacing="0" cellpadding="4">
 <tr><th><input type="hidden" name="id" value="<?php echo $id ?>" />
-        <?php __("Domain name"); ?></th><td>
+        <?php __("Domain name:"); ?></th><td>
 	<?php echo $r["hostname"]; ?>
 </td></tr>
-<tr><th><label for="folder"><?php __("Folder"); ?></label></th><td><input type="text" class="int" name="folder" id="folder" value="<?php echo $r["folder"]; ?>" size="20" maxlength="255" />
+<tr><th><label for="dir"><?php __("Folder where we will put the log file:"); ?></label></th><td><input type="text" class="int" name="dir" id="dir" value="<?php echo $r["folder"]; ?>" size="20" maxlength="255" />
 <script type="text/javascript">
 <!--
-  document.write("&nbsp;<input type=\"button\" name=\"bff\" onclick=\"browseforfolder('main.folder');\" value=\" ... \" class=\"inb\" />");
+  document.write("&nbsp;<input type=\"button\" name=\"bff\" class=\"bff\" onclick=\"browseforfolder('main.dir');\" value=\" <?php __("Choose a folder..."); ?> \" />");
 //  -->
 </script>
 </td></tr>

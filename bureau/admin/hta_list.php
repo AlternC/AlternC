@@ -61,8 +61,8 @@ $mem->show_help("hta_list2");
 </p>
 
 <form method="post" action="hta_del.php">
-<table cellspacing="0" cellpadding="4">
-<tr><th colspan="2">&nbsp;</th><th><?php __("Folder"); ?></th></tr>
+<table class="tlist">
+  <tr><th colspan="2"><?php __("Actions"); ?></th><th><?php __("Folder"); ?></th></tr>
 <?php
 $col=1;
 
@@ -72,18 +72,20 @@ for($i=0;$i<count($r);$i++){
 ?>
 	<tr  class="lst<?php echo $col; ?>">
 		<td align="center"><input type="checkbox" class="inc" name="del_<?php echo $r[$i] ?>" value="<?php echo $r[$i] ?>" /></td>
-		<td><a href="hta_edit.php?dir=<?php echo $r[$i]?>"><img src="images/edit.png" alt="<?php __("Edit"); ?>" /></a></td>
+		<td>
+<div class="ina"><a href="hta_edit.php?dir=<?php echo $r[$i]?>"><img src="icon/encrypted.png" alt="<?php __("Edit login and passwords"); ?>" /><?php __("Edit login and passwords"); ?></a></div>
+</td>
 		<td><code><?php echo "$r[$i]"?></code></td>
 	</tr>
     <?php
 	}
 ?>
-<tr><td colspan="3"><input type="submit" class="inb" name="submit" value="<?php __("Unprotect the checked folders"); ?>" /></td></tr>
 </table>
+<br />
+<input type="submit" class="inb" name="submit" value="<?php __("Unprotect the checked folders"); ?>" />
+			<span class="inb"><a href="hta_add.php"><?php __("Protect a folder"); ?></a></span>
 </form>
-<p>
-<a href="hta_add.php"><?php __("Protect a folder"); ?></a>
-</p>
+
 <p>
 <?php $mem->show_help("hta_list"); ?>
 </p>

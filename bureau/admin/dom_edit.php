@@ -69,7 +69,7 @@ function dnsoff() {
 <!-- *****************************************
 		 gestion des sous-domaines
  -->
-<table cellspacing="0" cellpadding="3">
+<table class="tlist">
 <tr><th colspan="2"><?php __("Actions"); ?></th><th><?php __("Subdomain"); ?></th><th><?php __("Place"); ?></th></tr>
 <?php
 $col=1;
@@ -79,6 +79,7 @@ for($i=0;$i<$r["nsub"];$i++) {
 	<tr class="lst<?php echo $col; ?>">
 		<td class="center">
 			<div class="ina"><a href="dom_subedit.php?domain=<?php echo urlencode($r["name"]) ?>&amp;sub=<?php  echo urlencode($r["sub"][$i]["name"]) ?>"><img src="images/edit.png" alt="<?php __("Edit"); ?>" /><?php __("Edit"); ?></a></div>
+
 			</td><td class="center">
 			<div class="ina"><a href="dom_subdel.php?domain=<?php echo urlencode($r["name"]) ?>&amp;sub=<?php  echo urlencode($r["sub"][$i]["name"]) ?>"><img src="images/delete.png" alt="<?php __("Delete"); ?>" /><?php __("Delete"); ?></a></div>
 		</td>
@@ -90,7 +91,7 @@ for($i=0;$i<$r["nsub"];$i++) {
 <br />
 <hr/>
 <br />
-<form action="dom_subdoedit.php?" method="post" name="main" id="main">
+<form action="dom_subdoedit.php" method="post" name="main" id="main">
 	<table border="0">
 		<tr>
 			<td colspan="2">

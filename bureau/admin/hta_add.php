@@ -33,7 +33,7 @@ include_once("head.php");
 ?>
 <h3><?php __("Protect a folder"); ?></h3>
 <p>
-<?php __("The folder must exists."); ?>
+<?php __("Enter the name of the folder you want to protect. It must already exists."); ?>
 </p>
 <?php
 	if ($error) {
@@ -46,15 +46,17 @@ include_once("head.php");
 <table border="1" cellspacing="0" cellpadding="4">
 <tr>
 	<td><label for="dir"><?php __("Folder"); ?></label></td>
-	<td><input type="text" class="int" name="dir" id="dir" value="<?php echo $value ?>" size="20" maxlength="64" />
+	<td><input type="text" class="int" name="dir" id="dir" value="<?php echo $value ?>" maxlength="255" />
 <script type="text/javascript">
 <!--
-  document.write("&nbsp;<input type=\"button\" name=\"bff\" onclick=\"browseforfolder('main.dir');\" value=\" ... \" class=\"inb\">");
+  document.write("&nbsp;<input type=\"button\" name=\"bff\" onclick=\"browseforfolder('main.dir');\" value=\" <?php __("Choose a folder..."); ?> \" class=\"bff\">");
 //  -->
-</script></td>
+</script>
+</td>
 </tr>
-<tr><td colspan="2"><input type="submit" class="inb" value="<?php __("Protect this folder"); ?>" /></td></tr>
 </table>
+<br />
+<input type="submit" class="inb" value="<?php __("Protect this folder"); ?>" />
 </form>
 <script type="text/javascript">
 document.forms['main'].dir.focus();

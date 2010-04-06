@@ -45,7 +45,7 @@ echo "<p>"._("help_sql_list_ok")."</p>";
 ?>
 
 <form method="post" action="sql_del.php" name="main" id="main">
-<table cellspacing="0" cellpadding="4">
+<table class="tlist">
    <tr><th>&nbsp;</th><th><?php __("Database"); ?></th><th><?php __("Backup"); ?></th><th><?php __("Restore"); ?></th><th><?php __("Size"); ?></th></tr>
 
 <?php
@@ -58,8 +58,8 @@ for($i=0;$i<count($r);$i++) {
 	<tr  class="lst<?php echo $col; ?>">
 		<td align="center"><input type="checkbox" class="inc" id="del_<?php echo $val["name"]; ?>" name="del_<?php echo $val["name"]; ?>" value="<?php echo $val["name"]; ?>" /></td>
 	   <td><label for="del_<?php echo $val["name"]; ?>"><?php echo $val["db"]; ?></label></td>
-		<td><a href="sql_bck.php?id=<?php echo $val["name"] ?>"><?php __("Backup"); ?></a></td>
-		<td><a href="sql_restore.php?id=<?php echo $val["name"] ?>"><?php __("Restore"); ?></a></td>
+		<td><div class="ina"><a href="sql_bck.php?id=<?php echo $val["name"] ?>"><?php __("Backup"); ?></a></div></td>
+		<td><div class="ina"><a href="sql_restore.php?id=<?php echo $val["name"] ?>"><?php __("Restore"); ?></a></div></td>
 		<td><code><?php echo format_size($val["size"]); ?></code></td>
 	</tr>
 <?php

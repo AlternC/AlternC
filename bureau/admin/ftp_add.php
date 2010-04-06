@@ -47,7 +47,7 @@ if (!$quota->cancreate("ftp")) {
 	}
 ?>
 <form method="post" action="ftp_doadd.php" name="main" id="main">
-<table><thead><?php __("Create a new ftp account"); ?></thead>
+<table>
 <tr><th><input type="hidden" name="id" value="<?php echo $id ?>" />
 <label for="login"><?php __("Username"); ?></label></th><td>
 	<select class="inl" name="prefixe"><?php $ftp->select_prefix_list($prefixe); ?></select>&nbsp;<b>_</b>&nbsp;<input type="text" class="int" name="login" id="login" value="<?php echo $login; ?>" size="20" maxlength="64" />

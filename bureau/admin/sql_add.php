@@ -47,11 +47,12 @@ if (!$quota->cancreate("mysql")) {
 	}
 ?>
 <form method="post" action="sql_doadd.php" id="main">
-<table border="1" cellspacing="0" cellpadding="4">
+<table class="tedit">
 <tr><th><label for="dbn"><?php __("Database"); ?></label></th><td>
 	<?php echo $mem->user["login"]; ?>&nbsp;<b>_</b>&nbsp;<input type="text" class="int" name="dbn" id="dbn" value="<?php echo $dbn; ?>" size="20" maxlength="30" />
 </td></tr>
-<tr><td colspan="2"><input type="submit" class="inb" name="submit" value="<?php __("Create this new database."); ?>" /></td></tr>
 </table>
+<br />
+<input type="submit" class="inb" name="submit" value="<?php __("Create this new database."); ?>" />
 </form>
 <?php include_once("foot.php"); ?>

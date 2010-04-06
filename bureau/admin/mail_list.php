@@ -51,9 +51,12 @@ if(!$res=$mail->enum_doms_mails($domain,1,$letter)) {
 if ($error) {
   echo "<p class=\"error\">$error</p>";
 }
-echo "<p><a href=\"mail_add.php?domain=$domain\">".sprintf(_("Add a mailbox on <b>%s</b>"),$domain)."</a><br />";
-echo "   <a href=\"mail_add.php?many=1&amp;domain=$domain\">".sprintf(_("Add many mailboxes on <b>%s</b>"),$domain)."</a></p>";
-
+?>
+<p>
+  <span class="inb"><a href="mail_add.php?domain=<?php echo $domain; ?>"><?php printf(_("Add a mailbox on <b>%s</b>"),$domain); ?></a></span> 
+  <span class="inb"><a href="mail_add.php?many=1&amp;domain=<?php echo $domain; ?>"><?php printf(_("Add many mailboxes on <b>%s</b>"),$domain); ?></a></span>
+</p>
+<?
 }
 else
 {
@@ -64,37 +67,47 @@ else
 if ($error) {
   echo "<p class=\"error\">$error</p>";
 }
-
-echo "<p><a href=\"mail_add.php?domain=$domain\">".sprintf(_("Add a mailbox on <b>%s</b>"),$domain)."</a><br />";
-echo "   <a href=\"mail_add.php?many=1&amp;domain=$domain\">".sprintf(_("Add many mailboxes on <b>%s</b>"),$domain)."</a></p>";
+?>
+<p>
+  <span class="inb"><a href="mail_add.php?domain=<?php echo $domain; ?>"><?php printf(_("Add a mailbox on <b>%s</b>"),$domain); ?></a></span> 
+  <span class="inb"><a href="mail_add.php?many=1&amp;domain=<?php echo $domain; ?>"><?php printf(_("Add many mailboxes on <b>%s</b>"),$domain); ?></a></span>
+</p>
+<?php
 
 if(!$letters=$mail->enum_doms_mails_letters($domain))
   $error=$err->errstr();
 else{
+  echo "<p>";
+  __("Show only mail starting by:"); 
+  echo " ";
   for($i=0;$i<count($letters);$i++){
     $val=$letters[$i];
     echo "   <a href=\"mail_list.php?domain=$domain&amp;letter=$val\">$val&nbsp;</a>";
   }
   echo "   <a href=\"mail_list.php?domain=$domain\">".sprintf(_("All"))."</a>";
+  echo "</p>";
 }
 
  if ($res["count"]) {
 ?>
 <form method="post" action="mail_del.php" id="main">
 
-<table cellspacing="0" cellpadding="4">
+<table class="tlist">
 
-<tr><th><input type="hidden" name="domain" value="<?php echo $domain ?>"/>
-<?php __("Delete"); ?></th><th><?php __("Email address"); ?></th><th><?php __("Action"); ?></th><th><?php __("Size"); ?></th></tr>
+<tr><th colspan="2"><input type="hidden" name="domain" value="<?php echo $domain ?>"/>
+<?php __("Actions"); ?></th><th><?php __("Email address"); ?></th><th><?php __("Size"); ?></th></tr>
 <?php
 $col=1;
 for($i=0;$i<$res["count"];$i++) {
 	$col=3-$col;
 	$val=$res[$i];
 	echo "<tr class=\"lst$col\">";
-	echo "<td align=\"center\"><input class=\"inc\" type=\"checkbox\" id=\"del_$i\" name=\"d[]\" value=\"".$val["mail"]."\" /></td>
-	<td><label for=\"del_$i\">".$val["mail"]."</label></td>
-	<td class=\"center\"><a href=\"mail_edit.php?email=".urlencode($val["mail"])."&amp;domain=".urlencode($domain)."\"><img src=\"images/edit.png\" alt=\""._("Edit")."\" /></a></td>";
+	echo "<td align=\"center\"><input class=\"inc\" type=\"checkbox\" id=\"del_$i\" name=\"d[]\" value=\"".$val["mail"]."\" /></td>";
+?>
+<td><div class="ina"><a href="mail_edit.php?email=<?php echo urlencode($val["mail"]);  ?>&amp;domain=<?php echo urlencode($domain); ?>"><img src="images/edit.png" alt="<?php __("Edit"); ?>" /><?php __("Edit"); ?></a></div></td>
+
+<?php
+	echo "<td><label for=\"del_$i\">".$val["mail"]."</label></td>";
 	if ($val["pop"]) {
 		echo "<td>".format_size($val["size"])."</td>";
 	} else {
@@ -104,8 +117,9 @@ for($i=0;$i<$res["count"];$i++) {
 
 }
 ?>
-<tr><td colspan="5"><input type="submit" class="inb" name="submit" value="<?php __("Delete the selected mailboxes"); ?>" /></td></tr>
 </table>
+<br />
+<input type="submit" class="inb" name="submit" value="<?php __("Delete the selected mailboxes"); ?>" />
 </form>
 
 <?php

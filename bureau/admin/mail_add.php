@@ -49,7 +49,7 @@ if ($error) {
 <table border="1" cellspacing="0" cellpadding="4">
 	<tr><td><input type="hidden" name="domain" value="<?php echo $domain ?>" />
 <label for="email"><?php __("Email address"); ?></label></td><td><input class="int" type="text" name="email" id="email" value="<?php echo $email ?>" size="20" maxlength="32" />@<?php echo $domain ?></td></tr>
-	<tr><td><label for="ispop"><?php __("Is it a POP account?"); ?></label></td><td><input id="ispop" class="inc" type="checkbox" name="pop" value="1" <?php if ($pop=="1") echo "checked=\"checked\""; ?> /></td></tr>
+	<tr><td><label for="ispop"><?php __("Is it a POP/IMAP account?"); ?></label></td><td><input id="ispop" class="inc" type="checkbox" name="pop" value="1" <?php if ($pop=="1") echo "checked=\"checked\""; ?> /></td></tr>
 	<tr><td><label for="pass"><?php __("POP password"); ?></label></td><td><input class="int" type="password" name="pass" id="pass" value="<?php echo $pass; ?>" size="20" maxlength="32" /></td></tr>
 	<tr><td><label for="passconf"><?php __("Confirm password"); ?></label></td><td><input class="int" type="password" name="passconf" id="passconf" value="<?php echo $pass; ?>" size="20" maxlength="32" /></td></tr>
 	<tr><td><label for="alias"><?php __("Other recipients"); ?></label></td><td>(<?php __("One email per line"); ?>)<br /><textarea class="int" cols="32" rows="5" name="alias" id="alias"><?php echo $alias; ?></textarea></td></tr>
