@@ -854,7 +854,7 @@ EOF;
   /** Check all the domains for their NS MX and IPs
    */
   function checkalldom() {
-    global $L_NS1,$L_NS2,$L_MX,$L_PUBLIC_IP;
+    global $db,$L_NS1,$L_NS2,$L_MX,$L_PUBLIC_IP;
     $checked=array();
     $r=$db->query("SELECT * FROM domaines ORDER BY domaine;");
     $dl=array();
@@ -875,7 +875,7 @@ EOF;
 	if (count($out)==0) {
 	  $dontexist=true;
 	} else {
-	  if (!in_array($L_NS1,$out) || !in_array($L_NS2,$out)) {
+	  if (!in_array($L_NS1.".",$out) || !in_array($L_NS2.".",$out)) {
 	    $errno=1; $errstr.="NS for this domain are not $L_NS1 and $L_NS2 BUT ".implode(",",$out)."\n";
 	  }
 	}
@@ -887,7 +887,7 @@ EOF;
 	foreach($out as $o) {
 	  list($t,$out2[])=explode(" ",$o);
 	}
-	if (!in_array($L_MX,$out2)) {
+	if (!in_array($L_MX.".",$out2)) {
 	  $errno=1; $errstr.="MX is not $L_MX BUT ".implode(",",$out2)."\n";
 	}
       }

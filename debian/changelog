@@ -1,4 +1,4 @@
-alternc (0.9.10~rc1) stable; urgency=low
+alternc (1.0~rc1) stable; urgency=low
 
   * new features:
     * removed the dependency on postgrey, added dnsutils (for domain checks)
@@ -30,7 +30,7 @@ alternc (0.9.10~rc1) stable; urgency=low
   * Major patch
     * Blue desktop using only css, no frameset etc
     * Sanitizing of get/request/post parameters
-
+	
  -- Benjamin Sonntag <benjamin@alternc.org>  Sat, 12 May 2009 17:55:30 +0200
 
 alternc (0.9.9) stable; urgency=low
