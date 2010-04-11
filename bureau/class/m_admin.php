@@ -197,7 +197,7 @@ class m_admin {
       return false;
     }
     $db=new DB_System();
-    if ($mem->user['uid']==2000 && $creator) {
+    if ($creator) {
       // Limit listing to a specific reseller
       $db->query("SELECT uid FROM membres WHERE creator='".$creator."' ORDER BY login;");
     } elseif ($mem->user['uid']==2000 || $all) {
@@ -214,6 +214,7 @@ class m_admin {
       return false;
     }
   }
+
 
   /**
    * Returns an array with the known information about resellers (uid, login, number of accounts)

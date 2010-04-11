@@ -40,17 +40,20 @@ if (!$admin->enabled) {
 
 $fields = array (
 	"show"    => array ("request", "string", ""),
-	"creator_id" => array("request", "integer", 2000),
+	"creator" => array("request", "integer", 0),
 );
 getFields($fields);
 
-if ($show && $cuid != 2000)
+$subadmin=variable_get("subadmin_restriction");
+
+if ($subadmin==0 && $show && $cuid != 2000)
 {
 	__("This page is restricted to authorized staff");
 	exit();
 }
 
-$r=$admin->get_list($show == 'all' ? 1 : 0, $creator_id);
+
+$r=$admin->get_list($show == 'all' ? 1 : 0, $creator);
 
 ?>
 <h3><?php __("Member list"); ?></h3>
@@ -64,12 +67,12 @@ $r=$admin->get_list($show == 'all' ? 1 : 0, $creator_id);
 &nbsp;
 <?php if($_REQUEST['show'] != 'all') {
   echo '<br /><a href="adm_list.php?show=all">' . _('List all the accounts') . '</a>';
-  if ($cuid == 2000) {
+  if ($subadmin!=0 || $cuid==2000) {
     $list_creators = $admin->get_creator_list();
     $infos_creators = array();
 
     foreach ($list_creators as $key => $val) {
-      $infos_creators[] = '<a href="adm_list.php?show_all&creator=' . $val['uid'] . '">' . $val['login'] . '</a>';
+      $infos_creators[] = '<a href="adm_list.php?creator=' . $val['uid'] . '">' . $val['login'] . '</a>';
     }
 
     if (count($infos_creators)) {
@@ -117,7 +120,6 @@ while (list($key,$val)=each($r))
 ?>
 	<tr class="lst<?php echo $col; ?>">
 <?php
-		  if($admin->checkcreator($val['uid'])) {
  if ($val["su"]) { ?>
 			<td>&nbsp;</td>
 <?php } else { ?>
@@ -130,16 +132,11 @@ while (list($key,$val)=each($r))
 		if (!$val["enabled"])
 			echo "<img src=\"icon/encrypted.png\" width=\"16\" height=\"16\" alt=\""._("Locked Account")."\" />";
 		else {
-		  if($admin->checkcreator($val['uid'])) {
 		?>
 			<a href="adm_login.php?id=<?php echo $val["uid"];?>"><?php __("Connect as"); ?></a>
-		<?php } } ?>
+		<?php } ?>
 		</td>
-		    <?php
-		    } else { 
-		      echo "<td colspan=\"5\"></td>"; 
-		    }
- ?>
+
 		<td <?php if ($val["su"]) echo "style=\"color: red\""; ?>><?php echo $val["login"] ?></td>
 		<td><a href="mailto:<?php echo $val["mail"]; ?>"><?php echo $val["nom"]." ".$val["prenom"] ?></a>&nbsp;</td>
 		<td><?php echo $val["parentlogin"] ?></td>

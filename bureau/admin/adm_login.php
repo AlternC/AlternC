@@ -39,7 +39,9 @@ $fields = array (
 );
 getFields($fields);
 
-if (!$admin->checkcreator($id)) {
+$subadmin=variable_get("subadmin_restriction");
+
+if ($subadmin==0 && !$admin->checkcreator($id)) {
   __("This page is restricted to authorized staff");
   exit();
 }
