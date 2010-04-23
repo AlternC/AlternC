@@ -49,5 +49,5 @@ Note: vous pouvez aussi installer les modules additionnels d'AlternC par
 la suite. Pour plus d'information, rendez-vous sur le serveur de 
 développement à l'adresse : 
 
-	https://dev.alternc.org/trac/alternc/
+	https://alternc.org/
 
