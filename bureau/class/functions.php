@@ -412,5 +412,87 @@ function eoption($values,$cur,$info="") {
   }
 }
 
+/* ECHOes checked="checked" only if the parameter is true
+ * useful for checkboxes and radio buttons
+ */
+function checked($bool) {
+  if ($bool) {
+    echo " checked=\"checked\"";
+  }
+}
+
+/* ECHOes selected="selected" only if the parameter is true
+ * useful for checkboxes and radio buttons
+ */
+function selected($bool) {
+  if ($bool) {
+    echo " selected=\"selected\"";
+  }
+}
+
+/* Echo the HTMLSpecialChars version of a value. 
+ * Must be called when pre-filling fields values in forms such as : 
+ * <input type="text" name="toto" value="<?php ehe($toto); ?>" />
+ * Use the charset of the current language for transcription
+ */
+function ehe($str) {
+  global $charset;
+  echo htmlspecialchars($str,ENT_COMPAT,$charset); 
+}
+
+
+/* Get the Fields of the posted form from $_REQUEST or POST or GET
+ * and check their type
+ */
+function getFields($fields, $requestOnly = false) {
+  $vars = array();
+  $methodType = array ("get", "post", "request", "files");
+  
+  foreach ($fields AS $name => $options) {
+    if (in_array($options[0], $methodType) === false)
+      die ("Illegal method type used for field " . $name . " : " . $options[0]);
+    
+    if ($requestOnly === true)
+      $method = "_REQUEST";
+    else
+      $method = "_" . strtoupper($options[0]);
+    
+    switch ($options[1]) {
+    case "integer":
+      $vars[$name] = (isset($GLOBALS[$method][$name]) && is_numeric($GLOBALS[$method][$name]) ? intval($GLOBALS[$method][$name]) : $options[2]);
+      break;
+    case "float":
+      $vars[$name] = (isset($GLOBALS[$method][$name]) && is_numeric($GLOBALS[$method][$name]) ? floatval($GLOBALS[$method][$name]) : $options[2]);
+      break;
+    case "string":
+      $vars[$name] = (isset($GLOBALS[$method][$name]) ? trim($GLOBALS[$method][$name]) : $options[2]);
+      break;
+    case "array":
+      $vars[$name] = (isset($GLOBALS[$method][$name]) && is_array($GLOBALS[$method][$name]) ? $GLOBALS[$method][$name] : $options[2]);
+      break;
+    case "boolean":
+      $vars[$name] = (isset($GLOBALS[$method][$name]) ? $GLOBALS[$method][$name] : $options[2]);
+      break;
+    case "file":
+      $vars[$name] = (isset($GLOBALS[$method][$name]) ? $GLOBALS[$method][$name] : $options[2]);
+      break;
+    default:
+      die ("Illegal method type used for field " . $name . " : " . $options[1]);
+    }
+  }
+  
+  // Insert into $GLOBALS. FIXME : Use stripslashes if the magic_quotes_gpc is ON !
+  foreach ($vars AS $var => $value)
+    $GLOBALS[$var] = $value;
+  
+  return $vars;
+}
+
+function printVar($array) {
+  echo "<pre style=\"border: 1px solid black; text-align: left; font-size: 9px\">\n";
+  print_r($array);
+  echo "</pre>\n";
+}
+
 
 ?>

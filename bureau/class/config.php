@@ -78,7 +78,6 @@ require_once($root."class/local.php");
 
 require_once($root."class/db_mysql.php");
 require_once($root."class/functions.php");
-require_once($root."class/functions2.php");
 require_once($root."class/variables.php");
 
 // Redirection si appel à https://(!fqdn)/

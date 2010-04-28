@@ -271,6 +271,12 @@ class m_mail {
       $err->raise("mail",15);
       return false;
     }
+    // Check this password against the password policy using common API : 
+    if (is_callable(array($admin,"checkPolicy"))) {
+      if (!$admin->checkPolicy("pop",$email."@".$dom,$pass)) {
+	return false; // The error has been raised by checkPolicy()
+      }
+    }
     if (!$this->_updatepop($email,$dom,$pass)) {
       return false;
     }
@@ -357,6 +363,12 @@ class m_mail {
       }
     }
     if ($pop=="1" && $oldpop==1 && $pass!="") { /* POP Account Edition */
+      // Check this password against the password policy using common API : 
+      if (is_callable(array($admin,"checkPolicy"))) {
+	if (!$admin->checkPolicy("pop",$email."@".$dom,$pass)) {
+	  return false; // The error has been raised by checkPolicy()
+	}
+      }
       if (!$this->_updatepop($email,$dom,$pass)) {
 	return false;
       }

@@ -424,7 +424,7 @@ msgstr "Compte verrouillé"
 
 #: ../admin/adm_list.php:103 ../admin/adm_list.php:135
 msgid "Connect as"
-msgstr "Connecter"
+msgstr "Connection"
 
 #: ../admin/adm_list.php:153 ../admin/adm_list.php:174
 #: ../admin/adm_list.php:199 ../admin/adm_list.php:185
@@ -1356,12 +1356,12 @@ msgstr "Ajout d'un mail sur le domaine %s"
 #: ../admin/mail_add.php:49 ../admin/mail_edit.php:58 ../admin/mail_add.php:52
 #: ../admin/mail_edit.php:65
 msgid "Is it a POP/IMAP account?"
-msgstr "Est-ce un compte POP/IMAP ?"
+msgstr "Est-ce un compte POP/IMAP&nbsp;?"
 
 #: ../admin/mail_add.php:50 ../admin/mail_edit.php:59 ../admin/mail_add.php:53
 #: ../admin/mail_edit.php:66
-msgid "POP password"
-msgstr "Mot de passe POP"
+msgid "POP/IMAP password"
+msgstr "Mot de passe POP/IMAP"
 
 #: ../admin/mail_add.php:52 ../admin/mail_edit.php:61 ../admin/mail_add.php:55
 #: ../admin/mail_edit.php:68
@@ -1370,7 +1370,7 @@ msgstr "Autres destinataires"
 
 #: ../admin/mail_add.php:52 ../admin/mail_edit.php:61 ../admin/mail_add.php:55
 #: ../admin/mail_edit.php:68
-msgid "One email per line"
+msgid "one email per line"
 msgstr "un email par ligne"
 
 #: ../admin/mail_add.php:53 ../admin/mail_add.php:56
@@ -1438,17 +1438,17 @@ msgstr "Le mail <b>%s</b> a été modifié avec succès"
 
 #: ../admin/mail_edit.php:41 ../admin/mail_edit.php:48
 #, php-format
-msgid "Edit a mailbox of the domain %s"
-msgstr "Modification d'un email du domaine %s"
+msgid "Edit an email address of the domain %s"
+msgstr "Modification d'une adresse email du domaine %s"
 
 #: ../admin/mail_edit.php:57 ../admin/mail_edit.php:64
 #, php-format
-msgid "Edit the mailbox <b>%s</b>"
-msgstr "Modification du mail <b>%s</b>"
+msgid "Edit the email address <b>%s</b>"
+msgstr "Modification de l'adresse email <b>%s</b>"
 
 #: ../admin/mail_edit.php:62 ../admin/mail_edit.php:69
-msgid "Change this mailbox"
-msgstr "Modifier cet email"
+msgid "Change this email address"
+msgstr "Modifier cette adresse email"
 
 #: ../admin/mail_edit.php:66 ../admin/mail_edit.php:73
 msgid "help_mail_edit"
@@ -1470,8 +1470,8 @@ msgstr ""
 #: ../admin/mail_list.php:42 ../admin/mail_list.php:60
 #: ../admin/mail_list.php:49 ../admin/mail_list.php:62
 #, php-format
-msgid "Mailbox list of the domain %s"
-msgstr "Liste des emails du domaine %s"
+msgid "Email addresses of the domain %s"
+msgstr "Liste des adresses emails du domaine %s"
 
 #: ../admin/mail_list.php:47 ../admin/mail_list.php:66
 #: ../admin/mail_list.php:54 ../admin/mail_list.php:68
@@ -1706,8 +1706,8 @@ msgstr "Comptes FTP"
 
 #: ../admin/menu_mail.php:37 ../admin/menu_mail.php:36
 #: ../admin/menu_mail.php:40
-msgid "Mailboxes"
-msgstr "Comptes Mails"
+msgid "Email Addresses"
+msgstr "Adresses email"
 
 #: ../admin/menu_mem.php:32 ../admin/menu_mem.php:31
 msgid "Settings"
@@ -2505,8 +2505,8 @@ msgstr ""
 "now."
 
 #: ../admin/mail_edit.php:58 ../admin/mail_edit.php:65
-msgid "WARNING: turning POP off will DELETE the mailbox and its content"
-msgstr ""
+msgid "WARNING: turning POP/IMAP off will DELETE the stored messages in this email address. This email address will become a simple redirection."
+msgstr "ATTENTION&nbsp;: Choisir 'Non' ici supprimera les messages stockés dans cette adresse email. L'adresse email sera transformée en simple redirection."
 
 #: ../admin/main.php:62 ../admin/main.php:61
 msgid "Latest news"
@@ -2609,11 +2609,11 @@ msgstr "Adresse Email"
 
 #: ../admin/mail_del.php:83
 msgid ""
-"Warning: Deleting a mailbox will destroy all the emails it contains! You "
+"Warning: Deleting an email address will destroy all the messages it contains! You "
 "will <b>NOT</b> be able to get it back!"
 msgstr ""
-"Attention: L'effacement d'une boite aux lettres détruit tout son contenu ! "
-"Vous ne pourrez <b>PLUS</b> retrouver les mails ainsi effacés !"
+"Attention: L'effacement d'une adresse email détruit tous ses messages&nbsp;! "
+"Vous ne pourrez <b>PLUS</b> retrouver les messages ainsi effacés&nbsp;!"
 
 #: ../admin/menu.php:36
 msgid "Home / Information"
@@ -2652,19 +2652,19 @@ msgid "Complexity"
 msgstr "Complexité"
 
 msgid "Allow Password=Login?"
-msgstr "Autorise Mot de passe=Login ?"
+msgstr "Autorise Mot de passe=Login&nbsp;?"
 
 msgid "Please choose which policy you want to apply to this password kind:"
-msgstr "Merci de choisir la politique à appliquer à ce type de mot de passe : "
+msgstr "Merci de choisir la politique à appliquer à ce type de mot de passe&nbsp;:"
 
 msgid "Minimum Password Size:"
-msgstr "Taille minimale du mot de passe :"
+msgstr "Taille minimale du mot de passe&nbsp;:"
 
 msgid "Maximum Password Size:"
-msgstr "Taille maximale du mot de passe :"
+msgstr "Taille maximale du mot de passe&nbsp;:"
 
 msgid "In how many classes of characters must be the password (at least):"
-msgstr "Dans combien de classes de caractères doit être ce mot de passe (au minimum) :"
+msgstr "Dans combien de classes de caractères doit être ce mot de passe (au minimum)&nbsp;:"
 
 msgid "Do we allow the password to be like the login?"
 msgstr "Autorise-t-on le mot de passe à ressembler au nom d'utilisateur ?"
@@ -2724,13 +2724,13 @@ msgid "Change this user's password"
 msgstr "Changer le mot de passe de cet utilisateur"
 
 msgid "Do you want to point this domain to another domain already installed in your account?"
-msgstr "Voulez-vous pointer ce domaine sur un autre déjà installé sur votre compte ?"
+msgstr "Voulez-vous pointer ce domaine sur un autre déjà installé sur votre compte&nbsp;?"
 
 msgid "No: This domain will have its own folder."
 msgstr "Non : ce domaine aura son propre dossier."
 
 msgid "Yes, redirect this new domain to this one:"
-msgstr "Oui, redirigez ce nouveau domaine vers ce domaine existant :"
+msgstr "Oui, redirigez ce nouveau domaine vers ce domaine existant&nbsp;:"
 
 msgid "-- Choose a domain --"
 msgstr "-- Choisir un nom de domaine --"
@@ -2748,10 +2748,10 @@ msgid "Choose a folder..."
 msgstr "Choisir un répertoire ..."
 
 msgid "Send one file:"
-msgstr "Envoyer un fichier:"
+msgstr "Envoyer un fichier&nbsp;:"
 
 msgid "New file or folder:"
-msgstr "Créer un fichier ou un dossier:"
+msgstr "Créer un fichier ou un répertoire&nbsp;:"
 
 msgid "Send this file"
 msgstr "Envoyer ce fichier"
@@ -2794,7 +2794,21 @@ msgid "Delete %s from this server"
 msgstr "Effacer le domaine %s de ce serveur"
 
 msgid "Folder where we will put the log file:"
-msgstr "Dossier qui accueillera vos logs :"
+msgstr "Répertoire qui accueillera vos logs :"
 
 msgid "Domain name:"
 msgstr "Nom de domaine :"
+
+msgid "The domain OK column are green when the domain exists in the worldwide registry and has a proper NS,MX and IP depending on its configuration. It is red if we have serious doubts about its NS, MX or IP configuration. Contact the user of this domain or a system administrator."
+msgstr "La colonne OK? est verte quand le domaine existe dans le registre DNS mondial et que sa configuration IP, NS et MX est correcte. Il est rouge lorsque le serveur a de sérieux doutes sur sa configuration NS, MX ou IP. Vérifiez auprès du propriétaire de ce domaine, et si besoin contactez un administrateur système."
+
+msgid "If you want to force the check of NS, MX, IP on domains, click the link"
+msgstr "Si vous voulez forcer la vérification des NS,  MX et IP des domaines, cliquez le lien"
+
+msgid "Show domain list with refreshed checked NS, MX, IP information"
+msgstr "Afficher la liste des domaines avec des informations NS, MX et IP à jour."
+
+
+msgid "Redirections<br />Other recipients:"
+msgstr "Redirections/Autres destinataires&nbsp;:"
+

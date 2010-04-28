@@ -86,7 +86,7 @@ if (is_array($r)) {
 	<td><input type="text" class="int" name="bck_dir" id="bck_dir" size="30" maxlength="255" value="<?php echo $r["dir"]; ?>" />
 <script type="text/javascript">
 <!--
-  document.write("&nbsp;<input type=\"button\" name=\"bff\" class=\"bff\" onclick=\"browseforfolder('main.bck_dir');\" value=\" <?php __("Choose a folder..."); \" />");
+  document.write("&nbsp;<input type=\"button\" name=\"bff\" class=\"bff\" onclick=\"browseforfolder('main.bck_dir');\" value=\" <?php __("Choose a folder..."); ?> \" />");
 //  -->
 </script>
 </td>

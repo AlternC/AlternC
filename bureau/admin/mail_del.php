@@ -80,7 +80,7 @@ while (list($key,$val)=each($d)) {
 </p>
 
 <p>
-<?php __("Warning: Deleting a mailbox will destroy all the emails it contains! You will <b>NOT</b> be able to get it back!"); ?>
+<?php __("Warning: Deleting an email address will destroy all the messages it contains! You will <b>NOT</b> be able to get it back!"); ?>
 </p>
 
 </form>

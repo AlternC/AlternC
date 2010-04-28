@@ -37,7 +37,7 @@ if ($q["t"] > 0 && $r["u"] > 0) {
 ?>
 <div class="menu-box">
 <div class="menu-title">
-<img src="images/mail.png" alt="<?php __("Mailboxes"); ?>" />&nbsp;<?php __("Mailboxes"); ?> (<?= $q["u"]; ?>/<?= $q["t"]; ?>)</div>
+<img src="images/mail.png" alt="<?php __("Email Addresses"); ?>" />&nbsp;<?php __("Email Addresses"); ?> (<?= $q["u"]; ?>/<?= $q["t"]; ?>)</div>
 <div class="menu-content" id="menu-mail">
 <ul>
 <?php

@@ -109,3 +109,52 @@ function CheckAll() {
   }
 }
 
+function hide(s) {
+    if (document.all) {
+        if (document.all[s]) {
+            document.all[s].visibility="invisible";
+            eval("document.all."+s+".style.display=\"none\"");
+        }
+    } else {
+        if (document.getElementById(s)) {
+            document.getElementById(s).visibility="invisible";
+            document.getElementById(s).style.display="none";
+        }
+    }
+}
+
+/* Affiche le composant s */
+function show(s,shm) {
+    if (!shm) shm="block";
+    if (document.all) {
+        if (document.all[s]) {
+            document.all[s].visibility="visible";
+            eval("document.all."+s+".style.display=\""+shm+"\"");
+        }
+    } else {
+        if (document.getElementById(s)) {
+            document.getElementById(s).visibility="visible";
+            document.getElementById(s).style.display=shm;
+        }
+    }
+}
+/* Affiche / Cache le composant s */
+function swap(s,shm) {
+    if (document.all) {
+        if (document.all[s]) {
+            if (document.all[s].visibility=="visible") {
+                hide(s);
+            } else {
+                show(s,shm);
+            }
+        }
+    } else {
+        if (document.getElementById(s)) {
+            if (document.getElementById(s).visibility=="visible") {
+                hide(s);
+            } else {
+                show(s,shm);
+            }
+        }
+    }
+}

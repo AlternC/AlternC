@@ -53,14 +53,14 @@ $c=$admin->dom_list(true,$forcecheck);
 <?php __("Here is the list of the domains installed on this server. You can remove a domain if it does not exist or does not point to our server anymore. You can also set the 'Lock' flag on a domain so that the user will not be able to change any DNS parameter or delete this domain from his account."); ?>
 </p>
 <p>
-<?php __("The domain OK column are green when the domain exists in the worldwide registry and has a proper NS,MX and IP depending on its configuration. It is red if we have serious doubts about its NS, MX or IP configuration"); ?>
+<?php __("The domain OK column are green when the domain exists in the worldwide registry and has a proper NS,MX and IP depending on its configuration. It is red if we have serious doubts about its NS, MX or IP configuration. Contact the user of this domain or a system administrator."); ?>
 </p>
 <p>
-<?php __("If you want to force the check of NS, MX, IP on domains, click the link "); ?><a href="adm_doms.php?force=1"><?php __("Show domain list with refreshed checked NS, MX, IP information"); ?></a>
+<?php __("If you want to force the check of NS, MX, IP on domains, click the link"); ?> <a href="adm_doms.php?force=1"><?php __("Show domain list with refreshed checked NS, MX, IP information"); ?></a>
 </p>
 <form method="post" action="adm_dodom.php">
 <table border="0" cellpadding="4" cellspacing="0">
-    <tr><th><?php __("Action"); ?></th><th><?php __("Domain"); ?></th><th><?php __("Member"); ?></th><th><?php __("Connect as"); ?><th><?php __("Lock"); ?></th><th><?php __("OK?"); ?></th><th><?php __("Status"); ?></th></tr>
+    <tr><th></th><th><?php __("Action"); ?></th><th><?php __("Domain"); ?></th><th><?php __("Creator"); ?></th><th><?php __("Connect as"); ?><th><?php __("OK?"); ?></th><th><?php __("Status"); ?></th></tr>
 <?php
 $col=1;
 for($i=0;$i<count($c);$i++) {
@@ -68,6 +68,9 @@ for($i=0;$i<count($c);$i++) {
 ?>
 
 <tr class="lst<?php echo $col; ?>">
+				    <td><?php if ($c[$i]["noerase"]) {
+			echo "<img src=\"icon/encrypted.png\" width=\"16\" height=\"16\" alt=\""._("Locked Domain")."\" />";
+				    } ?></td>
 <td><a href="adm_domlock.php?domain=<?php echo urlencode($c[$i][domaine]); ?>"><?php
    if ($c[$i]["noerase"]) __("Unlock"); else __("Lock");  ?></a></td>
 <td><a href="http://<?php echo $c[$i][domaine]; ?>" target="_blank"><?php echo $c[$i]["domaine"]; ?></a></td>
@@ -78,9 +81,6 @@ for($i=0;$i<count($c);$i++) {
 			<a href="adm_login.php?id=<?php echo $c[$i]["uid"];?>"><?php __("Connect as"); ?></a>
 		<?php } ?>
 </td>
-				    <td><?php if ($c[$i]["noerase"]) {
-			echo "<img src=\"icon/encrypted.png\" width=\"16\" height=\"16\" alt=\""._("Locked Domain")."\" />";
-				    } ?></td>
 <td style="background: <?php 
 				       if ($c[$i]["errno"]==0) {
 					 echo "green";

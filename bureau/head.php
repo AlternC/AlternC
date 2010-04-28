@@ -27,6 +27,8 @@
  Purpose of file:
  ----------------------------------------------------------------------
 */
+if (!$charset) $charset="iso-8859-1";
+@header("Content-Type: text/html; charset=$charset");
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -41,4 +43,4 @@ sur serveurs mutualisés, né d'Altern.org et de Lautre Net" />
 <meta name="keywords" content="Hébergement, Logiciel d'hébergement, Altern, Lautre Net, GPL, Développement" />
 
 <link rel="stylesheet" href="/admin/styles/base.css" type="text/css" />
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $charset; ?>" />
