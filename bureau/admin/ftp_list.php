@@ -43,24 +43,31 @@ if (!$r=$ftp->get_list($domain)) {
 
 ?>
 <h3><?php __("FTP accounts list"); ?></h3>
+ 
 <?php
-	if ($noftp) {
-?>
-	<p class="error"><?php echo $error ?></p>
-	<a href="ftp_add.php"><?php __("Create a new ftp account") ?></a><br />
-	<?php $mem->show_help("ftp_list_no"); ?>
-<?php
-		include_once("foot.php");
-		exit();
-	}
-
-if ($error) {
+if ($error && !$noftp) {
 ?>
 <p class="error"><?php echo $error ?></p>
 <?php } ?>
+
+<?php if ($quota->cancreate("ftp")) { ?>
+<p>
+   <span class="inb"><a href="ftp_add.php"><?php __("Create a new ftp account"); ?></a></span> 
+</p>
+<?php  	} ?>
+
+<?php
+	if ($noftp) {
+?>
+	<?php $mem->show_help("ftp_list_no"); ?>
+<?php
+ include_once("foot.php"); 
+    } 
+?>
+
 <form method="post" action="ftp_del.php">
-<table cellspacing="0" cellpadding="4">
-<tr><th colspan="2">&nbsp;</th><th><?php __("Username"); ?></th><th><?php __("Folder"); ?></th></tr>
+<table class="tlist">
+  <tr><th colspan="2"><?php __("Actions"); ?></th><th><?php __("Username"); ?></th><th><?php __("Folder"); ?></th></tr>
 <?php
 reset($r);
 $col=1;
@@ -70,7 +77,8 @@ while (list($key,$val)=each($r))
 ?>
 	<tr class="lst<?php echo $col; ?>">
 		<td align="center"><input type="checkbox" class="inc" id="del_<?php echo $val["id"]; ?>" name="del_<?php echo $val["id"]; ?>" value="<?php echo $val["id"]; ?>" /></td>
-		<td class="center"><a href="ftp_edit.php?id=<?php echo $val["id"] ?>"><img src="images/edit.png" alt="<?php __("Edit"); ?>" /></a></td>
+<td><div class="ina"><a href="ftp_edit.php?id=<?php echo $val["id"] ?>"><img src="images/edit.png" alt="<?php __("Edit"); ?>" /><?php __("Edit"); ?></a></div></td>
+
 		<td><label for="del_<?php echo $val["id"]; ?>"><?php echo $val["login"] ?></label></td>
 		<td><code>/<?php echo $val["dir"] ?></code></td>
 	</tr>
@@ -81,12 +89,7 @@ while (list($key,$val)=each($r))
 </table>
 </form>
 
-<?php if ($quota->cancreate("ftp")) { ?>
-<p>
-<a href="ftp_add.php"><?php __("Create a new ftp account"); ?></a>
-</p>
-<?php  	}
-
+<?php
 $mem->show_help("ftp_list");
 ?>
 <?php include_once("foot.php"); ?>

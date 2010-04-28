@@ -46,7 +46,7 @@ if(!$domain)
 if(!$res=$mail->enum_doms_mails($domain,1,$letter)) {
   $error=$err->errstr();
 ?>
-<h3><?php printf(_("Mailbox list of the domain %s"),"http://$domain"); ?> : </h3>
+<h3><?php printf(_("Email addresses of the domain %s"),$domain); ?> : </h3>
 <?php
 if ($error) {
   echo "<p class=\"error\">$error</p>";
@@ -62,7 +62,7 @@ else
 {
 
 ?>
-<h3><?php printf(_("Mailbox list of the domain %s"),"http://$domain"); ?> : </h3>
+<h3><?php printf(_("Email addresses of the domain %s"),$domain); ?> : </h3>
 <?php
 if ($error) {
   echo "<p class=\"error\">$error</p>";
@@ -119,7 +119,7 @@ for($i=0;$i<$res["count"];$i++) {
 ?>
 </table>
 <br />
-<input type="submit" class="inb" name="submit" value="<?php __("Delete the selected mailboxes"); ?>" />
+<input type="submit" class="inb" name="submit" value="<?php __("Delete the checked email addresses"); ?>" />
 </form>
 
 <?php

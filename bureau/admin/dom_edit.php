@@ -128,7 +128,7 @@ for($i=0;$i<$r["nsub"];$i++) {
 				<label for="webmail"><?php __("Webmail access"); ?></label></td>
 			<td>&nbsp;</td>
 		</tr>
-		<tr style="text-align: right">
+		<tr class="trbtn">
 			<td colspan="2"><input type="submit" class="inb" name="add" value="<?php __("Add this subdomain"); ?>" /></td>
 		</tr>
 	</table>
@@ -165,7 +165,7 @@ if (!$r[noerase]) {
 	<select class="inl" id="email" name="email" <?php if ($r["dns"]) echo "disabled=\"disabled\""; ?>><option value="1"<?php if ($r["mail"]) echo " selected=\"selected\"";?>><?php __("Yes"); ?></option><option value="0"<?php if (!$r["mail"]) echo " selected=\"selected\"";?>><?php __("No"); ?></option></select>
 	</td>
 </tr>
-<tr><td colspan="2" align="center"><input type="submit" class="inb" name="submit" value="<?php __("Submit the changes"); ?>" /></td></tr>
+<tr class="trbtn"><td colspan="2"><input type="submit" class="inb" name="submit" value="<?php __("Submit the changes"); ?>" /></td></tr>
 </table>
 	</form>
 

@@ -43,7 +43,7 @@ if (!$mail->put_mail_details($email,$pop,$pass,$alias)) {
 		include ("mail_edit.php");
 
 } else {
-            $ok=sprintf(_("The mailbox <b>%s</b> has been successfully changed"),$email)."<br />";
+            $ok=sprintf(_("The email address <b>%s</b> has been successfully changed"),$email)."<br />";
             $addok=1;
             $t=explode("@",$email);
             $email=$t[0];

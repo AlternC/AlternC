@@ -38,7 +38,7 @@ if (!$id) {
         	exit();
 	}
 
-	$r=$ftp->put_ftp_details($id,$prefixe,$login,$pass,$rep);
+	$r=$ftp->put_ftp_details($id,$prefixe,$login,$pass,$dir);
 	if (!$r) {
 		$error=$err->errstr();
 		include("ftp_edit.php");

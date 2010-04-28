@@ -52,20 +52,24 @@ if (!$quota->cancreate("ftp")) {
 <label for="login"><?php __("Username"); ?></label></th><td>
 	<select class="inl" name="prefixe"><?php $ftp->select_prefix_list($prefixe); ?></select>&nbsp;<b>_</b>&nbsp;<input type="text" class="int" name="login" id="login" value="<?php echo $login; ?>" size="20" maxlength="64" />
 </td></tr>
-<tr><th><label for="pass"><?php __("Password"); ?></label></th><td><input type="password" class="int" name="pass" id="pass" value="<?php echo $pass; ?>" size="20" maxlength="64" /></td></tr>
-<tr><th><label for="passconf"><?php __("Confirm password"); ?></label></th><td><input type="password" class="int" name="passconf" id="passconf" value="<?php echo $passconf; ?>" size="20" maxlength="64" /></td></tr>
 <tr><th><label for="dir"><?php __("Folder"); ?></label></th><td><input type="text" class="int" name="dir" id="dir" value="<?php echo $dir; ?>" size="20" maxlength="255" />
 <script type="text/javascript">
 <!--
-  document.write("&nbsp;<input type=\"button\" name=\"bff\" onclick=\"browseforfolder('main.dir');\" value=\" ... \" class=\"inb\">");
+  document.write("&nbsp;<input type=\"button\" name=\"bff\" onclick=\"browseforfolder('main.dir');\" value=\" <?php __("Choose a folder..."); ?> \" class=\"bff\">");
 //  -->
 </script>
 </td></tr>
-<tr><td colspan="2"><input type="submit" class="inb" name="submit" value="<?php __("Create this new FTP account."); ?>" /></td></tr>
+<tr><th><label for="pass"><?php __("Password"); ?></label></th><td><input type="password" class="int" name="pass" id="pass" value="<?php echo $pass; ?>" size="20" maxlength="64" /></td></tr>
+<tr><th><label for="passconf"><?php __("Confirm password"); ?></label></th><td><input type="password" class="int" name="passconf" id="passconf" value="<?php echo $passconf; ?>" size="20" maxlength="64" /></td></tr>
+<tr class="trbtn"><td colspan="2">
+  <input type="submit" class="inb" name="submit" value="<?php __("Create this new FTP account."); ?>" />
+  <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='ftp_list.php'"/>
+</td></tr>
 </table>
 </form>
 <?php $mem->show_help("ftp_add"); ?>
 <script type="text/javascript">
 document.forms['main'].login.focus();
+document.forms['main'].setAttribute('autocomplete', 'off');
 </script>
 <?php include_once("foot.php"); ?>

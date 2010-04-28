@@ -88,9 +88,14 @@ $dom->unlock();
 			<label for="webmail"><?php __("Webmail access"); ?></label></td>
 		<td>&nbsp;</td>
 	</tr>
+	<tr class="trbtn">
+            <td colspan="2">
+              <input type="submit" class="inb" name="submit" value="<?php __("Validate this change"); ?>" />
+              <input type="button" class="inb" name="back" value="<?php __("Cancel"); ?>" onclick="history.back();" />
+            </td>
+        </tr>
+
 	</table>
-<br />
-<input type="submit" class="inb" name="submit" value="<?php __("Validate this change"); ?>" />
-<input type="button" class="inb" name="back" value="<?php __("Cancel"); ?>" onclick="history.back();" />
+
 </form>
 <?php include_once("foot.php"); ?>

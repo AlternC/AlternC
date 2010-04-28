@@ -1147,8 +1147,8 @@ msgstr "Valider les changements"
 msgid "help_domain_del %s"
 msgstr ""
 "Si vous voulez détruire le domaine %s, cliquez sur le bouton ci-dessous. "
-"Attention, cela  supprime aussi tous les comptes ftp, email, listes de "
-"diffusions etc. associés à ce domaine et à tous ses sous-domaines !"
+"Attention, cela  supprime aussi tous les comptes ftp, les adresses email, les listes de "
+"diffusion etc... associés à ce domaine et à tous ses sous-domaines !"
 
 #: ../admin/dom_edit.php:170 ../admin/dom_edit.php:172
 #: ../admin/dom_edit.php:173
@@ -1371,16 +1371,16 @@ msgstr "Autres destinataires"
 #: ../admin/mail_add.php:52 ../admin/mail_edit.php:61 ../admin/mail_add.php:55
 #: ../admin/mail_edit.php:68
 msgid "one email per line"
-msgstr "un email par ligne"
+msgstr "une adresse email par ligne"
 
 #: ../admin/mail_add.php:53 ../admin/mail_add.php:56
-msgid "Create this mailbox"
-msgstr "Ajouter cet email"
+msgid "Create this email address"
+msgstr "Ajouter cette adresse email"
 
 #: ../admin/mail_add.php:57 ../admin/mail_add.php:60
 msgid "help_mail_add"
 msgstr ""
-"- Pour créer cet email<br /> * Si vous voulez stocker les emails recus et y "
+"- Pour créer cette adresse email<br /> * Si vous voulez stocker les messages reçus et y "
 "accéder avec un logiciel de messagerie ou le webmail, cochez la case 'Compte "
 "pop'. Dans ce cas, entrez un mot de passe pour le compte pop.<br /> * Si "
 "vous souhaitez rediriger ce mail vers d'autres, entrer la liste des mails "
@@ -1395,46 +1395,49 @@ msgstr ""
 #: ../admin/mail_del.php:42 ../admin/mail_dodel.php:41
 #: ../admin/mail_del.php:63
 msgid "Deleting mail accounts"
-msgstr "Effacement des comptes email"
+msgstr "Suppression des adresses email"
 
 #: ../admin/mail_del.php:43 ../admin/mail_del.php:64
 msgid "Please confirm the deletion of the following mail accounts:"
-msgstr "Confirmez la suppression des comptes emails suivants&nbsp;:"
+msgstr "Confirmez la suppression des adresses email suivantes&nbsp;:"
 
 #: ../admin/mail_del.php:57 ../admin/mail_list.php:107
 #: ../admin/mail_del.php:79
-msgid "Delete the selected mailboxes"
-msgstr "Effacer les mails sélectionnés"
+msgid "Confirm the deletion"
+msgstr "Confirmer la suppression"
+
+msgid "Delete the checked email addresses"
+msgstr "Supprimer les adresses email cochées"
 
 #: ../admin/mail_del.php:57 ../admin/mail_del.php:79
-msgid "Don't delete accounts and go back to the mail list"
-msgstr "Ne rien effacer, retourner à la liste des emails"
+msgid "Don't delete anything and go back to the email list"
+msgstr "Ne rien supprimer, revenir à la liste des adresses email"
 
 #: ../admin/mail_doadd.php:44
 #, php-format
-msgid "The mailbox <b>%s</b> has been successfully created"
-msgstr "Le mail <b>%s</b> a été ajouté avec succès"
+msgid "The email address <b>%s</b> has been successfully created"
+msgstr "L'adresse email <b>%s</b> a été ajouté avec succès"
 
 #: ../admin/mail_dodel.php:48 ../admin/mail_del.php:51
 #: ../admin/mail_dodel.php:40
 #, php-format
-msgid "The mailbox <b>%s</b> does not exist!"
-msgstr "Le mail <b>%s</b> n'existe pas"
+msgid "The email address <b>%s</b> does not exist!"
+msgstr "L'adresse email <b>%s</b> n'existe pas"
 
 #: ../admin/mail_dodel.php:51 ../admin/mail_del.php:53
 #: ../admin/mail_dodel.php:43
 #, php-format
-msgid "The mailbox <b>%s</b> has been deleted!"
-msgstr "La boîte aux lettres <b>%s</b> a été effacée&nbsp;!"
+msgid "The email address <b>%s</b> has been deleted!"
+msgstr "L'adresse email <b>%s</b> a été supprimée&nbsp;!"
 
 #: ../admin/mail_dodel.php:60
-msgid "Back to the mail account list"
-msgstr "Retour à la liste des emails"
+msgid "Back to the email address list"
+msgstr "Retour à la liste des adresses email"
 
 #: ../admin/mail_doedit.php:46
 #, php-format
-msgid "The mailbox <b>%s</b> has been successfully changed"
-msgstr "Le mail <b>%s</b> a été modifié avec succès"
+msgid "The email address <b>%s</b> has been successfully changed"
+msgstr "L'adresse email <b>%s</b> a été modifiée avec succès"
 
 #: ../admin/mail_edit.php:41 ../admin/mail_edit.php:48
 #, php-format
@@ -1477,13 +1480,13 @@ msgstr "Liste des adresses emails du domaine %s"
 #: ../admin/mail_list.php:54 ../admin/mail_list.php:68
 #, php-format
 msgid "Add a mailbox on <b>%s</b>"
-msgstr "Ajouter un email sur <b>%s</b>"
+msgstr "Ajouter une adresse email sur <b>%s</b>"
 
 #: ../admin/mail_list.php:48 ../admin/mail_list.php:67
 #: ../admin/mail_list.php:55 ../admin/mail_list.php:69
 #, php-format
 msgid "Add many mailboxes on <b>%s</b>"
-msgstr "Ajouter plusieurs emails sur <b>%s</b>"
+msgstr "Ajouter plusieurs adresses email sur <b>%s</b>"
 
 #: ../admin/mail_list.php:76 ../admin/mail_list.php:78
 #, php-format
@@ -1535,14 +1538,14 @@ msgstr "Préférences d'administration"
 #: ../admin/mem_chgmail.php:44 ../admin/mem_cm2.php:40 ../admin/mem_cm.php:35
 #: ../admin/mem_cm.php:46 ../admin/mem_param.php:74
 msgid "Change the email of the account"
-msgstr "Changement d'Email du compte"
+msgstr "Changement d'adresse email du compte AlternC"
 
 #: ../admin/mem_chgmail.php:46 ../admin/mem_chgmail.php:51
 #, php-format
 msgid "help_mem_chgmail %s"
 msgstr ""
-"Un email a été envoyé à l'adresse <big><code>%s</code></big> pour "
-"confirmation.<br /> Cet email contient un lien où vous devrez vous rendre "
+"Un essage a été envoyé à l'adresse <big><code>%s</code></big> pour "
+"confirmation.<br /> Ce message contient un lien où vous devrez vous rendre "
 "pour valider la modification.<br /> A cette adresse, la clé suivante vous "
 "sera demandée : <br /> "
 
@@ -1556,7 +1559,7 @@ msgid ""
 "OK button."
 msgstr ""
 "Entrez la clé qui vous a été donnée lors de la demande de changement "
-"d'email, puis cliquez sur OK"
+"d'adresse email, puis cliquez sur OK"
 
 #: ../admin/mem_cm.php:49 ../admin/mem_cm.php:48
 msgid "Key"
@@ -1618,19 +1621,19 @@ msgstr "Changer mon mot de passe"
 #: ../admin/mem_param.php:75
 msgid "help_chg_mail"
 msgstr ""
-"Vous pouvez modifier ici l'email d'inscription correspondant à votre compte."
-"<br />Entrez ici le nouvel email. Un message est envoyé sur cet email pour "
+"Vous pouvez modifier ici l'adresse email d'inscription correspondant à votre compte AlternC."
+"<br />Entrez ici la nouvelle adresse email. Un message est envoyé à cette adresse pour "
 "confirmation."
 
 #: ../admin/mem_param.php:77 ../admin/mem_param.php:74
 #: ../admin/mem_param.php:76
 msgid "Current mailbox"
-msgstr "Email actuel"
+msgstr "Adresse email actuelle"
 
 #: ../admin/mem_param.php:78 ../admin/mem_param.php:75
 #: ../admin/mem_param.php:77
 msgid "New mailbox"
-msgstr "Nouvel Email"
+msgstr "Nouvelle adresse email"
 
 #: ../admin/mem_param.php:79 ../admin/mem_param.php:76
 #: ../admin/mem_param.php:78
@@ -2518,7 +2521,7 @@ msgstr "Administration"
 
 #: ../admin/menu_adm.php:38
 msgid "AlternC configuration"
-msgstr ""
+msgstr "Configuration d'AlternC"
 
 #: ../admin/menu_brouteur.php:33
 msgid "Files and directories"
@@ -2612,7 +2615,7 @@ msgid ""
 "Warning: Deleting an email address will destroy all the messages it contains! You "
 "will <b>NOT</b> be able to get it back!"
 msgstr ""
-"Attention: L'effacement d'une adresse email détruit tous ses messages&nbsp;! "
+"Attention: La suppression d'une adresse email détruit tous ses messages&nbsp;! "
 "Vous ne pourrez <b>PLUS</b> retrouver les messages ainsi effacés&nbsp;!"
 
 #: ../admin/menu.php:36
@@ -2787,7 +2790,7 @@ msgid "as a %s file"
 msgstr "comme fichier %s"
 
 msgid "Show only mail starting by:"
-msgstr "N'afficher que les mails commençant par :"
+msgstr "Afficher seulement les adresses mails commençant par :"
 
 
 msgid "Delete %s from this server"
@@ -2811,4 +2814,7 @@ msgstr "Afficher la liste des domaines avec des informations NS, MX et IP à jour
 
 msgid "Redirections<br />Other recipients:"
 msgstr "Redirections/Autres destinataires&nbsp;:"
+
+msgid "Path" 
+msgstr "Répertoire courant"
 

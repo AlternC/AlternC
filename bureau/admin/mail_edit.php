@@ -45,7 +45,7 @@ else
 {
 
 ?>
-<h3><?php printf(_("Edit an email address of the domain %s"),"http://$domain"); ?> : </h3>
+<h3><?php printf(_("Edit an email address of the domain %s"),$domain); ?> : </h3>
 <?php
 if ($error_edit) {
 	echo "<p class=\"error\">$error_edit</p>";
@@ -62,28 +62,32 @@ if ($error_edit) {
 	<tr><th colspan="2"><input type="hidden" name="email" value="<?php echo $email; ?>" />
 <input type="hidden" name="domain" value="<?php echo $domain; ?>" />
 <?php printf(_("Edit the email address <b>%s</b>"),$email); ?></th></tr>
-								  <tr><td><label for="ispop"><?php __("Is it a POP/IMAP account?"); ?></label></td>
+								  <tr><td><label for="pop"><?php __("Is it a POP/IMAP account?"); ?></label></td>
 <td>
 <p>
- <input type="radio" name="ispop" id="ispop0" class="inc" value="0"<?php checked($pop==0); ?> onclick="hide('ispoptbl');"><label for="ispop0"><?php __("No"); ?></label>
- <input type="radio" name="ispop" id="ispop1" class="inc" value="1"<?php checked($pop==1); ?> onclick="show('ispoptbl');"><label for="ispop1"><?php __("Yes"); ?></label>
+ <input type="radio" name="pop" id="pop0" class="inc" value="0"<?php checked($pop==0); ?> onclick="hide('poptbl');"><label for="pop0"><?php __("No"); ?></label>
+ <input type="radio" name="pop" id="pop1" class="inc" value="1"<?php checked($pop==1); ?> onclick="show('poptbl');"><label for="pop1"><?php __("Yes"); ?></label>
 </p>
-<div id="ispoptbl">
+<div id="poptbl">
 <table class="tedit" >
 	<tr><td><label for="pass"><?php __("POP/IMAP password"); ?></label></td><td><input type="password" class="int" name="pass" id="pass" value="<?php ehe($pass); ?>" size="20" maxlength="32" /></td></tr>
 	<tr><td><label for="passconf"><?php __("Confirm password"); ?></label></td><td><input type="password" class="int" name="passconf" id="passconf" value="<?php echo $pass; ?>" size="20" maxlength="32" /></td></tr>
 </table>
 </div>
- <?php if ($pop) { echo  "<br />"; __("WARNING: turning POP/IMAP off will DELETE the stored messages in this email address. This email address will become a simple redirection."); }?>
-
+<br />
+  <?php if ($pop==1) { 
+echo "<div class=\"warningmsg\">"._("WARNING: turning POP/IMAP off will DELETE the stored messages in this email address. This email address will become a simple redirection.")."</div>"; 
+} ?>
 </td></tr>
 
     <tr><td><label for="alias"><?php __("Redirections<br />Other recipients:"); ?></label></td><td>(<?php __("one email per line"); ?>)<br /><textarea class="int" cols="32" rows="5" name="alias" id="alias"><?php echo $alias; ?></textarea></td></tr>
+<tr class="trbtn"><td colspan="2">
+  <input type="submit" class="inb" name="submit" value="<?php __("Change this email address"); ?>" />
+  <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='mail_list.php?domain=<?php echo urlencode($domain); ?>'"/>
+</td></tr>
 </table>
-<br />
-<input type="submit" class="inb" name="submit" value="<?php __("Change this mailbox"); ?>" />
-<input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='mail_list.php?domain=<?php echo urlencode($domain); ?>'"/>
 </form>
+
 <p><small>
 <?php __("help_mail_edit"); ?>
 </small></p>
@@ -92,5 +96,9 @@ if ($error_edit) {
 ?>
 <script type="text/javascript">
 document.forms['main'].email.focus();
+<?php if ($pop==0) { ?>
+  hide('poptbl'); 
+  <?php } ?>
+document.forms['main'].setAttribute('autocomplete', 'off');
 </script>
 <?php include_once("foot.php"); ?>

@@ -34,32 +34,53 @@ include_once("head.php");
 $fields = array (
 	"domain"    => array ("request", "string", ""),
 	"many"      => array ("request", "integer", 0),
+	"pop"     => array ("request", "integer", 1),
 );
 getFields($fields);
 
 ?>
-<h3><?php printf(_("Add a mail to the domain %s"),"http://$domain"); ?> : </h3>
+<h3><?php printf(_("Add a mail to the domain %s"),$domain); ?> : </h3>
 <?php
 if ($error) {
   echo "<p class=\"error\">$error</p>";
 }
 
 ?>
-<form action="mail_doadd.php" name="main" id="main" method="post">
-<table border="1" cellspacing="0" cellpadding="4">
-	<tr><td><input type="hidden" name="domain" value="<?php echo $domain ?>" />
-<label for="email"><?php __("Email address"); ?></label></td><td><input class="int" type="text" name="email" id="email" value="<?php echo $email ?>" size="20" maxlength="32" />@<?php echo $domain ?></td></tr>
-	<tr><td><label for="ispop"><?php __("Is it a POP/IMAP account?"); ?></label></td><td><input id="ispop" class="inc" type="checkbox" name="pop" value="1" <?php if ($pop=="1") echo "checked=\"checked\""; ?> /></td></tr>
-	<tr><td><label for="pass"><?php __("POP password"); ?></label></td><td><input class="int" type="password" name="pass" id="pass" value="<?php echo $pass; ?>" size="20" maxlength="32" /></td></tr>
-	<tr><td><label for="passconf"><?php __("Confirm password"); ?></label></td><td><input class="int" type="password" name="passconf" id="passconf" value="<?php echo $pass; ?>" size="20" maxlength="32" /></td></tr>
-	<tr><td><label for="alias"><?php __("Other recipients"); ?></label></td><td>(<?php __("One email per line"); ?>)<br /><textarea class="int" cols="32" rows="5" name="alias" id="alias"><?php echo $alias; ?></textarea></td></tr>
-	<tr><td colspan="2"><input type="hidden" name="many" value="<?php echo intval($many); ?>" /><input type="submit" class="inb" name="submit" value="<?php __("Create this mailbox"); ?>" /></td></tr>
+
+<form action="mail_doadd.php" method="post" name="main" id="main">
+  <input type="hidden" name="domain" value="<?php echo $domain; ?>" />
+ <table class="tedit">
+<tr><td>
+  <label for="email"><?php __("Email address"); ?></label></td><td><input class="int" type="text" name="email" id="email" value="<?php ehe($email); ?>" size="20" maxlength="32" /><span class="int" id="emaildom">@ <?php echo $domain ?></span>
+  </td></tr>
+ <tr><td><label for="pop"><?php __("Is it a POP/IMAP account?"); ?></label></td>
+<td>
+<p>
+ <input type="radio" name="pop" id="pop0" class="inc" value="0"<?php checked($pop==0); ?> onclick="hide('poptbl');"><label for="pop0"><?php __("No"); ?></label>
+ <input type="radio" name="pop" id="pop1" class="inc" value="1"<?php checked($pop==1); ?> onclick="show('poptbl');"><label for="pop1"><?php __("Yes"); ?></label>
+</p>
+<div id="poptbl">
+<table class="tedit" >
+	<tr><td><label for="pass"><?php __("POP/IMAP password"); ?></label></td><td><input type="password" class="int" name="pass" id="pass" value="<?php ehe($pass); ?>" size="20" maxlength="32" /></td></tr>
+	<tr><td><label for="passconf"><?php __("Confirm password"); ?></label></td><td><input type="password" class="int" name="passconf" id="passconf" value="<?php echo $pass; ?>" size="20" maxlength="32" /></td></tr>
+</table>
+</div>
+</td></tr>
+
+    <tr><td><label for="alias"><?php __("Redirections<br />Other recipients:"); ?></label></td><td>(<?php __("one email per line"); ?>)<br /><textarea class="int" cols="32" rows="5" name="alias" id="alias"><?php echo $alias; ?></textarea></td></tr>
+<tr class="trbtn"><td colspan="2">
+<input type="hidden" name="many" value="<?php echo intval($many); ?>" />
+  <input type="submit" class="inb" name="submit" value="<?php __("Create this email address"); ?>" />
+  <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='mail_list.php?domain=<?php echo urlencode($domain); ?>'"/>
+</td></tr>
 </table>
 </form>
+
 <p><small>
 <?php __("help_mail_add"); ?>
 </small></p>
 <script type="text/javascript">
 document.forms['main'].email.focus();
+document.forms['main'].setAttribute('autocomplete', 'off');
 </script>
 <?php include_once("foot.php");

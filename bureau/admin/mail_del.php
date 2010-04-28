@@ -48,9 +48,9 @@ if ($confirm=="y") {
 
 while (list($key,$val)=each($d)) {
 	if (!$mail->del_mail($val)) {
-		$error.=sprintf(_("The mailbox <b>%s</b> does not exist!")."<br />",$val);
+		$error.=sprintf(_("The email address <b>%s</b> does not exist!")."<br />",$val);
 	} else {
-		$error.=sprintf(_("The mailbox <b>%s</b> has been deleted!")."<br />",$val); 
+		$error.=sprintf(_("The email address <b>%s</b> has been deleted!")."<br />",$val); 
 	}
 }
 include("mail_list.php");
@@ -76,10 +76,11 @@ while (list($key,$val)=each($d)) {
 
 ?>
 </p>
-<p><input type="submit" class="inb" name="submit" value="<?php __("Delete the selected mailboxes"); ?>" /> - <input type="button" name="cancel" id="cancel" onclick="window.history.go(-1);" class="inb" value="<?php __("Don't delete accounts and go back to the mail list"); ?>"/>
+<p>
+<input type="submit" class="inb" name="submit" value="<?php __("Confirm the deletion"); ?>" /> - <input type="button" name="cancel" id="cancel" onclick="window.history.go(-1);" class="inb" value="<?php __("Don't delete anything and go back to the email list"); ?>"/>
 </p>
 
-<p>
+<p class="warningmsg">
 <?php __("Warning: Deleting an email address will destroy all the messages it contains! You will <b>NOT</b> be able to get it back!"); ?>
 </p>
 

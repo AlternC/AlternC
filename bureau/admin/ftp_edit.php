@@ -59,21 +59,25 @@ if (!$id) {
 <label for="login"><?php __("Username"); ?></label></th><td>
 	<select class="inl" name="prefixe"><?php $ftp->select_prefix_list($r["prefixe"]); ?></select>&nbsp;<b>_</b>&nbsp;<input type="text" class="int" name="login" id="login" value="<?php echo $r["login"]; ?>" size="20" maxlength="64" />
 </td></tr>
-<tr><th><label for="pass"><?php __("Password"); ?></label></th><td><input type="password" class="int" name="pass" id="pass" size="20" maxlength="64" value="********"/></td></tr>
-<tr><th><label for="passconf"><?php __("Confirm password"); ?></label></th><td><input type="password" class="int" name="passconf" id="passconf" size="20" maxlength="64" value="********"/></td></tr>
-<tr><th><label for="rep"><?php __("Folder"); ?></label></th><td><input type="text" class="int" name="rep" id="rep" value="<?php echo $r["dir"]; ?>" size="20" maxlength="64" />
+<tr><th><label for="dir"><?php __("Folder"); ?></label></th><td><input type="text" class="int" name="dir" id="dir" value="<?php echo $r["dir"]; ?>" size="20" maxlength="64" />
 
 <script type="text/javascript">
 <!--
-  document.write("&nbsp;<input type=\"button\" name=\"bff\" onclick=\"browseforfolder('main.rep');\" value=\" ... \" class=\"inb\">");
+  document.write("&nbsp;<input type=\"button\" name=\"bff\" onclick=\"browseforfolder('main.dir');\" value=\" <?php __("Choose a folder..."); ?> \" class=\"bff\">");
 //  -->
 </script>
 </td></tr>
+<tr><th><label for="pass"><?php __("Password"); ?></label></th><td><input type="password" class="int" name="pass" id="pass" size="20" maxlength="64" value=""/></td></tr>
+<tr><th><label for="passconf"><?php __("Confirm password"); ?></label></th><td><input type="password" class="int" name="passconf" id="passconf" size="20" maxlength="64" value=""/></td></tr>
 
-<tr><td colspan="2"><input type="submit" class="inb" name="submit" value="<?php __("Change this FTP account"); ?>" /></td></tr>
+<tr class="trbtn"><td colspan="2">
+  <input type="submit" class="inb" name="submit" value="<?php __("Change this FTP account"); ?>" />
+  <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='ftp_list.php'"/>
+</td></tr>
 </table>
 </form>
 <script type="text/javascript">
 document.forms['main'].login.focus();
+document.forms['main'].setAttribute('autocomplete', 'off'); 
 </script>
 <?php include_once("foot.php"); ?>

@@ -41,7 +41,7 @@ if (!$mail->add_mail($domain,$email,$pop,$pass,$alias)) {
 	include ("mail_add.php");
 } else {
 	$addok=1;
-	$error=sprintf (_("The mailbox <b>%s</b> has been successfully created"),"$email@$domain");
+	$error=sprintf (_("The email address <b>%s</b> has been successfully created"),"$email@$domain");
 	if ($many) {
 		unset($email,$pass,$alias);
 		include("mail_add.php");
