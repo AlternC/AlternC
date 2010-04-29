@@ -357,28 +357,23 @@ a:hover {
 
 }
 
-#newdomwww {
+#newdomwww, #sub, #usernpfx, #dbnpfx {
     border-right: 0;
     padding-right: 0;
 }
-#newdomain {
+#newdomain, #newsubname, #usern, #dbn {
     border-left: 0;
     padding-left: 0;
 }
-#sub {
-    border-right: 0;
-    padding-right: 0;
-}
-#newsubname {
-    border-left: 0;
-    padding-left: 0;
-}
+
+
 
 input#email {
     border-right: 0;
     padding-right: 0;
     text-align: right;
 }
+
 span#emaildom {
     border-left: 0;
     padding-left: 2px;
@@ -419,3 +414,4 @@ input#dir, input#sub_local {
 #mx {
     width: 300px;
 }
+

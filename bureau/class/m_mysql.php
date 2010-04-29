@@ -270,6 +270,10 @@ class m_mysql {
       $err->raise("mysql",8);
       return false;
     }
+    if (!$password) {
+      $err->raise("mysql",20);
+      return false;      
+    }
 
     // Check this password against the password policy using common API : 
     if (is_callable(array($admin,"checkPolicy"))) {
@@ -296,6 +300,10 @@ class m_mysql {
     if (strlen($password)>16) {
       $err->raise("mysql",8);
       return false;
+    }
+    if (!$password) {
+      $err->raise("mysql",20);
+      return false;      
     }
     $db->query("SELECT * FROM db WHERE uid='$cuid';");
     if ($db->num_rows()) {
@@ -418,10 +426,19 @@ class m_mysql {
   function add_user($usern,$password,$passconf) {
     global $db,$err,$quota,$mem,$cuid,$admin;
     $err->log("mysql","add_user",$usern);
-    
+
+    $usern=trim($usern);
     $user=addslashes($mem->user["login"]."_".$usern);
     $pass=addslashes($password);
-        
+
+    if (!$usern) {
+      $err->raise("mysql",21);
+      return false;
+    }
+    if (!$pass) {
+      $err->raise("mysql",20);
+      return false;
+    }
     if (!$quota->cancreate("mysql_users")) {
       $err->raise("mysql",13);
       return false;
@@ -432,7 +449,7 @@ class m_mysql {
     }
     
     // We check the length of the COMPLETE username, not only the part after _
-    if (strlen($user) > 16 || strlen($usern) == 0 ) {
+    if (strlen($user) > 16) {
       $err->raise("mysql",15);
       return false;
     }

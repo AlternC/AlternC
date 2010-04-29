@@ -32,6 +32,11 @@ include_once("head.php");
 
 $fields = array (
 	"id"     => array ("request", "string", ""),
+	"bck_mode" => array ("request", "integer", 0),
+	"bck_history" => array ("request", "integer", 7),
+	"bck_gzip" => array ("request", "integer", 0),
+	"bck_dir" => array ("request", "string", "/"),
+	
 );
 getFields($fields);
 
@@ -53,17 +58,16 @@ if (is_array($r)) {
 <form action="sql_dobck.php" method="post" id="main" name="main">
 <table class="tedit">
 <tr>
-	<th><label for="bck_mode"><?php __("Do sql backup?"); ?></label></th>
+	<th><label for="bck_mode"><?php __("Do MySQL backup?"); ?></label></th>
 	<td>
         <input type="hidden" name="id" value="<?php echo $id; ?>" />
-        <select class="inl" name="bck_mode" id="bck_mode">
-	<option value="0"<?php if ($r["bck"]==0) echo " selected=\"selected\""; ?>><?php __("No backup"); ?></option>
-	<option value="1"<?php if ($r["bck"]==1) echo " selected=\"selected\""; ?>><?php __("Weekly backup"); ?></option>
-	<option value="2"<?php if ($r["bck"]==2) echo " selected=\"selected\""; ?>><?php __("Daily backup"); ?></option>
+        <input type="radio" class="inc" id="bck_mode0" name="bck_mode" value="0"<?php cbox($r["bck"]==0); ?>><label for="bck_mode0"><?php __("No backup"); ?></label><br />
+	<input type="radio" class="inc" id="bck_mode1" name="bck_mode" value="1"<?php cbox($r["bck"]==1); ?>><label for="bck_mode1"><?php __("Weekly backup"); ?></label><br />
+	<input type="radio" class="inc" id="bck_mode2" name="bck_mode" value="2"<?php cbox($r["bck"]==2); ?>><label for="bck_mode2"><?php __("Daily backup"); ?></label><br />
 	</select></td>
 </tr>
 <tr>
-	<th><label for="bck_history"><?php __("How many backup should be kept?"); ?></label></th>
+	<th><label for="bck_history"><?php __("How many backups should be kept?"); ?></label></th>
 	<td><select class="inl" name="bck_history" id="bck_history">
 	<?php
 	for($i=1;$i<20;$i++) {
@@ -76,10 +80,12 @@ if (is_array($r)) {
 </tr>
 <tr>
 	<th><label for="bck_gzip"><?php __("Compress the backups? (gzip)"); ?></label></th>
-	<td><select class="inl" name="bck_gzip" id="bck_gzip">
-	<option value="0"<?php if ($r["gzip"]==0) echo " selected=\"selected\""; ?>><?php __("No"); ?></option>
-	<option value="1"<?php if ($r["gzip"]==1) echo " selected=\"selected\""; ?>><?php __("Yes"); ?></option>
-	</select></td>
+	<td>
+
+        <input type="radio" class="inc" id="bck_gzip0" name="bck_gzip" value="0"<?php cbox($r["gzip"]==0); ?>><label for="bck_gzip0"><?php __("No"); ?></label><br />
+	<input type="radio" class="inc" id="bck_gzip1" name="bck_gzip" value="1"<?php cbox($r["gzip"]==1); ?>><label for="bck_gzip1"><?php __("Yes"); ?></label><br />
+
+</td>
 </tr>
 <tr>
 	<th><label for="bck_dir"><?php __("In which folder do you want to store the backups?"); ?></label></th>
@@ -93,7 +99,7 @@ if (is_array($r)) {
 </tr>
 
 <tr class="trbtn"><td colspan="2">
-  <input class="inb" type="submit" name="submit" value="<?php __("Change the SQL backup parameters"); ?>" />
+  <input class="inb" type="submit" name="submit" value="<?php __("Change the MySQL backup parameters"); ?>" />
   <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='sql_list.php'"/>
 </td></tr>
 </table>

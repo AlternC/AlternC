@@ -68,7 +68,7 @@ if (!$r=$admin->get($uid)) {
 	<td><?php echo $r["login"]; ?></td>
 </tr>
 <tr>
-	<th><label for="enabled"><?php __("Account Enabled ?"); ?></label></th>
+	<th><label for="enabled"><?php __("Account Enabled?"); ?></label></th>
 	<td><select class="inl" name="enabled" id="enabled">
         <?php
 	  echo "<option";

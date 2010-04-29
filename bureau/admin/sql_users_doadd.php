@@ -29,6 +29,13 @@
 */
 require_once("../class/config.php");
 
+$fields = array (
+	"usern"     => array ("request", "string", ""),
+	"password"    => array ("request", "string", ""),
+	"passconf"    => array ("request", "string", ""),
+);
+getFields($fields);
+
 
 if (!$quota->cancreate("mysql_users")) {
 //	$error=_("err_mysql_1");

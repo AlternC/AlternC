@@ -65,8 +65,8 @@ if ($error_edit) {
 								  <tr><td><label for="pop"><?php __("Is it a POP/IMAP account?"); ?></label></td>
 <td>
 <p>
- <input type="radio" name="pop" id="pop0" class="inc" value="0"<?php checked($pop==0); ?> onclick="hide('poptbl');"><label for="pop0"><?php __("No"); ?></label>
- <input type="radio" name="pop" id="pop1" class="inc" value="1"<?php checked($pop==1); ?> onclick="show('poptbl');"><label for="pop1"><?php __("Yes"); ?></label>
+ <input type="radio" name="pop" id="pop0" class="inc" value="0"<?php cbox($pop==0); ?> onclick="hide('poptbl');"><label for="pop0"><?php __("No"); ?></label>
+ <input type="radio" name="pop" id="pop1" class="inc" value="1"<?php cbox($pop==1); ?> onclick="show('poptbl');"><label for="pop1"><?php __("Yes"); ?></label>
 </p>
 <div id="poptbl">
 <table class="tedit" >

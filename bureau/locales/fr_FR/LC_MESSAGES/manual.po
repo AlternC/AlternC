@@ -304,7 +304,7 @@ msgstr ""
 msgid "err_ftp_6"
 msgstr "Impossible de créer le répertoire."
 
-#. Voici la liste des comptes ftp ayant accès à votre compte. Cliquez sur 
+#. Voici la liste des comptes ftp ayant accès à l'espace disque de votre compte AlternC. Cliquez sur 
 #. 'Modifier' pour changer le nom d'utilisateur, le mot de passe, ou le dossier 
 #. racine.<br /> Pour supprimer un compte, cochez la case correspondante et 
 #. cliquez sur le bouton 'Supprimer les comptes cochés'<br />Pour pouvoir 
@@ -649,7 +649,7 @@ msgstr "Le nom de la base de données est trop long (64 caractères maximum)"
 #. You cannot create more MySQL users
 msgid "err_mysql_13"
 msgstr ""
-"Vous avez atteint votre quota d'utilisateurs SQL, vous ne pouvez plus en "
+"Vous avez atteint votre quota d'utilisateurs MySQL, vous ne pouvez plus en "
 "créer"
 
 #. MySQL users can only have a-z and 0-9 characters.
@@ -678,6 +678,14 @@ msgstr "L'utilisateur n'existe pas"
 msgid "err_mysql_19"
 msgstr "Aucun utilisateur n'est défini dans MySQL."
 
+#. The password is mandatory
+msgid "err_mysql_20"
+msgstr "Le mot de passe est obligatoire"
+
+#. The username cannot be empty
+msgid "err_mysql_21"
+msgstr "Le nom d'utilisateur ne peut pas être vide"
+
 #. Your MySQL backups are stored in the chosen folder from <code>db.sql.1</
 #. code> to <code>db.sql.19</code><br />your database name replaces 'db'.<br /
 #. >WARNING: If you modify backup settings (backups, compression...) previous 
@@ -687,7 +695,9 @@ msgid "hlp_sql_bck"
 msgstr ""
 "Les sauvegardes de votre base MySQL sont stockées dans le répertoire choisi "
 "sous le nom <code>db.sql.1</code> à <code>db.sql.19</code><br /> où 'db' est "
-"remplacé par le nom de la base de données.<br />ATTENTION : si vous modifiez "
+"remplacé par le nom de la base de données.<br /><b>ATTENTION : </b><br />"
+"- Le répertoire doit déja exister, si ce n'est pas le cas créez le au préalable<br />"
+"- si vous modifiez "
 "les paramètres de la sauvegarde (nombre de sauvegardes, compression ...) des "
 "vieilles sauvegardes peuvent rester dans le répertoire concerné. Vous pouvez "
 "les effacer dans le gestionnaire de fichiers."
@@ -736,7 +746,7 @@ msgstr ""
 msgid "help_domain_del %s"
 msgstr ""
 
-#. You can create various databases<br />Click on 'SQL Admin' in the menu to 
+#. You can create various databases<br />Click on 'MySQL Admin' in the menu to 
 #. manage them<br />or use the table below to backup, retrieve or delete them:
 msgid "help_sql_list_ok"
 msgstr ""

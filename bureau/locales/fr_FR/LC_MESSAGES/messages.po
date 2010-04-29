@@ -80,7 +80,7 @@ msgstr "Confirmer le mot de passe"
 
 #: ../admin/adm_add.php:66 ../admin/adm_edit.php:86 ../admin/adm_edit.php:90
 msgid "Can he change its password"
-msgstr "Peut-il changer de mot de passe ?"
+msgstr "Peut-il changer de mot de passe&nbsp;?"
 
 #: ../admin/adm_add.php:78 ../admin/adm_edit.php:98 ../admin/adm_list.php:78
 #: ../admin/adm_list.php:76 ../admin/adm_add.php:82 ../admin/adm_edit.php:106
@@ -270,7 +270,7 @@ msgid "Member Edition"
 msgstr "Modification d'un membre"
 
 #: ../admin/adm_edit.php:65 ../admin/adm_edit.php:69
-msgid "Account Enabled ?"
+msgid "Account Enabled?"
 msgstr "Compte Actif&nbsp;? "
 
 #: ../admin/adm_edit.php:70 ../admin/dom_dodel.php:55
@@ -1538,7 +1538,7 @@ msgstr "Préférences d'administration"
 #: ../admin/mem_chgmail.php:44 ../admin/mem_cm2.php:40 ../admin/mem_cm.php:35
 #: ../admin/mem_cm.php:46 ../admin/mem_param.php:74
 msgid "Change the email of the account"
-msgstr "Changement d'adresse email du compte AlternC"
+msgstr "Changer l'adresse email du compte AlternC"
 
 #: ../admin/mem_chgmail.php:46 ../admin/mem_chgmail.php:51
 #, php-format
@@ -1594,7 +1594,7 @@ msgstr "Paramètres de votre compte"
 #: ../admin/mem_param.php:53 ../admin/mem_param.php:50
 #: ../admin/mem_passwd.php:41
 msgid "Password change"
-msgstr "Changement du mot de passe"
+msgstr "Changer le mot de passe"
 
 #: ../admin/mem_param.php:55 ../admin/mem_param.php:57
 #: ../admin/mem_param.php:54
@@ -1772,8 +1772,8 @@ msgstr "Vous avez atteint votre quota de bases, vous ne pouvez plus en créer."
 
 #: ../admin/sql_add.php:41 ../admin/sql_list.php:82 ../admin/sql_add.php:39
 #: ../admin/sql_list.php:79
-msgid "Create a new database"
-msgstr "Création d'une base de données"
+msgid "Create a new MySQL database"
+msgstr "Création d'une base de données MySQL"
 
 #: ../admin/sql_add.php:53 ../admin/sql_getparam.php:52
 #: ../admin/sql_list.php:53 ../admin/sql_list.php:99
@@ -1784,9 +1784,12 @@ msgstr "Création d'une base de données"
 msgid "Database"
 msgstr "Base de données"
 
+msgid "MySQL Database"
+msgstr "Base de données MySQL"
+
 #: ../admin/sql_add.php:56 ../admin/sql_add.php:54
-msgid "Create this new database."
-msgstr "Créer cette nouvelle base."
+msgid "Create this new MySQL database."
+msgstr "Créer cette nouvelle base de données MySQL."
 
 #: ../admin/sql_bck.php:40 ../admin/sql_del.php:53
 #: ../admin/sql_dorestore.php:39 ../admin/sql_getparam.php:40
@@ -1801,11 +1804,11 @@ msgstr "Base de données MySQL"
 #: ../admin/sql_bck.php:48 ../admin/sql_bck.php:51
 #, php-format
 msgid "Manage the SQL backup for database %s"
-msgstr "Changer la sauvegarde de la base %s"
+msgstr "Gérer la sauvegarde de la base %s"
 
 #: ../admin/sql_bck.php:53 ../admin/sql_bck.php:56
-msgid "Do sql backup?"
-msgstr "Sauvegarder la base SQL ?"
+msgid "Do MySQL backup?"
+msgstr "Sauvegarder la base MySQL&nbsp;?"
 
 #: ../admin/sql_bck.php:57 ../admin/sql_bck.php:60
 msgid "No backup"
@@ -1820,20 +1823,20 @@ msgid "Daily backup"
 msgstr "Sauvegarde quotidienne"
 
 #: ../admin/sql_bck.php:63 ../admin/sql_bck.php:66
-msgid "How many backup should be kept?"
-msgstr "Combien de sauvegardes conserve-t-on ?"
+msgid "How many backups should be kept?"
+msgstr "Combien de sauvegardes conserve-t-on&nbsp;?"
 
 #: ../admin/sql_bck.php:75 ../admin/sql_bck.php:78
 msgid "Compress the backups? (gzip)"
-msgstr "Compresser les sauvegardes ? (gzip)"
+msgstr "Compresser les sauvegardes&nbsp;? (gzip)"
 
 #: ../admin/sql_bck.php:82 ../admin/sql_bck.php:85
 msgid "In which folder do you want to store the backups?"
-msgstr "Où voulez-vous stocker les sauvegardes ?"
+msgstr "Où voulez-vous stocker les sauvegardes&nbsp;?"
 
 #: ../admin/sql_bck.php:92 ../admin/sql_bck.php:95
-msgid "Change the SQL backup parameters"
-msgstr "Changer les paramètres de sauvegarde SQL"
+msgid "Change the MySQL backup parameters"
+msgstr "Changer les paramètres de sauvegarde MySQL"
 
 #: ../admin/sql_bck.php:101 ../admin/sql_dorestore.php:55
 #: ../admin/sql_restore.php:69 ../admin/sql_restore.php:97
@@ -1879,7 +1882,7 @@ msgstr "Voici vos paramètres actuels"
 #: ../admin/sql_passchg.php:53 ../admin/sql_users_list.php:97
 #: ../admin/sql_getparam.php:56 ../admin/sql_list.php:95
 #: ../admin/sql_passchg.php:51 ../admin/sql_users_list.php:100
-msgid "SQL Server"
+msgid "MySQL Server"
 msgstr "Serveur MySQL"
 
 #: ../admin/sql_list.php:48 ../admin/sql_list.php:44
@@ -1904,12 +1907,12 @@ msgid "Delete the checked databases"
 msgstr "Effacer les bases cochées"
 
 #: ../admin/sql_list.php:84 ../admin/sql_list.php:81
-msgid "Change the SQL password"
-msgstr "Changement de mot de passe SQL"
+msgid "Change the MySQL password"
+msgstr "Changer le mot de passe MySQL"
 
 #: ../admin/sql_list.php:85 ../admin/sql_list.php:82
-msgid "Get the current SQL parameters"
-msgstr "Afficher les paramètres SQL actuels"
+msgid "Get the current MySQL parameters"
+msgstr "Afficher les paramètres MySQL actuels"
 
 #: ../admin/sql_list.php:91 ../admin/sql_users_list.php:90
 #: ../admin/sql_list.php:88 ../admin/sql_users_list.php:86
@@ -1925,16 +1928,16 @@ msgstr "Créer ma base de données principale"
 
 #: ../admin/sql_passchg.php:46 ../admin/sql_passchg.php:44
 msgid ""
-"Enter the new password of your SQL database and click 'change the password' "
+"Enter the new password of your MySQL database and click 'change the password' "
 "to change it"
 msgstr ""
-"Entrez le nouveau mot de passe de votre base de données SQL et cliquez sur "
+"Entrez le nouveau mot de passe de votre base de données MySQL et cliquez sur "
 "'Changer le mot de passe'"
 
 #: ../admin/sql_restore.php:48 ../admin/sql_restore.php:51
 #, php-format
-msgid "Restore a SQL backup for database %s"
-msgstr "Restaurer la sauvegarde SQL de la base %s"
+msgid "Restore a MySQL backup for database %s"
+msgstr "Restaurer la sauvegarde MySQL de la base %s"
 
 #: ../admin/sql_restore.php:54 ../admin/sql_restore.php:82
 #: ../admin/sql_restore.php:57
@@ -2576,6 +2579,9 @@ msgstr "Afficher la taille complète des répertoires (lent)"
 msgid "Editing subdomain"
 msgstr "Edition du sous-domaine"
 
+msgid "Editing subdomains of %s"
+msgstr "Edition des sous-domaines de %s"
+
 #: ../admin/dom_subedit.php:58
 msgid "Sub-domain"
 msgstr "Sous-domaine"
@@ -2670,7 +2676,7 @@ msgid "In how many classes of characters must be the password (at least):"
 msgstr "Dans combien de classes de caractères doit être ce mot de passe (au minimum)&nbsp;:"
 
 msgid "Do we allow the password to be like the login?"
-msgstr "Autorise-t-on le mot de passe à ressembler au nom d'utilisateur ?"
+msgstr "Autorise-t-on le mot de passe à ressembler au nom d'utilisateur&nbsp;?"
 
 msgid "Apply this password policy"
 msgstr "Appliquer cette politique de mot de passe"
@@ -2826,3 +2832,16 @@ msgstr "Retour à la liste des bases MySQL"
 
 msgid "(enter an IPv4 address, for example 192.168.1.2)"
 msgstr "(entrez une adresse IPv4, par exemple 192.168.1.2)"
+
+msgid "Create an ftp account in this folder"
+msgstr "Créer un compte FTP dans ce répertoire"
+
+msgid "Edit the ftp account"
+msgstr "Modifier le compte FTP"
+
+msgid "that exists in this folder"
+msgstr "qui existe dans ce répertoire"
+
+msgid "Create this new MySQL user"
+msgstr "Créer ce nouvel utilisateur MySQL"
+

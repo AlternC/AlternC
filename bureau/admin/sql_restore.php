@@ -48,7 +48,7 @@ if (!$r=$mysql->get_mysql_details($id)) {
 
 if (is_array($r)) {
 ?>
-<h3><?php printf(_("Restore a SQL backup for database %s"),$r["db"]); ?></h3>
+<h3><?php printf(_("Restore a MySQL backup for database %s"),$r["db"]); ?></h3>
 
 <form action="sql_dorestore.php" method="post">
 <input type="hidden" name="id" value="<?php echo $id ?>" />

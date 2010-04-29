@@ -38,19 +38,26 @@ if (!$r=$mysql->get_dblist()) {
 <h3><?php __("MySQL Databases"); ?></h3>
 <?php
 	if ($error) {
-		echo "<p class=\"error\">$error</p><p>&nbsp;</p>";
+		echo "<p class=\"error\">$error</p>";
 	}
 
-echo "<p>"._("Enter the new password of your SQL database and click 'change the password' to change it")."</p>";
+echo "<p>"._("Enter the new password of your MySQL database and click 'change the password' to change it")."</p>";
 ?>
 
-<form method="post" action="sql_pass.php">
-<table cellspacing="0" cellpadding="4">
-		<tr class="lst2"><th><?php __("Username"); ?></th><td><code><?php echo $mem->user["login"]; ?></code></td></tr>
-		<tr class="lst1"><th><label for="pass"><?php __("Password"); ?></label></th><td><code><input class="int" type="password" name="pass" id="pass" value="" /></code></td></tr>
-		<tr class="lst2"><th><?php __("SQL Server"); ?></th><td><code><?php echo $mysql->server; ?></code></td></tr>
-		<tr class="lst1"><th><?php __("Database"); ?></th><td><code><?php echo $r[0]["db"]; ?></code></td></tr>
-	<tr><td><input type="submit" class="inb" name="submit" value="<?php __("Change the password"); ?>" /></td></tr>
+<form method="post" action="sql_pass.php" name="main" id="main">
+<table class="tedit">
+		<tr><th><?php __("Username"); ?></th><td><code><?php echo $mem->user["login"]; ?></code></td></tr>
+		<tr><th><label for="pass"><?php __("Password"); ?></label></th><td><code><input class="int" type="password" name="pass" id="pass" value="" /></code></td></tr>
+		<tr><th><?php __("SQL Server"); ?></th><td><code><?php echo $mysql->server; ?></code></td></tr>
+		<tr><th><?php __("Database"); ?></th><td><code><?php echo $r[0]["db"]; ?></code></td></tr>
+	<tr class="trbtn"><td colspan="2">
+  <input type="submit" class="inb" name="submit" value="<?php __("Change the password"); ?>" />
+  <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='sql_list.php'"/>
+  </td></tr>
 </table>
 </form>
+<script type="text/javascript">
+document.forms['main'].pass.focus();
+document.forms['main'].setAttribute('autocomplete', 'off');
+</script>
 <?php include_once("foot.php"); ?>

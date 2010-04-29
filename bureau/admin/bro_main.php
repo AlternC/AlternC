@@ -553,7 +553,7 @@ else {
      if ($id=$ftp->is_ftp($R)) {
 ?>
 <span class="ina">
-	 <a href="ftp_edit.php?id=<?php ehe($id); ?>"><?php __("Edit the ftp account."); ?></a> 
+	 <a href="ftp_edit.php?id=<?php ehe($id); ?>"><?php __("Edit the ftp account"); ?></a> 
 </span> &nbsp; <?php __("that exists in this folder"); ?>
 <?php
 }

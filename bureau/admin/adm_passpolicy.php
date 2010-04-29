@@ -82,38 +82,37 @@ if ($edit) {
 
 <form method="post" name="adm_passpolicy.php">
 <input type="hidden" name="doedit" value="<?php echo $edit; ?>"/> 
-<table class="formv">
-<tr class="lt1">
+<table class="tedit">
+<tr>
   <th><?php __("Minimum Password Size:"); ?></th>
-						<td><select name="minsize" id="minsize"><?php for($i=0;$i<=64;$i++) {
+						<td><select class="inl" name="minsize" id="minsize"><?php for($i=0;$i<=64;$i++) {
 						  echo "<option";
 						  if ($c[$edit]["minsize"]==$i) echo " selected=\"selected\"";
 						  echo ">$i</option>";
 						}
 ?></td></tr>
-  <tr class="lst2"><th><?php __("Maximum Password Size:"); ?></th>
-						<td><select name="maxsize" id="maxsize"><?php for($i=0;$i<=64;$i++) {
+  <tr><th><?php __("Maximum Password Size:"); ?></th>
+						<td><select class="inl" name="maxsize" id="maxsize"><?php for($i=0;$i<=64;$i++) {
 						  echo "<option";
 						  if ($c[$edit]["maxsize"]==$i) echo " selected=\"selected\"";
 						  echo ">$i</option>";
 						}
 ?></td></tr>
-  <tr class="lst1">  <th><?php __("In how many classes of characters must be the password (at least):"); ?></th>
-						<td><select name="classcount" id="classcount"><?php for($i=0;$i<=4;$i++) {
+  <tr>  <th><?php __("In how many classes of characters must be the password (at least):"); ?></th>
+						<td><select class="inl" name="classcount" id="classcount"><?php for($i=0;$i<=4;$i++) {
 						  echo "<option";
 						  if ($c[$edit]["classcount"]==$i) echo " selected=\"selected\"";
 						  echo ">$i</option>";
 						}
 ?></td></tr>
-  <tr class="lst2">  <th><?php __("Do we allow the password to be like the login?"); ?></th>
-						<td><select name="allowlogin" id="allowlogin"><?php 
- echo "<option value=\"0\">"._("No")."</option>";
- echo "<option value=\"1\""; if ($c[$edit]["allowlogin"]) echo " selected=\"selected\"";
- echo ">"._("Yes")."</option>";
-?></td></tr>
+  <tr>  <th><?php __("Do we allow the password to be like the login?"); ?></th>
+						<td>
+      <input type="radio" name="allowlogin" id="allowlogin0" value="0" <?php cbox(!$c[$edit]["allowlogin"]); ?> />&nbsp;<?php __("No"); ?>
+      <input type="radio" name="allowlogin" id="allowlogin1" value="1" <?php cbox($c[$edit]["allowlogin"]); ?> />&nbsp;<?php __("Yes"); ?>
+</td></tr>
 </table>
-<p><input type="submit" name="go" value="<?php __("Apply this password policy"); ?>" /> &nbsp; 
-<input type="button" name="cancel" value="<?php __("Cancel and go back to the policy list"); ?>" onclick="history.go(-1);" /></p>
+<p><input type="submit" class="inb" name="go" value="<?php __("Apply this password policy"); ?>" /> &nbsp; 
+<input type="button" class="inb" name="cancel" value="<?php __("Cancel and go back to the policy list"); ?>" onclick="document.location='adm_passpolicy.php'" /></p>
 </form>
 
       <p><?php __("The classes of characters are : <br />1. Low-case letters (a-z)<br />2. Upper-case letters (A-Z)<br />3. Figures (0-9)<br />4. Ascii symbols (!\"#$%&'()*+,-./:;<=>?@[\\]^_`)<br />5. Non-Ascii symbols (~יאגפ...)"); ?></p>
@@ -132,8 +131,8 @@ if (is_array($c)) {
 <?php __("Here is the list of the password policies for each place a password may be needed in AlternC's services. For each of those password kind, you can choose which policy will be applied to passwords. A policy is a minimum and maximum password size, and how many classes of characters must appear in the password. You can also forbid (or not) to use the login or part of it as a password."); ?>
 </p>
 
-<table border="0" cellpadding="4" cellspacing="0">
-<tr><th rowspan="2"></th><th rowspan="2"><?php __("Password Kind"); ?></th><th colspan="4"><?php __("Password Policy"); ?></th></tr>
+<table class="tedit">
+    <tr><th rowspan="2"><?php __("Actions"); ?></th><th rowspan="2"><?php __("Password Kind"); ?></th><th colspan="4"><?php __("Password Policy"); ?></th></tr>
 <tr>
   <th><?php __("Min Size"); ?></th>
   <th><?php __("Max Size"); ?></th>
@@ -147,7 +146,9 @@ $col=1;
 ?>
 
 <tr class="lst<?php echo $col; ?>">
-<td class="center"><a href="adm_passpolicy.php?edit=<?php echo urlencode($v["name"]); ?>"><img src="images/edit.png" alt="<?php __("Change password policy"); ?>" /></a></td>
+<td class="center">
+   <div class="ina"><a href="adm_passpolicy.php?edit=<?php echo urlencode($v["name"]); ?>"><img src="images/edit.png" alt="<?php __("Change password policy"); ?>" /><?php __("Change password policy"); ?></a></div>
+</td>
  <td><?php echo $v["description"]; ?></td>
  <td class="center"><?php echo $v["minsize"]; ?></td>
  <td class="center"><?php echo $v["maxsize"]; ?></td>

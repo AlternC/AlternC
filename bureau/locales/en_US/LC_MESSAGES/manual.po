@@ -636,6 +636,14 @@ msgstr "The requested MySQL user does not exist."
 msgid "err_mysql_19"
 msgstr "You have no MySQL users at the moment."
 
+#. The password is mandatory
+msgid "err_mysql_20"
+msgstr "The password is mandatory"
+
+#. The username cannot be empty
+msgid "err_mysql_21"
+msgstr "The username cannot be empty"
+
 #. Your MySQL backups are stored in the chosen folder from <code>db.sql.1</
 #. code> to <code>db.sql.19</code><br />your database name replaces 'db'.<br /
 #. >WARNING: If you modify backup settings (backups, compression...) previous 

@@ -57,7 +57,7 @@ if ($error) echo "<p class=\"error\">$error</p>";
 <label for="newdomain"><b><?php __("Domain name"); ?> :</b></label> <span class="int" id="newdomwww">www.</span><input type="text" class="int" id="newdomain" name="newdomain" value="<?php ehe($newdomain); ?>" size="32" maxlength="255" />
 </p>
 <p>
-  <input type="checkbox" name="dns" class="inc" value="1" id="yndns"<?php checked($dns=="1"); ?>/>&nbsp;<label for="yndns"><?php __("host my dns here"); ?></label>
+  <input type="checkbox" name="dns" class="inc" value="1" id="yndns"<?php cbox($dns=="1"); ?>/>&nbsp;<label for="yndns"><?php __("host my dns here"); ?></label>
 </p>
 <?php
   $q = $quota->getquota("dom");
@@ -66,9 +66,9 @@ if ($q["u"]>0) {
 <p>
     <?php __("Do you want to point this domain to another domain already installed in your account?"); ?>
 <br />
-   <input type="radio" id="newisslave0" name="newisslave" value="0"<?php checked($newisslave==0); ?>/><label for="newisslave0"><?php __("No: This domain will have its own folder."); ?></label>
+   <input type="radio" id="newisslave0" name="newisslave" value="0"<?php cbox($newisslave==0); ?>/><label for="newisslave0"><?php __("No: This domain will have its own folder."); ?></label>
 <br />
-   <input type="radio" id="newisslave1" name="newisslave" value="1"<?php checked($newisslave==1); ?>/><label for="newisslave1"><?php __("Yes, redirect this new domain to this one:"); ?> </label> <select name="slavedom" id="slavedom" class="inl">
+   <input type="radio" id="newisslave1" name="newisslave" value="1"<?php cbox($newisslave==1); ?>/><label for="newisslave1"><?php __("Yes, redirect this new domain to this one:"); ?> </label> <select name="slavedom" id="slavedom" class="inl">
  <option value=""><?php __("-- Choose a domain --"); ?></option>
 <?php
 $dl=$dom->get_domain_list();

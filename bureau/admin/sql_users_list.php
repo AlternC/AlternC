@@ -79,38 +79,14 @@ for($i=0;$i<count($r);$i++) {
   }
   if ($quota->cancreate("mysql_users")) {
 ?>
-<p><a href="sql_users_add.php"><?php __("Create a new MySQL user"); ?></a><br /></p>
+<p>
+  <span class="ina"><a href="sql_users_add.php"><?php __("Create a new MySQL user"); ?></a><br /></span>
+</p>
 <?php
   }
 } else {
-  echo "<p>"._("help_sql_list_no")."</p>";
-
+  include("sql_list.php"); // no main database, let's show the main db creation form (don't duplicate it here...)
+  exit();
+ } 
 ?>
-<form method="post" action="sql_addmain.php" name="main" id="main">
-<table cellspacing="0" cellpadding="4">
-	<tr class="lst2">
-		<th><?php __("Username"); ?></th>
-		<td><code><?php echo $mem->user["login"]; ?></code></td>
-	</tr>
-	<tr class="lst1">
-		<th><label for="pass"><?php __("Password"); ?></label></th>
-		<td><code><input class="int" type="password" name="pass" id="pass" value="" /></code></td>
-	</tr>
-	<tr class="lst2">
-		<th><?php __("SQL Server"); ?></th>
-		<td><code><?php echo $mysql->server; ?></code></td>
-	</tr>
-	<tr class="lst1">
-		<th><?php __("Database"); ?></th>
-		<td><code><?php echo $mem->user["login"]; ?></code></td>
-	</tr>
-	<tr>
-		<td colspan="2"><input type="submit" class="inb" name="submit" value="<?php __("Create my main database"); ?>" /></td>
-	</tr>
-</table>
-</form>
-<?php } ?>
-<script type="text/javascript">
-document.forms['main'].pass.focus();
-</script>
 <?php include_once("foot.php"); ?>

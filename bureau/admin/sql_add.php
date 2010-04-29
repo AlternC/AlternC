@@ -36,7 +36,7 @@ if (!$quota->cancreate("mysql")) {
 }
 
 ?>
-<h3><?php __("Create a new database"); ?></h3>
+<h3><?php __("Create a new MySQL database"); ?></h3>
 <?php
 	if ($error) {
 		echo "<p class=\"error\">$error</p>";
@@ -46,13 +46,18 @@ if (!$quota->cancreate("mysql")) {
 		}
 	}
 ?>
-<form method="post" action="sql_doadd.php" id="main">
+<form method="post" action="sql_doadd.php" id="main" name="main">
 <table class="tedit">
-<tr><th><label for="dbn"><?php __("Database"); ?></label></th><td>
-	<?php echo $mem->user["login"]; ?>&nbsp;<b>_</b>&nbsp;<input type="text" class="int" name="dbn" id="dbn" value="<?php echo $dbn; ?>" size="20" maxlength="30" />
+<tr><th><label for="dbn"><?php __("MySQL Database"); ?></label></th><td>
+	<span class="int" id="dbnpfx"><?php echo $mem->user["login"]; ?>_</span><input type="text" class="int" name="dbn" id="dbn" value="<?php echo $dbn; ?>" size="20" maxlength="30" />
 </td></tr>
 </table>
 <br />
-<input type="submit" class="inb" name="submit" value="<?php __("Create this new database."); ?>" />
+<input type="submit" class="inb" name="submit" value="<?php __("Create this new MySQL database."); ?>" />
 </form>
+
+<script type="text/javascript">
+  document.forms['main'].dbn.focus();
+</script>
+
 <?php include_once("foot.php"); ?>

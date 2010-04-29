@@ -30,8 +30,15 @@
 require_once("../class/config.php");
 include_once("head.php");
 
+$fields = array (
+	"usern"     => array ("request", "string", ""),
+	"password"    => array ("request", "string", ""),
+	"passconf"    => array ("request", "string", ""),
+);
+getFields($fields);
+
 if (!$quota->cancreate("mysql_users")) {
-	$error=_("err_mysql_20");
+	$error=_("err_mysql_13");
 	$fatal=1;
 }
 
@@ -48,11 +55,11 @@ if (!$quota->cancreate("mysql_users")) {
 		}
 	}
 ?>
-<form method="post" action="sql_users_doadd.php" id="main">
-<table border="1" cellspacing="0" cellpadding="4">
+<form method="post" action="sql_users_doadd.php" id="main" name="main">
+<table class="tedit">
 <tr>
   <th><label for="usern"><?php __("Username"); ?></label></th>
-  <td><?php echo $mem->user["login"]; ?>&nbsp;<b>_</b>&nbsp;<input type="text" class="int" name="usern" id="usern" value="" size="20" maxlength="30" /></td>
+  <td><span class="int" id="usernpfx"><?php echo $mem->user["login"]; ?>_</span><input type="text" class="int" name="usern" id="usern" value="<?php ehe($usern); ?>" size="20" maxlength="20" /></td>
 </tr>
 <tr>
   <th><label for="password"><?php __("Password"); ?></label></th>
@@ -63,7 +70,19 @@ if (!$quota->cancreate("mysql_users")) {
   <td><input type="password" class="int" name="passconf" id="passconf" size="26"/></td>
 </tr>
 
-<tr><td colspan="2"><input type="submit" class="inb" name="submit" value="<?php __("Create this new user"); ?>" /></td></tr>
+<tr class="trbtn"><td colspan="2">
+  <input type="submit" class="inb" name="submit" value="<?php __("Create this new MySQL user"); ?>" />
+  <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='sql_users_list.php'"/>
+</td></tr>
 </table>
 </form>
+<script type="text/javascript">
+  if (document.forms['main'].usern.text!='') {
+    document.forms['main'].password.focus();
+  } else {
+    document.forms['main'].usern.focus();
+  }
+  document.forms['main'].setAttribute('autocomplete', 'off');
+
+</script>
 <?php include_once("foot.php"); ?>

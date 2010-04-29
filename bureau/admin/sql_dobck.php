@@ -29,6 +29,17 @@
 */
 require_once("../class/config.php");
 
+$fields = array (
+	"id"     => array ("request", "string", ""),
+	"bck_mode" => array ("request", "integer", 0),
+	"bck_history" => array ("request", "integer", 7),
+	"bck_gzip" => array ("request", "integer", 0),
+	"bck_dir" => array ("request", "string", "/"),
+	
+);
+getFields($fields);
+
+
 if (!$mysql->put_mysql_backup($id,$bck_mode,$bck_history,$bck_gzip,$bck_dir)) {
 	$error=$err->errstr();
 	include("sql_bck.php");
