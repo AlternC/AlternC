@@ -772,7 +772,7 @@ msgstr "%1$d/%2$d/%3$d %4$d:%5$d"
 #.  1  2  3
 #. eg: english : %3$d/%1$d/%2$d
 msgid "%3$d-%2$d-%1$d"
-msgstr "%1$d/%2$d/%3$d"
+msgstr "%1$02d/%2$02d/%3$04d"
 
 msgid "AlternC's account password"
 msgstr "Mots de passe des comptes AlternC"

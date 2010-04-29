@@ -56,8 +56,9 @@ if (! ($confirmed = ($_GET['submit'] == _("Confirm")) ) ) {
   ?>
   <form action="<?=$PHP_SELF?>" method="GET">
   <input type="hidden" name="uid" value="<?=$uid?>" />
-  <? __("Redirection URL:") ?> <input type="text" name="redirect" value="http://example.com/" />
-  <input type="submit" name="submit" value="<?=_("Confirm")?>" />
+  <? __("Redirection URL:") ?> <input type="text" name="redirect" class="int" value="http://example.com/" />
+  <input type="submit" name="submit" class="inb" value="<?=_("Confirm")?>" />
+  <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='adm_list.php'"/>
   </form><?php
 
   print "<h3>" . _("Domains of user: ") . $r["login"] . "</h3>";
@@ -96,32 +97,34 @@ foreach ($domains as $key => $domain) {
   }
   $dom->unlock();
   # 2. for each subdomain
-  foreach ($r['sub'] as $k => $sub) {
-    # shortcuts
-    $type = $sub['type'];
-    $dest = $sub['dest'];
-    $sub = $sub['name'];
-    # if it's a real website
-    if ($type == $dom->type_local) {
-      if (!$confirmed) {
-        print "<li>";
-        if ($sub) {
-          print $sub . '.';
-        }
-        print "$domain -> $dest</li>";
-      } else {
+  if (is_array($r['sub'])) {
+    foreach ($r['sub'] as $k => $sub) {
+# shortcuts
+      $type = $sub['type'];
+      $dest = $sub['dest'];
+      $sub = $sub['name'];
+# if it's a real website
+      if ($type == $dom->type_local) {
+	if (!$confirmed) {
+	  print "<li>";
+	  if ($sub) {
+	    print $sub . '.';
+	  }
+	  print "$domain -> $dest</li>";
+	} else {
 
-        # 2.1 keep a copy of where it was, in an SQL request
-        $backup .= "UPDATE `sub_domaines` SET `type`='$type', valeur='$dest' WHERE `domaine`='$domain' AND sub='$sub';\n";
-        $backup .= "DELETE FROM `sub_domaines_standby` WHERE domaine='$domain' and sub='$sub';\n";
-        $backup .= "INSERT INTO sub_domaines_standby (compte,domaine,sub,valeur,type,action) values ('$cuid','$domain','$sub','$dest','$type',1);\n"; // UPDATE
-
-        # 2.2 change the subdomain to redirect to http://spam.koumbit.org/
-	$dom->lock();
-        if (!$dom->set_sub_domain($domain, $sub, $dom->type_url, "edit", $redirect)) {
-	  print "-- error in $sub.$domain: " . $err->errstr() . "\n";
+# 2.1 keep a copy of where it was, in an SQL request
+	  $backup .= "UPDATE `sub_domaines` SET `type`='$type', valeur='$dest' WHERE `domaine`='$domain' AND sub='$sub';\n";
+	  $backup .= "DELETE FROM `sub_domaines_standby` WHERE domaine='$domain' and sub='$sub';\n";
+	  $backup .= "INSERT INTO sub_domaines_standby (compte,domaine,sub,valeur,type,action) values ('$cuid','$domain','$sub','$dest','$type',1);\n"; // UPDATE
+	  
+# 2.2 change the subdomain to redirect to http://spam.koumbit.org/
+	  $dom->lock();
+	  if (!$dom->set_sub_domain($domain, $sub, $dom->type_url, "edit", $redirect)) {
+	    print "-- error in $sub.$domain: " . $err->errstr() . "\n";
+	  }
+	  $dom->unlock();
 	}
-	$dom->unlock();
       }
     }
   }

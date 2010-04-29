@@ -42,7 +42,7 @@ if ($submit) {
 
   while (list($key,$val)=each($qlist)) {
     $var="q_".$key;
-    $quota->setquota($key,$$var);
+    $quota->setquota($key,$_REQUEST[$var]);
   }
   $mem->unsu();
   $error=_("The quotas has been successfully edited");

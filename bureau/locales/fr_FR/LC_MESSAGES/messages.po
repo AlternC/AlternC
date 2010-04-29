@@ -394,8 +394,8 @@ msgid "Last login"
 msgstr "Dernière connexion"
 
 #: ../admin/adm_list.php:78 ../admin/adm_list.php:76 ../admin/adm_list.php:106
-msgid "Last fail"
-msgstr "Dernier échec"
+msgid "Recent fail"
+msgstr "Échec récent"
 
 #: ../admin/adm_list.php:78 ../admin/adm_list.php:76 ../admin/adm_list.php:107
 msgid "Last ip"
@@ -2845,3 +2845,5 @@ msgstr "qui existe dans ce répertoire"
 msgid "Create this new MySQL user"
 msgstr "Créer ce nouvel utilisateur MySQL"
 
+msgid "Created on"
+msgstr "Créé le"

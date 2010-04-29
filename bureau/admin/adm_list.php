@@ -100,15 +100,15 @@ if ($mem->user["admlist"]==0) { // Normal (large) mode
 ?>
 <table cellspacing="0" cellpadding="4">
 <tr>
-<th colspan="5">&nbsp;</th>
+<th colspan="5"><?php echo __("Actions"); ?></th>
 <th><?php __("Username"); ?></th>
 <th><?php echo _("Surname")." "._("First Name")."<br />("._("Email address").")"; ?></th>
 <th><?php __("Created by") ?></th>
 <th><?php __("Created on") ?></th>
 <th><?php __("Account type") ?></th>
 <th><?php __("Last login"); ?></th>
-<th><?php __("Last fail"); ?></th>
 <th><?php __("Last ip"); ?></th>
+<th><?php __("Recent fail"); ?></th>
 <th><?php __('Expiry') ?></th>
 </tr>
 <?php
@@ -144,8 +144,8 @@ while (list($key,$val)=each($r))
 		<td><?php echo format_date('%3$d-%2$d-%1$d',$val["created"]); ?></td>
 		<td><?php echo $val["type"] ?></td>
 		<td><?php echo $val["lastlogin"] ?></td>
-		<td><?php echo $val["lastfail"] ?></td>
                 <td><?php echo $val["lastip"] ?></td>
+		<td><?php echo $val["lastfail"] ?></td>
 		<td><div class="<?php echo 'exp' . $admin->renew_get_status($val['uid']) ?>"><?php echo $admin->renew_get_expiry($val['uid']) ?></div></td>
 	</tr>
 <?php

@@ -61,10 +61,10 @@ $mem->unsu();
 	}
 ?>
 <form method="post" action="adm_quotadoedit.php">
-<table border="1" cellspacing="0" cellpadding="6">
+<table class="tedit">
 <tr><th><input type="hidden" name="uid" value="<?php echo $uid ?>" />
 <?php __("Username"); ?></th><td colspan="3"><code><big><?php echo $us["login"]; ?></big></code>&nbsp;</td></tr>
-<tr><th><?php __("Quota"); ?></th><th><?php __("Total"); ?></th><th><?php __("Used"); ?></th></tr>
+<tr><th><?php __("Quota"); ?></th><th style="text-align: right"><?php __("Total"); ?></th><th><?php __("Used"); ?></th></tr>
 <?php
 $ql=$quota->qlist();
 reset($ql);
@@ -80,7 +80,10 @@ while (list($key,$val)=each($ql)) {
 	echo "</tr>";
 }
 ?>
-<tr><td colspan="4" align="center"><input class="inb" type="submit" name="submit" value="<?php __("Edit the quotas"); ?>" />
+<tr class="trbtn"><td colspan="3">
+  <input class="inb" type="submit" name="submit" value="<?php __("Edit the quotas"); ?>" />
+  <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='adm_list.php'" />
+
 </td></tr>
 </table>
 </form>
