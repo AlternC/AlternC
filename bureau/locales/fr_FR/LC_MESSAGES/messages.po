@@ -2854,3 +2854,9 @@ msgstr "Compte"
 
 msgid "Create a new AlternC account"
 msgstr "Créer un nouveau compte AlternC"
+
+msgid "Or only the accounts of:"
+msgstr "Ou seulement les comptes de&nbsp;:"
+
+msgid "Advanced features"
+msgstr "Fonctionnalités avancées"

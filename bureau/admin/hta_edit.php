@@ -46,6 +46,8 @@ if (!$dir) {
 
 ?>
 <h3><?php printf(_("List of authorized user in folder %s"),$dir); ?></h3>
+<hr id="topbar"/>
+<br />
 <?php
 	if (!count($r)) {
 		echo "<p class=\"error\">".sprintf(_("No authorized user in %s"),$dir)."</p>";

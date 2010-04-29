@@ -61,6 +61,8 @@ include("mail_list.php");
 </head>
 <body>
 <h3><?php __("Deleting mail accounts"); ?> : </h3>
+<hr id="topbar"/>
+<br />
 <p><?php __("Please confirm the deletion of the following mail accounts:"); ?></p>
 <form method="post" action="mail_del.php" id="main">
 <p>

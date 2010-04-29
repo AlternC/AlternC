@@ -46,7 +46,8 @@ if ($error) {
 }
 
 ?>
-
+<hr id="topbar"/>
+<br />
 <form action="mail_doadd.php" method="post" name="main" id="main">
   <input type="hidden" name="domain" value="<?php echo $domain; ?>" />
  <table class="tedit">

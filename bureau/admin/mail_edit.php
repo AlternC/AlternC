@@ -46,6 +46,8 @@ else
 
 ?>
 <h3><?php printf(_("Edit an email address of the domain %s"),$domain); ?> : </h3>
+<hr id="topbar"/>
+<br />
 <?php
 if ($error_edit) {
 	echo "<p class=\"error\">$error_edit</p>";

@@ -52,6 +52,8 @@ if ($error) {
   echo "<p class=\"error\">$error</p>";
 }
 ?>
+<hr id="topbar"/>
+<br />
 <p>
   <span class="inb"><a href="mail_add.php?domain=<?php echo $domain; ?>"><?php printf(_("Add a mailbox on <b>%s</b>"),$domain); ?></a></span> 
   <span class="inb"><a href="mail_add.php?many=1&amp;domain=<?php echo $domain; ?>"><?php printf(_("Add many mailboxes on <b>%s</b>"),$domain); ?></a></span>
@@ -68,6 +70,8 @@ if ($error) {
   echo "<p class=\"error\">$error</p>";
 }
 ?>
+<hr id="topbar"/>
+<br />
 <p>
   <span class="inb"><a href="mail_add.php?domain=<?php echo $domain; ?>"><?php printf(_("Add a mailbox on <b>%s</b>"),$domain); ?></a></span> 
   <span class="inb"><a href="mail_add.php?many=1&amp;domain=<?php echo $domain; ?>"><?php printf(_("Add many mailboxes on <b>%s</b>"),$domain); ?></a></span>

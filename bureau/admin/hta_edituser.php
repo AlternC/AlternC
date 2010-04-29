@@ -38,6 +38,8 @@ getFields($fields);
 
 ?>
 <h3><?php printf(_("Editing user %s in the protected folder %s"),$user,$dir); ?></h3>
+<hr id="topbar"/>
+<br />
 <?php
 	if ($error) {
 		echo "<p class=\"error\">$error</p>";
@@ -54,4 +56,8 @@ getFields($fields);
 <tr><td colspan="2"><input type="submit" class="inb" value="<?php __("Change the password"); ?>" /></td></tr>
 </table>
 </form>
+<script type="text/javascript">
+document.forms['main'].newpass.focus();
+document.forms['main'].setAttribute('autocomplete', 'off');
+</script>
 <?php include_once("foot.php"); ?>
