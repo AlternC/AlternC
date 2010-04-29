@@ -389,7 +389,7 @@ function pretty_months($months) {
  * @access private
  */
 function duration_list($name, $selected=0) {
-  $res = "<select name=\"$name\" id=\"$name\">";
+  $res = "<select name=\"$name\" id=\"$name\" class=\"inl\">";
 
   foreach(array(0, 1, 2, 3, 4, 6, 12, 24) as $dur) {
     $res .= "<option value=\"$dur\"";

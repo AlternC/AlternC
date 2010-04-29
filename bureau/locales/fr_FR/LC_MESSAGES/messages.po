@@ -317,7 +317,7 @@ msgid "Password"
 msgstr "Mot de passe"
 
 #: ../admin/adm_edit.php:117 ../admin/adm_edit.php:125
-msgid "Reset quotas to default ?"
+msgid "Reset quotas to default?"
 msgstr "Réinitialiser les quotas de ce compte&nbsp;?"
 
 #: ../admin/adm_edit.php:120 ../admin/adm_edit.php:128
@@ -1742,8 +1742,8 @@ msgstr "Bases de données"
 
 #: ../admin/menu_sql.php:37 ../admin/sql_admin.php:47 ../admin/menu_sql.php:36
 #: ../admin/menu_sql.php:40
-msgid "SQL Admin"
-msgstr "Admin SQL"
+msgid "PhpMyAdmin"
+msgstr "PhpMyAdmin"
 
 #: ../admin/menu_sta2.php:37 ../admin/menu_sta2.php:36
 #: ../admin/menu_sta2.php:39

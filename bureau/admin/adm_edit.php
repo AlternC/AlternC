@@ -61,7 +61,7 @@ if (!$r=$admin->get($uid)) {
 	}
 ?>
 <form method="post" action="adm_doedit.php" name="main" id="main">
-<table border="1" cellspacing="0" cellpadding="4">
+<table class="tedit">
 <tr>
 	<th><input type="hidden" name="uid" value="<?php echo $uid ?>" />
 <?php __("Username"); ?></th>
@@ -69,15 +69,10 @@ if (!$r=$admin->get($uid)) {
 </tr>
 <tr>
 	<th><label for="enabled"><?php __("Account Enabled?"); ?></label></th>
-	<td><select class="inl" name="enabled" id="enabled">
-        <?php
-	  echo "<option";
-          if ($r["enabled"]=="0") echo " selected=\"selected\"";
-          echo " value=\"0\">"._("No")."</option>";
-          echo "<option";
-          if ($r["enabled"]=="1") echo " selected=\"selected\"";
-          echo " value=\"1\">"._("Yes")."</option>";
-?></select></td>
+	<td>
+        <input type="radio" class="inc" id="enabled0" name="enabled" value="0"<?php cbox($r["enabled"]==0); ?>><label for="enabled0"><?php __("No"); ?></label><br />
+	<input type="radio" class="inc" id="enabled1" name="enabled" value="1"<?php cbox($r["enabled"]==1); ?>><label for="enabled1"><?php __("Yes"); ?></label><br />	
+	</td>
 </tr>
 
 <tr>
@@ -90,14 +85,9 @@ if (!$r=$admin->get($uid)) {
 </tr>
 <tr>
 	<th><label for="canpass"><?php __("Can he change its password"); ?></label></th>
-	<td><select class="inl" name="canpass" id="canpass">
-	<?php
-	for($i=0;$i<count($bro->l_icons);$i++) {
-	  echo "<option";
-	  if ($r["canpass"]==$i) echo " selected=\"selected\"";
-	  echo " value=\"$i\">"._($bro->l_icons[$i])."</option>";
-	}
-?></select>
+	<td>
+        <input type="radio" class="inc" id="canpass0" name="canpass" value="0"<?php cbox($r["canpass"]==0); ?>><label for="canpass0"><?php __("No"); ?></label><br />
+	<input type="radio" class="inc" id="canpass1" name="canpass" value="1"<?php cbox($r["canpass"]==1); ?>><label for="canpass1"><?php __("Yes"); ?></label><br />	
 	</td>
 </tr>
  <tr>
@@ -114,7 +104,7 @@ if (!$r=$admin->get($uid)) {
 </tr>
 <tr>
 	<th><label for="type"><?php __("Account type"); ?></label></th>
-	<td><select name="type" id="type">
+	<td><select name="type" id="type" class="inl">
 	<?php
 	$db->query("SELECT distinct(type) FROM defquotas ORDER by type");
 	while($db->next_record()) {
@@ -124,14 +114,16 @@ if (!$r=$admin->get($uid)) {
 	    echo " selected";
 	  echo ">$type</option>";
 	}
-?></select><label for="reset_quotas"><?php __("Reset quotas to default ?") ?></label><input type="checkbox" name="reset_quotas" id="reset_quotas" /></td>
+?></select>&nbsp; <input type="checkbox" name="reset_quotas" id="reset_quotas" class="inc" /><label for="reset_quotas"><?php __("Reset quotas to default?") ?></label></td>
 </tr>
 <tr>
 	<th><label for="duration"><?php __("Period"); ?></label></th>
 	<td><?php echo duration_list('duration', $r['duration']) ?></td>
 </tr>
-<tr>
-	<td colspan="2" align="center"><input type="submit" class="inb" name="submit" value="<?php __("Edit this account"); ?>" />
+<tr class="trbtn"><td colspan="2">
+  <input type="submit" class="inb" name="submit" value="<?php __("Edit this account"); ?>" />
+  <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='adm_list.php'" />
+	  
 </td>
 </tr>
 </table>
@@ -157,18 +149,18 @@ if (!$r=$admin->get($uid)) {
 
 <p>
 <?php
-	if ($mem->user[uid]==2000) { // PATCHBEN only admin can change su/nosu :)
+if ($mem->user["uid"]==2000) {  // Only ADMIN (2000) can change the admin status of accounts
 if ($r["su"]) {
 ?>
-<b><?php __("This account is a super-admin account"); ?></b><br />
+<p><b><?php __("This account is a super-admin account"); ?></b></p>
 <?php if ($admin->onesu()) {
   __("There is only one administrator account, you cannot turn this account back to normal");
 } else {
 ?>
-<a href="adm_donosu.php?uid=<?php echo $r["uid"]; ?>"><?php __("Turn this account back to normal"); ?></a>
+<p><span class="ina"><a href="adm_donosu.php?uid=<?php echo $r["uid"]; ?>"><?php __("Turn this account back to normal"); ?></a></span></p>
 <?php }
 } else { ?>
-<a href="adm_dosu.php?uid=<?php echo $r["uid"]; ?>"><?php __("Make this account a super admin one"); ?></a>
+<p><span class="ina"><a href="adm_dosu.php?uid=<?php echo $r["uid"]; ?>"><?php __("Make this account a super admin one"); ?></a></span></p>
 <?php } ?>
 </p>
 
@@ -179,8 +171,8 @@ $c=$admin->get($r["creator"]);
 printf(_("Account created by %s"),$c["login"]);
 ?>
 </p>
-<p><a href="adm_list.php"><?php __("Back to the account list"); ?></a></p>
 <script type="text/javascript">
-document.forms['main'].pass.focus();
+ document.forms['main'].pass.focus();
+ document.forms['main'].setAttribute('autocomplete', 'off');
 </script>
 <?php include_once("foot.php"); ?>

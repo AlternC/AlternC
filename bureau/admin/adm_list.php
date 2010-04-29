@@ -104,6 +104,7 @@ if ($mem->user["admlist"]==0) { // Normal (large) mode
 <th><?php __("Username"); ?></th>
 <th><?php echo _("Surname")." "._("First Name")."<br />("._("Email address").")"; ?></th>
 <th><?php __("Created by") ?></th>
+<th><?php __("Created on") ?></th>
 <th><?php __("Account type") ?></th>
 <th><?php __("Last login"); ?></th>
 <th><?php __("Last fail"); ?></th>
@@ -140,6 +141,7 @@ while (list($key,$val)=each($r))
 		<td <?php if ($val["su"]) echo "style=\"color: red\""; ?>><?php echo $val["login"] ?></td>
 		<td><a href="mailto:<?php echo $val["mail"]; ?>"><?php echo $val["nom"]." ".$val["prenom"] ?></a>&nbsp;</td>
 		<td><?php echo $val["parentlogin"] ?></td>
+		<td><?php echo format_date('%3$d-%2$d-%1$d',$val["created"]); ?></td>
 		<td><?php echo $val["type"] ?></td>
 		<td><?php echo $val["lastlogin"] ?></td>
 		<td><?php echo $val["lastfail"] ?></td>
