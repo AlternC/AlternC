@@ -70,8 +70,12 @@ if (!$r=$admin->get($uid)) {
 <tr>
 	<th><label for="enabled"><?php __("Account Enabled?"); ?></label></th>
 	<td>
+	<?php if ($r["uid"]==$mem->user["uid"]) { ?>
+  <?php __("You cannot disable your own account."); ?>
+  <?php } else { ?>
         <input type="radio" class="inc" id="enabled0" name="enabled" value="0"<?php cbox($r["enabled"]==0); ?>><label for="enabled0"><?php __("No"); ?></label><br />
 	<input type="radio" class="inc" id="enabled1" name="enabled" value="1"<?php cbox($r["enabled"]==1); ?>><label for="enabled1"><?php __("Yes"); ?></label><br />	
+	<?php } ?>
 	</td>
 </tr>
 
@@ -122,8 +126,7 @@ if (!$r=$admin->get($uid)) {
 </tr>
 <tr class="trbtn"><td colspan="2">
   <input type="submit" class="inb" name="submit" value="<?php __("Edit this account"); ?>" />
-  <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='adm_list.php'" />
-	  
+  <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='adm_list.php'" />	  
 </td>
 </tr>
 </table>
@@ -149,7 +152,7 @@ if (!$r=$admin->get($uid)) {
 
 <p>
 <?php
-if ($mem->user["uid"]==2000) {  // Only ADMIN (2000) can change the admin status of accounts
+if ($mem->user["uid"]==2000 && $r["uid"]!=2000) {  // Only ADMIN (2000) can change the admin status of accounts
 if ($r["su"]) {
 ?>
 <p><b><?php __("This account is a super-admin account"); ?></b></p>
@@ -163,7 +166,6 @@ if ($r["su"]) {
 <p><span class="ina"><a href="adm_dosu.php?uid=<?php echo $r["uid"]; ?>"><?php __("Make this account a super admin one"); ?></a></span></p>
 <?php } ?>
 </p>
-
 
 <p><?php
 	}

@@ -41,8 +41,15 @@ if (!$admin->enabled) {
 $fields = array (
 	"show"    => array ("request", "string", ""),
 	"creator" => array("request", "integer", 0),
+	"short" => array("request", "integer", -1),
 );
 getFields($fields);
+
+
+if ($short!=-1) {
+  $mem->adminpref($short);
+  $mem->user["admlist"]=$short;
+ }
 
 $subadmin=variable_get("subadmin_restriction");
 
@@ -56,17 +63,18 @@ if ($subadmin==0 && $show && $cuid != 2000)
 $r=$admin->get_list($show == 'all' ? 1 : 0, $creator);
 
 ?>
-<h3><?php __("Member list"); ?></h3>
+<h3><?php __("AlternC account list"); ?></h3>
 <?php
 	if ($error) {
 	  echo "<p class=\"error\">$error</p>";
 	}
 ?>
 <p>
-<?php __("Here is the list of hosted members"); ?>
+<?php __("Here is the list of hosted AlternC accounts"); ?> (<?php printf(_("%s accounts"),count($r)); ?>)
+
 &nbsp;
 <?php if($_REQUEST['show'] != 'all') {
-  echo '<br /><a href="adm_list.php?show=all">' . _('List all the accounts') . '</a>';
+  echo '<br /><a href="adm_list.php?show=all">' . _('List all AlternC accounts') . '</a>';
   if ($subadmin!=0 || $cuid==2000) {
     $list_creators = $admin->get_creator_list();
     $infos_creators = array();
@@ -80,9 +88,9 @@ $r=$admin->get_list($show == 'all' ? 1 : 0, $creator);
     }
   }
 } else {
-  echo '<br /><a href="adm_list.php">' . _('List only my accounts') . '</a>';
+  echo '<br /><a href="adm_list.php">' . _('List only my AlternC accounts') . '</a>';
 } ?>
-  <br /><a href="adm_add.php"><?php __("Create a new member"); ?></a>
+  <br /><a href="adm_add.php"><?php __("Create a new AlternC account"); ?></a>
   <br /><a href="<?php echo $_SERVER["SCRIPT_NAME"]; ?>"><?php __("Update this page"); ?></a>
 </p>
 <?php
@@ -98,17 +106,27 @@ if (!is_array($r)) {
 
 if ($mem->user["admlist"]==0) { // Normal (large) mode
 ?>
-<table cellspacing="0" cellpadding="4">
+<table class="tlist">
+<tr><td colspan="6">
+<?php  if (count($r)>5) { ?>
+<input type="submit" class="inb" name="submit" value="<?php __("Delete checked accounts"); ?>" />
+			  <?php } ?>
+</td>
+<td  class="trbtn" colspan="4">
+<span class="inav"><a href="adm_list.php?short=1"><?php __("Minimal view"); ?></a></span> &nbsp;
+<span class="ina" style="cursor: text"><?php __("Complete view"); ?></span>
+</td>
+</tr>
 <tr>
-<th colspan="5"><?php echo __("Actions"); ?></th>
-<th><?php __("Username"); ?></th>
-<th><?php echo _("Surname")." "._("First Name")."<br />("._("Email address").")"; ?></th>
+<th></th>
+<th><?php __("Account"); ?></th>
+<th><?php __("Manager"); ?></th>
 <th><?php __("Created by") ?></th>
 <th><?php __("Created on") ?></th>
-<th><?php __("Account type") ?></th>
+<th><?php __("Quotas") ?></th>
 <th><?php __("Last login"); ?></th>
 <th><?php __("Last ip"); ?></th>
-<th><?php __("Recent fail"); ?></th>
+<th><?php __("Fails"); ?></th>
 <th><?php __('Expiry') ?></th>
 </tr>
 <?php
@@ -120,25 +138,14 @@ while (list($key,$val)=each($r))
 	$col=3-$col;
 ?>
 	<tr class="lst<?php echo $col; ?>">
+
 <?php
  if ($val["su"]) { ?>
-			<td>&nbsp;</td>
+		   <td>&nbsp;</td>
 <?php } else { ?>
- <td align="center"><input type="checkbox" class="inc" name="d[]" value="<?php echo $val["uid"]; ?>" /></td>
+ <td><input type="checkbox" class="inc" name="d[]" value="<?php echo $val["uid"]; ?>" /></td>
 <?php } ?>
-		<td align="center"><a href="adm_edit.php?uid=<?php echo $val["uid"] ?>"><?php __("Edit"); ?></a></td>
-		<td align="center"><a href="adm_quotaedit.php?uid=<?php echo $val["uid"] ?>"><?php __("Quotas"); ?></a></td>
-		<td align="center"><a href="adm_deactivate.php?uid=<?php echo $val["uid"] ?>"><?php __("Deactivate"); ?></a></td>
-		<td align="center"><?php
-		if (!$val["enabled"])
-			echo "<img src=\"icon/encrypted.png\" width=\"16\" height=\"16\" alt=\""._("Locked Account")."\" />";
-		else {
-		?>
-			<a href="adm_login.php?id=<?php echo $val["uid"];?>"><?php __("Connect as"); ?></a>
-		<?php } ?>
-		</td>
-
-		<td <?php if ($val["su"]) echo "style=\"color: red\""; ?>><?php echo $val["login"] ?></td>
+		<td <?php if ($val["su"]) echo "style=\"color: red\""; ?>><b><?php echo $val["login"] ?></b></td>
 		<td><a href="mailto:<?php echo $val["mail"]; ?>"><?php echo $val["nom"]." ".$val["prenom"] ?></a>&nbsp;</td>
 		<td><?php echo $val["parentlogin"] ?></td>
 		<td><?php echo format_date('%3$d-%2$d-%1$d',$val["created"]); ?></td>
@@ -148,20 +155,56 @@ while (list($key,$val)=each($r))
 		<td><?php echo $val["lastfail"] ?></td>
 		<td><div class="<?php echo 'exp' . $admin->renew_get_status($val['uid']) ?>"><?php echo $admin->renew_get_expiry($val['uid']) ?></div></td>
 	</tr>
+
+<tr class="lst<?php echo $col; ?>" >
+<td></td><td></td>
+<td colspan="8" >
+<div id="admlistbtn">
+<span class="ina<?php if ($col==2) echo "v"; ?> lst<?php echo $col; ?>">
+  <a href="adm_login.php?id=<?php echo $val["uid"];?>"><?php __("Connect as"); ?></a>
+</span>&nbsp;
+	&nbsp;
+<span class="ina<?php if ($col==2) echo "v"; ?> lst<?php echo $col; ?>" >
+  <a href="adm_edit.php?uid=<?php echo $val["uid"] ?>"><?php __("Edit"); ?></a>
+</span>&nbsp;
+<span class="ina<?php if ($col==2) echo "v"; ?> lst<?php echo $col; ?>" >
+  <a href="adm_quotaedit.php?uid=<?php echo $val["uid"] ?>"><?php __("Quotas"); ?></a>
+</span>&nbsp;
+	<?php if (!$val["su"]) { ?>
+<span class="ina<?php if ($col==2) echo "v"; ?> lst<?php echo $col; ?>" >
+  <a href="adm_deactivate.php?uid=<?php echo $val["uid"] ?>"><?php __("Disable"); ?></a>
+</span>&nbsp;
+	  <?php } ?>
+</div>
+</td>
+</tr>
 <?php
 	}
 
-} // Normal Mode
+} // NORMAL MODE
 
-if ($mem->user["admlist"]==1) { // Short mode TODO : make 3 columns instead of 2  + XHTML compliance instead of 1px img trick ;)
+if ($mem->user["admlist"]==1) { // SHORT MODE
 ?>
 
+  [&nbsp;<?php __("C"); ?>&nbsp;] <?php __("Connect as"); ?> &nbsp; &nbsp; 
+  [&nbsp;<?php __("E"); ?>&nbsp;] <?php __("Edit"); ?> &nbsp; &nbsp; 
+  [&nbsp;<?php __("Q"); ?>&nbsp;] <?php __("Quotas"); ?> &nbsp; &nbsp; 
 
-<table cellspacing="0" cellpadding="0">
+<table class="tlist">
+<tr><td colspan="4">
+<?php  if (count($r)>50) { ?>
+<input type="submit" class="inb" name="submit" value="<?php __("Delete checked accounts"); ?>" />
+			  <?php } ?>
+</td>
+<td  class="trbtn" colspan="5">
+<span class="ina" style="cursor: text"><?php __("Minimal view"); ?></span> &nbsp;
+<span class="inav"><a href="adm_list.php?short=0"><?php __("Complete view"); ?></a></span>
+</td>
+</tr>
 <tr>
-	<th colspan="2">&nbsp;</th><th><?php __("Username"); ?></th>
-	<th colspan="2">&nbsp;</th><th><?php __("Username"); ?></th>
-	<th colspan="2">&nbsp;</th><th><?php __("Username"); ?></th>
+   <th colspan="2"><?php __("Actions"); ?></th><th><?php __("Account"); ?></th>
+   <th colspan="2"><?php __("Actions"); ?></th><th><?php __("Account"); ?></th>
+   <th colspan="2"><?php __("Actions"); ?></th><th><?php __("Account"); ?></th>
 </tr>
 <?php
 reset($r);
@@ -181,17 +224,13 @@ $val=$r[$z];
  <td align="center"><input type="checkbox" class="inc" name="d[]" value="<?php echo $val["uid"]; ?>" /></td>
 <?php } ?>
 		<td align="center">
-		<a href="adm_edit.php?uid=<?php echo $val["uid"] ?>"><?php __("E"); ?></a>
-		<a href="adm_quotaedit.php?uid=<?php echo $val["uid"] ?>"><?php __("Q"); ?></a>
-		<?php
-		if (!$val["enabled"])
-			echo "<img src=\"icon/encrypted.png\" width=\"16\" height=\"16\" alt=\""._("Locked Account")."\">";
-		else {
-		?>
-			<a href="adm_login.php?id=<?php echo $val["uid"];?>" target="_parent"><?php __("C"); ?></a>
-		<?php } ?>
+		   <a href="adm_login.php?id=<?php echo $val["uid"];?>" target="_parent">[&nbsp;<?php __("C"); ?>&nbsp;]</a>
+		   <a href="adm_edit.php?uid=<?php echo $val["uid"] ?>">[&nbsp;<?php __("E"); ?>&nbsp;]</a>
+<?php		  if($admin->checkcreator($val['uid'])) { ?>
+		   <a href="adm_quotaedit.php?uid=<?php echo $val["uid"] ?>">[&nbsp;<?php __("Q"); ?>&nbsp;]</a>
+							  <?php } ?>
 		</td>
-		<td style="padding-right: 2px; border-right: 1px solid; <?php if ($val["su"]) echo "color: red"; ?>"><?php echo $val["login"] ?></td>
+		<td style="padding-right: 2px; border-right: 1px solid black; <?php if ($val["su"]) echo "color: red"; ?>"><b><?php echo $val["login"] ?></b></td>
 <?php
 $val=$r[$z+$rz];
 if (is_array($val)) {
@@ -202,18 +241,13 @@ if (is_array($val)) {
  <td align="center"><input type="checkbox" class="inc" name="d[]" value="<?php echo $val["uid"]; ?>"></td>
 <?php } ?>
 		<td align="center">
-		<a href="adm_edit.php?uid=<?php echo $val["uid"] ?>"><?php __("E"); ?></a>
-		<a href="adm_quotaedit.php?uid=<?php echo $val["uid"] ?>"><?php __("Q"); ?></a>
-		<?php
-		if (!$val["enabled"])
-			echo "<img src=\"icon/encrypted.png\" width=\"16\" height=\"16\" alt=\""._("Locked Account")."\">";
-		else {
-		  if($admin->checkcreator($val['uid'])) {
-		?>
-			<a href="adm_login.php?id=<?php echo $val["uid"];?>" target="_parent"><?php __("C"); ?></a>
-		<?php } } ?>
+		   <a href="adm_login.php?id=<?php echo $val["uid"];?>" target="_parent">[&nbsp;<?php __("C"); ?>&nbsp;]</a>
+		   <a href="adm_edit.php?uid=<?php echo $val["uid"] ?>">[&nbsp;<?php __("E"); ?>&nbsp;]</a>
+<?php		  if($admin->checkcreator($val['uid'])) { ?>
+		   <a href="adm_quotaedit.php?uid=<?php echo $val["uid"] ?>">[&nbsp;<?php __("Q"); ?>&nbsp;]</a>
+							  <?php } ?>
 		</td>
-		<td style="padding-right: 2px; border-right: 1px solid; <?php if ($val["su"]) echo "color: red"; ?>"><?php echo $val["login"] ?></td>
+		<td style="padding-right: 2px; border-right: 1px solid black; <?php if ($val["su"]) echo "color: red"; ?>"><b><?php echo $val["login"] ?></b></td>
 <?php
 
 } else echo "<td style=\"padding-right: 2px; border-right: 1px solid;\" colspan=\"3\"></td></tr>";
@@ -227,17 +261,13 @@ if (is_array($val)) {
  <td align="center"><input type="checkbox" class="inc" name="d[]" value="<?php echo $val["uid"]; ?>"></td>
 <?php } ?>
 		<td align="center">
-		<a href="adm_edit.php?uid=<?php echo $val["uid"] ?>"><?php __("E"); ?></a>
-		<a href="adm_quotaedit.php?uid=<?php echo $val["uid"] ?>"><?php __("Q"); ?></a>
-		<?php
-		if (!$val["enabled"])
-			echo "<img src=\"icon/encrypted.png\" width=\"16\" height=\"16\" alt=\""._("Locked Account")."\">";
-		else {
-		?>
-			<a href="adm_login.php?id=<?php echo $val["uid"];?>" target="_parent"><?php __("C"); ?></a>
-		<?php } ?>
+		   <a href="adm_login.php?id=<?php echo $val["uid"];?>" target="_parent">[&nbsp;<?php __("C"); ?>&nbsp;]</a>
+		   <a href="adm_edit.php?uid=<?php echo $val["uid"] ?>">[&nbsp;<?php __("E"); ?>&nbsp;]</a>
+<?php		  if($admin->checkcreator($val['uid'])) { ?>
+		   <a href="adm_quotaedit.php?uid=<?php echo $val["uid"] ?>">[&nbsp;<?php __("Q"); ?>&nbsp;]</a>
+							  <?php } ?>
 		</td>
-		<td style="padding-right: 2px; border-right: 1px solid; <?php if ($val["su"]) echo "color: red"; ?>"><?php echo $val["login"] ?></td>
+		<td style="padding-right: 2px; border-right: 1px solid black; <?php if ($val["su"]) echo "color: red"; ?>"><b><?php echo $val["login"] ?></b></td>
 	</tr>
 <?php
 	} else echo "<td style=\"padding-right: 2px; border-right: 1px solid;\" colspan=\"3\"></td></tr>";
@@ -246,11 +276,10 @@ if (is_array($val)) {
 
 
 ?>
-<tr><td colspan="9"><input type="submit" class="inb" name="submit" value="<?php __("Delete checked accounts"); ?>" /></td></tr>
+<tr><td colspan="10"><input type="submit" class="inb" name="submit" value="<?php __("Delete checked accounts"); ?>" /></td></tr>
 </table>
 </form>
 <?php
-   printf("<p>"._("%s accounts")."</p>",count($r));
- } 
+ }
 ?>
 <?php include_once("foot.php"); ?>

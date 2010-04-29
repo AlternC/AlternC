@@ -41,8 +41,8 @@ msgid "This page is restricted to authorized staff"
 msgstr "Cette page est réservée aux administrateurs"
 
 #: ../admin/adm_add.php:46
-msgid "New member"
-msgstr "Ajout d'un membre"
+msgid "New AlternC account"
+msgstr "Créer un compte AlternC"
 
 #: ../admin/adm_add.php:54 ../admin/adm_edit.php:61 ../admin/adm_list.php:78
 #: ../admin/adm_list.php:131 ../admin/adm_list.php:132
@@ -112,13 +112,13 @@ msgstr "Type de compte"
 
 #: ../admin/adm_add.php:102 ../admin/adm_add.php:104 ../admin/adm_add.php:108
 #, php-format
-msgid "Create the domain <b>username.%s</b>"
-msgstr "Installer le domaine <b>login.%s</b>"
+msgid "Install the domain"
+msgstr "Installer le domaine"
 
 #: ../admin/adm_add.php:106 ../admin/adm_list.php:62 ../admin/adm_list.php:59
 #: ../admin/adm_add.php:119 ../admin/adm_add.php:124 ../admin/adm_list.php:82
-msgid "Create a new member"
-msgstr "Créer un nouveau membre"
+msgid "Create this AlternC account"
+msgstr "Créer ce compte AlternC"
 
 #: ../admin/adm_defquotas.php:43 ../admin/adm_panel.php:50
 #: ../admin/adm_panel.php:49 ../admin/adm_defquotas.php:42
@@ -370,16 +370,16 @@ msgid "Back to the account list"
 msgstr "Retour à la liste des comptes"
 
 #: ../admin/adm_list.php:46 ../admin/adm_list.php:56
-msgid "Member list"
-msgstr "Liste des membres"
+msgid "AlternC account list"
+msgstr "Liste des comptes AlternC"
 
 #: ../admin/adm_list.php:53 ../admin/adm_list.php:63
-msgid "Here is the list of hosted members"
-msgstr "Voici la liste des membres hébergés"
+msgid "Here is the list of hosted AlternC accounts"
+msgstr "Voici la liste des comptes AlternC hébergés"
 
 #: ../admin/adm_list.php:56 ../admin/adm_list.php:55 ../admin/adm_list.php:66
-msgid "List all the accounts"
-msgstr "Lister tous les comptes"
+msgid "List all AlternC accounts"
+msgstr "Liste de tous les comptes AlternC"
 
 #: ../admin/adm_list.php:58 ../admin/adm_list.php:57 ../admin/adm_list.php:80
 msgid "List only my accounts"
@@ -394,8 +394,8 @@ msgid "Last login"
 msgstr "Dernière connexion"
 
 #: ../admin/adm_list.php:78 ../admin/adm_list.php:76 ../admin/adm_list.php:106
-msgid "Recent fail"
-msgstr "Échec récent"
+msgid "Fails"
+msgstr "Échecs"
 
 #: ../admin/adm_list.php:78 ../admin/adm_list.php:76 ../admin/adm_list.php:107
 msgid "Last ip"
@@ -424,7 +424,7 @@ msgstr "Compte verrouillé"
 
 #: ../admin/adm_list.php:103 ../admin/adm_list.php:135
 msgid "Connect as"
-msgstr "Connection"
+msgstr "Se connecter"
 
 #: ../admin/adm_list.php:153 ../admin/adm_list.php:174
 #: ../admin/adm_list.php:199 ../admin/adm_list.php:185
@@ -2376,7 +2376,7 @@ msgid "Update this page"
 msgstr "Recharger cette page"
 
 #: ../admin/adm_list.php:97 ../admin/adm_list.php:128
-msgid "Deactivate"
+msgid "Disable"
 msgstr "Désactiver"
 
 #: ../admin/adm_list.php:222 ../admin/adm_list.php:254
@@ -2556,7 +2556,7 @@ msgstr "Notes"
 
 #: ../admin/adm_list.php:103
 msgid "Created by"
-msgstr "Créé par"
+msgstr "Créateur"
 
 #: ../admin/bro_editor.php:63
 msgid "ctrl+click or shift+click and drag to resize the editing zone"
@@ -2847,3 +2847,10 @@ msgstr "Créer ce nouvel utilisateur MySQL"
 
 msgid "Created on"
 msgstr "Créé le"
+
+msgid "Account"
+msgstr "Compte"
+
+
+msgid "Create a new AlternC account"
+msgstr "Créer un nouveau compte AlternC"

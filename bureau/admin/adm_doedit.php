@@ -48,6 +48,10 @@ if ($pass != $passconf) {
   include("adm_edit.php");
   exit();
 }
+// When changing its own account, enabled forced to 1.
+if ($uid==$mem->user["uid"]) {
+  $enabled=1;
+ }
 
 if (!$admin->update_mem($uid, $nmail, $nom, $prenom, $pass, $enabled, $canpass, $type, $duration, $notes)){
   $error=$err->errstr();

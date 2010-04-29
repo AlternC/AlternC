@@ -33,7 +33,7 @@ td {
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 11px;
 	color: #000000;
-	padding-right: 10px;
+	padding-right: 6px;
 }
 
 th {
@@ -106,33 +106,33 @@ hr {
     background-color: #BFD3E1;
 }
 
-.ina {
+.ina:hover, .ina, .inav, .inav:hover {
 	border: 1px solid #999;
-	background-color: #F1F8FD;
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	font-size: 10px;
-	padding: 2px 4px 2px 4px;
-	color: black;
-
-}
-.ina:hover {
-	border: 1px solid #999;
-	background-color: #CFE3F1;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 10px;
 	padding: 2px 4px 2px 4px;
 	color: black;
 	cursor: pointer;
 }
-.ina a {
+.ina {
+	background-color: #F1F8FD;
+}
+.ina:hover, .inav {
+	background-color: #CFE3F1;
+}
+.inav:hover {
+	background-color: #F1F8FD;
+}
+
+.ina a, .inav a {
     color: black;
 }
-.ina a:hover {
+.ina a:hover, .inav a:hover {
     text-decoration: none;
     color: black;
 }
 
-.ina img {
+.ina img, .ina img {
     vertical-align: middle;
     padding: 2px;
 }
@@ -366,6 +366,15 @@ a:hover {
     padding-left: 0;
 }
 
+#create_dom_list_pfx {
+    border-right: 0;
+    padding: 3px;
+}
+#create_dom_list {
+    border-left: 0;
+    padding-left: 0;
+}
+
 
 
 input#email {
@@ -398,7 +407,7 @@ span#emaildom {
  }
 
 .tlist, .tlist td, .tlist th { 
-         padding: 6px;
+         padding: 4px;
          margin: 0;
          border-collapse: collapse;
  }
@@ -415,3 +424,6 @@ input#dir, input#sub_local {
     width: 300px;
 }
 
+#admlistbtn {
+    padding-bottom: 6px;
+}

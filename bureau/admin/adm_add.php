@@ -43,16 +43,16 @@ $fields = array (
 getFields($fields);
 
 ?>
-<h3><?php __("New member"); ?></h3>
+<h3><?php __("New AlternC account"); ?></h3>
 <?php
 if ($error) {
 	echo "<p class=\"error\">$error</p>";
 }
 ?>
-<form method="post" action="adm_doadd.php">
-<table border="1" cellspacing="0" cellpadding="4">
+<form method="post" action="adm_doadd.php" id="main" name="main">
+<table class="tedit">
 <tr><th><label for="login"><?php __("Username"); ?></label></th><td>
-	<input type="text" class="int" name="login" id="login" value="<?php echo $login; ?>" size="20" maxlength="64" />
+	<input type="text" class="int" name="login" id="login" value="<?php echo $login; ?>" size="20" maxlength="16" />
 </td></tr>
 <tr>
 	<th><label for="pass"><?php __("Initial password"); ?></label></th>
@@ -64,14 +64,9 @@ if ($error) {
 </tr>
 <tr>
 	<th><label for="canpass"><?php __("Can he change its password"); ?></label></th>
-	<td><select class="inl" name="canpass" id="canpass">
-	<?php
-	for($i=0;$i<count($bro->l_icons);$i++) {
-	  echo "<option";
-	  if ($canpass==$i) echo " selected=\"selected\"";
-	  echo " value=\"$i\">"._($bro->l_icons[$i])."</option>";
-	}
-?></select>
+	<td>
+        <input type="radio" class="inc" id="canpass0" name="canpass" value="0"<?php cbox($canpass==0); ?>><label for="canpass0"><?php __("No"); ?></label><br />
+	<input type="radio" class="inc" id="canpass1" name="canpass" value="1"<?php cbox($canpass==1); ?>><label for="canpass1"><?php __("Yes"); ?></label><br />	
 	</td>
 </tr>
 <tr>
@@ -104,9 +99,9 @@ if ($error) {
 <?php if (variable_get('hosting_tld') || $dom->enum_domains()) { ?>
 <tr>
     <th colspan="2">
-        <input type="checkbox" name="create_dom" value="1" />
-        <label><?php printf(_("Create the domain <b>username.%s</b>"),""); ?></label>
-        <select name="create_dom_list">
+        <input type="checkbox" name="create_dom" value="1" class="inc" id="create_dom" />
+        <label for="create_dom"><?php printf(_("Install the domain"),""); ?></label>
+        <span class="int" id="create_dom_list_pfx">login.</span><select name="create_dom_list" class="int" id="create_dom_list">
             <?php if (variable_get('hosting_tld')) { ?>
              <option value="<?php echo variable_get('hosting_tld'); ?>" selected="selected"><?php echo variable_get('hosting_tld'); ?></option>
           <?php } 
@@ -120,10 +115,15 @@ if ($error) {
     </th>
 </tr>
  <?php } ?>
-<tr>
-	<td colspan="2"><input type="submit" class="inb" name="submit" value="<?php __("Create a new member"); ?>" /></td>
-</tr>
+<tr class="trbtn"><td colspan="2">
+  <input type="submit" class="inb" name="submit" value="<?php __("Create this AlternC account"); ?>" />
+  <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='adm_list.php'" />
+</td></tr>
 </table>
 </form>
+<script type="text/javascript">
+ document.forms['main'].login.focus();
+ document.forms['main'].setAttribute('autocomplete', 'off');
+</script>
 
 <?php include_once("foot.php"); ?>
