@@ -352,7 +352,11 @@ if ($mode==0) {
 } elseif ($mode==1) {
 	echo sprintf("%.1f",(100*$ts/$totaltotal))."&nbsp;%";
 } else {
+  if ($totaltotal) { 
 	$pc=intval(100*$ts/$totaltotal);
+  } else {
+    $pc=0;
+  }
 	echo "<img src=\"hippo_bleue.gif\" style=\"width: ".(1*$pc)."px; height: 16px\" alt=\"".$pc."%\" title=\"".$pc."%\"/>";
 }
 

@@ -46,16 +46,23 @@ include_once("head.php");
 	}
 ?>
 <ul id="adm_panel">
-<li class="lst1"><a href="adm_tld.php"><?php __("Manage allowed domains (TLD)"); ?></a></li>
-<li class="lst2"><a href="adm_defquotas.php"><?php __("Change the default quotas"); ?></a></li>
-<li class="lst1"><a href="adm_doms.php"><?php __("Manage installed domains"); ?></a></li>
-<li class="lst2"><a href="adm_slaveip.php"><?php __("Manage allowed ip for slave zone transfers"); ?></a></li>
-<li class="lst1"><a href="adm_slaveaccount.php"><?php __("Manage allowed accounts for slave zone transfers"); ?></a></li>
-<li class="lst2"><a href="adm_mxaccount.php"><?php __("Manage allowed accounts for secondary mx"); ?></a></li>
-<li class="lst1"><a href="adm_variables.php"><?php __("Configure AlternC variables"); ?></a></li>
-<li class="lst2"><a href="quota_show_all.php"><?php __("Show all quotas"); ?></a></li>
-<li class="lst1"><a href="stats_members.php"><?php __("Account creation statistics"); ?></a></li>
-<li class="lst2"><a href="adm_passpolicy.php"><?php __("Password Policies"); ?></a></li>
+ <li class="lst1"><a href="adm_tld.php"><?php __("Manage allowed domains (TLD)"); ?></a></li>
+ <li class="lst2"><a href="adm_passpolicy.php"><?php __("Password Policies"); ?></a></li>
+ <li class="lst1"><a href="adm_doms.php"><?php __("Manage installed domains"); ?></a></li>
+ <li class="lst2"><a href="adm_defquotas.php"><?php __("Change the default quotas"); ?></a></li>
+</ul>
+
+
+ <h3><?php __("Advanced features"); ?></h3>
+
+<ul id="adm_panel_root">
+ <li class="lst2"><a href="adm_slaveip.php"><?php __("Manage allowed ip for slave zone transfers"); ?></a></li>
+ <li class="lst1"><a href="adm_slaveaccount.php"><?php __("Manage allowed accounts for slave zone transfers"); ?></a></li>
+ <li class="lst2"><a href="adm_mxaccount.php"><?php __("Manage allowed accounts for secondary mx"); ?></a></li>
+ <li class="lst1"><a href="adm_variables.php"><?php __("Configure AlternC variables"); ?></a></li>
+ <li class="lst2"><a href="stats_members.php"><?php __("Account creation statistics"); ?></a></li>
+</ul>
+
 <?php
 
 // here we include any "adminmenu_*" file content

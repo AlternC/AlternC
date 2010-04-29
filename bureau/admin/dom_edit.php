@@ -73,7 +73,7 @@ function dnsoff() {
 		echo "<p class=\"error\">$error</p>";
 	}
 ?>
-<hr />
+<hr id="topbar"/>
 <br />
 <!-- *****************************************
 		 gestion des sous-domaines

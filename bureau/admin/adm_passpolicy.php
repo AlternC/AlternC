@@ -82,7 +82,7 @@ if ($edit) {
 
 <form method="post" name="adm_passpolicy.php">
 <input type="hidden" name="doedit" value="<?php echo $edit; ?>"/> 
-<table class="tedit">
+<table class="tlist">
 <tr>
   <th><?php __("Minimum Password Size:"); ?></th>
 						<td><select class="inl" name="minsize" id="minsize"><?php for($i=0;$i<=64;$i++) {
@@ -131,7 +131,7 @@ if (is_array($c)) {
 <?php __("Here is the list of the password policies for each place a password may be needed in AlternC's services. For each of those password kind, you can choose which policy will be applied to passwords. A policy is a minimum and maximum password size, and how many classes of characters must appear in the password. You can also forbid (or not) to use the login or part of it as a password."); ?>
 </p>
 
-<table class="tedit">
+<table class="tlist">
     <tr><th rowspan="2"><?php __("Actions"); ?></th><th rowspan="2"><?php __("Password Kind"); ?></th><th colspan="4"><?php __("Password Policy"); ?></th></tr>
 <tr>
   <th><?php __("Min Size"); ?></th>
@@ -147,7 +147,7 @@ $col=1;
 
 <tr class="lst<?php echo $col; ?>">
 <td class="center">
-   <div class="ina"><a href="adm_passpolicy.php?edit=<?php echo urlencode($v["name"]); ?>"><img src="images/edit.png" alt="<?php __("Change password policy"); ?>" /><?php __("Change password policy"); ?></a></div>
+   <div class="ina"><a href="adm_passpolicy.php?edit=<?php echo urlencode($v["name"]); ?>"><img src="images/edit.png" alt="<?php __("Edit"); ?>" /><?php __("Edit"); ?></a></div>
 </td>
  <td><?php echo $v["description"]; ?></td>
  <td class="center"><?php echo $v["minsize"]; ?></td>

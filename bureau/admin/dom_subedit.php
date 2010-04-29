@@ -79,7 +79,7 @@ $dom->unlock();
 		echo "<p class=\"error\">$error</p>";
 	}
 ?>
-<hr />
+<hr id="topbar"/>
 <br />
 <!-- *****************************************
 		 gestion du sous-domaine
