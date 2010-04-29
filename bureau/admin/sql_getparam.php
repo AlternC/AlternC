@@ -53,7 +53,7 @@ if (!$r=$mysql->get_dblist()) {
 		<td><code><?php echo $r[0]["pass"]; ?></code></td>
 	</tr>
 	<tr>
-		<th><?php __("SQL Server"); ?></th>
+		<th><?php __("MySQL Server"); ?></th>
 		<td><code><?php echo $mysql->server; ?></code></td>
 	</tr>
 	<tr>
@@ -61,4 +61,8 @@ if (!$r=$mysql->get_dblist()) {
 		<td><code><?php echo $r[0]["db"]; ?></code></td>
 	</tr>
 </table>
+
+<p><span class="ina"><a href="sql_list.php"><?php __("Back to the MySQL database list"); ?></a></span></p>
+
+
 <?php include_once("foot.php"); ?>

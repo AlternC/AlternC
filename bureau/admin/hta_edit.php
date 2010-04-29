@@ -114,6 +114,7 @@ for($i=0;$i<count($r);$i++){
 </form>
 <script type="text/javascript">
 document.forms['main'].user.focus();
+document.forms['main'].setAttribute('autocomplete', 'off'); 
 </script>
 
 <?php include_once("foot.php"); ?>

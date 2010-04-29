@@ -32,6 +32,11 @@ include_once("head.php");
 
 $fields = array (
 	"domain"    => array ("request", "string", ""),
+	"sub"       => array ("request", "string", ""),
+	"type"      => array ("request", "integer", $dom->type_local),
+	"sub_local" => array ("request", "string",  "/"),
+	"sub_url"   => array ("request", "string", "http://"), 
+	"sub_ip"    => array ("request", "string", ""),
 );
 getFields($fields);
 
@@ -45,17 +50,21 @@ $dom->unlock();
 <script type="text/javascript">
 function dnson() {
 	// Active les composants DNS :
-	if (document.forms["dns"].mx.disabled!=null)
-		document.forms["dns"].mx.disabled=false;
-	if (document.forms["dns"].mail.disabled!=null)
-		document.forms["dns"].mail.disabled=true;
+	if (document.forms["fdns"].mx.disabled!=null)
+		document.forms["fdns"].mx.disabled=false;
+	if (document.forms["fdns"].emailon.disabled!=null)
+		document.forms["fdns"].emailon.disabled=true;
+	if (document.forms["fdns"].emailoff.disabled!=null)
+		document.forms["fdns"].emailoff.disabled=true;
 }
 function dnsoff() {
 	// Active les composants DNS :
-	if (document.forms["dns"].mx.disabled!=null)
-		document.forms["dns"].mx.disabled=true;
-	if (document.forms["dns"].mail.disabled!=null)
-		document.forms["dns"].mail.disabled=false;
+	if (document.forms["fdns"].mx.disabled!=null)
+		document.forms["fdns"].mx.disabled=true;
+	if (document.forms["fdns"].emailon.disabled!=null)
+		document.forms["fdns"].emailon.disabled=false;
+	if (document.forms["fdns"].emailoff.disabled!=null)
+		document.forms["fdns"].emailoff.disabled=false;
 }
 </script>
 <h3><?php printf(_("Editing subdomains of %s"),$domain); ?></h3>
@@ -94,16 +103,16 @@ for($i=0;$i<$r["nsub"];$i++) {
 <form action="dom_subdoedit.php" method="post" name="main" id="main">
 	<table border="0">
 		<tr>
-			<td colspan="2">
-			<input type="hidden" name="domain" value="<?php echo $r["name"]; ?>" />
+			<td>
+			<input type="hidden" name="domain" value="<?php ehe($r["name"]); ?>" />
 			<input type="hidden" name="action" value="add" />
-<?php __("Create a subdomain:"); ?>
-<input type="text" class="int" name="sub" style="text-align:right" value="" size="22" id="sub" /><span class="int" id="newsubname">.<?php echo $domain; ?></span></td>
+  <?php __("Create a subdomain:"); ?></td><td>
+<input type="text" class="int" name="sub" style="text-align:right" value="<?php ehe($sub); ?>" size="22" id="sub" /><span class="int" id="newsubname">.<?php echo $domain; ?></span></td>
 		</tr>
 		<tr>
-			<td><input type="radio" id="local" class="inc" name="type" value="<?php echo $dom->type_local; ?>" checked="checked" onclick="document.main.sub_local.focus();" />
+<td><input type="radio" id="local" class="inc" name="type" value="<?php echo $dom->type_local; ?>" <?php cbox($type==$dom->type_local); ?> onclick="document.main.sub_local.focus();" />
 				<label for="local"><?php __("Locally managed"); ?></label></td>
-			<td><input type="text" class="int" name="sub_local" id="sub_local" value="/" size="28" />
+			<td><input type="text" class="int" name="sub_local" id="sub_local" value="<?php ehe($sub_local); ?>" size="28" />
 <script type="text/javascript">
 <!--
   document.write("&nbsp;<input type=\"button\" name=\"bff\" onclick=\"browseforfolder('main.sub_local');\" value=\" <?php __("Choose a folder..."); ?> \" class=\"bff\">");
@@ -112,19 +121,19 @@ for($i=0;$i<$r["nsub"];$i++) {
 </td>
 		</tr>
 		<tr>
-			<td><input type="radio" id="url" class="inc" name="type" value="<?php echo $dom->type_url; ?>" onclick="document.main.sub_url.focus();" />
+			<td><input type="radio" id="url" class="inc" name="type" value="<?php echo $dom->type_url; ?>" <?php cbox($type==$dom->type_url); ?> onclick="document.main.sub_url.focus();" />
 				<label for="url" ><?php __("URL redirection"); ?></label></td>
-			<td><input type="text" class="int" name="sub_url" id="sub_url" value="http://" size="50" /></td>
+			<td><input type="text" class="int" name="sub_url" id="sub_url" value="<?php ehe($sub_url); ?>" size="50" /></td>
 		</tr>
 		<?php if ($r["dns"]) { // show only if dns is enabled ?>
 		<tr>
-			<td><input type="radio" id="ip" class="inc" name="type" value="<?php echo $dom->type_ip; ?>" onclick="document.main.sub_ip.focus();" />
+			<td><input type="radio" id="ip" class="inc" name="type" value="<?php echo $dom->type_ip; ?>" <?php cbox($type==$dom->type_ip); ?> onclick="document.main.sub_ip.focus();" />
 				<label for="ip"><?php __("IP redirection"); ?></label></td>
-			<td><input type="text" class="int" name="sub_ip" id="sub_ip" value="xxx.xxx.xxx.xxx" size="16" /></td>
+		<td><input type="text" class="int" name="sub_ip" id="sub_ip" value="<?php ehe($sub_ip); ?>" size="16" /> <small><?php __("(enter an IPv4 address, for example 192.168.1.2)"); ?></small></td>
 		</tr>
-		 <? } ?>
+		<? } ?>
 		<tr>
-			<td><input type="radio" id="webmail" class="inc" name="type" value="<?php echo $dom->type_webmail; ?>" />
+		<td><input type="radio" id="webmail" class="inc" name="type" value="<?php echo $dom->type_webmail; ?>" <?php cbox($type==$dom->type_webmail); ?>/>
 				<label for="webmail"><?php __("Webmail access"); ?></label></td>
 			<td>&nbsp;</td>
 		</tr>
@@ -145,12 +154,12 @@ if (!$r[noerase]) {
 
 <hr />
 <h3><?php __("DNS parameters"); ?></h3>
-<form action="dom_editdns.php?domain=<?php echo urlencode($r["name"]) ?>" method="post" id="dns">
+<form action="dom_editdns.php?domain=<?php echo urlencode($r["name"]) ?>" method="post" id="fdns" name="fdns">
 <table border="1" cellpadding="6" cellspacing="0">
 <tr><td colspan="2"><?php __("Manage the DNS on the server ?"); ?></td></tr>
 <tr>
-	<td align="center" width="65%"><label for="yesdns"><?php __("Yes"); ?></label><input type="radio" id="yesdns" class="inc" name="dns" value="1"<?php if ($r["dns"]) echo " checked=\"checked\"" ?> onclick="dnson();" /></td>
-	<td align="center" width="35%"><label for="nodns"><?php __("No"); ?></label><input type="radio" id="nodns" class="inc" name="dns" value="0"<?php if (!$r["dns"]) echo " checked=\"checked\"" ?> onclick="dnsoff();" /></td>
+								      <td align="center" width="65%"><input type="radio" id="yesdns" class="inc" name="dns" value="1"<?php cbox($r["dns"]); ?> onclick="dnson();" />&nbsp;<label for="yesdns"><?php __("Yes"); ?></label></td>
+   <td align="center" width="35%"><input type="radio" id="nodns" class="inc" name="dns" value="0"<?php cbox(!$r["dns"]); ?> onclick="dnsoff();" />&nbsp;<label for="nodns"><?php __("No"); ?></label></td>
 </tr>
 <tr>
 	<td width="65%" valign="top">
@@ -162,7 +171,9 @@ if (!$r[noerase]) {
 	<td width="35%" valign="top">
 	<p>
 	<?php __("help_dns_mail"); ?></p>
-	<select class="inl" id="email" name="email" <?php if ($r["dns"]) echo "disabled=\"disabled\""; ?>><option value="1"<?php if ($r["mail"]) echo " selected=\"selected\"";?>><?php __("Yes"); ?></option><option value="0"<?php if (!$r["mail"]) echo " selected=\"selected\"";?>><?php __("No"); ?></option></select>
+	 <input type="radio" id="emailon" class="inc" name="email" id="emailon" value="1"<?php cbox($r["mail"]); ?> <?php if ($r["dns"]) echo "disabled=\"disabled\""; ?>/><label for="emailon"><?php __("Yes"); ?></label>
+<br />
+         <input type="radio" id="emailoff" class="inc" name="email" id="emailoff" value="0"<?php cbox(!$r["mail"]); ?> <?php if ($r["dns"]) echo "disabled=\"disabled\""; ?>/><label for="emailoff"><?php __("No"); ?></label>
 	</td>
 </tr>
 <tr class="trbtn"><td colspan="2"><input type="submit" class="inb" name="submit" value="<?php __("Submit the changes"); ?>" /></td></tr>

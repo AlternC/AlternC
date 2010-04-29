@@ -897,8 +897,8 @@ msgid "Your preferences have been updated."
 msgstr "Vos préférences ont été mises à jour."
 
 #: ../admin/bro_pref.php:45 ../admin/bro_pref.php:49
-msgid "File editor preferences"
-msgstr "Préférences du gestionnaire de fichiers"
+msgid "Configure the file editor"
+msgstr "Configurer le gestionnaire de fichiers"
 
 #: ../admin/bro_pref.php:50
 msgid "Horizontal window size"
@@ -1179,7 +1179,7 @@ msgstr ""
 #: ../admin/ftp_add.php:39 ../admin/ftp_add.php:50 ../admin/ftp_list.php:50
 #: ../admin/ftp_list.php:86 ../admin/menu_ftp.php:44
 msgid "Create a new ftp account"
-msgstr "Création d'un compte ftp"
+msgstr "Créer un compte ftp"
 
 #: ../admin/ftp_add.php:65 ../admin/ftp_add.php:66 ../admin/ftp_add.php:64
 msgid "Create this new FTP account."
@@ -1727,7 +1727,7 @@ msgstr "Accueil"
 
 #: ../admin/menu_quota.php:32 ../admin/menu_quota.php:31
 msgid "Show my quotas"
-msgstr "Afficher les quotas"
+msgstr "Quotas du compte"
 
 #: ../admin/menu_sql.php:35 ../admin/sql_users_list.php:40
 #: ../admin/menu_sql.php:34 ../admin/menu_sql.php:38
@@ -1880,7 +1880,7 @@ msgstr "Voici vos paramètres actuels"
 #: ../admin/sql_getparam.php:56 ../admin/sql_list.php:95
 #: ../admin/sql_passchg.php:51 ../admin/sql_users_list.php:100
 msgid "SQL Server"
-msgstr "Serveur SQL"
+msgstr "Serveur MySQL"
 
 #: ../admin/sql_list.php:48 ../admin/sql_list.php:44
 msgid "help_sql_list_ok"
@@ -2777,14 +2777,14 @@ msgstr "Afficher la taille des répertoires"
 msgid "(slow)"
 msgstr "(lent)"
 
-msgid "Edit this folder's restrictions"
-msgstr "Modifier les restriction dans ce dossier"
+msgid "Edit this folder's protection"
+msgstr "Modifier la protection de ce répertoire"
 
 msgid "with a login and a password"
 msgstr "utilisant un nom d'utilisateur et un mot de passe"
 
 msgid "Download this folder"
-msgstr "Télécharger ce dossier"
+msgstr "Télécharger ce répertoire"
 
 msgid "as a %s file"
 msgstr "comme fichier %s"
@@ -2818,3 +2818,11 @@ msgstr "Redirections/Autres destinataires&nbsp;:"
 msgid "Path" 
 msgstr "Répertoire courant"
 
+msgid "Edit login and passwords"
+msgstr "Gérer les utilisateurs et mots de passe"
+
+msgid "Back to the MySQL database list"
+msgstr "Retour à la liste des bases MySQL"
+
+msgid "(enter an IPv4 address, for example 192.168.1.2)"
+msgstr "(entrez une adresse IPv4, par exemple 192.168.1.2)"

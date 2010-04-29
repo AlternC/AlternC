@@ -46,7 +46,6 @@ include_once("head.php");
 
 
 <table cellpadding="6" border="1" cellspacing="0">
-<tr><td colspan="2"><h4><?php __("File browser preferences"); ?></h4></td></tr>
 <tr><td><?php __("Horizontal window size"); ?></td><td><select class="inl" name="editsizex">
 <?php
 for($i=50;$i<=200;$i+=10) {
@@ -128,10 +127,12 @@ for($i=0;$i<count($bro->l_icons);$i++) {
 }
 ?></select></td></tr>
 
+<tr class="trbtn"><td colspan="2">
+  <input type="submit" name="submit" class="inb" value="<?php __("Change my settings"); ?>" />
+  <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='bro_main.php'"/>
+
+</td></tr>
 </table>
-<p><input type="submit" name="submit" class="inb" value="<?php __("Change my settings"); ?>" /></p>
 
 </form>
-<p>&nbsp;</p>
-<a href="bro_main.php"><?php __("Back to the file browser"); ?></a>
 <?php include_once("foot.php"); ?>

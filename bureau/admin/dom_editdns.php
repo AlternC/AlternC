@@ -34,25 +34,26 @@ $fields = array (
 	"domain"    => array ("request", "string", ""),
 	"dns"       => array ("request", "integer", 1),
 	"mx"        => array ("request", "string", ""),
+	"email"     => array ("request", "integer", 0),
 );
 getFields($fields);
 
 $dom->lock();
 if ($dns!="1") {
-	// On fixe mx :
-	if ($email=="1") {
-		$mx=$L_MX;
-	} else {
-		$mx="";
-	}
-}
+  // On fixe mx :
+  if ($email=="1") {
+    $mx=$L_MX;
+  } else {
+    $mx="";
+  }
+ }
 
 if (!$dom->edit_domain($domain,$dns,$mx)) {
-	$error=$err->errstr();
-	include("dom_edit.php");
-	$dom->unlock();
-	exit();
-}
+  $error=$err->errstr();
+  include("dom_edit.php");
+  $dom->unlock();
+  exit();
+ }
 $dom->unlock();
 
 ?>
@@ -64,6 +65,6 @@ $dom->unlock();
 // XXX: we assume the cron job is at every 5 minutes
   print strtr(_("The modifications will take effect at %time.  Server time is %now."), array('%now' => date('H:i:s', $t), '%time' => date('H:i:s', ($t-($t%300)+300)))); 
 ?><br />
-<a href="login.php" target="_top"><?php __("Click here to continue"); ?></a>
+<span class="ina"><a href="login.php" target="_top"><?php __("Click here to continue"); ?></a></span>
 </p>
 <?php include_once("foot.php"); ?>

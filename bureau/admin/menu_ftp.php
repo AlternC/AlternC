@@ -41,7 +41,7 @@ if ($q["t"] > 0) {
 <div class="menu-content" id="menu-ftp">
 <ul>
 <?php if ($quota->cancreate("ftp")) { ?>
-<li><a href="ftp_add.php"><img src="images/new.png" alt="<?php __("Create a new ftp account"); ?>" /><?php __("Create a new ftp account"); ?></a></li>
+     <li><a href="ftp_add.php"><img src="images/new.png" alt="<?php __("Create a new ftp account"); ?>" />&nbsp;<?php __("Create a new ftp account"); ?></a></li>
 <?php } ?>
 <li><a href="ftp_list.php"><?php __("FTP accounts list"); ?></a></li>
 </ul>

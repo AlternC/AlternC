@@ -336,7 +336,7 @@ echo "\">".htmlentities($c[$i]["name"])."/</a></b></td>\n";
 echo "	<td>".format_size($c[$i]["size"])."</td>";
 echo "<td>".format_date('%3$d-%2$d-%1$d %4$d:%5$d',date("Y-m-d h:i:s",$c[$i]["date"]))."<br /></td>";
 if ($p["showtype"]) {
-echo "<td>Dossier</td>";
+  echo "<td>"._("Folder")."</td>";
 }
 echo "<td>&nbsp;";
 echo "</td>\n";
@@ -531,7 +531,7 @@ else {
 </p><p>
 <span class="ina"><?php
 if ($hta->is_protected($R)) {
-echo "<a href=\"hta_edit.php?dir=".(($R)?$R:"/")."\">"._("Edit this folder's restrictions")."</a>";
+echo "<a href=\"hta_edit.php?dir=".(($R)?$R:"/")."\">"._("Edit this folder's protection")."</a>";
 }
 else {
   echo "<a href=\"hta_add.php?value=".(($R)?$R:"/")."\">"._("Protect this folder")."</a>";
@@ -545,7 +545,7 @@ else {
 </span>
 </p><p>
 <span class="ina">
-  <a href="bro_pref.php"><?php __("File browser preferences"); ?></a>
+  <a href="bro_pref.php"><?php __("Configure the file editor"); ?></a>
 </span> 
 </p>	
      <?php

@@ -70,6 +70,8 @@ class m_dom {
   var $type_url = "1";
   var $type_ip = "2";
   var $type_webmail = "3";
+  var $type_cname = "4"; // TODO : implement this ;) 
+  var $type_ns = "5"; // TODO : implement this ;) 
 
   var $action_insert = "0";
   var $action_update= "1";

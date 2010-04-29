@@ -91,9 +91,12 @@ if (is_array($r)) {
 </script>
 </td>
 </tr>
+
+<tr class="trbtn"><td colspan="2">
+  <input class="inb" type="submit" name="submit" value="<?php __("Change the SQL backup parameters"); ?>" />
+  <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='sql_list.php'"/>
+</td></tr>
 </table>
-<br />
-<input class="inb" type="submit" name="submit" value="<?php __("Change the SQL backup parameters"); ?>" />
 </form>
 <?php
 	$mem->show_help("sql_bck");

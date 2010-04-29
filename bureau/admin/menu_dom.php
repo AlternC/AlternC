@@ -41,7 +41,7 @@ if ($q["t"] > 0)
 <div class="menu-content" id="menu-dom">
 <ul>
 <?php if ($quota->cancreate("dom")) { ?>
-	<li><a href="dom_add.php"><img src="images/new.png" alt="<?php __("Add a domain"); ?>" /><?php __("Add a domain"); ?></a></li>
+     <li><a href="dom_add.php"><img src="images/new.png" alt="<?php __("Add a domain"); ?>" />&nbsp;<?php __("Add a domain"); ?></a></li>
 <?php }
 
 /* Enumeration des domaines : */

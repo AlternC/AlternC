@@ -29,6 +29,17 @@
 */
 require_once("../class/config.php");
 
+$fields = array (
+	"domain"    => array ("request", "string", ""),
+	"sub"       => array ("request", "string", ""),
+	"type"      => array ("request", "integer", $dom->type_local),
+	"sub_local" => array ("request", "string",  "/"),
+	"sub_url"   => array ("request", "string", "http://"), 
+	"sub_ip"    => array ("request", "string", ""),
+	"action"    => array ("request", "string", "add"),
+);
+getFields($fields);
+
 $dom->lock();
 
 switch ($type) {
@@ -49,10 +60,14 @@ $dom->unlock();
 
 if (!$r) {
   $error=$err->errstr();
+  $noread=true;
+  include("dom_subedit.php"); 
+  exit();
 } else {
   $t = time();
   // XXX: we assume the cron job is at every 5 minutes
   $error=strtr(_("The modifications will take effect at %time. Server time is %now."), array('%now' => date('H:i:s', $t), '%time' => date('H:i:s', ($t-($t%300)+300))));
+  foreach($fields as $k=>$v) unset($k);
 }
 include("dom_edit.php");
 exit;

@@ -227,8 +227,21 @@ function getuserpath($user = null) {
   return $L_ALTERNC_LOC . "/html/".substr($user,0,1)."/".$user;
 }
 
+/* ECHOes checked="checked" only if the parameter is true
+ * useful for checkboxes and radio buttons
+ */
 function cbox($test) {
   if ($test) echo (" checked=\"checked\"");
+}
+
+
+/* ECHOes selected="selected" only if the parameter is true
+ * useful for checkboxes and radio buttons
+ */
+function selected($bool) {
+  if ($bool) {
+    echo " selected=\"selected\"";
+  }
 }
 
 function ecif($test,$tr,$fa="") {
@@ -412,23 +425,6 @@ function eoption($values,$cur,$info="") {
   }
 }
 
-/* ECHOes checked="checked" only if the parameter is true
- * useful for checkboxes and radio buttons
- */
-function checked($bool) {
-  if ($bool) {
-    echo " checked=\"checked\"";
-  }
-}
-
-/* ECHOes selected="selected" only if the parameter is true
- * useful for checkboxes and radio buttons
- */
-function selected($bool) {
-  if ($bool) {
-    echo " selected=\"selected\"";
-  }
-}
 
 /* Echo the HTMLSpecialChars version of a value. 
  * Must be called when pre-filling fields values in forms such as : 

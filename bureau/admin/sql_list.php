@@ -74,14 +74,13 @@ for($i=0;$i<count($r);$i++) {
 </form>
 
 <p>&nbsp;</p>
-<p>
-<?php if ($quota->cancreate("mysql")) { ?>
- <a href="sql_add.php"><?php __("Create a new database"); ?></a><br /><br />
-<?php } ?>
-<a href="sql_passchg.php"><?php __("Change the SQL password"); ?></a><br /><br />
-<a href="sql_getparam.php"><?php __("Get the current SQL parameters"); ?></a><br /><br />
 
-</p>
+<?php if ($quota->cancreate("mysql")) { ?>
+<p>  <span class="ina"><a href="sql_add.php"><?php __("Create a new database"); ?></a></span> </p>
+<?php } ?>
+<p><span class="ina"><a href="sql_passchg.php"><?php __("Change the SQL password"); ?></a></span></p>
+<p><span class="ina"><a href="sql_getparam.php"><?php __("Get the current SQL parameters"); ?></a></span></p>
+
 
 <?php
 	} else {

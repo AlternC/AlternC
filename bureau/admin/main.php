@@ -100,7 +100,7 @@ $c=@mysql_fetch_array(mysql_query("SELECT * FROM membres WHERE uid='".$cuid."';"
 
 	list($totalweb)=@mysql_fetch_array(mysql_query("SELECT SUM(size) FROM size_web WHERE uid = '" . $c["uid"] . "'"));
 
-	echo "<p>Espace WEB: ";
+echo "<p>"._("WEB Space:")." ";
 	echo sprintf("%.1f", $totalweb / 1024)."&nbsp;Mo";
 	echo "</p>";
 
