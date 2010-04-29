@@ -1,5 +1,9 @@
 alternc (1.0~rc1) stable; urgency=low
 
+  * Major patch
+    * Blue desktop using only css, no frameset etc
+    * Sanitizing of get/request/post parameters using getFields function. May allow alternc not to use register_globals some day ...
+  * security: passwords are now MANDATORY in MySQL class (whoosh...)
   * security: now using htmlspecialchars on every form default values ... yes it's 2010 ;) 
   * i18n: charset is now variable depending on the current language
   * new features:
@@ -15,9 +19,7 @@ alternc (1.0~rc1) stable; urgency=low
     * PHP sessions are now stored in /var/alternc/sessions
   * new features:
     * add support for .cc and .re domains.
-    * when creating new accounts, "www, stats, backups" directories are
-      automatically created in their accoutn.
-    * when adding a new domain to an account, a directory "www/example.net"
+    * when adding a new domain to an account, a directory "examplenet"
       is automatically created and the domain points to it instead of /.
     * add new field to member form: 'notes' which is just a text field
     * send an email on new account creation. the actual email needs to be
@@ -29,9 +31,6 @@ alternc (1.0~rc1) stable; urgency=low
       is a major performance hit on MySQL < 5.1.22 if there are > 1000
       databases on the system. This speeds up the AlternC login by about
       30 seconds on Koumbit.org.
-  * Major patch
-    * Blue desktop using only css, no frameset etc
-    * Sanitizing of get/request/post parameters
 
  -- Benjamin Sonntag <benjamin@alternc.org>  Sat, 12 May 2009 17:55:30 +0200
 
