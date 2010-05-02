@@ -50,7 +50,10 @@ if ($del_confirm!="y") {
 
 ?>
 <h3><?php printf(_("Confirm the deletion of domain %s"),$domain); ?></h3>
+<hr id="topbar"/>
+<br />
 <p class="error"><?php __("WARNING"); ?><br /><?php printf(_("Confirm the deletion of domain %s"),$domain); ?><br />
+
 <?php __("This will delete the related sub-domains too."); ?></p>
 <form method="post" action="dom_dodel.php" id="main">
 <p>
@@ -64,9 +67,11 @@ if ($del_confirm!="y") {
 	}
 ?>
 <h3><?php printf(_("Domain %s deleted"),$domain); ?></h3>
+<hr id="topbar"/>
+<br />
 <p>
-<?php printf(_("The domain %s has been successfully deleted."),$domain); ?><br />
-<a href="main.php" target="_parent"><?php __("Click here to continue"); ?></a>
+<?php printf(_("The domain %s has been successfully deleted."),$domain); ?><br /><br />
+<span class="ina"><a href="main.php" target="_parent"><?php __("Click here to continue"); ?></a></span>
 <?php $mem->show_help("del_domain"); ?>
 </p>
 <?php include_once("foot.php"); ?>

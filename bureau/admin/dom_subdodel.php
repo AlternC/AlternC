@@ -60,5 +60,5 @@ $dom->unlock();
 	    echo "<p class=\"error\">".$error."</p>";
 	}
 ?>
-<p><a href="dom_edit.php?domain=<?php echo urlencode($domain) ?>"><?php __("Click here to continue"); ?></a></p>
+<p><span class="ina"><a href="dom_edit.php?domain=<?php echo urlencode($domain) ?>"><?php __("Click here to continue"); ?></a></span></p>
 <?php include_once("foot.php"); ?>
