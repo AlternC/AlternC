@@ -32,6 +32,8 @@ include_once("head.php");
 
 ?>
 <h3><?php __("Protect a folder"); ?></h3>
+<hr id="topbar"/>
+<br />
 <p>
 <?php __("Enter the name of the folder you want to protect. It must already exists."); ?>
 </p>

@@ -37,6 +37,8 @@ if (!$quota->cancreate("ftp")) {
 
 ?>
 <h3><?php __("Create a new ftp account"); ?></h3>
+<hr id="topbar"/>
+<br />
 <?php
 	if ($error) {
 		echo "<p class=\"error\">$error</p>";

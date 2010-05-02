@@ -42,6 +42,8 @@ include_once("head.php");
 ?>
 <?php if ($error) echo "<font color=\"red\">$error</font><br />"; ?>
 <h3><?php __("File browser preferences"); ?></h3>
+<hr id="topbar"/>
+<br />
 <form action="bro_pref.php" method="post">
 
 

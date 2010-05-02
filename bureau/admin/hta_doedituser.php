@@ -49,6 +49,8 @@ if (!$hta->change_pass($user,$newpass,$dir)) {
 
 ?>
 <h3><?php printf(_("Change the user %s in the protected folder %s"),$user,$dir); ?></h3>
+<hr id="topbar"/>
+<br />
 <?php
 	if ($error) {
 		echo "<p class=\"error\">$error</p>";
@@ -56,6 +58,6 @@ if (!$hta->change_pass($user,$newpass,$dir)) {
 	else {
 		echo "<p>".sprintf(_("The password of the user %s has been successfully changed"),$user)."</p>";
 	}
-	echo "<p><a href=\"hta_edit.php?dir=$dir\">"._("Click here to continue")."</a></p>";
+	echo "<p><span class=\"ina\"><a href=\"hta_edit.php?dir=$dir\">"._("Click here to continue")."</a></span></p>";
 ?>
 <?php include_once("foot.php"); ?>

@@ -44,6 +44,8 @@ getFields($fields);
 
 ?>
 <h3><?php __("New AlternC account"); ?></h3>
+<hr id="topbar"/>
+<br />
 <?php
 if ($error) {
 	echo "<p class=\"error\">$error</p>";

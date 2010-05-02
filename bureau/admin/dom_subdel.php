@@ -51,7 +51,8 @@ $dom->unlock();
 		exit();
 	}
 ?>
-<hr />
+<hr id="topbar"/>
+<br />
 <!-- *****************************************
 		 gestion du sous-domaine
  -->

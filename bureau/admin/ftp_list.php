@@ -43,6 +43,8 @@ if (!$r=$ftp->get_list($domain)) {
 
 ?>
 <h3><?php __("FTP accounts list"); ?></h3>
+<hr id="topbar"/>
+<br />
  
 <?php
 if ($error && !$noftp) {
