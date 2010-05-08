@@ -71,7 +71,7 @@ if ($q["u"]>0) {
    <input type="radio" id="newisslave1" name="newisslave" value="1"<?php cbox($newisslave==1); ?>/><label for="newisslave1"><?php __("Yes, redirect this new domain to this one:"); ?> </label> <select name="slavedom" id="slavedom" class="inl">
  <option value=""><?php __("-- Choose a domain --"); ?></option>
 <?php
-$dl=$dom->get_domain_list();
+$dl=$dom->get_domain_list($cuid);
   $ddl=array();
   foreach($dl as $d) {
     $ddl[$d]=$d;
