@@ -130,7 +130,7 @@ if ($errbrowsefold) {
 <input type="hidden" name="caller" value="<?php echo $caller; ?>" />
 <input type="hidden" name="lastcurdir" value="<?php echo $curdir; ?>" />
 
-<input type="text" class="int" name="file" size="20" value="<?php echo $file ?>" /><input class="bff" type="submit" name="submit" value="..." /><br />
+<input type="text" class="int" name="file" size="20" value="<?php echo $file ?>" /><br />
 
 <input type="submit" name="select" value="<?php __("Select"); ?>" class="inb" />&nbsp;
 <input type="button" name="cancel" value="<?php __("Cancel"); ?>" class="inb" onclick="window.close();" />&nbsp;
