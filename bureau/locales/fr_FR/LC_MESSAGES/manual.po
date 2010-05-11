@@ -199,8 +199,8 @@ msgstr ""
 #. domain's DNS (and eventually wait 1 day) before you install it again.
 msgid "err_dom_23"
 msgstr ""
-"Les DNS de ce domaine ne correspondent pas à ceux du serveur. Vous devez "
-"modifier les DNS du domaine (et, dans certains cas, attendre 24H) avant de "
+"Les DNS de ce domaine ne correspondent pas à ceux du serveur.<br /> Vous devez "
+"modifier les DNS du domaine (et, dans certains cas, attendre 24H) <br />avant de "
 "pouvoir l'installer"
 
 #. There is some forbidden characters in the sub domain (only A-Z 0-9 and - are allowed).
@@ -784,41 +784,41 @@ msgid "Protected folders passwords"
 msgstr "Mots de passe des dossiers protégés"
 
 
-#~ msgid "Editing subdomain %s"
-#~ msgstr "Edition du sous-domaine %s"
+msgid "Editing subdomain %s"
+msgstr "Edition du sous-domaine %s"
 
 #, fuzzy
-#~ msgid "err_stats_4"
-#~ msgstr "Aucun répertoire protégé"
+msgid "err_stats_4"
+msgstr "Aucun répertoire protégé"
 
 #, fuzzy
-#~ msgid "err_stats_5"
-#~ msgstr "Impossible de supprimer le fichier '%s'/.htaccess"
+msgid "err_stats_5"
+msgstr "Impossible de supprimer le fichier '%s'/.htaccess"
 
 #, fuzzy
-#~ msgid "err_stats_6"
-#~ msgstr "Impossible de supprimer le fichier '%s'/.htpasswd"
+msgid "err_stats_6"
+msgstr "Impossible de supprimer le fichier '%s'/.htpasswd"
 
 #, fuzzy
-#~ msgid "err_stats_7"
-#~ msgstr "Le fichier .htaccess n'existe pas"
+msgid "err_stats_7"
+msgstr "Le fichier .htaccess n'existe pas"
 
-#~ msgid "1 column, detailed"
-#~ msgstr "1 colonne, détaillée"
+msgid "1 column, detailed"
+msgstr "1 colonne, détaillée"
 
-#~ msgid "2 columns, short"
-#~ msgstr "2 colonnes, court"
+msgid "2 columns, short"
+msgstr "2 colonnes, court"
 
-#~ msgid "3 columns, short"
-#~ msgstr "3 colonnes, court"
+msgid "3 columns, short"
+msgstr "3 colonnes, court"
 
-#~ msgid "Go back to the file manager"
-#~ msgstr "Retourner au gestionnaire de fichiers"
+msgid "Go back to the file manager"
+msgstr "Retourner au gestionnaire de fichiers"
 
-#~ msgid "Edit the newly created file"
-#~ msgstr "Editer le nouveau fichier"
+msgid "Edit the newly created file"
+msgstr "Editer le nouveau fichier"
 
-#~ msgid "hlp_login"
-#~ msgstr ""
-#~ "Vous pouvez aussi consulter l'aide en ligne sur l'accueil du panneau de "
-#~ "contrôle HELPID_300<br />"
+msgid "hlp_login"
+msgstr ""
+"Vous pouvez aussi consulter l'aide en ligne sur l'accueil du panneau de "
+"contrôle HELPID_300<br />"

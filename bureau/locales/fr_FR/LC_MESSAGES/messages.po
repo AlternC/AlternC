@@ -1692,8 +1692,8 @@ msgid "Manage the members"
 msgstr "Gérer les membres"
 
 #: ../admin/menu_adm.php:41 ../admin/menu_adm.php:39 ../admin/menu_adm.php:45
-msgid "General SQL Admin"
-msgstr "Admin SQL Général"
+msgid "General PhpMyAdmin"
+msgstr "PhpMyAdmin Général"
 
 #: ../admin/menu_aide.php:33 ../admin/menu_aide.php:32
 msgid "Online help"
@@ -2724,7 +2724,7 @@ msgstr "Impossible de modifier la politique de mot de passe, une erreur est appa
 #~ msgstr "<-Aucun mot de passe->"
 
 msgid "Show this folder's content in the File Browser"
-msgstr "Afficher le contenu de ce dossier dans le Gestionnaire de Fichiers"
+msgstr "Afficher le contenu de ce répertoire dans le Gestionnaire de Fichiers"
 
 msgid "Adding an authorized user"
 msgstr "Ajout d'un utilisateur autorisé"
@@ -2736,7 +2736,7 @@ msgid "Do you want to point this domain to another domain already installed in y
 msgstr "Voulez-vous pointer ce domaine sur un autre déjà installé sur votre compte&nbsp;?"
 
 msgid "No: This domain will have its own folder."
-msgstr "Non : ce domaine aura son propre dossier."
+msgstr "Non : ce domaine aura son propre répertoire."
 
 msgid "Yes, redirect this new domain to this one:"
 msgstr "Oui, redirigez ce nouveau domaine vers ce domaine existant&nbsp;:"
