@@ -3,7 +3,10 @@
 
 require_once("/var/alternc/bureau/class/config_nochk.php");
 // On déverrouile le bureau AlternC :) 
-alternc_shutdown();
+@alternc_shutdown();
+
+mysql_query("TRUNCATE TABLE size_mail;");
+mysql_query("TRUNCATE TABLE size_web;");
 
 echo "---------------------------\n Generating size-cache for mail accounts\n\n";
 $r=mysql_query("SELECT * FROM mail_users WHERE alias NOT LIKE '%@%' AND alias LIKE '%\_%';");
