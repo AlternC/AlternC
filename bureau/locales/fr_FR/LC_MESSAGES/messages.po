@@ -80,7 +80,7 @@ msgstr "Confirmer le mot de passe"
 
 #: ../admin/adm_add.php:66 ../admin/adm_edit.php:86 ../admin/adm_edit.php:90
 msgid "Can he change its password"
-msgstr "Peut-il changer de mot de passe&nbsp;?"
+msgstr "Peut-il changer son mot de passe&nbsp;?"
 
 #: ../admin/adm_add.php:78 ../admin/adm_edit.php:98 ../admin/adm_list.php:78
 #: ../admin/adm_list.php:76 ../admin/adm_add.php:82 ../admin/adm_edit.php:106
@@ -175,7 +175,7 @@ msgstr "Les mots de passe ne correspondent pas"
 #: ../admin/adm_doadd.php:75 ../admin/adm_doadd.php:73
 #: ../admin/adm_doadd.php:71
 msgid "The new member has been successfully created"
-msgstr "Le membre a été ajouté avec succès"
+msgstr "Le compte AlternC a été ajouté avec succès"
 
 #: ../admin/adm_dodefquotas.php:43
 msgid "added"
@@ -209,11 +209,11 @@ msgstr "Le membre '%s' n'existe pas"
 #: ../admin/adm_dodel.php:51
 #, php-format
 msgid "Member %s successfully deleted"
-msgstr "Le membre '%s' a été effacé avec succès"
+msgstr "Le compte AlternC '%s' a été effacé avec succès"
 
 #: ../admin/adm_doedit.php:53
 msgid "The member has been successfully edited"
-msgstr "Le compte a été modifié avec succès"
+msgstr "Le compte AlternC a été modifié avec succès"
 
 #: ../admin/adm_doms.php:41 ../admin/adm_panel.php:51
 #: ../admin/adm_panel.php:50 ../admin/adm_doms.php:40
@@ -247,7 +247,7 @@ msgstr "Domaine"
 
 #: ../admin/adm_doms.php:56 ../admin/adm_doms.php:58 ../admin/adm_doms.php:55
 msgid "Member"
-msgstr "Membre"
+msgstr "Compte AlternC"
 
 #: ../admin/adm_doms.php:65 ../admin/adm_doms.php:67 ../admin/adm_doms.php:64
 msgid "Unlock"
@@ -263,11 +263,11 @@ msgstr "Domaine verrouillé"
 
 #: ../admin/adm_dorenew.php:46
 msgid "The member has been successfully renewed"
-msgstr "Le compte a été renouvelé avec succès"
+msgstr "Le compte AlternC a été renouvelé avec succès"
 
 #: ../admin/adm_edit.php:51 ../admin/adm_edit.php:55
 msgid "Member Edition"
-msgstr "Modification d'un membre"
+msgstr "Modification d'un compte AlternC"
 
 #: ../admin/adm_edit.php:65 ../admin/adm_edit.php:69
 msgid "Account Enabled?"
@@ -326,7 +326,7 @@ msgstr "Périodicité de facturation"
 
 #: ../admin/adm_edit.php:124 ../admin/adm_edit.php:132
 msgid "Edit this account"
-msgstr "Modifier le compte"
+msgstr "Modifier ce compte"
 
 #: ../admin/adm_edit.php:136 ../admin/adm_edit.php:144
 msgid "Renew for"
@@ -342,7 +342,7 @@ msgstr "Renouveler"
 
 #: ../admin/adm_edit.php:153 ../admin/adm_edit.php:161
 msgid "This account is a super-admin account"
-msgstr "Ce compte est un compte d'administrateur"
+msgstr "Ce compte AlternC est un compte d'administrateur"
 
 #: ../admin/adm_edit.php:155 ../admin/adm_edit.php:163
 msgid ""
@@ -367,7 +367,7 @@ msgstr "Compte créé par %s"
 
 #: ../admin/adm_edit.php:172 ../admin/adm_edit.php:180
 msgid "Back to the account list"
-msgstr "Retour à la liste des comptes"
+msgstr "Retour à la liste des comptes AlternC"
 
 #: ../admin/adm_list.php:46 ../admin/adm_list.php:56
 msgid "AlternC account list"
@@ -420,7 +420,7 @@ msgstr "Modifier"
 #: ../admin/adm_list.php:131 ../admin/adm_list.php:189
 #: ../admin/adm_list.php:210 ../admin/adm_list.php:235
 msgid "Locked Account"
-msgstr "Compte verrouillé"
+msgstr "Compte AlternC verrouillé"
 
 #: ../admin/adm_list.php:103 ../admin/adm_list.php:135
 msgid "Connect as"
@@ -447,7 +447,7 @@ msgstr "C"
 #: ../admin/adm_list.php:218 ../admin/ftp_list.php:77 ../admin/ftp_list.php:66
 #: ../admin/ftp_list.php:90 ../admin/adm_list.php:250 ../admin/ftp_list.php:80
 msgid "Delete checked accounts"
-msgstr "Supprimer les comptes cochés"
+msgstr "Supprimer les comptes AlternC cochés"
 
 #: ../admin/adm_login.php:58 ../admin/login.php:42 ../admin/login.php:46
 msgid "AlternC Desktop"
@@ -456,7 +456,7 @@ msgstr "Bureau AlternC"
 #: ../admin/adm_login.php:82 ../admin/adm_login.php:83
 #: ../admin/adm_login.php:67
 msgid "Member login"
-msgstr "Nom d'utilisateur du membre"
+msgstr "Nom d'utilisateur du compte AlternC"
 
 #: ../admin/adm_mxaccount.php:40 ../admin/adm_slaveaccount.php:40
 #: ../admin/adm_slaveaccount.php:48 ../admin/adm_mxaccount.php:48
@@ -551,7 +551,7 @@ msgstr "Les quotas ont été modifiés avec succès"
 
 #: ../admin/adm_quotaedit.php:50 ../admin/adm_quotaedit.php:55
 msgid "Editing the quotas of a member"
-msgstr "Modification des quotas d'un compte"
+msgstr "Modification des quotas d'un compte AlernC"
 
 #: ../admin/adm_quotaedit.php:61 ../admin/quota_show.php:42
 #: ../admin/adm_quotaedit.php:67 ../admin/quota_show.php:40
@@ -1197,7 +1197,7 @@ msgstr "Le compte FTP a été créé avec succès"
 #: ../admin/ftp_doedit.php:33 ../admin/ftp_edit.php:33
 #: ../admin/ftp_edit.php:39
 msgid "No account selected!"
-msgstr "Aucun compte de sélectionné !"
+msgstr "Aucun compte sélectionné !"
 
 #: ../admin/ftp_doedit.php:47
 msgid "The ftp account has been successfully changed"
@@ -1232,7 +1232,7 @@ msgstr "Le répertoire doit déjà exister."
 
 #: ../admin/hta_add.php:59 ../admin/hta_add.php:56
 msgid "Protect this folder"
-msgstr "Protéger le répertoire"
+msgstr "Protéger ce répertoire"
 
 #: ../admin/hta_adduser.php:37 ../admin/hta_adduser.php:39
 #, php-format
@@ -1592,7 +1592,7 @@ msgstr "Vos paramètres d'aide ont été modifiés."
 
 #: ../admin/mem_param.php:42 ../admin/mem_param.php:40
 msgid "Settings of your account"
-msgstr "Paramètres de votre compte"
+msgstr "Paramètres de votre compte AlternC"
 
 #: ../admin/mem_param.php:51 ../admin/mem_passwd.php:42
 #: ../admin/mem_param.php:53 ../admin/mem_param.php:50
@@ -1731,7 +1731,7 @@ msgstr "Accueil"
 
 #: ../admin/menu_quota.php:32 ../admin/menu_quota.php:31
 msgid "Show my quotas"
-msgstr "Quotas du compte"
+msgstr "Quotas du compte AlternC"
 
 #: ../admin/menu_sql.php:35 ../admin/sql_users_list.php:40
 #: ../admin/menu_sql.php:34 ../admin/menu_sql.php:38
@@ -1764,7 +1764,7 @@ msgstr "Quotas du compte"
 
 #: ../admin/quota_show.php:40 ../admin/quota_show.php:38
 msgid "No quotas for this account, or quotas currently unavailable!"
-msgstr "Aucun quota pour ce compte, ou quota impossible à obtenir !"
+msgstr "Aucun quota pour ce compte AlternC, ou quota impossible à obtenir !"
 
 #: ../admin/sql_addmain.php:35
 msgid "Your database has been successfully created"

@@ -528,7 +528,7 @@ else {
 
 <p>
 <span class="ina"><a href="bro_main.php?R=<?php echo $R; ?>&showdirsize=1"><?php __("Show size of directories"); ?></a></span> <?php __("(slow)"); ?>
-</p><p>
+</p><p>&nbsp;</p><p>
 <span class="ina"><?php
 if ($hta->is_protected($R)) {
 echo "<a href=\"hta_edit.php?dir=".(($R)?$R:"/")."\">"._("Edit this folder's protection")."</a>";
@@ -543,10 +543,6 @@ else {
 </span> &nbsp; 
   <?php printf(_("as a %s file"),$bro->l_tgz[$p["downfmt"]]); ?>
 </span>
-</p><p>
-<span class="ina">
-  <a href="bro_pref.php"><?php __("Configure the file editor"); ?></a>
-</span> 
 </p>	
      <?php
 
@@ -566,6 +562,11 @@ else {
 }
 
 ?>
-
+<p>&nbsp;</p>
+<p>
+<span class="ina">
+  <a href="bro_pref.php"><?php __("Configure the file editor"); ?></a>
+</span> 
+</p>
 </td></tr></table>
 <?php include_once("foot.php"); ?>
