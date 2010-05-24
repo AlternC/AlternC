@@ -47,7 +47,7 @@ else {
 	}
 
 	if (!is_array($r)) {
-		echo "<p><a href=\"hta_add.php\">"._("Protect a folder")."</a><br />";
+		echo "<p><span class=\"ina\"<a href=\"hta_add.php\">"._("Protect a folder")."</a></span><br />";
 		$mem->show_help("hta_list");
 		echo "</p>";
 		include_once("foot.php");
@@ -84,8 +84,8 @@ for($i=0;$i<count($r);$i++){
 ?>
 </table>
 <br />
-<input type="submit" class="inb" name="submit" value="<?php __("Unprotect the checked folders"); ?>" />
-			<span class="inb"><a href="hta_add.php"><?php __("Protect a folder"); ?></a></span>
+<input type="submit" class="ina" name="submit" value="<?php __("Unprotect the checked folders"); ?>" />
+			<span class="ina"><a href="hta_add.php"><?php __("Protect a folder"); ?></a></span>
 </form>
 
 <p>
