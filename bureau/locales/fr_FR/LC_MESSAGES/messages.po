@@ -1222,6 +1222,10 @@ msgstr "Liste des comptes ftp"
 msgid "Protect a folder"
 msgstr "Protéger un répertoire"
 
+#: ../admin/hta_add.php:39 ../admin/hta_add.php:38
+msgid "Enter the name of the folder you want to protect. It must already exists."
+msgstr "Choisir le répertoire que vous souhaitez protéger. Ce répertoire doit préexister."
+
 #: ../admin/hta_add.php:39 ../admin/hta_add.php:36
 msgid "The folder must exists."
 msgstr "Le répertoire doit déjà exister."

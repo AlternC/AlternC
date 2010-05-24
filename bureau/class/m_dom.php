@@ -70,8 +70,6 @@ class m_dom {
   var $type_url = "1";
   var $type_ip = "2";
   var $type_webmail = "3";
-  var $type_cname = "4"; // TODO : implement this ;) 
-  var $type_ns = "5"; // TODO : implement this ;) 
 
   var $action_insert = "0";
   var $action_update= "1";
@@ -977,10 +975,14 @@ class m_dom {
   /**
    * Returns the complete hosted domain list : 
    */
-  function get_domain_list() {
+  function get_domain_list($uid=-1) {
 	global $db,$err;
+	$uid=intval($uid);
 	$res=array();
-	$db->query("SELECT domaine FROM domaines WHERE gesdns=1 ORDER BY domaine");
+	if ($uid!=-1) {
+	  $sql=" AND compte='$uid' ";
+	}
+	$db->query("SELECT domaine FROM domaines WHERE gesdns=1 $sql ORDER BY domaine");
 	while ($db->next_record()) {
 		$res[]=$db->f("domaine");
 	}
