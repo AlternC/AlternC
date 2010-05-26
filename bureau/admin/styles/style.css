@@ -201,7 +201,9 @@ img {
 	margin-bottom: 20px;
 	width: 1020px;
 	border: 5px solid #1D6A9F;
+	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
+	border-radius: 10px;	
 	background-color: #F0F0FA;
 /* 	background: #F1F8FD url(/admin/images/bgborder.gif) repeat-y scroll top left; */
 }
@@ -247,7 +249,9 @@ img {
 	border: 1px solid #1D6A9F;
 	background-color: #C0DCF0;
 	padding: 3px;
+	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
+	border-radius: 4px;
 }
 
 .menu-box .menu-content {
@@ -306,7 +310,9 @@ img {
 	background-color: white;
 	border: 1px solid black;
 	height: 8px;
+	-webkit-border-radius:4px;
 	-moz-border-radius: 4px;
+	border-radius: 4px;
 }
 
 .barfill {
