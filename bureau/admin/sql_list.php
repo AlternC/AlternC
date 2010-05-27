@@ -34,6 +34,8 @@ $r=$mysql->get_dblist();
 
 ?>
 <h3><?php __("MySQL Databases"); ?></h3>
+<hr id="topbar"/>
+<br />
 <?php
 	if ($error) {
 		echo "<p class=\"error\">$error</p>";

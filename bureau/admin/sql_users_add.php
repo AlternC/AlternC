@@ -44,12 +44,15 @@ if (!$quota->cancreate("mysql_users")) {
 
 ?>
 <h3><?php __("Create a new MySQL user"); ?></h3>
+<hr id="topbar"/>
+<br />
 <?php
 	if ($error) {
 		echo "<p class=\"error\">$error</p>";
 		if ($fatal) {
 ?>
 <?php include_once("foot.php"); ?>
+
 <?php
 			exit();
 		}

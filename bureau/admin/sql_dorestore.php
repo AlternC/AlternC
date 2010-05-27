@@ -36,6 +36,8 @@ if (!$r=$mysql->get_mysql_details($id)) {
 }
 ?>
 <h3><?php __("MySQL Databases"); ?></h3>
+<hr id="topbar"/>
+<br />
 <?php
 if ($r["enabled"]) {
 ?>

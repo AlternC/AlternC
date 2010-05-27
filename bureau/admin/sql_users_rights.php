@@ -39,6 +39,8 @@ $r=$mysql->get_user_dblist($id);
 
 ?>
 <h3><?php printf(_("MySQL Rights for %s"),$mem->user["login"]."_".$id) ?></h3>
+<hr id="topbar"/>
+<br />
 <?php
 	if ($error) {
 		echo "<p class=\"error\">$error</p><p>&nbsp;</p>";
