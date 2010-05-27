@@ -61,7 +61,7 @@ for($i=0;$i<count($r);$i++) {
             <input type="checkbox" class="inc" id="del_<?php echo $val["name"]; ?>" name="del_<?php echo $val["name"]; ?>" value="<?php echo $val["name"]; ?>" />
           </td>
 	  <td><label for="del_<?php echo $val["name"]; ?>"><?php echo $mem->user["login"]."_".$val["name"]; ?></label></td>
-	  <td><a href="sql_users_rights.php?id=<?php echo $val["name"] ?>"><?php __("Rights"); ?></a></td>
+	  <td><span class="ina"><a href="sql_users_rights.php?id=<?php echo $val["name"] ?>"><?php __("Manage the rights"); ?></a></span></td>
 	</tr>
 <?php
 
