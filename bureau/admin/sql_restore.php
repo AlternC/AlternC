@@ -51,14 +51,14 @@ if (is_array($r)) {
 <h3><?php printf(_("Restore a MySQL backup for database %s"),$r["db"]); ?></h3>
 <?php
 echo "<p>";
-__("Warning: Write the complete path and the name of the file. <br />For example if your backups are in the directory /Backups,<br />write /Backups/file.sql.gz (where file.sql.gz is the name of the file).");
+__("Warning: Write the complete path and the filename. <br />For example if your backups are in the directory /Backups,<br />write /Backups/file.sql.gz (where file.sql.gz is the filename).");
 echo "</p>";
 ?>
 <form action="sql_dorestore.php" method="post">
 <input type="hidden" name="id" value="<?php echo $id ?>" />
 <table cellspacing="0" cellpadding="4">
 <tr class="lst2">
-	<th><label for="restfile"><?php __("Please enter the filename containing SQL data to be restored."); ?></label></th>
+	<th><label for="restfile"><?php __("Please enter the path and the filename containing SQL data to be restored."); ?></label></th>
 	<td><input type="text" class="int" id="restfile" name="restfile" size="30" maxlength="255" value="" /></td>
 </tr>
 <tr>
