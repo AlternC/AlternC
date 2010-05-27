@@ -49,7 +49,11 @@ if (!$r=$mysql->get_mysql_details($id)) {
 if (is_array($r)) {
 ?>
 <h3><?php printf(_("Restore a MySQL backup for database %s"),$r["db"]); ?></h3>
-
+<?php
+echo "<p>";
+__("Warning: Write the complete path and the name of the file. <br />For example if your backups are in the directory /Backups ,<br />write /Backups/file.sql.gz (where file.sql.gz is the name of the file)");
+echo "</p>";
+?>
 <form action="sql_dorestore.php" method="post">
 <input type="hidden" name="id" value="<?php echo $id ?>" />
 <table cellspacing="0" cellpadding="4">
