@@ -50,6 +50,8 @@ include_once("head.php");
 
 ?>
 <h3><?php __("Manage allowed domains (TLD)"); ?></h3>
+<hr id="topbar"/>
+<br />
 <?php
         if ($error) {
                 echo "<p class=\"error\">$error</p>";
@@ -58,12 +60,16 @@ include_once("head.php");
 <h3><?php __("Edit a TLD"); ?></h3>
 
 <form method="post" action="adm_tlddoedit.php">
-<table border="0" cellpadding="4" cellspacing="0">
+<table name="main" id="main" class="tedit">
 <tr><th><label for="tld"><?php __("TLD"); ?></label></th><td><code><?php echo $tld; ?></code><input type="hidden" name="tld" id="tld" value="<?php echo $tld; ?>" /></td></tr>
 <tr><th><label for="mode"><?php __("Allowed Mode"); ?></label></th><td><select name="mode" class="inl" id="mode">
         <?php $admin->selecttldmode($mode); ?>
 </select></td></tr>
-<tr><td colspan="2"><input type="submit" class="inb" value="<?php __("Edit this TLD"); ?>" /></td></tr>
+<tr class="trbtn"><td colspan="2">
+  <input type="submit" class="inb" value="<?php __("Edit this TLD"); ?>" />
+  <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='adm_tld.php'"/>
+
+</td></tr>
 </table>
 </form>
 <?php include_once("foot.php"); ?>

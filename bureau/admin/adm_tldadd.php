@@ -38,6 +38,8 @@ include_once ("head.php");
 
 ?>
 <h3><?php __("Manage allowed domains (TLD)"); ?></h3>
+<hr id="topbar"/>
+<br />
 <?php
 	if ($error) {
 	  echo "<p class=\"error\">$error</p>";
@@ -51,14 +53,22 @@ include_once ("head.php");
 <small><?php __("Warning : only some final tld are known in the whois function of AlternC, please check m_dom.php accordingly."); ?></small>
 </p>
 
-<form method="post" action="adm_tlddoadd.php">
+<form method="post" action="adm_tlddoadd.php" name="main" id="main">
 
-<table border="0" cellpadding="4" cellspacing="0">
+<table class="tedit">
 <tr><th><label for="tld"><?php __("TLD"); ?></label></th><td><input type="text" id="tld" name="tld" class="int" value="<?php ehe($tld); ?>" size="20" maxlength="64" /></td></tr>
 <tr><th><label for="mode"><?php __("Allowed Mode"); ?></label></th><td><select name="mode" id="mode" class="inl">
 	<?php $admin->selecttldmode($mode); ?>
 </select></td></tr>
-<tr><td colspan="2"><input type="submit" class="inb" value="<?php __("Add a new TLD"); ?>" /></td></tr>
+<tr class="trbtn"><td colspan="2">
+ <input type="submit" class="inb" value="<?php __("Add a new TLD"); ?>" />
+  <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='adm_tld.php'"/>
+</td></tr>
 </table>
 </form>
+<script type="text/javascript">
+document.forms['main'].tld.focus();
+</script>
+
+
 <?php include_once("foot.php"); ?>

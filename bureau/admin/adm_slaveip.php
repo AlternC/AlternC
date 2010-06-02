@@ -60,6 +60,8 @@ include_once("head.php");
 
 ?>
 <h3><?php __("Manage allowed ip for slave zone transfers"); ?></h3>
+<hr id="topbar" />
+<br />
 <?php
 	if ($error) {
 	  echo "<p class=\"error\">$error</p>";
@@ -83,7 +85,7 @@ for($i=0;$i<count($c);$i++) {
 ?>
 
 <tr class="lst<?php echo $col; ?>">
-<td class="center"><a href="adm_slaveip.php?delip=<?php echo urlencode($c[$i][ip]); ?>"><img src="images/delete.png" alt="<?php __("Delete"); ?>" /></a></td>
+   <td class="center"><div class="ina"><a href="adm_slaveip.php?delip=<?php echo urlencode($c[$i][ip]); ?>"><img src="images/delete.png" alt="<?php __("Delete"); ?>" /><?php __("Delete"); ?></a></div></td>
 <td><?php echo $c[$i]["ip"]."/".$c[$i]["class"]; ?></td>
 </tr>
 <?php
@@ -92,15 +94,19 @@ for($i=0;$i<count($c);$i++) {
 </table>
     <?php } ?>
 <p><?php __("If you want to allow an ip address or class to connect to your dns server, enter it here. Choose 32 as a prefix for single ip address."); ?></p>
-<form method="post" action="adm_slaveip.php">
-<table border="0" cellpadding="4" cellspacing="0">
+<form method="post" action="adm_slaveip.php" name="main" id="main">
+<table class="tedit">
 <tr><th><label for="newip"><?php __("IP Address"); ?></label></th><th><label for="newclass"><?php __("Prefix"); ?></label></th></tr>
 <tr>
-	<td style="text-align: right"><input type="text" class="int" value="<?php ehe(newip); ?>" id="newip" name="newip" maxlength="15" size="20" style="text-align:right" /> / </td>
-	<td><input type="text" class="int" value="<?php echo urlencode($newclass); ?>" id="newclass" name="newclass" maxlength="2" size="3" /></td>
+	<td style="text-align: right"><input type="text" class="int" value="<?php ehe($newip); ?>" id="newip" name="newip" maxlength="15" size="20" style="text-align:right" /> / </td>
+	<td><input type="text" class="int" value="<?php ehe($newclass); ?>" id="newclass" name="newclass" maxlength="2" size="3" /></td>
 </tr>
 <tr><td colspan="2">
 	<input type="submit" value="<?php __("Add this ip to the slave list"); ?>" class="inb" />
 </table>
 </form>
+<script type="text/javascript">
+document.forms['main'].newip.focus();
+</script>
+
 <?php include_once("foot.php"); ?>

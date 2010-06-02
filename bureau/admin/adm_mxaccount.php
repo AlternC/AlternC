@@ -61,6 +61,8 @@ include_once("head.php");
 </head>
 <body>
 <h3><?php __("Manage allowed accounts for secondary mx"); ?></h3>
+<hr id="topbar"/>
+<br />
 <?php
 	if ($error) {
 	  echo "<p class=\"error\">$error</p>";
@@ -84,7 +86,7 @@ for($i=0;$i<count($c);$i++) {
 ?>
 
 <tr class="lst<?php echo $col; ?>">
-<td class="center"><a href="adm_mxaccount.php?delaccount=<?php echo urlencode($c[$i]["login"]); ?>"><img src="images/delete.png" alt="<?php __("Delete"); ?>" /></a></td>
+<td class="center"><div class="ina"><a href="adm_mxaccount.php?delaccount=<?php echo urlencode($c[$i]["login"]); ?>"><img src="images/delete.png" alt="<?php __("Delete"); ?>" /><?php __("Delete"); ?></a></div></td>
 <td><?php echo $c[$i]["login"]; ?></td>
 <td><?php echo $c[$i]["pass"]; ?></td>
 </tr>
@@ -94,16 +96,21 @@ for($i=0;$i<count($c);$i++) {
 </table>
     <?php } ?>
 <p><?php __("If you want to allow a new server to access your mx-hosted domain list, give him an account."); ?></p>
-<form method="post" action="adm_mxaccount.php">
-<table border="0" cellpadding="4" cellspacing="0">
+<form method="post" action="adm_mxaccount.php" name="main" id="main">
+<table class="tedit">
 <tr><th><label for="newlogin"><?php __("Login"); ?></label></th><th><label for="newpass"><?php __("Password"); ?></label></th></tr>
 <tr>
-	<td><input type="text" class="int" value="<?php ehe($newlogin); ?>" id="newlogin" name="newlogin" maxlength="64" size="32" /> / </td>
+	<td><input type="text" class="int" value="<?php ehe($newlogin); ?>" id="newlogin" name="newlogin" maxlength="64" size="32" /></td>
 	<td><input type="password" class="int" value="<?php ehe($newpass); ?>" id="newpass" name="newpass" maxlength="64" size="32" /></td>
 </tr>
-<tr><td colspan="2">
+<tr class="trbtn"><td colspan="2">
 	<input type="submit" value="<?php __("Add this account to the allowed list"); ?>" class="inb" />
 </table>
 
 </form>
+
+<script type="text/javascript">
+document.forms['main'].newlogin.focus();
+document.forms['main'].setAttribute('autocomplete', 'off');
+</script>
 <?php include_once("foot.php"); ?>

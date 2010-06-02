@@ -45,6 +45,8 @@ include_once ("head.php");
 
 ?>
 <h3><?php __("Configure AlternC variables"); ?></h3>
+<hr id="topbar"/>
+<br />
 
 <p>
 <?php __("Here are the internal AlternC variables that are currently being used."); ?>

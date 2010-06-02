@@ -40,6 +40,8 @@ include_once ("head.php");
 
 ?>
 <h3><?php __("Change the default quotas"); ?></h3>
+<hr id="topbar"/>
+<br />
 <?php
 	if ($error) {
 	  echo "<p class=\"error\">$error</p>";

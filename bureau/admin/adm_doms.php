@@ -58,8 +58,8 @@ $c=$admin->dom_list(true,$forcecheck);
 <p>
 <?php __("If you want to force the check of NS, MX, IP on domains, click the link"); ?> <a href="adm_doms.php?force=1"><?php __("Show domain list with refreshed checked NS, MX, IP information"); ?></a>
 </p>
-<form method="post" action="adm_dodom.php">
-<table border="0" cellpadding="4" cellspacing="0">
+<form method="post" action="adm_dodom.php" name="main" id="main">
+<table class="tlist">
     <tr><th></th><th><?php __("Action"); ?></th><th><?php __("Domain"); ?></th><th><?php __("Creator"); ?></th><th><?php __("Connect as"); ?><th><?php __("OK?"); ?></th><th><?php __("Status"); ?></th></tr>
 <?php
 $col=1;
@@ -71,14 +71,14 @@ for($i=0;$i<count($c);$i++) {
 				    <td><?php if ($c[$i]["noerase"]) {
 			echo "<img src=\"icon/encrypted.png\" width=\"16\" height=\"16\" alt=\""._("Locked Domain")."\" />";
 				    } ?></td>
-<td><a href="adm_domlock.php?domain=<?php echo urlencode($c[$i][domaine]); ?>"><?php
-   if ($c[$i]["noerase"]) __("Unlock"); else __("Lock");  ?></a></td>
+<td><div class="ina"><a href="adm_domlock.php?domain=<?php echo urlencode($c[$i][domaine]); ?>"><?php
+   if ($c[$i]["noerase"]) __("Unlock"); else __("Lock");  ?></a></div></td>
 <td><a href="http://<?php echo $c[$i][domaine]; ?>" target="_blank"><?php echo $c[$i]["domaine"]; ?></a></td>
 <td><?php echo $c[$i]["login"]; ?></td>
 <td>
 <?php		  if($admin->checkcreator($c[$i]['uid'])) {
 		?>
-			<a href="adm_login.php?id=<?php echo $c[$i]["uid"];?>"><?php __("Connect as"); ?></a>
+			<div class="ina"><a href="adm_login.php?id=<?php echo $c[$i]["uid"];?>"><?php __("Connect as"); ?></a></div>
 		<?php } ?>
 </td>
 <td style="background: <?php 
