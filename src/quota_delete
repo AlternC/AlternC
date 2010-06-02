@@ -2,7 +2,7 @@
 <?php
 
 /*
- This script delete completely a quota from the quota managment system.
+ This script deletes completely a quota from the quota management system.
  (this script may be used when removing an AlternC module)
 
  $argv[1] = The named quota to create
