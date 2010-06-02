@@ -62,7 +62,7 @@ include_once("head.php");
  <li class="lst1"><a href="adm_slaveaccount.php"><?php __("Manage allowed accounts for slave zone transfers"); ?></a></li>
  <li class="lst2"><a href="adm_mxaccount.php"><?php __("Manage allowed accounts for secondary mx"); ?></a></li>
  <li class="lst1"><a href="adm_variables.php"><?php __("Configure AlternC variables"); ?></a></li>
- <li class="lst2"><a href="stats_members.php"><?php __("Account creation statistics"); ?></a></li>
+<!--  <li class="lst2"><a href="stats_members.php"><?php __("Account creation statistics"); ?></a></li> -->
 </ul>
 
 <?php
