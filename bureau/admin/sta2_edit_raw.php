@@ -42,6 +42,8 @@ if (!$id) {
 
 ?>
 <h3><?php __("Change the Raw Statistics"); ?></h3>
+<hr id="topbar"/>
+<br />
 <?php
 	if ($error) {
 		echo "<p class=\"error\">$error</p>";

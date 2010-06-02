@@ -178,7 +178,7 @@ class m_dom {
    *  force ne devrait être utilisé que par le super-admin.
    $ @return boolean Retourne FALSE si une erreur s'est produite, TRUE sinon.
   */
-  function add_domain($domain,$dns,$noerase=0,$force=0,$isslave,$slavedom) {
+  function add_domain($domain,$dns,$noerase=0,$force=0,$isslave=0,$slavedom="") {
     global $db,$err,$quota,$classes,$L_MX,$L_FQDN,$tld,$cuid,$bro;
     $err->log("dom","add_domain",$domain);
     $mx="1";

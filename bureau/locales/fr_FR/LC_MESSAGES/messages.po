@@ -2066,8 +2066,8 @@ msgid "Change those Raw Statistics."
 msgstr "Modifier ce jeu de stats brutes."
 
 #: ../admin/sta2_list.php:36 ../admin/sta2_list.php:35
-msgid "Statistics List"
-msgstr "Liste des jeux de statistiques"
+msgid "Raw Statistics List"
+msgstr "Liste des jeux de statistiques brutes"
 
 #: ../admin/sta2_list.php:40 ../admin/sta2_list.php:39
 msgid "Create new Raw Statistics (apache)"
@@ -2876,4 +2876,7 @@ msgstr "Fonctionnalités avancées"
 
 msgid "Please check which databases you want to delete"
 msgstr "Vous devez cocher les bases de données que vous souhaitez effacer"
+
+msgid "Main database"
+msgstr "Base de données principale"
 

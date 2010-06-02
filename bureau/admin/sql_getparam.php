@@ -59,7 +59,7 @@ if (!$r=$mysql->get_dblist()) {
 		<td><code><?php echo $mysql->server; ?></code></td>
 	</tr>
 	<tr>
-		<th><?php __("Database"); ?></th>
+		<th><?php __("Main database"); ?></th>
 		<td><code><?php echo $r[0]["db"]; ?></code></td>
 	</tr>
 </table>

@@ -32,7 +32,9 @@ require_once("../class/config.php");
 include_once("head.php");
 
 ?>
-<h3><?php __("Statistics List"); ?></h3>
+<h3><?php __("Raw Statistics List"); ?></h3>
+<hr id="topbar"/>
+<br />
 <?php
 	if ($quota->cancreate("sta2")) { ?>
 <p>

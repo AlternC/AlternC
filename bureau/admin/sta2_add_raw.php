@@ -36,6 +36,8 @@ if (!$quota->cancreate("sta2")) {
 include_once("head.php");
 ?>
 <h3><?php __("New Raw Statistics (apache)"); ?></h3>
+<hr id="topbar"/>
+<br />
 <?php
 	if ($error) {
 		echo "<p class=\"error\">$error</p>";
