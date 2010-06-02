@@ -1777,7 +1777,7 @@ msgstr "Vous avez atteint votre quota de bases, vous ne pouvez plus en créer."
 #: ../admin/sql_add.php:41 ../admin/sql_list.php:82 ../admin/sql_add.php:39
 #: ../admin/sql_list.php:79
 msgid "Create a new MySQL database"
-msgstr "Création d'une base de données MySQL"
+msgstr "Créer une nouvelle base de données MySQL"
 
 #: ../admin/sql_add.php:53 ../admin/sql_getparam.php:52
 #: ../admin/sql_list.php:53 ../admin/sql_list.php:99
@@ -1870,6 +1870,11 @@ msgstr "Vos paramètres de sauvegarde ont été modifiés avec succès"
 msgid "Restore a SQL backup"
 msgstr "Restaurer une sauvegarde SQL"
 
+#: ../admin/sql_dorestore.php:49 ../admin/sql_restore.php:54
+
+msgid "Warning: Write the complete path and the filename. <br />For example if your backups are in the directory /Backups,<br />write /Backups/file.sql.gz (where file.sql.gz is the filename)."
+msgstr "Attention : Indiquez le chemin complet et le nom du fichier <br /> Par exemple si vos sauvegardes sont dans le répertoire /Sauvegardes, <br />écrivez /Sauvegardes/file.sql.gz (où file.sql.gz est le nom du fichier)."
+
 #: ../admin/sql_dorestore.php:49 ../admin/sql_dorestore.php:48
 msgid ""
 "Your database has been restored, check out the previous text for error "
@@ -1945,9 +1950,9 @@ msgstr "Restaurer la sauvegarde MySQL de la base %s"
 
 #: ../admin/sql_restore.php:54 ../admin/sql_restore.php:82
 #: ../admin/sql_restore.php:57
-msgid "Please enter the filename containing SQL data to be restored."
+msgid "Please enter the path and the filename containing SQL data to be restored."
 msgstr ""
-"Entrez le nom du fichier contenant des données SQL à restaurer dans la base."
+"Entrez le chemin complet et le nom du fichier contenant des données SQL à restaurer dans la base."
 
 #: ../admin/sql_restore.php:58 ../admin/sql_restore.php:73
 #: ../admin/sql_restore.php:86 ../admin/sql_restore.php:61
@@ -1999,6 +2004,10 @@ msgstr "Utilisez le tableau ci-dessous pour gérer vos utilisateurs MySQL : "
 #: ../admin/sql_users_list.php:50 ../admin/sql_users_list.php:62
 msgid "Rights"
 msgstr "Droits"
+
+#: ../admin/sql_users_list.php:53 ../admin/sql_users_list.php:64
+msgid "Manage the rights"
+msgstr "Gérer les droits"
 
 #: ../admin/sql_users_rights.php:38 ../admin/sql_users_rights.php:41
 #, php-format
@@ -2864,3 +2873,7 @@ msgstr "Ou seulement les comptes de&nbsp;:"
 
 msgid "Advanced features"
 msgstr "Fonctionnalités avancées"
+
+msgid "Please check which databases you want to delete"
+msgstr "Vous devez cocher les bases de données que vous souhaitez effacer"
+

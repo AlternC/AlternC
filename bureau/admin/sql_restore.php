@@ -58,15 +58,8 @@ echo "</p>";
 ?>
 <form action="sql_dorestore.php" method="post">
 <input type="hidden" name="id" value="<?php echo $id ?>" />
-<table cellspacing="0" cellpadding="4">
-<tr class="lst2">
-	<th><label for="restfile"><?php __("Please enter the path and the filename containing SQL data to be restored."); ?></label></th>
-	<td><input type="text" class="int" id="restfile" name="restfile" size="30" maxlength="255" value="" /></td>
-</tr>
-<tr>
-<td colspan="2"><input class="inb" type="submit" name="submit" value="<?php __("Restore my database"); ?>" /></td>
-</tr>
-</table>
+<p><label for="restfile"><?php __("Please enter the path and the filename containing SQL data to be restored."); ?></label></p>
+<p><input type="text" class="int" id="restfile" name="restfile" size="35" maxlength="255" value="" /> <input class="inb" type="submit" name="submit" value="<?php __("Restore my database"); ?>" /></p>
 </form>
 <?php
 echo "<p>";

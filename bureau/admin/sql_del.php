@@ -47,6 +47,18 @@ if ($confirm=="y") {
   exit();
 }
 
+$found=false;
+foreach($_POST as $k) {
+  if (substr($key,0,4)=="del_") {
+    $found=true;
+  }
+}
+if (!$found) {
+  $error=_("Please check which databases you want to delete"); 
+  include("sql_list.php");
+  exit();
+ }
+
 ?>
 <h3><?php __("MySQL Databases"); ?></h3>
 <hr id="topbar"/>
