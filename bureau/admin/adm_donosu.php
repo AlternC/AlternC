@@ -41,7 +41,9 @@ getFields($fields);
 
 if (!$admin->su2normal($uid)) {
 	$error=$err->errstr();
-}
+ } else {
+  $error=_("This account is now a normal account");
+ }
 
 include("adm_edit.php");
 

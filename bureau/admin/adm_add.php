@@ -54,15 +54,15 @@ if ($error) {
 <form method="post" action="adm_doadd.php" id="main" name="main">
 <table class="tedit">
 <tr><th><label for="login"><?php __("Username"); ?></label></th><td>
-	<input type="text" class="int" name="login" id="login" value="<?php echo $login; ?>" size="20" maxlength="16" />
+	<input type="text" class="int" name="login" id="login" value="<?php ehe($login); ?>" size="20" maxlength="16" />
 </td></tr>
 <tr>
 	<th><label for="pass"><?php __("Initial password"); ?></label></th>
-	<td><input type="password" id="pass" name="pass" class="int" value="<?php echo $pass; ?>" size="20" maxlength="64" /></td>
+	<td><input type="password" id="pass" name="pass" class="int" value="<?php ehe($pass); ?>" size="20" maxlength="64" /></td>
 </tr>
 <tr>
 	<th><label for="passconf"><?php __("Confirm password"); ?></label></th>
-	<td><input type="password" id="passconf" name="passconf" class="int" value="<?php echo $passconf; ?>" size="20" maxlength="64" /></td>
+	<td><input type="password" id="passconf" name="passconf" class="int" value="<?php ehe($passconf); ?>" size="20" maxlength="64" /></td>
 </tr>
 <tr>
 	<th><label for="canpass"><?php __("Can he change its password"); ?></label></th>
@@ -77,11 +77,11 @@ if ($error) {
 </tr>
 <tr>
         	<th><label for="nom"><?php echo _("Surname")."</label> / <label for=\"prenom\">"._("First Name"); ?></label></th>
-	<td><input class="int" type="text" id="nom" name="nom" value="<?php echo $nom; ?>" size="20" maxlength="128" />&nbsp;/&nbsp;<input type="text" name="prenom" id="prenom" value="<?php echo $prenom; ?>" class="int" size="20" maxlength="128" /></td>
+	<td><input class="int" type="text" id="nom" name="nom" value="<?php ehe($nom); ?>" size="20" maxlength="128" />&nbsp;/&nbsp;<input type="text" name="prenom" id="prenom" value="<?php ehe($prenom); ?>" class="int" size="20" maxlength="128" /></td>
 </tr>
 <tr>
 	<th><label for="nmail"><?php __("Email address"); ?></label></th>
-	<td><input type="text" name="nmail" id="nmail" class="int" value="<?php echo $nmail; ?>" size="30" maxlength="128" /></td>
+	<td><input type="text" name="nmail" id="nmail" class="int" value="<?php ehe($nmail); ?>" size="30" maxlength="128" /></td>
 </tr>
 <tr>
 	<th><label for="type"><?php __("Account type"); ?></label></th>

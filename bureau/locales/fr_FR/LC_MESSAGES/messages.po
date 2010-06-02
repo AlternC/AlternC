@@ -1641,8 +1641,8 @@ msgstr "Nouvelle adresse email"
 
 #: ../admin/mem_param.php:79 ../admin/mem_param.php:76
 #: ../admin/mem_param.php:78
-msgid "Change my mail"
-msgstr "Changer mon mail"
+msgid "Change my email address"
+msgstr "Changer mon adresse email"
 
 #: ../admin/mem_param.php:86 ../admin/mem_param.php:81
 #: ../admin/mem_param.php:85
@@ -2397,6 +2397,10 @@ msgstr "Désactiver"
 msgid "%s accounts"
 msgstr "%s comptes"
 
+#
+msgid "You cannot disable your own account."
+msgstr "Vous ne pouvez pas désactiver votre propre compte !" 
+
 #: ../admin/adm_panel.php:57 ../admin/adm_panel.php:56
 msgid "Account creation statistics"
 msgstr "Statistiques de création des comptes"
@@ -2879,4 +2883,12 @@ msgstr "Vous devez cocher les bases de données que vous souhaitez effacer"
 
 msgid "Main database"
 msgstr "Base de données principale"
+
+msgid "This account is now a normal account"
+msgstr "Ce compte est maintenant un compte normal"
+
+msgid "This account is now an administrator account"
+msgstr "Ce compte est maintenant un compte administrateur"
+
+
 

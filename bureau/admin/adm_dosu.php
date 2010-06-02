@@ -41,7 +41,9 @@ getFields($fields);
 
 if (!$admin->normal2su($uid)) {
 	$error=$err->errstr();
-}
+ } else {
+  $error=_("This account is now an administrator account");
+ }
 
 include("adm_edit.php");
 

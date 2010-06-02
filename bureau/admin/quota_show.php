@@ -32,6 +32,8 @@ include_once("head.php");
 
 ?>
 <h3><?php __("Account's quotas"); ?> : </h3>
+<hr id="topbar"/>
+<br />
 <?php
 $q=$quota->getquota();
 if (!is_array($q)) {

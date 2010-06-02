@@ -30,6 +30,11 @@
 require_once("../class/config.php");
 
 
+$fields = array (
+	"dir"     => array ("request", "string", ""),
+);
+getFields($fields);
+
 if(!$hta->CreateDir($dir)) {
 	$error=$err->errstr();
 	include("hta_add.php");

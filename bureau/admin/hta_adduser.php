@@ -46,12 +46,12 @@ getFields($fields);
 <form method="post" action="hta_doadduser.php" name="main" id="main">
 <table border="1" cellspacing="0" cellpadding="4">
 	<tr>
-		<td><input type="hidden" name="dir" value="<?php echo $dir ?>" /><?php __("Folder"); ?></td>
+		<td><input type="hidden" name="dir" value="<?php ehe($dir); ?>" /><?php __("Folder"); ?></td>
 		<td><code><?php echo $dir; ?></code></td>
 	</tr>
 	<tr>
 		<td><label for="user"><?php __("Username"); ?></label></td>
-		<td><input type="text" class="int" name="user" id="user" value="" size="20" maxlength="64" /></td>
+		<td><input type="text" class="int" name="user" id="user" value="<?php ehe($user); ?>" size="20" maxlength="64" /></td>
 	</tr>
 	<tr>
 		<td><label for="password"><?php __("Password"); ?></label></td>

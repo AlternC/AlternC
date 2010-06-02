@@ -53,6 +53,8 @@ $mem->unsu();
 
 ?>
 <h3><?php __("Editing the quotas of a member"); ?></h3>
+<hr id="topbar"/>
+<br />
 <?php
 	if ($error) {
 	  echo "<p class=\"error\">$error</p>";

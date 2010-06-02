@@ -64,6 +64,8 @@ $r=$admin->get_list($show == 'all' ? 1 : 0, $creator);
 
 ?>
 <h3><?php __("AlternC account list"); ?></h3>
+<hr id="topbar"/>
+<br />
 <?php
 	if ($error) {
 	  echo "<p class=\"error\">$error</p>";

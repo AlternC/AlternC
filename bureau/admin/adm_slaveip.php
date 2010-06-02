@@ -96,7 +96,7 @@ for($i=0;$i<count($c);$i++) {
 <table border="0" cellpadding="4" cellspacing="0">
 <tr><th><label for="newip"><?php __("IP Address"); ?></label></th><th><label for="newclass"><?php __("Prefix"); ?></label></th></tr>
 <tr>
-	<td style="text-align: right"><input type="text" class="int" value="<?php echo urlencode($newip); ?>" id="newip" name="newip" maxlength="15" size="20" style="text-align:right" /> / </td>
+	<td style="text-align: right"><input type="text" class="int" value="<?php ehe(newip); ?>" id="newip" name="newip" maxlength="15" size="20" style="text-align:right" /> / </td>
 	<td><input type="text" class="int" value="<?php echo urlencode($newclass); ?>" id="newclass" name="newclass" maxlength="2" size="3" /></td>
 </tr>
 <tr><td colspan="2">

@@ -49,7 +49,7 @@ if (!$quota->cancreate("mysql")) {
 <form method="post" action="sql_doadd.php" id="main" name="main">
 <table class="tedit">
 <tr><th><label for="dbn"><?php __("MySQL Database"); ?></label></th><td>
-	<span class="int" id="dbnpfx"><?php echo $mem->user["login"]; ?>_</span><input type="text" class="int" name="dbn" id="dbn" value="<?php echo $dbn; ?>" size="20" maxlength="30" />
+	<span class="int" id="dbnpfx"><?php echo $mem->user["login"]; ?>_</span><input type="text" class="int" name="dbn" id="dbn" value="<?php ehe($dbn); ?>" size="20" maxlength="30" />
 </td></tr>
 </table>
 <br />

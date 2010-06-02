@@ -64,7 +64,7 @@ while ($db->next_record()) {
 
  <tr class="lst<?php echo $col; ?>">
  <td><?php echo $vars['name']; ?></td>
- <td><input type="text" name="<?php echo $vars['name']?>" value="<?php echo $vars['value']?>" /></td>
+ <td><input type="text" name="<?php ehe($vars['name']); ?>" value="<?php ehe($vars['value']); ?>" /></td>
  <td><?php echo $vars['comment']; ?></td>
  </tr>
 <? } ?>

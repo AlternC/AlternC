@@ -45,7 +45,7 @@ include_once("head.php");
 		<tr><td colspan="2"><input type="hidden" name="usr" value="<?php echo $usr; ?>" /><input type="hidden" name="cookie" value="<?php echo $cookie; ?>" />
 <?php __("Change the email of the account"); ?><br />
 		<?php __("Enter the key you got when you requested the mailbox change, then click the OK button."); ?></td></tr>
-		<tr><th><label for="cle"><?php __("Key"); ?></label></th><td><input type="text" class="int" name="cle" id="cle" value="<?php echo $cle; ?>" size="8" maxlength="8" /></td></tr>
+		<tr><th><label for="cle"><?php __("Key"); ?></label></th><td><input type="text" class="int" name="cle" id="cle" value="<?php ehe($cle); ?>" size="8" maxlength="8" /></td></tr>
 		<tr><td align="center" colspan="3"><input type="submit" class="inb" name="submit" value="<?php __("OK"); ?>" /></td></tr>
 	</table>
 </form>

@@ -55,6 +55,8 @@ if (!$r=$admin->get($uid)) {
 
 ?>
 <h3><?php __("Member Edition"); ?></h3>
+<hr id="topbar"/>
+<br />
 <?php
 	if ($error) {
 		echo "<p class=\"error\">$error</p>";
@@ -96,15 +98,15 @@ if (!$r=$admin->get($uid)) {
 </tr>
  <tr>
 	<th><label for="notes"><?php __("Notes"); ?></label></th>
-	<td><textarea name="notes" id="notes" class="int" cols="32" rows="5"><?php echo $r['notes']; ?></textarea></td>
+	<td><textarea name="notes" id="notes" class="int" cols="32" rows="5"><?php ehe($r['notes']); ?></textarea></td>
 </tr>
 <tr>
 	<th><label for="nom"><?php echo _("Surname")."</label> / <label for=\"prenom\">"._("First Name"); ?></label></th>
-	<td><input type="text" class="int" name="nom" id="nom" value="<?php echo $r["nom"]; ?>" size="20" maxlength="128" />&nbsp;/&nbsp;<input type="text" class="int" name="prenom" id="prenom" value="<?php echo $r["prenom"]; ?>" size="20" maxlength="128" /></td>
+	<td><input type="text" class="int" name="nom" id="nom" value="<?php ehe($r["nom"]); ?>" size="20" maxlength="128" />&nbsp;/&nbsp;<input type="text" class="int" name="prenom" id="prenom" value="<?php ehe($r["prenom"]); ?>" size="20" maxlength="128" /></td>
 </tr>
 <tr>
 	<th><label for="nmail"><?php __("Email address"); ?></label></th>
-	<td><input type="text" class="int" name="nmail" id="nmail" value="<?php echo $r["mail"]; ?>" size="30" maxlength="128" /></td>
+	<td><input type="text" class="int" name="nmail" id="nmail" value="<?php ehe($r["mail"]); ?>" size="30" maxlength="128" /></td>
 </tr>
 <tr>
 	<th><label for="type"><?php __("Account type"); ?></label></th>
@@ -169,8 +171,9 @@ if ($r["su"]) {
 
 <p><?php
 	}
-$c=$admin->get($r["creator"]);
-printf(_("Account created by %s"),$c["login"]);
+if ($c=$admin->get($r["creator"])) {
+  printf(_("Account created by %s"),$c["login"]);
+ }
 ?>
 </p>
 <script type="text/javascript">

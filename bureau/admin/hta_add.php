@@ -48,7 +48,7 @@ include_once("head.php");
 <table border="1" cellspacing="0" cellpadding="4">
 <tr>
 	<td><label for="dir"><?php __("Folder"); ?></label></td>
-	<td><input type="text" class="int" name="dir" id="dir" value="<?php echo $value ?>" maxlength="255" />
+	<td><input type="text" class="int" name="dir" id="dir" value="<?php ehe($dir); ?>" maxlength="255" />
 <script type="text/javascript">
 <!--
   document.write("&nbsp;<input type=\"button\" name=\"bff\" onclick=\"browseforfolder('main.dir');\" value=\" <?php __("Choose a folder..."); ?> \" class=\"bff\">");

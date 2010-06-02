@@ -91,7 +91,7 @@ if (is_array($r)) {
 </tr>
 <tr>
 	<th><label for="bck_dir"><?php __("In which folder do you want to store the backups?"); ?></label></th>
-	<td><input type="text" class="int" name="bck_dir" id="bck_dir" size="30" maxlength="255" value="<?php echo $r["dir"]; ?>" />
+	<td><input type="text" class="int" name="bck_dir" id="bck_dir" size="30" maxlength="255" value="<?php ehe($r["dir"]); ?>" />
 <script type="text/javascript">
 <!--
   document.write("&nbsp;<input type=\"button\" name=\"bff\" class=\"bff\" onclick=\"browseforfolder('main.bck_dir');\" value=\" <?php __("Choose a folder..."); ?> \" />");

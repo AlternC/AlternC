@@ -164,7 +164,7 @@ if ($c===false) $error=$err->errstr();
 <form action="bro_main.php" method="post" name="nn" id="nn">
 <input type="hidden" name="R" value="<?php echo $R; ?>" />
 <table><tr>
-<td><input type="text" class="int" name="nomfich" size="22" maxlength="255" /></td>
+<td><input type="text" class="int" name="nomfich" id="nomfich" size="22" maxlength="255" /></td>
 <td><input type="submit" class="ina" value="<?php __("Create"); ?>" /></td>
 </tr><tr><td>
 <input type="radio" class="inc" id="nfile" onclick="document.nn.nomfich.focus();" name="formu" value="6" <?php if (!$p["crff"]) echo "checked=\"checked\""; ?> /><label for="nfile">&nbsp;<?php __("File"); ?></label>

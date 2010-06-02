@@ -54,7 +54,7 @@ include_once ("head.php");
 <form method="post" action="adm_tlddoadd.php">
 
 <table border="0" cellpadding="4" cellspacing="0">
-<tr><th><label for="tld"><?php __("TLD"); ?></label></th><td><input type="text" id="tld" name="tld" class="int" value="<?php echo $tld; ?>" size="20" maxlength="64" /></td></tr>
+<tr><th><label for="tld"><?php __("TLD"); ?></label></th><td><input type="text" id="tld" name="tld" class="int" value="<?php ehe($tld); ?>" size="20" maxlength="64" /></td></tr>
 <tr><th><label for="mode"><?php __("Allowed Mode"); ?></label></th><td><select name="mode" id="mode" class="inl">
 	<?php $admin->selecttldmode($mode); ?>
 </select></td></tr>

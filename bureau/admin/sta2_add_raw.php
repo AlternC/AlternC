@@ -51,7 +51,7 @@ include_once("head.php");
   <label for="hostname"><?php __("Domain name:"); ?></label></th><td>
 	<select class="inl" name="hostname" id="hostname"><?php $sta2->select_host_list($hostname); ?></select>
 </td></tr>
-<tr><th><label for="dir"><?php __("Folder where we will put the log file:"); ?></label></th><td><input type="text" class="int" name="dir" id="dir" value="<?php echo $dir; ?>" size="20" maxlength="255" />
+<tr><th><label for="dir"><?php __("Folder where we will put the log file:"); ?></label></th><td><input type="text" class="int" name="dir" id="dir" value="<?php ehe($dir); ?>" size="20" maxlength="255" />
 <script type="text/javascript">
 <!--
   document.write("&nbsp;<input type=\"button\" name=\"bff\" class=\"bff\" onclick=\"browseforfolder('main.dir');\" value=\" <?php __("Choose a folder..."); ?> \" />");

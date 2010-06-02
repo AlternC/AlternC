@@ -15,6 +15,8 @@ include_once ("head.php");
 
 ?>
 <h3>Tableau de bord</h3>
+<hr id="topbar"/>
+<br />
 <?php
 if ($error) {
   echo "<p class=\"error\">$error</p>";
@@ -25,27 +27,27 @@ Cette page résume les informations d`hébergement des comptes AlternC<br />
 Les tailles sont exprimées en <?php if ($mode==0 || $mode==4) echo "Mo."; else echo "% du total"; ?>
 </p>
 <p>
-<a href="quotas_users.php?mode=4">Global</a><br /><br />
+<span class="ina"><a href="quotas_users.php?mode=4">Global</a></span><br /><br />
 Détail:
 <?php if ($mode==0) { ?>
-<a href="quotas_users.php?mode=1&amp;sd=<?php echo $sd; ?>&amp;usr=<?php echo $usr; ?>">En pourcentage</a>
-<a href="quotas_users.php?mode=2&amp;sd=<?php echo $sd; ?>&amp;usr=<?php echo $usr; ?>">En graphique</a>
+<span class="ina"><a href="quotas_users.php?mode=1&amp;sd=<?php echo $sd; ?>&amp;usr=<?php echo $usr; ?>">En pourcentage</a></span>
+<span class="ina"><a href="quotas_users.php?mode=2&amp;sd=<?php echo $sd; ?>&amp;usr=<?php echo $usr; ?>">En graphique</a></span>
    <?php } elseif ($mode==1) { ?>
-<a href="quotas_users.php?mode=0&amp;sd=<?php echo $sd; ?>&amp;usr=<?php echo $usr; ?>">En Mo</a>
-<a href="quotas_users.php?mode=2&amp;sd=<?php echo $sd; ?>&amp;usr=<?php echo $usr; ?>">En graphique</a>
+<span class="ina"><a href="quotas_users.php?mode=0&amp;sd=<?php echo $sd; ?>&amp;usr=<?php echo $usr; ?>">En Mo</a></span>
+<span class="ina"><a href="quotas_users.php?mode=2&amp;sd=<?php echo $sd; ?>&amp;usr=<?php echo $usr; ?>">En graphique</a></span>
    <?php } else { ?>
-<a href="quotas_users.php?mode=0&amp;sd=<?php echo $sd; ?>&amp;usr=<?php echo $usr; ?>">En Mo</a>
-<a href="quotas_users.php?mode=1&amp;sd=<?php echo $sd; ?>&amp;usr=<?php echo $usr; ?>">En pourcentage</a>
+<span class="ina"><a href="quotas_users.php?mode=0&amp;sd=<?php echo $sd; ?>&amp;usr=<?php echo $usr; ?>">En Mo</a></span>
+<span class="ina"><a href="quotas_users.php?mode=1&amp;sd=<?php echo $sd; ?>&amp;usr=<?php echo $usr; ?>">En pourcentage</a></span>
  <?php } ?>
 
 <?php if ($mode != 4) { ?>
 <?php if ($usr==0) { if ($sd==0) { ?>
-<a href="quotas_users.php?mode=<?php echo $mode; ?>&amp;sd=1&amp;usr=<?php echo $usr; ?>">Afficher les domaines</a>
+<span class="ina"><a href="quotas_users.php?mode=<?php echo $mode; ?>&amp;sd=1&amp;usr=<?php echo $usr; ?>">Afficher les domaines</a></span>
    <?php } else { ?>
-<a href="quotas_users.php?mode=<?php echo $mode; ?>&amp;sd=0&amp;usr=<?php echo $usr; ?>">Cacher les domaines</a>
+<span class="ina"><a href="quotas_users.php?mode=<?php echo $mode; ?>&amp;sd=0&amp;usr=<?php echo $usr; ?>">Cacher les domaines</a></span>
  <?php } } ?>
 <?php if ($usr) { ?>
-<a href="quotas_users.php?mode=<?php echo $mode; ?>&amp;sd=<? echo $sd; ?>">Tous les comptes</a>
+<span class="ina"><a href="quotas_users.php?mode=<?php echo $mode; ?>&amp;sd=<? echo $sd; ?>">Tous les comptes</a></span>
 <?php } ?>
 <?php } ?>
 </p>
