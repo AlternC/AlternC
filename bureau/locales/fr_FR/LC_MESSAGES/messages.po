@@ -2804,7 +2804,7 @@ msgid "Edit this folder's protection"
 msgstr "Modifier la protection de ce répertoire"
 
 msgid "with a login and a password"
-msgstr "utilisant un nom d'utilisateur et un mot de passe"
+msgstr "en utilisant un nom d'utilisateur et un mot de passe"
 
 msgid "Download this folder"
 msgstr "Télécharger ce répertoire"
