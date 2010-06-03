@@ -464,3 +464,22 @@ CREATE TABLE IF NOT EXISTS `size_web` (
   KEY `ts` (`ts`)
 ) TYPE=MyISAM COMMENT='Web space used by accounts.';
 
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `size_db` (
+  `db` varchar(255) NOT NULL default '',
+  `size` int(10) unsigned NOT NULL default '0',
+  `ts` timestamp(14) NOT NULL,
+  PRIMARY KEY  (`db`),
+  KEY `ts` (`ts`)
+) TYPE=MyISAM COMMENT='MySQL Database used space';
+
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `size_mailman` (
+  `list` varchar(255) NOT NULL default '',
+  `uid` int(11) NOT NULL default '0',
+  `size` int(10) unsigned NOT NULL default '0',
+  `ts` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  PRIMARY KEY  (`list`),
+  KEY `ts` (`ts`),
+  KEY `uid` (`uid`)
+) ENGINE=MyISAM COMMENT='Mailman Lists used space';

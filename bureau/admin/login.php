@@ -40,23 +40,3 @@ include("main.php");
 exit;
 
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
-<html>
-<head>
-<title><?php __("AlternC Desktop"); ?></title>
-<link rel="stylesheet" href="styles/style.css" type="text/css" />
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-</head>
-<frameset cols="225px,*">
-	<frame src="menu.php" name="left" />
-	<frame src="main.php" name="right" />
-<noframes>
-<body>
-<p>
-	Votre navigateur doit supporter les cadres.<br />
-	Your browser must support frames
-</p>
-</body>
-</noframes>
-</frameset>
-</html>

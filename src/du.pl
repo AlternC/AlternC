@@ -31,3 +31,9 @@ if ($A=~/^\/var\/alternc\/db\//) {
     $B=~/^([0-9]+).*/;
     printf "$1\n";
 }
+if ($A=~/^\/var\/lib\/mailman\//) {
+    open(SI,"/usr/bin/du -s '$A'|");
+    $B=<SI>;
+    $B=~/^([0-9]+).*/;
+    printf "$1\n";
+}

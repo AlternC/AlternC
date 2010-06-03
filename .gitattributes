@@ -260,7 +260,6 @@ bureau/admin/sta2_doedit_raw.php -text
 bureau/admin/sta2_edit_raw.php -text
 bureau/admin/sta2_list.php -text
 bureau/admin/stats_members.php -text
-bureau/admin/styles/base.css -text
 bureau/admin/styles/style.css -text
 bureau/admin/template.php -text
 bureau/admin/web_list.php -text
@@ -288,7 +287,6 @@ bureau/class/m_sta2.php -text
 bureau/class/mime.php -text
 bureau/class/reset_stats_conf.php -text
 bureau/class/variables.php -text
-bureau/head.php -text
 bureau/index.php -text
 bureau/locales/Makefile -text
 bureau/locales/README -text

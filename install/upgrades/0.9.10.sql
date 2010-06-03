@@ -16,3 +16,25 @@ VALUES (
 'This variable set the way the account list works for accounts other than "admin" (2000). 0 (default) = admin other than admin/2000 can see their own account, but not the other one 1 = admin other than admin/2000 can see any account by clicking the ''show all accounts'' link. '
 );
 
+-- --------------------------------------------------------
+-- TABLES de mémorisation de la taille des dossiers db/listes
+
+CREATE TABLE IF NOT EXISTS `size_db` (
+  `db` varchar(255) NOT NULL default '',
+  `size` int(10) unsigned NOT NULL default '0',
+  `ts` timestamp(14) NOT NULL,
+  PRIMARY KEY  (`db`),
+  KEY `ts` (`ts`)
+) TYPE=MyISAM COMMENT='MySQL Database used space';
+
+
+CREATE TABLE IF NOT EXISTS `size_mailman` (
+  `list` varchar(255) NOT NULL default '',
+  `uid` int(11) NOT NULL default '0',
+  `size` int(10) unsigned NOT NULL default '0',
+  `ts` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  PRIMARY KEY  (`list`),
+  KEY `ts` (`ts`),
+  KEY `uid` (`uid`)
+) ENGINE=MyISAM COMMENT='Mailman Lists used space';
+
