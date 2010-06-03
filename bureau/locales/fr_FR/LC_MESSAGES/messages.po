@@ -2890,5 +2890,57 @@ msgstr "Ce compte est maintenant un compte normal"
 msgid "This account is now an administrator account"
 msgstr "Ce compte est maintenant un compte administrateur"
 
+msgid "This page shows the space and service count of your AlternC server and each AlternC accounts."
+msgstr "Cette page montre l'espace et le nombre de service utilisé sur AlternC et pour chaque compte."
 
+msgid "Sizes are shown as %s"
+msgstr "Les tailles sont exprimées en %s"
+
+msgid "MB."
+msgstr "Mo."
+
+msgid "% of the total."
+msgstr "% du total."
+
+msgid "Percentage"
+msgstr "En pourcentages"
+
+msgid "In MB"
+msgstr "En Mo"
+
+msgid "Graphical"
+msgstr "En graphique"
+
+msgid "Show the domain names"
+msgstr "Afficher les domaines"
+
+msgid "Hide the domain names"
+msgstr "Cacher les domaines"
+
+msgid "All accounts"
+msgstr "Tous les comptes"
+
+msgid "Server-side view:"
+msgstr "Vue générale du serveur :"
+
+msgid "Detailed view:"
+msgstr "Vue détaillée par compte :"
+
+msgid "Count"
+msgstr "Nombre"
+
+msgid "Space"
+msgstr "Espace"
+
+msgid "Email addresses"
+msgstr "Adresses email"
+
+msgid "Mailman lists"
+msgstr "Listes Mailman"
+
+msgid "Lists"
+msgstr "Listes"
+
+msgid "DB"
+msgstr "Bases"
 

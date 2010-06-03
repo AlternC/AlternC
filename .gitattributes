@@ -232,6 +232,7 @@ bureau/admin/mxlist.php -text
 bureau/admin/phpinfo.php -text
 bureau/admin/powered2.jpg -text
 bureau/admin/quota_show.php -text
+bureau/admin/quotas_oneuser.php -text
 bureau/admin/quotas_users.php -text
 bureau/admin/sql_add.php -text
 bureau/admin/sql_addmain.php -text

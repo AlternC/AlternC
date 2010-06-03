@@ -23,31 +23,31 @@ if ($error) {
 }
 ?>
 <p>
-Cette page résume les informations d`hébergement des comptes AlternC<br />
-Les tailles sont exprimées en <?php if ($mode==0 || $mode==4) echo "Mo."; else echo "% du total"; ?>
+<?php __("This page shows the space and service count of your AlternC server and each AlternC accounts."); ?>
+<?php printf(_("Sizes are shown as %s"),($mode==0 || $mode==4)?_("MB."):_("% of the total.")); ?>
 </p>
 <p>
-<span class="ina"><a href="quotas_users.php?mode=4">Global</a></span><br /><br />
-Détail:
+<?php __("Server-side view:"); ?> <span class="ina"><a href="quotas_users.php?mode=4"><?php __("Global"); ?></a></span><br /><br />
+<?php __("Detailed view:"); ?>
 <?php if ($mode==0) { ?>
-<span class="ina"><a href="quotas_users.php?mode=1&amp;sd=<?php echo $sd; ?>&amp;usr=<?php echo $usr; ?>">En pourcentage</a></span>
-<span class="ina"><a href="quotas_users.php?mode=2&amp;sd=<?php echo $sd; ?>&amp;usr=<?php echo $usr; ?>">En graphique</a></span>
+  <span class="ina"><a href="quotas_users.php?mode=1&amp;sd=<?php echo $sd; ?>&amp;usr=<?php echo $usr; ?>"><?php __("Percentage"); ?></a></span>
+  <span class="ina"><a href="quotas_users.php?mode=2&amp;sd=<?php echo $sd; ?>&amp;usr=<?php echo $usr; ?>"><?php __("Graphical"); ?></a></span>
    <?php } elseif ($mode==1) { ?>
-<span class="ina"><a href="quotas_users.php?mode=0&amp;sd=<?php echo $sd; ?>&amp;usr=<?php echo $usr; ?>">En Mo</a></span>
-<span class="ina"><a href="quotas_users.php?mode=2&amp;sd=<?php echo $sd; ?>&amp;usr=<?php echo $usr; ?>">En graphique</a></span>
+     <span class="ina"><a href="quotas_users.php?mode=0&amp;sd=<?php echo $sd; ?>&amp;usr=<?php echo $usr; ?>"><?php __("In MB"); ?></a></span>
+     <span class="ina"><a href="quotas_users.php?mode=2&amp;sd=<?php echo $sd; ?>&amp;usr=<?php echo $usr; ?>"><?php __("Graphical"); ?></a></span>
    <?php } else { ?>
-<span class="ina"><a href="quotas_users.php?mode=0&amp;sd=<?php echo $sd; ?>&amp;usr=<?php echo $usr; ?>">En Mo</a></span>
-<span class="ina"><a href="quotas_users.php?mode=1&amp;sd=<?php echo $sd; ?>&amp;usr=<?php echo $usr; ?>">En pourcentage</a></span>
+  <span class="ina"><a href="quotas_users.php?mode=0&amp;sd=<?php echo $sd; ?>&amp;usr=<?php echo $usr; ?>"><?php __("In MB"); ?></a></span>
+  <span class="ina"><a href="quotas_users.php?mode=1&amp;sd=<?php echo $sd; ?>&amp;usr=<?php echo $usr; ?>"><?php __("Percentage"); ?></a></span>
  <?php } ?>
 
 <?php if ($mode != 4) { ?>
 <?php if ($usr==0) { if ($sd==0) { ?>
-<span class="ina"><a href="quotas_users.php?mode=<?php echo $mode; ?>&amp;sd=1&amp;usr=<?php echo $usr; ?>">Afficher les domaines</a></span>
+      <span class="ina"><a href="quotas_users.php?mode=<?php echo $mode; ?>&amp;sd=1&amp;usr=<?php echo $usr; ?>"><?php __("Show the domain names"); ?></a></span>
    <?php } else { ?>
-<span class="ina"><a href="quotas_users.php?mode=<?php echo $mode; ?>&amp;sd=0&amp;usr=<?php echo $usr; ?>">Cacher les domaines</a></span>
+      <span class="ina"><a href="quotas_users.php?mode=<?php echo $mode; ?>&amp;sd=0&amp;usr=<?php echo $usr; ?>"><?php __("Hide the domain names"); ?></a></span>
  <?php } } ?>
 <?php if ($usr) { ?>
-<span class="ina"><a href="quotas_users.php?mode=<?php echo $mode; ?>&amp;sd=<? echo $sd; ?>">Tous les comptes</a></span>
+    <span class="ina"><a href="quotas_users.php?mode=<?php echo $mode; ?>&amp;sd=<? echo $sd; ?>"><?php __("All accounts"); ?></a></span>
 <?php } ?>
 <?php } ?>
 </p>
@@ -122,34 +122,36 @@ Détail:
 ?>
 <center>
 <div style="width: 650px">
-<table cellspacing="0" cellpadding="4" border="1" width="550" style="border-collapse: collapse">
+<table class="tedit">
 <thead>
-<tr><th>&nbsp;</th><th>Nombre</th><th>Espace</th></tr>
+   <tr><th>&nbsp;</th><th><?php __("Count"); ?></th><th><?php __("Space"); ?></th></tr>
 </thead>
 <tbody>
 <tr>
-<td>Domaines</td>
-<td><?php echo $dc; ?></td>
-<td><?php echo sprintf("%.1f", $totalweb / 1024); ?>&nbsp;Mo</td>
+  <th><?php __("Domains"); ?></th>
+ <td><?php echo $dc; ?></td>
+ <td><?php echo sprintf("%.1f", $totalweb / 1024); ?>&nbsp;Mo</td>
 </tr>
 <tr>
-<td>Mails</td>
-<td><?php echo $mc; ?></td>
-<td><?php echo sprintf("%.1f", $totalmail / 1024); ?>&nbsp;Mo</td>
+ <th><?php __("Email addresses"); ?></th>
+ <td><?php echo $mc; ?></td>
+ <td><?php echo sprintf("%.1f", $totalmail / 1024); ?>&nbsp;Mo</td>
+</tr>
+<?php if ($mlc) { ?>
+<tr>
+ <th><?php __("Mailman lists"); ?></th>
+ <td><?php echo $mlc; ?></td>
+ <td><?php echo sprintf("%.1f", $totallist / 1024); ?>&nbsp;Mo</td>
+</tr>
+							      <?php } ?>
+<tr>
+ <th><?php __("MySQL Databases"); ?></th>
+ <td><?php echo $dbc; ?></td>
+ <td><?php echo sprintf("%.1f", $totaldb / 1024 / 1024); ?>&nbsp;Mo</td>
 </tr>
 <tr>
-<td>Listes</td>
-<td><?php echo $mlc; ?></td>
-<td><?php echo sprintf("%.1f", $totallist / 1024); ?>&nbsp;Mo</td>
-</tr>
-<tr>
-<td>Bases</td>
-<td><?php echo $dbc; ?></td>
-<td><?php echo sprintf("%.1f", $totaldb / 1024 / 1024); ?>&nbsp;Mo</td>
-</tr>
-<tr>
-<td colspan="2" style="text-align: right;">Total</td>
-<td><?php echo sprintf("%.1f", $totaltotal / 1024); ?>&nbsp;Mo</td>
+ <th colspan="2"><?php __("Total"); ?></th>
+ <td><?php echo sprintf("%.1f", $totaltotal / 1024); ?>&nbsp;Mo</td>
 </tr>
 </tbody>
 </table>
@@ -161,18 +163,18 @@ Détail:
 <center>
 
 <div style="width: 650px">
-<table cellspacing="0" cellpadding="4" border="1" width="550" style="border-collapse: collapse">
+<table  class="tedit">
 <thead>
-<tr><th rowspan="2">Compte</th><th colspan="3">Nombre de</th><th colspan="5">Espace</th></tr>
+	    <tr><th rowspan="2"><?php __("Account"); ?></th><th colspan="3"><?php __("Count"); ?></th><th colspan="5"><?php __("Space"); ?></th></tr>
 <tr>
-    <th>Dom</th>
-    <th>Mails</th>
-    <th>Listes</th>
-    <th>Web</th>
-    <th>Mail</th>
-    <th>Listes</th>
-    <th>Bases</th>
-    <th>Total</th>
+  <th><?php __("Dom"); ?></th>
+  <th><?php __("Mails"); ?></th>
+  <th><?php __("Lists"); ?></th>
+  <th><?php __("Web");  ?></th>
+  <th><?php __("Mails"); ?></th>
+  <th><?php __("Lists"); ?></th>
+  <th><?php __("DB"); ?></th>
+  <th><?php __("Total"); ?></th>
 </tr>
 </thead>
 <tbody>
@@ -281,7 +283,7 @@ if ($sd)     echo "&nbsp;&nbsp;&nbsp;-&nbsp;".$d["domaine"]."<br />\n";
 		$pc=0;
 
 if ($mode==0) {
-  echo sprintf("%.1f", $ws / 1024)."&nbsp;Mo";
+  echo sprintf("%.1f", $ws / 1024)."&nbsp;"._("MB");
 } elseif ($mode==1) {
   echo sprintf("%.1f",$pc)."&nbsp;%";
 } else {
@@ -317,7 +319,7 @@ else
 	$pc=0;
 
 if ($mode==0) {
-  echo sprintf("%.1f", $mls / 1024)."&nbsp;Mo";
+  echo sprintf("%.1f", $mls / 1024)."&nbsp;"._("MB");
 } elseif ($mode==1) {
   echo sprintf("%.1f",$pc)."&nbsp;%";
 } else {
@@ -337,7 +339,7 @@ else
 	$pc=0;
 
 if ($mode==0) {
-	echo sprintf("%.1f", $ds / 1024/1024)."&nbsp;Mo";
+  echo sprintf("%.1f", $ds / 1024/1024)."&nbsp;"._("MB");
 } elseif ($mode==1) {
 	echo sprintf("%.1f",$pc)."&nbsp;%";
 } else {
@@ -350,7 +352,7 @@ echo ">";
 
 $ts=$ds/1024+$ws+$ms+$mls;
 if ($mode==0) {
-	echo sprintf("%.1f", $ts/1024)."&nbsp;Mo";
+  echo sprintf("%.1f", $ts/1024)."&nbsp;"._("MB");
 } elseif ($mode==1) {
 	echo sprintf("%.1f",(100*$ts/$totaltotal))."&nbsp;%";
 } else {
@@ -390,144 +392,11 @@ echo "</tr>";
 
 	if (!empty($c))
 	{
-?>
 
-<!-- Les Mails -->
-<center>
-<p>Compte <span style="font-weight: bold;"><?php echo $c["login"]; ?></span></p>
-<?php
+	  define("QUOTASONE","1");
+	  require_once("quotas_oneuser.php");
 
-	list($totalweb)=@mysql_fetch_array(mysql_query("SELECT SUM(size) FROM size_web WHERE uid = '" . $c["uid"] . "'"));
-
-	echo "<p>Espace WEB: ";
-	echo sprintf("%.1f", $totalweb / 1024)."&nbsp;Mo";
-	echo "</p>";
-
-?>
-<div style="width: 550px">
-<table cellspacing="0" cellpadding="4" border="1" width="550" style="border-collapse: collapse">
-<thead>
-<tr>
-    <th>Domaine</th>
-    <th>Mail</th>
-    <th>Espace</th>
-</tr>
-</thead>
-<tbody>
-<?php
-
-
-  $s=mysql_query("SELECT * FROM domaines WHERE compte='".$c["uid"]."';");
-  $totalmail=0;
-  while ($d=mysql_fetch_array($s)) {
-    list($mstmp)=@mysql_fetch_array(mysql_query("SELECT SUM(size) FROM size_mail WHERE alias LIKE '%\_".$d["domaine"]."';"));
-    $totalmail+=$mstmp;
-  }
-
-  $s=mysql_query("SELECT * FROM domaines WHERE compte='".$c["uid"]."';");
-  while ($d=mysql_fetch_array($s)) {
-    $t=mysql_query("SELECT alias,size FROM size_mail WHERE alias LIKE '%\_".$d["domaine"]."';");
-    while ($e=mysql_fetch_array($t)) {
-      echo "<tr><td>".$d["domaine"]."</td>";
-      echo "<td>".str_replace("_","@",$e["alias"])."</td>";
-      echo "<td";
-      if ($mode!=2) echo " style=\"text-align: right\"";
-      echo ">";
-      $ms=$e["size"];
-			if ($totalmail)
-				$pc=intval(100*$ms/$totalmail);
-			else
-				$pc=0;
-      if ($mode==0) {
-	echo sprintf("%.1f", $ms / 1024)."&nbsp;Mo";
-      } elseif ($mode==1) {
-	echo sprintf("%.1f", $pc)."&nbsp;%";
-      } else {
-	echo "<img src=\"hippo_bleue.gif\" style=\"width: ".(2*$pc)."px; height: 16px\" alt=\"".$pc."%\" title=\"".$pc."\"/>";
-      }
-      echo "</td></tr>";
-    }
-  }
-?>
-</tbody>
-</table>
-    <p>&nbsp;</p>
-
-<table cellspacing="0" cellpadding="4" border="1" width="550" style="border-collapse: collapse">
-<thead>
-<tr>
-    <th>DB</th>
-    <th>Espace</th>
-</tr>
-</thead>
-<tbody>
-<?php
-
-    // Espace DB :
-    list($totaldb)=@mysql_fetch_array(mysql_query("SELECT SUM(size) FROM size_db WHERE db='".$c["login"]."' OR db LIKE '".$c["login"]."\_%';"));
-    $s=mysql_query("SELECT db,size FROM size_db WHERE db='".$c["login"]."' OR db LIKE '".$c["login"]."\_%';");
-  while ($d=mysql_fetch_array($s)) {
-    echo "<tr><td>".$d["db"]."</td><td";
-    if ($mode!=2) echo " style=\"text-align: right\"";
-    echo ">";
-    $ds=$d["size"];
-		if ($totaldb)
-			$pc=intval(100*$ds/$totaldb);
-		else
-			$pc=0;
-    if ($mode==0) {
-      echo sprintf("%.1f", $ds / 1024/1024)."&nbsp;Mo";
-    } elseif ($mode==1) {
-      echo sprintf("%.1f", $pc)."&nbsp;%";
-    } else {
-      echo "<img src=\"hippo_bleue.gif\" style=\"width: ".(2*$pc)."px; height: 16px\" alt=\"".$pc."%\" title=\"".$pc."%\"/>";
-    }
-    echo "</td></tr>";
-  }
-?>
-</tbody>
-</table>
-
-<p>&nbsp;</p>
-
-<table cellspacing="0" cellpadding="4" border="1" width="550" style="border-collapse: collapse">
-<thead>
-<tr>
-    <th>Liste</th>
-    <th>Espace</th>
-</tr>
-</thead>
-<tbody>
-<?php
-
-    // Espace Liste :
-    list($totallist)=@mysql_fetch_array(mysql_query("SELECT SUM(size) FROM size_mailman WHERE uid='".$c["uid"]."'"));
-    $s=mysql_query("SELECT list,size FROM size_mailman WHERE uid='".$c["uid"]."' ORDER BY list ASC");
-  while ($d=mysql_fetch_array($s)) {
-    echo "<tr><td>".$d["list"]."</td><td";
-    if ($mode!=2) echo " style=\"text-align: right\"";
-    echo ">";
-    $ds=$d["size"];
-		if ($totallist)
-			$pc=intval(100*$ds/$totallist);
-		else
-			$pc=0;
-    if ($mode==0) {
-      echo sprintf("%.1f", $ds / 1024)."&nbsp;Mo";
-    } elseif ($mode==1) {
-      echo sprintf("%.1f", $pc)."&nbsp;%";
-    } else {
-      echo "<img src=\"hippo_bleue.gif\" style=\"width: ".(2*$pc)."px; height: 16px\" alt=\"".$pc."%\" title=\"".$pc."%\"/>";
-    }
-    echo "</td></tr>";
-  }
-?>
-</tbody>
-</table>
-
-</div>
-</center>
-<?php } ?>
+ } ?>
 <?php
     }
 ?>
