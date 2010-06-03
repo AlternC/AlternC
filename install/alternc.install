@@ -183,11 +183,6 @@ done
 echo "."
 rm -f $SED_SCRIPT
 
-#######################################################################
-# Save installed files to check them during next install
-#
-tar -zcf "$INSTALLED_CONFIG_TAR" -C / $CONFIG_FILES
-
 ######################################################################## 
 # Ad-hoc fixes
 #
@@ -319,6 +314,11 @@ if [ -x /usr/sbin/locale-gen ] ; then
 	locale-gen
     fi
 fi
+
+#######################################################################
+# Save installed files to check them during next install
+#
+tar -zcf "$INSTALLED_CONFIG_TAR" -C / $CONFIG_FILES
 
 #######################################################################
 # Reload services
