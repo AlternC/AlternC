@@ -53,7 +53,12 @@ if($_POST["del_confirm"] == "y"){
   }
   include("adm_list.php");
   exit();
-}else{
+} else {
+  if (!is_array($d) || count($d)==0) {
+    $error=_("Please check the accounts you want to delete");
+    require("adm_list.php");
+    exit();
+  } 
     include("head.php");
     ?>
     </head>

@@ -2944,3 +2944,8 @@ msgstr "Listes"
 msgid "DB"
 msgstr "Bases"
 
+msgid "MB"
+msgstr "Mo"
+
+msgid "Please check the accounts you want to delete"
+msgstr "Veuillez cocher les comptes que vous souhaitez effacer"
