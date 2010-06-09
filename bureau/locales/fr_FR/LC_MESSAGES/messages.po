@@ -1701,8 +1701,8 @@ msgid "Your password has been successfully changed."
 msgstr "Votre mot de passe a été changé avec succès."
 
 #: ../admin/menu_adm.php:39 ../admin/menu_adm.php:37 ../admin/menu_adm.php:41
-msgid "Manage the members"
-msgstr "Gérer les membres"
+msgid "Manage the Alternc accounts"
+msgstr "Gérer les comptes AlternC"
 
 #: ../admin/menu_adm.php:41 ../admin/menu_adm.php:39 ../admin/menu_adm.php:45
 msgid "General PhpMyAdmin"
@@ -2399,7 +2399,7 @@ msgstr "Recharger cette page"
 
 #: ../admin/adm_doms.php:63
 msgid "Creator"
-msgstr "créateur"
+msgstr "Créateur"
 
 #: ../admin/adm_list.php:97 ../admin/adm_list.php:128
 msgid "Disable"

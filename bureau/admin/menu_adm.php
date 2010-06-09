@@ -38,7 +38,7 @@ if ($mem->checkRight()) { ?>
     <img src="images/admin.png" alt="Administration" />&nbsp;<span style="color: red;"><?php __("Administration"); ?></span></div>
 <div class="menu-content" id ="menu-adm">
 <ul>
-<li><a href="adm_list.php"><span style="color: red;"><?php __("Manage the members"); ?></span></a></li>
+<li><a href="adm_list.php"><span style="color: red;"><?php __("Manage the Alternc accounts"); ?></span></a></li>
 <li><a href="quotas_users.php?mode=4"><span style="color: red;"><?php __("User Quotas"); ?></span></a></li>
 <?php if ($cuid == 2000) { ?>
 <li><a href="adm_panel.php"><span style="color: red;"><?php __("Admin Control Panel"); ?></span></a></li>
