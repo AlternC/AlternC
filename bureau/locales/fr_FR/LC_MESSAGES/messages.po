@@ -369,6 +369,15 @@ msgstr "Compte créé par %s"
 msgid "Back to the account list"
 msgstr "Retour à la liste des comptes AlternC"
 
+#: ../admin/adm_list.php:118
+msgid "Minimal view"
+msgstr "Affichage simplifié"
+
+#: ../admin/adm_list.php:119
+msgid "Complete view"
+msgstr "Affichage détaillé"
+
+
 #: ../admin/adm_list.php:46 ../admin/adm_list.php:56
 msgid "AlternC account list"
 msgstr "Liste des comptes AlternC"
