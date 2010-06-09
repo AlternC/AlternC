@@ -2397,6 +2397,10 @@ msgstr "ATTENTION : Confirmez-vous la suppression de cette utilisateur"
 msgid "Update this page"
 msgstr "Recharger cette page"
 
+#: ../admin/adm_doms.php:63
+msgid "Creator"
+msgstr "créateur"
+
 #: ../admin/adm_list.php:97 ../admin/adm_list.php:128
 msgid "Disable"
 msgstr "Désactiver"
@@ -2813,7 +2817,7 @@ msgid "Edit this folder's protection"
 msgstr "Modifier la protection de ce répertoire"
 
 msgid "with a login and a password"
-msgstr "en utilisant un nom d'utilisateur et un mot de passe"
+msgstr "utilisant un nom d'utilisateur et un mot de passe"
 
 msgid "Download this folder"
 msgstr "Télécharger ce répertoire"
