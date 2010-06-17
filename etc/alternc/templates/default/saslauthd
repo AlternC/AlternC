@@ -5,3 +5,4 @@ MECHANISMS="rimap"
 PWDIR=/var/spool/postfix/var/run/saslauthd
 PIDFILE="${PWDIR}/saslauthd.pid"
 OPTIONS="-r -m /var/spool/postfix/var/run/saslauthd -O localhost -c"
+NAME="saslauthd"
