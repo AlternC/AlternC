@@ -560,7 +560,7 @@ msgstr "Les quotas ont été modifiés avec succès"
 
 #: ../admin/adm_quotaedit.php:50 ../admin/adm_quotaedit.php:55
 msgid "Editing the quotas of a member"
-msgstr "Modification des quotas d'un compte AlernC"
+msgstr "Modification des quotas d'un compte AlternC"
 
 #: ../admin/adm_quotaedit.php:61 ../admin/quota_show.php:42
 #: ../admin/adm_quotaedit.php:67 ../admin/quota_show.php:40
