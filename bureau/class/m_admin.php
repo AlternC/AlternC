@@ -586,6 +586,8 @@ EOF;
 	  ($db->query("DELETE FROM local WHERE uid='$uid';"))) {
 	exec("/usr/lib/alternc/mem_del ".$tt["login"]);
 	$mem->unsu();
+	// If this user was (one day) an administrator one, he may have a list of his own accounts. Let's associate those accounts to nobody as a creator.
+	$db->query("UPDATE membres SET creator=2000 WHERE creator='$uid';");
 	return true;
       } else {
 	$err->raise("admin",2);
