@@ -570,6 +570,9 @@ EOF;
     // On devient l'utilisateur : 
     $mem->su($uid);
 
+    // This script may take a long time on big accounts, let's give us some time ... Fixes 1132
+    @set_time_limit(0);
+
     // WE MUST call m_dom before all others because of conflicts ...
     $dom->alternc_del_member();
 
