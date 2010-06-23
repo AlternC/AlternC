@@ -1128,7 +1128,7 @@ msgstr "Gère-t-on le DNS de ce domaine ?"
 #, php-format
 msgid "help_dns_mx %s %s"
 msgstr ""
-"Si l'on ne gère vos DNS : <br /> Vous pouvez choisir de faire gérer vos "
+"Si l'on gère vos DNS : <br /> Vous pouvez choisir de faire gérer vos "
 "mails ailleurs (champ MX).<br /> Mettez <b><code>%s</code></b> dans ce champ "
 "pour gérer vos mails par %s<br /> Sinon mettez l'ip ou le nom du serveur que "
 "vous souhaitez utiliser pour gérer vos mails.\t<small>Attention : Si vous "
