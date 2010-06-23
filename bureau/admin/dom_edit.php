@@ -171,10 +171,15 @@ if (!$r[noerase]) {
 	<td width="35%" valign="top">
 	<p>
 	<?php __("help_dns_mail"); ?></p>
+<p>
 	 <input type="radio" id="emailon" class="inc" name="email" id="emailon" value="1"<?php cbox($r["mail"]); ?> <?php if ($r["dns"]) echo "disabled=\"disabled\""; ?>/><label for="emailon"><?php __("Yes"); ?></label>
 <br />
          <input type="radio" id="emailoff" class="inc" name="email" id="emailoff" value="0"<?php cbox(!$r["mail"]); ?> <?php if ($r["dns"]) echo "disabled=\"disabled\""; ?>/><label for="emailoff"><?php __("No"); ?></label>
+</p>
+	<p>																										  <?php __("Warning: If you set this to 'no', all your email accounts and aliases on this domain will be immediately deleted."); ?>
+</p>
 	</td>
+
 </tr>
 <tr class="trbtn"><td colspan="2"><input type="submit" class="inb" name="submit" value="<?php __("Submit the changes"); ?>" /></td></tr>
 </table>

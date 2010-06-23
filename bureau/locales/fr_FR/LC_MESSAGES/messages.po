@@ -2962,3 +2962,6 @@ msgstr "Mo"
 
 msgid "Please check the accounts you want to delete"
 msgstr "Veuillez cocher les comptes que vous souhaitez effacer"
+
+msgid "Warning: If you set this to 'no', all your email accounts and aliases on this domain will be immediately deleted."
+msgstr "Attention: Si vous mettez 'non' ici, toutes les adresses emails de ce domaine et les messages qu'elles contiennent seront immédiatement détruits."

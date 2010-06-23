@@ -101,7 +101,7 @@ if ($error) {
 <?php if (variable_get('hosting_tld') || $dom->enum_domains()) { ?>
 <tr>
     <th colspan="2">
-        <input type="checkbox" name="create_dom" value="1" class="inc" id="create_dom" />
+        <input type="checkbox" name="create_dom" value="1" class="inc" id="create_dom" <?php cbox($create_dom==1); ?>/>
         <label for="create_dom"><?php printf(_("Install the domain"),""); ?></label>
         <span class="int" id="create_dom_list_pfx">login.</span><select name="create_dom_list" class="int" id="create_dom_list">
             <?php if (variable_get('hosting_tld')) { ?>
