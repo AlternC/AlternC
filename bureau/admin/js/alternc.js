@@ -97,16 +97,12 @@ function browseforfolder(caller) {
 }
 
 function CheckAll() {
-  var fi = 1;
-  for (var i = 0; i < document.main.elements.length; i++) {
-    if(document.main.elements[i].type == 'checkbox'){
-	if (fi) {
-		fi=0;
-		chk=!document.main.elements[i].checked;
+    chk=document.getElementById('checkall').checked;
+    for (var i = 0; i < document.main.elements.length; i++) {
+	if(document.main.elements[i].type == 'checkbox'){
+	    document.main.elements[i].checked = chk;
 	}
-      document.main.elements[i].checked = chk;
     }
-  }
 }
 
 function hide(s) {

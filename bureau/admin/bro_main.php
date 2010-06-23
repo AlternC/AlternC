@@ -66,7 +66,7 @@ if ($formu) {
         include_once("head.php");
 ?>
   <h3><?php printf(_("Deleting files and/or directories")); ?> : </h3>
-  <form action="bro_main.php" method="post">  
+  <form action="bro_main.php" method="post" name="main" id="main">  
     <input type="hidden" name="formu" value="2" />
     <input type="hidden" name="actdel" value="1" />
     <input type="hidden" name="R" value="<?php echo $R?>" />
@@ -277,7 +277,7 @@ echo "<table width=\"100%\" style=\"border: 0px\" cellpadding=\"2\" cellspacing=
 <tr><th>
 <script type="text/javascript">
 <!--
-document.write("<input type=\"checkbox\" value=\"1\" class=\"inb\" onclick=\"CheckAll();\" />");
+document.write("<input type=\"checkbox\" id=\"checkall\" value=\"1\" class=\"inb\" onclick=\"CheckAll();\" />");
 //  -->
 </script>
 </th>
