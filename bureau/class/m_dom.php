@@ -873,9 +873,14 @@ class m_dom {
       }
     }
     
-    $db->query("update domaines set gesdns='$dns', mx='$mx', gesmx='$gesmx' where domaine='$dom'");
-    $db->query("insert into domaines_standby (compte,domaine,mx,gesdns,gesmx,action) values ('$cuid','$dom','$mx','$dns','$gesmx',1);"); 
-    // UPDATE
+    $db->query("UPDATE domaines SET gesdns='$dns', mx='$mx', gesmx='$gesmx' WHERE domaine='$dom'");
+    $db->query("INSERT INTO domaines_standby (compte,domaine,mx,gesdns,gesmx,action) VALUES ('$cuid','$dom','$mx','$dns','$gesmx',1);"); 
+    // If we go from NODNS to YESDNS, we HAVE TO recreate all the subdomains of this domain in the bind zone file
+    // This code will fix Ticket 517
+    if ($dns==1 && $r["dns"]==0) {
+      $db->query("INSERT INTO sub_domaines_standby SELECT compte,domaine,sub,valeur,type,1 FROM sub_domaines WHERE domaine='$dom';");
+    }
+    
     return true;
   } // edit_domain
   
