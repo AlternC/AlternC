@@ -386,12 +386,12 @@ class m_mail {
    * @return boolean TRUE si le compte a bien été créé, FALSE si une erreur s'est produite.
    */
   function add_mail($dom,$mail,$pop,$pass,$alias) {
-    global $quota,$err,$cuid,$db,$admin;
+    global $quota,$err,$cuid,$db,$admin,$L_FQDN;
     $err->log("mail","add_mail",$dom."/".$mail);
     $account=array();
     $mail=trim(strtolower($mail)); // remove spaces also
     if ($pop) $pop="1"; else $pop="0";
-    if ($mail) {
+    if ($mail || $dom==$L_FQDN) {
       if (!checkloginmail($mail)) {
 	$err->raise("mail",13);
 	return false;
