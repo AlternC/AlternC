@@ -41,13 +41,13 @@ if ($formu) {
   switch ($formu) {
   case 1:  // Créer le répertoire $R.$nomfich
     if (!$bro->CreateDir($R,$nomfich)) {
-      print $err->errstr();
+      $error = $err->errstr();
     }
     $p=$bro->GetPrefs();
     break;
   case 6: // Créer le fichier $R.$nomfich
     if (!$bro->CreateFile($R,$nomfich)) {
-      print $err->errstr();
+      $error = $err->errstr();
     }
     $p=$bro->GetPrefs();
     if ($p["createfile"]==1) {
@@ -60,7 +60,7 @@ if ($formu) {
     if ($actdel) {
       if ($del_confirm != "") { 
         if (!$bro->DeleteFile($d,$R)) {
-          print $err->errstr();
+          $error = $err->errstr();
         }
       } elseif (!$cancel && is_array($d)) {
         include_once("head.php");
@@ -88,28 +88,28 @@ if ($formu) {
     }
     if ($actcopy) {
       if (!$bro->CopyFile($d,$R,$actmoveto)) {
-        print $err->errstr();
+        $error = $err->errstr();
       }
     }
     if ($actmove) {
       if (!$bro->MoveFile($d,$R,$actmoveto)) {
-        print $err->errstr();
+        $error = $err->errstr();
       }
     }
     break;
   case 4:  // Renommage Effectif...
     if (!$bro->RenameFile($R,$o,$d)) { // Rename $R (directory) $o (old) $d (new) names
-      print $err->errstr();
+      $error = $err->errstr();
     } 
     break;
   case 3:  // Upload de fichier...
     if (!$bro->UploadFile($R)) {
-      print $err->errstr();
+      $error = $err->errstr();
     }
     break;
   case 7:  // Changement de permissions [ML]
     if (!$bro->ChangePermissions($R, $d, $perm)) {
-      print $err->errstr();
+      $error = $err->errstr();
     }
     break;
   }
@@ -118,8 +118,10 @@ if ($formu) {
 if ($actextract) {
   print _("extracting...")."<br />\n"; flush();
   if ($bro->ExtractFile($R. '/' . $file, $R)) {
+    echo "<p class=\"error\">";
     print $err->errstr();
     print _("failed")."<br />\n";
+    echo "</p>";
   } else {
     print _("done")."<br />\n";
   }
@@ -135,11 +137,13 @@ if ($c===false) $error=$err->errstr();
 <tr><td>
 
 <hr />
+
+
 <p class="breadcrumb">
  <?php __("Path"); ?> / <a href="bro_main.php?R=/"><?php echo $mem->user["login"]; ?></a>&nbsp;/&nbsp;<?php echo $bro->PathList($R,"bro_main.php") ?>
 </p>
 
-<?php if ($error) echo "<font color=\"red\">$error</font>"; ?>
+<?php if ($error) echo "<p class=\"error\">$error</p>"; ?>
 
 <table><tr>
 <td class="formcell">

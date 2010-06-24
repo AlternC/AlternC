@@ -350,7 +350,7 @@ class m_bro {
     global $db,$err,$cuid;
     $file=ssla($file);
     $absolute=$this->convertabsolute($dir."/".$file,0);
-    if (!$absolute) {
+    if (!$absolute || file_exists($absolute)) {
       $err->raise("bro",1);
       return false;
     }
