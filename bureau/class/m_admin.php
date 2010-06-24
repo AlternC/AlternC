@@ -305,20 +305,26 @@ class m_admin {
    * @return boolean Retourne FALSE si une erreur s'est produite, TRUE sinon.
    *
    */
-  function add_mem($login, $pass, $nom, $prenom, $mail, $canpass=1, $type='default', $duration=0, $notes = "") {
+  function add_mem($login, $pass, $nom, $prenom, $mail, $canpass=1, $type='default', $duration=0, $notes = "", $force=0) {
     global $err,$quota,$classes,$cuid,$mem,$L_MYSQL_DATABASE,$L_MYSQL_LOGIN;
     $err->log("admin","add_mem",$login."/".$mail);
     if (!$this->enabled) {
       $err->raise("admin",1);
       return false;
     }
-    if (($login=="")||($pass=="")||($mail=="")){
+    if (($login=="")||($pass=="")) {
       $err->raise("admin",6);
       return false;
     }
-    if (checkmail($mail)!=0){
-      $err->raise("admin",5);
-      return false;
+    if (!$force) {
+      if ($mail=="") {
+	$err->raise("admin",6);
+	return false;
+      }
+      if (checkmail($mail)!=0){
+	$err->raise("admin",5);
+	return false;
+      }
     }
     // Vérification de la conformité du login
     $login=strtolower($login);

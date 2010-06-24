@@ -44,7 +44,7 @@ require("/var/alternc/bureau/class/config_nochk.php");
 $admin->enabled=1;
 
 // On crée le compte admin : 
-if (!$admin->add_mem("admin","admin","Administrateur", "Admin", "postmaster@".$L_FQDN)) {
+if (!$admin->add_mem("admin","admin","Administrateur", "Admin", "postmaster@".$L_FQDN,1,'default',0,'',1)) {
 	echo $err->errstr()."\n";
 	exit(1);
 }
