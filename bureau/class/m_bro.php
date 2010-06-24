@@ -512,11 +512,16 @@ class m_bro {
     if (!strpos($_FILES['userfile']['name'],"/")) {
       if (is_uploaded_file($_FILES['userfile']['tmp_name'])) {
         if (!file_exists($absolute."/".$_FILES['userfile']['name'])) {
-          touch($absolute."/".$_FILES['userfile']['name']);
+          @touch($absolute."/".$_FILES['userfile']['name']);
         }
-        move_uploaded_file($_FILES['userfile']['tmp_name'], $absolute."/".$_FILES['userfile']['name']);
+        if (@move_uploaded_file($_FILES['userfile']['tmp_name'], $absolute."/".$_FILES['userfile']['name'])) {
+	  return $absolute."/".$_FILES['userfile']['name'];
+	} else {
+	  $err->raise("bro",3);
+	  return false;
+	}
       } else {
-	    $err->log("bro","uploadfile","Tentative d'attaque : ".$_FILES['userfile']['tmp_name']);
+	$err->log("bro","uploadfile","Tentative d'attaque : ".$_FILES['userfile']['tmp_name']);
         return false;
       }
     }

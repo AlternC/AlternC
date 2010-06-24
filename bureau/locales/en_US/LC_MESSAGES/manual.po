@@ -681,6 +681,9 @@ msgstr "File or folder name is incorrect"
 msgid "err_bro_2"
 msgstr "You cannot move or copy a file to the same folder"
 
+msgid "err_bro_3"
+msgstr "You don't have the right to write into this folder. Please check the access rights."
+
 #. If we manage your DNS <br />You can manage your mails elsewhere if you want 
 #. (MX field).<br />Write <b><code>%s</code></b> in this field if your mail 
 #. must be managed by %s<br />or put the IP address or name of the mail server 

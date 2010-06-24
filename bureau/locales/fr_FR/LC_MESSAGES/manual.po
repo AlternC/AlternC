@@ -728,6 +728,10 @@ msgstr "Répertoire ou fichier incorrect !"
 msgid "err_bro_2"
 msgstr "Vous ne pouvez pas déplacer un fichier dans le même répertoire !"
 
+#. Right incorrect
+msgid "err_bro_3"
+msgstr "Vous n'avez pas le droit d'écrire dans ce répertoire. Vérifiez les droits d'accès !"
+
 #. If we manage your DNS <br />You can manage your mails elsewhere if you want 
 #. (MX field).<br />Write <b><code>%s</code></b> in this field if your mail 
 #. must be managed by %s<br />or put the IP address or name of the mail server 
