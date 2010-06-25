@@ -32,7 +32,6 @@ msgstr "Etes-vous CERTAIN de vouloir installer AlternC sur cet ordinateur ?"
 #. Type: boolean
 #. Description
 #: ../templates:1001
-#, fuzzy
 msgid ""
 "You are currently trying to install AlternC on your computer. Be aware that "
 "this package will overwrite critical system files, including but not limited "
@@ -305,12 +304,11 @@ msgstr "l'adresse IP principale de ce serveur : "
 #. Type: string
 #. Description
 #: ../templates:13001
-#, fuzzy
 msgid ""
 "AlternC will default the A records for domains it hosts to this address. In "
 "other words, this is the address everyone can reach to server at."
 msgstr ""
-"AlternC va donner cette adresse pas défaut aux domaines qu'il héberge. "
+"AlternC va donner cette adresse par défaut aux domaines qu'il héberge. "
 "Autrement dit, c'est l'adresse à laquelle tout le monde peut contacter le "
 "serveur."
 
@@ -385,7 +383,6 @@ msgstr "serveur de surveillance : "
 #. Type: string
 #. Description
 #: ../templates:17001
-#, fuzzy
 msgid ""
 "The IP address (or ip/prefix) of the server(s) which must be authorized to  "
 "ping us and access apache status pages. Completely optional."
@@ -470,7 +467,6 @@ msgstr "Cela supprimera toutes les zone de bind créées par AlternC"
 #. Type: boolean
 #. Description
 #: ../templates:22001
-#, fuzzy
 msgid "Should AlternC remove mailboxes ?"
 msgstr "Les boites mails doivent elles être supprimées ?"
 
@@ -485,7 +481,7 @@ msgstr ""
 #. Description
 #: ../templates:23001
 msgid "Slave servers"
-msgstr ""
+msgstr "Serveurs esclaves"
 
 #. Type: string
 #. Description
@@ -495,7 +491,9 @@ msgid ""
 "server (this server). When writing apache configuration files, the master "
 "server will attempt to reload apache on those remote servers. The alternc-"
 "slave package correctly configures those machines to allow login and reload."
-msgstr ""
+msgstr "Entre une liste séparée par des espaces des serveurs 'esclaves' du serveur maître (qui est ce serveur). "
+"Lors de l'écriture de la configuration d'Apache, ce maître tentera de recharger apache sur les serveurs distants. "
+"le package alternc-slave configure ces machines comme il faut pour permettre la connexion distante et le rechargement d'apache. "
 
 #~ msgid "trusted servers for bind:"
 #~ msgstr "serveurs de confiance pour bind : "
