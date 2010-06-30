@@ -37,7 +37,7 @@ if (!defined("QUOTASONE")) return;
 
   $s=mysql_query("SELECT * FROM domaines WHERE compte='".$c["uid"]."';");
   while ($d=mysql_fetch_array($s)) {
-    $t=mysql_query("SELECT alias,size FROM size_mail WHERE alias LIKE '%\_".$d["domaine"]."';");
+    $t=mysql_query("SELECT alias,size FROM size_mail WHERE alias LIKE '%\_".$d["domaine"]."' ORDER BY alias;");
     while ($e=mysql_fetch_array($t)) {
       echo "<tr><td>".$d["domaine"]."</td>";
       echo "<td>".str_replace("_","@",$e["alias"])."</td>";
