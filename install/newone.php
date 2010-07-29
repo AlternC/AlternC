@@ -30,7 +30,7 @@
 */
 
 // On vérifie que mysql.so est bien chargé, sinon on essaye de le charger
-if(!function_exists(mysql_connect))  {
+if(!function_exists('mysql_connect'))  {
   if(!dl("mysql.so"))
     exit(1);
 }
