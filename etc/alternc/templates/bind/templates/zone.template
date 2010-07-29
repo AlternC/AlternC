@@ -2,7 +2,7 @@ $TTL 1D
 ;
 ; BIND data file for domain @@DOMAINE@@
 ;
-@       IN SOA %%ns1%%. root.%%fqdn%%. (
+@       IN SOA %%fqdn%%. root.%%fqdn%%. (
                 @@SERIAL@@      ; serial
                 21600           ; refresh (6h)
                 3600            ; retry (1h)
