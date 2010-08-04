@@ -38,3 +38,8 @@ CREATE TABLE IF NOT EXISTS `size_mailman` (
   KEY `uid` (`uid`)
 ) ENGINE=MyISAM COMMENT='Mailman Lists used space';
 
+-- IPv6 compatibility :  
+ALTER TABLE `slaveip` CHANGE `ip` `ip` VARCHAR(40);
+ALTER TABLE `sessions` CHANGE `ip` `ip` VARCHAR( 40 ) NULL;
+
+

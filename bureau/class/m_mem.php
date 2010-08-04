@@ -76,7 +76,7 @@ class m_mem {
    * @return boolean TRUE if the user has been successfully connected, or FALSE if an error occured.
    */
   function login($username,$password,$restrictip=0) {
-    global $db,$session,$err,$cuid;
+    global $db,$err,$cuid;
     $err->log("mem","login",$username);
     //    $username=addslashes($username);
     //    $password=addslashes($password);
@@ -98,14 +98,14 @@ class m_mem {
     $this->user=$db->Record;
     $cuid=$db->f("uid");
     if ($restrictip) {
-      $ip="INET_ATON('".getenv("REMOTE_ADDR")."')";
-    } else $ip="0";
+      $ip="'".getenv("REMOTE_ADDR")."'";
+    } else $ip="''";
     /* Close sessions that are more than 2 days old. */
     $db->query("DELETE FROM sessions WHERE DATE_ADD(ts,INTERVAL 2 DAY)<NOW();");
     /* Open the session : */
-    $session=md5(uniqid(mt_rand()));
-    $db->query("insert into sessions (sid,ip,uid) values ('$session',$ip,'$cuid');");
-    setcookie("session",$session,0,"/");
+    $_REQUEST["session"]=md5(uniqid(mt_rand()));
+    $db->query("insert into sessions (sid,ip,uid) values ('".$_REQUEST["session"]."',$ip,'$cuid');");
+    setcookie("session",$_REQUEST["session"],0,"/");
     $err->error=0;
     /* Fill in $local */
     $db->query("SELECT * FROM local WHERE uid='$cuid';");
@@ -126,7 +126,7 @@ class m_mem {
    * @return boolean TRUE if the user has been successfully connected, FALSE else.
    */
   function setid($id) {
-    global $db,$session,$err,$cuid;
+    global $db,$err,$cuid;
     $err->log("mem","setid",$username);
     $db->query("select * from membres where uid='$id';");
     if ($db->num_rows()==0) {
@@ -137,9 +137,9 @@ class m_mem {
     $this->user=$db->Record;
     $cuid=$db->f("uid");
     $ip=getenv("REMOTE_ADDR");
-    $session=md5(uniqid(mt_rand()));
-    $db->query("insert into sessions (sid,ip,uid) values ('$session',INET_ATON('$ip'),'$cuid');");
-    setcookie("session",$session,0,"/");
+    $_REQUEST["session"]=md5(uniqid(mt_rand()));
+    $db->query("insert into sessions (sid,ip,uid) values ('".$_REQUEST["session"]."','$ip','$cuid');");
+    setcookie("session",$_REQUEST["session"],0,"/");
     $err->error=0;
     /* Fill in $local */
     $db->query("SELECT * FROM local WHERE uid='$cuid';");
@@ -171,17 +171,17 @@ class m_mem {
    * @return TRUE si la session est correcte, FALSE sinon.
    */
   function checkid() {
-    global $db,$err,$session,$username,$password,$cuid,$restrictip;
-    if ($username && $password) {
-      return $this->login($username,$password,$restrictip);
+    global $db,$err,$cuid,$restrictip;
+    if ($_REQUEST["username"] && $_REQUEST["password"]) {
+      return $this->login($_REQUEST["username"],$_REQUEST["password"],$_REQUEST["restrictip"]);
     }
-    $session=addslashes($session);
-    if (strlen($session)!=32) {
+    $_COOKIE["session"]=addslashes($_COOKIE["session"]);
+    if (strlen($_COOKIE["session"])!=32) {
       $err->raise("mem",3);
       return false;
     }
     $ip=getenv("REMOTE_ADDR");
-    $db->query("select uid,INET_ATON('$ip') as me,ip from sessions where sid='$session'");
+    $db->query("select uid,'$ip' as me,ip from sessions where sid='".$_COOKIE["session"]."'");
     if ($db->num_rows()==0) {
       $err->raise("mem",4);
       return false;
@@ -246,20 +246,20 @@ class m_mem {
    * @return boolean TRUE si la session a bien été détruite, FALSE sinon.
    */
   function del_session() {
-    global $db,$session,$user,$err,$cuid,$classes;
+    global $db,$user,$err,$cuid,$classes;
     $err->log("mem","del_session");
-    $session=addslashes($session);
+    $_COOKIE["session"]=addslashes($_COOKIE["session"]);
     setcookie("session","",0,"/");
-    if ($session=="") {
+    if ($_COOKIE["session"]=="") {
       $err->error=0;
       return true;
     }
-    if (strlen($session)!=32) {
+    if (strlen($_COOKIE["session"])!=32) {
       $err->raise("mem",3);
       return false;
     }
     $ip=getenv("REMOTE_ADDR");
-    $db->query("select uid,INET_ATON('$ip') as me,ip from sessions where sid='$session'");
+    $db->query("select uid,'$ip' as me,ip from sessions where sid='".$_COOKIE["session"]."'");
     if ($db->num_rows()==0) {
       $err->raise("mem",4);
       return false;
@@ -270,7 +270,7 @@ class m_mem {
       return false;
     }
     $cuid=$db->f("uid");
-    $db->query("delete from sessions where sid='$session';");
+    $db->query("delete from sessions where sid='".$_COOKIE["session"]."';");
     $err->error=0;
     
     # Invoker le logout dans toutes les autres classes
