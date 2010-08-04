@@ -57,12 +57,8 @@ register_shutdown_function("alternc_shutdown");
 // 4. Acquire the semaphore : with that process, 
 sem_acquire( $alternc_sem );
 
-if (!get_magic_quotes_gpc()) {
-  echo "MAGIC QUOTES GPC IS DISABLED ! It's a bug in your php4 configuration, please fix it !!";
-  exit();
-}
 if (ini_get("safe_mode")) {
-  echo "SAFE MODE IS ENABLED for the web panel ! It's a bug in your php4 or apache configuration, please fix it !!";
+  echo "SAFE MODE IS ENABLED for the web panel ! It's a bug in your php or apache configuration, please fix it !!";
   exit();
 }
 
@@ -116,7 +112,7 @@ $cuid=0;
 
 
 $classes=array();
-/* CLASSES PHP4 : automatic include : */
+/* CLASSES PHP : automatic include : */
 $c=opendir($root."class/");
 while ($di=readdir($c)) {
   if (ereg("^m_(.*)\\.php$",$di,$match)) { // $
