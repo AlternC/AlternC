@@ -382,6 +382,9 @@ class m_dom {
     case "re":
       $serveur="whois.nic.re";
       break;
+    case "coop":
+      $serveur="whois.nic.coop";
+      break;
     default:
       $err->raise("dom",7);
       return false;
@@ -475,6 +478,12 @@ class m_dom {
 		}
 	  }
 	  break;
+        case "coop":
+          if (preg_match('/Host Name:\s*([^\s]+)/', $ligne, $matches)) {
+            $found = true;
+            $server[] = $matches[1];
+            echo "Found NS = " . $matches[1] . "<br>";
+          }
 	} // switch
       } // while
       fclose($fp);
