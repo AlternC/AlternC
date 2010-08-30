@@ -482,7 +482,6 @@ class m_dom {
           if (preg_match('/Host Name:\s*([^\s]+)/', $ligne, $matches)) {
             $found = true;
             $server[] = $matches[1];
-            echo "Found NS = " . $matches[1] . "<br>";
           }
 	} // switch
       } // while
