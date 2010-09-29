@@ -271,6 +271,7 @@ bureau/class/config_real.php -text
 bureau/class/db_mysql.php -text
 bureau/class/export_account.php -text
 bureau/class/functions.php -text
+bureau/class/hooks.php -text
 bureau/class/lang_env.php -text
 bureau/class/local.php -text
 bureau/class/m_admin.php -text
