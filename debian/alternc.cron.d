@@ -1,5 +1,5 @@
 # Every day at 4am, produce raw statistics
-0 4 * * *	www-data	/usr/lib/alternc/rawstat.daily
+0 4 * * *	root	/usr/lib/alternc/rawstat.daily
 
 # Every day at 5am and every week at 4am, make requested SQL backups
 0 5 * * *	www-data	/usr/lib/alternc/sqlbackup.sh daily
