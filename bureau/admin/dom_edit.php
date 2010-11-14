@@ -131,6 +131,13 @@ for($i=0;$i<$r["nsub"];$i++) {
 				<label for="ip"><?php __("IP redirection"); ?></label></td>
 		<td><input type="text" class="int" name="sub_ip" id="sub_ip" value="<?php ehe($sub_ip); ?>" size="16" /> <small><?php __("(enter an IPv4 address, for example 192.168.1.2)"); ?></small></td>
 		</tr>
+
+		<tr>
+			<td><input type="radio" id="ipv6" class="inc" name="type" value="<?php echo $dom->type_ipv6; ?>" <?php cbox($type==$dom->type_ipv6); ?> onclick="document.main.sub_ip.focus();" />
+				<label for="ipv6"><?php __("IPv6 redirection"); ?></label></td>
+		<td><input type="text" class="int" name="sub_ipv6" id="sub_ipv6" value="<?php ehe($sub_ipv6); ?>" size="32" /> <small><?php __("(enter an IPv6 address, for example 2001:0910::)"); ?></small></td>
+		</tr>
+
 		<? } ?>
 		<tr>
 		<td><input type="radio" id="webmail" class="inc" name="type" value="<?php echo $dom->type_webmail; ?>" <?php cbox($type==$dom->type_webmail); ?>/>

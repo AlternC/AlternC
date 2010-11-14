@@ -53,6 +53,7 @@ TYPE_LOCAL=0
 TYPE_URL=1
 TYPE_IP=2
 TYPE_WEBMAIL=3
+TYPE_IPV6=4
 YES=1
 
 if [ `id -u` -ne 0 ]; then

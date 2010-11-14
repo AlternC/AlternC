@@ -70,6 +70,7 @@ class m_dom {
   var $type_url = "1";
   var $type_ip = "2";
   var $type_webmail = "3";
+  var $type_ipv6 = "4";
 
   var $action_insert = "0";
   var $action_update= "1";
@@ -696,6 +697,12 @@ class m_dom {
     }
     if ($type==2) { // IP
       if (!checkip($dest)) {
+	$err->raise("dom",19);
+	return false;
+      }
+    }
+    if ($type==4) { // IPv6
+      if (!checkipv6($dest)) {
 	$err->raise("dom",19);
 	return false;
       }

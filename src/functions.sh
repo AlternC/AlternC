@@ -105,8 +105,13 @@ change_host_ip() {
     if [ -z "$host" ]; then
         host="@"
     fi
-    a_line="$host 	IN	A 	$ip"
-    pattern="^$host[[:space:]]*IN[[:space:]]*A[[:space:]]*.*\$"
+    if [ "$host_type" = "$TYPE_IPV6" ]; then
+        a_line="$host 	IN	AAAA 	$ip"
+        pattern="^$host[[:space:]]*IN[[:space:]]*AAAA[[:space:]]*.*\$"
+    else
+        a_line="$host 	IN	A 	$ip"
+        pattern="^$host[[:space:]]*IN[[:space:]]*A[[:space:]]*.*\$"
+    fi
     if [ ! -f "$zone_file" ]; then
         echo "Should change $host.$domain, but can't find $zone_file."
         return 1
@@ -142,6 +147,8 @@ add_host() {
     fi
 
     if [ "$host_type" = "$TYPE_IP" ]; then
+       ip="$value"
+    elif [ "$host_type" = "$TYPE_IPV6" ]; then
        ip="$value"
     else
        ip="$PUBLIC_IP"
@@ -211,7 +218,7 @@ delete_host() {
 
     if [ -f "$ZONES_DIR/$domain" ] ; then
         cp -a -f "$ZONES_DIR/$domain" "$ZONES_DIR/$domain.$$"
-        sed -e "/^$escaped_host[[:space:]]*IN[[:space:]]*A[[:space:]]/d" \
+        sed -e "/^$escaped_host[[:space:]]*IN[[:space:]]*\(AAAA\|A\)[[:space:]]/d" \
             < "$ZONES_DIR/$domain" > "$ZONES_DIR/$domain.$$"
         mv "$ZONES_DIR/$domain.$$" "$ZONES_DIR/$domain"
         increment_serial "$domain"

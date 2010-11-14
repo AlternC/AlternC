@@ -36,6 +36,7 @@ $fields = array (
 	"sub_local" => array ("request", "string",  "/"),
 	"sub_url"   => array ("request", "string", "http://"), 
 	"sub_ip"    => array ("request", "string", ""),
+	"sub_ipv6"  => array ("request", "string", ""),
 	"action"    => array ("request", "string", "add"),
 );
 getFields($fields);
@@ -51,6 +52,9 @@ switch ($type) {
    break;
  case $dom->type_ip:
    $r=$dom->set_sub_domain($domain,$sub,$type,$action,$sub_ip);
+   break;
+ case $dom->type_ipv6:
+   $r=$dom->set_sub_domain($domain,$sub,$type,$action,$sub_ipv6);
    break;
  case $dom->type_webmail:
    $r=$dom->set_sub_domain($domain,$sub,$type,$action,"");
