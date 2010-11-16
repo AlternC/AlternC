@@ -115,22 +115,25 @@ function checkurl($url) {
   return true;
 }
 
+/* Check that TXT domain is correct */
+function checksubtxt($txt) {
+	return true;
+}
+/* Check that CNAME domain is correct */
+function checkcname($cname) {
+	return true;
+}
+
 /* Check that $ip is a correct 4 Dotted ip */
 function checkip($ip) {
   // return true or false whether the ip is correctly formatted
-  if (!ereg("[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*",$ip)) return false;
-  $l=explode(".",$ip);
-  if ($l[0]>255 || $l[1]>255 || $l[2]>255 || $l[3]>255) return false;
-  return true;
+  return filter_var($ip,FILTER_VALIDATE_IP, FILTER_FLAG_IPV4);
 }
 
 /* Check that $ip is a correct ipv6 ip */
 function checkipv6($ip) {
   // return true or false whether the ip is correctly formatted
-  $pattern =
-'/^((([0-9A-Fa-f]{1,4}:){7}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){6}:[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){5}:([0-9A-Fa-f]{1,4}:)?[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){4}:([0-9A-Fa-f]{1,4}:){0,2}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){3}:([0-9A-Fa-f]{1,4}:){0,3}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){2}:([0-9A-Fa-f]{1,4}:){0,4}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){6}((\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b)\.){3}(\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b))|(([0-9A-Fa-f]{1,4}:){0,5}:((\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b)\.){3}(\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b))|(::([0-9A-Fa-f]{1,4}:){0,5}((\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b)\.){3}(\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b))|([0-9A-Fa-f]{1,4}::([0-9A-Fa-f]{1,4}:){0,5}[0-9A-Fa-f]{1,4})|(::([0-9A-Fa-f]{1,4}:){0,6}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){1,7}:))$/';
-
-  return preg_match( $pattern, $ip ) ? TRUE : FALSE;
+  return filter_var($ip,FILTER_VALIDATE_IP, FILTER_FLAG_IPV6);
 }
 
 /* Check a login mail */

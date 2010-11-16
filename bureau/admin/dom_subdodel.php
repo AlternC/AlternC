@@ -33,12 +33,13 @@ include_once("head.php");
 $fields = array (
 	"domain"    => array ("request", "string", ""),
 	"sub"       => array ("request", "string", ""),
+	"type"      => array ("request", "string", ""),
 );
 getFields($fields);
 
 $dom->lock();
 
-if (!$dom->del_sub_domain($domain,$sub)) {
+if (!$dom->del_sub_domain($domain,$sub,$type)) {
 	$error=$err->errstr();
 }
 

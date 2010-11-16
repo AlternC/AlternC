@@ -105,13 +105,25 @@ change_host_ip() {
     if [ -z "$host" ]; then
         host="@"
     fi
-    if [ "$host_type" = "$TYPE_IPV6" ]; then
-        a_line="$host 	IN	AAAA 	$ip"
-        pattern="^$host[[:space:]]*IN[[:space:]]*AAAA[[:space:]]*.*\$"
-    else
-        a_line="$host 	IN	A 	$ip"
-        pattern="^$host[[:space:]]*IN[[:space:]]*A[[:space:]]*.*\$"
-    fi
+
+    case "$host_type" in
+        "$TYPE_IPV6")
+            a_line="$host 	IN	AAAA 	$ip"
+            pattern="^$host[[:space:]]*IN[[:space:]]*AAAA[[:space:]]+.+\$"
+        ;;
+        "$TYPE_CNAME")
+            a_line="$host 	IN	CNAME 	$ip"
+            pattern="^$host[[:space:]]*IN[[:space:]]*CNAME[[:space:]]+.+\$"
+        ;;
+        "$TYPE_TXT")
+            a_line="$host 	IN	TXT 	$ip"
+            pattern="^$host[[:space:]]*IN[[:space:]]*TXT[[:space:]]+.+\$"
+        ;;
+        *)
+            a_line="$host 	IN	A 	$ip"
+            pattern="^$host[[:space:]]*IN[[:space:]]*A[[:space:]]+.+\$"
+    esac
+
     if [ ! -f "$zone_file" ]; then
         echo "Should change $host.$domain, but can't find $zone_file."
         return 1
@@ -138,7 +150,7 @@ add_host() {
     local fqdn
     local vhost_directory
 	
-    delete_host "$domain" "$host"
+    delete_host "$domain" "$host" "$host_type"
 
     if [ "$host" = "@" -o -z "$host" ]; then
         FQDN="$domain"
@@ -146,16 +158,28 @@ add_host() {
         FQDN="$host.$domain"
     fi
 
-    if [ "$host_type" = "$TYPE_IP" ]; then
-       ip="$value"
-    elif [ "$host_type" = "$TYPE_IPV6" ]; then
-       ip="$value"
-    else
-       ip="$PUBLIC_IP"
-       if [ "$host_type" != "$TYPE_WEBMAIL" ]; then
-           add_to_php_override "$FQDN"
-       fi
-    fi
+    case "$host_type" in
+        "$TYPE_IP")
+            ip="$value"
+            ;;
+        "$TYPE_IPV6")
+            ip="$value"
+            ;;
+        "$TYPE_CNAME")
+            ip="$value"
+            ;;
+        "$TYPE_TXT")
+            ip="$value"
+            ;;
+        "$TYPE_WEBMAIL")
+            ip="$PUBLIC_IP"
+            add_to_php_override "$FQDN"
+            ;;
+        *)
+            ip="$PUBLIC_IP"
+            ;;
+    esac
+
     if [ "$host" = "@" -o -z "$host" ]; then
         change_host_ip "$domain" "$ip" || true
         fqdn="$domain"
@@ -203,10 +227,12 @@ add_host() {
 delete_host() {
     local domain="$1"
     local host="$2"
+    local host_type="$3"
     local domain_letter=`print_domain_letter "$domain"`
     local fqdn
     local escaped_host
     local escaped_fqdn
+    local pattern
     
     if [ "$host" = "@" -o -z "$host" ]; then
         fqdn="$domain"
@@ -218,8 +244,22 @@ delete_host() {
 
     if [ -f "$ZONES_DIR/$domain" ] ; then
         cp -a -f "$ZONES_DIR/$domain" "$ZONES_DIR/$domain.$$"
-        sed -e "/^$escaped_host[[:space:]]*IN[[:space:]]*\(AAAA\|A\)[[:space:]]/d" \
-            < "$ZONES_DIR/$domain" > "$ZONES_DIR/$domain.$$"
+
+        case "$host_type" in
+            "$TYPE_IPV6")
+                pattern="/^$escaped_host[[:space:]]*IN[[:space:]]*AAAA[[:space:]]/d"
+            ;;
+            "$TYPE_CNAME")
+                pattern="/^$escaped_host[[:space:]]*IN[[:space:]]*CNAME[[:space:]]/d"
+            ;;
+            "$TYPE_TXT")
+                pattern="/^$escaped_host[[:space:]]*IN[[:space:]]*TXT[[:space:]]/d"
+            ;;
+            *)
+                pattern="/^$escaped_host[[:space:]]*IN[[:space:]]*A[[:space:]]/d"
+        esac
+
+        sed -e "$pattern" < "$ZONES_DIR/$domain" > "$ZONES_DIR/$domain.$$"
         mv "$ZONES_DIR/$domain.$$" "$ZONES_DIR/$domain"
         increment_serial "$domain"
         add_to_named_reload "$domain"

@@ -38,13 +38,15 @@ $fields = array (
 	"sub_url"   => array ("request", "string", "http://"), 
 	"sub_ip"    => array ("request", "string", ""),
 	"sub_ipv6"  => array ("request", "string", ""),
+	"sub_cname" => array ("request", "string", ""),
+	"sub_txt"   => array ("request", "string", ""),
 	"action"    => array ("request", "string", "add"),
 );
 getFields($fields);
 
 $dom->lock();
 if (!$noread) {
-  if (!$r=$dom->get_sub_domain_all($domain,$sub)) {
+  if (!$r=$dom->get_sub_domain_all($domain,$sub,$type)) {
     $error=$err->errstr();
     ?>
       <h3><?php __("Editing subdomain"); ?> http://<?php ecif($sub,$sub."."); echo $domain; ?></h3>
@@ -62,6 +64,12 @@ switch ($type) {
    break;
  case $dom->type_url:
    $sub_url=$r["dest"];
+   break;
+ case $dom->type_cname:
+   $sub_cname=$r["dest"];
+   break;
+ case $dom->type_txt:
+   $sub_txt=$r["dest"];
    break;
  case $dom->type_ipv6:
    $sub_ipv6=$r["dest"];
@@ -93,6 +101,7 @@ $dom->unlock();
 	<tr>
 		<td>	<input type="hidden" name="domain" value="<?php ehe($domain); ?>" />
 	<input type="hidden" name="sub" value="<?php echo ehe($sub); ?>" />
+	<input type="hidden" name="type_old" value="<?php echo ehe($type); ?>" />
 	<input type="hidden" name="action" value="edit" />
 
 <input type="radio" id="local" class="inc" name="type" value="<?php echo $dom->type_local; ?>" <?php cbox($r["type"]==$dom->type_local); ?> onclick="document.main.sub_local.focus();" />
@@ -118,16 +127,31 @@ $dom->unlock();
 
 
 	<tr>
-		<td><input type="radio" id="ipv6" class="inc" name="type" value="<?php echo $dom->type_ipv6; ?>" <?php cbox($type==$dom->type_ipv6); ?> onclick="document.main.sub_ipv6.focus();" />
-			<label for="ipv6"><?php __("IPv6 redirection"); ?></label></td>
-		<td><input type="text" class="int" name="sub_ipv6" id="sub_ipv6" value="<?php ehe($sub_ipv6); ?>" size="16" /> <small><?php __("(enter an IPv6 address, for example 2001:0910::0)"); ?></small></td>
-
-	</tr>
-	<tr>
 		<td><input type="radio" id="webmail" class="inc" name="type" value="<?php echo $dom->type_webmail; ?>" <?php cbox($r["type"]==$dom->type_webmail); ?> />
 			<label for="webmail"><?php __("Webmail access"); ?></label></td>
 		<td>&nbsp;</td>
 	</tr>
+
+	<tr><td colspan=2 style="background-color: #CFE3F1;color: #007777;font-weight:bold;" >Advanced options</td></tr>
+	<tr id="advopt1">
+		<td><input type="radio" id="ipv6" class="inc" name="type" value="<?php echo $dom->type_ipv6; ?>" <?php cbox($type==$dom->type_ipv6); ?> onclick="document.main.sub_ipv6.focus();" />
+			<label for="ipv6"><?php __("IPv6 redirection"); ?></label></td>
+		<td><input type="text" class="int" name="sub_ipv6" id="sub_ipv6" value="<?php ehe($sub_ipv6); ?>" size="32" /> <small><?php __("(enter an IPv6 address, for example 2001:0910::0)"); ?></small></td>
+	</tr>
+
+	<tr id="advopt2">
+		<td><input type="radio" id="cname" class="inc" name="type" value="<?php echo $dom->type_cname; ?>" <?php cbox($type==$dom->type_cname); ?> onclick="document.main.sub_cname.focus();" />
+			<label for="cname"><?php __("CNAME redirection"); ?></label></td>
+		<td><input type="text" class="int" name="sub_cname" id="sub_cname" value="<?php ehe($sub_cname); ?>" size="32" /> <small><?php __("(enter a server address or a subdomain)"); ?></small></td>
+	</tr>
+
+	<tr id="advopt3">
+		<td><input type="radio" id="txt" class="inc" name="type" value="<?php echo $dom->type_txt; ?>" <?php cbox($type==$dom->type_txt); ?> onclick="document.main.sub_txt.focus();" />
+			<label for="txt"><?php __("TXT information"); ?></label></td>
+		<td><input type="text" class="int" name="sub_txt" id="sub_txt" value="<?php ehe($sub_txt); ?>" size="32" /> <small><?php __("(enter a TXT informations for this domain)"); ?></small></td>
+	</tr>
+
+
 	<tr class="trbtn">
             <td colspan="2">
               <input type="submit" class="inb" name="submit" value="<?php __("Validate this change"); ?>" />

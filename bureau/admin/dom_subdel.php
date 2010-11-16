@@ -33,11 +33,12 @@ include_once("head.php");
 $fields = array (
 	"domain"    => array ("request", "string", ""),
 	"sub"       => array ("request", "string", ""),
+	"type"      => array ("request", "string", ""),
 );
 getFields($fields);
 
 $dom->lock();
-if (!$r=$dom->get_sub_domain_all($domain,$sub)) {
+if (!$r=$dom->get_sub_domain_all($domain,$sub,$type)) {
 	$error=$err->errstr();
 }
 $dom->unlock();
@@ -60,6 +61,7 @@ $dom->unlock();
 	<p class="error">
 	<input type="hidden" name="domain" value="<?php echo $domain ?>" />
 	<input type="hidden" name="sub" value="<?php echo $sub ?>" />
+	<input type="hidden" name="type" value="<?php echo $type ?>" />
 <?php __("WARNING : Confirm the deletion of the subdomain"); ?> : </p>
 	<p><?php ecif($sub,$sub."."); echo $domain; ?></p>
 	<blockquote>

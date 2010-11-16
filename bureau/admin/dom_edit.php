@@ -37,6 +37,9 @@ $fields = array (
 	"sub_local" => array ("request", "string",  "/"),
 	"sub_url"   => array ("request", "string", "http://"), 
 	"sub_ip"    => array ("request", "string", ""),
+	"sub_ipv6"  => array ("request", "string", ""),
+	"sub_cname" => array ("request", "string", ""),
+	"sub_txt"   => array ("request", "string", ""),
 );
 getFields($fields);
 
@@ -87,10 +90,10 @@ for($i=0;$i<$r["nsub"];$i++) {
 ?>
 	<tr class="lst<?php echo $col; ?>">
 		<td class="center">
-			<div class="ina"><a href="dom_subedit.php?domain=<?php echo urlencode($r["name"]) ?>&amp;sub=<?php  echo urlencode($r["sub"][$i]["name"]) ?>"><img src="images/edit.png" alt="<?php __("Edit"); ?>" /><?php __("Edit"); ?></a></div>
+			<div class="ina"><a href="dom_subedit.php?domain=<?php echo urlencode($r["name"]) ?>&amp;sub=<?php  echo urlencode($r["sub"][$i]["name"]) ?>&amp;type=<?php  echo urlencode($r["sub"][$i]["type"]) ?>"><img src="images/edit.png" alt="<?php __("Edit"); ?>" /><?php __("Edit"); ?></a></div>
 
 			</td><td class="center">
-			<div class="ina"><a href="dom_subdel.php?domain=<?php echo urlencode($r["name"]) ?>&amp;sub=<?php  echo urlencode($r["sub"][$i]["name"]) ?>"><img src="images/delete.png" alt="<?php __("Delete"); ?>" /><?php __("Delete"); ?></a></div>
+			<div class="ina"><a href="dom_subdel.php?domain=<?php echo urlencode($r["name"]) ?>&amp;sub=<?php  echo urlencode($r["sub"][$i]["name"]) ?>&amp;type=<?php  echo urlencode($r["sub"][$i]["type"]) ?>"><img src="images/delete.png" alt="<?php __("Delete"); ?>" /><?php __("Delete"); ?></a></div>
 		</td>
 		<td><a href="http://<?php ecif($r["sub"][$i]["name"],$r["sub"][$i]["name"]."."); echo $r["name"] ?>" target="_blank"><?php ecif($r["sub"][$i]["name"],$r["sub"][$i]["name"]."."); echo $r["name"] ?></a></td>
 		<td><?php echo $r["sub"][$i]['type'] === '0' ? '<a href="bro_main.php?R='.urlencode($r["sub"][$i]["dest"]).'">'.htmlspecialchars($r["sub"][$i]["dest"]).'</a>' : htmlspecialchars($r["sub"][$i]["dest"]); ?>&nbsp;</td>
@@ -125,6 +128,11 @@ for($i=0;$i<$r["nsub"];$i++) {
 				<label for="url" ><?php __("URL redirection"); ?></label></td>
 			<td><input type="text" class="int" name="sub_url" id="sub_url" value="<?php ehe($sub_url); ?>" size="50" /></td>
 		</tr>
+		<tr>
+		<td><input type="radio" id="webmail" class="inc" name="type" value="<?php echo $dom->type_webmail; ?>" <?php cbox($type==$dom->type_webmail); ?>/>
+				<label for="webmail"><?php __("Webmail access"); ?></label></td>
+			<td>&nbsp;</td>
+		</tr>
 		<?php if ($r["dns"]) { // show only if dns is enabled ?>
 		<tr>
 			<td><input type="radio" id="ip" class="inc" name="type" value="<?php echo $dom->type_ip; ?>" <?php cbox($type==$dom->type_ip); ?> onclick="document.main.sub_ip.focus();" />
@@ -132,18 +140,27 @@ for($i=0;$i<$r["nsub"];$i++) {
 		<td><input type="text" class="int" name="sub_ip" id="sub_ip" value="<?php ehe($sub_ip); ?>" size="16" /> <small><?php __("(enter an IPv4 address, for example 192.168.1.2)"); ?></small></td>
 		</tr>
 
-		<tr>
-			<td><input type="radio" id="ipv6" class="inc" name="type" value="<?php echo $dom->type_ipv6; ?>" <?php cbox($type==$dom->type_ipv6); ?> onclick="document.main.sub_ip.focus();" />
+		<tr><td colspan=2 style="background-color: #CFE3F1;color: #007777;font-weight:bold;" >Advanced options</td></tr>
+		<tr id="advopt1">
+			<td><input type="radio" id="ipv6" class="inc" name="type" value="<?php echo $dom->type_ipv6; ?>" <?php cbox($type==$dom->type_ipv6); ?> onclick="document.main.sub_ipv6.focus();" />
 				<label for="ipv6"><?php __("IPv6 redirection"); ?></label></td>
-		<td><input type="text" class="int" name="sub_ipv6" id="sub_ipv6" value="<?php ehe($sub_ipv6); ?>" size="32" /> <small><?php __("(enter an IPv6 address, for example 2001:0910::)"); ?></small></td>
+			<td><input type="text" class="int" name="sub_ipv6" id="sub_ipv6" value="<?php ehe($sub_ipv6); ?>" size="32" /> <small><?php __("(enter an IPv6 address, for example 2001:0910::0)"); ?></small></td>
 		</tr>
 
-		<? } ?>
-		<tr>
-		<td><input type="radio" id="webmail" class="inc" name="type" value="<?php echo $dom->type_webmail; ?>" <?php cbox($type==$dom->type_webmail); ?>/>
-				<label for="webmail"><?php __("Webmail access"); ?></label></td>
-			<td>&nbsp;</td>
+		<tr id="advopt2">
+			<td><input type="radio" id="cname" class="inc" name="type" value="<?php echo $dom->type_cname; ?>" <?php cbox($type==$dom->type_cname); ?> onclick="document.main.sub_cname.focus();" />
+				<label for="cname"><?php __("CNAME redirection"); ?></label></td>
+		<td><input type="text" class="int" name="sub_cname" id="sub_cname" value="<?php ehe($sub_cname); ?>" size="32" /> <small><?php __("(enter a server address or a subdomain)"); ?></small></td>
 		</tr>
+
+		<tr id="advopt3">
+			<td><input type="radio" id="txt" class="inc" name="type" value="<?php echo $dom->type_txt; ?>" <?php cbox($type==$dom->type_txt); ?> onclick="document.main.sub_txt.focus();" />
+				<label for="txt"><?php __("TXT information"); ?></label></td>
+		<td><input type="text" class="int" name="sub_txt" id="sub_txt" value="<?php ehe($sub_txt); ?>" size="32" /> <small><?php __("(enter a TXT informations for this domain)"); ?></small></td>
+		</tr>
+
+
+		<? } ?>
 		<tr class="trbtn">
 			<td colspan="2"><input type="submit" class="inb" name="add" value="<?php __("Add this subdomain"); ?>" /></td>
 		</tr>

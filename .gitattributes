@@ -392,6 +392,7 @@ install/upgrades/0.9.5.sql -text
 install/upgrades/0.9.6.sql -text
 install/upgrades/0.9.7.sql -text
 install/upgrades/0.9.9.sql -text
+install/upgrades/1.0.sql -text
 install/upgrades/README -text
 man/alternc-admintools.8 -text
 man/alternc-admintools.fr.8 -text

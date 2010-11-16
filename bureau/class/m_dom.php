@@ -71,6 +71,8 @@ class m_dom {
   var $type_ip = "2";
   var $type_webmail = "3";
   var $type_ipv6 = "4";
+  var $type_cname = "5";
+  var $type_txt = "6";
 
   var $action_insert = "0";
   var $action_update= "1";
@@ -631,7 +633,7 @@ class m_dom {
    *  $r["type"]= Type (0-n) de la redirection.
    *  Retourne FALSE si une erreur s'est produite.
    */
-  function get_sub_domain_all($dom,$sub) {
+  function get_sub_domain_all($dom,$sub, $type = "") {
     global $db,$err,$cuid;
     $err->log("dom","get_sub_domain_all",$dom."/".$sub);
     // Locked ?
@@ -644,7 +646,10 @@ class m_dom {
       $err->raise("dom",3+$t);
       return false;
     }
-    $db->query("select * from sub_domaines where compte='$cuid' and domaine='$dom' and sub='$sub'");
+    if ( ! empty($type)) {
+        $type = " and type='".intval($type)."'";
+    }
+    $db->query("select * from sub_domaines where compte='$cuid' and domaine='$dom' and sub='$sub' $type");
     if ($db->num_rows()==0) {
       $err->raise("dom",14);
       return false;
@@ -675,7 +680,8 @@ class m_dom {
    *  de $type (url, ip, dossier...)
    * @return boolean Retourne FALSE si une erreur s'est produite, TRUE sinon.
    */
-  function set_sub_domain($dom,$sub,$type,$action,$dest) {
+  function set_sub_domain($dom,$sub,$type,$action,$dest, $type_old=null) {
+    if (is_null($type_old)) $type_old=$type;
     global $db,$err,$cuid;
     $err->log("dom","set_sub_domain",$dom."/".$sub);
     // Locked ?
@@ -697,29 +703,41 @@ class m_dom {
     }
     if ($type==2) { // IP
       if (!checkip($dest)) {
-	$err->raise("dom",19);
-	return false;
+	    $err->raise("dom",19);
+	    return false;
       }
     }
     if ($type==4) { // IPv6
       if (!checkipv6($dest)) {
-	$err->raise("dom",19);
-	return false;
+	    $err->raise("dom",19);
+	    return false;
+      }
+    }
+    if ($type==5) { // Cname
+      if (!checkcname($dest)) {
+	    $err->raise("dom",19);
+	    return false;
+      }
+    }
+    if ($type==6) { // TXT
+      if (!checksubtxt($dest)) {
+	    $err->raise("dom",19);
+	    return false;
       }
     }
     if ($type==1) { // URL
       if (!checkurl($dest)) {
-	$err->raise("dom",20);
-	return false;
+	    $err->raise("dom",20);
+	    return false;
       }
     }
     if ($type==0) { // LOCAL
       if (substr($dest,0,1)!="/") {
-	$dest="/".$dest;
+	    $dest="/".$dest;
       }
       if (!checkuserpath($dest)) {
-	$err->raise("dom",21);
-	return false;
+	    $err->raise("dom",21);
+    	return false;
       }
     }
     // On a épuré $dir des problèmes eventuels ... On est en DESSOUS du dossier de l'utilisateur.
@@ -728,31 +746,59 @@ class m_dom {
       $err->raise("dom",3+$t);
       return false;
     }
-    if (!$r=$this->get_sub_domain_all($dom,$sub)) {
-      // Le sous-domaine n'existe pas, on le crée seulement si $action vaut add
-      if ($action=="add") {
-	$db->query("insert into sub_domaines (compte,domaine,sub,valeur,type) values ('$cuid','$dom','$sub','$dest',$type);");
-	$db->query("delete from sub_domaines_standby where domaine='$dom' and sub='$sub';");
-	$db->query("insert into sub_domaines_standby (compte,domaine,sub,valeur,type,action) values ('$cuid','$dom','$sub','$dest','$type',0);"); // INSERT
-      } else {
-	$err->raise("dom",14);
-	return false;
-      }
+
+
+    // Si l'action demandé est une création
+    if ($action=="add") {
+        $do_create=false;
+        // Tout d'abord on vérifie si il faut le créer
+        $r=$this->get_sub_domain_all($dom,$sub);
+        if ( !$r) { $do_create=true ;}; // If subdomains do not exist
+        if ($r and (!in_array($type, Array(0,1,3))) )  { // Les types URL, LOCAL et WEBMAIL ne peuvent pas être en doublon 
+            foreach($r as $rr) { $rtype[] = $rr['type'];} // Tableau pour vérifier les compatibilitées de type
+            if (
+                  ( $type==$this->type_ipv6  and (in_array($this->type_cname, $rtype)) ) or
+                  ( $type==$this->type_ipv4  and (in_array($this->type_cname, $rtype)) ) or
+                  ( $type==$this->type_cname and (in_array($this->type_ipv4,  $rtype)) ) or
+                  ( $type==$this->type_cname and (in_array($this->type_ipv6,  $rtype)) )
+                ) { $do_create=false; } else {$do_create=true ;}
+        }
+        if ($do_create) {
+            // Tout est, je peux créer le sous-domaine
+            $db->query("insert into sub_domaines (compte,domaine,sub,valeur,type) values ('$cuid','$dom','$sub','$dest',$type);");
+            $db->query("delete from sub_domaines_standby where domaine='$dom' and sub='$sub' and type=$type;");
+            $db->query("insert into sub_domaines_standby (compte,domaine,sub,valeur,type,action) values ('$cuid','$dom','$sub','$dest','$type',0);"); // INSERT
+        } else {
+            $err->raise("dom",14);
+            return false;
+        }
+    }elseif ($action=="edit") {
+        // On vérifie que des modifications ont bien eu lieu :)
+        if ($r["type"]==$type && $r["dest"]==$dest) {
+          $err->raise("dom",15);
+          return false;
+        }
+        // OK, des modifs ont été faites, on valide :
+        //$db->query("update sub_domaines set type='$type', valeur='$dest' where domaine='$dom' and sub='$sub' and type='".$r["type"]."'");
+        //$db->query("delete from sub_domaines_standby where domaine='$dom' and sub='$sub' and type='".$r["type"]."'");
+        //$db->query("insert into sub_domaines_standby (compte,domaine,sub,valeur,type,action) values ('$cuid','$dom','$sub','$dest','$type',1);"); // UPDATE
+/*
+$type contient la valeur QUE LON VEUT DONNER au sous domaine
+$type_old contient la valeur du subdomain QUE LON VEUX EDITER
+
+die(" XXXX type = $type ---- type_old = $type_old XXXX ");
+*/
+        if ($type != $type_old) {
+            $this->del_sub_domain($dom,$sub,$type_old);
+            $this->set_sub_domain($dom,$sub,$type,"add",$dest);
+        } else {
+            $db->query("update sub_domaines set type='$type', valeur='$dest' where domaine='$dom' and sub='$sub' and type='$type_old';");
+            $db->query("delete from sub_domaines_standby where domaine='$dom' and sub='$sub' and type='$type_old';");
+            $db->query("insert into sub_domaines_standby (compte,domaine,sub,valeur,type,action) values ('$cuid','$dom','$sub','$dest','$type',1);"); // UPDATE
+        }
     } else {
-      if ($action=="edit") {
-	// On vérifie que des modifications ont bien eu lieu :)
-	if ($r["type"]==$type && $r["dest"]==$dest) {
-	  $err->raise("dom",15);
-	  return false;
-	}
-	// OK, des modifs ont été faites, on valide :
-	$db->query("update sub_domaines set type='$type', valeur='$dest' where domaine='$dom' and sub='$sub'");
-	$db->query("delete from sub_domaines_standby where domaine='$dom' and sub='$sub'");
-	$db->query("insert into sub_domaines_standby (compte,domaine,sub,valeur,type,action) values ('$cuid','$dom','$sub','$dest','$type',1);"); // UPDATE
-      } else {
-	$err->raise("dom",16);
-	return false;
-      }
+        $err->raise("dom",16);
+        return false;
     }
     return true;
   } // set_sub_domain
@@ -766,7 +812,7 @@ class m_dom {
    * @return boolean Retourne FALSE si une erreur s'est produite, TRUE sinon.
    *
    */
-  function del_sub_domain($dom,$sub) {
+  function del_sub_domain($dom,$sub,$type) {
     global $db,$err,$cuid;
     $err->log("dom","del_sub_domain",$dom."/".$sub);
     // Locked ?
@@ -779,14 +825,14 @@ class m_dom {
       $err->raise("dom",3+$t);
       return false;
     }
-    if (!$r=$this->get_sub_domain_all($dom,$sub)) {
+    if (!$r=$this->get_sub_domain_all($dom,$sub,$type)) {
       // Le sous-domaine n'existe pas, erreur
       $err->raise("dom",14);
       return false;
     } else {
       // OK, on valide :
-      $db->query("delete from sub_domaines where domaine='$dom' and sub='$sub'");
-      $db->query("delete from sub_domaines_standby where domaine='$dom' and sub='$sub'");
+      $db->query("delete from sub_domaines where domaine='$dom' and sub='$sub' and type='$type'");
+      $db->query("delete from sub_domaines_standby where domaine='$dom' and sub='$sub' type='$type");
       $db->query("insert into sub_domaines_standby (compte,domaine,sub,valeur,type,action) values ('$cuid','$dom','$sub','".$r["dest"]."','".$r["type"]."',2);"); // DELETE
     }
     return true;

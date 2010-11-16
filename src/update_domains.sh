@@ -54,6 +54,8 @@ TYPE_URL=1
 TYPE_IP=2
 TYPE_WEBMAIL=3
 TYPE_IPV6=4
+TYPE_CNAME=5
+TYPE_TXT=6
 YES=1
 
 if [ `id -u` -ne 0 ]; then
@@ -226,7 +228,7 @@ while read user domain host value type action; do
         ;;
 
       $ACTION_DELETE)
-        delete_host "$domain" "$host"
+        delete_host "$domain" "$host" "$type"
         ;;
 
       *)

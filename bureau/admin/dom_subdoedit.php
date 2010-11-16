@@ -32,10 +32,13 @@ require_once("../class/config.php");
 $fields = array (
 	"domain"    => array ("request", "string", ""),
 	"sub"       => array ("request", "string", ""),
+	"type_old"  => array ("request", "integer",""),
 	"type"      => array ("request", "integer", $dom->type_local),
 	"sub_local" => array ("request", "string",  "/"),
 	"sub_url"   => array ("request", "string", "http://"), 
 	"sub_ip"    => array ("request", "string", ""),
+	"sub_txt"   => array ("request", "string", ""),
+	"sub_cname" => array ("request", "string", ""),
 	"sub_ipv6"  => array ("request", "string", ""),
 	"action"    => array ("request", "string", "add"),
 );
@@ -45,19 +48,25 @@ $dom->lock();
 
 switch ($type) {
  case $dom->type_local:
-   $r=$dom->set_sub_domain($domain,$sub,$type,$action,$sub_local);
+   $r=$dom->set_sub_domain($domain,$sub,$type,$action,$sub_local, $type_old);
    break;
  case $dom->type_url:
-   $r=$dom->set_sub_domain($domain,$sub,$type,$action,$sub_url);
+   $r=$dom->set_sub_domain($domain,$sub,$type,$action,$sub_url, $type_old);
+   break;
+ case $dom->type_txt:
+   $r=$dom->set_sub_domain($domain,$sub,$type,$action,$sub_txt, $type_old);
+   break;
+ case $dom->type_cname:
+   $r=$dom->set_sub_domain($domain,$sub,$type,$action,$sub_cname, $type_old);
    break;
  case $dom->type_ip:
-   $r=$dom->set_sub_domain($domain,$sub,$type,$action,$sub_ip);
+   $r=$dom->set_sub_domain($domain,$sub,$type,$action,$sub_ip, $type_old);
    break;
  case $dom->type_ipv6:
-   $r=$dom->set_sub_domain($domain,$sub,$type,$action,$sub_ipv6);
+   $r=$dom->set_sub_domain($domain,$sub,$type,$action,$sub_ipv6, $type_old);
    break;
  case $dom->type_webmail:
-   $r=$dom->set_sub_domain($domain,$sub,$type,$action,"");
+   $r=$dom->set_sub_domain($domain,$sub,$type,$action,"", $type_old);
    break;
 }
 $dom->unlock();
