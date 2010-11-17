@@ -267,7 +267,7 @@ CREATE TABLE IF NOT EXISTS sub_domaines (
   sub varchar(100) NOT NULL default '',
   valeur varchar(255) default NULL,
   type int(1) NOT NULL default '0',
-  PRIMARY KEY  (compte,domaine,sub)
+  PRIMARY KEY  (compte,domaine,sub,type)
 ) TYPE=MyISAM;
 
 #
@@ -282,7 +282,7 @@ CREATE TABLE IF NOT EXISTS sub_domaines_standby (
   valeur varchar(255) default NULL,
   type int(1) NOT NULL default '0',
   action int(1) NOT NULL default '0',
-  PRIMARY KEY  (compte,domaine,sub,action)
+  PRIMARY KEY  (compte,domaine,sub,action,type)
 ) TYPE=MyISAM;
 
 #
