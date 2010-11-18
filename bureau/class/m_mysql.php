@@ -329,7 +329,7 @@ class m_mysql {
     // OK, creation now...
     $db->query("INSERT INTO db (uid,login,pass,db) VALUES ('$cuid','".$login."','$password','".$dbname."');");
     // give everything but GRANT on $user.*
-    $db->query("GRANT ALL PRIVILEGES ON `".$dbname."`.* TO '".$login."'@'$this->client' IDENTIFIED BY '".$password."'");
+    $db->query("GRANT ALL PRIVILEGES ON `".$dbname."`.* TO '".$login."'@'$this->client' IDENTIFIED BY '".addslashes($password)."'");
     $db->query("CREATE DATABASE `".$dbname."`;");
     return true;
   }

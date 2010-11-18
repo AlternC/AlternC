@@ -35,7 +35,7 @@ if ($confirm=="y") {
   while (list($key,$val)=each($_POST)) {
     if (substr($key,0,4)=="del_") {
       // Effacement de la base $val
-      $r=$mysql->del_db($val);
+      $r=$mysql->del_db(substr($key,4));
       if (!$r) {
 	$error.=$err->errstr()."<br />";
       } else {
@@ -48,7 +48,7 @@ if ($confirm=="y") {
 }
 
 $found=false;
-foreach($_POST as $k) {
+foreach($_POST as $key=>$val) {
   if (substr($key,0,4)=="del_") {
     $found=true;
   }

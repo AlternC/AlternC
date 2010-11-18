@@ -68,7 +68,7 @@ if (!($u=$admin->add_mem($login, $pass, $nom, $prenom, $nmail, $canpass, $type, 
   $ftp->add_ftp($login,"",$pass,"/");
   $mem->unsu();
  
- $error=_("The new member has been successfully created");
+  $error=_("The new member has been successfully created");
 
  include("adm_list.php");
  exit;
