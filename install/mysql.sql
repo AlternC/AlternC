@@ -40,7 +40,7 @@
 #########################################################################
 
 CREATE TABLE IF NOT EXISTS `slaveip` (
-`ip` VARCHAR( 15 ) NOT NULL ,
+`ip` VARCHAR( 40 ) NOT NULL ,
 `class` TINYINT NOT NULL ,
 PRIMARY KEY ( `ip` , `class` )
 ) COMMENT = 'Allowed ip for slave dns managment';
@@ -252,7 +252,7 @@ CREATE TABLE IF NOT EXISTS quotas (
 CREATE TABLE IF NOT EXISTS sessions (
   sid varchar(32) NOT NULL default '',			# Cookie de session (md5)
   uid int(10) unsigned NOT NULL default '0',		# UID du membre concerné
-  ip int(10) unsigned NOT NULL default '0',		# Adresse IP de la connexion
+  ip varchar(40) NOT NULL default '',		# Adresse IP de la connexion
   ts timestamp(14) NOT NULL
 ) TYPE=MyISAM COMMENT='Session actives sur le bureau';
 
@@ -483,3 +483,23 @@ CREATE TABLE IF NOT EXISTS `size_mailman` (
   KEY `ts` (`ts`),
   KEY `uid` (`uid`)
 ) ENGINE=MyISAM COMMENT='Mailman Lists used space';
+
+-- --------------------------------------------------------
+
+
+CREATE TABLE IF NOT EXISTS `policy` (
+  `name` varchar(64) NOT NULL,
+  `minsize` tinyint(3) unsigned NOT NULL,
+  `maxsize` tinyint(3) unsigned NOT NULL,
+  `classcount` tinyint(3) unsigned NOT NULL,
+  `allowlogin` tinyint(3) unsigned NOT NULL,
+  PRIMARY KEY  (`name`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='The password policies for services';
+
+
+INSERT IGNORE INTO `variable` (`name` ,`value` ,`comment`)
+VALUES (
+'subadmin_restriction', '', 
+'This variable set the way the account list works for accounts other than "admin" (2000). 0 (default) = admin other than admin/2000 can see their own account, but not the other one 1 = admin other than admin/2000 can see any account by clicking the ''show all accounts'' link. '
+);
+
