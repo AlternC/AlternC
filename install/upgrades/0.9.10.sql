@@ -42,4 +42,7 @@ CREATE TABLE IF NOT EXISTS `size_mailman` (
 ALTER TABLE `slaveip` CHANGE `ip` `ip` VARCHAR(40);
 ALTER TABLE `sessions` CHANGE `ip` `ip` VARCHAR( 40 ) NULL;
 
+--- type subdomain evolution
+ALTER TABLE `sub_domaines` CHANGE `type` `type` VARCHAR(30);
+ALTER TABLE `sub_domaines_standby` CHANGE `type` `type` VARCHAR(30);
 
