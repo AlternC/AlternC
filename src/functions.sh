@@ -127,7 +127,7 @@ change_host_ip() {
     if [ ! -f "$zone_file" ]; then
         echo "Should change $host.$domain, but can't find $zone_file."
         return 1
-    fi 
+    fi
     if grep -q "$pattern" "$zone_file"; then
         cp -a -f "$zone_file" "$zone_file.$$"
         sed "s/$pattern/$a_line/" < "$zone_file" > "$zone_file.$$"
@@ -149,7 +149,7 @@ add_host() {
     local ip
     local fqdn
     local vhost_directory
-	
+
     delete_host "$domain" "$host" "$host_type"
 
     if [ "$host" = "@" -o -z "$host" ]; then
@@ -193,12 +193,11 @@ add_host() {
 
     case "$host_type" in
       $TYPE_LOCAL)
-        ln -snf "${HTML_HOME}/${user_letter}/${user}${value}" \
-                "$vhost_directory"
+		host_create_vhost $user $fqdn ${value}
         ;;
 
       $TYPE_WEBMAIL)
-        ln -snf "${WEBMAIL_DIR}" "$vhost_directory"
+		host_create_webmail $user $fqdn
         ;;
 
       $TYPE_URL)
@@ -207,12 +206,9 @@ add_host() {
         # followed by at least /
         value=`echo $value | sed -e 's#\([^/:]*://\)\?\([^/]*\)/*\(.*\)#\1\2/\3#'`
 
-        (echo "RewriteEngine on"
-         echo "RewriteRule (.*) ${value}\$1 [R=permanent,L]"
-        ) > "$htaccess_directory/.htaccess"
-        ln -snf "$htaccess_directory" "$vhost_directory"
+		host_create_redirect $user $fqdn $value
         ;;
-	
+
       $TYPE_IP)
         rm -f "$vhost_directory"
         rm -rf "$htaccess_directory/.htaccess"
@@ -222,6 +218,7 @@ add_host() {
         echo "Unknow type code: $type" >> "$DOMAIN_LOG_FILE"
         ;;
     esac
+ 	host_enable_host $user $fqdn
 }
 
 delete_host() {
@@ -233,7 +230,7 @@ delete_host() {
     local escaped_host
     local escaped_fqdn
     local pattern
-    
+
     if [ "$host" = "@" -o -z "$host" ]; then
         fqdn="$domain"
         escaped_host=""
@@ -276,6 +273,7 @@ delete_host() {
 
     rm -f "$HTTP_DNS/$domain_letter/$fqdn"
     rm -rf "$HTTP_DNS/redir/$domain_letter/$fqdn"
+	host_disable_host $fqdn
 }
 
 

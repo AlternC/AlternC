@@ -109,7 +109,7 @@ MYSQL_DELETE="mysql --defaults-file=/etc/alternc/my.cnf "
 ########################################################################
 # Functions
 #
-. /usr/lib/alternc/functions.sh
+. /usr/lib/alternc/hosting_functions.sh
 
 ########################################################################
 # Main

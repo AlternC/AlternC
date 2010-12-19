@@ -419,6 +419,11 @@ src/basedir_prot.sh -text
 src/du.pl -text
 src/fixperms.sh -text
 src/functions.sh -text
+src/hosting_functions.sh -text
+src/hosting_functions/hosting_panel.sh -text
+src/hosting_functions/hosting_redirect.sh -text
+src/hosting_functions/hosting_vhost.sh -text
+src/hosting_functions/hosting_webmail.sh -text
 src/mail_add -text
 src/mail_del -text
 src/mem_add -text
