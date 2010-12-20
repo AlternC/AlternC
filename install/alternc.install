@@ -217,6 +217,7 @@ if [ -x /usr/sbin/apache2 ]; then
     if ! ( [ -L /etc/apache2/mods-enabled/vhost_alias.load ] && [ -L /etc/apache2/mods-enabled/$php.load ] )
     then
         a2enmod vhost_alias
+        a2enmod rewrite
         a2enmod $php
         s="apache2"
     fi 
