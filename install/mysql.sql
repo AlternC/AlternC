@@ -76,10 +76,10 @@ CREATE TABLE IF NOT EXISTS `mail_users` (
 CREATE TABLE IF NOT EXISTS `mail_domain` (
   `mail` varchar(255) NOT NULL default '',	# Adresse email COMPLETE (login@domaine)
   `alias` text NOT NULL,			# Alias intermédiaire (login_domaine) pour référence dans users
-  `uid` int(10) unsigned NOT NULL default '0',	# Numéro de l'utilisateur (alternc)
+  `uid` int(10) unsigned NOT NULL default '0',	# Numéro de l utilisateur (alternc)
   `pop` tinyint(4) NOT NULL default '0',	# Est-ce un compte pop ? 
   `type` tinyint(4) NOT NULL default '0',	# Je ne sais plus ...
-  `expiration_date` DEFAULT null, # Pour les mails temporaire
+  `expiration_date` datetime DEFAULT null, # Pour les mails temporaire
   PRIMARY KEY  (`mail`),
   KEY `uid` (`uid`),
   KEY `pop` (`pop`)
