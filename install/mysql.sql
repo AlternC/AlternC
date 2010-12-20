@@ -79,6 +79,7 @@ CREATE TABLE IF NOT EXISTS `mail_domain` (
   `uid` int(10) unsigned NOT NULL default '0',	# Numéro de l'utilisateur (alternc)
   `pop` tinyint(4) NOT NULL default '0',	# Est-ce un compte pop ? 
   `type` tinyint(4) NOT NULL default '0',	# Je ne sais plus ...
+  `expiration_date` DEFAULT null, # Pour les mails temporaire
   PRIMARY KEY  (`mail`),
   KEY `uid` (`uid`),
   KEY `pop` (`pop`)

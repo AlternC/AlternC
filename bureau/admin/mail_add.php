@@ -33,8 +33,9 @@ include_once("head.php");
 
 $fields = array (
 	"domain"    => array ("request", "string", ""),
+	"dst_mail"  => array ("request", "string", ""),
 	"many"      => array ("request", "integer", 0),
-	"pop"     => array ("request", "integer", 1),
+	"pop"       => array ("request", "integer", 1),
 );
 getFields($fields);
 
@@ -44,6 +45,10 @@ getFields($fields);
 if ($error) {
   echo "<p class=\"error\">$error</p>";
 }
+
+// If a dst email is indicated, it's for an alias
+// So we desactivate pop by default
+if (!empty($dst_mail)) $pop=0;
 
 ?>
 <hr id="topbar"/>
@@ -68,7 +73,13 @@ if ($error) {
 </div>
 </td></tr>
 
-    <tr><td><label for="alias"><?php __("Redirections<br />Other recipients:"); ?></label></td><td>(<?php __("one email per line"); ?>)<br /><textarea class="int" cols="32" rows="5" name="alias" id="alias"><?php echo $alias; ?></textarea></td></tr>
+    <tr><td><label for="alias"><?php __("Redirections<br />Other recipients:"); ?></label></td><td>(<?php __("one email per line"); ?>)<br /><textarea class="int" cols="32" rows="5" name="alias" id="alias"><?php echo $alias; echo ((empty($alias) && !empty($dst_mail))?"":"\n").$dst_mail; ?></textarea></td></tr>
+<tr><td>
+   <?php echo __("Informations for temporary account"); ?><br/>
+   <span style="color: red;"><?php __("All this account information will <br/> be deleted at expiration");?></span>
+</td><td>
+    <?php include_once("trash_dateselect.php"); ?>
+</td></tr>
 <tr class="trbtn"><td colspan="2">
 <input type="hidden" name="many" value="<?php echo intval($many); ?>" />
   <input type="submit" class="inb" name="submit" value="<?php __("Create this email address"); ?>" />

@@ -120,7 +120,7 @@ class m_mail {
 	$letter = "";
     else
 	$letter .= "%";
-    $db->query("SELECT mail,pop,alias FROM mail_domain WHERE mail LIKE '".addslashes($letter)."@".addslashes($dom)."' AND uid='$cuid' AND type=0;");
+    $db->query("SELECT mail,pop,alias,expiration_date FROM mail_domain WHERE mail LIKE '".addslashes($letter)."@".addslashes($dom)."' AND uid='$cuid' AND type=0;");
     $res=array(); $i=0;
     while ($db->next_record()) {
       if ($db->f("pop")) { 
@@ -136,7 +136,7 @@ class m_mail {
 	$account=$db->f("alias");
       }
       $res[]=array("mail" => $db->f("mail"), "pop" => $db->f("pop"), 
-		   "alias"=>$account,"size"=>$size);
+		   "alias"=>$account,"size"=>$size, "expiration_date"=>$db->f("expiration_date"));
       $i++;
     }
     if ($sort==1) {
@@ -183,19 +183,21 @@ class m_mail {
   function get_mail_details($mail) {
     global $err,$db,$cuid;
     $err->log("mail","get_mail_details",$mail);
-    $db->query("SELECT mail,pop,alias FROM mail_domain WHERE mail='$mail' AND uid='$cuid';");
+    $db->query("SELECT mail,pop,alias,expiration_date FROM mail_domain WHERE mail='$mail' AND uid='$cuid';");
     if (!$db->next_record()) { 
       $err->raise("mail",3,$mail);
       return false;
     }
     $pop=$db->f("pop"); 
+    $trash_info=new m_trash();
+    $trash_info->set_from_db($db->f("expiration_date"));
     if ($pop) {
       $login=str_replace("@","_",$db->f("mail"));
       $account=str_replace($login,"",$db->f("alias")); 
     } else {
       $account=$db->f("alias");
     }
-    return array("mail" => $mail, "login" => $login, "alias" => $account, "pop" => $pop);
+    return array("mail" => $mail, "login" => $login, "alias" => $account, "pop" => $pop, "trash_info"=> $trash_info);
   }
 
 
@@ -293,7 +295,7 @@ class m_mail {
    * @param string $alias Liste des destinataires auxiliaires, un par ligne.
    * @return boolean TRUE si l'email a bien été modifié, FALSE si une erreur s'est produite.
    */
-  function put_mail_details($mail,$pop,$pass,$alias) {
+  function put_mail_details($mail,$pop,$pass,$alias, $expiration_date=null) {
     global $err,$cuid,$db,$admin;
     $err->log("mail","put_mail_details",$mail);
     $mail=trim(strtolower($mail)); // remove spaces also
@@ -330,7 +332,7 @@ class m_mail {
       }
     }
 
-    $db->query("SELECT mail,alias,pop FROM mail_domain WHERE mail='$mail' AND uid='$cuid' AND type=0;");
+    $db->query("SELECT mail,alias,pop,expiration_date FROM mail_domain WHERE mail='$mail' AND uid='$cuid' AND type=0;");
     if (!$db->next_record()) {
       $err->raise("mail",3,$mail);
       return false;
@@ -350,7 +352,8 @@ class m_mail {
       }
     }
 
-    $db->query("UPDATE mail_domain SET alias='".implode("\n",$account)."', pop='$pop' WHERE mail='$mail';");
+    $expiration_sql = (is_null($expiration_date))?"null":"'$expiration_date'";
+    $db->query("UPDATE mail_domain SET alias='".implode("\n",$account)."', pop='$pop',expiration_date=$expiration_sql WHERE mail='$mail';");
 
     if ($pop=="1" && $oldpop!=1) { /* POP Creation */
       if (!$this->_createpop($email,$dom,$pass)) {
@@ -385,7 +388,7 @@ class m_mail {
    * @param string $alias Liste des alias, un par ligne
    * @return boolean TRUE si le compte a bien été créé, FALSE si une erreur s'est produite.
    */
-  function add_mail($dom,$mail,$pop,$pass,$alias) {
+  function add_mail($dom,$mail,$pop,$pass,$alias, $expiration_date=null) {
     global $quota,$err,$cuid,$db,$admin,$L_FQDN;
     $err->log("mail","add_mail",$dom."/".$mail);
     $account=array();
@@ -450,7 +453,8 @@ class m_mail {
       $err->raise("mail",8);
       return false;
     }
-    $db->query("INSERT INTO mail_domain (mail,alias,uid,pop,type) VALUES ('".$mail."@".$dom."','".implode("\n",$account)."','$cuid','$pop',0);");
+    $expiration_sql = (is_null($expiration_date))?"null":"'$expiration_date'";
+    $db->query("INSERT INTO mail_domain (mail,alias,uid,pop,type,expiration_date) VALUES ('".$mail."@".$dom."','".implode("\n",$account)."','$cuid','$pop',0, $expiration_sql);");
 
     if ($pop=="1") {
       if (!$this->_createpop($mail,$dom,$pass))

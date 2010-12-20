@@ -30,6 +30,8 @@
 require_once("../class/config.php");
 
 $error_edit="";
+$trash=new m_trash();
+$trash->getfromform();
 
 if ($pass != $passconf) {
 	$error = _("Passwords do not match");
@@ -37,7 +39,7 @@ if ($pass != $passconf) {
 	exit();
 }
 
-if (!$mail->put_mail_details($email,$pop,$pass,$alias)) {
+if (!$mail->put_mail_details($email,$pop,$pass,$alias,$trash->expiration_date_db)) {
 	$error_edit=$err->errstr();
             $addok=0;
 		include ("mail_edit.php");

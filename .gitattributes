@@ -195,6 +195,7 @@ bureau/admin/images/quota.png -text
 bureau/admin/images/stat.png -text
 bureau/admin/index.php -text
 bureau/admin/js/alternc.js -text
+bureau/admin/js/jquery.min.js -text
 bureau/admin/js/prototype.js -text
 bureau/admin/js/rico.js -text
 bureau/admin/js/wz_dragdrop.js -text
@@ -285,6 +286,7 @@ bureau/class/m_mem.php -text
 bureau/class/m_mysql.php -text
 bureau/class/m_quota.php -text
 bureau/class/m_sta2.php -text
+bureau/class/m_trash.php -text
 bureau/class/mime.php -text
 bureau/class/reset_stats_conf.php -text
 bureau/class/variables.php -text
