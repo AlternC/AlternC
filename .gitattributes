@@ -361,6 +361,8 @@ etc/alternc/templates/bind/templates/zone.template -text
 etc/alternc/templates/courier/authdaemonrc -text
 etc/alternc/templates/courier/authmysqlrc -text
 etc/alternc/templates/default/saslauthd -text
+etc/alternc/templates/dovecot/dovecot-sql.conf -text
+etc/alternc/templates/dovecot/dovecot.conf -text
 etc/alternc/templates/postfix/ca.der -text
 etc/alternc/templates/postfix/myalias.cf -text
 etc/alternc/templates/postfix/mydomain.cf -text
