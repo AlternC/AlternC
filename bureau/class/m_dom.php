@@ -334,59 +334,24 @@ class m_dom {
     $ext=$out[1];
     // pour ajouter un nouveau TLD, utiliser le code ci-dessous.
     //	echo "ext: $ext<br />";
+
+    if (($fp=@fsockopen("whois.iana.org", 43))>0) {
+      fputs($fp, "$domain\r\n");
+      $found = false;
+      $state=0;
+      while (!feof($fp)) {
+        $ligne = fgets($fp,128);
+        if (ereg('^whois:[[:space:]]+.*$', $ligne)) { $serveur=preg_replace('/whois:\ */','',$ligne,1); }
+      }
+    }
+
     $egal="";
     switch($ext) {
-    case "com":
     case "net":
-      $serveur="whois.crsnic.net";
       $egal="=";
       break;
-    case "org":
-      $serveur="whois.pir.org";
-      break;
-    case "be":
-      $serveur="whois.dns.be";
-      break;
-    case "eu":
-      # source: http://www.iana.org/domains/root/db/eu.html
-      $serveur="whois.eu";
-      break;
-    case "info":
-      $serveur="whois.afilias.net";
-      break;
-    case "ca":
-      $serveur="whois.cira.ca";
-      break;
-    case "cc":
-      $serveur="ccwhois.verisign-grs.com";
-      break;
-    case "cx":
-      $serveur="whois.nic.cx";
-      break;
-    case "im":
-      $serveur="whois.nic.im";
-      break;
-    case "it":
-      $serveur="whois.nic.it";
-      break;
-    case "fr":
-      $serveur="whois.nic.fr";
-      break;
-    case "biz":
-      $serveur="whois.nic.biz";
-      break;
     case "name":
-      $serveur="whois.nic.name";
       $egal="domain = ";
-      break;
-    case "ws":
-      $serveur="whois.samoanic.ws";
-      break;
-    case "re":
-      $serveur="whois.nic.re";
-      break;
-    case "coop":
-      $serveur="whois.nic.coop";
       break;
     default:
       $err->raise("dom",7);
