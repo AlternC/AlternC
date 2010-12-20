@@ -128,6 +128,8 @@ if [ -z "$MONITOR_IP" ]; then
     MONITOR_IP="127.0.0.1"
 fi
 
+PUBLIC_IP_BEGIN=$(echo $PUBLIC_IP|cut -d '.' -f 1)
+
 # XXX: I assume this is secure if /tmp is sticky (+t)
 # we should have a better way to deal with templating, of course.
 SED_SCRIPT=`mktemp`
@@ -135,6 +137,7 @@ cat > $SED_SCRIPT <<EOF
 s\\%%hosting%%\\$HOSTING\\;
 s\\%%fqdn%%\\$FQDN\\;
 s\\%%public_ip%%\\$PUBLIC_IP\\;
+s\\%%public_ip_begin%%\\$PUBLIC_IP_BEGIN\\;
 s\\%%internal_ip%%\\$INTERNAL_IP\\;
 s\\%%monitor_ip%%\\$MONITOR_IP\\;
 s\\%%ns1%%\\$NS1_HOSTNAME\\;
