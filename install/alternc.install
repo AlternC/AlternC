@@ -128,7 +128,7 @@ if [ -z "$MONITOR_IP" ]; then
     MONITOR_IP="127.0.0.1"
 fi
 
-PUBLIC_IP_BEGIN=$(echo $PUBLIC_IP|cut -d '.' -f 1)
+PUBLIC_IP_BEGIN=${PUBLIC_IP:0:1}
 
 # XXX: I assume this is secure if /tmp is sticky (+t)
 # we should have a better way to deal with templating, of course.
