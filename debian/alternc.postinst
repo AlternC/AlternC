@@ -216,6 +216,7 @@ EOF
 
     # Add access to the management panel    
     ln -nsf /var/alternc/bureau /var/alternc/dns/$FQDN_LETTER/$FQDN
+    mkdir -p /var/alternc/dns/$(echo $PUBLIC_IP|cut -d '.' -f 1)
     ln -nsf /var/alternc/bureau /var/alternc/dns/$(echo $PUBLIC_IP|cut -d '.' -f 1)/$PUBLIC_IP
 
     # Bind stuff
