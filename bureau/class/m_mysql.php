@@ -477,6 +477,38 @@ class m_mysql {
     return true;
   }
 
+  /* ------------------------------------------------------------ */
+  /** 
+   * Change a user's MySQL password
+   * @param $usern the username 
+   * @param $password The password for this username
+   * @param $passconf The password confirmation
+   * @return TRUE if the password has been changed in MySQL or FALSE if an error occurred
+   **/
+  function change_user_password($usern,$password,$passconf) {
+    global $db,$err,$quota,$mem,$cuid,$admin;
+    $err->log("mysql","add_user",$usern);
+
+    $usern=trim($usern);
+    $user=addslashes($mem->user["login"]."_".$usern);
+    $pass=addslashes($password);
+    if ($password != $passconf || !$password) {
+      $err->raise("mysql",17);
+      return false;
+    }
+
+    // Check this password against the password policy using common API : 
+    if (is_callable(array($admin,"checkPolicy"))) {
+      if (!$admin->checkPolicy("mysql",$user,$password)) {
+    	return false; // The error has been raised by checkPolicy()
+      }
+    }
+
+    $db->query("SET PASSWORD FOR '$user'@'$this->client' = PASSWORD('$pass')");
+    return true;
+  }
+
+
 
   /* ------------------------------------------------------------ */
   /** 
