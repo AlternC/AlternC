@@ -1,5 +1,6 @@
 etc/alternc
 etc/alternc/templates
+etc/alternc/templates/apache2
 etc/bind
 etc/bind/templates
 etc/courier
@@ -9,6 +10,7 @@ etc/postfix
 etc/squirrelmail
 usr/bin
 usr/lib/alternc
+usr/lib/alternc/hosting_functions
 usr/sbin
 usr/share/alternc/install
 usr/share/locale/fr/LC_MESSAGES

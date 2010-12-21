@@ -40,4 +40,8 @@ alternc: executable-is-not-world-readable usr/lib/alternc/quota_init 0750 != 075
 alternc: executable-is-not-world-readable usr/lib/alternc/basedir_prot.sh 0750 != 0755
 alternc: executable-is-not-world-readable usr/lib/alternc/spoolsize.php 0750 != 0755
 alternc: executable-is-not-world-readable usr/lib/alternc/rawstat.daily 0750 != 0755
+alternc: executable-is-not-world-readable usr/lib/alternc/hosting_functions/hosting_panel.sh 0750 != 0755
+alternc: executable-is-not-world-readable usr/lib/alternc/hosting_functions/hosting_redirect.sh 0750 != 0755
+alternc: executable-is-not-world-readable usr/lib/alternc/hosting_functions/hosting_vhost.sh 0750 != 0755
+alternc: executable-is-not-world-readable usr/lib/alternc/hosting_functions/hosting_webmail.sh 0750 != 0755
 alternc: using-first-person-in-templates alternc/monitor_ip
