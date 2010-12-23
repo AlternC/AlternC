@@ -11,7 +11,7 @@ VHOST_FILE="$VHOST_DIR/vhosts_all.conf"
 host_create() {
     # Function to create a vhost for a website
     # First, it look if there is a special file for
-    # this type of vhost
+    # this type of vhost
     # If there isn't, it use the default function
     # and the template file provided
 
@@ -25,38 +25,39 @@ host_create() {
         return
     fi
     
-    # There is no special script, I use the standart template
+    # There is no special script, I use the standart template
     # If I do not found template manualy define, I look
     # If there is an existing template with the good name
 
-    # First, usefull vars. Some may be empty or false, it's
+    # First, usefull vars. Some may be empty or false, it's
     # OK, it will be solve in the "case" below
     local USER=$2
     local FQDN=$3
     local REDIRECT=$4   # Yes, TARGET_DIR and REDIRECT are the same
-    local TARGET_DIR=$4 # It's used by different template
+    local TARGET_DIR=$4 # It's used by different template
     local user_letter=`print_user_letter "$USER"`
     local DOCUMENT_ROOT="${HTML_HOME}/${user_letter}/${USER}/$TARGET_DIR"
     local FILE_TARGET="$VHOST_DIR/${user_letter}/$USER/$FQDN.conf"
 
 
-    # panel.conf  redirect.conf  vhost.conf  webmail.conf
+    # In case VTYPE don't have the same name as the template file, 
+    # here we can define it
     case $VTYPE in
-      "vhost")
-        TEMPLATE="$TEMPLATE_DIR/vhost.conf"
-        ;;
+#      "example")
+#        TEMPLATE="$TEMPLATE_DIR/an-example.conf"
+#        ;;
       *)
         # No template found, look if there is some in the
-        # template dir
+        # template dir
         [ -r "$TEMPLATE_DIR/$VTYPE" ] && TEMPLATE="$TEMPLATE_DIR/$VTYPE"
         [ ! "$TEMPLATE" ] && [ -r "$TEMPLATE_DIR/$VTYPE.conf" ] && TEMPLATE="$TEMPLATE_DIR/$VTYPE.conf"
         ;;
     esac
 
-    # Create a new conf file
+    # Create a new conf file
     local TMP_FILE=$(mktemp "/tmp/alternc_host.XXXXXX")
+    echo "#Username: $USER" > $TMP_FILE
     cp "$TEMPLATE" "$TMP_FILE"
-    echo "#Username: $USER"
 
     # Put the good value in the conf file
         sed -i \
@@ -65,7 +66,7 @@ host_create() {
         -e "s#%%redirect%%#$REDIRECT#g" \
         $TMP_FILE
 
-    # Check if all is right in the conf file
+    # Check if all is right in the conf file
     # If not, put a debug message
     local ISNOTGOOD=$(grep "%%" "$TMP_FILE") 
     [ "$ISNOTGOOD" ] && (echo "# There was a probleme in the generation : $ISNOTGOOD" > "$TMP_FILE"
@@ -87,6 +88,16 @@ host_enable() {
 host_change_enable() {
     # Function to enable or disable a host
     local STATE=$1 
+
+    # If there is a VTYPE precised and a specific script exist
+    if [ $3 ] ; then 
+        local VTYPE=$3
+        if [ -x "$HOSTING_DIR/hosting_$VTYPE.sh" ] ; then
+            "$HOSTING_DIR/hosting_$VTYPE.sh" $@
+            return
+        fi
+    fi
+
     local FQDN=$2
     local USER=`get_account_by_domain $FQDN`
     local user_letter=`print_user_letter "$USER"`
@@ -107,8 +118,8 @@ host_change_enable() {
             ;;
     esac
 
-    if [ ! -e "$TARGET" ] && [ -e "$SOURCE" ] ; then
-        # If the "target" file do not exist and the "source" file exist
+    if [ ! -e "$TARGET" ] && [ -e "$SOURCE" ] ; then
+        # If the "target" file do not exist and the "source" file exist
         rename -f "$SOURCE" "$TARGET"
     else
         return 2
@@ -117,6 +128,16 @@ host_change_enable() {
 
 host_delete() {
     local FQDN=$1
+
+    # If there is a VTYPE precised and a specific script exist
+    if [ $2 ] ; then 
+        local VTYPE=$2
+        if [ -x "$HOSTING_DIR/hosting_$VTYPE.sh" ] ; then
+            "$HOSTING_DIR/hosting_$VTYPE.sh" "delete" $@
+            return
+        fi
+    fi
+
     local USER=`get_account_by_domain $FQDN`
     local user_letter=`print_user_letter "$USER"`
     local FENABLED="$VHOST_DIR/${user_letter}/$USER/$FQDN.conf"
