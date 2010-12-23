@@ -435,6 +435,7 @@ src/hosting_functions/hosting_panel.sh -text
 src/hosting_functions/hosting_redirect.sh -text
 src/hosting_functions/hosting_vhost.sh -text
 src/hosting_functions/hosting_webmail.sh -text
+src/hosting_functions_v2.sh -text
 src/mail_add -text
 src/mail_del -text
 src/mem_add -text
