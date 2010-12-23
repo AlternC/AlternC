@@ -122,8 +122,8 @@ host_delete() {
     local FENABLED="$VHOST_DIR/${user_letter}/$USER/$FQDN.conf"
     local FDISABLED="$FENABLED-disabled"
 
-    [ -w "$FENABLED" ] && rm -f "$FENABLED"
-    [ -w "$FDISABLED" ] && rm -f "$FDISABLED"
+    [ -w "$FENABLED" ] && rm -f "$FENABLED"
+    [ -w "$FDISABLED" ] && rm -f "$FDISABLED"
 }
 
 
