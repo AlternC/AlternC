@@ -22,7 +22,15 @@ host_create() {
         # I launch it and quit the host_create function
         # (I precise to the script this is for a "enable" task)
         "$HOSTING_DIR/hosting_$VTYPE.sh" "create" $@
-        return
+        local returnval=$?
+
+        # If the special script for this type exit with a code between
+        # 20 and 25, it means I have to continue like it didn't exist.
+        # It allow for example creation a script to exist only for deletion,
+        # or to do pre-inst or post-inst.
+        if [ $returnval -lt 20 ] || [ $returnval -gt 25 ] ; then
+            return
+        fi
     fi
     
     # There is no special script, I use the standart template
@@ -54,9 +62,11 @@ host_create() {
         ;;
     esac
 
+    # If TEMPLATE is empty, stop right here
+    [ ! "$TEMPLATE" ] && return 6
+
     # Create a new conf file
     local TMP_FILE=$(mktemp "/tmp/alternc_host.XXXXXX")
-    echo "#Username: $USER" > $TMP_FILE
     cp "$TEMPLATE" "$TMP_FILE"
 
     # Put the good value in the conf file
@@ -75,6 +85,9 @@ host_create() {
     mkdir -p "$(dirname "$FILE_TARGET")"
     mv -f "$TMP_FILE" "$FILE_TARGET"
 
+    # Execute post-install if there is some for this VTYPE
+    [ -x "$HOSTING_DIR/hosting_$VTYPE.sh" ] && "$HOSTING_DIR/hosting_$VTYPE.sh" "postint" $@
+ 
 }
 
 host_disable() {
@@ -134,7 +147,12 @@ host_delete() {
         local VTYPE=$2
         if [ -x "$HOSTING_DIR/hosting_$VTYPE.sh" ] ; then
             "$HOSTING_DIR/hosting_$VTYPE.sh" "delete" $@
-            return
+            local returnval=$?
+            # If the exit value of the VTYPE script is between 20 and 25,
+            # continue the delete like it didn't exist
+            if [ $returnval -lt 20 ] || [ $returnval -gt 25 ] ; then
+                return
+            fi
         fi
     fi
 
