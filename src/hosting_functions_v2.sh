@@ -24,10 +24,10 @@ host_create() {
         "$HOSTING_DIR/hosting_$VTYPE.sh" "create" $@
         local returnval=$?
 
-        # If the special script for this type exit with a code between
-        # 20 and 25, it means I have to continue like it didn't exist.
-        # It allow for example creation a script to exist only for deletion,
-        # or to do pre-inst or post-inst.
+        # If the special script for this type exit with a code between
+        # 20 and 25, it means I have to continue like it didn't exist.
+        # It allow for example creation a script to exist only for deletion,
+        # or to do pre-inst or post-inst.
         if [ $returnval -lt 20 ] || [ $returnval -gt 25 ] ; then
             return
         fi
@@ -62,8 +62,8 @@ host_create() {
         ;;
     esac
 
-    # If TEMPLATE is empty, stop right here
-    [ ! "$TEMPLATE" ] && return 6
+    # If TEMPLATE is empty, stop right here
+    [ ! "$TEMPLATE" ] && return 6
 
     # Create a new conf file
     local TMP_FILE=$(mktemp "/tmp/alternc_host.XXXXXX")
@@ -85,7 +85,7 @@ host_create() {
     mkdir -p "$(dirname "$FILE_TARGET")"
     mv -f "$TMP_FILE" "$FILE_TARGET"
 
-    # Execute post-install if there is some for this VTYPE
+    # Execute post-install if there is some for this VTYPE
     [ -x "$HOSTING_DIR/hosting_$VTYPE.sh" ] && "$HOSTING_DIR/hosting_$VTYPE.sh" "postint" $@
  
 }
@@ -102,7 +102,7 @@ host_change_enable() {
     # Function to enable or disable a host
     local STATE=$1 
 
-    # If there is a VTYPE precised and a specific script exist
+    # If there is a VTYPE precised and a specific script exist
     if [ $3 ] ; then 
         local VTYPE=$3
         if [ -x "$HOSTING_DIR/hosting_$VTYPE.sh" ] ; then
@@ -142,14 +142,14 @@ host_change_enable() {
 host_delete() {
     local FQDN=$1
 
-    # If there is a VTYPE precised and a specific script exist
+    # If there is a VTYPE precised and a specific script exist
     if [ $2 ] ; then 
         local VTYPE=$2
         if [ -x "$HOSTING_DIR/hosting_$VTYPE.sh" ] ; then
             "$HOSTING_DIR/hosting_$VTYPE.sh" "delete" $@
             local returnval=$?
             # If the exit value of the VTYPE script is between 20 and 25,
-            # continue the delete like it didn't exist
+            # continue the delete like it didn't exist
             if [ $returnval -lt 20 ] || [ $returnval -gt 25 ] ; then
                 return
             fi
