@@ -427,6 +427,7 @@ src/alternc-check -text
 src/alternc-passwd -text
 src/alternc_reload -text
 src/basedir_prot.sh -text
+src/dns.sh -text
 src/du.pl -text
 src/fixperms.sh -text
 src/functions.sh -text
