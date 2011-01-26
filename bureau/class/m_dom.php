@@ -92,6 +92,65 @@ class m_dom {
   function alternc_quota_names() {
     return "dom";
   }
+  /* ----------------------------------------------------------------- */
+  /**
+   * Retourne un tableau contenant les types de domaines
+   *
+   * @return array retourne un tableau indexé contenant la liste types de domaines 
+   *  authorisé. Retourne FALSE si une erreur s'est produite.
+   */
+  function domains_type_lst() {
+    global $db,$err,$cuid;
+    $err->log("dom","domains_type_lst");
+    $db->query("select * from domaines_type order by id;");
+    $this->domains_type_lst=false;
+    while ($db->next_record()) {
+      $this->domains_type_lst[] = $db->Record;
+    }
+    return $this->domains_type_lst;
+  }
+
+  function domains_type_get($id) {
+    global $db,$err,$cuid; 
+    $id=intval($id);
+    $db->query("select * from domaines_type where id = $id ;");
+    $db->next_record();
+    return $db->Record;
+  }
+
+  function domains_type_del($id) {
+    global $db,$err,$cuid;
+    $id=intval($id);
+    $db->query("delete domaines_type where id=$id;");
+    return true;
+  }
+
+  function domains_type_disable($id) {
+    global $db,$err,$cuid;
+    $id=intval($id);
+    $db->query("update domaines_type set enable=false where id=$id;");
+    return true;
+  }
+
+  function domains_type_enable($id) {
+    global $db,$err,$cuid;
+    $id=intval($id);
+    $db->query("update domaines_type set enable=true where id=$id;");
+    return true;
+  }
+
+  function domains_type_update($id, $name, $description, $ask_dest, $entry, $compatibility) {
+    global $err,$cuid,$db;
+    $id=intval($id);
+    $name=mysql_real_escape_string($name);
+    $description=mysql_real_escape_string($description);
+    $ask_dest=intval($ask_dest);
+    $entry=mysql_real_escape_string($entry);
+    $compatibility=mysql_real_escape_string($compatibility);
+    $db->query("UPDATE domaines_type SET name='$name', description='$description', ask_dest='$ask_dest', entry='$entry', compatibility='$compatibility' where id='$id';");
+    return true;
+  }   
+
 
   /* ----------------------------------------------------------------- */
   /**
@@ -108,7 +167,7 @@ class m_dom {
     $this->domains=array();
     if ($db->num_rows()>0) {
       while ($db->next_record()) {
-	$this->domains[]=$db->f("domaine");
+	    $this->domains[]=$db->f("domaine");
       }
     }
     return $this->domains;
