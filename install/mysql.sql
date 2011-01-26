@@ -8,7 +8,7 @@
 # http://alternc.org/
 # ----------------------------------------------------------------------
 # Based on:
-# Valentin Lacambre's web hosting softwares: http://altern.org/
+# Valentin Lacambre`s web hosting softwares: http://altern.org/
 # ----------------------------------------------------------------------
 # LICENSE
 #
@@ -30,12 +30,12 @@
 #
 
 ######################################################################
-# STRUCTURE DES TABLES D'ALTERNC
+# STRUCTURE DES TABLES D`ALTERNC
 #
 # IMPORTANT: lorsque la structure de ces tables est modifiée, le
 # fichier upgrades/<version>.sql doit être modifié (ou créé!) pour que
 # les installations courantes soient mises à jour. <version> est ici
-# le prochain numéro de version d'AlternC. Voir upgrades/README pour
+# le prochain numéro de version d`AlternC. Voir upgrades/README pour
 # plus de détails.
 #########################################################################
 
@@ -63,9 +63,9 @@ CREATE TABLE IF NOT EXISTS `mail_alias` (
 
 
 CREATE TABLE IF NOT EXISTS `mail_users` (
-  `uid` int(10) unsigned NOT NULL default '0',	# UID AlternC de l'utilisateur du mail
+  `uid` int(10) unsigned NOT NULL default '0',	# UID AlternC de l`utilisateur du mail
   `alias` varchar(255) NOT NULL default '',	# Alias = Alias intermédiaire (voir domain)
-  `path` varchar(255) NOT NULL default '',	# Chemin vers le mail de l'utilisateur
+  `path` varchar(255) NOT NULL default '',	# Chemin vers le mail de l`utilisateur
   `password` varchar(255) NOT NULL default '',	# Mot de passe crypté 
   PRIMARY KEY  (`alias`),
   KEY `path` (`path`),
@@ -94,16 +94,16 @@ CREATE TABLE IF NOT EXISTS `mail_domain` (
 
 
 CREATE TABLE IF NOT EXISTS browser (
-  uid int(10) unsigned NOT NULL default '0',		# Numéro de l'utilisateur
-  editsizex int(10) unsigned NOT NULL default '0',	# Largeur de la zone d'edition du brouteur
-  editsizey int(10) unsigned NOT NULL default '0',	# Hauteur de la zone d'edition du brouteur
+  uid int(10) unsigned NOT NULL default '0',		# Numéro de l`utilisateur
+  editsizex int(10) unsigned NOT NULL default '0',	# Largeur de la zone d`edition du brouteur
+  editsizey int(10) unsigned NOT NULL default '0',	# Hauteur de la zone d`edition du brouteur
   listmode tinyint(3) unsigned NOT NULL default '0',	# Mode de listing (1 colonne, 2 colonne, 3 colonne)
   showicons tinyint(4) NOT NULL default '0',		# Faut-il afficher les icones (1/0)
   downfmt tinyint(4) NOT NULL default '0',		# Format de téléchargement (zip/bz2/tgz/tar.Z)
-  createfile tinyint(4) NOT NULL default '0',		# Que fait-on après création d'un fichier (1/0)
+  createfile tinyint(4) NOT NULL default '0',		# Que fait-on après création d`un fichier (1/0)
   showtype tinyint(4) NOT NULL default '0',		# Affiche-t-on le type mime ? 
-  editor_font varchar(64) NOT NULL default '',		# Nom de la police dans l'éditeur de fichiers
-  editor_size varchar(8) NOT NULL default '',		# Taille de la police dans l'éditeur de fichiers
+  editor_font varchar(64) NOT NULL default '',		# Nom de la police dans l`éditeur de fichiers
+  editor_size varchar(8) NOT NULL default '',		# Taille de la police dans l`éditeur de fichiers
   crff tinyint(4) NOT NULL default '0',			# mémorise le dernier fichier/dossier créé (pour le bouton radio)
   golastdir tinyint(4) NOT NULL default '0',		# Faut-il aller au dernier dossier ou au dossier racine dans le brouteur ?
   lastdir varchar(255) NOT NULL default '',		# Dernier dossier visité.
@@ -117,7 +117,7 @@ CREATE TABLE IF NOT EXISTS browser (
 # Cette table contient les demandes de changements de mail pour les membres
 
 CREATE TABLE IF NOT EXISTS chgmail (
-  uid int(10) unsigned NOT NULL default '0',		# Numéro de l'utilisateur
+  uid int(10) unsigned NOT NULL default '0',		# Numéro de l`utilisateur
   cookie varchar(20) NOT NULL default '',		# Cookie du mail
   ckey varchar(6) NOT NULL default '',			# Clé de vérif
   mail varchar(128) NOT NULL default '',		# Nouvel Email
@@ -131,8 +131,8 @@ CREATE TABLE IF NOT EXISTS chgmail (
 # Contient les bases mysql des membres, + login / pass en clair
 
 CREATE TABLE IF NOT EXISTS db (
-  uid int(10) unsigned NOT NULL default '0',		# Numéro de l'utilisateur
-  login varchar(16) NOT NULL default '',		# Nom d'utilisateur mysql
+  uid int(10) unsigned NOT NULL default '0',		# Numéro de l`utilisateur
+  login varchar(16) NOT NULL default '',		# Nom d`utilisateur mysql
   pass varchar(16) NOT NULL default '',			# Mot de passe mysql
   db varchar(64) NOT NULL default '',			# Base de données concernée
   bck_mode tinyint(3) unsigned NOT NULL default '0',	# Mode de backup (0/non 1/Daily 2/Weekly)
@@ -193,7 +193,7 @@ CREATE TABLE IF NOT EXISTS ftpusers (
 #
 # Structure de la table `local`
 #
-# Champs utilisables par l'hébergeur pour associer des données locales aux membres.
+# Champs utilisables par l`hébergeur pour associer des données locales aux membres.
 
 CREATE TABLE IF NOT EXISTS local (
   uid int(10) unsigned NOT NULL default '0',
@@ -209,21 +209,21 @@ CREATE TABLE IF NOT EXISTS local (
 
 CREATE TABLE IF NOT EXISTS membres (
   uid int(10) unsigned NOT NULL auto_increment,		# Numéro du membre (GID)
-  login varchar(128) NOT NULL default '',		# Nom d'utilisateur
+  login varchar(128) NOT NULL default '',		# Nom d`utilisateur
   pass varchar(64) NOT NULL default '',			# Mot de passe
   enabled tinyint(4) NOT NULL default '1',		# Le compte est-il actif ?
   su tinyint(4) NOT NULL default '0',			# Le compte est-il super-admin ?
   mail varchar(128) NOT NULL default '',		# Adresse email du possesseur
   lastaskpass bigint(20) unsigned default '0',		# Date de dernière demande du pass par mail
-  show_help tinyint(4) NOT NULL default '1',		# Faut-il afficher l'aide dans le bureau
+  show_help tinyint(4) NOT NULL default '1',		# Faut-il afficher l`aide dans le bureau
   lastlogin datetime NOT NULL default '0000-00-00 00:00:00',	# Date du dernier login
-  lastfail tinyint(4) NOT NULL default '0',		# Nombre d'échecs depuis le dernier login
+  lastfail tinyint(4) NOT NULL default '0',		# Nombre d`échecs depuis le dernier login
   lastip varchar(255) NOT NULL default '',		# Nom DNS du client au dernier login
   creator int(10) unsigned default '0',			# Qui a créé le compte (quel uid admin)
-  canpass tinyint(4) default '1',			# L'utilisateur peut-il changer son pass.
-  warnlogin tinyint(4) default '0',			# TODO L'utilisateur veut-il recevoir un mail quand on se loggue sur son compte ?
-  warnfailed tinyint(4) default '0',			# TODO L'utilisateur veut-il recevoir un mail quand on tente de se logguer sur son compte ?
-  admlist tinyint(4) default '0',			# Mode d'affichage de la liste des membres pour les super admins
+  canpass tinyint(4) default '1',			# L`utilisateur peut-il changer son pass.
+  warnlogin tinyint(4) default '0',			# TODO L`utilisateur veut-il recevoir un mail quand on se loggue sur son compte ?
+  warnfailed tinyint(4) default '0',			# TODO L`utilisateur veut-il recevoir un mail quand on tente de se logguer sur son compte ?
+  admlist tinyint(4) default '0',			# Mode d`affichage de la liste des membres pour les super admins
   type varchar(128) default 'default',
   notes TEXT NOT NULL,
   created datetime default NULL, 
@@ -268,7 +268,8 @@ CREATE TABLE IF NOT EXISTS sub_domaines (
   sub varchar(100) NOT NULL default '',
   valeur varchar(255) default NULL,
   type varchar(30) NOT NULL default '0',
-  PRIMARY KEY  (compte,domaine,sub,type)
+  PRIMARY KEY  (compte,domaine,sub,type),
+  FOREIGN KEY (type) REFERENCES (domaines_type)
 ) TYPE=MyISAM;
 
 #
@@ -293,7 +294,7 @@ CREATE TABLE IF NOT EXISTS sub_domaines_standby (
 
 CREATE TABLE IF NOT EXISTS stats2 (
   id int(10) unsigned NOT NULL auto_increment,	# Numéro du jeu de stat brut
-  mid int(10) unsigned NOT NULL default '0',	# Numéro de l'utilisateur
+  mid int(10) unsigned NOT NULL default '0',	# Numéro de l`utilisateur
   hostname varchar(255) NOT NULL default '',	# Domaine concerné
   folder varchar(255) NOT NULL default '',	# Dossier de stockage des logs
   PRIMARY KEY  (id),
@@ -316,7 +317,7 @@ CREATE TABLE IF NOT EXISTS defquotas (
 #
 # Quotas par defaut pour les nouveaux membres
 #
-# Ces quotas par defaut sont redefinissables dans l'interface web
+# Ces quotas par defaut sont redefinissables dans l`interface web
 
 INSERT IGNORE INTO defquotas (quota,value) VALUES ('dom',1);
 INSERT IGNORE INTO defquotas (quota,value) VALUES ('mail',10);
@@ -503,4 +504,26 @@ VALUES (
 'subadmin_restriction', '', 
 'This variable set the way the account list works for accounts other than "admin" (2000). 0 (default) = admin other than admin/2000 can see their own account, but not the other one 1 = admin other than admin/2000 can see any account by clicking the ''show all accounts'' link. '
 );
+
+CREATE TABLE IF NOT EXISTS `domaines_type` (
+    `id` INTEGER NOT NULL ,
+    `name` VARCHAR (255) NOT NULL,
+    `description` TEXT,
+    `ask_dest` BOOLEAN DEFAULT FALSE,
+    `entry` VARCHAR (255) DEFAULT '',
+    `compatibility` VARCHAR (255) DEFAULT '',
+    `enable` BOOLEAN DEFAULT TRUE,
+PRIMARY KEY ( `id` )
+) COMMENT = 'Type of domains allowed';
+
+INSERT IGNORE INTO `domaines_type` (id, name, description, ask_dest, entry, compatibility) values
+(0, 'local','local redirection', false, '%SUB% IN A @@PUBLIC_IP@@', '6'),
+(1, 'url','url redirection', false, '%SUB% IN A @@PUBLIC_IP@@','6'),
+(2, 'ip','ip address', true, '%SUB% IN A %TARGET%','2,4,6'),
+(3, 'webmail', 'webmail', false, '%SUB% IN A @@PUBLIC_IP@@', '6'),
+(4, 'ipv6','ipv6 address', true, '%SUB% IN AAAA %TARGET%','2,4,6'),
+(5, 'cname', 'cname entry', true, '%SUB% CNAME %TARGET%', '6'),
+(6, 'txt', 'txt entry', true, '%SUB% IN TXT "%TARGET%"','0,1,2,3,4,5,6'),
+(7, 'mx', 'mx entry', true, '%SUB% IN MX %TARGET%', '0,1,2,3,4,5,6')
+;
 
