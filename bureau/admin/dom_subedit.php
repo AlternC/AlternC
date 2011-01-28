@@ -30,136 +30,39 @@
 require_once("../class/config.php");
 include_once("head.php");
 
+
 $fields = array (
 	"domain"    => array ("request", "string", ""),
 	"sub"       => array ("request", "string", ""),
-	"type"      => array ("request", "integer", $dom->type_local),
-	"sub_local" => array ("request", "string",  "/"),
-	"sub_url"   => array ("request", "string", "http://"), 
-	"sub_ip"    => array ("request", "string", ""),
-	"sub_ipv6"  => array ("request", "string", ""),
-	"sub_cname" => array ("request", "string", ""),
-	"sub_txt"   => array ("request", "string", ""),
-	"action"    => array ("request", "string", "add"),
+	"type"      => array ("request", "string", $dom->type_local),
+	"value"     => array ("request", "string",  ""),
 );
 getFields($fields);
 
 $dom->lock();
+$domroot=$dom->get_domain_all($domain);
 if (!$noread) {
-  if (!$r=$dom->get_sub_domain_all($domain,$sub,$type)) {
+  if (!$r=$dom->get_sub_domain_all($domain,$sub,$type,$value)) {
     $error=$err->errstr();
-    ?>
-      <h3><?php __("Editing subdomain"); ?> http://<?php ecif($sub,$sub."."); echo $domain; ?></h3>
-<?php
+  }
+}
+
+echo "<h3>";
+__("Editing subdomain");
+echo " http://"; ecif($sub,$sub."."); echo $domain."</h3>";
+if ($error) {
 	echo "<p class=\"error\">$error</p>";
-	include_once("foot.php");
-	exit();
- } 
-
-$sub=$r["name"];
-$type=$r["type"];
-switch ($type) {
- case $dom->type_local:
-   $sub_local=$r["dest"];
-   break;
- case $dom->type_url:
-   $sub_url=$r["dest"];
-   break;
- case $dom->type_cname:
-   $sub_cname=$r["dest"];
-   break;
- case $dom->type_txt:
-   $sub_txt=$r["dest"];
-   break;
- case $dom->type_ipv6:
-   $sub_ipv6=$r["dest"];
-   break;
- case $dom->type_ip:
-   $sub_ip=$r["dest"];
-   break;
- case $dom->type_webmail:
-   break;
- }
- }
-
+  include_once("foot.php");
+  exit();
+} 
 $dom->unlock();
+?>
 
-?>
-<h3><?php __("Editing subdomain"); ?> http://<?php ecif($sub,$sub."."); echo $domain; ?></h3>
-<?php
-	if ($error) {
-		echo "<p class=\"error\">$error</p>";
-	}
-?>
 <hr id="topbar"/>
 <br />
-<!-- *****************************************
-		 gestion du sous-domaine
- -->
-<form action="dom_subdoedit.php" method="post" id="main" name="main">
-	<table border="0">
-	<tr>
-		<td>	<input type="hidden" name="domain" value="<?php ehe($domain); ?>" />
-	<input type="hidden" name="sub" value="<?php echo ehe($sub); ?>" />
-	<input type="hidden" name="type_old" value="<?php echo ehe($type); ?>" />
-	<input type="hidden" name="action" value="edit" />
+<?php 
+require_once('dom_edit.inc.php');
+sub_domains_edit($domain,$sub,$type,$value);
 
-<input type="radio" id="local" class="inc" name="type" value="<?php echo $dom->type_local; ?>" <?php cbox($r["type"]==$dom->type_local); ?> onclick="document.main.sub_local.focus();" />
-			<label for="local"><?php __("Locally managed"); ?></label></td>
-		<td><input type="text" class="int" name="sub_local" id="sub_local" value="<?php ehe($sub_local); ?>" size="40" />
-<script type="text/javascript">
-<!--
-  document.write("&nbsp;<input type=\"button\" name=\"bff\" onclick=\"browseforfolder('main.sub_local');\" value=\" <?php __("Choose a folder..."); ?> \" class=\"bff\">");
-//  -->
-</script>
-</td>
-	</tr>
-	<tr>
-		<td><input type="radio" id="url" class="inc" name="type" value="<?php echo $dom->type_url; ?>" <?php cbox($type==$dom->type_url); ?> onclick="document.main.sub_url.focus();" />
-			<label for="url"><?php __("URL redirection"); ?></label></td>
-		<td><input type="text" class="int" name="sub_url" id="sub_url" value="<?php ehe($sub_url); ?>" size="50" /></td>
-	</tr>
-
-	<tr>
-		<td><input type="radio" id="ip" class="inc" name="type" value="<?php echo $dom->type_ip; ?>" <?php cbox($type==$dom->type_ip); ?> onclick="document.main.sub_ip.focus();" />
-			<label for="ip"><?php __("IP redirection"); ?></label></td>
-		<td><input type="text" class="int" name="sub_ip" id="sub_ip" value="<?php ehe($sub_ip); ?>" size="16" /> <small><?php __("(enter an IPv4 address, for example 192.168.1.2)"); ?></small></td>
-
-
-	<tr>
-		<td><input type="radio" id="webmail" class="inc" name="type" value="<?php echo $dom->type_webmail; ?>" <?php cbox($r["type"]==$dom->type_webmail); ?> />
-			<label for="webmail"><?php __("Webmail access"); ?></label></td>
-		<td>&nbsp;</td>
-	</tr>
-
-	<tr><td colspan=2 style="background-color: #CFE3F1;color: #007777;font-weight:bold;" >Advanced options</td></tr>
-	<tr id="advopt1">
-		<td><input type="radio" id="ipv6" class="inc" name="type" value="<?php echo $dom->type_ipv6; ?>" <?php cbox($type==$dom->type_ipv6); ?> onclick="document.main.sub_ipv6.focus();" />
-			<label for="ipv6"><?php __("IPv6 redirection"); ?></label></td>
-		<td><input type="text" class="int" name="sub_ipv6" id="sub_ipv6" value="<?php ehe($sub_ipv6); ?>" size="32" /> <small><?php __("(enter an IPv6 address, for example 2001:0910::0)"); ?></small></td>
-	</tr>
-
-	<tr id="advopt2">
-		<td><input type="radio" id="cname" class="inc" name="type" value="<?php echo $dom->type_cname; ?>" <?php cbox($type==$dom->type_cname); ?> onclick="document.main.sub_cname.focus();" />
-			<label for="cname"><?php __("CNAME redirection"); ?></label></td>
-		<td><input type="text" class="int" name="sub_cname" id="sub_cname" value="<?php ehe($sub_cname); ?>" size="32" /> <small><?php __("(enter a server address or a subdomain)"); ?></small></td>
-	</tr>
-
-	<tr id="advopt3">
-		<td><input type="radio" id="txt" class="inc" name="type" value="<?php echo $dom->type_txt; ?>" <?php cbox($type==$dom->type_txt); ?> onclick="document.main.sub_txt.focus();" />
-			<label for="txt"><?php __("TXT information"); ?></label></td>
-		<td><input type="text" class="int" name="sub_txt" id="sub_txt" value="<?php ehe($sub_txt); ?>" size="32" /> <small><?php __("(enter a TXT informations for this domain)"); ?></small></td>
-	</tr>
-
-
-	<tr class="trbtn">
-            <td colspan="2">
-              <input type="submit" class="inb" name="submit" value="<?php __("Validate this change"); ?>" />
-              <input type="button" class="inb" name="back" value="<?php __("Cancel"); ?>" onclick="document.location='dom_edit.php?domain=<?php ehe($domain); ?>'" />
-            </td>
-        </tr>
-
-	</table>
-
-</form>
-<?php include_once("foot.php"); ?>
+include_once("foot.php"); 
+?>

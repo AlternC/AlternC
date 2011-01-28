@@ -1,12 +1,14 @@
+#!/bin/bash
+
+. /usr/lib/alternc/functions.sh
+
 TEMPLATE_DIR="/etc/alternc/templates/apache2"
 HOSTING_DIR="/usr/lib/alternc/hosting_functions"
 
-DATA_ROOT="/var/alternc"
-HTML_HOME="$DATA_ROOT/html"
-VHOST_DIR="$DATA_ROOT/apache-vhost"
+HTML_HOME="$ALTERNC_LOC/html"
+VHOST_DIR="$ALTERNC_LOC/apache-vhost"
 VHOST_FILE="$VHOST_DIR/vhosts_all.conf"
 
-. /usr/lib/alternc/functions.sh
 
 host_create() {
     # Function to create a vhost for a website
@@ -79,7 +81,7 @@ host_create() {
     # Check if all is right in the conf file
     # If not, put a debug message
     local ISNOTGOOD=$(grep "%%" "$TMP_FILE") 
-    [ "$ISNOTGOOD" ] && (echo "# There was a probleme in the generation : $ISNOTGOOD" > "$TMP_FILE"
+    [ "$ISNOTGOOD" ] && (echo "# There was a probleme in the generation : $ISNOTGOOD" > "$TMP_FILE" )
 
     # Put the conf file in prod
     mkdir -p "$(dirname "$FILE_TARGET")"
@@ -87,7 +89,7 @@ host_create() {
 
     # Execute post-install if there is some for this VTYPE
     [ -x "$HOSTING_DIR/hosting_$VTYPE.sh" ] && "$HOSTING_DIR/hosting_$VTYPE.sh" "postint" $@
- 
+
 }
 
 host_disable() {

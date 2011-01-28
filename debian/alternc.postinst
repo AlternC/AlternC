@@ -227,6 +227,7 @@ EOF
     /usr/lib/alternc/slave_dns
     # Apache will not start without this file
     touch /var/alternc/apacheconf/override_php.conf
+    touch /var/alternc/apache-vhost/vhosts_all.conf
 
     # Update l18n files
     /usr/share/alternc/install/dopo.sh

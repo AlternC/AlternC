@@ -1,13 +1,14 @@
 #!/bin/bash
 # dns.sh next-gen by Fufroma
 
-# Init some vars
+# Init some vars
 . /etc/alternc/local.sh
+. /usr/lib/alternc/functions.sh
 
 # Init some other vars
-MYSQL_DO="mysql --defaults-file=/etc/alternc/my.cnf -Bs -e "
 ZONE_TEMPLATE="/etc/alternc/templates/bind/templates/zone.template"
-NAMED_TEMPLATE="/etc/bind/templates/named.template"
+NAMED_TEMPLATE="/etc/alternc/templates/bind/templates/named.template"
+NAMED_CONF="/var/alternc/bind/automatic.conf"
 
 dns_zone_file() {
     echo "$ALTERNC_LOC/bind/zones/$1"
@@ -15,7 +16,10 @@ dns_zone_file() {
 
 dns_is_locked() {
     local domain=$1
-    grep "LOCKED:YES" "$(dns_zone_file $domain)" &> /dev/null 
+    if [ ! -r "$(dns_zone_file $domain)" ] ; then
+      return 1
+    fi
+    grep "LOCKED:YES" "$(dns_zone_file $domain)"
     return $?
 }
 
@@ -37,13 +41,43 @@ dns_chmod() {
     return 0
 }
 
+dns_named_conf() {
+  local domain=$1
+
+  if [ ! -f "$(dns_zone_file $domain)" ] ; then
+    echo Error : no file $(dns_zone_file $domain)
+    return 1
+  fi
+
+  grep -q "$domain" "$NAMED_CONF"
+  if [ $? -ne 0 ] ; then
+    local tempo=$(cat "$NAMED_TEMPLATE")
+    tempo=${tempo/@@DOMAINE@@/$domain}
+    tempo=${tempo/@@ZONE_FILE@@/$(dns_zone_file $domain)}
+    echo $tempo >> "$NAMED_CONF"
+  fi
+}
+
+dns_delete() {
+  local domain=$1
+
+  # Delete the zone file
+  if [ -w $(dns_zone_file $domain) ] ; then
+    rm -f $(dns_zone_file $domain)
+  fi
+
+  # Remove from the named conf
+  local file=$(cat "$NAMED_CONF")
+  echo -e "$file" |grep -v "\"$domain\"" > "$NAMED_CONF"
+}
+
 # DNS regenerate
 dns_regenerate() {
     local domain=$1
     local manual_tag=";;; END ALTERNC AUTOGENERATE CONFIGURATION"
     local zone_file=$(dns_zone_file $domain)
 
-    # Check if locked
+    # Check if locked
     dns_is_locked "$domain"
     if [ $? -eq 0 ]; then
         echo "DNS $domain LOCKED" 
@@ -59,11 +93,11 @@ dns_regenerate() {
     # Add the entry
     file=$(
         echo -e "$file"
-        $MYSQL_DO "select replace(replace(dt.entry,'%TARGET%',sd.valeur), '%SUB%', sd.sub) from sub_domaines sd,domaines_type dt where sd.type=dt.id and sd.domaine='$domain';"|sort
+        $MYSQL_DO "select replace(replace(dt.entry,'%TARGET%',sd.valeur), '%SUB%', if(length(sd.sub)>0,sd.sub,'@')) from sub_domaines sd,domaines_type dt where sd.type=dt.name and sd.domaine='$domain';"|sort
     )
 
 
-    # Get some usefull vars
+    # Get some usefull vars
     local mx=$( $MYSQL_DO "select mx from domaines where domaine='$domain';")
 
     # Replace the vars by their values
@@ -87,8 +121,11 @@ dns_regenerate() {
         file=$(echo -e "$file"; echo "$manual_tag")
     fi
 
-    # Init the file
+    # Init the file
     echo -e "$file" > "$zone_file"
+
     # And set his rights
     dns_chmod $domain
+    # Add it to named conf
+    dns_named_conf $domain
 }

@@ -45,10 +45,6 @@ include_once("head.php");
 	  echo "<p class=\"error\">$error</p>";
 	}
 
-$dom = new m_dom();
-$r=$dom->domains_type_lst;
-// die(print_r($dom->domains_type_lst()));
-
 ?>
 <p>
 <?php __("Here is the list of the domains type."); ?>
@@ -56,10 +52,9 @@ $r=$dom->domains_type_lst;
 <p><span class="ina"><a href="adm_domstypeadd.php"><?php __("Add a new domains type"); ?></a></span></p>
 <table class="tlist">
 <tr>
-    <th><?php __("Id");?></th>
     <th><?php __("Name");?></th>
     <th><?php __("Description");?></th>
-    <th><?php __("Ask destination ?");?></th>
+    <th><?php __("Target");?></th>
     <th><?php __("Entry");?></th>
     <th><?php __("Compatibility");?></th>
     <th><?php __("Edit");?></th>
@@ -70,13 +65,12 @@ foreach($dom->domains_type_lst() as $d) {
 ++$pair;
 ?>
 <tr class="lst<?php echo $pair%2+1 ?>">
-    <td><?php echo $d['id'];?></td>
     <td><?php echo $d['name'];?></td>
     <td><?php echo $d['description'];?></td>
-    <td><?php echo $d['ask_dest']?__("Yes"):__("No");?></td>
+    <td><?php echo $d['target'];?></td>
     <td><?php echo $d['entry'];?></td>
     <td><?php echo $d['compatibility'];?></td>
-    <td><div class="ina"><a href="adm_domstypeedit.php?id=<?php echo urlencode($d['id']); ?>"><img style="padding-bottom: 5px" src="images/edit.png" alt="<?php __("Edit"); ?>" /><?php __("Edit"); ?></a></div></td>
+    <td><div class="ina"><a href="adm_domstypeedit.php?name=<?php echo urlencode($d['name']); ?>"><img style="padding-bottom: 5px" src="images/edit.png" alt="<?php __("Edit"); ?>" /><?php __("Edit"); ?></a></div></td>
 
     
 </tr>

@@ -34,12 +34,13 @@ $fields = array (
 	"domain"    => array ("request", "string", ""),
 	"sub"       => array ("request", "string", ""),
 	"type"      => array ("request", "string", ""),
+	"value"     => array ("request", "string", ""),
 );
 getFields($fields);
 
 $dom->lock();
 
-if (!$dom->del_sub_domain($domain,$sub,$type)) {
+if (!$dom->del_sub_domain($domain,$sub,$type,$value)) {
 	$error=$err->errstr();
 }
 

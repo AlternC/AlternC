@@ -91,6 +91,7 @@ bureau/admin/direct.php -text
 bureau/admin/dom_add.php -text
 bureau/admin/dom_doadd.php -text
 bureau/admin/dom_dodel.php -text
+bureau/admin/dom_edit.inc.php -text
 bureau/admin/dom_edit.php -text
 bureau/admin/dom_editdns.php -text
 bureau/admin/dom_subdel.php -text

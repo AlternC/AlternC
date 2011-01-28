@@ -504,26 +504,3 @@ VALUES (
 'subadmin_restriction', '', 
 'This variable set the way the account list works for accounts other than "admin" (2000). 0 (default) = admin other than admin/2000 can see their own account, but not the other one 1 = admin other than admin/2000 can see any account by clicking the ''show all accounts'' link. '
 );
-
-CREATE TABLE IF NOT EXISTS `domaines_type` (
-    `id` INTEGER NOT NULL ,
-    `name` VARCHAR (255) NOT NULL,
-    `description` TEXT,
-    `ask_dest` BOOLEAN DEFAULT FALSE,
-    `entry` VARCHAR (255) DEFAULT '',
-    `compatibility` VARCHAR (255) DEFAULT '',
-    `enable` BOOLEAN DEFAULT TRUE,
-PRIMARY KEY ( `id` )
-) COMMENT = 'Type of domains allowed';
-
-INSERT IGNORE INTO `domaines_type` (id, name, description, ask_dest, entry, compatibility) values
-(0, 'local','local redirection', false, '%SUB% IN A @@PUBLIC_IP@@', '6'),
-(1, 'url','url redirection', false, '%SUB% IN A @@PUBLIC_IP@@','6'),
-(2, 'ip','ip address', true, '%SUB% IN A %TARGET%','2,4,6'),
-(3, 'webmail', 'webmail', false, '%SUB% IN A @@PUBLIC_IP@@', '6'),
-(4, 'ipv6','ipv6 address', true, '%SUB% IN AAAA %TARGET%','2,4,6'),
-(5, 'cname', 'cname entry', true, '%SUB% CNAME %TARGET%', '6'),
-(6, 'txt', 'txt entry', true, '%SUB% IN TXT "%TARGET%"','0,1,2,3,4,5,6'),
-(7, 'mx', 'mx entry', true, '%SUB% IN MX %TARGET%', '0,1,2,3,4,5,6')
-;
-

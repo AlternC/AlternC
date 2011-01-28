@@ -36,17 +36,16 @@ if (!$admin->enabled) {
 include_once("head.php");
 
 $fields = array (
-    "id"            => array ("request", "integer", ""),
     "name"          => array ("request", "string", ""),
     "description"   => array ("request", "string", ""),
-    "ask_dest"      => array ("request", "boolean", ""),
+    "target"        => array ("request", "string", ""),
     "entry"         => array ("request", "string", ""),
     "compatibility" => array ("request", "string", ""),
 );
 getFields($fields);
 
 
-if (! $d=$dom->domains_type_get($id)) {
+if (! $d=$dom->domains_type_get($name)) {
 	$error=$err->errstr();
 	echo $error;
 } else {
@@ -63,19 +62,21 @@ if ($error_edit) {
 } ?>
 
 <form action="adm_domstypedoedit.php" method="post" name="main" id="main">
-    <input type="hidden" name="id" value="<?php echo $d['id']; ?>" />
+    <input type="hidden" name="name" value="<?php echo $d['name']; ?>" />
     <table class="tedit">
-	    <tr>
-            <th><?php __("Name");?></th>
-            <td><input name="name" type=text size="15" value="<?php echo $d['name']; ?>" /></td>
-        </tr>
 	    <tr>
             <th><?php __("Description");?></th>
             <td><input name="description" type=text size="30" value="<?php echo $d['description']; ?>" /></td>
         </tr>
 	    <tr>
-            <th><?php __("Ask destination ?");?></th>
-            <td><input name="ask_dest" type=checkbox value=1 <?php echo $d['ask_dest']?"checked":""; ?>/></td>
+            <th><?php __("Target");?></th>
+            <td>
+              <select name="target">
+                <?php foreach ($dom->domains_type_target_values() as $k) { ?>
+                  <option value="<?php echo $k ?>" <?php echo ($d['target']==$k)?"selected":"";?> ><?php echo $k;?></option>
+                <?php } ?>
+              </select>
+            </td>
         </tr>
 	    <tr>
             <th><?php __("Entry");?></th>

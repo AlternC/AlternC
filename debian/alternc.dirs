@@ -15,6 +15,7 @@ usr/sbin
 usr/share/alternc/install
 usr/share/locale/fr/LC_MESSAGES
 usr/share/lintian/overrides/
+var/alternc/apache-vhost
 var/alternc/apacheconf
 var/alternc/apacheconf/_
 var/alternc/apacheconf/0
