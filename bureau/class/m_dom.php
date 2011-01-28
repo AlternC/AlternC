@@ -159,7 +159,7 @@ class m_dom {
     return true;
   }
 
-  function domains_type_update($name, $description, $target, $entry, $compatibility) {
+  function domains_type_update($name, $description, $target, $entry, $compatibility, $enable, $only_dns, $need_dns) {
     global $err,$cuid,$db;
     $id=intval($id);
     $name=mysql_real_escape_string($name);
@@ -167,7 +167,10 @@ class m_dom {
     $target=mysql_real_escape_string($target);
     $entry=mysql_real_escape_string($entry);
     $compatibility=mysql_real_escape_string($compatibility);
-    $db->query("UPDATE domaines_type SET description='$description', target='$target', entry='$entry', compatibility='$compatibility' where name='$name';");
+    $enable=intval($enable);
+    $only_dns=intval($only_dns);
+    $need_dns=intval($need_dns);
+    $db->query("UPDATE domaines_type SET description='$description', target='$target', entry='$entry', compatibility='$compatibility', enable=$enable, need_dns=$need_dns, only_dns=$only_dns where name='$name';");
     return true;
   }   
 
@@ -629,7 +632,7 @@ class m_dom {
     $db->next_record();
     $r["nsub"]=$db->Record["cnt"];
     $db->free();
-    $db->query("select * from sub_domaines where compte='$cuid' and domaine='$dom'");
+    $db->query("select sd.*, dt.description as type_desc from sub_domaines sd, domaines_type dt where compte='$cuid' and domaine='$dom' and upper(dt.name)=upper(sd.type)");
     // Pas de webmail, on le cochera si on le trouve.
     $this->webmail=0;
     for($i=0;$i<$r["nsub"];$i++) {
@@ -638,6 +641,7 @@ class m_dom {
       $r["sub"][$i]["name"]=$db->Record["sub"];
       $r["sub"][$i]["dest"]=$db->Record["valeur"];
       $r["sub"][$i]["type"]=$db->Record["type"];
+      $r["sub"][$i]["type_desc"]=$db->Record["type_desc"];
 /*
       if ($db->Record["type"]==3) { // Webmail
 	$this->webmail=1;
@@ -685,7 +689,7 @@ class m_dom {
         $type = " and type=\"".mysql_real_escape_string($type)."\"";
     }
 */
-    $db->query("select * from sub_domaines where compte='$cuid' and domaine='$dom' and sub='$sub' and ( length('$type')=0 or type='$type') and (length('$value')=0 or '$value'=valeur);");
+    $db->query("select sd.*, dt.description as type_desc from sub_domaines sd, domaines_type dt where compte='$cuid' and domaine='$dom' and sub='$sub' and ( length('$type')=0 or type='$type') and (length('$value')=0 or '$value'=valeur) and upper(dt.name)=upper(sd.type);");
     if ($db->num_rows()==0) {
       $err->raise("dom",14);
       return false;
@@ -695,6 +699,7 @@ class m_dom {
     $r["name"]=$db->Record["sub"];
     $r["dest"]=$db->Record["valeur"];
     $r["type"]=$db->Record["type"];
+    $r["type_desc"]=$db->Record["type_desc"];
     $db->free();
     return $r;
   } // get_sub_domain_all

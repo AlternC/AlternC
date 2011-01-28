@@ -57,6 +57,9 @@ include_once("head.php");
     <th><?php __("Target");?></th>
     <th><?php __("Entry");?></th>
     <th><?php __("Compatibility");?></th>
+    <th><?php __("Enabled ?");?></th>
+    <th><?php __("Only DNS ?");?></th>
+    <th><?php __("Need to be DNS ?");?></th>
     <th><?php __("Edit");?></th>
 </tr>
 <?php 
@@ -70,6 +73,9 @@ foreach($dom->domains_type_lst() as $d) {
     <td><?php echo $d['target'];?></td>
     <td><?php echo $d['entry'];?></td>
     <td><?php echo $d['compatibility'];?></td>
+    <td><?php echo $d['enable']?__("Yes"):__("No");?></td>
+    <td><?php echo $d['only_dns']?__("Yes"):__("No");?></td>
+    <td><?php echo $d['need_dns']?__("Yes"):__("No");?></td>
     <td><div class="ina"><a href="adm_domstypeedit.php?name=<?php echo urlencode($d['name']); ?>"><img style="padding-bottom: 5px" src="images/edit.png" alt="<?php __("Edit"); ?>" /><?php __("Edit"); ?></a></div></td>
 
     

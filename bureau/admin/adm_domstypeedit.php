@@ -41,6 +41,9 @@ $fields = array (
     "target"        => array ("request", "string", ""),
     "entry"         => array ("request", "string", ""),
     "compatibility" => array ("request", "string", ""),
+    "enable"        => array ("request", "boolean", ""),
+    "only_dns"      => array ("request", "boolean", ""),
+    "need_dns"      => array ("request", "boolean", ""),
 );
 getFields($fields);
 
@@ -67,7 +70,7 @@ if ($error_edit) {
 	    <tr>
             <th><?php __("Description");?></th>
             <td><input name="description" type=text size="30" value="<?php echo $d['description']; ?>" /></td>
-        </tr>
+      </tr>
 	    <tr>
             <th><?php __("Target");?></th>
             <td>
@@ -81,13 +84,24 @@ if ($error_edit) {
 	    <tr>
             <th><?php __("Entry");?></th>
             <td><input name="entry" type=text size="30" value="<?php echo $d['entry']; ?>" /></td>
-        </tr>
+      </tr>
 	    <tr>
             <th><?php __("Compatibility");?></th>
             <td><input name="compatibility" type=text size="15" value="<?php echo $d['compatibility']; ?>" /></td>
-
-        </tr>
-        <tr class="trbtn">
+      </tr>
+	    <tr>
+            <th><?php __("Enable");?></th>
+            <td><input name="enable" type=checkbox value="1" <?php cbox($d['enable']); ?> /></td>
+      </tr>
+	    <tr>
+            <th><?php __("Do only a DNS entry");?></th>
+            <td><input name="only_dns" type=checkbox value="1" <?php cbox($d['only_dns']); ?> /></td>
+      </tr>
+	    <tr>
+            <th><?php __("Need to be the DNS");?></th>
+            <td><input name="need_dns" type=checkbox value="1" <?php cbox($d['need_dns']); ?> /></td>
+      </tr>
+      <tr class="trbtn">
           <td colspan="2">
              <input type="submit" class="inb" name="submit" value="<?php __("Change this domains type"); ?>" />
           </td>

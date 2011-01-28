@@ -75,7 +75,7 @@ function dnsoff() {
 		 gestion des sous-domaines
  -->
 <table class="tlist">
-<tr><th colspan="2"><?php __("Actions"); ?></th><th><?php __("Subdomain"); ?></th><th><?php __("Place"); ?></th></tr>
+<tr><th colspan="2"><?php __("Actions"); ?></th><th><?php __("Subdomain"); ?></th><th><?php __("Type");?></th><th><?php __("Place"); ?></th></tr>
 <?php
 $col=1;
 for($i=0;$i<$r["nsub"];$i++) {
@@ -89,7 +89,8 @@ for($i=0;$i<$r["nsub"];$i++) {
 			<div class="ina"><a href="dom_subdel.php?domain=<?php echo urlencode($r["name"]) ?>&amp;sub=<?php  echo urlencode($r["sub"][$i]["name"]) ?>&amp;type=<?php  echo urlencode($r["sub"][$i]["type"]) ?>&amp;value=<?php echo urlencode($r["sub"][$i]['dest'])?>"><img src="images/delete.png" alt="<?php __("Delete"); ?>" /><?php __("Delete"); ?></a></div>
 		</td>
 		<td><a href="http://<?php ecif($r["sub"][$i]["name"],$r["sub"][$i]["name"]."."); echo $r["name"] ?>" target="_blank"><?php ecif($r["sub"][$i]["name"],$r["sub"][$i]["name"]."."); echo $r["name"] ?></a></td>
-		<td><?php echo $r["sub"][$i]['type'] === '0' ? '<a href="bro_main.php?R='.urlencode($r["sub"][$i]["dest"]).'">'.htmlspecialchars($r["sub"][$i]["dest"]).'</a>' : htmlspecialchars($r["sub"][$i]["dest"]); ?>&nbsp;</td>
+		<td><?php __($r['sub'][$i]['type_desc']);?></td>
+		<td><?php echo $r["sub"][$i]['type'] === 'LOCAL' ? '<a href="bro_main.php?R='.urlencode($r["sub"][$i]["dest"]).'">'.htmlspecialchars($r["sub"][$i]["dest"]).'</a>' : htmlspecialchars($r["sub"][$i]["dest"]); ?>&nbsp;</td>
 	</tr>
 <?php } ?>
 </table>

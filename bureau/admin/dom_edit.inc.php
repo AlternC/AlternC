@@ -58,7 +58,7 @@ $dom->unlock();
             <input type="text" class="int" name="t_<?php echo $dt['name']?>" id="t_<?php echo $dt['name']?>" value="<?php ehe($targval); ?>" size="28" />
             <script type="text/javascript">
             <!--
-            document.write("&nbsp;<input type=\"button\" name=\"bff\" onclick=\"browseforfolder('main.type_val_<?php echo $dt['name'];?>');\" value=\" <?php __("Choose a folder..."); ?> \" class=\"bff\">");
+            document.write("&nbsp;<input type=\"button\" name=\"bff\" onclick=\"browseforfolder('main.t_<?php echo $dt['name'];?>');\" value=\" <?php __("Choose a folder..."); ?> \" class=\"bff\">");
             //  -->
             </script><?php
             break;
