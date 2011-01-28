@@ -21,7 +21,7 @@ PRIMARY KEY ( `name` )
 INSERT IGNORE INTO `domaines_type` (name, description, target, entry, compatibility, only_dns, need_dns) values
 ('local','Locally managed', 'DIRECTORY', '%SUB% IN A @@PUBLIC_IP@@', 'txt', false, false),
 ('url','URL redirection', 'URL', '%SUB% IN A @@PUBLIC_IP@@','txt', true, true),
-('ip','IP redirection', 'IP', '%SUB% IN A %TARGET%','url,ip,ipv6,txt', true, true),
+('ip','IP redirection', 'IP', '%SUB% IN A %TARGET%','url,ip,ipv6,txt', false, true),
 ('webmail', 'Webmail access', 'NONE', '%SUB% IN A @@PUBLIC_IP@@', 'txt', false, false),
 ('ipv6','ipv6 address', 'IPV6', '%SUB% IN AAAA %TARGET%','ip,ipv6,webmail,txt',true, true),
 ('cname', 'cname entry', 'DOMAIN', '%SUB% CNAME %TARGET%', 'txt',true, true),

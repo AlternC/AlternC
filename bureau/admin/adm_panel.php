@@ -52,6 +52,7 @@ include_once("head.php");
  <li class="lst2"><a href="adm_passpolicy.php"><?php __("Password Policies"); ?></a></li>
  <li class="lst1"><a href="adm_doms.php"><?php __("Manage installed domains"); ?></a></li>
  <li class="lst2"><a href="adm_defquotas.php"><?php __("Change the default quotas"); ?></a></li>
+ <li class="lst1"><a href="adm_dnsweberror.php"><?php __("DNS and website in error"); ?></a></li>
 </ul>
 
 

@@ -16,6 +16,7 @@ bureau/admin/adm_add.php -text
 bureau/admin/adm_deactivate.php -text
 bureau/admin/adm_defquotas.php -text
 bureau/admin/adm_del.php -text
+bureau/admin/adm_dnsweberror.php -text
 bureau/admin/adm_doadd.php -text
 bureau/admin/adm_dodefquotas.php -text
 bureau/admin/adm_dodel.php -text
