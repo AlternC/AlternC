@@ -70,6 +70,25 @@ function dnsoff() {
 	}
 ?>
 <hr id="topbar"/>
+<?php
+
+if ($r['dns_action']=='UPDATE') {?>
+  <p class="error"><?php __("This domain have some DNS change pending. Please wait."); ?></p>
+<?php
+} elseif ($r['dns_action']=='DELETE') {?>
+  <p class="error"><?php __("You requested deletion of this domain.");?></p>
+<?php
+/*
+  // Link hidden as long as the del_domain_cancel function is not complete
+  <a href="dom_dodel.php?domain=<?php echo urlencode($domain);?>&del_cancel=true"><?php __("Clic here to cancel deletion");?></a>
+*/
+?>
+  <?php
+  include_once("foot.php");
+  die();
+}
+
+?>
 <br />
 <!-- *****************************************
 		 gestion des sous-domaines

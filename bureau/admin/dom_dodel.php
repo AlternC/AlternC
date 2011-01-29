@@ -32,7 +32,8 @@ include_once("head.php");
 
 $fields = array (
 	"domain"      => array ("request", "string", ""),
-	"del_confirm" => array ("post", "string", ""),
+	"del_confirm" => array ("post",    "string", ""),
+	"del_cancel"  => array ("request", "string", ""),
 );
 getFields($fields);
 
@@ -46,6 +47,17 @@ if ($del_confirm=="y")
 	}
 
 $dom->unlock();
+
+if (! empty($del_cancel)) {
+  $dom->del_domain_cancel($domain);
+  // The link to this function is disable : the del_domain_cancel function need some modification
+  __("Deletion have been successfully cancelled");?><br/>
+  <p>
+  <span class="ina"><a href="main.php" target="_parent"><?php __("Click here to continue"); ?></a></span>
+  </p>
+  <?php 
+  exit();
+}
 if ($del_confirm!="y") {
 
 ?>
@@ -61,8 +73,7 @@ if ($del_confirm!="y") {
 <input type="hidden" name="domain" value="<?php echo $domain ?>" />
 <input type="submit" class="inb" name="submit" value="<?php __("Yes"); ?>" /> - <input type="button" class="inb" name="non" value="<?php __("No"); ?>" onclick="history.back()" />
 </form>
-<?php include_once("foot.php"); ?>
-<?php
+<?php include_once("foot.php");
 	exit();
 	}
 ?>

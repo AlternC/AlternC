@@ -196,6 +196,18 @@ class m_dom {
     return $this->domains;
   }
 
+  function del_domain_cancel($dom) {
+    global $db,$err,$classes,$cuid;
+    $err->log("dom","del_domaini_canl",$dom);
+    $dom=strtolower($dom);
+    $db->query("UPDATE sub_domaines SET web_action='UPDATE'  WHERE domaine='$dom';");
+    $db->query("UPDATE domaines SET dns_action='UPDATE'  WHERE domaine='$dom';");
+
+    # TODO : some work with domain sensitive classes
+
+    return true;
+  }
+
   /* ----------------------------------------------------------------- */
   /**
    *  Efface un domaine du membre courant, et tous ses sous-domaines
@@ -624,6 +636,8 @@ class m_dom {
     }
     $db->next_record();
     $r["dns"]=$db->Record["gesdns"];
+    $r["dns_action"]=$db->Record["dns_action"];
+    $r["dns_result"]=$db->Record["dns_result"];
     $r["mail"]=$db->Record["gesmx"];
     $r["mx"]=$db->Record["mx"];
     $r[noerase]=$db->Record[noerase];
