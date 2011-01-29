@@ -44,8 +44,8 @@ $dom->unlock();
     ?>
     <tr>
       <td>
-        <input type="radio" id="<?php echo $dt['name']?>" class="inc" name="type" value="<?php echo $dt['name']; ?>" <?php cbox(strtoupper($type)==strtoupper($dt['name'])); ?> />
-        <label for="<?php echo $dt['name']?>"><?php __($dt['description']); ?></label>
+        <input type="radio" id="r_<?php echo $dt['name']?>" class="inc" name="type" value="<?php echo $dt['name']; ?>" <?php cbox(strtoupper($type)==strtoupper($dt['name'])); ?> />
+        <label for="r_<?php echo $dt['name']?>"><?php __($dt['description']); ?></label>
       </td>
       <td>
         <?php 
