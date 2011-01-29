@@ -7,6 +7,7 @@
 # Init some other vars
 MYSQL_DO="/usr/bin/mysql --defaults-file=/etc/alternc/my.cnf -Bs -e "
 DOMAIN_LOG_FILE="/var/log/alternc/update_domains.log"
+VHOST_FILE="$VHOST_DIR/vhosts_all.conf" 
 
 # Some usefull miscellaneous shell functions
 print_domain_letter() {

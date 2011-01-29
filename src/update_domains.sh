@@ -43,8 +43,7 @@ $MYSQL_DO "update sub_domaines sd, domaines d set sd.web_action = 'DELETE' where
 # Sub_domaines we want to delete
 # sub_domaines.web_action = delete
 for sub in $( $MYSQL_DO "select if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine) from sub_domaines sd where web_action ='DELETE';") ; do
-    echo $sub
-    # TODO Do the conf
+    host_delete $sub
     # TODO Update the entry in the DB with the result and the action
 done
 
@@ -58,11 +57,21 @@ params=$( $MYSQL_DO "
   and dt.only_dns = false
   ;")
 for sub in $params;do
-    echo  host_create $(echo $sub|tr '|µ' ' ')
     host_create $(echo $sub|tr '|µ' ' ')
     # TODO Update the entry in the DB with the result and the action
 done
-unset IFS
+
+# Domaine to enable
+for sub in $( $MYSQL_DO "select if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine) from sub_domaines sd where sd.web_action ='ENABLE' ;");do
+    host_enable $sub
+    # TODO Update the entry in the DB with the result and the action
+done
+
+# Domains to disable
+for sub in $( $MYSQL_DO "select if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine) from sub_domaines sd where sd.web_action ='DISABLE' ;");do
+    host_disable $sub
+    # TODO Update the entry in the DB with the result and the action
+done
 
 # Domains we do not want to be the DNS serveur anymore :
 # domaines.dns_action = UPDATE and domaines.gesdns = 0
@@ -87,20 +96,22 @@ for dom in $( $MYSQL_DO "select domaine from domaines where dns_action = 'DELETE
 done
 
 
-echo Exitbefore reload everything, we are testing, FUCK
-rm "$LOCK_FILE"
-exit 1
 # Concat the apaches files
-local tempo=$(mktemp /tmp/alternc-vhost.XXXXX)
-find "$VHOST_DIR" -type f -iname "*.conf" -exec cat '{}' >> "$tempo" \;
+tempo=$(mktemp /tmp/alternc-vhost.XXXXX)
+find "$VHOST_DIR" -mindepth 2 -type f -iname "*.conf" -exec cat '{}' > "$tempo" \;
 if [ $? -ne 0 ] ; then
   log_error " web file concatenation failed"
 fi
-if [ ! -w "$VHOST_FILE" ] ; then
+touch "$VHOST_FILE"
+if [ ! -w "$VHOST_FILE" ] ; then
   log_error "cannot write on $VHOST_FILE"
 fi
 
 mv "$tempo" "$VHOST_FILE"
+
+echo Exitbefore reload everything, we are testing, FUCK
+rm "$LOCK_FILE"
+exit 1
 
 # Reload web and dns
 alternc_reload all

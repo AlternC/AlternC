@@ -134,7 +134,7 @@ host_change_enable() {
 
     if [ ! -e "$TARGET" ] && [ -e "$SOURCE" ] ; then
         # If the "target" file do not exist and the "source" file exist
-        rename -f "$SOURCE" "$TARGET"
+        mv -f "$SOURCE" "$TARGET"
     else
         return 2
     fi
