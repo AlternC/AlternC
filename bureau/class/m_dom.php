@@ -646,7 +646,7 @@ class m_dom {
     $db->next_record();
     $r["nsub"]=$db->Record["cnt"];
     $db->free();
-    $db->query("select sd.*, dt.description as type_desc from sub_domaines sd, domaines_type dt where compte='$cuid' and domaine='$dom' and upper(dt.name)=upper(sd.type)");
+    $db->query("select sd.*, dt.description as type_desc, dt.only_dns from sub_domaines sd, domaines_type dt where compte='$cuid' and domaine='$dom' and upper(dt.name)=upper(sd.type)");
     // Pas de webmail, on le cochera si on le trouve.
     $this->webmail=0;
     for($i=0;$i<$r["nsub"];$i++) {
@@ -655,7 +655,10 @@ class m_dom {
       $r["sub"][$i]["name"]=$db->Record["sub"];
       $r["sub"][$i]["dest"]=$db->Record["valeur"];
       $r["sub"][$i]["type"]=$db->Record["type"];
+      $r["sub"][$i]["enable"]=$db->Record["enable"];
       $r["sub"][$i]["type_desc"]=$db->Record["type_desc"];
+      $r["sub"][$i]["only_dns"]=$db->Record["only_dns"];
+      $r["sub"][$i]["web_action"]=$db->Record["web_action"];
 /*
       if ($db->Record["type"]==3) { // Webmail
 	$this->webmail=1;
@@ -703,7 +706,7 @@ class m_dom {
         $type = " and type=\"".mysql_real_escape_string($type)."\"";
     }
 */
-    $db->query("select sd.*, dt.description as type_desc from sub_domaines sd, domaines_type dt where compte='$cuid' and domaine='$dom' and sub='$sub' and ( length('$type')=0 or type='$type') and (length('$value')=0 or '$value'=valeur) and upper(dt.name)=upper(sd.type);");
+    $db->query("select sd.*, dt.description as type_desc, dt.only_dns from sub_domaines sd, domaines_type dt where compte='$cuid' and domaine='$dom' and sub='$sub' and ( length('$type')=0 or type='$type') and (length('$value')=0 or '$value'=valeur) and upper(dt.name)=upper(sd.type);");
     if ($db->num_rows()==0) {
       $err->raise("dom",14);
       return false;
@@ -712,8 +715,10 @@ class m_dom {
     $r=array();
     $r["name"]=$db->Record["sub"];
     $r["dest"]=$db->Record["valeur"];
-    $r["type"]=$db->Record["type"];
+    $r["enable"]=$db->Record["enable"];
     $r["type_desc"]=$db->Record["type_desc"];
+    $r["only_dns"]=$db->Record["only_dns"];
+    $r["web_action"]=$db->Record["web_action"];
     $db->free();
     return $r;
   } // get_sub_domain_all
@@ -737,6 +742,7 @@ class m_dom {
           $err->raise("dom",21);
         return false;
         }
+        return true;
         break;
       case 'IP': 
         if (checkip($value)) {return true;}
@@ -758,7 +764,7 @@ class m_dom {
   } //check_type_value
 
 
-  function can_create_subdomain($dom,$sub,$type) {
+  function can_create_subdomain($dom,$sub,$type,$value_old='') {
     global $db,$err,$cuid;
     $err->log("dom","can_create_subdomain",$dom."/".$sub);
 
@@ -768,7 +774,8 @@ class m_dom {
     $compatibility_lst = explode(",",$db->f('compatibility'));
 
     # Get the list of type of subdomains already here who have the same name
-    $db->query("select distinct type from sub_domaines where sub='$sub' and domaine='$dom';");
+    $db->query("select * from sub_domaines where sub='$sub' and domaine='$dom' and not (type='$type' and valeur='$value_old')");
+    #$db->query("select * from sub_domaines where sub='$sub' and domaine='$dom';");
     while ($db->next_record()) {
       # And if there is a domain with a incompatible type, return false
       if (! in_array(strtoupper($db->f('type')),$compatibility_lst)) return false;
@@ -828,7 +835,7 @@ class m_dom {
       return false;
     }
 
-    if (! $this->can_create_subdomain($dom,$sub,$type)) {
+    if (! $this->can_create_subdomain($dom,$sub,$type,$value_old)) {
       # TODO have a real error code
       $err->raise("dom", 654);
       return false;

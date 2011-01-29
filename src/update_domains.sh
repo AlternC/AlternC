@@ -42,8 +42,8 @@ $MYSQL_DO "update sub_domaines sd, domaines d set sd.web_action = 'DELETE' where
 
 # Sub_domaines we want to delete
 # sub_domaines.web_action = delete
-for sub in $( $MYSQL_DO "select if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine) from sub_domaines sd where web_action ='DELETE';") ; do
-    host_delete $sub
+for sub in $( $MYSQL_DO "select concat_ws('|µ',if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine),sd.type) from sub_domaines sd where web_action ='DELETE';") ; do
+    host_delete $(echo $sub|tr '|µ' ' ')
     # TODO Update the entry in the DB with the result and the action
 done
 
@@ -51,26 +51,24 @@ done
 # sub_domaines.web_action = update and sub_domains.only_dns = false
 params=$( $MYSQL_DO "
   select concat_ws('|µ',lower(sd.type), if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine), valeur) 
-  from sub_domaines sd, domaines_type dt
+  from sub_domaines sd
   where sd.web_action ='UPDATE'
-  and lower(sd.type) = lower(dt.name)
-  and dt.only_dns = false
   ;")
 for sub in $params;do
     host_create $(echo $sub|tr '|µ' ' ')
-    # TODO Update the entry in the DB with the result and the action
+    $MYSQL_DO "update sub_domaines sd set web_action='OK',web_result='$?' where concat_ws('|µ',lower(sd.type),if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine),valeur)='$sub'"
 done
 
 # Domaine to enable
-for sub in $( $MYSQL_DO "select if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine) from sub_domaines sd where sd.web_action ='ENABLE' ;");do
-    host_enable $sub
-    # TODO Update the entry in the DB with the result and the action
+for sub in $( $MYSQL_DO "select concat_ws('|µ',if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine),lower(sd.type)) from sub_domaines sd where sd.enable ='ENABLE' ;");do
+    host_enable $(echo $sub|tr '|µ' ' ')
+    $MYSQL_DO "update sub_domaines sd set enable='ENABLED' where concat_ws('|µ',if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine),lower(sd.type)) = '$sub';"
 done
 
 # Domains to disable
-for sub in $( $MYSQL_DO "select if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine) from sub_domaines sd where sd.web_action ='DISABLE' ;");do
-    host_disable $sub
-    # TODO Update the entry in the DB with the result and the action
+for sub in $( $MYSQL_DO "select concat_ws('|µ',if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine),lower(sd.type)) from sub_domaines sd where sd.enable ='DISABLE' ;");do
+    host_disable $(echo $sub|tr '|µ' ' ')
+    $MYSQL_DO "update sub_domaines sd set enable='DISABLED' where concat_ws('|µ',if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine),lower(sd.type)) = '$sub';"
 done
 
 # Domains we do not want to be the DNS serveur anymore :

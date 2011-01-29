@@ -93,9 +93,8 @@ dns_regenerate() {
     # Add the entry
     file=$(
         echo -e "$file"
-        $MYSQL_DO "select distinct replace(replace(dt.entry,'%TARGET%',sd.valeur), '%SUB%', if(length(sd.sub)>0,sd.sub,'@')) as entry from sub_domaines sd,domaines_type dt where sd.type=dt.name and sd.domaine='$domain' order by entry ;"
+        $MYSQL_DO "select distinct replace(replace(dt.entry,'%TARGET%',sd.valeur), '%SUB%', if(length(sd.sub)>0,sd.sub,'@')) as entry from sub_domaines sd,domaines_type dt where sd.type=dt.name and sd.domaine='$domain' and sd.enable in ('ENABLE', 'ENABLED') order by entry ;"
     )
-
 
     # Get some usefull vars
     local mx=$( $MYSQL_DO "select mx from domaines where domaine='$domain' limit 1;")

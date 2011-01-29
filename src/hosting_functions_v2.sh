@@ -113,6 +113,7 @@ host_change_enable() {
     fi
 
     local FQDN=$2
+    local TYPE=$3 # no use here, but one day, maybe... So here he is
     local USER=$(get_account_by_domain $FQDN)
     local user_letter=`print_user_letter "$USER"`
     local FENABLED="$VHOST_DIR/${user_letter}/$USER/$FQDN.conf"
