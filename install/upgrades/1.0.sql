@@ -27,6 +27,7 @@ INSERT IGNORE INTO `domaines_type` (name, description, target, entry, compatibil
 ('cname', 'cname entry', 'DOMAIN', '%SUB% CNAME %TARGET%', 'txt',true, true),
 ('txt', 'txt entry', 'TXT', '%SUB% IN TXT "%TARGET%"','local,url,ip,webmail,ipv6,cname,txt',true, true),
 ('mx', 'mx entry', 'IP', '%SUB% IN MX %TARGET%', 'local,url,ip,webmail,ipv6,cname,txt',true, false)
+('panel', 'Panel redirection', 'NONE', '%SUB% IN A @@PUBLIC_IP@@', 'local,url,ip,webmail,ipv6,cname,txt',true, false)
 ;
 
 -- Changing stanby use

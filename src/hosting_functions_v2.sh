@@ -7,7 +7,6 @@ HOSTING_DIR="/usr/lib/alternc/hosting_functions"
 
 HTML_HOME="$ALTERNC_LOC/html"
 VHOST_DIR="$ALTERNC_LOC/apache-vhost"
-VHOST_FILE="$VHOST_DIR/vhosts_all.conf"
 
 
 host_create() {
@@ -41,17 +40,17 @@ host_create() {
 
     # First, usefull vars. Some may be empty or false, it's
     # OK, it will be solve in the "case" below
-    local USER=$2
-    local FQDN=$3
-    local REDIRECT=$4   # Yes, TARGET_DIR and REDIRECT are the same
-    local TARGET_DIR=$4 # It's used by different template
+    local FQDN=$2
+    local REDIRECT=$3   # Yes, TARGET_DIR and REDIRECT are the same
+    local TARGET_DIR=$3 # It's used by different template
+    local USER=$(get_account_by_domain $FQDN)
     local user_letter=`print_user_letter "$USER"`
     local DOCUMENT_ROOT="${HTML_HOME}/${user_letter}/${USER}/$TARGET_DIR"
     local FILE_TARGET="$VHOST_DIR/${user_letter}/$USER/$FQDN.conf"
 
-
     # In case VTYPE don't have the same name as the template file, 
     # here we can define it
+    local TEMPLATE=''
     case $VTYPE in
 #      "example")
 #        TEMPLATE="$TEMPLATE_DIR/an-example.conf"
@@ -114,7 +113,7 @@ host_change_enable() {
     fi
 
     local FQDN=$2
-    local USER=`get_account_by_domain $FQDN`
+    local USER=$(get_account_by_domain $FQDN)
     local user_letter=`print_user_letter "$USER"`
     local FENABLED="$VHOST_DIR/${user_letter}/$USER/$FQDN.conf"
     local FDISABLED="$FENABLED-disabled"
@@ -166,5 +165,4 @@ host_delete() {
     [ -w "$FENABLED" ] && rm -f "$FENABLED"
     [ -w "$FDISABLED" ] && rm -f "$FDISABLED"
 }
-
 

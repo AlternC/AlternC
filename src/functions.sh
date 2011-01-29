@@ -5,7 +5,7 @@
 . /etc/alternc/local.sh
 
 # Init some other vars
-MYSQL_DO="mysql --defaults-file=/etc/alternc/my.cnf -Bs -e "
+MYSQL_DO="/usr/bin/mysql --defaults-file=/etc/alternc/my.cnf -Bs -e "
 DOMAIN_LOG_FILE="/var/log/alternc/update_domains.log"
 
 # Some usefull miscellaneous shell functions
@@ -27,16 +27,16 @@ print_user_letter() {
 # imprime le nom d'usager associé au domaine
 get_account_by_domain() {
     # les admintools ne sont peut-être pas là
-    if [ -x "/usr/bin/get_account_by_domain" ]
-    then
-        # only first field, only first line
-        /usr/bin/get_account_by_domain "$1"|head -1|awk '{ print $1;}'
-    else
+#    if [ -x "/usr/bin/get_account_by_domain" ]
+#    then
+#        # only first field, only first line
+#        /usr/bin/get_account_by_domain "$1"|head -1|awk '{ print $1;}'
+#    else
         # implantons localement ce que nous avons besoin, puisque admintools
         # n'est pas là
         $MYSQL_DO 'SELECT a.login FROM membres a, sub_domaines b WHERE a.uid = b.compte AND \
         CONCAT(IF(sub="", "", CONCAT(sub, ".")), domaine) = "'"$1"'" LIMIT 1;'
-    fi
+#    fi
 }
 
 log_error() {

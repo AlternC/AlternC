@@ -42,7 +42,7 @@ $MYSQL_DO "update sub_domaines sd, domaines d set sd.web_action = 'DELETE' where
 
 # Sub_domaines we want to delete
 # sub_domaines.web_action = delete
-for sub in $( $MYSQL_DO "select if (length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine) from sub_domaines sd where web_action ='DELETE';") ; do
+for sub in $( $MYSQL_DO "select if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine) from sub_domaines sd where web_action ='DELETE';") ; do
     echo $sub
     # TODO Do the conf
     # TODO Update the entry in the DB with the result and the action
@@ -50,8 +50,19 @@ done
 
 # Sub domaines we want to update
 # sub_domaines.web_action = update and sub_domains.only_dns = false
-# TODO do the conf
-# TODO Update the entry in the DB with the result and the action
+params=$( $MYSQL_DO "
+  select concat_ws('|µ',lower(sd.type), if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine), valeur) 
+  from sub_domaines sd, domaines_type dt
+  where sd.web_action ='UPDATE'
+  and lower(sd.type) = lower(dt.name)
+  and dt.only_dns = false
+  ;")
+for sub in $params;do
+    echo  host_create $(echo $sub|tr '|µ' ' ')
+    host_create $(echo $sub|tr '|µ' ' ')
+    # TODO Update the entry in the DB with the result and the action
+done
+unset IFS
 
 # Domains we do not want to be the DNS serveur anymore :
 # domaines.dns_action = UPDATE and domaines.gesdns = 0
