@@ -174,6 +174,16 @@ class m_dom {
     return true;
   }   
 
+  function sub_domain_change_status($domain,$sub,$type,$value,$status) {
+    global $db,$err,$cuid;
+    $err->log("dom","sub_domain_change_status");
+    $status=strtoupper($status);
+    if (! in_array($status,array('ENABLE', 'DISABLE'))) return false;
+
+    $db->query("update sub_domaines set enable='$status' where domaine='$domain' and sub='$sub' and lower(type)=lower('$type') and valeur='$value'");
+
+    return true;
+  } 
 
   /* ----------------------------------------------------------------- */
   /**
@@ -203,7 +213,7 @@ class m_dom {
     $db->query("UPDATE sub_domaines SET web_action='UPDATE'  WHERE domaine='$dom';");
     $db->query("UPDATE domaines SET dns_action='UPDATE'  WHERE domaine='$dom';");
 
-    # TODO : some work with domain sensitive classes
+    # TODO : some work with domain sensitive classes
 
     return true;
   }
@@ -836,7 +846,7 @@ class m_dom {
     }
 
     if (! $this->can_create_subdomain($dom,$sub,$type,$value_old)) {
-      # TODO have a real error code
+      # TODO have a real error code
       $err->raise("dom", 654);
       return false;
     }

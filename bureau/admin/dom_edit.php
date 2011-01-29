@@ -94,7 +94,7 @@ if ($r['dns_action']=='UPDATE') {?>
 		 gestion des sous-domaines
  -->
 <table class="tlist">
-<tr><th colspan="2"><?php __("Actions"); ?></th><th><?php __("Subdomain"); ?></th><th><?php __("Type");?></th><th><?php __("Place"); ?></th><th><?php __("Enable")?></th><th><?php __("Pending");?></tr>
+<tr><th colspan="2"><?php __("Actions"); ?></th><th><?php __("Subdomain"); ?></th><th><?php __("Type");?></th><th><?php __("Place"); ?></th><th><?php __("Status")?></th><th><?php __("Pending");?></tr>
 <?php
 $col=1;
 for($i=0;$i<$r["nsub"];$i++) {
@@ -114,12 +114,14 @@ for($i=0;$i<$r["nsub"];$i++) {
       switch ($r['sub'][$i]['enable']) {
         case 'ENABLED':
           __("Enabled");
+          echo "<br/><a href='dom_substatus.php?domain=".urlencode($r["name"])."&amp;sub=".urlencode($r["sub"][$i]["name"])."&amp;type=".urlencode($r["sub"][$i]["type"])."&amp;value=".urlencode($r["sub"][$i]['dest'])."&status=disable'>";__("Disable");echo "</a>";
           break;
         case 'ENABLE':
           __("Activation pending");
           break;
         case 'DISABLED':
           __("Disabled");
+          echo "<br/><a href='dom_substatus.php?domain=".urlencode($r["name"])."&amp;sub=".urlencode($r["sub"][$i]["name"])."&amp;type=".urlencode($r["sub"][$i]["type"])."&amp;value=".urlencode($r["sub"][$i]['dest'])."&status=enable'>";__("Enable");echo "</a>";
           break;
         case 'DISABLE':
           __("Desactivation pending");

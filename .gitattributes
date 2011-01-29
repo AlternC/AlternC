@@ -99,6 +99,7 @@ bureau/admin/dom_subdel.php -text
 bureau/admin/dom_subdodel.php -text
 bureau/admin/dom_subdoedit.php -text
 bureau/admin/dom_subedit.php -text
+bureau/admin/dom_substatus.php -text
 bureau/admin/domlist.php -text
 bureau/admin/foot.php -text
 bureau/admin/ftp_add.php -text
