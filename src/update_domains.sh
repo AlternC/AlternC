@@ -17,6 +17,7 @@ done
 # Some vars
 umask 022
 LOCK_FILE="$ALTERNC_LOC/bureau/cron.lock"
+B='µµ' # Strange letters to make split in query
 
 
 # Somes check before start operations
@@ -42,33 +43,33 @@ $MYSQL_DO "update sub_domaines sd, domaines d set sd.web_action = 'DELETE' where
 
 # Sub_domaines we want to delete
 # sub_domaines.web_action = delete
-for sub in $( $MYSQL_DO "select concat_ws('|µ',if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine),sd.type) from sub_domaines sd where web_action ='DELETE';") ; do
-    host_delete $(echo $sub|tr '|µ' ' ')
+for sub in $( $MYSQL_DO "select concat_ws('$B',if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine),sd.type) from sub_domaines sd where web_action ='DELETE';") ; do
+    host_delete $(echo $sub|tr "$B" ' ')
     # TODO Update the entry in the DB with the result and the action
 done
 
 # Sub domaines we want to update
 # sub_domaines.web_action = update and sub_domains.only_dns = false
 params=$( $MYSQL_DO "
-  select concat_ws('|µ',lower(sd.type), if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine), valeur) 
+  select concat_ws('$B',lower(sd.type), if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine), valeur) 
   from sub_domaines sd
   where sd.web_action ='UPDATE'
   ;")
 for sub in $params;do
-    host_create $(echo $sub|tr '|µ' ' ')
-    $MYSQL_DO "update sub_domaines sd set web_action='OK',web_result='$?' where concat_ws('|µ',lower(sd.type),if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine),valeur)='$sub'"
+    host_create $(echo $sub|tr "$B" ' ')
+    $MYSQL_DO "update sub_domaines sd set web_action='OK',web_result='$?' where concat_ws('$B',lower(sd.type),if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine),valeur)='$sub'"
 done
 
 # Domaine to enable
-for sub in $( $MYSQL_DO "select concat_ws('|µ',if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine),lower(sd.type)) from sub_domaines sd where sd.enable ='ENABLE' ;");do
-    host_enable $(echo $sub|tr '|µ' ' ')
-    $MYSQL_DO "update sub_domaines sd set enable='ENABLED' where concat_ws('|µ',if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine),lower(sd.type)) = '$sub';"
+for sub in $( $MYSQL_DO "select concat_ws('$B',if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine),lower(sd.type)) from sub_domaines sd where sd.enable ='ENABLE' ;");do
+    host_enable $(echo $sub|tr "$B" ' ')
+    $MYSQL_DO "update sub_domaines sd set enable='ENABLED' where concat_ws('$B',if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine),lower(sd.type)) = '$sub';"
 done
 
 # Domains to disable
-for sub in $( $MYSQL_DO "select concat_ws('|µ',if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine),lower(sd.type)) from sub_domaines sd where sd.enable ='DISABLE' ;");do
-    host_disable $(echo $sub|tr '|µ' ' ')
-    $MYSQL_DO "update sub_domaines sd set enable='DISABLED' where concat_ws('|µ',if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine),lower(sd.type)) = '$sub';"
+for sub in $( $MYSQL_DO "select concat_ws('$B',if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine),lower(sd.type)) from sub_domaines sd where sd.enable ='DISABLE' ;");do
+    host_disable $(echo $sub|tr "$B" ' ')
+    $MYSQL_DO "update sub_domaines sd set enable='DISABLED' where concat_ws('$B',if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine),lower(sd.type)) = '$sub';"
 done
 
 # Domains we do not want to be the DNS serveur anymore :
