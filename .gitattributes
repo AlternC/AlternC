@@ -26,6 +26,7 @@ bureau/admin/adm_doms.php -text
 bureau/admin/adm_domstype.php -text
 bureau/admin/adm_domstypedoedit.php -text
 bureau/admin/adm_domstypeedit.php -text
+bureau/admin/adm_domstyperegenerate.php -text
 bureau/admin/adm_donosu.php -text
 bureau/admin/adm_dorenew.php -text
 bureau/admin/adm_dosu.php -text

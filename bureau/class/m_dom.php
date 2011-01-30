@@ -130,6 +130,14 @@ class m_dom {
     }
   }
 
+  function domains_type_regenerate($name) {
+    global $db,$err,$cuid; 
+    $name=mysql_real_escape_string($name);
+    $db->query("update sub_domaines set web_action='UPDATE' where lower(type) = lower('$name') ;");
+    $db->query("update domaines d, sub_domaines sd set d.dns_action = 'UPDATE' where lower(sd.type)=lower('$name');");
+    return true;
+  }
+
   function domains_type_get($name) {
     global $db,$err,$cuid; 
     $name=mysql_real_escape_string($name);

@@ -61,6 +61,7 @@ include_once("head.php");
     <th><?php __("Only DNS ?");?></th>
     <th><?php __("Need to be DNS ?");?></th>
     <th><?php __("Edit");?></th>
+    <th/>
 </tr>
 <?php 
 $pair=0;
@@ -77,8 +78,7 @@ foreach($dom->domains_type_lst() as $d) {
     <td><?php echo $d['only_dns']?__("Yes"):__("No");?></td>
     <td><?php echo $d['need_dns']?__("Yes"):__("No");?></td>
     <td><div class="ina"><a href="adm_domstypeedit.php?name=<?php echo urlencode($d['name']); ?>"><img style="padding-bottom: 5px" src="images/edit.png" alt="<?php __("Edit"); ?>" /><?php __("Edit"); ?></a></div></td>
-
-    
+    <td><a href='adm_domstyperegenerate.php?name=<?php echo urlencode($d['name']);?>'><?php __("Regenerate");?></a></td> 
 </tr>
 <?php } // end foreach ?>
 
