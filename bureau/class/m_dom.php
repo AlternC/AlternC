@@ -664,7 +664,7 @@ class m_dom {
     $db->next_record();
     $r["nsub"]=$db->Record["cnt"];
     $db->free();
-    $db->query("select sd.*, dt.description as type_desc, dt.only_dns from sub_domaines sd, domaines_type dt where compte='$cuid' and domaine='$dom' and upper(dt.name)=upper(sd.type)");
+    $db->query("select sd.*, dt.description as type_desc, dt.only_dns from sub_domaines sd, domaines_type dt where compte='$cuid' and domaine='$dom' and upper(dt.name)=upper(sd.type) order by sd.sub,sd.type");
     // Pas de webmail, on le cochera si on le trouve.
     $this->webmail=0;
     for($i=0;$i<$r["nsub"];$i++) {
