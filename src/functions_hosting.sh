@@ -8,6 +8,26 @@ HOSTING_DIR="/usr/lib/alternc/hosting_functions"
 HTML_HOME="$ALTERNC_LOC/html"
 VHOST_DIR="$ALTERNC_LOC/apache-vhost"
 
+launch_hooks() {
+  local ACTION=$1
+
+  if [ ! $2 ] ; then
+    # If no VTYPE specified
+    return 0
+  fi
+
+  local VTYPE=$2
+
+  if [ -x "$HOSTING_DIR/hosting_$VTYPE.sh" ] ; then
+    # If a specific script exist for this VTYPE,
+    # we launch it, and return his return code
+    "$HOSTING_DIR/hosting_$VTYPE.sh" $@
+    return $?
+  fi
+
+  # No specific script, return 0
+  return 0
+}
 
 host_create() {
     # Function to create a vhost for a website
@@ -18,20 +38,12 @@ host_create() {
 
     local VTYPE="$1"
  
-    if [ -x "$HOSTING_DIR/hosting_$VTYPE.sh" ] ; then
-        # There is a script special for this type,
-        # I launch it and quit the host_create function
-        # (I precise to the script this is for a "enable" task)
-        "$HOSTING_DIR/hosting_$VTYPE.sh" "create" $@
-        local returnval=$?
-
-        # If the special script for this type exit with a code between
-        # 20 and 25, it means I have to continue like it didn't exist.
-        # It allow for example creation a script to exist only for deletion,
-        # or to do pre-inst or post-inst.
-        if [ $returnval -lt 20 ] || [ $returnval -gt 25 ] ; then
-            return
-        fi
+    launch_hooks "create" $@
+    if [ $? -gt 10 ] ; then
+      # If the hooks return a value > 10
+      # it's mean we do not continue the 
+      # "default" actions
+      return $?
     fi
     
     # There is no special script, I use the standart template
@@ -86,9 +98,17 @@ host_create() {
     mkdir -p "$(dirname "$FILE_TARGET")"
     mv -f "$TMP_FILE" "$FILE_TARGET"
 
-    # Execute post-install if there is some for this VTYPE
-    [ -x "$HOSTING_DIR/hosting_$VTYPE.sh" ] && "$HOSTING_DIR/hosting_$VTYPE.sh" "postint" $@
+    # Execute post-install hooks
+    launch_hooks "postinst" $@
+    if [ $? -gt 10 ] ; then
+      # If the hooks return a value > 10
+      # it's mean we do not continue the 
+      # "default" actions
+      return $?
+    fi
 
+    # All is quit, we return 0
+    return 0
 }
 
 host_disable() {
@@ -103,13 +123,13 @@ host_change_enable() {
     # Function to enable or disable a host
     local STATE=$1 
 
-    # If there is a VTYPE precised and a specific script exist
-    if [ $3 ] ; then 
-        local VTYPE=$3
-        if [ -x "$HOSTING_DIR/hosting_$VTYPE.sh" ] ; then
-            "$HOSTING_DIR/hosting_$VTYPE.sh" $@
-            return
-        fi
+    # Execute hooks
+    launch_hooks  $@
+    if [ $? -gt 10 ] ; then
+      # If the hooks return a value > 10
+      # it's mean we do not continue the 
+      # "default" actions
+      return $?
     fi
 
     local FQDN=$2
@@ -143,19 +163,13 @@ host_change_enable() {
 
 host_delete() {
     local FQDN=$1
-
-    # If there is a VTYPE precised and a specific script exist
-    if [ $2 ] ; then 
-        local VTYPE=$2
-        if [ -x "$HOSTING_DIR/hosting_$VTYPE.sh" ] ; then
-            "$HOSTING_DIR/hosting_$VTYPE.sh" "delete" $@
-            local returnval=$?
-            # If the exit value of the VTYPE script is between 20 and 25,
-            # continue the delete like it didn't exist
-            if [ $returnval -lt 20 ] || [ $returnval -gt 25 ] ; then
-                return
-            fi
-        fi
+    # Execute post-install hooks
+    launch_hooks "delete" $@
+    if [ $? -gt 10 ] ; then
+      # If the hooks return a value > 10
+      # it's mean we do not continue the 
+      # "default" actions
+      return $?
     fi
 
     local USER=`get_account_by_domain $FQDN`

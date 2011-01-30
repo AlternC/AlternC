@@ -4,8 +4,8 @@
 for CONFIG_FILE in \
       /etc/alternc/local.sh \
       /usr/lib/alternc/functions.sh \
-      /usr/lib/alternc/hosting_functions_v2.sh \
-      /usr/lib/alternc/dns.sh
+      /usr/lib/alternc/functions_hosting.sh \
+      /usr/lib/alternc/functions_dns.sh
   do
     if [ ! -r "$CONFIG_FILE" ]; then
         echo "Can't access $CONFIG_FILE."
@@ -106,10 +106,6 @@ if [ ! -w "$VHOST_FILE" ] ; then
 fi
 
 mv "$tempo" "$VHOST_FILE"
-
-echo Exitbefore reload everything, we are testing, FUCK
-rm "$LOCK_FILE"
-exit 1
 
 # Reload web and dns
 alternc_reload all
