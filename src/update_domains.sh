@@ -108,7 +108,7 @@ fi
 mv "$tempo" "$VHOST_FILE"
 
 # Reload web and dns
-alternc_reload all
+/usr/bin/alternc_reload all
 
 # TODO reload slaves
 
