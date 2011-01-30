@@ -154,22 +154,9 @@ CREATE TABLE IF NOT EXISTS domaines (
   gesdns int(1) NOT NULL default '1',
   gesmx int(1) NOT NULL default '1',
   noerase tinyint(4) NOT NULL default '0',
+  dns_action enum ('OK','UPDATE','DELETE') NOT NULL default 'UPDATE',
+  dns_result varchar(255) not null default '',
   PRIMARY KEY  (compte,domaine)
-) TYPE=MyISAM;
-
-#
-# Structure de la table `domaines_standby`
-#
-# Liste temporaire utilisée par le cron des domaines
-
-CREATE TABLE IF NOT EXISTS domaines_standby (
-  compte int(10) unsigned NOT NULL default '0',
-  domaine varchar(64) NOT NULL default '',
-  mx varchar(64) default NULL,
-  gesdns int(1) NOT NULL default '1',
-  gesmx int(1) NOT NULL default '1',
-  action int(1) NOT NULL default '0',
-  PRIMARY KEY  (compte,domaine,action)
 ) TYPE=MyISAM;
 
 #
@@ -267,24 +254,12 @@ CREATE TABLE IF NOT EXISTS sub_domaines (
   domaine varchar(64) NOT NULL default '',
   sub varchar(100) NOT NULL default '',
   valeur varchar(255) default NULL,
-  type varchar(30) NOT NULL default '0',
+  type varchar(30) NOT NULL default 'LOCAL',
+  web_action enum ('OK','UPDATE','DELETE') NOT NULL default 'UPDATE',
+  dns_result varchar(255) not null default '',
+  enable enum ('ENABLED', 'ENABLE', 'DISABLED', 'DISABLE') NOT NULL DEFAULT 'ENABLED',
   PRIMARY KEY  (compte,domaine,sub,type),
   FOREIGN KEY (type) REFERENCES (domaines_type)
-) TYPE=MyISAM;
-
-#
-# Structure de la table `sub_domaines_standby`
-#
-# Table temporaire des sous-domaines des membres utilisée par le cron
-
-CREATE TABLE IF NOT EXISTS sub_domaines_standby (
-  compte int(10) unsigned NOT NULL default '0',
-  domaine varchar(64) NOT NULL default '',
-  sub varchar(100) NOT NULL default '',
-  valeur varchar(255) default NULL,
-  type varchar(30) NOT NULL default '0',
-  action int(1) NOT NULL default '0',
-  PRIMARY KEY  (compte,domaine,sub,action,type)
 ) TYPE=MyISAM;
 
 #
@@ -504,3 +479,30 @@ VALUES (
 'subadmin_restriction', '', 
 'This variable set the way the account list works for accounts other than "admin" (2000). 0 (default) = admin other than admin/2000 can see their own account, but not the other one 1 = admin other than admin/2000 can see any account by clicking the ''show all accounts'' link. '
 );
+
+-- Domains type
+CREATE TABLE IF NOT EXISTS `domaines_type` (
+    `name` VARCHAR (255) NOT NULL, -- Uniq name
+    `description` TEXT, -- Human description
+    `target` enum ('NONE', 'URL', 'DIRECTORY', 'IP', 'IPV6', 'DOMAIN', 'TXT') NOT NULL DEFAULT 'NONE', -- Target type
+    `entry` VARCHAR (255) DEFAULT '', -- BIND entry
+    `compatibility` VARCHAR (255) DEFAULT '', -- Which type can be on the same subdomains
+    `enable` BOOLEAN DEFAULT TRUE, -- Show this options to the users ?
+    `only_dns` BOOLEAN DEFAULT FALSE, -- Update_domains modify just the dns, no web configuration
+    `need_dns` BOOLEAN DEFAULT TRUE, -- The server need to be the DNS to allow this service
+PRIMARY KEY ( `name` )
+) COMMENT = 'Type of domains allowed';
+
+INSERT IGNORE INTO `domaines_type` (name, description, target, entry, compatibility, only_dns, need_dns) values
+('local','Locally managed', 'DIRECTORY', '%SUB% IN A @@PUBLIC_IP@@', 'txt', false, false),
+('url','URL redirection', 'URL', '%SUB% IN A @@PUBLIC_IP@@','txt', true, true),
+('ip','IP redirection', 'IP', '%SUB% IN A %TARGET%','url,ip,ipv6,txt', false, true),
+('webmail', 'Webmail access', 'NONE', '%SUB% IN A @@PUBLIC_IP@@', 'txt', false, false),
+('ipv6','ipv6 address', 'IPV6', '%SUB% IN AAAA %TARGET%','ip,ipv6,webmail,txt',true, true),
+('cname', 'cname entry', 'DOMAIN', '%SUB% CNAME %TARGET%', 'txt',true, true),
+('txt', 'txt entry', 'TXT', '%SUB% IN TXT "%TARGET%"','local,url,ip,webmail,ipv6,cname,txt',true, true),
+('mx', 'mx entry', 'IP', '%SUB% IN MX %TARGET%', 'local,url,ip,webmail,ipv6,cname,txt',true, false)
+('panel', 'Panel redirection', 'NONE', '%SUB% IN A @@PUBLIC_IP@@', 'local,url,ip,webmail,ipv6,cname,txt',true, false)
+;
+
+
