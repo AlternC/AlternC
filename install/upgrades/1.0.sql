@@ -19,6 +19,7 @@ PRIMARY KEY ( `name` )
 ) COMMENT = 'Type of domains allowed';
 
 INSERT IGNORE INTO `domaines_type` (name, description, target, entry, compatibility, only_dns, need_dns) values
+('massvhost','Locally managed with Mass Virtual Hosting technologie', 'DIRECTORY', '%SUB% IN A @@PUBLIC_IP@@', 'txt', false, false),
 ('local','Locally managed', 'DIRECTORY', '%SUB% IN A @@PUBLIC_IP@@', 'txt', false, false),
 ('url','URL redirection', 'URL', '%SUB% IN A @@PUBLIC_IP@@','txt', true, true),
 ('ip','IP redirection', 'IP', '%SUB% IN A %TARGET%','url,ip,ipv6,txt', false, true),
@@ -40,7 +41,7 @@ alter table sub_domaines add column enable enum ('ENABLED', 'ENABLE', 'DISABLED'
 drop table sub_domaines_standby;
 drop table domaines_standby;
 
-update sub_domaines set type='LOCAL' where type='0';
+update sub_domaines set type='MASSVHOST' where type='0';
 update sub_domaines set type='URL' where type='1';
 update sub_domaines set type='IP' where type='2';
 update sub_domaines set type='WEBMAIL' where type='3';

@@ -3,7 +3,7 @@
 . /usr/lib/alternc/functions.sh
 
 TEMPLATE_DIR="/etc/alternc/templates/apache2"
-HOSTING_DIR="/usr/lib/alternc/hosting_functions"
+HOSTING_DIR="/etc/alternc/functions_hosting"
 
 HTML_HOME="$ALTERNC_LOC/html"
 VHOST_DIR="$ALTERNC_LOC/apache-vhost"
@@ -21,7 +21,7 @@ launch_hooks() {
   if [ -x "$HOSTING_DIR/hosting_$VTYPE.sh" ] ; then
     # If a specific script exist for this VTYPE,
     # we launch it, and return his return code
-    "$HOSTING_DIR/hosting_$VTYPE.sh" $@
+    "$HOSTING_DIR/hosting_$VTYPE.sh" "$1" "$2" "$3" "$4" 
     return $?
   fi
 
@@ -37,8 +37,8 @@ host_create() {
     # and the template file provided
 
     local VTYPE="$1"
- 
-    launch_hooks "create" $@
+
+    launch_hooks "create" "$1" "$2" "$3" "$4"
     if [ $? -gt 10 ] ; then
       # If the hooks return a value > 10
       # it's mean we do not continue the 
@@ -99,7 +99,7 @@ host_create() {
     mv -f "$TMP_FILE" "$FILE_TARGET"
 
     # Execute post-install hooks
-    launch_hooks "postinst" $@
+    launch_hooks "postinst" "$1" "$2" "$3" "$4"
     if [ $? -gt 10 ] ; then
       # If the hooks return a value > 10
       # it's mean we do not continue the 
@@ -112,11 +112,11 @@ host_create() {
 }
 
 host_disable() {
-    host_change_enable "disable" $@
+    host_change_enable "disable" "$1" "$2" "$3" "$4"
 }
 
 host_enable() {
-    host_change_enable "enable" $@
+    host_change_enable "enable" "$1" "$2" "$3" "$4"
 }
 
 host_change_enable() {
@@ -124,7 +124,7 @@ host_change_enable() {
     local STATE=$1 
 
     # Execute hooks
-    launch_hooks  $@
+    launch_hooks "$1" "$2" "$3" "$4"
     if [ $? -gt 10 ] ; then
       # If the hooks return a value > 10
       # it's mean we do not continue the 
@@ -132,8 +132,8 @@ host_change_enable() {
       return $?
     fi
 
-    local FQDN=$2
-    local TYPE=$3 # no use here, but one day, maybe... So here he is
+    local TYPE=$2 # no use here, but one day, maybe... So here he is
+    local FQDN=$3
     local USER=$(get_account_by_domain $FQDN)
     local user_letter=`print_user_letter "$USER"`
     local FENABLED="$VHOST_DIR/${user_letter}/$USER/$FQDN.conf"
@@ -164,7 +164,7 @@ host_change_enable() {
 host_delete() {
     local FQDN=$1
     # Execute post-install hooks
-    launch_hooks "delete" $@
+    launch_hooks "delete" "$1" "$2" "$3" "$4"
     if [ $? -gt 10 ] ; then
       # If the hooks return a value > 10
       # it's mean we do not continue the 

@@ -353,6 +353,7 @@ etc/alternc/apache-ssl.conf -text
 etc/alternc/apache.conf -text
 etc/alternc/apache2-ssl.conf -text
 etc/alternc/apache2.conf -text
+etc/alternc/functions_hosting/hosting_massvhost.sh -text
 etc/alternc/menulist.txt -text
 etc/alternc/phpmyadmin.inc.php -text
 etc/alternc/postfix-slave.cf -text

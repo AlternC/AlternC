@@ -6,6 +6,7 @@
 
 # Init some other vars
 MYSQL_DO="/usr/bin/mysql --defaults-file=/etc/alternc/my.cnf -Bs -e "
+mysql_query() { /usr/bin/mysql --defaults-file=/etc/alternc/my.cnf -Bs -e "$@" ; }
 DOMAIN_LOG_FILE="/var/log/alternc/update_domains.log"
 VHOST_FILE="$VHOST_DIR/vhosts_all.conf" 
 
@@ -35,7 +36,7 @@ get_account_by_domain() {
 #    else
         # implantons localement ce que nous avons besoin, puisque admintools
         # n'est pas là
-        $MYSQL_DO 'SELECT a.login FROM membres a, sub_domaines b WHERE a.uid = b.compte AND \
+        mysql_query 'SELECT a.login FROM membres a, sub_domaines b WHERE a.uid = b.compte AND \
         CONCAT(IF(sub="", "", CONCAT(sub, ".")), domaine) = "'"$1"'" LIMIT 1;'
 #    fi
 }
