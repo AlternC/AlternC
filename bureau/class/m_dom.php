@@ -782,7 +782,7 @@ class m_dom {
   } //check_type_value
 
 
-  function can_create_subdomain($dom,$sub,$type,$value_old='') {
+  function can_create_subdomain($dom,$sub,$type,$type_old='', $value_old='') {
     global $db,$err,$cuid;
     $err->log("dom","can_create_subdomain",$dom."/".$sub);
 
@@ -792,7 +792,7 @@ class m_dom {
     $compatibility_lst = explode(",",$db->f('compatibility'));
 
     # Get the list of type of subdomains already here who have the same name
-    $db->query("select * from sub_domaines where sub='$sub' and domaine='$dom' and not (type='$type' and valeur='$value_old') and web_action != 'DELETE'");
+    $db->query("select * from sub_domaines where sub='$sub' and domaine='$dom' and not (type='$type_old' and valeur='$value_old') and web_action != 'DELETE'");
     #$db->query("select * from sub_domaines where sub='$sub' and domaine='$dom';");
     while ($db->next_record()) {
       # And if there is a domain with a incompatible type, return false
@@ -853,7 +853,7 @@ class m_dom {
       return false;
     }
 
-    if (! $this->can_create_subdomain($dom,$sub,$type,$value_old)) {
+    if (! $this->can_create_subdomain($dom,$sub,$type,$type_old,$value_old)) {
       # TODO have a real error code
       $err->raise("dom", 654);
       return false;
