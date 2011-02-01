@@ -35,7 +35,7 @@ INSERT IGNORE INTO `domaines_type` (name, description, target, entry, compatibil
 alter table domaines add column dns_action enum ('OK','UPDATE','DELETE') NOT NULL default 'UPDATE';
 alter table domaines add column dns_result varchar(255) not null default '';
 alter table sub_domaines add column web_action enum ('OK','UPDATE','DELETE') NOT NULL default 'UPDATE';
-alter table sub_domaines add column dns_result varchar(255) not null default '';
+alter table sub_domaines add column web_result varchar(255) not null default '';
 alter table sub_domaines add column enable enum ('ENABLED', 'ENABLE', 'DISABLED', 'DISABLE') NOT NULL DEFAULT 'ENABLED';
 drop table sub_domaines_standby;
 drop table domaines_standby;

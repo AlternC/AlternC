@@ -40,6 +40,7 @@ $dom->unlock();
     <?php foreach($dom->domains_type_lst() as $dt) { 
         if (! $dt['enable']) continue;
         if ( (! $r['dns'] ) and ($dt['need_dns']) ) continue;
+        //if ( strtoupper($type)!=strtoupper($dt['name']) ) continue;
         $targval=(strtoupper($type)==strtoupper($dt['name']))?$sd['dest']:'';
     ?>
     <tr>

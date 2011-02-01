@@ -792,7 +792,7 @@ class m_dom {
     $compatibility_lst = explode(",",$db->f('compatibility'));
 
     # Get the list of type of subdomains already here who have the same name
-    $db->query("select * from sub_domaines where sub='$sub' and domaine='$dom' and not (type='$type' and valeur='$value_old')");
+    $db->query("select * from sub_domaines where sub='$sub' and domaine='$dom' and not (type='$type' and valeur='$value_old') and web_action != 'DELETE'");
     #$db->query("select * from sub_domaines where sub='$sub' and domaine='$dom';");
     while ($db->next_record()) {
       # And if there is a domain with a incompatible type, return false
@@ -860,7 +860,7 @@ class m_dom {
     }
 
     if (! is_null($type_old )) { // It's not a creation, it's an edit. Delete the old one
-      $db->query("delete from sub_domaines where domaine='$dom' and sub='$sub' and upper(type)=upper('$type_old') and valeur='$value_old';");
+      $db->query("update sub_domaines set web_action='DELETE' where domaine='$dom' and sub='$sub' and upper(type)=upper('$type_old') and valeur='$value_old';");
     }
 
     // Re-create the one we want
