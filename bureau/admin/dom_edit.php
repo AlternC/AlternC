@@ -101,31 +101,35 @@ for($i=0;$i<$r["nsub"];$i++) {
 	$col=3-$col;
 ?>
 	<tr class="lst<?php echo $col; ?>">
+    <?php if ( $r['sub'][$i]['web_action'] =='DELETE') { echo "<td colspan=2 />"; } else { ?>
 		<td class="center">
 			<div class="ina"><a href="dom_subedit.php?domain=<?php echo urlencode($r["name"]) ?>&amp;sub=<?php  echo urlencode($r["sub"][$i]["name"]) ?>&amp;type=<?php  echo urlencode($r["sub"][$i]["type"]) ?>&amp;value=<?php echo urlencode($r["sub"][$i]['dest'])?>"><img src="images/edit.png" alt="<?php __("Edit"); ?>" /><?php __("Edit"); ?></a></div>
 
 			</td><td class="center">
 			<div class="ina"><a href="dom_subdel.php?domain=<?php echo urlencode($r["name"]) ?>&amp;sub=<?php  echo urlencode($r["sub"][$i]["name"]) ?>&amp;type=<?php  echo urlencode($r["sub"][$i]["type"]) ?>&amp;value=<?php echo urlencode($r["sub"][$i]['dest'])?>"><img src="images/delete.png" alt="<?php __("Delete"); ?>" /><?php __("Delete"); ?></a></div>
 		</td>
+    <?php } // end IF ==DELETE ?>
 		<td><a href="http://<?php ecif($r["sub"][$i]["name"],$r["sub"][$i]["name"]."."); echo $r["name"] ?>" target="_blank"><?php ecif($r["sub"][$i]["name"],$r["sub"][$i]["name"]."."); echo $r["name"] ?></a></td>
 		<td><?php __($r['sub'][$i]['type_desc']);?></td>
 		<td><?php echo $r["sub"][$i]['type'] === 'LOCAL' ? '<a href="bro_main.php?R='.urlencode($r["sub"][$i]["dest"]).'">'.htmlspecialchars($r["sub"][$i]["dest"]).'</a>' : htmlspecialchars($r["sub"][$i]["dest"]); ?>&nbsp;</td>
 		<td><?php 
-      switch ($r['sub'][$i]['enable']) {
-        case 'ENABLED':
-          __("Enabled");
-          echo "<br/><a href='dom_substatus.php?domain=".urlencode($r["name"])."&amp;sub=".urlencode($r["sub"][$i]["name"])."&amp;type=".urlencode($r["sub"][$i]["type"])."&amp;value=".urlencode($r["sub"][$i]['dest'])."&status=disable'>";__("Disable");echo "</a>";
-          break;
-        case 'ENABLE':
-          __("Activation pending");
-          break;
-        case 'DISABLED':
-          __("Disabled");
-          echo "<br/><a href='dom_substatus.php?domain=".urlencode($r["name"])."&amp;sub=".urlencode($r["sub"][$i]["name"])."&amp;type=".urlencode($r["sub"][$i]["type"])."&amp;value=".urlencode($r["sub"][$i]['dest'])."&status=enable'>";__("Enable");echo "</a>";
-          break;
-        case 'DISABLE':
-          __("Desactivation pending");
-          break;
+      if ( $r['sub'][$i]['web_action'] !='DELETE') { 
+        switch ($r['sub'][$i]['enable']) {
+          case 'ENABLED':
+            __("Enabled");
+            echo "<br/><a href='dom_substatus.php?domain=".urlencode($r["name"])."&amp;sub=".urlencode($r["sub"][$i]["name"])."&amp;type=".urlencode($r["sub"][$i]["type"])."&amp;value=".urlencode($r["sub"][$i]['dest'])."&status=disable'>";__("Disable");echo "</a>";
+            break;
+          case 'ENABLE':
+            __("Activation pending");
+            break;
+          case 'DISABLED':
+            __("Disabled");
+            echo "<br/><a href='dom_substatus.php?domain=".urlencode($r["name"])."&amp;sub=".urlencode($r["sub"][$i]["name"])."&amp;type=".urlencode($r["sub"][$i]["type"])."&amp;value=".urlencode($r["sub"][$i]['dest'])."&status=enable'>";__("Enable");echo "</a>";
+            break;
+          case 'DISABLE':
+            __("Desactivation pending");
+            break;
+        }
       }?></td>
 		<td><?php 
       switch ($r['sub'][$i]['web_action']) {
