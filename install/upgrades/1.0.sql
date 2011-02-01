@@ -49,3 +49,8 @@ update sub_domaines set type='IPV6' where type='4';
 update sub_domaines set type='CNAME' where type='5';
 update sub_domaines set type='TXT' where type='6';
 
+-- If people want to stop using mass virtual hosting and use only virtual hosting :
+-- insert into sub_domaines (compte, domaine, sub, valeur, type,web_action) select compte, domaine, sub, valeur, 'local', 'UPDATE' 
+-- from sub_domaines where lower(type)='massvhost'; 
+-- update sub_domaines set web_action = 'DELETE' where lower(type)='massvhost';
+
