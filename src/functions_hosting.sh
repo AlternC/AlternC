@@ -92,7 +92,7 @@ host_create() {
     # Check if all is right in the conf file
     # If not, put a debug message
     local ISNOTGOOD=$(grep "%%" "$TMP_FILE") 
-    [ "$ISNOTGOOD" ] && (echo "# There was a probleme in the generation : $ISNOTGOOD" > "$TMP_FILE" )
+    [ "$ISNOTGOOD" ] && (echo "# There was a probleme in the generation : $ISNOTGOOD" > "$TMP_FILE" ; return 44 )
 
     # Put the conf file in prod
     mkdir -p "$(dirname "$FILE_TARGET")"

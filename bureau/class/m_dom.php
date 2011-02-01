@@ -900,7 +900,7 @@ class m_dom {
       return false;
     } else {
       // OK, on valide :
-      $db->query("delete from sub_domaines where domaine='$dom' and sub='$sub' and type='$type' and ( length('$value')=0 or valeur='$value') ");
+      $db->query("update sub_domaines set web_action='DELETE' where domaine='$dom' and sub='$sub' and type='$type' and ( length('$value')=0 or valeur='$value') ");
       $db->query("update domaines set dns_action='UPDATE' where domaine='$dom';");
     }
     return true;

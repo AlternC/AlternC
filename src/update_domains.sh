@@ -41,14 +41,14 @@ touch "$LOCK_FILE"
 # set sub_domaines.web_action = delete where domaines.dns_action = DELETE
 $MYSQL_DO "update sub_domaines sd, domaines d set sd.web_action = 'DELETE' where sd.domaine = d.domaine and sd.compte=d.compte and d.dns_action = 'DELETE';"
 
-# Sub_domaines we want to delete
+# Sub_domaines we want to delete
 # sub_domaines.web_action = delete
 for sub in $( $MYSQL_DO "select concat_ws('$B',if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine),sd.type) from sub_domaines sd where web_action ='DELETE';") ; do
     host_delete $(echo $sub|tr "$B" ' ')
-    # TODO Update the entry in the DB with the result and the action
+    $MYSQL_DO "delete from sub_domaines where concat_ws('$B',if(length(sub)>0,concat_ws('.',sub,domaine),domaine),type) = '$sub' and web_action ='DELETE';"
 done
 
-# Sub domaines we want to update
+# Sub domaines we want to update
 # sub_domaines.web_action = update and sub_domains.only_dns = false
 params=$( $MYSQL_DO "
   select concat_ws('$B',lower(sd.type), if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine), valeur) 
@@ -90,7 +90,7 @@ done
 # domaines.dns_action = DELETE
 for dom in $( $MYSQL_DO "select domaine from domaines where dns_action = 'DELETE';") ; do
     dns_delete $dom
-    # Web configurations have already bean cleaned previously
+    # Web configurations have already bean cleaned previously
     $MYSQL_DO "delete sub_domaines where domaine='$dom'; delete domaines where domaine='$dom';"
 done
 
