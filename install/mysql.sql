@@ -258,8 +258,8 @@ CREATE TABLE IF NOT EXISTS sub_domaines (
   web_action enum ('OK','UPDATE','DELETE') NOT NULL default 'UPDATE',
   dns_result varchar(255) not null default '',
   enable enum ('ENABLED', 'ENABLE', 'DISABLED', 'DISABLE') NOT NULL DEFAULT 'ENABLED',
-  PRIMARY KEY  (compte,domaine,sub,type),
-  FOREIGN KEY (type) REFERENCES (domaines_type)
+  PRIMARY KEY  (compte,domaine,sub,type)
+--  ,FOREIGN KEY (type) REFERENCES (domaines_type)
 ) TYPE=MyISAM;
 
 #
@@ -501,7 +501,7 @@ INSERT IGNORE INTO `domaines_type` (name, description, target, entry, compatibil
 ('ipv6','ipv6 address', 'IPV6', '%SUB% IN AAAA %TARGET%','ip,ipv6,webmail,txt',true, true),
 ('cname', 'cname entry', 'DOMAIN', '%SUB% CNAME %TARGET%', 'txt',true, true),
 ('txt', 'txt entry', 'TXT', '%SUB% IN TXT "%TARGET%"','local,url,ip,webmail,ipv6,cname,txt',true, true),
-('mx', 'mx entry', 'IP', '%SUB% IN MX %TARGET%', 'local,url,ip,webmail,ipv6,cname,txt',true, false)
+('mx', 'mx entry', 'IP', '%SUB% IN MX %TARGET%', 'local,url,ip,webmail,ipv6,cname,txt',true, false),
 ('panel', 'Panel redirection', 'NONE', '%SUB% IN A @@PUBLIC_IP@@', 'local,url,ip,webmail,ipv6,cname,txt',true, false)
 ;
 
