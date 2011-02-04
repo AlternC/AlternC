@@ -17,6 +17,8 @@ alternc: non-standard-executable-perm usr/lib/alternc/rawstat.daily 0750 != 0755
 alternc: non-standard-executable-perm usr/lib/alternc/quota_init 0750 != 0755
 alternc: non-standard-executable-perm usr/lib/alternc/quota_delete 0750 != 0755
 alternc: non-standard-executable-perm usr/lib/alternc/update_domains.sh 0750 != 0755
+alternc: non-standard-executable-perm usr/lib/alternc/functions_hosting.sh 0750 != 0755
+alternc: non-standard-executable-perm usr/lib/alternc/functions_dns.sh 0750 != 0755
 alternc: non-standard-executable-perm usr/lib/alternc/slave_dns 0750 != 0755
 alternc: non-standard-executable-perm usr/lib/alternc/sendmail 0750 != 0755
 alternc: non-standard-executable-perm usr/lib/alternc/spoolsize.php 0750 != 0755
@@ -35,13 +37,11 @@ alternc: executable-is-not-world-readable usr/lib/alternc/sqlbackup.sh 0750 != 0
 alternc: executable-is-not-world-readable usr/lib/alternc/quota_get 4750
 alternc: executable-is-not-world-readable usr/lib/alternc/slave_dns 0750 != 0755
 alternc: executable-is-not-world-readable usr/lib/alternc/update_domains.sh 0750 != 0755
+alternc: executable-is-not-world-readable usr/lib/alternc/functions_hosting.sh 0750 != 0755
+alternc: executable-is-not-world-readable usr/lib/alternc/functions_dns.sh 0750 != 0755
 alternc: executable-is-not-world-readable usr/lib/alternc/du.pl 4750
 alternc: executable-is-not-world-readable usr/lib/alternc/quota_init 0750 != 0755
 alternc: executable-is-not-world-readable usr/lib/alternc/basedir_prot.sh 0750 != 0755
 alternc: executable-is-not-world-readable usr/lib/alternc/spoolsize.php 0750 != 0755
 alternc: executable-is-not-world-readable usr/lib/alternc/rawstat.daily 0750 != 0755
-alternc: executable-is-not-world-readable usr/lib/alternc/hosting_functions/hosting_panel.sh 0750 != 0755
-alternc: executable-is-not-world-readable usr/lib/alternc/hosting_functions/hosting_redirect.sh 0750 != 0755
-alternc: executable-is-not-world-readable usr/lib/alternc/hosting_functions/hosting_vhost.sh 0750 != 0755
-alternc: executable-is-not-world-readable usr/lib/alternc/hosting_functions/hosting_webmail.sh 0750 != 0755
 alternc: using-first-person-in-templates alternc/monitor_ip
