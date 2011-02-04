@@ -458,10 +458,6 @@ class m_dom {
     case "name":
       $egal="domain = ";
       break;
-    default:
-      $err->raise("dom",7);
-      return false;
-      break;
     }
     // pour ajouter un nouveau TLD, utiliser le code ci-dessous.
     //	echo "serveur : $serveur <br />";
