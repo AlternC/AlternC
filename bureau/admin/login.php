@@ -28,18 +28,6 @@
  ----------------------------------------------------------------------
 */
 
-// For people who want to authenticate with HTTP AUTH
-if (isset($_GET['http_auth'])) $http_auth=strval($_GET['http_auth']);
-if ($http_auth) {
-    if (empty($_SERVER['PHP_AUTH_USER']) || empty($_SERVER['PHP_AUTH_PW'])) {
-        header('WWW-Authenticate: Basic realm="Test Authentication System"');
-        header('HTTP/1.0 401 Unauthorized');
-    } else {
-        // Gruiiik
-        $_REQUEST["username"]=$_SERVER['PHP_AUTH_USER'];
-        $_REQUEST["password"]=$_SERVER['PHP_AUTH_PW'];
-    }
-}
 
 require_once("../class/config.php");
 
