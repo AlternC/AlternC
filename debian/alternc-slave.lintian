@@ -24,4 +24,6 @@ alternc-slave: executable-is-not-world-readable usr/lib/alternc/slave_dns 0750 !
 alternc-slave: executable-is-not-world-readable usr/lib/alternc/spoolsize.php 0750 != 0755
 alternc-slave: executable-is-not-world-readable usr/lib/alternc/sqlbackup.sh 0750 != 0755
 alternc-slave: executable-is-not-world-readable usr/lib/alternc/update_domains.sh 0750 != 0755
+alternc-slave: executable-is-not-world-readable usr/lib/alternc/functions_hosting.sh 0750 != 0755
+alternc-slave: executable-is-not-world-readable usr/lib/alternc/functions_dns.sh 0750 != 0755
 alternc-slave: non-standard-dir-in-var var/backups/
