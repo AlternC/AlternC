@@ -1,6 +1,6 @@
 <?php
 /*
- $Id: mail_edit.php,v 1.6 2006/01/12 01:10:48 anarcat Exp $
+ $Id: adm_domstypeedit.php,v 1.6 2006/01/12 01:10:48 anarcat Exp $
  ----------------------------------------------------------------------
  AlternC - Web Hosting System
  Copyright (C) 2002 by the AlternC Development Team.
@@ -23,8 +23,8 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file: Benjamin Sonntag
- Purpose of file: Edit a mailbox.
+ Original Author of file: Alan Garcia
+ Purpose of file: Edit the domain types
  ----------------------------------------------------------------------
 */
 require_once("../class/config.php");
@@ -54,7 +54,7 @@ if (! $d=$dom->domains_type_get($name)) {
 } else {
 ?>
 
-<h3><?php __("Edit a domains type"); ?> </h3>
+<h3><?php __("Edit a domain type"); ?> </h3>
 <hr id="topbar"/>
 <br />
 <?php
@@ -67,12 +67,16 @@ if ($error_edit) {
 <form action="adm_domstypedoedit.php" method="post" name="main" id="main">
     <input type="hidden" name="name" value="<?php echo $d['name']; ?>" />
     <table class="tedit">
-	    <tr>
+      <tr>
+            <th><?php __("Name");?></th>
+	    <td><b><?php echo $d["name"]; ?></b></td>
+      </tr>
+      <tr>
             <th><?php __("Description");?></th>
-            <td><input name="description" type=text size="30" value="<?php echo $d['description']; ?>" /></td>
+            <td><input name="description" type="text" size="30" value="<?php echo $d['description']; ?>" /></td>
       </tr>
 	    <tr>
-            <th><?php __("Target");?></th>
+            <th><?php __("Target type");?></th>
             <td>
               <select name="target">
                 <?php foreach ($dom->domains_type_target_values() as $k) { ?>
@@ -80,33 +84,36 @@ if ($error_edit) {
                 <?php } ?>
               </select>
             </td>
-        </tr>
+      </tr>
 	    <tr>
             <th><?php __("Entry");?></th>
-            <td><input name="entry" type=text size="30" value="<?php echo $d['entry']; ?>" /></td>
+            <td><input name="entry" type="text" size="30" value="<?php echo $d['entry']; ?>" /></td>
       </tr>
 	    <tr>
-            <th><?php __("Compatibility");?></th>
-            <td><input name="compatibility" type=text size="15" value="<?php echo $d['compatibility']; ?>" /></td>
+	<th><?php __("Compatibility");?><br /><small><?php __("Enter comma-separated name of other types"); ?></small></th>
+            <td><input name="compatibility" type="text" size="15" value="<?php echo $d['compatibility']; ?>" /></td>
       </tr>
 	    <tr>
-            <th><?php __("Enable");?></th>
-            <td><input name="enable" type=checkbox value="1" <?php cbox($d['enable']); ?> /></td>
+            <th><?php __("Enabled");?></th>
+            <td><input name="enable" type="checkbox" value="1" <?php cbox($d['enable']); ?> /></td>
       </tr>
 	    <tr>
             <th><?php __("Do only a DNS entry");?></th>
-            <td><input name="only_dns" type=checkbox value="1" <?php cbox($d['only_dns']); ?> /></td>
+            <td><input name="only_dns" type="checkbox" value="1" <?php cbox($d['only_dns']); ?> /></td>
       </tr>
 	    <tr>
-            <th><?php __("Need to be the DNS");?></th>
-            <td><input name="need_dns" type=checkbox value="1" <?php cbox($d['need_dns']); ?> /></td>
+            <th><?php __("Domain must have our DNS");?></th>
+            <td><input name="need_dns" type="checkbox" value="1" <?php cbox($d['need_dns']); ?> /></td>
       </tr>
       <tr class="trbtn">
           <td colspan="2">
-             <input type="submit" class="inb" name="submit" value="<?php __("Change this domains type"); ?>" />
+             <input type="submit" class="inb" name="submit" value="<?php __("Change this domain type"); ?>" />
+	    <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='adm_domstype.php'"/>
           </td>
         </tr>
 </table>
 </form>
 
 <?php } ?>
+
+<?php include_once("foot.php"); ?>

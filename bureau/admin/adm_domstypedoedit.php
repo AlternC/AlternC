@@ -9,7 +9,7 @@ if (!$admin->enabled) {
 if ( ! $dom->domains_type_update($name, $description, $target, $entry, $compatibility, $enable, $only_dns, $need_dns) ) {
     die($err->errstr());
 } else {
-include("adm_domstype.php");
+    include("adm_domstype.php");
 }
 
 ?>

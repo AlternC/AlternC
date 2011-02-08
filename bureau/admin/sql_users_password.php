@@ -61,8 +61,8 @@ $r=$mysql->get_user_dblist($id);
   </tr>
   <tr>
     <td>
+      <input type="submit" class="inb" value="<?php __("Change user password"); ?>" />
       <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='sql_users_list.php'"/>
-      <input type="submit" class="inb" value="<?php __("Confirm"); ?>" />
     </td>
   </tr>
 </table>

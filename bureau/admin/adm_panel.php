@@ -52,7 +52,6 @@ include_once("head.php");
  <li class="lst2"><a href="adm_passpolicy.php"><?php __("Password Policies"); ?></a></li>
  <li class="lst1"><a href="adm_doms.php"><?php __("Manage installed domains"); ?></a></li>
  <li class="lst2"><a href="adm_defquotas.php"><?php __("Change the default quotas"); ?></a></li>
- <li class="lst1"><a href="adm_dnsweberror.php"><?php __("DNS and website in error"); ?></a></li>
 </ul>
 
 
@@ -64,6 +63,7 @@ include_once("head.php");
  <li class="lst2"><a href="adm_mxaccount.php"><?php __("Manage allowed accounts for secondary mx"); ?></a></li>
  <li class="lst1"><a href="adm_variables.php"><?php __("Configure AlternC variables"); ?></a></li>
  <li class="lst2"><a href="adm_domstype.php"><?php __("Manage domains type"); ?></a></li>
+ <li class="lst1"><a href="adm_dnsweberror.php"><?php __("DNS and website having errors"); ?></a></li>
 <!--  <li class="lst2"><a href="stats_members.php"><?php __("Account creation statistics"); ?></a></li> -->
 </ul>
 

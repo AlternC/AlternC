@@ -12,12 +12,10 @@ getFields($fields);
 
 
 if (empty($name) || (! $dom->domains_type_regenerate($name)) ) {
-    die($err->errstr());
+  die($err->errstr());
 } else {
-
-$error="Regenerate pending"; 
-
-include("adm_domstype.php");
+  $error="Regenerate pending"; 
+  include("adm_domstype.php");
 }
 
 ?>

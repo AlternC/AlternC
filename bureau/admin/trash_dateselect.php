@@ -24,30 +24,27 @@
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
  Original Author of file: Alan Garcia
- Purpose of file:
+ Purpose of file: Show the date selection form for temporary emails
  ----------------------------------------------------------------------
 */
 require_once("../class/config.php");
 ?>
-<script src="js/jquery.min.js" type="text/javascript"></script>
-<script src="js/jquery_ui/js/jquery-ui-1.8.6.custom.min.js" type="text/javascript"></script>
-<link href="js/jquery_ui/css/smoothness/jquery-ui-1.8.6.custom.css" rel="stylesheet" type="text/css"/>
 
 <div id="trash_expire_picker">
     <table>
         <tbody>
             <tr>
                 <td>
-                    <input type="radio" name="trash_type_expiration" value="no_exp" id="no_exp" checked onclick="trash_exp_none();">
+                    <input type="radio" name="trash_type_expiration" value="no_exp" id="no_exp" checked="checked" onclick="trash_exp_none();">
                 </td><td>
-                    <label for="no_exp"><?php echo __("No expiration date"); ?></label>
+                    <label for="no_exp"><?php echo __("No auto-deletion date"); ?></label>
                 </td>
             </tr>
             <tr>
-                <td valign=top>
+                <td valign="top">
                     <input type="radio" name="trash_type_expiration" value="trash_in_x" id="trash_in_x" onclick="trash_exp_in_activate();"> 
                 </td><td>
-                    <label for="trash_in_x"><?php __('You want it to expire in');?></label><br/>
+                    <label for="trash_in_x"><?php __('You want it to be deleted in');?></label><br/>
                     <select id="trash_exp_in_value" name="trash_exp_in_value" >
                         <?php for($i=1;$i<=30;$i++) { ?>
                             <option value="<?php echo $i;?>" <?php echo $i==7?'selected="selected"':"" ;?>><?php echo $i;?></option>
@@ -63,8 +60,8 @@ require_once("../class/config.php");
                 <td valign=top>
                     <input type="radio" name="trash_type_expiration" value="trash_at_x" id="trash_at_x" onclick="trash_exp_at_activate();"> 
                 </td><td>
-                    <label for="trash_at_x"><?php __('Pick up the date and time you want,<br/>or enter it with the format DD/MM/YYYY');?></label><br/>
-                    <input id="trash_datepicker" name="trash_datepicker" type="text" size=10 value="<?php echo strftime("%d/%m/%Y",mktime() + (3600*24*7));?>" />
+                    <label for="trash_at_x"><?php __('Delete this email the following day,<br/>enter the date using DD/MM/YYYY format');?></label><br/>
+                    <input id="trash_datepicker" name="trash_datepicker" type="text" size="10" value="<?php echo strftime("%d/%m/%Y",mktime() + (3600*24*7));?>" />
                 </td>
             </tr>
         </tbody>

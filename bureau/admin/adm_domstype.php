@@ -23,8 +23,8 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file: Benjamin Sonntag
- Purpose of file: Manage allowed TLD on the server
+ Original Author of file: Alan Garcia
+ Purpose of file: Manage domain types on the server 
  ----------------------------------------------------------------------
 */
 require_once("../class/config.php");
@@ -39,6 +39,8 @@ include_once("head.php");
 ?>
 <h3><?php __("Manage domains type"); ?></h3>
 <hr id="topbar" />
+  <p><?php __("If you don't know what this page is about, don't touch anything, and read AlternC documentation about domain types"); ?></p>
+
 <br />
 <?php
 	if ($error) {
@@ -47,20 +49,20 @@ include_once("head.php");
 
 ?>
 <p>
-<?php __("Here is the list of the domains type."); ?>
+<?php __("Here is the list of domain types."); ?>
 </p>
-<p><span class="ina"><a href="adm_domstypeadd.php"><?php __("Add a new domains type"); ?></a></span></p>
+<p><span class="ina"><a href="adm_domstypeadd.php"><?php __("Create a domain type"); ?></a></span></p>
 <table class="tlist">
 <tr>
+    <th colspan="2"> </th>
     <th><?php __("Name");?></th>
     <th><?php __("Description");?></th>
     <th><?php __("Target");?></th>
     <th><?php __("Entry");?></th>
-    <th><?php __("Compatibility");?></th>
-    <th><?php __("Enabled ?");?></th>
-    <th><?php __("Only DNS ?");?></th>
-    <th><?php __("Need to be DNS ?");?></th>
-    <th><?php __("Edit");?></th>
+    <th><?php __("Compatible with");?><br /><small><?php __("Enter comma-separated name of other types"); ?></small></th>
+    <th><?php __("Enabled?");?></th>
+    <th><?php __("Only DNS?");?></th>
+    <th><?php __("Need to be DNS?");?></th>
     <th/>
 </tr>
 <?php 
@@ -69,6 +71,8 @@ foreach($dom->domains_type_lst() as $d) {
 ++$pair;
 ?>
 <tr class="lst<?php echo $pair%2+1 ?>">
+    <td><div class="ina"><a href="adm_domstypeedit.php?name=<?php echo urlencode($d['name']); ?>"><img style="padding-bottom: 5px" src="images/edit.png" alt="<?php __("Edit"); ?>" /><?php __("Edit"); ?></a></div></td>
+    <td><div class="ina"><a href="adm_domstyperegenerate.php?name=<?php echo urlencode($d['name']);?>"><?php __("Regenerate");?></a></div></td> 
     <td><?php echo $d['name'];?></td>
     <td><?php echo $d['description'];?></td>
     <td><?php echo $d['target'];?></td>
@@ -77,9 +81,8 @@ foreach($dom->domains_type_lst() as $d) {
     <td><?php echo $d['enable']?__("Yes"):__("No");?></td>
     <td><?php echo $d['only_dns']?__("Yes"):__("No");?></td>
     <td><?php echo $d['need_dns']?__("Yes"):__("No");?></td>
-    <td><div class="ina"><a href="adm_domstypeedit.php?name=<?php echo urlencode($d['name']); ?>"><img style="padding-bottom: 5px" src="images/edit.png" alt="<?php __("Edit"); ?>" /><?php __("Edit"); ?></a></div></td>
-    <td><a href='adm_domstyperegenerate.php?name=<?php echo urlencode($d['name']);?>'><?php __("Regenerate");?></a></td> 
 </tr>
-<?php } // end foreach ?>
+<?php } // end foreach 
+?>
 
 <?php include_once("foot.php"); ?>

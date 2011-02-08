@@ -99,7 +99,7 @@ else{
 <table class="tlist">
 
 <tr><th colspan="2"><input type="hidden" name="domain" value="<?php echo $domain ?>"/>
-<?php __("Actions"); ?></th><th><?php __("Email address"); ?></th><th><?php __("Size"); ?></th><th/></tr>
+<?php __("Actions"); ?></th><th><?php __("Email address"); ?></th><th><?php __("Size"); ?></th><th> </th></tr>
 <?php
 $col=1;
 for($i=0;$i<$res["count"];$i++) {
@@ -121,8 +121,8 @@ for($i=0;$i<$res["count"];$i++) {
     if (! is_null($val['expiration_date'])) {
         // It's a temporary account
         echo __("Manage this temporary account");
-        // It's a normal account
     } else {
+        // It's a normal account
         echo "<a href='mail_add.php?domain=".urlencode($domain)."&dst_mail=".urlencode($val["mail"])."'>";
         echo __("Create alias");
         echo "</a>";

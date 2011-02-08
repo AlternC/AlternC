@@ -81,7 +81,7 @@ $dom->unlock();
               break;
           case 'DOMAIN':?>
 		        <input type="text" class="int" name="t_<?php echo $dt['name']?>" id="t_<?php echo $dt['name']?>" value="<?php ehe($targval);?>" size="32" /> 
-            <small><?php __("(enter a server address or a subdomain)"); ?></small><?php
+            <small><?php __("(enter a domain name or subdomain)"); ?></small><?php
               break;
         } // switch ?>
       </td>

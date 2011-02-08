@@ -1,6 +1,6 @@
 <?php
 /*
- $Id: adm_tld.php,v 1.4 2004/11/29 17:27:04 anonymous Exp $
+ $Id: adm_dnsweberror.php,v 1.4 2004/11/29 17:27:04 anonymous Exp $
  ----------------------------------------------------------------------
  AlternC - Web Hosting System
  Copyright (C) 2002 by the AlternC Development Team.
@@ -23,8 +23,8 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file: Benjamin Sonntag
- Purpose of file: Manage allowed TLD on the server
+ Original Author of file: Alan Garcia
+ Purpose of file: Report domains and websites having error in the DB
  ----------------------------------------------------------------------
 */
 require_once("../class/config.php");
@@ -37,9 +37,9 @@ if (!$admin->enabled) {
 include_once("head.php");
 
 ?>
-<h3><?php __("DNS and website in error"); ?></h3>
+<h3><?php __("Domains and Websites having errors"); ?></h3>
 <hr id="topbar" />
-<br />
+ <br />
 <?php
 	if ($error) {
 	  echo "<p class=\"error\">$error</p>";
@@ -47,17 +47,17 @@ include_once("head.php");
 
 ?>
 <p>
-<h3><?php __("Here is the list of the websites in error."); ?></h3>
+<h3><?php __("List of the websites having errors in the domain database."); ?></h3>
 </p>
 <table class="tlist">
   <tr>
-    <th> compte </th>
-    <th> login </th>
-    <th> domaine </th>
-    <th> fqdn         </th>
-    <th> valeur       </th>
-    <th> description     </th>
-    <th> web_result </th>
+  <th><?php __("Uid"); ?></th>
+  <th><?php __("Account"); ?></th>
+  <th><?php __("Domain name"); ?></th>
+  <th><?php __("FQDN"); ?></th>
+  <th><?php __("Value"); ?></th>
+  <th><?php __("Description"); ?></th>
+  <th><?php __("Web Result field"); ?></th>
   </tr>
 
 <?php 
@@ -81,13 +81,13 @@ print_r($d);
 </table>
 <hr/>
 
-<h3><?php __("Here is the list of the DNS in error."); ?></h3>
+<h3><?php __("List of the domain names having errors in the domain database."); ?></h3>
 <table class="tlist">
   <tr>
-    <th> compte </th>
-    <th> login </th>
-    <th> domaine </th>
-    <th> dns_result </th>
+  <th><?php __("Uid"); ?></th>
+  <th><?php __("Account"); ?></th>
+  <th><?php __("Domain name"); ?></th>
+  <th><?php __("DNS Result field"); ?></th>
   </tr>
 
 <?php 
