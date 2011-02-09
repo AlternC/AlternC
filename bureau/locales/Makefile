@@ -1,12 +1,12 @@
-all: mailman_manual.pot mailman.pot */LC_MESSAGES/mailman.po */LC_MESSAGES/mailman_manual.po
+all: manual.pot messages.pot */LC_MESSAGES/manual.po */LC_MESSAGES/messages.po
 
 
-mailman.pot: ../*/*.php
+messages.pot: ../*/*.php
 	[ -r $@ ] || touch $@
 	xgettext --force-po --omit-header -o $@ --keyword=__ --keyword=_  -L PHP --from-code iso-8859-1 -j $^
 
-%/LC_MESSAGES/mailman.po: mailman.pot
+%/LC_MESSAGES/messages.po: messages.pot
 	msgmerge -v -U $@ $^
 
-%/LC_MESSAGES/mailman_manual.po: mailman_manual.pot
+%/LC_MESSAGES/manual.po: manual.pot
 	msgmerge -v -U $@ $^

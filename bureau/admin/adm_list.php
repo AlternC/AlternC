@@ -204,9 +204,9 @@ if ($mem->user["admlist"]==1) { // SHORT MODE
 </td>
 </tr>
 <tr>
-   <th colspan="2"><?php __("Actions"); ?></th><th><?php __("Account"); ?></th>
-   <th colspan="2"><?php __("Actions"); ?></th><th><?php __("Account"); ?></th>
-   <th colspan="2"><?php __("Actions"); ?></th><th><?php __("Account"); ?></th>
+   <th colspan="2"> </th><th><?php __("Account"); ?></th>
+   <th colspan="2"> </th><th><?php __("Account"); ?></th>
+   <th colspan="2"> </th><th><?php __("Account"); ?></th>
 </tr>
 <?php
 reset($r);

@@ -98,8 +98,8 @@ else{
 
 <table class="tlist">
 
-<tr><th colspan="2"><input type="hidden" name="domain" value="<?php echo $domain ?>"/>
-<?php __("Actions"); ?></th><th><?php __("Email address"); ?></th><th><?php __("Size"); ?></th><th> </th></tr>
+<tr><th colspan="2"><input type="hidden" name="domain" value="<?php echo $domain ?>"/> </th>
+<th><?php __("Email address"); ?></th><th><?php __("Size"); ?></th><th> </th></tr>
 <?php
 $col=1;
 for($i=0;$i<$res["count"];$i++) {

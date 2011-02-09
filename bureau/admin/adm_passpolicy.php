@@ -134,7 +134,7 @@ if (is_array($c)) {
 </p>
 
 <table class="tlist">
-    <tr><th rowspan="2"><?php __("Actions"); ?></th><th rowspan="2"><?php __("Password Kind"); ?></th><th colspan="4"><?php __("Password Policy"); ?></th></tr>
+    <tr><th rowspan="2"> </th><th rowspan="2"><?php __("Password Kind"); ?></th><th colspan="4"><?php __("Password Policy"); ?></th></tr>
 <tr>
   <th><?php __("Min Size"); ?></th>
   <th><?php __("Max Size"); ?></th>

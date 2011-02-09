@@ -64,7 +64,7 @@ $mem->show_help("hta_list2");
 
 <form method="post" action="hta_del.php">
 <table class="tlist">
-  <tr><th colspan="2"><?php __("Actions"); ?></th><th><?php __("Folder"); ?></th></tr>
+  <tr><th colspan="2"> </th><th><?php __("Folder"); ?></th></tr>
 <?php
 $col=1;
 

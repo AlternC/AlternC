@@ -14,6 +14,7 @@ msgstr ""
 "PO-Revision-Date: 2002-06-16 13:50CEST\n"
 "Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
 "Language-Team: English <i18n@alternc.org>\n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -636,14 +637,6 @@ msgstr "The requested MySQL user does not exist."
 msgid "err_mysql_19"
 msgstr "You have no MySQL users at the moment."
 
-#. The password is mandatory
-msgid "err_mysql_20"
-msgstr "The password is mandatory"
-
-#. The username cannot be empty
-msgid "err_mysql_21"
-msgstr "The username cannot be empty"
-
 #. Your MySQL backups are stored in the chosen folder from <code>db.sql.1</
 #. code> to <code>db.sql.19</code><br />your database name replaces 'db'.<br /
 #. >WARNING: If you modify backup settings (backups, compression...) previous 
@@ -680,9 +673,6 @@ msgstr "File or folder name is incorrect"
 #. You cannot move or copy a file to the same folder
 msgid "err_bro_2"
 msgstr "You cannot move or copy a file to the same folder"
-
-msgid "err_bro_3"
-msgstr "You don't have the right to write into this folder. Please check the access rights."
 
 #. If we manage your DNS <br />You can manage your mails elsewhere if you want 
 #. (MX field).<br />Write <b><code>%s</code></b> in this field if your mail 
@@ -733,6 +723,86 @@ msgstr ""
 #. eg: english : %3$d/%1$d/%2$d, at %6$d:%5$d %7$s
 msgid "%3$d-%2$d-%1$d %4$d:%5$d"
 msgstr "%2$d/%1$d/%3$d %6$d:%5$d %7$d"
+
+msgid "1 column, detailed"
+msgstr "1 column, detailed"
+
+msgid "2 columns, short"
+msgstr "2 columns, short"
+
+msgid "3 columns, short"
+msgstr "3 columns, short"
+
+msgid "Go back to the file manager"
+msgstr "Go back to the file manager"
+
+msgid "Edit the newly created file"
+msgstr "Edit the newly created file"
+
+#, fuzzy
+msgid "hlp_login"
+msgstr ""
+"Le domaine a été effacé, mais les fichiers de votre site n'ont pas été "
+"détruits.<br />Si vous souhaitez détruire les fichiers du site web, utilisez "
+"le Gestionnaire de Fichier<br />Plus d'info sur la gestion des domaines dans "
+"l'aide en ligne HELPID_200<br />"
+
+#, fuzzy
+msgid "err_admin_14"
+msgstr "-- Only administrators can access this page !! --"
+
+#, fuzzy
+msgid "err_admin_15"
+msgstr "-- Only administrators can access this page !! --"
+
+#, fuzzy
+msgid "err_admin_16"
+msgstr "-- Only administrators can access this page !! --"
+
+#, fuzzy
+msgid "err_admin_17"
+msgstr "-- Only administrators can access this page !! --"
+
+#, fuzzy
+msgid "err_admin_18"
+msgstr "-- Only administrators can access this page !! --"
+
+#, fuzzy
+msgid "err_hta_12"
+msgstr "An incompatible .htaccess file exists in this folder."
+
+#, fuzzy
+msgid "err_mail_16"
+msgstr "ldap connexion impossible, please try again later."
+
+msgid "err_mysql_20"
+msgstr "The password is mandatory"
+
+msgid "err_mysql_21"
+msgstr "The username cannot be empty"
+
+msgid "err_bro_3"
+msgstr ""
+"You don't have the right to write into this folder. Please check the access "
+"rights."
+
+# $d,$m,$y,$h,$i,$hh,$am
+#  1  2  3  4  5  6   7
+#, fuzzy
+msgid "%3$d-%2$d-%1$d"
+msgstr "%2$d/%1$d/%3$d %6$d:%5$d %7$d"
+
+#, fuzzy
+msgid "AlternC's account password"
+msgstr "Please enter a password"
+
+#, fuzzy
+msgid "POP/IMAP account passwords"
+msgstr "POP password"
+
+#, fuzzy
+msgid "Protected folders passwords"
+msgstr "Protected folders list"
 
 #~ msgid "Editing subdomain %s"
 #~ msgstr "Editing subdomain %s"
@@ -1096,21 +1166,6 @@ msgstr "%2$d/%1$d/%3$d %6$d:%5$d %7$d"
 #~ msgid "Change my settings"
 #~ msgstr "Change my settings"
 
-#~ msgid "1 column, detailed"
-#~ msgstr "1 column, detailed"
-
-#~ msgid "2 columns, short"
-#~ msgstr "2 columns, short"
-
-#~ msgid "3 columns, short"
-#~ msgstr "3 columns, short"
-
-#~ msgid "Go back to the file manager"
-#~ msgstr "Go back to the file manager"
-
-#~ msgid "Edit the newly created file"
-#~ msgstr "Edit the newly created file"
-
 #~ msgid "View"
 #~ msgstr "View"
 
@@ -1298,9 +1353,6 @@ msgstr "%2$d/%1$d/%3$d %6$d:%5$d %7$d"
 #~ msgid "Delete a protected folder"
 #~ msgstr "Delete a protected folder"
 
-#~ msgid "Please enter a password"
-#~ msgstr "Please enter a password"
-
 #~ msgid "Change the user %s in the protected folder %s"
 #~ msgstr "Change the user %s in the protected folder %s"
 
@@ -1331,9 +1383,6 @@ msgstr "%2$d/%1$d/%3$d %6$d:%5$d %7$d"
 #~ msgid "Change the password"
 #~ msgstr "Change the password"
 
-#~ msgid "Protected folders list"
-#~ msgstr "Protected folders list"
-
 #~ msgid "Unprotect the checked folders"
 #~ msgstr "Unprotect the checked folders"
 
@@ -1348,9 +1397,6 @@ msgstr "%2$d/%1$d/%3$d %6$d:%5$d %7$d"
 
 #~ msgid "Is it a POP account?"
 #~ msgstr "Is it a POP account?"
-
-#~ msgid "POP password"
-#~ msgstr "POP password"
 
 #~ msgid "Other recipients"
 #~ msgstr "Other recipients"

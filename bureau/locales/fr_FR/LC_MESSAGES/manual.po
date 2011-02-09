@@ -15,6 +15,7 @@ msgstr ""
 "PO-Revision-Date: 2002-06-16 13:50CEST\n"
 "Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
 "Language-Team: French <i18n@alternc.org>\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -72,27 +73,6 @@ msgstr "Ce TLD existe déjà"
 #. The login is too long (16 chars max)
 msgid "err_admin_13"
 msgstr "Le login est trop long (16 caractères maximum)"
-
-#. There is no password policy available, this password has been denied (it's a coding error though...)
-msgid "err_admin_14"
-msgstr "La politique de mot de passe demandée n'a pas été trouvée, Ce password est refusé (c'est une erreur de programmation ...)"
-
-#. The password is too short according to your policy, please check it
-msgid "err_admin_15"
-msgstr "Le mot de passe est trop court selon votre politique de mot de passe, merci de vérifier"
-
-#. The password is too long according to your policy, please check it
-msgid "err_admin_16"
-msgstr "Le mot de passe est trop long selon votre politique de mot de passe, merci de vérifier"
-
-#. The password cannot be part of the login according to your policy, please check it
-msgid "err_admin_17"
-msgstr "Le mot de passe ne peut pas être le même que le nom d'utilisateur (ou quelque chose de similaire) selon votre politique de mot de passe, merci de vérifier"
-
-#. The password must contains characters from %s different classes according to your policy (it only contains %s classes), please check it
-msgid "err_admin_18"
-msgstr "Le mot de passe doit contenir des caractères de %s classes différentes selon votre politique de mot de passe (il n'en contient que %s), merci de vérifier"
-
 
 #. Domain names
 msgid "quota_dom"
@@ -199,9 +179,9 @@ msgstr ""
 #. domain's DNS (and eventually wait 1 day) before you install it again.
 msgid "err_dom_23"
 msgstr ""
-"Les DNS de ce domaine ne correspondent pas à ceux du serveur.<br /> Vous devez "
-"modifier les DNS du domaine (et, dans certains cas, attendre 24H) <br />avant de "
-"pouvoir l'installer"
+"Les DNS de ce domaine ne correspondent pas à ceux du serveur.<br /> Vous "
+"devez modifier les DNS du domaine (et, dans certains cas, attendre 24H) <br /"
+">avant de pouvoir l'installer"
 
 #. There is some forbidden characters in the sub domain (only A-Z 0-9 and - are allowed).
 msgid "err_dom_24"
@@ -228,9 +208,8 @@ msgstr ""
 "doit être complet, mais <b>sans le www.</b><br /> IMPORTANT : Si vous voulez "
 "un hébergement réel de domaine, il faut que les DNS de votre domaine "
 "pointent vers nos serveurs DNS. Contacter votre hébergeur pour plus "
-"d'information."
-"<br />Plus d'info sur la gestion des domaines dans l'aide en ligne "
-"HELPID_200<br />"
+"d'information.<br />Plus d'info sur la gestion des domaines dans l'aide en "
+"ligne HELPID_200<br />"
 
 #. Cliquez sur le lien ci-dessus. Vous pourrez ensuite accéder aux paremètres 
 #. du domaine dans le menu à gauche.2 liens vont apparaitre : <br />- un 
@@ -257,8 +236,8 @@ msgid "hlp_del_domain"
 msgstr ""
 "Le domaine a été effacé, mais les fichiers de votre site n'ont pas été "
 "détruits.<br />Si vous souhaitez détruire les fichiers du site web, utilisez "
-"le Gestionnaire de Fichiers ou un compte FTP<br />Plus d'info sur la gestion des domaines dans "
-"l'aide en ligne HELPID_200<br />"
+"le Gestionnaire de Fichiers ou un compte FTP<br />Plus d'info sur la gestion "
+"des domaines dans l'aide en ligne HELPID_200<br />"
 
 #. Cette zone vous permet de modifier les paramètres de votre domaine, ainsi 
 #. que des sous-domaines installés<br />Vous pouvez créer un nouveau sous-
@@ -304,7 +283,7 @@ msgstr ""
 msgid "err_ftp_6"
 msgstr "Impossible de créer le répertoire."
 
-#. Voici la liste des comptes ftp ayant accès à l'espace disque de votre compte AlternC. Cliquez sur 
+#. Voici la liste des comptes ftp ayant accès à votre compte. Cliquez sur 
 #. 'Modifier' pour changer le nom d'utilisateur, le mot de passe, ou le dossier 
 #. racine.<br /> Pour supprimer un compte, cochez la case correspondante et 
 #. cliquez sur le bouton 'Supprimer les comptes cochés'<br />Pour pouvoir 
@@ -399,10 +378,6 @@ msgstr "L'utilisateur '%s' existe déja pour ce répertoire"
 msgid "err_hta_11"
 msgstr "Veuillez saisir un nom d'utilisateur valide"
 
-#. The file .htpasswd does not exist
-msgid "err_hta_12"
-msgstr "Le fichier .htpasswd n'existe pas"
-
 #. Email Accounts
 msgid "quota_mail"
 msgstr "Comptes emails"
@@ -472,9 +447,6 @@ msgid "err_mail_15"
 msgstr ""
 "Ce mail n'est pas un compte pop, il est impossible d'en changer le mot de "
 "passe !"
-
-msgid "err_mail_16"
-msgstr "Ce compte esclave MX existe déjà"
 
 #. OK
 msgid "err_err_0"
@@ -633,8 +605,8 @@ msgstr "Le fichier entré n'existe pas ou est incorect."
 #. Your cannot create your main database : you still have other dbs !
 msgid "err_mysql_10"
 msgstr ""
-"Erreur : vous ne pouvez créer votre base principale&nbsp;: il vous reste d'autres "
-"bases !"
+"Erreur : vous ne pouvez créer votre base principale&nbsp;: il vous reste "
+"d'autres bases !"
 
 #. You have no database, click on 'Databases' to create the first one
 msgid "err_mysql_11"
@@ -678,14 +650,6 @@ msgstr "L'utilisateur n'existe pas"
 msgid "err_mysql_19"
 msgstr "Aucun utilisateur n'est défini dans MySQL."
 
-#. The password is mandatory
-msgid "err_mysql_20"
-msgstr "Le mot de passe est obligatoire"
-
-#. The username cannot be empty
-msgid "err_mysql_21"
-msgstr "Le nom d'utilisateur ne peut pas être vide"
-
 #. Your MySQL backups are stored in the chosen folder from <code>db.sql.1</
 #. code> to <code>db.sql.19</code><br />your database name replaces 'db'.<br /
 #. >WARNING: If you modify backup settings (backups, compression...) previous 
@@ -695,12 +659,12 @@ msgid "hlp_sql_bck"
 msgstr ""
 "Les sauvegardes de votre base MySQL sont stockées dans le répertoire choisi "
 "sous le nom <code>db.sql.1</code> à <code>db.sql.19</code><br /> où 'db' est "
-"remplacé par le nom de la base de données.<br /><b>ATTENTION : </b><br />"
-"- Le répertoire doit déja exister, si ce n'est pas le cas créez le au préalable<br />"
-"- si vous modifiez "
-"les paramètres de la sauvegarde (nombre de sauvegardes, compression ...) des "
-"vieilles sauvegardes peuvent rester dans le répertoire concerné. Vous pouvez "
-"les effacer dans le gestionnaire de fichiers."
+"remplacé par le nom de la base de données.<br /><b>ATTENTION : </b><br />- "
+"Le répertoire doit déja exister, si ce n'est pas le cas créez le au "
+"préalable<br />- si vous modifiez les paramètres de la sauvegarde (nombre de "
+"sauvegardes, compression ...) des vieilles sauvegardes peuvent rester dans "
+"le répertoire concerné. Vous pouvez les effacer dans le gestionnaire de "
+"fichiers."
 
 #. Web Statistics
 msgid "quota_sta2"
@@ -728,10 +692,6 @@ msgstr "Répertoire ou fichier incorrect !"
 msgid "err_bro_2"
 msgstr "Vous ne pouvez pas déplacer un fichier dans le même répertoire !"
 
-#. Right incorrect
-msgid "err_bro_3"
-msgstr "Vous n'avez pas le droit d'écrire dans ce répertoire. Vérifiez les droits d'accès !"
-
 #. If we manage your DNS <br />You can manage your mails elsewhere if you want 
 #. (MX field).<br />Write <b><code>%s</code></b> in this field if your mail 
 #. must be managed by %s<br />or put the IP address or name of the mail server 
@@ -750,7 +710,7 @@ msgstr ""
 msgid "help_domain_del %s"
 msgstr ""
 
-#. You can create various databases<br />Click on 'MySQL Admin' in the menu to 
+#. You can create various databases<br />Click on 'SQL Admin' in the menu to 
 #. manage them<br />or use the table below to backup, retrieve or delete them:
 msgid "help_sql_list_ok"
 msgstr ""
@@ -768,44 +728,6 @@ msgstr ""
 #. eg: english : %3$d/%1$d/%2$d, at %6$d:%5$d %7$s
 msgid "%3$d-%2$d-%1$d %4$d:%5$d"
 msgstr "%1$d/%2$d/%3$d %4$d:%5$d"
-
-# $d,$m,$y
-#  1  2  3 
-#. This is a date representation : parameters are the date as follow :
-#. $d,$m,$y
-#.  1  2  3
-#. eg: english : %3$d/%1$d/%2$d
-msgid "%3$d-%2$d-%1$d"
-msgstr "%1$02d/%2$02d/%3$04d"
-
-msgid "AlternC's account password"
-msgstr "Mots de passe des comptes AlternC"
-
-msgid "POP/IMAP account passwords"
-msgstr "Mots de passe des comptes POP/IMAP"
-
-msgid "Protected folders passwords"
-msgstr "Mots de passe des dossiers protégés"
-
-
-msgid "Editing subdomain %s"
-msgstr "Edition du sous-domaine %s"
-
-#, fuzzy
-msgid "err_stats_4"
-msgstr "Aucun répertoire protégé"
-
-#, fuzzy
-msgid "err_stats_5"
-msgstr "Impossible de supprimer le fichier '%s'/.htaccess"
-
-#, fuzzy
-msgid "err_stats_6"
-msgstr "Impossible de supprimer le fichier '%s'/.htpasswd"
-
-#, fuzzy
-msgid "err_stats_7"
-msgstr "Le fichier .htaccess n'existe pas"
 
 msgid "1 column, detailed"
 msgstr "1 colonne, détaillée"
@@ -826,3 +748,62 @@ msgid "hlp_login"
 msgstr ""
 "Vous pouvez aussi consulter l'aide en ligne sur l'accueil du panneau de "
 "contrôle HELPID_300<br />"
+
+msgid "err_admin_14"
+msgstr ""
+"La politique de mot de passe demandée n'a pas été trouvée, Ce password "
+"est refusé (c'est une erreur de programmation ...)"
+
+msgid "err_admin_15"
+msgstr ""
+"Le mot de passe est trop court selon votre politique de mot de passe, "
+"merci de vérifier"
+
+msgid "err_admin_16"
+msgstr ""
+"Le mot de passe est trop long selon votre politique de mot de passe, "
+"merci de vérifier"
+
+msgid "err_admin_17"
+msgstr ""
+"Le mot de passe ne peut pas être le même que le nom d'utilisateur (ou "
+"quelque chose de similaire) selon votre politique de mot de passe, merci "
+"de vérifier"
+
+msgid "err_admin_18"
+msgstr ""
+"Le mot de passe doit contenir des caractères de %s classes différentes "
+"selon votre politique de mot de passe (il n'en contient que %s), merci de "
+"vérifier"
+
+msgid "err_hta_12"
+msgstr "Le fichier .htpasswd n'existe pas"
+
+msgid "err_mail_16"
+msgstr "Ce compte esclave MX existe déjà"
+
+msgid "err_mysql_20"
+msgstr "Le mot de passe est obligatoire"
+
+msgid "err_mysql_21"
+msgstr "Le nom d'utilisateur ne peut pas être vide"
+
+msgid "err_bro_3"
+msgstr ""
+"Vous n'avez pas le droit d'écrire dans ce répertoire. Vérifiez les droits "
+"d'accès !"
+
+# $d,$m,$y
+#  1  2  3 
+msgid "%3$d-%2$d-%1$d"
+msgstr "%1$02d/%2$02d/%3$04d"
+
+msgid "AlternC's account password"
+msgstr "Mots de passe des comptes AlternC"
+
+msgid "POP/IMAP account passwords"
+msgstr "Mots de passe des comptes POP/IMAP"
+
+msgid "Protected folders passwords"
+msgstr "Mots de passe des dossiers protégés"
+

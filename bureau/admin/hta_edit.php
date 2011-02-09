@@ -58,7 +58,7 @@ if (!$dir) {
 <form method="post" action="hta_dodeluser.php">
 <table cellspacing="0" cellpadding="4">
 	<tr>
-   <th colspan="2" ><input type="hidden" name="dir" value="<?php echo $dir?>"><?php __("Actions"); ?></th>
+   <th colspan="2" ><input type="hidden" name="dir" value="<?php echo $dir?>"> </th>
 		<th><?php __("Username"); ?></th>
 	</tr>
 <?php

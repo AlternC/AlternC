@@ -632,3 +632,79 @@ msgid "%3$d-%2$d-%1$d %4$d:%5$d"
 msgstr ""
 
 
+msgid "1 column, detailed"
+msgstr ""
+
+msgid "2 columns, short"
+msgstr ""
+
+msgid "3 columns, short"
+msgstr ""
+
+msgid "Go back to the file manager"
+msgstr ""
+
+msgid "Edit the newly created file"
+msgstr ""
+
+msgid "hlp_login"
+msgstr ""
+
+msgid "err_admin_14"
+msgstr ""
+"La politique de mot de passe demandée n'a pas été trouvée, Ce password "
+"est refusé (c'est une erreur de programmation ...)"
+
+msgid "err_admin_15"
+msgstr ""
+"Le mot de passe est trop court selon votre politique de mot de passe, "
+"merci de vérifier"
+
+msgid "err_admin_16"
+msgstr ""
+"Le mot de passe est trop long selon votre politique de mot de passe, "
+"merci de vérifier"
+
+msgid "err_admin_17"
+msgstr ""
+"Le mot de passe ne peut pas être le même que le nom d'utilisateur (ou "
+"quelque chose de similaire) selon votre politique de mot de passe, merci "
+"de vérifier"
+
+msgid "err_admin_18"
+msgstr ""
+"Le mot de passe doit contenir des caractères de %s classes différentes "
+"selon votre politique de mot de passe (il n'en contient que %s), merci de "
+"vérifier"
+
+msgid "err_hta_12"
+msgstr "Le fichier .htpasswd n'existe pas"
+
+msgid "err_mail_16"
+msgstr "Ce compte esclave MX existe déjà"
+
+msgid "err_mysql_20"
+msgstr "Le mot de passe est obligatoire"
+
+msgid "err_mysql_21"
+msgstr "Le nom d'utilisateur ne peut pas être vide"
+
+msgid "err_bro_3"
+msgstr ""
+"Vous n'avez pas le droit d'écrire dans ce répertoire. Vérifiez les droits "
+"d'accès !"
+
+# $d,$m,$y
+#  1  2  3 
+msgid "%3$d-%2$d-%1$d"
+msgstr "%1$02d/%2$02d/%3$04d"
+
+msgid "AlternC's account password"
+msgstr "Mots de passe des comptes AlternC"
+
+msgid "POP/IMAP account passwords"
+msgstr "Mots de passe des comptes POP/IMAP"
+
+msgid "Protected folders passwords"
+msgstr "Mots de passe des dossiers protégés"
+

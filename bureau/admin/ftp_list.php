@@ -69,7 +69,7 @@ if ($error && !$noftp) {
 
 <form method="post" action="ftp_del.php">
 <table class="tlist">
-  <tr><th colspan="2"><?php __("Actions"); ?></th><th><?php __("Username"); ?></th><th><?php __("Folder"); ?></th></tr>
+  <tr><th colspan="2"> </th><th><?php __("Username"); ?></th><th><?php __("Folder"); ?></th></tr>
 <?php
 reset($r);
 $col=1;

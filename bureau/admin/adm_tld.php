@@ -64,7 +64,7 @@ $c=$admin->listtld();
 <p><span class="ina"><a href="adm_tldadd.php"><?php __("Add a new TLD"); ?></a></span></p>
 <form method="post" action="adm_tld.php" name="main" id="main">
 <table class="tlist">
-<tr><th colspan="2"><?php __("Actions"); ?></th><th><?php __("TLD"); ?></th><th><?php __("Allowed Mode"); ?></th></tr>
+<tr><th colspan="2"> </th><th><?php __("TLD"); ?></th><th><?php __("Allowed Mode"); ?></th></tr>
 <?php
 $col=1;
 for($i=0;$i<count($c);$i++) {

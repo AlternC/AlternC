@@ -55,7 +55,7 @@ if (!$r=$sta2->get_list_raw()) {
 
 <form method="post" action="sta2_del_raw.php">
 <table class="tlist">
-    <tr><th colspan="2"><?php __("Actions"); ?></th><th><?php __("Domain name"); ?></th><th><?php __("Folder"); ?></th><th><?php __("View"); ?></th></tr>
+    <tr><th colspan="2"> </th><th><?php __("Domain name"); ?></th><th><?php __("Folder"); ?></th><th><?php __("View"); ?></th></tr>
 <?php
 reset($r);
 $col=1;

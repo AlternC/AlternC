@@ -15,6 +15,7 @@ msgstr ""
 "PO-Revision-Date: 2003-09-30 16:42+0200\n"
 "Last-Translator: Bruno Marmier <bruno@marmier.net>\n"
 "Language-Team:  <i18n@alternc.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -783,6 +784,89 @@ msgstr ""
 #, fuzzy
 msgid "%3$d-%2$d-%1$d %4$d:%5$d"
 msgstr "le %1$d/%2$d/%3$d, à %4$dh%5$d"
+
+msgid "1 column, detailed"
+msgstr ""
+
+msgid "2 columns, short"
+msgstr ""
+
+msgid "3 columns, short"
+msgstr ""
+
+msgid "Go back to the file manager"
+msgstr ""
+
+msgid "Edit the newly created file"
+msgstr ""
+
+#, fuzzy
+msgid "hlp_login"
+msgstr ""
+"Le domaine a été effacé, mais les fichiers de votre site n'ont pas été "
+"détruits.<br />Si vous souhaitez détruire les fichiers du site web, utilisez "
+"le Gestionnaire de Fichier<br />Plus d'info sur la gestion des domaines dans "
+"l'aide en ligne HELPID_200<br />"
+
+# m_membre
+#, fuzzy
+msgid "err_admin_14"
+msgstr "-- ¡¡Solo los administradores tienen acceso a estas páginas!! -- "
+
+# m_membre
+#, fuzzy
+msgid "err_admin_15"
+msgstr "-- ¡¡Solo los administradores tienen acceso a estas páginas!! -- "
+
+# m_membre
+#, fuzzy
+msgid "err_admin_16"
+msgstr "-- ¡¡Solo los administradores tienen acceso a estas páginas!! -- "
+
+# m_membre
+#, fuzzy
+msgid "err_admin_17"
+msgstr "-- ¡¡Solo los administradores tienen acceso a estas páginas!! -- "
+
+# m_membre
+#, fuzzy
+msgid "err_admin_18"
+msgstr "-- ¡¡Solo los administradores tienen acceso a estas páginas!! -- "
+
+#, fuzzy
+msgid "err_hta_12"
+msgstr "Un archivo .htaccess incompatible se encuentra en este directorio."
+
+#, fuzzy
+msgid "err_mail_16"
+msgstr "Conexión ldap imposible. Intente más tarde."
+
+#, fuzzy
+msgid "err_mysql_20"
+msgstr ""
+"El nombre de la base de datos solo puede contener cifras y letras minúsculas."
+
+#, fuzzy
+msgid "err_mysql_21"
+msgstr ""
+"El nombre de la base de datos solo puede contener cifras y letras minúsculas."
+
+#, fuzzy
+msgid "err_bro_3"
+msgstr "¡Carpeta o archivo incorrecto!"
+
+#, fuzzy
+msgid "%3$d-%2$d-%1$d"
+msgstr "le %1$d/%2$d/%3$d, à %4$dh%5$d"
+
+msgid "AlternC's account password"
+msgstr "Mots de passe des comptes AlternC"
+
+msgid "POP/IMAP account passwords"
+msgstr "Mots de passe des comptes POP/IMAP"
+
+msgid "Protected folders passwords"
+msgstr "Mots de passe des dossiers protégés"
 
 #~ msgid "Editing subdomain %s"
 #~ msgstr "Edition du sous-domaine %s"
