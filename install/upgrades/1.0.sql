@@ -27,11 +27,11 @@ INSERT IGNORE INTO `domaines_type` (name, description, target, entry, compatibil
 ('ipv6','ipv6 address', 'IPV6', '%SUB% IN AAAA %TARGET%','ip,ipv6,webmail,txt',true, true),
 ('cname', 'cname entry', 'DOMAIN', '%SUB% CNAME %TARGET%', 'txt',true, true),
 ('txt', 'txt entry', 'TXT', '%SUB% IN TXT "%TARGET%"','local,url,ip,webmail,ipv6,cname,txt',true, true),
-('mx', 'mx entry', 'IP', '%SUB% IN MX %TARGET%', 'local,url,ip,webmail,ipv6,cname,txt',true, false)
+('mx', 'mx entry', 'IP', '%SUB% IN MX %TARGET%', 'local,url,ip,webmail,ipv6,cname,txt',true, false),
 ('panel', 'Panel redirection', 'NONE', '%SUB% IN A @@PUBLIC_IP@@', 'local,url,ip,webmail,ipv6,cname,txt',true, false)
 ;
 
--- Changing stanby use
+-- Changing standby use
 -- TODO modify mysql.sh to add this changes
 alter table domaines add column dns_action enum ('OK','UPDATE','DELETE') NOT NULL default 'UPDATE';
 alter table domaines add column dns_result varchar(255) not null default '';
