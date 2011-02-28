@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # AlternC Main install script.
 # This script should be launched only once, when installing AlternC
