@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 #
 # AlternC Main install script.
 # This script should be launched only once, when installing AlternC
@@ -128,7 +128,7 @@ if [ -z "$MONITOR_IP" ]; then
     MONITOR_IP="127.0.0.1"
 fi
 
-PUBLIC_IP_BEGIN=${PUBLIC_IP:0:1}
+PUBLIC_IP_BEGIN=$(echo $PUBLIC_IP|cut -c 1)
 
 # XXX: I assume this is secure if /tmp is sticky (+t)
 # we should have a better way to deal with templating, of course.
@@ -210,6 +210,7 @@ then
             ln -sf /etc/alternc/apache.conf /etc/apache/conf.d/alternc.conf
     fi
 
+    touch /var/alternc/apacheconf/override_php.conf
     if [ ! -h /etc/apache/conf.d/override_php.conf ] && [ -e /etc/apache/conf.d/ ]; then
             ln -sf /var/alternc/apacheconf/override_php.conf /etc/apache/conf.d/override_php.conf
     fi

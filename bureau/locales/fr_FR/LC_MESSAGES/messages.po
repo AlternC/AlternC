@@ -3034,18 +3034,9 @@ msgstr "Ce compte est maintenant un compte normal"
 msgid "This account is now an administrator account"
 msgstr "Ce compte est maintenant un compte administrateur"
 
-#: ../admin/adm_edit.php:73
-msgid "Account Enabled?"
-msgstr "Compte Actif&nbsp;? "
-
-#
 #: ../admin/adm_edit.php:76
 msgid "You cannot disable your own account."
 msgstr "Vous ne pouvez pas désactiver votre propre compte !"
-
-#: ../admin/adm_edit.php:123
-msgid "Reset quotas to default?"
-msgstr "Réinitialiser les quotas de ce compte&nbsp;?"
 
 #: ../admin/adm_list.php:66
 msgid "AlternC account list"

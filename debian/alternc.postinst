@@ -199,12 +199,12 @@ EOF
     /usr/share/alternc/install/upgrade_check.sh $2
 
     echo "config phpmyadmin"
-    include_str='include("/etc/alternc/phpmyadmin.inc.php")'
-    pma_config=/etc/phpmyadmin/config.inc.php
     # Mise à jour sur une configuration existante
     # recherche la chaine include_str (avec les / echappées) et supprime les <?php ?>
-    sed 's/<?php \('"${include_str//\//\\/}"'\) ?>/\1;/g' $pma_config > $pma_config'_2'
-    mv $pma_config'_2' $pma_config  
+    # ${include_str//\//\\/}"'\) c'est uniquement BASH, on est en SH/DASH 
+    include_str='include("/etc/alternc/phpmyadmin.inc.php")'
+    pma_config='/etc/phpmyadmin/config.inc.php'
+    bash -c "include_str='include(\"/etc/alternc/phpmyadmin.inc.php\")';pma_config='/etc/phpmyadmin/config.inc.php';sed 's/<?php \('\"\${include_str//\//\\/}\"'\) ?>/\1;/g' \$pma_config > \$pma_config'_2' && mv \$pma_config'_2' \$pma_config"
 
     # Sur une configuration vierge, inclure la configuration alternc
     if ! grep -e "$include_str" $pma_config > /dev/null 2>&1; then
@@ -215,9 +215,10 @@ EOF
     find /var/alternc/dns/ -type l -lname /var/alternc/bureau -exec rm {} \;
 
     # Add access to the management panel    
+    PUBLIC_IP_C=$(echo $PUBLIC_IP|cut -c 1)
     ln -nsf /var/alternc/bureau /var/alternc/dns/$FQDN_LETTER/$FQDN
-    mkdir -p /var/alternc/dns/${PUBLIC_IP:0:1}
-    ln -nsf /var/alternc/bureau /var/alternc/dns/${PUBLIC_IP:0:1}/$PUBLIC_IP
+    mkdir -p /var/alternc/dns/$PUBLIC_IP_C
+    ln -nsf /var/alternc/bureau /var/alternc/dns/$PUBLIC_IP_C/$PUBLIC_IP
 
     # Bind stuff
     touch /var/alternc/bind/automatic.conf /var/alternc/bind/slaveip.conf
