@@ -1,5 +1,5 @@
 #!/bin/bash
-# Update domain next-gen by fufrom
+# Update domain next-gen by fufroma
 
 for CONFIG_FILE in \
       /etc/alternc/local.sh \
@@ -19,6 +19,7 @@ umask 022
 LOCK_FILE="$ALTERNC_LOC/bureau/cron.lock"
 OLDIFS="$IFS"
 NEWIFS=" "
+RELOAD_ZONES=""
 B="µµ§§" # Strange letters to make split in query
 
 # Somes check before start operations
@@ -78,6 +79,7 @@ done
 for dom in $( mysql_query "select domaine from domaines where dns_action = 'UPDATE' and gesdns = 0;") ; do
     dns_delete $dom
     mysql_query "update domaines set dns_action = 'OK', dns_result = '$?' where domaine = '$dom'"
+    RELOAD_ZONES="$RELOAD_ZONES $dom"
 done
 
 # Domains we have to update the dns :
@@ -85,6 +87,7 @@ done
 for dom in $( mysql_query "select domaine from domaines where dns_action = 'UPDATE';") ; do
     dns_regenerate $dom
     mysql_query "update domaines set dns_action = 'OK', dns_result = '$?' where domaine = '$dom'"
+    RELOAD_ZONES="$RELOAD_ZONES $dom"
 done
 
 # Domains we want to delete completely, now we do it
@@ -93,6 +96,7 @@ for dom in $( mysql_query "select domaine from domaines where dns_action = 'DELE
     dns_delete $dom
     # Web configurations have already bean cleaned previously
     mysql_query "delete sub_domaines where domaine='$dom'; delete domaines where domaine='$dom';"
+    RELOAD_ZONES="$RELOAD_ZONES $dom"
 done
 
 
@@ -109,10 +113,13 @@ fi
 
 mv "$tempo" "$VHOST_FILE"
 
-# Reload web and dns
-/usr/bin/alternc_reload all
-
-# TODO reload slaves
+# we assume we run apache and bind on the master
+/usr/bin/alternc_reload $RELOAD_ZONES || true
+for slave in $ALTERNC_SLAVES; do
+    if [ "$slave" != "localhost" ]; then
+        ssh alternc@$slave alternc_reload "$RELOAD_ZONES" || true
+    fi
+done
 
 rm "$LOCK_FILE"
 
