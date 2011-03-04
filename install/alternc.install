@@ -338,6 +338,10 @@ done
 # Last touches
 #
 
+ln -nsf /var/alternc/bureau /var/alternc/dns/$FQDN_LETTER/$FQDN
+ln -nsf /var/alternc/bureau /var/alternc/dns/$PUBLIC_IP_BEGIN/$PUBLIC_IP
+
+
 # Creating admin user if needed
 HAS_ROOT=`mysql --defaults-file=/etc/alternc/my.cnf -e "SELECT COUNT(*) FROM membres WHERE login = 'admin' OR login = 'root' and su = 1" | tail -1`
 if [ "$HAS_ROOT" != "1" ]; then
