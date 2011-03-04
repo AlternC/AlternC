@@ -19,7 +19,7 @@ if ($A=~/^\/var\/alternc\/html\/[a-z0-9]\//) {
     $B=~/^([0-9]+).*/;
     printf "$1\n";
 }
-if ($A=~/^\/var\/alternc\/mail\/[a-z0-9]\//) {
+if ($A=~/^\/var\/alternc\/mail\/[a-z0-9_]\//) {
     open(SI,"/usr/bin/du -s '$A'|");
     $B=<SI>;
     $B=~/^([0-9]+).*/;
