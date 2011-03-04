@@ -29,6 +29,29 @@
 */
 require_once("../class/config.php");
 
+// If we just want to return to our previous session
+$oldid=intval($_COOKIE['oldid']);
+if ($oldid) {
+  setcookie('oldid','',0,'/admin/');
+
+  $db->query("select lastip from membres where uid='$oldid';");
+  $db->next_record();
+  if ($db->f("lastip") != getenv("REMOTE_ADDR") ) {
+    die('Error : bad IP address');
+  }
+
+	if (!$mem->setid($oldid))
+	{
+    $oldid=null;
+		$error=$err->errstr();
+		include("index.php");
+		exit();
+	}
+  $oldid=null;
+	include_once("main.php");
+	exit();
+}
+
 if (!$admin->enabled) {
 	__("This page is restricted to authorized staff");
 	exit();
@@ -52,6 +75,7 @@ if (!$r=$admin->get($id))
 }
 else
 {
+  setcookie('oldid',$cuid,0,'/admin/');
 	if (!$mem->setid($id))
 	{
 		$error=$err->errstr();

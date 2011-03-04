@@ -43,6 +43,14 @@ if (!$charset) $charset="iso-8859-1";
 <link href="js/jquery_ui/css/smoothness/jquery-ui-1.8.6.custom.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
+<?
+$oldid=intval($_COOKIE['oldid']);
+if ($oldid && $oldid!=$cuid) {
+  echo "<div align=center><p class='error'>";
+  __("Invited session. Clic <a href='adm_login.php'>here</a> to return to your previous session.");
+  echo "</p></div>";
+}
+?>
 <div id="global">
 <table>
 <tr>

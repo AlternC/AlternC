@@ -250,6 +250,7 @@ class m_mem {
     $err->log("mem","del_session");
     $_COOKIE["session"]=addslashes($_COOKIE["session"]);
     setcookie("session","",0,"/");
+    setcookie("oldid","",0,"/admin/");
     if ($_COOKIE["session"]=="") {
       $err->error=0;
       return true;

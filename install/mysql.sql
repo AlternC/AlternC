@@ -256,7 +256,7 @@ CREATE TABLE IF NOT EXISTS sub_domaines (
   valeur varchar(255) default NULL,
   type varchar(30) NOT NULL default 'LOCAL',
   web_action enum ('OK','UPDATE','DELETE') NOT NULL default 'UPDATE',
-  dns_result varchar(255) not null default '',
+  web_result varchar(255) not null default '',
   enable enum ('ENABLED', 'ENABLE', 'DISABLED', 'DISABLE') NOT NULL DEFAULT 'ENABLED',
   PRIMARY KEY  (compte,domaine,sub,type)
 --  ,FOREIGN KEY (type) REFERENCES (domaines_type)
