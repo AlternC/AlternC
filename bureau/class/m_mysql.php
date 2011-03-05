@@ -671,7 +671,13 @@ class m_mysql {
     $c=$this->get_dblist();
     if (is_array($c)) {
       for($i=0;$i<count($c);$i++) {
-	$this->del_db($c[$i]["name"]);
+	      $this->del_db($c[$i]["name"]);
+      }
+    }
+    $d=$this->get_userslist();
+    if (is_array($d)) {
+      for($i=0;$i<count($d);$i++) {
+	      $this->del_user($d[$i]["name"]);
       }
     }
     return true;
