@@ -210,10 +210,6 @@ then
             ln -sf /etc/alternc/apache.conf /etc/apache/conf.d/alternc.conf
     fi
 
-    touch /var/alternc/apacheconf/override_php.conf
-    if [ ! -h /etc/apache/conf.d/override_php.conf ] && [ -e /etc/apache/conf.d/ ]; then
-            ln -sf /var/alternc/apacheconf/override_php.conf /etc/apache/conf.d/override_php.conf
-    fi
     SERVICES="$SERVICES apache apache-ssl"
 fi
 if [ -x /usr/sbin/apache2 ]; then
@@ -249,10 +245,6 @@ if [ -x /usr/sbin/apache2 ]; then
     fi
     if [ ! -h /etc/apache2/conf.d/alternc.conf ] && [ -e /etc/apache2/conf.d/ ]; then
         ln -sf /etc/alternc/apache2.conf /etc/apache2/conf.d/alternc.conf
-        s="apache2"
-    fi
-    if [ ! -h /etc/apache2/conf.d/override_php.conf ] && [ -e /etc/apache2/conf.d/ ]; then
-        ln -sf /var/alternc/apacheconf/override_php.conf /etc/apache2/conf.d/override_php.conf
         s="apache2"
     fi
     if [ -e /etc/apache2/sites-enabled/000-default ]; then
@@ -337,9 +329,6 @@ done
 #######################################################################
 # Last touches
 #
-
-ln -nsf /var/alternc/bureau /var/alternc/dns/$FQDN_LETTER/$FQDN
-ln -nsf /var/alternc/bureau /var/alternc/dns/$PUBLIC_IP_BEGIN/$PUBLIC_IP
 
 
 # Creating admin user if needed

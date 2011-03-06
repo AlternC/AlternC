@@ -192,7 +192,6 @@ EOF
     # They will be regenerated without the bug by upgrade_check.sh below.
     if dpkg --compare-versions "$2" le "0.9.3.9-globenet14"; then
         rm -f /var/alternc/apacheconf/*/*
-        rm -f /var/alternc/apacheconf/override_php.conf
     fi
 
     echo "checking for upgrades"
@@ -214,12 +213,6 @@ EOF
     #clean old access to the management panel
     find /var/alternc/dns/ -type l -lname /var/alternc/bureau -exec rm {} \;
 
-    # Add access to the management panel    
-    PUBLIC_IP_C=$(echo $PUBLIC_IP|cut -c 1)
-    ln -nsf /var/alternc/bureau /var/alternc/dns/$FQDN_LETTER/$FQDN
-    mkdir -p /var/alternc/dns/$PUBLIC_IP_C
-    ln -nsf /var/alternc/bureau /var/alternc/dns/$PUBLIC_IP_C/$PUBLIC_IP
-
     # Bind stuff
     touch /var/alternc/bind/automatic.conf /var/alternc/bind/slaveip.conf
     chown root:bind /var/alternc/bind/automatic.conf /var/alternc/bind/slaveip.conf
@@ -227,7 +220,6 @@ EOF
     touch /var/run/alternc/refresh_slave
     /usr/lib/alternc/slave_dns
     # Apache will not start without this file
-    touch /var/alternc/apacheconf/override_php.conf
     touch /var/alternc/apache-vhost/vhosts_all.conf
 
     # Update l18n files
@@ -238,9 +230,6 @@ EOF
 
     echo "running alternc.install"
     alternc.install
-
-    # Add basedir protection
-    /usr/lib/alternc/basedir_prot.sh
 
     ;;
 

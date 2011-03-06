@@ -723,8 +723,9 @@ EOF;
 		   " HAVING status=2 or status=3 ORDER BY status DESC, expiry;"))
       return false;
     else {
+      $res=array();
       while($db->next_record())
-	$res[] = $db->Record;
+	      $res[] = $db->Record;
       return $res;
     }
   }

@@ -26,7 +26,7 @@
 # ----------------------------------------------------------------------
 #
 SETUID=mail_add mail_del quota_edit quota_get mem_add mem_del
-SCRIPTS=quota_edit.sh quota_get.sh basedir_prot.sh sqlbackup.sh rawstat.daily quota_init quota_delete update_domains.sh slave_dns sendmail spoolsize.php fixperms.sh 
+SCRIPTS=quota_edit.sh quota_get.sh sqlbackup.sh rawstat.daily quota_init quota_delete update_domains.sh slave_dns sendmail spoolsize.php fixperms.sh 
 LIBS=functions.sh functions_hosting.sh functions_dns.sh
 BIN=$(DESTDIR)/usr/lib/alternc/
 

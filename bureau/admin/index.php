@@ -57,7 +57,7 @@ if (!isset($restrictip)) {
     <p id="logo">  <img src="logo.png" border="0" alt="<?php __("Web Hosting Control Panel"); ?>" title="<?php __("Web Hosting Control Panel"); ?>" /></a>
     </p>
 <p>&nbsp;</p>
-<?php if ($error) echo "<font color=red>$error</font>"; ?>
+<?php if (isset($error) && $error) echo "<font color=red>$error</font>"; ?>
 <?php
 /*
 if (!$_SERVER[HTTPS]) {

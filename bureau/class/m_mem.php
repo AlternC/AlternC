@@ -488,15 +488,15 @@ Cordialement.
      */
   function show_help($file,$force=false) {
     global $err;
-    $err->log("mem","show_help",$show);
+    $err->log("mem","show_help");
     if ($this->user["show_help"] || $force) {
       $hlp=_("hlp_$file");
       if ($hlp!="hlp_$file") {
-	$hlp=ereg_replace(
+	      $hlp=ereg_replace(
 			  "HELPID_([0-9]*)",
 			  "<a href=\"javascript:help(\\1);\"><img src=\"/admin/aide/help.png\" width=\"17\" height=\"17\" style=\"vertical-align: middle;\" alt=\""._("Help")."\" /></a>",$hlp);
-	echo "<p class=\"hlp\">".$hlp."</p>";
-	return true;
+      	echo "<p class=\"hlp\">".$hlp."</p>";
+       	return true;
       }
       return false;
     } else {

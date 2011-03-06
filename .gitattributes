@@ -349,8 +349,6 @@ debian/po/templates.pot -text
 debian/rules -text
 debian/templates -text
 etc/alternc/alternc.ini -text
-etc/alternc/apache-ssl.conf -text
-etc/alternc/apache.conf -text
 etc/alternc/apache2-ssl.conf -text
 etc/alternc/apache2.conf -text
 etc/alternc/functions_hosting/hosting_massvhost.sh -text
@@ -396,9 +394,7 @@ install/mysql.sql -text
 install/newone.php -text
 install/reset_root.php -text
 install/upgrade_check.sh -text
-install/upgrades/0.9.1.sh -text
 install/upgrades/0.9.1.sql -text
-install/upgrades/0.9.10.sh -text
 install/upgrades/0.9.10.sql -text
 install/upgrades/0.9.1_migrationldap.php -text
 install/upgrades/0.9.2.php -text
@@ -434,7 +430,6 @@ src/Makefile -text
 src/alternc-check -text
 src/alternc-passwd -text
 src/alternc_reload -text
-src/basedir_prot.sh -text
 src/du.pl -text
 src/fixperms.sh -text
 src/functions.sh -text

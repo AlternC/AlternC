@@ -11,7 +11,6 @@ alternc: setuid-binary usr/lib/alternc/db_create 4750 root/www-data
 alternc: setuid-binary usr/lib/alternc/du.pl 4750 root/www-data
 alternc: non-standard-executable-perm usr/lib/alternc/quota_edit.sh 0750 != 0755
 alternc: non-standard-executable-perm usr/lib/alternc/quota_get.sh 0750 != 0755
-alternc: non-standard-executable-perm usr/lib/alternc/basedir_prot.sh 0750 != 0755
 alternc: non-standard-executable-perm usr/lib/alternc/sqlbackup.sh 0750 != 0755
 alternc: non-standard-executable-perm usr/lib/alternc/rawstat.daily 0750 != 0755
 alternc: non-standard-executable-perm usr/lib/alternc/quota_init 0750 != 0755
@@ -41,7 +40,6 @@ alternc: executable-is-not-world-readable usr/lib/alternc/functions_hosting.sh 0
 alternc: executable-is-not-world-readable usr/lib/alternc/functions_dns.sh 0750 != 0755
 alternc: executable-is-not-world-readable usr/lib/alternc/du.pl 4750
 alternc: executable-is-not-world-readable usr/lib/alternc/quota_init 0750 != 0755
-alternc: executable-is-not-world-readable usr/lib/alternc/basedir_prot.sh 0750 != 0755
 alternc: executable-is-not-world-readable usr/lib/alternc/spoolsize.php 0750 != 0755
 alternc: executable-is-not-world-readable usr/lib/alternc/rawstat.daily 0750 != 0755
 alternc: using-first-person-in-templates alternc/monitor_ip

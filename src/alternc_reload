@@ -56,9 +56,6 @@ if [ ! -z "$RELOAD_ZONES" ]; then
             $sudo rndc reload "$zone" > /dev/null || echo "Cannot reload bind for zone $zone" >> "$DOMAIN_LOG_FILE"
         done
     fi
-    if [ -x /usr/sbin/apachectl ]; then
-        $sudo /usr/sbin/apachectl graceful > /dev/null || echo "Cannot restart apache" >> "$DOMAIN_LOG_FILE"
-    fi
     if [ -x /usr/sbin/apache2ctl ]; then
         $sudo /usr/sbin/apache2ctl graceful > /dev/null || echo "Cannot restart apache" >> "$DOMAIN_LOG_FILE"
     fi

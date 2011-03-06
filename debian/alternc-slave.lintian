@@ -5,7 +5,6 @@ alternc-slave: setuid-binary usr/lib/alternc/mem_add 4750 root/www-data
 alternc-slave: setuid-binary usr/lib/alternc/mem_del 4750 root/www-data
 alternc-slave: setuid-binary usr/lib/alternc/quota_edit 4750 root/www-data
 alternc-slave: setuid-binary usr/lib/alternc/quota_get 4750 root/www-data
-alternc-slave: executable-is-not-world-readable usr/lib/alternc/basedir_prot.sh 0750 != 0755
 alternc-slave: executable-is-not-world-readable usr/lib/alternc/du.pl 4750
 alternc-slave: executable-is-not-world-readable usr/lib/alternc/fixperms.sh 0750 != 0755
 alternc-slave: executable-is-not-world-readable usr/lib/alternc/mail_add 4750

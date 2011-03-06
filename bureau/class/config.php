@@ -64,7 +64,7 @@ if (ini_get("safe_mode")) {
 
 // For people who want to authenticate with HTTP AUTH
 if (isset($_GET['http_auth'])) $http_auth=strval($_GET['http_auth']);
-if ($http_auth) {
+if (isset($http_auth) && $http_auth) {
     if (empty($_SERVER['PHP_AUTH_USER']) || empty($_SERVER['PHP_AUTH_PW'])) {
         header('WWW-Authenticate: Basic realm="Test Authentication System"');
         header('HTTP/1.0 401 Unauthorized');
@@ -93,7 +93,7 @@ require_once($root."class/functions.php");
 require_once($root."class/variables.php");
 
 // Redirection si appel à https://(!fqdn)/
-if ($_SERVER["HTTPS"]=="on" && $host!=$L_FQDN) {
+if (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"]=="on" && $host!=$L_FQDN) {
   header("Location: https://$L_FQDN/");
 }
 

@@ -65,7 +65,7 @@ function dnsoff() {
 </script>
 <h3><?php printf(_("Editing subdomains of %s"),$domain); ?></h3>
 <?php
-	if ($error) {
+	if (isset($error) && $error) {
 		echo "<p class=\"error\">$error</p>";
 	}
 ?>

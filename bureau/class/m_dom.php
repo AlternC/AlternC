@@ -66,7 +66,7 @@ class m_dom {
    */
   var $islocked=false;
 
-  var $type_local = "LOCAL";
+  var $type_local = "VHOST";
   var $type_url = "URL";
   var $type_ip = "IP";
   var $type_webmail = "WEBMAIL";
@@ -223,7 +223,7 @@ class m_dom {
     $this->domains=array();
     if ($db->num_rows()>0) {
       while ($db->next_record()) {
-	    $this->domains[]=$db->f("domaine");
+      $this->domains[]=$db->f("domaine");
       }
     }
     return $this->domains;
@@ -347,16 +347,16 @@ class m_dom {
     if (!$force) {
       $v=checkhostallow($domain,$this->dns);
       if ($v==-1) {
-	$err->raise("dom",7); 	// TLD interdit
-	return false;
+  $err->raise("dom",7);   // TLD interdit
+  return false;
       }
       if ($dns && $v==-2) {
-	$err->raise("dom",12); 	// Domaine non trouvé dans le whois
-	return false;
+  $err->raise("dom",12);   // Domaine non trouvé dans le whois
+  return false;
       }
       if ($dns && $v==-3) {
-	$err->raise("dom",23); 	// Domaine non trouvé dans le whois
-	return false;
+  $err->raise("dom",23);   // Domaine non trouvé dans le whois
+  return false;
       }
 
       if ($dns) $dns="1"; else $dns="0";
@@ -365,11 +365,11 @@ class m_dom {
       if ($tld[$v]==5) $dns=0;
       // It must be a real domain (no subdomain)
       if (!$dns) {
-	$v=checkhostallow_nodns($domain);
-	if ($v) {
-	  $err->raise("dom",22);
-	  return false;
-	}
+  $v=checkhostallow_nodns($domain);
+  if ($v) {
+    $err->raise("dom",22);
+    return false;
+  }
       }
     }
     // Check the quota :
@@ -385,8 +385,8 @@ class m_dom {
       $db->query("SELECT domaine FROM domaines WHERE compte='$cuid' AND domaine='$slavedom';");
       $db->next_record();
       if (!$db->Record["domaine"]) {
-	$err->raise("dom",1,$slavedom);
-	$isslave=false;
+  $err->raise("dom",1,$slavedom);
+  $isslave=false;
       }
       // Point to the master domain : 
       $this->set_sub_domain($domain, '',     $this->type_url, 'http://www.'.$slavedom);
@@ -399,7 +399,7 @@ class m_dom {
       $domshort=str_replace("-","",str_replace(".","",$domain));
       
       if (! is_dir($dest_root . "/". $domshort)) {
-	mkdir($dest_root . "/". $domshort);
+  mkdir($dest_root . "/". $domshort);
       }
       
       // Creation des 3 sous-domaines par défaut : Vide, www et mail
@@ -412,19 +412,19 @@ class m_dom {
     // Declenchons les autres classes.    
     foreach($classes as $c) {
       if (method_exists($GLOBALS[$c],"alternc_add_domain")) {
-	$GLOBALS[$c]->alternc_add_domain($domain);
+  $GLOBALS[$c]->alternc_add_domain($domain);
       }
     }
     foreach($classes as $c) {
       if (method_exists($GLOBALS[$c],"alternc_add_mx_domain")) {
-	$GLOBALS[$c]->alternc_add_mx_domain($domain);
+  $GLOBALS[$c]->alternc_add_mx_domain($domain);
       }
     }
     if ($isslave) {
       foreach($classes as $c) {
-	if (method_exists($GLOBALS[$c],"alternc_add_slave_domain")) {
-	  $GLOBALS[$c]->alternc_add_slave_domain($domain,$slavedom);
-	}
+  if (method_exists($GLOBALS[$c],"alternc_add_slave_domain")) {
+    $GLOBALS[$c]->alternc_add_slave_domain($domain,$slavedom);
+  }
       } 
     }
     return true;
@@ -449,11 +449,11 @@ class m_dom {
     global $db,$err;
     $err->log("dom","whois",$domain);
     // pour ajouter un nouveau TLD, utiliser le code ci-dessous.
-    //	echo "whois : $domain<br />";
+    //  echo "whois : $domain<br />";
     ereg(".*\.([^\.]*)",$domain,$out);
     $ext=$out[1];
     // pour ajouter un nouveau TLD, utiliser le code ci-dessous.
-    //	echo "ext: $ext<br />";
+    //  echo "ext: $ext<br />";
 
     if (($fp=@fsockopen("whois.iana.org", 43))>0) {
       fputs($fp, "$domain\r\n");
@@ -475,43 +475,43 @@ class m_dom {
       break;
     }
     // pour ajouter un nouveau TLD, utiliser le code ci-dessous.
-    //	echo "serveur : $serveur <br />";
+    //  echo "serveur : $serveur <br />";
     if (($fp=@fsockopen($serveur, 43))>0) {
       fputs($fp, "$egal$domain\r\n");
       $found = false;
       $state=0;
       while (!feof($fp)) {
-	$ligne = fgets($fp,128);
-	// pour ajouter un nouveau TLD, utiliser le code ci-dessous.
-	//	echo "| $ligne<br />";
-	switch($ext) {
-	case "org":
-	case "com":
-	case "net":
-	case "info":
-	case "biz":
-	case "name":
-	case "cc":
-	  if (ereg("Name Server:", $ligne)) {
-	    $found = true;
-	    $tmp=strtolower(ereg_replace(chr(10), "",ereg_replace(chr(13),"",ereg_replace(" ","", ereg_replace("Name Server:","", $ligne)))));
-	    if ($tmp)
-	      $server[]=$tmp;
-	  }
-	  break;
-	case "cx":
-	  $ligne = ereg_replace(chr(10), "",ereg_replace(chr(13),"",ereg_replace(" ","", $ligne)));
-	  if ($ligne=="" && $state==1)
-	    $state=2;
-	  if ($state==1)
-	    $server[]=strtolower($ligne);
-	  if ($ligne=="Nameservers:" && $state==0) {
-	    $state=1;
-	    $found = true;
-	  }
-	  break;
+  $ligne = fgets($fp,128);
+  // pour ajouter un nouveau TLD, utiliser le code ci-dessous.
+  //  echo "| $ligne<br />";
+  switch($ext) {
+  case "org":
+  case "com":
+  case "net":
+  case "info":
+  case "biz":
+  case "name":
+  case "cc":
+    if (ereg("Name Server:", $ligne)) {
+      $found = true;
+      $tmp=strtolower(ereg_replace(chr(10), "",ereg_replace(chr(13),"",ereg_replace(" ","", ereg_replace("Name Server:","", $ligne)))));
+      if ($tmp)
+        $server[]=$tmp;
+    }
+    break;
+  case "cx":
+    $ligne = ereg_replace(chr(10), "",ereg_replace(chr(13),"",ereg_replace(" ","", $ligne)));
+    if ($ligne=="" && $state==1)
+      $state=2;
+    if ($state==1)
+      $server[]=strtolower($ligne);
+    if ($ligne=="Nameservers:" && $state==0) {
+      $state=1;
+      $found = true;
+    }
+    break;
         case "eu":
-	case "be":
+  case "be":
           $ligne=preg_replace("/^ *([^ ]*) \(.*\)$/","\\1",trim($ligne));
           if($found)
              $tmp = trim($ligne);
@@ -540,8 +540,8 @@ class m_dom {
               $server[]=$tmp;
           }
           break;
-	case "fr":
-	case "re":
+  case "fr":
+  case "re":
           if (ereg("nserver:", $ligne)) {
             $found=true;
             $tmp=strtolower(preg_replace("/nserver:\s*([^\s]*)\s*.*$/","\\1", $ligne));
@@ -549,25 +549,25 @@ class m_dom {
               $server[]=$tmp;
           }
           break;
-	case "ca":
-	case "ws";
-	  if (ereg('^[[:space:]]*Name servers:[[:space:]]*$', $ligne)) {
-	        // found the server
-	  	$state = 1;
-	  } elseif ($state) {
-	  	if (ereg('^[^%]', $ligne) && $ligne = ereg_replace('[[:space:]]', "", $ligne)) {
-		  // first non-whitespace line is considered to be the nameservers themselves
-		  $found = true;
-		  $server[] = $ligne;
-		}
-	  }
-	  break;
+  case "ca":
+  case "ws";
+    if (ereg('^[[:space:]]*Name servers:[[:space:]]*$', $ligne)) {
+          // found the server
+      $state = 1;
+    } elseif ($state) {
+      if (ereg('^[^%]', $ligne) && $ligne = ereg_replace('[[:space:]]', "", $ligne)) {
+      // first non-whitespace line is considered to be the nameservers themselves
+      $found = true;
+      $server[] = $ligne;
+    }
+    }
+    break;
         case "coop":
           if (preg_match('/Host Name:\s*([^\s]+)/', $ligne, $matches)) {
             $found = true;
             $server[] = $matches[1];
           }
-	} // switch
+  } // switch
       } // while
       fclose($fp);
     } else {
@@ -669,7 +669,7 @@ class m_dom {
     $r["dns_result"]=$db->Record["dns_result"];
     $r["mail"]=$db->Record["gesmx"];
     $r["mx"]=$db->Record["mx"];
-    $r[noerase]=$db->Record[noerase];
+    $r['noerase']=$db->Record['noerase'];
     $db->free();
     $db->query("select count(*) as cnt from sub_domaines where compte='$cuid' and domaine='$dom'");
     $db->next_record();
@@ -690,8 +690,8 @@ class m_dom {
       $r["sub"][$i]["web_action"]=$db->Record["web_action"];
 /*
       if ($db->Record["type"]==3) { // Webmail
-	$this->webmail=1;
-	$r["sub"][$i]["dest"]=_("Webmail access");
+  $this->webmail=1;
+  $r["sub"][$i]["dest"]=_("Webmail access");
       }
 */
     }
@@ -754,6 +754,8 @@ class m_dom {
 
 
   function check_type_value($type, $value) {
+    global $db,$err,$cuid;
+
     // check the type we can have in domaines_type.target
 
     switch ($this->domains_type_target_values($type)) {
@@ -986,14 +988,14 @@ class m_dom {
       $vmx = $this->checkmx($dom,$mx);
       if ($vmx == 1) {
         // Aucun champ mx de spécifié sur le dns
-	$err->raise("dom",25);
-	return false;
+  $err->raise("dom",25);
+  return false;
       }
   
       if ($vmx == 2) {
         // Serveur non spécifié parmi les champx mx
-	$err->raise("dom",25);
-	return false;
+  $err->raise("dom",25);
+  return false;
       }
     }
       
@@ -1002,18 +1004,18 @@ class m_dom {
     if ($gesmx && !$r["mail"]) { // on a associé le MX : on cree donc l'entree dans LDAP
       // Lancement de add_dom sur les classes domain_sensitive :
       foreach($classes as $c) {
-	if (method_exists($GLOBALS[$c],"alternc_add_mx_domain")) {
-	$GLOBALS[$c]->alternc_add_mx_domain($dom);
-	}
+  if (method_exists($GLOBALS[$c],"alternc_add_mx_domain")) {
+  $GLOBALS[$c]->alternc_add_mx_domain($dom);
+  }
       }
     }
     
     if (!$gesmx && $r["mail"]) { // on a dissocié le MX : on détruit donc l'entree dans LDAP
       // Lancement de del_dom sur les classes domain_sensitive :
       foreach($classes as $c) {
-	if (method_exists($GLOBALS[$c],"alternc_del_mx_domain")) {
-	  $GLOBALS[$c]->alternc_del_mx_domain($dom);
-	}
+  if (method_exists($GLOBALS[$c],"alternc_del_mx_domain")) {
+    $GLOBALS[$c]->alternc_del_mx_domain($dom);
+  }
       }
     }
     
@@ -1034,15 +1036,15 @@ class m_dom {
    * through AXFR Transfers from the bind server.
    */
   function enum_slave_ip() {
-	global $db,$err;
-	$db->query("SELECT * FROM slaveip;");
-	if (!$db->next_record()) {
-	  return false;
-	}
-	do {
-	  $res[]=$db->Record;
-	} while ($db->next_record());
-	return $res;
+  global $db,$err;
+  $db->query("SELECT * FROM slaveip;");
+  if (!$db->next_record()) {
+    return false;
+  }
+  do {
+    $res[]=$db->Record;
+  } while ($db->next_record());
+  return $res;
   }
 
   /* ----------------------------------------------------------------- */
@@ -1050,23 +1052,23 @@ class m_dom {
    * Add an ip address (or a ip class) to the list of allowed slave ip access list.
    */
   function add_slave_ip($ip,$class="32") {
-	global $db,$err;
-	if (!checkip($ip)) {
-		$err->raise("dom",19);
-		return false;
-	}
-	$class=intval($class);
-	if ($class<8 || $class>32) $class=32;
-	$db->query("SELECT * FROM slaveip WHERE ip='$ip' AND class='$class';");
-	if ($db->next_record()) {
-	  $err->raise("err",22);
-	  return false;
-	}
-	$db->query("INSERT INTO slaveip (ip,class) VALUES ('$ip','$class');");
-	$f=fopen(SLAVE_FLAG,"w");
-	fputs($f,"yopla");
-	fclose($f);	
-	return true;
+  global $db,$err;
+  if (!checkip($ip)) {
+    $err->raise("dom",19);
+    return false;
+  }
+  $class=intval($class);
+  if ($class<8 || $class>32) $class=32;
+  $db->query("SELECT * FROM slaveip WHERE ip='$ip' AND class='$class';");
+  if ($db->next_record()) {
+    $err->raise("err",22);
+    return false;
+  }
+  $db->query("INSERT INTO slaveip (ip,class) VALUES ('$ip','$class');");
+  $f=fopen(SLAVE_FLAG,"w");
+  fputs($f,"yopla");
+  fclose($f);  
+  return true;
   }
 
   /* ----------------------------------------------------------------- */
@@ -1074,16 +1076,16 @@ class m_dom {
    * Remove an ip address (or a ip class) from the list of allowed slave ip access list.
    */
   function del_slave_ip($ip) {
-	global $db,$err;
-	if (!checkip($ip)) {
-		$err->raise("dom",19);
-		return false;
-	}
-	$db->query("DELETE FROM slaveip WHERE ip='$ip'");
-	$f=fopen(SLAVE_FLAG,"w");
-	fputs($f,"yopla");
-	fclose($f);	
-	return true;
+  global $db,$err;
+  if (!checkip($ip)) {
+    $err->raise("dom",19);
+    return false;
+  }
+  $db->query("DELETE FROM slaveip WHERE ip='$ip'");
+  $f=fopen(SLAVE_FLAG,"w");
+  fputs($f,"yopla");
+  fclose($f);  
+  return true;
   }
 
 
@@ -1093,12 +1095,12 @@ class m_dom {
    * Check for a slave account
    */
   function check_slave_account($login,$pass) {
-	global $db,$err;
-	$db->query("SELECT * FROM slaveaccount WHERE login='$login' AND pass='$pass';");
-	if ($db->next_record()) { 
-		return true;
-	}
-	return false;
+  global $db,$err;
+  $db->query("SELECT * FROM slaveaccount WHERE login='$login' AND pass='$pass';");
+  if ($db->next_record()) { 
+    return true;
+  }
+  return false;
   }
 
   /* ----------------------------------------------------------------- */
@@ -1106,12 +1108,12 @@ class m_dom {
    * Out (echo) the complete hosted domain list : 
    */
   function echo_domain_list() {
-	global $db,$err;
-	$db->query("SELECT domaine FROM domaines WHERE gesdns=1 ORDER BY domaine");
-	while ($db->next_record()) {
-		echo $db->f("domaine")."\n";
-	}
-	return true;
+  global $db,$err;
+  $db->query("SELECT domaine FROM domaines WHERE gesdns=1 ORDER BY domaine");
+  while ($db->next_record()) {
+    echo $db->f("domaine")."\n";
+  }
+  return true;
   }
 
 
@@ -1120,17 +1122,17 @@ class m_dom {
    * Returns the complete hosted domain list : 
    */
   function get_domain_list($uid=-1) {
-	global $db,$err;
-	$uid=intval($uid);
-	$res=array();
-	if ($uid!=-1) {
-	  $sql=" AND compte='$uid' ";
-	}
-	$db->query("SELECT domaine FROM domaines WHERE gesdns=1 $sql ORDER BY domaine");
-	while ($db->next_record()) {
-		$res[]=$db->f("domaine");
-	}
-	return $res;
+  global $db,$err;
+  $uid=intval($uid);
+  $res=array();
+  if ($uid!=-1) {
+    $sql=" AND compte='$uid' ";
+  }
+  $db->query("SELECT domaine FROM domaines WHERE gesdns=1 $sql ORDER BY domaine");
+  while ($db->next_record()) {
+    $res[]=$db->f("domaine");
+  }
+  return $res;
   }
 
 
@@ -1139,14 +1141,14 @@ class m_dom {
    * Return the list of allowed slave accounts 
    */
   function enum_slave_account() {
-	global $db,$err;
-	$db->query("SELECT * FROM slaveaccount;");
-	$res=array();
-	while ($db->next_record()) {
-		$res[]=$db->Record;
-	}
-	if (!count($res)) return false;
-	return $res;
+  global $db,$err;
+  $db->query("SELECT * FROM slaveaccount;");
+  $res=array();
+  while ($db->next_record()) {
+    $res[]=$db->Record;
+  }
+  if (!count($res)) return false;
+  return $res;
   }
 
   /* ----------------------------------------------------------------- */
@@ -1154,14 +1156,14 @@ class m_dom {
    * Add a slave account that will be allowed to access the domain list
    */
   function add_slave_account($login,$pass) {
-	global $db,$err;
-	$db->query("SELECT * FROM slaveaccount WHERE login='$login'");
-	if ($db->next_record()) {
-	  $err->raise("err",23);
-	  return false;
-	}
-	$db->query("INSERT INTO slaveaccount (login,pass) VALUES ('$login','$pass')");
-	return true;
+  global $db,$err;
+  $db->query("SELECT * FROM slaveaccount WHERE login='$login'");
+  if ($db->next_record()) {
+    $err->raise("err",23);
+    return false;
+  }
+  $db->query("INSERT INTO slaveaccount (login,pass) VALUES ('$login','$pass')");
+  return true;
   }
 
   /* ----------------------------------------------------------------- */
@@ -1169,9 +1171,9 @@ class m_dom {
    * Remove a slave account
    */
   function del_slave_account($login) {
-	global $db,$err;
-	$db->query("DELETE FROM slaveaccount WHERE login='$login'");
-	return true;
+  global $db,$err;
+  $db->query("DELETE FROM slaveaccount WHERE login='$login'");
+  return true;
   }
 
   /*************/

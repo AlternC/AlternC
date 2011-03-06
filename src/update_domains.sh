@@ -95,7 +95,7 @@ done
 for dom in $( mysql_query "select domaine from domaines where dns_action = 'DELETE';") ; do
     dns_delete $dom
     # Web configurations have already bean cleaned previously
-    mysql_query "delete sub_domaines where domaine='$dom'; delete domaines where domaine='$dom';"
+    mysql_query "delete from sub_domaines where domaine='$dom'; delete from domaines where domaine='$dom';"
     RELOAD_ZONES="$RELOAD_ZONES $dom"
 done
 
@@ -114,7 +114,8 @@ fi
 mv "$tempo" "$VHOST_FILE"
 
 # we assume we run apache and bind on the master
-/usr/bin/alternc_reload $RELOAD_ZONES || true
+#/usr/bin/alternc_reload $RELOAD_ZONES || true
+/usr/bin/alternc_reload all || true
 for slave in $ALTERNC_SLAVES; do
     if [ "$slave" != "localhost" ]; then
         ssh alternc@$slave alternc_reload "$RELOAD_ZONES" || true
