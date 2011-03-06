@@ -66,7 +66,7 @@ else
 ?>
 <h3><?php printf(_("Email addresses of the domain %s"),$domain); ?> : </h3>
 <?php
-if ($error) {
+if (isset($error) && $error) {
   echo "<p class=\"error\">$error</p>";
 }
 ?>
