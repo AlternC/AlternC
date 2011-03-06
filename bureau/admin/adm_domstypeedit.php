@@ -41,9 +41,10 @@ $fields = array (
     "target"        => array ("request", "string", ""),
     "entry"         => array ("request", "string", ""),
     "compatibility" => array ("request", "string", ""),
-    "enable"        => array ("request", "boolean", ""),
+    "enable"        => array ("request", "string", ""),
     "only_dns"      => array ("request", "boolean", ""),
     "need_dns"      => array ("request", "boolean", ""),
+    "advanced"      => array ("request", "boolean", ""),
 );
 getFields($fields);
 
@@ -90,12 +91,18 @@ if ($error_edit) {
             <td><input name="entry" type="text" size="30" value="<?php echo $d['entry']; ?>" /></td>
       </tr>
 	    <tr>
-	<th><?php __("Compatibility");?><br /><small><?php __("Enter comma-separated name of other types"); ?></small></th>
+          	<th><?php __("Compatibility");?><br /><small><?php __("Enter comma-separated name of other types"); ?></small></th>
             <td><input name="compatibility" type="text" size="15" value="<?php echo $d['compatibility']; ?>" /></td>
       </tr>
 	    <tr>
             <th><?php __("Enabled");?></th>
-            <td><input name="enable" type="checkbox" value="1" <?php cbox($d['enable']); ?> /></td>
+            <td>
+              <select name="enable">
+                <?php foreach ($dom->domains_type_enable_values() as $k) { ?>
+                  <option value="<?php echo $k ?>" <?php echo ($d['enable']==$k)?"selected":"";?> ><?php __($k);?></option>
+                <?php } ?>
+              </select>
+            </td>
       </tr>
 	    <tr>
             <th><?php __("Do only a DNS entry");?></th>
@@ -105,10 +112,14 @@ if ($error_edit) {
             <th><?php __("Domain must have our DNS");?></th>
             <td><input name="need_dns" type="checkbox" value="1" <?php cbox($d['need_dns']); ?> /></td>
       </tr>
+	    <tr>
+            <th><?php __("Is it an advanced option ?");?></th>
+            <td><input name="advanced" type="checkbox" value="1" <?php cbox($d['advanced']); ?> /></td>
+      </tr>
       <tr class="trbtn">
           <td colspan="2">
              <input type="submit" class="inb" name="submit" value="<?php __("Change this domain type"); ?>" />
-	    <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='adm_domstype.php'"/>
+	           <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='adm_domstype.php'"/>
           </td>
         </tr>
 </table>

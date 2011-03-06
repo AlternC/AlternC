@@ -51,7 +51,7 @@ include_once("head.php");
 <p>
 <?php __("Here is the list of domain types."); ?>
 </p>
-<p><span class="ina"><a href="adm_domstypeadd.php"><?php __("Create a domain type"); ?></a></span></p>
+<p><span class="ina"><a href="#" OnClick="alert('Todo. But if you want to play with that, you are advanced enough to do an insert in MySQL');" ><?php __("Create a domain type"); ?></a></span></p>
 <table class="tlist">
 <tr>
     <th colspan="2"> </th>
@@ -63,6 +63,7 @@ include_once("head.php");
     <th><?php __("Enabled?");?></th>
     <th><?php __("Only DNS?");?></th>
     <th><?php __("Need to be DNS?");?></th>
+    <th><?php __("Advanced?");?></th>
     <th/>
 </tr>
 <?php 
@@ -78,9 +79,10 @@ foreach($dom->domains_type_lst() as $d) {
     <td><?php echo $d['target'];?></td>
     <td><?php echo $d['entry'];?></td>
     <td><?php echo $d['compatibility'];?></td>
-    <td><?php echo $d['enable']?__("Yes"):__("No");?></td>
+    <td><?php echo __($d['enable']);?></td>
     <td><?php echo $d['only_dns']?__("Yes"):__("No");?></td>
     <td><?php echo $d['need_dns']?__("Yes"):__("No");?></td>
+    <td><?php echo $d['advanced']?__("Yes"):__("No");?></td>
 </tr>
 <?php } // end foreach 
 ?>

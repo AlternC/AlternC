@@ -7,6 +7,7 @@ include_once("head.php");
 # Take the values of the subdomain in arguments
 
 function sub_domains_edit($domain, $sub=false,$type=false,$value=false) {
+global $admin, $oldid;
 
 $dom=new m_dom();
 $dom->lock();
@@ -37,13 +38,27 @@ $dom->unlock();
   <?php __("Create a subdomain:"); ?></td><td>
 <input type="text" class="int" name="sub" style="text-align:right" value="<?php ehe($sub); ?>" size="22" id="sub" /><span class="int" id="newsubname">.<?php echo $domain; ?></span></td>
 		</tr>
-    <?php foreach($dom->domains_type_lst() as $dt) { 
-        if (! $dt['enable']) continue;
+    <?php 
+      $first_advanced=true;
+      foreach($dom->domains_type_lst() as $dt) { 
+        // If this type is disabled AND it's not the type in use here, continue
+        if ( $dt['enable'] == 'NONE' && strtoupper($type)!=strtoupper($dt['name'])) continue ;
+        // If this type is only for ADMIN and i'm not an admin, continue (oldid is to check if we are an admin who take user identity)
+        if (( $dt['enable'] == 'ADMIN') && (! $admin->enabled and ! intval($oldid))) continue;
+
         if ( (! $r['dns'] ) and ($dt['need_dns']) ) continue;
-        //if ( strtoupper($type)!=strtoupper($dt['name']) ) continue;
         $targval=(strtoupper($type)==strtoupper($dt['name']))?$sd['dest']:'';
+
+        if ($dt['advanced']) {
+          $lst_advanced[]=$dt['name'];
+          if ($first_advanced) {
+            $first_advanced=false;
+            echo "<tr id='domtype_show' onClick=\"domtype_advanced_show();\"><th colspan=2><a href=\"javascript:domtype_advanced_show();\"><b>+ "; __("Show advanced options"); echo "</b></a></th></tr>";
+            echo "<tr id='domtype_hide' onClick=\"domtype_advanced_hide();\" style='display:none'><th colspan=2><a href=\"javascript:domtype_advanced_hide();\"><b>- "; __("Hide advanced options"); echo "</b></a></th></tr>";
+          }
+        }
     ?>
-    <tr>
+    <tr id="tr_<?php echo $dt['name']; ?>">
       <td>
         <input type="radio" id="r_<?php echo $dt['name']?>" class="inc" name="type" value="<?php echo $dt['name']; ?>" <?php cbox(strtoupper($type)==strtoupper($dt['name'])); ?> />
         <label for="r_<?php echo $dt['name']?>"><?php __($dt['description']); ?></label>
@@ -93,6 +108,22 @@ $dom->unlock();
 		</tr>
 	</table>
 </form>
+
+<script type="text/javascript">
+function domtype_advanced_hide() { 
+  <?php foreach ($lst_advanced as $adv) echo "$(\"#tr_$adv\").hide();\n"?>
+  $("#domtype_show").show();
+  $("#domtype_hide").hide();
+}
+function domtype_advanced_show() { 
+  <?php foreach ($lst_advanced as $adv) echo "$(\"#tr_$adv\").show();\n"?>
+  $("#domtype_show").hide();
+  $("#domtype_hide").show();
+}
+
+domtype_advanced_hide();
+
+</script>
 
 <?php
 } // sub_domains_edit

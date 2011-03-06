@@ -102,12 +102,26 @@ class m_dom {
   function domains_type_lst() {
     global $db,$err,$cuid;
     $err->log("dom","domains_type_lst");
-    $db->query("select * from domaines_type order by name;");
+    $db->query("select * from domaines_type order by advanced, name;");
     $this->domains_type_lst=false;
     while ($db->next_record()) {
       $this->domains_type_lst[] = $db->Record;
     }
     return $this->domains_type_lst;
+  }
+
+  function domains_type_enable_values() {
+    global $db,$err,$cuid;
+    $err->log("dom","domains_type_target_values");
+    $db->query("desc domaines_type;");
+    $r = array();
+    while ($db->next_record()) {
+      if ($db->f('Field') == 'enable') {
+        $tab = explode(",", substr($db->f('Type'), 5, -1));
+        foreach($tab as $t) { $r[]=substr($t,1,-1); }
+      }
+    }
+    return $r;
   }
 
   function domains_type_target_values($type=null) {
@@ -167,7 +181,7 @@ class m_dom {
     return true;
   }
 
-  function domains_type_update($name, $description, $target, $entry, $compatibility, $enable, $only_dns, $need_dns) {
+  function domains_type_update($name, $description, $target, $entry, $compatibility, $enable, $only_dns, $need_dns,$advanced) {
     global $err,$cuid,$db;
     $id=intval($id);
     $name=mysql_real_escape_string($name);
@@ -175,10 +189,11 @@ class m_dom {
     $target=mysql_real_escape_string($target);
     $entry=mysql_real_escape_string($entry);
     $compatibility=mysql_real_escape_string($compatibility);
-    $enable=intval($enable);
+    $enable=mysql_real_escape_string($enable);
     $only_dns=intval($only_dns);
     $need_dns=intval($need_dns);
-    $db->query("UPDATE domaines_type SET description='$description', target='$target', entry='$entry', compatibility='$compatibility', enable=$enable, need_dns=$need_dns, only_dns=$only_dns where name='$name';");
+    $advanced=intval($advanced);
+    $db->query("UPDATE domaines_type SET description='$description', target='$target', entry='$entry', compatibility='$compatibility', enable='$enable', need_dns=$need_dns, only_dns=$only_dns, advanced='$advanced' where name='$name';");
     return true;
   }   
 

@@ -6,7 +6,7 @@ if (!$admin->enabled) {
 }
 
 
-if ( ! $dom->domains_type_update($name, $description, $target, $entry, $compatibility, $enable, $only_dns, $need_dns) ) {
+if ( ! $dom->domains_type_update($name, $description, $target, $entry, $compatibility, $enable, $only_dns, $need_dns, $advanced) ) {
     die($err->errstr());
 } else {
     include("adm_domstype.php");
