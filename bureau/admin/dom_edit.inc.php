@@ -53,8 +53,8 @@ $dom->unlock();
           $lst_advanced[]=$dt['name'];
           if ($first_advanced) {
             $first_advanced=false;
-            echo "<tr id='domtype_show' onClick=\"domtype_advanced_show();\"><th colspan=2><a href=\"javascript:domtype_advanced_show();\"><b>+ "; __("Show advanced options"); echo "</b></a></th></tr>";
-            echo "<tr id='domtype_hide' onClick=\"domtype_advanced_hide();\" style='display:none'><th colspan=2><a href=\"javascript:domtype_advanced_hide();\"><b>- "; __("Hide advanced options"); echo "</b></a></th></tr>";
+            echo "<tr id='domtype_show' class='lst2' onClick=\"domtype_advanced_show();\"><td colspan=2><a href=\"javascript:domtype_advanced_show();\"><b>+ "; __("Show advanced options"); echo "</b></a></td></tr>";
+            echo "<tr id='domtype_hide' class='lst2' onClick=\"domtype_advanced_hide();\" style='display:none'><td colspan=2><a href=\"javascript:domtype_advanced_hide();\"><b>- "; __("Hide advanced options"); echo "</b></a></td></tr>";
           }
         }
     ?>
