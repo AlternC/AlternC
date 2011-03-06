@@ -162,7 +162,8 @@ host_change_enable() {
 }
 
 host_delete() {
-    local FQDN=$1
+    local VTYPE=$1
+    local FQDN=$2
     # Execute post-install hooks
     launch_hooks "delete" "$1" "$2" "$3" "$4"
     if [ $? -gt 10 ] ; then

@@ -114,9 +114,7 @@ foreach ($domains as $key => $domain) {
 	} else {
 
 # 2.1 keep a copy of where it was, in an SQL request
-	  $backup .= "UPDATE `sub_domaines` SET `type`='$type', valeur='$dest' WHERE `domaine`='$domain' AND sub='$sub';\n";
-	  $backup .= "DELETE FROM `sub_domaines_standby` WHERE domaine='$domain' and sub='$sub';\n";
-	  $backup .= "INSERT INTO sub_domaines_standby (compte,domaine,sub,valeur,type,action) values ('$cuid','$domain','$sub','$dest','$type',1);\n"; // UPDATE
+	  $backup .= "UPDATE `sub_domaines` SET `type`='$type', valeur='$dest',web_action='UPDATE' WHERE `domaine`='$domain' AND sub='$sub';\n";
 	  
 # 2.2 change the subdomain to redirect to http://spam.koumbit.org/
 	  $dom->lock();

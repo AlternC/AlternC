@@ -76,7 +76,7 @@ MYSQL_UNREACHABLE_DATABASE=`$printf "$($gettext "Cannot access accounts database
 # Have to get AlternC conf file :
 ! [ -f "$ALTERNC_CONF_FILE" ] && { echo $MISSING_CONF_FILE ; exit 1 ; } || . $ALTERNC_CONF_FILE
 mysql="$mysql --defaults-file=/etc/alternc/my.cnf"
-$mysql -e "select count(*) from domaines_standby;" > /dev/null 2>&1
+$mysql -e "desc domaines;" > /dev/null 2>&1
 [ "$?" != 0 ] && { echo "$MYSQL_UNREACHABLE_DATABASE" ; exit 1 ; }
 
 # Does the stuff
