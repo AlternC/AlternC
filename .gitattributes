@@ -358,7 +358,7 @@ etc/alternc/postfix-slave.cf -text
 etc/alternc/postfix.cf -text
 etc/alternc/templates/alternc/bureau.conf -text
 etc/alternc/templates/apache2/panel.conf -text
-etc/alternc/templates/apache2/redirect.conf -text
+etc/alternc/templates/apache2/url.conf -text
 etc/alternc/templates/apache2/vhost.conf -text
 etc/alternc/templates/apache2/webmail.conf -text
 etc/alternc/templates/bind/automatic.conf -text
