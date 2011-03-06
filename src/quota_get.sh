@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 . /etc/alternc/local.sh
 
 AWK=/usr/bin/awk

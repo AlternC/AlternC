@@ -29,7 +29,7 @@ if (!(isset($lang))) {  // Use the browser first preferred language
 }
 
 
-if (!$locales[$lang]) { // Requested language not found in locales
+if (! isset($locales[$lang])) { // Requested language not found in locales
   // treat special cases such as en_AU or fr_BF : use the language only, not the country.
   $ll=substr($lang,0,2);
   foreach($locales as $l) {

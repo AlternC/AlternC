@@ -248,7 +248,7 @@ class m_mem {
   function del_session() {
     global $db,$user,$err,$cuid,$classes;
     $err->log("mem","del_session");
-    $_COOKIE["session"]=addslashes($_COOKIE["session"]);
+    $_COOKIE["session"]=addslashes(isset($_COOKIE["session"])?$_COOKIE["session"]:'');
     setcookie("session","",0,"/");
     setcookie("oldid","",0,"/admin/");
     if ($_COOKIE["session"]=="") {

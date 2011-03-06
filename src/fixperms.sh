@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/bash -e
 
 #
 # $Id: fixperms.sh,v 1.1 2005/08/29 19:21:31 benjamin Exp $

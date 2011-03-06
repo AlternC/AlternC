@@ -44,7 +44,7 @@ if (!$charset) $charset="iso-8859-1";
 </head>
 <body>
 <?
-$oldid=intval($_COOKIE['oldid']);
+$oldid=intval(isset($_COOKIE['oldid'])?$_COOKIE['oldid']:'');
 if ($oldid && $oldid!=$cuid) {
   echo "<div align=center><p class='error'>";
   __("Invited session. Clic <a href='adm_login.php'>here</a> to return to your previous session.");
