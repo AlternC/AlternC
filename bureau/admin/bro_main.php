@@ -32,12 +32,13 @@ require_once("../class/config.php");
 include_once ("head.php");
 
 $p=$bro->GetPrefs();
+if (! isset($R)) $R='';
 if (!$R && $p["golastdir"]) {
   $R=$p["lastdir"];
 }
 $R=$bro->convertabsolute($R,1);
 // on fait ?
-if ($formu) {
+if (isset($formu) && $formu) {
   switch ($formu) {
   case 1:  // Créer le répertoire $R.$nomfich
     if (!$bro->CreateDir($R,$nomfich)) {
@@ -115,7 +116,7 @@ if ($formu) {
   }
 }
 
-if ($actextract) {
+if (isset($actextract) && $actextract) {
   print _("extracting...")."<br />\n"; flush();
   if ($bro->ExtractFile($R. '/' . $file, $R)) {
     echo "<p class=\"error\">";
@@ -128,7 +129,7 @@ if ($actextract) {
 }
 
 /* Creation de la liste des fichiers courants */
-$c=$bro->filelist($R, $_REQUEST['showdirsize']);
+$c=$bro->filelist($R, isset($_REQUEST['showdirsize'])?$_REQUEST['showdirsize']:null );
 if ($c===false) $error=$err->errstr();
 
 ?>
@@ -143,7 +144,7 @@ if ($c===false) $error=$err->errstr();
  <?php __("Path"); ?> / <a href="bro_main.php?R=/"><?php echo $mem->user["login"]; ?></a>&nbsp;/&nbsp;<?php echo $bro->PathList($R,"bro_main.php") ?>
 </p>
 
-<?php if ($error) echo "<p class=\"error\">$error</p>"; ?>
+<?php if (isset($error) && $error) echo "<p class=\"error\">$error</p>"; ?>
 
 <table><tr>
 <td class="formcell">
@@ -184,7 +185,7 @@ if ($c===false) $error=$err->errstr();
 
 <?php
 /* Renommer / Copier / Déplacer les fichiers : */
-if ($formu==2 && $actrename && count($d)) {
+if (isset($formu) && $formu==2 && $actrename && count($d)) {
   echo "<table cellpadding=\"6\">\n";
   echo "<form action=\"bro_main.php\" method=\"post\">\n";
   echo "<input type=\"hidden\" name=\"R\" value=\"$R\" />\n";
@@ -201,7 +202,7 @@ if ($formu==2 && $actrename && count($d)) {
 }
 
 /* [ML] Changer les permissions : */
-if ($formu==2 && $_REQUEST['actperms'] && count($d)) {
+if (isset($formu) && $formu==2 && $_REQUEST['actperms'] && count($d)) {
   echo "<form action=\"bro_main.php\" method=\"post\">\n";
   echo "<input type=\"hidden\" name=\"R\" value=\"$R\" />\n";
   echo "<input type=\"hidden\" name=\"formu\" value=\"7\" />\n";

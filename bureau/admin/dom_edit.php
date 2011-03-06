@@ -162,7 +162,7 @@ sub_domains_edit($domain);
 		 modification des parametres dns
  -->
 <?php
-if (!$r[noerase]) {
+if (!$r['noerase']) {
 ?>
 
 <hr />

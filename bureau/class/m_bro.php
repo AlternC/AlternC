@@ -693,10 +693,11 @@ class m_bro {
     $path=$this->convertabsolute($path,1);
     $a=explode("/",$path);
     if (!is_array($a)) $a=array($a);
+    $c='';
     for($i=0;$i<count($a);$i++) {
       if ($a[$i]) {
-	$R.=$a[$i]."/";
-	$c.="<a href=\"$action?R=".urlencode($R)."\">".$a[$i]."</a>&nbsp;/&nbsp;";
+	      $R.=$a[$i]."/";
+	      $c.="<a href=\"$action?R=".urlencode($R)."\">".$a[$i]."</a>&nbsp;/&nbsp;";
       }
     }
     return $c;

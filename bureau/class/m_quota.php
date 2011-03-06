@@ -124,37 +124,44 @@ class m_quota {
    * @Return array the quota used and total for this ressource (or for all ressource if unspecified)
    */
   function getquota($ressource="") {
-    global $db,$err,$cuid;
+    global $db,$err,$cuid,$get_quota_cache;
     $err->log("quota","getquota",$ressource);
-    $this->qlist(); // Generate the quota list.
-    $db->query("select * from quotas where uid='$cuid';");
-    if ($db->num_rows()==0) {
-      return array("t"=>0, "u"=>0);
+    if (! empty($get_quota_cache) ) {
+      // This function is called many time each webpage, so I cache the result
+      $this->quotas = $get_quota_cache;
     } else {
-      while ($db->next_record()) {
-	$ttmp[]=$db->Record;
-      }
+      $this->qlist(); // Generate the quota list.
+      $db->query("select * from quotas where uid='$cuid';");
+      if ($db->num_rows()==0) {
+        return array("t"=>0, "u"=>0);
+      } else {
+        while ($db->next_record()) {
+        $ttmp[]=$db->Record;
+      }             
       foreach ($ttmp as $tt) {
-	$g=array("t"=>$tt["total"],"u"=>0);
-	if (method_exists($GLOBALS[$this->clquota[$tt["name"]]],"alternc_get_quota")) {
-	  $g["u"]=$GLOBALS[$this->clquota[$tt["name"]]]->alternc_get_quota($tt["name"]);
-	}
-	$this->quotas[$tt["name"]]=$g;
-      }
+        $g=array("t"=>$tt["total"],"u"=>0);
+        if (method_exists($GLOBALS[$this->clquota[$tt["name"]]],"alternc_get_quota")) {
+          $g["u"]=$GLOBALS[$this->clquota[$tt["name"]]]->alternc_get_quota($tt["name"]);
+        }
+        $this->quotas[$tt["name"]]=$g;
+        }           
+      }   
+      reset($this->disk);
+      while (list($key,$val)=each($this->disk)) {
+        $a=array(); 
+        exec("/usr/lib/alternc/quota_get ".$cuid." ".$val,$a);
+        $this->quotas[$val]=array("t"=>$a[1],"u"=>$a[0]);
+      }   
+      $get_quota_cache = $this->quotas;
     }
-    reset($this->disk);
-    while (list($key,$val)=each($this->disk)) {
-      $a=array();
-      exec("/usr/lib/alternc/quota_get ".$cuid." ".$val,$a);
-      $this->quotas[$val]=array("t"=>$a[1],"u"=>$a[0]);
-    }
-
+    
     if ($ressource) {
       return $this->quotas[$ressource];
     } else {
       return $this->quotas;
     }
   }
+
 
 
   /* ----------------------------------------------------------------- */
