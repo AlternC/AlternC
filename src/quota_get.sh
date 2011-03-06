@@ -22,6 +22,7 @@ fi
 # quota will split its display on two lines if QUOTA_PART is bigger than 15
 # characters. *sigh*
 PART_LEN=`echo -n "$QUOTA_PART" | $WC -c`
+val=$(
 if [ "$PART_LEN" -gt 15 ]; then
     $QUOTA -g "$1" |
        $SED -n -e "\\;${QUOTA_PART};,+1s/ *\([0-9]*\) .*/\1/p" |
@@ -32,5 +33,14 @@ if [ "$PART_LEN" -gt 15 ]; then
 else
     $QUOTA -g "$1" | $AWK /${QUOTA_PART//\//\\\/}/\ {print\ '$2'}
     $QUOTA -g "$1" | $AWK /${QUOTA_PART//\//\\\/}/\ {print\ '$3'}
+fi
+)
+
+# If the quota aren't activated, I return something anyway
+if [ -z "$val" ] ; then
+        echo 0
+        echo 0
+else   
+        echo -e "$val"
 fi
 
