@@ -105,24 +105,24 @@ for dom in $( mysql_query "select domaine from domaines where dns_action = 'DELE
 done
 
 
-# Concat the apaches files
-tempo=$(mktemp "$VHOST_FILE.XXXXX")
-find "$VHOST_DIR" -mindepth 2 -type f -iname "*.conf" -exec cat '{}' > "$tempo" \;
-if [ $? -ne 0 ] ; then
-  log_error " web file concatenation failed"
-fi
-touch "$VHOST_FILE"
-if [ ! -w "$VHOST_FILE" ] ; then
-  log_error "cannot write on $VHOST_FILE"
-fi
-
-mv "$tempo" "$VHOST_FILE"
-
-# we assume we run apache and bind on the master
 if [ $RELOAD_WEB ] ; then
   RELOAD_ZONES="$RELOAD_ZONES apache"
+
+  # Concat the apaches files
+  tempo=$(mktemp "$VHOST_FILE.XXXXX")
+  find "$VHOST_DIR" -mindepth 2 -type f -iname "*.conf" -exec cat '{}' > "$tempo" \;
+  if [ $? -ne 0 ] ; then
+    log_error " web file concatenation failed"
+  fi
+  touch "$VHOST_FILE"
+  if [ ! -w "$VHOST_FILE" ] ; then
+    log_error "cannot write on $VHOST_FILE"
+  fi
+  mv "$tempo" "$VHOST_FILE"
+
 fi
 
+# we assume we run apache and bind on the master
 /usr/bin/alternc_reload $RELOAD_ZONES || true
 for slave in $ALTERNC_SLAVES; do
     if [ "$slave" != "localhost" ]; then
