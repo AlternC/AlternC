@@ -29,7 +29,12 @@ if [ `id -u` -ne 0 ]; then
 elif [ -z "$DEFAULT_MX" -o -z "$PUBLIC_IP" ]; then
     log_error "Bad configuration. Please use: dpkg-reconfigure alternc"
 elif [ -f "$LOCK_FILE" ]; then
-    log_error "last cron unfinished or stale lock file ($LOCK_FILE)."
+    process=$(ps f -p `cat "$LOCK_FILE"|tail -1`|tail -1|awk '{print $NF;}')
+    if [ "$(basename $process)" = "$(basename "$0")" ] ; then
+      log_error "last cron unfinished or stale lock file ($LOCK_FILE)."
+    else
+      rm "$LOCK_FILE"
+    fi
 fi
 
 # backward compatibility: single-server setup
@@ -38,7 +43,8 @@ if [ -z "$ALTERNC_SLAVES" ] ; then
 fi
 
 # We lock the application
-touch "$LOCK_FILE"
+echo $$ > "$LOCK_FILE"
+read
 
 # For domains we want to delete completely, make sure all the tags are all right
 # set sub_domaines.web_action = delete where domaines.dns_action = DELETE
@@ -105,7 +111,7 @@ for dom in $( mysql_query "select domaine from domaines where dns_action = 'DELE
 done
 
 
-if [ $RELOAD_WEB ] ; then
+if [ ! -z $RELOAD_WEB ] ; then
   RELOAD_ZONES="$RELOAD_ZONES apache"
 
   # Concat the apaches files
