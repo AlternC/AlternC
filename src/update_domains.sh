@@ -20,6 +20,7 @@ LOCK_FILE="$ALTERNC_LOC/bureau/cron.lock"
 OLDIFS="$IFS"
 NEWIFS=" "
 RELOAD_ZONES=""
+RELOAD_WEB=""
 B="µµ§§" # Strange letters to make split in query
 
 # Somes check before start operations
@@ -48,6 +49,7 @@ mysql_query "update sub_domaines sd, domaines d set sd.web_action = 'DELETE' whe
 for sub in $( mysql_query "select concat_ws('$B',lower(sd.type), if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine)) from sub_domaines sd where web_action ='DELETE';") ; do
     host_delete ${sub/$B/ }
     mysql_query "delete from sub_domaines where concat_ws('$B',lower(type), if(length(sub)>0,concat_ws('.',sub,domaine),domaine)) = '$sub' and web_action ='DELETE';"
+    RELOAD_WEB=true
 done
 
 # Sub domaines we want to update
@@ -60,18 +62,21 @@ where sd.web_action ='UPDATE'
 ;" | while read type domain valeur ; do
     host_create "$type" "$domain" "$valeur"
     mysql_query "update sub_domaines sd set web_action='OK',web_result='$?' where lower(sd.type)='$type' and if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine)='$domain' and sd.valeur='$valeur'; "
+    RELOAD_WEB=true
 done
 
 # Domaine to enable
 mysql_query "select concat_ws('$IFS',lower(sd.type),if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine),sd.valeur) from sub_domaines sd where sd.enable ='ENABLE' ;"|while read type domain valeur ; do
     host_enable "$type" "$domain" "$valeur"
     mysql_query "update sub_domaines sd set enable='ENABLED' where lower(sd.type)='$type' and if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine)='$domain' and sd.valeur='$valeur';"
+    RELOAD_WEB=true
 done
 
 # Domains to disable
 mysql_query "select concat_ws('$IFS',lower(sd.type),if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine),sd.valeur) from sub_domaines sd where sd.enable ='DISABLE' ;"|while read type domain valeur ; do
     host_disable "$type" "$domain" "$valeur"
     mysql_query "update sub_domaines sd set enable='DISABLED' where lower(sd.type)='$type' and if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine)='$domain' and sd.valeur='$valeur';"
+    RELOAD_WEB=true
 done
 
 # Domains we do not want to be the DNS serveur anymore :
@@ -114,8 +119,11 @@ fi
 mv "$tempo" "$VHOST_FILE"
 
 # we assume we run apache and bind on the master
-#/usr/bin/alternc_reload $RELOAD_ZONES || true
-/usr/bin/alternc_reload all || true
+if [ $RELOAD_WEB ] ; then
+  RELOAD_ZONES="$RELOAD_ZONES apache"
+fi
+
+/usr/bin/alternc_reload $RELOAD_ZONES || true
 for slave in $ALTERNC_SLAVES; do
     if [ "$slave" != "localhost" ]; then
         ssh alternc@$slave alternc_reload "$RELOAD_ZONES" || true

@@ -41,22 +41,33 @@ umask 022
 DOMAIN_LOG_FILE="/var/log/alternc/update_domains.log"
 
 if [ `whoami` = 'root' ]; then
-    sudo="env"
+  sudo="env"
 else
-    sudo="sudo"
+  sudo="sudo"
 fi
+
+function apache_reload() {
+  if [ -x /usr/sbin/apache2ctl ]; then
+    $sudo /usr/sbin/apache2ctl graceful > /dev/null || echo "Cannot restart apache" >> "$DOMAIN_LOG_FILE"
+  fi
+}
 
 RELOAD_ZONES="$*"
 
 if [ ! -z "$RELOAD_ZONES" ]; then
-    if [ "$RELOAD_ZONES" = "all" ]; then
+  for zone in $RELOAD_ZONES; do
+    case $zone in
+      "all")
         $sudo rndc reload > /dev/null || echo "Cannot reload bind" >> "$DOMAIN_LOG_FILE"
-    else
-        for zone in $RELOAD_ZONES; do
-            $sudo rndc reload "$zone" > /dev/null || echo "Cannot reload bind for zone $zone" >> "$DOMAIN_LOG_FILE"
-        done
-    fi
-    if [ -x /usr/sbin/apache2ctl ]; then
-        $sudo /usr/sbin/apache2ctl graceful > /dev/null || echo "Cannot restart apache" >> "$DOMAIN_LOG_FILE"
-    fi
+        apache_reload # keep for compatibility
+        ;;
+      "apache")
+        apache_reload
+        ;;
+      *)
+        $sudo rndc reload "$zone" > /dev/null || echo "Cannot reload bind for zone $zone" >> "$DOMAIN_LOG_FILE"
+        ;;
+    esac
+  done
 fi
+
