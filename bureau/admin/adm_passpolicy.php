@@ -117,7 +117,7 @@ if ($edit) {
 <input type="button" class="inb" name="cancel" value="<?php __("Cancel and go back to the policy list"); ?>" onclick="document.location='adm_passpolicy.php'" /></p>
 </form>
 
-      <p><?php __("The classes of characters are : <br />1. Low-case letters (a-z)<br />2. Upper-case letters (A-Z)<br />3. Figures (0-9)<br />4. Ascii symbols (!\"#$%&'()*+,-./:;<=>?@[\\]^_`)<br />5. Non-Ascii symbols (~יאגפ...)"); ?></p>
+      <p><?php __("The classes of characters are : <br />1. Low-case letters (a-z)<br />2. Upper-case letters (A-Z)<br />3. Figures (0-9)<br />4. Ascii symbols (!\"#$%&'()*+,-./:;<=>?@[\\]^_`)<br />5. Non-Ascii symbols (accents...)"); ?></p>
 </p>
 
 <?php

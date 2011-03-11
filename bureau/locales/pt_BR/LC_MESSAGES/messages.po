@@ -23,7 +23,8 @@
 #: ../admin/adm_domstypeedit.php:32 ../admin/adm_domstype.php:33
 #: ../admin/adm_domstyperegenerate.php:4 ../admin/adm_edit.php:48
 #: ../admin/adm_list.php:58 ../admin/adm_login.php:45
-#: ../admin/adm_passpolicy.php:30
+#: ../admin/adm_passpolicy.php:30 ../admin/adm_login.php:56
+#: ../admin/adm_login.php:68
 msgid "This page is restricted to authorized staff"
 msgstr "Esta página é restringida à equipe de funcionários autorizada"
 
@@ -311,6 +312,7 @@ msgstr "Conta Permitiu ?"
 #: ../admin/dom_edit.php:190 ../admin/dom_subdel.php:71
 #: ../admin/mail_add.php:65 ../admin/mail_edit.php:73 ../admin/sql_bck.php:87
 #: ../admin/sql_del.php:81 ../admin/sql_users_del.php:70
+#: ../admin/adm_domstype.php:84 ../admin/adm_domstype.php:85
 msgid "No"
 msgstr "Não"
 
@@ -332,6 +334,7 @@ msgstr "Não"
 #: ../admin/dom_edit.php:188 ../admin/dom_subdel.php:70
 #: ../admin/mail_add.php:66 ../admin/mail_edit.php:74 ../admin/sql_bck.php:88
 #: ../admin/sql_del.php:81 ../admin/sql_users_del.php:70
+#: ../admin/adm_domstype.php:84 ../admin/adm_domstype.php:85
 msgid "Yes"
 msgstr "Sim"
 
@@ -481,6 +484,7 @@ msgstr ""
 #: ../admin/adm_list.php:192 ../admin/adm_passpolicy.php:152
 #: ../admin/adm_tld.php:76 ../admin/dom_edit.php:106 ../admin/ftp_list.php:82
 #: ../admin/mail_list.php:111 ../admin/sta2_list.php:68
+#: ../admin/adm_domstype.php:75
 msgid "Edit"
 msgstr "Editar"
 
@@ -534,6 +538,7 @@ msgstr "Desktop AlternC"
 
 #: ../admin/adm_login.php:82 ../admin/adm_login.php:83
 #: ../admin/adm_login.php:67 ../admin/adm_login.php:69
+#: ../admin/adm_login.php:93
 #, fuzzy
 msgid "Member login"
 msgstr "Lista dos membros"
@@ -581,7 +586,7 @@ msgstr ""
 #: ../admin/bro_main.php:229 ../admin/adm_mxaccount.php:87
 #: ../admin/adm_mxaccount.php:89 ../admin/adm_slaveaccount.php:88
 #: ../admin/adm_slaveip.php:88 ../admin/bro_main.php:255
-#: ../admin/dom_edit.php:109
+#: ../admin/dom_edit.php:109 ../admin/bro_main.php:256
 msgid "Delete"
 msgstr "Suprimir"
 
@@ -872,12 +877,14 @@ msgstr "Sair"
 #: ../admin/bro_main.php:126 ../admin/bro_main.php:138
 #: ../admin/menu_brouteur.php:33 ../admin/bro_main.php:133
 #: ../admin/hta_edit.php:53 ../admin/hta_edit.php:88 ../admin/bro_main.php:135
+#: ../admin/bro_main.php:136
 msgid "File browser"
 msgstr "Navegador de arquivos"
 
 #: ../admin/bro_main.php:95 ../admin/bro_main.php:133
 #: ../admin/bro_main.php:132 ../admin/bro_main.php:150
 #: ../admin/bro_main.php:147 ../admin/bro_main.php:172
+#: ../admin/bro_main.php:173
 msgid "Create"
 msgstr "Criar"
 
@@ -886,6 +893,7 @@ msgstr "Criar"
 #: ../admin/bro_main.php:134 ../admin/bro_main.php:152
 #: ../admin/bro_main.php:149 ../admin/bro_main.php:188
 #: ../admin/bro_main.php:174 ../admin/bro_main.php:214
+#: ../admin/bro_main.php:175 ../admin/bro_main.php:215
 msgid "File"
 msgstr "Arquivo"
 
@@ -904,7 +912,8 @@ msgstr "Arquivo"
 #: ../admin/bro_main.php:343 ../admin/ftp_edit.php:62 ../admin/ftp_list.php:72
 #: ../admin/hta_add.php:50 ../admin/hta_edit.php:98
 #: ../admin/hta_edituser.php:52 ../admin/hta_list.php:67
-#: ../admin/sta2_list.php:58
+#: ../admin/sta2_list.php:58 ../admin/bro_main.php:176
+#: ../admin/bro_main.php:344
 msgid "Folder"
 msgstr "Pasta"
 
@@ -916,6 +925,8 @@ msgstr "Pasta"
 #: ../admin/bro_main.php:166 ../admin/bro_main.php:172
 #: ../admin/bro_main.php:231 ../admin/bro_main.php:192
 #: ../admin/bro_main.php:198 ../admin/bro_main.php:256
+#: ../admin/bro_main.php:193 ../admin/bro_main.php:199
+#: ../admin/bro_main.php:257
 msgid "Rename"
 msgstr "Rebatizar"
 
@@ -926,6 +937,7 @@ msgstr "tudo/nada"
 
 #: ../admin/bro_main.php:142 ../admin/bro_main.php:180
 #: ../admin/bro_main.php:235 ../admin/bro_main.php:260
+#: ../admin/bro_main.php:261
 msgid "Move"
 msgstr "Relocalizar"
 
@@ -937,6 +949,7 @@ msgstr "Relocalizar"
 #: ../admin/sta2_list.php:56 ../admin/sta2_list.php:70
 #: ../admin/bro_main.php:320 ../admin/bro_main.php:498
 #: ../admin/sta2_list.php:58 ../admin/sta2_list.php:72
+#: ../admin/bro_main.php:321 ../admin/bro_main.php:499
 msgid "View"
 msgstr "Vista"
 
@@ -950,12 +963,14 @@ msgstr "Vista"
 #: ../admin/bro_main.php:387 ../admin/bro_main.php:417
 #: ../admin/bro_main.php:370 ../admin/bro_main.php:400
 #: ../admin/bro_main.php:437 ../admin/bro_main.php:467
+#: ../admin/bro_main.php:371 ../admin/bro_main.php:401
+#: ../admin/bro_main.php:438 ../admin/bro_main.php:468
 msgid "V"
 msgstr "V"
 
 #: ../admin/bro_main.php:374 ../admin/bro_main.php:412
 #: ../admin/bro_main.php:480 ../admin/bro_main.php:474
-#: ../admin/bro_main.php:524
+#: ../admin/bro_main.php:524 ../admin/bro_main.php:525
 msgid "No files in this folder"
 msgstr "Nenhum arquivo nesta pasta"
 
@@ -1103,7 +1118,7 @@ msgstr "Suprimir"
 #: ../admin/hta_adduser.php:67 ../admin/mail_add.php:86
 #: ../admin/mail_edit.php:98 ../admin/sql_bck.php:105
 #: ../admin/sql_passchg.php:57 ../admin/sql_users_add.php:78
-#: ../admin/sql_users_password.php:65
+#: ../admin/sql_users_password.php:65 ../admin/adm_domstypeedit.php:122
 msgid "Cancel"
 msgstr ""
 
@@ -1230,7 +1245,7 @@ msgid "Subdomains"
 msgstr "Secundário-domínios"
 
 #: ../admin/dom_edit.php:93 ../admin/dom_edit.php:94
-#: ../admin/dom_edit.inc.php:37
+#: ../admin/dom_edit.inc.php:37 ../admin/dom_edit.inc.php:38
 #, fuzzy
 msgid "Create a subdomain:"
 msgstr "Adiçionar um secundário-domínio"
@@ -1387,7 +1402,7 @@ msgid "The folder must exists."
 msgstr "The folder must exists."
 
 #: ../admin/hta_add.php:59 ../admin/hta_add.php:56 ../admin/bro_main.php:541
-#: ../admin/hta_add.php:61
+#: ../admin/hta_add.php:61 ../admin/bro_main.php:542
 msgid "Protect this folder"
 msgstr "Protect this folder"
 
@@ -1648,7 +1663,7 @@ msgstr ""
 
 #: ../admin/mail_list.php:88 ../admin/sql_list.php:53 ../admin/sql_list.php:49
 #: ../admin/bro_main.php:292 ../admin/mail_list.php:102
-#: ../admin/sql_list.php:51
+#: ../admin/sql_list.php:51 ../admin/bro_main.php:293
 msgid "Size"
 msgstr "Tamanho"
 
@@ -2515,6 +2530,7 @@ msgid "Real Media File"
 msgstr ""
 
 #: ../class/m_mem.php:474 ../class/m_mem.php:481 ../class/m_mem.php:496
+#: ../class/m_mem.php:497
 msgid "Help"
 msgstr "Ajuda"
 
@@ -2652,7 +2668,7 @@ msgstr ""
 msgid "during the month"
 msgstr ""
 
-#: ../admin/bro_main.php:73
+#: ../admin/bro_main.php:73 ../admin/bro_main.php:74
 #, fuzzy
 msgid "WARNING: Confirm the deletion of this files"
 msgstr "AVISO : Confirmar o apagamento do secundário-domínio"
@@ -2690,16 +2706,18 @@ msgid ""
 "alldeps install Image_Graph-devel' to see the graph."
 msgstr ""
 
-#: ../admin/bro_main.php:119
+#: ../admin/bro_main.php:119 ../admin/bro_main.php:120
 msgid "extracting..."
 msgstr ""
 
 #: ../admin/bro_main.php:122 ../admin/bro_main.php:123
+#: ../admin/bro_main.php:124
 #, fuzzy
 msgid "failed"
 msgstr "Arquivo"
 
 #: ../admin/bro_main.php:124 ../admin/bro_main.php:126
+#: ../admin/bro_main.php:127
 msgid "done"
 msgstr ""
 
@@ -2707,11 +2725,13 @@ msgstr ""
 #: ../admin/bro_main.php:182 ../admin/bro_main.php:188
 #: ../admin/bro_main.php:232 ../admin/bro_main.php:208
 #: ../admin/bro_main.php:214 ../admin/bro_main.php:257
+#: ../admin/bro_main.php:209 ../admin/bro_main.php:215
+#: ../admin/bro_main.php:258
 msgid "Permissions"
 msgstr ""
 
 #: ../admin/bro_main.php:216 ../admin/bro_main.php:210
-#: ../admin/bro_main.php:236
+#: ../admin/bro_main.php:236 ../admin/bro_main.php:237
 #, fuzzy
 msgid "Change permissions"
 msgstr "Mudar meus ajustes"
@@ -2722,7 +2742,7 @@ msgid "Copy to"
 msgstr "Copiar"
 
 #: ../admin/bro_main.php:283 ../admin/bro_main.php:277
-#: ../admin/bro_main.php:327
+#: ../admin/bro_main.php:327 ../admin/bro_main.php:328
 msgid "Extract"
 msgstr ""
 
@@ -2803,10 +2823,12 @@ msgid "ctrl+click or shift+click and drag to resize the editing zone"
 msgstr ""
 
 #: ../admin/bro_main.php:202 ../admin/bro_main.php:228
+#: ../admin/bro_main.php:229
 msgid "write"
 msgstr ""
 
 #: ../admin/bro_main.php:234 ../admin/bro_main.php:259
+#: ../admin/bro_main.php:260
 #, fuzzy
 msgid "Copy"
 msgstr "Copiar"
@@ -2912,7 +2934,7 @@ msgid "FQDN"
 msgstr ""
 
 #: ../admin/adm_dnsweberror.php:59 ../admin/adm_domstypeedit.php:75
-#: ../admin/adm_domstype.php:59
+#: ../admin/adm_domstype.php:59 ../admin/adm_domstypeedit.php:76
 msgid "Description"
 msgstr "Descição"
 
@@ -2964,45 +2986,49 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
-#: ../admin/adm_domstypeedit.php:57
+#: ../admin/adm_domstypeedit.php:57 ../admin/adm_domstypeedit.php:58
 #, fuzzy
 msgid "Edit a domain type"
 msgstr "Editando o domínio %s"
 
 #: ../admin/adm_domstypeedit.php:71 ../admin/adm_domstype.php:58
+#: ../admin/adm_domstypeedit.php:72
 #, fuzzy
 msgid "Name"
 msgstr "Membro novo"
 
-#: ../admin/adm_domstypeedit.php:79
+#: ../admin/adm_domstypeedit.php:79 ../admin/adm_domstypeedit.php:80
 msgid "Target type"
 msgstr ""
 
 #: ../admin/adm_domstypeedit.php:89 ../admin/adm_domstype.php:61
+#: ../admin/adm_domstypeedit.php:90
 msgid "Entry"
 msgstr ""
 
-#: ../admin/adm_domstypeedit.php:93
+#: ../admin/adm_domstypeedit.php:93 ../admin/adm_domstypeedit.php:94
 msgid "Compatibility"
 msgstr ""
 
 #: ../admin/adm_domstypeedit.php:93 ../admin/adm_domstype.php:62
+#: ../admin/adm_domstypeedit.php:94
 msgid "Enter comma-separated name of other types"
 msgstr ""
 
 #: ../admin/adm_domstypeedit.php:97 ../admin/dom_edit.php:119
+#: ../admin/adm_domstypeedit.php:98
 msgid "Enabled"
 msgstr ""
 
-#: ../admin/adm_domstypeedit.php:101
+#: ../admin/adm_domstypeedit.php:101 ../admin/adm_domstypeedit.php:108
 msgid "Do only a DNS entry"
 msgstr ""
 
-#: ../admin/adm_domstypeedit.php:105
+#: ../admin/adm_domstypeedit.php:105 ../admin/adm_domstypeedit.php:112
 msgid "Domain must have our DNS"
 msgstr ""
 
-#: ../admin/adm_domstypeedit.php:110
+#: ../admin/adm_domstypeedit.php:110 ../admin/adm_domstypeedit.php:121
 #, fuzzy
 msgid "Change this domain type"
 msgstr "Mudar esta caixa de email"
@@ -3049,7 +3075,7 @@ msgstr ""
 msgid "Need to be DNS?"
 msgstr ""
 
-#: ../admin/adm_domstype.php:75
+#: ../admin/adm_domstype.php:75 ../admin/adm_domstype.php:76
 msgid "Regenerate"
 msgstr ""
 
@@ -3240,85 +3266,85 @@ msgstr ""
 msgid "Allow Password=Login?"
 msgstr ""
 
-#: ../admin/bro_main.php:143
+#: ../admin/bro_main.php:143 ../admin/bro_main.php:144
 msgid "Path"
 msgstr ""
 
-#: ../admin/bro_main.php:155
+#: ../admin/bro_main.php:155 ../admin/bro_main.php:156
 msgid "Send one file:"
 msgstr ""
 
-#: ../admin/bro_main.php:159
+#: ../admin/bro_main.php:159 ../admin/bro_main.php:160
 #, fuzzy
 msgid "Send this file"
 msgstr "Importar este arquivo"
 
-#: ../admin/bro_main.php:167
+#: ../admin/bro_main.php:167 ../admin/bro_main.php:168
 #, fuzzy
 msgid "New file or folder:"
 msgstr "Nenhum arquivo nesta pasta"
 
-#: ../admin/bro_main.php:261
+#: ../admin/bro_main.php:261 ../admin/bro_main.php:262
 msgid "To"
 msgstr ""
 
-#: ../admin/bro_main.php:291
+#: ../admin/bro_main.php:291 ../admin/bro_main.php:292
 #, fuzzy
 msgid "Filename"
 msgstr "Rebatizar"
 
-#: ../admin/bro_main.php:293
+#: ../admin/bro_main.php:293 ../admin/bro_main.php:294
 msgid "Last modification"
 msgstr ""
 
-#: ../admin/bro_main.php:295
+#: ../admin/bro_main.php:295 ../admin/bro_main.php:296
 #, fuzzy
 msgid "File Type"
 msgstr "Arquivo"
 
-#: ../admin/bro_main.php:534
+#: ../admin/bro_main.php:534 ../admin/bro_main.php:535
 msgid "Show size of directories"
 msgstr ""
 
-#: ../admin/bro_main.php:534
+#: ../admin/bro_main.php:534 ../admin/bro_main.php:535
 msgid "(slow)"
 msgstr ""
 
-#: ../admin/bro_main.php:538
+#: ../admin/bro_main.php:538 ../admin/bro_main.php:539
 msgid "Edit this folder's protection"
 msgstr ""
 
-#: ../admin/bro_main.php:543
+#: ../admin/bro_main.php:543 ../admin/bro_main.php:544
 #, fuzzy
 msgid "with a login and a password"
 msgstr "Senha inicial"
 
-#: ../admin/bro_main.php:546
+#: ../admin/bro_main.php:546 ../admin/bro_main.php:547
 #, fuzzy
 msgid "Download this folder"
 msgstr "Protect this folder"
 
-#: ../admin/bro_main.php:548
+#: ../admin/bro_main.php:548 ../admin/bro_main.php:549
 #, php-format
 msgid "as a %s file"
 msgstr ""
 
-#: ../admin/bro_main.php:556
+#: ../admin/bro_main.php:556 ../admin/bro_main.php:557
 #, fuzzy
 msgid "Edit the ftp account"
 msgstr "Editar esta conta"
 
-#: ../admin/bro_main.php:557
+#: ../admin/bro_main.php:557 ../admin/bro_main.php:558
 #, fuzzy
 msgid "that exists in this folder"
 msgstr "Nenhum arquivo nesta pasta"
 
-#: ../admin/bro_main.php:563
+#: ../admin/bro_main.php:563 ../admin/bro_main.php:564
 #, fuzzy
 msgid "Create an ftp account in this folder"
 msgstr "Há uma conta ftp nesta pasta"
 
-#: ../admin/bro_main.php:572
+#: ../admin/bro_main.php:572 ../admin/bro_main.php:573
 #, fuzzy
 msgid "Configure the file editor"
 msgstr "Configurar o navegador de arquivo"
@@ -3349,31 +3375,32 @@ msgstr "A caixa de email %s foi mudado com sucesso"
 #: ../admin/dom_edit.inc.php:62 ../admin/ftp_add.php:60
 #: ../admin/ftp_edit.php:66 ../admin/hta_add.php:54 ../admin/sql_bck.php:97
 #: ../admin/sta2_add_raw.php:57 ../admin/sta2_edit_raw.php:63
+#: ../admin/dom_edit.inc.php:77
 #, fuzzy
 msgid "Choose a folder..."
 msgstr "Protect a folder"
 
-#: ../admin/dom_edit.inc.php:68
+#: ../admin/dom_edit.inc.php:68 ../admin/dom_edit.inc.php:83
 msgid "(enter an URL here)"
 msgstr ""
 
-#: ../admin/dom_edit.inc.php:72
+#: ../admin/dom_edit.inc.php:72 ../admin/dom_edit.inc.php:87
 msgid "(enter an IPv4 address, for example 192.168.1.2)"
 msgstr ""
 
-#: ../admin/dom_edit.inc.php:76
+#: ../admin/dom_edit.inc.php:76 ../admin/dom_edit.inc.php:91
 msgid "(enter an IPv6 address, for example 2001:0910::0)"
 msgstr ""
 
-#: ../admin/dom_edit.inc.php:80
+#: ../admin/dom_edit.inc.php:80 ../admin/dom_edit.inc.php:95
 msgid "(enter a TXT informations for this domain)"
 msgstr ""
 
-#: ../admin/dom_edit.inc.php:84
+#: ../admin/dom_edit.inc.php:84 ../admin/dom_edit.inc.php:99
 msgid "(enter a domain name or subdomain)"
 msgstr ""
 
-#: ../admin/dom_edit.inc.php:92
+#: ../admin/dom_edit.inc.php:92 ../admin/dom_edit.inc.php:107
 #, fuzzy
 msgid "Add this subdomain"
 msgstr "Adiçionar este domínio"
@@ -3907,6 +3934,35 @@ msgstr ""
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Emacs 21\n"
+
+#: ../admin/adm_domstypeedit.php:116
+msgid "Is it an advanced option ?"
+msgstr ""
+
+#: ../admin/adm_domstype.php:66
+msgid "Advanced?"
+msgstr ""
+
+#: ../admin/dom_edit.inc.php:56
+msgid "Show advanced options"
+msgstr ""
+
+#: ../admin/dom_edit.inc.php:57
+msgid "Hide advanced options"
+msgstr ""
+
+#: ../admin/head.php:50
+msgid ""
+"Invited session. Clic <a href='adm_login.php'>here</a> to return to your "
+"previous session."
+msgstr ""
+
+#: ../admin/adm_passpolicy.php:120
+msgid ""
+"The classes of characters are : <br />1. Low-case letters (a-z)<br />2. "
+"Upper-case letters (A-Z)<br />3. Figures (0-9)<br />4. Ascii symbols (!\"#$"
+"%&'()*+,-./:;<=>?@[\\]^_`)<br />5. Non-Ascii symbols (accents...)"
+msgstr ""
 
 #, fuzzy
 #~ msgid "Edition du sous-domaine"

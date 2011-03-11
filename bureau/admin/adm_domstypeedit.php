@@ -113,7 +113,7 @@ if ($error_edit) {
             <td><input name="need_dns" type="checkbox" value="1" <?php cbox($d['need_dns']); ?> /></td>
       </tr>
 	    <tr>
-            <th><?php __("Is it an advanced option ?");?></th>
+            <th><?php __("Is it an advanced option?");?></th>
             <td><input name="advanced" type="checkbox" value="1" <?php cbox($d['advanced']); ?> /></td>
       </tr>
       <tr class="trbtn">

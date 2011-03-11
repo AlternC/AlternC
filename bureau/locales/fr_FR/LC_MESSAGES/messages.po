@@ -1,4 +1,3 @@
-
 # French AlternC Translation
 # Copyright (c) 2002 the AlternC Development Team
 # <tech@alternc.org>
@@ -45,7 +44,8 @@ msgstr ""
 #: ../admin/adm_domstypeedit.php:32 ../admin/adm_domstype.php:33
 #: ../admin/adm_domstyperegenerate.php:4 ../admin/adm_edit.php:48
 #: ../admin/adm_list.php:58 ../admin/adm_login.php:45
-#: ../admin/adm_passpolicy.php:30
+#: ../admin/adm_passpolicy.php:30 ../admin/adm_login.php:56
+#: ../admin/adm_login.php:68
 msgid "This page is restricted to authorized staff"
 msgstr "Cette page est réservée aux administrateurs"
 
@@ -303,10 +303,6 @@ msgstr "Le compte AlternC a été renouvelé avec succès"
 msgid "Member Edition"
 msgstr "Modification d'un compte AlternC"
 
-#: ../admin/adm_edit.php:65 ../admin/adm_edit.php:69
-msgid "Account Enabled?"
-msgstr "Compte Actif&nbsp;? "
-
 #: ../admin/adm_edit.php:70 ../admin/dom_dodel.php:55
 #: ../admin/dom_edit.php:144 ../admin/dom_edit.php:156
 #: ../admin/dom_subdel.php:61 ../admin/sql_bck.php:77 ../admin/sql_del.php:69
@@ -325,6 +321,7 @@ msgstr "Compte Actif&nbsp;? "
 #: ../admin/dom_edit.php:190 ../admin/dom_subdel.php:71
 #: ../admin/mail_add.php:65 ../admin/mail_edit.php:73 ../admin/sql_bck.php:87
 #: ../admin/sql_del.php:81 ../admin/sql_users_del.php:70
+#: ../admin/adm_domstype.php:84 ../admin/adm_domstype.php:85
 msgid "No"
 msgstr "Non"
 
@@ -346,6 +343,7 @@ msgstr "Non"
 #: ../admin/dom_edit.php:188 ../admin/dom_subdel.php:70
 #: ../admin/mail_add.php:66 ../admin/mail_edit.php:74 ../admin/sql_bck.php:88
 #: ../admin/sql_del.php:81 ../admin/sql_users_del.php:70
+#: ../admin/adm_domstype.php:84 ../admin/adm_domstype.php:85
 msgid "Yes"
 msgstr "Oui"
 
@@ -371,10 +369,6 @@ msgstr "Oui"
 #: ../admin/sql_users_password.php:55
 msgid "Password"
 msgstr "Mot de passe"
-
-#: ../admin/adm_edit.php:117 ../admin/adm_edit.php:125
-msgid "Reset quotas to default?"
-msgstr "Réinitialiser les quotas de ce compte&nbsp;?"
 
 #: ../admin/adm_edit.php:120 ../admin/adm_edit.php:128
 #: ../admin/adm_edit.php:126
@@ -486,6 +480,7 @@ msgstr "Expiration"
 #: ../admin/adm_list.php:192 ../admin/adm_passpolicy.php:152
 #: ../admin/adm_tld.php:76 ../admin/dom_edit.php:106 ../admin/ftp_list.php:82
 #: ../admin/mail_list.php:111 ../admin/sta2_list.php:68
+#: ../admin/adm_domstype.php:75
 msgid "Edit"
 msgstr "Modifier"
 
@@ -539,6 +534,7 @@ msgstr "Bureau AlternC"
 
 #: ../admin/adm_login.php:82 ../admin/adm_login.php:83
 #: ../admin/adm_login.php:67 ../admin/adm_login.php:69
+#: ../admin/adm_login.php:93
 msgid "Member login"
 msgstr "Nom d'utilisateur du compte AlternC"
 
@@ -588,7 +584,7 @@ msgstr "Nom d'utilisateur"
 #: ../admin/bro_main.php:229 ../admin/adm_mxaccount.php:87
 #: ../admin/adm_mxaccount.php:89 ../admin/adm_slaveaccount.php:88
 #: ../admin/adm_slaveip.php:88 ../admin/bro_main.php:255
-#: ../admin/dom_edit.php:109
+#: ../admin/dom_edit.php:109 ../admin/bro_main.php:256
 msgid "Delete"
 msgstr "Effacer"
 
@@ -889,12 +885,14 @@ msgstr "Fermer"
 #: ../admin/bro_main.php:126 ../admin/bro_main.php:138
 #: ../admin/menu_brouteur.php:33 ../admin/bro_main.php:133
 #: ../admin/hta_edit.php:53 ../admin/hta_edit.php:88 ../admin/bro_main.php:135
+#: ../admin/bro_main.php:136
 msgid "File browser"
 msgstr "Gestionnaire de fichiers"
 
 #: ../admin/bro_main.php:95 ../admin/bro_main.php:133
 #: ../admin/bro_main.php:132 ../admin/bro_main.php:150
 #: ../admin/bro_main.php:147 ../admin/bro_main.php:172
+#: ../admin/bro_main.php:173
 msgid "Create"
 msgstr "Créer"
 
@@ -903,6 +901,7 @@ msgstr "Créer"
 #: ../admin/bro_main.php:134 ../admin/bro_main.php:152
 #: ../admin/bro_main.php:149 ../admin/bro_main.php:188
 #: ../admin/bro_main.php:174 ../admin/bro_main.php:214
+#: ../admin/bro_main.php:175 ../admin/bro_main.php:215
 msgid "File"
 msgstr "Fichier"
 
@@ -921,7 +920,8 @@ msgstr "Fichier"
 #: ../admin/bro_main.php:343 ../admin/ftp_edit.php:62 ../admin/ftp_list.php:72
 #: ../admin/hta_add.php:50 ../admin/hta_edit.php:98
 #: ../admin/hta_edituser.php:52 ../admin/hta_list.php:67
-#: ../admin/sta2_list.php:58
+#: ../admin/sta2_list.php:58 ../admin/bro_main.php:176
+#: ../admin/bro_main.php:344
 msgid "Folder"
 msgstr "Répertoire"
 
@@ -933,6 +933,8 @@ msgstr "Répertoire"
 #: ../admin/bro_main.php:166 ../admin/bro_main.php:172
 #: ../admin/bro_main.php:231 ../admin/bro_main.php:192
 #: ../admin/bro_main.php:198 ../admin/bro_main.php:256
+#: ../admin/bro_main.php:193 ../admin/bro_main.php:199
+#: ../admin/bro_main.php:257
 msgid "Rename"
 msgstr "Renommer"
 
@@ -943,6 +945,7 @@ msgstr "tous/aucun"
 
 #: ../admin/bro_main.php:142 ../admin/bro_main.php:180
 #: ../admin/bro_main.php:235 ../admin/bro_main.php:260
+#: ../admin/bro_main.php:261
 msgid "Move"
 msgstr "Déplacer"
 
@@ -954,6 +957,7 @@ msgstr "Déplacer"
 #: ../admin/sta2_list.php:56 ../admin/sta2_list.php:70
 #: ../admin/bro_main.php:320 ../admin/bro_main.php:498
 #: ../admin/sta2_list.php:58 ../admin/sta2_list.php:72
+#: ../admin/bro_main.php:321 ../admin/bro_main.php:499
 msgid "View"
 msgstr "Voir"
 
@@ -967,12 +971,14 @@ msgstr "Voir"
 #: ../admin/bro_main.php:387 ../admin/bro_main.php:417
 #: ../admin/bro_main.php:370 ../admin/bro_main.php:400
 #: ../admin/bro_main.php:437 ../admin/bro_main.php:467
+#: ../admin/bro_main.php:371 ../admin/bro_main.php:401
+#: ../admin/bro_main.php:438 ../admin/bro_main.php:468
 msgid "V"
 msgstr "V"
 
 #: ../admin/bro_main.php:374 ../admin/bro_main.php:412
 #: ../admin/bro_main.php:480 ../admin/bro_main.php:474
-#: ../admin/bro_main.php:524
+#: ../admin/bro_main.php:524 ../admin/bro_main.php:525
 msgid "No files in this folder"
 msgstr "Aucun fichier dans ce répertoire"
 
@@ -1115,7 +1121,7 @@ msgstr "Sélectionner"
 #: ../admin/hta_adduser.php:67 ../admin/mail_add.php:86
 #: ../admin/mail_edit.php:98 ../admin/sql_bck.php:105
 #: ../admin/sql_passchg.php:57 ../admin/sql_users_add.php:78
-#: ../admin/sql_users_password.php:65
+#: ../admin/sql_users_password.php:65 ../admin/adm_domstypeedit.php:122
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -1242,7 +1248,7 @@ msgid "Subdomains"
 msgstr "Sous-domaines"
 
 #: ../admin/dom_edit.php:93 ../admin/dom_edit.php:94
-#: ../admin/dom_edit.inc.php:37
+#: ../admin/dom_edit.inc.php:37 ../admin/dom_edit.inc.php:38
 msgid "Create a subdomain:"
 msgstr "Création d'un sous-domaine : "
 
@@ -1398,7 +1404,7 @@ msgid "The folder must exists."
 msgstr "Le répertoire doit déjà exister."
 
 #: ../admin/hta_add.php:59 ../admin/hta_add.php:56 ../admin/bro_main.php:541
-#: ../admin/hta_add.php:61
+#: ../admin/hta_add.php:61 ../admin/bro_main.php:542
 msgid "Protect this folder"
 msgstr "Protéger ce répertoire"
 
@@ -1673,7 +1679,7 @@ msgstr "Tous"
 
 #: ../admin/mail_list.php:88 ../admin/sql_list.php:53 ../admin/sql_list.php:49
 #: ../admin/bro_main.php:292 ../admin/mail_list.php:102
-#: ../admin/sql_list.php:51
+#: ../admin/sql_list.php:51 ../admin/bro_main.php:293
 msgid "Size"
 msgstr "Taille"
 
@@ -2497,6 +2503,7 @@ msgid "Real Media File"
 msgstr "Fichier Real Media"
 
 #: ../class/m_mem.php:474 ../class/m_mem.php:481 ../class/m_mem.php:496
+#: ../class/m_mem.php:497
 msgid "Help"
 msgstr "Aide"
 
@@ -2635,7 +2642,7 @@ msgstr "avant le mois"
 msgid "during the month"
 msgstr "durant le mois"
 
-#: ../admin/bro_main.php:73
+#: ../admin/bro_main.php:73 ../admin/bro_main.php:74
 msgid "WARNING: Confirm the deletion of this files"
 msgstr "ATTENTION : Confirmez la suppression de ces fichiers"
 
@@ -2671,15 +2678,17 @@ msgstr ""
 "Image_Graph n'est pas installée. Lancez 'aptitude install php-pear' puis "
 "'pear --alldeps install Image_Graph-devel' pour voir le graphique."
 
-#: ../admin/bro_main.php:119
+#: ../admin/bro_main.php:119 ../admin/bro_main.php:120
 msgid "extracting..."
 msgstr "extraction..."
 
 #: ../admin/bro_main.php:122 ../admin/bro_main.php:123
+#: ../admin/bro_main.php:124
 msgid "failed"
 msgstr "échec"
 
 #: ../admin/bro_main.php:124 ../admin/bro_main.php:126
+#: ../admin/bro_main.php:127
 msgid "done"
 msgstr "terminé"
 
@@ -2687,11 +2696,13 @@ msgstr "terminé"
 #: ../admin/bro_main.php:182 ../admin/bro_main.php:188
 #: ../admin/bro_main.php:232 ../admin/bro_main.php:208
 #: ../admin/bro_main.php:214 ../admin/bro_main.php:257
+#: ../admin/bro_main.php:209 ../admin/bro_main.php:215
+#: ../admin/bro_main.php:258
 msgid "Permissions"
 msgstr "Permissions"
 
 #: ../admin/bro_main.php:216 ../admin/bro_main.php:210
-#: ../admin/bro_main.php:236
+#: ../admin/bro_main.php:236 ../admin/bro_main.php:237
 msgid "Change permissions"
 msgstr "Modifier les permissions"
 
@@ -2700,7 +2711,7 @@ msgid "Copy to"
 msgstr "Copier vers"
 
 #: ../admin/bro_main.php:283 ../admin/bro_main.php:277
-#: ../admin/bro_main.php:327
+#: ../admin/bro_main.php:327 ../admin/bro_main.php:328
 msgid "Extract"
 msgstr "Extraire"
 
@@ -2781,10 +2792,12 @@ msgstr ""
 "ctrl+clic ou shift+clic et déplacer pour redimensionner la zone d'édition"
 
 #: ../admin/bro_main.php:202 ../admin/bro_main.php:228
+#: ../admin/bro_main.php:229
 msgid "write"
 msgstr "écriture"
 
 #: ../admin/bro_main.php:234 ../admin/bro_main.php:259
+#: ../admin/bro_main.php:260
 msgid "Copy"
 msgstr "Copier Vers"
 
@@ -2888,7 +2901,7 @@ msgid "FQDN"
 msgstr "FQDN"
 
 #: ../admin/adm_dnsweberror.php:59 ../admin/adm_domstypeedit.php:75
-#: ../admin/adm_domstype.php:59
+#: ../admin/adm_domstype.php:59 ../admin/adm_domstypeedit.php:76
 msgid "Description"
 msgstr "Description"
 
@@ -2944,43 +2957,47 @@ msgstr "OK&nbsp;?"
 msgid "Status"
 msgstr "État"
 
-#: ../admin/adm_domstypeedit.php:57
+#: ../admin/adm_domstypeedit.php:57 ../admin/adm_domstypeedit.php:58
 msgid "Edit a domain type"
 msgstr "Modification d'un type de domaine"
 
 #: ../admin/adm_domstypeedit.php:71 ../admin/adm_domstype.php:58
+#: ../admin/adm_domstypeedit.php:72
 msgid "Name"
 msgstr "Nom"
 
-#: ../admin/adm_domstypeedit.php:79
+#: ../admin/adm_domstypeedit.php:79 ../admin/adm_domstypeedit.php:80
 msgid "Target type"
 msgstr "Type de destination"
 
 #: ../admin/adm_domstypeedit.php:89 ../admin/adm_domstype.php:61
+#: ../admin/adm_domstypeedit.php:90
 msgid "Entry"
 msgstr "Entrée"
 
-#: ../admin/adm_domstypeedit.php:93
+#: ../admin/adm_domstypeedit.php:93 ../admin/adm_domstypeedit.php:94
 msgid "Compatibility"
 msgstr "Compatibilité"
 
 #: ../admin/adm_domstypeedit.php:93 ../admin/adm_domstype.php:62
+#: ../admin/adm_domstypeedit.php:94
 msgid "Enter comma-separated name of other types"
 msgstr "Entrez la liste séparée par des virgules des autres types"
 
 #: ../admin/adm_domstypeedit.php:97 ../admin/dom_edit.php:119
+#: ../admin/adm_domstypeedit.php:98
 msgid "Enabled"
 msgstr "Actif"
 
-#: ../admin/adm_domstypeedit.php:101
+#: ../admin/adm_domstypeedit.php:101 ../admin/adm_domstypeedit.php:108
 msgid "Do only a DNS entry"
 msgstr "Crée seulement l'entrée DNS"
 
-#: ../admin/adm_domstypeedit.php:105
+#: ../admin/adm_domstypeedit.php:105 ../admin/adm_domstypeedit.php:112
 msgid "Domain must have our DNS"
 msgstr "Le domaine doit avoir nos DNS"
 
-#: ../admin/adm_domstypeedit.php:110
+#: ../admin/adm_domstypeedit.php:110 ../admin/adm_domstypeedit.php:121
 msgid "Change this domain type"
 msgstr "Modifier ce type de domaine"
 
@@ -2992,7 +3009,9 @@ msgstr "Gestion des types de domaines"
 msgid ""
 "If you don't know what this page is about, don't touch anything, and read "
 "AlternC documentation about domain types"
-msgstr "Si vous ne savez pas de quoi parle cette page, ne touchez à rien et consultez la documentation d'AlternC sur les types de domaines"
+msgstr ""
+"Si vous ne savez pas de quoi parle cette page, ne touchez à rien et "
+"consultez la documentation d'AlternC sur les types de domaines"
 
 #: ../admin/adm_domstype.php:52
 msgid "Here is the list of domain types."
@@ -3022,7 +3041,7 @@ msgstr "Ne créer que l'entrée DNS&nbsp;?"
 msgid "Need to be DNS?"
 msgstr "Le domaine doit-il avoir nos DNS&nbsp;?"
 
-#: ../admin/adm_domstype.php:75
+#: ../admin/adm_domstype.php:75 ../admin/adm_domstype.php:76
 msgid "Regenerate"
 msgstr "Régénérer"
 
@@ -3034,9 +3053,17 @@ msgstr "Ce compte est maintenant un compte normal"
 msgid "This account is now an administrator account"
 msgstr "Ce compte est maintenant un compte administrateur"
 
+#: ../admin/adm_edit.php:73
+msgid "Account Enabled?"
+msgstr "Compte Actif&nbsp;? "
+
 #: ../admin/adm_edit.php:76
 msgid "You cannot disable your own account."
 msgstr "Vous ne pouvez pas désactiver votre propre compte !"
+
+#: ../admin/adm_edit.php:123
+msgid "Reset quotas to default?"
+msgstr "Réinitialiser les quotas de ce compte&nbsp;?"
 
 #: ../admin/adm_list.php:66
 msgid "AlternC account list"
@@ -3150,16 +3177,6 @@ msgstr "Appliquer cette politique de mot de passe"
 msgid "Cancel and go back to the policy list"
 msgstr "Annuler et revenir à la liste des politiques de mots de passe"
 
-#: ../admin/adm_passpolicy.php:120
-msgid ""
-"The classes of characters are : <br />1. Low-case letters (a-z)<br />2. "
-"Upper-case letters (A-Z)<br />3. Figures (0-9)<br />4. Ascii symbols (!\"#$"
-"%&'()*+,-./:;<=>?@[\\]^_`)<br />5. Non-Ascii symbols (~...)"
-msgstr ""
-"Les classes de caractère sont : <br />1. Lettres minuscules (a-z)<br />2. "
-"Lettres majuscules (A-Z)<br />3. Chiffres (0-9)<br />4. Caractères Ascii (!"
-"\"#$%&'()*+,-./:;<=>?@[\\]^_`)<br />5. Caractères non-Ascii (~éàâô...)"
-
 #: ../admin/adm_passpolicy.php:133
 msgid ""
 "Here is the list of the password policies for each place a password may be "
@@ -3201,76 +3218,76 @@ msgstr "Complexité"
 msgid "Allow Password=Login?"
 msgstr "Autorise Mot de passe=Login&nbsp;?"
 
-#: ../admin/bro_main.php:143
+#: ../admin/bro_main.php:143 ../admin/bro_main.php:144
 msgid "Path"
 msgstr "Répertoire courant"
 
-#: ../admin/bro_main.php:155
+#: ../admin/bro_main.php:155 ../admin/bro_main.php:156
 msgid "Send one file:"
 msgstr "Envoyer un fichier&nbsp;:"
 
-#: ../admin/bro_main.php:159
+#: ../admin/bro_main.php:159 ../admin/bro_main.php:160
 msgid "Send this file"
 msgstr "Envoyer ce fichier"
 
-#: ../admin/bro_main.php:167
+#: ../admin/bro_main.php:167 ../admin/bro_main.php:168
 msgid "New file or folder:"
 msgstr "Créer un fichier ou un répertoire&nbsp;:"
 
-#: ../admin/bro_main.php:261
+#: ../admin/bro_main.php:261 ../admin/bro_main.php:262
 msgid "To"
 msgstr "Vers"
 
-#: ../admin/bro_main.php:291
+#: ../admin/bro_main.php:291 ../admin/bro_main.php:292
 msgid "Filename"
 msgstr "Nom du fichier"
 
-#: ../admin/bro_main.php:293
+#: ../admin/bro_main.php:293 ../admin/bro_main.php:294
 msgid "Last modification"
 msgstr "Dernière modification"
 
-#: ../admin/bro_main.php:295
+#: ../admin/bro_main.php:295 ../admin/bro_main.php:296
 msgid "File Type"
 msgstr "Type de fichier"
 
-#: ../admin/bro_main.php:534
+#: ../admin/bro_main.php:534 ../admin/bro_main.php:535
 msgid "Show size of directories"
 msgstr "Afficher la taille des répertoires"
 
-#: ../admin/bro_main.php:534
+#: ../admin/bro_main.php:534 ../admin/bro_main.php:535
 msgid "(slow)"
 msgstr "(lent)"
 
-#: ../admin/bro_main.php:538
+#: ../admin/bro_main.php:538 ../admin/bro_main.php:539
 msgid "Edit this folder's protection"
 msgstr "Modifier la protection de ce répertoire"
 
-#: ../admin/bro_main.php:543
+#: ../admin/bro_main.php:543 ../admin/bro_main.php:544
 msgid "with a login and a password"
 msgstr "utilisant un nom d'utilisateur et un mot de passe"
 
-#: ../admin/bro_main.php:546
+#: ../admin/bro_main.php:546 ../admin/bro_main.php:547
 msgid "Download this folder"
 msgstr "Télécharger ce répertoire"
 
-#: ../admin/bro_main.php:548
+#: ../admin/bro_main.php:548 ../admin/bro_main.php:549
 #, php-format
 msgid "as a %s file"
 msgstr "comme fichier %s"
 
-#: ../admin/bro_main.php:556
+#: ../admin/bro_main.php:556 ../admin/bro_main.php:557
 msgid "Edit the ftp account"
 msgstr "Modifier le compte FTP"
 
-#: ../admin/bro_main.php:557
+#: ../admin/bro_main.php:557 ../admin/bro_main.php:558
 msgid "that exists in this folder"
 msgstr "qui existe dans ce répertoire"
 
-#: ../admin/bro_main.php:563
+#: ../admin/bro_main.php:563 ../admin/bro_main.php:564
 msgid "Create an ftp account in this folder"
 msgstr "Créer un compte FTP dans ce répertoire"
 
-#: ../admin/bro_main.php:572
+#: ../admin/bro_main.php:572 ../admin/bro_main.php:573
 msgid "Configure the file editor"
 msgstr "Configurer le gestionnaire de fichiers"
 
@@ -3301,30 +3318,31 @@ msgstr "La suppression a été annulée avec succès."
 #: ../admin/dom_edit.inc.php:62 ../admin/ftp_add.php:60
 #: ../admin/ftp_edit.php:66 ../admin/hta_add.php:54 ../admin/sql_bck.php:97
 #: ../admin/sta2_add_raw.php:57 ../admin/sta2_edit_raw.php:63
+#: ../admin/dom_edit.inc.php:77
 msgid "Choose a folder..."
 msgstr "Choisir un répertoire ..."
 
-#: ../admin/dom_edit.inc.php:68
+#: ../admin/dom_edit.inc.php:68 ../admin/dom_edit.inc.php:83
 msgid "(enter an URL here)"
 msgstr "(entrez une URL ici)"
 
-#: ../admin/dom_edit.inc.php:72
+#: ../admin/dom_edit.inc.php:72 ../admin/dom_edit.inc.php:87
 msgid "(enter an IPv4 address, for example 192.168.1.2)"
 msgstr "(entrez une adresse IPv4, par exemple 192.168.1.2)"
 
-#: ../admin/dom_edit.inc.php:76
+#: ../admin/dom_edit.inc.php:76 ../admin/dom_edit.inc.php:91
 msgid "(enter an IPv6 address, for example 2001:0910::0)"
 msgstr "(entrez une adresse IPv6, par exemple 2001:0910::0)"
 
-#: ../admin/dom_edit.inc.php:80
+#: ../admin/dom_edit.inc.php:80 ../admin/dom_edit.inc.php:95
 msgid "(enter a TXT informations for this domain)"
 msgstr "(entrez une information TXT pour le domaine)"
 
-#: ../admin/dom_edit.inc.php:84
+#: ../admin/dom_edit.inc.php:84 ../admin/dom_edit.inc.php:99
 msgid "(enter a domain name or subdomain)"
 msgstr "(entrez un domaine ou sous-domaine)"
 
-#: ../admin/dom_edit.inc.php:92
+#: ../admin/dom_edit.inc.php:92 ../admin/dom_edit.inc.php:107
 msgid "Add this subdomain"
 msgstr "Ajouter ce sous-domaine"
 
@@ -3809,7 +3827,42 @@ msgstr "Semaines"
 msgid ""
 "Delete this email the following day,<br/>enter the date using DD/MM/YYYY "
 "format"
-msgstr "Cette adresse doit être supprimée le jour suivant<br />entrez la date sous la forme JJ/MM/AAAA"
+msgstr ""
+"Cette adresse doit être supprimée le jour suivant<br />entrez la date sous "
+"la forme JJ/MM/AAAA"
+
+
+#: ../admin/adm_domstypeedit.php:116
+msgid "Is it an advanced option?"
+msgstr "Est-ce une option avancée&nbsp;?"
+
+#: ../admin/adm_domstype.php:66
+msgid "Advanced?"
+msgstr "Est-ce une fonctionnalité avancée&nbsp;?"
+
+#: ../admin/dom_edit.inc.php:56
+msgid "Show advanced options"
+msgstr "Afficher les options avancées"
+
+#: ../admin/dom_edit.inc.php:57
+msgid "Hide advanced options"
+msgstr "Cacher les options avancées"
+
+#: ../admin/head.php:50
+msgid ""
+"Invited session. Clic <a href='adm_login.php'>here</a> to return to your "
+"previous session."
+msgstr "Session invité <a href='adm_login.php'>Cliquez ici</a> pour revenir a votre session précédente"
+
+#: ../admin/adm_passpolicy.php:120
+msgid ""
+"The classes of characters are : <br />1. Low-case letters (a-z)<br />2. "
+"Upper-case letters (A-Z)<br />3. Figures (0-9)<br />4. Ascii symbols (!\"#$"
+"%&'()*+,-./:;<=>?@[\\]^_`)<br />5. Non-Ascii symbols (accents...)"
+msgstr ""
+"Les classes de caractère sont : <br />1. Lettres minuscules (a-z)<br />2. "
+"Lettres majuscules (A-Z)<br />3. Chiffres (0-9)<br />4. Caractères Ascii (!"
+"\"#$%&'()*+,-./:;<=>?@[\\]^_`)<br />5. Caractères non-Ascii (accents...)"
 
 #~ msgid "Back to the email address list"
 #~ msgstr "Retour à la liste des adresses email"
