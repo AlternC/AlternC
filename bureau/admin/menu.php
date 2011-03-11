@@ -50,7 +50,13 @@ if ($tt) {
 }
 
 ?>
-<p class="center"><a href="http://www.alternc.org" target="_blank"><img src="logo2.png" border="0" alt="" /></a>
+<p class="center"><a href="http://www.alternc.org" target="_blank"><img src="logo2.png" border="0" alt="AlternC" /></a>
 <br />
-<?php echo "$L_VERSION"; ?>
+<?php 
+echo "$L_VERSION";
+echo "</p><p class='center'>";
+foreach($locales as $l) { ?>
+  <a href="?setlang=<?php echo $l; ?>"><img alt='<?php __($l); ?>' src='images/flag_<?php echo $l;?>.png' /></a><?php
+}
+?>
 </p>

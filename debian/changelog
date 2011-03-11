@@ -1,3 +1,21 @@
+alternc (1.0~rc2) stable; urgency=low
+  * Major patch
+    * Web & DNS file generation rebuild from scratch
+    * Drop of apache 1 support
+    * Big changes in database schema (domaines, sub_domaines, *_standby)
+  * Major changes
+    * Drop mass virtual hosting, now use full vhost
+  * New features
+    * Domains type are dynamic, the administrator can create domaine type with his own apache template
+    * Advanced DNS options (ipv6, cname, txt, mx)
+    * Possibility to create a temporary mail
+  * Bugfixes
+    * Too many to be listed (we change the update_domaines.sh)
+    * Dash compatibility
+    * Use iana.org to have whois server list up to date
+    
+ -- Alan Garcia <fufroma@mailfr.com>  Fri, 11 Mars 2011 10:24:30 +0200
+
 alternc (1.0~rc1) stable; urgency=low
 
   * Major patch

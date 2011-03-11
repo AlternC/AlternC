@@ -2,17 +2,16 @@
 
 function update_locale($langpath) {
   $locales=array();
-  $f=@fopen("/etc/locale.gen","rb");
-  if ($f) {
-    while ($s=fgets($f,1024)) {
-      if (preg_match("/^([a-z][a-z]_[A-Z][A-Z])/",trim($s),$mat) && file_exists($langpath . '/' . $mat[1])) {
-	$locales[$mat[1]]=$mat[1];
-      }
+  $file=file("/etc/locale.gen", FILE_SKIP_EMPTY_LINES);
+  if (! is_array($file) ) return $locales;
+  foreach ($file as $v ) {
+    if ( (preg_match("/^([a-z][a-z]_[A-Z][A-Z])/",trim($v),$mat) && file_exists($langpath . '/' . $mat[1]) ) ) {
+      $locales[$mat[1]]=$mat[1];
     }
-    fclose($f);
   }
   return $locales;
 }
+
 
 // setlang is on the link at the login page
 if (isset($_REQUEST["setlang"])) {

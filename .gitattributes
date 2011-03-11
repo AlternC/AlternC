@@ -164,6 +164,10 @@ bureau/admin/images/delete.png -text
 bureau/admin/images/dom.png -text
 bureau/admin/images/edit.png -text
 bureau/admin/images/exit.png -text
+bureau/admin/images/flag_de_DE.png -text
+bureau/admin/images/flag_en_US.png -text
+bureau/admin/images/flag_es_ES.png -text
+bureau/admin/images/flag_fr_FR.png -text
 bureau/admin/images/folder.png -text
 bureau/admin/images/folderhta.png -text
 bureau/admin/images/ftp.png -text
