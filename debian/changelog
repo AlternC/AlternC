@@ -5,6 +5,7 @@ alternc (1.0~rc2) stable; urgency=low
     * Big changes in database schema (domaines, sub_domaines, *_standby)
   * Major changes
     * Drop mass virtual hosting, now use full vhost
+    * Panel URL do not need anymore /admin/ (but you can still use it)
   * New features
     * Domains type are dynamic, the administrator can create domaine type with his own apache template
     * Advanced DNS options (ipv6, cname, txt, mx)

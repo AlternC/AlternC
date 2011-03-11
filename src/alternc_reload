@@ -46,7 +46,7 @@ else
   sudo="sudo"
 fi
 
-function apache_reload() {
+apache_reload() {
   if [ -x /usr/sbin/apache2ctl ]; then
     $sudo /usr/sbin/apache2ctl graceful > /dev/null || echo "Cannot restart apache" >> "$DOMAIN_LOG_FILE"
   fi
