@@ -39,8 +39,13 @@ if (!$charset) $charset="iso-8859-1";
 <script type="text/javascript" src="js/alternc.js"></script>
 <script type="text/javascript" src="js/wz_dragdrop.js"></script>
 <script src="js/jquery.min.js" type="text/javascript"></script>
-<script src="js/jquery_ui/js/jquery-ui-1.8.6.custom.min.js" type="text/javascript"></script>
-<link href="js/jquery_ui/css/smoothness/jquery-ui-1.8.6.custom.css" rel="stylesheet" type="text/css" />
+<script src="js/jquery_ui/js/jquery-ui-1.8.10.custom.min.js" type="text/javascript"></script>
+<?php
+$lang_date_picker="js/jquery_ui/js/jquery.ui.datepicker-".substr($lang,0,2).".js";
+if (file_exists($lang_date_picker)) 
+  echo "<script src=\"$lang_date_picker\" type=\"text/javascript\"></script>";
+?>
+<link href="js/jquery_ui/css/smoothness/jquery-ui-1.8.10.custom.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <?
