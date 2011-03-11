@@ -38,25 +38,15 @@ require_once("../class/config.php");
 <?php
 
 $MENUPATH="/var/alternc/bureau/admin/";
-$tt=@fopen("menulist.txt","rb");
-if ($tt) {
-  while (!feof ($tt)) {
-    $c=trim(fgets($tt,4096));
-    if ($c && file_exists($MENUPATH.$c)) {
-      include($MENUPATH.$c);
-    }
-  }
-  fclose($tt);
+$file=file("/etc/alternc/menulist.txt", FILE_SKIP_EMPTY_LINES);
+foreach($file as $v) {
+  $v=trim($v);
+  if ( file_exists($MENUPATH.$v)) include($MENUPATH.$v);
 }
-
 ?>
 <p class="center"><a href="http://www.alternc.org" target="_blank"><img src="logo2.png" border="0" alt="AlternC" /></a>
 <br />
 <?php 
 echo "$L_VERSION";
-echo "</p><p class='center'>";
-foreach($locales as $l) { ?>
-  <a href="?setlang=<?php echo $l; ?>"><img alt='<?php __($l); ?>' src='images/flag_<?php echo $l;?>.png' /></a><?php
-}
 ?>
 </p>

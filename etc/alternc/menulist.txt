@@ -9,3 +9,4 @@ menu_sql.php
 menu_quota.php
 menu_aide.php
 menu_mem.php
+menu_lang.php
