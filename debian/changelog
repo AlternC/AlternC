@@ -15,7 +15,7 @@ alternc (1.0~rc2) stable; urgency=low
     * Dash compatibility
     * Use iana.org to have whois server list up to date
     
- -- Alan Garcia <fufroma@mailfr.com>  Fri, 11 Mars 2011 10:24:30 +0200
+ -- Alan Garcia <fufroma@mailfr.com>  Fri, 11 Mar 2011 10:24:30 +0200
 
 alternc (1.0~rc1) stable; urgency=low
 
