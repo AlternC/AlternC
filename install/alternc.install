@@ -258,6 +258,10 @@ do
    postconf -e "$line"
 done < $postfix_conf
 
+# Bug #1215: configure mydestination when $FQDN is not in
+OLDDESTINATION=`postconf mydestination | awk -F '=' '{print $2}'`
+echo "$OLDDESTINATION" | grep -q -v "$FQDN" && postconf -e "mydestination = $FQDN, $OLDDESTINATION"
+ 
 if [ -e /etc/courier/authmysqlrc ] ; then
     chown root:root /etc/courier/authmysqlrc
     chmod 640 /etc/courier/authmysqlrc
