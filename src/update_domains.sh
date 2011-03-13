@@ -20,7 +20,7 @@ LOCK_FILE="$ALTERNC_LOC/bureau/cron.lock"
 OLDIFS="$IFS"
 NEWIFS=" "
 RELOAD_ZONES=""
-RELOAD_WEB=""
+RELOAD_WEB=false
 B="µµ§§" # Strange letters to make split in query
 
 # Somes check before start operations
@@ -111,7 +111,7 @@ for dom in $( mysql_query "select domaine from domaines where dns_action = 'DELE
 done
 
 
-if [ ! -z $RELOAD_WEB ] ; then
+if [ $RELOAD_WEB ] ; then
   RELOAD_ZONES="$RELOAD_ZONES apache"
 
   # Concat the apaches files
