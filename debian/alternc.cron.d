@@ -15,6 +15,3 @@
 # You may put this computing every week only or on your filer on busy services.
 0 2 * * *       www-data 	/usr/lib/alternc/spoolsize.php
 
-# alternc-specific PHP sessions cleanup routine
-# copied from php5's
-09,39 *     * * *     root   [ -d /var/alternc/sessions ] && find /var/alternc/sessions/ -type f -cmin +$(if [ -e /usr/lib/php4/maxlifetime ] ; then /usr/lib/php4/maxlifetime ; else /usr/lib/php5/maxlifetime ; fi) -print0 | xargs -r -0 rm
