@@ -501,8 +501,8 @@ INSERT IGNORE INTO `domaines_type` (name, description, target, entry, compatibil
 ('webmail', 'Webmail access', 'NONE', '%SUB% IN A @@PUBLIC_IP@@', 'txt', false, false, false),
 ('ipv6','IPv6 address', 'IPV6', '%SUB% IN AAAA %TARGET%','ip,ipv6,webmail,txt',true, true, true ),
 ('cname', 'cname entry', 'DOMAIN', '%SUB% CNAME %TARGET%', 'txt',true, true, true ),
-('txt', 'txt entry', 'TXT', '%SUB% IN TXT "%TARGET%"','vhost,url,ip,webmail,ipv6,cname,txt',true, true, true),
-('mx', 'mx entry', 'IP', '%SUB% IN MX %TARGET%', 'vhost,url,ip,webmail,ipv6,cname,txt',true, false, true),
+('txt', 'txt entry', 'TXT', '%SUB% IN TXT "%TARGET%"','vhost,url,ip,webmail,ipv6,cname,txt,mx',true, true, true),
+('mx', 'mx entry', 'IP', '%SUB% IN MX 5 %TARGET%', 'vhost,url,ip,webmail,ipv6,cname,txt,mx',true, false, true),
 ('panel', 'Panel redirection', 'NONE', '%SUB% IN A @@PUBLIC_IP@@', 'vhost,url,ip,webmail,ipv6,cname,txt',true, false, false)
 ;
 

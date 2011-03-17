@@ -22,8 +22,6 @@ var/alternc/bind/zones
 var/alternc/bureau
 var/alternc/cgi-bin
 var/alternc/db
-var/alternc/dns
-var/alternc/dns/redir/
 var/alternc/exec.usr
 var/alternc/html
 var/alternc/html/_
@@ -102,7 +100,6 @@ var/alternc/mail/x
 var/alternc/mail/y
 var/alternc/mail/z
 var/alternc/mla
-var/alternc/redir
 var/alternc/sessions
 var/alternc/tmp
 var/backups/alternc
