@@ -44,7 +44,6 @@ fi
 
 # We lock the application
 echo $$ > "$LOCK_FILE"
-read
 
 # For domains we want to delete completely, make sure all the tags are all right
 # set sub_domaines.web_action = delete where domaines.dns_action = DELETE
