@@ -58,7 +58,7 @@ install: build
 	chmod 1733 debian/alternc/var/alternc/sessions
 	chmod -R 644 debian/alternc/var/alternc/bureau
 	chmod -R a+X debian/alternc/var/alternc/bureau
-	chown -R www-data:www-data debian/alternc/var/alternc/dns debian/alternc/var/alternc/html debian/alternc/var/run/alternc debian/alternc/var/log/alternc debian/alternc/var/alternc/tmp
+	chown -R www-data:www-data debian/alternc/var/alternc/html debian/alternc/var/run/alternc debian/alternc/var/log/alternc debian/alternc/var/alternc/tmp
 	chmod a+x debian/alternc/usr/share/alternc/install/alternc.install debian/alternc/usr/share/alternc/install/dopo.sh debian/alternc/usr/share/alternc/install/mysql.sh debian/alternc/usr/share/alternc/install/newone.php debian/alternc/usr/share/alternc/install/reset_root.php debian/alternc/usr/share/alternc/install/upgrade_check.sh debian/alternc/usr/share/alternc/install/upgrades/*.php debian/alternc/usr/share/alternc/install/upgrades/*.sh
 
 	for sub in mail html ; do \
