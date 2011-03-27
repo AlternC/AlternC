@@ -39,7 +39,7 @@ include_once("head.php");
 ?>
 <h3><?php __("Manage domains type"); ?></h3>
 <hr id="topbar" />
-  <p><?php __("If you don't know what this page is about, don't touch anything."); ?></p>
+  <p><?php __("If you don't know what this page is about, don't touch anything, and read AlternC documentation about domain types"); ?></p>
 
 <br />
 <?php

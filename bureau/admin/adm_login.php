@@ -40,26 +40,25 @@ if ($oldid) {
     die('Error : bad IP address');
   }
 
-	if (!$mem->setid($oldid))
-	{
+  if (!$mem->setid($oldid)) {
     $oldid=null;
-		$error=$err->errstr();
-		include("index.php");
-		exit();
-	}
+    $error=$err->errstr();
+    include("index.php");
+    exit();
+  }
   $oldid=null;
-	include_once("main.php");
-	exit();
+  include_once("main.php");
+  exit();
 }
 
 if (!$admin->enabled) {
-	__("This page is restricted to authorized staff");
-	exit();
+  __("This page is restricted to authorized staff");
+  exit();
 }
 
 $fields = array (
-	"id"    => array ("request", "integer", 0),
-);
+		 "id"    => array ("request", "integer", 0),
+		 );
 getFields($fields);
 
 $subadmin=variable_get("subadmin_restriction");
@@ -69,22 +68,18 @@ if ($subadmin==0 && !$admin->checkcreator($id)) {
   exit();
 }
 
-if (!$r=$admin->get($id))
-{
-	$error=$err->errstr();
-}
-else
-{
+if (!$r=$admin->get($id)) {
+  $error=$err->errstr();
+} else {
   setcookie('oldid',$cuid,0,'/admin/');
-	if (!$mem->setid($id))
-	{
-		$error=$err->errstr();
-		include("index.php");
-		exit();
-	}
-
-	include_once("main.php");
-	exit();
+  if (!$mem->setid($id)) {
+    $error=$err->errstr();
+    include("index.php");
+    exit();
+  }
+  
+  include_once("main.php");
+  exit();
 }
 
 include_once("head.php");
@@ -93,11 +88,10 @@ include_once("head.php");
 <h3><?php __("Member login"); ?></h3>
 <?php
 
-	if ($error)
-	{
-		echo "<p class=\"error\">$error</p>";
-		include_once("foot.php");
-		exit();
-	}
+if ($error) {
+  echo "<p class=\"error\">$error</p>";
+  include_once("foot.php");
+  exit();
+}
 ?>
 <?php include_once("foot.php"); ?>
