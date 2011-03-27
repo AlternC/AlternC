@@ -86,12 +86,13 @@ echo "<div class=\"warningmsg\">"._("WARNING: turning POP/IMAP off will DELETE t
 </td></tr>
 
     <tr><td><label for="alias"><?php __("Redirections<br />Other recipients:"); ?></label></td><td>(<?php __("one email per line"); ?>)<br /><textarea class="int" cols="32" rows="5" name="alias" id="alias"><?php echo $alias; ?></textarea></td></tr>
+ <!-- 
 <tr><td>
    <?php echo __("Is it a temporary mail account?"); ?><br/>
 </td><td>
     <?php include_once("trash_dateselect.php"); ?>
 </td></tr>
-
+ -->
 <tr class="trbtn"><td colspan="2">
   <input type="submit" class="inb" name="submit" value="<?php __("Change this email address"); ?>" />
   <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='mail_list.php?domain=<?php echo urlencode($domain); ?>'"/>
