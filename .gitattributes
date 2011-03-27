@@ -442,6 +442,11 @@ man/top_http_users.8 -text
 man/top_http_users.fr.8 -text
 man/top_mysql_users.8 -text
 man/top_mysql_users.fr.8 -text
+nightlybuild/HEADER.html -text
+nightlybuild/README.html -text
+nightlybuild/READMEFIRST -text
+nightlybuild/build.sh -text
+nightlybuild/nightly.key -text
 po/alternc-admintools.pot -text
 po/fr/LC_MESSAGES/.svnignore -text
 po/fr/LC_MESSAGES/alternc-admintools.po -text

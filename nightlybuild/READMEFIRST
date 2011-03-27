@@ -1,0 +1,10 @@
+To use the build system : 
+
+- create a user (nightly) 
+- create 2 folders in his home : buildroot and www
+- point a virtualhost into www in your webserver
+- copy build.sh to the home and the other files to www
+- launch build.sh when you want to build the packages
+
+You may need to change the pgp-key-id into build.sh (2 times) and into nightly.key
+
