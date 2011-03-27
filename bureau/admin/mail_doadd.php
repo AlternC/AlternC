@@ -30,6 +30,17 @@
 require_once("../class/config.php");
 $trash->getfromform();
 
+$fields = array (
+	"domain"    => array ("request", "string", ""),
+	"email"       => array ("request", "string", ""),
+	"pop"       => array ("request", "integer", 0),
+	"pass"       => array ("request", "string", ""),
+	"passconf"       => array ("request", "string", ""),
+	"alias"       => array ("request", "string", ""),
+);
+getFields($fields);
+
+
 if ($pass != $passconf) {
 	$error = _("Passwords do not match");
 	include("mail_add.php");

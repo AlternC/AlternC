@@ -37,21 +37,25 @@ class m_trash {
   function set_from_db($expiration_date_db) {
     $this->expiration_date_db=$expiration_date_db;
     $this->expiration_date=strtotime($this->expiration_date_db);
+    if ($this->expiration_date_db) $this->is_trash=true;
   }
 
   function human_display() {
-    return strftime("%d/%m/%Y %T",$this->expiration_date);
+    return strftime("%d/%m/%Y",$this->expiration_date);
   }
 
   function getfromform() {
     $fields = array (
-	  "trash_type_expiration"   => array ("request", "string", ""),
-	  "trash_exp_in_value"      => array ("request", "string", ""),
-	  "trash_exp_in_unit"       => array ("request", "string", ""),
-	  "trash_datepicker"        => array ("request", "string", ""),
+		     "istrash"                => array ("request", "boolean", false),
+		     "trash_type_expiration"  => array ("request", "string", ""),
+		     "trash_exp_in_value"     => array ("request", "string", ""),
+		     "trash_exp_in_unit"      => array ("request", "string", ""),
+		     "trash_datepicker"       => array ("request", "string", ""),
     );
     $champs=getFields($fields);
     foreach($champs as $k=>$v) $$k = $v; 
+
+    if (!$istrash) $trash_type_expiration="no_exp";
 
     switch($trash_type_expiration) {
         case "trash_at_x":
