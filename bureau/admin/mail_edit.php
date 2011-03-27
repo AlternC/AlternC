@@ -87,8 +87,7 @@ echo "<div class=\"warningmsg\">"._("WARNING: turning POP/IMAP off will DELETE t
 
     <tr><td><label for="alias"><?php __("Redirections<br />Other recipients:"); ?></label></td><td>(<?php __("one email per line"); ?>)<br /><textarea class="int" cols="32" rows="5" name="alias" id="alias"><?php echo $alias; ?></textarea></td></tr>
 <tr><td>
-   <?php echo __("Informations for temporary account"); ?><br/>
-   <span style="color: red;"><?php __("All this account information will <br/> be deleted at expiration time");?></span>
+   <?php echo __("Is it a temporary mail account?"); ?><br/>
 </td><td>
     <?php include_once("trash_dateselect.php"); ?>
 </td></tr>

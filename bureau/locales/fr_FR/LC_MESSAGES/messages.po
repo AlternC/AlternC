@@ -3459,9 +3459,12 @@ msgstr "une adresse email par ligne"
 msgid "Informations for temporary account"
 msgstr "Informations du compte temporaire"
 
+msgid "Is it a temporary mail account?"
+msgstr "Souhaitez-vous que ce mail soit temporaire&nbsp;?"
+
 #: ../admin/mail_add.php:79
-msgid "All this account information will <br/> be deleted at expiration"
-msgstr "L'adresse email sera détruite<br />à la date d'expiration"
+msgid "All this account information will be deleted at expiration"
+msgstr "L'adresse email sera détruite à la date d'expiration"
 
 #: ../admin/mail_add.php:85
 msgid "Create this email address"
@@ -3809,7 +3812,7 @@ msgstr "Pas de date d'autosuppression"
 
 #: ../admin/trash_dateselect.php:47
 msgid "You want it to be deleted in"
-msgstr "Vous souhaitez que cette adresse soit supprimée le"
+msgstr "Vous souhaitez que cette adresse soit supprimée dans"
 
 #: ../admin/trash_dateselect.php:54
 msgid "Hours"

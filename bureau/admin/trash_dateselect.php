@@ -28,18 +28,21 @@
  ----------------------------------------------------------------------
 */
 require_once("../class/config.php");
+
+$istrash=false;
+if (! is_null($res['trash_info']) && $res['trash_info']->is_trash ) {
+  $istrash=true;
+}
 ?>
+
+<p>
+ <input type="radio" name="istrash" id="istrash0" class="inc" value="0"<?php cbox(!$istrash); ?> onclick="hide('trash_expire_picker');"><label for="istrash0"><?php __("No"); ?></label>
+ <input type="radio" name="istrash" id="istrash1" class="inc" value="1"<?php cbox($istrash); ?> onclick="show('trash_expire_picker');"><label for="istrash1"><?php __("Yes"); ?></label>
+</p>
 
 <div id="trash_expire_picker">
     <table>
         <tbody>
-            <tr>
-                <td>
-                    <input type="radio" name="trash_type_expiration" value="no_exp" id="no_exp" checked="checked" onclick="trash_exp_none();">
-                </td><td>
-                    <label for="no_exp"><?php echo __("No auto-deletion date"); ?></label>
-                </td>
-            </tr>
             <tr>
                 <td valign="top">
                     <input type="radio" name="trash_type_expiration" value="trash_in_x" id="trash_in_x" onclick="trash_exp_in_activate();"> 
@@ -57,32 +60,34 @@ require_once("../class/config.php");
                     </select>
                 </td>
             </tr><tr>
-                <td valign=top>
-                    <input type="radio" name="trash_type_expiration" value="trash_at_x" id="trash_at_x" onclick="trash_exp_at_activate();"> 
+                <td valign="top">
+                    <input type="radio" name="trash_type_expiration" value="trash_at_x" id="trash_at_x" checked="checked" onclick="trash_exp_at_activate();"> 
                 </td><td>
                     <label for="trash_at_x"><?php __('Delete this email the following day,<br/>enter the date using DD/MM/YYYY format');?></label><br/>
-                    <input id="trash_datepicker" name="trash_datepicker" type="text" size="10" value="<?php echo strftime("%d/%m/%Y",mktime() + (3600*24*7));?>" />
+                    <input id="trash_datepicker" name="trash_datepicker" type="text" size="10" value="<?php 
+if ($istrash) {
+  echo $res['trash_info']->human_display();
+} else {
+  echo strftime("%d/%m/%Y",mktime() + (3600*24*7));
+}
+?>" />
                 </td>
             </tr>
         </tbody>
     </table>
+<br />
+   <span style="color: red;"><?php __("All this account information will be deleted at expiration");?></span>
+
 </div>
 
 <script>
     $(document).ready(function() {
         $("#trash_datepicker").datepicker({ minDate: '+1d'}); // We can't give an anterior date
         $("#trash_datepicker").datepicker( "option", "dateFormat", "dd/mm/yy" ); // format of the date
-        $("#trash_datepicker").datepicker( "option", "defaultDate", "+7d" ); // format of the date
-        // I let Vinci make de translation wrapper for jquery and jquery_ui, he have a better view than me
-        trash_exp_none();
+        // FIXME : I let Benjamin make de translation wrapper for jquery and jquery_ui, he have a better view than me
+        trash_exp_at_activate();
     });
     
-    function trash_exp_none() {
-        $('#trash_datepicker').attr('disabled', 'disabled');
-        $('#trash_exp_in_value').attr('disabled', true);
-        $('#trash_exp_in_unit').attr('disabled', true);
-    } 
-
     function trash_exp_at_activate() {
         $('#trash_datepicker').removeAttr('disabled');
         $('#trash_exp_in_value').attr('disabled', true);
@@ -93,6 +98,10 @@ require_once("../class/config.php");
         $('#trash_exp_in_value').removeAttr('disabled');
         $('#trash_exp_in_unit').removeAttr('disabled');
     }
+
+<?php if (!$istrash) { ?>
+  hide('trash_expire_picker'); 
+  <?php } ?>
 
 </script>
 

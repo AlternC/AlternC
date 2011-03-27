@@ -55,8 +55,9 @@ if ($error) {
 <hr id="topbar"/>
 <br />
 <p>
-  <span class="inb"><a href="mail_add.php?domain=<?php echo $domain; ?>"><?php printf(_("Add a mailbox on <b>%s</b>"),$domain); ?></a></span> 
-  <span class="inb"><a href="mail_add.php?many=1&amp;domain=<?php echo $domain; ?>"><?php printf(_("Add many mailboxes on <b>%s</b>"),$domain); ?></a></span>
+   <span class="inb"><a href="mail_add.php?domain=<?php echo $domain; ?>"><?php printf(_("Add a mailbox on <b>%s</b>"),$domain); ?></a></span>
+</p><p>
+   <span class="inb"><a href="mail_add.php?many=1&amp;domain=<?php echo $domain; ?>"><?php printf(_("Add many mailboxes on <b>%s</b>"),$domain); ?></a></span>
 </p>
 <?
 }
@@ -73,8 +74,9 @@ if (isset($error) && $error) {
 <hr id="topbar"/>
 <br />
 <p>
-  <span class="inb"><a href="mail_add.php?domain=<?php echo $domain; ?>"><?php printf(_("Add a mailbox on <b>%s</b>"),$domain); ?></a></span> 
-  <span class="inb"><a href="mail_add.php?many=1&amp;domain=<?php echo $domain; ?>"><?php printf(_("Add many mailboxes on <b>%s</b>"),$domain); ?></a></span>
+   <span class="inb"><a href="mail_add.php?domain=<?php echo $domain; ?>"><?php printf(_("Add a mailbox on <b>%s</b>"),$domain); ?></a></span>
+</p><p>
+   <span class="inb"><a href="mail_add.php?many=1&amp;domain=<?php echo $domain; ?>"><?php printf(_("Add many mailboxes on <b>%s</b>"),$domain); ?></a></span>
 </p>
 <?php
 
@@ -119,13 +121,10 @@ for($i=0;$i<$res["count"];$i++) {
 	}
     echo "<td>";
     if (! is_null($val['expiration_date'])) {
-        // It's a temporary account
-        echo __("Manage this temporary account");
-    } else {
-        // It's a normal account
-        echo "<a href='mail_add.php?domain=".urlencode($domain)."&dst_mail=".urlencode($val["mail"])."'>";
-        echo __("Create alias");
-        echo "</a>";
+      // It's a temporary account
+      $trash_info=new m_trash();
+      $trash_info->set_from_db($val["expiration_date"]);
+      echo __("This account will be deleted on"); echo "<br />".$trash_info->human_display();
     }
     echo "</td>";
 	echo "</tr>";
