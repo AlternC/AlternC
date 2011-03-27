@@ -86,7 +86,8 @@ done
 
 # Domains we do not want to be the DNS serveur anymore :
 # domaines.dns_action = UPDATE and domaines.gesdns = 0
-for dom in $( mysql_query "select domaine from domaines where dns_action = 'UPDATE' and gesdns = 0;") ; do
+for dom in `mysql_query "select domaine from domaines where dns_action = 'UPDATE' and gesdns = 0;"| tr '\n' ' '`
+do
     dns_delete $dom
     mysql_query "update domaines set dns_action = 'OK', dns_result = '$?' where domaine = '$dom'"
     RELOAD_ZONES="$RELOAD_ZONES $dom"
@@ -94,7 +95,9 @@ done
 
 # Domains we have to update the dns :
 # domaines.dns_action = UPDATE
-for dom in $( mysql_query "select domaine from domaines where dns_action = 'UPDATE';") ; do
+for dom in `mysql_query "select domaine from domaines where dns_action = 'UPDATE';" | tr '\n' ' '`
+do
+    echo "dns_regenerate : domain=/$dom/"
     dns_regenerate $dom
     mysql_query "update domaines set dns_action = 'OK', dns_result = '$?' where domaine = '$dom'"
     RELOAD_ZONES="$RELOAD_ZONES $dom"
@@ -102,7 +105,8 @@ done
 
 # Domains we want to delete completely, now we do it
 # domaines.dns_action = DELETE
-for dom in $( mysql_query "select domaine from domaines where dns_action = 'DELETE';") ; do
+for dom in `mysql_query "select domaine from domaines where dns_action = 'DELETE';" | tr '\n' ' '`
+do
     dns_delete $dom
     # Web configurations have already bean cleaned previously
     mysql_query "delete from sub_domaines where domaine='$dom'; delete from domaines where domaine='$dom';"
