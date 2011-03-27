@@ -22,6 +22,7 @@ var/alternc/bind/zones
 var/alternc/bureau
 var/alternc/cgi-bin
 var/alternc/db
+var/alternc/dns
 var/alternc/exec.usr
 var/alternc/html
 var/alternc/html/_
