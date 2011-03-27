@@ -807,3 +807,30 @@ msgstr "Mots de passe des comptes POP/IMAP"
 msgid "Protected folders passwords"
 msgstr "Mots de passe des dossiers protégés"
 
+msgid "AlternC panel access"
+msgstr "Accès au bureau AlternC"
+
+msgid "Locally hosted"
+msgstr "Géré en local"
+
+msgid "URL redirection"
+msgstr "Redirection vers une url"
+
+msgid "IPv4 redirect"
+msgstr "Redirection vers une IPv4"
+
+msgid "Webmail access"
+msgstr "Accès au webmail"
+
+msgid "IPv6 redirect"
+msgstr "Redirection vers une IPv6"
+
+msgid "CNAME DNS entry"
+msgstr "Entrée DNS CNAME"
+
+msgid "TXT DNS entry"
+msgstr "Entrée DNS TXT"
+
+msgid "MX DNS entry"
+msgstr "Entrée DNS MX"
+

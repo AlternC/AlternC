@@ -1252,30 +1252,12 @@ msgstr "Sous-domaines"
 msgid "Create a subdomain:"
 msgstr "Création d'un sous-domaine : "
 
+msgid "Edit a subdomain:"
+msgstr "Modification d'un sous-domaine : "
+
 #: ../admin/dom_edit.php:95 ../admin/dom_edit.php:126
 msgid "Add a subdomain"
 msgstr "Ajouter un sous-domaine"
-
-#: ../admin/dom_edit.php:99 ../admin/dom_subedit.php:62
-#: ../admin/dom_subedit.php:67
-msgid "Locally managed"
-msgstr "Géré en local"
-
-#: ../admin/dom_edit.php:110 ../admin/dom_subedit.php:73
-#: ../admin/dom_subedit.php:78
-msgid "URL redirection"
-msgstr "Redirection vers une url"
-
-#: ../admin/dom_edit.php:116 ../admin/dom_subedit.php:78
-#: ../admin/dom_subedit.php:83
-msgid "IP redirection"
-msgstr "Redirection vers une ip"
-
-#: ../admin/dom_edit.php:122 ../admin/dom_subedit.php:83
-#: ../class/m_dom.php:551 ../class/m_dom.php:594 ../class/m_dom.php:559
-#: ../class/m_dom.php:550 ../admin/dom_subedit.php:88 ../class/m_dom.php:574
-msgid "Webmail access"
-msgstr "Accès au webmail"
 
 #: ../admin/dom_edit.php:138 ../admin/dom_edit.php:141
 #: ../admin/dom_edit.php:169

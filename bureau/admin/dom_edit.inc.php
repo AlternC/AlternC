@@ -35,7 +35,13 @@ $dom->unlock();
 			<input type="hidden" name="type_old" value="<?php ehe($type); ?>" />
 			<input type="hidden" name="value_old" value="<?php ehe($value); ?>" />
 			<input type="hidden" name="action" value="add" />
-  <?php __("Create a subdomain:"); ?></td><td>
+  <?php
+   if ($isedit) {
+     __("Create a subdomain:"); 
+   } else {
+     __("Edit a subdomain:"); 
+   }
+?></td><td>
 <input type="text" class="int" name="sub" style="text-align:right" value="<?php ehe($sub); ?>" size="22" id="sub" /><span class="int" id="newsubname">.<?php echo $domain; ?></span></td>
 		</tr>
     <?php 

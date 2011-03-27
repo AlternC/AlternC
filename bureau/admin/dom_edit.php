@@ -94,7 +94,7 @@ if ($r['dns_action']=='UPDATE') {?>
 		 gestion des sous-domaines
  -->
 <table class="tlist">
-<tr><th colspan="2"> </th><th><?php __("Subdomain"); ?></th><th><?php __("Type");?></th><th><?php __("Place"); ?></th><th><?php __("Status")?></th><th><?php __("Pending");?></tr>
+<tr><th colspan="2"> </th><th><?php __("Subdomain"); ?></th><th><?php __("Type");?></th><th><?php __("Status")?></th><th><?php __("Pending");?></tr>
 <?php
 $col=1;
 for($i=0;$i<$r["nsub"];$i++) {
@@ -110,8 +110,14 @@ for($i=0;$i<$r["nsub"];$i++) {
 		</td>
     <?php } // end IF ==DELETE ?>
 		<td><a href="http://<?php ecif($r["sub"][$i]["name"],$r["sub"][$i]["name"]."."); echo $r["name"] ?>" target="_blank"><?php ecif($r["sub"][$i]["name"],$r["sub"][$i]["name"]."."); echo $r["name"] ?></a></td>
-		<td><?php __($r['sub'][$i]['type_desc']);?></td>
-		<td><?php echo $r["sub"][$i]['type'] === 'LOCAL' ? '<a href="bro_main.php?R='.urlencode($r["sub"][$i]["dest"]).'">'.htmlspecialchars($r["sub"][$i]["dest"]).'</a>' : htmlspecialchars($r["sub"][$i]["dest"]); ?>&nbsp;</td>
+		<td><?php __($r['sub'][$i]['type_desc']); ?>
+ <?php 
+ if ($r["sub"][$i]['type'] === 'VHOST') {
+  echo '<br /><a href="bro_main.php?R='.urlencode($r["sub"][$i]["dest"]).'">'.htmlspecialchars($r["sub"][$i]["dest"]).'</a>';
+} else {
+  if ($r["sub"][$i]['type']) echo "<br />".htmlspecialchars($r["sub"][$i]["dest"]);
+}
+?></td>
 		<td><?php 
       if ( $r['sub'][$i]['web_action'] !='DELETE') { 
         switch ($r['sub'][$i]['enable']) {
@@ -151,6 +157,7 @@ for($i=0;$i<$r["nsub"];$i++) {
 <br />
 <hr/>
 <?php
+$isedit=false;
 require_once('dom_edit.inc.php');
 sub_domains_edit($domain);
 ?>

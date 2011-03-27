@@ -61,6 +61,7 @@ $dom->unlock();
 <hr id="topbar"/>
 <br />
 <?php 
+  $isedit=true;
 require_once('dom_edit.inc.php');
 sub_domains_edit($domain,$sub,$type,$value);
 
