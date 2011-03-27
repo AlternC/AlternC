@@ -7,7 +7,7 @@ include_once("head.php");
 # Take the values of the subdomain in arguments
 
 function sub_domains_edit($domain, $sub=false,$type=false,$value=false) {
-global $admin, $oldid;
+  global $admin, $oldid, $isedit;
 
 $dom=new m_dom();
 $dom->lock();
@@ -37,9 +37,9 @@ $dom->unlock();
 			<input type="hidden" name="action" value="add" />
   <?php
    if ($isedit) {
-     __("Create a subdomain:"); 
-   } else {
      __("Edit a subdomain:"); 
+   } else {
+     __("Create a subdomain:"); 
    }
 ?></td><td>
 <input type="text" class="int" name="sub" style="text-align:right" value="<?php ehe($sub); ?>" size="22" id="sub" /><span class="int" id="newsubname">.<?php echo $domain; ?></span></td>
@@ -59,8 +59,10 @@ $dom->unlock();
           $lst_advanced[]=$dt['name'];
           if ($first_advanced) {
             $first_advanced=false;
+	    echo "<tr><td colspan=\"2\" class=\"advdom\"></td></tr>";
             echo "<tr id='domtype_show' class='lst2' onClick=\"domtype_advanced_show();\"><td colspan=2><a href=\"javascript:domtype_advanced_show();\"><b>+ "; __("Show advanced options"); echo "</b></a></td></tr>";
             echo "<tr id='domtype_hide' class='lst2' onClick=\"domtype_advanced_hide();\" style='display:none'><td colspan=2><a href=\"javascript:domtype_advanced_hide();\"><b>- "; __("Hide advanced options"); echo "</b></a></td></tr>";
+	    echo "<tr><td colspan=\"2\" class=\"advdom\"></td></tr>";
           }
         }
     ?>

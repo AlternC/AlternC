@@ -102,7 +102,7 @@ class m_dom {
   function domains_type_lst() {
     global $db,$err,$cuid;
     $err->log("dom","domains_type_lst");
-    $db->query("select * from domaines_type order by advanced, name;");
+    $db->query("select * from domaines_type order by advanced;");
     $this->domains_type_lst=false;
     while ($db->next_record()) {
       $this->domains_type_lst[] = $db->Record;
