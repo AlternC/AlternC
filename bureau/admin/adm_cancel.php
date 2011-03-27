@@ -29,69 +29,7 @@
 */
 require_once("../class/config.php");
 
-// If we just want to return to our previous session
-$oldid=intval($_COOKIE['oldid']);
-if ($oldid) {
-  setcookie('oldid','',0,'/');
+setcookie('oldid','',0,'/');
 
-  $db->query("select lastip from membres where uid='$oldid';");
-  $db->next_record();
-  if ($db->f("lastip") != getenv("REMOTE_ADDR") ) {
-    die('Error : bad IP address');
-  }
+require_once("main.php");
 
-  if (!$mem->setid($oldid)) {
-    $oldid=null;
-    $error=$err->errstr();
-    include("index.php");
-    exit();
-  }
-  $oldid=null;
-  include_once("main.php");
-  exit();
-}
-
-if (!$admin->enabled) {
-  __("This page is restricted to authorized staff");
-  exit();
-}
-
-$fields = array (
-		 "id"    => array ("request", "integer", 0),
-		 );
-getFields($fields);
-
-$subadmin=variable_get("subadmin_restriction");
-
-if ($subadmin==0 && !$admin->checkcreator($id)) {
-  __("This page is restricted to authorized staff");
-  exit();
-}
-
-if (!$r=$admin->get($id)) {
-  $error=$err->errstr();
-} else {
-  setcookie('oldid',$cuid,0,'/');
-  if (!$mem->setid($id)) {
-    $error=$err->errstr();
-    include("index.php");
-    exit();
-  }
-  
-  include_once("main.php");
-  exit();
-}
-
-include_once("head.php");
-
-?>
-<h3><?php __("Member login"); ?></h3>
-<?php
-
-if ($error) {
-  echo "<p class=\"error\">$error</p>";
-  include_once("foot.php");
-  exit();
-}
-?>
-<?php include_once("foot.php"); ?>

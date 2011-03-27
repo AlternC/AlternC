@@ -3833,9 +3833,8 @@ msgstr "Cacher les options avancées"
 
 #: ../admin/head.php:50
 msgid ""
-"Invited session. Clic <a href='adm_login.php'>here</a> to return to your "
-"previous session."
-msgstr "Session invité <a href='adm_login.php'>Cliquez ici</a> pour revenir a votre session précédente"
+"Administrator session. you may <a href='adm_login.php'>return to your account</a> or <a href='adm_cancel.php'>cancel this feature</a>"
+msgstr "Session administrateur. Vous pouvez <a href='adm_login.php'>revenir à votre compte</a> ou <a href='adm_cancel.php'>annuler cette possibilité</a>"
 
 #: ../admin/adm_passpolicy.php:120
 msgid ""
