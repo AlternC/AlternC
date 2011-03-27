@@ -41,7 +41,7 @@ umask 022
 DOMAIN_LOG_FILE="/var/log/alternc/update_domains.log"
 
 if [ `whoami` = 'root' ]; then
-  sudo="env"
+  sudo=""
 else
   sudo="sudo"
 fi
