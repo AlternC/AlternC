@@ -30,6 +30,6 @@
 require_once("../class/config.php");
 
 setcookie('oldid','',0,'/');
-
+unset($_COOKIE['oldid']);
 require_once("main.php");
 

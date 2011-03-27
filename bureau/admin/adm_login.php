@@ -33,6 +33,7 @@ require_once("../class/config.php");
 $oldid=intval($_COOKIE['oldid']);
 if ($oldid) {
   setcookie('oldid','',0,'/');
+  unset($_COOKIE['oldid']);
 
   $db->query("select lastip from membres where uid='$oldid';");
   $db->next_record();
@@ -72,6 +73,8 @@ if (!$r=$admin->get($id)) {
   $error=$err->errstr();
 } else {
   setcookie('oldid',$cuid,0,'/');
+  $_COOKIE['oldid']=$cuid;
+
   if (!$mem->setid($id)) {
     $error=$err->errstr();
     include("index.php");
