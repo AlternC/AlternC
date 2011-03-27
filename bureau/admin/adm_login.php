@@ -44,7 +44,7 @@ if ($oldid) {
   if (!$mem->setid($oldid)) {
     $oldid=null;
     $error=$err->errstr();
-    include("index.php");
+    include("adm_list.php");
     exit();
   }
   $oldid=null;
