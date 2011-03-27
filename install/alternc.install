@@ -338,6 +338,11 @@ if [ "$HAS_ROOT" != "1" ]; then
     fi
 fi
 
+# We force the re-computing of the DNS zones, since we may have changed the IP address (see #460)
+MYSQL_CONFIG="/etc/alternc/my.cnf"
+mysql="/usr/bin/mysql --defaults-file=$MYSQL_CONFIG"
+$mysql -B -e "update domaines set dns_action='update';"
+
 # We should restart apaches after all configuration stuff ...
 for service in $SERVICES; do
     test -x /etc/init.d/$service && invoke-rc.d $service stop || true
