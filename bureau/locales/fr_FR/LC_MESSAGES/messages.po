@@ -2989,11 +2989,9 @@ msgstr "Gestion des types de domaines"
 
 #: ../admin/adm_domstype.php:42
 msgid ""
-"If you don't know what this page is about, don't touch anything, and read "
-"AlternC documentation about domain types"
+"If you don't know what this page is about, don't touch anything"
 msgstr ""
-"Si vous ne savez pas de quoi parle cette page, ne touchez à rien et "
-"consultez la documentation d'AlternC sur les types de domaines"
+"Si vous ne savez pas de quoi parle cette page, ne touchez à rien."
 
 #: ../admin/adm_domstype.php:52
 msgid "Here is the list of domain types."
