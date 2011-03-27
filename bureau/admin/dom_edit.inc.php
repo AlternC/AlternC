@@ -112,7 +112,13 @@ $dom->unlock();
     <?php } // foreach ?>
 
 		<tr class="trbtn">
-			<td colspan="2"><input type="submit" class="inb" name="add" value="<?php __("Add this subdomain"); ?>" /></td>
+			<td colspan="2"><input type="submit" class="inb" name="add" value="<?php
+   if ($isedit) {
+ __("Edit this subdomain");
+} else {
+ __("Add this subdomain");
+} 
+?>" /></td>
 		</tr>
 	</table>
 </form>

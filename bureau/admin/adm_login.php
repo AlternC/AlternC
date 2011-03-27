@@ -44,11 +44,11 @@ if ($oldid) {
   if (!$mem->setid($oldid)) {
     $oldid=null;
     $error=$err->errstr();
-    include("adm_list.php");
+    include("index.php");
     exit();
   }
   $oldid=null;
-  include_once("main.php");
+  include_once("adm_list.php");
   exit();
 }
 

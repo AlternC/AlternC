@@ -31,6 +31,19 @@
 require_once("../class/config.php");
 include_once ("head.php");
 
+$fields = array (
+		 "R"    => array ("request", "string", ""),
+		 "formu"       => array ("request", "integer", ""),
+		 "actextract"    => array ("request", "string", ""),
+		 "fileextract"    => array ("request", "string", ""),
+		 "actdel"    => array ("request", "string", ""),
+		 "actcopy"    => array ("request", "string", ""),
+		 "actmove"    => array ("request", "string", ""),
+		 "actmoveto"    => array ("request", "string", ""),
+		 );
+getFields($fields);
+
+
 $p=$bro->GetPrefs();
 if (! isset($R)) $R='';
 if (!$R && $p["golastdir"]) {
@@ -72,7 +85,7 @@ if (isset($formu) && $formu) {
     <input type="hidden" name="actdel" value="1" />
     <input type="hidden" name="R" value="<?php echo $R?>" />
     <p class="error"><?php __("WARNING: Confirm the deletion of this files"); ?></p>
-<?php foreach($d as $file){ ?>
+<?php foreach($_REQUEST["d"] as $file){ ?>
 	<p><?php echo stripslashes($file); ?></p>
         <input type="hidden" name="d[]" value="<?php echo htmlentities(stripslashes($file)); ?>" />
 <?php } ?>
@@ -118,7 +131,7 @@ if (isset($formu) && $formu) {
 
 if (isset($actextract) && $actextract) {
   print _("extracting...")."<br />\n"; flush();
-  if ($bro->ExtractFile($R. '/' . $file, $R)) {
+  if ($bro->ExtractFile($R. '/' . $fileextract, $R)) {
     echo "<p class=\"error\">";
     print $err->errstr();
     print _("failed")."<br />\n";
@@ -324,7 +337,7 @@ echo "<td>&nbsp;";
 }
 $e = $bro->is_extractable($R,$c[$i]["name"]);
 if ($e) {
-  echo " <a href=\"bro_main.php?actextract=1&file=".urlencode($c[$i]["name"])."&amp;R=".urlencode($R)."\">";
+  echo " <a href=\"bro_main.php?actextract=1&amp;fileextract=".urlencode($c[$i]["name"])."&amp;R=".urlencode($R)."\">";
   echo _("Extract");
   echo "</a>";
 }

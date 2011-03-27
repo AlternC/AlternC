@@ -94,7 +94,7 @@ if ($r['dns_action']=='UPDATE') {?>
 		 gestion des sous-domaines
  -->
 <table class="tlist">
-<tr><th colspan="2"> </th><th><?php __("Subdomain"); ?></th><th><?php __("Type");?></th><th><?php __("Status")?></th><th><?php __("Pending");?></tr>
+<tr><th colspan="2"> </th><th><?php __("Subdomain"); ?></th><th><?php __("Type");?></th><th><?php __("Status")?></th></tr>
 <?php
 $col=1;
 for($i=0;$i<$r["nsub"];$i++) {
@@ -147,7 +147,6 @@ for($i=0;$i<$r["nsub"];$i++) {
           break;
         case 'OK':
         default:
-          __("Up to date");
           break;
       }?></td>
             
