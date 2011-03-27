@@ -146,9 +146,9 @@ EOF
         . /usr/share/alternc/install/mysql.sh
     fi
 
-    # forget the password
-    db_reset alternc/mysql/password || true
-    db_fset alternc/mysql/password "seen" "false" || true
+# We don't force seen or reset the data : this will allow preseeding
+#    db_reset alternc/mysql/password || true
+#    db_fset alternc/mysql/password "seen" "false" || true
 
     if [ -e $CONFIGFILE ]; then
       # source local.sh variables
@@ -211,7 +211,8 @@ EOF
     fi
 
     #clean old access to the management panel
-    find /var/alternc/dns/ -type l -lname /var/alternc/bureau -exec rm {} \;
+    # We don't use this anymore : (FIXME : shall we remove /var/alternc/dns while upgrading ?)
+    #find /var/alternc/dns/ -type l -lname /var/alternc/bureau -exec rm {} \;
 
     # Bind stuff
     touch /var/alternc/bind/automatic.conf /var/alternc/bind/slaveip.conf
