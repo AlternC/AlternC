@@ -29,29 +29,47 @@
 */
 require_once("../class/config.php");
 
-// If we just want to return to our previous session
-$oldid=intval($_COOKIE['oldid']);
-if ($oldid) {
+/*
+ We come into this page in two situations : 
+ * with a user id to go to (we check the current account is admin and is allowed to connect to this account)
+ * with no parameter when the admin want to go back to his admin account.
+ */
+
+
+// * with no parameter when the admin want to go back to his admin account.  
+if (!$_REQUEST["id"] && $_COOKIE["oldid"]) {
+  // We check the cookie's value : 
+  list($newuid,$passcheck)=explode("/",$_COOKIE["oldid"]);
+  $newuid=intval($newuid); 
+  if (!$newuid) {
+    $error=_("Your authentication information are incorrect");
+    include("index.php");
+    exit();
+  }
+  $admin->enabled=true;
+  $r=$admin->get($newuid);
+  if ($passcheck!=md5($r["pass"])) {
+    $error=_("Your authentication information are incorrect");
+    include("index.php");
+    exit();
+  }
+
+  // Ok, so we remove the cookie : 
   setcookie('oldid','',0,'/');
   unset($_COOKIE['oldid']);
 
-  $db->query("select lastip from membres where uid='$oldid';");
-  $db->next_record();
-  if ($db->f("lastip") != getenv("REMOTE_ADDR") ) {
-    die('Error : bad IP address');
-  }
-
-  if (!$mem->setid($oldid)) {
-    $oldid=null;
+  // And we go back to the former administrator account : 
+  if (!$mem->setid($newuid)) {
     $error=$err->errstr();
     include("index.php");
     exit();
   }
-  $oldid=null;
   include_once("adm_list.php");
   exit();
 }
 
+
+//  * with a user id to go to (we check the current account is admin and is allowed to connect to this account) 
 if (!$admin->enabled) {
   __("This page is restricted to authorized staff");
   exit();
@@ -62,8 +80,8 @@ $fields = array (
 		 );
 getFields($fields);
 
+// Depending on subadmin_restriction, a subadmin can (or cannot) connect to account he didn't create
 $subadmin=variable_get("subadmin_restriction");
-
 if ($subadmin==0 && !$admin->checkcreator($id)) {
   __("This page is restricted to authorized staff");
   exit();
@@ -72,19 +90,21 @@ if ($subadmin==0 && !$admin->checkcreator($id)) {
 if (!$r=$admin->get($id)) {
   $error=$err->errstr();
 } else {
-  setcookie('oldid',$cuid,0,'/');
-  $_COOKIE['oldid']=$cuid;
+  $oldid=$cuid."/".md5($mem->user["pass"]);
+  setcookie('oldid',$oldid,0,'/');
+  $_COOKIE['oldid']=$oldid;
 
   if (!$mem->setid($id)) {
     $error=$err->errstr();
     include("index.php");
     exit();
   }
-  
+  // Now we are the other user :) 
   include_once("main.php");
   exit();
 }
 
+// If there were an error, let's show it :
 include_once("head.php");
 
 ?>
@@ -96,5 +116,7 @@ if ($error) {
   include_once("foot.php");
   exit();
 }
+
+ include_once("foot.php"); 
+
 ?>
-<?php include_once("foot.php"); ?>
