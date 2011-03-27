@@ -126,9 +126,9 @@ class m_quota {
   function getquota($ressource="") {
     global $db,$err,$cuid,$get_quota_cache;
     $err->log("quota","getquota",$ressource);
-    if (! empty($get_quota_cache) ) {
+    if (! empty($get_quota_cache[$cuid]) ) {
       // This function is called many time each webpage, so I cache the result
-      $this->quotas = $get_quota_cache;
+      $this->quotas = $get_quota_cache[$cuid];
     } else {
       $this->qlist(); // Generate the quota list.
       $db->query("select * from quotas where uid='$cuid';");
@@ -152,7 +152,7 @@ class m_quota {
         exec("/usr/lib/alternc/quota_get ".$cuid." ".$val,$a);
         $this->quotas[$val]=array("t"=>$a[1],"u"=>$a[0]);
       }   
-      $get_quota_cache = $this->quotas;
+      $get_quota_cache[$cuid] = $this->quotas;
     }
     
     if ($ressource) {
