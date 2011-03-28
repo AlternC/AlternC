@@ -194,20 +194,26 @@ php="`ls /usr/lib/apache*/*/*php*.so | sed -e 's/^.*libphp\(.\)\.so$/php\1/' | t
 ln -fs /etc/alternc/alternc.ini /etc/$php/conf.d/alternc.ini || true
 if [ -x /usr/sbin/apache2 ]; then
     s=""
-    if ! ( [ -L /etc/apache2/mods-enabled/vhost_alias.load ] && [ -L /etc/apache2/mods-enabled/$php.load ] )
+    if ! [ -L /etc/apache2/mods-enabled/vhost_alias.load ]
     then
         a2enmod vhost_alias
-        a2enmod rewrite
-        a2enmod $php
         s="apache2"
     fi 
+    if ! [ -L /etc/apache2/mods-enabled/$php.load ]
+    then
+	a2enmod $php
+    fi
+    if ! [ -L /etc/apache2/mods-enabled/rewrite.load ]
+    then
+	a2enmod rewrite
+    fi
     if [ -e /etc/alternc/apache.pem ]; then
         # We enable proftpd tls module
         cat /etc/proftpd/modules.conf | sed -e 's/^#LoadModule mod_tls.c/LoadModule mod_tls.c/' > /etc/proftpd/modules.conf.alternc-new
         mv /etc/proftpd/modules.conf.alternc-new /etc/proftpd/modules.conf 
         cp /etc/proftpd/modules.conf /etc/alternc/templates/proftpd/
         # We enable apache2 SSL : 
-        if [ ! -h /etc/apache2/mods-enabled/ssl.load ] ; then
+        if [ ! -L /etc/apache2/mods-enabled/ssl.load ] ; then
             a2enmod ssl
             s="apache2"
         fi
