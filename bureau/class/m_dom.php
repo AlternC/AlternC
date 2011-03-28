@@ -73,6 +73,8 @@ class m_dom {
   var $type_ipv6 = "IPV6";
   var $type_cname = "CNAME";
   var $type_txt = "TXT";
+  var $type_mx = "MX";
+  var $type_mx2 = "MX2";
 
   var $action_insert = "0";
   var $action_update= "1";
@@ -347,16 +349,16 @@ class m_dom {
     if (!$force) {
       $v=checkhostallow($domain,$this->dns);
       if ($v==-1) {
-  $err->raise("dom",7);   // TLD interdit
-  return false;
+        $err->raise("dom",7);   // TLD interdit
+        return false;
       }
       if ($dns && $v==-2) {
-  $err->raise("dom",12);   // Domaine non trouvé dans le whois
-  return false;
+        $err->raise("dom",12);   // Domaine non trouvé dans le whois
+        return false;
       }
       if ($dns && $v==-3) {
-  $err->raise("dom",23);   // Domaine non trouvé dans le whois
-  return false;
+        $err->raise("dom",23);   // Domaine non trouvé dans le whois
+        return false;
       }
 
       if ($dns) $dns="1"; else $dns="0";
@@ -365,11 +367,11 @@ class m_dom {
       if ($tld[$v]==5) $dns=0;
       // It must be a real domain (no subdomain)
       if (!$dns) {
-  $v=checkhostallow_nodns($domain);
-  if ($v) {
-    $err->raise("dom",22);
-    return false;
-  }
+         $v=checkhostallow_nodns($domain);
+         if ($v) {
+           $err->raise("dom",22);
+           return false;
+         }
       }
     }
     // Check the quota :
@@ -385,8 +387,8 @@ class m_dom {
       $db->query("SELECT domaine FROM domaines WHERE compte='$cuid' AND domaine='$slavedom';");
       $db->next_record();
       if (!$db->Record["domaine"]) {
-  $err->raise("dom",1,$slavedom);
-  $isslave=false;
+        $err->raise("dom",1,$slavedom);
+        $isslave=false;
       }
       // Point to the master domain : 
       $this->set_sub_domain($domain, '',     $this->type_url, 'http://www.'.$slavedom);
@@ -399,7 +401,7 @@ class m_dom {
       $domshort=str_replace("-","",str_replace(".","",$domain));
       
       if (! is_dir($dest_root . "/". $domshort)) {
-  mkdir($dest_root . "/". $domshort);
+        mkdir($dest_root . "/". $domshort);
       }
       
       // Creation des 3 sous-domaines par défaut : Vide, www et mail
@@ -407,24 +409,32 @@ class m_dom {
       $this->set_sub_domain($domain, 'www',  $this->type_local,   '/'. $domshort);
       $this->set_sub_domain($domain, 'mail', $this->type_webmail, '');
     }
+
+    if ($mx) {
+      $this->set_sub_domain($domain, '', $this->type_mx, $GLOBALS['L_DEFAULT_MX']);
+      if (! empty($GLOBALS['L_DEFAULT_SECONDARY_MX'])) {
+        $this->set_sub_domain($domain, '', $this->type_mx2, $GLOBALS['L_DEFAULT_SECONDARY_MX']);
+      }
+    }
+
     // DEPENDANCE :
     // Lancement de add_dom sur les classes domain_sensitive :
     // Declenchons les autres classes.    
     foreach($classes as $c) {
       if (method_exists($GLOBALS[$c],"alternc_add_domain")) {
-  $GLOBALS[$c]->alternc_add_domain($domain);
+        $GLOBALS[$c]->alternc_add_domain($domain);
       }
     }
     foreach($classes as $c) {
       if (method_exists($GLOBALS[$c],"alternc_add_mx_domain")) {
-  $GLOBALS[$c]->alternc_add_mx_domain($domain);
+        $GLOBALS[$c]->alternc_add_mx_domain($domain);
       }
     }
     if ($isslave) {
       foreach($classes as $c) {
-  if (method_exists($GLOBALS[$c],"alternc_add_slave_domain")) {
-    $GLOBALS[$c]->alternc_add_slave_domain($domain,$slavedom);
-  }
+        if (method_exists($GLOBALS[$c],"alternc_add_slave_domain")) {
+          $GLOBALS[$c]->alternc_add_slave_domain($domain,$slavedom);
+        }
       } 
     }
     return true;

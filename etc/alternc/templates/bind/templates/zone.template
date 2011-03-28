@@ -16,4 +16,3 @@ $TTL 1D
 
                 IN      NS      %%ns1%%.
                 IN      NS      %%ns2%%.
-                IN      MX 5    %%mx%%.

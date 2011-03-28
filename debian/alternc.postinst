@@ -81,6 +81,9 @@ NS2_HOSTNAME=""
 # Mail server hostname
 DEFAULT_MX=""
 
+# Secondary mail server hostname
+DEFAULT_SECONDARY_MX=""
+
 # Note: MySQL username/password configuration now stored in /etc/alternc/my.cnf
 
 # quels clients mysql sont permis (%, localhost, etc)
