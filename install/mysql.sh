@@ -45,12 +45,6 @@
 
 # The grant all is the most important right needed in this script.
 echo "Granting users..."
-# cat <<EOF
-# host: $host
-# user: $user
-# password: $password
-# database: $database
-# EOF
 
 MYSQL_CONFIG="/etc/alternc/my.cnf"
 

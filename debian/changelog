@@ -2,19 +2,23 @@ alternc (1.0~rc2) stable; urgency=low
   * Major patch
     * Web & DNS file generation rebuild from scratch
     * Drop of apache 1 support
-    * Big changes in database schema (domaines, sub_domaines, *_standby)
+    * Big changes in database schema (domaines, sub_domaines, *_standby removal)
   * Major changes
     * Drop mass virtual hosting, now use full vhost
-    * Panel URL do not need anymore /admin/ (but you can still use it)
+    * Panel URL do not need anymore /admin/ (but you can still use it, we put a 301 redirect)
+    * JQuery is now used by AlternC (but not needed for any usual feature usage)
   * New features
     * Domains type are dynamic, the administrator can create domaine type with his own apache template
     * Advanced DNS options (ipv6, cname, txt, mx)
-    * Possibility to create a temporary mail
+    * Possibility to create a temporary mail (not yet shown, need cron)
+    * Admin can connect to other account and go back to their own
+    * Language link is back inside the menu
   * Bugfixes
-    * Too many to be listed (we change the update_domaines.sh)
+    * Too many to be listed (we change the historic update_domaines.sh)
     * Dash compatibility
     * Use iana.org to have whois server list up to date
-    
+    * Preseeding compatibility : don't ask for questions when already set
+
  -- Alan Garcia <fufroma@mailfr.com>  Fri, 11 Mar 2011 10:24:30 +0200
 
 alternc (1.0~rc1) stable; urgency=low
@@ -23,7 +27,7 @@ alternc (1.0~rc1) stable; urgency=low
     * Blue desktop using only css, no frameset etc
     * Sanitizing of get/request/post parameters using getFields function. May allow alternc not to use register_globals some day ...
   * security: passwords are now MANDATORY in MySQL class (whoosh...)
-  * security: now using htmlspecialchars on every form default values ... yes it's 2010 ;) 
+  * security: now using htmlspecialchars on every form default values ... yes it's 2010 ;)
   * i18n: charset is now variable depending on the current language
   * new features:
     * removed the dependency on postgrey, added dnsutils (for domain checks)
@@ -32,7 +36,7 @@ alternc (1.0~rc1) stable; urgency=low
     * fix a "already exist" error when creating a database containing an hyphen (-)
     * #1163: fix sqlbackup script call routine to retain backwards
       compatibility
-    * fix usage of ISO8859-15 charset (that may NOT be defined in locales...) 
+    * fix usage of ISO8859-15 charset (that may NOT be defined in locales...)
       and add it to the correct url (%%fqdn_lettre%%...)
   * major changes:
     * PHP sessions are now stored in /var/alternc/sessions
@@ -43,7 +47,7 @@ alternc (1.0~rc1) stable; urgency=low
     * add new field to member form: 'notes' which is just a text field
     * send an email on new account creation. the actual email needs to be
       configured through the AlternC variables for this to work.
-    * added the password policy management module : you can choose which 
+    * added the password policy management module : you can choose which
       password complexity you want to force for each place a password is required.
   * API changes
     * m_mysql->get_db_list() doesn't include size anymore because this
@@ -144,7 +148,7 @@ alternc (0.9.7) stable; urgency=low
   * fix dns install of internal hosting domains (#1056)
   * fix proftpd and saslauthd configuration for Etch (#1046, #1069)
   * fix .eu, .be, .name whois issue (#571)
-  * change apache log format to a working one (using host request), also fix awstats issues. 
+  * change apache log format to a working one (using host request), also fix awstats issues.
   * fix modules manipulation rules (#1062)
   * try to support apache2, at least with the right dependencies
   * end explicit mysql-server dependencies, which switches to Recommends,
@@ -184,7 +188,7 @@ alternc (0.9.6.1) stable; urgency=high
   * Make it possible to erase files and directories in file browser. Closes: #1002.
   * Fix mail accounts creation. Closes: #1003.
   * Fix a race condition in update_domains.sh which could allow users to
-    bypass openbasedir protection when creating domains. Reported by 
+    bypass openbasedir protection when creating domains. Reported by
     Jerome Moinet.
 
  -- Antoine Beaupré <anarcat@koumbit.org>  Fri, 12 Jan 2007 15:59:42 -0500
@@ -222,7 +226,7 @@ alternc (0.9.4) stable; urgency=low
   * maintenance release to fix packaging and security bugs
   * see https://dev.alternc.org/trac/alternc/milestone/0.9.4 for milestone
   * changelog at https://dev.alternc.org/trac/alternc/query?status=closed&milestone=0.9.4
-  However, this version contains mainly : 
+  However, this version contains mainly :
   * Integration of Globenet patchs (replacement of do_domains.sh by update_domains.sh and others)
   * Changing mysql database creation from uid to login name
   * Major improvements in FHS compliance
@@ -263,7 +267,7 @@ alternc (0.9.3.9-globenet9) unstable; urgency=low
 
 alternc (0.9.3.9-globenet8) unstable; urgency=low
 
-  * Finally fix empty host handling in update_domains.sh. 
+  * Finally fix empty host handling in update_domains.sh.
 
  -- Lunar <lunar@anargeek.net>  Wed, 21 Sep 2005 23:45:06 +0200
 
@@ -371,7 +375,3 @@ alternc (0.9-1) testing; urgency=low
   * Initial Release.
 
  -- Benjamin Sonntag <benjamin@alternc.org>  Tue, 27 Aug 2002 19:31:26 +0200
-
-
-
-	

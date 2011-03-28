@@ -13,10 +13,9 @@ update_var() {
     question="$1"
     var="$2"
     db_get "$question"
-    if [ ! -z "$RET" ]; then
-        grep -Eq "^ *$var=" $CONFIGFILE || echo "$var=" >> $CONFIGFILE
-        SED_SCRIPT="$SED_SCRIPT;s\\^ *$var=.*\\$var=\"$RET\"\\"
-    fi
+
+    grep -Eq "^ *$var=" $CONFIGFILE || echo "$var=" >> $CONFIGFILE
+    SED_SCRIPT="$SED_SCRIPT;s\\^ *$var=.*\\$var=\"$RET\"\\"
 }
 
 # summary of how this script can be called:
@@ -145,10 +144,6 @@ EOF
         # we source (instead of forking) mysql.sh so that it gets the local environment above
         . /usr/share/alternc/install/mysql.sh
     fi
-
-# We don't force seen or reset the data : this will allow preseeding
-#    db_reset alternc/mysql/password || true
-#    db_fset alternc/mysql/password "seen" "false" || true
 
     if [ -e $CONFIGFILE ]; then
       # source local.sh variables

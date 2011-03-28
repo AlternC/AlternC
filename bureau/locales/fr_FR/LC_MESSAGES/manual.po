@@ -834,3 +834,6 @@ msgstr "Entrée DNS TXT"
 msgid "MX DNS entry"
 msgstr "Entrée DNS MX"
 
+msgid "secondary MX DNS entry"
+msgstr "Entrée DNS MX secondaire"
+
