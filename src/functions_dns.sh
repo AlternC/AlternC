@@ -97,7 +97,9 @@ dns_regenerate() {
     )
 
     # Get some usefull vars
-    local mx=$( $MYSQL_DO "select mx from domaines where domaine='$domain' limit 1;")
+
+# Deprecated ?
+#    local mx=$( $MYSQL_DO "select mx from domaines where domaine='$domain' limit 1;")
 
     # Replace the vars by their values
     # Here we can add dynamic value for the default MX
@@ -105,7 +107,8 @@ dns_regenerate() {
             s/%%fqdn%%/$FQDN/g;
             s/%%ns1%%/$NS1_HOSTNAME/g;
             s/%%ns2%%/$NS2_HOSTNAME/g;
-            s/%%mx%%/$mx/g;
+            s/%%DEFAULT_MX%%/$DEFAULT_MX/g;
+            s/%%DEFAULT_SECONDARY_MX%%/$DEFAULT_SECONDARY_MX/g;
             s/@@DOMAINE@@/$domain/g;
             s/@@SERIAL@@/$serial/g;
             s/@@PUBLIC_IP@@/$PUBLIC_IP/g")

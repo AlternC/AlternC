@@ -73,8 +73,8 @@ class m_dom {
   var $type_ipv6 = "IPV6";
   var $type_cname = "CNAME";
   var $type_txt = "TXT";
-  var $type_mx = "MX";
-  var $type_mx2 = "MX2";
+  var $type_mx = "DEFMX";
+  var $type_mx2 = "DEFMX2";
 
   var $action_insert = "0";
   var $action_update= "1";
@@ -411,9 +411,9 @@ class m_dom {
     }
 
     if ($mx) {
-      $this->set_sub_domain($domain, '', $this->type_mx, $GLOBALS['L_DEFAULT_MX']);
+      $this->set_sub_domain($domain, '', $this->type_defmx, '');
       if (! empty($GLOBALS['L_DEFAULT_SECONDARY_MX'])) {
-        $this->set_sub_domain($domain, '', $this->type_mx2, $GLOBALS['L_DEFAULT_SECONDARY_MX']);
+        $this->set_sub_domain($domain, '', $this->type_defmx2, '');
       }
     }
 

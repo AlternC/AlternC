@@ -22,13 +22,15 @@ PRIMARY KEY ( `name` )
 INSERT IGNORE INTO `domaines_type` (name, description, target, entry, compatibility, only_dns, need_dns, advanced) values
 ('vhost','Locally hosted', 'DIRECTORY', '%SUB% IN A @@PUBLIC_IP@@', 'txt', false, false, false),
 ('url','URL redirection', 'URL', '%SUB% IN A @@PUBLIC_IP@@','txt', true, true, false),
-('ip','IPv4 redirect', 'IP', '%SUB% IN A %TARGET%','url,ip,ipv6,txt,mx,mx2', false, true, false),
+('ip','IPv4 redirect', 'IP', '%SUB% IN A %TARGET%','url,ip,ipv6,txt,mx,mx2,defmx,defmx2', false, true, false),
 ('webmail', 'Webmail access', 'NONE', '%SUB% IN A @@PUBLIC_IP@@', 'txt', false, false, false),
-('ipv6','IPv6 redirect', 'IPV6', '%SUB% IN AAAA %TARGET%','ip,ipv6,webmail,txt,mx,mx2',true, true, true ),
-('cname', 'CNAME DNS entry', 'DOMAIN', '%SUB% CNAME %TARGET%', 'txt',true, true, true ),
-('txt', 'TXT DNS entry', 'TXT', '%SUB% IN TXT "%TARGET%"','vhost,url,ip,webmail,ipv6,cname,txt,mx,mx2',true, true, true),
+('ipv6','IPv6 redirect', 'IPV6', '%SUB% IN AAAA %TARGET%','ip,ipv6,webmail,txt,mx,mx2,defmx,defmx2',true, true, true ),
+('cname', 'CNAME DNS entry', 'DOMAIN', '%SUB% CNAME %TARGET%', 'txt,mx,mx2,defmx,defmx2',true, true, true ),
+('txt', 'TXT DNS entry', 'TXT', '%SUB% IN TXT "%TARGET%"','vhost,url,ip,webmail,ipv6,cname,txt,mx,mx2,defmx,defmx2',true, true, true),
 ('mx', 'MX DNS entry', 'DOMAIN', '%SUB% IN MX 5 %TARGET%', 'vhost,url,ip,webmail,ipv6,cname,txt,mx,mx2',true, false, true),
-('mx2', 'secondary MX DNS entry', 'DOMAIN', '%SUB% IN MX 10 %TARGET%', 'vhost,url,ip,webmail,ipv6,cname,txt,mx2',true, false, true),
+('mx2', 'secondary MX DNS entry', 'DOMAIN', '%SUB% IN MX 10 %TARGET%', 'vhost,url,ip,webmail,ipv6,cname,txt,mx,mx2',true, false, true),
+('defmx', 'Default mail server', 'NONE', '%SUB% IN MX 5 @@DEFAULT_MX@@', 'vhost,url,ip,webmail,ipv6,cname,txt,defmx2',true, false, true),
+('defmx2', 'Default backup mail server', 'DOMAIN', '%SUB% IN MX 10 @@DEFAULT_SECONDARY_MX@@', 'vhost,url,ip,webmail,ipv6,cname,txt,defmx',true, false, true),
 ('panel', 'AlternC panel access', 'NONE', '%SUB% IN A @@PUBLIC_IP@@', 'vhost,url,ip,webmail,ipv6,cname,txt,mx,mx2',true, false, true)
 ;
 
