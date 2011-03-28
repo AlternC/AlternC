@@ -65,7 +65,7 @@ if (isset($formu) && $formu) {
     }
     $p=$bro->GetPrefs();
     if ($p["createfile"]==1) {
-      $file=$nomfich;
+      $editfile=$nomfich;
       include("bro_editor.php");
       exit();
     }
@@ -85,9 +85,9 @@ if (isset($formu) && $formu) {
     <input type="hidden" name="actdel" value="1" />
     <input type="hidden" name="R" value="<?php echo $R?>" />
     <p class="error"><?php __("WARNING: Confirm the deletion of this files"); ?></p>
-<?php foreach($_REQUEST["d"] as $file){ ?>
-	<p><?php echo stripslashes($file); ?></p>
-        <input type="hidden" name="d[]" value="<?php echo htmlentities(stripslashes($file)); ?>" />
+<?php foreach($_REQUEST["d"] as $editfile){ ?>
+	<p><?php echo stripslashes($editfile); ?></p>
+        <input type="hidden" name="d[]" value="<?php echo htmlentities(stripslashes($editfile)); ?>" />
 <?php } ?>
     <blockquote>
       <input type="submit" class="inb" name="del_confirm" value="<?php __("Yes"); ?>" />&nbsp;&nbsp;
@@ -322,7 +322,7 @@ if ($p["showicons"]) {
 echo "<td width=\"28\"><img src=\"icon/".$bro->icon($c[$i]["name"])."\" width=\"16\" height=\"16\" alt=\"\" /></td>";
 }
 echo "<td><a href=\"";
-echo "bro_editor.php?file=".urlencode($c[$i]["name"])."&amp;R=".urlencode($R);
+echo "bro_editor.php?editfile=".urlencode($c[$i]["name"])."&amp;R=".urlencode($R);
 echo "\">".htmlentities($c[$i]["name"])."</a></td>\n";
 echo "	<td>".format_size($c[$i]["size"])."</td>";
 echo "<td>".format_date('%3$d-%2$d-%1$d %4$d:%5$d',date("Y-m-d H:i:s",$c[$i]["date"]))."<br /></td>";
@@ -376,7 +376,7 @@ $col=3-$col;
 echo "<tr class=\"lst$col\">\n";
 if ($c[$i]["type"]) {
 echo "	<td width=\"28\"><input type=\"checkbox\" class=\"inc\" name=\"d[]\" value=\"".$c[$i]["name"]."\" /></td><td><a href=\"";
-echo "bro_editor.php?file=".urlencode($c[$i]["name"])."&amp;R=".urlencode($R);
+echo "bro_editor.php?editfile=".urlencode($c[$i]["name"])."&amp;R=".urlencode($R);
 echo "\">".htmlentities($c[$i]["name"])."</a></td>\n";
 echo "	<td>".format_size($c[$i]["size"])."</td><td>";
 $vu=$bro->viewurl($R,$c[$i]["name"]);
@@ -406,7 +406,7 @@ $col=3-$col;
 echo "<tr class=\"lst$col\">\n";
 if ($c[$i]["type"]) {
 echo "	<td width=\"28\"><input TYPE=checkbox class=\"inc\" name=\"d[]\" value=\"".$c[$i]["name"]."\"></td><td><a href=\"";
-echo "bro_editor.php?file=".urlencode($c[$i]["name"])."&amp;R=".urlencode($R);
+echo "bro_editor.php?editfile=".urlencode($c[$i]["name"])."&amp;R=".urlencode($R);
 echo "\">".htmlentities($c[$i]["name"])."</a></td>\n";
 echo "	<td>".format_size($c[$i]["size"])."</td><td>";
 $vu=$bro->viewurl($R,$c[$i]["name"]);
@@ -443,7 +443,7 @@ $col=3-$col;
 echo "<tr class=\"lst$col\">\n";
 if ($c[$i]["type"]) {
 echo "	<td width=\"28\"><input TYPE=checkbox class=\"inc\" name=\"d[]\" value=\"".$c[$i]["name"]."\"></td><td><a href=\"";
-echo "bro_editor.php?file=".urlencode($c[$i]["name"])."&amp;R=".urlencode($R);
+echo "bro_editor.php?editfile=".urlencode($c[$i]["name"])."&amp;R=".urlencode($R);
 echo "\">".htmlentities($c[$i]["name"])."</a></td>\n";
 echo "	<td>".format_size($c[$i]["size"])."</td><td>";
 $vu=$bro->viewurl($R,$c[$i]["name"]);
@@ -473,7 +473,7 @@ $col=3-$col;
 echo "<tr class=\"lst$col\">\n";
 if ($c[$i]["type"]) {
 echo "	<td width=\"28\"><input TYPE=checkbox class=\"inc\" name=\"d[]\" value=\"".$c[$i]["name"]."\"></td><td><a href=\"";
-echo "bro_editor.php?file=".urlencode($c[$i]["name"])."&amp;R=".urlencode($R);
+echo "bro_editor.php?editfile=".urlencode($c[$i]["name"])."&amp;R=".urlencode($R);
 echo "\">".htmlentities($c[$i]["name"])."</a></td>\n";
 echo "	<td>".format_size($c[$i]["size"])."</td><td>";
 $vu=$bro->viewurl($R,$c[$i]["name"]);
@@ -504,7 +504,7 @@ $col=3-$col;
 echo "<tr class=\"lst$col\">\n";
 if ($c[$i]["type"]) {
 echo "	<td width=\"28\"><input TYPE=checkbox class=\"inc\" name=\"d[]\" value=\"".$c[$i]["name"]."\"></td><td><a href=\"";
-echo "bro_editor.php?file=".urlencode($c[$i]["name"])."&amp;R=".urlencode($R);
+echo "bro_editor.php?editfile=".urlencode($c[$i]["name"])."&amp;R=".urlencode($R);
 echo "\">".htmlentities($c[$i]["name"])."</a></td>\n";
 echo "	<td>".format_size($c[$i]["size"])."</td><td>";
 $vu=$bro->viewurl($R,$c[$i]["name"]);
