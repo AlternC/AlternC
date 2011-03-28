@@ -1259,6 +1259,9 @@ msgstr "Modification d'un sous-domaine : "
 msgid "Add a subdomain"
 msgstr "Ajouter un sous-domaine"
 
+msgid "Edit this subdomain"
+msgstr "Modifier ce sous-domaine"
+
 #: ../admin/dom_edit.php:138 ../admin/dom_edit.php:141
 #: ../admin/dom_edit.php:169
 msgid "DNS parameters"
@@ -3377,11 +3380,7 @@ msgstr "Mise à jour en attente"
 
 #: ../admin/dom_edit.php:140
 msgid "Deletion pending"
-msgstr "Supprimession en attente"
-
-#: ../admin/dom_edit.php:144
-msgid "Up to date"
-msgstr "à jour"
+msgstr "Suppression en attente"
 
 #: ../admin/dom_edit.php:192
 msgid ""
