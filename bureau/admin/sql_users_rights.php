@@ -56,6 +56,7 @@ echo "<p>"._("help_sql_users_rights_ok")."</p>";
 <table cellspacing="0" cellpadding="4">
    <tr>
      <th>&nbsp;</th>
+     <th>&nbsp;</th>
      <th>SELECT</th>
      <th>INSERT</th>
      <th>UPDATE</th>
@@ -71,45 +72,19 @@ echo "<p>"._("help_sql_users_rights_ok")."</p>";
 
 <?php
 $col=1;
+$sql_right=Array('select','insert','update','delete','create','drop','references','index','alter','create_tmp','lock');
 for($i=0;$i<count($r);$i++) {
   $val=$r[$i];
   $col=3-$col;
 ?>
 	<tr class="lst<?php echo $col; ?>">
-          <td><strong><?php echo $mem->user["login"].($val["db"]?"_":"").$val["db"] ?></strong></td>
+    <td><strong><?php echo $mem->user["login"].($val["db"]?"_":"").$val["db"] ?></strong></td>
+    <td><a href="javascript:inverse_sql_right('<?php echo htmlentities($val["db"]);?>');"><?php __('Reverse selection');?></a></td>
+    <?php foreach($sql_right as $sr) { ?>
 	  <td align="center">
-            <input type="checkbox" class="inc" id="<?php echo $val["db"]; ?>_select" name="<?php echo $val["db"]; ?>_select"<?php if($val["select"]=="Y") echo " checked=\"checked\""; ?> />
-          </td>
-	  <td align="center">
-            <input type="checkbox" class="inc" id="<?php echo $val["db"]; ?>_insert" name="<?php echo $val["db"]; ?>_insert"<?php if($val["insert"]=="Y") echo " checked=\"checked\""; ?> />
-          </td>
-	  <td align="center">
-            <input type="checkbox" class="inc" id="<?php echo $val["db"]; ?>_update" name="<?php echo $val["db"]; ?>_update"<?php if($val["update"]=="Y") echo " checked=\"checked\""; ?> />
-          </td>
-	  <td align="center">
-            <input type="checkbox" class="inc" id="<?php echo $val["db"]; ?>_delete" name="<?php echo $val["db"]; ?>_delete"<?php if($val["delete"]=="Y") echo " checked=\"checked\""; ?> />
-          </td>
-	  <td align="center">
-            <input type="checkbox" class="inc" id="<?php echo $val["db"]; ?>_create" name="<?php echo $val["db"]; ?>_create"<?php if($val["create"]=="Y") echo " checked=\"checked\""; ?> />
-          </td>
-	  <td align="center">
-            <input type="checkbox" class="inc" id="<?php echo $val["db"]; ?>_drop" name="<?php echo $val["db"]; ?>_drop"<?php if($val["drop"]=="Y") echo " checked=\"checked\""; ?> />
-          </td>
-	  <td align="center">
-            <input type="checkbox" class="inc" id="<?php echo $val["db"]; ?>_references" name="<?php echo $val["db"]; ?>_references"<?php if($val["references"]=="Y") echo " checked=\"checked\""; ?> />
-          </td>
-	  <td align="center">
-            <input type="checkbox" class="inc" id="<?php echo $val["db"]; ?>_index" name="<?php echo $val["db"]; ?>_index"<?php if($val["index"]=="Y") echo " checked=\"checked\""; ?> />
-          </td>
-	  <td align="center">
-            <input type="checkbox" class="inc" id="<?php echo $val["db"]; ?>_alter" name="<?php echo $val["db"]; ?>_alter"<?php if($val["alter"]=="Y") echo " checked=\"checked\""; ?> />
-          </td>
-	  <td align="center">
-            <input type="checkbox" class="inc" id="<?php echo $val["db"]; ?>_create_tmp" name="<?php echo $val["db"]; ?>_create_tmp"<?php if($val["create_tmp"]=="Y") echo " checked=\"checked\""; ?> />
-          </td>
-	  <td align="center">
-            <input type="checkbox" class="inc" id="<?php echo $val["db"]; ?>_lock" name="<?php echo $val["db"]; ?>_lock"<?php if($val["lock"]=="Y") echo " checked=\"checked\""; ?> />
-          </td>
+            <input type="checkbox" class="inc" id="<?php echo $val["db"]."_$sr"; ?>" name="<?php echo $val["db"]."_$sr"; ?>"<?php if($val[$sr]=="Y") echo " checked=\"checked\""; ?> />
+    </td>
+    <?php } ?>
 	</tr>
 <?php
 
@@ -122,5 +97,17 @@ for($i=0;$i<count($r);$i++) {
 </table>
 </form>
 <p>&nbsp;</p>
+<script type="text/javascript">
+function inverse_sql_right(db) {
+  <?php foreach($sql_right as $sr) { ?>
+    if ( document.getElementById(db+'_<?php echo $sr;?>').checked ) {
+      document.getElementById(db+'_<?php echo $sr;?>').checked=false;
+    } else {
+      document.getElementById(db+'_<?php echo $sr;?>').checked=true;
+    }
+  <?php } ?>
+}
+
+</script>
 <?php } ?>
 <?php include_once("foot.php"); ?>
