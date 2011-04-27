@@ -202,6 +202,7 @@ bureau/admin/images/plus.png -text
 bureau/admin/images/quota.png -text
 bureau/admin/images/stat.png -text
 bureau/admin/index.php -text
+bureau/admin/ip_main.php -text
 bureau/admin/js/alternc.js -text
 bureau/admin/js/jquery.min.js -text
 bureau/admin/js/jquery_ui/css/smoothness/images/ui-bg_flat_0_aaaaaa_40x100.png -text
@@ -251,6 +252,7 @@ bureau/admin/menu_aide.php -text
 bureau/admin/menu_brouteur.php -text
 bureau/admin/menu_dom.php -text
 bureau/admin/menu_ftp.php -text
+bureau/admin/menu_ip.php -text
 bureau/admin/menu_lang.php -text
 bureau/admin/menu_mail.php -text
 bureau/admin/menu_mem.php -text
@@ -428,6 +430,7 @@ install/upgrades/0.9.6.sql -text
 install/upgrades/0.9.7.sql -text
 install/upgrades/0.9.9.sql -text
 install/upgrades/1.0.sql -text
+install/upgrades/1.1.sql -text
 install/upgrades/README -text
 man/alternc-admintools.8 -text
 man/alternc-admintools.fr.8 -text

@@ -108,7 +108,7 @@ class m_admin {
       $db->next_record();
       reset($db->Record);
       while (list($key,$val)=each($db->Record)) {
-	$c[$key]=$val;
+	      $c[$key]=$val;
       }
     }
     return $c;
@@ -141,7 +141,7 @@ class m_admin {
       $db->next_record();
       reset($db->Record);
       while (list($key,$val)=each($db->Record)) {
-	$c[$key]=$val;
+	      $c[$key]=$val;
       }
     }
 
@@ -150,7 +150,7 @@ class m_admin {
       $db->next_record();
       reset($db->Record);
       while (list($key,$val)=each($db->Record)) {
-	$c[$key]=$val;
+	      $c[$key]=$val;
       }
     }
 
@@ -350,10 +350,10 @@ class m_admin {
     if (!$db->f("cnt")) {
       $db->query("SELECT max(m.uid)+1 as nextid FROM membres m");
       if (!$db->next_record()) {
-	$uid=2000;
+	      $uid=2000;
       } else {
-	$uid=$db->Record["nextid"];
-	if ($uid<=2000) $uid=2000;
+	      $uid=$db->Record["nextid"];
+	      if ($uid<=2000) $uid=2000;
       }
       // on le créé ensuite dans system.membres et system.local
       $db->query("INSERT INTO membres (uid,login,pass,mail,creator,canpass,type,created, notes) VALUES ('$uid','$login','$pass','$mail','$cuid','$canpass', '$type', NOW(), '$notes');");
@@ -363,9 +363,9 @@ class m_admin {
       // Declenchons les autres classes.
       $mem->su($uid);
       foreach($classes as $c) {
-	if (method_exists($GLOBALS[$c],"alternc_add_member")) {
-	  $GLOBALS[$c]->alternc_add_member();
-	}
+      	if (method_exists($GLOBALS[$c],"alternc_add_member")) {
+	        $GLOBALS[$c]->alternc_add_member();
+	      }
       }
       $mem->unsu();
       return $uid;
@@ -477,9 +477,9 @@ EOF;
     }
 
     if (($db->query("UPDATE local SET nom='$nom', prenom='$prenom' WHERE uid='$uid';"))
-	&&($db->query("UPDATE membres SET mail='$mail', canpass='$canpass', enabled='$enabled', `type`='$type', notes='$notes' $ssq WHERE uid='$uid';"))){
+	     &&($db->query("UPDATE membres SET mail='$mail', canpass='$canpass', enabled='$enabled', `type`='$type', notes='$notes' $ssq WHERE uid='$uid';"))){
       if($_POST['reset_quotas'] == "on")
-	$quota->addquotas();
+	      $quota->addquotas();
       $this->renew_update($uid, $duration);
       return true;
     }
@@ -584,21 +584,21 @@ EOF;
 
       // Send the event to the other classes : 
       foreach($classes as $c) {
-	if (method_exists($GLOBALS[$c],"alternc_del_member")) {
-	  $GLOBALS[$c]->alternc_del_member();
-	}
+	      if (method_exists($GLOBALS[$c],"alternc_del_member")) {
+	        $GLOBALS[$c]->alternc_del_member();
+	      }
       }
       if (($db->query("DELETE FROM membres WHERE uid='$uid';")) &&
-	  ($db->query("DELETE FROM local WHERE uid='$uid';"))) {
-	exec("/usr/lib/alternc/mem_del ".$tt["login"]);
-	$mem->unsu();
-	// If this user was (one day) an administrator one, he may have a list of his own accounts. Let's associate those accounts to nobody as a creator.
-	$db->query("UPDATE membres SET creator=2000 WHERE creator='$uid';");
-	return true;
+	        ($db->query("DELETE FROM local WHERE uid='$uid';"))) {
+	      exec("/usr/lib/alternc/mem_del ".$tt["login"]);
+	      $mem->unsu();
+	      // If this user was (one day) an administrator one, he may have a list of his own accounts. Let's associate those accounts to nobody as a creator.
+	      $db->query("UPDATE membres SET creator=2000 WHERE creator='$uid';");
+	      return true;
       } else {
-	$err->raise("admin",2);
-	$mem->unsu();
-	return false;
+        $err->raise("admin",2);
+        $mem->unsu();
+        return false;
       }
   }
 
@@ -882,47 +882,47 @@ EOF;
       $dontexist=false;
       // Check du domaine
       if ($c["gesdns"]==1) {
-	// Check du NS qui pointe chez nous 
-	$out=array();
-	exec("dig +short NS ".escapeshellarg($c["domaine"]),$out);
-	if (count($out)==0) {
-	  $dontexist=true;
-	} else {
-	  if (!in_array($L_NS1.".",$out) || !in_array($L_NS2.".",$out)) {
-	    $errno=1; $errstr.="NS for this domain are not $L_NS1 and $L_NS2 BUT ".implode(",",$out)."\n";
-	  }
-	}
+	      // Check du NS qui pointe chez nous 
+	      $out=array();
+	      exec("dig +short NS ".escapeshellarg($c["domaine"]),$out);
+	      if (count($out)==0) {
+	        $dontexist=true;
+	      } else {
+	        if (!in_array($L_NS1.".",$out) || !in_array($L_NS2.".",$out)) {
+	          $errno=1; $errstr.="NS for this domain are not $L_NS1 and $L_NS2 BUT ".implode(",",$out)."\n";
+	        }
+	      }
       }
       if ($c["gesmx"]==1 && !$dontexist) {
-	$out=array();
-	exec("dig +short MX ".escapeshellarg($c["domaine"]),$out);
-	$out2=array();
-	foreach($out as $o) {
-	  list($t,$out2[])=explode(" ",$o);
-	}
-	if (!in_array($L_MX.".",$out2)) {
-	  $errno=1; $errstr.="MX is not $L_MX BUT ".implode(",",$out2)."\n";
-	}
+  	    $out=array();
+	      exec("dig +short MX ".escapeshellarg($c["domaine"]),$out);
+	      $out2=array();
+	      foreach($out as $o) {
+	        list($t,$out2[])=explode(" ",$o);
+	      }
+	      if (!in_array($L_MX.".",$out2)) {
+	        $errno=1; $errstr.="MX is not $L_MX BUT ".implode(",",$out2)."\n";
+	      }
       }
       if (!$dontexist) {
-	// On liste les sous-domaine et on verifie qu'ils pointent bien chez nous...
-	$db->query("SELECT * FROM sub_domaines WHERE domaine='".addslashes($c["domaine"])."' ORDER BY sub;");
-	while ($db->next_record()) {
-	  $d=$db->Record;
-	  if ($d["type"]==0) {
-	    // Check l'IP : 
-	    $out=array();
-	    exec("dig +short A ".escapeshellarg($d["sub"].(($d["sub"]!="")?".":"").$c["domaine"]),$out);
-	    if (!in_array($L_PUBLIC_IP,$out)) {
-	      $errstr.="subdomain '".$d["sub"]."' don't point to $L_PUBLIC_IP but to ".implode(",",$out)."\n";
-	      $errno=1;
-	    }
-	  }
-	}
+	      // On liste les sous-domaine et on verifie qu'ils pointent bien chez nous...
+	      $db->query("SELECT * FROM sub_domaines WHERE domaine='".addslashes($c["domaine"])."' ORDER BY sub;");
+	      while ($db->next_record()) {
+	        $d=$db->Record;
+	        if ($d["type"]==0) {
+	          // Check l'IP : 
+	          $out=array();
+	          exec("dig +short A ".escapeshellarg($d["sub"].(($d["sub"]!="")?".":"").$c["domaine"]),$out);
+	          if (!in_array($L_PUBLIC_IP,$out)) {
+	            $errstr.="subdomain '".$d["sub"]."' don't point to $L_PUBLIC_IP but to ".implode(",",$out)."\n";
+	            $errno=1;
+	          }
+	        }
+	      }
       }
       if ($dontexist) {
-	$errno=2;
-	$errstr="Domain don't exist anymore !";
+        $errno=2;
+	      $errstr="Domain don't exist anymore !";
       }
       if ($errno==0) $errstr="OK";
       $checked[$c["domaine"]]=array("errno"=>$errno, "errstr"=>$errstr); 
