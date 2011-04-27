@@ -330,8 +330,6 @@ bureau/locales/en_US/LC_MESSAGES/manual.po -text
 bureau/locales/en_US/LC_MESSAGES/messages.po -text
 bureau/locales/es_ES/LC_MESSAGES/manual.po -text
 bureau/locales/es_ES/LC_MESSAGES/messages.po -text
-bureau/locales/es_VE/LC_MESSAGES/manual.po -text
-bureau/locales/es_VE/LC_MESSAGES/messages.po -text
 bureau/locales/fr_FR/LC_MESSAGES/manual.po -text
 bureau/locales/fr_FR/LC_MESSAGES/messages.po -text
 bureau/locales/manual.pot -text
