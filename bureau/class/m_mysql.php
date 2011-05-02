@@ -401,7 +401,7 @@ class m_mysql {
   function get_userslist() {
     global $db,$err,$bro,$cuid;
     $err->log("mysql","get_userslist");
-    $db->query("SELECT name FROM dbusers WHERE uid='$cuid';");
+    $db->query("SELECT name FROM dbusers WHERE uid='$cuid' ORDER BY name;");
     if (!$db->num_rows()) {
       $err->raise("mysql",19);
       return false;
@@ -561,10 +561,9 @@ class m_mysql {
       else
         $r[]=array("db"=>$dblist[$i]["name"], "select"=>"N", "insert"=>"N", "update"=>"N", "delete"=>"N", "create"=>"N", "drop"=>"N", "references"=>"N", "index"=>"N", "alter"=>"N", "Create_tmp"=>"N", "lock"=>"N" );
     }
-
+    
     return $r;
   }
-
 
   /* ------------------------------------------------------------ */
   /** 
@@ -645,9 +644,9 @@ class m_mysql {
       $err->log("mysql","alternc_get_quota");
       $c=$this->get_dblist();
       if (is_array($c)) {
-	return count($c);
+	      return count($c);
       } else {
-	return 0;
+	      return 0;
       }
     } elseif ($name=="mysql_users") {
       $err->log("mysql","alternc_get_quota");
