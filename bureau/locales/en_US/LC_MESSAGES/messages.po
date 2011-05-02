@@ -1,3 +1,23 @@
+# English AlternC Translation
+# Copyright (c) 2008 the AlternC Development Team
+# <dev@alternc.org>
+# $Id: admin.po,v 1.10 2004/11/01 15:55:44 anonymous Exp $
+#: ../class/lang_env.php:62
+msgid ""
+msgstr ""
+"Project-Id-Version: $Id: admin.po,v 1.10 2004/11/01 15:55:44 anonymous Exp "
+"$\n"
+"Report-Msgid-Bugs-To: i18n@alternc.org\n"
+"POT-Creation-Date: 2006-05-09 17:16+0200\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: French <i18n@alternc.org>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+
 #: ../admin/adm_add.php:35 ../admin/adm_defquotas.php:35
 #: ../admin/adm_doadd.php:35 ../admin/adm_dodefquotas.php:35
 #: ../admin/adm_dodel.php:33 ../admin/adm_dodel.php:45
@@ -3684,26 +3704,6 @@ msgid ""
 "Delete this email the following day,<br/>enter the date using DD/MM/YYYY "
 "format"
 msgstr ""
-
-# English AlternC Translation
-# Copyright (c) 2008 the AlternC Development Team
-# <dev@alternc.org>
-# $Id: admin.po,v 1.10 2004/11/01 15:55:44 anonymous Exp $
-#: ../class/lang_env.php:62
-msgid ""
-msgstr ""
-"Project-Id-Version: $Id: admin.po,v 1.10 2004/11/01 15:55:44 anonymous Exp "
-"$\n"
-"Report-Msgid-Bugs-To: i18n@alternc.org\n"
-"POT-Creation-Date: 2006-05-09 17:16+0200\n"
-"PO-Revision-Date: 2002-06-16 13:50CEST\n"
-"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
-"Language-Team: French <i18n@alternc.org>\n"
-"Language: fr\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-1\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Emacs 21\n"
 
 #: ../admin/adm_domstypeedit.php:116
 msgid "Is it an advanced option ?"
