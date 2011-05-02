@@ -281,6 +281,7 @@ img {
 	padding-left: 2px;
 	text-decoration: none;
 	border: 1px solid #F1F8FD;
+  line-height: 0.75em;
 }
 
 .menu-box li a img {
