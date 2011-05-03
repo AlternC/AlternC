@@ -24,7 +24,11 @@
 **/
 class m_authip {
 
-  // Return all the IP address define by this user
+  /*
+   * Retourne la liste des ip spécifiées par cet utilisateur
+   *
+   * @return array retourne un tableau indexé des ip de l'utilisateur
+   */
   function list_ip() {
     global $db, $cuid;
 
@@ -43,7 +47,13 @@ class m_authip {
     return $r;
   }
 
-  // Delete an IP in authorised_ip
+  /*
+   * Supprime une IP des IP de l'utilisateur
+   * et supprime les droits attaché en cascade
+   *
+   * @param integer $id id de la ligne à supprimer
+   * @return boolean Retourne FALSE si erreur, sinon TRUE
+   */
   function ip_delete($id) {
     global $db, $cuid;
     $id=intval($id);
@@ -59,7 +69,17 @@ class m_authip {
     return true;
   }
 
-  // Insert or update in authorised_ip
+  /*
+   * Sauvegarde une IP dans les IP authorisée
+   *
+   * @param integer $id id de la ligne à modifier. Si vide ou
+   *        égal à 0, alors c'est une insertion
+   * @param string $ipsub IP (v4 ou v6), potentiellement avec un subnet ( /24)
+   * @param string $infos commentaire pour l'utilisateur
+   * @param integer $uid Si $uid=0 et qu'on est super-admin, insertion avec uid=0
+   *        ce qui correspond a une ip toujours authorisée 
+   * @return boolean Retourne FALSE si erreur, sinon TRUE
+   */
   function ip_save($id, $ipsub, $infos, $uid=null) {
     global $db, $mem;
 
@@ -95,11 +115,17 @@ class m_authip {
     if (checkip($ip) && $subnet > 32 ) $subnet=32;
       
     if ($id) { // Update
+      $list_affected = $this->list_affected($id);
+      foreach($list_affected as $k => $v) {
+        $this->call_hooks("authip_on_delete", $k );    
+      }
       if (! $db->query("update authorised_ip set ip='$ip', subnet='$subnet', infos='$infos' where id='$id' and uid='$cuid' ;") ) {
         echo "query failed: ".$db->Error;
         return false;
       }
-      // TODO hooks update
+      foreach($list_affected as $k => $v) {
+        $this->call_hooks("authip_on_create", $k );    
+      }
     } else { // Insert
       if (! $db->query("insert into authorised_ip (uid, ip, subnet, infos) values ('$cuid', '$ip', '$subnet', '$infos' );") ) {
         echo "query failed: ".$db->Error;
@@ -109,7 +135,12 @@ class m_authip {
     return true;
   }
 
-  // Function called by alternc when you delete a member
+  /*
+   * Fonction appelée par Alternc lors de la suppression d'un utilisateur
+   *
+   * @param integer $l_uid uid de l'utilisater à supprimer
+   * @return boolean Retourne TRUE
+   */
   function alternc_del_member($l_uid) {
     $db->query("SELECT id FROM authorised_ip WHERE uid ='$l_uid';");
     while ($db->next_record()) {
@@ -119,6 +150,12 @@ class m_authip {
   }
 
 
+  /*
+   * Analyse les classes et récupéres les informations
+   * des classes voulant de la restriction IP
+   *
+   * @return array Retourne un tableau compliqué
+   */
   function get_auth_class() {
     global $classes;
     $authclass=array();
@@ -134,7 +171,17 @@ class m_authip {
     return $authclass;
   }
 
-  // Save in ip_affected_save
+  /*
+   * Enregistre ou modifie une affectation ip<=>ressource
+   * Nota : lance des hooks sur la classe correspondante pour
+   * informer de l'édition/création
+   *
+   * @param integer $authorised_ip_id id de l'ip affecté
+   * @param string $protocol nom du protocole (définie dans la classe correspondante)
+   * @param string $parameters information propre au protocole
+   * @param integer $id présent si c'est une édition
+   * @return boolean Retourne FALSE si erreur, sinon TRUE
+   */
   function ip_affected_save($authorised_ip_id, $protocol, $parameters, $id=null) {
     global $db;
     $authorised_ip_id=intval($authorised_ip_id);
@@ -143,47 +190,83 @@ class m_authip {
 
     if ($id) {
       $id=intval($id);
+      $this->call_hooks("authip_on_delete", $id );    
       if (! $db->query("update authorised_ip_affected set authorised_ip_id='$authorised_ip_id', protocol='$protocol', parameters='$parameters' where id ='$id' limit 1;") ) {
         echo "query failed: ".$db->Error;
         return false;
       }
-      // TODO hooks update
+      $this->call_hooks("authip_on_create", $id );    
     } else {
       if (! $db->query("insert into authorised_ip_affected (authorised_ip_id, protocol, parameters) values ('$authorised_ip_id', '$protocol', '$parameters');") ) {
         echo "query failed: ".$db->Error;
         return false;
       }
-      // TODO hooks insert
+      $this->call_hooks("authip_on_create", mysql_insert_id() );    
     }
     return true;
   }
 
-  // Delete an IP in authorised_ip_affected
+  /*
+   * Supprime une affectation ip<=>ressource
+   * Nota : lance des hooks dans la classe correspondante
+   * pour informer de la suppression
+   *
+   * @param integer $id id de la ligne à supprimer
+   * @return boolean Retourne FALSE si erreur, sinon TRUE
+   */
   function ip_affected_delete($id) {
     global $db;
     $id=intval($id);
+
+    // Call hooks
+    $this->call_hooks("authip_on_delete", $id );    
+
     if (! $db->query("delete from authorised_ip_affected where id='$id' limit 1;") ) {
       echo "query failed: ".$db->Error;
       return false;
     }
-    // TODO hooks delete
     return true;
   }
 
 
-  function list_affected() {
+  /*
+   * Appel les hooks demandé avec en parametres les 
+   * affectationt ip<=>ressource dont l'id est en parametre
+   *
+   * @param string $function nom de la fonction a rechercher et appeller dans les classes
+   * @param integer $affectation_id id de l'affectation correspondante
+   * @return boolean Retourne TRUE
+   */
+  function call_hooks($function, $affectation_id) {
+    $d = $this->list_affected();
+    $affectation = $d[$affectation_id];
+    $e = $this->get_auth_class();
+    $c = $e[$affectation['protocol']]['class'];
+    global $$c;
+    if ( method_exists($$c, $function) ) {
+      $$c->$function($affectation);
+    }
+    return true;
+  }
+
+  /*
+   * Liste les affectation ip<=>ressource d'un utilisateur
+   *
+   * @return array Retourne un tableau de valeurs
+   */
+  function list_affected($ip_id=null) {
     global $db, $cuid;
 
     $r = array();
-    $db->query("SELECT * FROM authorised_ip_affected WHERE authorised_ip_id in (select id from authorised_ip where uid = '$cuid');");
+    if ( is_null($ip_id) ) {
+      $db->query("select aia.* from authorised_ip_affected aia, authorised_ip ai where ai.uid='$cuid' and aia.authorised_ip_id = ai.id order by protocol, parameters;");
+    } else {
+      $db->query("select aia.* from authorised_ip_affected aia, authorised_ip ai where ai.uid='$cuid' and aia.authorised_ip_id = '".intval($ip_id)."' order by protocol, parameters;");
+    }
     while ($db->next_record()) {
-      $r[]=$db->Record;
+      $r[$db->f('id')]=$db->Record;
     }
     return $r;
   }
-// TODO :
-// hooks on créations/update/delete
-
-
 
 }; /* Classe m_authip */

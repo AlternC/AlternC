@@ -4,12 +4,13 @@ include_once("head.php");
 
 
 $fields = array (
-  "delete_id"    => array ("get",  "integer", ""),
-  "id"           => array ("post", "integer", 0),
-  "ipsub"        => array ("post", "string", ""),
-  "infos"        => array ("post", "string" ,""),
-  "s_ipsub"      => array ("post", "integer", ""),
-  "s_protocol"   => array ("post", "string", ""),
+  "delete_id"           => array ("get",  "integer", ""),
+  "delete_affected_id"  => array ("get",  "integer", ""),
+  "id"                  => array ("post", "integer", 0),
+  "ipsub"               => array ("post", "string", ""),
+  "infos"               => array ("post", "string" ,""),
+  "s_ipsub"             => array ("post", "integer", ""),
+  "s_protocol"          => array ("post", "string", ""),
 );
 getFields($fields);
 
@@ -23,9 +24,15 @@ if (!empty($s_protocol)) {
   }
 }
 
+if (!empty($delete_affected_id)) {
+  if (! $authip->ip_affected_delete($delete_affected_id)) {
+    $error="Error during deletion";
+  }
+}
+
 if (!empty($delete_id)) {
   if (! $authip->ip_delete($delete_id)) {
-    $error="Error during recording";
+    $error="Error during deletion";
   }
 }
 
@@ -59,7 +66,9 @@ $lac = $authip->list_affected();
     echo "<tr>";
     echo "<td>".$ac[$ll['protocol']]['name']."</td>";
     echo "<td>".$ac[$ll['protocol']]['values'][$ll['parameters']]."</td>";
-    echo "<td>".$list_ip[$ll['authorised_ip_id']]['ip_human']."</td>";
+    echo "<td>".$list_ip[$ll['authorised_ip_id']]['infos']."<br/>".$list_ip[$ll['authorised_ip_id']]['ip_human']."</td>"; ?>
+    <td><div class="ina"><a href="ip_main.php?delete_affected_id=<?php echo urlencode($ll["id"]) ?>"><img src="images/delete.png" alt="<?php __("Delete")?>" /><?php __("Delete"); ?></a></div></td>
+  <?php
     echo "</tr>";
   }
 ?>
@@ -79,7 +88,7 @@ $lac = $authip->list_affected();
     <td>
       <?php foreach ($ac as $a) { ?>
         <p>
-        <input type="radio" name="s_protocol" id="protocol_<?php echo htmlentities($a['protocol']);?>" value="<?php echo htmlentities($a['protocol']);?>" />
+        <input type="radio" name="s_protocol" id="s_protocol_<?php echo htmlentities($a['protocol']);?>" value="<?php echo htmlentities($a['protocol']);?>" />
         <label for="s_protocol_<?php echo htmlentities($a['protocol']);?>"><?php echo htmlentities($a['name']); ?></label>
         <select name="s_affect_<?php echo htmlentities($a['protocol']);?>" id="s_affect_<?php echo htmlentities($a['protocol']);?>">
           <?php foreach ($a['values'] as $k => $v) { ?>
@@ -119,21 +128,17 @@ $lac = $authip->list_affected();
         if (checkip($i['ip'])) {
           if ($i['subnet']==32) {
             $txt="Address IPv4";
-            $ip="${i['ip']}";
           } else {
             $txt="Subnet IPv4";
-            $ip="${i['ip']}/${i['subnet']}";
           }
         } elseif (checkipv6($i['ip'])) {
           if ($i['subnet']==128) {
             $txt="Address IPv6";
-            $ip="${i['ip']}";
           } else {
             $txt="Subnet IPv6";
-            $ip="${i['ip']}/${i['subnet']}";
           }
         } 
-        echo "<tr><td>$txt</td><td>$ip</td><td>${i['infos']}</td>";
+        echo "<tr><td>$txt</td><td>{$i['ip_human']}</td><td>{$i['infos']}</td>";
         ?>
         <td><div class="ina"><a href="javascript:edit_ip(<?php echo "'".htmlentities($i['id'])."','".htmlentities($i['ip_human'])."','".htmlentities($i['infos'])."'"; ?>);"><img src="images/edit.png" alt="<?php __("Edit"); ?>" /><?php __("Edit"); ?></a></div></td>
         <td><div class="ina"><a href="ip_main.php?delete_id=<?php echo urlencode($i["id"]) ?>"><img src="images/delete.png" alt="<?php __("Delete"); ?>" /><?php __("Delete"); ?></a></div></td>
@@ -155,7 +160,7 @@ $lac = $authip->list_affected();
           </p>
           <p>
             <?php __("Add a comment");?><br/>
-            <input type="text" size=30 maxlength=200 name="infos" id="edit_infos" />
+            <input type="text" size=25 maxlength=200 name="infos" id="edit_infos" />
           </p>
           <input type="submit" class="inb" value="<?php __("Save")?>" />
         </form>
