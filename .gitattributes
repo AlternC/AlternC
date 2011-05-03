@@ -310,6 +310,7 @@ bureau/class/hooks.php -text
 bureau/class/lang_env.php -text
 bureau/class/local.php -text
 bureau/class/m_admin.php -text
+bureau/class/m_authip.php -text
 bureau/class/m_bro.php -text
 bureau/class/m_dom.php -text
 bureau/class/m_err.php -text

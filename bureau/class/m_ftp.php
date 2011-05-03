@@ -56,6 +56,21 @@ class m_ftp {
   }
 
 
+  // Return the values needed to activate security access. See get_auth_class()
+  // in authip for more informations
+  function authip_class() {
+    $c = Array();
+    $c['name']="FTP";
+    $c['protocol']="ftp";
+    $c['values']=Array();
+
+    foreach ($this->get_list() as $v ) {
+      $c['values'][$v['id']]=$v['login'];
+    }
+
+    return $c;
+  }
+
   /* ----------------------------------------------------------------- */
   /** Retourne la liste des comptes FTP du compte hébergé
    * Retourne la liste des comptes FTP sous forme de tableau indexé de
@@ -73,12 +88,12 @@ class m_ftp {
     $db->query("SELECT id, name, homedir FROM ftpusers WHERE uid='$cuid' ORDER BY homedir;");
     if ($db->num_rows()) {
       while ($db->next_record()) {
-	// On passe /var/alternc/html/u/user
-	$tr=preg_match("/^\/var\/alternc\/html\/.\/[^\/]*\/(.*)$/", $db->f("homedir"),$match);    /* " */
-	$r[]=array(
-		   "id"=>$db->f("id"),
-		   "login"=>$db->f("name"),
-		   "dir"=>$match[1]
+	      // On passe /var/alternc/html/u/user
+	      $tr=preg_match("/^\/var\/alternc\/html\/.\/[^\/]*\/(.*)$/", $db->f("homedir"),$match);    /* " */
+	      $r[]=array(
+		        "id"=>$db->f("id"),
+		        "login"=>$db->f("name"),
+		        "dir"=>$match[1]
 		   );
       }
       return $r;
@@ -104,8 +119,8 @@ class m_ftp {
       $tr=preg_match("/^\/var\/alternc\/html\/.\/[^\/]*\/(.*)$/", $db->f("homedir"),$match);                  /*"*/
       $lg=explode("_",$db->f("name"));
       if (!is_array($lg)) {
-	$lg[0]=$db->f("name");
-	$lg[1]="";
+	      $lg[0]=$db->f("name");
+	      $lg[1]="";
       }
       return array(
 		   "id"=>$db->f("id"),
@@ -200,9 +215,9 @@ class m_ftp {
 
       // Check this password against the password policy using common API : 
       if (is_callable(array($admin,"checkPolicy"))) {
-	if (!$admin->checkPolicy("ftp",$prefixe.$login,$pass)) {
-	  return false; // The error has been raised by checkPolicy()
-	}
+        if (!$admin->checkPolicy("ftp",$prefixe.$login,$pass)) {
+          return false; // The error has been raised by checkPolicy()
+        }
       }
 
       $db->query("UPDATE ftpusers SET name='".$prefixe.$login."', password='', encrypted_password=ENCRYPT('$pass'), homedir='/var/alternc/html/$l/$lo/$dir', uid='$cuid' WHERE id='$id';");
@@ -276,7 +291,7 @@ class m_ftp {
     // Check this password against the password policy using common API : 
     if (is_callable(array($admin,"checkPolicy"))) {
       if (!$admin->checkPolicy("ftp",$prefixe.$login,$pass)) {
-	return false; // The error has been raised by checkPolicy()
+	      return false; // The error has been raised by checkPolicy()
       }
     }
 

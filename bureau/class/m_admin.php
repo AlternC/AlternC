@@ -845,19 +845,19 @@ EOF;
     $cachetime=3600; // The dns cache file can be up to 1H old
     if ($alsocheck) {
       if (!$forcecheck && file_exists($cachefile) && filemtime($cachefile)+$cachetime>time()) {
-	$checked=unserialize(file_get_contents($cachefile));
+	      $checked=unserialize(file_get_contents($cachefile));
       } else {
-	// TODO : do the check here (cf checkdom.php) and store it in $checked
-	$checked=$this->checkalldom();
-	file_put_contents($cachefile,serialize($checked));
+        // TODO : do the check here (cf checkdom.php) and store it in $checked
+        $checked=$this->checkalldom();
+        file_put_contents($cachefile,serialize($checked));
       }
     }
     $db->query("SELECT m.login,d.domaine,d.gesdns,d.gesmx,d.noerase FROM domaines d LEFT JOIN membres m ON m.uid=d.compte ORDER BY domaine;");
     while ($db->next_record()) {
       $tmp=$db->Record;
       if ($alsocheck) {
-	$tmp["errstr"]=$checked[$tmp["domaine"]]["errstr"];
-	$tmp["errno"]=$checked[$tmp["domaine"]]["errno"];
+      	$tmp["errstr"]=$checked[$tmp["domaine"]]["errstr"];
+	      $tmp["errno"]=$checked[$tmp["domaine"]]["errno"];
       }
       $c[]=$tmp;
     }
