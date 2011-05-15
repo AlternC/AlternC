@@ -141,7 +141,7 @@ class m_authip {
    * @return boolean Retourne TRUE
    */
   function alternc_del_member() {
-    global $cuid;
+    global $cuid,$db;
     $db->query("SELECT id FROM authorised_ip WHERE uid ='$cuid';");
     while ($db->next_record()) {
       $this->ip_delete($db->f('id'));
