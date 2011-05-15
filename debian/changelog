@@ -1,3 +1,8 @@
+alternc (1.1) stable; urgency=low
+  * Dev in progress
+  * New class : access security. Allow to restrict some function to specific IP or subnet
+  * Access security management on the ftp account.
+
 alternc (1.0~rc2) stable; urgency=low
   * Major patch
     * Web & DNS file generation rebuild from scratch
