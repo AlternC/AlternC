@@ -64,6 +64,8 @@ class m_ftp {
     $c['protocol']="ftp";
     $c['values']=Array();
 
+    $tt = $this->get_list();
+    if (empty($tt) || !is_array($tt)) return $c;
     foreach ($this->get_list() as $v ) {
       $c['values'][$v['id']]=$v['login'];
     }
