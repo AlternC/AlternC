@@ -138,11 +138,11 @@ class m_authip {
   /*
    * Fonction appelée par Alternc lors de la suppression d'un utilisateur
    *
-   * @param integer $l_uid uid de l'utilisater à supprimer
    * @return boolean Retourne TRUE
    */
-  function alternc_del_member($l_uid) {
-    $db->query("SELECT id FROM authorised_ip WHERE uid ='$l_uid';");
+  function alternc_del_member() {
+    global $cuid;
+    $db->query("SELECT id FROM authorised_ip WHERE uid ='$cuid';");
     while ($db->next_record()) {
       $this->ip_delete($db->f('id'));
     }
