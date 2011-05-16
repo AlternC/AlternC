@@ -25,12 +25,29 @@
 class m_authip {
 
   /*
+   * Retourne la liste des ip whitelist
+   *
+   * @return array retourne un tableau indexé des ip de l'utilisateur
+   */
+  function list_ip_whitelist() {
+    global $mem;
+    if (!$mem->checkRight()) return false;
+    return $this->list_ip(true); 
+  }
+
+  /*
    * Retourne la liste des ip spécifiées par cet utilisateur
    *
    * @return array retourne un tableau indexé des ip de l'utilisateur
    */
-  function list_ip() {
-    global $db, $cuid;
+  function list_ip($whitelist=false) {
+    global $db, $mem;
+ 
+    if ($whitelist && $mem->checkRight() ) {
+      $cuid=0;
+    } else {
+      global $cuid;
+    }
 
     $r = array();
     $db->query("SELECT * FROM authorised_ip WHERE uid='$cuid';");
@@ -46,6 +63,8 @@ class m_authip {
     }
     return $r;
   }
+
+
 
   /*
    * Supprime une IP des IP de l'utilisateur
@@ -67,6 +86,23 @@ class m_authip {
       return false;
     }
     return true;
+  }
+
+  /*
+   * Sauvegarde une IP dans les IP TOUJOURS authorisée
+   *
+   * @param integer $id id de la ligne à modifier. Si vide ou
+   *        égal à 0, alors c'est une insertion
+   * @param string $ipsub IP (v4 ou v6), potentiellement avec un subnet ( /24)
+   * @param string $infos commentaire pour l'utilisateur
+   * @param integer $uid Si $uid=0 et qu'on est super-admin, insertion avec uid=0
+   *        ce qui correspond a une ip toujours authorisée 
+   * @return boolean Retourne FALSE si erreur, sinon TRUE
+   */
+  function ip_save_whitelist($id, $ipsub, $infos) {
+    global $mem;
+    if (!$mem->checkRight()) return false;
+    return $this->ip_save($id, $ipsub, $infos, 0);
   }
 
   /*

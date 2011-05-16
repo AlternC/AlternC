@@ -13,6 +13,7 @@ aide/sommaire.sgml -text
 aide/stats.sgml -text
 aide/test.sgml -text
 bureau/admin/adm_add.php -text
+bureau/admin/adm_authip_whitelist.php -text
 bureau/admin/adm_cancel.php -text
 bureau/admin/adm_deactivate.php -text
 bureau/admin/adm_defquotas.php -text
