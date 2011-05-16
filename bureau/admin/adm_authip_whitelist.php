@@ -35,6 +35,9 @@ $list_ip = $authip->list_ip_whitelist();
 <?php if ($error) { ?>
   <p class="error"><?php echo $error ?></p>
 <?php } ?>
+<center>
+  <p class="error"><?php __("Warning"); echo "<br/>"; __("The IP and subnet you have here are allowed for ALL users and ALL usages"); ?></p>
+</center>
 
 <p>
       <fieldset>
