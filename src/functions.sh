@@ -26,6 +26,10 @@ print_user_letter() {
     echo "$user" | awk '{print substr($1, 1, 1)}'
 }
 
+get_uid_by_name() {
+  mysql_query 'SELECT uid FROM membres WHERE login="'"$1"'" LIMIT 1;'
+}
+
 # imprime le nom d'usager associé au domaine
 get_account_by_domain() {
     # les admintools ne sont peut-être pas là

@@ -56,6 +56,8 @@ host_create() {
     local REDIRECT=$3   # Yes, TARGET_DIR and REDIRECT are the same
     local TARGET_DIR=$3 # It's used by different template
     local USER=$(get_account_by_domain $FQDN)
+    local U_ID=$(get_uid_by_name "$USER")
+    local G_ID=$(get_uid_by_name "$USER")
     local user_letter=`print_user_letter "$USER"`
     local DOCUMENT_ROOT="${HTML_HOME}/${user_letter}/${USER}/$TARGET_DIR"
     local FILE_TARGET="$VHOST_DIR/${user_letter}/$USER/$FQDN.conf"
@@ -87,6 +89,8 @@ host_create() {
         -e "s#%%fqdn%%#$FQDN#g" \
         -e "s#%%document_root%%#$DOCUMENT_ROOT#g" \
         -e "s#%%redirect%%#$REDIRECT#g" \
+        -e "s#%%UID%%#$U_ID#g" \
+        -e "s#%%GID%%#$G_ID#g" \
         $TMP_FILE
 
     # Check if all is right in the conf file
