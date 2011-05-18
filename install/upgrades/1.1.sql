@@ -79,3 +79,7 @@ VALUES (
 );
 
 
+-- Regenerate apache conf to enable mpm-itk
+update sub_domaines set web_action = 'UPDATE';
+update domaines     set dns_action = 'UPDATE';
+
