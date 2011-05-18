@@ -88,7 +88,8 @@ class DBU_mysql extends DB_Sql {
     $this->Password = $password;
 // TODO BUG BUG BUG
 // c'est pas étanche : $db se retrouve avec Database de $sql->dbu . Danger, faut comprendre pourquoi
-    $this->Database = "alternc";
+// Si on veux que ca marche, il faut Database=alternc.
+    $this->Database = "mysql";
     $this->HumanHostname = $human_hostname;
 
   }
@@ -96,14 +97,14 @@ class DBU_mysql extends DB_Sql {
 
 
 class m_mysql {
-  var $dbu;
+  var $dbus;
 
   /*---------------------------------------------------------------------------*/
   /** Constructor
   * m_mysql([$mid]) Constructeur de la classe m_mysql, initialise le membre concerne
   */
   function m_mysql() {
-    $this->dbu = new DBU_mysql();
+    $this->dbus = new DBU_mysql();
   }
 
 
@@ -217,12 +218,12 @@ class m_mysql {
       $lo=addslashes($db->f("login"));
       $pa=addslashes($db->f("pass"));
     }
-    if ($this->dbu->query("CREATE DATABASE `$dbname`;")) {
+    if ($this->dbus->query("CREATE DATABASE `$dbname`;")) {
       // Ok, database does not exist, quota is ok and dbname is compliant. Let's proceed
       $db->query("INSERT INTO db (uid,login,pass,db,bck_mode) VALUES ('$cuid','$lo','$pa','$dbname',0);");
       // give everything but GRANT on db.*
       // we assume there's already a user
-      $this->dbu->query("GRANT ALL PRIVILEGES ON `".$dbname."`.* TO '".$lo."'@'$this->client'");
+      $this->dbus->query("GRANT ALL PRIVILEGES ON `".$dbname."`.* TO '".$lo."'@'$this->client'");
       return true;
     } else {
       $err->raise("mysql",3);
@@ -252,13 +253,13 @@ class m_mysql {
 
     // Ok, database exists and dbname is compliant. Let's proceed
     $db->query("DELETE FROM db WHERE uid='$cuid' AND db='$dbname';");
-    $this->dbu->query("DROP DATABASE `$dbname`;");
+    $this->dbus->query("DROP DATABASE `$dbname`;");
     $db->query("SELECT COUNT(*) AS cnt FROM db WHERE uid='$cuid';");
     $db->next_record();
-    $this->dbu->query("REVOKE ALL PRIVILEGES ON `".$dbname."`.* FROM '".$login."'@'$this->client'");
-    if ($this->dbu->f("cnt")==0) {
-      $this->dbu->query("DELETE FROM mysql.user WHERE User='".$login."';");
-      $this->dbu->query("FLUSH PRIVILEGES;");
+    $this->dbus->query("REVOKE ALL PRIVILEGES ON `".$dbname."`.* FROM '".$login."'@'$this->client'");
+    if ($this->dbus->f("cnt")==0) {
+      $this->dbus->query("DELETE FROM mysql.user WHERE User='".$login."';");
+      $this->dbus->query("FLUSH PRIVILEGES;");
     }
     return true;
   }
@@ -342,7 +343,7 @@ class m_mysql {
 
     // Update all the "pass" fields for this user : 
     $db->query("UPDATE db SET pass='$password' WHERE uid='$cuid';");
-    $this->dbu->query("SET PASSWORD FOR '$login'@'$this->client' = PASSWORD('$password')");
+    $this->dbus->query("SET PASSWORD FOR '$login'@'$this->client' = PASSWORD('$password')");
     return true;
   }
 
@@ -387,8 +388,8 @@ class m_mysql {
     // OK, creation now...
     $db->query("INSERT INTO db (uid,login,pass,db) VALUES ('$cuid','".$login."','$password','".$dbname."');");
     // give everything but GRANT on $user.*
-    $this->dbu->query("GRANT ALL PRIVILEGES ON `".$dbname."`.* TO '".$login."'@'$this->client' IDENTIFIED BY '".addslashes($password)."'");
-    $this->dbu->query("CREATE DATABASE `".$dbname."`;");
+    $this->dbus->query("GRANT ALL PRIVILEGES ON `".$dbname."`.* TO '".$login."'@'$this->client' IDENTIFIED BY '".addslashes($password)."'");
+    $this->dbus->query("CREATE DATABASE `".$dbname."`;");
     return true;
   }
 
@@ -443,7 +444,7 @@ class m_mysql {
   function get_db_size($dbname) {
     global $db,$err;
     
-    $this->dbu->query("SHOW TABLE STATUS FROM `$dbname`;");
+    $this->dbus->query("SHOW TABLE STATUS FROM `$dbname`;");
     $size = 0;
     while ($db->next_record()) {
       $size += $db->f('Data_length') + $db->f('Index_length')	+ $db->f('Data_free');
@@ -529,7 +530,7 @@ class m_mysql {
     }
 
     // We create the user account (the "file" right is the only one we need globally to be able to use load data into outfile)
-    $this->dbu->query("GRANT file ON *.* TO '$user'@'$this->client' IDENTIFIED BY '$pass';");
+    $this->dbus->query("GRANT file ON *.* TO '$user'@'$this->client' IDENTIFIED BY '$pass';");
     // We add him to the user table 
     $db->query("INSERT INTO dbusers (uid,name) VALUES($cuid,'$user');");
     return true;
@@ -562,7 +563,7 @@ class m_mysql {
       }
     }
 
-    $this->dbu->query("SET PASSWORD FOR '$user'@'$this->client' = PASSWORD('$pass')");
+    $this->dbus->query("SET PASSWORD FOR '$user'@'$this->client' = PASSWORD('$pass')");
     return true;
   }
 
@@ -590,11 +591,11 @@ class m_mysql {
     $login=$db->f("name");
 
     // Ok, database exists and dbname is compliant. Let's proceed
-    $this->dbu->query("REVOKE ALL PRIVILEGES ON *.* FROM '".$mem->user["login"]."_$user'@'$this->client';");
-    $this->dbu->query("DELETE FROM mysql.db WHERE User='".$mem->user["login"]."_$user' AND Host='$this->client';");
-    $this->dbu->query("DELETE FROM mysql.user WHERE User='".$mem->user["login"]."_$user' AND Host='$this->client';");
-    $this->dbu->query("FLUSH PRIVILEGES");
-    $this->dbu->query("DELETE FROM dbusers WHERE uid='$cuid' AND name='".$mem->user["login"]."_$user';");
+    $this->dbus->query("REVOKE ALL PRIVILEGES ON *.* FROM '".$mem->user["login"]."_$user'@'$this->client';");
+    $this->dbus->query("DELETE FROM mysql.db WHERE User='".$mem->user["login"]."_$user' AND Host='$this->client';");
+    $this->dbus->query("DELETE FROM mysql.user WHERE User='".$mem->user["login"]."_$user' AND Host='$this->client';");
+    $this->dbus->query("FLUSH PRIVILEGES");
+    $this->dbus->query("DELETE FROM dbusers WHERE uid='$cuid' AND name='".$mem->user["login"]."_$user';");
     return true;
   }
 
@@ -613,9 +614,9 @@ class m_mysql {
     $dblist=$this->get_dblist();
 
     for ( $i=0 ; $i<count($dblist) ; $i++ ) {
-      $this->dbu->query("SELECT Db, Select_priv, Insert_priv, Update_priv, Delete_priv, Create_priv, Drop_priv, References_priv, Index_priv, Alter_priv, Create_tmp_table_priv, Lock_tables_priv FROM mysql.db WHERE User='".$mem->user["login"].($user?"_":"").$user."' AND Host='$this->client' AND Db='".$dblist[$i]["db"]."';");
-      if ($this->dbu->next_record())
-        $r[]=array("db"=>$dblist[$i]["name"], "select"=>$this->dbu->f("Select_priv"), "insert"=>$this->dbu->f("Insert_priv"),	"update"=>$this->dbu->f("Update_priv"), "delete"=>$this->dbu->f("Delete_priv"), "create"=>$this->dbu->f("Create_priv"), "drop"=>$this->dbu->f("Drop_priv"), "references"=>$this->dbu->f("References_priv"), "index"=>$this->dbu->f("Index_priv"), "alter"=>$this->dbu->f("Alter_priv"), "create_tmp"=>$this->dbu->f("Create_tmp_table_priv"), "lock"=>$this->dbu->f("Lock_tables_priv"));
+      $this->dbus->query("SELECT Db, Select_priv, Insert_priv, Update_priv, Delete_priv, Create_priv, Drop_priv, References_priv, Index_priv, Alter_priv, Create_tmp_table_priv, Lock_tables_priv FROM mysql.db WHERE User='".$mem->user["login"].($user?"_":"").$user."' AND Host='$this->client' AND Db='".$dblist[$i]["db"]."';");
+      if ($this->dbus->next_record())
+        $r[]=array("db"=>$dblist[$i]["name"], "select"=>$this->dbus->f("Select_priv"), "insert"=>$this->dbus->f("Insert_priv"),	"update"=>$this->dbus->f("Update_priv"), "delete"=>$this->dbus->f("Delete_priv"), "create"=>$this->dbus->f("Create_priv"), "drop"=>$this->dbus->f("Drop_priv"), "references"=>$this->dbus->f("References_priv"), "index"=>$this->dbus->f("Index_priv"), "alter"=>$this->dbus->f("Alter_priv"), "create_tmp"=>$this->dbus->f("Create_tmp_table_priv"), "lock"=>$this->dbus->f("Lock_tables_priv"));
       else
         $r[]=array("db"=>$dblist[$i]["name"], "select"=>"N", "insert"=>"N", "update"=>"N", "delete"=>"N", "create"=>"N", "drop"=>"N", "references"=>"N", "index"=>"N", "alter"=>"N", "Create_tmp"=>"N", "lock"=>"N" );
     }
@@ -677,14 +678,14 @@ class m_mysql {
     }
 
     // We reset all user rights on this DB : 
-    $this->dbu->query("SELECT * FROM mysql.db WHERE User = '$usern' AND Db = '$dbname';");
-    if($this->dbu->num_rows())
-      $this->dbu->query("REVOKE ALL PRIVILEGES ON $dbname.* FROM '$usern'@'$this->client';");
+    $this->dbus->query("SELECT * FROM mysql.db WHERE User = '$usern' AND Db = '$dbname';");
+    if($this->dbus->num_rows())
+      $this->dbus->query("REVOKE ALL PRIVILEGES ON $dbname.* FROM '$usern'@'$this->client';");
     if( $strrights ){
       $strrights=substr($strrights,0,strlen($strrights)-1);
-      $this->dbu->query("GRANT $strrights ON $dbname.* TO '$usern'@'$this->client';");      
+      $this->dbus->query("GRANT $strrights ON $dbname.* TO '$usern'@'$this->client';");      
     }
-    $this->dbu->query("FLUSH PRIVILEGES");
+    $this->dbus->query("FLUSH PRIVILEGES");
     return TRUE;
   }
 
