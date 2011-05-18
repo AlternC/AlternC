@@ -1,0 +1,8 @@
+# If you create a file /etc/alternc/dbusers.cnf
+# His configuration will be used for the storage
+# of the users databases.
+[client]
+host="1.2.3.4"
+#alternc_var human_hostnameee ="human_readable_hostname"
+user="my_user"
+password="my_string_password"

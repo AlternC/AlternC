@@ -267,9 +267,9 @@ class m_bro {
       $ext=$t[count($t)-1];
     // Now seek the extension
     if (!$bro_type[$ext]) {
-	return "File";
+	    return "File";
     } else {
-	return $bro_type[$ext];
+	    return $bro_type[$ext];
     }
   }
 
@@ -306,7 +306,7 @@ class m_bro {
       while (false !== ($file = readdir($handle))) {
         $nextpath = $dir . '/' . $file;
 
-	if ($file != '.' && $file != '..' && !is_link($nextpath)) {
+	      if ($file != '.' && $file != '..' && !is_link($nextpath)) {
           if (is_dir($nextpath)) {
             $totalsize += $this->dirsize($nextpath);
           } elseif (is_file ($nextpath)) {
@@ -405,12 +405,12 @@ class m_bro {
       $old[$i]=ssla($old[$i]); // strip slashes if needed
       $new[$i]=ssla($new[$i]);
       if (!strpos($old[$i],"/") && !strpos($new[$i],"/")) {  // caractère / interdit dans old ET dans new...
-	@rename($absolute."/".$old[$i],$absolute."/".$old[$i].$alea);
+	      @rename($absolute."/".$old[$i],$absolute."/".$old[$i].$alea);
       }
     }
     for ($i=0;$i<count($old);$i++) {
       if (!strpos($old[$i],"/") && !strpos($new[$i],"/")) {  // caractère / interdit dans old ET dans new...
-	@rename($absolute."/".$old[$i].$alea,$absolute."/".$new[$i]);
+      	@rename($absolute."/".$old[$i].$alea,$absolute."/".$new[$i]);
       }
     }
 
@@ -476,19 +476,19 @@ class m_bro {
     for ($i=0;$i<count($d);$i++) {
       $d[$i]=ssla($d[$i]); // strip slashes if needed
       if (!strpos($d[$i],"/")) {  // caractère / interdit dans le nom du fichier
-	// @rename($absolute."/".$old[$i],$absolute."/".$old[$i].$alea);
-	$m = fileperms($absolute."/". $d[$i]);
+        // @rename($absolute."/".$old[$i],$absolute."/".$old[$i].$alea);
+        $m = fileperms($absolute."/". $d[$i]);
 
-	// pour l'instant on se limite a "write" pour owner, puisque c'est le seul
-	// cas interessant compte tenu de la conf de Apache pour AlternC..
-	if ($perm[$i]['w']) {
-	  $m = $m | 128;
-	} else {
-          $m = $m ^ 128;
-	}
-	$m = $m | ($perm[$i]['w'] ? 128 : 0); // 0600
-	chmod($absolute."/".$d[$i], $m);
-	echo "chmod " . sprintf('%o', $m) . " file, was " . sprintf('%o', fileperms($absolute."/". $d[$i])). " -- " . $perm[$i]['w'];
+        // pour l'instant on se limite a "write" pour owner, puisque c'est le seul
+        // cas interessant compte tenu de la conf de Apache pour AlternC..
+        if ($perm[$i]['w']) {
+          $m = $m | 128;
+        } else {
+                $m = $m ^ 128;
+        }
+        $m = $m | ($perm[$i]['w'] ? 128 : 0); // 0600
+        chmod($absolute."/".$d[$i], $m);
+        echo "chmod " . sprintf('%o', $m) . " file, was " . sprintf('%o', fileperms($absolute."/". $d[$i])). " -- " . $perm[$i]['w'];
       }
     }
 
@@ -755,25 +755,25 @@ class m_bro {
       // On parcours $dir en remontant les /
       $end="";	$beg=$dir;	$tofind=true;
       while ($tofind) {
-	$db->query("SELECT sub,domaine FROM sub_domaines WHERE compte='$cuid'
-			 AND type=0 AND (valeur='/$beg/' or valeur='/$beg');");
-	$db->next_record();
-	if ($db->num_rows()) {
-	  $tofind=false;
-	  $this->cacheurl["d".$dir]="http://".$db->f("sub").ife($db->f("sub"),".").$db->f("domaine").$end;
-	}
-	if (!$beg && $tofind) {
-	  $tofind=false;
-	  $this->cacheurl["d".$dir]="-";
-				// We did not find it ;(
-	}
-	if (($tt=strrpos($beg,"/"))!==false) {
-	  $end=substr($beg,$tt).$end; // = /topdir$end so $end starts AND ends with /
-	  $beg=substr($beg,0,$tt);
-	} else {
-	  $end="/".$beg.$end;
-	  $beg="/";
-	}
+        $db->query("SELECT sub,domaine FROM sub_domaines WHERE compte='$cuid'
+             AND type=0 AND (valeur='/$beg/' or valeur='/$beg');");
+        $db->next_record();
+        if ($db->num_rows()) {
+          $tofind=false;
+          $this->cacheurl["d".$dir]="http://".$db->f("sub").ife($db->f("sub"),".").$db->f("domaine").$end;
+        }
+        if (!$beg && $tofind) {
+          $tofind=false;
+          $this->cacheurl["d".$dir]="-";
+              // We did not find it ;(
+        }
+        if (($tt=strrpos($beg,"/"))!==false) {
+          $end=substr($beg,$tt).$end; // = /topdir$end so $end starts AND ends with /
+          $beg=substr($beg,0,$tt);
+        } else {
+          $end="/".$beg.$end;
+          $beg="/";
+        }
       }
     }
     if ($this->cacheurl["d".$dir] && $this->cacheurl["d".$dir]!="-") {
@@ -793,8 +793,8 @@ class m_bro {
       case "gz":
       case "bz":
       case "bz2":
-	$ext = array_pop($parts) . $ext;
-	/* FALLTHROUGH */
+	    $ext = array_pop($parts) . $ext;
+	    /* FALLTHROUGH */
       case "tar.gz":
       case "tar.bz":
       case "tar.bz2":
@@ -816,10 +816,10 @@ class m_bro {
     if (!strpos($file,"/")) {
       $absolute.="/".$file;
       if (file_exists($absolute)) {
-	$content = @file($absolute);
-	for($i=0;$i<count($content);$i++) {
-	  echo stripslashes($content[$i]);
-	}
+	      $content = @file($absolute);
+	      for($i=0;$i<count($content);$i++) {
+	        echo stripslashes($content[$i]);
+      	}
       }
     } else {
       $err->raise("bro",1);
@@ -843,11 +843,11 @@ class m_bro {
     if (!strpos($file,"/")) {
       $absolute.="/".$file;
       if (file_exists($absolute)) {
-	$f=@fopen($absolute,"wb");
-	if ($f) {
-	  fputs($f,$texte,strlen($texte));
-	  fclose($f);
-	}
+	      $f=@fopen($absolute,"wb");
+       	if ($f) {
+	        fputs($f,$texte,strlen($texte));
+	        fclose($f);
+	      }
       }
     } else {
       $err->raise("bro",1);
@@ -939,9 +939,9 @@ class m_bro {
     if (is_dir($file)) {
       $handle = opendir($file);
       while($filename = readdir($handle)) {
-	if ($filename != "." && $filename != "..") {
-	  $this->_delete($file."/".$filename);
-	}
+	      if ($filename != "." && $filename != "..") {
+	        $this->_delete($file."/".$filename);
+	      }
       }
       closedir($handle);
       rmdir($file);
