@@ -100,6 +100,12 @@ class DB_Sql {
         return 0;
       }
     }
+
+    //persistent connection don't conserve database selection
+    //if needed do a correct database selection
+    $db_connected = @mysql_fetch_array(@mysql_query("SELECT DATABASE();",$this->Link_ID));
+    if ($db_connected[0] != $this->Database)
+      mysql_select_db($Database,$this->Link_ID);
     
     return $this->Link_ID;
   }
