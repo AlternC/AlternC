@@ -39,6 +39,7 @@ class DB_Sql {
   /* private: link and query handles */
   var $Link_ID  = 0;
   var $Query_ID = 0;
+  var $Query_String = "";
   
 
 
@@ -144,6 +145,7 @@ class DB_Sql {
     # New query, discard previous result.
     if ($this->Query_ID) {
       $this->free();
+      $this->Query_String = $Query_String;
     }
 
     if ($this->Debug)

@@ -34,13 +34,13 @@
  * @copyright    AlternC-Team 2002-2005 http://alternc.org/
  */
 
-class DBU_mysql extends DB_Sql {
+class DB_users extends DB_Sql {
   var $Host,$HumanHostname,$User,$Password;
 
   /**
   * Creator
   */
-  function DBU_mysql() {
+  function DB_users() {
 
     # Use the dbusers file if exist, else use default alternc configuration
     if ( is_readable("/etc/alternc/dbusers.cnf") ) {
@@ -104,7 +104,7 @@ class m_mysql {
   * m_mysql([$mid]) Constructeur de la classe m_mysql, initialise le membre concerne
   */
   function m_mysql() {
-    $this->dbus = new DBU_mysql();
+    $this->dbus = new DB_users();
   }
 
 
