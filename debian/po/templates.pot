@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: anarcat@koumbit.org\n"
-"POT-Creation-Date: 2009-07-27 17:24-0400\n"
+"POT-Creation-Date: 2011-05-22 20:29+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,15 +45,43 @@ msgstr ""
 msgid "YOU HAVE BEEN WARNED."
 msgstr ""
 
-#. Type: string
+#. Type: note
 #. Description
 #: ../templates:2001
+msgid "AlternC need ACL and QUOTA activated"
+msgstr ""
+
+#. Type: note
+#. Description
+#: ../templates:2001
+msgid ""
+"AlternC can't work without ACL activated on his file. Please check your /etc/"
+"fstab to activate ACL for AlternC."
+msgstr ""
+
+#. Type: note
+#. Description
+#: ../templates:2001
+msgid "Run /usr/lib/alternc/fixperms.sh once it's activated."
+msgstr ""
+
+#. Type: note
+#. Description
+#: ../templates:2001
+msgid ""
+"Also, you need to activate group quota (grpquota) to be able to use disk "
+"quota."
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../templates:3001
 msgid "Fully qualified name of the desktop:"
 msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:2001
+#: ../templates:3001
 msgid ""
 "Please enter the fully qualified name of your server. This will be the "
 "domain part of the url you will use to access the virtual managment desktop. "
@@ -62,19 +90,19 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:2001
+#: ../templates:3001
 msgid "The default should be ok if your machine is correctly configured."
 msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:3001
+#: ../templates:4001
 msgid "Name of your hosting service:"
 msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:3001
+#: ../templates:4001
 msgid ""
 "Please enter the name of your hosting service. It may be your company's name "
 "or your personnal name or whatever you want to ..."
@@ -82,13 +110,13 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:4001
+#: ../templates:5001
 msgid "Name of the primary domain name server:"
 msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:4001
+#: ../templates:5001
 msgid ""
 "Please enter the fully qualified name of your primary dns server. It can be "
 "this server since bind is installed and configured by AlternC. Anyway, if "
@@ -99,13 +127,13 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:5001
+#: ../templates:6001
 msgid "Name of the secondary domain name server:"
 msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:5001
+#: ../templates:6001
 msgid ""
 "Please enter the fully qualified name of your secondary dns server. It can "
 "be this server since bind is installed and configured by AlternC. Anyway, "
@@ -115,7 +143,7 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:5001
+#: ../templates:6001
 msgid ""
 "You may contact the AlternC's users mailing list if you want to exchange dns "
 "service with other AlternC's users."
@@ -123,13 +151,13 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:6001
+#: ../templates:7001
 msgid "Name of the mysql server:"
 msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:6001
+#: ../templates:7001
 msgid ""
 "Please enter the fully qualified name of your mysql server host. On small "
 "systems, it IS \"localhost\" since you may have installed a local mysql "
@@ -143,13 +171,13 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:7001
+#: ../templates:8001
 msgid "AlternC's mysql system database:"
 msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:7001
+#: ../templates:8001
 msgid ""
 "AlternC will create a mysql database to store it's system data. Please "
 "choose the name of this database here. The default value should be good in "
@@ -158,13 +186,13 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:8001
+#: ../templates:9001
 msgid "AlternC's mysql account:"
 msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:8001
+#: ../templates:9001
 msgid ""
 "AlternC will create a mysql administrator account. Please choose it's "
 "username here. The default value should be good in most case."
@@ -172,13 +200,13 @@ msgstr ""
 
 #. Type: password
 #. Description
-#: ../templates:9001
+#: ../templates:10001
 msgid "Password of the AlternC's mysql account:"
 msgstr ""
 
 #. Type: password
 #. Description
-#: ../templates:9001
+#: ../templates:10001
 msgid ""
 "AlternC requires an administrator account on the mysql server. It will be "
 "created automatically during the install process. Please choose a password "
@@ -187,7 +215,7 @@ msgstr ""
 
 #. Type: password
 #. Description
-#: ../templates:9001
+#: ../templates:10001
 msgid ""
 "Please choose a quite complex password since it will have full access to the "
 "system database !!!"
@@ -195,13 +223,13 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:10001
+#: ../templates:11001
 msgid "The server to GRANT permissions to:"
 msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:10001
+#: ../templates:11001
 msgid ""
 "AlternC and MySQL can be installed on different servers. In order to have "
 "GRANT table properly created and manipulated, this parameter must be set to "
@@ -211,13 +239,13 @@ msgstr ""
 
 #. Type: select
 #. Description
-#: ../templates:11001
+#: ../templates:12001
 msgid "The way backup rotation is executated"
 msgstr ""
 
 #. Type: select
 #. Description
-#: ../templates:11001
+#: ../templates:12001
 msgid ""
 "AlternC enables users to configure their own backups, on demand, with "
 "automatic rotation. This option determines how the backups are rotated."
@@ -225,7 +253,7 @@ msgstr ""
 
 #. Type: select
 #. Description
-#: ../templates:11001
+#: ../templates:12001
 msgid ""
 "rotate - backup.sql, backup.sql.0, backup.sql.1 date - backup.sql, backup."
 "sql.20080709, backup.sql.20080708"
@@ -233,13 +261,13 @@ msgstr ""
 
 #. Type: select
 #. Description
-#: ../templates:12001
+#: ../templates:13001
 msgid "Behavior of the backup script when it encounters a unmanaged file"
 msgstr ""
 
 #. Type: select
 #. Description
-#: ../templates:12001
+#: ../templates:13001
 msgid ""
 "The SQL backups can rename or overwrite existing files it doesn't know about "
 "when doing backups. The default behavior is to skip those files and ignore "
@@ -248,13 +276,13 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:13001
+#: ../templates:14001
 msgid "The primary IP of this server:"
 msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:13001
+#: ../templates:14001
 msgid ""
 "AlternC will default the A records for domains it hosts to this address. In "
 "other words, this is the address everyone can reach to server at."
@@ -262,13 +290,13 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:14001
+#: ../templates:15001
 msgid "The internal IP of this server:"
 msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:14001
+#: ../templates:15001
 msgid ""
 "AlternC will configure Apache and other services to listen to this address. "
 "This is usually the same as the primary IP of the server, unless the server "
@@ -277,19 +305,19 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:14001
+#: ../templates:15001
 msgid "In other words, this is the IP address of eth0."
 msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:15001
+#: ../templates:16001
 msgid "The default MX to assign to new domains:"
 msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:15001
+#: ../templates:16001
 msgid ""
 "AlternC will assign this hostname as the MX record for all the domains it "
 "hosts. It is usually better be left alone."
@@ -297,13 +325,13 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:16001
+#: ../templates:17001
 msgid "The path where AlternC is installed:"
 msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:16001
+#: ../templates:17001
 msgid ""
 "Please enter the partition name where alternc is installed. This is used "
 "mainly for disk quotas."
@@ -311,19 +339,19 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:16001
+#: ../templates:17001
 msgid "Warning : Be careful ! It can generate some problems."
 msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:17001
+#: ../templates:18001
 msgid "The monitoring server:"
 msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:17001
+#: ../templates:18001
 msgid ""
 "The IP address (or ip/prefix) of the server(s) which must be authorized to  "
 "ping us and access apache status pages. Completely optional."
@@ -331,13 +359,13 @@ msgstr ""
 
 #. Type: note
 #. Description
-#: ../templates:18001
+#: ../templates:19001
 msgid "POP Before SMTP deprecated"
 msgstr ""
 
 #. Type: note
 #. Description
-#: ../templates:18001
+#: ../templates:19001
 msgid ""
 "AlternC doesn't automatically configure the pop-before-smtp package anymore, "
 "since it is correctly configured for SASL authentification these days. If "
@@ -346,13 +374,13 @@ msgstr ""
 
 #. Type: note
 #. Description
-#: ../templates:18001
+#: ../templates:19001
 msgid "# For Courier-POP3 and Courier-IMAP:"
 msgstr ""
 
 #. Type: note
 #. Description
-#: ../templates:18001
+#: ../templates:19001
 msgid ""
 "in the /etc/pop-before-smtp/pop-before-smtp.conf and uncomment it. hash:/var/"
 "lib/pop-before-smtp/hosts must also be added to the mynetworks directive of /"
@@ -361,61 +389,61 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../templates:19001
+#: ../templates:20001
 msgid "Should AlternC remove all databases (/var/lib/mysql/) ?"
 msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../templates:19001
+#: ../templates:20001
 msgid "All users databases will be trashed"
 msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../templates:20001
+#: ../templates:21001
 msgid "Should AlternC remove users datas ?"
 msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../templates:20001
+#: ../templates:21001
 msgid "The files and apache redirections created by users will be trashed"
 msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../templates:21001
+#: ../templates:22001
 msgid "Should AlternC remove bind zones ?"
 msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../templates:21001
+#: ../templates:22001
 msgid "It will delete all bind zones created by AlternC"
 msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../templates:22001
+#: ../templates:23001
 msgid "Should AlternC remove mailboxes ?"
 msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../templates:22001
+#: ../templates:23001
 msgid "If you accept all users e-mails will be deleted"
 msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:23001
+#: ../templates:24001
 msgid "Slave servers"
 msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:23001
+#: ../templates:24001
 msgid ""
 "This is a space-separated list of servers that are \"slaves\" to the master "
 "server (this server). When writing apache configuration files, the master "

@@ -20,7 +20,6 @@ case "$1" in
     echo "and re-run /usr/lib/alternc/fixperms.sh "
     /usr/lib/alternc/fixperms.sh
 
-
     if dpkg --compare-versions "$2" lt "0.9.4"; then
         echo "Upgrading bind configuration"
         # Move /etc/bind files around

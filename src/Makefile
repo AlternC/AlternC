@@ -31,8 +31,8 @@ LIBS=functions.sh functions_hosting.sh functions_dns.sh
 BIN=$(DESTDIR)/usr/lib/alternc/
 
 install: 
-	chown root:www-data $(BIN)
+	chown root:alterncpanel $(BIN)
 	chmod 755 $(BIN)
-	install -o root -g www-data -m4750 $(SETUID) du.pl $(BIN)
-	install -o root -g www-data -m0750 $(SCRIPTS) $(BIN)
-	install -o root -g www-data -m0644 $(LIBS) $(BIN)
+	install -o root -g alterncpanel -m4750 $(SETUID) du.pl $(BIN)
+	install -o root -g alterncpanel -m0750 $(SCRIPTS) $(BIN)
+	install -o root -g alterncpanel -m0644 $(LIBS) $(BIN)

@@ -33,7 +33,7 @@ for my $p (@create_paths) {
     mkdir($p);
     chown($uid, $uid, $p);
     system("/bin/chmod 02770 '$p'");
-    system("/usr/bin/setfacl -m d:g:alterncpanel:rw- -m d:u:$uid:rw- -m d:g:$uid:rw- '$p'");
+    system("/usr/bin/setfacl -m d:g:alterncpanel:rw- -m d:u:$uid:rw- -m d:g:$uid:rw- -m g:alterncpanel:rw- -m u:$uid:rw- -m g:$uid:rw- '$p'");
 }
 
 0;

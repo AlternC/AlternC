@@ -11,6 +11,17 @@ _Description: Do you REALLY want to install AlternC on this computer ?
  .
  YOU HAVE BEEN WARNED.
 
+Template: alternc/warningaclquota
+Type: note
+_Description: AlternC need ACL and QUOTA activated
+ AlternC can't work without ACL activated on his file.
+ Please check your /etc/fstab to activate ACL for AlternC.
+ .
+ Run /usr/lib/alternc/fixperms.sh once it's activated.
+ .
+ Also, you need to activate group quota (grpquota)
+ to be able to use disk quota.
+
 Template: alternc/desktopname
 Type: string
 _Description: Fully qualified name of the desktop:
