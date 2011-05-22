@@ -68,7 +68,7 @@ install: build
 		done ;\
 	done
 
-  chown alterncpanel:alterncpanel debian/alternc/var/alternc/html/*
+	chown alterncpanel:alterncpanel debian/alternc/var/alternc/html/*
 
 	# Ex old alternc-admintools
 	install tools/top_http_users debian/alternc/usr/bin
