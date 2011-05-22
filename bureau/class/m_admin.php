@@ -318,12 +318,12 @@ class m_admin {
     }
     if (!$force) {
       if ($mail=="") {
-	$err->raise("admin",6);
-	return false;
+	      $err->raise("admin",6);
+	      return false;
       }
       if (checkmail($mail)!=0){
-	$err->raise("admin",5);
-	return false;
+	      $err->raise("admin",5);
+	      return false;
       }
     }
     // Vérification de la conformité du login

@@ -320,24 +320,13 @@ done
 # Last touches
 #
 
-# Changing owner of web panel's files
-chown -R alterncpanel:alterncpanel "$ALTERNC_LOC/bureau"
-
-# Set correct rights on files
-echo "/!\ Warning /!\ Defaults ACL will be applied"
-echo "If error, please remount $ALTERNC_LOC with ACL"
-echo "and re-run /usr/lib/alternc/fixperms.sh "
-echo "<press enter to continue>"
-read
-/usr/lib/alternc/fixperms.sh
-
 # Creating admin user if needed
 HAS_ROOT=`mysql --defaults-file=/etc/alternc/my.cnf -e "SELECT COUNT(*) FROM membres WHERE login = 'admin' OR login = 'root' and su = 1" | tail -1`
 if [ "$HAS_ROOT" != "1" ]; then
     echo "Creating admin user..."
     echo ""
 
-    if su - www-data -c /usr/share/alternc/install/newone.php
+    if su - alterncpanel -c /usr/share/alternc/install/newone.php
       then
       echo "*******************************************"
       echo "*                                         *"
@@ -354,10 +343,11 @@ if [ "$HAS_ROOT" != "1" ]; then
     fi
 fi
 
+# Changing owner of web panel's files
+chown -R alterncpanel:alterncpanel "$ALTERNC_LOC/bureau"
+
 # We force the re-computing of the DNS zones, since we may have changed the IP address (see #460)
-MYSQL_CONFIG="/etc/alternc/my.cnf"
-mysql="/usr/bin/mysql --defaults-file=$MYSQL_CONFIG"
-$mysql -B -e "update domaines set dns_action='update';"
+/usr/bin/mysql --defaults-file="/etc/alternc/my.cnf" -B -e "update domaines set dns_action='update';"
 
 # We should restart apaches after all configuration stuff ...
 for service in $SERVICES; do

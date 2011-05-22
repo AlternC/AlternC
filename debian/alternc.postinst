@@ -103,7 +103,7 @@ SQLBACKUP_OVERWRITE=""
 ALTERNC_SLAVES=""
 EOF
 
-        chown root:www-data $CONFIGFILE
+        chown root:alterncpanel $CONFIGFILE
         chmod 640 $CONFIGFILE
     fi
 

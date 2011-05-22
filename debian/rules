@@ -54,7 +54,7 @@ install: build
 	# Fix permisions
 	chmod 755 debian/alternc/etc/alternc
 	chmod 644 debian/alternc/etc/alternc/phpmyadmin.inc.php
-	chown -R root:www-data debian/alternc/var/alternc/bureau
+	chown -R alterncpanel:alterncpanel debian/alternc/var/alternc/bureau
 	chmod 1733 debian/alternc/var/alternc/sessions
 	chmod -R 644 debian/alternc/var/alternc/bureau
 	chmod -R a+X debian/alternc/var/alternc/bureau

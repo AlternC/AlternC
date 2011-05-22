@@ -31,8 +31,9 @@ my @create_paths = ($PTH);
 
 for my $p (@create_paths) {
     mkdir($p);
-    chown(33, $uid, $p);
+    chown($uid, $uid, $p);
     system("/bin/chmod 02770 '$p'");
+    system("/usr/bin/setfacl -m d:g:alterncpanel:rw- -m d:u:$uid:rw- -m d:g:$uid:rw- '$p'");
 }
 
 0;

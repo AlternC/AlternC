@@ -61,11 +61,8 @@ doone() {
       chmod 2770 -R "$REP"
 
       # Delete existings ACL
-      find $REP -exec setfacl -bk '{}' \;
-      # Set the defaults acl on directory
-      find $REP -type d -exec setfacl -m d:g:alterncpanel:rw- '{}' \;
-      # Set the acl on all the files
-      find $REP -exec setfacl -m g:alterncpanel:rw- '{}' \;
+      # Set the defaults acl on all the files
+      setfacl -b -k -m d:g:alterncpanel:rw- -R "$REP" \;
 
 	    read GID LOGIN
     done
