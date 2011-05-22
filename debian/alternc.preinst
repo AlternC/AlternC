@@ -4,6 +4,11 @@ set -e
 
 . /usr/share/debconf/confmodule
 
+# Create AlternC Panel user for web server
+addgroup --system --gid 1999 alterncpanel
+adduser --system --home "$ALTERNC_LOC/bureau" --no-create-home \
+  --disabled-password --uid 1999 --ingroup alterncpanel alterncpanel
+
 case "$1" in
   install)
     ;;

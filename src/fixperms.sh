@@ -49,17 +49,25 @@ fi
 
 doone() {
     read GID LOGIN
-    while [ "$LOGIN" ] 
-      do
+    while [ "$LOGIN" ] ; do
       if [ "$DEBUG" ]; then
-	  echo "Setting rights and ownership for user $LOGIN having gid $GID"
+	      echo "Setting rights and ownership for user $LOGIN having gid $GID"
       fi
       INITIALE=`echo $LOGIN |cut -c1`
       REP="$ALTERNC_LOC/html/$INITIALE/$LOGIN"
             
-      find $REP -type d -exec chmod g+s \{\} \;
-	  chown -R 33.$GID $REP
-	  read GID LOGIN
+      # Set the file readable only for the AlternC User
+	    chown -R $GID:$GID "$REP"
+      chmod 2770 -R "$REP"
+
+      # Delete existings ACL
+      find $REP -exec setfacl -bk '{}' \;
+      # Set the defaults acl on directory
+      find $REP -type d -exec setfacl -m d:g:alterncpanel:rw- '{}' \;
+      # Set the acl on all the files
+      find $REP -exec setfacl -m g:alterncpanel:rw- '{}' \;
+
+	    read GID LOGIN
     done
 }
 

@@ -105,7 +105,7 @@ if [ -r /etc/alternc/my.cnf ]; then
     # * convert mysql variables into our MYSQL_ naming convention (;s)
     # * print the result (;p)
     eval `sed -n -e "/=/{s/ *= *\"\?/='/;s/\"\?\$/'/;s/host/MYSQL_HOST/;s/user/MYSQL_USER/;s/password/MYSQL_PASS/;s/database/MYSQL_DATABASE/;p}" /etc/alternc/my.cnf`
-    chown root:www-data /etc/alternc/my.cnf
+    chown root:alterncpanel /etc/alternc/my.cnf
     chmod 640 /etc/alternc/my.cnf
 fi
 
@@ -201,11 +201,11 @@ if [ -x /usr/sbin/apache2 ]; then
     fi 
     if ! [ -L /etc/apache2/mods-enabled/$php.load ]
     then
-	a2enmod $php
+	    a2enmod $php
     fi
     if ! [ -L /etc/apache2/mods-enabled/rewrite.load ]
     then
-	a2enmod rewrite
+	    a2enmod rewrite
     fi
     if [ -e /etc/alternc/apache.pem ]; then
         # We enable proftpd tls module
@@ -320,6 +320,16 @@ done
 # Last touches
 #
 
+# Changing owner of web panel's files
+chown -R alterncpanel:alterncpanel "$ALTERNC_LOC/bureau"
+
+# Set correct rights on files
+echo "/!\ Warning /!\ Defaults ACL will be applied"
+echo "If error, please remount $ALTERNC_LOC with ACL"
+echo "and re-run /usr/lib/alternc/fixperms.sh "
+echo "<press enter to continue>"
+read
+/usr/lib/alternc/fixperms.sh
 
 # Creating admin user if needed
 HAS_ROOT=`mysql --defaults-file=/etc/alternc/my.cnf -e "SELECT COUNT(*) FROM membres WHERE login = 'admin' OR login = 'root' and su = 1" | tail -1`
