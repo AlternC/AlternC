@@ -95,6 +95,11 @@ fi
 
 . /etc/alternc/local.sh
 
+# Check ACL
+aclcheckfile="$ALTERNC_LOC/test-acl"
+touch "$aclcheckfile"
+setfacl -m u:root:rwx "$aclcheckfile" 2>/dev/null || ( echo "Error : ACL aren't activated on $ALTERNC_LOC . AlternC can't work without it." ; exit 2)
+
 # XXX: copy-paste from debian/config
 if [ -r /etc/alternc/my.cnf ]; then
     # make mysql configuration available as shell variables
