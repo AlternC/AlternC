@@ -3,6 +3,8 @@ alternc (1.1) stable; urgency=low
   * New class : access security. Allow to restrict some function to specific IP or subnet
   * Access security management on the ftp account.
 
+ -- Alan Garcia <fufroma@mailfr.com>  Wed, 25 May 2011 09:24:30 +0200
+
 alternc (1.0~rc2) stable; urgency=low
   * Major patch
     * Web & DNS file generation rebuild from scratch
