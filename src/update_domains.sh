@@ -114,7 +114,7 @@ do
 done
 
 
-if [ $RELOAD_WEB ] ; then
+if [ "$RELOAD_WEB" == "true" ] ; then
   RELOAD_ZONES="$RELOAD_ZONES apache"
 
   # Concat the apaches files
