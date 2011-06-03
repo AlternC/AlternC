@@ -80,13 +80,13 @@ if (!empty($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_PW'])) {
 
 $help_baseurl="http://www.aide-alternc.org/";
 
-/* PHPLIB inclusions : */
-$root="/var/alternc/bureau/";
 /* Server Domain Name */
 $host=getenv("HTTP_HOST");
 
 /* Global variables (AlternC configuration) */
 require_once($root."class/local.php");
+/* PHPLIB inclusions : */
+$root=$L_ALTERNC_LOC."/bureau/";
 
 require_once($root."class/db_mysql.php");
 require_once($root."class/functions.php");
