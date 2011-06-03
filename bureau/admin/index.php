@@ -59,6 +59,7 @@ if (!isset($restrictip)) {
 <p>&nbsp;</p>
 <?php if (isset($error) && $error) echo "<font color=red>$error</font>"; ?>
 <?php
+$authip_token=$_GET['authip_token'];
 /*
 if (!$_SERVER[HTTPS]) {
   echo "<h4>ATTENTION : vous allez accéder à votre panel en mode *non sécurisé*<br/>
@@ -69,6 +70,7 @@ if (!$_SERVER[HTTPS]) {
 <div style="position: relative; left: 100px">
 <table><tr><td style="width: 320px">
 <?php __("To connect to the hosting control panel, enter your AlternC's login and password in the following form and click 'Enter'"); ?>
+<?php if (!empty($authip_token)) { echo "<p style='color:red;'>";__("You are attemping to connect without IP restriction."); echo "</p>"; } ?>
 </td><td>
 <form action="login.php" method="post" target="_top">
 <table border="0" style="border: 1px solid #202020;" cellspacing="0" cellpadding="3" width="300px" >
@@ -77,6 +79,7 @@ if (!$_SERVER[HTTPS]) {
 <tr><th align="right"><label for="password"><?php echo _("Password"); ?></label></th><td><input type="password" class="int" name="password" id="password" value="" maxlength="128" size="15" /></td></tr>
 <tr><td colspan="2" align="center"><input type="submit" class="inb" name="submit" value="<?php __("Enter"); ?>" /><input type="hidden" id="restrictip" name="restrictip" value="1" /></td></tr>
 </table>
+<input type="hidden" id="authip_token" name="authip_token" value="<?php echo htmlentities($authip_token) ?>" />
 </form>
 
 </td></tr>

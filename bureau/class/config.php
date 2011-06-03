@@ -149,6 +149,7 @@ include_once("lang_env.php");
 
 $mem=new m_mem();
 $err=new m_err();
+$authip=new m_authip();
 
 /* Check the User identity (if required) */
 if (!defined('NOCHECK')) {
@@ -160,7 +161,7 @@ if (!defined('NOCHECK')) {
 } 
 
 for($i=0;$i<count($classes);$i++) {
-  if ($classes[$i]!="mem" && $classes[$i]!="err") {
+  if (! in_array($classes[$i],Array('mem', 'err', 'authip'))) {
     $name2=$classes[$i];
     $name1="m_".$name2;
     $$name2= new $name1();

@@ -75,8 +75,8 @@ class m_mem {
    * @param $password string User Password.
    * @return boolean TRUE if the user has been successfully connected, or FALSE if an error occured.
    */
-  function login($username,$password,$restrictip=0) {
-    global $db,$err,$cuid;
+  function login($username,$password,$restrictip=0,$authip_token=false) {
+    global $db,$err,$cuid, $authip;
     $err->log("mem","login",$username);
     //    $username=addslashes($username);
     //    $password=addslashes($password);
@@ -97,6 +97,23 @@ class m_mem {
     }
     $this->user=$db->Record;
     $cuid=$db->f("uid");
+
+    // AuthIP
+    $allowed_ip=false;
+    if ( $authip_token ) $allowed_ip = $this->authip_tokencheck($authip_token);
+
+    $aga = $authip->get_allowed('panel');
+    foreach ($aga as $k=>$v ) {
+      if ( $authip->is_in_subnet(getenv("REMOTE_ADDR"), $v['ip'], $v['subnet']) ) $allowed=true ;
+    }
+
+    // Error if there is rules, the IP is not allowed and it's not in the whitelisted IP
+    if ( sizeof($aga)>1 && !$allowed_ip && !$authip->is_wl(getenv("REMOTE_ADDR")) ) {
+      $err->raise("mem",42); // FIXME have a real error code -- Votre ip est pas authorisée
+      return false;
+    }
+    // End AuthIP
+
     if ($restrictip) {
       $ip="'".getenv("REMOTE_ADDR")."'";
     } else $ip="''";
@@ -160,6 +177,30 @@ class m_mem {
     $db->query("UPDATE membres SET lastlogin=NOW(), lastfail=0, lastip='$ip' WHERE uid='$cuid';");
   }
 
+  function authip_token($bis=false) {
+    global $db,$cuid;
+    $db->query("select pass from membres where uid='$cuid';");
+    $db->next_record();
+    $i=intval(time()/3600);
+    if ($bis) ++$i;
+    return md5("$i--".$db->f('pass'));
+  }
+
+  function authip_tokencheck($t) {
+    if ($t==$this->authip_token() || $t==$this->authip_token(true) ) return true;
+    return false;
+  }
+
+  function authip_class() {
+    global $cuid;
+    $c = Array();
+    $c['name']="Panel access";
+    $c['protocol']="panel";
+    $c['values']=Array($cuid=>'');
+
+    return $c;
+  }
+
   /* ----------------------------------------------------------------- */
   /** Vérifie que la session courante est correcte (cookie ok et ip valide).
    * Si besoin, et si réception des champs username & password, crée une nouvelle
@@ -171,7 +212,7 @@ class m_mem {
    * @return TRUE si la session est correcte, FALSE sinon.
    */
   function checkid() {
-    global $db,$err,$cuid,$restrictip;
+    global $db,$err,$cuid,$restrictip,$authip;
     if ($_REQUEST["username"] && $_REQUEST["password"]) {
       return $this->login($_REQUEST["username"],$_REQUEST["password"],$_REQUEST["restrictip"]);
     }
@@ -189,8 +230,8 @@ class m_mem {
     $db->next_record();
     if ($db->f("ip")) {
       if ($db->f("me")!=$db->f("ip")) {
-	$err->raise("mem",5);
-	return false;
+	      $err->raise("mem",5);
+	      return false;
       }
     }
     $cuid=$db->f("uid");
@@ -215,7 +256,7 @@ class m_mem {
   function su($uid) {
     global $cuid,$db,$err;
     if (!$this->olduid)
-	$this->olduid=$cuid;
+	    $this->olduid=$cuid;
     $db->query("select * from membres where uid='$uid';");
     if ($db->num_rows()==0) {
       $err->raise("mem",1);

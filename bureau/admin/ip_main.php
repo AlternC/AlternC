@@ -90,17 +90,25 @@ $lac = $authip->list_affected();
         <p>
         <input type="radio" name="s_protocol" id="s_protocol_<?php echo htmlentities($a['protocol']);?>" value="<?php echo htmlentities($a['protocol']);?>" />
         <label for="s_protocol_<?php echo htmlentities($a['protocol']);?>"><?php echo htmlentities($a['name']); ?></label>
-        <select name="s_affect_<?php echo htmlentities($a['protocol']);?>" id="s_affect_<?php echo htmlentities($a['protocol']);?>">
+
+        <?php if ( sizeof($a['values']) > 1 ) { ?>
+           <select name="s_affect_<?php echo htmlentities($a['protocol']);?>" id="s_affect_<?php echo htmlentities($a['protocol']);?>">
+             <?php foreach ($a['values'] as $k => $v) { ?>
+               <option value="<?php echo htmlentities($k); ?>"><?php echo htmlentities($v); ?></option>
+             <?php  } ?>
+           </select>
+        <?php } else { ?>
           <?php foreach ($a['values'] as $k => $v) { ?>
-            <option value="<?php echo htmlentities($k); ?>"><?php echo htmlentities($v); ?></option>
+            <label><b><?php echo htmlentities($v); ?></b></label> 
+            <input type=hidden name="s_affect_<?php echo htmlentities($a['protocol']);?>" id="s_affect_<?php echo htmlentities($a['protocol']);?>" value="<?php echo htmlentities($k); ?>" readonly>
           <?php  } ?>
-        </select>
+        <?php } ?>
         </p>
       <?php } ?>
     </td><td valign="middle">
       <p>
       <select name="s_ipsub">
-        <?php foreach ($list_ip as $li) { ?>
+        <?php foreach ($list_ip as $li) { ?>
           <option value="<?php echo $li['id']; ?>"><?php echo htmlentities($li['infos']); echo " - ".$li['ip'] ; if (!($li['subnet']==32 || $li['subnet'] == 128)) echo "/".$li['subnet'];?></option>
         <?php } ?>
       </select>

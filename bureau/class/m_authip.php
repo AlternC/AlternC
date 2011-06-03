@@ -89,6 +89,51 @@ class m_authip {
   }
 
   /*
+   * Liste les IP et subnet authorisés
+   * pour une classe donnée
+   *
+   * @param string $s classe concernée
+   * @return array Retourne un tableau
+   */
+  function get_allowed($s) {
+    global $db, $cuid;
+    if (! $db->query("select ai.ip, ai.subnet, ai.infos, aia.parameters from authorised_ip ai, authorised_ip_affected aia where aia.protocol='$s' and aia.authorised_ip_id = ai.id and ai.uid='$cuid';") ) {
+      echo "query failed: ".$db->Error;
+      return false;
+    }
+    $r=Array();
+    while ($db->next_record()) {
+      $r[]=Array("ip"=>$db->f("ip"), "subnet"=>$db->f("subnet"), "infos"=>$db->f("infos"), "parameters"=>$db->f("parameters"));
+    }
+    return $r;
+  }
+
+  function is_wl($ip) {
+    global $db;
+    if (! $db->query("select ai.ip, ai.subnet from authorised_ip ai where ai.uid='0';") ) {
+      echo "query failed: ".$db->Error;
+      return false;
+    }
+    while ($db->next_record()) {
+      if ( $this->is_in_subnet($ip, $db->f('ip'), $db->f('subnet') ) ) return true;
+    }
+    return false;
+  }
+
+  /*
+   * Retourne si l'ip appartient au subnet.
+   *
+   */
+   function is_in_subnet($o, $ip, $sub) {
+    $o = inet_pton($o);
+    $ip = inet_pton($ip);
+    $sub = pow(2, $sub);
+  
+    if ( $o >= $ip && $o <= ($ip+$sub) ) return true;
+    return false;
+  }
+
+  /*
    * Sauvegarde une IP dans les IP TOUJOURS authorisée
    *
    * @param integer $id id de la ligne à modifier. Si vide ou
