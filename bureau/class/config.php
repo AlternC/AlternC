@@ -70,7 +70,7 @@ if (isset($http_auth) && $http_auth) {
         header('HTTP/1.0 401 Unauthorized');
 	exit();
     }
- }
+}
 if (!empty($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_PW'])) {
   // Gruiiik
   $_REQUEST["username"]=$_SERVER['PHP_AUTH_USER'];
@@ -84,7 +84,7 @@ $help_baseurl="http://www.aide-alternc.org/";
 $host=getenv("HTTP_HOST");
 
 /* Global variables (AlternC configuration) */
-require_once($root."class/local.php");
+require_once(dirname(__FILE__)."/local.php");
 /* PHPLIB inclusions : */
 $root=$L_ALTERNC_LOC."/bureau/";
 
