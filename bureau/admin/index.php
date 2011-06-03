@@ -72,7 +72,7 @@ if (!$_SERVER[HTTPS]) {
 </td><td>
 <form action="login.php" method="post" target="_top">
 <table border="0" style="border: 1px solid #202020;" cellspacing="0" cellpadding="3" width="300px" >
-<tr><th colspan="2" align="center">Accès AlternC</th></tr>
+<tr><th colspan="2" align="center"><?php __("AlternC access"); ?></th></tr>
 <tr><th align="right"><label for="username"><?php echo _("Username"); ?></label></th><td><input type="text" class="int" name="username" id="username" value="" maxlength="128" size="15" /></td></tr>
 <tr><th align="right"><label for="password"><?php echo _("Password"); ?></label></th><td><input type="password" class="int" name="password" id="password" value="" maxlength="128" size="15" /></td></tr>
 <tr><td colspan="2" align="center"><input type="submit" class="inb" name="submit" value="<?php __("Enter"); ?>" /><input type="hidden" id="restrictip" name="restrictip" value="1" /></td></tr>
