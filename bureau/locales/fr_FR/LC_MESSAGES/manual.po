@@ -837,3 +837,9 @@ msgstr "Entrée DNS MX"
 msgid "secondary MX DNS entry"
 msgstr "Entrée DNS MX secondaire"
 
+msgid "Default mail server"
+msgstr "Serveur de mail par défaut"
+
+msgid "Default backup mail server"
+msgstr "Serveur de mail de secours"
+

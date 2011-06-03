@@ -33,22 +33,13 @@ include_once("head.php");
 $fields = array (
 	"domain"    => array ("request", "string", ""),
 	"dns"       => array ("request", "integer", 1),
-	"mx"        => array ("request", "string", ""),
-	"email"     => array ("request", "integer", 0),
+	"email"     => array ("request", "integer", 1),
 );
 getFields($fields);
 
 $dom->lock();
-if ($dns!="1") {
-  // On fixe mx :
-  if ($email=="1") {
-    $mx=$L_MX;
-  } else {
-    $mx="";
-  }
- }
 
-if (!$dom->edit_domain($domain,$dns,$mx)) {
+if (!$dom->edit_domain($domain,$dns,$email)) {
   $error=$err->errstr();
   include("dom_edit.php");
   $dom->unlock();
