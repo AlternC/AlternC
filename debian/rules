@@ -54,7 +54,8 @@ install: build
 	# Fix permisions
 	chmod 755 debian/alternc/etc/alternc
 	chmod 644 debian/alternc/etc/alternc/phpmyadmin.inc.php
-	chown -R alterncpanel:alterncpanel debian/alternc/var/alternc/bureau
+	# Group and user 1999 reference alterncpanel
+	chown -R 1999:1999 debian/alternc/var/alternc/bureau
 	chmod 1733 debian/alternc/var/alternc/sessions
 	chmod -R 644 debian/alternc/var/alternc/bureau
 	chmod -R a+X debian/alternc/var/alternc/bureau
@@ -68,7 +69,8 @@ install: build
 		done ;\
 	done
 
-	chown alterncpanel:alterncpanel debian/alternc/var/alternc/html/*
+	# Group and user 1999 reference alterncpanel
+	chown 1999:1999 debian/alternc/var/alternc/html/*
 
 	# Ex old alternc-admintools
 	install tools/top_http_users debian/alternc/usr/bin
