@@ -31,8 +31,9 @@ LIBS=functions.sh functions_hosting.sh functions_dns.sh
 BIN=$(DESTDIR)/usr/lib/alternc/
 
 install: 
-	chown root:alterncpanel $(BIN)
+	# Group 1999 references alterncpanel
+	chown root:1999 $(BIN)
 	chmod 755 $(BIN)
-	install -o root -g alterncpanel -m4750 $(SETUID) du.pl $(BIN)
-	install -o root -g alterncpanel -m0750 $(SCRIPTS) $(BIN)
-	install -o root -g alterncpanel -m0644 $(LIBS) $(BIN)
+	install -o root -g 1999 -m4750 $(SETUID) du.pl $(BIN)
+	install -o root -g 1999 -m0750 $(SCRIPTS) $(BIN)
+	install -o root -g 1999 -m0644 $(LIBS) $(BIN)
