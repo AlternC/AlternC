@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Optimize alternc databases
+/usr/bin/mysqlcheck --defaults-file=/etc/alternc/my.cnf  --quick --force --optimize --auto-repair --databases $(cat /etc/alternc/my.cnf |grep ^database|cut -d '"' -f 2) > /dev/null

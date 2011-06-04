@@ -460,6 +460,7 @@ po/fr/LC_MESSAGES/alternc-admintools.po -text
 /quota_init -text
 src/Makefile -text
 src/alternc-check -text
+src/alternc-dboptimize -text
 src/alternc-passwd -text
 src/alternc_reload -text
 src/du.pl -text
