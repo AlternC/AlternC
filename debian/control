@@ -10,9 +10,11 @@ Standards-Version: 3.8.0
 Package: alternc
 Architecture: all
 Pre-depends: debconf (>= 0.5.00) | debconf-2.0
-Depends: debianutils (>= 1.13.1), apache2-mpm-itk, libapache2-mod-php5, courier-ssl, courier-imap-ssl, courier-pop-ssl, php5-mysql, phpmyadmin, postfix, proftpd-mod-mysql, proftpd-basic, squirrelmail, squirrelmail-locales, postfix-tls, bind9, wget, rsync, quota, courier-authmysql | courier-authlib-mysql, ca-certificates, locales, perl-suid, perl, postfix-mysql, wwwconfig-common, sasl2-bin, fam, libsasl2-modules, php5-cli, lockfile-progs (>= 0.1.9), gettext (>= 0.10.40-5), adduser, mysql-client, dnsutils, bash, acl
-Recommends: mysql-server
-Conflicts: alternc-admintools, alternc-awstats (<= 0.3.2), alternc-webalizer (<= 0.9.4)
+Depends: debianutils (>= 1.13.1), apache2-mpm-itk, libapache2-mod-php5, php5-mysql, phpmyadmin, postfix, proftpd-mod-mysql, proftpd-basic, squirrelmail, squirrelmail-locales, postfix-tls, bind9, wget, rsync, quota, ca-certificates, locales, perl-suid, perl, postfix-mysql, wwwconfig-common, sasl2-bin, fam, libsasl2-modules, php5-cli, lockfile-progs (>= 0.1.9), gettext (>= 0.10.40-5), adduser, mysql-client, dnsutils, bash, acl, dovecot-common (>= 1:1.2.15), dovecot-imapd, dovecot-pop3d, dovecot-mysql
+
+
+Recommends: mysql-server, dovecot-managesieved, dovecot-sieve
+Conflicts: alternc-admintools, alternc-awstats (<= 0.3.2), alternc-webalizer (<= 0.9.4), courier-authdaemon
 Provides: alternc-admintools
 Replaces: alternc-admintools
 Suggests: alternc-awstats, alternc-mailman, alternc-changepass, amavisd-new, clamav-daemon, spamassassin, pop-before-smtp, magpierss, zip, ncompress, bzip2
@@ -29,9 +31,9 @@ Homepage: http://www.alternc.org/
 Package: alternc-slave
 Architecture: all
 Pre-depends: debconf (>= 0.5.00) | debconf-2.0
-Depends: debianutils (>= 1.13.1), apache2, libapache2-mod-php5, courier-ssl, courier-imap-ssl, courier-pop-ssl, php5-mysql, phpmyadmin, postfix, proftpd-mod-mysql, proftpd-basic, squirrelmail, postfix-tls, bind9, wget, rsync, quota, courier-authmysql | courier-authlib-mysql, ca-certificates, locales, perl-suid, perl, postfix-mysql, wwwconfig-common, sasl2-bin, libsasl2-modules, php5-cli, lockfile-progs (>= 0.1.9), gettext (>= 0.10.40-5), adduser, mysql-client, sudo
-Recommends: apache2
-Conflicts: alternc-admintools, alternc-awstats (<= 0.3.2), alternc-webalizer (<= 0.9.4), alternc
+Depends: debianutils (>= 1.13.1), apache2-mpm-itk, libapache2-mod-php5, php5-mysql, phpmyadmin, postfix, proftpd-mod-mysql, proftpd-basic, squirrelmail, postfix-tls, bind9, wget, rsync, quota, ca-certificates, locales, perl-suid, perl, postfix-mysql, wwwconfig-common, sasl2-bin, libsasl2-modules, php5-cli, lockfile-progs (>= 0.1.9), gettext (>= 0.10.40-5), adduser, mysql-client, sudo, acl, dovecot-common (>= 1:1.2.15), dovecot-imapd, dovecot-pop3d, dovecot-mysql
+Recommends: dovecot-managesieved, dovecot-sieve
+Conflicts: alternc-admintools, alternc-awstats (<= 0.3.2), alternc-webalizer (<= 0.9.4), alternc, courier-authdaemon
 Provides: alternc
 Replaces: alternc
 Suggests: alternc-awstats, alternc-mailman, alternc-changepass, amavisd-new, clamav-daemon, spamassassin, pop-before-smtp, magpierss, zip, ncompress, bzip2
