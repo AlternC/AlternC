@@ -10,12 +10,12 @@ Standards-Version: 3.8.0
 Package: alternc
 Architecture: all
 Pre-depends: debconf (>= 0.5.00) | debconf-2.0
-Depends: debianutils (>= 1.13.1), apache2, libapache2-mod-php5, courier-ssl, courier-imap-ssl, courier-pop-ssl, php5-mysql, phpmyadmin, postfix, proftpd-mod-mysql, proftpd-basic, squirrelmail, squirrelmail-locales, postfix-tls, bind9, wget, rsync, quota, courier-authmysql | courier-authlib-mysql, ca-certificates, locales, perl-suid, perl, postfix-mysql, wwwconfig-common, sasl2-bin, fam, libsasl2-modules, php5-cli, lockfile-progs (>= 0.1.9), gettext (>= 0.10.40-5), pdksh (>= 5.2.14-6), adduser, mysql-client, dnsutils, bash
-Recommends: apache2, mysql-server
+Depends: debianutils (>= 1.13.1), apache2-mpm-prefork, libapache2-mod-php5, courier-ssl, courier-imap-ssl, courier-pop-ssl, php5-mysql, phpmyadmin, postfix, proftpd-mod-mysql, proftpd-basic, squirrelmail, squirrelmail-locales, postfix-tls, bind9, wget, rsync, quota, courier-authmysql | courier-authlib-mysql, ca-certificates, locales, perl-suid, perl, postfix-mysql, wwwconfig-common, sasl2-bin, fam, libsasl2-modules, php5-cli, lockfile-progs (>= 0.1.9), gettext (>= 0.10.40-5), adduser, mysql-client, dnsutils, bash
+Recommends: mysql-server
 Conflicts: alternc-admintools, alternc-awstats (<= 0.3.2), alternc-webalizer (<= 0.9.4)
 Provides: alternc-admintools
 Replaces: alternc-admintools
-Suggests: alternc-awstats, alternc-mailman, alternc-changepass, pop-before-smtp, magpierss, zip, ncompress, bzip2
+Suggests: alternc-awstats, alternc-mailman, alternc-changepass, amavisd-new, clamav-daemon, spamassassin, pop-before-smtp, magpierss, zip, ncompress, bzip2
 Description: hosting software managment suite for Debian
  Hosting software suite based on Valentin Lacambre's altern.org French hosting
  service. It uses Apache, Postfix, Sympa, MySQL and PHP to allow a web-based
@@ -29,12 +29,12 @@ Homepage: http://www.alternc.org/
 Package: alternc-slave
 Architecture: all
 Pre-depends: debconf (>= 0.5.00) | debconf-2.0
-Depends: debianutils (>= 1.13.1), apache2, libapache2-mod-php5, courier-ssl, courier-imap-ssl, courier-pop-ssl, php5-mysql, phpmyadmin, postfix, proftpd-mod-mysql, proftpd-basic, squirrelmail, postfix-tls, bind9, wget, rsync, quota, courier-authmysql | courier-authlib-mysql, ca-certificates, locales, perl-suid, perl, postfix-mysql, wwwconfig-common, sasl2-bin, libsasl2-modules, php5-cli, lockfile-progs (>= 0.1.9), gettext (>= 0.10.40-5), pdksh (>= 5.2.14-6), adduser, mysql-client, postgrey, sudo
+Depends: debianutils (>= 1.13.1), apache2, libapache2-mod-php5, courier-ssl, courier-imap-ssl, courier-pop-ssl, php5-mysql, phpmyadmin, postfix, proftpd-mod-mysql, proftpd-basic, squirrelmail, postfix-tls, bind9, wget, rsync, quota, courier-authmysql | courier-authlib-mysql, ca-certificates, locales, perl-suid, perl, postfix-mysql, wwwconfig-common, sasl2-bin, libsasl2-modules, php5-cli, lockfile-progs (>= 0.1.9), gettext (>= 0.10.40-5), adduser, mysql-client, postgrey, sudo
 Recommends: apache2
 Conflicts: alternc-admintools, alternc-awstats (<= 0.3.2), alternc-webalizer (<= 0.9.4), alternc
 Provides: alternc
 Replaces: alternc
-Suggests: alternc-awstats, alternc-mailman, alternc-changepass, pop-before-smtp, magpierss, zip, ncompress, bzip2
+Suggests: alternc-awstats, alternc-mailman, alternc-changepass, amavisd-new, clamav-daemon, spamassassin, pop-before-smtp, magpierss, zip, ncompress, bzip2
 Description: hosting software managment suite for Debian, frontend web node
  Hosting software suite based on Valentin Lacambre's altern.org French hosting
  service. It uses Apache, Postfix, Sympa, MySQL and PHP to allow a web-based

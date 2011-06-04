@@ -92,7 +92,7 @@ _Description: The server to GRANT permissions to:
 Template: alternc/sql/backup_type
 Type: select
 Choices: rotate, date
-_Description: The way backup rotation is executated
+_Description: The way backup rotation is executed
  AlternC enables users to configure their own backups, on demand, with
  automatic rotation. This option determines how the backups are rotated.
  .
@@ -125,8 +125,14 @@ _Description: The internal IP of this server:
 Template: alternc/default_mx
 Type: string
 _Description: The default MX to assign to new domains:
- AlternC will assign this hostname as the MX record for all the domains it
- hosts. It is usually better be left alone.
+ AlternC will assign this hostname as the MX record for all
+ the domains it hosts. It is usually better be left alone.
+
+Template: alternc/default_mx2
+Type: string
+_Description: The default Backup MX to assign to new domains:
+ AlternC will assign this hostname as the Backup MX record for all
+ the domains it hosts. Don't set it if you don't know what it is about.
 
 Template: alternc/alternc_location
 Type: string

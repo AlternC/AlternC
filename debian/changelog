@@ -1,4 +1,4 @@
-alternc (1.0~rc2) stable; urgency=low
+alternc (1.0~rc3) stable; urgency=low
   * Major patch
     * Web & DNS file generation rebuild from scratch
     * Drop of apache 1 support
@@ -13,13 +13,14 @@ alternc (1.0~rc2) stable; urgency=low
     * Possibility to create a temporary mail (not yet shown, need cron)
     * Admin can connect to other account and go back to their own
     * Language link is back inside the menu
+    * MX and secondary MX are now available in debconf
   * Bugfixes
     * Too many to be listed (we change the historic update_domaines.sh)
     * Dash compatibility
     * Use iana.org to have whois server list up to date
     * Preseeding compatibility : don't ask for questions when already set
 
- -- Alan Garcia <fufroma@mailfr.com>  Fri, 11 Mar 2011 10:24:30 +0200
+ -- Benjamin Sonntag <benjamin@alternc.org>  Sat, 04 June 2011 10:15:30 +0200
 
 alternc (1.0~rc1) stable; urgency=low
 

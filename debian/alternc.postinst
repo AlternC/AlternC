@@ -123,6 +123,7 @@ EOF
     update_var alternc/ns1 NS1_HOSTNAME
     update_var alternc/ns2 NS2_HOSTNAME
     update_var alternc/default_mx DEFAULT_MX 
+    update_var alternc/default_mx2 DEFAULT_SECONDARY_MX
     update_var alternc/mysql/client MYSQL_CLIENT 
     update_var alternc/sql/backup_type SQLBACKUP_TYPE
     update_var alternc/sql/backup_overwrite SQLBACKUP_OVERWRITE
