@@ -46,7 +46,7 @@ function variable_init($conf = array()) {
   while ($db->next_record($result)) {
     /* maybe the data is *not* serialized, in that case, take it verbatim */
     $variable = $db->Record;
-    if (($variables[$variable['name']] = unserialize($variable['value'])) === FALSE) {
+    if (($variables[$variable['name']] = @unserialize($variable['value'])) === FALSE) {
       $variables[$variable['name']] = $variable['value'];
     }
   }

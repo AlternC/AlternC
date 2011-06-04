@@ -258,6 +258,17 @@ if [ -e /etc/postfix/myalias.cf -o -e /etc/postfix/mydomain.cf -o -e /etc/postfi
     chmod 640 /etc/postfix/my*
 fi
 
+if [ ! -f /etc/postfix/main.cf ]
+then
+    echo "****************************************"
+    echo "POSTFIX is NOT configured properly"
+    echo "please launch dpkg-reconfigure -plow postfix" 
+    echo "and choose 'Internet Site'"
+    echo "then reinstall alternc"
+    echo "****************************************"
+    exit 1
+fi
+
 # configure postfix appropriatly for our needs
 if [ "$slave" = "1" ]; then
     postfix_conf=/etc/alternc/postfix-slave.cf
