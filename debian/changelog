@@ -5,10 +5,12 @@ alternc (1.0) stable; urgency=low
     * Big changes in database schema (domaines, sub_domaines, *_standby removal)
   * Major changes
     * Drop mass virtual hosting, now use full vhost
-    * Panel URL do not need anymore /admin/ (but you can still use it, we put a 301 redirect)
+    * Panel URL do not need anymore /admin/
+    * (you can still use it, we put a 301 redirection)
     * JQuery is now used by AlternC (but not needed for any usual feature usage)
   * New features
-    * Domains type are dynamic, the administrator can create domaine type with his own apache template
+    * Domains type are dynamic
+    * (the administrator can create domaine type with his own apache template)
     * Advanced DNS options (ipv6, cname, txt, mx)
     * Possibility to create a temporary mail (not yet shown, need cron)
     * Admin can connect to other account and go back to their own
@@ -20,7 +22,7 @@ alternc (1.0) stable; urgency=low
     * Use iana.org to have whois server list up to date
     * Preseeding compatibility : don't ask for questions when already set
 
- -- Benjamin Sonntag <benjamin@alternc.org> Sat, 4 Jun 2011 18:18:18 +0200
+ -- Benjamin Sonntag <benjamin@alternc.org>  Sat, 04 Jun 2011 18:18:18 +0200
 
 alternc (1.0~rc1) stable; urgency=low
 

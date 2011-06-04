@@ -1,7 +1,6 @@
 etc/*
 usr/bin/*
 usr/lib/alternc/*
-usr/sbin/*
 usr/share/lintian/overrides/*
 usr/share/alternc/install/*
 usr/share/doc/alternc/*
