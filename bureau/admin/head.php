@@ -38,7 +38,6 @@ if (!$charset) $charset="iso-8859-1";
 <link rel="stylesheet" href="styles/passwordStrengthMeter.css" type="text/css" />
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $charset; ?>" />
 <script type="text/javascript" src="js/alternc.js"></script>
-<script type="text/javascript" src="js/wz_dragdrop.js"></script>
 <script src="js/jquery.min.js" type="text/javascript"></script>
 <script src="js/jquery_ui/js/jquery-ui-1.8.10.custom.min.js" type="text/javascript"></script>
 <?php
@@ -52,7 +51,12 @@ if (file_exists($lang_date_picker))
 <body>
 <?
 $oldid=intval(isset($_COOKIE['oldid'])?$_COOKIE['oldid']:'');
+$isinvited=false;
+
+if ($admin->enabled) $isinvited=true;
+
 if ($oldid && $oldid!=$cuid) {
+  $isinvited=true;
   echo "<div align=center><p class='error'>";
   __("Administrator session. you may <a href='adm_login.php'>return to your account</a> or <a href='adm_cancel.php'>cancel this feature</a>");
   echo "</p></div>";

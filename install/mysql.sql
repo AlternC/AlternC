@@ -225,7 +225,7 @@ CREATE TABLE IF NOT EXISTS sub_domaines (
   web_result varchar(255) not null default '',
   enable enum ('ENABLED', 'ENABLE', 'DISABLED', 'DISABLE') NOT NULL DEFAULT 'ENABLED',
   PRIMARY KEY (id),
-  UNIQUE (compte,domaine,sub,type)
+  UNIQUE (compte,domaine,sub,type,valeur)
 --  ,FOREIGN KEY (type) REFERENCES (domaines_type)
 ) TYPE=MyISAM;
 

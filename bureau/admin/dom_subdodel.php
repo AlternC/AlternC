@@ -38,6 +38,13 @@ $fields = array (
 );
 getFields($fields);
 
+$dt=$dom->domains_type_lst();
+if (!$isinvited && $dt[strtolower($type)]["enable"] != "ALL" ) {
+  __("This page is restricted to authorized staff");
+  exit();
+}
+
+
 $dom->lock();
 
 if (!$dom->del_sub_domain($domain,$sub,$type,$value)) {

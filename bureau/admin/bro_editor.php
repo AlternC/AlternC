@@ -40,27 +40,37 @@ if ($cancel) {
 	exit();
 }
 if ($saveret) {
-	$bro->Save($editfile,$R,$texte);
-	$error=sprintf(_("Your file %s has been saved"),$editfile)." (".format_date('%3$d-%2$d-%1$d %4$d:%5$d',date("Y-m-d H:i:s")).")";
-	include("bro_main.php");
-	exit();
+  if ($bro->Save($editfile,$R,$texte)) {
+    $error=sprintf(_("Your file %s has been saved"),$editfile)." (".format_date('%3$d-%2$d-%1$d %4$d:%5$d',date("Y-m-d H:i:s")).")";
+  } else {
+    $error=$err->errstr();
+  }
+  include("bro_main.php");
+  exit();
 }
 if ($save) {
-	$bro->Save($editfile,$R,$texte);
-	$error=sprintf(_("Your file %s has been saved"),$editfile)." (".format_date('%3$d-%2$d-%1$d %4$d:%5$d',date("Y-m-d H:i:s")).")";
+  if ($bro->Save($editfile,$R,$texte)) {
+    $error=sprintf(_("Your file %s has been saved"),$editfile)." (".format_date('%3$d-%2$d-%1$d %4$d:%5$d',date("Y-m-d H:i:s")).")";
+  } else {
+    $error=$err->errstr();
+  }
 }
 
 include_once("head.php");
 
 ?>
 <p>
-<?php if ($error) echo "<font color=\"red\">$error</font><br />"; ?>
+<?php if ($error) echo "<p class=\"error\">$error</p>"; ?>
 <?php echo _("File editing")." <code>$R/<b>$editfile</b></code><br />"; ?>
 </p>
 <form action="bro_editor.php" method="post"><br />
 <div id="resizer" style="left: 0px; top: 0px; z-index: 54; width: <?php echo $p["editsizex"]*8; ?>px; height: <?php echo $p["editsizey"]*8; ?>px; cursor: auto;"><textarea class="int" style="font-family: <?php echo $p["editor_font"]; ?>; font-size: <?php echo $p["editor_size"]; ?>; width: 90%; height: 90%;" name="texte"><?php
-$bro->content($R,$editfile);
-?></textarea><img src="/admin/icon/winresize.gif" alt="<?php __("ctrl+click or shift+click and drag to resize the editing zone"); ?>" title="<?php __("ctrl+click or shift+click and drag to resize the editing zone"); ?>" height="20" width="20" /></div><br />
+  $failed=false;
+  if (!$bro->content($R,$editfile)) {
+    $failed=true;
+  }
+?></textarea>
+<?php if ($failed) echo "<p class=\"error\">".$err->errstr()."</p>"; ?>
 	<input type="hidden" name="editfile" value="<?php echo str_replace("\"","&quot;",$editfile); ?>" />
 	<input type="hidden" name="R" value="<?php echo str_replace("\"","&quot;",$R); ?>" />
 
@@ -68,10 +78,5 @@ $bro->content($R,$editfile);
 	<input type="submit" class="inb" value="<?php __("Save &amp; Quit"); ?>" name="saveret" />
 	<input type="submit" class="inb" value="<?php __("Quit"); ?>" name="cancel" />
 <br />
-<script type="text/javascript">
-<!--
-SET_DHTML("resizer"+RESIZABLE);
-//-->
-</script>
 </form>
 <?php include_once("foot.php"); ?>

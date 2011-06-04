@@ -71,18 +71,28 @@ class m_hta {
       return false;
     }
     if (!file_exists($absolute)) {
-      mkdir($absolute,00777);
+      @mkdir($absolute,00777);
     }
     if (!file_exists("$absolute/.htaccess")) {
-      touch("$absolute/.htaccess");
-      $file = fopen("$absolute/.htaccess","r+");
+      if (!@touch("$absolute/.htaccess")) {
+	$err->raise("hta",12);
+	return false;
+      }
+      $file = @fopen("$absolute/.htaccess","r+");
+      if (!$file) {
+	$err->raise("hta",12);
+        return false;
+      }
       fseek($file,0);
       $param="AuthUserFile $absolute/.htpasswd\nAuthName \"Zone Protégée\"\nAuthType Basic\nrequire valid-user\n";
       fwrite($file, $param);
       fclose($file);
     }
     if (!file_exists("$absolute/.htpasswd")) {
-      touch("$absolute/.htpasswd");
+      if (!touch("$absolute/.htpasswd")) {
+	$err->raise("hta",12);
+        return false;
+      }
       return true;
     }
     return true;

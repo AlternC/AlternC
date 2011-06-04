@@ -378,6 +378,10 @@ msgstr "L'utilisateur '%s' existe déja pour ce répertoire"
 msgid "err_hta_11"
 msgstr "Veuillez saisir un nom d'utilisateur valide"
 
+#. Cannot write inside the requested folder. Please check your permissions
+msgid "err_hta_12"
+msgstr "Impossible d'écrire dans le dossier concerné. Vérifiez vos permissions."
+
 #. Email Accounts
 msgid "quota_mail"
 msgstr "Comptes emails"
@@ -692,6 +696,22 @@ msgstr "Répertoire ou fichier incorrect !"
 msgid "err_bro_2"
 msgstr "Vous ne pouvez pas déplacer un fichier dans le même répertoire !"
 
+#. Cannot create the requested file. Please check permissions.
+msgid "err_bro_3"
+msgstr "Impossible de créer le fichier demandé. Vérifiez les permissions."
+
+#. Cannot create the requested directory. Please check permissions.
+msgid "err_bro_4"
+msgstr "Impossible de créer le répertoire demandé. Vérifiez les permissions."
+
+#. Cannot edit the requested file. Please check permissions.
+msgid "err_bro_5"
+msgstr "Impossible de modifier le fichier demandé. Vérifiez les permissions."
+
+#. Cannot read the requested file. Please check permissions.
+msgid "err_bro_6"
+msgstr "Impossible de lire le fichier demandé. Vérifiez les permissions."
+
 #. If we manage your DNS <br />You can manage your mails elsewhere if you want 
 #. (MX field).<br />Write <b><code>%s</code></b> in this field if your mail 
 #. must be managed by %s<br />or put the IP address or name of the mail server 
@@ -788,11 +808,6 @@ msgstr "Le mot de passe est obligatoire"
 msgid "err_mysql_21"
 msgstr "Le nom d'utilisateur ne peut pas être vide"
 
-msgid "err_bro_3"
-msgstr ""
-"Vous n'avez pas le droit d'écrire dans ce répertoire. Vérifiez les droits "
-"d'accès !"
-
 # $d,$m,$y
 #  1  2  3 
 msgid "%3$d-%2$d-%1$d"
@@ -836,4 +851,10 @@ msgstr "Entrée DNS MX"
 
 msgid "secondary MX DNS entry"
 msgstr "Entrée DNS MX secondaire"
+
+msgid "Default mail server"
+msgstr "Serveur de mail par défaut"
+
+msgid "Default backup mail server"
+msgstr "Serveur de mail de secours"
 

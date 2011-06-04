@@ -97,16 +97,23 @@ if ($r['dns_action']=='UPDATE') {?>
 <tr><th colspan="2"> </th><th><?php __("Subdomain"); ?></th><th><?php __("Type");?></th><th><?php __("Status")?></th></tr>
 <?php
 $col=1;
+$dt=$dom->domains_type_lst();
 for($i=0;$i<$r["nsub"];$i++) {
 	$col=3-$col;
+
 ?>
 	<tr class="lst<?php echo $col; ?>">
     <?php if ( $r['sub'][$i]['web_action'] =='DELETE') { echo "<td colspan=2 />"; } else { ?>
 		<td class="center">
+    <?php  if (!(!$isinvited && $dt[strtolower($r["sub"][$i]["type"])]["enable"] != "ALL" )) { ?>
 			<div class="ina"><a href="dom_subedit.php?domain=<?php echo urlencode($r["name"]) ?>&amp;sub=<?php  echo urlencode($r["sub"][$i]["name"]) ?>&amp;type=<?php  echo urlencode($r["sub"][$i]["type"]) ?>&amp;value=<?php echo urlencode($r["sub"][$i]['dest'])?>"><img src="images/edit.png" alt="<?php __("Edit"); ?>" /><?php __("Edit"); ?></a></div>
+  <?php } ?>
+
 
 			</td><td class="center">
+    <?php  if (!(!$isinvited && $dt[strtolower($r["sub"][$i]["type"])]["enable"] != "ALL" )) { ?>
 			<div class="ina"><a href="dom_subdel.php?domain=<?php echo urlencode($r["name"]) ?>&amp;sub=<?php  echo urlencode($r["sub"][$i]["name"]) ?>&amp;type=<?php  echo urlencode($r["sub"][$i]["type"]) ?>&amp;value=<?php echo urlencode($r["sub"][$i]['dest'])?>"><img src="images/delete.png" alt="<?php __("Delete"); ?>" /><?php __("Delete"); ?></a></div>
+<?php } ?>
 		</td>
     <?php } // end IF ==DELETE ?>
 		<td><a href="http://<?php ecif($r["sub"][$i]["name"],$r["sub"][$i]["name"]."."); echo $r["name"] ?>" target="_blank"><?php ecif($r["sub"][$i]["name"],$r["sub"][$i]["name"]."."); echo $r["name"] ?></a></td>
@@ -163,7 +170,6 @@ sub_domains_edit($domain);
 <br />
 <?php $mem->show_help("edit_domain"); ?>
 <p>&nbsp;</p>
-<p>&nbsp;</p>
 <!-- *****************************************
 		 modification des parametres dns
  -->
@@ -172,41 +178,38 @@ if (!$r['noerase']) {
 ?>
 
 <hr />
-<h3><?php __("DNS parameters"); ?></h3>
+<h3><?php __("DNS & Email parameters"); ?></h3>
 <form action="dom_editdns.php?domain=<?php echo urlencode($r["name"]) ?>" method="post" id="fdns" name="fdns">
-<table border="1" cellpadding="6" cellspacing="0">
-<tr><td colspan="2"><?php __("Manage the DNS on the server ?"); ?></td></tr>
-<tr>
-								      <td align="center" width="65%"><input type="radio" id="yesdns" class="inc" name="dns" value="1"<?php cbox($r["dns"]); ?> onclick="dnson();" />&nbsp;<label for="yesdns"><?php __("Yes"); ?></label></td>
-   <td align="center" width="35%"><input type="radio" id="nodns" class="inc" name="dns" value="0"<?php cbox(!$r["dns"]); ?> onclick="dnsoff();" />&nbsp;<label for="nodns"><?php __("No"); ?></label></td>
-</tr>
-<tr>
-	<td width="65%" valign="top">
-	<p>
-<?php printf(_("help_dns_mx %s %s"),$L_MX,$L_HOSTING); ?>
-	</p>
-	<label for="mx"><?php __("MX Field"); ?> : </label><input type="text" class="int" name="mx" id="mx" value="<?php if ($r["dns"]) echo $r["mx"]; else echo $L_MX; ?>" <?php if (!$r["dns"]) echo "disabled=\"disabled\""; ?> />
-	</td>
-	<td width="35%" valign="top">
-	<p>
-	<?php __("help_dns_mail"); ?></p>
-<p>
-	 <input type="radio" id="emailon" class="inc" name="email" id="emailon" value="1"<?php cbox($r["mail"]); ?> <?php if ($r["dns"]) echo "disabled=\"disabled\""; ?>/><label for="emailon"><?php __("Yes"); ?></label>
-<br />
-         <input type="radio" id="emailoff" class="inc" name="email" id="emailoff" value="0"<?php cbox(!$r["mail"]); ?> <?php if ($r["dns"]) echo "disabled=\"disabled\""; ?>/><label for="emailoff"><?php __("No"); ?></label>
-</p>
-	<p>																										  <?php __("Warning: If you set this to 'no', all your email accounts and aliases on this domain will be immediately deleted."); ?>
-</p>
-	</td>
 
+<table class="tlist">
+<tr>
+  <td><?php __("Manage the DNS on the server ?"); ?></td>
+  <td> 
+     <input type="radio" id="yesdns" class="inc" name="dns" value="1"<?php cbox($r["dns"]); ?> />&nbsp;<label for="yesdns"><?php __("Yes"); ?></label>
+      </td><td><input type="radio" id="nodns" class="inc" name="dns" value="0"<?php cbox(!$r["dns"]); ?> />&nbsp;<label for="nodns"><?php __("No"); ?></label>
+  </td>
 </tr>
-<tr class="trbtn"><td colspan="2"><input type="submit" class="inb" name="submit" value="<?php __("Submit the changes"); ?>" /></td></tr>
 </table>
+
+<table class="tlist">
+<tr>
+  <td>
+    <?php __("Manage the Emails Addresses of this domain on the server?"); ?>
+  </td>
+  <td> 
+     <input type="radio" id="yesemail" class="inc" name="email" value="1"<?php cbox($r["mail"]); ?> />&nbsp;<label for="yesemail"><?php __("Yes"); ?></label>
+     </td><td><input type="radio" id="noemail" class="inc" name="email" value="0"<?php cbox(!$r["mail"]); ?> />&nbsp;<label for="noemail"><?php __("No"); ?></label>
+  </td>
+</table>
+<div style="padding-left: 30px; padding-bottom: 20px" class="error">    <?php __("Warning: If you set this to 'no', all your email accounts and aliases on this domain will be immediately deleted."); ?></div>
+
+<input type="submit" class="inb" name="submit" value="<?php __("Submit the changes"); ?>" />
 	</form>
 
-<!-- *****************************************
-		 destruction du domaine
- -->
+<p>&nbsp</p>
+<hr />
+<h3><?php __("Domain removal"); ?></h3>
+
 <br />
 <?php printf(_("help_domain_del %s"),$domain); ?><br />
 <form action="dom_dodel.php?domain=<?php echo urlencode($domain) ?>" method="post">
@@ -214,6 +217,8 @@ if (!$r['noerase']) {
 <input type="submit" class="inb" name="detruire" value="<?php printf(_("Delete %s from this server"),$domain); ?>" />
 </p>
 </form>
+
+<br />
 <hr />
 <?php } // noerase ?>
 <script type="text/javascript">

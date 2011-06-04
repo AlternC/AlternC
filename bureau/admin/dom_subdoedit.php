@@ -50,6 +50,14 @@ $value=$$dynamicvar;
 
 $dom->lock();
 
+$dt=$dom->domains_type_lst();
+if (!$isinvited && $dt[strtolower($type)]["enable"] != "ALL" ) {
+  __("This page is restricted to authorized staff");
+  exit();
+}
+
+
+
 $r=$dom->set_sub_domain($domain,$sub,$type,$value, $type_old, $sub_old, $value_old);
 
 $dom->unlock();

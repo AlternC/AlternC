@@ -73,8 +73,8 @@ class m_dom {
   var $type_ipv6 = "IPV6";
   var $type_cname = "CNAME";
   var $type_txt = "TXT";
-  var $type_mx = "DEFMX";
-  var $type_mx2 = "DEFMX2";
+  var $type_defmx = "DEFMX";
+  var $type_defmx2 = "DEFMX2";
 
   var $action_insert = "0";
   var $action_update= "1";
@@ -107,7 +107,7 @@ class m_dom {
     $db->query("select * from domaines_type order by advanced;");
     $this->domains_type_lst=false;
     while ($db->next_record()) {
-      $this->domains_type_lst[] = $db->Record;
+      $this->domains_type_lst[strtolower($db->Record["name"])] = $db->Record;
     }
     return $this->domains_type_lst;
   }
@@ -312,7 +312,7 @@ class m_dom {
   function add_domain($domain,$dns,$noerase=0,$force=0,$isslave=0,$slavedom="") {
     global $db,$err,$quota,$classes,$L_MX,$L_FQDN,$tld,$cuid,$bro;
     $err->log("dom","add_domain",$domain);
-    $mx="1";
+
     // Locked ?
     if (!$this->islocked) {
       $err->raise("dom",3);
@@ -380,7 +380,7 @@ class m_dom {
       return false;
     }
     if ($noerase) $noerase="1"; else $noerase="0";
-    $db->query("insert into domaines (compte,domaine,mx,gesdns,gesmx,noerase,dns_action) values ('$cuid','$domain','$L_MX','$dns','$mx','$noerase','UPDATE');");
+    $db->query("insert into domaines (compte,domaine,gesdns,gesmx,noerase,dns_action) values ('$cuid','$domain','$dns','1','$noerase','UPDATE');");
 
     if ($isslave) {
       $isslave=true;
@@ -408,13 +408,6 @@ class m_dom {
       $this->set_sub_domain($domain, '',     $this->type_url,     'http://www.'.$domain);
       $this->set_sub_domain($domain, 'www',  $this->type_local,   '/'. $domshort);
       $this->set_sub_domain($domain, 'mail', $this->type_webmail, '');
-    }
-
-    if ($mx) {
-      $this->set_sub_domain($domain, '', $this->type_defmx, '');
-      if (! empty($GLOBALS['L_DEFAULT_SECONDARY_MX'])) {
-        $this->set_sub_domain($domain, '', $this->type_defmx2, '');
-      }
     }
 
     // DEPENDANCE :
@@ -845,7 +838,7 @@ class m_dom {
    // TODO : j'ai viré le type action, valider que plus personne ne l'utilise (quatrieme argument)
   function set_sub_domain($dom,$sub,$type,$dest, $type_old=null,$sub_old=null,$value_old=null) {
     global $db,$err,$cuid;
-    $err->log("dom","set_sub_domain",$dom."/".$sub);
+    $err->log("dom","set_sub_domain",$dom."/".$sub."/".$type."/".$dest);
     // Locked ?
     if (!$this->islocked) {
       $err->raise("dom",3);
@@ -939,15 +932,14 @@ class m_dom {
    *
    * @param string $dom Domaine du compte courant que l'on souhaite modifier
    * @param integer $dns Vaut 1 ou 0 pour héberger ou pas le DNS du domaine
-   * @param integer $mx Nom fqdn du serveur mx, si le mx local est précisé,
-   *  on héberge alors les mails du domaine.
+   * @param integer $gesmx Héberge-t-on le emails du domaines sur ce serveur ?
    * @param boolean $force Faut-il passer les checks DNS ou MX ? (admin only)
    * @return boolean appelle $mail->add_dom ou $ma->del_dom si besoin, en
    *  fonction du champs MX. Retourne FALSE si une erreur s'est produite,
    *  TRUE sinon.
    *
    */
-  function edit_domain($dom,$dns,$mx,$force=0) {
+  function edit_domain($dom,$dns,$gesmx,$force=0) {
     global $db,$err,$L_MX,$classes,$cuid;
     $err->log("dom","edit_domain",$dom);
     // Locked ?
@@ -983,55 +975,50 @@ class m_dom {
     }
     if ($dns!="1") $dns="0";
     // On vérifie que des modifications ont bien eu lieu :)
-    if ($r["dns"]==$dns && $r["mx"]==$mx) {
+    if ($r["dns"]==$dns && $r["mail"]==$gesmx) {
       $err->raise("dom",15);
       return false;
     }
-    // MX ?
-    if ($mx==$L_MX)
-      $gesmx="1";
-    else
-      $gesmx="0";
       
     //si gestion mx uniquement, vérification du dns externe
     if ($dns=="0" && $gesmx=="1" && !$force) {
       $vmx = $this->checkmx($dom,$mx);
       if ($vmx == 1) {
         // Aucun champ mx de spécifié sur le dns
-  $err->raise("dom",25);
-  return false;
+	$err->raise("dom",25);
+	return false;
       }
-  
+      
       if ($vmx == 2) {
         // Serveur non spécifié parmi les champx mx
-  $err->raise("dom",25);
-  return false;
+	$err->raise("dom",25);
+	return false;
       }
     }
       
     // OK, des modifs ont été faites, on valide :
     // DEPENDANCE :
-    if ($gesmx && !$r["mail"]) { // on a associé le MX : on cree donc l'entree dans LDAP
+    if ($gesmx && !$r["mail"]) { // on a associé le MX : on cree donc l'entree dans MySQL
       // Lancement de add_dom sur les classes domain_sensitive :
       foreach($classes as $c) {
-  if (method_exists($GLOBALS[$c],"alternc_add_mx_domain")) {
-  $GLOBALS[$c]->alternc_add_mx_domain($dom);
-  }
+	if (method_exists($GLOBALS[$c],"alternc_add_mx_domain")) {
+	  $GLOBALS[$c]->alternc_add_mx_domain($dom);
+	}
       }
     }
     
     if (!$gesmx && $r["mail"]) { // on a dissocié le MX : on détruit donc l'entree dans LDAP
       // Lancement de del_dom sur les classes domain_sensitive :
       foreach($classes as $c) {
-  if (method_exists($GLOBALS[$c],"alternc_del_mx_domain")) {
-    $GLOBALS[$c]->alternc_del_mx_domain($dom);
-  }
+	if (method_exists($GLOBALS[$c],"alternc_del_mx_domain")) {
+	  $GLOBALS[$c]->alternc_del_mx_domain($dom);
+	}
       }
     }
     
     $db->query("UPDATE domaines SET gesdns='$dns', mx='$mx', gesmx='$gesmx' WHERE domaine='$dom'");
     $db->query("UPDATE domaines set dns_action='UPDATE' where domaine='$dom';");
-
+    
     return true;
   } // edit_domain
   
@@ -1229,6 +1216,23 @@ class m_dom {
     return true;
   }
 
+
+  /* ----------------------------------------------------------------- */
+  /**
+   * Declare that a domain's emails are hosted in this server : 
+   * This adds 2 MX entries in this domain (if required)
+   */
+  function alternc_add_mx_domain($domain) {
+    global $err;
+    $err->log("dom","alternc_add_mx_domain");
+    $this->set_sub_domain($domain, '', $this->type_defmx, '');
+    if (! empty($GLOBALS['L_DEFAULT_SECONDARY_MX'])) {
+      $this->set_sub_domain($domain, '', $this->type_defmx2, '');
+    }
+    return true;
+  }
+
+
   /* ----------------------------------------------------------------- */
   /**
    * Efface un compte (tous ses domaines)
@@ -1242,6 +1246,7 @@ class m_dom {
     }
     return true;
   }
+
 
   /* ----------------------------------------------------------------- */
   /**
