@@ -51,40 +51,6 @@ CREATE TABLE IF NOT EXISTS `slaveaccount` (
 PRIMARY KEY ( `login` )
 ) COMMENT = 'Allowed account for slave dns managment';
 
-# 
-# Structure de la table mail_alias
-# 
-
-CREATE TABLE IF NOT EXISTS `mail_alias` (
-  `mail` varchar(255) NOT NULL default '',	# Adresse email LOCALE
-  `alias` varchar(255) NOT NULL default '',	# WRAPPER 
-  PRIMARY KEY  (`mail`)
-) TYPE=MyISAM COMMENT='Mail Alias pour postfix';
-
-
-CREATE TABLE IF NOT EXISTS `mail_users` (
-  `uid` int(10) unsigned NOT NULL default '0',	# UID AlternC de l`utilisateur du mail
-  `alias` varchar(255) NOT NULL default '',	# Alias = Alias intermdiaire (voir domain)
-  `path` varchar(255) NOT NULL default '',	# Chemin vers le mail de l`utilisateur
-  `password` varchar(255) NOT NULL default '',	# Mot de passe crypt 
-  PRIMARY KEY  (`alias`),
-  KEY `path` (`path`),
-  KEY `uid` (`uid`)
-) TYPE=MyISAM COMMENT='Comptes pop, wrappers, alias';
-
-
-CREATE TABLE IF NOT EXISTS `mail_domain` (
-  `mail` varchar(255) NOT NULL default '',	# Adresse email COMPLETE (login@domaine)
-  `alias` text NOT NULL,			# Alias intermdiaire (login_domaine) pour rfrence dans users
-  `uid` int(10) unsigned NOT NULL default '0',	# Numro de l utilisateur (alternc)
-  `pop` tinyint(4) NOT NULL default '0',	# Est-ce un compte pop ? 
-  `type` tinyint(4) NOT NULL default '0',	# Je ne sais plus ...
-  `expiration_date` datetime DEFAULT null, # Pour les mails temporaire
-  PRIMARY KEY  (`mail`),
-  KEY `uid` (`uid`),
-  KEY `pop` (`pop`)
-) TYPE=MyISAM COMMENT='Alias en domaine pour Postfix';
-
 
 
 #
@@ -243,12 +209,13 @@ CREATE TABLE IF NOT EXISTS sessions (
   ts timestamp(14) NOT NULL
 ) TYPE=MyISAM COMMENT='Session actives sur le bureau';
 
-#
-# Structure de la table `sub_domaines`
-#
-# Sous-domaines des membres
+--
+-- Structure de la table `sub_domaines`
+--
+-- Sous-domaines des membres
 
 CREATE TABLE IF NOT EXISTS sub_domaines (
+  id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   compte int(10) unsigned NOT NULL default '0',
   domaine varchar(64) NOT NULL default '',
   sub varchar(100) NOT NULL default '',
@@ -257,9 +224,71 @@ CREATE TABLE IF NOT EXISTS sub_domaines (
   web_action enum ('OK','UPDATE','DELETE') NOT NULL default 'UPDATE',
   web_result varchar(255) not null default '',
   enable enum ('ENABLED', 'ENABLE', 'DISABLED', 'DISABLE') NOT NULL DEFAULT 'ENABLED',
-  PRIMARY KEY  (compte,domaine,sub,type)
+  PRIMARY KEY (id),
+  UNIQUE (compte,domaine,sub,type)
 --  ,FOREIGN KEY (type) REFERENCES (domaines_type)
 ) TYPE=MyISAM;
+
+--
+-- Main address table.
+--
+-- Addresses for domain.
+
+CREATE TABLE `address` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT, -- Technical id.
+  `domain_id` bigint(20) unsigned DEFAULT NULL REFERENCES `sub_domain`(`id`), -- FK to sub_domains.
+  `address` varchar(255) NOT NULL, -- The address.
+  `password` varchar(255) DEFAULT NULL, -- The password associated to the address.
+  `enabled` int(1) unsigned NOT NULL DEFAULT '1', -- Enabled flag.
+  `expire_date` datetime DEFAULT NULL, -- Expiration date, used for temporary addresses.
+  `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- Update date, for technical usage only.
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `address` (`address`)
+) COMMENT = 'This is the main address table. It represents an address as in RFC2822';
+
+--
+-- Mailbox table.
+-- 
+-- Local delivered mailboxes.
+
+CREATE TABLE `mailbox` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT, -- Technical id.
+  `address_id` bigint(20) unsigned NOT NULL REFERENCES `address`(`id`), -- Reference to address.
+  `path` varchar(255) NOT NULL, -- Relative path to the mailbox.
+  `quota` bigint(20) unsigned DEFAULT NULL, -- Quota for this mailbox.
+  `delivery` varchar(255) NOT NULL, -- Delivery transport.
+  `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- Update date, for technical usage only.
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `address_id` (`address_id`)
+) COMMENT = 'Table containing local deliverd mailboxes.';
+
+--
+-- Other recipients.
+--
+-- Other recipients for an address (aliases)
+
+CREATE TABLE `recipient` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT, -- Technical id.
+  `address_id` bigint(20) unsigned NOT NULL REFERENCES `address`(`id`), -- Reference to address
+  `recipients` text NOT NULL, -- Recipients
+  `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- Update date, for technical usage only.
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `address_id` (`address_id`)
+) COMMENT = 'Table containing other recipients (aliases) for an address.';
+
+--
+-- Mailman table.
+--
+-- Table containing mailman addresses
+
+CREATE TABLE `mailman` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT, -- Technical id.
+  `address_id` bigint(20) unsigned NOT NULL REFERENCES `address`(`id`), -- Reference to address
+  `delivery` varchar(255) NOT NULL, -- Delivery transport.
+  `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- Update date, for technical usage only.
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `address_id` (`address_id`)
+) COMMENT = 'Table containing mailman list addresses.';
 
 #
 # Structure de la table `stats2`
