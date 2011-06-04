@@ -63,7 +63,7 @@ class m_hta {
    * @return boolean TRUE if the folder has been protected, or FALSE if an error occurred
    */
   function CreateDir($dir) {
-    global $mem,$bro,$err;
+    global $mem,$bro,$err,$L_ALTERNC_LOC;
     $err->log("hta","createdir",$dir);
     $absolute=$bro->convertabsolute($dir,0);
     if (!$absolute) {
@@ -105,17 +105,17 @@ class m_hta {
    * @return array Array containing user folder list
    */
   function ListDir() {
-    global $err,$mem;
+    global $err,$mem,$L_ALTERNC_LOC;
     $err->log("hta","listdir");
     $sortie=array();
-    $absolute="/var/alternc/html/".substr($mem->user["login"],0,1)."/".$mem->user["login"];
+    $absolute="$L_ALTERNC_LOC/html/".substr($mem->user["login"],0,1)."/".$mem->user["login"];
     exec("find $absolute -name .htpasswd | sort", $sortie);
     if (!count($sortie)) {
       $err->raise("hta",4);
       return false;
     }
     for ($i=0;$i<count($sortie);$i++){
-      preg_match("/^\/var\/alternc\/html\/.\/[^\/]*\/(.*)\/\.htpasswd/", $sortie[$i], $matches);
+      preg_match("/^".addslashes("$L_ALTERNC_LOC/html/")."\/.\/[^\/]*\/(.*)\/\.htpasswd/", $sortie[$i], $matches);
       $r[$i]=$matches[1]."/";
     }
     return $r;
@@ -129,9 +129,9 @@ class m_hta {
    * @return TRUE if the folder is protected, or FALSE if it is not
    */
   function is_protected($dir){
-    global $mem,$err;
+    global $mem,$err,$L_ALTERNC_LOC;
     $err->log("hta","is_protected",$dir);
-    $absolute="/var/alternc/html/".substr($mem->user["login"],0,1)."/".$mem->user["login"]."/$dir";
+    $absolute="$L_ALTERNC_LOC/html/".substr($mem->user["login"],0,1)."/".$mem->user["login"]."/$dir";
     $sortie=array();
     if (file_exists("$absolute/.htpasswd")){
       return true;
@@ -149,9 +149,9 @@ class m_hta {
    * @return array An array containing the list of logins from the .htpasswd file, or FALSE
    */
   function get_hta_detail($dir) {
-    global $mem,$err;
+    global $mem,$err,$L_ALTERNC_LOC;
     $err->log("hta","get_hta_detail");
-    $absolute="/var/alternc/html/".substr($mem->user["login"],0,1)."/".$mem->user["login"]."/$dir";
+    $absolute="$L_ALTERNC_LOC/html/".substr($mem->user["login"],0,1)."/".$mem->user["login"]."/$dir";
     if (file_exists("$absolute/.htaccess")) {
       /*		if (!_reading_htaccess($absolute)) {
 			return false;
