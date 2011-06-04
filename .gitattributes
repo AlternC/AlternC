@@ -397,8 +397,6 @@ etc/alternc/templates/bind/templates/mx.template -text
 etc/alternc/templates/bind/templates/named.template -text
 etc/alternc/templates/bind/templates/slave.template -text
 etc/alternc/templates/bind/templates/zone.template -text
-etc/alternc/templates/courier/authdaemonrc -text
-etc/alternc/templates/courier/authmysqlrc -text
 etc/alternc/templates/default/saslauthd -text
 etc/alternc/templates/dovecot/dovecot-sql.conf -text
 etc/alternc/templates/dovecot/dovecot.conf -text
