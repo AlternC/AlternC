@@ -2,7 +2,7 @@
 # $Id: mysql.sql,v 1.39 2006/02/17 15:15:54 olivier Exp $
 # ----------------------------------------------------------------------
 # AlternC - Web Hosting System
-# Copyright (C) 2006 Le réseau Koumbit Inc.
+# Copyright (C) 2006 Le rseau Koumbit Inc.
 # http://koumbit.org/
 # Copyright (C) 2002 by the AlternC Development Team.
 # http://alternc.org/
@@ -32,11 +32,11 @@
 ######################################################################
 # STRUCTURE DES TABLES D`ALTERNC
 #
-# IMPORTANT: lorsque la structure de ces tables est modifiée, le
-# fichier upgrades/<version>.sql doit être modifié (ou créé!) pour que
-# les installations courantes soient mises à jour. <version> est ici
-# le prochain numéro de version d`AlternC. Voir upgrades/README pour
-# plus de détails.
+# IMPORTANT: lorsque la structure de ces tables est modifie, le
+# fichier upgrades/<version>.sql doit tre modifi (ou cr!) pour que
+# les installations courantes soient mises  jour. <version> est ici
+# le prochain numro de version d`AlternC. Voir upgrades/README pour
+# plus de dtails.
 #########################################################################
 
 CREATE TABLE IF NOT EXISTS `slaveip` (
@@ -64,9 +64,9 @@ CREATE TABLE IF NOT EXISTS `mail_alias` (
 
 CREATE TABLE IF NOT EXISTS `mail_users` (
   `uid` int(10) unsigned NOT NULL default '0',	# UID AlternC de l`utilisateur du mail
-  `alias` varchar(255) NOT NULL default '',	# Alias = Alias intermédiaire (voir domain)
+  `alias` varchar(255) NOT NULL default '',	# Alias = Alias intermdiaire (voir domain)
   `path` varchar(255) NOT NULL default '',	# Chemin vers le mail de l`utilisateur
-  `password` varchar(255) NOT NULL default '',	# Mot de passe crypté 
+  `password` varchar(255) NOT NULL default '',	# Mot de passe crypt 
   PRIMARY KEY  (`alias`),
   KEY `path` (`path`),
   KEY `uid` (`uid`)
@@ -75,8 +75,8 @@ CREATE TABLE IF NOT EXISTS `mail_users` (
 
 CREATE TABLE IF NOT EXISTS `mail_domain` (
   `mail` varchar(255) NOT NULL default '',	# Adresse email COMPLETE (login@domaine)
-  `alias` text NOT NULL,			# Alias intermédiaire (login_domaine) pour référence dans users
-  `uid` int(10) unsigned NOT NULL default '0',	# Numéro de l utilisateur (alternc)
+  `alias` text NOT NULL,			# Alias intermdiaire (login_domaine) pour rfrence dans users
+  `uid` int(10) unsigned NOT NULL default '0',	# Numro de l utilisateur (alternc)
   `pop` tinyint(4) NOT NULL default '0',	# Est-ce un compte pop ? 
   `type` tinyint(4) NOT NULL default '0',	# Je ne sais plus ...
   `expiration_date` datetime DEFAULT null, # Pour les mails temporaire
@@ -90,25 +90,25 @@ CREATE TABLE IF NOT EXISTS `mail_domain` (
 #
 # Structure de la table `browser`
 #
-# Cette table contient les préférences des utilisateurs dans le gestionnaire de fichiers
+# Cette table contient les prfrences des utilisateurs dans le gestionnaire de fichiers
 
 
 CREATE TABLE IF NOT EXISTS browser (
-  uid int(10) unsigned NOT NULL default '0',		# Numéro de l`utilisateur
+  uid int(10) unsigned NOT NULL default '0',		# Numro de l`utilisateur
   editsizex int(10) unsigned NOT NULL default '0',	# Largeur de la zone d`edition du brouteur
   editsizey int(10) unsigned NOT NULL default '0',	# Hauteur de la zone d`edition du brouteur
   listmode tinyint(3) unsigned NOT NULL default '0',	# Mode de listing (1 colonne, 2 colonne, 3 colonne)
   showicons tinyint(4) NOT NULL default '0',		# Faut-il afficher les icones (1/0)
-  downfmt tinyint(4) NOT NULL default '0',		# Format de téléchargement (zip/bz2/tgz/tar.Z)
-  createfile tinyint(4) NOT NULL default '0',		# Que fait-on après création d`un fichier (1/0)
+  downfmt tinyint(4) NOT NULL default '0',		# Format de tlchargement (zip/bz2/tgz/tar.Z)
+  createfile tinyint(4) NOT NULL default '0',		# Que fait-on aprs cration d`un fichier (1/0)
   showtype tinyint(4) NOT NULL default '0',		# Affiche-t-on le type mime ? 
-  editor_font varchar(64) NOT NULL default '',		# Nom de la police dans l`éditeur de fichiers
-  editor_size varchar(8) NOT NULL default '',		# Taille de la police dans l`éditeur de fichiers
-  crff tinyint(4) NOT NULL default '0',			# mémorise le dernier fichier/dossier créé (pour le bouton radio)
+  editor_font varchar(64) NOT NULL default '',		# Nom de la police dans l`diteur de fichiers
+  editor_size varchar(8) NOT NULL default '',		# Taille de la police dans l`diteur de fichiers
+  crff tinyint(4) NOT NULL default '0',			# mmorise le dernier fichier/dossier cr (pour le bouton radio)
   golastdir tinyint(4) NOT NULL default '0',		# Faut-il aller au dernier dossier ou au dossier racine dans le brouteur ?
-  lastdir varchar(255) NOT NULL default '',		# Dernier dossier visité.
+  lastdir varchar(255) NOT NULL default '',		# Dernier dossier visit.
   PRIMARY KEY  (uid)
-) TYPE=MyISAM COMMENT='Préférences du gestionnaire de fichiers';
+) TYPE=MyISAM COMMENT='Prfrences du gestionnaire de fichiers';
 
 
 #
@@ -117,9 +117,9 @@ CREATE TABLE IF NOT EXISTS browser (
 # Cette table contient les demandes de changements de mail pour les membres
 
 CREATE TABLE IF NOT EXISTS chgmail (
-  uid int(10) unsigned NOT NULL default '0',		# Numéro de l`utilisateur
+  uid int(10) unsigned NOT NULL default '0',		# Numro de l`utilisateur
   cookie varchar(20) NOT NULL default '',		# Cookie du mail
-  ckey varchar(6) NOT NULL default '',			# Clé de vérif
+  ckey varchar(6) NOT NULL default '',			# Cl de vrif
   mail varchar(128) NOT NULL default '',		# Nouvel Email
   ts bigint(20) unsigned NOT NULL default '0',		# Timestamp de la demande 
   PRIMARY KEY  (uid)
@@ -131,26 +131,25 @@ CREATE TABLE IF NOT EXISTS chgmail (
 # Contient les bases mysql des membres, + login / pass en clair
 
 CREATE TABLE IF NOT EXISTS db (
-  uid int(10) unsigned NOT NULL default '0',		# Numéro de l`utilisateur
+  uid int(10) unsigned NOT NULL default '0',		# Numro de l`utilisateur
   login varchar(16) NOT NULL default '',		# Nom d`utilisateur mysql
   pass varchar(16) NOT NULL default '',			# Mot de passe mysql
-  db varchar(64) NOT NULL default '',			# Base de données concernée
+  db varchar(64) NOT NULL default '',			# Base de donnes concerne
   bck_mode tinyint(3) unsigned NOT NULL default '0',	# Mode de backup (0/non 1/Daily 2/Weekly)
-  bck_history tinyint(3) unsigned NOT NULL default '0',	# Nombre de backup à conserver ?
+  bck_history tinyint(3) unsigned NOT NULL default '0',	# Nombre de backup  conserver ?
   bck_gzip tinyint(3) unsigned NOT NULL default '0',	# Faut-il compresser les backups ?
-  bck_dir varchar(255) NOT NULL default '',		# Où stocke-t-on les backups sql ?
+  bck_dir varchar(255) NOT NULL default '',		# O stocke-t-on les backups sql ?
   KEY uid (uid)
 ) TYPE=MyISAM COMMENT='Bases MySQL des membres';
 
 #
 # Structure de la table `domaines`
 #
-# Liste des domaines hébergés
+# Liste des domaines hbergs
 
 CREATE TABLE IF NOT EXISTS domaines (
   compte int(10) unsigned NOT NULL default '0',
   domaine varchar(64) NOT NULL default '',
-  mx varchar(64) default NULL,
   gesdns int(1) NOT NULL default '1',
   gesmx int(1) NOT NULL default '1',
   noerase tinyint(4) NOT NULL default '0',
@@ -180,7 +179,7 @@ CREATE TABLE IF NOT EXISTS ftpusers (
 #
 # Structure de la table `local`
 #
-# Champs utilisables par l`hébergeur pour associer des données locales aux membres.
+# Champs utilisables par l`hbergeur pour associer des donnes locales aux membres.
 
 CREATE TABLE IF NOT EXISTS local (
   uid int(10) unsigned NOT NULL default '0',
@@ -195,18 +194,18 @@ CREATE TABLE IF NOT EXISTS local (
 # Liste des membres
 
 CREATE TABLE IF NOT EXISTS membres (
-  uid int(10) unsigned NOT NULL auto_increment,		# Numéro du membre (GID)
+  uid int(10) unsigned NOT NULL auto_increment,		# Numro du membre (GID)
   login varchar(128) NOT NULL default '',		# Nom d`utilisateur
   pass varchar(64) NOT NULL default '',			# Mot de passe
   enabled tinyint(4) NOT NULL default '1',		# Le compte est-il actif ?
   su tinyint(4) NOT NULL default '0',			# Le compte est-il super-admin ?
   mail varchar(128) NOT NULL default '',		# Adresse email du possesseur
-  lastaskpass bigint(20) unsigned default '0',		# Date de dernière demande du pass par mail
+  lastaskpass bigint(20) unsigned default '0',		# Date de dernire demande du pass par mail
   show_help tinyint(4) NOT NULL default '1',		# Faut-il afficher l`aide dans le bureau
   lastlogin datetime NOT NULL default '0000-00-00 00:00:00',	# Date du dernier login
-  lastfail tinyint(4) NOT NULL default '0',		# Nombre d`échecs depuis le dernier login
+  lastfail tinyint(4) NOT NULL default '0',		# Nombre d`checs depuis le dernier login
   lastip varchar(255) NOT NULL default '',		# Nom DNS du client au dernier login
-  creator int(10) unsigned default '0',			# Qui a créé le compte (quel uid admin)
+  creator int(10) unsigned default '0',			# Qui a cr le compte (quel uid admin)
   canpass tinyint(4) default '1',			# L`utilisateur peut-il changer son pass.
   warnlogin tinyint(4) default '0',			# TODO L`utilisateur veut-il recevoir un mail quand on se loggue sur son compte ?
   warnfailed tinyint(4) default '0',			# TODO L`utilisateur veut-il recevoir un mail quand on tente de se logguer sur son compte ?
@@ -226,9 +225,9 @@ CREATE TABLE IF NOT EXISTS membres (
 # Listes des quotas des membres
 
 CREATE TABLE IF NOT EXISTS quotas (
-  uid int(10) unsigned NOT NULL default '0',		# Numéro GID du membre concerné
+  uid int(10) unsigned NOT NULL default '0',		# Numro GID du membre concern
   name varchar(64) NOT NULL default '',			# Nom du quota
-  total bigint(20) unsigned NOT NULL default '0',	# Quota total (maximum autorisé)
+  total bigint(20) unsigned NOT NULL default '0',	# Quota total (maximum autoris)
   PRIMARY KEY  (uid,name)
 ) TYPE=MyISAM COMMENT='Quotas des Membres';
 
@@ -239,7 +238,7 @@ CREATE TABLE IF NOT EXISTS quotas (
 
 CREATE TABLE IF NOT EXISTS sessions (
   sid varchar(32) NOT NULL default '',			# Cookie de session (md5)
-  uid int(10) unsigned NOT NULL default '0',		# UID du membre concerné
+  uid int(10) unsigned NOT NULL default '0',		# UID du membre concern
   ip varchar(40) NOT NULL default '',		# Adresse IP de la connexion
   ts timestamp(14) NOT NULL
 ) TYPE=MyISAM COMMENT='Session actives sur le bureau';
@@ -265,12 +264,12 @@ CREATE TABLE IF NOT EXISTS sub_domaines (
 #
 # Structure de la table `stats2`
 #
-# Liste des jeux de stat brutes demandées sur le serveur
+# Liste des jeux de stat brutes demandes sur le serveur
 
 CREATE TABLE IF NOT EXISTS stats2 (
-  id int(10) unsigned NOT NULL auto_increment,	# Numéro du jeu de stat brut
-  mid int(10) unsigned NOT NULL default '0',	# Numéro de l`utilisateur
-  hostname varchar(255) NOT NULL default '',	# Domaine concerné
+  id int(10) unsigned NOT NULL auto_increment,	# Numro du jeu de stat brut
+  mid int(10) unsigned NOT NULL default '0',	# Numro de l`utilisateur
+  hostname varchar(255) NOT NULL default '',	# Domaine concern
   folder varchar(255) NOT NULL default '',	# Dossier de stockage des logs
   PRIMARY KEY  (id),
   KEY mid (mid)
@@ -280,12 +279,12 @@ CREATE TABLE IF NOT EXISTS stats2 (
 #
 # Structure de la table `defquotas`
 #
-# Quotas par défaut pour les services
+# Quotas par dfaut pour les services
 
 CREATE TABLE IF NOT EXISTS defquotas (
   quota varchar(128),				# Nom du quota
   value bigint(20) unsigned default '0',	# Valeur du quota
-  type  varchar(128) default 'default',		# Type de compte associée à ce quota
+  type  varchar(128) default 'default',		# Type de compte associe  ce quota
   PRIMARY KEY (quota,type)
 ) TYPE=MyISAM;
 
@@ -343,14 +342,14 @@ INSERT IGNORE INTO forbidden_domains VALUES ('yahoo.fr');
 #
 # Structure de la table `tld`
 #
-# Liste des tld autorisés sur ce serveur : 
+# Liste des tld autoriss sur ce serveur : 
 
 CREATE TABLE IF NOT EXISTS tld (
   tld varchar(128) NOT NULL default '',		# lettres du tld (sans le .)
-  mode tinyint(4) NOT NULL default '0',		# Comment est-il autorisé ?
+  mode tinyint(4) NOT NULL default '0',		# Comment est-il autoris ?
   PRIMARY KEY  (tld),
   KEY mode (mode)
-) TYPE=MyISAM COMMENT='TLD autorisés et comment sont-ils autorisés ? ';
+) TYPE=MyISAM COMMENT='TLD autoriss et comment sont-ils autoriss ? ';
 
 #
 # Contenu de la table `tld`
@@ -494,19 +493,19 @@ CREATE TABLE IF NOT EXISTS `domaines_type` (
 PRIMARY KEY ( `name` )
 ) COMMENT = 'Type of domains allowed';
 
-INSERT IGNORE INTO `domaines_type` (name, description, target, entry, compatibility, only_dns, need_dns, advanced) values
-('vhost','Locally hosted', 'DIRECTORY', '%SUB% IN A @@PUBLIC_IP@@', 'txt', false, false, false),
-('url','URL redirection', 'URL', '%SUB% IN A @@PUBLIC_IP@@','txt', true, true, false),
-('ip','IPv4 redirect', 'IP', '%SUB% IN A %TARGET%','url,ip,ipv6,txt,mx,mx2,defmx,defmx2', false, true, false),
-('webmail', 'Webmail access', 'NONE', '%SUB% IN A @@PUBLIC_IP@@', 'txt', false, false, false),
-('ipv6','IPv6 redirect', 'IPV6', '%SUB% IN AAAA %TARGET%','ip,ipv6,webmail,txt,mx,mx2,defmx,defmx2',true, true, true ),
-('cname', 'CNAME DNS entry', 'DOMAIN', '%SUB% CNAME %TARGET%', 'txt,mx,mx2,defmx,defmx2',true, true, true ),
-('txt', 'TXT DNS entry', 'TXT', '%SUB% IN TXT "%TARGET%"','vhost,url,ip,webmail,ipv6,cname,txt,mx,mx2,defmx,defmx2',true, true, true),
-('mx', 'MX DNS entry', 'DOMAIN', '%SUB% IN MX 5 %TARGET%', 'vhost,url,ip,webmail,ipv6,cname,txt,mx,mx2',true, false, true),
-('mx2', 'secondary MX DNS entry', 'DOMAIN', '%SUB% IN MX 10 %TARGET%', 'vhost,url,ip,webmail,ipv6,cname,txt,mx,mx2',true, false, true),
-('defmx', 'Default mail server', 'NONE', '%SUB% IN MX 5 @@DEFAULT_MX@@', 'vhost,url,ip,webmail,ipv6,cname,txt,defmx2',true, false, true),
-('defmx2', 'Default backup mail server', 'DOMAIN', '%SUB% IN MX 10 @@DEFAULT_SECONDARY_MX@@', 'vhost,url,ip,webmail,ipv6,cname,txt,defmx',true, false, true),
-('panel', 'AlternC panel access', 'NONE', '%SUB% IN A @@PUBLIC_IP@@', 'vhost,url,ip,webmail,ipv6,cname,txt,mx,mx2',true, false, true)
+INSERT IGNORE INTO `domaines_type` (name, description, target, entry, compatibility, only_dns, need_dns, advanced, enable) values
+('vhost','Locally hosted', 'DIRECTORY', '%SUB% IN A @@PUBLIC_IP@@', 'txt', false, false, false, 'ALL'),
+('url','URL redirection', 'URL', '%SUB% IN A @@PUBLIC_IP@@','txt', true, true, false, 'ALL'),
+('ip','IPv4 redirect', 'IP', '%SUB% IN A %TARGET%','url,ip,ipv6,txt,mx,mx2,defmx,defmx2', false, true, false, 'ALL'),
+('webmail', 'Webmail access', 'NONE', '%SUB% IN A @@PUBLIC_IP@@', 'txt', false, false, false, 'ALL'),
+('ipv6','IPv6 redirect', 'IPV6', '%SUB% IN AAAA %TARGET%','ip,ipv6,webmail,txt,mx,mx2,defmx,defmx2',true, true, true , 'ALL'),
+('cname', 'CNAME DNS entry', 'DOMAIN', '%SUB% CNAME %TARGET%', 'txt,mx,mx2,defmx,defmx2',true, true, true , 'ALL'),
+('txt', 'TXT DNS entry', 'TXT', '%SUB% IN TXT "%TARGET%"','vhost,url,ip,webmail,ipv6,cname,txt,mx,mx2,defmx,defmx2',true, true, true, 'ALL'),
+('mx', 'MX DNS entry', 'DOMAIN', '%SUB% IN MX 5 %TARGET%', 'vhost,url,ip,webmail,ipv6,cname,txt,mx,mx2',true, false, true, 'ALL'),
+('mx2', 'secondary MX DNS entry', 'DOMAIN', '%SUB% IN MX 10 %TARGET%', 'vhost,url,ip,webmail,ipv6,cname,txt,mx,mx2',true, false, true, 'ALL'),
+('defmx', 'Default mail server', 'NONE', '%SUB% IN MX 5 @@DEFAULT_MX@@', 'vhost,url,ip,webmail,ipv6,cname,txt,defmx2',true, false, true, 'ADMIN'),
+('defmx2', 'Default backup mail server', 'DOMAIN', '%SUB% IN MX 10 @@DEFAULT_SECONDARY_MX@@', 'vhost,url,ip,webmail,ipv6,cname,txt,defmx',true, false, true, 'ADMIN'),
+('panel', 'AlternC panel access', 'NONE', '%SUB% IN A @@PUBLIC_IP@@', 'vhost,url,ip,webmail,ipv6,cname,txt,mx,mx2',true, false, true, 'ALL')
 ;
 
 

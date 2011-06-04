@@ -19,36 +19,39 @@ CREATE TABLE IF NOT EXISTS `domaines_type` (
 PRIMARY KEY ( `name` )
 ) COMMENT = 'Type of domains allowed';
 
-INSERT IGNORE INTO `domaines_type` (name, description, target, entry, compatibility, only_dns, need_dns, advanced) values
-('vhost','Locally hosted', 'DIRECTORY', '%SUB% IN A @@PUBLIC_IP@@', 'txt', false, false, false),
-('url','URL redirection', 'URL', '%SUB% IN A @@PUBLIC_IP@@','txt', true, true, false),
-('ip','IPv4 redirect', 'IP', '%SUB% IN A %TARGET%','url,ip,ipv6,txt,mx,mx2,defmx,defmx2', false, true, false),
-('webmail', 'Webmail access', 'NONE', '%SUB% IN A @@PUBLIC_IP@@', 'txt', false, false, false),
-('ipv6','IPv6 redirect', 'IPV6', '%SUB% IN AAAA %TARGET%','ip,ipv6,webmail,txt,mx,mx2,defmx,defmx2',true, true, true ),
-('cname', 'CNAME DNS entry', 'DOMAIN', '%SUB% CNAME %TARGET%', 'txt,mx,mx2,defmx,defmx2',true, true, true ),
-('txt', 'TXT DNS entry', 'TXT', '%SUB% IN TXT "%TARGET%"','vhost,url,ip,webmail,ipv6,cname,txt,mx,mx2,defmx,defmx2',true, true, true),
-('mx', 'MX DNS entry', 'DOMAIN', '%SUB% IN MX 5 %TARGET%', 'vhost,url,ip,webmail,ipv6,cname,txt,mx,mx2',true, false, true),
-('mx2', 'secondary MX DNS entry', 'DOMAIN', '%SUB% IN MX 10 %TARGET%', 'vhost,url,ip,webmail,ipv6,cname,txt,mx,mx2',true, false, true),
-('defmx', 'Default mail server', 'NONE', '%SUB% IN MX 5 @@DEFAULT_MX@@', 'vhost,url,ip,webmail,ipv6,cname,txt,defmx2',true, false, true),
-('defmx2', 'Default backup mail server', 'DOMAIN', '%SUB% IN MX 10 @@DEFAULT_SECONDARY_MX@@', 'vhost,url,ip,webmail,ipv6,cname,txt,defmx',true, false, true),
-('panel', 'AlternC panel access', 'NONE', '%SUB% IN A @@PUBLIC_IP@@', 'vhost,url,ip,webmail,ipv6,cname,txt,mx,mx2',true, false, true)
+INSERT IGNORE INTO `domaines_type` (name, description, target, entry, compatibility, only_dns, need_dns, advanced, enable) values
+('vhost','Locally hosted', 'DIRECTORY', '%SUB% IN A @@PUBLIC_IP@@', 'txt', false, false, false, 'ALL'),
+('url','URL redirection', 'URL', '%SUB% IN A @@PUBLIC_IP@@','txt', true, true, false, 'ALL'),
+('ip','IPv4 redirect', 'IP', '%SUB% IN A %TARGET%','url,ip,ipv6,txt,mx,mx2,defmx,defmx2', false, true, false, 'ALL'),
+('webmail', 'Webmail access', 'NONE', '%SUB% IN A @@PUBLIC_IP@@', 'txt', false, false, false, 'ALL'),
+('ipv6','IPv6 redirect', 'IPV6', '%SUB% IN AAAA %TARGET%','ip,ipv6,webmail,txt,mx,mx2,defmx,defmx2',true, true, true , 'ALL'),
+('cname', 'CNAME DNS entry', 'DOMAIN', '%SUB% CNAME %TARGET%', 'txt,mx,mx2,defmx,defmx2',true, true, true , 'ALL'),
+('txt', 'TXT DNS entry', 'TXT', '%SUB% IN TXT "%TARGET%"','vhost,url,ip,webmail,ipv6,cname,txt,mx,mx2,defmx,defmx2',true, true, true, 'ALL'),
+('mx', 'MX DNS entry', 'DOMAIN', '%SUB% IN MX 5 %TARGET%', 'vhost,url,ip,webmail,ipv6,cname,txt,mx,mx2',true, false, true, 'ALL'),
+('mx2', 'secondary MX DNS entry', 'DOMAIN', '%SUB% IN MX 10 %TARGET%', 'vhost,url,ip,webmail,ipv6,cname,txt,mx,mx2',true, false, true, 'ALL'),
+('defmx', 'Default mail server', 'NONE', '%SUB% IN MX 5 @@DEFAULT_MX@@', 'vhost,url,ip,webmail,ipv6,cname,txt,defmx2',true, false, true, 'ADMIN'),
+('defmx2', 'Default backup mail server', 'DOMAIN', '%SUB% IN MX 10 @@DEFAULT_SECONDARY_MX@@', 'vhost,url,ip,webmail,ipv6,cname,txt,defmx',true, false, true, 'ADMIN'),
+('panel', 'AlternC panel access', 'NONE', '%SUB% IN A @@PUBLIC_IP@@', 'vhost,url,ip,webmail,ipv6,cname,txt,mx,mx2',true, false, true, 'ALL')
 ;
 
 -- Changing standby use
-alter table domaines add column dns_action enum ('OK','UPDATE','DELETE') NOT NULL default 'UPDATE';
-alter table domaines add column dns_result varchar(255) not null default '';
-alter table sub_domaines add column web_action enum ('OK','UPDATE','DELETE') NOT NULL default 'UPDATE';
-alter table sub_domaines add column web_result varchar(255) not null default '';
-alter table sub_domaines add column enable enum ('ENABLED', 'ENABLE', 'DISABLED', 'DISABLE') NOT NULL DEFAULT 'ENABLED';
-drop table sub_domaines_standby;
-drop table domaines_standby;
+ALTER TABLE domaines ADD COLUMN dns_action enum ('OK','UPDATE','DELETE') NOT NULL default 'UPDATE';
+ALTER TABLE domaines ADD COLUMN dns_result varchar(255) not null default '';
+ALTER TABLE sub_domaines ADD COLUMN web_action enum ('OK','UPDATE','DELETE') NOT NULL default 'UPDATE';
+ALTER TABLE sub_domaines ADD COLUMN web_result varchar(255) not null default '';
+ALTER TABLE sub_domaines ADD COLUMN enable enum ('ENABLED', 'ENABLE', 'DISABLED', 'DISABLE') NOT NULL DEFAULT 'ENABLED';
+DROP TABLE sub_domaines_standby;
+DROP TABLE domaines_standby;
 
-update sub_domaines set type='VHOST' where type='0'; -- We decide to drop massvhost.
-update sub_domaines set type='URL' where type='1';
-update sub_domaines set type='IP' where type='2';
-update sub_domaines set type='WEBMAIL' where type='3';
-update sub_domaines set type='IPV6' where type='4';
-update sub_domaines set type='CNAME' where type='5';
-update sub_domaines set type='TXT' where type='6';
-update sub_domaines set web_action='UPDATE';
+UPDATE sub_domaines SET type='VHOST' WHERE type='0'; -- We decide to drop massvhost.
+UPDATE sub_domaines SET type='URL' WHERE type='1';
+UPDATE sub_domaines SET type='IP' WHERE type='2';
+UPDATE sub_domaines SET type='WEBMAIL' WHERE type='3';
+UPDATE sub_domaines SET type='IPV6' WHERE type='4';
+UPDATE sub_domaines SET type='CNAME' WHERE type='5';
+UPDATE sub_domaines SET type='TXT' WHERE type='6';
+UPDATE sub_domaines SET web_action='UPDATE';
+
+-- not needed : it's now a subdomain with defmx and/or defmx2 type (this type is admin-only) :
+ALTER TABLE `domaines` DROP `mx` ;
 

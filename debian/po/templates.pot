@@ -7,11 +7,12 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: anarcat@koumbit.org\n"
-"POT-Creation-Date: 2011-05-22 20:29+0200\n"
+"Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
+"POT-Creation-Date: 2011-06-04 10:33+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -321,6 +322,20 @@ msgstr ""
 msgid ""
 "AlternC will assign this hostname as the MX record for all the domains it "
 "hosts. It is usually better be left alone."
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../templates:17001
+msgid "The default Backup MX to assign to new domains:"
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../templates:17001
+msgid ""
+"AlternC will assign this hostname as the Backup MX record for all the "
+"domains it hosts. Don't set it if you don't know what it is about."
 msgstr ""
 
 #. Type: string
