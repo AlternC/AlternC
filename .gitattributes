@@ -200,6 +200,7 @@ bureau/admin/images/orig/plus.png -text
 bureau/admin/images/orig/quota.png -text
 bureau/admin/images/orig/stat.png -text
 bureau/admin/images/password.png -text
+bureau/admin/images/passwordstrength.jpg -text
 bureau/admin/images/plus.png -text
 bureau/admin/images/quota.png -text
 bureau/admin/images/stat.png -text
@@ -227,6 +228,7 @@ bureau/admin/js/jquery_ui/js/jquery-ui-1.8.10.custom.min.js -text
 bureau/admin/js/jquery_ui/js/jquery.ui.datepicker-de.js -text
 bureau/admin/js/jquery_ui/js/jquery.ui.datepicker-es.js -text
 bureau/admin/js/jquery_ui/js/jquery.ui.datepicker-fr.js -text
+bureau/admin/js/passwordStrengthMeter.js -text
 bureau/admin/js/prototype.js -text
 bureau/admin/js/rico.js -text
 bureau/admin/js/wz_dragdrop.js -text
@@ -296,6 +298,7 @@ bureau/admin/sta2_doedit_raw.php -text
 bureau/admin/sta2_edit_raw.php -text
 bureau/admin/sta2_list.php -text
 bureau/admin/stats_members.php -text
+bureau/admin/styles/passwordStrengthMeter.css -text
 bureau/admin/styles/style.css -text
 bureau/admin/template.php -text
 bureau/admin/trash_dateselect.php -text

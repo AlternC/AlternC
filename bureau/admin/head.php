@@ -35,6 +35,7 @@ if (!$charset) $charset="iso-8859-1";
 <head>
 <title>Bureau</title>
 <link rel="stylesheet" href="styles/style.css" type="text/css" />
+<link rel="stylesheet" href="styles/passwordStrengthMeter.css" type="text/css" />
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $charset; ?>" />
 <script type="text/javascript" src="js/alternc.js"></script>
 <script type="text/javascript" src="js/wz_dragdrop.js"></script>
@@ -46,6 +47,7 @@ if (file_exists($lang_date_picker))
   echo "<script src=\"$lang_date_picker\" type=\"text/javascript\"></script>";
 ?>
 <link href="js/jquery_ui/css/smoothness/jquery-ui-1.8.10.custom.css" rel="stylesheet" type="text/css" />
+<script src="js/passwordStrengthMeter.js" type="text/javascript"></script>
 </head>
 <body>
 <?

@@ -74,9 +74,9 @@ class m_mail {
       $db->query("select * from domaines where compte='$cuid' AND gesmx=1 order by domaine asc;");
       $this->domains=array();
       if ($db->num_rows()>0) {
-	while ($db->next_record()) {
-	  $this->domains[]=$db->f("domaine");
-	}
+        while ($db->next_record()) {
+          $this->domains[]=$db->f("domaine");
+        }
       }
     }
     return $this->domains;
@@ -117,23 +117,23 @@ class m_mail {
     global $err,$cuid,$db;
     $err->log("mail","enum_doms_mails",$dom);
     if($letter == "@")
-	$letter = "";
+	    $letter = "";
     else
-	$letter .= "%";
+      $letter .= "%";
     $db->query("SELECT mail,pop,alias,expiration_date FROM mail_domain WHERE mail LIKE '".addslashes($letter)."@".addslashes($dom)."' AND uid='$cuid' AND type=0;");
     $res=array(); $i=0;
     while ($db->next_record()) {
       if ($db->f("pop")) { 
-	$size=0;
+	      $size=0;
         $r=mysql_query("SELECT size FROM size_mail WHERE alias='".str_replace("@","_",$db->f("mail"))."';");
         list($size)=@mysql_fetch_array($r);
         $size=$size*1024;
       } else $size=0;
       if ($db->f("pop")) {
-	$login=str_replace("@","_",$db->f("mail"));
-	$account=str_replace($login,"",$db->f("alias")); 
+      	$login=str_replace("@","_",$db->f("mail"));
+	      $account=str_replace($login,"",$db->f("alias")); 
       } else {
-	$account=$db->f("alias");
+	      $account=$db->f("alias");
       }
       $res[]=array("mail" => $db->f("mail"), "pop" => $db->f("pop"), 
 		   "alias"=>$account,"size"=>$size, "expiration_date"=>$db->f("expiration_date"));
@@ -161,9 +161,9 @@ class m_mail {
       $al = strtolower($a["pop"]);
       $bl = strtolower($b["pop"]);
       if ($al == $bl) {
-	$al = strtolower($a["mail"]);
-	$bl = strtolower($b["mail"]);
-	if ($al == $bl) return 0;
+        $al = strtolower($a["mail"]);
+        $bl = strtolower($b["mail"]);
+        if ($al == $bl) return 0;
       }
       return ($al > $bl) ? +1 : -1;
     }
@@ -209,7 +209,7 @@ class m_mail {
   function available($mail) {
     global $err,$db,$cuid;
     $err->log("mail","available",$mail);
-    $db->query("SELECT mail FROM mail_domain WHERE mail='$mail';");
+    $db->query("SELECT address FROM address WHERE address='$mail';");
     if ($db->next_record()) {
       return false;
     } else {
@@ -258,25 +258,21 @@ class m_mail {
    * @param string $pass New password
    * @return boolean TRUE if the password has been changed, FALSE if an error occurred.
    */
-  function change_password($mail,$pass) {
+  function change_password($mail,$pass) { // NEW OK
     global $err,$db,$cuid;
     $err->log("mail","change_password",$mail);
     $t=explode("@",$mail);
     $email=$t[0];
     $dom=$t[1];
-    $db->query("SELECT mail,alias,pop FROM mail_domain WHERE mail='$mail' AND uid='$cuid';");
+    $db->query("SELECT address FROM address WHERE address='$mail' AND uid='$cuid';");
     if (!$db->next_record()) {
       $err->raise("mail",3,$mail);
-      return false;
-    }
-    if (!$db->f("pop")) {
-      $err->raise("mail",15);
       return false;
     }
     // Check this password against the password policy using common API : 
     if (is_callable(array($admin,"checkPolicy"))) {
       if (!$admin->checkPolicy("pop",$email."@".$dom,$pass)) {
-	return false; // The error has been raised by checkPolicy()
+	      return false; // The error has been raised by checkPolicy()
       }
     }
     if (!$this->_updatepop($email,$dom,$pass)) {
@@ -318,17 +314,17 @@ class m_mail {
     if ($alias){
       $a=explode("\n",$alias);
       if (count($a)>0) {
-	reset($a);
-	for ($i=0;$i<count($a);$i++){
-	  $a[$i]=trim($a[$i]); // remove spaces
-	  if ($a[$i]){
-	    if(checkmail($a[$i])>1){
-	      $err->raise("mail",14);
-	      return false;
-	    }
-	  }
-	  $account[]=$a[$i];
-	}
+	      reset($a);
+	      for ($i=0;$i<count($a);$i++){
+	        $a[$i]=trim($a[$i]); // remove spaces
+	        if ($a[$i]){
+	          if(checkmail($a[$i])>1){
+	            $err->raise("mail",14);
+	            return false;
+	          }
+	        }
+	        $account[]=$a[$i];
+	      }
       }
     }
 
@@ -341,14 +337,14 @@ class m_mail {
     // When we CREATE a pop account, we MUST give a password
     if ($pop=="1" && $oldpop!=1) {
       if (!$pass) {
-	$err->raise("mail",4);
-	return false;
+	      $err->raise("mail",4);
+	      return false;
       }
       // Check this password against the password policy using common API : 
       if (is_callable(array($admin,"checkPolicy"))) {
-	if (!$admin->checkPolicy("pop",$email."@".$dom,$pass)) {
-	  return false; // The error has been raised by checkPolicy()
-	}
+	      if (!$admin->checkPolicy("pop",$email."@".$dom,$pass)) {
+	        return false; // The error has been raised by checkPolicy()
+	      }
       }
     }
 
@@ -357,23 +353,23 @@ class m_mail {
 
     if ($pop=="1" && $oldpop!=1) { /* POP Creation */
       if (!$this->_createpop($email,$dom,$pass)) {
-	return false;
+	      return false;
       }
     }
     if ($pop!="1" && $oldpop==1) { /* POP Destruction */
       if (!$this->_deletepop($email,$dom)) {
-	return false;
+	      return false;
       }
     }
     if ($pop=="1" && $oldpop==1 && $pass!="") { /* POP Account Edition */
       // Check this password against the password policy using common API : 
       if (is_callable(array($admin,"checkPolicy"))) {
-	if (!$admin->checkPolicy("pop",$email."@".$dom,$pass)) {
-	  return false; // The error has been raised by checkPolicy()
-	}
+	      if (!$admin->checkPolicy("pop",$email."@".$dom,$pass)) {
+	        return false; // The error has been raised by checkPolicy()
+	      }
       }
       if (!$this->_updatepop($email,$dom,$pass)) {
-	return false;
+	      return false;
       }
     }
     return true;
@@ -396,8 +392,8 @@ class m_mail {
     if ($pop) $pop="1"; else $pop="0";
     if ($mail || $dom==$L_FQDN) {
       if (!checkloginmail($mail)) {
-	$err->raise("mail",13);
-	return false;
+	      $err->raise("mail",13);
+	      return false;
       }
     }
 
@@ -409,9 +405,9 @@ class m_mail {
     if ($pop=="1") {
       // Check this password against the password policy using common API : 
       if (is_callable(array($admin,"checkPolicy"))) {
-	if (!$admin->checkPolicy("pop",$mail."@".$dom,$pass)) {
-	  return false; // The error has been raised by checkPolicy()
-	}
+	      if (!$admin->checkPolicy("pop",$mail."@".$dom,$pass)) {
+	        return false; // The error has been raised by checkPolicy()
+      	}
       }
     }
 
@@ -422,17 +418,17 @@ class m_mail {
     if ($alias){
       $a=explode("\n",$alias);
       if (count($a)>0) {
-	reset($a);
-	for ($i=0;$i<count($a);$i++){
-	  $a[$i]=trim($a[$i]);
-	  if ($a[$i]){
-	    if(checkmail($a[$i])>1){
-	      $err->raise("mail",14);
-	      return false;
-	    }
-	  }
-	  $account[]=$a[$i];
-	}
+	      reset($a);
+	      for ($i=0;$i<count($a);$i++){
+	        $a[$i]=trim($a[$i]);
+	        if ($a[$i]){
+	          if(checkmail($a[$i])>1){
+	            $err->raise("mail",14);
+	            return false;
+	          }
+	        }
+	        $account[]=$a[$i];
+	      }
       }
     }
 
@@ -458,7 +454,7 @@ class m_mail {
 
     if ($pop=="1") {
       if (!$this->_createpop($mail,$dom,$pass))
-	return false;
+	      return false;
     }
     return true;
   }
@@ -487,7 +483,7 @@ class m_mail {
 
     if ($pop=="1") {
       if (!$this->_deletepop($mdom,$dom)) {
-	return false;
+	      return false;
       }
     }
     return true;
@@ -601,9 +597,9 @@ class m_mail {
     fputs($f,"email_address=$mail@$dom\nchosen_theme=default_theme.php\n");
     if ($g) {
       while ($s=fgets($g,1024)) {
-	if (substr($s,0,14)!="email_address=" && substr($s,0,13)!="chosen_theme=") {
-	  fputs($f,$s);
-	}
+	      if (substr($s,0,14)!="email_address=" && substr($s,0,13)!="chosen_theme=") {
+	        fputs($f,$s);
+      	}
       }
       fclose($g);
     }
@@ -622,12 +618,12 @@ class m_mail {
    * @return boolean TRUE si le compte pop a bien été modifié, FALSE si une erreur s'est produite.
    * @access private
    */
-  function _updatepop($mail,$dom,$pass) {
+  function _updatepop($mail,$dom,$pass) { // NEW OK
     global $err,$cuid,$db;
     $err->log("mail","_updatepop",$mail."@".$dom);
     $m=substr($mail,0,1);
     $gecos=$mail;
-    $db->query("UPDATE mail_users SET password='"._md5cr($pass)."' WHERE ( alias='". $mail."_".$dom."' OR alias='". $mail."@".$dom."' ) AND uid='$cuid';");
+    $db->query("UPDATE address SET password='"._md5cr($pass)."' WHERE address='". $mail."@".$dom."' AND uid='$cuid';");
     return true;
   }
 
@@ -679,10 +675,10 @@ class m_mail {
     if (is_array($a)) {
       reset($a);
       for($i=0;$i<$a["count"];$i++) {
-	$val=$a[$i];
-	if (!$this->del_mail($val["mail"])) {
-	  $err->raise("mail",5);
-	}
+	      $val=$a[$i];
+	      if (!$this->del_mail($val["mail"])) {
+	        $err->raise("mail",5);
+	      }
       }
     }
     /* Effacement du domaine himself */
