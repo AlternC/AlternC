@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
-"POT-Creation-Date: 2011-06-04 10:33+0200\n"
+"POT-Creation-Date: 2011-06-04 11:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -213,7 +213,7 @@ msgstr ""
 #. Type: select
 #. Description
 #: ../templates:11001
-msgid "The way backup rotation is executated"
+msgid "The way backup rotation is executed"
 msgstr ""
 
 #. Type: select
