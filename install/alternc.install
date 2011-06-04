@@ -40,10 +40,6 @@ if [ -e /etc/bind/named.conf ]; then
     CONFIG_FILES="$CONFIG_FILES etc/bind/templates/zone.template
                   etc/bind/templates/named.template etc/bind/named.conf.options"
 fi
-if [ -e /etc/courier/authdaemonrc ]; then
-    CONFIG_FILES="$CONFIG_FILES etc/courier/authdaemonrc
-                  etc/courier/authmysqlrc"
-fi
 if [ -d /etc/postfix ]; then
     CONFIG_FILES="$CONFIG_FILES etc/postfix/myalias.cf etc/postfix/myrelay.cf
                   etc/postfix/mydomain.cf etc/postfix/mygid.cf
@@ -284,11 +280,6 @@ done < $postfix_conf
 OLDDESTINATION=`postconf mydestination | awk -F '=' '{print $2}'`
 echo "$OLDDESTINATION" | grep -q -v "$FQDN" && postconf -e "mydestination = $FQDN, $OLDDESTINATION"
  
-if [ -e /etc/courier/authmysqlrc ] ; then
-    chown root:root /etc/courier/authmysqlrc
-    chmod 640 /etc/courier/authmysqlrc
-fi
-
 if [ -e /etc/proftpd.conf ] ; then
     chmod 640 /etc/proftpd/proftpd.conf
 fi
@@ -326,9 +317,7 @@ tar -zcf "$INSTALLED_CONFIG_TAR" -C / $CONFIG_FILES
 #######################################################################
 # Reload services
 #
-for service in postfix bind9 courier-authdaemon \
-               courier-imap courier-imap-ssl courier-pop courier-pop-ssl \
-               cron proftpd; do
+for service in postfix bind9 dovecot cron proftpd; do
     invoke-rc.d $service force-reload || true
 done
 

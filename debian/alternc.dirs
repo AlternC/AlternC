@@ -4,7 +4,6 @@ etc/alternc/templates/apache2
 etc/alternc/functions_hosting
 etc/bind
 etc/bind/templates
-etc/courier
 etc/cron.d
 etc/phpmyadmin
 etc/postfix
