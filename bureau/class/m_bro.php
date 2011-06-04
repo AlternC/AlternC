@@ -330,7 +330,10 @@ class m_bro {
     $file=ssla($file);
     $absolute=$this->convertabsolute($dir."/".$file,0);
     if ($absolute && !file_exists($absolute)) {
-      mkdir($absolute,00777);
+      if (!@mkdir($absolute,00777)) {
+	$err->raise("bro",4);
+	return false;
+      }
       $db->query("UPDATE browser SET crff=1 WHERE uid='$cuid';");
       return true;
     } else {
@@ -355,7 +358,10 @@ class m_bro {
       return false;
     }
     if (!file_exists($absolute)) {
-      touch($absolute);
+      if (!@touch($absolute)) {
+	$err->raise("bro",3);
+	return false;
+      }
     }
     $db->query("UPDATE browser SET crff=0 WHERE uid='$cuid';");
     return true;
@@ -433,10 +439,7 @@ class m_bro {
       return false;
     }
 
-    // FIXME: check that we don't have a huge security issue here ...
-    // If the destionation (new) doesn't have an absolute path, give it the prefix (old) from the first file found
     if ($new[0] != '/') {
-      // Ex: settings.php will become /var/alternc/html/f/foo/www/example.org/drupal-6.10/sites/default/settings.php
       $new = $old . '/' . $new;
     } else {
       $new = $this->convertabsolute($new,0);
@@ -464,9 +467,10 @@ class m_bro {
    * @param string $R dossier dans lequel se trouve les fichiers à renommer.
    * @param array of string $old Ancien nom des fichiers
    * @param array of string $new Nouveau nom des fichiers
+   * @param $verbose boolean shall we 'echo' what we did ?
    * @return boolean TRUE si les fichiers ont été renommés, FALSE si une erreur s'est produite.
    */
-  function ChangePermissions($R,$d,$perm) {
+  function ChangePermissions($R,$d,$perm,$verbose=true) {
     global $err;
     $absolute=$this->convertabsolute($R,0);
     if (!$absolute) {
@@ -476,7 +480,6 @@ class m_bro {
     for ($i=0;$i<count($d);$i++) {
       $d[$i]=ssla($d[$i]); // strip slashes if needed
       if (!strpos($d[$i],"/")) {  // caractère / interdit dans le nom du fichier
-	// @rename($absolute."/".$old[$i],$absolute."/".$old[$i].$alea);
 	$m = fileperms($absolute."/". $d[$i]);
 
 	// pour l'instant on se limite a "write" pour owner, puisque c'est le seul
@@ -488,7 +491,9 @@ class m_bro {
 	}
 	$m = $m | ($perm[$i]['w'] ? 128 : 0); // 0600
 	chmod($absolute."/".$d[$i], $m);
-	echo "chmod " . sprintf('%o', $m) . " file, was " . sprintf('%o', fileperms($absolute."/". $d[$i])). " -- " . $perm[$i]['w'];
+	if ($verbose) {
+	  echo "chmod " . sprintf('%o', $m) . " file, was " . sprintf('%o', fileperms($absolute."/". $d[$i])). " -- " . $perm[$i]['w'];
+	}
       }
     }
 
@@ -550,16 +555,18 @@ class m_bro {
     }
     $file = escapeshellarg($file);
     $dest = escapeshellarg($dest);
-#TODO new version of tar supports `tar xf ...` so there is no
-#     need to specify the compression format
+    // TODO new version of tar supports `tar xf ...` so there is no
+    //     need to specify the compression format
     exec("tar -xzf $file -C $dest", $void, $ret);
     if ($ret) {
-      #print "tgz extraction failed, moving on to tbz\n";
       exec("tar -xjf $file -C $dest", $void, $ret);
     }
     if ($ret) {
       $cmd = "unzip -o $file -d $dest";
-      #print "tbz extraction failed, moving on to zip: $cmd\n";
+      exec($cmd, $void, $ret);
+    }
+    if ($ret) {
+      $cmd = "gunzip $file";
       exec($cmd, $void, $ret);
     }
     if ($ret) {
@@ -611,64 +618,6 @@ class m_bro {
   function CopyOneFile($src, $dest)
   {
     global $err;
-
-    /*
-     * XXX: Disabled functionality until audit is completed
-     */
-    /*
-    if (substr($src, 0, 7) == "http://") {
-      $filename = basename($src);
-      $extractdir = tempnam("/tmp", "brouteur");
-      unlink($extractdir);
-      mkdir($extractdir);
-
-      if (!$http = @fopen($src, "rb")) {
-        // Try to get a handle on $http with fsockopen instead
-//FIXME we'd better use a real http getter function/class (such as Octopuce_Http_Client (ask Benjamin)
-        ereg('^http://([^/]+)(/.*)$', $src, $eregs);
-        $hostname = $eregs[1];
-        $path = $eregs[2];
-        $http = @fsockopen($hostname, 80);
-        @fputs($http, "GET $path HTTP/1.1\nHost: $hostname\n\n");
-      }
-      if ($http) {
-        // Save the bits
-        $f = fopen("$extractdir/$filename", "wb");
-        while (!feof($http)) {
-          $bin = fgets($http, 16384);
-          fwrite($f, $bin);
-//FIXME if (!trim($bin)) break;
-        }
-        fclose($f);
-        fclose($http);
-      } else {
-        // Dammit, try with wget than
-        exec("wget -q '$src' -O '$extractdir/$filename'", $void, $ret);
-        if ($ret) {
-          $error = _("Unable to download the web application's package.");
-          return false;
-        }
-      }
-
-      // Now extract that package
-      if (!brouteur_extract("$extractdir/$filename", $extractdir)) {
-        $error = _("Unable to extract the files");
-        return false;
-      }
-      unlink("$extractdir/$filename");
-
-      // Corrupt $src since we want to copy $extractdir/packagename
-      $hd = opendir($extractdir);
-      while ($file = readdir($hd)) {
-        if ($file != "." && $file != "..") {
-          $src = "$extractdir/$file";
-          break;
-        }
-      }
-    }
-    */
-
-    // Last step // Copy -R
     $src = escapeshellarg($src);
     $dest = escapeshellarg($dest);
     exec("cp -Rpf $src $dest", $void, $ret);
@@ -718,10 +667,19 @@ class m_bro {
     if (!strpos($file,"/")) {
       $absolute.="/".$file;
       if (file_exists($absolute)) {
-	$content = @file($absolute);
-	for($i=0;$i<count($content);$i++) {
-	  echo str_replace("<","&lt;",str_replace("&","&amp;",$content[$i]));
+	$f=fopen($absolute,"rb");
+	if ($f) {
+	  while ($s=fgets($f,1024)) {
+	    echo str_replace("<","&lt;",str_replace("&","&amp;",$s));
+	  }
+	  fclose($f);
+	} else {
+	  $err->raise("bro",6);
+	  return false;
 	}
+      } else {
+	$err->raise("bro",6);
+	return false;
       }
     } else {
       $err->raise("bro",1);
@@ -783,6 +741,7 @@ class m_bro {
     }
   }
 
+
   /**
    * Return a HTML snippet representing an extraction function only if the mimetype of $name is supported
    */
@@ -810,22 +769,24 @@ class m_bro {
     return false;
   }
 
+
+  /* ------------------------------------------------------------------ */
+  /** Echoes the content of the file $file located in directory $R
+   */
   function content_send($R,$file) {
     global $err;
     $absolute=$this->convertabsolute($R,0);
     if (!strpos($file,"/")) {
       $absolute.="/".$file;
       if (file_exists($absolute)) {
-	$content = @file($absolute);
-	for($i=0;$i<count($content);$i++) {
-	  echo stripslashes($content[$i]);
-	}
+	readfile($absolute);
       }
     } else {
       $err->raise("bro",1);
       return false;
     }
   }
+
 
   /* ----------------------------------------------------------------- */
   /** Sauve le fichier $file dans le dossier $R avec pour contenu $texte
@@ -847,6 +808,9 @@ class m_bro {
 	if ($f) {
 	  fputs($f,$texte,strlen($texte));
 	  fclose($f);
+	} else {
+	  $err->raise("bro",5);
+	  return false;
 	}
       }
     } else {
@@ -855,59 +819,62 @@ class m_bro {
     }
   }
 
+
   /* ----------------------------------------------------------------- */
   /** Echo d'un flux .tar.Z contenant tout le contenu du dossier $dir
    * @param string $dir dossier à dumper, relatif à la racine du compte du membre.
    * @return void NE RETOURNE RIEN, et il faut Quitter le script immédiatement après
    */
- function DownloadZ($dir="") {
-    global $mem;
+  function DownloadZ($dir="") {
+    global $mem,$L_ALTERNC_LOC;
     header("Content-Disposition: attachment; filename=".$mem->user["login"].".Z");
     header("Content-Type: application/x-Z");
     header("Content-Transfer-Encoding: binary");
     $d=escapeshellarg(".".$this->convertabsolute($dir,1));
     set_time_limit(0);
-    passthru("/bin/tar -cZ -C /var/alternc/html/".substr($mem->user["login"],0,1)."/".$mem->user["login"]."/ $d");
+    passthru("/bin/tar -cZ -C ".$L_ALTERNC_LOC."/html/".substr($mem->user["login"],0,1)."/".$mem->user["login"]."/ $d");
   }
+
 
   /* ----------------------------------------------------------------- */
   /** Echo d'un flux .tgz contenant tout le contenu du dossier $dir
    * @param string $dir dossier à dumper, relatif à la racine du compte du membre.
    * @return void NE RETOURNE RIEN, et il faut Quitter le script immédiatement après
    */
- function DownloadTGZ($dir="") {
-    global $mem;
+  function DownloadTGZ($dir="") {
+    global $mem,$L_ALTERNC_LOC;
     header("Content-Disposition: attachment; filename=".$mem->user["login"].".tgz");
     header("Content-Type: application/x-tgz");
     header("Content-Transfer-Encoding: binary");
     $d=escapeshellarg(".".$this->convertabsolute($dir,1));
     set_time_limit(0);
-    passthru("/bin/tar -cz -C /var/alternc/html/".substr($mem->user["login"],0,1)."/".$mem->user["login"]."/ $d");
+    passthru("/bin/tar -cz -C ".$L_ALTERNC_LOC."/html/".substr($mem->user["login"],0,1)."/".$mem->user["login"]."/ $d");
   }
-
-
+  
+  
   /* ----------------------------------------------------------------- */
   /** Echo d'un flux .tar.bz2 contenant tout le contenu du dossier $dir
    * @param string $dir dossier à dumper, relatif à la racine du compte du membre.
    * @return void NE RETOURNE RIEN, et il faut Quitter le script immédiatement après
    */
- function DownloadTBZ($dir="") {
-    global $mem;
+  function DownloadTBZ($dir="") {
+    global $mem,$L_ALTERNC_LOC;
     header("Content-Disposition: attachment; filename=".$mem->user["login"].".tar.bz2");
     header("Content-Type: application/x-bzip2");
     header("Content-Transfer-Encoding: binary");
     $d=escapeshellarg(".".$this->convertabsolute($dir,1));
     set_time_limit(0);
-    passthru("/bin/tar -cj -C /var/alternc/html/".substr($mem->user["login"],0,1)."/".$mem->user["login"]."/ $d");
+    passthru("/bin/tar -cj -C ".$L_ALTERNC_LOC."/html/".substr($mem->user["login"],0,1)."/".$mem->user["login"]."/ $d");
   }
 
+  
   /* ----------------------------------------------------------------- */
   /** Echo d'un flux .ZIP contenant tout le contenu du dossier $dir
    * @param string $dir dossier à dumper, relatif à la racine du compte du membre.
    * @return void NE RETOURNE RIEN, et il faut Quitter le script immédiatement après
    */
- function DownloadZIP($dir="") {
-    global $mem;
+  function DownloadZIP($dir="") {
+    global $mem,$L_ALTERNC_LOC;
     header("Content-Disposition: attachment; filename=".$mem->user["login"].".zip");
     header("Content-Type: application/x-zip");
     header("Content-Transfer-Encoding: binary");
@@ -916,6 +883,7 @@ class m_bro {
     passthru("/usr/bin/zip -r - $d");
   }
 
+  
   /* ----------------------------------------------------------------- */
   /** Fonction de tri perso utilisé par filelist.
    * @access private
@@ -925,6 +893,7 @@ class m_bro {
     if ($b["type"] && !$a["type"]) return -1;
     return $a["name"]>$b["name"];
   }
+
 
   /* ----------------------------------------------------------------- */
   /** Efface $file et tous ses sous-dossiers s'il s'agit d'un dossier

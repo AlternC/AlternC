@@ -674,6 +674,22 @@ msgstr "File or folder name is incorrect"
 msgid "err_bro_2"
 msgstr "You cannot move or copy a file to the same folder"
 
+#. Cannot create the requested file. Please check permissions.
+msgid "err_bro_3"
+msgstr "Cannot create the requested file. Please check permissions."
+
+#. Cannot create the requested directory. Please check permissions.
+msgid "err_bro_4"
+msgstr "Cannot create the requested directory. Please check permissions."
+
+#. Cannot edit the requested file. Please check permissions.
+msgid "err_bro_5"
+msgstr "Cannot edit the requested file. Please check permissions."
+
+#. Cannot read the requested file. Please check permissions.
+msgid "err_bro_6"
+msgstr "Cannot read the requested file. Please check permissions."
+
 #. If we manage your DNS <br />You can manage your mails elsewhere if you want 
 #. (MX field).<br />Write <b><code>%s</code></b> in this field if your mail 
 #. must be managed by %s<br />or put the IP address or name of the mail server 
@@ -780,11 +796,6 @@ msgstr "The password is mandatory"
 
 msgid "err_mysql_21"
 msgstr "The username cannot be empty"
-
-msgid "err_bro_3"
-msgstr ""
-"You don't have the right to write into this folder. Please check the access "
-"rights."
 
 # $d,$m,$y,$h,$i,$hh,$am
 #  1  2  3  4  5  6   7
