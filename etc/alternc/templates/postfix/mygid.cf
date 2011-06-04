@@ -6,6 +6,5 @@ user = %%dbuser%%
 password = %%dbpwd%%
 hosts =%%dbhost%%
 dbname = %%dbname%%
-table = mail_users
-select_field = uid
-where_field = alias
+query = select compte from domaines join address on address.domain_id = domaines.id join mailbox on mailbox.address_id = address.id where address.address='%s'
+

@@ -6,7 +6,5 @@ user = %%dbuser%%
 password = %%dbpwd%%
 hosts =%%dbhost%%
 dbname = %%dbname%%
-table = mail_users
-select_field = path
-where_field = alias
+select concat(path, '/Maildir/') from mailbox join address on address.id = mailbox.address_id where address.address='%s'
 

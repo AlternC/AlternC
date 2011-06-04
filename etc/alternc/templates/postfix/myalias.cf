@@ -6,7 +6,5 @@ user = %%dbuser%%
 password = %%dbpwd%%
 hosts =%%dbhost%%
 dbname = %%dbname%%
-table = mail_alias
-select_field = alias
-where_field = mail
+query = select concat(if(isnull(mailbox.id), '', concat(address.address, '\n')), recipient.recipient) from recipient join address on address.id = recipient.address_id left outer join mailbox on mailbox.address_id = address.id where address.address='%s';
 
