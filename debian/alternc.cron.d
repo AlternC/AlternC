@@ -15,3 +15,5 @@
 # You may put this computing every week only or on your filer on busy services.
 0 2 * * *       www-data 	/usr/lib/alternc/spoolsize.php
 
+# Once a week at 7am, optimise the AlternC database
+0 1 * * 7   alterncpanel  /usr/lib/alternc/alternc-dboptimize
