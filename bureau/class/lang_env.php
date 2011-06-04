@@ -9,6 +9,9 @@ function update_locale($langpath) {
       $locales[$mat[1]]=$mat[1];
     }
   }
+  if (!count($locales)) {
+    $locales=array("en_US"=>"en_US");
+  }
   return $locales;
 }
 
@@ -22,6 +25,11 @@ $langpath = bindtextdomain("alternc", "/var/alternc/bureau/locales");
 
 // Create or update a locale.php file if it is outdated.
 $locales = update_locale($langpath);
+
+// Default to en_US : 
+if (!isset($_SERVER["HTTP_ACCEPT_LANGUAGE"])) {
+  $_SERVER["HTTP_ACCEPT_LANGUAGE"]="en_US";
+}
 
 if (!(isset($lang))) {  // Use the browser first preferred language
   $lang=strtolower(substr(trim($_SERVER["HTTP_ACCEPT_LANGUAGE"]),0,5));
@@ -39,7 +47,7 @@ if (! isset($locales[$lang])) { // Requested language not found in locales
   }
 }
 
-if (!isset($locales[$lang])) $lang=$locales[0]; 
+if (!isset($locales[$lang])) list($lang)=each($locales);
 
 if (isset($setlang) && isset($lang)) {
   setcookie("lang",$lang);

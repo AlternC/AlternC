@@ -173,7 +173,7 @@ class m_quota {
     global $err,$db,$cuid;
     $err->log("quota","setquota",$ressource."/".$size);
     if (floatval($size)==0) $size="0";
-    if ($this->disk[$ressource]) {
+    if (isset($this->disk[$ressource])) {
       // It's a disk resource, update it with shell command
       exec("/usr/lib/alternc/quota_edit $cuid $size");
       // Now we check that the value has been written properly : 
