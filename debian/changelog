@@ -1,4 +1,4 @@
-alternc (1.0~rc3) stable; urgency=low
+alternc (1.0) stable; urgency=low
   * Major patch
     * Web & DNS file generation rebuild from scratch
     * Drop of apache 1 support
@@ -20,7 +20,7 @@ alternc (1.0~rc3) stable; urgency=low
     * Use iana.org to have whois server list up to date
     * Preseeding compatibility : don't ask for questions when already set
 
- -- Benjamin Sonntag <benjamin@alternc.org>  Sat, 04 June 2011 10:15:30 +0200
+ -- Benjamin Sonntag <benjamin@alternc.org> Sat, 4 Jun 2011 18:18:18 +0200
 
 alternc (1.0~rc1) stable; urgency=low
 
