@@ -10,7 +10,7 @@ Standards-Version: 3.9.1
 Package: alternc
 Architecture: all
 Pre-depends: debconf (>= 0.5.00) | debconf-2.0
-Depends: debianutils (>= 1.13.1), apache2-mpm-prefork, libapache2-mod-php5, courier-ssl, courier-imap-ssl, courier-pop-ssl, php5-mysql, phpmyadmin, postfix, proftpd-mod-mysql, proftpd-basic, squirrelmail, squirrelmail-locales, postfix-tls, bind9, wget, rsync, quota, courier-authmysql | courier-authlib-mysql, ca-certificates, locales, perl-suid, perl, postfix-mysql, wwwconfig-common, sasl2-bin, fam, libsasl2-modules, php5-cli, lockfile-progs (>= 0.1.9), gettext (>= 0.10.40-5), adduser, mysql-client, dnsutils, bash
+Depends: debianutils (>= 1.13.1), apache2-mpm-prefork, libapache2-mod-php5, courier-ssl, courier-imap-ssl, courier-pop-ssl, php5-mysql, phpmyadmin, postfix, proftpd-mod-mysql, proftpd-basic, squirrelmail, squirrelmail-locales, postfix-tls, bind9, wget, rsync, quota, courier-authmysql | courier-authlib-mysql, ca-certificates, locales, perl-suid, perl, postfix-mysql, wwwconfig-common, sasl2-bin, fam, libsasl2-modules, php5-cli, lockfile-progs (>= 0.1.9), gettext (>= 0.10.40-5), adduser, mysql-client, dnsutils, ${misc:Depends}
 Recommends: mysql-server
 Conflicts: alternc-admintools, alternc-awstats (<< 1.0), alternc-mailman (<< 2.0), alternc-procmail (<< 2.0), alternc-munin (<< 1.0), alternc-changepass (<< 1.0)
 Provides: alternc-admintools
@@ -36,12 +36,10 @@ Description-fr.UTF-8: Suite logicielle d'hébergement mutualisé pour Debian
  .
  Pour plus d'informations, consultez http://www.alternc.com/
 
-
-
 Package: alternc-slave
 Architecture: all
 Pre-depends: debconf (>= 0.5.00) | debconf-2.0
-Depends: debianutils (>= 1.13.1), apache2-mpm-prefork, libapache2-mod-php5, courier-ssl, courier-imap-ssl, courier-pop-ssl, php5-mysql, phpmyadmin, postfix, proftpd-mod-mysql, proftpd-basic, squirrelmail, postfix-tls, bind9, wget, rsync, quota, courier-authmysql | courier-authlib-mysql, ca-certificates, locales, perl-suid, perl, postfix-mysql, wwwconfig-common, sasl2-bin, libsasl2-modules, php5-cli, lockfile-progs (>= 0.1.9), gettext (>= 0.10.40-5), adduser, mysql-client, sudo
+Depends: debianutils (>= 1.13.1), apache2-mpm-prefork, libapache2-mod-php5, courier-ssl, courier-imap-ssl, courier-pop-ssl, php5-mysql, phpmyadmin, postfix, proftpd-mod-mysql, proftpd-basic, squirrelmail, postfix-tls, bind9, wget, rsync, quota, courier-authmysql | courier-authlib-mysql, ca-certificates, locales, perl-suid, perl, postfix-mysql, wwwconfig-common, sasl2-bin, libsasl2-modules, php5-cli, lockfile-progs (>= 0.1.9), gettext (>= 0.10.40-5), adduser, mysql-client, sudo, ${misc:Depends}
 Conflicts: alternc-admintools, alternc-awstats (<= 0.3.2), alternc-webalizer (<= 0.9.4), alternc
 Provides: alternc
 Replaces: alternc
