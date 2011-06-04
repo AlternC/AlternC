@@ -376,6 +376,10 @@ msgstr "The user '%s' already exist for this folder"
 msgid "err_hta_11"
 msgstr "Please enter a valid username"
 
+#. Cannot write inside the requested folder. Please check your permissions
+msgid "err_hta_12"
+msgstr "Cannot write inside the requested folder. Please check your permissions."
+
 #. Email Accounts
 msgid "quota_mail"
 msgstr "Email Accounts"

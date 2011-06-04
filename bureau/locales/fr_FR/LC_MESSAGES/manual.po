@@ -378,6 +378,10 @@ msgstr "L'utilisateur '%s' existe déja pour ce répertoire"
 msgid "err_hta_11"
 msgstr "Veuillez saisir un nom d'utilisateur valide"
 
+#. Cannot write inside the requested folder. Please check your permissions
+msgid "err_hta_12"
+msgstr "Impossible d'écrire dans le dossier concerné. Vérifiez vos permissions."
+
 #. Email Accounts
 msgid "quota_mail"
 msgstr "Comptes emails"
