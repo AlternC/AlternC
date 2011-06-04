@@ -12,19 +12,31 @@ Architecture: all
 Pre-depends: debconf (>= 0.5.00) | debconf-2.0
 Depends: debianutils (>= 1.13.1), apache2-mpm-prefork, libapache2-mod-php5, courier-ssl, courier-imap-ssl, courier-pop-ssl, php5-mysql, phpmyadmin, postfix, proftpd-mod-mysql, proftpd-basic, squirrelmail, squirrelmail-locales, postfix-tls, bind9, wget, rsync, quota, courier-authmysql | courier-authlib-mysql, ca-certificates, locales, perl-suid, perl, postfix-mysql, wwwconfig-common, sasl2-bin, fam, libsasl2-modules, php5-cli, lockfile-progs (>= 0.1.9), gettext (>= 0.10.40-5), adduser, mysql-client, dnsutils, bash
 Recommends: mysql-server
-Conflicts: alternc-admintools, alternc-awstats (<= 0.3.2), alternc-webalizer (<= 0.9.4)
+Conflicts: alternc-admintools, alternc-awstats (< 1.0), alternc-webalizer (<= 0.9.4), alternc-mailman (< 2.0)
 Provides: alternc-admintools
 Replaces: alternc-admintools
 Suggests: alternc-awstats, alternc-mailman, alternc-changepass, amavisd-new, clamav-daemon, spamassassin, pop-before-smtp, magpierss, zip, ncompress, bzip2
-Description: hosting software managment suite for Debian
- Hosting software suite based on Valentin Lacambre's altern.org French hosting
- service. It uses Apache, Postfix, Sympa, MySQL and PHP to allow a web-based
- managment of services, such as web hosting, mail hosting, mailing lists,
- virtual hosts, and so on.
+Description: Hosting software managment suite for Debian
+ AlternC is a mutualized hosting software manager for Linux.
+ It allows you to manage your websites,	  domains, ftp, emails, aliases,
+ web statistics, mailing-lists, jabber accounts, etc.
  .
  AlternC is mainly a PHP based administration interface and some conf files
- for the softwares used by it. More information at http://www.alternc.org/
-Homepage: http://www.alternc.org/
+ for the softwares used by it. 
+ .
+ More information at http://www.alternc.com/
+Homepage: http://www.alternc.com/
+Description-fr.UTF-8: Suite logicielle d'hébergement mutualisé pour Debian
+ AlternC est un logiciel d'hébergement mutualisé pour serveur Linux.
+ Il permet de gérer les	sites web, domaines, ftp, emails, alias,
+ statistiques web, listes de discussions, comptes jabber, etc.
+ .
+ AlternC est essentiellement une interface d'administration en PHP et
+ quelques fichiers de configuration pour les logiciels qu'il utilise.
+ .
+ Pour plus d'informations, consultez http://www.alternc.com/
+
+
 
 Package: alternc-slave
 Architecture: all
@@ -35,17 +47,31 @@ Conflicts: alternc-admintools, alternc-awstats (<= 0.3.2), alternc-webalizer (<=
 Provides: alternc
 Replaces: alternc
 Suggests: alternc-awstats, alternc-mailman, alternc-changepass, amavisd-new, clamav-daemon, spamassassin, pop-before-smtp, magpierss, zip, ncompress, bzip2
-Description: hosting software managment suite for Debian, frontend web node
- Hosting software suite based on Valentin Lacambre's altern.org French hosting
- service. It uses Apache, Postfix, Sympa, MySQL and PHP to allow a web-based
- managment of services, such as web hosting, mail hosting, mailing lists,
- virtual hosts, and so on.
+Description: Hosting software managment suite for Debian
+ AlternC is a mutualized hosting software manager for Linux.
+ It allows you to manage your websites,	  domains, ftp, emails, aliases,
+ web statistics, mailing-lists, jabber accounts, etc.
  .
  AlternC is mainly a PHP based administration interface and some conf files
- for the softwares used by it. More information at http://www.alternc.org/
+ for the softwares used by it. 
  .
  This package is designed for frontend nodes in a load balancing setup, where
  the /var/alternc directory is not touched and managed over NFS.
-Homepage: http://www.alternc.org/
+ . 
+ More information at http://www.alternc.com/
+Homepage: http://www.alternc.com/
+Description-fr.UTF-8: Suite logicielle d'hébergement mutualisé pour Debian
+ AlternC est un logiciel d'hébergement mutualisé pour serveur Linux.
+ Il permet de gérer les	sites web, domaines, ftp, emails, alias,
+ statistiques web, listes de discussions, comptes jabber, etc.
+ .
+ AlternC est essentiellement une interface d'administration en PHP et
+ quelques fichiers de configuration pour les logiciels qu'il utilise.
+ .
+ Ce paquet permet de construire un noeud frontal dans une configuration avec
+ répartiteur de charge, ou le dossier /var/alternc n'est pas modifié et géré
+ à travers NFS.
+ .
+ Pour plus d'informations, consultez http://www.alternc.com/
 
 
