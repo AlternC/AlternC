@@ -788,10 +788,6 @@ msgid "err_admin_18"
 msgstr "-- Only administrators can access this page !! --"
 
 #, fuzzy
-msgid "err_hta_12"
-msgstr "An incompatible .htaccess file exists in this folder."
-
-#, fuzzy
 msgid "err_mail_16"
 msgstr "ldap connexion impossible, please try again later."
 

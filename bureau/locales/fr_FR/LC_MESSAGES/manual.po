@@ -796,9 +796,6 @@ msgstr ""
 "selon votre politique de mot de passe (il n'en contient que %s), merci de "
 "vérifier"
 
-msgid "err_hta_12"
-msgstr "Le fichier .htpasswd n'existe pas"
-
 msgid "err_mail_16"
 msgstr "Ce compte esclave MX existe déjà"
 
