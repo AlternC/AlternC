@@ -41,6 +41,9 @@ $H=getenv("HTTP_HOST");
 if (!isset($restrictip)) {
   $restrictip=1;
 }
+if (!$charset) $charset="UTF-8";
+@header("Content-Type: text/html; charset=$charset");
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
@@ -48,7 +51,7 @@ if (!isset($restrictip)) {
 <title>AlternC Desktop</title>
 <link rel="stylesheet" href="styles/style.css" type="text/css" />
 <script type="text/javascript" src="js/alternc.js"></script>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $charset; ?>" />
 </head>
 <body>
 
