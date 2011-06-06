@@ -126,23 +126,25 @@ for($i=0;$i<$r["nsub"];$i++) {
 }
 ?></td>
 		<td><?php 
-      if ( $r['sub'][$i]['web_action'] !='DELETE') { 
-        switch ($r['sub'][$i]['enable']) {
-          case 'ENABLED':
-            __("Enabled");
-            echo "<br/><a href='dom_substatus.php?domain=".urlencode($r["name"])."&amp;sub=".urlencode($r["sub"][$i]["name"])."&amp;type=".urlencode($r["sub"][$i]["type"])."&amp;value=".urlencode($r["sub"][$i]['dest'])."&status=disable'>";__("Disable");echo "</a>";
-            break;
-          case 'ENABLE':
-            __("Activation pending");
-            break;
-          case 'DISABLED':
-            __("Disabled");
-            echo "<br/><a href='dom_substatus.php?domain=".urlencode($r["name"])."&amp;sub=".urlencode($r["sub"][$i]["name"])."&amp;type=".urlencode($r["sub"][$i]["type"])."&amp;value=".urlencode($r["sub"][$i]['dest'])."&status=enable'>";__("Enable");echo "</a>";
-            break;
-          case 'DISABLE':
-            __("Desactivation pending");
-            break;
-        }
+			if (!(!$isinvited && $dt[strtolower($r["sub"][$i]["type"])]["enable"] != "ALL" )) {
+				if ( $r['sub'][$i]['web_action'] !='DELETE') { 
+					switch ($r['sub'][$i]['enable']) {
+						case 'ENABLED':
+							__("Enabled");
+							echo "<br/><a href='dom_substatus.php?domain=".urlencode($r["name"])."&amp;sub=".urlencode($r["sub"][$i]["name"])."&amp;type=".urlencode($r["sub"][$i]["type"])."&amp;value=".urlencode($r["sub"][$i]['dest'])."&status=disable'>";__("Disable");echo "</a>";
+							break;
+						case 'ENABLE':
+							__("Activation pending");
+							break;
+						case 'DISABLED':
+							__("Disabled");
+							echo "<br/><a href='dom_substatus.php?domain=".urlencode($r["name"])."&amp;sub=".urlencode($r["sub"][$i]["name"])."&amp;type=".urlencode($r["sub"][$i]["type"])."&amp;value=".urlencode($r["sub"][$i]['dest'])."&status=enable'>";__("Enable");echo "</a>";
+							break;
+						case 'DISABLE':
+							__("Desactivation pending");
+							break;
+					}
+				}
       }?></td>
 		<td><?php 
       switch ($r['sub'][$i]['web_action']) {
