@@ -42,7 +42,7 @@ if ($mem->checkRight()) { ?>
 <li><a href="quotas_users.php?mode=4"><span style="color: red;"><?php __("User Quotas"); ?></span></a></li>
 <?php if ($cuid == 2000) { ?>
 <li><a href="adm_panel.php"><span style="color: red;"><?php __("Admin Control Panel"); ?></span></a></li>
-<li><a href="/altenrc-sql/?server=2"><span style="color: red;"><?php __("General PhpMyAdmin"); ?></span></a></li>
+<li><a href="/alternc-sql/?server=2"><span style="color: red;"><?php __("General PhpMyAdmin"); ?></span></a></li>
 <?php } ?>
 </ul>
 </div>
