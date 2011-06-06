@@ -533,7 +533,7 @@ INSERT IGNORE INTO `domaines_type` (name, description, target, entry, compatibil
 ('mx', 'MX DNS entry', 'DOMAIN', '%SUB% IN MX 5 %TARGET%', 'vhost,url,ip,webmail,ipv6,cname,txt,mx,mx2',true, false, true, 'ALL'),
 ('mx2', 'secondary MX DNS entry', 'DOMAIN', '%SUB% IN MX 10 %TARGET%', 'vhost,url,ip,webmail,ipv6,cname,txt,mx,mx2',true, false, true, 'ALL'),
 ('defmx', 'Default mail server', 'NONE', '%SUB% IN MX 5 @@DEFAULT_MX@@', 'vhost,url,ip,webmail,ipv6,cname,txt,defmx2',true, false, true, 'ADMIN'),
-('defmx2', 'Default backup mail server', 'DOMAIN', '%SUB% IN MX 10 @@DEFAULT_SECONDARY_MX@@', 'vhost,url,ip,webmail,ipv6,cname,txt,defmx',true, false, true, 'ADMIN'),
+('defmx2', 'Default backup mail server', 'NONE', '%SUB% IN MX 10 @@DEFAULT_SECONDARY_MX@@', 'vhost,url,ip,webmail,ipv6,cname,txt,defmx',true, false, true, 'ADMIN'),
 ('panel', 'AlternC panel access', 'NONE', '%SUB% IN A @@PUBLIC_IP@@', 'vhost,url,ip,webmail,ipv6,cname,txt,mx,mx2',true, false, true, 'ALL')
 ;
 
