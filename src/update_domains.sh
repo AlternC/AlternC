@@ -19,9 +19,12 @@ umask 022
 LOCK_FILE="$ALTERNC_LOC/bureau/cron.lock"
 OLDIFS="$IFS"
 NEWIFS=" "
-RELOAD_ZONES=""
-RELOAD_WEB=false
+RELOAD_ZONES="$(mktemp /tmp/alternc_reload_zones.XXXX)"
+RELOAD_WEB="$(mktemp /tmp/alternc_reload_web.XXXX)"
 B="µµ§§" # Strange letters to make split in query
+
+echo "" > "$RELOAD_ZONES"
+echo "" > "$RELOAD_WEB"
 
 # Somes check before start operations
 if [ `id -u` -ne 0 ]; then
@@ -54,7 +57,7 @@ mysql_query "update sub_domaines sd, domaines d set sd.web_action = 'DELETE' whe
 for sub in $( mysql_query "select concat_ws('$B',lower(sd.type), if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine)) from sub_domaines sd where web_action ='DELETE';") ; do
     host_delete ${sub/$B/ }
     mysql_query "delete from sub_domaines where concat_ws('$B',lower(type), if(length(sub)>0,concat_ws('.',sub,domaine),domaine)) = '$sub' and web_action ='DELETE';"
-    RELOAD_WEB=true
+    echo 1 > "$RELOAD_WEB"
 done
 
 # Sub domaines we want to update
@@ -67,21 +70,21 @@ where sd.web_action ='UPDATE'
 ;" | while read type domain valeur ; do
     host_create "$type" "$domain" "$valeur"
     mysql_query "update sub_domaines sd set web_action='OK',web_result='$?' where lower(sd.type)='$type' and if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine)='$domain' and sd.valeur='$valeur'; "
-    RELOAD_WEB=true
+    echo 1 > "$RELOAD_WEB"
 done
 
 # Domaine to enable
 mysql_query "select concat_ws('$IFS',lower(sd.type),if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine),sd.valeur) from sub_domaines sd where sd.enable ='ENABLE' ;"|while read type domain valeur ; do
     host_enable "$type" "$domain" "$valeur"
     mysql_query "update sub_domaines sd set enable='ENABLED' where lower(sd.type)='$type' and if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine)='$domain' and sd.valeur='$valeur';"
-    RELOAD_WEB=true
+    echo 1 > "$RELOAD_WEB"
 done
 
 # Domains to disable
 mysql_query "select concat_ws('$IFS',lower(sd.type),if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine),sd.valeur) from sub_domaines sd where sd.enable ='DISABLE' ;"|while read type domain valeur ; do
     host_disable "$type" "$domain" "$valeur"
     mysql_query "update sub_domaines sd set enable='DISABLED' where lower(sd.type)='$type' and if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine)='$domain' and sd.valeur='$valeur';"
-    RELOAD_WEB=true
+    echo 1 > "$RELOAD_WEB"
 done
 
 # Domains we do not want to be the DNS serveur anymore :
@@ -90,7 +93,7 @@ for dom in `mysql_query "select domaine from domaines where dns_action = 'UPDATE
 do
     dns_delete $dom
     mysql_query "update domaines set dns_action = 'OK', dns_result = '$?' where domaine = '$dom'"
-    RELOAD_ZONES="$RELOAD_ZONES $dom"
+    echo -n " $dom " >> "$RELOAD_ZONES"
 done
 
 # Domains we have to update the dns :
@@ -100,7 +103,7 @@ do
     echo "dns_regenerate : domain=/$dom/"
     dns_regenerate $dom
     mysql_query "update domaines set dns_action = 'OK', dns_result = '$?' where domaine = '$dom'"
-    RELOAD_ZONES="$RELOAD_ZONES $dom"
+    echo -n " $dom " >> "$RELOAD_ZONES"
 done
 
 # Domains we want to delete completely, now we do it
@@ -110,12 +113,12 @@ do
     dns_delete $dom
     # Web configurations have already bean cleaned previously
     mysql_query "delete from sub_domaines where domaine='$dom'; delete from domaines where domaine='$dom';"
-    RELOAD_ZONES="$RELOAD_ZONES $dom"
+    echo -n " $dom " >> "$RELOAD_ZONES"
 done
 
 
-if [ "$RELOAD_WEB" == "true" ] ; then
-  RELOAD_ZONES="$RELOAD_ZONES apache"
+if [ ! -z "$(cat "$RELOAD_WEB")" ] ; then
+  echo " apache " >> "$RELOAD_ZONES"
 
   # Concat the apaches files
   tempo=$(mktemp "$VHOST_FILE.XXXXX")
@@ -132,14 +135,14 @@ if [ "$RELOAD_WEB" == "true" ] ; then
 fi
 
 # we assume we run apache and bind on the master
-/usr/bin/alternc_reload $RELOAD_ZONES || true
+/usr/bin/alternc_reload $( cat "$RELOAD_ZONES") || true
 for slave in $ALTERNC_SLAVES; do
     if [ "$slave" != "localhost" ]; then
-        ssh alternc@$slave alternc_reload "$RELOAD_ZONES" || true
+        ssh alternc@$slave alternc_reload $(cat "$RELOAD_ZONES") || true
     fi
 done
 
-rm "$LOCK_FILE"
+rm -f "$LOCK_FILE" "$RELOAD_ZONES" "$RELOAD_WEB"
 
 exit 0
 
