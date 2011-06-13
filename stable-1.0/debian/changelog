@@ -1,0 +1,380 @@
+alternc (1.0) stable; urgency=low
+  * Major patch
+    * Web & DNS file generation rebuild from scratch
+    * Drop of apache 1 support
+    * Big changes in database schema (domaines, sub_domaines, *_standby removal)
+  * Major changes
+    * Drop mass virtual hosting, now use full vhost
+    * Panel URL do not need anymore /admin/
+    * (you can still use it, we put a 301 redirection)
+    * JQuery is now used by AlternC (but not needed for any usual feature usage)
+  * New features
+    * Domains type are dynamic
+    * (the administrator can create domaine type with his own apache template)
+    * Advanced DNS options (ipv6, cname, txt, mx)
+    * Possibility to create a temporary mail (not yet shown, need cron)
+    * Admin can connect to other account and go back to their own
+    * Language link is back inside the menu
+    * MX and secondary MX are now available in debconf
+  * Bugfixes
+    * Too many to be listed (we change the historic update_domaines.sh)
+    * Dash compatibility
+    * Use iana.org to have whois server list up to date
+    * Preseeding compatibility : don't ask for questions when already set
+
+ -- Benjamin Sonntag <benjamin@alternc.org>  Sat, 04 Jun 2011 18:18:18 +0200
+
+alternc (1.0~rc1) stable; urgency=low
+
+  * Major patch
+    * Blue desktop using only css, no frameset etc
+    * Sanitizing of get/request/post parameters using getFields function. May allow alternc not to use register_globals some day ...
+  * security: passwords are now MANDATORY in MySQL class (whoosh...)
+  * security: now using htmlspecialchars on every form default values ... yes it's 2010 ;)
+  * i18n: charset is now variable depending on the current language
+  * new features:
+    * removed the dependency on postgrey, added dnsutils (for domain checks)
+    * added domain check (exists, ns, mx, ip) when listing domains in admin panel.
+  * bugfixes:
+    * fix a "already exist" error when creating a database containing an hyphen (-)
+    * #1163: fix sqlbackup script call routine to retain backwards
+      compatibility
+    * fix usage of ISO8859-15 charset (that may NOT be defined in locales...)
+      and add it to the correct url (%%fqdn_lettre%%...)
+  * major changes:
+    * PHP sessions are now stored in /var/alternc/sessions
+  * new features:
+    * add support for .cc and .re domains.
+    * when adding a new domain to an account, a directory "examplenet"
+      is automatically created and the domain points to it instead of /.
+    * add new field to member form: 'notes' which is just a text field
+    * send an email on new account creation. the actual email needs to be
+      configured through the AlternC variables for this to work.
+    * added the password policy management module : you can choose which
+      password complexity you want to force for each place a password is required.
+  * API changes
+    * m_mysql->get_db_list() doesn't include size anymore because this
+      is a major performance hit on MySQL < 5.1.22 if there are > 1000
+      databases on the system. This speeds up the AlternC login by about
+      30 seconds on Koumbit.org.
+
+ -- Benjamin Sonntag <benjamin@alternc.org>  Sat, 12 May 2009 17:55:30 +0200
+
+alternc (0.9.9) stable; urgency=low
+
+  * bugfixes:
+    * #1080: fix webmail redirection
+    * #1128, #1110: translation fixes
+    * fix WHOIS lookups for .ca, .com and .net
+    * fix ProFTPd TLS/SSL mode
+    * #708: remove '-' from the list of authorized usernames
+    * put the logout button at the end of the left menu
+    * #1124: fix database user configuration
+    * FTP/TLS is now working properly (config is RSA not DSA, and key AND
+      certif config must be BOTH populated)
+    * #1029: do not overwrite the main.cf from postfix
+    * #1129: remove 2GB quota limit
+    * #1017: fix apache2 configuration
+    * #1078: run upgrade scripts properly
+  * new features:
+    * start logging IP addresses in logs
+    * rework the sqlbackup script to allow for date-based backups instead of
+      log-like incremental backups
+    * #1131: allow admins to make all list URLs be based on the FQDN
+    * #1087: allow admins to create user subdomains according to hardcoded
+      value or available domains
+    * make a new alternc-slave package that eases installation on NFS-backed
+      frontend nodes
+    * builtin postgrey and Spamhaus blacklisting configuration
+    * #1017: complete apache2 support, although apache1 is still the "official"
+      platform for now
+    * FTP+SSL support
+  * other changes:
+    * deprecate the mynetwork modification in Postfix, this is now left to the
+      admin
+    * do not overwrite main.cf
+    * do not overwrite named.conf
+
+ -- Antoine Beaupré <anarcat@koumbit.org>  Tue, 15 Apr 2008 11:52:56 -0400
+
+alternc (0.9.8) stable; urgency=high
+
+  This release is packed with minor enhancements and bugfixes. It also packages
+  security fixes. Not all targets of the milestone were accomplished but this
+  was released nevertheless because of the security issue.
+
+  * security:
+    * move mysql configuration into a valid MySQL configuration file
+      (/etc/alternc/my.cnf). This fixes a serious security issue (#318)
+      where the MySQL root password was passed on the commandline and could
+      therefore be visible to local users (and hosted members that don't have
+      safe_mode controls or can access the process table in some way).
+    * disable the autocomplete on frontal user/login
+  * various bugfixes
+    * upgrade to Debian standard 3.7.3 (from 3.7.2.1)
+    * added missing dependency on mysql-client
+    * fix display of errors on directory creation
+    * from Trac: #1012, #1082, #1077, #1109
+    * fix 0.9.7 regressions: #1079, #1080, #1099, #1076
+  * new features:
+    * starting with this release, the old warning signal defaults to "YES" which
+      means that AlternC can be automatically installed without preseeding.
+    * crude implementation of a permission change interface in the file browser
+      (partial implementation of #267)
+    * standardisation of the web interface, along with some esthetic changes, by
+      Marc Angles, sponsored by Koumbit (partial implementation of #37)
+    * styles can now be changed locally in admin/styles/custom.css
+    * allow arbitrary error strings in error handlers
+    * copy and archive extraction in the file browser (#1043)
+    * display at which time the DNS changes will take effect (#231)
+    * use timestamp for sql backups rather than rotating the files (#1063)
+    * other simple additions: #1043, #1097
+
+ -- Antoine Beaupré <anarcat@koumbit.org>  Thu, 10 Apr 2008 13:56:22 -0400
+
+alternc (0.9.7) stable; urgency=low
+
+  * major release, closing more than 40 bugs, including...
+  * Fixing MX check when hosting a mail (#1706)
+  * Delete the zonefile properly when destroying a domain (#772)
+  * Choose english as default language, (#1047)
+  * Proper parameter checking in subdomain creation (#1037)
+  * Changing ownership of /var/alternc/tmp, makes file upload work again (#1058)
+  * Force the restart of apache & apache-ssl (#1000)
+  * Redirect are now done on http://$url$1 base, not $url/$1 (#1054)
+  * Patch to install properly apache and apache-ssl modules
+  * We copy /etc/squirrelmail/default_pref content for new accounts in _createpop (#1015)
+  * we configure postfix even if main.cf don't currently exist (#1009)
+  * Fixed the 'view' link issues (no urlencode) (#690)
+  * Change "move" to "move to" (ergonomic) (#787)
+  * Confirm file deletion in the browser (#659)
+  * fix dns install of internal hosting domains (#1056)
+  * fix proftpd and saslauthd configuration for Etch (#1046, #1069)
+  * fix .eu, .be, .name whois issue (#571)
+  * change apache log format to a working one (using host request), also fix awstats issues.
+  * fix modules manipulation rules (#1062)
+  * try to support apache2, at least with the right dependencies
+  * end explicit mysql-server dependencies, which switches to Recommends,
+    since we can now configure remote mysql servers properly (#1014)
+  * fix our phpmyadmin config for etch (#1052)
+  * add portuguese translation
+  * see subversion changelog for more details
+
+ -- Antoine Beaupré <anarcat@koumbit.org>  Fri,  9 Nov 2007 18:40:50 -0500
+
+alternc (0.9.6.3) stable; urgency=low
+
+  * change dependency on courier-authmysql or courier-authlib-mysql for etch
+  * fix sql backups in case of missing target directory
+  * fix translations
+  * php5 compatibility
+  * fix checkmx (#1031)
+  * etch support
+
+ -- Antoine Beaupré <anarcat@koumbit.org>  Fri, 11 May 2007 01:18:08 +0000
+
+alternc (0.9.6.2) stable; urgency=high
+
+  * repackage 0.9.6.1 properly: include all latest fixes, which didn't make it
+    to the package
+  * don't put postfix in pre-depends
+  * urgency=high because 0.9.6.1 doesn't include all the security fixes it
+    pretends
+
+ -- Antoine Beaupré <anarcat@koumbit.org>  Wed, 17 Jan 2007 15:58:39 -0500
+
+alternc (0.9.6.1) stable; urgency=high
+
+  * Emergency release to fix issues with release 0.9.6.
+  * Fix a security issue with override_php.conf not being configured in apache, effectively disabling open_basedir restrictions. Closes: #1005
+  * Show installation warning only once. Closes: #737
+  * Make it possible to erase files and directories in file browser. Closes: #1002.
+  * Fix mail accounts creation. Closes: #1003.
+  * Fix a race condition in update_domains.sh which could allow users to
+    bypass openbasedir protection when creating domains. Reported by
+    Jerome Moinet.
+
+ -- Antoine Beaupré <anarcat@koumbit.org>  Fri, 12 Jan 2007 15:59:42 -0500
+
+alternc (0.9.6) stable; urgency=high
+
+  * Replacing C setuid scripts by perl-suid one. AlternC is now arch-indep !
+  * Do not overwrite httpd.conf anymore. Everything is now done through includes in the /etc/apache/conf.d/ directory
+  * Fix security issues with file browser and domain management that allowed an attacker to inspect the filesystem, create files in other accounts and perform cross site scripting javascript attacks. Credit: thabob.
+  * #563: do not overwrite php.ini anymore. Everything is configured in the
+    apache config.
+  * All other bugs are postponed to 0.9.7 because of the security issue (hence
+    urgency=high). See https://dev.alternc.org/trac/alternc/milestone/0.9.6
+    for more information.
+
+ -- Antoine Beaupré <anarcat@koumbit.org>  Mon, 27 Nov 2006 21:26:32 +0000
+
+alternc (0.9.5) stable; urgency=low
+
+  * maintenance release to fix packaging and security bugs
+  * see https://dev.alternc.org/trac/alternc/milestone/0.9.5 for milestone
+  * changelog at https://dev.alternc.org/trac/alternc/query?status=closed&milestone=0.9.5
+  However, this version contains mainly :
+  * quota management fixes
+  * bind now forbid recursion and domain poisoning
+  * now using po-debconf
+  * mysql right management now included in the web desktop.
+  * .eu tld domain is now allowed.
+  * postfix is now using saslauthd with rimap for smtp sasl authentication
+
+ -- Benjamin Sonntag <benjamin@alternc.org>  Thu,  4 May 2006 03:55:30 +0200
+
+alternc (0.9.4) stable; urgency=low
+
+  * maintenance release to fix packaging and security bugs
+  * see https://dev.alternc.org/trac/alternc/milestone/0.9.4 for milestone
+  * changelog at https://dev.alternc.org/trac/alternc/query?status=closed&milestone=0.9.4
+  However, this version contains mainly :
+  * Integration of Globenet patchs (replacement of do_domains.sh by update_domains.sh and others)
+  * Changing mysql database creation from uid to login name
+  * Major improvements in FHS compliance
+  * Major improvements in config file management and debconf idempotency
+
+ -- Benjamin Sonntag <benjamin@alternc.org>  Wed, 29 Mar 2006 19:34:41 +0200
+
+alternc (0.9.3.1) testing; urgency=low
+
+  * maintenance release to fix packaging and security bugs
+  * see http://mantis.alternc.org/view.php?id=436 for milestones
+  * full changelog at: http://mantis.alternc.org/changelog_page.php
+  * Arch: all to have this package available in all architectures
+  * take over maintainership
+  * release sponsored by Koumbit.net
+
+ -- Antoine Beaupre <anarcat@koumbit.org>  Thu, 19 Jan 2006 20:48:45 +0000
+
+alternc (0.9.3.9-globenet10) stable; urgency=low
+
+  * Fix typo in sqlbackup.sh.
+  * Another fix for empty host in update_domains.sh.
+  * Fix database name spliting in the bureau.
+  * Fix zone reload and php overrides bugs in update_domains.sh.
+  * Don't try to generate php override file for IP hosts.
+  * Redirect apache reload output to the log file in update_domains.sh.
+  * Fix sendmail wrapper behaviour w.r.t. Sender header.
+  * Correct Section and Maintainer field for the Debian package.
+
+ -- Lunar <lunar@anargeek.net>  Sat, 15 Oct 2005 02:43:37 +0200
+
+alternc (0.9.3.9-globenet9) unstable; urgency=low
+
+  * Fix deletion of empty host in update_domains.sh.
+  * Fix DNS zone serial generation.
+
+ -- Lunar <lunar@anargeek.net>  Thu, 22 Sep 2005 00:26:15 +0200
+
+alternc (0.9.3.9-globenet8) unstable; urgency=low
+
+  * Finally fix empty host handling in update_domains.sh.
+
+ -- Lunar <lunar@anargeek.net>  Wed, 21 Sep 2005 23:45:06 +0200
+
+alternc (0.9.3.9-globenet7) unstable; urgency=low
+
+  * Fix menulist.txt symlink target.
+
+ -- Lunar <lunar@anargeek.net>  Wed, 21 Sep 2005 21:26:02 +0200
+
+alternc (0.9.3.9-globenet6) unstable; urgency=low
+
+  * Create menulist.txt symbolic link in debian/rules
+  * Make menulist.txt migration more likely to happen
+
+ -- Lunar <lunar@anargeek.net>  Wed, 21 Sep 2005 21:08:08 +0200
+
+alternc (0.9.3.9-globenet5) unstable; urgency=low
+
+  * Rewrite sqlbackup.sh, enabling non-local MySQL server
+  * allow mysql users connection from the web server (jonathan)
+  * Move menulist.txt to /etc/alternc
+  * Fix update_domains.sh not working with empty hostnames
+
+ -- Lunar <lunar@anargeek.net>  Wed, 21 Sep 2005 19:57:59 +0200
+
+alternc (0.9.3.9-globenet4) unstable; urgency=low
+
+  * named.template now points to the correct directory..
+
+ -- Lunar <lunar@anargeek.net>  Thu, 15 Sep 2005 00:00:37 +0200
+
+alternc (0.9.3.9-globenet3) unstable; urgency=low
+
+  * Fix mail not sent from PHP scripts
+  * Actually exit update_domains.sh when killed
+  * Fix templates warning
+  * Fix reverse DNS test for BIND_INTERNAL
+
+ -- Lunar <lunar@anargeek.net>  Wed, 14 Sep 2005 23:54:23 +0200
+
+alternc (0.9.3.9-globenet2) unstable; urgency=low
+
+  * Fix alternc.install failling when unable to backup an unecessary file.
+
+ -- Lunar <lunar@anargeek.net>  Tue,  6 Sep 2005 23:18:56 +0200
+
+alternc (0.9.3.9-globenet1) unstable; urgency=low
+
+  * Major overhaul of configuration and install system:
+      - /etc/alternc/alternc.conf is no more and /etc/alternc/local.sh
+        is used by everyone else.
+      - alternc.install was rewritten.
+      - configuration templates now lies in /etc/alternc/templates,
+        tagged as conffiles.
+      - alternc.install will now check if you have changed a configuration
+        file without modifying the template and calling alternc.install
+        again.
+      - alternc.install now determines which configuration files it needs
+        based on what is currently installed, thus it's easier to build
+        custom Debian package with lower deps.
+  * BIND interaction mostly rewritten:
+      - do_domaines.sh is no more and replaced by update_domains.sh
+      - templates used to build automatic.conf and zone files are now in
+        /etc/bind/templates once installed
+      - automatic.conf and slaveip.conf are now generated in /var/alternc/bind
+      - zone files are now generated in /var/alternc/bind/zones.
+      - the secondary feature and /usr/lib/alternc/bind2 are gone
+  * Small things:
+      - Striped the second reject_unauth_destination from postfix main.cf.
+      - Fixed debconf dependency.
+      - Add support for quota on NFS partitions.
+      - Disk usage calculation disabled for directories in browser.
+      - bind_internal is now used in named.conf template.
+      - Fixed phpmyadmin server list bug.
+
+ -- Lunar <lunar@anargeek.net>  Tue,  6 Sep 2005 20:34:53 +0200
+
+alternc (0.9.3) testing; urgency=low
+
+  * Upstream update : many bugfixes, see the bugs related to
+    http://mantis.alternc.org/view.php?id=246 for details
+
+ -- Benjamin Sonntag <benjamin@alternc.org>  Wed, 10 Nov 2004 00:00:00 +0200
+
+alternc (0.9.2-2) testing; urgency=low
+
+  * Upstream update : many bugfixes (http://mantis.alternc.org)
+
+ -- Benjamin Sonntag <benjamin@alternc.org>  Wed, 09 Sep 2004 23:04:26 +0200
+
+alternc (0.9.2-1) testing; urgency=low
+
+  * Upstream update
+
+ -- Benjamin Sonntag <benjamin@alternc.org>  Fri, 27 Aug 2004 18:04:26 +0200
+
+alternc (0.9.1-1) testing; urgency=low
+
+  * Upstream update
+
+ -- Benjamin Sonntag <benjamin@alternc.org>  Fri, 04 Jun 2004 19:31:26 +0200
+
+alternc (0.9-1) testing; urgency=low
+
+  * Initial Release.
+
+ -- Benjamin Sonntag <benjamin@alternc.org>  Tue, 27 Aug 2002 19:31:26 +0200

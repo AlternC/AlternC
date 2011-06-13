@@ -1,0 +1,226 @@
+#!/bin/sh
+
+set -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+CONFIGFILE="/etc/alternc/local.sh"
+
+update_var() {
+    local question
+    local var
+    question="$1"
+    var="$2"
+    db_get "$question"
+    if [ ! -z "$RET" ]; then
+        grep -Eq "^ *$var=" $CONFIGFILE || echo "$var=" >> $CONFIGFILE
+        SED_SCRIPT="$SED_SCRIPT;s\\^ *$var=.*\\$var=\"$RET\"\\"
+    fi
+}
+
+# summary of how this script can be called:
+#        * <postinst> `configure' <most-recently-configured-version>
+#        * <old-postinst> `abort-upgrade' <new version>
+#        * <conflictor's-postinst> `abort-remove' `in-favour' <package>
+#          <new-version>
+#        * <deconfigured's-postinst> `abort-deconfigure' `in-favour'
+#          <failed-install-package> <version> `removing'
+#          <conflicting-package> <version>
+# for details, see http://www.debian.org/doc/debian-policy/ or
+# the debian-policy package
+#
+# quoting from the policy:
+#     Any necessary prompting should almost always be confined to the
+#     post-installation script, and should be protected with a conditional
+#     so that unnecessary prompting doesn't happen if a package's
+#     installation fails and the `postinst' is called with `abort-upgrade',
+#     `abort-remove' or `abort-deconfigure'.
+
+case "$1" in
+  configure)
+
+    # ajoute l'user postfix au groupe sasl
+    adduser --quiet postfix sasl
+
+    # corriger les permissions du chroot
+    mkdir -p /var/spool/postfix/var/run/saslauthd || true
+    dpkg-statoverride --quiet --update --add root sasl 710 /var/spool/postfix/var/run/saslauthd  || true
+
+    # build local.sh if it does not exist
+    if [ ! -f $CONFIGFILE ]; then
+        cat > $CONFIGFILE <<EOF
+#!/bin/sh
+#
+# AlternC - Web Hosting System - Configuration
+# This file will be modified on package configuration
+# (e.g. upgrade or dpkg-reconfigure alternc)
+
+# Hosting service name
+HOSTING=""
+
+# Primary hostname for this box (will be used to access the management panel)
+FQDN=""
+
+# Public IP
+PUBLIC_IP=""
+
+# Internal IP
+# (most of the time, should be equal to PUBLIC_IP, unless you are behind
+# firewall doing address translation)
+INTERNAL_IP=""
+
+# Monitoring IP or network (will be allowed to access Apache status)
+MONITOR_IP=""
+
+# Primary DNS hostname
+NS1_HOSTNAME=""
+
+# Secondary DNS hostname
+NS2_HOSTNAME=""
+
+# Mail server hostname
+DEFAULT_MX=""
+
+# Note: MySQL username/password configuration now stored in /etc/alternc/my.cnf
+
+# quels clients mysql sont permis (%, localhost, etc)
+MYSQL_CLIENT=""
+
+# Folder holding data (used for quota management)
+ALTERNC_LOC=""
+
+# the type of backup created by the sql backup script
+# valid options are "rotate" (newsyslog-style) or "date" (suffix is the date)
+SQLBACKUP_TYPE=""
+
+# overwrite existing files when backing up
+SQLBACKUP_OVERWRITE=""
+EOF
+
+        chown root:www-data $CONFIGFILE
+        chmod 640 $CONFIGFILE
+    fi
+
+    # Update local.sh
+    # 1. use cp to keep permissions
+    # 2. add missing variable to local.sh
+    # 3. use sed to set variables with current values
+    echo "Updating $CONFIGFILE"
+    cp -a -f $CONFIGFILE $CONFIGFILE.tmp
+    # SED_SCRIPT will be modified by update_var
+    SED_SCRIPT=""
+    update_var alternc-slave/hostingname HOSTING
+    update_var alternc-slave/desktopname FQDN 
+    update_var alternc-slave/public_ip PUBLIC_IP
+    update_var alternc-slave/internal_ip INTERNAL_IP
+    update_var alternc-slave/monitor_ip MONITOR_IP
+    update_var alternc-slave/ns1 NS1_HOSTNAME
+    update_var alternc-slave/ns2 NS2_HOSTNAME
+    update_var alternc-slave/default_mx DEFAULT_MX 
+    update_var alternc-slave/mysql/client MYSQL_CLIENT 
+    update_var alternc-slave/sql/backup_type SQLBACKUP_TYPE
+    update_var alternc-slave/sql/backup_overwrite SQLBACKUP_OVERWRITE
+    update_var alternc-slave/alternc_location ALTERNC_LOC
+    sed -e "$SED_SCRIPT" < $CONFIGFILE > $CONFIGFILE.tmp
+    mv -f $CONFIGFILE.tmp $CONFIGFILE
+
+    # Setup grants
+    db_get "alternc-slave/mysql/host"
+    MYSQL_HOST="$RET"
+    if [ "$MYSQL_HOST" != "localhost" -o -e /usr/sbin/mysqld ]; then
+        # compatibility shims with my.cnf
+        host="$RET"
+        db_get "alternc-slave/mysql/db"
+        database="$RET"
+        db_get "alternc-slave/mysql/user"
+        user="$RET"
+        db_get "alternc-slave/mysql/password"
+        password="$RET"
+        
+        # we source (instead of forking) mysql.sh so that it gets the local environment above
+        . /usr/share/alternc/install/mysql.sh
+    fi
+
+    # forget the password
+    db_reset alternc-slave/mysql/password || true
+    db_fset alternc-slave/mysql/password "seen" "false" || true
+
+    if [ -e $CONFIGFILE ]; then
+      # source local.sh variables
+      . $CONFIGFILE
+    fi
+
+    if grep -q alternc-mergelog /etc/passwd ; then
+        echo "Reusing the alternc-mergelog account as a generic alternc account"
+        # the uid is ugly. we should request allocation from
+        # base-passwd instead
+        usermod --uid 342 --shell /bin/rbash --login alternc alternc-mergelog
+        # this is a separate step otherwise usermod will look for
+        # files to chown in /var/alternc, which takes a long time
+        usermod --home $ALTERNC_LOC alternc
+    fi
+    if [ -d /var/run/alternc-mergelog/.ssh ]; then
+        echo "Cleaning up old alternc-mergelog home"
+        mv /var/run/alternc-mergelog/.ssh $ALTERNC_LOC/.ssh && rmdir /var/run/alternc-mergelog
+    fi
+    if ! grep -q alternc /etc/passwd ; then
+        echo "Creating alternc account"
+        # this uid is ugly. we should request allocation from
+        # base-password instead
+        adduser --quiet --system --uid 342 --home $ALTERNC_LOC --shell /bin/rbash --ingroup adm alternc
+    fi
+
+    echo "config phpmyadmin"
+    include_str='include("/etc/alternc/phpmyadmin.inc.php")'
+    pma_config=/etc/phpmyadmin/config.inc.php
+    if ! grep -e "$include_str" $pma_config > /dev/null 2>&1; then
+        echo "<?php $include_str ?>" >> $pma_config
+    fi
+
+    if ! grep -q '## ALTERNC START' /etc/sudoers; then
+        # XXX: this is not proper locking
+        if [ -e /etc/sudoers.tmp ]; then
+            echo "sudoers file being edited, aborting"
+            exit 1
+        else
+            cp /etc/sudoers /etc/sudoers.tmp
+            cat >> /etc/sudoers.tmp <<EOF
+## ALTERNC START
+## do not change anything between those lines
+alternc ALL=NOPASSWD: /usr/sbin/invoke-rc.d apache reload
+alternc ALL=NOPASSWD: /usr/sbin/invoke-rc.d apache2 reload
+alternc ALL=NOPASSWD: /usr/sbin/rndc reload *
+alternc ALL=NOPASSWD: /usr/sbin/rndc reload
+## ALTERNC END
+EOF
+            mv /etc/sudoers.tmp /etc/sudoers
+        fi
+    fi
+
+    # important: postinst gele sans ca
+    db_stop
+
+    echo "running alternc.install"
+    alternc.install -s
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+
+esac
+
+# dh_installdeb will replace this with shell code automatically
+# generated by other debhelper scripts.
+
+#DEBHELPER#
+
+exit 0
+
+# vim: et sw=4

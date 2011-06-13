@@ -1,0 +1,53 @@
+AlternC: Architecture pour serveurs d'hébergement
+=================================================
+
+Introduction
+------------
+
+AlternC est un ensemble de logiciels d'hébergement facile à utiliser,
+facile à installer, basé uniquement sur des logiciels OpenSource,
+AlternC étant sous licence GPL.
+
+Ce logiciel contient un système d'installation et de configuration
+automatique, ainsi qu'un panneau de contrôle accessible par le web, pour
+la gestion des utilisateurs et des services web (domaines, mails,
+comptes ftp, statistiques ...)
+
+Techniquement, AlternC se base sur la distribution Debian GNU/Linux
+'Sarge', et utilise d'autres logiciels tels Apache, Postfix, Mailman ...
+Il contient aussi une documentation d'API, permettant une
+personnalisation facile et rapide du bureau, le 'panneau de contrôle
+web' d'AlternC.
+
+La langue natale de ce projet est le Français. Cependant, le paquet
+debian contient le bureau en Français, Anglais, Espagnol. 
+Les traductions dans
+d'autres langues auront lieu si vous nous y aidez. La documentation
+n'est actuellement disponible qu'en Français, mais une traduction
+multilingue devrait arriver un jour ...
+
+AlternC est développé par les administrateurs système de l'Autre Net,
+les membres de l'Autre Net, ainsi que d'autres structures / développeurs
+parmis lesquels Globenet, Neuronnexion ou Koumbit. 
+
+Installation
+------------
+
+Pour l'instant, AlternC doit être installé en package Debian. Ceci prend
+soin d'installer AlternC lui-même est toutes ses dépendances. Pour
+télécharger les packages Debian d'alternc, veuillez insérer les linges
+suivantes dans votre fichier /etc/apt/sources.list
+
+ deb http://debian.alternc.org debian/
+ deb-src http://debian.alternc.org debian/
+
+lancez ensuite
+	aptitude update
+	aptitude install alternc
+
+Note: vous pouvez aussi installer les modules additionnels d'AlternC par
+la suite. Pour plus d'information, rendez-vous sur le serveur de 
+développement à l'adresse : 
+
+	https://alternc.org/
+

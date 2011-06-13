@@ -1,0 +1,47 @@
+.TH TOP_FTP_USERS 8 "26 novembre 2003"
+.SH NOM
+top_ftp_users \- statistiques ftp pour AlternC
+.SH SYNOPSIS
+.B top_ftp_users 
+.RI [ options ] " nombre"
+.SH DESCRIPTION
+Cette page de manuel documente brièvement la commande
+.B top_ftp_users.
+.PP
+\fBtop_ftp_users\fP est un programme qui donne de brèves statistiques sur l'usage de ftp en parcourant ses logs.
+.TP
+Les résultats sont triés par :
+* nombre de connexions, par utilisateur
+.br
+* Taille des données transférées, par utilisateur
+.PP
+Dans la mesure où le fait de parcourir des logs, si ils sont de grande taille, peut emmener à une consomation de ressources importante, il est conseillé d'utiliser l'option -n avec une valeur faible, et ce de manière à avoir des résultats plus rapidement, mais moins précis.
+.PP
+\fBtop_ftp_users\fP doit être lancé en tant que root.
+.SH OPTIONS
+Ce programme suit la syntaxe des lignes de commande GNU, avec des options longues commencant par deux tirets (`-'). Un résumé de ces options est inclut ci-dessous.
+.TP
+.B \-h, \-\-help
+Affiche un court message d'aide.
+.TP
+.B \-v, \-\-version
+Affiche la version de top_ftp_users.
+.TP
+.B \-z, \-\-use-gz-logs
+Parcourt les logs gzippés, ainsi que les logs en .1, .2, ... ,.n au lieu de parcourir le log courant.
+.br
+Cette option n'est pas compatible avec l'option \-n.
+.TP
+.B \-n, \-\-number=NOMBRE
+Parcourt les NOMBRE dernières lignes du log courant.
+.br
+Cette option n'est pas compatible avec l'option \-z.
+.SH NOMBRE
+Affiche le résultat pour
+.IR nombre
+utilisateurs.
+.SH VOIR AUSSI
+.BR top_http_users (8),
+.BR top_mysql_users (8),
+.BR alternc-admintools (8).
+.br

@@ -1,0 +1,24 @@
+<h1>AlternC Nightly build repositories</h1>
+
+Ce dossier contient les contructions quotidiennes automatique d'AlternC
+<br />
+La dernière version a un lien symbolique depuis latest/ 
+<br />
+pour utiliser ce dépôt, créer un fichier /etc/apt/sources.list.d/alternc-nightly.list comme suit
+<br /><br />
+This folder contains the automatic nightly build of AlternC
+<br />
+The latest version is linked inside latest/ symlink
+<br />
+To use this repository, create a file named /etc/apt/sources.list.d/alternc-nightly.list as follow : 
+<br />
+<pre>
+ deb http://nightly.alternc.org/ latest/
+</pre>
+<br />
+Le dépôt et les packages sont signés avec la clé pgp des nightly d'AlternC : 
+<br /><br />
+The repository and the packages are signed by the pgp key of AlternC nightly build user : 
+<pre>
+ wget http://nightly.alternc.org/nightly.key -O - | apt-key add - 
+</pre>

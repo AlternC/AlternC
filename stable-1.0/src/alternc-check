@@ -1,0 +1,212 @@
+#!/usr/bin/php
+<?php
+
+// TODO : we should accept a "-n" option that will mean : "don't do any action, but tell us" :) 
+
+echo "Connecting to AlternC MySQL database... "; flush();
+
+define('NOCHECK', 1);
+require_once("/var/alternc/bureau/class/config.php");
+
+echo "done.\n";
+echo "------------------------------------------------------------\n";
+echo "Statistics : \n";
+
+list($m1)=@mysql_fetch_array(mysql_query("SELECT COUNT(*) FROM membres;"));
+echo " $m1 accounts\n";
+list($m2)=@mysql_fetch_array(mysql_query("SELECT COUNT(DISTINCT path) FROM mail_users;"));
+echo " $m2 pop accounts\n";
+list($m3)=@mysql_fetch_array(mysql_query("SELECT COUNT(*) FROM domaines;"));
+echo " $m3 domains\n";
+list($m4)=@mysql_fetch_array(mysql_query("SELECT COUNT(*) FROM sub_domaines;"));
+echo " $m4 subdomains\n";
+list($m5)=@mysql_fetch_array(mysql_query("SELECT COUNT(*) FROM ftpusers;"));
+echo " $m5 ftp accounts\n";
+list($m6)=@mysql_fetch_array(mysql_query("SELECT COUNT(*) FROM aws;"));
+if ($m6) echo " $m6 awstats statistics\n";
+list($m7)=@mysql_fetch_array(mysql_query("SELECT COUNT(*) FROM mailman;"));
+if ($m7) echo " $m7 mailing-lists using mailman\n";
+
+if (!$m1 && !$m2 && !$m3 && !$m4 && !$m5) {
+  echo "All statistics are wrong. We certainly have a connection problem. Please check !\n";
+  exit();
+}
+
+$checks=array(
+	      "1" => "Change owner and group of pop mail accounts",
+	      "2" => "Change owner and group of html folders",
+	      "3" => "Remove non-existent pop accounts in /var/alternc/mail",
+	      "4" => "Remove non-existent alternc accounts in /var/alternc/html",
+	      "5" => "Delete subdomains of non-existents folders pointers (dangling links)",
+	      "6" => "Delete ftp accounts of non-existents folders",
+	      "7" => "Delete mailman mailing-lists in mailman alternc table who does not exists anymore in /var/lib/mailman/lists",
+	      "8" => "Delete mailman mailing-lists in /var/lib/mailman/lists who does not exists anymore in mailman alternc table",
+	      "100" => "Send anonymous statistics regarding your AlternC installation to alternc team",
+	      );
+
+echo "------------------------------------------------------------\n";
+echo "The following checks can be done : \n";
+foreach($checks as $k=>$v) {
+  echo " - $k : $v\n";
+}
+
+if (!$argv[1]) {
+  do {
+    echo "\nPlease choose the check you want to do (or [a]ll of them) : ";
+    $f=fopen("php://stdin","rb");
+    $r=fgets($f,1024);
+    $r=strtolower(trim($r));
+  } while (!$r); 
+} else {
+  $r=strtolower(trim($argv[1]));
+}
+
+
+// Change owner and group of pop mail accounts
+if ($r=="1" || $r=="a") {
+  echo "========== ".$checks[1]." STARTING (".date("d/m/Y H:i:s").")\n";
+  $r=mysql_query("SELECT  DISTINCT(path),uid from mail_users;");
+  while ($c=mysql_fetch_array($r)) {
+    echo $c["path"]." ".$c["uid"]."\n";
+    if (substr($c["path"],0,17)=="/var/alternc/mail") {
+      if (is_dir($c["path"])) {
+	exec("chown -R 33.".$c["uid"]." ".escapeshellarg($c["path"]));
+      } else {
+	echo "WARNING: Folder ".$c["path"]." does not exist. Please do relevant check to delete associated pop account\n";
+      }
+    } else {
+      echo "SKIPPED\n";
+    }
+  }
+  echo "========== ".$checks[1]." ENDING (".date("d/m/Y H:i:s").")\n";
+}
+
+
+// Change owner and group of html folders
+if ($r=="2" || $r=="a") {
+  echo "========== ".$checks[2]." STARTING (".date("d/m/Y H:i:s").")\n";
+  $r=mysql_query("SELECT uid,login FROM membres;");
+  while ($c=mysql_fetch_array($r)) {
+    echo $c["login"]." ".$c["uid"]."\n";
+    if (is_dir("/var/alternc/html/".substr($c["login"],0,1)."/".$c["login"])) { 
+      exec("chown -R 33.".$c["uid"]." ".escapeshellarg("/var/alternc/html/".substr($c["login"],0,1)."/".$c["login"]));
+    } else {
+      echo "WARNING: Folder "."/var/alternc/html/".substr($c["login"],0,1)."/".$c["login"]." does not exist. Please do relevant check to delete associated alternc account, or recreate the folder\n";
+    }
+  }
+  echo "========== ".$checks[2]." ENDING (".date("d/m/Y H:i:s").")\n";
+}
+
+
+// Remove non-existent pop accounts in /var/alternc/mail
+if ($r=="3" || $r=="a") {
+  echo "========== ".$checks[3]." STARTING (".date("d/m/Y H:i:s").")\n";
+  $mail="/var/alternc/mail";
+  $d1=opendir($mail);
+  while (($c1=readdir($d1))!==false) {
+    if (substr($c1,0,1)!="." && is_dir($mail."/".$c1)) {
+      $d2=opendir($mail."/".$c1);
+      while ($c2=readdir($d2)) {
+	if (substr($c2,0,1)!="." && is_dir($mail."/".$c1."/".$c2)) {
+	  // Ok, we have a mail folder in /var/alternc/mail/p/popaccount_domain.tld/ Let's check it in the db : 
+	  list($alias)=@mysql_fetch_array(mysql_query("SELECT alias FROM mail_users WHERE path='".addslashes($mail."/".$c1."/".$c2)."';"));
+	  if (!$alias) {
+	    echo "WARNING: NOT FOUND: ".$mail."/".$c1."/".$c2.", deleting old pop folder.\n";
+	    exec("rm -rf ".escapeshellarg($mail."/".$c1."/".$c2));
+	  } else {
+	    echo $alias." OK\n";
+	  }
+	} elseif (is_file($mail."/".$c1."/".$c2)) {
+	  echo "WARNING: File ".$mail."/".$c1."/".$c2." unexpected. You may delete it...\n";
+	}
+      }
+      closedir($d2);
+    } elseif (is_file($mail."/".$c1)) {
+      echo "WARNING: File ".$mail."/".$c1." unexpected. You may delete it...\n";
+    }
+
+  }
+  closedir($d1);
+  echo "========== ".$checks[3]." ENDING (".date("d/m/Y H:i:s").")\n";
+}
+
+
+// Remove non-existent alternc accounts in /var/alternc/html
+if ($r=="4" || $r=="a") {
+  echo "========== ".$checks[4]." STARTING (".date("d/m/Y H:i:s").")\n";
+  $html="/var/alternc/html";
+  $d1=opendir($html);
+  while (($c1=readdir($d1))!==false) {
+    if (substr($c1,0,1)!="." && is_dir($html."/".$c1)) {
+      $d2=opendir($html."/".$c1);
+      while ($c2=readdir($d2)) {
+	if (substr($c2,0,1)!="." && is_dir($html."/".$c1."/".$c2)) {
+	  // Ok, we have a html folder in /var/alternc/html/u/user/ Let's check it in the db : 
+	  if (substr($c2,0,1)!=$c1) {
+	    echo "WARNING: html folder is inconsistent in ".$html."/".$c1."/".$c2." YOU SHOULD FIX IT MANUALLY !\n";
+	  } else {
+	    list($uid)=@mysql_fetch_array(mysql_query("SELECT uid FROM membres WHERE login='".addslashes($c2)."';"));
+	    if (!$uid) {
+	      echo "WARNING: NOT FOUND: ".$html."/".$c1."/".$c2.", deleting old alternc account.\n";
+	      exec("rm -rf ".escapeshellarg($html."/".$c1."/".$c2));
+	    } else {
+	      echo $c2." (".$uid.") OK\n";
+	    }
+	  }
+	} elseif (is_file($html."/".$c1."/".$c2)) {
+	  echo "WARNING: File ".$html."/".$c1."/".$c2." unexpected. You may delete it...\n";
+	}
+      }
+      closedir($d2);
+    } elseif (is_file($html."/".$c1)) {
+      echo "WARNING: File ".$html."/".$c1." unexpected. You may delete it...\n";
+    }
+  }
+  closedir($d1);
+  echo "========== ".$checks[4]." ENDING (".date("d/m/Y H:i:s").")\n";
+}
+
+// Delete subdomains of non-existents folders pointers (dangling links)
+if ($r=="5" || $r=="a") {
+  echo "========== ".$checks[5]." STARTING (".date("d/m/Y H:i:s").")\n";
+  echo "NOT YET IMPLEMENTED\n";
+  echo "========== ".$checks[5]." ENDING (".date("d/m/Y H:i:s").")\n";
+}
+
+
+// Delete ftp accounts of non-existents folders
+if ($r=="6" || $r=="a") {
+  echo "========== ".$checks[6]." STARTING (".date("d/m/Y H:i:s").")\n";
+  echo "NOT YET IMPLEMENTED\n";
+  echo "========== ".$checks[6]." ENDING (".date("d/m/Y H:i:s").")\n";
+}
+
+
+// Delete mailman mailing-lists in mailman alternc table who does not exists anymore in /var/lib/mailman/lists
+if ($r=="7" || $r=="a") {
+  echo "========== ".$checks[7]." STARTING (".date("d/m/Y H:i:s").")\n";
+  echo "NOT YET IMPLEMENTED\n";
+  echo "========== ".$checks[7]." ENDING (".date("d/m/Y H:i:s").")\n";
+}
+
+
+// Delete mailman mailing-lists in /var/lib/mailman/lists who does not exists anymore in mailman alternc table
+if ($r=="8" || $r=="a") {
+  echo "========== ".$checks[8]." STARTING (".date("d/m/Y H:i:s").")\n";
+  echo "NOT YET IMPLEMENTED\n";
+  echo "========== ".$checks[8]." ENDING (".date("d/m/Y H:i:s").")\n";
+}
+
+
+// Send anonymous statistics to AlternC team.
+if ($r=="100" || $r=="a") {
+  $f=fopen("http://svn.alternc.org/stats.php?m1=$m1&m2=$m2&m3=$m3&m4=$m4&m5=$m5&m6=$m6&m7=$m7","rb");
+  if ($f) {
+    while ($s=fgets($f,1024)) {
+    }
+    fclose($f);
+  }
+ }
+
+
+?>

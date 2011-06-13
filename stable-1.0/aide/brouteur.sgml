@@ -1,0 +1,65 @@
+<chapter id="browser"><title>Le gestionnaire de fichiers</title>
+
+<sect1 id="browser.1"><title>Introduction / Description</title>
+
+<para>
+Sur AlternC, vous disposez d'un espace disque personnel sur lequel vous pouvez installer vos
+domaines, sous-domaines, comptes ftp, statistiques web etc. Cet espace est en fait un dossier
+sur le serveur, dans lequel vous pouvez stocker des fichiers, mais aussi des sous-dossiers,
+afin d'organiser au mieux votre espace disponible.
+</para>
+<para>
+Afin de pouvoir modifier facilement vos fichiers, vous pouvez utiliser le FTP, en créant un
+compte sur votre bureau virtuel. Plus d'info sur le FTP dans <link id="ftp">la section FTP de l'Aide.</link>.
+Vous pouvez aussi utiliser le gestionnaire de fichier pour gérer vos fichiers directement depuis le
+bureau virtuel. Pour cela, dans le menu principal, cliquez sur "Gestionnaire de fichiers"
+</para>
+
+<para>
+Le gestionnaire de fichier permet de gérer l'ensemble de vos fichiers, à savoir :
+<itemizedlist>
+	<listitem><para>Créer Supprimer et Renommer des fichiers</para></listitem>
+	<listitem><para>Créer Supprimer et Renommer des dossiers / Sous-dossiers</para></listitem>
+	<listitem><para>Editer les fichiers présents dans le compte (fichiers textes, html ...)</para></listitem>
+	<listitem><para>Visualiser les fichiers du compte (html, images, document ...)</para></listitem>
+	<listitem><para>Télécharger l'ensemble de votre compte dans un fichier compressé (plusieurs formats supportés)</para></listitem>
+	<listitem><para>Accéder aux autres fonctions du bureau, tels la création de comptes FTP ou la protection de
+        dossier par nom d'utilisateur et mot de passe.
+        </para></listitem>
+</itemizedlist>
+</para>
+
+</sect1>
+
+<sect1 id="browser.2"><title>Paramètres du gestionnaire de fichiers</title>
+
+<para>
+Vous pouvez régler les préférences du gestionnaire de fichier en cliquant sur "Régler mes préférences"
+en bas du gestionnaire.
+<graphic fileref="files/browser_set.png" format="png"></>
+Les éléments ci-dessous peuvent être réglés :
+<itemizedlist>
+<listitem><para>Type d'affichage du gestionnaire (1 colonne de fichiers, 2 colonnes, 3 colonnes)</para></listitem>
+<listitem><para>L'affichage ou pas des icones des fichiers</para></listitem>
+<listitem><para>L'affichage ou pas des types des fichiers (image jpeg, page html, ...)</para></listitem>
+<listitem><para>Le format de compression utilisé pour téléchargé tout le site au format compressé. (zip, tgz, tar.z, tar.bz2 supportés)</para></listitem>
+<listitem><para>La largeur et la hauteur de la fenêtre de l'éditeur de fichiers.</para></listitem>
+<listitem><para>Si vous préférer aller à l'éditeur de fichiers ou au gestionnaire après la création d'un nouveau fichier.</para></listitem>
+</itemizedlist>
+</para>
+
+<para>
+</para>
+
+<para>
+</para>
+
+<para>
+</para>
+
+<para>
+</para>
+
+</sect1>
+
+</chapter>

@@ -1,0 +1,74 @@
+#!/bin/sh
+#
+# $Id: update_domaines.sh,v 1.31 2005/08/29 19:21:31 anarcat Exp $
+# ----------------------------------------------------------------------
+# AlternC - Web Hosting System
+# Copyright (C) 2002 by the AlternC Development Team.
+# http://alternc.org/
+# ----------------------------------------------------------------------
+# Based on:
+# Valentin Lacambre's web hosting softwares: http://altern.org/
+# ----------------------------------------------------------------------
+# LICENSE
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License (GPL)
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# To read the license please visit http://www.gnu.org/copyleft/gpl.html
+# ----------------------------------------------------------------------
+# Original Author of file: Jerome Moinet for l'Autre Net - 14/12/2000
+# Purpose of file: service reloading
+# ----------------------------------------------------------------------
+#
+
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+
+set -e
+
+umask 022
+
+########################################################################
+# Constants & Preliminary checks
+#
+
+DOMAIN_LOG_FILE="/var/log/alternc/update_domains.log"
+exec >>"$DOMAIN_LOG_FILE" 2>&1
+
+if [ `whoami` = 'root' ]; then
+  sudo=""
+else
+  sudo="sudo"
+fi
+
+apache_reload() {
+  if [ -x /usr/sbin/apache2ctl ]; then
+    $sudo /usr/sbin/apache2ctl graceful || echo "Cannot restart apache"  
+  fi
+}
+
+RELOAD_ZONES="$*"
+
+if [ ! -z "$RELOAD_ZONES" ]; then
+  for zone in $RELOAD_ZONES; do
+    case $zone in
+      "all")
+        $sudo rndc reload  || echo "Cannot reload bind" 
+        apache_reload # keep for compatibility
+        ;;
+      "apache")
+        apache_reload
+        ;;
+      *)
+        $sudo rndc reload "$zone"  || echo "Cannot reload bind for zone $zone" 
+        ;;
+    esac
+  done
+fi
+

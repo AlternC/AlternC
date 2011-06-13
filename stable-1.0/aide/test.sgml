@@ -1,0 +1,16 @@
+<chapter id="Test"><title>Coucou</title>
+
+ <sect1><title>le Coucou premier</title>
+
+<para>Juste histoire de tester les manipulations à effectuer pour créer un fichier d'aide </para>
+
+</sect1>
+
+<sect1><title>le coucou en second</title>
+<para>
+A voir donc
+</para>
+
+</sect1>
+
+</chapter>

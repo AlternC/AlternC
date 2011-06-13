@@ -1,0 +1,43 @@
+alternc (0.9.10) stable; urgency=low
+
+  * I have moved back the PHP sessions in the /var/alternc directory to
+    facilitate sharing sessions between NFS-mounted nodes. This overrides
+    the default /var/lib/php5 and adds a cronjob that replicates the
+    manual session garbage collection the PHP package is doing.
+    
+    Note that existing sessions are not migrated.
+
+ -- Antoine Beaupré <anarcat@koumbit.org>  Fri, 31 Oct 2008 13:40:18 -0400
+
+alternc (0.9.9) stable; urgency=low
+
+    Starting with 0.9.9, we do not overwrite Postfix's main.cf directly
+    (#1029). However, some settings are directly overwritten, using
+    postconf -e (as per Debian Policy). Those settings are configured in
+    /etc/alternc/postfix.cf and are therefore managed as a configuration
+    file which means that your configuration changes will be preserved.
+    
+    Also, this is the last release that will overwrite the main Bind
+    configuration file (named.conf). All changes will be performed in
+    named.conf.options in the future. This release still installs a new
+    named.conf that will make sure that this transition functions
+    properly. See #1025 and #1104.
+    
+    We also got rid of the bind_internal parameter. This configuration is
+    not recommended as it allows recursive queries on an authoritative
+    nameserver. The 'internal' ACL can still be changed in a template if
+    required. Similarly, we now let the mynetworks configuration in
+    Postfix up to the administrator and do not prompt for it directly
+    through AlternC.
+
+    We now support Apache2 out of the box, but it's not the default
+    platform deployed. To install AlternC with Apache2, you will need a
+    commandline like this:
+    
+        apt-get install apache2 libapache2-mod-php5 alternc
+    
+    Note, however, that this doesn't take care of removing the existing
+    apache1 installation. This is a more complex operation that must be
+    performed with a complete package manager like aptitude or synaptic.
+
+ -- Antoine Beaupré <anarcat@koumbit.org>  Tue, 15 Apr 2008 11:52:56 -0400

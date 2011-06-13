@@ -1,0 +1,79 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+case "$1" in
+  install)
+    ;;
+
+  upgrade)
+    if dpkg --compare-versions "$2" lt "0.9.4"; then
+        echo "Upgrading bind configuration"
+        # Move /etc/bind files around
+        mkdir -p /var/alternc/bind
+        if [ ! -e /var/alternc/bind/automatic.conf -a \
+             -f /etc/bind/automatic.conf ]; then
+            if [ ! -e /var/alternc/bind/zones ]; then
+                mkdir -p /var/alternc/bind/zones
+            fi
+            for zone in `sed -n -e 's,.*/etc/bind/master/\(.*\)".*,\1,p' \
+                             /etc/bind/automatic.conf`; do
+                if [ -f /etc/bind/master/$zone ]; then
+                    mv /etc/bind/master/$zone /var/alternc/bind/zones
+                fi
+            done
+            cp -a -f /etc/bind/automatic.conf /var/alternc/bind/automatic.conf
+            sed -e 's,/etc/bind/master,/var/alternc/bind/zones,g' \
+                < /etc/bind/automatic.conf > /var/alternc/bind/automatic.conf
+            rm /etc/bind/automatic.conf
+        fi
+        if [ ! -e /var/alternc/bind/slaveip.conf -a \
+             -f /etc/bind/slaveip.conf ]; then
+            mv /etc/bind/slaveip.conf /var/alternc/bind/slaveip.conf
+        fi
+        if [ ! -e /etc/bind/templates ]; then
+            mkdir -p /etc/bind/templates
+        fi
+        if [ ! -e /etc/bind/templates/named.template -a \
+             -f /etc/bind/domaines.template ]; then
+            mv /etc/bind/domaines.template /etc/bind/templates/named.template
+        fi
+        if [ ! -e /etc/bind/templates/zone.template -a \
+             -f /etc/bind/master/domaines.template ]; then
+            mv /etc/bind/master/domaines.template \
+               /etc/bind/templates/zone.template
+        fi
+        if [ -f /etc/bind/master/mx.template ]; then
+            rm /etc/bind/master/mx.template
+        fi
+        if [ -f /etc/bind/master/slave.template ]; then
+            rm /etc/bind/master/slave.template
+        fi
+        rmdir /etc/bind/master 2> /dev/null ||
+            echo "/etc/bind/master was not empty. Please remove it manually."
+    fi
+
+    if [ ! -e /etc/alternc/menulist.txt ]; then
+        if [ -f /var/alternc/bureau/admin/menulist.txt ]; then
+            mv -f /var/alternc/bureau/admin/menulist.txt \
+                  /etc/alternc/menulist.txt
+        fi
+    fi
+
+    ;;
+
+  abort-upgrade)
+    ;;
+
+  *)
+    echo "preinst called with unknown argument '$1'" >&2
+    exit 1
+    ;;
+
+esac
+
+#DEBHELPER#
+
+# vim: et sw=4

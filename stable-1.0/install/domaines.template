@@ -1,0 +1,1 @@
+zone "@@DOMAINE@@" { type slave; allow-query { any; }; file "@@DOMAINE@@"; masters { %%public_ip%%; }; };

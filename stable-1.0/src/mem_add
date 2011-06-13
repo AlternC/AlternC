@@ -1,0 +1,39 @@
+#!/usr/bin/perl 
+
+use strict;
+
+my ($name,$uid) = @ARGV;
+
+if (!$name || !$uid) {
+    print "Usage: mem_add <name> <uid>\n";
+    print " Create the AlternC account <name> having uid number <uid>\n";
+    exit(1);
+}
+
+$ENV{PATH} = "";
+delete @ENV{'IFS', 'CDPATH', 'ENV', 'BASH_ENV'};
+
+if (!($name =~ /^([a-z0-9]+)$/)) {
+    die "Account name is incorrect.";
+}
+$name=$1;
+if (!($uid =~ /^([0-9]+)$/)) {
+    die "uid is incorrect.";
+}
+$uid=$1;
+
+$< = $>;
+$( = $);
+
+my $PTH="/var/alternc/html/".substr($name,0,1)."/".$name;
+
+my @create_paths = ($PTH);
+
+for my $p (@create_paths) {
+    mkdir($p);
+    chown(33, $uid, $p);
+    system("/bin/chmod 02770 '$p'");
+}
+
+0;
+

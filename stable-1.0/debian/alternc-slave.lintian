@@ -1,0 +1,28 @@
+alternc-slave: setuid-binary usr/lib/alternc/du.pl 4750 root/www-data
+alternc-slave: setuid-binary usr/lib/alternc/mail_add 4750 root/www-data
+alternc-slave: setuid-binary usr/lib/alternc/mail_del 4750 root/www-data
+alternc-slave: setuid-binary usr/lib/alternc/mem_add 4750 root/www-data
+alternc-slave: setuid-binary usr/lib/alternc/mem_del 4750 root/www-data
+alternc-slave: setuid-binary usr/lib/alternc/quota_edit 4750 root/www-data
+alternc-slave: setuid-binary usr/lib/alternc/quota_get 4750 root/www-data
+alternc-slave: executable-is-not-world-readable usr/lib/alternc/du.pl 4750
+alternc-slave: executable-is-not-world-readable usr/lib/alternc/fixperms.sh 0750 != 0755
+alternc-slave: executable-is-not-world-readable usr/lib/alternc/mail_add 4750
+alternc-slave: executable-is-not-world-readable usr/lib/alternc/mail_del 4750
+alternc-slave: executable-is-not-world-readable usr/lib/alternc/mem_add 4750
+alternc-slave: executable-is-not-world-readable usr/lib/alternc/mem_del 4750
+alternc-slave: executable-is-not-world-readable usr/lib/alternc/quota_delete 0750 != 0755
+alternc-slave: executable-is-not-world-readable usr/lib/alternc/quota_get 4750
+alternc-slave: executable-is-not-world-readable usr/lib/alternc/quota_edit 4750
+alternc-slave: executable-is-not-world-readable usr/lib/alternc/quota_edit.sh 0750 != 0755
+alternc-slave: executable-is-not-world-readable usr/lib/alternc/quota_get.sh 0750 != 0755
+alternc-slave: executable-is-not-world-readable usr/lib/alternc/quota_init 0750 != 0755
+alternc-slave: executable-is-not-world-readable usr/lib/alternc/rawstat.daily 0750 != 0755
+alternc-slave: executable-is-not-world-readable usr/lib/alternc/sendmail 0750 != 0755
+alternc-slave: executable-is-not-world-readable usr/lib/alternc/slave_dns 0750 != 0755
+alternc-slave: executable-is-not-world-readable usr/lib/alternc/spoolsize.php 0750 != 0755
+alternc-slave: executable-is-not-world-readable usr/lib/alternc/sqlbackup.sh 0750 != 0755
+alternc-slave: executable-is-not-world-readable usr/lib/alternc/update_domains.sh 0750 != 0755
+alternc-slave: executable-is-not-world-readable usr/lib/alternc/functions_hosting.sh 0750 != 0755
+alternc-slave: executable-is-not-world-readable usr/lib/alternc/functions_dns.sh 0750 != 0755
+alternc-slave: non-standard-dir-in-var var/backups/

@@ -1,0 +1,28 @@
+#!/usr/bin/perl 
+
+use strict;
+
+my ($name) = @ARGV;
+
+if (!$name) {
+    print "Usage: mem_del <name>\n";
+    print " Delete the AlternC account <name>\n";
+    exit(1);
+}
+
+$ENV{PATH} = "";
+delete @ENV{'IFS', 'CDPATH', 'ENV', 'BASH_ENV'};
+
+if (!($name =~ /^([a-z0-9]+)$/)) {
+    die "Account name is incorrect.";
+}
+$name=$1;
+
+$< = $>;
+$( = $);
+
+my $PTH="/var/alternc/html/".substr($name,0,1)."/".$name;
+
+system("/bin/rm -rf '$PTH'");
+
+0;

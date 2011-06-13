@@ -1,0 +1,38 @@
+#
+# $Id: Makefile,v 1.20 2005/05/21 16:07:32 arnaud-lb Exp $
+# ----------------------------------------------------------------------
+# AlternC - Web Hosting System
+# Copyright (C) 2002 by the AlternC Development Team.
+# http://alternc.org/
+# ----------------------------------------------------------------------
+# Based on:
+# Valentin Lacambre's web hosting softwares: http://altern.org/
+# ----------------------------------------------------------------------
+# LICENSE
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License (GPL)
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# To read the license please visit http://www.gnu.org/copyleft/gpl.html
+# ----------------------------------------------------------------------
+# Purpose of file: Makefile des binaires de /usr/lib/alternc
+# ----------------------------------------------------------------------
+#
+SETUID=mail_add mail_del quota_edit quota_get mem_add mem_del
+SCRIPTS=quota_edit.sh quota_get.sh sqlbackup.sh rawstat.daily quota_init quota_delete update_domains.sh slave_dns sendmail spoolsize.php fixperms.sh alternc-dboptimize
+LIBS=functions.sh functions_hosting.sh functions_dns.sh
+BIN=$(DESTDIR)/usr/lib/alternc/
+
+install: 
+	chown root:www-data $(BIN)
+	chmod 755 $(BIN)
+	install -o root -g www-data -m4750 $(SETUID) du.pl $(BIN)
+	install -o root -g www-data -m0750 $(SCRIPTS) $(BIN)
+	install -o root -g www-data -m0644 $(LIBS) $(BIN)

@@ -1,0 +1,13 @@
+#
+# %%warning_message%%
+#
+
+user = %%dbuser%%
+password = %%dbpwd%%
+hosts =%%dbhost%%
+dbname = %%dbname%%
+table = mail_domain
+# this should by %%primary_mx%%
+select_field = 'relay:[%%mx%%]'
+where_field = mail
+

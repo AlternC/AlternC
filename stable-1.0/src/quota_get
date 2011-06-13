@@ -1,0 +1,28 @@
+#!/usr/bin/perl 
+
+use strict;
+
+my ($uid) = @ARGV;
+
+if (!$uid) {
+    print "Usage: quota_get <uid>\n";
+    print " Get the quota of the AlternC account having uid <uid>\n";
+    exit(1);
+}
+
+$ENV{PATH} = "";
+delete @ENV{'IFS', 'CDPATH', 'ENV', 'BASH_ENV'};
+
+if (!($uid =~ /^([0-9]+)$/)) {
+    die "uid is incorrect.";
+}
+$uid=$1;
+
+$< = $>;
+$( = $);
+
+my $PTH="/usr/lib/alternc/quota_get.sh '$uid'";
+
+system($PTH);
+
+0;

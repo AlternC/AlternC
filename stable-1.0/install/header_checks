@@ -1,0 +1,4 @@
+/^Subject: ILOVEYOU/ REJECT
+/^From:.*<_.*>$/ REJECT
+/^Subject: How are you$/ REJECT
+/^Subject: Eager to see you$/ REJECT

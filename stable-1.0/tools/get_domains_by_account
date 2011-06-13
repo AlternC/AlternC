@@ -1,0 +1,84 @@
+#!/bin/bash
+#
+# $Id: get_domains_by_account 22 2005-04-11 17:21:15Z jerome $
+# ----------------------------------------------------------------------
+# AlternC - Web Hosting System
+# Copyright (C) 2002 by the AlternC Development Team.
+# http://alternc.org
+# ----------------------------------------------------------------------
+# Based on:
+# Valentin Lacambre's web hosting softwares: http://altern.org/
+# ----------------------------------------------------------------------
+# LICENSE
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License (GPL)
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# To read the license please visit http://www.gnu.org/copyleft/gpl.html
+# ----------------------------------------------------------------------
+# Original Author of file: Jerome Moinet
+# Purpose of file: gives domains and sub-domains attached to an account
+# ----------------------------------------------------------------------
+#
+PATH=""
+PROG_NAME=get_domains_by_account
+PROG_VERSION=0.1.0
+ALTERNC_ETC=/etc/alternc
+ALTERNC_CONF_FILE=$ALTERNC_ETC/local.sh
+export TEXTDOMAIN=alternc-admintools
+
+
+# Be sure to use the right programs on Debian
+# and be sure they are there
+id=/usr/bin/id
+mysql=/usr/bin/mysql
+gettext=/usr/bin/gettext
+printf=/usr/bin/printf
+
+# Must have gettext first to display error messages
+[ -x "$gettext" ] || { echo "Cannot execute $gettext"; exit 1 ; }
+
+for i in $id $mysql $printf
+do
+  ! [ -x "$i" ] && { echo "$($gettext "Unable to execute") ${i}."; exit 1 ; }
+done
+
+# Language-dependent messages
+# Uses gettext and mo files.
+# Don't change these messages, change the .po file instead.
+HELP=$($gettext "Gives domains and sub-domains attached to an account.")
+USAGE=`$printf "$($gettext "Usage: %s account.")" $PROG_NAME`
+NOT_FOUND_MSG=$($gettext "does not exist.")
+NON_ROOT_MSG=$($gettext "You have to be root (uid 0) to execute this program.")
+MISSING_PROG=$($gettext "Unable to execute")
+MISSING_CONF_FILE=`$printf "$($gettext "Can't find %s. Are you sure AlterncC is properly installed?")" $ALTERNC_CONF_FILE`
+MYSQL_UNREACHABLE_DATABASE=`$printf "$($gettext "Cannot access accounts database. Please check either %s or Mysql state.")" $ALTERNC_CONF_FILE`
+
+
+#-------------------------
+# Main
+#-------------------------
+# Must be root
+[ "`$id -u`" != "0" ] && { echo $NON_ROOT_MSG ; exit 1 ; }
+# Must have minimum 1 parameter
+[ -z "$1" ] && { echo $USAGE ; exit 1 ; }
+# Handle -h and --help flags
+[ "$1" = "-h" ] || [ "$1" = "--help" ] && { echo $HELP ; echo $USAGE ; exit 0 ; }
+# Have to get AlternC conf file :
+! [ -f "$ALTERNC_CONF_FILE" ] && { echo $MISSING_CONF_FILE ; exit 1 ; } || . $ALTERNC_CONF_FILE
+# Must have access to mysql to retreive accounts owning domains :
+mysql="$mysql --defaults-file=/etc/alternc/my.cnf -B -N -e"
+$mysql "desc domaines;" > /dev/null 2>&1
+[ "$?" != 0 ] && { echo "$MYSQL_UNREACHABLE_DATABASE" ; exit 1 ; }
+
+# Does the stuff
+$mysql "select concat(a.sub, if(a.sub=\"\",\"\", \".\"), a.domaine) from sub_domaines a, membres b where a.compte = b.uid and b.login = \"${1}\";"
+
+

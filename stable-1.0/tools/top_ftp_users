@@ -1,0 +1,201 @@
+#!/bin/bash
+#
+# $Id: top_ftp_users 22 2005-04-11 17:21:15Z jerome $
+# ----------------------------------------------------------------------
+# AlternC - Web Hosting System
+# Copyright (C) 2002 by the AlternC Development Team.
+# http://alternc.org
+# ----------------------------------------------------------------------
+# Based on:
+# Valentin Lacambre's web hosting softwares: http://altern.org/
+# ----------------------------------------------------------------------
+# LICENSE
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License (GPL)
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# To read the license please visit http://www.gnu.org/copyleft/gpl.html
+# ----------------------------------------------------------------------
+# Original Author of file: Jerome Moinet
+# Purpose of file: Parse the ftp logs to give the n most active users
+# ----------------------------------------------------------------------
+#
+PATH=""
+PROG_NAME=top_ftp_users
+PROG_VERSION=0.1.0
+ALTERNC_ROOT=/var/alternc
+ALTERNC_ETC=/etc/alternc
+ALTERNC_LIB=/usr/lib/alternc
+ALTERNC_CONF_FILE=$ALTERNC_ETC/local.sh
+LOG_DIR=/var/log
+LOG_FILE=$LOG_DIR/xferlog
+TMP_ROOT=$ALTERNC_ROOT/tmp
+RES_FILE=$TMP_ROOT/$PROG_NAME.res.$$
+INTERMEDIATE_FILE=$TMP_ROOT/$PROG_NAME.int.$$
+LOCK_FILE=/var/run/$PROG_NAME
+export TEXTDOMAIN=alternc-admintools
+YES=yes
+NO=no
+
+# Be sure to use the right programs
+# and be sure they are there
+awk=/usr/bin/awk
+grep=/bin/grep
+cat=/bin/cat
+zcat=/bin/zcat
+head=/usr/bin/head
+id=/usr/bin/id
+sort=/usr/bin/sort
+rm=/bin/rm
+sed=/bin/sed
+cut=/usr/bin/cut
+tail=/usr/bin/tail
+ls=/bin/ls
+gettext=/usr/bin/gettext
+printf=/usr/bin/printf
+lockfileremove=/usr/bin/lockfile-remove
+lockfilecreate=/usr/bin/lockfile-create
+lockfiletouch=/usr/bin/lockfile-touch
+
+# Must have gettext first to display error messages
+[ -x "$gettext" ] || { echo "Cannot execute $gettext"; exit 1 ; }
+
+for i in $awk $grep $cat $zcat $head $id $sort $rm $sed $cut $tail $ls $printf $lockfileremove $lockfilecreate $lockfiletouch
+do
+	[ -x "$i" ] || { echo "$($gettext "Unable to execute") ${i}."; exit 1 ; }
+done
+
+
+#-------------------------
+set_messages()
+#-------------------------
+{
+	# Language-dependent messages
+	# Uses gettext and mo files.
+	# Don't change these messages, change the .po file instead.
+	USAGE=$($gettext -e "Usage: top_ftp_users [ options ] number\n\ntop_ftp_users is a program that gives brief statistics\non ftp usage by parsing the ftp logs.\n\nOptions:\n  -h, --help           This help text.\n  -v, --version        Show version.\n  -z, --use-gz-logs    Parse gzipped and .1, ...n apache logs instead of just parsing the current log.\n  -n, --number=NUMBER  parse the NUMBER last lines of the current log.\n                     This option is not compatible with the --use-gz-logs option.\nSee the top_ftp_users(8) manual page for more information.")
+	NOT_FOUND_MSG=$($gettext "does not exist.")
+	NON_NUM_MSG=$($gettext "The \"number\" argument must be a number.")
+	NON_COMPATIBLE_MSG=$($gettext "The -n and -z options are not compatible.")
+	NON_NUM_MSG_FOR_N=$($gettext "The -n option requieres a number as argument.")
+	LOCKFILE_CREATION_FAILED=`$printf "$($gettext "%s is allready beeing executed.")" $PROG_NAME`
+	NON_ROOT_MSG=$($gettext "You have to be root (uid 0) to execute this program.")
+	HIT_RES_MSG=`$printf "$($gettext "Top %s ftp users, sorted by connection number (using gzipped logs: %s):")" $NB_USERS $($gettext "$USE_GZ_LOGS")`
+	SIZE_RES_MSG=`$printf "$($gettext "Top %s ftp users, sorted by size (using gzipped logs: %s):")" $NB_USERS $($gettext "$USE_GZ_LOGS")`
+	MISSING_CONF_FILE=`$printf "$($gettext "Can't find %s. Are you sure AlterncC is properly installed?")" $ALTERNC_CONF_FILE`
+	UNKNOWN_OPTION=$($gettext "Unknown %s option.")
+}
+
+
+#-------------------------
+trap_EXIT()
+#-------------------------
+{
+	# Does some cleaning
+	$rm -f $RES_FILE
+	$rm -f $INTERMEDIATE_FILE
+	$lockfileremove $LOCK_FILE
+	exit
+}
+trap trap_EXIT INT KILL TERM QUIT ABRT STOP HUP
+
+
+#-------------------------
+# Main
+#-------------------------
+set_messages
+# Must be root
+[ "`$id -u`" != "0" ] && { echo $NON_ROOT_MSG ; exit 1 ; }
+
+# Parse args
+IS_N_PARAM=false
+USE_GZ_LOGS="$NO"
+N_PARAM=""
+COMMAND=$cat
+for ARG in "$@" ; do
+	[ "$IS_N_PARAM" = "true" ] && { shift ; IS_N_PARAM=false ; continue ; }
+	[ "`$printf "$ARG\n" | $cut -c1`" != "-" ] && [ "$IS_N_PARAM" = "false" ] &&  break
+
+	case $ARG in
+		-h | --help        ) echo $PROG_NAME version $PROG_VERSION ; $printf "$USAGE\n" ; exit ;;
+		-v | --version     ) echo $PROG_NAME version $PROG_VERSION ; exit ;;
+		-z | --use-gz-logs ) USE_GZ_LOGS="$YES" ;;
+		-n | --number=*    ) 
+			if [ "$ARG" != "-n" ] ; then
+				N_PARAM=`echo $ARG | $cut -d"=" -f2`
+			else
+				N_PARAM=$2
+				IS_N_PARAM=true
+			fi
+			[ `echo "$N_PARAM" | $grep -c [^0-9]` != 0 ] && { echo "$NON_NUM_MSG_FOR_N" ; exit 1 ; }
+			COMMAND="$tail -n $N_PARAM"
+			;;
+		*) $printf "${UNKNOWN_OPTION}\n" $ARG ; exit 1 ;;
+	esac
+	shift
+done
+
+# -n and -z options are not compatible
+[ "$USE_GZ_LOGS" = "$YES" ] && ! [ -z "$N_PARAM" ] && { echo $NON_COMPATIBLE_MSG ; exit 1 ; }
+# Must have only 1 parameter
+[ -z "$1" ] || [ "$#" -gt 1 ] && { $printf "$USAGE\n" ; exit 1 ; }
+# Argument "number"  must be numeric
+[ `echo "$1" | $grep -c [^0-9]` != 0 ] && { echo "$NON_NUM_MSG" ; exit 1 ; } || NB_USERS=$1
+# Parameter 1 must be numeric
+[ `echo "$1" | $grep -c [^0-9]` != 0 ] && { echo "$NON_NUM_MSG" ; exit 1 ; } || NB_USERS=$1
+# These dirs/files must exist
+! [ -d "$LOG_DIR" ] && { echo "$LOG_DIR $NOT_FOUND_MSG" ; exit 1 ; }
+! [ -d "$TMP_ROOT" ] && { echo "$TMP_ROOT $NOT_FOUND_MSG" ; exit 1 ; }
+! [ -f "$LOG_FILE" ] && { echo "$LOG_FILE $NOT_FOUND_MSG" ; exit 1 ; }
+# Have to get AlternC conf file :
+! [ -f "$ALTERNC_CONF_FILE" ] && { echo $MISSING_CONF_FILE ; exit 1 ; } || . $ALTERNC_CONF_FILE
+
+
+# Prevents executing more than one shell at the same time
+$lockfilecreate --retry 1 $LOCK_FILE
+if [ $? != 0 ]
+then
+	echo $LOCKFILE_CREATION_FAILED
+	exit 1
+fi
+$lockfiletouch $LOCK_FILE &
+BADGER="$!"
+
+
+# Does the stuff
+set_messages
+# Have to parse files one by one or else system wil go on knees
+$COMMAND $LOG_FILE | $awk '{z=NF-4 ; account[$z]++ ; size[$z]+=$8} END {for (item in account) print item" "account[item]" "size[item]}' > $RES_FILE
+for FILE in `$ls -1 $LOG_FILE.* | $grep -v "\.gz$"`; do
+	[ "$USE_GZ_LOGS" = "$YES" ] && [ -f $FILE ] && $cat $FILE | $awk '{z=NF-4 ; account[$z]++ ; size[$z]+=$8} END {for (item in account) print item" "account[item]" "size[item]}' >> $RES_FILE
+done
+if [ "$USE_GZ_LOGS" = "$YES" ] 
+then
+	for GZLOG in $LOG_FILE.*.gz
+	do
+		$zcat $GZLOG | $awk '{z=NF-4 ; account[$z]++ ; size[$z]+=$8} END {for (item in account) print item" "account[item]" "size[item]}' >> $RES_FILE
+	done
+fi
+
+
+# show results
+$cat $RES_FILE | $awk '{account[$1]+=$2 ; size[$1]+=$3} END {for (item in account) print item" "account[item]" "size[item]}' > $INTERMEDIATE_FILE
+
+echo $HIT_RES_MSG
+$cat $INTERMEDIATE_FILE | $awk {'printf ("%20d %s\n", $2, $1)'} | $sort -gr | $head -n$NB_USERS
+echo ""
+echo $SIZE_RES_MSG
+$cat $INTERMEDIATE_FILE | $awk {'printf ("%20d %s\n", $3, $1)'} | $sort -gr | $head -n$NB_USERS
+
+
+# cleanly exit and remove temp files
+kill "${BADGER}"
+trap_EXIT
+
