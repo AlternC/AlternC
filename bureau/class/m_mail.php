@@ -91,7 +91,7 @@ class m_mail {
   function enum_doms_mails_letters($dom) {
     global $err,$cuid,$db;
     $err->log("mail","enum_doms_mails_letters",$dom);
-    $db->query("SELECT LEFT(mail,1) as letter FROM mail_domain where uid='$cuid' AND type=0 and mail like '%@".addslashes($dom)."' GROUP BY letter ORDER BY letter;");
+    $db->query("select distinct left(ad.address,1) as letter from address ad, domaines d where address like '%@".addslashes($dom)."' and ad.domain_id = d.compte and d.compte='$cuid' order by letter;");
     $res=array();
     while($db->next_record()) {
       $res[]=$db->f("letter");
@@ -206,7 +206,7 @@ class m_mail {
    * @param string $mail the email address (with its fqdn domain)
    * @return boolean true if this email is available, false if it is already defined.
    */
-  function available($mail) {
+  function available($mail) { // NEW OK
     global $err,$db,$cuid;
     $err->log("mail","available",$mail);
     $db->query("SELECT address FROM address WHERE address='$mail';");

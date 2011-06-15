@@ -78,6 +78,68 @@ VALUES (
 'This variable set if you want to allow all IP address to access FTP by default. If the user start to define some IP or subnet in the allow list, only those he defined will be allowed. This variable can take two value : 0 or 1.'
 );
 
+--
+-- Main address table.
+--
+-- Addresses for domain.
+
+CREATE TABLE `address` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT, -- Technical id.
+  `domain_id` bigint(20) unsigned DEFAULT NULL REFERENCES `sub_domain`(`id`), -- FK to sub_domains.
+  `address` varchar(255) NOT NULL, -- The address.
+  `password` varchar(255) DEFAULT NULL, -- The password associated to the address.
+  `enabled` int(1) unsigned NOT NULL DEFAULT '1', -- Enabled flag.
+  `expire_date` datetime DEFAULT NULL, -- Expiration date, used for temporary addresses.
+  `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- Update date, for technical usage only.
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `address` (`address`)
+) COMMENT = 'This is the main address table. It represents an address as in RFC2822';
+
+
+--
+-- Mailbox table.
+-- 
+-- Local delivered mailboxes.
+
+CREATE TABLE `mailbox` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT, -- Technical id.
+  `address_id` bigint(20) unsigned NOT NULL REFERENCES `address`(`id`), -- Reference to address.
+  `path` varchar(255) NOT NULL, -- Relative path to the mailbox.
+  `quota` bigint(20) unsigned DEFAULT NULL, -- Quota for this mailbox.
+  `delivery` varchar(255) NOT NULL, -- Delivery transport.
+  `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- Update date, for technical usage only.
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `address_id` (`address_id`)
+) COMMENT = 'Table containing local deliverd mailboxes.';
+
+--
+-- Other recipients.
+--
+-- Other recipients for an address (aliases)
+
+CREATE TABLE `recipient` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT, -- Technical id.
+  `address_id` bigint(20) unsigned NOT NULL REFERENCES `address`(`id`), -- Reference to address
+  `recipients` text NOT NULL, -- Recipients
+  `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- Update date, for technical usage only.
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `address_id` (`address_id`)
+) COMMENT = 'Table containing other recipients (aliases) for an address.';
+
+--
+-- Mailman table.
+--
+-- Table containing mailman addresses
+
+CREATE TABLE `mailman` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT, -- Technical id.
+  `address_id` bigint(20) unsigned NOT NULL REFERENCES `address`(`id`), -- Reference to address
+  `delivery` varchar(255) NOT NULL, -- Delivery transport.
+  `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- Update date, for technical usage only.
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `address_id` (`address_id`)
+) COMMENT = 'Table containing mailman list addresses.';
+
 
 -- Regenerate apache conf to enable mpm-itk
 update sub_domaines set web_action = 'UPDATE';
