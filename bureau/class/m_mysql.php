@@ -447,7 +447,8 @@ class m_mysql {
     $this->dbus->query("SHOW TABLE STATUS FROM `$dbname`;");
     $size = 0;
     while ($db->next_record()) {
-      $size += $db->f('Data_length') + $db->f('Index_length')	+ $db->f('Data_free');
+      $size += $db->f('Data_length') + $db->f('Index_length');
+      if ( $db->f('Engine') != 'InnoDB') $size += $db->f('Data_free');
     }
     return $size;
   }
