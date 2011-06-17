@@ -533,8 +533,8 @@ Cordialement.
     if ($this->user["show_help"] || $force) {
       $hlp=_("hlp_$file");
       if ($hlp!="hlp_$file") {
-	      $hlp=ereg_replace(
-			  "HELPID_([0-9]*)",
+	      $hlp=preg_replace(
+			  "#HELPID_([0-9]*)#",
 			  "<a href=\"javascript:help(\\1);\"><img src=\"/admin/aide/help.png\" width=\"17\" height=\"17\" style=\"vertical-align: middle;\" alt=\""._("Help")."\" /></a>",$hlp);
       	echo "<p class=\"hlp\">".$hlp."</p>";
        	return true;

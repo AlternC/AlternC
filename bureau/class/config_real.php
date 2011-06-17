@@ -84,7 +84,7 @@ $classes=array();
 /* CLASSES PHP : automatic include : */
 $c=opendir($root."class/");
 while ($di=readdir($c)) {
-  if (ereg("^m_(.*)\\.php$",$di,$match)) { // $
+  if (preg_match("#^m_(.*)\\.php$#",$di,$match)) { // $
     $name1="m_".$match[1];
     $name2=$match[1];
     $classes[]=$name2;

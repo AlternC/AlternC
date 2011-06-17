@@ -453,7 +453,7 @@ class m_dom {
     $err->log("dom","whois",$domain);
     // pour ajouter un nouveau TLD, utiliser le code ci-dessous.
     //  echo "whois : $domain<br />";
-    ereg(".*\.([^\.]*)",$domain,$out);
+    preg_match("#.*\.([^\.]*)#",$domain,$out);
     $ext=$out[1];
     // pour ajouter un nouveau TLD, utiliser le code ci-dessous.
     //  echo "ext: $ext<br />";
@@ -464,7 +464,7 @@ class m_dom {
       $state=0;
       while (!feof($fp)) {
         $ligne = fgets($fp,128);
-        if (ereg('^whois:[[:space:]]+.*$', $ligne)) { $serveur=preg_replace('/whois:\ */','',$ligne,1); }
+        if (preg_match('#^whois:#', $ligne)) { $serveur=preg_replace('/whois:\ */','',$ligne,1); }
       }
     }
 
@@ -495,15 +495,15 @@ class m_dom {
   case "biz":
   case "name":
   case "cc":
-    if (ereg("Name Server:", $ligne)) {
+    if (preg_match("#Name Server:#", $ligne)) {
       $found = true;
-      $tmp=strtolower(ereg_replace(chr(10), "",ereg_replace(chr(13),"",ereg_replace(" ","", ereg_replace("Name Server:","", $ligne)))));
+      $tmp=strtolower(str_replace(chr(10), "",str_replace(chr(13),"",str_replace(" ","", str_replace("Name Server:","", $ligne)))));
       if ($tmp)
         $server[]=$tmp;
     }
     break;
   case "cx":
-    $ligne = ereg_replace(chr(10), "",ereg_replace(chr(13),"",ereg_replace(" ","", $ligne)));
+    $ligne = str_replace(chr(10), "",str_replace(chr(13),"",str_replace(" ","", $ligne)));
     if ($ligne=="" && $state==1)
       $state=2;
     if ($state==1)
@@ -536,7 +536,7 @@ class m_dom {
           }
           break;
     case "it":
-          if (ereg("nserver:", $ligne)) {
+          if (preg_match("#nserver:#", $ligne)) {
             $found=true;
             $tmp=strtolower(preg_replace("/nserver:\s*[^ ]*\s*([^\s]*)$/","\\1", $ligne));
             if ($tmp)
@@ -545,20 +545,20 @@ class m_dom {
           break;
   case "fr":
   case "re":
-          if (ereg("nserver:", $ligne)) {
+          if (preg_match("#nserver:#", $ligne)) {
             $found=true;
-            $tmp=strtolower(preg_replace("/nserver:\s*([^\s]*)\s*.*$/","\\1", $ligne));
+            $tmp=strtolower(preg_replace("#nserver:\s*([^\s]*)\s*.*$#","\\1", $ligne));
             if ($tmp)
               $server[]=$tmp;
           }
           break;
   case "ca":
   case "ws";
-    if (ereg('^[[:space:]]*Name servers:[[:space:]]*$', $ligne)) {
+    if (preg_match('#Name servers#', $ligne)) {
           // found the server
       $state = 1;
     } elseif ($state) {
-      if (ereg('^[^%]', $ligne) && $ligne = ereg_replace('[[:space:]]', "", $ligne)) {
+      if (preg_match('#^[^%]#', $ligne) && $ligne = preg_replace('#[[:space:]]#', "", $ligne)) {
       // first non-whitespace line is considered to be the nameservers themselves
       $found = true;
       $server[] = $ligne;
@@ -566,7 +566,7 @@ class m_dom {
     }
     break;
         case "coop":
-          if (preg_match('/Host Name:\s*([^\s]+)/', $ligne, $matches)) {
+          if (preg_match('#Host Name:\s*([^\s]+)#', $ligne, $matches)) {
             $found = true;
             $server[] = $matches[1];
           }
@@ -941,7 +941,7 @@ class m_dom {
    */
   function edit_domain($dom,$dns,$gesmx,$force=0) {
     global $db,$err,$L_MX,$classes,$cuid;
-    $err->log("dom","edit_domain",$dom);
+    $err->log("dom","edit_domain",$dom."/".$dns."/".$gesmx);
     // Locked ?
     if (!$this->islocked && !$force) {
       $err->raise("dom",3);
@@ -1016,7 +1016,7 @@ class m_dom {
       }
     }
     
-    $db->query("UPDATE domaines SET gesdns='$dns', mx='$mx', gesmx='$gesmx' WHERE domaine='$dom'");
+    $db->query("UPDATE domaines SET gesdns='$dns', gesmx='$gesmx' WHERE domaine='$dom'");
     $db->query("UPDATE domaines set dns_action='UPDATE' where domaine='$dom';");
     
     return true;

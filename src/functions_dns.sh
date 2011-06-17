@@ -109,6 +109,11 @@ dns_regenerate() {
             s/%%ns2%%/$NS2_HOSTNAME/g;
             s/%%DEFAULT_MX%%/$DEFAULT_MX/g;
             s/%%DEFAULT_SECONDARY_MX%%/$DEFAULT_SECONDARY_MX/g;
+            s/@@fqdn@@/$FQDN/g;
+            s/@@ns1@@/$NS1_HOSTNAME/g;
+            s/@@ns2@@/$NS2_HOSTNAME/g;
+            s/@@DEFAULT_MX@@/$DEFAULT_MX/g;
+            s/@@DEFAULT_SECONDARY_MX@@/$DEFAULT_SECONDARY_MX/g;
             s/@@DOMAINE@@/$domain/g;
             s/@@SERIAL@@/$serial/g;
             s/@@PUBLIC_IP@@/$PUBLIC_IP/g")

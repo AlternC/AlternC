@@ -328,7 +328,7 @@ class m_admin {
     }
     // Vérification de la conformité du login
     $login=strtolower($login);
-    if (!ereg("^[a-z0-9]*$",$login)) { //$
+    if (!preg_match("#^[a-z0-9]*$#",$login)) { //$
       $err->raise("admin", "Login can only contains characters a-z and 0-9");
       return false;
     }

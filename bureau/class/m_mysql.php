@@ -194,7 +194,7 @@ class m_mysql {
       $err->raise("mysql",1);
       return false;
     }
-    if (!ereg("^[0-9a-z]*$",$dbn)) {
+    if (!preg_match("#^[0-9a-z]*$#",$dbn)) {
       $err->raise("mysql",2);
       return false;
     }
@@ -277,7 +277,7 @@ class m_mysql {
   function put_mysql_backup($dbn,$bck_mode,$bck_history,$bck_gzip,$bck_dir) {
     global $db,$err,$mem,$bro,$cuid;
     $err->log("mysql","put_mysql_backup");
-    if (!ereg("^[0-9a-z]*$",$dbn)) {
+    if (!preg_match("#^[0-9a-z]*$#",$dbn)) {
       $err->raise("mysql",2);
       return false;
     }
@@ -502,7 +502,7 @@ class m_mysql {
       $err->raise("mysql",13);
       return false;
     }
-    if (!ereg("^[0-9a-z]",$usern)) {
+    if (!preg_match("#^[0-9a-z]#",$usern)) {
       $err->raise("mysql",14);
       return false;
     }
@@ -578,7 +578,7 @@ class m_mysql {
   function del_user($user) {
     global $db,$err,$mem,$cuid,$L_MYSQL_DATABASE;
     $err->log("mysql","del_user",$user);
-    if (!ereg("^[0-9a-z]",$user)) {
+    if (!preg_match("#^[0-9a-z]#",$user)) {
       $err->raise("mysql",14);
       return false;
     }

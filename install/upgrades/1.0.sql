@@ -1,3 +1,57 @@
+-- 
+-- Because of problems with people using AlternC pre1 , 
+-- we include 0.9.10.sql in this file
+
+ALTER IGNORE TABLE `membres` ADD COLUMN `notes` TEXT NOT NULL AFTER `type`;
+
+CREATE TABLE IF NOT EXISTS `policy` (
+  `name` varchar(64) NOT NULL,
+  `minsize` tinyint(3) unsigned NOT NULL,
+  `maxsize` tinyint(3) unsigned NOT NULL,
+  `classcount` tinyint(3) unsigned NOT NULL,
+  `allowlogin` tinyint(3) unsigned NOT NULL,
+  PRIMARY KEY  (`name`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='The password policies for services';
+
+
+INSERT IGNORE INTO `variable` (`name` ,`value` ,`comment`)
+VALUES (
+'subadmin_restriction', '', 
+'This variable set the way the account list works for accounts other than "admin" (2000). 0 (default) = admin other than admin/2000 can see their own account, but not the other one 1 = admin other than admin/2000 can see any account by clicking the ''show all accounts'' link. '
+);
+
+-- 
+-- TABLES de mémorisation de la taille des dossiers db/listes
+
+CREATE TABLE IF NOT EXISTS `size_db` (
+  `db` varchar(255) NOT NULL default '',
+  `size` int(10) unsigned NOT NULL default '0',
+  `ts` timestamp(14) NOT NULL,
+  PRIMARY KEY  (`db`),
+  KEY `ts` (`ts`)
+) TYPE=MyISAM COMMENT='MySQL Database used space';
+
+
+CREATE TABLE IF NOT EXISTS `size_mailman` (
+  `list` varchar(255) NOT NULL default '',
+  `uid` int(11) NOT NULL default '0',
+  `size` int(10) unsigned NOT NULL default '0',
+  `ts` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  PRIMARY KEY  (`list`),
+  KEY `ts` (`ts`),
+  KEY `uid` (`uid`)
+) ENGINE=MyISAM COMMENT='Mailman Lists used space';
+
+-- IPv6 compatibility :  
+ALTER TABLE `slaveip` CHANGE `ip` `ip` VARCHAR(40);
+ALTER TABLE `sessions` CHANGE `ip` `ip` VARCHAR( 40 ) NULL;
+
+-- type subdomain evolution
+ALTER TABLE `sub_domaines` CHANGE `type` `type` VARCHAR(30);
+ALTER TABLE `sub_domaines_standby` CHANGE `type` `type` VARCHAR(30);
+
+-- END OF 0.9.10.sql
+
 -- Alter table to allow use of ipv6, cname and txt in dns record
 ALTER TABLE sub_domaines DROP PRIMARY KEY;
 ALTER TABLE sub_domaines ADD CONSTRAINT pk_SubDomaines PRIMARY KEY (compte,domaine,sub,type,valeur);
@@ -20,8 +74,8 @@ PRIMARY KEY ( `name` )
 ) COMMENT = 'Type of domains allowed';
 
 INSERT IGNORE INTO `domaines_type` (name, description, target, entry, compatibility, only_dns, need_dns, advanced, enable) values
-('vhost','Locally hosted', 'DIRECTORY', '%SUB% IN A @@PUBLIC_IP@@', 'txt', false, false, false, 'ALL'),
-('url','URL redirection', 'URL', '%SUB% IN A @@PUBLIC_IP@@','txt', true, true, false, 'ALL'),
+('vhost','Locally hosted', 'DIRECTORY', '%SUB% IN A @@PUBLIC_IP@@', 'txt,defmx,defmx2,mx,mx2', false, false, false, 'ALL'),
+('url','URL redirection', 'URL', '%SUB% IN A @@PUBLIC_IP@@','txt,defmx,defmx2', true, true, false, 'ALL'),
 ('ip','IPv4 redirect', 'IP', '%SUB% IN A %TARGET%','url,ip,ipv6,txt,mx,mx2,defmx,defmx2', false, true, false, 'ALL'),
 ('webmail', 'Webmail access', 'NONE', '%SUB% IN A @@PUBLIC_IP@@', 'txt', false, false, false, 'ALL'),
 ('ipv6','IPv6 redirect', 'IPV6', '%SUB% IN AAAA %TARGET%','ip,ipv6,webmail,txt,mx,mx2,defmx,defmx2',true, true, true , 'ALL'),
@@ -29,9 +83,9 @@ INSERT IGNORE INTO `domaines_type` (name, description, target, entry, compatibil
 ('txt', 'TXT DNS entry', 'TXT', '%SUB% IN TXT "%TARGET%"','vhost,url,ip,webmail,ipv6,cname,txt,mx,mx2,defmx,defmx2',true, true, true, 'ALL'),
 ('mx', 'MX DNS entry', 'DOMAIN', '%SUB% IN MX 5 %TARGET%', 'vhost,url,ip,webmail,ipv6,cname,txt,mx,mx2',true, false, true, 'ALL'),
 ('mx2', 'secondary MX DNS entry', 'DOMAIN', '%SUB% IN MX 10 %TARGET%', 'vhost,url,ip,webmail,ipv6,cname,txt,mx,mx2',true, false, true, 'ALL'),
-('defmx', 'Default mail server', 'NONE', '%SUB% IN MX 5 @@DEFAULT_MX@@', 'vhost,url,ip,webmail,ipv6,cname,txt,defmx2',true, false, true, 'ADMIN'),
-('defmx2', 'Default backup mail server', 'NONE', '%SUB% IN MX 10 @@DEFAULT_SECONDARY_MX@@', 'vhost,url,ip,webmail,ipv6,cname,txt,defmx',true, false, true, 'ADMIN'),
-('panel', 'AlternC panel access', 'NONE', '%SUB% IN A @@PUBLIC_IP@@', 'vhost,url,ip,webmail,ipv6,cname,txt,mx,mx2',true, false, true, 'ALL')
+('defmx', 'Default mail server', 'NONE', '%SUB% IN MX 5 @@DEFAULT_MX@@.', 'vhost,url,ip,webmail,ipv6,cname,txt,defmx2',true, false, true, 'ADMIN'),
+('defmx2', 'Default backup mail server', 'NONE', '%SUB% IN MX 10 @@DEFAULT_SECONDARY_MX@@.', 'vhost,url,ip,webmail,ipv6,cname,txt,defmx',true, false, true, 'ADMIN'),
+('panel', 'AlternC panel access', 'NONE', '%SUB% IN A @@PUBLIC_IP@@', 'vhost,url,ip,webmail,ipv6,cname,txt,mx,mx2,defmx,defmx2',true, false, true, 'ALL')
 ;
 
 -- Changing standby use
@@ -53,5 +107,6 @@ UPDATE sub_domaines SET type='TXT' WHERE type='6';
 UPDATE sub_domaines SET web_action='UPDATE';
 
 -- not needed : it's now a subdomain with defmx and/or defmx2 type (this type is admin-only) :
-ALTER TABLE `domaines` DROP `mx` ;
+-- ALTER TABLE `domaines` DROP `mx` ;
+-- BUT we will remove it in a distant future version : we need it for the migration to take place fluently ...
 

@@ -1,6 +1,6 @@
 <div class="menu-box">
  <div class="menu-title">
-  <img src="/admin/images/lang.png" alt="<?php __("Langues"); ?>" />&nbsp;<a href="javascript:menulang_show();"><?php __("Langues"); ?></a></div>
+  <img src="/admin/images/lang.png" alt="<?php __("Langues"); ?>" />&nbsp;<a href="javascript:menulang_toggle();"><?php __("Langues"); ?></a></div>
   <div class="menu-content" id="menu-lang">
   <ul>
    <?php foreach($locales as $l) { ?>
@@ -10,8 +10,8 @@
  </div>
 </div>
 <script type="text/javascript">
-  $("#menu-lang").hide();
-  function menulang_show() {
-    $("#menu-lang").show();
+  function menulang_toggle() {
+    $("#menu-lang").toggle();
   }
+  menulang_toggle();
 </script>

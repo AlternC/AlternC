@@ -190,7 +190,7 @@ function checkfqdn($fqdn) {
 
     // Note: a.foo.net is a valid domain
     // Note: RFC1035 tells us that a domain should not start by a digit, but every registrar allows such a domain to be created ... too bad.
-    if (!eregi("^[a-z0-9]([a-z0-9-]*[a-z0-9])?$",$val)) {
+    if (!preg_match("#^[a-z0-9]([a-z0-9-]*[a-z0-9])?$#i",$val)) {
       return 3;
     }
   }

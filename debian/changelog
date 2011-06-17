@@ -5,7 +5,12 @@ alternc (1.1) stable; urgency=low
 
  -- Alan Garcia <fufroma@mailfr.com>  Wed, 25 May 2011 09:24:30 +0200
 
-alternc (1.0~rc3) stable; urgency=low
+alternc (1.0.1) stable; urgency=high
+  * Bugfix : upgrades from 0.* to 1.0 was not working for MX fields, Fixed.
+
+ -- Benjamin Sonntag <benjamin@alternc.org>  Thu, 14 Jun 2011 17:59:50 +0200
+
+alternc (1.0) stable; urgency=low
   * Major patch
     * Web & DNS file generation rebuild from scratch
     * Drop of apache 1 support
