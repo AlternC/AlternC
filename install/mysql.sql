@@ -108,12 +108,13 @@ CREATE TABLE IF NOT EXISTS db (
   KEY uid (uid)
 ) TYPE=MyISAM COMMENT='Bases MySQL des membres';
 
-#
-# Structure de la table `domaines`
-#
-# Liste des domaines hbergs
+--
+-- Structure de la table `domaines`
+--
+-- Liste des domaines heberges
 
 CREATE TABLE IF NOT EXISTS domaines (
+  id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   compte int(10) unsigned NOT NULL default '0',
   domaine varchar(64) NOT NULL default '',
   gesdns int(1) NOT NULL default '1',
@@ -121,7 +122,8 @@ CREATE TABLE IF NOT EXISTS domaines (
   noerase tinyint(4) NOT NULL default '0',
   dns_action enum ('OK','UPDATE','DELETE') NOT NULL default 'UPDATE',
   dns_result varchar(255) not null default '',
-  PRIMARY KEY  (compte,domaine)
+  PRIMARY KEY (id),
+  UNIQUE KEY (domaine)
 ) TYPE=MyISAM;
 
 #
@@ -236,7 +238,7 @@ CREATE TABLE IF NOT EXISTS sub_domaines (
 
 CREATE TABLE `address` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT, -- Technical id.
-  `domain_id` bigint(20) unsigned DEFAULT NULL REFERENCES `sub_domain`(`id`), -- FK to sub_domains.
+  `domain_id` bigint(20) unsigned NOT NULL REFERENCES `domaines`(`id`), -- FK to sub_domains.
   `address` varchar(255) NOT NULL, -- The address.
   `password` varchar(255) DEFAULT NULL, -- The password associated to the address.
   `enabled` int(1) unsigned NOT NULL DEFAULT '1', -- Enabled flag.
