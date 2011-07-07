@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
-"POT-Creation-Date: 2011-06-04 10:33+0200\n"
+"POT-Creation-Date: 2011-06-04 11:00+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -241,7 +241,7 @@ msgstr ""
 #. Type: select
 #. Description
 #: ../templates:12001
-msgid "The way backup rotation is executated"
+msgid "The way backup rotation is executed"
 msgstr ""
 
 #. Type: select
@@ -340,13 +340,13 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:17001
+#: ../templates:18001
 msgid "The path where AlternC is installed:"
 msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:17001
+#: ../templates:18001
 msgid ""
 "Please enter the partition name where alternc is installed. This is used "
 "mainly for disk quotas."
@@ -354,19 +354,19 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:17001
+#: ../templates:18001
 msgid "Warning : Be careful ! It can generate some problems."
 msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:18001
+#: ../templates:19001
 msgid "The monitoring server:"
 msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:18001
+#: ../templates:19001
 msgid ""
 "The IP address (or ip/prefix) of the server(s) which must be authorized to  "
 "ping us and access apache status pages. Completely optional."
@@ -374,13 +374,13 @@ msgstr ""
 
 #. Type: note
 #. Description
-#: ../templates:19001
+#: ../templates:20001
 msgid "POP Before SMTP deprecated"
 msgstr ""
 
 #. Type: note
 #. Description
-#: ../templates:19001
+#: ../templates:20001
 msgid ""
 "AlternC doesn't automatically configure the pop-before-smtp package anymore, "
 "since it is correctly configured for SASL authentification these days. If "
@@ -389,13 +389,13 @@ msgstr ""
 
 #. Type: note
 #. Description
-#: ../templates:19001
+#: ../templates:20001
 msgid "# For Courier-POP3 and Courier-IMAP:"
 msgstr ""
 
 #. Type: note
 #. Description
-#: ../templates:19001
+#: ../templates:20001
 msgid ""
 "in the /etc/pop-before-smtp/pop-before-smtp.conf and uncomment it. hash:/var/"
 "lib/pop-before-smtp/hosts must also be added to the mynetworks directive of /"
@@ -404,61 +404,61 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../templates:20001
+#: ../templates:21001
 msgid "Should AlternC remove all databases (/var/lib/mysql/) ?"
 msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../templates:20001
+#: ../templates:21001
 msgid "All users databases will be trashed"
 msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../templates:21001
+#: ../templates:22001
 msgid "Should AlternC remove users datas ?"
 msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../templates:21001
+#: ../templates:22001
 msgid "The files and apache redirections created by users will be trashed"
 msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../templates:22001
+#: ../templates:23001
 msgid "Should AlternC remove bind zones ?"
 msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../templates:22001
+#: ../templates:23001
 msgid "It will delete all bind zones created by AlternC"
 msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../templates:23001
+#: ../templates:24001
 msgid "Should AlternC remove mailboxes ?"
 msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../templates:23001
+#: ../templates:24001
 msgid "If you accept all users e-mails will be deleted"
 msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:24001
+#: ../templates:25001
 msgid "Slave servers"
 msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:24001
+#: ../templates:25001
 msgid ""
 "This is a space-separated list of servers that are \"slaves\" to the master "
 "server (this server). When writing apache configuration files, the master "

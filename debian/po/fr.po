@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AlternC 0.9.5\n"
 "Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
-"POT-Creation-Date: 2011-06-04 10:33+0200\n"
+"POT-Creation-Date: 2011-06-04 11:00+0200\n"
 "PO-Revision-Date: 2006-04-26 11:16+0200\n"
 "Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
 "Language-Team: Team AlternC <team@alternc.org>\n"
@@ -39,9 +39,8 @@ msgid ""
 "to the config files of bind, postfix, courier, squirrelmail and proftpd."
 msgstr ""
 "Vous tes en train d'installer AlternC sur cet ordinateur. Comprenez que ce "
-"paquetage va craser plusieurs fichiers de configuration critiques, "
-"incluant, sans se limiter : postfix, bind, courier, squirrelmail, proftpd "
-"et php."
+"paquetage va craser plusieurs fichiers de configuration critiques, incluant, "
+"sans se limiter : postfix, bind, courier, squirrelmail, proftpd et php."
 
 #. Type: boolean
 #. Description
@@ -88,8 +87,8 @@ msgid ""
 "Also, you need to activate group quota (grpquota) to be able to use disk "
 "quota."
 msgstr ""
-"Vous avez aussi besoin des quota de groupe (grpquota) pour pouvoir utiliser"
-"les quotas disque."
+"Vous avez aussi besoin des quota de groupe (grpquota) pour pouvoir "
+"utiliserles quotas disque."
 
 #. Type: string
 #. Description
@@ -106,8 +105,8 @@ msgid ""
 "This (sub)domain MUST point to your server."
 msgstr ""
 "Entrez le nom de domaine de votre serveur. Cela correspondra  l'url qu'il "
-"faudra saisir pour accder au panneau d'administration. Ce (sous)domaine "
-"DOIT pointer vers votre serveur."
+"faudra saisir pour accder au panneau d'administration. Ce (sous)domaine DOIT "
+"pointer vers votre serveur."
 
 #. Type: string
 #. Description
@@ -151,9 +150,9 @@ msgid ""
 msgstr ""
 "Entrez le nom de domaine de votre serveur de dns primaire. Cela peut tre "
 "votre serveur puisque bind est install et configur par AlternC. Cependant, "
-"si votre service d'hbergement est gros, vous pouvez dispoer d'un serveur "
-"dns primaire externe synchronis avec vos serveurs sous AlternC. La valeur "
-"par dfaut devrait convenir dans la plupart des cas."
+"si votre service d'hbergement est gros, vous pouvez dispoer d'un serveur dns "
+"primaire externe synchronis avec vos serveurs sous AlternC. La valeur par "
+"dfaut devrait convenir dans la plupart des cas."
 
 #. Type: string
 #. Description
@@ -182,8 +181,8 @@ msgid ""
 "You may contact the AlternC's users mailing list if you want to exchange dns "
 "service with other AlternC's users."
 msgstr ""
-"N'hsitez pas  contacter la liste de diffusion des utilisateurs d'AlternC "
-"si vous souhaitez changer des serveurs dns primaires / secondaires avec "
+"N'hsitez pas  contacter la liste de diffusion des utilisateurs d'AlternC si "
+"vous souhaitez changer des serveurs dns primaires / secondaires avec "
 "d'autres."
 
 #. Type: string
@@ -207,12 +206,12 @@ msgid ""
 msgstr ""
 "Entrez le nom de domaine de votre serveur mysql. Sur des petits systmes, "
 "mettez \"localhost\" car vous avez surement un serveur mysql local "
-"d'install. Si vous tes un plus gros fournisseur d'hbergement, vous "
-"pourriez mettre votre service mysql sur un rseau synchronis de serveurs. "
-"Dans ce cas, mettez le nom de domaine de votre mysql distant. Ce serveur "
-"DOIT pouvoir accder  votre mysql par le port standard (3306). Il est "
-"recommend d'utiliser \"127.0.0.1\" au lieu de \"localhost\" si votre "
-"postfix est configur en \"chroot\" (ce qui est le cas par dfaut)."
+"d'install. Si vous tes un plus gros fournisseur d'hbergement, vous pourriez "
+"mettre votre service mysql sur un rseau synchronis de serveurs. Dans ce cas, "
+"mettez le nom de domaine de votre mysql distant. Ce serveur DOIT pouvoir "
+"accder  votre mysql par le port standard (3306). Il est recommend d'utiliser "
+"\"127.0.0.1\" au lieu de \"localhost\" si votre postfix est configur en "
+"\"chroot\" (ce qui est le cas par dfaut)."
 
 #. Type: string
 #. Description
@@ -228,9 +227,9 @@ msgid ""
 "choose the name of this database here. The default value should be good in "
 "most case."
 msgstr ""
-"AlternC va crer une base de donnes pour stocker ses informations. Entrez "
-"le nom de la base qui sera cre. La valeur par dfaut convient dans la "
-"plupart des cas."
+"AlternC va crer une base de donnes pour stocker ses informations. Entrez le "
+"nom de la base qui sera cre. La valeur par dfaut convient dans la plupart "
+"des cas."
 
 #. Type: string
 #. Description
@@ -245,9 +244,9 @@ msgid ""
 "AlternC will create a mysql administrator account. Please choose it's "
 "username here. The default value should be good in most case."
 msgstr ""
-"AlternC va crer un compte administrateur sur le serveur mysql. Entrez le "
-"nom d'utilisateur qui sera cr. La valeur par dfaut convient dans la "
-"plupart des cas."
+"AlternC va crer un compte administrateur sur le serveur mysql. Entrez le nom "
+"d'utilisateur qui sera cr. La valeur par dfaut convient dans la plupart des "
+"cas."
 
 #. Type: password
 #. Description
@@ -262,8 +261,7 @@ msgid ""
 "AlternC requires an administrator account on the mysql server. It will be "
 "created automatically during the install process. Please choose a password "
 "for this account."
-msgstr ""
-"Entrez le mot de passe mysql du compte qui va tre cr automatiquement."
+msgstr "Entrez le mot de passe mysql du compte qui va tre cr automatiquement."
 
 #. Type: password
 #. Description
@@ -303,7 +301,10 @@ msgstr "De quelle faon sont tourns les backups"
 msgid ""
 "AlternC enables users to configure their own backups, on demand, with "
 "automatic rotation. This option determines how the backups are rotated."
-msgstr "AlternC permet aux utilisateurs de configurer leurs propres backups,  la demande, avec rotation automatique. Cette option dtermine la manire dont les backups sont tourns."
+msgstr ""
+"AlternC permet aux utilisateurs de configurer leurs propres backups,  la "
+"demande, avec rotation automatique. Cette option dtermine la manire dont les "
+"backups sont tourns."
 
 #. Type: select
 #. Description
@@ -327,8 +328,8 @@ msgid ""
 "when doing backups. The default behavior is to skip those files and ignore "
 "it."
 msgstr ""
-"Le script de backup SQL peut renommer ou craser un fichier prexistant."
-"Le comportement par dfaut est de passer ces fichiers et de les ignorer."
+"Le script de backup SQL peut renommer ou craser un fichier prexistant.Le "
+"comportement par dfaut est de passer ces fichiers et de les ignorer."
 
 #. Type: string
 #. Description
@@ -395,23 +396,24 @@ msgstr "le MX de secours  assigner aux nouveaux domaines : "
 
 #. Type: string
 #. Description
-#: ../templates:16001
+#: ../templates:17001
 msgid ""
 "AlternC will assign this hostname as the Backup MX record for all the "
 "domains it hosts. Don't set it if you don't know what it is about."
 msgstr ""
-"AlternC va assigner ce nom de domaine comme enregistrement MX de secours pour tous les "
-"domaines qu'il hberge. Si vous ne savez pas de quoi il s'agit, laissez ce champ vide."
+"AlternC va assigner ce nom de domaine comme enregistrement MX de secours "
+"pour tous les domaines qu'il hberge. Si vous ne savez pas de quoi il s'agit, "
+"laissez ce champ vide."
 
 #. Type: string
 #. Description
-#: ../templates:17001
+#: ../templates:18001
 msgid "The path where AlternC is installed:"
 msgstr "Emplacement d'AlternC : "
 
 #. Type: string
 #. Description
-#: ../templates:17001
+#: ../templates:18001
 msgid ""
 "Please enter the partition name where alternc is installed. This is used "
 "mainly for disk quotas."
@@ -421,19 +423,19 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../templates:17001
+#: ../templates:18001
 msgid "Warning : Be careful ! It can generate some problems."
 msgstr "Attention : Prenez garde ! Cela peut entraner quelques problmes."
 
 #. Type: string
 #. Description
-#: ../templates:18001
+#: ../templates:19001
 msgid "The monitoring server:"
 msgstr "serveur de surveillance : "
 
 #. Type: string
 #. Description
-#: ../templates:18001
+#: ../templates:19001
 msgid ""
 "The IP address (or ip/prefix) of the server(s) which must be authorized to  "
 "ping us and access apache status pages. Completely optional."
@@ -443,13 +445,13 @@ msgstr ""
 
 #. Type: note
 #. Description
-#: ../templates:19001
+#: ../templates:20001
 msgid "POP Before SMTP deprecated"
 msgstr "POP Before SMTP dprci"
 
 #. Type: note
 #. Description
-#: ../templates:19001
+#: ../templates:20001
 msgid ""
 "AlternC doesn't automatically configure the pop-before-smtp package anymore, "
 "since it is correctly configured for SASL authentification these days. If "
@@ -461,13 +463,13 @@ msgstr ""
 
 #. Type: note
 #. Description
-#: ../templates:19001
+#: ../templates:20001
 msgid "# For Courier-POP3 and Courier-IMAP:"
 msgstr "# For Courier-POP3 and Courier-IMAP:"
 
 #. Type: note
 #. Description
-#: ../templates:19001
+#: ../templates:20001
 msgid ""
 "in the /etc/pop-before-smtp/pop-before-smtp.conf and uncomment it. hash:/var/"
 "lib/pop-before-smtp/hosts must also be added to the mynetworks directive of /"
@@ -479,25 +481,25 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../templates:20001
+#: ../templates:21001
 msgid "Should AlternC remove all databases (/var/lib/mysql/) ?"
 msgstr "Les bases de donnes doivent elles tre supprims (/var/lib/mysql) ?"
 
 #. Type: boolean
 #. Description
-#: ../templates:20001
+#: ../templates:21001
 msgid "All users databases will be trashed"
 msgstr "Toutes les bases de donnes des utilisateurs seront perdues"
 
 #. Type: boolean
 #. Description
-#: ../templates:21001
+#: ../templates:22001
 msgid "Should AlternC remove users datas ?"
 msgstr "Les donnes des utilisateurs doivent elles tres supprims ?"
 
 #. Type: boolean
 #. Description
-#: ../templates:21001
+#: ../templates:22001
 msgid "The files and apache redirections created by users will be trashed"
 msgstr ""
 "Les fichiers et les redirections d'apache crs par les utilisateurs seront "
@@ -505,38 +507,37 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../templates:22001
+#: ../templates:23001
 msgid "Should AlternC remove bind zones ?"
 msgstr "Les zones de bind doivent elles tre supprimes ?"
 
 #. Type: boolean
 #. Description
-#: ../templates:22001
+#: ../templates:23001
 msgid "It will delete all bind zones created by AlternC"
 msgstr "Cela supprimera toutes les zone de bind cres par AlternC"
 
 #. Type: boolean
 #. Description
-#: ../templates:23001
+#: ../templates:24001
 msgid "Should AlternC remove mailboxes ?"
 msgstr "Les boites mails doivent elles tre supprimes ?"
 
 #. Type: boolean
 #. Description
-#: ../templates:23001
+#: ../templates:24001
 msgid "If you accept all users e-mails will be deleted"
-msgstr ""
-"Si vous acceptez, toutes les e-mails des utilisateurs seront supprimes"
+msgstr "Si vous acceptez, toutes les e-mails des utilisateurs seront supprimes"
 
 #. Type: string
 #. Description
-#: ../templates:24001
+#: ../templates:25001
 msgid "Slave servers"
 msgstr "Serveurs esclaves"
 
 #. Type: string
 #. Description
-#: ../templates:24001
+#: ../templates:25001
 msgid ""
 "This is a space-separated list of servers that are \"slaves\" to the master "
 "server (this server). When writing apache configuration files, the master "
@@ -544,10 +545,10 @@ msgid ""
 "slave package correctly configures those machines to allow login and reload."
 msgstr ""
 "Entre une liste spare par des espaces des serveurs 'esclaves' du serveur "
-"matre (qui est ce serveur). Lors de l'criture de la configuration "
-"d'Apache, ce matre tentera de recharger apache sur les serveurs distants. "
-"le package alternc-slave configure ces machines comme il faut pour permettre "
-"la connexion distante et le rechargement d'apache. "
+"matre (qui est ce serveur). Lors de l'criture de la configuration d'Apache, "
+"ce matre tentera de recharger apache sur les serveurs distants. le package "
+"alternc-slave configure ces machines comme il faut pour permettre la "
+"connexion distante et le rechargement d'apache. "
 
 #~ msgid "trusted servers for bind:"
 #~ msgstr "serveurs de confiance pour bind : "
@@ -564,8 +565,7 @@ msgstr ""
 
 #~ msgid "IP addresses of the networks authorized in SMTP, space-delimited."
 #~ msgstr ""
-#~ "Adresses ip des reseaux autoriss en SMTP (ou ip/prefixe) spars par "
-#~ "espace."
+#~ "Adresses ip des reseaux autoriss en SMTP (ou ip/prefixe) spars par espace."
 
 #~ msgid ""
 #~ "If you still want to proceed with this installation, choose YES here, "
