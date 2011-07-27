@@ -135,15 +135,15 @@ if [ ! -z "$(cat "$RELOAD_WEB")" ] ; then
 fi
 
 # we assume we run apache and bind on the master
-/usr/bin/alternc_reload $( cat "$RELOAD_ZONES") || true
+tempo=$(cat "$RELOAD_ZONES"|tr '\n' ' ')
+/usr/bin/alternc_reload $tempo || true
 for slave in $ALTERNC_SLAVES; do
     if [ "$slave" != "localhost" ]; then
-        ssh alternc@$slave alternc_reload $(cat "$RELOAD_ZONES") || true
+        ssh alternc@$slave alternc_reload $tempo || true
     fi
 done
 
 rm -f "$LOCK_FILE" "$RELOAD_ZONES" "$RELOAD_WEB"
 
 exit 0
-
 

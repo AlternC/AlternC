@@ -467,6 +467,7 @@ class m_dom {
         if (preg_match('#^whois:#', $ligne)) { $serveur=preg_replace('/whois:\ */','',$ligne,1); }
       }
     }
+		$serveur=str_replace(array(" ","\n"),"",$serveur);
 
     $egal="";
     switch($ext) {
