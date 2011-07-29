@@ -252,6 +252,7 @@ class m_mysql {
     $login=$db->f("login");
 
     // Ok, database exists and dbname is compliant. Let's proceed
+    $db->query("DELETE FROM size_db WHERE db='$dbname';");
     $db->query("DELETE FROM db WHERE uid='$cuid' AND db='$dbname';");
     $this->dbus->query("DROP DATABASE `$dbname`;");
     $db->query("SELECT COUNT(*) AS cnt FROM db WHERE uid='$cuid';");

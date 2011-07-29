@@ -877,7 +877,7 @@ class m_dom {
     }
 
     if (! is_null($type_old )) { // It's not a creation, it's an edit. Delete the old one
-      $db->query("update sub_domaines set web_action='DELETE' where domaine='$dom' and sub='$sub' and upper(type)=upper('$type_old') and valeur='$value_old';");
+      $db->query("update sub_domaines set web_action='DELETE' where domaine='$dom' and sub='$sub_old' and upper(type)=upper('$type_old') and valeur='$value_old';");
     }
 
     // Re-create the one we want
