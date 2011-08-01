@@ -484,6 +484,7 @@ src/slave_dns -text
 src/spoolsize.php -text
 src/sqlbackup.sh -text
 src/update_domains.sh -text
+tests/make_mail_dataset.sh -text
 tests/mechdump.pm -text
 tests/test_demo.pl -text
 tests/whois_test.php -text
