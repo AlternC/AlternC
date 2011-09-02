@@ -49,7 +49,7 @@ dns_named_conf() {
     return 1
   fi
 
-  grep -q "$domain" "$NAMED_CONF"
+  grep -q "\"$domain\"" "$NAMED_CONF"
   if [ $? -ne 0 ] ; then
     local tempo=$(cat "$NAMED_TEMPLATE")
     tempo=${tempo/@@DOMAINE@@/$domain}
