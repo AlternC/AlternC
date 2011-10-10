@@ -1,11 +1,14 @@
 #! /bin/bash
 
-#Les systeme Ã  compiler
+#Les systeme ÃƒÂ  compiler
 CHROOT_DIR="/root/compilation/chroot"
 #repertoire cible des compilations
 BUILD_AREA="/root/compilation/build-area"
 #le repertoire contenant les sources
 SRC_DIR="/root/vcs"
+#repertoire local (dans chroot) contenant les builds area
+LOCAL_BUILD_AREA="/root/build-area"
+
 
 SOURCES[0]='svn https://www.alternc.org/svn/ /root/vcs/'
 #SOURCES[1]='vcs url_ressource target_directory_in_chroot'
@@ -53,7 +56,6 @@ function create_packages() {
 	        dist=$(echo $dir | sed 's/-.*//' )
 	        arch=$(echo $dir | sed 's/.*-//' )
 
-
 		#Ouvrir un chroot
 		SCHROOT_SESSION=$(schroot -b -c $dir)
 		if [[ ! $SCHROOT_SESSION ]]; then
@@ -61,14 +63,14 @@ function create_packages() {
 		fi
 	
 		CHROOT_SRC=$CHROOT_DIR/$dist-$arch$SRC_DIR
-		CHROOT_BUILD_AREA=$CHROOT_DIR/$dist-$arch$BUILD_AREA
+		CHROOT_BUILD_AREA=$CHROOT_DIR/$dist-$arch/$LOCAL_BUILD_AREA
 
 		mkdir -p $BUILD_AREA/$dist-$arch
 		mkdir -p $CHROOT_SRC
 		mkdir -p $CHROOT_BUILD_AREA
 
-#		mount --bind $SRC_DIR $CHROOT_SRC
-#		mount --bind $BUILD_AREA/$dir $CHROOT_BUILD_AREA
+		umount $CHROOT_BUILD_AREA
+		mount --bind $BUILD_AREA/$dist-$arch $CHROOT_BUILD_AREA
 
 		#Trouver les paquets
 		for paquet in $(find $CHROOT_SRC -ipath \*/debian -printf %h\\n); do
@@ -88,9 +90,8 @@ function create_packages() {
 
 			#Construire le package				
 			echo $STATUT
-			mkdir -p /build-area/$STATUT
-			chroot_run $SCHROOT_SESSION "svn-buildpackage -us -uc -rfakeroot --svn-move-to='/build-area/$STATUT'" $SRC_DIR/$SVN_DIR
-			exit
+			mkdir -p "$CHROOT_BUILD_AREA/$STATUT"
+			chroot_run $SCHROOT_SESSION "svn-buildpackage -us -uc -rfakeroot --svn-move-to=$LOCAL_BUILD_AREA/$STATUT" $SRC_DIR/$SVN_DIR
 			chroot_run $SCHROOT_SESSION "svn revert ./ -R" $SRC_DIR/$SVN_DIR
 		done
 
@@ -98,7 +99,6 @@ function create_packages() {
 		schroot -e \
 			--chroot=$SCHROOT_SESSION
 
-#		umount $CHROOT_SRC
 #		umount $CHROOT_BUILD_AREA
 
 	done;
@@ -108,7 +108,7 @@ function create_packages() {
 }
 
 function create_apt() {
-	#CrÃ©ation du depot
+	#CrÃƒÂ©ation du depot
 
 	DEPOT_DIR="/root/depot"
 
@@ -153,3 +153,4 @@ function create_apt() {
 #get_sources
 create_packages
 #create_apt
+
