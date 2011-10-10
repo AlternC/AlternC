@@ -1,13 +1,19 @@
 #! /bin/bash
 
+#Le repertoire racine
+ROOT_DIR="/root/compilation"
+
 #Les systeme ÃƒÂ  compiler
-CHROOT_DIR="/root/compilation/chroot"
+CHROOT_DIR="$ROOT_DIR/chroot"
 #repertoire cible des compilations
-BUILD_AREA="/root/compilation/build-area"
+BUILD_AREA="$ROOT_DIR/build-area"
 #le repertoire contenant les sources
 SRC_DIR="/root/vcs"
 #repertoire local (dans chroot) contenant les builds area
 LOCAL_BUILD_AREA="/root/build-area"
+#Le depot formatÃ© pour le web 
+DEPOT_DIR="$ROOT_DIR/depot"
+
 
 
 SOURCES[0]='svn https://www.alternc.org/svn/ /root/vcs/'
@@ -93,6 +99,7 @@ function create_packages() {
 			mkdir -p "$CHROOT_BUILD_AREA/$STATUT"
 			chroot_run $SCHROOT_SESSION "svn-buildpackage -us -uc -rfakeroot --svn-move-to=$LOCAL_BUILD_AREA/$STATUT" $SRC_DIR/$SVN_DIR
 			chroot_run $SCHROOT_SESSION "svn revert ./ -R" $SRC_DIR/$SVN_DIR
+
 		done
 
 		#Fermer le chroot
@@ -109,10 +116,9 @@ function create_packages() {
 
 function create_apt() {
 	#CrÃƒÂ©ation du depot
+	mkdir -p $DEPOT_DIR
 
-	DEPOT_DIR="/root/depot"
-
-	for dir in $(ls $CHROOT_DIR); do
+	for dir in $(ls $BUILD_AREA); do
         	if [[ ! -d $CHROOT_DIR/$dir ]]; then
                 	continue
 	        fi
@@ -144,13 +150,12 @@ function create_apt() {
 			cd $DEPOT_DIST/$dir/
 			dpkg-scanpackages binary-$arch /dev/null dists/$dist/$dir/ | gzip -f9 > binary-$arch/Packages.gz
 			dpkg-scansources source /dev/null dists/$dist/$dir/ | gzip -f9 > source/Sources.gz
-			apt-ftparchive -c /root/$dist-$arch-apt-ftparchive.conf release $DEPOT_BIN > $DEPOT_BIN/Release
-			apt-ftparchive -c /root/$dist-$arch-apt-ftparchive.conf release $DEPOT_SRC > $DEPOT_SRC/Release
+			apt-ftparchive -c $ROOT_DIR/$dist-$arch-apt-ftparchive.conf release $DEPOT_BIN > $DEPOT_BIN/Release
+			apt-ftparchive -c $ROOT_DIR/$dist-$arch-apt-ftparchive.conf release $DEPOT_SRC > $DEPOT_SRC/Release
 		done
 	done
 }
 
 #get_sources
-create_packages
-#create_apt
-
+#create_packages
+create_apt
