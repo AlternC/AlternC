@@ -100,7 +100,7 @@ function create_packages() {
 			#Construire le package				
 			echo $STATUT
 			mkdir -p "$CHROOT_BUILD_AREA/$STATUT"
-			chroot_run $SCHROOT_SESSION "svn-buildpackage -us -uc -rfakeroot --svn-move-to=$LOCAL_BUILD_AREA/$STATUT" $SRC_DIR/$SVN_DIR
+			chroot_run $SCHROOT_SESSION "svn-buildpackage -us -uc -rfakeroot --svn-move-to=$LOCAL_BUILD_AREA/$STATUT --svn-ignore" $SRC_DIR/$SVN_DIR
 			chroot_run $SCHROOT_SESSION "svn revert ./ -R" $SRC_DIR/$SVN_DIR
 
 		done
