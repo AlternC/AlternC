@@ -20,16 +20,19 @@ SOURCES[0]='svn https://www.alternc.org/svn/ /root/vcs/'
 #SOURCES[1]='vcs url_ressource target_directory_in_chroot'
 
 function get_sources() {
-	CHROOT=${1:-"etch-i386"}
-	ELEMENTS=${#SOURCES[@]}
-	for ((i=0;i<$ELEMENTS;i++)); do
-		SOURCE=( `echo ${SOURCES[${i}]}` )
-		VCS=${SOURCE[0]}
-		SOURCE=${SOURCE[1]}
-		TARGET=${SOURCE[2]}
-		chroot_run $CHROOT "mkdir -p $TARGET" '/root/'
-		get_$VCS $CHROOT $SOURCE $TARGET
-	done
+
+	 for CHROOT in $(ls $CHROOT_DIR); do	
+		#CHROOT=${1:-"etch-i386"}
+		ELEMENTS=${#SOURCES[@]}
+		for ((i=0;i<$ELEMENTS;i++)); do
+			SOURCE=( `echo ${SOURCES[${i}]}` )
+			VCS=${SOURCE[0]}
+			SOURCE=${SOURCE[1]}
+			TARGET=${SOURCE[2]}
+			chroot_run $CHROOT "mkdir -p $TARGET" '/root/'
+			get_$VCS $CHROOT $SOURCE $TARGET
+		done
+	done;
 }
 
 function get_svn() {
@@ -156,6 +159,6 @@ function create_apt() {
 	done
 }
 
-#get_sources
-#create_packages
+get_sources
+create_packages
 create_apt
