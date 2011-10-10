@@ -1,11 +1,14 @@
 #! /bin/bash
 
-CHROOT_DIR="/root/chroot"
-BUILD_AREA="/root/build-area"
-SRC_DIR="/root/src"
+#Les systeme Ã  compiler
+CHROOT_DIR="/root/compilation/chroot"
+#repertoire cible des compilations
+BUILD_AREA="/root/compilation/build-area"
+#le repertoire contenant les sources
+SRC_DIR="/root/vcs"
 
-SOURCES[0]='svn https://www.alternc.org/svn/ /home/root/test/'
-#SOURCES[1]='vcs url_ressource target_directory'
+SOURCES[0]='svn https://www.alternc.org/svn/ /root/vcs/'
+#SOURCES[1]='vcs url_ressource target_directory_in_chroot'
 
 function get_sources() {
 	CHROOT=${1:-"etch-i386"}
@@ -38,8 +41,6 @@ function chroot_run() {
 		--chroot $SCHROOT_SESSION \
 		-d $DIR \
 #		-- "${COMMAND}"
-
-
 }
 
 function create_packages() {
@@ -52,10 +53,7 @@ function create_packages() {
 	        dist=$(echo $dir | sed 's/-.*//' )
 	        arch=$(echo $dir | sed 's/.*-//' )
 
-#		if [[ $dist != 'squeeze' ]]; then
-#			continue
-#		fi
-	
+
 		#Ouvrir un chroot
 		SCHROOT_SESSION=$(schroot -b -c $dir)
 		if [[ ! $SCHROOT_SESSION ]]; then
@@ -73,43 +71,27 @@ function create_packages() {
 #		mount --bind $BUILD_AREA/$dir $CHROOT_BUILD_AREA
 
 		#Trouver les paquets
-		for paquet in $(find /root/src/alternc-all/ -ipath \*/debian -printf %h\\n); do
-			SVN_DIR=$paquet
+		for paquet in $(find $CHROOT_SRC -ipath \*/debian -printf %h\\n); do
+			SVN_DIR=${paquet#$CHROOT_SRC}
 			STATUT=$(basename $SVN_DIR)
+
+			chroot_run $SCHROOT_SESSION "svn revert ./ -R" $SRC_DIR/$SVN_DIR
+
 
 			if [[ $STATUT != "trunk" ]]; then
 				STATUT=$(basename $(dirname $SVN_DIR))
 			else
-				echo "dch -l \"`date +%Y-%m-%d`\" nightly" | \
-				schroot \
-					-r \
-					--chroot $SCHROOT_SESSION \
-					-d $SVN_DIR \
-					-p
+				version=( `schroot -p -r --chroot $SCHROOT_SESSION -d $SRC_DIR/$SVN_DIR -- egrep -o '\(.*\)' -m 1 debian/changelog | sed 's/(//'|sed s'/)//'` )
+				chroot_run $SCHROOT_SESSION "dch -v ${version}.1~`date +%Y-%m-%d` nightly" $SRC_DIR/$SVN_DIR
+				#echo "dch -l \"`date +%Y-%m-%d`\" nightly" | \
 			fi
-
-			continue
 
 			#Construire le package				
 			echo $STATUT
-			mkdir -p $CHROOT_BUILD_AREA/$STATUT
-
-			echo "svn-buildpackage -us -uc -rfakeroot --svn-move-to=$BUILD_AREA/$STATUT" | \
-			schroot \
-				-r \
-				--chroot $SCHROOT_SESSION \
-				-d $SVN_DIR \
-				-p
-
-			echo "svn revert * -R" | \
-			schroot \
-				-r \
-				--chroot $SCHROOT_SESSION \
-				-d $SVN_DIR \
-				-p
-
-			
-
+			mkdir -p /build-area/$STATUT
+			chroot_run $SCHROOT_SESSION "svn-buildpackage -us -uc -rfakeroot --svn-move-to='/build-area/$STATUT'" $SRC_DIR/$SVN_DIR
+			exit
+			chroot_run $SCHROOT_SESSION "svn revert ./ -R" $SRC_DIR/$SVN_DIR
 		done
 
 		#Fermer le chroot
@@ -122,7 +104,7 @@ function create_packages() {
 	done;
 
 	#Nettoyer les build-area dans les sources
-	find $SRC_DIR -iname build-area -exec rm -r {} \;
+#	find $SRC_DIR -iname build-area -exec rm -r {} \;
 }
 
 function create_apt() {
