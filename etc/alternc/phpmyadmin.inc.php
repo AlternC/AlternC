@@ -15,6 +15,7 @@
  */
 
 include_once('/var/alternc/bureau/class/local.php');
+$cfg['SuhosinDisableWarning'] = true;
 
 $i = 1;
 

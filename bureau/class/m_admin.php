@@ -852,7 +852,7 @@ EOF;
         file_put_contents($cachefile,serialize($checked));
       }
     }
-    $db->query("SELECT m.login,d.domaine,d.gesdns,d.gesmx,d.noerase FROM domaines d LEFT JOIN membres m ON m.uid=d.compte ORDER BY domaine;");
+    $db->query("SELECT m.uid,m.login,d.domaine,d.gesdns,d.gesmx,d.noerase FROM domaines d LEFT JOIN membres m ON m.uid=d.compte ORDER BY domaine;");
     while ($db->next_record()) {
       $tmp=$db->Record;
       if ($alsocheck) {

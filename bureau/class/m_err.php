@@ -22,12 +22,12 @@
 /**
 * Classe de gestion des erreurs apparaissant lors d'appels API.
 *
-* <p>Cette classe gère les erreurs qui peuvent apparaitre lors d'appels
-* à l'API d'AlternC. Ces erreurs sont stockées sous la forme de 2 nombres
-* (Classe ID et Numéro d'erreur) ainsi qu'un texte facultatif associé.
-* Des textes d'erreurs localisés sont aussi disponibles.</p>
-* <p>Cette classe se charge aussi d'insérer les appels à l'API d'AlternC
-* dans les logs du système dans /var/log/alternc/bureau.log
+* <p>Cette classe gÃ¨re les erreurs qui peuvent apparaitre lors d'appels
+* Ã  l'API d'AlternC. Ces erreurs sont stockÃ©es sous la forme de 2 nombres
+* (Classe ID et NumÃ©ro d'erreur) ainsi qu'un texte facultatif associÃ©.
+* Des textes d'erreurs localisÃ©s sont aussi disponibles.</p>
+* <p>Cette classe se charge aussi d'insÃ©rer les appels Ã  l'API d'AlternC
+* dans les logs du systÃ¨me dans /var/log/alternc/bureau.log
 * </p>
 * Copyleft {@link http://alternc.net/ AlternC Team}
 * 
@@ -38,10 +38,10 @@ class m_err {
   /** Numero de classe d'erreur actuelle */
   var $clsid=0;
 
-  /** Dernière erreur enregistrée par la classe */
+  /** DerniÃ¨re erreur enregistrÃ©e par la classe */
   var $error=0;
 
-  /** Paramètre chaine eventuellement associé à la dernière erreur */
+  /** ParamÃ¨tre chaine eventuellement associÃ© Ã  la derniÃ¨re erreur */
   var $param="";
 
   /** Emplacement du fichier de logs d'AlternC */
@@ -51,13 +51,13 @@ class m_err {
    * Leve une erreur, signale celle-ci dans les logs et stocke le code erreur
    * 
    * Cette fonction lance une erreur, l'ajoute dans les logs d'AlternC, 
-   * et la met à disposition pour le bureau virtuel pour affichage ultérieur.
+   * et la met Ã  disposition pour le bureau virtuel pour affichage ultÃ©rieur.
    *
-   * @todo ne plus utiliser $error de façon numérique, nulle part
+   * @todo ne plus utiliser $error de faÃ§on numÃ©rique, nulle part
    *
-   * @param integer $clsid Classe qui lève l'erreur
-   * @param mixed $error Numéro de l'erreur ou chaîne décrivant l'erreur
-   * @param string $param Paramètre chaine associé à l'erreur (facultatif)
+   * @param integer $clsid Classe qui lÃ¨ve l'erreur
+   * @param mixed $error NumÃ©ro de l'erreur ou chaÃ®ne dÃ©crivant l'erreur
+   * @param string $param ParamÃ¨tre chaine associÃ© Ã  l'erreur (facultatif)
    * @return boolean TRUE si l'erreur est connue, FALSE sinon.
    *
    */
@@ -73,18 +73,18 @@ class m_err {
     } else {
       $this->clsid="err";
       $this->error=1;
-      $this->param="Numéro $error, Classe $clsid, Valeur $param";
+      $this->param="Error # $error in Class $clsid, Value is $param. (sorry, no text for this error in your language at the moment)";
       $this->logerr();
       return false;
     }
   }
 
   /**
-   * Retourne la chaine d'erreur correspondant à la dernière erreur rencontrée
+   * Retourne la chaine d'erreur correspondant Ã  la derniÃ¨re erreur rencontrÃ©e
    *
-   * Si la dernière erreur rencontrée est connue, retourne l'erreur en toute lettre
-   * dans la langue actuellement sélectionnée, ou en anglais par défaut.
-   * Si l'erreur n'est pas connue, retourne son numéro de classe et d'ereur.
+   * Si la derniÃ¨re erreur rencontrÃ©e est connue, retourne l'erreur en toute lettre
+   * dans la langue actuellement sÃ©lectionnÃ©e, ou en anglais par dÃ©faut.
+   * Si l'erreur n'est pas connue, retourne son numÃ©ro de classe et d'ereur.
    *
    * @return string Chaine d'erreur.
    *
@@ -108,9 +108,9 @@ class m_err {
   /**
    * Envoi un log d'erreur dans /var/log/alternc/bureau.log
    *
-   * Cette fonction Loggue la dernière erreur dans /var/log sur la machine,
+   * Cette fonction Loggue la derniÃ¨re erreur dans /var/log sur la machine,
    * permettant ainsi aux admins de savoir ce qu'il se passe...
-   * Elle est appelée automatiquement par error
+   * Elle est appelÃ©e automatiquement par error
    * @access private
    */
   function logerr() {
@@ -127,13 +127,13 @@ class m_err {
   /**
    * Envoi un log d'appel d'API dans /var/log/alternc/bureau.log
    *
-   * Cette fonction loggue dans /var/log l'appel à la fonction de l'API
+   * Cette fonction loggue dans /var/log l'appel Ã  la fonction de l'API
    * d'AlternC.
    *
-   * @param integer $clsid Numéro de la classe dont on a appelé une fonction
-   * @param string $function Nom de la fonction appelée
-   * @param string $param Paramètre (facultatif) passés à la fonction de l'API.
-   * @return boolean TRUE si le log a été ajouté, FALSE sinon
+   * @param integer $clsid NumÃ©ro de la classe dont on a appelÃ© une fonction
+   * @param string $function Nom de la fonction appelÃ©e
+   * @param string $param ParamÃ¨tre (facultatif) passÃ©s Ã  la fonction de l'API.
+   * @return boolean TRUE si le log a Ã©tÃ© ajoutÃ©, FALSE sinon
    *
    */
   function log($clsid,$function,$param="") {

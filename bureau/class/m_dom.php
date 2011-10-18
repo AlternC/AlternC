@@ -186,6 +186,11 @@ class m_dom {
   function domains_type_update($name, $description, $target, $entry, $compatibility, $enable, $only_dns, $need_dns,$advanced) {
     global $err,$cuid,$db;
     $id=intval($id);
+    // The name MUST contain only letter and digits, it's an identifier after all ...
+    if (!preg_match("#^[a-z0-9]+$#",$name)) {
+      $err->raise("dom", 26);
+      return false;
+    }
     $name=mysql_real_escape_string($name);
     $description=mysql_real_escape_string($description);
     $target=mysql_real_escape_string($target);
@@ -799,24 +804,33 @@ class m_dom {
   } //check_type_value
 
 
+  /* ----------------------------------------------------------------- */
+  /**
+   * Check the compatibility of the POSTed parameters with the chosen
+   * domain type
+   *
+   * @param string $dom FQDN of the domain name
+   * @param string $sub SUBdomain 
+   * @return boolean tell you if the subdomain can be installed there 
+   */
   function can_create_subdomain($dom,$sub,$type,$type_old='', $value_old='') {
     global $db,$err,$cuid;
     $err->log("dom","can_create_subdomain",$dom."/".$sub);
 
-    # Get the compatibility list for this domain type
+    // Get the compatibility list for this domain type
     $db->query("select upper(compatibility) as compatibility from domaines_type where upper(name)=upper('$type');");
     if (!$db->next_record()) return false;
     $compatibility_lst = explode(",",$db->f('compatibility'));
 
-    # Get the list of type of subdomains already here who have the same name
+    // Get the list of type of subdomains already here who have the same name
     $db->query("select * from sub_domaines where sub='$sub' and domaine='$dom' and not (type='$type_old' and valeur='$value_old') and web_action != 'DELETE'");
     #$db->query("select * from sub_domaines where sub='$sub' and domaine='$dom';");
     while ($db->next_record()) {
-      # And if there is a domain with a incompatible type, return false
+      // And if there is a domain with a incompatible type, return false
       if (! in_array(strtoupper($db->f('type')),$compatibility_lst)) return false;
     }
     
-    # All is right, go ! Create ur domain !
+    // All is right, go ! Create ur domain !
     return true;
   }
 
@@ -836,7 +850,6 @@ class m_dom {
    *  de $type (url, ip, dossier...)
    * @return boolean Retourne FALSE si une erreur s'est produite, TRUE sinon.
    */
-   // TODO : j'ai viré le type action, valider que plus personne ne l'utilise (quatrieme argument)
   function set_sub_domain($dom,$sub,$type,$dest, $type_old=null,$sub_old=null,$value_old=null) {
     global $db,$err,$cuid;
     $err->log("dom","set_sub_domain",$dom."/".$sub."/".$type."/".$dest);
@@ -859,8 +872,8 @@ class m_dom {
     }
 
     if (! $this->check_type_value($type,$dest)) {
-      # TODO have a real err code
-      $err->raise("dom",667);
+      // Invalid domain type selected, please check.
+      $err->raise("dom",27);
       return false;
     }
 
@@ -871,8 +884,8 @@ class m_dom {
     }
 
     if (! $this->can_create_subdomain($dom,$sub,$type,$type_old,$value_old)) {
-      # TODO have a real error code
-      $err->raise("dom", 654);
+      // The parameters for this subdomain and domain type are invalid. Please check for subdomain entries incompatibility
+      $err->raise("dom", 28);
       return false;
     }
 

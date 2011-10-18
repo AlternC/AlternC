@@ -60,6 +60,7 @@ host_create() {
     local G_ID=$(get_uid_by_name "$USER")
     local user_letter=`print_user_letter "$USER"`
     local DOCUMENT_ROOT="${HTML_HOME}/${user_letter}/${USER}/$TARGET_DIR"
+    local ACCOUNT_ROOT="${HTML_HOME}/${user_letter}/${USER}/"
     local FILE_TARGET="$VHOST_DIR/${user_letter}/$USER/$FQDN.conf"
 
     # In case VTYPE don't have the same name as the template file, 
@@ -84,19 +85,27 @@ host_create() {
     local TMP_FILE=$(mktemp "/tmp/alternc_host.XXXXXX")
     cp "$TEMPLATE" "$TMP_FILE"
 
+    # Substitute special characters : 
+    FQDN2="`echo $FQDN | sed -e 's/\\\\/\\\\\\\\/g' -e 's/#/\\\\#/g' -e 's/&/\\\\\\&/g'`"
+    DOCUMENT_ROOT2="`echo $DOCUMENT_ROOT | sed -e 's/\\\\/\\\\\\\\/g' -e 's/#/\\\\#/g' -e 's/&/\\\\\\&/g'`"
+    ACCOUNT_ROOT2="`echo $ACCOUNT_ROOT | sed -e 's/\\\\/\\\\\\\\/g' -e 's/#/\\\\#/g' -e 's/&/\\\\\\&/g'`"	
+    REDIRECT2="`echo $REDIRECT | sed -e 's/\\\\/\\\\\\\\/g' -e 's/#/\\\\#/g' -e 's/&/\\\\\\&/g'`"
+
     # Put the good value in the conf file
         sed -i \
-        -e "s#%%fqdn%%#$FQDN#g" \
-        -e "s#%%document_root%%#$DOCUMENT_ROOT#g" \
-        -e "s#%%redirect%%#$REDIRECT#g" \
+        -e "s#%%fqdn%%#$FQDN2#g" \
+        -e "s#%%document_root%%#$DOCUMENT_ROOT2#g" \
+        -e "s#%%account_root%%#$ACCOUNT_ROOT2#g" \
+        -e "s#%%redirect%%#$REDIRECT2#g" \
         -e "s#%%UID%%#$U_ID#g" \
         -e "s#%%GID%%#$G_ID#g" \
         $TMP_FILE
 
     # Check if all is right in the conf file
     # If not, put a debug message
-    local ISNOTGOOD=$(grep "%%" "$TMP_FILE") 
-    [ "$ISNOTGOOD" ] && (echo "# There was a probleme in the generation : $ISNOTGOOD" > "$TMP_FILE" ; return 44 )
+# NO : redirect and document_root COULD contains legitimate %% expressions (...) 
+#    local ISNOTGOOD=$(grep "%%" "$TMP_FILE") 
+#    [ "$ISNOTGOOD" ] && (echo "# There was a probleme in the generation : $ISNOTGOOD" > "$TMP_FILE" ; return 44 )
 
     # Put the conf file in prod
     mkdir -p "$(dirname "$FILE_TARGET")"
