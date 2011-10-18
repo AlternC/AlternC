@@ -21,6 +21,7 @@ OLDIFS="$IFS"
 NEWIFS=" "
 RELOAD_ZONES="$(mktemp /tmp/alternc_reload_zones.XXXX)"
 RELOAD_WEB="$(mktemp /tmp/alternc_reload_web.XXXX)"
+DNS_DO_RESTART="/tmp/alternc.do_do_restart.$$"
 B="µµ§§" # Strange letters to make split in query
 
 echo "" > "$RELOAD_ZONES"
@@ -134,16 +135,21 @@ if [ ! -z "$(cat "$RELOAD_WEB")" ] ; then
 
 fi
 
+# What do we reload ?
+lst_zones=$(cat "$RELOAD_ZONES"|tr '\n' ' ')
+if [ -e "$DNS_DO_RESTART" ] ; then
+  lst_zones="dns_daemon $lst_zones" 
+fi
+
 # we assume we run apache and bind on the master
-tempo=$(cat "$RELOAD_ZONES"|tr '\n' ' ')
-/usr/bin/alternc_reload $tempo || true
+/usr/bin/alternc_reload $lst_zones || true
 for slave in $ALTERNC_SLAVES; do
     if [ "$slave" != "localhost" ]; then
-        ssh alternc@$slave alternc_reload $tempo || true
+        ssh alternc@$slave alternc_reload $lst_zones || true
     fi
 done
 
-rm -f "$LOCK_FILE" "$RELOAD_ZONES" "$RELOAD_WEB"
+rm -f "$LOCK_FILE" "$RELOAD_ZONES" "$RELOAD_WEB" "$DNS_DO_RESTART"
 
 exit 0
 

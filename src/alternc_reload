@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # $Id: update_domaines.sh,v 1.31 2005/08/29 19:21:31 anarcat Exp $
 # ----------------------------------------------------------------------
@@ -53,20 +53,30 @@ apache_reload() {
   fi
 }
 
+dns_restart() {
+  if [ -x /etc/init.d/bind9 ]; then
+    $sudo /etc/init.d/bind9 restart || echo "Cannot restart dns daemon (bind9)"  
+  fi
+}
+
 RELOAD_ZONES="$*"
+echo $RELOAD_ZONES
 
 if [ ! -z "$RELOAD_ZONES" ]; then
   for zone in $RELOAD_ZONES; do
     case $zone in
       "all")
-        $sudo rndc reload  || echo "Cannot reload bind" 
+        $sudo rndc reload || echo "Cannot reload bind" 
         apache_reload # keep for compatibility
+        ;;
+      "dns_daemon")
+        dns_restart
         ;;
       "apache")
         apache_reload
         ;;
       *)
-        $sudo rndc reload "$zone"  || echo "Cannot reload bind for zone $zone" 
+        $sudo rndc reload "$zone" || echo "Cannot reload bind for zone $zone" 
         ;;
     esac
   done
