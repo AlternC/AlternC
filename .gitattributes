@@ -309,7 +309,6 @@ bureau/class/config_real.php -text
 bureau/class/db_mysql.php -text
 bureau/class/export_account.php -text
 bureau/class/functions.php -text
-bureau/class/hooks.php -text
 bureau/class/lang_env.php -text
 bureau/class/local.php -text
 bureau/class/m_admin.php -text
@@ -318,6 +317,7 @@ bureau/class/m_bro.php -text
 bureau/class/m_dom.php -text
 bureau/class/m_err.php -text
 bureau/class/m_ftp.php -text
+bureau/class/m_hooks.php -text
 bureau/class/m_hta.php -text
 bureau/class/m_mail.php -text
 bureau/class/m_mem.php -text

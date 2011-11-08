@@ -1,0 +1,69 @@
+<?php
+/*
+ LICENSE
+
+ This program is free software; you can redistribute it and/or
+ modify it under the terms of the GNU General Public License (GPL)
+ as published by the Free Software Foundation; either version 2
+ of the License, or (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ To read the license please visit http://www.gnu.org/copyleft/gpl.html
+ ----------------------------------------------------------------------
+ Original Author of file: Camille Lafitte
+ Purpose of file: Manage hook system.
+ ----------------------------------------------------------------------
+*/
+/**
+ * This class manage hooks.
+ * 
+ * @copyright    AlternC-Team 2002-2005 http://alternc.org/
+ */
+class m_hooks {
+
+  /*---------------------------------------------------------------------------*/
+  /** Constructor
+  * hooks([$mid]) Constructeur de la classe hooks, ne fait rien pour le moment
+  */
+  function m_hooks() {
+  }
+
+  /** 
+    * run_hook()
+    * $hname nom de la fonction "hooks" que l'on cherche dans les classes
+    * $hparam tableau contenant les parametres
+    * $hclass tableau contenant les classes spécifique qu'on veux appeler (si on veux pas TOUTE les appeler)
+  */
+  function invoke($hname, $hparam = array(), $hclass = null) {
+
+    // Si $hclass est defini, on veut appeler le hooks QUE pour UNE 
+    // classe et pas pour toute.
+    if (is_null($hclass)) {
+      global $classes;
+    } else {
+      $classes = $hclass;
+    }
+
+    // On parcourt les classes, si la fonction qu'on cherche
+    // existe on l'execute et on rajoute ce qu'elle a retourné dans
+    // un tableau
+    $val = array();
+    foreach ($classes as $c) {
+      global $$c;
+      if ( method_exists($$c, $hname) ) {
+        //$val[$$c]=call_user_func_array(array($$c,$hname), $hparam);
+        $val[$c]=call_user_func_array(array($$c,$hname), $hparam);
+      }
+    }
+
+    // On retourne le tout
+    return $val;
+  }
+
+} /* Class hooks */
+
+?>
