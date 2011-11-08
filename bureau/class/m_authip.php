@@ -238,17 +238,16 @@ class m_authip {
    * @return array Retourne un tableau compliqué
    */
   function get_auth_class() {
-    global $classes;
+    global $hooks;
     $authclass=array();
+    $authclass = $hooks->invoke('authip_class');
 
-    foreach ($classes as $c) {
-      global $$c;
-      if ( method_exists($$c, "authip_class") ) {
-        $a=$$c->authip_class();
-        $a['class']=$c;
-        $authclass[$a['protocol']]=$a;
-      }
+    // Je rajoute la class DANS l'objet parce que
+    // ca m'interesse
+    foreach ($authclass as $k => $v) {
+	$authclass[$k]['class']=$k;
     }
+
     return $authclass;
   }
 
@@ -319,14 +318,19 @@ class m_authip {
    * @return boolean Retourne TRUE
    */
   function call_hooks($function, $affectation_id) {
+    global $hooks;
+
+    // On récure l'objet dont on parle
     $d = $this->list_affected();
     $affectation = $d[$affectation_id];
+
+    // On en déduis la classe qui le concerne
     $e = $this->get_auth_class();
     $c = $e[$affectation['protocol']]['class'];
-    global $$c;
-    if ( method_exists($$c, $function) ) {
-      $$c->$function($affectation);
-    }
+
+    // On appelle le hooks de cette classe
+    $hooks->invoke($function, Array($affectation), Array($c) );
+
     return true;
   }
 
