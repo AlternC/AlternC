@@ -221,8 +221,8 @@ class m_ftp {
           return false; // The error has been raised by checkPolicy()
         }
       }
-
-      $db->query("UPDATE ftpusers SET name='".$prefixe.$login."', password='', encrypted_password=ENCRYPT('$pass'), homedir='/var/alternc/html/$l/$lo/$dir', uid='$cuid' WHERE id='$id';");
+      $encrypted_password = crypt($pass,strrev(microtime(true)));
+      $db->query("UPDATE ftpusers SET name='".$prefixe.$login."', password='', encrypted_password='$encrypted_password', homedir='/var/alternc/html/$l/$lo/$dir', uid='$cuid' WHERE id='$id';");
     } else {
       $db->query("UPDATE ftpusers SET name='".$prefixe.$login."', homedir='/var/alternc/html/$l/$lo/$dir', uid='$cuid' WHERE id='$id';");
     }
@@ -298,7 +298,8 @@ class m_ftp {
     }
 
     if ($quota->cancreate("ftp")) {
-      $db->query("INSERT INTO ftpusers (name,password, encrypted_password,homedir,uid) VALUES ('".$prefixe.$login."', '', ENCRYPT('$pass'), '/var/alternc/html/$l/$lo/$dir', '$cuid')");
+      $encrypted_password = crypt($pass,strrev(microtime(true)));
+      $db->query("INSERT INTO ftpusers (name,password, encrypted_password,homedir,uid) VALUES ('".$prefixe.$login."', '', '$encrypted_password', '/var/alternc/html/$l/$lo/$dir', '$cuid')");
       return true;
     } else {
       $err->raise("ftp",5);
