@@ -31,11 +31,12 @@
 
 #Default Query : fixperms for all account
 query="SELECT uid,login FROM membres"
+sub_dir=""
 
 #Two optionals argument
 # -l string : a specific login to fix
 # -u interger : a specifi uid to fix
-while getopts "l:u:" optname
+while getopts "l:u:d:" optname
   do
     case "$optname" in
       "l")
@@ -43,6 +44,9 @@ while getopts "l:u:" optname
         ;;
       "u")
         query="SELECT uid,login FROM membres WHERE uid LIKE '$OPTARG'"
+        ;;
+      "d")
+        sub_dir="$OPTARG"
         ;;
       "?")
         echo "Unknown option $OPTARG - stop processing"
@@ -85,7 +89,7 @@ doone() {
         echo "Setting rights and ownership for user $LOGIN having gid $GID"
       fi
       INITIALE=`echo $LOGIN |cut -c1`
-      REP="$ALTERNC_LOC/html/$INITIALE/$LOGIN"
+      REP="$ALTERNC_LOC/html/$INITIALE/$LOGIN/$sub_dir"
 
       # Set the file readable only for the AlternC User
       chown -R $GID:$GID "$REP"
