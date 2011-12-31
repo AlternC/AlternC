@@ -29,6 +29,37 @@
 # ----------------------------------------------------------------------
 #
 
+#Default Query : fixperms for all account
+query="SELECT uid,login FROM membres"
+
+#Two optionals argument
+# -l string : a specific login to fix
+# -u interger : a specifi uid to fix
+while getopts "l:u:" optname
+  do
+    case "$optname" in
+      "l")
+        query="SELECT uid,login FROM membres WHERE login LIKE '$OPTARG'"
+        ;;
+      "u")
+        query="SELECT uid,login FROM membres WHERE uid LIKE '$OPTARG'"
+        ;;
+      "?")
+        echo "Unknown option $OPTARG - stop processing"
+        exit
+        ;;
+      ":")
+        echo "No argument value for option $OPTARG - stop processing"
+        exit
+        ;;
+      *)
+      # Should not occur
+        echo "Unknown error while processing options"
+        exit
+        ;;
+    esac
+  done
+
 CONFIG_FILE="/etc/alternc/local.sh"
 
 PATH=/sbin:/bin:/usr/sbin:/usr/bin
@@ -55,7 +86,7 @@ doone() {
       fi
       INITIALE=`echo $LOGIN |cut -c1`
       REP="$ALTERNC_LOC/html/$INITIALE/$LOGIN"
-            
+
       # Set the file readable only for the AlternC User
       chown -R $GID:$GID "$REP"
       chmod 2770 -R "$REP"
@@ -64,11 +95,10 @@ doone() {
       # Set the defaults acl on all the files
       setfacl -b -k -m d:g:alterncpanel:rw- -m d:u:$GID:rw- -m d:g:$GID:rw- \
                     -m   g:alterncpanel:rw- -m   u:$GID:rw- -m   g:$GID:rw- \
-              -R "$REP" 
+              -R "$REP"
 
       read GID LOGIN
     done
 }
 
-mysql --defaults-file=/etc/alternc/my.cnf -B -e "select uid,login from membres" |grep -v ^uid|doone
-
+mysql --defaults-file=/etc/alternc/my.cnf -B -e "$query" |grep -v ^uid|doone
