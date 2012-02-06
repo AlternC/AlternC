@@ -105,4 +105,5 @@ doone() {
     done
 }
 
-mysql --defaults-file=/etc/alternc/my.cnf -B -e "$query" |grep -v ^uid|doone
+mysql --defaults-file=/etc/alternc/my.cnf --skip-column-names -B -e "$query" |doone
+

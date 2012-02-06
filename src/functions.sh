@@ -23,7 +23,7 @@ print_domain_letter() {
 
 print_user_letter() {
     local user="$1"
-    echo "$user" | awk '{print substr($1, 1, 1)}'
+    echo ${user:0:1}
 }
 
 get_uid_by_name() {

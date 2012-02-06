@@ -475,9 +475,7 @@ src/mem_add -text
 src/mem_del -text
 src/quota_delete -text
 src/quota_edit -text
-src/quota_edit.sh -text
 src/quota_get -text
-src/quota_get.sh -text
 src/quota_init -text
 src/rawstat.daily -text
 src/sendmail -text

@@ -1,28 +1,43 @@
-#!/usr/bin/perl 
+#!/bin/bash
+. /etc/alternc/local.sh
 
-use strict;
+AWK=/usr/bin/awk
+DF=/bin/df
+SED=/bin/sed
+MOUNT=/bin/mount
+QUOTA=/usr/bin/quota
+GREP=/bin/grep
+WC=/usr/bin/wc
 
-my ($uid) = @ARGV;
+MID=$1
 
-if (!$uid) {
-    print "Usage: quota_get <uid>\n";
-    print " Get the quota of the AlternC account having uid <uid>\n";
-    exit(1);
-}
+if [ "x$MID" == "x" ] ; then
+  echo "Usage: quota_get <uid>"
+  echo "Get the quota of the AlternC account having uid <uid>"
+  exit 1
+fi
 
-$ENV{PATH} = "";
-delete @ENV{'IFS', 'CDPATH', 'ENV', 'BASH_ENV'};
+# The second line is the one interesting
+# We look precisely on the HTML directory. Why ? because it's surely
+# the bigger one, and if someone separate it we need to look this one
+# particulary. It should be interesting to cumulate quota of all mounted directory.
+DATA_PART=`$DF "${ALTERNC_LOC}/html" 2>/dev/null | $AWK 'NR==2 { print $1 }'`
 
-if (!($uid =~ /^([0-9]+)$/)) {
-    die "uid is incorrect.";
-}
-$uid=$1;
+# quota will give over NFS will print the partition using the full NFS name
+# (e.g. 10.0.0.1:/var/alternc) so we need to lookup first with mount
+# to convert DATA_PART if needed.
+QUOTA_PART=`$MOUNT | $SED -n -e "s,\([^ ]*\) on ${DATA_PART} type nfs.*,\1,p"`
+if [ -z "$QUOTA_PART" ]; then
+    QUOTA_PART="$DATA_PART"
+fi
 
-$< = $>;
-$( = $);
+# Now we get the quota 
+val=$(quota -A -wg "$MID" |grep "$QUOTA_PART" | awk '{ print $2 "\n" $3; }')
 
-my $PTH="/usr/lib/alternc/quota_get.sh '$uid'";
+# If the quota aren't activated, I return something anyway
+if [ -z "$val" ] ; then
+        echo -e "0\n0"
+else
+        echo -e "$val"
+fi
 
-system($PTH);
-
-0;
