@@ -8,7 +8,7 @@ alternc (1.1) stable; urgency=low
 alternc (1.0.3) stable; urgency=high
   * Bugfix : the 'connect' button in the list of installed domains didn't work, make it work
 
- - Benjamin Sonntag <benjamin@alternc.org>  Wed, 12 Oct 2011 18:00:00 +0200
+ -- Benjamin Sonntag <benjamin@alternc.org>  Wed, 12 Oct 2011 18:00:00 +0200
 
 alternc (1.0.2) stable; urgency=high
   * Bugfix : dependency on gamin OR fam : gamin is better for courier-imap
