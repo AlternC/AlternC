@@ -329,16 +329,17 @@ class m_bro {
     global $db,$cuid,$err;
     $file=ssla($file);
     $absolute=$this->convertabsolute($dir."/".$file,0);
-    if ($absolute && !file_exists($absolute)) {
-      if (!@mkdir($absolute,00777)) {
-	$err->raise("bro",4);
-	return false;
-      }
-      $db->query("UPDATE browser SET crff=1 WHERE uid='$cuid';");
-      return true;
+    echo "$absolute";
+    if ($absolute && (!file_exists($absolute))) {
+        if (!mkdir($absolute,00777)) {
+            $err->raise("bro",4);
+	        return false;
+        }
+        $db->query("UPDATE browser SET crff=1 WHERE uid='$cuid';");
+        return true;
     } else {
-      $err->raise("bro",1);
-      return false;
+        $err->raise("bro",1);
+        return false;
     }
   }
 
@@ -357,6 +358,7 @@ class m_bro {
       $err->raise("bro",1);
       return false;
     }
+    print_r($absolute);
     if (!file_exists($absolute)) {
       if (!@touch($absolute)) {
 	$err->raise("bro",3);
@@ -918,28 +920,55 @@ class m_bro {
       unlink($file);
     }
   }
+/*----------------------------------------------------------*/
+/** Function d'exportation de configuration appelé par la classe m_export via un hooks
+*Produit en sorti un tableau formatté ( pour le moment) en HTML
+*
+*/
 
-
-  /* ----------------------------------------------------------------- */
-  /**
-   * Exporte toutes les informations ftp du compte AlternC
-   * @access private
-   * EXPERIMENTAL 'sid' function ;) 
-   */
-  function alternc_export() {
+function alternc_export_conf() {
     global $db,$err;
-    $err->log("bro","export");
-    $str="<bro>\n";
+    $err->log("bro","export_conf");
+    $str="<table border=\"1\"><caption> Browser </caption>\n";
     $pref=$this->GetPrefs();
+    
+    $i=1;
     foreach ($pref as $k=>$v) {
-      $str.="  <pref>\n";
-      $str.="    <".$k.">".xml_entities($v)."</".$k.">\n";
-      $str.="  </pref>\n";
+         if (($i % 2)==0){
+            $str.="  <tr>\n";
+            $str.="  <td>".$k."</td><td>".$v."</td>\n"; 
+            $str.="  </tr>\n";
+       } 
+        $i++;
     }
-    $str.="</bro>\n";
+    $str.="</table>\n";
     
     return $str;
   }
+
+/*----------------------------------------------------------*/
+/** Function d'exportation des données appelé par la classe m_export via un hooks
+*@param : le chemin destination du tarball produit.
+*/
+function alternc_export_data($dir){
+    global $mem,$L_ALTERNC_LOC,$err;
+    $err->log("bro","export_data");
+    $dir.="html/";
+    if(!is_dir($dir)){ 
+        if(!mkdir($dir))
+            $err->raise("bro",4);
+    }
+    $timestamp=date("H:i:s");
+
+   if(exec("/bin/tar cvf -  ".$L_ALTERNC_LOC."/html/".substr($mem->user['login'],0,1)."/".$mem->user['login']."/ | gzip -9c > ".$dir."/".$mem->user['login']."_html_".$timestamp.".tar.gz")){
+        $err->log("bro","export_data_succes");
+    }else{
+        $err->log("bro","export_data_failed");
+
+    }
+
+}
+
 
 
 } /* Classe BROUTEUR */

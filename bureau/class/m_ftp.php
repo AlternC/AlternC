@@ -95,7 +95,8 @@ class m_ftp {
 	      $r[]=array(
 		        "id"=>$db->f("id"),
 		        "login"=>$db->f("name"),
-		        "dir"=>$match[1]
+		        //"dir"=>$match[1]
+		        "dir"=>$db->f("homedir")
 		   );
       }
       return $r;
@@ -378,19 +379,20 @@ class m_ftp {
    * @access private
    * EXPERIMENTAL 'sid' function ;) 
    */
-  function alternc_export() {
+  function alternc_export_conf() {
     global $db,$err;
     $err->log("ftp","export");
     $f=$this->get_list();
-    $str="<ftp>\n";
-    foreach ($f as $d) {
-      $str.="  <account>\n";
-      $str.="    <login>".xml_entities($s[login])."</login>\n";
-      $str.="    <pass>".xml_entities($s[pass])."</pass>\n";
-      $str.="    <dir>".xml_entities($s[dir])."</dir>\n";
-      $str.="  </account>\n";
+    $str="<table border=\"1\"><caption> FTP </caption>\n";
+    foreach ($f as $d=>$v) {
+      $str.="  <tr>\n";
+      $str.="    <td>".$v["id"]."</td>\n";
+      $str.="    <td>".($v["encrypted_password"])."</td>\n";
+      $str.="    <td>".($v["login"])."</td>\n";
+      $str.="    <td>".($v["dir"])."<td>\n";
+      $str.="  </tr>\n";
     }
-    $str.="</ftp>\n";
+    $str.="</table>\n";
     return $str;
   }
   

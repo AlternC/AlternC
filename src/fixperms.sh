@@ -1,5 +1,4 @@
 #!/bin/bash -e
-
 #
 # $Id: fixperms.sh,v 1.1 2005/08/29 19:21:31 benjamin Exp $
 # ----------------------------------------------------------------------
@@ -97,8 +96,8 @@ doone() {
 
       # Delete existings ACL
       # Set the defaults acl on all the files
-      setfacl -b -k -m d:g:alterncpanel:rw- -m d:u:$GID:rw- -m d:g:$GID:rw- \
-                    -m   g:alterncpanel:rw- -m   u:$GID:rw- -m   g:$GID:rw- \
+      setfacl -b -k -m d:g:alterncpanel:rwx -m d:u:$GID:rw- -m d:g:$GID:rw- \
+                    -m   g:alterncpanel:rwx -m   u:$GID:rw- -m   g:$GID:rw- \
               -R "$REP"
 
       read GID LOGIN

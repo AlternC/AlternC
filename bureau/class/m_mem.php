@@ -550,17 +550,23 @@ Cordialement.
   /**
    * Exports all the personnal user related information for an account.
    * @access private
-   * EXPERIMENTAL 'sid' function ;) 
    */
-  function alternc_export($tmpdir) {
+  function alternc_export_conf() {
     global $db,$err;
     $err->log("mem","export");
-    $str="<mem>\n";
-
-    foreach ($this->user as $k=>$v) {
-      $str.="   <$k>".xml_entities($v)."</$k>\n";
-    }
-    $str.="</mem>\n";
+    $str="<table border=\"1\"><caption > Member </caption>\n";
+    $users=$this->user;
+      $str.="  <tr> <td>".$users["uid"]."</td></tr>\n";
+      $str.="  <tr> <td>".$users["login"]."</td></tr>\n";
+      $str.="  <tr> <td>".$users["enabled"]."</td></tr>\n";
+      $str.="  <tr> <td>".$users["su"]."</td></tr>\n";
+      $str.="  <tr> <td>".$users["pass"]."</td></tr>\n";
+      $str.="  <tr> <td>".$users["mail"]."</td></tr>\n";
+      $str.="  <tr> <td>".$users["created"]."</td></tr>\n";
+      $str.="  <tr> <td>".$users["lastip"]."</td></tr>\n";
+      $str.="  <tr> <td>".$users["lastlogin"]."</td></tr>\n";
+      $str.="  <tr> <td>".$users["lastfail"]."</td></tr>\n";
+    $str.="</table>\n";
     return $str;
   }
 

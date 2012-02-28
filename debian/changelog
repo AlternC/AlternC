@@ -1,9 +1,18 @@
+alternc (1.1+nmu1) stable; urgency=low
+
+  * Dev in progres.
+  * New class: m_export allowing account exporting given it's iud and a path : http://www.alternc.org/wiki/AlterncExport
+  * Adding script export_account.php usind the above class to export an account. 
+  * Bugfixes: quota's scripts udpated ( mostly concerning LVM partitions), and lots of others (permissions, browser ...)
+
+ -- Lerider Steven <squidly@nnx.com>  Tue, 28 Feb 2012 14:57:48 +0100
+
 alternc (1.1) stable; urgency=low
   * Dev in progress
   * New class : access security. Allow to restrict some function to specific IP or subnet
   * Access security management on the ftp account.
 
- -- Alan Garcia <fufroma@mailfr.com>  Wed, 25 May 2011 09:24:30 +0200
+ -- Alan Garcia (nickname) <fufroma@mailfr.com>  Wed, 25 May 2011 09:24:30 +0200
 
 alternc (1.0.3) stable; urgency=high
   * Bugfix : the 'connect' button in the list of installed domains didn't work, make it work

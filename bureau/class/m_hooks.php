@@ -33,7 +33,8 @@ class m_hooks {
   }
 
   /** 
-    * run_hook()
+    * invoke() permet de lancer une fonction donné en parametre dans toute les classes
+    * connues de alternc, avec les parametres donnés.
     * $hname nom de la fonction "hooks" que l'on cherche dans les classes
     * $hparam tableau contenant les parametres
     * $hclass tableau contenant les classes spécifique qu'on veux appeler (si on veux pas TOUTE les appeler)

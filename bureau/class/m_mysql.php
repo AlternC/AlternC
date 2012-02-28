@@ -35,7 +35,7 @@
  */
 
 class DB_users extends DB_Sql {
-  var $Host,$HumanHostname,$User,$Password;
+  var $Host,$HumanHostname,$User,$Password,$client;
 
   /**
   * Creator
@@ -81,15 +81,16 @@ class DB_users extends DB_Sql {
       }
     }
 
-
     # Create the object
     $this->Host     = $host;
+    $this->client   = $GLOBALS['L_MYSQL_CLIENT'];
     $this->User     = $user;
     $this->Password = $password;
 // TODO BUG BUG BUG
 // c'est pas étanche : $db se retrouve avec Database de $sql->dbu . Danger, faut comprendre pourquoi
 // Si on veux que ca marche, il faut Database=alternc.
-    $this->Database = "mysql";
+    //$this->Database = "mysql";
+    $this->Database = "alternc";
     $this->HumanHostname = $human_hostname;
 
   }
@@ -219,13 +220,15 @@ class m_mysql {
       $pa=addslashes($db->f("pass"));
     }
     if ($this->dbus->query("CREATE DATABASE `$dbname`;")) {
+      $err->log("mysql","add_db_succes",$dbn);
       // Ok, database does not exist, quota is ok and dbname is compliant. Let's proceed
       $db->query("INSERT INTO db (uid,login,pass,db,bck_mode) VALUES ('$cuid','$lo','$pa','$dbname',0);");
       // give everything but GRANT on db.*
       // we assume there's already a user
-      $this->dbus->query("GRANT ALL PRIVILEGES ON `".$dbname."`.* TO '".$lo."'@'$this->client'");
+      $this->dbus->query("GRANT ALL PRIVILEGES ON `".$dbname."`.* TO '".$lo."'@'$this->dbus->client'");
       return true;
     } else {
+      $err->log("mysql","add_db",$dbn);
       $err->raise("mysql",3);
       return false;
     }
@@ -257,7 +260,7 @@ class m_mysql {
     $this->dbus->query("DROP DATABASE `$dbname`;");
     $db->query("SELECT COUNT(*) AS cnt FROM db WHERE uid='$cuid';");
     $db->next_record();
-    $this->dbus->query("REVOKE ALL PRIVILEGES ON `".$dbname."`.* FROM '".$login."'@'$this->client'");
+    $this->dbus->query("REVOKE ALL PRIVILEGES ON `".$dbname."`.* FROM '".$login."'@".$this->dbus->client."");
     if ($this->dbus->f("cnt")==0) {
       $this->dbus->query("DELETE FROM mysql.user WHERE User='".$login."';");
       $this->dbus->query("FLUSH PRIVILEGES;");
@@ -344,7 +347,7 @@ class m_mysql {
 
     // Update all the "pass" fields for this user : 
     $db->query("UPDATE db SET pass='$password' WHERE uid='$cuid';");
-    $this->dbus->query("SET PASSWORD FOR '$login'@'$this->client' = PASSWORD('$password')");
+    $this->dbus->query("SET PASSWORD FOR '$login'@'$this->dbus->client' = PASSWORD('$password')");
     return true;
   }
 
@@ -389,7 +392,7 @@ class m_mysql {
     // OK, creation now...
     $db->query("INSERT INTO db (uid,login,pass,db) VALUES ('$cuid','".$login."','$password','".$dbname."');");
     // give everything but GRANT on $user.*
-    $this->dbus->query("GRANT ALL PRIVILEGES ON `".$dbname."`.* TO '".$login."'@'$this->client' IDENTIFIED BY '".addslashes($password)."'");
+    $this->dbus->query("GRANT ALL PRIVILEGES ON `".$dbname."`.* TO '".$login."'@".$this->dbus->client." IDENTIFIED BY '".addslashes($password)."'");
     $this->dbus->query("CREATE DATABASE `".$dbname."`;");
     return true;
   }
@@ -532,7 +535,7 @@ class m_mysql {
     }
 
     // We create the user account (the "file" right is the only one we need globally to be able to use load data into outfile)
-    $this->dbus->query("GRANT file ON *.* TO '$user'@'$this->client' IDENTIFIED BY '$pass';");
+    $this->dbus->query("GRANT file ON *.* TO '$user'@".$this->dbus->client." IDENTIFIED BY '$pass';");
     // We add him to the user table 
     $db->query("INSERT INTO dbusers (uid,name) VALUES($cuid,'$user');");
     return true;
@@ -564,8 +567,7 @@ class m_mysql {
     	return false; // The error has been raised by checkPolicy()
       }
     }
-
-    $this->dbus->query("SET PASSWORD FOR '$user'@'$this->client' = PASSWORD('$pass')");
+    $this->dbus->query("SET PASSWORD FOR ".$user."@".$this->dbus->client." = PASSWORD(".$pass.")");
     return true;
   }
 
@@ -593,9 +595,9 @@ class m_mysql {
     $login=$db->f("name");
 
     // Ok, database exists and dbname is compliant. Let's proceed
-    $this->dbus->query("REVOKE ALL PRIVILEGES ON *.* FROM '".$mem->user["login"]."_$user'@'$this->client';");
-    $this->dbus->query("DELETE FROM mysql.db WHERE User='".$mem->user["login"]."_$user' AND Host='$this->client';");
-    $this->dbus->query("DELETE FROM mysql.user WHERE User='".$mem->user["login"]."_$user' AND Host='$this->client';");
+    $this->dbus->query("REVOKE ALL PRIVILEGES ON *.* FROM '".$mem->user["login"]."_$user'@".$this->dbus->client.";");
+    $this->dbus->query("DELETE FROM mysql.db WHERE User='".$mem->user["login"]."_$user' AND Host=".$this->dbus->client.";");
+    $this->dbus->query("DELETE FROM mysql.user WHERE User='".$mem->user["login"]."_$user' AND Host=".$this->dbus->client.";");
     $this->dbus->query("FLUSH PRIVILEGES");
     $this->dbus->query("DELETE FROM dbusers WHERE uid='$cuid' AND name='".$mem->user["login"]."_$user';");
     return true;
@@ -616,7 +618,7 @@ class m_mysql {
     $dblist=$this->get_dblist();
 
     for ( $i=0 ; $i<count($dblist) ; $i++ ) {
-      $this->dbus->query("SELECT Db, Select_priv, Insert_priv, Update_priv, Delete_priv, Create_priv, Drop_priv, References_priv, Index_priv, Alter_priv, Create_tmp_table_priv, Lock_tables_priv FROM mysql.db WHERE User='".$mem->user["login"].($user?"_":"").$user."' AND Host='$this->client' AND Db='".$dblist[$i]["db"]."';");
+      $this->dbus->query("SELECT Db, Select_priv, Insert_priv, Update_priv, Delete_priv, Create_priv, Drop_priv, References_priv, Index_priv, Alter_priv, Create_tmp_table_priv, Lock_tables_priv FROM mysql.db WHERE User='".$mem->user["login"].($user?"_":"").$user."' AND Host=".$this->dbus->client." AND Db='".$dblist[$i]["db"]."';");
       if ($this->dbus->next_record())
         $r[]=array("db"=>$dblist[$i]["name"], "select"=>$this->dbus->f("Select_priv"), "insert"=>$this->dbus->f("Insert_priv"),	"update"=>$this->dbus->f("Update_priv"), "delete"=>$this->dbus->f("Delete_priv"), "create"=>$this->dbus->f("Create_priv"), "drop"=>$this->dbus->f("Drop_priv"), "references"=>$this->dbus->f("References_priv"), "index"=>$this->dbus->f("Index_priv"), "alter"=>$this->dbus->f("Alter_priv"), "create_tmp"=>$this->dbus->f("Create_tmp_table_priv"), "lock"=>$this->dbus->f("Lock_tables_priv"));
       else
@@ -682,10 +684,10 @@ class m_mysql {
     // We reset all user rights on this DB : 
     $this->dbus->query("SELECT * FROM mysql.db WHERE User = '$usern' AND Db = '$dbname';");
     if($this->dbus->num_rows())
-      $this->dbus->query("REVOKE ALL PRIVILEGES ON $dbname.* FROM '$usern'@'$this->client';");
+      $this->dbus->query("REVOKE ALL PRIVILEGES ON $dbname.* FROM '$usern'@'".$this->dbus->client."';");
     if( $strrights ){
       $strrights=substr($strrights,0,strlen($strrights)-1);
-      $this->dbus->query("GRANT $strrights ON $dbname.* TO '$usern'@'$this->client';");      
+      $this->dbus->query("GRANT $strrights ON $dbname.* TO '$usern'@'".$this->dbus->client."';");      
     }
     $this->dbus->query("FLUSH PRIVILEGES");
     return TRUE;
@@ -761,35 +763,61 @@ class m_mysql {
    * @access private
    * EXPERIMENTAL 'sid' function ;) 
    */
-  function alternc_export($tmpdir) {
+  function alternc_export_conf() {
 //TODO don't work with separated sql server for dbusers
     global $db,$err,$cuid;
     $err->log("mysql","export");
     $db->query("SELECT login, pass, db, bck_mode, bck_dir, bck_history, bck_gzip FROM db WHERE uid='$cuid';");
+    $str.="<table border=\"1\"><caption>MyQSL</caption><th>login</th><th>pass</th>";
     if ($db->next_record()) {
-      $str="<mysql>\n";
-      $str.="  <login>".xml_entities($db->Record["login"])."</login>";
-      $str.="  <pass>".xml_entities($db->Record["pass"])."</pass>";
+      $str.="<tr>\n";
+      $str.="  <td>".$db->Record["login"]."</td>";
+      $str.="  <td>".$db->Record["pass"]."</td>";
+      $str.="</tr>\n";
       do {
-	// Do the dump : 
 	$filename=$tmpdir."/mysql.".$db->Record["db"].".sql.gz";
-	exec("/usr/bin/mysqldump --add-drop-table --allow-keywords -Q -f -q -a -e -u".escapeshellarg($db->Record["login"])." -p".escapeshellarg($db->Record["pass"])." ".escapeshellarg($db->Record["db"])." |/bin/gzip >".escapeshellarg($filename));
-	$str.="  <db>\n";
-	$str.="    <name>".xml_entities($db->Record["db"])."</name>\n";
+	$str.="  <tr>\n";
+	$str.="    <td>".($db->Record["db"])."</td>\n";
+	$str.="    <td>".($db->Record["pass"])."</td>\n";
 	if ($s["bck_mode"]!=0) {
-	  $str.="    <backup>\n";
-	  $str.="      <mode>".xml_entities($db->Record["bck_mode"])."</mode>\n";
-	  $str.="      <dir>".xml_entities($db->Record["bck_dir"])."</dir>\n";
-	  $str.="      <history>".xml_entities($db->Record["bck_history"])."</history>\n";
-	  $str.="      <gzip>".xml_entities($db->Record["bck_gzip"])."</gzip>\n";
-	  $str.="    </backup>\n";
+	  $str.="    <table>\n";
+	  $str.="      <td>".($db->Record["bck_mode"])."</td>\n";
+	  $str.="      <td>".($db->Record["bck_dir"])."</td>\n";
+	  $str.="      <td>".($db->Record["bck_history"])."</td>\n";
+	  $str.="      <td>".($db->Record["bck_gzip"])."</td>\n";
+	  $str.="    </table>\n";
 	}
-	$str.="  </db>\n";
+	$str.="  </tr>\n";
       } while ($db->next_record());
-      $str.="</mysql>\n";
+      $str.="</table>\n";
     }
     return $str;
   }
+
+  /* ----------------------------------------------------------------- */
+  /**
+   * Exporte all the mysql databases a of give account to $dir directory
+   * @access private
+   * EXPERIMENTAL 'sid' function ;) 
+   */
+function alternc_export_data ($dir){
+    global $db, $err, $cuid,$mem;
+    $err->log("mysql","export_data");
+    $db->query("SELECT db.login, db.pass, db.db, dbusers.name FROM db,dbusers WHERE db.uid='$cuid' AND dbusers.uid=db.uid;");
+    $dir.="sql/";
+    if(!is_dir($dir)){
+        if(!mkdir($dir)){
+            $err->raise('mysql',4);
+        }
+    }
+    // on exporte toutes les bases utilisateur.
+    while($db->next_record()){
+	    $filename=$dir."mysql.".$db->Record["db"].".".date("H:i:s").".sql.gz";
+	    exec ("/usr/bin/mysqldump --defaults-file=/etc/alternc/my.cnf --add-drop-table --allow-keywords -Q -f -q -a -e ".escapeshellarg($db->Record["db"])." |/bin/gzip >".escapeshellarg($filename));
+    }
+
+
+}
 
 
 } /* Class m_mysql */

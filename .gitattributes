@@ -316,6 +316,7 @@ bureau/class/m_authip.php -text
 bureau/class/m_bro.php -text
 bureau/class/m_dom.php -text
 bureau/class/m_err.php -text
+bureau/class/m_export.php -text
 bureau/class/m_ftp.php -text
 bureau/class/m_hooks.php -text
 bureau/class/m_hta.php -text
@@ -465,6 +466,7 @@ src/alternc-dboptimize -text
 src/alternc-passwd -text
 src/alternc_reload -text
 src/du.pl -text
+src/export_account.php -text
 src/fixperms.sh -text
 src/functions.sh -text
 src/functions_dns.sh -text

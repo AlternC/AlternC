@@ -1,6 +1,5 @@
 #!/bin/bash
 . /etc/alternc/local.sh
-
 AWK=/usr/bin/awk
 DF=/bin/df
 SED=/bin/sed
@@ -8,7 +7,7 @@ MOUNT=/bin/mount
 QUOTA=/usr/bin/quota
 GREP=/bin/grep
 WC=/usr/bin/wc
-
+BLKID=/sbin/blkid
 MID=$1
 
 if [ "x$MID" == "x" ] ; then
@@ -21,22 +20,36 @@ fi
 # We look precisely on the HTML directory. Why ? because it's surely
 # the bigger one, and if someone separate it we need to look this one
 # particulary. It should be interesting to cumulate quota of all mounted directory.
+
 DATA_PART=`$DF "${ALTERNC_LOC}/html" 2>/dev/null | $AWK 'NR==2 { print $1 }'`
 
 # quota will give over NFS will print the partition using the full NFS name
 # (e.g. 10.0.0.1:/var/alternc) so we need to lookup first with mount
 # to convert DATA_PART if needed.
+
 QUOTA_PART=`$MOUNT | $SED -n -e "s,\([^ ]*\) on ${DATA_PART} type nfs.*,\1,p"`
+
 if [ -z "$QUOTA_PART" ]; then
     QUOTA_PART="$DATA_PART"
+    #if the partition is an LVM one we need to adress the partition by its UUID
+    UUID=$( $BLKID | grep "$QUOTA_PART" | cut -f2 -s -d" " | sed 's/\(UUID="\)\(.*\)\(\"$\)/\2/')
 fi
 
-# Now we get the quota 
-val=$(quota -A -wg "$MID" |grep "$QUOTA_PART" | awk '{ print $2 "\n" $3; }')
 
-# If the quota aren't activated, I return something anyway
+
+# Now we get the quota 
+#first by testing if the partition is referenced by UUID
+val=$(sudo quota -A -wg "$MID" |grep "$UUID" | awk '{ print $2 "\n" $3; }')
 if [ -z "$val" ] ; then
+    val=$(sudo quota -A -wg "$MID" |grep "$QUOTA_PART" | awk '{ print $2 "\n" $3; }')
+    
+    # If the quota aren't activated, I return something anyway
+    if [ -z "$val" ] ; then
         echo -e "0\n0"
+    else
+        echo -e "0\n0"
+    fi
+
 else
         echo -e "$val"
 fi

@@ -176,9 +176,12 @@ class m_quota {
     if (isset($this->disk[$ressource])) {
       // It's a disk resource, update it with shell command
       exec("/usr/lib/alternc/quota_edit $cuid $size");
+        echo "quota set :::::ciud: $cuid :::: size: $size :::: \n ";
       // Now we check that the value has been written properly : 
       exec("/usr/lib/alternc/quota_get ".$cuid,$a);
-      if ($size!=$a[1]) {
+        echo "quota get :::::ciud: $cuid :::: size: $size :::: a?: $a ";
+        print_r($a);
+    if ($size!=$a[1]) {
 	$err->raise("quota",1);
 	return false;
       }
@@ -362,17 +365,18 @@ class m_quota {
    * @access private
    * EXPERIMENTAL 'sid' function ;) 
    */
-  function alternc_export($tmpdir) {
+  function alternc_export_conf($tmpdir) {
     global $db,$err;
     $err->log("quota","export");
-    $str="<quota>\n";
+    $str="<table border=\"1\" ><caption>QUOTA</caption>\n";
 
     $q=$this->getquota();
     foreach ($q as $k=>$v) {
-      $str.="  <service>\n    <name>".xml_entities($k)."</name>\n";
-      $str.="    <total>".xml_entities($v)."</total>\n  </service>\n";
+      $str.="  <tr>\n    <td>".($k)."</td>\n";
+      $str.="    <td>".($v[u])."</td>\n  \n";
+      $str.="    <td>".($v[t])."</td>\n  </tr>\n";
     }
-    $str.="</quota>\n";
+    $str.="</table>\n";
     return $str;
   }
 

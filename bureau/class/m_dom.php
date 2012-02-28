@@ -1279,36 +1279,51 @@ class m_dom {
     } else return false;
   }
 
-
-  /* ----------------------------------------------------------------- */
-  /**
-   * Exporte toutes les informations domaine du compte.
-   * @access private
-   * EXPERIMENTAL 'sid' function ;) 
-   */
-  function alternc_export() {
+/*---------------------------------------------------------------------*/
+/**
+    * Returns the global domain(s) configuration(s) of a particular user
+    * No parameters needed 
+    *
+**/
+  function alternc_export_conf() {
     global $db,$err;
     $err->log("dom","export");
     $this->enum_domains();
-    $str="<dom>\n";
+    $str="<table border=\"1\"><caption>Domaines</caption><tr><th>Domaine</th><th>DNS</th><th>MX</th><th>mail</th></tr> \n";
     foreach ($this->domains as $d) {
-      $str.="  <domain>\n    <name>".xml_entities($d)."</name>\n";
-      $s=$this->get_domain_all($d);
-      $str.="    <hasdns>".xml_entities($s[dns])."</hasdns>\n";
-      $str.="    <hasmx>".xml_entities($s[mx])."</hasmx>\n";
-      $str.="    <mx>".xml_entities($s[mail])."</mx>\n";
-      if (is_array($s[sub])) {
-        foreach ($s[sub] as $sub) {
-          $str.="    <subdomain>";
-          $str.="<name>".xml_entities($sub[name])."</name>";
-          $str.="<dest>".xml_entities($sub[dest])."</dest>";
-          $str.="<type>".xml_entities($sub[type])."</type>";
-          $str.="</subdomain>\n";
+        $str.="<tr>";
+        $str.="<td>".$d."</td>";
+        $this->lock();
+        $s=$this->get_domain_all($d);
+        $this->unlock();
+        if(empty($s[dns])){
+            $s[dns]="non"; 
         }
-      }
-      $str.="  </domain>\n";
+        $str.=" <td>".$s[dns]."</td>\n";
+        
+        if(empty($s[mx])){
+            $s[mx]="non"; 
+        }
+        $str.="<td>".$s[mx]."</td>\n";
+
+        if(empty($s[mail])){
+            $s[mail]="non"; 
+        }
+        $str.="<td>".$s[mail]."</td>\n";
+        if (is_array($s[sub])) {
+            $str.="<table border=\"1\"><th>nom sous domaine</th><th>destination</th><th>type</th><tr>";
+
+            foreach ($s[sub] as $sub) {
+                  $str.="<tr><td>".$sub["enable"]." </td>";
+                  $str.="<td>".$sub["dest"]." </td>";
+                  $str.="<td>".$sub["type"]." </td></tr>";
+            }
+
+            $str.="</tr>\n";
+        }
+        $str.="</table>\n";
     }
-    $str.="</dom>\n";
+    $str.="</table>\n";
     return $str;
   }
 

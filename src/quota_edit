@@ -1,17 +1,17 @@
 #!/bin/bash
 . /etc/alternc/local.sh
-
 # Set disk quota to an user
 # Won't work over NFS
 
 MID=$1
 SIZE=$2
-
+AWK=/usr/bin/awk
+QUOTA=/usr/sbin/setquota
 if [ $# -ne 2 ] || [[ ! "$MID" =~ ^[0-9]+$ ]] || [[ ! "$SIZE" =~ ^[0-9]+$ ]]; then
   echo "Usage: quota_edit <uid> <size>"
   echo "Edit the quota of the AlternC account having uid <uid> the the available space to <size>"
   exit 1 
 fi
 
-DATA_PART=`$DF "${ALTERNC_LOC}/html" 2>/dev/null | $AWK 'NR==2 { print $1 }'`
-/usr/sbin/setquota -r -g $MID $SIZE $SIZE 0 0 $DATA_PART 2>/dev/null || echo "Group quota are not enabled on /var/alternc." >&2
+DATA_PART=`df "${ALTERNC_LOC}/html" 2>/dev/null | $AWK 'NR==2 { print $1; }'`
+`sudo $QUOTA -r -g $MID $SIZE $SIZE 0 0 $DATA_PART 2>/dev/null || echo "Group quota are not enabled on /var/alternc." >&2`

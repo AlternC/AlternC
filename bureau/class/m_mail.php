@@ -751,44 +751,45 @@ class m_mail {
     global $db,$err;
     $err->log("mail","export");
     $domain=$this->enum_domains();
-    $str="<mail>\n";
+    $str="<table border=\"1\"><caption> Mail</caption>\n";
     $tmpfile=$tmpdir."/mail_filelist.txt";
     $f=fopen($tmpfile,"wb");
     $onepop=false;
     foreach ($domain as $d) {
-      $str.="  <domain>\n    <name>".xml_entities($d)."</name>\n";
-      $s=$this->enum_doms_mails($d);
-      unset($s["count"]);
-      if (count($s)) {
-        foreach($s as $e) {
-          $str.="    <address>\n";
-          $str.="      <mail>".xml_entities($e["mail"])."</mail>\n";
-          $str.="      <ispop>".xml_entities($e["pop"])."</ispop>\n";
-          $acc=explode("\n",$e["alias"]);
-          foreach($acc as $f) {
-	    $f=trim($f);
-	    if ($f) {
-	      $str.="      <alias>".xml_entities($f)."</alias>\n";
-	    }
-	  }
-	  if ($e["pop"]) {
-	    $db->query("SELECT path FROM mail_users WHERE alias='".str_replace("@","_",$e["mail"])."';");
-	    if ($db->next_record()) {
-	      fputs($f,$db->Record["path"]."\n");
-	      $onepop=true;
-	    }
-	  }
-	  $str.="    </address>\n";
-	}
+        $str.="  <tr>\n    <td>".($d)."</td>\n";
+        $s=$this->enum_doms_mails($d);
+        unset($s["count"]);
+        if (count($s)) {
+            foreach($s as $e) {
+              $str.="    <table><tr>\n";
+              $str.="      <td>".($e["mail"])."</td>\n";
+              $str.="      <td>".($e["pop"])."</td>\n";
+              $acc=explode("\n",$e["alias"]);
+                  foreach($acc as $f) {
+                      $f=trim($f);
+                      $str.="<ul>";
+                        if ($f) {
+                            $str.=" <li>".($f)."</li>\n</ul>";
+                        }
+                  }
+                  if ($e["pop"]) {
+                      $db->query("SELECT path FROM mail_users WHERE alias='".str_replace("@","_",$e["mail"])."';");
+                      if ($db->next_record()) {
+                      fputs($f,$db->Record["path"]."\n");
+                      $onepop=true;
+                    }
+            }
+            $str.="    </tr>\n";
+        }
       }     
-      $str.="  </domain>\n";
+      $str.="  </tr>\n";
     }
-    $str.="</mail>\n";
+    $str.="</table>\n";
     fclose($f);
-    if ($onepop) {
+    /*if ($onepop) {
       // Now do the tarball of all pop accounts : 
       exec("/bin/tar -czf ".escapeshellarg($tmpdir."/mail.tar.gz")." -T ".escapeshellarg($tmpfile)); 
-    }
+    }*/
     @unlink($tmpfile);
     return $str;
   }

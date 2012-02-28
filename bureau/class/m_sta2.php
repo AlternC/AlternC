@@ -290,15 +290,15 @@ class m_sta2 {
    * @access private
    * EXPERIMENTAL 'sid' function ;) 
    */
-  function alternc_export($tmpdir) {
+  function alternc_export_conf() {
     global $db,$err;
     $err->log("sta2","export");
-    $this->get_list_raw();
+    $f=$this->get_list_raw();
     $str="<sta2>\n";
     foreach ($f as $d) {
       $str.="  <stats>\n";
-      $str.="    <hostname>".xml_entities($s[hostname])."</hostname>\n";
-      $str.="    <folder>".xml_entities($s[folder])."</folder>\n";
+      $str.="    <hostname>".($s[hostname])."</hostname>\n";
+      $str.="    <folder>".($s[folder])."</folder>\n";
       $str.="  </stats>\n";
     }
     $str.="</sta2>\n";
