@@ -144,7 +144,7 @@ class m_mem {
    */
   function setid($id) {
     global $db,$err,$cuid;
-    $err->log("mem","setid",$username);
+    $err->log("mem","setid",$id);
     $db->query("select * from membres where uid='$id';");
     if ($db->num_rows()==0) {
       $err->raise("mem",1);
@@ -191,6 +191,7 @@ class m_mem {
     return false;
   }
 
+/* Faut finir de l'implémenter :)
   function authip_class() {
     global $cuid;
     $c = Array();
@@ -200,6 +201,7 @@ class m_mem {
 
     return $c;
   }
+*/
 
   /* ----------------------------------------------------------------- */
   /** Vérifie que la session courante est correcte (cookie ok et ip valide).
@@ -213,10 +215,12 @@ class m_mem {
    */
   function checkid() {
     global $db,$err,$cuid,$restrictip,$authip;
-    if ($_REQUEST["username"] && $_REQUEST["password"]) {
-      return $this->login($_REQUEST["username"],$_REQUEST["password"],$_REQUEST["restrictip"]);
-    }
-    $_COOKIE["session"]=addslashes($_COOKIE["session"]);
+    if (isset($_REQUEST["username"])) {
+      if ($_REQUEST["username"] && $_REQUEST["password"]) {
+      	return $this->login($_REQUEST["username"],$_REQUEST["password"],$_REQUEST["restrictip"]);
+      }
+    } // end isset
+    $_COOKIE["session"]=isset($_COOKIE["session"])?addslashes($_COOKIE["session"]):"";
     if (strlen($_COOKIE["session"])!=32) {
       $err->raise("mem",3);
       return false;
@@ -318,7 +322,7 @@ class m_mem {
     # Invoker le logout dans toutes les autres classes
     foreach($classes as $c) {
       if (method_exists($GLOBALS[$c],"alternc_del_session")) {
-	    $GLOBALS[$c]->alternc_del_session($dom);
+	    $GLOBALS[$c]->alternc_del_session();
       }
     }
     return true;

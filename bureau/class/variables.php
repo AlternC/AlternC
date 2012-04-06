@@ -99,17 +99,22 @@ function variable_get($name, $default = null) {
  *   The value to set. This can be any PHP data type; these functions take care
  *   of serialization as necessary.
  */
-function variable_set($name, $value) {
+function variable_set($name, $value, $comment=null) {
   global $conf, $db;
 
   $conf[$name] = $value;
   if (is_object($value) || is_array($value)) {
     $value = serialize($value);
   }
-  @$db->query("INSERT IGNORE INTO `variable` (name, value) VALUES ('".$name."', '".$value."')");
-  if ($db->affected_rows() < 1) {
-    $db->query("UPDATE `variable` SET value = '".$value."' WHERE name = '".$name."'");
+
+  if ( is_null($comment) ) {
+    $query = "INSERT INTO variable (name, value) values ('".$name."', '".$value."') on duplicate key update name='$name', value='$value';";
+  } else {
+    $comment=mysql_real_escape_string($comment);
+    $query = "INSERT INTO variable (name, value, comment) values ('".$name."', '".$value."', '$comment') on duplicate key update name='$name', value='$value', comment='$comment';";
   }
+
+  $db->query("$query");
 
   variable_init_maybe();
 }

@@ -59,7 +59,7 @@ if (! $d=$dom->domains_type_get($name)) {
 <hr id="topbar"/>
 <br />
 <?php
-if ($error_edit) {
+if (isset($error_edit) && $error_edit) {
 	echo "<p class=\"error\">$error_edit</p>";
 	$error_edit="";
 

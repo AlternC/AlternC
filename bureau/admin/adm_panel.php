@@ -41,11 +41,11 @@ include_once("head.php");
 <hr id="topbar"/>
 <br />
 <?php
-	if ($error) {
-		echo "<p class=\"error\">$error</p>";
-		include_once("foot.php");
-		exit;
-	}
+if (isset($error) && $error) {
+	echo "<p class=\"error\">$error</p>";
+	include_once("foot.php");
+	exit;
+}
 ?>
 <ul id="adm_panel">
  <li class="lst1"><a href="adm_tld.php"><?php __("Manage allowed domains (TLD)"); ?></a></li>

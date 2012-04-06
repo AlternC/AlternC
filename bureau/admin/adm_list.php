@@ -67,7 +67,7 @@ $r=$admin->get_list($show == 'all' ? 1 : 0, $creator);
 <hr id="topbar"/>
 <br />
 <?php
-	if ($error) {
+	if (isset($error) && $error ) {
 	  echo "<p class=\"error\">$error</p>";
 	}
 ?>
@@ -75,7 +75,7 @@ $r=$admin->get_list($show == 'all' ? 1 : 0, $creator);
 <?php __("Here is the list of hosted AlternC accounts"); ?> (<?php printf(_("%s accounts"),count($r)); ?>)
 
 &nbsp;
-<?php if($_REQUEST['show'] != 'all') {
+<?php if($show != 'all') {
   echo '<p><span class="ina"><a href="adm_list.php?show=all">' . _('List all AlternC accounts') . '</a></span>';
   if ($subadmin!=0 || $cuid==2000) {
     $list_creators = $admin->get_creator_list();

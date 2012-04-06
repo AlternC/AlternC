@@ -1,6 +1,6 @@
-<?php
+<?
 /*
- $Id: mail_dodel.php,v 1.2 2003/06/10 06:45:16 root Exp $
+ mail_alias_doedit.php, author: squidly
  ----------------------------------------------------------------------
  AlternC - Web Hosting System
  Copyright (C) 2002 by the AlternC Development Team.
@@ -23,29 +23,32 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file: Benjamin Sonntag
- Purpose of file: Delete a mailbox
+ Purpose of file: Create a new mail account
  ----------------------------------------------------------------------
 */
 require_once("../class/config.php");
+$fields = array (
+	"alias" => array ("request", "string",0),
+	"mail_id" => array ("request", "integer",0),
+	"domain" => array ("request", "string",0),
+	"address_full" => array ("request", "string",0),
+	"dom_id" => array ("request", "integer",0),
+	"rcp" =>array("request", "array", "")
+);
+getFields($fields);
 
-if (!is_array($d)) {
-        $d[]=$d;
+$alias_retour=array ();
+$alias_retour=$mail->create($dom_id,$alias);
+//setting up the alias.
+if(!$mail_alias->setalias($alias_retour["mail_id"],$address_full)){
+//if fails redirect to creation with error message.
+$error=sprintf(_("Alias: %s already created"), $alias);
+include("mail_alias_create.php");
+}else{
+//redirection to the properties list.
+header ("Location: mail_properties.php?mail_id=$mail_id");
 }
 
 
-reset($d);
-while (list($key,$val)=each($d)) {
-	if (!$mail->del_mail($val)) {
-		$error.=sprintf(_("The mailbox <b>%s</b> does not exist!")."<br />",$val);
-		echo $error;
-	} else {
-		$error.=sprintf(_("The mailbox <b>%s</b> has been deleted!")."<br />",$val); 
-		echo $error;		
-	}
-include("mail_list.php");
-}
 
-exit();
 
-?>

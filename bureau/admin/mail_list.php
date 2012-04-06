@@ -1,6 +1,6 @@
 <?php
 /*
- $Id: mail_list.php,v 1.8 2005/04/01 16:05:26 benjamin Exp $
+ $Id: mail_list.php, author: squidly
  ----------------------------------------------------------------------
  AlternC - Web Hosting System
  Copyright (C) 2002 by the AlternC Development Team.
@@ -23,121 +23,81 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file: Benjamin Sonntag, Franck Missoum
- Purpose of file: Show the mail account list on domain $dom
+ Purpose of file: listing of mail accounts 
  ----------------------------------------------------------------------
 */
+
 require_once("../class/config.php");
 include_once("head.php");
 
 $fields = array (
 	"domain"    => array ("request", "string", ""),
-
-	"letter"    => array ("get", "string", ""),
+	"domain_id"    => array ("request", "integer", ""),
 );
-getFields($fields);
 
-if(!$domain)
+$champs=getFields($fields);
+
+if( !$domain && !$domain_id )
 {
 	include("main.php");
 	exit();
 }
 
-if(!$res=$mail->enum_doms_mails($domain,1,$letter)) {
-  $error=$err->errstr();
+$domain_id=$champs["domain_id"];
+
+if(!$mails_list = $mail->enum_domain_mails($domain_id)){
+	$error=$err->errstr();
+}
 ?>
+
+<?php
+if (isset($error)) {
+  	echo "<p class=\"error\">$error</p>";
+}
+
+//Mail creation.
+if ($quota->cancreate("mail")) { ?>
+<h3><?php __("Create a new mail account");?></h3>
+	<form method="post" action="mail_doadd.php" id="main" name="mail_create" onsubmit="return is_valid_mail2()">
+		<input type="text" class="int" name="mail_arg" value="" size="20" id="mail_arg" maxlength="32" /><span id="emaildom" class="int" > <?php echo "@".$domain; ?></span>
+		<input type="hidden" name="domain_id"  value="<?php echo $domain_id;?>" />
+		<input type="hidden" name="domain"  value="<?php echo $domain;?>" />
+		<input type="submit" name="submit" class="inb" value="<?php __("Create"); ?>" />
+	</form>
+<?php 
+}
+
+if (empty($mails_list)){ // If there is no mail for this domain 
+	__("No mail for this domain");
+} else {
+?>
+
 <h3><?php printf(_("Email addresses of the domain %s"),$domain); ?> : </h3>
-<?php
-if ($error) {
-  echo "<p class=\"error\">$error</p>";
-}
-?>
-<hr id="topbar"/>
-<br />
-<p>
-   <span class="inb"><a href="mail_add.php?domain=<?php echo $domain; ?>"><?php printf(_("Add a mailbox on <b>%s</b>"),$domain); ?></a></span>
-</p><p>
-   <span class="inb"><a href="mail_add.php?many=1&amp;domain=<?php echo $domain; ?>"><?php printf(_("Add many mailboxes on <b>%s</b>"),$domain); ?></a></span>
-</p>
-<?
-}
-else
-{
-
-?>
-<h3><?php printf(_("Email addresses of the domain %s"),$domain); ?> : </h3>
-<?php
-if (isset($error) && $error) {
-  echo "<p class=\"error\">$error</p>";
-}
-?>
-<hr id="topbar"/>
-<br />
-<p>
-   <span class="inb"><a href="mail_add.php?domain=<?php echo $domain; ?>"><?php printf(_("Add a mailbox on <b>%s</b>"),$domain); ?></a></span>
-</p><p>
-   <span class="inb"><a href="mail_add.php?many=1&amp;domain=<?php echo $domain; ?>"><?php printf(_("Add many mailboxes on <b>%s</b>"),$domain); ?></a></span>
-</p>
-<?php
-
-if(!$letters=$mail->enum_doms_mails_letters($domain))
-  $error=$err->errstr();
-else{
-  echo "<p>";
-  __("Show only mail starting by:"); 
-  echo " ";
-  for($i=0;$i<count($letters);$i++){
-    $val=$letters[$i];
-    echo "   <a href=\"mail_list.php?domain=$domain&amp;letter=$val\">$val&nbsp;</a>";
-  }
-  echo "   <a href=\"mail_list.php?domain=$domain\">".sprintf(_("All"))."</a>";
-  echo "</p>";
-}
-
- if ($res["count"]) {
-?>
-<form method="post" action="mail_del.php" id="main">
 
 <table class="tlist">
-
-<tr><th colspan="2"><input type="hidden" name="domain" value="<?php echo $domain ?>"/> </th>
-<th><?php __("Email address"); ?></th><th><?php __("Size"); ?></th><th> </th></tr>
+<tr><th><?php __("Active");?></th><th align=center><?php __("Address"); ?></th><th><?php __("State"); ?></th></tr>
 <?php
+
 $col=1;
-for($i=0;$i<$res["count"];$i++) {
+//listing of every mail of the current domain.
+while (list($key,$val)=each($mails_list)){
 	$col=3-$col;
-	$val=$res[$i];
-	echo "<tr class=\"lst$col\">";
-	echo "<td align=\"center\"><input class=\"inc\" type=\"checkbox\" id=\"del_$i\" name=\"d[]\" value=\"".$val["mail"]."\" /></td>";
-?>
-<td><div class="ina"><a href="mail_edit.php?email=<?php echo urlencode($val["mail"]);  ?>&amp;domain=<?php echo urlencode($domain); ?>"><img src="images/edit.png" alt="<?php __("Edit"); ?>" /><?php __("Edit"); ?></a></div></td>
-
-<?php
-	echo "<td><label for=\"del_$i\">".$val["mail"]."</label></td>";
-	if ($val["pop"]) {
-		echo "<td>".format_size($val["size"])."</td>";
-	} else {
-		echo "<td>&nbsp;</td>";
-	}
-    echo "<td>";
-    if (! is_null($val['expiration_date'])) {
-      // It's a temporary account
-      $trash_info=new m_trash();
-      $trash_info->set_from_db($val["expiration_date"]);
-      echo __("This account will be deleted on"); echo "<br />".$trash_info->human_display();
-    }
-    echo "</td>";
-	echo "</tr>";
-
+	?>
+	<tr class="lst_clic<?php echo $col; ?>" onclick="javascript:window.location.href='mail_properties.php?mail_id=<?php echo $val["id"]; ?>'">
+	<td><?php if ($val["enabled"] ) { ?>
+			<img src="images/check_ok.png" alt="<?php __("Enabled"); ?>" />
+		<?php } else { ?>
+			<img src="images/check_no.png" alt="<?php __("Disabled"); ?>" />
+		<?php } // if enabled ?>
+	</td>
+	<td align=right><?php echo $val["address"]."@".$domain ?></td>
+	<td><div class="ina"><a href="mail_properties.php?mail_id=<?php echo $val["id"] ?>"><img src="images/edit.png" alt="<?php __("Edit"); ?>" /><?php __("Edit"); ?></a></div></td>
+	</tr>
+	<?php
 }
+} // end if no mail for this domain
 ?>
+
 </table>
-<br />
-<input type="submit" class="inb" name="submit" value="<?php __("Delete the checked email addresses"); ?>" />
-</form>
 
-<?php
-   }
-}
-?>
 <?php include_once("foot.php"); ?>

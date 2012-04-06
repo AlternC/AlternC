@@ -130,6 +130,8 @@ class DB_Sql {
   * @return the $Query_ID class variable (null if fails)
   */
   function query($Query_String) {
+    global $debug_alternc;
+
     /* No empty queries, please, since PHP4 chokes on them. */
     if ($Query_String == "")
       /* The empty query string is passed on from the constructor,
@@ -151,12 +153,18 @@ class DB_Sql {
     if ($this->Debug)
       printf("Debug: query = %s<br />\n", $Query_String);
 
+    $debug_chrono_start = microtime(true);
     $this->Query_ID = @mysql_query($Query_String,$this->Link_ID);
+    $debug_chrono_start = (microtime(true) - $debug_chrono_start)*1000;
     $this->Row   = 0;
     $this->Errno = mysql_errno();
     $this->Error = mysql_error();
     if (!$this->Query_ID) {
       $this->halt("Invalid SQL: ".$Query_String);
+    }
+
+    if (isset($debug_alternc)) {
+      $debug_alternc->add("SQL Query : (".substr($debug_chrono_start,0,5)." ms)\t $Query_String");
     }
 
     # Will return nada if it fails. That's fine.

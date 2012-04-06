@@ -1,6 +1,6 @@
-<?php
-/**
- mail_add.php, author: squidly
+<?
+/*
+ mail_localbox_doedit.php, author: squidly
  ----------------------------------------------------------------------
  AlternC - Web Hosting System
  Copyright (C) 2002 by the AlternC Development Team.
@@ -27,17 +27,50 @@
  ----------------------------------------------------------------------
 */
 
-require_once("../class/config.php");
-include_once("head.php");
+
+ require_once("../class/config.php");
+
+
 $fields = array (
-	"domain_id"    => array ("request", "integer", ""),
-	"mail_arg"  => array ("request", "string", ""),
+	"local" => array ("request", "integer",0),
+	"mail_id" => array ("request", "integer",0),
+	"is_local" => array ("request", "integer",0)
 );
 getFields($fields);
+/*si local vaut non =
+	si boite pas deja locale : ne rien faire
+	si boite locale: suprimmer entré dans mailbox
+	niveau system virer le dossier.
+  si local vaut oui =
+	si boite pas deja local: ajout entré table mailbox
+	si boite locale: dire a l'utilisateur que c'est deja le cas.
+*/
+print_r($is_local);
+//if we are already processing a localy hosted mail
+if(isset($is_local) && intval($is_local) == 1){
+	//if user chose yes to localbox
+	if($local == 1){
+		$error = _("Already Activated");
+		include ("mail_edit.php");
+		exit();
+	}else{
+		$mail_localbox->unset_localbox($mail_id);
+		header ("Location: /mail_properties.php?mail_id=$mail_id");
+	}
+}elseif( intval($is_local) == 0 ){
+
+	if($local == 0){
+		$error = _("Already Activated");
+		include ("mail_edit.php");
+		exit();
+	}else{
+		//echo "processing mail to localbox";
+		$mail_localbox->set_localbox($mail_id);
+		header ("Location: /mail_properties.php?mail_id=$mail_id");
+	}
 
 
-<h3><?php printf(_("Add %s mail to the domain %s"),$mail_arg,$domain_id); ?> : </h3>
-<?php
-if ($error) {
-  echo "<p class=\"error\">$error</p>";
+
 }
+
+

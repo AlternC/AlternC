@@ -47,7 +47,7 @@ if (!$r=$ftp->get_list($domain)) {
 <br />
  
 <?php
-if ($error && !$noftp) {
+if (isset($error) && $error && !$noftp) {
 ?>
 <p class="error"><?php echo $error ?></p>
 <?php } ?>

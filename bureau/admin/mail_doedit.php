@@ -1,6 +1,6 @@
 <?php
 /*
- $Id: mail_doedit.php,v 1.5 2006/01/12 01:10:48 anarcat Exp $
+ $Id: mail_doedit.php, author : squidly
  ----------------------------------------------------------------------
  AlternC - Web Hosting System
  Copyright (C) 2002 by the AlternC Development Team.
@@ -23,46 +23,65 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file: Benjamin Sonntag, Franck Missoum
- Purpose of file: DO edit a mailbox, or alias
+ Purpose of file: Create a new mail account
  ----------------------------------------------------------------------
 */
+
+
 require_once("../class/config.php");
 
-$error_edit="";
-$trash=new m_trash();
-$trash->getfromform();
-
-
 $fields = array (
-	"domain"    => array ("request", "string", ""),
-	"email"       => array ("request", "string", ""),
-	"pop"       => array ("request", "integer", 0),
-	"pass"       => array ("request", "string", ""),
-	"passconf"       => array ("request", "string", ""),
-	"alias"       => array ("request", "string", ""),
+	"dom_id" =>array ("request","integer",""),
+	"mail_id" => array ("request","integer",""),
+	"pass" => array ("request","string",""),
+	"passconf" => array("request","string",""),
+	"is_enabled" => array("request","string",""),
+	"enable" => array("request","string","")
 );
+
 getFields($fields);
 
+/*
+* checking the password
+*/
 
-if ($pass != $passconf) {
-	$error = _("Passwords do not match");
-	include ("mail_edit.php");
-	exit();
-}
-
-if (!$mail->put_mail_details($email,$pop,$pass,$alias,$trash->expiration_date_db)) {
-	$error_edit=$err->errstr();
-            $addok=0;
+if(isset($pass) && $pass != ""){
+	if($pass != $passconf){
+		$error = _("Password do not match");
 		include ("mail_edit.php");
-
-} else {
-            $ok=sprintf(_("The email address <b>%s</b> has been successfully changed"),$email)."<br />";
-            $addok=1;
-            $t=explode("@",$email);
-            $email=$t[0];
-	    $error=$ok;
-	    include("mail_list.php");
-	    exit();
+		exit();
+	}else{
+		//adding the password
+		$mail->setpasswd($mail_id,$pass);
+		header ("Location: /mail_properties.php?mail_id=$mail_id");
+	}	
 }
-?>
+/*
+* checking the activation state of the mail
+* redirecting according to it.
+*/
+if($is_enabled == 1){
+	if(intval($enable)==0){
+		//desactivation	
+		$mail->disable($mail_id);
+		header ("Location: /mail_properties.php?mail_id=$mail_id");
+	}else{
+		$error = _("Already Activated");
+		include ("mail_edit.php");
+		exit();
+	}
+}elseif($is_enabled == 0){
+	if(intval($enable)==0){
+		// c'est dja inactif
+		$error = _("Already disabled ");
+		include ("mail_edit.php");
+		exit();
+	}else{
+		//Activation
+		$mail->enable($mail_id);
+		header ("Location: /mail_properties.php?mail_id=$mail_id");
+	}
+
+}
+
+

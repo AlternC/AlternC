@@ -95,3 +95,5 @@ class m_trash {
   }
 
 }
+
+?>

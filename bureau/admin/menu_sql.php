@@ -32,7 +32,10 @@ if ($q["t"]) {
 ?>
 <div class="menu-box">
 <div class="menu-title">
-<img src="images/mysql.png" alt="MySQL" />&nbsp;MySQL (<?= $q["u"]; ?>/<?= $q["t"]; ?>)</div>
+<a href="javascript:menu_toggle('menu-sql');">
+<img src="images/mysql.png" alt="MySQL" />&nbsp;MySQL (<?= $q["u"]; ?>/<?= $q["t"]; ?>)
+<img src="/images/row-down.png" alt="" style="float:right;"/></a>
+</div>
 <div class="menu-content" id="menu-sql">
 <ul>
 <li><a href="sql_list.php"><?php __("Databases"); ?></a></li>

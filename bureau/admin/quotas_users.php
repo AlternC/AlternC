@@ -2,9 +2,12 @@
 
 require_once("../class/config.php");
 
-$mode=intval($_REQUEST["mode"]);
-$sd=intval($_REQUEST["sd"]);
-$usr=intval($_REQUEST["usr"]);
+$fields = array (
+	"mode"   => array ("get", "integer" ,0), 
+	"sd"     => array ("get", "integer" ,0), 
+	"usr"    => array ("get", "integer" ,0), 
+);
+getFields($fields);
 
 if (!$admin->enabled) {
   __("This page is restricted to authorized staff");
@@ -18,7 +21,7 @@ include_once ("head.php");
 <hr id="topbar"/>
 <br />
 <?php
-if ($error) {
+if (isset($error) && $error) {
   echo "<p class=\"error\">$error</p>";
 }
 ?>

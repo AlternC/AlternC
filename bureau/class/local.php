@@ -44,3 +44,4 @@ while (FALSE !== ($line = fgets($config_file))) {
 }
 
 fclose($config_file);
+?>

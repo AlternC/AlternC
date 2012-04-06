@@ -10,6 +10,7 @@ menulist[4] = "menu-adm";
 
 var menu_opened = "";
 
+/*
 function deploy(menu)
 {
 	for (var i = 0; i < menulist.length; i++)
@@ -20,7 +21,7 @@ function deploy(menu)
 			var div_img = new getObj("img-" + menulist[i]);
 
 			div_content.style.display = "none";
-			div_img.obj.src = "/admin/images/plus.png";
+			div_img.obj.src = "/images/plus.png";
 		}
 	}
 
@@ -33,13 +34,13 @@ function deploy(menu)
 	if (menu_opened == menu)
 	{
 		div_content.style.display = "none";
-		div_img.obj.src = "/admin/images/plus.png";
+		div_img.obj.src = "/images/plus.png";
 		menu_opened = "";
 	}
 	else
 	{
 		div_content.style.display = "block";
-		div_img.obj.src = "/admin/images/minus.png";
+		div_img.obj.src = "/images/minus.png";
 		menu_opened = menu;
 	}
 }
@@ -82,6 +83,7 @@ function checkObj(name)
 	}
 	return false;
 }
+*/
 
 function help(hid) {
 	var top=100; /* (10-screen.height); */
@@ -154,3 +156,46 @@ function swap(s,shm) {
         }
     }
 }
+
+
+function is_valid_mail(id_elem) {
+  //var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+  //FIXME mail documentation doesn't expect a maximum length of the mail address : http://tools.ietf.org/html/rfc2822#section-3.4.1
+  var reg = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i; 
+var rgxp = /^[a-z0-9\!\#\$\%\&\'\*+/=?^_`{|}~-]{1,}((\.[a-z0-9\!\#\$\%\&\'\*+/=?^_`{|}~-]{1,13})?)+@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9\-]*[a-z0-9])?$/
+  var mail = document.getElementById('rcp-'+id_elem).value;
+  var src = "";
+  var alt = "";
+
+  if (mail != "" ) {
+    if(rgxp.test(mail) == false) {
+      src = "images/check_no.png";
+      alt = "KO";
+    } else {
+      src ="images/check_ok.png";
+      alt ="OK";
+    }
+  } 
+
+  document.getElementById('valid-rcp-'+id_elem).src = src;
+  document.getElementById('valid-rcp-'+id_elem).alt = alt;
+}
+
+
+function is_valid_mail2() {
+  var reg = /^[A-Z0-9._%+-]+$/i; 
+  var arg = document.getElementById('mail_arg').value;
+var rgxp = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+((\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)?)+?$/
+    if(rgxp.test(arg) == false) {
+	alert(arg+" : incorect");
+	return false;
+    } else {
+	return true;
+    }
+
+}
+
+function menu_toggle(id) {
+  $("#"+id).toggle();
+}
+

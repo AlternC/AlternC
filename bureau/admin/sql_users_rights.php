@@ -42,9 +42,9 @@ $r=$mysql->get_user_dblist($id);
 <hr id="topbar"/>
 <br />
 <?php
-	if ($error) {
-		echo "<p class=\"error\">$error</p><p>&nbsp;</p>";
-	}
+if (isset($error) && $error) {
+	echo "<p class=\"error\">$error</p><p>&nbsp;</p>";
+}
 
 if ($r) {
 

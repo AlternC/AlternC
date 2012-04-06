@@ -38,9 +38,9 @@ $rdb=$mysql->get_dblist();
 <hr id="topbar"/>
 <br />
 <?php
-	if ($error) {
-		echo "<p class=\"error\">$error</p><p>&nbsp;</p>";
-	}
+if (isset($error) && $error) {
+	echo "<p class=\"error\">$error</p><p>&nbsp;</p>";
+}
 
 if ($rdb) {
   if($r){

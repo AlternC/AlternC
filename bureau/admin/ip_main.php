@@ -51,19 +51,23 @@ $lac = $authip->list_affected();
 <hr id="topbar"/>
 <br />
 
-<?php if ($error) { ?>
+<?php if (isset($error) && $error) { ?>
   <p class="error"><?php echo $error ?></p>
 <?php } ?>
 
-<table>
+<h3><?php __("Enabled rules"); ?></h3>
+
+<table class="tlist">
 <tr>
   <th><?php __("Protocol");?></th>
   <th><?php __("Target");?></th>
   <th><?php __("IP address");?></th>
 </tr>
 <?php 
+  $col=1;
   foreach ($lac as $ll) {
-    echo "<tr>";
+    $col=3-$col;
+    echo "<tr class='lst$col' >";
     echo "<td>".$ac[$ll['protocol']]['name']."</td>";
     echo "<td>".$ac[$ll['protocol']]['values'][$ll['parameters']]."</td>";
     echo "<td>".$list_ip[$ll['authorised_ip_id']]['infos']."<br/>".$list_ip[$ll['authorised_ip_id']]['ip_human']."</td>"; ?>
@@ -75,13 +79,14 @@ $lac = $authip->list_affected();
 </table>
 </p>
 
-<fieldset><legend><?php __("Add a new rule"); ?></legend>
+<hr/>
+<h3><?php __("Add a new rule"); ?></h3>
 <form method="post" action="ip_main.php" name="main" id="main">
-<table>
+<table class="tlist">
   <thead>
     <th><?php __("Target"); ?></th>
     <th><?php __("IP address (or subnet)"); ?></th>
-    <th/>
+    <td/>
   </thead>
   <tbody>
     <tr valign="top">
@@ -121,18 +126,18 @@ $lac = $authip->list_affected();
   </tbody>
 </table>
 </form>
-</fieldset>
 
-<table>
-  
+<hr/>
+<h3><?php __("Know IP and networks");?></h3>
+<table class="tlist">
   <tr>
-    <th colspan=2><?php __("IP address");?></th>
-  </tr>
-  <tr>
-    <td valign=top>
+    <td valign=top width=40%> 
       <table>
       <tr><th><?php __("Type"); ?></th><th><?php __("IP"); ?></th><th><?php __("Informations"); ?></th><th colspan=2/></tr>
-      <?php foreach($list_ip as $i) {
+      <?php 
+      $col=1;
+      foreach($list_ip as $i) {
+        $col=3-$col;
         if (checkip($i['ip'])) {
           if ($i['subnet']==32) {
             $txt="Address IPv4";
@@ -146,7 +151,7 @@ $lac = $authip->list_affected();
             $txt="Subnet IPv6";
           }
         } 
-        echo "<tr><td>$txt</td><td>{$i['ip_human']}</td><td>{$i['infos']}</td>";
+        echo "<tr class='lst$col' ><td>$txt</td><td>{$i['ip_human']}</td><td>{$i['infos']}</td>";
         ?>
         <td><div class="ina"><a href="javascript:edit_ip(<?php echo "'".htmlentities($i['id'])."','".htmlentities($i['ip_human'])."','".htmlentities($i['infos'])."'"; ?>);"><img src="images/edit.png" alt="<?php __("Edit"); ?>" /><?php __("Edit"); ?></a></div></td>
         <td><div class="ina"><a href="ip_main.php?delete_id=<?php echo urlencode($i["id"]) ?>"><img src="images/delete.png" alt="<?php __("Delete"); ?>" /><?php __("Delete"); ?></a></div></td>
@@ -155,7 +160,7 @@ $lac = $authip->list_affected();
       <?php } ?>
       </table>
     </td>
-    <td valign=top>
+    <td valign=top width=40%>
       <fieldset>
         <legend><?php __("Add an IP");?> - <a href="javascript:edit_ip('','<?php echo htmlentities($_SERVER['REMOTE_ADDR'])."','Home IP'";?>);" ><?php echo __("Add my current IP"); ?></a></legend>
         <span id="form_add_ip">

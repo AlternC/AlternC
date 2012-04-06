@@ -1,6 +1,6 @@
 <?php
 /*
- $Id: mail_doadd.php,v 1.3 2006/01/12 01:10:48 anarcat Exp $
+ $Id: mail_doadd.php, author: squidly
  ----------------------------------------------------------------------
  AlternC - Web Hosting System
  Copyright (C) 2002 by the AlternC Development Team.
@@ -23,43 +23,27 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file: Benjamin Sonntag
  Purpose of file: Create a new mail account
  ----------------------------------------------------------------------
 */
 require_once("../class/config.php");
-$trash->getfromform();
-
 $fields = array (
+	"mail_arg"     => array ("request", "string", ""),
+	"domain_id"    => array ("request", "integer", ""),
 	"domain"    => array ("request", "string", ""),
-	"email"       => array ("request", "string", ""),
-	"pop"       => array ("request", "integer", 0),
-	"pass"       => array ("request", "string", ""),
-	"passconf"       => array ("request", "string", ""),
-	"alias"       => array ("request", "string", ""),
 );
 getFields($fields);
 
-if ($pass != $passconf) {
-	$error = _("Passwords do not match");
-	include("mail_add.php");
-	exit();
-}
 
-if (!$mail->add_mail($domain,$email,$pop,$pass,$alias,$trash->expiration_date_db)) {
-	$error=$err->errstr();
-        $addok=0;
-	include ("mail_add.php");
-} else {
-	$addok=1;
-	$error=sprintf (_("The email address <b>%s</b> has been successfully created"),"$email@$domain");
-	if ($many) {
-		unset($email,$pass,$alias);
-		include("mail_add.php");
- 	} else {
-		include("mail_list.php");
-	}
-	exit();
-}
+$res= array();
+//FIXME seems good but maybe can be done in a more fashion way.
+$res=$mail->create($domain_id,$mail_arg);
 
+//once the mail created redirection to mail_properties.php, with the mail_id as parameters ( + domain_id )
+if($res["mail_id"]== null){
+	header ("Location: /mail_list.php?domain=$domain&domain_id=$domain_id");
+}else{
+	$test= 'mail_properties.php?mail_id='.$res["mail_id"]."&domain_id=$domain_id";
+	header("Location: /$test");
+}
 ?>

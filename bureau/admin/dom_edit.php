@@ -131,7 +131,7 @@ for($i=0;$i<$r["nsub"];$i++) {
 					switch ($r['sub'][$i]['enable']) {
 						case 'ENABLED':
 							__("Enabled");
-							echo "<br/><a href='dom_substatus.php?domain=".urlencode($r["name"])."&amp;sub=".urlencode($r["sub"][$i]["name"])."&amp;type=".urlencode($r["sub"][$i]["type"])."&amp;value=".urlencode($r["sub"][$i]['dest'])."&status=disable'>";__("Disable");echo "</a>";
+							echo "<br/><a href='dom_substatus.php?domain=".urlencode($r["name"])."&amp;sub=".urlencode($r["sub"][$i]["name"])."&amp;type=".urlencode($r["sub"][$i]["type"])."&amp;value=".urlencode($r["sub"][$i]['dest'])."&amp;status=disable'>";__("Disable");echo "</a>";
 							break;
 						case 'ENABLE':
 							__("Activation pending");
@@ -208,7 +208,7 @@ if (!$r['noerase']) {
 <input type="submit" class="inb" name="submit" value="<?php __("Submit the changes"); ?>" />
 	</form>
 
-<p>&nbsp</p>
+<p>&nbsp;</p>
 <hr />
 <h3><?php __("Domain removal"); ?></h3>
 

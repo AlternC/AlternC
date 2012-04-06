@@ -1,6 +1,6 @@
-<?php
+<?
 /*
- $Id: menu_dom.php,v 1.2 2003/06/10 06:42:25 root Exp $
+ mail_redirection_doedit.php, author: squidly
  ----------------------------------------------------------------------
  AlternC - Web Hosting System
  Copyright (C) 2002 by the AlternC Development Team.
@@ -23,39 +23,29 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file:
- Purpose of file:
+ Purpose of file: Create a new mail account
  ----------------------------------------------------------------------
 */
 
-		/* ############# DOMAINES ############# */
-$q = $quota->getquota("dom");
+require_once("../class/config.php");
+$fields = array (
+	"alias" => array ("request", "string",0),
+	"mail_id" => array ("request", "integer",0),
+	"domain" => array ("request", "string",0),
+	"address_full" => array ("request", "string",0),
+	"dom_id" => array ("request", "integer",0),
+	"rcp" =>array("request", "array", "")
+);
+getFields($fields);
+//obon on crée les redirect..
+$tst=$mail_redirection->setredirection($mail_id, $rcp);
+if($tst==false){
+	$error="One ore more redirection could not be added";
+}
 
-if ($q["t"] > 0)
-{
+
+
+//redirection si tout se passe bien.
+header ("Location: mail_properties.php?mail_id=$mail_id"); 
 
 ?>
-<div class="menu-box">
-<div class="menu-title" id="test">
-  <a href="javascript:menu_toggle('menu-dom');">
-    <img src="images/dom.png" alt="<?php __("Domains"); ?>" />&nbsp;<?php __("Domains"); ?> (<?= $q["u"]; ?>/<?= $q["t"]; ?>)
-    <img src="images/row-down.png" alt="" style="float:right;"/></a>
-</div>
-<div class="menu-content" id="menu-dom">
-<ul>
-<?php if ($quota->cancreate("dom")) { ?>
-     <li><a href="dom_add.php"><img src="images/new.png" alt="<?php __("Add a domain"); ?>" />&nbsp;<?php __("Add a domain"); ?></a></li>
-<?php }
-
-/* Enumeration des domaines : */
-$domlist = $dom->enum_domains();
-reset($domlist);
-while (list($key, $val) = each($domlist))
-{
-?>
-	<li><a href="dom_edit.php?domain=<?php echo urlencode($val) ?>"><?php echo $val ?></a></li>
-<?php } ?>
-</ul>
-</div>
-</div>
-<?php } ?>

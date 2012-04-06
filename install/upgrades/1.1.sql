@@ -92,7 +92,7 @@ CREATE TABLE `address` (
   `expire_date` datetime DEFAULT NULL, -- Expiration date, used for temporary addresses.
   `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- Update date, for technical usage only.
   PRIMARY KEY (`id`),
-  UNIQUE KEY `address` (`address`)
+  UNIQUE KEY `domain_id` (`domain_id`,`address`)
 ) COMMENT = 'This is the main address table. It represents an address as in RFC2822';
 
 
@@ -145,3 +145,18 @@ CREATE TABLE `mailman` (
 update sub_domaines set web_action = 'UPDATE';
 update domaines     set dns_action = 'UPDATE';
 
+--
+-- Scheduled tasks
+--
+CREATE TABLE IF NOT EXISTS `cron` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) NOT NULL,
+  `url` varchar(2100) NOT NULL,
+  `user` varchar(64) NOT NULL,
+  `password` varchar(64) NOT NULL,
+  `schedule` int(11) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `next_execution` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `uid` (`uid`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;

@@ -620,3 +620,20 @@ VALUES (
 'This variable set if you want to allow all IP address to access FTP by default. If the user start to define some IP or subnet in the allow list, only those he defined will be allowed. This variable can take two value : 0 or 1.'
 );
 
+
+--
+-- Structure de la table `cron`
+--
+
+CREATE TABLE IF NOT EXISTS `cron` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) NOT NULL,
+  `url` varchar(2100) NOT NULL,
+  `user` varchar(64) NOT NULL,
+  `password` varchar(64) NOT NULL,
+  `schedule` int(11) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `next_execution` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `uid` (`uid`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;

@@ -677,7 +677,7 @@ class m_dom {
     $r["dns_action"]=$db->Record["dns_action"];
     $r["dns_result"]=$db->Record["dns_result"];
     $r["mail"]=$db->Record["gesmx"];
-    $r["mx"]=$db->Record["mx"];
+//    $r["mx"]=$db->Record["mx"]; // le champs mx n'existe plus dans domaines
     $r['noerase']=$db->Record['noerase'];
     $db->free();
     $db->query("select count(*) as cnt from sub_domaines where compte='$cuid' and domaine='$dom'");

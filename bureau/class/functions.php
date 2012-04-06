@@ -501,6 +501,12 @@ function printVar($array) {
   print_r($array);
   echo "</pre>\n";
 }
+function list_properties_order($a, $b) {
+  if ( $a['label'] == $b['label']) {
+    return 0;
+  }
+  return ($a['label']<$b['label'])?-1:1;
+} // end private function list_properties_order
 
 
 ?>

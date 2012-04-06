@@ -1,6 +1,6 @@
-<?php
+<?php 
 /*
- $Id: dom_subedit.php,v 1.3 2003/08/13 23:01:45 root Exp $
+ mail_alias_create.php,v 1.3 2006/01/12 01:10:48 anarcat Exp $
  ----------------------------------------------------------------------
  AlternC - Web Hosting System
  Copyright (C) 2002 by the AlternC Development Team.
@@ -23,55 +23,36 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file:
- Purpose of file:
+ Original Author of file: Benjamin Sonntag
+ Purpose of file: Create a new mail account
  ----------------------------------------------------------------------
 */
 require_once("../class/config.php");
-include_once("head.php");
 
-
-$fields = array (
-	"domain"    => array ("request", "string", ""),
-	"sub"       => array ("request", "string", ""),
-	"type"      => array ("request", "string", $dom->type_local),
-	"value"     => array ("request", "string",  ""),
-);
-getFields($fields);
-
-$dom->lock();
-$domroot=$dom->get_domain_all($domain);
-
-$dt=$dom->domains_type_lst();
-if (!$isinvited && $dt[strtolower($type)]["enable"] != "ALL" ) {
-  __("This page is restricted to authorized staff");
-  exit();
+if (!$details=$mail->mail_get_details($mail_id)) {
+	$error=$err->errstr();
+	echo $error;
 }
+?>
+<?php
 
-
-if (!$noread) {
-  if (!$r=$dom->get_sub_domain_all($domain,$sub,$type,$value)) {
-    $error=$err->errstr();
-  }
-}
-
-echo "<h3>";
-__("Editing subdomain");
-echo " http://"; ecif($sub,$sub."."); echo $domain."</h3>";
 if (isset($error) && $error) {
-  echo "<p class=\"error\">$error</p>";
-  include_once("foot.php");
-  exit();
-} 
-$dom->unlock();
-?>
+	echo "<p class=\"error\">$error</p>";
+}
 
-<hr id="topbar"/>
-<br />
-<?php 
-  $isedit=true;
-require_once('dom_edit.inc.php');
-sub_domains_edit($domain,$sub,$type,$value);
-
-include_once("foot.php"); 
+$dom_list = $mail->enum_domains;
 ?>
+<form action="mail_alias_doedit.php" method="post" name="mail_create" id="main" onsubmit="return is_valid_mail2()">
+<table>
+<tr> 
+    <td> 
+      <input type="text" class="int" name="alias" id="mail_arg" value="" size="20" maxlength="255" /> 
+    </td> 
+    <td>@<select name="dom_id" id="dom_id" ><?php foreach($dom_list as $key => $val){ ?><option value="<?php echo urlencode($val['id']) ?>"><?php echo $val["domaine"] ?> </option><?php } ?> </select><td>
+    <td><input type="submit" class="inb" name="submit" value="<?php __("Create this alias"); ?>" /></td>
+</table>
+<input type="hidden" class="inb" name="mail_id" value="<?php echo $mail_id ; ?>" />
+<input type="hidden" class="inb" name="address_full" value="<?php echo $details["address_full"] ; ?>" />
+
+
+</form>

@@ -62,11 +62,11 @@ if (!$charset) $charset="UTF-8";
 <p>&nbsp;</p>
 <?php if (isset($error) && $error) echo "<font color=red>$error</font>"; ?>
 <?php
-$authip_token=$_GET['authip_token'];
+if (isset($_GET['authip_token'])) $authip_token=$_GET['authip_token'];
 /*
 if (!$_SERVER[HTTPS]) {
   echo "<h4>ATTENTION : vous allez accéder à votre panel en mode *non sécurisé*<br/>
-<a href=\"https://".$_SERVER["HTTP_HOST"]."/admin/\">Cliquez ici pour passer en mode sécurisé</a></h4>"; 
+<a href=\"https://".$_SERVER["HTTP_HOST"]."/\">Cliquez ici pour passer en mode sécurisé</a></h4>"; 
 }
 */
 ?>

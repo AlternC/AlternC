@@ -43,9 +43,9 @@ include_once("head.php");
 
 <br />
 <?php
-	if ($error) {
-	  echo "<p class=\"error\">$error</p>";
-	}
+if (isset($error) && $error) {
+  echo "<p class=\"error\">$error</p>";
+}
 
 ?>
 <p>

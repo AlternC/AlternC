@@ -44,6 +44,7 @@ Merci de revenir plus tard.";
   exit();
 }
 */
+    ini_set('display_errors', true);
 
 // 1. Get a semaphore id for the alternc magic number (18577)
 $alternc_sem = sem_get ( 18577 );
@@ -167,5 +168,6 @@ for($i=0;$i<count($classes);$i++) {
     $$name2= new $name1();
   }
 }
+
 
 ?>

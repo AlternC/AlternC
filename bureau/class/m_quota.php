@@ -140,6 +140,7 @@ class m_quota {
       }             
       foreach ($ttmp as $tt) {
         $g=array("t"=>$tt["total"],"u"=>0);
+	if (! isset( $this->clquota[$tt["name"]] )) continue;
         if (method_exists($GLOBALS[$this->clquota[$tt["name"]]],"alternc_get_quota")) {
           $g["u"]=$GLOBALS[$this->clquota[$tt["name"]]]->alternc_get_quota($tt["name"]);
         }
@@ -156,7 +157,11 @@ class m_quota {
     }
     
     if ($ressource) {
-      return $this->quotas[$ressource];
+      if (isset($this->quotas[$ressource]) ) {
+        return $this->quotas[$ressource];
+      } else {
+        return 0;
+      } 
     } else {
       return $this->quotas;
     }
@@ -180,7 +185,6 @@ class m_quota {
       // Now we check that the value has been written properly : 
       exec("/usr/lib/alternc/quota_get ".$cuid,$a);
         echo "quota get :::::ciud: $cuid :::: size: $size :::: a?: $a ";
-        print_r($a);
     if ($size!=$a[1]) {
 	$err->raise("quota",1);
 	return false;

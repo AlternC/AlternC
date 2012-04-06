@@ -170,7 +170,7 @@ class m_bro {
       }
       closedir($dir);
     }
-    if (is_array($c)) {
+    if (isset ($c) && is_array($c)) {
       usort ($c, array("m_bro","_sort_filelist_name"));
       return $c;
     } else {
@@ -329,7 +329,7 @@ class m_bro {
     global $db,$cuid,$err;
     $file=ssla($file);
     $absolute=$this->convertabsolute($dir."/".$file,0);
-    echo "$absolute";
+    #echo "$absolute";
     if ($absolute && (!file_exists($absolute))) {
         if (!mkdir($absolute,00777)) {
             $err->raise("bro",4);
@@ -358,7 +358,6 @@ class m_bro {
       $err->raise("bro",1);
       return false;
     }
-    print_r($absolute);
     if (!file_exists($absolute)) {
       if (!@touch($absolute)) {
 	$err->raise("bro",3);
@@ -645,6 +644,7 @@ class m_bro {
     $a=explode("/",$path);
     if (!is_array($a)) $a=array($a);
     $c='';
+    $R='';
     for($i=0;$i<count($a);$i++) {
       if ($a[$i]) {
 	      $R.=$a[$i]."/";

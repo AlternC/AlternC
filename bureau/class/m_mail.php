@@ -1,6 +1,6 @@
 <?php
 /*
- $Id: m_mail.php,v 1.31 2006/01/12 06:26:16 anarcat Exp $
+ $Id: m_mail.php,v 2.00 2012/03/12 06:26:16 anarcat Exp $
  ----------------------------------------------------------------------
  LICENSE
 
@@ -54,6 +54,16 @@ class m_mail {
     return "mail";
   }
 
+  function alternc_get_quota($name) {
+    global $db,$err,$cuid;
+    if ($name=="mail") {
+      $err->log("mail","getquota");
+      $db->query("SELECT COUNT(*) AS cnt FROM address WHERE domain_id in(select id from domaines where compte=$cuid);");
+      $db->next_record();
+      return $db->f("cnt");
+    }
+  }
+
 
   /**
    * Password kind used in this class (hook for admin class)
@@ -62,36 +72,42 @@ class m_mail {
     return array("pop"=>"POP/IMAP account passwords");
   }
 
-  
+
   /* ----------------------------------------------------------------- */
   /** Returns the list of mail-hosted domains for a user
    * @return array indexed array of hosted domains
    */
   function enum_domains() {
-    global $db,$err,$cuid;
-    $err->log("mail","enum_domains");
-    if (!is_array($this->domains)) {
-      $db->query("select * from domaines where compte='$cuid' AND gesmx=1 order by domaine asc;");
-      $this->domains=array();
-      if ($db->num_rows()>0) {
-        while ($db->next_record()) {
-          $this->domains[]=$db->f("domaine");
-        }
+      global $db,$err,$cuid;
+      $err->log("mail","enum_domains");
+      $db->query("select d.id, d.domaine, count(a.id) as nb_mail FROM domaines d left join address a on a.domain_id=d.id where d.compte = $cuid group by d.id order by d.domaine asc;");
+      while($db->next_record()){
+          $this->enum_domains[]=$db->Record;
       }
-    }
-    return $this->domains;
+      //print_r("<pre>");print_r($this->enum_domains);die();
+      return $this->enum_domains;
+
   }
 
-
-  /* ----------------------------------------------------------------- */
-  /** Returns the first letters used as email for a domain
-   * @param string $dom Domain whose mail we want to search for
-  * @return array An indexed array of letters or false if something bad happened
+  /* function used to list every mail address hosted on a domain.
+   * @param : the technical domain id.
+   * @result : an array of each mail hosted under the domain.
    */
-  function enum_doms_mails_letters($dom) {
+  function enum_domain_mails($dom_id = null){
+    global $db,$err,$cuid;
+    $err->log("mail","enum_domains_mail");
+    $db->query("select * from address where domain_id=$dom_id order by address asc;");
+    while($db->next_record()){
+      $this->enum_domain_mails[]=$db->Record;
+    }
+    return $this->enum_domain_mails;
+  }
+
+  function enum_doms_mails_letters($mail_id) {
     global $err,$cuid,$db;
-    $err->log("mail","enum_doms_mails_letters",$dom);
-    $db->query("select distinct left(ad.address,1) as letter from address ad, domaines d where address like '%@".addslashes($dom)."' and ad.domain_id = d.compte and d.compte='$cuid' order by letter;");
+    $err->log("mail","enum_doms_mails_letters");
+    //$db->query("select distinct left(ad.address,1) as letter from address ad, domaines d where ad.domain_id = d.id and d.compte='$cuid' order by letter;");
+    $db->query("select distinct left(ad.address,1) as letter from address ad,where ad.id = $mail_id ;");
     $res=array();
     while($db->next_record()) {
       $res[]=$db->f("letter");
@@ -99,702 +115,272 @@ class m_mail {
     return $res;
   }
 
-
-  /* ----------------------------------------------------------------- */
-  /** Retourne la liste des mails du domaine $dom et si une lettre est
-   * définie, cela retourne les mail qui commencent par celle ci
-   * Retourne un tableau indexé de tableaux associatifs sous la forme :
-   * $a["mail"]=Adresse email
-   * $a["pop"]=1 ou 0 selon s'il s'agit d'un compte pop ou pas
-   * $a["size"]=taille en octets de la boite s'il s'agit d'un compte pop.
-   * @param string $dom Domaine dont on veut les mails
-   * @param integer $sort Champs de tri (0 pour non trié (default), 1 pour email, 2 pour type)
-   * @param string $letter Première lettre des mails à retourner, ou "" pour les retourner tous
-   * @return array Tableau de mails comme indiqué ci-dessus ou FALSE si une erreur
-   *  s'est produite
-   */
-  function enum_doms_mails($dom,$sort=0,$letter="") {
-    global $err,$cuid,$db;
-    $err->log("mail","enum_doms_mails",$dom);
-    if($letter == "@")
-	    $letter = "";
-    else
-      $letter .= "%";
-    $db->query("SELECT mail,pop,alias,expiration_date FROM mail_domain WHERE mail LIKE '".addslashes($letter)."@".addslashes($dom)."' AND uid='$cuid' AND type=0;");
-    $res=array(); $i=0;
-    while ($db->next_record()) {
-      if ($db->f("pop")) { 
-	      $size=0;
-        $r=mysql_query("SELECT size FROM size_mail WHERE alias='".str_replace("@","_",$db->f("mail"))."';");
-        list($size)=@mysql_fetch_array($r);
-        $size=$size*1024;
-      } else $size=0;
-      if ($db->f("pop")) {
-      	$login=str_replace("@","_",$db->f("mail"));
-	      $account=str_replace($login,"",$db->f("alias")); 
-      } else {
-	      $account=$db->f("alias");
-      }
-      $res[]=array("mail" => $db->f("mail"), "pop" => $db->f("pop"), 
-		   "alias"=>$account,"size"=>$size, "expiration_date"=>$db->f("expiration_date"));
-      $i++;
-    }
-    if ($sort==1) {
-      usort($res,array("m_mail","_cmp_mail"));
-    }
-    if ($sort==2) {
-      usort($res,array("m_mail","_cmp_type"));
-    }
-    $res["count"]=$i;
-    return $res;
-  }
-
-  function _cmp_mail($a, $b)
-    {
-      $al = strtolower($a["mail"]);
-      $bl = strtolower($b["mail"]);
-      if ($al == $bl) return 0;
-      return ($al > $bl) ? +1 : -1;
-    }
-  function _cmp_type($a, $b)
-    {
-      $al = strtolower($a["pop"]);
-      $bl = strtolower($b["pop"]);
-      if ($al == $bl) {
-        $al = strtolower($a["mail"]);
-        $bl = strtolower($b["mail"]);
-        if ($al == $bl) return 0;
-      }
-      return ($al > $bl) ? +1 : -1;
-    }
-
-
-  /* ----------------------------------------------------------------- */
-  /** Retourne les détails d'un mail
-   * Le mail $mail est retourné sous la forme d'un tableaau associatif comme suit :
-   * $a["mail"]= Adresse email
-   * $a["login"]= Login pop
-   * $a["password"]= Mot de passe pop (crypté)
-   * $a["alias"]= Alias destination, 1 par ligne
-   * $a["pop"]= 1 ou 0 s'il s'agit d'un compte pop
-   * @param string $mail Mail dont on veut retourner le détail
-   * @return array Tableau associatif comme ci-dessus.
-   */
-  function get_mail_details($mail) {
-    global $err,$db,$cuid;
-    $err->log("mail","get_mail_details",$mail);
-    $db->query("SELECT mail,pop,alias,expiration_date FROM mail_domain WHERE mail='$mail' AND uid='$cuid';");
-    if (!$db->next_record()) { 
-      $err->raise("mail",3,$mail);
-      return false;
-    }
-    $pop=$db->f("pop"); 
-    $trash_info=new m_trash();
-    $trash_info->set_from_db($db->f("expiration_date"));
-    if ($pop) {
-      $login=str_replace("@","_",$db->f("mail"));
-      $account=str_replace($login,"",$db->f("alias")); 
-    } else {
-      $account=$db->f("alias");
-    }
-    return array("mail" => $mail, "login" => $login, "alias" => $account, "pop" => $pop, "trash_info"=> $trash_info);
-  }
-
-
-  /* ----------------------------------------------------------------- */
-  /** Tell if a mail is available or not 
-   * @param string $mail the email address (with its fqdn domain)
-   * @return boolean true if this email is available, false if it is already defined.
-   */
-  function available($mail) { // NEW OK
-    global $err,$db,$cuid;
-    $err->log("mail","available",$mail);
-    $db->query("SELECT address FROM address WHERE address='$mail';");
-    if ($db->next_record()) {
-      return false;
-    } else {
-      return true;
-    }
-  }
-
-
-  /* ----------------------------------------------------------------- */
-  /** Create a wrapper for $login@$domain email
-   * @param string $login left part of the @ for the email creation
-   * @param string $domain domain-part of the email 
-   * @param string $command The command we want to execute, without " nor | (raw command)
-   * @param string $type now unused (was a ldap class name)
-   * @return boolean TRUE if the wrapper has been created, false if an error occurred.
-   */
-  function add_wrapper($login,$domain,$command,$type="") {
-    global $err,$cuid,$db;
-    if (!$this->available($login."@".$domain)) {
-      $err->raise("mail",7,$login."@".$domain);
-      return false;
-    }
-    $db->query("INSERT INTO mail_domain (mail,alias,uid,pop,type) VALUES ('".$login."@".$domain."','".$login."_".$domain."','$cuid',0,1);");
-    $db->query("INSERT INTO mail_alias (mail,alias) VALUES ('".$login."_".$domain."','\"| $command\"');");
-    return true;
-  }
-
-
-  /* ----------------------------------------------------------------- */
-  /** Delete a wrapper email
-   * @param string $login left part of the @ for the email creation
-   * @param string $domain domain-part of the email 
-   * @return boolean TRUE if the wrapper has been deleted, FALSE if an error occurred.
-   */
-  function del_wrapper($login,$domain) {
-    global $err,$cuid,$db;
-    $db->query("DELETE FROM mail_domain WHERE mail='".$login."@".$domain."' AND uid='$cuid' AND type=1;");
-    $db->query("DELETE FROM mail_alias WHERE mail='".$login."_".$domain."';");
-    return true;
-  }
-
-
-  /* ----------------------------------------------------------------- */
-  /** Change the password of the email account $mail
-   * @param string $mail Pop/Imap email account
-   * @param string $pass New password
-   * @return boolean TRUE if the password has been changed, FALSE if an error occurred.
-   */
-  function change_password($mail,$pass) { // NEW OK
-    global $err,$db,$cuid;
-    $err->log("mail","change_password",$mail);
-    $t=explode("@",$mail);
-    $email=$t[0];
-    $dom=$t[1];
-    $db->query("SELECT address FROM address WHERE address='$mail' AND uid='$cuid';");
-    if (!$db->next_record()) {
-      $err->raise("mail",3,$mail);
-      return false;
-    }
-    // Check this password against the password policy using common API : 
-    if (is_callable(array($admin,"checkPolicy"))) {
-      if (!$admin->checkPolicy("pop",$email."@".$dom,$pass)) {
-	      return false; // The error has been raised by checkPolicy()
-      }
-    }
-    if (!$this->_updatepop($email,$dom,$pass)) {
-      return false;
-    }
-    return true;
-  }
-
-
-  /* ----------------------------------------------------------------- */
-  /** Modifie les paramètres d'un compte email
-   * Tout peut être modifié dans l'email (sauf l'adresse elle-même)
-   * @param string $mail Adresse à modifier. Le domaine doit appartenir au membre
-   * @param integer $pop Doit-il etre un compte pop (1) ou juste un alias (0)
-   * @param string $pass Nouveau mot de passe pop, si pop=1
-   * @param string $alias Liste des destinataires auxiliaires, un par ligne.
-   * @return boolean TRUE si l'email a bien été modifié, FALSE si une erreur s'est produite.
-   */
-  function put_mail_details($mail,$pop,$pass,$alias, $expiration_date=null) {
-    global $err,$cuid,$db,$admin;
-    $err->log("mail","put_mail_details",$mail);
-    $mail=trim(strtolower($mail)); // remove spaces also
-    $t=explode("@",$mail);
-    $email=trim($t[0]); // remove spaces also
-    $dom=$t[1];
-
-    $account=array();
-
-    if ($pop) $pop="1"; else $pop="0";
-
-    if ($pop=="0" && $alias=="") {
-      $err->raise("mail",4);
-      return false;
-    }
-    if ($pop=="1"){
-      $account[]=$email."_".$dom;
-    }
-
-    if ($alias){
-      $a=explode("\n",$alias);
-      if (count($a)>0) {
-	      reset($a);
-	      for ($i=0;$i<count($a);$i++){
-	        $a[$i]=trim($a[$i]); // remove spaces
-	        if ($a[$i]){
-	          if(checkmail($a[$i])>1){
-	            $err->raise("mail",14);
-	            return false;
-	          }
-	        }
-	        $account[]=$a[$i];
-	      }
-      }
-    }
-
-    $db->query("SELECT mail,alias,pop,expiration_date FROM mail_domain WHERE mail='$mail' AND uid='$cuid' AND type=0;");
-    if (!$db->next_record()) {
-      $err->raise("mail",3,$mail);
-      return false;
-    }
-    $oldpop= $db->f("pop");
-    // When we CREATE a pop account, we MUST give a password
-    if ($pop=="1" && $oldpop!=1) {
-      if (!$pass) {
-	      $err->raise("mail",4);
-	      return false;
-      }
-      // Check this password against the password policy using common API : 
-      if (is_callable(array($admin,"checkPolicy"))) {
-	      if (!$admin->checkPolicy("pop",$email."@".$dom,$pass)) {
-	        return false; // The error has been raised by checkPolicy()
-	      }
-      }
-    }
-
-    $expiration_sql = (is_null($expiration_date))?"null":"'$expiration_date'";
-    $db->query("UPDATE mail_domain SET alias='".implode("\n",$account)."', pop='$pop',expiration_date=$expiration_sql WHERE mail='$mail';");
-
-    if ($pop=="1" && $oldpop!=1) { /* POP Creation */
-      if (!$this->_createpop($email,$dom,$pass)) {
-	      return false;
-      }
-    }
-    if ($pop!="1" && $oldpop==1) { /* POP Destruction */
-      if (!$this->_deletepop($email,$dom)) {
-	      return false;
-      }
-    }
-    if ($pop=="1" && $oldpop==1 && $pass!="") { /* POP Account Edition */
-      // Check this password against the password policy using common API : 
-      if (is_callable(array($admin,"checkPolicy"))) {
-	      if (!$admin->checkPolicy("pop",$email."@".$dom,$pass)) {
-	        return false; // The error has been raised by checkPolicy()
-	      }
-      }
-      if (!$this->_updatepop($email,$dom,$pass)) {
-	      return false;
-      }
-    }
-    return true;
-  }
-
-
-  /* ----------------------------------------------------------------- */
-  /** Crée un compte email $mail sur le domaine $dom
-   * @param string $dom Domaine concerné, il doit appartenir au membre
-   * @param string $mail Email à créer, il ne doit pas exister ni en mail, ni en liste.
-   * @param integer $pop vaut 1 pour créer un compte pop, 0 pour un alias
-   * @param string $alias Liste des alias, un par ligne
-   * @return boolean TRUE si le compte a bien été créé, FALSE si une erreur s'est produite.
-   */
-  function add_mail($dom,$mail,$pop,$pass,$alias, $expiration_date=null) {
-    global $quota,$err,$cuid,$db,$admin,$L_FQDN;
-    $err->log("mail","add_mail",$dom."/".$mail);
-    $account=array();
-    $mail=trim(strtolower($mail)); // remove spaces also
-    if ($pop) $pop="1"; else $pop="0";
-    if ($mail || $dom==$L_FQDN) {
-      if (!checkloginmail($mail)) {
-	      $err->raise("mail",13);
-	      return false;
-      }
-    }
-
-    if (($pop=="1" && $pass=="")||($pop!="1" && $alias=="")){
-      $err->raise("mail",4);
-      return false;
-    }
-
-    if ($pop=="1") {
-      // Check this password against the password policy using common API : 
-      if (is_callable(array($admin,"checkPolicy"))) {
-	      if (!$admin->checkPolicy("pop",$mail."@".$dom,$pass)) {
-	        return false; // The error has been raised by checkPolicy()
-      	}
-      }
-    }
-
-    if ($pop=="1"){
-      $account[]=$mail."_".$dom;
-    }
-
-    if ($alias){
-      $a=explode("\n",$alias);
-      if (count($a)>0) {
-	      reset($a);
-	      for ($i=0;$i<count($a);$i++){
-	        $a[$i]=trim($a[$i]);
-	        if ($a[$i]){
-	          if(checkmail($a[$i])>1){
-	            $err->raise("mail",14);
-	            return false;
-	          }
-	        }
-	        $account[]=$a[$i];
-	      }
-      }
-    }
-
-    // check that the domain is a user's own ...
-    $db->query("SELECT domaine FROM domaines WHERE compte='$cuid' AND domaine='$dom';");
-    if (!$db->next_record()) {
-      $err->raise("mail",6,$dom);
-      return false;
-    }    
-    $db->query("SELECT mail FROM mail_domain WHERE mail='".$mail."@".$dom."' AND uid='$cuid';");
-    if ($db->next_record()) {
-      $err->raise("mail",7,$mail."@".$dom);
-      return false;
-    }    
-
-    /* QuotaCheck */
-    if (!$quota->cancreate("mail")) {
-      $err->raise("mail",8);
-      return false;
-    }
-    $expiration_sql = (is_null($expiration_date))?"null":"'$expiration_date'";
-    $db->query("INSERT INTO mail_domain (mail,alias,uid,pop,type,expiration_date) VALUES ('".$mail."@".$dom."','".implode("\n",$account)."','$cuid','$pop',0, $expiration_sql);");
-
-    if ($pop=="1") {
-      if (!$this->_createpop($mail,$dom,$pass))
-	      return false;
-    }
-    return true;
-  }
-
-
-  /* ----------------------------------------------------------------- */
-  /** Delete an email account (pop or alias) $mail
-   * @param string $mail Email to delete
-   * @return boolean TRUE if the email has been deleted, or FALSE if an error occurred
-   */
-  function del_mail($mail) {
-    global $err,$cuid,$db;
-    $err->log("mail","del_mail",$mail);
-    $mail=strtolower($mail);
-
-    $db->query("SELECT pop,mail FROM mail_domain WHERE mail='$mail' AND uid='$cuid' AND type=0;");
-    if (!$db->next_record()) {
-      $err->raise("mail",3,$dom);
-      return false;
-    }    
-    $t=explode("@",$mail);
-    $mdom=$t[0]; $dom=$t[1];
-    $pop=$db->f("pop");
-    
-    $db->query("DELETE FROM mail_domain WHERE mail='$mail' AND uid='$cuid';");
-
-    if ($pop=="1") {
-      if (!$this->_deletepop($mdom,$dom)) {
-	      return false;
-      }
-    }
-    return true;
-  }
-
-
-  /* ----------------------------------------------------------------- */
-  /**
-   * Check for a slave account (secondary mx)
-   * @param string $login the login to check 
-   * @param string $pass the password to check
-   * @return boolean TRUE if the password is correct, or FALSE if an error occurred.
-   */
-  function check_slave_account($login,$pass) {
-	global $db,$err;
-	$db->query("SELECT * FROM mxaccount WHERE login='$login' AND pass='$pass';");
-	if ($db->next_record()) { 
-		return true;
-	}
-	return false;
-  }
-
-
-  /* ----------------------------------------------------------------- */
-  /**
-   * Out (echo) the complete mx-hosted domain list : 
-   */
-  function echo_domain_list() {
-	global $db,$err;
-	$db->query("SELECT domaine FROM domaines WHERE gesmx=1 ORDER BY domaine");
-	while ($db->next_record()) {
-		echo $db->f("domaine")."\n";
-	}
-	return true;
-  }
-
-
-  /* ----------------------------------------------------------------- */
-  /**
-   * Return the list of allowed slave accounts (secondary-mx)
-   * @return array 
-   */
-  function enum_slave_account() {
-	global $db,$err;
-	$db->query("SELECT * FROM mxaccount;");
-	$res=array();
-	while ($db->next_record()) {
-		$res[]=$db->Record;
-	}
-	if (!count($res)) return false;
-	return $res;
-  }
-
-
-  /* ----------------------------------------------------------------- */
-  /**
-   * Add a slave account that will be allowed to access the mxdomain list
-   * @param string $login the login to add
-   * @param string $pass the password to add
-   * @return boolean TRUE if the account has been created, or FALSE if an error occurred.
-   */
-  function add_slave_account($login,$pass) {
-	global $db,$err;
-	$db->query("SELECT * FROM mxaccount WHERE login='$login'");
-	if ($db->next_record()) {
-	  $err->raise("mail",16); 
-	  return false;
-	}
-	$db->query("INSERT INTO mxaccount (login,pass) VALUES ('$login','$pass')");
-	return true;
-  }
-
-
-  /* ----------------------------------------------------------------- */
-  /**
-   * Remove a slave account
-   * @param string $login the login to delete
-   */
-  function del_slave_account($login) {
-	global $db,$err;
-	$db->query("DELETE FROM mxaccount WHERE login='$login'");
-	return true;
-  }
-
-
-  /* ----------------------------------------------------------------- */
-  /** Crée le compte pop $mail@$dom, avec pour mot de passe $pass
-   * @param string $mail Compte email à créer en pop
-   * @param string $dom Domaine sur lequel on crée le compte email
-   * @param string $pass Mot de passe du compte email.
-   * @return boolean TRUE si le compte pop a bien été créé, FALSE si une erreur est survenur
-   * @access private
-   */
-  function _createpop($mail,$dom,$pass) {
-    global $err,$cuid,$db;
-    $err->log("mail","_createpop",$mail."@".$dom);
-    $m=substr($mail,0,1);
-    $gecos=$mail;
-    if (!$mail) {
-      // Cas du CATCH-ALL
-      $gecos="Catch-All";
-      $m="_";
-    }
-    $db->query("INSERT INTO mail_users (uid,alias,path,password) VALUES ('$cuid','".$mail."_".$dom."','/var/alternc/mail/".$m."/".$mail."_".$dom."','"._md5cr($pass)."');");
-    $db->query("INSERT INTO mail_users (uid,alias,path,password) VALUES ('$cuid','".$mail."@".$dom."','/var/alternc/mail/".$m."/".$mail."_".$dom."','"._md5cr($pass)."');");
-    $db->query("INSERT INTO mail_alias (mail,alias) VALUES ('".$mail."_".$dom."','/var/alternc/mail/".$m."/".$mail."_".$dom."/Maildir/');");
-
-    // Webmail data (squirrelmail default preferences)
-    $f=fopen("/var/lib/squirrelmail/data/".$mail."_".$dom.".pref","wb");
-    $g=0; $g=@fopen("/etc/squirrelmail/default_pref","rb");
-    fputs($f,"email_address=$mail@$dom\nchosen_theme=default_theme.php\n");
-    if ($g) {
-      while ($s=fgets($g,1024)) {
-	      if (substr($s,0,14)!="email_address=" && substr($s,0,13)!="chosen_theme=") {
-	        fputs($f,$s);
-      	}
-      }
-      fclose($g);
-    }
-    fclose($f);
-    @copy("/var/lib/squirrelmail/data/".$mail."_".$dom.".pref","/var/lib/squirrelmail/data/".$mail."@".$dom.".pref");
-    exec("/usr/lib/alternc/mail_add ".$mail."_".$dom." ".$cuid);
-    return true;
-  }
-
-
-  /* ----------------------------------------------------------------- */
-  /** Met à jour un compte pop existant
-   * @param string $mail mail à modifier
-   * @param string $dom Domaine dont on modifie le compte pop
-   * @param string $pass Nouveau mot de passe.
-   * @return boolean TRUE si le compte pop a bien été modifié, FALSE si une erreur s'est produite.
-   * @access private
-   */
-  function _updatepop($mail,$dom,$pass) { // NEW OK
-    global $err,$cuid,$db;
-    $err->log("mail","_updatepop",$mail."@".$dom);
-    $m=substr($mail,0,1);
-    $gecos=$mail;
-    $db->query("UPDATE address SET password='"._md5cr($pass)."' WHERE address='". $mail."@".$dom."' AND uid='$cuid';");
-    return true;
-  }
-
-
-  /* ----------------------------------------------------------------- */
-  /** Détruit le compte pop $mail@$dom.
-   * @param string $mail Email dont on souhaite détruire le compte pop
-   * @param string $dom Domaine dont on souhaite détuire le compte pop.
-   * @return boolean TRUE si le compte pop a bien été détruit, FALSE si une erreur s'est produite.
-   * @access private
-   */
-  function _deletepop($mail,$dom) {
-    global $err,$cuid,$db;
-    $err->log("mail","_deletepop",$mail."@".$dom);
-    $db->query("DELETE FROM mail_users WHERE uid='$cuid' AND (  alias='". $mail."_".$dom."' OR alias='". $mail."@".$dom."' ) ;");
-    $db->query("DELETE FROM mail_alias WHERE mail='".$mail."_".$dom."';");
-    $db->query("DELETE FROM size_mail WHERE alias='".$mail."_".$dom."';");
-    @unlink("/var/lib/squirrelmail/data/".$mail."_".$dom.".pref");
-    @unlink("/var/lib/squirrelmail/data/".$mail."_".$dom.".abook");
-    @unlink("/var/lib/squirrelmail/data/".$mail."@".$dom.".pref");
-    @unlink("/var/lib/squirrelmail/data/".$mail."@".$dom.".abook");
-    exec("/usr/lib/alternc/mail_del ".$mail."_".$dom);
-    return true;
-  }
-
-
-  /* ----------------------------------------------------------------- */
-  /** Fonction appellée par domaines lorsqu'un domaine est effacé.
-   * Cette fonction efface tous les comptes mails du domaine concerné.
-   * @param string $dom Domaine à effacer
-   * @return boolean TRUE si le domaine a bien été effacé, FALSE si une erreur s'est produite.
-   * @access private
-   */
-  function alternc_del_mx_domain($dom) {
-    global $err,$db,$cuid;
-    $err->error=0;
-    $err->log("mail","alternc_del_mx_domain",$dom);
-
-    /* FIXME / Why on hell is it commented out ? 
-    $db->query("SELECT domaine FROM domaines WHERE compte='$cuid' AND domaine='$dom';");
-    if (!$db->next_record()) {
-      $err->raise("mail",6,$dom);
-      return false;
-    }    
-    */
-
-    /* Effacement de tous les mails de ce domaine : */
-    $a=$this->enum_doms_mails($dom);
-    if (is_array($a)) {
-      reset($a);
-      for($i=0;$i<$a["count"];$i++) {
-	      $val=$a[$i];
-	      if (!$this->del_mail($val["mail"])) {
-	        $err->raise("mail",5);
-	      }
-      }
-    }
-    /* Effacement du domaine himself */
-    $db->query("DELETE FROM mail_domain WHERE mail LIKE '%@$dom';");     
-    $db->query("DELETE FROM mail_users WHERE alias LIKE '%@$dom' OR alias LIKE '%\\_$dom';");     
-    $db->query("DELETE FROM mail_alias WHERE mail LIKE '%\\_$dom';");     
-    $db->query("DELETE FROM mail_domain WHERE mail='$dom';");
-    return true;
-  }
-
-
-  /* ----------------------------------------------------------------- */
-  /** hook function called by AlternC when a domain is created for 
-   * the current user account
-   * This function create default email accuonts (postmaster) for the newly hosted domain
-   * @param string $dom Domain that has just been created
-   * @return boolean TRUE if the domain has been successfully created in the email db or FALSE if an error occurred.
-   * @access private
-   */
-  function alternc_add_mx_domain($dom) {
-    global $err,$cuid,$db,$mem;
-    $err->log("mail","alternc_add_mx_domain",$dom);
-    $db->query("INSERT INTO mail_domain (mail,alias,uid) VALUES ('$dom','$dom', '$cuid');");
-    $this->add_mail($dom,"postmaster",0,"",$mem->user["mail"]);
-    return true;
-  }
-
-
-  /* ----------------------------------------------------------------- */
-  /** hook function called by AlternC when a domain is created for 
-   * the current user account using the SLAVE DOMAIN feature
-   * This function create a CATCHALL to the master domain
-   * @param string $dom Domain that has just been created
-   * @param string $master Master domain
-   * @access private
-   */
-  function alternc_add_slave_domain($dom,$slave) {
-    global $err;
-    $err->log("mail","alternc_add_slave_domain",$dom);
-    $this->add_mail($dom,"",0,"","@".$slave);
-    return true;
-  }
-
-
-  /* ----------------------------------------------------------------- */
-  /**
-   * Returns the used quota for the $name service for the current user.
-   * @param $name string name of the quota
-   * @return integer the number of service used or false if an error occured
-   * @access private
-   */
-  function alternc_get_quota($name) {
-    global $db,$err,$cuid;
-    if ($name=="mail") {
-      $err->log("mail","getquota");
-      $db->query("SELECT COUNT(*) AS cnt FROM mail_domain WHERE type=0 AND uid='$cuid'");
-      $db->next_record();
-      return $db->f("cnt");
-    }
-  }
-
-
-  /* ----------------------------------------------------------------- */
-  /**
-   * Exports all the mail related information for an account.
-   * @access private
-   * EXPERIMENTAL 'sid' function ;) 
-   */
-  function alternc_export($tmpdir) {
-    global $db,$err;
-    $err->log("mail","export");
-    $domain=$this->enum_domains();
-    $str="<table border=\"1\"><caption> Mail</caption>\n";
-    $tmpfile=$tmpdir."/mail_filelist.txt";
-    $f=fopen($tmpfile,"wb");
-    $onepop=false;
-    foreach ($domain as $d) {
-        $str.="  <tr>\n    <td>".($d)."</td>\n";
-        $s=$this->enum_doms_mails($d);
-        unset($s["count"]);
-        if (count($s)) {
-            foreach($s as $e) {
-              $str.="    <table><tr>\n";
-              $str.="      <td>".($e["mail"])."</td>\n";
-              $str.="      <td>".($e["pop"])."</td>\n";
-              $acc=explode("\n",$e["alias"]);
-                  foreach($acc as $f) {
-                      $f=trim($f);
-                      $str.="<ul>";
-                        if ($f) {
-                            $str.=" <li>".($f)."</li>\n</ul>";
-                        }
-                  }
-                  if ($e["pop"]) {
-                      $db->query("SELECT path FROM mail_users WHERE alias='".str_replace("@","_",$e["mail"])."';");
-                      if ($db->next_record()) {
-                      fputs($f,$db->Record["path"]."\n");
-                      $onepop=true;
-                    }
-            }
-            $str.="    </tr>\n";
-        }
-      }     
-      $str.="  </tr>\n";
-    }
-    $str.="</table>\n";
-    fclose($f);
-    /*if ($onepop) {
-      // Now do the tarball of all pop accounts : 
-      exec("/bin/tar -czf ".escapeshellarg($tmpdir."/mail.tar.gz")." -T ".escapeshellarg($tmpfile)); 
+  /*
+   * Function used to insert a new mail into de the db
+   * @param: a domain_id (linked to the user ) and the left part of mail waiting to be inserted 
+   * @return: an hashtable containing the database id of the newly created mail, the state ( succes or failure ) of the operation, 
+   * and an error message if necessary.
+   * TODO piensar a enlever la contrainte d'unicitÃ© sur le champs address et en rajouter une sur adrresse+dom_id.
+   */ 
+  function create($dom_id, $mail_arg){
+    global $mail,$err,$db,$cuid;
+    $err->log("mail","create");
+  
+    $return = array ( 
+      "state" => true,
+      "mail_id" => null,
+      "error" => "OK");
+    //FIXME checker uniformitÃ© des mails.
+    /*if(checkmail(mail_arg) != 0){
+      $return["state"]=false;
+      $return["error"]="erreur d'appel a cancreate";
+      return $return;
     }*/
-    @unlink($tmpfile);
-    return $str;
+  
+    $return=$mail->cancreate($dom_id, $mail_arg);
+    //Si l'appel Ã©choue
+    if(!$return ){
+      $return["state"]=false;
+      $return["error"]="erreur d'appel a cancreate";
+      return $return;
+    }
+    if($return["state"]==false){
+      $return["error"]="erreur d'appel a cancreate";
+      return ($return);
+    }    
+    // check appartenance domaine      
+    $test=$db->query("select id from domaines where compte=$cuid and id=$dom_id;");
+  
+    if(!$db->next_record($test)){
+        $return["state"]= false;
+        $return["error"]=" hophophop tu t'es prix pour un banquier ouquoi ?";
+        return $return;
+    }
+    //verifie quota ( une fois rÃ©parÃ© ^^ )
+    //TODO quotacheck;
+  
+    // a remplacer par un truc genre insert into address (domain_id, address) values (7, '4455') ; select id from address where address='4455';  
+    $db->query("insert into address (domain_id, address) VALUES ($dom_id, '$mail_arg');");
+    $test=$db->query("select id from address where domain_id=$dom_id and address=\"$mail_arg\";");
+      $db->next_record();
+    
+    $return["mail_id"]=$db->f("id");
+  
+      return $return;
   }
+
+/*
+ *Function used to check if a given mail address can be inserted a new mail into de the db
+ *@param: a domain_id (linked to the user ) and the left part of mail waiting to be inserted 
+ *@return: an hashtable containing the database id of the newly created mail, the state ( succes or failure ) of the operation, 
+ *and an error message if necessary.
+ */
+  function cancreate($dom_id,$mail_arg){
+    global $db,$err,$cuid,$hooks;
+    $err->log("mail","cancreate");
+  
+    $return = array ( 
+        "state" => true,
+        "mail_id" => null,
+        "error" => "");
+  
+    $return2 = array ();
+    $return2 = $hooks->invoke('hooks_mail_cancreate',array($dom_id,$mail_arg));
+  
+    foreach($return2 as $tab => $v){
+      if($v["state"] != true){
+        print_r($tab);
+        $return["state"]=false;
+        $return["error"]="erreur lors du check de la classe $tab";
+        return $return; 
+      }
+    }
+    return $return; 
+  }
+
+  function form($mail_id) {
+    global $mail, $err;
+    include('mail_edit.inc.php');
+  }
+
+
+  /*
+   * hooks called by the cancreate function
+   * @param: a domain_id (linked to the user ) and the left part of mail waiting to be inserted 
+   * @return: an hashtable containing the database id of the newly created mail, the state ( succes or failure ) of the operation, 
+   * and an error message if necessary.
+   *
+   */ 
+  function hooks_mail_cancreate($dom_id, $mail_arg) {
+    global $db,$err;
+    $err->log("mail","hooks_mail_cancreate");
+  
+    $return = array ( 
+        "state" => true,
+        "mail_id" => null,
+        "error" => "");
+  
+    $db->query("select count(*) as cnt from address where domain_id=$dom_id and address=\"$mail_arg\";"); 
+  
+    if($db->next_record()){
+      //if mail_arg not already in table "address"
+      if( $db->f("cnt") == "0") {
+        return $return;
+      }else{
+        $return["state"] = false;
+        $return["error"]="mail existe deja";
+        return $return;
+      }
+    } 
+    $return["error"]="erreur de requÃªte";
+    return $return;
+  }
+
+  /**
+  * @param : mail_id
+  * fonction used to invoque the "hooks" corresponding to each mail relative classes
+  * the two foreach are used to format the array the way we want.
+  */
+  function list_properties($mail_id) {
+    global $err,$hooks;
+    $err->log("mail","list_properties");
+    $prop = $hooks->invoke("hooks_mail_properties_list",array($mail_id));
+    $final=Array();
+  
+          /* Ici on :
+             - trie/fait du mÃ©nage
+             - prend en premier les properties non avancÃ©es
+             - prend en second les properties avancÃ©es (donc en bas)
+             - on pense a avoir un trie par label, histoire d'avoir une cohÃ©rence d'affichage
+          */
+    $f_simple=Array();
+    $f_adv=Array();
+    foreach ($prop as $k => $v ) {
+      if ( empty($v) ) continue; // on continue si le tableau Ã©tait vide
+      if ( isset($v['label'] ) ) { // si c'est directement le tableau qu'on souhaite
+        if ( isset($v['advanced']) && $v['advanced']) {
+          $f_adv[] = $v;
+        } else { // option simple
+          $f_simple[] = $v;
+        }
+      } else {
+        foreach ($v as $k2 => $v2 ) { // sinon on joue avec les sous-tableau
+          if ( isset($v2['advanced']) && $v2['advanced']) {
+            $f_adv[] = $v2;
+          } else { // option simple
+            $f_simple[]=$v2;
+          }
+        }
+      }
+    }
+    $v_simple=usort($f_simple,'list_properties_order');
+    $v_adv=usort($f_adv,'list_properties_order');
+  
+    $final=array_merge($f_simple,$f_adv);
+  
+  //FIXME sort pour avoir ceux qui sont ADVANCED a la fin, et trie par label pour etre "fixe"
+  
+    return $final;
+  }
+  
+  /* function used to get every information at our disposal concerning a mail.
+  *  @param: $mail_id, $recur (used to stop the fonction correctly when called from list alias.
+  *  @return: an hashtable of every usefull informations we can get about a mail.
+  */
+
+  function mail_get_details($mail_id, $recur=true){
+    global $db, $err, $mail_redirection,$mail_alias, $mail_localbox;
+    $err->log("mail","mail_get_details");
+    
+    $details = array (
+        "address_id" => "",
+        "address" => "",
+        "domain" => "", 
+        "address_full" => "",
+        "password" => "",
+        "enabled" => false,
+        "is_local" => Array(),
+        "recipients" => Array(),
+        "alias" => Array(),
+        );
+  
+    //on recupere les info principales de toutes adresses
+    $db->query("select a.address,a.password,a.enabled, d.domaine from address a, domaines d where a.id=$mail_id and d.id=a.domain_id;");
+  
+    // Return if no entry in the database
+    if (! $db->next_record()) return false;
+  
+    $details["address_id"]  =$mail_id;
+    $details["address"]  =$db->f("address");
+    $details["password"]  =$db->f("password");
+    $details["enabled"]  =$db->f("enabled");
+    $details["domain"]  =$db->f("domaine");
+    $details["address_full"]=$details["address"].'@'.$details["domain"];
+  
+    if ($recur) {
+      // Get some human-usefull informations
+      $details["is_local"]=$mail_localbox->details($mail_id);
+      $details["recipients"] = $mail_redirection->list_recipients($mail_id);
+      $details["alias"] = $mail_alias->list_alias($details['address_full']);
+    }
+    
+    return $details;
+  }
+
+ /** 
+  * activate a mail address.
+  * @param integer mail_id: unique mail identifier
+  */  
+  function enable($mail_id){
+    global $db,$err;
+    $err->log("mail","enable");
+    if( !$db->query("UPDATE address SET enabled=1 where id=$mail_id;"))return false;
+  }
+
+ /** 
+  * disable a mail address.
+  * @param integer mail_id: unique mail identifier
+  */  
+  function disable($mail_id){
+    global $db,$err;
+    $err->log("mail","enable");
+    if( !$db->query("UPDATE address SET enabled=0 where id=$mail_id;")) return false;
+  }
+
+ /** 
+  * setpasswd a mail address.
+  * @param integer mail_id: unique mail identifier
+  */  
+  function setpasswd($mail_id,$pass,$passwd_type){
+    global $db,$err,$admin;
+    $err->log("mail","setpasswd");
+    if(!$admin->checkPolicy("pop",$mail_full,$pass)) return false;
+    if(!$db->query("UPDATE address SET password='"._md5cr($pass)."' where id=$mail_id;")) return false;
+  }
+
+
+ /** 
+  * mail_delete a mail address.
+  * @param integer mail_id: unique mail identifier
+	TODO: mail del
+  */  
+  function mail_delete($mail_id){
+    global $db,$err,$admin;
+    $err->log("mail","mail_delete");
+  
+   // $db->query("
+  /*supprimer de la table address
+	supprimer la mailbox si il yen a une.
+	supprimer alias et redirection.
+    supprimer les alias associÃ© si il ne sont reliÃ© a aucunes autre addresses.
+  */
+
+  }
+
+
 
 
 } /* Class m_mail */
+
 
 ?>

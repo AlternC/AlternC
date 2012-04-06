@@ -47,11 +47,11 @@ if (!$id) {
 ?>
 <h3><?php __("Editing an FTP account"); ?></h3>
 <?php
-	if ($error) {
-		echo "<p class=\"error\">$error</p>";
-		include_once("foot.php");
-		exit();
-	}
+if (isset($error) && $error) {
+	echo "<p class=\"error\">$error</p>";
+	include_once("foot.php");
+	exit();
+}
 ?>
 <form method="post" action="ftp_doedit.php" name="main" id="main">
 <table border="1" cellspacing="0" cellpadding="4">

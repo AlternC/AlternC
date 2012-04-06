@@ -37,21 +37,24 @@ if ($q["t"] > 0 && $r["u"] > 0) {
 ?>
 <div class="menu-box">
 <div class="menu-title">
-<img src="images/mail.png" alt="<?php __("Email Addresses"); ?>" />&nbsp;<?php __("Email Addresses"); ?> (<?= $q["u"]; ?>/<?= $q["t"]; ?>)</div>
+<a href="javascript:menu_toggle('menu-mail');">
+<img src="images/mail.png" alt="<?php __("Email Addresses"); ?>" />&nbsp;<?php __("Email Addresses"); ?> (<?= $q["u"]; ?>/<?= $q["t"]; ?>)
+<img src="images/row-down.png" alt="" style="float:right;"/></a>
+</div>
 <div class="menu-content" id="menu-mail">
 <ul>
 <?php
 	
 /* Enumeration des domlistes en mail : */
 $domlist = $mail->enum_domains();
-reset($domlist);
-while (list($key, $val) = each($domlist)) {
-$res = $mail->enum_doms_mails($val, 1);
-	
+foreach($domlist as $l => $v){
 ?>
-	<li><a href="mail_list.php?domain=<?php echo urlencode($val) ?>"><?php echo $val ?> (<?= $res["count"]; ?>)</a></li>
-<?php } ?>
+	<li><a href="mail_list.php?domain=<?php echo urlencode($v["domaine"]) ?>&amp;domain_id=<?php echo urlencode($v["id"]) ?>"><?php echo $v["domaine"] ?> (<?php echo $v["nb_mail"]; ?>)</a></li>
+<?php
+}?>
 </ul>
 </div>
 </div>
-<?php } ?>
+<?php
+} // fin du if pour les quotas 
+?>
