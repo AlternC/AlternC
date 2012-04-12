@@ -42,17 +42,17 @@ if (isset($error) && $error) {
 
 $dom_list = $mail->enum_domains;
 ?>
-<form action="mail_alias_doedit.php" method="post" name="mail_create" id="main" onsubmit="return is_valid_mail2()">
+<form action="mail_alias_doedit.php" method="post" name="mail_create" id="main" onsubmit="return is_valid_mail(document.getElementById('mail_arg').value+document.getElementById('dom_id').options[document.getElementById('dom_id').selectedIndex].text);">
 <table>
 <tr> 
     <td> 
-      <input type="text" class="int" name="alias" id="mail_arg" value="" size="20" maxlength="255" /> 
+      <input type="text" class="inb" name="mail_arg" id="mail_arg" value="" size="20" maxlength="255"  /> 
     </td> 
-    <td>@<select name="dom_id" id="dom_id" ><?php foreach($dom_list as $key => $val){ ?><option value="<?php echo urlencode($val['id']) ?>"><?php echo $val["domaine"] ?> </option><?php } ?> </select><td>
+    <td><select name="dom_id" id="dom_id" ><?php foreach($dom_list as $key => $val){ ?><option value="<?php echo urlencode($val['id']) ?>"><?php echo "@".$val["domaine"] ?> </option><?php } ?> </select><td>
     <td><input type="submit" class="inb" name="submit" value="<?php __("Create this alias"); ?>" /></td>
 </table>
 <input type="hidden" class="inb" name="mail_id" value="<?php echo $mail_id ; ?>" />
-<input type="hidden" class="inb" name="address_full" value="<?php echo $details["address_full"] ; ?>" />
+<input type="hidden" class="inb" name="address_full" id="address_full" value="<?php echo $details["address_full"] ; ?>" />
 
 
 </form>

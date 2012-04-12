@@ -58,10 +58,11 @@ if (isset($error)) {
 //Mail creation.
 if ($quota->cancreate("mail")) { ?>
 <h3><?php __("Create a new mail account");?></h3>
-	<form method="post" action="mail_doadd.php" id="main" name="mail_create" onsubmit="return is_valid_mail2()">
+	<form method="post" action="mail_doadd.php" id="main" name="mail_create" onsubmit="return is_valid_mail(document.getElementById('mail_arg').value+"@"+document.getElementById('domain') )">
 		<input type="text" class="int" name="mail_arg" value="" size="20" id="mail_arg" maxlength="32" /><span id="emaildom" class="int" > <?php echo "@".$domain; ?></span>
 		<input type="hidden" name="domain_id"  value="<?php echo $domain_id;?>" />
-		<input type="hidden" name="domain"  value="<?php echo $domain;?>" />
+		<input type="hidden" name="domain" id="domain"  value="<?php echo $domain;?>" />
+		<input type="hidden" name="arg" id="arg"  value="<?php echo $domain;?>" />
 		<input type="submit" name="submit" class="inb" value="<?php __("Create"); ?>" />
 	</form>
 <?php 
@@ -99,5 +100,4 @@ while (list($key,$val)=each($mails_list)){
 ?>
 
 </table>
-
 <?php include_once("foot.php"); ?>

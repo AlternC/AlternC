@@ -46,7 +46,7 @@ for ($ii=0;$ii <= count($lst_rcp)+10; $ii++) {
   <tr>
     <td>
       <input type="text" class="int" name="rcp[<?php echo $ii?>]" id="rcp-<?php echo $ii?>" value="<?php 
-	if (isset($lst_rcp[$ii])){ ehe($lst_rcp[$ii]);} ?>" size="20" maxlength="255" onKeyUp="javascript:is_valid_mail(<?php echo $ii; ?>);" />
+	if (isset($lst_rcp[$ii])){ ehe($lst_rcp[$ii]);} ?>" size="20" maxlength="255" onKeyUp="javascript:check_mail_form_validity(<?php echo $ii; ?>);" />
     </td>
     <td><img id="valid-rcp-<?php echo $ii?>" alt="" src="" ></td>
     <td><a href="#" onclick="javascript:delete_one_recipients(<?php echo $ii?>);" ><?php __("Delete");?></a></td>
@@ -70,7 +70,7 @@ for ($ii=0;$ii <= count($lst_rcp)+10; $ii++) {
 
 function delete_one_recipients(idelem) {
   document.getElementById('rcp-'+idelem).value='';
-  is_valid_mail(idelem);
+  check_mail_form_validity(idelem);
 }
 
 function delete_all_recipients() {
@@ -85,7 +85,7 @@ function delete_all_recipients() {
 
 
 <?php for ($ii=0;$ii <= count($lst_rcp)+10; $ii++) { ?>
-is_valid_mail(<?php echo $ii;?>);
+check_mail_form_validity(<?php echo $ii;?>);
 <?php } // for ?>
 
 

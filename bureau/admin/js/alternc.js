@@ -157,18 +157,19 @@ function swap(s,shm) {
     }
 }
 
-
-function is_valid_mail(id_elem) {
-  //var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-  //FIXME mail documentation doesn't expect a maximum length of the mail address : http://tools.ietf.org/html/rfc2822#section-3.4.1
-  var reg = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i; 
-var rgxp = /^[a-z0-9\!\#\$\%\&\'\*+/=?^_`{|}~-]{1,}((\.[a-z0-9\!\#\$\%\&\'\*+/=?^_`{|}~-]{1,13})?)+@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9\-]*[a-z0-9])?$/
+/**
+* Function check_form_mail_validity
+* is used to check if a given mail is a valid RFC 2822 mail adress and set the according image onto the page.
+* @param : id_elem , id of the mail input box we are checking
+*/
+function check_mail_form_validity(id_elem) {
   var mail = document.getElementById('rcp-'+id_elem).value;
+  var mail_element = document.getElementById('rcp-'+id_elem);
   var src = "";
   var alt = "";
 
   if (mail != "" ) {
-    if(rgxp.test(mail) == false) {
+    if(is_valid_mail(mail_element.value) != true ){
       src = "images/check_no.png";
       alt = "KO";
     } else {
@@ -181,13 +182,15 @@ var rgxp = /^[a-z0-9\!\#\$\%\&\'\*+/=?^_`{|}~-]{1,}((\.[a-z0-9\!\#\$\%\&\'\*+/=?
   document.getElementById('valid-rcp-'+id_elem).alt = alt;
 }
 
-
-function is_valid_mail2() {
-  var reg = /^[A-Z0-9._%+-]+$/i; 
-  var arg = document.getElementById('mail_arg').value;
-var rgxp = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+((\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)?)+?$/
+/*
+* Function :is_valid_mail
+* @param : interger arg, an RFC 2822 mail adress
+* @return : true if arg really is formed like described in RFC 2822, else false
+*/
+function is_valid_mail(arg) {
+  //FIXME mail documentation doesn't expect a maximum length of the mail address : http://tools.ietf.org/html/rfc2822#section-3.4.1
+  var rgxp = /^[a-z0-9\!\#\$\%\&\'\*+/=?^_`{|}~-]{1,}((\.[a-z0-9\!\#\$\%\&\'\*+/=?^_`{|}~-]{1,13})?)+@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9\-]*[a-z0-9])?$/
     if(rgxp.test(arg) == false) {
-	alert(arg+" : incorect");
 	return false;
     } else {
 	return true;

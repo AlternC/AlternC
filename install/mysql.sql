@@ -245,6 +245,7 @@ CREATE TABLE `address` (
   `expire_date` datetime DEFAULT NULL, -- Expiration date, used for temporary addresses.
   `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- Update date, for technical usage only.
   PRIMARY KEY (`id`),
+  UNIQUE INDEX `domain_id_idx` (`domain_id`),
   UNIQUE KEY `address` (`address`)
 ) COMMENT = 'This is the main address table. It represents an address as in RFC2822';
 
@@ -275,7 +276,7 @@ CREATE TABLE `recipient` (
   `recipients` text NOT NULL, -- Recipients
   `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- Update date, for technical usage only.
   PRIMARY KEY (`id`),
-  UNIQUE KEY `address_id` (`address_id`)
+  UNIQUE KEY `key_id` (`id`,`address_id`)
 ) COMMENT = 'Table containing other recipients (aliases) for an address.';
 
 --

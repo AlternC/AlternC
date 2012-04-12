@@ -484,6 +484,8 @@ src/alternc-check -text
 src/alternc-dboptimize -text
 src/alternc-passwd -text
 src/alternc_reload -text
+src/cron_users.sh -text
+src/cron_users_doit.sh -text
 src/du.pl -text
 src/export_account.php -text
 src/fixperms.sh -text

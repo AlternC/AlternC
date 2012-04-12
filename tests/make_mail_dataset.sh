@@ -7,7 +7,7 @@
 #     make_mail_dataset.sh > dataset.sql
 
 # Domaine sur lequel porte le jeu de données.
-DOMAIN="test.com"
+DOMAIN="test22.com"
 
 # Identifiant du domaine.
 DOMAIN_ID=2000
