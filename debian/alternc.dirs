@@ -8,6 +8,7 @@ etc/cron.d
 etc/phpmyadmin
 etc/postfix
 etc/squirrelmail
+/etc/sudoers.d
 usr/bin
 usr/lib/alternc
 usr/sbin

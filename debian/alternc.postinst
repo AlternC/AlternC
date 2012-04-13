@@ -224,6 +224,15 @@ EOF
 
     # Update l18n files
     /usr/share/alternc/install/dopo.sh
+		
+		#sudo stuff allowing alterncpanel to use quota
+		if [ -d /etc/sudoers.d ]; then
+			cp /etc/alternc/alternc-sudoers /etc/sudoers.d/alternc-sudoers
+			chmod 0440 /etc/sudoers.d/alternc-sudoers
+		else
+			echo "running an older version of sudo"
+			echo "copy content of /usr/share/doc/aegir-provision/examples/example.sudoers into /etc/sudoers for aegir to run properly"
+	  fi
 
     # important: postinst gele sans ca
     db_stop

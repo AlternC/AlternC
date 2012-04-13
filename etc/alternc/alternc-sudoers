@@ -1,0 +1,1 @@
+alterncpanel	ALL = NOPASSWD : /usr/bin/quota, /usr/sbin/setquota

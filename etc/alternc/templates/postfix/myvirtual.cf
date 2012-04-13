@@ -6,5 +6,6 @@ user = %%dbuser%%
 password = %%dbpwd%%
 hosts =%%dbhost%%
 dbname = %%dbname%%
-select concat(path, '/Maildir/') from mailbox join address on address.id = mailbox.address_id where address.address='%s'
+query = select concat(path, '/Maildir/') from mailbox join address on address.id = mailbox.address_id join domaines on domaines.id = address.domain_id where concat(address.address,
+'@',domaines.domaine) ='%s';
 

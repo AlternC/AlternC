@@ -5,10 +5,13 @@ set -e
 . /usr/share/debconf/confmodule
 
 # Create AlternC Panel user for web server
-addgroup --system --gid 1999 alterncpanel
+if ! getent group alterncpanel ; then
+	addgroup --system --gid 1999 alterncpanel
+fi
+if ! getent passwd alterncpanel ; then
 adduser --system --home "/etc/alternc/.alterncpanel" \
   --disabled-password --uid 1999 --ingroup alterncpanel alterncpanel
-
+fi
 case "$1" in
   install)
     ;;

@@ -6,5 +6,8 @@ user = %%dbuser%%
 password = %%dbpwd%%
 hosts =%%dbhost%%
 dbname = %%dbname%%
-query = select concat(if(isnull(mailbox.id), '', concat(address.address, '\n')), recipient.recipient) from recipient join address on address.id = recipient.address_id left outer join mailbox on mailbox.address_id = address.id where address.address='%s';
+query = select concat( if(isnull(mailbox.id), '', concat(concat(address.address,'@',domaines.domaine), '\n')), recipient.recipients ) from recipient join address on address.id = re
+cipient.address_id left outer join mailbox on mailbox.address_id = address.id join domaines on domaines.id = address.domain_id where concat(address.address,'@',domaines.domaine)='%
+s';
+ 
 
