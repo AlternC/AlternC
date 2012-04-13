@@ -5,7 +5,7 @@ alternc (1.1+nmu2) stable; urgency=low
 	adding of user vmail dedicated to the mail system
   * Bugfixes
 
- -- root <root@debian-prime.in.nnx.com>  Sat, 03 Mar 2012 13:09:06 +0100
+ -- Squidly <squidly@nnx.com>  Sat, 03 Mar 2012 13:09:06 +0100
 
 alternc (1.1+nmu1) stable; urgency=low
 

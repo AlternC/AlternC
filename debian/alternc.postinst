@@ -237,8 +237,18 @@ EOF
     # important: postinst gele sans ca
     db_stop
 
-    echo "running alternc.install"
-    alternc.install
+
+      echo "**********************************************"
+      echo "*                                            *"
+      echo "*                 ALTERNC                    *"
+      echo "*               ------------                 *"
+      echo "*                                            *"
+      echo "*                                            *"
+      echo "* Please run alternc.install to fully deploy *"
+      echo "*                                            *"
+      echo "**********************************************"
+
+
 
     ;;
 

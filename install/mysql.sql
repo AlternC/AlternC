@@ -261,6 +261,8 @@ CREATE TABLE `mailbox` (
   `quota` bigint(20) unsigned DEFAULT NULL, -- Quota for this mailbox.
   `delivery` varchar(255) NOT NULL, -- Delivery transport.
   `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- Update date, for technical usage only.
+  `bytes` bigint(20) NOT NULL DEFAULT '0',
+  `messages` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `address_id` (`address_id`)
 ) COMMENT = 'Table containing local deliverd mailboxes.';

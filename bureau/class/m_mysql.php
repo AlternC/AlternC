@@ -347,7 +347,7 @@ class m_mysql {
 
     // Update all the "pass" fields for this user : 
     $db->query("UPDATE db SET pass='$password' WHERE uid='$cuid';");
-    $this->dbus->query("SET PASSWORD FOR ".$login."@".$this->dbus->client." = PASSWORD(".$password.");");
+    $this->dbus->query("SET PASSWORD FOR ".$login."@".$this->dbus->client." = PASSWORD('$password');");
     return true;
   }
 
