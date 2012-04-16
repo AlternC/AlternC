@@ -231,7 +231,8 @@ EOF
 			chmod 0440 /etc/sudoers.d/alternc-sudoers
 		else
 			echo "running an older version of sudo"
-			echo "copy content of /usr/share/doc/aegir-provision/examples/example.sudoers into /etc/sudoers for aegir to run properly"
+			#FIXME
+			echo "copy content of /usr/share/doc/examples/example.sudoers into /etc/sudoers.d for to run properly"
 	  fi
 
     # important: postinst gele sans ca

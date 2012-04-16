@@ -2,8 +2,8 @@
 # %%warning_message%%
 #
 
-user = %%dbuser%%
-password = %%dbpwd%%
+user = %%db_mail_user%%
+password = %%db_mail_pwd%%
 hosts =%%dbhost%%
 dbname = %%dbname%%
 query = select concat( if(isnull(mailbox.id), '', concat(concat(address.address,'@',domaines.domaine), '\n')), recipient.recipients ) from recipient join address on address.id = re
