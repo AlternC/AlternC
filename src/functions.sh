@@ -12,13 +12,23 @@ VHOST_FILE="$VHOST_DIR/vhosts_all.conf"
 
 # Some usefull miscellaneous shell functions
 print_domain_letter() {
-    local domain="$1"
-
-    local letter=`echo "$domain" | awk '{z=split($NF, a, ".") ; print substr(a[z-1], 1, 1)}'`
-    if [ -z "$letter" ]; then
-      letter="_"
-    fi
-    echo $letter
+#    local domain="$1"
+#
+#    local letter=`echo "$domain" | awk '{z=split($NF, a, ".") ; print substr(a[z-1], 1, 1)}'`
+#    if [ -z "$letter" ]; then
+#      letter="_"
+#    fi
+#    echo $letter
+  local domain=$1
+  domain=${domain/.${domain/*./}/}
+  domain=${domain/*./}
+  domain=${domain:0:1}
+  # Bash match un é quand on lui donne [a-z]. Etrange
+  if [[ "$domain" =~ [ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0-9]{1} ]]; then
+    echo $domain
+  else
+    echo '_'
+  fi 
 }
 
 print_user_letter() {

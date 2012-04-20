@@ -123,7 +123,7 @@ if [ ! -z "$(cat "$RELOAD_WEB")" ] ; then
 
   # Concat the apaches files
   tempo=$(mktemp "$VHOST_FILE.XXXXX")
-  find "$VHOST_DIR" -mindepth 2 -type f -iname "*.conf" -exec cat '{}' > "$tempo" \;
+  find "$VHOST_DIR" -mindepth 2 -type f -iname "*.conf" -print0 | xargs -0 cat > "$tempo" 
   if [ $? -ne 0 ] ; then
     log_error " web file concatenation failed"
   fi
