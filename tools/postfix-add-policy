@@ -1,0 +1,104 @@
+#!/usr/bin/python
+'''
+postfix-add-filter - A script to append new services to Postfix master.cf to
+simplify integration of content filters.
+
+Copyright (c) 2008 Scott Kitterman <scott@kitterman.com>
+Permission is hereby granted, free of charge, to any person obtaining a copy
+ of this software and associated documentation files (the "Software"), to deal
+ in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ copies of the Software, and to permit persons to whom the Software is
+ furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in
+ all copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ THE SOFTWARE.
+'''
+__author__ = "Scott Kitterman"
+__email__ = "scott@kitterman.com"
+__version__ = "0.1: August 3, 2008"
+
+import sys
+import shutil
+import os
+import time
+import fileinput
+
+def makepolicy(name, method, flags, user, argv):
+    # Recommendations from the Postfix SMTPD_POLICY_README.
+    header = """# ==========================================================================
+# service type  private unpriv  chroot  wakeup  maxproc command + args
+#               (yes)   (yes)   (yes)   (never) (100)
+# ==========================================================================
+# Added using postfix-add-policy script:
+"""
+    policy = ("""%s unix    -       n       n       -       0     %s
+    %s  user=%s argv=%s
+""" % (name, method, flags, user, argv))
+    additions = header + policy
+    return (additions)
+
+
+USAGE = """To add a new policy service to your master.cf:
+    % sudo postfix-policy-add {policy service name} {user} {file (full path)}
+
+Example:
+    % sudo postfix-policy-add policyd noboby /usr/bin/policyd
+
+Adds the following to master.cf:
+""" + makepolicy('policyd','method','flags', 'nobody', '/usr/bin/policyd') + """
+To output this usage message:
+    % postfix-add-policy
+"""
+
+
+if __name__ == '__main__':
+    import sys
+    if len(sys.argv) < 6:
+        print USAGE
+    elif len(sys.argv) == 6:
+        policyname = sys.argv[1]
+        user = sys.argv[2]
+        flags = sys.argv[3]
+        method = sys.argv[4]
+        argv = sys.argv[5]
+        # Read in master.cf and check to make sure specified name isn't
+        # already used
+        masterfile = open('/etc/postfix/master.cf', mode='r')
+        master = masterfile.readlines()
+        masterfile.close()
+        bailout = False
+        for line in master:
+            if policyname in line:
+                # Policy name already used, print error and bail
+               	print ('Selected policy name, %s, already in master.cf.  \
+                        Master.cf not updated.' % (policyname))
+                bailout = True
+                break
+        if not bailout:
+            # Make backup copy
+            backupname = '/etc/postfix/master.cf.' + str(int(time.time()))
+            shutil.copy2('/etc/postfix/master.cf', backupname)
+            # Make working copy
+            shutil.copy2('/etc/postfix/master.cf', \
+                '/etc/postfix/master.cf.working')
+            # Add stuff in
+            stuff = makepolicy(policyname, user, method, flags, argv)
+            # Append stuff to the working copy:
+
+            newmaster = open('/etc/postfix/master.cf.working', mode='a')
+            newmaster.writelines(stuff)
+
+            newmaster.close()
+            # Put working copy in place.
+            shutil.move('/etc/postfix/master.cf.working', \
+                '/etc/postfix/master.cf')
+    else:
+        print USAGE
+

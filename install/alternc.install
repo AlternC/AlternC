@@ -118,7 +118,7 @@ if [ -r /etc/alternc/my_mail.cnf ]; then
     # * add a right quote operator at the end of line (;s)
     # * convert mysql variables into our MYSQL_ naming convention (;s)
     # * print the result (;p)
-    eval `sed -n -e "/=/{s/ *= *\"\?/='/;s/\"\?\$/'/;s/host/MYSQL_HOST/;s/user/MYSQL_USER/;s/password/MYSQL_PASS/;s/database/MYSQL_DATABASE/;p}" /etc/alternc/my.cnf`
+    eval `sed -n -e "/=/{s/ *= *\"\?/='/;s/\"\?\$/'/;s/host/MYSQL_HOST/;s/user/MYSQL_MAIL_USER/;s/password/MYSQL_MAIL_PASS/;s/database/MYSQL_DATABASE/;p}" /etc/alternc/my_mail.cnf`
     chown root:alterncpanel /etc/alternc/my_mail.cnf
     chmod 640 /etc/alternc/my_mail.cnf
 fi
@@ -280,16 +280,18 @@ then
     exit 1
 fi
 
-# configure postfix appropriatly for our needs
+# configure Postfix appropriatly for our needs
 if [ "$slave" = "1" ]; then
     postfix_conf=/etc/alternc/postfix-slave.cf
 else
     postfix_conf=/etc/alternc/postfix.cf
 fi
-while read line
-do
+while read line ; do
    postconf -e "$line"
-done < $postfix_conf
+done < "$postfix_conf"
+
+# Conviguring delivery used bu Postfix FIXME change script name
+echo `/usr/bin/postfix-add-policy2 dovecot pipe DRhu vmail:vmail  '/usr/lib/dovecot/deliver -f ${sender} -d ${recipient} '`
 
 # Bug #1215: configure mydestination when $FQDN is not in
 OLDDESTINATION=`postconf mydestination | awk -F '=' '{print $2}'`
@@ -365,6 +367,10 @@ if [ "$HAS_ROOT" != "1" ]; then
       echo "Il a été impossible de créer un nouveau membre alternc. newone.php a retourné un code d'erreur $?. Vérifiez si la base MySQL, PHP, ainsi que le fichier local.sh sont bien configurés. Vérifiez aussi si des erreurs ne sont pas apparues plus haut dans l'installation."
     fi
 fi
+
+#giving vmail user read access on dovecot sql file
+chgrp vmail /etc/dovecot/dovecot.conf
+chmod g+r /etc/dovecot/dovecot.conf
 
 # Changing owner of web panel's files
 chown -R alterncpanel:alterncpanel "$ALTERNC_LOC/bureau"

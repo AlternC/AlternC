@@ -236,7 +236,7 @@ CREATE TABLE IF NOT EXISTS sub_domaines (
 --
 -- Addresses for domain.
 
-CREATE TABLE `address` (
+CREATE TABLE IF NOT EXISTS `address` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT, -- Technical id.
   `domain_id` bigint(20) unsigned NOT NULL REFERENCES `domaines`(`id`), -- FK to sub_domains.
   `address` varchar(255) NOT NULL, -- The address.
@@ -254,7 +254,7 @@ CREATE TABLE `address` (
 -- 
 -- Local delivered mailboxes.
 
-CREATE TABLE `mailbox` (
+CREATE TABLE IF NOT EXISTS `mailbox` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT, -- Technical id.
   `address_id` bigint(20) unsigned NOT NULL REFERENCES `address`(`id`), -- Reference to address.
   `path` varchar(255) NOT NULL, -- Relative path to the mailbox.
@@ -272,7 +272,7 @@ CREATE TABLE `mailbox` (
 --
 -- Other recipients for an address (aliases)
 
-CREATE TABLE `recipient` (
+CREATE TABLE IF NOT EXISTS `recipient` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT, -- Technical id.
   `address_id` bigint(20) unsigned NOT NULL REFERENCES `address`(`id`), -- Reference to address
   `recipients` text NOT NULL, -- Recipients
@@ -286,7 +286,7 @@ CREATE TABLE `recipient` (
 --
 -- Table containing mailman addresses
 
-CREATE TABLE `mailman` (
+CREATE TABLE IF NOT EXISTS `mailman` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT, -- Technical id.
   `address_id` bigint(20) unsigned NOT NULL REFERENCES `address`(`id`), -- Reference to address
   `delivery` varchar(255) NOT NULL, -- Delivery transport.
@@ -545,6 +545,7 @@ INSERT IGNORE INTO `domaines_type` (name, description, target, entry, compatibil
 
 -- Add function who are not in mysql 5 to be able ton convert ipv6 to decimal (and reverse it)
 DELIMITER //
+DROP FUNCTION IF EXISTS INET_ATON6;//
 CREATE FUNCTION INET_ATON6(n CHAR(39))
 RETURNS DECIMAL(39) UNSIGNED
 DETERMINISTIC
@@ -569,6 +570,7 @@ END;
 //
 DELIMITER ;
 DELIMITER //
+DROP FUNCTION IF EXISTS INET_NTOA6;//
 CREATE FUNCTION INET_NTOA6(n DECIMAL(39) UNSIGNED)
 RETURNS CHAR(39)
 DETERMINISTIC
@@ -647,7 +649,7 @@ CREATE TABLE IF NOT EXISTS `cron` (
 -- Structure de la vue `dovecot-view`
 --
 
-CREATE VIEW `dovecot_view` AS
+CREATE OR REPLACE VIEW `dovecot_view` AS
 SELECT concat(`address`.`address`,'@',`domaines`.`domaine`) AS `user`,
 concat('*:storage=',cast(`mailbox`.`quota` as char charset latin1),'M') AS `userdb_quota_rule`,
 `address`.`password` AS `password`,

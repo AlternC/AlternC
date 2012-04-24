@@ -46,6 +46,18 @@ case "$1" in
     mkdir -p /var/spool/postfix/var/run/saslauthd || true
     dpkg-statoverride --quiet --update --add root sasl 710 /var/spool/postfix/var/run/saslauthd  || true
 
+
+    #Create Dovecot user for mail handling FIXME change home with ALTERNC_LOC
+    if ! getent group vmail; then
+       addgroup --gid 1998 vmail
+    fi
+    if ! getent passwd vmail; then
+       adduser -g vmail -u 1998 vmail -d /var/alternc/mail -m 
+    fi 
+    chown -R vmail:vmail /var/alternc/mail
+    chmod u+w /var/alternc/mail
+
+
     # build local.sh if it does not exist
     if [ ! -f $CONFIGFILE ]; then
         cat > $CONFIGFILE <<EOF
@@ -144,7 +156,11 @@ EOF
         user="$RET"
         db_get "alternc/mysql/password"
         password="$RET"
-        
+        db_get "alternc/mysql/alternc_mail_user"
+        alternc_mail_user="$RET"
+        db_get "alternc/mysql/alternc_mail_password"
+        alternc_mail_password="$RET"
+
         # we source (instead of forking) mysql.sh so that it gets the local environment above
         . /usr/share/alternc/install/mysql.sh
     fi

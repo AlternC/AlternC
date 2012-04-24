@@ -34,8 +34,8 @@
 # * user
 # * password
 # * database
-# * mail_user
-# * mail_password
+# * alternc_mail_user
+# * alternc_mail_password
 # * MYSQL_CLIENT
 # 
 # XXX: the sed script should be generated here
@@ -55,7 +55,9 @@ MYSQL_MAIL_CONFIG="/etc/alternc/my_mail.cnf"
 # the purpose of this "grant" is to make sure that the generated my.cnf works
 # this means (a) creating the user and (b) creating the database
 grant="GRANT ALL ON *.* TO '$user'@'${MYSQL_CLIENT}' IDENTIFIED BY '$password' WITH GRANT OPTION;
-CREATE DATABASE IF NOT EXISTS $database;GRANT ALL ON '$database'.dovecot_view TO '$mail_user'@'${MYSQL_CLIENT}' IDENTIFIED BY '$mail_password'; "
+CREATE DATABASE IF NOT EXISTS $database; "
+grant_mail="GRANT ALL ON $database.dovecot_view TO '$alternc_mail_user'@'${MYSQL_CLIENT}' IDENTIFIED BY '$alternc_mail_password';"
+grant_mail=$grant_mail"GRANT SELECT ON $database.* TO '$alternc_mail_user'@'${MYSQL_CLIENT}' IDENTIFIED BY '$alternc_mail_password';"
 
 echo -n "Trying debian.cnf: "
 mysql="/usr/bin/mysql --defaults-file=/etc/mysql/debian.cnf"
@@ -136,10 +138,15 @@ set_value() {
     RET=$2
     file=$3
     grep -Eq "^ *$var=" $file || echo "$var=" >> $file
-    SED_SCRIPT="$SED_SCRIPT;s\\^ *$var=.*\\$var=\"$RET\"\\"
+    if [ $file = $MYSQL_CONFIG ]; then
+      SED_SCRIPT_USR="$SED_SCRIPT_USR;s\\^ *$var=.*\\$var=\"$RET\"\\"
+    else
+      SED_SCRIPT_MAIL="$SED_SCRIPT_MAIL;s\\^ *$var=.*\\$var=\"$RET\"\\"
+    fi 
 }
 
-SED_SCRIPT=""
+SED_SCRIPT_USR=""
+SED_SCRIPT_MAIL=""
 # hostname was empty in older (pre-0.9.6?) versions
 if [ -z "$host" ]; then
     host="localhost"
@@ -154,19 +161,30 @@ set_value password $password $MYSQL_CONFIG
 #filling the config file for the mailuser
 set_value host $host $MYSQL_MAIL_CONFIG
 set_value database $database $MYSQL_MAIL_CONFIG
-set_value user $mail_user $MYSQL_MAIL_CONFIG
-set_value password $mail_password $MYSQL_MAIL_CONFIG
+set_value user $alternc_mail_user $MYSQL_MAIL_CONFIG
+set_value password $alternc_mail_password $MYSQL_MAIL_CONFIG
 
+echo $SED_SCRIPT_MAIL
+echo XXXXXX
+echo $SED_SCRIPT_USR
 
 # take extra precautions here with the mysql password:
 # put the sed script in a temporary file
 SED_SCRIPT_NAME=`mktemp`
 cat > $SED_SCRIPT_NAME <<EOF
-$SED_SCRIPT
+$SED_SCRIPT_USR
 EOF
 sed -f "$SED_SCRIPT_NAME" < $MYSQL_CONFIG > $MYSQL_CONFIG.$$
 mv -f $MYSQL_CONFIG.$$ $MYSQL_CONFIG
 rm -f $SED_SCRIPT_NAME
+
+SED_SCRIPT_NAME_MAIL=`mktemp`
+cat > $SED_SCRIPT_NAME_MAIL <<EOF
+$SED_SCRIPT_MAIL
+EOF
+sed -f "$SED_SCRIPT_NAME_MAIL" < $MYSQL_MAIL_CONFIG > $MYSQL_MAIL_CONFIG.$$
+mv -f $MYSQL_MAIL_CONFIG.$$ $MYSQL_MAIL_CONFIG
+rm -f $SED_SCRIPT_NAME_MAIL
 
 # Now we should be able to use the mysql configuration
 mysql="/usr/bin/mysql --defaults-file=$MYSQL_CONFIG"
@@ -174,9 +192,10 @@ mysql_mail="/usr/bin/mysql --defaults-file=$MYSQL_MAIL_CONFIG"
 
 echo "Checking for MySQL connectivity"
 $mysql -e "SHOW TABLES" >/dev/null && echo "MYSQL.SH OK!" || echo "MYSQL.SH FAILED: database user setup failed"
-$mysql_mail -e "SHOW TABLES" >/dev/null && echo "MYSQL.SH OK!" || echo "MYSQL.SH FAILED: database mail user setup failed"
-
+echo $grant_mail
 # Final mysql setup: db schema
 echo "installing AlternC schema in $database..."
 $mysql < /usr/share/alternc/install/mysql.sql || echo cannot load database schema
-
+$mysql <<EOF
+ $grant_mail
+EOF

@@ -6,5 +6,5 @@ user = %%db_mail_user%%
 password = %%db_mail_pwd%%
 hosts =%%dbhost%%
 dbname = %%dbname%%
-query = select compte from domaines join address on address.domain_id = domaines.id join mailbox on mailbox.address_id = address.id where address.address='%s'
+query = select compte from domaines join address on address.domain_id = domaines.id join mailbox on mailbox.address_id = address.id where concat(address.address,'@',domaines.domaine)='%s'
 
