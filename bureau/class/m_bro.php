@@ -558,7 +558,7 @@ class m_bro {
     $dest = escapeshellarg($dest);
     // TODO new version of tar supports `tar xf ...` so there is no
     //     need to specify the compression format
-    exec("tar -xzf $file -C $dest", $void, $ret);
+    exec("tar -xf $file -C $dest", $void, $ret);
     if ($ret) {
       exec("tar -xjf $file -C $dest", $void, $ret);
     }
