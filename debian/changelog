@@ -1,3 +1,11 @@
+alternc (1.1+nmu3) stable; urgency=low
+
+  * Templating full configuration of postfix & dovecot 
+  * bugfixes in mysql database configuration 
+  * adding default quota (to use with dovecot) in local mailbox creation  
+
+ -- Squidly <squidly@nnx.com>  Wed, 02 May 2012 14:51:49 +0200
+
 alternc (1.1+nmu2) stable; urgency=low
 
   * Templating of dovecot and postfix

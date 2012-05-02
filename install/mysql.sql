@@ -245,8 +245,7 @@ CREATE TABLE IF NOT EXISTS `address` (
   `expire_date` datetime DEFAULT NULL, -- Expiration date, used for temporary addresses.
   `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- Update date, for technical usage only.
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `domain_id_idx` (`domain_id`),
-  UNIQUE KEY `address` (`address`)
+  UNIQUE INDEX `fk_domain_id` (`domain_id`,`address`)
 ) COMMENT = 'This is the main address table. It represents an address as in RFC2822';
 
 --

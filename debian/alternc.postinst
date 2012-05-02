@@ -56,7 +56,7 @@ case "$1" in
     fi 
     chown -R vmail:vmail /var/alternc/mail
     chmod u+w /var/alternc/mail
-
+    chmod -R g+w /var/alternc/mail
 
     # build local.sh if it does not exist
     if [ ! -f $CONFIGFILE ]; then

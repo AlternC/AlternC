@@ -62,7 +62,6 @@ Class m_mail_localbox{
     global $db, $err;
     $err->log("localbox","set_localbox");
     $path="mail/";
-    //if(!$db->query("select distinct left(ad.address,1) as letter,d.domaine from address ad,where ad.id = $mail_id ;"));
     if(!$db->query("select distinct left(ad.address,1) as letter,ad.address ,d.domaine from address ad, domaines d where ad.domain_id = d.id  and ad.id = $mail_id order by letter;"));
 
     if(! $db->next_record()){
@@ -70,7 +69,7 @@ Class m_mail_localbox{
     }
     $path="/var/alternc/mail/".$db->f('letter')."/".$db->f('address')."_".$db->f('domaine');
     //FIXME faire un touch de la maildir si dovecot ne sait pas le faire.
-    if(!$db->query("INSERT into mailbox (address_id,path) values ($mail_id,'$path');"));     
+    if(!$db->query("INSERT into mailbox (address_id,path,quota) values ($mail_id,'$path',50);"));     
 
   }
 

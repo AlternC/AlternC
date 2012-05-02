@@ -42,7 +42,7 @@ if [ -e /etc/bind/named.conf ]; then
 fi
 if [ -d /etc/postfix ]; then
     CONFIG_FILES="$CONFIG_FILES etc/postfix/myalias.cf etc/postfix/myrelay.cf
-                  etc/postfix/mydomain.cf etc/postfix/mygid.cf
+                  etc/postfix/mydomain.cf etc/postfix/mygid.cf etc/postfix/myquota.cf
                   etc/postfix/myvirtual.cf etc/postfix/sasl/smtpd.conf"
 fi
 if [ -e /etc/proftpd/proftpd.conf ]; then
@@ -54,6 +54,10 @@ fi
 
 if [ -e /etc/default/saslauthd ]; then
     CONFIG_FILES="$CONFIG_FILES etc/default/saslauthd"
+fi
+
+if [ -e /etc/dovecot/dovecot.conf ]; then
+    CONFIG_FILES="$CONFIG_FILES etc/dovecot/dovecot.conf etc/dovecot/dovecot-sql.conf etc/dovecot/dovecot-dict-quota.conf"
 fi
 
 INSTALLED_CONFIG_TAR="/var/backups/alternc/etc-installed.tar.gz"
@@ -264,7 +268,7 @@ for file in body_checks header_checks; do
 done
 
 # Attribute the correct rights to critical postfix files
-if [ -e /etc/postfix/myalias.cf -o -e /etc/postfix/mydomain.cf -o -e /etc/postfix/mygid.cf -o -e /etc/postfix/myvirtual.cf -o -e /etc/postfix/myrelay.cf ]; then
+if [ -e /etc/postfix/myalias.cf -o -e /etc/postfix/mydomain.cf -o -e /etc/postfix/mygid.cf -o -e /etc/postfix/myvirtual.cf -o -e /etc/postfix/myrelay.cf -o -e /etc/postfix/myquota.cf ]; then
     chown root:postfix /etc/postfix/my*
     chmod 640 /etc/postfix/my*
 fi
