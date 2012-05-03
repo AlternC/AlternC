@@ -39,7 +39,7 @@ def makepolicy(name, method, flags, user, argv):
 # Added using postfix-add-policy script:
 """
     policy = ("""%s unix    -       n       n       -       0     %s
-    %s  user=%s argv=%s
+   flags=%s  user=%s argv=%s
 """ % (name, method, flags, user, argv))
     additions = header + policy
     return (additions)

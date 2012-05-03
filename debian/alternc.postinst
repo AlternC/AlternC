@@ -52,7 +52,7 @@ case "$1" in
        addgroup --gid 1998 vmail
     fi
     if ! getent passwd vmail; then
-       adduser -g vmail -u 1998 vmail -d /var/alternc/mail -m 
+       useradd -g vmail -u 1998 vmail -d /var/alternc/mail -m 
     fi 
     chown -R vmail:vmail /var/alternc/mail
     chmod u+w /var/alternc/mail
