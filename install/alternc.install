@@ -290,9 +290,9 @@ if [ "$slave" = "1" ]; then
 else
     postfix_conf=/etc/alternc/postfix.cf
 fi
-while read line ; do
+grep -v '^\ *#' $postfix_conf |while read line ; do
    postconf -e "$line"
-done < "$postfix_conf"
+done 
 
 # Conviguring delivery used bu Postfix FIXME change script name
 echo `/usr/bin/postfix-add-policy dovecot pipe DRhu vmail:vmail  '/usr/bin/sudo /usr/lib/dovecot/deliver -f ${sender} -d ${recipient} '`

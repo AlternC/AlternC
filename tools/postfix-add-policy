@@ -52,7 +52,7 @@ Example:
     % sudo postfix-policy-add policyd noboby /usr/bin/policyd
 
 Adds the following to master.cf:
-""" + makepolicy('policyd','method','flags', 'nobody', '/usr/bin/policyd') + """
+""" + makepolicy('policyd','method','flags', 'user', '/usr/bin/policyd') + """
 To output this usage message:
     % postfix-add-policy
 """
@@ -89,7 +89,7 @@ if __name__ == '__main__':
             shutil.copy2('/etc/postfix/master.cf', \
                 '/etc/postfix/master.cf.working')
             # Add stuff in
-            stuff = makepolicy(policyname, user, method, flags, argv)
+            stuff = makepolicy(policyname, method, flags, user, argv)
             # Append stuff to the working copy:
 
             newmaster = open('/etc/postfix/master.cf.working', mode='a')

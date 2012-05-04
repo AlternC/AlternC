@@ -1,3 +1,4 @@
+# Postfix Configuration options
 # Used by alternc.install with postconf
 home_mailbox = Maildir/
 smtpd_banner = $myhostname ESMTP
@@ -5,6 +6,7 @@ header_checks = regexp:/etc/postfix/header_checks
 body_checks = regexp:/etc/postfix/body_checks
 local_destination_concurrency_limit = 8
 default_destination_concurrency_limit = 10
+# TLS options
 smtpd_use_tls = yes
 smtpd_tls_dcert_file = /etc/alternc/apache.pem
 smtpd_tls_dkey_file = $smtpd_tls_dcert_file
@@ -14,16 +16,20 @@ smtpd_tls_cert_file =  $smtpd_tls_dcert_file
 smtpd_tls_loglevel = 0
 smtpd_tls_received_header = yes
 smtpd_tls_session_cache_timeout = 3600s
-smtp_use_tls = yes
 smtp_tls_dcert_file = $smtpd_tls_dcert_file
 smtp_tls_dkey_file = $smtpd_tls_dcert_file
 smtp_tls_CApath = $smtpd_tls_CApath
 smtpd_tls_auth_only = yes
+#SASL options
 smtpd_sasl_auth_enable = yes
 smtpd_sasl_local_domain = postfix
 smtpd_sasl_security_options = noanonymous
 enable_sasl_authentification = yes
 broken_sasl_auth_clients = yes
+smtpd_sasl_type=dovecot
+smtpd_sasl_path=private/auth
+smtpd_sasl_auth_enable=yes
+#Virtual Maping
 alias_maps = hash:/etc/aliases
 alias_database = hash:/etc/aliases
 virtual_alias_maps = proxy:mysql:/etc/postfix/myalias.cf
