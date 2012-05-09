@@ -340,6 +340,7 @@ bureau/class/m_mail_alias.php -text
 bureau/class/m_mail_jabber.php -text
 bureau/class/m_mail_localbox.php -text
 bureau/class/m_mail_redirection.php -text
+bureau/class/m_mail_squirrelmail.php -text
 bureau/class/m_mem.php -text
 bureau/class/m_mysql.php -text
 bureau/class/m_quota.php -text

@@ -19,7 +19,7 @@ smtpd_tls_session_cache_timeout = 3600s
 smtp_tls_dcert_file = $smtpd_tls_dcert_file
 smtp_tls_dkey_file = $smtpd_tls_dcert_file
 smtp_tls_CApath = $smtpd_tls_CApath
-smtpd_tls_auth_only = yes
+smtpd_tls_auth_only = no
 #SASL options
 smtpd_sasl_auth_enable = yes
 smtpd_sasl_local_domain = postfix

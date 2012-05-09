@@ -65,7 +65,9 @@ Class m_mail_jabber{
     $return = array (
         "label"         => "jabberdemo",      // an internal label 
         "short_desc"    => _("Jabber Demo"),  // A human short description
+        "class"         => "mail_jabber",
         "human_desc"    => _("This is just a demo.<br/>Look at m_mail_jabber.php"), // A human long description
+        "form_param"  => Array($mail_id),
         "url"           => "javascript:alert('Ici un renvoie vers le formulaire adequat de cette entrée.');", // The URL to go
         "pass_required" => true, 	            // This feature require the mail to have a global password ?
         "advanced"      => $this->advanced,   // Is this an advanced feature ?

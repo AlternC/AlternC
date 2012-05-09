@@ -59,27 +59,34 @@ Class m_mail_localbox{
    * @param integer $mail_id
    */
   function set_localbox($mail_id){
-    global $db, $err;
-    $err->log("localbox","set_localbox");
+    global $db, $err, $hooks;
+    $err->log("localbox","set_localbox!!!!!!!!");
     $path="mail/";
     if(!$db->query("select distinct left(ad.address,1) as letter,ad.address ,d.domaine from address ad, domaines d where ad.domain_id = d.id  and ad.id = $mail_id order by letter;"));
 
     if(! $db->next_record()){
         return null;
     }
+    //FIXME passer par un hooks pour squirel
+		$hooks->invoke('hooks_squirrelmail_init',(array($db->f('address'),$db->f('domaine') )));   
     $path="/var/alternc/mail/".$db->f('letter')."/".$db->f('address')."_".$db->f('domaine');
-    //FIXME faire un touch de la maildir si dovecot ne sait pas le faire.
     if(!$db->query("INSERT into mailbox (address_id,path,quota) values ($mail_id,'$path',50);"));     
-
+	
   }
 
   /*
-   * Set a localbox
+   * Unset a localbox
    * @param integer $mail_id
    */
   function unset_localbox($mail_id){
-    global $db, $err;
-    $err->log("localbox","set_localbox");
+    global $db, $err,$hooks;
+    $err->log("localbox","unset_localbox");
+    if(!$db->query("select address,domaine from address,domaines where address.domain_id=domaines.id and address.id=$mail_id   ;"));
+
+    if(! $db->next_record()){
+        return null;
+    }
+		$hooks->invoke('hooks_squirrelmail_delete',(array($db->f('address'),$db->f('domaine') )));   
     if(!$db->query("DELETE from  mailbox where address_id=$mail_id;"));     
 
   }

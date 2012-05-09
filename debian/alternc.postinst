@@ -240,8 +240,11 @@ EOF
 
     # Update l18n files
     /usr/share/alternc/install/dopo.sh
-		
-		#sudo stuff allowing alterncpanel to use quota
+
+	  #squirrelmail fix		
+		chown -R :alterncpanel /var/lib/squirrelmail/data
+		chmod -R g+w /var/lib/squirrelmail
+				#sudo stuff allowing alterncpanel to use quota
 		if [ -d /etc/sudoers.d ]; then
 			cp /etc/alternc/alternc-sudoers /etc/sudoers.d/alternc-sudoers
 			chmod 0440 /etc/sudoers.d/alternc-sudoers
@@ -249,7 +252,7 @@ EOF
 			echo "running an older version of sudo"
 			#FIXME
 			echo "copy content of /usr/share/doc/examples/example.sudoers into /etc/sudoers.d for to run properly"
-	  fi
+	 fi
 
     # important: postinst gele sans ca
     db_stop

@@ -184,7 +184,7 @@ class m_quota {
         echo "quota set :::::ciud: $cuid :::: size: $size :::: \n ";
       // Now we check that the value has been written properly : 
       exec("/usr/lib/alternc/quota_get ".$cuid,$a);
-        echo "quota get :::::ciud: $cuid :::: size: $size :::: a?: $a ";
+	print_r($a);
     if ($size!=$a[1]) {
 	$err->raise("quota",1);
 	return false;
