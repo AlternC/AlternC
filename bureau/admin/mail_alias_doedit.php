@@ -28,7 +28,7 @@
 */
 require_once("../class/config.php");
 $fields = array (
-	"alias" => array ("request", "string",0),
+	"mail_arg" => array ("request", "string",0),
 	"mail_id" => array ("request", "integer",0),
 	"domain" => array ("request", "string",0),
 	"address_full" => array ("request", "string",0),
@@ -38,12 +38,12 @@ $fields = array (
 getFields($fields);
 
 $alias_retour=array ();
-$alias_retour=$mail->create($dom_id,$alias);
+$alias_retour=$mail->create($dom_id,$mail_arg);
 //setting up the alias.
 if(!$mail_alias->setalias($alias_retour["mail_id"],$address_full)){
 //if fails redirect to creation with error message.
-$error=sprintf(_("Alias: %s already created"), $alias);
-include("mail_alias_create.php");
+$error=sprintf(_("Alias: %s already created"), $mail_arg);
+include("mail_alias_create.inc.php");
 }else{
 //redirection to the properties list.
 header ("Location: mail_properties.php?mail_id=$mail_id");

@@ -51,8 +51,7 @@ if(isset($is_local) && intval($is_local) == 1){
 	//if user chose yes to localbox
 	if($local == 1){
 		$error = _("Already Activated");
-		include ("mail_edit.php");
-		exit();
+		header ("Location: /mail_properties.php?mail_id=$mail_id");
 	}else{
 		$mail_localbox->unset_localbox($mail_id);
 		header ("Location: /mail_properties.php?mail_id=$mail_id");
@@ -60,9 +59,8 @@ if(isset($is_local) && intval($is_local) == 1){
 }elseif( intval($is_local) == 0 ){
 
 	if($local == 0){
-		$error = _("Already Activated");
-		include ("mail_edit.php");
-		exit();
+		$error = _("Already disactivated");
+		header ("Location: /mail_properties.php?mail_id=$mail_id");
 	}else{
 		//echo "processing mail to localbox";
 		$mail_localbox->set_localbox($mail_id);

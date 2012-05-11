@@ -75,7 +75,8 @@ Class m_mail_alias{
   function form($mail_id, $edit_id) {
     global $mail,$err;
     if ($edit_id) {
-      echo "<a href='mail_redirection_edit.php?mail_id=$edit_id'>";__("Edit");echo "</a>";
+      //echo "<a href='mail_redirection_edit.inc.php?mail_id=$edit_id'>";__("Edit");echo "</a>";
+      echo "<a href='mail_properties.php?mail_id=$edit_id'>";__("Edit");echo "</a>";
     } else {
       include('mail_alias_create.inc.php');
     }
