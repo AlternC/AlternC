@@ -47,7 +47,7 @@ if (!$quota->cancreate("mysql_users")) {
 <hr id="topbar"/>
 <br />
 <?php
-	if ($error) {
+	if (isset($error) && $error) {
 		echo "<p class=\"error\">$error</p>";
 		if ($fatal) {
 ?>

@@ -93,7 +93,7 @@ for($i=0;$i<count($r);$i++) {
 <table class="tedit">
 		<tr><th><?php __("Username"); ?></th><td><code><?php echo $mem->user["login"]; ?></code></td></tr>
 		<tr><th><label for="pass"><?php __("Password"); ?></label></th><td><code><input class="int" type="password" name="pass" id="pass" value="" /></code></td></tr>
-		<tr><th><?php __("SQL Server"); ?></th><td><code><?php echo $mysql->server; ?></code></td></tr>
+		<tr><th><?php __("SQL Server"); ?></th><td><code><?php echo $L_MYSQL_HOST; ?></code></td></tr>
 		<tr><th><?php __("Database"); ?></th><td><code><?php echo $mem->user["login"]; ?></code></td></tr>
 	<tr class="trbtn"><td colspan="2"><input type="submit" class="inb" name="submit" value="<?php __("Create my main database"); ?>" /></td></tr>
 </table>

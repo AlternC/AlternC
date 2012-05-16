@@ -1224,8 +1224,6 @@ EOF;
 
     if (!$pol["allowlogin"]) {
       // We do misc check on password versus login : 
-      $l2=str_replace("_","@",$l2);
-      $l2=str_replace(".","@",$l2);
       $logins=explode("@",$login);
       $logins[]=$login;
       foreach($logins as $l) {

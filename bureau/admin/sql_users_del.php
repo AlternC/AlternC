@@ -28,8 +28,10 @@
  ----------------------------------------------------------------------
 */
 require_once("../class/config.php");
-
-if ($confirm=="y") {
+if(!isset($error)){
+	$error="";
+}
+if (isset($confirm) && ($confirm=="y")) {
   reset($_POST);
   while (list($key,$val)=each($_POST)) {
     if (substr($key,0,4)=="del_") {

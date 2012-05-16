@@ -40,7 +40,7 @@ if (!$quota->cancreate("ftp")) {
 <hr id="topbar"/>
 <br />
 <?php
-	if ($error) {
+	if (isset($error) && $error) {
 		echo "<p class=\"error\">$error</p>";
 		if ($fatal) {
 		  include_once("foot.php");

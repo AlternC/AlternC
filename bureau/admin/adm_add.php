@@ -39,6 +39,13 @@ if (!$admin->enabled) {
 
 $fields = array (
 	"canpass"   => array ("request", "integer", 1),
+	"login"   => array ("request", "string", null),
+	"pass"   => array ("request", "string", null),
+	"passconf"   => array ("request", "string", null),
+	"notes"   => array ("request", "string", null),
+	"nom"   => array ("request", "string", null),
+	"prenom"   => array ("request", "string", null),
+	"nmail"   => array ("request", "string", null),
 );
 getFields($fields);
 
@@ -47,7 +54,7 @@ getFields($fields);
 <hr id="topbar"/>
 <br />
 <?php
-if ($error) {
+if (isset($error) && $error) {
 	echo "<p class=\"error\">$error</p>";
 }
 ?>
@@ -73,7 +80,7 @@ if ($error) {
 </tr>
 <tr>
        <th><label for="notes"><?php __("Notes"); ?></label></th>
-       <td><textarea name="notes" id="notes" class="int" cols="32" rows="5"><?php echo $notes; ?></textarea></td>
+       <td><textarea name="notes" id="notes" class="int" cols="32" rows="5"><?php  ehe($notes); ?></textarea></td>
 </tr>
 <tr>
         	<th><label for="nom"><?php echo _("Surname")."</label> / <label for=\"prenom\">"._("First Name"); ?></label></th>

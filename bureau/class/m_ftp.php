@@ -119,18 +119,19 @@ class m_ftp {
     $db->query("SELECT id, name, homedir FROM ftpusers WHERE uid='$cuid' AND id='$id';");
     if ($db->num_rows()) {
       $db->next_record();
-      $tr=preg_match("/^\/var\/alternc\/html\/.\/[^\/]*\/(.*)$/", $db->f("homedir"),$match);                  /*"*/
+      $tr=preg_match("/^\/var\/alternc\/html\/.\/[^\/]*\/(.*)$/", $db->f("homedir"),$match);
       $lg=explode("_",$db->f("name"));
-      if (!is_array($lg)) {
+      if ((!is_array($lg)) || (count($lg)!=2)) {
 	      $lg[0]=$db->f("name");
 	      $lg[1]="";
       }
-      return array(
+      $r[]=array(
 		   "id"=>$db->f("id"),
 		   "prefixe"=> $lg[0],
 		   "login"=>$lg[1],
 		   "dir"=>$match[1]
 		   );
+	return $r;
     } else {
       $err->raise("ftp",2);
       return false;
