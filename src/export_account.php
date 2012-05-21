@@ -72,14 +72,14 @@ $conf_user=$export->export_conf();
 $file_conf=$dir."dump_conf_".date("H:i:s");
 echo $file_conf;
 $file=fopen($file_conf."dump","ab");
-fputs($file,"dump of ::".$mem->user["login"]."\n");
+fputs($file,"<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?\> \n");
 
-fputs($file,"alternc version:".$L_VERSION."\n\n");
-fputs($file,"<html><body>");
+fputs($file,"<version>:".$L_VERSION."</version>\n");
+fputs($file,"<user>".$mem->user["login"]."</user>\n");
 foreach($conf_user as $string){
     fputs($file,$string);
 }
-fputs($file,"</html></body>");
+//fputs($file,"</html></body>");
 fclose($file);
 
 

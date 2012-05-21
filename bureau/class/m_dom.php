@@ -1289,41 +1289,43 @@ class m_dom {
     global $db,$err;
     $err->log("dom","export");
     $this->enum_domains();
-    $str="<table border=\"1\"><caption>Domaines</caption><tr><th>Domaine</th><th>DNS</th><th>MX</th><th>mail</th></tr> \n";
     foreach ($this->domains as $d) {
-        $str.="<tr>";
-        $str.="<td>".$d."</td>";
+        $str="  <domaines>\n";
+        $str.="   <nom>".$d."</nom>\n";
         $this->lock();
         $s=$this->get_domain_all($d);
         $this->unlock();
-        if(empty($s[dns])){
+        if(empty($s["dns"])){
             $s[dns]="non"; 
+        }else{
+            $s[dns]="oui";
         }
-        $str.=" <td>".$s[dns]."</td>\n";
+        $str.="   <dns>".$s[dns]."</dns>\n";
         
         if(empty($s[mx])){
             $s[mx]="non"; 
+        }else{
+            $s[mx]="oui";
         }
-        $str.="<td>".$s[mx]."</td>\n";
+
+        $str.="   <mx>".$s[mx]."</mx>\n";
 
         if(empty($s[mail])){
             $s[mail]="non"; 
         }
-        $str.="<td>".$s[mail]."</td>\n";
+        $str.="   <mail>".$s[mail]."</mail>\n";
         if (is_array($s[sub])) {
-            $str.="<table border=\"1\"><th>nom sous domaine</th><th>destination</th><th>type</th><tr>";
-
             foreach ($s[sub] as $sub) {
-                  $str.="<tr><td>".$sub["enable"]." </td>";
-                  $str.="<td>".$sub["dest"]." </td>";
-                  $str.="<td>".$sub["type"]." </td></tr>";
+                  $str.="     <subdomain>\n";
+                  $str.="       <enabled>".$sub["enable"]." </enabled>\n";
+                  $str.="       <destination>".$sub["dest"]." </destination>\n";
+                  $str.="       <type>".$sub["type"]." </type>\n";
+                  $str.="     </subdomain>\n";
             }
 
-            $str.="</tr>\n";
         }
-        $str.="</table>\n";
+        $str.=" </domaines>\n";
     }
-    $str.="</table>\n";
     return $str;
   }
 

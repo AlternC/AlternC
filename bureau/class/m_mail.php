@@ -105,7 +105,6 @@ class m_mail {
     while($db->next_record()){
       $this->enum_domain_mails[]=$db->Record;
     }
-    
     return $this->enum_domain_mails;
   }
 
@@ -195,7 +194,7 @@ class m_mail {
   
     foreach($return2 as $tab => $v){
       if($v["state"] != true){
-        print_r($tab);
+        //print_r($tab);
         $return["state"]=false;
         $return["error"]="erreur lors du check de la classe $tab";
         return $return; 
@@ -383,7 +382,52 @@ class m_mail {
 
   }
 
-
+/**
+* Export the mail information of an account 
+* @return: str, chaine de caractere containing every usefull mail informations.
+*
+*/
+function alternc_export_conf() {
+     global $db,$err,$mail_localbox;
+     $err->log("mail","export");
+     $domain=$this->enum_domains();
+     $str="<mail>\n";
+     $onepop=false;
+     foreach ($domain as $d) {
+       $str.="  <domain>\n    <name>".xml_entities($d["domaine"])."</name>\n";
+       $s=$this->enum_domain_mails($d["id"]);
+       if (count($s)) {
+         while (list($key,$val)=each($s)){
+            $test=$this->mail_get_details($val['id']);
+           $str.="    <address>\n";
+           $str.="      <name>".xml_entities($val["address"])."</name>\n";
+           $str.="      <enabled>".xml_entities($val["enabled"])."</enabled>\n";
+           if(is_array($test["is_local"])){
+             $str.="      <islocal>oui</islocal>\n";
+             $str.="      <path>".$test["is_local"]["path"]."</path>\n";
+             $str.="      <quota>".$test["is_local"]["quota"]."</quota>\n";
+           }else{
+             $str.="      <islocal>non</islocal>\n";
+          }
+          if(!empty($test["recipients"])){
+              foreach($test["recipients"] as $recip){
+                $str.="      <recipients>".$recip."<recipients>\n";
+              }
+          }
+          if(!empty($test["alias"])){
+              foreach($test["alias"] as $alias){
+                $str.="      <alias>".$alias."<alias>\n";
+              }
+          }
+       $str.="    </address>\n";
+     }
+       }     
+       $str.="  </domain>\n";
+     }
+     $str.="</mail>\n";
+     return $str;
+   }
+ 
 
 } /* Class m_mail */
 

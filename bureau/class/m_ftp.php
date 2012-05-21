@@ -384,16 +384,13 @@ class m_ftp {
     global $db,$err;
     $err->log("ftp","export");
     $f=$this->get_list();
-    $str="<table border=\"1\"><caption> FTP </caption>\n";
+    $str="  <ftp>";
     foreach ($f as $d=>$v) {
-      $str.="  <tr>\n";
-      $str.="    <td>".$v["id"]."</td>\n";
-      $str.="    <td>".($v["encrypted_password"])."</td>\n";
-      $str.="    <td>".($v["login"])."</td>\n";
-      $str.="    <td>".($v["dir"])."<td>\n";
-      $str.="  </tr>\n";
+      $str.="   <login>".($v["login"])."</login>\n";
+      $str.="   <password>".($v["encrypted_password"])."</password>\n";
+      $str.="   <directory>".($v["dir"])."<directory>\n";
     }
-    $str.="</table>\n";
+    $str.=" </ftp>\n";
     return $str;
   }
   

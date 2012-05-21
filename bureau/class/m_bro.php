@@ -930,18 +930,17 @@ function alternc_export_conf() {
     global $db,$err;
     $err->log("bro","export_conf");
     $str="<table border=\"1\"><caption> Browser </caption>\n";
+    $str="  <browser>\n";
     $pref=$this->GetPrefs();
     
     $i=1;
     foreach ($pref as $k=>$v) {
          if (($i % 2)==0){
-            $str.="  <tr>\n";
-            $str.="  <td>".$k."</td><td>".$v."</td>\n"; 
-            $str.="  </tr>\n";
-       } 
+            $str.="   <$k>$v</$k>\n"; 
+       }
         $i++;
     }
-    $str.="</table>\n";
+    $str.=" </browser>\n";
     
     return $str;
   }

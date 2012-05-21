@@ -768,28 +768,22 @@ class m_mysql {
     global $db,$err,$cuid;
     $err->log("mysql","export");
     $db->query("SELECT login, pass, db, bck_mode, bck_dir, bck_history, bck_gzip FROM db WHERE uid='$cuid';");
-    $str.="<table border=\"1\"><caption>MyQSL</caption><th>login</th><th>pass</th>";
     if ($db->next_record()) {
-      $str.="<tr>\n";
-      $str.="  <td>".$db->Record["login"]."</td>";
-      $str.="  <td>".$db->Record["pass"]."</td>";
-      $str.="</tr>\n";
+      $str.=" <sql>\n";
+      $str.="   <login>".$db->Record["login"]."</login>\n";
+      $str.="   <pass>".$db->Record["pass"]."</pass>\n";
       do {
 	$filename=$tmpdir."/mysql.".$db->Record["db"].".sql.gz";
-	$str.="  <tr>\n";
-	$str.="    <td>".($db->Record["db"])."</td>\n";
-	$str.="    <td>".($db->Record["pass"])."</td>\n";
+	$str.="   <database>".($db->Record["db"])."</database>\n";
+	$str.="   <password>".($db->Record["pass"])."</password>\n";
 	if ($s["bck_mode"]!=0) {
-	  $str.="    <table>\n";
-	  $str.="      <td>".($db->Record["bck_mode"])."</td>\n";
-	  $str.="      <td>".($db->Record["bck_dir"])."</td>\n";
-	  $str.="      <td>".($db->Record["bck_history"])."</td>\n";
-	  $str.="      <td>".($db->Record["bck_gzip"])."</td>\n";
-	  $str.="    </table>\n";
+	  $str.="   <backup-mode>".($db->Record["bck_mode"])."</backup-mode>\n";
+	  $str.="   <backup-dir>".($db->Record["bck_dir"])."</backup-dir>\n";
+	  $str.="   <backup-history>".($db->Record["bck_history"])."</backup-history>\n";
+	  $str.="   <backup-gzip>".($db->Record["bck_gzip"])."</backup-gzip>\n";
 	}
-	$str.="  </tr>\n";
       } while ($db->next_record());
-      $str.="</table>\n";
+      $str.=" </sql>\n";
     }
     return $str;
   }
@@ -815,8 +809,6 @@ function alternc_export_data ($dir){
 	    $filename=$dir."mysql.".$db->Record["db"].".".date("H:i:s").".sql.gz";
 	    exec ("/usr/bin/mysqldump --defaults-file=/etc/alternc/my.cnf --add-drop-table --allow-keywords -Q -f -q -a -e ".escapeshellarg($db->Record["db"])." |/bin/gzip >".escapeshellarg($filename));
     }
-
-
 }
 
 

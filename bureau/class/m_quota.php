@@ -369,18 +369,19 @@ class m_quota {
    * @access private
    * EXPERIMENTAL 'sid' function ;) 
    */
-  function alternc_export_conf($tmpdir) {
+  function alternc_export_conf() {
     global $db,$err;
     $err->log("quota","export");
-    $str="<table border=\"1\" ><caption>QUOTA</caption>\n";
+    $str="  <quota>";
 
     $q=$this->getquota();
     foreach ($q as $k=>$v) {
-      $str.="  <tr>\n    <td>".($k)."</td>\n";
-      $str.="    <td>".($v[u])."</td>\n  \n";
-      $str.="    <td>".($v[t])."</td>\n  </tr>\n";
+      $str.=" <$k>\n";
+      $str.="   <used>".($v["u"])."</used>\n";
+      $str.="   <total>".($v["t"])."</total>\n";
+      $str.=" </$k>\n";
     }
-    $str.="</table>\n";
+    $str.="</quota>\n";
     return $str;
   }
 
