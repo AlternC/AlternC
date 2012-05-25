@@ -104,23 +104,24 @@ class m_hta {
    * Returns the list of all user folder currently protected by a .htpasswd file
    * @return array Array containing user folder list
    */
-  function ListDir() {
-    global $err,$mem,$L_ALTERNC_LOC;
-    $err->log("hta","listdir");
-    $sortie=array();
-    $absolute="$L_ALTERNC_LOC/html/".substr($mem->user["login"],0,1)."/".$mem->user["login"];
-    exec("find $absolute -name .htpasswd | sort", $sortie);
-    if (!count($sortie)) {
-      $err->raise("hta",4);
-      return false;
-    }
-    for ($i=0;$i<count($sortie);$i++){
-      preg_match("/^".addslashes("$L_ALTERNC_LOC/html/")."\/.\/[^\/]*\/(.*)\/\.htpasswd/", $sortie[$i], $matches);
-      $r[$i]=$matches[1]."/";
-    }
-    return $r;
-  }
 
+  function ListDir(){
+	  global$err,$mem,$L_ALTERNC_LOC;
+	  $err->log("hta","listdir");
+	  $sortie=array();
+	  $absolute="$L_ALTERNC_LOC/html/".substr($mem->user["login"],0,1)."/".$mem->user["login"];
+	  exec("find $absolute -name .htpasswd|sort",$sortie);
+	  if(!count($sortie)){
+		  $err->raise("hta",4);
+		  return false;
+	  }
+	  $pattern="/^".preg_quote($L_ALTERNC_LOC,"/")."\/html\/.\/[^\/]*\/(.*)\/\.htpasswd/";
+	  	  for($i=0;$i<count($sortie);$i++){
+		  preg_match($pattern,$sortie[$i],$matches);
+		  $r[$i]=$matches[1]."/";
+	  }
+	  return $r;
+  }
 
   /*---------------------------------------------------------------------------*/
   /**
@@ -191,11 +192,11 @@ class m_hta {
       $err->raise("hta",8,$dir);
       return false;
     }
-    if (!unlink("$dir/.htaccess")) {
+    if (!@unlink("$dir/.htaccess")) {
       $err->raise("hta",5,$dir);
       return false;
     }
-    if (!unlink("$dir/.htpasswd")) {
+    if (!@unlink("$dir/.htpasswd")) {
       $err->raise("hta",6,$dir);
       return false;
     }
@@ -314,7 +315,7 @@ class m_hta {
 
     // Check this password against the password policy using common API : 
     if (is_callable(array($admin,"checkPolicy"))) {
-      if (!$admin->checkPolicy("hta",$user,$password)) {
+      if (!$admin->checkPolicy("hta",$user,$newpass)) {
 	return false; // The error has been raised by checkPolicy()
       }
     }
