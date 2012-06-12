@@ -6,11 +6,11 @@ require_once("/var/alternc/bureau/class/config_nochk.php");
 @alternc_shutdown();
 
 echo "---------------------------\n Generating size-cache for mail accounts\n\n";
-$r=mysql_query("SELECT * FROM mail_users WHERE alias NOT LIKE '%@%' AND alias LIKE '%\_%';");
+$r=mysql_query("SELECT * FROM dovecot_view ;");
 while ($c=mysql_fetch_array($r)) {
-  echo $c["alias"]; flush();
-  $size=exec("/usr/lib/alternc/du.pl ".$c["path"]);
-  mysql_query("REPLACE INTO size_mail SET alias='".addslashes($c["alias"])."',size='$size';");
+  echo $c["user"]; flush();
+  $size=exec("/usr/lib/alternc/du.pl ".$c["userdb_home"]);
+  mysql_query("REPLACE INTO size_mail SET alias='".addslashes($c["user"])."',size='$size';");
   echo " done ($size KB)\n";  flush();
 }
 

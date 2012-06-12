@@ -52,8 +52,8 @@ if (mysql_errno()) {
 }
 while ($c=mysql_fetch_array($r)) {
 	$s=mysql_query("SELECT name FROM quotas WHERE uid='$c[uid]' AND name='$name';");
-	if (!mysql_num_rows($s)) {
-		mysql_query("INSERT INTO quotas (uid,name,total) VALUES ('$c[uid]','$name','$quota');");
+	if (mysql_num_rows($s)) {
+		mysql_query("INSERT INTO quotas (uid,name,total) VALUES ('$c[uid]','$name','$quota') on DUPLICATE KEY UPDATE total=$quota;");
 	}
 }
 

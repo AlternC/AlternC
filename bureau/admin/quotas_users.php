@@ -280,10 +280,12 @@ if ($sd)     echo "&nbsp;&nbsp;&nbsp;-&nbsp;".$d["domaine"]."<br />\n";
   // Espace WEB
   list($ws)=@mysql_fetch_array(mysql_query("SELECT size FROM size_web WHERE uid='".$c["uid"]."';"));
 
-	if ($totalweb)
+	if (isset($totalweb) && $totalweb){
 		$pc=intval(100*$ws/$totalweb);
-	else
+	}
+	else{
 		$pc=0;
+	}
 
 if ($mode==0) {
   echo sprintf("%.1f", $ws / 1024)."&nbsp;"._("MB");

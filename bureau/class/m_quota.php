@@ -181,10 +181,8 @@ class m_quota {
     if (isset($this->disk[$ressource])) {
       // It's a disk resource, update it with shell command
       exec("/usr/lib/alternc/quota_edit $cuid $size");
-        echo "quota set :::::ciud: $cuid :::: size: $size :::: \n ";
       // Now we check that the value has been written properly : 
-      exec("/usr/lib/alternc/quota_get ".$cuid,$a);
-	print_r($a);
+      exec("usr/lib/alternc/quota_get $cuid",$a);
     if ($size!=$a[1]) {
 	$err->raise("quota",1);
 	return false;

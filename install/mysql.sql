@@ -327,6 +327,7 @@ CREATE TABLE IF NOT EXISTS defquotas (
 # Ces quotas par defaut sont redefinissables dans l`interface web
 
 INSERT IGNORE INTO defquotas (quota,value) VALUES ('dom',1);
+INSERT IGNORE INTO defquotas (quota,value) VALUES ('web',51200);
 INSERT IGNORE INTO defquotas (quota,value) VALUES ('mail',10);
 INSERT IGNORE INTO defquotas (quota,value) VALUES ('ftp',2);
 INSERT IGNORE INTO defquotas (quota,value) VALUES ('stats',1);
