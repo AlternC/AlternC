@@ -509,7 +509,7 @@ class m_bro {
    * @returns the path where the file resides or false if upload failed
    */
   function UploadFile($R) {
-    global $_FILES,$err;
+    global $_FILES,$err,$cuid;
     $absolute=$this->convertabsolute($R,0);
     if (!$absolute) {
       $err->raise("bro",1);
@@ -521,7 +521,8 @@ class m_bro {
           @touch($absolute."/".$_FILES['userfile']['name']);
         }
         if (@move_uploaded_file($_FILES['userfile']['tmp_name'], $absolute."/".$_FILES['userfile']['name'])) {
-	  return $absolute."/".$_FILES['userfile']['name'];
+			exec("sudo /usr/lib/alternc/fixperms.sh -u ".$cuid." -f ".$absolute."/".$_FILES['userfile']['name']);
+			return $absolute."/".$_FILES['userfile']['name'];
 	} else {
 	  $err->raise("bro",3);
 	  return false;

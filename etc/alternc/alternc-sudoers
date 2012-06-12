@@ -1,2 +1,2 @@
-alterncpanel	ALL = NOPASSWD : /usr/bin/quota, /usr/sbin/setquota
+alterncpanel	ALL = NOPASSWD : /usr/bin/quota, /usr/sbin/setquota, /usr/lib/alternc/fixperms.sh
 vmail		ALL = NOPASSWD : /usr/lib/dovecot/deliver

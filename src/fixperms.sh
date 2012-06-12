@@ -31,18 +31,33 @@
 #Default Query : fixperms for all account
 query="SELECT uid,login FROM membres"
 sub_dir=""
-
+file=""
 #Two optionals argument
 # -l string : a specific login to fix
-# -u interger : a specifi uid to fix
-while getopts "l:u:d:" optname
+# -u interger : a specific uid to fix
+# -f interger : a specific file to fix according to a given uid 
+
+while getopts "l:u:f:d:" optname
   do
     case "$optname" in
       "l")
-        query="SELECT uid,login FROM membres WHERE login LIKE '$OPTARG'"
+		if [[ "$OPTARG" =~ ^[a-zA-Z0-9_]+$ ]] ; then
+        	query="SELECT uid,login FROM membres WHERE login LIKE '$OPTARG'"
+		else	
+			echo "Bad login provided"
+			exit
+		fi
         ;;
       "u")
-        query="SELECT uid,login FROM membres WHERE uid LIKE '$OPTARG'"
+		if [[ "$OPTARG" =~ ^[0-9]+$ ]] ; then
+			query="SELECT uid,login FROM membres WHERE uid LIKE '$OPTARG'"
+		else
+			echo "Bad uid provided"
+			exit
+		fi
+        ;;
+      "f")
+		  file="$OPTARG"
         ;;
       "d")
         sub_dir="$OPTARG"
@@ -97,12 +112,31 @@ doone() {
       # Delete existings ACL
       # Set the defaults acl on all the files
       setfacl -b -k -m d:g:alterncpanel:rwx -m d:u:$GID:rw- -m d:g:$GID:rw- \
-                    -m   g:alterncpanel:rwx -m   u:$GID:rw- -m   g:$GID:rw- \
-              -R "$REP"
+                    -Rm   g:alterncpanel:rwx -m   u:$GID:rw- -m   g:$GID:rw- \
+               "$REP"
 
       read GID LOGIN
     done
 }
 
-mysql --defaults-file=/etc/alternc/my.cnf --skip-column-names -B -e "$query" |doone
+fixefile(){
+	read GID LOGIN
+	/usr/bin/setfacl  -bk $file
+	echo "gid: $GID"
+	echo "file: $file"
+	chown $GID:$GID $file
+	chmod 0770 $file
+	/usr/bin/setfacl  -m u:$GID:rw- -m g:$GID:rw- -m g:alterncpanel:rw- -m u:$GID:rw- -m g:$GID:rw- $file
+	echo file ownership and ACLs changed
 
+}
+
+if [[  $file != "" ]]; then
+	if [ -e $file ]; then
+		mysql --defaults-file=/etc/alternc/my.cnf --skip-column-names -B -e "$query" |fixefile
+	else
+		echo "file not found"
+	fi
+else
+	mysql --defaults-file=/etc/alternc/my.cnf --skip-column-names -B -e "$query" |doone
+fi
