@@ -408,7 +408,14 @@ class m_dom {
       if (! is_dir($dest_root . "/". $domshort)) {
         mkdir($dest_root . "/". $domshort);
       }
-      
+
+      if (! is_dir($dest_root . "/tmp")) {
+        mkdir($dest_root . "/tmp");
+      }
+
+	  //on corrige les permissions
+	  exec("sudo /usr/lib/alternc/fixperms.sh -u ".$uid);
+
       // Creation des 3 sous-domaines par défaut : Vide, www et mail
       $this->set_sub_domain($domain, '',     $this->type_url,     'http://www.'.$domain);
       $this->set_sub_domain($domain, 'www',  $this->type_local,   '/'. $domshort);

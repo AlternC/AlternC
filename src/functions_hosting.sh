@@ -59,7 +59,7 @@ host_create() {
     local U_ID=$(get_uid_by_name "$USER")
     local G_ID=$(get_uid_by_name "$USER")
     local user_letter=`print_user_letter "$USER"`
-    local DOCUMENT_ROOT="${HTML_HOME}/${user_letter}/${USER}/$TARGET_DIR"
+    local DOCUMENT_ROOT="${HTML_HOME}/${user_letter}/${USER}$TARGET_DIR"
     local ACCOUNT_ROOT="${HTML_HOME}/${user_letter}/${USER}/"
     local FILE_TARGET="$VHOST_DIR/${user_letter}/$USER/$FQDN.conf"
 
