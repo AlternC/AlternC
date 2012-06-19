@@ -106,13 +106,13 @@ doone() {
       REP="$ALTERNC_LOC/html/$INITIALE/$LOGIN/$sub_dir"
 
       # Set the file readable only for the AlternC User
-      chown -R $GID:$GID "$REP"
+      chown -R alterncpanel:$GID "$REP"
       chmod 2770 -R "$REP"
 
       # Delete existings ACL
       # Set the defaults acl on all the files
-      setfacl -b -k -m d:g:alterncpanel:rwx -m d:u:$GID:rw- -m d:g:$GID:rw- \
-                    -Rm   g:alterncpanel:rwx -m   u:$GID:rw- -m   g:$GID:rw- \
+      setfacl -b -k -n -R -m d:g:alterncpanel:rwx -m d:u::rwx -m d:g::rwx -m d:u:$GID:rwx -m d:g:$GID:rwx -m d:o::--- -m d:mask:rwx\
+                    -Rm   g:alterncpanel:rwx -m u:$GID:rwx -m g:$GID:rwx -m mask:rwx\
                "$REP"
 
       read GID LOGIN
@@ -124,7 +124,7 @@ fixefile(){
 	/usr/bin/setfacl  -bk $file
 	echo "gid: $GID"
 	echo "file: $file"
-	chown $GID:$GID $file
+	chown alterncpanel:$GID $file
 	chmod 0770 $file
 	/usr/bin/setfacl  -m u:$GID:rw- -m g:$GID:rw- -m g:alterncpanel:rw- -m u:$GID:rw- -m g:$GID:rw- $file
 	echo file ownership and ACLs changed

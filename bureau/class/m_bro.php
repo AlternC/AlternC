@@ -471,7 +471,7 @@ class m_bro {
    * @param $verbose boolean shall we 'echo' what we did ?
    * @return boolean TRUE si les fichiers ont t renomms, FALSE si une erreur s'est produite.
    */
-  function ChangePermissions($R,$d,$perm,$verbose=true) {
+  function ChangePermissions($R,$d,$perm,$verbose=false) {
     global $err;
     $absolute=$this->convertabsolute($R,0);
     if (!$absolute) {
@@ -544,7 +544,7 @@ class m_bro {
    */
   function ExtractFile($file, $dest=null)
   {
-    global $err;
+    global $err,$cuid,$mem,$L_ALTERNC_LOC;
     $file = $this->convertabsolute($file,0);
     if (is_null($dest)) {
       $dest = dirname($file);
@@ -556,7 +556,9 @@ class m_bro {
       return 1;
     }
     $file = escapeshellarg($file);
-    $dest = escapeshellarg($dest);
+	$dest = escapeshellarg($dest);
+	$dest_to_fix=str_replace($L_ALTERNC_LOC."/html/".substr($mem->user["login"],0,1)."/".$mem->user["login"],'',$dest);
+	 
     // TODO new version of tar supports `tar xf ...` so there is no
     //     need to specify the compression format
     exec("tar -xf $file -C $dest", $void, $ret);
@@ -574,7 +576,9 @@ class m_bro {
     if ($ret) {
       $err->raise("bro","could not find a way to extract file %s, unsupported format?", $file);
     }
-
+	
+	//fix the perms of the extracted archive
+	exec("sudo /usr/lib/alternc/fixperms.sh -u ".$cuid." -d ".$dest_to_fix);
     return $ret;
   }
 
@@ -712,7 +716,7 @@ class m_bro {
     if (substr($dir,-1)=="/") $dir=substr($dir,0,-1);
     $dir=str_replace("%2F", "/", urlencode($dir));
     $name=urlencode($name);
-    if (!$this->cacheurl["d".$dir]) {
+    if (!@$this->cacheurl["d".$dir]) {
       // On parcours $dir en remontant les /
       $end="";	$beg=$dir;	$tofind=true;
       while ($tofind) {
