@@ -50,14 +50,14 @@ include_once("head.php");
 <hr id="topbar"/>
 <br />
 <?php
-	if ($error) {
+	if (isset($error) && $error) {
 	  echo "<p class=\"error\">$error</p>";
 	}
 
 $c=$admin->listPasswordPolicies();
 //echo "<pre>"; print_r($c); echo "</pre>";
 
-if ($doedit) {
+if (isset($doedit) && $doedit) {
   if (!$c[$doedit]) {
     echo "<p class=\"error\">"._("Policy not found")."</p>";
   } else {

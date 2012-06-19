@@ -46,7 +46,7 @@ if($_POST["action"] == "add") {
   }
   include("adm_defquotas.php");
 } else if($_POST["action"] == "delete") {
-  if($_POST["del_confirm"] == "y"){
+  if(@$_POST["del_confirm"] == "y"){
     if($_POST['type']) {
       if($quota->deltype($_POST['type'])) {
         $error=_("Account type"). " \"$type\" "._("deleted");

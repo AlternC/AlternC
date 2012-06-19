@@ -41,7 +41,7 @@ include_once("head.php");
 <hr id="topbar" />
  <br />
 <?php
-	if ($error) {
+	if (isset($error) && $error) {
 	  echo "<p class=\"error\">$error</p>";
 	}
 
@@ -66,7 +66,6 @@ $db->query("select sd.compte, m.login, sd.domaine, if(length(sub)>0,concat_ws('.
 
 while($db->next_record()) { 
 ++$pair;
-print_r($d);
 ?>
 <tr class="lst<?php echo $pair%2+1 ?>">
     <td><?php echo $db->f('compte');?></td>

@@ -35,11 +35,11 @@ $texte=ssla($texte);
 $R=$bro->convertabsolute($R,1);
 $p=$bro->GetPrefs();
 
-if ($cancel) {
+if (isset($cancel) && $cancel) {
 	include("bro_main.php");
 	exit();
 }
-if ($saveret) {
+if (isset($saveret) && $saveret) {
   if ($bro->Save($editfile,$R,$texte)) {
     $error=sprintf(_("Your file %s has been saved"),$editfile)." (".format_date('%3$d-%2$d-%1$d %4$d:%5$d',date("Y-m-d H:i:s")).")";
   } else {
@@ -48,7 +48,7 @@ if ($saveret) {
   include("bro_main.php");
   exit();
 }
-if ($save) {
+if (isset($save) && $save) {
   if ($bro->Save($editfile,$R,$texte)) {
     $error=sprintf(_("Your file %s has been saved"),$editfile)." (".format_date('%3$d-%2$d-%1$d %4$d:%5$d',date("Y-m-d H:i:s")).")";
   } else {
@@ -60,7 +60,7 @@ include_once("head.php");
 
 ?>
 <p>
-<?php if ($error) echo "<p class=\"error\">$error</p>"; ?>
+<?php if (isset($error) && $error) echo "<p class=\"error\">$error</p>"; ?>
 <?php echo _("File editing")." <code>$R/<b>$editfile</b></code><br />"; ?>
 </p>
 <form action="bro_editor.php" method="post"><br />

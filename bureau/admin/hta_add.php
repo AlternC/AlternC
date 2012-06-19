@@ -38,7 +38,7 @@ include_once("head.php");
 <?php __("Enter the name of the folder you want to protect. It must already exists."); ?>
 </p>
 <?php
-	if ($error) {
+	if (isset($error) && $error) {
 		echo "<p class=\"error\">$error</p>";
 		include_once("foot.php");
 		exit;
@@ -48,7 +48,7 @@ include_once("head.php");
 <table border="1" cellspacing="0" cellpadding="4">
 <tr>
 	<td><label for="dir"><?php __("Folder"); ?></label></td>
-	<td><input type="text" class="int" name="dir" id="dir" value="<?php ehe($dir); ?>" maxlength="255" />
+	<td><input type="text" class="int" name="dir" id="dir" value="<?php (isset($dir)) ? : $dir="";ehe($dir); ?>" maxlength="255" />
 <script type="text/javascript">
 <!--
   document.write("&nbsp;<input type=\"button\" name=\"bff\" onclick=\"browseforfolder('main.dir');\" value=\" <?php __("Choose a folder..."); ?> \" class=\"bff\">");

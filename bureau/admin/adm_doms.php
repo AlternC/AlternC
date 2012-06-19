@@ -39,13 +39,14 @@ include_once ("head.php");
 ?>
 <h3><?php __("Manage installed domains"); ?></h3>
 <?php
-	if ($error) {
+	if (isset($error) && $error) {
 	  echo "<p class=\"error\">$error</p>";
 	}
 
 // List the domains. If the first parameter is true, also check their DNS & other IPs actual parameters.
 // If the second parameter is true, check the domains whatever the dis cache is.
-$forcecheck=($_REQUEST["force"]!="");
+
+$forcecheck=@($_REQUEST["force"]!="");
 $c=$admin->dom_list(true,$forcecheck);
 
 ?>

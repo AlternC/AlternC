@@ -31,7 +31,7 @@ require_once("../class/config.php");
 
 include_once("head.php");
 
-if ($help_setting) {
+if (isset($help_setting) && $help_setting) {
 	$mem->set_help_param($showhelp);
 	$error=_("Your help setting has been updated.");
 }
@@ -39,7 +39,7 @@ if ($help_setting) {
 ?>
 <div align="center"><h3><?php __("Settings of your account"); ?></h3></div>
 <?php
-	if ($error) {
+	if (isset($error) && $error) {
 		echo "<font color=red>$error</font>";
 		include_once("foot.php");
 		exit();
@@ -60,9 +60,9 @@ if (!$mem->user["canpass"]) {
 </p>
 <form method="post" action="mem_passwd.php" name="main" id="main">
 <table border="1" cellspacing="0" cellpadding="4">
-<tr><th><?php __("Old password"); ?></th><td><input type="password" class="int" name="oldpass" value="<?php echo $oldpass; ?>" size="20" maxlength="128" /></td></tr>
-<tr><th><?php __("New password"); ?> (1)</th><td><input type="password" class="int" name="newpass" value="<?php echo $newpass; ?>" size="20" maxlength="60" /></td></tr>
-<tr><th><?php __("New password"); ?> (2)</th><td><input type="password" class="int" name="newpass2" value="<?php echo $newpass2; ?>" size="20" maxlength="61" /></td></tr>
+<tr><th><?php __("Old password"); ?></th><td><input type="password" class="int" name="oldpass" value="<?php isset($oldpass) ? : $oldpass=""; echo $oldpass; ?>" size="20" maxlength="128" /></td></tr>
+<tr><th><?php __("New password"); ?> (1)</th><td><input type="password" class="int" name="newpass" value="<?php isset($newpass) ? : $newpass=""; echo $newpass;  ?>" size="20" maxlength="60" /></td></tr>
+<tr><th><?php __("New password"); ?> (2)</th><td><input type="password" class="int" name="newpass22" value="<?php isset($newpass2) ? : $newpass2=""; echo $newpass2;?>" size="20" maxlength="61" /></td></tr>
 <tr class="trbtn"><td colspan="3"><input type="submit" class="inb" name="submit" value="<?php __("Change my password"); ?>" /></td></tr>
 </table>
 </form>
@@ -74,7 +74,7 @@ if (!$mem->user["canpass"]) {
 		<tr><td colspan="2"><?php __("Change the email of the account"); ?><br />
 		<?php __("help_chg_mail"); ?></td></tr>
 		<tr><th><?php __("Current mailbox"); ?></th><td><big><code><?php echo $mem->user["mail"]; ?></code></big></td></tr>
-		<tr><th><?php __("New mailbox"); ?></th><td><input type="text" class="int" name="newmail" value="<?php echo $newmail; ?>" size="40" maxlength="128" /></td></tr>
+		<tr><th><?php __("New mailbox"); ?></th><td><input type="text" class="int" name="newmail" value="<?php   isset($newmail) ? : $newmail=""; echo $newmail;?>" size="40" maxlength="128" /></td></tr>
 		<tr class="trbtn"><td colspan="3"><input type="submit" class="inb" name="submit" value="<?php __("Change my email address"); ?>" /></td></tr>
 	</table>
 </form>

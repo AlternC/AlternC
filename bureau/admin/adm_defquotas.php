@@ -43,7 +43,7 @@ include_once ("head.php");
 <hr id="topbar"/>
 <br />
 <?php
-	if ($error) {
+	if (isset($error) && $error) {
 	  echo "<p class=\"error\">$error</p>";
 	}
 
@@ -93,11 +93,13 @@ foreach($qlist as $type => $q) {
 foreach($q as $name => $value) {
 	$key = $type . ":" . $name;
 	$col=3-$col;
+	//TODO fix notice
 ?>
 
 <tr class="lst<?php echo $col; ?>">
-<td><label for="<?php echo $key; ?>"><?php echo $qarray[$name]; ?></label></td>
+<td><label for="<?php echo $key; ?>"><?php $name= ($name=="stats")? 'sta2': $name ;echo $qarray[$name]= ($qarray[$name]=="quota_sta2") ? 'quota_stats':  $qarray[$name]  ; ?></label></td>
 <td><input type="text" class="int" size="16" maxlength="16" name="<?php echo $key; ?>" id="<?php echo $name; ?>" value="<?php ehe($value); ?>" /></td></tr>
+
 <?php
   }
 ?>

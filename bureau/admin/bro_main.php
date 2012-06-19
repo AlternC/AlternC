@@ -72,11 +72,11 @@ if (isset($formu) && $formu) {
     break;
   case 2:  // act vaut Supprimer Copier ou Renommer.
     if ($actdel) {
-      if ($del_confirm != "") { 
+      if (isset($del_confirm) && $del_confirm != "") { 
         if (!$bro->DeleteFile($d,$R)) {
           $error = $err->errstr();
         }
-      } elseif (!$cancel && is_array($d)) {
+      } elseif (!isset($cancel) && is_array($d)) {
         include_once("head.php");
 ?>
   <h3><?php printf(_("Deleting files and/or directories")); ?> : </h3>
@@ -122,7 +122,7 @@ if (isset($formu) && $formu) {
     }
     break;
   case 7:  // Changement de permissions [ML]
-    if (!$bro->ChangePermissions($R, $d, $perm)) {
+    if (!@$bro->ChangePermissions($R, $d, $perm)) {
       $error = $err->errstr();
     }
     break;
@@ -198,7 +198,7 @@ if ($c===false) $error=$err->errstr();
 
 <?php
 /* Renommer / Copier / Déplacer les fichiers : */
-if (isset($formu) && $formu==2 && $actrename && count($d)) {
+if (isset($formu) && $formu==2 && isset($actrename) && $actrename && count($d)) {
   echo "<table cellpadding=\"6\">\n";
   echo "<form action=\"bro_main.php\" method=\"post\">\n";
   echo "<input type=\"hidden\" name=\"R\" value=\"$R\" />\n";
@@ -215,7 +215,7 @@ if (isset($formu) && $formu==2 && $actrename && count($d)) {
 }
 
 /* [ML] Changer les permissions : */
-if (isset($formu) && $formu==2 && $_REQUEST['actperms'] && count($d)) {
+if (isset($formu) && $formu==2 && isset($_REQUEST['actperms']) && $_REQUEST['actperms'] && count($d)) {
   echo "<form action=\"bro_main.php\" method=\"post\">\n";
   echo "<input type=\"hidden\" name=\"R\" value=\"$R\" />\n";
   echo "<input type=\"hidden\" name=\"formu\" value=\"7\" />\n";

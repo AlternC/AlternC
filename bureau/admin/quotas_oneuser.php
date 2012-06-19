@@ -86,9 +86,9 @@ if (!defined("QUOTASONE")) return;
 			$pc=intval(100*$ds/$totaldb);
 		else
 			$pc=0;
-    if ($mode==0) {
+    if (isset($mode) && $mode==0) {
       echo sprintf("%.1f", $ds / 1024/1024)."&nbsp;"._("MB");
-    } elseif ($mode==1) {
+    } elseif (isset($mode) &&$mode==1) {
       echo sprintf("%.1f", $pc)."&nbsp;%";
     } else {
       echo "<img src=\"hippo_bleue.gif\" style=\"width: ".(2*$pc)."px; height: 16px\" alt=\"".$pc."%\" title=\"".$pc."%\"/>";

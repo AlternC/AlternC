@@ -32,7 +32,7 @@ $list_ip = $authip->list_ip_whitelist();
 <hr id="topbar"/>
 <br />
 
-<?php if ($error) { ?>
+<?php if (isset($error) && $error) { ?>
   <p class="error"><?php echo $error ?></p>
 <?php } ?>
 <center>
