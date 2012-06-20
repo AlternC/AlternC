@@ -82,7 +82,7 @@ while (list($key,$val)=each($r))
 <td><div class="ina"><a href="ftp_edit.php?id=<?php echo $val["id"] ?>"><img src="images/edit.png" alt="<?php __("Edit"); ?>" /><?php __("Edit"); ?></a></div></td>
 
 		<td><label for="del_<?php echo $val["id"]; ?>"><?php echo $val["login"] ?></label></td>
-		<td><code>/<?php echo $val["dir"] ?></code></td>
+		<td><code><?php echo $val["dir"] ?></code></td>
 	</tr>
 <?php
 	}

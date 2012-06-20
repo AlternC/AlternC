@@ -56,21 +56,26 @@ include_once ("head.php");
 </p>
 </form>
 
+<?php
+?>
 <form method="post" action="adm_dodefquotas.php">
+<table border="0" cellpadding="4" cellspacing="0">
 <p>
 <input type="hidden" name="action" value="delete" />
+<tr class="lst1">
+<td>
 <select name="type" id="type" class="inl">
 <?php
 $db->query("SELECT distinct(type) FROM defquotas WHERE TYPE != 'default' ORDER by type");
 while($db->next_record()) {
   $type = $db->f("type");
-  echo "<option value=\"$type\">$type</option>";
+  echo "<option value=\"$type\">$type</option>\n";
 }
 ?></select>
-<input type="submit" class="inb" value="<?php __("Delete account type"); ?>" />
-</p>
+</td><td><input type="submit" class="inb" value="<?php __("Delete account type"); ?>" /></td>
+</tr>
+</table>
 </form>
-
 <p>
 <?php __("Here is the list of the quotas on the server for the new accounts. If you want to change them, enter new values"); ?>
 </p>
@@ -93,7 +98,6 @@ foreach($qlist as $type => $q) {
 foreach($q as $name => $value) {
 	$key = $type . ":" . $name;
 	$col=3-$col;
-	//TODO fix notice
 ?>
 
 <tr class="lst<?php echo $col; ?>">
