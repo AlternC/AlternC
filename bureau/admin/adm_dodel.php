@@ -34,7 +34,7 @@ if (!$admin->enabled) {
   exit();
 }
 
-if($_POST["del_confirm"] == "y"){
+if(isset($_POST["del_confirm"]) && $_POST["del_confirm"] == "y"){
   if (!is_array($d)) {
     $d[]=$d;
   }
@@ -46,9 +46,9 @@ if($_POST["del_confirm"] == "y"){
       exit();
     }
     if (!($u=$admin->get($val)) || !$admin->del_mem($val)) {
-      $error.=sprintf(_("Member '%s' does not exist"),$val)."<br />";
+      $error=sprintf(_("Member '%s' does not exist"),$val)."<br />";
     } else {
-      $error.=sprintf(_("Member %s successfully deleted"),$u["login"])."<br />";
+      $error=sprintf(_("Member %s successfully deleted"),$u["login"])."<br />";
     }
   }
   include("adm_list.php");

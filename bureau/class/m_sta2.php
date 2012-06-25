@@ -117,7 +117,7 @@ class m_sta2 {
       $t[]=$db->f("hostname");
     }
     // on détruit les jeux de stats associés au préfixe correspondant :
-    for($i=0;$i<cnt;$i++) {
+    for($i=0;$i<$cnt;$i++) {
       $db->query("DELETE FROM stats2 WHERE mid='$cuid' AND hostname='".$t[$i]."';");
     }
     return true;

@@ -406,11 +406,17 @@ class m_dom {
       $domshort=str_replace("-","",str_replace(".","",$domain));
       
       if (! is_dir($dest_root . "/". $domshort)) {
-        mkdir($dest_root . "/". $domshort);
+		  if(!mkdir($dest_root . "/". $domshort)){
+			  $err->raise("dom",1);
+			  return false;
+		  }
       }
 
       if (! is_dir($dest_root . "/tmp")) {
-        mkdir($dest_root . "/tmp");
+		  if(!mkdir($dest_root . "/tmp")){
+			  $err->raise("dom",1);
+			  return false;
+		  }
       }
 
 	  //on corrige les permissions
