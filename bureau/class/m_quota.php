@@ -150,7 +150,7 @@ class m_quota {
       reset($this->disk);
       while (list($key,$val)=each($this->disk)) {
         $a=array(); 
-        exec("/usr/lib/alternc/quota_get ".$cuid." ".$val,$a);
+        exec("/usr/lib/alternc/quota_get ".$cuid ,$a);
         $this->quotas[$val]=array("t"=>$a[1],"u"=>$a[0]);
       }   
       $get_quota_cache[$cuid] = $this->quotas;
