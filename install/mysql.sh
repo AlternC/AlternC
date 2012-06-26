@@ -164,9 +164,6 @@ set_value database $database $MYSQL_MAIL_CONFIG
 set_value user $alternc_mail_user $MYSQL_MAIL_CONFIG
 set_value password $alternc_mail_password $MYSQL_MAIL_CONFIG
 
-echo $SED_SCRIPT_MAIL
-echo XXXXXX
-echo $SED_SCRIPT_USR
 
 # take extra precautions here with the mysql password:
 # put the sed script in a temporary file
@@ -192,10 +189,9 @@ mysql_mail="/usr/bin/mysql --defaults-file=$MYSQL_MAIL_CONFIG"
 
 echo "Checking for MySQL connectivity"
 $mysql -e "SHOW TABLES" >/dev/null && echo "MYSQL.SH OK!" || echo "MYSQL.SH FAILED: database user setup failed"
-echo $grant_mail
 # Final mysql setup: db schema
 echo "installing AlternC schema in $database..."
 $mysql < /usr/share/alternc/install/mysql.sql || echo cannot load database schema
 $mysql <<EOF
- $grant_mail
+$grant_mail
 EOF

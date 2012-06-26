@@ -419,9 +419,6 @@ class m_dom {
 		  }
       }
 
-	  //on corrige les permissions
-	  exec("sudo /usr/lib/alternc/fixperms.sh -u ".$cuid);
-
       // Creation des 3 sous-domaines par défaut : Vide, www et mail
       $this->set_sub_domain($domain, '',     $this->type_url,     'http://www.'.$domain);
       $this->set_sub_domain($domain, 'www',  $this->type_local,   '/'. $domshort);
