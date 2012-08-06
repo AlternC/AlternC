@@ -225,7 +225,7 @@ class m_mysql {
       $db->query("INSERT INTO db (uid,login,pass,db,bck_mode) VALUES ('$cuid','$lo','$pa','$dbname',0);");
       // give everything but GRANT on db.*
       // we assume there's already a user
-      $this->dbus->query("GRANT ALL PRIVILEGES ON `".$dbname."`.* TO '".$lo."'@'$this->dbus->client'");
+      $this->dbus->query("GRANT ALL PRIVILEGES ON `".$dbname."`.* TO '".$lo."@".$this->dbus->client."';");
       return true;
     } else {
       $err->log("mysql","add_db",$dbn);
