@@ -437,6 +437,9 @@ they log in. Set this to 0 or a "false" string to ignore.');
 INSERT IGNORE INTO `variable` (name, value, comment) VALUES ('new_email', 0,
 'An email will be sent to this address when new accounts are created if set.');
 
+INSERT IGNORE INTO `variable` (name, value, comment) VALUES ('mailname_bounce', '',
+'FQDN of the mail server, used to create vhost virtual mail_adress.');
+
 --
 -- Table structure for table `dbusers`
 --
