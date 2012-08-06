@@ -38,7 +38,7 @@ if ($q["t"] > 0)
 <div class="menu-box">
 <div class="menu-title" id="test">
   <a href="javascript:menu_toggle('menu-dom');">
-    <img src="images/dom.png" alt="<?php __("Domains"); ?>" />&nbsp;<?php __("Domains"); ?> (<?= $q["u"]; ?>/<?= $q["t"]; ?>)
+    <img src="images/dom.png" alt="<?php __("Domains"); ?>" />&nbsp;<?php __("Domains"); ?> (<?php echo $q["u"]; ?>/<?php echo $q["t"]; ?>)
     <img src="images/row-down.png" alt="" style="float:right;"/></a>
 </div>
 <div class="menu-content" id="menu-dom">

@@ -33,7 +33,7 @@ if ($q["t"]) {
 <div class="menu-box">
 <div class="menu-title">
 <a href="javascript:menu_toggle('menu-sql');">
-<img src="images/mysql.png" alt="MySQL" />&nbsp;MySQL (<?= $q["u"]; ?>/<?= $q["t"]; ?>)
+<img src="images/mysql.png" alt="MySQL" />&nbsp;MySQL (<?php echo $q["u"]; ?>/<?php echo $q["t"]; ?>)
 <img src="/images/row-down.png" alt="" style="float:right;"/></a>
 </div>
 <div class="menu-content" id="menu-sql">
