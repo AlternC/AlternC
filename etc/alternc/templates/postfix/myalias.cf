@@ -6,6 +6,6 @@ user = %%db_mail_user%%
 password = %%db_mail_pwd%%
 hosts =%%dbhost%%
 dbname = %%dbname%%
-query = select concat( if(isnull(mailbox.id), '', concat(concat(address.address,'@',domaines.domaine), '\n')), recipient.recipients ) from recipient join address on address.id = recipient.address_id left outer join mailbox on mailbox.address_id = address.id join domaines on domaines.id = address.domain_id where concat(address.address,'@',domaines.domaine)='%s';
+query = select alias from alias_view where mail='%s';
  
 
