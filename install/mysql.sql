@@ -97,6 +97,7 @@ CREATE TABLE IF NOT EXISTS chgmail (
 # Contient les bases mysql des membres, + login / pass en clair
 
 CREATE TABLE IF NOT EXISTS db (
+  id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   uid int(10) unsigned NOT NULL default '0',		# Numro de l`utilisateur
   login varchar(16) NOT NULL default '',		# Nom d`utilisateur mysql
   pass varchar(16) NOT NULL default '',			# Mot de passe mysql
@@ -105,7 +106,7 @@ CREATE TABLE IF NOT EXISTS db (
   bck_history tinyint(3) unsigned NOT NULL default '0',	# Nombre de backup  conserver ?
   bck_gzip tinyint(3) unsigned NOT NULL default '0',	# Faut-il compresser les backups ?
   bck_dir varchar(255) NOT NULL default '',		# O stocke-t-on les backups sql ?
-  KEY uid (uid)
+  PRIMARY KEY uid (uid)
 ) TYPE=MyISAM COMMENT='Bases MySQL des membres';
 
 --
@@ -448,6 +449,8 @@ CREATE TABLE IF NOT EXISTS `dbusers` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `uid` int(10) unsigned NOT NULL default '0',
   `name` varchar(16) NOT NULL default '',
+  `password`  varchar( 64 ),
+  `enable` enum ('ACTIVATED', 'HIDDEN', 'ADMIN') NOT NULL DEFAULT 'ACTIVATED', 
   KEY `id` (`id`)
 ) TYPE=MyISAM COMMENT='Utilisateurs MySQL des membres';
 

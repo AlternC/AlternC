@@ -16,7 +16,7 @@
 
 include_once('/var/alternc/bureau/class/local.php');
 $cfg['SuhosinDisableWarning'] = true;
-
+$cfg['ShowCreateDb'] = false; 
 $i = 1;
 
 $cfg['Servers'][$i]['host']          = $GLOBALS['L_MYSQL_HOST']; // MySQL hostname or IP address

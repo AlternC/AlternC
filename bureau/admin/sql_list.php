@@ -30,7 +30,8 @@
 require_once("../class/config.php");
 include_once("head.php");
 
-$r=$mysql->get_dblist();
+$rdb=$mysql->get_dblist();
+$r=$mysql->get_userslist();
 
 ?>
 <h3><?php __("MySQL Databases"); ?></h3>
@@ -40,20 +41,30 @@ $r=$mysql->get_dblist();
 	if (isset($error) && $error) {
 		echo "<p class=\"error\">$error</p>";
 	}
-
-if ($r) {
-
-echo "<p>"._("help_sql_list_ok")."</p>";
+  if(!$r || empty($r)){
+    echo "<p class=\"error\">"._("You have no sql user at the moment.")."</p>";  
+  }
 ?>
 
+<table class="tedit">
+	<tr>
+<?php __("Your current settings are"); ?> 
+</tr><tr>
+		<th><?php __("MySQL Server"); ?> : </th>
+		<td><code><?php echo $mysql->dbus->HumanHostname; ?></code></td>
+	</tr>
+</table>
+<?php
+if($rdb){
+?>
 <form method="post" action="sql_del.php" name="main" id="main">
 <table class="tlist">
    <tr><th>&nbsp;</th><th><?php __("Database"); ?></th><th><?php __("Backup"); ?></th><th><?php __("Restore"); ?></th><th><?php __("Size"); ?></th></tr>
 
 <?php
 $col=1;
-for($i=0;$i<count($r);$i++) {
-  $val=$r[$i];
+for($i=0;$i<count($rdb);$i++) {
+  $val=$rdb[$i];
   $val['size'] = $mysql->get_db_size($val['db']);
  $col=3-$col;
 ?>
@@ -74,31 +85,15 @@ for($i=0;$i<count($r);$i++) {
 </td></tr>
 </table>
 </form>
-
+<?php
+}
+?>
 <p>&nbsp;</p>
 
 <?php if ($quota->cancreate("mysql")) { ?>
 <p>  <span class="ina"><a href="sql_add.php"><?php __("Create a new MySQL database"); ?></a></span> </p>
-<?php } ?>
-<p><span class="ina"><a href="sql_passchg.php"><?php __("Change the MySQL password"); ?></a></span></p>
-<p><span class="ina"><a href="sql_getparam.php"><?php __("Get the current MySQL parameters"); ?></a></span></p>
-
-
-<?php
-	} else {
-  echo "<p>"._("help_sql_list_no")."</p>";
-
+<?php } 
 ?>
-<form method="post" action="sql_addmain.php" name="main" id="main">
-<table class="tedit">
-		<tr><th><?php __("Username"); ?></th><td><code><?php echo $mem->user["login"]; ?></code></td></tr>
-		<tr><th><label for="pass"><?php __("Password"); ?></label></th><td><code><input class="int" type="password" name="pass" id="pass" value="" /></code></td></tr>
-		<tr><th><?php __("SQL Server"); ?></th><td><code><?php echo $L_MYSQL_HOST; ?></code></td></tr>
-		<tr><th><?php __("Database"); ?></th><td><code><?php echo $mem->user["login"]; ?></code></td></tr>
-	<tr class="trbtn"><td colspan="2"><input type="submit" class="inb" name="submit" value="<?php __("Create my main database"); ?>" /></td></tr>
-</table>
-</form>
-<?php } ?>
 <script type="text/javascript">
 document.forms['main'].pass.focus();
 document.forms['main'].setAttribute('autocomplete', 'off');

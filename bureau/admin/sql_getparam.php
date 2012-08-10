@@ -56,7 +56,7 @@ if (!$r=$mysql->get_dblist()) {
 	</tr>
 	<tr>
 		<th><?php __("MySQL Server"); ?></th>
-		<td><code><?php echo $mysql->server; ?></code></td>
+		<td><code><?php echo $mysql->dbus->HumanHostname; ?></code></td>
 	</tr>
 	<tr>
 		<th><?php __("Main database"); ?></th>

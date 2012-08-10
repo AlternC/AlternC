@@ -41,12 +41,8 @@ $rdb=$mysql->get_dblist();
 if (isset($error) && $error) {
 	echo "<p class=\"error\">$error</p><p>&nbsp;</p>";
 }
-
-if ($rdb) {
   if($r){
-echo "<p>"._("help_sql_users_list_ok")."</p>";
 ?>
-
 <form method="post" action="sql_users_del.php">
 <table cellspacing="0" cellpadding="4">
    <tr><th>&nbsp;</th><th><?php __("User"); ?></th><th><?php __("Rights"); ?></th><th><?php __("Password");?></th></tr>
@@ -87,9 +83,5 @@ for($i=0;$i<count($r);$i++) {
 </p>
 <?php
   }
-} else {
-  include("sql_list.php"); // no main database, let's show the main db creation form (don't duplicate it here...)
-  exit();
- } 
 ?>
 <?php include_once("foot.php"); ?>

@@ -38,9 +38,9 @@ if (!$quota->cancreate("mysql")) {
 ?>
 <h3><?php __("Create a new MySQL database"); ?></h3>
 <?php
-	if ($error) {
+	if (isset($error) && $error) {
 		echo "<p class=\"error\">$error</p>";
-		if ($fatal) {
+		if (isset($fatal) && $fatal) {
 			include_once("foot.php");
 			exit();
 		}
@@ -48,9 +48,11 @@ if (!$quota->cancreate("mysql")) {
 ?>
 <form method="post" action="sql_doadd.php" id="main" name="main">
 <table class="tedit">
-<tr><th><label for="dbn"><?php __("MySQL Database"); ?></label></th><td>
-	<span class="int" id="dbnpfx"><?php echo $mem->user["login"]; ?>_</span><input type="text" class="int" name="dbn" id="dbn" value="<?php ehe($dbn); ?>" size="20" maxlength="30" />
-</td></tr>
+<tr>
+  <th><label for="dbn"><?php __("MySQL Database"); ?></label></th>
+  <td>
+	<span class="int" id="dbnpfx"><?php echo $mem->user["login"]; ?>_</span><input type="text" class="int" name="dbn" id="dbn" value="" size="20" maxlength="30" />
+</tr>
 </table>
 <br />
 <input type="submit" class="inb" name="submit" value="<?php __("Create this new MySQL database."); ?>" />

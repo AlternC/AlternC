@@ -30,7 +30,7 @@
 require_once("../class/config.php");
 // include_once ("head.php");
 
-if (!$r=$mysql->get_dblist()) {
+if (!$r=$mysql->php_myadmin_connect()) {
 	$error=$err->errstr();
 } else {
 	setcookie("REMOTE_USER",$r[0]["login"],0,"/");
