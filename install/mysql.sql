@@ -106,7 +106,7 @@ CREATE TABLE IF NOT EXISTS db (
   bck_history tinyint(3) unsigned NOT NULL default '0',	# Nombre de backup  conserver ?
   bck_gzip tinyint(3) unsigned NOT NULL default '0',	# Faut-il compresser les backups ?
   bck_dir varchar(255) NOT NULL default '',		# O stocke-t-on les backups sql ?
-  PRIMARY KEY uid (uid)
+  PRIMARY KEY id (id)
 ) TYPE=MyISAM COMMENT='Bases MySQL des membres';
 
 --

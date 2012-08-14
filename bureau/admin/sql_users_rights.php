@@ -48,7 +48,6 @@ if (isset($error) && $error) {
 
 if ($r) {
 
-echo "<p>"._("help_sql_users_rights_ok")."</p>";
 ?>
 
 <form method="post" action="sql_users_dorights.php">

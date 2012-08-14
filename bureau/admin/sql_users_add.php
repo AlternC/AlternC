@@ -49,7 +49,7 @@ if (!$quota->cancreate("mysql_users")) {
 <?php
 	if (isset($error) && $error) {
 		echo "<p class=\"error\">$error</p>";
-		if ($fatal) {
+		if (isset($fatal) && $fatal) {
 ?>
 <?php include_once("foot.php"); ?>
 

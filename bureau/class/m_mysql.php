@@ -131,16 +131,13 @@ class m_mysql {
    * @return array returns an associative array as follow : <br>
    *  "db" => database name "bck" => backup mode for this db 
    *  "dir" => Backup folder.
-   *  Returns FALSE if the user has no database.
+   *  Returns an array (empty) if no databases
    */
   function get_dblist() {
     global $db,$err,$bro,$cuid;
     $err->log("mysql","get_dblist");
+    $db->free();
     $db->query("SELECT login,pass,db, bck_mode, bck_dir FROM db WHERE uid='$cuid' ORDER BY db;");
-    if (!$db->num_rows()) {
-      $err->raise("mysql",11);
-      return false;
-    }
     $c=array();
     while ($db->next_record()) {
       list($dbu,$dbn)=split_mysql_database_name($db->f("db"));
@@ -247,10 +244,8 @@ class m_mysql {
       $err->log("mysql","add_db_succes",$dbn);
       // Ok, database does not exist, quota is ok and dbname is compliant. Let's proceed
       $db->query("INSERT INTO db (uid,login,pass,db,bck_mode) VALUES ('$cuid','$myadm','$password','$dbname',0);");
-       #TODO escape dbname to avoid wildcard '_'
-die();
-      print_r("GRANT ALL PRIVILEGES ON `".$dbname."`.* TO '".$myadm."'@".$this->dbus->Host." IDENTIFIED BY '".addslashes($password)."'");
-      $this->dbus->query("GRANT ALL PRIVILEGES ON `".addslashes($dbname)."`.* TO '".$myadm."'@".$this->dbus->Host." IDENTIFIED BY '".addslashes($password)."'");
+      $dbname=str_replace('_','\_',$dbname);
+      $this->grant($dbname,$myadm,"ALL PRIVILEGES",$password);
       $this->dbus->query("FLUSH PRIVILEGES;");
       return true;
     } else {
@@ -369,7 +364,55 @@ die();
     return true;
   }
 
+/**
+* Function used to grant SQL rights to users:
+* @base :database 
+* @user : database user
+* @rights : rights to apply ( optional, every rights apply given if missing
+* @pass : user password ( optional, if not given the pass stays the same, else it takes the new value )
+* @table : sql tables to apply rights
+**/
+  function grant($base,$user,$rights=null,$pass=null,$table='*'){
+    global $err,$db;
+    $err->log("mysql","grant");
+    if(!preg_match("#^[0-9a-z\_]*$#",$base)){
+      $err->raise("mysql",2);
+      return false;
+    }elseif(!$db->query("select db from db where db='$base';")){
+      $err->raise("mysql",10);
+      return false; 
+    }
 
+    if($rights==null){
+      $rights='ALL PRIVILEGES';
+    }elseif(!preg_match("#^[a-zA-Z\,]*$#",$rights)){
+      $err->raise("mysql",3);
+      return false;
+    }
+
+    if(!preg_match("#^[0-9a-z\_]*$#",$user)) {
+      $err->raise("mysql",5);
+      return false;
+    }
+    if(!$db->query("select name from dbusers where name='".$user."' ;")){
+      $err->raise("mysql",6);
+      return false; 
+    }
+
+    $grant="grant ".$rights." on `".$base."`.".$table." to '".$user."'@'".$this->dbus->Host."'" ;
+
+    if($pass){
+      $grant .= " identified by '".$pass."';";
+    }else{
+      $grant .= ";";
+    }
+   if(!$this->dbus->query($grant)){
+      $err->raise("mysql",6);
+      return false;
+   }
+    return true;
+
+  }
 
 
   /* ----------------------------------------------------------------- */
@@ -509,7 +552,7 @@ die();
     }
 
     // We create the user account (the "file" right is the only one we need globally to be able to use load data into outfile)
-    $this->dbus->query("GRANT file ON *.* TO '$user'@".$this->dbus->Host." IDENTIFIED BY '$pass';");
+    $this->grant("*",$user,"FILE",$pass);
     // We add him to the user table 
     $db->query("INSERT INTO dbusers (uid,name,enable) VALUES($cuid,'$user','ACTIVATED');");
     return true;
@@ -525,7 +568,7 @@ die();
    **/
   function change_user_password($usern,$password,$passconf) {
     global $db,$err,$quota,$mem,$cuid,$admin;
-    $err->log("mysql","add_user",$usern);
+    $err->log("mysql","change_user_pass",$usern);
 
     $usern=trim($usern);
     $user=addslashes($mem->user["login"]."_".$usern);
@@ -541,7 +584,7 @@ die();
     	return false; // The error has been raised by checkPolicy()
       }
     }
-    $this->dbus->query("SET PASSWORD FOR ".$user."@".$this->dbus->Host." = PASSWORD(".$pass.")");
+    $this->dbus->query("SET PASSWORD FOR ".$user."@".$this->dbus->Host." = PASSWORD('".$pass."')");
     return true;
   }
 
@@ -589,8 +632,8 @@ die();
     $err->log("mysql","get_user_dblist");
 
     $r=array();
+    $db->free();
     $dblist=$this->get_dblist();
-
     for ( $i=0 ; $i<count($dblist) ; $i++ ) {
       $this->dbus->query("SELECT Db, Select_priv, Insert_priv, Update_priv, Delete_priv, Create_priv, Drop_priv, References_priv, Index_priv, Alter_priv, Create_tmp_table_priv, Lock_tables_priv FROM mysql.db WHERE User='".$mem->user["login"].($user?"_":"").$user."' AND Host='".$this->dbus->Host."' AND Db='".$dblist[$i]["db"]."';");
       if ($this->dbus->next_record())
@@ -662,7 +705,7 @@ die();
       $this->dbus->query("REVOKE ALL PRIVILEGES ON $dbname.* FROM '$usern'@'".$this->dbus->Host."';");
     if( $strrights ){
       $strrights=substr($strrights,0,strlen($strrights)-1);
-      $this->dbus->query("GRANT $strrights ON $dbname.* TO '$usern'@'".$this->dbus->Host."';");      
+      $this->grant($dbname,$usern,$strrights);
     }
     $this->dbus->query("FLUSH PRIVILEGES");
     return TRUE;
@@ -695,7 +738,7 @@ die();
         return 0;
     } else return false;
   }
-  
+
   /* ----------------------------------------------------------------- */
   /** Hook function called when a user is created.
    * AlternC's standard function that create a member
@@ -711,11 +754,20 @@ die();
       $password=$db->f("password");  
     }else{
       $myadm=$mem->user["login"]."_myadm";
-      $password="kikoulol";
+      $chars = "234567890abcdefghijkmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      $i = 0;
+      $password = "";
+      while ($i <= 8) {
+        $password .= $chars{mt_rand(0,strlen($chars))};
+        $i++;
+      } 
       $db->query("INSERT INTO dbusers (uid,name,password,enable) VALUES ('$cuid','$myadm','$password','ADMIN');");
     }
     return true;
   }
+
+
+
   
   /* ----------------------------------------------------------------- */
   /** Hook function called when a user is deleted.

@@ -44,7 +44,7 @@ if (!$r=$mysql->get_mysql_details($id)) {
 <hr id="topbar"/>
 <br />
 <?php
-	if ($error) {
+	if (isset($error) && $error) {
 		echo "<p class=\"error\">$error</p><p>&nbsp;</p>";
 	}
 

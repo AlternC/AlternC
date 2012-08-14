@@ -1,3 +1,15 @@
+alternc (1.1+nmu4) stable; urgency=low
+
+  * SQL Modification
+    * MySQL tables used for Alternc users databases modified (mysql.sql)
+    * Adding a special phpmyadmin user.
+    * Users can now create databases en databases users independently 
+      ( no need to create a first database to create a user anymore)
+  * Bugfixes in installation process
+ 
+
+ -- squidly <squidly@nnx.com>  Tue, 14 Aug 2012 11:21:14 +0200
+
 alternc (1.1+nmu3) stable; urgency=low
 
   * Templating full configuration of postfix & dovecot 
