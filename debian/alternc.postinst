@@ -47,16 +47,18 @@ case "$1" in
     dpkg-statoverride --quiet --update --add root sasl 710 /var/spool/postfix/var/run/saslauthd  || true
 
 
+    db_get "alternc/alternc_location"
+    VMAIL_HOME="$RET"
     #Create Dovecot user for mail handling FIXME change home with ALTERNC_LOC
     if ! getent group vmail; then
        addgroup --gid 1998 vmail
     fi
     if ! getent passwd vmail; then
-       useradd -g vmail -u 1998 vmail -d /var/alternc/mail -m 
+       useradd -g vmail -u 1998 vmail -d $VMAIL_HOME/mail -m 
     fi 
-    chown -R vmail:vmail /var/alternc/mail
-    chmod u+w /var/alternc/mail
-    chmod -R g+w /var/alternc/mail
+    chown -R vmail:vmail $VMAIL_HOME/mail
+    chmod u+w $VMAIL_HOME/mail
+    chmod -R g+w $VMAIL_HOME/mail
 
     # build local.sh if it does not exist
     if [ ! -f $CONFIGFILE ]; then
