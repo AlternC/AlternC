@@ -489,7 +489,7 @@ function getFields($fields, $requestOnly = false) {
     }
   }
   
-  // Insert into $GLOBALS. FIXME : Use stripslashes if the magic_quotes_gpc is ON !
+  // Insert into $GLOBALS.
   foreach ($vars AS $var => $value)
     $GLOBALS[$var] = $value;
   
