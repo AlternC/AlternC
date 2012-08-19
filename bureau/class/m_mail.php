@@ -127,20 +127,21 @@ class m_mail {
    * and an error message if necessary.
    * TODO piensar a enlever la contrainte d'unicité sur le champs address et en rajouter une sur adrresse+dom_id.
    */ 
-  function create($dom_id, $mail_arg){
-    global $mail,$err,$db,$cuid;
+  function create($dom_id, $mail_arg,$dom_name){
+    global $mail,$err,$db,$cuid,$quota;
     $err->log("mail","create");
   
     $return = array ( 
       "state" => true,
       "mail_id" => null,
       "error" => "OK");
-    //FIXME checker uniformité des mails.
-    /*if(checkmail(mail_arg) != 0){
+
+    $m=$mail_arg."@".$dom_name;
+    if(checkmail($m) != 0){
       $return["state"]=false;
       $return["error"]="erreur d'appel a cancreate";
       return $return;
-    }*/
+    }
   
     $return=$mail->cancreate($dom_id, $mail_arg);
     //Si l'appel échoue
@@ -161,17 +162,21 @@ class m_mail {
         $return["error"]=" hophophop tu t'es prix pour un banquier ouquoi ?";
         return $return;
     }
-    //verifie quota ( une fois réparé ^^ )
-    //TODO quotacheck;
+
+    // Check the quota :
+    if (!$quota->cancreate("mail")) {
+      $err->raise("mail",10);
+      return false;
+    }
   
-    // a remplacer par un truc genre insert into address (domain_id, address) values (7, '4455') ; select id from address where address='4455';  
-    $db->query("insert into address (domain_id, address) VALUES ($dom_id, '$mail_arg');");
-    $test=$db->query("select id from address where domain_id=$dom_id and address=\"$mail_arg\";");
-      $db->next_record();
+		$db->query("insert into address (domain_id, address) VALUES ($dom_id, '$mail_arg');");
+		$test=$db->query("select id from address where domain_id=$dom_id and address=\"$mail_arg\";");
+
+    $db->next_record();
     
     $return["mail_id"]=$db->f("id");
   
-      return $return;
+    return $return;
   }
 
 /*
@@ -282,8 +287,6 @@ class m_mail {
     $v_adv=usort($f_adv,'list_properties_order');
   
     $final=array_merge($f_simple,$f_adv);
-  
-  //FIXME sort pour avoir ceux qui sont ADVANCED a la fin, et trie par label pour etre "fixe"
   
     return $final;
   }

@@ -44,6 +44,7 @@ echo sprintf(_("Edition of <b>%s</b>")."<br />",$details['address_full']);
 echo "</h3>";?>
 
 <hr/>
+<h3><?php __("Select your action");?></h3>
 <table class="tlist">
   <tr id='globalmail_title'><td colspan=2 class='advdom'><b><a href="javascript:toogle_properties('globalmail_');"><font id='globalmail_minus'>-</font><font id='globalmail_plus' style='display:none'>+</font> <?php __("Global options");?></a></b></td></tr>
   <tr id="globalmail_"><td>
@@ -51,7 +52,6 @@ echo "</h3>";?>
   </td>
   </tr>
 
-<tr><td colspan=2><h3><?php __("Select your action");?></h3></td></tr>
 <?php
 $properties = $mail->list_properties($mail_id);
 $prev_desc="";

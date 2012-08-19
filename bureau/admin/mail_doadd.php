@@ -37,7 +37,7 @@ getFields($fields);
 
 $res= array();
 //FIXME seems good but maybe can be done in a more fashion way.
-$res=$mail->create($domain_id,$mail_arg);
+$res=$mail->create($domain_id,$mail_arg,$domain);
 
 //once the mail created redirection to mail_properties.php, with the mail_id as parameters ( + domain_id )
 if($res["mail_id"]== null){

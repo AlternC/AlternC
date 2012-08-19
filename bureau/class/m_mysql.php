@@ -375,7 +375,8 @@ class m_mysql {
   function grant($base,$user,$rights=null,$pass=null,$table='*'){
     global $err,$db;
     $err->log("mysql","grant");
-    if(!preg_match("#^[0-9a-z\_]*$#",$base)){
+
+    if(!preg_match("#^[0-9a-z_\\\\]*$#",$base)){
       $err->raise("mysql",2);
       return false;
     }elseif(!$db->query("select db from db where db='$base';")){
@@ -385,12 +386,12 @@ class m_mysql {
 
     if($rights==null){
       $rights='ALL PRIVILEGES';
-    }elseif(!preg_match("#^[a-zA-Z\,]*$#",$rights)){
+    }elseif(!preg_match("#^[a-zA-Z,\s]*$#",$rights)){
       $err->raise("mysql",3);
       return false;
     }
 
-    if(!preg_match("#^[0-9a-z\_]*$#",$user)) {
+    if(!preg_match("#^[0-9a-z_]*$#",$user)) {
       $err->raise("mysql",5);
       return false;
     }
@@ -482,12 +483,8 @@ class m_mysql {
   function get_userslist() {
     global $db,$err,$bro,$cuid;
     $err->log("mysql","get_userslist");
-    $db->query("SELECT name FROM dbusers WHERE uid='$cuid' and enable not in ('ADMIN','HIDDEN') ORDER BY name;");
-    if (!$db->num_rows()) {
-      $err->raise("mysql",19);
-      return false;
-    }
     $c=array();
+    $db->query("SELECT name FROM dbusers WHERE uid='$cuid' and enable not in ('ADMIN','HIDDEN') ORDER BY name;");
     while ($db->next_record()) {
       $c[]=array("name"=>substr($db->f("name"),strpos($db->f("name"),"_")+1));
     }
@@ -753,7 +750,13 @@ class m_mysql {
       $myadm=$db->f("name");  
       $password=$db->f("password");  
     }else{
-      $myadm=$mem->user["login"]."_myadm";
+      if (strlen($mem->user["login"]) > 9) { //MYSQL doesn't allow login larger dans 16 characters
+        $myadm=substr($mem->user["login"],0,9); 
+        $myadm=$myadm."_myadm";
+      }else{ 
+        $myadm=$mem->user["login"]."_myadm";
+      }
+
       $chars = "234567890abcdefghijkmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
       $i = 0;
       $password = "";
@@ -784,7 +787,7 @@ class m_mysql {
       }
     }
     $d=$this->get_userslist();
-    if (is_array($d)) {
+    if (!empty($d)) {
       for($i=0;$i<count($d);$i++) {
 	      $this->del_user($d[$i]["name"]);
       }
