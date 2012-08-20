@@ -8,10 +8,14 @@ remove)
     # remove postfix from the sasl group (might not be user will though...)
     deluser --quiet postfix sasl || true
 
-    . /etc/alternc/local.sh
-
+    if [ -r "/etc/alternc/local.sh" ]
+    then
+	. /etc/alternc/local.sh
+    else
+	FQDN="`hostname --fqdn`"
+    fi
+	
     FQDN_LETTER="`echo $FQDN | sed -e 's/.*\.\([^\.]\)[^\.]*\.[^\.]*$/\1/'`"
-
     rm -rf /var/alternc/bureau/locales || true
     rmdir -p /var/alternc/bureau 2> /dev/null || true
     rm -f /var/alternc/dns/bureau || true
