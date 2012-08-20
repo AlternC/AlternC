@@ -56,7 +56,7 @@ $mem->unsu();
 <hr id="topbar"/>
 <br />
 <?php
-	if ($error) {
+	if (isset($error) && $error) {
 	  echo "<p class=\"error\">$error</p>";
 	  include_once("foot.php");
 	  exit();

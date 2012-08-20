@@ -35,6 +35,20 @@ if (!$admin->enabled) {
 	__("This page is restricted to authorized staff");
 	exit;
 }
+$fields = array (
+	"login"    		=> array ("post", "string", ""),
+	"pass"    		=> array ("post", "string", ""),
+	"passconf"    		=> array ("post", "string", ""),
+	"canpass"    		=> array ("post", "integer", ""),
+	"notes"    		=> array ("post", "string", ""),
+	"nom"    		=> array ("post", "string", ""),
+	"prenom"    		=> array ("post", "string", ""),
+	"nmail"    		=> array ("post", "string", ""),
+	"type"    		=> array ("post", "string", ""),
+	"create_dom_list"    	=> array ("post", "string", ""),
+	"submit"    		=> array ("post", "string", ""),
+);
+getFields($fields);
 
 if ($pass != $passconf) {
 	$error = _("Passwords do not match");

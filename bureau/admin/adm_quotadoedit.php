@@ -33,22 +33,24 @@ if (!$admin->enabled) {
 	__("This page is restricted to authorized staff");
 	exit();
 }
+$fields = array (
+	"uid"    => array ("post", "integer", "0"),
+);
+getFields($fields);
 
-if ($submit) {
+if (!$uid) die('UID Error');
 
-  $mem->su($uid);
-  $qlist=$quota->qlist();
-  reset($qlist);
+$mem->su($uid);
+$qlist=$quota->qlist();
+reset($qlist);
 
-  while (list($key,$val)=each($qlist)) {
-    $var="q_".$key;
-    $quota->setquota($key,$_REQUEST[$var]);
-  }
-  $mem->unsu();
-  $error=_("The quotas has been successfully edited");
-  include("adm_list.php");
-  exit;
-
+while (list($key,$val)=each($qlist)) {
+  $var="q_".$key;
+  $quota->setquota($key,$_REQUEST[$var]);
 }
+$mem->unsu();
+$error=_("The quotas has been successfully edited");
+include("adm_list.php");
+exit;
 
 ?>
