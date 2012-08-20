@@ -33,13 +33,17 @@ include_once ("head.php");
 
 $fields = array (
 		 "R"    => array ("request", "string", ""),
+		 "o"    => array ("request", "array", ""),
+		 "d"    => array ("request", "array", ""),
 		 "formu"       => array ("request", "integer", ""),
 		 "actextract"    => array ("request", "string", ""),
 		 "fileextract"    => array ("request", "string", ""),
 		 "actdel"    => array ("request", "string", ""),
 		 "actcopy"    => array ("request", "string", ""),
+		 "actrename"    => array ("request", "string", ""),
 		 "actmove"    => array ("request", "string", ""),
 		 "actmoveto"    => array ("request", "string", ""),
+		 "nomfich"    => array ("request", "string", ""),
 		 );
 getFields($fields);
 

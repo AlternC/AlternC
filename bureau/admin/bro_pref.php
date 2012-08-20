@@ -29,6 +29,21 @@
 */
 require_once("../class/config.php");
 
+$fields = array (
+        "submit"           => array ("post", "string", ""),
+        "editsizex"        => array ("post", "string", ""),
+        "listmode"         => array ("post", "string", ""),
+        "editsizey"        => array ("post", "string", ""),
+        "showicons"        => array ("post", "string", ""),
+        "downfmt"          => array ("post", "string", ""),
+        "createfile"       => array ("post", "string", ""),
+        "showtype"         => array ("post", "string", ""),
+        "editor_font"      => array ("post", "string", ""),
+        "editor_size"      => array ("post", "string", ""),
+        "golastdir"        => array ("post", "string", ""),
+);
+getFields($fields);
+
 if ($submit) {
 	$bro->SetPrefs($editsizex, $editsizey, $listmode, $showicons, $downfmt, $createfile, $showtype, $editor_font, $editor_size, $golastdir);
 	$error=_("Your preferences have been updated.");
@@ -40,7 +55,7 @@ $p=$bro->GetPrefs();
 include_once("head.php");
 
 ?>
-<?php if ($error) echo "<font color=\"red\">$error</font><br />"; ?>
+<?php if (isset($error) && $error) echo "<font color=\"red\">$error</font><br />"; ?>
 <h3><?php __("File browser preferences"); ?></h3>
 <hr id="topbar"/>
 <br />
