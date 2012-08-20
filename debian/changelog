@@ -6,7 +6,7 @@ alternc (1.1+nmu4) stable; urgency=low
     * Users can now create databases en databases users independently 
       ( no need to create a first database to create a user anymore)
   * Bugfixes in installation process
- 
+  * Kick off register_globals
 
  -- squidly <squidly@nnx.com>  Tue, 14 Aug 2012 11:21:14 +0200
 

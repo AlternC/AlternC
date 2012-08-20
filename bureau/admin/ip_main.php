@@ -69,7 +69,7 @@ $lac = $authip->list_affected();
     $col=3-$col;
     echo "<tr class='lst$col' >";
     echo "<td>".$ac[$ll['protocol']]['name']."</td>";
-    echo "<td>".$ac[$ll['protocol']]['values'][$ll['parameters']]."</td>";
+    echo "<td>".(isset($ac[$ll['protocol']]['values'][$ll['parameters']])?$ac[$ll['protocol']]['values'][$ll['parameters']]:'')."</td>";
     echo "<td>".$list_ip[$ll['authorised_ip_id']]['infos']."<br/>".$list_ip[$ll['authorised_ip_id']]['ip_human']."</td>"; ?>
     <td><div class="ina"><a href="ip_main.php?delete_affected_id=<?php echo urlencode($ll["id"]) ?>"><img src="images/delete.png" alt="<?php __("Delete")?>" /><?php __("Delete"); ?></a></div></td>
   <?php
