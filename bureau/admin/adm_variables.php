@@ -36,8 +36,8 @@ if (!$admin->enabled) {
 
 $conf = variable_init();
 foreach ($conf as $name => $val) {
-  if (isset($$name)) {
-    variable_set($name, $$name);
+  if (isset($GLOBALS['_POST'][$name])) {
+    variable_set($name, $GLOBALS['_POST'][$name]);
   }
 }
 

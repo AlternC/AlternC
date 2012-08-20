@@ -36,7 +36,6 @@ if (!$admin->enabled) {
 
 $fields = array (
 	"delip"   => array ("request", "string", ""),
-
 	"newip"    => array ("request", "string", ""),
 	"newclass" => array ("request", "string", "32"),
 );
@@ -98,8 +97,8 @@ for($i=0;$i<count($c);$i++) {
 <table class="tedit">
 <tr><th><label for="newip"><?php __("IP Address"); ?></label></th><th><label for="newclass"><?php __("Prefix"); ?></label></th></tr>
 <tr>
-	<td style="text-align: right"><input type="text" class="int" value="<?php ehe($newip); ?>" id="newip" name="newip" maxlength="15" size="20" style="text-align:right" /> / </td>
-	<td><input type="text" class="int" value="<?php ehe($newclass); ?>" id="newclass" name="newclass" maxlength="2" size="3" /></td>
+	<td style="text-align: right"><input type="text" class="int" value="<?php ehe( (isset($newip)?$newip:'') ); ?>" id="newip" name="newip" maxlength="15" size="20" style="text-align:right" /> / </td>
+	<td><input type="text" class="int" value="<?php ehe( (isset($newclass)?$newclass:'') ); ?>" id="newclass" name="newclass" maxlength="2" size="3" /></td>
 </tr>
 <tr><td colspan="2">
 	<input type="submit" value="<?php __("Add this ip to the slave list"); ?>" class="inb" />
