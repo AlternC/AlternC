@@ -29,6 +29,15 @@
 */
 require_once("../class/config.php");
 
+$fields = array (
+	"oldpass"    		=> array ("post", "string", ""),
+	"newpass"    		=> array ("post", "string", ""),
+	"newpass2"    		=> array ("post", "string", ""),
+);
+getFields($fields);
+
+
+
 if (!$mem->passwd($oldpass,$newpass,$newpass2)) {
 	$error=$err->errstr();
 } else {
@@ -40,7 +49,7 @@ include_once("head.php");
 ?>
 <div align="center"><h3><?php __("Password change"); ?></h3></div>
 <?php
-	if ($error) {
+	if (isset($error) && $error) {
 		echo "<font color=red>$error</font>";
 		include("foot.php");
 		exit();

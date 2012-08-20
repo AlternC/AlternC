@@ -62,7 +62,7 @@ if (!$mem->user["canpass"]) {
 <table border="1" cellspacing="0" cellpadding="4">
 <tr><th><?php __("Old password"); ?></th><td><input type="password" class="int" name="oldpass" value="<?php isset($oldpass) ? : $oldpass=""; echo $oldpass; ?>" size="20" maxlength="128" /></td></tr>
 <tr><th><?php __("New password"); ?> (1)</th><td><input type="password" class="int" name="newpass" value="<?php isset($newpass) ? : $newpass=""; echo $newpass;  ?>" size="20" maxlength="60" /></td></tr>
-<tr><th><?php __("New password"); ?> (2)</th><td><input type="password" class="int" name="newpass22" value="<?php isset($newpass2) ? : $newpass2=""; echo $newpass2;?>" size="20" maxlength="61" /></td></tr>
+<tr><th><?php __("New password"); ?> (2)</th><td><input type="password" class="int" name="newpass2" value="<?php isset($newpass2) ? : $newpass2=""; echo $newpass2;?>" size="20" maxlength="61" /></td></tr>
 <tr class="trbtn"><td colspan="3"><input type="submit" class="inb" name="submit" value="<?php __("Change my password"); ?>" /></td></tr>
 </table>
 </form>
