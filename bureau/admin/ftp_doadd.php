@@ -29,6 +29,15 @@
 */
 require_once("../class/config.php");
 
+$fields = array (
+	"prefixe"    		=> array ("post", "string", ""),
+	"login"    		=> array ("post", "string", ""),
+	"dir"    		=> array ("post", "string", ""),
+	"pass"    		=> array ("post", "string", ""),
+	"passconf"    		=> array ("post", "string", ""),
+);
+getFields($fields);
+
 if ($pass != $passconf) {
 	$error = _("Passwords do not match");
 	include("ftp_add.php");

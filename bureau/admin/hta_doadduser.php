@@ -28,6 +28,14 @@
  ----------------------------------------------------------------------
 */
 require_once("../class/config.php");
+$fields = array (
+        "dir"		=> array ("post", "string", ""),
+        "user"		=> array ("post", "string", ""),
+        "password"	=> array ("post", "string", ""),
+        "passwordconf"	=> array ("post", "string", ""),
+);
+getFields($fields);
+
 
 if ($password != $passwordconf) {
 	$error = _("Passwords do not match");

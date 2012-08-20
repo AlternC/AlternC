@@ -36,6 +36,7 @@ $fields = array (
 	"newpass"      => array ("request", "string", ""),
 	"newpassconf"  => array ("request", "string", ""),
 );
+getFields($fields);
 
 if ($newpass != $newpassconf) {
 	$error = _("Passwords do not match");

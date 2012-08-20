@@ -31,6 +31,7 @@ require_once("../class/config.php");
 include_once("head.php");
 
 if (!$r=$hta->ListDir()) {
+echo "plop";
 	$error=$err->errstr();
 }
 else {

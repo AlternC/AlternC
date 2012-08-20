@@ -33,6 +33,16 @@ function ife($test,$true,$false="") {
 */
 include("../class/config.php");
 
+// FIXME Refaire ce truc hein...
+$fields = array (
+        "caller"               => array ("request", "string", ""),
+        "select"               => array ("request", "string", ""),
+        "curdir"               => array ("request", "string", ""),
+        "lastcurdir"           => array ("request", "string", ""),
+        "file"                 => array ("request", "string", ""),
+);
+getFields($fields);
+
 function _subbrowse($curdir,$pos,$level) {
 	global $maxlevel,$root,$brlist;
 	if ($level>$maxlevel)
