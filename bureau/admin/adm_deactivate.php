@@ -54,10 +54,10 @@ if (! ($confirmed = ($_GET['submit'] == _("Confirm")) ) ) {
   __("The following domains will be deactivated and redirected to the URL entered in the following box. A backup of the domain configuration will be displayed as a serie of SQL request that you can run to restore the current configuration if you want. Click confirm if you are sure you want to deactivate all this user's domains.");
 
   ?>
-  <form action="<?=$PHP_SELF?>" method="GET">
-  <input type="hidden" name="uid" value="<?=$uid?>" />
-  <? __("Redirection URL:") ?> <input type="text" name="redirect" class="int" value="http://example.com/" />
-  <input type="submit" name="submit" class="inb" value="<?=_("Confirm")?>" />
+  <form action="<?php echo $PHP_SELF?>" method="GET">
+  <input type="hidden" name="uid" value="<?php echo $uid?>" />
+  <?php __("Redirection URL:") ?> <input type="text" name="redirect" class="int" value="http://example.com/" />
+  <input type="submit" name="submit" class="inb" value="<?php __("Confirm")?>" />
   <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='adm_list.php'"/>
   </form><?php
 

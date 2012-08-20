@@ -50,7 +50,7 @@ if (isset($error) && $error) {
       <span class="ina"><a href="quotas_users.php?mode=<?php echo $mode; ?>&amp;sd=0&amp;usr=<?php echo $usr; ?>"><?php __("Hide the domain names"); ?></a></span>
  <?php } } ?>
 <?php if ($usr) { ?>
-    <span class="ina"><a href="quotas_users.php?mode=<?php echo $mode; ?>&amp;sd=<? echo $sd; ?>"><?php __("All accounts"); ?></a></span>
+    <span class="ina"><a href="quotas_users.php?mode=<?php echo $mode; ?>&amp;sd=<?php echo $sd; ?>"><?php __("All accounts"); ?></a></span>
 <?php } ?>
 <?php } ?>
 </p>

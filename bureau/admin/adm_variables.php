@@ -69,7 +69,7 @@ while ($db->next_record()) {
  <td><input type="text" name="<?php ehe($vars['name']); ?>" value="<?php ehe($vars['value']); ?>" /></td>
  <td><?php echo $vars['comment']; ?></td>
  </tr>
-<? } ?>
+<?php } ?>
 </table>
 <p><input type="submit" class="inb" value="<?php __("Save variables"); ?>" /></p>
 </form>

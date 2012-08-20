@@ -54,7 +54,7 @@ if (!$dom->del_sub_domain($domain,$sub,$type,$value)) {
 $dom->unlock();
 
 ?>
-<h3><?=sprintf(_("Deleting the subdomain %s:"),"http://".(($sub)?$sub.".":$sub).$domain); ?></h3>
+<h3><?php echo sprintf(_("Deleting the subdomain %s:"),"http://".(($sub)?$sub.".":$sub).$domain); ?></h3>
 <hr id="topbar"/>
 <br />
 <?php

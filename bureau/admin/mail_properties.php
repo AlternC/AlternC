@@ -151,7 +151,7 @@ toogle_properties('globalmail_');
 <?php 
 foreach ($lst_toggle as $t) { ?>
 toogle_properties('<?php echo $t ?>');
-<? } //foreach toggle ?>
+<?php } //foreach toggle ?>
 
 toggle_mailadv();
 </script>
