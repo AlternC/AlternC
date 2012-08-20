@@ -15,7 +15,8 @@ Template: alternc/warningaclquota
 Type: note
 _Description: AlternC need ACL and QUOTA activated
  AlternC can't work without ACL activated on his file.
- Please check your /etc/fstab to activate ACL for AlternC.
+ Please check your /etc/fstab and add "acl" to the options
+ of the partition where you will install AlternC.
  .
  Run /usr/lib/alternc/fixperms.sh once it's activated.
  .
