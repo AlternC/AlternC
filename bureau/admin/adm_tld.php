@@ -34,6 +34,12 @@ if (!$admin->enabled) {
 	exit();
 }
 
+$fields = array (
+	"sel"    		=> array ("post", "array", ""),
+);
+getFields($fields);
+
+
 if (is_array($sel)) {
 	$error="";
 	for($i=0;$i<count($sel);$i++) {
@@ -51,7 +57,7 @@ include_once("head.php");
 <hr id="topbar" />
 <br />
 <?php
-	if ($error) {
+	if (isset($error) && $error) {
 	  echo "<p class=\"error\">$error</p>";
 	}
 

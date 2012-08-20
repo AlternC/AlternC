@@ -53,7 +53,7 @@ include_once("head.php");
 <hr id="topbar"/>
 <br />
 <?php
-        if ($error) {
+        if (isset($error) && $error) {
                 echo "<p class=\"error\">$error</p>";
         }
 ?>

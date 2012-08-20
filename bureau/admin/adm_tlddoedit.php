@@ -28,6 +28,12 @@
  ----------------------------------------------------------------------
 */
 require_once("../class/config.php");
+$fields = array (
+        "tld"                 => array ("post", "string", ""),
+        "mode"                => array ("post", "integer", ""),
+);      
+getFields($fields);
+
 
 if (!$admin->enabled) {
         __("This page is restricted to authorized staff");

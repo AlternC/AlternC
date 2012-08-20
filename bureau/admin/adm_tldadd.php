@@ -33,6 +33,12 @@ if (!$admin->enabled) {
 	__("This page is restricted to authorized staff");
 	exit();
 }
+$fields = array (
+	"tld"    		=> array ("post", "string", ""),
+	"mode"    		=> array ("post", "integer", ""),
+);
+getFields($fields);
+
 
 include_once ("head.php");
 
@@ -41,7 +47,7 @@ include_once ("head.php");
 <hr id="topbar"/>
 <br />
 <?php
-	if ($error) {
+	if (isset($error) && $error) {
 	  echo "<p class=\"error\">$error</p>";
 	}
 
@@ -56,7 +62,7 @@ include_once ("head.php");
 <form method="post" action="adm_tlddoadd.php" name="main" id="main">
 
 <table class="tedit">
-<tr><th><label for="tld"><?php __("TLD"); ?></label></th><td><input type="text" id="tld" name="tld" class="int" value="<?php ehe($tld); ?>" size="20" maxlength="64" /></td></tr>
+<tr><th><label for="tld"><?php __("TLD"); ?></label></th><td><input type="text" id="tld" name="tld" class="int" value="<?php ehe( (isset($tld)?$tld:'') ); ?>" size="20" maxlength="64" /></td></tr>
 <tr><th><label for="mode"><?php __("Allowed Mode"); ?></label></th><td><select name="mode" id="mode" class="inl">
 	<?php $admin->selecttldmode($mode); ?>
 </select></td></tr>

@@ -34,6 +34,13 @@ if (!$admin->enabled) {
 	exit();
 }
 
+$fields = array (
+        "tld"    => array ("request", "string", ""),
+        "mode"   => array ("request", "integer", ""),
+);
+getFields($fields);
+
+
 if (!$admin->addtld($tld,$mode)) {
 	$error=$err->errstr();
 	include("adm_tldadd.php");
