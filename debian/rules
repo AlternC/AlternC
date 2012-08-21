@@ -71,6 +71,9 @@ install: build
 		done ;\
 	done
 
+	#log directory
+	mkdir -p debian/alternc/var/alternc/logs
+	chown alterncpanel:alterncpanel debian/alternc/var/alternc/logs
 	# Group and user 1999 reference alterncpanel
 	chown 1999:1999 debian/alternc/var/alternc/html/*
 

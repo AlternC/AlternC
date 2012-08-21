@@ -102,6 +102,7 @@ var/alternc/mail/z
 var/alternc/mla
 var/alternc/sessions
 var/alternc/tmp
+var/alternc/logs
 var/backups/alternc
 var/log/alternc
 var/run/alternc

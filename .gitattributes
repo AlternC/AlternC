@@ -241,6 +241,8 @@ bureau/admin/js/prototype.js -text
 bureau/admin/login.php -text
 bureau/admin/logo.png -text
 bureau/admin/logo2.png -text
+bureau/admin/logs_download.php -text
+bureau/admin/logs_list.php -text
 bureau/admin/mail_add.php -text
 bureau/admin/mail_alias_create.inc.php -text
 bureau/admin/mail_alias_doedit.php -text
@@ -336,6 +338,7 @@ bureau/class/m_export.php -text
 bureau/class/m_ftp.php -text
 bureau/class/m_hooks.php -text
 bureau/class/m_hta.php -text
+bureau/class/m_log.php -text
 bureau/class/m_mail.php -text
 bureau/class/m_mail_alias.php -text
 bureau/class/m_mail_jabber.php -text
@@ -410,6 +413,7 @@ etc/alternc/alternc-sudoers -text
 etc/alternc/alternc.ini -text
 etc/alternc/apache2-ssl.conf -text
 etc/alternc/apache2.conf -text
+etc/alternc/apache_logformat.conf -text
 etc/alternc/dbusers.cnf.sample -text
 etc/alternc/functions_hosting/hosting_massvhost.sh -text
 etc/alternc/menulist.txt -text
@@ -503,8 +507,10 @@ src/alternc-check -text
 src/alternc-dboptimize -text
 src/alternc-passwd -text
 src/alternc_reload -text
+src/compress_logs.sh -text
 src/cron_users.sh -text
 src/cron_users_doit.sh -text
+src/delete_logs.sh -text
 src/du.pl -text
 src/export_account.php -text
 src/fixperms.sh -text

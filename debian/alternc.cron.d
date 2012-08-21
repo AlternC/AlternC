@@ -1,6 +1,12 @@
 # Every day at 4am, produce raw statistics
 0 4 * * *	root	/usr/lib/alternc/rawstat.daily
 
+# Every 2 days compress log files
+0 4 * * *	root	/usr/lib/alternc/compress_logs.sh
+
+# Suppress log files older than one year
+0 4 * * *	root	/usr/lib/alternc/delete_logs.sh
+
 # Every day at 5am and every week at 4am, make requested SQL backups
 0 5 * * *	www-data	/usr/lib/alternc/sqlbackup.sh -t daily
 0 4 * * 0	www-data	/usr/lib/alternc/sqlbackup.sh -t weekly

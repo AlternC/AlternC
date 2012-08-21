@@ -93,6 +93,7 @@ host_create() {
 
     # Put the good value in the conf file
         sed -i \
+	-e "s#%%LOGIN%%#$USER#g" \
         -e "s#%%fqdn%%#$FQDN2#g" \
         -e "s#%%document_root%%#$DOCUMENT_ROOT2#g" \
         -e "s#%%account_root%%#$ACCOUNT_ROOT2#g" \

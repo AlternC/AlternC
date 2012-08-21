@@ -19,6 +19,7 @@ umask 022
 LOCK_FILE="$ALTERNC_LOC/bureau/cron.lock"
 OLDIFS="$IFS"
 NEWIFS=" "
+LOGFORMAT_FILE="/etc/alternc/apache_logformat.conf"
 RELOAD_ZONES="$(mktemp /tmp/alternc_reload_zones.XXXX)"
 RELOAD_WEB="$(mktemp /tmp/alternc_reload_web.XXXX)"
 DNS_DO_RESTART="/tmp/alternc.do_do_restart.$$"
@@ -117,13 +118,26 @@ do
     echo -n " $dom " >> "$RELOAD_ZONES"
 done
 
-
 if [ ! -z "$(cat "$RELOAD_WEB")" ] ; then
   echo " apache " >> "$RELOAD_ZONES"
 
   # Concat the apaches files
   tempo=$(mktemp "$VHOST_FILE.XXXXX")
-  find "$VHOST_DIR" -mindepth 2 -type f -iname "*.conf" -print0 | xargs -0 cat > "$tempo" 
+
+  (
+    echo "###BEGIN OF ALTERNC AUTO-GENERATED FILE - DO NOT EDIT MANUALLY###"
+    # If exists and readable, include conf file "apache_logformat.conf"
+    # contain LogFormat and CustomLog directives for our Vhosts)
+    echo "## LogFormat informations"
+    if [ ! -r "$LOGFORMAT_FILE" ] ; then
+      echo "## Warning : Cannot read $LOGFORMAT_FILE"
+    else
+      echo "Include \"$LOGFORMAT_FILE\""
+    fi
+    find "$VHOST_DIR" -mindepth 2 -type f -iname "*.conf" -print0 | xargs -0 cat 
+    echo "###END OF ALTERNC AUTO-GENERATED FILE - DO NOT EDIT MANUALLY###" 
+  ) > "$tempo"
+
   if [ $? -ne 0 ] ; then
     log_error " web file concatenation failed"
   fi

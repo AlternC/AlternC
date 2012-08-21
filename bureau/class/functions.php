@@ -35,6 +35,11 @@ mt_srand((float) $sec + ((float) $usec * 100000));
 /* Format a field value for input or textarea : */
 function fl($str) { return str_replace("<","&lt;",str_replace("\"","&quot;",$str)); }
 
+// Use of m_log
+function compare_logname($a, $b) {
+  return strcmp($a['name'],$b['name']);
+}
+
 /*
  Check if a domain can be hosted on this server :
  Return a negative value in case of an error,
