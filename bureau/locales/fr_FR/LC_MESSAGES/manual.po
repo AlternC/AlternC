@@ -195,18 +195,6 @@ msgstr ""
 "Il n'y a pas de MX pointant vers ce serveur, alors que vous nous demandez "
 "d'héberger le mail ici."
 
-#. The name of the domain type MUST contain only digits and letters
-msgid "err_dom_26"
-msgstr "Le nom des types de domaines ne doit être composé que de chiffres ou de lettres."
-
-#. Invalid domain type selected, please check.
-msgid "err_dom_27"
-msgstr "Un type de domaine invalide a été sélectionné, merci de vérifier."
-
-#. The parameters for this subdomain and domain type are invalid. Please check for subdomain entries incompatibility
-msgid "err_dom_28"
-msgstr "Les paramètres pour ce sous-domaine et ce type de domaine sont invalide. Vérifiez qu'aucune incompatibilité n'existe sur ce sous-domaine."
-
 #. - Entrez le nom du domaine que vous souhaitez héberger. Le nom de domaine 
 #. doit être complet, mais <b>sans le www.</b><br /> IMPORTANT : Si vous voulez 
 #. un hébergement réel de domaine, il faut que les DNS de votre domaine 
@@ -389,10 +377,6 @@ msgstr "L'utilisateur '%s' existe déja pour ce répertoire"
 #. Please enter a valid username
 msgid "err_hta_11"
 msgstr "Veuillez saisir un nom d'utilisateur valide"
-
-#. Cannot write inside the requested folder. Please check your permissions
-msgid "err_hta_12"
-msgstr "Impossible d'écrire dans le dossier concerné. Vérifiez vos permissions."
 
 #. Email Accounts
 msgid "quota_mail"
@@ -708,22 +692,6 @@ msgstr "Répertoire ou fichier incorrect !"
 msgid "err_bro_2"
 msgstr "Vous ne pouvez pas déplacer un fichier dans le même répertoire !"
 
-#. Cannot create the requested file. Please check permissions.
-msgid "err_bro_3"
-msgstr "Impossible de créer le fichier demandé. Vérifiez les permissions."
-
-#. Cannot create the requested directory. Please check permissions.
-msgid "err_bro_4"
-msgstr "Impossible de créer le répertoire demandé. Vérifiez les permissions."
-
-#. Cannot edit the requested file. Please check permissions.
-msgid "err_bro_5"
-msgstr "Impossible de modifier le fichier demandé. Vérifiez les permissions."
-
-#. Cannot read the requested file. Please check permissions.
-msgid "err_bro_6"
-msgstr "Impossible de lire le fichier demandé. Vérifiez les permissions."
-
 #. If we manage your DNS <br />You can manage your mails elsewhere if you want 
 #. (MX field).<br />Write <b><code>%s</code></b> in this field if your mail 
 #. must be managed by %s<br />or put the IP address or name of the mail server 
@@ -783,30 +751,33 @@ msgstr ""
 
 msgid "err_admin_14"
 msgstr ""
-"La politique de mot de passe demandée n'a pas été trouvée, Ce password "
-"est refusé (c'est une erreur de programmation ...)"
+"La politique de mot de passe demandée n'a pas été trouvée, Ce password est "
+"refusé (c'est une erreur de programmation ...)"
 
 msgid "err_admin_15"
 msgstr ""
-"Le mot de passe est trop court selon votre politique de mot de passe, "
-"merci de vérifier"
+"Le mot de passe est trop court selon votre politique de mot de passe, merci "
+"de vérifier"
 
 msgid "err_admin_16"
 msgstr ""
-"Le mot de passe est trop long selon votre politique de mot de passe, "
-"merci de vérifier"
+"Le mot de passe est trop long selon votre politique de mot de passe, merci "
+"de vérifier"
 
 msgid "err_admin_17"
 msgstr ""
 "Le mot de passe ne peut pas être le même que le nom d'utilisateur (ou "
-"quelque chose de similaire) selon votre politique de mot de passe, merci "
-"de vérifier"
+"quelque chose de similaire) selon votre politique de mot de passe, merci de "
+"vérifier"
 
 msgid "err_admin_18"
 msgstr ""
-"Le mot de passe doit contenir des caractères de %s classes différentes "
-"selon votre politique de mot de passe (il n'en contient que %s), merci de "
-"vérifier"
+"Le mot de passe doit contenir des caractères de %s classes différentes selon "
+"votre politique de mot de passe (il n'en contient que %s), merci de vérifier"
+
+msgid "err_hta_12"
+msgstr ""
+"Impossible d'écrire dans le dossier concerné. Vérifiez vos permissions."
 
 msgid "err_mail_16"
 msgstr "Ce compte esclave MX existe déjà"
@@ -816,6 +787,9 @@ msgstr "Le mot de passe est obligatoire"
 
 msgid "err_mysql_21"
 msgstr "Le nom d'utilisateur ne peut pas être vide"
+
+msgid "err_bro_3"
+msgstr "Impossible de créer le fichier demandé. Vérifiez les permissions."
 
 # $d,$m,$y
 #  1  2  3 
@@ -831,39 +805,62 @@ msgstr "Mots de passe des comptes POP/IMAP"
 msgid "Protected folders passwords"
 msgstr "Mots de passe des dossiers protégés"
 
-msgid "AlternC panel access"
-msgstr "Accès au bureau AlternC"
+#~ msgid "err_dom_26"
+#~ msgstr ""
+#~ "Le nom des types de domaines ne doit être composé que de chiffres ou de "
+#~ "lettres."
 
-msgid "Locally hosted"
-msgstr "Géré en local"
+#~ msgid "err_dom_27"
+#~ msgstr "Un type de domaine invalide a été sélectionné, merci de vérifier."
 
-msgid "URL redirection"
-msgstr "Redirection vers une url"
+#~ msgid "err_dom_28"
+#~ msgstr ""
+#~ "Les paramètres pour ce sous-domaine et ce type de domaine sont invalide. "
+#~ "Vérifiez qu'aucune incompatibilité n'existe sur ce sous-domaine."
 
-msgid "IPv4 redirect"
-msgstr "Redirection vers une IPv4"
+#~ msgid "err_bro_4"
+#~ msgstr ""
+#~ "Impossible de créer le répertoire demandé. Vérifiez les permissions."
 
-msgid "Webmail access"
-msgstr "Accès au webmail"
+#~ msgid "err_bro_5"
+#~ msgstr ""
+#~ "Impossible de modifier le fichier demandé. Vérifiez les permissions."
 
-msgid "IPv6 redirect"
-msgstr "Redirection vers une IPv6"
+#~ msgid "err_bro_6"
+#~ msgstr "Impossible de lire le fichier demandé. Vérifiez les permissions."
 
-msgid "CNAME DNS entry"
-msgstr "Entrée DNS CNAME"
+#~ msgid "AlternC panel access"
+#~ msgstr "Accès au bureau AlternC"
 
-msgid "TXT DNS entry"
-msgstr "Entrée DNS TXT"
+#~ msgid "Locally hosted"
+#~ msgstr "Géré en local"
 
-msgid "MX DNS entry"
-msgstr "Entrée DNS MX"
+#~ msgid "URL redirection"
+#~ msgstr "Redirection vers une url"
 
-msgid "secondary MX DNS entry"
-msgstr "Entrée DNS MX secondaire"
+#~ msgid "IPv4 redirect"
+#~ msgstr "Redirection vers une IPv4"
 
-msgid "Default mail server"
-msgstr "Serveur de mail par défaut"
+#~ msgid "Webmail access"
+#~ msgstr "Accès au webmail"
 
-msgid "Default backup mail server"
-msgstr "Serveur de mail de secours"
+#~ msgid "IPv6 redirect"
+#~ msgstr "Redirection vers une IPv6"
 
+#~ msgid "CNAME DNS entry"
+#~ msgstr "Entrée DNS CNAME"
+
+#~ msgid "TXT DNS entry"
+#~ msgstr "Entrée DNS TXT"
+
+#~ msgid "MX DNS entry"
+#~ msgstr "Entrée DNS MX"
+
+#~ msgid "secondary MX DNS entry"
+#~ msgstr "Entrée DNS MX secondaire"
+
+#~ msgid "Default mail server"
+#~ msgstr "Serveur de mail par défaut"
+
+#~ msgid "Default backup mail server"
+#~ msgstr "Serveur de mail de secours"
