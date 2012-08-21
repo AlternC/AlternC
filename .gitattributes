@@ -1,5 +1,6 @@
 * text=auto !eol
 /.svnignore -text
+.tx/config -text
 /COPYING -text
 /README.en -text
 /README.fr -text
