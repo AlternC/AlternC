@@ -10,7 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2002-06-16 13:50CEST\n"
 "Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Emacs 21\n"
 
@@ -174,37 +174,37 @@ msgstr ""
 msgid "err_dom_25"
 msgstr ""
 
-#. - Entrez le nom du domaine que vous souhaitez héberger. Le nom de domaine 
-#. doit être complet, mais <b>sans le www.</b><br /> IMPORTANT : Si vous voulez 
-#. un hébergement réel de domaine, il faut que les DNS de votre domaine 
-#. pointent vers nos serveurs DNS. Contacter votre hébergeur pour plus 
+#. - Entrez le nom du domaine que vous souhaitez hÃ©berger. Le nom de domaine 
+#. doit Ãªtre complet, mais <b>sans le www.</b><br /> IMPORTANT : Si vous voulez 
+#. un hÃ©bergement rÃ©el de domaine, il faut que les DNS de votre domaine 
+#. pointent vers nos serveurs DNS. Contacter votre hÃ©bergeur pour plus 
 #. d'information.<br /> Exemples : globenet.org / demo.com / test.eu.org etc.
 #. <br />Plus d'info sur la gestion des domaines dans l'aide en ligne 
 #. HELPID_200<br />
 msgid "hlp_add_domain"
 msgstr ""
 
-#. Cliquez sur le lien ci-dessus. Vous pourrez ensuite accéder aux paremètres 
-#. du domaine dans le menu à gauche.2 liens vont apparaitre : <br />- un 
-#. premier pour modifier les paramètres d'hébergement du domaine (sous-
-#. domaines, redirections, hébergement mails ...) <br />- un second pour gérer 
-#. les comptes emails du domaine (si vous souhaitez créer des boites aux 
+#. Cliquez sur le lien ci-dessus. Vous pourrez ensuite accÃ©der aux paremÃ¨tres 
+#. du domaine dans le menu Ã  gauche.2 liens vont apparaitre : <br />- un 
+#. premier pour modifier les paramÃ¨tres d'hÃ©bergement du domaine (sous-
+#. domaines, redirections, hÃ©bergement mails ...) <br />- un second pour gÃ©rer 
+#. les comptes emails du domaine (si vous souhaitez crÃ©er des boites aux 
 #. lettres).<br />Plus d'info sur la gestion des domaines dans l'aide en ligne 
 #. HELPID_200<br />
 msgid "hlp_add_domain_2"
 msgstr ""
 
-#. Le domaine a été effacé, mais les fichiers de votre site n'ont pas été 
-#. détruits.<br />Si vous souhaitez détruire les fichiers du site web, utilisez 
+#. Le domaine a Ã©tÃ© effacÃ©, mais les fichiers de votre site n'ont pas Ã©tÃ© 
+#. dÃ©truits.<br />Si vous souhaitez dÃ©truire les fichiers du site web, utilisez 
 #. le Gestionnaire de Fichier<br />Plus d'info sur la gestion des domaines dans 
 #. l'aide en ligne HELPID_200<br />
 msgid "hlp_del_domain"
 msgstr ""
 
-#. Cette zone vous permet de modifier les paramètres de votre domaine, ainsi 
-#. que des sous-domaines installés<br />Vous pouvez créer un nouveau sous-
+#. Cette zone vous permet de modifier les paramÃ¨tres de votre domaine, ainsi 
+#. que des sous-domaines installÃ©s<br />Vous pouvez crÃ©er un nouveau sous-
 #. domaine et choisir, soit de le rediriger vers votre espace disque, vers une 
-#. autre adresse Internet, ou vers une adresse IP (utilisateurs avancés)<br />
+#. autre adresse Internet, ou vers une adresse IP (utilisateurs avancÃ©s)<br />
 #. Plus d'info sur la gestion des domaines dans l'aide en ligne HELPID_200<br />
 msgid "hlp_edit_domain"
 msgstr ""
@@ -237,32 +237,32 @@ msgstr ""
 msgid "err_ftp_6"
 msgstr ""
 
-#. Voici la liste des comptes ftp ayant accès à votre compte. Cliquez sur 
+#. Voici la liste des comptes ftp ayant accÃ¨s Ã  votre compte. Cliquez sur 
 #. 'Modifier' pour changer le nom d'utilisateur, le mot de passe, ou le dossier 
 #. racine.<br /> Pour supprimer un compte, cochez la case correspondante et 
-#. cliquez sur le bouton 'Supprimer les comptes cochés'<br />Pour pouvoir 
-#. accéder à vos fichiers avec un logiciel de ftp, vous devez créer au moins un 
-#. compte. Chaque compte est associé à un dossier, et n'aura donc accès qu'aux 
-#. fichiers situés dans ce dossier ou en dessous. <br />Plus d'info sur le FTP 
+#. cliquez sur le bouton 'Supprimer les comptes cochÃ©s'<br />Pour pouvoir 
+#. accÃ©der Ã  vos fichiers avec un logiciel de ftp, vous devez crÃ©er au moins un 
+#. compte. Chaque compte est associÃ© Ã  un dossier, et n'aura donc accÃ¨s qu'aux 
+#. fichiers situÃ©s dans ce dossier ou en dessous. <br />Plus d'info sur le FTP 
 #. dans l'aide en ligne HELPID_100<br />
 msgid "hlp_ftp_list"
 msgstr ""
 
 #. Vous n'avez actuellement aucun Compte FTP de disponible. Cliquez sur 
-#. 'Création d'un compte ftp' pour en créer un.<br />Pour pouvoir accéder à vos 
-#. fichiers avec un logiciel de ftp, vous devez créer au moins un compte.  
-#. Chaque compte est associé à un dossier, et n'aura donc accès qu'aux fichiers 
-#. situés dans ce dossier ou en dessous. <br />Plus d'info sur le FTP dans 
+#. 'CrÃ©ation d'un compte ftp' pour en crÃ©er un.<br />Pour pouvoir accÃ©der Ã  vos 
+#. fichiers avec un logiciel de ftp, vous devez crÃ©er au moins un compte.  
+#. Chaque compte est associÃ© Ã  un dossier, et n'aura donc accÃ¨s qu'aux fichiers 
+#. situÃ©s dans ce dossier ou en dessous. <br />Plus d'info sur le FTP dans 
 #. l'aide en ligne HELPID_100<br />
 msgid "hlp_ftp_list_no"
 msgstr ""
 
 #. Pour ajouter un compte ftp, vous devez choisir un Nom d'utilisateur, un mot 
-#. de passe, et un répertoire racine<br />Le nom d'utilisateur commence 
+#. de passe, et un rÃ©pertoire racine<br />Le nom d'utilisateur commence 
 #. toujours par votre nom de login ou le nom d'un de vos domaines.<br />Le 
-#. répertoire racine, s'il n'existe pas, sera créé automatiquement.<br />Note : 
-#. Le compte que vous créez ainsi aura accès en lecture et en écriture aux 
-#. fichiers situés dans le répertoire et tous ses sous-répertoires.<br />Plus 
+#. rÃ©pertoire racine, s'il n'existe pas, sera crÃ©Ã© automatiquement.<br />Note : 
+#. Le compte que vous crÃ©ez ainsi aura accÃ¨s en lecture et en Ã©criture aux 
+#. fichiers situÃ©s dans le rÃ©pertoire et tous ses sous-rÃ©pertoires.<br />Plus 
 #. d'info sur le FTP dans l'aide en ligne HELPID_100<br />
 msgid "hlp_ftp_add"
 msgstr ""
@@ -413,7 +413,7 @@ msgid "err_mem_5"
 msgstr ""
 
 #. The old password is incorrect
-#. PROBLEME : il y avait 2 fois le 5, les autres messages doivent surement etre décalés (TODO)
+#. PROBLEME : il y avait 2 fois le 5, les autres messages doivent surement etre dÃ©calÃ©s (TODO)
 msgid "err_mem_6"
 msgstr ""
 
@@ -437,12 +437,12 @@ msgstr ""
 msgid "err_mem_12"
 msgstr ""
 
-#. Français (France)
+#. FranÃ§ais (France)
 #. Please do NOT translate those strings to each language. Use the original language instead
 msgid "fr_FR"
 msgstr ""
 
-#. Français (Canada)
+#. FranÃ§ais (Canada)
 #. Please do NOT translate those strings to each language. Use the original language instead
 msgid "fr_CA"
 msgstr ""
@@ -462,12 +462,12 @@ msgstr ""
 msgid "de_DE"
 msgstr ""
 
-#. Español (Spania)
+#. EspaÃ±ol (Spania)
 #. Please do NOT translate those strings to each language. Use the original language instead
 msgid "es_ES"
 msgstr ""
 
-#. Español (Venezuela)
+#. EspaÃ±ol (Venezuela)
 #. Please do NOT translate those strings to each language. Use the original language instead
 msgid "es_VE"
 msgstr ""
@@ -652,47 +652,47 @@ msgstr ""
 
 msgid "err_admin_14"
 msgstr ""
-"La politique de mot de passe demandée n'a pas été trouvée, Ce password "
-"est refusé (c'est une erreur de programmation ...)"
+"La politique de mot de passe demandÃ©e n'a pas Ã©tÃ© trouvÃ©e, Ce password "
+"est refusÃ© (c'est une erreur de programmation ...)"
 
 msgid "err_admin_15"
 msgstr ""
 "Le mot de passe est trop court selon votre politique de mot de passe, "
-"merci de vérifier"
+"merci de vÃ©rifier"
 
 msgid "err_admin_16"
 msgstr ""
 "Le mot de passe est trop long selon votre politique de mot de passe, "
-"merci de vérifier"
+"merci de vÃ©rifier"
 
 msgid "err_admin_17"
 msgstr ""
-"Le mot de passe ne peut pas être le même que le nom d'utilisateur (ou "
+"Le mot de passe ne peut pas Ãªtre le mÃªme que le nom d'utilisateur (ou "
 "quelque chose de similaire) selon votre politique de mot de passe, merci "
-"de vérifier"
+"de vÃ©rifier"
 
 msgid "err_admin_18"
 msgstr ""
-"Le mot de passe doit contenir des caractères de %s classes différentes "
+"Le mot de passe doit contenir des caractÃ¨res de %s classes diffÃ©rentes "
 "selon votre politique de mot de passe (il n'en contient que %s), merci de "
-"vérifier"
+"vÃ©rifier"
 
 msgid "err_hta_12"
 msgstr "Le fichier .htpasswd n'existe pas"
 
 msgid "err_mail_16"
-msgstr "Ce compte esclave MX existe déjà"
+msgstr "Ce compte esclave MX existe dÃ©jÃ "
 
 msgid "err_mysql_20"
 msgstr "Le mot de passe est obligatoire"
 
 msgid "err_mysql_21"
-msgstr "Le nom d'utilisateur ne peut pas être vide"
+msgstr "Le nom d'utilisateur ne peut pas Ãªtre vide"
 
 msgid "err_bro_3"
 msgstr ""
-"Vous n'avez pas le droit d'écrire dans ce répertoire. Vérifiez les droits "
-"d'accès !"
+"Vous n'avez pas le droit d'Ã©crire dans ce rÃ©pertoire. VÃ©rifiez les droits "
+"d'accÃ¨s !"
 
 # $d,$m,$y
 #  1  2  3 
@@ -706,5 +706,5 @@ msgid "POP/IMAP account passwords"
 msgstr "Mots de passe des comptes POP/IMAP"
 
 msgid "Protected folders passwords"
-msgstr "Mots de passe des dossiers protégés"
+msgstr "Mots de passe des dossiers protÃ©gÃ©s"
 

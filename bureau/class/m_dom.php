@@ -473,6 +473,7 @@ class m_dom {
     // pour ajouter un nouveau TLD, utiliser le code ci-dessous.
     //  echo "ext: $ext<br />";
 
+    $serveur="";
     if (($fp=@fsockopen("whois.iana.org", 43))>0) {
       fputs($fp, "$domain\r\n");
       $found = false;
@@ -482,7 +483,7 @@ class m_dom {
         if (preg_match('#^whois:#', $ligne)) { $serveur=preg_replace('/whois:\ */','',$ligne,1); }
       }
     }
-		$serveur=str_replace(array(" ","\n"),"",$serveur);
+    $serveur=str_replace(array(" ","\n"),"",$serveur);
 
     $egal="";
     switch($ext) {
