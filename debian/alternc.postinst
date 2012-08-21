@@ -54,11 +54,11 @@ case "$1" in
        addgroup --gid 1998 vmail
     fi
     if ! getent passwd vmail; then
-       useradd -g vmail -u 1998 vmail -d $VMAIL_HOME/mail -m 
+       useradd -g vmail -u 1998 vmail -d "$VMAIL_HOME"/mail -m 
     fi 
-    chown -R vmail:vmail $VMAIL_HOME/mail
-    chmod u+w $VMAIL_HOME/mail
-    chmod -R g+w $VMAIL_HOME/mail
+    chown -R vmail:vmail "$VMAIL_HOME"/mail
+    chmod u+w "$VMAIL_HOME"/mail
+    chmod -R g+w "$VMAIL_HOME"/mail
 
     # build local.sh if it does not exist
     if [ ! -f $CONFIGFILE ]; then
