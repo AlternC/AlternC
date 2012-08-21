@@ -31,7 +31,12 @@ require_once("../class/config.php");
 
 include_once("head.php");
 
-if (!$id) {
+$fields = array (
+        "id"                => array ("get", "integer", ""),
+);
+getFields($fields);
+
+if (empty($id)) {
 	$error=_("No Statistics selected!");
 } else {
 	$r=$sta2->get_stats_details_raw($id);
@@ -45,7 +50,7 @@ if (!$id) {
 <hr id="topbar"/>
 <br />
 <?php
-	if ($error) {
+	if (isset($error) && $error) {
 		echo "<p class=\"error\">$error</p>";
 		include_once("foot.php");
 		exit();

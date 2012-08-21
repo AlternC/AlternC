@@ -29,7 +29,13 @@
 */
 require_once("../class/config.php");
 
-if (!$id) {
+$fields = array (
+        "id"                => array ("post", "integer", ""),
+        "dir"               => array ("post", "string", ""),
+);
+getFields($fields);
+
+if (empty($id)) {
 	$error=_("No Statistics selected!");
 } else {
 	$r=$sta2->put_stats_details_raw($id,$dir);
