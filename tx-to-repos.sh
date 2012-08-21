@@ -17,12 +17,15 @@ do
     cp "lang/${lang}.po" "bureau/locales/$lang/LC_MESSAGES/alternc"
     sublang="`echo $lang | cut -c 1-2`"
     # merge the po for debconf into the relevant file for the modules : 
-    msgcat --use-first --less-than=3 --more-than=1 -o tmp.po  "lang/${lang}.po" "debian/po/${sublang}.po"
-    mv -f tmp.po "debian/po/${sublang}.po"
-    msgcat --use-first --less-than=3 --more-than=1 -o tmp.po  "lang/${lang}.po" "../../alternc-awstats/trunk/debian/po/${sublang}.po"
-    mv -f tmp.po "../../alternc-awstats/debian/po/${sublang}.po"
-    msgcat --use-first --less-than=3 --more-than=1 -o tmp.po  "lang/${lang}.po" "../../alternc-mailman/trunk/debian/po/${sublang}.po"
-    mv -f tmp.po "../../alternc-mailman/debian/po/${sublang}.po"
+    if [ "$lang" != "en" ]
+    then
+	msgcat --use-first --less-than=3 --more-than=1 -o tmp.po  "lang/${lang}.po" "debian/po/${sublang}.po"
+	mv -f tmp.po "debian/po/${sublang}.po"
+	msgcat --use-first --less-than=3 --more-than=1 -o tmp.po  "lang/${lang}.po" "../../alternc-awstats/trunk/debian/po/${sublang}.po"
+	mv -f tmp.po "../../alternc-awstats/trunk/debian/po/${sublang}.po"
+	msgcat --use-first --less-than=3 --more-than=1 -o tmp.po  "lang/${lang}.po" "../../alternc-mailman/trunk/debian/po/${sublang}.po"
+	mv -f tmp.po "../../alternc-mailman/trunk/debian/po/${sublang}.po"
+    fi
     echo "done"
 done
 
