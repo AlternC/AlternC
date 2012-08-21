@@ -1,7 +1,14 @@
 #!/bin/bash
 
+#------------------------------------------------------------
+# Short doc: launch this when people said they translated 
+# the program in Transifex, so that their translation appears
+# in the production package.
+#------------------------------------------------------------
+
+# Long doc: 
 # Take each sub-project of AlternC 
-# (EXPECTED IN PARENT FOLDERS)
+# (EXPECTED IN PARENT FOLDERS of alternc/trunk/)
 # (yes, one day we will be united again ;) )
 # and get the TRANSLATED strings from transifex
 # then put them at the right places in the repositories

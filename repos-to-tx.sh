@@ -1,14 +1,22 @@
 #!/bin/bash
 
+#------------------------------------------------------------
+# Short doc: launch this after big changes, so that 
+# people who translate the project have the new strings ;) 
+#------------------------------------------------------------
+
+# Long doc: 
 # Take each sub-project of AlternC 
-# (EXPECTED IN PARENT FOLDERS)
+# (EXPECTED IN PARENT FOLDERS of alternc/trunk/)
 # (yes, one day we will be united again ;) )
 # and regenerate the .POT 
 # then regenerate the .PO for each language
 # then merge them into one big .po file and 
-# put them in the altenrc-i18n repository
+# put them in the lang/ folder
 #
-# finally, push all those files to transifex
+# finally, push en_US to transifex
+# to be translated.
+
 
 pushd ../..
 
