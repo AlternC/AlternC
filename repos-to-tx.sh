@@ -43,7 +43,7 @@ do
 	"alternc/trunk/tmp.$lang/" 
     # now we have all .po files in one folder, merge them into one big catalog: 
     msgcat --use-first -o "alternc/trunk/lang/${lang}.po" alternc/trunk/tmp.$lang/*
-#    rm -rf "alternc/trunk/tmp.$lang"
+    rm -rf "alternc/trunk/tmp.$lang"
    echo "done"
 done
 
