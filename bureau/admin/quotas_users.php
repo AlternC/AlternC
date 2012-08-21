@@ -240,6 +240,7 @@ else
 }
 
 $totaltotal=$totalweb+$totallist+$totalmail+($totaldb/1024); // en Ko
+if ($totaltotal==0) $totaltotal=1;
 
 if ($cuid != 2000)
 {
