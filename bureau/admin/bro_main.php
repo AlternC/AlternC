@@ -32,18 +32,20 @@ require_once("../class/config.php");
 include_once ("head.php");
 
 $fields = array (
-		 "R"    => array ("request", "string", ""),
-		 "o"    => array ("request", "array", ""),
-		 "d"    => array ("request", "array", ""),
+		 "R"           => array ("request", "string", ""),
+		 "o"           => array ("request", "array", ""),
+		 "d"           => array ("request", "array", ""),
 		 "formu"       => array ("request", "integer", ""),
-		 "actextract"    => array ("request", "string", ""),
-		 "fileextract"    => array ("request", "string", ""),
-		 "actdel"    => array ("request", "string", ""),
-		 "actcopy"    => array ("request", "string", ""),
-		 "actrename"    => array ("request", "string", ""),
-		 "actmove"    => array ("request", "string", ""),
-		 "actmoveto"    => array ("request", "string", ""),
-		 "nomfich"    => array ("request", "string", ""),
+		 "actextract"  => array ("request", "string", ""),
+		 "fileextract" => array ("request", "string", ""),
+		 "actdel"      => array ("request", "string", ""),
+		 "actcopy"     => array ("request", "string", ""),
+		 "actrename"   => array ("request", "string", ""),
+		 "actmove"     => array ("request", "string", ""),
+		 "actmoveto"   => array ("request", "string", ""),
+		 "nomfich"     => array ("request", "string", ""),
+		 "del_confirm" => array ("request", "string", ""),
+		 "cancel"      => array ("request", "string", ""),
 		 );
 getFields($fields);
 
@@ -89,7 +91,7 @@ if (isset($formu) && $formu) {
     <input type="hidden" name="actdel" value="1" />
     <input type="hidden" name="R" value="<?php echo $R?>" />
     <p class="error"><?php __("WARNING: Confirm the deletion of this files"); ?></p>
-<?php foreach($_REQUEST["d"] as $editfile){ ?>
+<?php foreach($d as $editfile){ ?>
 	<p><?php echo stripslashes($editfile); ?></p>
         <input type="hidden" name="d[]" value="<?php echo htmlentities(stripslashes($editfile)); ?>" />
 <?php } ?>
@@ -101,6 +103,7 @@ if (isset($formu) && $formu) {
 </body>
 </html>
 <?php
+	include_once("foot.php");
         exit();
       }
     }
