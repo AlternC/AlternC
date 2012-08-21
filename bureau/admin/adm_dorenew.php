@@ -34,12 +34,19 @@ if (!$admin->enabled) {
   __("This page is restricted to authorized staff");
   exit();
 }
+
+$fields = array (
+        "uid"                => array ("post", "integer", ""),
+        "periods"            => array ("post", "integer", ""),
+);
+getFields($fields);
+
 if (!$admin->checkcreator($uid)) {
   __("This page is restricted to authorized staff");
   exit();
 }
 
-if (!$admin->renew_mem($_REQUEST['uid'], $_REQUEST['periods'])){
+if (!$admin->renew_mem($uid, $periods)){
   $error=$err->errstr();
   include("adm_edit.php");
 } else {

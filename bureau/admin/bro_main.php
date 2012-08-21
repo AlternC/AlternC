@@ -38,6 +38,7 @@ $fields = array (
 		 "formu"       => array ("request", "integer", ""),
 		 "actextract"  => array ("request", "string", ""),
 		 "fileextract" => array ("request", "string", ""),
+		 "actperms"    => array ("request", "array", ""),
 		 "actdel"      => array ("request", "string", ""),
 		 "actcopy"     => array ("request", "string", ""),
 		 "actrename"   => array ("request", "string", ""),
@@ -46,6 +47,7 @@ $fields = array (
 		 "nomfich"     => array ("request", "string", ""),
 		 "del_confirm" => array ("request", "string", ""),
 		 "cancel"      => array ("request", "string", ""),
+		 "showdirsize" => array ("request", "integer", "0"),
 		 );
 getFields($fields);
 
@@ -149,7 +151,7 @@ if (isset($actextract) && $actextract) {
 }
 
 /* Creation de la liste des fichiers courants */
-$c=$bro->filelist($R, isset($_REQUEST['showdirsize'])?$_REQUEST['showdirsize']:null );
+$c=$bro->filelist($R, $showdirsize );
 if ($c===false) $error=$err->errstr();
 
 ?>
@@ -222,7 +224,7 @@ if (isset($formu) && $formu==2 && isset($actrename) && $actrename && count($d)) 
 }
 
 /* [ML] Changer les permissions : */
-if (isset($formu) && $formu==2 && isset($_REQUEST['actperms']) && $_REQUEST['actperms'] && count($d)) {
+if ($formu==2 && ! (empty($actperms)) && count($d)) {
   echo "<form action=\"bro_main.php\" method=\"post\">\n";
   echo "<input type=\"hidden\" name=\"R\" value=\"$R\" />\n";
   echo "<input type=\"hidden\" name=\"formu\" value=\"7\" />\n";

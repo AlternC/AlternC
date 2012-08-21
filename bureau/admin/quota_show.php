@@ -44,7 +44,7 @@ if (!is_array($q)) {
 	reset($qlist);
 	$col=1;
  	while (list($key,$val)=each($qlist)) {
-		if (!$q[$key]["t"]) continue;
+		if ( !isset($q[$key]) || !$q[$key]["t"]) continue;
  		$col=3-$col;
  		echo "<tr class=\"lst$col\">";
  		echo "<td>";

@@ -2,8 +2,13 @@
 require_once("../class/config.php");
 include_once("head.php");
 
-if (isset($_POST['cron']) && is_array($_POST['cron'])) {
-  if (! $cron->update($_POST['cron'])) {
+$fields = array (
+        "cron"                => array ("post", "array", ""),
+);
+getFields($fields);
+
+if (!empty($cron) {
+  if (! $cron->update($cron) {
     $error=_("There was an error during the record.");
   } else {
     $error=_("Save done.");

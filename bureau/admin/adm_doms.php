@@ -39,14 +39,19 @@ include_once ("head.php");
 ?>
 <h3><?php __("Manage installed domains"); ?></h3>
 <?php
-	if (isset($error) && $error) {
-	  echo "<p class=\"error\">$error</p>";
-	}
+if (isset($error) && $error) {
+  echo "<p class=\"error\">$error</p>";
+}
+
+$fields = array (
+	"force"    		=> array ("get", "integer", "0"),
+);
+getFields($fields);
 
 // List the domains. If the first parameter is true, also check their DNS & other IPs actual parameters.
 // If the second parameter is true, check the domains whatever the dis cache is.
 
-$forcecheck=@($_REQUEST["force"]!="");
+$forcecheck=$force; // retrocompatibility
 $c=$admin->dom_list(true,$forcecheck);
 
 ?>

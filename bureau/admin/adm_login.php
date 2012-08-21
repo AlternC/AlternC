@@ -35,9 +35,14 @@ require_once("../class/config.php");
  * with no parameter when the admin want to go back to his admin account.
  */
 
+$fields = array (
+        "id"                => array ("request", "integer", ""),
+);
+getFields($fields);
+
 
 // * with no parameter when the admin want to go back to his admin account.  
-if ( ( !isset($_REQUEST["id"]) || !$_REQUEST["id"]) && $_COOKIE["oldid"]) {
+if ( $id && $_COOKIE["oldid"]) {
   // We check the cookie's value : 
   list($newuid,$passcheck)=explode("/",$_COOKIE["oldid"]);
   $newuid=intval($newuid); 
