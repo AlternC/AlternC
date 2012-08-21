@@ -353,6 +353,7 @@ bureau/class/variables.php -text
 bureau/index.php -text
 bureau/locales/Makefile -text
 bureau/locales/README -text
+bureau/locales/de_DE/LC_MESSAGES/manual.po -text
 bureau/locales/de_DE/LC_MESSAGES/messages.po -text
 bureau/locales/en_US/LC_MESSAGES/manual.po -text
 bureau/locales/en_US/LC_MESSAGES/messages.po -text
@@ -362,6 +363,7 @@ bureau/locales/fr_FR/LC_MESSAGES/manual.po -text
 bureau/locales/fr_FR/LC_MESSAGES/messages.po -text
 bureau/locales/manual.pot -text
 bureau/locales/messages.pot -text
+bureau/locales/pt_BR/LC_MESSAGES/manual.po -text
 bureau/locales/pt_BR/LC_MESSAGES/messages.po -text
 debian/.svnignore -text
 debian/NEWS -text

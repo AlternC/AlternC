@@ -14,7 +14,7 @@ msgstr ""
 "Language-Team: Espagnol <i18n@alternc.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.0.2\n"
 
@@ -606,7 +606,7 @@ msgstr ""
 #: ../admin/sql_passchg.php:52 ../admin/sql_users_add.php:68
 #: ../admin/sql_users_list.php:48 ../admin/sql_users_password.php:55
 msgid "Password"
-msgstr "Passwört"
+msgstr "PasswÃ¶rt"
 
 #: ../admin/adm_edit.php:123
 msgid "Reset quotas to default?"
@@ -804,7 +804,7 @@ msgstr ""
 #: ../admin/adm_panel.php:52
 #, fuzzy
 msgid "Password Policies"
-msgstr "Passwört"
+msgstr "PasswÃ¶rt"
 
 #: ../admin/adm_panel.php:55
 msgid "Manage IP whitelist"
@@ -898,12 +898,12 @@ msgstr ""
 #: ../admin/adm_passpolicy.php:137
 #, fuzzy
 msgid "Password Kind"
-msgstr "Passwört"
+msgstr "PasswÃ¶rt"
 
 #: ../admin/adm_passpolicy.php:137
 #, fuzzy
 msgid "Password Policy"
-msgstr "Passwört"
+msgstr "PasswÃ¶rt"
 
 #: ../admin/adm_passpolicy.php:139
 msgid "Min Size"
@@ -940,7 +940,7 @@ msgstr ""
 
 #: ../admin/adm_quotaedit.php:69 ../admin/quota_show.php:42
 msgid "Used"
-msgstr "Benützt"
+msgstr "BenÃ¼tzt"
 
 #: ../admin/adm_quotaedit.php:77 ../class/m_quota.php:99
 #: ../class/m_quota.php:107 ../class/m_quota.php:111
@@ -1842,7 +1842,7 @@ msgstr ""
 #: ../admin/mail_doedit.php:50
 #, fuzzy
 msgid "Password do not match"
-msgstr "Passwört"
+msgstr "PasswÃ¶rt"
 
 #: ../admin/mail_doedit.php:69 ../admin/mail_localbox_doedit.php:53
 msgid "Already Activated"
@@ -1884,7 +1884,7 @@ msgstr "Miglied '%s' existiert nicht"
 #: ../admin/mail_edit.inc.php:103
 #, fuzzy
 msgid "Password match"
-msgstr "Passwört"
+msgstr "PasswÃ¶rt"
 
 #: ../admin/mail_list.php:60
 msgid "Create a new mail account"
@@ -2888,7 +2888,7 @@ msgstr "Hilfe"
 
 #, fuzzy
 #~ msgid "POP/IMAP password"
-#~ msgstr "Passwört"
+#~ msgstr "PasswÃ¶rt"
 
 #, fuzzy
 #~ msgid "The email address <b>%s</b> does not exist!"
@@ -2905,7 +2905,7 @@ msgstr "Hilfe"
 
 #, fuzzy
 #~ msgid "You can use a different language: "
-#~ msgstr "Für eine andere Sprache, click über die Fahne"
+#~ msgstr "FÃ¼r eine andere Sprache, click Ã¼ber die Fahne"
 
 #, fuzzy
 #~ msgid "Front page"
@@ -2920,10 +2920,10 @@ msgstr "Hilfe"
 
 #, fuzzy
 #~ msgid "Users"
-#~ msgstr "Benützt"
+#~ msgstr "BenÃ¼tzt"
 
 #~ msgid "If you want to use a different language, click on the flag below"
-#~ msgstr "Für eine andere Sprache, click über die Fahne"
+#~ msgstr "FÃ¼r eine andere Sprache, click Ã¼ber die Fahne"
 
 #~ msgid "lang"
 #~ msgstr "lang"
