@@ -98,8 +98,6 @@ class m_mail {
     $err->log("mail","enum_domains_mail");
     $db->query("select * from address where domain_id=$dom_id order by address asc;");
     if (!$db->num_rows()) {
-      //TODO verifier numero erreur
-      $err->raise("mysql",19);
       return false;
     }
     while($db->next_record()){
