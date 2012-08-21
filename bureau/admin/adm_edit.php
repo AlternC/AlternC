@@ -58,9 +58,9 @@ if (!$r=$admin->get($uid)) {
 <hr id="topbar"/>
 <br />
 <?php
-	if ($error) {
-		echo "<p class=\"error\">$error</p>";
-	}
+  if (isset($error) && $error) {
+    echo "<p class=\"error\">$error</p>";
+  }
 ?>
 <form method="post" action="adm_doedit.php" name="main" id="main">
 <table class="tedit">

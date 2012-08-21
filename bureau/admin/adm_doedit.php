@@ -38,6 +38,23 @@ if (!$admin->enabled) {
 
 $subadmin=variable_get("subadmin_restriction");
 
+$fields = array (
+	"uid" => array ("request", "integer", 0),
+	"enabled" => array ("request", "boolean", true),
+	"pass" => array ("request", "string", ""),
+	"passconf" => array ("request", "string", ""),
+	"canpass" => array ("request", "boolean", true),
+	"notes" => array ("request", "string", ""),
+	"nom" => array ("request", "string", ""),
+	"prenom" => array ("request", "string", ""),
+	"nmail" => array ("request", "string", ""),
+	"type" => array ("request", "string", ""),
+	"duration" => array ("request", "integer", 0),
+	"reset_quotas" => array ("request", "boolean", false),
+);
+getFields($fields);
+
+
 if ($subadmin==0 && !$admin->checkcreator($uid)) {
   __("This page is restricted to authorized staff");
   exit();
