@@ -144,9 +144,9 @@ while (list($key,$val)=each($r))
  if ($val["su"]) { ?>
 		   <td>&nbsp;</td>
 <?php } else { ?>
- <td><input type="checkbox" class="inc" name="d[]" value="<?php echo $val["uid"]; ?>" /></td>
+ <td><input type="checkbox" class="inc" name="d[]" id="user_<?php echo $val["uid"]; ?>" value="<?php echo $val["uid"]; ?>" /></td>
 <?php } ?>
-		<td <?php if ($val["su"]) echo "style=\"color: red\""; ?>><b><?php echo $val["login"] ?></b></td>
+		<td <?php if ($val["su"]) echo "style=\"color: red\""; ?>><label for="user_<?php echo $val["uid"]; ?>"><b><?php echo $val["login"] ?></b></label></td>
 		<td><a href="mailto:<?php echo $val["mail"]; ?>"><?php echo $val["nom"]." ".$val["prenom"] ?></a>&nbsp;</td>
 		<td><?php echo $val["parentlogin"] ?></td>
 		<td><?php echo format_date('%3$d-%2$d-%1$d',$val["created"]); ?></td>

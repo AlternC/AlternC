@@ -34,7 +34,14 @@ if (!$admin->enabled) {
   exit();
 }
 
-if(isset($_POST["del_confirm"]) && $_POST["del_confirm"] == "y"){
+$fields = array (
+		 "d" => array ("request", "array", array()),
+		 "del_confirm" => array("request", "string", ""),
+);
+getFields($fields);
+
+
+if($del_confirm == "y"){
   if (!is_array($d)) {
     $d[]=$d;
   }
