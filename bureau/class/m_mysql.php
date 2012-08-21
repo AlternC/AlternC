@@ -245,6 +245,7 @@ class m_mysql {
       // Ok, database does not exist, quota is ok and dbname is compliant. Let's proceed
       $db->query("INSERT INTO db (uid,login,pass,db,bck_mode) VALUES ('$cuid','$myadm','$password','$dbname',0);");
       $dbname=str_replace('_','\_',$dbname);
+	echo $admin;echo $dbname;die();
       $this->grant($dbname,$myadm,"ALL PRIVILEGES",$password);
       $this->dbus->query("FLUSH PRIVILEGES;");
       return true;
@@ -374,9 +375,9 @@ class m_mysql {
 **/
   function grant($base,$user,$rights=null,$pass=null,$table='*'){
     global $err,$db;
-    $err->log("mysql","grant");
+    $err->log("mysql","grant",$base);
 
-    if(!preg_match("#^[0-9a-z_\\\\]*$#",$base)){
+    if(!preg_match("#^[0-9a-z_\\*\\\\]*$#",$base)){
       $err->raise("mysql",2);
       return false;
     }elseif(!$db->query("select db from db where db='$base';")){
@@ -395,12 +396,18 @@ class m_mysql {
       $err->raise("mysql",5);
       return false;
     }
-    if(!$db->query("select name from dbusers where name='".$user."' ;")){
-      $err->raise("mysql",6);
-      return false; 
-    }
 
-    $grant="grant ".$rights." on `".$base."`.".$table." to '".$user."'@'".$this->dbus->Host."'" ;
+    $db->query("select name from dbusers where name='".$user."' ;");
+
+    if(!$db->num_rows()){
+    	$err->raise("mysql",6);
+	return false;
+    }
+    if($rights == "FILE"){
+       $grant="grant ".$rights." on ".$base.".".$table." to '".$user."'@'".$this->dbus->Host."'" ;
+    }else{
+       $grant="grant ".$rights." on `".$base."`.".$table." to '".$user."'@'".$this->dbus->Host."'" ;
+    }
 
     if($pass){
       $grant .= " identified by '".$pass."';";
@@ -408,7 +415,7 @@ class m_mysql {
       $grant .= ";";
     }
    if(!$this->dbus->query($grant)){
-      $err->raise("mysql",6);
+      $err->raise("mysql",7);
       return false;
    }
     return true;
@@ -750,14 +757,10 @@ class m_mysql {
       $myadm=$db->f("name");  
       $password=$db->f("password");  
     }else{
-      if (strlen($mem->user["login"]) > 9) { //MYSQL doesn't allow login larger dans 16 characters
-        $myadm=substr($mem->user["login"],0,9); 
-        $myadm=$myadm."_myadm";
-      }else{ 
-        $myadm=$mem->user["login"]."_myadm";
+	$myadm=$cuid."_myadm";
       }
 
-      $chars = "234567890abcdefghijkmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      $chars = "1234567890abcdefghijkmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
       $i = 0;
       $password = "";
       while ($i <= 8) {
@@ -765,7 +768,7 @@ class m_mysql {
         $i++;
       } 
       $db->query("INSERT INTO dbusers (uid,name,password,enable) VALUES ('$cuid','$myadm','$password','ADMIN');");
-    }
+    
     return true;
   }
 
