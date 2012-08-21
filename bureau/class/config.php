@@ -162,11 +162,10 @@ if (!defined('NOCHECK')) {
 } 
 
 for($i=0;$i<count($classes);$i++) {
-  if (! in_array($classes[$i],Array('mem', 'err', 'authip'))) {
-    $name2=$classes[$i];
-    $name1="m_".$name2;
-    $$name2= new $name1();
-  }
+  $name2=$classes[$i];
+  if (isset($$name2)) continue; // for already instancied class like mem, err or authip
+  $name1="m_".$name2;
+  $$name2= new $name1();
 }
 
 

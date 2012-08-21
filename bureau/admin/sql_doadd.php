@@ -29,6 +29,10 @@
 */
 require_once("../class/config.php");
 
+$fields = array (
+        "dbn"                 => array ("post", "string", ""),
+);
+getFields($fields);
 
 if (!$quota->cancreate("mysql")) {
 	$error=_("err_mysql_1");

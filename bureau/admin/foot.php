@@ -10,3 +10,6 @@ if ( $debug_alternc->status ) {
 ?>
 </body>
 </html>
+<?php 
+exit(); // case of include('foot.php');
+?>

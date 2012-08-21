@@ -30,10 +30,16 @@
 require_once("../class/config.php");
 include_once ("head.php");
 
+$fields = array (
+        "confirm"                => array ("post", "string", ""),
+);
+getFields($fields);
+
 if(!isset($error)){
 	$error="";
 }
-if (isset($confirm) && $confirm=="y" ) {
+
+if ($confirm=="y" ) {
   reset($_POST);
   while (list($key,$val)=each($_POST)) {
     if (substr($key,0,4)=="del_") {
