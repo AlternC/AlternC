@@ -53,7 +53,7 @@ register_shutdown_function("alternc_shutdown");
 sem_acquire( $alternc_sem );
 
 /* PHPLIB inclusions : */
-$root="/var/alternc/bureau/";
+$root=ALTERNC_PANEL."/";
 /* Server Domain Name */
 $host=getenv("HTTP_HOST");
 
@@ -98,7 +98,7 @@ closedir($c);
 
 
 /* Language */
-bindtextdomain("alternc", "/var/alternc/bureau/locales");
+bindtextdomain("alternc", ALTERNC_LOCALES);
 
 if (!$do_not_set_lang_env) {
   // setlang is on the link at the login page

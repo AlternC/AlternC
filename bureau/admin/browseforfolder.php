@@ -74,7 +74,7 @@ function browseforfolder($curdir) {
         return $brlist;
 }
 
-$root="/var/alternc/html/".substr($mem->user["login"],0,1)."/".$mem->user["login"]."/";
+$root=getuserpath();
 // pour utiliser 'la ou est browseforfolder', mettre dirname($HTTP_SERVER_VARS["PATH_TRANSLATED"]);
 
 if (substr($file,0,1)!="/") $file="/".$file;

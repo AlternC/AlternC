@@ -122,7 +122,7 @@ class m_bro {
    * @return string Returns the complete path to the root of the user's directory.
    */
   function get_user_root($login) {
-    return "/var/alternc/html/".substr($login,0,1)."/".$login;
+    return getuserpath();
   }
 
   /** Retourne le chemin complet vers la racine du repertoire de l'utilisateur.
@@ -377,7 +377,7 @@ class m_bro {
    */
   function DeleteFile($file_list,$R) {
     global $err, $mem;
-    $root=realpath("/var/alternc/html/".substr($mem->user["login"],0,1)."/".$mem->user["login"]);
+    $root=realpath(getuserpath());
     $absolute=$this->convertabsolute($R,0);
     if (!$absolute && strpos($root,$absolute) === 0 && strlen($absolute) > (strlen($root)+1) ) {
       $err->raise("bro",1);
@@ -556,8 +556,8 @@ class m_bro {
       return 1;
     }
     $file = escapeshellarg($file);
-	$dest = escapeshellarg($dest);
-	$dest_to_fix=str_replace($L_ALTERNC_LOC."/html/".substr($mem->user["login"],0,1)."/".$mem->user["login"],'',$dest);
+    $dest = escapeshellarg($dest);
+    $dest_to_fix=str_replace(getuserpath(),'',$dest);
 	 
     // TODO new version of tar supports `tar xf ...` so there is no
     //     need to specify the compression format
@@ -839,7 +839,7 @@ class m_bro {
     header("Content-Transfer-Encoding: binary");
     $d=escapeshellarg(".".$this->convertabsolute($dir,1));
     set_time_limit(0);
-    passthru("/bin/tar -cZ -C ".$L_ALTERNC_LOC."/html/".substr($mem->user["login"],0,1)."/".$mem->user["login"]."/ $d");
+    passthru("/bin/tar -cZ -C ".getuserpath()."/".$mem->user["login"]."/ $d");
   }
 
 
@@ -855,7 +855,7 @@ class m_bro {
     header("Content-Transfer-Encoding: binary");
     $d=escapeshellarg(".".$this->convertabsolute($dir,1));
     set_time_limit(0);
-    passthru("/bin/tar -cz -C ".$L_ALTERNC_LOC."/html/".substr($mem->user["login"],0,1)."/".$mem->user["login"]."/ $d");
+    passthru("/bin/tar -cz -C ".getuserpath()."/ $d");
   }
   
   
@@ -871,7 +871,7 @@ class m_bro {
     header("Content-Transfer-Encoding: binary");
     $d=escapeshellarg(".".$this->convertabsolute($dir,1));
     set_time_limit(0);
-    passthru("/bin/tar -cj -C ".$L_ALTERNC_LOC."/html/".substr($mem->user["login"],0,1)."/".$mem->user["login"]."/ $d");
+    passthru("/bin/tar -cj -C ".getuserpath()."/ $d");
   }
 
   
@@ -964,7 +964,7 @@ function alternc_export_data($dir){
     }
     $timestamp=date("H:i:s");
 
-   if(exec("/bin/tar cvf -  ".$L_ALTERNC_LOC."/html/".substr($mem->user['login'],0,1)."/".$mem->user['login']."/ | gzip -9c > ".$dir."/".$mem->user['login']."_html_".$timestamp.".tar.gz")){
+   if(exec("/bin/tar cvf -  ".getuserpath()."/ | gzip -9c > ".$dir."/".$mem->user['login']."_html_".$timestamp.".tar.gz")){
         $err->log("bro","export_data_succes");
     }else{
         $err->log("bro","export_data_failed");

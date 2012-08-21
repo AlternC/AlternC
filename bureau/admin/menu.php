@@ -37,7 +37,7 @@ require_once("../class/config.php");
 </div>
 <?php
 
-$MENUPATH="/var/alternc/bureau/admin/";
+$MENUPATH=ALTERNC_PANEL."/admin/";
 $file=file("/etc/alternc/menulist.txt", FILE_SKIP_EMPTY_LINES);
 foreach($file as $v) {
   $v=trim($v);

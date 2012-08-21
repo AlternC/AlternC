@@ -21,7 +21,7 @@ if (isset($_REQUEST["setlang"])) {
   $lang=$_REQUEST["setlang"];
 }
 
-$langpath = bindtextdomain("alternc", "/var/alternc/bureau/locales");
+$langpath = bindtextdomain("alternc", ALTERNC_LOCALES);
 
 // Create or update a locale.php file if it is outdated.
 $locales = update_locale($langpath);

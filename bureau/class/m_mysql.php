@@ -184,7 +184,7 @@ class m_mysql {
    */
   function get_mysql_details($dbn) {
     global $db,$err,$bro,$mem,$cuid;
-    $root="/var/alternc/html/".substr($mem->user["login"],0,1)."/".$mem->user["login"];
+    $root=getuserpath();
     $err->log("mysql","get_mysql_details");
     $dbname=$mem->user["login"].($dbn?"_":"").$dbn;
     $size=$this->get_db_size($dbname);

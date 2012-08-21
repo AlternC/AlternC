@@ -140,6 +140,7 @@ class m_sta2 {
     if ($db->num_rows()) {
       while ($db->next_record()) {
 	// We skip /var/alternc/html/u/user
+        // FIXME: utiliser ALTERNC_HTML au lieu de /var/alternc/html/
 	preg_match("/^\/var\/alternc\/html\/.\/[^\/]*\/(.*)/", $db->f("folder"),$match);
 	$r[]=array(
 		   "id"=>$db->f("id"),
@@ -173,6 +174,7 @@ class m_sta2 {
     if ($db->num_rows()) {
       $db->next_record();
       // We skip /var/alternc/html/u/user
+      // FIXME: utiliser ALTERNC_HTML au lieu de /var/alternc/html/
       preg_match("/^\/var\/alternc\/html\/.\/[^\/]*\/(.*)/", $db->f("folder"),$match);
       return array(
 		   "id"=>$db->f("id"),
@@ -209,9 +211,7 @@ class m_sta2 {
     if (substr($folder,0,1)=="/") {
       $folder=substr($folder,1);
     }
-    $lo=$mem->user["login"];
-    $l=substr($lo,0,1);
-    $db->query("UPDATE stats2 SET folder='/var/alternc/html/$l/$lo/$folder', mid='$cuid' WHERE id='$id';");
+    $db->query("UPDATE stats2 SET folder='".getuserpath()."/$folder', mid='$cuid' WHERE id='$id';");
     return true;
   }
 
@@ -254,10 +254,8 @@ class m_sta2 {
     if (substr($dir,0,1)=="/") {
       $dir=substr($dir,1);
     }
-    $lo=$mem->user["login"];
-    $l=substr($lo,0,1);
     if ($quota->cancreate("sta2")) {
-      $db->query("INSERT INTO stats2 (hostname,folder,mid) VALUES ('$hostname','/var/alternc/html/$l/$lo/$dir','$cuid')");
+      $db->query("INSERT INTO stats2 (hostname,folder,mid) VALUES ('$hostname','".getuserpath()."/$dir','$cuid')");
       return true;
     } else {
       $err->raise("sta2",1);

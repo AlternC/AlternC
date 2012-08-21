@@ -46,6 +46,12 @@ Merci de revenir plus tard.";
 */
     ini_set('display_errors', true);
 
+// Some constant
+define('ALTERNC_HTML',     "/var/alternc/html");
+define('ALTERNC_PANEL',    "/var/alternc/bureau");
+define('ALTERNC_LOGS',     "/var/alternc/logs");
+define('ALTERNC_LOCALES',  "/var/alternc/bureau/locales");
+
 // 1. Get a semaphore id for the alternc magic number (18577)
 $alternc_sem = sem_get ( 18577 );
 // 2. Declare the shutdown function, that release the semaphore
@@ -87,10 +93,10 @@ $host=getenv("HTTP_HOST");
 /* Global variables (AlternC configuration) */
 require_once(dirname(__FILE__)."/local.php");
 /* PHPLIB inclusions : */
-$root=$L_ALTERNC_LOC."/bureau/";
+$root=ALTERNC_PANEL."/";
 
-require_once($root."class/db_mysql.php");
-require_once($root."class/functions.php");
+require_once($root."/class/db_mysql.php");
+require_once($root."/class/functions.php");
 require_once($root."class/variables.php");
 
 // Redirection si appel à https://(!fqdn)/

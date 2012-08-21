@@ -209,13 +209,13 @@ function checkuserpath($path) {
   if (substr($path,0,1)=="/")
     $path="/".$path;
 
-  $rpath = realpath("/var/alternc/html/$usar/$user$path");
-  $userpath = realpath("/var/alternc/html/$usar/$user");
+  $rpath = realpath(ALTERNC_HTML."/$usar/$user$path");
+  $userpath = getuserpath();
   if(strpos($rpath,$userpath) === 0){
-    if (is_dir("/var/alternc/html/$usar/$user$path")) {
+    if (is_dir(ALTERNC_HTML."/$usar/$user$path")) {
         return 1;
     }
-    if (is_file("/var/alternc/html/$usar/$user$path")) {
+    if (is_file(ALTERNC_HTML."/$usar/$user$path")) {
       return 2;
     }
   }
@@ -236,7 +236,7 @@ function getuserpath($user = null) {
     global $mem;
     $user = $mem->user['login'];
   }
-  return $L_ALTERNC_LOC . "/html/".substr($user,0,1)."/".$user;
+  return ALTERNC_HTML."/".substr($user,0,1)."/".$user;
 }
 
 /* ECHOes checked="checked" only if the parameter is true

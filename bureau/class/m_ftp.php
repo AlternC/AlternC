@@ -91,6 +91,7 @@ class m_ftp {
     if ($db->num_rows()) {
       while ($db->next_record()) {
 	      // On passe /var/alternc/html/u/user
+              // FIXME: utiliser getuserpath()
 	      $tr=preg_match("/^\/var\/alternc\/html\/.\/[^\/]*\/(.*)$/", $db->f("homedir"),$match);    /* " */
 	      $r[]=array(
 		        "id"=>$db->f("id"),
@@ -119,6 +120,7 @@ class m_ftp {
     $db->query("SELECT id, name, homedir FROM ftpusers WHERE uid='$cuid' AND id='$id';");
     if ($db->num_rows()) {
       $db->next_record();
+      // FIXME: utiliser getuserpath
       $tr=preg_match("/^\/var\/alternc\/html\/.\/[^\/]*\/(.*)$/", $db->f("homedir"),$match);
       $lg=explode("_",$db->f("name"));
       if ((!is_array($lg)) || (count($lg)!=2)) {
@@ -207,7 +209,7 @@ class m_ftp {
       $err->raise("ftp",4);
       return false;
     }
-    $absolute="/var/alternc/html/".substr($mem->user["login"],0,1)."/".$mem->user["login"]."/$dir";
+    $absolute=getuserpath()."/$dir";
     if (!file_exists($absolute)) {
       system("/bin/mkdir -p $absolute");
     }
@@ -224,9 +226,9 @@ class m_ftp {
         }
       }
       $encrypted_password = crypt($pass,strrev(microtime(true)));
-      $db->query("UPDATE ftpusers SET name='".$prefixe.$login."', password='', encrypted_password='$encrypted_password', homedir='/var/alternc/html/$l/$lo/$dir', uid='$cuid' WHERE id='$id';");
+      $db->query("UPDATE ftpusers SET name='".$prefixe.$login."', password='', encrypted_password='$encrypted_password', homedir='$absolute', uid='$cuid' WHERE id='$id';");
     } else {
-      $db->query("UPDATE ftpusers SET name='".$prefixe.$login."', homedir='/var/alternc/html/$l/$lo/$dir', uid='$cuid' WHERE id='$id';");
+      $db->query("UPDATE ftpusers SET name='".$prefixe.$login."', homedir='$absolute', uid='$cuid' WHERE id='$id';");
     }
     return true;
   }
@@ -283,7 +285,7 @@ class m_ftp {
     $db->next_record();
     $lo=$db->f("login");
     $l=substr($lo,0,1);
-    $absolute="/var/alternc/html/".substr($mem->user["login"],0,1)."/".$mem->user["login"]."/$dir";
+    $absolute=getuserpath()."/$dir";
     if (!file_exists($absolute)) {
       system("/bin/mkdir -p $absolute");
     }
@@ -301,7 +303,7 @@ class m_ftp {
 
     if ($quota->cancreate("ftp")) {
       $encrypted_password = crypt($pass,strrev(microtime(true)));
-      $db->query("INSERT INTO ftpusers (name,password, encrypted_password,homedir,uid) VALUES ('".$prefixe.$login."', '', '$encrypted_password', '/var/alternc/html/$l/$lo/$dir', '$cuid')");
+      $db->query("INSERT INTO ftpusers (name,password, encrypted_password,homedir,uid) VALUES ('".$prefixe.$login."', '', '$encrypted_password', '$absolute', '$cuid')");
       return true;
     } else {
       $err->raise("ftp",5);
@@ -320,7 +322,7 @@ class m_ftp {
     $lo=$mem->user["login"];
     $l=substr($lo,0,1);
     if (substr($dir,0,1)=="/") $dir=substr($dir,1);
-    $db->query("SELECT id FROM ftpusers WHERE homedir='/var/alternc/html/$l/$lo/$dir';");
+    $db->query("SELECT id FROM ftpusers WHERE homedir='".getuserpath()."/$dir';");
     if ($db->num_rows()) {
       $db->next_record();
       return $db->f("id");
