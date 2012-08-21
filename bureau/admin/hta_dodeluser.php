@@ -29,15 +29,15 @@
 */
 require_once("../class/config.php");
 
-if (!is_array($d)) {
-        $d[]=$d;
-}
+$fields = array (
+        "d"                => array ("post", "array", ""),
+        "dir"              => array ("post", "string", ""),
+);
+getFields($fields);
 
 reset($d);
 if (!$hta->del_user($d,$dir)) {
-		$error=$err->errstr();
-
-
+  $error=$err->errstr();
 }
 
 include("hta_edit.php");
