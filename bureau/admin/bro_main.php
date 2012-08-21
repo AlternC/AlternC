@@ -48,6 +48,7 @@ $fields = array (
 		 "del_confirm" => array ("request", "string", ""),
 		 "cancel"      => array ("request", "string", ""),
 		 "showdirsize" => array ("request", "integer", "0"),
+		 "nomfich"    => array ("request", "string", ""),
 		 );
 getFields($fields);
 
