@@ -26,6 +26,7 @@ build: build-stamp
 build-stamp:
 	dh_testdir
 	/usr/bin/msgfmt po/fr/LC_MESSAGES/alternc-admintools.po -o po/fr/LC_MESSAGES/alternc-admintools.mo
+	find bureau/locales -mindepth 2 -maxdepth 2 -type d -name "LC_MESSAGES" -exec msgfmt "{}/alternc" -o "{}/alternc.mo"  \; 
 	touch build-stamp
 
 clean:
@@ -34,6 +35,7 @@ clean:
 	rm -f build-stamp
 	debconf-updatepo
 	dh_clean
+	find bureau/locales -mindepth 3	-maxdepth 3 -type d -name "alternc.mo" -delete
 
 install: DH_OPTIONS=
 install: build

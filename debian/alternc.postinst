@@ -240,9 +240,6 @@ EOF
     # Apache will not start without this file
     touch /var/alternc/apache-vhost/vhosts_all.conf
 
-    # Update l18n files
-    /usr/share/alternc/install/dopo.sh
-
 	  #squirrelmail fix		
 		chown -R :alterncpanel /var/lib/squirrelmail/data
 		chmod -R g+w /var/lib/squirrelmail
