@@ -1,31 +1,11 @@
 [main]
 host = https://www.transifex.net
 
-[alternc.messages]
-source_file = bureau/locales/messages.pot
+[alternc.alternc]
+source_file = lang/en_US.po
 source_lang = en
-trans.fr_FR = bureau/locales/fr_FR/LC_MESSAGES/messages.po
-trans.es_ES = bureau/locales/es_ES/LC_MESSAGES/messages.po
-trans.pt_BR = bureau/locales/pt_BR/LC_MESSAGES/messages.po
-trans.en_US = bureau/locales/en_US/LC_MESSAGES/messages.po
-trans.de_DE = bureau/locales/de_DE/LC_MESSAGES/messages.po
-
-[alternc.manual]
-source_file = bureau/locales/manual.pot
-source_lang = en
-trans.fr_FR = bureau/locales/fr_FR/LC_MESSAGES/manual.po
-trans.es_ES = bureau/locales/es_ES/LC_MESSAGES/manual.po
-trans.pt_BR = bureau/locales/pt_BR/LC_MESSAGES/manual.po
-trans.en_US = bureau/locales/en_US/LC_MESSAGES/manual.po
-trans.de_DE = bureau/locales/de_DE/LC_MESSAGES/manual.po
-
-[alternc.alterncadmintools]
-source_file = po/alternc-admintools.pot
-source_lang = en
-trans.fr_FR = po/fr/LC_MESSAGES/alternc-admintools.po
-
-[alternc.debian]
-source_file = debian/po/templates.pot
-source_lang = en
-trans.fr_FR = debian/po/fr.po
+trans.fr_FR = lang/fr_FR.po
+trans.es_ES = lang/es_ES.po
+trans.pt_BR = lang/pt_BR.po
+trans.de_DE = lang/de_DE.po
 
