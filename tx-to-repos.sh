@@ -17,7 +17,7 @@ do
     cp "lang/${lang}.po" "bureau/locales/$lang/LC_MESSAGES/alternc"
     sublang="`echo $lang | cut -c 1-2`"
     # merge the po for debconf into the relevant file for the modules : 
-    if [ "$lang" != "en" ]
+    if [ "$lang" != "en_US" ]
     then
 	msgcat --use-first --less-than=3 --more-than=1 -o tmp.po  "lang/${lang}.po" "debian/po/${sublang}.po"
 	mv -f tmp.po "debian/po/${sublang}.po"
