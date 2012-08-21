@@ -31,13 +31,24 @@ require_once("../class/config.php");
 
 include_once("head.php");
 
-$uid = $_GET['uid'];
+if (!$admin->enabled) {
+	__("This page is restricted to authorized staff");
+	exit;
+}
+$fields = array (
+	"uid"    		=> array ("request",  "integer", ""),
+	"submit"    		=> array ("post", "string", ""),
+	"redirect"    		=> array ("post", "string", ""),
+);
+getFields($fields);
+
 if (!$uid) {
 	__("Missing uid");
 	include_once("foot.php");
 	exit();
 }
-if (!$admin->enabled || !$admin->checkcreator($uid)) {
+
+if (!$admin->checkcreator($uid)) {
         __("This page is restricted to authorized staff");
 	include_once("foot.php");
 	exit();
@@ -49,12 +60,15 @@ if (!$r=$admin->get($uid)) {
 	exit();
 }
 
-if (! ($confirmed = ($_GET['submit'] == _("Confirm")) ) ) {
+$confirmed = ($submit == _("Confirm"))?true:false;
+
+
+if (! ($confirmed ) ) {
   print '<h2>' . _('WARNING: experimental feature, use at your own risk') . '</h2>';
   __("The following domains will be deactivated and redirected to the URL entered in the following box. A backup of the domain configuration will be displayed as a serie of SQL request that you can run to restore the current configuration if you want. Click confirm if you are sure you want to deactivate all this user's domains.");
 
   ?>
-  <form action="<?php echo $PHP_SELF?>" method="GET">
+  <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
   <input type="hidden" name="uid" value="<?php echo $uid?>" />
   <?php __("Redirection URL:") ?> <input type="text" name="redirect" class="int" value="http://example.com/" />
   <input type="submit" name="submit" class="inb" value="<?php __("Confirm")?>" />
@@ -63,13 +77,11 @@ if (! ($confirmed = ($_GET['submit'] == _("Confirm")) ) ) {
 
   print "<h3>" . _("Domains of user: ") . $r["login"] . "</h3>";
 } else {
-  if (!$_GET['redirect']) {
+  if (empty($redirect)) {
     __("Missing redirect url.");
     include_once("foot.php");
     exit();
-  } else {
-    $redirect = $_GET['redirect'];
-  }
+  } 
 }
 
 # this string will contain an SQL request that will be printed at the end of the process and that can be used to reload the old domain configuration

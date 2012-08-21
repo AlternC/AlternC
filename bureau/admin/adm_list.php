@@ -41,7 +41,7 @@ if (!$admin->enabled) {
 $fields = array (
 	"show"    => array ("request", "string", ""),
 	"creator" => array("request", "integer", 0),
-	"short" => array("request", "integer", -1),
+	"short"   => array("request", "integer", -1),
 );
 getFields($fields);
 
@@ -112,11 +112,10 @@ if ($mem->user["admlist"]==0) { // Normal (large) mode
 <tr><td colspan="6">
 <?php  if (count($r)>5) { ?>
 <input type="submit" class="inb" name="submit" value="<?php __("Delete checked accounts"); ?>" />
-			  <?php } ?>
+<?php } ?>
 </td>
 <td  class="trbtn" colspan="4">
 <span class="inav"><a href="adm_list.php?short=1"><?php __("Minimal view"); ?></a></span> &nbsp;
-<span class="ina" style="cursor: text"><?php __("Complete view"); ?></span>
 </td>
 </tr>
 <tr>
@@ -196,10 +195,9 @@ if ($mem->user["admlist"]==1) { // SHORT MODE
 <tr><td colspan="4">
 <?php  if (count($r)>50) { ?>
 <input type="submit" class="inb" name="submit" value="<?php __("Delete checked accounts"); ?>" />
-			  <?php } ?>
+<?php } ?>
 </td>
 <td  class="trbtn" colspan="5">
-<span class="ina" style="cursor: text"><?php __("Minimal view"); ?></span> &nbsp;
 <span class="inav"><a href="adm_list.php?short=0"><?php __("Complete view"); ?></a></span>
 </td>
 </tr>
@@ -254,7 +252,11 @@ if (is_array($val)) {
 
 } else echo "<td style=\"padding-right: 2px; border-right: 1px solid;\" colspan=\"3\"></td></tr>";
 
-$val=$r[$z+2*$rz];
+$val=null;
+if (isset($r[$z+2*$rz])) {
+  $val=$r[$z+2*$rz];
+}
+ 
 if (is_array($val)) {
 ?>
 <?php if ($val["su"]) { ?>
