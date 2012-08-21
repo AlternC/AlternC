@@ -29,9 +29,11 @@ do
     rm -rf "alternc/trunk/tmp.$lang"
     mkdir "alternc/trunk/tmp.$lang"
     # po-debconf : (they are using only the language code, not lang_country
-    cp "alternc/trunk/debian/po/${sublang}.po" "alternc/trunk/tmp.$lang/alternc.debconf.po"
-    cp "alternc-mailman/trunk/debian/po/${sublang}.po" "alternc/trunk/tmp.$lang/alternc-mailman.debconf.po"
-    cp "alternc-awstats/trunk/debian/po/${sublang}.po" "alternc/trunk/tmp.$lang/alternc-mailman.debconf.po"
+    if [ "$sublang" != "en" ] ; then
+	cp "alternc/trunk/debian/po/${sublang}.po" "alternc/trunk/tmp.$lang/alternc.debconf.po"
+	cp "alternc-mailman/trunk/debian/po/${sublang}.po" "alternc/trunk/tmp.$lang/alternc-mailman.debconf.po"
+	cp "alternc-awstats/trunk/debian/po/${sublang}.po" "alternc/trunk/tmp.$lang/alternc-awstats.debconf.po"
+    fi
     cp "alternc/trunk/bureau/locales/$lang/LC_MESSAGES/messages.po" \
 	"alternc/trunk/bureau/locales/$lang/LC_MESSAGES/manual.po" \
 	"alternc-mailman/trunk/bureau/locales/$lang/LC_MESSAGES/mailman.po" \
@@ -41,7 +43,7 @@ do
 	"alternc/trunk/tmp.$lang/" 
     # now we have all .po files in one folder, merge them into one big catalog: 
     msgcat --use-first -o "alternc/trunk/lang/${lang}.po" alternc/trunk/tmp.$lang/*
-    rm -rf "alternc/trunk/tmp.$lang"
+#    rm -rf "alternc/trunk/tmp.$lang"
    echo "done"
 done
 
