@@ -34,6 +34,6 @@ $r = $quota->getquota("dom");
 if ($q["t"] > 0 && $r["u"] > 0) {
 ?>
 <div class="menu-box">
-<div class="menu-title"><img src="images/stat.png" alt="<?php __("Raw web statistics"); ?>" />&nbsp;<a href="sta2_list.php"><?php __("Raw web statistics"); ?></a> (<?php echo $q["u"]; ?>/<?php echo $q["t"]; ?>)</div>
+<div class="menu-title"><img src="images/stat.png" alt="<?php __("Raw web statistics"); ?>" />&nbsp;<a href="sta2_list.php"><?php __("Raw web statistics"); ?> (<?php echo $q["u"]; ?>/<?php echo $q["t"]; ?>)</a></div>
 </div>
 <?php } ?>
