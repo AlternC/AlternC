@@ -86,5 +86,6 @@ foreach($dom->domains_type_lst() as $d) {
 </tr>
 <?php } // end foreach 
 ?>
+</table>
 
 <?php include_once("foot.php"); ?>

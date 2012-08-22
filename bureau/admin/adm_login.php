@@ -40,9 +40,8 @@ $fields = array (
 );
 getFields($fields);
 
-
 // * with no parameter when the admin want to go back to his admin account.  
-if ( $id && $_COOKIE["oldid"]) {
+if ( empty($id) && isset($_COOKIE["oldid"]) && !empty($_COOKIE["oldid"])) {
   // We check the cookie's value : 
   list($newuid,$passcheck)=explode("/",$_COOKIE["oldid"]);
   $newuid=intval($newuid); 
@@ -80,11 +79,6 @@ if (!$admin->enabled) {
   exit();
 }
 
-$fields = array (
-		 "id"    => array ("request", "integer", 0),
-		 );
-getFields($fields);
-
 // Depending on subadmin_restriction, a subadmin can (or cannot) connect to account he didn't create
 $subadmin=variable_get("subadmin_restriction");
 if ($subadmin==0 && !$admin->checkcreator($id)) {
@@ -116,12 +110,8 @@ include_once("head.php");
 <h3><?php __("Member login"); ?></h3>
 <?php
 
-if ($error) {
+if (isset($error) && $error) {
   echo "<p class=\"error\">$error</p>";
-  include_once("foot.php");
-  exit();
 }
-
- include_once("foot.php"); 
-
+include_once("foot.php"); 
 ?>
