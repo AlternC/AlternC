@@ -31,7 +31,14 @@ require_once("../class/config.php");
 
 include_once("head.php");
 
-if (isset($help_setting) && $help_setting) {
+$fields = array (
+	"help_setting" 	=> array ("request", "string", ""),
+	"showhelp" 	=> array ("request", "integer", ""),
+);
+getFields($fields);
+
+
+if (!empty($help_setting)) {
 	$mem->set_help_param($showhelp);
 	$error=_("Your help setting has been updated.");
 }

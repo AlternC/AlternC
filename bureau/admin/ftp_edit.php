@@ -51,7 +51,6 @@ if (isset($error) && $error) {
 	include_once("foot.php");
 	exit();
 }
-printVar($r);
 ?>
 <form method="post" action="ftp_doedit.php" name="main" id="main">
 <table border="1" cellspacing="0" cellpadding="4">

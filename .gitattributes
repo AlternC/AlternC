@@ -95,7 +95,6 @@ bureau/admin/bro_tgzdown.php -text
 bureau/admin/bro_view.php -text
 bureau/admin/browseforfolder.php -text
 bureau/admin/cron.php -text
-bureau/admin/direct.php -text
 bureau/admin/dom_add.php -text
 bureau/admin/dom_doadd.php -text
 bureau/admin/dom_dodel.php -text
@@ -285,7 +284,6 @@ bureau/admin/quota_show.php -text
 bureau/admin/quotas_oneuser.php -text
 bureau/admin/quotas_users.php -text
 bureau/admin/sql_add.php -text
-bureau/admin/sql_addmain.php -text
 bureau/admin/sql_admin.php -text
 bureau/admin/sql_bck.php -text
 bureau/admin/sql_del.php -text
@@ -294,8 +292,6 @@ bureau/admin/sql_dobck.php -text
 bureau/admin/sql_dorestore.php -text
 bureau/admin/sql_getparam.php -text
 bureau/admin/sql_list.php -text
-bureau/admin/sql_pass.php -text
-bureau/admin/sql_passchg.php -text
 bureau/admin/sql_restore.php -text
 bureau/admin/sql_users_add.php -text
 bureau/admin/sql_users_del.php -text

@@ -75,7 +75,7 @@ if (!$_SERVER[HTTPS]) {
 <?php __("To connect to the hosting control panel, enter your AlternC's login and password in the following form and click 'Enter'"); ?>
 <?php if (!empty($authip_token)) { echo "<p style='color:red;'>";__("You are attemping to connect without IP restriction."); echo "</p>"; } ?>
 </td><td>
-<form action="login.php" method="post" target="_top">
+<form action="login.php" method="post" name="loginform" target="_top">
 <table border="0" style="border: 1px solid #202020;" cellspacing="0" cellpadding="3" width="300px" >
 <tr><th colspan="2" align="center"><?php __("AlternC access"); ?></th></tr>
 <tr><th align="right"><label for="username"><?php echo _("Username"); ?></label></th><td><input type="text" class="int" name="username" id="username" value="" maxlength="128" size="15" /></td></tr>
@@ -133,6 +133,11 @@ if (!$_SERVER[HTTPS]) {
 
 
 </div>
+<script>
+//FIXME
+// set focus to textbox
+document.forms['loginform'].username.focus();
+</script>
 
 </body>
 </html>

@@ -57,10 +57,8 @@ include_once ("head.php");
 <tr><th><?php __("Names"); ?></th><th><?php __("Value"); ?></th><th><?php __("Comment"); ?></th></tr>
 <?php
 $col=1;
-$db->query("SELECT * FROM `variable` WHERE `comment` IS NOT NULL ORDER BY `name`");
 
-while ($db->next_record()) {
- $vars = $db->Record;
+foreach( variables_list() as $vars) {
  $col=3-$col;
  ?>
 

@@ -132,4 +132,15 @@ function variable_del($name) {
 
   unset($conf[$name]);
 }
+
+function variables_list() {
+  global $db;
+  $t=array();
+  $db->query("SELECT * FROM `variable` WHERE `comment` IS NOT NULL ORDER BY `name`");
+  while ($db->next_record()) {
+    $t[]=$db->Record;
+  }
+  return $t;
+}
+
 ?>

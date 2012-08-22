@@ -35,18 +35,30 @@ if (!$quota->cancreate("ftp")) {
 	$fatal=1;
 }
 
+$fields = array (
+	"id" 			=> array ("post", "integer", 0),
+	"prefixe" 		=> array ("post", "string", ""),
+	"login" 		=> array ("post", "string", ""),
+	"dir" 			=> array ("post", "string", ""),
+	"pass" 			=> array ("post", "string", ""),
+	"passconf" 		=> array ("post", "string", ""),
+	"submit" 		=> array ("post", "string", ""),
+);
+getFields($fields);
+
+
 ?>
 <h3><?php __("Create a new ftp account"); ?></h3>
 <hr id="topbar"/>
 <br />
 <?php
-	if (isset($error) && $error) {
-		echo "<p class=\"error\">$error</p>";
-		if ($fatal) {
-		  include_once("foot.php");
-		  exit();
-		}
+if (isset($error) && $error) {
+	echo "<p class=\"error\">$error</p>";
+	if (isset($fatal) && $fatal) {
+	  include_once("foot.php");
+	  exit();
 	}
+}
 ?>
 <form method="post" action="ftp_doadd.php" name="main" id="main">
 <table>

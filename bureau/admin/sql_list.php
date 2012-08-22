@@ -70,7 +70,7 @@ for($i=0;$i<count($rdb);$i++) {
 ?>
 	<tr  class="lst<?php echo $col; ?>">
 		<td align="center"><input type="checkbox" class="inc" id="del_<?php echo $val["name"]; ?>" name="del_<?php echo $val["name"]; ?>" value="<?php echo ($val["name"])?$val["name"]:"_"; ?>" /></td>
-	   <td><label for="del_<?php echo $val["name"]; ?>"><?php echo $val["db"]; ?></label></td>
+	   	<td><label for="del_<?php echo $val["name"]; ?>"><?php echo $val["db"]; ?></label></td>
 		<td><div class="ina"><a href="sql_bck.php?id=<?php echo $val["name"] ?>"><?php __("Backup"); ?></a></div></td>
 		<td><div class="ina"><a href="sql_restore.php?id=<?php echo $val["name"] ?>"><?php __("Restore"); ?></a></div></td>
 		<td><code><?php echo format_size($val["size"]); ?></code></td>
