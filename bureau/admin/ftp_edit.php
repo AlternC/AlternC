@@ -51,6 +51,7 @@ if (isset($error) && $error) {
 	include_once("foot.php");
 	exit();
 }
+printVar($r);
 ?>
 <form method="post" action="ftp_doedit.php" name="main" id="main">
 <table border="1" cellspacing="0" cellpadding="4">
@@ -58,7 +59,7 @@ if (isset($error) && $error) {
 <label for="login"><?php __("Username"); ?></label></th><td>
 	<select class="inl" name="prefixe"><?php $ftp->select_prefix_list($r["prefixe"]); ?></select>&nbsp;<b>_</b>&nbsp;<input type="text" class="int" name="login" id="login" value="<?php ehe($r[0]["login"]); ?>" size="20" maxlength="64" />
 </td></tr>
-<tr><th><label for="dir"><?php __("Folder"); ?></label></th><td><input type="text" class="int" name="dir" id="dir" value="<?php ehe($r[0]["dir"]); ?>" size="20" maxlength="64" />
+<tr><th><label for="dir"><?php __("Folder"); ?></label></th><td><input type="text" class="int" name="dir" id="dir" value="<?php ehe("/".$r[0]["dir"]); ?>" size="20" maxlength="64" />
 
 <script type="text/javascript">
 <!--
