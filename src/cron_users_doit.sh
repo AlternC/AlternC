@@ -23,6 +23,8 @@ for CONFIG_FILE in \
     . "$CONFIG_FILE"
 done
 
+from="noreply@$FQDN"
+
 if [ "x$url" == "x" ] ; then
   echo Missing arguments
   exit 0
@@ -52,8 +54,7 @@ if [ ! "x$user" == "x" -a ! "x$password" == "x" ]; then
   params="--http-user=\"$(urldecode $user)\" --http-password=\"$(urldecode $password)\""
 fi
 
-echo wget -O - $params "$(urldecode $url)" --timeout=$timeout
-# FIXME envoie de mail pour le "rapport d'execution"
+wget -O - $params "$(urldecode $url)" --timeout=$timeout | mailx -s "AlternC Cron $id - Report $date" -r "$from" "$email"
 
 # On calcule l'heure de la prochaine execution idéale
 ((interval=$schedule * 60))
