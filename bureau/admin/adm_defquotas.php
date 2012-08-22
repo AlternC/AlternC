@@ -66,9 +66,8 @@ include_once ("head.php");
 <td>
 <select name="type" id="type" class="inl">
 <?php
-$db->query("SELECT distinct(type) FROM defquotas WHERE TYPE != 'default' ORDER by type");
-while($db->next_record()) {
-  $type = $db->f("type");
+foreach($quota->listtype() as $type) {
+  if ($type=="default") continue;
   echo "<option value=\"$type\">$type</option>\n";
 }
 ?></select>

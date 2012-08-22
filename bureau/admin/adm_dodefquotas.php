@@ -35,23 +35,28 @@ if (!$admin->enabled) {
 	__("This page is restricted to authorized staff");
 	exit();
 }
+$fields = array (
+	"action"    		=> array ("post", "string", ""),
+	"type"    		=> array ("post", "string", ""),
+	"del_confirm"  		=> array ("post", "string", ""),
+);
+getFields($fields);
 
-if($_POST["action"] == "add") {
-  $type = $_POST['type'];
+if($action == "add") {
 
   if($quota->addtype($type)) {
-    $error=_("Account type"). " \"$type\" "._("added");
+    $error=_("Account type"). " \"".htmlentities($type)."\" "._("added");
   } else {
-    $error=_("Account type"). " \"$type\" "._("could not be added");
+    $error=_("Account type"). " \"".htmlentities($type)."\" "._("could not be added");
   }
   include("adm_defquotas.php");
-} else if($_POST["action"] == "delete") {
-  if(@$_POST["del_confirm"] == "y"){
-    if($_POST['type']) {
-      if($quota->deltype($_POST['type'])) {
-        $error=_("Account type"). " \"$type\" "._("deleted");
+} else if($action == "delete") {
+  if($del_confirm == "y"){
+    if(!empty($type)) {
+      if($quota->deltype($type)) {
+        $error=_("Account type"). " \"".htmlentities($type)."\" "._("deleted");
       } else {
-        $error=_("Account type"). " \"$type\" "._("could not be deleted");
+        $error=_("Account type"). " \"".htmlentities($type)."\" "._("could not be deleted");
       }
     }
     include("adm_defquotas.php");
@@ -60,11 +65,11 @@ if($_POST["action"] == "add") {
     ?>
     </head>
     <body>
-    <h3><?php printf(_("Deleting quota %s"),$_POST["type"]); ?> : </h3>
+    <h3><?php printf(_("Deleting quota %s"),$type); ?> : </h3>
 
     <form action="adm_dodefquotas.php" method="post">
       <input type="hidden" name="action" value="delete" />
-      <input type="hidden" name="type" value="<?php echo $_POST["type"] ?>" />
+      <input type="hidden" name="type" value="<?php echo $type ?>" />
       <input type="hidden" name="del_confirm" value="y" />
       <p class="error"><?php __("WARNING : Confirm the deletion of the quota"); ?></p>
       <p><?php echo $_POST["type"]; ?></p>
@@ -77,7 +82,7 @@ if($_POST["action"] == "add") {
     </html>
     <?php
   }
-} else if($_POST["action"] == "modify") {
+} else if($action == "modify") {
   reset($_POST);
   $c=array();
   foreach($_POST as $key => $val) {

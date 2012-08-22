@@ -262,11 +262,15 @@ class m_quota {
    * @return boolean true if all went ok
    */
   function addtype($type) {
-    global $db;
+    global $db,$err;
     $qlist=$this->qlist();
     reset($qlist);
-    if(empty($type))
-	return false;
+    if(empty($type)) return false;
+    $type=strtolower($type);
+    if (!preg_match("#^[a-z0-9]*$#",$type)) {
+      $err->raise("quota", "Type can only contains characters a-z and 0-9");
+      return false;
+    }
     while (list($key,$val)=each($qlist)) {
       if(!$db->query("INSERT IGNORE INTO defquotas (quota,type) VALUES('$key', '$type');")
 	 || $db->affected_rows() == 0)
@@ -275,6 +279,21 @@ class m_quota {
     return true;
   }
 
+
+  /* ----------------------------------------------------------------- */
+  /**
+   * List for quotas
+   * @return array
+   */
+  function listtype() {
+    global $db;
+    $db->query("SELECT distinct(type) FROM defquotas ORDER by type");
+    $t=array();
+    while ($db->next_record()) {
+      $t[] = $db->f("type");
+    }
+    return $t;
+  }
 
   /* ----------------------------------------------------------------- */
   /**
