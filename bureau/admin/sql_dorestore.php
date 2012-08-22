@@ -30,6 +30,12 @@
 require_once("../class/config.php");
 
 include_once("head.php");
+$fields = array (
+	"id"    		=> array ("post", "string", ""),
+	"restfile"    		=> array ("post", "string", ""),
+);
+getFields($fields);
+
 
 if (!$r=$mysql->get_mysql_details($id)) {
         $error=$err->errstr();

@@ -31,17 +31,17 @@ require_once("../class/config_nochk.php");
 
 // Check for the http authentication
 if (!isset($_SERVER['PHP_AUTH_USER'])) {
- header('WWW-Authenticate: Basic realm="Domain List Authentication"');
- header('HTTP/1.0 401 Unauthorized');
- exit;
- } else {
-	if ($dom->check_slave_account($_SERVER['PHP_AUTH_USER'],$_SERVER['PHP_AUTH_PW'])) {
-		$dom->echo_domain_list();
-	} else {
- header('WWW-Authenticate: Basic realm="Domain List Authentication"');
- header('HTTP/1.0 401 Unauthorized');
- exit;
-	}
+  header('WWW-Authenticate: Basic realm="Domain List Authentication"');
+  header('HTTP/1.0 401 Unauthorized');
+  exit;
+} else {
+  if ($dom->check_slave_account($_SERVER['PHP_AUTH_USER'],$_SERVER['PHP_AUTH_PW'])) {
+    $dom->echo_domain_list();
+  } else {
+    header('WWW-Authenticate: Basic realm="Domain List Authentication"');
+    header('HTTP/1.0 401 Unauthorized');
+    exit;
   }
+}
 
 ?>
