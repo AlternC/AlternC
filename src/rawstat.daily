@@ -95,7 +95,7 @@ while ($line = fgets($apache_log_file)) {
 	//assume that hostname is at end of line and separated with a space
 	$host = substr($line, strrpos($line, ' ')+1, -1);
 
-	if (is_null($hosts[$host])) {
+	if (isset($hosts[$host]) && is_null($hosts[$host])) {
 		unset($hosts[$host]);
 		$nolog_hosts[$host]='';
 		continue;
@@ -115,7 +115,7 @@ while ($line = fgets($apache_log_file)) {
 				$pos = false;
 				break;
 			}
-			if (is_null($hosts[$parent_host])) {
+			if (isset($hosts[$parent_host]) && is_null($hosts[$parent_host])) {
 				unset($hosts[$parent_host]);
 				$nolog_hosts[$parent_host]='';
 				$pos = false;
