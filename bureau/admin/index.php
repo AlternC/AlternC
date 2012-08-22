@@ -125,7 +125,7 @@ if (!$_SERVER[HTTPS]) {
 </td>
 <td>
 <p>
-<a href="http://www.alternc.org/"><img src="alternc.jpg" width="128" height="32" alt="powered by AlternC" /></a>
+<a href="http://www.alternc.com/"><img src="alternc.jpg" width="128" height="32" alt="powered by AlternC" /></a>
 </p>
 </td>
 </tr>
