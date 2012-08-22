@@ -120,9 +120,10 @@ class m_mem {
     /* Close sessions that are more than 2 days old. */
     $db->query("DELETE FROM sessions WHERE DATE_ADD(ts,INTERVAL 2 DAY)<NOW();");
     /* Open the session : */
-    $_REQUEST["session"]=md5(uniqid(mt_rand()));
-    $db->query("insert into sessions (sid,ip,uid) values ('".$_REQUEST["session"]."',$ip,'$cuid');");
-    setcookie("session",$_REQUEST["session"],0,"/");
+    $sess=md5(uniqid(mt_rand()));
+    $_REQUEST["session"]=$sess;
+    $db->query("insert into sessions (sid,ip,uid) values ('$sess',$ip,'$cuid');");
+    setcookie("session",$sess,0,"/");
     $err->error=0;
     /* Fill in $local */
     $db->query("SELECT * FROM local WHERE uid='$cuid';");
@@ -154,9 +155,10 @@ class m_mem {
     $this->user=$db->Record;
     $cuid=$db->f("uid");
     $ip=getenv("REMOTE_ADDR");
-    $_REQUEST["session"]=md5(uniqid(mt_rand()));
-    $db->query("insert into sessions (sid,ip,uid) values ('".$_REQUEST["session"]."','$ip','$cuid');");
-    setcookie("session",$_REQUEST["session"],0,"/");
+    $sess=md5(uniqid(mt_rand()));
+    $_REQUEST["session"]=$sess;
+    $db->query("insert into sessions (sid,ip,uid) values ('$sess','$ip','$cuid');");
+    setcookie("session",$sess,0,"/");
     $err->error=0;
     /* Fill in $local */
     $db->query("SELECT * FROM local WHERE uid='$cuid';");
