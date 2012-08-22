@@ -108,6 +108,7 @@ bureau/admin/dom_subdoedit.php -text
 bureau/admin/dom_subedit.php -text
 bureau/admin/dom_substatus.php -text
 bureau/admin/domlist.php -text
+bureau/admin/favicon.ico -text
 bureau/admin/foot.php -text
 bureau/admin/ftp_add.php -text
 bureau/admin/ftp_del.php -text
