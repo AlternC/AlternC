@@ -458,9 +458,11 @@ EOF;
    * @return boolean Retourne FALSE si une erreur s'est produite, TRUE sinon.
    * 
    */
-  function update_mem($uid, $mail, $nom, $prenom, $pass, $enabled, $canpass, $type='default', $duration=0, $notes = "") {
+  function update_mem($uid, $mail, $nom, $prenom, $pass, $enabled, $canpass, $type='default', $duration=0, $notes = "",$reset_quotas=false) {
     global $err,$db;
     global $cuid, $quota;
+
+    $notes=addslashes($notes);
 
     $err->log("admin","update_mem",$uid);
     if (!$this->enabled) {
@@ -478,8 +480,7 @@ EOF;
 
     if (($db->query("UPDATE local SET nom='$nom', prenom='$prenom' WHERE uid='$uid';"))
 	     &&($db->query("UPDATE membres SET mail='$mail', canpass='$canpass', enabled='$enabled', `type`='$type', notes='$notes' $ssq WHERE uid='$uid';"))){
-      if($_POST['reset_quotas'] == "on")
-	      $quota->addquotas();
+      if($reset_quotas == "on") $quota->addquotas();
       $this->renew_update($uid, $duration);
       return true;
     }

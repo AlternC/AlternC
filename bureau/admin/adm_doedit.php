@@ -50,7 +50,7 @@ $fields = array (
 	"nmail" => array ("request", "string", ""),
 	"type" => array ("request", "string", ""),
 	"duration" => array ("request", "integer", 0),
-	"reset_quotas" => array ("request", "boolean", false),
+	"reset_quotas" => array ("request", "string", false),
 );
 getFields($fields);
 
@@ -70,7 +70,7 @@ if ($uid==$mem->user["uid"]) {
   $enabled=1;
  }
 
-if (!$admin->update_mem($uid, $nmail, $nom, $prenom, $pass, $enabled, $canpass, $type, $duration, $notes)){
+if (!$admin->update_mem($uid, $nmail, $nom, $prenom, $pass, $enabled, $canpass, $type, $duration, $notes, $reset_quotas)){
   $error=$err->errstr();
   include("adm_edit.php");
 } else {
