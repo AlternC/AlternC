@@ -245,7 +245,6 @@ class m_mysql {
       // Ok, database does not exist, quota is ok and dbname is compliant. Let's proceed
       $db->query("INSERT INTO db (uid,login,pass,db,bck_mode) VALUES ('$cuid','$myadm','$password','$dbname',0);");
       $dbname=str_replace('_','\_',$dbname);
-	echo $admin;echo $dbname;die();
       $this->grant($dbname,$myadm,"ALL PRIVILEGES",$password);
       $this->dbus->query("FLUSH PRIVILEGES;");
       return true;
