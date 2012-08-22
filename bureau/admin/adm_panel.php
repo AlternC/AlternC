@@ -53,6 +53,7 @@ if (isset($error) && $error) {
  <li class="lst1"><a href="adm_doms.php"><?php __("Manage installed domains"); ?></a></li>
  <li class="lst2"><a href="adm_defquotas.php"><?php __("Change the default quotas"); ?></a></li>
  <li class="lst1"><a href="adm_authip_whitelist.php"><?php __("Manage IP whitelist"); ?></a></li>
+ <li class="lst2"><a href="adm_email.php"><?php __("Send an email to all members"); ?></a></li>
 </ul>
 
 

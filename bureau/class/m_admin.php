@@ -216,6 +216,37 @@ class m_admin {
   }
 
 
+  function mailallmembers($subject,$message,$from) {
+    global $err,$mem,$cuid,$db;
+    $err->log("admin","mailallmembers");
+    if (!$this->enabled) {
+      $err->raise("admin",1);
+      return false;
+    }
+    $subject=trim($subject);
+    $message=trim($message);
+    $from=trim($from);
+
+    if (empty($subject) || empty($message) || empty($from) ){
+      $err->raise("admin",16);
+      return false;
+    }
+
+    if (checkmail($from) != 0) {
+      $err->raise("admin",17);
+      return false;
+    }
+
+    @set_time_limit(1200);
+    $db->query("select distinct mail from membres;");
+    while ($db->next_record()) {
+      // Can't do BCC due to postfix limitation
+      mail($db->f('mail'), $subject, $message, null, "-f$from");
+    }
+
+    return true;
+  }
+
   /**
    * Returns an array with the known information about resellers (uid, login, number of accounts)
    * Does not include account 2000 in the list.
