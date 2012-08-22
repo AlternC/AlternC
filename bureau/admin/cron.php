@@ -3,12 +3,12 @@ require_once("../class/config.php");
 include_once("head.php");
 
 $fields = array (
-        "cron"                => array ("post", "array", ""),
+        "cronupdate"                => array ("post", "array", ""),
 );
 getFields($fields);
 
-if (!empty($cron) {
-  if (! $cron->update($cron) {
+if (!empty($cronupdate)) {
+  if (! $cron->update($cronupdate)) {
     $error=_("There was an error during the record.");
   } else {
     $error=_("Save done.");
@@ -31,6 +31,7 @@ $lst_cron = $cron->lst_cron();
 
 <table>
   <tr>
+    <th/>
     <th><?php __("URL"); ?></th>
     <th><?php __("Schedule"); ?></th>
     <th><?php __("User"); ?></th>
@@ -45,10 +46,15 @@ if ( sizeof($lst_cron) > $max_cron ) $max_cron=sizeof($lst_cron);
 for ($i=0; $i < $max_cron ; $i++) { 
 ?>
   <tr>
-    <?php if (isset($lst_cron[$i])) echo "<input type='hidden' name='cron[$i][id]' value='".$lst_cron[$i]['id']."' />"; ?> 
-    <td><input type="text" name="<?php echo "cron[$i][url]";?>" size="30" maxlength="255" value="<?php if (isset($lst_cron[$i]['url'])) { echo htmlentities($lst_cron[$i]['url']);} ?>"/></td>
+    <?php if (isset($lst_cron[$i])) echo "<input type='hidden' name='cronupdate[$i][id]' value='".$lst_cron[$i]['id']."' />"; ?> 
     <td>
-      <select name='cron[<?php echo $i; ?>][schedule]'>
+      <a href="javascript:cleancron('<?php echo $i ?>');"><img src="images/delete.png" alt="<?php __("Delete");?>" title="<?php __("Delete");?>"/></a>
+    </td>
+    <td>
+      <input type="text" id="crup_url_<?php echo $i?>" name="<?php echo "cronupdate[$i][url]";?>" size="30" maxlength="255" value="<?php if (isset($lst_cron[$i]['url'])) { echo htmlentities($lst_cron[$i]['url']);} ?>"/>
+    </td>
+    <td>
+      <select name='cronupdate[<?php echo $i; ?>][schedule]'>
 <?php
 foreach ($cron->schedule() as $cs) {
   echo "<option value='".$cs['unit']."'";
@@ -61,15 +67,28 @@ foreach ($cron->schedule() as $cs) {
 ?>
       </select>
     </td>
-    <td><input type="text" name="<?php echo "cron[$i][user]";?>" size="10" maxlength="64" value="<?php if (isset($lst_cron[$i]['user'])) { echo htmlentities($lst_cron[$i]['user']);} ?>"/></td>
-    <td><input type="text" name="<?php echo "cron[$i][password]";?>" size="10" maxlength="64" value="<?php if (isset($lst_cron[$i]['password'])) { echo htmlentities($lst_cron[$i]['password']);} ?>"/></td>
-    <td><input type="text" name="<?php echo "cron[$i][email]";?>" size="10" maxlength="64" value="<?php if (isset($lst_cron[$i]['email'])) { echo htmlentities($lst_cron[$i]['email']);} ?>"/></td>
+    <td><input type="text" id="crup_user_<?php echo $i?>" name="<?php echo "cronupdate[$i][user]";?>" size="10" maxlength="64" value="<?php if (isset($lst_cron[$i]['user'])) { echo htmlentities($lst_cron[$i]['user']);} ?>"/></td>
+    <td><input type="text" id="crup_pass_<?php echo $i?>" name="<?php echo "cronupdate[$i][password]";?>" size="10" maxlength="64" value="<?php if (isset($lst_cron[$i]['password'])) { echo htmlentities($lst_cron[$i]['password']);} ?>"/></td>
+    <td><input type="text" id="crup_mail_<?php echo $i?>" name="<?php echo "cronupdate[$i][email]";?>" size="10" maxlength="64" value="<?php if (isset($lst_cron[$i]['email'])) { echo htmlentities($lst_cron[$i]['email']);} ?>"/></td>
   </tr>
 <?php } //foreach ?>
+  <tr>
+    <td/>
+    <td>
+      <input type="submit" name="submit" class="inb" value="<?php __("Save"); ?>" />
+    </td>
 </table>
 
-<input type="submit" name="submit" class="inb" value="<?php __("Save"); ?>" />
 </form>
 
+<script type="text/javascript">
+function cleancron(i) {
+  document.getElementById('crup_url_'+i).value = ''; 
+  document.getElementById('crup_user_'+i).value = ''; 
+  document.getElementById('crup_pass_'+i).value = ''; 
+  document.getElementById('crup_mail_'+i).value = ''; 
+}
+
+</script>
 
 <?php include_once("foot.php"); ?>

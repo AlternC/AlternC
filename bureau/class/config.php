@@ -174,5 +174,4 @@ for($i=0;$i<count($classes);$i++) {
   $$name2= new $name1();
 }
 
-
 ?>
