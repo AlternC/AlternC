@@ -45,7 +45,6 @@ if ($mem->user["lastfail"]) {
 	printf(_("%1\$d login failed since last login")."<br />",$mem->user["lastfail"]);
 }
 
-$mem->resetlast();
 
 /*
  use MagpieRSS to syndicate content from another site if available

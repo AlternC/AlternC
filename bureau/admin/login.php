@@ -38,6 +38,8 @@ if (!$mem->checkid())
 	exit();
 }
 
+$mem->resetlast();
+
 include("main.php");
 exit;
 

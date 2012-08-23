@@ -82,7 +82,7 @@ if (!$_SERVER[HTTPS]) {
 <tr><th align="right"><label for="password"><?php echo _("Password"); ?></label></th><td><input type="password" class="int" name="password" id="password" value="" maxlength="128" size="15" /></td></tr>
 <tr><td colspan="2" align="center"><input type="submit" class="inb" name="submit" value="<?php __("Enter"); ?>" /><input type="hidden" id="restrictip" name="restrictip" value="1" /></td></tr>
 </table>
-<input type="hidden" id="authip_token" name="authip_token" value="<?php echo htmlentities($authip_token) ?>" />
+<input type="hidden" id="authip_token" name="authip_token" value="<?php echo htmlentities( (empty($authip_token)?'':$authip_token) ) ?>" />
 </form>
 
 </td></tr>
