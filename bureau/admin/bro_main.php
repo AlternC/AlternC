@@ -60,7 +60,7 @@ if (!$R && $p["golastdir"]) {
 }
 $R=$bro->convertabsolute($R,1);
 // on fait ?
-if (isset($formu) && $formu) {
+if (!empty($formu) && $formu) {
   switch ($formu) {
   case 1:  // Créer le répertoire $R.$nomfich
     if (!$bro->CreateDir($R,$nomfich)) {
@@ -81,11 +81,11 @@ if (isset($formu) && $formu) {
     break;
   case 2:  // act vaut Supprimer Copier ou Renommer.
     if ($actdel) {
-      if (isset($del_confirm) && $del_confirm != "") { 
+      if (!empty($del_confirm) ) { 
         if (!$bro->DeleteFile($d,$R)) {
           $error = $err->errstr();
         }
-      } elseif (!isset($cancel) && is_array($d)) {
+      } elseif (empty($cancel) && is_array($d)) {
         include_once("head.php");
 ?>
   <h3><?php printf(_("Deleting files and/or directories")); ?> : </h3>
@@ -103,8 +103,6 @@ if (isset($formu) && $formu) {
       <input type="submit" class="inb" name="cancel" value="<?php __("No"); ?>" />
     </blockquote>
   </form>
-</body>
-</html>
 <?php
 	include_once("foot.php");
         exit();
