@@ -81,7 +81,9 @@ while (list($key,$val)=each($r))
 		<td align="center"><input type="checkbox" class="inc" id="del_<?php echo $val["id"]; ?>" name="del_<?php echo $val["id"]; ?>" value="<?php echo $val["id"]; ?>" /></td>
 <td><div class="ina"><a href="ftp_edit.php?id=<?php echo $val["id"] ?>"><img src="images/edit.png" alt="<?php __("Edit"); ?>" /><?php __("Edit"); ?></a></div></td>
 
-		<td><label for="del_<?php echo $val["id"]; ?>"><?php echo $val["login"] ?></label></td>
+		<td><label for="del_<?php echo $val["id"]; ?>"><?php echo $val["login"] ?></label>
+                  <input type='hidden' name='names[<?php echo $val['id'];?>]' value='<?php echo $val["login"] ?>' >
+                </td>
 		<td><code><?php echo str_replace(ALTERNC_HTML,'',$val["dir"]) ?></code></td>
 	</tr>
 <?php

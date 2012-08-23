@@ -32,17 +32,61 @@ require_once("../class/config.php");
 $error="";
 // On parcours les POST_VARS et on repere les del_.
 reset($_POST);
+$lst_todel=array();
 while (list($key,$val)=each($_POST)) {
-	if (substr($key,0,4)=="del_") {
-		// Effacement du compte ftp $val
-		$r=$ftp->delete_ftp($val);
-		if (!$r) {
-			$error.=$err->errstr()."<br />";
-		} else {
-			$error.=sprintf(_("The ftp account %s has been successfully deleted"),$r)."<br />";
-		}
-	}
+  if (substr($key,0,4)=="del_") {
+    $lst_todel[]=$val;
+  }
 }
-include("ftp_list.php");
-exit();
+
+if (empty($lst_todel)) {
+  header ("Location: /ftp_list.php");
+  exit();
+}
+
+$fields = array (
+  "confirm_del"    	=> array ("post", "string", ""),
+  "names"    		=> array ("post", "array", ""),
+);
+getFields($fields);
+
+
+if(!empty($confirm_del)) {
+  foreach($lst_todel as $v) {
+    $r=$ftp->delete_ftp($v);
+    if (!$r) {
+      $error.=$err->errstr()."<br />";
+    } else {
+      $error.=sprintf(_("The ftp account %s has been successfully deleted"),$r)."<br />";
+    }
+  }
+  include("ftp_list.php");
+  exit();
+} else {
+  include_once('head.php');
+?>
+<h3><?php __("FTP accounts deletion confirm"); ?></h3>
+<hr id="topbar"/>
+<br />
+  <?php __("Do you really want to delete those accounts ?");?>
+  <ul>
+  <?php foreach($lst_todel as $t) {
+    echo "<li>".$names[$t]."</li>\n";
+  } ?>
+  </ul>
+
+  <form method="post" action="ftp_del.php" name="main" id="main">
+    <?php foreach($lst_todel as $t) {
+      echo "<input type='hidden' name='del_$t' value='$t' >\n";
+    } ?>
+    <input type="submit" class="inb" name="confirm_del" value="<?php __("Delete")?>" />
+    <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='ftp_list.php'" />
+  </form>
+  
+<?php
+  include_once('foot.php');
+  exit();
+
+}
+
 ?>
