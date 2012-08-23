@@ -30,6 +30,13 @@
 
 require_once("../class/config_nochk.php");
 
+$fields = array (
+	"usr" => array ("request", "integer", 0),
+	"cookie" => array ("request", "string", ""),
+	"cle" => array("request","string",""),
+);
+getFields($fields);
+
 if (!$mem->ChangeMail2($cookie,$cle,$usr)) {
 	$error=$err->errstr();
 }
@@ -39,7 +46,7 @@ include_once("head.php");
 ?>
 <h3><?php __("Change the email of the account"); ?></h3>
 <?php
-	if ($error) {
+if (isset($error) && $error) {
 		echo "<p class=\"error\">$error</p>";
 		include_once("foot.php");
 		exit();
