@@ -43,7 +43,7 @@ include_once("head.php");
 ?>
 <h3><?php __("Change the email of the account"); ?></h3>
 <?php
-	if ($error) {
+	if (isset($error) && $error) {
 		echo "<p class=\"error\">$error</p>";
 		include_once("foot.php");
 		exit();

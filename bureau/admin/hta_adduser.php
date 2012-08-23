@@ -32,13 +32,14 @@ include_once("head.php");
 
 $fields = array (
 	"dir"      => array ("request", "string", ""),
+	"user"     => array ("request", "string", ""),
 );
 getFields($fields);
 
 ?>
 <h3><?php printf(_("Adding a username in %s"),$dir); ?></h3>
 <?php
-	if ($error) {
+	if (isset($error) && $error) {
 		echo "<p class=\"error\">$error</p>";
 	}
 ?>

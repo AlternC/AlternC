@@ -46,7 +46,7 @@ include_once("head.php");
 ?>
 <h3><?php __("SQL Admin"); ?></h3>
 <?php
-	if ($error) {
+	if (isset($error) && $error) {
 		echo "<p class=\"error\">$error</p>";
 	}
 ?>

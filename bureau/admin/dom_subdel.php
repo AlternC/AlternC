@@ -56,7 +56,7 @@ $dom->unlock();
 ?>
 <h3><?php printf(_("Deleting subdomain %s"),"http://".ife($sub,$sub.".").$domain); ?> : </h3>
 <?php
-	if ($error) {
+	if (isset($error) && $error) {
 		echo "<p class=\"error\">$error</p>";
 		include_once("foot.php");
 		exit();

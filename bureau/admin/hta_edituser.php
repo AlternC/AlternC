@@ -41,9 +41,9 @@ getFields($fields);
 <hr id="topbar"/>
 <br />
 <?php
-	if ($error) {
-		echo "<p class=\"error\">$error</p>";
-	}
+if (isset($error) && $error) {
+	echo "<p class=\"error\">$error</p>";
+}
 ?>
 <form method="post" action="hta_doedituser.php" name="main" id="main">
 <table border="1" cellspacing="0" cellpadding="4">

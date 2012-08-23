@@ -36,7 +36,6 @@ if (!$admin->enabled) {
 
 $fields = array (
 	"delaccount"   => array ("request", "string", ""),
-
 	"newlogin"   => array ("request", "string", ""),
 	"newpass"    => array ("request", "string", ""),
 );
@@ -64,7 +63,7 @@ include_once("head.php");
 <hr id="topbar"/>
 <br />
 <?php
-	if ($error) {
+	if (isset($error) && $error) {
 	  echo "<p class=\"error\">$error</p>";
 	}
 

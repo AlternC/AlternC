@@ -35,7 +35,7 @@ $fields = array (
 	"sub_old"   => array ("request", "string", ""),
 	"type"      => array ("request", "string", $dom->type_local),
 	"type_old"  => array ("request", "string", ""),
-  "value_old" => array ("request", "string", ""),
+  	"value_old" => array ("request", "string", ""),
 );
 getFields($fields);
 
@@ -51,7 +51,7 @@ $value=$$dynamicvar;
 $dom->lock();
 
 $dt=$dom->domains_type_lst();
-if (!$isinvited && $dt[strtolower($type)]["enable"] != "ALL" ) {
+if ( (!isset($isinvited) || !$isinvited) && $dt[strtolower($type)]["enable"] != "ALL" ) {
   __("This page is restricted to authorized staff");
   exit();
 }
