@@ -134,8 +134,6 @@ if (!$_SERVER[HTTPS]) {
 
 </div>
 <script>
-//FIXME
-// set focus to textbox
 document.forms['loginform'].username.focus();
 </script>
 
