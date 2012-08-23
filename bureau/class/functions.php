@@ -1,13 +1,9 @@
 <?php
 /*
- $Id: functions.php,v 1.9 2005/12/18 09:50:59 benjamin Exp $
  ----------------------------------------------------------------------
  AlternC - Web Hosting System
- Copyright (C) 2002 by the AlternC Development Team.
- http://alternc.org/
- ----------------------------------------------------------------------
- Based on:
- Valentin Lacambre's web hosting softwares: http://altern.org/
+ Copyright (C) 2000-2012 by the AlternC Development Team.
+ https://alternc.org/
  ----------------------------------------------------------------------
  LICENSE
 
@@ -23,7 +19,6 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file: Benjamin Sonntag, Franck Missoum
  Purpose of file: Miscellaneous functions globally used
  ----------------------------------------------------------------------
 */
@@ -35,7 +30,7 @@ mt_srand((float) $sec + ((float) $usec * 100000));
 /* Format a field value for input or textarea : */
 function fl($str) { return str_replace("<","&lt;",str_replace("\"","&quot;",$str)); }
 
-// Use of m_log
+/* Used by class/m_log.php for usort */
 function compare_logname($a, $b) {
   return strcmp($a['name'],$b['name']);
 }
@@ -141,39 +136,20 @@ function checkipv6($ip) {
   return filter_var($ip,FILTER_VALIDATE_IP, FILTER_FLAG_IPV6);
 }
 
-/* Check a login mail */
+/* Check a login mail, cf http://www.bortzmeyer.org/arreter-d-interdire-des-adresses-legales.html */
+/* FIXME: check who is using that function and delete it when unused */
 function checkloginmail($mail) {
-  if (!preg_match("/^[a-zA-Z0-9_\.:\+\-]*[a-zA-Z0-9_]$/",$mail)) {
-    return false;
-  } else {
-    return true;
-  }
+  return true;
 }
-/* " */
 
-/* Check an email address, use checkloginmail and checkfqdn */
+/* Check an email address, use filter_var with emails, which works great ;)  */
+/* FIXME: check who is using that function and delete it when unused */
 function checkmail($mail) {
-  // Retourne 0 si tout va bien, sinon retourne un code erreur...
-  // 1 s'il n'y a rien devant l'@
-  // 2 3 ou 4 si le domaine est incorrect.
-  // 5 s'il y a caractères interdits dans la partie gauche du @
-  // 6 si le mail contient aucun ou plus d'un @
-  $t=explode("@",$mail);
-  if (count($t)!=2) {
-    return 6;
+  if (filter_var($mail,FILTER_VALIDATE_EMAIL)) {
+    return 0;
+  } else {
+    return 1;
   }
-  $c=checkfqdn($t[1]);
-  if ($c)
-    return $c;
-  // Verification de la partie gauche :
-  if (!checkloginmail($t[0])) {
-    if ($t[0]=="") {
-    	return 1;
-    } else {
-        return 5;
-    }
-  }
-  return 0;
 }
 
 /* Check that a domain name is fqdn compliant */
@@ -512,6 +488,96 @@ function list_properties_order($a, $b) {
   }
   return ($a['label']<$b['label'])?-1:1;
 } // end private function list_properties_order
+
+
+/** Show a pager as 
+  Previous page 0 1 2 ... 16 17 18 19 20 ... 35 36 37 Next page
+  Arguments are as follow : 
+  $offset = the current offset from 0 
+  $count = The number of elements shown per page 
+  $total = The total number of elements 
+  $url = The url to show for each page. %%offset%% will be replace by the proper offset
+  $before & $after are HTML code to show before and after the pager **only if the pager is to be shown**
+  */
+function pager($offset,$count,$total,$url,$before="",$after="") {
+  $offset=intval($offset); 
+  $count=intval($count); 
+  $total=intval($total); 
+  if ($offset<=0) $offset="0";
+  if ($count<=1) $count="1";
+  if ($total<=0) $total="0";
+  if ($total<$offset) $offset=max(0,$total-$count);
+
+  if ($total<=$count) { // When there is less element than 1 complete page, just don't do anything :-D
+    return true;
+  }
+  echo $before;
+  // Shall-we show previous page link ?
+  if ($offset) {
+    $o=max($offset-$count,0);
+    echo "<a href=\"".str_replace("%%offset%%",$o,$url)."\" alt=\"(Ctl/Alt-p)\" title=\"(Alt-p)\" accesskey=\"p\">"._("Previous Page")."</a> ";
+  } else {
+    echo _("Previous Page")." ";
+  }
+
+  if ($total>(2*$count)) { // On n'affiche le pager central (0 1 2 ...) s'il y a au moins 2 pages.
+    echo " - ";
+    if (($total<($count*10)) && ($total>$count)) {  // moins de 10 pages : 
+      for($i=0;$i<$total/$count;$i++) {
+	$o=$i*$count;
+	if ($offset==$o) {
+	  echo $i." "; 
+	} else {
+	  echo "<a href=\"".str_replace("%%offset%%",$o,$url)."\">$i</a> ";
+	}
+      }
+    } else { // Plus de 10 pages, on affiche 0 1 2 , 2 avant et 2 après la page courante, et les 3 dernieres
+      for($i=0;$i<=2;$i++) {
+	$o=$i*$count;
+	if ($offset==$o) {
+	  echo $i." "; 
+	} else {
+	  echo "<a href=\"".str_replace("%%offset%%",$o,$url)."\">$i</a> ";
+	}
+      }
+      if ($offset>=$count && $offset<($total-2*$count)) { // On est entre les milieux ...
+	// On affiche 2 avant jusque 2 après l'offset courant mais sans déborder sur les indices affichés autour
+	$start=max(3,intval($offset/$count)-2);
+	$end=min(intval($offset/$count)+3,intval($total/$count)-3);
+	if ($start!=3) echo " ... ";
+	for($i=$start;$i<$end;$i++) {
+	  $o=$i*$count;
+	  if ($offset==$o) {
+	    echo $i." "; 
+	  } else {
+	    echo "<a href=\"".str_replace("%%offset%%",$o,$url)."\">$i</a> ";
+	  }
+	}
+	if ($end!=intval($total/$count)-3) echo " ... ";
+      } else {
+	echo " ... ";
+      }
+      for($i=intval($total/$count)-3;$i<$total/$count;$i++) {
+	$o=$i*$count;
+	if ($offset==$o) {
+	  echo $i." "; 
+	} else {
+	  echo "<a href=\"".str_replace("%%offset%%",$o,$url)."\">$i</a> ";
+	}
+      }
+    echo " - ";
+    } // More than 10 pages?
+  }
+  // Shall-we show the next page link ?
+  if ($offset+$count<$total) {
+    $o=$offset+$count;
+    echo "<a href=\"".str_replace("%%offset%%",$o,$url)."\" alt=\"(Ctl/Alt-s)\" title=\"(Alt-s)\" accesskey=\"s\">"._("Next Page")."</a> ";
+  } else {
+    echo _("Next Page")." ";
+  }
+  echo $after;
+}
+
 
 
 ?>

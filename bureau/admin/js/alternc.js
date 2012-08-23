@@ -186,6 +186,7 @@ function check_mail_form_validity(id_elem) {
 * Function :is_valid_mail
 * @param : interger arg, an RFC 2822 mail adress
 * @return : true if arg really is formed like described in RFC 2822, else false
+* FIXME: does this function is used anywhere ? if yes, remove it, see http://www.bortzmeyer.org/arreter-d-interdire-des-adresses-legales.html
 */
 function is_valid_mail(arg) {
   //FIXME mail documentation doesn't expect a maximum length of the mail address : http://tools.ietf.org/html/rfc2822#section-3.4.1

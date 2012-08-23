@@ -154,6 +154,14 @@ hr {
 	padding: 2px;
 	color: black;
 }
+.intleft {
+    border-right: 0px;
+    padding-right: 0px;
+}
+.intright {
+    border-left: 0px;
+    padding-left: 0px;
+}
 
 .lst1 {
 	background-color: #F1F8FD;
@@ -327,6 +335,16 @@ img {
 	text-align: center;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+table.searchtable {
+    width: 700px; 
+    border: 1px dotted #99f; 
+    margin: 20px 0 20px 0px;
+}
+
+table.searchtable td {
+    padding: 5px;
 }
 
 /* Others */

@@ -1,6 +1,5 @@
 <?php
 /*
- $Id: m_mail.php,v 2.00 2012/03/12 06:26:16 anarcat Exp $
  ----------------------------------------------------------------------
  LICENSE
 
@@ -16,7 +15,6 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file: Benjamin Sonntag, Franck Missoum
  Purpose of file: Manage Email accounts and aliases.
  ----------------------------------------------------------------------
 */
@@ -25,93 +23,228 @@
 * This class handle emails (pop and/or aliases and even wrapper for internal
 * classes) of hosted users.
 *
-* Copyleft {@link http://alternc.net/ AlternC Team}
-*
-* @copyright    AlternC-Team 2002-11-01 http://alternc.net/
-*
+* @copyright    AlternC-Team 2012-09-01 http://alternc.com/
+* This class is directly using the following alternc MySQL tables:
+* address = any used email address will be defined here, mailbox = pop/imap mailboxes, recipient = redirection from an email to another
+* and indirectly the domain class, to know domain names from their id in the DB.
+* This class is also defining a few hooks, search ->invoke in the code.
 */
 class m_mail {
 
-  /** domain list
+
+  /* ----------------------------------------------------------------- */
+  /** domain list for this account
    * @access private
    */
   var $domains;
 
 
   /* ----------------------------------------------------------------- */
-  /**
-   * Constructor
+  /** Number of results for a pager display
+   * @access public
    */
-  function m_mail() {
-  }
+  var $total;
 
 
   /* ----------------------------------------------------------------- */
-  /**
-   * Quota list (hook for quota class)
+  /** Quota list (hook for quota class)
    */
   function alternc_quota_names() {
     return "mail";
   }
 
+
+  /* ----------------------------------------------------------------- */
+  /** get_quota (hook for quota class), returns the number of used 
+   * service for a quota-bound service
+   * @param $name string the named quota we want
+   * @return the number of used service for the specified quota, 
+   * or false if I'm not the one for the named quota
+   */
   function alternc_get_quota($name) {
     global $db,$err,$cuid;
     if ($name=="mail") {
       $err->log("mail","getquota");
-      //$db->query("SELECT COUNT(*) AS cnt FROM address WHERE domain_id in(select id from domaines where compte=$cuid);");
-      $db->query("SELECT COUNT(a.id) AS cnt FROM address a, domaines d WHERE a.domain_id =d.id and d.compte=$cuid group by a.id;");
+      $db->query("SELECT COUNT(*) AS cnt FROM address WHERE domain_id in (select id from domaines where compte=$cuid);");
       $db->next_record();
       return $db->f("cnt");
     }
-  }
-
-
-  /**
-   * Password kind used in this class (hook for admin class)
-   */
-  function alternc_password_policy() {
-    return array("pop"=>"POP/IMAP account passwords");
+    return false;
   }
 
 
   /* ----------------------------------------------------------------- */
-  /** Returns the list of mail-hosted domains for a user
+  /** Password policy kind used in this class (hook for admin class)
+   * @return array an array of policykey => "policy name (for humans)"
+   */
+  function alternc_password_policy() {
+    return array("pop"=>_("Email account password"));
+  }
+
+
+  /* ----------------------------------------------------------------- */
+  /** Returns the list of mail-hosting domains for a user
    * @return array indexed array of hosted domains
    */
   function enum_domains() {
       global $db,$err,$cuid;
       $err->log("mail","enum_domains");
       $db->query("select d.id, d.domaine, count(a.id) as nb_mail FROM domaines d left join address a on a.domain_id=d.id where d.compte = $cuid group by d.id order by d.domaine asc;");
+      $this->enum_domains=array();
       while($db->next_record()){
           $this->enum_domains[]=$db->Record;
       }
-      //print_r("<pre>");print_r($this->enum_domains);die();
       return $this->enum_domains;
-
   }
 
+
+  /* ----------------------------------------------------------------- */
   /* function used to list every mail address hosted on a domain.
-   * @param : the technical domain id.
-   * @result : an array of each mail hosted under the domain.
+   * @param $dom_id integer the domain id.
+   * @param $search string search that string in recipients or address.
+   * @param $offset integer skip THAT much emails in the result.
+   * @param $count integer return no more than THAT much emails.
+   * @result an array of each mail hosted under the domain.
    */
-  function enum_domain_mails($dom_id = null){
-    global $db,$err,$cuid;
+  function enum_domain_mails($dom_id = null, $search="", $offset=0, $count=30){
+    global $db,$err,$cuid,$hooks;
     $err->log("mail","enum_domains_mail");
-    $db->query("select * from address where domain_id=$dom_id order by address asc;");
-    if (!$db->num_rows()) {
+
+    $search=trim($search);
+
+    $where="a.domain_id=$dom_id";
+    if ($search) $where.=" AND (a.address LIKE '%".addslashes($search)."%' OR r.recipients LIKE '%".addslashes($search)."%')";
+    $db->query("SELECT count(a.id) AS total FROM address a LEFT JOIN recipient r ON r.address_id=a.id WHERE $where;");
+    $db->next_record();
+    $this->total=$db->f("total");
+
+    $db->query("SELECT a.id, a.address, a.password, a.enabled, d.domaine AS domain, m.quota*1024*1024 AS quota, m.bytes AS used, NOT ISNULL(m.id) AS islocal, a.type, r.recipients, m.lastlogin  
+         FROM (address a LEFT JOIN mailbox m ON m.address_id=a.id) LEFT JOIN recipient r ON r.address_id=a.id, domaines d 
+         WHERE $where AND d.id=a.domain_id 
+         LIMIT $offset,$count;");
+    if (! $db->next_record()) {
+      $err->raise("mail",_("No mail found for this query"));
       return false;
     }
-    while($db->next_record()){
-      $this->enum_domain_mails[]=$db->Record;
-    }
-    return $this->enum_domain_mails;
+    $res=array();
+    do {
+      $details=$db->Record;
+      // if necessary, fill the typedata with data from hooks ...
+      if ($details["type"]) {
+	$result=$hooks->invoke("mail_get_details",array($details["id"])); // Will fill typedata if necessary
+	$details["typedata"]=implode("<br />",$result);
+      }
+      $res[]=$details;
+    } while ($db->next_record());
+    return $res;
   }
 
-  function enum_doms_mails_letters($mail_id) {
+
+
+  /* ----------------------------------------------------------------- */
+  /** Function used to insert a new mail into de the db
+   * should be used by the web interface, not by third-party programs.
+   *
+   * This function calls the hook "hooks_mail_cancreate"
+   * which must return FALSE if the user can't create this email, and raise and error accordingly
+   * 
+   * @param $dom_id integer A domain_id (owned by the user) 
+   * (will be the part at the right of the @ in the email)
+   * @param $mail string the left part of the email to create (something@dom_id)
+   * @return an hashtable containing the database id of the newly created mail, 
+   * or false if an error occured ($err is filled accordingly)
+   */ 
+  function create($dom_id, $mail){
+    global $err,$db,$cuid,$quota,$dom;
+    $err->log("mail","create");
+
+    // Validate the domain id
+    if (!($domain=$dom->get_domain_byid($dom_id))) {
+      return false;
+    }
+
+    // Validate the email syntax:
+    $m=$mail."@".$domain;
+    if (!filter_var($m,FILTER_VALIDATE_EMAIL)){
+      $err->raise("mail",_("The email you entered is syntaxically incorrect"));
+      return false;
+    }
+
+    // Call other classes to check we can create it:
+    $cancreate=$hooks->invoke('hooks_mail_cancreate',array($dom_id,$domain,$mail));
+    if (in_array(false,$cancreate,true)) {
+      return false;
+    }
+
+    // Check the quota:
+    if (!$quota->cancreate("mail")) {
+      $err->raise("mail",_("You cannot create email addresses: your quota is over."));
+      return false;
+    }
+    // Already exists?
+    $db->query("SELECT * FROM address WHERE domain_id=".$dom_id." AND address='".addslashes($mail)."';");
+    if ($db->next_record()) {
+      $err->raise("mail",_("This email address already exists"));
+      return false;
+    }
+    // Create it now
+    $db->query("INSERT INTO address (domain_id, address) VALUES ($dom_id, '".addslashes($mail)."');");
+    if (!($id=$db->lastid())) {
+      $err->raise("mail",_("An unexpected error occured when creating the email"));
+      return false;
+    }
+    return $id;
+  }
+
+
+  /* ----------------------------------------------------------------- */
+  /** function used to get every information we can on a mail 
+  * @param $mail_id integer
+  * @return array a hashtable with all the informations for that email
+  */
+  function get_details($mail_id) {
+    global $db, $err, $cuid;
+    $err->log("mail","get_details");
+
+    $mail_id=intval($mail_id);
+
+    // We fetch all the informations for that email: these will fill the hastable : 
+    $db->query("SELECT a.address, a.password, a.enabled, d.domaine AS domain, m.quota, m.bytes/1024/1024 AS used, NOT ISNULL(m.id) AS islocal, a.type  
+         FROM address a LEFT JOIN mailbox m ON m.address_id=a.id, domaines d WHERE a.id=$mail_id AND d.id=a.domain_id;");
+    if (! $db->next_record()) return false;
+    $details=$db->Record;
+    // if necessary, fill the typedata with data from hooks ...
+    if ($details["type"]) {
+      $result=$hooks->invoke("mail_get_details",array($mail_id)); // Will fill typedata if necessary
+      $details["typedata"]=implode("<br />",$result);
+    }
+    return $details;
+  }
+
+
+
+
+
+
+
+  /* ############################################################ */
+  /* ############################################################ */
+  /* After that line, to be deleted / checked & co. */
+  /* ############################################################ */
+  /* ############################################################ */
+
+
+
+  /* ----------------------------------------------------------------- */
+  /** function used to list the first letter used in the list of the emails hosted in a specific domain
+   * @param $domain_id integer the domain id.
+   * @result an array of each letter used in mail hosted under the domain.
+   */
+  function enum_doms_mails_letters($domain_id) {
     global $err,$cuid,$db;
     $err->log("mail","enum_doms_mails_letters");
-    //$db->query("select distinct left(ad.address,1) as letter from address ad, domaines d where ad.domain_id = d.id and d.compte='$cuid' order by letter;");
-    $db->query("select distinct left(ad.address,1) as letter from address ad,where ad.id = $mail_id ;");
+    $domain_id=intval($domain_id);
+    $db->query("select distinct left(ad.address,1) as letter from address ad,where ad.domain_id = $domain_id ;");
     $res=array();
     while($db->next_record()) {
       $res[]=$db->f("letter");
@@ -119,130 +252,20 @@ class m_mail {
     return $res;
   }
 
-  /*
-   * Function used to insert a new mail into de the db
-   * @param: a domain_id (linked to the user ) and the left part of mail waiting to be inserted 
-   * @return: an hashtable containing the database id of the newly created mail, the state ( succes or failure ) of the operation, 
-   * and an error message if necessary.
-   * TODO piensar a enlever la contrainte d'unicité sur le champs address et en rajouter une sur adrresse+dom_id.
-   */ 
-  function create($dom_id, $mail_arg,$dom_name){
-    global $mail,$err,$db,$cuid,$quota;
-    $err->log("mail","create");
-  
-    $return = array ( 
-      "state" => true,
-      "mail_id" => null,
-      "error" => "OK");
-
-    $m=$mail_arg."@".$dom_name;
-    if(checkmail($m) != 0){
-      $return["state"]=false;
-      $return["error"]="erreur d'appel a cancreate";
-      return $return;
-    }
-  
-    $return=$mail->cancreate($dom_id, $mail_arg);
-    //Si l'appel échoue
-    if(!$return ){
-      $return["state"]=false;
-      $return["error"]="erreur d'appel a cancreate";
-      return $return;
-    }
-    if($return["state"]==false){
-      $return["error"]="erreur d'appel a cancreate";
-      return ($return);
-    }    
-    // check appartenance domaine      
-    $test=$db->query("select id from domaines where compte=$cuid and id=$dom_id;");
-  
-    if(!$db->next_record($test)){
-        $return["state"]= false;
-        $return["error"]=" hophophop tu t'es prix pour un banquier ouquoi ?";
-        return $return;
-    }
-
-    // Check the quota :
-    if (!$quota->cancreate("mail")) {
-      $err->raise("mail",10);
-      return false;
-    }
-  
-		$db->query("insert into address (domain_id, address) VALUES ($dom_id, '$mail_arg');");
-		$test=$db->query("select id from address where domain_id=$dom_id and address=\"$mail_arg\";");
-
-    $db->next_record();
-    
-    $return["mail_id"]=$db->f("id");
-  
-    return $return;
+  /* FIXME: check who is using that function and delete it when unused */
+  function cancreate($dom_id, $email){
+    return true;
   }
-
-/*
- *Function used to check if a given mail address can be inserted a new mail into de the db
- *@param: a domain_id (linked to the user ) and the left part of mail waiting to be inserted 
- *@return: an hashtable containing the database id of the newly created mail, the state ( succes or failure ) of the operation, 
- *and an error message if necessary.
- */
-  function cancreate($dom_id,$mail_arg){
-    global $db,$err,$cuid,$hooks;
-    $err->log("mail","cancreate");
   
-    $return = array ( 
-        "state" => true,
-        "mail_id" => null,
-        "error" => "");
-  
-    $return2 = array ();
-    $return2 = $hooks->invoke('hooks_mail_cancreate',array($dom_id,$mail_arg));
-  
-    foreach($return2 as $tab => $v){
-      if($v["state"] != true){
-        //print_r($tab);
-        $return["state"]=false;
-        $return["error"]="erreur lors du check de la classe $tab";
-        return $return; 
-      }
-    }
-    return $return; 
-  }
-
+   /* FIXME: check who is using that function and delete it when unused */
   function form($mail_id) {
-    global $mail, $err;
-    include('mail_edit.inc.php');
   }
 
 
-  /*
-   * hooks called by the cancreate function
-   * @param: a domain_id (linked to the user ) and the left part of mail waiting to be inserted 
-   * @return: an hashtable containing the database id of the newly created mail, the state ( succes or failure ) of the operation, 
-   * and an error message if necessary.
-   *
-   */ 
-  function hooks_mail_cancreate($dom_id, $mail_arg) {
+   /* FIXME: check who is using that function and delete it when unused */
+  function hooks_mail_cancreate($dom_id, $domain, $mail_arg) {
     global $db,$err;
-    $err->log("mail","hooks_mail_cancreate");
-  
-    $return = array ( 
-        "state" => true,
-        "mail_id" => null,
-        "error" => "");
-  
-    $db->query("select count(*) as cnt from address where domain_id=$dom_id and address=\"$mail_arg\";"); 
-  
-    if($db->next_record()){
-      //if mail_arg not already in table "address"
-      if( $db->f("cnt") == "0") {
-        return $return;
-      }else{
-        $return["state"] = false;
-        $return["error"]="mail existe deja";
-        return $return;
-      }
-    } 
-    $return["error"]="erreur de requête";
-    return $return;
+    return true;
   }
 
   /**
@@ -290,49 +313,7 @@ class m_mail {
     return $final;
   }
   
-  /* function used to get every information at our disposal concerning a mail.
-  *  @param: $mail_id, $recur (used to stop the fonction correctly when called from list alias.
-  *  @return: an hashtable of every usefull informations we can get about a mail.
-  */
 
-  function mail_get_details($mail_id, $recur=true){
-    global $db, $err, $mail_redirection,$mail_alias, $mail_localbox;
-    $err->log("mail","mail_get_details");
-    
-    $details = array (
-        "address_id" => "",
-        "address" => "",
-        "domain" => "", 
-        "address_full" => "",
-        "password" => "",
-        "enabled" => false,
-        "is_local" => Array(),
-        "recipients" => Array(),
-        "alias" => Array(),
-        );
-  
-    //on recupere les info principales de toutes adresses
-    $db->query("select a.address,a.password,a.enabled, d.domaine from address a, domaines d where a.id=$mail_id and d.id=a.domain_id;");
-  
-    // Return if no entry in the database
-    if (! $db->next_record()) return false;
-  
-    $details["address_id"]  =$mail_id;
-    $details["address"]  =$db->f("address");
-    $details["password"]  =$db->f("password");
-    $details["enabled"]  =$db->f("enabled");
-    $details["domain"]  =$db->f("domaine");
-    $details["address_full"]=$details["address"].'@'.$details["domain"];
-  
-    if ($recur) {
-      // Get some human-usefull informations
-      $details["is_local"]=$mail_localbox->details($mail_id);
-      $details["recipients"] = $mail_redirection->list_recipients($mail_id);
-      $details["alias"] = $mail_alias->list_alias($details['address_full']);
-    }
-    
-    return $details;
-  }
 
  /** 
   * activate a mail address.
@@ -344,6 +325,7 @@ class m_mail {
     if( !$db->query("UPDATE address SET enabled=1 where id=$mail_id;"))return false;
   }
 
+
  /** 
   * disable a mail address.
   * @param integer mail_id: unique mail identifier
@@ -354,20 +336,16 @@ class m_mail {
     if( !$db->query("UPDATE address SET enabled=0 where id=$mail_id;")) return false;
   }
 
+
  /** 
   * setpasswd a mail address.
   * @param integer mail_id: unique mail identifier
-  * @return boolean true if the password has been changed. Set $err to a proper error code is false.
   */  
   function setpasswd($mail_id,$pass,$passwd_type){
     global $db,$err,$admin;
     $err->log("mail","setpasswd");
     if(!$admin->checkPolicy("pop",$mail_full,$pass)) return false;
-    if(!$db->query("UPDATE address SET password='"._md5cr($pass)."' where id=$mail_id;")) {
-      $err->raise("mail",1);
-      return false;
-    }
-    return true;
+    if(!$db->query("UPDATE address SET password='"._md5cr($pass)."' where id=$mail_id;")) return false;
   }
 
 

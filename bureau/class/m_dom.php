@@ -1,6 +1,5 @@
 <?php
 /*
- $Id: m_dom.php,v 1.27 2006/02/17 18:34:30 olivier Exp $
  ----------------------------------------------------------------------
  LICENSE
 
@@ -16,7 +15,6 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file: Benjamin Sonntag
  Purpose of file: PHP Class that manage domain names installed on the server
  ----------------------------------------------------------------------
 */
@@ -94,6 +92,7 @@ class m_dom {
   function alternc_quota_names() {
     return "dom";
   }
+  
   /* ----------------------------------------------------------------- */
   /**
    * Retourne un tableau contenant les types de domaines
@@ -185,6 +184,7 @@ class m_dom {
 
   function domains_type_update($name, $description, $target, $entry, $compatibility, $enable, $only_dns, $need_dns,$advanced) {
     global $err,$cuid,$db;
+    $id=intval($id);
     // The name MUST contain only letter and digits, it's an identifier after all ...
     if (!preg_match("#^[a-z0-9]+$#",$name)) {
       $err->raise("dom", 26);
@@ -1156,6 +1156,32 @@ class m_dom {
   return $res;
   }
 
+
+
+  /* ----------------------------------------------------------------- */
+  /**
+   * Returns the name of a domain for the current user, from it's domain_id
+   * @param $dom_id integer the domain_id to search for
+   * @return string the domain name, or false with an error raised.
+   */
+  function get_domain_byid($dom_id) {
+    global $db,$err,$cuid;
+    $dom_id=intval($dom_id);
+    $db->query("SELECT domaine FROM domaines WHERE id=$dom_id AND compte=$cuid;");
+    if ($db->next_record()) {
+      $domain=$db->f("domaine");
+      if (!$domain) {
+	$err->raise("dom",_("This domain is not installed in your account"));
+	return false;
+      } else {
+	return $domain;
+      }
+    } else {
+      $err->raise("dom",_("This domain is not installed in your account"));
+      return false;
+    }
+  }
+  
 
   /* ----------------------------------------------------------------- */
   /**

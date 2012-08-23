@@ -91,8 +91,10 @@ class m_err {
    */
   function errstr() {
     if (is_string($this->error)) {
-      $str = _("err_".$this->clsid."_generic: ")._($this->error)."\n";
+      // new way of handling errors: message directly in the class
+      $str = $this->error."\n";
     } else {
+      // old way: message in the locales files (ugly)
       $str = _("err_".$this->clsid."_".$this->error)."\n";
     }
     $args = $this->param;
