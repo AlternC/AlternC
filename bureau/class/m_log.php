@@ -39,6 +39,7 @@ class m_log {
     global $cuid,$err;
     $err->log("log","list_logs_directory");
 
+    $c=array();
     $dir2=$dir;
     if ($dir = @opendir($dir)) {
       while (($file = readdir($dir)) !== false) {
