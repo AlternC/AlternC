@@ -45,30 +45,40 @@ if ($mem->user["lastfail"]) {
 	printf(_("%1\$d login failed since last login")."<br />",$mem->user["lastfail"]);
 }
 
+?>
+<center>
+<?php
+$feed_url = variable_get('rss_feed');
+if (!empty($feed_url)) {
+$cache_time = 60*5; // 5 minutes
+$cache_file = "/tmp/alterncpanel_cache_main.rss";
+$timedif = @(time() - filemtime($cache_file));
 
-/*
- use MagpieRSS to syndicate content from another site if available
- this should work, since the debian package installs it in
- /usr/share/php, which is in the include path
-*/
-$rss_url = variable_get('rss_feed');
-$inc = @include_once('magpierss/rss_fetch.inc');
-if ($inc && $rss_url) {
-  $rss = fetch_rss($rss_url);
+if (file_exists($cache_file) && $timedif < $cache_time) {
+  $string = file_get_contents($cache_file);
+} else {
+  $string = file_get_contents("$feed_url");
+  file_put_contents($cache_file,$string);
+}
+$xml = @simplexml_load_string($string);
 
-  if ($rss) {
-    echo "<h2>" . _("Latest news") . "</h2>";
-    foreach ($rss->items as $item) {
-      $href = $item['link'];
-     $title = $item['title'];
-      echo "<h3><a href=$href>$title</a></h3>";
-      echo '<span class="date">'.$item['pubdate'] .'</span> - ';
-      echo '<span class="author">'.$item['dc']['creator'].'</span>';
-      echo $item['summary'];
-    }
-  }
- }
+// place the code below somewhere in your html
+echo '<table cellspacing="0" cellpadding="6" border="1" style="border-collapse: collapse">';
+echo '<tr><th>'._("Title").'</th><th>'._("Date").'</th></tr>';
+$count = 0;
+$max = 5;
+foreach ($xml->channel->item as $val) {
+if ($count < $max) {
+  echo '
+  <tr>
+    <td><a href="'.$val->link.'">'.$val->title.'</a></td><td>'.strftime("%d/%m/%Y" , strtotime($val->pubDate)).'</td></td>
+  </tr>';
+}
+$count++;
+}
+echo "</table>\n</center>";
 
+} // empty feed_url
 
 if($admin->enabled) {
   $expiring = $admin->renew_get_expiring_accounts();
