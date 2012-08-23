@@ -30,17 +30,42 @@
 require_once("../class/config.php");
 
 $fields = array (
-        "d"                => array ("post", "array", ""),
+        "d"                => array ("post", "array", array()),
         "dir"              => array ("post", "string", ""),
+	"confirm_del"      => array ("post", "string", ""),
 );
 getFields($fields);
 
-reset($d);
-if (!$hta->del_user($d,$dir)) {
-  $error=$err->errstr();
+if (!empty($confirm_del)) {
+  reset($d);
+  if (!$hta->del_user($d,$dir)) {
+    $error=$err->errstr();
+  }
+  header ('Location: /hta_edit.php?dir='.urlencode($dir));
+  exit();
 }
+include_once('head.php');
+?>
+<h3><?php __("Authorized user deletion confirm"); ?></h3>
+<hr id="topbar"/>
+<br />
+  <?php __("Do you really want to delete those users ?");?>
+  <ul>
+  <?php foreach($d as $t) {
+    echo "<li>$t</li>\n";
+  } ?>
+  </ul>
 
-include("hta_edit.php");
+  <form method="post" action="hta_dodeluser.php" name="main" id="main">
+    <input type='hidden' name='dir' value='<?php echo $dir;?>' >
+    <?php foreach($d as $t) {
+      echo "<input type='hidden' name='d[$t]' value='$t' >\n";
+    } ?>
+    <input type="submit" class="inb" name="confirm_del" value="<?php __("Delete")?>" />
+    <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='/hta_edit.php?dir=<?php echo urlencode($dir);?>'" />
+  </form>
+
+<?php
+include_once('foot.php');
 exit();
 ?>
-
