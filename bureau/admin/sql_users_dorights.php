@@ -29,7 +29,14 @@
 */
 require_once("../class/config.php");
 
-$keys=array_keys($_REQUEST);
+
+$fields = array (
+	"id"    		=> array ("post", "string", ""),
+);
+getFields($fields);
+
+
+$keys=array_keys($_POST);
 $dblist=$mysql->get_dblist();
 
 for( $i=0 ; $i<count($dblist) ; $i++ ) {
