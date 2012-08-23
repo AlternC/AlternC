@@ -79,7 +79,7 @@ class m_log {
       return false;
     }
     $db->next_record();
-    $c=array("dir"=>"/var/alternc/logs/".$cuid."-".$db->f("login"));
+    $c=array("dir"=>ALTERNC_LOGS."/".$cuid."-".$db->f("login"));
     return $c;
   }
   

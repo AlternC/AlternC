@@ -32,7 +32,7 @@
 
 ?>
 <div class="menu-box">
-<div class="menu-title"><img src="images/help.png" alt="<?php __("Logs"); ?>" width="16" height="16" />&nbsp;<a href="logs_list.php"><?php __("Logs"); ?></a> </div>
+<div class="menu-title"><img src="images/logs.png" alt="<?php __("Logs"); ?>" width="16" height="16" />&nbsp;<a href="logs_list.php"><?php __("Logs"); ?></a> </div>
 </div>
 
 
