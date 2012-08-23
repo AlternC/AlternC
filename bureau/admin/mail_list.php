@@ -107,7 +107,7 @@ while (list($key,$val)=each($mails_list)){
 	<tr class="lst<?php echo $col; ?>">
 	  <?php if (!$val["type"]) { ?>
         <td align="center">
-	    <input class="inc" type="checkbox" id="del_<?php echo $i; ?>" name="d[]\" value="<?php ehe($val["address"]); ?>" />
+	    <input class="inc" type="checkbox" id="del_<?php echo $i; ?>" name="d[]\" value="<?php ehe($val["address"]."@".$val["domain"]); ?>" />
 	</td>
 	<td>
 	  <div class="ina"><a href="mail_properties.php?mail_id=<?php echo $val["id"] ?>"><img src="images/edit.png" alt="<?php __("Edit"); ?>" /><?php __("Edit"); ?></a></div></td>

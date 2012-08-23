@@ -213,6 +213,7 @@ bureau/admin/images/quota.png -text
 bureau/admin/images/row-down.png -text
 bureau/admin/images/row-down.png2 -text
 bureau/admin/images/schedule.png -text
+bureau/admin/images/search.png -text
 bureau/admin/images/stat.png -text
 bureau/admin/index.php -text
 bureau/admin/ip_main.php -text
@@ -245,6 +246,7 @@ bureau/admin/logs_list.php -text
 bureau/admin/mail_add.php -text
 bureau/admin/mail_alias_create.inc.php -text
 bureau/admin/mail_alias_doedit.php -text
+bureau/admin/mail_del.php -text
 bureau/admin/mail_doadd.php -text
 bureau/admin/mail_doedit.php -text
 bureau/admin/mail_edit.inc.php -text
