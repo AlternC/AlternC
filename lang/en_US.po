@@ -16,67 +16,66 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Emacs 21\n"
 
-#, fuzzy
 msgid "quota_aws"
 msgstr "Web Statistics (awstats)"
 
-#, fuzzy
 msgid "err_aws_1"
 msgstr "No statistic set found."
 
-#, fuzzy
 msgid "err_aws_2"
 msgstr "This statistic set does not exist."
 
-#, fuzzy
 msgid "err_aws_3"
-msgstr "The chosen prefix is not allowed here"
+msgstr "This hostname does not exist"
 
-#, fuzzy
 msgid "err_aws_4"
-msgstr "This statistic set already exists !"
-
-#, fuzzy
-msgid "err_aws_5"
 msgstr ""
 "Your statistic set quota is over. You cannot create more statistic sets."
 
-#, fuzzy
+msgid "err_aws_5"
+msgstr "Login does not exists"
+
 msgid "err_aws_6"
-msgstr "This language is not supported."
+msgstr "Login incorrect"
 
-#, fuzzy
 msgid "err_aws_7"
-msgstr "This language is not supported."
+msgstr "Login does not exist"
 
-#, fuzzy
 msgid "err_aws_8"
-msgstr "This language is not supported."
+msgstr "This login is already allowed for this statistics."
 
-#, fuzzy
 msgid "err_aws_9"
-msgstr "This language is not supported."
+msgstr "This login is already denied for this statistics."
 
-#, fuzzy
 msgid "err_aws_10"
-msgstr "No statistic set found."
+msgstr "prefix not allowed."
 
-#, fuzzy
 msgid "err_aws_11"
-msgstr "No statistic set found."
+msgstr "Forbidden caracters in the login"
 
-#, fuzzy
 msgid "err_aws_12"
-msgstr "This statistic set does not exist."
+msgstr "Hostname is incorrect"
 
-#, fuzzy
 msgid "err_aws_13"
-msgstr "The chosen prefix is not allowed here"
+msgstr "No user currently defined"
+
+#: ../admin/aws_add.php:38 admin/aws_add.php:33
+msgid "You cannot add any new statistics, your quota is over."
+msgstr "You cannot add any new statistics, your quota is over."
 
 #: ../admin/aws_add.php:43 admin/aws_add.php:40
 #, fuzzy
 msgid "Edit Statistics"
 msgstr "New Statistics"
+
+#: ../admin/aws_add.php:43 admin/aws_add.php:40
+msgid "New Statistics"
+msgstr "New Statistics"
+
+#: ../admin/aws_add.php:54 ../admin/aws_list.php:61 admin/aws_add.php:50
+#: admin/aws_list.php:61
+msgid "Domain name"
+msgstr ""
 
 #: ../admin/aws_add.php:61 admin/aws_add.php:57
 msgid "Hostaliases"
@@ -96,6 +95,18 @@ msgstr ""
 msgid "View public"
 msgstr ""
 
+#: ../admin/aws_add.php:98 ../admin/aws_add.php:100
+msgid "No"
+msgstr ""
+
+#: ../admin/aws_add.php:98 ../admin/aws_add.php:100
+msgid "Yes"
+msgstr ""
+
+#: ../admin/aws_add.php:106 admin/aws_add.php:97
+msgid "Create those statistics"
+msgstr "Create those statistics"
+
 #: ../admin/aws_add.php:106 admin/aws_add.php:97
 #, fuzzy
 msgid "Edit those statistics"
@@ -114,8 +125,33 @@ msgstr "The statistics has been successfully created"
 msgid "Please check the statistics set you want to delete"
 msgstr ""
 
+#: ../admin/aws_doadd.php:38 admin/aws_doadd.php:38
+msgid "The statistics has been successfully created"
+msgstr "The statistics has been successfully created"
+
+#: ../admin/aws_doedit.php:33 ../admin/aws_edit.php:38 admin/aws_doedit.php:33
+#: admin/aws_edit.php:33
+msgid "No Statistics selected!"
+msgstr "No Statistics selected!"
+
+#: ../admin/aws_doedit.php:45 admin/aws_doedit.php:45
+msgid "The Statistics has been successfully changed"
+msgstr "The Statistics has been successfully changed"
+
+#: ../admin/aws_list.php:40 admin/aws_list.php:42
+msgid "Statistics List"
+msgstr "Statistics List"
+
 #: ../admin/aws_list.php:44 admin/aws_list.php:44
 msgid "Manage allowed users' accounts"
+msgstr ""
+
+#: ../admin/aws_list.php:47 ../admin/aws_users.php:46 admin/aws_list.php:47
+msgid "Create new Statistics"
+msgstr "Create new Statistics"
+
+#: ../admin/aws_list.php:61 ../admin/aws_users.php:78
+msgid "Action"
 msgstr ""
 
 #: ../admin/aws_list.php:61 ../admin/aws_list.php:74
@@ -123,8 +159,22 @@ msgstr ""
 msgid "View the statistics"
 msgstr "Create those statistics"
 
+#: ../admin/aws_list.php:71 admin/aws_list.php:71
+msgid "Edit"
+msgstr ""
+
+#: ../admin/aws_list.php:81 admin/aws_list.php:81
+msgid "Delete the checked Statistics"
+msgstr "Delete the checked Statistics"
+
 #: ../admin/aws_pass.php:57 admin/aws_pass.php:51
 msgid "Change a user's password"
+msgstr ""
+
+#: ../admin/aws_pass.php:67 ../admin/aws_users.php:52
+#: ../admin/aws_users.php:78 admin/aws_pass.php:61 admin/aws_users.php:47
+#: admin/aws_users.php:69
+msgid "Username"
 msgstr ""
 
 #: ../admin/aws_pass.php:70 admin/aws_pass.php:64
@@ -149,6 +199,10 @@ msgstr "The statistics has been successfully created"
 msgid "Awstats allowed user list"
 msgstr ""
 
+#: ../admin/aws_users.php:55 admin/aws_users.php:50
+msgid "Password"
+msgstr ""
+
 #: ../admin/aws_users.php:57
 #, fuzzy
 msgid "Create this new awstat account"
@@ -158,12 +212,25 @@ msgstr "Create those statistics"
 msgid "Change password"
 msgstr "Change password"
 
+#: ../admin/aws_users.php:92 admin/aws_users.php:83
+#, fuzzy
+msgid "Delete checked accounts"
+msgstr "Delete the checked Statistics"
+
+#: ../admin/menu_aws.php:38 admin/menu_aws.php:37
+msgid "Web Statistics"
+msgstr "Web Statistics"
+
 #: ../class/m_aws.php:86 class/m_aws.php:72
 msgid ""
 "The stats module allows any user to ask for statistics about his web site. "
 "Statistics are web pages generated daily based on the visits of the day "
 "before. Awstats is the soft used to produce those stats. The statistics are "
 "then protected by a login and a password."
+msgstr ""
+
+#: admin/aws_list.php:61 admin/aws_list.php:74
+msgid "View"
 msgstr ""
 
 #: admin/aws_users.php:51
@@ -207,10 +274,6 @@ msgstr ""
 
 msgid "err_mailman_11"
 msgstr "The passwords are differents, please try again"
-
-#, fuzzy
-msgid "man_mailman_1"
-msgstr "No list defined yet"
 
 msgid "quota_mailman"
 msgstr "Mailing lists (mailman)"
@@ -401,7 +464,7 @@ msgstr "Initial list password"
 
 #. -- Only administrators can access this page !! --
 msgid "err_admin_1"
-msgstr "-- Only administrators can access this page !! --"
+msgstr "-- Only administrators can access this page! --"
 
 #. Account not found
 msgid "err_admin_2"
@@ -423,9 +486,9 @@ msgstr "Please enter a valid email address"
 msgid "err_admin_6"
 msgstr "All fields are mandatory"
 
-#. You can ask for your password only once a day !
+#. You can ask for your password only once a day!
 msgid "err_admin_7"
-msgstr "You can ask for your password only once a day !"
+msgstr "You can ask for your password only once a day!"
 
 #. This account is ALREADY an administrator account
 msgid "err_admin_8"
@@ -433,7 +496,7 @@ msgstr "This account is ALREADY an administrator account"
 
 #. This account is NOT an administrator account !
 msgid "err_admin_9"
-msgstr "This account is NOT an administrator account !"
+msgstr "This account is NOT an administrator account!"
 
 #. Login can only contains characters a-z, 0-9 and -
 msgid "err_admin_10"
@@ -443,9 +506,9 @@ msgstr "Login can only contains characters a-z, 0-9 and -"
 msgid "err_admin_11"
 msgstr "This TLD does not exist"
 
-#. This TLD already exists
+#. This TLD already exist
 msgid "err_admin_12"
-msgstr "This TLD already exists"
+msgstr "This TLD already exist"
 
 #. The login is too long (16 chars max)
 msgid "err_admin_13"
@@ -461,11 +524,11 @@ msgstr "Domain '%s' not found."
 
 #. The domaine '%s' does not belong to you.
 msgid "err_dom_2"
-msgstr "The domaine '%s' does not belong to you."
+msgstr "The domain '%s' does not belong to you."
 
 #. --- Programm error --- No lock on the domains !
 msgid "err_dom_3"
-msgstr "--- Programm error --- No lock on the domains !"
+msgstr "--- Program error --- No lock on the domains!"
 
 #. The domain name is too long.
 msgid "err_dom_4"
@@ -489,7 +552,7 @@ msgstr ""
 
 #. The domain already exists.
 msgid "err_dom_8"
-msgstr "The domain already exists."
+msgstr "The domain already exist."
 
 #. The domain has been deleted less than 5 minutes ago, please try again later.
 msgid "err_dom_9"
@@ -522,18 +585,18 @@ msgstr "The sub-domain does not exist."
 msgid "err_dom_15"
 msgstr "No change has been requested..."
 
-#. The sub-domain already exists.
+#. The sub-domain already exist.
 msgid "err_dom_16"
-msgstr "The sub-domain already exists."
+msgstr "The sub-domain already exist."
 
-#. --- Programm error --- Lock already obtained !
+#. --- Program error --- Lock already obtained!
 msgid "err_dom_17"
-msgstr "--- Programm error --- Lock already obtained !"
+msgstr "--- Program error --- Lock already obtained!"
 
-#. This domain is the server's domain !!! You cannot host it on your account !
+#. This domain is the server's domain! You cannot host it on your account!
 msgid "err_dom_18"
 msgstr ""
-"This domain is the server's domain !!! You cannot host it on your account !"
+"This domain is the server's domain! You cannot host it on your account!"
 
 #. The IP address you entered is incorrect.
 msgid "err_dom_19"
@@ -558,7 +621,7 @@ msgstr ""
 msgid "err_dom_23"
 msgstr ""
 "The DNS of this domain do not match the server's DNS. Please change your "
-"domain's DNS (and eventually wait 1 day) before you install it again."
+"domain's DNS (you may need to wait 1 day) before you install it again."
 
 #. There is some forbidden characters in the sub domain (only A-Z 0-9 and - are allowed).
 msgid "err_dom_24"
@@ -567,9 +630,10 @@ msgstr ""
 "allowed)."
 
 #. There is no MX record pointing to this server, and you are asking us to host the Mail here 
-#, fuzzy
 msgid "err_dom_25"
-msgstr "The domaine '%s' does not belong to you."
+msgstr ""
+"There is no MX record pointing to this server, and you are asking us to host "
+"the mail here. Please fix your MX DNS pointer."
 
 #. - Entrez le nom du domaine que vous souhaitez héberger. Le nom de domaine 
 #. doit être complet, mais <b>sans le www.</b><br /> IMPORTANT : Si vous voulez 
@@ -580,13 +644,13 @@ msgstr "The domaine '%s' does not belong to you."
 #. HELPID_200<br />
 msgid "hlp_add_domain"
 msgstr ""
-"- Entrez le nom du domaine que vous souhaitez héberger. Le nom de domaine "
-"doit être complet, mais <b>sans le www.</b><br /> IMPORTANT : Si vous voulez "
-"un hébergement réel de domaine, il faut que les DNS de votre domaine "
-"pointent vers nos serveurs DNS. Contacter votre hébergeur pour plus "
-"d'information.<br /> Exemples : globenet.org / demo.com / test.eu.org etc."
-"<br />Plus d'info sur la gestion des domaines dans l'aide en ligne "
-"HELPID_200<br />"
+"- Please enter the domain name you want to hosthere. The domain name must be "
+"complete, but <b>without the www.</b><br />IMPORTANT: If you want to host "
+"that domain properly, the DNS Servers of your domain must point to the DNS "
+"Servers of your hosting provider. Contact your hosting provider for more "
+"information<br /> Examples of domain name: globenet.org / demo.com / test.eu."
+"org etc. <br />For more information on domain management, read the online "
+"help, HELPID_200"
 
 #. Cliquez sur le lien ci-dessus. Vous pourrez ensuite accéder aux paremètres 
 #. du domaine dans le menu à gauche.2 liens vont apparaitre : <br />- un 
@@ -640,7 +704,7 @@ msgstr "No ftp account found"
 
 #. This ftp account does not exist
 msgid "err_ftp_2"
-msgstr "This ftp account does not exist"
+msgstr "This FTP account does not exist"
 
 #. The chosen prefix is not allowed
 msgid "err_ftp_3"
@@ -648,11 +712,11 @@ msgstr "The chosen prefix is not allowed"
 
 #. This ftp account already exists
 msgid "err_ftp_4"
-msgstr "This ftp account already exists"
+msgstr "This FTP account already exist"
 
 #. Your ftp account quota is over. You cannot create more ftp accounts.
 msgid "err_ftp_5"
-msgstr "Your ftp account quota is over. You cannot create more ftp accounts."
+msgstr "Your FTP account quota is over. You cannot create more FTP accounts."
 
 #. The directory cannot be created.
 msgid "err_ftp_6"
@@ -711,7 +775,7 @@ msgstr ""
 
 #. An incompatible .htaccess file exists in this folder.
 msgid "err_hta_1"
-msgstr "An incompatible .htaccess file exists in this folder."
+msgstr "An incompatible .htaccess file exist in this folder."
 
 #. .htaccess parsed and syntaxically correct, a .htpassword file has been created.
 msgid "err_hta_2"
@@ -801,7 +865,7 @@ msgstr "The domain '%s' does not exist."
 
 #. -- Programm error -- Mail quota does not exist
 msgid "err_mail_10"
-msgstr "-- Programm error -- Mail quota does not exist"
+msgstr "-- Program error -- Mail quota does not exist"
 
 #. Please enter an Email address
 msgid "err_mail_11"
@@ -822,7 +886,7 @@ msgstr "One or more email redirection are invalid"
 #. This mail is not a pop account. It's impossible to change the password !
 msgid "err_mail_15"
 msgstr ""
-"This mail is not a pop account. It's impossible to change the password !"
+"This mail is not a pop account. It's impossible to change the password!"
 
 #. OK
 msgid "err_err_0"
@@ -886,6 +950,9 @@ msgstr "You are not allowed to change your password."
 msgid "err_mem_12"
 msgstr "You must be a system administrator to do this"
 
+msgid "err_mem_13"
+msgstr "Your IP address is not allowed here."
+
 # Please do NOT translate those strings to each language. Use the original language instead
 #. Français (France)
 #. Please do NOT translate those strings to each language. Use the original language instead
@@ -923,9 +990,8 @@ msgid "es_VE"
 msgstr "Español (Venezuela)"
 
 #. OK
-#, fuzzy
 msgid "err_quota_0"
-msgstr "Error writing the quota entry !"
+msgstr "OK"
 
 #. Error writing the quota entry !
 msgid "err_quota_1"
@@ -946,7 +1012,7 @@ msgstr "Disk space"
 #. Data base name can contain only digits or lowercase alphabetic characters
 msgid "err_mysql_2"
 msgstr ""
-"Data base name can contain only digits or lowercase alphabetic characters"
+"Database name can contain only digits or lowercase alphabetic characters"
 
 #. The database does not exist, you'll get an access by creating it.
 msgid "err_mysql_3"
@@ -976,9 +1042,9 @@ msgstr "The password is too long (16 chars max)"
 msgid "err_mysql_9"
 msgstr "The file is incorrect or does not exist."
 
-#. Your cannot create your main database : you still have other dbs !
+#. Your cannot create your main database: you still have other dbs !
 msgid "err_mysql_10"
-msgstr "Your cannot create your main database : you still have other dbs !"
+msgstr "Your cannot create your main database: you still have other dbs !"
 
 #. You have no database, click on 'Databases' to create the first one
 msgid "err_mysql_11"
@@ -986,7 +1052,7 @@ msgstr "You have no database, click on 'Databases' to create the first one"
 
 #. The data base name is too long (64 chars max)
 msgid "err_mysql_12"
-msgstr "The data base name is too long (64 chars max)"
+msgstr "The database name is too long (64 chars max)"
 
 #. You cannot create more MySQL users
 msgid "err_mysql_13"
@@ -1118,41 +1184,28 @@ msgstr "Go back to the file manager"
 msgid "Edit the newly created file"
 msgstr "Edit the newly created file"
 
-#, fuzzy
 msgid "hlp_login"
 msgstr ""
-"Le domaine a été effacé, mais les fichiers de votre site n'ont pas été "
-"détruits.<br />Si vous souhaitez détruire les fichiers du site web, utilisez "
-"le Gestionnaire de Fichier<br />Plus d'info sur la gestion des domaines dans "
-"l'aide en ligne HELPID_200<br />"
 
-#, fuzzy
 msgid "err_admin_14"
-msgstr "-- Only administrators can access this page !! --"
+msgstr "-- Program error -- The requested password policy does not exist!"
 
-#, fuzzy
 msgid "err_admin_15"
-msgstr "-- Only administrators can access this page !! --"
+msgstr "The password length is too short according to the password policy"
 
-#, fuzzy
 msgid "err_admin_16"
-msgstr "-- Only administrators can access this page !! --"
+msgstr "The password is too long according to the password policy"
 
-#, fuzzy
 msgid "err_admin_17"
-msgstr "-- Only administrators can access this page !! --"
+msgstr ""
+"The password policy prevents you to use your login name inside your password"
 
-#, fuzzy
 msgid "err_admin_18"
-msgstr "-- Only administrators can access this page !! --"
+msgstr "Your password contains not enough different classes of character"
 
 msgid "err_hta_12"
 msgstr ""
 "Cannot write inside the requested folder. Please check your permissions."
-
-#, fuzzy
-msgid "err_mail_16"
-msgstr "ldap connexion impossible, please try again later."
 
 msgid "err_mysql_20"
 msgstr "The password is mandatory"
@@ -1165,24 +1218,51 @@ msgstr "Cannot create the requested file. Please check permissions."
 
 # $d,$m,$y,$h,$i,$hh,$am
 #  1  2  3  4  5  6   7
-#, fuzzy
 msgid "%3$d-%2$d-%1$d"
-msgstr "%2$d/%1$d/%3$d %6$d:%5$d %7$d"
+msgstr "%2$d/%1$d/%3$d"
 
-#, fuzzy
 msgid "AlternC's account password"
-msgstr "Please enter a password"
+msgstr "AlternC's account password"
 
-#, fuzzy
 msgid "POP/IMAP account passwords"
-msgstr "POP password"
+msgstr "POP/IMAP account passwords"
 
-#, fuzzy
 msgid "Protected folders passwords"
-msgstr "Protected folders list"
+msgstr "Protected folders passwords"
+
+#: ../admin/adm_add.php:36 ../admin/adm_deactivate.php:35
+#: ../admin/adm_deactivate.php:52 ../admin/adm_defquotas.php:35
+#: ../admin/adm_dnsweberror.php:33 ../admin/adm_doadd.php:35
+#: ../admin/adm_dodefquotas.php:35 ../admin/adm_dodel.php:33
+#: ../admin/adm_dodel.php:52 ../admin/adm_doedit.php:35
+#: ../admin/adm_doedit.php:59 ../admin/adm_domlock.php:33
+#: ../admin/adm_doms.php:33 ../admin/adm_domstype.php:33
+#: ../admin/adm_domstypedoedit.php:4 ../admin/adm_domstypeedit.php:32
+#: ../admin/adm_domstyperegenerate.php:4 ../admin/adm_donosu.php:33
+#: ../admin/adm_dorenew.php:34 ../admin/adm_dorenew.php:38
+#: ../admin/adm_dorenew.php:45 ../admin/adm_dosu.php:33
+#: ../admin/adm_edit.php:36 ../admin/adm_edit.php:48 ../admin/adm_list.php:37
+#: ../admin/adm_list.php:58 ../admin/adm_login.php:74
+#: ../admin/adm_login.php:79 ../admin/adm_login.php:86
+#: ../admin/adm_login.php:91 ../admin/adm_mxaccount.php:33
+#: ../admin/adm_panel.php:33 ../admin/adm_passpolicy.php:30
+#: ../admin/adm_quotadoedit.php:33 ../admin/adm_quotaedit.php:34
+#: ../admin/adm_slaveaccount.php:33 ../admin/adm_slaveip.php:33
+#: ../admin/adm_tld.php:33 ../admin/adm_tldadd.php:33
+#: ../admin/adm_tlddoadd.php:33 ../admin/adm_tlddoedit.php:39
+#: ../admin/adm_tldedit.php:33 ../admin/adm_variables.php:33
+#: ../admin/dom_subdel.php:43 ../admin/dom_subdodel.php:43
+#: ../admin/dom_subdoedit.php:55 ../admin/dom_subedit.php:47
+#: ../admin/quotas_users.php:13 ../class/reset_stats_conf.php:6
+msgid "This page is restricted to authorized staff"
+msgstr ""
 
 #: ../admin/adm_add.php:53
 msgid "New AlternC account"
+msgstr ""
+
+#: ../admin/adm_add.php:67
+msgid "Initial password"
 msgstr ""
 
 #: ../admin/adm_add.php:71 ../admin/adm_edit.php:89 ../admin/ftp_add.php:65
@@ -1193,8 +1273,20 @@ msgstr ""
 msgid "Confirm password"
 msgstr ""
 
+#: ../admin/adm_add.php:75 ../admin/adm_edit.php:93
+msgid "Can he change its password"
+msgstr ""
+
 #: ../admin/adm_add.php:82 ../admin/adm_edit.php:100
 msgid "Notes"
+msgstr ""
+
+#: ../admin/adm_add.php:86 ../admin/adm_edit.php:104
+msgid "First Name"
+msgstr ""
+
+#: ../admin/adm_add.php:86 ../admin/adm_edit.php:104
+msgid "Surname"
 msgstr ""
 
 #: ../admin/adm_add.php:94 ../admin/adm_dodefquotas.php:43
@@ -1246,6 +1338,12 @@ msgstr ""
 
 #: ../admin/adm_authip_whitelist.php:54 ../admin/ip_main.php:175
 msgid "Add a comment"
+msgstr ""
+
+#: ../admin/adm_authip_whitelist.php:57 ../admin/bro_editor.php:77
+#: ../admin/cron.php:66 ../admin/cron.php:71 ../admin/ip_main.php:123
+#: ../admin/ip_main.php:178
+msgid "Save"
 msgstr ""
 
 #: ../admin/adm_authip_whitelist.php:64 ../admin/ip_main.php:136
@@ -1303,6 +1401,10 @@ msgstr ""
 msgid "-- Redirecting all domains and subdomains of the user %s to %s\n"
 msgstr ""
 
+#: ../admin/adm_defquotas.php:42 ../admin/adm_panel.php:54
+msgid "Change the default quotas"
+msgstr ""
+
 #: ../admin/adm_defquotas.php:55
 msgid "Add account type"
 msgstr ""
@@ -1323,6 +1425,12 @@ msgstr ""
 
 #: ../admin/adm_defquotas.php:96
 msgid "Default Value"
+msgstr ""
+
+#: ../admin/adm_defquotas.php:96 ../admin/adm_list.php:127
+#: ../admin/adm_list.php:172 ../admin/adm_list.php:192
+#: ../admin/menu_quota.php:52
+msgid "Quotas"
 msgstr ""
 
 #: ../admin/adm_defquotas.php:115
@@ -1356,6 +1464,11 @@ msgstr ""
 msgid "Value"
 msgstr ""
 
+#: ../admin/adm_dnsweberror.php:59 ../admin/adm_domstype.php:59
+#: ../admin/adm_domstypeedit.php:76
+msgid "Description"
+msgstr ""
+
 #: ../admin/adm_dnsweberror.php:60
 msgid "Web Result field"
 msgstr ""
@@ -1372,6 +1485,10 @@ msgstr ""
 #: ../admin/ftp_doadd.php:42 ../admin/ftp_doedit.php:36
 #: ../admin/hta_doadduser.php:41 ../admin/hta_doedituser.php:42
 msgid "Passwords do not match"
+msgstr ""
+
+#: ../admin/adm_doadd.php:85
+msgid "The new member has been successfully created"
 msgstr ""
 
 #: ../admin/adm_dodefquotas.php:43
@@ -1399,8 +1516,22 @@ msgstr ""
 msgid "WARNING : Confirm the deletion of the quota"
 msgstr ""
 
+#: ../admin/adm_dodefquotas.php:92
+msgid "Default quotas successfully changed"
+msgstr ""
+
 #: ../admin/adm_dodefquotas.php:94
 msgid "Default quotas could not be set."
+msgstr ""
+
+#: ../admin/adm_dodel.php:56
+#, php-format
+msgid "Member '%s' does not exist"
+msgstr ""
+
+#: ../admin/adm_dodel.php:58
+#, php-format
+msgid "Member %s successfully deleted"
 msgstr ""
 
 #: ../admin/adm_dodel.php:65
@@ -1414,6 +1545,10 @@ msgstr ""
 
 #: ../admin/adm_dodel.php:77
 msgid "WARNING : Confirm the deletion of the users"
+msgstr ""
+
+#: ../admin/adm_doedit.php:77
+msgid "The member has been successfully edited"
 msgstr ""
 
 #: ../admin/adm_doms.php:40 ../admin/adm_panel.php:53
@@ -1442,6 +1577,12 @@ msgstr ""
 
 #: ../admin/adm_doms.php:60 ../admin/adm_doms.php:65
 msgid "Show domain list with refreshed checked NS, MX, IP information"
+msgstr ""
+
+#: ../admin/adm_doms.php:64 ../admin/adm_doms.php:69 ../admin/adm_doms.php:82
+#: ../admin/adm_doms.php:87 ../admin/adm_list.php:165
+#: ../admin/adm_list.php:190
+msgid "Connect as"
 msgstr ""
 
 #: ../admin/adm_doms.php:64 ../admin/adm_doms.php:69
@@ -1577,6 +1718,10 @@ msgstr ""
 msgid "This account is now an administrator account"
 msgstr ""
 
+#: ../admin/adm_edit.php:57
+msgid "Member Edition"
+msgstr ""
+
 #: ../admin/adm_edit.php:73
 msgid "Account Enabled?"
 msgstr ""
@@ -1593,6 +1738,10 @@ msgstr ""
 msgid "Period"
 msgstr ""
 
+#: ../admin/adm_edit.php:130
+msgid "Edit this account"
+msgstr ""
+
 #: ../admin/adm_edit.php:143
 msgid "Renew for"
 msgstr ""
@@ -1603,6 +1752,29 @@ msgstr ""
 
 #: ../admin/adm_edit.php:147
 msgid "Renew"
+msgstr ""
+
+#: ../admin/adm_edit.php:160
+msgid "This account is a super-admin account"
+msgstr ""
+
+#: ../admin/adm_edit.php:162
+msgid ""
+"There is only one administrator account, you cannot turn this account back "
+"to normal"
+msgstr ""
+
+#: ../admin/adm_edit.php:165
+msgid "Turn this account back to normal"
+msgstr ""
+
+#: ../admin/adm_edit.php:168
+msgid "Make this account a super admin one"
+msgstr ""
+
+#: ../admin/adm_edit.php:175
+#, php-format
+msgid "Account created by %s"
 msgstr ""
 
 #: ../admin/adm_list.php:66
@@ -1738,6 +1910,15 @@ msgstr ""
 msgid "Add this account to the allowed list"
 msgstr ""
 
+#: ../admin/adm_panel.php:40 ../admin/menu_adm.php:48
+msgid "Admin Control Panel"
+msgstr ""
+
+#: ../admin/adm_panel.php:51 ../admin/adm_tld.php:56
+#: ../admin/adm_tldadd.php:46 ../admin/adm_tldedit.php:52
+msgid "Manage allowed domains (TLD)"
+msgstr ""
+
 #: ../admin/adm_panel.php:52
 msgid "Password Policies"
 msgstr ""
@@ -1855,9 +2036,34 @@ msgstr ""
 msgid "Allow Password=Login?"
 msgstr ""
 
+#: ../admin/adm_quotadoedit.php:52
+msgid "The quotas has been successfully edited"
+msgstr ""
+
+#: ../admin/adm_quotaedit.php:55
+msgid "Editing the quotas of a member"
+msgstr ""
+
+#: ../admin/adm_quotaedit.php:69 ../admin/quota_show.php:42
+msgid "Quota"
+msgstr ""
+
+#: ../admin/adm_quotaedit.php:69 ../admin/quota_show.php:42
+#: ../admin/quotas_users.php:156 ../admin/quotas_users.php:180
+msgid "Total"
+msgstr ""
+
+#: ../admin/adm_quotaedit.php:69 ../admin/quota_show.php:42
+msgid "Used"
+msgstr ""
+
 #: ../admin/adm_quotaedit.php:77 ../class/m_quota.php:99
 #: ../class/m_quota.php:107 ../class/m_quota.php:111
 msgid "quota_"
+msgstr ""
+
+#: ../admin/adm_quotaedit.php:86
+msgid "Edit the quotas"
 msgstr ""
 
 #: ../admin/adm_slaveaccount.php:76
@@ -1911,10 +2117,65 @@ msgstr ""
 msgid "Add this ip to the slave list"
 msgstr ""
 
+#: ../admin/adm_tld.php:47
+msgid "Some TLD cannot be deleted..."
+msgstr ""
+
+#: ../admin/adm_tld.php:50
+msgid "The requested TLD has been deleted"
+msgstr ""
+
+#: ../admin/adm_tld.php:68
+msgid ""
+"Here is the list of the TLD allowed on this server. Each TLD can be allowed "
+"or denied after some checks (whois, ns, domain exists...)"
+msgstr ""
+
+#: ../admin/adm_tld.php:70 ../admin/adm_tld.php:93 ../admin/adm_tldadd.php:56
+#: ../admin/adm_tldadd.php:70
+msgid "Add a new TLD"
+msgstr ""
+
+#: ../admin/adm_tld.php:73 ../admin/adm_tldadd.php:66
+#: ../admin/adm_tldedit.php:65
+msgid "Allowed Mode"
+msgstr ""
+
+#: ../admin/adm_tld.php:73 ../admin/adm_tldadd.php:65
+#: ../admin/adm_tldedit.php:64
+msgid "TLD"
+msgstr ""
+
+#: ../admin/adm_tld.php:89
+msgid "Delete the checked TLD"
+msgstr ""
+
+#: ../admin/adm_tldadd.php:58
+msgid ""
+"Enter the new TLD (without the first dot) and choose what check should be "
+"done."
+msgstr ""
+
 #: ../admin/adm_tldadd.php:59
 msgid ""
 "Warning : only some final tld are known in the whois function of AlternC, "
 "please check m_dom.php accordingly."
+msgstr ""
+
+#: ../admin/adm_tlddoadd.php:49
+msgid "The TLD has been successfully added"
+msgstr ""
+
+#: ../admin/adm_tlddoedit.php:48
+msgid "The TLD has been successfully edited"
+msgstr ""
+
+#: ../admin/adm_tldedit.php:60
+msgid "Edit a TLD"
+msgstr ""
+
+#: ../admin/adm_tldedit.php:69
+msgid "Edit this TLD"
 msgstr ""
 
 #: ../admin/adm_variables.php:52
@@ -1931,6 +2192,23 @@ msgstr ""
 
 #: ../admin/adm_variables.php:74
 msgid "Save variables"
+msgstr ""
+
+#: ../admin/bro_editor.php:44 ../admin/bro_editor.php:53
+#, php-format
+msgid "Your file %s has been saved"
+msgstr ""
+
+#: ../admin/bro_editor.php:64
+msgid "File editing"
+msgstr ""
+
+#: ../admin/bro_editor.php:78
+msgid "Save &amp; Quit"
+msgstr ""
+
+#: ../admin/bro_editor.php:79
+msgid "Quit"
 msgstr ""
 
 #: ../admin/bro_main.php:86 ../admin/bro_main.php:90
@@ -1954,6 +2232,11 @@ msgstr ""
 msgid "done"
 msgstr ""
 
+#: ../admin/bro_main.php:153 ../admin/bro_main.php:158
+#: ../admin/menu_brouteur.php:34
+msgid "File browser"
+msgstr ""
+
 #: ../admin/bro_main.php:161 ../admin/bro_main.php:166
 msgid "Path"
 msgstr ""
@@ -1970,6 +2253,31 @@ msgstr ""
 msgid "New file or folder:"
 msgstr ""
 
+#: ../admin/bro_main.php:190 ../admin/bro_main.php:195
+#: ../admin/mail_list.php:66
+msgid "Create"
+msgstr ""
+
+#: ../admin/bro_main.php:192 ../admin/bro_main.php:197
+#: ../admin/bro_main.php:232 ../admin/bro_main.php:237
+msgid "File"
+msgstr ""
+
+#: ../admin/bro_main.php:193 ../admin/bro_main.php:198
+#: ../admin/bro_main.php:361 ../admin/bro_main.php:366 ../admin/ftp_add.php:57
+#: ../admin/ftp_edit.php:61 ../admin/ftp_list.php:72 ../admin/hta_add.php:50
+#: ../admin/hta_adduser.php:49 ../admin/hta_edit.php:98
+#: ../admin/hta_edituser.php:52 ../admin/hta_list.php:67
+#: ../admin/hta_list.php:68 ../admin/sta2_list.php:58
+msgid "Folder"
+msgstr ""
+
+#: ../admin/bro_main.php:210 ../admin/bro_main.php:215
+#: ../admin/bro_main.php:216 ../admin/bro_main.php:221
+#: ../admin/bro_main.php:274 ../admin/bro_main.php:279
+msgid "Rename"
+msgstr ""
+
 #: ../admin/bro_main.php:226 ../admin/bro_main.php:231
 #: ../admin/bro_main.php:232 ../admin/bro_main.php:237
 #: ../admin/bro_main.php:275 ../admin/bro_main.php:280
@@ -1984,12 +2292,25 @@ msgstr ""
 msgid "Change permissions"
 msgstr ""
 
+#: ../admin/bro_main.php:277 ../admin/bro_main.php:282
+msgid "Copy"
+msgstr ""
+
+#: ../admin/bro_main.php:278 ../admin/bro_main.php:283
+msgid "Move"
+msgstr ""
+
 #: ../admin/bro_main.php:279 ../admin/bro_main.php:284
 msgid "To"
 msgstr ""
 
 #: ../admin/bro_main.php:309 ../admin/bro_main.php:314
 msgid "Filename"
+msgstr ""
+
+#: ../admin/bro_main.php:310 ../admin/bro_main.php:315
+#: ../admin/sql_list.php:62
+msgid "Size"
 msgstr ""
 
 #: ../admin/bro_main.php:311 ../admin/bro_main.php:316
@@ -2004,6 +2325,17 @@ msgstr ""
 msgid "Extract"
 msgstr ""
 
+#: ../admin/bro_main.php:388 ../admin/bro_main.php:393
+#: ../admin/bro_main.php:418 ../admin/bro_main.php:423
+#: ../admin/bro_main.php:455 ../admin/bro_main.php:460
+#: ../admin/bro_main.php:485 ../admin/bro_main.php:490
+msgid "V"
+msgstr ""
+
+#: ../admin/bro_main.php:542 ../admin/bro_main.php:547
+msgid "No files in this folder"
+msgstr ""
+
 #: ../admin/bro_main.php:552 ../admin/bro_main.php:557
 msgid "(slow)"
 msgstr ""
@@ -2014,6 +2346,10 @@ msgstr ""
 
 #: ../admin/bro_main.php:556 ../admin/bro_main.php:561
 msgid "Edit this folder's protection"
+msgstr ""
+
+#: ../admin/bro_main.php:559 ../admin/bro_main.php:564 ../admin/hta_add.php:61
+msgid "Protect this folder"
 msgstr ""
 
 #: ../admin/bro_main.php:561 ../admin/bro_main.php:566
@@ -2043,6 +2379,58 @@ msgstr ""
 
 #: ../admin/bro_main.php:590 ../admin/bro_main.php:595
 msgid "Configure the file editor"
+msgstr ""
+
+#: ../admin/bro_pref.php:49
+msgid "Your preferences have been updated."
+msgstr ""
+
+#: ../admin/bro_pref.php:59
+msgid "File browser preferences"
+msgstr ""
+
+#: ../admin/bro_pref.php:66
+msgid "Horizontal window size"
+msgstr ""
+
+#: ../admin/bro_pref.php:74
+msgid "Vertical window size"
+msgstr ""
+
+#: ../admin/bro_pref.php:82
+msgid "File editor font name"
+msgstr ""
+
+#: ../admin/bro_pref.php:90
+msgid "File editor font size"
+msgstr ""
+
+#: ../admin/bro_pref.php:98
+msgid "File list view"
+msgstr ""
+
+#: ../admin/bro_pref.php:106
+msgid "Downloading file format"
+msgstr ""
+
+#: ../admin/bro_pref.php:114
+msgid "What to do after creating a file"
+msgstr ""
+
+#: ../admin/bro_pref.php:122
+msgid "Show icons?"
+msgstr ""
+
+#: ../admin/bro_pref.php:130
+msgid "Show file types?"
+msgstr ""
+
+#: ../admin/bro_pref.php:138
+msgid "Remember last visited directory?"
+msgstr ""
+
+#: ../admin/bro_pref.php:148
+msgid "Change my settings"
 msgstr ""
 
 #: ../admin/browseforfolder.php:125
@@ -2090,6 +2478,22 @@ msgstr ""
 msgid "Email report"
 msgstr ""
 
+#: ../admin/dom_add.php:45
+msgid "Domain hosting"
+msgstr ""
+
+#: ../admin/dom_add.php:49
+msgid "Contact your administrator for more information."
+msgstr ""
+
+#: ../admin/dom_add.php:49
+msgid "You cannot add any new domain, your quota is over."
+msgstr ""
+
+#: ../admin/dom_add.php:60
+msgid "host my dns here"
+msgstr ""
+
 #: ../admin/dom_add.php:67
 msgid ""
 "Do you want to point this domain to another domain already installed in your "
@@ -2108,8 +2512,56 @@ msgstr ""
 msgid "-- Choose a domain --"
 msgstr ""
 
+#: ../admin/dom_add.php:86
+msgid "Add this domain"
+msgstr ""
+
+#: ../admin/dom_add.php:91
+msgid ""
+"If you don't want to host in our server the DNS of your domain, don't check "
+"the box 'host my dns here'. If you don't know what it mean, leave it checked."
+msgstr ""
+
+#: ../admin/dom_add.php:96 ../admin/dom_doadd.php:60
+msgid "Whois result on the domain"
+msgstr ""
+
+#: ../admin/dom_doadd.php:52 ../admin/menu_dom.php:47
+msgid "Add a domain"
+msgstr ""
+
+#: ../admin/dom_doadd.php:54
+#, php-format
+msgid "Your new domain %s has been successfully installed"
+msgstr ""
+
+#: ../admin/dom_doadd.php:55 ../admin/dom_dodel.php:56
+#: ../admin/dom_dodel.php:85 ../admin/dom_editdns.php:61
+#: ../admin/dom_subdodel.php:72 ../admin/hta_doedituser.php:62
+msgid "Click here to continue"
+msgstr ""
+
 #: ../admin/dom_dodel.php:54
 msgid "Deletion have been successfully cancelled"
+msgstr ""
+
+#: ../admin/dom_dodel.php:64 ../admin/dom_dodel.php:67
+#, php-format
+msgid "Confirm the deletion of domain %s"
+msgstr ""
+
+#: ../admin/dom_dodel.php:69
+msgid "This will delete the related sub-domains too."
+msgstr ""
+
+#: ../admin/dom_dodel.php:80
+#, php-format
+msgid "Domain %s deleted"
+msgstr ""
+
+#: ../admin/dom_dodel.php:84
+#, php-format
+msgid "The domain %s has been successfully deleted."
 msgstr ""
 
 #: ../admin/dom_edit.inc.php:40
@@ -2208,6 +2660,10 @@ msgstr ""
 msgid "DNS & Email parameters"
 msgstr ""
 
+#: ../admin/dom_edit.php:188
+msgid "Manage the DNS on the server ?"
+msgstr ""
+
 #: ../admin/dom_edit.php:199
 msgid "Manage the Emails Addresses of this domain on the server?"
 msgstr ""
@@ -2216,6 +2672,10 @@ msgstr ""
 msgid ""
 "Warning: If you set this to 'no', all your email accounts and aliases on "
 "this domain will be immediately deleted."
+msgstr ""
+
+#: ../admin/dom_edit.php:208
+msgid "Submit the changes"
 msgstr ""
 
 #: ../admin/dom_edit.php:213
@@ -2227,6 +2687,11 @@ msgstr ""
 msgid "Delete %s from this server"
 msgstr ""
 
+#: ../admin/dom_editdns.php:51
+#, php-format
+msgid "Editing domain %s"
+msgstr ""
+
 #: ../admin/dom_editdns.php:56
 #, php-format
 msgid "The domain %s has been changed."
@@ -2234,6 +2699,15 @@ msgstr ""
 
 #: ../admin/dom_editdns.php:59 ../admin/dom_subdodel.php:68
 msgid "The modifications will take effect at %time.  Server time is %now."
+msgstr ""
+
+#: ../admin/dom_subdel.php:57
+#, php-format
+msgid "Deleting subdomain %s"
+msgstr ""
+
+#: ../admin/dom_subdel.php:76
+msgid "WARNING : Confirm the deletion of the subdomain"
 msgstr ""
 
 #: ../admin/dom_subdodel.php:57
@@ -2249,10 +2723,56 @@ msgstr ""
 msgid "Editing subdomain"
 msgstr ""
 
+#: ../admin/ftp_add.php:34
+msgid "You cannot add any new ftp account, your quota is over."
+msgstr ""
+
+#: ../admin/ftp_add.php:39 ../admin/ftp_list.php:57 ../admin/menu_ftp.php:47
+msgid "Create a new ftp account"
+msgstr ""
+
+#: ../admin/ftp_add.php:67
+msgid "Create this new FTP account."
+msgstr ""
+
+#: ../admin/ftp_del.php:42
+#, php-format
+msgid "The ftp account %s has been successfully deleted"
+msgstr ""
+
+#: ../admin/ftp_doadd.php:53
+msgid "The FTP account has been successfully created"
+msgstr ""
+
+#: ../admin/ftp_doedit.php:33 ../admin/ftp_edit.php:39
+msgid "No account selected!"
+msgstr ""
+
+#: ../admin/ftp_doedit.php:47
+msgid "The ftp account has been successfully changed"
+msgstr ""
+
+#: ../admin/ftp_doedit.php:56 ../admin/ftp_edit.php:47
+msgid "Editing an FTP account"
+msgstr ""
+
+#: ../admin/ftp_edit.php:73
+msgid "Change this FTP account"
+msgstr ""
+
+#: ../admin/ftp_list.php:45 ../admin/menu_ftp.php:49
+msgid "FTP accounts list"
+msgstr ""
+
 #: ../admin/head.php:61
 msgid ""
 "Administrator session. you may <a href='adm_login.php'>return to your "
 "account</a> or <a href='adm_cancel.php'>cancel this feature</a>"
+msgstr ""
+
+#: ../admin/hta_add.php:34 ../admin/hta_list.php:50 ../admin/hta_list.php:51
+#: ../admin/hta_list.php:88 ../admin/hta_list.php:89 ../admin/web_list.php:3
+msgid "Protect a folder"
 msgstr ""
 
 #: ../admin/hta_add.php:38
@@ -2260,8 +2780,50 @@ msgid ""
 "Enter the name of the folder you want to protect. It must already exists."
 msgstr ""
 
+#: ../admin/hta_adduser.php:39
+#, php-format
+msgid "Adding a username in %s"
+msgstr ""
+
+#: ../admin/hta_adduser.php:66 ../admin/hta_edit.php:115
+msgid "Add this user"
+msgstr ""
+
+#: ../admin/hta_del.php:42
+#, php-format
+msgid "The protected folder %s has been successfully unprotected"
+msgstr ""
+
 #: ../admin/hta_doadduser.php:47
 msgid "Please enter a password"
+msgstr ""
+
+#: ../admin/hta_doedituser.php:52
+#, php-format
+msgid "Change the user %s in the protected folder %s"
+msgstr ""
+
+#: ../admin/hta_doedituser.php:60
+#, php-format
+msgid "The password of the user %s has been successfully changed"
+msgstr ""
+
+#: ../admin/hta_edit.php:39
+msgid "No folder selected!"
+msgstr ""
+
+#: ../admin/hta_edit.php:48
+#, php-format
+msgid "List of authorized user in folder %s"
+msgstr ""
+
+#: ../admin/hta_edit.php:53
+#, php-format
+msgid "No authorized user in %s"
+msgstr ""
+
+#: ../admin/hta_edit.php:82 ../admin/sql_users_list.php:70
+msgid "Delete the checked users"
 msgstr ""
 
 #: ../admin/hta_edit.php:87
@@ -2270,6 +2832,20 @@ msgstr ""
 
 #: ../admin/hta_edit.php:93
 msgid "Adding an authorized user"
+msgstr ""
+
+#: ../admin/hta_edituser.php:40
+#, php-format
+msgid "Editing user %s in the protected folder %s"
+msgstr ""
+
+#: ../admin/hta_edituser.php:54 ../admin/mem_param.php:64
+#: ../admin/mem_param.php:65
+msgid "New password"
+msgstr ""
+
+#: ../admin/hta_edituser.php:56 ../admin/sql_passchg.php:56
+msgid "Change the password"
 msgstr ""
 
 #: ../admin/hta_list.php:41 ../admin/hta_list.php:42
@@ -2282,6 +2858,10 @@ msgstr "Here is the list of protected directories in your account"
 
 #: ../admin/hta_list.php:78 ../admin/hta_list.php:79
 msgid "Edit login and passwords"
+msgstr ""
+
+#: ../admin/hta_list.php:87 ../admin/hta_list.php:88
+msgid "Unprotect the checked folders"
 msgstr ""
 
 #: ../admin/index.php:60
@@ -2318,6 +2898,10 @@ msgstr ""
 
 #: ../admin/index.php:98
 msgid "Email Address"
+msgstr ""
+
+#: ../admin/index.php:112
+msgid "You must accept the session cookie to log-in"
 msgstr ""
 
 #: ../admin/ip_main.php:58
@@ -2470,6 +3054,20 @@ msgstr ""
 msgid "Are you sure you want to clear all redirections?"
 msgstr ""
 
+#: ../admin/main.php:38
+msgid "Last Login: "
+msgstr ""
+
+#: ../admin/main.php:41
+#, php-format
+msgid "from: <code> %1$s </code>"
+msgstr ""
+
+#: ../admin/main.php:45
+#, php-format
+msgid "%1$d login failed since last login"
+msgstr ""
+
 #: ../admin/main.php:61
 msgid "Latest news"
 msgstr ""
@@ -2492,6 +3090,11 @@ msgstr ""
 
 #: ../admin/mem_admin.php:46 ../admin/mem_param.php:97
 msgid "Admin preferences"
+msgstr ""
+
+#: ../admin/mem_chgmail.php:44 ../admin/mem_cm.php:35 ../admin/mem_cm.php:46
+#: ../admin/mem_cm2.php:40 ../admin/mem_param.php:74
+msgid "Change the email of the account"
 msgstr ""
 
 #: ../admin/mem_chgmail.php:51
@@ -2543,6 +3146,10 @@ msgstr ""
 #: ../admin/mem_param.php:50 ../admin/mem_passwd.php:50
 #: ../admin/sql_users_list.php:61
 msgid "Password change"
+msgstr ""
+
+#: ../admin/mem_param.php:54
+msgid "You cannot change your password"
 msgstr ""
 
 #: ../admin/mem_param.php:59
@@ -2637,6 +3244,19 @@ msgstr ""
 msgid "General PhpMyAdmin"
 msgstr ""
 
+#: ../admin/menu_aide.php:32
+msgid "Online help"
+msgstr ""
+
+#: ../admin/menu_dom.php:41 ../admin/quotas_oneuser.php:22
+#: ../admin/quotas_users.php:134
+msgid "Domains"
+msgstr ""
+
+#: ../admin/menu_ftp.php:41
+msgid "FTP accounts"
+msgstr ""
+
 #: ../admin/menu_lang.php:3
 msgid "Langues"
 msgstr ""
@@ -2657,6 +3277,10 @@ msgstr ""
 msgid "Show my quotas"
 msgstr ""
 
+#: ../admin/menu_sql.php:41
+msgid "Databases"
+msgstr ""
+
 #: ../admin/menu_sql.php:42 ../admin/sql_users_list.php:37
 msgid "MySQL Users"
 msgstr ""
@@ -2667,6 +3291,10 @@ msgstr ""
 
 #: ../admin/menu_sta2.php:37
 msgid "Raw web statistics"
+msgstr ""
+
+#: ../admin/menu_web.php:34
+msgid "Protected folders"
 msgstr ""
 
 #: ../admin/quota_show.php:34
@@ -2777,6 +3405,14 @@ msgstr ""
 msgid "Mailman lists"
 msgstr ""
 
+#: ../admin/quotas_users.php:151 ../admin/sql_bck.php:48
+#: ../admin/sql_del.php:66 ../admin/sql_del.php:72
+#: ../admin/sql_dorestore.php:38 ../admin/sql_getparam.php:38
+#: ../admin/sql_list.php:37 ../admin/sql_passchg.php:38
+#: ../admin/sql_restore.php:43
+msgid "MySQL Databases"
+msgstr ""
+
 #: ../admin/quotas_users.php:173
 msgid "Dom"
 msgstr ""
@@ -2809,6 +3445,10 @@ msgstr ""
 msgid "Your database has been successfully created"
 msgstr ""
 
+#: ../admin/sql_admin.php:47
+msgid "SQL Admin"
+msgstr ""
+
 #: ../admin/sql_bck.php:58
 #, php-format
 msgid "Manage the SQL backup for database %s"
@@ -2818,16 +3458,72 @@ msgstr ""
 msgid "Do MySQL backup?"
 msgstr ""
 
+#: ../admin/sql_bck.php:66
+msgid "No backup"
+msgstr ""
+
+#: ../admin/sql_bck.php:67
+msgid "Weekly backup"
+msgstr ""
+
+#: ../admin/sql_bck.php:68
+msgid "Daily backup"
+msgstr ""
+
 #: ../admin/sql_bck.php:72
 msgid "How many backups should be kept?"
+msgstr ""
+
+#: ../admin/sql_bck.php:84
+msgid "Compress the backups? (gzip)"
+msgstr ""
+
+#: ../admin/sql_bck.php:93
+msgid "In which folder do you want to store the backups?"
 msgstr ""
 
 #: ../admin/sql_bck.php:104
 msgid "Change the MySQL backup parameters"
 msgstr ""
 
+#: ../admin/sql_bck.php:113 ../admin/sql_dorestore.php:56
+#: ../admin/sql_restore.php:71
+msgid "You currently have no database defined"
+msgstr ""
+
+#: ../admin/sql_del.php:45 ../admin/sql_del.php:51
+#, php-format
+msgid "The database %s has been successfully deleted"
+msgstr ""
+
 #: ../admin/sql_del.php:60 ../admin/sql_del.php:66
 msgid "Please check which databases you want to delete"
+msgstr ""
+
+#: ../admin/sql_del.php:69 ../admin/sql_del.php:75
+msgid "Confirm the deletion of the following SQL databases"
+msgstr ""
+
+#: ../admin/sql_del.php:70 ../admin/sql_del.php:76
+msgid "This will delete all the tables currently in those db."
+msgstr ""
+
+#: ../admin/sql_dobck.php:48
+msgid "Your backup parameters has been successfully changed."
+msgstr ""
+
+#: ../admin/sql_dorestore.php:44
+msgid "Restore a SQL backup"
+msgstr ""
+
+#: ../admin/sql_dorestore.php:50
+msgid ""
+"Your database has been restored, check out the previous text for error "
+"messages."
+msgstr ""
+
+#: ../admin/sql_getparam.php:47 ../admin/sql_list.php:51
+msgid "Your current settings are"
 msgstr ""
 
 #: ../admin/sql_getparam.php:58 ../admin/sql_list.php:53
@@ -2846,10 +3542,30 @@ msgstr ""
 msgid "You have no sql user at the moment."
 msgstr ""
 
+#: ../admin/sql_list.php:62 ../admin/sql_list.php:74
+msgid "Backup"
+msgstr ""
+
+#: ../admin/sql_list.php:62 ../admin/sql_passchg.php:54
+msgid "Database"
+msgstr ""
+
+#: ../admin/sql_list.php:62 ../admin/sql_list.php:75
+msgid "Restore"
+msgstr ""
+
+#: ../admin/sql_list.php:84
+msgid "Delete the checked databases"
+msgstr ""
+
 #: ../admin/sql_passchg.php:46
 msgid ""
 "Enter the new password of your MySQL database and click 'change the "
 "password' to change it"
+msgstr ""
+
+#: ../admin/sql_passchg.php:53
+msgid "SQL Server"
 msgstr ""
 
 #: ../admin/sql_restore.php:53
@@ -2867,6 +3583,14 @@ msgstr ""
 #: ../admin/sql_restore.php:61
 msgid ""
 "Please enter the path and the filename containing SQL data to be restored."
+msgstr ""
+
+#: ../admin/sql_restore.php:62
+msgid "Restore my database"
+msgstr ""
+
+#: ../admin/sql_restore.php:66
+msgid "Note: If the filename ends with .gz, it will be uncompressed before."
 msgstr ""
 
 #: ../admin/sql_users_add.php:46 ../admin/sql_users_list.php:82
@@ -2919,6 +3643,10 @@ msgstr ""
 msgid "Apply"
 msgstr ""
 
+#: ../admin/sta2_add_raw.php:38
+msgid "New Raw Statistics (apache)"
+msgstr ""
+
 #: ../admin/sta2_add_raw.php:51 ../admin/sta2_edit_raw.php:57
 #: ../admin/sta2_edit_raw.php:62
 msgid "Domain name:"
@@ -2927,6 +3655,10 @@ msgstr ""
 #: ../admin/sta2_add_raw.php:54 ../admin/sta2_edit_raw.php:60
 #: ../admin/sta2_edit_raw.php:65
 msgid "Folder where we will put the log file:"
+msgstr ""
+
+#: ../admin/sta2_add_raw.php:63
+msgid "Create those raw statistics"
 msgstr ""
 
 #: ../admin/sta2_edit_raw.php:44 ../admin/sta2_edit_raw.php:49
@@ -2939,6 +3671,10 @@ msgstr ""
 
 #: ../admin/sta2_list.php:35
 msgid "Raw Statistics List"
+msgstr ""
+
+#: ../admin/sta2_list.php:41
+msgid "Create new Raw Statistics (apache)"
 msgstr ""
 
 #: ../admin/sta2_list.php:79
@@ -3097,6 +3833,10 @@ msgstr ""
 msgid "Send a copy of incoming emails to another mail address"
 msgstr ""
 
+#: ../class/m_mem.php:542
+msgid "Help"
+msgstr ""
+
 #: ../class/mime.php:135
 msgid "CSS Stylesheet"
 msgstr ""
@@ -3229,88 +3969,6 @@ msgstr ""
 msgid "Real Media File"
 msgstr ""
 
-#~ msgid "Web Statistics"
-#~ msgstr "Web Statistics"
-
-#~ msgid "You cannot add any new statistics, your quota is over."
-#~ msgstr "You cannot add any new statistics, your quota is over."
-
-#~ msgid "New Statistics"
-#~ msgstr "New Statistics"
-
-#~ msgid "Language"
-#~ msgstr "Language"
-
-#~ msgid "Create those statistics"
-#~ msgstr "Create those statistics"
-
-#~ msgid "WARNING"
-#~ msgstr "WARNING"
-
-#~ msgid ""
-#~ "The statistics %s has been successfully deleted (the stats files must be "
-#~ "manually deleted)"
-#~ msgstr ""
-#~ "The statistics %s has been successfully deleted (the stats files must be "
-#~ "manually deleted)"
-
-#~ msgid "Delete statistics"
-#~ msgstr "Delete statistics"
-
-#~ msgid "The statistics has been successfully created"
-#~ msgstr "The statistics has been successfully created"
-
-#~ msgid "No Statistics selected!"
-#~ msgstr "No Statistics selected!"
-
-#~ msgid "The Statistics has been successfully changed"
-#~ msgstr "The Statistics has been successfully changed"
-
-#~ msgid "Change the Statistics"
-#~ msgstr "Change the Statistics"
-
-#~ msgid "Change those Statistics."
-#~ msgstr "Change those Statistics."
-
-#~ msgid "Statistics List"
-#~ msgstr "Statistics List"
-
-#~ msgid "Create new Statistics"
-#~ msgstr "Create new Statistics"
-
-#~ msgid "Delete the checked Statistics"
-#~ msgstr "Delete the checked Statistics"
-
-#~ msgid "Byte"
-#~ msgstr "Byte"
-
-#~ msgid "Domain name"
-#~ msgstr "Domain name"
-
-#~ msgid "No"
-#~ msgstr "No"
-
-#~ msgid "Yes"
-#~ msgstr "Yes"
-
-#~ msgid "Action"
-#~ msgstr "Action"
-
-#~ msgid "Edit"
-#~ msgstr "Edit"
-
-#~ msgid "Username"
-#~ msgstr "Username"
-
-#~ msgid "Password"
-#~ msgstr "Password"
-
-#~ msgid "Delete checked accounts"
-#~ msgstr "Delete checked accounts"
-
-#~ msgid "View"
-#~ msgstr "View"
-
 #~ msgid "quota_stats"
 #~ msgstr "Web Statistics (awstats)"
 
@@ -3333,772 +3991,30 @@ msgstr ""
 #~ msgid "err_stats_6"
 #~ msgstr "This language is not supported."
 
-#~ msgid "err_bro_4"
-#~ msgstr "Cannot create the requested directory. Please check permissions."
+#~ msgid "Language"
+#~ msgstr "Language"
 
-#~ msgid "err_bro_5"
-#~ msgstr "Cannot edit the requested file. Please check permissions."
-
-#~ msgid "err_bro_6"
-#~ msgstr "Cannot read the requested file. Please check permissions."
-
-#~ msgid "Editing subdomain %s"
-#~ msgstr "Editing subdomain %s"
-
-#~ msgid "err_stats_7"
-#~ msgstr "Aucune jeu de statistiques brutes"
-
-#~ msgid "Description"
-#~ msgstr "Description"
-
-#~ msgid "Number of mailing-lists"
-#~ msgstr "Number of mailing-lists"
-
-#~ msgid "Number of domains"
-#~ msgstr "Number of domains"
-
-#~ msgid "Number of FTP accounts"
-#~ msgstr "Number of FTP accounts"
-
-#~ msgid "Number of web statistics"
-#~ msgstr "Number of web statistics"
-
-#~ msgid "Number of email accounts"
-#~ msgstr "Number of email accounts"
-
-#~ msgid "This TLD is forbidden"
-#~ msgstr "This TLD is forbidden"
-
-#~ msgid "primary DNS is checked in WHOIS db"
-#~ msgstr "primary DNS is checked in WHOIS db"
-
-#~ msgid "primary & secondary DNS are checked in WHOIS db"
-#~ msgstr "primary & secondary DNS are checked in WHOIS db"
-
-#~ msgid "Domain must exist, but don't do any DNS check"
-#~ msgstr "Domain must exist, but don't do any DNS check"
-
-#~ msgid "Domain can be installed, no check at all"
-#~ msgstr "Domain can be installed, no check at all"
-
-#~ msgid "Domain can be installed, force NO DNS hosting"
-#~ msgstr "Domain can be installed, force NO DNS hosting"
-
-#~ msgid "The user has no database"
-#~ msgstr "The user has no database"
-
-#~ msgid "Enable the database"
-#~ msgstr "Enable the database"
-
-#~ msgid "The user has a MySQL database"
-#~ msgstr "The user has a MySQL database"
-
-#~ msgid "Disable the database"
-#~ msgstr "Disable the database"
-
-#~ msgid "Disk space (in KB)"
-#~ msgstr "Disk space (in KB)"
-
-#~ msgid "Delete my SQL database"
-#~ msgstr "Delete my SQL database"
-
-#~ msgid "Manage the SQL backup"
-#~ msgstr "Manage SQL backups"
-
-#~ msgid "Destroy my database"
-#~ msgstr "Destroy my database"
-
-#~ msgid "Click here to continue"
-#~ msgstr "Click here to continue"
-
-#~ msgid "General SQL Admin"
-#~ msgstr "General SQL Admin"
-
-#~ msgid "This page is restricted to authorized staff"
-#~ msgstr "This page is restricted to authorized staff"
-
-#~ msgid "New member"
-#~ msgstr "New member"
-
-#~ msgid "Initial password"
-#~ msgstr "Initial password"
-
-#~ msgid "Surname"
-#~ msgstr "Surname"
-
-#~ msgid "First Name"
-#~ msgstr "First Name"
-
-#~ msgid "Create a new member"
-#~ msgstr "Create a new member"
-
-#~ msgid "The new member has been successfully created"
-#~ msgstr "The new member has been successfully created"
-
-#~ msgid "Member '%s' does not exist"
-#~ msgstr "Member '%s' does not exist"
-
-#~ msgid "Member %s successfully deleted"
-#~ msgstr "Member %s successfully deleted"
-
-#~ msgid "Member Edition"
-#~ msgstr "Member Edition"
-
-#~ msgid "The member has been successfully edited"
-#~ msgstr "The member has been successfully edited"
-
-#~ msgid "Account Enabled ?"
-#~ msgstr "Account Enabled ?"
-
-#~ msgid "Edit this account"
-#~ msgstr "Edit this account"
-
-#~ msgid "Member list"
-#~ msgstr "Member list"
-
-#~ msgid "Here is the list of hosted members"
-#~ msgstr "Here is the list of hosted members"
-
-#~ msgid "Quotas"
-#~ msgstr "Quotas"
-
-#~ msgid "Connect as"
-#~ msgstr "Connect as"
-
-#~ msgid "Editing the quotas of a member"
-#~ msgstr "Editing the quotas of a member"
-
-#~ msgid "The quotas has been successfully edited"
-#~ msgstr "The quotas has been successfully edited"
-
-#~ msgid "Quota"
-#~ msgstr "Quota"
-
-#~ msgid "Total"
-#~ msgstr "Total"
-
-#~ msgid "Used"
-#~ msgstr "Used"
-
-#~ msgid "Edit the quotas"
-#~ msgstr "Edit the quotas"
-
-#~ msgid "Recalculate the quotas of the account"
-#~ msgstr "Recalculate the quotas of the account"
+#~ msgid "WARNING"
+#~ msgstr "WARNING"
 
 #~ msgid ""
-#~ "There is only one administrator account, you cannot turn this account "
-#~ "back to normal"
+#~ "The statistics %s has been successfully deleted (the stats files must be "
+#~ "manually deleted)"
 #~ msgstr ""
-#~ "There is only one administrator account, you cannot turn this account "
-#~ "back to normal"
+#~ "The statistics %s has been successfully deleted (the stats files must be "
+#~ "manually deleted)"
 
-#~ msgid "This account is a super-admin account"
-#~ msgstr "This account is a super-admin account"
+#~ msgid "Delete statistics"
+#~ msgstr "Delete statistics"
 
-#~ msgid "Turn this account back to normal"
-#~ msgstr "Turn this account back to normal"
+#~ msgid "Change the Statistics"
+#~ msgstr "Change the Statistics"
 
-#~ msgid "Make this account a super admin one"
-#~ msgstr "Make this account a super admin one"
+#~ msgid "Change those Statistics."
+#~ msgstr "Change those Statistics."
 
-#~ msgid "Some TLD cannot be deleted..."
-#~ msgstr "Some TLD cannot be deleted..."
-
-#~ msgid "The requested TLD has been deleted"
-#~ msgstr "The requested TLD has been deleted"
-
-#~ msgid "Manage allowed domains (TLD)"
-#~ msgstr "Manage allowed domains (TLD)"
-
-#~ msgid ""
-#~ "Here is the list of the TLD allowed on this server. Each TLD can be "
-#~ "allowed or denied after some checks (whois, ns, domain exists...)"
-#~ msgstr ""
-#~ "Here is the list of the TLD allowed on this server. Each TLD can be "
-#~ "allowed or denied after some checks (whois, ns, domain exists...)"
-
-#~ msgid "TLD"
-#~ msgstr "TLD"
-
-#~ msgid "Allowed Mode"
-#~ msgstr "Allowed Mode"
-
-#~ msgid "Delete the checked TLD"
-#~ msgstr "Delete the checked TLD"
-
-#~ msgid "Add a new TLD"
-#~ msgstr "Add a new TLD"
-
-#~ msgid "The TLD has been successfully added"
-#~ msgstr "The TLD has been successfully added"
-
-#~ msgid ""
-#~ "Enter the new TLD (without the first dot) and choose what check should be "
-#~ "done."
-#~ msgstr ""
-#~ "Enter the new TLD (without the first dot) and choose what check should be "
-#~ "done."
-
-#~ msgid ""
-#~ "Warning : only some final tld are known in the whois function of AlternC, "
-#~ "please check m_domains.php accordingly."
-#~ msgstr ""
-#~ "Warning : only some final tld are known in the whois function of AlternC, "
-#~ "please check m_domains.php accordingly."
-
-#~ msgid "Edit a TLD"
-#~ msgstr "Edit a TLD"
-
-#~ msgid "Edit this TLD"
-#~ msgstr "Edit this TLD"
-
-#~ msgid "The TLD has been successfully edited"
-#~ msgstr "The TLD has been successfully edited"
-
-#~ msgid "Change the default quotas"
-#~ msgstr "Change the default quotas"
-
-#~ msgid "Manage the members"
-#~ msgstr "Manage the members"
-
-#~ msgid "Admin Control Panel"
-#~ msgstr "Admin Control Panel"
-
-#~ msgid "Default quotas successfully changed"
-#~ msgstr "Default quotas successfully changed"
-
-#~ msgid "Can he change its password"
-#~ msgstr "Can he change its password"
-
-#~ msgid "Account created by %s"
-#~ msgstr "Account created by %s"
-
-#~ msgid "Locked Account"
-#~ msgstr "Locked Account"
-
-#~ msgid "Your file %s has been saved"
-#~ msgstr "Your file %s has been saved"
-
-#~ msgid "Back to the file browser"
-#~ msgstr "Back to the file browser"
-
-#~ msgid "File editing"
-#~ msgstr "File editing"
-
-#~ msgid "File browser"
-#~ msgstr "File browser"
-
-#~ msgid "Rename"
-#~ msgstr "Rename"
-
-#~ msgid "Copy"
-#~ msgstr "Copy"
-
-#~ msgid "Move"
-#~ msgstr "Move"
-
-#~ msgid "Create"
-#~ msgstr "Create"
-
-#~ msgid "File"
-#~ msgstr "File"
-
-#~ msgid "Folder"
-#~ msgstr "Folder"
-
-#~ msgid "Import this file"
-#~ msgstr "Import this file"
-
-#~ msgid "Send"
-#~ msgstr "Send"
-
-#~ msgid "There is an ftp account in this folder"
-#~ msgstr "There is an ftp account in this folder"
-
-#~ msgid "click here to edit this ftp account"
-#~ msgstr "click here to edit this ftp account"
-
-#~ msgid "click here to create an ftp account in this folder"
-#~ msgstr "click here to create an ftp account in this folder"
-
-#~ msgid "This folder has restricted access"
-#~ msgstr "This folder has restricted access"
-
-#~ msgid "Click here to protect this folder with login/password"
-#~ msgstr "Click here to protect this folder with login/password"
-
-#~ msgid "Download"
-#~ msgstr "Download"
-
-#~ msgid "this folder and its subfolders as a compressed file"
-#~ msgstr "this folder and its subfolders as a compressed file"
-
-#~ msgid "Configure the file browser"
-#~ msgstr "Configure the file browser"
-
-#~ msgid "Your preferences have been updated."
-#~ msgstr "Your preferences have been updated."
-
-#~ msgid "File editor preferences"
-#~ msgstr "File editor preferences"
-
-#~ msgid "File browser preferences"
-#~ msgstr "File browser preferences"
-
-#~ msgid "File editor font name"
-#~ msgstr "File editor font name"
-
-#~ msgid "File editor font size"
-#~ msgstr "File editor font size"
-
-#~ msgid "Horizontal window size"
-#~ msgstr "Horizontal window size"
-
-#~ msgid "Vertical window size"
-#~ msgstr "Vertical window size"
-
-#~ msgid "File list view"
-#~ msgstr "File list view"
-
-#~ msgid "Downloading file format"
-#~ msgstr "Downloading file format"
-
-#~ msgid "What to do after creating a file"
-#~ msgstr "What to do after creating a file"
-
-#~ msgid "Show icons?"
-#~ msgstr "Show icons?"
-
-#~ msgid "Show file types?"
-#~ msgstr "Show file types?"
-
-#~ msgid "Change my settings"
-#~ msgstr "Change my settings"
-
-#~ msgid "V"
-#~ msgstr "V"
-
-#~ msgid "Remember last visited directory?"
-#~ msgstr "Remember last visited directory?"
-
-#~ msgid "Save"
-#~ msgstr "Save"
-
-#~ msgid "Save &amp; Quit"
-#~ msgstr "Save &amp; Quit"
-
-#~ msgid "Quit"
-#~ msgstr "Quit"
-
-#~ msgid "all/none"
-#~ msgstr "all/none"
-
-#~ msgid "No files in this folder"
-#~ msgstr "No files in this folder"
-
-#~ msgid "Domain hosting"
-#~ msgstr "Domain hosting"
-
-#~ msgid "You cannot add any new domain, your quota is over."
-#~ msgstr "You cannot add any new domain, your quota is over."
-
-#~ msgid "Contact your administrator for more information."
-#~ msgstr "Contact your administrator for more information."
-
-#~ msgid ""
-#~ "If you don't want to host in our server the DNS of your domain, don't "
-#~ "check the box 'host my dns here'. If you don't know what it mean, leave "
-#~ "it checked."
-#~ msgstr ""
-#~ "If you don't want to host in our server the DNS of your domain, don't "
-#~ "check the box 'host my dns here'. If you don't know what it mean, leave "
-#~ "it checked."
-
-#~ msgid "host my dns here"
-#~ msgstr "host my dns here"
-
-#~ msgid "Add a domain"
-#~ msgstr "Add a domain"
-
-#~ msgid "Add this domain"
-#~ msgstr "Add this domain"
-
-#~ msgid "Your new domain %s has been successfully installed"
-#~ msgstr "Your new domain %s has been successfully installed"
-
-#~ msgid "Whois result on the domain"
-#~ msgstr "Whois result on the domain"
-
-#~ msgid "Confirm the deletion of domain %s"
-#~ msgstr "Confirm the deletion of domain %s"
-
-#~ msgid "This will delete the related sub-domains too."
-#~ msgstr "This will delete the related sub-domains too."
-
-#~ msgid "Domain %s deleted"
-#~ msgstr "Domain %s deleted"
-
-#~ msgid "The domain %s has been successfully deleted."
-#~ msgstr "The domain %s has been successfully deleted."
-
-#~ msgid "Editing domain %s"
-#~ msgstr "Editing domain %s"
-
-#~ msgid "Subdomains"
-#~ msgstr "Subdomains"
-
-#~ msgid "Domains"
-#~ msgstr "Domains"
-
-#~ msgid "Add a subdomain"
-#~ msgstr "Add a subdomain"
-
-#~ msgid "Locally managed"
-#~ msgstr "Locally managed"
-
-#~ msgid "URL redirection"
-#~ msgstr "URL redirection"
-
-#~ msgid "IP redirection"
-#~ msgstr "IP redirection"
-
-#~ msgid "Webmail access"
-#~ msgstr "Webmail access"
-
-#~ msgid "DNS parameters"
-#~ msgstr "DNS parameters"
-
-#~ msgid "Manage the DNS on the server ?"
-#~ msgstr "Manage the DNS on the server ?"
-
-#~ msgid "MX Field"
-#~ msgstr "MX Field"
-
-#~ msgid "Submit the changes"
-#~ msgstr "Submit the changes"
-
-#~ msgid "Delete %s"
-#~ msgstr "Delete %s"
-
-#~ msgid ""
-#~ "The domain %s has been changed. The modifications will take effect in 5 "
-#~ "minutes."
-#~ msgstr ""
-#~ "The domain %s has been changed. The modifications will take effect in 5 "
-#~ "minutes."
-
-#~ msgid "Deleting subdomain %s"
-#~ msgstr "Deleting subdomain %s"
-
-#~ msgid "WARNING : Confirm the deletion of the subdomain"
-#~ msgstr "WARNING : Confirm the deletion of the subdomain"
-
-#~ msgid "The modifications will take effect in 5 minutes."
-#~ msgstr "The modifications will take effect in 5 minutes."
-
-#~ msgid "You cannot add any new ftp account, your quota is over."
-#~ msgstr "You cannot add any new ftp account, your quota is over."
-
-#~ msgid "Create a new ftp account"
-#~ msgstr "Create a new ftp account"
-
-#~ msgid "Create this new FTP account."
-#~ msgstr "Create this new FTP account."
-
-#~ msgid "The ftp account %s has been successfully deleted"
-#~ msgstr "The ftp account %s has been successfully deleted"
-
-#~ msgid "Deleting an FTP account"
-#~ msgstr "Deleting an FTP account"
-
-#~ msgid "The FTP account has been successfully created"
-#~ msgstr "The FTP account has been successfully created"
-
-#~ msgid "No account selected!"
-#~ msgstr "No account selected!"
-
-#~ msgid "The ftp account has been successfully changed"
-#~ msgstr "The ftp account has been successfully changed"
-
-#~ msgid "Editing an FTP account"
-#~ msgstr "Editing an FTP account"
-
-#~ msgid "Change this FTP account"
-#~ msgstr "Change this FTP account"
-
-#~ msgid "FTP accounts list"
-#~ msgstr "FTP accounts list"
-
-#~ msgid "<-No Password->"
-#~ msgstr "<-No Password->"
-
-#~ msgid "FTP accounts"
-#~ msgstr "FTP accounts"
-
-#~ msgid "Protect a folder"
-#~ msgstr "Protect a folder"
-
-#~ msgid "The folder must exists."
-#~ msgstr "The folder must exists."
-
-#~ msgid "Protect this folder"
-#~ msgstr "Protect this folder"
-
-#~ msgid "Adding a username in %s"
-#~ msgstr "Adding a username in %s"
-
-#~ msgid "Add this user"
-#~ msgstr "Add this user"
-
-#~ msgid "The protected folder %s has been successfully unprotected"
-#~ msgstr "The protected folder %s has been successfully unprotected"
-
-#~ msgid "Delete a protected folder"
-#~ msgstr "Delete a protected folder"
-
-#~ msgid "Change the user %s in the protected folder %s"
-#~ msgstr "Change the user %s in the protected folder %s"
-
-#~ msgid "The password of the user %s has been successfully changed"
-#~ msgstr "The password of the user %s has been successfully changed"
-
-#~ msgid "No folder selected!"
-#~ msgstr "No folder selected!"
-
-#~ msgid "List of authorized user in folder %s"
-#~ msgstr "List of authorized user in folder %s"
-
-#~ msgid "No authorized user in %s"
-#~ msgstr "No authorized user in %s"
-
-#~ msgid "Add a username"
-#~ msgstr "Add a username"
-
-#~ msgid "Delete the checked users"
-#~ msgstr "Delete the checked users"
-
-#~ msgid "Editing user %s in the protected folder %s"
-#~ msgstr "Editing user %s in the protected folder %s"
-
-#~ msgid "New password"
-#~ msgstr "New password"
-
-#~ msgid "Change the password"
-#~ msgstr "Change the password"
-
-#~ msgid "Unprotect the checked folders"
-#~ msgstr "Unprotect the checked folders"
-
-#~ msgid "Protected folders"
-#~ msgstr "Protected folders"
-
-#~ msgid "Add a mail to the domain %s"
-#~ msgstr "Add a mail to the domain %s"
-
-#~ msgid "Create this mailbox"
-#~ msgstr "Create this mailbox"
-
-#~ msgid "Is it a POP account?"
-#~ msgstr "Is it a POP account?"
-
-#~ msgid "Other recipients"
-#~ msgstr "Other recipients"
-
-#~ msgid "One email per line"
-#~ msgstr "One email per line"
-
-#~ msgid "The mailbox <b>%s</b> has been successfully created"
-#~ msgstr "The mailbox <b>%s</b> has been successfully created"
-
-#~ msgid "The mailbox <b>%s</b> does not exist!"
-#~ msgstr "The mailbox <b>%s</b> does not exist!"
-
-#~ msgid "The mailbox <b>%s</b> has been successfully changed"
-#~ msgstr "The mailbox <b>%s</b> has been successfully changed"
-
-#~ msgid "Edit a mailbox of the domain %s"
-#~ msgstr "Edit a mailbox of the domain %s"
-
-#~ msgid "Edit the mailbox %s"
-#~ msgstr "Edit the mailbox %s"
-
-#~ msgid "Change this mailbox"
-#~ msgstr "Change this mailbox"
-
-#~ msgid "The mailbox %s has been successfully changed"
-#~ msgstr "The mailbox %s has been successfully changed"
-
-#~ msgid "Mailbox list of the domain %s"
-#~ msgstr "Mailbox list of the domain %s"
-
-#~ msgid "Size"
-#~ msgstr "Size"
-
-#~ msgid "Delete the selected mailboxes"
-#~ msgstr "Delete the selected mailboxes"
-
-#~ msgid "Add a mailbox on <b>%s</b>"
-#~ msgstr "Add a mailbox on <b>%s</b>"
-
-#~ msgid "Mailboxes"
-#~ msgstr "Mailboxes"
-
-#~ msgid ""
-#~ "Enter your username and your password to connect to the virtual desktop "
-#~ "interface"
-#~ msgstr ""
-#~ "Enter your username and your password to connect to the virtual desktop "
-#~ "interface"
-
-#~ msgid "You must accept the session cookie to log-in"
-#~ msgstr "You must accept the session cookie to log-in"
-
-#~ msgid "If you want to use a different language, click on the flag below"
-#~ msgstr "If you want to use a different language, click on the flag below"
-
-#~ msgid "You cannot change your password"
-#~ msgstr "You cannot change your password"
-
-#~ msgid "Administration of"
-#~ msgstr "Administration of"
-
-#~ msgid "AlternC Desktop"
-#~ msgstr "AlternC Desktop"
-
-#~ msgid "Last Login: "
-#~ msgstr "Last Login: "
-
-#~ msgid "%1$d login failed since last login"
-#~ msgstr "%1$d login failed since last login"
-
-#~ msgid "from: <code> %1$s </code>"
-#~ msgstr "from: <code> %1$s </code>"
-
-#~ msgid "Online help"
-#~ msgstr "Online help"
-
-#~ msgid "Change the email of the account"
-#~ msgstr "Change the email of the account"
-
-#~ msgid "Help"
-#~ msgstr "Help"
-
-#~ msgid "MySQL Databases"
-#~ msgstr "MySQL Databases"
-
-#~ msgid "SQL Server"
-#~ msgstr "SQL Server"
-
-#~ msgid "Database"
-#~ msgstr "Database"
-
-#~ msgid "Delete the checked databases"
-#~ msgstr "Delete the chosen databases"
-
-#~ msgid "Get the current SQL parameters"
-#~ msgstr "Get the current SQL settings"
-
-#~ msgid "Confirm the deletion of the following SQL databases"
-#~ msgstr "Confirm the deletion of the following SQL databases"
-
-#~ msgid "This will delete all the tables currently in those db."
-#~ msgstr "This will delete all the tables in the database."
-
-#~ msgid "The database %s has been successfully deleted"
-#~ msgstr "The database '%s' has been successfully deleted"
-
-#~ msgid "You currently have no database defined"
-#~ msgstr "Your don't have a database yet"
-
-#~ msgid "Restore a SQL backup"
-#~ msgstr "Restore a SQL backup"
-
-#~ msgid "Please enter the filename containing SQL data to be restored."
-#~ msgstr ""
-#~ "Please enter the filename containing the SQL data that need restoring."
-
-#~ msgid "Note: If the filename ends with .gz, it will be uncompressed before."
-#~ msgstr ""
-#~ "Note: If the filename ends up with .gz, it will be uncompressed first."
-
-#~ msgid "Restore my database"
-#~ msgstr "Restore a database"
-
-#~ msgid ""
-#~ "Your database has been restored, check out the previous text for error "
-#~ "messages."
-#~ msgstr ""
-#~ "Your database has been restored, check the previous text for error "
-#~ "messages."
-
-#~ msgid ""
-#~ "Enter the new password of your SQL database and click 'change the "
-#~ "password' to change it"
-#~ msgstr "Enter your new password to your SQL database"
-
-#~ msgid "No backup"
-#~ msgstr "No backup"
-
-#~ msgid "Weekly backup"
-#~ msgstr "Weekly backup"
-
-#~ msgid "Daily backup"
-#~ msgstr "Daily backup"
-
-#~ msgid "Change the SQL password"
-#~ msgstr "Change your SQL password"
-
-#~ msgid "Do sql backup?"
-#~ msgstr "Backup frequency:"
-
-#~ msgid "Change the SQL backup parameters"
-#~ msgstr "Modify SQL backup settings"
-
-#~ msgid "How many backup should be kept?"
-#~ msgstr "How long do you want to keep them (days/weeks)?"
-
-#~ msgid "Compress the backups? (gzip)"
-#~ msgstr "Do you want to compress the backups? (gzip)"
-
-#~ msgid "In which folder do you want to store the backups?"
-#~ msgstr "Which folder do you want to store the backups in?"
-
-#~ msgid "Your current settings are"
-#~ msgstr "Your current settings are:"
-
-#~ msgid "Create my main database"
-#~ msgstr "Create my main database"
-
-#~ msgid "Databases"
-#~ msgstr "Databases"
-
-#~ msgid "SQL Admin"
-#~ msgstr "SQL Admin"
-
-#~ msgid "Create a new database"
-#~ msgstr "Create a database"
-
-#~ msgid "Create this new database."
-#~ msgstr "Create the database."
-
-#~ msgid "Backup"
-#~ msgstr "Backup"
-
-#~ msgid "Restore"
-#~ msgstr "Restore"
-
-#~ msgid "Your backup parameters has been successfully changed."
-#~ msgstr "Your backup parameters has been successfully changed."
-
-#~ msgid "Create new Raw Statistics (apache)"
-#~ msgstr "Create new Raw Statistics (apache)"
-
-#~ msgid "Create those raw statistics"
-#~ msgstr "Create those raw statistics"
-
-#~ msgid "New Raw Statistics (apache)"
-#~ msgstr "New Raw Statistics (apache)"
+#~ msgid "Byte"
+#~ msgstr "Byte"
 
 #~ msgid "help_mail_add"
 #~ msgstr ""

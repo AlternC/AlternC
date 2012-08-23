@@ -241,6 +241,7 @@ CREATE TABLE IF NOT EXISTS `address` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT, -- Technical id.
   `domain_id` bigint(20) unsigned NOT NULL REFERENCES `domaines`(`id`), -- FK to sub_domains.
   `address` varchar(255) NOT NULL, -- The address.
+  `type` char(8) NOT NULL, -- standard emails are '', other may be 'mailman' or 'sympa' ...
   `password` varchar(255) DEFAULT NULL, -- The password associated to the address.
   `enabled` int(1) unsigned NOT NULL DEFAULT '1', -- Enabled flag.
   `expire_date` datetime DEFAULT NULL, -- Expiration date, used for temporary addresses.
@@ -261,8 +262,9 @@ CREATE TABLE IF NOT EXISTS `mailbox` (
   `quota` bigint(20) unsigned DEFAULT NULL, -- Quota for this mailbox.
   `delivery` varchar(255) NOT NULL, -- Delivery transport.
   `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- Update date, for technical usage only.
-  `bytes` bigint(20) NOT NULL DEFAULT '0',
-  `messages` int(11) NOT NULL DEFAULT '0',
+  `bytes` bigint(20) NOT NULL DEFAULT '0', -- number of bytes in the mailbox, filled by dovecot
+  `messages` int(11) NOT NULL DEFAULT '0', -- number of messages in the mailbox, filled by dovecot 
+  `lastlogin` datetime NOT NULL, -- Last login, filled by dovecot
   PRIMARY KEY (`id`),
   UNIQUE KEY `address_id` (`address_id`)
 ) COMMENT = 'Table containing local deliverd mailboxes.';

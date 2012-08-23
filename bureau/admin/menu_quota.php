@@ -47,7 +47,7 @@ $first=true;
 while (list($key,$val)=each($qlist)) {
 	$col=3-$col;
 
-	if (($key == 'bw_web' || $key == 'web') && ($q[$key]["t"] > 0)) {
+	if (($key == 'bw_web' || $key == 'web') && (isset($q[$key]["t"]) && $q[$key]["t"] > 0)) {
 	  if ($first) {
 	    echo '<dt id="#quotas">' . _("Quotas") . '</dt>';
 	    $first=false;
