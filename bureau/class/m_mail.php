@@ -357,12 +357,17 @@ class m_mail {
  /** 
   * setpasswd a mail address.
   * @param integer mail_id: unique mail identifier
+  * @return boolean true if the password has been changed. Set $err to a proper error code is false.
   */  
   function setpasswd($mail_id,$pass,$passwd_type){
     global $db,$err,$admin;
     $err->log("mail","setpasswd");
     if(!$admin->checkPolicy("pop",$mail_full,$pass)) return false;
-    if(!$db->query("UPDATE address SET password='"._md5cr($pass)."' where id=$mail_id;")) return false;
+    if(!$db->query("UPDATE address SET password='"._md5cr($pass)."' where id=$mail_id;")) {
+      $err->raise("mail",1);
+      return false;
+    }
+    return true;
   }
 
 
