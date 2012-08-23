@@ -71,14 +71,14 @@ include_once("head.php");
 ?>
 <p>
 <?php if (isset($error) && $error) echo "<p class=\"error\">$error</p>"; ?>
-<?php echo _("File editing")." <code>$R/<b>$editfile</b></code><br />"; ?>
+<h3><?php echo _("File editing")." <code>$R/<b>$editfile</b></code><br />"; ?></h3>
 </p>
 <form action="bro_editor.php" method="post"><br />
-<div id="resizer" style="left: 0px; top: 0px; z-index: 54; width: <?php echo $p["editsizex"]*8; ?>px; height: <?php echo $p["editsizey"]*8; ?>px; cursor: auto;"><textarea class="int" style="font-family: <?php echo $p["editor_font"]; ?>; font-size: <?php echo $p["editor_size"]; ?>; width: 90%; height: 90%;" name="texte"><?php
+<textarea class="int" style="font-family: <?php echo $p["editor_font"]; ?>; font-size: <?php echo $p["editor_size"]; ?>; width: 90%; height: 400px;" name="texte"><?php
   $failed=false;
-  if (!$bro->content($R,$editfile)) {
-    $failed=true;
-  }
+  $content=$bro->content($R,$editfile);
+  if (empty($content)) $failed=true;
+  
 ?></textarea>
 <?php if ($failed) echo "<p class=\"error\">".$err->errstr()."</p>"; ?>
 	<input type="hidden" name="editfile" value="<?php echo str_replace("\"","&quot;",$editfile); ?>" />

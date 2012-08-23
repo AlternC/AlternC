@@ -671,19 +671,11 @@ class m_bro {
   function content($R,$file) {
     global $err;
     $absolute=$this->convertabsolute($R,0);
+    $std="";
     if (!strpos($file,"/")) {
       $absolute.="/".$file;
       if (file_exists($absolute)) {
-	$f=fopen($absolute,"rb");
-	if ($f) {
-	  while ($s=fgets($f,1024)) {
-	    echo str_replace("<","&lt;",str_replace("&","&amp;",$s));
-	  }
-	  fclose($f);
-	} else {
-	  $err->raise("bro",6);
-	  return false;
-	}
+	    $std=str_replace("<","&lt;",str_replace("&","&amp;",file_get_contents($absolute)));
       } else {
 	$err->raise("bro",6);
 	return false;
@@ -692,6 +684,7 @@ class m_bro {
       $err->raise("bro",1);
       return false;
     }
+    return $std;
   }
 
   /** Cache des urls pour VIEW
