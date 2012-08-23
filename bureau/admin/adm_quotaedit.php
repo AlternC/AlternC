@@ -71,6 +71,7 @@ $mem->unsu();
 $ql=$quota->qlist();
 reset($ql);
 while (list($key,$val)=each($ql)) {
+	if (!isset($r[$key])) continue;
 	echo "<tr>";
 	echo "<td>";
 	if ($r[$key]["t"]==$r[$key]["u"] && $r[$key]["u"]) echo "<span style=\"color: red;\">";
