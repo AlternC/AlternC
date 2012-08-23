@@ -58,7 +58,8 @@ class m_mail {
     global $db,$err,$cuid;
     if ($name=="mail") {
       $err->log("mail","getquota");
-      $db->query("SELECT COUNT(*) AS cnt FROM address WHERE domain_id in(select id from domaines where compte=$cuid);");
+      //$db->query("SELECT COUNT(*) AS cnt FROM address WHERE domain_id in(select id from domaines where compte=$cuid);");
+      $db->query("SELECT COUNT(a.id) AS cnt FROM address a, domaines d WHERE a.domain_id =d.id and d.compte=$cuid group by a.id;");
       $db->next_record();
       return $db->f("cnt");
     }
