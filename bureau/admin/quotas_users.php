@@ -17,7 +17,7 @@ if (!$admin->enabled) {
 include_once ("head.php");
 
 ?>
-<h3>Tableau de bord</h3>
+<h3><?php __("Quotas status"); ?></h3>
 <hr id="topbar"/>
 <br />
 <?php
