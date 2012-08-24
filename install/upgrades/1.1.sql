@@ -164,3 +164,14 @@ CREATE TABLE IF NOT EXISTS `cron` (
   PRIMARY KEY (`id`),
   KEY `uid` (`uid`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+
+--
+-- Piwik user tables
+--
+CREATE TABLE  IF NOT EXISTS `piwik_users` (
+`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+`uid` INT NOT NULL ,
+`login` VARCHAR( 255 ) NOT NULL ,
+`created_date` TIMESTAMP NOT NULL
+) ENGINE = MYISAM ;
+
