@@ -45,8 +45,6 @@ $fields = array (
 getFields($fields);
 
 ?>
-</head>
-<body>
 <h3><?php __("Send an email to all members"); ?></h3>
 <?php
 

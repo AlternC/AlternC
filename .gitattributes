@@ -13,6 +13,7 @@ aide/index.sgml -text
 aide/sommaire.sgml -text
 aide/stats.sgml -text
 aide/test.sgml -text
+bureau/admin/about.php -text
 bureau/admin/adm_add.php -text
 bureau/admin/adm_authip_whitelist.php -text
 bureau/admin/adm_cancel.php -text
