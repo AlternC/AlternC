@@ -70,15 +70,15 @@ __("Edit the file /etc/alternc/menulist.txt to enable, disable ou change order o
 ?>
 <h4><?php __("Menu actually activated"); ?></h4>
 <ul>
-  <?php foreach($menu_activated as $m){ echo "<li>$m - <i>"._("shortdesc_$m")."</i></li>";} ?>
+  <?php foreach($menu_activated as $m){ echo "<li>$m - <i>"._("shortdesc_".basename($m,".php"))."</i></li>";} ?>
 </ul>
 <h4><?php __("Menu activated but not present"); ?></h4>
 <ul>
-  <?php foreach($menu_error as $m){ echo "<li>$m - <i>"._("shortdesc_$m")."</i></li>";} ?>
+  <?php foreach($menu_error as $m){ echo "<li>$m - <i>"._("shortdesc_".basename($m,".php"))."</i></li>";} ?>
 </ul>
 <h4><?php __("Menu avalaible but not activated"); ?></h4>
 <ul>
-  <?php foreach($menu_diff as $m){ echo "<li>$m - <i>"._("shortdesc_$m")."</i></li>";} ?>
+  <?php foreach($menu_diff as $m){ echo "<li>$m - <i>"._("shortdesc_".basename($m,".php"))."</i></li>";} ?>
 </ul>
 
 
