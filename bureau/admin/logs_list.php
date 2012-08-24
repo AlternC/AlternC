@@ -39,8 +39,10 @@ $list=$log->list_logs_directory_all($log->get_logs_directory());
 if (isset($error) && $error) {
 	echo "<p class=\"error\">$error</p>";
 }
-if(!$list || empty($list)){
+if(!$list || empty($list['dir'])){
 	echo "<p class=\"error\">"._("You have no sql logs to list a the moment.")."</p>";  
+	include_once('foot.php');
+	exit;
 }
 ?>
 <table class="tlist">
