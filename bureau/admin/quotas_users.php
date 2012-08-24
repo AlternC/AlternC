@@ -27,22 +27,16 @@ if (isset($error) && $error) {
 ?>
 <p>
 <?php __("This page shows the space and service count of your AlternC server and each AlternC accounts."); ?>
+</p>
+<p>
 <?php printf(_("Sizes are shown as %s"),($mode==0 || $mode==4)?_("MB."):_("% of the total.")); ?>
 </p>
 <p>
-<?php __("Server-side view:"); ?> <span class="ina"><a href="quotas_users.php?mode=4"><?php __("Global"); ?></a></span><br /><br />
+<?php __("Server-side view:"); ?> <span class="ina <?php if ($mode==4) { echo 'ina-active'; } ?>"><a href="quotas_users.php?mode=4"><?php __("Global"); ?></a></span><br /><br />
 <?php __("Detailed view:"); ?>
-<?php if ($mode==0) { ?>
-  <span class="ina"><a href="quotas_users.php?mode=1&amp;sd=<?php echo $sd; ?>&amp;usr=<?php echo $usr; ?>"><?php __("Percentage"); ?></a></span>
-  <span class="ina"><a href="quotas_users.php?mode=2&amp;sd=<?php echo $sd; ?>&amp;usr=<?php echo $usr; ?>"><?php __("Graphical"); ?></a></span>
-   <?php } elseif ($mode==1) { ?>
-     <span class="ina"><a href="quotas_users.php?mode=0&amp;sd=<?php echo $sd; ?>&amp;usr=<?php echo $usr; ?>"><?php __("In MB"); ?></a></span>
-     <span class="ina"><a href="quotas_users.php?mode=2&amp;sd=<?php echo $sd; ?>&amp;usr=<?php echo $usr; ?>"><?php __("Graphical"); ?></a></span>
-   <?php } else { ?>
-  <span class="ina"><a href="quotas_users.php?mode=0&amp;sd=<?php echo $sd; ?>&amp;usr=<?php echo $usr; ?>"><?php __("In MB"); ?></a></span>
-  <span class="ina"><a href="quotas_users.php?mode=1&amp;sd=<?php echo $sd; ?>&amp;usr=<?php echo $usr; ?>"><?php __("Percentage"); ?></a></span>
- <?php } ?>
-
+  <span class="ina <?php if ($mode==0) { echo 'ina-active'; } ?>"><a href="quotas_users.php?mode=0&amp;sd=<?php echo $sd; ?>&amp;usr=<?php echo $usr; ?>"><?php __("In MB"); ?></a></span>
+  <span class="ina <?php if ($mode==1) { echo 'ina-active'; } ?>"><a href="quotas_users.php?mode=1&amp;sd=<?php echo $sd; ?>&amp;usr=<?php echo $usr; ?>"><?php __("Percentage"); ?></a></span>
+  <span class="ina <?php if ($mode==2) { echo 'ina-active'; } ?>"><a href="quotas_users.php?mode=2&amp;sd=<?php echo $sd; ?>&amp;usr=<?php echo $usr; ?>"><?php __("Graphical"); ?></a></span>
 <?php if ($mode != 4) { ?>
 <?php if ($usr==0) { if ($sd==0) { ?>
       <span class="ina"><a href="quotas_users.php?mode=<?php echo $mode; ?>&amp;sd=1&amp;usr=<?php echo $usr; ?>"><?php __("Show the domain names"); ?></a></span>

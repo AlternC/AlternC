@@ -124,6 +124,10 @@ hr {
 	background-color: #F1F8FD;
 }
 
+.ina-active {
+	background-color: #C1FFCD;
+}
+
 .ina a, .inav a {
     color: black;
 }
