@@ -131,7 +131,7 @@ while (list($key,$val)=each($mails_list)){
 	<?php if ($val["type"]) { ?>
 	<td colspan="2"><?php echo $val["typedata"]; ?></td>
 	<?php } else { ?>
-	<td class="<?php echo $grey; ?>"><?php if ($val["islocal"]) echo format_size($val["used"])."/".format_size($val["quota"]); else __("No"); ?></td>
+	<td class="<?php echo $grey; ?>"><?php if ($val["islocal"]) echo format_size($val["used"])."/".format_size($val["quotabytes"]); else __("No"); ?></td>
 	<td class="<?php echo $grey; ?>"><?php echo $val["recipients"]; /* TODO : if >60chars, use "..." + js close/open */ ?></td>
 	<?php } ?>
         <td class="<?php echo $grey; ?>"><?php if ($val["islocal"]) { 

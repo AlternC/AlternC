@@ -45,20 +45,12 @@ if ($confirm=="y") {
   while (list($key,$val)=each($d)) {
     $mail->delete($val);
     $error.=$err->errstr()."<br />"; 
-    /*
-      $error.=$err->errstr()."<br />"; //sprintf(_("The email address <b>%s</b> does not exist!")."<br />",$val);
-    } else {
-      $error.=sprintf(_("The email address <b>%s</b> has been deleted!")."<br />",$val); 
-      }
-    */
   }
   include("mail_list.php");
   exit();
 }
 
 ?>
-</head>
-<body>
 <h3><?php __("Deleting mail accounts"); ?> : </h3>
 <hr id="topbar"/>
 <br />
@@ -88,5 +80,3 @@ while (list($key,$val)=each($d)) {
 
 </form>
 <?php include_once("foot.php"); ?>
-</body>
-</html>

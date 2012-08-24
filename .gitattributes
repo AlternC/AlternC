@@ -253,6 +253,7 @@ bureau/admin/mail_del.php -text
 bureau/admin/mail_doadd.php -text
 bureau/admin/mail_doedit.php -text
 bureau/admin/mail_edit.inc.php -text
+bureau/admin/mail_edit.php -text
 bureau/admin/mail_list.php -text
 bureau/admin/mail_localbox_doedit.php -text
 bureau/admin/mail_localbox_edit.inc.php -text

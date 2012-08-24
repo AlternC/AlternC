@@ -26,20 +26,14 @@ require_once("../class/config.php");
 $fields = array (
 	"mail_arg"     => array ("request", "string", ""),
 	"domain_id"    => array ("request", "integer", ""),
-	"domain"    => array ("request", "string", ""),
 );
 getFields($fields);
 
-
-$res= array();
-//FIXME seems good but maybe can be done in a more fashion way.
-$res=$mail->create($domain_id,$mail_arg,$domain);
-
-//once the mail created redirection to mail_properties.php, with the mail_id as parameters ( + domain_id )
-if($res["mail_id"]== null){
-	header ("Location: /mail_list.php?domain=$domain&domain_id=$domain_id");
-}else{
-	$test= 'mail_properties.php?mail_id='.$res["mail_id"]."&domain_id=$domain_id";
-	header("Location: /$test");
+if (!($res=$mail->create($domain_id,$mail_arg))) {
+  $error=$err->errstr();
+  include("mail_list.php");
+} else {
+  $_REQUEST["mail_id"]=$res;
+  include("mail_edit.php"); 
 }
 ?>

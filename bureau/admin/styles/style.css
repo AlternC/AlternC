@@ -156,7 +156,6 @@ hr {
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 11px;
 	padding: 2px;
-	color: black;
 }
 .intleft {
     border-right: 0px;
@@ -425,7 +424,7 @@ span#emaildom {
  }
 .tedit td, .tedit th { 
          border: 1px solid #aaa;
-         padding: 6px;
+         padding: 6px 10px;
          margin: 0;                       
  }
 
@@ -461,6 +460,6 @@ input#dir, input#sub_local {
     padding-top: 6px;
 }
 
-.grey {
+.grey, .grey td {
     color: #999;
 }

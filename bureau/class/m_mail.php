@@ -1,6 +1,10 @@
 <?php
 /*
  ----------------------------------------------------------------------
+ AlternC - Web Hosting System
+ Copyright (C) 2000-2012 by the AlternC Development Team.
+ https://alternc.org/
+ ----------------------------------------------------------------------
  LICENSE
 
  This program is free software; you can redistribute it and/or
@@ -118,7 +122,7 @@ class m_mail {
     $db->next_record();
     $this->total=$db->f("total");
 
-    $db->query("SELECT a.id, a.address, a.password, a.`enabled`, a.mail_action, d.domaine AS domain, m.quota*1024*1024 AS quota, m.bytes AS used, NOT ISNULL(m.id) AS islocal, a.type, r.recipients, m.lastlogin  
+    $db->query("SELECT a.id, a.address, a.password, a.`enabled`, a.mail_action, d.domaine AS domain, m.quota, m.quota*1024*1024 AS quotabytes, m.bytes AS used, NOT ISNULL(m.id) AS islocal, a.type, r.recipients, m.lastlogin  
          FROM (address a LEFT JOIN mailbox m ON m.address_id=a.id) LEFT JOIN recipient r ON r.address_id=a.id, domaines d 
          WHERE $where AND d.id=a.domain_id 
          LIMIT $offset,$count;");
@@ -209,8 +213,8 @@ class m_mail {
     $mail_id=intval($mail_id);
 
     // We fetch all the informations for that email: these will fill the hastable : 
-    $db->query("SELECT a.address, a.password, a.`enabled`, d.domaine AS domain, m.quota, m.bytes/1024/1024 AS used, NOT ISNULL(m.id) AS islocal, a.type  
-         FROM address a LEFT JOIN mailbox m ON m.address_id=a.id, domaines d WHERE a.id=$mail_id AND d.id=a.domain_id;");
+    $db->query("SELECT a.address, a.password, a.`enabled`, d.domaine AS domain, m.quota, m.quota*1024*1024 AS quotabytes, m.bytes AS used, NOT ISNULL(m.id) AS islocal, a.type, r.recipients, m.lastlogin  
+         FROM (address a LEFT JOIN mailbox m ON m.address_id=a.id) LEFT JOIN recipient r ON r.address_id=a.id, domaines d WHERE a.id=$mail_id AND d.id=a.domain_id;");
     if (! $db->next_record()) return false;
     $details=$db->Record;
     // if necessary, fill the typedata with data from hooks ...
