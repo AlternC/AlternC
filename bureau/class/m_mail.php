@@ -275,7 +275,7 @@ class m_mail {
       $err->raise("mail",_("The email %s is special, it can't be deleted"),$mail);
       return false;
     }
-    if ($db->f("mailbox_action")!=""  || $db->f("mail_action")!="") { // will be deleted soon ...
+    if ($db->f("mailbox_action")!="OK" || $db->f("mail_action")!="OK") { // will be deleted soon ...
       $err->raise("mail",_("The email %s is already marked for deletion, it can't be deleted"),$mail);
       return false;
     }
@@ -338,8 +338,8 @@ class m_mail {
 
     if ($db->f("islocal")) {
       // If it's a pop/imap mailbox, mark it for deletion
-      $db->query("UPDATE address SET mail_action='', `enabled`=1 WHERE id='$mail_id';");
-      $db->query("UPDATE mailbox SET mail_action='' WHERE address_id='$mail_id';");
+      $db->query("UPDATE address SET mail_action='OK', `enabled`=1 WHERE id='$mail_id';");
+      $db->query("UPDATE mailbox SET mail_action='OK' WHERE address_id='$mail_id';");
       $err->raise("mail",_("The email %s has been undeleted"),$mail);
       return true;
     } else {

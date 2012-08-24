@@ -246,7 +246,7 @@ CREATE TABLE IF NOT EXISTS `address` (
   `enabled` int(1) unsigned NOT NULL DEFAULT '1', -- Enabled flag.
   `expire_date` datetime DEFAULT NULL, -- Expiration date, used for temporary addresses.
   `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- Update date, for technical usage only.
-  `mail_action` varchar(8) NOT NULL, -- mail_action is DELETE or DELETING when deleting a mailbox by cron
+  `mail_action` enum('OK','DELETE','DELETING') NOT NULL default 'OK', -- mail_action is DELETE or DELETING when deleting a mailbox by cron
   PRIMARY KEY (`id`),
   UNIQUE INDEX `fk_domain_id` (`domain_id`,`address`)
 ) COMMENT = 'This is the main address table. It represents an address as in RFC2822';
@@ -266,7 +266,7 @@ CREATE TABLE IF NOT EXISTS `mailbox` (
   `bytes` bigint(20) NOT NULL DEFAULT '0', -- number of bytes in the mailbox, filled by dovecot
   `messages` int(11) NOT NULL DEFAULT '0', -- number of messages in the mailbox, filled by dovecot 
   `lastlogin` datetime NOT NULL, -- Last login, filled by dovecot
-  `mail_action` varchar(8) NOT NULL, -- mail_action is DELETE or DELETING when deleting a mailbox by cron  
+  `mail_action` enum('OK','DELETE','DELETING') NOT NULL default 'OK', -- mail_action is DELETE or DELETING when deleting a mailbox by cron
   PRIMARY KEY (`id`),
   UNIQUE KEY `address_id` (`address_id`)
 ) COMMENT = 'Table containing local deliverd mailboxes.';
