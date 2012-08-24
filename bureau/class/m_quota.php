@@ -361,6 +361,107 @@ class m_quota {
     }
   }
 
+  /* get size_xx function (filled by spoolsize.php) */
+
+  function _get_sum_sql($sql) {
+    global $db,$err,$cuid;
+    $db->query($sql);
+    if ($db->num_rows() == 0) {
+      return -1;
+    } else {
+      $db->next_record();
+      $r = $db->Record;
+      return $r['sum'];
+    }
+  }
+
+  function _get_count_sql($sql) {
+    global $db,$err,$cuid;
+    $db->query($sql);
+    if ($db->num_rows() == 0) {
+      return 0;
+    } else {
+      $db->next_record();
+      $r = $db->Record;
+      return $r['count'];
+    }
+  }
+
+  /* sum of websites sizes from all users */
+  function get_size_web_sum_all() {
+    return $this->_get_sum_sql("SELECT SUM(size) AS sum FROM size_web;");
+  }
+
+  /* sum of websites sizes from one user */
+  function get_size_web_sum_user($u) {
+    return $this->_get_sum_sql("SELECT SUM(size) AS sum FROM size_web WHERE uid='$u';");
+  }
+
+  /* sum of mailbox sizes from all domains */
+  function get_size_mail_sum_all() {
+    return $this->_get_sum_sql("SELECT SUM(size) AS sum FROM size_mail;");
+  }
+
+  /* sum of mailbox sizes for one domain */
+  function get_size_mail_sum_domain($dom) {
+    return $this->_get_sum_sql("SELECT SUM(size) AS sum FROM size_mail WHERE alias LIKE '%\_{$dom}'");
+  }
+
+  /* count of mailbox sizes from all domains */
+  function get_size_mail_count_all() {
+    return $this->_get_count_sql("SELECT COUNT(*) AS count FROM size_mail;");
+  }
+
+  /* count of mailbox for one domain */
+  function get_size_mail_count_domain($dom) {
+    return $this->_get_count_sql("SELECT COUNT(*) AS count FROM size_mail FROM size_mail WHERE alias LIKE '%\_{$dom}'");
+  }
+
+  /* sum of mailman lists sizes from all domains */
+  function get_size_mailman_sum_all() {
+    return $this->_get_sum_sql("SELECT SUM(size) AS sum FROM size_mailman;");
+  }
+
+  /* sum of mailman lists sizes for one domain */
+  function get_size_mailman_sum_domain($dom) {
+    return $this->_get_sum_sql("SELECT SUM(size) AS sum FROM size_mailman WHERE list LIKE '%@{$dom}'");
+  }
+
+  /* count of mailman lists sizes from all domains */
+  function get_size_mailman_count_all() {
+    return $this->_get_count_sql("SELECT COUNT(*) AS count FROM size_mailman;");
+  }
+
+  /* count of mailman lists for one user */
+  function get_size_mailman_count_user($u) {
+    return $this->_get_count_sql("SELECT COUNT(*) AS count FROM size_mailman WHERE uid = '{$u}'");
+  }
+
+  /* sum of databases sizes from all users */
+  function get_size_db_sum_all() {
+    return $this->_get_sum_sql("SELECT SUM(size) AS sum FROM size_db;");
+  }
+
+  /* sum of databases sizes for one user */
+  function get_size_db_sum_user($u) {
+    return $this->_get_sum_sql("SELECT SUM(size) AS sum FROM size_db WHERE db = '{$u}' OR db LIKE '{$u}\_%'");
+  }
+
+  /* count of databases from all users */
+  function get_size_db_count_all() {
+    return $this->_get_count_sql("SELECT COUNT(*) AS count FROM size_db;");
+  }
+
+  /* count of mailman lists for one user */
+  function get_size_db_count_user($u) {
+    return $this->_get_count_sql("SELECT COUNT(*) AS count FROM size_db WHERE db = '{$u}' OR db LIKE '{$u}\_%'");
+  }
+
+
+#list($dc)=@mysql_fetch_array(mysql_query("SELECT COUNT(*) FROM domaines;"));
+
+
+  /* ==== Hook functions ==== */
 
   /* ----------------------------------------------------------------- */
   /** Hook function call when a user is deleted

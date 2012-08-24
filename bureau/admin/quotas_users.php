@@ -75,7 +75,7 @@ if (isset($error) && $error) {
 
 		foreach ($mList as $mUID => $mData)
 		{
-			list($tmpweb) = @mysql_fetch_array(mysql_query("SELECT SUM(size) FROM size_web WHERE uid = '" . $mUID . "'"));
+            $tmpweb = $quota->get_size_web_sum_user($mUID);
 			$totalweb += $tmpweb;
 
 			if (!empty($mData["domaines"]))
@@ -84,36 +84,36 @@ if (isset($error) && $error) {
 				{
 					$dc++;
 
-					list($tmpmail) = @mysql_fetch_array(mysql_query("SELECT SUM(size) FROM size_mail WHERE alias LIKE '%\_" . $domaine . "'"));
+					$tmpmail = $quota->get_size_mail_sum_domain($domaine);
 					$totalmail += $tmpmail;
-					list($mc) = @mysql_fetch_array(mysql_query("SELECT COUNT(*) FROM size_mail WHERE alias LIKE '%\_" . $domaine . "'"));
+					$mc = $quota->get_size_mail_count_domain($domaine);
 
-					list($tmplist) = @mysql_fetch_array(mysql_query("SELECT SUM(size) FROM size_mailman WHERE list LIKE '%@" . $domaine . "'"));
+					$tmplist = $quota->get_size_mailman_sum_domain($domaine);
 					$totallist += $tmplist;
 				}
 			}
 
-			list($mlc) = @mysql_fetch_array(mysql_query("SELECT COUNT(*) FROM size_mailman WHERE uid = '" . $mUID . "'"));
-			list($tmpdb) = @mysql_fetch_array(mysql_query("SELECT SUM(size) FROM size_db WHERE db = '" . $mData["login"] . "' OR db LIKE '" . $mData["login"] . "\_%'"));
+            $mlc = $quota->get_size_mailman_count_user($mUID);
+            $tmpdb = $quota->get_size_db_sum_user($mData["login"]);
 			$totaldb += $tmpdb;
-			list($dbc) = @mysql_fetch_array(mysql_query("SELECT COUNT(*) FROM size_db WHERE db = '" . $mData["login"] . "' OR db LIKE '" . $mData["login"] . "\_%'"));
+            $dbc = $quota->get_size_db_count_user($mData["login"]);
 		}
 
 		$totaltotal=$totalweb+$totallist+$totalmail+($totaldb/1024); // en Ko
 	}
 	else
 	{
-		list($totalweb)=@mysql_fetch_array(mysql_query("SELECT SUM(size) FROM size_web;"));
-		list($totalmail)=@mysql_fetch_array(mysql_query("SELECT SUM(size) FROM size_mail;"));
-		list($totallist)=@mysql_fetch_array(mysql_query("SELECT SUM(size) FROM size_mailman;"));
-		list($totaldb)=@mysql_fetch_array(mysql_query("SELECT SUM(size) FROM size_db;"));
+        $totalweb = $quota->get_size_web_sum_all();
+        $totalmail = $quota->get_size_mail_sum_all();
+        $totallist = $quota->get_size_mailman_sum_all();
+        $totaldb = $quota->get_size_db_sum_all();
 
 		$totaltotal=$totalweb+$totallist+$totalmail+($totaldb/1024); // en Ko
 
 		list($dc)=@mysql_fetch_array(mysql_query("SELECT COUNT(*) FROM domaines;"));
-		list($mc)=@mysql_fetch_array(mysql_query("SELECT COUNT(*) FROM size_mail;"));
-		list($mlc)=@mysql_fetch_array(mysql_query("SELECT COUNT(*) FROM size_mailman;"));
-		list($dbc)=@mysql_fetch_array(mysql_query("SELECT COUNT(*) FROM size_db;"));
+        $mc = $quota->get_size_mail_count_all();
+        $mlc = $quota->get_size_mailman_count_all();
+        $dbc = $quota->get_size_db_count_all();
 	}
 
 ?>
@@ -200,7 +200,7 @@ if ($cuid != 2000)
 
 	foreach ($mList as $mUID => $mData)
 	{
-		list($tmpweb) = @mysql_fetch_array(mysql_query("SELECT SUM(size) FROM size_web WHERE uid = '" . $mUID . "'"));
+        $tmpweb = $quota->get_size_web_sum_user($mUID);
 		$totalweb += $tmpweb;
 
 		if (!empty($mData["domaines"]))
@@ -209,28 +209,28 @@ if ($cuid != 2000)
 			{
 				$dc++;
 
-				list($tmpmail) = @mysql_fetch_array(mysql_query("SELECT SUM(size) FROM size_mail WHERE alias LIKE '%\_" . $domaine . "'"));
+                $tmpmail = $quota->get_size_mail_sum_domain($domaine);
 				$totalmail += $tmpmail;
-				list($mc) = @mysql_fetch_array(mysql_query("SELECT COUNT(*) FROM size_mail WHERE alias LIKE '%\_" . $domaine . "'"));
+                $mc = $quota->get_size_mail_count_domain($domaine);
 
-				list($tmplist) = @mysql_fetch_array(mysql_query("SELECT SUM(size) FROM size_mailman WHERE list LIKE '%@" . $domaine . "'"));
+                $tmplist = $quota->get_size_mailman_sum_domain($domaine);
 				$totallist += $tmplist;
 			}
 		}
 
-		list($mlc) = @mysql_fetch_array(mysql_query("SELECT COUNT(*) FROM size_mailman WHERE uid = '" . $mUID . "'"));
-		list($tmpdb) = @mysql_fetch_array(mysql_query("SELECT SUM(size) FROM size_db WHERE db = '" . $mData["login"] . "' OR db LIKE '" . $mData["login"] . "\_%'"));
+        $mlc = $quota->get_size_mailman_count_domain($mUID);
+        $tmpdb = $quota->get_size_db_sum_user($mData["login"]);
 		$totaldb += $tmpdb;
-		list($dbc) = @mysql_fetch_array(mysql_query("SELECT COUNT(*) FROM size_db WHERE db = '" . $mData["login"] . "' OR db LIKE '" . $mData["login"] . "\_%'"));
+        $dbc = $quota->get_size_db_count_user($mData["login"]);
 	}
 
 }
 else
 {
-	list($totalweb)=@mysql_fetch_array(mysql_query("SELECT SUM(size) FROM size_web;"));
-	list($totalmail)=@mysql_fetch_array(mysql_query("SELECT SUM(size) FROM size_mail;"));
-	list($totallist)=@mysql_fetch_array(mysql_query("SELECT SUM(size) FROM size_mailman;"));
-	list($totaldb)=@mysql_fetch_array(mysql_query("SELECT SUM(size) FROM size_db;"));
+    $totalweb = $quota->get_size_web_sum_all();
+    $totalmail = $quota->get_size_mail_sum_all();
+    $totallist = $quota->get_size_mailman_sum_all();
+    $totaldb = $quota->get_size_db_sum_all();
 }
 
 $totaltotal=$totalweb+$totallist+$totalmail+($totaldb/1024); // en Ko
@@ -258,9 +258,9 @@ while ($c=mysql_fetch_array($r)) {
   while ($d=mysql_fetch_array($s)) {
 if ($sd)     echo "&nbsp;&nbsp;&nbsp;-&nbsp;".$d["domaine"]."<br />\n";
     $dc++;
-    list($mstmp)=@mysql_fetch_array(mysql_query("SELECT SUM(size) FROM size_mail WHERE alias LIKE '%\_".$d["domaine"]."';"));
+    $mstmp = $quota->get_size_mail_sum_domain($d["domaine"]);
     $ms+=$mstmp;
-    list($mlstmp)=@mysql_fetch_array(mysql_query("SELECT SUM(size) FROM size_mailman WHERE list LIKE '%@".$d["domaine"]."';"));
+    $mlstmp = $quota->get_size_mailman_sum_domain($d["domaine"]);
     $mls+=$mlstmp;
   }
 
@@ -273,7 +273,7 @@ if ($sd)     echo "&nbsp;&nbsp;&nbsp;-&nbsp;".$d["domaine"]."<br />\n";
   echo ">";
 
   // Espace WEB
-  list($ws)=@mysql_fetch_array(mysql_query("SELECT size FROM size_web WHERE uid='".$c["uid"]."';"));
+  $ws = $quota->get_size_web_sum_user($c["uid"]);
 
 	if (isset($totalweb) && $totalweb){
 		$pc=intval(100*$ws/$totalweb);
@@ -331,7 +331,7 @@ if ($mode!=2) echo " style=\"text-align: right\"";
 echo ">";
 
 // Espace DB :
-list($ds)=@mysql_fetch_array(mysql_query("SELECT SUM(size) FROM size_db WHERE db='".$c["login"]."' OR db LIKE '".$c["login"]."\_%';"));
+$ds = $quota->get_size_db_sum_user($c["login"]);
 
 if ($totaldb)
 	$pc=intval(100*$ds/$totaldb);
