@@ -84,7 +84,7 @@ if (empty($mails_list)){ // If there is no mail for this domain
 <span class="int intleft"><img src="/images/search.png" style="vertical-align: middle"/> </span><input type="text" name="search" value="<?php ehe($search); ?>" size="20" maxlength="64" class="int intright" />
 </form>
 </td><td>
-<?php pager($offset,$count,$mail->total,"mail_list.php?domain_id=".$domain_id."&count=".$count."&search=".urlencode($search)."&offset=%%offset%%"); ?>
+<?php pager($offset,$count,$mail->total,"mail_list.php?domain_id=".$domain_id."&amp;count=".$count."&amp;search=".urlencode($search)."&amp;offset=%%offset%%"); ?>
 </td><td style="text-align:right">
 <form method="get" name="" action="mail_list.php">
  <input type="hidden" name="domain_id" value="<?php echo $domain_id; ?>" />
@@ -92,7 +92,6 @@ if (empty($mails_list)){ // If there is no mail for this domain
  <?php __("Items per page:"); ?> <select name="count" class="inl" onchange="submit()"><?php eoption($counts,$count); ?></select>
 </form>
 </td></tr></table>
-</fieldset>
 
 <form method="post" action="mail_del.php">
  <input type="hidden" name="domain_id" value="<?php echo $domain_id; ?>" />
@@ -110,14 +109,14 @@ while (list($key,$val)=each($mails_list)){
 	  <td colspan="3"><?php __("Deleting..."); ?></td>
 	  <?php } else if ($val["mail_action"]=="DELETE") { $grey="grey"; ?>
 	  <td></td>
-	  <td><div class="ina"><a href="mail_undelete.php?search=<?php ehe($search); ?>&offset=<?php ehe($offset); ?>&count=<?php ehe($count); ?>&domain_id=<?php ehe($domain_id);  ?>&mail_id=<?php echo $val["id"] ?>"><img src="images/undelete.png" alt="<?php __("Undelete"); ?>" /><?php __("Undelete"); ?></a></div></td>
+	  <td><div class="ina"><a href="mail_undelete.php?search=<?php ehe($search); ?>&amp;offset=<?php ehe($offset); ?>&amp;count=<?php ehe($count); ?>&amp;domain_id=<?php ehe($domain_id);  ?>&amp;mail_id=<?php echo $val["id"] ?>"><img src="images/undelete.png" alt="<?php __("Undelete"); ?>" /><?php __("Undelete"); ?></a></div></td>
 	  <td><img src="images/check_no.png" alt="<?php __("Disabled"); ?>" /></td>	  
 	  <?php } else if (!$val["type"]) { ?>
           <td align="center">
 	    <input class="inc" type="checkbox" id="del_<?php echo $i; ?>" name="d[]" value="<?php ehe($val["id"]); ?>" />
 	</td>
 	<td class="<?php echo $grey; ?>">
-	  <div class="ina"><a href="mail_properties.php?mail_id=<?php echo $val["id"] ?>"><img src="images/edit.png" alt="<?php __("Edit"); ?>" /><?php __("Edit"); ?></a></div></td>
+	  <div class="ina"><a href="mail_edit.php?mail_id=<?php echo $val["id"] ?>"><img src="images/edit.png" alt="<?php __("Edit"); ?>" /><?php __("Edit"); ?></a></div></td>
 	<td class="<?php echo $grey; ?>"><?php if ($val["enabled"] ) { ?>
 			<img src="images/check_ok.png" alt="<?php __("Enabled"); ?>" />
 		<?php } else { ?>
