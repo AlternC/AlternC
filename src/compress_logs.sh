@@ -1,5 +1,8 @@
 #! /bin/bash
 
+# How long do we wait before compressing the log ? Default: 2
+DAYS=2
+
 for CONFIG_FILE in \
       /etc/alternc/local.sh \
       /usr/lib/alternc/functions.sh
@@ -10,7 +13,10 @@ for CONFIG_FILE in \
     fi
     . "$CONFIG_FILE"
 done
-$days=2
-#parcourir tous les logs pour trouver ceux qui on plus de 2 jours et en faire un tar.
-find "$ALTERNC_LOC/logs" -not -name '*.gz' -mtime +$days -exec gzip '{}' \;
+
+#FIXME: should be define in local.sh
+ALTERNC_LOGS="$ALTERNC_LOC/logs"
+
+#Compress logs older than XX days
+nice 10 find "$ALTERNC_LOGS" -not -name '*.gz' -mtime +$DAYS -exec gzip '{}' \;
 

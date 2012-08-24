@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# How many day do we keep the logs ?
+DAYS=366
+
 for CONFIG_FILE in \
       /etc/alternc/local.sh \
       /usr/lib/alternc/functions.sh
@@ -10,6 +13,8 @@ for CONFIG_FILE in \
     fi
     . "$CONFIG_FILE"
 done
-days=366
-#parcourir tous les logs pour trouver ceux qui on plus de 1 ans et les deletes.
-find "$ALTERNC_LOC/logs" -mtime +$days -exec rm '{}' \;
+
+# FIXME this var should be define in local.sh
+ALTERNC_LOGS="$ALTERNC_LOC/logs"
+
+nice 10 find "$ALTERNC_LOGS" -mtime +$DAYS -delete

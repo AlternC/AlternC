@@ -2,14 +2,14 @@
 0 4 * * *	root	/usr/lib/alternc/rawstat.daily
 
 # Every 2 days compress log files
-0 4 * * *	root	/usr/lib/alternc/compress_logs.sh
+0 4 * * *	alterncpanel	/usr/lib/alternc/compress_logs.sh
 
 # Suppress log files older than one year
-0 4 * * *	root	/usr/lib/alternc/delete_logs.sh
+0 4 * * *	alterncpanel	/usr/lib/alternc/delete_logs.sh
 
 # Every day at 5am and every week at 4am, make requested SQL backups
-0 5 * * *	www-data	/usr/lib/alternc/sqlbackup.sh -t daily
-0 4 * * 0	www-data	/usr/lib/alternc/sqlbackup.sh -t weekly
+0 5 * * *	alterncpanel	/usr/lib/alternc/sqlbackup.sh -t daily
+0 4 * * 0	alterncpanel	/usr/lib/alternc/sqlbackup.sh -t weekly
 
 # Every 5 minutes, spool waiting domain changes
 */5 * * * *	root		/usr/lib/alternc/update_domains.sh
