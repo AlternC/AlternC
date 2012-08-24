@@ -78,36 +78,40 @@ VALUES (
 'This variable set if you want to allow all IP address to access FTP by default. If the user start to define some IP or subnet in the allow list, only those he defined will be allowed. This variable can take two value : 0 or 1.'
 );
 
---
 -- Main address table.
 --
 -- Addresses for domain.
 
-CREATE TABLE `address` (
+CREATE TABLE IF NOT EXISTS `address` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT, -- Technical id.
-  `domain_id` bigint(20) unsigned DEFAULT NULL REFERENCES `sub_domain`(`id`), -- FK to sub_domains.
+  `domain_id` bigint(20) unsigned NOT NULL REFERENCES `domaines`(`id`), -- FK to sub_domains.
   `address` varchar(255) NOT NULL, -- The address.
+  `type` char(8) NOT NULL, -- standard emails are '', other may be 'mailman' or 'sympa' ...
   `password` varchar(255) DEFAULT NULL, -- The password associated to the address.
   `enabled` int(1) unsigned NOT NULL DEFAULT '1', -- Enabled flag.
   `expire_date` datetime DEFAULT NULL, -- Expiration date, used for temporary addresses.
   `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- Update date, for technical usage only.
+  `mail_action` varchar(8) NOT NULL, -- mail_action is DELETE or DELETING when deleting a mailbox by cron
   PRIMARY KEY (`id`),
-  UNIQUE KEY `domain_id` (`domain_id`,`address`)
+  UNIQUE INDEX `fk_domain_id` (`domain_id`,`address`)
 ) COMMENT = 'This is the main address table. It represents an address as in RFC2822';
-
 
 --
 -- Mailbox table.
 -- 
 -- Local delivered mailboxes.
 
-CREATE TABLE `mailbox` (
+CREATE TABLE IF NOT EXISTS `mailbox` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT, -- Technical id.
   `address_id` bigint(20) unsigned NOT NULL REFERENCES `address`(`id`), -- Reference to address.
   `path` varchar(255) NOT NULL, -- Relative path to the mailbox.
   `quota` bigint(20) unsigned DEFAULT NULL, -- Quota for this mailbox.
   `delivery` varchar(255) NOT NULL, -- Delivery transport.
   `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- Update date, for technical usage only.
+  `bytes` bigint(20) NOT NULL DEFAULT '0', -- number of bytes in the mailbox, filled by dovecot
+  `messages` int(11) NOT NULL DEFAULT '0', -- number of messages in the mailbox, filled by dovecot 
+  `lastlogin` datetime NOT NULL, -- Last login, filled by dovecot
+  `mail_action` varchar(8) NOT NULL, -- mail_action is DELETE or DELETING when deleting a mailbox by cron 
   PRIMARY KEY (`id`),
   UNIQUE KEY `address_id` (`address_id`)
 ) COMMENT = 'Table containing local deliverd mailboxes.';
