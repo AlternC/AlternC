@@ -3,6 +3,9 @@
 require_once("../class/config.php");
 if (!defined("QUOTASONE")) return;
 
+if (!isset($mode)) { # when included from adm_login, mode is not set
+  $mode = 0;
+}
 ?>
 <center>
 
@@ -69,7 +72,12 @@ if (!defined("QUOTASONE")) return;
       }
       echo "</td></tr>";
     }
-    $tpc = intval(100 * $domsize / $totalmail);
+    if ($totalmail) {
+      $tpc = intval(100 * $domsize / $totalmail);
+    } else {
+      $tpc = 0;
+    }
+    if (count($alias_sizes) > 0) {
     echo "<tr><td><i>". _('Total'). " {$domaine}</i></td><td></td>";
     echo "<td";
     if ($mode!=2) echo " style=\"text-align: right\"";
@@ -82,6 +90,7 @@ if (!defined("QUOTASONE")) return;
       echo "<img src=\"hippo_bleue.gif\" style=\"width: ".(2*$tpc)."px; height: 16px\" alt=\"".$tpc."%\" title=\"".$tpc."\"/>";
     }
     echo "</i></td></tr>";
+  }
   }
 ?>
 </tbody>
