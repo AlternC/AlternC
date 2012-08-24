@@ -685,3 +685,16 @@ select distinct concat(`m`.`login`,'@',`v`.`value`) AS `mail`,
 `m`.`mail` AS `alias`
 from ((`membres` `m` join `variable` `v`) join `domaines` `d`)
 where (`v`.`name` = 'mailname_bounce');
+
+
+--
+-- Structure de la table `piwik_users`
+--
+
+CREATE TABLE  IF NOT EXISTS `piwik_users` (
+`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+`uid` INT NOT NULL ,
+`login` VARCHAR( 255 ) NOT NULL ,
+`created_date` TIMESTAMP NOT NULL
+) ENGINE = MYISAM ;
+
