@@ -1,13 +1,9 @@
 <?php
 /*
- $Id: mail_doedit.php, author : squidly
  ----------------------------------------------------------------------
  AlternC - Web Hosting System
- Copyright (C) 2002 by the AlternC Development Team.
- http://alternc.org/
- ----------------------------------------------------------------------
- Based on:
- Valentin Lacambre's web hosting softwares: http://altern.org/
+ Copyright (C) 2000-2012 by the AlternC Development Team.
+ https://alternc.org/
  ----------------------------------------------------------------------
  LICENSE
 
@@ -23,7 +19,7 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Purpose of file: Create a new mail account
+ Purpose of file: Edit mail account settings
  ----------------------------------------------------------------------
 */
 
@@ -31,57 +27,98 @@
 require_once("../class/config.php");
 
 $fields = array (
-	"dom_id" =>array ("request","integer",""),
-	"mail_id" => array ("request","integer",""),
-	"pass" => array ("request","string",""),
-	"passconf" => array("request","string",""),
-	"is_enabled" => array("request","string",""),
-	"enable" => array("request","string","")
-);
+		 "mail_id" =>array ("request","integer",""),
+		 "pass" => array ("request","string",""),
+		 "passconf" => array("request","string",""),
+		 "quotamb" => array("request","integer",0),
+		 "enabled" => array("request","boolean",true),
+		 "islocal" => array("request","boolean",true),
+		 "recipients" => array("request","string",""),
+		 );
 
 getFields($fields);
 
-/*
-* checking the password
-*/
+$isedit=true; // if we go back to edit, it will know ;)
+$error="";
 
-if(isset($pass) && $pass != ""){
-	if($pass != $passconf){
-		$error = _("Password do not match");
-		include ("mail_edit.php");
-		exit();
-	}else{
-		//adding the password
-		$mail->setpasswd($mail_id,$pass);
-		header ("Location: /mail_properties.php?mail_id=$mail_id");
-	}	
-}
-/*
-* checking the activation state of the mail
-* redirecting according to it.
-*/
-if($is_enabled == 1){
-	if(intval($enable)==0){
-		//desactivation	
-		$mail->disable($mail_id);
-		header ("Location: /mail_properties.php?mail_id=$mail_id");
-	}else{
-		$error = _("Already Activated");
-		include ("mail_edit.php");
-		exit();
-	}
-}elseif($is_enabled == 0){
-	if(intval($enable)==0){
-		// c'est dja inactif
-		$error = _("Already disabled ");
-		include ("mail_edit.php");
-		exit();
-	}else{
-		//Activation
-		$mail->enable($mail_id);
-		header ("Location: /mail_properties.php?mail_id=$mail_id");
-	}
+// We check that email first ... so that we can compare its status with our ...
+if (!$res=$mail->get_details($mail_id)) {
+  $error=$err->errstr();
+  include("main.php");
+  exit();
+} else {
+  
+  
+  /*
+   * checking the password
+   */
+  if(isset($pass) && $pass != ""){
+    if($pass != $passconf){
+      $error = _("Passwords do not match");
+      include ("mail_edit.php");
+      exit();
+    } else {
+      if (!$mail->set_passwd($mail_id,$pass)) { /* SET THE PASSWORD */
+	$error=$err->errstr();
+	include ("mail_edit.php");
+	exit();
+      } else {
+	$error.=$err->errstr()."<br />";
+      }
+    }	
+  }
 
-}
 
+  /* 
+   * now the enable/disable status
+   */
+  if ($res["enabled"] && !$enabled) {
+    if (!$mail->disable($mail_id)) { /* DISABLE */
+      $error=$err->errstr();
+      include ("mail_edit.php");
+      exit();
+    } else {
+      $error.=$err->errstr()."<br />";
+    }
+  }
+  if (!$res["enabled"] && $enabled) {
+    if (!$mail->enable($mail_id)) { /* ENABLE */
+      $error=$err->errstr();
+      include ("mail_edit.php");
+      exit();
+    } else {
+      $error.=$err->errstr()."<br />";
+    }
+  }
+
+
+  /* 
+   * now the islocal + quota + recipients 
+   */
+  if (!$mail->set_details($mail_id,$islocal,$quotamb,$recipients)) { /* SET OTHERS */
+    $error=$err->errstr();
+    include ("mail_edit.php");
+    exit();
+  } else {
+    $error.=$err->errstr()."<br />";
+  }
+
+
+  /* 
+   * Other elements by hooks
+   */
+  $rh=$hooks->invoke("mail_edit_post",array($mail_id));
+  if (in_array(false,$res,true)) {
+    include ("mail_edit.php");
+    exit();
+  } else {
+    foreach($rh as $h) if ($h) $error.=$h."<br />";
+  }
+
+} 
+
+if ($error) $error=_("Your email has been edited successfully");
+
+$_REQUEST["domain_id"]=$dom->get_domain_byname($res["domain"]);
+include("mail_list.php");
 

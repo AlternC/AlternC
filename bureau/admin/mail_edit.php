@@ -26,7 +26,13 @@ require_once("../class/config.php");
 include_once("head.php");
 
 $fields = array (
-	"mail_id"     => array ("request", "integer", ""),
+	"mail_id" =>array ("request","integer",""),
+	"pass" => array ("request","string",""),
+	"passconf" => array("request","string",""),
+	"quotamb" => array("request","integer",0),
+	"enabled" => array("request","boolean",true),
+	"islocal" => array("request","boolean",true),
+	"recipients" => array("request","string",""),
 );
 getFields($fields);
 
@@ -35,21 +41,48 @@ if (!$res=$mail->get_details($mail_id)) {
   include("main.php");
   exit();
 } else {
-foreach($res as $key=>$val) $$key=$val;
+  
+  foreach($res as $key=>$val) $$key=$val;
+  $quotamb=$quota;
+
+  if ($islocal && $mailbox_action=="DELETE") $islocal=false;
+  
+  if (isset($isedit) && $isedit) getFields($fields); // we came from a POST, so let's get the request again ...
 
 ?>
 <h3><?php printf(_("Editing the email %s"),$res["address"]."@".$res["domain"]); ?></h3>
 <hr id="topbar"/>
 <br />
 
+
+<?php
+if (isset($error)) {
+  	echo "<p class=\"error\">$error</p>";
+}
+?>
+
 <form action="mail_doedit.php" method="post" name="main" id="main">
 <input type="hidden" name="mail_id" value="<?php echo $mail_id; ?>" />
 <table class="tedit">
+  <tr><th colspan="2"><b><?php __("Is this email enabled?"); ?></b></th></tr>
+
+  <tr><td style="width: 50%; text-align: justify"><?php __("You can enable or disable this email anytime. This will bounce any mail received on this address, but will not delete the stored email, or the redirections or password."); ?><br />
+</td>
+    <td>
+      <p>
+	<input type="radio" name="enabled" id="enabled0" class="inc" value="0"<?php cbox($enabled==0); ?> /><label for="enabled0"><?php __("No (email disabled)"); ?></label>
+	<input type="radio" name="enabled" id="enabled1" class="inc" value="1"<?php cbox($enabled==1); ?> /><label for="enabled1"><?php __("Yes (email enabled)"); ?></label>
+      </p>
+  </td></tr>
+
   <tr><th colspan="2"><b><?php __("Is it a POP/IMAP account?"); ?></b></th></tr>
   <tr><td style="width: 50%; text-align: justify"><?php __("POP/IMAP accounts are receiving emails in the server. To read those emails, you can use a Webmail, or a mail client such as Thunderbird. If you don't use POP/IMAP, you can configure your email to be a redirection to other existing emails. The maximum size is in megabytes, use 0 to make it infinite."); ?><br />
 <p>&nbsp;</p>
 <?php if ($islocal) { ?>
 <p><?php printf(_('This mailbox is currently using %1$s / %2$s'),format_size($used),format_size($quotabytes)); ?></p>
+<?php } ?>
+<?php if ($mailbox_action=="DELETE") { ?>
+<p><span class="error"><?php __("This mailbox is pending deletion. You can recover its mails by setting it to 'Yes' NOW!"); ?></span></p>
 <?php } ?>
 </td>
     <td>
@@ -61,7 +94,7 @@ foreach($res as $key=>$val) $$key=$val;
 	<table class="tedit" >
 	  <tr><td><label for="pass"><?php __("Enter a POP/IMAP password"); ?></label></td><td><input type="password" class="int" name="pass" id="pass" value="" size="20" maxlength="32" /></td></tr>
 	  <tr><td><label for="passconf"><?php __("Confirm password"); ?></label></td><td><input type="password" class="int" name="passconf" id="passconf" value="" size="20" maxlength="32" /></td></tr>
-	  <tr><td><label for="quota"><?php __("Maximum allowed size of this Mailbox"); ?></label></td><td><input type="text" class="int intleft" style="text-align: right" name="quota" id="quota" value="<?php ehe($quota); ?>" size="7" maxlength="6" /><span class="int intright"><?php __("MB"); ?></span></td></tr>
+	  <tr><td><label for="quotamb"><?php __("Maximum allowed size of this Mailbox"); ?></label></td><td><input type="text" class="int intleft" style="text-align: right" name="quotamb" id="quotamb" value="<?php ehe($quotamb); ?>" size="7" maxlength="6" /><span class="int intright"><?php __("MB"); ?></span></td></tr>
 	</table>
       </div>
   </td></tr>
@@ -101,14 +134,14 @@ function popoff() {
     $('#turnoff').show(); 
     $('#poptbl').addClass('grey'); 
     $('#pass').attr("disabled", "disabled");
-    $('#quota').attr("disabled", "disabled");
+    $('#quotamb').attr("disabled", "disabled");
     $('#passconf').attr("disabled", "disabled");
 }
 function popon() {
     $('#turnoff').hide(); 
     $('#poptbl').removeClass('grey'); 
     $('#pass').removeAttr("disabled");
-    $('#quota').removeAttr("disabled");
+    $('#quotamb').removeAttr("disabled");
     $('#passconf').removeAttr("disabled");
 }
 </script>

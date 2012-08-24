@@ -46,7 +46,8 @@ Merci de revenir plus tard.";
 */
     ini_set('display_errors', true);
 
-// Some constant
+// FIXME: Some constant, we put them here so that we can change them later ;) LFS 
+define('ALTERNC_MAIL',     "/var/alternc/mail");
 define('ALTERNC_HTML',     "/var/alternc/html");
 define('ALTERNC_PANEL',    "/var/alternc/bureau");
 define('ALTERNC_LOGS',     "/var/alternc/logs");

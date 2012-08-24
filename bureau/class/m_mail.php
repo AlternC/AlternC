@@ -169,7 +169,7 @@ class m_mail {
 
     // Validate the email syntax:
     $m=$mail."@".$domain;
-    if (!filter_var($m,FILTER_VALIDATE_EMAIL)){
+    if (!filter_var($m,FILTER_VALIDATE_EMAIL) || (strpos($m,"..")!==false)  || (strpos($m,"/")!==false) ) {
       $err->raise("mail",_("The email you entered is syntaxically incorrect"));
       return false;
     }
@@ -211,10 +211,13 @@ class m_mail {
     $err->log("mail","get_details");
 
     $mail_id=intval($mail_id);
+    // Validate that this email is owned by me...
+    if (!($mail=$this->is_it_my_mail($mail_id))) {
+      return false;
+    }
 
     // We fetch all the informations for that email: these will fill the hastable : 
-    $db->query("SELECT a.address, a.password, a.`enabled`, d.domaine AS domain, m.quota, m.quota*1024*1024 AS quotabytes, m.bytes AS used, NOT ISNULL(m.id) AS islocal, a.type, r.recipients, m.lastlogin  
-         FROM (address a LEFT JOIN mailbox m ON m.address_id=a.id) LEFT JOIN recipient r ON r.address_id=a.id, domaines d WHERE a.id=$mail_id AND d.id=a.domain_id;");
+    $db->query("SELECT a.address, a.password, a.enabled, d.domaine AS domain, m.quota, m.quota*1024*1024 AS quotabytes, m.bytes AS used, NOT ISNULL(m.id) AS islocal, a.type, r.recipients, m.lastlogin, a.mail_action, m.mail_action AS mailbox_action FROM (address a LEFT JOIN mailbox m ON m.address_id=a.id) LEFT JOIN recipient r ON r.address_id=a.id, domaines d WHERE a.id=".$mail_id." AND d.id=a.domain_id;");
     if (! $db->next_record()) return false;
     $details=$db->Record;
     // if necessary, fill the typedata with data from hooks ...
@@ -226,6 +229,8 @@ class m_mail {
   }
 
 
+  private $isitmy_cache=array(); 
+
   /* ----------------------------------------------------------------- */
   /** Check if an email is mine ...
    *
@@ -236,12 +241,15 @@ class m_mail {
   function is_it_my_mail($mail_id){
     global $err,$db,$cuid;
     $mail_id=intval($mail_id);
+    // cache it (may be called more than one time in the same page).
+    if (isset($this->isitmy_cache[$mail_id])) return $this->isitmy_cache[$mail_id];
+
     $db->query("SELECT concat(a.address,'@',d.domaine) AS email FROM address a, domaines d WHERE d.id=a.domain_id AND a.id=$mail_id AND d.compte=$cuid;");
     if ($db->next_record()) {
-      return $db->f("email");
+      return $this->isitmy_cache[$mail_id]=$db->f("email");
     } else {
       $err->raise("mail",_("This email is not yours, you can't change anything on it"));
-      return false;
+      return $this->isitmy_cache[$mail_id]=false;
     }
   }
 
@@ -353,6 +361,101 @@ class m_mail {
   }
 
 
+  /* ----------------------------------------------------------------- */
+  /** set the password of an email address.
+   * @param $mail_id integer email ID 
+   * @param $pass string the new password.
+   * @return boolean true if the password has been set, false else, raise an error.
+   */  
+  function set_passwd($mail_id,$pass){
+    global $db,$err,$admin;
+    $err->log("mail","setpasswd");
+
+    if (!($email=$this->is_it_my_mail($mail_id))) return false;
+    if (!$admin->checkPolicy("pop",$email,$pass)) return false;
+    if (!$db->query("UPDATE address SET password='"._md5cr($pass)."' where id=$mail_id;")) return false;
+    return true;
+  }
+
+
+  /* ----------------------------------------------------------------- */
+  /** Enables an email address.
+   * @param $mail_id integer Email ID
+   * @return boolean true if the email has been enabled.
+   */  
+  function enable($mail_id){
+    global $db,$err;
+    $err->log("mail","enable");
+    if (!($email=$this->is_it_my_mail($mail_id))) return false;
+    if (!$db->query("UPDATE address SET `enabled`=1 where id=$mail_id;")) return false;
+    return true;
+  }
+
+
+  /* ----------------------------------------------------------------- */
+  /** Disables an email address.
+   * @param $mail_id integer Email ID
+   * @return boolean true if the email has been enabled.
+   */ 
+  function disable($mail_id){
+    global $db,$err;
+    $err->log("mail","disable");
+    if (!($email=$this->is_it_my_mail($mail_id))) return false;
+    if (!$db->query("UPDATE address SET `enabled`=0 where id=$mail_id;")) return false;
+    return true;
+  }
+
+
+  /* ----------------------------------------------------------------- */
+  /** Function used to update an email settings
+   * should be used by the web interface, not by third-party programs.
+   *
+   * @param $mail_id integer the number of the email to delete
+   * @param $islocal boolean is it a POP/IMAP mailbox ?
+   * @param $quotamb integer if islocal=1, quota in MB
+   * @param $recipients string recipients, one mail per line.
+   * @return true if the email has been properly edited
+   * or false if an error occured ($err is filled accordingly)
+   */ 
+  function set_details($mail_id, $islocal, $quotamb, $recipients) {
+    global $err,$db,$cuid,$quota,$dom,$hooks;
+    $err->log("mail","set_details");
+    if (!($me=$this->get_details($mail_id))) {
+      return false;
+    }
+    if ($me["islocal"] && !$islocal) {
+      // delete pop
+      $db->query("UPDATE mailbox SET mail_action='DELETE' WHERE address_id=".$mail_id.";");
+    } 
+    if (!$me["islocal"] && $islocal) {
+      // create pop
+      $path=ALTERNC_MAIL."/".substr($me["address"]."_",0,1)."/".$me["address"]."_".$me["domain"];
+      $db->query("INSERT INTO mailbox SET address_id=".$mail_id.", path='".addslashes($path)."';");
+    }
+    if ($me["islocal"] && $islocal && $me["mailbox_action"]=="DELETE") {
+      $db->query("UPDATE mailbox SET mail_action='' WHERE mail_action='DELETE' AND address_id=".$mail_id.";");
+    }
+
+    if ($islocal) {
+      $db->query("UPDATE mailbox SET quota=".intval($quotamb)." WHERE address_id=".$mail_id.";");
+    }
+
+    $r=explode("\n",$recipients);
+    $red="";
+    foreach($r as $m) {
+      $m=trim($m);
+      if ($m && filter_var($m,FILTER_VALIDATE_EMAIL)) {
+	$red.=$m."\n";
+      }
+    }
+    $db->query("DELETE FROM recipient WHERE address_id=".$mail_id.";");
+    if ($m) {
+      $db->query("INSERT INTO recipient SET address_id=".$mail_id.", recipients='".addslashes($red)."';");
+    }
+    return true;
+  }
+
+
 
 
   /* ############################################################ */
@@ -442,39 +545,6 @@ class m_mail {
   }
   
 
-
- /** 
-  * activate a mail address.
-  * @param integer mail_id: unique mail identifier
-  */  
-  function enable($mail_id){
-    global $db,$err;
-    $err->log("mail","enable");
-    if( !$db->query("UPDATE address SET `enabled`=1 where id=$mail_id;"))return false;
-  }
-
-
- /** 
-  * disable a mail address.
-  * @param integer mail_id: unique mail identifier
-  */  
-  function disable($mail_id){
-    global $db,$err;
-    $err->log("mail","enable");
-    if( !$db->query("UPDATE address SET `enabled`=0 where id=$mail_id;")) return false;
-  }
-
-
- /** 
-  * setpasswd a mail address.
-  * @param integer mail_id: unique mail identifier
-  */  
-  function setpasswd($mail_id,$pass,$passwd_type){
-    global $db,$err,$admin;
-    $err->log("mail","setpasswd");
-    if(!$admin->checkPolicy("pop",$mail_full,$pass)) return false;
-    if(!$db->query("UPDATE address SET password='"._md5cr($pass)."' where id=$mail_id;")) return false;
-  }
 
 
  /** 
