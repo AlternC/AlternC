@@ -27,7 +27,8 @@ require_once("../class/config.php");
 include_once("head.php");
 
 $fields = array (
-		 "domain_id"    => array ("request", "integer", ""),
+		 "mail_arg"    => array ("request", "integer", ""), // from mail_add.php in case of error
+		 "domain_id"    => array ("request", "integer", ""), 
 		 "search"    => array ("request", "string", ""),
 		 "offset"    => array ("request", "integer", 0),
 		 "count"    => array ("request", "integer", 50),
@@ -61,7 +62,7 @@ if ($quota->cancreate("mail")) {
 ?>
 <h3><?php __("Create a new mail account");?></h3>
 	<form method="post" action="mail_doadd.php" id="main" name="mail_create">
-		<input type="text" class="int intleft" style="text-align: right" name="mail_arg" value="" size="32" id="mail_arg" maxlength="255" /><span id="emaildom" class="int intright"><?php echo "@".$domain; ?></span>
+		<input type="text" class="int intleft" style="text-align: right" name="mail_arg" value="<?php ehe($mail_arg); ?>" size="32" id="mail_arg" maxlength="255" /><span id="emaildom" class="int intright"><?php echo "@".$domain; ?></span>
 		<input type="hidden" name="domain_id"  value="<?php echo $domain_id;?>" />
 		<input type="submit" name="submit" class="inb" value="<?php __("Create this email address"); ?>" />
 	</form>
@@ -73,20 +74,20 @@ if (empty($mails_list)){ // If there is no mail for this domain
 } else {
 ?>
 <br />
-<hr />
+<hr id="topbar"/>
 <h3><?php printf(_("Email addresses of the domain %s"),$domain); ?> : </h3>
 
 
 <table class="searchtable"><tr><td>
-<form method="get" name="" action="mail_list.php">
+<form method="get" name="formlist1" id="formlist1" action="mail_list.php">
 <input type="hidden" name="domain_id" value="<?php echo $domain_id; ?>" />
 <input type="hidden" name="offset" value="0" />
-<span class="int intleft"><img src="/images/search.png" style="vertical-align: middle"/> </span><input type="text" name="search" value="<?php ehe($search); ?>" size="20" maxlength="64" class="int intright" />
+<span class="int intleft"><img alt="<?php __("Search"); ?>" title="<?php __("Search"); ?>" src="/images/search.png" style="vertical-align: middle"/> </span><input type="text" name="search" value="<?php ehe($search); ?>" size="20" maxlength="64" class="int intright" />
 </form>
 </td><td>
 <?php pager($offset,$count,$mail->total,"mail_list.php?domain_id=".$domain_id."&amp;count=".$count."&amp;search=".urlencode($search)."&amp;offset=%%offset%%"); ?>
 </td><td style="text-align:right">
-<form method="get" name="" action="mail_list.php">
+<form method="get" name="formlist2" id="formlist2" action="mail_list.php">
  <input type="hidden" name="domain_id" value="<?php echo $domain_id; ?>" />
  <input type="hidden" name="offset" value="0" />
  <?php __("Items per page:"); ?> <select name="count" class="inl" onchange="submit()"><?php eoption($counts,$count); ?></select>
