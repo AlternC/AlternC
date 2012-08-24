@@ -66,6 +66,7 @@ if (isset($error) && $error) {
  <li class="lst1"><a href="adm_variables.php"><?php __("Configure AlternC variables"); ?></a></li>
  <li class="lst2"><a href="adm_domstype.php"><?php __("Manage domains type"); ?></a></li>
  <li class="lst1"><a href="adm_dnsweberror.php"><?php __("DNS and website having errors"); ?></a></li>
+ <li class="lst2"><a href="adm_menulist.php"><?php __("Manage menu"); ?></a></li>
 <!--  <li class="lst2"><a href="stats_members.php"><?php __("Account creation statistics"); ?></a></li> -->
 </ul>
 

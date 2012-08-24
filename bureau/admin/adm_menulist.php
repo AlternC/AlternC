@@ -1,6 +1,6 @@
 <?php
 /*
-$Id: adm_email.php,v 1.1 2005/09/05 10:55:48 arnodu59 Exp $
+$Id: adm_menulist.php,v 1.1 2005/09/05 10:55:48 arnodu59 Exp $
 ----------------------------------------------------------------------
 AlternC - Web Hosting System
 Copyright (C) 2005 by the AlternC Development Team.
@@ -34,28 +34,52 @@ include("head.php");
 ?>
 <body>
 <h3><?php __("About AlternC"); ?></h3>
-<i><?php __("Hosting control panel");?></i>
 <hr/>
-<p>
 <?php
-__("AlternC is an automatic hosting software suite. It features a PHP-based administration interface and scripts that manage server configuration. <br/>It manages, among others, email, Web, Web statistics, and mailing list services. It is available in many languages. It is a free software distributed under GPL license.");
-?>
-<p>
+$menu_available=array();
+$menu_activated=array();
+$menu_error=array();
 
-<p>
-  <ul>
-    <li><?php __("Official website: ");?> <a target=_blank href="http://alternc.com">http://alternc.com</a></li>
-    <li><?php __("Developer website: ");?> <a target=_blank href="https://alternc.org">https://alternc.org</a></li>
-    <li><?php __("Help: ");?> <a target=_blank href="http://aide-alternc.org">http://aide-alternc.org</a></li>
-  </ul>
-</li>
+$MENUPATH=ALTERNC_PANEL."/admin/";
+$file=file("/etc/alternc/menulist.txt", FILE_SKIP_EMPTY_LINES);
+foreach($file as $v) {
+  $v=trim($v);
+  if ( file_exists($MENUPATH.$v)) {
+    $menu_activated[]=$v;
+  } else {
+    $menu_error[]=$v;
+  }
+}
 
-<hr/>
-<p class="center"><a href="http://www.alternc.com" target="_blank"><img src="logo2.png" border="0" alt="AlternC" /></a>
-<br />
-<?php 
-__("You are currently using AlternC ");
-echo " $L_VERSION"; 
+$c=opendir($MENUPATH);
+while ($di=readdir($c)) {
+  if (preg_match("#^menu_.*\\.php$#",$di,$match)) {
+    $menu_available[]=$match[0];
+  }
+}
+closedir($c);
+
+asort($menu_available);
+asort($menu_activated);
+asort($menu_error);
+
+
+$menu_diff=array_diff($menu_available,$menu_activated);
+
+__("Edit the file /etc/alternc/menulist.txt to enable, disable ou change order of menu entry.");
 ?>
+<h4><?php __("Menu actually activated"); ?></h4>
+<ul>
+  <?php foreach($menu_activated as $m){ echo "<li>$m - <i>"._("shortdesc_$m")."</i></li>";} ?>
+</ul>
+<h4><?php __("Menu activated but not present"); ?></h4>
+<ul>
+  <?php foreach($menu_error as $m){ echo "<li>$m - <i>"._("shortdesc_$m")."</i></li>";} ?>
+</ul>
+<h4><?php __("Menu avalaible but not activated"); ?></h4>
+<ul>
+  <?php foreach($menu_diff as $m){ echo "<li>$m - <i>"._("shortdesc_$m")."</i></li>";} ?>
+</ul>
+
 
 <?php include_once('foot.php');?>
