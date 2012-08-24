@@ -5,7 +5,7 @@ if (!defined("QUOTASONE")) return;
 
 ?><!-- Les Mails -->
 <center>
-	    <p><?php __("Account"); ?> <span style="font-weight: bold;"><?php echo $c["login"]; ?></span></p>
+	    <p><h3><center><?php __("Account"); ?> <span style="font-weight: bold;"><?php echo $c["login"]; ?></span></center></h3></p>
 <?php
 
 	list($totalweb)=@mysql_fetch_array(mysql_query("SELECT SUM(size) FROM size_web WHERE uid = '" . $c["uid"] . "'"));

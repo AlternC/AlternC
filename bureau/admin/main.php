@@ -62,21 +62,23 @@ if (file_exists($cache_file) && $timedif < $cache_time) {
 }
 $xml = @simplexml_load_string($string);
 
-// place the code below somewhere in your html
 echo '<table cellspacing="0" cellpadding="6" border="1" style="border-collapse: collapse">';
-echo '<tr><th>'._("Title").'</th><th>'._("Date").'</th></tr>';
+echo "<tr><th colspan=2><a target=_blank style='font-size: 18px;font-weight: bold;color: #10507C;' href='".$xml->channel->link."'>".$xml->channel->title."</a><br/><i>".$xml->channel->description."</i></th></tr>";
+//echo '<tr><th>'._("Title").'</th><th>'._("Date").'</th></tr>';
 $count = 0;
 $max = 5;
 foreach ($xml->channel->item as $val) {
 if ($count < $max) {
   echo '
   <tr>
-    <td><a href="'.$val->link.'">'.$val->title.'</a></td><td>'.strftime("%d/%m/%Y" , strtotime($val->pubDate)).'</td></td>
-  </tr>';
+    <td '.(empty($val->pubDate)?'colpan=2':'').'><a target=_blank href="'.$val->link.'">'.$val->title.'</a></td>';
+    if (!empty($val->pubDate)) { echo '<td>'.strftime("%d/%m/%Y" , strtotime($val->pubDate)).'</td></td>'; }
+  echo '</tr>';
 }
 $count++;
 }
 echo "</table>\n</center>";
+echo "<br/>";
 
 } // empty feed_url
 
@@ -104,6 +106,7 @@ if($admin->enabled) {
 $c=@mysql_fetch_array(mysql_query("SELECT * FROM membres WHERE uid='".$cuid."';"));
 
 define("QUOTASONE","1");
+echo "<hr/>";
 require_once("quotas_oneuser.php");
 
 
