@@ -1,13 +1,9 @@
 #!/bin/bash -e
 #
-# $Id: fixperms.sh,v 1.1 2005/08/29 19:21:31 benjamin Exp $
 # ----------------------------------------------------------------------
 # AlternC - Web Hosting System
-# Copyright (C) 2002 by the AlternC Development Team.
-# http://alternc.org/
-# ----------------------------------------------------------------------
-# Based on:
-# Valentin Lacambre's web hosting softwares: http://altern.org/
+# Copyright (C) 2000-2012 by the AlternC Development Team.
+# https://alternc.org/
 # ----------------------------------------------------------------------
 # LICENSE
 #
@@ -23,19 +19,18 @@
 #
 # To read the license please visit http://www.gnu.org/copyleft/gpl.html
 # ----------------------------------------------------------------------
-# Original Author of file: Benjamin Sonntag for Metaconsult
-# Purpose of file: Fix permission and ownership of html files
+# Purpose of file: Fix permission, ACL and ownership of AlternC's files
 # ----------------------------------------------------------------------
 #
 
-#Default Query : fixperms for all account
+# Default Query : fixperms for all account
 query="SELECT uid,login FROM membres"
 sub_dir=""
 file=""
-#Two optionals argument
+# Two optionals argument
 # -l string : a specific login to fix
-# -u interger : a specific uid to fix
-# -f interger : a specific file to fix according to a given uid 
+# -u integer : a specific uid to fix
+# -f integer : a specific file to fix according to a given uid 
 
 while getopts "l:u:f:d:" optname
   do
@@ -105,7 +100,7 @@ doone() {
       INITIALE=`echo $LOGIN |cut -c1`
       REP="$ALTERNC_LOC/html/$INITIALE/$LOGIN/$sub_dir"
 
-      # Set the file readable only for the AlternC User
+      # Set the file readable only for the AlternC User
       chown -R alterncpanel:$GID "$REP"
       chmod 2770 -R "$REP"
 
@@ -115,13 +110,13 @@ doone() {
                     -Rm   g:alterncpanel:rwx -m u:$GID:rwx -m g:$GID:rwx -m mask:rwx\
                "$REP"
 
-      read GID LOGIN
+      read GID LOGIN || true
     done
 }
 
-fixefile(){
+fixfile() {
 	read GID LOGIN
-	/usr/bin/setfacl  -bk $file
+	/usr/bin/setfacl -bk $file
 	echo "gid: $GID"
 	echo "file: $file"
 	chown alterncpanel:$GID $file
@@ -131,9 +126,9 @@ fixefile(){
 
 }
 
-if [[  $file != "" ]]; then
-	if [ -e $file ]; then
-		mysql --defaults-file=/etc/alternc/my.cnf --skip-column-names -B -e "$query" |fixefile
+if [[ "$file" != "" ]]; then
+	if [ -e "$file" ]; then
+		mysql --defaults-file=/etc/alternc/my.cnf --skip-column-names -B -e "$query" |fixfile
 	else
 		echo "file not found"
 	fi
