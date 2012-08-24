@@ -217,15 +217,17 @@ class m_dom {
   /* ----------------------------------------------------------------- */
   /**
    * Retourne un tableau contenant les domaines d'un membre.
+   * Par défaut le membre connecté
    *
    * @return array retourne un tableau indexé contenant la liste des
    *  domaines hébergés sur le compte courant. Retourne FALSE si une
    *  erreur s'est produite.
    */
-  function enum_domains() {
+  function enum_domains($uid=-1) {
     global $db,$err,$cuid;
     $err->log("dom","enum_domains");
-    $db->query("select * from domaines where compte='$cuid' order by domaine asc;");
+    if ($uid == -1) { $uid = $cuid; }
+    $db->query("SELECT * FROM domaines WHERE compte='{$uid}' ORDER BY domaine ASC;");
     $this->domains=array();
     if ($db->num_rows()>0) {
       while ($db->next_record()) {
