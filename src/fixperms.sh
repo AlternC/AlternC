@@ -92,7 +92,7 @@ fi
 . "$CONFIG_FILE"
 
 doone() {
-    read GID LOGIN
+    read GID LOGIN || true
     while [ "$LOGIN" ] ; do
       if [ "$DEBUG" ]; then
         echo "Setting rights and ownership for user $LOGIN having gid $GID"
