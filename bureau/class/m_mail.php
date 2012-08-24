@@ -433,7 +433,7 @@ class m_mail {
       $db->query("INSERT INTO mailbox SET address_id=".$mail_id.", path='".addslashes($path)."';");
     }
     if ($me["islocal"] && $islocal && $me["mailbox_action"]=="DELETE") {
-      $db->query("UPDATE mailbox SET mail_action='' WHERE mail_action='DELETE' AND address_id=".$mail_id.";");
+      $db->query("UPDATE mailbox SET mail_action='OK' WHERE mail_action='DELETE' AND address_id=".$mail_id.";");
     }
 
     if ($islocal) {
