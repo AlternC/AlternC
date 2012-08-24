@@ -297,7 +297,7 @@ class m_mem {
     $err->log("mem","del_session");
     $_COOKIE["session"]=addslashes(isset($_COOKIE["session"])?$_COOKIE["session"]:'');
     setcookie("session","",0,"/");
-    setcookie("oldid","",0,"/admin/");
+    setcookie("oldid","",0,"/");
     if ($_COOKIE["session"]=="") {
       $err->error=0;
       return true;
@@ -327,6 +327,7 @@ class m_mem {
 	    $GLOBALS[$c]->alternc_del_session();
       }
     }
+    session_unset();
     return true;
   }
 
