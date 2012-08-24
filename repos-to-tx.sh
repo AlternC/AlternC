@@ -17,6 +17,11 @@
 # finally, push en_US to transifex
 # to be translated.
 
+if [ ! -x /usr/bin/tx ] ; then
+  echo "Package transifex-client is not installed."
+  echo "Install it to run $0."
+  exit 1
+fi
 
 pushd ../..
 
