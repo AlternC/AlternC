@@ -166,12 +166,28 @@ CREATE TABLE IF NOT EXISTS `cron` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 --
--- Piwik user tables
+-- Structure de la table `piwik_users`
 --
-CREATE TABLE  IF NOT EXISTS `piwik_users` (
-`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-`uid` INT NOT NULL ,
-`login` VARCHAR( 255 ) NOT NULL ,
-`created_date` TIMESTAMP NOT NULL
-) ENGINE = MYISAM ;
+
+CREATE TABLE IF NOT EXISTS `piwik_users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) NOT NULL,
+  `login` varchar(255) NOT NULL,
+  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uniq_user` (`login`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
+
+--
+-- Structure de la table `piwik_sites`
+--
+
+CREATE TABLE IF NOT EXISTS `piwik_sites` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) NOT NULL,
+  `piwik_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_site_per_user` (`uid`,`piwik_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
 
