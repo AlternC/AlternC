@@ -40,7 +40,9 @@ if ($q["t"]) {
 <ul>
 <li><a href="sql_list.php"><?php __("Databases"); ?></a></li>
 <li><a href="sql_users_list.php"><?php __("MySQL Users") ?></a></li>
-<li><a target="_blank" href="sql_admin.php"><?php __("PhpMyAdmin"); ?></a></li>
+<?php if ($q["u"] > 0 ) { ?>
+  <li><a target="_blank" href="sql_admin.php"><?php __("PhpMyAdmin"); ?></a></li>
+<?php } ?>
 </ul>
 </div>
 </div>
