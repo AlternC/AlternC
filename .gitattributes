@@ -258,6 +258,7 @@ bureau/admin/mail_localbox_edit.inc.php -text
 bureau/admin/mail_properties.php -text
 bureau/admin/mail_redirection_doedit.php -text
 bureau/admin/mail_redirection_edit.inc.php -text
+bureau/admin/mail_undelete.php -text
 bureau/admin/main.php -text
 bureau/admin/mem_admin.php -text
 bureau/admin/mem_chgmail.php -text

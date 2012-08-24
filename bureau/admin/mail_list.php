@@ -95,6 +95,7 @@ if (empty($mails_list)){ // If there is no mail for this domain
 </fieldset>
 
 <form method="post" action="mail_del.php">
+ <input type="hidden" name="domain_id" value="<?php echo $domain_id; ?>" />
 <table class="tlist">
 <tr><th></th><th></th><th><?php __("Enabled");?></th><th style="text-align:right"><?php __("Address"); ?></th><th><?php __("Pop/Imap"); ?></th><th><?php __("Other recipients"); ?></th><th><?php __("Last login time"); ?></th></tr>
 <?php
@@ -102,16 +103,22 @@ if (empty($mails_list)){ // If there is no mail for this domain
 $col=1; $i=0;
 //listing of every mail of the current domain.
 while (list($key,$val)=each($mails_list)){
-	$col=3-$col;
+  $col=3-$col; $grey="";
 	?>
 	<tr class="lst<?php echo $col; ?>">
-	  <?php if (!$val["type"]) { ?>
-        <td align="center">
-	    <input class="inc" type="checkbox" id="del_<?php echo $i; ?>" name="d[]\" value="<?php ehe($val["address"]."@".$val["domain"]); ?>" />
+	   <?php if ($val["mail_action"]=="DELETING") { $grey="grey"; ?>
+	  <td colspan="3"><?php __("Deleting..."); ?></td>
+	  <?php } else if ($val["mail_action"]=="DELETE") { $grey="grey"; ?>
+	  <td></td>
+	  <td><div class="ina"><a href="mail_undelete.php?search=<?php ehe($search); ?>&offset=<?php ehe($offset); ?>&count=<?php ehe($count); ?>&domain_id=<?php ehe($domain_id);  ?>&mail_id=<?php echo $val["id"] ?>"><img src="images/undelete.png" alt="<?php __("Undelete"); ?>" /><?php __("Undelete"); ?></a></div></td>
+	  <td><img src="images/check_no.png" alt="<?php __("Disabled"); ?>" /></td>	  
+	  <?php } else if (!$val["type"]) { ?>
+          <td align="center">
+	    <input class="inc" type="checkbox" id="del_<?php echo $i; ?>" name="d[]" value="<?php ehe($val["id"]); ?>" />
 	</td>
-	<td>
+	<td class="<?php echo $grey; ?>">
 	  <div class="ina"><a href="mail_properties.php?mail_id=<?php echo $val["id"] ?>"><img src="images/edit.png" alt="<?php __("Edit"); ?>" /><?php __("Edit"); ?></a></div></td>
-	<td><?php if ($val["enabled"] ) { ?>
+	<td class="<?php echo $grey; ?>"><?php if ($val["enabled"] ) { ?>
 			<img src="images/check_ok.png" alt="<?php __("Enabled"); ?>" />
 		<?php } else { ?>
 			<img src="images/check_no.png" alt="<?php __("Disabled"); ?>" />
@@ -120,14 +127,14 @@ while (list($key,$val)=each($mails_list)){
 	<?php } else { ?>
 	<td colspan="3"></td>
 	<?php } ?>
-	<td style="text-align:right"><?php echo $val["address"]."@".$domain ?></td>
+	<td  class="<?php echo $grey; ?>" style="text-align:right"><?php echo $val["address"]."@".$domain ?></td>
 	<?php if ($val["type"]) { ?>
 	<td colspan="2"><?php echo $val["typedata"]; ?></td>
 	<?php } else { ?>
-	<td><?php if ($val["islocal"]) echo format_size($val["used"])."/".format_size($val["quota"]); else __("No"); ?></td>
-	<td><?php echo $val["recipients"]; /* TODO : if >60chars, use "..." + js close/open */ ?></td>
+	<td class="<?php echo $grey; ?>"><?php if ($val["islocal"]) echo format_size($val["used"])."/".format_size($val["quota"]); else __("No"); ?></td>
+	<td class="<?php echo $grey; ?>"><?php echo $val["recipients"]; /* TODO : if >60chars, use "..." + js close/open */ ?></td>
 	<?php } ?>
-        <td><?php if ($val["islocal"]) { 
+        <td class="<?php echo $grey; ?>"><?php if ($val["islocal"]) { 
 if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"],11,5); else if (substr($val["lastlogin"],0,10)=="0000-00-00") __("Never"); else echo format_date(_('%3$d-%2$d-%1$d'),$val["lastlogin"]);
 } ?></td>
 	</tr>

@@ -27,7 +27,7 @@ require_once("../class/config.php");
 
 $fields = array (
 	"d"    => array ("request", "array", ""),
-	"domain"  => array ("request", "string", ""),
+	"domain_id"  => array ("request", "integer", ""),
 	"confirm" => array("request", "string", "n"),
 );
 getFields($fields);
@@ -41,16 +41,19 @@ reset($d);
 include_once ("head.php");
 
 if ($confirm=="y") {
-
-while (list($key,$val)=each($d)) {
-	if (!$mail->del_mail($val)) {
-		$error.=sprintf(_("The email address <b>%s</b> does not exist!")."<br />",$val);
-	} else {
-		$error.=sprintf(_("The email address <b>%s</b> has been deleted!")."<br />",$val); 
-	}
-}
-include("mail_list.php");
- exit();
+  $error="";
+  while (list($key,$val)=each($d)) {
+    $mail->delete($val);
+    $error.=$err->errstr()."<br />"; 
+    /*
+      $error.=$err->errstr()."<br />"; //sprintf(_("The email address <b>%s</b> does not exist!")."<br />",$val);
+    } else {
+      $error.=sprintf(_("The email address <b>%s</b> has been deleted!")."<br />",$val); 
+      }
+    */
+  }
+  include("mail_list.php");
+  exit();
 }
 
 ?>
@@ -63,13 +66,14 @@ include("mail_list.php");
 <form method="post" action="mail_del.php" id="main">
 <p>
 <input type="hidden" name="confirm" value="y" />
-<input type="hidden" name="domain" value="<?php echo $domain; ?>" />
+<input type="hidden" name="domain_id" value="<?php echo $domain_id; ?>" />
 
 <?php
 
 while (list($key,$val)=each($d)) {
+  $m=$mail->get_details($val);
   echo "<input type=\"hidden\" name=\"d[]\" value=\"$val\" />";
-  echo $val."<br />";
+  echo $m["address"]."@".$m["domain"]."<br />";
 }
 
 ?>

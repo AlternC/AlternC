@@ -1181,6 +1181,32 @@ class m_dom {
       return false;
     }
   }
+
+
+
+  /* ----------------------------------------------------------------- */
+  /**
+   * Returns the id of a domain for the current user, from it's domain name
+   * @param $domain string the domain name to search for
+   * @return integer the domain id, or false with an error raised.
+   */
+  function get_domain_byname($domain) {
+    global $db,$err,$cuid;
+    $domain=trim($domain);
+    $db->query("SELECT id FROM domaines WHERE domaine='".addslashes($domain)."' AND compte=$cuid;");
+    if ($db->next_record()) {
+      $id=$db->f("id");
+      if (!$id) {
+	$err->raise("dom",_("This domain is not installed in your account"));
+	return false;
+      } else {
+	return $id;
+      }
+    } else {
+      $err->raise("dom",_("This domain is not installed in your account"));
+      return false;
+    }
+  }
   
 
   /* ----------------------------------------------------------------- */

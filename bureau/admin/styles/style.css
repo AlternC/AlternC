@@ -461,3 +461,6 @@ input#dir, input#sub_local {
     padding-top: 6px;
 }
 
+.grey {
+    color: #999;
+}

@@ -118,7 +118,7 @@ class m_mail {
     $db->next_record();
     $this->total=$db->f("total");
 
-    $db->query("SELECT a.id, a.address, a.password, a.enabled, d.domaine AS domain, m.quota*1024*1024 AS quota, m.bytes AS used, NOT ISNULL(m.id) AS islocal, a.type, r.recipients, m.lastlogin  
+    $db->query("SELECT a.id, a.address, a.password, a.`enabled`, a.mail_action, d.domaine AS domain, m.quota*1024*1024 AS quota, m.bytes AS used, NOT ISNULL(m.id) AS islocal, a.type, r.recipients, m.lastlogin  
          FROM (address a LEFT JOIN mailbox m ON m.address_id=a.id) LEFT JOIN recipient r ON r.address_id=a.id, domaines d 
          WHERE $where AND d.id=a.domain_id 
          LIMIT $offset,$count;");
@@ -142,7 +142,7 @@ class m_mail {
 
 
   /* ----------------------------------------------------------------- */
-  /** Function used to insert a new mail into de the db
+  /** Function used to insert a new mail into the db
    * should be used by the web interface, not by third-party programs.
    *
    * This function calls the hook "hooks_mail_cancreate"
@@ -155,7 +155,7 @@ class m_mail {
    * or false if an error occured ($err is filled accordingly)
    */ 
   function create($dom_id, $mail){
-    global $err,$db,$cuid,$quota,$dom;
+    global $err,$db,$cuid,$quota,$dom,$hooks;
     $err->log("mail","create");
 
     // Validate the domain id
@@ -203,13 +203,13 @@ class m_mail {
   * @return array a hashtable with all the informations for that email
   */
   function get_details($mail_id) {
-    global $db, $err, $cuid;
+    global $db, $err, $cuid, $hooks;
     $err->log("mail","get_details");
 
     $mail_id=intval($mail_id);
 
     // We fetch all the informations for that email: these will fill the hastable : 
-    $db->query("SELECT a.address, a.password, a.enabled, d.domaine AS domain, m.quota, m.bytes/1024/1024 AS used, NOT ISNULL(m.id) AS islocal, a.type  
+    $db->query("SELECT a.address, a.password, a.`enabled`, d.domaine AS domain, m.quota, m.bytes/1024/1024 AS used, NOT ISNULL(m.id) AS islocal, a.type  
          FROM address a LEFT JOIN mailbox m ON m.address_id=a.id, domaines d WHERE a.id=$mail_id AND d.id=a.domain_id;");
     if (! $db->next_record()) return false;
     $details=$db->Record;
@@ -222,7 +222,131 @@ class m_mail {
   }
 
 
+  /* ----------------------------------------------------------------- */
+  /** Check if an email is mine ...
+   *
+   * @param $mail_id integer the number of the email to check
+   * @return string the complete email address if that's mine, false if not
+   * ($err is filled accordingly)
+   */ 
+  function is_it_my_mail($mail_id){
+    global $err,$db,$cuid;
+    $mail_id=intval($mail_id);
+    $db->query("SELECT concat(a.address,'@',d.domaine) AS email FROM address a, domaines d WHERE d.id=a.domain_id AND a.id=$mail_id AND d.compte=$cuid;");
+    if ($db->next_record()) {
+      return $db->f("email");
+    } else {
+      $err->raise("mail",_("This email is not yours, you can't change anything on it"));
+      return false;
+    }
+  }
 
+
+  /* ----------------------------------------------------------------- */
+  /** Function used to delete a mail from the db
+   * should be used by the web interface, not by third-party programs.
+   *
+   * @param $mail_id integer the number of the email to delete
+   * @return true if the email has been properly deleted 
+   * or false if an error occured ($err is filled accordingly)
+   */ 
+  function delete($mail_id){
+    global $err,$db,$cuid,$quota,$dom,$hooks;
+    $err->log("mail","delete");
+
+    $mail_id=intval($mail_id);
+
+    if (!$mail_id)  {
+      $err->raise("mail",_("The email you entered is syntaxically incorrect"));
+      return false;
+    }
+    // Validate that this email is owned by me...
+    if (!($mail=$this->is_it_my_mail($mail_id))) {
+      return false;
+    }
+
+    // Search for that address:
+    $db->query("SELECT a.id, a.type, a.mail_action, m.mail_action AS mailbox_action, NOT ISNULL(m.id) AS islocal FROM address a LEFT JOIN mailbox m ON m.address_id=a.id WHERE a.id='$mail_id';");
+    if (!$db->next_record()) {
+      $err->raise("mail",_("The email %s does not exist, it can't be deleted"),$mail);
+      return false;
+    }
+    if ($db->f("type")!="") { // Technically special : mailman, sympa ... 
+      $err->raise("mail",_("The email %s is special, it can't be deleted"),$mail);
+      return false;
+    }
+    if ($db->f("mailbox_action")!=""  || $db->f("mail_action")!="") { // will be deleted soon ...
+      $err->raise("mail",_("The email %s is already marked for deletion, it can't be deleted"),$mail);
+      return false;
+    }
+    $mail_id=$db->f("id");
+
+    if ($db->f("islocal")) {
+      // If it's a pop/imap mailbox, mark it for deletion
+      $db->query("UPDATE address SET mail_action='DELETE', enabled=0 WHERE id='$mail_id';");
+      $db->query("UPDATE mailbox SET mail_action='DELETE' WHERE address_id='$mail_id';");
+      $err->raise("mail",_("The email %s has been marked for deletion"),$mail);
+    } else {
+      // If it's only aliases, delete it NOW.
+      $db->query("DELETE FROM address WHERE id='$mail_id';");
+      $db->query("DELETE FROM mailbox WHERE address_id='$mail_id';");
+      $db->query("DELETE FROM recipient WHERE address_id='$mail_id';");
+      $err->raise("mail",_("The email %s has been successfully deleted"),$mail);
+    }
+    return true;
+  }
+
+
+  /* ----------------------------------------------------------------- */
+  /** Function used to undelete a pending deletion mail from the db
+   * should be used by the web interface, not by third-party programs.
+   *
+   * @param $mail_id integer the email id
+   * @return true if the email has been properly undeleted 
+   * or false if an error occured ($err is filled accordingly)
+   */ 
+  function undelete($mail_id){
+    global $err,$db,$cuid,$quota,$dom,$hooks;
+    $err->log("mail","undelete");
+
+    $mail_id=intval($mail_id);
+
+    if (!$mail_id)  {
+      $err->raise("mail",_("The email you entered is syntaxically incorrect"));
+      return false;
+    }
+    // Validate that this email is owned by me...
+    if (!($mail=$this->is_it_my_mail($mail_id))) {
+      return false;
+    }
+
+    // Search for that address:
+    $db->query("SELECT a.id, a.type, a.mail_action, m.mail_action AS mailbox_action, NOT ISNULL(m.id) AS islocal FROM address a LEFT JOIN mailbox m ON m.address_id=a.id WHERE a.id='$mail_id';");
+    if (!$db->next_record()) {
+      $err->raise("mail",_("The email %s does not exist, it can't be undeleted"),$mail);
+      return false;
+    }
+    if ($db->f("type")!="") { // Technically special : mailman, sympa ... 
+      $err->raise("mail",_("The email %s is special, it can't be undeleted"),$mail);
+      return false;
+    }
+    if ($db->f("mailbox_action")!="DELETE" || $db->f("mail_action")!="DELETE") { // will be deleted soon ...
+      $err->raise("mail",_("Sorry, deletion of email %s is already in progress, or not marked for deletion, it can't be undeleted"),$mail);
+      return false;
+    }
+    $mail_id=$db->f("id");
+
+    if ($db->f("islocal")) {
+      // If it's a pop/imap mailbox, mark it for deletion
+      $db->query("UPDATE address SET mail_action='', `enabled`=1 WHERE id='$mail_id';");
+      $db->query("UPDATE mailbox SET mail_action='' WHERE address_id='$mail_id';");
+      $err->raise("mail",_("The email %s has been undeleted"),$mail);
+      return true;
+    } else {
+      $err->raise("mail",_("-- Program Error -- The email %s can't be undeleted"),$mail);
+      return false;
+    }
+  }
 
 
 
@@ -322,7 +446,7 @@ class m_mail {
   function enable($mail_id){
     global $db,$err;
     $err->log("mail","enable");
-    if( !$db->query("UPDATE address SET enabled=1 where id=$mail_id;"))return false;
+    if( !$db->query("UPDATE address SET `enabled`=1 where id=$mail_id;"))return false;
   }
 
 
@@ -333,7 +457,7 @@ class m_mail {
   function disable($mail_id){
     global $db,$err;
     $err->log("mail","enable");
-    if( !$db->query("UPDATE address SET enabled=0 where id=$mail_id;")) return false;
+    if( !$db->query("UPDATE address SET `enabled`=0 where id=$mail_id;")) return false;
   }
 
 
