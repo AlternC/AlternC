@@ -8,10 +8,10 @@ if (!defined("QUOTASONE")) return;
 	    <p><h3><center><?php __("Account"); ?> <span style="font-weight: bold;"><?php echo $c["login"]; ?></span></center></h3></p>
 <?php
 
-	list($totalweb)=@mysql_fetch_array(mysql_query("SELECT SUM(size) FROM size_web WHERE uid = '" . $c["uid"] . "'"));
+    $totalweb = $quota->get_size_web_sum_user($c["uid"]);
 
-	  echo "<p>"._("Web Space:")." ";
-	  echo sprintf("%.1f", $totalweb / 1024)."&nbsp;"._("MB");
+	echo "<p>"._("Web Space:")." ";
+	echo sprintf("%.1f", $totalweb / 1024)."&nbsp;"._("MB");
 	echo "</p>";
 
 ?>
@@ -31,14 +31,18 @@ if (!defined("QUOTASONE")) return;
   $s=mysql_query("SELECT * FROM domaines WHERE compte='".$c["uid"]."';");
   $totalmail=0;
   while ($d=mysql_fetch_array($s)) {
-    list($mstmp)=@mysql_fetch_array(mysql_query("SELECT SUM(size) FROM size_mail WHERE alias LIKE '%\_".$d["domaine"]."';"));
+    $mstmp = $quota->get_size_mail_sum_domain($d["domaine"]);
     $totalmail+=$mstmp;
   }
 
+  echo "<p>"._("Mail boxes:")." ";
+  echo sprintf("%.1f", $totalmail / 1024)."&nbsp;"._("MB");
+  echo "</p>";
+
   $s=mysql_query("SELECT * FROM domaines WHERE compte='".$c["uid"]."';");
   while ($d=mysql_fetch_array($s)) {
-    $t=mysql_query("SELECT alias,size FROM size_mail WHERE alias LIKE '%\_".$d["domaine"]."' ORDER BY alias;");
-    while ($e=mysql_fetch_array($t)) {
+    $alias_sizes = $quota->get_size_mail_details_domain($d["domaine"]);
+    foreach ($alias_sizes as $e) {
       echo "<tr><td>".$d["domaine"]."</td>";
       echo "<td>".str_replace("_","@",$e["alias"])."</td>";
       echo "<td";
@@ -64,6 +68,15 @@ if (!defined("QUOTASONE")) return;
 </table>
     <p>&nbsp;</p>
 
+<?php
+  // Espace DB :
+  $totaldb = $quota->get_size_db_sum_user($c["login"]);
+
+  echo "<p>"._("Databases:")." ";
+  echo sprintf("%.1f", $totaldb/(1024*1024))."&nbsp;"._("MB");
+  echo "</p>";
+?>
+
 <table class="tedit">
 <thead>
 <tr>
@@ -74,10 +87,8 @@ if (!defined("QUOTASONE")) return;
 <tbody>
 <?php
 
-    // Espace DB :
-    list($totaldb)=@mysql_fetch_array(mysql_query("SELECT SUM(size) FROM size_db WHERE db='".$c["login"]."' OR db LIKE '".$c["login"]."\_%';"));
-    $s=mysql_query("SELECT db,size FROM size_db WHERE db='".$c["login"]."' OR db LIKE '".$c["login"]."\_%';");
-  while ($d=mysql_fetch_array($s)) {
+  $db_sizes = $quota->get_size_db_details_user($c["login"]);
+  foreach ($db_sizes as $d) {
     echo "<tr><td>".$d["db"]."</td><td";
     if ($mode!=2) echo " style=\"text-align: right\"";
     echo ">";
@@ -100,10 +111,16 @@ if (!defined("QUOTASONE")) return;
 </table>
 
 <?php
-    list($totallist)=@mysql_fetch_array(mysql_query("SELECT SUM(size) FROM size_mailman WHERE uid='".$c["uid"]."'"));
+    $totallist = $quota->get_size_mailman_sum_user($c["uid"]);
   if ($totallist) {
     ?>
     <p>&nbsp;</p>
+
+<?php
+  echo "<p>"._("Mailman lists:")." ";
+  echo sprintf("%.1f", $totallist/1024)."&nbsp;"._("MB");
+  echo "</p>";
+?>
 		 
 <table class="tedit">
 <thead>
@@ -115,9 +132,9 @@ if (!defined("QUOTASONE")) return;
 <tbody>
 <?php
 
-    // Espace Liste :
-    $s=mysql_query("SELECT list,size FROM size_mailman WHERE uid='".$c["uid"]."' ORDER BY list ASC");
-  while ($d=mysql_fetch_array($s)) {
+  // Espace Liste :
+  $mailman_size = $quota->get_size_mailman_details_user($c["uid"]);
+  foreach ($mailman_size as $d) {
     echo "<tr><td>".$d["list"]."</td><td";
     if ($mode!=2) echo " style=\"text-align: right\"";
     echo ">";

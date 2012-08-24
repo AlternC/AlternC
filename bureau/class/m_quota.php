@@ -387,6 +387,20 @@ class m_quota {
     }
   }
 
+  function _get_size_and_record_sql($sql) {
+    global $db,$err,$cuid;
+    $db->query($sql);
+    if ($db->num_rows() == 0) {
+      return array();
+    } else {
+      $ret = array();
+      while ($db->next_record()) {
+        $ret[] = $db->Record;
+      }
+      return $ret;
+    }
+  }
+
   /* sum of websites sizes from all users */
   function get_size_web_sum_all() {
     return $this->_get_sum_sql("SELECT SUM(size) AS sum FROM size_web;");
@@ -396,6 +410,7 @@ class m_quota {
   function get_size_web_sum_user($u) {
     return $this->_get_sum_sql("SELECT SUM(size) AS sum FROM size_web WHERE uid='$u';");
   }
+
 
   /* sum of mailbox sizes from all domains */
   function get_size_mail_sum_all() {
@@ -417,6 +432,12 @@ class m_quota {
     return $this->_get_count_sql("SELECT COUNT(*) AS count FROM size_mail FROM size_mail WHERE alias LIKE '%\_{$dom}'");
   }
 
+  /* get list of mailbox alias and size for one domain */
+  function get_size_mail_details_domain($dom) {
+    return $this->_get_size_and_record_sql("SELECT alias,size FROM size_mail WHERE alias LIKE '%\_{$dom}' ORDER BY alias;");
+  }
+
+
   /* sum of mailman lists sizes from all domains */
   function get_size_mailman_sum_all() {
     return $this->_get_sum_sql("SELECT SUM(size) AS sum FROM size_mailman;");
@@ -425,6 +446,11 @@ class m_quota {
   /* sum of mailman lists sizes for one domain */
   function get_size_mailman_sum_domain($dom) {
     return $this->_get_sum_sql("SELECT SUM(size) AS sum FROM size_mailman WHERE list LIKE '%@{$dom}'");
+  }
+
+  /* sum of mailman lists for one user */
+  function get_size_mailman_sum_user($u) {
+    return $this->_get_sum_sql("SELECT SUM(size) AS sum FROM size_mailman WHERE uid = '{$u}'");
   }
 
   /* count of mailman lists sizes from all domains */
@@ -436,6 +462,12 @@ class m_quota {
   function get_size_mailman_count_user($u) {
     return $this->_get_count_sql("SELECT COUNT(*) AS count FROM size_mailman WHERE uid = '{$u}'");
   }
+
+  /* get list of mailman list and size for one user */
+  function get_size_mailman_details_user($u) {
+    return $this->_get_size_and_record_sql("SELECT list,size FROM size_mailman WHERE uid='{$u}' ORDER BY list ASC");
+  }
+
 
   /* sum of databases sizes from all users */
   function get_size_db_sum_all() {
@@ -452,10 +484,16 @@ class m_quota {
     return $this->_get_count_sql("SELECT COUNT(*) AS count FROM size_db;");
   }
 
-  /* count of mailman lists for one user */
+  /* count of databases for one user */
   function get_size_db_count_user($u) {
     return $this->_get_count_sql("SELECT COUNT(*) AS count FROM size_db WHERE db = '{$u}' OR db LIKE '{$u}\_%'");
   }
+
+  /* get list of databases name and size for one user */
+  function get_size_db_details_user($u) {
+    return $this->_get_size_and_record_sql("SELECT db,size FROM size_db WHERE db='{$u}' OR db LIKE '{$u}\_%';");
+  }
+
 
 
 #list($dc)=@mysql_fetch_array(mysql_query("SELECT COUNT(*) FROM domaines;"));
