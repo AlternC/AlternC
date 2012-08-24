@@ -578,6 +578,19 @@ function pager($offset,$count,$total,$url,$before="",$after="") {
   echo $after;
 }
 
+function create_pass($length = 8){
+
+	$chars = "1234567890abcdefghijkmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	$i = 0;
+  $password = "";
+  while ($i <= $length) {
+    $password .= @$chars{mt_rand(0,strlen($chars))};
+    $i++;
+  }
+  return $password;
+
+}
+
 
 
 ?>
