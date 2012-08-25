@@ -120,6 +120,35 @@ class m_mail {
 
 
   /* ----------------------------------------------------------------- */
+  /** available: tells if an email address can be installed in the server
+   * check the domain part (is it mine too), the syntax, and the availability.
+   * @param $mail string email to check
+   * @return boolean true if the email can be installed on the server 
+   */  
+  function available($mail){
+    global $db,$err,$dom;
+    $err->log("mail","available");    
+    list($login,$domain)=explode("@",$mail,2);
+    // Validate the domain ownership & syntax
+    if (!($dom_id=$dom->get_domain_byname($domain))) {
+      return false;
+    }
+    // Validate the email syntax:
+    if (!filter_var($mail,FILTER_VALIDATE_EMAIL)) {
+      $err->raise("mail",_("The email you entered is syntaxically incorrect"));
+      return false;
+    }
+    // Check the availability
+    $db->query("SELECT a.id FROM address a WHERE a.domain_id=".$dom_id." AND a.address='".addslashes($login)."';");
+    if ($db->next_record()) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+
+  /* ----------------------------------------------------------------- */
   /* function used to list every mail address hosted on a domain.
    * @param $dom_id integer the domain id.
    * @param $search string search that string in recipients or address.
