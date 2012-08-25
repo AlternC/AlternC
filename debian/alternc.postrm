@@ -4,6 +4,8 @@ set -e
 
 . /usr/share/debconf/confmodule
 
+ALTERNC_DB=$(cat /etc/alternc/my.cnf |grep ^database|cut -d '"' -f 2)
+
 #     * postrm remove
 #     * postrm purge 
 #     * old-postrm upgrade new-version
@@ -23,7 +25,7 @@ case "$1" in
     db_go
     db_get alternc/postrm_remove_databases || true
     if [ "$RET" = "true" ]; then
-      rm -rf /var/alternc/db
+      /usr/bin/mysql --defaults-file=/etc/alternc/my.cnf -Bs -e "DROP DATABASE $ALTERNC_DB"
     fi
 
     # Purge datafiles?
