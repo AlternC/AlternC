@@ -67,10 +67,10 @@ class m_mail {
 
 
   /* ----------------------------------------------------------------- */
-  /** Quota list (hook for quota class)
+  /** Quota list (hook for quota class, returns an array of hashes)
    */
   function hook_quota_names() {
-    return "mail";
+    return array("mail"=>_("Email addresses"));
   }
 
 
@@ -583,4 +583,3 @@ class m_mail {
 } /* Class m_mail */
 
 
-?>

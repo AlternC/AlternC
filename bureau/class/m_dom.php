@@ -30,10 +30,6 @@ define('SLAVE_FLAG', "/var/run/alternc/refresh_slave");
 * 
 * Cette classe permet de gérer les domaines / sous-domaines, redirections
 * dns et mx des domaines d'un membre hébergé.<br />
-* Copyleft {@link http://alternc.net/ AlternC Team}
-* 
-* @copyright    AlternC-Team 2002-11-01 http://alternc.net/
-* 
 */
 class m_dom {
 
@@ -93,8 +89,8 @@ class m_dom {
   /**
    * Quota name
    */
-  function alternc_quota_names() {
-    return "dom";
+  function hook_quota_names() {
+    return array("dom"=>_("Domain name"));
   }
   
   /* ----------------------------------------------------------------- */
@@ -1359,5 +1355,3 @@ class m_dom {
   
 
 } /* Class m_domains */
-
-?>
