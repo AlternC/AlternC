@@ -324,9 +324,7 @@ bureau/admin/sta2_list.php -text
 bureau/admin/stats_members.php -text
 bureau/admin/styles/passwordStrengthMeter.css -text
 bureau/admin/styles/style.css -text
-bureau/admin/template.php -text
 bureau/admin/trash_dateselect.php -text
-bureau/admin/web_list.php -text
 bureau/admin/webmail/.htaccess -text
 bureau/admin/webmail/index.php -text
 bureau/class/config.php -text
