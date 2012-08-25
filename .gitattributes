@@ -531,6 +531,7 @@ src/functions_hosting.sh -text
 src/mail_deletion.sh -text
 src/mem_add -text
 src/mem_del -text
+src/quota-warning.sh -text
 src/quota_delete -text
 src/quota_edit -text
 src/quota_get -text
