@@ -340,6 +340,7 @@ bureau/class/functions.php -text
 bureau/class/lang_env.php -text
 bureau/class/local.php -text
 bureau/class/m_admin.php -text
+bureau/class/m_api.php -text
 bureau/class/m_authip.php -text
 bureau/class/m_bro.php -text
 bureau/class/m_cron.php -text
