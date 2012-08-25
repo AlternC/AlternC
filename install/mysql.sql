@@ -232,7 +232,7 @@ CREATE TABLE IF NOT EXISTS sub_domaines (
 
 CREATE TABLE IF NOT EXISTS `address` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT, -- Technical id.
-  `domain_id` bigint(20) unsigned NOT NULL REFERENCES `domaines`(`id`), -- FK to sub_domains.
+  `domain_id` bigint(20) unsigned NOT NULL REFERENCES `domaines`(`id`), -- FK to domaines.
   `address` varchar(255) NOT NULL, -- The address.
   `type` char(8) NOT NULL, -- standard emails are '', other may be 'mailman' or 'sympa' ...
   `password` varchar(255) DEFAULT NULL, -- The password associated to the address.
