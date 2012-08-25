@@ -48,7 +48,6 @@ $fatal=false;
 if ($domain=$dom->get_domain_byid($domain_id)) {
   if(!($mails_list = $mail->enum_domain_mails($domain_id,$search,$offset,$count))) {
     $error=$err->errstr();
-    $fatal=true;
   }
 } else {
   $error=$err->errstr();
@@ -61,7 +60,7 @@ if ($fatal) {
 } else {
 
 // Mail creation form
-if ($quota->cancreate("mail") && $domain) { 
+if ($quota->cancreate("mail")) {
 ?>
 <h3><?php __("Create a new mail account");?></h3>
 	<form method="post" action="mail_doadd.php" id="main" name="mail_create">
@@ -71,7 +70,9 @@ if ($quota->cancreate("mail") && $domain) {
 	</form>
 <?php 
 }
-?>
+
+if (!empty($mails_list)) {
+  ?>
 <br />
 <hr id="topbar"/>
 <h3><?php printf(_("Email addresses of the domain %s"),$domain); ?> : </h3>
@@ -152,5 +153,5 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
 </form>
 
 <?php
-} // end if no mail for this domain
+    } } // end if no mail for this domain
  include_once("foot.php"); ?>
