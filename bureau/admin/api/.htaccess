@@ -1,0 +1,9 @@
+
+# Route access to do_api.php
+
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule (.*)    do_api.php  [L]
+

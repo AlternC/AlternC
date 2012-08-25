@@ -90,6 +90,8 @@ bureau/admin/alternc.jpg -text
 bureau/admin/alternc.png -text
 bureau/admin/alternc3.png -text
 bureau/admin/alternc_debugme.php -text
+bureau/admin/api/.htaccess -text
+bureau/admin/api/do_api.php -text
 bureau/admin/bro_editor.php -text
 bureau/admin/bro_main.php -text
 bureau/admin/bro_pref.php -text
