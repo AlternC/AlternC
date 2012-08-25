@@ -279,8 +279,10 @@ class m_mail {
    */ 
   function hook_dom_del_mx_domain($dom_id) {
     $list=$this->enum_domain_mails($dom_id,"",0,-1);
-    foreach($list as $one) {
-      $this->delete($one["id"]);
+    if (is_array($list)) {
+      foreach($list as $one) {
+	$this->delete($one["id"]);
+      }
     }
     return true;
   }
