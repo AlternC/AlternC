@@ -28,6 +28,10 @@
  ----------------------------------------------------------------------
 */
 require_once("../class/config.php");
+$fields = array (
+        "confirm"                => array ("post", "string", ""),
+);
+getFields($fields);
 if(!isset($error)){
 	$error="";
 }
@@ -40,7 +44,7 @@ if (isset($confirm) && ($confirm=="y")) {
       if (!$r) {
 	$error.=$err->errstr()."<br />";
       } else {
-	$error.=sprintf(_("The user %s has been successfully deleted"),$mem->user["login"]."_$val")."<br />";
+	$error.=sprintf(_("The user %s has been successfully deleted"),$val)."<br />";
       }
     }
   }
@@ -63,7 +67,7 @@ include_once("head.php");
 reset($_POST);
 while (list($key,$val)=each($_POST)) {
   if (substr($key,0,4)=="del_") {
-    echo "<input type=\"hidden\" name=\"$key\" value=\"$val\" />".$mem->user["login"]."_$val<br />\n";
+    echo "<input type=\"hidden\" name=\"$key\" value=\"$val\" />".$val."<br />\n";
   }
 }
 

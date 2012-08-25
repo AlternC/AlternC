@@ -33,17 +33,37 @@ $fields = array (
         "dbn"                 => array ("post", "string", ""),
 );
 getFields($fields);
-
 if (!$quota->cancreate("mysql")) {
 	$error=_("err_mysql_1");
 	include("sql_add.php");
 	exit;
 }
+$q=$quota->getquota("mysql");
+if($q['u'] == 0){
+	$dbname=$mem->user["login"];
+	if(!$mysql->add_db($dbname)){
+	  $error=$err->errstr();
+		include("sql_add.php");
+		exit;
+	}
+}else{
+  if(!empty($dbn)){
+    $dbname=$mem->user["login"]."_".$dbn;
+    if(!$mysql->add_db($dbname)) {
+      $error=$err->errstr();
+      include("sql_add.php");
+      exit;
+    }
+  }else{
+    $dbname=$mem->user["login"];
+    if(!$mysql->add_db($dbname)) {
+      $error=$err->errstr();
+      include("sql_add.php");
+      exit;
+    }
 
-if (!$mysql->add_db($dbn)) {
-  $error=$err->errstr();
-  include("sql_add.php");
-  exit;
+  }
+
 }
 
 include("sql_list.php");

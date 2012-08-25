@@ -36,9 +36,8 @@ $fields = array (
 getFields($fields);
 
 $r=$mysql->get_user_dblist($id);
-
 ?>
-<h3><?php printf(_("MySQL Rights for %s"),$mem->user["login"]."_".$id) ?></h3>
+<h3><?php printf(_("MySQL Rights for %s"),$id) ?></h3>
 <hr id="topbar"/>
 <br />
 <?php
@@ -77,7 +76,7 @@ for($i=0;$i<count($r);$i++) {
   $col=3-$col;
 ?>
 	<tr class="lst<?php echo $col; ?>">
-    <td><strong><?php echo $mem->user["login"].($val["db"]?"_":"").$val["db"] ?></strong></td>
+    <td><strong><?php echo $val["db"] ?></strong></td>
     <td><a href="javascript:inverse_sql_right('<?php echo htmlentities($val["db"]);?>');"><?php __('Reverse selection');?></a></td>
     <?php foreach($sql_right as $sr) { ?>
 	  <td align="center">

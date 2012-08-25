@@ -38,7 +38,7 @@ getFields($fields);
 $r=$mysql->get_user_dblist($id);
 
 ?>
-<h3><?php __("Change this user's password"); echo " - ".$mem->user["login"]."_".$id ?></h3>
+<h3><?php __("Change this user's password"); echo " - ".$id ?></h3>
 <hr id="topbar"/>
 <br />
 <?php
