@@ -43,19 +43,25 @@ if(!$domain_id ) {
   exit();
 }
 
+$fatal=false;
+
 if ($domain=$dom->get_domain_byid($domain_id)) {
   if(!($mails_list = $mail->enum_domain_mails($domain_id,$search,$offset,$count))) {
     $error=$err->errstr();
+    $fatal=true;
   }
 } else {
   $error=$err->errstr();
+  $fatal=true;
 }
-?>
 
-<?php
+
+if ($fatal) {
+  echo "<div class=\"error\">$error</div>";
+} else {
 
 // Mail creation form
-if ($quota->cancreate("mail")) { 
+if ($quota->cancreate("mail") && $domain) { 
 ?>
 <h3><?php __("Create a new mail account");?></h3>
 	<form method="post" action="mail_doadd.php" id="main" name="mail_create">
@@ -65,10 +71,6 @@ if ($quota->cancreate("mail")) {
 	</form>
 <?php 
 }
-
-if (empty($mails_list)){ // If there is no mail for this domain 
-	__("No mail for this domain");
-} else {
 ?>
 <br />
 <hr id="topbar"/>
@@ -143,11 +145,12 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
 	<?php
    $i++;
 }
-} // end if no mail for this domain
 ?>
 
 </table>
   <p><input type="submit" class="inb" name="submit" value="<?php __("Delete the checked email addresses"); ?>" /></p>
 </form>
 
-<?php include_once("foot.php"); ?>
+<?php
+} // end if no mail for this domain
+ include_once("foot.php"); ?>
