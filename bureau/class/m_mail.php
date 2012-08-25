@@ -44,6 +44,22 @@ class m_mail {
 
 
   /* ----------------------------------------------------------------- */
+  /** If an email has those chars, 'not nice in shell env' ;) 
+   * we don't store the email in $mail/u/{user}_domain, but in $mail/_/{address_id}_domain
+   * @access private
+   */
+  var $specialchars=array('"',"'",'\\','/');
+
+
+  /* ----------------------------------------------------------------- */
+  /** If an email has those chars, we will ONLY allow RECIPIENTS, NOT POP/IMAP for DOVECOT !
+   * Since Dovecot doesn't allow those characters
+   * @access private
+   */
+  var $forbiddenchars=array('"',"'",'\\','/','?','!','*','$','|','#','+');
+
+
+  /* ----------------------------------------------------------------- */
   /** Number of results for a pager display
    * @access public
    */
@@ -169,7 +185,7 @@ class m_mail {
 
     // Validate the email syntax:
     $m=$mail."@".$domain;
-    if (!filter_var($m,FILTER_VALIDATE_EMAIL) || (strpos($m,"..")!==false)  || (strpos($m,"/")!==false) ) {
+    if (!filter_var($m,FILTER_VALIDATE_EMAIL)) {
       $err->raise("mail",_("The email you entered is syntaxically incorrect"));
       return false;
     }
@@ -217,7 +233,7 @@ class m_mail {
     }
 
     // We fetch all the informations for that email: these will fill the hastable : 
-    $db->query("SELECT a.address, a.password, a.enabled, d.domaine AS domain, m.quota, m.quota*1024*1024 AS quotabytes, m.bytes AS used, NOT ISNULL(m.id) AS islocal, a.type, r.recipients, m.lastlogin, a.mail_action, m.mail_action AS mailbox_action FROM (address a LEFT JOIN mailbox m ON m.address_id=a.id) LEFT JOIN recipient r ON r.address_id=a.id, domaines d WHERE a.id=".$mail_id." AND d.id=a.domain_id;");
+    $db->query("SELECT a.id, a.address, a.password, a.enabled, d.domaine AS domain, m.path, m.quota, m.quota*1024*1024 AS quotabytes, m.bytes AS used, NOT ISNULL(m.id) AS islocal, a.type, r.recipients, m.lastlogin, a.mail_action, m.mail_action AS mailbox_action FROM (address a LEFT JOIN mailbox m ON m.address_id=a.id) LEFT JOIN recipient r ON r.address_id=a.id, domaines d WHERE a.id=".$mail_id." AND d.id=a.domain_id;");
     if (! $db->next_record()) return false;
     $details=$db->Record;
     // if necessary, fill the typedata with data from hooks ...
@@ -287,7 +303,7 @@ class m_mail {
       $err->raise("mail",_("The email %s is special, it can't be deleted"),$mail);
       return false;
     }
-    if ($db->f("mailbox_action")!="OK" || $db->f("mail_action")!="OK") { // will be deleted soon ...
+    if ($db->f("mail_action")!="OK" || ($db->f("islocal") && $db->f("mailbox_action")!="OK")) { // will be deleted soon ...
       $err->raise("mail",_("The email %s is already marked for deletion, it can't be deleted"),$mail);
       return false;
     }
@@ -430,6 +446,19 @@ class m_mail {
     if (!$me["islocal"] && $islocal) {
       // create pop
       $path=ALTERNC_MAIL."/".substr($me["address"]."_",0,1)."/".$me["address"]."_".$me["domain"];
+      foreach($this->forbiddenchars as $str) {
+	if (strpos($me["address"],$str)!==false) {
+	  $err->raise("mail",_("There is forbidden characters in your mail name. You can't make it a POP/IMAP account, you can only use it as redirections to other emails."));
+	  return false;
+	  break;
+	}
+      }
+      foreach($this->specialchars as $str) {
+	if (strpos($me["address"],$str)!==false) {
+	  $path=ALTERNC_MAIL."/_/".$me["id"]."_".$me["domain"];
+	  break;
+	}
+      }
       $db->query("INSERT INTO mailbox SET address_id=".$mail_id.", path='".addslashes($path)."';");
     }
     if ($me["islocal"] && $islocal && $me["mailbox_action"]=="DELETE") {
@@ -456,150 +485,37 @@ class m_mail {
   }
 
 
-
-
-  /* ############################################################ */
-  /* ############################################################ */
-  /* After that line, to be deleted / checked & co. */
-  /* ############################################################ */
-  /* ############################################################ */
-
-
-
   /* ----------------------------------------------------------------- */
-  /** function used to list the first letter used in the list of the emails hosted in a specific domain
-   * @param $domain_id integer the domain id.
-   * @result an array of each letter used in mail hosted under the domain.
+  /** Export the mail information of an account 
+   * @return: str, string containing the complete configuration 
+   * of the email for the current acccount.
    */
-  function enum_doms_mails_letters($domain_id) {
-    global $err,$cuid,$db;
-    $err->log("mail","enum_doms_mails_letters");
-    $domain_id=intval($domain_id);
-    $db->query("select distinct left(ad.address,1) as letter from address ad,where ad.domain_id = $domain_id ;");
-    $res=array();
-    while($db->next_record()) {
-      $res[]=$db->f("letter");
-    }
-    return $res;
-  }
-
-  /* FIXME: check who is using that function and delete it when unused */
-  function cancreate($dom_id, $email){
-    return true;
-  }
-  
-   /* FIXME: check who is using that function and delete it when unused */
-  function form($mail_id) {
-  }
-
-
-   /* FIXME: check who is using that function and delete it when unused */
-  function hooks_mail_cancreate($dom_id, $domain, $mail_arg) {
-    global $db,$err;
-    return true;
-  }
-
-  /**
-  * @param : mail_id
-  * fonction used to invoque the "hooks" corresponding to each mail relative classes
-  * the two foreach are used to format the array the way we want.
-  */
-  function list_properties($mail_id) {
-    global $err,$hooks;
-    $err->log("mail","list_properties");
-    $prop = $hooks->invoke("hooks_mail_properties_list",array($mail_id));
-    $final=Array();
-  
-          /* Ici on :
-             - trie/fait du ménage
-             - prend en premier les properties non avancées
-             - prend en second les properties avancées (donc en bas)
-             - on pense a avoir un trie par label, histoire d'avoir une cohérence d'affichage
-          */
-    $f_simple=Array();
-    $f_adv=Array();
-    foreach ($prop as $k => $v ) {
-      if ( empty($v) ) continue; // on continue si le tableau était vide
-      if ( isset($v['label'] ) ) { // si c'est directement le tableau qu'on souhaite
-        if ( isset($v['advanced']) && $v['advanced']) {
-          $f_adv[] = $v;
-        } else { // option simple
-          $f_simple[] = $v;
-        }
-      } else {
-        foreach ($v as $k2 => $v2 ) { // sinon on joue avec les sous-tableau
-          if ( isset($v2['advanced']) && $v2['advanced']) {
-            $f_adv[] = $v2;
-          } else { // option simple
-            $f_simple[]=$v2;
-          }
-        }
-      }
-    }
-    $v_simple=usort($f_simple,'list_properties_order');
-    $v_adv=usort($f_adv,'list_properties_order');
-  
-    $final=array_merge($f_simple,$f_adv);
-  
-    return $final;
-  }
-  
-
-
-
- /** 
-  * mail_delete a mail address.
-  * @param integer mail_id: unique mail identifier
-	TODO: mail del
-  */  
-  function mail_delete($mail_id){
-    global $db,$err,$admin;
-    $err->log("mail","mail_delete");
-  
-   // $db->query("
-  /*supprimer de la table address
-	supprimer la mailbox si il yen a une.
-	supprimer alias et redirection.
-    supprimer les alias associé si il ne sont relié a aucunes autre addresses.
-  */
-
-  }
-
-/**
-* Export the mail information of an account 
-* @return: str, chaine de caractere containing every usefull mail informations.
-*
-*/
-function alternc_export_conf() {
-     global $db,$err,$mail_localbox;
-     $err->log("mail","export");
-     $domain=$this->enum_domains();
-     $str="<mail>\n";
-     $onepop=false;
-     foreach ($domain as $d) {
-       $str.="  <domain>\n    <name>".xml_entities($d["domaine"])."</name>\n";
-       $s=$this->enum_domain_mails($d["id"]);
-       if (count($s)) {
-         while (list($key,$val)=each($s)){
-            $test=$this->mail_get_details($val['id']);
-           $str.="    <address>\n";
-           $str.="      <name>".xml_entities($val["address"])."</name>\n";
-           $str.="      <enabled>".xml_entities($val["enabled"])."</enabled>\n";
-           if(is_array($test["is_local"])){
-             $str.="      <islocal>oui</islocal>\n";
-             $str.="      <path>".$test["is_local"]["path"]."</path>\n";
-             $str.="      <quota>".$test["is_local"]["quota"]."</quota>\n";
+  function alternc_export_conf() {
+    global $db,$err,$mail_localbox;
+    $err->log("mail","export");
+    $domain=$this->enum_domains();
+    $str="<mail>\n";
+    $onepop=false;
+    foreach ($domain as $d) {
+      $str.="  <domain>\n    <name>".xml_entities($d["domain"])."</name>\n";
+      $s=$this->enum_domain_mails($d["id"]);
+      if (count($s)) {
+	while (list($key,$val)=each($s)){
+	  $test=$this->get_details($val['id']);
+	  $str.="    <address>\n";
+	  $str.="      <name>".xml_entities($val["address"])."</name>\n";
+	  $str.="      <enabled>".xml_entities($val["enabled"])."</enabled>\n";
+	  if(is_array($val["islocal"])){
+	    $str.="      <islocal>1</islocal>\n";
+             $str.="      <quota>".$val["quota"]."</quota>\n";
+             $str.="      <path>".$val["path"]."</path>\n";
            }else{
-             $str.="      <islocal>non</islocal>\n";
+             $str.="      <islocal>0</islocal>\n";
           }
-          if(!empty($test["recipients"])){
-              foreach($test["recipients"] as $recip){
+          if(!empty($val["recipients"])){
+	    $r=explode("\n",$val["recipients"]);
+              foreach($r as $recip){
                 $str.="      <recipients>".$recip."<recipients>\n";
-              }
-          }
-          if(!empty($test["alias"])){
-              foreach($test["alias"] as $alias){
-                $str.="      <alias>".$alias."<alias>\n";
               }
           }
        $str.="    </address>\n";

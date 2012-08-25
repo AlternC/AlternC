@@ -110,7 +110,7 @@ while (list($key,$val)=each($mails_list)){
 	  <td colspan="3"><?php __("Deleting..."); ?></td>
 	  <?php } else if ($val["mail_action"]=="DELETE") { $grey="grey"; ?>
 	  <td></td>
-	  <td><div class="ina"><a href="mail_undelete.php?search=<?php ehe($search); ?>&amp;offset=<?php ehe($offset); ?>&amp;count=<?php ehe($count); ?>&amp;domain_id=<?php ehe($domain_id);  ?>&amp;mail_id=<?php echo $val["id"] ?>"><img src="images/undelete.png" alt="<?php __("Undelete"); ?>" /><?php __("Undelete"); ?></a></div></td>
+	  <td><div class="ina"><a href="mail_undelete.php?search=<?php ehe($search); ?>&amp;offset=<?php ehe($offset); ?>&amp;count=<?php ehe($count); ?>&amp;domain_id=<?php ehe($domain_id);  ?>&amp;mail_id=<?php echo $val["id"] ?>" title="<?php __("This email will be deleted soon. You may still be able to undelete it by clicking here"); ?>"><img src="images/undelete.png" alt="<?php __("Undelete"); ?>" /><?php __("Undelete"); ?></a></div></td>
 	  <td><img src="images/check_no.png" alt="<?php __("Disabled"); ?>" /></td>	  
 	  <?php } else if (!$val["type"]) { ?>
           <td align="center">
