@@ -55,15 +55,9 @@ if (isset($error) && $error) {
 	if ($cuid != 2000)
 	{
 		$mList = array();
-		$res = mysql_query("SELECT * FROM membres WHERE creator = '" . $cuid . "'");
-		while ($n = @mysql_fetch_array($res))
-		{
-			$domList = array();
-			$res2 = mysql_query("SELECT * FROM domaines WHERE compte = '" . $n["uid"] . "'");
-			while ($n2 = @mysql_fetch_array($res2))
-			{
-				$domList[] = $n2["domaine"];
-			}
+        $membres_list = $admin->get_list(0, $cuid);
+        foreach ($membres_list as $n) {
+            $domList = $dom->enum_domains($n["uid"]);
 			$mList[$n["uid"]] = array (
 				"login"    => $n["login"],
 				"domaines" => $domList,
@@ -110,7 +104,7 @@ if (isset($error) && $error) {
 
 		$totaltotal=$totalweb+$totallist+$totalmail+($totaldb/1024); // en Ko
 
-		list($dc)=@mysql_fetch_array(mysql_query("SELECT COUNT(*) FROM domaines;"));
+        $dc = $dom->count_domains_all();
         $mc = $quota->get_size_mail_count_all();
         $mlc = $quota->get_size_mailman_count_all();
         $dbc = $quota->get_size_db_count_all();
@@ -180,17 +174,11 @@ if (isset($error) && $error) {
 if ($cuid != 2000)
 {
 	$mList = array();
-	$res = mysql_query("SELECT * FROM membres WHERE creator = '" . $cuid . "'");
-	while ($n = @mysql_fetch_array($res))
-	{
-		$domList = array();
-		$res2 = mysql_query("SELECT * FROM domaines WHERE compte = '" . $n["uid"] . "'");
-		while ($n2 = @mysql_fetch_array($res2))
-		{
-			$domList[] = $n2["domaine"];
-		}
-		$mList[$n["uid"]] = array (
-			"login"    => $n["login"],
+    $membres_list = $admin->get_list(0, $cuid);
+    foreach ($membres_list as $minfo) {
+        $domList = $dom->enum_domains($minfo['uid']);
+		$mList[$muid] = array (
+			"login"    => $minfo['login'],
 			"domaines" => $domList,
 		);
 	}
@@ -218,7 +206,7 @@ if ($cuid != 2000)
 			}
 		}
 
-        $mlc = $quota->get_size_mailman_count_domain($mUID);
+        $mlc = $quota->get_size_mailman_count_user($mUID);
         $tmpdb = $quota->get_size_db_sum_user($mData["login"]);
 		$totaldb += $tmpdb;
         $dbc = $quota->get_size_db_count_user($mData["login"]);
@@ -236,38 +224,39 @@ else
 $totaltotal=$totalweb+$totallist+$totalmail+($totaldb/1024); // en Ko
 if ($totaltotal==0) $totaltotal=1;
 
-if ($cuid != 2000)
-{
-	$r = mysql_query("SELECT * FROM membres WHERE creator = '" . $cuid . "' ORDER BY login;");
-}
-else
-{
-	$r=mysql_query("SELECT * FROM membres ORDER BY login;");
+if ($cuid != 2000) {
+    $membres_list = $admin->get_list(0, $cuid);
+} else {
+    $membres_list = $admin->get_list(1);
 }
 
-while ($c=mysql_fetch_array($r)) {
+foreach ($membres_list as $c) {
 
   echo "<tr><td>";
 
   // On affiche le compte et ses domaines :
   echo "<b><a href=\"quotas_users.php?mode=".$mode."&sd=".$sd."&usr=".$c["uid"]."\">".$c["login"]."</a></b><br />\n";
-  $s=mysql_query("SELECT * FROM domaines WHERE compte='".$c["uid"]."';");
+  $domaines_list = $dom->enum_domains($c["uid"]);
   $dc=0; // Domain Count
   $ms=0; // Mail Space
-	$mls=0;
-  while ($d=mysql_fetch_array($s)) {
-if ($sd)     echo "&nbsp;&nbsp;&nbsp;-&nbsp;".$d["domaine"]."<br />\n";
+  $mls=0;
+  foreach ($domaines_list as $d) {
+    if ($sd)     echo "&nbsp;&nbsp;&nbsp;-&nbsp;{$d}<br />\n";
     $dc++;
-    $mstmp = $quota->get_size_mail_sum_domain($d["domaine"]);
+    $mstmp = $quota->get_size_mail_sum_domain($d);
     $ms+=$mstmp;
-    $mlstmp = $quota->get_size_mailman_sum_domain($d["domaine"]);
+    $mlstmp = $quota->get_size_mailman_sum_domain($d);
     $mls+=$mlstmp;
   }
 
   // Mail Count
-  list($mc)=@mysql_fetch_array(mysql_query("SELECT COUNT(*) FROM mail_domain WHERE type=0 AND uid='".$c["uid"]."';"));
+  $maildomains_list = $mail->enum_domains($c["uid"]);
+  $mc = 0;
+  foreach ($maildomains_list as $md) {
+    $mc += $md['nb_mail'];
+  }
   // Mailman List Count
-  list($mlc)=@mysql_fetch_array(mysql_query("SELECT COUNT(*) FROM mailman WHERE uid='".$c["uid"]."';"));
+  $mlc = $mailman->count_ml_user($c["uid"]);
   echo "</td><td>$dc</td><td>$mc</td><td>$mlc</td><td";
   if ($mode!=2) echo " style=\"text-align: right\"";
   echo ">";
@@ -381,23 +370,25 @@ echo "</tr>";
 <?php
     } else { // Mode affichage d'UN seul compte
 
-	if ($cuid != 2000)
-	{
-		$c=@mysql_fetch_array(mysql_query("SELECT * FROM membres WHERE uid='".$usr."' AND creator = '" . $cuid . "';"));
-	}
-	else
-	{
-		$c=@mysql_fetch_array(mysql_query("SELECT * FROM membres WHERE uid='".$usr."';"));
+    $oneuser_ok = false;
+	if ($cuid != 2000) {
+        $c = $admin->get($usr);
+        $mcreator = $admin->get_creator($c['uid']);
+        if ($mcreator['uid'] == $cuid) {
+            $oneuser_ok = true;
+        }
+	} else {
+        $c = $admin->get($usr);
+        if ($c != false) {
+            $oneuser_ok = true;
+        }
 	}
 
-	if (!empty($c))
-	{
-
+    if ($oneuser_ok) {  # quotas_oneuser.php will used prefilled $c
 	  define("QUOTASONE","1");
 	  require_once("quotas_oneuser.php");
-
- } ?>
-<?php
     }
+
+    } // endif un seul compte
 ?>
 <?php include_once("foot.php"); ?>
