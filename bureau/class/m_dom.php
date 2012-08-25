@@ -647,7 +647,7 @@ class m_dom {
       return false;
     }
     $r["name"]=$dom;
-    $db->query("select * from domaines where compte='$cuid' and domaine='$dom'");
+    $db->query("SELECT * FROM domaines WHERE compte='$cuid' AND domaine='$dom'");
     if ($db->num_rows()==0) {
       $err->raise("dom",1,$dom);
       return false;
@@ -660,11 +660,11 @@ class m_dom {
     $r["mail"]=$db->Record["gesmx"];
     $r['noerase']=$db->Record['noerase'];
     $db->free();
-    $db->query("select count(*) as cnt from sub_domaines where compte='$cuid' and domaine='$dom'");
+    $db->query("SELECT COUNT(*) AS cnt FROM sub_domaines WHERE compte='$cuid' AND domaine='$dom'");
     $db->next_record();
     $r["nsub"]=$db->Record["cnt"];
     $db->free();
-    $db->query("select sd.*, dt.description as type_desc, dt.only_dns from sub_domaines sd, domaines_type dt where compte='$cuid' and domaine='$dom' and upper(dt.name)=upper(sd.type) order by sd.sub,sd.type");
+    $db->query("SELECT sd.*, dt.description AS type_desc, dt.only_dns FROM sub_domaines sd, domaines_type dt WHERE compte='$cuid' AND domaine='$dom' AND UPPER(dt.name)=UPPER(sd.type) ORDER BY sd.sub,sd.type");
     // Pas de webmail, on le cochera si on le trouve.
     for($i=0;$i<$r["nsub"];$i++) {
       $db->next_record();
