@@ -14,6 +14,9 @@
 # Every 5 minutes, spool waiting domain changes
 */5 * * * *	root		/usr/lib/alternc/update_domains.sh
 
+# Every 5 minutes, delete mails
+*/5 * * * *	root		/usr/lib/alternc/mail_deletion.sh
+
 # Every hour, check for slave_dns refreshes
 5 * * * *       root            /usr/lib/alternc/slave_dns
 

@@ -530,6 +530,7 @@ src/functions_dns.sh -text
 src/functions_hosting.sh -text
 src/mail_add -text
 src/mail_del -text
+src/mail_deletion.sh -text
 src/mem_add -text
 src/mem_del -text
 src/quota_delete -text
