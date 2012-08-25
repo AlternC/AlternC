@@ -1,10 +1,9 @@
 <?php
-/*
- $Id: m_admin.php,v 1.16 2006/02/09 20:12:22 benjamin Exp $
+/* 
  ----------------------------------------------------------------------
  AlternC - Web Hosting System
- Copyright (C) 2006 Le réseau Koumbit Inc.
- http://koumbit.org/
+ Copyright (C) 2000-2012 by the AlternC Development Team.
+ https://alternc.org/
  ----------------------------------------------------------------------
  LICENSE
 
@@ -20,10 +19,10 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file: Benjamin Sonntag
  Purpose of file: Administrate members and rights.
  ----------------------------------------------------------------------
 */
+
 /* ----------------------------------------------------------------- */
 /**
 * Classe de gestion de l'administration du serveur par les super-admin.
@@ -49,14 +48,7 @@ class m_admin {
     * the authorized TLDs. It's an array of strings explaining the current state of the TLD.
     */
 
-  var $tldmode=array(
-		     0 => "This TLD is forbidden",
-		     1 => "primary DNS is checked in WHOIS db",
-		     2 => "primary & secondary DNS are checked in WHOIS db",
-		     3 => "Domain must exist, but don't do any DNS check",
-		     4 => "Domain can be installed, no check at all",
-		     5 => "Domain can be installed, force NO DNS hosting",
-		     );
+  public $tldmode=array();
 
   /* ----------------------------------------------------------------- */
   /**
@@ -67,6 +59,15 @@ class m_admin {
     $db->query("SELECT su FROM membres WHERE uid='$cuid';");
     $db->next_record();
     $this->enabled=$db->f("su");
+
+    $this->tldmode=array(
+			 0 => _("This TLD is forbidden"),
+			 1 => _("primary DNS is checked in WHOIS db"),
+			 2 => _("primary & secondary DNS are checked in WHOIS db"),
+			 3 => _("Domain must exist, but don't do any DNS check"),
+			 4 => _("Domain can be installed, no check at all"),
+			 5 => _("Domain can be installed, force NO DNS hosting"),
+			 );
   }
 
   /* ----------------------------------------------------------------- */
@@ -1260,7 +1261,7 @@ EOF;
       $logins[]=$login;
       foreach($logins as $l) {
 	if (strpos($password,$l)!==false) {
-	  $err->raise("admin",17);
+	  $err->raise("admin",_("The password policy prevents you to use your login name inside your password"));
 	  return false;
 	}
       }

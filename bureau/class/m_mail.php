@@ -124,7 +124,7 @@ class m_mail {
    * @param $dom_id integer the domain id.
    * @param $search string search that string in recipients or address.
    * @param $offset integer skip THAT much emails in the result.
-   * @param $count integer return no more than THAT much emails.
+   * @param $count integer return no more than THAT much emails. -1 for ALL. Offset is ignored then.
    * @result an array of each mail hosted under the domain.
    */
   function enum_domain_mails($dom_id = null, $search="", $offset=0, $count=30){
@@ -138,11 +138,10 @@ class m_mail {
     $db->query("SELECT count(a.id) AS total FROM address a LEFT JOIN recipient r ON r.address_id=a.id WHERE $where;");
     $db->next_record();
     $this->total=$db->f("total");
-
+    if ($count!=-1) $limit="LIMIT $offset,$count"; else $limit="";
     $db->query("SELECT a.id, a.address, a.password, a.`enabled`, a.mail_action, d.domaine AS domain, m.quota, m.quota*1024*1024 AS quotabytes, m.bytes AS used, NOT ISNULL(m.id) AS islocal, a.type, r.recipients, m.lastlogin  
          FROM (address a LEFT JOIN mailbox m ON m.address_id=a.id) LEFT JOIN recipient r ON r.address_id=a.id, domaines d 
-         WHERE $where AND d.id=a.domain_id 
-         LIMIT $offset,$count;");
+         WHERE $where AND d.id=a.domain_id $limit;");
     if (! $db->next_record()) {
       $err->raise("mail",_("No mail found for this query"));
       return false;
@@ -152,7 +151,7 @@ class m_mail {
       $details=$db->Record;
       // if necessary, fill the typedata with data from hooks ...
       if ($details["type"]) {
-	$result=$hooks->invoke("mail_get_details",array($details["id"])); // Will fill typedata if necessary
+	$result=$hooks->invoke("hook_mail_get_details",array($details["id"])); // Will fill typedata if necessary
 	$details["typedata"]=implode("<br />",$result);
       }
       $res[]=$details;
@@ -192,7 +191,7 @@ class m_mail {
     }
 
     // Call other classes to check we can create it:
-    $cancreate=$hooks->invoke('hooks_mail_cancreate',array($dom_id,$domain,$mail));
+    $cancreate=$hooks->invoke("hook_mail_cancreate",array($dom_id,$mail));
     if (in_array(false,$cancreate,true)) {
       return false;
     }
@@ -239,7 +238,7 @@ class m_mail {
     $details=$db->Record;
     // if necessary, fill the typedata with data from hooks ...
     if ($details["type"]) {
-      $result=$hooks->invoke("mail_get_details",array($mail_id)); // Will fill typedata if necessary
+      $result=$hooks->invoke("hook_mail_get_details",array($mail_id)); // Will fill typedata if necessary
       $details["typedata"]=implode("<br />",$result);
     }
     return $details;
@@ -268,6 +267,22 @@ class m_mail {
       $err->raise("mail",_("This email is not yours, you can't change anything on it"));
       return $this->isitmy_cache[$mail_id]=false;
     }
+  }
+
+
+  /* ----------------------------------------------------------------- */
+  /** Hook called when the DOMAIN class will delete a domain.
+   *
+   * @param $dom integer the number of the email to delete
+   * @return true if the email has been properly deleted 
+   * or false if an error occured ($err is filled accordingly)
+   */ 
+  function hook_dom_del_mx_domain($dom_id) {
+    $list=$this->enum_domain_mails($dom_id,"",0,-1);
+    foreach($list as $one) {
+      $this->delete($one["id"]);
+    }
+    return true;
   }
 
 
@@ -478,7 +493,8 @@ class m_mail {
     $red="";
     foreach($r as $m) {
       $m=trim($m);
-      if ($m && filter_var($m,FILTER_VALIDATE_EMAIL)) {
+      if ($m && filter_var($m,FILTER_VALIDATE_EMAIL)  // Recipient Email is valid
+	  && $m!=($me["address"]."@".$me["domain"])) {  // And not myself (no loop allowed easily ;) )
 	$red.=$m."\n";
       }
     }

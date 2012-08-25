@@ -117,7 +117,7 @@ if (!$res=$mail->get_details($mail_id)) {
 
 } 
 
-if (!$error) $error=_("Your email has been edited successfully");
+if (!$error || !trim($error,"<br />")) $error=_("Your email has been edited successfully");
 
 $_REQUEST["domain_id"]=$dom->get_domain_byname($res["domain"]);
 include("mail_list.php");

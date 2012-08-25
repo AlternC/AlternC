@@ -1,6 +1,10 @@
 <?php
-/*
+/* 
  ----------------------------------------------------------------------
+ AlternC - Web Hosting System
+ Copyright (C) 2000-2012 by the AlternC Development Team.
+ https://alternc.org/
+----------------------------------------------------------------------
  LICENSE
 
  This program is free software; you can redistribute it and/or
@@ -190,15 +194,9 @@ class m_dom {
       $err->raise("dom", 26);
       return false;
     }
-    $name=mysql_real_escape_string($name);
-    $description=mysql_real_escape_string($description);
-    $target=mysql_real_escape_string($target);
-    $entry=mysql_real_escape_string($entry);
-    $compatibility=mysql_real_escape_string($compatibility);
-    $enable=mysql_real_escape_string($enable);
-    $only_dns=intval($only_dns);
-    $need_dns=intval($need_dns);
-    $advanced=intval($advanced);
+    $name=mysql_real_escape_string($name);    $description=mysql_real_escape_string($description);    $target=mysql_real_escape_string($target);
+    $entry=mysql_real_escape_string($entry);    $compatibility=mysql_real_escape_string($compatibility);    $enable=mysql_real_escape_string($enable);
+    $only_dns=intval($only_dns);    $need_dns=intval($need_dns);    $advanced=intval($advanced);
     $db->query("UPDATE domaines_type SET description='$description', target='$target', entry='$entry', compatibility='$compatibility', enable='$enable', need_dns=$need_dns, only_dns=$only_dns, advanced='$advanced' where name='$name';");
     return true;
   }   
@@ -262,35 +260,26 @@ class m_dom {
    * @return boolean Retourne FALSE si une erreur s'est produite, TRUE sinon.
    */
   function del_domain($dom) {
-    global $db,$err,$classes,$cuid;
+    global $db,$err,$classes,$cuid,$hooks;
     $err->log("dom","del_domain",$dom);
     $dom=strtolower($dom);
-    $db->query("SELECT * FROM domaines WHERE domaine='$dom';");
-    if ($db->num_rows()==0) {
-      $err->raise("dom",1,$dom);
+
+    if (!$r=$this->get_domain_all($dom)) {
       return false;
     }
-    $db->next_record();
-    if ($db->f("compte")!=$cuid) {
-      $err->raise("dom",2,$dom);
-      return false;
-    }
+
+    // Call Hooks to delete the domain and the MX management:
+    // TODO : the 2 calls below are using an OLD hook call, FIXME: remove them when unused
+    $hooks->invoke("alternc_del_domain",array($dom));
+    $hooks->invoke("alternc_del_mx_domain",array($dom));
+    // New hook calls: 
+    $hooks->invoke("hook_dom_del_domain",array($r["id"]));
+    $hooks->invoke("hook_dom_del_mx_domain",array($r["id"]));
+
+    // Now mark the domain for deletion:
     $db->query("UPDATE sub_domaines SET web_action='DELETE'  WHERE domaine='$dom';");
     $db->query("UPDATE domaines SET dns_action='DELETE'  WHERE domaine='$dom';");
 
-    // DEPENDANCE :
-    // Lancement de del_dom sur les classes domain_sensitive :
-    // Declenchons les autres classes.
-    foreach($classes as $c) {
-      if (method_exists($GLOBALS[$c],"alternc_del_domain")) {
-          $GLOBALS[$c]->alternc_del_domain($dom);
-      }
-    }
-    foreach($classes as $c) {
-      if (method_exists($GLOBALS[$c],"alternc_del_mx_domain")) {
-          $GLOBALS[$c]->alternc_del_mx_domain($dom);
-      }
-    }
     return true;
   }
 
@@ -316,7 +305,7 @@ class m_dom {
    $ @return boolean Retourne FALSE si une erreur s'est produite, TRUE sinon.
   */
   function add_domain($domain,$dns,$noerase=0,$force=0,$isslave=0,$slavedom="") {
-    global $db,$err,$quota,$classes,$L_MX,$L_FQDN,$tld,$cuid,$bro;
+    global $db,$err,$quota,$classes,$L_MX,$L_FQDN,$tld,$cuid,$bro,$hooks;
     $err->log("dom","add_domain",$domain);
 
     // Locked ?
@@ -332,7 +321,7 @@ class m_dom {
       return false;
     }
     // Interdit les domaines clés (table forbidden_domains) sauf en cas FORCE
-    $db->query("select domain from forbidden_domains where domain='$domain'");
+    $db->query("SELECT domain FROM forbidden_domains WHERE domain='$domain'");
     if ($db->num_rows() && !$force) {
       $err->raise("dom",22);
       return false;
@@ -386,7 +375,11 @@ class m_dom {
       return false;
     }
     if ($noerase) $noerase="1"; else $noerase="0";
-    $db->query("insert into domaines (compte,domaine,gesdns,gesmx,noerase,dns_action) values ('$cuid','$domain','$dns','1','$noerase','UPDATE');");
+    $db->query("INSERT INTO domaines (compte,domaine,gesdns,gesmx,noerase,dns_action) VALUES ('$cuid','$domain','$dns','1','$noerase','UPDATE');");
+    if (!($id=$db->lastid())) {
+      $err->raise("dom",_("An unexpected error occured when creating the domain"));
+      return false;
+    }
 
     if ($isslave) {
       $isslave=true;
@@ -426,28 +419,21 @@ class m_dom {
       $this->set_sub_domain($domain, 'mail', $this->type_webmail, '');
     }
 
-    // DEPENDANCE :
-    // Lancement de add_dom sur les classes domain_sensitive :
-    // Declenchons les autres classes.    
-    foreach($classes as $c) {
-      if (method_exists($GLOBALS[$c],"alternc_add_domain")) {
-        $GLOBALS[$c]->alternc_add_domain($domain);
-      }
-    }
-    foreach($classes as $c) {
-      if (method_exists($GLOBALS[$c],"alternc_add_mx_domain")) {
-        $GLOBALS[$c]->alternc_add_mx_domain($domain);
-      }
-    }
+    // TODO: Old hooks, FIXME: when unused remove them
+    $hooks->invoke("alternc_add_domain",array($domain));
+    $hooks->invoke("alternc_add_mx_domain",array($domain));
     if ($isslave) {
-      foreach($classes as $c) {
-        if (method_exists($GLOBALS[$c],"alternc_add_slave_domain")) {
-          $GLOBALS[$c]->alternc_add_slave_domain($domain,$slavedom);
-        }
-      } 
+      $hooks->invoke("alternc_add_slave_domain",array($domain));
+    }
+    // New Hooks: 
+    $hooks->invoke("hook_dom_add_domain",array($id));
+    $hooks->invoke("hook_dom_add_mx_domain",array($id));
+    if ($isslave) {
+      $hooks->invoke("hook_dom_add_slave_domain",array($id));
     }
     return true;
   }
+
 
   /* ----------------------------------------------------------------- */
   /**
@@ -604,12 +590,12 @@ class m_dom {
     }
   } // whois
 
+
   /* ----------------------------------------------------------------- */
   /**
    *  vérifie la presence d'un champs mx valide sur un serveur DNS
    *
-  */
-  
+  */  
   function checkmx($domaine,$mx) {
     //initialise variables
     $mxhosts = array();
@@ -685,11 +671,11 @@ class m_dom {
       return false;
     }
     $db->next_record();
+    $r["id"]=$db->Record["id"];
     $r["dns"]=$db->Record["gesdns"];
     $r["dns_action"]=$db->Record["dns_action"];
     $r["dns_result"]=$db->Record["dns_result"];
     $r["mail"]=$db->Record["gesmx"];
-//    $r["mx"]=$db->Record["mx"]; // le champs mx n'existe plus dans domaines
     $r['noerase']=$db->Record['noerase'];
     $db->free();
     $db->query("select count(*) as cnt from sub_domaines where compte='$cuid' and domaine='$dom'");
@@ -698,7 +684,6 @@ class m_dom {
     $db->free();
     $db->query("select sd.*, dt.description as type_desc, dt.only_dns from sub_domaines sd, domaines_type dt where compte='$cuid' and domaine='$dom' and upper(dt.name)=upper(sd.type) order by sd.sub,sd.type");
     // Pas de webmail, on le cochera si on le trouve.
-    $this->webmail=0;
     for($i=0;$i<$r["nsub"];$i++) {
       $db->next_record();
       $r["sub"][$i]=array();
@@ -709,12 +694,6 @@ class m_dom {
       $r["sub"][$i]["type_desc"]=$db->Record["type_desc"];
       $r["sub"][$i]["only_dns"]=$db->Record["only_dns"];
       $r["sub"][$i]["web_action"]=$db->Record["web_action"];
-/*
-      if ($db->Record["type"]==3) { // Webmail
-  $this->webmail=1;
-  $r["sub"][$i]["dest"]=_("Webmail access");
-      }
-*/
     }
     $db->free();
     return $r;
@@ -748,14 +727,6 @@ class m_dom {
       $err->raise("dom",3+$t);
       return false;
     }
-/*
-    if ( ! empty($value)) {
-        $type = " and valeur=\"".mysql_real_escape_string($value)."\"";
-    }
-    if ( ! empty($type)) {
-        $type = " and type=\"".mysql_real_escape_string($type)."\"";
-    }
-*/
     $db->query("select sd.*, dt.description as type_desc, dt.only_dns from sub_domaines sd, domaines_type dt where compte='$cuid' and domaine='$dom' and sub='$sub' and ( length('$type')=0 or type='$type') and (length('$value')=0 or '$value'=valeur) and upper(dt.name)=upper(sd.type);");
     if ($db->num_rows()==0) {
       $err->raise("dom",14);
@@ -778,7 +749,6 @@ class m_dom {
     global $db,$err,$cuid;
 
     // check the type we can have in domaines_type.target
-
     switch ($this->domains_type_target_values($type)) {
       case 'NONE':
         if (empty($value) or is_null($value)) {return true;}
@@ -846,7 +816,7 @@ class m_dom {
     return true;
   }
 
-  //  /* ----------------------------------------------------------------- */
+  /* ----------------------------------------------------------------- */
   /**
    * Modifier les information du sous-domaine demandé.
    *
@@ -952,6 +922,7 @@ class m_dom {
     return true;
   } // del_sub_domain
 
+
   /* ----------------------------------------------------------------- */
   /**
    * Modifie les information du domaine précisé.
@@ -966,7 +937,7 @@ class m_dom {
    *
    */
   function edit_domain($dom,$dns,$gesmx,$force=0) {
-    global $db,$err,$L_MX,$classes,$cuid;
+    global $db,$err,$L_MX,$classes,$cuid,$hooks;
     $err->log("dom","edit_domain",$dom."/".$dns."/".$gesmx);
     // Locked ?
     if (!$this->islocked && !$force) {
@@ -1022,24 +993,18 @@ class m_dom {
       }
     }
       
-    // OK, des modifs ont été faites, on valide :
-    // DEPENDANCE :
-    if ($gesmx && !$r["mail"]) { // on a associé le MX : on cree donc l'entree dans MySQL
-      // Lancement de add_dom sur les classes domain_sensitive :
-      foreach($classes as $c) {
-	if (method_exists($GLOBALS[$c],"alternc_add_mx_domain")) {
-	  $GLOBALS[$c]->alternc_add_mx_domain($dom);
-	}
-      }
+    if ($gesmx && !$r["mail"]) {
+      // TODO: old hooks, FIXME: remove when unused
+      $hooks->invoke("alternc_add_mx_domain",array($domain));
+      // New Hooks: 
+      $hooks->invoke("hook_dom_add_mx_domain",array($r["id"]));
     }
     
     if (!$gesmx && $r["mail"]) { // on a dissocié le MX : on détruit donc l'entree dans LDAP
-      // Lancement de del_dom sur les classes domain_sensitive :
-      foreach($classes as $c) {
-	if (method_exists($GLOBALS[$c],"alternc_del_mx_domain")) {
-	  $GLOBALS[$c]->alternc_del_mx_domain($dom);
-	}
-      }
+      // TODO: old hooks, FIXME: remove when unused
+      $hooks->invoke("alternc_del_mx_domain",array($domain));
+      // New Hooks: 
+      $hooks->invoke("hook_dom_del_mx_domain",array($r["id"]));
     }
     
     $db->query("UPDATE domaines SET gesdns='$dns', gesmx='$gesmx' WHERE domaine='$dom'");

@@ -106,7 +106,7 @@ if (isset($error)) {
   <tr><td style="width: 50%; text-align: justify"><label for="recipients"><?php __("If you want to send emails received on this address to other addresses, even outside this server, enter those recipients here."); ?></label></td><td>(<?php __("one recipient per line"); ?>)<br /><textarea class="int" cols="32" rows="5" name="recipients" id="recipients"><?php echo $recipients; ?></textarea></td></tr>
 <?php 
    
-   $html=$hooks->invoke("mail_edit_html",array($mail_id,$type));
+   $html=$hooks->invoke("hook_mail_edit_html",array($mail_id,$type));
 foreach($html as $h) echo $h; 
 
 ?>
