@@ -1,0 +1,9 @@
+The following files are selenium test suites
+
+the <date>-*.html files are complete test suites
+the *.html files are individual tests. 
+
+use Selenium IDE and Selenium Server to manage / run those tests.
+
+The AlternC's panel is supposed to run at http://ac.local/
+

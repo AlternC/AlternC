@@ -513,6 +513,9 @@ po/fr/LC_MESSAGES/alternc-admintools.po -text
 /quota_delete -text
 /quota_init -text
 /repos-to-tx.sh -text
+selenium/20120826-alternc-panel-testsuite.html -text
+selenium/README -text
+selenium/alternc.domain-local-mail-tld.html -text
 src/Makefile -text
 src/alternc-check -text
 src/alternc-dboptimize -text
