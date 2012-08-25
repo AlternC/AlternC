@@ -1,13 +1,9 @@
 <?php
 /*
-$Id: adm_email.php,v 1.1 2005/09/05 10:55:48 arnodu59 Exp $
 ----------------------------------------------------------------------
 AlternC - Web Hosting System
-Copyright (C) 2005 by the AlternC Development Team.
-http://alternc.org/
-----------------------------------------------------------------------
-Based on:
-Valentin Lacambre's web hosting softwares: http://altern.org/
+Copyright (C) 2000-2012 by the AlternC Development Team.
+https://alternc.org/
 ----------------------------------------------------------------------
 LICENSE
 
@@ -23,7 +19,6 @@ GNU General Public License for more details.
 
 To read the license please visit http://www.gnu.org/copyleft/gpl.html
 ----------------------------------------------------------------------
-Original Author of file: Benjamin Sonntag
 Purpose of file: Show a form to edit a member
 ----------------------------------------------------------------------
 */
@@ -37,10 +32,10 @@ if (!$admin->enabled) {
 }
 
 $fields = array (
-	"subject"    		=> array ("post", "string", ""),
-	"message"    		=> array ("post", "string", ""),
-	"from"    		=> array ("post", "string", ""),
-	"submit"    		=> array ("post", "string", ""),
+		 "subject"    		=> array ("post", "string", ""),
+		 "message"    		=> array ("post", "string", ""),
+		 "from"    		=> array ("post", "string", ""),
+		 "submit"    		=> array ("post", "string", ""),
 );
 getFields($fields);
 
@@ -49,7 +44,7 @@ getFields($fields);
 <?php
 
 if ( !empty($submit) ) {
-  if ($admin->mailallmembers($subject,$message,$from)) {
+  if ($admin->mail_all_members($subject,$message,$from)) {
     $error=_("The email was successfully sent");
   } else {
     $error=_("There was an error");

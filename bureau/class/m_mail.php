@@ -69,7 +69,7 @@ class m_mail {
   /* ----------------------------------------------------------------- */
   /** Quota list (hook for quota class)
    */
-  function alternc_quota_names() {
+  function hook_quota_names() {
     return "mail";
   }
 
@@ -81,11 +81,11 @@ class m_mail {
    * @return the number of used service for the specified quota, 
    * or false if I'm not the one for the named quota
    */
-  function alternc_get_quota($name) {
+  function hook_quota_get($name) {
     global $db,$err,$cuid;
     if ($name=="mail") {
       $err->log("mail","getquota");
-      $db->query("SELECT COUNT(*) AS cnt FROM address a, domaines d WHERE a.domain_id=d.id AND d.compte=$cuid;");
+      $db->query("SELECT COUNT(*) AS cnt FROM address a, domaines d WHERE a.domain_id=d.id AND d.compte=$cuid AND a.type='';");
       $db->next_record();
       return $db->f("cnt");
     }
