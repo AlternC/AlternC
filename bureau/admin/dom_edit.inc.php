@@ -7,7 +7,7 @@ include_once("head.php");
 # Take the values of the subdomain in arguments
 
 function sub_domains_edit($domain, $sub=false,$type=false,$value=false) {
-  global $admin, $oldid, $isedit;
+  global $admin, $err, $oldid, $isedit;
 
 $dom=new m_dom();
 $dom->lock();
