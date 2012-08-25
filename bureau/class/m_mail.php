@@ -85,7 +85,7 @@ class m_mail {
     global $db,$err,$cuid;
     if ($name=="mail") {
       $err->log("mail","getquota");
-      $db->query("SELECT COUNT(*) AS cnt FROM address WHERE domain_id in (select id from domaines where compte=$cuid);");
+      $db->query("SELECT COUNT(*) AS cnt FROM address a, domaines d WHERE a.domain_id=d.id AND d.compte=$cuid;");
       $db->next_record();
       return $db->f("cnt");
     }
@@ -482,7 +482,7 @@ class m_mail {
     }
 
     if ($islocal) {
-      if ($quotamb<(intval($me["used"]/1024/1024)+1)) {
+      if ($quotamb!=0 && $quotamb<(intval($me["used"]/1024/1024)+1)) {
 	$quotamb=intval($me["used"]/1024/1024)+1;
 	$err->raise("mail",_("You set a quota smaller than the current mailbox size. Since it's not allowed, we set the quota to the current mailbox size."));
       }
