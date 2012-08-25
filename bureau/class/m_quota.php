@@ -1,40 +1,40 @@
 <?php
 /*
- ----------------------------------------------------------------------
- AlternC - Web Hosting System
- Copyright (C) 2000-2012 by the AlternC Development Team.
- https://alternc.org/
- ----------------------------------------------------------------------
- LICENSE
+  ----------------------------------------------------------------------
+  AlternC - Web Hosting System
+  Copyright (C) 2000-2012 by the AlternC Development Team.
+  https://alternc.org/
+  ----------------------------------------------------------------------
+  LICENSE
 
- This program is free software; you can redistribute it and/or
- modify it under the terms of the GNU General Public License (GPL)
- as published by the Free Software Foundation; either version 2
- of the License, or (at your option) any later version.
+  This program is free software; you can redistribute it and/or
+  modify it under the terms of the GNU General Public License (GPL)
+  as published by the Free Software Foundation; either version 2
+  of the License, or (at your option) any later version.
 
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
 
- To read the license please visit http://www.gnu.org/copyleft/gpl.html
- ----------------------------------------------------------------------
- Purpose of file: Manage user quota
- ----------------------------------------------------------------------
+  To read the license please visit http://www.gnu.org/copyleft/gpl.html
+  ----------------------------------------------------------------------
+  Purpose of file: Manage user quota
+  ----------------------------------------------------------------------
 */
 
 /**
-* Class for hosting quotas management
-*
-* This class manages services' quotas for each user of AlternC.
-* The available quotas for each service is stored in the system.quotas
-* mysql table. The used value is computed by the class using a
-* callback function <code>alternc_quota_check($uid)</code> that
-* may by exported by each service class.<br>
-* each class may also export a function <code>alternc_quota_names()</code>
-* that returns an array with the quotas names managed by this class.
-*
-*/
+ * Class for hosting quotas management
+ *
+ * This class manages services' quotas for each user of AlternC.
+ * The available quotas for each service is stored in the system.quotas
+ * mysql table. The used value is computed by the class using a
+ * callback function <code>alternc_quota_check($uid)</code> that
+ * may by exported by each service class.<br>
+ * each class may also export a function <code>alternc_quota_names()</code>
+ * that returns an array with the quotas names managed by this class.
+ *
+ */
 class m_quota {
 
   var $disk=Array(  /* disk resource for which we will manage quotas */
@@ -127,49 +127,49 @@ class m_quota {
         return array("t"=>0, "u"=>0);
       } else {
         while ($db->next_record()) {
-        $ttmp[]=$db->Record;
-      }             
+	  $ttmp[]=$db->Record;
+	}             
 	// TODO: old hook method FIXME: remove when unused
-      foreach ($ttmp as $tt) {
-	if (! isset( $this->clquota[$tt["name"]] )) continue;
-        if (method_exists($GLOBALS[$this->clquota[$tt["name"]]],"alternc_get_quota")) {
-          $this->quotas[$tt["name"]] = 
-	    array( 
-		  "t"=>$tt["total"], 
-		  "u"=> $GLOBALS[$this->clquota[$tt["name"]]]->alternc_get_quota($tt["name"])
-		   );
-        }
-      }   
-      foreach ($ttmp as $tt) {
-	$res=$hooks->invoke("",$tt["name"]);
-	foreach($res as $r) {
-	  if ($r) {
-	    $this->quotas[$tt["name"]]=array("t"=>$tt["total"],"u");
+	foreach ($ttmp as $tt) {
+	  if (! isset( $this->clquota[$tt["name"]] )) continue;
+	  if (method_exists($GLOBALS[$this->clquota[$tt["name"]]],"alternc_get_quota")) {
+	    $this->quotas[$tt["name"]] = 
+	      array( 
+		    "t"=>$tt["total"], 
+		    "u"=> $GLOBALS[$this->clquota[$tt["name"]]]->alternc_get_quota($tt["name"])
+		     );
 	  }
 	}
+	foreach ($ttmp as $tt) {
+	  $res=$hooks->invoke("",$tt["name"]);
+	  foreach($res as $r) {
+	    if ($r) {
+	      $this->quotas[$tt["name"]]=array("t"=>$tt["total"],"u");
+	    }
+	  }
+	}
+	reset($this->disk);
+	while (list($key,$val)=each($this->disk)) {
+	  $a=array(); 
+	  exec("/usr/lib/alternc/quota_get ".$cuid ,$a);
+	  $this->quotas[$val]=array("t"=>$a[1],"u"=>$a[0]);
+	}   
+	$get_quota_cache[$cuid] = $this->quotas;
       }
-      reset($this->disk);
-      while (list($key,$val)=each($this->disk)) {
-        $a=array(); 
-        exec("/usr/lib/alternc/quota_get ".$cuid ,$a);
-        $this->quotas[$val]=array("t"=>$a[1],"u"=>$a[0]);
-      }   
-      $get_quota_cache[$cuid] = $this->quotas;
     }
-    
+      
     if ($ressource) {
       if (isset($this->quotas[$ressource]) ) {
-        return $this->quotas[$ressource];
+	return $this->quotas[$ressource];
       } else {
-        return 0;
+	return 0;
       } 
     } else {
       return $this->quotas;
     }
   }
-
-
-
+  
+  
   /* ----------------------------------------------------------------- */
   /** Set the quota for a user (and for a ressource)
    * @param string $ressource ressource to set quota of
@@ -184,7 +184,7 @@ class m_quota {
       exec("/usr/lib/alternc/quota_edit $cuid $size &> /dev/null &");
       // Now we check that the value has been written properly : 
       exec("/usr/lib/alternc/quota_get $cuid &> /dev/null &",$a);
-    if ($size!=$a[1]) {
+      if ($size!=$a[1]) {
 	$err->raise("quota",1);
 	return false;
       }
@@ -192,9 +192,9 @@ class m_quota {
     // We check that this ressource exists for this client :
     $db->query("SELECT * FROM quotas WHERE uid='$cuid' AND name='$ressource'");
     if ($db->num_rows()) {
-	$db->query("UPDATE quotas SET total='$size' WHERE uid='$cuid' AND name='$ressource';");
+      $db->query("UPDATE quotas SET total='$size' WHERE uid='$cuid' AND name='$ressource';");
     } else {
-	$db->query("INSERT INTO quotas (uid,name,total) VALUES ('$cuid','$ressource','$size');");
+      $db->query("INSERT INTO quotas (uid,name,total) VALUES ('$cuid','$ressource','$size');");
     }
     return true;
   }
