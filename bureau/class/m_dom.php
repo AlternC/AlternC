@@ -1210,6 +1210,19 @@ class m_dom {
     }
   }
   
+  /* ----------------------------------------------------------------- */
+  /**
+   * Count all domains, for all users
+   */
+  function count_domains_all() {
+    global $db,$err,$cuid;
+    $db->query("SELECT COUNT(*) AS count FROM domaines;");
+    if ($db->next_record()) {
+      return $db->f('count');
+    } else {
+      return 0;
+    }
+  }
 
   /* ----------------------------------------------------------------- */
   /**
