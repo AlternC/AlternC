@@ -168,20 +168,6 @@ class m_dom {
     return true;
   }
 
-  function domains_type_disable($id) {
-    global $db,$err,$cuid;
-    $id=intval($id);
-    $db->query("update domaines_type set enable=false where id=$id;");
-    return true;
-  }
-
-  function domains_type_enable($id) {
-    global $db,$err,$cuid;
-    $id=intval($id);
-    $db->query("update domaines_type set enable=true where id=$id;");
-    return true;
-  }
-
   function domains_type_update($name, $description, $target, $entry, $compatibility, $enable, $only_dns, $need_dns,$advanced) {
     global $err,$cuid,$db;
     $id=intval($id);
