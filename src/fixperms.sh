@@ -101,6 +101,7 @@ doone() {
       REP="$ALTERNC_LOC/html/$INITIALE/$LOGIN/$sub_dir"
 
       # Set the file readable only for the AlternC User
+      mkdir -p "$REP"
       chown -R alterncpanel:$GID "$REP"
       chmod 2770 -R "$REP"
 
