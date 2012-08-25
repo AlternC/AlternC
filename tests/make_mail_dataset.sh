@@ -7,7 +7,7 @@
 #     make_mail_dataset.sh > dataset.sql
 
 # Domaine sur lequel porte le jeu de données.
-DOMAIN="test22.com"
+DOMAIN="example.com"
 
 # Identifiant du domaine.
 DOMAIN_ID=2000
@@ -119,7 +119,7 @@ commit(){
 
 # Ajout du domaine
 begin
-echo "INSERT INTO domaines (compte, domaine, dns_result) VALUES ($DOMAIN_ID, '$DOMAIN', '0');"
+echo "INSERT INTO domaines (id, compte, domaine, dns_result) VALUES ($DOMAIN_ID, $DOMAIN_ID, '$DOMAIN', '0');"
 commit
 
 # Cas simples
