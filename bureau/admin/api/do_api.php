@@ -23,15 +23,28 @@
  ----------------------------------------------------------------------
 */
 
+/* We will handle auth ourselves */
+define('NOCHECK', true);
+
 require_once("../../class/config.php");
 
 class AC_Rest_Api {
+
+    /*
+     * Constructor
+     */
+    function AC_Rest_Api($method, $request, $accept) {
+        $this->_method = $method;
+        $this->_request = $request;
+        $this->_out_format = $this->_choose_output_format($accept);
+    }
+
     /*
      * Choose which output format to use
      *
      * @param accept string An HTTP accept string
      */
-    function choose_output_format($accept) {
+    function _choose_output_format($accept) {
         $accepts = split(',', $accept);
         $found = false;
         foreach ($accepts as $acc) {
@@ -48,22 +61,45 @@ class AC_Rest_Api {
         }
         return $output;
     }
+
+    function send_output() {
+        header("Content-Type: {$this->_out_format}; charset=UTF-8");
+        $out_data = array ('text' => "This is the output from REST request");
+        switch ($this->_out_format) {
+            case 'text/html':
+                echo "<html><body><xmp>\n";
+                print_r($out_data);
+                echo "</xmp></body></html>\n";
+                break;
+            case 'text/plain':
+                print_r($out_data);
+                break;
+            case 'application/json':
+                echo json_encode($out_data);
+                break;
+        }
+    }
 }
 
 # parse request
 $fields = array (
     "SCRIPT_URL"        => array ("server", "string", ""),
     "HTTP_ACCEPT"       => array ("server", "string", "application/json"),
+    "REQUEST_METHOD"    => array ("server", "string", "GET"),
 );
 $qvars = getFields($fields);
-print_r($qvars);
-$outfmt = AC_Rest_Api::choose_output_format($qvars['HTTP_ACCEPT']);
-print $outfmt;
+#print_r($qvars);
+
+$rest_req = new AC_Rest_Api($qvars['REQUEST_METHOD'], array(), $qvars['HTTP_ACCEPT']);
+
+$rest_req->send_output();
 
 # check auth, if required
 
 # do something with AlternC api class
 
 # return the response
+
+#phpinfo();
 
 ?>

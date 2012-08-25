@@ -8,31 +8,31 @@ remove)
     # remove postfix from the sasl group (might not be user will though...)
     deluser --quiet postfix sasl || true
 
-    if [ -r "/etc/alternc/local.sh" ]
-    then
-	. /etc/alternc/local.sh
-    else
-	FQDN="`hostname --fqdn`"
-    fi
+    #if [ -r "/etc/alternc/local.sh" ]
+    #then
+    #	. /etc/alternc/local.sh
+    #else
+    #	FQDN="`hostname --fqdn`"
+    #fi
 	
     FQDN_LETTER="`echo $FQDN | sed -e 's/.*\.\([^\.]\)[^\.]*\.[^\.]*$/\1/'`"
-    rm -rf /var/alternc/bureau/locales || true
-    rmdir -p /var/alternc/bureau 2> /dev/null || true
-    rm -f /var/alternc/dns/bureau || true
-    rm -f /var/alternc/dns/$FQDN_LETTER/$FQDN || true
-    rmdir -p /var/alternc/html/a/admin 2> /dev/null || true
-    rmdir -p /var/alternc/html/r/root 2> /dev/null || true
+    #rm -rf /var/alternc/bureau/locales || true
+    #rmdir -p /var/alternc/bureau 2> /dev/null || true
+    #rm -f /var/alternc/dns/bureau || true
+    #rm -f /var/alternc/dns/$FQDN_LETTER/$FQDN || true
+    #rmdir -p /var/alternc/html/a/admin 2> /dev/null || true
+    #rmdir -p /var/alternc/html/r/root 2> /dev/null || true
     ;;
 
 upgrade)
     ;;
 
 purge)
-    find /var/alternc/bureau/locales -type f -name "alternc.mo" -exec rm {} \;
-    find /var/alternc/bureau/locales -type f -name "alternc" -exec rm {} \;
-    rm /var/alternc/bureau/class/local.php
-    rm -f /var/alternc/apacheconf/bureau
-    rm -f /var/alternc/apacheconf/$FQDN_LETTER/$FQDN
+    #find /var/alternc/bureau/locales -type f -name "alternc.mo" -exec rm {} \;
+    #find /var/alternc/bureau/locales -type f -name "alternc" -exec rm {} \;
+    #rm /var/alternc/bureau/class/local.php
+    #rm -f /var/alternc/apacheconf/bureau
+    #rm -f /var/alternc/apacheconf/$FQDN_LETTER/$FQDN
     ;;
 
 failed-upgrade|abort-install|abort-upgrade|disappear)
