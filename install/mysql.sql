@@ -663,7 +663,9 @@ concat('*:storage=',cast(`mailbox`.`quota` as char charset latin1),'M') AS `user
 `mailbox`.`messages` AS `nb_messages` 
 from ((`mailbox`
 join `address` on((`address`.`id` = `mailbox`.`address_id`))) 
-join `domaines` on((`domaines`.`id` = `address`.`domain_id`)));
+join `domaines` on((`domaines`.`id` = `address`.`domain_id`)))
+where `address`.`enabled` = 1
+;
 
 --
 -- Structure de la vue `alias_view`
@@ -675,12 +677,12 @@ concat(if(isnull(`mailbox`.`id`),'',concat(concat(`address`.`address`,'@',`domai
 from (((`recipient` join `address` on((`address`.`id` = `recipient`.`address_id`)))
 left join `mailbox` on((`mailbox`.`address_id` = `address`.`id`)))
 join `domaines` on((`domaines`.`id` = `address`.`domain_id`)))
+where `address`.`enabled` = 1
 union
 select distinct concat(`m`.`login`,'@',`v`.`value`) AS `mail`,
 `m`.`mail` AS `alias`
 from ((`membres` `m` join `variable` `v`) join `domaines` `d`)
 where (`v`.`name` = 'mailname_bounce');
-
 
 --
 -- Structure de la table `piwik_users`
