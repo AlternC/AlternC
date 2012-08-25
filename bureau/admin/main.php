@@ -107,7 +107,7 @@ if($admin->enabled) {
   }
 }
 
-$c=@mysql_fetch_array(mysql_query("SELECT * FROM membres WHERE uid='".$cuid."';"));
+$c = $admin->get($cuid);
 
 define("QUOTASONE","1");
 echo "<hr/>";
