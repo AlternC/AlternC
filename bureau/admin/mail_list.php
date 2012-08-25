@@ -53,9 +53,6 @@ if ($domain=$dom->get_domain_byid($domain_id)) {
 ?>
 
 <?php
-if (isset($error)) {
-  	echo "<p class=\"error\">$error</p>";
-}
 
 // Mail creation form
 if ($quota->cancreate("mail")) { 
@@ -77,6 +74,11 @@ if (empty($mails_list)){ // If there is no mail for this domain
 <hr id="topbar"/>
 <h3><?php printf(_("Email addresses of the domain %s"),$domain); ?> : </h3>
 
+<?php
+if (isset($error)) {
+  	echo "<p class=\"error\">$error</p>";
+}
+?>
 
 <table class="searchtable"><tr><td>
 <form method="get" name="formlist1" id="formlist1" action="mail_list.php">

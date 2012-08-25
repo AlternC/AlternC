@@ -467,6 +467,10 @@ class m_mail {
     }
 
     if ($islocal) {
+      if ($quotamb<(intval($me["used"]/1024/1024)+1)) {
+	$quotamb=intval($me["used"]/1024/1024)+1;
+	$err->raise("mail",_("You set a quota smaller than the current mailbox size. Since it's not allowed, we set the quota to the current mailbox size."));
+      }
       $db->query("UPDATE mailbox SET quota=".intval($quotamb)." WHERE address_id=".$mail_id.";");
     }
 
