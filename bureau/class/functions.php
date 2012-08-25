@@ -435,11 +435,11 @@ function ehe($str) {
  */
 function getFields($fields, $requestOnly = false) {
   $vars = array();
-  $methodType = array ("get", "post", "request", "files");
+  $methodType = array ("get", "post", "request", "files", "server");
   
   foreach ($fields AS $name => $options) {
-    if (in_array($options[0], $methodType) === false)
-      die ("Illegal method type used for field " . $name . " : " . $options[0]);
+    if (in_array(strtolower($options[0]), $methodType) === false)
+      die ("Unrecognized method type used for field " . $name . " : " . $options[0]);
     
     if ($requestOnly === true)
       $method = "_REQUEST";
