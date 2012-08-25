@@ -106,10 +106,11 @@ class m_mail {
   /** Returns the list of mail-hosting domains for a user
    * @return array indexed array of hosted domains
    */
-  function enum_domains() {
+  function enum_domains($uid=-1) {
       global $db,$err,$cuid;
       $err->log("mail","enum_domains");
-      $db->query("select d.id, d.domaine, count(a.id) as nb_mail FROM domaines d left join address a on a.domain_id=d.id where d.compte = $cuid group by d.id order by d.domaine asc;");
+      if ($uid == -1) { $uid = $cuid; }
+      $db->query("SELECT d.id, d.domaine, COUNT(a.id) AS nb_mail FROM domaines d LEFT JOIN address a ON a.domain_id=d.id WHERE d.compte={$uid} GROUP BY d.id ORDER BY d.domaine ASC;");
       $this->enum_domains=array();
       while($db->next_record()){
           $this->enum_domains[]=$db->Record;
