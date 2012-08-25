@@ -1012,15 +1012,15 @@ class m_dom {
     
     return true;
   } // edit_domain
-  
 
 
   /****************************/
   /*  Slave dns ip managment  */
   /****************************/
+
+
   /* ----------------------------------------------------------------- */
-  /**
-   * Return the list of ip addresses and classes that are allowed access to domain list
+  /** Return the list of ip addresses and classes that are allowed access to domain list
    * through AXFR Transfers from the bind server.
    */
   function enum_slave_ip() {
@@ -1035,9 +1035,9 @@ class m_dom {
   return $res;
   }
 
+
   /* ----------------------------------------------------------------- */
-  /**
-   * Add an ip address (or a ip class) to the list of allowed slave ip access list.
+  /** Add an ip address (or a ip class) to the list of allowed slave ip access list.
    */
   function add_slave_ip($ip,$class="32") {
   global $db,$err;
@@ -1059,9 +1059,9 @@ class m_dom {
   return true;
   }
 
+
   /* ----------------------------------------------------------------- */
-  /**
-   * Remove an ip address (or a ip class) from the list of allowed slave ip access list.
+  /** Remove an ip address (or a ip class) from the list of allowed slave ip access list.
    */
   function del_slave_ip($ip) {
   global $db,$err;
@@ -1077,10 +1077,8 @@ class m_dom {
   }
 
 
-
   /* ----------------------------------------------------------------- */
-  /**
-   * Check for a slave account
+  /** Check for a slave account
    */
   function check_slave_account($login,$pass) {
   global $db,$err;
@@ -1091,9 +1089,9 @@ class m_dom {
   return false;
   }
 
+
   /* ----------------------------------------------------------------- */
-  /**
-   * Out (echo) the complete hosted domain list : 
+  /** Out (echo) the complete hosted domain list : 
    */
   function echo_domain_list() {
   global $db,$err;
@@ -1106,8 +1104,7 @@ class m_dom {
 
 
   /* ----------------------------------------------------------------- */
-  /**
-   * Returns the complete hosted domain list : 
+  /** Returns the complete hosted domain list : 
    */
   function get_domain_list($uid=-1) {
   global $db,$err;
@@ -1124,10 +1121,8 @@ class m_dom {
   }
 
 
-
   /* ----------------------------------------------------------------- */
-  /**
-   * Returns the name of a domain for the current user, from it's domain_id
+  /** Returns the name of a domain for the current user, from it's domain_id
    * @param $dom_id integer the domain_id to search for
    * @return string the domain name, or false with an error raised.
    */
@@ -1150,10 +1145,8 @@ class m_dom {
   }
 
 
-
   /* ----------------------------------------------------------------- */
-  /**
-   * Returns the id of a domain for the current user, from it's domain name
+  /** Returns the id of a domain for the current user, from it's domain name
    * @param $domain string the domain name to search for
    * @return integer the domain id, or false with an error raised.
    */
@@ -1174,10 +1167,10 @@ class m_dom {
       return false;
     }
   }
+
   
   /* ----------------------------------------------------------------- */
-  /**
-   * Count all domains, for all users
+  /** Count all domains, for all users
    */
   function count_domains_all() {
     global $db,$err,$cuid;
@@ -1189,9 +1182,9 @@ class m_dom {
     }
   }
 
+
   /* ----------------------------------------------------------------- */
-  /**
-   * Return the list of allowed slave accounts 
+  /** Return the list of allowed slave accounts 
    */
   function enum_slave_account() {
   global $db,$err;
@@ -1204,9 +1197,9 @@ class m_dom {
   return $res;
   }
 
+
   /* ----------------------------------------------------------------- */
-  /**
-   * Add a slave account that will be allowed to access the domain list
+  /** Add a slave account that will be allowed to access the domain list
    */
   function add_slave_account($login,$pass) {
   global $db,$err;
@@ -1219,9 +1212,9 @@ class m_dom {
   return true;
   }
 
+
   /* ----------------------------------------------------------------- */
-  /**
-   * Remove a slave account
+  /** Remove a slave account
    */
   function del_slave_account($login) {
   global $db,$err;
@@ -1229,17 +1222,14 @@ class m_dom {
   return true;
   }
 
+
   /*************/
   /*  Private  */
   /*************/
 
 
   /* ----------------------------------------------------------------- */
-  /**
-   * Lock tente de verrouiller le fichier lock du cron. Si tout va bien (toujours?)
-   * retourne True, sinon retourne False
-   * NOTE : le systeme de lock est asymétrique, si on a un fichier CRONLOCK, on
-   * attends (que le cron ait fini son execution).
+  /** Try to lock a domain
    * @access private
    */
   function lock() {
@@ -1255,11 +1245,10 @@ class m_dom {
     return true;
   }
 
+
   /* ----------------------------------------------------------------- */
-  /**
-   * unlock déverrouille le fichier lock du cron. Si tout va bien (toujours?)
-   * retourne True, sinon retourne False
-   * NOTE : actuellement, vu le système de lock asymetrique, on ne fait rien ;)
+  /** Unlock the cron for domain management
+   * return true
    * @access private
    */
   function unlock() {
@@ -1274,8 +1263,7 @@ class m_dom {
 
 
   /* ----------------------------------------------------------------- */
-  /**
-   * Declare that a domain's emails are hosted in this server : 
+  /** Declare that a domain's emails are hosted in this server : 
    * This adds 2 MX entries in this domain (if required)
    */
   function alternc_add_mx_domain($domain) {
@@ -1291,9 +1279,9 @@ class m_dom {
 
   /* ----------------------------------------------------------------- */
   /**
-   * Efface un compte (tous ses domaines)
+   * Delete an account (all his domains)
    */
-  function alternc_del_member() {
+  function hook_admin_del_member() {
     global $err;
     $err->log("dom","alternc_del_member");
     $li=$this->enum_domains();
@@ -1305,13 +1293,12 @@ class m_dom {
 
 
   /* ----------------------------------------------------------------- */
-  /**
-   * Returns the used quota for the $name service for the current user.
+  /** Returns the used quota for the $name service for the current user.
    * @param $name string name of the quota
    * @return integer the number of service used or false if an error occured
    * @access private
    */
-  function alternc_get_quota($name) {
+  function hook_quota_get($name) {
     global $db,$err,$cuid;
     if ($name=="dom") {
       $err->log("dom","get_quota");
@@ -1321,56 +1308,55 @@ class m_dom {
     } else return false;
   }
 
+
 /*---------------------------------------------------------------------*/
-/**
-    * Returns the global domain(s) configuration(s) of a particular user
-    * No parameters needed 
-    *
-**/
+/** Returns the global domain(s) configuration(s) of a particular user
+ * No parameters needed 
+ **/
   function alternc_export_conf() {
     global $db,$err;
     $err->log("dom","export");
     $this->enum_domains();
     foreach ($this->domains as $d) {
-        $str="  <domaines>\n";
-        $str.="   <nom>".$d."</nom>\n";
-        $this->lock();
-        $s=$this->get_domain_all($d);
-        $this->unlock();
-        if(empty($s["dns"])){
-            $s[dns]="non"; 
-        }else{
-            $s[dns]="oui";
-        }
-        $str.="   <dns>".$s[dns]."</dns>\n";
-        
-        if(empty($s[mx])){
-            $s[mx]="non"; 
-        }else{
-            $s[mx]="oui";
-        }
-
-        $str.="   <mx>".$s[mx]."</mx>\n";
-
-        if(empty($s[mail])){
-            $s[mail]="non"; 
-        }
-        $str.="   <mail>".$s[mail]."</mail>\n";
-        if (is_array($s[sub])) {
-            foreach ($s[sub] as $sub) {
-                  $str.="     <subdomain>\n";
-                  $str.="       <enabled>".$sub["enable"]." </enabled>\n";
-                  $str.="       <destination>".$sub["dest"]." </destination>\n";
-                  $str.="       <type>".$sub["type"]." </type>\n";
-                  $str.="     </subdomain>\n";
-            }
-
-        }
-        $str.=" </domaines>\n";
+      $str="  <domaines>\n";
+      $str.="   <nom>".$d."</nom>\n";
+      $this->lock();
+      $s=$this->get_domain_all($d);
+      $this->unlock();
+      if(empty($s["dns"])){
+	$s[dns]="non"; 
+      }else{
+	$s[dns]="oui";
+      }
+      $str.="   <dns>".$s[dns]."</dns>\n";
+      
+      if(empty($s[mx])){
+	$s[mx]="non"; 
+      }else{
+	$s[mx]="oui";
+      }
+      
+      $str.="   <mx>".$s[mx]."</mx>\n";
+      
+      if(empty($s[mail])){
+	$s[mail]="non"; 
+      }
+      $str.="   <mail>".$s[mail]."</mail>\n";
+      if (is_array($s[sub])) {
+	foreach ($s[sub] as $sub) {
+	  $str.="     <subdomain>\n";
+	  $str.="       <enabled>".$sub["enable"]." </enabled>\n";
+	  $str.="       <destination>".$sub["dest"]." </destination>\n";
+	  $str.="       <type>".$sub["type"]." </type>\n";
+	  $str.="     </subdomain>\n";
+	}
+	
+      }
+      $str.=" </domaines>\n";
     }
     return $str;
   }
-
+  
 
 } /* Class m_domains */
 

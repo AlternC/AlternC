@@ -69,7 +69,7 @@ class m_mail {
   /* ----------------------------------------------------------------- */
   /** Quota list (hook for quota class)
    */
-  function alternc_quota_names() {
+  function hook_quota_names() {
     return "mail";
   }
 
@@ -81,11 +81,11 @@ class m_mail {
    * @return the number of used service for the specified quota, 
    * or false if I'm not the one for the named quota
    */
-  function alternc_get_quota($name) {
+  function hook_quota_get($name) {
     global $db,$err,$cuid;
     if ($name=="mail") {
       $err->log("mail","getquota");
-      $db->query("SELECT COUNT(*) AS cnt FROM address a, domaines d WHERE a.domain_id=d.id AND d.compte=$cuid;");
+      $db->query("SELECT COUNT(*) AS cnt FROM address a, domaines d WHERE a.domain_id=d.id AND d.compte=$cuid AND a.type='';");
       $db->next_record();
       return $db->f("cnt");
     }
@@ -116,6 +116,35 @@ class m_mail {
           $this->enum_domains[]=$db->Record;
       }
       return $this->enum_domains;
+  }
+
+
+  /* ----------------------------------------------------------------- */
+  /** available: tells if an email address can be installed in the server
+   * check the domain part (is it mine too), the syntax, and the availability.
+   * @param $mail string email to check
+   * @return boolean true if the email can be installed on the server 
+   */  
+  function available($mail){
+    global $db,$err,$dom;
+    $err->log("mail","available");    
+    list($login,$domain)=explode("@",$mail,2);
+    // Validate the domain ownership & syntax
+    if (!($dom_id=$dom->get_domain_byname($domain))) {
+      return false;
+    }
+    // Validate the email syntax:
+    if (!filter_var($mail,FILTER_VALIDATE_EMAIL)) {
+      $err->raise("mail",_("The email you entered is syntaxically incorrect"));
+      return false;
+    }
+    // Check the availability
+    $db->query("SELECT a.id FROM address a WHERE a.domain_id=".$dom_id." AND a.address='".addslashes($login)."';");
+    if ($db->next_record()) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
 

@@ -4,8 +4,6 @@ set -e
 
 . /usr/share/debconf/confmodule
 
-ALTERNC_DB=$(cat /etc/alternc/my.cnf |grep ^database|cut -d '"' -f 2)
-
 #     * postrm remove
 #     * postrm purge 
 #     * old-postrm upgrade new-version
@@ -17,42 +15,48 @@ ALTERNC_DB=$(cat /etc/alternc/my.cnf |grep ^database|cut -d '"' -f 2)
 
 case "$1" in
   purge)
-    rm -f /etc/alternc/local.sh /etc/alternc/my_mail.cnf /etc/alternc/my.cnf /etc/alternc/bureau.conf
+    rm -f /etc/alternc/local.sh /etc/alternc/my_mail.cnf /etc/alternc/bureau.conf
     rm -f /var/backups/alternc/etc-installed.tar.gz
 
-    # Purge database?
-    db_input high alternc/postrm_remove_databases || true
-    db_go
-    db_get alternc/postrm_remove_databases || true
-    if [ "$RET" = "true" ]; then
-      /usr/bin/mysql --defaults-file=/etc/alternc/my.cnf -Bs -e "DROP DATABASE $ALTERNC_DB"
-    fi
+    # FIXME : remove following commented lines if we are sure
+    # to not drop database and remove files (except /etc/alternc)
+    # when Alternc is purged
 
-    # Purge datafiles?
-    db_input high alternc/postrm_remove_datafiles || true
-    db_go
-    db_get alternc/postrm_remove_datafiles || true
-    if [ "$RET" = "true" ]; then
-      rm -rf /var/backups/alternc /var/alternc/dns /var/alternc/html /var/alternc/redir
-    fi
+    # Maybe tell to user how to do if he want to drop db and/or remove files ?
+
+    # Purge database?
+    #db_input high alternc/postrm_remove_databases || true
+    #db_go
+    #db_get alternc/postrm_remove_databases || true
+    #if [ "$RET" = "true" ]; then
+    #  /usr/bin/mysql --defaults-file=/etc/alternc/my.cnf -Bs -e "DROP DATABASE $ALTERNC_DB"
+    #fi
+
+    # Purge datafiles
+    #db_input high alternc/postrm_remove_datafiles || true
+    #db_go
+    #db_get alternc/postrm_remove_datafiles || true
+    #if [ "$RET" = "true" ]; then
+    #  rm -rf /var/backups/alternc /var/alternc/dns /var/alternc/html /var/alternc/redir
+    #fi
 
     # Purge bind zones
-    db_input high alternc/postrm_remove_bind || true
-    db_go
-    db_get alternc/postrm_remove_bind || true
-    if [ "$RET" = "true" ]; then
-      rm -rf /var/alternc/bind /etc/bind/templates
-    fi
+    #db_input high alternc/postrm_remove_bind || true
+    #db_go
+    #db_get alternc/postrm_remove_bind || true
+    #if [ "$RET" = "true" ]; then
+    #  rm -rf /var/alternc/bind /etc/bind/templates
+    #fi
 
     # Purge mailboxes
-    db_input high alternc/postrm_remove_mailboxes || true
-    db_go
-    db_get alternc/postrm_remove_mailboxes || true
-    if [ "$RET" = "true" ]; then
-      rm -rf /var/alternc/mail
-    fi
+    #db_input high alternc/postrm_remove_mailboxes || true
+    #db_go
+    #db_get alternc/postrm_remove_mailboxes || true
+    #if [ "$RET" = "true" ]; then
+    #  rm -rf /var/alternc/mail
+    #fi
 
-    rm -rf /var/alternc/apacheconf /var/alternc/cgi-bin /var/alternc/bureau /var/alternc/exec.usr /var/alternc/mla /var/alternc/redir /var/alternc/tmp /var/log/alternc
+    #rm -rf /var/alternc/apacheconf /var/alternc/cgi-bin /var/alternc/bureau /var/alternc/exec.usr /var/alternc/mla /var/alternc/redir /var/alternc/tmp /var/log/alternc
     rm -f /etc/apache*/conf.d/override_php.conf /etc/apache*/conf.d/alternc-ssl.conf /etc/apache*/conf.d/alternc.conf
     rm -f /etc/php*/conf.d/alternc.ini
     ;;

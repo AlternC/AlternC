@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # TODO Traduction.
 # Script permettant de générer un jeu de données pour tester différents cas sur les mails.
@@ -20,6 +20,8 @@ MAILBOX_DELIVERY="dovecot"
 
 # Delivery des listes
 MAILMAN_DELIVERY="mailman"
+
+ALTERNC_MAIL="/var/alternc/mail"
 
 # Fonction pour ajouter la clause where
 append_from_address(){
@@ -48,7 +50,7 @@ insert_recipient(){
 insert_mailbox(){
     username="$1"
 
-    echo "INSERT INTO mailbox (address_id, path, delivery) SELECT address.id AS address_id, '$DOMAIN/$username' AS path, '$MAILBOX_DELIVERY' AS delivery"
+    echo "INSERT INTO mailbox (address_id, path, delivery) SELECT address.id AS address_id, '$ALTERNC_MAIL/$DOMAIN/$username' AS path, '$MAILBOX_DELIVERY' AS delivery"
     append_from_address "$username"
 }
 
@@ -64,11 +66,13 @@ insert_mailman(){
 append_recipients(){
     username="$1"
     shift
-
+    
+    j=""
     for i in $*; do
-       insert_recipient "$username" "$i"
+      j=$(echo -e "$j\n$i")
     done
    
+    insert_recipient "$username" "$j"
 }
 
 # Fonction permettant d'ajouter une adresse avec un alias avec des destinataires supplémentaires
@@ -215,3 +219,9 @@ add_mailbox "50" "recipient00@example.com" "alias00@$DOMAIN" "mailbox00@$DOMAIN"
 # list50@$DOMAIN : liste de diffusion avec distribution supplémentaire vers recipient00@example.com, alias00@$DOMAIN, mailbox00@$DOMAIN et list00@$DOMAIN (list + alias00 + alias10 + alias11 + alias12)
 add_list "50" "recipient00@example.com" "alias00@$DOMAIN" "mailbox00@$DOMAIN" "list00@$DOMAIN"
 
+
+echo "-- To delete everything"
+echo "-- delete from mailbox where address_id in (select id from address where domain_id=2000);"
+echo "-- delete from recipient where address_id in (select id from address where domain_id=2000);"
+echo "-- delete from address where domain_id = 2000;"
+echo "-- delete from domaines where id=2000;"

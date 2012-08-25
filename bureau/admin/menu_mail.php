@@ -49,7 +49,7 @@ if ($q["t"] > 0 && $r["u"] > 0) {
 $domlist = $mail->enum_domains();
 foreach($domlist as $l => $v){
 ?>
-	<li><a href="mail_list.php?domain=<?php echo urlencode($v["domaine"]) ?>&amp;domain_id=<?php echo urlencode($v["id"]) ?>"><?php echo $v["domaine"] ?> (<?php echo $v["nb_mail"]; ?>)</a></li>
+	<li><a href="mail_list.php?domain_id=<?php echo urlencode($v["id"]) ?>"><?php echo $v["domaine"] ?> (<?php echo $v["nb_mail"]; ?>)</a></li>
 <?php
 }?>
 </ul>

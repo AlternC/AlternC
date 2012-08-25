@@ -10,23 +10,6 @@
         rotate 12
         compress
         delaycompress
-}
-
-/var/log/alternc/domaines.log {
-        monthly
-        missingok
-        create 0640 root root
-        rotate 12
-        compress
-        delaycompress
-}
-
-/var/log/alternc/sub_domaines.log {
-        monthly
-        missingok
-        create 0640 root root
-        rotate 12
-        compress
-        delaycompress
+        dateext
 }
 

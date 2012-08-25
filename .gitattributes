@@ -326,9 +326,7 @@ bureau/admin/sta2_list.php -text
 bureau/admin/stats_members.php -text
 bureau/admin/styles/passwordStrengthMeter.css -text
 bureau/admin/styles/style.css -text
-bureau/admin/template.php -text
 bureau/admin/trash_dateselect.php -text
-bureau/admin/web_list.php -text
 bureau/admin/webmail/.htaccess -text
 bureau/admin/webmail/index.php -text
 bureau/class/config.php -text
@@ -353,11 +351,6 @@ bureau/class/m_hooks.php -text
 bureau/class/m_hta.php -text
 bureau/class/m_log.php -text
 bureau/class/m_mail.php -text
-bureau/class/m_mail_alias.php -text
-bureau/class/m_mail_jabber.php -text
-bureau/class/m_mail_localbox.php -text
-bureau/class/m_mail_redirection.php -text
-bureau/class/m_mail_squirrelmail.php -text
 bureau/class/m_mem.php -text
 bureau/class/m_mysql.php -text
 bureau/class/m_piwik.php -text
@@ -513,9 +506,10 @@ nightlybuild/nightly.key -text
 po/alternc-admintools.pot -text
 po/fr/LC_MESSAGES/.svnignore -text
 po/fr/LC_MESSAGES/alternc-admintools.po -text
-/quota_delete -text
-/quota_init -text
 /repos-to-tx.sh -text
+selenium/20120826-alternc-panel-testsuite.html -text
+selenium/README -text
+selenium/alternc.domain-local-mail-tld.html -text
 src/Makefile -text
 src/alternc-check -text
 src/alternc-dboptimize -text

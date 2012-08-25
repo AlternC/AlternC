@@ -1,67 +1,43 @@
 <?php
 /*
- $Id: m_quota.php,v 1.17 2006/02/09 19:48:30 benjamin Exp $
- ----------------------------------------------------------------------
- AlternC - Web Hosting System
- Copyright (C) 2006 Le réseau Koumbit Inc.
- http://koumbit.org/
- Copyright (C) 2002 by the AlternC Development Team.
- http://alternc.org/
- ----------------------------------------------------------------------
- Based on:
- Valentin Lacambre's web hosting softwares: http://altern.org/
- ----------------------------------------------------------------------
- LICENSE
+  ----------------------------------------------------------------------
+  AlternC - Web Hosting System
+  Copyright (C) 2000-2012 by the AlternC Development Team.
+  https://alternc.org/
+  ----------------------------------------------------------------------
+  LICENSE
 
- This program is free software; you can redistribute it and/or
- modify it under the terms of the GNU General Public License (GPL)
- as published by the Free Software Foundation; either version 2
- of the License, or (at your option) any later version.
+  This program is free software; you can redistribute it and/or
+  modify it under the terms of the GNU General Public License (GPL)
+  as published by the Free Software Foundation; either version 2
+  of the License, or (at your option) any later version.
 
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
 
- To read the license please visit http://www.gnu.org/copyleft/gpl.html
- ----------------------------------------------------------------------
- Original Author of file: Benjamin Sonntag
- Purpose of file: Manage user quota
- ----------------------------------------------------------------------
-*/
-/*
-# Structure of `defquotas` table
-CREATE TABLE `defquotas` (
-  `quota` varchar(128) NOT NULL default '',
-  `value` bigint(20) unsigned NOT NULL default '0'
-  `type`  varchar(128) NOT NULL default ''
-) TYPE=MyISAM COMMENT='Quotas par défaut (nouveaux comptes)';
-# Structure de la table `quotas`
-CREATE TABLE `quotas` (
-  `uid` int(10) unsigned NOT NULL default '0',
-  `name` varchar(64) NOT NULL default '',
-  `total` int(11) NOT NULL default '0',
-  PRIMARY KEY  (`uid`,`name`)
-) TYPE=MyISAM COMMENT='Quotas des Membres';
+  To read the license please visit http://www.gnu.org/copyleft/gpl.html
+  ----------------------------------------------------------------------
+  Purpose of file: Manage user quota
+  ----------------------------------------------------------------------
 */
 
 /**
-* Class for hosting quotas management
-*
-* This class manages services' quotas for each user of AlternC.
-* The available quotas for each service is stored in the system.quotas
-* mysql table. The used value is computed by the class using a
-* callback function <code>alternc_quota_check($uid)</code> that
-* may by exported by each service class.<br>
-* each class may also export a function <code>alternc_quota_names()</code>
-* that returns an array with the quotas names managed by this class.
-*
-* @copyright    AlternC-Team 2001-2005 http://alternc.org/
-*
-*/
+ * Class for hosting quotas management
+ *
+ * This class manages services' quotas for each user of AlternC.
+ * The available quotas for each service is stored in the system.quotas
+ * mysql table. The used value is computed by the class using a
+ * callback function <code>alternc_quota_check($uid)</code> that
+ * may by exported by each service class.<br>
+ * each class may also export a function <code>alternc_quota_names()</code>
+ * that returns an array with the quotas names managed by this class.
+ *
+ */
 class m_quota {
 
-  var $disk=Array(  /* Liste des ressources disque soumises a quota */
+  var $disk=Array(  /* disk resource for which we will manage quotas */
 		  "web"=>"web");
 
   var $quotas;
@@ -88,16 +64,17 @@ class m_quota {
 
 
   /* ----------------------------------------------------------------- */
-  /**
-   * @Return an array with the list of quota-managed services in the server
+  /** List the quota-managed services in the server
+   * @Return array the quota names and description (translated)
    */
   function qlist() {
-    global $classes;
+    global $classes,$hooks;
     $qlist=array();
     reset($this->disk);
     while (list($key,$val)=each($this->disk)) {
       $qlist[$key]=_("quota_".$key); // those are specific disks quotas.
     }
+    // TODO: old hook method FIXME: remove this when unused
     foreach($classes as $c) {
       if (method_exists($GLOBALS[$c],"alternc_quota_names")) {
 	$res=$GLOBALS[$c]->alternc_quota_names(); // returns a string or an array.
@@ -114,6 +91,20 @@ class m_quota {
 	}
       }
     }
+    $qname=$hooks->invoke("hook_quota_names"); // return strings or arrays
+    foreach($qname as $res) 
+      if ($res) {
+	if (is_array($res)) {
+	  foreach($res as $k) {
+	    $qlist[$k]=_("quota_".$k);
+	    $this->clquota[$k]=$c;
+	  }
+	} else {
+	  $qlist[$res]=_("quota_".$res);
+	  $this->clquota[$res]=$c;
+	  
+	}
+      }
     return $qlist;
   }
 
@@ -124,7 +115,7 @@ class m_quota {
    * @Return array the quota used and total for this ressource (or for all ressource if unspecified)
    */
   function getquota($ressource="") {
-    global $db,$err,$cuid,$get_quota_cache;
+    global $db,$err,$cuid,$get_quota_cache,$hooks;
     $err->log("quota","getquota",$ressource);
     if (! empty($get_quota_cache[$cuid]) ) {
       // This function is called many time each webpage, so I cache the result
@@ -136,39 +127,49 @@ class m_quota {
         return array("t"=>0, "u"=>0);
       } else {
         while ($db->next_record()) {
-        $ttmp[]=$db->Record;
-      }             
-      foreach ($ttmp as $tt) {
-        $g=array("t"=>$tt["total"],"u"=>0);
-	if (! isset( $this->clquota[$tt["name"]] )) continue;
-        if (method_exists($GLOBALS[$this->clquota[$tt["name"]]],"alternc_get_quota")) {
-          $g["u"]=$GLOBALS[$this->clquota[$tt["name"]]]->alternc_get_quota($tt["name"]);
-        }
-        $this->quotas[$tt["name"]]=$g;
-        }           
-      }   
-      reset($this->disk);
-      while (list($key,$val)=each($this->disk)) {
-        $a=array(); 
-        exec("/usr/lib/alternc/quota_get ".$cuid ,$a);
-        $this->quotas[$val]=array("t"=>$a[1],"u"=>$a[0]);
-      }   
-      $get_quota_cache[$cuid] = $this->quotas;
+	  $ttmp[]=$db->Record;
+	}             
+	// TODO: old hook method FIXME: remove when unused
+	foreach ($ttmp as $tt) {
+	  if (! isset( $this->clquota[$tt["name"]] )) continue;
+	  if (method_exists($GLOBALS[$this->clquota[$tt["name"]]],"alternc_get_quota")) {
+	    $this->quotas[$tt["name"]] = 
+	      array( 
+		    "t"=>$tt["total"], 
+		    "u"=> $GLOBALS[$this->clquota[$tt["name"]]]->alternc_get_quota($tt["name"])
+		     );
+	  }
+	}
+	foreach ($ttmp as $tt) {
+	  $res=$hooks->invoke("",$tt["name"]);
+	  foreach($res as $r) {
+	    if ($r) {
+	      $this->quotas[$tt["name"]]=array("t"=>$tt["total"],"u");
+	    }
+	  }
+	}
+	reset($this->disk);
+	while (list($key,$val)=each($this->disk)) {
+	  $a=array(); 
+	  exec("/usr/lib/alternc/quota_get ".$cuid ,$a);
+	  $this->quotas[$val]=array("t"=>$a[1],"u"=>$a[0]);
+	}   
+	$get_quota_cache[$cuid] = $this->quotas;
+      }
     }
-    
+      
     if ($ressource) {
       if (isset($this->quotas[$ressource]) ) {
-        return $this->quotas[$ressource];
+	return $this->quotas[$ressource];
       } else {
-        return 0;
+	return 0;
       } 
     } else {
       return $this->quotas;
     }
   }
-
-
-
+  
+  
   /* ----------------------------------------------------------------- */
   /** Set the quota for a user (and for a ressource)
    * @param string $ressource ressource to set quota of
@@ -183,7 +184,7 @@ class m_quota {
       exec("/usr/lib/alternc/quota_edit $cuid $size &> /dev/null &");
       // Now we check that the value has been written properly : 
       exec("/usr/lib/alternc/quota_get $cuid &> /dev/null &",$a);
-    if ($size!=$a[1]) {
+      if ($size!=$a[1]) {
 	$err->raise("quota",1);
 	return false;
       }
@@ -191,9 +192,9 @@ class m_quota {
     // We check that this ressource exists for this client :
     $db->query("SELECT * FROM quotas WHERE uid='$cuid' AND name='$ressource'");
     if ($db->num_rows()) {
-	$db->query("UPDATE quotas SET total='$size' WHERE uid='$cuid' AND name='$ressource';");
+      $db->query("UPDATE quotas SET total='$size' WHERE uid='$cuid' AND name='$ressource';");
     } else {
-	$db->query("INSERT INTO quotas (uid,name,total) VALUES ('$cuid','$ressource','$size');");
+      $db->query("INSERT INTO quotas (uid,name,total) VALUES ('$cuid','$ressource','$size');");
     }
     return true;
   }
@@ -212,8 +213,7 @@ class m_quota {
 
 
   /* ----------------------------------------------------------------- */
-  /**
-   * Get the default quotas as an associative array
+  /** Get the default quotas as an associative array
    * @return array the array of the default quotas
    */
   function getdefaults() {
@@ -227,7 +227,6 @@ class m_quota {
     $db->query("SELECT value,quota,type FROM defquotas ORDER BY type,quota");
     while($db->next_record()) {
       $type = $db->f("type");
-
       $c[$type][$db->f("quota")] = $db->f("value");
     }
     return $c;
@@ -235,8 +234,7 @@ class m_quota {
 
 
   /* ----------------------------------------------------------------- */
-  /**
-   * Set the default quotas
+  /** Set the default quotas
    * @param array associative array of quota (key=>val)
    */
   function setdefaults($newq) {
@@ -253,11 +251,10 @@ class m_quota {
     }
     return true;
   }
-
+  
 
   /* ----------------------------------------------------------------- */
-  /**
-   * Add an account type for quotas
+  /** Add an account type for quotas
    * @param string $type account type to be added
    * @return boolean true if all went ok
    */
@@ -281,8 +278,7 @@ class m_quota {
 
 
   /* ----------------------------------------------------------------- */
-  /**
-   * List for quotas
+  /** List for quotas
    * @return array
    */
   function listtype() {
@@ -295,9 +291,9 @@ class m_quota {
     return $t;
   }
 
+
   /* ----------------------------------------------------------------- */
-  /**
-   * Delete an account type for quotas
+  /** Delete an account type for quotas
    * @param string $type account type to be deleted
    * @return boolean true if all went ok
    */
@@ -305,7 +301,7 @@ class m_quota {
     global $db;
     $qlist=$this->qlist();
     reset($qlist);
-
+    
     if($db->query("UPDATE membres SET type='default' WHERE type='$type'") &&
        $db->query("DELETE FROM defquotas WHERE type='$type'")) {
       return true;
@@ -314,10 +310,9 @@ class m_quota {
     }
   }
 
-
+  
   /* ----------------------------------------------------------------- */
-  /**
-   * Create default quotas entries for a new user.
+  /** Create default quotas entries for a new user.
    * The user we are talking about is in the global $cuid.
    */
   function addquotas() {
@@ -333,7 +328,7 @@ class m_quota {
     $db->query("SELECT type FROM membres WHERE uid='$cuid'");
     $db->next_record();
     $t = $db->f("type");
-
+    
     foreach($ql as $res => $val) {
       $db->query("SELECT value FROM defquotas WHERE quota='$res' AND type='$t'");
       $q = $db->next_record() ? $db->f("value") : 0;
@@ -341,8 +336,8 @@ class m_quota {
     }
     return true;
   }
-
-
+  
+  
   /* ----------------------------------------------------------------- */
   /** Return a quota value with its unit (when it is a space quota)
    * in MB, GB, TB ...
@@ -360,9 +355,9 @@ class m_quota {
       return $value;
     }
   }
+  
 
   /* get size_xx function (filled by spoolsize.php) */
-
   function _get_sum_sql($sql) {
     global $db,$err,$cuid;
     $db->query($sql);
@@ -374,7 +369,7 @@ class m_quota {
       return $r['sum'];
     }
   }
-
+  
   function _get_count_sql($sql) {
     global $db,$err,$cuid;
     $db->query($sql);
@@ -496,16 +491,14 @@ class m_quota {
 
 
 
-#list($dc)=@mysql_fetch_array(mysql_query("SELECT COUNT(*) FROM domaines;"));
-
-
   /* ==== Hook functions ==== */
 
   /* ----------------------------------------------------------------- */
   /** Hook function call when a user is deleted
    * AlternC's standard function called when a user is deleted
+   * globals $cuid is the appropriate user
    */
-  function alternc_del_member() {
+  function hook_admin_del_member() {
     $this->delquotas();
   }
 
@@ -513,17 +506,17 @@ class m_quota {
   /* ----------------------------------------------------------------- */
   /** Hook function called when a user is created
    * This function initialize the user's quotas.
+   * globals $cuid is the appropriate user
    */
-  function alternc_add_member() {
+  function hook_admin_add_member() {
     $this->addquotas();
   }
 
 
   /* ----------------------------------------------------------------- */
-  /**
-   * Exports all the quota related information for an account.
+  /** Exports all the quota related information for an account.
    * @access private
-   * EXPERIMENTAL 'sid' function ;) 
+   * EXPERIMENTAL function ;) 
    */
   function alternc_export_conf() {
     global $db,$err;
@@ -544,4 +537,3 @@ class m_quota {
 
 } /* Class m_quota */
 
-?>
