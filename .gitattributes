@@ -281,12 +281,18 @@ bureau/admin/menu_lang.php -text
 bureau/admin/menu_logs.php -text
 bureau/admin/menu_mail.php -text
 bureau/admin/menu_mem.php -text
+bureau/admin/menu_piwik.php -text
 bureau/admin/menu_quota.php -text
 bureau/admin/menu_sql.php -text
 bureau/admin/menu_sta2.php -text
 bureau/admin/menu_web.php -text
 bureau/admin/mxlist.php -text
 bureau/admin/phpinfo.php -text
+bureau/admin/piwik_addaccount.php -text
+bureau/admin/piwik_addsites.php -text
+bureau/admin/piwik_sitelist.php -text
+bureau/admin/piwik_user_dodel.php -text
+bureau/admin/piwik_userlist.php -text
 bureau/admin/powered2.jpg -text
 bureau/admin/quota_show.php -text
 bureau/admin/quotas_oneuser.php -text
@@ -351,6 +357,7 @@ bureau/class/m_mail_redirection.php -text
 bureau/class/m_mail_squirrelmail.php -text
 bureau/class/m_mem.php -text
 bureau/class/m_mysql.php -text
+bureau/class/m_piwik.php -text
 bureau/class/m_quota.php -text
 bureau/class/m_sta2.php -text
 bureau/class/m_trash.php -text
