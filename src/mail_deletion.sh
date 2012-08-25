@@ -14,10 +14,25 @@ for CONFIG_FILE in \
     . "$CONFIG_FILE"
 done
 
-#FIXME: do the lock
+LOCK_FILE="/var/run/alternc/mail_deletion"
 
 #FIXME: this var should be define by local.sh
 ALTERNC_MAIL_LOC="/var/alternc/mail"
+
+# Somes check before start operations
+if [ `id -u` -ne 0 ]; then
+    log_error "must be launched as root"
+elif [ -f "$LOCK_FILE" ]; then
+    process=$(ps f -p `cat "$LOCK_FILE"|tail -1`|tail -1|awk '{print $NF;}')
+    if [ "$(basename $process)" = "$(basename "$0")" ] ; then
+      log_error "last cron unfinished or stale lock file ($LOCK_FILE)."
+    else
+      rm "$LOCK_FILE"
+    fi
+fi
+
+# We lock the application
+echo $$ > "$LOCK_FILE"
 
 # List the local addresses to DELETE
 # Foreach => Mark for deleting and start deleting the files
@@ -37,3 +52,5 @@ done
 # Delete if only if there isn't any mailbox refering to it
 mysql_query "DELETE FROM a using address a, mailbox m  WHERE a.mail_action='DELETE' OR a.mail_action='DELETING' AND a.id != m.address_id;"
 
+# Delete the lock
+rm -f "$LOCK_FILE"
