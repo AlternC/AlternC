@@ -1,8 +1,6 @@
 alternc: non-standard-dir-in-var var/alternc/
 alternc: non-standard-dir-in-var var/backups/
 alternc: file-in-unusual-dir
-alternc: setuid-binary usr/lib/alternc/mail_add 4750 root/www-data
-alternc: setuid-binary usr/lib/alternc/mail_del 4750 root/www-data
 alternc: setuid-binary usr/lib/alternc/quota_edit 4750 root/www-data
 alternc: setuid-binary usr/lib/alternc/quota_get 4750 root/www-data
 alternc: setuid-binary usr/lib/alternc/mem_add 4750 root/www-data
@@ -27,8 +25,6 @@ alternc: executable-is-not-world-readable usr/lib/alternc/quota_edit.sh 0750 != 
 alternc: executable-is-not-world-readable usr/lib/alternc/fixperms.sh 0750 != 0755
 alternc: executable-is-not-world-readable usr/lib/alternc/quota_edit 4750
 alternc: executable-is-not-world-readable usr/lib/alternc/quota_get.sh 0750 != 0755
-alternc: executable-is-not-world-readable usr/lib/alternc/mail_add 4750
-alternc: executable-is-not-world-readable usr/lib/alternc/mail_del 4750
 alternc: executable-is-not-world-readable usr/lib/alternc/mem_del 4750
 alternc: executable-is-not-world-readable usr/lib/alternc/quota_delete 0750 != 0755
 alternc: executable-is-not-world-readable usr/lib/alternc/mem_add 4750
