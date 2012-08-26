@@ -217,3 +217,9 @@ CREATE TABLE IF NOT EXISTS `piwik_sites` (
 -- No longer MySQL User quotas
 DELETE FROM defquotas WHERE quota = 'mysql_users';
 DELETE FROM quotas WHERE name = 'mysql_users';
+
+-- Raw web statistics are deprecated since vlogger
+DELETE FROM quotas WHERE name = 'sta2';
+DELETE FROM defquotas WHERE quota = 'sta2';
+
+DROP TABLE stats2;

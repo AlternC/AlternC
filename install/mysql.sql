@@ -280,21 +280,6 @@ CREATE TABLE IF NOT EXISTS `recipient` (
 
 
 --
--- Structure de la table `stats3`
---
--- Liste des jeux de stat brutes demandées sur le serveur
-
-CREATE TABLE IF NOT EXISTS stats2 (
-  id int(10) unsigned NOT NULL auto_increment,	-- Numéro du jeu de stat brut
-  mid int(10) unsigned NOT NULL default '0',	-- Numéro de l`utilisateur
-  hostname varchar(255) NOT NULL default '',	-- Domaine concerné
-  folder varchar(255) NOT NULL default '',	-- Dossier de stockage des logs
-  PRIMARY KEY  (id),
-  KEY mid (mid)
-) TYPE=MyISAM COMMENT='Statistiques apaches brutes';
-
-
---
 -- Structure de la table `defquotas`
 --
 -- Quotas par défaut pour les services
@@ -317,7 +302,6 @@ INSERT IGNORE INTO defquotas (quota,value) VALUES ('mail',10);
 INSERT IGNORE INTO defquotas (quota,value) VALUES ('ftp',2);
 INSERT IGNORE INTO defquotas (quota,value) VALUES ('stats',1);
 INSERT IGNORE INTO defquotas (quota,value) VALUES ('mysql',1);
-INSERT IGNORE INTO defquotas (quota,value) VALUES ('mysql_users',1);
 
 
 --

@@ -284,7 +284,6 @@ bureau/admin/menu_mem.php -text
 bureau/admin/menu_piwik.php -text
 bureau/admin/menu_quota.php -text
 bureau/admin/menu_sql.php -text
-bureau/admin/menu_sta2.php -text
 bureau/admin/menu_web.php -text
 bureau/admin/mxlist.php -text
 bureau/admin/phpinfo.php -text
@@ -315,12 +314,6 @@ bureau/admin/sql_users_dorights.php -text
 bureau/admin/sql_users_list.php -text
 bureau/admin/sql_users_password.php -text
 bureau/admin/sql_users_rights.php -text
-bureau/admin/sta2_add_raw.php -text
-bureau/admin/sta2_del_raw.php -text
-bureau/admin/sta2_doadd_raw.php -text
-bureau/admin/sta2_doedit_raw.php -text
-bureau/admin/sta2_edit_raw.php -text
-bureau/admin/sta2_list.php -text
 bureau/admin/stats_members.php -text
 bureau/admin/styles/passwordStrengthMeter.css -text
 bureau/admin/styles/style.css -text
@@ -352,7 +345,6 @@ bureau/class/m_mem.php -text
 bureau/class/m_mysql.php -text
 bureau/class/m_piwik.php -text
 bureau/class/m_quota.php -text
-bureau/class/m_sta2.php -text
 bureau/class/m_trash.php -text
 bureau/class/mime.php -text
 bureau/class/reset_stats_conf.php -text
@@ -531,7 +523,6 @@ src/quota_delete -text
 src/quota_edit -text
 src/quota_get -text
 src/quota_init -text
-src/rawstat.daily -text
 src/sendmail -text
 src/slave_dns -text
 src/spoolsize.php -text

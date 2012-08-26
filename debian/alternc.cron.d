@@ -1,6 +1,3 @@
-# Every day at 4am, produce raw statistics
-0 4 * * *	root	/usr/lib/alternc/rawstat.daily
-
 # Every 2 days compress log files
 0 4 * * *	alterncpanel	/usr/lib/alternc/compress_logs.sh
 
