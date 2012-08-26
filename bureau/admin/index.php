@@ -41,7 +41,7 @@ if (!$charset) $charset="UTF-8";
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <title>AlternC Desktop</title>
 <link rel="stylesheet" href="styles/style.css" type="text/css" />
@@ -83,19 +83,11 @@ if (!$_SERVER[HTTPS]) {
 </td></tr>
 <tr><td>
 
-<?php __("If you want to read your mail, enter your Email address and password in the following form and click 'Enter'"); ?>
-
+  <?php if (variable_get("webmail_redirect","")) { ?>
+<p><a href="/webmail"><?php __("If you want to read your mail, click here and enter your Email address and password in the next form, then click 'Enter'."); ?></a></p>
+ <?php } ?>
 </td><td>
 
-<form action="/webmail/src/redirect.php" method="post">
-<table border="0" style="border: 1px solid #202020;" cellspacing="0" cellpadding="3" width="300px" >
-<tr><th colspan="2" align="center"><?php __("Webmail Access"); ?></th></tr>
-<tr><th align="right"><label for="login_username"><?php __("Email Address"); ?></label></th><td><input type="text" class="int" name="login_username" id="login_username" value="" maxlength="128" size="15" /></td></tr>
-
-<tr><th align="right"><label for="secretkey"><?php __("Password"); ?></label></th><td><input type="password" class="int" name="secretkey" id="secretkey" value="" maxlength="128" size="15" /></td></tr>
-<tr><td colspan="2" align="center"><input type="submit" class="inb" name="submit" value="<?php __("Enter"); ?>" /> </td></tr>
-</table>
-</form>
 </td></tr>
 
 </table>

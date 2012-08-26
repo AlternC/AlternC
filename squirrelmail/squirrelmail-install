@@ -28,6 +28,14 @@ then
     cp -f /etc/alternc/templates/squirrelmail/avelsieve-config.php /etc/alternc/templates/squirrelmail/apache.conf /etc/squirrelmail/
     cp -f /etc/alternc/templates/javascript-common/javascript-common.conf /etc/javascript-common/
     echo "Done"
+    
+    . /usr/lib/alternc/functions.sh
+    
+    echo "Setting squirrelmail as default webmail"
+    mysql_query "REPLACE INTO variable SET name='webmail_redirect', value='squirrelmail', comment='Set it to the name of your preferred webmail, /webmail will point to it';"
+    echo "Done"
+    
 fi
+
 
 

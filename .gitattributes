@@ -286,6 +286,7 @@ bureau/admin/menu_quota.php -text
 bureau/admin/menu_sql.php -text
 bureau/admin/menu_web.php -text
 bureau/admin/mxlist.php -text
+bureau/admin/nowebmail.php -text
 bureau/admin/phpinfo.php -text
 bureau/admin/piwik_addaccount.php -text
 bureau/admin/piwik_addsites.php -text
@@ -318,8 +319,7 @@ bureau/admin/stats_members.php -text
 bureau/admin/styles/passwordStrengthMeter.css -text
 bureau/admin/styles/style.css -text
 bureau/admin/trash_dateselect.php -text
-bureau/admin/webmail/.htaccess -text
-bureau/admin/webmail/index.php -text
+bureau/admin/webmail-redirect.php -text
 bureau/class/config.php -text
 bureau/class/config_nochk.php -text
 bureau/class/config_real.php -text
