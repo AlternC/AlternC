@@ -216,7 +216,7 @@ class m_admin {
     $from=trim($from);
 
     if (empty($subject) || empty($message) || empty($from) ){
-      $err->raise("admin",_("The password is too long according to the password policy");
+      $err->raise("admin",_("The password is too long according to the password policy"));
       return false;
     }
 
