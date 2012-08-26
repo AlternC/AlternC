@@ -309,7 +309,7 @@ class m_hta {
     $err->log("hta","change_pass",$user."/".$dir);
     $absolute=$bro->convertabsolute($dir,0);
     if (!file_exists($absolute)) {
-      $err->raise("hta",printf(_"The folder '%s' does not exist"),$dir));
+      $err->raise("hta",printf(_("The folder '%s' does not exist"),$dir));
       return false;
     }
 
