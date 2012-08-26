@@ -87,14 +87,6 @@ class m_dom {
 
   /* ----------------------------------------------------------------- */
   /**
-   * Quota name
-   */
-  function hook_quota_names() {
-    return array("dom"=>_("Domain name"));
-  }
-  
-  /* ----------------------------------------------------------------- */
-  /**
    * Retourne un tableau contenant les types de domaines
    *
    * @return array retourne un tableau indexé contenant la liste types de domaines 
@@ -1280,14 +1272,15 @@ class m_dom {
    * @return integer the number of service used or false if an error occured
    * @access private
    */
-  function hook_quota_get($name) {
+  function hook_quota_get() {
     global $db,$err,$cuid;
-    if ($name=="dom") {
-      $err->log("dom","get_quota");
-      $db->query("SELECT COUNT(*) AS cnt FROM domaines WHERE compte='$cuid'");
-      $db->next_record();
-      return $db->f("cnt");
-    } else return false;
+    $err->log("dom","get_quota");
+    $q=Array("name"=>"dom", "description"=>_("Domain name"), "used"=>0);
+    $db->query("SELECT COUNT(*) AS cnt FROM domaines WHERE compte='$cuid'");
+    if ($db->next_record() ) {
+      $q['used']=$db->f("cnt");
+    }
+    return $q;
   }
 
 

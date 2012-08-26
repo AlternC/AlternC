@@ -214,3 +214,6 @@ CREATE TABLE IF NOT EXISTS `piwik_sites` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 
+-- No longer MySQL User quotas
+DELETE FROM defquotas WHERE quota = 'mysql_users';
+DELETE FROM quotas WHERE name = 'mysql_users';

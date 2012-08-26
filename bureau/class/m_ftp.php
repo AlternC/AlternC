@@ -38,14 +38,6 @@ class m_ftp {
   function m_ftp() {
   }
 
-  /* ----------------------------------------------------------------- */
-  /**
-   * Quota name
-   */
-  function alternc_quota_names() {
-    return "ftp";
-  }
-
 
   /* ----------------------------------------------------------------- */
   /**
@@ -365,14 +357,15 @@ class m_ftp {
    * @return integer the number of service used or false if an error occured
    * @access private
    */
-  function alternc_get_quota($name) {
+  function hook_quota_get() {
     global $db,$err,$cuid;
-    if ($name=="ftp") {
-      $err->log("ftp","getquota");
-      $db->query("SELECT COUNT(*) AS cnt FROM ftpusers WHERE uid='$cuid'");
-      $db->next_record();
-      return $db->f("cnt");
-    } else return false;
+    $err->log("ftp","getquota");
+    $q=Array("name"=>"ftp", "description"=>_("FTP accounts"), "used"=>0);
+    $db->query("SELECT COUNT(*) AS cnt FROM ftpusers WHERE uid='$cuid'");
+    if ($db->next_record()) {
+      $q['used']=$db->f("cnt");
+    }
+    return $q;
   }
 
 

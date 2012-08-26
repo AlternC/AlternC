@@ -65,15 +65,6 @@ class m_mail {
    */
   var $total;
 
-
-  /* ----------------------------------------------------------------- */
-  /** Quota list (hook for quota class, returns an array of hashes)
-   */
-  function hook_quota_names() {
-    return array("mail"=>_("Email addresses"));
-  }
-
-
   /* ----------------------------------------------------------------- */
   /** get_quota (hook for quota class), returns the number of used 
    * service for a quota-bound service
@@ -81,15 +72,15 @@ class m_mail {
    * @return the number of used service for the specified quota, 
    * or false if I'm not the one for the named quota
    */
-  function hook_quota_get($name) {
+  function hook_quota_get() {
     global $db,$err,$cuid;
-    if ($name=="mail") {
-      $err->log("mail","getquota");
-      $db->query("SELECT COUNT(*) AS cnt FROM address a, domaines d WHERE a.domain_id=d.id AND d.compte=$cuid AND a.type='';");
-      $db->next_record();
-      return $db->f("cnt");
+    $err->log("mail","getquota");
+    $q=Array("name"=>"mail", "description"=>_("Email addresses"), "used"=>0);
+    $db->query("SELECT COUNT(*) AS cnt FROM address a, domaines d WHERE a.domain_id=d.id AND d.compte=$cuid AND a.type='';");
+    if ($db->next_record()) {
+      $q['used']=$db->f("cnt");
     }
-    return false;
+    return $q;
   }
 
 

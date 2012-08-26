@@ -1,13 +1,9 @@
 <?php
 /*
- $Id: menu_mail.php,v 1.3 2004/05/19 14:23:06 benjamin Exp $
  ----------------------------------------------------------------------
  AlternC - Web Hosting System
- Copyright (C) 2002 by the AlternC Development Team.
- http://alternc.org/
- ----------------------------------------------------------------------
- Based on:
- Valentin Lacambre's web hosting softwares: http://altern.org/
+ Copyright (C) 2000-2012 by the AlternC Development Team.
+ https://alternc.org/
  ----------------------------------------------------------------------
  LICENSE
 
@@ -23,15 +19,12 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file:
- Purpose of file:
- ----------------------------------------------------------------------
 */
 
 /* ############# CRON ############# */
 
 $q = $quota->getquota("cron");
-if ($q['t'] > 0)  {
+if ($q['t'] > 0 || $q['u'] > 0)  {
 
 ?>
 <div class="menu-box">

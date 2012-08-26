@@ -74,32 +74,10 @@ class m_quota {
     while (list($key,$val)=each($this->disk)) {
       $qlist[$key]=_("quota_".$key); // those are specific disks quotas.
     }
-    // TODO: old hook method FIXME: remove this when unused
-    foreach($classes as $c) {
-      if (method_exists($GLOBALS[$c],"alternc_quota_names")) {
-	$res=$GLOBALS[$c]->alternc_quota_names(); // returns a string or an array.
-	if($res != "") {
-	  if (is_array($res)) {
-	    foreach($res as $k) {
-	      $qlist[$k]=_("quota_".$k);
-	      $this->clquota[$k]=$c;
-	    }
-	  } else {
-	    $qlist[$res]=_("quota_".$res);
-	    $this->clquota[$res]=$c;
-	  }
-	}
-      }
+
+    foreach($this->getquota() as $qq) {
+      $qlist[$qq['name']]=$qq['description'];
     }
-    // New Hook
-    $qname=$hooks->invoke("hook_quota_names"); // return strings or arrays
-    foreach($qname as $res) 
-      if ($res && is_array($res)) {
-	foreach($res as $k=>$v) {
-	  $qlist[$k]=$v;
-	  $this->clquota[$k]=$k;
-	}
-      }
     return $qlist;
   }
   
@@ -116,48 +94,27 @@ class m_quota {
       // This function is called many time each webpage, so I cache the result
       $this->quotas = $get_quota_cache[$cuid];
     } else {
-      $this->qlist(); // Generate the quota list.
-      $db->query("select * from quotas where uid='$cuid';");
-      if ($db->num_rows()==0) {
-        return array("t"=>0, "u"=>0);
-      } else {
-        while ($db->next_record()) {
-	  $ttmp[$db->f("name")]=$db->Record;
-	}             
-	foreach($this->clquota as $k=>$v) {
-	  if (!isset($ttmp[$k])) {
-	    $ttmp[$k]=array("name" => $k, "total" => 0);
-	  }
-	}
-	// TODO: old hook method FIXME: remove when unused
-	foreach ($ttmp as $tt) {
-	  if (! isset( $this->clquota[$tt["name"]] )) continue;
-	  if (method_exists($GLOBALS[$this->clquota[$tt["name"]]],"alternc_get_quota")) {
-	    $this->quotas[$tt["name"]] = 
-	      array( 
-		    "t"=>$tt["total"], 
-		    "u"=> $GLOBALS[$this->clquota[$tt["name"]]]->alternc_get_quota($tt["name"])
-		     );
-	  }
-	}
-	// New Hook : 
-	foreach ($ttmp as $tt) {
-	  $res=$hooks->invoke("hook_quota_get",array($tt["name"]));
-	  foreach($res as $r) {
-	    if ($r!==false) {
-	      $this->quotas[$tt["name"]]=array("t"=>$tt["total"],"u"=>$r);
-	    }
-	  }
+	$res=$hooks->invoke("hook_quota_get");
+	foreach($res as $r) {
+          $this->quotas[$r['name']]=$r;
+          $this->quotas[$r['name']]['u']=$r['used']; // retrocompatibilité
+          $this->quotas[$r['name']]['t']=0; // Default quota = 0
 	}
 	reset($this->disk);
 	while (list($key,$val)=each($this->disk)) {
 	  $a=array(); 
 	  exec("/usr/lib/alternc/quota_get ".$cuid ,$a);
-	  $this->quotas[$val]=array("t"=>$a[1],"u"=>$a[0]);
+	  $this->quotas[$val]=array("name"=>"$val", 'description'=>_("quota_".$val), "t"=>$a[1],"u"=>$a[0]);
 	}   
+
+        // Get the allowed quota from database.
+        $db->query("select name, total from quotas where uid='$cuid';");
+        while ( $db->next_record() ) {
+          $this->quotas[$db->f('name')]['t']=$db->f('total');
+        }
+
 	$get_quota_cache[$cuid] = $this->quotas;
       }
-    }
       
     if ($ressource) {
       if (isset($this->quotas[$ressource]) ) {
@@ -262,7 +219,6 @@ class m_quota {
   function addtype($type) {
     global $db,$err;
     $qlist=$this->qlist();
-    reset($qlist);
     if(empty($type)) return false;
     $type=strtolower($type);
     if (!preg_match("#^[a-z0-9]*$#",$type)) {
@@ -301,7 +257,6 @@ class m_quota {
   function deltype($type) {
     global $db;
     $qlist=$this->qlist();
-    reset($qlist);
     
     if($db->query("UPDATE membres SET type='default' WHERE type='$type'") &&
        $db->query("DELETE FROM defquotas WHERE type='$type'")) {

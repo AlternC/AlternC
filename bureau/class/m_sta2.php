@@ -48,16 +48,6 @@ class m_sta2 {
   }
 
   /* ----------------------------------------------------------------- */
-  /** Hook function that returns the quota names for this class
-   * 
-   * @return string the quota names for this class
-   */
-  function alternc_quota_names() {
-    return "sta2";
-  } 
-
-
-  /* ----------------------------------------------------------------- */
   /** Returns the list of domains and/or subdomains for this account
    * 
    * @return array returns an array with all the domains / subdomains for this account.
@@ -271,14 +261,15 @@ class m_sta2 {
    * @return integer the number of service used or false if an error occured
    * @access private
    */
-  function alternc_get_quota($name) {
+  function hook_quota_get() {
     global $db,$err,$cuid;
-    if ($name=="sta2") {
-      $err->log("sta2","get_quota");
-      $db->query("SELECT COUNT(*) AS cnt FROM stats2 WHERE mid='$cuid'");
-      $db->next_record();
-      return $db->f("cnt");
-    } else return false;
+    $err->log("sta2","get_quota");
+    $q=Array("name"=>"sta2", "description"=>_("RAW Statistics"), "used"=>0);
+    $db->query("SELECT COUNT(*) AS cnt FROM stats2 WHERE mid='$cuid'");
+    if ($db->next_record()) {
+      $q['used']=$db->f("cnt");
+    }
+    return $q;
   }
 
 

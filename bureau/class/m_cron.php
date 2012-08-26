@@ -152,26 +152,18 @@ class m_cron {
     return $r;
   }
 
-
-  /*---------------------------------------------------------------------------*/
-  /** hook for quota name
-   */
-  function hook_quota_names() {
-    return array("cron"=>_("Scheduled tasks"));
-  }
-
-
   /*---------------------------------------------------------------------------*/
   /** hook for quota computation
    */
   function hook_quota_get() {
     global $cuid,$db,$err;
     $err->log("cron","alternc_get_quota");
+    $q=Array("name"=>"cron", "description"=>_("Scheduled tasks"), "used"=>0);
     $db->query("select count(*) as cnt from cron where uid = $cuid;");
     if ($db->next_record()) {
-        return $db->f('cnt');
+        $q['used']=$db->f('cnt');
     }
-    return false;
+    return $q;
   }
 
 

@@ -48,15 +48,6 @@ class m_piwik {
     }
   }
 
-
-  /**
-   * Quota name
-   */
-  function hook_quota_names() {
-    return array("piwik"=>_("Statistics through Piwik accounts"));
-  }
-
-
   /* ----------------------------------------------------------------- */
   /** hook called when an AlternC account is deleted
    */
@@ -72,14 +63,14 @@ class m_piwik {
    * @return integer the number of service used or false if an error occured
    * @access private
    */
-  function hook_quota_get($name) {
+  function hook_quota_get() {
     global $db, $cuid;
-    if ($name=="piwik") {
-      $db->query("SELECT COUNT(id) AS nb FROM piwik_users WHERE uid='$cuid'");
-      $db->next_record();
-      return $db->f('nb');
-    } else
-      return false;
+    $db->query("SELECT COUNT(id) AS nb FROM piwik_users WHERE uid='$cuid'");
+    $q=Array("name"=>"piwik", "description"=>_("Statistics through Piwik accounts"), "used"=>0);
+    if ($db->next_record()) {
+      $q['used']=$db->f('nb');
+    }
+    return $q;
   }
 
 
