@@ -1,6 +1,7 @@
 * text=auto !eol
 /.svnignore -text
 .tx/config -text
+/CODING_CONVENTION.php -text
 /COPYING -text
 /README -text
 aide/bin/build.sh -text
