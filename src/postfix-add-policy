@@ -3,7 +3,10 @@
 postfix-add-filter - A script to append new services to Postfix master.cf to
 simplify integration of content filters.
 
-Copyright (c) 2008 Scott Kitterman <scott@kitterman.com>
+Modified version for Alternc. Original author: Scott Kitterman <scott@kitterman.com>
+
+For the need of AlternC, we add the feature to specify policy name.
+
 Permission is hereby granted, free of charge, to any person obtaining a copy
  of this software and associated documentation files (the "Software"), to deal
  in the Software without restriction, including without limitation the rights
@@ -20,9 +23,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  THE SOFTWARE.
 '''
-__author__ = "Scott Kitterman"
-__email__ = "scott@kitterman.com"
-__version__ = "0.1: August 3, 2008"
+__author__ = "AlternC"
+__email__ = "equipe@alternc.org"
+__version__ = "0.1~alternc: August 26, 2012"
 
 import sys
 import shutil

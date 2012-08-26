@@ -524,6 +524,7 @@ src/functions_dns.sh -text
 src/functions_hosting.sh -text
 src/mem_add -text
 src/mem_del -text
+src/postfix-add-policy -text
 src/quota-warning.sh -text
 src/quota_delete -text
 src/quota_edit -text
@@ -544,7 +545,6 @@ tests/whois_test.php -text
 tools/alternc_get_path -text
 tools/get_account_by_domain -text
 tools/get_domains_by_account -text
-tools/postfix-add-policy -text
 tools/top_ftp_users -text
 tools/top_http_users -text
 tools/top_mysql_users -text
