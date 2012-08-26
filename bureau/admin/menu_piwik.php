@@ -26,6 +26,14 @@ $q = $quota->getquota("piwik");
 if (!empty($piwik->piwik_server_uri) && ($q["t"] > 0 || $r["u"] > 0)) {
 ?>
 <div class="menu-box">
-<div class="menu-title"><img src="images/stat.png" alt="<?php __("Piwik statistics"); ?>" />&nbsp;<a href="piwik_userlist.php"><?php __("Piwik statistics"); ?> (<?php echo $q["u"]; ?>/<?php echo $q["t"]; ?>)</a></div>
+<div class="menu-title">
+<a href="javascript:menu_toggle('menu-piwik');">
+<img src="images/stat.png" alt="<?php __("Piwik statistics"); ?>" />&nbsp;<?php __("Piwik statistics"); ?>&nbsp;(<?php echo $q["u"]; ?>/<?php echo $q["t"]; ?>)</a></div>
+<div class="menu-content" id="menu-piwik">
+<ul>
+<li><a href="piwik_userlist.php"><?php __("Piwik Users"); ?></a></li>
+<li><a href="piwik_sitelist.php"><?php __("Piwik Sites") ?></a></li>
+</ul>
+</div>
 </div>
 <?php } ?>
