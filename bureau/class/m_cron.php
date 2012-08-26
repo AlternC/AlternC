@@ -121,18 +121,18 @@ class m_cron {
     if (is_null($id)) { // if a new insert, quotacheck
       $q = $quota->getquota("cron");
       if ( $q["u"] >= $q["t"] ) {
-        $err->log("cron","update_one","quota problem");
+        $err->raise("cron",_("You seems to be over-quota."));
         return false;
       }
     } else { // if not a new insert, check the $cuid
       $db->query("SELECT uid FROM cron WHERE id = $id;");
       if (! $db->next_record()) { return "false"; } // return false if pb
       if ( $db->f('uid') != $cuid ) {
-        $err->log("cron","update_one","bad uid");
+        $err->raise("cron","Identity problem");
         return false;
       } 
     }
-    $query = "INSERT INTO cron (id, uid, url, user, password, schedule, email) VALUES ('$id', '$cuid', '$url', '$user', '$password', '$schedule', '$email') ON DUPLICATE KEY UPDATE url='$url', user='$user', password='$password', schedule='$schedule', email='$email', uid='$cuid';";
+    $query = "REPLACE INTO cron (id, uid, url, user, password, schedule, email) VALUES ('$id', '$cuid', '$url', '$user', '$password', '$schedule', '$email') ;";
     return $db->query("$query");
   }
 
