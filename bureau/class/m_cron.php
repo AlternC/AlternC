@@ -128,7 +128,7 @@ class m_cron {
       $db->query("SELECT uid FROM cron WHERE id = $id;");
       if (! $db->next_record()) { return "false"; } // return false if pb
       if ( $db->f('uid') != $cuid ) {
-        $err->raise("cron","Identity problem");
+        $err->raise("cron",_("Identity problem"));
         return false;
       } 
     }
