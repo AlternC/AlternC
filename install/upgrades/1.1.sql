@@ -130,20 +130,6 @@ CREATE TABLE `recipient` (
   UNIQUE KEY `address_id` (`address_id`)
 ) COMMENT = 'Table containing other recipients (aliases) for an address.';
 
---
--- Mailman table.
---
--- Table containing mailman addresses
-
-CREATE TABLE `mailman` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT, -- Technical id.
-  `address_id` bigint(20) unsigned NOT NULL REFERENCES `address`(`id`), -- Reference to address
-  `delivery` varchar(255) NOT NULL, -- Delivery transport.
-  `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- Update date, for technical usage only.
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `address_id` (`address_id`)
-) COMMENT = 'Table containing mailman list addresses.';
-
 
 -- Regenerate apache conf to enable mpm-itk
 update sub_domaines set web_action = 'UPDATE';
