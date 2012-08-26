@@ -173,7 +173,7 @@ class m_dom {
     $id=intval($id);
     // The name MUST contain only letter and digits, it's an identifier after all ...
     if (!preg_match("#^[a-z0-9]+$#",$name)) {
-      $err->raise("dom", 26);
+      $err->raise("dom", _("The name MUST contain only letter and digits."));
       return false;
     }
     $name=mysql_real_escape_string($name);    $description=mysql_real_escape_string($description);    $target=mysql_real_escape_string($target);
@@ -292,49 +292,49 @@ class m_dom {
 
     // Locked ?
     if (!$this->islocked) {
-      $err->raise("dom",3);
+      $err->raise("dom",_("--- Program error --- No lock on the domains!"));
       return false;
     }
     // Verifie que le domaine est rfc-compliant
     $domain=strtolower($domain);
     $t=checkfqdn($domain);
     if ($t) {
-      $err->raise("dom",3+$t);
+      $err->raise("dom",_("The domain name is syntaxically incorrect"));
       return false;
     }
     // Interdit les domaines clés (table forbidden_domains) sauf en cas FORCE
     $db->query("SELECT domain FROM forbidden_domains WHERE domain='$domain'");
     if ($db->num_rows() && !$force) {
-      $err->raise("dom",22);
+      $err->raise("dom",_("The requested domain is forbidden in this server, please contact the administrator"));
       return false;
     }
     if ($domain==$L_FQDN || $domain=="www.$L_FQDN") {
-      $err->raise("dom",18);
+      $err->raise("dom",_("This domain is the server's domain! You cannot host it on your account!"));
       return false;
     }
     $db->query("SELECT compte FROM domaines WHERE domaine='$domain';");
     if ($db->num_rows()) {
-      $err->raise("dom",8);
+      $err->raise("dom",_("The domain already exist."));
       return false;
     }
     $db->query("SELECT compte FROM `sub_domaines` WHERE sub != \"\" AND concat( sub, \".\", domaine )='$domain' OR domaine='$domain';");
     if ($db->num_rows()) {
-      $err->raise("dom",8);
+      $err->raise("dom",_("The domain already exist."));
       return false;
     }
     $this->dns=$this->whois($domain);
     if (!$force) {
       $v=checkhostallow($domain,$this->dns);
       if ($v==-1) {
-        $err->raise("dom",7);   // TLD interdit
+        $err->raise("dom",_("The last member of the domain name is incorrect or cannot be hosted in that server."));   
         return false;
       }
       if ($dns && $v==-2) {
-        $err->raise("dom",12);   // Domaine non trouvé dans le whois
+        $err->raise("dom",_("The domain cannot be found in the whois database.")); 
         return false;
       }
       if ($dns && $v==-3) {
-        $err->raise("dom",23);   // Domaine non trouvé dans le whois
+        $err->raise("dom",_("The domain cannot be found in the whois database."));
         return false;
       }
 
@@ -346,14 +346,14 @@ class m_dom {
       if (!$dns) {
          $v=checkhostallow_nodns($domain);
          if ($v) {
-           $err->raise("dom",22);
+           $err->raise("dom",_("The requested domain is forbidden in this server, please contact the administrator"));
            return false;
          }
       }
     }
     // Check the quota :
     if (!$quota->cancreate("dom")) {
-      $err->raise("dom",10);
+      $err->raise("dom",_("Your domain quota is over, you cannot create more domain names."));
       return false;
     }
     if ($noerase) $noerase="1"; else $noerase="0";
@@ -368,7 +368,7 @@ class m_dom {
       $db->query("SELECT domaine FROM domaines WHERE compte='$cuid' AND domaine='$slavedom';");
       $db->next_record();
       if (!$db->Record["domaine"]) {
-        $err->raise("dom",1,$slavedom);
+        $err->raise("dom",_("Domain '%s' not found."),$slavedom);
         $isslave=false;
       }
       // Point to the master domain : 
@@ -382,17 +382,17 @@ class m_dom {
       $domshort=str_replace("-","",str_replace(".","",$domain));
       
       if (! is_dir($dest_root . "/". $domshort)) {
-		  if(!mkdir($dest_root . "/". $domshort)){
-			  $err->raise("dom",1);
-			  return false;
-		  }
+	if(!mkdir($dest_root . "/". $domshort)){
+	  $err->raise("dom",_("I can't write to the destination folder"));
+	  return false;
+	}
       }
-
+      
       if (! is_dir($dest_root . "/tmp")) {
-		  if(!mkdir($dest_root . "/tmp")){
-			  $err->raise("dom",1);
-			  return false;
-		  }
+	if(!mkdir($dest_root . "/tmp")){
+	  $err->raise("dom",_("I can't write to the destination folder"));
+	  return false;
+	}
       }
 
       // Creation des 3 sous-domaines par défaut : Vide, www et mail
@@ -560,14 +560,14 @@ class m_dom {
       } // while
       fclose($fp);
     } else {
-      $err->raise("dom",11);
+      $err->raise("dom",_("The Whois database is unavailable, please try again later."));
       return false;
     }
 
     if ($found) {
       return $server;
     } else {
-      $err->raise("dom",12);
+      $err->raise("dom",_("The domain cannot be found in the whois database."));
       return false;
     }
   } // whois
@@ -638,18 +638,18 @@ class m_dom {
     $err->log("dom","get_domain_all",$dom);
     // Locked ?
     if (!$this->islocked) {
-      $err->raise("dom",3);
+      $err->raise("dom",_("--- Program error --- No lock on the domains!"));
       return false;
     }
     $t=checkfqdn($dom);
     if ($t) {
-      $err->raise("dom",3+$t);
+      $err->raise("dom",_("The domain name is syntaxically incorrect"));
       return false;
     }
     $r["name"]=$dom;
     $db->query("SELECT * FROM domaines WHERE compte='$cuid' AND domaine='$dom'");
     if ($db->num_rows()==0) {
-      $err->raise("dom",1,$dom);
+      $err->raise("dom",1,_("Domain '%s' not found."),$dom);
       return false;
     }
     $db->next_record();
