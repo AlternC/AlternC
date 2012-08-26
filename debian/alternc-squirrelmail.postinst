@@ -14,7 +14,8 @@ case "$1" in
 	if ! getent passwd alternc-squirrelmail; then
 	    useradd -g nogroup -u 1997 alternc-squirrelmail -d /usr/share/squirrelmail 
 	fi 	     
-	dpkg-statoverride --add alternc-squirrelmail root 0750 /var/spool/squirrelmail/attach /usr/lib/squirrelmail/data
+	dpkg-statoverride --add alternc-squirrelmail root 0750 /var/spool/squirrelmail/attach
+	dpkg-statoverride --add alternc-squirrelmail root 0750 /usr/lib/squirrelmail/data
 	chown -R alternc-squirrelmail:root /var/spool/squirrelmail/attach /usr/lib/squirrelmail/data
 	chmod -R 750 /var/spool/squirrelmail/attach /usr/lib/squirrelmail/data	
 	;;
