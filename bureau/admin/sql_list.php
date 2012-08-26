@@ -95,7 +95,7 @@ for($i=0;$i<count($rdb);$i++) {
   $q=$quota->getquota("mysql");
   if($q['u'] == 0 ){
 ?>
-<p>  <span class="ina"><a href="sql_add.php"><?php __("Create a new MySQL database"); ?></a></span> </p>
+<p>  <span class="ina"><a href="sql_doadd.php"><?php __("Create a new MySQL database"); ?></a></span> </p>
 <?php }else{
 ?>
 <form method="post" action="sql_doadd.php" id="main" name="main">

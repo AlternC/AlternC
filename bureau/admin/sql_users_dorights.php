@@ -35,12 +35,11 @@ $fields = array (
 );
 getFields($fields);
 
-
 foreach($_POST as $k=>$v) {
   $keys[$k]=$v;
 }
 
-$cleanrights=array("select","update","insert","delete","create","drop","references","index","alter","create_tmp",'lock');
+$cleanrights=$mysql->available_sql_rights();
 foreach($mysql->get_dblist() as $d){
   $rights=array();
   foreach ($cleanrights as $r) {
@@ -48,6 +47,7 @@ foreach($mysql->get_dblist() as $d){
       $rights[]=$r; 
     }
   }  
+  //add if empty rights
   $mysql->set_user_rights($id,$d['db'],$rights);
 }
 

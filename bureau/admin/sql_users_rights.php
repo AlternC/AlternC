@@ -66,11 +66,18 @@ if ($r) {
      <th>ALTER</th>
      <th>CREATE_TMP_TABLE</th>
      <th>LOCK</th>
+     <th>CREATE VIEW</th>
+     <th>SHOW VIEW</th>
+     <th>CREATE ROUTINE</th>
+     <th>ALTER ROUTINE</th>
+     <th>EXECUTE</th>
+     <th>EVENT</th>
+     <th>TRIGGER</th>
   </tr>
 
 <?php
 $col=1;
-$sql_right=Array('select','insert','update','delete','create','drop','references','index','alter','create_tmp','lock');
+$sql_right=$mysql->available_sql_rights();
 for($i=0;$i<count($r);$i++) {
   $val=$r[$i];
   $col=3-$col;

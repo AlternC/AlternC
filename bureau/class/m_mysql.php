@@ -409,6 +409,7 @@ class m_mysql {
   function grant($base,$user,$rights=null,$pass=null,$table='*'){
     global $err,$db;
     $err->log("mysql","grant",$base."-".$user);
+
     if(!preg_match("#^[0-9a-z_\\*\\\\]*$#",$base)){
       $err->raise("mysql","base_not_match");
       return false;
@@ -544,7 +545,7 @@ class m_mysql {
     $dbu=$dbn;
     $r=array();
     $dbn=str_replace('_','\_',$dbn);
-    $q=$db->query("Select Host,Db,User,Select_priv,Insert_priv,Update_priv,Delete_priv,Create_priv,Drop_priv,References_priv,Index_priv,Alter_priv,Create_tmp_table_priv,Lock_tables_priv from mysql.db where Db='".$dbn."' and User!='".$cuid."_myadm';");
+    $q=$db->query("Select * from mysql.db where Db='".$dbn."' and User!='".$cuid."_myadm';");
 
     if(!$db->num_rows()){
       return $r;
@@ -585,6 +586,27 @@ class m_mysql {
           return $r;
         } 
         if($db->f('Lock_tables_priv') !== "Y"){
+          return $r;
+        } 
+        if($db->f('Create_view_priv') !== "Y"){
+          return $r;
+        } 
+        if($db->f('Show_view_priv') !== "Y"){
+          return $r;
+        } 
+        if($db->f('Create_routine_priv') !== "Y"){
+          return $r;
+        } 
+        if($db->f('Alter_routine_priv') !== "Y"){
+          return $r;
+        } 
+        if($db->f('Execute_priv') !== "Y"){
+          return $r;
+        } 
+        if($db->f('Event_priv') !== "Y"){
+          return $r;
+        } 
+        if($db->f('Trigger_priv') !== "Y"){
           return $r;
         } 
       }
@@ -748,15 +770,23 @@ class m_mysql {
     foreach($dblist as $tab){
       $pos=strpos($tab['db'],"_");
       if($pos === false){
-        $this->dbus->query("SELECT Db, Select_priv, Insert_priv, Update_priv, Delete_priv, Create_priv, Drop_priv, References_priv, Index_priv, Alter_priv, Create_tmp_table_priv, Lock_tables_priv FROM mysql.db WHERE User='".$user."' AND Host='".$this->dbus->Host."' AND Db='".$tab["db"]."';");
+        $this->dbus->query("SELECT * FROM mysql.db WHERE User='".$user."' AND Host='".$this->dbus->Host."' AND Db='".$tab["db"]."';");
       }else{
         $dbname=str_replace('_','\_',$tab['db']);
-        $this->dbus->query("SELECT Db, Select_priv, Insert_priv, Update_priv, Delete_priv, Create_priv, Drop_priv, References_priv, Index_priv, Alter_priv, Create_tmp_table_priv, Lock_tables_priv FROM mysql.db WHERE User='".$user."' AND Host='".$this->dbus->Host."' AND Db='".$dbname."';");
+        $this->dbus->query("SELECT * FROM mysql.db WHERE User='".$user."' AND Host='".$this->dbus->Host."' AND Db='".$dbname."';");
       }	
       if ($this->dbus->next_record()){
-        $r[]=array("db"=>$tab["db"], "select"=>$this->dbus->f("Select_priv"), "insert"=>$this->dbus->f("Insert_priv"),	"update"=>$this->dbus->f("Update_priv"), "delete"=>$this->dbus->f("Delete_priv"), "create"=>$this->dbus->f("Create_priv"), "drop"=>$this->dbus->f("Drop_priv"), "references"=>$this->dbus->f("References_priv"), "index"=>$this->dbus->f("Index_priv"), "alter"=>$this->dbus->f("Alter_priv"), "create_tmp"=>$this->dbus->f("Create_tmp_table_priv"), "lock"=>$this->dbus->f("Lock_tables_priv"));
+        $r[]=array("db"=>$tab["db"], "select"=>$this->dbus->f("Select_priv"), "insert"=>$this->dbus->f("Insert_priv"),	"update"=>$this->dbus->f("Update_priv"), "delete"=>$this->dbus->f("Delete_priv"), "create"=>$this->dbus->f("Create_priv"), "drop"=>$this->dbus->f("Drop_priv"), "references"=>$this->dbus->f("References_priv"), "index"=>$this->dbus->f("Index_priv"), "alter"=>$this->dbus->f("Alter_priv"), "create_tmp"=>$this->dbus->f("Create_tmp_table_priv"), "lock"=>$this->dbus->f("Lock_tables_priv"),
+        "create_view"=>$this->dbus->f("Create_view_priv"),
+        "show_view"=>$this->dbus->f("Show_view_priv"),
+        "create_routine"=>$this->dbus->f("Create_routine_priv"),
+        "alter_routine"=>$this->dbus->f("Alter_routine_priv"),
+        "execute"=>$this->dbus->f("Execute_priv"),
+        "event"=>$this->dbus->f("Event_priv"),
+        "trigger"=>$this->dbus->f("Trigger_priv")
+        );
       }else{
-        $r[]=array("db"=>$tab['db'], "select"=>"N", "insert"=>"N", "update"=>"N", "delete"=>"N", "create"=>"N", "drop"=>"N", "references"=>"N", "index"=>"N", "alter"=>"N", "Create_tmp"=>"N", "lock"=>"N" );
+        $r[]=array("db"=>$tab['db'], "select"=>"N", "insert"=>"N", "update"=>"N", "delete"=>"N", "create"=>"N", "drop"=>"N", "references"=>"N", "index"=>"N", "alter"=>"N", "Create_tmp"=>"N", "lock"=>"N","create_view"=>"N","show_view"=>"N","create_routine"=>"N","alter_routine"=>"N","execute"=>"N","event"=>"N","trigger"=>"N");
 
       }
 
@@ -776,7 +806,6 @@ class m_mysql {
   function set_user_rights($user,$dbn,$rights) {
     global $mem,$err,$db;
     $err->log("mysql","set_user_rights");
-    $err->log("mysql",$dbn);
 
     $usern=addslashes($user);
     $dbname=addslashes($dbn);
@@ -818,6 +847,27 @@ class m_mysql {
         case "lock":
           $strrights.="LOCK TABLES,";
         break;
+        case "create_view":
+          $strrights.="CREATE VIEW,";
+        break;
+        case "show_view":
+          $strrights.="SHOW VIEW,";
+        break;
+        case "create_routine":
+          $strrights.="CREATE ROUTINE,";
+        break;
+        case "alter_routine":
+          $strrights.="ALTER ROUTINE,";
+        break;
+        case "execute":
+          $strrights.="EXECUTE,";
+        break;
+        case "event":
+          $strrights.="EVENT,";
+        break;
+        case "trigger":
+          $strrights.="TRIGGER,";
+        break;
       }
     }
 
@@ -831,6 +881,12 @@ class m_mysql {
     }
     $this->dbus->query("FLUSH PRIVILEGES");
     return TRUE;
+  }
+
+  function available_sql_rights(){
+    return Array('select','insert','update','delete','create','drop','references','index','alter','create_tmp','lock','create_view','show_view','create_routine','alter_routine','execute','event','trigger');
+
+
   }
 
 
