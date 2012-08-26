@@ -71,16 +71,9 @@ class m_log {
   }
   
   function get_logs_directory(){
-    global $cuid,$db,$err;
+    global $cuid,$mem,$err;
     $err->log("log","get_logs_directory");
-    
-    $db->query("select login from membres where uid=$cuid ;");
-    if ($db->num_rows()==0) {
-      $err->raise("log",1);
-      return false;
-    }
-    $db->next_record();
-    $c=array("dir"=>ALTERNC_LOGS."/".$cuid."-".$db->f("login"));
+    $c=array("dir"=>ALTERNC_LOGS."/".$cuid."-".$mem->user["login"]);
     return $c;
   }
   
