@@ -91,6 +91,7 @@ for($i=0;$i<count($r);$i++) {
 ?>
 <tr><td colspan="5">
    <input type="submit" value="<?php __("Apply"); ?>" class="inb" />
+  <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='sql_users_list.php'"/>
 </td></tr>
 </table>
 </form>

@@ -544,47 +544,51 @@ class m_mysql {
     $dbu=$dbn;
     $r=array();
     $dbn=str_replace('_','\_',$dbn);
-    $db->query("Select Host,Db,User,Select_priv,Insert_priv,Update_priv,Delete_priv,Create_priv,Drop_priv,References_priv,Index_priv,Alter_priv,Create_tmp_table_priv,Lock_tables_priv from mysql.db where Db='".$dbn."' and User='".$dbu."';");
+    $q=$db->query("Select Host,Db,User,Select_priv,Insert_priv,Update_priv,Delete_priv,Create_priv,Drop_priv,References_priv,Index_priv,Alter_priv,Create_tmp_table_priv,Lock_tables_priv from mysql.db where Db='".$dbn."' and User!='".$cuid."_myadm';");
 
     if(!$db->num_rows()){
       return $r;
     }
-    $db->next_record();
-    $r['Host']=$db->f('Host');		
-    if($db->f('Select_priv') !== "Y"){
-      return $r;
-    } 
-    if($db->f('Insert_priv') !== "Y"){
-      return $r;
-    } 
-    if($db->f('Update_priv') !== "Y"){
-      return $r;
-    } 
-    if($db->f('Delete_priv') !== "Y"){
-      return $r;
-    } 
-    if($db->f('Create_priv') !== "Y"){
-      return $r;
-    } 
-    if($db->f('Drop_priv') !== "Y"){
-      return $r;
-    } 
-    if($db->f('References_priv') !== "Y"){
-      return $r;
-    } 
-    if($db->f('Index_priv') !== "Y"){
-      return $r;
-    } 
-    if($db->f('Alter_priv') !== "Y"){
-      return $r;
-    } 
-    if($db->f('Create_tmp_table_priv') !== "Y"){
-      return $r;
-    } 
-    if($db->f('Lock_tables_priv') !== "Y"){
-      return $r;
-    } 
+    while ($db->next_record()) {       
+      $variable = $db->Record;     
+      if($variable['User'] == $dbu){
+        $r['Host']=$db->f('Host');		
 
+        if($db->f('Select_priv') !== "Y"){
+          return $r;
+        } 
+        if($db->f('Insert_priv') !== "Y"){
+          return $r;
+        } 
+        if($db->f('Update_priv') !== "Y"){
+          return $r;
+        } 
+        if($db->f('Delete_priv') !== "Y"){
+          return $r;
+        } 
+        if($db->f('Create_priv') !== "Y"){
+          return $r;
+        } 
+        if($db->f('Drop_priv') !== "Y"){
+          return $r;
+        } 
+        if($db->f('References_priv') !== "Y"){
+          return $r;
+        } 
+        if($db->f('Index_priv') !== "Y"){
+          return $r;
+        } 
+        if($db->f('Alter_priv') !== "Y"){
+          return $r;
+        } 
+        if($db->f('Create_tmp_table_priv') !== "Y"){
+          return $r;
+        } 
+        if($db->f('Lock_tables_priv') !== "Y"){
+          return $r;
+        } 
+      }
+    }//endwhile
     if(!$db->query("SELECT name,password from dbusers where name='".$dbu."';")){
       return $r;
     }

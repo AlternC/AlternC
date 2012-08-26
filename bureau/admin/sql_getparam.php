@@ -49,7 +49,6 @@ if (!$r=$mysql->get_dblist()) {
 		echo "<p class=\"error\">$error</p><p>&nbsp;</p>";
 	}
 $r=$mysql->get_defaultsparam($dbname);
-if(!empty($r)){
 ?>
 <p><?php __("Your current connection settings are"); ?> : </p>
 <table class="tedit">
@@ -78,13 +77,12 @@ if(isset($r['user'])){
 </table>
 <?php
 if(!isset($r['user'])){
-	echo "<p class=\"error\">";__("You changed the MySQL User base configuration. Please refer to your configuration");echo"</p><p>&nbsp;</p>";
+	echo "<p class=\"error\">";__("You changed the MySQL User base configuration. Please reffer to your configuration");echo"</p><p>&nbsp;</p>";
 }
 ?>
 <p><span class="ina"><a href="sql_list.php"><?php __("Back to the MySQL database list"); ?></a></span></p>
 
 
 <?php
-} //empty $r
  include_once("foot.php"); ?>
 
