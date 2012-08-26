@@ -62,7 +62,7 @@ case "$1" in
 
     # Restore orignals conf files which have been replaced by Alternc
     # With the oldest tar found
-    $BACKUP=$(ls /var/backups/alternc/etc-original*.tar.gz | head -n 1)
+    BACKUP=$(ls /var/backups/alternc/etc-original*.tar.gz | head -n 1)
     tar -C / -xf "$BACKUP" 2>/dev/null || true
 
     ;;
