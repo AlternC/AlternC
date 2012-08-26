@@ -75,7 +75,7 @@ while (list($key,$val)=each($ql)) {
 	echo "<tr>";
 	echo "<td>";
 	if ($r[$key]["t"]==$r[$key]["u"] && $r[$key]["u"]) echo "<span style=\"color: red;\">";
-	echo "<label for=\"q_$key\">" . _("quota_".$key) . "</label>";
+	echo "<label for=\"q_$key\">" . $val . "</label>";
 	if ($r[$key]["t"]==$r[$key]["u"] && $r[$key]["u"]) echo "</span>";
 	echo "</td>";
 	echo "<td align=\"center\"><input type=\"text\" class=\"int\" style=\"text-align: right\" size=\"10\" maxlength=\"20\" value=\"".$r[$key]["t"]."\" name=\"q_".$key."\" id=\"q_".$key."\" /></td>";
