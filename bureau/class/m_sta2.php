@@ -150,7 +150,7 @@ class m_sta2 {
       }
       return $r;
     } else {
-      $err->raise("sta2",2);
+      $err->raise("sta2",_("You cannot create more raw statistic set."));
       return false;
     }
   }
@@ -182,7 +182,7 @@ class m_sta2 {
 		   "folder"=>$match[1]
 		   );
     } else {
-      $err->raise("sta2",3);
+      $err->raise("sta2",_("The requested raw statistic set has not been found."));
       return false;
     }
   }
@@ -203,7 +203,7 @@ class m_sta2 {
     $db->query("SELECT count(*) AS cnt FROM stats2 WHERE id='$id' and mid='$cuid';");
     $db->next_record();
     if (!$db->f("cnt")) {
-      $err->raise("sta2",3);
+      $err->raise("sta2",_("The requested raw statistic set has not been found."));
       return false;
     }
     // TODO : replace with ,1 on convertabsolute call, and delete "/Var/alternc.../" at the query. ???
@@ -228,7 +228,7 @@ class m_sta2 {
     $err->log("sta2","delete_stats_raw",$id);
     $db->query("SELECT hostname FROM stats2 WHERE id='$id' and mid='$cuid';");
     if (!$db->num_rows()) {
-      $err->raise("sta2",3);
+      $err->raise("sta2",_("The requested raw statistic set has not been found."));
       return false;
     }
     $db->next_record();
@@ -258,7 +258,7 @@ class m_sta2 {
       $db->query("INSERT INTO stats2 (hostname,folder,mid) VALUES ('$hostname','".getuserpath()."/$dir','$cuid')");
       return true;
     } else {
-      $err->raise("sta2",1);
+      $err->raise("sta2",_("You cannot create more raw statistic set."));
       return false;
     }
   }
