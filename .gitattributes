@@ -383,6 +383,7 @@ debian/alternc-slave.postrm -text
 debian/alternc-slave.prerm -text
 debian/alternc-slave.templates -text
 debian/alternc-squirrelmail.dirs -text
+debian/alternc-squirrelmail.postinst -text
 debian/alternc.config -text
 debian/alternc.cron.d -text
 debian/alternc.dirs -text

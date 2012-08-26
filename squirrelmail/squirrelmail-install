@@ -32,10 +32,8 @@ then
     . /usr/lib/alternc/functions.sh
     
     echo "Setting squirrelmail as default webmail"
-    mysql_query "REPLACE INTO variable SET name='webmail_redirect', value='squirrelmail', comment='Set it to the name of your preferred webmail, /webmail will point to it';"
+    mysql_query "INSERT IGNORE INTO variable SET name='webmail_redirect', value='squirrel', comment='Set it to the name of your preferred webmail, /webmail will point to it (squirrel, rc...)';"
     echo "Done"
     
 fi
-
-
 

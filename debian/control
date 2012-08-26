@@ -39,7 +39,7 @@ Description-fr.UTF-8: Suite logicielle d'hébergement mutualisé pour Debian
 Package: alternc-slave
 Architecture: all
 Pre-depends: debconf (>= 0.5.00) | debconf-2.0
-Depends: debianutils (>= 1.13.1), apache2-mpm-itk, libapache2-mod-php5, php5-mysql, phpmyadmin, postfix, proftpd-mod-mysql, proftpd-basic, squirrelmail, postfix-tls, bind9, wget, rsync, quota, ca-certificates, locales, perl-suid, perl, postfix-mysql, wwwconfig-common, sasl2-bin, libsasl2-modules, php5-cli, lockfile-progs (>= 0.1.9), gettext (>= 0.10.40-5), adduser, mysql-client, sudo, acl, dovecot-common (>= 1:1.2.15), dovecot-imapd, dovecot-pop3d
+Depends: debianutils (>= 1.13.1), apache2-mpm-itk, libapache2-mod-php5, php5-mysql, phpmyadmin, postfix, proftpd-mod-mysql, proftpd-basic, postfix-tls, bind9, wget, rsync, quota, ca-certificates, locales, perl-suid, perl, postfix-mysql, wwwconfig-common, sasl2-bin, libsasl2-modules, php5-cli, lockfile-progs (>= 0.1.9), gettext (>= 0.10.40-5), adduser, mysql-client, sudo, acl, dovecot-common (>= 1:1.2.15), dovecot-imapd, dovecot-pop3d
 Recommends: dovecot-managesieved, dovecot-sieve, dovecot-mysql
 Conflicts: alternc-admintools, alternc-awstats (<= 0.3.2), alternc-webalizer (<= 0.9.4), alternc, courier-authdaemon
 Provides: alternc
@@ -74,8 +74,8 @@ Description-fr.UTF-8: Suite logicielle d'hébergement mutualisé pour Debian
 
 Package: alternc-squirrelmail
 Architecture: all
-Pre-depends: debconf (>= 0.5.00) | debconf-2.0
-Depends: debianutils (>= 1.13.1), alternc (>= 1.1), squirrelmail, squirrelmail-locales, avelsieve
+Pre-depends: debconf (>= 0.5.00) | debconf-2.0, alternc (>= 1.1)
+Depends: debianutils (>= 1.13.1), squirrelmail, squirrelmail-locales, avelsieve
 Conflicts: alternc (<= 1.0.3)
 Provides: alternc-webmail
 Suggests: 

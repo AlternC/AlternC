@@ -240,9 +240,6 @@ EOF
     # Apache will not start without this file
     touch /var/alternc/apache-vhost/vhosts_all.conf
 
-	  #squirrelmail fix		
-		chown -R :alterncpanel /var/lib/squirrelmail/data
-		chmod -R g+w /var/lib/squirrelmail
 				#sudo stuff allowing alterncpanel to use quota
 		if [ -d /etc/sudoers.d ]; then
 			cp /etc/alternc/alternc-sudoers /etc/sudoers.d/alternc-sudoers

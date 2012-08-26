@@ -1,0 +1,22 @@
+#!/bin/sh
+
+set -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+CONFIGFILE="/etc/alternc/local.sh"
+
+case "$1" in
+    configure)
+	
+        # add alternc-squirrelmail user for php-itk special rights
+	if ! getent passwd alternc-squirrelmail; then
+	    useradd -g alternc-squirrelmail -u 1997 alternc-squirrelmail -d /usr/share/squirrelmail -m 
+	fi 	     
+	dpkg-statoverride --add alternc-squirrelmail root 0750 /var/spool/squirrelmail/attach /usr/lib/squirrelmail/data
+	chown -R alternc-squirrelmail:root /var/spool/squirrelmail/attach /usr/lib/squirrelmail/data
+	chmod -R 750 /var/spool/squirrelmail/attach /usr/lib/squirrelmail/data	
+	;;
+esac
+
