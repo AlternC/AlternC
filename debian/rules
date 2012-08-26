@@ -96,10 +96,8 @@ install: build
 	cp debian/alternc.lintian debian/alternc/usr/share/lintian/overrides/alternc
 	cp debian/alternc-slave.lintian debian/alternc/usr/share/lintian/overrides/alternc-slave
 
-	install -m 644 squirrelmail/templates/squirrelmail/* debian/alternc-squirrelmail/etc/alternc/templates/squirrelmail/
-	install -m 644 squirrelmail/templates/javascript-common/* debian/alternc-squirrelmail/etc/alternc/templates/javascript-common/
-	install -m 750 squirrelmail/squirrelmail-install debian/alternc-squirrelmail/usr/lib/alternc/install.d/
-	install -m 644 squirrelmail/apache-panel.d/squirrelmail.conf debian/alternc-squirrelmail/etc/alternc/apache-panel.d/
+	# alternc-squirrelmail:
+	(cd squirrelmail && $(MAKE) install DESTDIR=$(CURDIR)/debian/alternc-squirrelmail)
 
 # This single target is used to build all the packages, all at once, or
 # one at a time. So keep in mind: any options passed to commands here will

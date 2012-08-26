@@ -17,17 +17,18 @@
 #
 # To read the license please visit http://www.gnu.org/copyleft/gpl.html
 # ----------------------------------------------------------------------
-# Purpose of file: Makefile des binaires de /usr/lib/alternc
+# Purpose of file: Install the files of alternc-squirrelmail packages
 # ----------------------------------------------------------------------
-SETUID=quota_edit quota_get mem_add mem_del du.pl
-SCRIPTS=sqlbackup.sh quota_init quota_delete update_domains.sh slave_dns sendmail spoolsize.php fixperms.sh alternc-dboptimize export_account.php cron_users_doit.sh cron_users.sh compress_logs.sh delete_logs.sh quota-warning.sh update_mails.sh postfix-add-policy
-LIBS=functions.sh functions_hosting.sh functions_dns.sh
-BIN=$(DESTDIR)/usr/lib/alternc/
 
-install: 
-	# Group 1999 references alterncpanel
-	chown root:1999 $(BIN)
-	chmod 755 $(BIN)
-	install -o root -g 1999 -m4750 $(SETUID) $(BIN)
-	install -o root -g 1999 -m0750 $(SCRIPTS) $(BIN)
-	install -o root -g 1999 -m0644 $(LIBS) $(BIN)
+install:
+	# alternc-squirrelmail files install
+	install -m 644 templates/squirrelmail/* $(DESTDIR)/etc/alternc/templates/squirrelmail/
+	install -m 644 templates/javascript-common/* $(DESTDIR)/etc/alternc/templates/javascript-common/
+	install -m 750 squirrelmail-install $(DESTDIR)/usr/lib/alternc/install.d/
+	install -m 644 apache-panel.d/squirrelmail.conf $(DESTDIR)/etc/alternc/apache-panel.d/
+	# default webmail vhost: squirrelmail.local, will be proxified from http://panel/squirrel/
+	install -m 644 apache2.conf $(DESTDIR)/etc/apache2/conf.d/alternc-squirrelmail.conf
+	# domaintype template: 
+	install -m 644 templates/apache2/squirrelmail.conf $(DESTDIR)/etc/alternc/templates/apache2/squirrelmail.conf
+	# empty folder for redirect to /squirrel location ... 
+	install -m 644 redirect.php $(DESTDIR)/usr/share/alternc-squirrelmail/index.php

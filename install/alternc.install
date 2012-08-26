@@ -27,7 +27,7 @@
 
 # Also launches scripts in /usr/lib/alternc/install.d/ 
 # with an argument telling where you are in alternc.install
-# argument will be : startup, templates, before-reload, end
+# argument will be : startup, templates, apache2, before-reload, end
 
 # Somes check before start operations
 if [ `id -u` -ne 0 ]; then
@@ -243,8 +243,11 @@ rm -f $SED_SCRIPT
 php="`ls /usr/lib/apache*/*/*php*.so | sed -e 's/^.*libphp\(.\)\.so$/php\1/' | tail -1`"
 ln -fs /etc/alternc/alternc.ini /etc/$php/conf.d/alternc.ini || true
 if [ -x /usr/sbin/apache2 ]; then
+    # hook 
+    run-parts --arg=apache2 /usr/lib/alternc/install.d 
+    
     s=""
-    # unused from AlternC 1.1
+    # unused from AlternC 1.1, FIXME: remove it later
     if [ -L /etc/apache2/mods-enabled/vhost_alias.load ]
     then
         a2dismod vhost_alias

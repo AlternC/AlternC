@@ -27,13 +27,39 @@ then
     echo "Installing Squirrelmail Templates ..."
     cp -f /etc/alternc/templates/squirrelmail/avelsieve-config.php /etc/alternc/templates/squirrelmail/apache.conf /etc/squirrelmail/
     cp -f /etc/alternc/templates/javascript-common/javascript-common.conf /etc/javascript-common/
-    echo "Done"
+    echo "    Done"
     
     . /usr/lib/alternc/functions.sh
     
-    echo "Setting squirrelmail as default webmail"
+    echo "Setting squirrelmail as default webmail & installing domaintype"
     mysql_query "INSERT IGNORE INTO variable SET name='webmail_redirect', value='squirrel', comment='Set it to the name of your preferred webmail, /webmail will point to it (squirrel, rc...)';"
-    echo "Done"
+    mysql_query "INSERT IGNORE INTO domaines_type (name ,description ,target ,entry ,compatibility ,enable ,only_dns ,need_dns ,advanced )VALUES ('squirrelmail','Squirrelmail Webmail access', 'NONE', '%SUB% IN A @@PUBLIC_IP@@', 'txt', 'ALL', '0', '0', '0');"
+    echo "    Done"
+
+    echo "Migrating old webmail domaine type to squirrelmail one:"
+    # migration of the "webmail" hosts to "squirrelmail" hosts:
+    mysql_query "INSERT IGNORE INTO sub_domaines (compte, domaine, sub, valeur, type, web_action, web_result, enable) SELECT compte, domaine, sub, valeur,'squirrelmail', 'UPDATE',0, enable FROM sub_domaines WHERE type='webmail' AND web_action='OK';"
+    mysql_query "UPDATE sub_domaines SET web_action='DELETE' WHERE type='webmail' AND web_action='OK';"
+    echo "    Done"
     
+#    echo "Adding squirrelmail.local in /etc/hosts for webmail vhost"
+#    if ! grep -q "127.0.0.1.*squirrelmail.local" /etc/hosts
+#    then
+#	echo "127.0.0.1    squirrelmail.local" >>/etc/hosts
+#    fi
 fi
+
+#if [ "$1" = "apache2" ]
+#then
+#    echo "Installing Apache Proxy module for Squirrelmail ..."
+#    if ! [ -L /etc/apache2/mods-enabled/proxy.load ]
+#    then
+#	    a2enmod proxy
+#    fi
+#    if ! [ -L /etc/apache2/mods-enabled/proxy_http.load ]
+#    then
+#	    a2enmod proxy_http
+#    fi
+#    echo "Done"
+#fi
 

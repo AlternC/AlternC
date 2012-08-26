@@ -225,3 +225,7 @@ DROP TABLE stats2;
 
 -- With Dovecot, no more use of size_mail
 DROP TABLE size_mail;
+
+-- now that we have separate packages for the webmails, we can't serve webmail domainetype anymore
+DELETE FROM domaines_type WHERE name='webmail';
+UPDATE domaines_type SET compatibility=REPLACE(compatibility,'webmail,','');

@@ -422,7 +422,6 @@ etc/alternc/templates/alternc/bureau.conf -text
 etc/alternc/templates/apache2/panel.conf -text
 etc/alternc/templates/apache2/url.conf -text
 etc/alternc/templates/apache2/vhost.conf -text
-etc/alternc/templates/apache2/webmail.conf -text
 etc/alternc/templates/bind/automatic.conf -text
 etc/alternc/templates/bind/named.conf.options -text
 etc/alternc/templates/bind/slaveip.conf -text
@@ -472,6 +471,7 @@ install/upgrades/0.9.9.sql -text
 install/upgrades/1.0.1.php -text
 install/upgrades/1.0.3.sql -text
 install/upgrades/1.0.sql -text
+install/upgrades/1.1.php -text
 install/upgrades/1.1.sql -text
 install/upgrades/README -text
 lang/README -text
@@ -501,8 +501,12 @@ po/fr/LC_MESSAGES/alternc-admintools.po -text
 selenium/20120826-alternc-panel-testsuite.html -text
 selenium/README -text
 selenium/alternc.domain-local-mail-tld.html -text
+squirrelmail/Makefile -text
 squirrelmail/apache-panel.d/squirrelmail.conf -text
+squirrelmail/apache2.conf -text
+squirrelmail/redirect.php -text
 squirrelmail/squirrelmail-install -text
+squirrelmail/templates/apache2/squirrelmail.conf -text
 squirrelmail/templates/javascript-common/javascript-common.conf -text
 squirrelmail/templates/squirrelmail/apache.conf -text
 squirrelmail/templates/squirrelmail/avelsieve-config.php -text
