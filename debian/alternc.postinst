@@ -56,9 +56,9 @@ case "$1" in
     if ! getent passwd vmail; then
        useradd -g vmail -u 1998 vmail -d "$VMAIL_HOME"/mail -m 
     fi 
-    chown -R vmail:vmail "$VMAIL_HOME"/mail
-    chmod u+w "$VMAIL_HOME"/mail
-    chmod -R g+w "$VMAIL_HOME"/mail
+    chown vmail:vmail "$VMAIL_HOME"/mail "$VMAIL_HOME"/mail/* 
+    chmod u+rxw "$VMAIL_HOME"/mail "$VMAIL_HOME"/mail/*
+    chmod g+rxw "$VMAIL_HOME"/mail "$VMAIL_HOME"/mail/*
 
     # build local.sh if it does not exist
     if [ ! -f $CONFIGFILE ]; then
