@@ -122,8 +122,13 @@ class m_quota {
         return array("t"=>0, "u"=>0);
       } else {
         while ($db->next_record()) {
-	  $ttmp[]=$db->Record;
+	  $ttmp[$db->f("name")]=$db->Record;
 	}             
+	foreach($this->clquota as $k=>$v) {
+	  if (!isset($ttmp[$k])) {
+	    $ttmp[$k]=array("name" => $k, "t" => 0, "u" => 0);
+	  }
+	}
 	// TODO: old hook method FIXME: remove when unused
 	foreach ($ttmp as $tt) {
 	  if (! isset( $this->clquota[$tt["name"]] )) continue;
