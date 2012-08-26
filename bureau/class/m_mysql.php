@@ -109,15 +109,6 @@ class m_mysql {
 
 
   /* ----------------------------------------------------------------- */
-  /** Hook called by m_quota to obtain the quota managed by this class.
-   * Quota name
-   */
-  function alternc_quota_names() {
-    return array("mysql");
-  }
-
-
-  /* ----------------------------------------------------------------- */
   /**
    * Password kind used in this class (hook for admin class)
    */
@@ -897,24 +888,15 @@ class m_mysql {
    * @return integer the number of service used or false if an error occured
    * @access private
    */
-  function alternc_get_quota($name) {
+  function hook_quota_get() {
     global $err,$db,$cuid;
-    if ($name=="mysql") {
-      $err->log("mysql","alternc_get_quota");
-      $c=$this->get_dblist();
-      if (is_array($c)) {
-        return count($c);
-      } else {
-        return 0;
-      }
-    } elseif ($name=="mysql_users") {
-      $err->log("mysql","alternc_get_quota");
-      $c=$this->get_userslist();
-      if(is_array($c))
-        return count($c);
-      else
-        return 0;
-    } else return false;
+    $err->log("mysql","alternc_get_quota");
+    $q=Array("name"=>"mysql", "description"=>_("MySQL Databases"), "used"=>0);
+    $c=$this->get_dblist();
+    if (is_array($c)) {
+      $q['used']=count($c);
+    }
+    return $q;
   }
 
   /* ----------------------------------------------------------------- */
