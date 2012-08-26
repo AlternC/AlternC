@@ -1,0 +1,8 @@
+etc/alternc
+etc/alternc/apache-panel.d
+etc/alternc/templates/squirrelmail
+etc/alternc/templates/javascript-common
+etc/cron.d
+etc/squirrelmail
+usr/share/alternc/install
+usr/lib/alternc/install.d

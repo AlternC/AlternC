@@ -1,21 +1,48 @@
 #!/bin/sh
+
+# ----------------------------------------------------------------------
+# AlternC - Web Hosting System
+# Copyright (C) 2000-2012 by the AlternC Development Team.
+# https://alternc.org/
+# ----------------------------------------------------------------------
+# LICENSE
 #
-# AlternC Main install script.
-# This script should be launched only once, when installing AlternC
-# on a new server. THIS SCRIPT ERASE ALL DATA ON THE AlternC SYSTEM !!
-# YOU HAVE BEEN WARNED !
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License (GPL)
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# To read the license please visit http://www.gnu.org/copyleft/gpl.html
+# ----------------------------------------------------------------------
+# Purpose of file: Main install script, launch it anytime ;) 
+# ----------------------------------------------------------------------
 
 # This script now assumes it has MySQL connectivity through
 # /etc/alternc/my.cnf
+
+# Also launches scripts in /usr/lib/alternc/install.d/ 
+# with an argument telling where you are in alternc.install
+# argument will be : startup, templates, before-reload, end
+
+# Somes check before start operations
+if [ `id -u` -ne 0 ]; then
+    echo "must be launched as root"
+    exit 1
+fi
 
 set -e 
 
 for i in $*; do
     case "$i" in
         -f|--force)
-            force=1; shift;;
+            export force=1; shift;;
         -s|--slave)
-            slave=1; shift;;
+            export slave=1; shift;;
         --)
             break;;
         *)
@@ -24,6 +51,9 @@ for i in $*; do
 done
 
 . /usr/lib/alternc/functions.sh
+
+# hook 
+run-parts --arg=startup /usr/lib/alternc/install.d 
 
 #######################################################################
 # Script configuration
@@ -47,9 +77,6 @@ if [ -d /etc/postfix ]; then
 fi
 if [ -e /etc/proftpd/proftpd.conf ]; then
     CONFIG_FILES="$CONFIG_FILES etc/proftpd/proftpd.conf etc/proftpd/welcome.msg etc/proftpd/modules.conf"
-fi
-if [ -e /etc/squirrelmail/apache.conf ]; then
-    CONFIG_FILES="$CONFIG_FILES etc/squirrelmail/apache.conf"
 fi
 
 if [ -e /etc/default/saslauthd ]; then
@@ -82,7 +109,7 @@ if [ -f "$INSTALLED_CONFIG_TAR" ]; then
             echo "changing the template in $TEMPLATE_DIR and then calling"
             echo "$0 to perform the update."
             echo ""
-            echo "Please examine the situation closely and call '$0 --force'"
+            echo "Please examine the situation closely and call '$0 -f'"
             echo "if you still want to actually overwrite these files."
             exit 1
         fi
@@ -174,6 +201,9 @@ s\\%%version%%\\$VERSION\\;
 s\\%%ns2_ip%%\\$NS2_IP\\;
 EOF
 
+# hook 
+run-parts --arg=templates /usr/lib/alternc/install.d 
+
 #######################################################################
 # Backup configuration files
 #
@@ -214,9 +244,10 @@ php="`ls /usr/lib/apache*/*/*php*.so | sed -e 's/^.*libphp\(.\)\.so$/php\1/' | t
 ln -fs /etc/alternc/alternc.ini /etc/$php/conf.d/alternc.ini || true
 if [ -x /usr/sbin/apache2 ]; then
     s=""
-    if ! [ -L /etc/apache2/mods-enabled/vhost_alias.load ]
+    # unused from AlternC 1.1
+    if [ -L /etc/apache2/mods-enabled/vhost_alias.load ]
     then
-        a2enmod vhost_alias
+        a2dismod vhost_alias
         s="apache2"
     fi 
     if ! [ -L /etc/apache2/mods-enabled/$php.load ]
@@ -279,7 +310,7 @@ then
     echo "POSTFIX is NOT configured properly"
     echo "please launch dpkg-reconfigure -plow postfix" 
     echo "and choose 'Internet Site'"
-    echo "then reinstall alternc"
+    echo "then launch alternc.install again"
     echo "****************************************"
     exit 1
 fi
@@ -294,7 +325,7 @@ grep -v '^\ *#' $postfix_conf |while read line ; do
    postconf -e "$line"
 done 
 
-# Conviguring delivery used bu Postfix
+# Conviguring delivery used by Postfix
 echo `/usr/lib/alternc/postfix-add-policy dovecot vmail:vmail DRhu pipe '/usr/bin/sudo /usr/lib/dovecot/deliver -f ${sender} -d ${recipient} '`
 
 # Bug #1215: configure mydestination when $FQDN is not in
@@ -325,13 +356,29 @@ if [ -x /usr/sbin/locale-gen ] ; then
 	echo "fr_FR ISO-8859-1" >>/etc/locale.gen
 	LOCALECHANGED=1
     fi
+    if ! grep -q "^de_DE.UTF-8 UTF-8$" /etc/locale.gen ; then
+	echo "de_DE.UTF-8 UTF-8" >>/etc/locale.gen
+	LOCALECHANGED=1
+    fi
+    if ! grep -q "^fr_FR.UTF-8 UTF-8$" /etc/locale.gen ; then
+	echo "fr_FR.UTF-8 UTF-8" >>/etc/locale.gen
+	LOCALECHANGED=1
+    fi
+    if ! grep -q "^es_ES.UTF-8 UTF-8$" /etc/locale.gen ; then
+	echo "es_ES.UTF-8 UTF-8" >>/etc/locale.gen
+	LOCALECHANGED=1
+    fi
+    if ! grep -q "^en_US.UTF-8 UTF-8$" /etc/locale.gen ; then
+	echo "en_US.UTF-8 UTF-8" >>/etc/locale.gen
+	LOCALECHANGED=1
+    fi
     if [ "$LOCALECHANGED" ] ; then
 	locale-gen
     fi
 fi
 
 #######################################################################
-#populate alternc database with the mailname used by postfix to send mail for each vhost
+# populate alternc database with the mailname used by postfix to send mail for each vhost
 #
 mailname=`cat /etc/mailname`
 mysql_query "update variable SET value='"$mailname"' where name='mailname_bounce';" 
@@ -342,13 +389,6 @@ chmod +r "/etc/mailname"
 # Save installed files to check them during next install
 #
 tar -zcf "$INSTALLED_CONFIG_TAR" -C / $CONFIG_FILES
-
-#######################################################################
-# Reload services
-#
-for service in postfix bind9 dovecot cron proftpd; do
-    invoke-rc.d $service force-reload || true
-done
 
 #######################################################################
 # Last touches
@@ -390,6 +430,16 @@ chown -R alterncpanel:alterncpanel "$ALTERNC_LOC/bureau"
 # We force the re-computing of the DNS zones, since we may have changed the IP address (see #460)
 /usr/bin/mysql --defaults-file="/etc/alternc/my.cnf" -B -e "update domaines set dns_action='update';"
 
+# hook 
+run-parts --arg=before-reload /usr/lib/alternc/install.d 
+
+#######################################################################
+# Reload services
+#
+for service in postfix bind9 dovecot cron proftpd; do
+    invoke-rc.d $service force-reload || true
+done
+
 # We should restart apaches after all configuration stuff ...
 for service in $SERVICES; do
     test -x /etc/init.d/$service && invoke-rc.d $service stop || true
@@ -397,3 +447,6 @@ done
 for service in $SERVICES; do
     test -x /etc/init.d/$service && invoke-rc.d $service start || true
 done
+
+# hook 
+run-parts --arg=end /usr/lib/alternc/install.d 

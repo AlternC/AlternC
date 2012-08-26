@@ -1,14 +1,10 @@
 <?php
 
 /*
- $Id: index.php,v 1.11 2004/05/24 17:30:22 anonymous Exp $
  ----------------------------------------------------------------------
  AlternC - Web Hosting System
- Copyright (C) 2002 by the AlternC Development Team.
- http://alternc.org/
- ----------------------------------------------------------------------
- Based on:
- Valentin Lacambre's web hosting softwares: http://altern.org/
+ Copyright (C) 2000-2012 by the AlternC Development Team.
+ https://alternc.org/
  ----------------------------------------------------------------------
  LICENSE
 
@@ -24,7 +20,6 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file: Benjamin Sonntag
  Purpose of file: Main index : show the login page
  ----------------------------------------------------------------------
 */

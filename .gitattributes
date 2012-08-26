@@ -382,6 +382,7 @@ debian/alternc-slave.postinst -text
 debian/alternc-slave.postrm -text
 debian/alternc-slave.prerm -text
 debian/alternc-slave.templates -text
+debian/alternc-squirrelmail.dirs -text
 debian/alternc.config -text
 debian/alternc.cron.d -text
 debian/alternc.dirs -text
@@ -444,7 +445,6 @@ etc/alternc/templates/postfix/sasl/smtpd.conf -text
 etc/alternc/templates/proftpd/modules.conf -text
 etc/alternc/templates/proftpd/proftpd.conf -text
 etc/alternc/templates/proftpd/welcome.msg -text
-etc/alternc/templates/squirrelmail/apache.conf -text
 install/alternc.install -text
 install/body_checks -text
 install/domaines.template -text
@@ -500,6 +500,11 @@ po/fr/LC_MESSAGES/alternc-admintools.po -text
 selenium/20120826-alternc-panel-testsuite.html -text
 selenium/README -text
 selenium/alternc.domain-local-mail-tld.html -text
+squirrelmail/apache-panel.d/squirrelmail.conf -text
+squirrelmail/squirrelmail-install -text
+squirrelmail/templates/javascript-common/javascript-common.conf -text
+squirrelmail/templates/squirrelmail/apache.conf -text
+squirrelmail/templates/squirrelmail/avelsieve-config.php -text
 src/Makefile -text
 src/alternc-check -text
 src/alternc-dboptimize -text

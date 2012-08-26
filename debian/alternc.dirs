@@ -1,4 +1,5 @@
 etc/alternc
+etc/alternc/apache-panel.d
 etc/alternc/templates
 etc/alternc/templates/apache2
 etc/alternc/functions_hosting
@@ -7,10 +8,10 @@ etc/bind/templates
 etc/cron.d
 etc/phpmyadmin
 etc/postfix
-etc/squirrelmail
-/etc/sudoers.d
+etc/sudoers.d
 usr/bin
 usr/lib/alternc
+usr/lib/alternc/install.d
 usr/sbin
 usr/share/alternc/install
 usr/share/locale/fr/LC_MESSAGES
