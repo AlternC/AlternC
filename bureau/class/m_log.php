@@ -80,7 +80,7 @@ class m_log {
   function download_link($file){
     global $err,$mem;
     $err->log("log","download_link");
-    header("Content-Disposition: attachment; filename=".$mem->user["login"].".zip");
+    header("Content-Disposition: attachment; filename=".$mem->user["login"].".zip"); // FIXME: keep the original name file
     header("Content-Type: application/force-download");
     header("Content-Transfer-Encoding: binary");
     $f=$this->get_logs_directory();

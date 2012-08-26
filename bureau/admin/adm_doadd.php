@@ -1,15 +1,9 @@
 <?php
 /*
- $Id: adm_doadd.php,v 1.8 2006/01/24 05:03:30 joe Exp $
  ----------------------------------------------------------------------
  AlternC - Web Hosting System
- Copyright (C) 2006 Le réseau Koumbit Inc.
- http://koumbit.org/
- Copyright (C) 2002 by the AlternC Development Team.
- http://alternc.org/
- ----------------------------------------------------------------------
- Based on:
- Valentin Lacambre's web hosting softwares: http://altern.org/
+ Copyright (C) 2000-2012 by the AlternC Development Team.
+ https://alternc.org/
  ----------------------------------------------------------------------
  LICENSE
 
@@ -24,9 +18,6 @@
  GNU General Public License for more details.
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
- ----------------------------------------------------------------------
- Original Author of file: Benjamin Sonntag
- Purpose of file: Create a new member
  ----------------------------------------------------------------------
 */
 require_once("../class/config.php");

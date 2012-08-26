@@ -741,6 +741,22 @@ class m_bro {
     }
   }
 
+  function can_edit($dir,$name) {
+    global $mem,$err;
+    $absolute="$dir/$name";
+    $absolute=$this->convertabsolute($absolute,0);
+    if (!$absolute) {
+      $err->raise('bro',_("File not in authorized directory"));
+      include('foot.php');
+      exit;
+    }
+    $finfo = finfo_open(FILEINFO_MIME_TYPE); 
+    $mime = finfo_file($finfo,$absolute);
+    if ( substr($mime,0,5)=="text/" || $mime == "application/x-empty") {
+      return true;
+    }
+    return false;
+  }
 
   /**
    * Return a HTML snippet representing an extraction function only if the mimetype of $name is supported
@@ -767,6 +783,15 @@ class m_bro {
       }
     }
     return false;
+  }
+
+  function download_link($dir,$file){
+    global $err;
+    $err->log("bro","download_link");
+    header("Content-Disposition: attachment; filename=$file");
+    header("Content-Type: application/force-download");
+    header("Content-Transfer-Encoding: binary");
+    $this->content_send($dir,$file);
   }
 
 

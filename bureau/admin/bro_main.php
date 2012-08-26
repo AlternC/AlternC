@@ -330,7 +330,12 @@ if ($p["showicons"]) {
 echo "<td width=\"28\"><img src=\"icon/".$bro->icon($c[$i]["name"])."\" width=\"16\" height=\"16\" alt=\"\" /></td>";
 }
 echo "<td><a href=\"";
-echo "bro_editor.php?editfile=".urlencode($c[$i]["name"])."&amp;R=".urlencode($R);
+$canedit = $bro->can_edit($R,$c[$i]["name"]);
+if ($canedit) {
+  echo "bro_editor.php?editfile=".urlencode($c[$i]["name"])."&amp;R=".urlencode($R);
+} else {
+  echo "bro_downloadfile.php?dir=".urlencode($R)."&amp;file=".urlencode($c[$i]["name"]);
+}
 echo "\">".htmlentities($c[$i]["name"])."</a></td>\n";
 echo "	<td>".format_size($c[$i]["size"])."</td>";
 echo "<td>".format_date('%3$d-%2$d-%1$d %4$d:%5$d',date("Y-m-d H:i:s",$c[$i]["date"]))."<br /></td>";

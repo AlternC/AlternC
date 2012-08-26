@@ -4,7 +4,7 @@
 </table>
 </div> <!-- div global -->
 <?php 
-if ( $debug_alternc->status ) {
+if ( isset($debug_alternc) && $debug_alternc->status ) {
   $debug_alternc->dump();
 }
 ?>
