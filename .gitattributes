@@ -2,8 +2,7 @@
 /.svnignore -text
 .tx/config -text
 /COPYING -text
-/README.en -text
-/README.fr -text
+/README -text
 aide/bin/build.sh -text
 aide/bin/frames.dsl -text
 aide/brouteur.sgml -text
