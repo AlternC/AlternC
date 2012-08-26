@@ -25,10 +25,5 @@ install:
 	install -m 644 templates/squirrelmail/* $(DESTDIR)/etc/alternc/templates/squirrelmail/
 	install -m 644 templates/javascript-common/* $(DESTDIR)/etc/alternc/templates/javascript-common/
 	install -m 750 squirrelmail-install $(DESTDIR)/usr/lib/alternc/install.d/
-	install -m 644 apache-panel.d/squirrelmail.conf $(DESTDIR)/etc/alternc/apache-panel.d/
-	# default webmail vhost: squirrelmail.local, will be proxified from http://panel/squirrel/
-	install -m 644 apache2.conf $(DESTDIR)/etc/apache2/conf.d/alternc-squirrelmail.conf
 	# domaintype template: 
 	install -m 644 templates/apache2/squirrelmail.conf $(DESTDIR)/etc/alternc/templates/apache2/squirrelmail.conf
-	# empty folder for redirect to /squirrel location ... 
-	install -m 644 redirect.php $(DESTDIR)/usr/share/alternc-squirrelmail/index.php

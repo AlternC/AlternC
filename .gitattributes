@@ -502,9 +502,6 @@ selenium/20120826-alternc-panel-testsuite.html -text
 selenium/README -text
 selenium/alternc.domain-local-mail-tld.html -text
 squirrelmail/Makefile -text
-squirrelmail/apache-panel.d/squirrelmail.conf -text
-squirrelmail/apache2.conf -text
-squirrelmail/redirect.php -text
 squirrelmail/squirrelmail-install -text
 squirrelmail/templates/apache2/squirrelmail.conf -text
 squirrelmail/templates/javascript-common/javascript-common.conf -text
