@@ -30,10 +30,6 @@ define('SLAVE_FLAG', "/var/run/alternc/refresh_slave");
 * 
 * Cette classe permet de gérer les domaines / sous-domaines, redirections
 * dns et mx des domaines d'un membre hébergé.<br />
-* Copyleft {@link http://alternc.net/ AlternC Team}
-* 
-* @copyright    AlternC-Team 2002-11-01 http://alternc.net/
-* 
 */
 class m_dom {
 
@@ -89,14 +85,6 @@ class m_dom {
   function m_dom() {
   }
 
-  /* ----------------------------------------------------------------- */
-  /**
-   * Quota name
-   */
-  function alternc_quota_names() {
-    return "dom";
-  }
-  
   /* ----------------------------------------------------------------- */
   /**
    * Retourne un tableau contenant les types de domaines
@@ -172,26 +160,12 @@ class m_dom {
     return true;
   }
 
-  function domains_type_disable($id) {
-    global $db,$err,$cuid;
-    $id=intval($id);
-    $db->query("update domaines_type set enable=false where id=$id;");
-    return true;
-  }
-
-  function domains_type_enable($id) {
-    global $db,$err,$cuid;
-    $id=intval($id);
-    $db->query("update domaines_type set enable=true where id=$id;");
-    return true;
-  }
-
   function domains_type_update($name, $description, $target, $entry, $compatibility, $enable, $only_dns, $need_dns,$advanced) {
     global $err,$cuid,$db;
     $id=intval($id);
     // The name MUST contain only letter and digits, it's an identifier after all ...
     if (!preg_match("#^[a-z0-9]+$#",$name)) {
-      $err->raise("dom", 26);
+      $err->raise("dom", _("The name MUST contain only letter and digits."));
       return false;
     }
     $name=mysql_real_escape_string($name);    $description=mysql_real_escape_string($description);    $target=mysql_real_escape_string($target);
@@ -310,49 +284,49 @@ class m_dom {
 
     // Locked ?
     if (!$this->islocked) {
-      $err->raise("dom",3);
+      $err->raise("dom",_("--- Program error --- No lock on the domains!"));
       return false;
     }
     // Verifie que le domaine est rfc-compliant
     $domain=strtolower($domain);
     $t=checkfqdn($domain);
     if ($t) {
-      $err->raise("dom",3+$t);
+      $err->raise("dom",_("The domain name is syntaxically incorrect"));
       return false;
     }
     // Interdit les domaines clés (table forbidden_domains) sauf en cas FORCE
     $db->query("SELECT domain FROM forbidden_domains WHERE domain='$domain'");
     if ($db->num_rows() && !$force) {
-      $err->raise("dom",22);
+      $err->raise("dom",_("The requested domain is forbidden in this server, please contact the administrator"));
       return false;
     }
     if ($domain==$L_FQDN || $domain=="www.$L_FQDN") {
-      $err->raise("dom",18);
+      $err->raise("dom",_("This domain is the server's domain! You cannot host it on your account!"));
       return false;
     }
     $db->query("SELECT compte FROM domaines WHERE domaine='$domain';");
     if ($db->num_rows()) {
-      $err->raise("dom",8);
+      $err->raise("dom",_("The domain already exist."));
       return false;
     }
     $db->query("SELECT compte FROM `sub_domaines` WHERE sub != \"\" AND concat( sub, \".\", domaine )='$domain' OR domaine='$domain';");
     if ($db->num_rows()) {
-      $err->raise("dom",8);
+      $err->raise("dom",_("The domain already exist."));
       return false;
     }
     $this->dns=$this->whois($domain);
     if (!$force) {
       $v=checkhostallow($domain,$this->dns);
       if ($v==-1) {
-        $err->raise("dom",7);   // TLD interdit
+        $err->raise("dom",_("The last member of the domain name is incorrect or cannot be hosted in that server."));   
         return false;
       }
       if ($dns && $v==-2) {
-        $err->raise("dom",12);   // Domaine non trouvé dans le whois
+        $err->raise("dom",_("The domain cannot be found in the whois database.")); 
         return false;
       }
       if ($dns && $v==-3) {
-        $err->raise("dom",23);   // Domaine non trouvé dans le whois
+        $err->raise("dom",_("The domain cannot be found in the whois database."));
         return false;
       }
 
@@ -364,14 +338,14 @@ class m_dom {
       if (!$dns) {
          $v=checkhostallow_nodns($domain);
          if ($v) {
-           $err->raise("dom",22);
+           $err->raise("dom",_("The requested domain is forbidden in this server, please contact the administrator"));
            return false;
          }
       }
     }
     // Check the quota :
     if (!$quota->cancreate("dom")) {
-      $err->raise("dom",10);
+      $err->raise("dom",_("Your domain quota is over, you cannot create more domain names."));
       return false;
     }
     if ($noerase) $noerase="1"; else $noerase="0";
@@ -386,7 +360,7 @@ class m_dom {
       $db->query("SELECT domaine FROM domaines WHERE compte='$cuid' AND domaine='$slavedom';");
       $db->next_record();
       if (!$db->Record["domaine"]) {
-        $err->raise("dom",1,$slavedom);
+        $err->raise("dom",_("Domain '%s' not found."),$slavedom);
         $isslave=false;
       }
       // Point to the master domain : 
@@ -400,17 +374,17 @@ class m_dom {
       $domshort=str_replace("-","",str_replace(".","",$domain));
       
       if (! is_dir($dest_root . "/". $domshort)) {
-		  if(!mkdir($dest_root . "/". $domshort)){
-			  $err->raise("dom",1);
-			  return false;
-		  }
+	if(!mkdir($dest_root . "/". $domshort)){
+	  $err->raise("dom",_("I can't write to the destination folder"));
+	  return false;
+	}
       }
-
+      
       if (! is_dir($dest_root . "/tmp")) {
-		  if(!mkdir($dest_root . "/tmp")){
-			  $err->raise("dom",1);
-			  return false;
-		  }
+	if(!mkdir($dest_root . "/tmp")){
+	  $err->raise("dom",_("I can't write to the destination folder"));
+	  return false;
+	}
       }
 
       // Creation des 3 sous-domaines par défaut : Vide, www et mail
@@ -578,14 +552,14 @@ class m_dom {
       } // while
       fclose($fp);
     } else {
-      $err->raise("dom",11);
+      $err->raise("dom",_("The Whois database is unavailable, please try again later."));
       return false;
     }
 
     if ($found) {
       return $server;
     } else {
-      $err->raise("dom",12);
+      $err->raise("dom",_("The domain cannot be found in the whois database."));
       return false;
     }
   } // whois
@@ -656,18 +630,18 @@ class m_dom {
     $err->log("dom","get_domain_all",$dom);
     // Locked ?
     if (!$this->islocked) {
-      $err->raise("dom",3);
+      $err->raise("dom",_("--- Program error --- No lock on the domains!"));
       return false;
     }
     $t=checkfqdn($dom);
     if ($t) {
-      $err->raise("dom",3+$t);
+      $err->raise("dom",_("The domain name is syntaxically incorrect"));
       return false;
     }
     $r["name"]=$dom;
-    $db->query("select * from domaines where compte='$cuid' and domaine='$dom'");
+    $db->query("SELECT * FROM domaines WHERE compte='$cuid' AND domaine='$dom'");
     if ($db->num_rows()==0) {
-      $err->raise("dom",1,$dom);
+      $err->raise("dom",1,_("Domain '%s' not found."),$dom);
       return false;
     }
     $db->next_record();
@@ -678,11 +652,11 @@ class m_dom {
     $r["mail"]=$db->Record["gesmx"];
     $r['noerase']=$db->Record['noerase'];
     $db->free();
-    $db->query("select count(*) as cnt from sub_domaines where compte='$cuid' and domaine='$dom'");
+    $db->query("SELECT COUNT(*) AS cnt FROM sub_domaines WHERE compte='$cuid' AND domaine='$dom'");
     $db->next_record();
     $r["nsub"]=$db->Record["cnt"];
     $db->free();
-    $db->query("select sd.*, dt.description as type_desc, dt.only_dns from sub_domaines sd, domaines_type dt where compte='$cuid' and domaine='$dom' and upper(dt.name)=upper(sd.type) order by sd.sub,sd.type");
+    $db->query("SELECT sd.*, dt.description AS type_desc, dt.only_dns FROM sub_domaines sd, domaines_type dt WHERE compte='$cuid' AND domaine='$dom' AND UPPER(dt.name)=UPPER(sd.type) ORDER BY sd.sub,sd.type");
     // Pas de webmail, on le cochera si on le trouve.
     for($i=0;$i<$r["nsub"];$i++) {
       $db->next_record();
@@ -1298,14 +1272,15 @@ class m_dom {
    * @return integer the number of service used or false if an error occured
    * @access private
    */
-  function hook_quota_get($name) {
+  function hook_quota_get() {
     global $db,$err,$cuid;
-    if ($name=="dom") {
-      $err->log("dom","get_quota");
-      $db->query("SELECT COUNT(*) AS cnt FROM domaines WHERE compte='$cuid'");
-      $db->next_record();
-      return $db->f("cnt");
-    } else return false;
+    $err->log("dom","get_quota");
+    $q=Array("name"=>"dom", "description"=>_("Domain name"), "used"=>0);
+    $db->query("SELECT COUNT(*) AS cnt FROM domaines WHERE compte='$cuid'");
+    if ($db->next_record() ) {
+      $q['used']=$db->f("cnt");
+    }
+    return $q;
   }
 
 
@@ -1359,5 +1334,3 @@ class m_dom {
   
 
 } /* Class m_domains */
-
-?>

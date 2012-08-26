@@ -38,14 +38,6 @@ class m_ftp {
   function m_ftp() {
   }
 
-  /* ----------------------------------------------------------------- */
-  /**
-   * Quota name
-   */
-  function alternc_quota_names() {
-    return "ftp";
-  }
-
 
   /* ----------------------------------------------------------------- */
   /**
@@ -102,7 +94,7 @@ class m_ftp {
       }
       return $r;
     } else {
-      $err->raise("ftp",1);
+      $err->raise("ftp",_("No ftp account found"));
       return false;
     }
   }
@@ -135,7 +127,7 @@ class m_ftp {
 		   );
 	return $r;
     } else {
-      $err->raise("ftp",2);
+      $err->raise("ftp",_("This ftp account does not exist"));
       return false;
     }
   }
@@ -188,7 +180,7 @@ class m_ftp {
     $db->query("SELECT count(*) AS cnt FROM ftpusers WHERE id='$id' and uid='$cuid';");
     $db->next_record();
     if (!$db->f("cnt")) {
-      $err->raise("ftp",2);
+      $err->raise("ftp",_("This ftp account does not exist"));
       return false;
     }
     $dir=$bro->convertabsolute($dir);
@@ -197,7 +189,7 @@ class m_ftp {
     }
     $r=$this->prefix_list();
     if (!in_array($prefixe,$r)) {
-      $err->raise("ftp",3);
+      $err->raise("ftp",_("The chosen prefix is not allowed"));
       return false;
     }
     $lo=$mem->user["login"];
@@ -206,7 +198,7 @@ class m_ftp {
     $db->query("SELECT COUNT(*) AS cnt FROM ftpusers WHERE id!='$id' AND name='$prefixe$login';");
     $db->next_record();
     if ($db->f("cnt")) {
-      $err->raise("ftp",4);
+      $err->raise("ftp",_("This ftp account already exists"));
       return false;
     }
     $absolute=getuserpath()."/$dir";
@@ -214,7 +206,7 @@ class m_ftp {
       system("/bin/mkdir -p $absolute");
     }
     if (!is_dir($absolute)) {
-      $err->raise("ftp",6);
+      $err->raise("ftp",_("The directory cannot be created."));
       return false;
     }
     if (trim($pass)) {
@@ -246,7 +238,7 @@ class m_ftp {
     $db->next_record();
     $name=$db->f("name");
     if (!$name) {
-      $err->raise("ftp",2);
+      $err->raise("ftp",_("This ftp account does not exist"));
       return false;
     }
     $db->query("DELETE FROM ftpusers WHERE id='$id'");
@@ -271,14 +263,14 @@ class m_ftp {
     }
     $r=$this->prefix_list();
     if (!in_array($prefixe,$r) || $prefixe=="") {
-      $err->raise("ftp",3);
+      $err->raise("ftp",_("The chosen prefix is not allowed"));
       return false;
     }
     if ($login) $login="_".$login;
     $db->query("SELECT count(*) AS cnt FROM ftpusers WHERE name='".$prefixe.$login."'");
     $db->next_record();
     if ($db->f("cnt")) {
-      $err->raise("ftp",4);
+      $err->raise("ftp",_("This ftp account already exists"));
       return false;
     }
     $db->query("SELECT login FROM membres WHERE uid='$cuid';");
@@ -290,7 +282,7 @@ class m_ftp {
       system("/bin/mkdir -p $absolute");
     }
     if (!is_dir($absolute)) {
-      $err->raise("ftp",6);
+      $err->raise("ftp",_("The directory cannot be created."));
       return false;
     }
 
@@ -306,7 +298,7 @@ class m_ftp {
       $db->query("INSERT INTO ftpusers (name,password, encrypted_password,homedir,uid) VALUES ('".$prefixe.$login."', '', '$encrypted_password', '$absolute', '$cuid')");
       return true;
     } else {
-      $err->raise("ftp",5);
+      $err->raise("ftp",_("Your ftp account quota is over. You cannot create more ftp accounts."));
       return false;
     }
   }
@@ -365,14 +357,15 @@ class m_ftp {
    * @return integer the number of service used or false if an error occured
    * @access private
    */
-  function alternc_get_quota($name) {
+  function hook_quota_get() {
     global $db,$err,$cuid;
-    if ($name=="ftp") {
-      $err->log("ftp","getquota");
-      $db->query("SELECT COUNT(*) AS cnt FROM ftpusers WHERE uid='$cuid'");
-      $db->next_record();
-      return $db->f("cnt");
-    } else return false;
+    $err->log("ftp","getquota");
+    $q=Array("name"=>"ftp", "description"=>_("FTP accounts"), "used"=>0);
+    $db->query("SELECT COUNT(*) AS cnt FROM ftpusers WHERE uid='$cuid'");
+    if ($db->next_record()) {
+      $q['used']=$db->f("cnt");
+    }
+    return $q;
   }
 
 

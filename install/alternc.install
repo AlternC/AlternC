@@ -294,8 +294,8 @@ grep -v '^\ *#' $postfix_conf |while read line ; do
    postconf -e "$line"
 done 
 
-# Conviguring delivery used bu Postfix FIXME change script name
-echo `/usr/bin/postfix-add-policy dovecot vmail:vmail DRhu pipe '/usr/bin/sudo /usr/lib/dovecot/deliver -f ${sender} -d ${recipient} '`
+# Conviguring delivery used bu Postfix
+echo `/usr/lib/alternc/postfix-add-policy dovecot vmail:vmail DRhu pipe '/usr/bin/sudo /usr/lib/dovecot/deliver -f ${sender} -d ${recipient} '`
 
 # Bug #1215: configure mydestination when $FQDN is not in
 OLDDESTINATION=`postconf mydestination | awk -F '=' '{print $2}'`

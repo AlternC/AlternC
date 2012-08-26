@@ -255,11 +255,14 @@ foreach ($membres_list as $c) {
   foreach ($maildomains_list as $md) {
     $mc += $md['nb_mail'];
   }
+
+if (isset($mailman)) {
   // Mailman List Count
   $mlc = $mailman->count_ml_user($c["uid"]);
   echo "</td><td>$dc</td><td>$mc</td><td>$mlc</td><td";
   if ($mode!=2) echo " style=\"text-align: right\"";
   echo ">";
+} // isset mailman
 
   // Espace WEB
   $ws = $quota->get_size_web_sum_user($c["uid"]);

@@ -37,16 +37,19 @@ $fields = array (
 getFields($fields);
 
 
-if (!$quota->cancreate("mysql_users")) {
-//	$error=_("err_mysql_1");
-	include("sql_users_add.php");
-	exit;
-}
-
-if (!$mysql->add_user($usern,$password,$passconf)) {
-  $error=$err->errstr();
-  include("sql_users_add.php");
-  exit;
+if(!empty($usern)){
+  if (!$mysql->add_user($usern,$password,$passconf)) {
+    $error=$err->errstr();
+    include("sql_users_add.php");
+    exit;
+  }
+}else{
+  $usern=$mem->user["login"];
+  if (!$mysql->add_user($usern,$password,$passconf)) {
+    $error=$err->errstr();
+    include("sql_users_add.php");
+    exit;
+  }
 }
 
 include("sql_users_list.php");

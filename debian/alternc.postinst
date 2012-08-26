@@ -253,22 +253,13 @@ EOF
 			echo "copy content of /usr/share/doc/examples/example.sudoers into /etc/sudoers.d for to run properly"
 	 fi
 
-    # important: postinst gele sans ca
+    # important: postinst freezes withtout that:
     db_stop
 
-
-      echo "**********************************************"
-      echo "*                                            *"
-      echo "*                 ALTERNC                    *"
-      echo "*               ------------                 *"
-      echo "*                                            *"
-      echo "*                                            *"
-      echo "* Please run alternc.install to fully deploy *"
-      echo "*                                            *"
-      echo "**********************************************"
-
-
-
+    echo "**********************************************"
+    echo "*                 ALTERNC:                   *"
+    echo "* Please run alternc.install to fully deploy *"
+    echo "**********************************************"
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

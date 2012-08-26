@@ -56,7 +56,7 @@ for($i=0;$i<count($r);$i++) {
 	  <td align="center">
             <input type="checkbox" class="inc" id="del_<?php echo $val["name"]; ?>" name="del_<?php echo $val["name"]; ?>" value="<?php echo $val["name"]; ?>" />
           </td>
-	  <td><label for="del_<?php echo $val["name"]; ?>"><?php echo $mem->user["login"]."_".$val["name"]; ?></label></td>
+	  <td><label for="del_<?php echo $val["name"]; ?>"><?php echo $val["name"]; ?></label></td>
 	  <td><span class="ina"><a href="sql_users_rights.php?id=<?php echo $val["name"] ?>"><?php __("Manage the rights"); ?></a></span></td>
 	  <td><span class="ina"><a href="sql_users_password.php?id=<?php echo $val["name"] ?>"><?php __("Password change"); ?></a></span></td>
 	</tr>
@@ -76,12 +76,10 @@ for($i=0;$i<count($r);$i++) {
 
 <?php
   }
-  if ($quota->cancreate("mysql_users")) {
 ?>
 <p>
   <span class="ina"><a href="sql_users_add.php"><?php __("Create a new MySQL user"); ?></a><br /></span>
 </p>
 <?php
-  }
 ?>
 <?php include_once("foot.php"); ?>

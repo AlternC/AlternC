@@ -1,32 +1,32 @@
 <?php
 /*
- $Id: m_mysql.php,v 1.35 2005/12/18 09:51:32 benjamin Exp $
- ----------------------------------------------------------------------
- AlternC - Web Hosting System
- Copyright (C) 2002 by the AlternC Development Team.
- http://alternc.org/
- ----------------------------------------------------------------------
- Based on:
- Valentin Lacambre's web hosting softwares: http://altern.org/
- ----------------------------------------------------------------------
- LICENSE
+   $Id: m_mysql.php,v 1.35 2005/12/18 09:51:32 benjamin Exp $
+   ----------------------------------------------------------------------
+   AlternC - Web Hosting System
+   Copyright (C) 2002 by the AlternC Development Team.
+   http://alternc.org/
+   ----------------------------------------------------------------------
+   Based on:
+   Valentin Lacambre's web hosting softwares: http://altern.org/
+   ----------------------------------------------------------------------
+   LICENSE
 
- This program is free software; you can redistribute it and/or
- modify it under the terms of the GNU General Public License (GPL)
- as published by the Free Software Foundation; either version 2
- of the License, or (at your option) any later version.
+   This program is free software; you can redistribute it and/or
+   modify it under the terms of the GNU General Public License (GPL)
+   as published by the Free Software Foundation; either version 2
+   of the License, or (at your option) any later version.
 
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
 
- To read the license please visit http://www.gnu.org/copyleft/gpl.html
- ----------------------------------------------------------------------
- Original Author of file: Benjamin Sonntag
- Purpose of file: Manage mysql database for users.
- ----------------------------------------------------------------------
-*/
+   To read the license please visit http://www.gnu.org/copyleft/gpl.html
+   ----------------------------------------------------------------------
+   Original Author of file: Benjamin Sonntag
+   Purpose of file: Manage mysql database for users.
+   ----------------------------------------------------------------------
+ */
 /**
  * MySQL user database management for AlternC.
  * This class manage user's databases in MySQL, and user's MySQL accounts.
@@ -38,11 +38,11 @@ class DB_users extends DB_Sql {
   var $Host,$HumanHostname,$User,$Password,$client;
 
   /**
-  * Creator
-  */
+   * Creator
+   */
   function DB_users() {
 
-    # Use the dbusers file if exist, else use default alternc configuration
+# Use the dbusers file if exist, else use default alternc configuration
     if ( is_readable("/etc/alternc/dbusers.cnf") ) {
       $mysqlconf=file_get_contents("/etc/alternc/dbusers.cnf");
     } else {
@@ -50,29 +50,29 @@ class DB_users extends DB_Sql {
     }
     $mysqlconf=explode("\n",$mysqlconf);
 
-    # Read the configuration
+# Read the configuration
     foreach ($mysqlconf as $line) {
-      # First, read the "standard" configuration
+# First, read the "standard" configuration
       if (preg_match('/^([A-Za-z0-9_]*) *= *"?(.*?)"?$/', trim($line), $regs)) {
-          switch ($regs[1]) {
+        switch ($regs[1]) {
           case "user":
-              $user = $regs[2];
-              break;
+            $user = $regs[2];
+          break;
           case "password":
-              $password = $regs[2];
-              break;
+            $password = $regs[2];
+          break;
           case "host":
-              $host = $regs[2];
-              break;
-          }
+            $host = $regs[2];
+          break;
+        }
       }
-      # Then, read specific alternc configuration
+# Then, read specific alternc configuration
       if (preg_match('/^#alternc_var ([A-Za-z0-9_]*) *= *"?(.*?)"?$/', trim($line), $regs)) {
         $$regs[1]=$regs[2];
       }
     }
 
-    # Set value of human_host if unset
+# Set value of human_host if unset
     if (! isset($human_hostname) || empty($human_hostname)) {
       if ( checkip($host) || checkipv6($host) ) {
         $human_hostname = gethostbyaddr($host);
@@ -81,13 +81,13 @@ class DB_users extends DB_Sql {
       }
     }
 
-    # Create the object
+# Create the object
     $this->Host     = $host;
     $this->User     = $user;
     $this->Password = $password;
-// TODO BUG BUG BUG
-// c'est pas étanche : $db se retrouve avec Database de $sql->dbu . Danger, faut comprendre pourquoi
-// Si on veux que ca marche, il faut Database=alternc.
+    // TODO BUG BUG BUG
+    // c'est pas étanche : $db se retrouve avec Database de $sql->dbu . Danger, faut comprendre pourquoi
+    // Si on veux que ca marche, il faut Database=alternc.
     //$this->Database = "mysql";
     $this->Database = "alternc";
     $this->HumanHostname = $human_hostname;
@@ -101,19 +101,10 @@ class m_mysql {
 
   /*---------------------------------------------------------------------------*/
   /** Constructor
-  * m_mysql([$mid]) Constructeur de la classe m_mysql, initialise le membre concerne
-  */
+   * m_mysql([$mid]) Constructeur de la classe m_mysql, initialise le membre concerne
+   */
   function m_mysql() {
     $this->dbus = new DB_users();
-  }
-
-
-  /* ----------------------------------------------------------------- */
-  /** Hook called by m_quota to obtain the quota managed by this class.
-   * Quota name
-   */
-  function alternc_quota_names() {
-    return array("mysql","mysql_users");
   }
 
 
@@ -162,12 +153,12 @@ class m_mysql {
     $db->next_record();
     $info=array();
     $info[]=array(
-                "login"=>$db->f("name"),
-                "pass"=>$db->f("password")
-            );
+        "login"=>$db->f("name"),
+        "pass"=>$db->f("password")
+        );
     return $info;
   }
-    
+
 
   /*---------------------------------------------------------------------------*/
   /** Returns the details of a user's database.
@@ -199,6 +190,12 @@ class m_mysql {
     return array("enabled"=>true,"login"=>$db->f("login"),"db"=>$db->f("db"), "name"=>$dbn,"bck"=>$db->f("bck_mode"), "dir"=>substr($db->f("bck_dir"),strlen($root)), "size"=>$size, "pass"=>$db->f("pass"), "history"=>$db->f("bck_history"), "gzip"=>$db->f("bck_gzip"));
   }
 
+  function test_get_param($dbname){
+    global $db,$err,$cuid;
+    $db->query("SELECT ");
+
+
+  }
 
   /*---------------------------------------------------------------------------*/
   /** Create a new database for the current user.
@@ -209,15 +206,25 @@ class m_mysql {
   function add_db($dbn) {
     global $db,$err,$quota,$mem,$cuid,$admin;
     $err->log("mysql","add_db",$dbn);
+    $password_user="";
     if (!$quota->cancreate("mysql")) {
       $err->raise("mysql",1);
       return false;
+    }
+    $pos=strpos($dbn,'_');
+    if($pos === false){
+      $dbname=$dbn;
+    }else{
+      $dbncomp=explode('_',$dbn);
+      $dbname=$dbn;
+      $dbn=$dbncomp[1];
     }
     if (!preg_match("#^[0-9a-z]*$#",$dbn)) {
       $err->raise("mysql",2);
       return false;
     }
-    $dbname=$mem->user["login"].($dbn?"_":"").$dbn;
+
+
     if (strlen($dbname) > 64) {
       $err->raise("mysql",12);
       return false;
@@ -227,6 +234,14 @@ class m_mysql {
       $err->raise("mysql",3);
       return false;
     }
+
+    $db->query("SELECT name from dbusers where name='".$dbname."' and enable='ACTIVATED' ;");
+    if(!$db->num_rows()){
+      $password_user=create_pass(8);
+      if(!$this->add_user($dbn,$password_user,$password_user)){
+      }
+    }
+
     //checking for the phpmyadmin user
     $db->query("SELECT * FROM dbusers WHERE uid=$cuid AND enable='ADMIN';");
     if ($db->num_rows()) {
@@ -234,18 +249,21 @@ class m_mysql {
       $myadm=$db->f("name");  
       $password=$db->f("password");  
     }else{
-      $err->raise("mysql",3);
+      $err->raise("mysql",3);//FIXME error code
       return false;
     }
 
     //Grant the special user every rights.
-
     if ($this->dbus->query("CREATE DATABASE `$dbname`;")) {
       $err->log("mysql","add_db_succes",$dbn);
       // Ok, database does not exist, quota is ok and dbname is compliant. Let's proceed
       $db->query("INSERT INTO db (uid,login,pass,db,bck_mode) VALUES ('$cuid','$myadm','$password','$dbname',0);");
+      $dbuser=$dbname;
       $dbname=str_replace('_','\_',$dbname);
       $this->grant($dbname,$myadm,"ALL PRIVILEGES",$password);
+      if(!empty($password_user)){
+        $this->grant($dbname,$dbuser,"ALL PRIVILEGES",$password_user);
+      }
       $this->dbus->query("FLUSH PRIVILEGES;");
       return true;
     } else {
@@ -265,8 +283,7 @@ class m_mysql {
   function del_db($dbn) {
     global $db,$err,$mem,$cuid;
     $err->log("mysql","del_db",$dbn);
-
-    $dbname=addslashes($mem->user["login"].($dbn?"_":"").$dbn);
+    $dbname=addslashes($dbn);
     $db->query("SELECT uid FROM db WHERE db='$dbname';");
     if (!$db->num_rows()) {
       $err->raise("mysql",4);
@@ -278,9 +295,17 @@ class m_mysql {
     $db->query("DELETE FROM size_db WHERE db='$dbname';");
     $db->query("DELETE FROM db WHERE uid='$cuid' AND db='$dbname';");
     $this->dbus->query("DROP DATABASE `$dbname`;");
+
+    $db_esc=str_replace('_','\_',$dbname);
+    $db->query("select User from mysql.db where User='".$dbname."' and Db!='".$db_esc."' and (Select_priv='Y' or Insert_priv='Y' or Update_priv='Y' or Delete_priv='Y' or Create_priv='Y' or Drop_priv='Y' or References_priv='Y' or Index_priv='Y' or Alter_priv='Y' or Create_tmp_table_priv='Y' or Lock_tables_priv='Y');");
+    if(!$db->num_rows()){
+      $this->del_user($dbname);
+    }
     return true;
   }
-  
+
+
+
 
   /*---------------------------------------------------------------------------*/
   /** Set the backup parameters for the database $db
@@ -354,7 +379,7 @@ class m_mysql {
     // Check this password against the password policy using common API : 
     if (is_callable(array($admin,"checkPolicy"))) {
       if (!$admin->checkPolicy("mysql",$login,$password)) {
-	      return false; // The error has been raised by checkPolicy()
+        return false; // The error has been raised by checkPolicy()
       }
     }
 
@@ -364,48 +389,48 @@ class m_mysql {
     return true;
   }
 
-/**
-* Function used to grant SQL rights to users:
-* @base :database 
-* @user : database user
-* @rights : rights to apply ( optional, every rights apply given if missing
-* @pass : user password ( optional, if not given the pass stays the same, else it takes the new value )
-* @table : sql tables to apply rights
-**/
+  /**
+   * Function used to grant SQL rights to users:
+   * @base :database 
+   * @user : database user
+   * @rights : rights to apply ( optional, every rights apply given if missing
+   * @pass : user password ( optional, if not given the pass stays the same, else it takes the new value )
+   * @table : sql tables to apply rights
+   **/
   function grant($base,$user,$rights=null,$pass=null,$table='*'){
     global $err,$db;
-    $err->log("mysql","grant",$base);
+    $err->log("mysql","grant",$base."-".$user);
 
     if(!preg_match("#^[0-9a-z_\\*\\\\]*$#",$base)){
-      $err->raise("mysql",2);
+      $err->raise("mysql","base_not_match");
       return false;
     }elseif(!$db->query("select db from db where db='$base';")){
-      $err->raise("mysql",10);
+      $err->raise("mysql","query base fail");
       return false; 
     }
 
     if($rights==null){
       $rights='ALL PRIVILEGES';
     }elseif(!preg_match("#^[a-zA-Z,\s]*$#",$rights)){
-      $err->raise("mysql",3);
+      $err->raise("mysql","rights_fail");
       return false;
     }
 
     if(!preg_match("#^[0-9a-z_]*$#",$user)) {
-      $err->raise("mysql",5);
+      $err->raise("mysql","user match");
       return false;
     }
-
     $db->query("select name from dbusers where name='".$user."' ;");
 
     if(!$db->num_rows()){
-    	$err->raise("mysql",6);
-	return false;
+      $lol=$db->f('name');
+      $err->raise("mysql","num row 0:".$lol."<--".$user);
+      return false;
     }
     if($rights == "FILE"){
-       $grant="grant ".$rights." on ".$base.".".$table." to '".$user."'@'".$this->dbus->Host."'" ;
+      $grant="grant ".$rights." on ".$base.".".$table." to '".$user."'@'".$this->dbus->Host."'" ;
     }else{
-       $grant="grant ".$rights." on `".$base."`.".$table." to '".$user."'@'".$this->dbus->Host."'" ;
+      $grant="grant ".$rights." on `".$base."`.".$table." to '".$user."'@'".$this->dbus->Host."'" ;
     }
 
     if($pass){
@@ -413,10 +438,10 @@ class m_mysql {
     }else{
       $grant .= ";";
     }
-   if(!$this->dbus->query($grant)){
-      $err->raise("mysql",7);
+    if(!$this->dbus->query($grant)){
+      $err->raise("mysql","grant fail:".$grant);
       return false;
-   }
+    }
     return true;
 
   }
@@ -430,7 +455,7 @@ class m_mysql {
    * @return boolean TRUE if the database has been restored, or FALSE if an error occurred
    */
   function restore($file,$stdout,$id) { 
-// TODO don't work with the separated sql serveur for dbusers
+    // TODO don't work with the separated sql serveur for dbusers
     global $err,$bro,$mem,$L_MYSQL_HOST;
     if (!$r=$this->get_mysql_details($id)) { 
       return false; 
@@ -447,7 +472,7 @@ class m_mysql {
       $exe="/usr/bin/mysql -h".escapeshellarg($L_MYSQL_HOST)." -u".escapeshellarg($r["login"])." -p".escapeshellarg($r["pass"])." ".escapeshellarg($r["db"])." <".escapeshellarg($fi); 
     }
     $exe .= " 2>&1";
-    
+
     echo "<code><pre>" ;
     if ($stdout) {
       passthru($exe,$ret);
@@ -462,7 +487,7 @@ class m_mysql {
     }
   }
 
-  
+
   /* ----------------------------------------------------------------- */
   /** Get the size of a database
    * @param $dbname name of the database
@@ -471,7 +496,7 @@ class m_mysql {
    */
   function get_db_size($dbname) {
     global $db,$err;
-    
+
     $this->dbus->query("SHOW TABLE STATUS FROM `$dbname`;");
     $size = 0;
     while ($db->next_record()) {
@@ -480,8 +505,8 @@ class m_mysql {
     }
     return $size;
   }
-  
-  
+
+
   /* ------------------------------------------------------------ */
   /** 
    * Returns the list of database users of an account
@@ -492,10 +517,103 @@ class m_mysql {
     $c=array();
     $db->query("SELECT name FROM dbusers WHERE uid='$cuid' and enable not in ('ADMIN','HIDDEN') ORDER BY name;");
     while ($db->next_record()) {
-      $c[]=array("name"=>substr($db->f("name"),strpos($db->f("name"),"_")+1));
+      $pos=strpos($db->f("name"),"_");
+      if($pos === false){
+        $c[]=array("name"=>($db->f("name")));
+      }else{
+        $c[]=array("name"=>($db->f("name")));
+        //$c[]=array("name"=>substr($db->f("name"),strpos($db->f("name"),"_")+1));
+      }
     }
 
     return $c;
+  }
+
+  function get_defaultsparam($dbn){
+    global $db,$err,$bro,$cuid;
+    $err->log("mysql","getdefaults");
+
+    $dbu=$dbn;
+    $r=array();
+    $dbn=str_replace('_','\_',$dbn);
+    $q=$db->query("Select * from mysql.db where Db='".$dbn."' and User!='".$cuid."_myadm';");
+
+    if(!$db->num_rows()){
+      return $r;
+    }
+    while ($db->next_record()) {       
+      $variable = $db->Record;     
+      if($variable['User'] == $dbu){
+        $r['Host']=$db->f('Host');		
+
+        if($db->f('Select_priv') !== "Y"){
+          return $r;
+        } 
+        if($db->f('Insert_priv') !== "Y"){
+          return $r;
+        } 
+        if($db->f('Update_priv') !== "Y"){
+          return $r;
+        } 
+        if($db->f('Delete_priv') !== "Y"){
+          return $r;
+        } 
+        if($db->f('Create_priv') !== "Y"){
+          return $r;
+        } 
+        if($db->f('Drop_priv') !== "Y"){
+          return $r;
+        } 
+        if($db->f('References_priv') !== "Y"){
+          return $r;
+        } 
+        if($db->f('Index_priv') !== "Y"){
+          return $r;
+        } 
+        if($db->f('Alter_priv') !== "Y"){
+          return $r;
+        } 
+        if($db->f('Create_tmp_table_priv') !== "Y"){
+          return $r;
+        } 
+        if($db->f('Lock_tables_priv') !== "Y"){
+          return $r;
+        } 
+        if($db->f('Create_view_priv') !== "Y"){
+          return $r;
+        } 
+        if($db->f('Show_view_priv') !== "Y"){
+          return $r;
+        } 
+        if($db->f('Create_routine_priv') !== "Y"){
+          return $r;
+        } 
+        if($db->f('Alter_routine_priv') !== "Y"){
+          return $r;
+        } 
+        if($db->f('Execute_priv') !== "Y"){
+          return $r;
+        } 
+        if($db->f('Event_priv') !== "Y"){
+          return $r;
+        } 
+        if($db->f('Trigger_priv') !== "Y"){
+          return $r;
+        } 
+      }
+    }//endwhile
+    if(!$db->query("SELECT name,password from dbusers where name='".$dbu."';")){
+      return $r;
+    }
+
+    if(!$db->num_rows()){
+      return $r;
+    }
+    $db->next_record();
+    $r['user']=$db->f('name');
+    $r['password']=$db->f('password');
+    return $r;
+
   }
 
 
@@ -512,7 +630,12 @@ class m_mysql {
     $err->log("mysql","add_user",$usern);
 
     $usern=trim($usern);
-    $user=addslashes($mem->user["login"]."_".$usern);
+    $login=$mem->user["login"];
+    if($login != $usern){ 
+      $user=addslashes($login."_".$usern);
+    }else{
+      $user=$usern;
+    }
     $pass=addslashes($password);
 
     if (!$usern) {
@@ -523,15 +646,12 @@ class m_mysql {
       $err->raise("mysql",20);
       return false;
     }
-    if (!$quota->cancreate("mysql_users")) {
-      $err->raise("mysql",13);
-      return false;
-    }
     if (!preg_match("#^[0-9a-z]#",$usern)) {
       $err->raise("mysql",14);
       return false;
     }
-    
+
+
     // We check the length of the COMPLETE username, not only the part after _
     if (strlen($user) > 16) {
       $err->raise("mysql",15);
@@ -550,14 +670,14 @@ class m_mysql {
     // Check this password against the password policy using common API : 
     if (is_callable(array($admin,"checkPolicy"))) {
       if (!$admin->checkPolicy("mysql",$user,$password)) {
-	      return false; // The error has been raised by checkPolicy()
+        return false; // The error has been raised by checkPolicy()
       }
     }
 
+    // We add him to the user table 
+    $db->query("INSERT INTO dbusers (uid,name,password,enable) VALUES($cuid,'$user','$password','ACTIVATED');");
     // We create the user account (the "file" right is the only one we need globally to be able to use load data into outfile)
     $this->grant("*",$user,"FILE",$pass);
-    // We add him to the user table 
-    $db->query("INSERT INTO dbusers (uid,name,enable) VALUES($cuid,'$user','ACTIVATED');");
     return true;
   }
 
@@ -574,7 +694,7 @@ class m_mysql {
     $err->log("mysql","change_user_pass",$usern);
 
     $usern=trim($usern);
-    $user=addslashes($mem->user["login"]."_".$usern);
+    $user=addslashes($usern);
     $pass=addslashes($password);
     if ($password != $passconf || !$password) {
       $err->raise("mysql",17);
@@ -584,10 +704,11 @@ class m_mysql {
     // Check this password against the password policy using common API : 
     if (is_callable(array($admin,"checkPolicy"))) {
       if (!$admin->checkPolicy("mysql",$user,$password)) {
-    	return false; // The error has been raised by checkPolicy()
+        return false; // The error has been raised by checkPolicy()
       }
     }
-    $this->dbus->query("SET PASSWORD FOR ".$user."@".$this->dbus->Host." = PASSWORD('".$pass."')");
+    $db->query("SET PASSWORD FOR '".$user."'@'".$this->dbus->Host."' = PASSWORD('".$pass."');");
+    $db->query("UPDATE dbusers set password='".$pass."' where name='".$usern."' and uid=$cuid ;");
     return true;
   }
 
@@ -606,7 +727,7 @@ class m_mysql {
       $err->raise("mysql",14);
       return false;
     }
-    $db->query("SELECT name FROM dbusers WHERE name='".$mem->user["login"]."_$user' and enable not in ('ADMIN','HIDDEN');");
+    $db->query("SELECT name FROM dbusers WHERE name='".$user."' and enable not in ('ADMIN','HIDDEN');");
     if (!$db->num_rows()) {
       $err->raise("mysql",18);
       return false;
@@ -615,11 +736,11 @@ class m_mysql {
     $login=$db->f("name");
 
     // Ok, database exists and dbname is compliant. Let's proceed
-    $this->dbus->query("REVOKE ALL PRIVILEGES ON *.* FROM '".$mem->user["login"]."_$user'@'".$this->dbus->Host."';");
-    $this->dbus->query("DELETE FROM mysql.db WHERE User='".$mem->user["login"]."_$user' AND Host='".$this->dbus->Host."';");
-    $this->dbus->query("DELETE FROM mysql.user WHERE User='".$mem->user["login"]."_$user' AND Host='".$this->dbus->Host."';");
-    $this->dbus->query("FLUSH PRIVILEGES");
-    $this->dbus->query("DELETE FROM dbusers WHERE uid='$cuid' AND name='".$mem->user["login"]."_$user';");
+    $db->query("REVOKE ALL PRIVILEGES ON *.* FROM '".$user."'@'".$this->dbus->Host."';");
+    $db->query("DELETE FROM mysql.db WHERE User='".$user."' AND Host='".$this->dbus->Host."';");
+    $db->query("DELETE FROM mysql.user WHERE User='".$user."' AND Host='".$this->dbus->Host."';");
+    $db->query("FLUSH PRIVILEGES");
+    $db->query("DELETE FROM dbusers WHERE uid='$cuid' AND name='".$user."';");
     return true;
   }
 
@@ -630,21 +751,37 @@ class m_mysql {
    * @param $user the username 
    * @return array An array of database name and rights
    **/
-  function get_user_dblist($user) {
-    global $db,$err,$mem,$cuid,$L_MYSQL_DATABASE;
-    $err->log("mysql","get_user_dblist");
+
+  function get_user_dblist($user){
+    global $db,$err,$mem,$cuid;
 
     $r=array();
     $db->free();
     $dblist=$this->get_dblist();
-    for ( $i=0 ; $i<count($dblist) ; $i++ ) {
-      $this->dbus->query("SELECT Db, Select_priv, Insert_priv, Update_priv, Delete_priv, Create_priv, Drop_priv, References_priv, Index_priv, Alter_priv, Create_tmp_table_priv, Lock_tables_priv FROM mysql.db WHERE User='".$mem->user["login"].($user?"_":"").$user."' AND Host='".$this->dbus->Host."' AND Db='".$dblist[$i]["db"]."';");
-      if ($this->dbus->next_record())
-        $r[]=array("db"=>$dblist[$i]["name"], "select"=>$this->dbus->f("Select_priv"), "insert"=>$this->dbus->f("Insert_priv"),	"update"=>$this->dbus->f("Update_priv"), "delete"=>$this->dbus->f("Delete_priv"), "create"=>$this->dbus->f("Create_priv"), "drop"=>$this->dbus->f("Drop_priv"), "references"=>$this->dbus->f("References_priv"), "index"=>$this->dbus->f("Index_priv"), "alter"=>$this->dbus->f("Alter_priv"), "create_tmp"=>$this->dbus->f("Create_tmp_table_priv"), "lock"=>$this->dbus->f("Lock_tables_priv"));
-      else
-        $r[]=array("db"=>$dblist[$i]["name"], "select"=>"N", "insert"=>"N", "update"=>"N", "delete"=>"N", "create"=>"N", "drop"=>"N", "references"=>"N", "index"=>"N", "alter"=>"N", "Create_tmp"=>"N", "lock"=>"N" );
-    }
-    
+    foreach($dblist as $tab){
+      $pos=strpos($tab['db'],"_");
+      if($pos === false){
+        $this->dbus->query("SELECT * FROM mysql.db WHERE User='".$user."' AND Host='".$this->dbus->Host."' AND Db='".$tab["db"]."';");
+      }else{
+        $dbname=str_replace('_','\_',$tab['db']);
+        $this->dbus->query("SELECT * FROM mysql.db WHERE User='".$user."' AND Host='".$this->dbus->Host."' AND Db='".$dbname."';");
+      }	
+      if ($this->dbus->next_record()){
+        $r[]=array("db"=>$tab["db"], "select"=>$this->dbus->f("Select_priv"), "insert"=>$this->dbus->f("Insert_priv"),	"update"=>$this->dbus->f("Update_priv"), "delete"=>$this->dbus->f("Delete_priv"), "create"=>$this->dbus->f("Create_priv"), "drop"=>$this->dbus->f("Drop_priv"), "references"=>$this->dbus->f("References_priv"), "index"=>$this->dbus->f("Index_priv"), "alter"=>$this->dbus->f("Alter_priv"), "create_tmp"=>$this->dbus->f("Create_tmp_table_priv"), "lock"=>$this->dbus->f("Lock_tables_priv"),
+        "create_view"=>$this->dbus->f("Create_view_priv"),
+        "show_view"=>$this->dbus->f("Show_view_priv"),
+        "create_routine"=>$this->dbus->f("Create_routine_priv"),
+        "alter_routine"=>$this->dbus->f("Alter_routine_priv"),
+        "execute"=>$this->dbus->f("Execute_priv"),
+        "event"=>$this->dbus->f("Event_priv"),
+        "trigger"=>$this->dbus->f("Trigger_priv")
+        );
+      }else{
+        $r[]=array("db"=>$tab['db'], "select"=>"N", "insert"=>"N", "update"=>"N", "delete"=>"N", "create"=>"N", "drop"=>"N", "references"=>"N", "index"=>"N", "alter"=>"N", "Create_tmp"=>"N", "lock"=>"N","create_view"=>"N","show_view"=>"N","create_routine"=>"N","alter_routine"=>"N","execute"=>"N","event"=>"N","trigger"=>"N");
+
+      }
+
+    }	
     return $r;
   }
 
@@ -658,60 +795,89 @@ class m_mysql {
    * 
    **/
   function set_user_rights($user,$dbn,$rights) {
-    global $mem, $db;
+    global $mem,$err,$db;
+    $err->log("mysql","set_user_rights");
 
-    $usern=addslashes($mem->user["login"].($user?"_":"").$user);
-    $dbname=addslashes($mem->user["login"].($dbn?"_":"").$dbn);
+    $usern=addslashes($user);
+    $dbname=addslashes($dbn);
+    $dbname=str_replace('_','\_',$dbname);
     // On génère les droits en fonction du tableau de droits
     $strrights="";
     for( $i=0 ; $i<count($rights) ; $i++ ) {
       switch ($rights[$i]) {
         case "select":
           $strrights.="SELECT,";
-          break;
+        break;
         case "insert":
           $strrights.="INSERT,";
-          break;
+        break;
         case "update":
           $strrights.="UPDATE,";
-          break;
+        break;
         case "delete":
           $strrights.="DELETE,";
-          break;
+        break;
         case "create":
           $strrights.="CREATE,";
-          break;
+        break;
         case "drop":
           $strrights.="DROP,";
-          break;
+        break;
         case "references":
           $strrights.="REFERENCES,";
-          break;
+        break;
         case "index":
           $strrights.="INDEX,";
-          break;
+        break;
         case "alter":
           $strrights.="ALTER,";
-          break;
+        break;
         case "create_tmp":
           $strrights.="CREATE TEMPORARY TABLES,";
-          break;
+        break;
         case "lock":
           $strrights.="LOCK TABLES,";
-          break;
+        break;
+        case "create_view":
+          $strrights.="CREATE VIEW,";
+        break;
+        case "show_view":
+          $strrights.="SHOW VIEW,";
+        break;
+        case "create_routine":
+          $strrights.="CREATE ROUTINE,";
+        break;
+        case "alter_routine":
+          $strrights.="ALTER ROUTINE,";
+        break;
+        case "execute":
+          $strrights.="EXECUTE,";
+        break;
+        case "event":
+          $strrights.="EVENT,";
+        break;
+        case "trigger":
+          $strrights.="TRIGGER,";
+        break;
       }
     }
 
     // We reset all user rights on this DB : 
     $this->dbus->query("SELECT * FROM mysql.db WHERE User = '$usern' AND Db = '$dbname';");
     if($this->dbus->num_rows())
-      $this->dbus->query("REVOKE ALL PRIVILEGES ON $dbname.* FROM '$usern'@'".$this->dbus->Host."';");
+      $this->dbus->query("REVOKE ALL PRIVILEGES ON `$dbname`.* FROM '$usern'@'".$this->dbus->Host."';");
     if( $strrights ){
       $strrights=substr($strrights,0,strlen($strrights)-1);
       $this->grant($dbname,$usern,$strrights);
     }
     $this->dbus->query("FLUSH PRIVILEGES");
     return TRUE;
+  }
+
+  function available_sql_rights(){
+    return Array('select','insert','update','delete','create','drop','references','index','alter','create_tmp','lock','create_view','show_view','create_routine','alter_routine','execute','event','trigger');
+
+
   }
 
 
@@ -722,24 +888,15 @@ class m_mysql {
    * @return integer the number of service used or false if an error occured
    * @access private
    */
-  function alternc_get_quota($name) {
+  function hook_quota_get() {
     global $err,$db,$cuid;
-    if ($name=="mysql") {
-      $err->log("mysql","alternc_get_quota");
-      $c=$this->get_dblist();
-      if (is_array($c)) {
-	      return count($c);
-      } else {
-	      return 0;
-      }
-    } elseif ($name=="mysql_users") {
-      $err->log("mysql","alternc_get_quota");
-      $c=$this->get_userslist();
-      if(is_array($c))
-        return count($c);
-      else
-        return 0;
-    } else return false;
+    $err->log("mysql","alternc_get_quota");
+    $q=Array("name"=>"mysql", "description"=>_("MySQL Databases"), "used"=>0);
+    $c=$this->get_dblist();
+    if (is_array($c)) {
+      $q['used']=count($c);
+    }
+    return $q;
   }
 
   /* ----------------------------------------------------------------- */
@@ -756,24 +913,19 @@ class m_mysql {
       $myadm=$db->f("name");  
       $password=$db->f("password");  
     }else{
-	$myadm=$cuid."_myadm";
-      }
+      $myadm=$cuid."_myadm";
+      $password=create_pass(8); 
+    }
 
-      $chars = "1234567890abcdefghijkmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-      $i = 0;
-      $password = "";
-      while ($i <= 8) {
-        $password .= $chars{mt_rand(0,strlen($chars))};
-        $i++;
-      } 
-      $db->query("INSERT INTO dbusers (uid,name,password,enable) VALUES ('$cuid','$myadm','$password','ADMIN');");
-    
+
+    $db->query("INSERT INTO dbusers (uid,name,password,enable) VALUES ('$cuid','$myadm','$password','ADMIN');");
+
     return true;
   }
 
 
 
-  
+
   /* ----------------------------------------------------------------- */
   /** Hook function called when a user is deleted.
    * AlternC's standard function that delete a member
@@ -785,13 +937,13 @@ class m_mysql {
     $c=$this->get_dblist();
     if (is_array($c)) {
       for($i=0;$i<count($c);$i++) {
-	      $this->del_db($c[$i]["name"]);
+        $this->del_db($c[$i]["name"]);
       }
     }
     $d=$this->get_userslist();
     if (!empty($d)) {
       for($i=0;$i<count($d);$i++) {
-	      $this->del_user($d[$i]["name"]);
+        $this->del_user($d[$i]["name"]);
       }
     }
     return true;
@@ -808,7 +960,7 @@ class m_mysql {
     setcookie("REMOTE_PASSWORD","");
   }
 
-  
+
   /* ----------------------------------------------------------------- */
   /**
    * Exporte all the mysql information of an account
@@ -816,7 +968,7 @@ class m_mysql {
    * EXPERIMENTAL 'sid' function ;) 
    */
   function alternc_export_conf() {
-//TODO don't work with separated sql server for dbusers
+    //TODO don't work with separated sql server for dbusers
     global $db,$err,$cuid;
     $err->log("mysql","export");
     $db->query("SELECT login, pass, db, bck_mode, bck_dir, bck_history, bck_gzip FROM db WHERE uid='$cuid';");
@@ -825,15 +977,15 @@ class m_mysql {
       $str.="   <login>".$db->Record["login"]."</login>\n";
       $str.="   <pass>".$db->Record["pass"]."</pass>\n";
       do {
-	$filename=$tmpdir."/mysql.".$db->Record["db"].".sql.gz";
-	$str.="   <database>".($db->Record["db"])."</database>\n";
-	$str.="   <password>".($db->Record["pass"])."</password>\n";
-	if ($s["bck_mode"]!=0) {
-	  $str.="   <backup-mode>".($db->Record["bck_mode"])."</backup-mode>\n";
-	  $str.="   <backup-dir>".($db->Record["bck_dir"])."</backup-dir>\n";
-	  $str.="   <backup-history>".($db->Record["bck_history"])."</backup-history>\n";
-	  $str.="   <backup-gzip>".($db->Record["bck_gzip"])."</backup-gzip>\n";
-	}
+        $filename=$tmpdir."/mysql.".$db->Record["db"].".sql.gz";
+        $str.="   <database>".($db->Record["db"])."</database>\n";
+        $str.="   <password>".($db->Record["pass"])."</password>\n";
+        if ($s["bck_mode"]!=0) {
+          $str.="   <backup-mode>".($db->Record["bck_mode"])."</backup-mode>\n";
+          $str.="   <backup-dir>".($db->Record["bck_dir"])."</backup-dir>\n";
+          $str.="   <backup-history>".($db->Record["bck_history"])."</backup-history>\n";
+          $str.="   <backup-gzip>".($db->Record["bck_gzip"])."</backup-gzip>\n";
+        }
       } while ($db->next_record());
       $str.=" </sql>\n";
     }
@@ -846,22 +998,22 @@ class m_mysql {
    * @access private
    * EXPERIMENTAL 'sid' function ;) 
    */
-function alternc_export_data ($dir){
+  function alternc_export_data ($dir){
     global $db, $err, $cuid,$mem;
     $err->log("mysql","export_data");
     $db->query("SELECT db.login, db.pass, db.db, dbusers.name FROM db,dbusers WHERE db.uid='$cuid' AND dbusers.uid=db.uid;");
     $dir.="sql/";
     if(!is_dir($dir)){
-        if(!mkdir($dir)){
-            $err->raise('mysql',4);
-        }
+      if(!mkdir($dir)){
+        $err->raise('mysql',4);
+      }
     }
     // on exporte toutes les bases utilisateur.
     while($db->next_record()){
-	    $filename=$dir."mysql.".$db->Record["db"].".".date("H:i:s").".sql.gz";
-	    exec ("/usr/bin/mysqldump --defaults-file=/etc/alternc/my.cnf --add-drop-table --allow-keywords -Q -f -q -a -e ".escapeshellarg($db->Record["db"])." |/bin/gzip >".escapeshellarg($filename));
+      $filename=$dir."mysql.".$db->Record["db"].".".date("H:i:s").".sql.gz";
+      exec ("/usr/bin/mysqldump --defaults-file=/etc/alternc/my.cnf --add-drop-table --allow-keywords -Q -f -q -a -e ".escapeshellarg($db->Record["db"])." |/bin/gzip >".escapeshellarg($filename));
     }
-}
+  }
 
 
 } /* Class m_mysql */

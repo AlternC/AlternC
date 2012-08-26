@@ -1,5 +1,10 @@
 <?php
 /*
+ ----------------------------------------------------------------------
+ AlternC - Web Hosting System
+ Copyright (C) 2000-2012 by the AlternC Development Team.
+ https://alternc.org/
+ ----------------------------------------------------------------------
  LICENSE
 
  This program is free software; you can redistribute it and/or
@@ -14,37 +19,39 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file: Camille Lafitte
  Purpose of file: Manage hook system.
  ----------------------------------------------------------------------
 */
+
 /**
- * This class manage cron.
- * 
- * @copyright    AlternC-Team 2002-2005 http://alternc.org/
+ * This class manage web-cron tasks
  */
 class m_cron {
+
 
   /*---------------------------------------------------------------------------*/
   /** Constructor
   */
   function m_cron() {
   }
-//FIXME rajouter contrainte NOT NULL sur uid dans la bdd
-
+  //FIXME add a  NOT NULL constraint on uid in the DB
   function schedule() {
-  return Array(
-    Array('unit'=>1440, 'name'=>_("Daily")),
-    Array('unit'=>60,   'name'=>_("Hour")),
-    Array('unit'=>30,   'name'=>_("Half Hour")),
-  );
-
+    return Array(
+		 Array('unit'=>1440, 'name'=>_("Daily")),
+		 Array('unit'=>60,   'name'=>_("Hour")),
+		 Array('unit'=>30,   'name'=>_("Half Hour")),
+		 );
   }
 
+  
+  /*---------------------------------------------------------------------------*/
+  /** List the crontab for the current user.
+   * @return array an hash for each crontab.
+   */
   function lst_cron() {
     global $cuid,$db,$err;
     $err->log("cron","lst_cron");
-    $db->query("select * from cron where uid = $cuid order by url;");
+    $db->query("SELECT * FROM cron WHERE uid = $cuid ORDER BY url;");
     $r=Array();
     while ($db->next_record()) {
       $tmp=Array();
@@ -59,25 +66,42 @@ class m_cron {
     return $r;
   }
 
+
+  /*---------------------------------------------------------------------------*/
+  /** update the crontab 
+   * @param $arr array the crontab information, including its ID
+   * @return boolean TRUE if the crontab has been edited
+  */
   function update($arr) {
     $ok=true;
     foreach ($arr as $a) {
       if (! isset($a['id'])) $a['id']=null;
       if (empty($a['url']) && is_null($a['id'])) continue;
-      if (! $this->update_one($a['url'], $a['user'], $a['password'], $a['email'], $a['schedule'], $a['id']) ) {
+      if (! $this->_update_one($a['url'], $a['user'], $a['password'], $a['email'], $a['schedule'], $a['id']) ) {
         $ok=false;
       }
     }
     return $ok;
   }
+  
 
+  /*---------------------------------------------------------------------------*/
+  /** delete a crontab 
+   * @param $id the id of the crontab to delete
+   * @return boolean TRUE if the crontab has been deleted
+  */
   function delete_one($id) {
     global $db,$err,$cuid;
     $err->log("cron","delete_one");
-    return $db->query("delete from cron where id=".intval($id)." and uid=$cuid limit 1;");
+    return $db->query("DELETE FROM cron WHERE id=".intval($id)." AND uid=$cuid LIMIT 1;");
   }
+  
 
-  function update_one($url, $user, $password, $email, $schedule, $id=null) {
+  /*---------------------------------------------------------------------------*/
+  /** update a crontab, 
+   * @return boolean TRUE if the crontab has been edited
+  */
+  private function _update_one($url, $user, $password, $email, $schedule, $id=null) {
     global $db,$err,$quota,$cuid;
     $err->log("cron","update_one");
 
@@ -85,8 +109,7 @@ class m_cron {
       return $this->delete_one($id);
     }
 
-    // FIXME check que l'url est une vrai URL
-
+    // FIXME check the url property
     $url=mysql_real_escape_string(urlencode($url));
     $user=mysql_real_escape_string(urlencode($user));
     if (empty($user)) $password='';
@@ -98,23 +121,27 @@ class m_cron {
     if (is_null($id)) { // if a new insert, quotacheck
       $q = $quota->getquota("cron");
       if ( $q["u"] >= $q["t"] ) {
-        $err->log("cron","update_one","quota problem");
+        $err->raise("cron",_("You seems to be over-quota."));
         return false;
       }
     } else { // if not a new insert, check the $cuid
-      $db->query("select uid from cron where id = $id;");
+      $db->query("SELECT uid FROM cron WHERE id = $id;");
       if (! $db->next_record()) { return "false"; } // return false if pb
       if ( $db->f('uid') != $cuid ) {
-        $err->log("cron","update_one","bad uid");
+        $err->raise("cron",_("Identity problem"));
         return false;
       } 
     }
-
-    $query = "INSERT INTO cron (id, uid, url, user, password, schedule, email) values ('$id', '$cuid', '$url', '$user', '$password', '$schedule', '$email') on duplicate key update url='$url', user='$user', password='$password', schedule='$schedule', email='$email', uid='$cuid';";
+    $query = "REPLACE INTO cron (id, uid, url, user, password, schedule, email) VALUES ('$id', '$cuid', '$url', '$user', '$password', '$schedule', '$email') ;";
     return $db->query("$query");
-
   }
 
+
+  /*---------------------------------------------------------------------------*/
+  /** validate a crontab schedule
+   * @param $s array schedule paramters
+   * @return boolean TRUE if the schedule is valid
+  */
   function valid_schedule($s) {
     $s2 = intval($s);
     if ($s2 != $s) return false;
@@ -125,23 +152,19 @@ class m_cron {
     return $r;
   }
 
-  function alternc_quota_names() {
-    return "cron";
-  }
-
-  // return the used quota
-  function alternc_get_quota() {
+  /*---------------------------------------------------------------------------*/
+  /** hook for quota computation
+   */
+  function hook_quota_get() {
     global $cuid,$db,$err;
     $err->log("cron","alternc_get_quota");
+    $q=Array("name"=>"cron", "description"=>_("Scheduled tasks"), "used"=>0);
     $db->query("select count(*) as cnt from cron where uid = $cuid;");
-
     if ($db->next_record()) {
-        return $db->f('cnt');
+        $q['used']=$db->f('cnt');
     }
-    return false;
-    
+    return $q;
   }
 
-} /* Class cron */
 
-?>
+} /* Class cron */

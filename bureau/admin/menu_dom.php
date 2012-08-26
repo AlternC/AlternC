@@ -1,13 +1,9 @@
 <?php
 /*
- $Id: menu_dom.php,v 1.2 2003/06/10 06:42:25 root Exp $
  ----------------------------------------------------------------------
  AlternC - Web Hosting System
- Copyright (C) 2002 by the AlternC Development Team.
- http://alternc.org/
- ----------------------------------------------------------------------
- Based on:
- Valentin Lacambre's web hosting softwares: http://altern.org/
+ Copyright (C) 2000-2012 by the AlternC Development Team.
+ https://alternc.org/
  ----------------------------------------------------------------------
  LICENSE
 
@@ -23,15 +19,12 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file:
- Purpose of file:
- ----------------------------------------------------------------------
 */
 
 		/* ############# DOMAINES ############# */
 $q = $quota->getquota("dom");
 
-if ($q["t"] > 0)
+if ($q["t"] > 0 || $q['u'] > 0)
 {
 
 ?>

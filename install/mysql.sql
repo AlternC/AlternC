@@ -278,34 +278,6 @@ CREATE TABLE IF NOT EXISTS `recipient` (
   UNIQUE KEY `key_id` (`id`,`address_id`)
 ) COMMENT = 'Table containing other recipients (aliases) for an address.';
 
---
--- Mailman table.
---
--- Table containing mailman addresses
-
-CREATE TABLE IF NOT EXISTS `mailman` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT, -- Technical id.
-  `address_id` bigint(20) unsigned NOT NULL REFERENCES `address`(`id`), -- Reference to address
-  `delivery` varchar(255) NOT NULL, -- Delivery transport.
-  `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- Update date, for technical usage only.
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `address_id` (`address_id`)
-) COMMENT = 'Table containing mailman list addresses.';
-
---
--- Structure de la table `stats3`
---
--- Liste des jeux de stat brutes demandées sur le serveur
-
-CREATE TABLE IF NOT EXISTS stats2 (
-  id int(10) unsigned NOT NULL auto_increment,	-- Numéro du jeu de stat brut
-  mid int(10) unsigned NOT NULL default '0',	-- Numéro de l`utilisateur
-  hostname varchar(255) NOT NULL default '',	-- Domaine concerné
-  folder varchar(255) NOT NULL default '',	-- Dossier de stockage des logs
-  PRIMARY KEY  (id),
-  KEY mid (mid)
-) TYPE=MyISAM COMMENT='Statistiques apaches brutes';
-
 
 --
 -- Structure de la table `defquotas`
@@ -330,7 +302,6 @@ INSERT IGNORE INTO defquotas (quota,value) VALUES ('mail',10);
 INSERT IGNORE INTO defquotas (quota,value) VALUES ('ftp',2);
 INSERT IGNORE INTO defquotas (quota,value) VALUES ('stats',1);
 INSERT IGNORE INTO defquotas (quota,value) VALUES ('mysql',1);
-INSERT IGNORE INTO defquotas (quota,value) VALUES ('mysql_users',1);
 
 
 --

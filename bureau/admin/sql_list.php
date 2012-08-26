@@ -59,20 +59,21 @@ if($rdb){
 ?>
 <form method="post" action="sql_del.php" name="main" id="main">
 <table class="tlist">
-   <tr><th>&nbsp;</th><th><?php __("Database"); ?></th><th><?php __("Backup"); ?></th><th><?php __("Restore"); ?></th><th><?php __("Size"); ?></th></tr>
+   <tr><th>&nbsp;</th><th><?php __("Database"); ?></th><th><?php __("Backup"); ?></th><th><?php __("Restore"); ?></th><th><?php __("Show Settings"); ?></th><th><?php __("Size"); ?></th></tr>
 
 <?php
 $col=1;
 for($i=0;$i<count($rdb);$i++) {
   $val=$rdb[$i];
   $val['size'] = $mysql->get_db_size($val['db']);
- $col=3-$col;
+  $col=3-$col;
 ?>
 	<tr  class="lst<?php echo $col; ?>">
-		<td align="center"><input type="checkbox" class="inc" id="del_<?php echo $val["name"]; ?>" name="del_<?php echo $val["name"]; ?>" value="<?php echo ($val["name"])?$val["name"]:"_"; ?>" /></td>
-	   	<td><label for="del_<?php echo $val["name"]; ?>"><?php echo $val["db"]; ?></label></td>
-		<td><div class="ina"><a href="sql_bck.php?id=<?php echo $val["name"] ?>"><?php __("Backup"); ?></a></div></td>
-		<td><div class="ina"><a href="sql_restore.php?id=<?php echo $val["name"] ?>"><?php __("Restore"); ?></a></div></td>
+		<td align="center"><input type="checkbox" class="inc" id="del_<?php echo $val["db"]; ?>" name="del_<?php echo $val["db"]; ?>" value="<?php echo ($val["db"]); ?>" /></td>
+	   	<td><label for="del_<?php echo $val["db"]; ?>"><?php echo $val["db"]; ?></label></td>
+		<td><div class="ina"><a href="sql_bck.php?id=<?php echo $val["db"] ?>"><?php __("Backup"); ?></a></div></td>
+		<td><div class="ina"><a href="sql_restore.php?id=<?php echo $val["db"] ?>"><?php __("Restore"); ?></a></div></td>
+		<td><div class="ina"><a href="sql_getparam.php?dbname=<?php echo $val["db"] ?>"><?php __("Show Settings"); ?></a></div></td>
 		<td><code><?php echo format_size($val["size"]); ?></code></td>
 	</tr>
 <?php
@@ -90,9 +91,27 @@ for($i=0;$i<count($rdb);$i++) {
 ?>
 <p>&nbsp;</p>
 
-<?php if ($quota->cancreate("mysql")) { ?>
-<p>  <span class="ina"><a href="sql_add.php"><?php __("Create a new MySQL database"); ?></a></span> </p>
-<?php } 
+<?php if ($quota->cancreate("mysql")) {
+  $q=$quota->getquota("mysql");
+  if($q['u'] == 0 ){
+?>
+<p>  <span class="ina"><a href="sql_doadd.php"><?php __("Create a new MySQL database"); ?></a></span> </p>
+<?php }else{
+?>
+<form method="post" action="sql_doadd.php" id="main" name="main">
+<table class="tedit">
+<tr>
+  <th><label for="dbn"><?php __("MySQL Database"); ?></label></th>
+  <td>
+	<span class="int" id="dbnpfx"><?php echo $mem->user["login"]; ?>_</span><input type="text" class="int" name="dbn" id="dbn" value="" size="20" maxlength="30" />
+</tr>
+</table>
+<br />
+<input type="submit" class="inb" name="submit" value="<?php __("Create this new MySQL database."); ?>" />
+</form>
+<?php
+}
+}
 ?>
 <script type="text/javascript">
 document.forms['main'].pass.focus();

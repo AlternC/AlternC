@@ -84,7 +84,6 @@ install: build
 	install tools/get_domains_by_account debian/alternc/usr/bin
 	install tools/get_account_by_domain debian/alternc/usr/bin
 	install tools/alternc_get_path debian/alternc/usr/bin
-	install tools/postfix-add-policy debian/alternc/usr/bin
 	install src/alternc_reload debian/alternc/usr/bin
 	install -m 644 po/fr/LC_MESSAGES/alternc-admintools.mo debian/alternc/usr/share/locale/fr/LC_MESSAGES/
 

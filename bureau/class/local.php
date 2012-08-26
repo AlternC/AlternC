@@ -1,7 +1,7 @@
 <?php
 
 /* Read global variables (AlternC configuration) */
-$L_VERSION="v. 1.1~dev20110501";
+$L_VERSION="v. 1.1~rc1~20120826";
 
 /* To ease the transition, we define a lookup table for old names */
 $compat = array('DEFAULT_MX'   => 'MX',

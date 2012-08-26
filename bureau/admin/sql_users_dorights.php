@@ -1,6 +1,6 @@
 <?php
 /*
- $Id: sql_users_rights.php,v 1.8 2006/02/16 16:26:28 nahuel Exp $
+ $Id: sql_users_dorights.php,v 1.8 2006/02/16 16:26:28 nahuel Exp $
  ----------------------------------------------------------------------
  AlternC - Web Hosting System
  Copyright (C) 2002 by the AlternC Development Team.
@@ -31,21 +31,24 @@ require_once("../class/config.php");
 
 
 $fields = array (
-	"id"    		=> array ("post", "string", ""),
+  "id"        => array ("post", "string", ""),
 );
 getFields($fields);
 
+foreach($_POST as $k=>$v) {
+  $keys[$k]=$v;
+}
 
-$keys=array_keys($_POST);
-$dblist=$mysql->get_dblist();
-
-for( $i=0 ; $i<count($dblist) ; $i++ ) {
+$cleanrights=$mysql->available_sql_rights();
+foreach($mysql->get_dblist() as $d){
   $rights=array();
-  for( $j=0 ; $j<count($keys) ; $j++ ) {
-      if( strpos( $keys[$j], $dblist[$i]["name"]."_" ) === 0 )
-        $rights[]=substr($keys[$j], strlen( $dblist[$i]["name"]."_" ));
-  }
-  $mysql->set_user_rights($id,$dblist[$i]["name"],$rights);
+  foreach ($cleanrights as $r) {
+    if (isset($keys[$d['db'].'_'.$r])) {
+      $rights[]=$r; 
+    }
+  }  
+  //add if empty rights
+  $mysql->set_user_rights($id,$d['db'],$rights);
 }
 
 $error=_("The rights has been successfully applied to the user");

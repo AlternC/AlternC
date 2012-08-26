@@ -37,11 +37,6 @@ $fields = array (
 );
 getFields($fields);
 
-if (!$quota->cancreate("mysql_users")) {
-	$error=_("err_mysql_13");
-	$fatal=1;
-}
-
 ?>
 <h3><?php __("Create a new MySQL user"); ?></h3>
 <hr id="topbar"/>

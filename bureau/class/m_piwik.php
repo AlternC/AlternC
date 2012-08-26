@@ -1,6 +1,11 @@
 <?php
 
 /*
+ ----------------------------------------------------------------------
+ AlternC - Web Hosting System
+ Copyright (C) 2000-2012 by the AlternC Development Team.
+ https://alternc.org/
+ ----------------------------------------------------------------------
  LICENSE
 
  This program is free software; you can redistribute it and/or
@@ -15,18 +20,17 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file: Camille Lafitte
- Purpose of file: Manage hook system.
+ Purpose of file: Manage piwik Statistics set
  ----------------------------------------------------------------------
 */
+
 /**
- * This class manage piwik.
- * 
- * @copyright    AlternC-Team 2002-2005 http://alternc.org/
+ * This class manage piwik statistics management through AlternC, using piwik's "API".
  */
 class m_piwik {
   var $piwik_server_uri;
   var $piwik_admin_token;
+
 
   /*---------------------------------------------------------------------------*/
   /** Constructor
@@ -37,61 +41,49 @@ class m_piwik {
       variable_set('piwik_server_uri','','Remote Piwik server uri');
       $this->piwik_server_uri='';
     }
-
     $this->piwik_admin_token=variable_get('piwik_admin_token',null);
     if (is_null($this->piwik_admin_token)) { // if not configuration var, setup one (with a default value)
       variable_set('piwik_admin_token','','Remote Piwik super-admin token');
       $this->piwik_admin_token='';
     }
-
   }
-
-  /**
-   * Quota name
-   */
-  function alternc_quota_names() {
-    return "piwik";
-  }
-
 
   /* ----------------------------------------------------------------- */
-  /** Fonction appellée par membres quand un membre est effacé.
-   * @param integer $uid Numéro de membre effacé.
-   * @access private
+  /** hook called when an AlternC account is deleted
    */
-  function alternc_del_member() {
-    //FIXME
+  function hook_admin_del_member() {
+    //FIXME : implement the hook_admin_del_member for piwik
     return true;
   }
 
+
   /* ----------------------------------------------------------------- */
-  /** 
-   * Returns the used quota for the $name service for the current user.
+  /** Returns the used quota for the $name service for the current user.
    * @param $name string name of the quota 
    * @return integer the number of service used or false if an error occured
    * @access private
    */
-  function alternc_get_quota() {
+  function hook_quota_get() {
     global $db, $cuid;
     $db->query("SELECT COUNT(id) AS nb FROM piwik_users WHERE uid='$cuid'");
-    $db->next_record();
-
-    return $db->f('nb');
+    $q=Array("name"=>"piwik", "description"=>_("Statistics through Piwik accounts"), "used"=>0);
+    if ($db->next_record()) {
+      $q['used']=$db->f('nb');
+    }
+    return $q;
   }
 
-  function url()
-  {
+
+  function url() {
     return $this->piwik_server_uri;
   }
 
 
   /***********************/
-  /* Users related tasks */
+  /* User-related tasks */
   /***********************/
 
 
-  // Créé un utilisateur
-  // Si échoue en remote, n'enregistre rien
   function user_add($user_login, $user_mail = null) {
 
         global $db, $mem, $cuid, $err;
@@ -103,20 +95,15 @@ class m_piwik {
 	$user_alias = $user_login;
 
 	$api_data = $this->call_privileged_page('API', 'UsersManager.addUser', array('userLogin' => $user_login, 'password' => $user_pass, 'email' => $user_mail, 'alias' => $user_alias), 'JSON'); 
-	if ($api_data)
-	{
-	  if ($api_data->result === 'success')
-	  {
+	if ($api_data) {
+	  if ($api_data->result === 'success') {
 	    $user = $this->get_user($user_login);
 	    $user_creation_date = $user->date_registered;
 	    $db->query("INSERT INTO piwik_users (uid, login, created_date) VALUES ('$cuid', '$user_login', '$user_creation_date')");
 	  }
-	}
-	else // api_data = false -> error is already filled
-	{
+	} else { // api_data = false -> error is already filled
 	  return FALSE;
 	}
-
   }
 
 
@@ -126,8 +113,8 @@ class m_piwik {
     return true;
   }
 
-  function get_user($user_login)
-  {
+
+  function get_user($user_login) {
     $api_data = $this->call_privileged_page('API', 'UsersManager.getUser', array('userLogin' => $user_login));
 
     if ($api_data)
@@ -135,6 +122,7 @@ class m_piwik {
     else
       return FALSE;
   }
+
 
   // Supprime l'utilisateur Piwik passé en parametre
   // Ne le supprime pas localement tant que pas supprimé en remote
@@ -144,25 +132,18 @@ class m_piwik {
     $db->query("SELECT created_date, COUNT(id) AS cnt FROM piwik_users WHERE uid='$cuid' AND login='$piwik_user_login'");
     $db->next_record();
 
-    if ($db->f('cnt') == 1)
-      {
-
+    if ($db->f('cnt') == 1) {
 	$api_data = $this->call_privileged_page('API', 'UsersManager.getUser', array('userLogin' => $piwik_user_login));
 	printvar($api_data);
 	if ($api_data[0]->date_registered == $db->f('created_date'))
 	  echo "equals";
 	else
 	  echo "non equals";
-	// $api_data = $this->call_privileged_page('API', 'UsersManager.deleteUser', array('idSite' => $site_id));
-
-	
-      }
-    else
-      {
-	$err->raise("piwik", _("You are not allowed to delete the statistics of this website"));
-	return FALSE;
-      }
-
+	// $api_data = $this->call_privileged_page('API', 'UsersManager.deleteUser', array('idSite' => $site_id));	
+    } else {
+      $err->raise("piwik", _("You are not allowed to delete the statistics of this website"));
+      return FALSE;
+    }
     //SitesManager.deleteSite (idSite)
     //FIXME
     return true;
@@ -171,20 +152,14 @@ class m_piwik {
 
   function users_list() { 
     global $db, $cuid;
-
     $db->query("SELECT login FROM piwik_users WHERE uid = '$cuid'");
-
     if ($db->num_rows() == 0)
       return array();
-
     $users = '';
     while ($db->next_record())
 	$users .= ($users !== '') ? ',' . $db->f('login') : $db->f('login');
-
     return $this->call_privileged_page('API', 'UsersManager.getUsers', array('userLogins' => $users)); 
   }
-
-
 
 
   // Verifie que l'utilisateur existe bien dans piwik
@@ -210,22 +185,17 @@ class m_piwik {
 
 
 
-
-
   /***********************/
-  /* Sites related tasks */
+  /* Site-related tasks */
   /***********************/
 
 
-  function site_list()
-  {
+  function site_list() {
     $api_data = $this->call_privileged_page('API', 'SitesManager.getAllSites');
     $data = array();
 
-    if($api_data)
-    {
-      foreach ($api_data AS $site)
-      {
+    if($api_data) {
+      foreach ($api_data AS $site) {
 
 	$item = new stdClass();
 
@@ -235,35 +205,29 @@ class m_piwik {
 
 	$user_data = $this->call_privileged_page('API', 'UsersManager.getUsersAccessFromSite', array('idSite' => $site->idsite));
 
-	if (is_array($user_data))
-	  {
+	if (is_array($user_data)) {
 	    printvar($user_data);
-	  }
-	else if(is_object($user_data))
-	  {
+	  } else if(is_object($user_data)) {
 	    $item->rights = json_decode($user_data[0]);
 	  }
 
-
-
 	$data[] = $item;
       }
-      
       return $data;
-    }
-    else
+    } else
       return FALSE;
-
   }
+
+
   // Ajoute un site à Piwik
   // can't figure out how to pass multiple url through the API
   function site_add($siteName, $urls, $ecommerce = FALSE) {
     $urls = is_array($urls) ? implode(',', $urls) : $urls;
     $api_data = $this->call_privileged_page('API', 'SitesManager.addSite', array('siteName' => $siteName, 'urls' => $urls));
     printvar($api_data);
-
     return TRUE;
   }
+
 
   // Supprime un site de Piwik
   function site_delete($site_id) {
@@ -272,23 +236,21 @@ class m_piwik {
     $db->query("SELECT COUNT(id) AS cnt FROM piwik_sites WHERE uid='$cuid' AND piwik_id='$site_id'");
     $db->next_record();
 
-    if ($db->f('cnt') == 1)
-      {
+    if ($db->f('cnt') == 1) {
 	$api_data = $this->call_privileged_page('API', 'SitesManager.deleteSite', array('idSite' => $site_id));
 	printvar($api_data);
 	
-      }
-    else
-      {
+    } else {
 	$err->raise("piwik", _("You are not allowed to delete the statistics of this website"));
 	return FALSE;
-      }
+    }
 
     //SitesManager.deleteSite (idSite)
     //FIXME
     return true;
   }
  
+
   // Ajoute un alias sur un site existant
   function site_alias_add() {
     // FIXME
@@ -297,21 +259,20 @@ class m_piwik {
 
 
 
-  /* Helper code */
+  /* Helper code FIXME: rename those function using "private" + "_" prefix  */
 
-  function clean_user_name($username)
-  {
+  function clean_user_name($username) {
     return mysql_real_escape_string(trim($username));
   }
 
-  function dev() 
-  {
+
+  function dev() {
     // $this->call_page('module', 'method', array('user' => 'fser', 'pass' => 'toto'));
     // return $this->users_list();
   }
 
-  function call_page($module, $method, $arguments=array(), $output = 'JSON')
-  {
+
+  function call_page($module, $method, $arguments=array(), $output = 'JSON') {
     global $err;
 	$url = sprintf('%s/?module=%s&method=%s&format=%s', $this->piwik_server_uri, $module, $method, $output);
 	foreach ($arguments AS $k=>$v)
@@ -323,39 +284,30 @@ class m_piwik {
 	//}
 	echo $url;
 	$page_content = file_get_contents($url);
-	if ($page_content === FALSE)
-	{
+	if ($page_content === FALSE) {
 	  $err->raise("piwik", _("Unable to reach the API"));
 	  return FALSE;
 	}
 
-	if ($output == 'JSON')
-	{
+	if ($output == 'JSON') {
 	  $api_data = json_decode($page_content);
-	  if ($api_data == FALSE)
-	  {
+	  if ($api_data == FALSE) {
 	    $err->raise("piwik", _("Error while decoding response from the API"));
 	    return FALSE;
 	  }
 
 	  return $api_data;
-	}
-	else
-	{
+	} else {
 	  $err->raise("piwik", _("Other format than JSON is not implemented yet"));
 	  return FALSE;
 	}
-
   }
 
 
-  function call_privileged_page($module, $method, $arguments=array(), $output = 'JSON')
-  {
+  function call_privileged_page($module, $method, $arguments=array(), $output = 'JSON') {
 	$arguments['token_auth'] = $this->piwik_admin_token;
-	
 	return $this->call_page($module, $method, $arguments, $output);
   }
 
-} /* Class piwik */
 
-?>
+} /* Class piwik */

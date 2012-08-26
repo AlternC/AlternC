@@ -45,6 +45,10 @@ if (!$quota->cancreate("mysql")) {
 			exit();
 		}
 	}
+$q=$quota->getquota("mysql");
+if($q['u'] == 0 ){
+	include_once("sql_doadd.php");	
+}else{
 ?>
 <form method="post" action="sql_doadd.php" id="main" name="main">
 <table class="tedit">
@@ -57,7 +61,9 @@ if (!$quota->cancreate("mysql")) {
 <br />
 <input type="submit" class="inb" name="submit" value="<?php __("Create this new MySQL database."); ?>" />
 </form>
-
+<?php
+}
+?>
 <script type="text/javascript">
   document.forms['main'].dbn.focus();
 </script>

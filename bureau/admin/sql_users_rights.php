@@ -36,9 +36,8 @@ $fields = array (
 getFields($fields);
 
 $r=$mysql->get_user_dblist($id);
-
 ?>
-<h3><?php printf(_("MySQL Rights for %s"),$mem->user["login"]."_".$id) ?></h3>
+<h3><?php printf(_("MySQL Rights for %s"),$id) ?></h3>
 <hr id="topbar"/>
 <br />
 <?php
@@ -67,17 +66,24 @@ if ($r) {
      <th>ALTER</th>
      <th>CREATE_TMP_TABLE</th>
      <th>LOCK</th>
+     <th>CREATE VIEW</th>
+     <th>SHOW VIEW</th>
+     <th>CREATE ROUTINE</th>
+     <th>ALTER ROUTINE</th>
+     <th>EXECUTE</th>
+     <th>EVENT</th>
+     <th>TRIGGER</th>
   </tr>
 
 <?php
 $col=1;
-$sql_right=Array('select','insert','update','delete','create','drop','references','index','alter','create_tmp','lock');
+$sql_right=$mysql->available_sql_rights();
 for($i=0;$i<count($r);$i++) {
   $val=$r[$i];
   $col=3-$col;
 ?>
 	<tr class="lst<?php echo $col; ?>">
-    <td><strong><?php echo $mem->user["login"].($val["db"]?"_":"").$val["db"] ?></strong></td>
+    <td><strong><?php echo $val["db"] ?></strong></td>
     <td><a href="javascript:inverse_sql_right('<?php echo htmlentities($val["db"]);?>');"><?php __('Reverse selection');?></a></td>
     <?php foreach($sql_right as $sr) { ?>
 	  <td align="center">
@@ -92,6 +98,7 @@ for($i=0;$i<count($r);$i++) {
 ?>
 <tr><td colspan="5">
    <input type="submit" value="<?php __("Apply"); ?>" class="inb" />
+  <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='sql_users_list.php'"/>
 </td></tr>
 </table>
 </form>

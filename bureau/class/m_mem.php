@@ -82,17 +82,17 @@ class m_mem {
     //    $password=addslashes($password);
     $db->query("select * from membres where login='$username';");
     if ($db->num_rows()==0) {
-      $err->raise("mem",1);
+      $err->raise("mem",_("User or password incorrect"));
       return false;
     }
     $db->next_record();
     if (_md5cr($password,$db->f("pass"))!=$db->f("pass")) {
       $db->query("UPDATE membres SET lastfail=lastfail+1 WHERE uid='".$db->f("uid")."';");
-      $err->raise("mem",1);
+      $err->raise("mem",_("User or password incorrect"));
       return false;
     } 
     if (!$db->f("enabled")) {
-      $err->raise("mem",2);
+      $err->raise("mem",_("This account is locked, contact the administrator"));
       return false;
     }
     $this->user=$db->Record;
@@ -109,7 +109,7 @@ class m_mem {
 
     // Error if there is rules, the IP is not allowed and it's not in the whitelisted IP
     if ( sizeof($aga)>1 && !$allowed_ip && !$authip->is_wl(getenv("REMOTE_ADDR")) ) {
-      $err->raise("mem",42); // FIXME have a real error code -- Votre ip est pas authorisée
+      $err->raise("mem",_("Your IP isn't allowed to connect"));
       return false;
     }
     // End AuthIP
@@ -148,7 +148,7 @@ class m_mem {
     $err->log("mem","setid",$id);
     $db->query("select * from membres where uid='$id';");
     if ($db->num_rows()==0) {
-      $err->raise("mem",1);
+      $err->raise("mem",_("User or password incorrect"));
       return false;
     }
     $db->next_record();
@@ -224,19 +224,19 @@ class m_mem {
     } // end isset
     $_COOKIE["session"]=isset($_COOKIE["session"])?addslashes($_COOKIE["session"]):"";
     if (strlen($_COOKIE["session"])!=32) {
-      $err->raise("mem",3);
+      $err->raise("mem",_("Cookie incorrect, please accept the session cookie"));
       return false;
     }
     $ip=getenv("REMOTE_ADDR");
     $db->query("select uid,'$ip' as me,ip from sessions where sid='".$_COOKIE["session"]."'");
     if ($db->num_rows()==0) {
-      $err->raise("mem",4);
+      $err->raise("mem",_("Session unknown, contact the administrator"));
       return false;
     }
     $db->next_record();
     if ($db->f("ip")) {
       if ($db->f("me")!=$db->f("ip")) {
-	      $err->raise("mem",5);
+	      $err->raise("mem",_("IP address incorrect, please contact the administrator"));
 	      return false;
       }
     }
@@ -265,7 +265,7 @@ class m_mem {
 	    $this->olduid=$cuid;
     $db->query("select * from membres where uid='$uid';");
     if ($db->num_rows()==0) {
-      $err->raise("mem",1);
+      $err->raise("mem",_("User or password incorrect"));
       return false;
     }
     $db->next_record();
@@ -303,18 +303,18 @@ class m_mem {
       return true;
     }
     if (strlen($_COOKIE["session"])!=32) {
-      $err->raise("mem",3);
+      $err->raise("mem",_("Cookie incorrect, please accept the session cookie"));
       return false;
     }
     $ip=getenv("REMOTE_ADDR");
     $db->query("select uid,'$ip' as me,ip from sessions where sid='".$_COOKIE["session"]."'");
     if ($db->num_rows()==0) {
-      $err->raise("mem",4);
+      $err->raise("mem",_("Session unknown, contact the administrator"));
       return false;
     }
     $db->next_record();
     if ($db->f("me")!=$db->f("ip")) {
-      $err->raise("mem",5);
+      $err->raise("mem",_("IP address incorrect, please contact the administrator"));
       return false;
     }
     $cuid=$db->f("uid");
@@ -345,19 +345,15 @@ class m_mem {
     $newpass=stripslashes($newpass);
     $newpass2=stripslashes($newpass2);
     if (!$this->user["canpass"]) {
-      $err->raise("mem",11);
+      $err->raise("mem",("You are not allowed to change your password."));
       return false;
     }
     if ($this->user["pass"]!=_md5cr($oldpass,$this->user["pass"])) {
-      $err->raise("mem",6);
+      $err->raise("mem",_("The old password is incorrect"));
       return false;
     }
     if ($newpass!=$newpass2) {
-      $err->raise("mem",7);
-      return false;
-    }
-    if (strlen($newpass)<3) {
-      $err->raise("mem",8);
+      $err->raise("mem",_("The new passwords are differents, please retry."));
       return false;
     }
     $db->query("SELECT login FROM membres WHERE uid='$cuid';");   
@@ -381,7 +377,7 @@ class m_mem {
     global $db,$err,$cuid;
     $err->log("mem","admlist");
     if (!$this->user["su"]) {
-      $err->raise("mem",12);
+      $err->raise("mem",("You must be a system administrator to do this."));
       return false;
     }
     $db->query("UPDATE membres SET admlist='$admlist' WHERE uid='$cuid';");
@@ -401,12 +397,12 @@ class m_mem {
     $err->log("mem","send_pass");
     $db->query("SELECT * FROM membres WHERE login='$login';");
     if (!$db->num_rows()) {
-      $err->raise("mem",2);
+      $err->raise("mem",("This account is locked, contact the administrator."));
       return false;
     }
     $db->next_record();
     if (time()-$db->f("lastaskpass")<86400) {
-      $err->raise("mem",7);
+      $err->raise("mem",_("The new passwords are differents, please retry"));
       return false;
     }
     $txt="Bonjour,
@@ -446,7 +442,7 @@ Cordialement.
     $err->log("mem","changemail1",$newmail);
     $db->query("SELECT * FROM membres WHERE uid='$cuid';");
     if (!$db->num_rows()) {
-      $err->raise("mem",2);
+      $err->raise("mem",_("This account is locked, contact the administrator"));
       return false;
     }
     $db->next_record();
@@ -496,7 +492,7 @@ Cordialement.
       $err->log("mem","changemail2",$uid);
       $db->query("SELECT * FROM chgmail WHERE cookie='$COOKIE' and ckey='$KEY' and uid='$uid';");
       if (!$db->num_rows()) {
-	$err->raise("mem",9);
+	$err->raise("mem",_("The information you entered is incorrect."));
 	return false;
       }
       $db->next_record();

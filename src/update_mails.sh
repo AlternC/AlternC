@@ -14,7 +14,7 @@ for CONFIG_FILE in \
     . "$CONFIG_FILE"
 done
 
-LOCK_FILE="/var/run/alternc/mail_deletion"
+LOCK_FILE="/var/run/alternc/update_mails"
 
 #FIXME: this var should be define by local.sh
 ALTERNC_MAIL_LOC="/var/alternc/mail"

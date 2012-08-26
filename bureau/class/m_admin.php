@@ -25,13 +25,7 @@
 
 /* ----------------------------------------------------------------- */
 /**
-* Classe de gestion de l'administration du serveur par les super-admin.
-*
-* Cette classe permet de créer / modifier / détruire les comptes, ainsi que de
-* modifier les paramètres du serveur.<br />
-* Copyleft {@link http://alternc.net/ AlternC Team}
-*
-*
+* Manage the AlternC's account administration (create/edit/delete)
 */
 class m_admin {
 
@@ -51,7 +45,7 @@ class m_admin {
 
 
   /* ----------------------------------------------------------------- */
-  /** Constructeur
+  /** Constructor
    */
   function m_admin() {
     global $db,$cuid;
@@ -80,19 +74,12 @@ class m_admin {
    * @return an associative array containing all the fields of the
    * table <code>membres</code> and <code>local</code> of the corresponding account.
    * Returns FALSE if an error occurs.
-   *
-   * Retourne tout ce que l'on sait sur un membre (contenu des tables <code>membres et local</code>) 
-   * vérifie que le compte appelant est super-admin
-   * @param integer $uid Numéro de l'utilisateur dont on veut les informations.
-   * @return array Retourne un tableau associatif contenant l'ensemble des champs des tables 'membres'
-   *  et 'local' pour le membre demandé. Retourne FALSE si une erreur s'est produite.
-   * 
    */
   function get($uid) {
     global $err,$db;
     //    $err->log("admin","get",$uid);
     if (!$this->enabled) {
-      $err->raise("admin",1);
+      $err->raise("admin",_("-- Only administrators can access this page! --"));
       return false;
     }
     $db->query("SELECT m.*, parent.login as parentlogin FROM membres as m LEFT JOIN membres as parent ON (parent.uid = m.creator) WHERE m.uid='$uid';");
@@ -100,7 +87,7 @@ class m_admin {
       $db->next_record();
       $c=$db->Record;
     } else {
-      $err->raise("admin",2);
+      $err->raise("admin",_("Account not found"));
       return false;
     }
     $db->query("SELECT * FROM local WHERE uid='$uid';");
@@ -123,7 +110,7 @@ class m_admin {
     global $err,$db;
     //    $err->log("admin","get",$uid);
     if (!$this->enabled) {
-      $err->raise("admin",1);
+      $err->raise("admin",_("-- Only administrators can access this page! --"));
       return false;
     }
 
@@ -133,7 +120,7 @@ class m_admin {
       $db->next_record();
       $c=$db->Record;
     } else {
-      $err->raise("admin",2);
+      $err->raise("admin",_("Account not found"));
       return false;
     }
 
@@ -161,7 +148,8 @@ class m_admin {
 
   /* ----------------------------------------------------------------- */
   /** @return TRUE if there's only ONE admin account
-   * Retourne true s'il n'existe qu'un seul compte administrateur
+   * @return boolean TRUE if there is only one admin account
+   * (allow the program to prevent the destruction of the last admin account)
    */
   function onesu() {
     global $db;
@@ -186,7 +174,7 @@ class m_admin {
     global $err,$mem,$cuid;
     $err->log("admin","get_list");
     if (!$this->enabled) {
-      $err->raise("admin",1);
+      $err->raise("admin",_("-- Only administrators can access this page! --"));
       return false;
     }
     $db=new DB_System();
@@ -220,7 +208,7 @@ class m_admin {
     global $err,$mem,$cuid,$db;
     $err->log("admin","mailallmembers");
     if (!$this->enabled) {
-      $err->raise("admin",1);
+      $err->raise("admin",_("-- Only administrators can access this page! --"));
       return false;
     }
     $subject=trim($subject);
@@ -228,12 +216,12 @@ class m_admin {
     $from=trim($from);
 
     if (empty($subject) || empty($message) || empty($from) ){
-      $err->raise("admin",16);
+      $err->raise("admin",_("The password is too long according to the password policy"));
       return false;
     }
 
     if (checkmail($from) != 0) {
-      $err->raise("admin",17);
+      $err->raise("admin",_("The password policy prevents you to use your login name inside your password"));
       return false;
     }
 
@@ -260,14 +248,9 @@ class m_admin {
     $creators = array();
 
     $err->log("admin","get_reseller_list");
-    if (!$this->enabled) {
-      $err->raise("admin",1);
+    if (!$this->enabled || $cuid!=2000) {
+      $err->raise("admin",_("-- Only administrators can access this page! --"));
       return false;
-    }
-
-    if ($cuid != 2000) {
-      $err->raise("admin",1);
-      return $creators;
     }
 
     $db=new DB_System();
@@ -279,6 +262,7 @@ class m_admin {
     }
     return $creators;
   }
+
 
   /* ----------------------------------------------------------------- */
   /** Check if I am the creator of the member $uid
@@ -293,7 +277,7 @@ class m_admin {
     $db->query("SELECT creator FROM membres WHERE uid='$uid';");
     $db->next_record();
     if ($db->Record["creator"]!=$cuid) {
-      $err->raise("admin",1);
+      $err->raise("admin",_("-- Only administrators can access this page! --"));
       return false;
     }
     return true;
@@ -320,41 +304,40 @@ class m_admin {
     global $err,$quota,$classes,$cuid,$mem,$L_MYSQL_DATABASE,$L_MYSQL_LOGIN,$hooks;
     $err->log("admin","add_mem",$login."/".$mail);
     if (!$this->enabled) {
-      $err->raise("admin",1);
+      $err->raise("admin",_("-- Only administrators can access this page! --"));
       return false;
     }
     if (($login=="")||($pass=="")) {
-      $err->raise("admin",6);
+      $err->raise("admin",_("All fields are mandatory"));
       return false;
     }
     if (!$force) {
       if ($mail=="") {
-	      $err->raise("admin",6);
+	$err->raise("admin",_("All fields are mandatory"));
 	      return false;
       }
       if (checkmail($mail)!=0){
-	      $err->raise("admin",5);
+	$err->raise("admin",_("Please enter a valid email address"));
 	      return false;
       }
     }
-    // Vérification de la conformité du login
     $login=strtolower($login);
     if (!preg_match("#^[a-z0-9]*$#",$login)) { //$
-      $err->raise("admin", "Login can only contains characters a-z and 0-9");
+      $err->raise("admin", _("Login can only contains characters a-z and 0-9"));
       return false;
     }
     if (strlen($login) > 16) {
-      $err->raise("admin",13);
+      $err->raise("admin",_("The login is too long (16 chars max)"));
       return false;
     }
-    // Il ne peut pas être égal au login ou au nom de base systeme ! 
+    // Some login are not allowed...
     if ($login==$L_MYSQL_DATABASE || $login==$L_MYSQL_LOGIN || $login=="mysql" || $login=="root") {
-      $err->raise("admin",10);
+      $err->raise("admin",_("Login can only contains characters a-z, 0-9 and -"));
       return false;
     }
     $pass=_md5cr($pass);
     $db=new DB_System();
-    // vérification de l'inexistence du membre dans system.membres
+    // Already exist?
     $db->query("SELECT count(*) AS cnt FROM membres WHERE login='$login';");
     $db->next_record();
     if (!$db->f("cnt")) {
@@ -365,12 +348,11 @@ class m_admin {
 	      $uid=$db->Record["nextid"];
 	      if ($uid<=2000) $uid=2000;
       }
-      // on le créé ensuite dans system.membres et system.local
       $db->query("INSERT INTO membres (uid,login,pass,mail,creator,canpass,type,created, notes) VALUES ('$uid','$login','$pass','$mail','$cuid','$canpass', '$type', NOW(), '$notes');");
       $db->query("INSERT INTO local(uid,nom,prenom) VALUES('$uid','$nom','$prenom');");
       $this->renew_update($uid, $duration);
       exec("/usr/lib/alternc/mem_add ".$login." ".$uid);
-      // Declenchons les autres classes.
+      // Triggering hooks
       $mem->su($uid);
       // TODO: old hook method FIXME: when unused remove this
       foreach($classes as $c) {
@@ -378,14 +360,16 @@ class m_admin {
 	        $GLOBALS[$c]->alternc_add_member();
 	      }
       }
+      // New hook way
       $hooks->invoke("hook_admin_add_member");
       $mem->unsu();
       return $uid;
     } else {
-      $err->raise("admin",3);
+      $err->raise("admin",_("This login already exists"));
       return false;
     }
   }
+
 
   /* ----------------------------------------------------------------- */
   /** AlternC's standard function called when a user is created
@@ -463,7 +447,7 @@ EOF;
 
     $err->log("admin","update_mem",$uid);
     if (!$this->enabled) {
-      $err->raise("admin",1);
+      $err->raise("admin",_("-- Only administrators can access this page! --"));
       return false;
     }
     $db=new DB_System();
@@ -481,7 +465,7 @@ EOF;
       return true;
     }
     else {
-      $err->raise("admin",2);
+      $err->raise("admin",_("Account not found"));
       return false;
     }
   }
@@ -489,9 +473,7 @@ EOF;
 
   /* ----------------------------------------------------------------- */
   /** Lock an account
-   *
    * Lock an account and prevent the user to access its account.
-   *
    * @param $uid integer the uid number of the account we want to lock
    * @return boolean Returns FALSE if an error occurs, TRUE if not.
    */
@@ -499,7 +481,7 @@ EOF;
     global $err,$db;
     $err->log("admin","lock_mem",$uid);
     if (!$this->enabled) {
-      $err->raise("admin",1);
+      $err->raise("admin",_("-- Only administrators can access this page! --"));
       return false;
     }
     $db=new DB_System();
@@ -507,7 +489,7 @@ EOF;
       return true;
     }
     else {
-      $err->raise("admin",2);
+      $err->raise("admin",_("Account not found"));
       return false;
     }
   }
@@ -515,9 +497,7 @@ EOF;
 
   /* ----------------------------------------------------------------- */
   /** UnLock an account
-   *
    * UnLock an account and prevent the user to access its account.
-   *
    * @param $uid integer the uid number of the account we want to unlock
    * @return boolean Returns FALSE if an error occurs, TRUE if not.
    */
@@ -525,7 +505,7 @@ EOF;
     global $err,$db;
     $err->log("admin","unlock_mem",$uid);
     if (!$this->enabled) {
-      $err->raise("admin",1);
+      $err->raise("admin",_("-- Only administrators can access this page! --"));
       return false;
     }
     $db=new DB_System();
@@ -533,7 +513,7 @@ EOF;
       return true;
     }
     else {
-      $err->raise("admin",2);
+      $err->raise("admin",_("Account not found"));
       return false;
     }
   }
@@ -541,10 +521,8 @@ EOF;
 
   /* ----------------------------------------------------------------- */
   /** Deletes an account
-   *
    * Deletes the specified account. Prevents any manipulation of the account if
    * the account $mid is not super-admin.
-   *
    * @param $uid integer the uid number of the account we want to delete
    * @return boolean Returns FALSE if an error occurs, TRUE if not.
    */
@@ -553,7 +531,7 @@ EOF;
     $err->log("admin","del_mem",$uid);
 
     if (!$this->enabled) {
-      $err->raise("admin",1);
+      $err->raise("admin",_("-- Only administrators can access this page! --"));
       return false;
     }
     $db=new DB_System();
@@ -581,7 +559,7 @@ EOF;
       $db->query("UPDATE membres SET creator=2000 WHERE creator='$uid';");
       return true;
     } else {
-      $err->raise("admin",2);
+      $err->raise("admin",_("Account not found"));
       $mem->unsu();
       return false;
     }
@@ -590,7 +568,6 @@ EOF;
 
   /* ----------------------------------------------------------------- */
   /** Renew an account
-   *
    * Renew an account for its duration
    * @param $uid integer the uid number of the account we want to renew
    * @param $periods integer the number of periods we renew for
@@ -607,7 +584,7 @@ EOF;
     if ($db->query($query)) {
       return true;
     } else {
-      $err->raise("admin",2);
+      $err->raise("admin",_("Account not found"));
       return false;
     }
   }
@@ -631,14 +608,13 @@ EOF;
 	return true;
     }
 
-    $err->raise("admin",2);
+    $err->raise("admin",_("Account not found"));
     return false;
   }
 
 
   /* ----------------------------------------------------------------- */
   /** Get the expiry date for an account
-   *
    * @param $uid integer The uid number of the account
    * @return string The expiry date, a string as printed by MySQL
    */
@@ -656,7 +632,6 @@ EOF;
 
   /* ----------------------------------------------------------------- */
   /** Get the expiry status for an account
-   *
    * @param $uid integer The uid number of the account
    * @return integer The expiry status:
    *  0: account does not expire
@@ -716,11 +691,11 @@ EOF;
     global $err,$db;
     $db->query("SELECT su FROM membres WHERE uid='$uid';");
     if (!$db->next_record()) {
-      $err->raise("admin",2);
+      $err->raise("admin",_("Account not found"));
       return false;
     } 
     if ($db->Record["su"]!=0) {
-      $err->raise("admin",8);
+      $err->raise("admin",_("This account is ALREADY an administrator account"));
       return false;
     }
     $db->query("UPDATE membres SET su=1 WHERE uid='$uid';");
@@ -730,7 +705,6 @@ EOF;
 
   /* ----------------------------------------------------------------- */
   /** Turns a super-admin account into a common account
-   *
    * @param $uid integer the uid number of the super-admin account we want to turn into a
    * common account.
    * @return boolean Returns FALSE if an error occurs, TRUE if not.
@@ -739,27 +713,26 @@ EOF;
     global $err,$db;
     $db->query("SELECT su FROM membres WHERE uid='$uid';");
     if (!$db->next_record()) {
-      $err->raise("admin",2);
+      $err->raise("admin",_("Account not found"));
       return false;
     }
     if ($db->Record["su"]!=1) {
-      $err->raise("admin",9);
+      $err->raise("admin",_("This account is NOT an administrator account!"));
       return false;
     }
     $db->query("UPDATE membres SET su=0 WHERE uid='$uid';");
     return true;
   }
 
+
   /* ----------------------------------------------------------------- */
   /** List of the authorized TLDs
-   *
    * Returns the list of the authorized TLDs and also the way they are
    * authorized. A TLD is the last members (or the last two) of a
    * domain. For example, "com", "org" etc... AlternC keeps a table
    * containing the list of the TLDs authorized to be installed on the
    * server with the instructions to validate the installation of a
    * domain for each TLD (if necessary).
-   * 
    * @return array An associative array like $r["tld"], $r["mode"] where tld
    * is the tld and mode is the authorized mode.
    */
@@ -772,10 +745,9 @@ EOF;
     return $c;
   }
 
+
   /* ----------------------------------------------------------------- */
-  /**
-   * List the hosted domains on this server
-   * 
+  /** List the hosted domains on this server
    * Return the list of hosted domains on this server, (an array of associative arrays)
    * @param boolean $alsocheck Returns also errstr and errno telling the domains dig checks
    * @param boolean $forcecheck Force the check of dig domain even if a cache exists.
@@ -886,7 +858,7 @@ EOF;
     global $db,$err;
     $db->query("SELECT compte FROM domaines WHERE domaine='$domain';");
     if (!$db->next_record()) {
-      $err->raise("dom",1);
+      $err->raise("dom",_("Domain '%s' not found."),$domain);
       return false;
     }
     $db->query("UPDATE domaines SET noerase=1-noerase WHERE domaine='$domain';");
@@ -905,7 +877,7 @@ EOF;
     global $db,$err;
     $db->query("SELECT mode FROM tld WHERE tld='$tld';");
     if (!$db->next_record()) {
-      $err->raise("admin",11);
+      $err->raise("admin",_("This TLD does not exist"));
       return false;
     }
     return $db->Record["mode"];
@@ -929,7 +901,6 @@ EOF;
   /** Deletes the specified tld in the list of the authorized TLDs
    * <b>Note</b> : This function does not delete the domains depending
    * on this TLD
-   *
    * @param $tld string The TLD you want to delete
    * @return boolean returns true if the TLD has been deleted, or
    * false if an error occured.
@@ -938,7 +909,7 @@ EOF;
     global $db,$err;
     $db->query("SELECT tld FROM tld WHERE tld='$tld';");
     if (!$db->next_record()) {
-      $err->raise("admin",11);
+      $err->raise("admin",_("This TLD does not exist"));
       return false;
     }
     $db->query("DELETE FROM tld WHERE tld='$tld';");
@@ -948,7 +919,6 @@ EOF;
 
   /* ----------------------------------------------------------------- */
   /** Add a TLD to the list of the authorized TLDs during the installation
-   *
    * @param $tld string TLD we want to authorize
    * @param $mode integer Controls to make on this TLD.
    * <b>Note: </b> If you check in the whois, be sure that
@@ -960,12 +930,12 @@ EOF;
   function addtld($tld,$mode) {
     global $db,$err;
     if (!$tld) {
-      $err->raise("admin",12);
+      $err->raise("admin",_("The TLD name is mandatory"));
       return false;
     }
     $db->query("SELECT tld FROM tld WHERE tld='$tld';");
     if ($db->next_record()) {
-      $err->raise("admin",12);
+      $err->raise("admin",_("This TLD already exist"));
       return false;
     }
     if (substr($tld,0,1)==".") $tld=substr($tld,1);
@@ -987,7 +957,7 @@ EOF;
     global $db,$err;
     $db->query("SELECT tld FROM tld WHERE tld='$tld';");
     if (!$db->next_record()) {
-      $err->raise("admin",11);
+      $err->raise("admin",_("This TLD does not exist"));
       return false;
     }
     $mode=intval($mode);
@@ -998,8 +968,8 @@ EOF;
 
 
   /* ----------------------------------------------------------------- */
-  /** Donne le login du compte administrateur principal d'AlternC
-   * @return string Retourne le login du compte admin ou root.
+  /** Get the login name of the main administrator account
+   * @return string the login name of admin, like 'root' for older alterncs
    */
   function getadmin() {
     global $db;
@@ -1091,7 +1061,7 @@ EOF;
     global $db,$err;
     $pol=$this->listPasswordPolicies();
     if (!$pol[$policy]) {
-      $err->raise("admin",14);
+      $err->raise("admin",_("-- Program error -- The requested password policy does not exist!"));
       return false;
     }
     $pol=$pol[$policy];
@@ -1099,12 +1069,12 @@ EOF;
     $plen=strlen($password);
 
     if ($plen<$pol["minsize"]) {
-      $err->raise("admin",15);
+      $err->raise("admin",_("The password length is too short according to the password policy"));
       return false;
     }
 
     if ($plen>$pol["maxsize"]) {
-      $err->raise("admin",16);
+      $err->raise("admin",_("The password is too long according to the password policy"));
       return false;
     }
 
@@ -1138,13 +1108,13 @@ EOF;
       } // foreach
       $clc=array_sum($cls);
       if ($clc<$pol["classcount"]) {
-	$err->raise("admin",18,$pol["classcount"],$clc);
+	$err->raise("admin",_("Your password contains not enough different classes of character, between low-case, up-case, figures and special characters."));
 	return false;
       }
     }
-
     return true; // congratulations ! 
   }
 
 
 } /* Classe ADMIN */
+

@@ -67,7 +67,7 @@ class m_hta {
     $err->log("hta","createdir",$dir);
     $absolute=$bro->convertabsolute($dir,0);
     if (!$absolute) {
-      $err->raise("hta",8,$dir);
+      $err->raise("hta",printf(_("The folder '%s' does not exist"),$dir));
       return false;
     }
     if (!file_exists($absolute)) {
@@ -75,12 +75,12 @@ class m_hta {
     }
     if (!file_exists("$absolute/.htaccess")) {
       if (!@touch("$absolute/.htaccess")) {
-	$err->raise("hta",12);
+	$err->raise("hta",_("File already exist"));
 	return false;
       }
       $file = @fopen("$absolute/.htaccess","r+");
       if (!$file) {
-	$err->raise("hta",12);
+	$err->raise("hta",_("File already exist"));
         return false;
       }
       fseek($file,0);
@@ -90,7 +90,7 @@ class m_hta {
     }
     if (!file_exists("$absolute/.htpasswd")) {
       if (!touch("$absolute/.htpasswd")) {
-	$err->raise("hta",12);
+	$err->raise("hta",_("File already exist"));
         return false;
       }
       return true;
@@ -112,7 +112,7 @@ class m_hta {
 	  $absolute="$L_ALTERNC_LOC/html/".substr($mem->user["login"],0,1)."/".$mem->user["login"];
 	  exec("find $absolute -name .htpasswd|sort",$sortie);
 	  if(!count($sortie)){
-		  $err->raise("hta",4);
+		  $err->raise("hta",_("No protected folder"));
 		  return false;
 	  }
 	  $pattern="/^".preg_quote($L_ALTERNC_LOC,"/")."\/html\/.\/[^\/]*\/(.*)\/\.htpasswd/";
@@ -189,15 +189,15 @@ class m_hta {
     $err->log("hta","deldir",$dir);
     $dir=$bro->convertabsolute($dir,0);
     if (!$dir) {
-      $err->raise("hta",8,$dir);
+      $err->raise("hta",printf(("The folder '%s' does not exist"),$dir));
       return false;
     }
     if (!@unlink("$dir/.htaccess")) {
-      $err->raise("hta",5,$dir);
+      $err->raise("hta",printf(_("I cannot delete the file '%s'/.htaccess"),$dir));
       return false;
     }
     if (!@unlink("$dir/.htpasswd")) {
-      $err->raise("hta",6,$dir);
+      $err->raise("hta",printf(_("I cannot delete the file '%s'/.htpasswd"),$dir));
       return false;
     }
     return true;
@@ -217,7 +217,7 @@ class m_hta {
     $err->log("hta","add_user",$user."/".$dir);
     $absolute=$bro->convertabsolute($dir,0);
     if (!file_exists($absolute)) {
-      $err->raise("hta",8,$dir);
+      $err->raise("hta",printf(("The folder '%s' does not exist"),$dir));
       return false;
     }
     if (checkloginmail($user)){
@@ -230,7 +230,7 @@ class m_hta {
 
       $file = @fopen("$absolute/.htpasswd","a+");
       if (!$file) {
-	$err->raise("hta",12);
+	$err->raise("hta",_("File already exist"));
 	return false;
       }
       fseek($file,0);
@@ -238,7 +238,7 @@ class m_hta {
 	$s=fgets($file,1024);
 	$t=explode(":",$s);
 	if ($t[0]==$user) {
-	  $err->raise("hta",10,$user);
+	  $err->raise("hta",printf(_("The user '%s' already exist for this folder"),$user));
 	  return false;
 	}
       }
@@ -250,7 +250,7 @@ class m_hta {
       fclose($file);
       return true;
     } else {
-      $err->raise("hta",11);
+      $err->raise("hta",_("Please enter a valid username"));
       return false;
     }
   }
@@ -268,14 +268,14 @@ class m_hta {
     $err->log("hta","del_user",$lst."/".$dir);
     $absolute=$bro->convertabsolute($dir,0);
     if (!file_exists($absolute)) {
-      $err->raise("hta",8,$dir);
+      $err->raise("hta",printf(_("The folder '%s' does not exist"),$dir));
       return false;
     }
     touch("$absolute/.htpasswd.new");
     $file = fopen("$absolute/.htpasswd","r");
     $newf = fopen("$absolute/.htpasswd.new","a");
     if (!$file || !$newf) {
-      $err->raise("hta",12);
+      $err->raise("hta",_("File already exist"));
       return false;
     }
     reset($lst);
@@ -309,7 +309,7 @@ class m_hta {
     $err->log("hta","change_pass",$user."/".$dir);
     $absolute=$bro->convertabsolute($dir,0);
     if (!file_exists($absolute)) {
-      $err->raise("hta",8,$dir);
+      $err->raise("hta",printf(_("The folder '%s' does not exist"),$dir));
       return false;
     }
 
@@ -324,7 +324,7 @@ class m_hta {
     $file = fopen("$absolute/.htpasswd","r");
     $newf = fopen("$absolute/.htpasswd.new","a");
     if (!$file || !$newf) {
-      $err->raise("hta",12);
+      $err->raise("hta",_("File already exist"));
       return false;
     }
     while (!feof($file)) {
@@ -379,7 +379,7 @@ class m_hta {
     } // Reading config file
     fclose($file);
     if ($errr ||  in_array(0,$lignes)) {
-      $err->raise("hta",1);
+      $err->raise("hta",_("An incompatible .htaccess file exists in this folder."));
       return false;
     }
     return true;
