@@ -91,23 +91,18 @@ class m_quota {
 	}
       }
     }
+    // New Hook
     $qname=$hooks->invoke("hook_quota_names"); // return strings or arrays
     foreach($qname as $res) 
-      if ($res) {
-	if (is_array($res)) {
-	  foreach($res as $k) {
-	    $qlist[$k]=_("quota_".$k);
-	    $this->clquota[$k]=$c;
-	  }
-	} else {
-	  $qlist[$res]=_("quota_".$res);
-	  $this->clquota[$res]=$c;
-	  
+      if ($res && is_array($res)) {
+	foreach($res as $k=>$v) {
+	  $qlist[$k]=$v;
+	  $this->clquota[$k]=$k;
 	}
       }
     return $qlist;
   }
-
+  
 
   /* ----------------------------------------------------------------- */
   /** Return a ressource usage (u) and total quota (t)
@@ -140,11 +135,12 @@ class m_quota {
 		     );
 	  }
 	}
+	// New Hook : 
 	foreach ($ttmp as $tt) {
-	  $res=$hooks->invoke("",$tt["name"]);
+	  $res=$hooks->invoke("hook_quota_get",array($tt["name"]));
 	  foreach($res as $r) {
-	    if ($r) {
-	      $this->quotas[$tt["name"]]=array("t"=>$tt["total"],"u");
+	    if ($r!==false) {
+	      $this->quotas[$tt["name"]]=array("t"=>$tt["total"],"u"=>$r);
 	    }
 	  }
 	}
