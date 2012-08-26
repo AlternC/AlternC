@@ -365,27 +365,27 @@ class m_quota {
 
   /* sum of mailbox sizes from all domains */
   function get_size_mail_sum_all() {
-    return $this->_get_sum_sql("SELECT SUM(size) AS sum FROM size_mail;");
+    return $this->_get_sum_sql("SELECT SUM(bytes) AS sum FROM mailbox;");
   }
 
   /* sum of mailbox sizes for one domain */
   function get_size_mail_sum_domain($dom) {
-    return $this->_get_sum_sql("SELECT SUM(size) AS sum FROM size_mail WHERE alias LIKE '%\_{$dom}'");
+    return $this->_get_sum_sql("SELECT SUM(size) AS sum FROM dovecot_view WHERE user LIKE '%@{$dom}'"); 
   }
 
   /* count of mailbox sizes from all domains */
   function get_size_mail_count_all() {
-    return $this->_get_count_sql("SELECT COUNT(*) AS count FROM size_mail;");
+    return $this->_get_count_sql("SELECT COUNT(*) AS count FROM mailbox;");
   }
 
   /* count of mailbox for one domain */
   function get_size_mail_count_domain($dom) {
-    return $this->_get_count_sql("SELECT COUNT(*) AS count FROM size_mail FROM size_mail WHERE alias LIKE '%\_{$dom}'");
+    return $this->_get_count_sql("SELECT COUNT(*) AS count FROM dovecot_view WHERE user LIKE '%@{$dom}'");
   }
 
   /* get list of mailbox alias and size for one domain */
   function get_size_mail_details_domain($dom) {
-    return $this->_get_size_and_record_sql("SELECT alias,size FROM size_mail WHERE alias LIKE '%\_{$dom}' ORDER BY alias;");
+    return $this->_get_size_and_record_sql("SELECT user as alias,quota_dovecot as size FROM dovecot_view WHERE alias LIKE '%@{$dom}' ORDER BY alias;");
   }
 
 
