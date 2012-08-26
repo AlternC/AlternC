@@ -126,7 +126,7 @@ class m_quota {
 	}             
 	foreach($this->clquota as $k=>$v) {
 	  if (!isset($ttmp[$k])) {
-	    $ttmp[$k]=array("name" => $k, "t" => 0, "u" => 0);
+	    $ttmp[$k]=array("name" => $k, "total" => 0);
 	  }
 	}
 	// TODO: old hook method FIXME: remove when unused
