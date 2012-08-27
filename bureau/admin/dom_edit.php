@@ -45,6 +45,7 @@ $dom->unlock();
 ?>
 <script type="text/javascript">
 function dnson() {
+  alert('This function seems unused. If you see this message, please let us know.');
 	// Active les composants DNS :
 	if (document.forms["fdns"].mx.disabled!=null)
 		document.forms["fdns"].mx.disabled=false;
@@ -54,6 +55,7 @@ function dnson() {
 		document.forms["fdns"].emailoff.disabled=true;
 }
 function dnsoff() {
+  alert('This function seems unused. If you see this message, please let us know.');
 	// Active les composants DNS :
 	if (document.forms["fdns"].mx.disabled!=null)
 		document.forms["fdns"].mx.disabled=true;
