@@ -439,7 +439,7 @@ run-parts --arg=before-reload /usr/lib/alternc/install.d
 #######################################################################
 # Reload services
 #
-for service in postfix bind9 dovecot cron proftpd; do
+for service in postfix bind9 apache2 dovecot cron proftpd; do
     invoke-rc.d $service force-reload || true
 done
 
