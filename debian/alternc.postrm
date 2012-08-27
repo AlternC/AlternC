@@ -64,6 +64,11 @@ case "$1" in
     # With the oldest tar found
     BACKUP=$(ls /var/backups/alternc/etc-original*.tar.gz | head -n 1)
     tar -C / -xf "$BACKUP" 2>/dev/null || true
+    
+    # Reload services which use these files
+    for service in bind9 postfix proftpd dovecot apache2; do
+	invoke-rc.d $service force-reload || true
+    done
 
     ;;
   remove|upgrade|failed-upgrade|abort-install|abort-upgrade)
