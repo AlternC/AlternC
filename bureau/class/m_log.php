@@ -73,6 +73,7 @@ class m_log {
   function get_logs_directory(){
     global $cuid,$mem,$err;
     $err->log("log","get_logs_directory");
+    // Return an array to allow multiple directory in the future
     $c=array("dir"=>ALTERNC_LOGS."/".$cuid."-".$mem->user["login"]);
     return $c;
   }
@@ -80,7 +81,7 @@ class m_log {
   function download_link($file){
     global $err,$mem;
     $err->log("log","download_link");
-    header("Content-Disposition: attachment; filename=$file"); 
+    header("Content-Disposition: attachment; filename=".$file); 
     header("Content-Type: application/force-download");
     header("Content-Transfer-Encoding: binary");
     $f=$this->get_logs_directory();
