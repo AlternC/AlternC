@@ -81,15 +81,18 @@ class m_quota {
     return $qlist;
   }
   
-
   /* ----------------------------------------------------------------- */
   /** Return a ressource usage (u) and total quota (t)
    * @param string $ressource ressource to get quota of
    * @Return array the quota used and total for this ressource (or for all ressource if unspecified)
    */
-  function getquota($ressource="") {
+  function getquota($ressource="",$recheck=false) {
     global $db,$err,$cuid,$get_quota_cache,$hooks;
     $err->log("quota","getquota",$ressource);
+    if ($recheck) { // rebuilding quota
+      $get_quota_cache=null;
+      $this->quota=array();
+    }
     if (! empty($get_quota_cache[$cuid]) ) {
       // This function is called many time each webpage, so I cache the result
       $this->quotas = $get_quota_cache[$cuid];

@@ -36,6 +36,8 @@ require_once("../class/config.php");
     <div class="menu-title"><img src="images/home.png" alt="<?php  __("Home / Information"); ?>" />&nbsp;<a href="main.php"><?php  __("Home / Information"); ?></a></div>
 </div>
 <?php
+// Force rebuilding quota, in case of add or edit of the quota and cache not up-to-date
+$quota->getquota("",true); // rebuild quota
 
 $MENUPATH=ALTERNC_PANEL."/admin/";
 $file=file("/etc/alternc/menulist.txt", FILE_SKIP_EMPTY_LINES);
