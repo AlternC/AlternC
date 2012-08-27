@@ -52,7 +52,7 @@ $dom->unlock();
 <h3><?php __("Add a domain"); ?></h3>
 <p>
 <?php printf(_("Your new domain %s has been successfully installed"),$newdomain); ?><br /><br />
-<span class="inb"><a href="main.php" target="_top"><?php __("Click here to continue"); ?></a></span><br />
+<span class="inb"><a href="dom_edit.php?domain=<?php echo urlencode($newdomain);?>" ><?php __("Click here to continue"); ?></a></span><br />
 <?php $mem->show_help("add_domain"); ?>
 <br />
 <?php

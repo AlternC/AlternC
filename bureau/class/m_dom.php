@@ -257,6 +257,10 @@ class m_dom {
     return true;
   }
 
+  function domshort($dom, $sub="") {
+    return str_replace("-","",str_replace(".","",empty($sub)?"":"$sub.").$dom );
+  }
+
   /* ----------------------------------------------------------------- */
   /**
    *  Installe un domaine sur le compte courant.
@@ -364,33 +368,10 @@ class m_dom {
         $isslave=false;
       }
       // Point to the master domain : 
-      $this->set_sub_domain($domain, '',     $this->type_url, 'http://www.'.$slavedom);
-      $this->set_sub_domain($domain, 'www',  $this->type_url, 'http://www.'.$slavedom);
-      $this->set_sub_domain($domain, 'mail', $this->type_url, 'http://mail.'.$slavedom);      
+      $this->create_default_subdomains($domain, $slavedom);
     }
     if (!$isslave) {
-      // Creation du repertoire dans www
-      $dest_root = $bro->get_userid_root($cuid);
-      $domshort=str_replace("-","",str_replace(".","",$domain));
-      
-      if (! is_dir($dest_root . "/". $domshort)) {
-	if(!mkdir($dest_root . "/". $domshort)){
-	  $err->raise("dom",_("I can't write to the destination folder"));
-	  return false;
-	}
-      }
-      
-      if (! is_dir($dest_root . "/tmp")) {
-	if(!mkdir($dest_root . "/tmp")){
-	  $err->raise("dom",_("I can't write to the destination folder"));
-	  return false;
-	}
-      }
-
-      // Creation des 3 sous-domaines par défaut : Vide, www et mail
-      $this->set_sub_domain($domain, '',     $this->type_url,     'http://www.'.$domain);
-      $this->set_sub_domain($domain, 'www',  $this->type_local,   '/'. $domshort);
-      $this->set_sub_domain($domain, 'mail', $this->type_webmail, '');
+      $this->create_default_subdomains($domain);
     }
 
     // TODO: Old hooks, FIXME: when unused remove them
@@ -408,6 +389,32 @@ class m_dom {
     return true;
   }
 
+  function create_default_subdomains($domain,$target_domain=""){
+    global $db;
+    $query="SELECT sub, domain_type, domain_type_parameter FROM default_subdomains WHERE concerned = 'SLAVE' or concerned = 'BOTH' and enabled=1;";
+    if(empty($target_domain)) {
+      $query="SELECT sub, domain_type, domain_type_parameter FROM default_subdomains WHERE concerned = 'MAIN' or concerned = 'BOTH' and enabled=1;";
+    }
+    $domaindir=$this->domdefaultdir($domain);
+    $db->query($query);
+    $jj=array();
+    while ($db->next_record()) {
+      $jj[]=Array("domain_type_parameter"=>$db->f('domain_type_parameter'),"sub"=>$db->f('sub'), "domain_type"=>$db->f('domain_type'));
+    }
+    $src_var=array("%%SUB%%","%%DOMAIN%%","%%DOMAINDIR%%", "%%TARGETDOM%%");
+    foreach($jj as $j){
+      $trg_var=array($j['sub'],$domain,$domaindir,$target_domain);
+      $domain_type_parameter=str_ireplace($src_var,$trg_var,$j['domain_type_parameter']);
+      $this->set_sub_domain($domain, $j['sub'], strtolower($j['domain_type']), $domain_type_parameter);
+    }
+  }
+
+  function domdefaultdir($domain) {
+    global $bro,$cuid;
+    $dest_root = $bro->get_userid_root($cuid);
+    #  return $dest_root."/www/".$this->domshort($domain);
+    return "/www/".$this->domshort($domain);
+  }
 
   /* ----------------------------------------------------------------- */
   /**
@@ -736,7 +743,7 @@ class m_dom {
         }
         if (!checkuserpath($value)) {
           $err->raise("dom",_("The folder you entered is incorrect or does not exist."));
-        return false;
+          return false;
         }
         return true;
         break;
@@ -807,7 +814,7 @@ class m_dom {
    * @return boolean Retourne FALSE si une erreur s'est produite, TRUE sinon.
    */
   function set_sub_domain($dom,$sub,$type,$dest, $type_old=null,$sub_old=null,$value_old=null) {
-    global $db,$err,$cuid;
+    global $db,$err,$cuid,$bro;
     $err->log("dom","set_sub_domain",$dom."/".$sub."/".$type."/".$dest);
     // Locked ?
     if (!$this->islocked) {
@@ -851,6 +858,29 @@ class m_dom {
     if (! $db->query("insert into sub_domaines (compte,domaine,sub,valeur,type,web_action) values ('$cuid','$dom','$sub','$dest','$type','UPDATE');") ) {
       echo "query failed: ".$db->Error;
       return false;
+    }
+
+    // Create TMP dir and TARGET dir if needed by the domains_type
+    $dest_root = $bro->get_userid_root($cuid);
+    $domshort=$this->domshort($dom,$sub);
+    $db->query("select create_tmpdir, create_targetdir from domaines_type where name = '$type';");
+    $db->next_record();
+    if ($db->f('create_tmpdir')) {
+      if (! is_dir($dest_root . "/tmp")) {
+	if(!mkdir($dest_root . "/tmp")){
+printvar("je viens de tenter de mkdir ++$dest_root/tmp++"); // FIXME Bullshit. Safemode à la con ?
+	  $err->raise("dom",_("I can't write to the destination folder"));
+	}
+      }
+    }
+    if ($db->f('create_targetdir')) {
+      $dirr=$dest_root.$dest;
+      if (! is_dir($dirr)) {
+	if(!mkdir($dirr,null,1)){
+printvar("je viens de tenter de mkdir ++$dirr++"); // FIXME Bullshit. Safemode à la con ?
+	  $err->raise("dom",_("I can't write to the destination folder"));
+        }
+      }
     }
 
     // Tell to update the DNS file

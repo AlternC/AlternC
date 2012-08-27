@@ -229,3 +229,29 @@ DROP TABLE size_mail;
 -- now that we have separate packages for the webmails, we can't serve webmail domainetype anymore
 DELETE FROM domaines_type WHERE name='webmail';
 UPDATE domaines_type SET compatibility=REPLACE(compatibility,'webmail,','');
+
+-- Edit domains_type
+ALTER TABLE `domaines_type` ADD create_tmpdir BOOLEAN NOT NULL DEFAULT FALSE ;
+ALTER TABLE `domaines_type` ADD create_targetdir BOOLEAN NOT NULL DEFAULT FALSE ;
+UPDATE domaines_type SET create_tmpdir=true, create_targetdir=true WHERE target='DIRECTORY';
+
+-- Defaults subdomains to create when a domain is added
+CREATE TABLE IF NOT EXISTS `default_subdomains` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `sub` varchar(255) NOT NULL,
+  `domain_type` varchar(255) NOT NULL,
+  `domain_type_parameter` varchar(255) NOT NULL,
+  `concerned` enum('BOTH','MAIN','SLAVE') NOT NULL DEFAULT 'MAIN',
+  `enabled` boolean not null default true,
+  PRIMARY KEY  (`id`)
+) COMMENT='Contains the defaults subdomains created on domains creation';
+
+INSERT INTO `default_subdomains` (`sub`, `domain_type`, `domain_type_parameter`, `concerned`) VALUES
+('www', 'VHOST', '%%DOMAINDIR%%', 'MAIN'),
+('mail', 'WEBMAIL', '', 'MAIN'),
+('', 'URL', 'www.%%DOMAIN%%', 'MAIN'),
+('www', 'URL', 'www.%%TARGETDOM%%', 'SLAVE'),
+('mail', 'URL', 'mail.%%TARGETDOM%%', 'SLAVE'),
+('', 'URL', '%%TARGETDOM%%', 'SLAVE');
+
+

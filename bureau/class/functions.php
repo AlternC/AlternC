@@ -187,10 +187,13 @@ function checkuserpath($path) {
   global $mem;
   $user=$mem->user["login"];
   $usar=substr($user,0,1);
-  if (substr($path,0,1)=="/")
+  if (substr($path,0,1)!="/")
     $path="/".$path;
 
   $rpath = realpath(ALTERNC_HTML."/$usar/$user$path");
+  if (!$rpath) { // if file or directory does not exist
+    return 1; // FIXME is it safe to say OK in this case ?
+  }
   $userpath = getuserpath();
   if(strpos($rpath,$userpath) === 0){
     if (is_dir(ALTERNC_HTML."/$usar/$user$path")) {

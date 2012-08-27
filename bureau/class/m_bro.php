@@ -338,7 +338,7 @@ class m_bro {
     $absolute=$this->convertabsolute($dir."/".$file,0);
     #echo "$absolute";
     if ($absolute && (!file_exists($absolute))) {
-      if (!mkdir($absolute,00777)) {
+      if (!mkdir($absolute,00777,true)) {
 	$err->raise("bro",_("Cannot create the requested directory. Please check permissions."));
 	return false;
       }

@@ -489,6 +489,8 @@ CREATE TABLE IF NOT EXISTS `domaines_type` (
     `only_dns` BOOLEAN DEFAULT FALSE, -- Update_domains modify just the dns, no web configuration
     `need_dns` BOOLEAN DEFAULT TRUE, -- The server need to be the DNS to allow this service
     `advanced` BOOLEAN DEFAULT TRUE, -- It's an advanced option
+    create_tmpdir BOOLEAN NOT NULL DEFAULT FALSE, -- do we create tmp dir ?
+    create_targetdir BOOLEAN NOT NULL DEFAULT FALSE, -- do we create target dir ?
 PRIMARY KEY ( `name` )
 ) COMMENT = 'Type of domains allowed';
 
@@ -505,7 +507,7 @@ INSERT IGNORE INTO `domaines_type` (name, description, target, entry, compatibil
 ('defmx2', 'Default backup mail server', 'NONE', '%SUB% IN MX 10 @@DEFAULT_SECONDARY_MX@@.', 'vhost,url,ip,ipv6,cname,txt,defmx',true, false, true, 'ADMIN'),
 ('panel', 'AlternC panel access', 'NONE', '%SUB% IN A @@PUBLIC_IP@@', 'vhost,url,ip,ipv6,cname,txt,mx,mx2,defmx,defmx2',true, false, true, 'ALL')
 ;
-
+UPDATE domaines_type SET create_tmpdir=true, create_targetdir=true WHERE target='DIRECTORY';
 
 -- Add function who are not in mysql 5 to be able ton convert ipv6 to decimal (and reverse it)
 DELIMITER //
@@ -669,5 +671,24 @@ CREATE TABLE IF NOT EXISTS `piwik_sites` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique_site_per_user` (`uid`,`piwik_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- Defaults subdomains to create when a domain is added
+CREATE TABLE IF NOT EXISTS `default_subdomains` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `sub` varchar(255) NOT NULL,
+  `domain_type` varchar(255) NOT NULL,
+  `domain_type_parameter` varchar(255) NOT NULL,
+  `concerned` enum('BOTH','MAIN','SLAVE') NOT NULL DEFAULT 'MAIN',
+  `enabled` boolean not null default true,
+  PRIMARY KEY  (`id`)
+) COMMENT='Contains the defaults subdomains created on domains creation';
+
+INSERT INTO `default_subdomains` (`sub`, `domain_type`, `domain_type_parameter`, `concerned`) VALUES
+('www', 'VHOST', '%%DOMAINDIR%%', 'MAIN'),
+('mail', 'WEBMAIL', '', 'MAIN'),
+('', 'URL', 'www.%%DOMAIN%%', 'MAIN'),
+('www', 'URL', 'www.%%TARGETDOM%%', 'SLAVE'),
+('mail', 'URL', 'mail.%%TARGETDOM%%', 'SLAVE'),
+('', 'URL', '%%TARGETDOM%%', 'SLAVE');
 
 
