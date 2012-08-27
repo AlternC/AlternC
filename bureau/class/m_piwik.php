@@ -280,7 +280,7 @@ class m_piwik {
 
 	// We are supposed to chose what's enabled on our php instance :-)
 	// if (! ini_get('allow_url_fopen')==True) {
-      	//	$err->raise("piwik",2,"PHP var allow_url_fopen is not allowed");
+      	//	$err->raise("piwik",_("Program Error: PHP ini var 'allow_url_fopen' is not allowed"));
 	//}
 	echo $url;
 	$page_content = file_get_contents($url);

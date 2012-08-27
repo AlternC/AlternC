@@ -693,17 +693,17 @@ class m_dom {
     $err->log("dom","get_sub_domain_all",$dom."/".$sub);
     // Locked ?
     if (!$this->islocked) {
-      $err->raise("dom",3);
+      $err->raise("dom",_("--- Program error --- No lock on the domains!"));
       return false;
     }
     $t=checkfqdn($dom);
     if ($t) {
-      $err->raise("dom",3+$t);
+      $err->raise("dom",_("The domain name is syntaxically incorrect"));
       return false;
     }
     $db->query("select sd.*, dt.description as type_desc, dt.only_dns from sub_domaines sd, domaines_type dt where compte='$cuid' and domaine='$dom' and sub='$sub' and ( length('$type')=0 or type='$type') and (length('$value')=0 or '$value'=valeur) and upper(dt.name)=upper(sd.type);");
     if ($db->num_rows()==0) {
-      $err->raise("dom",14);
+      $err->raise("dom",_("The sub-domain does not exist."));
       return false;
     }
     $db->next_record();
@@ -735,7 +735,7 @@ class m_dom {
           $value="/".$value;
         }
         if (!checkuserpath($value)) {
-          $err->raise("dom",21);
+          $err->raise("dom",_("The folder you entered is incorrect or does not exist."));
         return false;
         }
         return true;
@@ -811,7 +811,7 @@ class m_dom {
     $err->log("dom","set_sub_domain",$dom."/".$sub."/".$type."/".$dest);
     // Locked ?
     if (!$this->islocked) {
-      $err->raise("dom",3);
+      $err->raise("dom",_("--- Program error --- No lock on the domains!"));
       return false;
     }
     $dest=trim($dest);
@@ -823,25 +823,23 @@ class m_dom {
     $fqdn=checkfqdn($sub);
     // Special cases : * (all subdomains at once) and '' empty subdomain are allowed.
     if (($sub != '*' && $sub!='') && !($fqdn==0 || $fqdn==4)) {
-      $err->raise("dom",24);
+      $err->raise("dom",_("There is some forbidden characters in the sub domain (only A-Z 0-9 and - are allowed)."));
       return false;
     }
 
     if (! $this->check_type_value($type,$dest)) {
-      // Invalid domain type selected, please check.
-      $err->raise("dom",27);
+      $err->raise("dom",_("Invalid domain type selected, please check."));
       return false;
     }
 
     // On a épuré $dir des problèmes eventuels ... On est en DESSOUS du dossier de l'utilisateur.
     if ($t=checkfqdn($dom)) {
-      $err->raise("dom",3+$t);
+      $err->raise("dom",_("The domain name is syntaxically incorrect"));
       return false;
     }
 
-    if (! $this->can_create_subdomain($dom,$sub,$type,$type_old,$value_old)) {
-      // The parameters for this subdomain and domain type are invalid. Please check for subdomain entries incompatibility
-      $err->raise("dom", 28);
+    if (! $this->can_create_subdomain($dom,$sub,$type,$type_old,$value_old)) { 
+      $err->raise("dom", _("The parameters for this subdomain and domain type are invalid. Please check for subdomain entries incompatibility"));
       return false;
     }
 
@@ -876,20 +874,18 @@ class m_dom {
     $err->log("dom","del_sub_domain",$dom."/".$sub);
     // Locked ?
     if (!$this->islocked) {
-      $err->raise("dom",3);
+      $err->raise("dom",_("--- Program error --- No lock on the domains!"));
       return false;
     }
     $t=checkfqdn($dom);
     if ($t) {
-      $err->raise("dom",3+$t);
+      $err->raise("dom",("The domain name is syntaxically incorrect"));
       return false;
     }
     if (!$r=$this->get_sub_domain_all($dom,$sub,$type)) {
-      // Le sous-domaine n'existe pas, erreur
-      $err->raise("dom",14);
+      $err->raise("dom",_("The sub-domain does not exist."));
       return false;
     } else {
-      // OK, on valide :
       $db->query("update sub_domaines set web_action='DELETE' where domaine='$dom' and sub='$sub' and type='$type' and ( length('$value')=0 or valeur='$value') ");
       $db->query("update domaines set dns_action='UPDATE' where domaine='$dom';");
     }
@@ -915,39 +911,39 @@ class m_dom {
     $err->log("dom","edit_domain",$dom."/".$dns."/".$gesmx);
     // Locked ?
     if (!$this->islocked && !$force) {
-      $err->raise("dom",3);
+      $err->raise("dom",_("--- Program error --- No lock on the domains!"));
       return false;
     }
     if ($dns == 1 && !$force) {
       $this->dns=$this->whois($dom);
       $v=checkhostallow($dom,$this->dns);
       if ($v==-1) {
-        $err->raise("dom",7);   // TLD interdit
+        $err->raise("dom",_("The last member of the domain name is incorrect or cannot be hosted in that server."));
         return false;
       }
       if ($dns && $v==-2) {
-        $err->raise("dom",12);  // Domaine non trouvé dans le whois
+        $err->raise("dom",_("The domain cannot be found in the whois database."));
         return false;
       }
       if ($dns && $v==-3) {
-        $err->raise("dom",23);  // Domaine non trouvé dans le whois
+        $err->raise("dom",_("The DNS of this domain do not match the server's DNS. Please change your domain's DNS (you may need to wait 1 day) before you install it again.")); 
         return false;
       }
     }
     $t=checkfqdn($dom);
     if ($t) {
-      $err->raise("dom",3+$t);
+      $err->raise("dom",_("The domain name is syntaxically incorrect"));
       return false;
     }
     if (!$r=$this->get_domain_all($dom)) {
       // Le domaine n'existe pas, Failure
-      $err->raise("dom",4,$dom);
+      $err->raise("dom",_("The domain name %s does not exist"),$dom);
       return false;
     }
     if ($dns!="1") $dns="0";
     // On vérifie que des modifications ont bien eu lieu :)
     if ($r["dns"]==$dns && $r["mail"]==$gesmx) {
-      $err->raise("dom",15);
+      $err->raise("dom",_("No change has been requested..."));
       return false;
     }
       
@@ -955,14 +951,13 @@ class m_dom {
     if ($dns=="0" && $gesmx=="1" && !$force) {
       $vmx = $this->checkmx($dom,$mx);
       if ($vmx == 1) {
-        // Aucun champ mx de spécifié sur le dns
-	$err->raise("dom",25);
+	$err->raise("dom",_("There is no MX record pointing to this server, and you are asking us to host the mail here. Please fix your MX DNS pointer."));
 	return false;
       }
       
       if ($vmx == 2) {
         // Serveur non spécifié parmi les champx mx
-	$err->raise("dom",25);
+	$err->raise("dom",_("There is no MX record pointing to this server, and you are asking us to host the mail here. Please fix your MX DNS pointer."));
 	return false;
       }
     }
@@ -1015,15 +1010,15 @@ class m_dom {
    */
   function add_slave_ip($ip,$class="32") {
   global $db,$err;
-  if (!checkip($ip)) {
-    $err->raise("dom",19);
+  if (!checkip($ip)) { // FIXME: replace by filter_var (same for checkfqdn ?
+    $err->raise("dom",_("The IP address you entered is incorrect."));
     return false;
   }
   $class=intval($class);
   if ($class<8 || $class>32) $class=32;
   $db->query("SELECT * FROM slaveip WHERE ip='$ip' AND class='$class';");
   if ($db->next_record()) {
-    $err->raise("err",22);
+    $err->raise("err",_("The requested domain is forbidden in this server, please contact the administrator"));
     return false;
   }
   $db->query("INSERT INTO slaveip (ip,class) VALUES ('$ip','$class');");
@@ -1040,7 +1035,7 @@ class m_dom {
   function del_slave_ip($ip) {
   global $db,$err;
   if (!checkip($ip)) {
-    $err->raise("dom",19);
+    $err->raise("dom",_("The IP address you entered is incorrect."));
     return false;
   }
   $db->query("DELETE FROM slaveip WHERE ip='$ip'");
@@ -1179,7 +1174,7 @@ class m_dom {
   global $db,$err;
   $db->query("SELECT * FROM slaveaccount WHERE login='$login'");
   if ($db->next_record()) {
-    $err->raise("err",23);
+    $err->raise("dom",_("The specified slave account already exists"));
     return false;
   }
   $db->query("INSERT INTO slaveaccount (login,pass) VALUES ('$login','$pass')");
@@ -1210,7 +1205,7 @@ class m_dom {
     global $db,$err;
     $err->log("dom","lock");
     if ($this->islocked) {
-      $err->raise("dom",17);
+      $err->raise("dom",_("--- Program error --- Lock already obtained!"));
     }
     while (file_exists($this->fic_lock_cron)) {
       sleep(2);
@@ -1229,7 +1224,7 @@ class m_dom {
     global $db,$err;
     $err->log("dom","unlock");
     if (!$this->islocked) {
-      $err->raise("dom",3);
+      $err->raise("dom",_("--- Program error --- No lock on the domains!"));
     }
     $this->islocked=false;
     return true;

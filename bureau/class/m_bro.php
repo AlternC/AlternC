@@ -1,83 +1,79 @@
 <?php
 /*
- $Id: m_bro.php,v 1.15 2005/12/18 09:51:32 benjamin Exp $
- ----------------------------------------------------------------------
- LICENSE
+  ----------------------------------------------------------------------
+  AlternC - Web Hosting System
+  Copyright (C) 2000-2012 by the AlternC Development Team.
+  https://alternc.org/
+  ----------------------------------------------------------------------
+  LICENSE
 
- This program is free software; you can redistribute it and/or
- modify it under the terms of the GNU General Public License (GPL)
- as published by the Free Software Foundation; either version 2
- of the License, or (at your option) any later version.
+  This program is free software; you can redistribute it and/or
+  modify it under the terms of the GNU General Public License (GPL)
+  as published by the Free Software Foundation; either version 2
+  of the License, or (at your option) any later version.
 
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
 
- To read the license please visit http://www.gnu.org/copyleft/gpl.html
- ----------------------------------------------------------------------
- Original Author of file:
- Purpose of file:
- ----------------------------------------------------------------------
+  To read the license please visit http://www.gnu.org/copyleft/gpl.html
+  ----------------------------------------------------------------------
+  Purpose of file: file browser class.
+  ----------------------------------------------------------------------
 */
 
 /* Add the mime type list */
 @include("mime.php");
 
 /**
-* Classe de gestion du navigateur de fichiers en ligne.
-*
-* Cette classe permet de grer les fichiers, dossiers ...
-* d'un membre hberg.<br />
-* Copyleft {@link http://alternc.net/ AlternC Team}
-*
-* @copyright    AlternC-Team 2002-11-01 http://alternc.net/
-*
-*/
-
-
+ * This class manage the file browser of AlternC
+ * allow the file and directory management in the user account web folder
+ */
 class m_bro {
 
-  /** Mode d'affichage des fichiers en colonne */
-  var $l_mode=array(0=>"1 column, detailed",1=>"2 columns, short",2=>"3 columns, short");
+  /** How we draw the file in column */
+  var $l_mode;
 
-  /** Mode de tlchargement d'un dossier compress (zip,bz,tar,..) */
-  var $l_tgz=array(0=>"tgz (Linux)",1=>"tar.bz2 (Linux)",2=>"zip (Windows/Dos)",3=>"tar.Z (Unix)");
+  /** download mode of a compressed folder */
+  var $l_tgz;
 
-  /** Faut-il afficher ou non les icones ? */
-  var $l_icons=array(0=>"No",1=>"Yes");
+  /** Shall we show icons or just names? */
+  var $l_icons;
 
-  /** Que fait-on aprs la cration d'un fichier ? */
-  var $l_createfile=array(0=>"Go back to the file manager",1=>"Edit the newly created file");
+  /** What do we do after creating a file? */
+  var $l_createfile;
 
-  /** Cache des descriptions de fichier extraits de la base
-   * @access private
+  /** internal cache
    */
-  var $mime_desc=array();
+  private var $mime_desc=array();
 
-  /** Cache des icones extraits de la base
-   * @access private
+  /** internal cache
    */
-  var $mime_icon=array();
+  private var $mime_icon=array();
 
-  /** Cache des types mimes extraits de la base
-   * @access private
+  /** internal cache
    */
-  var $mime_type=array();
+  private var $mime_type=array();
 
-  /** Choix des polices d'dition de fichiers */
+  /** Font choice in the editor */
   var $l_editor_font=array("Arial, Helvetica, Sans-serif","Times, Bookman, Serif","Courier New, Courier, Fixed");
 
-  /** Choix des tailles de police d'dition de fichiers */
+  /** font size in the editor */
   var $l_editor_size=array("18px","14px","12px","10px","8px","0.8em","0.9em","1em","1.1em","1.2em");
 
   /* ----------------------------------------------------------------- */
-  /** Constructeur */
+  /** Constructor */
   function m_bro() {
+    $this->l_mode=array( 0=>_("1 column, detailed"), 1=>_("2 columns, short"), 2=>_("3 columns, short") );
+    $this->l_tgz=array( 0=>_("tgz (Linux)"), 1=>_("tar.bz2 (Linux)"), 2=>_("zip (Windows/Dos)"), 3=>_("tar.Z (Unix)") );
+    $this->l_icons=array( 0=>_("No"), 1=>_("Yes") );
+    $this->l_createfile=array( 0=>_("Go back to the file manager"), 1=>_("Edit the newly created file") );
   }
 
+
   /* ----------------------------------------------------------------- */
-  /** Vrifie un dossier relatif au dossier de l'utilisateur courant
+  /** Verifie un dossier relatif au dossier de l'utilisateur courant
    *
    * @param string $dir Dossier (absolu que l'on souhaite vrifier
    * @return string Retourne le nom du dossier vrifi, relatif au
@@ -115,6 +111,8 @@ class m_bro {
       return $dir;
   }
 
+
+  /* ----------------------------------------------------------------- */
   /** Retourne le chemin complet vers la racine du repertoire de l'utilisateur.
    *  Returns the complete path to the root of the user's directory.
    *
@@ -125,6 +123,8 @@ class m_bro {
     return getuserpath();
   }
 
+
+  /* ----------------------------------------------------------------- */
   /** Retourne le chemin complet vers la racine du repertoire de l'utilisateur.
    *  Returns the complete path to the root of the user's directory.
    *
@@ -145,6 +145,7 @@ class m_bro {
 
     return $this->get_user_root($member['login']);
   }
+
 
   /* ----------------------------------------------------------------- */
   /** Retourne un tableau contenant la liste des fichiers du dossier courant
@@ -178,6 +179,7 @@ class m_bro {
     }
   }
 
+
   /* ----------------------------------------------------------------- */
   /** Retourne un tableau contenant les prfrences de l'utilisateur courant
    * Ce tableau aqssociatif contient les valeurs des champs de la table "browser"
@@ -194,6 +196,7 @@ class m_bro {
     $db->next_record();
     return $db->Record;
   }
+
 
   /* ----------------------------------------------------------------- */
   /** Modifie les prfrences de l'utilisateur courant.
@@ -224,6 +227,7 @@ class m_bro {
     return true;
   }
 
+
   /* ----------------------------------------------------------------- */
   /** Retourne le nom du fichier icone associ au fichier donc le nom est $file
    * <b>Note</b>: Les fichiers icones sont mis en cache sur la page courante.
@@ -242,11 +246,12 @@ class m_bro {
       $ext=$t[count($t)-1];
     // Now seek the extension
     if (!$bro_icon[$ext]) {
-	return "file.png";
+      return "file.png";
     } else {
-	return $bro_icon[$ext].".png";
+      return $bro_icon[$ext].".png";
     }
   }
+
 
   /* ----------------------------------------------------------------- */
   /** Retourne le type mime associ au fichier donc le nom est $file
@@ -267,11 +272,12 @@ class m_bro {
       $ext=$t[count($t)-1];
     // Now seek the extension
     if (!$bro_type[$ext]) {
-	    return "File";
+      return "File";
     } else {
-	    return $bro_type[$ext];
+      return $bro_type[$ext];
     }
   }
+
 
   /* ----------------------------------------------------------------- */
   /** Retourne la taille du fichier $file
@@ -306,7 +312,7 @@ class m_bro {
       while (false !== ($file = readdir($handle))) {
         $nextpath = $dir . '/' . $file;
 
-	      if ($file != '.' && $file != '..' && !is_link($nextpath)) {
+	if ($file != '.' && $file != '..' && !is_link($nextpath)) {
           if (is_dir($nextpath)) {
             $totalsize += $this->dirsize($nextpath);
           } elseif (is_file ($nextpath)) {
@@ -318,6 +324,7 @@ class m_bro {
     }
     return $totalsize;
   }
+
 
   /* ----------------------------------------------------------------- */
   /** Cre le dossier $file dans le dossier (parent) $dir
@@ -331,15 +338,15 @@ class m_bro {
     $absolute=$this->convertabsolute($dir."/".$file,0);
     #echo "$absolute";
     if ($absolute && (!file_exists($absolute))) {
-        if (!mkdir($absolute,00777)) {
-            $err->raise("bro",_("Cannot create the requested directory. Please check permissions."));
-	        return false;
-        }
-        $db->query("UPDATE browser SET crff=1 WHERE uid='$cuid';");
-        return true;
+      if (!mkdir($absolute,00777)) {
+	$err->raise("bro",_("Cannot create the requested directory. Please check permissions."));
+	return false;
+      }
+      $db->query("UPDATE browser SET crff=1 WHERE uid='$cuid';");
+      return true;
     } else {
-        $err->raise("bro",_("File or folder name is incorrect"));
-        return false;
+      $err->raise("bro",_("File or folder name is incorrect"));
+      return false;
     }
   }
 
@@ -412,7 +419,7 @@ class m_bro {
       $old[$i]=ssla($old[$i]); // strip slashes if needed
       $new[$i]=ssla($new[$i]);
       if (!strpos($old[$i],"/") && !strpos($new[$i],"/")) {  // caractre / interdit dans old ET dans new...
-	      @rename($absolute."/".$old[$i],$absolute."/".$old[$i].$alea);
+	@rename($absolute."/".$old[$i],$absolute."/".$old[$i].$alea);
       }
     }
     for ($i=0;$i<count($old);$i++) {
@@ -463,6 +470,7 @@ class m_bro {
     return true;
   }
 
+
   /* ----------------------------------------------------------------- */
   /** Change les droits d'acces aux fichier de $d du dossier $R en $p
    * @param string $R dossier dans lequel se trouve les fichiers  renommer.
@@ -488,7 +496,7 @@ class m_bro {
         if ($perm[$i]['w']) {
           $m = $m | 128;
         } else {
-                $m = $m ^ 128;
+	  $m = $m ^ 128;
         }
         $m = $m | ($perm[$i]['w'] ? 128 : 0); // 0600
         chmod($absolute."/".$d[$i], $m);
@@ -500,6 +508,7 @@ class m_bro {
 
     return true;
   }
+
 
   /* ----------------------------------------------------------------- */
   /** Recoit un champ file upload (Global) et le stocke dans le dossier $R
@@ -521,8 +530,8 @@ class m_bro {
           @touch($absolute."/".$_FILES['userfile']['name']);
         }
         if (@move_uploaded_file($_FILES['userfile']['tmp_name'], $absolute."/".$_FILES['userfile']['name'])) {
-			exec("sudo /usr/lib/alternc/fixperms.sh -u ".$cuid." -f ".$absolute."/".$_FILES['userfile']['name']);
-			return $absolute."/".$_FILES['userfile']['name'];
+	  exec("sudo /usr/lib/alternc/fixperms.sh -u ".$cuid." -f ".$absolute."/".$_FILES['userfile']['name']);
+	  return $absolute."/".$_FILES['userfile']['name'];
 	} else {
 	  $err->raise("bro",("Cannot create the requested file. Please check permissions."));
 	  return false;
@@ -535,6 +544,8 @@ class m_bro {
     return $absolute."/".$_FILES['userfile']['name'];
   }
 
+
+  /* ----------------------------------------------------------------- */
   /**
    * Extract an archive by using GNU and non-GNU tools
    * @param string $file is the full or relative path to the archive
@@ -542,8 +553,7 @@ class m_bro {
    * same directory as the archive by default
    * @return boolean != 0 on error
    */
-  function ExtractFile($file, $dest=null)
-  {
+  function ExtractFile($file, $dest=null) {
     global $err,$cuid,$mem,$L_ALTERNC_LOC;
     $file = $this->convertabsolute($file,0);
     if (is_null($dest)) {
@@ -574,17 +584,16 @@ class m_bro {
       exec($cmd, $void, $ret);
     }
     if ($ret) {
-      $err->raise("bro","could not find a way to extract file %s, unsupported format?", $file);
+      $err->raise("bro",_("I can't find a way to extract the file %s, is it an unsupported compressed format?"), $file);
     }
-	
-	//fix the perms of the extracted archive
-	exec("sudo /usr/lib/alternc/fixperms.sh -u ".$cuid." -d ".$dest_to_fix);
+    // fix the perms of the extracted archive TODO: does it work???
+    exec("sudo /usr/lib/alternc/fixperms.sh -u ".$cuid." -d ".$dest_to_fix);
     return $ret;
   }
 
 
-  /**
-   * Copy many files from point A to point B
+  /* ----------------------------------------------------------------- */
+  /** Copy many files from point A to point B
    */
   function CopyFile($d,$old,$new) {
     global $err;
@@ -611,6 +620,8 @@ class m_bro {
     return true;
   }
 
+
+  /* ----------------------------------------------------------------- */
   /**
    * Copy a source to a destination by either copying recursively a
    * directory or by downloading a file with a URL (only http:// is
@@ -621,8 +632,7 @@ class m_bro {
    *
    * Note that we assume that the inputs have been convertabsolute()'d
    */
-  function CopyOneFile($src, $dest)
-  {
+  function CopyOneFile($src, $dest)  {
     global $err;
     $src = escapeshellarg($src);
     $dest = escapeshellarg($dest);
@@ -631,9 +641,9 @@ class m_bro {
       $err->raise("bro","Errors happened while copying the source to destination. cp return value: %d", $ret);
       return false;
     }
-
     return true;
   }
+
 
   /* ----------------------------------------------------------------- */
   /** Affiche le chemin et les liens de la racine au dossier $path
@@ -652,12 +662,13 @@ class m_bro {
     $R='';
     for($i=0;$i<count($a);$i++) {
       if ($a[$i]) {
-	      $R.=$a[$i]."/";
-	      $c.="<a href=\"$action?R=".urlencode($R)."\">".$a[$i]."</a>&nbsp;/&nbsp;";
+	$R.=$a[$i]."/";
+	$c.="<a href=\"$action?R=".urlencode($R)."\">".$a[$i]."</a>&nbsp;/&nbsp;";
       }
     }
     return $c;
   }
+
 
   /* ----------------------------------------------------------------- */
   /** Affiche le contenu d'un fichier pour un champ VALUE de textarea
@@ -675,7 +686,7 @@ class m_bro {
     if (!strpos($file,"/")) {
       $absolute.="/".$file;
       if (file_exists($absolute)) {
-	    $std=str_replace("<","&lt;",str_replace("&","&amp;",file_get_contents($absolute)));
+	$std=str_replace("<","&lt;",str_replace("&","&amp;",file_get_contents($absolute)));
       } else {
 	$err->raise("bro",_("Cannot read the requested file. Please check permissions."));
 	return false;
@@ -687,11 +698,13 @@ class m_bro {
     return $std;
   }
 
-  /** Cache des urls pour VIEW
-   * @access private
-   */
-  var $cacheurl=array();
 
+  /** Internal cache for viewurl
+   */
+  private var $cacheurl=array();
+
+
+  /* ----------------------------------------------------------------- */
   // Return a browsing url if available.
   // Maintain a url cache (positive AND negative(-) cache)
   /* ----------------------------------------------------------------- */
@@ -723,7 +736,7 @@ class m_bro {
         if (!$beg && $tofind) {
           $tofind=false;
           $this->cacheurl["d".$dir]="-";
-              // We did not find it ;(
+	  // We did not find it ;(
         }
         if (($tt=strrpos($beg,"/"))!==false) {
           $end=substr($beg,$tt).$end; // = /topdir$end so $end starts AND ends with /
@@ -741,6 +754,10 @@ class m_bro {
     }
   }
 
+
+  /* ----------------------------------------------------------------- */
+  /**
+   */
   function can_edit($dir,$name) {
     global $mem,$err;
     $absolute="$dir/$name";
@@ -758,8 +775,9 @@ class m_bro {
     return false;
   }
 
-  /**
-   * Return a HTML snippet representing an extraction function only if the mimetype of $name is supported
+
+  /* ----------------------------------------------------------------- */
+  /** Return a HTML snippet representing an extraction function only if the mimetype of $name is supported
    */
   function is_extractable($dir,$name) {
     if ($parts = explode(".", $name)) {
@@ -768,8 +786,8 @@ class m_bro {
       case "gz":
       case "bz":
       case "bz2":
-	    $ext = array_pop($parts) . $ext;
-	    /* FALLTHROUGH */
+	$ext = array_pop($parts) . $ext;
+      /* FALLTHROUGH */
       case "tar.gz":
       case "tar.bz":
       case "tar.bz2":
@@ -785,6 +803,10 @@ class m_bro {
     return false;
   }
 
+
+  /* ----------------------------------------------------------------- */
+  /**
+   */
   function download_link($dir,$file){
     global $err;
     $err->log("bro","download_link");
@@ -829,14 +851,14 @@ class m_bro {
     if (!strpos($file,"/")) {
       $absolute.="/".$file;
       if (file_exists($absolute)) {
-	      $f=@fopen($absolute,"wb");
+	$f=@fopen($absolute,"wb");
        	if ($f) {
-	        fputs($f,$texte,strlen($texte));
-	        fclose($f);
+	  fputs($f,$texte,strlen($texte));
+	  fclose($f);
 	} else {
 	  $err->raise("bro",("Cannot edit the requested file. Please check permissions."));
 	  return false;
-	      }
+	}
       }
     } else {
       $err->raise("bro",_("File or folder name is incorrect"));
@@ -933,9 +955,9 @@ class m_bro {
     if (is_dir($file)) {
       $handle = opendir($file);
       while($filename = readdir($handle)) {
-	      if ($filename != "." && $filename != "..") {
-	        $this->_delete($file."/".$filename);
-	      }
+	if ($filename != "." && $filename != "..") {
+	  $this->_delete($file."/".$filename);
+	}
       }
       closedir($handle);
       rmdir($file);
@@ -943,13 +965,13 @@ class m_bro {
       unlink($file);
     }
   }
-/*----------------------------------------------------------*/
-/** Function d'exportation de configuration appelé par la classe m_export via un hooks
-*Produit en sorti un tableau formatté ( pour le moment) en HTML
-*
-*/
 
-function alternc_export_conf() {
+
+  /*----------------------------------------------------------*/
+  /** Function d'exportation de configuration appelé par la classe m_export via un hooks
+   *Produit en sorti un tableau formatté ( pour le moment) en HTML
+   */
+  function alternc_export_conf() {
     global $db,$err;
     $err->log("bro","export_conf");
     $str="<table border=\"1\"><caption> Browser </caption>\n";
@@ -958,41 +980,40 @@ function alternc_export_conf() {
     
     $i=1;
     foreach ($pref as $k=>$v) {
-         if (($i % 2)==0){
-            $str.="   <$k>$v</$k>\n"; 
-       }
-        $i++;
+      if (($i % 2)==0){
+	$str.="   <$k>$v</$k>\n"; 
+      }
+      $i++;
     }
     $str.=" </browser>\n";
     
     return $str;
   }
 
-/*----------------------------------------------------------*/
-/** Function d'exportation des données appelé par la classe m_export via un hooks
-*@param : le chemin destination du tarball produit.
-*/
-function alternc_export_data($dir){
+
+  /*----------------------------------------------------------*/
+  /** Function d'exportation des données appelé par la classe m_export via un hooks
+   *@param : le chemin destination du tarball produit.
+   */
+  function alternc_export_data($dir){
     global $mem,$L_ALTERNC_LOC,$err;
     $err->log("bro","export_data");
     $dir.="html/";
     if(!is_dir($dir)){ 
-        if(!mkdir($dir))
-            $err->raise("bro",_("Cannot create the requested directory. Please check permissions."));
+      if(!mkdir($dir))
+	$err->raise("bro",_("Cannot create the requested directory. Please check permissions."));
     }
     $timestamp=date("H:i:s");
 
-   if(exec("/bin/tar cvf -  ".getuserpath()."/ | gzip -9c > ".$dir."/".$mem->user['login']."_html_".$timestamp.".tar.gz")){
-        $err->log("bro","export_data_succes");
+    if(exec("/bin/tar cvf -  ".getuserpath()."/ | gzip -9c > ".$dir."/".$mem->user['login']."_html_".$timestamp.".tar.gz")){
+      $err->log("bro","export_data_succes");
     }else{
-        $err->log("bro","export_data_failed");
+      $err->log("bro","export_data_failed");
 
     }
 
-}
+  }
 
 
+} /* Class Browser */
 
-} /* Classe BROUTEUR */
-
-?>
