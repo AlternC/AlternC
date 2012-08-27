@@ -46,7 +46,7 @@ foreach($file as $v) {
   if ( file_exists($MENUPATH.$v)) include($MENUPATH.$v);
 }
 ?>
-<p class="center"><a href="about.php" target="_blank"><img src="logo2.png" border="0" alt="AlternC" title="<?php __("About"); ?>"/></a>
+<p class="center"><a href="about.php"><img src="logo2.png" border="0" alt="AlternC" title="<?php __("About"); ?>"/></a>
 <br />
 <?php 
 echo "$L_VERSION";
