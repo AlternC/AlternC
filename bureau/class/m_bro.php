@@ -46,15 +46,15 @@ class m_bro {
 
   /** internal cache
    */
-  private var $mime_desc=array();
+  var $mime_desc=array();
 
   /** internal cache
    */
-  private var $mime_icon=array();
+  var $mime_icon=array();
 
   /** internal cache
    */
-  private var $mime_type=array();
+  var $mime_type=array();
 
   /** Font choice in the editor */
   var $l_editor_font=array("Arial, Helvetica, Sans-serif","Times, Bookman, Serif","Courier New, Courier, Fixed");
@@ -701,7 +701,7 @@ class m_bro {
 
   /** Internal cache for viewurl
    */
-  private var $cacheurl=array();
+   var $cacheurl=array();
 
 
   /* ----------------------------------------------------------------- */
