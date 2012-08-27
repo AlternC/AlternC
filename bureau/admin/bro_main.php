@@ -35,10 +35,11 @@ $fields = array (
 		 "R"           => array ("request", "string", ""),
 		 "o"           => array ("request", "array", ""),
 		 "d"           => array ("request", "array", ""),
+		 "perm"        => array ("post",    "array", array()),
 		 "formu"       => array ("request", "integer", ""),
 		 "actextract"  => array ("request", "string", ""),
 		 "fileextract" => array ("request", "string", ""),
-		 "actperms"    => array ("request", "array", ""),
+		 "actperms"    => array ("request", "string", ""),
 		 "actdel"      => array ("request", "string", ""),
 		 "actcopy"     => array ("request", "string", ""),
 		 "actrename"   => array ("request", "string", ""),
@@ -48,7 +49,7 @@ $fields = array (
 		 "del_confirm" => array ("request", "string", ""),
 		 "cancel"      => array ("request", "string", ""),
 		 "showdirsize" => array ("request", "integer", "0"),
-		 "nomfich"    => array ("request", "string", ""),
+		 "nomfich"     => array ("request", "string", ""),
 		 );
 getFields($fields);
 
