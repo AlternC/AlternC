@@ -35,7 +35,7 @@
  */
 
 class DB_users extends DB_Sql {
-  var $Host,$HumanHostname,$User,$Password,$client;
+  var $Host,$HumanHostname,$User,$Password,$Client;
 
   /**
    * Creator
@@ -85,6 +85,7 @@ class DB_users extends DB_Sql {
     $this->Host     = $host;
     $this->User     = $user;
     $this->Password = $password;
+    $this->Client   = $GLOBALS['L_MYSQL_CLIENT'];
     // TODO BUG BUG BUG
     // c'est pas étanche : $db se retrouve avec Database de $sql->dbu . Danger, faut comprendre pourquoi
     // Si on veux que ca marche, il faut Database=alternc.
@@ -385,7 +386,7 @@ class m_mysql {
 
     // Update all the "pass" fields for this user : 
     $db->query("UPDATE db SET pass='$password' WHERE uid='$cuid';");
-    $this->dbus->query("SET PASSWORD FOR ".$login."@".$this->dbus->Host." = PASSWORD('$password');");
+    $this->dbus->query("SET PASSWORD FOR ".$login."@".$this->dbus->Client." = PASSWORD('$password');");
     return true;
   }
 
@@ -423,14 +424,13 @@ class m_mysql {
     $db->query("select name from dbusers where name='".$user."' ;");
 
     if(!$db->num_rows()){
-      $lol=$db->f('name');
-      $err->raise("mysql","num row 0:".$lol."<--".$user);
+      $err->raise("mysql","num row 0:");
       return false;
     }
     if($rights == "FILE"){
-      $grant="grant ".$rights." on ".$base.".".$table." to '".$user."'@'".$this->dbus->Host."'" ;
+      $grant="grant ".$rights." on ".$base.".".$table." to '".$user."'@'".$this->dbus->Client."'" ;
     }else{
-      $grant="grant ".$rights." on `".$base."`.".$table." to '".$user."'@'".$this->dbus->Host."'" ;
+      $grant="grant ".$rights." on `".$base."`.".$table." to '".$user."'@'".$this->dbus->Client."'" ;
     }
 
     if($pass){
@@ -707,7 +707,7 @@ class m_mysql {
         return false; // The error has been raised by checkPolicy()
       }
     }
-    $db->query("SET PASSWORD FOR '".$user."'@'".$this->dbus->Host."' = PASSWORD('".$pass."');");
+    $db->query("SET PASSWORD FOR '".$user."'@'".$this->dbus->Client."' = PASSWORD('".$pass."');");
     $db->query("UPDATE dbusers set password='".$pass."' where name='".$usern."' and uid=$cuid ;");
     return true;
   }
@@ -736,9 +736,9 @@ class m_mysql {
     $login=$db->f("name");
 
     // Ok, database exists and dbname is compliant. Let's proceed
-    $db->query("REVOKE ALL PRIVILEGES ON *.* FROM '".$user."'@'".$this->dbus->Host."';");
-    $db->query("DELETE FROM mysql.db WHERE User='".$user."' AND Host='".$this->dbus->Host."';");
-    $db->query("DELETE FROM mysql.user WHERE User='".$user."' AND Host='".$this->dbus->Host."';");
+    $db->query("REVOKE ALL PRIVILEGES ON *.* FROM '".$user."'@'".$this->dbus->Client."';");
+    $db->query("DELETE FROM mysql.db WHERE User='".$user."' AND Host='".$this->dbus->Client."';");
+    $db->query("DELETE FROM mysql.user WHERE User='".$user."' AND Host='".$this->dbus->Client."';");
     $db->query("FLUSH PRIVILEGES");
     $db->query("DELETE FROM dbusers WHERE uid='$cuid' AND name='".$user."';");
     return true;
@@ -761,10 +761,10 @@ class m_mysql {
     foreach($dblist as $tab){
       $pos=strpos($tab['db'],"_");
       if($pos === false){
-        $this->dbus->query("SELECT * FROM mysql.db WHERE User='".$user."' AND Host='".$this->dbus->Host."' AND Db='".$tab["db"]."';");
+        $this->dbus->query("SELECT * FROM mysql.db WHERE User='".$user."' AND Host='".$this->dbus->Client."' AND Db='".$tab["db"]."';");
       }else{
         $dbname=str_replace('_','\_',$tab['db']);
-        $this->dbus->query("SELECT * FROM mysql.db WHERE User='".$user."' AND Host='".$this->dbus->Host."' AND Db='".$dbname."';");
+        $this->dbus->query("SELECT * FROM mysql.db WHERE User='".$user."' AND Host='".$this->dbus->Client."' AND Db='".$dbname."';");
       }	
       if ($this->dbus->next_record()){
         $r[]=array("db"=>$tab["db"], "select"=>$this->dbus->f("Select_priv"), "insert"=>$this->dbus->f("Insert_priv"),	"update"=>$this->dbus->f("Update_priv"), "delete"=>$this->dbus->f("Delete_priv"), "create"=>$this->dbus->f("Create_priv"), "drop"=>$this->dbus->f("Drop_priv"), "references"=>$this->dbus->f("References_priv"), "index"=>$this->dbus->f("Index_priv"), "alter"=>$this->dbus->f("Alter_priv"), "create_tmp"=>$this->dbus->f("Create_tmp_table_priv"), "lock"=>$this->dbus->f("Lock_tables_priv"),
@@ -865,7 +865,7 @@ class m_mysql {
     // We reset all user rights on this DB : 
     $this->dbus->query("SELECT * FROM mysql.db WHERE User = '$usern' AND Db = '$dbname';");
     if($this->dbus->num_rows())
-      $this->dbus->query("REVOKE ALL PRIVILEGES ON `$dbname`.* FROM '$usern'@'".$this->dbus->Host."';");
+      $this->dbus->query("REVOKE ALL PRIVILEGES ON `$dbname`.* FROM '$usern'@'".$this->dbus->Client."';");
     if( $strrights ){
       $strrights=substr($strrights,0,strlen($strrights)-1);
       $this->grant($dbname,$usern,$strrights);

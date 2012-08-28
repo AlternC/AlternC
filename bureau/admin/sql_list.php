@@ -46,14 +46,6 @@ $r=$mysql->get_userslist();
   }
 ?>
 
-<table class="tedit">
-	<tr>
-<?php __("Your current settings are"); ?> 
-</tr><tr>
-		<th><?php __("MySQL Server"); ?> : </th>
-		<td><code><?php echo $mysql->dbus->HumanHostname; ?></code></td>
-	</tr>
-</table>
 <?php
 if($rdb){
 ?>
