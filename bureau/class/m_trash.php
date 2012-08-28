@@ -1,6 +1,9 @@
 <?php
 /*
- $Id: m_trash.php,v 0.1 2010/11/17 15:51:00 fufroma Exp $
+ ----------------------------------------------------------------------
+ AlternC - Web Hosting System
+ Copyright (C) 2000-2012 by the AlternC Development Team.
+ https://alternc.org/
  ----------------------------------------------------------------------
  LICENSE
 
@@ -16,7 +19,6 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file: Alan Garcia
  Purpose of file: Manage trash class
  ----------------------------------------------------------------------
 */
