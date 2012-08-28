@@ -86,6 +86,9 @@ esac
 
 #DEBHELPER#
 
+# important: postrm freezes withtout that:
+db_stop
+
 exit 0
 
 # vim: et sw=4
