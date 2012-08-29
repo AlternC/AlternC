@@ -77,8 +77,11 @@ include_once("head.php");
 <textarea class="int" style="font-family: <?php echo $p["editor_font"]; ?>; font-size: <?php echo $p["editor_size"]; ?>; width: 90%; height: 400px;" name="texte"><?php
   $failed=false;
   $content=$bro->content($R,$editfile);
-  if (empty($content)) $failed=true;
-  
+  if (empty($content)) { 
+    $failed=true;
+  } else {
+    echo $content;  
+  }
 ?></textarea>
 <?php if ($failed) echo "<p class=\"error\">".$err->errstr()."</p>"; ?>
 	<input type="hidden" name="editfile" value="<?php echo str_replace("\"","&quot;",$editfile); ?>" />
