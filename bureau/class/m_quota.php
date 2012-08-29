@@ -76,7 +76,9 @@ class m_quota {
     }
 
     foreach($this->getquota() as $qq) {
-      $qlist[$qq['name']]=$qq['description'];
+      if (isset($qq['name'])) {
+        $qlist[$qq['name']]=$qq['description'];
+      }
     }
     return $qlist;
   }

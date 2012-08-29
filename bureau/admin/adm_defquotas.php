@@ -95,12 +95,13 @@ foreach($qlist as $type => $q) {
 <tr><th><?php __("Quotas") ?></th><th><?php __("Default Value"); ?></th></tr>
 <?php
 foreach($q as $name => $value) {
+	if (!isset($qarray[$name])) continue;
 	$key = $type . ":" . $name;
 	$col=3-$col;
 ?>
 
 <tr class="lst<?php echo $col; ?>">
-<td><label for="<?php echo $key; ?>"><?php $name= ($name=="stats")? 'sta2': $name ;echo $qarray[$name]= ($qarray[$name]=="quota_sta2") ? 'quota_stats':  $qarray[$name]  ; ?></label></td>
+<td><label for="<?php echo $key; ?>"><?php echo $qarray[$name] ; ?></label></td>
 <td><input type="text" class="int" size="16" maxlength="16" name="<?php echo $key; ?>" id="<?php echo $name; ?>" value="<?php ehe($value); ?>" /></td></tr>
 
 <?php
