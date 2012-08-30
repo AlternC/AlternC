@@ -1,0 +1,5 @@
+alternc-awstats: non-standard-dir-in-var var/alternc/
+alternc-awstats: file-in-unusual-dir
+alternc-awstats: no-debconf-config
+alternc-awstats: postinst-does-not-load-confmodule
+

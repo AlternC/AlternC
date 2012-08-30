@@ -1,0 +1,62 @@
+#!/bin/bash
+
+# Appelé seul, lance les stats AWStats du jour.
+# Appelé avec "all" lance les stats avec tous les fichiers .gz situés dans /var/log/apache
+# Appelé avec un nom de domaine en paramètre, rescanne tous les fichiers .gz pour ce domaine uniquement.
+
+# Include some usefull functions
+. /usr/lib/alternc/functions.sh
+
+# Regenerate the awstat etc cache files :
+if [ -x ./awstats.cache.php ]
+then
+    ./awstats.cache.php
+fi
+
+# FIXME : set this var in local.sh
+LOG_DIR="/var/alternc/logs"
+
+CACHEDIR="/var/cache/awstats" # Dans la sarge par defaut les données awstats sont stockées dans /var/lib/awstats ...
+mkdir -p $CACHEDIR
+
+function searchdomain {
+    U_ID=$(mysql_query "SELECT uid FROM aws WHERE hostname='$1'" | grep -v "^uid")
+    U_LOGIN=$(mysql_query "SELECT login FROM membres WHERE uid='$U_ID'" |grep -v "^login")
+    DOM_DIR="$LOG_DIR/$U_ID-$U_LOGIN"
+    echo $(find -P "$DOM_DIR" -mindepth 1 -maxdepth 2 -type f -iname "*.log" -print0 | xargs -0)
+}
+
+function dostatgz {
+    read DOM
+    while [ "$DOM" ]
+    do
+      LOGAPACHE=$(searchdomain $DOM)
+      echo "processing $DOM (for access files in $LOGAPACHE )"
+      /usr/lib/cgi-bin/awstats.pl -config=$DOM -update -LogFile="/usr/lib/alternc/logresolvemerge.pl $LOGAPACHE* |"
+      read DOM
+    done
+}
+
+function dostat {
+    read DOM
+    while [ "$DOM" ]
+    do
+      echo "processing $DOM"
+      LOGAPACHE=$(searchdomain $DOM)
+      /usr/lib/cgi-bin/awstats.pl -config=$DOM  -LogFile="/usr/lib/alternc/logresolvemerge.pl $LOGAPACHE | "
+      read DOM
+    done
+}
+
+if [ -z "$1" ]
+    then
+    mysql_query "SELECT hostname FROM aws" |grep -v "^hostname" | dostat
+else
+    if [ "$1" = "all" ]
+	then
+	mysql_query "SELECT hostname FROM aws" |grep -v "^hostname" | dostatgz
+    else
+	echo "$1" | dostatgz
+    fi
+fi
+
