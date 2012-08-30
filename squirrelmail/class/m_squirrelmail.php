@@ -29,6 +29,12 @@
 */
 class m_squirrelmail {
 
+  /* ----------------------------------------------------------------- */
+  /** Hook called by the homepage or the /webmail link
+   * to redirect the user to a known webmail url.
+   * the variable 'webmail_redirect' tells which webmail has the priority. 
+   * @return string the URL of the webmail
+   */
   function hook_admin_webmail() {
     global $db;
     // not found ? use admin account (2000)
@@ -42,7 +48,7 @@ class m_squirrelmail {
       $db->query("SELECT * FROM sub_domaines s WHERE s.domaine='".addslashes($dompart)."' AND s.type='squirrelmail';");
       if ($db->next_record()) {
 	$domain=$db->Record;
-	return "<p><a href=\"http://".$domain["sub"].(($domain["sub"])?".":"").$domain["domaine"]."\">"._("To read your mail in a browser, click here to use the Squirrelmail Webmail")."</a></p>\n";
+	return "http://".$domain["sub"].(($domain["sub"])?".":"").$domain["domaine"];
       }
       $i++;
     } while (strpos($dompart,'.')!==false);
@@ -51,7 +57,7 @@ class m_squirrelmail {
     $db->query("SELECT * FROM sub_domaines s WHERE s.compte=2000 AND s.type='squirrelmail';");
     if ($db->next_record()) {
       $domain=$db->Record;
-      return "<p><a href=\"http://".$domain["sub"].(($domain["sub"])?".":"").$domain["domaine"]."\">"._("To read your mail in a browser, click here to go to the Squirrelmail Webmail")."</a></p>\n";
+      return "http://".$domain["sub"].(($domain["sub"])?".":"").$domain["domaine"];
     }
 
   }

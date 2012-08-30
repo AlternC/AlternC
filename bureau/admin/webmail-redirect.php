@@ -25,9 +25,16 @@
 
 require_once("../class/config_nochk.php");
 
-if ($webmail=variable_get("webmail_redirect","")) {
-  header("Location: /$webmail");
+
+  $res=$hooks->invoke("hook_admin_webmail");
+if (($wr=get_variable("webmail_redirect")) && isset($res[$wr]) && $res[$wr]) {
+  $url=$res[$wr];
 } else {
-  header("Location: /nowebmail.php"); 
+  foreach($res as $r) if ($r!==false) { $url=$r; break; }
+}
+if ($url)  {
+  header("Location: $url"); 
+} else {
+  header("Location: /nowebmail");
 }
 
