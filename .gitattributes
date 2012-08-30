@@ -61,6 +61,7 @@ bureau/admin/adm_dodel.php -text
 bureau/admin/adm_doedit.php -text
 bureau/admin/adm_domlock.php -text
 bureau/admin/adm_doms.php -text
+bureau/admin/adm_doms_def_type.php -text
 bureau/admin/adm_domstype.php -text
 bureau/admin/adm_domstypedoedit.php -text
 bureau/admin/adm_domstypeedit.php -text

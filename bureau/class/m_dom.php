@@ -416,6 +416,55 @@ class m_dom {
     return "/www/".$this->domshort($domain);
   }
 
+
+  function lst_default_subdomains(){
+    global $db,$err;
+    $c=array();
+    $db->query("select * from default_subdomains;");
+     
+    while($db->next_record()) {
+      $c[]=array('id'=>$db->f('id'),
+                 'sub'=>$db->f('sub'),
+                 'domain_type'=>$db->f('domain_type'),
+                 'domain_type_parameter'=>$db->f('domain_type_parameter'),
+                 'concerned'=>$db->f('concerned'),
+                 'enabled'=>$db->f('enabled')
+                 ) ; 
+    }
+
+    return $c;
+  }
+
+  
+  function update_default_subdomains($arr) {
+    $ok=true;
+    foreach ($arr as $a) {
+      if (! isset($a['id'])) $a['id']=null;
+      if(!empty($a['sub']) || !empty($a['domain_type_parameter'])){
+
+        if (! isset($a['enabled'])) $a['enabled']=0;
+        printvar($a);
+        if (! $this->update_one_default($a['domain_type'],$a['sub'], $a['domain_type_parameter'], $a['concerned'], $a['enabled'],$a['id']) ) {
+         $ok=false;
+        }
+      }  
+    }
+    return $ok;
+  }
+
+  function update_one_default($domain_type,$sub,$domain_type_parameter,$concerned,$enabled,$id=null){
+    global $db,$err;
+    
+    if($id==null)
+      $db->query("INSERT INTO default_subdomains values ('','".$sub."','".$domain_type."','".$domain_type_parameter."','".$concerned."','".$enabled."');");
+    else
+    $db->query("UPDATE default_subdomains set sub='".$sub."', domain_type='".$domain_type."',domain_type_parameter='".$domain_type_parameter."',concerned='".$concerned."',enabled='".$enabled."' where id=".$id.";");
+    return true;
+      //update
+    
+
+  }
+
   /* ----------------------------------------------------------------- */
   /**
    * Retourne les entrées DNS du domaine $domain issues du WHOIS.
