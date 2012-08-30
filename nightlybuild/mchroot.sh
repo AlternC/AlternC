@@ -3,7 +3,7 @@
 #Le repertoire racine
 ROOT_DIR="/root/compilation"
 
-#Les systeme ÃƒÂ  compiler
+#Les systeme à compiler
 CHROOT_DIR="$ROOT_DIR/chroot"
 #repertoire cible des compilations
 BUILD_AREA="$ROOT_DIR/build-area"
@@ -11,7 +11,7 @@ BUILD_AREA="$ROOT_DIR/build-area"
 SRC_DIR="/root/vcs"
 #repertoire local (dans chroot) contenant les builds area
 LOCAL_BUILD_AREA="/root/build-area"
-#Le depot formatÃ© pour le web
+#Le depôt formaté pour le web
 DEPOT_DIR="$ROOT_DIR/depot"
 
 
