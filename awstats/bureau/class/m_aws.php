@@ -284,7 +284,8 @@ class m_aws {
     $this->_delconf($hostname);
     $db->query("DELETE FROM aws WHERE id='$id'");
     system("rm ".$this->CACHEDIR."/$hostname/ -rf");
-    return $name;
+    return $hostname;
+
   }
 
 
@@ -300,6 +301,7 @@ class m_aws {
   function add_stats($hostname,$users="", $hostaliases,$public) {
     global $db,$err,$quota,$mem,$cuid;
     $err->log("aws","add_stats",$hostname);
+    $ha="";
     $r=$this->host_list();
     if (!in_array($hostname,$r) || $hostname=="") {
       $err->raise("aws",3); // This hostname does not exist
