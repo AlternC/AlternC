@@ -526,6 +526,9 @@ selenium/20120826-alternc-panel-testsuite.html -text
 selenium/README -text
 selenium/alternc.domain-local-mail-tld.html -text
 squirrelmail/Makefile -text
+squirrelmail/alternc-changepass/change.php -text
+squirrelmail/alternc-changepass/config.php -text
+squirrelmail/alternc-changepass/setup.php -text
 squirrelmail/class/m_squirrelmail.php -text
 squirrelmail/squirrelmail-install -text
 squirrelmail/templates/apache2/squirrelmail.conf -text

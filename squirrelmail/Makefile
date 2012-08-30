@@ -29,3 +29,5 @@ install:
 	install -m 644 templates/apache2/squirrelmail.conf $(DESTDIR)/etc/alternc/templates/apache2/squirrelmail.conf
 	# Desktop files
 	install -o 1999 -g 1999 -m 644 class/m_squirrelmail.php $(DESTDIR)/var/alternc/bureau/class/
+	# Squirrelmail Change Password Plugin
+	install -m 644 alternc-changepass/config.php alternc-changepass/setup.php alternc-changepass/change.php $(DESTDIR)/usr/share/squirrelmail/plugins/alternc-changepass/

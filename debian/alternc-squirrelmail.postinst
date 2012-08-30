@@ -20,6 +20,9 @@ case "$1" in
 	dpkg-statoverride --add alternc-squirrelmail root 0750 /var/lib/squirrelmail/data
 	chown -R alternc-squirrelmail:root /var/spool/squirrelmail/attach /var/lib/squirrelmail/data
 	chmod -R 750 /var/spool/squirrelmail/attach /var/lib/squirrelmail/data	
+	# Enable the squirrelmail plugin 
+	squirrelmail-configure --remove-plugin alternc-changepass
+        squirrelmail-configure --install-plugin alternc-changepass
 	;;
 esac
 

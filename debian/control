@@ -76,7 +76,7 @@ Package: alternc-squirrelmail
 Architecture: all
 Pre-depends: debconf (>= 0.5.00) | debconf-2.0
 Depends: debianutils (>= 1.13.1), alternc (>= 1.1), squirrelmail, squirrelmail-locales, avelsieve
-Conflicts: alternc (<= 1.0.3)
+Conflicts: alternc (<= 1.0.3), alternc-changepass
 Provides: alternc-webmail
 Suggests: 
 Description: Squirrelmail-Webmail plugin and configuration for AlternC

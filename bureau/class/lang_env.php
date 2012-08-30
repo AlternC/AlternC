@@ -66,7 +66,8 @@ putenv("LANGUAGE=".$lang);
 setlocale(LC_ALL,$lang); 
 textdomain("alternc");
 
-if (_("") && preg_match("#charset=([A-Za-z0-9\.-]*)#",_(""),$mat)) {
+$empty="";
+if (_($empty) && preg_match("#charset=([A-Za-z0-9\.-]*)#",_($empty),$mat)) {
   $charset=$mat[1];
  }
 if (! isset($charset) || !$charset) $charset="UTF-8";
