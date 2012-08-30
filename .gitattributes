@@ -544,12 +544,12 @@ selenium/README -text
 selenium/alternc.domain-local-mail-tld.html -text
 squirrelmail/Makefile -text
 squirrelmail/alternc-changepass/change.php -text
-squirrelmail/alternc-changepass/config.php -text
 squirrelmail/alternc-changepass/setup.php -text
 squirrelmail/class/m_squirrelmail.php -text
 squirrelmail/squirrelmail-install -text
 squirrelmail/templates/apache2/squirrelmail.conf -text
 squirrelmail/templates/javascript-common/javascript-common.conf -text
+squirrelmail/templates/squirrelmail/alternc-changepass.conf -text
 squirrelmail/templates/squirrelmail/apache.conf -text
 squirrelmail/templates/squirrelmail/avelsieve-config.php -text
 src/Makefile -text
