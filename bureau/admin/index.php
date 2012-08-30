@@ -83,10 +83,14 @@ if (!$_SERVER[HTTPS]) {
 </td></tr>
 <tr><td>
 
-  <?php if (variable_get("webmail_redirect","")) { ?>
-<p><a href="/webmail"><?php __("If you want to read your mail, click here and enter your Email address and password in the next form, then click 'Enter'."); ?></a></p>
- <?php } ?>
-</td><td>
+<?php
+
+  // Here we used to have a form to enter the squirrelmail's webmail.
+  // Following the "rule of less astonishment, we try to put it here again, even though the webmail is now a plugin.
+  $res=$hooks->invoke("hook_admin_webmail");
+foreach($res as $r) if ($r!==false) echo $r;
+
+?></td><td>
 
 </td></tr>
 
