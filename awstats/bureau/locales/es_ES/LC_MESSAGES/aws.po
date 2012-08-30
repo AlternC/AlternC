@@ -1,0 +1,268 @@
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: aws.po 3237 2012-08-21 14:59:46Z benjamin $ 
+msgid ""
+msgstr ""
+"Project-Id-Version: $Id: aws.po 3237 2012-08-21 14:59:46Z benjamin $\n"
+"Report-Msgid-Bugs-To: i18n@alternc.org\n"
+"POT-Creation-Date: 2012-08-21 12:01+0200\n"
+"PO-Revision-Date: 2002-06-16 13:50CEST\n"
+"Last-Translator: Bruno <bruno@alternc.org>\n"
+"Language-Team: Espanol <i18n@alternc.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+
+#: ../admin/aws_add.php:38 admin/aws_add.php:33
+msgid "You cannot add any new statistics, your quota is over."
+msgstr "No puede crear más estadísticas, su cuota alcanzó su limite."
+
+#: ../admin/aws_add.php:43 admin/aws_add.php:40
+#, fuzzy
+msgid "Edit Statistics"
+msgstr "Creación de estadísticas"
+
+#: ../admin/aws_add.php:43 admin/aws_add.php:40
+msgid "New Statistics"
+msgstr "Creación de estadísticas"
+
+#: ../admin/aws_add.php:54 ../admin/aws_list.php:61 admin/aws_add.php:50
+#: admin/aws_list.php:61
+msgid "Domain name"
+msgstr ""
+
+#: ../admin/aws_add.php:61 admin/aws_add.php:57
+msgid "Hostaliases"
+msgstr ""
+
+#: ../admin/aws_add.php:72 ../admin/aws_list.php:61 admin/aws_add.php:68
+msgid "Allowed Users"
+msgstr ""
+
+#: ../admin/aws_add.php:88 admin/aws_add.php:84
+msgid ""
+"No users currently defined, you must create login with the 'Manage allowed "
+"users' accounts' menu."
+msgstr ""
+
+#: ../admin/aws_add.php:92 admin/aws_add.php:88
+msgid "View public"
+msgstr ""
+
+#: ../admin/aws_add.php:98 ../admin/aws_add.php:100
+msgid "No"
+msgstr ""
+
+#: ../admin/aws_add.php:98 ../admin/aws_add.php:100
+msgid "Yes"
+msgstr ""
+
+#: ../admin/aws_add.php:106 admin/aws_add.php:97
+msgid "Create those statistics"
+msgstr "Crear estas estadísticas"
+
+#: ../admin/aws_add.php:106 admin/aws_add.php:97
+#, fuzzy
+msgid "Edit those statistics"
+msgstr "Crear estas estadísticas"
+
+#: ../admin/aws_add.php:107 ../admin/aws_pass.php:73 ../admin/aws_users.php:58
+msgid "Cancel"
+msgstr ""
+
+#: ../admin/aws_del.php:44 admin/aws_del.php:42
+#, fuzzy, php-format
+msgid "The statistics %s has been successfully deleted"
+msgstr "El juego de estadísticas ha sido creado"
+
+#: ../admin/aws_del.php:50
+msgid "Please check the statistics set you want to delete"
+msgstr ""
+
+#: ../admin/aws_doadd.php:38 admin/aws_doadd.php:38
+msgid "The statistics has been successfully created"
+msgstr "El juego de estadísticas ha sido creado"
+
+#: ../admin/aws_doedit.php:33 ../admin/aws_edit.php:38 admin/aws_doedit.php:33
+#: admin/aws_edit.php:33
+msgid "No Statistics selected!"
+msgstr "¡Ningún juego seleccionado!"
+
+#: ../admin/aws_doedit.php:45 admin/aws_doedit.php:45
+msgid "The Statistics has been successfully changed"
+msgstr "El juego de estadísticas ha sido modificado"
+
+#: ../admin/aws_list.php:40 admin/aws_list.php:42
+msgid "Statistics List"
+msgstr "Lista de juegos de estadísticas"
+
+#: ../admin/aws_list.php:44 admin/aws_list.php:44
+msgid "Manage allowed users' accounts"
+msgstr ""
+
+#: ../admin/aws_list.php:47 ../admin/aws_users.php:46 admin/aws_list.php:47
+msgid "Create new Statistics"
+msgstr "Crear un nuevo juego de estadísticas"
+
+#: ../admin/aws_list.php:61 ../admin/aws_users.php:78
+msgid "Action"
+msgstr ""
+
+#: ../admin/aws_list.php:61 ../admin/aws_list.php:74
+#, fuzzy
+msgid "View the statistics"
+msgstr "Crear estas estadísticas"
+
+#: ../admin/aws_list.php:71 admin/aws_list.php:71
+msgid "Edit"
+msgstr ""
+
+#: ../admin/aws_list.php:81 admin/aws_list.php:81
+msgid "Delete the checked Statistics"
+msgstr "Suprimir los juegos marcados"
+
+#: ../admin/aws_pass.php:57 admin/aws_pass.php:51
+msgid "Change a user's password"
+msgstr ""
+
+#: ../admin/aws_pass.php:67 ../admin/aws_users.php:52
+#: ../admin/aws_users.php:78 admin/aws_pass.php:61 admin/aws_users.php:47
+#: admin/aws_users.php:69
+msgid "Username"
+msgstr ""
+
+#: ../admin/aws_pass.php:70 admin/aws_pass.php:64
+msgid "New Password"
+msgstr ""
+
+#: ../admin/aws_pass.php:72 admin/aws_pass.php:65
+msgid "Change this user's password"
+msgstr ""
+
+#: ../admin/aws_useradd.php:43 admin/aws_useradd.php:36
+#, fuzzy
+msgid "The Awstat account has been successfully created"
+msgstr "El juego de estadísticas ha sido creado"
+
+#: ../admin/aws_userdel.php:42 admin/aws_userdel.php:42
+#, fuzzy, php-format
+msgid "The awstat account %s has been successfully deleted"
+msgstr "El juego de estadísticas ha sido creado"
+
+#: ../admin/aws_users.php:40 admin/aws_users.php:42
+msgid "Awstats allowed user list"
+msgstr ""
+
+#: ../admin/aws_users.php:55 admin/aws_users.php:50
+msgid "Password"
+msgstr ""
+
+#: ../admin/aws_users.php:57
+#, fuzzy
+msgid "Create this new awstat account"
+msgstr "Crear estas estadísticas"
+
+#: ../admin/aws_users.php:86 admin/aws_users.php:77
+msgid "Change password"
+msgstr ""
+
+#: ../admin/aws_users.php:92 admin/aws_users.php:83
+#, fuzzy
+msgid "Delete checked accounts"
+msgstr "Suprimir los juegos marcados"
+
+#: ../admin/menu_aws.php:38 admin/menu_aws.php:37
+msgid "Web Statistics"
+msgstr "Estadísticas Web"
+
+#: ../class/m_aws.php:86 class/m_aws.php:72
+msgid ""
+"The stats module allows any user to ask for statistics about his web site. "
+"Statistics are web pages generated daily based on the visits of the day "
+"before. Awstats is the soft used to produce those stats. The statistics are "
+"then protected by a login and a password."
+msgstr ""
+
+#: admin/aws_list.php:61 admin/aws_list.php:74
+msgid "View"
+msgstr ""
+
+#: admin/aws_users.php:51
+#, fuzzy
+msgid "Create this new awstat account."
+msgstr "Crear estas estadísticas"
+
+#~ msgid "quota_stats"
+#~ msgstr "Web Statistics"
+
+# #################################################################
+# m_stats
+#~ msgid "err_stats_1"
+#~ msgstr "No se consiguió ningún juego de estadísticas"
+
+#~ msgid "err_stats_2"
+#~ msgstr "Este juego de estadísticas no existe."
+
+#~ msgid "err_stats_3"
+#~ msgstr "El prefijo escogido no está autorizado"
+
+#~ msgid "err_stats_4"
+#~ msgstr "¡Este juego de estadísticas ya existe!"
+
+#~ msgid "err_stats_5"
+#~ msgstr ""
+#~ "Ha llegado al limite de su cuota de juego de estadísticas, no se puede "
+#~ "crear más."
+
+#~ msgid "err_stats_6"
+#~ msgstr "Este idioma no está disponible."
+
+#~ msgid "help_sta_list"
+#~ msgstr ""
+#~ "Aquí tiene la lista de los juegos de estatísticas installadas en su "
+#~ "cuenta:<br /> Haga clic en 'Modificar' para cambiar la configuración de "
+#~ "las estadísticas<br /> Para suprimir un juego de estadísticas, marque el "
+#~ "cuadro correspondiente y haga clic en el botón 'Suprimir juegos marcados'"
+
+#~ msgid "Your backup parameters has been successfully changed."
+#~ msgstr "Sus parámetros de copia de seguridad han sido cambiados."
+
+#~ msgid "Language"
+#~ msgstr "Idioma"
+
+#~ msgid "WARNING"
+#~ msgstr "ADVERTENCIA"
+
+#~ msgid ""
+#~ "The statistics %s has been successfully deleted (the stats files must be "
+#~ "manually deleted)"
+#~ msgstr ""
+#~ "El juego de estatísticas %s a sido borrado (los archivos de estatísticas "
+#~ "deben ser a manos)"
+
+#~ msgid "Delete statistics"
+#~ msgstr "Borrar juego de estadísticas"
+
+#~ msgid "Change the Statistics"
+#~ msgstr "Modificar un juego de estadísticas"
+
+#~ msgid "Change those Statistics."
+#~ msgstr "Modificar este juego de estadísticas."
+
+#~ msgid "Byte"
+#~ msgstr "Byte"
+
+#, fuzzy
+#~ msgid "hlp_sta_add"
+#~ msgstr ""
+#~ "Entrez le nom du domaine dont vous souhaitez obtenir des statistiques de "
+#~ "fréquentation. <br />Choisissez ensuite la langue dans laquelle ces "
+#~ "statistiques devront etre générées. <br />Enfin, entrez le dossier de "
+#~ "votre espace disque dans lequel ces statistiques devront etre stockées "
+#~ "(sous forme de pages html + images).<br /> Il est conseillé que ce "
+#~ "dossier soit accessible depuis l'un de vos domaines ou sous-domaines. De "
+#~ "plus, vous pouvez protéger ce dossier à l'aide du menu 'dossiers "
+#~ "protégés'."
