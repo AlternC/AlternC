@@ -11,14 +11,13 @@ BUILD_AREA="$ROOT_DIR/build-area"
 SRC_DIR="/root/vcs"
 #repertoire local (dans chroot) contenant les builds area
 LOCAL_BUILD_AREA="/root/build-area"
-#Le depot formatÃ© pour le web 
+#Le depot formatÃ© pour le web
 DEPOT_DIR="$ROOT_DIR/depot"
 
 
-
+#SOURCES[x]='vcs url_ressource target_directory_in_chroot'
 SOURCES[0]='svn https://www.alternc.org/svn/ /root/vcs/'
-#SOURCES[1]='vcs url_ressource target_directory_in_chroot'
- 
+
 function prepare_chroot() {
 
 	#Traiter dans les chroot
@@ -48,7 +47,7 @@ function prepare_chroot() {
 
 function get_sources() {
 
-	 for CHROOT in $(ls $CHROOT_DIR); do	
+	 for CHROOT in $(ls $CHROOT_DIR); do
 		#CHROOT=${1:-"etch-i386"}
 		ELEMENTS=${#SOURCES[@]}
 		for ((i=0;i<$ELEMENTS;i++)); do
@@ -79,7 +78,6 @@ function chroot_run() {
 		-r \
 		--chroot $SCHROOT_SESSION \
 		-d $DIR \
-#		-- "${COMMAND}"
 }
 
 function create_packages() {
@@ -98,7 +96,7 @@ function create_packages() {
 		if [[ ! $SCHROOT_SESSION ]]; then
 			continue
 		fi
-	
+
 		CHROOT_SRC=$CHROOT_DIR/$dist-$arch$SRC_DIR
 		CHROOT_BUILD_AREA=$CHROOT_DIR/$dist-$arch/$LOCAL_BUILD_AREA
 
@@ -125,7 +123,7 @@ function create_packages() {
 				#echo "dch -l \"`date +%Y-%m-%d`\" nightly" | \
 			fi
 
-			#Construire le package				
+			#Construire le package
 			echo $STATUT
 			mkdir -p "$CHROOT_BUILD_AREA/$STATUT"
 			chroot_run $SCHROOT_SESSION "svn-buildpackage -us -uc -rfakeroot --svn-move-to=$LOCAL_BUILD_AREA/$STATUT --svn-ignore" $SRC_DIR/$SVN_DIR
@@ -140,13 +138,10 @@ function create_packages() {
 #		umount $CHROOT_BUILD_AREA
 
 	done;
-
-	#Nettoyer les build-area dans les sources
-#	find $SRC_DIR -iname build-area -exec rm -r {} \;
 }
 
 function create_apt() {
-	#CrÃƒÂ©ation du depot
+	#Création du depot
 	mkdir -p $DEPOT_DIR
 
 	for dir in $(ls $BUILD_AREA); do
@@ -160,7 +155,7 @@ function create_apt() {
 
         	CHROOT_BUILD_AREA=$BUILD_AREA/$dist-$arch
 
-		for dir in $(ls $CHROOT_BUILD_AREA); do 	
+		for dir in $(ls $CHROOT_BUILD_AREA); do
 
 			echo $dir
 
