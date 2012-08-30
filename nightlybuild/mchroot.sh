@@ -18,6 +18,33 @@ DEPOT_DIR="$ROOT_DIR/depot"
 
 SOURCES[0]='svn https://www.alternc.org/svn/ /root/vcs/'
 #SOURCES[1]='vcs url_ressource target_directory_in_chroot'
+ 
+function prepare_chroot() {
+
+	#Traiter dans les chroot
+        for dir in $(ls $CHROOT_DIR); do
+                if [[ ! -d $CHROOT_DIR/$dir ]]; then
+                        continue
+                fi
+                dist=$(echo $dir | sed 's/-.*//' )
+                arch=$(echo $dir | sed 's/.*-//' )
+
+                #Ouvrir un chroot
+                SCHROOT_SESSION=$(schroot -b -c $dir)
+                if [[ ! $SCHROOT_SESSION ]]; then
+                        continue
+                fi
+
+       	        #Nettoyer les chroot
+                chroot_run $SCHROOT_SESSION "find /tmp/ -type f -exec rm {} \;" "./"
+	done;
+
+	#Nettoyer les build-area dans les sources
+#	find $SRC_DIR -iname build-area -exec rm -r {} \;
+
+	#Purger le depot de transition
+	rm -r $DEPOT_DIR
+}
 
 function get_sources() {
 
@@ -57,6 +84,7 @@ function chroot_run() {
 
 function create_packages() {
 	rm -r $BUILD_AREA
+	rm -r $DEPOT_DIR
 
 	for dir in $(ls $CHROOT_DIR); do
         	if [[ ! -d $CHROOT_DIR/$dir ]]; then
@@ -159,6 +187,7 @@ function create_apt() {
 	done
 }
 
+prepare_chroot
 get_sources
 create_packages
 create_apt
