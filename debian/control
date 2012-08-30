@@ -10,7 +10,7 @@ Standards-Version: 3.9.1
 Package: alternc
 Architecture: all
 Pre-depends: debconf (>= 0.5.00) | debconf-2.0
-Depends: debianutils (>= 1.13.1), apache2-mpm-itk, libapache2-mod-php5, php5-mysql, phpmyadmin, postfix, proftpd-mod-mysql, proftpd-basic, bind9, wget, rsync, quota, ca-certificates, locales, perl-suid, perl, postfix-mysql, wwwconfig-common, sasl2-bin, fam | gamin, libsasl2-modules, php5-cli, lockfile-progs (>= 0.1.9), gettext (>= 0.10.40-5), sudo, adduser, mysql-client, dnsutils, bash, acl, dovecot-common (>= 1:1.2.15), dovecot-imapd, dovecot-pop3d, vlogger, mailx
+Depends: debianutils (>= 1.13.1), apache2-mpm-itk, libapache2-mod-php5, php5-mysql, phpmyadmin, postfix, proftpd-mod-mysql, proftpd-basic, bind9, wget, rsync, quota, ca-certificates, locales, perl-suid, perl, postfix-mysql, wwwconfig-common, sasl2-bin, fam | gamin, libsasl2-modules, php5-cli, lockfile-progs (>= 0.1.9), gettext (>= 0.10.40-5), sudo, adduser, mysql-client, dnsutils, bash (>= 4), acl, dovecot-common (>= 1:1.2.15), dovecot-imapd, dovecot-pop3d, vlogger, mailx
 Recommends: mysql-server(>= 5.0), dovecot-managesieved, dovecot-sieve, dovecot-mysql, ntp
 Conflicts: alternc-admintools, alternc-awstats (< 1.0), alternc-webalizer (<= 0.9.4), alternc-mailman (< 2.0), courier-authdaemon
 Provides: alternc-admintools
@@ -18,7 +18,7 @@ Replaces: alternc-admintools
 Suggests: alternc-awstats, alternc-mailman, alternc-changepass, amavisd-new, clamav-daemon, spamassassin, pop-before-smtp, magpierss, zip, ncompress, bzip2, alternc-squirrelmail, alternc-roundcube
 Description: Hosting software managment suite for Debian
  AlternC is a mutualized hosting software manager for Linux.
- It allows you to manage your websites,	  domains, ftp, emails, aliases,
+ It allows you to manage your websites, domains, ftp, emails, aliases,
  web statistics, mailing-lists, jabber accounts, etc.
  .
  AlternC is mainly a PHP based administration interface and some conf files
@@ -28,7 +28,7 @@ Description: Hosting software managment suite for Debian
 Homepage: http://www.alternc.com/
 Description-fr.UTF-8: Suite logicielle d'hébergement mutualisé pour Debian
  AlternC est un logiciel d'hébergement mutualisé pour serveur Linux.
- Il permet de gérer les	sites web, domaines, ftp, emails, alias,
+ Il permet de gérer les sites web, domaines, ftp, emails, alias,
  statistiques web, listes de discussions, comptes jabber, etc.
  .
  AlternC est essentiellement une interface d'administration en PHP et
@@ -47,7 +47,7 @@ Replaces: alternc
 Suggests: alternc-awstats, alternc-mailman, alternc-changepass, amavisd-new, clamav-daemon, spamassassin, pop-before-smtp, magpierss, zip, ncompress, bzip2
 Description: Hosting software managment suite for Debian
  AlternC is a mutualized hosting software manager for Linux.
- It allows you to manage your websites,	  domains, ftp, emails, aliases,
+ It allows you to manage your websites, domains, ftp, emails, aliases,
  web statistics, mailing-lists, jabber accounts, etc.
  .
  AlternC is mainly a PHP based administration interface and some conf files
@@ -60,7 +60,7 @@ Description: Hosting software managment suite for Debian
 Homepage: http://www.alternc.com/
 Description-fr.UTF-8: Suite logicielle d'hébergement mutualisé pour Debian
  AlternC est un logiciel d'hébergement mutualisé pour serveur Linux.
- Il permet de gérer les	sites web, domaines, ftp, emails, alias,
+ Il permet de gérer les sites web, domaines, ftp, emails, alias,
  statistiques web, listes de discussions, comptes jabber, etc.
  .
  AlternC est essentiellement une interface d'administration en PHP et
@@ -81,7 +81,7 @@ Provides: alternc-webmail
 Suggests: 
 Description: Squirrelmail-Webmail plugin and configuration for AlternC
  AlternC is a mutualized hosting software manager for Linux.
- It allows you to manage your websites,	  domains, ftp, emails, aliases,
+ It allows you to manage your websites, domains, ftp, emails, aliases,
  web statistics, mailing-lists, jabber accounts, etc.
  .
  This extension to AlternC is installing and configuring properly the
@@ -93,7 +93,7 @@ Description: Squirrelmail-Webmail plugin and configuration for AlternC
 Homepage: http://www.alternc.com/
 Description-fr.UTF-8: Suite logicielle d'hébergement mutualisé pour Debian
  AlternC est un logiciel d'hébergement mutualisé pour serveur Linux.
- Il permet de gérer les	sites web, domaines, ftp, emails, alias,
+ Il permet de gérer les sites web, domaines, ftp, emails, alias,
  statistiques web, listes de discussions, comptes jabber, etc.
  .
  Cette extension d'AlternC installe et configure le webmail Squirrelmail.
@@ -112,7 +112,7 @@ Provides: alternc-webmail
 Suggests: 
 Description: Roundcube-Webmail plugin and configuration for AlternC
  AlternC is a mutualized hosting software manager for Linux.
- It allows you to manage your websites,	  domains, ftp, emails, aliases,
+ It allows you to manage your websites, domains, ftp, emails, aliases,
  web statistics, mailing-lists, jabber accounts, etc.
  .
  This extension to AlternC is installing and configuring properly the
@@ -124,7 +124,7 @@ Description: Roundcube-Webmail plugin and configuration for AlternC
 Homepage: http://www.alternc.com/
 Description-fr.UTF-8: Suite logicielle d'hébergement mutualisé pour Debian
  AlternC est un logiciel d'hébergement mutualisé pour serveur Linux.
- Il permet de gérer les	sites web, domaines, ftp, emails, alias,
+ Il permet de gérer les sites web, domaines, ftp, emails, alias,
  statistiques web, listes de discussions, comptes jabber, etc.
  .
  Cette extension d'AlternC installe et configure le webmail Roundcube.

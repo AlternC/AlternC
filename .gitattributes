@@ -435,6 +435,7 @@ debian/alternc.preinst -text
 debian/alternc.prerm -text
 debian/changelog -text
 debian/compat -text
+debian/conffiles -text
 debian/control -text
 debian/copyright -text
 debian/docs -text
