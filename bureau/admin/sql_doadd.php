@@ -35,7 +35,7 @@ $fields = array (
 getFields($fields);
 if (!$quota->cancreate("mysql")) {
   $error=_("You ");
-  include("sql_add.php"); //FIXME svn del sql_add
+  include("sql_list.php");
   exit;
 }
 $q=$quota->getquota("mysql");
@@ -48,7 +48,7 @@ if($q['u'] > 0){
 
 if(!$mysql->add_db($dbname)) {
   $error=$err->errstr();
-  include("sql_add.php"); //FIXME svn del sql_add
+  include("sql_list.php");
   exit;
 }
 
