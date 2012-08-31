@@ -391,6 +391,7 @@ class m_dom {
 
   function create_default_subdomains($domain,$target_domain=""){
     global $db;
+    $err->log("dom","create_default_subdomains",$domain);
     $query="SELECT sub, domain_type, domain_type_parameter FROM default_subdomains WHERE concerned = 'SLAVE' or concerned = 'BOTH' and enabled=1;";
     if(empty($target_domain)) {
       $query="SELECT sub, domain_type, domain_type_parameter FROM default_subdomains WHERE concerned = 'MAIN' or concerned = 'BOTH' and enabled=1;";
@@ -419,6 +420,7 @@ class m_dom {
 
   function lst_default_subdomains(){
     global $db,$err;
+    $err->log("dom","lst_default_subdomains");
     $c=array();
     $db->query("select * from default_subdomains;");
      
@@ -437,13 +439,14 @@ class m_dom {
 
   
   function update_default_subdomains($arr) {
+    global $err;
+    $err->log("dom","update_default_subdomains");
     $ok=true;
     foreach ($arr as $a) {
       if (! isset($a['id'])) $a['id']=null;
       if(!empty($a['sub']) || !empty($a['domain_type_parameter'])){
 
         if (! isset($a['enabled'])) $a['enabled']=0;
-        printvar($a);
         if (! $this->update_one_default($a['domain_type'],$a['sub'], $a['domain_type_parameter'], $a['concerned'], $a['enabled'],$a['id']) ) {
          $ok=false;
         }
@@ -454,14 +457,29 @@ class m_dom {
 
   function update_one_default($domain_type,$sub,$domain_type_parameter,$concerned,$enabled,$id=null){
     global $db,$err;
+    $err->log("dom","update_one_default");
     
     if($id==null)
-      $db->query("INSERT INTO default_subdomains values ('','".$sub."','".$domain_type."','".$domain_type_parameter."','".$concerned."','".$enabled."');");
+      $db->query("INSERT INTO default_subdomains values ('','".addslashes($sub)."','".addslashes($domain_type)."','".addslashes($domain_type_parameter)."','".addslashes($concerned)."','".addslashes($enabled)."');");
     else
-    $db->query("UPDATE default_subdomains set sub='".$sub."', domain_type='".$domain_type."',domain_type_parameter='".$domain_type_parameter."',concerned='".$concerned."',enabled='".$enabled."' where id=".$id.";");
+    $db->query("UPDATE default_subdomains set sub='".addslashes($sub)."', domain_type='".addslashes($domain_type)."',domain_type_parameter='".addslashes($domain_type_parameter)."',concerned='".addslashes($concerned)."',enabled='".addslashes($enabled)."' where id=".addslashes($id).";");
     return true;
       //update
     
+
+  }
+
+  function del_default_type($id){
+    global $err,$db;
+    $err->log("dom","del_default_type");
+
+    if(!$db->query("delete from default_subdomains where id=$id;")){
+      $err->raise("dom",_("Could not delete default type"));
+      return false;
+    }
+
+    return true;
+
 
   }
 

@@ -12,6 +12,14 @@ if (!$admin->enabled) {
     <h3><?php __("Manage defaults domains type"); ?></h3>
     <hr id="topbar" />
       <p><?php __("If you don't know what this page is about, don't touch anything, and read AlternC documentation about domain types"); ?></p>
+      <p><?php __("The Type column contains a type of available VirtualHost config on The server."); ?></p>
+      <p><?php __("The Setting column contains the variables to be expanded in the defaults configuration. Available values are:  "); ?></p>
+      <ul>
+        <li><?php __("%%DOMAIN%% : the Domain name"); ?></li>
+        <li><?php __("%%TARGETDOM%%: The destination domain"); ?></li>
+        <li><?php __("%%SUB%% : The subdomain name"); ?></li>
+        <li><?php __("%%DOMAINDIR%%: the domain directory on the file system"); ?></li>
+      </ul>
 
       <br />
       <?php
@@ -35,7 +43,7 @@ if (!empty($domup)) {
 
 $tab=$dom->lst_default_subdomains();
 ?>
-<form method="post" action="dom_defedit.php" name="main" id="main">
+<form method="post" action="adm_doms_def_type.php" name="main" id="main">
 <table class="tlist">
    <tr><th>&nbsp;</th><th><?php __("Sub"); ?></th><th><?php __("Type"); ?></th><th><?php __("settings"); ?></th><th><?php __("Concerned"); ?></th><th><?php __("Activation"); ?></th></tr>
 <?php
@@ -48,17 +56,20 @@ for($i=0;$i<count($tab)+1;$i++) {
     }
 ?>
 	<tr  class="lst<?php echo $col; ?>">
-  <td></td>
-  <td><input type='text' name='domup[<?php echo $i; ?>][sub]' value="<?php echo $val['sub']; ?>"/></td>
+  <td>
+  <div class="ina"><a href=dom_defdel.php?id=<?php echo $val['id']; ?> type=''><img src="images/delete.png" alt="<?php __("Delete"); ?>" /><?php __("Delete"); ?></a></div>
+  </td>
+
+  <td><input type='text' size="16" name='domup[<?php echo $i; ?>][sub]' value="<?php echo $val['sub']; ?>"/></td>
   <?php $type=array("VHOST","URL","WEBMAIL","");
   if(in_array($val['domain_type'],$type)){?> 
-  <td><select name='domup[<?php echo $i; ?>][domain_type]'>
+  <td><select width="100px" style="width:100px"  name='domup[<?php echo $i; ?>][domain_type]'>
         <option value='VHOST' <?php if($val['domain_type']=='VHOST') echo "selected=\"selected\""; ?> >VHOST</option>
         <option value='URL' <?php if($val['domain_type']=='URL') echo "selected=\"selected\""; ?> >URL</option>
         <option value='WEBMAIL' <?php if($val['domain_type']=='WEBMAIL') echo "selected=\"selected\""; ?> >WEBMAIL</option>
       </select>
   <?php }else{?>
-    <td><input type ='text' name='domup[<?php echo $i; ?>][domain_type]' value='<?php echo $val['domain_type']?>' ></td>
+    <td><input type ='text'  width="100px" style="width:100px" name='domup[<?php echo $i; ?>][domain_type]' value='<?php echo $val['domain_type']?>' ></td>
  <? }?>
   </td>
   <td><input type ='text' name='domup[<?php echo $i; ?>][domain_type_parameter]' value='<?php echo $val['domain_type_parameter']?>' ></td>
@@ -74,8 +85,8 @@ for($i=0;$i<count($tab)+1;$i++) {
 }
 ?>
 
+  <td><p><input type="submit" class="inb" name="submit" value="<?php __("Save"); ?>" /></p></td>
 </table>
-  <p><input type="submit" class="inb" name="submit" value="<?php __("Save"); ?>" /></p>
 </form>
 <?php
  include_once("foot.php"); ?>
