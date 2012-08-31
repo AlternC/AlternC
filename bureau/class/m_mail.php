@@ -571,6 +571,88 @@ class m_mail {
    }
  
 
+  /* ----------------------------------------------------------------- */
+  /**
+   * Return the list of allowed slave accounts (secondary-mx)
+   * @return array
+   */
+  function enum_slave_account() {
+    global $db,$err;
+    $db->query("SELECT login,pass FROM mxaccount;");
+    $res=array();
+    while ($db->next_record()) {
+        $res[]=$db->Record;
+    }
+    if (!count($res)) return false;
+    return $res;
+  }
+
+  /* ----------------------------------------------------------------- */
+  /**
+   * Check for a slave account (secondary mx)
+   * @param string $login the login to check
+   * @param string $pass the password to check
+   * @return boolean TRUE if the password is correct, or FALSE if an error occurred.
+   */
+  function check_slave_account($login,$pass) {
+    global $db,$err;
+    $login=mysql_escape_string($login);
+    $pass=mysql_escape_string($pass);
+    $db->query("SELECT * FROM mxaccount WHERE login='$login' AND pass='$pass';");
+    if ($db->next_record()) {
+        return true;
+    }
+    return false;
+  }
+  /* ----------------------------------------------------------------- */
+  /**
+   * Add a slave account that will be allowed to access the mxdomain list
+   * @param string $login the login to add
+   * @param string $pass the password to add
+   * @return boolean TRUE if the account has been created, or FALSE if an error occurred.
+   */
+  function add_slave_account($login,$pass) {
+    global $db,$err;
+    $login=mysql_escape_string($login);
+    $pass=mysql_escape_string($pass);
+    $db->query("SELECT * FROM mxaccount WHERE login='$login'");
+    if ($db->next_record()) {
+      $err->raise("mail",16);
+      return false;
+    }
+    $db->query("INSERT INTO mxaccount (login,pass) VALUES ('$login','$pass')");
+    return true;
+  }
+
+
+  /* ----------------------------------------------------------------- */
+  /**
+   * Remove a slave account
+   * @param string $login the login to delete
+   */
+  function del_slave_account($login) {
+    global $db,$err;
+    $login=mysql_escape_string($login);
+    $db->query("DELETE FROM mxaccount WHERE login='$login'");
+    return true;
+  }
+
+  /* ----------------------------------------------------------------- */
+  /** hook function called by AlternC when a domain is created for
+   * the current user account using the SLAVE DOMAIN feature
+   * This function create a CATCHALL to the master domain
+   * @param string $dom Domain that has just been created
+   * @param string $master Master domain
+   * @access private
+   */
+  function alternc_add_slave_domain($dom,$slave) { //FIXME don't we have to change his name ?
+    global $err;
+    $err->log("mail","alternc_add_slave_domain",$dom);
+    $this->add_mail($dom,"",0,"","@".$slave);
+    return true;
+  }
+
+
 } /* Class m_mail */
 
 
