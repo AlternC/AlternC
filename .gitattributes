@@ -333,7 +333,6 @@ bureau/admin/powered2.jpg -text
 bureau/admin/quota_show.php -text
 bureau/admin/quotas_oneuser.php -text
 bureau/admin/quotas_users.php -text
-bureau/admin/sql_add.php -text
 bureau/admin/sql_admin.php -text
 bureau/admin/sql_bck.php -text
 bureau/admin/sql_del.php -text
