@@ -10,7 +10,7 @@ BEGIN
                        *      79228162514264337593543950336 -- 65536 ^ 6
          + CAST(CONV(SUBSTRING(n FROM 11 FOR 4), 16, 10) AS DECIMAL(39))
                        *          1208925819614629174706176 -- 65536 ^ 5
-         + CAST(CONV(SUBSTRING(n FROM 16 FOR 4), 16, 10) AS DECIMAL(39)) 
+         + CAST(CONV(SUBSTRING(n FROM 16 FOR 4), 16, 10) AS DECIMAL(39))
                        *               18446744073709551616 -- 65536 ^ 4
          + CAST(CONV(SUBSTRING(n FROM 21 FOR 4), 16, 10) AS DECIMAL(39))
                        *                    281474976710656 -- 65536 ^ 3
@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS `address` (
 
 --
 -- Mailbox table.
--- 
+--
 -- Local delivered mailboxes.
 
 CREATE TABLE IF NOT EXISTS `mailbox` (
@@ -109,7 +109,7 @@ CREATE TABLE IF NOT EXISTS `mailbox` (
   `delivery` varchar(255) NOT NULL, -- Delivery transport.
   `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- Update date, for technical usage only.
   `bytes` bigint(20) NOT NULL DEFAULT '0', -- number of bytes in the mailbox, filled by dovecot
-  `messages` int(11) NOT NULL DEFAULT '0', -- number of messages in the mailbox, filled by dovecot 
+  `messages` int(11) NOT NULL DEFAULT '0', -- number of messages in the mailbox, filled by dovecot
   `lastlogin` datetime NOT NULL, -- Last login, filled by dovecot
   `mail_action` enum('OK','DELETE','DELETING') NOT NULL default 'OK', -- mail_action is DELETE or DELETING when deleting a mailbox by cron
   PRIMARY KEY (`id`),
@@ -163,9 +163,9 @@ concat('*:storage=',cast(`mailbox`.`quota` as char charset latin1),'M') AS `user
 `domaines`.`compte` AS `userdb_uid`,
 `domaines`.`compte` AS `userdb_gid`,
 `mailbox`.`bytes` AS `quota_dovecot`,
-`mailbox`.`messages` AS `nb_messages` 
+`mailbox`.`messages` AS `nb_messages`
 from ((`mailbox`
-join `address` on((`address`.`id` = `mailbox`.`address_id`))) 
+join `address` on((`address`.`id` = `mailbox`.`address_id`)))
 join `domaines` on((`domaines`.`id` = `address`.`domain_id`)))
 where `address`.`enabled` = 1
 ;
@@ -174,9 +174,9 @@ where `address`.`enabled` = 1
 -- Structure de la vue `alias_view`
 --
 
-CREATE OR REPLACE VIEW `alias_view` AS 
+CREATE OR REPLACE VIEW `alias_view` AS
 select concat(`address`.`address`,'@',`domaines`.`domaine`) AS `mail`,
-concat(if(isnull(`mailbox`.`id`),'',concat(concat(`address`.`address`,'@',`domaines`.`domaine`),'\n')),`recipient`.`recipients`) AS `alias` 
+concat(if(isnull(`mailbox`.`id`),'',concat(concat(`address`.`address`,'@',`domaines`.`domaine`),'\n')),`recipient`.`recipients`) AS `alias`
 from (((`recipient` join `address` on((`address`.`id` = `recipient`.`address_id`)))
 left join `mailbox` on((`mailbox`.`address_id` = `address`.`id`)))
 join `domaines` on((`domaines`.`id` = `address`.`domain_id`)))
@@ -254,4 +254,232 @@ INSERT INTO `default_subdomains` (`sub`, `domain_type`, `domain_type_parameter`,
 ('mail', 'URL', 'mail.%%TARGETDOM%%', 'SLAVE'),
 ('', 'URL', '%%TARGETDOM%%', 'SLAVE');
 
+
+-- -------------------------------------------------
+-- Update domaines table.
+alter table domaines
+    drop primary key;
+
+alter table domaines
+    add column id bigint(20) unsigned NOT NULL AUTO_INCREMENT primary key;
+
+alter table domaines
+    add unique key(domaine);
+-- End of update domaines table.
+-- -------------------------------------------------
+
+-- -------------------------------------------------
+-- Add column to follow the migration process and detect unmigrated entries
+alter table mail_domain
+    add column migration_state enum ('UNMIGRATED', 'WONT BE MIGRATED', 'DB MIGRATED', 'FS MIGRATED') not null default 'UNMIGRATED';
+
+alter table mail_users
+    add column migration_state enum ('UNMIGRATED', 'WONT BE MIGRATED', 'DB MIGRATED', 'FS MIGRATED') not null default 'UNMIGRATED';
+
+alter table mail_alias
+    add column migration_state enum ('UNMIGRATED', 'WONT BE MIGRATED', 'DB MIGRATED', 'FS MIGRATED') not null default 'UNMIGRATED';
+
+
+-- Tag mail_domain addresses without @ to not migrated.
+update mail_domain
+    set mail_domain.migration_state='WONT BE MIGRATED'
+    where locate('@', mail_domain.mail) = 0;
+
+-- Tag mail_domain addresses with no corresponding domain in domaines to not migrate
+update mail_domain
+    set mail_domain.migration_state='WONT BE MIGRATED'
+    where locate('@', mail_domain.mail) > 0
+        and substring_index(mail_domain.mail, '@', -1) not in (select domaines.domaine from domaines);
+
+-- Tag mail_domain addresses with two @
+update mail_domain
+    set mail_domain.migration_state='WONT BE MIGRATED'
+    where locate('@', mail_domain.mail) > 0
+        and mail_domain.mail like '%@%@%';
+
+-- Tag mail
+update mail_users
+    set mail_users.migration_state='WONT BE MIGRATED'
+    where alias in (select replace(mail_domain.mail, '@', '_')
+        from mail_domain
+        where mail_domain.migration_state='WONT BE MIGRATED');
+
+update mail_users
+    set mail_users.migration_state='WONT BE MIGRATED'
+    where alias in (select mail_domain.mail
+        from mail_domain
+        where mail_domain.migration_state='WONT BE MIGRATED');
+
+
+-- update mail_domain, domaines
+--     set migration_state='WONT BE MIGRATED'
+--     where mail = domaines.domaine;
+
+-- End of add column to follow the migration process and detect unmigrated entries
+-- -------------------------------------------------
+
+-- -------------------------------------------------
+-- Insert data into new model from old model.
+
+-- Insert local managed mailboxes
+insert into address (domain_id, address, type, password)
+    select domaines.id as domain_id,
+    substring_index(mail_domain.mail, '@', 1) as address,
+    '' as type,
+    mail_users.password
+    from domaines
+        join mail_domain
+            on domaines.domaine = substring_index(mail_domain.mail, '@', -1)
+        join mail_users
+            on locate(concat(trim(mail_users.alias), ' '), concat(trim(replace(mail_domain.alias, '\n', ' ')), ' ')) = 1
+    where mail_domain.migration_state='UNMIGRATED'
+        and mail_domain.mail like '%@%'
+        and mail_domain.type = 0
+        and mail_domain.pop = 1;
+
+insert into mailbox (address_id, path, delivery, lastlogin)
+    select address.id,
+    mail_users.path,
+    'dovecot' as delivery,
+    0 as last_login
+    from address
+        join domaines
+            on domaines.id = address.domain_id
+        join mail_domain
+            on mail_domain.mail = concat(address.address, '@', domaines.domaine)
+        join mail_users
+            on locate(concat(trim(mail_users.alias), ' '), concat(trim(replace(mail_domain.alias, '\n', ' ')), ' ')) = 1
+    where mail_domain.migration_state='UNMIGRATED'
+        and mail_domain.mail like '%@%'
+        and mail_domain.type = 0
+        and mail_domain.pop = 1;
+
+insert into recipient (address_id, recipients)
+    select address.id as address_id,
+    recipients.recipients
+    from address
+        join domaines
+            on domaines.id = address.domain_id
+        join (select
+                mail_domain.mail as mail,
+                trim(both '\n' from trim(replace(mail_domain.alias, replace(mail_domain.mail, '@', '_'), ''))) as recipients
+            from mail_domain
+            where mail_domain.migration_state='UNMIGRATED'
+                and mail_domain.mail like '%@%'
+                and mail_domain.type = 0
+                and mail_domain.pop = 1) as recipients
+            on recipients.recipients != ''
+                and recipients.mail = concat(address.address, '@', domaines.domaine);
+
+update mail_domain, domaines, mail_users
+    set mail_domain.migration_state = 'DB MIGRATED',
+        mail_users.migration_state = 'DB MIGRATED'
+    where mail_domain.migration_state='UNMIGRATED'
+        and domaines.domaine = substring_index(mail_domain.mail, '@', -1)
+        and locate(concat(trim(mail_users.alias), ' '), concat(trim(replace(mail_domain.alias, '\n', ' ')), ' ')) = 1
+        and mail_domain.mail like '%@%'
+        and mail_domain.type = 0
+        and mail_domain.pop = 1;
+
+update mail_domain, domaines, mail_users
+    set mail_users.migration_state = 'DB MIGRATED'
+    where mail_domain.migration_state='UNMIGRATED'
+        and domaines.domaine = substring_index(mail_domain.mail, '@', -1)
+        and mail_users.alias = mail_domain.mail
+        and mail_domain.mail like '%@%'
+        and mail_domain.type = 0
+        and mail_domain.pop = 1;
+
+-- Here we should have inserted all local managed mailboxes and their aliases.
+
+-- Insert alias only adresses.
+insert into address (domain_id, address, type, password)
+    select domaines.id as domain_id,
+    substring_index(mail_domain.mail, '@', 1) as address,
+    '' as type,
+    '' as password
+    from domaines
+        join mail_domain
+            on domaines.domaine = substring_index(mail_domain.mail, '@', -1)
+    where mail_domain.mail like '%@%'
+        and mail_domain.type = 0
+        and mail_domain.pop = 0;
+
+insert into recipient (address_id, recipients)
+    select address.id as address_id,
+    trim(both '\n' from recipients.recipients)
+    from address
+        join domaines
+            on domaines.id = address.domain_id
+        join (select
+                mail_domain.mail as mail,
+                mail_domain.alias as recipients
+            from mail_domain
+            where mail_domain.migration_state='UNMIGRATED'
+                and mail_domain.mail like '%@%'
+                and mail_domain.type = 0
+                and mail_domain.pop = 0) as recipients
+            on recipients.recipients != ''
+                and recipients.mail = concat(address.address, '@', domaines.domaine);
+
+update mail_domain, domaines
+    set mail_domain.migration_state = 'DB MIGRATED'
+    where mail_domain.migration_state='UNMIGRATED'
+        and domaines.domaine = substring_index(mail_domain.mail, '@', -1)
+        and mail_domain.mail like '%@%'
+        and mail_domain.type = 0
+        and mail_domain.pop = 0;
+
+-- Insert procmail managed addresses.
+-- Note: those addresses should be treated as local managed adresses.
+
+-- Insert mailman list addresses
+insert into address (domain_id, address, type, password)
+    select domaines.id as domain_id,
+    substring_index(mail_domain.mail, '@', 1) as address,
+    'mailman' as type,
+    '' as password
+    from domaines
+        join mail_domain
+            on domaines.domaine = substring_index(mail_domain.mail, '@', -1)
+        join mail_alias
+            on mail_alias.mail = mail_domain.alias
+    where mail_domain.migration_state='UNMIGRATED'
+        and mail_domain.type = 1
+        and mail_domain.pop = 0
+        and mail_alias.alias like '"| /var/lib/mailman/mail/mailman %';
+
+update mail_domain, domaines, mail_alias
+    set mail_domain.migration_state = 'DB MIGRATED'
+    where mail_domain.migration_state='UNMIGRATED'
+        and domaines.domaine = substring_index(mail_domain.mail, '@', -1)
+        and mail_alias.mail = mail_domain.alias
+        and mail_domain.type = 1
+        and mail_alias.alias like '"| /var/lib/mailman/mail/mailman %';
+
+-- Insert sympa list addresses
+insert into address (domain_id, address, type, password)
+    select domaines.id as domain_id,
+    substring_index(mail_domain.mail, '@', 1) as address,
+    'sympa' as type,
+    '' as password
+    from domaines
+        join mail_domain
+            on domaines.domaine = substring_index(mail_domain.mail, '@', -1)
+        join mail_alias
+            on mail_alias.mail = mail_domain.alias
+    where mail_domain.migration_state='UNMIGRATED'
+        and mail_domain.type = 1
+        and mail_domain.pop = 0
+        and mail_alias.alias like '"|/usr/lib/sympa/bin/bouncequeue %';
+
+update mail_domain, domaines, mail_alias
+    set mail_domain.migration_state = 'DB MIGRATED'
+    where mail_domain.migration_state='UNMIGRATED'
+        and domaines.domaine = substring_index(mail_domain.mail, '@', -1)
+        and mail_alias.mail = mail_domain.alias
+        and mail_domain.type = 1
+        and mail_alias.alias like '"|/usr/lib/sympa/bin/bouncequeue %';
+-- End of insert data into new model from old model.
+-- -------------------------------------------------
 
