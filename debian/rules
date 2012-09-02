@@ -99,6 +99,9 @@ install: build
 	# alternc-squirrelmail:
 	(cd squirrelmail && $(MAKE) install DESTDIR=$(CURDIR)/debian/alternc-squirrelmail)
 
+	# alternc-upnp
+	(cd upnp && $(MAKE) install DESTDIR=$(CURDIR)/debian/alternc-upnp)
+
 	# alternc-awstats:
 	(cd awstats && $(MAKE) install DESTDIR=$(CURDIR)/debian/alternc-awstats)
 	cd ..

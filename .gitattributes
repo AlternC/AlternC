@@ -593,3 +593,9 @@ tools/top_ftp_users -text
 tools/top_http_users -text
 tools/top_mysql_users -text
 /tx-to-repos.sh -text
+upnp/Makefile -text
+upnp/adminmenu_upnp.php -text
+upnp/m_upnp.php -text
+upnp/update_upnp.sh -text
+upnp/upnp-cron -text
+upnp/upnp.sql -text

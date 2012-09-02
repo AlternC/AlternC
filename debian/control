@@ -91,7 +91,7 @@ Description: Squirrelmail-Webmail plugin and configuration for AlternC
  .
  More information at http://www.alternc.com/
 Homepage: http://www.alternc.com/
-Description-fr.UTF-8: Suite logicielle d'hébergement mutualisé pour Debian
+Description-fr.UTF-8: Webmail Squirrelmail pour AlternC
  AlternC est un logiciel d'hébergement mutualisé pour serveur Linux.
  Il permet de gérer les sites web, domaines, ftp, emails, alias,
  statistiques web, listes de discussions, comptes jabber, etc.
@@ -122,7 +122,7 @@ Description: Roundcube-Webmail plugin and configuration for AlternC
  .
  More information at http://www.alternc.com/
 Homepage: http://www.alternc.com/
-Description-fr.UTF-8: Suite logicielle d'hébergement mutualisé pour Debian
+Description-fr.UTF-8: Webmail Roundcube pour AlternC
  AlternC est un logiciel d'hébergement mutualisé pour serveur Linux.
  Il permet de gérer les sites web, domaines, ftp, emails, alias,
  statistiques web, listes de discussions, comptes jabber, etc.
@@ -150,3 +150,32 @@ Description: Awstats statistics module for AlternC
  managment to the virtual desktop.
  .
  More information on http://www.alternc.com/.
+
+Package: alternc-upnp
+Architecture: all
+Pre-depends: debconf (>= 0.5.00) | debconf-2.0
+Depends: debianutils (>= 1.13.1), alternc (>= 1.1), miniupnpc
+Description: UPnP client for AlternC 
+ AlternC is a mutualized hosting software manager for Linux.
+ It allows you to manage your websites, domains, ftp, emails, aliases,
+ web statistics, mailing-lists, jabber accounts, etc.
+ .
+ This extension to AlternC is installing a UPnP IGD client and make it so
+ that your router required tcp and udp port are forwarded to AlternC.
+ You need that only if your AlternC's server is behind a NAT router.
+ .
+ More information at http://www.alternc.com/
+Homepage: http://www.alternc.com/
+Description-fr.UTF-8: Client UPnP pour AlternC
+ AlternC est un logiciel d'hébergement mutualisé pour serveur Linux.
+ Il permet de gérer les sites web, domaines, ftp, emails, alias,
+ statistiques web, listes de discussions, comptes jabber, etc.
+ .
+ Cette extension d'AlternC installe un client UPnP IGD et fait de telle
+ sorte que les ports udp et tcp nécessaire au fonctionnement de votre
+ serveur sous AlternC soient transmis depuis votre routeur.
+ Vous n'avez besoin de cette extension que si votre serveur AlternC est
+ situé derrière un routeur NAT.
+ .
+ Pour plus d'informations, consultez http://www.alternc.com/
+
