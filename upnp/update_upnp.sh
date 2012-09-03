@@ -1,47 +1,31 @@
-#!/bin/bash
-# 
-# This configures the upnp client for AlternC
-# 
+#!/usr/bin/php
+   <?php
 
-CONFIG_FILE="/etc/alternc/local.sh"
+$f=@fopen("/etc/alternc/local.sh","rb");
+if (!$f) {
+  echo "Can't find /etc/alternc/local.sh, please install AlternC properly !\n";
+  exit();
+}
 
-if [ ! -r "$CONFIG_FILE" ]; then
-    echo "Can't access $CONFIG_FILE."
-    exit 1
-fi
-. "$CONFIG_FILE"
+$ALTERNC_LOC="";
+while ($s=fgets($f,1024)) {
+  if (strpos($s,"=")!==false) {
+    list($key,$val)=explode("=",trim($s),2);
+    if (trim($key)=="ALTERNC_LOC") {
+      $val=trim(trim($val,"'\""));
+      $ALTERNC_LOC=$val;
+      break;
+    }
+  }
+  
+}
+fclose($f);
+if (!$ALTERNC_LOC) {
+  echo "Can't find ALTERNC_LOC in /etc/alternc/local.sh, please install AlternC properly !\n";
+  exit();  
+}
 
-# Some vars
-umask 022
-LOCK_FILE="/tmp/alternc-upnp.lock"
+require_once($ALTERNC_LOC."/class/config_nochk.php"); 
 
-# Somes check before start operations
-if [ `id -u` -ne 0 ]; then
-    log_error "must be launched as root"
-elif [ -z "$INTERNAL_IP" -o -z "$PUBLIC_IP" ]; then
-    log_error "Bad configuration. Please use: dpkg-reconfigure alternc"
-elif [ -f "$LOCK_FILE" ]; then
-    process=$(ps f -p `cat "$LOCK_FILE"|tail -1`|tail -1|awk '{print $NF;}')
-    if [ "$(basename $process)" = "$(basename "$0")" ] ; then
-	log_error "last cron unfinished or stale lock file ($LOCK_FILE)."
-    else
-	rm "$LOCK_FILE"
-    fi
-fi
-
-# We lock the application
-echo $$ > "$LOCK_FILE"
-
-# Check the status of the router 
-upnpc -s
-if [ "$?" != "0" ]
-then
-    
-fi
-
-
-
-rm -f "$LOCK_FILE"
-
-exit 0
+$upnp->cron();
 

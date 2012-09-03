@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS `upnp` (
   `enabled` tinyint(3) unsigned NOT NULL,
   `lastcheck` datetime NOT NULL,
   `lastupdate` datetime NOT NULL,
+  `action` enum('CREATE','OK','DISABLE','ENABLE','DELETE','DELETING') NOT NULL DEFAULT 'CREATE',
   `result` varchar(128) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM COMMENT='UPnP port forwards and their status.';

@@ -599,3 +599,5 @@ upnp/m_upnp.php -text
 upnp/update_upnp.sh -text
 upnp/upnp-cron -text
 upnp/upnp.sql -text
+upnp/upnp_change.php -text
+upnp/upnp_list.php -text

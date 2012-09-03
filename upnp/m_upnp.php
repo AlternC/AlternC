@@ -85,9 +85,13 @@ class m_upnp {
     global $db,$err;
     $id=intval($id);
     $err->log("upnp","disable_port($id)");
-    $db->query("SELECT enabled FROM upnp WHERE id=$id;");
+    $db->query("SELECT enabled,mandatory FROM upnp WHERE id=$id;");
     if (!$db->next_record()) {
       $err->raise("upnp",_("The required port is not currently defined"));
+      return false;
+    }
+    if ($db->f("mandatory")) {
+      $err->raise("upnp",_("You can't disable that mandatory port forward"));
       return false;
     }
     if ($db->f("enabled")) {
@@ -99,6 +103,10 @@ class m_upnp {
     return true;
   }
 
+
+
+
   
 
-}
+} /* Class UPnP */
+
