@@ -386,8 +386,19 @@ class m_ftp {
     $str.=" </ftp>\n";
     return $str;
   }
-  
+
+
+  /* ----------------------------------------------------------------- */
+  /** hook function called by AlternC-upnp to know which open 
+   * tcp or udp ports this class requires or suggests
+   * @return array a key => value list of port protocol name mandatory values
+   * @access private
+   */
+  function hook_upnp_list() {
+    return array(
+		 "ftp" => array("port" => 21, "protocol" => "tcp", "mandatory" => 1),
+		 );
+  }  
   
 } /* Class m_ftp */
 
-?>

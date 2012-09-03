@@ -388,5 +388,3 @@ class m_hta {
 } /* CLASS m_hta */
 
 
-
-?>
