@@ -1,0 +1,15 @@
+#! /bin/bash
+
+#script used to update Postfix Master.cf file, to use dovecot delivery service.
+#launch from alternc.install
+
+
+name="/etc/postfix/master.cf"
+
+if grep -q dovecot $name ; then  
+  echo "Policy already active, not updated" 
+else 
+  echo -e "dovecot unix    -       n       n       -       0   pipe\n\tflags=DRhu  user=vmail:vmail argv=/usr/bin/sudo /usr/lib/dovecot/deliver -f \${sender} -d \${recipient}" >> $name 
+  echo "Policy updated" 
+fi
+

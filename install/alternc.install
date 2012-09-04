@@ -329,7 +329,7 @@ grep -v '^\ *#' $postfix_conf |while read line ; do
 done 
 
 # Conviguring delivery used by Postfix
-echo `/usr/lib/alternc/postfix-add-policy dovecot vmail:vmail DRhu pipe '/usr/bin/sudo /usr/lib/dovecot/deliver -f ${sender} -d ${recipient} '`
+. ./alternc_add_policy_dovecot
 
 # Bug #1215: configure mydestination when $FQDN is not in
 OLDDESTINATION=`postconf mydestination | awk -F '=' '{print $2}'`

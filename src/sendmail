@@ -3,6 +3,7 @@
 # 1. On lit les en-têtes et on mémorise l'état.
 
 $fr="";
+
 $rt="";
 
 open(SM,"|/usr/sbin/sendmail -t -i");

@@ -556,6 +556,7 @@ src/Makefile -text
 src/alternc-check -text
 src/alternc-dboptimize -text
 src/alternc-passwd -text
+src/alternc_add_policy_dovecot -text
 src/alternc_reload -text
 src/compress_logs.sh -text
 src/cron_users.sh -text
@@ -569,7 +570,6 @@ src/functions_dns.sh -text
 src/functions_hosting.sh -text
 src/mem_add -text
 src/mem_del -text
-src/postfix-add-policy -text
 src/quota-warning.sh -text
 src/quota_delete -text
 src/quota_edit -text
