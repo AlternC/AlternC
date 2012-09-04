@@ -1,5 +1,5 @@
 #!/usr/bin/php
-   <?php
+<?php
 
 $f=@fopen("/etc/alternc/local.sh","rb");
 if (!$f) {

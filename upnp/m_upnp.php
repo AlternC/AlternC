@@ -104,6 +104,67 @@ class m_upnp {
   }
 
 
+  /* ----------------------------------------------------------------- */
+  /** cron launched every minute to check the status of UPnP forwarding
+   */
+  function cron() {
+    global $hooks;
+    // if we check anything less than 5 minutes ago, or if the upnp table is empty, let's make a check...
+    $db->query("SELECT UNIX_TIMESTAMP(lastcheck) AS lc, * FROM upnp ORDER BY lastcheck ASC;");
+    $forwards=array();
+    $bigcheck=false;
+    if (!$db->next_record()) {
+      $bigcheck=true;
+    } else {
+      if ($db->f("lc")+600<time()) { 
+	$bigcheck=true;
+      }
+      do {
+	$db->Record["found"]=false;
+	$forwards[]=$db->Record;
+      } while ($db->next_record());
+    }
+    
+    if ($bigcheck) {
+      // Do the check first by calling the hooks & comparing the arrays
+      $res=$hooks->invoke("hooks_upnp_list");
+      foreach($res as $c=>$tmp) {
+	foreach($tmp as $name=>$v) {
+
+	  // We compare the hook array with the forwards array
+	  $found=false;
+	  for($i=0;$i<count($forwards);$i++) {
+	    if ($forwards[$i]["class"]==$c && 
+		$forwards[$i]["name"]==$name && 
+		$forwards[$i]["protocol"]==$v["protocol"] && 
+		$forwards[$i]["port"]==$v["port"] && 
+		$forwards[$i]["mandatory"]==$v["mandatory"]) {
+	      // Found it and unchanged
+	      $forwards[$i]["found"]=true;
+	      $found=true;
+	    }
+	  } // compare with forwards class.
+	  if (!$found) {
+	    // Mark it for creation
+	    $db->query("INSERT INTO upnp SET mandatory='".addslashes($v["mandatory"])."', protocol='".addslashes($v["protocol"])."', port='".addslashes($v["port"])."', name='".addslashes($name)."', action='CREATE'");
+	    $id=$db->last_id();
+	    $forwards[]=array("id"=>$id, "mandatory" => intval($v["mandatory"]), "protocol" => $v["protocol"], "port" => intval($v["port"]), "name" => $name, "action" => "CREATE");
+	  }
+	} // for each port forward in that class
+      } // for each hooked class
+      // We search the "not found" and remove them from the array
+      for($i=0;$i<count($forwards);$i++) {
+	if (!$forwards[$i]["found"]) {
+	  $forwards[$i]["action"]="DELETING";
+	  $db->query("UPDATE upnp SET action='DELETING' WHERE id=".$forwards[$i]["id"].";");
+	}
+      }
+      
+      
+    } // bigcheck ?
+  }
+  
+
 
 
   
