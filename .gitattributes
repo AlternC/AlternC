@@ -424,6 +424,7 @@ debian/alternc-slave.prerm -text
 debian/alternc-slave.templates -text
 debian/alternc-squirrelmail.dirs -text
 debian/alternc-squirrelmail.postinst -text
+debian/alternc-upnp.dirs -text
 debian/alternc.config -text
 debian/alternc.cron.d -text
 debian/alternc.dirs -text
@@ -598,6 +599,7 @@ upnp/adminmenu_upnp.php -text
 upnp/m_upnp.php -text
 upnp/update_upnp.sh -text
 upnp/upnp-cron -text
+upnp/upnp-install -text
 upnp/upnp.sql -text
 upnp/upnp_change.php -text
 upnp/upnp_list.php -text
