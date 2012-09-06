@@ -108,7 +108,7 @@ class m_upnp {
   /** cron launched every minute to check the status of UPnP forwarding
    */
   function cron() {
-    global $hooks;
+    global $hooks,$L_INTERNAL_IP,$PUBLIC_IP;
     // if we check anything less than 5 minutes ago, or if the upnp table is empty, let's make a check...
     $db->query("SELECT UNIX_TIMESTAMP(lastcheck) AS lc, * FROM upnp ORDER BY lastcheck ASC;");
     $forwards=array();
@@ -129,30 +129,32 @@ class m_upnp {
       // Do the check first by calling the hooks & comparing the arrays
       $res=$hooks->invoke("hooks_upnp_list");
       foreach($res as $c=>$tmp) {
-	foreach($tmp as $name=>$v) {
-
-	  // We compare the hook array with the forwards array
-	  $found=false;
-	  for($i=0;$i<count($forwards);$i++) {
-	    if ($forwards[$i]["class"]==$c && 
-		$forwards[$i]["name"]==$name && 
-		$forwards[$i]["protocol"]==$v["protocol"] && 
-		$forwards[$i]["port"]==$v["port"] && 
-		$forwards[$i]["mandatory"]==$v["mandatory"]) {
-	      // Found it and unchanged
-	      $forwards[$i]["found"]=true;
-	      $found=true;
+	if (is_array($tmp) && count($tmp)) {
+	  foreach($tmp as $name=>$v) {
+	    
+	    // We compare the hook array with the forwards array
+	    $found=false;
+	    for($i=0;$i<count($forwards);$i++) {
+	      if ($forwards[$i]["class"]==$c && 
+		  $forwards[$i]["name"]==$name && 
+		  $forwards[$i]["protocol"]==$v["protocol"] && 
+		  $forwards[$i]["port"]==$v["port"] && 
+		  $forwards[$i]["mandatory"]==$v["mandatory"]) {
+		// Found it and unchanged
+		$forwards[$i]["found"]=true;
+		$found=true;
+	      }
+	    } // compare with forwards class.
+	    if (!$found) {
+	      // Mark it for creation
+	      $db->query("INSERT INTO upnp SET mandatory='".addslashes($v["mandatory"])."', protocol='".addslashes($v["protocol"])."', port='".addslashes($v["port"])."', name='".addslashes($name)."', action='CREATE'");
+	      $id=$db->last_id();
+	      $forwards[]=array("id"=>$id, "mandatory" => intval($v["mandatory"]), "protocol" => $v["protocol"], "port" => intval($v["port"]), "name" => $name, "action" => "CREATE");
 	    }
-	  } // compare with forwards class.
-	  if (!$found) {
-	    // Mark it for creation
-	    $db->query("INSERT INTO upnp SET mandatory='".addslashes($v["mandatory"])."', protocol='".addslashes($v["protocol"])."', port='".addslashes($v["port"])."', name='".addslashes($name)."', action='CREATE'");
-	    $id=$db->last_id();
-	    $forwards[]=array("id"=>$id, "mandatory" => intval($v["mandatory"]), "protocol" => $v["protocol"], "port" => intval($v["port"]), "name" => $name, "action" => "CREATE");
-	  }
-	} // for each port forward in that class
+	  } // for each port forward in that class
+	} 
       } // for each hooked class
-      // We search the "not found" and remove them from the array
+      // Now We search the "not found" and remove them from the array
       for($i=0;$i<count($forwards);$i++) {
 	if (!$forwards[$i]["found"]) {
 	  $forwards[$i]["action"]="DELETING";
@@ -160,9 +162,70 @@ class m_upnp {
 	}
       }
       
-      
     } // bigcheck ?
-  }
+    
+    // Ask for the current upnp status of forwarded ports
+    $status=array(); $statusout=array(); $bad=false;
+    unset($out);
+    exec("upnpc -l 2>&1",$res,$out);
+    foreach($out as $line) {
+      // example line:  1 TCP   222->192.168.0.5:22   'libminiupnpc' ''
+      if (preg_match("#^ *([0-9]+) (TCP|UDP) *([0-9]+)\-\>([0-9\.]+):([0-9]+) *#",$line,$mat)) {
+	if ($mat[4]==$L_INTERNAL_IP) {
+	  $status[]=array("protocol" => $mat[2], "port" => $mat[3]);
+	} else {
+	  $statusout[]=array("protocol" => $mat[2], "port" => $mat[3], "ip" => $mat[4]);
+	}
+      }
+      if (preg_match("#No IGD UPnP Device found on the network#",$line)) {
+	$bad=true;
+      }
+    } // For each line in upnpc -l (check list)
+
+    // No UPnP peripheral !! maybe you should not have installed AlternC-upnp altogether ? 
+    if ($bad) {
+      foreach($forwards as $f) {
+	if ($f["action"]!="OK") {
+	  $db->query("UPDATE upnp SET lastupdate=NOW(), lastcheck=NOW(), result='No UPnP device detected in your network !' WHERE id=".$f["id"].";");
+	} else {
+	  $db->query("UPDATE upnp SET lastupdate=NOW(), lastcheck=NOW(), WHERE id=".$f["id"].";");
+	}
+      }
+      return;
+    }
+
+    // Now, for each forward, we either 
+    // * check it (via upnpc -l parsing)
+    // * add it (via upnpc -a)
+    // * remove it (via upnpc -d)
+    foreach($forwards as $f) {
+      switch ($f["action"]) {
+      case "OK": // check
+	$found=false;
+	foreach($status as $s) {
+	  if ($s["port"]==$f["port"] && $s["protocol"]==$s["protocol"]) {
+	    $found=true;
+	    $db->query("UPDATE upnp SET lastcheck=NOW() WHERE id=".$f["id"].";");
+	  }
+	}
+	if (!$found) {
+	  // Search this protocol+port in the OTHER list ... if found, tell it ...
+	}
+	break;
+      case "CREATE": 
+	break;
+      case "DELETE":
+      case "DELETING":
+	break;
+      case "DISABLE":
+	break;
+      case "ENABLE":
+	break;
+      }
+    }
+
+
+  } // CRON function
   
 
 
