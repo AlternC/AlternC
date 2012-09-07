@@ -71,6 +71,9 @@ if(isset($r['user'])){
 		<th><?php __("Password"); ?></th>
 		<td><code><?php echo $r['password']; ?></code></td>
 	</tr>
+	<tr>
+		<td colspan=2 align=center><a href="/alternc-sql/?server=2" target=_blank><?php __("Web interface PhpMyAdmin"); ?></a></td>
+	</tr>
 <?php
 }
 ?>
