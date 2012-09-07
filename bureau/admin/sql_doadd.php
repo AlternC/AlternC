@@ -52,7 +52,7 @@ if(!$mysql->add_db($dbname)) {
   exit;
 }
 
-
-include("sql_list.php");
+header('Location: sql_getparam.php?dbname='.htmlentities($dbname));
+#include("sql_list.php");
 
 ?>
