@@ -148,7 +148,7 @@ class m_mysql {
     $err->log("mysql","php_myadmin_connect");
     $db->query("SELECT  name,password FROM dbusers WHERE uid='$cuid' and enable='ADMIN';");
     if (!$db->num_rows()) {
-      $err->raise("mysql",11);
+      $err->raise("mysql",_("Cannot connect to PhpMyadmin"));
       return false;
     }
     $db->next_record();
@@ -182,7 +182,7 @@ class m_mysql {
     $size=$this->get_db_size($dbname);
     $db->query("SELECT login,pass,db, bck_mode, bck_gzip, bck_dir, bck_history FROM db WHERE uid='$cuid' AND db='$dbname';");
     if (!$db->num_rows()) {
-      $err->raise("mysql",4);
+      $err->raise("mysql",_("The database %s not found"),$dbn);
       return array("enabled"=>false);
     }
     $c=array();
@@ -209,7 +209,7 @@ class m_mysql {
     $err->log("mysql","add_db",$dbn);
     $password_user="";
     if (!$quota->cancreate("mysql")) {
-      $err->raise("mysql",1);
+      $err->raise("mysql",_("Your databases quota is over. You cannot create more databases."));
       return false;
     }
     $pos=strpos($dbn,'_');
@@ -221,18 +221,18 @@ class m_mysql {
       $dbn=$dbncomp[1];
     }
     if (!preg_match("#^[0-9a-z]*$#",$dbn)) {
-      $err->raise("mysql",2);
+      $err->raise("mysql",_("Database name can only only letters and numbers."));
       return false;
     }
 
 
     if (strlen($dbname) > 64) {
-      $err->raise("mysql",12);
+      $err->raise("mysql",_("Database name cannot exceed 64 characters."));
       return false;
     }
     $db->query("SELECT * FROM db WHERE db='$dbname';");
     if ($db->num_rows()) {
-      $err->raise("mysql",3);
+      $err->raise("mysql",_("Database %s already exists."),$dbn);
       return false;
     }
 
@@ -250,7 +250,7 @@ class m_mysql {
       $myadm=$db->f("name");  
       $password=$db->f("password");  
     }else{
-      $err->raise("mysql",3);//FIXME error code
+      $err->raise("mysql",_("There is a problem with the special PhpMyadmin user. Contact the administrator."));//FIXME error code
       return false;
     }
 
@@ -269,7 +269,7 @@ class m_mysql {
       return true;
     } else {
       $err->log("mysql","add_db",$dbn);
-      $err->raise("mysql",3);
+      $err->raise("mysql",_("An error occured. The database could not be created."));
       return false;
     }
   }
@@ -287,7 +287,7 @@ class m_mysql {
     $dbname=addslashes($dbn);
     $db->query("SELECT uid FROM db WHERE db='$dbname';");
     if (!$db->num_rows()) {
-      $err->raise("mysql",4);
+      $err->raise("mysql",_("The database was not found. Suppression failed."));
       return false;
     }
     $db->next_record();
@@ -321,13 +321,13 @@ class m_mysql {
     global $db,$err,$mem,$bro,$cuid;
     $err->log("mysql","put_mysql_backup");
     if (!preg_match("#^[0-9a-z]*$#",$dbn)) {
-      $err->raise("mysql",2);
+      $err->raise("mysql",_("Database name can contain only letters and numbers."));
       return false;
     }
     $dbname=$mem->user["login"].($dbn?"_":"").$dbn;
     $db->query("SELECT * FROM db WHERE uid='$cuid' AND db='$dbname';");
     if (!$db->num_rows()) {
-      $err->raise("mysql",4);
+      $err->raise("mysql",_("Database %s not found."),$dbn);
       return false;
     }
     $db->next_record();
@@ -340,11 +340,11 @@ class m_mysql {
     if (!$bck_mode)
       $bck_mode="0";
     if (!$bck_history) {
-      $err->raise("mysql",5);
+      $err->raise("mysql",_("You have to choose how many backups you want to keep."));
       return false;
     }
     if (($bck_dir=$bro->convertabsolute($bck_dir,0))===false) { // return a full path or FALSE
-      $err->raise("mysql",6);
+      $err->raise("mysql",_("Directory does not exists."));
       return false;
     }
     $db->query("UPDATE db SET bck_mode='$bck_mode', bck_history='$bck_history', bck_gzip='$bck_gzip', bck_dir='$bck_dir' WHERE uid='$cuid' AND db='$dbname';");
@@ -362,19 +362,20 @@ class m_mysql {
     $err->log("mysql","put_mysql_details");
     $db->query("SELECT * FROM db WHERE uid='$cuid';");
     if (!$db->num_rows()) {
-      $err->raise("mysql",7);
+      $err->raise("mysql",_("Database not found."));
       return false;
     }
     $db->next_record();
     $login=$db->f("login");
 
-    if (strlen($password)>16) {
-      $err->raise("mysql",8);
-      return false;
-    }
     if (!$password) {
-      $err->raise("mysql",20);
+      $err->raise("mysql",_("You have to set a new password."));
       return false;      
+    }
+
+    if (strlen($password)>16) {
+      $err->raise("mysql",_("Mysql password cannot exceed 16 characters."));
+      return false;
     }
 
     // Check this password against the password policy using common API : 
@@ -403,7 +404,7 @@ class m_mysql {
     $err->log("mysql","grant",$base."-".$user);
 
     if(!preg_match("#^[0-9a-z_\\*\\\\]*$#",$base)){
-      $err->raise("mysql","base_not_match");
+      $err->raise("mysql",_("Database name can only contain letters and numbers."));
       return false;
     }elseif(!$db->query("select db from db where db='$base';")){
       $err->raise("mysql","query base fail");
@@ -413,18 +414,18 @@ class m_mysql {
     if($rights==null){
       $rights='ALL PRIVILEGES';
     }elseif(!preg_match("#^[a-zA-Z,\s]*$#",$rights)){
-      $err->raise("mysql","rights_fail");
+      $err->raise("mysql",_("Databases rights are not correct."));
       return false;
     }
 
     if(!preg_match("#^[0-9a-z_]*$#",$user)) {
-      $err->raise("mysql","user match");
+      $err->raise("mysql",_("Database username can contain only letters numbers and underscores"));
       return false;
     }
     $db->query("select name from dbusers where name='".$user."' ;");
 
     if(!$db->num_rows()){
-      $err->raise("mysql","num row 0:");
+      $err->raise("mysql","Database user not found.");
       return false;
     }
     if($rights == "FILE"){
@@ -439,7 +440,7 @@ class m_mysql {
       $grant .= ";";
     }
     if(!$this->dbus->query($grant)){
-      $err->raise("mysql","grant fail:".$grant);
+      $err->raise("mysql",_("Could not grant rights."));
       return false;
     }
     return true;
@@ -461,7 +462,7 @@ class m_mysql {
       return false; 
     } 
     if (!($fi=$bro->convertabsolute($file,0))) {
-      $err->raise("mysql",9);
+      $err->raise("mysql",_("File not found."));
       return false; 
     }
     if (substr($fi,-3)==".gz") {
@@ -639,31 +640,31 @@ class m_mysql {
     $pass=addslashes($password);
 
     if (!$usern) {
-      $err->raise("mysql",21);
+      $err->raise("mysql",_("You have to input a username."));
       return false;
     }
     if (!$pass) {
-      $err->raise("mysql",20);
+      $err->raise("mysql",_("You have to input a password."));
       return false;
     }
     if (!preg_match("#^[0-9a-z]#",$usern)) {
-      $err->raise("mysql",14);
+      $err->raise("mysql",_("The username can contain only letters and numbers."));
       return false;
     }
 
 
     // We check the length of the COMPLETE username, not only the part after _
     if (strlen($user) > 16) {
-      $err->raise("mysql",15);
+      $err->raise("mysql",_("Mysql username cannot exceed 16 characters."));
       return false;
     }
     $db->query("SELECT * FROM dbusers WHERE name='$user';");
     if ($db->num_rows()) {
-      $err->raise("mysql",16);
+      $err->raise("mysql",_("The database user was not found."));
       return false;
     }
     if ($password != $passconf || !$password) {
-      $err->raise("mysql",17);
+      $err->raise("mysql",_("The passwords do not match."));
       return false;
     }
 
@@ -697,7 +698,7 @@ class m_mysql {
     $user=addslashes($usern);
     $pass=addslashes($password);
     if ($password != $passconf || !$password) {
-      $err->raise("mysql",17);
+      $err->raise("mysql",_("The passwords do not match."));
       return false;
     }
 
@@ -724,12 +725,12 @@ class m_mysql {
     global $db,$err,$mem,$cuid,$L_MYSQL_DATABASE;
     $err->log("mysql","del_user",$user);
     if (!preg_match("#^[0-9a-z]#",$user)) {
-      $err->raise("mysql",14);
+      $err->raise("mysql",_("The username can contain only letters and numbers."));
       return false;
     }
     $db->query("SELECT name FROM dbusers WHERE name='".$user."' and enable not in ('ADMIN','HIDDEN');");
     if (!$db->num_rows()) {
-      $err->raise("mysql",18);
+      $err->raise("mysql",_("The username was not found."));
       return false;
     }
     $db->next_record();
@@ -1005,7 +1006,7 @@ class m_mysql {
     $dir.="sql/";
     if(!is_dir($dir)){
       if(!mkdir($dir)){
-        $err->raise('mysql',4);
+        $err->raise('mysql',_("The directory could not be created"));
       }
     }
     // on exporte toutes les bases utilisateur.

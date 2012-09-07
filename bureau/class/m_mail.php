@@ -617,7 +617,7 @@ class m_mail {
     $pass=mysql_escape_string($pass);
     $db->query("SELECT * FROM mxaccount WHERE login='$login'");
     if ($db->next_record()) {
-      $err->raise("mail",16);
+      $err->raise("mail",_("The MX account was not found."));
       return false;
     }
     $db->query("INSERT INTO mxaccount (login,pass) VALUES ('$login','$pass')");
