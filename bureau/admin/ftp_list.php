@@ -84,7 +84,7 @@ while (list($key,$val)=each($r))
 		<td><label for="del_<?php echo $val["id"]; ?>"><?php echo $val["login"] ?></label>
                   <input type='hidden' name='names[<?php echo $val['id'];?>]' value='<?php echo $val["login"] ?>' >
                 </td>
-		<td><code><?php echo str_replace(ALTERNC_HTML,'',$val["dir"]) ?></code></td>
+		<td><code><?php echo substr(str_replace(ALTERNC_HTML,'',$val["dir"]),strlen($mem->user['login'])+3) ?></code></td>
 	</tr>
 <?php
 	}
