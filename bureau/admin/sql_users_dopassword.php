@@ -36,7 +36,10 @@ $fields = array (
 getFields($fields);
 
 $mysql->change_user_password($id,$password,$passwordconf);
-
-include("sql_users_list.php");
-
+$error=$err->errstr();
+if(isset($error) && $error){
+  include("sql_users_password.php");
+}else{
+  include("sql_users_list.php");
+}
 ?>

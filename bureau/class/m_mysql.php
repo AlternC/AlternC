@@ -696,6 +696,10 @@ class m_mysql {
 
     $usern=trim($usern);
     $user=addslashes($usern);
+    if(!preg_match("#^[0-9a-zA-Z_]*$#",$password)) {
+      $err->raise("mysql",_("Database password can contain only letters numbers and underscore."));
+      return false;
+    }
     $pass=addslashes($password);
     if ($password != $passconf || !$password) {
       $err->raise("mysql",_("The passwords do not match."));
