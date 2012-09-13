@@ -34,7 +34,7 @@ class m_cron {
   */
   function m_cron() {
   }
-  //FIXME add a  NOT NULL constraint on uid in the DB
+
   function schedule() {
     return Array(
 		 Array('unit'=>1440, 'name'=>_("Daily")),
@@ -109,12 +109,19 @@ class m_cron {
       return $this->delete_one($id);
     }
 
-    // FIXME check the url property
+
+    if(filter_var($url,FILTER_VALIDATE_URL)===false){
+      $err->raise("cron",_("URL not valid"));
+      return false;
+    }
     $url=mysql_real_escape_string(urlencode($url));
     $user=mysql_real_escape_string(urlencode($user));
     if (empty($user)) $password='';
     $password=mysql_real_escape_string(urlencode($password));
-    if (! checkmail($email) == 0 ) return false;
+    if (! checkmail($email) == 0 ){ 
+        $err->raise("cron",_("Email address is not valid"));
+      return false;
+    }
     $email=mysql_real_escape_string(urlencode($email));
     if (! $this->valid_schedule($schedule)) return false;
 
@@ -126,7 +133,9 @@ class m_cron {
       }
     } else { // if not a new insert, check the $cuid
       $db->query("SELECT uid FROM cron WHERE id = $id;");
-      if (! $db->next_record()) { return "false"; } // return false if pb
+      if (! $db->next_record()) { 
+        return "false"; 
+      } // return false if pb
       if ( $db->f('uid') != $cuid ) {
         $err->raise("cron",_("Identity problem"));
         return false;

@@ -9,7 +9,7 @@ getFields($fields);
 
 if (!empty($cronupdate)) {
   if (! $cron->update($cronupdate)) {
-    $error=_("There was an error during the record.");
+    $error=$err->errstr();
   } else {
     $error=_("Save done.");
   }
@@ -75,7 +75,7 @@ foreach ($cron->schedule() as $cs) {
   <tr>
     <td/>
     <td>
-      <input type="submit" name="submit" class="inb" value="<?php __("Save"); ?>" />
+      <input type="submit" name="submit" class="inb" value="<?php __("Apply the modifications"); ?>" />
     </td>
 </table>
 
