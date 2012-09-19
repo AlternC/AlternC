@@ -76,11 +76,8 @@ _Description: Name of the secondary domain name server:
 Template: alternc/mysql/host
 Type: string
 _Description: Name of the mysql server:
- Please enter the fully qualified name of your mysql server host. On small
- systems, it IS "localhost" since you may have installed a local mysql
- server. If you are a bigger hosting service, you may put your mysql
- service on a remote synchronized ring or equivalent. In that case, please
- enter the hostname of your mysql server. This server MUST be able to
+ Please enter the fully qualified name of your mysql server host.
+ This server MUST be able to
  access the remote server at standard port (3306). It is recommended to use
  "127.0.0.1" instead of "localhost" if your postfix installation is
  configured in a chroot (which is the case, by default).
@@ -231,3 +228,24 @@ _Description: Slave servers
  the master server will attempt to reload apache on those remote
  servers. The alternc-slave package correctly configures those machines
  to allow login and reload.
+
+
+Template: alternc/use_local_mysql
+Type: boolean
+_Description:
+ A local MySQL connexion was established on the server. Do you Want to Use it, or do you prefer to use a remote server ?
+
+Template: alternc/use_remote_mysql
+Type: boolean
+_Description: 
+ No local Mysql server was found. Do you want to use a remote Mysql Server or abort the installation. 
+
+Template: alternc/remote_mysql_error
+Type: boolean
+_Description: 
+ Remote connection failed. Do you want to try again ?
+
+Template: alternc/use_private_ip
+Type: boolean
+_Description: 
+ The ip appears to be private, do you want to use it anyway ? The server might not be reachable from outside your network.

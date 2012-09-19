@@ -1,3 +1,12 @@
+alternc (1.1+nmu5) stable; urgency=low
+
+  * Modification in alternc package config script.
+    * Order of questions changed
+    * Check the public IP address according to RFC 1918
+    * checking SQL connectivity ( different procedure for local and remote server ) 
+
+ -- squidly <squidly@nnx.com>  Tue, 19 Sep 2012 13:47:47 +0200
+
 alternc (1.1+nmu4) stable; urgency=low
 
   * SQL Modification
