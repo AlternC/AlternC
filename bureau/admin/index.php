@@ -88,7 +88,7 @@ if (!$_SERVER[HTTPS]) {
   // Here we used to have a form to enter the squirrelmail's webmail.
   // Following the "rule of less astonishment, we try to put it here again, even though the webmail is now a plugin.
   $res=$hooks->invoke("hook_admin_webmail");
-if (($wr=get_variable("webmail_redirect")) && isset($res[$wr]) && $res[$wr]) {
+if (($wr=variable_get("webmail_redirect")) && isset($res[$wr]) && $res[$wr]) {
   $url=$res[$wr];
 } else {
   foreach($res as $r) if ($r!==false) { $url=$r; break; }
