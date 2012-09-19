@@ -341,6 +341,9 @@ INSERT IGNORE INTO forbidden_domains VALUES ('voila.fr');
 INSERT IGNORE INTO forbidden_domains VALUES ('wanadoo.fr');
 INSERT IGNORE INTO forbidden_domains VALUES ('yahoo.com');
 INSERT IGNORE INTO forbidden_domains VALUES ('yahoo.fr');
+INSERT IGNORE INTO forbidden_domains VALUES ('gmail.com');
+INSERT IGNORE INTO forbidden_domains VALUES ('orange.fr');
+INSERT IGNORE INTO forbidden_domains VALUES ('sfr.fr');
 
 --
 -- Structure de la table `tld`
@@ -372,6 +375,9 @@ INSERT IGNORE INTO tld VALUES ('be', 1);
 INSERT IGNORE INTO tld VALUES ('eu.org', 4);
 INSERT IGNORE INTO tld VALUES ('cjb.net', 4);
 INSERT IGNORE INTO tld VALUES ('asso.fr', 4);
+INSERT IGNORE INTO tld VALUES ('eu', 1);
+INSERT IGNORE INTO tld VALUES ('coop', 1);
+INSERT IGNORE INTO tld VALUES ('asia', 1);
 
 --
 -- Table structure for table 'variable'
