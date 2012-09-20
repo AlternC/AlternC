@@ -152,6 +152,14 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
   <p><input type="submit" class="inb" name="submit" value="<?php __("Delete the checked email addresses"); ?>" /></p>
 </form>
 
+<p><h5><?php __("Mail client configuration : "); ?></h5></p>
+<p><?php __("The account name to use is the mail address you want to use."); ?></p>
+<p><h5><?php __("Outgoing Mail"); ?></h5></p>
+<p><?php __("The SMTP server is $L_DEFAULT_MX. The default port to use is 25. or 587 if the port 25 is blocked. ( Common ISP practice.)"); ?>
+<br><?php __("The SMTP authentification parameters are the mail address you use and its associated password."); ?></p>
+<p><h5><?php __("Incomming Mail"); ?></h5></p>
+<p><?php __("The Incomming mail server is $L_DEFAULT_MX with port 110 if you want to use POP3 and 143 if you want to use the IMAP protocol."); ?>
+<br><?php __("to use the more secure capabilities of the mail protocol, it is advised to activate TLS / SSL in your mail client. In which case the POP3s port is 995 and the IMAPs port is 993."); ?></p>
 <?php
     } } // end if no mail for this domain
  include_once("foot.php"); ?>
