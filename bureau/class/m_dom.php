@@ -943,7 +943,7 @@ class m_dom {
       $dirr=$dest_root.$dest;
       if (! is_dir($dirr)) {
       $old = umask(0);
-	if(!mkdir($dirr,0777,true)){
+	if(!mkdir($dirr,0770,true)){
 	  $err->raise("dom",_("I can't write to the destination folder"));
         }
         umask($old);
