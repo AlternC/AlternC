@@ -229,23 +229,23 @@ _Description: Slave servers
  servers. The alternc-slave package correctly configures those machines
  to allow login and reload.
 
-
 Template: alternc/use_local_mysql
 Type: boolean
 _Description:
- A local MySQL connexion was established on the server. Do you Want to Use it, or do you prefer to use a remote server ?
+ A local MySQL connexion was established on the server. Do you Want to Use it. If not remote MySQL server connexion parameters will be needed.
 
 Template: alternc/use_remote_mysql
 Type: boolean
-_Description: 
- No local Mysql server was found. Do you want to use a remote Mysql Server or abort the installation. 
+_Description:
+ No local Mysql server was found. Do you want to use a remote Mysql Server. If not AlternC cannot be installed.
 
 Template: alternc/remote_mysql_error
 Type: boolean
-_Description: 
+_Description:
  Remote connection failed. Do you want to try again ?
 
 Template: alternc/use_private_ip
 Type: boolean
-_Description: 
+_Description:
  The ip appears to be private, do you want to use it anyway ? The server might not be reachable from outside your network.
+
