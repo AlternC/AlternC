@@ -935,7 +935,6 @@ class m_dom {
     if ($db->f('create_tmpdir')) {
       if (! is_dir($dest_root . "/tmp")) {
 	if(!mkdir($dest_root . "/tmp")){
-printvar("je viens de tenter de mkdir ++$dest_root/tmp++"); // FIXME Bullshit. Safemode à la con ?
 	  $err->raise("dom",_("I can't write to the destination folder"));
 	}
       }
@@ -943,10 +942,11 @@ printvar("je viens de tenter de mkdir ++$dest_root/tmp++"); // FIXME Bullshit. S
     if ($db->f('create_targetdir')) {
       $dirr=$dest_root.$dest;
       if (! is_dir($dirr)) {
-	if(!mkdir($dirr,null,1)){
-printvar("je viens de tenter de mkdir ++$dirr++"); // FIXME Bullshit. Safemode à la con ?
+      $old = umask(0);
+	if(!mkdir($dirr,0777,true)){
 	  $err->raise("dom",_("I can't write to the destination folder"));
         }
+        umask($old);
       }
     }
 
