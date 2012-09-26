@@ -16,12 +16,17 @@ if [ `id -u` -ne 0 ]; then
     exit 1
 fi
 
+. "$CONFIG_FILE"
+
 fix_mail() {
     read LOGIN GID || true
     while [ "$LOGIN" ]; do
         INITIALE=`echo $LOGIN |cut -c1`
-        REP="$ALTERNC_LOC/mail/$INITIALE/$LOGIN/"
+	MAIL=$(echo $LOGIN |sed -e 's/\@/_/')
+        REP="$ALTERNC_LOC/mail/$INITIALE/$MAIL/"
         chown --recursive $GID:vmail "$REP"
+	read LOGIN GID || true
+    done
 }
 
 query="select user,userdb_gid from dovecot_view"
