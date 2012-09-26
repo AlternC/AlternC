@@ -120,6 +120,7 @@ fi
 # Prepare template expansions
 #
 
+chown :alterncpanel /etc/alternc/local.sh
 . /etc/alternc/local.sh
 
 # Check ACL
