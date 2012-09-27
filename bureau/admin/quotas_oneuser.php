@@ -9,7 +9,7 @@ if (!isset($mode)) { # when included from adm_login, mode is not set
 ?>
 <center>
 
-<p><h3><center><?php __("Account"); ?> <span style="font-weight: bold;"><?php echo $c["login"]; ?></span></center></h3></p>
+<p><h3><center><?php __("Account"); ?> <span style="font-weight: bold;"><?php echo $mem->user["login"]; ?></span></center></h3></p>
 
 <div style="width: 550px">
 
@@ -17,7 +17,7 @@ if (!isset($mode)) { # when included from adm_login, mode is not set
 
 <?php
 
-  $totalweb = $quota->get_size_web_sum_user($c["uid"]);
+  $totalweb = $quota->get_size_web_sum_user($mem->user["uid"]);
 
   echo "<p>"._("Web Space:")." ";
   echo sprintf("%.1f", $totalweb / 1024)."&nbsp;"._("MB");
@@ -38,7 +38,7 @@ if (!isset($mode)) { # when included from adm_login, mode is not set
 <tbody>
 <?php
 
-  $domaines_user = $dom->enum_domains($c["uid"]);
+  $domaines_user = $dom->enum_domains($mem->user["uid"]);
   $totalmail=0;
   foreach ($domaines_user as $domaine) {
     $mstmp = $quota->get_size_mail_sum_domain($domaine);
@@ -99,7 +99,7 @@ if (!isset($mode)) { # when included from adm_login, mode is not set
 <!-- Les bases -->
 
 <?php
-  $totaldb = $quota->get_size_db_sum_user($c["login"]);
+  $totaldb = $quota->get_size_db_sum_user($mem->user["login"]);
 
   echo "<p>"._("Databases:")." ";
   echo sprintf("%.1f", $totaldb/(1024*1024))."&nbsp;"._("MB");
@@ -116,7 +116,7 @@ if (!isset($mode)) { # when included from adm_login, mode is not set
 <tbody>
 <?php
 
-  $db_sizes = $quota->get_size_db_details_user($c["login"]);
+  $db_sizes = $quota->get_size_db_details_user($mem->user["login"]);
   foreach ($db_sizes as $d) {
     echo "<tr><td>".$d["db"]."</td><td";
     if ($mode!=2) echo " style=\"text-align: right\"";
@@ -163,7 +163,7 @@ if (!isset($mode)) { # when included from adm_login, mode is not set
 <tbody>
 <?php
 
-  $mailman_size = $quota->get_size_mailman_details_user($c["uid"]);
+  $mailman_size = $quota->get_size_mailman_details_user($mem->user["uid"]);
   foreach ($mailman_size as $d) {
     echo "<tr><td>".$d["list"]."</td><td";
     if ($mode!=2) echo " style=\"text-align: right\"";
