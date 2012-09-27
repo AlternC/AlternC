@@ -452,5 +452,8 @@ for service in $SERVICES; do
     test -x /etc/init.d/$service && invoke-rc.d $service start || true
 done
 
+#launch fixperms 
+/usr/lib/alternc/fixperms.sh
+
 # hook 
 run-parts --arg=end /usr/lib/alternc/install.d 

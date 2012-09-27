@@ -117,14 +117,13 @@ doone() {
 
 fixfile() {
 	read GID LOGIN
-	/usr/bin/setfacl -bk $file
+	/usr/bin/setfacl -bk "$file"
 	echo "gid: $GID"
 	echo "file: $file"
-	chown alterncpanel:$GID $file
-	chmod 0770 $file
-	/usr/bin/setfacl  -m u:$GID:rw- -m g:$GID:rw- -m g:alterncpanel:rw- -m u:$GID:rw- -m g:$GID:rw- $file
+	chown alterncpanel:$GID "$file"
+	chmod 0770 "$file"
+	/usr/bin/setfacl  -m u:$GID:rw- -m g:$GID:rw- -m g:alterncpanel:rw- -m u:$GID:rw- -m g:$GID:rw- "$file"
 	echo file ownership and ACLs changed
-
 }
 
 if [[ "$file" != "" ]]; then
