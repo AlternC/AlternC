@@ -530,7 +530,7 @@ class m_bro {
           @touch($absolute."/".$_FILES['userfile']['name']);
         }
         if (@move_uploaded_file($_FILES['userfile']['tmp_name'], $absolute."/".$_FILES['userfile']['name'])) {
-	  exec("sudo /usr/lib/alternc/fixperms.sh -u ".$cuid." -f ".$absolute."/".$_FILES['userfile']['name']);
+	  exec("sudo /usr/lib/alternc/fixperms.sh -u ".$cuid." -f '".$absolute."/".$_FILES['userfile']['name']."'");
 	  return $absolute."/".$_FILES['userfile']['name'];
 	} else {
 	  $err->raise("bro",("Cannot create the requested file. Please check permissions."));
