@@ -178,7 +178,14 @@ class m_mysql {
     global $db,$err,$bro,$mem,$cuid;
     $root=getuserpath();
     $err->log("mysql","get_mysql_details");
-    $dbname=$mem->user["login"].($dbn?"_":"").$dbn;
+    $pos=strpos($dbn,'_');
+    if($pos === false){
+      $dbname=$dbn;
+    }else{
+      $dbncomp=explode('_',$dbn);
+      $dbname=$dbn;
+      $dbn=$dbncomp[1];
+    }
     $size=$this->get_db_size($dbname);
     $db->query("SELECT login,pass,db, bck_mode, bck_gzip, bck_dir, bck_history FROM db WHERE uid='$cuid' AND db='$dbname';");
     if (!$db->num_rows()) {
@@ -320,11 +327,19 @@ class m_mysql {
   function put_mysql_backup($dbn,$bck_mode,$bck_history,$bck_gzip,$bck_dir) {
     global $db,$err,$mem,$bro,$cuid;
     $err->log("mysql","put_mysql_backup");
+    $pos=strpos($dbn,'_');
+    if($pos === false){
+      $dbname=$dbn;
+    }else{
+      $dbncomp=explode('_',$dbn);
+      $dbname=$dbn;
+      $dbn=$dbncomp[1];
+    }
     if (!preg_match("#^[0-9a-z]*$#",$dbn)) {
       $err->raise("mysql",_("Database name can contain only letters and numbers."));
       return false;
     }
-    $dbname=$mem->user["login"].($dbn?"_":"").$dbn;
+    printvar("SELECT * FROM db WHERE uid='$cuid' AND db='$dbname';");
     $db->query("SELECT * FROM db WHERE uid='$cuid' AND db='$dbname';");
     if (!$db->num_rows()) {
       $err->raise("mysql",_("Database %s not found."),$dbn);
