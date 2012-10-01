@@ -205,6 +205,13 @@ EOF
 # hook 
 run-parts --arg=templates /usr/lib/alternc/install.d 
 
+
+######################################################################
+# Backup the Main database
+DB_BACKUP="/var/backups/alternc/${MYSQL_DATABASE}-db-`date +%Y%m%d-%H:%M:%S`.gz"
+db_dump="mysqldump --defaults-file=/etc/alternc/my.cnf --add-drop-table --allow-keywords --quote-names --force --quick --add-locks --lock-tables --extended-insert ${MYSQL_DATABASE}"
+$db_dump | /bin/gzip -c > $DB_BACKUP || echo "backup of the main database failed"
+
 #######################################################################
 # Backup configuration files
 #
