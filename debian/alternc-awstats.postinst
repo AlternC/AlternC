@@ -95,7 +95,7 @@ EOF
     # ADD menu item :
     if ! grep -q "^menu_aws.php$" "$MENUFILE"; then
         rm -f $MENUFILE.alternc_awstats
-        sed -e "s/menu_sta2.php/&\\
+        sed -e "s/menu_cron.php/&\\
 menu_aws.php/" <$MENUFILE >$MENUFILE.alternc_awstats
         mv -f $MENUFILE.alternc_awstats $MENUFILE
     fi
