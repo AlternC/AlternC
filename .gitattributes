@@ -21,6 +21,7 @@ awstats/awstats.cache.php -text
 awstats/awstats.sql -text
 awstats/awstats.template.conf -text
 awstats/awstats_alternc.png -text
+awstats/awstatsconfregenerate.sh -text
 awstats/bureau/admin/aws_add.php -text
 awstats/bureau/admin/aws_del.php -text
 awstats/bureau/admin/aws_doadd.php -text
