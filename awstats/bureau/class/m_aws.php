@@ -92,7 +92,7 @@ class m_aws {
       while ($db->next_record()) {
 	$r[]=array(
 		   "id"=>$db->f("id"),
-		   "hostname"=>$db->f("hostname"),
+		   "hostname"=>$db->f("hostname")
 		   );
       }
       $t=array();
@@ -102,11 +102,15 @@ class m_aws {
 	while ($db->next_record()) {
 		$u.=$db->f("login")." ";
 	}
-	$t[]=array("id"=>$v["id"],"hostname"=>$v["hostname"],"users"=>$u);
+	$t[]=array(
+        "id"=>$v["id"],
+        "hostname"=>$v["hostname"],
+        "users"=>$u
+    );
       }
       return $t;
     } else {
-      $err->raise("aws",1); // No statistics currently defined
+      $err->raise("aws",_("No statistics currently defined"));
       return false;
     }
   }
@@ -146,26 +150,33 @@ class m_aws {
                 "public"=>$public
 		   );
     } else {
-      $err->raise("aws",2); // This statistic does not exist
+      $err->raise("aws",_("This statistic does not exist"));
       return false;
     }
   }
 
 
-  /* ----------------------------------------------------------------- */
-  /** Return the list of domains / subdomains allowed for this member
+/* ----------------------------------------------------------------- */
+  /** Return the list of domains / subdomains allowed for this member with the type (MX,URL,...)
    * 
    * @return array an array of allowed domains / subdomains.
    */
   function host_list() {
     global $db,$err,$cuid;
     $r=array();
-    $db->query("SELECT domaine,sub FROM sub_domaines WHERE compte='$cuid' ORDER BY domaine,sub;");
+    $db->query("SELECT sd.domaine, sd.sub, dt.name, dt.description FROM sub_domaines sd, domaines_type dt WHERE compte='$cuid' AND lower(sd.type) = lower(dt.name) AND dt.only_dns = false ORDER BY domaine,sub;");
     while ($db->next_record()) {
       if ($db->f("sub")) {
-	$r[]=$db->f("sub").".".$db->f("domaine");
+        $r[]=array(
+            "hostname"=>$db->f("sub").".".$db->f("domaine"),
+            "type"=>$db->f("name"),
+            "desc"=>$db->f("description")
+        );
       } else {
-	$r[]=$db->f("domaine");
+        $r[]=array(
+            "hostname"=>$db->f("domaine"),
+            "type"=>"CACA",
+        );
       }
     }
     return $r;
@@ -209,15 +220,39 @@ class m_aws {
 
   /* ----------------------------------------------------------------- */
   /** 
-   * Draw options for a select html code with the list of allowed domains
+   * Draw options for a select html code with the list of allowed and availables domains
    * for this member.
    */
   function select_host_list($current) {
     $r=$this->host_list();
     reset($r);
     while (list($key,$val)=each($r)) {
-      if ($current==$val) $c=" selected=\"selected\""; else $c="";
-      echo "<option$c>$val</option>";
+      $ho=$val["hostname"];
+      $ty=$val["desc"];
+      if ($current==$ho) $c=" selected=\"selected\""; else $c="";
+      if ($this->check_host_available($ho)) echo "<option value=\"$ho\"$c>$ho ("._($ty).")</option>";
+    }
+    return true;
+  }
+
+
+  /* ----------------------------------------------------------------- */
+  /** 
+   * Check if hosts is already used by awstats
+   * of available for this member.
+   */
+  function check_host_available($current) {
+    global $err;
+    $err->log("aws","check_host_available",$current);
+    $r=$this->get_list();
+    if(is_array($r)){
+        reset($r);
+        while (list($key,$val)=each($r)) {
+          if ($current==$val["hostname"]) {
+              $err->raise("aws",_("Host already managed by awstats!"));
+              return false;
+          }
+        }
     }
     return true;
   }
@@ -275,7 +310,7 @@ class m_aws {
     $err->log("aws","delete_stats",$id);
     $db->query("SELECT hostname FROM aws WHERE id='$id' and uid='$cuid';");
     if (!$db->num_rows()) {
-      $err->raise("aws",2); // This statistic does not exist
+      $err->raise("aws",_("This statistic does not exist"));
       return false;
     }
     $db->next_record();
@@ -303,15 +338,21 @@ class m_aws {
     $err->log("aws","add_stats",$hostname);
     $ha="";
     $r=$this->host_list();
-    if (!in_array($hostname,$r) || $hostname=="") {
-      $err->raise("aws",3); // This hostname does not exist
+    $hosts=array();
+    foreach ($r as $key=>$val) {
+        $hosts[]=$val["hostname"];
+    }
+    reset($hosts);
+    if (!in_array($hostname,$hosts) || $hostname=="") {
+      $err->raise("aws",_("This hostname does not exist (Domain name)"));
       return false;
     }
+
     // Parse the hostaliases array (it should contains valid domains)
 	if (is_array($hostaliases)) {
 		foreach($hostaliases as $ho) {
-			if (!in_array($hostname,$r) || $hostname=="") {
-				$err->raise("aws",3); // This hostname does not exist
+			if (!in_array($ho,$hosts) || $hostname=="") {
+				$err->raise("aws",_("This hostname does not exist (Hostaliases)"));
 				return false;
 			}
 			$ha .= "$ho ";
@@ -331,7 +372,7 @@ class m_aws {
       mkdir($this->CACHEDIR."/".$hostname,0777);
       return true;
     } else {
-      $err->raise("aws",4); // Your stat quota is over...
+      $err->raise("aws",_("Your stat quota is over..."));
       return false;
     }
   }
@@ -344,7 +385,7 @@ class m_aws {
     $db->query("SELECT login FROM aws_users WHERE uid='$cuid';");
     $res=array();
     if (!$db->next_record()) {
-	$err->raise("aws",13); // No user currently defined
+	$err->raise("aws",_("No user currently defined"));
       return false;
     }
     do { 
@@ -402,7 +443,7 @@ class m_aws {
     global $db,$err,$cuid;
     $err->log("aws","del_login");
     if (!$this->login_exists($login,1)) {
-      $err->raise("aws",5); // Login does not exists
+      $err->raise("aws",_("Login does not exists")); // Login does not exists
       return false;
     }
     $db->query("DELETE FROM aws_users WHERE uid='$cuid' AND login='$login';");
@@ -418,11 +459,11 @@ class m_aws {
     $err->log("aws","add_login");
 
     if (!($login=$this->_check($login))) {
-      $err->raise("aws",6); // Login incorrect 
+      $err->raise("aws",_("Login incorrect")); // Login incorrect 
       return false;
     }
     if (!($this->login_exists($login,0))) {
-      $err->raise("aws",7); // Login does not exist
+      $err->raise("aws",_("Login does not exist")); // Login does not exist
       return false;
     }
     $pass=crypt($pass);
@@ -438,11 +479,11 @@ class m_aws {
     $err->log("aws","change_pass");
 
     if (!($login=$this->_check($login))) {
-      $err->raise("aws",6); // Login incorrect 
+      $err->raise("aws",_("Login incorrect")); // Login incorrect 
       return false;
     }
     if (!($this->login_exists($login))) {
-      $err->raise("aws",5); // Login does not exists
+      $err->raise("aws",_("Login does not exists")); // Login does not exists
       return false;
     }
     $pass=crypt($pass);
@@ -458,21 +499,21 @@ class m_aws {
     $err->log("aws","allow_login");
 
     if (!($login=$this->_check($login))) {
-      $err->raise("aws",6); // Login incorrect 
+      $err->raise("aws",_("Login incorrect")); // Login incorrect 
       return false;      
     }
     if (!$this->login_exists($login)) {
-      $err->raise("aws",5); // Login does not exists
+      $err->raise("aws",_("Login does not exists")); // Login does not exists
       return false;
     }
     $db->query("SELECT id FROM aws WHERE id='$id' AND uid='$cuid'");
     if (!$db->next_record()) {
-      $err->raise("aws",2); // The requested statistic does not exist.
+      $err->raise("aws",_("The requested statistic does not exist.")); // The requested statistic does not exist.
       return false;
     }
     $db->query("SELECT login FROM aws_access WHERE id='$id' AND login='$login'");
     if ($db->next_record()) {
-      $err->raise("aws",8); // This login is already allowed for this statistics.
+      $err->raise("aws",_("This login is already allowed for this statistics.")); // This login is already allowed for this statistics.
       return false;
     }
     $db->query("INSERT INTO aws_access (uid,id,login) VALUES ('$cuid','$id','$login');");
@@ -491,7 +532,7 @@ class m_aws {
 
     $db->query("SELECT id FROM aws WHERE id='$id' AND uid='$cuid'");
     if (!$db->next_record()) {
-      $err->raise("aws",2); // The requested statistic does not exist.
+      $err->raise("aws",_("The requested statistic does not exist.")); // The requested statistic does not exist.
       return false;
     }
     $db->query("DELETE FROM aws_access WHERE id='$id';");
@@ -509,21 +550,21 @@ class m_aws {
     $err->log("aws","deny_login");
 
     if (!($login=$this->_check($login))) {
-      $err->raise("aws",6); // Login incorrect 
+      $err->raise("aws",_("Login incorrect")); // Login incorrect 
       return false;
     }
     if (!$this->login_exists($login,0)) {
-      $err->raise("aws",5); // Login does not exists
+      $err->raise("aws",_("Login does not exists")); // Login does not exists
       return false;
     }
     $db->query("SELECT id FROM aws WHERE id='$id' AND uid='$cuid'");
     if (!$db->next_record()) {
-      $err->raise("aws",2); // The requested statistic does not exist.
+      $err->raise("aws",_("The requested statistic does not exist.")); // The requested statistic does not exist.
       return false;
     }
     $db->query("SELECT login FROM aws_access WHERE id='$id' AND login='$login'");
     if (!$db->next_record()) {
-      $err->raise("aws",9); // This login is already denied for this statistics.
+      $err->raise("aws",_("This login is already denied for this statistics.")); // This login is already denied for this statistics.
       return false;
     }
     $db->query("DELETE FROM aws_access WHERE id='$id' AND login='$login';");
@@ -611,11 +652,11 @@ class m_aws {
     }
     $r=$this->prefix_list();
     if (!in_array($prefix,$r)) { 
-      $err->raise("aws",10); // prefix not allowed. 
+      $err->raise("aws",_("prefix not allowed.")); // prefix not allowed. 
       return false;
     } 
    if (!preg_match('/^[0-9a-z_-]*$/', $postfix)){
-      $err->raise("aws",11); // Forbidden caracters in the postfix.
+      $err->raise("aws",_("Forbidden caracters in the postfix.")); // Forbidden caracters in the postfix.
       return false;
     }
     return $login;
@@ -629,7 +670,7 @@ class m_aws {
   function _delconf($hostname) {
     global $err;
     if (!preg_match('/^[._a-z0-9-]*$/', $hostname)){
-      $err->raise("aws",12); // Hostname is incorrect
+      $err->raise("aws",_("Hostname is incorrect")); // Hostname is incorrect
       return false;
     }
     @unlink($this->CONFDIR."/awstats.".$hostname.".conf");
@@ -650,7 +691,7 @@ class m_aws {
         $db->query("SELECT * FROM aws WHERE id='$id' AND uid='$cuid';");
     }
     if (!$db->num_rows()) {
-      $err->raise("aws",2); // This statistic does not exist
+      $err->raise("aws",_("This statistic does not exist")); // This statistic does not exist
       return false;
     }
     $db->next_record();

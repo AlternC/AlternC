@@ -32,14 +32,22 @@ $fields = array (
 );
 getFields($fields);
 
-$r=$aws->add_stats($hostname,$awsusers,$hostaliases,$public);
-if (!$r) {
-	$error=$err->errstr();
-	include("aws_add.php");
-	exit();
-} else {
-	$error=_("The statistics has been successfully created");
-	include("aws_list.php");
-	exit();
+if ($aws->check_host_available($hostname)) {
+    $r=$aws->add_stats($hostname,$awsusers,$hostaliases,$public);
+    if (!$r) {
+        $error=$err->errstr();
+        include("aws_add.php");
+        exit();
+    } else {
+        $error=_("The statistics has been successfully created");
+	    include("aws_list.php");
+	    exit();
+    }
 }
+else {
+    $error=$err->errstr();
+    include("aws_add.php");
+    exit();
+}
+
 ?>

@@ -56,11 +56,14 @@ include_once("head.php");
 <tr><th><?php __("Hostaliases"); ?></th><td>
 <?php  // TODO : put them on 2 columns (at least)
 $hl=$aws->host_list();
+reset($hl);
 $hatab=$aws->get_hostaliases($id);
-foreach ($hl as $ho) {
+while (list($key,$val)=each($hl)) {
+  $ho=$val["hostname"];
+  $ty=$val["desc"];
   echo "<input type=\"checkbox\" name=\"hostaliases[]\" id=\"ha_$ho\" value=\"$ho\"";
   if (in_array($ho,explode(" ",$hatab[0]))) echo " checked=\"checked\"";
-  echo " /><label for=\"ha_$ho\">$ho</label><br />\n";
+  echo " /><label for=\"ha_$ho\">$ho ($ty)</label><br />\n";
 }
 ?>
 </td></tr>
