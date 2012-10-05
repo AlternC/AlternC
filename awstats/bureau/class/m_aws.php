@@ -175,7 +175,8 @@ class m_aws {
       } else {
         $r[]=array(
             "hostname"=>$db->f("domaine"),
-            "type"=>"CACA",
+            "type"=>$db->f("name"),
+            "desc"=>$db->f("description")
         );
       }
     }
