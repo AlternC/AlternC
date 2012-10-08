@@ -101,7 +101,7 @@ class m_mail {
       global $db,$err,$cuid;
       $err->log("mail","enum_domains");
       if ($uid == -1) { $uid = $cuid; }
-      $db->query("SELECT d.id, d.domaine, COUNT(a.id) AS nb_mail FROM domaines d LEFT JOIN address a ON a.domain_id=d.id WHERE d.compte={$uid} GROUP BY d.id ORDER BY d.domaine ASC;");
+      $db->query("SELECT d.id, d.domaine, COUNT(a.id) AS nb_mail FROM domaines d LEFT JOIN address a ON a.domain_id=d.id WHERE d.compte={$uid} AND a.type='' GROUP BY d.id ORDER BY d.domaine ASC;");
       $this->enum_domains=array();
       while($db->next_record()){
           $this->enum_domains[]=$db->Record;
@@ -161,7 +161,7 @@ class m_mail {
     if ($count!=-1) $limit="LIMIT $offset,$count"; else $limit="";
     $db->query("SELECT a.id, a.address, a.password, a.`enabled`, a.mail_action, d.domaine AS domain, m.quota, m.quota*1024*1024 AS quotabytes, m.bytes AS used, NOT ISNULL(m.id) AS islocal, a.type, r.recipients, m.lastlogin  
          FROM (address a LEFT JOIN mailbox m ON m.address_id=a.id) LEFT JOIN recipient r ON r.address_id=a.id, domaines d 
-         WHERE $where AND d.id=a.domain_id $limit;");
+         WHERE $where AND d.id=a.domain_id AND a.type='' $limit ;");
     if (! $db->next_record()) {
       $err->raise("mail",_("No mail found for this query"));
       return false;
@@ -194,7 +194,7 @@ class m_mail {
    * @return an hashtable containing the database id of the newly created mail, 
    * or false if an error occured ($err is filled accordingly)
    */ 
-  function create($dom_id, $mail){
+  function create($dom_id, $mail,$type=""){
     global $err,$db,$cuid,$quota,$dom,$hooks;
     $err->log("mail","create");
 
@@ -228,7 +228,7 @@ class m_mail {
       return false;
     }
     // Create it now
-    $db->query("INSERT INTO address (domain_id, address) VALUES ($dom_id, '".addslashes($mail)."');");
+    $db->query("INSERT INTO address (domain_id, address,type) VALUES ($dom_id, '".addslashes($mail)."','$type');");
     if (!($id=$db->lastid())) {
       $err->raise("mail",_("An unexpected error occured when creating the email"));
       return false;
@@ -337,10 +337,11 @@ class m_mail {
       $err->raise("mail",_("The email %s does not exist, it can't be deleted"),$mail);
       return false;
     }
-    if ($db->f("type")!="") { // Technically special : mailman, sympa ... 
+    #This function is now used to delete mailman specific addres via the del_wrapper function so i'm commenting this part. Don't know if that's the right way tough..
+    /*if ($db->f("type")!="") { // Technically special : mailman, sympa ... 
       $err->raise("mail",_("The email %s is special, it can't be deleted"),$mail);
       return false;
-    }
+    }*/
     if ($db->f("mail_action")!="OK" || ($db->f("islocal") && $db->f("mailbox_action")!="OK")) { // will be deleted soon ...
       $err->raise("mail",_("The email %s is already marked for deletion, it can't be deleted"),$mail);
       return false;
@@ -467,12 +468,13 @@ class m_mail {
    * @param $mail_id integer the number of the email to delete
    * @param $islocal boolean is it a POP/IMAP mailbox ?
    * @param $quotamb integer if islocal=1, quota in MB
-   * @param $recipients string recipients, one mail per line.
+  * @param $recipients string recipients, one mail per line.
    * @return true if the email has been properly edited
    * or false if an error occured ($err is filled accordingly)
    */ 
-  function set_details($mail_id, $islocal, $quotamb, $recipients) {
+  function set_details($mail_id, $islocal, $quotamb, $recipients,$delivery="dovecot") {
     global $err,$db,$cuid,$quota,$dom,$hooks;
+    $delivery=mysql_escape_string($delivery);
     $err->log("mail","set_details");
     if (!($me=$this->get_details($mail_id))) {
       return false;
@@ -483,21 +485,24 @@ class m_mail {
     } 
     if (!$me["islocal"] && $islocal) {
       // create pop
-      $path=ALTERNC_MAIL."/".substr($me["address"]."_",0,1)."/".$me["address"]."_".$me["domain"];
+      $path="";
+      if($delivery=="dovecot"){
+        $path=ALTERNC_MAIL."/".substr($me["address"]."_",0,1)."/".$me["address"]."_".$me["domain"];
+      }
       foreach($this->forbiddenchars as $str) {
-	if (strpos($me["address"],$str)!==false) {
-	  $err->raise("mail",_("There is forbidden characters in your mail name. You can't make it a POP/IMAP account, you can only use it as redirections to other emails."));
-	  return false;
-	  break;
-	}
+	    if (strpos($me["address"],$str)!==false) {
+	      $err->raise("mail",_("There is forbidden characters in your mail name. You can't make it a POP/IMAP account, you can only use it as redirections to other emails."));
+          return false;
+          break;
+        }
       }
       foreach($this->specialchars as $str) {
-	if (strpos($me["address"],$str)!==false) {
-	  $path=ALTERNC_MAIL."/_/".$me["id"]."_".$me["domain"];
-	  break;
-	}
+	    if (strpos($me["address"],$str)!==false) {
+	      $path=ALTERNC_MAIL."/_/".$me["id"]."_".$me["domain"];
+	      break;
+  	    } 
       }
-      $db->query("INSERT INTO mailbox SET address_id=".$mail_id.", path='".addslashes($path)."';");
+      $db->query("INSERT INTO mailbox SET address_id=$mail_id, delivery='$delivery', path='".addslashes($path)."';");
     }
     if ($me["islocal"] && $islocal && $me["mailbox_action"]=="DELETE") {
       $db->query("UPDATE mailbox SET mail_action='OK' WHERE mail_action='DELETE' AND address_id=".$mail_id.";");
@@ -527,6 +532,30 @@ class m_mail {
     return true;
   }
 
+  /* ----------------------------------------------------------------- */
+  /** A wrapper used by mailman class to create it's needed addresses 
+   * @ param : $dom_id , the domain id associated to a given address
+   * @ param : $m , the left part of the  mail address being created
+   * @ param : $delivery , the delivery used to deliver the mail
+   */
+ 
+  function add_wrapper($dom_id,$m,$delivery){
+    global $err,$db,$ciud,$mail;
+    $err->log("mail","add_wrapper",$delivery);
+    $mail_id=$mail->create($dom_id,$m,$delivery);
+    $this->set_details($mail_id,1,0,"",$delivery);
+  }
+  
+  /* ----------------------------------------------------------------- */
+  /** A wrapper used by mailman class to create it's needed addresses 
+   * @ param : $mail_id , the mysql id of the mail address we want to delete
+   * of the email for the current acccount.
+   */
+  function del_wrapper($mail_id){
+    global $err,$db;
+    $err->log("mail","del_wrapper");
+    $this->delete($mail_id);
+  }
 
   /* ----------------------------------------------------------------- */
   /** Export the mail information of an account 
