@@ -73,7 +73,7 @@ fi
 if [ -d /etc/postfix ]; then
     CONFIG_FILES="$CONFIG_FILES etc/postfix/myalias.cf etc/postfix/myrelay.cf
                   etc/postfix/mydomain.cf etc/postfix/mygid.cf etc/postfix/myquota.cf
-                  etc/postfix/myvirtual.cf etc/postfix/sasl/smtpd.conf"
+                  etc/postfix/myvirtual.cf etc/postfix/mytransport.cf etc/postfix/sasl/smtpd.conf"
 fi
 if [ -e /etc/proftpd/proftpd.conf ]; then
     CONFIG_FILES="$CONFIG_FILES etc/proftpd/proftpd.conf etc/proftpd/welcome.msg etc/proftpd/modules.conf"
