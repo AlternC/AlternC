@@ -101,7 +101,15 @@ class m_mail {
       global $db,$err,$cuid;
       $err->log("mail","enum_domains");
       if ($uid == -1) { $uid = $cuid; }
-      $db->query("SELECT d.id, d.domaine, COUNT(a.id) AS nb_mail FROM domaines d LEFT JOIN address a ON a.domain_id=d.id WHERE d.compte={$uid} GROUP BY d.id ORDER BY d.domaine ASC;");
+      $db->query("SELECT domaines.id,domaines.domaine, IFNULL(mail, 0) as nb_mail
+                 FROM domaines  
+                 LEFT JOIN  
+		      (SELECT address.id, COUNT(*) AS mail
+		      FROM address 
+		      WHERE type=''
+		      GROUP BY address.domain_id) lol
+		 USING (id) 
+                 WHERE COMPTE={$uid}");
       $this->enum_domains=array();
       while($db->next_record()){
           $this->enum_domains[]=$db->Record;
@@ -544,7 +552,6 @@ class m_mail {
     $err->log("mail","add_wrapper","$m------$name-----$function");
 
     $mail_id=$mail->create($dom_id,$m,$delivery);
-    printvar($dom_id,$m,$delivery);
     if (!($domain=$dom->get_domain_byid($dom_id))) {
       return false;
     }
