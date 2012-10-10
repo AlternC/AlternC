@@ -101,7 +101,7 @@ class m_mail {
       global $db,$err,$cuid;
       $err->log("mail","enum_domains");
       if ($uid == -1) { $uid = $cuid; }
-      $db->query("SELECT d.id, d.domaine, COUNT(a.id) AS nb_mail FROM domaines d LEFT JOIN address a ON a.domain_id=d.id WHERE d.compte={$uid} AND a.type='' GROUP BY d.id ORDER BY d.domaine ASC;");
+      $db->query("SELECT d.id, d.domaine, COUNT(a.id) AS nb_mail FROM domaines d LEFT JOIN address a ON a.domain_id=d.id WHERE d.compte={$uid} GROUP BY d.id ORDER BY d.domaine ASC;");
       $this->enum_domains=array();
       while($db->next_record()){
           $this->enum_domains[]=$db->Record;
@@ -539,11 +539,24 @@ class m_mail {
    * @ param : $delivery , the delivery used to deliver the mail
    */
  
-  function add_wrapper($dom_id,$m,$delivery){
-    global $err,$db,$ciud,$mail;
-    $err->log("mail","add_wrapper",$delivery);
+  function add_wrapper($dom_id,$m,$delivery,$function,$name){
+    global $err,$db,$ciud,$mail,$dom;
+    $err->log("mail","add_wrapper","$m------$name-----$function");
+
     $mail_id=$mail->create($dom_id,$m,$delivery);
-    $this->set_details($mail_id,1,0,"",$delivery);
+    printvar($dom_id,$m,$delivery);
+    if (!($domain=$dom->get_domain_byid($dom_id))) {
+      return false;
+    }
+    if($function==""){
+      $recipient="$name";
+      $this->set_details($mail_id,1,0,"",$delivery);
+    }else{
+      $recipient="$name-$function";
+      $this->set_details($mail_id,0,0,"$recipient@$domain",$delivery);
+      $mail_id2=$mail->create($dom_id,$recipient,$delivery);
+      $this->set_details($mail_id2,1,0,"",$delivery);
+    }
   }
   
   /* ----------------------------------------------------------------- */
