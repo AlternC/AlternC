@@ -433,8 +433,8 @@ class m_mysql {
       return false;
     }
 
-    if(!preg_match("#^[0-9a-z_]*$#",$user)) {
-      $err->raise("mysql",_("Database username can contain only letters numbers and underscores"));
+    if(!preg_match("#^[0-9a-z_-]*$#",$user)) {
+      $err->raise("mysql",_("Database username can contain only letters numbers hyphen and underscores"));
       return false;
     }
     $db->query("select name from dbusers where name='".$user."' ;");
