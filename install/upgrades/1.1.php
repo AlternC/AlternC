@@ -31,7 +31,7 @@ $db->query("select distinct uid,login,pass from db;");
 //on insere dans dbusers avec enabled = admin
 $query=array();
 while($db->next_record()){
- $query[]="insert into dbusers values('',".$db->f('uid').",'".$db->f('login')."','".$db->f('pass')."',\"ADMIN\");";
+ $query[]="insert or update into dbusers values('',".$db->f('uid').",'".$db->f('login')."','".$db->f('pass')."',\"ADMIN\");";
 }
 foreach ($query as $q){
 $db->query($q);
@@ -43,6 +43,7 @@ $db->query("select Db from mysql.db ;");
 $query2=array();
 while($db->next_record()){
   $dbn=preg_replace("/^([A-Za-z0-9]*)_([A-Za-z0-9]*)/","$1\_$2",$db->f('Db'));
+  print_r( " update mysql.db set Db=replace(Db,'".$db->f('Db')."','".$dbn."');");
   $query2[]="update mysql.db set Db=replace(Db,'".$db->f('Db')."','".$dbn."');";
 }
 
