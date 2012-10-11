@@ -64,6 +64,8 @@ if (isset($error) && $error) {
     <th><?php __("Only DNS?");?></th>
     <th><?php __("Need to be DNS?");?></th>
     <th><?php __("Advanced?");?></th>
+    <th><?php __("Create tmp directory ?");?></th>
+    <th><?php __("create www directory ?");?></th>
     <th/>
 </tr>
 <?php 
@@ -83,6 +85,8 @@ foreach($dom->domains_type_lst() as $d) {
     <td><?php echo $d['only_dns']?__("Yes"):__("No");?></td>
     <td><?php echo $d['need_dns']?__("Yes"):__("No");?></td>
     <td><?php echo $d['advanced']?__("Yes"):__("No");?></td>
+    <td><?php echo $d['create_tmpdir']?__("Yes"):__("No");?></td>
+    <td><?php echo $d['create_targetdir']?__("Yes"):__("No");?></td>
 </tr>
 <?php } // end foreach 
 ?>

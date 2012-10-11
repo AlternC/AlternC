@@ -45,6 +45,8 @@ $fields = array (
     "only_dns"      => array ("request", "boolean", ""),
     "need_dns"      => array ("request", "boolean", ""),
     "advanced"      => array ("request", "boolean", ""),
+    "create_tmpdir"      => array ("request", "boolean", ""),
+    "create_targetdir"      => array ("request", "boolean", ""),
 );
 getFields($fields);
 
@@ -115,6 +117,16 @@ if (isset($error_edit) && $error_edit) {
 	    <tr>
             <th><?php __("Is it an advanced option?");?></th>
             <td><input name="advanced" type="checkbox" value="1" <?php cbox($d['advanced']); ?> /></td>
+      </tr>
+      </tr>
+	    <tr>
+            <th><?php __("Create tmp directory ?");?></th>
+            <td><input name="create_tmpdir" type="checkbox" value="1" <?php cbox($d['create_tmpdir']); ?> /></td>
+      </tr>
+      </tr>
+	    <tr>
+            <th><?php __("Create target directory ?");?></th>
+            <td><input name="create_targetdir" type="checkbox" value="1" <?php cbox($d['create_targetdir']); ?> /></td>
       </tr>
       <tr class="trbtn">
           <td colspan="2">

@@ -15,10 +15,12 @@ $fields = array (
 	"only_dns"    		=> array ("post", "string", ""),
 	"need_dns"    		=> array ("post", "string", ""),
 	"advanced"    		=> array ("post", "string", ""),
+	"create_tmpdir"    		=> array ("post", "string", ""),
+	"create_targetdir"    		=> array ("post", "string", ""),
 );
 getFields($fields);
 
-if ( ! $dom->domains_type_update($name, $description, $target, $entry, $compatibility, $enable, $only_dns, $need_dns, $advanced) ) {
+if ( ! $dom->domains_type_update($name, $description, $target, $entry, $compatibility, $enable, $only_dns, $need_dns, $advanced,$create_tmpdir,$create_targetdir) ) {
     die($err->errstr());
 } else {
     include("adm_domstype.php");
