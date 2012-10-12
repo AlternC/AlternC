@@ -480,6 +480,7 @@ etc/alternc/templates/postfix/myalias.cf -text
 etc/alternc/templates/postfix/mydomain.cf -text
 etc/alternc/templates/postfix/mygid.cf -text
 etc/alternc/templates/postfix/myquota.cf -text
+etc/alternc/templates/postfix/myrelay-domain.cf -text
 etc/alternc/templates/postfix/myrelay.cf -text
 etc/alternc/templates/postfix/mytransport.cf -text
 etc/alternc/templates/postfix/myvirtual.cf -text

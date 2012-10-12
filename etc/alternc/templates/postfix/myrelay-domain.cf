@@ -1,0 +1,10 @@
+#
+# %%warning_message%%
+#
+
+user = %%db_mail_user%%
+password = %%db_mail_pwd%%
+hosts =%%dbhost%%
+dbname = %%dbname%%
+query = select name from mailman where domain = '%d'
+
