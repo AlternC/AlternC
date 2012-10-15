@@ -53,8 +53,9 @@ host_create() {
     # First, usefull vars. Some may be empty or false, it's
     # OK, it will be solve in the "case" below
     local FQDN=$2
-    local REDIRECT=$3   # Yes, TARGET_DIR and REDIRECT are the same
-    local TARGET_DIR=$3 # It's used by different template
+    local MAIL_ACCOUNT=$3
+    local REDIRECT=$4   # Yes, TARGET_DIR and REDIRECT are the same
+    local TARGET_DIR=$4 # It's used by different template
     local USER=$(get_account_by_domain $FQDN)
     local U_ID=$(get_uid_by_name "$USER")
     local G_ID=$(get_uid_by_name "$USER")
@@ -100,6 +101,7 @@ host_create() {
         -e "s#%%redirect%%#$REDIRECT2#g" \
         -e "s#%%UID%%#$U_ID#g" \
         -e "s#%%GID%%#$G_ID#g" \
+        -e "s#%%mail_account%%#$MAIL_ACCOUNT#g" \
         $TMP_FILE
 
     # Check if all is right in the conf file

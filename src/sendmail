@@ -6,7 +6,7 @@ $fr="";
 
 $rt="";
 
-open(SM,"|/usr/sbin/sendmail -t -i");
+open(SM,"|/usr/sbin/sendmail -t -i -f '".@ARGV[0]."'");
 
 chomp($A=<STDIN>);
 while ($A ne "") {
