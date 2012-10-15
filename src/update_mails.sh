@@ -38,7 +38,6 @@ ionice > /dev/null && ionice="ionice -c 3 "
 # We lock the application
 echo $$ > "$LOCK_FILE"
 
-echo "kikou"
 # List the local addresses to DELETE
 # Foreach => Mark for deleting and start deleting the files
 # If process is interrupted, the row isn't deleted. We have to force it by reseting mail_action to 'DELETE'
