@@ -37,14 +37,13 @@
   et mettez votre ip dans le IF pour que seule votre ip puisse accéder au bureau : 
 */
 
-/*
-if (getenv("REMOTE_ADDR")!="81.56.98.108") {
+/* * /
+if (getenv("REMOTE_ADDR")!="127.0.0.1") {
   echo "Le bureau AlternC est en vacances jusqu'a minuit pour maintenance.<br>
 Merci de revenir plus tard.";
   exit();
 }
-*/
-    ini_set('display_errors', true);
+/* */
 
 // FIXME: Some constant, we put them here so that we can change them later ;) LFS 
 define('ALTERNC_MAIL',     "/var/alternc/mail");

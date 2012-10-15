@@ -162,7 +162,7 @@ $lac = $authip->list_affected();
     </td>
     <td valign=top width=40%>
       <fieldset>
-        <legend><?php __("Add an IP");?> - <a href="javascript:edit_ip('','<?php echo htmlentities($_SERVER['REMOTE_ADDR'])."','Home IP'";?>);" ><?php echo __("Add my current IP"); ?></a></legend>
+        <legend><?php __("Add an IP");?> - <a href="javascript:edit_ip('','<?php echo htmlentities(get_remote_ip())."','Home IP'";?>);" ><?php echo __("Add my current IP"); ?></a></legend>
         <span id="form_add_ip">
         <form method="post" action="ip_main.php" name="main" id="main">
           <p id="reset_edit_ip" style="display:none;"><a href="javascript:reset_edit_ip();"><?php __("Cancel edit")?></a></p>

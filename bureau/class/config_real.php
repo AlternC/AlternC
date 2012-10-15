@@ -32,13 +32,13 @@
    s'assurer que personne ne pourra accéder à 2 pages du bureau en même temps.
 */
 
-/*
-if (getenv("REMOTE_ADDR")!="81.56.98.108") {
+/* * /
+if (getenv("REMOTE_ADDR")!="127.0.0.1") {
   echo "Le bureau AlternC est en vacances jusqu'a minuit pour maintenance.<br>
 Merci de revenir plus tard.";
   exit();
 }
-*/
+/* */
 
 // 1. Get a semaphore id for the alternc magic number (18577)
 $alternc_sem = sem_get ( 18577 );

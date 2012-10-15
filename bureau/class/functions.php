@@ -101,6 +101,12 @@ function checkhostallow_nodns($domain) {
   return 0;
 }
 
+function get_remote_ip() {
+  // Return the remote IP.
+  // If you are behind a proxy, use X_FORWARDED_FOR instead of REMOTE_ADDR
+  return getenv('REMOTE_ADDR');
+}
+
 /* Check that $url is a correct url (http:// or https:// or ftp://)  */
 function checkurl($url) {
   // TODO : add a path/file check

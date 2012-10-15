@@ -104,18 +104,18 @@ class m_mem {
 
     $aga = $authip->get_allowed('panel');
     foreach ($aga as $k=>$v ) {
-      if ( $authip->is_in_subnet(getenv("REMOTE_ADDR"), $v['ip'], $v['subnet']) ) $allowed=true ;
+      if ( $authip->is_in_subnet(get_remote_ip(), $v['ip'], $v['subnet']) ) $allowed=true ;
     }
 
     // Error if there is rules, the IP is not allowed and it's not in the whitelisted IP
-    if ( sizeof($aga)>1 && !$allowed_ip && !$authip->is_wl(getenv("REMOTE_ADDR")) ) {
+    if ( sizeof($aga)>1 && !$allowed_ip && !$authip->is_wl(get_remote_ip()) ) {
       $err->raise("mem",_("Your IP isn't allowed to connect"));
       return false;
     }
     // End AuthIP
 
     if ($restrictip) {
-      $ip="'".getenv("REMOTE_ADDR")."'";
+      $ip="'".get_remote_ip()."'";
     } else $ip="''";
     /* Close sessions that are more than 2 days old. */
     $db->query("DELETE FROM sessions WHERE DATE_ADD(ts,INTERVAL 2 DAY)<NOW();");
@@ -154,7 +154,7 @@ class m_mem {
     $db->next_record();
     $this->user=$db->Record;
     $cuid=$db->f("uid");
-    $ip=getenv("REMOTE_ADDR");
+    $ip=get_remote_ip();
     $sess=md5(uniqid(mt_rand()));
     $_REQUEST["session"]=$sess;
     $db->query("insert into sessions (sid,ip,uid) values ('$sess','$ip','$cuid');");
@@ -175,7 +175,7 @@ class m_mem {
   function resetlast() {
     global $db,$cuid;
     $ip=addslashes(getenv("REMOTE_HOST"));
-    if (!$ip) $ip=addslashes(getenv("REMOTE_ADDR"));
+    if (!$ip) $ip=addslashes(get_remote_ip());
     $db->query("UPDATE membres SET lastlogin=NOW(), lastfail=0, lastip='$ip' WHERE uid='$cuid';");
   }
 
@@ -227,7 +227,7 @@ class m_mem {
       $err->raise("mem",_("Cookie incorrect, please accept the session cookie"));
       return false;
     }
-    $ip=getenv("REMOTE_ADDR");
+    $ip=get_remote_ip();
     $db->query("select uid,'$ip' as me,ip from sessions where sid='".$_COOKIE["session"]."'");
     if ($db->num_rows()==0) {
       $err->raise("mem",_("Session unknown, contact the administrator"));
@@ -306,7 +306,7 @@ class m_mem {
       $err->raise("mem",_("Cookie incorrect, please accept the session cookie"));
       return false;
     }
-    $ip=getenv("REMOTE_ADDR");
+    $ip=get_remote_ip();
     $db->query("select uid,'$ip' as me,ip from sessions where sid='".$_COOKIE["session"]."'");
     if ($db->num_rows()==0) {
       $err->raise("mem",_("Session unknown, contact the administrator"));
