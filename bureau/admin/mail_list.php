@@ -71,7 +71,11 @@ if ($quota->cancreate("mail")) {
 <?php 
 }
 
-if (!empty($mails_list)) {
+if (empty($mails_list)) {
+  echo "<p><i>";
+  __("No mails for this domain.");
+  echo "</i></p>";
+} else {
   ?>
 <br />
 <hr id="topbar"/>
@@ -152,14 +156,104 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
   <p><input type="submit" class="inb" name="submit" value="<?php __("Delete the checked email addresses"); ?>" /></p>
 </form>
 
-<p><h5><?php __("Mail client configuration : "); ?></h5></p>
-<p><?php __("The account name to use is the mail address you want to use."); ?></p>
-<p><h5><?php __("Outgoing Mail"); ?></h5></p>
-<p><?php __("The SMTP server is $L_DEFAULT_MX. The default port to use is 25. or 587 if the port 25 is blocked. ( Common ISP practice.)"); ?>
-<br><?php __("The SMTP authentification parameters are the mail address you use and its associated password."); ?></p>
-<p><h5><?php __("Incomming Mail"); ?></h5></p>
-<p><?php __("The Incomming mail server is $L_DEFAULT_MX with port 110 if you want to use POP3 and 143 if you want to use the IMAP protocol."); ?>
-<br><?php __("to use the more secure capabilities of the mail protocol, it is advised to activate TLS / SSL in your mail client. In which case the POP3s port is 995 and the IMAPs port is 993."); ?></p>
 <?php
     } } // end if no mail for this domain
- include_once("foot.php"); ?>
+?>
+
+<hr/>
+<h3><?php __("Mails configuration informations");?></h3>
+
+<?php __("Here are some configuration informations you'll need to configure your mail application.");?>
+
+<ul>
+  <li><b><?php __("Outgoing mail (SMTP)"); ?></b> :
+    <ul>
+      <li><b><a href="javascript:;" onClick="$('#cfg-submission').toggle();"><?php __("Submission");?></a></b>
+        <ul id='cfg-submission'>
+          <li><b><?php __("Server name: ");?></b> FIXME</li>
+          <li><b><?php __("Username: ");?></b> <?php __("The mail address you want to access <i>(example : myuser@example.tld)</i>");?></li>
+          <li><b><?php __("Port: ");?></b> 587</li>
+          <li><b><?php __("Authentication: ");?></b><?php __("Yes")?></li>
+          <li><b><?php __("Authentication method: ");?></b><?php __("Normal password")?></li>
+          <li><b><?php __("Connection security:");?></b> STARTTLS</li>
+        </ul>
+      </li>
+      <li><b><a href="javascript:;" onClick="$('#cfg-smtp').toggle();"><?php __("SMTP");?></a></b>
+        <ul id='cfg-smtp'>
+          <li><b><?php __("Server name: ");?></b> FIXME</li>
+          <li><b><?php __("Username: ");?></b> <?php __("The mail address you want to access <i>(example : myuser@example.tld)</i>");?></li>
+          <li><b><?php __("Port: ");?></b> 25</li>
+          <li><b><?php __("Authentication: ");?></b><?php __("FIXME")?></li>
+          <li><b><?php __("Authentication method: ");?></b><?php __("FIXME")?></li>
+          <li><b><?php __("Connection security:");?></b> FIXME</li>
+        </ul>
+      </li>
+       <li><b><a href="javascript:;" onClick="$('#cfg-smtps').toggle();"><?php __("SMTPS");?></a></b>
+        <ul id='cfg-smtps'>
+          <li><b><?php __("Server name: ");?></b> FIXME</li>
+          <li><b><?php __("Username: ");?></b> <?php __("The mail address you want to access <i>(example : myuser@example.tld)</i>");?></li>
+          <li><b><?php __("Port: ");?></b> 465</li>
+          <li><b><?php __("Authentication: ");?></b><?php __("FIXME")?></li>
+          <li><b><?php __("Authentication method: ");?></b><?php __("FIXME")?></li>
+          <li><b><?php __("Connection security:");?></b> FIXME</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><b><?php __("Incoming mails"); ?></b> :
+    <ul>
+      <li><b><a href="javascript:;" onClick="$('#cfg-imap').toggle();"><?php __("IMAP");?></a></b>
+        <ul id='cfg-imap'>
+          <li><b><?php __("Server name: ");?></b> FIXME</li>
+          <li><b><?php __("Port: ");?></b> 143</li>
+          <li><b><?php __("Authentication: ");?></b><?php __("Yes")?></li>
+          <li><b><?php __("Authentication method: ");?></b><?php __("Normal password")?></li>
+          <li><b><?php __("Connection security:");?></b> FIXME</li>
+        </ul>
+      </li>
+
+      <li><b><a href="javascript:;" onClick="$('#cfg-imaps').toggle();"><?php __("IMAPS");?></a></b>
+        <ul id='cfg-imaps'>
+          <li><b><?php __("Server name: ");?></b> FIXME</li>
+          <li><b><?php __("Port: ");?></b> 993</li>
+          <li><b><?php __("Authentication: ");?></b><?php __("Yes")?></li>
+          <li><b><?php __("Authentication method: ")?></b><?php __("Normal password")?></li>
+          <li><b><?php __("Connection security:");?></b> STARTTLS</li>
+        </ul>
+      </li>
+
+      <li><b><a href="javascript:;" onClick="$('#cfg-pop3').toggle();"><?php __("POP3");?></a></b>
+        <ul id='cfg-pop3'>
+          <li><b><?php __("Server name: ");?></b> FIXME</li>
+          <li><b><?php __("Port: ");?></b> 110</li>
+          <li><b><?php __("Authentication: ");?></b><?php __("Yes")?></li>
+          <li><b><?php __("Authentication method: ");?></b><?php __("Normal password")?></li>
+          <li><b><?php __("Connection security:");?></b> FIXME</li>
+        </ul>
+      </li>
+
+      <li><b><a href="javascript:;" onClick="$('#cfg-pop3s').toggle();"><?php __("POP3S");?></a></b>
+        <ul id='cfg-pop3s'>
+          <li><b><?php __("Server name: ");?></b> FIXME</li>
+          <li><b><?php __("Port: ");?></b> 995</li>
+          <li><b><?php __("Authentication: ");?></b><?php __("Yes")?></li>
+          <li><b><?php __("Authentication method: ");?></b><?php __("Normal password")?></li>
+          <li><b><?php __("Connection security:");?></b> FIXME</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<script type="text/javascript">
+  $('#cfg-submission').toggle();
+  $('#cfg-smtp').toggle();
+  $('#cfg-smtps').toggle();
+  $('#cfg-imap').toggle();
+  $('#cfg-imaps').toggle();
+  $('#cfg-pop3').toggle();
+  $('#cfg-pop3s').toggle();
+</script>
+
+
+<?php include_once("foot.php"); ?>

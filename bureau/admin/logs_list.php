@@ -40,11 +40,14 @@ if (isset($error) && $error) {
 	echo "<p class=\"error\">$error</p>";
 }
 if(!$list || empty($list['dir'])){
-	echo "<p class=\"error\">"._("You have no sql logs to list a the moment.")."</p>";  
+	echo "<p class=\"error\">"._("You have no web logs to list a the moment.")."</p>";  
 	include_once('foot.php');
 	exit;
 }
 ?>
+<p>
+<?php __("Here are web logs of your account.<br/>You can download them to do specific extract and statistics.");?>
+</p>
 <table class="tlist">
 <tr><th><?php __("Name");?></th><th align=center><?php __("Creation Date"); ?></th><th><?php __("Size"); ?></th><th><?php __("Download link");?></th></tr>
 <?php
