@@ -121,6 +121,9 @@ done
 if [ ! -z "$(cat "$RELOAD_WEB")" ] ; then
   echo " apache " >> "$RELOAD_ZONES"
 
+  # Just to encourage user to use THIS directory and not another one
+  test -d "$VHOST_MANUALCONF" || mkdir -p "$VHOST_MANUALCONF"
+
   # Concat the apaches files
   tempo=$(mktemp "$VHOST_FILE.XXXXX")
 
