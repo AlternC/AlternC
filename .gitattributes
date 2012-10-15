@@ -406,6 +406,7 @@ bureau/locales/pt_BR/LC_MESSAGES/messages.po -text
 debian/.svnignore -text
 debian/NEWS -text
 debian/README.Debian -text
+debian/alternc-awstats.cron.d -text
 debian/alternc-awstats.dirs -text
 debian/alternc-awstats.lintian-override -text
 debian/alternc-awstats.postinst -text
