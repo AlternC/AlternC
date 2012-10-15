@@ -31,6 +31,7 @@ MYSQL_DO="/usr/bin/mysql --defaults-file=/etc/alternc/my.cnf -Bs -e "
 mysql_query() { /usr/bin/mysql --defaults-file=/etc/alternc/my.cnf -Bs -e "$@" ; }
 DOMAIN_LOG_FILE="/var/log/alternc/update_domains.log"
 VHOST_FILE="$VHOST_DIR/vhosts_all.conf" 
+VHOST_MANUALCONF="$VHOST_DIR/manual/"
 
 
 # Some useful miscellaneous shell functions
@@ -67,6 +68,10 @@ get_account_by_domain() {
         CONCAT(IF(sub="", "", CONCAT(sub, ".")), domaine) = "'"$1"'" LIMIT 1;'
 }
 
+get_uid_by_domain() {
+        mysql_query 'SELECT b.compte as uid FROM sub_domaines b WHERE \
+        CONCAT(IF(sub="", "", CONCAT(sub, ".")), domaine) = "'"$1"'" LIMIT 1;'
+}
 
 # Log (echoes+log) an error and exit the current script with an error.
 log_error() {

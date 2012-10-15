@@ -29,6 +29,15 @@ launch_hooks() {
   return 0
 }
 
+host_conffile() {
+    # Return the absolute path of a conf file for a FQDN
+    local FQDN="$1"
+    local U_ID=$(get_uid_by_domain "$FQDN")
+    local CONFFILE="$VHOST_DIR/${U_ID:0:1}/$U_ID/$FQDN.conf"
+    echo $CONFFILE
+    return 0
+}
+
 host_create() {
     # Function to create a vhost for a website
     # First, it look if there is a special file for
@@ -56,13 +65,13 @@ host_create() {
     local MAIL_ACCOUNT=$3
     local REDIRECT=$4   # Yes, TARGET_DIR and REDIRECT are the same
     local TARGET_DIR=$4 # It's used by different template
+    local U_ID=$(get_uid_by_domain "$FQDN")
+    local G_ID="$U_ID"
     local USER=$(get_account_by_domain $FQDN)
-    local U_ID=$(get_uid_by_name "$USER")
-    local G_ID=$(get_uid_by_name "$USER")
     local user_letter=`print_user_letter "$USER"`
     local DOCUMENT_ROOT="${HTML_HOME}/${user_letter}/${USER}$TARGET_DIR"
     local ACCOUNT_ROOT="${HTML_HOME}/${user_letter}/${USER}/"
-    local FILE_TARGET="$VHOST_DIR/${user_letter}/$USER/$FQDN.conf"
+    local FILE_TARGET=$(host_conffile "$FQDN")
 
     # In case VTYPE don't have the same name as the template file, 
     # here we can define it
@@ -150,9 +159,7 @@ host_change_enable() {
 
     local TYPE=$2 # no use here, but one day, maybe... So here he is
     local FQDN=$3
-    local USER=$(get_account_by_domain $FQDN)
-    local user_letter=`print_user_letter "$USER"`
-    local FENABLED="$VHOST_DIR/${user_letter}/$USER/$FQDN.conf"
+    local FENABLED=$(host_conffile "$FQDN")
     local FDISABLED="$FENABLED-disabled"
 
     case $STATE in
@@ -189,9 +196,7 @@ host_delete() {
       return $?
     fi
 
-    local USER=`get_account_by_domain $FQDN`
-    local user_letter=`print_user_letter "$USER"`
-    local FENABLED="$VHOST_DIR/${user_letter}/$USER/$FQDN.conf"
+    local FENABLED=$(host_conffile "$FQDN")
     local FDISABLED="$FENABLED-disabled"
 
     [ -w "$FENABLED" ] && rm -f "$FENABLED"

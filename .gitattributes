@@ -513,6 +513,7 @@ install/upgrades/0.9.7.sql -text
 install/upgrades/0.9.9.sql -text
 install/upgrades/1.0.1.php -text
 install/upgrades/1.0.3.sql -text
+install/upgrades/1.0.4.sh -text
 install/upgrades/1.0.sql -text
 install/upgrades/1.1.php -text
 install/upgrades/1.1.sh -text
@@ -578,6 +579,7 @@ src/quota_delete -text
 src/quota_edit -text
 src/quota_get -text
 src/quota_init -text
+src/rebuild_all_webconf.sh -text
 src/sendmail -text
 src/slave_dns -text
 src/spoolsize.php -text
