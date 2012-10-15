@@ -72,7 +72,7 @@ if [ -e /etc/bind/named.conf ]; then
 fi
 if [ -d /etc/postfix ]; then
     CONFIG_FILES="$CONFIG_FILES etc/postfix/myalias.cf etc/postfix/myrelay.cf
-                  etc/postfix/mydomain.cf etc/postfix/mygid.cf etc/postfix/myquota.cf
+                  etc/postfix/mydomain.cf etc/postfix/myrelay-domain.cf etc/postfix/mygid.cf etc/postfix/myquota.cf
                   etc/postfix/myvirtual.cf etc/postfix/mytransport.cf etc/postfix/sasl/smtpd.conf"
 fi
 if [ -e /etc/proftpd/proftpd.conf ]; then
@@ -310,7 +310,7 @@ for file in body_checks header_checks; do
 done
 
 # Attribute the correct rights to critical postfix files
-if [ -e /etc/postfix/myalias.cf -o -e /etc/postfix/mydomain.cf -o -e /etc/postfix/mygid.cf -o -e /etc/postfix/myvirtual.cf -o -e /etc/postfix/myrelay.cf -o -e /etc/postfix/myquota.cf ]; then
+if [ -e /etc/postfix/myalias.cf -o -e /etc/postfix/mydomain.cf -o -e /etc/postfix/mygid.cf -o -e /etc/postfix/myrelay-domain.sh -o -e /etc/postfix/myvirtual.cf -o -e /etc/postfix/myrelay.cf -o -e /etc/postfix/myquota.cf ]; then
     chown root:postfix /etc/postfix/my*
     chmod 640 /etc/postfix/my*
 fi
