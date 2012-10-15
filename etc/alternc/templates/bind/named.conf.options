@@ -1,3 +1,10 @@
+//
+// AUTO GENERATED FILE
+// Will be override by AlternC
+// To modify, modify 
+// /etc/alternc/templates/bind/named.conf.options
+// and launch alternc.install
+//
 // Bind configuration for AlternC
 //
 // This is mostly a non-recursive, authoritative DNS server configuration
