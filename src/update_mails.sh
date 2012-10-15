@@ -56,13 +56,11 @@ mysql_query "SELECT id, quote(replace(path,'!','\\!')) FROM mailbox WHERE mail_a
   # If dir and rm ok, DELETE
   # Other case, do nothing
   if [ -d $path ] ; then 
-    #$ionice rm -rf $path && mysql_query "DELETE FROM mailbox WHERE id=$id AND mail_action='DELETING';"
-    echo "directory"
+    $ionice rm -rf $path && mysql_query "DELETE FROM mailbox WHERE id=$id AND mail_action='DELETING';"
     # Do the rm again in case of newly added file during delete. Should not be usefull
     test -d $path && $ionice rm -rf $path
   else
-    echo -n "DELETE FROM mailbox WHERE id=$id AND mail_action='DELETING';"
-    #mysql_query "DELETE FROM mailbox WHERE id=$id AND mail_action='DELETING';"
+    mysql_query "DELETE FROM mailbox WHERE id=$id AND mail_action='DELETING';"
   fi
 done
 
