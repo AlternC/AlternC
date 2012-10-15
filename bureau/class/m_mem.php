@@ -293,7 +293,7 @@ class m_mem {
    * @return boolean TRUE si la session a bien été détruite, FALSE sinon.
    */
   function del_session() {
-    global $db,$user,$err,$cuid,$classes;
+    global $db,$user,$err,$cuid,$classes,$hooks;
     $err->log("mem","del_session");
     $_COOKIE["session"]=addslashes(isset($_COOKIE["session"])?$_COOKIE["session"]:'');
     setcookie("session","",0,"/");
@@ -322,11 +322,15 @@ class m_mem {
     $err->error=0;
     
     # Invoker le logout dans toutes les autres classes
+    /*
     foreach($classes as $c) {
       if (method_exists($GLOBALS[$c],"alternc_del_session")) {
 	    $GLOBALS[$c]->alternc_del_session();
       }
     }
+    */
+    $hooks->invoke("alternc_del_session");
+    
     session_unset();
     return true;
   }

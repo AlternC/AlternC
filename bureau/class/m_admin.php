@@ -355,11 +355,14 @@ class m_admin {
       // Triggering hooks
       $mem->su($uid);
       // TODO: old hook method FIXME: when unused remove this
+      /*
       foreach($classes as $c) {
       	if (method_exists($GLOBALS[$c],"alternc_add_member")) {
 	        $GLOBALS[$c]->alternc_add_member();
 	      }
       }
+      */
+      $hooks->invoke("alternc_add_member");
       // New hook way
       $hooks->invoke("hook_admin_add_member");
       $mem->unsu();
@@ -544,11 +547,14 @@ EOF;
     $dom->hook_admin_del_member();
 
     // TODO: old hook method, FIXME: remove when unused
+    /*
     foreach($classes as $c) {
       if (method_exists($GLOBALS[$c],"alternc_del_member")) {
 	$GLOBALS[$c]->alternc_del_member();
       }
     }
+    */
+    $hooks->invoke("alternc_del_member");
     $hooks->invoke("hook_admin_del_member");
     
     if (($db->query("DELETE FROM membres WHERE uid='$uid';")) &&
@@ -984,20 +990,29 @@ EOF;
    * @return array an indexed array of associative array from the MySQL "policy" table
    */
   function listPasswordPolicies() {
-    global $db,$classes;
+    global $db,$classes,$hooks;
     $tmp1=array();
     $tmp2=array();
+    $tmp3=array();
     $policies=array();
     $db->query("SELECT * FROM policy;");
     while ($db->next_record()) {
       $tmp1[$db->Record["name"]]=$db->Record;
     }
+/* * /
     foreach($classes as $c) {
       if (method_exists($GLOBALS[$c],"alternc_password_policy")) {
 	$res=$GLOBALS[$c]->alternc_password_policy(); // returns an array
 	foreach($res as $k=>$v) {
 	  $tmp2[$k]=$v;
 	}
+      }
+    }
+/* */
+    $tmp3=$hooks->invoke("alternc_password_policy");
+    foreach ($tmp3 as $v) {
+      foreach ($v as $l=>$m) {
+        $tmp2[$l]=$m;
       }
     }
     foreach($tmp2 as $k=>$v) {
