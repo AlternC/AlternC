@@ -1,7 +1,7 @@
 #!/bin/sh
+# Upgrading script to AlternC 1.1
 
 CONFIG_FILE="/etc/alternc/local.sh"
-
 PATH=/sbin:/bin:/usr/sbin:/usr/bin
 
 umask 022
@@ -18,20 +18,50 @@ fi
 
 . "$CONFIG_FILE"
 
+MAIL_DIR="$ALTERNC_LOC/mail"
+
+## This part update mails' file owner and group ##
 fix_mail() {
     read LOGIN GID || true
     while [ "$LOGIN" ]; do
         INITIALE=`echo $LOGIN |cut -c1`
-	MAIL=$(echo $LOGIN |sed -e 's/\@/_/')
+        MAIL=$(echo $LOGIN |sed -e 's/\@/_/')
         REP="$ALTERNC_LOC/mail/$INITIALE/$MAIL/"
         chown --recursive $GID:vmail "$REP"
-	read LOGIN GID || true
+        read LOGIN GID || true
     done
 }
 
 query="select user,userdb_gid from dovecot_view"
 mysql --defaults-file=/etc/alternc/my.cnf --skip-column-names -B -e "$query" |fix_mail
+## End of mails' files owner and group fixing part ##
 
+## This part does the migration from Courier IMAP and POP3, preserving IMAP UIDs and POP3 UIDLs. ##
+## It reads Courier's 'courierimapuiddb' and 'courierpop3dsizelist' files and produces 'dovecot-uidlist' file from it. ##
+# We warn user it will take some time to migrate all indexes
+echo "                                                "
+echo "################################################"
+echo "# /!\ CONVERTING COURIER INDEXES TO DOVECOT /!\ "
+echo "# /!\        THIS MAY TAKE A WHILE !        /!\ "
+echo "#                                               "
+echo "# If you want to regenerate specifics indexes,  "
+echo "# remove related 'dovecot-uidlist' files in     "
+echo "#   $MAIL_DIR "
+echo "# then execute this command manually :          "
+echo "#                                               "
+echo "# perl \"/usr/lib/alternc/courier-dovecot-migrate.pl\" --to-dovecot --convert --recursive \"$MAIL_DIR\""
+echo "#                                               "
+echo "# Add \"--overwrite\" option if you want to     "
+echo "# overwrite ALL 'dovecot-uidlist' indexes       "
+echo "################################################"
+echo "                                                "
 
+# Stoping dovecot service
+invoke-rc.d dovecot stop || true
 
+# We call the migration script (provided by wiki.dovecot.com)
+perl "/usr/lib/alternc/courier-dovecot-migrate.pl" --to-dovecot --convert --recursive "$MAIL_DIR"
 
+# Starting dovecot service
+invoke-rc.d dovecot start || true
+## End of migration part

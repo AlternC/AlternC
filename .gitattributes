@@ -563,6 +563,7 @@ src/alternc-passwd -text
 src/alternc_add_policy_dovecot -text
 src/alternc_reload -text
 src/compress_logs.sh -text
+src/courier-dovecot-migrate.pl -text
 src/cron_users.sh -text
 src/cron_users_doit.sh -text
 src/delete_logs.sh -text
