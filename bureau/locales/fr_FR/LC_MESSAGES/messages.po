@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: $Id: admin.po,v 1.10 2004/11/01 15:55:44 anonymous Exp "
 "$\n"
 "Report-Msgid-Bugs-To: i18n@alternc.org\n"
-"POT-Creation-Date: 2012-10-16 16:43+0200\n"
+"POT-Creation-Date: 2012-10-16 16:58+0200\n"
 "PO-Revision-Date: 2012-10-16 16:48+0200\n"
 "Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
 "Language-Team: français <team@alternc.org>\n"
@@ -374,11 +374,11 @@ msgstr "Modifier"
 #: ../admin/adm_mxaccount.php:88 ../admin/adm_mxaccount.php:89
 #: ../admin/adm_slaveaccount.php:88 ../admin/adm_slaveip.php:87
 #: ../admin/bro_main.php:273 ../admin/bro_main.php:278 ../admin/cron.php:51
-#: ../admin/dom_edit.php:115 ../admin/dom_edit.php:117 ../admin/ftp_del.php:82
-#: ../admin/hta_dodeluser.php:64 ../admin/ip_main.php:74
-#: ../admin/ip_main.php:157 ../admin/mail_redirection_edit.inc.php:52
-#: ../admin/piwik_sitelist.php:74 ../admin/piwik_user_dodel.php:63
-#: ../admin/piwik_userlist.php:87
+#: ../admin/cron.php:54 ../admin/dom_edit.php:115 ../admin/dom_edit.php:117
+#: ../admin/ftp_del.php:82 ../admin/hta_dodeluser.php:64
+#: ../admin/ip_main.php:74 ../admin/ip_main.php:157
+#: ../admin/mail_redirection_edit.inc.php:52 ../admin/piwik_sitelist.php:74
+#: ../admin/piwik_user_dodel.php:63 ../admin/piwik_userlist.php:87
 msgid "Delete"
 msgstr "Effacer"
 
@@ -893,10 +893,11 @@ msgstr "Vous ne pouvez pas désactiver votre propre compte !"
 #: ../admin/adm_mxaccount.php:81 ../admin/adm_mxaccount.php:100
 #: ../admin/adm_mxaccount.php:101 ../admin/adm_slaveaccount.php:80
 #: ../admin/adm_slaveaccount.php:100 ../admin/cron.php:32 ../admin/cron.php:37
-#: ../admin/cron.php:38 ../admin/ftp_add.php:64 ../admin/ftp_add.php:76
-#: ../admin/ftp_edit.php:69 ../admin/hta_adduser.php:57
-#: ../admin/hta_adduser.php:58 ../admin/hta_edit.php:106 ../admin/index.php:77
-#: ../admin/index.php:82 ../admin/index.php:100 ../admin/mail_edit.inc.php:45
+#: ../admin/cron.php:38 ../admin/cron.php:39 ../admin/ftp_add.php:64
+#: ../admin/ftp_add.php:76 ../admin/ftp_edit.php:69
+#: ../admin/hta_adduser.php:57 ../admin/hta_adduser.php:58
+#: ../admin/hta_edit.php:106 ../admin/index.php:77 ../admin/index.php:82
+#: ../admin/index.php:100 ../admin/mail_edit.inc.php:45
 #: ../admin/mail_edit.inc.php:49 ../admin/mail_edit.inc.php:63
 #: ../admin/mail_edit.inc.php:67 ../admin/sql_getparam.php:54
 #: ../admin/sql_getparam.php:71 ../admin/sql_passchg.php:52
@@ -1777,28 +1778,59 @@ msgstr "Sélectionner"
 
 #: ../admin/cron.php:16 ../admin/cron.php:21 ../admin/menu_cron.php:33
 #: ../admin/menu_cron.php:40 ../class/m_cron.php:161 ../class/m_cron.php:170
+#: ../class/m_cron.php:171
 msgid "Scheduled tasks"
 msgstr ""
 
 #: ../admin/cron.php:29 ../admin/cron.php:34 ../admin/cron.php:35
+#: ../admin/cron.php:36
 msgid "URL"
 msgstr ""
 
 #: ../admin/cron.php:30 ../admin/cron.php:35 ../admin/cron.php:36
+#: ../admin/cron.php:37
 msgid "Schedule"
 msgstr ""
 
 #: ../admin/cron.php:31 ../admin/cron.php:36 ../admin/cron.php:37
-#: ../admin/hta_edituser.php:53 ../admin/sql_users_list.php:48
+#: ../admin/cron.php:38 ../admin/hta_edituser.php:53
+#: ../admin/sql_users_list.php:48
 msgid "User"
 msgstr "Utilisateur"
 
 #: ../admin/cron.php:33 ../admin/cron.php:38 ../admin/cron.php:39
+#: ../admin/cron.php:40
 #, fuzzy
 msgid "Email report"
 msgstr "Adresse Email"
 
-#: ../admin/cron.php:78
+#: ../admin/cron.php:57
+msgid "Called URL"
+msgstr ""
+
+#: ../admin/cron.php:60
+#, fuzzy
+msgid "Period:"
+msgstr "Périodicité de facturation"
+
+#: ../admin/cron.php:72
+msgid "Next execution: "
+msgstr ""
+
+#: ../admin/cron.php:75
+msgid "HTTP user (optionnal)"
+msgstr ""
+
+#: ../admin/cron.php:76
+msgid "HTTP password (optionnal)"
+msgstr ""
+
+#: ../admin/cron.php:77
+#, fuzzy
+msgid "Mail address (for reports)"
+msgstr "Adresses email"
+
+#: ../admin/cron.php:78 ../admin/cron.php:84
 #, fuzzy
 msgid "Apply the modifications"
 msgstr "Dernière modification"
@@ -3980,20 +4012,20 @@ msgstr "Heures"
 msgid "Half Hour"
 msgstr ""
 
-#: ../class/m_cron.php:114
+#: ../class/m_cron.php:114 ../class/m_cron.php:115
 msgid "URL not valid"
 msgstr ""
 
-#: ../class/m_cron.php:122
+#: ../class/m_cron.php:122 ../class/m_cron.php:123
 #, fuzzy
 msgid "Email address is not valid"
 msgstr "Liste des adresses emails du domaine %s"
 
-#: ../class/m_cron.php:124 ../class/m_cron.php:131
+#: ../class/m_cron.php:124 ../class/m_cron.php:131 ../class/m_cron.php:132
 msgid "You seems to be over-quota."
 msgstr ""
 
-#: ../class/m_cron.php:131 ../class/m_cron.php:140
+#: ../class/m_cron.php:131 ../class/m_cron.php:140 ../class/m_cron.php:141
 msgid "Identity problem"
 msgstr ""
 
