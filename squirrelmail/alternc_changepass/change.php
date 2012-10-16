@@ -1,12 +1,12 @@
 <?php
 
 @include_once("/etc/squirrelmail/alternc-changepass.conf");
-if (!defined("ALTERNC_LOC")) {
-  echo "No AlternC-Changepass configuration, please setup alternc-changepass plugin in /etc/squirrelmail/";
+if (!defined("ALTERNC_CHANGEPASS_LOC")) {
+  error_log("No configuration for squirrelmail plugin at /etc/squirrelmail/alternc-changepass.conf, please check");
   exit();
 }
 
-bindtextdomain("alternc-changepass", ALTERNC_LOC."/bureau/locales");
+bindtextdomain("alternc-changepass", ALTERNC_CHANGEPASS_LOC."/bureau/locales");
 
 $link=mysql_connect(
 		    ALTERNC_CHANGEPASS_MYSQL_HOST,
@@ -14,7 +14,7 @@ $link=mysql_connect(
 		    ALTERNC_CHANGEPASS_MYSQL_PASSWORD
 		    );
 if ($link) {
-  mysql_select_db(ALTERNC_CHANGEPASS_MYSLQ_DB);
+  mysql_select_db(ALTERNC_CHANGEPASS_MYSQL_DB);
 } else {
   __("Can't connect to MySQL server on AlternC!");
 }

@@ -21,8 +21,12 @@ case "$1" in
 	chown -R alternc-squirrelmail:root /var/spool/squirrelmail/attach /var/lib/squirrelmail/data
 	chmod -R 750 /var/spool/squirrelmail/attach /var/lib/squirrelmail/data	
 	# Enable the squirrelmail plugin 
-	squirrelmail-configure --remove-plugin alternc-changepass
-        squirrelmail-configure --install-plugin alternc-changepass
+	squirrelmail-configure --remove-plugin alternc_changepass
+        squirrelmail-configure --install-plugin alternc_changepass
+	echo "**********************************************"
+	echo "*        ALTERNC-SQUIRRELMAIL:               *"
+	echo "* Please run alternc.install to fully deploy *"
+	echo "**********************************************"
 	;;
 esac
 
