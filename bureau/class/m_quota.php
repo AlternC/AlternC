@@ -83,6 +83,22 @@ class m_quota {
     return $qlist;
   }
   
+
+  /**
+    * Synchronise the quotas of the users with the quota of the
+    * user's profile.
+    * If the user have a greater quota than the profile, no change.
+    * If the quota entry doesn't exist for the user, create it with
+    * the defaults value.
+    */
+  function synchronise_user_profile() {
+    global $db,$err;
+    $err->log("quota","apply_greater_quota");
+    $q="insert into quotas select m.uid as uid, d.quota as name, d.value as total from membres m, defquotas d left join quotas q on q.name=d.quota  where m.type=d.type  ON DUPLICATE KEY UPDATE total = greatest(d.value, quotas.total);";
+    $db->query($q);
+    return true;
+  }
+
   /* ----------------------------------------------------------------- */
   /** Return a ressource usage (u) and total quota (t)
    * @param string $ressource ressource to get quota of

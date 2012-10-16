@@ -35,6 +35,10 @@ if (!$admin->enabled) {
 	__("This page is restricted to authorized staff");
 	exit();
 }
+$fields = array (
+  "synchronise"        => array ("get", "integer", "0"),
+);
+getFields($fields);
 
 include_once ("head.php");
 
@@ -43,10 +47,14 @@ include_once ("head.php");
 <hr id="topbar"/>
 <br />
 <?php
-	if (isset($error) && $error) {
-	  echo "<p class=\"error\">$error</p>";
-	}
+if ($synchronise==true) {
+  $quota->synchronise_user_profile();
+  echo "<p class=\"error\">";__("User's quotas synchronised");echo "</p>";
+}
 
+if (isset($error) && $error) {
+  echo "<p class=\"error\">$error</p>";
+}
 ?>
 <form method="post" action="adm_dodefquotas.php">
 <p>
@@ -78,6 +86,7 @@ foreach($quota->listtype() as $type) {
 <p>
 <?php __("Here is the list of the quotas on the server for the new accounts. If you want to change them, enter new values"); ?>
 </p>
+<span class="inb"><a href="adm_defquotas.php?synchronise=1"><?php __("Synchronise user's quota"); ?></a></span>  
 
 <form method="post" action="adm_dodefquotas.php">
 <div>
