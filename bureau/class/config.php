@@ -174,4 +174,12 @@ for($i=0;$i<count($classes);$i++) {
   $$name2= new $name1();
 }
 
+$oldid=intval(isset($_COOKIE['oldid'])?$_COOKIE['oldid']:'');
+$isinvited=false;
+if ($admin->enabled) $isinvited=true;
+
+if ($oldid && $oldid!=$cuid) {
+  $isinvited=true;
+}
+
 ?>

@@ -50,13 +50,8 @@ if (file_exists($lang_date_picker))
 </head>
 <body>
 <?
-$oldid=intval(isset($_COOKIE['oldid'])?$_COOKIE['oldid']:'');
-$isinvited=false;
 
-if ($admin->enabled) $isinvited=true;
-
-if ($oldid && $oldid!=$cuid) {
-  $isinvited=true;
+if ($isinvited && isset($oldid) && !empty($oldid) && $oldid!=$cuid ) {
   echo "<div align=center><p class='error'>";
   __("Administrator session. you may <a href='adm_login.php'>return to your account</a> or <a href='adm_cancel.php'>cancel this feature</a>");
   echo "</p></div>";
