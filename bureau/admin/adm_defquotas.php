@@ -86,7 +86,7 @@ foreach($quota->listtype() as $type) {
 <p>
 <?php __("Here is the list of the quotas on the server for the new accounts. If you want to change them, enter new values"); ?>
 </p>
-<span class="inb"><a href="adm_defquotas.php?synchronise=1"><?php __("Synchronise user's quota"); ?></a></span>  
+<span class="inb"><a href="adm_defquotas.php?synchronise=1"><?php __("Synchronise user's quota (only to upper value)"); ?></a></span>  
 
 <form method="post" action="adm_dodefquotas.php">
 <div>

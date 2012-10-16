@@ -355,7 +355,7 @@ CREATE TABLE IF NOT EXISTS tld (
   mode tinyint(4) NOT NULL default '0',		-- Comment est-il autorisé ?
   PRIMARY KEY  (tld),
   KEY mode (mode)
-) TYPE=MyISAM COMMENT='TLD autorisés et comment sont-ils autorisés ? ';
+) TYPE=MyISAM COMMENT='TLD autorises et comment sont-ils autorises ? ';
 
 --
 -- Contenu de la table `tld`
