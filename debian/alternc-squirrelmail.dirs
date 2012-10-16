@@ -5,4 +5,4 @@ etc/alternc/templates/javascript-common
 etc/squirrelmail
 usr/lib/alternc/install.d
 var/alternc/bureau/class
-usr/share/squirrelmail/plugins/alternc-changepass
+usr/share/squirrelmail/plugins/alternc_changepass
