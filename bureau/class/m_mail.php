@@ -204,7 +204,7 @@ class m_mail {
    */ 
   function create($dom_id, $mail,$type=""){
     global $err,$db,$cuid,$quota,$dom,$hooks;
-    $err->log("mail","create");
+    $err->log("mail","create",$mail);
 
     // Validate the domain id
     if (!($domain=$dom->get_domain_byid($dom_id))) {
@@ -545,6 +545,8 @@ class m_mail {
    * @ param : $dom_id , the domain id associated to a given address
    * @ param : $m , the left part of the  mail address being created
    * @ param : $delivery , the delivery used to deliver the mail
+   * @ param : $function , the address' function ( join,leave,request etc...)
+   * @ param : $name , the mailing list name
    */
  
   function add_wrapper($dom_id,$m,$delivery,$function,$name){
@@ -555,14 +557,21 @@ class m_mail {
     if (!($domain=$dom->get_domain_byid($dom_id))) {
       return false;
     }
-    if($function==""){
-      $recipient="$name";
+    if(empty($function)){
+      #$recipient="$name";
       $this->set_details($mail_id,1,0,"",$delivery);
     }else{
       $recipient="$name-$function";
-      $this->set_details($mail_id,0,0,"$recipient@$domain",$delivery);
-      $mail_id2=$mail->create($dom_id,$recipient,$delivery);
-      $this->set_details($mail_id2,1,0,"",$delivery);
+
+      #used to alias virtual lists
+      if (file_exists("/usr/share/alternc-mailman/patches/mailman-true-virtual.applied")) {
+        $this->set_details($mail_id,0,0,"$recipient@$domain",$delivery);
+        $mail_id2=$mail->create($dom_id,$recipient,$delivery);
+        $this->set_details($mail_id2,1,0,"",$delivery);
+      }else{
+        $this->set_details($mail_id,1,0,"$recipient@$domain",$delivery);
+      }
+
     }
   }
   
