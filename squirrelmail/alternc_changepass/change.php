@@ -6,7 +6,27 @@ if (!defined("ALTERNC_CHANGEPASS_LOC")) {
   exit();
 }
 
-bindtextdomain("alternc-changepass", ALTERNC_CHANGEPASS_LOC."/bureau/locales");
+bindtextdomain("alternc", ALTERNC_CHANGEPASS_LOC."/bureau/locales");
+if (!function_exists("__")) {
+  function __($str) { echo _($str); } 
+}
+
+  /* ----------------------------------------------------------------- */
+  /** Hashe un mot de passe en clair en MD5 avec un salt aléatoire
+   * @param string $pass Mot de passe à crypter (max 32 caractères)
+   * @return string Retourne le mot de passe crypté
+   * @access private
+   */
+  function _md5cr($pass,$salt="") {
+    if (!$salt) {
+      $chars="./0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      for ($i=0;$i<12;$i++) {
+	$salt.=substr($chars,(mt_rand(0,strlen($chars))),1);
+      }
+      $salt="$1$".$salt;
+    }
+    return crypt($pass,$salt);
+  }
 
 $link=mysql_connect(
 		    ALTERNC_CHANGEPASS_MYSQL_HOST,
@@ -31,22 +51,23 @@ require_once(SM_PATH . 'include/load_prefs.php');
  /* get globals */
 sqgetGlobalVar('username', $username, SQ_SESSION);
 
-require_once (SM_PATH . "plugins/alternc_changepass/config.php");
+//require_once (SM_PATH . "plugins/alternc_changepass/config.php");
+//session_start();
 
-session_start();
-
-textdomain("alternc-changepass");
+textdomain("alternc");
 
 global $username, $base_uri, $key, $onetimepad;
 
 list($login,$domain)=explode("@",$username,2);
+$errstr="";
 
 if ($_POST['acp_oldpass'] && $_POST['acp_newpass'] && $_POST['acp_verify']) {
   if ($_POST['acp_newpass']!=$_POST['acp_verify']) {
     $errstr=_("Your new passwords are differents, pleasy try again.");
   } else {
     // Check the old password
-    $r=mysql_query("SELECT a.password FROM address a,domaines d WHERE a.address='".addslashes($login)."' AND a.dom_id=d.id AND d.domaine='".addslashes($domain)."';");
+    $r=mysql_query("SELECT a.password, a.id FROM address a,domaines d WHERE a.address='".addslashes($login)."' AND a.domain_id=d.id AND d.domaine='".addslashes($domain)."';");
+    echo mysql_error();
     if (!($c=mysql_fetch_array($r))) {
       $errstr=_("Your account has not been found, please try again later or ask an administrator.");
     } else {
@@ -76,13 +97,12 @@ if ($_POST['acp_oldpass'] && $_POST['acp_newpass'] && $_POST['acp_verify']) {
     }
   }
 } // POSTED data ? 
-
  
- textdomain("squirrelmail");
+textdomain("squirrelmail");
 
- displayPageHeader($color, 'None');
+displayPageHeader($color, 'None');
 
- textdomain("alternc-changepass");
+textdomain("alternc");
  
 if ($errstr) echo "<p><b>".$errstr."</b></p>";
 
