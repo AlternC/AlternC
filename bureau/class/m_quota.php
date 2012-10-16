@@ -95,7 +95,7 @@ class m_quota {
     global $db,$err;
     $err->log("quota","apply_greater_quota");
     $q="insert into quotas select m.uid as uid, d.quota as name, d.value as total from membres m, defquotas d left join quotas q on q.name=d.quota  where m.type=d.type  ON DUPLICATE KEY UPDATE total = greatest(d.value, quotas.total);";
-    $db->query($q);
+    if (!$db->query($q)) return false;
     return true;
   }
 

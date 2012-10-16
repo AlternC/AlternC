@@ -53,11 +53,9 @@ if(!$db->query("update membres set su=1 where login='admin';"))
   exit(1);
 
 // On lui attribue des quotas par defaut
-// 10 domains, 10 stats, 10 bases mysql, 20 ftp et 100 emails
-if(!($db->query("update quotas,membres set quotas.total=10 where (quotas.name='stats' or quotas.name='sta2' or quotas.name='mysql' or quotas.name='dom') and quotas.uid=membres.uid and membres.login='admin' ;")
-  && $db->query("update quotas,membres set quotas.total=20 where quotas.name='ftp' and quotas.uid=membres.uid and membres.login='admin' ;")
-  && $db->query("update quotas,membres set quotas.total=100 where quotas.name='mail' and quotas.uid=membres.uid and membres.login='admin' ;")))
+if(!$quota->synchronise_user_profile()) {
   exit(1);
+}
 
 exit(0);
 ?>
