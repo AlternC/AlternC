@@ -52,6 +52,8 @@ if ($synchronise==true) {
   echo "<p class=\"error\">";__("User's quotas synchronised");echo "</p>";
 }
 
+$quota->create_missing_quota_profile();
+
 if (isset($error) && $error) {
   echo "<p class=\"error\">$error</p>";
 }

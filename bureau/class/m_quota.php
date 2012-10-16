@@ -93,9 +93,27 @@ class m_quota {
     */
   function synchronise_user_profile() {
     global $db,$err;
-    $err->log("quota","apply_greater_quota");
+    $err->log("quota","synchronise_user_profile");
     $q="insert into quotas select m.uid as uid, d.quota as name, d.value as total from membres m, defquotas d left join quotas q on q.name=d.quota  where m.type=d.type  ON DUPLICATE KEY UPDATE total = greatest(d.value, quotas.total);";
     if (!$db->query($q)) return false;
+    return true;
+  }
+
+  /*
+   * Create default quota in the profile
+   * when a new quota appear
+   *
+   */
+  function create_missing_quota_profile() {
+    global $db,$quota,$err;
+    $err->log("quota","create_missing_quota_profile");
+    $qt=$quota->getquota('',true);
+    $type=$quota->listtype();
+    foreach($type as $t) {
+      foreach($qt as $q=>$vv) {
+      $db->query("INSERT IGNORE defquotas (value,quota,type) VALUES (0,'$q','$t');");
+      }
+    }
     return true;
   }
 
