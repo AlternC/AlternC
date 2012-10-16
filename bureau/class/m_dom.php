@@ -924,7 +924,7 @@ class m_dom {
     }
 
     // Re-create the one we want
-    if (! $db->query("insert into sub_domaines (compte,domaine,sub,valeur,type,web_action) values ('$cuid','$dom','$sub','$dest','$type','UPDATE');") ) {
+    if (! $db->query("replace into sub_domaines (compte,domaine,sub,valeur,type,web_action) values ('$cuid','$dom','$sub','$dest','$type','UPDATE');") ) {
       echo "query failed: ".$db->Error;
       return false;
     }
