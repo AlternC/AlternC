@@ -178,7 +178,7 @@ PUBLIC_IP_BEGIN=$(echo $PUBLIC_IP|cut -c 1)
 
 # XXX: I assume this is secure if /tmp is sticky (+t)
 # we should have a better way to deal with templating, of course.
-SED_SCRIPT=`mktemp`
+SED_SCRIPT="/tmp/alternc.install.sedscript"
 cat > $SED_SCRIPT <<EOF
 s\\%%hosting%%\\$HOSTING\\;
 s\\%%fqdn%%\\$FQDN\\;

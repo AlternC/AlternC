@@ -27,10 +27,32 @@ then
     echo "Installing Squirrelmail Templates ..."
     cp -f /etc/alternc/templates/squirrelmail/avelsieve-config.php /etc/alternc/templates/squirrelmail/apache.conf /etc/squirrelmail/
     cp -f /etc/alternc/templates/javascript-common/javascript-common.conf /etc/javascript-common/
+    if [ -e /etc/alternc/templates/squirrelmail/alternc-changepass.conf ]; then
+	CONFIG_FILES="$CONFIG_FILES squirrelmail/alternc-changepass.conf"
+    fi
+
+    LOGIN="2000_squirrelmail"
+    PASSWORD="`perl -e 'print map{("a".."z","A".."Z",0..9)[int(rand(62))]}(1..10)'`"
+
+    # Add new variables to the sed script ...
+    SED_SCRIPT="/tmp/alternc.install.sedscript"
+    cat >> $SED_SCRIPT <<EOF
+s\\%%squirrelmail-login%%\\$LOGIN\\;
+s\\%%squirrelmail-password%%\\$PASSWORD\\;
+EOF
     echo "    Done"
-    
+
     . /usr/lib/alternc/functions.sh
-    
+
+    echo "giving write access to squirrelmail to the email password ..."
+    # cf alternc.install for more explanations on this horror : 
+    eval `sed -n -e "/=/{s/ *= *\"\?/='/;s/\"\?\$/'/;s/host/MYSQL_HOST/;s/user/MYSQL_USER/;s/password/MYSQL_PASS/;s/database/MYSQL_DATABASE/;p}" /etc/alternc/my.cnf`
+    # now database host user and password are mysql root account values ;) 
+    mysql_query "GRANT UPDATE (password) ON ${database}.address TO '$LOGIN'@'%' IDENTIFIED BY PASSWORD('$PASSWORD');"
+    mysql_query "GRANT SELECT ON ${database}.address TO '$LOGIN'@'%';"
+    mysql_query "GRANT SELECT ON ${database}.domaines TO '$LOGIN'@'%';"
+    echo "    Done"
+   
     echo "Setting squirrelmail domaintype"
     mysql_query "INSERT IGNORE INTO domaines_type (name ,description ,target ,entry ,compatibility ,enable ,only_dns ,need_dns ,advanced )VALUES ('squirrelmail','Squirrelmail Webmail access', 'NONE', '%SUB% IN A @@PUBLIC_IP@@', 'txt', 'ALL', '0', '0', '0');"
     echo "    Done"
