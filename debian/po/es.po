@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AlternC-awstats module 2.0\n"
 "Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
-"POT-Creation-Date: 2012-08-21 12:36+0200\n"
+"POT-Creation-Date: 2012-10-16 14:45+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -188,14 +188,10 @@ msgstr ""
 #. Description
 #: ../templates:9001
 msgid ""
-"Please enter the fully qualified name of your mysql server host. On small "
-"systems, it IS \"localhost\" since you may have installed a local mysql "
-"server. If you are a bigger hosting service, you may put your mysql service "
-"on a remote synchronized ring or equivalent. In that case, please enter the "
-"hostname of your mysql server. This server MUST be able to access the remote "
-"server at standard port (3306). It is recommended to use \"127.0.0.1\" "
-"instead of \"localhost\" if your postfix installation is configured in a "
-"chroot (which is the case, by default)."
+"Please enter the fully qualified name of your mysql server host. This server "
+"MUST be able to access the remote server at standard port (3306). It is "
+"recommended to use \"127.0.0.1\" instead of \"localhost\" if your postfix "
+"installation is configured in a chroot (which is the case, by default)."
 msgstr ""
 
 #. Type: string
@@ -500,4 +496,34 @@ msgid ""
 "server (this server). When writing apache configuration files, the master "
 "server will attempt to reload apache on those remote servers. The alternc-"
 "slave package correctly configures those machines to allow login and reload."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../templates:30001
+msgid ""
+"A local MySQL connexion was established on the server. Do you Want to Use "
+"it. If not remote MySQL server connexion parameters will be needed."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../templates:31001
+msgid ""
+"No local Mysql server was found. Do you want to use a remote Mysql Server. "
+"If not AlternC cannot be installed."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../templates:32001
+msgid "Remote connection failed. Do you want to try again ?"
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../templates:33001
+msgid ""
+"The ip appears to be private, do you want to use it anyway ? The server "
+"might not be reachable from outside your network."
 msgstr ""

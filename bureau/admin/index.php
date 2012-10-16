@@ -95,7 +95,7 @@ if (($wr=variable_get("webmail_redirect")) && isset($res[$wr]) && $res[$wr]) {
 }
 if (isset($url) && $url)  {
 ?>
-  <p><a href="<?php echo $url; ?>"><?php __("To read your mail in a browser, click here to use the Squirrelmail Webmail"); ?></a></p>
+  <p><a href="<?php echo $url; ?>"><?php __("To read your mail in a browser, click here to go to your server's Webmail"); ?></a></p>
 <?php
 }
 ?></td><td>
