@@ -61,6 +61,7 @@ class m_cron {
       $tmp['password']=urldecode($db->f('password'));
       $tmp['schedule']=$db->f('schedule');
       $tmp['email']=urldecode($db->f('email'));
+      $tmp['next_execution']=$db->f('next_execution');
       $r[]=$tmp;
     }
     return $r;
@@ -114,15 +115,15 @@ class m_cron {
       $err->raise("cron",_("URL not valid"));
       return false;
     }
-    $url=mysql_real_escape_string(urlencode($url));
-    $user=mysql_real_escape_string(urlencode($user));
+    $url=urlencode($url);
+    $user=urlencode($user);
     if (empty($user)) $password='';
-    $password=mysql_real_escape_string(urlencode($password));
+    $password=urlencode($password);
     if (! checkmail($email) == 0 ){ 
         $err->raise("cron",_("Email address is not valid"));
       return false;
     }
-    $email=mysql_real_escape_string(urlencode($email));
+    $email=urlencode($email);
     if (! $this->valid_schedule($schedule)) return false;
 
     if (is_null($id)) { // if a new insert, quotacheck

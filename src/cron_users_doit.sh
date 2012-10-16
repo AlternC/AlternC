@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# FIXME relecture + commentaires
+# FIXME relecture + commentaires
 
 id=$1
 url=$2
@@ -46,15 +46,14 @@ urldecode() {
       i=$((i+1))
     fi
   done
-) | sed -e 's/"/\\"/g' -e 's/\!/\\\!/g'
+) | sed -e 's/"/\\"/g' -e 's/\!/\\\!/g' -e 's/\ /\\\ /g' -e "s/'/\\'/g"
 }
 
-params=""
-if [ ! "x$user" == "x" -a ! "x$password" == "x" ]; then
-  params="--http-user=\"$(urldecode $user)\" --http-password=\"$(urldecode $password)\""
-fi
 
-wget -O - $params "$(urldecode $url)" --timeout=$timeout | mailx -s "AlternC Cron $id - Report $date" -r "$from" "$email"
+date=$(date +%x\ %X)
+
+# Don't really understand why it must be called this way...
+bash -c "( echo -e 'Here the report for the scheduled task for the cron #$id in your AlternC configuration (from http://$FQDN)\n\n\n------------\n\n'; wget -O - --no-check-certificate --http-user=$(urldecode $user) --http-password=$(urldecode $password) \"$(urldecode $url)\" --timeout=$timeout 2>&1 )| mailx -s \"AlternC Cron #$id - Report $date\" -r \"$from\" \"$(urldecode $email)\""
 
 # On calcule l'heure de la prochaine execution idéale
 ((interval=$schedule * 60))
