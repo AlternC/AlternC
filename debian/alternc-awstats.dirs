@@ -1,4 +1,5 @@
 etc/apache
+etc/cron.d
 etc/awstats
 etc/alternc/templates/awstats
 var/cache/awstats
