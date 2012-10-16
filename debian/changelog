@@ -1,6 +1,7 @@
 alternc (1.1+nmu6) stable; urgency=low
 
   * Squirrelmail plugin is now fully functionnal, including the changepass and filter plugins. it's using a specific MySQL account to change the password.
+  * Roundcube plugin now exists, to be tested!
 
  -- Benjamin Sonntag <benjamin@sonntag.fr>  Tue, 16 Oct 2012 17:25:07 +0200
 
