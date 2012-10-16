@@ -544,6 +544,10 @@ po/alternc-admintools.pot -text
 po/fr/LC_MESSAGES/.svnignore -text
 po/fr/LC_MESSAGES/alternc-admintools.po -text
 /repos-to-tx.sh -text
+roundcube/Makefile -text
+roundcube/class/m_roundcube.php -text
+roundcube/roundcube-install -text
+roundcube/templates/apache2/roundcube.conf -text
 selenium/20120826-alternc-panel-testsuite.html -text
 selenium/README -text
 selenium/alternc.domain-local-mail-tld.html -text
@@ -553,7 +557,6 @@ squirrelmail/alternc_changepass/setup.php -text
 squirrelmail/class/m_squirrelmail.php -text
 squirrelmail/squirrelmail-install -text
 squirrelmail/templates/apache2/squirrelmail.conf -text
-squirrelmail/templates/javascript-common/javascript-common.conf -text
 squirrelmail/templates/squirrelmail/alternc-changepass.conf -text
 squirrelmail/templates/squirrelmail/apache.conf -text
 squirrelmail/templates/squirrelmail/avelsieve-config.php -text

@@ -10,7 +10,7 @@ msgstr ""
 "$\n"
 "Report-Msgid-Bugs-To: i18n@alternc.org\n"
 "POT-Creation-Date: 2012-10-16 16:58+0200\n"
-"PO-Revision-Date: 2012-10-16 16:48+0200\n"
+"PO-Revision-Date: 2012-10-16 19:47+0200\n"
 "Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
 "Language-Team: français <team@alternc.org>\n"
 "Language: fr\n"
@@ -302,41 +302,42 @@ msgstr "Annuler"
 #: ../admin/adm_authip_whitelist.php:31 ../admin/ip_main.php:50
 #: ../admin/menu_ip.php:28 ../admin/menu_ip.php:35
 msgid "Access security"
-msgstr ""
+msgstr "Contrôle d'accès"
 
 #: ../admin/adm_authip_whitelist.php:39
 msgid ""
 "The IP and subnet you have here are allowed for ALL users and ALL usages"
 msgstr ""
+"L'IP et le préfixe ci-dessous seront autorisés pour TOUS les utilisateurs et "
+"TOUS les usages"
 
 #: ../admin/adm_authip_whitelist.php:39
 msgid "Warning"
-msgstr ""
+msgstr "Attention"
 
 #: ../admin/adm_authip_whitelist.php:44 ../admin/ip_main.php:165
-#, fuzzy
 msgid "Add an IP"
-msgstr "Créer un nouveau TLD"
+msgstr "Ajouter une IP"
 
 #: ../admin/adm_authip_whitelist.php:44 ../admin/ip_main.php:165
 msgid "Add my current IP"
-msgstr ""
+msgstr "Ajouter mon IP"
 
 #: ../admin/adm_authip_whitelist.php:47 ../admin/ip_main.php:168
-#, fuzzy
 msgid "Cancel edit"
-msgstr "Annuler"
+msgstr "Annuler la modification"
 
 #: ../admin/adm_authip_whitelist.php:50 ../admin/ip_main.php:171
 msgid ""
 "Enter here the IP address you want. <br/> <i>IPv4, IPv6 and subnet allowed</"
 "i>"
 msgstr ""
+"Entrez ici l'adresse IP que vous souhaitez. <br /><i>IPV4, IPV6 et préfixes "
+"sont autorisés </i>"
 
 #: ../admin/adm_authip_whitelist.php:54 ../admin/ip_main.php:175
-#, fuzzy
 msgid "Add a comment"
-msgstr "Héberger un domaine"
+msgstr "Ajouter un commentaire"
 
 #: ../admin/adm_authip_whitelist.php:57 ../admin/adm_doms_def_type.php:88
 #: ../admin/bro_editor.php:77 ../admin/bro_editor.php:90 ../admin/cron.php:66
@@ -347,12 +348,11 @@ msgstr "Enregistrer"
 
 #: ../admin/adm_authip_whitelist.php:64 ../admin/ip_main.php:136
 msgid "IP"
-msgstr ""
+msgstr "IP"
 
 #: ../admin/adm_authip_whitelist.php:64 ../admin/ip_main.php:136
-#, fuzzy
 msgid "Informations"
-msgstr "Accueil / Information"
+msgstr "Informations"
 
 #: ../admin/adm_authip_whitelist.php:64 ../admin/adm_doms_def_type.php:48
 #: ../admin/dom_edit.php:97 ../admin/dom_edit.php:99 ../admin/ip_main.php:136
@@ -438,7 +438,7 @@ msgstr "Changer les quotas par défaut"
 
 #: ../admin/adm_defquotas.php:52
 msgid "User's quotas synchronised"
-msgstr ""
+msgstr "Synchroniser les quotas utilisateurs"
 
 #: ../admin/adm_defquotas.php:55 ../admin/adm_defquotas.php:63
 msgid "Add account type"
@@ -461,6 +461,7 @@ msgstr ""
 #: ../admin/adm_defquotas.php:89
 msgid "Synchronise user's quota (only to upper value)"
 msgstr ""
+"Synchroniser les quotas utilisateurs (uniquement pour une valeur plus grande)"
 
 #: ../admin/adm_defquotas.php:93 ../admin/adm_defquotas.php:94
 #: ../admin/adm_defquotas.php:102
@@ -689,9 +690,8 @@ msgid "Unlock"
 msgstr "Déverrouiller"
 
 #: ../admin/adm_doms_def_type.php:12 ../admin/adm_panel.php:67
-#, fuzzy
 msgid "Manage defaults domains type"
-msgstr "Gestion des types de domaines"
+msgstr "Gestion des types de domaines par défaut"
 
 #: ../admin/adm_doms_def_type.php:14 ../admin/adm_domstype.php:42
 msgid ""
@@ -706,58 +706,60 @@ msgid ""
 "The Type column contains a type of available VirtualHost config on The "
 "server."
 msgstr ""
+"La colonne Type contient la liste des Hôtes Virtuels disponibles dans la "
+"configuration du serveur."
 
 #: ../admin/adm_doms_def_type.php:16
 msgid ""
 "The Setting column contains the variables to be expanded in the defaults "
 "configuration. Available values are:  "
 msgstr ""
+"La colonne Paramètre contient la variable qui sera substituée dans la "
+"configuration par défaut. Les valeurs possibles sont :  "
 
 #: ../admin/adm_doms_def_type.php:18
-#, fuzzy, php-format
+#, php-format
 msgid "%%DOMAIN%% : the Domain name"
-msgstr "Afficher les domaines"
+msgstr "%%DOMAIN%% : Le nom du domaine"
 
 #: ../admin/adm_doms_def_type.php:19
 #, php-format
 msgid "%%TARGETDOM%%: The destination domain"
-msgstr ""
+msgstr "%%TARGETDOM%% : Le domaine de destination"
 
 #: ../admin/adm_doms_def_type.php:20
-#, fuzzy, php-format
+#, php-format
 msgid "%%SUB%% : The subdomain name"
-msgstr "Afficher les domaines"
+msgstr "%%SUB%% : Le nom du sous-domaine"
 
 #: ../admin/adm_doms_def_type.php:21
 #, php-format
 msgid "%%DOMAINDIR%%: the domain directory on the file system"
-msgstr ""
+msgstr "%%DOMAINDIR%% : Le répertoire du domaine dans le système de fichier"
 
 #: ../admin/adm_doms_def_type.php:38 ../admin/cron.php:7 ../admin/cron.php:12
 msgid "There was an error during the record."
-msgstr ""
+msgstr "Une erreur est survenue pendant l'enregistrement."
 
 #: ../admin/adm_doms_def_type.php:40 ../admin/cron.php:9 ../admin/cron.php:14
 msgid "Save done."
-msgstr ""
+msgstr "Sauvegarde effectuée."
 
 #: ../admin/adm_doms_def_type.php:48
-#, fuzzy
 msgid "Activation"
-msgstr "Action"
+msgstr "Activation"
 
 #: ../admin/adm_doms_def_type.php:48
 msgid "Concerned"
-msgstr ""
+msgstr "Concernant "
 
 #: ../admin/adm_doms_def_type.php:48
 msgid "Sub"
-msgstr ""
+msgstr "Sous"
 
 #: ../admin/adm_doms_def_type.php:48
-#, fuzzy
 msgid "settings"
-msgstr "Configuration"
+msgstr "paramètres"
 
 #: ../admin/adm_domstype.php:40 ../admin/adm_panel.php:66
 #: ../admin/adm_panel.php:67 ../admin/adm_panel.php:68
@@ -815,11 +817,11 @@ msgstr "Est-ce une fonctionnalité avancée&nbsp;?"
 
 #: ../admin/adm_domstype.php:67 ../admin/adm_domstypeedit.php:123
 msgid "Create tmp directory ?"
-msgstr ""
+msgstr "Créer un répertoire temporaire ?"
 
 #: ../admin/adm_domstype.php:68
 msgid "create www directory ?"
-msgstr ""
+msgstr "Créer un répertoire www ?"
 
 #: ../admin/adm_domstype.php:76 ../admin/adm_domstype.php:78
 msgid "Regenerate"
@@ -863,7 +865,7 @@ msgstr "Modifier ce type de domaine"
 
 #: ../admin/adm_domstypeedit.php:128
 msgid "Create target directory ?"
-msgstr ""
+msgstr "Créer le répertoire destination ?"
 
 #: ../admin/adm_donosu.php:45
 msgid "This account is now a normal account"
@@ -957,12 +959,11 @@ msgstr "Compte créé par %s"
 
 #: ../admin/adm_email.php:43 ../admin/adm_panel.php:56
 msgid "Send an email to all members"
-msgstr ""
+msgstr "Envoyer un mail à tous les membres"
 
 #: ../admin/adm_email.php:48
-#, fuzzy
 msgid "The email was successfully sent"
-msgstr "Le compte AlternC a été modifié avec succès"
+msgstr "L'Email a été modifié avec succès"
 
 #: ../admin/adm_email.php:50
 msgid "There was an error"

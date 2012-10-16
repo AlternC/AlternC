@@ -19,19 +19,20 @@
 #
 # To read the license please visit http://www.gnu.org/copyleft/gpl.html
 # ----------------------------------------------------------------------
-# Purpose of file: Install squirrelmail conf files.
+# Purpose of file: Install roundcube conf files.
 # ----------------------------------------------------------------------
 
 if [ "$1" = "templates" ]
 then
-    echo "Installing Squirrelmail Templates ..."
-    cp -f /etc/alternc/templates/squirrelmail/avelsieve-config.php /etc/alternc/templates/squirrelmail/apache.conf /etc/squirrelmail/
+    echo "Installing Roundcube Templates ..."
+#    cp -f /etc/alternc/templates/roundcube/avelsieve-config.php /etc/alternc/templates/roundcube/apache.conf /etc/roundcube/
+#    cp -f /etc/alternc/templates/javascript-common/javascript-common.conf /etc/javascript-common/
 
-    LOGIN="2000_squirrel"
+    LOGIN="2000_roundcube"
     PASSWORD="`perl -e 'print map{("a".."z","A".."Z",0..9)[int(rand(62))]}(1..10)'`"
 
     # Add new variables to the sed script ...
-    SED_SCRIPT="/tmp/alternc-squirrelmail.sedscript"
+    SED_SCRIPT="/tmp/alternc-roundcube.sedscript"
     # cf alternc.install for more explanations on this horror : 
     eval `sed -n -e "/=/{s/ *= *\"\?/='/;s/\"\?\$/'/;s/host/MYSQL_HOST/;s/user/MYSQL_USER/;s/password/MYSQL_PASS/;s/database/MYSQL_DATABASE/;p}" /etc/alternc/my.cnf`
     . /etc/alternc/local.sh
@@ -42,36 +43,36 @@ then
 s\\%%ALTERNC_LOC%%\\$ALTERNC_LOC\\;
 s\\%%dbhost%%\\$MYSQL_HOST\\;
 s\\%%dbname%%\\$MYSQL_DATABASE\\;
-s\\%%squirrelmail-login%%\\$LOGIN\\;
-s\\%%squirrelmail-password%%\\$PASSWORD\\;
+s\\%%roundcube-login%%\\$LOGIN\\;
+s\\%%roundcube-password%%\\$PASSWORD\\;
 EOF
-
-    file="etc/squirrelmail/alternc-changepass.conf"
-    TEMPLATE="$TEMPLATE_DIR/${file##etc/}"
-    echo -n " $file"
-    if [ -f "$TEMPLATE" ]; then
-        sed -f "$SED_SCRIPT" < $TEMPLATE > /$file
-    fi
+    for file in $CONFIG_FILES; do
+	TEMPLATE="$TEMPLATE_DIR/${file##etc/}"
+	echo -n " $file"
+	if [ -f "$TEMPLATE" ]; then
+            sed -f "$SED_SCRIPT" < $TEMPLATE > /$file
+	fi
+    done
     rm -f $SED_SCRIPT
 
     echo "    Done"
 
     . /usr/lib/alternc/functions.sh
 
-    echo "giving write access to squirrelmail to the email password ..."
+    echo "giving write access to roundcube to the email password ..."
     # now database host user and password are mysql root account values ;) 
     mysql_query "GRANT UPDATE (password) ON ${database}.address TO '${LOGIN}'@'${MYSQL_CLIENT}' IDENTIFIED BY '${PASSWORD}';"
     mysql_query "GRANT SELECT ON ${database}.address TO '${LOGIN}'@'${MYSQL_CLIENT}';"
     mysql_query "GRANT SELECT ON ${database}.domaines TO '${LOGIN}'@'${MYSQL_CLIENT}';"
     echo "    Done"
    
-    echo "Setting squirrelmail domaintype"
-    mysql_query "INSERT IGNORE INTO domaines_type (name ,description ,target ,entry ,compatibility ,enable ,only_dns ,need_dns ,advanced )VALUES ('squirrelmail','Squirrelmail Webmail access', 'NONE', '%SUB% IN A @@PUBLIC_IP@@', 'txt', 'ALL', '0', '0', '0');"
+    echo "Setting roundcube domaintype"
+    mysql_query "INSERT IGNORE INTO domaines_type (name ,description ,target ,entry ,compatibility ,enable ,only_dns ,need_dns ,advanced )VALUES ('roundcube','Roundcube Webmail access', 'NONE', '%SUB% IN A @@PUBLIC_IP@@', 'txt', 'ALL', '0', '0', '0');"
     echo "    Done"
 
-    echo "Migrating old webmail domaine type to squirrelmail one:"
-    # migration of the "webmail" hosts to "squirrelmail" hosts:
-    mysql_query "INSERT IGNORE INTO sub_domaines (compte, domaine, sub, valeur, type, web_action, web_result, enable) SELECT compte, domaine, sub, valeur,'squirrelmail', 'UPDATE',0, enable FROM sub_domaines WHERE type='webmail' AND web_action='OK';"
+    echo "Migrating old webmail domaine type to roundcube one:"
+    # migration of the "webmail" hosts to "roundcube" hosts:
+    mysql_query "INSERT IGNORE INTO sub_domaines (compte, domaine, sub, valeur, type, web_action, web_result, enable) SELECT compte, domaine, sub, valeur,'roundcube', 'UPDATE',0, enable FROM sub_domaines WHERE type='webmail' AND web_action='OK';"
     mysql_query "UPDATE sub_domaines SET web_action='DELETE' WHERE type='webmail' AND web_action='OK';"
     echo "    Done"
 
@@ -80,6 +81,7 @@ EOF
     # just in case 
     sed -i -e "s/^Alias \/javascript/# Do not uncomment, commented by AlternC to prevent a global alias\n#Alias \/javascript/" /etc/javascript-common/javascript-common.conf
     echo "    Done"
+    
 fi
 
 

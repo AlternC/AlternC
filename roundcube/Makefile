@@ -17,16 +17,14 @@
 #
 # To read the license please visit http://www.gnu.org/copyleft/gpl.html
 # ----------------------------------------------------------------------
-# Purpose of file: Install the files of alternc-squirrelmail packages
+# Purpose of file: Install the files of alternc-roundcube packages
 # ----------------------------------------------------------------------
 
 install:
-	# alternc-squirrelmail files install
-	install -m 644 templates/squirrelmail/* $(DESTDIR)/etc/alternc/templates/squirrelmail/
-	install -m 750 squirrelmail-install $(DESTDIR)/usr/lib/alternc/install.d/
+	# alternc-roundcube files install
+	install -m 644 templates/roundcube/* $(DESTDIR)/etc/alternc/templates/roundcube/
+	install -m 750 roundcube-install $(DESTDIR)/usr/lib/alternc/install.d/
 	# domaintype template: 
-	install -m 644 templates/apache2/squirrelmail.conf $(DESTDIR)/etc/alternc/templates/apache2/squirrelmail.conf
+	install -m 644 templates/apache2/roundcube.conf $(DESTDIR)/etc/alternc/templates/apache2/roundcube.conf
 	# Desktop files
-	install -o 1999 -g 1999 -m 644 class/m_squirrelmail.php $(DESTDIR)/var/alternc/bureau/class/
-	# Squirrelmail Change Password Plugin
-	install -m 644 alternc_changepass/setup.php alternc_changepass/change.php $(DESTDIR)/usr/share/squirrelmail/plugins/alternc_changepass/
+	install -o 1999 -g 1999 -m 644 class/m_roundcube.php $(DESTDIR)/var/alternc/bureau/class/

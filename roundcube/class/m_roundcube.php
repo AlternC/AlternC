@@ -19,15 +19,15 @@
   
   To read the license please visit http://www.gnu.org/copyleft/gpl.html
   ----------------------------------------------------------------------
-  Purpose of file: Manage Squirrelmail webmail configuration
+  Purpose of file: Manage Roundcube webmail configuration
   ----------------------------------------------------------------------
 */
 
 /**
-* This class handle squirrelmail's webmail
+* This class handle roundcube's webmail
 * hook the main panel page to add a link to the webmail
 */
-class m_squirrelmail {
+class m_roundcube {
 
   /* ----------------------------------------------------------------- */
   /** Hook called by the homepage or the /webmail link
@@ -43,16 +43,16 @@ class m_squirrelmail {
     do { // for each domain part (search panel.alternc.org then alternc.org then org, if the current panel is at www.panel.alternc.org)
       list($host,$dompart)=explode(".",$_SERVER["HTTP_HOST"],$i);
       // We search for a 'squirrelmail' subdomain in that domain
-      $db->query("SELECT * FROM sub_domaines s WHERE s.domaine='".addslashes($dompart)."' AND s.type='squirrelmail';");
+      $db->query("SELECT * FROM sub_domaines s WHERE s.domaine='".addslashes($dompart)."' AND s.type='roundcube';");
       if ($db->next_record()) {
 	$domain=$db->Record;
 	return "http://".$domain["sub"].(($domain["sub"])?".":"").$domain["domaine"];
       }
       $i++;
     } while (strpos($dompart,'.')!==false);
-  
+    
     // not found: search for a webmail in the admin user account
-    $db->query("SELECT * FROM sub_domaines s WHERE s.compte=2000 AND s.type='squirrelmail';");
+    $db->query("SELECT * FROM sub_domaines s WHERE s.compte=2000 AND s.type='roundcube';");
     if ($db->next_record()) {
       $domain=$db->Record;
       return "http://".$domain["sub"].(($domain["sub"])?".":"").$domain["domaine"];
@@ -60,7 +60,7 @@ class m_squirrelmail {
 
   }
 
-} /* Class Squirrelmail */
+} /* Class Roundcube */
 
 
 
