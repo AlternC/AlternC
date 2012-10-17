@@ -16,8 +16,8 @@ done
 max_process=2
 
 tasks () {
-$MYSQL_DO "select id, url, email, schedule, UNIX_TIMESTAMP(), user, password as now from cron c where next_execution <= now();" | while read id url email schedule now user password ; do
-  echo $id $url $email $schedule $now \"$user\" \"$password\" 
+$MYSQL_DO "select id, url, if(length(email)>0,email,'null'), schedule, UNIX_TIMESTAMP(), user, password as now from cron c where next_execution <= now();" | while read id url email schedule now user password ; do
+  echo $id $url \"$email\" $schedule $now \"$user\" \"$password\" 
 done
 }
 

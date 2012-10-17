@@ -49,11 +49,23 @@ urldecode() {
 ) | sed -e 's/"/\\"/g' -e 's/\!/\\\!/g' -e 's/\ /\\\ /g' -e "s/'/\\'/g"
 }
 
-
-date=$(date +%x\ %X)
+tmpfile=$(mktemp /tmp/altern-cron-id$id-$$.XXX)
 
 # Don't really understand why it must be called this way...
-bash -c "( echo -e 'Here the report for the scheduled task for the cron #$id in your AlternC configuration (from http://$FQDN)\n\n\n------------\n\n'; wget -O - --no-check-certificate --http-user=$(urldecode $user) --http-password=$(urldecode $password) \"$(urldecode $url)\" --timeout=$timeout 2>&1 )| mailx -s \"AlternC Cron #$id - Report $date\" -r \"$from\" \"$(urldecode $email)\""
+(
+echo -e "Here the report for the scheduled task for the cron #$id in your AlternC configuration (from http://$FQDN)\n\n"
+echo -e "\n---------- BEGIN ----------"
+bash -c "wget -O - --no-check-certificate --http-user=$(urldecode $user) --http-password=$(urldecode $password) \"$(urldecode $url)\" --timeout=$timeout 2>&1"
+echo -e "\n----------  END  ----------"
+) > "$tmpfile"
+
+# If there is an email specified, mail it
+if [ ! "x$email" == "x" -a ! "$email" == "null" ] ; then
+  date=$(date +%x\ %X)
+  cat "$tmpfile" | mailx -s "AlternC Cron #$id - Report $date" -r "$from" "$(urldecode $email)"
+fi
+
+rm -f "$tmpfile"
 
 # On calcule l'heure de la prochaine execution idéale
 ((interval=$schedule * 60))
