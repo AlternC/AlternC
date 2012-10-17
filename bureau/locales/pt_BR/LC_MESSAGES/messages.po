@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: $Id: admin.po,v 1.2 2003/06/09 14:36:08 root Exp $\n"
 "Report-Msgid-Bugs-To: i18n@alternc.org\n"
-"POT-Creation-Date: 2012-10-16 16:58+0200\n"
+"POT-Creation-Date: 2012-10-17 10:09+0200\n"
 "PO-Revision-Date: 2007-10-25 23:50-0400\n"
 "Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
 "Language-Team: English <i18n@alternc.org>\n"
@@ -16,30 +16,24 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Emacs 21\n"
 
-#: ../../squirrelmail/alternc-changepass/change.php:26
+#: ../../squirrelmail/alternc_changepass/change.php:39
+msgid "Can't connect to MySQL server on AlternC!"
+msgstr ""
+
 #: ../../squirrelmail/alternc_changepass/change.php:66
 msgid "Your new passwords are differents, pleasy try again."
 msgstr ""
 
-#: ../../squirrelmail/alternc-changepass/change.php:31
 #: ../../squirrelmail/alternc_changepass/change.php:72
 msgid ""
 "Your account has not been found, please try again later or ask an "
 "administrator."
 msgstr ""
 
-#: ../../squirrelmail/alternc-changepass/change.php:34
 #: ../../squirrelmail/alternc_changepass/change.php:75
 msgid "Your current password is incorrect, please try again."
 msgstr ""
 
-#: ../../squirrelmail/alternc-changepass/change.php:39
-msgid ""
-"This password is not strong enough for your policy, set a stronger password "
-"or call your administrator"
-msgstr ""
-
-#: ../../squirrelmail/alternc-changepass/change.php:49
 #: ../../squirrelmail/alternc_changepass/change.php:88
 msgid ""
 "Your password has been successfully changed. Don't forget to change it in "
@@ -47,50 +41,35 @@ msgid ""
 "Eudora ...)"
 msgstr ""
 
-#: ../../squirrelmail/alternc-changepass/change.php:77
 #: ../../squirrelmail/alternc_changepass/change.php:111
 #, fuzzy
 msgid "Changing your mail password"
 msgstr "Mudança da senha SQL"
 
-#: ../../squirrelmail/alternc-changepass/change.php:81
 #: ../../squirrelmail/alternc_changepass/change.php:115
 #, fuzzy
 msgid "Old Password:"
 msgstr "Senha POP"
 
-#: ../../squirrelmail/alternc-changepass/change.php:86
 #: ../../squirrelmail/alternc_changepass/change.php:120
 #, fuzzy
 msgid "New Password:"
 msgstr "New password"
 
-#: ../../squirrelmail/alternc-changepass/change.php:90
 #: ../../squirrelmail/alternc_changepass/change.php:124
 #, fuzzy
 msgid "Verify New Password:"
 msgstr "New password"
 
-#: ../../squirrelmail/alternc-changepass/change.php:95
 #: ../../squirrelmail/alternc_changepass/change.php:129
 #, fuzzy
 msgid "Change my mail password"
 msgstr "Mudança da senha SQL"
 
-#: ../../squirrelmail/alternc-changepass/setup.php:16
 #: ../../squirrelmail/alternc_changepass/setup.php:21
 #, fuzzy
 msgid "Change Password"
 msgstr "Mudança da senha SQL"
-
-#: ../../squirrelmail/alternc-changepass/setup.php:18
-#, fuzzy
-msgid "This allow you to change your mail password."
-msgstr "Você não pode mudar sua senha"
-
-#: ../../squirrelmail/alternc_changepass/change.php:39
-msgid "Can't connect to MySQL server on AlternC!"
-msgstr ""
 
 #: ../../squirrelmail/alternc_changepass/setup.php:23
 #, fuzzy
@@ -136,20 +115,17 @@ msgstr "Aqui seus parâmetros atuaís"
 #: ../admin/adm_add.php:36 ../admin/adm_deactivate.php:35
 #: ../admin/adm_deactivate.php:52 ../admin/adm_defquotas.php:35
 #: ../admin/adm_dnsweberror.php:33 ../admin/adm_doadd.php:26
-#: ../admin/adm_doadd.php:35 ../admin/adm_dodefquotas.php:35
-#: ../admin/adm_dodel.php:33 ../admin/adm_dodel.php:52
-#: ../admin/adm_doedit.php:35 ../admin/adm_doedit.php:59
-#: ../admin/adm_domlock.php:33 ../admin/adm_doms.php:33
-#: ../admin/adm_doms_def_type.php:5 ../admin/adm_domstype.php:33
-#: ../admin/adm_domstypedoedit.php:4 ../admin/adm_domstypeedit.php:32
-#: ../admin/adm_domstyperegenerate.php:4 ../admin/adm_donosu.php:33
-#: ../admin/adm_dorenew.php:34 ../admin/adm_dorenew.php:38
+#: ../admin/adm_dodefquotas.php:35 ../admin/adm_dodel.php:33
+#: ../admin/adm_dodel.php:52 ../admin/adm_doedit.php:35
+#: ../admin/adm_doedit.php:59 ../admin/adm_domlock.php:33
+#: ../admin/adm_doms.php:33 ../admin/adm_doms_def_type.php:5
+#: ../admin/adm_domstype.php:33 ../admin/adm_domstypedoedit.php:4
+#: ../admin/adm_domstypeedit.php:32 ../admin/adm_domstyperegenerate.php:4
+#: ../admin/adm_donosu.php:33 ../admin/adm_dorenew.php:34
 #: ../admin/adm_dorenew.php:45 ../admin/adm_dosu.php:33
 #: ../admin/adm_edit.php:36 ../admin/adm_edit.php:48 ../admin/adm_email.php:30
-#: ../admin/adm_list.php:37 ../admin/adm_list.php:58 ../admin/adm_login.php:74
-#: ../admin/adm_login.php:78 ../admin/adm_login.php:79
-#: ../admin/adm_login.php:85 ../admin/adm_login.php:86
-#: ../admin/adm_login.php:91 ../admin/adm_mxaccount.php:33
+#: ../admin/adm_list.php:37 ../admin/adm_list.php:58 ../admin/adm_login.php:78
+#: ../admin/adm_login.php:85 ../admin/adm_mxaccount.php:33
 #: ../admin/adm_panel.php:33 ../admin/adm_passpolicy.php:30
 #: ../admin/adm_quotadoedit.php:33 ../admin/adm_quotaedit.php:34
 #: ../admin/adm_slaveaccount.php:33 ../admin/adm_slaveip.php:33
@@ -168,13 +144,11 @@ msgid "New AlternC account"
 msgstr "Deletar as contas selecionadas"
 
 #: ../admin/adm_add.php:63 ../admin/adm_edit.php:69
-#: ../admin/adm_quotaedit.php:68 ../admin/ftp_add.php:54
-#: ../admin/ftp_add.php:66 ../admin/ftp_edit.php:58 ../admin/ftp_list.php:72
-#: ../admin/hta_adduser.php:53 ../admin/hta_adduser.php:54
-#: ../admin/hta_edit.php:62 ../admin/hta_edit.php:102 ../admin/index.php:76
-#: ../admin/index.php:81 ../admin/piwik_userlist.php:79
-#: ../admin/sql_getparam.php:50 ../admin/sql_passchg.php:51
-#: ../admin/sql_users_add.php:59 ../admin/sql_users_add.php:64
+#: ../admin/adm_quotaedit.php:68 ../admin/ftp_add.php:66
+#: ../admin/ftp_edit.php:58 ../admin/ftp_list.php:72
+#: ../admin/hta_adduser.php:54 ../admin/hta_edit.php:62
+#: ../admin/hta_edit.php:102 ../admin/index.php:76
+#: ../admin/piwik_userlist.php:79 ../admin/sql_users_add.php:59
 #, fuzzy
 msgid "Username"
 msgstr "Nome de usúario"
@@ -183,13 +157,11 @@ msgstr "Nome de usúario"
 msgid "Initial password"
 msgstr "Senha inicial"
 
-#: ../admin/adm_add.php:71 ../admin/adm_edit.php:89 ../admin/ftp_add.php:65
-#: ../admin/ftp_add.php:77 ../admin/ftp_edit.php:70
-#: ../admin/hta_adduser.php:61 ../admin/hta_adduser.php:62
+#: ../admin/adm_add.php:71 ../admin/adm_edit.php:89 ../admin/ftp_add.php:77
+#: ../admin/ftp_edit.php:70 ../admin/hta_adduser.php:62
 #: ../admin/hta_edit.php:110 ../admin/hta_edituser.php:55
-#: ../admin/mail_edit.inc.php:67 ../admin/mail_edit.inc.php:71
-#: ../admin/mail_edit.php:96 ../admin/sql_users_add.php:67
-#: ../admin/sql_users_add.php:72 ../admin/sql_users_password.php:59
+#: ../admin/mail_edit.inc.php:67 ../admin/mail_edit.php:96
+#: ../admin/sql_users_add.php:67 ../admin/sql_users_password.php:59
 #, fuzzy
 msgid "Confirm password"
 msgstr "Senha inicial"
@@ -198,45 +170,37 @@ msgstr "Senha inicial"
 msgid "Can he change its password"
 msgstr "Pode mudar a senha"
 
-#: ../admin/adm_add.php:77 ../admin/adm_dodefquotas.php:73
-#: ../admin/adm_dodefquotas.php:78 ../admin/adm_dodel.php:88
-#: ../admin/adm_domstype.php:83 ../admin/adm_domstype.php:84
-#: ../admin/adm_domstype.php:85 ../admin/adm_domstype.php:86
-#: ../admin/adm_domstype.php:87 ../admin/adm_domstype.php:88
-#: ../admin/adm_domstype.php:89 ../admin/adm_edit.php:78
-#: ../admin/adm_edit.php:95 ../admin/adm_passpolicy.php:112
-#: ../admin/adm_passpolicy.php:158 ../admin/bro_main.php:98
-#: ../admin/bro_main.php:102 ../admin/bro_main.php:104
-#: ../admin/dom_dodel.php:74 ../admin/dom_edit.php:191
-#: ../admin/dom_edit.php:193 ../admin/dom_edit.php:203
-#: ../admin/dom_edit.php:205 ../admin/dom_subdel.php:80
-#: ../admin/mail_edit.php:90 ../admin/mail_list.php:139
+#: ../admin/adm_add.php:77 ../admin/adm_dodefquotas.php:78
+#: ../admin/adm_dodel.php:88 ../admin/adm_domstype.php:85
+#: ../admin/adm_domstype.php:86 ../admin/adm_domstype.php:87
+#: ../admin/adm_domstype.php:88 ../admin/adm_domstype.php:89
+#: ../admin/adm_edit.php:78 ../admin/adm_edit.php:95
+#: ../admin/adm_passpolicy.php:112 ../admin/adm_passpolicy.php:158
+#: ../admin/bro_main.php:104 ../admin/dom_dodel.php:74
+#: ../admin/dom_edit.php:193 ../admin/dom_edit.php:205
+#: ../admin/dom_subdel.php:80 ../admin/mail_edit.php:90
 #: ../admin/mail_list.php:143 ../admin/mail_localbox_edit.inc.php:57
-#: ../admin/sql_bck.php:87 ../admin/sql_del.php:84 ../admin/sql_del.php:90
-#: ../admin/sql_users_del.php:72 ../admin/sql_users_del.php:76
-#: ../admin/trash_dateselect.php:39 ../class/m_bro.php:70
+#: ../admin/sql_bck.php:87 ../admin/sql_del.php:90
+#: ../admin/sql_users_del.php:76 ../admin/trash_dateselect.php:39
+#: ../class/m_bro.php:70
 msgid "No"
 msgstr "Não"
 
-#: ../admin/adm_add.php:78 ../admin/adm_dodefquotas.php:72
-#: ../admin/adm_dodefquotas.php:77 ../admin/adm_dodel.php:87
-#: ../admin/adm_domstype.php:83 ../admin/adm_domstype.php:84
-#: ../admin/adm_domstype.php:85 ../admin/adm_domstype.php:86
-#: ../admin/adm_domstype.php:87 ../admin/adm_domstype.php:88
-#: ../admin/adm_domstype.php:89 ../admin/adm_edit.php:79
-#: ../admin/adm_edit.php:96 ../admin/adm_passpolicy.php:113
-#: ../admin/adm_passpolicy.php:158 ../admin/bro_main.php:97
-#: ../admin/bro_main.php:101 ../admin/bro_main.php:103
-#: ../admin/dom_dodel.php:74 ../admin/dom_edit.php:190
-#: ../admin/dom_edit.php:192 ../admin/dom_edit.php:202
-#: ../admin/dom_edit.php:204 ../admin/dom_subdel.php:79
-#: ../admin/mail_edit.php:91 ../admin/mail_list.php:176
-#: ../admin/mail_list.php:209 ../admin/mail_list.php:219
-#: ../admin/mail_list.php:229 ../admin/mail_list.php:239
-#: ../admin/mail_localbox_edit.inc.php:58 ../admin/sql_bck.php:88
-#: ../admin/sql_del.php:84 ../admin/sql_del.php:90
-#: ../admin/sql_users_del.php:72 ../admin/sql_users_del.php:76
-#: ../admin/trash_dateselect.php:40 ../class/m_bro.php:70
+#: ../admin/adm_add.php:78 ../admin/adm_dodefquotas.php:77
+#: ../admin/adm_dodel.php:87 ../admin/adm_domstype.php:85
+#: ../admin/adm_domstype.php:86 ../admin/adm_domstype.php:87
+#: ../admin/adm_domstype.php:88 ../admin/adm_domstype.php:89
+#: ../admin/adm_edit.php:79 ../admin/adm_edit.php:96
+#: ../admin/adm_passpolicy.php:113 ../admin/adm_passpolicy.php:158
+#: ../admin/bro_main.php:103 ../admin/dom_dodel.php:74
+#: ../admin/dom_edit.php:192 ../admin/dom_edit.php:204
+#: ../admin/dom_subdel.php:79 ../admin/mail_edit.php:91
+#: ../admin/mail_list.php:176 ../admin/mail_list.php:209
+#: ../admin/mail_list.php:219 ../admin/mail_list.php:229
+#: ../admin/mail_list.php:239 ../admin/mail_localbox_edit.inc.php:58
+#: ../admin/sql_bck.php:88 ../admin/sql_del.php:90
+#: ../admin/sql_users_del.php:76 ../admin/trash_dateselect.php:40
+#: ../class/m_bro.php:70
 msgid "Yes"
 msgstr "Sim"
 
@@ -256,10 +220,8 @@ msgstr "Sobrenome"
 msgid "Email address"
 msgstr "Endereço email"
 
-#: ../admin/adm_add.php:94 ../admin/adm_dodefquotas.php:43
-#: ../admin/adm_dodefquotas.php:45 ../admin/adm_dodefquotas.php:48
-#: ../admin/adm_dodefquotas.php:50 ../admin/adm_dodefquotas.php:52
-#: ../admin/adm_dodefquotas.php:54 ../admin/adm_dodefquotas.php:57
+#: ../admin/adm_add.php:94 ../admin/adm_dodefquotas.php:48
+#: ../admin/adm_dodefquotas.php:50 ../admin/adm_dodefquotas.php:57
 #: ../admin/adm_dodefquotas.php:59 ../admin/adm_edit.php:112
 #, fuzzy
 msgid "Account type"
@@ -276,25 +238,22 @@ msgid "Create this AlternC account"
 msgstr "Criar está nova conta FTP."
 
 #: ../admin/adm_add.php:129 ../admin/adm_deactivate.php:75
-#: ../admin/adm_domstypeedit.php:122 ../admin/adm_domstypeedit.php:134
-#: ../admin/adm_edit.php:131 ../admin/adm_quotaedit.php:87
+#: ../admin/adm_domstypeedit.php:134 ../admin/adm_edit.php:131
 #: ../admin/adm_quotaedit.php:88 ../admin/adm_tldadd.php:71
 #: ../admin/adm_tldedit.php:70 ../admin/bro_pref.php:149
-#: ../admin/browseforfolder.php:146 ../admin/ftp_add.php:68
-#: ../admin/ftp_add.php:80 ../admin/ftp_del.php:83 ../admin/ftp_edit.php:74
-#: ../admin/hta_adduser.php:67 ../admin/hta_adduser.php:68
-#: ../admin/hta_dodeluser.php:65 ../admin/mail_edit.inc.php:80
-#: ../admin/mail_edit.inc.php:84 ../admin/mail_edit.php:115
+#: ../admin/browseforfolder.php:146 ../admin/ftp_add.php:80
+#: ../admin/ftp_del.php:83 ../admin/ftp_edit.php:74
+#: ../admin/hta_adduser.php:68 ../admin/hta_dodeluser.php:65
+#: ../admin/mail_edit.inc.php:80 ../admin/mail_edit.php:115
 #: ../admin/mail_localbox_edit.inc.php:68
 #: ../admin/mail_redirection_edit.inc.php:65 ../admin/piwik_user_dodel.php:64
-#: ../admin/sql_bck.php:105 ../admin/sql_passchg.php:57
-#: ../admin/sql_users_add.php:73 ../admin/sql_users_add.php:78
+#: ../admin/sql_bck.php:105 ../admin/sql_users_add.php:73
 #: ../admin/sql_users_password.php:65 ../admin/sql_users_rights.php:101
 msgid "Cancel"
 msgstr ""
 
-#: ../admin/adm_authip_whitelist.php:31 ../admin/ip_main.php:50
-#: ../admin/menu_ip.php:28 ../admin/menu_ip.php:35
+#: ../admin/adm_authip_whitelist.php:31 ../admin/adm_menulist.php:75
+#: ../admin/ip_main.php:50 ../admin/menu_ip.php:28
 msgid "Access security"
 msgstr ""
 
@@ -332,8 +291,7 @@ msgid "Add a comment"
 msgstr "Adiçionar um domínio"
 
 #: ../admin/adm_authip_whitelist.php:57 ../admin/adm_doms_def_type.php:88
-#: ../admin/bro_editor.php:77 ../admin/bro_editor.php:90 ../admin/cron.php:66
-#: ../admin/cron.php:71 ../admin/cron.php:78 ../admin/ip_main.php:123
+#: ../admin/bro_editor.php:90 ../admin/ip_main.php:123
 #: ../admin/ip_main.php:178
 msgid "Save"
 msgstr "Salvar"
@@ -347,30 +305,26 @@ msgid "Informations"
 msgstr ""
 
 #: ../admin/adm_authip_whitelist.php:64 ../admin/adm_doms_def_type.php:48
-#: ../admin/dom_edit.php:97 ../admin/dom_edit.php:99 ../admin/ip_main.php:136
+#: ../admin/dom_edit.php:99 ../admin/ip_main.php:136
 msgid "Type"
 msgstr ""
 
-#: ../admin/adm_authip_whitelist.php:81 ../admin/adm_domstype.php:75
-#: ../admin/adm_domstype.php:77 ../admin/adm_list.php:169
-#: ../admin/adm_list.php:191 ../admin/adm_passpolicy.php:152
-#: ../admin/adm_tld.php:82 ../admin/dom_edit.php:109 ../admin/dom_edit.php:111
-#: ../admin/ftp_list.php:82 ../admin/ip_main.php:156 ../admin/mail_list.php:95
-#: ../admin/mail_list.php:125 ../admin/mail_list.php:129
-#: ../admin/mail_properties.php:122 ../admin/sta2_list.php:68
-#: ../class/m_mail_alias.php:79
+#: ../admin/adm_authip_whitelist.php:81 ../admin/adm_domstype.php:77
+#: ../admin/adm_list.php:169 ../admin/adm_list.php:191
+#: ../admin/adm_passpolicy.php:152 ../admin/adm_tld.php:82
+#: ../admin/dom_edit.php:111 ../admin/ftp_list.php:82 ../admin/ip_main.php:156
+#: ../admin/mail_list.php:129 ../admin/mail_properties.php:122
 msgid "Edit"
 msgstr "Editar"
 
 #: ../admin/adm_authip_whitelist.php:82 ../admin/adm_doms_def_type.php:60
-#: ../admin/adm_mxaccount.php:88 ../admin/adm_mxaccount.php:89
-#: ../admin/adm_slaveaccount.php:88 ../admin/adm_slaveip.php:87
-#: ../admin/bro_main.php:273 ../admin/bro_main.php:278 ../admin/cron.php:51
-#: ../admin/cron.php:54 ../admin/dom_edit.php:115 ../admin/dom_edit.php:117
-#: ../admin/ftp_del.php:82 ../admin/hta_dodeluser.php:64
-#: ../admin/ip_main.php:74 ../admin/ip_main.php:157
-#: ../admin/mail_redirection_edit.inc.php:52 ../admin/piwik_sitelist.php:74
-#: ../admin/piwik_user_dodel.php:63 ../admin/piwik_userlist.php:87
+#: ../admin/adm_mxaccount.php:88 ../admin/adm_slaveaccount.php:88
+#: ../admin/adm_slaveip.php:87 ../admin/bro_main.php:278 ../admin/cron.php:54
+#: ../admin/dom_edit.php:117 ../admin/ftp_del.php:82
+#: ../admin/hta_dodeluser.php:64 ../admin/ip_main.php:74
+#: ../admin/ip_main.php:157 ../admin/mail_redirection_edit.inc.php:52
+#: ../admin/piwik_sitelist.php:74 ../admin/piwik_user_dodel.php:63
+#: ../admin/piwik_userlist.php:87
 msgid "Delete"
 msgstr "Suprimir"
 
@@ -418,8 +372,7 @@ msgstr ""
 msgid "-- Redirecting all domains and subdomains of the user %s to %s\n"
 msgstr ""
 
-#: ../admin/adm_defquotas.php:42 ../admin/adm_defquotas.php:46
-#: ../admin/adm_panel.php:54
+#: ../admin/adm_defquotas.php:46 ../admin/adm_panel.php:54
 msgid "Change the default quotas"
 msgstr "Mudar os quotas padrões"
 
@@ -427,46 +380,41 @@ msgstr "Mudar os quotas padrões"
 msgid "User's quotas synchronised"
 msgstr ""
 
-#: ../admin/adm_defquotas.php:55 ../admin/adm_defquotas.php:63
+#: ../admin/adm_defquotas.php:65
 #, fuzzy
 msgid "Add account type"
 msgstr "Nenhuma conta selecionada"
 
-#: ../admin/adm_defquotas.php:74 ../admin/adm_defquotas.php:75
-#: ../admin/adm_defquotas.php:82
+#: ../admin/adm_defquotas.php:84
 #, fuzzy
 msgid "Delete account type"
 msgstr "Deletar as contas selecionadas"
 
-#: ../admin/adm_defquotas.php:79 ../admin/adm_defquotas.php:80
-#: ../admin/adm_defquotas.php:87
+#: ../admin/adm_defquotas.php:89
 msgid ""
 "Here is the list of the quotas on the server for the new accounts. If you "
 "want to change them, enter new values"
 msgstr ""
 
-#: ../admin/adm_defquotas.php:89
+#: ../admin/adm_defquotas.php:91
 msgid "Synchronise user's quota (only to upper value)"
 msgstr ""
 
-#: ../admin/adm_defquotas.php:93 ../admin/adm_defquotas.php:94
-#: ../admin/adm_defquotas.php:102
+#: ../admin/adm_defquotas.php:104
 msgid "Accounts of type"
 msgstr ""
 
-#: ../admin/adm_defquotas.php:95 ../admin/adm_defquotas.php:96
-#: ../admin/adm_defquotas.php:104
+#: ../admin/adm_defquotas.php:106
 msgid "Default Value"
 msgstr ""
 
-#: ../admin/adm_defquotas.php:95 ../admin/adm_defquotas.php:96
-#: ../admin/adm_defquotas.php:104 ../admin/adm_list.php:127
+#: ../admin/adm_defquotas.php:106 ../admin/adm_list.php:127
 #: ../admin/adm_list.php:172 ../admin/adm_list.php:192
-#: ../admin/menu_quota.php:46 ../admin/menu_quota.php:52
+#: ../admin/menu_quota.php:46
 msgid "Quotas"
 msgstr "Quotas"
 
-#: ../admin/adm_defquotas.php:115 ../admin/adm_defquotas.php:124
+#: ../admin/adm_defquotas.php:126
 #, fuzzy
 msgid "Edit the default quotas"
 msgstr "Mudar os quotas padrões"
@@ -486,15 +434,13 @@ msgstr ""
 #: ../admin/adm_dnsweberror.php:55 ../admin/adm_dnsweberror.php:87
 #: ../admin/adm_list.php:123 ../admin/adm_list.php:205
 #: ../admin/adm_list.php:206 ../admin/adm_list.php:207
-#: ../admin/quotas_oneuser.php:8 ../admin/quotas_oneuser.php:12
-#: ../admin/quotas_users.php:159 ../admin/quotas_users.php:171
+#: ../admin/quotas_oneuser.php:12 ../admin/quotas_users.php:159
 #, fuzzy
 msgid "Account"
 msgstr "Conta Permitiu ?"
 
 #: ../admin/adm_dnsweberror.php:56 ../admin/adm_dnsweberror.php:88
-#: ../admin/dom_add.php:57 ../admin/sta2_list.php:58 ../class/m_dom.php:1303
-#: ../class/m_dom.php:1372
+#: ../admin/dom_add.php:57 ../class/m_dom.php:1372
 msgid "Domain name"
 msgstr "Nome do Domínio"
 
@@ -507,7 +453,7 @@ msgid "Value"
 msgstr ""
 
 #: ../admin/adm_dnsweberror.php:59 ../admin/adm_domstype.php:59
-#: ../admin/adm_domstypeedit.php:76 ../admin/adm_domstypeedit.php:78
+#: ../admin/adm_domstypeedit.php:78
 msgid "Description"
 msgstr "Descição"
 
@@ -523,51 +469,50 @@ msgstr ""
 msgid "DNS Result field"
 msgstr ""
 
-#: ../admin/adm_doadd.php:45 ../admin/adm_doadd.php:54
-#: ../admin/adm_doedit.php:64 ../admin/ftp_doadd.php:42
-#: ../admin/ftp_doedit.php:36 ../admin/ftp_doedit.php:46
+#: ../admin/adm_doadd.php:45 ../admin/adm_doedit.php:64
+#: ../admin/ftp_doadd.php:42 ../admin/ftp_doedit.php:46
 #: ../admin/hta_doadduser.php:41 ../admin/hta_doedituser.php:42
 #: ../admin/mail_doedit.php:57
 msgid "Passwords do not match"
 msgstr ""
 
-#: ../admin/adm_doadd.php:76 ../admin/adm_doadd.php:85
+#: ../admin/adm_doadd.php:76
 msgid "The new member has been successfully created"
 msgstr "O membro novo foi criado com sucesso"
 
-#: ../admin/adm_dodefquotas.php:43 ../admin/adm_dodefquotas.php:48
+#: ../admin/adm_dodefquotas.php:48
 msgid "added"
 msgstr ""
 
-#: ../admin/adm_dodefquotas.php:45 ../admin/adm_dodefquotas.php:50
+#: ../admin/adm_dodefquotas.php:50
 msgid "could not be added"
 msgstr ""
 
-#: ../admin/adm_dodefquotas.php:52 ../admin/adm_dodefquotas.php:57
+#: ../admin/adm_dodefquotas.php:57
 #, fuzzy
 msgid "deleted"
 msgstr "Suprimir"
 
-#: ../admin/adm_dodefquotas.php:54 ../admin/adm_dodefquotas.php:59
+#: ../admin/adm_dodefquotas.php:59
 #, fuzzy
 msgid "could not be deleted"
 msgstr "Algums TLD não pode ser suprimidos..."
 
-#: ../admin/adm_dodefquotas.php:63 ../admin/adm_dodefquotas.php:68
+#: ../admin/adm_dodefquotas.php:68
 #, fuzzy, php-format
 msgid "Deleting quota %s"
 msgstr "Suprimando o secundário-domínio %s"
 
-#: ../admin/adm_dodefquotas.php:69 ../admin/adm_dodefquotas.php:74
+#: ../admin/adm_dodefquotas.php:74
 #, fuzzy
 msgid "WARNING : Confirm the deletion of the quota"
 msgstr "AVISO : Confirmar o apagamento do secundário-domínio"
 
-#: ../admin/adm_dodefquotas.php:92 ../admin/adm_dodefquotas.php:97
+#: ../admin/adm_dodefquotas.php:97
 msgid "Default quotas successfully changed"
 msgstr "Quotas padrões foram mudados com sucesso"
 
-#: ../admin/adm_dodefquotas.php:94 ../admin/adm_dodefquotas.php:99
+#: ../admin/adm_dodefquotas.php:99
 #, fuzzy
 msgid "Default quotas could not be set."
 msgstr "Quotas padrões foram mudados com sucesso"
@@ -608,7 +553,7 @@ msgstr "O membro foi editado com sucesso"
 msgid "Manage installed domains"
 msgstr "Controla domínios permitidos (TLD)"
 
-#: ../admin/adm_doms.php:54 ../admin/adm_doms.php:59
+#: ../admin/adm_doms.php:59
 msgid ""
 "Here is the list of the domains installed on this server. You can remove a "
 "domain if it does not exist or does not point to our server anymore. You can "
@@ -616,7 +561,7 @@ msgid ""
 "change any DNS parameter or delete this domain from his account."
 msgstr ""
 
-#: ../admin/adm_doms.php:57 ../admin/adm_doms.php:62
+#: ../admin/adm_doms.php:62
 msgid ""
 "The domain OK column are green when the domain exists in the worldwide "
 "registry and has a proper NS,MX and IP depending on its configuration. It is "
@@ -624,56 +569,53 @@ msgid ""
 "the user of this domain or a system administrator."
 msgstr ""
 
-#: ../admin/adm_doms.php:60 ../admin/adm_doms.php:65
+#: ../admin/adm_doms.php:65
 msgid "If you want to force the check of NS, MX, IP on domains, click the link"
 msgstr ""
 
-#: ../admin/adm_doms.php:60 ../admin/adm_doms.php:65
+#: ../admin/adm_doms.php:65
 msgid "Show domain list with refreshed checked NS, MX, IP information"
 msgstr ""
 
-#: ../admin/adm_doms.php:64 ../admin/adm_doms.php:69
-#: ../admin/adm_mxaccount.php:80 ../admin/adm_mxaccount.php:81
+#: ../admin/adm_doms.php:69 ../admin/adm_mxaccount.php:80
 #: ../admin/adm_slaveaccount.php:80 ../admin/adm_slaveip.php:79
 msgid "Action"
 msgstr "Ação"
 
-#: ../admin/adm_doms.php:64 ../admin/adm_doms.php:69 ../admin/adm_doms.php:82
-#: ../admin/adm_doms.php:87 ../admin/adm_list.php:165
+#: ../admin/adm_doms.php:69 ../admin/adm_doms.php:87 ../admin/adm_list.php:165
 #: ../admin/adm_list.php:190
 msgid "Connect as"
 msgstr "Conectar como"
 
-#: ../admin/adm_doms.php:64 ../admin/adm_doms.php:69
+#: ../admin/adm_doms.php:69
 #, fuzzy
 msgid "Creator"
 msgstr "Criar"
 
-#: ../admin/adm_doms.php:64 ../admin/adm_doms.php:69
+#: ../admin/adm_doms.php:69
 #, fuzzy
 msgid "Domain"
 msgstr "Domínios"
 
-#: ../admin/adm_doms.php:64 ../admin/adm_doms.php:69
+#: ../admin/adm_doms.php:69
 msgid "OK?"
 msgstr ""
 
-#: ../admin/adm_doms.php:64 ../admin/adm_doms.php:69 ../admin/dom_edit.php:97
-#: ../admin/dom_edit.php:99 ../admin/mail_edit.inc.php:37
-#: ../admin/mail_edit.inc.php:41
+#: ../admin/adm_doms.php:69 ../admin/dom_edit.php:99
+#: ../admin/mail_edit.inc.php:37
 msgid "Status"
 msgstr ""
 
-#: ../admin/adm_doms.php:73 ../admin/adm_doms.php:78
+#: ../admin/adm_doms.php:78
 #, fuzzy
 msgid "Locked Domain"
 msgstr "Conta Troncada"
 
-#: ../admin/adm_doms.php:76 ../admin/adm_doms.php:81
+#: ../admin/adm_doms.php:81
 msgid "Lock"
 msgstr ""
 
-#: ../admin/adm_doms.php:76 ../admin/adm_doms.php:81
+#: ../admin/adm_doms.php:81
 msgid "Unlock"
 msgstr ""
 
@@ -720,11 +662,11 @@ msgstr "Nome do Domínio"
 msgid "%%DOMAINDIR%%: the domain directory on the file system"
 msgstr ""
 
-#: ../admin/adm_doms_def_type.php:38 ../admin/cron.php:7 ../admin/cron.php:12
+#: ../admin/adm_doms_def_type.php:38
 msgid "There was an error during the record."
 msgstr ""
 
-#: ../admin/adm_doms_def_type.php:40 ../admin/cron.php:9 ../admin/cron.php:14
+#: ../admin/adm_doms_def_type.php:40 ../admin/cron.php:14
 msgid "Save done."
 msgstr ""
 
@@ -746,8 +688,7 @@ msgstr ""
 msgid "settings"
 msgstr "Mostrar ícones?"
 
-#: ../admin/adm_domstype.php:40 ../admin/adm_panel.php:66
-#: ../admin/adm_panel.php:67 ../admin/adm_panel.php:68
+#: ../admin/adm_domstype.php:40 ../admin/adm_panel.php:68
 #, fuzzy
 msgid "Manage domains type"
 msgstr "Controla domínios permitidos (TLD)"
@@ -762,8 +703,7 @@ msgstr "Aqui está a lista de membros hospedados"
 msgid "Create a domain type"
 msgstr "Adiçionar um secundário-domínio"
 
-#: ../admin/adm_domstype.php:58 ../admin/adm_domstypeedit.php:72
-#: ../admin/adm_domstypeedit.php:74 ../admin/logs_list.php:49
+#: ../admin/adm_domstype.php:58 ../admin/adm_domstypeedit.php:74
 #: ../admin/logs_list.php:52
 #, fuzzy
 msgid "Name"
@@ -774,8 +714,7 @@ msgstr "Membro novo"
 msgid "Target"
 msgstr ""
 
-#: ../admin/adm_domstype.php:61 ../admin/adm_domstypeedit.php:90
-#: ../admin/adm_domstypeedit.php:92
+#: ../admin/adm_domstype.php:61 ../admin/adm_domstypeedit.php:92
 msgid "Entry"
 msgstr ""
 
@@ -783,8 +722,7 @@ msgstr ""
 msgid "Compatible with"
 msgstr ""
 
-#: ../admin/adm_domstype.php:62 ../admin/adm_domstypeedit.php:94
-#: ../admin/adm_domstypeedit.php:96
+#: ../admin/adm_domstype.php:62 ../admin/adm_domstypeedit.php:96
 msgid "Enter comma-separated name of other types"
 msgstr ""
 
@@ -813,58 +751,55 @@ msgstr ""
 msgid "create www directory ?"
 msgstr ""
 
-#: ../admin/adm_domstype.php:76 ../admin/adm_domstype.php:78
+#: ../admin/adm_domstype.php:78
 msgid "Regenerate"
 msgstr ""
 
-#: ../admin/adm_domstypeedit.php:58 ../admin/adm_domstypeedit.php:60
+#: ../admin/adm_domstypeedit.php:60
 #, fuzzy
 msgid "Edit a domain type"
 msgstr "Editando o domínio %s"
 
-#: ../admin/adm_domstypeedit.php:80 ../admin/adm_domstypeedit.php:82
+#: ../admin/adm_domstypeedit.php:82
 msgid "Target type"
 msgstr ""
 
-#: ../admin/adm_domstypeedit.php:94 ../admin/adm_domstypeedit.php:96
+#: ../admin/adm_domstypeedit.php:96
 msgid "Compatibility"
 msgstr ""
 
-#: ../admin/adm_domstypeedit.php:98 ../admin/adm_domstypeedit.php:100
-#: ../admin/dom_edit.php:133 ../admin/dom_edit.php:135
-#: ../admin/mail_list.php:89 ../admin/mail_list.php:105
-#: ../admin/mail_list.php:109 ../admin/mail_list.php:127
-#: ../admin/mail_list.php:131
+#: ../admin/adm_domstypeedit.php:100 ../admin/dom_edit.php:135
+#: ../admin/mail_list.php:109 ../admin/mail_list.php:131
 msgid "Enabled"
 msgstr ""
 
-#: ../admin/adm_domstypeedit.php:108 ../admin/adm_domstypeedit.php:110
+#: ../admin/adm_domstypeedit.php:110
 msgid "Do only a DNS entry"
 msgstr ""
 
-#: ../admin/adm_domstypeedit.php:112 ../admin/adm_domstypeedit.php:114
+#: ../admin/adm_domstypeedit.php:114
 msgid "Domain must have our DNS"
 msgstr ""
 
-#: ../admin/adm_domstypeedit.php:116 ../admin/adm_domstypeedit.php:118
+#: ../admin/adm_domstypeedit.php:118
 msgid "Is it an advanced option?"
 msgstr ""
-
-#: ../admin/adm_domstypeedit.php:121 ../admin/adm_domstypeedit.php:133
-#, fuzzy
-msgid "Change this domain type"
-msgstr "Mudar esta caixa de email"
 
 #: ../admin/adm_domstypeedit.php:128
 msgid "Create target directory ?"
 msgstr ""
+
+#: ../admin/adm_domstypeedit.php:133
+#, fuzzy
+msgid "Change this domain type"
+msgstr "Mudar esta caixa de email"
 
 #: ../admin/adm_donosu.php:45
 #, fuzzy
 msgid "This account is now a normal account"
 msgstr "Esta conta é uma conta super-administrador"
 
-#: ../admin/adm_dorenew.php:46 ../admin/adm_dorenew.php:53
+#: ../admin/adm_dorenew.php:53
 #, fuzzy
 msgid "The member has been successfully renewed"
 msgstr "O membro foi editado com sucesso"
@@ -889,18 +824,12 @@ msgid "You cannot disable your own account."
 msgstr "Você não pode mudar sua senha"
 
 #: ../admin/adm_edit.php:85 ../admin/adm_mxaccount.php:80
-#: ../admin/adm_mxaccount.php:81 ../admin/adm_mxaccount.php:100
-#: ../admin/adm_mxaccount.php:101 ../admin/adm_slaveaccount.php:80
-#: ../admin/adm_slaveaccount.php:100 ../admin/cron.php:32 ../admin/cron.php:37
-#: ../admin/cron.php:38 ../admin/cron.php:39 ../admin/ftp_add.php:64
+#: ../admin/adm_mxaccount.php:100 ../admin/adm_slaveaccount.php:80
+#: ../admin/adm_slaveaccount.php:100 ../admin/cron.php:39
 #: ../admin/ftp_add.php:76 ../admin/ftp_edit.php:69
-#: ../admin/hta_adduser.php:57 ../admin/hta_adduser.php:58
-#: ../admin/hta_edit.php:106 ../admin/index.php:77 ../admin/index.php:82
-#: ../admin/index.php:100 ../admin/mail_edit.inc.php:45
-#: ../admin/mail_edit.inc.php:49 ../admin/mail_edit.inc.php:63
-#: ../admin/mail_edit.inc.php:67 ../admin/sql_getparam.php:54
-#: ../admin/sql_getparam.php:71 ../admin/sql_passchg.php:52
-#: ../admin/sql_users_add.php:63 ../admin/sql_users_add.php:68
+#: ../admin/hta_adduser.php:58 ../admin/hta_edit.php:106 ../admin/index.php:77
+#: ../admin/mail_edit.inc.php:45 ../admin/mail_edit.inc.php:63
+#: ../admin/sql_getparam.php:71 ../admin/sql_users_add.php:63
 #: ../admin/sql_users_list.php:48 ../admin/sql_users_password.php:55
 msgid "Password"
 msgstr "Senha"
@@ -1028,7 +957,7 @@ msgid "No account defined for now"
 msgstr "Nenhuma conta selecionada"
 
 #: ../admin/adm_list.php:114 ../admin/adm_list.php:197
-#: ../admin/adm_list.php:283 ../admin/ftp_list.php:90 ../admin/ftp_list.php:92
+#: ../admin/adm_list.php:283 ../admin/ftp_list.php:92
 msgid "Delete checked accounts"
 msgstr "Deletar as contas selecionadas"
 
@@ -1064,14 +993,12 @@ msgstr "Último Login: "
 msgid "Fails"
 msgstr ""
 
-#: ../admin/adm_list.php:131 ../admin/main.php:80 ../admin/main.php:90
-#: ../admin/main.php:95
+#: ../admin/adm_list.php:131 ../admin/main.php:90
 msgid "Expiry"
 msgstr ""
 
-#: ../admin/adm_list.php:176 ../admin/dom_edit.php:134
-#: ../admin/dom_edit.php:136 ../admin/mail_edit.inc.php:41
-#: ../admin/mail_edit.inc.php:45
+#: ../admin/adm_list.php:176 ../admin/dom_edit.php:136
+#: ../admin/mail_edit.inc.php:41
 msgid "Disable"
 msgstr ""
 
@@ -1094,58 +1021,125 @@ msgstr ""
 msgid "Complete view"
 msgstr ""
 
-#: ../admin/adm_login.php:45 ../admin/adm_login.php:49
-#: ../admin/adm_login.php:50 ../admin/adm_login.php:52
-#: ../admin/adm_login.php:56 ../admin/adm_login.php:57
+#: ../admin/adm_login.php:49 ../admin/adm_login.php:56
 msgid "Your authentication information are incorrect"
 msgstr ""
 
-#: ../admin/adm_login.php:110 ../admin/adm_login.php:111
-#: ../admin/adm_login.php:116
+#: ../admin/adm_login.php:110
 #, fuzzy
 msgid "Member login"
 msgstr "Lista dos membros"
 
-#: ../admin/adm_menulist.php:69
+#: ../admin/adm_menulist.php:67 ../admin/menu_dom.php:34
+#: ../admin/quotas_oneuser.php:33 ../admin/quotas_users.php:122
+msgid "Domains"
+msgstr "Domínios"
+
+#: ../admin/adm_menulist.php:68 ../admin/menu_mail.php:34
+#, fuzzy
+msgid "Email Addresses"
+msgstr "Endereço email"
+
+#: ../admin/adm_menulist.php:69 ../admin/bro_main.php:158
+#: ../admin/menu_brouteur.php:26
+msgid "File browser"
+msgstr "Navegador de arquivos"
+
+#: ../admin/adm_menulist.php:70 ../admin/menu_web.php:27
+msgid "Protected folders"
+msgstr "Protected folders"
+
+#: ../admin/adm_menulist.php:71 ../admin/menu_ftp.php:34
+#: ../class/m_ftp.php:361
+msgid "FTP accounts"
+msgstr "Contas FTP"
+
+#: ../admin/adm_menulist.php:72 ../admin/cron.php:21 ../admin/menu_cron.php:33
+#: ../class/m_cron.php:171
+msgid "Scheduled tasks"
+msgstr ""
+
+#: ../admin/adm_menulist.php:73 ../admin/menu_sql.php:34
+#, fuzzy
+msgid "Databases"
+msgstr "Bases de dados"
+
+#: ../admin/adm_menulist.php:74 ../admin/menu_quota.php:25
+msgid "Show my quotas"
+msgstr ""
+
+#: ../admin/adm_menulist.php:76 ../admin/menu_logs.php:28
+msgid "Logs"
+msgstr ""
+
+#: ../admin/adm_menulist.php:77 ../admin/menu_aide.php:25
+msgid "Online help"
+msgstr "Ajuda online"
+
+#: ../admin/adm_menulist.php:78 ../admin/menu_lang.php:3
+msgid "Languages"
+msgstr ""
+
+#: ../admin/adm_menulist.php:79 ../admin/menu_mem.php:25
+msgid "Settings"
+msgstr ""
+
+#: ../admin/adm_menulist.php:80 ../admin/menu_piwik.php:31
+#, fuzzy
+msgid "Piwik statistics"
+msgstr "Número de statisticas Web"
+
+#: ../admin/adm_menulist.php:81 ../admin/menu_adm.php:32
+#, fuzzy
+msgid "Administration"
+msgstr "Administração do"
+
+#: ../admin/adm_menulist.php:82
+#, fuzzy
+msgid "Mailing lists"
+msgstr "Número de envi-listas"
+
+#: ../admin/adm_menulist.php:83
+#, fuzzy
+msgid "Web Statistics"
+msgstr "Número de statisticas Web"
+
+#: ../admin/adm_menulist.php:90
+msgid "Module"
+msgstr ""
+
+#: ../admin/adm_menulist.php:95
 msgid ""
 "Edit the file /etc/alternc/menulist.txt to enable, disable ou change order "
 "of menu entry."
 msgstr ""
 
-#: ../admin/adm_menulist.php:71
-msgid "Menu actually activated"
+#: ../admin/adm_menulist.php:97
+msgid "Menu currently activated"
 msgstr ""
 
-#: ../admin/adm_menulist.php:73 ../admin/adm_menulist.php:77
-#: ../admin/adm_menulist.php:81
-msgid "shortdesc_"
-msgstr ""
-
-#: ../admin/adm_menulist.php:75
+#: ../admin/adm_menulist.php:103
 msgid "Menu activated but not present"
 msgstr ""
 
-#: ../admin/adm_menulist.php:79
-msgid "Menu avalaible but not activated"
+#: ../admin/adm_menulist.php:110
+msgid "Menu available but not activated"
 msgstr ""
 
-#: ../admin/adm_mxaccount.php:47 ../admin/adm_mxaccount.php:48
-#: ../admin/adm_slaveaccount.php:48
+#: ../admin/adm_mxaccount.php:47 ../admin/adm_slaveaccount.php:48
 #, fuzzy
 msgid "The requested account has been deleted. It is now denied."
 msgstr "O TLD pedido foi suprimido"
 
-#: ../admin/adm_mxaccount.php:53 ../admin/adm_mxaccount.php:54
-#: ../admin/adm_slaveaccount.php:54
+#: ../admin/adm_mxaccount.php:53 ../admin/adm_slaveaccount.php:54
 msgid "The requested account address has been created. It is now allowed."
 msgstr ""
 
-#: ../admin/adm_mxaccount.php:62 ../admin/adm_mxaccount.php:63
-#: ../admin/adm_panel.php:64 ../admin/adm_panel.php:65
+#: ../admin/adm_mxaccount.php:62 ../admin/adm_panel.php:65
 msgid "Manage allowed accounts for secondary mx"
 msgstr ""
 
-#: ../admin/adm_mxaccount.php:76 ../admin/adm_mxaccount.php:77
+#: ../admin/adm_mxaccount.php:76
 msgid ""
 "Here is the list of the allowed accounts for secondary mx management. You "
 "can configure the alternc-secondarymx package on your secondary mx server "
@@ -1153,25 +1147,23 @@ msgid ""
 "hosted domain list. "
 msgstr ""
 
-#: ../admin/adm_mxaccount.php:80 ../admin/adm_mxaccount.php:81
-#: ../admin/adm_mxaccount.php:100 ../admin/adm_mxaccount.php:101
+#: ../admin/adm_mxaccount.php:80 ../admin/adm_mxaccount.php:100
 #: ../admin/adm_slaveaccount.php:80 ../admin/adm_slaveaccount.php:100
 #: ../admin/sql_getparam.php:67
 msgid "Login"
 msgstr ""
 
-#: ../admin/adm_mxaccount.php:97 ../admin/adm_mxaccount.php:98
+#: ../admin/adm_mxaccount.php:97
 msgid ""
 "If you want to allow a new server to access your mx-hosted domain list, give "
 "him an account."
 msgstr ""
 
-#: ../admin/adm_mxaccount.php:106 ../admin/adm_mxaccount.php:107
-#: ../admin/adm_slaveaccount.php:106
+#: ../admin/adm_mxaccount.php:106 ../admin/adm_slaveaccount.php:106
 msgid "Add this account to the allowed list"
 msgstr ""
 
-#: ../admin/adm_panel.php:40 ../admin/menu_adm.php:41 ../admin/menu_adm.php:48
+#: ../admin/adm_panel.php:40 ../admin/menu_adm.php:41
 msgid "Admin Control Panel"
 msgstr "Painel de controle do Administrador"
 
@@ -1190,41 +1182,36 @@ msgstr "Senha"
 msgid "Manage IP whitelist"
 msgstr "Controlar os membros"
 
-#: ../admin/adm_panel.php:59 ../admin/adm_panel.php:60
+#: ../admin/adm_panel.php:60
 msgid "Advanced features"
 msgstr ""
 
-#: ../admin/adm_panel.php:62 ../admin/adm_panel.php:63
-#: ../admin/adm_slaveip.php:61
+#: ../admin/adm_panel.php:63 ../admin/adm_slaveip.php:61
 msgid "Manage allowed ip for slave zone transfers"
 msgstr ""
 
-#: ../admin/adm_panel.php:63 ../admin/adm_panel.php:64
-#: ../admin/adm_slaveaccount.php:62
+#: ../admin/adm_panel.php:64 ../admin/adm_slaveaccount.php:62
 msgid "Manage allowed accounts for slave zone transfers"
 msgstr ""
 
-#: ../admin/adm_panel.php:65 ../admin/adm_panel.php:66
-#: ../admin/adm_variables.php:47
+#: ../admin/adm_panel.php:66 ../admin/adm_variables.php:47
 #, fuzzy
 msgid "Configure AlternC variables"
 msgstr "Configurar o navegador de arquivo"
 
-#: ../admin/adm_panel.php:67 ../admin/adm_panel.php:68
 #: ../admin/adm_panel.php:69
 msgid "DNS and website having errors"
 msgstr ""
 
-#: ../admin/adm_panel.php:68 ../admin/adm_panel.php:70
+#: ../admin/adm_panel.php:70
+#, fuzzy
+msgid "Manage menu"
+msgstr "Controlar os membros"
+
 #: ../admin/adm_panel.php:71
 #, fuzzy
 msgid "Account creation statistics"
 msgstr "Conta foi criado por %s"
-
-#: ../admin/adm_panel.php:69 ../admin/adm_panel.php:70
-#, fuzzy
-msgid "Manage menu"
-msgstr "Controlar os membros"
 
 #: ../admin/adm_passpolicy.php:49
 #, fuzzy
@@ -1331,8 +1318,7 @@ msgstr "Quota"
 
 #: ../admin/adm_quotaedit.php:69 ../admin/quota_show.php:42
 #: ../admin/quotas_oneuser.php:81 ../admin/quotas_users.php:144
-#: ../admin/quotas_users.php:156 ../admin/quotas_users.php:168
-#: ../admin/quotas_users.php:180
+#: ../admin/quotas_users.php:168
 msgid "Total"
 msgstr "Total"
 
@@ -1340,14 +1326,7 @@ msgstr "Total"
 msgid "Used"
 msgstr "Usado(s)"
 
-#: ../admin/adm_quotaedit.php:77 ../class/m_quota.php:75
-#: ../class/m_quota.php:99 ../class/m_quota.php:107 ../class/m_quota.php:111
-#: ../class/m_quota.php:112 ../class/m_quota.php:128
-#, fuzzy
-msgid "quota_"
-msgstr "Espaço de Disco"
-
-#: ../admin/adm_quotaedit.php:86 ../admin/adm_quotaedit.php:87
+#: ../admin/adm_quotaedit.php:87
 msgid "Edit the quotas"
 msgstr "Editar os quotas"
 
@@ -1484,232 +1463,198 @@ msgstr ""
 msgid "Names"
 msgstr ""
 
-#: ../admin/adm_variables.php:72 ../admin/adm_variables.php:74
+#: ../admin/adm_variables.php:72
 msgid "Save variables"
 msgstr ""
 
-#: ../admin/bro_editor.php:44 ../admin/bro_editor.php:53
 #: ../admin/bro_editor.php:54 ../admin/bro_editor.php:63
 #, php-format
 msgid "Your file %s has been saved"
 msgstr "Seu arquivo %s foi salvado com sucesso"
 
-#: ../admin/bro_editor.php:64 ../admin/bro_editor.php:74
+#: ../admin/bro_editor.php:74
 msgid "File editing"
 msgstr "Edição de arquivo"
 
-#: ../admin/bro_editor.php:78 ../admin/bro_editor.php:91
+#: ../admin/bro_editor.php:91
 msgid "Save &amp; Quit"
 msgstr "Salva &amp; Sair"
 
-#: ../admin/bro_editor.php:79 ../admin/bro_editor.php:92
+#: ../admin/bro_editor.php:92
 msgid "Quit"
 msgstr "Sair"
 
-#: ../admin/bro_main.php:86 ../admin/bro_main.php:90 ../admin/bro_main.php:92
+#: ../admin/bro_main.php:92
 #, php-format
 msgid "Deleting files and/or directories"
 msgstr ""
 
-#: ../admin/bro_main.php:91 ../admin/bro_main.php:95 ../admin/bro_main.php:97
+#: ../admin/bro_main.php:97
 #, fuzzy
 msgid "WARNING: Confirm the deletion of this files"
 msgstr "AVISO : Confirmar o apagamento do secundário-domínio"
 
-#: ../admin/bro_main.php:137 ../admin/bro_main.php:142
+#: ../admin/bro_main.php:142
 msgid "extracting..."
 msgstr ""
 
-#: ../admin/bro_main.php:141 ../admin/bro_main.php:146
+#: ../admin/bro_main.php:146
 #, fuzzy
 msgid "failed"
 msgstr "Arquivo"
 
-#: ../admin/bro_main.php:144 ../admin/bro_main.php:149
+#: ../admin/bro_main.php:149
 msgid "done"
 msgstr ""
 
-#: ../admin/bro_main.php:153 ../admin/bro_main.php:158
-#: ../admin/menu_brouteur.php:26 ../admin/menu_brouteur.php:34
-msgid "File browser"
-msgstr "Navegador de arquivos"
-
-#: ../admin/bro_main.php:161 ../admin/bro_main.php:166
+#: ../admin/bro_main.php:166
 msgid "Path"
 msgstr ""
 
-#: ../admin/bro_main.php:173 ../admin/bro_main.php:178
+#: ../admin/bro_main.php:178
 msgid "Send one file:"
 msgstr ""
 
-#: ../admin/bro_main.php:177 ../admin/bro_main.php:182
+#: ../admin/bro_main.php:182
 #, fuzzy
 msgid "Send this file"
 msgstr "Importar este arquivo"
 
-#: ../admin/bro_main.php:185 ../admin/bro_main.php:190
+#: ../admin/bro_main.php:190
 #, fuzzy
 msgid "New file or folder:"
 msgstr "Nenhum arquivo nesta pasta"
 
-#: ../admin/bro_main.php:190 ../admin/bro_main.php:195
-#: ../admin/mail_list.php:66 ../admin/piwik_sitelist.php:45
+#: ../admin/bro_main.php:195 ../admin/piwik_sitelist.php:45
 #: ../admin/piwik_userlist.php:44 ../admin/piwik_userlist.php:57
 msgid "Create"
 msgstr "Criar"
 
-#: ../admin/bro_main.php:192 ../admin/bro_main.php:197
-#: ../admin/bro_main.php:232 ../admin/bro_main.php:237
+#: ../admin/bro_main.php:197 ../admin/bro_main.php:237
 msgid "File"
 msgstr "Arquivo"
 
-#: ../admin/bro_main.php:193 ../admin/bro_main.php:198
-#: ../admin/bro_main.php:361 ../admin/bro_main.php:366
-#: ../admin/bro_main.php:371 ../admin/ftp_add.php:57 ../admin/ftp_add.php:69
+#: ../admin/bro_main.php:198 ../admin/bro_main.php:371 ../admin/ftp_add.php:69
 #: ../admin/ftp_edit.php:61 ../admin/ftp_list.php:72 ../admin/hta_add.php:50
-#: ../admin/hta_adduser.php:49 ../admin/hta_adduser.php:50
-#: ../admin/hta_edit.php:98 ../admin/hta_edituser.php:52
-#: ../admin/hta_list.php:67 ../admin/hta_list.php:68 ../admin/sta2_list.php:58
+#: ../admin/hta_adduser.php:50 ../admin/hta_edit.php:98
+#: ../admin/hta_edituser.php:52 ../admin/hta_list.php:67
 msgid "Folder"
 msgstr "Pasta"
 
-#: ../admin/bro_main.php:210 ../admin/bro_main.php:215
-#: ../admin/bro_main.php:216 ../admin/bro_main.php:221
-#: ../admin/bro_main.php:274 ../admin/bro_main.php:279
+#: ../admin/bro_main.php:215 ../admin/bro_main.php:221
+#: ../admin/bro_main.php:279
 msgid "Rename"
 msgstr "Rebatizar"
 
-#: ../admin/bro_main.php:226 ../admin/bro_main.php:231
-#: ../admin/bro_main.php:232 ../admin/bro_main.php:237
-#: ../admin/bro_main.php:275 ../admin/bro_main.php:280
+#: ../admin/bro_main.php:231 ../admin/bro_main.php:237
+#: ../admin/bro_main.php:280
 msgid "Permissions"
 msgstr ""
 
-#: ../admin/bro_main.php:246 ../admin/bro_main.php:251
+#: ../admin/bro_main.php:251
 msgid "write"
 msgstr ""
 
-#: ../admin/bro_main.php:254 ../admin/bro_main.php:259
+#: ../admin/bro_main.php:259
 #, fuzzy
 msgid "Change permissions"
 msgstr "Mudar meus ajustes"
 
-#: ../admin/bro_main.php:277 ../admin/bro_main.php:282
+#: ../admin/bro_main.php:282
 #, fuzzy
 msgid "Copy"
 msgstr "Copiar"
 
-#: ../admin/bro_main.php:278 ../admin/bro_main.php:283
+#: ../admin/bro_main.php:283
 msgid "Move"
 msgstr "Relocalizar"
 
-#: ../admin/bro_main.php:279 ../admin/bro_main.php:284
+#: ../admin/bro_main.php:284
 msgid "To"
 msgstr ""
 
-#: ../admin/bro_main.php:309 ../admin/bro_main.php:314
+#: ../admin/bro_main.php:314
 #, fuzzy
 msgid "Filename"
 msgstr "Rebatizar"
 
-#: ../admin/bro_main.php:310 ../admin/bro_main.php:315
-#: ../admin/logs_list.php:49 ../admin/logs_list.php:52
-#: ../admin/sql_list.php:54 ../admin/sql_list.php:62
+#: ../admin/bro_main.php:315 ../admin/logs_list.php:52
+#: ../admin/sql_list.php:54
 msgid "Size"
 msgstr "Tamanho"
 
-#: ../admin/bro_main.php:311 ../admin/bro_main.php:316
+#: ../admin/bro_main.php:316
 msgid "Last modification"
 msgstr ""
 
-#: ../admin/bro_main.php:313 ../admin/bro_main.php:318
+#: ../admin/bro_main.php:318
 #, fuzzy
 msgid "File Type"
 msgstr "Arquivo"
 
-#: ../admin/bro_main.php:338 ../admin/bro_main.php:343
-#: ../admin/bro_main.php:348 ../admin/bro_main.php:516
-#: ../admin/bro_main.php:521 ../admin/bro_main.php:526
-#: ../admin/sta2_list.php:58 ../admin/sta2_list.php:72
+#: ../admin/bro_main.php:348 ../admin/bro_main.php:526
 msgid "View"
 msgstr "Vista"
 
-#: ../admin/bro_main.php:345 ../admin/bro_main.php:350
 #: ../admin/bro_main.php:355
 msgid "Extract"
 msgstr ""
 
-#: ../admin/bro_main.php:388 ../admin/bro_main.php:393
-#: ../admin/bro_main.php:398 ../admin/bro_main.php:418
-#: ../admin/bro_main.php:423 ../admin/bro_main.php:428
-#: ../admin/bro_main.php:455 ../admin/bro_main.php:460
-#: ../admin/bro_main.php:465 ../admin/bro_main.php:485
-#: ../admin/bro_main.php:490 ../admin/bro_main.php:495
+#: ../admin/bro_main.php:398 ../admin/bro_main.php:428
+#: ../admin/bro_main.php:465 ../admin/bro_main.php:495
 msgid "V"
 msgstr "V"
 
-#: ../admin/bro_main.php:542 ../admin/bro_main.php:547
 #: ../admin/bro_main.php:552
 msgid "No files in this folder"
 msgstr "Nenhum arquivo nesta pasta"
 
-#: ../admin/bro_main.php:552 ../admin/bro_main.php:557
 #: ../admin/bro_main.php:562
 msgid "(slow)"
 msgstr ""
 
-#: ../admin/bro_main.php:552 ../admin/bro_main.php:557
 #: ../admin/bro_main.php:562
 msgid "Show size of directories"
 msgstr ""
 
-#: ../admin/bro_main.php:556 ../admin/bro_main.php:561
 #: ../admin/bro_main.php:566
 msgid "Edit this folder's protection"
 msgstr ""
 
-#: ../admin/bro_main.php:559 ../admin/bro_main.php:564
 #: ../admin/bro_main.php:569 ../admin/hta_add.php:61
 msgid "Protect this folder"
 msgstr "Protect this folder"
 
-#: ../admin/bro_main.php:561 ../admin/bro_main.php:566
 #: ../admin/bro_main.php:571
 #, fuzzy
 msgid "with a login and a password"
 msgstr "Senha inicial"
 
-#: ../admin/bro_main.php:564 ../admin/bro_main.php:569
 #: ../admin/bro_main.php:574
 #, fuzzy
 msgid "Download this folder"
 msgstr "Protect this folder"
 
-#: ../admin/bro_main.php:566 ../admin/bro_main.php:571
 #: ../admin/bro_main.php:576
 #, php-format
 msgid "as a %s file"
 msgstr ""
 
-#: ../admin/bro_main.php:574 ../admin/bro_main.php:579
 #: ../admin/bro_main.php:584
 #, fuzzy
 msgid "Edit the ftp account"
 msgstr "Editar esta conta"
 
-#: ../admin/bro_main.php:575 ../admin/bro_main.php:580
 #: ../admin/bro_main.php:585
 #, fuzzy
 msgid "that exists in this folder"
 msgstr "Nenhum arquivo nesta pasta"
 
-#: ../admin/bro_main.php:581 ../admin/bro_main.php:586
 #: ../admin/bro_main.php:591
 #, fuzzy
 msgid "Create an ftp account in this folder"
 msgstr "Há uma conta ftp nesta pasta"
 
-#: ../admin/bro_main.php:590 ../admin/bro_main.php:595
 #: ../admin/bro_main.php:600
 #, fuzzy
 msgid "Configure the file editor"
@@ -1786,30 +1731,20 @@ msgstr "Volta ao navegador de arquivos"
 msgid "Select"
 msgstr "Suprimir"
 
-#: ../admin/cron.php:16 ../admin/cron.php:21 ../admin/menu_cron.php:33
-#: ../admin/menu_cron.php:40 ../class/m_cron.php:161 ../class/m_cron.php:170
-#: ../class/m_cron.php:171
-msgid "Scheduled tasks"
-msgstr ""
-
-#: ../admin/cron.php:29 ../admin/cron.php:34 ../admin/cron.php:35
 #: ../admin/cron.php:36
 msgid "URL"
 msgstr ""
 
-#: ../admin/cron.php:30 ../admin/cron.php:35 ../admin/cron.php:36
 #: ../admin/cron.php:37
 msgid "Schedule"
 msgstr ""
 
-#: ../admin/cron.php:31 ../admin/cron.php:36 ../admin/cron.php:37
 #: ../admin/cron.php:38 ../admin/hta_edituser.php:53
 #: ../admin/sql_users_list.php:48
 #, fuzzy
 msgid "User"
 msgstr "Usado(s)"
 
-#: ../admin/cron.php:33 ../admin/cron.php:38 ../admin/cron.php:39
 #: ../admin/cron.php:40
 #, fuzzy
 msgid "Email report"
@@ -1840,7 +1775,7 @@ msgstr ""
 msgid "Mail address (for reports)"
 msgstr "Endereço email"
 
-#: ../admin/cron.php:78 ../admin/cron.php:84
+#: ../admin/cron.php:84
 msgid "Apply the modifications"
 msgstr ""
 
@@ -1895,7 +1830,7 @@ msgstr ""
 msgid "Whois result on the domain"
 msgstr "Resultado Whois deste domínio"
 
-#: ../admin/dom_doadd.php:52 ../admin/menu_dom.php:40 ../admin/menu_dom.php:47
+#: ../admin/dom_doadd.php:52 ../admin/menu_dom.php:40
 msgid "Add a domain"
 msgstr "Adiçionar um domínio"
 
@@ -1920,8 +1855,8 @@ msgstr "A caixa de email %s foi mudado com sucesso"
 msgid "Confirm the deletion of domain %s"
 msgstr "Confirma o apagamento deste domínio %s"
 
-#: ../admin/dom_dodel.php:67 ../admin/sql_del.php:69 ../admin/sql_del.php:75
-#: ../admin/sql_users_del.php:57 ../admin/sql_users_del.php:61
+#: ../admin/dom_dodel.php:67 ../admin/sql_del.php:75
+#: ../admin/sql_users_del.php:61
 msgid "WARNING"
 msgstr "AVISO"
 
@@ -1957,10 +1892,8 @@ msgstr ""
 msgid "Hide advanced options"
 msgstr ""
 
-#: ../admin/dom_edit.inc.php:85 ../admin/ftp_add.php:60
-#: ../admin/ftp_add.php:72 ../admin/ftp_edit.php:65 ../admin/hta_add.php:54
-#: ../admin/sql_bck.php:97 ../admin/sta2_add_raw.php:57
-#: ../admin/sta2_edit_raw.php:63 ../admin/sta2_edit_raw.php:68
+#: ../admin/dom_edit.inc.php:85 ../admin/ftp_add.php:72
+#: ../admin/ftp_edit.php:65 ../admin/hta_add.php:54 ../admin/sql_bck.php:97
 #, fuzzy
 msgid "Choose a folder..."
 msgstr "Protect a folder"
@@ -1995,89 +1928,81 @@ msgstr "Adiçionar este domínio"
 msgid "Add this subdomain"
 msgstr "Adiçionar este domínio"
 
-#: ../admin/dom_edit.php:66 ../admin/dom_edit.php:68
+#: ../admin/dom_edit.php:68
 #, fuzzy, php-format
 msgid "Editing subdomains of %s"
 msgstr "Editando o domínio %s"
 
-#: ../admin/dom_edit.php:76 ../admin/dom_edit.php:78
+#: ../admin/dom_edit.php:78
 msgid "This domain have some DNS change pending. Please wait."
 msgstr ""
-
-#: ../admin/dom_edit.php:79 ../admin/dom_edit.php:81
-#, fuzzy
-msgid "You requested deletion of this domain."
-msgstr "Confirma o apagamento deste domínio %s"
 
 #: ../admin/dom_edit.php:81
 #, fuzzy, php-format
 msgid "You requested deletion of domain %s."
 msgstr "Confirma o apagamento deste domínio %s"
 
-#: ../admin/dom_edit.php:97 ../admin/dom_edit.php:99
+#: ../admin/dom_edit.php:99
 #, fuzzy
 msgid "Subdomain"
 msgstr "Secundário-domínios"
 
-#: ../admin/dom_edit.php:137 ../admin/dom_edit.php:139
+#: ../admin/dom_edit.php:139
 msgid "Activation pending"
 msgstr ""
 
-#: ../admin/dom_edit.php:140 ../admin/dom_edit.php:142
-#: ../admin/mail_list.php:91 ../admin/mail_list.php:119
-#: ../admin/mail_list.php:123 ../admin/mail_list.php:129
+#: ../admin/dom_edit.php:142 ../admin/mail_list.php:123
 #: ../admin/mail_list.php:133
 msgid "Disabled"
 msgstr ""
 
-#: ../admin/dom_edit.php:141 ../admin/dom_edit.php:143
-#: ../admin/mail_edit.inc.php:42 ../admin/mail_edit.inc.php:46
+#: ../admin/dom_edit.php:143 ../admin/mail_edit.inc.php:42
 msgid "Enable"
 msgstr ""
 
-#: ../admin/dom_edit.php:144 ../admin/dom_edit.php:146
+#: ../admin/dom_edit.php:146
 msgid "Desactivation pending"
 msgstr ""
 
-#: ../admin/dom_edit.php:152 ../admin/dom_edit.php:154
+#: ../admin/dom_edit.php:154
 msgid "Update pending"
 msgstr ""
 
-#: ../admin/dom_edit.php:155 ../admin/dom_edit.php:157
+#: ../admin/dom_edit.php:157
 #, fuzzy
 msgid "Deletion pending"
 msgstr "Suprimando o secundário-domínio %s"
 
-#: ../admin/dom_edit.php:183 ../admin/dom_edit.php:185
+#: ../admin/dom_edit.php:185
 #, fuzzy
 msgid "DNS & Email parameters"
 msgstr "Parâmetros DNS"
 
-#: ../admin/dom_edit.php:188 ../admin/dom_edit.php:190
+#: ../admin/dom_edit.php:190
 msgid "Manage the DNS on the server ?"
 msgstr "Administrar o DNS neste servidor ?"
 
-#: ../admin/dom_edit.php:199 ../admin/dom_edit.php:201
+#: ../admin/dom_edit.php:201
 #, fuzzy
 msgid "Manage the Emails Addresses of this domain on the server?"
 msgstr "Administrar o DNS neste servidor ?"
 
-#: ../admin/dom_edit.php:206 ../admin/dom_edit.php:208
+#: ../admin/dom_edit.php:208
 msgid ""
 "Warning: If you set this to 'no', all your email accounts and aliases on "
 "this domain will be immediately deleted."
 msgstr ""
 
-#: ../admin/dom_edit.php:208 ../admin/dom_edit.php:210
+#: ../admin/dom_edit.php:210
 msgid "Submit the changes"
 msgstr "Submeter as mudanças"
 
-#: ../admin/dom_edit.php:213 ../admin/dom_edit.php:215
+#: ../admin/dom_edit.php:215
 #, fuzzy
 msgid "Domain removal"
 msgstr "Nome do Domínio"
 
-#: ../admin/dom_edit.php:216 ../admin/dom_edit.php:218
+#: ../admin/dom_edit.php:218
 #, php-format
 msgid "help_domain_del %s"
 msgstr ""
@@ -2085,7 +2010,7 @@ msgstr ""
 "suprimirá todo o ftp, correios, envi-listas ... associadas com estedomínio e "
 "os sécondarios domínios dele"
 
-#: ../admin/dom_edit.php:219 ../admin/dom_edit.php:221
+#: ../admin/dom_edit.php:221
 #, php-format
 msgid "Delete %s from this server"
 msgstr ""
@@ -2134,44 +2059,41 @@ msgstr "Editando o domínio %s"
 msgid "You cannot add any new ftp account, your quota is over."
 msgstr "Você não pode adiçionr mais domínios, sua quota acabou."
 
-#: ../admin/ftp_add.php:39 ../admin/ftp_add.php:51 ../admin/ftp_list.php:57
-#: ../admin/menu_ftp.php:40 ../admin/menu_ftp.php:47
+#: ../admin/ftp_add.php:51 ../admin/ftp_list.php:57 ../admin/menu_ftp.php:40
 msgid "Create a new ftp account"
 msgstr "Criar uma nova conta ftp"
 
-#: ../admin/ftp_add.php:67 ../admin/ftp_add.php:79
+#: ../admin/ftp_add.php:79
 msgid "Create this new FTP account."
 msgstr "Criar está nova conta FTP."
 
-#: ../admin/ftp_del.php:42 ../admin/ftp_del.php:60
+#: ../admin/ftp_del.php:60
 #, php-format
 msgid "The ftp account %s has been successfully deleted"
 msgstr "Esta conta ftp %s foi suprimado com sucesso"
 
 #: ../admin/ftp_del.php:68
 #, fuzzy
-msgid "FTP accounts deletion confirm"
-msgstr "Lista de contas FTP"
+msgid "Confirm the FTP accounts deletion"
+msgstr "Confirma o apagamento deste domínio %s"
 
 #: ../admin/ftp_del.php:71
-msgid "Do you really want to delete those accounts ?"
+msgid "Do you really want to delete those accounts?"
 msgstr ""
 
 #: ../admin/ftp_doadd.php:53
 msgid "The FTP account has been successfully created"
 msgstr "A conta FTP foi criado com sucesso"
 
-#: ../admin/ftp_doedit.php:33 ../admin/ftp_doedit.php:43
-#: ../admin/ftp_edit.php:39
+#: ../admin/ftp_doedit.php:43 ../admin/ftp_edit.php:39
 msgid "No account selected!"
 msgstr "Nenhuma conta selecionada"
 
-#: ../admin/ftp_doedit.php:47 ../admin/ftp_doedit.php:57
+#: ../admin/ftp_doedit.php:57
 msgid "The ftp account has been successfully changed"
 msgstr "A conta ftp foi mudado com sucesso"
 
-#: ../admin/ftp_doedit.php:56 ../admin/ftp_doedit.php:66
-#: ../admin/ftp_edit.php:47
+#: ../admin/ftp_doedit.php:66 ../admin/ftp_edit.php:47
 msgid "Editing an FTP account"
 msgstr "Editar uma conta FTP"
 
@@ -2179,7 +2101,7 @@ msgstr "Editar uma conta FTP"
 msgid "Change this FTP account"
 msgstr "Mudar esta conta FTP"
 
-#: ../admin/ftp_list.php:45 ../admin/menu_ftp.php:42 ../admin/menu_ftp.php:49
+#: ../admin/ftp_list.php:45 ../admin/menu_ftp.php:42
 msgid "FTP accounts list"
 msgstr "Lista de contas FTP"
 
@@ -2188,14 +2110,13 @@ msgstr "Lista de contas FTP"
 msgid "AlternC Control Panel"
 msgstr "Painel de controle do Administrador"
 
-#: ../admin/head.php:61
+#: ../admin/head.php:56
 msgid ""
 "Administrator session. you may <a href='adm_login.php'>return to your "
 "account</a> or <a href='adm_cancel.php'>cancel this feature</a>"
 msgstr ""
 
-#: ../admin/hta_add.php:34 ../admin/hta_list.php:50 ../admin/hta_list.php:51
-#: ../admin/hta_list.php:88 ../admin/hta_list.php:89 ../admin/web_list.php:3
+#: ../admin/hta_add.php:34 ../admin/hta_list.php:50 ../admin/hta_list.php:88
 msgid "Protect a folder"
 msgstr "Protect a folder"
 
@@ -2204,13 +2125,12 @@ msgid ""
 "Enter the name of the folder you want to protect. It must already exists."
 msgstr ""
 
-#: ../admin/hta_adduser.php:39 ../admin/hta_adduser.php:40
+#: ../admin/hta_adduser.php:40
 #, php-format
 msgid "Adding a username in %s"
 msgstr "Adding a username in %s"
 
-#: ../admin/hta_adduser.php:66 ../admin/hta_adduser.php:67
-#: ../admin/hta_edit.php:115
+#: ../admin/hta_adduser.php:67 ../admin/hta_edit.php:115
 msgid "Add this user"
 msgstr "Add this user"
 
@@ -2279,85 +2199,63 @@ msgstr "No authorized user in %s"
 msgid "Editing user %s in the protected folder %s"
 msgstr "Editing user %s in the protected folder %s"
 
-#: ../admin/hta_edituser.php:54 ../admin/mem_param.php:64
-#: ../admin/mem_param.php:65 ../admin/mem_param.php:71
+#: ../admin/hta_edituser.php:54 ../admin/mem_param.php:71
 #: ../admin/mem_param.php:72
 msgid "New password"
 msgstr "New password"
 
-#: ../admin/hta_edituser.php:56 ../admin/sql_passchg.php:56
+#: ../admin/hta_edituser.php:56
 #, fuzzy
 msgid "Change the password"
 msgstr "Mudança da senha SQL"
 
-#: ../admin/hta_list.php:41 ../admin/hta_list.php:42
+#: ../admin/hta_list.php:41
 msgid "Protected folders list"
 msgstr "Protected folders list"
 
-#: ../admin/hta_list.php:60 ../admin/hta_list.php:61
+#: ../admin/hta_list.php:60
 msgid "help_hta_list"
 msgstr ""
 
-#: ../admin/hta_list.php:78 ../admin/hta_list.php:79
+#: ../admin/hta_list.php:78
 #, fuzzy
 msgid "Edit login and passwords"
 msgstr "Senha inicial"
 
-#: ../admin/hta_list.php:87 ../admin/hta_list.php:88
+#: ../admin/hta_list.php:87
 msgid "Unprotect the checked folders"
 msgstr "Unprotect the checked folders"
 
-#: ../admin/index.php:55 ../admin/index.php:60
+#: ../admin/index.php:55
 #, fuzzy
 msgid "Web Hosting Control Panel"
 msgstr "Painel de controle do Administrador"
 
-#: ../admin/index.php:70 ../admin/index.php:75
+#: ../admin/index.php:70
 msgid ""
 "To connect to the hosting control panel, enter your AlternC's login and "
 "password in the following form and click 'Enter'"
 msgstr ""
 
-#: ../admin/index.php:71 ../admin/index.php:76
+#: ../admin/index.php:71
 msgid "You are attemping to connect without IP restriction."
 msgstr ""
 
-#: ../admin/index.php:75 ../admin/index.php:80
+#: ../admin/index.php:75
 #, fuzzy
 msgid "AlternC access"
 msgstr "Lista de contas FTP"
 
-#: ../admin/index.php:78 ../admin/index.php:83 ../admin/index.php:101
+#: ../admin/index.php:78
 msgid "Enter"
 msgstr ""
-
-#: ../admin/index.php:91
-msgid ""
-"If you want to read your mail, enter your Email address and password in the "
-"following form and click 'Enter'"
-msgstr ""
-
-#: ../admin/index.php:97
-#, fuzzy
-msgid "Webmail Access"
-msgstr "Acesso Webmail"
-
-#: ../admin/index.php:98
-#, fuzzy
-msgid "Email Address"
-msgstr "Endereço email"
 
 #: ../admin/index.php:98
 msgid ""
 "To read your mail in a browser, click here to go to your server's Webmail"
 msgstr ""
 
-#: ../admin/index.php:98
-msgid ""
-"To read your mail in a browser, click here to use the Squirrelmail Webmail"
-msgstr ""
-
-#: ../admin/index.php:111 ../admin/index.php:112
+#: ../admin/index.php:111
 msgid "You must accept the session cookie to log-in"
 msgstr "Você precisa aceitar o cookie da sessão para o login"
 
@@ -2385,7 +2283,7 @@ msgid "IP address (or subnet)"
 msgstr ""
 
 #: ../admin/ip_main.php:131
-msgid "Know IP and networks"
+msgid "Known IP and networks"
 msgstr ""
 
 #: ../admin/logs_list.php:35
@@ -2393,22 +2291,8 @@ msgid "Logs Listing"
 msgstr ""
 
 #: ../admin/logs_list.php:43
-msgid "You have no sql logs to list a the moment."
-msgstr ""
-
-#: ../admin/logs_list.php:43
 msgid "You have no web logs to list a the moment."
 msgstr ""
-
-#: ../admin/logs_list.php:49 ../admin/logs_list.php:52
-#, fuzzy
-msgid "Creation Date"
-msgstr "Criar"
-
-#: ../admin/logs_list.php:49 ../admin/logs_list.php:52
-#, fuzzy
-msgid "Download link"
-msgstr "Abaixar"
 
 #: ../admin/logs_list.php:49
 msgid ""
@@ -2416,7 +2300,17 @@ msgid ""
 "extract and statistics."
 msgstr ""
 
-#: ../admin/logs_list.php:63 ../admin/logs_list.php:66
+#: ../admin/logs_list.php:52
+#, fuzzy
+msgid "Creation Date"
+msgstr "Criar"
+
+#: ../admin/logs_list.php:52
+#, fuzzy
+msgid "Download link"
+msgstr "Abaixar"
+
+#: ../admin/logs_list.php:66
 msgid "Download"
 msgstr "Abaixar"
 
@@ -2460,58 +2354,45 @@ msgid ""
 "contains! You will <b>NOT</b> be able to get it back!"
 msgstr ""
 
-#: ../admin/mail_doedit.php:50
-#, fuzzy
-msgid "Password do not match"
-msgstr "Senha"
-
-#: ../admin/mail_doedit.php:69 ../admin/mail_localbox_doedit.php:53
-msgid "Already Activated"
-msgstr ""
-
-#: ../admin/mail_doedit.php:76
-msgid "Already disabled "
-msgstr ""
-
 #: ../admin/mail_doedit.php:120
 #, fuzzy
 msgid "Your email has been edited successfully"
 msgstr "Seu domínio %s foi instalado com sucesso"
 
-#: ../admin/mail_edit.inc.php:39 ../admin/mail_edit.inc.php:43
+#: ../admin/mail_edit.inc.php:39
 msgid ""
 "Is this mail enabled ?<br/><i>Having a mail disabled forbid consultation or "
 "reception, but do not remove the mailbox or his configuration.</i>"
 msgstr ""
 
-#: ../admin/mail_edit.inc.php:47 ../admin/mail_edit.inc.php:51
+#: ../admin/mail_edit.inc.php:47
 msgid ""
 "You need to have a password for some application (example: local mailbox);"
 msgstr ""
 
-#: ../admin/mail_edit.inc.php:52 ../admin/mail_edit.inc.php:56
+#: ../admin/mail_edit.inc.php:52
 #, fuzzy
 msgid "Set a passowrd:"
 msgstr "New password"
 
-#: ../admin/mail_edit.inc.php:55 ../admin/mail_edit.inc.php:59
+#: ../admin/mail_edit.inc.php:55
 #, fuzzy
 msgid "Change your password:"
 msgstr "Mudança da senha SQL"
 
-#: ../admin/mail_edit.inc.php:79 ../admin/mail_edit.inc.php:83
-#: ../admin/mail_edit.php:114 ../admin/mail_localbox_edit.inc.php:67
+#: ../admin/mail_edit.inc.php:79 ../admin/mail_edit.php:114
+#: ../admin/mail_localbox_edit.inc.php:67
 #: ../admin/mail_redirection_edit.inc.php:64
 #, fuzzy
 msgid "Change this email address"
 msgstr "Mudar esta caixa de email"
 
-#: ../admin/mail_edit.inc.php:95 ../admin/mail_edit.inc.php:99
+#: ../admin/mail_edit.inc.php:95
 #, fuzzy
 msgid "Password does not match"
 msgstr "Membro '%s' não existe"
 
-#: ../admin/mail_edit.inc.php:99 ../admin/mail_edit.inc.php:103
+#: ../admin/mail_edit.inc.php:99
 #, fuzzy
 msgid "Password match"
 msgstr "Senha"
@@ -2569,18 +2450,13 @@ msgstr ""
 msgid "Enter a POP/IMAP password"
 msgstr "Senha POP"
 
-#: ../admin/mail_edit.php:97 ../admin/quotas_oneuser.php:14
-#: ../admin/quotas_oneuser.php:23 ../admin/quotas_oneuser.php:49
-#: ../admin/quotas_oneuser.php:53 ../admin/quotas_oneuser.php:67
-#: ../admin/quotas_oneuser.php:86 ../admin/quotas_oneuser.php:90
-#: ../admin/quotas_oneuser.php:105 ../admin/quotas_oneuser.php:130
+#: ../admin/mail_edit.php:97 ../admin/quotas_oneuser.php:23
+#: ../admin/quotas_oneuser.php:49 ../admin/quotas_oneuser.php:67
+#: ../admin/quotas_oneuser.php:86 ../admin/quotas_oneuser.php:105
 #: ../admin/quotas_oneuser.php:131 ../admin/quotas_oneuser.php:152
 #: ../admin/quotas_oneuser.php:178 ../admin/quotas_users.php:278
-#: ../admin/quotas_users.php:291 ../admin/quotas_users.php:292
-#: ../admin/quotas_users.php:314 ../admin/quotas_users.php:327
-#: ../admin/quotas_users.php:328 ../admin/quotas_users.php:334
-#: ../admin/quotas_users.php:347 ../admin/quotas_users.php:348
-#: ../admin/quotas_users.php:360 ../admin/quotas_users.php:361
+#: ../admin/quotas_users.php:314 ../admin/quotas_users.php:334
+#: ../admin/quotas_users.php:347
 msgid "MB"
 msgstr ""
 
@@ -2610,7 +2486,7 @@ msgstr ""
 msgid "one recipient per line"
 msgstr "Um email por linha"
 
-#: ../admin/mail_list.php:60 ../admin/mail_list.php:65
+#: ../admin/mail_list.php:65
 #, fuzzy
 msgid "Create a new mail account"
 msgstr "Criar uma nova conta ftp"
@@ -2620,85 +2496,68 @@ msgstr "Criar uma nova conta ftp"
 msgid "Create this email address"
 msgstr "Criar uma caixa de email"
 
-#: ../admin/mail_list.php:72
-#, fuzzy
-msgid "No mail for this domain"
-msgstr "Adiçionar um email ao domínio %s"
-
-#: ../admin/mail_list.php:76 ../admin/mail_list.php:78
-#: ../admin/mail_list.php:82
-#, fuzzy, php-format
-msgid "Email addresses of the domain %s"
-msgstr "Lista de caixas de email do domínio %s"
-
 #: ../admin/mail_list.php:76
 #, fuzzy
 msgid "No mails for this domain."
 msgstr "Adiçionar um email ao domínio %s"
 
-#: ../admin/mail_list.php:79
-#, fuzzy
-msgid "Active"
-msgstr "Ação"
+#: ../admin/mail_list.php:82
+#, fuzzy, php-format
+msgid "Email addresses of the domain %s"
+msgstr "Lista de caixas de email do domínio %s"
 
-#: ../admin/mail_list.php:79 ../admin/mail_list.php:105
+#: ../admin/mail_list.php:94
+msgid "Search"
+msgstr ""
+
+#: ../admin/mail_list.php:102
+msgid "Items per page:"
+msgstr ""
+
 #: ../admin/mail_list.php:109
 #, fuzzy
 msgid "Address"
 msgstr "Endereço email"
 
-#: ../admin/mail_list.php:79
-msgid "State"
-msgstr ""
-
-#: ../admin/mail_list.php:90 ../admin/mail_list.php:94
-msgid "Search"
-msgstr ""
-
-#: ../admin/mail_list.php:98 ../admin/mail_list.php:102
-msgid "Items per page:"
-msgstr ""
-
-#: ../admin/mail_list.php:105 ../admin/mail_list.php:109
+#: ../admin/mail_list.php:109
 #, fuzzy
 msgid "Last login time"
 msgstr "Último Login: "
 
-#: ../admin/mail_list.php:105 ../admin/mail_list.php:109
+#: ../admin/mail_list.php:109
 msgid "Other recipients"
 msgstr "Outros receptores"
 
-#: ../admin/mail_list.php:105 ../admin/mail_list.php:109
+#: ../admin/mail_list.php:109
 msgid "Pop/Imap"
 msgstr ""
 
-#: ../admin/mail_list.php:115 ../admin/mail_list.php:119
+#: ../admin/mail_list.php:119
 #, fuzzy
 msgid "Deleting..."
 msgstr "Suprimando o secundário-domínio %s"
 
-#: ../admin/mail_list.php:118 ../admin/mail_list.php:122
+#: ../admin/mail_list.php:122
 msgid ""
 "This email will be deleted soon. You may still be able to undelete it by "
 "clicking here"
 msgstr ""
 
-#: ../admin/mail_list.php:118 ../admin/mail_list.php:122
+#: ../admin/mail_list.php:122
 #, fuzzy
 msgid "Undelete"
 msgstr "Suprimir"
 
-#: ../admin/mail_list.php:143 ../admin/mail_list.php:147
+#: ../admin/mail_list.php:147
 #, fuzzy, php-format
 msgid "%3$d-%2$d-%1$d"
 msgstr "%3$d/%1$d/%2$d %6$d:%5$d %7$s"
 
-#: ../admin/mail_list.php:143 ../admin/mail_list.php:147 ../admin/main.php:36
-#: ../admin/main.php:41
+#: ../admin/mail_list.php:147 ../admin/main.php:36
 msgid "Never"
 msgstr ""
 
-#: ../admin/mail_list.php:152 ../admin/mail_list.php:156
+#: ../admin/mail_list.php:156
 #, fuzzy
 msgid "Delete the checked email addresses"
 msgstr "Suprimir as bases selecionadas"
@@ -2810,6 +2669,10 @@ msgstr ""
 msgid "POP3S"
 msgstr ""
 
+#: ../admin/mail_localbox_doedit.php:53
+msgid "Already Activated"
+msgstr ""
+
 #: ../admin/mail_localbox_doedit.php:62
 msgid "Already disactivated"
 msgstr ""
@@ -2855,33 +2718,29 @@ msgstr "Redireção IP"
 msgid "Are you sure you want to clear all redirections?"
 msgstr ""
 
-#: ../admin/main.php:33 ../admin/main.php:38
+#: ../admin/main.php:33
 msgid "Last Login: "
 msgstr "Último Login: "
 
-#: ../admin/main.php:39 ../admin/main.php:41 ../admin/main.php:44
+#: ../admin/main.php:39
 #, php-format
 msgid "from: <code> %1$s </code>"
 msgstr "do: <code> %1$s </code>"
 
-#: ../admin/main.php:44 ../admin/main.php:45 ../admin/main.php:49
+#: ../admin/main.php:44
 #, php-format
 msgid "%1$d login failed since last login"
 msgstr "%1$d login falharam desde o último login"
 
-#: ../admin/main.php:61
-msgid "Latest news"
-msgstr ""
-
-#: ../admin/main.php:78 ../admin/main.php:88 ../admin/main.php:93
+#: ../admin/main.php:88
 msgid "Expired or about to expire accounts"
 msgstr ""
 
-#: ../admin/main.php:80 ../admin/main.php:90 ../admin/main.php:95
+#: ../admin/main.php:90
 msgid "Last name, surname"
 msgstr ""
 
-#: ../admin/main.php:80 ../admin/main.php:90 ../admin/main.php:95
+#: ../admin/main.php:90
 msgid "uid"
 msgstr ""
 
@@ -2890,15 +2749,13 @@ msgstr ""
 msgid "Your administrator preferences has been successfully changed."
 msgstr "Seus parâmetros de backup foram mudados com sucesso"
 
-#: ../admin/mem_admin.php:46 ../admin/mem_param.php:97
-#: ../admin/mem_param.php:104
+#: ../admin/mem_admin.php:46 ../admin/mem_param.php:104
 #, fuzzy
 msgid "Admin preferences"
 msgstr "Preferências do editor de arquivos"
 
-#: ../admin/mem_chgmail.php:44 ../admin/mem_cm.php:35 ../admin/mem_cm.php:42
-#: ../admin/mem_cm.php:46 ../admin/mem_cm.php:53 ../admin/mem_cm2.php:40
-#: ../admin/mem_cm2.php:47 ../admin/mem_param.php:74 ../admin/mem_param.php:81
+#: ../admin/mem_chgmail.php:44 ../admin/mem_cm.php:42 ../admin/mem_cm.php:53
+#: ../admin/mem_cm2.php:47 ../admin/mem_param.php:81
 msgid "Change the email of the account"
 msgstr "Mudar o email da sua conta"
 
@@ -2907,21 +2764,21 @@ msgstr "Mudar o email da sua conta"
 msgid "help_mem_chgmail %s"
 msgstr ""
 
-#: ../admin/mem_cm.php:47 ../admin/mem_cm.php:54
+#: ../admin/mem_cm.php:54
 msgid ""
 "Enter the key you got when you requested the mailbox change, then click the "
 "OK button."
 msgstr ""
 
-#: ../admin/mem_cm.php:48 ../admin/mem_cm.php:55
+#: ../admin/mem_cm.php:55
 msgid "Key"
 msgstr ""
 
-#: ../admin/mem_cm.php:49 ../admin/mem_cm.php:56
+#: ../admin/mem_cm.php:56
 msgid "OK"
 msgstr ""
 
-#: ../admin/mem_cm2.php:48 ../admin/mem_cm2.php:55
+#: ../admin/mem_cm2.php:55
 #, fuzzy
 msgid "The mailbox has been successfully changed."
 msgstr "A caixa de email %s foi mudado com sucesso"
@@ -2939,96 +2796,96 @@ msgstr ""
 msgid "Click here to log in"
 msgstr "Clicar aqui para continuar"
 
-#: ../admin/mem_param.php:36 ../admin/mem_param.php:43
+#: ../admin/mem_param.php:43
 #, fuzzy
 msgid "Your help setting has been updated."
 msgstr "Suas preferências foram atualizadas."
 
-#: ../admin/mem_param.php:40 ../admin/mem_param.php:47
+#: ../admin/mem_param.php:47
 #, fuzzy
 msgid "Settings of your account"
 msgstr "Suprimir uma conta FTP"
 
-#: ../admin/mem_param.php:50 ../admin/mem_param.php:57
-#: ../admin/mem_passwd.php:50 ../admin/sql_users_list.php:61
+#: ../admin/mem_param.php:57 ../admin/mem_passwd.php:50
+#: ../admin/sql_users_list.php:61
 #, fuzzy
 msgid "Password change"
 msgstr "Senha"
 
-#: ../admin/mem_param.php:54 ../admin/mem_param.php:61
+#: ../admin/mem_param.php:61
 msgid "You cannot change your password"
 msgstr "Você não pode mudar sua senha"
 
-#: ../admin/mem_param.php:59 ../admin/mem_param.php:66
+#: ../admin/mem_param.php:66
 msgid "help_chg_passwd"
 msgstr ""
 
-#: ../admin/mem_param.php:63 ../admin/mem_param.php:70
+#: ../admin/mem_param.php:70
 #, fuzzy
 msgid "Old password"
 msgstr "Senha POP"
 
-#: ../admin/mem_param.php:66 ../admin/mem_param.php:73
+#: ../admin/mem_param.php:73
 #, fuzzy
 msgid "Change my password"
 msgstr "Mudança da senha SQL"
 
-#: ../admin/mem_param.php:75 ../admin/mem_param.php:82
+#: ../admin/mem_param.php:82
 msgid "help_chg_mail"
 msgstr ""
 
-#: ../admin/mem_param.php:76 ../admin/mem_param.php:83
+#: ../admin/mem_param.php:83
 #, fuzzy
 msgid "Current mailbox"
 msgstr "Criar uma caixa de email"
 
-#: ../admin/mem_param.php:77 ../admin/mem_param.php:84
+#: ../admin/mem_param.php:84
 #, fuzzy
 msgid "New mailbox"
 msgstr "Caixas e email"
 
-#: ../admin/mem_param.php:78 ../admin/mem_param.php:85
+#: ../admin/mem_param.php:85
 #, fuzzy
 msgid "Change my email address"
 msgstr "Mudar esta caixa de email"
 
-#: ../admin/mem_param.php:85 ../admin/mem_param.php:92
+#: ../admin/mem_param.php:92
 #, fuzzy
 msgid "Online help settings"
 msgstr "Ajuda online"
 
-#: ../admin/mem_param.php:86 ../admin/mem_param.php:93
+#: ../admin/mem_param.php:93
 msgid "help_help_settings"
 msgstr ""
 
-#: ../admin/mem_param.php:87 ../admin/mem_param.php:94
+#: ../admin/mem_param.php:94
 msgid "Do you want to see the help texts and links on each page?"
 msgstr ""
 
-#: ../admin/mem_param.php:88 ../admin/mem_param.php:95
+#: ../admin/mem_param.php:95
 #, fuzzy
 msgid "Change these settings"
 msgstr "Mudar meus ajustes"
 
-#: ../admin/mem_param.php:101 ../admin/mem_param.php:108
+#: ../admin/mem_param.php:108
 #, fuzzy
 msgid "Members list view"
 msgstr "Lista dos membros"
 
-#: ../admin/mem_param.php:102 ../admin/mem_param.php:109
+#: ../admin/mem_param.php:109
 msgid "Large view"
 msgstr ""
 
-#: ../admin/mem_param.php:103 ../admin/mem_param.php:110
+#: ../admin/mem_param.php:110
 msgid "Short view"
 msgstr ""
 
-#: ../admin/mem_param.php:105 ../admin/mem_param.php:112
+#: ../admin/mem_param.php:112
 #, fuzzy
 msgid "Change my admin preferences"
 msgstr "Preferências do editor de arquivos"
 
-#: ../admin/mem_passwd.php:44 ../admin/sql_pass.php:38
+#: ../admin/mem_passwd.php:44
 msgid "Your password has been successfully changed."
 msgstr "Sua senha foi mudado com sucesso."
 
@@ -3040,65 +2897,24 @@ msgstr ""
 msgid "About"
 msgstr ""
 
-#: ../admin/menu_adm.php:32 ../admin/menu_adm.php:39
-#, fuzzy
-msgid "Administration"
-msgstr "Administração do"
-
-#: ../admin/menu_adm.php:37 ../admin/menu_adm.php:44
+#: ../admin/menu_adm.php:37
 #, fuzzy
 msgid "Manage the Alternc accounts"
 msgstr "Mudar o email da sua conta"
 
-#: ../admin/menu_adm.php:38 ../admin/menu_adm.php:45
+#: ../admin/menu_adm.php:38
 #, fuzzy
 msgid "User Quotas"
 msgstr "Quotas"
 
-#: ../admin/menu_adm.php:42 ../admin/menu_adm.php:49
+#: ../admin/menu_adm.php:42
 #, fuzzy
 msgid "General PhpMyAdmin"
 msgstr "Admin do SQL Geral"
 
-#: ../admin/menu_aide.php:25 ../admin/menu_aide.php:32
-msgid "Online help"
-msgstr "Ajuda online"
-
-#: ../admin/menu_dom.php:34 ../admin/menu_dom.php:41
-#: ../admin/quotas_oneuser.php:22 ../admin/quotas_oneuser.php:33
-#: ../admin/quotas_users.php:122 ../admin/quotas_users.php:134
-msgid "Domains"
-msgstr "Domínios"
-
-#: ../admin/menu_ftp.php:34 ../admin/menu_ftp.php:41 ../class/m_ftp.php:361
-msgid "FTP accounts"
-msgstr "Contas FTP"
-
-#: ../admin/menu_lang.php:3
-msgid "Langues"
-msgstr ""
-
-#: ../admin/menu_logs.php:28
-msgid "Logs"
-msgstr ""
-
-#: ../admin/menu_mail.php:34 ../admin/menu_mail.php:41
-#, fuzzy
-msgid "Email Addresses"
-msgstr "Endereço email"
-
-#: ../admin/menu_mem.php:25 ../admin/menu_mem.php:32
-msgid "Settings"
-msgstr ""
-
-#: ../admin/menu_mem.php:28 ../admin/menu_mem.php:35
+#: ../admin/menu_mem.php:28
 msgid "Logout"
 msgstr ""
-
-#: ../admin/menu_piwik.php:31
-#, fuzzy
-msgid "Piwik statistics"
-msgstr "Número de statisticas Web"
 
 #: ../admin/menu_piwik.php:34
 #, fuzzy
@@ -3109,33 +2925,14 @@ msgstr "Usado(s)"
 msgid "Piwik Sites"
 msgstr ""
 
-#: ../admin/menu_quota.php:25 ../admin/menu_quota.php:32
-msgid "Show my quotas"
-msgstr ""
-
-#: ../admin/menu_sql.php:34 ../admin/menu_sql.php:41
-#, fuzzy
-msgid "Databases"
-msgstr "Bases de dados"
-
-#: ../admin/menu_sql.php:35 ../admin/menu_sql.php:42
-#: ../admin/sql_users_list.php:37
+#: ../admin/menu_sql.php:35 ../admin/sql_users_list.php:37
 #, fuzzy
 msgid "MySQL Users"
 msgstr "Bases de dados MySQL"
 
-#: ../admin/menu_sql.php:37 ../admin/menu_sql.php:43
+#: ../admin/menu_sql.php:37
 msgid "PhpMyAdmin"
 msgstr ""
-
-#: ../admin/menu_sta2.php:37
-#, fuzzy
-msgid "Raw web statistics"
-msgstr "Número de statisticas Web"
-
-#: ../admin/menu_web.php:27 ../admin/menu_web.php:34
-msgid "Protected folders"
-msgstr "Protected folders"
 
 #: ../admin/piwik_addaccount.php:34
 #, fuzzy
@@ -3221,20 +3018,18 @@ msgstr ""
 msgid "No quotas for this account, or quotas currently unavailable!"
 msgstr ""
 
-#: ../admin/quotas_oneuser.php:13 ../admin/quotas_oneuser.php:22
+#: ../admin/quotas_oneuser.php:22
 msgid "Web Space:"
 msgstr ""
 
-#: ../admin/quotas_oneuser.php:23 ../admin/quotas_oneuser.php:34
+#: ../admin/quotas_oneuser.php:34
 #, fuzzy
 msgid "Emails"
 msgstr "Endereço email"
 
-#: ../admin/quotas_oneuser.php:24 ../admin/quotas_oneuser.php:35
-#: ../admin/quotas_oneuser.php:71 ../admin/quotas_oneuser.php:112
-#: ../admin/quotas_oneuser.php:113 ../admin/quotas_oneuser.php:160
-#: ../admin/quotas_users.php:118 ../admin/quotas_users.php:130
-#: ../admin/quotas_users.php:159 ../admin/quotas_users.php:171
+#: ../admin/quotas_oneuser.php:35 ../admin/quotas_oneuser.php:113
+#: ../admin/quotas_oneuser.php:160 ../admin/quotas_users.php:118
+#: ../admin/quotas_users.php:159
 msgid "Space"
 msgstr ""
 
@@ -3243,24 +3038,22 @@ msgstr ""
 msgid "Mail boxes:"
 msgstr "Caixas e email"
 
-#: ../admin/quotas_oneuser.php:70 ../admin/quotas_oneuser.php:112
-#: ../admin/quotas_users.php:167 ../admin/quotas_users.php:179
-msgid "DB"
-msgstr ""
-
 #: ../admin/quotas_oneuser.php:104
 #, fuzzy
 msgid "Databases:"
 msgstr "Bases de dados"
 
-#: ../admin/quotas_oneuser.php:111 ../admin/quotas_oneuser.php:159
-#: ../admin/quotas_users.php:163 ../admin/quotas_users.php:166
-#: ../admin/quotas_users.php:175 ../admin/quotas_users.php:178
-msgid "Lists"
+#: ../admin/quotas_oneuser.php:112 ../admin/quotas_users.php:167
+msgid "DB"
 msgstr ""
 
 #: ../admin/quotas_oneuser.php:151
 msgid "Mailman lists:"
+msgstr ""
+
+#: ../admin/quotas_oneuser.php:159 ../admin/quotas_users.php:163
+#: ../admin/quotas_users.php:166
+msgid "Lists"
 msgstr ""
 
 #: ../admin/quotas_users.php:20
@@ -3274,126 +3067,93 @@ msgid ""
 "AlternC accounts."
 msgstr ""
 
-#: ../admin/quotas_users.php:30 ../admin/quotas_users.php:32
+#: ../admin/quotas_users.php:32
 #, php-format
 msgid "% of the total."
 msgstr ""
 
-#: ../admin/quotas_users.php:30 ../admin/quotas_users.php:32
+#: ../admin/quotas_users.php:32
 msgid "MB."
 msgstr ""
 
-#: ../admin/quotas_users.php:30 ../admin/quotas_users.php:32
+#: ../admin/quotas_users.php:32
 #, php-format
 msgid "Sizes are shown as %s"
 msgstr ""
 
-#: ../admin/quotas_users.php:33 ../admin/quotas_users.php:35
+#: ../admin/quotas_users.php:35
 msgid "Global"
 msgstr ""
 
-#: ../admin/quotas_users.php:33 ../admin/quotas_users.php:35
+#: ../admin/quotas_users.php:35
 msgid "Server-side view:"
 msgstr ""
 
-#: ../admin/quotas_users.php:34 ../admin/quotas_users.php:36
+#: ../admin/quotas_users.php:36
 msgid "Detailed view:"
 msgstr ""
 
-#: ../admin/quotas_users.php:36 ../admin/quotas_users.php:38
-#: ../admin/quotas_users.php:43
-msgid "Percentage"
-msgstr ""
-
-#: ../admin/quotas_users.php:37 ../admin/quotas_users.php:39
-#: ../admin/quotas_users.php:40
-msgid "Graphical"
-msgstr ""
-
-#: ../admin/quotas_users.php:37 ../admin/quotas_users.php:39
-#: ../admin/quotas_users.php:42
+#: ../admin/quotas_users.php:37
 msgid "In MB"
 msgstr ""
 
-#: ../admin/quotas_users.php:42 ../admin/quotas_users.php:48
+#: ../admin/quotas_users.php:38
+msgid "Percentage"
+msgstr ""
+
+#: ../admin/quotas_users.php:39
+msgid "Graphical"
+msgstr ""
+
+#: ../admin/quotas_users.php:42
 #, fuzzy
 msgid "Show the domain names"
 msgstr "Nome do Domínio"
 
-#: ../admin/quotas_users.php:44 ../admin/quotas_users.php:50
+#: ../admin/quotas_users.php:44
 #, fuzzy
 msgid "Hide the domain names"
 msgstr "Nome do Domínio"
 
-#: ../admin/quotas_users.php:47 ../admin/quotas_users.php:53
+#: ../admin/quotas_users.php:47
 #, fuzzy
 msgid "All accounts"
 msgstr "Contas FTP"
 
-#: ../admin/quotas_users.php:118 ../admin/quotas_users.php:130
-#: ../admin/quotas_users.php:159 ../admin/quotas_users.php:171
+#: ../admin/quotas_users.php:118 ../admin/quotas_users.php:159
 msgid "Count"
 msgstr ""
 
-#: ../admin/quotas_users.php:127 ../admin/quotas_users.php:139
-#: ../class/m_mail.php:78
+#: ../admin/quotas_users.php:127 ../class/m_mail.php:78
 #, fuzzy
 msgid "Email addresses"
 msgstr "Endereço email"
 
-#: ../admin/quotas_users.php:133 ../admin/quotas_users.php:145
+#: ../admin/quotas_users.php:133
 msgid "Mailman lists"
 msgstr ""
 
-#: ../admin/quotas_users.php:139 ../admin/quotas_users.php:151
-#: ../admin/sql_bck.php:48 ../admin/sql_del.php:66 ../admin/sql_del.php:72
-#: ../admin/sql_dorestore.php:38 ../admin/sql_dorestore.php:44
-#: ../admin/sql_getparam.php:38 ../admin/sql_getparam.php:44
-#: ../admin/sql_list.php:37 ../admin/sql_passchg.php:38
-#: ../admin/sql_restore.php:43 ../class/m_mysql.php:894
-#: ../class/m_mysql.php:914
+#: ../admin/quotas_users.php:139 ../admin/sql_bck.php:48
+#: ../admin/sql_del.php:72 ../admin/sql_dorestore.php:44
+#: ../admin/sql_getparam.php:44 ../admin/sql_list.php:37
+#: ../admin/sql_restore.php:43 ../class/m_mysql.php:914
 #, fuzzy
 msgid "MySQL Databases"
 msgstr "Bases de dados MySQL"
 
-#: ../admin/quotas_users.php:161 ../admin/quotas_users.php:173
+#: ../admin/quotas_users.php:161
 #, fuzzy
 msgid "Dom"
 msgstr "Domínios"
 
 #: ../admin/quotas_users.php:162 ../admin/quotas_users.php:165
-#: ../admin/quotas_users.php:174 ../admin/quotas_users.php:177
 #, fuzzy
 msgid "Mails"
 msgstr "Caixas e email"
 
-#: ../admin/quotas_users.php:164 ../admin/quotas_users.php:176
+#: ../admin/quotas_users.php:164
 msgid "Web"
 msgstr ""
-
-#: ../admin/sql_add.php:34 ../admin/sql_doadd.php:34 ../admin/sql_doadd.php:38
-#, fuzzy
-msgid "err_mysql_1"
-msgstr "Sua quota está completo, você não pode criar mais bases de dados."
-
-#: ../admin/sql_add.php:39 ../admin/sql_list.php:90 ../admin/sql_list.php:94
-#, fuzzy
-msgid "Create a new MySQL database"
-msgstr "Criar uma nova base de dados"
-
-#: ../admin/sql_add.php:52 ../admin/sql_add.php:56 ../admin/sql_list.php:96
-#, fuzzy
-msgid "MySQL Database"
-msgstr "Bases de dados MySQL"
-
-#: ../admin/sql_add.php:58 ../admin/sql_add.php:62 ../admin/sql_list.php:102
-#, fuzzy
-msgid "Create this new MySQL database."
-msgstr "Criar esta nova base de dados."
-
-#: ../admin/sql_addmain.php:35
-msgid "Your database has been successfully created"
-msgstr "Sua base de dados foi criado com sucesso"
 
 #: ../admin/sql_admin.php:47
 #, fuzzy
@@ -3440,27 +3200,27 @@ msgstr "Que pasta você quiser usar para salvar seus backups?"
 msgid "Change the MySQL backup parameters"
 msgstr "Mudar os parâmetros SQL atuais"
 
-#: ../admin/sql_bck.php:113 ../admin/sql_dorestore.php:56
-#: ../admin/sql_dorestore.php:62 ../admin/sql_restore.php:71
+#: ../admin/sql_bck.php:113 ../admin/sql_dorestore.php:62
+#: ../admin/sql_restore.php:71
 #, fuzzy
 msgid "You currently have no database defined"
 msgstr "Você não tem nenhuma base de dados definida"
 
-#: ../admin/sql_del.php:45 ../admin/sql_del.php:51
+#: ../admin/sql_del.php:51
 #, fuzzy, php-format
 msgid "The database %s has been successfully deleted"
 msgstr "A base de dados %s foi suprimido com sucesso"
 
-#: ../admin/sql_del.php:60 ../admin/sql_del.php:66
+#: ../admin/sql_del.php:66
 msgid "Please check which databases you want to delete"
 msgstr ""
 
-#: ../admin/sql_del.php:69 ../admin/sql_del.php:75
+#: ../admin/sql_del.php:75
 #, fuzzy
 msgid "Confirm the deletion of the following SQL databases"
 msgstr "Confirma o apagamento das bases de dados SQL seguintes"
 
-#: ../admin/sql_del.php:70 ../admin/sql_del.php:76
+#: ../admin/sql_del.php:76
 #, fuzzy
 msgid "This will delete all the tables currently in those db."
 msgstr "Isto suprimirá todas as tabelas atuais nestas bases de dados."
@@ -3473,22 +3233,17 @@ msgstr ""
 msgid "Your backup parameters has been successfully changed."
 msgstr "Seus parâmetros de backup foram mudados com sucesso"
 
-#: ../admin/sql_dorestore.php:44 ../admin/sql_dorestore.php:50
+#: ../admin/sql_dorestore.php:50
 msgid "Restore a SQL backup"
 msgstr "Restaurar o backup SQL"
 
-#: ../admin/sql_dorestore.php:50 ../admin/sql_dorestore.php:56
+#: ../admin/sql_dorestore.php:56
 msgid ""
 "Your database has been restored, check out the previous text for error "
 "messages."
 msgstr ""
 "Sua base de dados foi restaurado, verificar o texto precedente para ver se "
 "há mensagens de erro."
-
-#: ../admin/sql_getparam.php:47 ../admin/sql_list.php:51
-#, fuzzy
-msgid "Your current settings are"
-msgstr "Aqui seus parâmetros atuaís"
 
 #: ../admin/sql_getparam.php:53
 #, fuzzy
@@ -3500,49 +3255,35 @@ msgstr "Aqui seus parâmetros atuaís"
 msgid "Mysql Server"
 msgstr "Servidor SQL"
 
-#: ../admin/sql_getparam.php:58 ../admin/sql_list.php:53
-#, fuzzy
-msgid "MySQL Server"
-msgstr "Servidor SQL"
-
 #: ../admin/sql_getparam.php:60 ../admin/sql_list.php:54
-#: ../admin/sql_list.php:62 ../admin/sql_passchg.php:54
 msgid "Database"
 msgstr "Base de dados"
-
-#: ../admin/sql_getparam.php:62
-#, fuzzy
-msgid "Main database"
-msgstr "Criar minha base de dados principal"
-
-#: ../admin/sql_getparam.php:67 ../admin/sql_getparam.php:83
-#: ../admin/sql_getparam.php:86
-#, fuzzy
-msgid "Back to the MySQL database list"
-msgstr "Lista de contas FTP"
 
 #: ../admin/sql_getparam.php:75
 #, fuzzy
 msgid "Web interface PhpMyAdmin"
 msgstr "Admin do SQL Geral"
 
-#: ../admin/sql_getparam.php:80 ../admin/sql_getparam.php:83
+#: ../admin/sql_getparam.php:83
 msgid ""
 "You changed the MySQL User base configuration. Please reffer to your "
 "configuration"
 msgstr ""
 
+#: ../admin/sql_getparam.php:86
+#, fuzzy
+msgid "Back to the MySQL database list"
+msgstr "Lista de contas FTP"
+
 #: ../admin/sql_list.php:45
 msgid "You have no sql user at the moment."
 msgstr ""
 
-#: ../admin/sql_list.php:54 ../admin/sql_list.php:62 ../admin/sql_list.php:66
-#: ../admin/sql_list.php:74
+#: ../admin/sql_list.php:54 ../admin/sql_list.php:66
 msgid "Backup"
 msgstr "Backup"
 
-#: ../admin/sql_list.php:54 ../admin/sql_list.php:62 ../admin/sql_list.php:67
-#: ../admin/sql_list.php:75
+#: ../admin/sql_list.php:54 ../admin/sql_list.php:67
 #, fuzzy
 msgid "Restore"
 msgstr "Restauração"
@@ -3552,23 +3293,25 @@ msgstr "Restauração"
 msgid "Show Settings"
 msgstr "Mostrar ícones?"
 
-#: ../admin/sql_list.php:77 ../admin/sql_list.php:84
+#: ../admin/sql_list.php:77
 #, fuzzy
 msgid "Delete the checked databases"
 msgstr "Suprimir as bases selecionadas"
 
-#: ../admin/sql_passchg.php:46
+#: ../admin/sql_list.php:90
 #, fuzzy
-msgid ""
-"Enter the new password of your MySQL database and click 'change the "
-"password' to change it"
-msgstr ""
-"Entrar sua nova senha de base de dados SQL e clica sobre 'Mudança de senha' "
-"para a mudar"
+msgid "Create a new MySQL database"
+msgstr "Criar uma nova base de dados"
 
-#: ../admin/sql_passchg.php:53
-msgid "SQL Server"
-msgstr "Servidor SQL"
+#: ../admin/sql_list.php:96
+#, fuzzy
+msgid "MySQL Database"
+msgstr "Bases de dados MySQL"
+
+#: ../admin/sql_list.php:102
+#, fuzzy
+msgid "Create this new MySQL database."
+msgstr "Criar esta nova base de dados."
 
 #: ../admin/sql_restore.php:53
 #, fuzzy, php-format
@@ -3601,38 +3344,32 @@ msgstr ""
 "Nota: Se o nome de arquivo termina com .gz, primeiramente ele será de-"
 "compressado."
 
-#: ../admin/sql_users_add.php:41 ../admin/sql_users_add.php:46
-#: ../admin/sql_users_list.php:81 ../admin/sql_users_list.php:82
+#: ../admin/sql_users_add.php:41 ../admin/sql_users_list.php:81
 #, fuzzy
 msgid "Create a new MySQL user"
 msgstr "Criar um membro novo"
 
-#: ../admin/sql_users_add.php:41
-#, fuzzy
-msgid "err_mysql_13"
-msgstr "Sua quota está completo, você não pode criar mais bases de dados."
-
-#: ../admin/sql_users_add.php:72 ../admin/sql_users_add.php:77
+#: ../admin/sql_users_add.php:72
 #, fuzzy
 msgid "Create this new MySQL user"
 msgstr "Criar um membro novo"
 
-#: ../admin/sql_users_del.php:43 ../admin/sql_users_del.php:47
+#: ../admin/sql_users_del.php:47
 #, fuzzy, php-format
 msgid "The user %s has been successfully deleted"
 msgstr "A base de dados %s foi suprimido com sucesso"
 
-#: ../admin/sql_users_del.php:54 ../admin/sql_users_del.php:58
+#: ../admin/sql_users_del.php:58
 #, fuzzy
 msgid "MySQL users"
 msgstr "Bases de dados MySQL"
 
-#: ../admin/sql_users_del.php:57 ../admin/sql_users_del.php:61
+#: ../admin/sql_users_del.php:61
 #, fuzzy
 msgid "Confirm the deletion of the following MySQL users"
 msgstr "Confirma o apagamento das bases de dados SQL seguintes"
 
-#: ../admin/sql_users_dorights.php:44 ../admin/sql_users_dorights.php:54
+#: ../admin/sql_users_dorights.php:54
 #, fuzzy
 msgid "The rights has been successfully applied to the user"
 msgstr "Os quotas foram editados com sucesso"
@@ -3651,90 +3388,18 @@ msgstr "Controlar os membros"
 msgid "Change user password"
 msgstr "Mudança da senha SQL"
 
-#: ../admin/sql_users_rights.php:40 ../admin/sql_users_rights.php:41
+#: ../admin/sql_users_rights.php:40
 #, php-format
 msgid "MySQL Rights for %s"
 msgstr ""
 
-#: ../admin/sql_users_rights.php:81 ../admin/sql_users_rights.php:87
+#: ../admin/sql_users_rights.php:87
 msgid "Reverse selection"
 msgstr ""
 
-#: ../admin/sql_users_rights.php:94 ../admin/sql_users_rights.php:100
+#: ../admin/sql_users_rights.php:100
 msgid "Apply"
 msgstr ""
-
-#: ../admin/sta2_add_raw.php:33
-#, fuzzy
-msgid "You cannot add any new statistics, your quota is over."
-msgstr "Você não pode adiçionr mais domínios, sua quota acabou."
-
-#: ../admin/sta2_add_raw.php:38
-msgid "New Raw Statistics (apache)"
-msgstr ""
-
-#: ../admin/sta2_add_raw.php:51 ../admin/sta2_edit_raw.php:57
-#: ../admin/sta2_edit_raw.php:62
-#, fuzzy
-msgid "Domain name:"
-msgstr "Nome do Domínio"
-
-#: ../admin/sta2_add_raw.php:54 ../admin/sta2_edit_raw.php:60
-#: ../admin/sta2_edit_raw.php:65
-msgid "Folder where we will put the log file:"
-msgstr ""
-
-#: ../admin/sta2_add_raw.php:63
-#, fuzzy
-msgid "Create those raw statistics"
-msgstr "Número de statisticas Web"
-
-#: ../admin/sta2_del_raw.php:42
-#, php-format
-msgid ""
-"The statistics %s has been successfully deleted (the stats files must be "
-"manually deleted)"
-msgstr ""
-
-#: ../admin/sta2_doadd_raw.php:44
-#, fuzzy
-msgid "The statistics has been successfully created"
-msgstr "Os quotas foram editados com sucesso"
-
-#: ../admin/sta2_doedit_raw.php:33 ../admin/sta2_doedit_raw.php:39
-#: ../admin/sta2_edit_raw.php:35 ../admin/sta2_edit_raw.php:40
-#, fuzzy
-msgid "No Statistics selected!"
-msgstr "Nenhuma conta selecionada"
-
-#: ../admin/sta2_doedit_raw.php:41 ../admin/sta2_doedit_raw.php:47
-#, fuzzy
-msgid "The Statistics has been successfully changed"
-msgstr "A caixa de email %s foi mudado com sucesso"
-
-#: ../admin/sta2_edit_raw.php:44 ../admin/sta2_edit_raw.php:49
-#, fuzzy
-msgid "Change the Raw Statistics"
-msgstr "Mudar os quotas padrões"
-
-#: ../admin/sta2_edit_raw.php:67 ../admin/sta2_edit_raw.php:72
-#, fuzzy
-msgid "Change those Raw Statistics."
-msgstr "Mudar os quotas padrões"
-
-#: ../admin/sta2_list.php:35
-#, fuzzy
-msgid "Raw Statistics List"
-msgstr "Número de statisticas Web"
-
-#: ../admin/sta2_list.php:41
-msgid "Create new Raw Statistics (apache)"
-msgstr ""
-
-#: ../admin/sta2_list.php:79
-#, fuzzy
-msgid "Delete the checked Raw Statistics (apache)"
-msgstr "Suprimir as bases selecionadas"
 
 #: ../admin/stats_members.php:32
 msgid ""
@@ -3782,68 +3447,55 @@ msgstr ""
 msgid "All this account information will be deleted at expiration"
 msgstr ""
 
-#: ../class/functions.php:270 ../class/functions.php:276
-#: ../class/functions.php:286
+#: ../class/functions.php:276
 msgid "Bytes"
 msgstr ""
 
-#: ../class/functions.php:272 ../class/functions.php:278
-#: ../class/functions.php:288
+#: ../class/functions.php:278
 msgid "Byte"
 msgstr ""
 
-#: ../class/functions.php:277 ../class/functions.php:283
-#: ../class/functions.php:293
+#: ../class/functions.php:283
 msgid "Kb"
 msgstr ""
 
-#: ../class/functions.php:281 ../class/functions.php:287
-#: ../class/functions.php:297
+#: ../class/functions.php:287
 msgid "Mb"
 msgstr ""
 
-#: ../class/functions.php:285 ../class/functions.php:291
-#: ../class/functions.php:301
+#: ../class/functions.php:291
 msgid "Gb"
 msgstr ""
 
-#: ../class/functions.php:287 ../class/functions.php:293
-#: ../class/functions.php:303
+#: ../class/functions.php:293
 msgid "Tb"
 msgstr ""
 
-#: ../class/functions.php:374 ../class/functions.php:380
-#: ../class/functions.php:390
+#: ../class/functions.php:380
 msgid "year"
 msgstr ""
 
-#: ../class/functions.php:374 ../class/functions.php:380
-#: ../class/functions.php:390
+#: ../class/functions.php:380
 msgid "years"
 msgstr ""
 
-#: ../class/functions.php:376 ../class/functions.php:382
-#: ../class/functions.php:392
+#: ../class/functions.php:382
 msgid "month"
 msgstr ""
 
-#: ../class/functions.php:376 ../class/functions.php:382
-#: ../class/functions.php:392
+#: ../class/functions.php:382
 msgid "months"
 msgstr ""
 
-#: ../class/functions.php:399 ../class/functions.php:405
-#: ../class/functions.php:415
+#: ../class/functions.php:405
 #, fuzzy
 msgid "Not managed"
 msgstr "Controlado localemente"
 
-#: ../class/functions.php:521 ../class/functions.php:523
 #: ../class/functions.php:527 ../class/functions.php:529
 msgid "Previous Page"
 msgstr ""
 
-#: ../class/functions.php:577 ../class/functions.php:579
 #: ../class/functions.php:583 ../class/functions.php:585
 msgid "Next Page"
 msgstr ""
@@ -3875,29 +3527,24 @@ msgstr "O domínio pode ser instalado, forçã a hospedadem SEM DNS"
 
 #: ../class/m_admin.php:82 ../class/m_admin.php:113 ../class/m_admin.php:177
 #: ../class/m_admin.php:211 ../class/m_admin.php:252 ../class/m_admin.php:280
-#: ../class/m_admin.php:307 ../class/m_admin.php:450 ../class/m_admin.php:453
-#: ../class/m_admin.php:484 ../class/m_admin.php:487 ../class/m_admin.php:508
-#: ../class/m_admin.php:511 ../class/m_admin.php:534 ../class/m_admin.php:537
+#: ../class/m_admin.php:307 ../class/m_admin.php:453 ../class/m_admin.php:487
+#: ../class/m_admin.php:511 ../class/m_admin.php:537
 msgid "-- Only administrators can access this page! --"
 msgstr ""
 
-#: ../class/m_admin.php:90 ../class/m_admin.php:123 ../class/m_admin.php:468
-#: ../class/m_admin.php:471 ../class/m_admin.php:492 ../class/m_admin.php:495
-#: ../class/m_admin.php:516 ../class/m_admin.php:519 ../class/m_admin.php:562
-#: ../class/m_admin.php:568 ../class/m_admin.php:587 ../class/m_admin.php:593
-#: ../class/m_admin.php:611 ../class/m_admin.php:617 ../class/m_admin.php:694
-#: ../class/m_admin.php:700 ../class/m_admin.php:716 ../class/m_admin.php:722
+#: ../class/m_admin.php:90 ../class/m_admin.php:123 ../class/m_admin.php:471
+#: ../class/m_admin.php:495 ../class/m_admin.php:519 ../class/m_admin.php:568
+#: ../class/m_admin.php:593 ../class/m_admin.php:617 ../class/m_admin.php:700
+#: ../class/m_admin.php:722
 #, fuzzy
 msgid "Account not found"
 msgstr "Conta Permitiu ?"
 
-#: ../class/m_admin.php:219 ../class/m_admin.php:1077
-#: ../class/m_admin.php:1092
+#: ../class/m_admin.php:219 ../class/m_admin.php:1092
 msgid "The password is too long according to the password policy"
 msgstr ""
 
-#: ../class/m_admin.php:224 ../class/m_admin.php:1087
-#: ../class/m_admin.php:1102
+#: ../class/m_admin.php:224 ../class/m_admin.php:1102
 msgid ""
 "The password policy prevents you to use your login name inside your password"
 msgstr ""
@@ -3923,49 +3570,47 @@ msgstr ""
 msgid "Login can only contains characters a-z, 0-9 and -"
 msgstr ""
 
-#: ../class/m_admin.php:368 ../class/m_admin.php:371
+#: ../class/m_admin.php:371
 msgid "This login already exists"
 msgstr ""
 
-#: ../class/m_admin.php:698 ../class/m_admin.php:704
+#: ../class/m_admin.php:704
 #, fuzzy
 msgid "This account is ALREADY an administrator account"
 msgstr "Esta conta é uma conta super-administrador"
 
-#: ../class/m_admin.php:720 ../class/m_admin.php:726
+#: ../class/m_admin.php:726
 #, fuzzy
 msgid "This account is NOT an administrator account!"
 msgstr "Esta conta é uma conta super-administrador"
 
-#: ../class/m_admin.php:861 ../class/m_admin.php:867 ../class/m_dom.php:367
-#: ../class/m_dom.php:369 ../class/m_dom.php:651 ../class/m_dom.php:720
+#: ../class/m_admin.php:867 ../class/m_dom.php:369 ../class/m_dom.php:720
 #, fuzzy, php-format
 msgid "Domain '%s' not found."
 msgstr "Domínio %s suprimido"
 
-#: ../class/m_admin.php:880 ../class/m_admin.php:886 ../class/m_admin.php:912
-#: ../class/m_admin.php:918 ../class/m_admin.php:960 ../class/m_admin.php:966
+#: ../class/m_admin.php:886 ../class/m_admin.php:918 ../class/m_admin.php:966
 #, fuzzy
 msgid "This TLD does not exist"
 msgstr "Membro '%s' não existe"
 
-#: ../class/m_admin.php:933 ../class/m_admin.php:939
+#: ../class/m_admin.php:939
 msgid "The TLD name is mandatory"
 msgstr ""
 
-#: ../class/m_admin.php:938 ../class/m_admin.php:944
+#: ../class/m_admin.php:944
 msgid "This TLD already exist"
 msgstr ""
 
-#: ../class/m_admin.php:1064 ../class/m_admin.php:1079
+#: ../class/m_admin.php:1079
 msgid "-- Program error -- The requested password policy does not exist!"
 msgstr ""
 
-#: ../class/m_admin.php:1072 ../class/m_admin.php:1087
+#: ../class/m_admin.php:1087
 msgid "The password length is too short according to the password policy"
 msgstr ""
 
-#: ../class/m_admin.php:1111 ../class/m_admin.php:1126
+#: ../class/m_admin.php:1126
 msgid ""
 "Your password contains not enough different classes of character, between "
 "low-case, up-case, figures and special characters."
@@ -4047,32 +3692,32 @@ msgstr ""
 msgid "File not in authorized directory"
 msgstr "No authorized user in %s"
 
-#: ../class/m_cron.php:37 ../class/m_cron.php:40
+#: ../class/m_cron.php:40
 msgid "Daily"
 msgstr ""
 
-#: ../class/m_cron.php:38 ../class/m_cron.php:41
+#: ../class/m_cron.php:41
 msgid "Hour"
 msgstr ""
 
-#: ../class/m_cron.php:39 ../class/m_cron.php:42
+#: ../class/m_cron.php:42
 msgid "Half Hour"
 msgstr ""
 
-#: ../class/m_cron.php:114 ../class/m_cron.php:115
+#: ../class/m_cron.php:115
 msgid "URL not valid"
 msgstr ""
 
-#: ../class/m_cron.php:122 ../class/m_cron.php:123
+#: ../class/m_cron.php:123
 #, fuzzy
 msgid "Email address is not valid"
 msgstr "Lista de caixas de email do domínio %s"
 
-#: ../class/m_cron.php:124 ../class/m_cron.php:131 ../class/m_cron.php:132
+#: ../class/m_cron.php:132
 msgid "You seems to be over-quota."
 msgstr ""
 
-#: ../class/m_cron.php:131 ../class/m_cron.php:140 ../class/m_cron.php:141
+#: ../class/m_cron.php:141
 msgid "Identity problem"
 msgstr ""
 
@@ -4080,55 +3725,47 @@ msgstr ""
 msgid "The name MUST contain only letter and digits."
 msgstr ""
 
-#: ../class/m_dom.php:291 ../class/m_dom.php:293 ../class/m_dom.php:640
-#: ../class/m_dom.php:703 ../class/m_dom.php:709 ../class/m_dom.php:772
-#: ../class/m_dom.php:821 ../class/m_dom.php:890 ../class/m_dom.php:907
-#: ../class/m_dom.php:944 ../class/m_dom.php:976 ../class/m_dom.php:1013
-#: ../class/m_dom.php:1257 ../class/m_dom.php:1326
+#: ../class/m_dom.php:293 ../class/m_dom.php:709 ../class/m_dom.php:772
+#: ../class/m_dom.php:890 ../class/m_dom.php:976 ../class/m_dom.php:1013
+#: ../class/m_dom.php:1326
 msgid "--- Program error --- No lock on the domains!"
 msgstr ""
 
-#: ../class/m_dom.php:298 ../class/m_dom.php:300 ../class/m_dom.php:645
-#: ../class/m_dom.php:708 ../class/m_dom.php:714 ../class/m_dom.php:777
-#: ../class/m_dom.php:844 ../class/m_dom.php:913 ../class/m_dom.php:965
-#: ../class/m_dom.php:1034
+#: ../class/m_dom.php:300 ../class/m_dom.php:714 ../class/m_dom.php:777
+#: ../class/m_dom.php:913 ../class/m_dom.php:1034
 msgid "The domain name is syntaxically incorrect"
 msgstr ""
 
-#: ../class/m_dom.php:304 ../class/m_dom.php:306 ../class/m_dom.php:345
-#: ../class/m_dom.php:347 ../class/m_dom.php:1051 ../class/m_dom.php:1120
+#: ../class/m_dom.php:306 ../class/m_dom.php:347 ../class/m_dom.php:1120
 msgid ""
 "The requested domain is forbidden in this server, please contact the "
 "administrator"
 msgstr ""
 
-#: ../class/m_dom.php:308 ../class/m_dom.php:310
+#: ../class/m_dom.php:310
 msgid "This domain is the server's domain! You cannot host it on your account!"
 msgstr ""
 
-#: ../class/m_dom.php:313 ../class/m_dom.php:315 ../class/m_dom.php:318
-#: ../class/m_dom.php:320
+#: ../class/m_dom.php:315 ../class/m_dom.php:320
 msgid "The domain already exist."
 msgstr ""
 
-#: ../class/m_dom.php:325 ../class/m_dom.php:327 ../class/m_dom.php:951
-#: ../class/m_dom.php:1020
+#: ../class/m_dom.php:327 ../class/m_dom.php:1020
 msgid ""
 "The last member of the domain name is incorrect or cannot be hosted in that "
 "server."
 msgstr ""
 
-#: ../class/m_dom.php:329 ../class/m_dom.php:331 ../class/m_dom.php:333
-#: ../class/m_dom.php:335 ../class/m_dom.php:569 ../class/m_dom.php:638
-#: ../class/m_dom.php:955 ../class/m_dom.php:1024
+#: ../class/m_dom.php:331 ../class/m_dom.php:335 ../class/m_dom.php:638
+#: ../class/m_dom.php:1024
 msgid "The domain cannot be found in the whois database."
 msgstr ""
 
-#: ../class/m_dom.php:352 ../class/m_dom.php:354
+#: ../class/m_dom.php:354
 msgid "Your domain quota is over, you cannot create more domain names."
 msgstr ""
 
-#: ../class/m_dom.php:358 ../class/m_dom.php:360
+#: ../class/m_dom.php:360
 msgid "An unexpected error occured when creating the domain"
 msgstr ""
 
@@ -4137,86 +3774,80 @@ msgstr ""
 msgid "Could not delete default type"
 msgstr "Algums TLD não pode ser suprimidos..."
 
-#: ../class/m_dom.php:562 ../class/m_dom.php:631
+#: ../class/m_dom.php:631
 msgid "The Whois database is unavailable, please try again later."
 msgstr ""
 
-#: ../class/m_dom.php:713 ../class/m_dom.php:782 ../class/m_dom.php:916
-#: ../class/m_dom.php:985
+#: ../class/m_dom.php:782 ../class/m_dom.php:985
 #, fuzzy
 msgid "The sub-domain does not exist."
 msgstr "A caixa de email <b>%s</b> não existe!"
 
-#: ../class/m_dom.php:745 ../class/m_dom.php:814
+#: ../class/m_dom.php:814
 msgid "The folder you entered is incorrect or does not exist."
 msgstr ""
 
-#: ../class/m_dom.php:833 ../class/m_dom.php:902
+#: ../class/m_dom.php:902
 msgid ""
 "There is some forbidden characters in the sub domain (only A-Z 0-9 and - are "
 "allowed)."
 msgstr ""
 
-#: ../class/m_dom.php:838 ../class/m_dom.php:907
+#: ../class/m_dom.php:907
 msgid "Invalid domain type selected, please check."
 msgstr ""
 
-#: ../class/m_dom.php:849 ../class/m_dom.php:918
+#: ../class/m_dom.php:918
 msgid ""
 "The parameters for this subdomain and domain type are invalid. Please check "
 "for subdomain entries incompatibility"
 msgstr ""
 
-#: ../class/m_dom.php:872 ../class/m_dom.php:881 ../class/m_dom.php:940
-#: ../class/m_dom.php:949
+#: ../class/m_dom.php:940 ../class/m_dom.php:949
 msgid "I can't write to the destination folder"
 msgstr ""
 
-#: ../class/m_dom.php:959 ../class/m_dom.php:1028
+#: ../class/m_dom.php:1028
 msgid ""
 "The DNS of this domain do not match the server's DNS. Please change your "
 "domain's DNS (you may need to wait 1 day) before you install it again."
 msgstr ""
 
-#: ../class/m_dom.php:970 ../class/m_dom.php:1039
+#: ../class/m_dom.php:1039
 #, fuzzy, php-format
 msgid "The domain name %s does not exist"
 msgstr "A caixa de email <b>%s</b> não existe!"
 
-#: ../class/m_dom.php:976 ../class/m_dom.php:1045
+#: ../class/m_dom.php:1045
 #, fuzzy
 msgid "No change has been requested..."
 msgstr "Suas preferências foram atualizadas."
 
-#: ../class/m_dom.php:984 ../class/m_dom.php:990 ../class/m_dom.php:1053
-#: ../class/m_dom.php:1059
+#: ../class/m_dom.php:1053 ../class/m_dom.php:1059
 msgid ""
 "There is no MX record pointing to this server, and you are asking us to host "
 "the mail here. Please fix your MX DNS pointer."
 msgstr ""
 
-#: ../class/m_dom.php:1044 ../class/m_dom.php:1068 ../class/m_dom.php:1113
-#: ../class/m_dom.php:1137
+#: ../class/m_dom.php:1113 ../class/m_dom.php:1137
 msgid "The IP address you entered is incorrect."
 msgstr ""
 
-#: ../class/m_dom.php:1135 ../class/m_dom.php:1141 ../class/m_dom.php:1159
-#: ../class/m_dom.php:1165 ../class/m_dom.php:1204 ../class/m_dom.php:1210
-#: ../class/m_dom.php:1228 ../class/m_dom.php:1234
+#: ../class/m_dom.php:1204 ../class/m_dom.php:1210 ../class/m_dom.php:1228
+#: ../class/m_dom.php:1234
 #, fuzzy
 msgid "This domain is not installed in your account"
 msgstr "Esta conta é uma conta super-administrador"
 
-#: ../class/m_dom.php:1207 ../class/m_dom.php:1276
+#: ../class/m_dom.php:1276
 msgid "The specified slave account already exists"
 msgstr ""
 
-#: ../class/m_dom.php:1238 ../class/m_dom.php:1307
+#: ../class/m_dom.php:1307
 msgid "--- Program error --- Lock already obtained!"
 msgstr ""
 
-#: ../class/m_err.php:66 ../class/m_err.php:94 ../class/m_err.php:96
-#: ../class/m_err.php:98
+#: ../class/m_err.php:66 ../class/m_err.php:98
 #, fuzzy
 msgid "err_"
 msgstr "A informação entrada é incorreta"
@@ -4293,164 +3924,104 @@ msgstr "Nenhum arquivo nesta pasta"
 msgid "Email account password"
 msgstr "Senha inicial"
 
-#: ../class/m_mail.php:129 ../class/m_mail.php:137 ../class/m_mail.php:209
-#: ../class/m_mail.php:217 ../class/m_mail.php:326 ../class/m_mail.php:334
-#: ../class/m_mail.php:381 ../class/m_mail.php:390
+#: ../class/m_mail.php:137 ../class/m_mail.php:217 ../class/m_mail.php:334
+#: ../class/m_mail.php:390
 msgid "The email you entered is syntaxically incorrect"
 msgstr ""
 
-#: ../class/m_mail.php:166 ../class/m_mail.php:174
+#: ../class/m_mail.php:174
 #, fuzzy
 msgid "No mail found for this query"
 msgstr "Adiçionar um email ao domínio %s"
 
-#: ../class/m_mail.php:221 ../class/m_mail.php:229
+#: ../class/m_mail.php:229
 #, fuzzy
 msgid "You cannot create email addresses: your quota is over."
 msgstr "Você não pode adiçionr mais domínios, sua quota acabou."
 
-#: ../class/m_mail.php:227 ../class/m_mail.php:235
+#: ../class/m_mail.php:235
 #, fuzzy
 msgid "This email address already exists"
 msgstr "A caixa de email <b>%s</b> não existe!"
 
-#: ../class/m_mail.php:233 ../class/m_mail.php:241
+#: ../class/m_mail.php:241
 msgid "An unexpected error occured when creating the email"
 msgstr ""
 
-#: ../class/m_mail.php:287 ../class/m_mail.php:295
+#: ../class/m_mail.php:295
 msgid "This email is not yours, you can't change anything on it"
 msgstr ""
 
-#: ../class/m_mail.php:337 ../class/m_mail.php:345
+#: ../class/m_mail.php:345
 #, fuzzy, php-format
 msgid "The email %s does not exist, it can't be deleted"
 msgstr "A caixa de email <b>%s</b> não existe!"
 
-#: ../class/m_mail.php:341
-#, fuzzy, php-format
-msgid "The email %s is special, it can't be deleted"
-msgstr "A caixa de email <b>%s</b> foi criado com sucesso"
-
-#: ../class/m_mail.php:345 ../class/m_mail.php:354
+#: ../class/m_mail.php:354
 #, php-format
 msgid "The email %s is already marked for deletion, it can't be deleted"
 msgstr ""
 
-#: ../class/m_mail.php:354 ../class/m_mail.php:363
+#: ../class/m_mail.php:363
 #, fuzzy, php-format
 msgid "The email %s has been marked for deletion"
 msgstr "O domínio %s foi suprimido com sucesso."
 
-#: ../class/m_mail.php:360 ../class/m_mail.php:369
+#: ../class/m_mail.php:369
 #, fuzzy, php-format
 msgid "The email %s has been successfully deleted"
 msgstr "O domínio %s foi suprimido com sucesso."
 
-#: ../class/m_mail.php:392 ../class/m_mail.php:401
+#: ../class/m_mail.php:401
 #, php-format
 msgid "The email %s does not exist, it can't be undeleted"
 msgstr ""
 
-#: ../class/m_mail.php:396 ../class/m_mail.php:405
+#: ../class/m_mail.php:405
 #, php-format
 msgid "The email %s is special, it can't be undeleted"
 msgstr ""
 
-#: ../class/m_mail.php:400 ../class/m_mail.php:409
+#: ../class/m_mail.php:409
 #, php-format
 msgid ""
 "Sorry, deletion of email %s is already in progress, or not marked for "
 "deletion, it can't be undeleted"
 msgstr ""
 
-#: ../class/m_mail.php:409 ../class/m_mail.php:418
+#: ../class/m_mail.php:418
 #, fuzzy, php-format
 msgid "The email %s has been undeleted"
 msgstr "A caixa de email <b>%s</b> foi criado com sucesso"
 
-#: ../class/m_mail.php:412 ../class/m_mail.php:421
+#: ../class/m_mail.php:421
 #, php-format
 msgid "-- Program Error -- The email %s can't be undeleted"
 msgstr ""
 
-#: ../class/m_mail.php:489 ../class/m_mail.php:502
+#: ../class/m_mail.php:502
 msgid ""
 "There is forbidden characters in your mail name. You can't make it a POP/"
 "IMAP account, you can only use it as redirections to other emails."
 msgstr ""
 
-#: ../class/m_mail.php:509 ../class/m_mail.php:522
+#: ../class/m_mail.php:522
 msgid ""
 "You set a quota smaller than the current mailbox size. Since it's not "
 "allowed, we set the quota to the current mailbox size."
 msgstr ""
 
-#: ../class/m_mail.php:669
+#: ../class/m_mail.php:678
 #, fuzzy
 msgid "The MX account was not found."
 msgstr "Conta Permitiu ?"
-
-#: ../class/m_mail_alias.php:98
-msgid "Alias"
-msgstr ""
-
-#: ../class/m_mail_alias.php:99
-msgid ""
-"To add an alias to this mail address.<br/><i>You must have the domain's "
-"alias setup in your AlternC account.</i>"
-msgstr ""
-
-#: ../class/m_mail_alias.php:114
-#, php-format
-msgid "Alias of %s"
-msgstr ""
-
-#: ../class/m_mail_alias.php:115
-#, php-format
-msgid "All the mails sent to %s will be received here."
-msgstr ""
-
-#: ../class/m_mail_jabber.php:67
-msgid "Jabber Demo"
-msgstr ""
-
-#: ../class/m_mail_jabber.php:69
-msgid "This is just a demo.<br/>Look at m_mail_jabber.php"
-msgstr ""
-
-#: ../class/m_mail_localbox.php:129
-#, fuzzy
-msgid "Local mailbox"
-msgstr "Caixas e email"
-
-#: ../class/m_mail_localbox.php:130
-msgid ""
-"Actually disabled.<br/>To have your mail stored on the server.<br/><i>You "
-"can access them remotely with the webmail, IMAP or POP</i>"
-msgstr ""
-
-#: ../class/m_mail_localbox.php:150
-msgid ""
-"Actually enabled.<br/>Your mails are stored on the server.<br/><i>You can "
-"access them remotely with the webmail, IMAP or POP</i>"
-msgstr ""
-
-#: ../class/m_mail_redirection.php:145
-#, fuzzy
-msgid "Redirection"
-msgstr "Redireção URL"
-
-#: ../class/m_mail_redirection.php:146
-msgid "Send a copy of incoming emails to another mail address"
-msgstr ""
 
 #: ../class/m_mem.php:85 ../class/m_mem.php:91 ../class/m_mem.php:151
 #: ../class/m_mem.php:268
 msgid "User or password incorrect"
 msgstr ""
 
-#: ../class/m_mem.php:95 ../class/m_mem.php:445 ../class/m_mem.php:449
+#: ../class/m_mem.php:95 ../class/m_mem.php:449
 #, fuzzy
 msgid "This account is locked, contact the administrator"
 msgstr "Esta conta é uma conta super-administrador"
@@ -4472,23 +4043,23 @@ msgstr ""
 msgid "IP address incorrect, please contact the administrator"
 msgstr ""
 
-#: ../class/m_mem.php:352 ../class/m_mem.php:356
+#: ../class/m_mem.php:356
 msgid "The old password is incorrect"
 msgstr ""
 
-#: ../class/m_mem.php:356 ../class/m_mem.php:360
+#: ../class/m_mem.php:360
 msgid "The new passwords are differents, please retry."
 msgstr ""
 
-#: ../class/m_mem.php:405 ../class/m_mem.php:409
+#: ../class/m_mem.php:409
 msgid "The new passwords are differents, please retry"
 msgstr ""
 
-#: ../class/m_mem.php:495 ../class/m_mem.php:499
+#: ../class/m_mem.php:499
 msgid "The information you entered is incorrect."
 msgstr ""
 
-#: ../class/m_mem.php:541 ../class/m_mem.php:542 ../class/m_mem.php:545
+#: ../class/m_mem.php:545
 msgid "Help"
 msgstr "Ajuda"
 
@@ -4646,7 +4217,12 @@ msgstr ""
 msgid "Other format than JSON is not implemented yet"
 msgstr ""
 
-#: ../class/m_quota.php:151 ../class/m_quota.php:167
+#: ../class/m_quota.php:75 ../class/m_quota.php:146
+#, fuzzy
+msgid "quota_"
+msgstr "Espaço de Disco"
+
+#: ../class/m_quota.php:185
 #, fuzzy
 msgid "Error writing the quota entry !"
 msgstr "Editando os quotas do membro"
@@ -4782,6 +4358,128 @@ msgstr ""
 #: ../class/mime.php:172 ../class/mime.php:173 ../class/mime.php:174
 msgid "Real Media File"
 msgstr ""
+
+#, fuzzy
+#~ msgid "This allow you to change your mail password."
+#~ msgstr "Você não pode mudar sua senha"
+
+#, fuzzy
+#~ msgid "You requested deletion of this domain."
+#~ msgstr "Confirma o apagamento deste domínio %s"
+
+#, fuzzy
+#~ msgid "FTP accounts deletion confirm"
+#~ msgstr "Lista de contas FTP"
+
+#, fuzzy
+#~ msgid "Webmail Access"
+#~ msgstr "Acesso Webmail"
+
+#, fuzzy
+#~ msgid "Email Address"
+#~ msgstr "Endereço email"
+
+#, fuzzy
+#~ msgid "Password do not match"
+#~ msgstr "Senha"
+
+#, fuzzy
+#~ msgid "No mail for this domain"
+#~ msgstr "Adiçionar um email ao domínio %s"
+
+#, fuzzy
+#~ msgid "Active"
+#~ msgstr "Ação"
+
+#, fuzzy
+#~ msgid "Raw web statistics"
+#~ msgstr "Número de statisticas Web"
+
+#, fuzzy
+#~ msgid "err_mysql_1"
+#~ msgstr "Sua quota está completo, você não pode criar mais bases de dados."
+
+#~ msgid "Your database has been successfully created"
+#~ msgstr "Sua base de dados foi criado com sucesso"
+
+#, fuzzy
+#~ msgid "Your current settings are"
+#~ msgstr "Aqui seus parâmetros atuaís"
+
+#, fuzzy
+#~ msgid "MySQL Server"
+#~ msgstr "Servidor SQL"
+
+#, fuzzy
+#~ msgid "Main database"
+#~ msgstr "Criar minha base de dados principal"
+
+#, fuzzy
+#~ msgid ""
+#~ "Enter the new password of your MySQL database and click 'change the "
+#~ "password' to change it"
+#~ msgstr ""
+#~ "Entrar sua nova senha de base de dados SQL e clica sobre 'Mudança de "
+#~ "senha' para a mudar"
+
+#~ msgid "SQL Server"
+#~ msgstr "Servidor SQL"
+
+#, fuzzy
+#~ msgid "err_mysql_13"
+#~ msgstr "Sua quota está completo, você não pode criar mais bases de dados."
+
+#, fuzzy
+#~ msgid "You cannot add any new statistics, your quota is over."
+#~ msgstr "Você não pode adiçionr mais domínios, sua quota acabou."
+
+#, fuzzy
+#~ msgid "Domain name:"
+#~ msgstr "Nome do Domínio"
+
+#, fuzzy
+#~ msgid "Create those raw statistics"
+#~ msgstr "Número de statisticas Web"
+
+#, fuzzy
+#~ msgid "The statistics has been successfully created"
+#~ msgstr "Os quotas foram editados com sucesso"
+
+#, fuzzy
+#~ msgid "No Statistics selected!"
+#~ msgstr "Nenhuma conta selecionada"
+
+#, fuzzy
+#~ msgid "The Statistics has been successfully changed"
+#~ msgstr "A caixa de email %s foi mudado com sucesso"
+
+#, fuzzy
+#~ msgid "Change the Raw Statistics"
+#~ msgstr "Mudar os quotas padrões"
+
+#, fuzzy
+#~ msgid "Change those Raw Statistics."
+#~ msgstr "Mudar os quotas padrões"
+
+#, fuzzy
+#~ msgid "Raw Statistics List"
+#~ msgstr "Número de statisticas Web"
+
+#, fuzzy
+#~ msgid "Delete the checked Raw Statistics (apache)"
+#~ msgstr "Suprimir as bases selecionadas"
+
+#, fuzzy
+#~ msgid "The email %s is special, it can't be deleted"
+#~ msgstr "A caixa de email <b>%s</b> foi criado com sucesso"
+
+#, fuzzy
+#~ msgid "Local mailbox"
+#~ msgstr "Caixas e email"
+
+#, fuzzy
+#~ msgid "Redirection"
+#~ msgstr "Redireção URL"
 
 #~ msgid "Add a mail to the domain %s"
 #~ msgstr "Adiçionar um email ao domínio %s"
@@ -5513,9 +5211,6 @@ msgstr ""
 
 #~ msgid "Number of domains"
 #~ msgstr "Número de domínios"
-
-#~ msgid "Number of mailing-lists"
-#~ msgstr "Número de envi-listas"
 
 #~ msgid "Number of email accounts"
 #~ msgstr "Número de contas do email"
