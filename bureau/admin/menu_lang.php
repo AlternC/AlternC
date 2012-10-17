@@ -1,6 +1,6 @@
 <div class="menu-box">
  <div class="menu-title">
-  <img src="/images/lang.png" alt="<?php __("Langues"); ?>" />&nbsp;<a href="javascript:menu_toggle('menu-lang');"><?php __("Langues"); ?>
+  <img src="/images/lang.png" alt="<?php __("Languages"); ?>" />&nbsp;<a href="javascript:menu_toggle('menu-lang');"><?php __("Languages"); ?>
   <img src="/images/row-down.png" alt="" style="float:right;"/></a>
   </div>
   <div class="menu-content" id="menu-lang">

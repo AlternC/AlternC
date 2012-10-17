@@ -65,10 +65,10 @@ if(!empty($confirm_del)) {
 } else {
   include_once('head.php');
 ?>
-<h3><?php __("FTP accounts deletion confirm"); ?></h3>
+<h3><?php __("Confirm the FTP accounts deletion"); ?></h3>
 <hr id="topbar"/>
 <br />
-  <?php __("Do you really want to delete those accounts ?");?>
+  <?php __("Do you really want to delete those accounts?");?>
   <ul>
   <?php foreach($lst_todel as $t) {
     echo "<li>".$names[$t]."</li>\n";

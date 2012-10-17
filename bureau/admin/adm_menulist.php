@@ -63,22 +63,56 @@ asort($menu_available);
 asort($menu_activated);
 asort($menu_error);
 
+$menus=array(
+	     "menu_dom" => _("Domains"),
+	     "menu_mail" => _("Email Addresses"),
+	     "menu_brouteur" => _("File browser"),
+	     "menu_web" => _("Protected folders"),
+	     "menu_ftp" => _("FTP accounts"),
+	     "menu_cron" => _("Scheduled tasks"),
+	     "menu_sql" => _("Databases"),
+	     "menu_quota" => _("Show my quotas"),
+	     "menu_ip" => _("Access security"),
+	     "menu_logs" => _("Logs"),
+	     "menu_aide" => _("Online help"),
+	     "menu_lang" => _("Languages"),
+	     "menu_mem" => _("Settings"),
+	     "menu_piwik" => _("Piwik statistics"), 
+	     "menu_admin" => _("Administration"),
+	     "menu_mailman" => _("Mailing lists"),
+	     "menu_aws" => _("Web Statistics"),
+	     );
+
+function tr($name) {
+  global $menus;
+  $name=basename($name,".php"); 
+  if ($menus[$name]) return $menus[$name];
+  else return _("Module")." ".$name;
+}
 
 $menu_diff=array_diff($menu_available,$menu_activated);
 
 __("Edit the file /etc/alternc/menulist.txt to enable, disable ou change order of menu entry.");
 ?>
-<h4><?php __("Menu actually activated"); ?></h4>
+<h4><?php __("Menu currently activated"); ?></h4>
 <ul>
-  <?php foreach($menu_activated as $m){ echo "<li>$m - <i>"._("shortdesc_".basename($m,".php"))."</i></li>";} ?>
+<?php foreach($menu_activated as $m) { 
+echo "<li>$m - <i>".tr($m)."</i></li>";
+} ?>
 </ul>
 <h4><?php __("Menu activated but not present"); ?></h4>
 <ul>
-  <?php foreach($menu_error as $m){ echo "<li>$m - <i>"._("shortdesc_".basename($m,".php"))."</i></li>";} ?>
+  <?php foreach($menu_error as $m) { 
+echo "<li>$m - <i>".tr($m)."</i></li>";
+}
+ ?>
 </ul>
-<h4><?php __("Menu avalaible but not activated"); ?></h4>
+<h4><?php __("Menu available but not activated"); ?></h4>
 <ul>
-  <?php foreach($menu_diff as $m){ echo "<li>$m - <i>"._("shortdesc_".basename($m,".php"))."</i></li>";} ?>
+  <?php foreach($menu_diff as $m) { 
+echo "<li>$m - <i>".tr($m)."</i></li>";
+}
+?>
 </ul>
 
 

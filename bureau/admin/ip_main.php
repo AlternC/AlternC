@@ -128,7 +128,7 @@ $lac = $authip->list_affected();
 </form>
 
 <hr/>
-<h3><?php __("Know IP and networks");?></h3>
+<h3><?php __("Known IP and networks");?></h3>
 <table class="tlist">
   <tr>
     <td valign=top width=40%> 

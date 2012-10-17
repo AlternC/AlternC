@@ -10,7 +10,7 @@ msgstr ""
 "$\n"
 "Report-Msgid-Bugs-To: i18n@alternc.org\n"
 "POT-Creation-Date: 2012-10-16 16:58+0200\n"
-"PO-Revision-Date: 2012-10-16 19:47+0200\n"
+"PO-Revision-Date: 2012-10-17 09:52+0200\n"
 "Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
 "Language-Team: français <team@alternc.org>\n"
 "Language: fr\n"
@@ -967,20 +967,19 @@ msgstr "L'Email a été modifié avec succès"
 
 #: ../admin/adm_email.php:50
 msgid "There was an error"
-msgstr ""
+msgstr "Une erreur est survenue"
 
 #: ../admin/adm_email.php:63
 msgid "From"
-msgstr ""
+msgstr "De"
 
 #: ../admin/adm_email.php:67
 msgid "Subject"
-msgstr ""
+msgstr "Sujet"
 
 #: ../admin/adm_email.php:71
-#, fuzzy
 msgid "Mail"
-msgstr "Adresses Email"
+msgstr "Email"
 
 #: ../admin/adm_email.php:75
 msgid "Send"
@@ -1098,11 +1097,12 @@ msgid ""
 "Edit the file /etc/alternc/menulist.txt to enable, disable ou change order "
 "of menu entry."
 msgstr ""
+"Modifiez le fichier /etc/alternc/menulist.txt pour activer, désactiver, ou "
+"changer l'ordre du menu."
 
 #: ../admin/adm_menulist.php:71
-#, fuzzy
 msgid "Menu actually activated"
-msgstr "Désactiver"
+msgstr ""
 
 #: ../admin/adm_menulist.php:73 ../admin/adm_menulist.php:77
 #: ../admin/adm_menulist.php:81
@@ -1111,7 +1111,7 @@ msgstr ""
 
 #: ../admin/adm_menulist.php:75
 msgid "Menu activated but not present"
-msgstr ""
+msgstr "Menu actif mais non présent"
 
 #: ../admin/adm_menulist.php:79
 msgid "Menu avalaible but not activated"
@@ -1178,9 +1178,8 @@ msgid "Password Policies"
 msgstr "Politiques de mot de passe"
 
 #: ../admin/adm_panel.php:55
-#, fuzzy
 msgid "Manage IP whitelist"
-msgstr "Gérer les droits"
+msgstr "Gérer les listes blanches IP"
 
 #: ../admin/adm_panel.php:59 ../admin/adm_panel.php:60
 msgid "Advanced features"
@@ -1212,9 +1211,8 @@ msgid "Account creation statistics"
 msgstr "Statistiques de création des comptes"
 
 #: ../admin/adm_panel.php:69 ../admin/adm_panel.php:70
-#, fuzzy
 msgid "Manage menu"
-msgstr "Administrateur"
+msgstr "Gérer le Menu"
 
 #: ../admin/adm_passpolicy.php:49
 msgid "Manage Password Policy"
@@ -1781,17 +1779,17 @@ msgstr "Sélectionner"
 #: ../admin/menu_cron.php:40 ../class/m_cron.php:161 ../class/m_cron.php:170
 #: ../class/m_cron.php:171
 msgid "Scheduled tasks"
-msgstr ""
+msgstr "Tâches planifiées"
 
 #: ../admin/cron.php:29 ../admin/cron.php:34 ../admin/cron.php:35
 #: ../admin/cron.php:36
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: ../admin/cron.php:30 ../admin/cron.php:35 ../admin/cron.php:36
 #: ../admin/cron.php:37
 msgid "Schedule"
-msgstr ""
+msgstr "Planification"
 
 #: ../admin/cron.php:31 ../admin/cron.php:36 ../admin/cron.php:37
 #: ../admin/cron.php:38 ../admin/hta_edituser.php:53
@@ -1801,40 +1799,36 @@ msgstr "Utilisateur"
 
 #: ../admin/cron.php:33 ../admin/cron.php:38 ../admin/cron.php:39
 #: ../admin/cron.php:40
-#, fuzzy
 msgid "Email report"
-msgstr "Adresse Email"
+msgstr "Rapport par mail"
 
 #: ../admin/cron.php:57
 msgid "Called URL"
-msgstr ""
+msgstr "URL appellée"
 
 #: ../admin/cron.php:60
-#, fuzzy
 msgid "Period:"
-msgstr "Périodicité de facturation"
+msgstr "Périodicité :"
 
 #: ../admin/cron.php:72
 msgid "Next execution: "
-msgstr ""
+msgstr "Prochaine exécution :"
 
 #: ../admin/cron.php:75
 msgid "HTTP user (optionnal)"
-msgstr ""
+msgstr "Utilisateur HTTP (facultatif)"
 
 #: ../admin/cron.php:76
 msgid "HTTP password (optionnal)"
-msgstr ""
+msgstr "Mot de passe HTTP (facultatif)"
 
 #: ../admin/cron.php:77
-#, fuzzy
 msgid "Mail address (for reports)"
-msgstr "Adresses email"
+msgstr "Adresses email (pour les rapports)"
 
 #: ../admin/cron.php:78 ../admin/cron.php:84
-#, fuzzy
 msgid "Apply the modifications"
-msgstr "Dernière modification"
+msgstr "Appliquer les modifications"
 
 #: ../admin/dom_add.php:45
 msgid "Domain hosting"
@@ -1997,7 +1991,7 @@ msgid "You requested deletion of this domain."
 msgstr "Vous avez demandé la suppression du domaine %s"
 
 #: ../admin/dom_edit.php:81
-#, fuzzy, php-format
+#, php-format
 msgid "You requested deletion of domain %s."
 msgstr "Vous avez demandé la suppression du domaine %s"
 
@@ -2136,13 +2130,12 @@ msgid "The ftp account %s has been successfully deleted"
 msgstr "Le compte ftp %s a été supprimé avec succès"
 
 #: ../admin/ftp_del.php:68
-#, fuzzy
 msgid "FTP accounts deletion confirm"
-msgstr "Liste des comptes ftp"
+msgstr "Confirmation de la suppression des comptes FTP"
 
 #: ../admin/ftp_del.php:71
 msgid "Do you really want to delete those accounts ?"
-msgstr ""
+msgstr "Voulez-vous vraiment supprimer ces comptes ?"
 
 #: ../admin/ftp_doadd.php:53
 msgid "The FTP account has been successfully created"
@@ -2214,13 +2207,12 @@ msgid "Please enter a password"
 msgstr "Veuillez entrer un mot de passe"
 
 #: ../admin/hta_dodeluser.php:49
-#, fuzzy
 msgid "Authorized user deletion confirm"
-msgstr "Aucun utilisateur autorisé dans %s"
+msgstr "Confirmation de la suppression de l'utilisateur autorisé"
 
 #: ../admin/hta_dodeluser.php:52
 msgid "Do you really want to delete those users ?"
-msgstr ""
+msgstr "Voulez-vous vraiment supprimer ces utilisateurs ?"
 
 #: ../admin/hta_doedituser.php:52
 #, php-format
@@ -2308,7 +2300,7 @@ msgstr ""
 
 #: ../admin/index.php:71 ../admin/index.php:76
 msgid "You are attemping to connect without IP restriction."
-msgstr ""
+msgstr "Vous êtes sur le point de vous connecter sans restriction d'IP."
 
 #: ../admin/index.php:75 ../admin/index.php:80
 msgid "AlternC access"
@@ -2352,27 +2344,24 @@ msgid "You must accept the session cookie to log-in"
 msgstr "Vous devez accepter le cookie de session pour pouvoir vous connecter"
 
 #: ../admin/ip_main.php:58
-#, fuzzy
 msgid "Enabled rules"
-msgstr "Actif"
+msgstr "Règles actives"
 
 #: ../admin/ip_main.php:62
 msgid "Protocol"
-msgstr ""
+msgstr "Protocole"
 
 #: ../admin/ip_main.php:64
-#, fuzzy
 msgid "IP address"
 msgstr "Adresse IP"
 
 #: ../admin/ip_main.php:83
-#, fuzzy
 msgid "Add a new rule"
-msgstr "Créer un nouveau TLD"
+msgstr "Ajouter une règle"
 
 #: ../admin/ip_main.php:88
 msgid "IP address (or subnet)"
-msgstr ""
+msgstr "Adresse IP (ou préfixe)"
 
 #: ../admin/ip_main.php:131
 msgid "Know IP and networks"
