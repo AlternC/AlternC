@@ -211,7 +211,7 @@ CREATE TABLE IF NOT EXISTS `default_subdomains` (
   PRIMARY KEY  (`id`)
 ) COMMENT='Contains the defaults subdomains created on domains creation';
 
-INSERT INTO `default_subdomains` (`sub`, `domain_type`, `domain_type_parameter`, `concerned`) VALUES
+INSERT IGNORE INTO `default_subdomains` (`sub`, `domain_type`, `domain_type_parameter`, `concerned`) VALUES
 ('www',  'VHOST',   '%%DOMAINDIR%%',             'MAIN'),
 ('mail', 'WEBMAIL', '',                          'MAIN'),
 ('',     'URL',     'http://www.%%DOMAIN%%',     'MAIN'),
