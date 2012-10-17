@@ -28,8 +28,6 @@ do
     then
 	msgcat --use-first --less-than=3 --more-than=1 -o tmp.po  "lang/${lang}.po" "debian/po/${sublang}.po"
 	mv -f tmp.po "debian/po/${sublang}.po"
-	msgcat --use-first --less-than=3 --more-than=1 -o tmp.po  "lang/${lang}.po" "../../alternc-awstats/trunk/debian/po/${sublang}.po"
-	mv -f tmp.po "../../alternc-awstats/trunk/debian/po/${sublang}.po"
 	msgcat --use-first --less-than=3 --more-than=1 -o tmp.po  "lang/${lang}.po" "../../alternc-mailman/trunk/debian/po/${sublang}.po"
 	mv -f tmp.po "../../alternc-mailman/trunk/debian/po/${sublang}.po"
     fi
@@ -39,8 +37,6 @@ done
 # Now committing 
 svn commit -m "Updating language files from Transifex"
 pushd ../../alternc-mailman/trunk
-svn commit -m "Updating language files from Transifex"
-cd ../../alternc-awstats/trunk
 svn commit -m "Updating language files from Transifex"
 popd
 
