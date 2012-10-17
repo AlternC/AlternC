@@ -692,9 +692,9 @@ CREATE TABLE IF NOT EXISTS `default_subdomains` (
 INSERT INTO `default_subdomains` (`sub`, `domain_type`, `domain_type_parameter`, `concerned`) VALUES
 ('www', 'VHOST', '%%DOMAINDIR%%', 'MAIN'),
 ('mail', 'WEBMAIL', '', 'MAIN'),
-('', 'URL', 'www.%%DOMAIN%%', 'MAIN'),
-('www', 'URL', 'www.%%TARGETDOM%%', 'SLAVE'),
-('mail', 'URL', 'mail.%%TARGETDOM%%', 'SLAVE'),
-('', 'URL', '%%TARGETDOM%%', 'SLAVE');
+('', 'URL', 'http://www.%%DOMAIN%%', 'MAIN'),
+('www', 'URL', 'http://www.%%TARGETDOM%%', 'SLAVE'),
+('mail', 'URL', 'http://mail.%%TARGETDOM%%', 'SLAVE'),
+('', 'URL', 'http://%%TARGETDOM%%', 'SLAVE');
 
 
