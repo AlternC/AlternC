@@ -1,1 +1,2 @@
-[type: gettext/rfc822deb] templates
+[type: gettext/rfc822deb] alternc.templates
+[type: gettext/rfc822deb] alternc-awstats.templates

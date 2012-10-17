@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: $Id: stats.po,v 1.1.1.1 2004/09/01 16:52:49 anonymous "
 "Exp $\n"
 "Report-Msgid-Bugs-To: i18n@alternc.org\n"
-"POT-Creation-Date: 2012-08-21 12:01+0200\n"
+"POT-Creation-Date: 2012-10-17 11:00+0200\n"
 "PO-Revision-Date: 2009-05-24 13:50CEST\n"
 "Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
 "Language-Team: French <i18n@alternc.org>\n"
@@ -17,32 +17,31 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Emacs 21\n"
 
-#: ../admin/aws_add.php:38 admin/aws_add.php:33
+#: ../admin/aws_add.php:33
 msgid "You cannot add any new statistics, your quota is over."
 msgstr "Vous ne pouvez plus créer de statistiques, votre quota est atteint."
 
-#: ../admin/aws_add.php:43 admin/aws_add.php:40
+#: ../admin/aws_add.php:38
 msgid "Edit Statistics"
 msgstr "Modifier un jeu de statistiques"
 
-#: ../admin/aws_add.php:43 admin/aws_add.php:40
+#: ../admin/aws_add.php:38
 msgid "New Statistics"
 msgstr "Créer un jeu de statistiques"
 
-#: ../admin/aws_add.php:54 ../admin/aws_list.php:61 admin/aws_add.php:50
-#: admin/aws_list.php:61
+#: ../admin/aws_add.php:49 ../admin/aws_list.php:56
 msgid "Domain name"
 msgstr "Nom de domaine"
 
-#: ../admin/aws_add.php:61 admin/aws_add.php:57
+#: ../admin/aws_add.php:56
 msgid "Hostaliases"
 msgstr "Autres noms de domaine à associer aux stats"
 
-#: ../admin/aws_add.php:72 ../admin/aws_list.php:61 admin/aws_add.php:68
+#: ../admin/aws_add.php:70 ../admin/aws_list.php:56
 msgid "Allowed Users"
 msgstr "Utilisateurs autorisés"
 
-#: ../admin/aws_add.php:88 admin/aws_add.php:84
+#: ../admin/aws_add.php:86
 msgid ""
 "No users currently defined, you must create login with the 'Manage allowed "
 "users' accounts' menu."
@@ -50,132 +49,130 @@ msgstr ""
 "Aucun utilisateur n'est défini pour l'instant. Vous devez créer des "
 "utilisateurs avec le menu 'Gérer les utilisateurs autorisés'."
 
-#: ../admin/aws_add.php:92 admin/aws_add.php:88
+#: ../admin/aws_add.php:90
 msgid "View public"
 msgstr "Visualisation publique"
 
-#: ../admin/aws_add.php:98 ../admin/aws_add.php:100
+#: ../admin/aws_add.php:96 ../admin/aws_add.php:98
 msgid "No"
 msgstr ""
 
-#: ../admin/aws_add.php:98 ../admin/aws_add.php:100
+#: ../admin/aws_add.php:96 ../admin/aws_add.php:98
 msgid "Yes"
 msgstr ""
 
-#: ../admin/aws_add.php:106 admin/aws_add.php:97
+#: ../admin/aws_add.php:104
 msgid "Create those statistics"
 msgstr "Créer ce jeu de statistiques"
 
-#: ../admin/aws_add.php:106 admin/aws_add.php:97
+#: ../admin/aws_add.php:104
 msgid "Edit those statistics"
 msgstr "Modifier ce jeu de statistiques"
 
-#: ../admin/aws_add.php:107 ../admin/aws_pass.php:73 ../admin/aws_users.php:58
+#: ../admin/aws_add.php:105 ../admin/aws_pass.php:68 ../admin/aws_users.php:53
 msgid "Cancel"
 msgstr ""
 
-#: ../admin/aws_del.php:44 admin/aws_del.php:42
+#: ../admin/aws_del.php:39
 #, php-format
 msgid "The statistics %s has been successfully deleted"
 msgstr "Le jeu de statistiques %s a été effacé avec succès"
 
-#: ../admin/aws_del.php:50
+#: ../admin/aws_del.php:45
 msgid "Please check the statistics set you want to delete"
 msgstr "Vous devez cocher les statistiques que vous souhaitez effacer"
 
-#: ../admin/aws_doadd.php:38 admin/aws_doadd.php:38
+#: ../admin/aws_doadd.php:42
 msgid "The statistics has been successfully created"
 msgstr "Le jeu de statistiques a été créé avec succès"
 
-#: ../admin/aws_doedit.php:33 ../admin/aws_edit.php:38 admin/aws_doedit.php:33
-#: admin/aws_edit.php:33
+#: ../admin/aws_doedit.php:36 ../admin/aws_edit.php:33
 msgid "No Statistics selected!"
 msgstr "Aucun jeu de sélectionné !"
 
-#: ../admin/aws_doedit.php:45 admin/aws_doedit.php:45
+#: ../admin/aws_doedit.php:48
 msgid "The Statistics has been successfully changed"
 msgstr "Le jeu de statistiques a été modifié avec succès"
 
-#: ../admin/aws_list.php:40 admin/aws_list.php:42
+#: ../admin/aws_list.php:35
 msgid "Statistics List"
 msgstr "Liste des jeux de statistiques"
 
-#: ../admin/aws_list.php:44 admin/aws_list.php:44
+#: ../admin/aws_list.php:39
 msgid "Manage allowed users' accounts"
 msgstr "Gérer les utilisateurs autorisés"
 
-#: ../admin/aws_list.php:47 ../admin/aws_users.php:46 admin/aws_list.php:47
+#: ../admin/aws_list.php:42 ../admin/aws_users.php:41
 msgid "Create new Statistics"
 msgstr "Créer un jeu de statistiques"
 
-#: ../admin/aws_list.php:61 ../admin/aws_users.php:78
+#: ../admin/aws_list.php:56 ../admin/aws_users.php:73
 msgid "Action"
 msgstr ""
 
-#: ../admin/aws_list.php:61 ../admin/aws_list.php:74
+#: ../admin/aws_list.php:56 ../admin/aws_list.php:69
 msgid "View the statistics"
 msgstr "Voir les statistiques"
 
-#: ../admin/aws_list.php:71 admin/aws_list.php:71
+#: ../admin/aws_list.php:66
 msgid "Edit"
 msgstr "Modifier"
 
-#: ../admin/aws_list.php:81 admin/aws_list.php:81
+#: ../admin/aws_list.php:76
 msgid "Delete the checked Statistics"
 msgstr "Effacer les statistiques cochées"
 
-#: ../admin/aws_pass.php:57 admin/aws_pass.php:51
+#: ../admin/aws_pass.php:52
 msgid "Change a user's password"
 msgstr "Changer le mot de passe d'un utilisateur"
 
-#: ../admin/aws_pass.php:67 ../admin/aws_users.php:52
-#: ../admin/aws_users.php:78 admin/aws_pass.php:61 admin/aws_users.php:47
-#: admin/aws_users.php:69
+#: ../admin/aws_pass.php:62 ../admin/aws_users.php:47
+#: ../admin/aws_users.php:73
 msgid "Username"
 msgstr "Nom d'utilisateur"
 
-#: ../admin/aws_pass.php:70 admin/aws_pass.php:64
+#: ../admin/aws_pass.php:65
 msgid "New Password"
 msgstr "Nouveau mot de passe"
 
-#: ../admin/aws_pass.php:72 admin/aws_pass.php:65
+#: ../admin/aws_pass.php:67
 msgid "Change this user's password"
 msgstr "Changer le mot de passe de cet utilisateur"
 
-#: ../admin/aws_useradd.php:43 admin/aws_useradd.php:36
+#: ../admin/aws_useradd.php:38
 msgid "The Awstat account has been successfully created"
 msgstr "Le compte utilisateur a été créé avec succès"
 
-#: ../admin/aws_userdel.php:42 admin/aws_userdel.php:42
+#: ../admin/aws_userdel.php:37
 #, php-format
 msgid "The awstat account %s has been successfully deleted"
 msgstr "Le compte utilisateur %s a été effacé avec succès"
 
-#: ../admin/aws_users.php:40 admin/aws_users.php:42
+#: ../admin/aws_users.php:35
 msgid "Awstats allowed user list"
 msgstr "Liste des utilisateurs autorisés"
 
-#: ../admin/aws_users.php:55 admin/aws_users.php:50
+#: ../admin/aws_users.php:50
 msgid "Password"
 msgstr "Mot de passe"
 
-#: ../admin/aws_users.php:57
+#: ../admin/aws_users.php:52
 msgid "Create this new awstat account"
 msgstr "Créer cet utilisateur"
 
-#: ../admin/aws_users.php:86 admin/aws_users.php:77
+#: ../admin/aws_users.php:81
 msgid "Change password"
 msgstr "Changer le mot de passe"
 
-#: ../admin/aws_users.php:92 admin/aws_users.php:83
+#: ../admin/aws_users.php:87
 msgid "Delete checked accounts"
 msgstr "Effacer les utilisateurs sélectionnés"
 
-#: ../admin/menu_aws.php:38 admin/menu_aws.php:37
+#: ../admin/menu_aws.php:38
 msgid "Web Statistics"
 msgstr "Statistiques Web"
 
-#: ../class/m_aws.php:86 class/m_aws.php:72
+#: ../class/m_aws.php:72
 msgid ""
 "The stats module allows any user to ask for statistics about his web site. "
 "Statistics are web pages generated daily based on the visits of the day "
@@ -188,14 +185,83 @@ msgstr ""
 "utilisé pour cela est Awstats. Les statistiques peuvent être lues dans de "
 "nombreuses langues."
 
-#: admin/aws_list.php:61 admin/aws_list.php:74
-msgid "View"
-msgstr "Voir"
-
-#: admin/aws_users.php:51
+#: ../class/m_aws.php:113
 #, fuzzy
-msgid "Create this new awstat account."
-msgstr "Créer cet utilisateur"
+msgid "No statistics currently defined"
+msgstr "Aucun jeu de sélectionné !"
+
+#: ../class/m_aws.php:153 ../class/m_aws.php:314 ../class/m_aws.php:695
+msgid "This statistic does not exist"
+msgstr ""
+
+#: ../class/m_aws.php:253
+msgid "Host already managed by awstats!"
+msgstr ""
+
+#: ../class/m_aws.php:348
+msgid "This hostname does not exist (Domain name)"
+msgstr ""
+
+#: ../class/m_aws.php:356
+msgid "This hostname does not exist (Hostaliases)"
+msgstr ""
+
+#: ../class/m_aws.php:376
+msgid "Your stat quota is over..."
+msgstr ""
+
+#: ../class/m_aws.php:389
+msgid "No user currently defined"
+msgstr ""
+
+#: ../class/m_aws.php:447 ../class/m_aws.php:487 ../class/m_aws.php:507
+#: ../class/m_aws.php:558
+msgid "Login does not exists"
+msgstr ""
+
+#: ../class/m_aws.php:463 ../class/m_aws.php:483 ../class/m_aws.php:503
+#: ../class/m_aws.php:554
+msgid "Login incorrect"
+msgstr ""
+
+#: ../class/m_aws.php:467
+msgid "Login does not exist"
+msgstr ""
+
+#: ../class/m_aws.php:512 ../class/m_aws.php:536 ../class/m_aws.php:563
+msgid "The requested statistic does not exist."
+msgstr ""
+
+#: ../class/m_aws.php:517
+msgid "This login is already allowed for this statistics."
+msgstr ""
+
+#: ../class/m_aws.php:568
+msgid "This login is already denied for this statistics."
+msgstr ""
+
+#: ../class/m_aws.php:634
+msgid "Awstats"
+msgstr ""
+
+#: ../class/m_aws.php:656
+msgid "prefix not allowed."
+msgstr ""
+
+#: ../class/m_aws.php:660
+msgid "Forbidden caracters in the postfix."
+msgstr ""
+
+#: ../class/m_aws.php:674
+msgid "Hostname is incorrect"
+msgstr ""
+
+#~ msgid "View"
+#~ msgstr "Voir"
+
+#, fuzzy
+#~ msgid "Create this new awstat account."
+#~ msgstr "Créer cet utilisateur"
 
 #~ msgid "<-No Password->"
 #~ msgstr "<- Aucun mot de passe ->"

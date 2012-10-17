@@ -27,9 +27,18 @@ pushd ../..
 
 langs="fr_FR de_DE en_US es_ES pt_BR" 
 
-for project in alternc alternc-awstats alternc-mailman
+# external repositories : 
+for project in alternc alternc-mailman
 do
     pushd "$project/trunk/bureau/locales"
+    make
+    popd
+done
+
+# internal po files : 
+for subproject in awstats 
+do
+    pushd "alternc/trunk/$subproject/bureau/locales"
     make
     popd
 done
@@ -45,14 +54,14 @@ do
     if [ "$sublang" != "en" ] ; then
 	cp "alternc/trunk/debian/po/${sublang}.po" "alternc/trunk/tmp.$lang/alternc.debconf.po"
 	cp "alternc-mailman/trunk/debian/po/${sublang}.po" "alternc/trunk/tmp.$lang/alternc-mailman.debconf.po"
-	cp "alternc-awstats/trunk/debian/po/${sublang}.po" "alternc/trunk/tmp.$lang/alternc-awstats.debconf.po"
+#	cp "alternc/trunk/awstats/debian/po/${sublang}.po" "alternc/trunk/tmp.$lang/alternc-awstats.debconf.po"
     fi
     cp "alternc/trunk/bureau/locales/$lang/LC_MESSAGES/messages.po" \
 	"alternc/trunk/bureau/locales/$lang/LC_MESSAGES/manual.po" \
 	"alternc-mailman/trunk/bureau/locales/$lang/LC_MESSAGES/mailman.po" \
 	"alternc-mailman/trunk/bureau/locales/$lang/LC_MESSAGES/mailman_manual.po" \
-	"alternc-awstats/trunk/bureau/locales/$lang/LC_MESSAGES/aws.po" \
-	"alternc-awstats/trunk/bureau/locales/$lang/LC_MESSAGES/aws_manual.po" \
+	"alternc/trunk/awstats/bureau/locales/$lang/LC_MESSAGES/aws.po" \
+	"alternc/trunk/awstats/bureau/locales/$lang/LC_MESSAGES/aws_manual.po" \
 	"alternc/trunk/tmp.$lang/" 
     # now we have all .po files in one folder, merge them into one big catalog: 
     msgcat --use-first -o "alternc/trunk/lang/${lang}.po" alternc/trunk/tmp.$lang/*

@@ -33,6 +33,7 @@ awstats/bureau/admin/aws_userdel.php -text
 awstats/bureau/admin/aws_users.php -text
 awstats/bureau/admin/menu_aws.php -text
 awstats/bureau/class/m_aws.php -text
+awstats/bureau/locales/Makefile -text
 awstats/bureau/locales/aws.pot -text
 awstats/bureau/locales/aws_manual.pot -text
 awstats/bureau/locales/de_DE/LC_MESSAGES/aws.po -text
