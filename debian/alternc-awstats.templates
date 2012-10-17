@@ -1,0 +1,19 @@
+Template: alternc-awstats/default_quota_value
+Type: string
+Default: 5
+_Description: Default quota value for awstats stats:
+ You are installing the alternc-awstats package. This package allows any
+ user to ask for statistics about his web site. Users can ask for a limited
+ number of statistic set. Please specify the default quota they will have
+ for this service ?
+
+Template: alternc-awstats/errorinstall
+Type: note
+_Description: Error installing AlternC-Awstats
+ AlternC-Awstats requires a complete installed AlternC system to get installed properly !
+ .
+ Please install AlternC and CONFIGURE IT before installing alternc-awstats or additional
+ modules (don't forget to launch 'alternc.install').
+ .
+ Please check out the AlternC installation documentation before proceeding.
+ Merci de consulter la documentation d'installation d'AlternC avant de continuer.
