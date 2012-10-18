@@ -567,36 +567,33 @@ class m_mail {
    * @ param : $dom_id , the domain id associated to a given address
    * @ param : $m , the left part of the  mail address being created
    * @ param : $delivery , the delivery used to deliver the mail
-   * @ param : $function , the address' function ( join,leave,request etc...)
-   * @ param : $name , the mailing list name
    */
- 
-  function add_wrapper($dom_id,$m,$delivery,$function,$name){
-    global $err,$db,$ciud,$mail,$dom;
-    $err->log("mail","add_wrapper","$m------$name-----$function");
 
-    $mail_id=$mail->create($dom_id,$m,$delivery);
-    if (!($domain=$dom->get_domain_byid($dom_id))) {
-      return false;
-    }
-    if(empty($function)){
-      #$recipient="$name";
-      $this->set_details($mail_id,1,0,"",$delivery);
-    }else{
-      $recipient="$name-$function";
+  function add_wrapper($dom_id,$m,$delivery){
+      global $err,$db,$mail;
+      $err->log("mail","add_wrapper","creating $delivery $m address");
 
-      #used to alias virtual lists
-      if (file_exists("/usr/share/alternc-mailman/patches/mailman-true-virtual.applied")) {
-        $this->set_details($mail_id,0,0,"$recipient@$domain",$delivery);
-        $mail_id2=$mail->create($dom_id,$recipient,$delivery);
-        $this->set_details($mail_id2,1,0,"",$delivery);
-      }else{
-        $this->set_details($mail_id,1,0,"$recipient@$domain",$delivery);
-      }
-
-    }
+      $mail_id=$mail->create($dom_id,$m,$delivery);
+      $this->set_details($mail_id,1,0,'',$delivery);
   }
-  
+
+  /* ----------------------------------------------------------------- */
+  /** A function used to create an alias for a specific address
+   * @ param : $dom_id , the domain sql identifier
+   * @ param : $m , the alias we want to create
+   * @ param : $alias , the already existing aliased address
+   * @ param : $delivery, the type of delivery of the alias created
+   */
+  function create_alias($dom_id,$m,$alias,$delivery) {
+      global $err,$db,$mail;
+      $err->log("mail","create_alias","creating $delivery $m alias for $alias");
+
+      $mail_id=$mail->create($dom_id,$m,$delivery);
+      $this->set_details($mail_id,0,0,$alias,"mailman");
+  }
+
+
+
   /* ----------------------------------------------------------------- */
   /** A wrapper used by mailman class to create it's needed addresses 
    * @ param : $mail_id , the mysql id of the mail address we want to delete
