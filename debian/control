@@ -75,7 +75,7 @@ Description-fr.UTF-8: Suite logicielle d'hébergement mutualisé pour Debian
 Package: alternc-squirrelmail
 Architecture: all
 Pre-depends: debconf (>= 0.5.00) | debconf-2.0
-Depends: debianutils (>= 1.13.1), alternc (>= 1.1), squirrelmail, squirrelmail-locales, avelsieve
+Depends: debianutils (>= 1.13.1), alternc (>= 1.1~zzz1), squirrelmail, squirrelmail-locales, avelsieve
 Conflicts: alternc (<= 1.0.3), alternc-changepass
 Provides: alternc-webmail
 Suggests: 
@@ -106,7 +106,7 @@ Description-fr.UTF-8: Webmail Squirrelmail pour AlternC
 Package: alternc-roundcube
 Architecture: all
 Pre-depends: debconf (>= 0.5.00) | debconf-2.0
-Depends: debianutils (>= 1.13.1), alternc (>= 1.1), roundcube, roundcube-mysql, roundcube-plugins
+Depends: debianutils (>= 1.13.1), alternc (>= 1.1~zzz1), roundcube, roundcube-mysql, roundcube-plugins
 Conflicts: alternc (<= 1.0.3)
 Provides: alternc-webmail
 Suggests: 
@@ -139,7 +139,7 @@ Priority: optional
 Section: admin
 Architecture: all
 Pre-depends: debconf
-Depends: alternc (>=1.1), awstats (>=6.1-1), php5-cli
+Depends: alternc (>= 1.1~zzz1), awstats (>=6.1-1), php5-cli
 Suggests: apachemerge
 Description: Awstats statistics module for AlternC
  AlternC is a mutualized hosting software manager for Linux.
@@ -154,7 +154,7 @@ Description: Awstats statistics module for AlternC
 Package: alternc-upnp
 Architecture: all
 Pre-depends: debconf (>= 0.5.00) | debconf-2.0
-Depends: debianutils (>= 1.13.1), alternc (>= 1.1), miniupnpc
+Depends: debianutils (>= 1.13.1), alternc (>= 1.1~zzz1), miniupnpc
 Description: UPnP client for AlternC 
  AlternC is a mutualized hosting software manager for Linux.
  It allows you to manage your websites, domains, ftp, emails, aliases,
