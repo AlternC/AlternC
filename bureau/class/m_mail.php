@@ -196,7 +196,7 @@ class m_mail {
     if ($count!=-1) $limit="LIMIT $offset,$count"; else $limit="";
     $db->query("SELECT a.id, a.address, a.password, a.`enabled`, a.mail_action, d.domaine AS domain, m.quota, m.quota*1024*1024 AS quotabytes, m.bytes AS used, NOT ISNULL(m.id) AS islocal, a.type, r.recipients, m.lastlogin  
          FROM (address a LEFT JOIN mailbox m ON m.address_id=a.id) LEFT JOIN recipient r ON r.address_id=a.id, domaines d 
-         WHERE $where AND d.id=a.domain_id AND a.type='' $limit ;");
+         WHERE $where AND d.id=a.domain_id $limit ;");
     if (! $db->next_record()) {
       $err->raise("mail",_("No email found for this query"));
       return false;
