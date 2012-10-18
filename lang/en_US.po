@@ -1494,8 +1494,8 @@ msgstr ""
 #: ../admin/adm_add.php:71 ../admin/adm_edit.php:89 ../admin/ftp_add.php:77
 #: ../admin/ftp_edit.php:70 ../admin/hta_adduser.php:62
 #: ../admin/hta_edit.php:110 ../admin/hta_edituser.php:55
-#: ../admin/mail_edit.inc.php:67 ../admin/mail_edit.php:96
-#: ../admin/sql_users_add.php:67 ../admin/sql_users_password.php:59
+#: ../admin/mail_edit.php:96 ../admin/sql_users_add.php:67
+#: ../admin/sql_users_password.php:59
 msgid "Confirm password"
 msgstr ""
 
@@ -1832,7 +1832,6 @@ msgid "OK?"
 msgstr ""
 
 #: ../admin/adm_doms.php:69 ../admin/dom_edit.php:99
-#: ../admin/mail_edit.inc.php:37
 msgid "Status"
 msgstr ""
 
@@ -2182,7 +2181,6 @@ msgid "Expiry"
 msgstr ""
 
 #: ../admin/adm_list.php:176 ../admin/dom_edit.php:136
-#: ../admin/mail_edit.inc.php:41
 msgid "Disable"
 msgstr ""
 
@@ -3069,7 +3067,7 @@ msgstr ""
 msgid "Disabled"
 msgstr ""
 
-#: ../admin/dom_edit.php:143 ../admin/mail_edit.inc.php:42
+#: ../admin/dom_edit.php:143
 msgid "Enable"
 msgstr ""
 
@@ -3398,15 +3396,6 @@ msgstr ""
 msgid "Add %s mail to the domain %s"
 msgstr ""
 
-#: ../admin/mail_alias_create.inc.php:52
-msgid "Create this alias"
-msgstr ""
-
-#: ../admin/mail_alias_doedit.php:45
-#, php-format
-msgid "Alias: %s already created"
-msgstr ""
-
 #: ../admin/mail_del.php:54
 msgid "Deleting mail accounts"
 msgstr ""
@@ -3431,39 +3420,6 @@ msgstr ""
 
 #: ../admin/mail_doedit.php:120
 msgid "Your email has been edited successfully"
-msgstr ""
-
-#: ../admin/mail_edit.inc.php:39
-msgid ""
-"Is this mail enabled ?<br/><i>Having a mail disabled forbid consultation or "
-"reception, but do not remove the mailbox or his configuration.</i>"
-msgstr ""
-
-#: ../admin/mail_edit.inc.php:47
-msgid ""
-"You need to have a password for some application (example: local mailbox);"
-msgstr ""
-
-#: ../admin/mail_edit.inc.php:52
-msgid "Set a passowrd:"
-msgstr ""
-
-#: ../admin/mail_edit.inc.php:55
-msgid "Change your password:"
-msgstr ""
-
-#: ../admin/mail_edit.inc.php:79 ../admin/mail_edit.php:114
-#: ../admin/mail_localbox_edit.inc.php:67
-#: ../admin/mail_redirection_edit.inc.php:64
-msgid "Change this email address"
-msgstr ""
-
-#: ../admin/mail_edit.inc.php:95
-msgid "Password does not match"
-msgstr ""
-
-#: ../admin/mail_edit.inc.php:99
-msgid "Password match"
 msgstr ""
 
 #: ../admin/mail_edit.php:53
@@ -3549,6 +3505,10 @@ msgstr ""
 
 #: ../admin/mail_edit.php:106
 msgid "one recipient per line"
+msgstr ""
+
+#: ../admin/mail_edit.php:114
+msgid "Change this email address"
 msgstr ""
 
 #: ../admin/mail_list.php:65
@@ -3717,31 +3677,9 @@ msgstr ""
 msgid "POP3S"
 msgstr ""
 
-#: ../admin/mail_localbox_doedit.php:53
-msgid "Already Activated"
-msgstr ""
-
-#: ../admin/mail_localbox_doedit.php:62
-msgid "Already disactivated"
-msgstr ""
-
-#: ../admin/mail_localbox_edit.inc.php:42 ../admin/mail_properties.php:43
+#: ../admin/mail_properties.php:43
 #, php-format
 msgid "Edition of <b>%s</b>"
-msgstr ""
-
-#: ../admin/mail_localbox_edit.inc.php:50
-msgid ""
-"WARNING: turning POP/IMAP off will DELETE the stored messages in this email "
-"address. This email address will become a simple redirection."
-msgstr ""
-
-#: ../admin/mail_localbox_edit.inc.php:52
-msgid ""
-"Activate the localbox, will allow you to store your mails on this server. \n"
-" It is a very conveniant way to check your mails while roaming,\n"
-"\t\tthince they can be accesed remotely by POP or IMAP. It consume space on "
-"the server so be sure to verify your quota attribution."
 msgstr ""
 
 #: ../admin/mail_properties.php:47
@@ -3754,14 +3692,6 @@ msgstr ""
 
 #: ../admin/mail_properties.php:110
 msgid "Unavaible, you need to set a password before"
-msgstr ""
-
-#: ../admin/mail_redirection_edit.inc.php:58
-msgid "Clear all redirections"
-msgstr ""
-
-#: ../admin/mail_redirection_edit.inc.php:77
-msgid "Are you sure you want to clear all redirections?"
 msgstr ""
 
 #: ../admin/main.php:33

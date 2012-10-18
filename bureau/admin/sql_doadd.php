@@ -34,7 +34,7 @@ $fields = array (
 );
 getFields($fields);
 if (!$quota->cancreate("mysql")) {
-  $error=_("You ");
+  $error=_("Can't create a database: your quota is over");
   include("sql_list.php");
   exit;
 }

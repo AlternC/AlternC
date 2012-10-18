@@ -80,7 +80,7 @@ if(isset($r['user'])){
 </table>
 <?php
 if(!isset($r['user'])){
-	echo "<p class=\"error\">";__("You changed the MySQL User base configuration. Please reffer to your configuration");echo"</p><p>&nbsp;</p>";
+	echo "<p class=\"error\">";__("You changed the MySQL User base configuration. Please refer to your configuration");echo"</p><p>&nbsp;</p>";
 }
 ?>
 <p><span class="ina"><a href="sql_list.php"><?php __("Back to the MySQL database list"); ?></a></span></p>

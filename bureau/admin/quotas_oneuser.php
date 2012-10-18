@@ -45,7 +45,7 @@ if (!isset($mode)) { # when included from adm_login, mode is not set
     $totalmail+=$mstmp;
   }
 
-  echo "<p>"._("Mail boxes:")." ";
+  echo "<p>"._("Mailboxes size:")." ";
   echo sprintf("%.1f", $totalmail / 1024)."&nbsp;"._("MB");
   echo "</p>";
 

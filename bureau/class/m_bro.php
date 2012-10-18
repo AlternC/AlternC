@@ -458,7 +458,7 @@ class m_bro {
       return false;
     }
     if ($old==$new) {
-      $err->raise("bro",_("You cannot move or copy a file to the same folder."));
+      $err->raise("bro",_("You cannot move or copy a file to the same folder"));
       return false;
     }
     for ($i=0;$i<count($d);$i++) {

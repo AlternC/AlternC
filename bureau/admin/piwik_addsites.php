@@ -39,11 +39,11 @@ getFields($fields);
 if(empty($site_name)) $site_name=$site_urls;
 
 if (empty($site_name)) {
-  $error=("Error : missing arguments.");
+  $error=("Error: missing arguments.");
 } elseif (! $piwik->site_add($site_name, $site_urls) ) {
-  $error=_("Error during adding website.<br/>".$err->errstr());
+  $error=_("Error while adding website.<br/>".$err->errstr());
 } else {
-  $error=_("Successfully add website");
+  $error=_("Website added Successfully");
 }
 include_once("piwik_sitelist.php");
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: alternc\n"
 "Report-Msgid-Bugs-To: i18n@alternc.org\n"
-"POT-Creation-Date: 2012-10-17 10:09+0200\n"
+"POT-Creation-Date: 2012-10-17 11:45+0200\n"
 "PO-Revision-Date: 2004-02-14 19:53-0400\n"
 "Last-Translator: Bruno Marmier <bruno@marmier.net>\n"
 "Language-Team: Espagnol <i18n@alternc.org>\n"
@@ -153,8 +153,8 @@ msgstr ""
 #: ../admin/adm_add.php:71 ../admin/adm_edit.php:89 ../admin/ftp_add.php:77
 #: ../admin/ftp_edit.php:70 ../admin/hta_adduser.php:62
 #: ../admin/hta_edit.php:110 ../admin/hta_edituser.php:55
-#: ../admin/mail_edit.inc.php:67 ../admin/mail_edit.php:96
-#: ../admin/sql_users_add.php:67 ../admin/sql_users_password.php:59
+#: ../admin/mail_edit.php:96 ../admin/sql_users_add.php:67
+#: ../admin/sql_users_password.php:59
 msgid "Confirm password"
 msgstr ""
 
@@ -171,8 +171,7 @@ msgstr ""
 #: ../admin/bro_main.php:104 ../admin/dom_dodel.php:74
 #: ../admin/dom_edit.php:193 ../admin/dom_edit.php:205
 #: ../admin/dom_subdel.php:80 ../admin/mail_edit.php:90
-#: ../admin/mail_list.php:143 ../admin/mail_localbox_edit.inc.php:57
-#: ../admin/sql_bck.php:87 ../admin/sql_del.php:90
+#: ../admin/mail_list.php:143 ../admin/sql_bck.php:87 ../admin/sql_del.php:90
 #: ../admin/sql_users_del.php:76 ../admin/trash_dateselect.php:39
 #: ../class/m_bro.php:70
 msgid "No"
@@ -189,8 +188,7 @@ msgstr "Nein"
 #: ../admin/dom_subdel.php:79 ../admin/mail_edit.php:91
 #: ../admin/mail_list.php:176 ../admin/mail_list.php:209
 #: ../admin/mail_list.php:219 ../admin/mail_list.php:229
-#: ../admin/mail_list.php:239 ../admin/mail_localbox_edit.inc.php:58
-#: ../admin/sql_bck.php:88 ../admin/sql_del.php:90
+#: ../admin/mail_list.php:239 ../admin/sql_bck.php:88 ../admin/sql_del.php:90
 #: ../admin/sql_users_del.php:76 ../admin/trash_dateselect.php:40
 #: ../class/m_bro.php:70
 msgid "Yes"
@@ -235,9 +233,7 @@ msgstr ""
 #: ../admin/browseforfolder.php:146 ../admin/ftp_add.php:80
 #: ../admin/ftp_del.php:83 ../admin/ftp_edit.php:74
 #: ../admin/hta_adduser.php:68 ../admin/hta_dodeluser.php:65
-#: ../admin/mail_edit.inc.php:80 ../admin/mail_edit.php:115
-#: ../admin/mail_localbox_edit.inc.php:68
-#: ../admin/mail_redirection_edit.inc.php:65 ../admin/piwik_user_dodel.php:64
+#: ../admin/mail_edit.php:115 ../admin/piwik_user_dodel.php:64
 #: ../admin/sql_bck.php:105 ../admin/sql_users_add.php:73
 #: ../admin/sql_users_password.php:65 ../admin/sql_users_rights.php:101
 msgid "Cancel"
@@ -311,9 +307,8 @@ msgstr ""
 #: ../admin/adm_slaveip.php:87 ../admin/bro_main.php:278 ../admin/cron.php:54
 #: ../admin/dom_edit.php:117 ../admin/ftp_del.php:82
 #: ../admin/hta_dodeluser.php:64 ../admin/ip_main.php:74
-#: ../admin/ip_main.php:157 ../admin/mail_redirection_edit.inc.php:52
-#: ../admin/piwik_sitelist.php:74 ../admin/piwik_user_dodel.php:63
-#: ../admin/piwik_userlist.php:87
+#: ../admin/ip_main.php:157 ../admin/piwik_sitelist.php:74
+#: ../admin/piwik_user_dodel.php:63 ../admin/piwik_userlist.php:87
 msgid "Delete"
 msgstr ""
 
@@ -575,7 +570,6 @@ msgid "OK?"
 msgstr ""
 
 #: ../admin/adm_doms.php:69 ../admin/dom_edit.php:99
-#: ../admin/mail_edit.inc.php:37
 msgid "Status"
 msgstr ""
 
@@ -786,7 +780,6 @@ msgstr ""
 #: ../admin/adm_slaveaccount.php:100 ../admin/cron.php:39
 #: ../admin/ftp_add.php:76 ../admin/ftp_edit.php:69
 #: ../admin/hta_adduser.php:58 ../admin/hta_edit.php:106 ../admin/index.php:77
-#: ../admin/mail_edit.inc.php:45 ../admin/mail_edit.inc.php:63
 #: ../admin/sql_getparam.php:71 ../admin/sql_users_add.php:63
 #: ../admin/sql_users_list.php:48 ../admin/sql_users_password.php:55
 msgid "Password"
@@ -938,7 +931,6 @@ msgid "Expiry"
 msgstr ""
 
 #: ../admin/adm_list.php:176 ../admin/dom_edit.php:136
-#: ../admin/mail_edit.inc.php:41
 msgid "Disable"
 msgstr ""
 
@@ -1844,7 +1836,7 @@ msgstr ""
 msgid "Disabled"
 msgstr ""
 
-#: ../admin/dom_edit.php:143 ../admin/mail_edit.inc.php:42
+#: ../admin/dom_edit.php:143
 msgid "Enable"
 msgstr ""
 
@@ -2182,15 +2174,6 @@ msgstr ""
 msgid "Add %s mail to the domain %s"
 msgstr ""
 
-#: ../admin/mail_alias_create.inc.php:52
-msgid "Create this alias"
-msgstr ""
-
-#: ../admin/mail_alias_doedit.php:45
-#, php-format
-msgid "Alias: %s already created"
-msgstr ""
-
 #: ../admin/mail_del.php:54
 msgid "Deleting mail accounts"
 msgstr ""
@@ -2216,41 +2199,6 @@ msgstr ""
 #: ../admin/mail_doedit.php:120
 msgid "Your email has been edited successfully"
 msgstr ""
-
-#: ../admin/mail_edit.inc.php:39
-msgid ""
-"Is this mail enabled ?<br/><i>Having a mail disabled forbid consultation or "
-"reception, but do not remove the mailbox or his configuration.</i>"
-msgstr ""
-
-#: ../admin/mail_edit.inc.php:47
-msgid ""
-"You need to have a password for some application (example: local mailbox);"
-msgstr ""
-
-#: ../admin/mail_edit.inc.php:52
-msgid "Set a passowrd:"
-msgstr ""
-
-#: ../admin/mail_edit.inc.php:55
-msgid "Change your password:"
-msgstr ""
-
-#: ../admin/mail_edit.inc.php:79 ../admin/mail_edit.php:114
-#: ../admin/mail_localbox_edit.inc.php:67
-#: ../admin/mail_redirection_edit.inc.php:64
-msgid "Change this email address"
-msgstr ""
-
-#: ../admin/mail_edit.inc.php:95
-#, fuzzy
-msgid "Password does not match"
-msgstr "Miglied '%s' existiert nicht"
-
-#: ../admin/mail_edit.inc.php:99
-#, fuzzy
-msgid "Password match"
-msgstr "Passwört"
 
 #: ../admin/mail_edit.php:53
 #, php-format
@@ -2336,6 +2284,10 @@ msgstr ""
 
 #: ../admin/mail_edit.php:106
 msgid "one recipient per line"
+msgstr ""
+
+#: ../admin/mail_edit.php:114
+msgid "Change this email address"
 msgstr ""
 
 #: ../admin/mail_list.php:65
@@ -2511,31 +2463,9 @@ msgstr ""
 msgid "POP3S"
 msgstr ""
 
-#: ../admin/mail_localbox_doedit.php:53
-msgid "Already Activated"
-msgstr ""
-
-#: ../admin/mail_localbox_doedit.php:62
-msgid "Already disactivated"
-msgstr ""
-
-#: ../admin/mail_localbox_edit.inc.php:42 ../admin/mail_properties.php:43
+#: ../admin/mail_properties.php:43
 #, php-format
 msgid "Edition of <b>%s</b>"
-msgstr ""
-
-#: ../admin/mail_localbox_edit.inc.php:50
-msgid ""
-"WARNING: turning POP/IMAP off will DELETE the stored messages in this email "
-"address. This email address will become a simple redirection."
-msgstr ""
-
-#: ../admin/mail_localbox_edit.inc.php:52
-msgid ""
-"Activate the localbox, will allow you to store your mails on this server. \n"
-" It is a very conveniant way to check your mails while roaming,\n"
-"\t\tthince they can be accesed remotely by POP or IMAP. It consume space on "
-"the server so be sure to verify your quota attribution."
 msgstr ""
 
 #: ../admin/mail_properties.php:47
@@ -2548,14 +2478,6 @@ msgstr ""
 
 #: ../admin/mail_properties.php:110
 msgid "Unavaible, you need to set a password before"
-msgstr ""
-
-#: ../admin/mail_redirection_edit.inc.php:58
-msgid "Clear all redirections"
-msgstr ""
-
-#: ../admin/mail_redirection_edit.inc.php:77
-msgid "Are you sure you want to clear all redirections?"
 msgstr ""
 
 #: ../admin/main.php:33
@@ -4101,6 +4023,14 @@ msgstr ""
 #: ../class/mime.php:172 ../class/mime.php:173 ../class/mime.php:174
 msgid "Real Media File"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Password does not match"
+#~ msgstr "Miglied '%s' existiert nicht"
+
+#, fuzzy
+#~ msgid "Password match"
+#~ msgstr "Passwört"
 
 #, fuzzy
 #~ msgid "Password do not match"
