@@ -339,7 +339,7 @@ class m_bro {
     #echo "$absolute";
     if ($absolute && (!file_exists($absolute))) {
       if (!mkdir($absolute,00777,true)) {
-	$err->raise("bro",_("Cannot create the requested directory. Please check permissions."));
+	$err->raise("bro",_("Cannot create the requested directory. Please check the permissions"));
 	return false;
       }
       $db->query("UPDATE browser SET crff=1 WHERE uid='$cuid';");
@@ -367,7 +367,7 @@ class m_bro {
     }
     if (!file_exists($absolute)) {
       if (!@touch($absolute)) {
-	$err->raise("bro",_("Cannot create the requested file. Please check permissions."));
+	$err->raise("bro",_("Cannot create the requested file. Please check the permissions"));
 	return false;
       }
     }
@@ -533,7 +533,7 @@ class m_bro {
 	  exec("sudo /usr/lib/alternc/fixperms.sh -u ".$cuid." -f '".$absolute."/".$_FILES['userfile']['name']."'");
 	  return $absolute."/".$_FILES['userfile']['name'];
 	} else {
-	  $err->raise("bro",("Cannot create the requested file. Please check permissions."));
+	  $err->raise("bro",("Cannot create the requested file. Please check the permissions"));
 	  return false;
 	}
       } else {
@@ -584,7 +584,7 @@ class m_bro {
       exec($cmd, $void, $ret);
     }
     if ($ret) {
-      $err->raise("bro",_("I can't find a way to extract the file %s, is it an unsupported compressed format?"), $file);
+      $err->raise("bro",_("I cannot find a way to extract the file %s, it is an unsupported compressed format"), $file);
     }
     // fix the perms of the extracted archive TODO: does it work???
     exec("sudo /usr/lib/alternc/fixperms.sh -u ".$cuid." -d ".$dest_to_fix);
@@ -688,7 +688,7 @@ class m_bro {
       if (file_exists($absolute)) {
 	$std=str_replace("<","&lt;",str_replace("&","&amp;",file_get_contents($absolute)));
       } else {
-	$err->raise("bro",_("Cannot read the requested file. Please check permissions."));
+	$err->raise("bro",_("Cannot read the requested file. Please check the permissions"));
 	return false;
       }
     } else {
@@ -856,7 +856,7 @@ class m_bro {
 	  fputs($f,$texte,strlen($texte));
 	  fclose($f);
 	} else {
-	  $err->raise("bro",("Cannot edit the requested file. Please check permissions."));
+	  $err->raise("bro",("Cannot edit the requested file. Please check the permissions"));
 	  return false;
 	}
       }
@@ -1001,7 +1001,7 @@ class m_bro {
     $dir.="html/";
     if(!is_dir($dir)){ 
       if(!mkdir($dir))
-	$err->raise("bro",_("Cannot create the requested directory. Please check permissions."));
+	$err->raise("bro",_("Cannot create the requested directory. Please check the permissions"));
     }
     $timestamp=date("H:i:s");
 

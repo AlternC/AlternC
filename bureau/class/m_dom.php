@@ -165,7 +165,7 @@ class m_dom {
     $id=intval($id);
     // The name MUST contain only letter and digits, it's an identifier after all ...
     if (!preg_match("#^[a-z0-9]+$#",$name)) {
-      $err->raise("dom", _("The name MUST contain only letter and digits."));
+      $err->raise("dom", _("The name MUST contain only letter and digits"));
       return false;
     }
     $name=mysql_real_escape_string($name);    $description=mysql_real_escape_string($description);    $target=mysql_real_escape_string($target);
@@ -312,27 +312,27 @@ class m_dom {
     }
     $db->query("SELECT compte FROM domaines WHERE domaine='$domain';");
     if ($db->num_rows()) {
-      $err->raise("dom",_("The domain already exist."));
+      $err->raise("dom",_("The domain already exist"));
       return false;
     }
     $db->query("SELECT compte FROM `sub_domaines` WHERE sub != \"\" AND concat( sub, \".\", domaine )='$domain' OR domaine='$domain';");
     if ($db->num_rows()) {
-      $err->raise("dom",_("The domain already exist."));
+      $err->raise("dom",_("The domain already exist"));
       return false;
     }
     $this->dns=$this->whois($domain);
     if (!$force) {
       $v=checkhostallow($domain,$this->dns);
       if ($v==-1) {
-        $err->raise("dom",_("The last member of the domain name is incorrect or cannot be hosted in that server."));   
+        $err->raise("dom",_("The last member of the domain name is incorrect or cannot be hosted in that server"));
         return false;
       }
       if ($dns && $v==-2) {
-        $err->raise("dom",_("The domain cannot be found in the whois database.")); 
+        $err->raise("dom",_("The domain cannot be found in the whois database")); 
         return false;
       }
       if ($dns && $v==-3) {
-        $err->raise("dom",_("The domain cannot be found in the whois database."));
+        $err->raise("dom",_("The domain cannot be found in the whois database"));
         return false;
       }
 
@@ -351,7 +351,7 @@ class m_dom {
     }
     // Check the quota :
     if (!$quota->cancreate("dom")) {
-      $err->raise("dom",_("Your domain quota is over, you cannot create more domain names."));
+      $err->raise("dom",_("Your domain quota is over, you cannot create more domain names"));
       return false;
     }
     if ($noerase) $noerase="1"; else $noerase="0";
@@ -366,7 +366,7 @@ class m_dom {
       $db->query("SELECT domaine FROM domaines WHERE compte='$cuid' AND domaine='$slavedom';");
       $db->next_record();
       if (!$db->Record["domaine"]) {
-        $err->raise("dom",_("Domain '%s' not found."),$slavedom);
+        $err->raise("dom",_("Domain '%s' not found"),$slavedom);
         $isslave=false;
       }
       // Point to the master domain : 
@@ -628,14 +628,14 @@ class m_dom {
       } // while
       fclose($fp);
     } else {
-      $err->raise("dom",_("The Whois database is unavailable, please try again later."));
+      $err->raise("dom",_("The Whois database is unavailable, please try again later"));
       return false;
     }
 
     if ($found) {
       return $server;
     } else {
-      $err->raise("dom",_("The domain cannot be found in the whois database."));
+      $err->raise("dom",_("The domain cannot be found in the Whois database"));
       return false;
     }
   } // whois
@@ -717,7 +717,7 @@ class m_dom {
     $r["name"]=$dom;
     $db->query("SELECT * FROM domaines WHERE compte='$cuid' AND domaine='$dom'");
     if ($db->num_rows()==0) {
-      $err->raise("dom",1,_("Domain '%s' not found."),$dom);
+      $err->raise("dom",1,_("Domain '%s' not found"),$dom);
       return false;
     }
     $db->next_record();
@@ -779,7 +779,7 @@ class m_dom {
     }
     $db->query("select sd.*, dt.description as type_desc, dt.only_dns from sub_domaines sd, domaines_type dt where compte='$cuid' and domaine='$dom' and sub='$sub' and ( length('$type')=0 or type='$type') and (length('$value')=0 or '$value'=valeur) and upper(dt.name)=upper(sd.type);");
     if ($db->num_rows()==0) {
-      $err->raise("dom",_("The sub-domain does not exist."));
+      $err->raise("dom",_("The sub-domain does not exist"));
       return false;
     }
     $db->next_record();
@@ -811,7 +811,7 @@ class m_dom {
           $value="/".$value;
         }
         if (!checkuserpath($value)) {
-          $err->raise("dom",_("The folder you entered is incorrect or does not exist."));
+          $err->raise("dom",_("The folder you entered is incorrect or does not exist"));
           return false;
         }
         return true;
@@ -899,12 +899,12 @@ class m_dom {
     $fqdn=checkfqdn($sub);
     // Special cases : * (all subdomains at once) and '' empty subdomain are allowed.
     if (($sub != '*' && $sub!='') && !($fqdn==0 || $fqdn==4)) {
-      $err->raise("dom",_("There is some forbidden characters in the sub domain (only A-Z 0-9 and - are allowed)."));
+      $err->raise("dom",_("There is some forbidden characters in the sub domain (only A-Z 0-9 and - are allowed)"));
       return false;
     }
 
     if (! $this->check_type_value($type,$dest)) {
-      $err->raise("dom",_("Invalid domain type selected, please check."));
+      $err->raise("dom",_("Invalid domain type selected, please check"));
       return false;
     }
 
@@ -937,7 +937,7 @@ class m_dom {
     if ($db->f('create_tmpdir')) {
       if (! is_dir($dest_root . "/tmp")) {
 	if(!mkdir($dest_root . "/tmp")){
-	  $err->raise("dom",_("I can't write to the destination folder"));
+	  $err->raise("dom",_("Cannot write to the destination folder"));
 	}
       }
     }
@@ -946,7 +946,7 @@ class m_dom {
       if (! is_dir($dirr)) {
       $old = umask(0);
 	if(!mkdir($dirr,0770,true)){
-	  $err->raise("dom",_("I can't write to the destination folder"));
+	  $err->raise("dom",_("Cannot write to the destination folder"));
         }
         umask($old);
       }
@@ -982,7 +982,7 @@ class m_dom {
       return false;
     }
     if (!$r=$this->get_sub_domain_all($dom,$sub,$type)) {
-      $err->raise("dom",_("The sub-domain does not exist."));
+      $err->raise("dom",_("The sub-domain does not exist"));
       return false;
     } else {
       $db->query("update sub_domaines set web_action='DELETE' where domaine='$dom' and sub='$sub' and type='$type' and ( length('$value')=0 or valeur='$value') ");
@@ -1017,15 +1017,15 @@ class m_dom {
       $this->dns=$this->whois($dom);
       $v=checkhostallow($dom,$this->dns);
       if ($v==-1) {
-        $err->raise("dom",_("The last member of the domain name is incorrect or cannot be hosted in that server."));
+        $err->raise("dom",_("The last member of the domain name is incorrect or cannot be hosted in that server"));
         return false;
       }
       if ($dns && $v==-2) {
-        $err->raise("dom",_("The domain cannot be found in the whois database."));
+        $err->raise("dom",_("The domain cannot be found in the Whois database"));
         return false;
       }
       if ($dns && $v==-3) {
-        $err->raise("dom",_("The DNS of this domain do not match the server's DNS. Please change your domain's DNS (you may need to wait 1 day) before you install it again.")); 
+        $err->raise("dom",_("The DNS of this domain do not match the server's DNS. Please change your domain's DNS before you install it again")); 
         return false;
       }
     }
@@ -1050,13 +1050,13 @@ class m_dom {
     if ($dns=="0" && $gesmx=="1" && !$force) {
       $vmx = $this->checkmx($dom,$mx);
       if ($vmx == 1) {
-	$err->raise("dom",_("There is no MX record pointing to this server, and you are asking us to host the mail here. Please fix your MX DNS pointer."));
+	$err->raise("dom",_("There is no MX record pointing to this server, and you are asking us to host the mail here. Please fix your MX DNS pointer"));
 	return false;
       }
       
       if ($vmx == 2) {
         // Serveur non spécifié parmi les champx mx
-	$err->raise("dom",_("There is no MX record pointing to this server, and you are asking us to host the mail here. Please fix your MX DNS pointer."));
+	$err->raise("dom",_("There is no MX record pointing to this server, and you are asking us to host the mail here. Please fix your MX DNS pointer"));
 	return false;
       }
     }
@@ -1110,7 +1110,7 @@ class m_dom {
   function add_slave_ip($ip,$class="32") {
   global $db,$err;
   if (!checkip($ip)) { // FIXME: replace by filter_var (same for checkfqdn ?
-    $err->raise("dom",_("The IP address you entered is incorrect."));
+    $err->raise("dom",_("The IP address you entered is incorrect"));
     return false;
   }
   $class=intval($class);
@@ -1134,7 +1134,7 @@ class m_dom {
   function del_slave_ip($ip) {
   global $db,$err;
   if (!checkip($ip)) {
-    $err->raise("dom",_("The IP address you entered is incorrect."));
+    $err->raise("dom",_("The IP address you entered is incorrect"));
     return false;
   }
   $db->query("DELETE FROM slaveip WHERE ip='$ip'");

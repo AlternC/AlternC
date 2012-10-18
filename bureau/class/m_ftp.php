@@ -92,7 +92,7 @@ class m_ftp {
       }
       return $r;
     } else {
-      $err->raise("ftp",_("No ftp account found"));
+      $err->raise("ftp",_("No FTP account found"));
       return false;
     }
   }
@@ -125,7 +125,7 @@ class m_ftp {
 		   );
 	return $r;
     } else {
-      $err->raise("ftp",_("This ftp account does not exist"));
+      $err->raise("ftp",_("This FTP account does not exist"));
       return false;
     }
   }
@@ -178,7 +178,7 @@ class m_ftp {
     $db->query("SELECT count(*) AS cnt FROM ftpusers WHERE id='$id' and uid='$cuid';");
     $db->next_record();
     if (!$db->f("cnt")) {
-      $err->raise("ftp",_("This ftp account does not exist"));
+      $err->raise("ftp",_("This FTP account does not exist"));
       return false;
     }
     $dir=$bro->convertabsolute($dir);
@@ -196,7 +196,7 @@ class m_ftp {
     $db->query("SELECT COUNT(*) AS cnt FROM ftpusers WHERE id!='$id' AND name='$prefixe$login';");
     $db->next_record();
     if ($db->f("cnt")) {
-      $err->raise("ftp",_("This ftp account already exists"));
+      $err->raise("ftp",_("This FTP account already exists"));
       return false;
     }
     $absolute=getuserpath()."/$dir";
@@ -204,7 +204,7 @@ class m_ftp {
       system("/bin/mkdir -p $absolute");
     }
     if (!is_dir($absolute)) {
-      $err->raise("ftp",_("The directory cannot be created."));
+      $err->raise("ftp",_("The directory cannot be created"));
       return false;
     }
     if (trim($pass)) {
@@ -236,7 +236,7 @@ class m_ftp {
     $db->next_record();
     $name=$db->f("name");
     if (!$name) {
-      $err->raise("ftp",_("This ftp account does not exist"));
+      $err->raise("ftp",_("This FTP account does not exist"));
       return false;
     }
     $db->query("DELETE FROM ftpusers WHERE id='$id'");
@@ -268,7 +268,7 @@ class m_ftp {
     $db->query("SELECT count(*) AS cnt FROM ftpusers WHERE name='".$prefixe.$login."'");
     $db->next_record();
     if ($db->f("cnt")) {
-      $err->raise("ftp",_("This ftp account already exists"));
+      $err->raise("ftp",_("This FTP account already exists"));
       return false;
     }
     $db->query("SELECT login FROM membres WHERE uid='$cuid';");
@@ -280,7 +280,7 @@ class m_ftp {
       system("/bin/mkdir -p $absolute");
     }
     if (!is_dir($absolute)) {
-      $err->raise("ftp",_("The directory cannot be created."));
+      $err->raise("ftp",_("The directory cannot be created"));
       return false;
     }
 
@@ -296,7 +296,7 @@ class m_ftp {
       $db->query("INSERT INTO ftpusers (name,password, encrypted_password,homedir,uid) VALUES ('".$prefixe.$login."', '', '$encrypted_password', '$absolute', '$cuid')");
       return true;
     } else {
-      $err->raise("ftp",_("Your ftp account quota is over. You cannot create more ftp accounts."));
+      $err->raise("ftp",_("Your FTP account quota is over. You cannot create more ftp accounts"));
       return false;
     }
   }

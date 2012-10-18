@@ -277,10 +277,6 @@ class m_piwik {
 	foreach ($arguments AS $k=>$v)
 	  $url .= sprintf('&%s=%s', urlencode($k), $v); //  urlencode($v));
 
-	// We are supposed to chose what's enabled on our php instance :-)
-	// if (! ini_get('allow_url_fopen')==True) {
-      	//	$err->raise("piwik",_("Program Error: PHP ini var 'allow_url_fopen' is not allowed"));
-	//}
 	echo $url;
 	$page_content = file_get_contents($url);
 	if ($page_content === FALSE) {

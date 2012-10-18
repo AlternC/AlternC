@@ -171,7 +171,7 @@ class m_mail {
          FROM (address a LEFT JOIN mailbox m ON m.address_id=a.id) LEFT JOIN recipient r ON r.address_id=a.id, domaines d 
          WHERE $where AND d.id=a.domain_id AND a.type='' $limit ;");
     if (! $db->next_record()) {
-      $err->raise("mail",_("No mail found for this query"));
+      $err->raise("mail",_("No email found for this query"));
       return false;
     }
     $res=array();
@@ -226,7 +226,7 @@ class m_mail {
 
     // Check the quota:
     if (!$quota->cancreate("mail")) {
-      $err->raise("mail",_("You cannot create email addresses: your quota is over."));
+      $err->raise("mail",_("You cannot create email addresses: your quota is over"));
       return false;
     }
     // Already exists?
@@ -345,11 +345,6 @@ class m_mail {
       $err->raise("mail",_("The email %s does not exist, it can't be deleted"),$mail);
       return false;
     }
-    #This function is now used to delete mailman specific addres via the del_wrapper function so i'm commenting this part. Don't know if that's the right way tough..
-    /*if ($db->f("type")!="") { // Technically special : mailman, sympa ... 
-      $err->raise("mail",_("The email %s is special, it can't be deleted"),$mail);
-      return false;
-    }*/
     if ($db->f("mail_action")!="OK" || ($db->f("islocal") && $db->f("mailbox_action")!="OK")) { // will be deleted soon ...
       $err->raise("mail",_("The email %s is already marked for deletion, it can't be deleted"),$mail);
       return false;
@@ -499,7 +494,7 @@ class m_mail {
       }
       foreach($this->forbiddenchars as $str) {
 	    if (strpos($me["address"],$str)!==false) {
-	      $err->raise("mail",_("There is forbidden characters in your mail name. You can't make it a POP/IMAP account, you can only use it as redirections to other emails."));
+	      $err->raise("mail",_("There is forbidden characters in your email address. You can't make it a POP/IMAP account, you can only use it as redirection to other emails"));
           return false;
           break;
         }
@@ -519,7 +514,7 @@ class m_mail {
     if ($islocal) {
       if ($quotamb!=0 && $quotamb<(intval($me["used"]/1024/1024)+1)) {
 	$quotamb=intval($me["used"]/1024/1024)+1;
-	$err->raise("mail",_("You set a quota smaller than the current mailbox size. Since it's not allowed, we set the quota to the current mailbox size."));
+	$err->raise("mail",_("You set a quota smaller than the current mailbox size. Since it's not allowed, we set the quota to the current mailbox size"));
       }
       $db->query("UPDATE mailbox SET quota=".intval($quotamb)." WHERE address_id=".$mail_id.";");
     }
@@ -675,7 +670,7 @@ class m_mail {
     $pass=mysql_escape_string($pass);
     $db->query("SELECT * FROM mxaccount WHERE login='$login'");
     if ($db->next_record()) {
-      $err->raise("mail",_("The MX account was not found."));
+      $err->raise("mail",_("The slave MX account was not found"));
       return false;
     }
     $db->query("INSERT INTO mxaccount (login,pass) VALUES ('$login','$pass')");

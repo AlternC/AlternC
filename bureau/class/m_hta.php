@@ -193,11 +193,11 @@ class m_hta {
       return false;
     }
     if (!@unlink("$dir/.htaccess")) {
-      $err->raise("hta",printf(_("I cannot delete the file '%s'/.htaccess"),$dir));
+      $err->raise("hta",printf(_("I cannot delete the file '%s/.htaccess'"),$dir));
       return false;
     }
     if (!@unlink("$dir/.htpasswd")) {
-      $err->raise("hta",printf(_("I cannot delete the file '%s'/.htpasswd"),$dir));
+      $err->raise("hta",printf(_("I cannot delete the file '%s/.htpasswd'"),$dir));
       return false;
     }
     return true;
@@ -378,8 +378,8 @@ class m_hta {
       } //authtype
     } // Reading config file
     fclose($file);
-    if ($errr ||  in_array(0,$lignes)) {
-      $err->raise("hta",_("An incompatible .htaccess file exists in this folder."));
+    if ($errr || in_array(0,$lignes)) {
+      $err->raise("hta",_("An incompatible .htaccess file exists in this folder"));
       return false;
     }
     return true;

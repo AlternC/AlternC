@@ -129,7 +129,7 @@ class m_cron {
     if (is_null($id)) { // if a new insert, quotacheck
       $q = $quota->getquota("cron");
       if ( $q["u"] >= $q["t"] ) {
-        $err->raise("cron",_("You seems to be over-quota."));
+        $err->raise("cron",_("You quota of cron entries is over. You cannot create more cron entries"));
         return false;
       }
     } else { // if not a new insert, check the $cuid

@@ -216,22 +216,22 @@ class m_admin {
     $from=trim($from);
 
     if (empty($subject) || empty($message) || empty($from) ){
-      $err->raise("admin",_("The password is too long according to the password policy"));
+      $err->raise("admin",_("Subject, message and sender are mandatory"));
       return false;
     }
 
     if (checkmail($from) != 0) {
-      $err->raise("admin",_("The password policy prevents you to use your login name inside your password"));
+      $err->raise("admin",_("Sender is syntaxically incorrect"));
       return false;
     }
 
     @set_time_limit(1200);
-    $db->query("select distinct mail from membres;");
+    $db->query("SELECT DISTINCT mail FROM membres WHERE mail!='';");
     while ($db->next_record()) {
       // Can't do BCC due to postfix limitation
+      // FIXME: use phpmailer, far better for mass-mailing than sendmail (reply-to issue among others)
       mail($db->f('mail'), $subject, $message, null, "-f$from");
     }
-
     return true;
   }
 
@@ -254,7 +254,7 @@ class m_admin {
     }
 
     $db=new DB_System();
-    $db->query("SELECT distinct creator FROM membres WHERE creator <> 0 ORDER BY creator asc;");
+    $db->query("SELECT DISTINCT creator FROM membres WHERE creator <> 0 ORDER BY creator ASC;");
     if ($db->num_rows()) {
       while ($db->next_record()) {
         $creators[] = $this->get_creator($db->f("creator"));

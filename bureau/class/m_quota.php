@@ -182,7 +182,7 @@ class m_quota {
       // Now we check that the value has been written properly : 
       exec("/usr/lib/alternc/quota_get $cuid &> /dev/null &",$a);
       if ($size!=$a[1]) {
-	$err->raise("quota",_("Error writing the quota entry !"));
+	$err->raise("quota",_("Error writing the quota entry!"));
 	return false;
       }
     }
