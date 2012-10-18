@@ -28,3 +28,6 @@ chown root:bind "$TARGET"
 chmod 640 "$TARGET"
 
 invoke-rc.d bind9 reload
+
+# Remove FLAGSLAVE file
+rm -f "$FLAGFILE"
