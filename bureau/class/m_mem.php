@@ -357,7 +357,7 @@ class m_mem {
       return false;
     }
     if ($newpass!=$newpass2) {
-      $err->raise("mem",_("The new passwords are differents, please retry."));
+      $err->raise("mem",_("The new passwords are differents, please retry"));
       return false;
     }
     $db->query("SELECT login FROM membres WHERE uid='$cuid';");   
