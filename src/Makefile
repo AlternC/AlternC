@@ -20,7 +20,7 @@
 # Purpose of file: Makefile des binaires de /usr/lib/alternc
 # ----------------------------------------------------------------------
 SETUID=quota_edit quota_get mem_add mem_del du.pl
-SCRIPTS=sqlbackup.sh quota_init quota_delete update_domains.sh slave_dns sendmail spoolsize.php fixperms.sh alternc-dboptimize export_account.php cron_users_doit.sh cron_users.sh compress_logs.sh delete_logs.sh quota-warning.sh update_mails.sh alternc_add_policy_dovecot rebuild_all_webconf.sh courier-dovecot-migrate.pl
+SCRIPTS=sqlbackup.sh quota_init quota_delete update_domains.sh slave_dns sendmail spoolsize.php fixperms.sh alternc-dboptimize export_account.php cron_users_doit.sh cron_users.sh compress_logs.sh delete_logs.sh quota-warning.sh update_mails.sh alternc_add_policy_dovecot rebuild_all_webconf.sh courier-dovecot-migrate.pl popimap-log-login.sh
 LIBS=functions.sh functions_hosting.sh functions_dns.sh
 BIN=$(DESTDIR)/usr/lib/alternc/
 
