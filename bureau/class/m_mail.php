@@ -65,6 +65,33 @@ class m_mail {
    */
   var $total;
 
+  
+  // Human server name for help
+  var $srv_submission;
+  var $srv_smtp;
+  var $srv_smtps;
+  var $srv_imap;
+  var $srv_imaps;
+  var $srv_pop3;
+  var $srv_pop3s;
+
+  /* ----------------------------------------------------------------- */
+  /** 
+   * Constructeur
+   */
+  function m_mail() {
+    global $L_FQDN;
+    $this->srv_submission = variable_get('mail_human_submission', $L_FQDN,'Human name for mail server (submission protocol)');
+    $this->srv_smtp       = variable_get('mail_human_smtp',       $L_FQDN,'Human name for mail server (SMTP protocol)');
+    $this->srv_smtps      = variable_get('mail_human_smtps',      $L_FQDN,'Human name for mail server (SMTPS protocol)');
+    $this->srv_imap       = variable_get('mail_human_imap',       $L_FQDN,'Human name for IMAP mail server');
+    $this->srv_imaps      = variable_get('mail_human_imaps',      $L_FQDN,'Human name for IMAPS mail server');
+    $this->srv_pop3       = variable_get('mail_human_pop3',       $L_FQDN,'Human name for POP3 mail server');
+    $this->srv_pop3s      = variable_get('mail_human_pop3s',      $L_FQDN,'Human name for POP3s mail server');
+  }
+
+  
+
   /* ----------------------------------------------------------------- */
   /** get_quota (hook for quota class), returns the number of used 
    * service for a quota-bound service

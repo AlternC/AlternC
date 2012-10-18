@@ -170,7 +170,7 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
     <ul>
       <li><b><a href="javascript:;" onClick="$('#cfg-submission').toggle();"><?php __("Submission");?></a></b>
         <ul id='cfg-submission'>
-          <li><b><?php __("Server name: ");?></b> FIXME</li>
+          <li><b><?php __("Server name: ");?></b> <?php __($mail->srv_submission); ?></li>
           <li><b><?php __("Username: ");?></b> <?php __("The mail address you want to access <i>(example : myuser@example.tld)</i>");?></li>
           <li><b><?php __("Port: ");?></b> 587</li>
           <li><b><?php __("Authentication: ");?></b><?php __("Yes")?></li>
@@ -180,7 +180,7 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
       </li>
       <li><b><a href="javascript:;" onClick="$('#cfg-smtp').toggle();"><?php __("SMTP");?></a></b>
         <ul id='cfg-smtp'>
-          <li><b><?php __("Server name: ");?></b> FIXME</li>
+          <li><b><?php __("Server name: ");?></b> <?php __($mail->srv_smtp); ?></li>
           <li><b><?php __("Username: ");?></b> <?php __("The mail address you want to access <i>(example : myuser@example.tld)</i>");?></li>
           <li><b><?php __("Port: ");?></b> 25</li>
           <li><b><?php __("Authentication: ");?></b><?php __("FIXME")?></li>
@@ -190,7 +190,7 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
       </li>
        <li><b><a href="javascript:;" onClick="$('#cfg-smtps').toggle();"><?php __("SMTPS");?></a></b>
         <ul id='cfg-smtps'>
-          <li><b><?php __("Server name: ");?></b> FIXME</li>
+          <li><b><?php __("Server name: ");?></b> <?php __($mail->srv_smtps); ?></li>
           <li><b><?php __("Username: ");?></b> <?php __("The mail address you want to access <i>(example : myuser@example.tld)</i>");?></li>
           <li><b><?php __("Port: ");?></b> 465</li>
           <li><b><?php __("Authentication: ");?></b><?php __("FIXME")?></li>
@@ -204,7 +204,7 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
     <ul>
       <li><b><a href="javascript:;" onClick="$('#cfg-imap').toggle();"><?php __("IMAP");?></a></b>
         <ul id='cfg-imap'>
-          <li><b><?php __("Server name: ");?></b> FIXME</li>
+          <li><b><?php __("Server name: ");?></b> <?php __($mail->srv_imap); ?></li>
           <li><b><?php __("Port: ");?></b> 143</li>
           <li><b><?php __("Authentication: ");?></b><?php __("Yes")?></li>
           <li><b><?php __("Authentication method: ");?></b><?php __("Normal password")?></li>
@@ -214,7 +214,7 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
 
       <li><b><a href="javascript:;" onClick="$('#cfg-imaps').toggle();"><?php __("IMAPS");?></a></b>
         <ul id='cfg-imaps'>
-          <li><b><?php __("Server name: ");?></b> FIXME</li>
+          <li><b><?php __("Server name: ");?></b> <?php __($mail->srv_imaps); ?></li>
           <li><b><?php __("Port: ");?></b> 993</li>
           <li><b><?php __("Authentication: ");?></b><?php __("Yes")?></li>
           <li><b><?php __("Authentication method: ")?></b><?php __("Normal password")?></li>
@@ -224,7 +224,7 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
 
       <li><b><a href="javascript:;" onClick="$('#cfg-pop3').toggle();"><?php __("POP3");?></a></b>
         <ul id='cfg-pop3'>
-          <li><b><?php __("Server name: ");?></b> FIXME</li>
+          <li><b><?php __("Server name: ");?></b> <?php __($mail->srv_pop3); ?></li>
           <li><b><?php __("Port: ");?></b> 110</li>
           <li><b><?php __("Authentication: ");?></b><?php __("Yes")?></li>
           <li><b><?php __("Authentication method: ");?></b><?php __("Normal password")?></li>
@@ -234,7 +234,7 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
 
       <li><b><a href="javascript:;" onClick="$('#cfg-pop3s').toggle();"><?php __("POP3S");?></a></b>
         <ul id='cfg-pop3s'>
-          <li><b><?php __("Server name: ");?></b> FIXME</li>
+          <li><b><?php __("Server name: ");?></b> <?php __($mail->srv_pop3s); ?></li>
           <li><b><?php __("Port: ");?></b> 995</li>
           <li><b><?php __("Authentication: ");?></b><?php __("Yes")?></li>
           <li><b><?php __("Authentication method: ");?></b><?php __("Normal password")?></li>
