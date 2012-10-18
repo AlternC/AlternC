@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: $Id: admin.po,v 1.2 2003/06/09 14:36:08 root Exp $\n"
 "Report-Msgid-Bugs-To: i18n@alternc.org\n"
-"POT-Creation-Date: 2012-10-17 11:45+0200\n"
+"POT-Creation-Date: 2012-10-18 11:24+0200\n"
 "PO-Revision-Date: 2007-10-25 23:50-0400\n"
 "Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
 "Language-Team: English <i18n@alternc.org>\n"
@@ -309,7 +309,7 @@ msgstr ""
 #: ../admin/adm_list.php:169 ../admin/adm_list.php:191
 #: ../admin/adm_passpolicy.php:152 ../admin/adm_tld.php:82
 #: ../admin/dom_edit.php:111 ../admin/ftp_list.php:82 ../admin/ip_main.php:156
-#: ../admin/mail_list.php:129 ../admin/mail_properties.php:122
+#: ../admin/mail_list.php:129
 msgid "Edit"
 msgstr "Editar"
 
@@ -1764,7 +1764,7 @@ msgstr ""
 
 #: ../admin/cron.php:77
 #, fuzzy
-msgid "Mail address (for reports)"
+msgid "Mail address (optionnal)"
 msgstr "Endereço email"
 
 #: ../admin/cron.php:84
@@ -1876,11 +1876,11 @@ msgstr "Editando o domínio %s"
 msgid "Create a subdomain:"
 msgstr "Adiçionar um secundário-domínio"
 
-#: ../admin/dom_edit.inc.php:63 ../admin/mail_properties.php:73
+#: ../admin/dom_edit.inc.php:63
 msgid "Show advanced options"
 msgstr ""
 
-#: ../admin/dom_edit.inc.php:64 ../admin/mail_properties.php:76
+#: ../admin/dom_edit.inc.php:64
 msgid "Hide advanced options"
 msgstr ""
 
@@ -2618,24 +2618,6 @@ msgstr ""
 msgid "POP3S"
 msgstr ""
 
-#: ../admin/mail_properties.php:43
-#, fuzzy, php-format
-msgid "Edition of <b>%s</b>"
-msgstr "Adiçionar a caixa de email em <b>%s</b>"
-
-#: ../admin/mail_properties.php:47
-#, fuzzy
-msgid "Select your action"
-msgstr "Suprimir uma conta FTP"
-
-#: ../admin/mail_properties.php:49
-msgid "Global options"
-msgstr ""
-
-#: ../admin/mail_properties.php:110
-msgid "Unavaible, you need to set a password before"
-msgstr ""
-
 #: ../admin/main.php:33
 msgid "Last Login: "
 msgstr "Último Login: "
@@ -2867,11 +2849,11 @@ msgid "Creation of Piwik account \"%s\""
 msgstr "Criar uma nova conta ftp"
 
 #: ../admin/piwik_addsites.php:44
-msgid "Error during adding website.<br/>"
+msgid "Error while adding website.<br/>"
 msgstr ""
 
 #: ../admin/piwik_addsites.php:46
-msgid "Successfully add website"
+msgid "Website added Successfully"
 msgstr ""
 
 #: ../admin/piwik_sitelist.php:42 ../admin/piwik_userlist.php:54
@@ -2953,7 +2935,7 @@ msgstr ""
 
 #: ../admin/quotas_oneuser.php:48
 #, fuzzy
-msgid "Mail boxes:"
+msgid "Mailboxes size:"
 msgstr "Caixas e email"
 
 #: ../admin/quotas_oneuser.php:104
@@ -3054,7 +3036,7 @@ msgstr ""
 #: ../admin/quotas_users.php:139 ../admin/sql_bck.php:48
 #: ../admin/sql_del.php:72 ../admin/sql_dorestore.php:44
 #: ../admin/sql_getparam.php:44 ../admin/sql_list.php:37
-#: ../admin/sql_restore.php:43 ../class/m_mysql.php:914
+#: ../admin/sql_restore.php:43 ../class/m_mysql.php:910
 #, fuzzy
 msgid "MySQL Databases"
 msgstr "Bases de dados MySQL"
@@ -3144,8 +3126,9 @@ msgid "This will delete all the tables currently in those db."
 msgstr "Isto suprimirá todas as tabelas atuais nestas bases de dados."
 
 #: ../admin/sql_doadd.php:37
-msgid "You "
-msgstr ""
+#, fuzzy
+msgid "Can't create a database: your quota is over"
+msgstr "Você não pode adiçionr mais domínios, sua quota acabou."
 
 #: ../admin/sql_dobck.php:48
 msgid "Your backup parameters has been successfully changed."
@@ -3184,7 +3167,7 @@ msgstr "Admin do SQL Geral"
 
 #: ../admin/sql_getparam.php:83
 msgid ""
-"You changed the MySQL User base configuration. Please reffer to your "
+"You changed the MySQL User base configuration. Please refer to your "
 "configuration"
 msgstr ""
 
@@ -3458,13 +3441,12 @@ msgstr ""
 msgid "Account not found"
 msgstr "Conta Permitiu ?"
 
-#: ../class/m_admin.php:219 ../class/m_admin.php:1092
-msgid "The password is too long according to the password policy"
+#: ../class/m_admin.php:219
+msgid "Subject, message and sender are mandatory"
 msgstr ""
 
-#: ../class/m_admin.php:224 ../class/m_admin.php:1102
-msgid ""
-"The password policy prevents you to use your login name inside your password"
+#: ../class/m_admin.php:224
+msgid "Sender is syntaxically incorrect"
 msgstr ""
 
 #: ../class/m_admin.php:311 ../class/m_admin.php:316
@@ -3502,7 +3484,7 @@ msgstr "Esta conta é uma conta super-administrador"
 msgid "This account is NOT an administrator account!"
 msgstr "Esta conta é uma conta super-administrador"
 
-#: ../class/m_admin.php:867 ../class/m_dom.php:369 ../class/m_dom.php:720
+#: ../class/m_admin.php:867
 #, fuzzy, php-format
 msgid "Domain '%s' not found."
 msgstr "Domínio %s suprimido"
@@ -3526,6 +3508,15 @@ msgstr ""
 
 #: ../class/m_admin.php:1087
 msgid "The password length is too short according to the password policy"
+msgstr ""
+
+#: ../class/m_admin.php:1092
+msgid "The password is too long according to the password policy"
+msgstr ""
+
+#: ../class/m_admin.php:1102
+msgid ""
+"The password policy prevents you to use your login name inside your password"
 msgstr ""
 
 #: ../class/m_admin.php:1126
@@ -3571,7 +3562,7 @@ msgid "Go back to the file manager"
 msgstr "Volta ao navegador de arquivos"
 
 #: ../class/m_bro.php:342 ../class/m_bro.php:1004
-msgid "Cannot create the requested directory. Please check permissions."
+msgid "Cannot create the requested directory. Please check the permissions"
 msgstr ""
 
 #: ../class/m_bro.php:348 ../class/m_bro.php:365 ../class/m_bro.php:390
@@ -3583,26 +3574,22 @@ msgid "File or folder name is incorrect"
 msgstr ""
 
 #: ../class/m_bro.php:370
-msgid "Cannot create the requested file. Please check permissions."
+msgid "Cannot create the requested file. Please check the permissions"
 msgstr ""
 
-#: ../class/m_bro.php:461
-msgid "You cannot move or copy a file to the same folder."
+#: ../class/m_bro.php:461 ../class/m_bro.php:611
+msgid "You cannot move or copy a file to the same folder"
 msgstr ""
 
 #: ../class/m_bro.php:587
 #, php-format
 msgid ""
-"I can't find a way to extract the file %s, is it an unsupported compressed "
-"format?"
-msgstr ""
-
-#: ../class/m_bro.php:611
-msgid "You cannot move or copy a file to the same folder"
+"I cannot find a way to extract the file %s, it is an unsupported compressed "
+"format"
 msgstr ""
 
 #: ../class/m_bro.php:691
-msgid "Cannot read the requested file. Please check permissions."
+msgid "Cannot read the requested file. Please check the permissions"
 msgstr ""
 
 #: ../class/m_bro.php:766
@@ -3632,7 +3619,7 @@ msgid "Email address is not valid"
 msgstr "Lista de caixas de email do domínio %s"
 
 #: ../class/m_cron.php:132
-msgid "You seems to be over-quota."
+msgid "You quota of cron entries is over. You cannot create more cron entries"
 msgstr ""
 
 #: ../class/m_cron.php:141
@@ -3640,7 +3627,7 @@ msgid "Identity problem"
 msgstr ""
 
 #: ../class/m_dom.php:168
-msgid "The name MUST contain only letter and digits."
+msgid "The name MUST contain only letter and digits"
 msgstr ""
 
 #: ../class/m_dom.php:293 ../class/m_dom.php:709 ../class/m_dom.php:772
@@ -3665,27 +3652,32 @@ msgid "This domain is the server's domain! You cannot host it on your account!"
 msgstr ""
 
 #: ../class/m_dom.php:315 ../class/m_dom.php:320
-msgid "The domain already exist."
-msgstr ""
+#, fuzzy
+msgid "The domain already exist"
+msgstr "Edição de arquivo"
 
 #: ../class/m_dom.php:327 ../class/m_dom.php:1020
 msgid ""
 "The last member of the domain name is incorrect or cannot be hosted in that "
-"server."
+"server"
 msgstr ""
 
-#: ../class/m_dom.php:331 ../class/m_dom.php:335 ../class/m_dom.php:638
-#: ../class/m_dom.php:1024
-msgid "The domain cannot be found in the whois database."
+#: ../class/m_dom.php:331 ../class/m_dom.php:335
+msgid "The domain cannot be found in the whois database"
 msgstr ""
 
 #: ../class/m_dom.php:354
-msgid "Your domain quota is over, you cannot create more domain names."
+msgid "Your domain quota is over, you cannot create more domain names"
 msgstr ""
 
 #: ../class/m_dom.php:360
 msgid "An unexpected error occured when creating the domain"
 msgstr ""
+
+#: ../class/m_dom.php:369 ../class/m_dom.php:720
+#, fuzzy, php-format
+msgid "Domain '%s' not found"
+msgstr "Domínio %s suprimido"
 
 #: ../class/m_dom.php:479
 #, fuzzy
@@ -3693,26 +3685,31 @@ msgid "Could not delete default type"
 msgstr "Algums TLD não pode ser suprimidos..."
 
 #: ../class/m_dom.php:631
-msgid "The Whois database is unavailable, please try again later."
+msgid "The Whois database is unavailable, please try again later"
+msgstr ""
+
+#: ../class/m_dom.php:638 ../class/m_dom.php:1024
+msgid "The domain cannot be found in the Whois database"
 msgstr ""
 
 #: ../class/m_dom.php:782 ../class/m_dom.php:985
 #, fuzzy
-msgid "The sub-domain does not exist."
+msgid "The sub-domain does not exist"
 msgstr "A caixa de email <b>%s</b> não existe!"
 
 #: ../class/m_dom.php:814
-msgid "The folder you entered is incorrect or does not exist."
-msgstr ""
+#, fuzzy
+msgid "The folder you entered is incorrect or does not exist"
+msgstr "Membro '%s' não existe"
 
 #: ../class/m_dom.php:902
 msgid ""
 "There is some forbidden characters in the sub domain (only A-Z 0-9 and - are "
-"allowed)."
+"allowed)"
 msgstr ""
 
 #: ../class/m_dom.php:907
-msgid "Invalid domain type selected, please check."
+msgid "Invalid domain type selected, please check"
 msgstr ""
 
 #: ../class/m_dom.php:918
@@ -3722,13 +3719,13 @@ msgid ""
 msgstr ""
 
 #: ../class/m_dom.php:940 ../class/m_dom.php:949
-msgid "I can't write to the destination folder"
+msgid "Cannot write to the destination folder"
 msgstr ""
 
 #: ../class/m_dom.php:1028
 msgid ""
 "The DNS of this domain do not match the server's DNS. Please change your "
-"domain's DNS (you may need to wait 1 day) before you install it again."
+"domain's DNS before you install it again"
 msgstr ""
 
 #: ../class/m_dom.php:1039
@@ -3744,11 +3741,11 @@ msgstr "Suas preferências foram atualizadas."
 #: ../class/m_dom.php:1053 ../class/m_dom.php:1059
 msgid ""
 "There is no MX record pointing to this server, and you are asking us to host "
-"the mail here. Please fix your MX DNS pointer."
+"the mail here. Please fix your MX DNS pointer"
 msgstr ""
 
 #: ../class/m_dom.php:1113 ../class/m_dom.php:1137
-msgid "The IP address you entered is incorrect."
+msgid "The IP address you entered is incorrect"
 msgstr ""
 
 #: ../class/m_dom.php:1204 ../class/m_dom.php:1210 ../class/m_dom.php:1228
@@ -3772,12 +3769,12 @@ msgstr "A informação entrada é incorreta"
 
 #: ../class/m_ftp.php:95
 #, fuzzy
-msgid "No ftp account found"
+msgid "No FTP account found"
 msgstr "Nenhuma conta selecionada"
 
 #: ../class/m_ftp.php:128 ../class/m_ftp.php:181 ../class/m_ftp.php:239
 #, fuzzy
-msgid "This ftp account does not exist"
+msgid "This FTP account does not exist"
 msgstr "Membro '%s' não existe"
 
 #: ../class/m_ftp.php:190 ../class/m_ftp.php:264
@@ -3785,15 +3782,17 @@ msgid "The chosen prefix is not allowed"
 msgstr ""
 
 #: ../class/m_ftp.php:199 ../class/m_ftp.php:271
-msgid "This ftp account already exists"
-msgstr ""
+#, fuzzy
+msgid "This FTP account already exists"
+msgstr "A caixa de email <b>%s</b> não existe!"
 
 #: ../class/m_ftp.php:207 ../class/m_ftp.php:283
-msgid "The directory cannot be created."
-msgstr ""
+#, fuzzy
+msgid "The directory cannot be created"
+msgstr "Algums TLD não pode ser suprimidos..."
 
 #: ../class/m_ftp.php:299
-msgid "Your ftp account quota is over. You cannot create more ftp accounts."
+msgid "Your FTP account quota is over. You cannot create more ftp accounts"
 msgstr ""
 
 #: ../class/m_hta.php:70 ../class/m_hta.php:271 ../class/m_hta.php:312
@@ -3814,12 +3813,12 @@ msgstr "Protected folders"
 
 #: ../class/m_hta.php:196
 #, php-format
-msgid "I cannot delete the file '%s'/.htaccess"
+msgid "I cannot delete the file '%s/.htaccess'"
 msgstr ""
 
 #: ../class/m_hta.php:200
 #, php-format
-msgid "I cannot delete the file '%s'/.htpasswd"
+msgid "I cannot delete the file '%s/.htpasswd'"
 msgstr ""
 
 #: ../class/m_hta.php:241
@@ -3834,7 +3833,7 @@ msgstr "Please enter a password"
 
 #: ../class/m_hta.php:382
 #, fuzzy
-msgid "An incompatible .htaccess file exists in this folder."
+msgid "An incompatible .htaccess file exists in this folder"
 msgstr "Nenhum arquivo nesta pasta"
 
 #: ../class/m_mail.php:92
@@ -3843,18 +3842,18 @@ msgid "Email account password"
 msgstr "Senha inicial"
 
 #: ../class/m_mail.php:137 ../class/m_mail.php:217 ../class/m_mail.php:334
-#: ../class/m_mail.php:390
+#: ../class/m_mail.php:385
 msgid "The email you entered is syntaxically incorrect"
 msgstr ""
 
 #: ../class/m_mail.php:174
 #, fuzzy
-msgid "No mail found for this query"
+msgid "No email found for this query"
 msgstr "Adiçionar um email ao domínio %s"
 
 #: ../class/m_mail.php:229
 #, fuzzy
-msgid "You cannot create email addresses: your quota is over."
+msgid "You cannot create email addresses: your quota is over"
 msgstr "Você não pode adiçionr mais domínios, sua quota acabou."
 
 #: ../class/m_mail.php:235
@@ -3875,63 +3874,63 @@ msgstr ""
 msgid "The email %s does not exist, it can't be deleted"
 msgstr "A caixa de email <b>%s</b> não existe!"
 
-#: ../class/m_mail.php:354
+#: ../class/m_mail.php:349
 #, php-format
 msgid "The email %s is already marked for deletion, it can't be deleted"
 msgstr ""
 
-#: ../class/m_mail.php:363
+#: ../class/m_mail.php:358
 #, fuzzy, php-format
 msgid "The email %s has been marked for deletion"
 msgstr "O domínio %s foi suprimido com sucesso."
 
-#: ../class/m_mail.php:369
+#: ../class/m_mail.php:364
 #, fuzzy, php-format
 msgid "The email %s has been successfully deleted"
 msgstr "O domínio %s foi suprimido com sucesso."
 
-#: ../class/m_mail.php:401
+#: ../class/m_mail.php:396
 #, php-format
 msgid "The email %s does not exist, it can't be undeleted"
 msgstr ""
 
-#: ../class/m_mail.php:405
+#: ../class/m_mail.php:400
 #, php-format
 msgid "The email %s is special, it can't be undeleted"
 msgstr ""
 
-#: ../class/m_mail.php:409
+#: ../class/m_mail.php:404
 #, php-format
 msgid ""
 "Sorry, deletion of email %s is already in progress, or not marked for "
 "deletion, it can't be undeleted"
 msgstr ""
 
-#: ../class/m_mail.php:418
+#: ../class/m_mail.php:413
 #, fuzzy, php-format
 msgid "The email %s has been undeleted"
 msgstr "A caixa de email <b>%s</b> foi criado com sucesso"
 
-#: ../class/m_mail.php:421
+#: ../class/m_mail.php:416
 #, php-format
 msgid "-- Program Error -- The email %s can't be undeleted"
 msgstr ""
 
-#: ../class/m_mail.php:502
+#: ../class/m_mail.php:497
 msgid ""
-"There is forbidden characters in your mail name. You can't make it a POP/"
-"IMAP account, you can only use it as redirections to other emails."
+"There is forbidden characters in your email address. You can't make it a POP/"
+"IMAP account, you can only use it as redirection to other emails"
 msgstr ""
 
-#: ../class/m_mail.php:522
+#: ../class/m_mail.php:517
 msgid ""
 "You set a quota smaller than the current mailbox size. Since it's not "
-"allowed, we set the quota to the current mailbox size."
+"allowed, we set the quota to the current mailbox size"
 msgstr ""
 
-#: ../class/m_mail.php:678
+#: ../class/m_mail.php:673
 #, fuzzy
-msgid "The MX account was not found."
+msgid "The slave MX account was not found"
 msgstr "Conta Permitiu ?"
 
 #: ../class/m_mem.php:85 ../class/m_mem.php:91 ../class/m_mem.php:151
@@ -3965,11 +3964,7 @@ msgstr ""
 msgid "The old password is incorrect"
 msgstr ""
 
-#: ../class/m_mem.php:360
-msgid "The new passwords are differents, please retry."
-msgstr ""
-
-#: ../class/m_mem.php:409
+#: ../class/m_mem.php:360 ../class/m_mem.php:409
 msgid "The new passwords are differents, please retry"
 msgstr ""
 
@@ -3982,135 +3977,116 @@ msgid "Help"
 msgstr "Ajuda"
 
 #: ../class/m_mysql.php:151
-msgid "Cannot connect to PhpMyadmin"
+msgid "Cannot connect to PhpMyAdmin"
 msgstr ""
 
-#: ../class/m_mysql.php:192
+#: ../class/m_mysql.php:192 ../class/m_mysql.php:345
 #, fuzzy, php-format
-msgid "The database %s not found"
-msgstr "A base de dados %s foi suprimido com sucesso"
+msgid "Database %s not found"
+msgstr "Domínio %s suprimido"
 
 #: ../class/m_mysql.php:219
-msgid "Your databases quota is over. You cannot create more databases."
+msgid "Your databases quota is over. You cannot create more databases"
 msgstr ""
 
-#: ../class/m_mysql.php:231
-msgid "Database name can only only letters and numbers."
+#: ../class/m_mysql.php:231 ../class/m_mysql.php:339 ../class/m_mysql.php:422
+msgid "Database name can contain only letters and numbers"
 msgstr ""
 
 #: ../class/m_mysql.php:237
-msgid "Database name cannot exceed 64 characters."
+msgid "Database name cannot exceed 64 characters"
 msgstr ""
 
 #: ../class/m_mysql.php:242
 #, fuzzy, php-format
-msgid "Database %s already exists."
+msgid "Database %s already exists"
 msgstr "Edição de arquivo"
 
 #: ../class/m_mysql.php:260
 msgid ""
-"There is a problem with the special PhpMyadmin user. Contact the "
-"administrator."
+"There is a problem with the special PhpMyAdmin user. Contact the "
+"administrator"
 msgstr ""
 
 #: ../class/m_mysql.php:279
-msgid "An error occured. The database could not be created."
-msgstr ""
+#, fuzzy
+msgid "An error occured. The database could not be created"
+msgstr "Algums TLD não pode ser suprimidos..."
 
 #: ../class/m_mysql.php:297
-msgid "The database was not found. Suppression failed."
-msgstr ""
-
-#: ../class/m_mysql.php:339
-msgid "Database name can contain only letters and numbers."
-msgstr ""
-
-#: ../class/m_mysql.php:345
-#, fuzzy, php-format
-msgid "Database %s not found."
-msgstr "Domínio %s suprimido"
+#, fuzzy
+msgid "The database was not found. I can't delete it"
+msgstr "A base de dados %s foi suprimido com sucesso"
 
 #: ../class/m_mysql.php:358
-msgid "You have to choose how many backups you want to keep."
+msgid "You have to choose how many backups you want to keep"
 msgstr ""
 
 #: ../class/m_mysql.php:362
 #, fuzzy
-msgid "Directory does not exists."
+msgid "Directory does not exist"
 msgstr "Membro '%s' não existe"
 
 #: ../class/m_mysql.php:380
 #, fuzzy
-msgid "Database not found."
+msgid "Database not found"
 msgstr "Domínio %s suprimido"
 
-#: ../class/m_mysql.php:387
+#: ../class/m_mysql.php:387 ../class/m_mysql.php:662
 #, fuzzy
-msgid "You have to set a new password."
-msgstr "Você não pode mudar sua senha"
+msgid "The password is mandatory"
+msgstr "Senha"
 
 #: ../class/m_mysql.php:392
-msgid "Mysql password cannot exceed 16 characters."
-msgstr ""
-
-#: ../class/m_mysql.php:422
-msgid "Database name can only contain letters and numbers."
+msgid "MySQL password cannot exceed 16 characters"
 msgstr ""
 
 #: ../class/m_mysql.php:432
-msgid "Databases rights are not correct."
+msgid "Databases rights are not correct"
 msgstr ""
 
 #: ../class/m_mysql.php:437
-msgid ""
-"Database username can contain only letters numbers hyphen and underscores"
+msgid "The username can contain only letters and numbers."
 msgstr ""
 
 #: ../class/m_mysql.php:458
-msgid "Could not grant rights."
+msgid "Could not grant rights"
 msgstr ""
 
 #: ../class/m_mysql.php:480
 #, fuzzy
-msgid "File not found."
+msgid "File not found"
 msgstr "Domínio %s suprimido"
 
 #: ../class/m_mysql.php:658
-msgid "You have to input a username."
-msgstr ""
-
-#: ../class/m_mysql.php:662
 #, fuzzy
-msgid "You have to input a password."
-msgstr "Você não pode mudar sua senha"
+msgid "The username is mandatory"
+msgstr "O usuário não tem nenhuma base de dados"
 
-#: ../class/m_mysql.php:666 ../class/m_mysql.php:747
-msgid "The username can contain only letters and numbers."
+#: ../class/m_mysql.php:666 ../class/m_mysql.php:743
+msgid "The username can contain only letters and numbers"
 msgstr ""
 
 #: ../class/m_mysql.php:673
-msgid "Mysql username cannot exceed 16 characters."
+msgid "MySQL username cannot exceed 16 characters"
 msgstr ""
 
 #: ../class/m_mysql.php:678
-msgid "The database user was not found."
-msgstr ""
-
-#: ../class/m_mysql.php:682 ../class/m_mysql.php:720
 #, fuzzy
-msgid "The passwords do not match."
+msgid "The database user was not found"
+msgstr "A base de dados %s foi suprimido com sucesso"
+
+#: ../class/m_mysql.php:682 ../class/m_mysql.php:716
+#, fuzzy
+msgid "The passwords do not match"
 msgstr "Senha"
 
-#: ../class/m_mysql.php:715
-msgid "Database password can contain only letters numbers and underscore."
-msgstr ""
-
-#: ../class/m_mysql.php:752
+#: ../class/m_mysql.php:748
 #, fuzzy
-msgid "The username was not found."
+msgid "The username was not found"
 msgstr "O usuário não tem nenhuma base de dados"
 
-#: ../class/m_mysql.php:1028
+#: ../class/m_mysql.php:1024
 #, fuzzy
 msgid "The directory could not be created"
 msgstr "Algums TLD não pode ser suprimidos..."
@@ -4123,15 +4099,15 @@ msgstr ""
 msgid "You are not allowed to delete the statistics of this website"
 msgstr ""
 
-#: ../class/m_piwik.php:287
+#: ../class/m_piwik.php:283
 msgid "Unable to reach the API"
 msgstr ""
 
-#: ../class/m_piwik.php:294
+#: ../class/m_piwik.php:290
 msgid "Error while decoding response from the API"
 msgstr ""
 
-#: ../class/m_piwik.php:300
+#: ../class/m_piwik.php:296
 msgid "Other format than JSON is not implemented yet"
 msgstr ""
 
@@ -4142,7 +4118,7 @@ msgstr "Espaço de Disco"
 
 #: ../class/m_quota.php:185
 #, fuzzy
-msgid "Error writing the quota entry !"
+msgid "Error writing the quota entry!"
 msgstr "Editando os quotas do membro"
 
 #: ../class/mime.php:135
@@ -4276,6 +4252,22 @@ msgstr ""
 #: ../class/mime.php:172 ../class/mime.php:173 ../class/mime.php:174
 msgid "Real Media File"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Edition of <b>%s</b>"
+#~ msgstr "Adiçionar a caixa de email em <b>%s</b>"
+
+#, fuzzy
+#~ msgid "Select your action"
+#~ msgstr "Suprimir uma conta FTP"
+
+#, fuzzy
+#~ msgid "You have to set a new password."
+#~ msgstr "Você não pode mudar sua senha"
+
+#, fuzzy
+#~ msgid "You have to input a password."
+#~ msgstr "Você não pode mudar sua senha"
 
 #, fuzzy
 #~ msgid "Create this alias"

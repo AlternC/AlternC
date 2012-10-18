@@ -551,6 +551,8 @@ roundcube/class/m_roundcube.php -text
 roundcube/roundcube-install -text
 roundcube/templates/apache2/roundcube.conf -text
 roundcube/templates/roundcube/main.inc.php -text
+roundcube/templates/roundcube/plugins/managesieve/config.inc.php -text
+roundcube/templates/roundcube/plugins/password/config.inc.php -text
 selenium/20120826-alternc-panel-testsuite.html -text
 selenium/README -text
 selenium/alternc.domain-local-mail-tld.html -text
