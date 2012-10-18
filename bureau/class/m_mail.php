@@ -131,12 +131,13 @@ class m_mail {
       $db->query("SELECT domaines.id,domaines.domaine, IFNULL(mail, 0) as nb_mail
                  FROM domaines  
                  LEFT JOIN  
-		      (SELECT address.id, COUNT(*) AS mail
-		      FROM address 
-		      WHERE type=''
-		      GROUP BY address.domain_id) lol
-		 USING (id) 
-                 WHERE COMPTE={$uid}");
+		               (SELECT address.id, COUNT(*) AS mail
+		                FROM address 
+		                WHERE type=''
+		                GROUP BY address.domain_id) subreq
+		                USING (id) 
+                 WHERE COMPTE={$uid}
+                 order by domaines.domaine");
       $this->enum_domains=array();
       while($db->next_record()){
           $this->enum_domains[]=$db->Record;
@@ -182,7 +183,7 @@ class m_mail {
    * @param $count integer return no more than THAT much emails. -1 for ALL. Offset is ignored then.
    * @result an array of each mail hosted under the domain.
    */
-  function enum_domain_mails($dom_id = null, $search="", $offset=0, $count=30){
+  function enum_domain_mails($dom_id = null, $search="", $offset=0, $count=30, $show_systemmails=false){
     global $db,$err,$cuid,$hooks;
     $err->log("mail","enum_domains_mail");
 
@@ -190,6 +191,7 @@ class m_mail {
 
     $where="a.domain_id=$dom_id";
     if ($search) $where.=" AND (a.address LIKE '%".addslashes($search)."%' OR r.recipients LIKE '%".addslashes($search)."%')";
+    if (!$show_systemmails) $where.=" AND type='' ";
     $db->query("SELECT count(a.id) AS total FROM address a LEFT JOIN recipient r ON r.address_id=a.id WHERE $where;");
     $db->next_record();
     $this->total=$db->f("total");
@@ -206,8 +208,8 @@ class m_mail {
       $details=$db->Record;
       // if necessary, fill the typedata with data from hooks ...
       if ($details["type"]) {
-	$result=$hooks->invoke("hook_mail_get_details",array($details["id"])); // Will fill typedata if necessary
-	$details["typedata"]=implode("<br />",$result);
+	      $result=$hooks->invoke("hook_mail_get_details",array($details["id"])); // Will fill typedata if necessary
+	      $details["typedata"]=implode("<br />",$result);
       }
       $res[]=$details;
     } while ($db->next_record());

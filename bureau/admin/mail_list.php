@@ -29,6 +29,7 @@ include_once("head.php");
 $fields = array (
 		 "mail_arg"    => array ("request", "integer", ""), // from mail_add.php in case of error
 		 "domain_id"    => array ("request", "integer", ""), 
+		 "show_systemmails"    => array ("request", "integer", ""), 
 		 "search"    => array ("request", "string", ""),
 		 "offset"    => array ("request", "integer", 0),
 		 "count"    => array ("request", "integer", 50),
@@ -46,14 +47,13 @@ if(!$domain_id ) {
 $fatal=false;
 
 if ($domain=$dom->get_domain_byid($domain_id)) {
-  if(!($mails_list = $mail->enum_domain_mails($domain_id,$search,$offset,$count))) {
+  if(!($mails_list = $mail->enum_domain_mails($domain_id,$search,$offset,$count,$show_systemmails))) {
     $error=$err->errstr();
   }
 } else {
   $error=$err->errstr();
   $fatal=true;
 }
-
 
 if ($fatal) {
   echo "<div class=\"error\">$error</div>";
@@ -92,10 +92,14 @@ if (isset($error) && !empty($error)) {
 <input type="hidden" name="domain_id" value="<?php echo $domain_id; ?>" />
 <input type="hidden" name="offset" value="0" />
 <span class="int intleft"><img alt="<?php __("Search"); ?>" title="<?php __("Search"); ?>" src="/images/search.png" style="vertical-align: middle"/> </span><input type="text" name="search" value="<?php ehe($search); ?>" size="20" maxlength="64" class="int intright" />
-</form>
 </td><td>
 <?php pager($offset,$count,$mail->total,"mail_list.php?domain_id=".$domain_id."&amp;count=".$count."&amp;search=".urlencode($search)."&amp;offset=%%offset%%"); ?>
-</td><td style="text-align:right">
+</td>
+<td style="text-align:center">
+  <input type="checkbox" id="show_systemmails" name="show_systemmails" <?php if($show_systemmails) {echo "checked";}?> value="1"><label for="show_systemmails" onclick="document.form['formlist1'].submit();"><?php __("Show system emails");?></label>
+</td>
+</form>
+<td style="text-align:right">
 <form method="get" name="formlist2" id="formlist2" action="mail_list.php">
  <input type="hidden" name="domain_id" value="<?php echo $domain_id; ?>" />
  <input type="hidden" name="offset" value="0" />
@@ -138,14 +142,14 @@ while (list($key,$val)=each($mails_list)){
 	<?php } ?>
 	<td  class="<?php echo $grey; ?>" style="text-align:right"><?php echo $val["address"]."@".$domain ?></td>
 	<?php if ($val["type"]) { ?>
-	<td colspan="2"><?php echo $val["typedata"]; ?></td>
+	<td colspan="3"><?php echo $val["typedata"]; ?></td>
 	<?php } else { ?>
 	<td class="<?php echo $grey; ?>"><?php if ($val["islocal"]) echo format_size($val["used"])."/".format_size($val["quotabytes"]); else __("No"); ?></td>
 	<td class="<?php echo $grey; ?>"><?php echo $val["recipients"]; /* TODO : if >60chars, use "..." + js close/open */ ?></td>
-	<?php } ?>
-        <td class="<?php echo $grey; ?>"><?php if ($val["islocal"]) { 
+  <td class="<?php echo $grey; ?>"><?php if ($val["islocal"]) { 
 if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"],11,5); else if (substr($val["lastlogin"],0,10)=="0000-00-00") __("Never"); else echo format_date(_('%3$d-%2$d-%1$d'),$val["lastlogin"]);
 } ?></td>
+	<?php } ?>
 	</tr>
 	<?php
    $i++;
