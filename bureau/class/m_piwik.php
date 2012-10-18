@@ -35,16 +35,8 @@ class m_piwik {
   /** Constructor
   */
   function m_piwik() {
-    $this->piwik_server_uri=variable_get('piwik_server_uri',null);
-    if (is_null($this->piwik_server_uri)) { // if not configuration var, setup one (with a default value)
-      variable_set('piwik_server_uri','','Remote Piwik server uri');
-      $this->piwik_server_uri='';
-    }
-    $this->piwik_admin_token=variable_get('piwik_admin_token',null);
-    if (is_null($this->piwik_admin_token)) { // if not configuration var, setup one (with a default value)
-      variable_set('piwik_admin_token','','Remote Piwik super-admin token');
-      $this->piwik_admin_token='';
-    }
+    $this->piwik_server_uri=variable_get('piwik_server_uri',null,'Remote Piwik server uri');
+    $this->piwik_admin_token=variable_get('piwik_admin_token',null,'Remote Piwik super-admin token');
   }
 
   /* ----------------------------------------------------------------- */

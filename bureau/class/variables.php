@@ -78,16 +78,25 @@ function variable_init_maybe() {
  *   The name of the variable to return.
  * @param $default
  *   The default value to use if this variable has never been set.
+ * @param $createit_comment 
+ *   If variable doesn't exist, create it with the default value
+ *   and createit_comment value as comment
  * @return
  *   The value of the variable.
  * @global $conf
  *   A cache of the configuration.
  */
-function variable_get($name, $default = null) {
+function variable_get($name, $default = null, $createit_comment = null) {
   global $conf;
 
   variable_init_maybe();
-  return isset($conf[$name]) ? $conf[$name] : $default;
+
+  if (isset($conf[$name])) {
+    return $conf[$name];
+  } elseif (!is_null($createit_comment)) {
+    variable_set($name, $default, $createit_comment);
+  }
+  return $default;
 }
 
 /**
@@ -116,7 +125,7 @@ function variable_set($name, $value, $comment=null) {
 
   $db->query("$query");
 
-  variable_init_maybe();
+  variable_init();
 }
 
 /**
