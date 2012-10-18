@@ -681,6 +681,21 @@ class m_mail {
     }
     return false;
   }
+
+
+  /* ----------------------------------------------------------------- */
+  /** Out (echo) the complete hosted domain list : 
+   */
+  function echo_domain_list() {
+  global $db,$err;
+  $db->query("SELECT domaine FROM domaines WHERE gesdns=1 ORDER BY domaine");
+  while ($db->next_record()) {
+    echo $db->f("domaine")."\n";
+  }
+  return true;
+  }
+
+
   /* ----------------------------------------------------------------- */
   /**
    * Add a slave account that will be allowed to access the mxdomain list
