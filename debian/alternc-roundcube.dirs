@@ -1,5 +1,8 @@
 etc/alternc
 etc/alternc/templates/roundcube
+etc/alternc/templates/roundcube/plugins
+etc/alternc/templates/roundcube/plugins/managesieve
+etc/alternc/templates/roundcube/plugins/password
 etc/alternc/templates/apache2
 etc/roundcube
 usr/lib/alternc/install.d
