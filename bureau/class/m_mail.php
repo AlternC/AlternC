@@ -793,14 +793,14 @@ class m_mail {
   /** hook function called by AlternC when a domain is created for
    * the current user account using the SLAVE DOMAIN feature
    * This function create a CATCHALL to the master domain
-   * @param string $dom Domain that has just been created
-   * @param string $master Master domain
+   * @param string $domain_id Domain that has just been created
+   * @param string $target_domain Master domain 
    * @access private
    */
-  function alternc_add_slave_domain($dom,$slave) { //FIXME don't we have to change his name ?
+  function hook_dom_add_slave_domain($domain_id,$target_domain) { 
     global $err;
-    $err->log("mail","alternc_add_slave_domain",$dom);
-    $this->add_mail($dom,"",0,"","@".$slave);
+    $err->log("mail","hook_dom_add_slave_domain",$domain_id);
+    $this->catchall_set($domain_id,'@'.$target_domain); 
     return true;
   }
 

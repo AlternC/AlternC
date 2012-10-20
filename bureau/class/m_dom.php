@@ -386,7 +386,7 @@ class m_dom {
     $hooks->invoke("hook_dom_add_domain",array($id));
     $hooks->invoke("hook_dom_add_mx_domain",array($id));
     if ($isslave) {
-      $hooks->invoke("hook_dom_add_slave_domain",array($id));
+      $hooks->invoke("hook_dom_add_slave_domain",array($id, $slavedom));
     }
     return true;
   }
