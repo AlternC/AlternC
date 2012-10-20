@@ -33,13 +33,13 @@ class m_debug_alternc {
   function m_debug_alternc() {
     if ( isset($_COOKIE['alternc_debugme']) && $_COOKIE['alternc_debugme'] ) {
       $this->status=true;
+      ini_set('display_errors', true);
     }
   }
 
   function activate() {
     setcookie('alternc_debugme',true, time()+3600); // expire in 1 hour
     $this->status="";
-    ini_set('display_errors', true);
     return true;
   }
 

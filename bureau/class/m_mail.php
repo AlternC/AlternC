@@ -90,7 +90,42 @@ class m_mail {
     $this->srv_pop3s      = variable_get('mail_human_pop3s',      $L_FQDN,'Human name for POP3s mail server');
   }
 
-  
+  // FIXME documenter
+  function catchall_getinfos($domain_id) {
+    global $dom, $db;
+    $rr=array(
+      'domain' =>$dom->get_domain_byid($domain_id),
+      'target' => '',
+      'type'   => '',
+      );
+    
+    $db->query("select r.recipients as dst from address a, recipient r where a.domain_id = $domain_id and r.address_id = a.id and a.address='';");
+    if ($db->next_record()) {
+      $rr['target'] = $db->f('dst');
+    }
+
+    // Does it redirect to a specific mail or to a domain
+    if (empty($rr['target'])) {
+      $rr['type']='none';
+    } elseif (substr($rr['target'],0,1)=='@') {
+      $rr['type']='domain';
+    } else {
+      $rr['type']='mail';
+    }
+    
+    return $rr;
+  }
+
+  function catchall_del($domain_id) {
+    //FIXME
+print("catchall_del    $domain_id");
+  }
+
+  function catchall_set($domain_id, $target) {
+    //FIXME 
+print("catchall_set    $domain_id   $target");
+  }
+
 
   /* ----------------------------------------------------------------- */
   /** get_quota (hook for quota class), returns the number of used 

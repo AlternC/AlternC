@@ -289,6 +289,7 @@ bureau/admin/mail_doadd.php -text
 bureau/admin/mail_doedit.php -text
 bureau/admin/mail_edit.php -text
 bureau/admin/mail_list.php -text
+bureau/admin/mail_manage_catchall.php -text
 bureau/admin/mail_undelete.php -text
 bureau/admin/main.php -text
 bureau/admin/mem_admin.php -text
