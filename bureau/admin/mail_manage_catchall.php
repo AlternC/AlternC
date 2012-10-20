@@ -58,7 +58,6 @@ if (!is_null($target_type)) {
 }
 
 $catch=$mail->catchall_getinfos($domain_id);
-printvar($catch);
   
 ?>
 <h3><?php printf(_("Manage catch-all configuration of %s"),$catch["domain"]); ?></h3>
@@ -93,7 +92,7 @@ __("You can choose what to do with emails send to unexisting address of this dom
     <td style="width: 50%; text-align: justify"><label for='target_type_domain'/><?php echo sprintf(_("Mails send to john.doe@%s will be redirect to john.doe@anotherdomain.tld"),$catch['domain']);?></label></td>
     <td>
       <p>
-        <input type="text" id="target_domain" name="target_domain" value="<?php if($catch['type']=='domain') { echo $catch['target']; } ?>" placeholder="example.tld" />
+        <input type="text" id="target_domain" name="target_domain" value="<?php if($catch['type']=='domain') { echo substr($catch['target'],1); } ?>" placeholder="example.tld" />
         <ul>
           <?php foreach ( $dom->enum_domains() as $d) { echo "<li><a href=\"javascript:set_target_domain_value('".addslashes($d)."');\">$d</a></li>"; } ?>
         </ul>
@@ -126,6 +125,7 @@ __("You can choose what to do with emails send to unexisting address of this dom
 <script type="text/javascript">
   function set_target_domain_value(value) {
     $('#target_domain').val(value);
+    $('#target_type_domain').prop('checked', true);
   }
 </script>
 

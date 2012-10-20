@@ -94,14 +94,16 @@ class m_mail {
   function catchall_getinfos($domain_id) {
     global $dom, $db;
     $rr=array(
+      'mail_id'=>'',
       'domain' =>$dom->get_domain_byid($domain_id),
       'target' => '',
       'type'   => '',
       );
     
-    $db->query("select r.recipients as dst from address a, recipient r where a.domain_id = $domain_id and r.address_id = a.id and a.address='';");
+    $db->query("select r.recipients as dst, a.id mail_id from address a, recipient r where a.domain_id = $domain_id and r.address_id = a.id and a.address='';");
     if ($db->next_record()) {
       $rr['target'] = $db->f('dst');
+      $rr['mail_id'] = $db->f('mail_id');
     }
 
     // Does it redirect to a specific mail or to a domain
@@ -117,13 +119,28 @@ class m_mail {
   }
 
   function catchall_del($domain_id) {
-    //FIXME
-print("catchall_del    $domain_id");
+    $catch = $this->catchall_getinfos($domain_id);
+    if (empty($catch['mail_id'])) return false;
+    return $this->delete($catch['mail_id']);
   }
 
   function catchall_set($domain_id, $target) {
-    //FIXME 
-print("catchall_set    $domain_id   $target");
+    // target :
+    $target=rtrim($target);
+    if ( substr_count($target,'@') == 0 ) { // Pas de @
+      $target = '@'.$target;
+    } 
+
+    if ( substr($target,0,1) == '@' ) { // le premier caractere est un @
+      // FIXME validate domain
+    } else { // ca doit être un mail
+      if (!filter_var($target,FILTER_VALIDATE_EMAIL)) {
+        $err->raise("mail",_("The email you entered is syntaxically incorrect"));
+        return false;
+      }
+    }
+    $this->catchall_del($domain_id);
+    return $this->create_alias($domain_id, '', $target, "catchall", true);
   }
 
 
@@ -231,7 +248,7 @@ print("catchall_set    $domain_id   $target");
     $db->next_record();
     $this->total=$db->f("total");
     if ($count!=-1) $limit="LIMIT $offset,$count"; else $limit="";
-    $db->query("SELECT a.id, a.address, a.password, a.`enabled`, a.mail_action, d.domaine AS domain, m.quota, m.quota*1024*1024 AS quotabytes, m.bytes AS used, NOT ISNULL(m.id) AS islocal, a.type, r.recipients, m.lastlogin  
+    $db->query("SELECT a.id, a.address, a.password, a.`enabled`, a.mail_action, d.domaine AS domain, m.quota, m.quota*1024*1024 AS quotabytes, m.bytes AS used, NOT ISNULL(m.id) AS islocal, a.type, r.recipients, m.lastlogin, a.domain_id  
          FROM (address a LEFT JOIN mailbox m ON m.address_id=a.id) LEFT JOIN recipient r ON r.address_id=a.id, domaines d 
          WHERE $where AND d.id=a.domain_id $limit ;");
     if (! $db->next_record()) {
@@ -243,7 +260,7 @@ print("catchall_set    $domain_id   $target");
       $details=$db->Record;
       // if necessary, fill the typedata with data from hooks ...
       if ($details["type"]) {
-	      $result=$hooks->invoke("hook_mail_get_details",array($details["id"])); // Will fill typedata if necessary
+	      $result=$hooks->invoke("hook_mail_get_details",array($details)); // Will fill typedata if necessary
 	      $details["typedata"]=implode("<br />",$result);
       }
       $res[]=$details;
@@ -251,6 +268,10 @@ print("catchall_set    $domain_id   $target");
     return $res;
   }
 
+
+  function hook_mail_get_details($detail) {
+    if ($detail['type']=='catchall') return _(sprintf("Special mail address for catch-all. <a href='mail_manage_catchall.php?domain_id=%s'>Click here to manage it.</a>",$detail['domain_id']));
+  }
 
 
   /* ----------------------------------------------------------------- */
@@ -266,7 +287,7 @@ print("catchall_set    $domain_id   $target");
    * @return an hashtable containing the database id of the newly created mail, 
    * or false if an error occured ($err is filled accordingly)
    */ 
-  function create($dom_id, $mail,$type=""){
+  function create($dom_id, $mail,$type="",$dontcheck=false){
     global $err,$db,$cuid,$quota,$dom,$hooks;
     $err->log("mail","create",$mail);
 
@@ -277,7 +298,7 @@ print("catchall_set    $domain_id   $target");
 
     // Validate the email syntax:
     $m=$mail."@".$domain;
-    if (!filter_var($m,FILTER_VALIDATE_EMAIL)) {
+    if (!filter_var($m,FILTER_VALIDATE_EMAIL) && !$dontcheck) {
       $err->raise("mail",_("The email you entered is syntaxically incorrect"));
       return false;
     }
@@ -535,11 +556,11 @@ print("catchall_set    $domain_id   $target");
    * @param $mail_id integer the number of the email to delete
    * @param $islocal boolean is it a POP/IMAP mailbox ?
    * @param $quotamb integer if islocal=1, quota in MB
-  * @param $recipients string recipients, one mail per line.
+   * @param $recipients string recipients, one mail per line.
    * @return true if the email has been properly edited
    * or false if an error occured ($err is filled accordingly)
    */ 
-  function set_details($mail_id, $islocal, $quotamb, $recipients,$delivery="dovecot") {
+  function set_details($mail_id, $islocal, $quotamb, $recipients,$delivery="dovecot",$dontcheck=false) {
     global $err,$db,$cuid,$quota,$dom,$hooks;
     $delivery=mysql_escape_string($delivery);
     $err->log("mail","set_details");
@@ -587,7 +608,7 @@ print("catchall_set    $domain_id   $target");
     $red="";
     foreach($r as $m) {
       $m=trim($m);
-      if ($m && filter_var($m,FILTER_VALIDATE_EMAIL)  // Recipient Email is valid
+      if ($m && ( filter_var($m,FILTER_VALIDATE_EMAIL) || $dontcheck)  // Recipient Email is valid
 	  && $m!=($me["address"]."@".$me["domain"])) {  // And not myself (no loop allowed easily ;) )
 	$red.=$m."\n";
       }
@@ -607,11 +628,12 @@ print("catchall_set    $domain_id   $target");
    */
 
   function add_wrapper($dom_id,$m,$delivery){
-      global $err,$db,$mail;
-      $err->log("mail","add_wrapper","creating $delivery $m address");
+    global $err,$db,$mail;
+    $err->log("mail","add_wrapper","creating $delivery $m address");
 
-      $mail_id=$mail->create($dom_id,$m,$delivery);
-      $this->set_details($mail_id,1,0,'',$delivery);
+    $mail_id=$mail->create($dom_id,$m,$delivery);
+    $this->set_details($mail_id,1,0,'',$delivery);
+    // FIXME return error code
   }
 
   /* ----------------------------------------------------------------- */
@@ -619,14 +641,15 @@ print("catchall_set    $domain_id   $target");
    * @ param : $dom_id , the domain sql identifier
    * @ param : $m , the alias we want to create
    * @ param : $alias , the already existing aliased address
-   * @ param : $delivery, the type of delivery of the alias created
+   * @ param : $type, the type of the alias created
    */
-  function create_alias($dom_id,$m,$alias,$delivery) {
-      global $err,$db,$mail;
-      $err->log("mail","create_alias","creating $delivery $m alias for $alias");
+  function create_alias($dom_id,$m,$alias,$type="",$dontcheck=false) {
+    global $err,$db,$mail;
+    $err->log("mail","create_alias","creating $m alias for $alias type $type");
 
-      $mail_id=$mail->create($dom_id,$m,$delivery);
-      $this->set_details($mail_id,0,0,$alias,"mailman");
+    $mail_id=$mail->create($dom_id,$m,$type,$dontcheck);
+    $this->set_details($mail_id,0,0,$alias,"dovecot",$dontcheck);
+    // FIXME return error code
   }
 
 

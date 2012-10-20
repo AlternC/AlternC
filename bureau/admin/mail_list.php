@@ -109,7 +109,7 @@ if (isset($error) && !empty($error)) {
 <?php pager($offset,$count,$mail->total,"mail_list.php?domain_id=".$domain_id."&amp;count=".$count."&amp;search=".urlencode($search)."&amp;offset=%%offset%%"); ?>
 </td>
 <td style="text-align:center">
-  <input type="checkbox" id="show_systemmails" name="show_systemmails" <?php if($show_systemmails) {echo "checked";}?> value="1"><label for="show_systemmails" onclick="document.getElementById('formlist1').submit();"><?php __("Show system emails");?></label>
+  <input type="checkbox" id="show_systemmails" name="show_systemmails" <?php if($show_systemmails) {echo "checked";}?> value="1"onclick="document.getElementById('formlist1').submit();" ><label for="show_systemmails" ><?php __("Show system emails");?></label>
 </td>
 </form>
 <td style="text-align:right">
