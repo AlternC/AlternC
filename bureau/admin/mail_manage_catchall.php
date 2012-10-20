@@ -94,7 +94,7 @@ __("You can choose what to do with emails send to unexisting address of this dom
       <p>
         <input type="text" id="target_domain" name="target_domain" value="<?php if($catch['type']=='domain') { echo substr($catch['target'],1); } ?>" placeholder="example.tld" />
         <ul>
-          <?php foreach ( $dom->enum_domains() as $d) { echo "<li><a href=\"javascript:set_target_domain_value('".addslashes($d)."');\">$d</a></li>"; } ?>
+          <?php foreach ( $dom->enum_domains() as $d) { if ($d==$catch['domain']) {continue;} echo "<li><a href=\"javascript:set_target_domain_value('".addslashes($d)."');\">$d</a></li>"; } ?>
         </ul>
       </p>
     </td>
