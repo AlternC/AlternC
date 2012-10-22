@@ -180,16 +180,21 @@ class m_mail {
       global $db,$err,$cuid;
       $err->log("mail","enum_domains");
       if ($uid == -1) { $uid = $cuid; }
-      $db->query("SELECT domaines.id,domaines.domaine, IFNULL(mail, 0) as nb_mail
-                 FROM domaines  
-                 LEFT JOIN  
-		               (SELECT address.id, COUNT(*) AS mail
-		                FROM address 
-		                WHERE type=''
-		                GROUP BY address.domain_id) subreq
-		                USING (id) 
-                 WHERE COMPTE={$uid}
-                 order by domaines.domaine");
+      $db->query("
+SELECT
+  d.id,
+  d.domaine,
+  IFNULL( COUNT(a.id), 0) as nb_mail
+FROM
+  domaines d LEFT JOIN address a ON (d.id=a.domain_id AND a.type='')
+WHERE
+  d.compte = $uid
+GROUP BY
+  d.id
+ORDER BY
+  d.domaine
+;
+");
       $this->enum_domains=array();
       while($db->next_record()){
           $this->enum_domains[]=$db->Record;
