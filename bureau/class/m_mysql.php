@@ -226,6 +226,10 @@ class m_mysql {
       $dbncomp=explode('_',$dbn);
       $dbname=$dbn;
       $dbn=$dbncomp[1];
+      if (empty($dbn)) { // If nothing after the '_'
+        $err->raise("mysql",_("Database can't have empty suffix"));
+        return false;
+      }
     }
     if (!preg_match("#^[0-9a-z]*$#",$dbn)) {
       $err->raise("mysql",_("Database name can contain only letters and numbers"));
