@@ -1,0 +1,67 @@
+
+body {
+  background-color: #101010;
+}
+
+#global {
+  background-color: #ffefd3;
+  border-color: #f08000;
+}
+
+h3 {
+  color: #c04000;
+}
+
+.menu-title {
+  background-color: #f0c040 !important;
+  border-color: #f08000 !important;
+}
+
+.menu-title A {
+  color: #a04000 !important;
+}
+
+.menu-box A {
+  color: #a04000 !important;
+}
+
+.breadcrumb A, .tlist A {
+  color: #a04000 !important;
+}
+.menu-box A:hover {
+  background-color: #f0c040 !important;
+  border-color: #f08000 !important;
+}
+
+hr {
+  border-color: #f08000;
+  color: #f08000;
+}
+
+.ina, .inav, .inb {
+  background-color: #f0e0c0 !important;
+}
+.ina:hover, .inav:hover, .inb:hover {
+  background-color: #f0d0a0 !important;
+}
+
+.lst2, .tedit th {
+  background-color: #f0d0a0 !important;
+}
+
+.lst1 {
+  background-color: #f0e0d0 !important;
+}
+
+.tlist SPAN:hover {
+  background-color: #f0d0a0 !important;
+}
+
+.lst2 SPAN:hover {
+  background-color: #f0e0c0 !important;
+}
+
+.tlist, .tlist th {
+  background-color: #f0e0c0 !important;
+}
+
