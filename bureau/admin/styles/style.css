@@ -287,7 +287,8 @@ img {
 
 .menu-box li a {
 	display: block;
-	height: 18px;
+  padding-top: 6px;
+  padding-bottom: 6px;
 	color: #0D5689;
 	padding-left: 2px;
 	text-decoration: none;
@@ -301,12 +302,12 @@ img {
 	height: 16px;
 	margin: 0px;
 	padding: 0px;
-	padding-top: 1px;
+	top: -3px;
+  position: relative;
 }
 
 .menu-box li a:hover {
 	color: #000000;
-	height: 18px;
 	border: 1px solid #1D6A9F;
 	text-decoration: none;
 	background-color: #DFEEF8;
