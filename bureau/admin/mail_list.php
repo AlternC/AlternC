@@ -181,9 +181,20 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
 <h3><?php __("Mails configuration informations");?></h3>
 
 <?php __("Here are some configuration informations you'll need to configure your mail application.");?>
+<br/>
+<br/>
 
-<ul>
-  <li><b><?php __("Outgoing mail (SMTP)"); ?></b> :
+<table width=100% class="tedit">
+<tr>
+<th width=50%>
+  <b><?php __("Outgoing mail (SMTP)"); ?></b> 
+</th>
+<th width=50%>
+  <b><?php __("Incoming mails"); ?></b>
+</th>
+</tr>
+<tr>
+  <td valign=top>
     <ul>
       <li><b><a href="javascript:;" onClick="$('#cfg-submission').toggle();"><?php __("Submission");?></a></b>
         <ul id='cfg-submission'>
@@ -216,8 +227,8 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
         </ul>
       </li>
     </ul>
-  </li>
-  <li><b><?php __("Incoming mails"); ?></b> :
+  </td>
+  <td valign=top>
     <ul>
       <li><b><a href="javascript:;" onClick="$('#cfg-imap').toggle();"><?php __("IMAP");?></a></b>
         <ul id='cfg-imap'>
@@ -259,8 +270,9 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
         </ul>
       </li>
     </ul>
-  </li>
-</ul>
+  </td>
+</tr>
+</table>
 
 <script type="text/javascript">
   $('#cfg-submission').toggle();
