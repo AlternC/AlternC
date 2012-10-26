@@ -203,3 +203,9 @@ function menu_toggle(id) {
   $("#"+id).toggle();
 }
 
+function false_if_empty(id,err_msg) {
+  if ( $("#"+id).val() == '' ) {
+    alert(err_msg);
+    return false;
+  }
+}

@@ -99,21 +99,14 @@ for($i=0;$i<count($rdb);$i++) {
 </tr>
 </table>
 <br />
-<input type="submit" class="inb" name="submit" value="<?php __("Create this new MySQL database."); ?>" onClick="return mysql_error_empty_suffix();" />
+<input type="submit" class="inb" name="submit" value="<?php __("Create this new MySQL database."); ?>" onClick="return false_if_empty('dbn', '<?php echo addslashes(_("Can't have empty MySQL suffix"));?>');" />
 </form>
 <?php
 }
 }
 ?>
 <script type="text/javascript">
-document.forms['main'].pass.focus();
-document.forms['main'].setAttribute('autocomplete', 'off');
-
-function mysql_error_empty_suffix() {
-  if ( $("#dbn").val() == '' ) {
-    alert("<?php __("Error: empty database suffix.");?>");
-    return false;
-  }
-}
+//document.forms['main'].pass.focus();
+//document.forms['main'].setAttribute('autocomplete', 'off');
 </script>
 <?php include_once("foot.php"); ?>
