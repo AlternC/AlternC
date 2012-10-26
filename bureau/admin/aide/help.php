@@ -33,7 +33,7 @@ $fields = array (
 );
 getFields($fields);
 
-header("Location: ".$help_baseurl."go?version=".urlencode($L_VERSION)."&hid=$hid"]);
+header("Location: ".$help_baseurl."go?version=".urlencode($L_VERSION_HELP)."&hid=$hid");
 
 exit();
 
