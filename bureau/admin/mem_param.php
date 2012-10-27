@@ -66,7 +66,7 @@ if (!$mem->user["canpass"]) {
  __("help_chg_passwd"); ?>
 </p>
 <form method="post" action="mem_passwd.php" name="main" id="main">
-<table border="1" cellspacing="0" cellpadding="4">
+<table border="1" cellspacing="0" cellpadding="4" class="tedit" >
 <tr><th><?php __("Old password"); ?></th><td><input type="password" class="int" name="oldpass" value="<?php isset($oldpass) ? : $oldpass=""; echo $oldpass; ?>" size="20" maxlength="128" /></td></tr>
 <tr><th><?php __("New password"); ?> (1)</th><td><input type="password" class="int" name="newpass" value="<?php isset($newpass) ? : $newpass=""; echo $newpass;  ?>" size="20" maxlength="60" /></td></tr>
 <tr><th><?php __("New password"); ?> (2)</th><td><input type="password" class="int" name="newpass2" value="<?php isset($newpass2) ? : $newpass2=""; echo $newpass2;?>" size="20" maxlength="61" /></td></tr>
@@ -77,7 +77,7 @@ if (!$mem->user["canpass"]) {
 <?php } ?>
 <hr id="topbar"/>
 <form method="post" action="mem_chgmail.php">
-	<table border="1" cellspacing="0" cellpadding="4">
+	<table border="1" cellspacing="0" cellpadding="4" class="tedit">
 		<tr><td colspan="2"><?php __("Change the email of the account"); ?><br />
 		<?php __("help_chg_mail"); ?></td></tr>
 		<tr><th><?php __("Current mailbox"); ?></th><td><big><code><?php echo $mem->user["mail"]; ?></code></big></td></tr>
@@ -88,7 +88,7 @@ if (!$mem->user["canpass"]) {
 <br />
 <hr id="topbar"/>
 <form method="post" action="mem_param.php">
-	<table border="1" cellspacing="0" cellpadding="4">
+	<table border="1" cellspacing="0" cellpadding="4" class="tedit">
 		<tr><td colspan="2"><?php __("Online help settings"); ?><br />
 		<?php __("help_help_settings"); ?></td></tr>
 		<tr><th><label for="showhelp"><?php __("Do you want to see the help texts and links on each page?"); ?></label></th><td><input type="checkbox" class="inc" id="showhelp" name="showhelp" value="1" <?php if ($mem->get_help_param()) echo "checked=\"checked\""; ?> /></td></tr>
@@ -104,7 +104,7 @@ if ($mem->user["su"]) {
 <?php __("Admin preferences"); ?> :
 </p>
 <form method="post" action="mem_admin.php">
-<table border="1" cellspacing="0" cellpadding="4">
+<table border="1" cellspacing="0" cellpadding="4" class="tedit">
 <tr><th><?php __("Members list view"); ?></th><td><select name="admlist" class="inl">
 <option value="0"<?php if ($mem->user["admlist"]==0) echo " selected=\"selected\""; ?>><?php __("Large view"); ?></option>
 <option value="1"<?php if ($mem->user["admlist"]==1) echo " selected=\"selected\""; ?>><?php __("Short view"); ?></option>

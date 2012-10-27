@@ -299,7 +299,7 @@ document.write("<input type=\"button\" name=\"bff\" onclick=\"browseforfolder('m
 case 0:
 /* AFFICHE 1 COLONNE DETAILLEE */
 reset($c);
-echo "<table width=\"100%\" style=\"border: 0px\" cellpadding=\"2\" cellspacing=\"0\">";
+echo "<table width=\"100%\" class=\"tlist\" style=\"border: 0px\" cellpadding=\"2\" cellspacing=\"0\">";
 ?>
 <tr><th>
 <script type="text/javascript">

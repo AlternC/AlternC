@@ -12,6 +12,11 @@ h3 {
   color: #c04000;
 }
 
+.menulogo {
+  background: url(/images/pumpkin.png) top center no-repeat;
+  height: 128px;
+}
+
 .menu-title {
   background-color: #f0c040 !important;
   border-color: #f08000 !important;

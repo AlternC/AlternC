@@ -61,7 +61,7 @@ if (file_exists($cache_file) && $timedif < $cache_time) {
 }
 $xml = @simplexml_load_string($string);
 
-echo '<table cellspacing="0" cellpadding="6" border="1" style="border-collapse: collapse">';
+echo '<table class="tedit" cellspacing="0" cellpadding="6">';
 echo "<tr><th colspan=2><a target=_blank style='font-size: 18px;font-weight: bold;color: #10507C;' href='".$xml->channel->link."'>".$xml->channel->title."</a><br/><i>".$xml->channel->description."</i></th></tr>";
 //echo '<tr><th>'._("Title").'</th><th>'._("Date").'</th></tr>';
 $count = 0;
