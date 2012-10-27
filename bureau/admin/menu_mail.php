@@ -25,7 +25,8 @@
 
 $q = $quota->getquota("mail");
 $r = $quota->getquota("dom");
-if ($q["t"] > 0 || $r["u"] > 0) {
+// there are some existing mail, or there is a domain AND quota authorize mail
+if ($q["u"] > 0 || ( $r["u"] > 0 && $q['t'] > 0 )) {
 
 ?>
 <div class="menu-box">
