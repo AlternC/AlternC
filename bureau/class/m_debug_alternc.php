@@ -59,6 +59,7 @@ class m_debug_alternc {
     if ( $cuid!=2000 ) return false;
     if ( ! $this->status ) return false;
 
+    echo "<div style='background-color: grey;'>";
     echo "<pre>";
     echo "+++ BEGIN Debug Mode+++\n\n";
     print_r($this->infos);
@@ -70,6 +71,7 @@ class m_debug_alternc {
     print_r($_SERVER);
     echo "\n\n+++ END Debug Mode+++";
     echo "</pre>";
+    echo "</div>";
     return true;
   }
 
