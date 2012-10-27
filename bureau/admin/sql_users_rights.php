@@ -51,7 +51,7 @@ if ($r) {
 
 <form method="post" action="sql_users_dorights.php">
 <input type="hidden" name="id" value="<?php echo $id; ?>" />
-<table cellspacing="0" cellpadding="4">
+<table cellspacing="0" cellpadding="4" class="tlist">
    <tr>
      <th>&nbsp;</th>
      <th>&nbsp;</th>

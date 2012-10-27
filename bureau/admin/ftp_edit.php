@@ -53,7 +53,7 @@ if (isset($error) && $error) {
 }
 ?>
 <form method="post" action="ftp_doedit.php" name="main" id="main">
-<table border="1" cellspacing="0" cellpadding="4">
+<table border="1" cellspacing="0" cellpadding="4" class="tedit">
 <tr><th><input type="hidden" name="id" value="<?php echo $id ?>" />
 <label for="login"><?php __("Username"); ?></label></th><td>
 	<select class="inl" name="prefixe"><?php $ftp->select_prefix_list($r["prefixe"]); ?></select>&nbsp;<b>_</b>&nbsp;<input type="text" class="int" name="login" id="login" value="<?php ehe($r[0]["login"]); ?>" size="20" maxlength="64" />
