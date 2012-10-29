@@ -67,6 +67,8 @@ class m_debug_alternc {
     print_r($_GET);
     echo "\n\n--- POST ---\n";
     print_r($_POST);
+    echo "\n\n--- COOKIE ---\n";
+    print_r($_COOKIE);
     echo "\n\n--- SERVER ---\n";
     print_r($_SERVER);
     echo "\n\n+++ END Debug Mode+++";

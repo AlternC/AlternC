@@ -15,10 +15,12 @@ function update_locale($langpath) {
   return $locales;
 }
 
-
 // setlang is on the link at the login page
 if (isset($_REQUEST["setlang"])) {
   $lang=$_REQUEST["setlang"];
+  $setlang=$_REQUEST["setlang"];
+} elseif (isset($_COOKIE['lang'])) {
+  $lang=$_COOKIE['lang'];
 }
 
 $langpath = bindtextdomain("alternc", ALTERNC_LOCALES);
