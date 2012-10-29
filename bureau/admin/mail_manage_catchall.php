@@ -53,7 +53,7 @@ if (!is_null($target_type)) {
       $mail->catchall_set($domain_id, $target_mail);
       break;
     default:
-      $error=_("Unknow target type");
+      $error=_("Unknown target type");
   }
 }
 
@@ -69,7 +69,7 @@ if (isset($error)) {
   	echo "<p class=\"error\">$error</p>";
 }
 
-__("You can choose what to do with emails send to unexisting address of this domain");
+__("You can choose what to do with emails sent to unexisting address of this domain");
 ?>
 <br/><br/>
 
@@ -89,7 +89,7 @@ __("You can choose what to do with emails send to unexisting address of this dom
   </tr>
   <tr>
     <td width=1px><input type="radio" name="target_type" id='target_type_domain' value="domain" <?php if ($catch['type']=='domain') {echo 'checked';}?> />
-    <td style="width: 50%; text-align: justify"><label for='target_type_domain'/><?php echo sprintf(_("Mails send to john.doe@%s will be redirect to john.doe@anotherdomain.tld"),$catch['domain']);?></label></td>
+    <td style="width: 50%; text-align: justify"><label for='target_type_domain'/><?php echo sprintf(_("Mails sent to john.doe@%s will be redirect to john.doe@anotherdomain.tld"),$catch['domain']);?></label></td>
     <td>
       <p>
         <input type="text" id="target_domain" name="target_domain" value="<?php if($catch['type']=='domain') { echo substr($catch['target'],1); } ?>" placeholder="example.tld" />
@@ -101,11 +101,11 @@ __("You can choose what to do with emails send to unexisting address of this dom
   </tr>
 
   <tr>
-    <th colspan="3"><b><?php __("Redirect to a specifig email");?></b></th>
+    <th colspan="3"><b><?php __("Redirect to a specific email");?></b></th>
   </tr>
   <tr>
     <td width=1px><input type="radio" name="target_type" id='target_type_mail' value="mail" <?php if ($catch['type']=='mail') {echo 'checked';}?> />
-    <td style="width: 50%; text-align: justify"><label for='target_type_mail'/><?php echo sprintf(_("Mails send to an unexisting email on '@%s' will be redirect to user@example.tld."),$catch['domain']);?></label></td>
+    <td style="width: 50%; text-align: justify"><label for='target_type_mail'/><?php echo sprintf(_("Mails sent to an unexisting email on '@%s' will be redirect to user@example.tld."),$catch['domain']);?></label></td>
     <td>
       <p>
         <input type="text" name="target_mail" value="<?php if($catch['type']=='mail') { echo $catch['target']; } ?>" placeholder="john.doe@example.tld" />

@@ -102,7 +102,7 @@ if($admin->enabled) {
   }
 
   echo "<hr/><p>";
-  __("You are using the AlternC Panel. You can contact the AlternC community for informations or feedback by joigning the mailing-list");
+  __("You are using the AlternC Panel. You can contact the AlternC community for informations or feedback by joining the mailing-list");
   echo "&nbsp;<a target=_blank href='http://lists.alternc.org/listinfo/users'>users@alternc.org</a>";
   echo "</p>";
 } // if $admin->enabled
