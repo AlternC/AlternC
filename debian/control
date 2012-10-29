@@ -106,7 +106,7 @@ Description-fr.UTF-8: Webmail Squirrelmail pour AlternC
 Package: alternc-roundcube
 Architecture: all
 Pre-depends: debconf (>= 0.5.00) | debconf-2.0
-Depends: debianutils (>= 1.13.1), alternc (>= 1.1~a), roundcube (>= 0.7.1), roundcube-mysql (>= 0.7.1), roundcube-plugins (>= 0.7.1)
+Depends: debianutils (>= 1.13.1), alternc (>= 1.1~a), roundcube (>= 0.7.1), roundcube-mysql (>= 0.7.1), roundcube-plugins (>= 0.7.1), imagemagick
 Conflicts: alternc (<= 1.0.3)
 Provides: alternc-webmail
 Suggests: 

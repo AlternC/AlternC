@@ -69,7 +69,7 @@ $rcmail_config['smtp_debug'] = false;
 // %d - domain (http hostname without the first part)
 // %s - domain name after the '@' from e-mail address provided at login screen
 // For example %n = mail.domain.tld, %d = domain.tld
-$rcmail_config['default_host'] = '';
+$rcmail_config['default_host'] = 'localhost';
 
 // TCP port used for IMAP connections
 $rcmail_config['default_port'] = 143;
@@ -101,10 +101,10 @@ $rcmail_config['imap_force_caps'] = false;
 // extension if available. Some servers (dovecot 1.x) returns wrong results
 // for shared namespaces in this case. http://trac.roundcube.net/ticket/1486225
 // Enable this option to force LSUB command usage instead.
-$rcmail_config['imap_force_lsub'] = false;
+$rcmail_config['imap_force_lsub'] = true;
 
 // IMAP connection timeout, in seconds. Default: 0 (no limit)
-$rcmail_config['imap_timeout'] = 0;
+$rcmail_config['imap_timeout'] = 10;
 
 // Optional IMAP authentication identifier to be used as authorization proxy
 $rcmail_config['imap_auth_cid'] = null;
@@ -132,7 +132,7 @@ $rcmail_config['messages_cache'] = false;
 // %d - domain (http hostname without the first part)
 // %z - IMAP domain (IMAP hostname without the first part)
 // For example %n = mail.domain.tld, %d = domain.tld
-$rcmail_config['smtp_server'] = '';
+$rcmail_config['smtp_server'] = 'localhost';
 
 // SMTP port (default is 25; 465 for SSL)
 $rcmail_config['smtp_port'] = 25;
@@ -195,7 +195,7 @@ $rcmail_config['use_https'] = false;
 
 // Allow browser-autocompletion on login form.
 // 0 - disabled, 1 - username and host only, 2 - username, host, password
-$rcmail_config['login_autocomplete'] = 0;
+$rcmail_config['login_autocomplete'] = 2;
 
 // If users authentication is not case sensitive this must be enabled.
 // You can also use it to force conversion of logins to lower case.
@@ -210,14 +210,14 @@ $rcmail_config['auto_create_user'] = true;
 
 // replace Roundcube logo with this image
 // specify an URL relative to the document root of this Roundcube installation
-$rcmail_config['skin_logo'] = null;
+$rcmail_config['skin_logo'] = 'skins/default/images/roundcube_alternc_logo.png';
 
 // Includes should be interpreted as PHP files
 $rcmail_config['skin_include_php'] = false;
 
 // Session lifetime in minutes
 // must be greater than 'keep_alive'/60
-$rcmail_config['session_lifetime'] = 10;
+$rcmail_config['session_lifetime'] = 60;
 
 // session domain: .example.org
 $rcmail_config['session_domain'] = '';
@@ -247,7 +247,7 @@ $rcmail_config['x_frame_options'] = 'sameorigin';
 // this key is used to encrypt the users imap password which is stored
 // in the session record (and the client cookie if remember password is enabled).
 // please provide a string of exactly 24 chars.
-$rcmail_config['des_key'] = 'cAMcxqIRdwKQYCkMC8QSu9Kh';
+$rcmail_config['des_key'] = '%%deskey%%';
 
 // Automatically add this domain to user names for login
 // Only for IMAP servers that require full e-mail addresses for login
@@ -342,16 +342,16 @@ $rcmail_config['client_mimetypes'] = null;  # null == default
 $rcmail_config['mime_magic'] = '/usr/share/misc/magic';
 
 // path to imagemagick identify binary
-$rcmail_config['im_identify_path'] = null;
+$rcmail_config['im_identify_path'] = '/usr/bin/identify';
 
 // path to imagemagick convert binary
-$rcmail_config['im_convert_path'] = null;
+$rcmail_config['im_convert_path'] = '/usr/bin/convert';
 
 // maximum size of uploaded contact photos in pixel
 $rcmail_config['contact_photo_size'] = 160;
 
 // Enable DNS checking for e-mail address validation
-$rcmail_config['email_dns_check'] = false;
+$rcmail_config['email_dns_check'] = true;
 
 // ----------------------------------
 // PLUGINS
@@ -377,7 +377,7 @@ $rcmail_config['list_cols'] = array('subject', 'status', 'from', 'date', 'size',
 
 // the default locale setting (leave empty for auto-detection)
 // RFC1766 formatted language name like en_US, de_DE, de_CH, fr_FR, pt_BR
-$rcmail_config['language'] = 'fr_FR';
+$rcmail_config['language'] = null;
 
 // use this format for date display (date or strftime format)
 $rcmail_config['date_format'] = 'Y-m-d';
@@ -422,13 +422,13 @@ $rcmail_config['trash_mbox'] = 'Trash';
 $rcmail_config['default_imap_folders'] = array('INBOX', 'Drafts', 'Sent', 'Junk', 'Trash');
 
 // automatically create the above listed default folders on first login
-$rcmail_config['create_default_folders'] = false;
+$rcmail_config['create_default_folders'] = true;
 
 // protect the default folders from renames, deletes, and subscription changes
 $rcmail_config['protect_default_folders'] = true;
 
 // if in your system 0 quota means no limit set this option to true
-$rcmail_config['quota_zero_as_unlimited'] = false;
+$rcmail_config['quota_zero_as_unlimited'] = true;
 
 // Make use of the built-in spell checker. It is based on GoogieSpell.
 // Since Google only accepts connections over https your PHP installatation
@@ -679,14 +679,14 @@ $rcmail_config['prettydate'] = true;
 $rcmail_config['draft_autosave'] = 300;
 
 // default setting if preview pane is enabled
-$rcmail_config['preview_pane'] = false;
+$rcmail_config['preview_pane'] = true;
 
 // Mark as read when viewed in preview pane (delay in seconds)
 // Set to -1 if messages in preview pane should not be marked as read
-$rcmail_config['preview_pane_mark_read'] = 0;
+$rcmail_config['preview_pane_mark_read'] = -1;
 
 // Clear Trash on logout
-$rcmail_config['logout_purge'] = false;
+$rcmail_config['logout_purge'] = true;
 
 // Compact INBOX on logout
 $rcmail_config['logout_expunge'] = false;
@@ -717,10 +717,10 @@ $rcmail_config['flag_for_deletion'] = false;
 $rcmail_config['keep_alive'] = 60;
 
 // If true all folders will be checked for recent messages
-$rcmail_config['check_all_folders'] = false;
+$rcmail_config['check_all_folders'] = true;
 
 // If true, after message delete/move, the next message will be displayed
-$rcmail_config['display_next'] = false;
+$rcmail_config['display_next'] = true;
 
 // 0 - Do not expand threads
 // 1 - Expand all threads automatically
@@ -765,7 +765,7 @@ $rcmail_config['delete_always'] = false;
 // 0 = ask the user, 1 = send automatically, 2 = ignore (never send or ask)
 // 3 = send automatically if sender is in addressbook, otherwise ask the user
 // 4 = send automatically if sender is in addressbook, otherwise ignore
-$rcmail_config['mdn_requests'] = 0;
+$rcmail_config['mdn_requests'] = 2;
 
 // Return receipt checkbox default state
 $rcmail_config['mdn_default'] = 0;

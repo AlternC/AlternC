@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: $Id: admin.po,v 1.2 2003/06/09 14:36:08 root Exp $\n"
 "Report-Msgid-Bugs-To: i18n@alternc.org\n"
-"POT-Creation-Date: 2012-10-18 11:24+0200\n"
+"POT-Creation-Date: 2012-10-29 16:25+0100\n"
 "PO-Revision-Date: 2007-10-25 23:50-0400\n"
 "Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
 "Language-Team: English <i18n@alternc.org>\n"
@@ -179,7 +179,7 @@ msgstr "Pode mudar a senha"
 #: ../admin/bro_main.php:104 ../admin/dom_dodel.php:74
 #: ../admin/dom_edit.php:193 ../admin/dom_edit.php:205
 #: ../admin/dom_subdel.php:80 ../admin/mail_edit.php:90
-#: ../admin/mail_list.php:143 ../admin/sql_bck.php:87 ../admin/sql_del.php:90
+#: ../admin/mail_list.php:160 ../admin/sql_bck.php:87 ../admin/sql_del.php:90
 #: ../admin/sql_users_del.php:76 ../admin/trash_dateselect.php:39
 #: ../class/m_bro.php:70
 msgid "No"
@@ -194,9 +194,9 @@ msgstr "Não"
 #: ../admin/bro_main.php:103 ../admin/dom_dodel.php:74
 #: ../admin/dom_edit.php:192 ../admin/dom_edit.php:204
 #: ../admin/dom_subdel.php:79 ../admin/mail_edit.php:91
-#: ../admin/mail_list.php:176 ../admin/mail_list.php:209
-#: ../admin/mail_list.php:219 ../admin/mail_list.php:229
-#: ../admin/mail_list.php:239 ../admin/sql_bck.php:88 ../admin/sql_del.php:90
+#: ../admin/mail_list.php:204 ../admin/mail_list.php:237
+#: ../admin/mail_list.php:247 ../admin/mail_list.php:257
+#: ../admin/mail_list.php:267 ../admin/sql_bck.php:88 ../admin/sql_del.php:90
 #: ../admin/sql_users_del.php:76 ../admin/trash_dateselect.php:40
 #: ../class/m_bro.php:70
 msgid "Yes"
@@ -242,9 +242,10 @@ msgstr "Criar está nova conta FTP."
 #: ../admin/browseforfolder.php:146 ../admin/ftp_add.php:80
 #: ../admin/ftp_del.php:83 ../admin/ftp_edit.php:74
 #: ../admin/hta_adduser.php:68 ../admin/hta_dodeluser.php:65
-#: ../admin/mail_edit.php:115 ../admin/piwik_user_dodel.php:64
-#: ../admin/sql_bck.php:105 ../admin/sql_users_add.php:73
-#: ../admin/sql_users_password.php:65 ../admin/sql_users_rights.php:101
+#: ../admin/mail_edit.php:115 ../admin/mail_manage_catchall.php:120
+#: ../admin/piwik_user_dodel.php:64 ../admin/sql_bck.php:105
+#: ../admin/sql_users_add.php:73 ../admin/sql_users_password.php:65
+#: ../admin/sql_users_rights.php:101
 msgid "Cancel"
 msgstr ""
 
@@ -288,7 +289,7 @@ msgstr "Adiçionar um domínio"
 
 #: ../admin/adm_authip_whitelist.php:57 ../admin/adm_doms_def_type.php:88
 #: ../admin/bro_editor.php:90 ../admin/ip_main.php:123
-#: ../admin/ip_main.php:178
+#: ../admin/ip_main.php:178 ../admin/mail_manage_catchall.php:119
 msgid "Save"
 msgstr "Salvar"
 
@@ -309,7 +310,7 @@ msgstr ""
 #: ../admin/adm_list.php:169 ../admin/adm_list.php:191
 #: ../admin/adm_passpolicy.php:152 ../admin/adm_tld.php:82
 #: ../admin/dom_edit.php:111 ../admin/ftp_list.php:82 ../admin/ip_main.php:156
-#: ../admin/mail_list.php:129
+#: ../admin/mail_list.php:146
 msgid "Edit"
 msgstr "Editar"
 
@@ -763,7 +764,7 @@ msgid "Compatibility"
 msgstr ""
 
 #: ../admin/adm_domstypeedit.php:100 ../admin/dom_edit.php:135
-#: ../admin/mail_list.php:109 ../admin/mail_list.php:131
+#: ../admin/mail_list.php:126 ../admin/mail_list.php:148
 msgid "Enabled"
 msgstr ""
 
@@ -1027,7 +1028,7 @@ msgstr "Lista dos membros"
 msgid "Domains"
 msgstr "Domínios"
 
-#: ../admin/adm_menulist.php:68 ../admin/menu_mail.php:34
+#: ../admin/adm_menulist.php:68 ../admin/menu_mail.php:35
 #, fuzzy
 msgid "Email Addresses"
 msgstr "Endereço email"
@@ -1943,8 +1944,8 @@ msgstr "Secundário-domínios"
 msgid "Activation pending"
 msgstr ""
 
-#: ../admin/dom_edit.php:142 ../admin/mail_list.php:123
-#: ../admin/mail_list.php:133
+#: ../admin/dom_edit.php:142 ../admin/mail_list.php:140
+#: ../admin/mail_list.php:150
 msgid "Disabled"
 msgstr ""
 
@@ -2102,7 +2103,7 @@ msgstr "Lista de contas FTP"
 msgid "AlternC Control Panel"
 msgstr "Painel de controle do Administrador"
 
-#: ../admin/head.php:56
+#: ../admin/head.php:60
 msgid ""
 "Administrator session. you may <a href='adm_login.php'>return to your "
 "account</a> or <a href='adm_cancel.php'>cancel this feature</a>"
@@ -2435,187 +2436,251 @@ msgstr "Um email por linha"
 msgid "Change this email address"
 msgstr "Mudar esta caixa de email"
 
-#: ../admin/mail_list.php:65
+#: ../admin/mail_list.php:69
 #, fuzzy
 msgid "Create a new mail account"
 msgstr "Criar uma nova conta ftp"
 
-#: ../admin/mail_list.php:69
+#: ../admin/mail_list.php:73
+#, fuzzy
+msgid "Can't have empty mail."
+msgstr "Mudar esta caixa de email"
+
+#: ../admin/mail_list.php:73
 #, fuzzy
 msgid "Create this email address"
 msgstr "Criar uma caixa de email"
 
-#: ../admin/mail_list.php:76
+#: ../admin/mail_list.php:75
+#, fuzzy
+msgid "Manage Catch-all for this domain"
+msgstr "Adiçionar um email ao domínio %s"
+
+#: ../admin/mail_list.php:89
 #, fuzzy
 msgid "No mails for this domain."
 msgstr "Adiçionar um email ao domínio %s"
 
-#: ../admin/mail_list.php:82
+#: ../admin/mail_list.php:95
 #, fuzzy, php-format
 msgid "Email addresses of the domain %s"
 msgstr "Lista de caixas de email do domínio %s"
 
-#: ../admin/mail_list.php:94
+#: ../admin/mail_list.php:107
 msgid "Search"
 msgstr ""
 
-#: ../admin/mail_list.php:102
+#: ../admin/mail_list.php:112
+#, fuzzy
+msgid "Show system emails"
+msgstr "Nome do Domínio"
+
+#: ../admin/mail_list.php:119
 msgid "Items per page:"
 msgstr ""
 
-#: ../admin/mail_list.php:109
+#: ../admin/mail_list.php:126
 #, fuzzy
 msgid "Address"
 msgstr "Endereço email"
 
-#: ../admin/mail_list.php:109
+#: ../admin/mail_list.php:126
 #, fuzzy
 msgid "Last login time"
 msgstr "Último Login: "
 
-#: ../admin/mail_list.php:109
+#: ../admin/mail_list.php:126
 msgid "Other recipients"
 msgstr "Outros receptores"
 
-#: ../admin/mail_list.php:109
+#: ../admin/mail_list.php:126
 msgid "Pop/Imap"
 msgstr ""
 
-#: ../admin/mail_list.php:119
+#: ../admin/mail_list.php:136
 #, fuzzy
 msgid "Deleting..."
 msgstr "Suprimando o secundário-domínio %s"
 
-#: ../admin/mail_list.php:122
+#: ../admin/mail_list.php:139
 msgid ""
 "This email will be deleted soon. You may still be able to undelete it by "
 "clicking here"
 msgstr ""
 
-#: ../admin/mail_list.php:122
+#: ../admin/mail_list.php:139
 #, fuzzy
 msgid "Undelete"
 msgstr "Suprimir"
 
-#: ../admin/mail_list.php:147
+#: ../admin/mail_list.php:163
 #, fuzzy, php-format
 msgid "%3$d-%2$d-%1$d"
 msgstr "%3$d/%1$d/%2$d %6$d:%5$d %7$s"
 
-#: ../admin/mail_list.php:147 ../admin/main.php:36
+#: ../admin/mail_list.php:163 ../admin/main.php:36
 msgid "Never"
 msgstr ""
 
-#: ../admin/mail_list.php:156
+#: ../admin/mail_list.php:173
 #, fuzzy
 msgid "Delete the checked email addresses"
 msgstr "Suprimir as bases selecionadas"
 
-#: ../admin/mail_list.php:164
+#: ../admin/mail_list.php:181
 msgid "Mails configuration informations"
 msgstr ""
 
-#: ../admin/mail_list.php:166
+#: ../admin/mail_list.php:183
 msgid ""
 "Here are some configuration informations you'll need to configure your mail "
 "application."
 msgstr ""
 
-#: ../admin/mail_list.php:169
+#: ../admin/mail_list.php:190
 msgid "Outgoing mail (SMTP)"
 msgstr ""
 
-#: ../admin/mail_list.php:171
+#: ../admin/mail_list.php:193
+msgid "Incoming mails"
+msgstr ""
+
+#: ../admin/mail_list.php:199
 msgid "Submission"
 msgstr ""
 
-#: ../admin/mail_list.php:173 ../admin/mail_list.php:183
-#: ../admin/mail_list.php:193 ../admin/mail_list.php:207
-#: ../admin/mail_list.php:217 ../admin/mail_list.php:227
-#: ../admin/mail_list.php:237
+#: ../admin/mail_list.php:201 ../admin/mail_list.php:211
+#: ../admin/mail_list.php:221 ../admin/mail_list.php:235
+#: ../admin/mail_list.php:245 ../admin/mail_list.php:255
+#: ../admin/mail_list.php:265
 #, fuzzy
 msgid "Server name: "
 msgstr "Rebatizar"
 
-#: ../admin/mail_list.php:174 ../admin/mail_list.php:184
-#: ../admin/mail_list.php:194
+#: ../admin/mail_list.php:202 ../admin/mail_list.php:212
+#: ../admin/mail_list.php:222
 msgid ""
 "The mail address you want to access <i>(example : myuser@example.tld)</i>"
 msgstr ""
 
-#: ../admin/mail_list.php:174 ../admin/mail_list.php:184
-#: ../admin/mail_list.php:194
+#: ../admin/mail_list.php:202 ../admin/mail_list.php:212
+#: ../admin/mail_list.php:222
 #, fuzzy
 msgid "Username: "
 msgstr "Nome de usúario"
 
-#: ../admin/mail_list.php:175 ../admin/mail_list.php:185
-#: ../admin/mail_list.php:195 ../admin/mail_list.php:208
-#: ../admin/mail_list.php:218 ../admin/mail_list.php:228
-#: ../admin/mail_list.php:238
+#: ../admin/mail_list.php:203 ../admin/mail_list.php:213
+#: ../admin/mail_list.php:223 ../admin/mail_list.php:236
+#: ../admin/mail_list.php:246 ../admin/mail_list.php:256
+#: ../admin/mail_list.php:266
 msgid "Port: "
 msgstr ""
 
-#: ../admin/mail_list.php:176 ../admin/mail_list.php:186
-#: ../admin/mail_list.php:196 ../admin/mail_list.php:209
-#: ../admin/mail_list.php:219 ../admin/mail_list.php:229
-#: ../admin/mail_list.php:239
+#: ../admin/mail_list.php:204 ../admin/mail_list.php:214
+#: ../admin/mail_list.php:224 ../admin/mail_list.php:237
+#: ../admin/mail_list.php:247 ../admin/mail_list.php:257
+#: ../admin/mail_list.php:267
 msgid "Authentication: "
 msgstr ""
 
-#: ../admin/mail_list.php:177 ../admin/mail_list.php:187
-#: ../admin/mail_list.php:197 ../admin/mail_list.php:210
-#: ../admin/mail_list.php:220 ../admin/mail_list.php:230
-#: ../admin/mail_list.php:240
+#: ../admin/mail_list.php:205 ../admin/mail_list.php:215
+#: ../admin/mail_list.php:225 ../admin/mail_list.php:238
+#: ../admin/mail_list.php:248 ../admin/mail_list.php:258
+#: ../admin/mail_list.php:268
 msgid "Authentication method: "
 msgstr ""
 
-#: ../admin/mail_list.php:177 ../admin/mail_list.php:210
-#: ../admin/mail_list.php:220 ../admin/mail_list.php:230
-#: ../admin/mail_list.php:240
+#: ../admin/mail_list.php:205 ../admin/mail_list.php:238
+#: ../admin/mail_list.php:248 ../admin/mail_list.php:258
+#: ../admin/mail_list.php:268
 #, fuzzy
 msgid "Normal password"
 msgstr "Senha inicial"
 
-#: ../admin/mail_list.php:178 ../admin/mail_list.php:188
-#: ../admin/mail_list.php:198 ../admin/mail_list.php:211
-#: ../admin/mail_list.php:221 ../admin/mail_list.php:231
-#: ../admin/mail_list.php:241
+#: ../admin/mail_list.php:206 ../admin/mail_list.php:216
+#: ../admin/mail_list.php:226 ../admin/mail_list.php:239
+#: ../admin/mail_list.php:249 ../admin/mail_list.php:259
+#: ../admin/mail_list.php:269
 #, fuzzy
 msgid "Connection security:"
 msgstr "Conectar como"
 
-#: ../admin/mail_list.php:181
+#: ../admin/mail_list.php:209
 msgid "SMTP"
 msgstr ""
 
-#: ../admin/mail_list.php:186 ../admin/mail_list.php:187
-#: ../admin/mail_list.php:196 ../admin/mail_list.php:197
+#: ../admin/mail_list.php:214 ../admin/mail_list.php:215
+#: ../admin/mail_list.php:224 ../admin/mail_list.php:225
 msgid "FIXME"
 msgstr ""
 
-#: ../admin/mail_list.php:191
+#: ../admin/mail_list.php:219
 msgid "SMTPS"
 msgstr ""
 
-#: ../admin/mail_list.php:203
-msgid "Incoming mails"
-msgstr ""
-
-#: ../admin/mail_list.php:205
+#: ../admin/mail_list.php:233
 msgid "IMAP"
 msgstr ""
 
-#: ../admin/mail_list.php:215
+#: ../admin/mail_list.php:243
 msgid "IMAPS"
 msgstr ""
 
-#: ../admin/mail_list.php:225
+#: ../admin/mail_list.php:253
 msgid "POP3"
 msgstr ""
 
-#: ../admin/mail_list.php:235
+#: ../admin/mail_list.php:263
 msgid "POP3S"
+msgstr ""
+
+#: ../admin/mail_manage_catchall.php:38
+msgid "Problem with the domain"
+msgstr ""
+
+#: ../admin/mail_manage_catchall.php:56
+msgid "Unknown target type"
+msgstr ""
+
+#: ../admin/mail_manage_catchall.php:63
+#, php-format
+msgid "Manage catch-all configuration of %s"
+msgstr ""
+
+#: ../admin/mail_manage_catchall.php:72
+msgid ""
+"You can choose what to do with emails sent to unexisting address of this "
+"domain"
+msgstr ""
+
+#: ../admin/mail_manage_catchall.php:80
+msgid "No catch-all"
+msgstr ""
+
+#: ../admin/mail_manage_catchall.php:84
+#, fuzzy
+msgid "No catch-all for this domain."
+msgstr "Adiçionar um email ao domínio %s"
+
+#: ../admin/mail_manage_catchall.php:88
+msgid "Redirect to same address on a different domain"
+msgstr ""
+
+#: ../admin/mail_manage_catchall.php:92
+#, php-format
+msgid ""
+"Mails sent to john.doe@%s will be redirect to john.doe@anotherdomain.tld"
+msgstr ""
+
+#: ../admin/mail_manage_catchall.php:104
+msgid "Redirect to a specific email"
+msgstr ""
+
+#: ../admin/mail_manage_catchall.php:108
+#, php-format
+msgid ""
+"Mails sent to an unexisting email on '@%s' will be redirect to user@example."
+"tld."
 msgstr ""
 
 #: ../admin/main.php:33
@@ -2642,6 +2707,12 @@ msgstr ""
 
 #: ../admin/main.php:90
 msgid "uid"
+msgstr ""
+
+#: ../admin/main.php:105
+msgid ""
+"You are using the AlternC Panel. You can contact the AlternC community for "
+"informations or feedback by joining the mailing-list"
 msgstr ""
 
 #: ../admin/mem_admin.php:40
@@ -3024,7 +3095,7 @@ msgstr "Contas FTP"
 msgid "Count"
 msgstr ""
 
-#: ../admin/quotas_users.php:127 ../class/m_mail.php:78
+#: ../admin/quotas_users.php:127 ../class/m_mail.php:157
 #, fuzzy
 msgid "Email addresses"
 msgstr "Endereço email"
@@ -3036,7 +3107,7 @@ msgstr ""
 #: ../admin/quotas_users.php:139 ../admin/sql_bck.php:48
 #: ../admin/sql_del.php:72 ../admin/sql_dorestore.php:44
 #: ../admin/sql_getparam.php:44 ../admin/sql_list.php:37
-#: ../admin/sql_restore.php:43 ../class/m_mysql.php:910
+#: ../admin/sql_restore.php:43 ../class/m_mysql.php:914
 #, fuzzy
 msgid "MySQL Databases"
 msgstr "Bases de dados MySQL"
@@ -3208,6 +3279,10 @@ msgstr "Criar uma nova base de dados"
 #, fuzzy
 msgid "MySQL Database"
 msgstr "Bases de dados MySQL"
+
+#: ../admin/sql_list.php:102
+msgid "Can't have empty MySQL suffix"
+msgstr ""
 
 #: ../admin/sql_list.php:102
 #, fuzzy
@@ -3836,99 +3911,99 @@ msgstr "Please enter a password"
 msgid "An incompatible .htaccess file exists in this folder"
 msgstr "Nenhum arquivo nesta pasta"
 
-#: ../class/m_mail.php:92
+#: ../class/m_mail.php:138 ../class/m_mail.php:222 ../class/m_mail.php:307
+#: ../class/m_mail.php:424 ../class/m_mail.php:475
+msgid "The email you entered is syntaxically incorrect"
+msgstr ""
+
+#: ../class/m_mail.php:171
 #, fuzzy
 msgid "Email account password"
 msgstr "Senha inicial"
 
-#: ../class/m_mail.php:137 ../class/m_mail.php:217 ../class/m_mail.php:334
-#: ../class/m_mail.php:385
-msgid "The email you entered is syntaxically incorrect"
-msgstr ""
-
-#: ../class/m_mail.php:174
+#: ../class/m_mail.php:260
 #, fuzzy
 msgid "No email found for this query"
 msgstr "Adiçionar um email ao domínio %s"
 
-#: ../class/m_mail.php:229
+#: ../class/m_mail.php:319
 #, fuzzy
 msgid "You cannot create email addresses: your quota is over"
 msgstr "Você não pode adiçionr mais domínios, sua quota acabou."
 
-#: ../class/m_mail.php:235
+#: ../class/m_mail.php:325
 #, fuzzy
 msgid "This email address already exists"
 msgstr "A caixa de email <b>%s</b> não existe!"
 
-#: ../class/m_mail.php:241
+#: ../class/m_mail.php:331
 msgid "An unexpected error occured when creating the email"
 msgstr ""
 
-#: ../class/m_mail.php:295
+#: ../class/m_mail.php:385
 msgid "This email is not yours, you can't change anything on it"
 msgstr ""
 
-#: ../class/m_mail.php:345
+#: ../class/m_mail.php:435
 #, fuzzy, php-format
 msgid "The email %s does not exist, it can't be deleted"
 msgstr "A caixa de email <b>%s</b> não existe!"
 
-#: ../class/m_mail.php:349
+#: ../class/m_mail.php:439
 #, php-format
 msgid "The email %s is already marked for deletion, it can't be deleted"
 msgstr ""
 
-#: ../class/m_mail.php:358
+#: ../class/m_mail.php:448
 #, fuzzy, php-format
 msgid "The email %s has been marked for deletion"
 msgstr "O domínio %s foi suprimido com sucesso."
 
-#: ../class/m_mail.php:364
+#: ../class/m_mail.php:454
 #, fuzzy, php-format
 msgid "The email %s has been successfully deleted"
 msgstr "O domínio %s foi suprimido com sucesso."
 
-#: ../class/m_mail.php:396
+#: ../class/m_mail.php:486
 #, php-format
 msgid "The email %s does not exist, it can't be undeleted"
 msgstr ""
 
-#: ../class/m_mail.php:400
+#: ../class/m_mail.php:490
 #, php-format
 msgid "The email %s is special, it can't be undeleted"
 msgstr ""
 
-#: ../class/m_mail.php:404
+#: ../class/m_mail.php:494
 #, php-format
 msgid ""
 "Sorry, deletion of email %s is already in progress, or not marked for "
 "deletion, it can't be undeleted"
 msgstr ""
 
-#: ../class/m_mail.php:413
+#: ../class/m_mail.php:503
 #, fuzzy, php-format
 msgid "The email %s has been undeleted"
 msgstr "A caixa de email <b>%s</b> foi criado com sucesso"
 
-#: ../class/m_mail.php:416
+#: ../class/m_mail.php:506
 #, php-format
 msgid "-- Program Error -- The email %s can't be undeleted"
 msgstr ""
 
-#: ../class/m_mail.php:497
+#: ../class/m_mail.php:587
 msgid ""
 "There is forbidden characters in your email address. You can't make it a POP/"
 "IMAP account, you can only use it as redirection to other emails"
 msgstr ""
 
-#: ../class/m_mail.php:517
+#: ../class/m_mail.php:607
 msgid ""
 "You set a quota smaller than the current mailbox size. Since it's not "
 "allowed, we set the quota to the current mailbox size"
 msgstr ""
 
-#: ../class/m_mail.php:673
+#: ../class/m_mail.php:777
 #, fuzzy
 msgid "The slave MX account was not found"
 msgstr "Conta Permitiu ?"
@@ -3980,7 +4055,7 @@ msgstr "Ajuda"
 msgid "Cannot connect to PhpMyAdmin"
 msgstr ""
 
-#: ../class/m_mysql.php:192 ../class/m_mysql.php:345
+#: ../class/m_mysql.php:192 ../class/m_mysql.php:349
 #, fuzzy, php-format
 msgid "Database %s not found"
 msgstr "Domínio %s suprimido"
@@ -3989,125 +4064,129 @@ msgstr "Domínio %s suprimido"
 msgid "Your databases quota is over. You cannot create more databases"
 msgstr ""
 
-#: ../class/m_mysql.php:231 ../class/m_mysql.php:339 ../class/m_mysql.php:422
+#: ../class/m_mysql.php:230
+msgid "Database can't have empty suffix"
+msgstr ""
+
+#: ../class/m_mysql.php:235 ../class/m_mysql.php:343 ../class/m_mysql.php:426
 msgid "Database name can contain only letters and numbers"
 msgstr ""
 
-#: ../class/m_mysql.php:237
+#: ../class/m_mysql.php:241
 msgid "Database name cannot exceed 64 characters"
 msgstr ""
 
-#: ../class/m_mysql.php:242
+#: ../class/m_mysql.php:246
 #, fuzzy, php-format
 msgid "Database %s already exists"
 msgstr "Edição de arquivo"
 
-#: ../class/m_mysql.php:260
+#: ../class/m_mysql.php:264
 msgid ""
 "There is a problem with the special PhpMyAdmin user. Contact the "
 "administrator"
 msgstr ""
 
-#: ../class/m_mysql.php:279
+#: ../class/m_mysql.php:283
 #, fuzzy
 msgid "An error occured. The database could not be created"
 msgstr "Algums TLD não pode ser suprimidos..."
 
-#: ../class/m_mysql.php:297
+#: ../class/m_mysql.php:301
 #, fuzzy
 msgid "The database was not found. I can't delete it"
 msgstr "A base de dados %s foi suprimido com sucesso"
 
-#: ../class/m_mysql.php:358
+#: ../class/m_mysql.php:362
 msgid "You have to choose how many backups you want to keep"
 msgstr ""
 
-#: ../class/m_mysql.php:362
+#: ../class/m_mysql.php:366
 #, fuzzy
 msgid "Directory does not exist"
 msgstr "Membro '%s' não existe"
 
-#: ../class/m_mysql.php:380
+#: ../class/m_mysql.php:384
 #, fuzzy
 msgid "Database not found"
 msgstr "Domínio %s suprimido"
 
-#: ../class/m_mysql.php:387 ../class/m_mysql.php:662
+#: ../class/m_mysql.php:391 ../class/m_mysql.php:666
 #, fuzzy
 msgid "The password is mandatory"
 msgstr "Senha"
 
-#: ../class/m_mysql.php:392
+#: ../class/m_mysql.php:396
 msgid "MySQL password cannot exceed 16 characters"
 msgstr ""
 
-#: ../class/m_mysql.php:432
+#: ../class/m_mysql.php:436
 msgid "Databases rights are not correct"
 msgstr ""
 
-#: ../class/m_mysql.php:437
+#: ../class/m_mysql.php:441
 msgid "The username can contain only letters and numbers."
 msgstr ""
 
-#: ../class/m_mysql.php:458
+#: ../class/m_mysql.php:462
 msgid "Could not grant rights"
 msgstr ""
 
-#: ../class/m_mysql.php:480
+#: ../class/m_mysql.php:484
 #, fuzzy
 msgid "File not found"
 msgstr "Domínio %s suprimido"
 
-#: ../class/m_mysql.php:658
+#: ../class/m_mysql.php:662
 #, fuzzy
 msgid "The username is mandatory"
 msgstr "O usuário não tem nenhuma base de dados"
 
-#: ../class/m_mysql.php:666 ../class/m_mysql.php:743
+#: ../class/m_mysql.php:670 ../class/m_mysql.php:747
 msgid "The username can contain only letters and numbers"
 msgstr ""
 
-#: ../class/m_mysql.php:673
+#: ../class/m_mysql.php:677
 msgid "MySQL username cannot exceed 16 characters"
 msgstr ""
 
-#: ../class/m_mysql.php:678
+#: ../class/m_mysql.php:682
 #, fuzzy
 msgid "The database user was not found"
 msgstr "A base de dados %s foi suprimido com sucesso"
 
-#: ../class/m_mysql.php:682 ../class/m_mysql.php:716
+#: ../class/m_mysql.php:686 ../class/m_mysql.php:720
 #, fuzzy
 msgid "The passwords do not match"
 msgstr "Senha"
 
-#: ../class/m_mysql.php:748
+#: ../class/m_mysql.php:752
 #, fuzzy
 msgid "The username was not found"
 msgstr "O usuário não tem nenhuma base de dados"
 
-#: ../class/m_mysql.php:1024
+#: ../class/m_mysql.php:1028
 #, fuzzy
 msgid "The directory could not be created"
 msgstr "Algums TLD não pode ser suprimidos..."
 
-#: ../class/m_piwik.php:68
+#: ../class/m_piwik.php:60
 msgid "Statistics through Piwik accounts"
 msgstr ""
 
-#: ../class/m_piwik.php:143 ../class/m_piwik.php:243
+#: ../class/m_piwik.php:135 ../class/m_piwik.php:235
 msgid "You are not allowed to delete the statistics of this website"
 msgstr ""
 
-#: ../class/m_piwik.php:283
+#: ../class/m_piwik.php:275
 msgid "Unable to reach the API"
 msgstr ""
 
-#: ../class/m_piwik.php:290
+#: ../class/m_piwik.php:282
 msgid "Error while decoding response from the API"
 msgstr ""
 
-#: ../class/m_piwik.php:296
+#: ../class/m_piwik.php:288
 msgid "Other format than JSON is not implemented yet"
 msgstr ""
 
@@ -4316,10 +4395,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Password do not match"
 #~ msgstr "Senha"
-
-#, fuzzy
-#~ msgid "No mail for this domain"
-#~ msgstr "Adiçionar um email ao domínio %s"
 
 #, fuzzy
 #~ msgid "Active"
@@ -4667,10 +4742,6 @@ msgstr ""
 
 #~ msgid "Mailbox list of the domain %s"
 #~ msgstr "Lista de caixas de email do domínio %s"
-
-#, fuzzy
-#~ msgid "Change my mail"
-#~ msgstr "Mudar esta caixa de email"
 
 #~ msgid "General SQL Admin"
 #~ msgstr "Admin do SQL Geral"

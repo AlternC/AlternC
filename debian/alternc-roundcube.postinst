@@ -1,0 +1,38 @@
+#!/bin/sh
+
+set -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+CONFIGFILE="/etc/alternc/local.sh"
+
+case "$1" in
+    configure)
+	
+        # add alternc-roundcube user for php-itk special rights
+	if ! getent passwd alternc-roundcube; then
+	    useradd -g nogroup -u 1996 alternc-roundcube -d /usr/share/roundcube
+	fi 	     
+	dpkg-statoverride --list /var/lib/roundcube/temp >/dev/null || 
+	dpkg-statoverride --add alternc-roundcube root 0750 /var/lib/roundcube/temp
+	chown -R alternc-roundcube:root /var/lib/roundcube/temp
+	chmod -R 750 /var/lib/roundcube/temp
+
+	dpkg-statoverride --list /etc/roundcube/debian-db.php >/dev/null || 
+	dpkg-statoverride --add alternc-roundcube root 0460 /etc/roundcube/debian-db.php
+	chown -R alternc-roundcube:root /etc/roundcube/debian-db.php
+	chmod -R 460 /etc/roundcube/debian-db.php
+
+	dpkg-statoverride --list /etc/roundcube/main.inc.php >/dev/null || 
+	dpkg-statoverride --add alternc-roundcube root 0460 /etc/roundcube/main.inc.php
+	chown -R alternc-roundcube:root /etc/roundcube/main.inc.php
+	chmod -R 460 /etc/roundcube/main.inc.php
+
+	echo "**********************************************"
+	echo "*          ALTERNC-ROUNDCUBE:                *"
+	echo "* Please run alternc.install to fully deploy *"
+	echo "**********************************************"
+	;;
+esac
+
