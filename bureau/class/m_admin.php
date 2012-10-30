@@ -939,6 +939,8 @@ EOF;
       $err->raise("admin",_("The TLD name is mandatory"));
       return false;
     }
+    $tld=trim($tld);
+
     $db->query("SELECT tld FROM tld WHERE tld='$tld';");
     if ($db->next_record()) {
       $err->raise("admin",_("This TLD already exist"));
