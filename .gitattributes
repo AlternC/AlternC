@@ -381,6 +381,7 @@ bureau/class/m_trash.php -text
 bureau/class/mime.php -text
 bureau/class/reset_stats_conf.php -text
 bureau/class/variables.php -text
+bureau/index.php -text
 bureau/locales/Makefile -text
 bureau/locales/README -text
 bureau/locales/de_DE/LC_MESSAGES/.svnignore -text
