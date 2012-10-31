@@ -112,7 +112,7 @@ install: build
 	# Copy the desk files
 	cp -r awstats/bureau debian/alternc-awstats/var/alternc/
 	find debian/alternc-awstats/var/alternc/ -depth -iname ".svn" -exec rm -rf "{}" \; 
-	rm debian/alternc-awstats/var/alternc/locales/Makefile
+	rm -f debian/alternc-awstats/var/alternc/bureau/locales/Makefile
 
 	# Fix permisions
 	chown -R root:www-data debian/alternc-awstats/var/alternc/bureau
