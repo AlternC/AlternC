@@ -343,7 +343,6 @@ class m_mysql {
       $err->raise("mysql",_("Database name can contain only letters and numbers"));
       return false;
     }
-    printvar("SELECT * FROM db WHERE uid='$cuid' AND db='$dbname';");
     $db->query("SELECT * FROM db WHERE uid='$cuid' AND db='$dbname';");
     if (!$db->num_rows()) {
       $err->raise("mysql",_("Database %s not found"),$dbn);

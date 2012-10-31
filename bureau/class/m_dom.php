@@ -171,8 +171,6 @@ class m_dom {
     $name=mysql_real_escape_string($name);    $description=mysql_real_escape_string($description);    $target=mysql_real_escape_string($target);
     $entry=mysql_real_escape_string($entry);    $compatibility=mysql_real_escape_string($compatibility);    $enable=mysql_real_escape_string($enable);
     $only_dns=intval($only_dns);    $need_dns=intval($need_dns);    $advanced=intval($advanced); $create_tmpdir=intval($create_tmpdir); $create_targetdir=intval($create_targetdir);
-  printvar($create_targetdir);
-  printvar("UPDATE domaines_type SET description='$description', target='$target', entry='$entry', compatibility='$compatibility', enable='$enable', need_dns=$need_dns, only_dns=$only_dns, advanced='$advanced',create_tmpdir=$create_tmpdir,create_targetdir=$create_targetdir where name='$name';");
     $db->query("UPDATE domaines_type SET description='$description', target='$target', entry='$entry', compatibility='$compatibility', enable='$enable', need_dns=$need_dns, only_dns=$only_dns, advanced='$advanced',create_tmpdir=$create_tmpdir,create_targetdir=$create_targetdir where name='$name';");
     return true;
   }   
