@@ -14,7 +14,7 @@
 # then put them at the right places in the repositories
 # and commit everything using svn
 
-tx pull -a 
+tx pull -a -f
 
 langs="fr_FR de_DE en_US es_ES pt_BR it_IT" 
 

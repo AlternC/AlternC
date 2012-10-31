@@ -1,621 +1,24 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# English AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: aws.po 3237 2012-08-21 14:59:46Z benjamin $
+# Translators:
+# Benjamin Sonntag <benjamin@alternc.org>, 2004.
+# Bruno Marmier <bruno@marmier.net>, 2004.
 msgid ""
 msgstr ""
-"Project-Id-Version: AlternC 2.0\n"
-"Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
-"POT-Creation-Date: 2012-10-17 11:21+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: <i18n@alternc.org>\n"
-"Language-Team: <i18n@alternc.org>\n"
-"Language: de\n"
+"Project-Id-Version: AlternC, hosting control panel\n"
+"Report-Msgid-Bugs-To: https://alternc.org/report/1\n"
+"POT-Creation-Date: 2012-10-17 11:00+0200\n"
+"PO-Revision-Date: 2012-10-31 10:55+0000\n"
+"Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
+"Language-Team: English <i18n@alternc.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#. Type: boolean
-#. Description
-#: ../alternc.templates:1001
-msgid "Do you REALLY want to install AlternC on this computer ?"
-msgstr ""
-
-#. Type: boolean
-#. Description
-#: ../alternc.templates:1001
-msgid ""
-"You are currently trying to install AlternC on your computer. Be aware that "
-"this package will overwrite critical system files, including but not limited "
-"to the config files of bind, postfix, dovecot, squirrelmail and proftpd."
-msgstr ""
-
-#. Type: boolean
-#. Description
-#: ../alternc.templates:1001
-msgid ""
-"A backup of your old configuration will be stored in \"/var/backups/alternc/"
-"etc-original-`date`.tar.gz\"."
-msgstr ""
-
-#. Type: boolean
-#. Description
-#: ../alternc.templates:1001
-msgid "YOU HAVE BEEN WARNED."
-msgstr ""
-
-#. Type: note
-#. Description
-#: ../alternc.templates:2001
-msgid "AlternC need ACL and QUOTA activated"
-msgstr ""
-
-#. Type: note
-#. Description
-#: ../alternc.templates:2001
-msgid ""
-"AlternC can't work without ACL activated on his file. Please check your /etc/"
-"fstab and add \"acl\" to the options of the partition where you will install "
-"AlternC."
-msgstr ""
-
-#. Type: note
-#. Description
-#: ../alternc.templates:2001
-msgid "Run /usr/lib/alternc/fixperms.sh once it's activated."
-msgstr ""
-
-#. Type: note
-#. Description
-#. Type: note
-#. Description
-#: ../alternc.templates:2001 ../alternc.templates:3001
-msgid ""
-"Also, you need to activate group quota (grpquota) to be able to use disk "
-"quota."
-msgstr ""
-
-#. Type: note
-#. Description
-#: ../alternc.templates:3001
-msgid "AlternC need ACL activated"
-msgstr ""
-
-#. Type: note
-#. Description
-#: ../alternc.templates:3001
-msgid ""
-"AlternC can't work without ACL activated on his file system. ACL not "
-"activated"
-msgstr ""
-
-#. Type: note
-#. Description
-#: ../alternc.templates:4001
-msgid "AlternC QUOTA not activated"
-msgstr ""
-
-#. Type: note
-#. Description
-#: ../alternc.templates:4001
-msgid "The QUOTA assigned to each user will be infinite."
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../alternc.templates:5001
-msgid "Fully qualified name of the desktop:"
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../alternc.templates:5001
-msgid ""
-"Please enter the fully qualified name of your server. This will be the "
-"domain part of the url you will use to access the virtual managment desktop. "
-"This (sub)domain MUST point to your server."
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../alternc.templates:5001
-msgid "The default should be ok if your machine is correctly configured."
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../alternc.templates:6001
-msgid "Name of your hosting service:"
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../alternc.templates:6001
-msgid ""
-"Please enter the name of your hosting service. It may be your company's name "
-"or your personnal name or whatever you want to ..."
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../alternc.templates:7001
-msgid "Name of the primary domain name server:"
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../alternc.templates:7001
-msgid ""
-"Please enter the fully qualified name of your primary dns server. It can be "
-"this server since bind is installed and configured by AlternC. Anyway, if "
-"your hosting service is quite big, you may have an external primary name "
-"server that keep in sync with your alternc's server(s). . The default value "
-"should be good in most case."
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../alternc.templates:8001
-msgid "Name of the secondary domain name server:"
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../alternc.templates:8001
-msgid ""
-"Please enter the fully qualified name of your secondary dns server. It can "
-"be this server since bind is installed and configured by AlternC. Anyway, "
-"you should have 2 separate DNS servers if you want to provide a high quality "
-"hosting service."
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../alternc.templates:8001
-msgid ""
-"You may contact the AlternC's users mailing list if you want to exchange dns "
-"service with other AlternC's users."
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../alternc.templates:9001
-msgid "Name of the mysql server:"
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../alternc.templates:9001
-msgid ""
-"Please enter the fully qualified name of your mysql server host. This server "
-"MUST be able to access the remote server at standard port (3306). It is "
-"recommended to use \"127.0.0.1\" instead of \"localhost\" if your postfix "
-"installation is configured in a chroot (which is the case, by default)."
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../alternc.templates:10001
-msgid "AlternC's mysql system database:"
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../alternc.templates:10001
-msgid ""
-"AlternC will create a mysql database to store it's system data. Please "
-"choose the name of this database here. The default value should be good in "
-"most case."
-msgstr ""
-
-#. Type: string
-#. Description
-#. Type: string
-#. Description
-#: ../alternc.templates:11001 ../alternc.templates:13001
-msgid "AlternC's mysql account:"
-msgstr ""
-
-#. Type: string
-#. Description
-#. Type: string
-#. Description
-#: ../alternc.templates:11001 ../alternc.templates:13001
-msgid ""
-"AlternC will create a mysql administrator account. Please choose it's "
-"username here. The default value should be good in most case."
-msgstr ""
-
-#. Type: password
-#. Description
-#. Type: password
-#. Description
-#: ../alternc.templates:12001 ../alternc.templates:14001
-msgid "Password of the AlternC's mysql account:"
-msgstr ""
-
-#. Type: password
-#. Description
-#. Type: password
-#. Description
-#: ../alternc.templates:12001 ../alternc.templates:14001
-msgid ""
-"AlternC requires an administrator account on the mysql server. It will be "
-"created automatically during the install process. Please choose a password "
-"for this account."
-msgstr ""
-
-#. Type: password
-#. Description
-#: ../alternc.templates:12001
-msgid ""
-"Please choose a quite complex password since it will have full access to the "
-"system database !!!"
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../alternc.templates:15001
-msgid "The server to GRANT permissions to:"
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../alternc.templates:15001
-msgid ""
-"AlternC and MySQL can be installed on different servers. In order to have "
-"GRANT table properly created and manipulated, this parameter must be set to "
-"the hostname or IP the Apache server will appear as connecting from to the "
-"MySQL server."
-msgstr ""
-
-#. Type: select
-#. Description
-#: ../alternc.templates:16001
-msgid "The way backup rotation is executed"
-msgstr ""
-
-#. Type: select
-#. Description
-#: ../alternc.templates:16001
-msgid ""
-"AlternC enables users to configure their own backups, on demand, with "
-"automatic rotation. This option determines how the backups are rotated."
-msgstr ""
-
-#. Type: select
-#. Description
-#: ../alternc.templates:16001
-msgid ""
-"rotate - backup.sql, backup.sql.0, backup.sql.1 date - backup.sql, backup."
-"sql.20080709, backup.sql.20080708"
-msgstr ""
-
-#. Type: select
-#. Description
-#: ../alternc.templates:17001
-msgid "Behavior of the backup script when it encounters a unmanaged file"
-msgstr ""
-
-#. Type: select
-#. Description
-#: ../alternc.templates:17001
-msgid ""
-"The SQL backups can rename or overwrite existing files it doesn't know about "
-"when doing backups. The default behavior is to skip those files and ignore "
-"it."
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../alternc.templates:18001
-msgid "The primary IP of this server:"
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../alternc.templates:18001
-msgid ""
-"AlternC will default the A records for domains it hosts to this address. In "
-"other words, this is the address everyone can reach to server at."
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../alternc.templates:19001
-msgid "The internal IP of this server:"
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../alternc.templates:19001
-msgid ""
-"AlternC will configure Apache and other services to listen to this address. "
-"This is usually the same as the primary IP of the server, unless the server "
-"is sitting behind a NAT router."
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../alternc.templates:19001
-msgid "In other words, this is the IP address of eth0."
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../alternc.templates:20001
-msgid "The default MX to assign to new domains:"
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../alternc.templates:20001
-msgid ""
-"AlternC will assign this hostname as the MX record for all the domains it "
-"hosts. It is usually better be left alone."
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../alternc.templates:21001
-msgid "The default Backup MX to assign to new domains:"
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../alternc.templates:21001
-msgid ""
-"AlternC will assign this hostname as the Backup MX record for all the "
-"domains it hosts. Don't set it if you don't know what it is about."
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../alternc.templates:22001
-msgid "The path where AlternC is installed:"
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../alternc.templates:22001
-msgid ""
-"Please enter the partition name where alternc is installed. This is used "
-"mainly for disk quotas."
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../alternc.templates:22001
-msgid "Warning : Be careful ! It can generate some problems."
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../alternc.templates:23001
-msgid "The monitoring server:"
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../alternc.templates:23001
-msgid ""
-"The IP address (or ip/prefix) of the server(s) which must be authorized to  "
-"ping us and access apache status pages. Completely optional."
-msgstr ""
-
-#. Type: note
-#. Description
-#: ../alternc.templates:24001
-msgid "POP Before SMTP deprecated"
-msgstr ""
-
-#. Type: note
-#. Description
-#: ../alternc.templates:24001
-msgid ""
-"AlternC doesn't automatically configure the pop-before-smtp package anymore, "
-"since it is correctly configured for SASL authentification these days. If "
-"you wish to configure pop-before-smtp, simply find the lines preceded by:"
-msgstr ""
-
-#. Type: note
-#. Description
-#: ../alternc.templates:24001
-msgid "# For Courier-POP3 and Courier-IMAP:"
-msgstr ""
-
-#. Type: note
-#. Description
-#: ../alternc.templates:24001
-msgid ""
-"in the /etc/pop-before-smtp/pop-before-smtp.conf and uncomment it. hash:/var/"
-"lib/pop-before-smtp/hosts must also be added to the mynetworks directive of /"
-"etc/postfix/main.cf"
-msgstr ""
-
-#. Type: boolean
-#. Description
-#: ../alternc.templates:25001
-msgid "Should AlternC remove all databases (/var/lib/mysql/) ?"
-msgstr ""
-
-#. Type: boolean
-#. Description
-#: ../alternc.templates:25001
-msgid "All users databases will be trashed"
-msgstr ""
-
-#. Type: boolean
-#. Description
-#: ../alternc.templates:26001
-msgid "Should AlternC remove users datas ?"
-msgstr ""
-
-#. Type: boolean
-#. Description
-#: ../alternc.templates:26001
-msgid "The files and apache redirections created by users will be trashed"
-msgstr ""
-
-#. Type: boolean
-#. Description
-#: ../alternc.templates:27001
-msgid "Should AlternC remove bind zones ?"
-msgstr ""
-
-#. Type: boolean
-#. Description
-#: ../alternc.templates:27001
-msgid "It will delete all bind zones created by AlternC"
-msgstr ""
-
-#. Type: boolean
-#. Description
-#: ../alternc.templates:28001
-msgid "Should AlternC remove mailboxes ?"
-msgstr ""
-
-#. Type: boolean
-#. Description
-#: ../alternc.templates:28001
-msgid "If you accept all users e-mails will be deleted"
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../alternc.templates:29001
-msgid "Slave servers"
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../alternc.templates:29001
-msgid ""
-"This is a space-separated list of servers that are \"slaves\" to the master "
-"server (this server). When writing apache configuration files, the master "
-"server will attempt to reload apache on those remote servers. The alternc-"
-"slave package correctly configures those machines to allow login and reload."
-msgstr ""
-
-#. Type: boolean
-#. Description
-#: ../alternc.templates:30001
-msgid ""
-"A local MySQL connexion was established on the server. Do you Want to Use "
-"it. If not remote MySQL server connexion parameters will be needed."
-msgstr ""
-
-#. Type: boolean
-#. Description
-#: ../alternc.templates:31001
-msgid ""
-"No local Mysql server was found. Do you want to use a remote Mysql Server. "
-"If not AlternC cannot be installed."
-msgstr ""
-
-#. Type: boolean
-#. Description
-#: ../alternc.templates:32001
-msgid "Remote connection failed. Do you want to try again ?"
-msgstr ""
-
-#. Type: boolean
-#. Description
-#: ../alternc.templates:33001
-msgid ""
-"The ip appears to be private, do you want to use it anyway ? The server "
-"might not be reachable from outside your network."
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../alternc-awstats.templates:1001
-msgid "Default quota value for awstats stats:"
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../alternc-awstats.templates:1001
-msgid ""
-"You are installing the alternc-awstats package. This package allows any user "
-"to ask for statistics about his web site. Users can ask for a limited number "
-"of statistic set. Please specify the default quota they will have for this "
-"service ?"
-msgstr ""
-
-#. Type: note
-#. Description
-#: ../alternc-awstats.templates:2001
-msgid "Error installing AlternC-Awstats"
-msgstr ""
-
-#. Type: note
-#. Description
-#: ../alternc-awstats.templates:2001
-msgid ""
-"AlternC-Awstats requires a complete installed AlternC system to get "
-"installed properly !"
-msgstr ""
-
-#. Type: note
-#. Description
-#: ../alternc-awstats.templates:2001
-msgid ""
-"Please install AlternC and CONFIGURE IT before installing alternc-awstats or "
-"additional modules (don't forget to launch 'alternc.install')."
-msgstr ""
-
-#. Type: note
-#. Description
-#: ../alternc-awstats.templates:2001
-msgid ""
-"Please check out the AlternC installation documentation before proceeding. "
-"Merci de consulter la documentation d'installation d'AlternC avant de "
-"continuer."
-msgstr ""
-
-#. Type: boolean
-#. Description
-#: ../templates:1001
-msgid "Do you want to patch mailman for virtual support?"
-msgstr ""
-
-#. Type: boolean
-#. Description
-#: ../templates:1001
-msgid ""
-"The AlternC mailman plugin can optionally patch mailman to make it support "
-"same-name lists on different domains (ie. allow test@example.com and "
-"test@example.org to coexist). Mailman 2.x, by default, doesn't support that "
-"functionality but Koumbit.org has developped patches to make it."
-msgstr ""
-
-#. Type: boolean
-#. Description
-#: ../templates:1001
-msgid ""
-"The plugin only supports patching, no way to unpatch right now. Please "
-"understand that this process will modify core Mailman code and might break "
-"some functionality. It is running in production on Koumbit.org."
-msgstr ""
-
-#. Type: boolean
-#. Description
-#: ../templates:1001
-msgid ""
-"Also, note that everytime the mailman package is upgraded or reinstalled, "
-"the patches will need to be reapplied manually. This can be done by "
-"reconfiguring the alternc-mailman package.  ."
-msgstr ""
-
-#. Type: boolean
-#. Description
-#: ../templates:1001
-msgid ""
-"The patches are in /usr/share/alternc-mailman/patches. More information "
-"about the patch at http://wiki.koumbit.net/VirtualMailman."
-msgstr ""
+"Language: de_DE\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Emacs 21\n"
 
 #: ../admin/aws_add.php:33
 msgid "You cannot add any new statistics, your quota is over."
@@ -651,35 +54,11 @@ msgstr ""
 msgid "View public"
 msgstr ""
 
-#: ../admin/adm_add.php:77 ../admin/adm_dodefquotas.php:78
-#: ../admin/adm_dodel.php:88 ../admin/adm_domstype.php:85
-#: ../admin/adm_domstype.php:86 ../admin/adm_domstype.php:87
-#: ../admin/adm_domstype.php:88 ../admin/adm_domstype.php:89
-#: ../admin/adm_edit.php:78 ../admin/adm_edit.php:95
-#: ../admin/adm_passpolicy.php:112 ../admin/adm_passpolicy.php:158
-#: ../admin/bro_main.php:104 ../admin/dom_dodel.php:74
-#: ../admin/dom_edit.php:193 ../admin/dom_edit.php:205
-#: ../admin/dom_subdel.php:80 ../admin/mail_edit.php:90
-#: ../admin/mail_list.php:160 ../admin/sql_bck.php:87 ../admin/sql_del.php:90
-#: ../admin/sql_users_del.php:76 ../admin/trash_dateselect.php:39
-#: ../class/m_bro.php:70
+#: ../admin/aws_add.php:96 ../admin/aws_add.php:98
 msgid "No"
 msgstr "Nein"
 
-#: ../admin/adm_add.php:78 ../admin/adm_dodefquotas.php:77
-#: ../admin/adm_dodel.php:87 ../admin/adm_domstype.php:85
-#: ../admin/adm_domstype.php:86 ../admin/adm_domstype.php:87
-#: ../admin/adm_domstype.php:88 ../admin/adm_domstype.php:89
-#: ../admin/adm_edit.php:79 ../admin/adm_edit.php:96
-#: ../admin/adm_passpolicy.php:113 ../admin/adm_passpolicy.php:158
-#: ../admin/bro_main.php:103 ../admin/dom_dodel.php:74
-#: ../admin/dom_edit.php:192 ../admin/dom_edit.php:204
-#: ../admin/dom_subdel.php:79 ../admin/mail_edit.php:91
-#: ../admin/mail_list.php:204 ../admin/mail_list.php:237
-#: ../admin/mail_list.php:247 ../admin/mail_list.php:257
-#: ../admin/mail_list.php:267 ../admin/sql_bck.php:88 ../admin/sql_del.php:90
-#: ../admin/sql_users_del.php:76 ../admin/trash_dateselect.php:40
-#: ../class/m_bro.php:70
+#: ../admin/aws_add.php:96 ../admin/aws_add.php:98
 msgid "Yes"
 msgstr "Ja"
 
@@ -774,13 +153,7 @@ msgstr ""
 msgid "Awstats allowed user list"
 msgstr ""
 
-#: ../admin/adm_edit.php:85 ../admin/adm_mxaccount.php:80
-#: ../admin/adm_mxaccount.php:100 ../admin/adm_slaveaccount.php:80
-#: ../admin/adm_slaveaccount.php:100 ../admin/cron.php:39
-#: ../admin/ftp_add.php:76 ../admin/ftp_edit.php:69
-#: ../admin/hta_adduser.php:58 ../admin/hta_edit.php:106 ../admin/index.php:77
-#: ../admin/sql_getparam.php:71 ../admin/sql_users_add.php:63
-#: ../admin/sql_users_list.php:48 ../admin/sql_users_password.php:55
+#: ../admin/aws_users.php:50
 msgid "Password"
 msgstr "Passwört"
 
@@ -788,7 +161,7 @@ msgstr "Passwört"
 msgid "Create this new awstat account"
 msgstr ""
 
-#: ../admin/aws_users.php:81
+#: ../admin/mman_list.php:103
 msgid "Change password"
 msgstr ""
 
@@ -1024,8 +397,8 @@ msgstr ""
 msgid ""
 "This is the current url to access administration and public pages for this "
 "list. If you want to change it, select another url in the list and submit "
-"this form. <br />If you don't know what you are doing, don't change anything "
-"here."
+"this form. <br />If you don't know what you are doing, don't change anything"
+" here."
 msgstr ""
 
 #: ../admin/mman_url.php:68
@@ -1103,14 +476,14 @@ msgstr ""
 
 #: ../class/m_mailman.php:245
 msgid ""
-"A list with the same name already exist on the server. Please choose another "
-"name."
+"A list with the same name already exist on the server. Please choose another"
+" name."
 msgstr ""
 
 #: ../class/m_mailman.php:260
 msgid ""
-"This email address (or one of the list-subscribe, list-unsubscribe etc.) are "
-"already used."
+"This email address (or one of the list-subscribe, list-unsubscribe etc.) are"
+" already used."
 msgstr ""
 
 #: ../class/m_mailman.php:289
@@ -1159,14 +532,12 @@ msgid "Changing your mail password"
 msgstr ""
 
 #: ../../squirrelmail/alternc_changepass/change.php:115
-#, fuzzy
 msgid "Old Password:"
-msgstr "Passwört"
+msgstr ""
 
 #: ../../squirrelmail/alternc_changepass/change.php:120
-#, fuzzy
 msgid "New Password:"
-msgstr "Passwört"
+msgstr ""
 
 #: ../../squirrelmail/alternc_changepass/change.php:124
 msgid "Verify New Password:"
@@ -1177,9 +548,8 @@ msgid "Change my mail password"
 msgstr ""
 
 #: ../../squirrelmail/alternc_changepass/setup.php:21
-#, fuzzy
 msgid "Change Password"
-msgstr "Passwört"
+msgstr ""
 
 #: ../../squirrelmail/alternc_changepass/setup.php:23
 msgid "Change the password of your email account."
@@ -1196,8 +566,8 @@ msgstr ""
 #: ../admin/about.php:41
 msgid ""
 "AlternC is an automatic hosting software suite. It features a PHP-based "
-"administration interface and scripts that manage server configuration. <br/"
-">It manages, among others, email, Web, Web statistics, and mailing list "
+"administration interface and scripts that manage server configuration. "
+"<br/>It manages, among others, email, Web, Web statistics, and mailing list "
 "services. It is available in many languages. It is a free software "
 "distributed under GPL license."
 msgstr ""
@@ -1211,9 +581,8 @@ msgid "Developer website: "
 msgstr ""
 
 #: ../admin/about.php:49
-#, fuzzy
 msgid "Help: "
-msgstr "Hilfe"
+msgstr ""
 
 #: ../admin/about.php:57
 msgid "You are currently using AlternC "
@@ -1266,9 +635,8 @@ msgid "Can he change its password"
 msgstr ""
 
 #: ../admin/adm_add.php:82 ../admin/adm_edit.php:100
-#, fuzzy
 msgid "Notes"
-msgstr "Bytes"
+msgstr ""
 
 #: ../admin/adm_add.php:86 ../admin/adm_edit.php:104
 msgid "First Name"
@@ -1277,10 +645,6 @@ msgstr "Vorname"
 #: ../admin/adm_add.php:86 ../admin/adm_edit.php:104
 msgid "Surname"
 msgstr "Name"
-
-#: ../admin/adm_add.php:90 ../admin/adm_edit.php:108
-msgid "Email address"
-msgstr ""
 
 #: ../admin/adm_add.php:94 ../admin/adm_dodefquotas.php:48
 #: ../admin/adm_dodefquotas.php:50 ../admin/adm_dodefquotas.php:57
@@ -1325,8 +689,8 @@ msgstr ""
 
 #: ../admin/adm_authip_whitelist.php:50 ../admin/ip_main.php:171
 msgid ""
-"Enter here the IP address you want. <br/> <i>IPv4, IPv6 and subnet allowed</"
-"i>"
+"Enter here the IP address you want. <br/> <i>IPv4, IPv6 and subnet "
+"allowed</i>"
 msgstr ""
 
 #: ../admin/adm_authip_whitelist.php:54 ../admin/ip_main.php:175
@@ -1357,9 +721,8 @@ msgid "Missing uid"
 msgstr ""
 
 #: ../admin/adm_deactivate.php:58
-#, fuzzy
 msgid "User does not exist"
-msgstr "Miglied '%s' existiert nicht"
+msgstr ""
 
 #: ../admin/adm_deactivate.php:63 ../admin/adm_deactivate.php:74
 msgid "Confirm"
@@ -1372,8 +735,8 @@ msgstr ""
 #: ../admin/adm_deactivate.php:68
 msgid ""
 "The following domains will be deactivated and redirected to the URL entered "
-"in the following box. A backup of the domain configuration will be displayed "
-"as a serie of SQL request that you can run to restore the current "
+"in the following box. A backup of the domain configuration will be displayed"
+" as a serie of SQL request that you can run to restore the current "
 "configuration if you want. Click confirm if you are sure you want to "
 "deactivate all this user's domains."
 msgstr ""
@@ -1561,21 +924,22 @@ msgstr ""
 #: ../admin/adm_doms.php:59
 msgid ""
 "Here is the list of the domains installed on this server. You can remove a "
-"domain if it does not exist or does not point to our server anymore. You can "
-"also set the 'Lock' flag on a domain so that the user will not be able to "
+"domain if it does not exist or does not point to our server anymore. You can"
+" also set the 'Lock' flag on a domain so that the user will not be able to "
 "change any DNS parameter or delete this domain from his account."
 msgstr ""
 
 #: ../admin/adm_doms.php:62
 msgid ""
 "The domain OK column are green when the domain exists in the worldwide "
-"registry and has a proper NS,MX and IP depending on its configuration. It is "
-"red if we have serious doubts about its NS, MX or IP configuration. Contact "
-"the user of this domain or a system administrator."
+"registry and has a proper NS,MX and IP depending on its configuration. It is"
+" red if we have serious doubts about its NS, MX or IP configuration. Contact"
+" the user of this domain or a system administrator."
 msgstr ""
 
 #: ../admin/adm_doms.php:65
-msgid "If you want to force the check of NS, MX, IP on domains, click the link"
+msgid ""
+"If you want to force the check of NS, MX, IP on domains, click the link"
 msgstr ""
 
 #: ../admin/adm_doms.php:65
@@ -1695,9 +1059,8 @@ msgstr ""
 
 #: ../admin/adm_domstype.php:58 ../admin/adm_domstypeedit.php:74
 #: ../admin/logs_list.php:52
-#, fuzzy
 msgid "Name"
-msgstr "Neuer Mitglied"
+msgstr ""
 
 #: ../admin/adm_domstype.php:60 ../admin/ip_main.php:63
 #: ../admin/ip_main.php:87
@@ -2086,8 +1449,8 @@ msgstr ""
 
 #: ../admin/adm_mxaccount.php:97
 msgid ""
-"If you want to allow a new server to access your mx-hosted domain list, give "
-"him an account."
+"If you want to allow a new server to access your mx-hosted domain list, give"
+" him an account."
 msgstr ""
 
 #: ../admin/adm_mxaccount.php:106 ../admin/adm_slaveaccount.php:106
@@ -2104,9 +1467,8 @@ msgid "Manage allowed domains (TLD)"
 msgstr ""
 
 #: ../admin/adm_panel.php:52
-#, fuzzy
 msgid "Password Policies"
-msgstr "Passwört"
+msgstr ""
 
 #: ../admin/adm_panel.php:55
 msgid "Manage IP whitelist"
@@ -2187,8 +1549,8 @@ msgstr ""
 #: ../admin/adm_passpolicy.php:120
 msgid ""
 "The classes of characters are : <br />1. Low-case letters (a-z)<br />2. "
-"Upper-case letters (A-Z)<br />3. Figures (0-9)<br />4. Ascii symbols (!\"#$"
-"%&'()*+,-./:;<=>?@[\\]^_`)<br />5. Non-Ascii symbols (accents...)"
+"Upper-case letters (A-Z)<br />3. Figures (0-9)<br />4. Ascii symbols "
+"(!\"#$%&'()*+,-./:;<=>?@[\\]^_`)<br />5. Non-Ascii symbols (accents...)"
 msgstr ""
 
 #: ../admin/adm_passpolicy.php:133
@@ -2196,20 +1558,18 @@ msgid ""
 "Here is the list of the password policies for each place a password may be "
 "needed in AlternC's services. For each of those password kind, you can "
 "choose which policy will be applied to passwords. A policy is a minimum and "
-"maximum password size, and how many classes of characters must appear in the "
-"password. You can also forbid (or not) to use the login or part of it as a "
+"maximum password size, and how many classes of characters must appear in the"
+" password. You can also forbid (or not) to use the login or part of it as a "
 "password."
 msgstr ""
 
 #: ../admin/adm_passpolicy.php:137
-#, fuzzy
 msgid "Password Kind"
-msgstr "Passwört"
+msgstr ""
 
 #: ../admin/adm_passpolicy.php:137
-#, fuzzy
 msgid "Password Policy"
-msgstr "Passwört"
+msgstr ""
 
 #: ../admin/adm_passpolicy.php:139
 msgid "Min Size"
@@ -2256,8 +1616,8 @@ msgstr ""
 #: ../admin/adm_slaveaccount.php:76
 msgid ""
 "Here is the list of the allowed accounts for slave dns synchronization. You "
-"can configure the alternc-slavedns package on your slave server and give him "
-"the login/pass that will grant him access to your server's domain list. "
+"can configure the alternc-slavedns package on your slave server and give him"
+" the login/pass that will grant him access to your server's domain list. "
 msgstr ""
 
 #: ../admin/adm_slaveaccount.php:97
@@ -2412,9 +1772,8 @@ msgid "extracting..."
 msgstr ""
 
 #: ../admin/bro_main.php:146
-#, fuzzy
 msgid "failed"
-msgstr "Datei"
+msgstr ""
 
 #: ../admin/bro_main.php:149
 msgid "done"
@@ -2483,9 +1842,8 @@ msgid "To"
 msgstr ""
 
 #: ../admin/bro_main.php:314
-#, fuzzy
 msgid "Filename"
-msgstr "Datei"
+msgstr ""
 
 #: ../admin/bro_main.php:315 ../admin/logs_list.php:52
 #: ../admin/sql_list.php:54
@@ -2497,9 +1855,8 @@ msgid "Last modification"
 msgstr ""
 
 #: ../admin/bro_main.php:318
-#, fuzzy
 msgid "File Type"
-msgstr "Datei"
+msgstr ""
 
 #: ../admin/bro_main.php:348 ../admin/bro_main.php:526
 msgid "View"
@@ -2694,8 +2051,8 @@ msgstr ""
 
 #: ../admin/dom_add.php:67
 msgid ""
-"Do you want to point this domain to another domain already installed in your "
-"account?"
+"Do you want to point this domain to another domain already installed in your"
+" account?"
 msgstr ""
 
 #: ../admin/dom_add.php:69
@@ -2717,7 +2074,8 @@ msgstr ""
 #: ../admin/dom_add.php:91
 msgid ""
 "If you don't want to host in our server the DNS of your domain, don't check "
-"the box 'host my dns here'. If you don't know what it mean, leave it checked."
+"the box 'host my dns here'. If you don't know what it mean, leave it "
+"checked."
 msgstr ""
 
 #: ../admin/dom_add.php:96 ../admin/dom_doadd.php:60
@@ -2746,11 +2104,6 @@ msgstr ""
 #: ../admin/dom_dodel.php:64 ../admin/dom_dodel.php:67
 #, php-format
 msgid "Confirm the deletion of domain %s"
-msgstr ""
-
-#: ../admin/dom_dodel.php:67 ../admin/sql_del.php:75
-#: ../admin/sql_users_del.php:61
-msgid "WARNING"
 msgstr ""
 
 #: ../admin/dom_dodel.php:69
@@ -3236,7 +2589,8 @@ msgid ""
 "POP/IMAP accounts are receiving emails in the server. To read those emails, "
 "you can use a Webmail, or a mail client such as Thunderbird. If you don't "
 "use POP/IMAP, you can configure your email to be a redirection to other "
-"existing emails. The maximum size is in megabytes, use 0 to make it infinite."
+"existing emails. The maximum size is in megabytes, use 0 to make it "
+"infinite."
 msgstr ""
 
 #: ../admin/mail_edit.php:82
@@ -3246,14 +2600,13 @@ msgstr ""
 
 #: ../admin/mail_edit.php:85
 msgid ""
-"This mailbox is pending deletion. You can recover its mails by setting it to "
-"'Yes' NOW!"
+"This mailbox is pending deletion. You can recover its mails by setting it to"
+" 'Yes' NOW!"
 msgstr ""
 
 #: ../admin/mail_edit.php:95
-#, fuzzy
 msgid "Enter a POP/IMAP password"
-msgstr "Passwört"
+msgstr ""
 
 #: ../admin/mail_edit.php:97 ../admin/quotas_oneuser.php:23
 #: ../admin/quotas_oneuser.php:49 ../admin/quotas_oneuser.php:67
@@ -3281,8 +2634,8 @@ msgstr ""
 
 #: ../admin/mail_edit.php:106
 msgid ""
-"If you want to send emails received on this address to other addresses, even "
-"outside this server, enter those recipients here."
+"If you want to send emails received on this address to other addresses, even"
+" outside this server, enter those recipients here."
 msgstr ""
 
 #: ../admin/mail_edit.php:106
@@ -3363,7 +2716,7 @@ msgstr ""
 #: ../admin/mail_list.php:163
 #, php-format
 msgid "%3$d-%2$d-%1$d"
-msgstr ""
+msgstr "%1$02d/%2$02d/%3$04d"
 
 #: ../admin/mail_list.php:163 ../admin/main.php:36
 msgid "Never"
@@ -3399,9 +2752,8 @@ msgstr ""
 #: ../admin/mail_list.php:221 ../admin/mail_list.php:235
 #: ../admin/mail_list.php:245 ../admin/mail_list.php:255
 #: ../admin/mail_list.php:265
-#, fuzzy
 msgid "Server name: "
-msgstr "Datei"
+msgstr ""
 
 #: ../admin/mail_list.php:202 ../admin/mail_list.php:212
 #: ../admin/mail_list.php:222
@@ -3438,9 +2790,8 @@ msgstr ""
 #: ../admin/mail_list.php:205 ../admin/mail_list.php:238
 #: ../admin/mail_list.php:248 ../admin/mail_list.php:258
 #: ../admin/mail_list.php:268
-#, fuzzy
 msgid "Normal password"
-msgstr "Passwört"
+msgstr ""
 
 #: ../admin/mail_list.php:206 ../admin/mail_list.php:216
 #: ../admin/mail_list.php:226 ../admin/mail_list.php:239
@@ -3522,8 +2873,8 @@ msgstr ""
 #: ../admin/mail_manage_catchall.php:108
 #, php-format
 msgid ""
-"Mails sent to an unexisting email on '@%s' will be redirect to user@example."
-"tld."
+"Mails sent to an unexisting email on '@%s' will be redirect to "
+"user@example.tld."
 msgstr ""
 
 #: ../admin/main.php:33
@@ -3700,9 +3051,8 @@ msgid "Manage the Alternc accounts"
 msgstr ""
 
 #: ../admin/menu_adm.php:38
-#, fuzzy
 msgid "User Quotas"
-msgstr "Quotas"
+msgstr ""
 
 #: ../admin/menu_adm.php:42
 msgid "General PhpMyAdmin"
@@ -3713,9 +3063,8 @@ msgid "Logout"
 msgstr ""
 
 #: ../admin/menu_piwik.php:34
-#, fuzzy
 msgid "Piwik Users"
-msgstr "Benützt"
+msgstr ""
 
 #: ../admin/menu_piwik.php:35
 msgid "Piwik Sites"
@@ -3767,9 +3116,8 @@ msgid "No existing Piwik users"
 msgstr ""
 
 #: ../admin/piwik_sitelist.php:66
-#, fuzzy
 msgid "Site name"
-msgstr "Datei"
+msgstr ""
 
 #: ../admin/piwik_sitelist.php:66
 msgid "Site url"
@@ -3844,9 +3192,8 @@ msgid "Lists"
 msgstr ""
 
 #: ../admin/quotas_users.php:20
-#, fuzzy
 msgid "Quotas status"
-msgstr "Quotas"
+msgstr ""
 
 #: ../admin/quotas_users.php:29
 msgid ""
@@ -4085,8 +3432,8 @@ msgstr ""
 
 #: ../admin/sql_restore.php:56
 msgid ""
-"Warning: Write the complete path and the filename. <br />For example if your "
-"backups are in the directory /Backups,<br />write /Backups/file.sql.gz "
+"Warning: Write the complete path and the filename. <br />For example if your"
+" backups are in the directory /Backups,<br />write /Backups/file.sql.gz "
 "(where file.sql.gz is the filename)."
 msgstr ""
 
@@ -4201,10 +3548,6 @@ msgstr ""
 msgid "Bytes"
 msgstr "Bytes"
 
-#: ../class/functions.php:278
-msgid "Byte"
-msgstr "Byte"
-
 #: ../class/functions.php:283
 msgid "Kb"
 msgstr "Kb"
@@ -4226,9 +3569,8 @@ msgid "year"
 msgstr ""
 
 #: ../class/functions.php:380
-#, fuzzy
 msgid "years"
-msgstr "Bytes"
+msgstr ""
 
 #: ../class/functions.php:382
 msgid "month"
@@ -4334,9 +3676,8 @@ msgid "Domain '%s' not found."
 msgstr ""
 
 #: ../class/m_admin.php:886 ../class/m_admin.php:918 ../class/m_admin.php:968
-#, fuzzy
 msgid "This TLD does not exist"
-msgstr "Miglied '%s' existiert nicht"
+msgstr ""
 
 #: ../class/m_admin.php:939
 msgid "The TLD name is mandatory"
@@ -4490,13 +3831,13 @@ msgid ""
 msgstr ""
 
 #: ../class/m_dom.php:310
-msgid "This domain is the server's domain! You cannot host it on your account!"
+msgid ""
+"This domain is the server's domain! You cannot host it on your account!"
 msgstr ""
 
 #: ../class/m_dom.php:315 ../class/m_dom.php:320
-#, fuzzy
 msgid "The domain already exist"
-msgstr "Miglied '%s' existiert nicht"
+msgstr ""
 
 #: ../class/m_dom.php:327 ../class/m_dom.php:1020
 msgid ""
@@ -4534,19 +3875,17 @@ msgid "The domain cannot be found in the Whois database"
 msgstr ""
 
 #: ../class/m_dom.php:782 ../class/m_dom.php:985
-#, fuzzy
 msgid "The sub-domain does not exist"
-msgstr "Miglied '%s' existiert nicht"
+msgstr ""
 
 #: ../class/m_dom.php:814
-#, fuzzy
 msgid "The folder you entered is incorrect or does not exist"
-msgstr "Miglied '%s' existiert nicht"
+msgstr ""
 
 #: ../class/m_dom.php:902
 msgid ""
-"There is some forbidden characters in the sub domain (only A-Z 0-9 and - are "
-"allowed)"
+"There is some forbidden characters in the sub domain (only A-Z 0-9 and - are"
+" allowed)"
 msgstr ""
 
 #: ../class/m_dom.php:907
@@ -4570,9 +3909,9 @@ msgid ""
 msgstr ""
 
 #: ../class/m_dom.php:1039
-#, fuzzy, php-format
+#, php-format
 msgid "The domain name %s does not exist"
-msgstr "Miglied '%s' existiert nicht"
+msgstr ""
 
 #: ../class/m_dom.php:1045
 msgid "No change has been requested..."
@@ -4580,8 +3919,8 @@ msgstr ""
 
 #: ../class/m_dom.php:1053 ../class/m_dom.php:1059
 msgid ""
-"There is no MX record pointing to this server, and you are asking us to host "
-"the mail here. Please fix your MX DNS pointer"
+"There is no MX record pointing to this server, and you are asking us to host"
+" the mail here. Please fix your MX DNS pointer"
 msgstr ""
 
 #: ../class/m_dom.php:1113 ../class/m_dom.php:1137
@@ -4606,23 +3945,20 @@ msgid "err_"
 msgstr "err_"
 
 #: ../class/m_ftp.php:95
-#, fuzzy
 msgid "No FTP account found"
-msgstr "Miglied '%s' existiert nicht"
+msgstr ""
 
 #: ../class/m_ftp.php:128 ../class/m_ftp.php:181 ../class/m_ftp.php:239
-#, fuzzy
 msgid "This FTP account does not exist"
-msgstr "Miglied '%s' existiert nicht"
+msgstr ""
 
 #: ../class/m_ftp.php:190 ../class/m_ftp.php:264
 msgid "The chosen prefix is not allowed"
 msgstr ""
 
 #: ../class/m_ftp.php:199 ../class/m_ftp.php:271
-#, fuzzy
 msgid "This FTP account already exists"
-msgstr "Miglied '%s' existiert nicht"
+msgstr ""
 
 #: ../class/m_ftp.php:207 ../class/m_ftp.php:283
 msgid "The directory cannot be created"
@@ -4633,9 +3969,9 @@ msgid "Your FTP account quota is over. You cannot create more ftp accounts"
 msgstr ""
 
 #: ../class/m_hta.php:70 ../class/m_hta.php:271 ../class/m_hta.php:312
-#, fuzzy, php-format
+#, php-format
 msgid "The folder '%s' does not exist"
-msgstr "Miglied '%s' existiert nicht"
+msgstr ""
 
 #: ../class/m_hta.php:78 ../class/m_hta.php:83 ../class/m_hta.php:93
 #: ../class/m_hta.php:233 ../class/m_hta.php:278 ../class/m_hta.php:327
@@ -4682,9 +4018,8 @@ msgid "You cannot create email addresses: your quota is over"
 msgstr ""
 
 #: ../class/m_mail.php:325
-#, fuzzy
 msgid "This email address already exists"
-msgstr "Miglied '%s' existiert nicht"
+msgstr ""
 
 #: ../class/m_mail.php:331
 msgid "An unexpected error occured when creating the email"
@@ -4743,8 +4078,8 @@ msgstr ""
 
 #: ../class/m_mail.php:587
 msgid ""
-"There is forbidden characters in your email address. You can't make it a POP/"
-"IMAP account, you can only use it as redirection to other emails"
+"There is forbidden characters in your email address. You can't make it a "
+"POP/IMAP account, you can only use it as redirection to other emails"
 msgstr ""
 
 #: ../class/m_mail.php:607
@@ -4754,9 +4089,8 @@ msgid ""
 msgstr ""
 
 #: ../class/m_mail.php:777
-#, fuzzy
 msgid "The slave MX account was not found"
-msgstr "Miglied '%s' existiert nicht"
+msgstr ""
 
 #: ../class/m_mem.php:85 ../class/m_mem.php:91 ../class/m_mem.php:151
 #: ../class/m_mem.php:268
@@ -4825,9 +4159,9 @@ msgid "Database name cannot exceed 64 characters"
 msgstr ""
 
 #: ../class/m_mysql.php:246
-#, fuzzy, php-format
+#, php-format
 msgid "Database %s already exists"
-msgstr "Miglied '%s' existiert nicht"
+msgstr ""
 
 #: ../class/m_mysql.php:264
 msgid ""
@@ -4848,18 +4182,16 @@ msgid "You have to choose how many backups you want to keep"
 msgstr ""
 
 #: ../class/m_mysql.php:366
-#, fuzzy
 msgid "Directory does not exist"
-msgstr "Miglied '%s' existiert nicht"
+msgstr ""
 
 #: ../class/m_mysql.php:384
 msgid "Database not found"
 msgstr ""
 
 #: ../class/m_mysql.php:391 ../class/m_mysql.php:666
-#, fuzzy
 msgid "The password is mandatory"
-msgstr "Passwört"
+msgstr ""
 
 #: ../class/m_mysql.php:396
 msgid "MySQL password cannot exceed 16 characters"
@@ -4894,19 +4226,16 @@ msgid "MySQL username cannot exceed 16 characters"
 msgstr ""
 
 #: ../class/m_mysql.php:682
-#, fuzzy
 msgid "The database user was not found"
-msgstr "Miglied '%s' existiert nicht"
+msgstr ""
 
 #: ../class/m_mysql.php:686 ../class/m_mysql.php:720
-#, fuzzy
 msgid "The passwords do not match"
-msgstr "Passwört"
+msgstr ""
 
 #: ../class/m_mysql.php:752
-#, fuzzy
 msgid "The username was not found"
-msgstr "Miglied '%s' existiert nicht"
+msgstr ""
 
 #: ../class/m_mysql.php:1028
 msgid "The directory could not be created"
@@ -5072,44 +4401,127 @@ msgstr ""
 msgid "Real Media File"
 msgstr ""
 
-#, fuzzy
-#~ msgid "Password does not match"
-#~ msgstr "Miglied '%s' existiert nicht"
+#~ msgid "Create this new awstat account."
+#~ msgstr "Create those statistics"
 
-#, fuzzy
-#~ msgid "Password match"
-#~ msgstr "Passwört"
+#~ msgid "quota_stats"
+#~ msgstr "Web Statistics (awstats)"
 
-#, fuzzy
-#~ msgid "Password do not match"
-#~ msgstr "Passwört"
+#~ msgid "err_stats_1"
+#~ msgstr "No statistic set found."
 
-#~ msgid "New member"
-#~ msgstr "Neuer Mitglied"
+#~ msgid "err_stats_2"
+#~ msgstr "This statistic set does not exist."
 
-#~ msgid "Member"
-#~ msgstr "Mitglied"
+#~ msgid "err_stats_3"
+#~ msgstr "The chosen prefix is not allowed here"
 
-#~ msgid "mode"
-#~ msgstr "mode"
+#~ msgid "err_stats_4"
+#~ msgstr "This statistic set already exists !"
 
-#, fuzzy
-#~ msgid "You can use a different language: "
-#~ msgstr "Für eine andere Sprache, click über die Fahne"
+#~ msgid "err_stats_5"
+#~ msgstr ""
+#~ "Your statistic set quota is over. You cannot create more statistic sets."
 
-#, fuzzy
-#~ msgid "Front page"
-#~ msgstr "Vorname"
+#~ msgid "err_stats_6"
+#~ msgstr "This language is not supported."
 
-#~ msgid "_"
-#~ msgstr "_"
+#~ msgid "Language"
+#~ msgstr "Language"
 
-#, fuzzy
-#~ msgid "New Name:"
-#~ msgstr "Neuer Mitglied"
+#~ msgid "WARNING"
+#~ msgstr "WARNING"
 
-#~ msgid "If you want to use a different language, click on the flag below"
-#~ msgstr "Für eine andere Sprache, click über die Fahne"
+#~ msgid ""
+#~ "The statistics %s has been successfully deleted (the stats files must be "
+#~ "manually deleted)"
+#~ msgstr ""
+#~ "The statistics %s has been successfully deleted (the stats files must be "
+#~ "manually deleted)"
 
-#~ msgid "lang"
-#~ msgstr "lang"
+#~ msgid "Delete statistics"
+#~ msgstr "Delete statistics"
+
+#~ msgid "Change the Statistics"
+#~ msgstr "Change the Statistics"
+
+#~ msgid "Change those Statistics."
+#~ msgstr "Change those Statistics."
+
+#~ msgid "Byte"
+#~ msgstr "Byte"
+
+#~ msgid "Public page"
+#~ msgstr "Public page"
+
+#~ msgid "List Members"
+#~ msgstr "List Members"
+
+#~ msgid "Sync Members"
+#~ msgstr "List Members"
+
+#~ msgid "Email address"
+#~ msgstr "Email address"
+
+#~ msgid "Owner"
+#~ msgstr "Owner"
+
+#~ msgid "Initial list password"
+#~ msgstr "Initial list password"
+
+#~ msgid "help_mail_add"
+#~ msgstr ""
+#~ "- To create this email<br /> * If you want to store emails received and "
+#~ "access with webmail or email software, check the box \"POP account'. In this"
+#~ " case, choose a password for the POP account.<br /> * If you want to "
+#~ "redirect this mail to other accounts, enter the list of emails, one email "
+#~ "per line (with the @ in every case).<br />Note: you need to either check the"
+#~ " box \"POP account\" or enter redirections, or both.<br /> * To access your "
+#~ "emails, use the address http://<your domain>/webmail/ or any subdomain of "
+#~ "type 'Webmail access'<br />The username is the email address in full (for "
+#~ "example <code>login@example.com</code>) and the password is the one entered "
+#~ "in this form."
+
+#~ msgid "help_mail_edit"
+#~ msgstr ""
+#~ "- To modify this email<br /> * If you want to store emails received and "
+#~ "access with webmail or email software, check the box \\\"POP account'. In "
+#~ "this case, choose a password for the POP account.<br /> * If you want to "
+#~ "redirect this mail to other accounts, enter the list of emails, one email "
+#~ "per line (with the @ in every case).<br />Note: you need to either check the"
+#~ " box \\\"POP account\\\" or enter redirections, or both.<br /> * To access "
+#~ "your emails, use the address http://<your domain>/webmail/ or any subdomain "
+#~ "of type 'Webmail access'<br />The username is the email address in full (for"
+#~ " example <code>login@example.com</code>) and the password is the one entered"
+#~ " in this form."
+
+#~ msgid "help_sql_list_ok"
+#~ msgstr ""
+#~ "You have one or many databases<br />Click on 'Admin SQL' in the "
+#~ "administrator menu<br />Or use the table below to manage backups/restore, "
+#~ "erase your databases :"
+
+#~ msgid "help_sql_list_no"
+#~ msgstr "Your main database doesn't exist, enter a password here to create it."
+
+#~ msgid "help_sql_users_list_ok"
+#~ msgstr ""
+#~ "You have one or many databases.<br />Click on 'Admin SQL' on the menu for "
+#~ "administrator<br />Or use the following table to manage your "
+#~ "backups/restores, deletion of your databases :"
+
+#~ msgid "help_sql_users_rights_ok"
+#~ msgstr ""
+#~ "Your main database doesn't exist, enter here a database password to create "
+#~ "it."
+
+#~ msgid "help_dns_mx %s %s"
+#~ msgstr ""
+#~ "If we manage your DNS:<br />You can decide to manage your mails elsewhere "
+#~ "(MX field).<br />Put <b><code>%s</code></b> in this field to manage your "
+#~ "mails with %s<br /> Otherwise put the ip or the name of the server you want "
+#~ "to use to manage your emails.\\t<small>Warning: if you leave this field "
+#~ "empty, you will not be able to use emails on this domain.</small>"
+
+#~ msgid "help_dns_mail"
+#~ msgstr "If we do not manage your DNS:<br /> do we manage your emails?"
