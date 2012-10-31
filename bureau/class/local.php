@@ -1,11 +1,11 @@
 <?php
 
 /* Read global variables (AlternC configuration) */
-$L_VERSION="v. 1.1~rc1";
+$L_VERSION="v. 3.0~rc1";
 
 // To be able to have displayer version != help version
 // (usefull during RC, etc...)
-$L_VERSION_HELP="1.1~rc1";
+$L_VERSION_HELP="3.0";
 
 /* To ease the transition, we define a lookup table for old names */
 $compat = array('DEFAULT_MX'   => 'MX',
