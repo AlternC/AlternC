@@ -318,7 +318,7 @@ function format_date($format,$date) {
     $hh=$h;
     $am="am";
   }
-  return sprintf(_($format),$d,$m,$y,$h,$i,$hh,$am);
+  return sprintf($format,$d,$m,$y,$h,$i,$hh,$am);
 }
 
 /* Strip slashes if needed : */

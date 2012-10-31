@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AlternC 2.0\n"
 "Report-Msgid-Bugs-To: i18n@alternc.org\n"
-"POT-Creation-Date: 2012-10-31 13:43+0100\n"
+"POT-Creation-Date: 2012-10-31 13:54+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -115,7 +115,7 @@ msgstr ""
 #: ../admin/adm_donosu.php:33 ../admin/adm_dorenew.php:34
 #: ../admin/adm_dorenew.php:45 ../admin/adm_dosu.php:33
 #: ../admin/adm_edit.php:36 ../admin/adm_edit.php:48 ../admin/adm_email.php:30
-#: ../admin/adm_list.php:37 ../admin/adm_list.php:58 ../admin/adm_login.php:78
+#: ../admin/adm_list.php:33 ../admin/adm_list.php:54 ../admin/adm_login.php:78
 #: ../admin/adm_login.php:85 ../admin/adm_mxaccount.php:33
 #: ../admin/adm_panel.php:33 ../admin/adm_passpolicy.php:30
 #: ../admin/adm_quotadoedit.php:33 ../admin/adm_quotaedit.php:34
@@ -291,7 +291,7 @@ msgid "Type"
 msgstr ""
 
 #: ../admin/adm_authip_whitelist.php:81 ../admin/adm_domstype.php:77
-#: ../admin/adm_list.php:169 ../admin/adm_list.php:191
+#: ../admin/adm_list.php:165 ../admin/adm_list.php:187
 #: ../admin/adm_passpolicy.php:152 ../admin/adm_tld.php:82
 #: ../admin/dom_edit.php:111 ../admin/ftp_list.php:82 ../admin/ip_main.php:156
 #: ../admin/mail_list.php:146
@@ -384,8 +384,8 @@ msgstr ""
 msgid "Default Value"
 msgstr ""
 
-#: ../admin/adm_defquotas.php:106 ../admin/adm_list.php:127
-#: ../admin/adm_list.php:172 ../admin/adm_list.php:192
+#: ../admin/adm_defquotas.php:106 ../admin/adm_list.php:123
+#: ../admin/adm_list.php:168 ../admin/adm_list.php:188
 #: ../admin/menu_quota.php:46
 msgid "Quotas"
 msgstr ""
@@ -407,8 +407,8 @@ msgid "Uid"
 msgstr ""
 
 #: ../admin/adm_dnsweberror.php:55 ../admin/adm_dnsweberror.php:87
-#: ../admin/adm_list.php:123 ../admin/adm_list.php:205
-#: ../admin/adm_list.php:206 ../admin/adm_list.php:207
+#: ../admin/adm_list.php:119 ../admin/adm_list.php:201
+#: ../admin/adm_list.php:202 ../admin/adm_list.php:203
 #: ../admin/quotas_oneuser.php:12 ../admin/quotas_users.php:159
 msgid "Account"
 msgstr ""
@@ -547,8 +547,8 @@ msgstr ""
 msgid "Action"
 msgstr ""
 
-#: ../admin/adm_doms.php:69 ../admin/adm_doms.php:87 ../admin/adm_list.php:165
-#: ../admin/adm_list.php:190
+#: ../admin/adm_doms.php:69 ../admin/adm_doms.php:87 ../admin/adm_list.php:161
+#: ../admin/adm_list.php:186
 msgid "Connect as"
 msgstr ""
 
@@ -854,96 +854,101 @@ msgstr ""
 msgid "Send"
 msgstr ""
 
-#: ../admin/adm_list.php:66
+#: ../admin/adm_list.php:62
 msgid "AlternC account list"
 msgstr ""
 
-#: ../admin/adm_list.php:75
+#: ../admin/adm_list.php:71
 #, php-format
 msgid "%s accounts"
 msgstr ""
 
-#: ../admin/adm_list.php:75
+#: ../admin/adm_list.php:71
 msgid "Here is the list of hosted AlternC accounts"
 msgstr ""
 
-#: ../admin/adm_list.php:79
+#: ../admin/adm_list.php:75
 msgid "List all AlternC accounts"
 msgstr ""
 
-#: ../admin/adm_list.php:89
+#: ../admin/adm_list.php:85
 msgid "Or only the accounts of:"
 msgstr ""
 
-#: ../admin/adm_list.php:94
+#: ../admin/adm_list.php:90
 msgid "List only my accounts"
 msgstr ""
 
-#: ../admin/adm_list.php:96
+#: ../admin/adm_list.php:92
 msgid "Create a new AlternC account"
 msgstr ""
 
-#: ../admin/adm_list.php:100
+#: ../admin/adm_list.php:96
 msgid "No account defined for now"
 msgstr ""
 
-#: ../admin/adm_list.php:114 ../admin/adm_list.php:197
-#: ../admin/adm_list.php:283 ../admin/ftp_list.php:92
+#: ../admin/adm_list.php:110 ../admin/adm_list.php:193
+#: ../admin/adm_list.php:279 ../admin/ftp_list.php:92
 msgid "Delete checked accounts"
 msgstr ""
 
-#: ../admin/adm_list.php:118
+#: ../admin/adm_list.php:114
 msgid "Minimal view"
 msgstr ""
 
-#: ../admin/adm_list.php:124
+#: ../admin/adm_list.php:120
 msgid "Manager"
 msgstr ""
 
-#: ../admin/adm_list.php:125
+#: ../admin/adm_list.php:121
 msgid "Created by"
 msgstr ""
 
-#: ../admin/adm_list.php:126
+#: ../admin/adm_list.php:122
 msgid "Created on"
 msgstr ""
 
-#: ../admin/adm_list.php:128
+#: ../admin/adm_list.php:124
 msgid "Last login"
 msgstr ""
 
-#: ../admin/adm_list.php:129
+#: ../admin/adm_list.php:125
 msgid "Last ip"
 msgstr ""
 
-#: ../admin/adm_list.php:130
+#: ../admin/adm_list.php:126
 msgid "Fails"
 msgstr ""
 
-#: ../admin/adm_list.php:131 ../admin/main.php:90
+#: ../admin/adm_list.php:127 ../admin/main.php:90
 msgid "Expiry"
 msgstr ""
 
-#: ../admin/adm_list.php:176 ../admin/dom_edit.php:136
+#: ../admin/adm_list.php:148 ../admin/mail_list.php:163
+#, php-format
+msgid "%3$d-%2$d-%1$d"
+msgstr ""
+
+#: ../admin/adm_list.php:172 ../admin/dom_edit.php:136
 msgid "Disable"
 msgstr ""
 
-#: ../admin/adm_list.php:190 ../admin/adm_list.php:227
-#: ../admin/adm_list.php:244 ../admin/adm_list.php:268
+#: ../admin/adm_list.php:186 ../admin/adm_list.php:223
+#: ../admin/adm_list.php:240 ../admin/adm_list.php:264
 msgid "C"
 msgstr ""
 
-#: ../admin/adm_list.php:191 ../admin/adm_list.php:228
-#: ../admin/adm_list.php:245 ../admin/adm_list.php:269
+#: ../admin/adm_list.php:187 ../admin/adm_list.php:224
+#: ../admin/adm_list.php:241 ../admin/adm_list.php:265
 msgid "E"
 msgstr ""
 
-#: ../admin/adm_list.php:192 ../admin/adm_list.php:230
-#: ../admin/adm_list.php:247 ../admin/adm_list.php:271
+#: ../admin/adm_list.php:188 ../admin/adm_list.php:226
+#: ../admin/adm_list.php:243 ../admin/adm_list.php:267
 msgid "Q"
 msgstr ""
 
-#: ../admin/adm_list.php:201
+#: ../admin/adm_list.php:197
 msgid "Complete view"
 msgstr ""
 
@@ -1363,6 +1368,12 @@ msgstr ""
 
 #: ../admin/adm_variables.php:72
 msgid "Save variables"
+msgstr ""
+
+#: ../admin/bro_editor.php:54 ../admin/bro_editor.php:63
+#: ../admin/bro_main.php:342 ../admin/bro_main.php:369
+#, php-format
+msgid "%3$d-%2$d-%1$d %4$d:%5$d"
 msgstr ""
 
 #: ../admin/bro_editor.php:54 ../admin/bro_editor.php:63
@@ -2344,11 +2355,6 @@ msgstr ""
 msgid "Undelete"
 msgstr ""
 
-#: ../admin/mail_list.php:163
-#, php-format
-msgid "%3$d-%2$d-%1$d"
-msgstr ""
-
 #: ../admin/mail_list.php:163 ../admin/main.php:36
 msgid "Never"
 msgstr ""
@@ -2510,6 +2516,11 @@ msgstr ""
 
 #: ../admin/main.php:33
 msgid "Last Login: "
+msgstr ""
+
+#: ../admin/main.php:38
+#, php-format
+msgid "the %3$d-%2$d-%1$d at %4$d:%5$d"
 msgstr ""
 
 #: ../admin/main.php:39

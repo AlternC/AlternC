@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: AlternC, hosting control panel\n"
 "Report-Msgid-Bugs-To: https://alternc.org/report/1\n"
 "POT-Creation-Date: 2012-10-17 11:00+0200\n"
-"PO-Revision-Date: 2012-10-31 12:46+0000\n"
+"PO-Revision-Date: 2012-10-31 12:56+0000\n"
 "Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
 "Language-Team: English <i18n@alternc.org>\n"
 "MIME-Version: 1.0\n"
@@ -608,7 +608,7 @@ msgstr "Vous utilisez actuellement AlternC "
 #: ../admin/adm_donosu.php:33 ../admin/adm_dorenew.php:34
 #: ../admin/adm_dorenew.php:45 ../admin/adm_dosu.php:33
 #: ../admin/adm_edit.php:36 ../admin/adm_edit.php:48 ../admin/adm_email.php:30
-#: ../admin/adm_list.php:37 ../admin/adm_list.php:58 ../admin/adm_login.php:78
+#: ../admin/adm_list.php:33 ../admin/adm_list.php:54 ../admin/adm_login.php:78
 #: ../admin/adm_login.php:85 ../admin/adm_mxaccount.php:33
 #: ../admin/adm_panel.php:33 ../admin/adm_passpolicy.php:30
 #: ../admin/adm_quotadoedit.php:33 ../admin/adm_quotaedit.php:34
@@ -800,8 +800,8 @@ msgstr "Type de compte"
 msgid "Default Value"
 msgstr "Valeur par défaut"
 
-#: ../admin/adm_defquotas.php:106 ../admin/adm_list.php:127
-#: ../admin/adm_list.php:172 ../admin/adm_list.php:192
+#: ../admin/adm_defquotas.php:106 ../admin/adm_list.php:123
+#: ../admin/adm_list.php:168 ../admin/adm_list.php:188
 #: ../admin/menu_quota.php:46
 msgid "Quotas"
 msgstr "Quotas"
@@ -823,8 +823,8 @@ msgid "Uid"
 msgstr "Uid"
 
 #: ../admin/adm_dnsweberror.php:55 ../admin/adm_dnsweberror.php:87
-#: ../admin/adm_list.php:123 ../admin/adm_list.php:205
-#: ../admin/adm_list.php:206 ../admin/adm_list.php:207
+#: ../admin/adm_list.php:119 ../admin/adm_list.php:201
+#: ../admin/adm_list.php:202 ../admin/adm_list.php:203
 #: ../admin/quotas_oneuser.php:12 ../admin/quotas_users.php:159
 msgid "Account"
 msgstr "Compte"
@@ -954,8 +954,8 @@ msgstr "Si vous voulez forcer la vérification des NS,  MX et IP des domaines, c
 msgid "Show domain list with refreshed checked NS, MX, IP information"
 msgstr "Afficher la liste des domaines avec des informations NS, MX et IP à jour."
 
-#: ../admin/adm_doms.php:69 ../admin/adm_doms.php:87 ../admin/adm_list.php:165
-#: ../admin/adm_list.php:190
+#: ../admin/adm_doms.php:69 ../admin/adm_doms.php:87 ../admin/adm_list.php:161
+#: ../admin/adm_list.php:186
 msgid "Connect as"
 msgstr "Se connecter"
 
@@ -1251,91 +1251,96 @@ msgstr "Email"
 msgid "Send"
 msgstr "Envoyer"
 
-#: ../admin/adm_list.php:66
+#: ../admin/adm_list.php:62
 msgid "AlternC account list"
 msgstr "Liste des comptes AlternC"
 
-#: ../admin/adm_list.php:75
+#: ../admin/adm_list.php:71
 #, php-format
 msgid "%s accounts"
 msgstr "%s comptes"
 
-#: ../admin/adm_list.php:75
+#: ../admin/adm_list.php:71
 msgid "Here is the list of hosted AlternC accounts"
 msgstr "Voici la liste des comptes AlternC hébergés"
 
-#: ../admin/adm_list.php:79
+#: ../admin/adm_list.php:75
 msgid "List all AlternC accounts"
 msgstr "Liste de tous les comptes AlternC"
 
-#: ../admin/adm_list.php:89
+#: ../admin/adm_list.php:85
 msgid "Or only the accounts of:"
 msgstr "Ou seulement les comptes de&nbsp;:"
 
-#: ../admin/adm_list.php:94
+#: ../admin/adm_list.php:90
 msgid "List only my accounts"
 msgstr "Lister seulement mes comptes"
 
-#: ../admin/adm_list.php:96
+#: ../admin/adm_list.php:92
 msgid "Create a new AlternC account"
 msgstr "Créer un nouveau compte AlternC"
 
-#: ../admin/adm_list.php:100
+#: ../admin/adm_list.php:96
 msgid "No account defined for now"
 msgstr "Aucun compte n'existe pour l'instant"
 
-#: ../admin/adm_list.php:118
+#: ../admin/adm_list.php:114
 msgid "Minimal view"
 msgstr "Affichage simplifié"
 
-#: ../admin/adm_list.php:124
+#: ../admin/adm_list.php:120
 msgid "Manager"
 msgstr "Administrateur"
 
-#: ../admin/adm_list.php:125
+#: ../admin/adm_list.php:121
 msgid "Created by"
 msgstr "Créateur"
 
-#: ../admin/adm_list.php:126
+#: ../admin/adm_list.php:122
 msgid "Created on"
 msgstr "Créé le"
 
-#: ../admin/adm_list.php:128
+#: ../admin/adm_list.php:124
 msgid "Last login"
 msgstr "Dernière connexion"
 
-#: ../admin/adm_list.php:129
+#: ../admin/adm_list.php:125
 msgid "Last ip"
 msgstr "Dernière IP"
 
-#: ../admin/adm_list.php:130
+#: ../admin/adm_list.php:126
 msgid "Fails"
 msgstr "Échecs"
 
-#: ../admin/adm_list.php:131 ../admin/main.php:90
+#: ../admin/adm_list.php:127 ../admin/main.php:90
 msgid "Expiry"
 msgstr "Expiration"
 
-#: ../admin/adm_list.php:176 ../admin/dom_edit.php:136
+#: ../admin/adm_list.php:148 ../admin/mail_list.php:163
+#, php-format
+msgid "%3$d-%2$d-%1$d"
+msgstr "%1$02d/%2$02d/%3$04d"
+
+#: ../admin/adm_list.php:172 ../admin/dom_edit.php:136
 msgid "Disable"
 msgstr "Désactiver"
 
-#: ../admin/adm_list.php:190 ../admin/adm_list.php:227
-#: ../admin/adm_list.php:244 ../admin/adm_list.php:268
+#: ../admin/adm_list.php:186 ../admin/adm_list.php:223
+#: ../admin/adm_list.php:240 ../admin/adm_list.php:264
 msgid "C"
 msgstr "C"
 
-#: ../admin/adm_list.php:191 ../admin/adm_list.php:228
-#: ../admin/adm_list.php:245 ../admin/adm_list.php:269
+#: ../admin/adm_list.php:187 ../admin/adm_list.php:224
+#: ../admin/adm_list.php:241 ../admin/adm_list.php:265
 msgid "E"
 msgstr "M"
 
-#: ../admin/adm_list.php:192 ../admin/adm_list.php:230
-#: ../admin/adm_list.php:247 ../admin/adm_list.php:271
+#: ../admin/adm_list.php:188 ../admin/adm_list.php:226
+#: ../admin/adm_list.php:243 ../admin/adm_list.php:267
 msgid "Q"
 msgstr "Q"
 
-#: ../admin/adm_list.php:201
+#: ../admin/adm_list.php:197
 msgid "Complete view"
 msgstr "Affichage détaillé"
 
@@ -1748,6 +1753,12 @@ msgstr "Noms"
 #: ../admin/adm_variables.php:72
 msgid "Save variables"
 msgstr "Sauver la configuration"
+
+#: ../admin/bro_editor.php:54 ../admin/bro_editor.php:63
+#: ../admin/bro_main.php:342 ../admin/bro_main.php:369
+#, php-format
+msgid "%3$d-%2$d-%1$d %4$d:%5$d"
+msgstr "%1$d/%2$d/%3$d %4$d:%5$d"
 
 #: ../admin/bro_editor.php:54 ../admin/bro_editor.php:63
 #, php-format
@@ -2721,11 +2732,6 @@ msgstr "Cet email sera effacé sous peu. Vous pouvez empêcher son effacement en
 msgid "Undelete"
 msgstr "Restaurer"
 
-#: ../admin/mail_list.php:163
-#, php-format
-msgid "%3$d-%2$d-%1$d"
-msgstr "%1$02d/%2$02d/%3$04d"
-
 #: ../admin/mail_list.php:163 ../admin/main.php:36
 msgid "Never"
 msgstr "Jamais"
@@ -2888,6 +2894,11 @@ msgstr "Les mails envoyé vers une adresse inexistante de '%s' seront redirigés
 #: ../admin/main.php:33
 msgid "Last Login: "
 msgstr "Dernière connexion : "
+
+#: ../admin/main.php:38
+#, php-format
+msgid "the %3$d-%2$d-%1$d at %4$d:%5$d"
+msgstr "le %1$d/%2$d/%3$d à %4$d:%5$d"
 
 #: ../admin/main.php:39
 #, php-format
@@ -4010,7 +4021,7 @@ msgstr "Serveur de mail de secours"
 
 #: ../class/m_dom.php:1459
 msgid "AlternC panel access"
-msgstr "Accès au panneau de contrôle AlternC"
+msgstr "Accès à AlternC"
 
 #: ../class/m_err.php:66 ../class/m_err.php:98
 msgid "err_"

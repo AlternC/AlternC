@@ -339,7 +339,7 @@ if ($canedit) {
 }
 echo "\">".htmlentities($c[$i]["name"])."</a></td>\n";
 echo "	<td>".format_size($c[$i]["size"])."</td>";
-echo "<td>".format_date('%3$d-%2$d-%1$d %4$d:%5$d',date("Y-m-d H:i:s",$c[$i]["date"]))."<br /></td>";
+echo "<td>".format_date(_('%3$d-%2$d-%1$d %4$d:%5$d'),date("Y-m-d H:i:s",$c[$i]["date"]))."<br /></td>";
 if ($p["showtype"]) {
 echo "<td>"._($bro->mime($c[$i]["name"]))."</td>";
 }
@@ -366,7 +366,7 @@ echo "<td><b><a href=\"";
 echo "bro_main.php?R=".urlencode($R."/".$c[$i]["name"]);
 echo "\">".htmlentities($c[$i]["name"])."/</a></b></td>\n";
 echo "	<td>".format_size($c[$i]["size"])."</td>";
-echo "<td>".format_date('%3$d-%2$d-%1$d %4$d:%5$d',date("Y-m-d h:i:s",$c[$i]["date"]))."<br /></td>";
+echo "<td>".format_date(_('%3$d-%2$d-%1$d %4$d:%5$d'),date("Y-m-d h:i:s",$c[$i]["date"]))."<br /></td>";
 if ($p["showtype"]) {
   echo "<td>"._("Folder")."</td>";
 }

@@ -1,15 +1,11 @@
 <?php
 /*
- $Id: adm_list.php,v 1.11 2006/01/24 05:03:30 joe Exp $
  ----------------------------------------------------------------------
  AlternC - Web Hosting System
  Copyright (C) 2006 Le réseau Koumbit Inc.
  http://koumbit.org/
  Copyright (C) 2002 by the AlternC Development Team.
  http://alternc.org/
- ----------------------------------------------------------------------
- Based on:
- Valentin Lacambre's web hosting softwares: http://altern.org/
  ----------------------------------------------------------------------
  LICENSE
 
@@ -149,7 +145,7 @@ while (list($key,$val)=each($r))
 		<td <?php if ($val["su"]) echo "style=\"color: red\""; ?>><label for="user_<?php echo $val["uid"]; ?>"><b><?php echo $val["login"] ?></b></label></td>
 		<td><a href="mailto:<?php echo $val["mail"]; ?>"><?php echo $val["nom"]." ".$val["prenom"] ?></a>&nbsp;</td>
 		<td><?php echo $val["parentlogin"] ?></td>
-		<td><?php echo format_date('%3$d-%2$d-%1$d',$val["created"]); ?></td>
+		<td><?php echo format_date(_('%3$d-%2$d-%1$d'),$val["created"]); ?></td>
 		<td><?php echo $val["type"] ?></td>
 		<td><?php echo $val["lastlogin"] ?></td>
                 <td><?php echo $val["lastip"] ?></td>

@@ -51,7 +51,7 @@ if (isset($cancel) && $cancel) {
 }
 if (isset($saveret) && $saveret) {
   if ($bro->Save($editfile,$R,$texte)) {
-    $error=sprintf(_("Your file %s has been saved"),$editfile)." (".format_date('%3$d-%2$d-%1$d %4$d:%5$d',date("Y-m-d H:i:s")).")";
+    $error=sprintf(_("Your file %s has been saved"),$editfile)." (".format_date(_('%3$d-%2$d-%1$d %4$d:%5$d'),date("Y-m-d H:i:s")).")";
   } else {
     $error=$err->errstr();
   }
@@ -60,7 +60,7 @@ if (isset($saveret) && $saveret) {
 }
 if (isset($save) && $save) {
   if ($bro->Save($editfile,$R,$texte)) {
-    $error=sprintf(_("Your file %s has been saved"),$editfile)." (".format_date('%3$d-%2$d-%1$d %4$d:%5$d',date("Y-m-d H:i:s")).")";
+    $error=sprintf(_("Your file %s has been saved"),$editfile)." (".format_date(_('%3$d-%2$d-%1$d %4$d:%5$d'),date("Y-m-d H:i:s")).")";
   } else {
     $error=$err->errstr();
   }
