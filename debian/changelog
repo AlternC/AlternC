@@ -1,3 +1,9 @@
+alternc (1.1~rc1) stable; urgency=low
+
+  * Halloween skin for the desktop
+
+ -- Alan Garcia (nickname) <fufroma@mailfr.com>  Wed, 31 Oct 2012 07:47:54 +0000
+
 alternc (1.1+nmu6) stable; urgency=low
 
   * Squirrelmail plugin is now fully functionnal, including the changepass and filter plugins. it's using a specific MySQL account to change the password.
