@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AlternC 2.0\n"
 "Report-Msgid-Bugs-To: i18n@alternc.org\n"
-"POT-Creation-Date: 2012-10-29 16:25+0100\n"
+"POT-Creation-Date: 2012-10-31 11:38+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3310,7 +3310,7 @@ msgstr ""
 msgid "Domain '%s' not found."
 msgstr ""
 
-#: ../class/m_admin.php:886 ../class/m_admin.php:918 ../class/m_admin.php:966
+#: ../class/m_admin.php:886 ../class/m_admin.php:918 ../class/m_admin.php:968
 msgid "This TLD does not exist"
 msgstr ""
 
@@ -3318,28 +3318,28 @@ msgstr ""
 msgid "The TLD name is mandatory"
 msgstr ""
 
-#: ../class/m_admin.php:944
+#: ../class/m_admin.php:946
 msgid "This TLD already exist"
 msgstr ""
 
-#: ../class/m_admin.php:1079
+#: ../class/m_admin.php:1081
 msgid "-- Program error -- The requested password policy does not exist!"
 msgstr ""
 
-#: ../class/m_admin.php:1087
+#: ../class/m_admin.php:1089
 msgid "The password length is too short according to the password policy"
 msgstr ""
 
-#: ../class/m_admin.php:1092
+#: ../class/m_admin.php:1094
 msgid "The password is too long according to the password policy"
 msgstr ""
 
-#: ../class/m_admin.php:1102
+#: ../class/m_admin.php:1104
 msgid ""
 "The password policy prevents you to use your login name inside your password"
 msgstr ""
 
-#: ../class/m_admin.php:1126
+#: ../class/m_admin.php:1128
 msgid ""
 "Your password contains not enough different classes of character, between "
 "low-case, up-case, figures and special characters."

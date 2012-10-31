@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: i18n@alternc.org\n"
-"POT-Creation-Date: 2012-10-29 16:25+0100\n"
+"POT-Creation-Date: 2012-10-31 11:38+0100\n"
 "PO-Revision-Date: 2008-09-05 16:50+0200\n"
 "Last-Translator: \n"
 "Language-Team:  <tech@alternc.org>\n"
@@ -3589,7 +3589,7 @@ msgstr "Esta cuenta es un cuenta de administrador"
 msgid "Domain '%s' not found."
 msgstr "Dominio %s borrado"
 
-#: ../class/m_admin.php:886 ../class/m_admin.php:918 ../class/m_admin.php:966
+#: ../class/m_admin.php:886 ../class/m_admin.php:918 ../class/m_admin.php:968
 #, fuzzy
 msgid "This TLD does not exist"
 msgstr "El usuario no existe"
@@ -3598,28 +3598,28 @@ msgstr "El usuario no existe"
 msgid "The TLD name is mandatory"
 msgstr ""
 
-#: ../class/m_admin.php:944
+#: ../class/m_admin.php:946
 msgid "This TLD already exist"
 msgstr ""
 
-#: ../class/m_admin.php:1079
+#: ../class/m_admin.php:1081
 msgid "-- Program error -- The requested password policy does not exist!"
 msgstr ""
 
-#: ../class/m_admin.php:1087
+#: ../class/m_admin.php:1089
 msgid "The password length is too short according to the password policy"
 msgstr ""
 
-#: ../class/m_admin.php:1092
+#: ../class/m_admin.php:1094
 msgid "The password is too long according to the password policy"
 msgstr ""
 
-#: ../class/m_admin.php:1102
+#: ../class/m_admin.php:1104
 msgid ""
 "The password policy prevents you to use your login name inside your password"
 msgstr ""
 
-#: ../class/m_admin.php:1126
+#: ../class/m_admin.php:1128
 msgid ""
 "Your password contains not enough different classes of character, between "
 "low-case, up-case, figures and special characters."

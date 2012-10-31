@@ -400,6 +400,8 @@ bureau/locales/fr_FR/LC_MESSAGES/.svnignore -text
 bureau/locales/fr_FR/LC_MESSAGES/alternc -text
 bureau/locales/fr_FR/LC_MESSAGES/manual.po -text
 bureau/locales/fr_FR/LC_MESSAGES/messages.po -text
+bureau/locales/it_IT/LC_MESSAGES/manual.po -text
+bureau/locales/it_IT/LC_MESSAGES/messages.po -text
 bureau/locales/manual.pot -text
 bureau/locales/messages.pot -text
 bureau/locales/pt_BR/LC_MESSAGES/.svnignore -text

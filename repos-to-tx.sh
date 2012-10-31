@@ -25,7 +25,7 @@ fi
 
 pushd ../..
 
-langs="fr_FR de_DE en_US es_ES pt_BR" 
+langs="fr_FR de_DE en_US es_ES pt_BR it_IT" 
 
 # external repositories : 
 for project in alternc alternc-mailman
