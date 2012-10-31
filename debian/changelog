@@ -1,8 +1,12 @@
-alternc (3.0~rc1) stable; urgency=low
+alternc (3.0~rc1) unstable; urgency=low
 
+  [ Alan Garcia (fufroma) ]
   * Halloween skin for the desktop
 
- -- Alan Garcia (fufroma) <fufroma@mailfr.com>  Wed, 31 Oct 2012 07:47:54 +0000
+  [ Benjamin Sonntag ]
+  * 3.0~rc1 release, change the release to 'unstable' so that http://debian.alternc.org/ have the packages in the right distribution.
+
+ -- Benjamin Sonntag <benjamin@sonntag.fr>  Wed, 31 Oct 2012 11:34:37 +0100
 
 alternc (1.1+nmu6) stable; urgency=low
 
