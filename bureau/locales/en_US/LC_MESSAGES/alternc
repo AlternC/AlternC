@@ -627,7 +627,7 @@ msgstr "Please enter a valid email address"
 msgid "err_admin_6"
 msgstr "All fields are mandatory"
 
-#. You can ask for your password only once a day!
+#. You can ask for your password only once a day !
 msgid "err_admin_7"
 msgstr "You can ask for your password only once a day!"
 
@@ -647,7 +647,7 @@ msgstr "Login can only contains characters a-z, 0-9 and -"
 msgid "err_admin_11"
 msgstr "This TLD does not exist"
 
-#. This TLD already exist
+#. This TLD already exists
 msgid "err_admin_12"
 msgstr "This TLD already exist"
 
@@ -726,15 +726,15 @@ msgstr "The sub-domain does not exist."
 msgid "err_dom_15"
 msgstr "No change has been requested..."
 
-#. The sub-domain already exist.
+#. The sub-domain already exists.
 msgid "err_dom_16"
 msgstr "The sub-domain already exist."
 
-#. --- Program error --- Lock already obtained!
+#. --- Programm error --- Lock already obtained !
 msgid "err_dom_17"
 msgstr "--- Program error --- Lock already obtained!"
 
-#. This domain is the server's domain! You cannot host it on your account!
+#. This domain is the server's domain !!! You cannot host it on your account !
 msgid "err_dom_18"
 msgstr ""
 "This domain is the server's domain! You cannot host it on your account!"
@@ -1091,9 +1091,6 @@ msgstr "You are not allowed to change your password."
 msgid "err_mem_12"
 msgstr "You must be a system administrator to do this"
 
-msgid "err_mem_13"
-msgstr "Your IP address is not allowed here."
-
 # Please do NOT translate those strings to each language. Use the original language instead
 #. Français (France)
 #. Please do NOT translate those strings to each language. Use the original language instead
@@ -1183,7 +1180,7 @@ msgstr "The password is too long (16 chars max)"
 msgid "err_mysql_9"
 msgstr "The file is incorrect or does not exist."
 
-#. Your cannot create your main database: you still have other dbs !
+#. Your cannot create your main database : you still have other dbs !
 msgid "err_mysql_10"
 msgstr "Your cannot create your main database: you still have other dbs !"
 
@@ -1347,6 +1344,10 @@ msgstr "Your password contains not enough different classes of character"
 msgid "err_hta_12"
 msgstr ""
 "Cannot write inside the requested folder. Please check your permissions."
+
+#, fuzzy
+msgid "err_mail_16"
+msgstr "ldap connexion impossible, please try again later."
 
 msgid "err_mysql_20"
 msgstr "The password is mandatory"
@@ -4546,7 +4547,7 @@ msgstr ""
 msgid "Domain '%s' not found."
 msgstr ""
 
-#: ../class/m_admin.php:886 ../class/m_admin.php:918 ../class/m_admin.php:966
+#: ../class/m_admin.php:886 ../class/m_admin.php:918 ../class/m_admin.php:968
 msgid "This TLD does not exist"
 msgstr ""
 
@@ -4554,28 +4555,28 @@ msgstr ""
 msgid "The TLD name is mandatory"
 msgstr ""
 
-#: ../class/m_admin.php:944
+#: ../class/m_admin.php:946
 msgid "This TLD already exist"
 msgstr ""
 
-#: ../class/m_admin.php:1079
+#: ../class/m_admin.php:1081
 msgid "-- Program error -- The requested password policy does not exist!"
 msgstr ""
 
-#: ../class/m_admin.php:1087
+#: ../class/m_admin.php:1089
 msgid "The password length is too short according to the password policy"
 msgstr ""
 
-#: ../class/m_admin.php:1092
+#: ../class/m_admin.php:1094
 msgid "The password is too long according to the password policy"
 msgstr ""
 
-#: ../class/m_admin.php:1102
+#: ../class/m_admin.php:1104
 msgid ""
 "The password policy prevents you to use your login name inside your password"
 msgstr ""
 
-#: ../class/m_admin.php:1126
+#: ../class/m_admin.php:1128
 msgid ""
 "Your password contains not enough different classes of character, between "
 "low-case, up-case, figures and special characters."
@@ -5320,6 +5321,9 @@ msgstr ""
 
 #~ msgid "Initial list password"
 #~ msgstr "Initial list password"
+
+#~ msgid "err_mem_13"
+#~ msgstr "Your IP address is not allowed here."
 
 #~ msgid "help_mail_add"
 #~ msgstr ""
