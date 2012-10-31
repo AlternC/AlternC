@@ -29,5 +29,6 @@ debian/files
 lang/de_DE.po
 lang/es_ES.po
 lang/fr_FR.po
+lang/it_IT.po
 lang/pt_BR.po
 po/fr/LC_MESSAGES/alternc-admintools.mo

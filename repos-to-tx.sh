@@ -57,11 +57,8 @@ do
 #	cp "alternc/trunk/awstats/debian/po/${sublang}.po" "alternc/trunk/tmp.$lang/alternc-awstats.debconf.po"
     fi
     cp "alternc/trunk/bureau/locales/$lang/LC_MESSAGES/messages.po" \
-	"alternc/trunk/bureau/locales/$lang/LC_MESSAGES/manual.po" \
 	"alternc-mailman/trunk/bureau/locales/$lang/LC_MESSAGES/mailman.po" \
-	"alternc-mailman/trunk/bureau/locales/$lang/LC_MESSAGES/mailman_manual.po" \
 	"alternc/trunk/awstats/bureau/locales/$lang/LC_MESSAGES/aws.po" \
-	"alternc/trunk/awstats/bureau/locales/$lang/LC_MESSAGES/aws_manual.po" \
 	"alternc/trunk/tmp.$lang/" 
     # now we have all .po files in one folder, merge them into one big catalog: 
     msgcat --use-first -o "alternc/trunk/lang/${lang}.po" alternc/trunk/tmp.$lang/*

@@ -617,73 +617,17 @@ msgid ""
 "about the patch at http://wiki.koumbit.net/VirtualMailman."
 msgstr ""
 
-#, fuzzy
-msgid "quota_aws"
-msgstr "Web Statistics"
-
-# #################################################################
-# m_stats
-#, fuzzy
-msgid "err_aws_1"
-msgstr "No se consiguió ningún juego de estadísticas"
-
-#, fuzzy
-msgid "err_aws_2"
-msgstr "Este juego de estadísticas no existe."
-
-#, fuzzy
-msgid "err_aws_3"
-msgstr "El prefijo escogido no está autorizado"
-
-#, fuzzy
-msgid "err_aws_4"
-msgstr "¡Este juego de estadísticas ya existe!"
-
-#, fuzzy
-msgid "err_aws_5"
-msgstr ""
-"Ha llegado al limite de su cuota de juego de estadísticas, no se puede crear "
-"más."
-
-#, fuzzy
-msgid "err_aws_6"
-msgstr "Este idioma no está disponible."
-
-#, fuzzy
-msgid "err_aws_7"
-msgstr "Este idioma no está disponible."
-
-#, fuzzy
-msgid "err_aws_8"
-msgstr "Este idioma no está disponible."
-
-#, fuzzy
-msgid "err_aws_9"
-msgstr "Este idioma no está disponible."
-
-# #################################################################
-# m_stats
-#, fuzzy
-msgid "err_aws_10"
-msgstr "No se consiguió ningún juego de estadísticas"
-
-# #################################################################
-# m_stats
-#, fuzzy
-msgid "err_aws_11"
-msgstr "No se consiguió ningún juego de estadísticas"
-
-#, fuzzy
-msgid "err_aws_12"
-msgstr "Este juego de estadísticas no existe."
-
-#, fuzzy
-msgid "err_aws_13"
-msgstr "El prefijo escogido no está autorizado"
+#: ../admin/aws_add.php:33
+msgid "You cannot add any new statistics, your quota is over."
+msgstr "No puede crear más estadísticas, su cuota alcanzó su limite."
 
 #: ../admin/aws_add.php:38
 #, fuzzy
 msgid "Edit Statistics"
+msgstr "Creación de estadísticas"
+
+#: ../admin/aws_add.php:38
+msgid "New Statistics"
 msgstr "Creación de estadísticas"
 
 #: ../admin/adm_dnsweberror.php:56 ../admin/adm_dnsweberror.php:88
@@ -742,6 +686,10 @@ msgid "Yes"
 msgstr "Sí"
 
 #: ../admin/aws_add.php:104
+msgid "Create those statistics"
+msgstr "Crear estas estadísticas"
+
+#: ../admin/aws_add.php:104
 #, fuzzy
 msgid "Edit those statistics"
 msgstr "Crear estas estadísticas"
@@ -769,9 +717,29 @@ msgstr "El juego de estadísticas ha sido creado"
 msgid "Please check the statistics set you want to delete"
 msgstr ""
 
+#: ../admin/aws_doadd.php:42
+msgid "The statistics has been successfully created"
+msgstr "El juego de estadísticas ha sido creado"
+
+#: ../admin/aws_doedit.php:36 ../admin/aws_edit.php:33
+msgid "No Statistics selected!"
+msgstr "¡Ningún juego seleccionado!"
+
+#: ../admin/aws_doedit.php:48
+msgid "The Statistics has been successfully changed"
+msgstr "El juego de estadísticas ha sido modificado"
+
+#: ../admin/aws_list.php:35
+msgid "Statistics List"
+msgstr "Lista de juegos de estadísticas"
+
 #: ../admin/aws_list.php:39
 msgid "Manage allowed users' accounts"
 msgstr ""
+
+#: ../admin/aws_list.php:42 ../admin/aws_users.php:41
+msgid "Create new Statistics"
+msgstr "Crear un nuevo juego de estadísticas"
 
 #: ../admin/adm_doms.php:69 ../admin/adm_mxaccount.php:80
 #: ../admin/adm_slaveaccount.php:80 ../admin/adm_slaveip.php:79
@@ -790,6 +758,10 @@ msgstr "Crear estas estadísticas"
 #: ../admin/mail_list.php:146
 msgid "Edit"
 msgstr "Modificar"
+
+#: ../admin/aws_list.php:76
+msgid "Delete the checked Statistics"
+msgstr "Suprimir los juegos marcados"
 
 #: ../admin/aws_pass.php:52
 msgid "Change a user's password"
@@ -849,6 +821,10 @@ msgstr ""
 #: ../admin/adm_list.php:283 ../admin/ftp_list.php:92
 msgid "Delete checked accounts"
 msgstr "Suprimir las cuentas marcadas"
+
+#: ../admin/menu_aws.php:38
+msgid "Web Statistics"
+msgstr "Estadísticas Web"
 
 #: ../class/m_aws.php:72
 msgid ""
@@ -928,60 +904,6 @@ msgstr ""
 #: ../class/m_aws.php:674
 msgid "Hostname is incorrect"
 msgstr ""
-
-msgid "err_mailman_1"
-msgstr "Ninguna lista de correo encontrada."
-
-msgid "err_mailman_2"
-msgstr "El login (parte izquierda del @) es obligatoria."
-
-msgid "err_mailman_3"
-msgstr ""
-"La dirección de correo del dueño y la contraseña de la lista son obligaorios."
-
-msgid "err_mailman_4"
-msgstr "Esta dirección de correo no es correcta."
-
-msgid "err_mailman_5"
-msgstr "Este dominio no existe."
-
-msgid "err_mailman_6"
-msgstr ""
-"Esta dirección de correo (o una de las direcciones de servicio lista-"
-"subscribe, lista-unsubscribe, etc.) ya está en uso."
-
-msgid "err_mailman_7"
-msgstr "Alcanzaste tu cuota de listas de correo, no puedes crear una más."
-
-msgid "err_mailman_8"
-msgstr "La parte izquierda del @ no puede contener el caracter '_'"
-
-msgid "err_mailman_9"
-msgstr "La lista especificada no existe."
-
-msgid "err_mailman_10"
-msgstr "Una lista con el mismo nombre ya existe. Elije otro nombre."
-
-#, fuzzy
-msgid "err_mailman_11"
-msgstr "Ninguna lista de correo encontrada."
-
-#, fuzzy
-msgid "quota_mailman"
-msgstr ""
-"<ul> <li>Mailman es un manejador de listas de discusión/difusión muy "
-"potente. Dispone de una interfaz web de gestión de lista completa, accesible "
-"a través de los diferentes enlaces aquí arrba.</li><li>Mailman permite "
-"moderar una lista: para moderar los futuros suscriptores ir a \"Opciones de "
-"confidencialidad\"->\"Filtros remitente\" y luego elegir  \"Sí\" en \"¿Los "
-"envíos de nuevos suscriptores deben ser moderados por omisión?\". De hecho, "
-"mailman puede moderar CADA suscriptor de una lista.</li><li>Para moderar los "
-"NO-suscriptores de una lsita, ir a \"Opciones de confidencialidad\"->"
-"\"Filtros remitente\" y luego elegir entre  \"Aceptar En espera Rechazar "
-"Ignorar\" para \"Acción para los envíos de los no-suscriptores\"</"
-"li><li>Varias otras opciones pueden ser modificadas en mailman. Para "
-"cualquier información, presiona en el enlace \"Détalles de ...\" abajo de "
-"cada elemento configurable, o contacta el hospedaje.</li></ul>"
 
 #: ../admin/menu_mailman.php:32
 msgid "(with mailman)"
@@ -1249,816 +1171,6 @@ msgstr ""
 #, fuzzy
 msgid "Mailing lists (mailman)"
 msgstr "Listas de correo"
-
-# m_membre
-#. -- Only administrators can access this page !! --
-msgid "err_admin_1"
-msgstr "-- ¡¡Sólo los administradores tienen acceso a estas páginas!! --"
-
-#. Account not found
-msgid "err_admin_2"
-msgstr "No se encuentra el miembro"
-
-#. This login already exists
-msgid "err_admin_3"
-msgstr "¡Este login ya existe!"
-
-#. -- I cannot create this account --
-msgid "err_admin_4"
-msgstr "--Imposible crear la cuenta--"
-
-#. Please enter a valid email address
-msgid "err_admin_5"
-msgstr "Por favor, entre un email válido."
-
-#. All fields are mandatory
-msgid "err_admin_6"
-msgstr "Los campos login, contraseña y correo son obligatorios."
-
-#. You can ask for your password only once a day !
-msgid "err_admin_7"
-msgstr "¡Solo puedes pedir tu contraseña una vez por día!"
-
-#. This account is ALREADY an administrator account
-msgid "err_admin_8"
-msgstr "¡El usuario seleccionado YA es administrador!"
-
-#. This account is NOT an administrator account !
-msgid "err_admin_9"
-msgstr "¡El usuario seleccionado NO es administrador!"
-
-# m_membre
-#. Login can only contains characters a-z, 0-9 and -
-msgid "err_admin_10"
-msgstr "Los únicos caracteres autorizados son a-z 0-9 y -."
-
-# m_membre
-#. This TLD does not exist
-msgid "err_admin_11"
-msgstr "Este TLD no existe"
-
-#. This TLD already exists
-msgid "err_admin_12"
-msgstr "Este TLD ya existe."
-
-# m_membre
-#. The login is too long (16 chars max)
-msgid "err_admin_13"
-msgstr "El login es demasiado largo (16 caracteres máximo)"
-
-#. Domain names
-msgid "quota_dom"
-msgstr "Nombres de dominio"
-
-#. Domain '%s' not found.
-msgid "err_dom_1"
-msgstr "El dominio '%s' no existe."
-
-#. The domaine '%s' does not belong to you.
-msgid "err_dom_2"
-msgstr "El dominio '%s' no te pertenece."
-
-#. --- Programm error --- No lock on the domains !
-msgid "err_dom_3"
-msgstr "--- Error de programación --- ¡Ningún Lock en los dominios!"
-
-#. The domain name is too long.
-msgid "err_dom_4"
-msgstr "El nombre de dominio es demasiado largo."
-
-#. One of the domain name member is too long.
-msgid "err_dom_5"
-msgstr "Uno de los componentes del nombre de dominio es demasiado largo."
-
-#. There is some forbidden characters in the domain name (only A-Z 0-9 and - are allowed).
-msgid "err_dom_6"
-msgstr ""
-"Hay caracteres prohibidos en el nombre de dominio (sólo A-Z 0-9 y - son "
-"autorizados)."
-
-#. The last member of the domain name is incorrect or cannot be hosted in that server.
-msgid "err_dom_7"
-msgstr ""
-"El último componente (TLD) del dominio es incorrecto o no se puede hospedar "
-"en este servidor."
-
-#. The domain already exists.
-msgid "err_dom_8"
-msgstr "El dominio ya existe."
-
-#. The domain has been deleted less than 5 minutes ago, please try again later.
-msgid "err_dom_9"
-msgstr "El dominio fue borrado hace menos de 5 minutos, intenta más tarde."
-
-#. Your domain quota is over, you cannot create more domain names.
-msgid "err_dom_10"
-msgstr "Alcanzaste el limite de tu cuota de dominios, no se pueden crear más."
-
-#. The Whois database is unavailable, please try again later.
-msgid "err_dom_11"
-msgstr "¡Conexión a la base Whois imposible!"
-
-#. The domain cannot be found in the whois database.
-msgid "err_dom_12"
-msgstr "No se encuentra el dominio en la base Whois"
-
-#. The domain has been changed less than 5 minutes ago. Please try again in a few minutes.
-msgid "err_dom_13"
-msgstr "El dominio fue modificado hace menos de 5 minutos, intenta más tarde."
-
-#. The sub-domain does not exist.
-msgid "err_dom_14"
-msgstr "El subdominio no existe."
-
-#. No change has been requested...
-msgid "err_dom_15"
-msgstr "No se pidió ninguna modificación..."
-
-#. The sub-domain already exists.
-msgid "err_dom_16"
-msgstr "El subdominio ya existe."
-
-#. --- Programm error --- Lock already obtained !
-msgid "err_dom_17"
-msgstr "--- Error de programación --- ¡Lock sobre los dominios ya obtenidos!"
-
-#. This domain is the server's domain !!! You cannot host it on your account !
-msgid "err_dom_18"
-msgstr "¡¡Este dominio es el del servidor!! No puedes instalarlo en tu cuenta."
-
-#. The IP address you entered is incorrect.
-msgid "err_dom_19"
-msgstr "La dirección IP ingresada es incorrecta."
-
-#. The URL you entered is incorrect.
-msgid "err_dom_20"
-msgstr "La URL es incorrecta. "
-
-#. The folder you entered is incorrect or does not exist.
-msgid "err_dom_21"
-msgstr "La carpeta especificada es incorrecta o no existe."
-
-#. The requested domain is forbidden in this server, please contact the administrator
-msgid "err_dom_22"
-msgstr ""
-"El dominio solicitado está prohibido en este servidor, contacta al "
-"administrador."
-
-#. The DNS of this domain do not match the server's DNS. Please change your 
-#. domain's DNS (and eventually wait 1 day) before you install it again.
-msgid "err_dom_23"
-msgstr ""
-"Los DNS de este dominio no coinciden con los de este servidor. Tienes que "
-"modificar los DNS del dominio (y esperar, a veces 24 horas) antes de poder "
-"instalarlo."
-
-#. There is some forbidden characters in the sub domain (only A-Z 0-9 and - are allowed).
-msgid "err_dom_24"
-msgstr ""
-"Hay caracteres prohibidos en el sub-dominio (sólo A-Z a-z 0-9 y - están "
-"autorizados)."
-
-#. There is no MX record pointing to this server, and you are asking us to host the Mail here 
-msgid "err_dom_25"
-msgstr "El dominio '%s' no te pertenece."
-
-#. - Entrez le nom du domaine que vous souhaitez héberger. Le nom de domaine 
-#. doit être complet, mais <b>sans le www.</b><br /> IMPORTANT : Si vous voulez 
-#. un hébergement réel de domaine, il faut que les DNS de votre domaine 
-#. pointent vers nos serveurs DNS. Contacter votre hébergeur pour plus 
-#. d'information.<br /> Exemples : globenet.org / demo.com / test.eu.org etc.
-#. <br />Plus d'info sur la gestion des domaines dans l'aide en ligne 
-#. HELPID_200<br />
-msgid "hlp_add_domain"
-msgstr ""
-"- Entra el nombre de dominio que quieres hospedar. Debe estar completo pero "
-"<b>sin el www.</b><br /> IMPORTANTE: Si quieres un hospedaje efectivo del "
-"dominio, es necesario que los DNS de tu dominio apunten a los servidores DNS "
-"de este hospedaje. Contacta a tu hospedaje para mayor información.<br /> "
-"Ejemplos: globenet.org / demo.com / test.eu.org etc.<br />Más información "
-"acerca de la gestión de dominios en la ayuda en línea HELPID_200<br />"
-
-#. Cliquez sur le lien ci-dessus. Vous pourrez ensuite accéder aux paremètres 
-#. du domaine dans le menu à gauche.2 liens vont apparaitre : <br />- un 
-#. premier pour modifier les paramètres d'hébergement du domaine (sous-
-#. domaines, redirections, hébergement mails ...) <br />- un second pour gérer 
-#. les comptes emails du domaine (si vous souhaitez créer des boites aux 
-#. lettres).<br />Plus d'info sur la gestion des domaines dans l'aide en ligne 
-#. HELPID_200<br />
-msgid "hlp_add_domain_2"
-msgstr ""
-"Presiona sobre el enlace aquí abajo. Podrás entonces acceder a los "
-"parámetros del dominio en el menú de la izquierda. Aparecerán dos enlaces: "
-"<br /> - uno para modificar los paráetros de hospedaje del dominio (sub-"
-"dominios, redirecciones, hospedaje de correo, ...)<br /> - otro para manejar "
-"los buzones email del dominio (si deseas crear estos buzones).<br /> Más "
-"información acerca del manejo de dominios en la ayuda en línea "
-"HELPID_200<br />"
-
-#. Le domaine a été effacé, mais les fichiers de votre site n'ont pas été 
-#. détruits.<br />Si vous souhaitez détruire les fichiers du site web, utilisez 
-#. le Gestionnaire de Fichier<br />Plus d'info sur la gestion des domaines dans 
-#. l'aide en ligne HELPID_200<br />
-msgid "hlp_del_domain"
-msgstr ""
-"El dominio fue borrado, pero los archivos de tu sitio no fueron destruídos. "
-"<br />Si quieres destruir los archivos del sitio (fuente de las pa?inas web) "
-"Utiliza el manejador de archivos.<br />Más información sobre el manejo de "
-"dominios en la ayuda en línea HELPID_200<br />"
-
-#. Cette zone vous permet de modifier les paramètres de votre domaine, ainsi 
-#. que des sous-domaines installés<br />Vous pouvez créer un nouveau sous-
-#. domaine et choisir, soit de le rediriger vers votre espace disque, vers une 
-#. autre adresse Internet, ou vers une adresse IP (utilisateurs avancés)<br />
-#. Plus d'info sur la gestion des domaines dans l'aide en ligne HELPID_200<br />
-msgid "hlp_edit_domain"
-msgstr ""
-"Esta zona permite modificar los parámetros de tu dominio y los sub-dominios "
-"instalados. .<br /> Puedes crear un nuevo sub-dominio y elegir, ya sea que "
-"responda con archivos de tu espacio de disco en este servidor, ya sea "
-"redirigirlo hacia otra dirección internet o una dirección IP, ya sea hacia "
-"la interfaz de webmail en este servidor. Esta última opción permitirá a los "
-"usuarios de buzones email que puedas crear consultar su correo electrónico "
-"por una iterfaz web.<br /> Más información sobre el manejo de dominios en la "
-"ayuda en línea HELPID_200<br />"
-
-#. FTP Accounts
-msgid "quota_ftp"
-msgstr "Cuentas FTP"
-
-#. No ftp account found
-msgid "err_ftp_1"
-msgstr "No se encontró ninguna cuenta FTP"
-
-#. This ftp account does not exist
-msgid "err_ftp_2"
-msgstr "Esta cuenta FTP no existe"
-
-#. The chosen prefix is not allowed
-msgid "err_ftp_3"
-msgstr "El prefijo escogido no está autorizado"
-
-#. This ftp account already exists
-msgid "err_ftp_4"
-msgstr "¡Esta cuenta FTP ya existe!"
-
-#. Your ftp account quota is over. You cannot create more ftp accounts.
-msgid "err_ftp_5"
-msgstr ""
-"Alcanzaste el limite de tu cuota de cuentas FTP, no se pueden crear más."
-
-#. The directory cannot be created.
-msgid "err_ftp_6"
-msgstr "Imposible crear la carpeta."
-
-#. Voici la liste des comptes ftp ayant accès à votre compte. Cliquez sur 
-#. 'Modifier' pour changer le nom d'utilisateur, le mot de passe, ou le dossier 
-#. racine.<br /> Pour supprimer un compte, cochez la case correspondante et 
-#. cliquez sur le bouton 'Supprimer les comptes cochés'<br />Pour pouvoir 
-#. accéder à vos fichiers avec un logiciel de ftp, vous devez créer au moins un 
-#. compte. Chaque compte est associé à un dossier, et n'aura donc accès qu'aux 
-#. fichiers situés dans ce dossier ou en dessous. <br />Plus d'info sur le FTP 
-#. dans l'aide en ligne HELPID_100<br />
-msgid "hlp_ftp_list"
-msgstr ""
-"He aquí la lista de cuentas FTP que tienen acceso a tu cuenta. Presiona en "
-"'Modificar' para cambiar el nombre de usuario, la contraseña, o la carpeta "
-"raíz. <br /> Para suprimir una cuenta, selecciona la casilla correspondiente "
-"y presiona el botón 'Suprimir las cuentas marcadas'<br /> Para acceder a tus "
-"archivos con una cuenta FTP, debes crear al menos una cuenta. Cada cuenta "
-"está asociada a una carpeta, y por ende sólo tendrá acceso a los archivos "
-"situados en ésta y en sub-carpetas. <br />Más información sobre el FTP en la "
-"ayuda en línea HELPID_100<br />"
-
-#. Vous n'avez actuellement aucun Compte FTP de disponible. Cliquez sur 
-#. 'Création d'un compte ftp' pour en créer un.<br />Pour pouvoir accéder à vos 
-#. fichiers avec un logiciel de ftp, vous devez créer au moins un compte.  
-#. Chaque compte est associé à un dossier, et n'aura donc accès qu'aux fichiers 
-#. situés dans ce dossier ou en dessous. <br />Plus d'info sur le FTP dans 
-#. l'aide en ligne HELPID_100<br />
-msgid "hlp_ftp_list_no"
-msgstr ""
-"Actualmente no tienes ninguna cuenta FTP disponible. Si quieres una, "
-"presiona en 'Crear una nueva cuenta FTP'.<br /> Para acceder a tus archivos "
-"con un software cliente FTP, tendrás que crear al menos una cuenta. Cada "
-"cuenta está asociada a una carpeta, y por ende sólo tendrá acceso a los "
-"archivos situados en ésta y en sub-carpetas. <br />Más información sobre el "
-"FTP en la ayuda en línea HELPID_100<br />"
-
-#. Pour ajouter un compte ftp, vous devez choisir un Nom d'utilisateur, un mot 
-#. de passe, et un répertoire racine<br />Le nom d'utilisateur commence 
-#. toujours par votre nom de login ou le nom d'un de vos domaines.<br />Le 
-#. répertoire racine, s'il n'existe pas, sera créé automatiquement.<br />Note : 
-#. Le compte que vous créez ainsi aura accès en lecture et en écriture aux 
-#. fichiers situés dans le répertoire et tous ses sous-répertoires.<br />Plus 
-#. d'info sur le FTP dans l'aide en ligne HELPID_100<br />
-msgid "hlp_ftp_add"
-msgstr ""
-"Para agregar una cuenta FTP. tines que elegir un login de conexión, una "
-"contraseña y una carpeta raíz. .<br /> El login de conexión empieza siempre "
-"por tu nombre de usuario o por uno de tus dominios.<br /> La carpeta raíz, "
-"si no existe, será creada automáticamente. <br /> Nota: La cuenta que creas "
-"así tendrá acceso en lectura y en escritura a los archivos situados en la "
-"carpeta raíz asociada y en sus sub-carpetas. <br />Plus d'info sur le FTP "
-"dans l'aide en ligne HELPID_100<br />"
-
-#. An incompatible .htaccess file exists in this folder.
-msgid "err_hta_1"
-msgstr "Un archivo .htaccess incompatible se encuentra en la carpeta. "
-
-#. .htaccess parsed and syntaxically correct, a .htpassword file has been created.
-msgid "err_hta_2"
-msgstr ".htaccess reconocido y sintaxis correcta, un .htpasswd fue creado."
-
-#. .htaccess parsed and syntaxically correct, a .htpasswd already exist.
-msgid "err_hta_3"
-msgstr ".htaccess reconocido y sintaxis correcta, .htpasswd ya existe"
-
-#. No protected folder
-msgid "err_hta_4"
-msgstr "No hay ninguna carpeta protegida"
-
-#. I cannot delete the file '%s'/.htaccess
-msgid "err_hta_5"
-msgstr "Imposible suprimir el archivo '%s'/.htaccess"
-
-#. I cannot delete the file '%s'/.htpasswd
-msgid "err_hta_6"
-msgstr "Imposible suprimir el archivo '%s'/.htpasswd"
-
-#. The file .htaccess does not exist
-msgid "err_hta_7"
-msgstr "El archivo .htaccess no existe"
-
-#. The folder '%s' does not exist
-msgid "err_hta_8"
-msgstr "La carpeta '%s' no existe"
-
-#. The file '%s' is not correct
-msgid "err_hta_9"
-msgstr "El archivo '%s' no es válido"
-
-#. The user '%s' already exist for this folder
-msgid "err_hta_10"
-msgstr "El usuario '%s' ya está existe para esta carpeta"
-
-#. Please enter a valid username
-msgid "err_hta_11"
-msgstr "Por favor entra un nombre de usuario válido"
-
-#. Email Accounts
-msgid "quota_mail"
-msgstr "Buzones de correos"
-
-#. DB connection impossible, please try again later.
-msgid "err_mail_1"
-msgstr "Conexión LDAP imposible. Intenta más tarde."
-
-#. No email on domain '%s'
-msgid "err_mail_2"
-msgstr "Ningún buzón de correo en el dominio '%s'."
-
-#. The email '%s' does not exist
-msgid "err_mail_3"
-msgstr "El buzón '%s' no existe."
-
-#. Please check 'pop account' and choose a password pop, or enter some
-#. redirections, or both
-msgid "err_mail_4"
-msgstr ""
-"Por favor, marca 'cuenta POP' e ingresa una contraseña POP <b>o</b> entra "
-"direcciones dónde redirigir los mensajes <b>o</o> ambas cosas."
-
-#. -- Server error --- Parameter is incorrect (%s)
-msgid "err_mail_5"
-msgstr "-- Error Servidor--- Parámetro incorrecto (%s)"
-
-#. The domain '%s' does not exist.
-msgid "err_mail_6"
-msgstr "El dominio '%s' no existe."
-
-#. The email '%s' already exists.
-msgid "err_mail_7"
-msgstr "El buzón '%s' ya existe."
-
-#. Your mail account quota is over. You cannot create more email accounts.
-msgid "err_mail_8"
-msgstr ""
-"Alcanzaste el limite de tu cuota de buzones de correo, no se pueden crear "
-"más."
-
-#. The domain '%s' does not exist.
-msgid "err_mail_9"
-msgstr "El dominio '%s' ya existe."
-
-#. -- Programm error -- Mail quota does not exist
-msgid "err_mail_10"
-msgstr "-- Error de programación -- la cuota Mail no existe."
-
-#. Please enter an Email address
-msgid "err_mail_11"
-msgstr "Ingresa una dirección de correo"
-
-#. Please enter a pop password
-msgid "err_mail_12"
-msgstr "Ingresa una contraseña pop"
-
-#. Please enter a valid email
-msgid "err_mail_13"
-msgstr "Ingresa una dirección de correo válida."
-
-#. One or more email redirection are invalid
-msgid "err_mail_14"
-msgstr "Una o más direcciones de correos para la redirección no son válidas."
-
-#. This mail is not a pop account. It's impossible to change the password !
-msgid "err_mail_15"
-msgstr ""
-"Esta cuenta no es una cuenta POP. ¡Es imposible cambiarle la contraseña!"
-
-#. OK
-msgid "err_err_0"
-msgstr "OK"
-
-#. The error message does not exist (%s)
-msgid "err_err_1"
-msgstr "El mensaje de error no existe (%s)"
-
-#. This is a date representation : parameters are the date as follow : 
-#. $d,$m,$y,$h,$i,$hh,$am
-#.  1  2  3  4  5  6   7
-#. hh is the hour in 12 hours format, and am is 'am' or 'pm'.
-#. eg: english : %3$d/%1$d/%2$d, at %6$d:%5$d %7$s
-msgid "the %3$d-%2$d-%1$d at %4$d:%5$d"
-msgstr "el %1$d/%2$d/%3$d, a las %4$dh%5$d"
-
-#. User or password incorrect
-msgid "err_mem_1"
-msgstr "Usuario o contraseña incorrecta."
-
-#. This account is locked, contact the administrator
-msgid "err_mem_2"
-msgstr "Cuenta bloqueada, contacta al administrador."
-
-#. Cookie incorrect, please accept the session cookie
-msgid "err_mem_3"
-msgstr "Cookie incorrecto, tu navegador tiene que aceptar los cookies."
-
-#. Session unknown, contact the administrator
-msgid "err_mem_4"
-msgstr "Sesión inexistente, contacta al administrador."
-
-#. IP address incorrect, please contact the administrator
-msgid "err_mem_5"
-msgstr "IP incorrecta, contacta al administrador."
-
-#. The old password is incorrect
-#. PROBLEME : il y avait 2 fois le 5, les autres messages doivent surement etre décalés (TODO)
-msgid "err_mem_6"
-msgstr "La antigua contraseña es incorrecta."
-
-#. The new passwords are differents, please retry
-msgid "err_mem_7"
-msgstr "Las dos versiones de la nueva contraseña son distintas."
-
-#. A password must be at least 3 characters long.
-msgid "err_mem_8"
-msgstr "Una contraseña debe estar compuesta por lo menos de 3 caracteres."
-
-#. The information you entered is incorrect
-msgid "err_mem_9"
-msgstr "Los datos proporcionados son incorrectos."
-
-#. You are not allowed to change your password.
-msgid "err_mem_11"
-msgstr "No estás autorizado a cambiar tu contraseña."
-
-#. You must be a system administrator to do this
-msgid "err_mem_12"
-msgstr ""
-"Debes ser administrador para cambiar las preferencias de Administrador."
-
-# Please do NOT translate those strings to each language. Use the original language instead
-#. Français (France)
-#. Please do NOT translate those strings to each language. Use the original language instead
-msgid "fr_FR"
-msgstr "Français (France)"
-
-#. Français (Canada)
-#. Please do NOT translate those strings to each language. Use the original language instead
-msgid "fr_CA"
-msgstr "Français (Canada)"
-
-#. English (United States)
-#. Please do NOT translate those strings to each language. Use the original language instead
-msgid "en_US"
-msgstr "English (United States)"
-
-#. English (United Kingdom)
-#. Please do NOT translate those strings to each language. Use the original language instead
-msgid "en_UK"
-msgstr "English (United Kingdom)"
-
-#. Deutsch (Germany)
-#. Please do NOT translate those strings to each language. Use the original language instead
-msgid "de_DE"
-msgstr "Deutsch (Germany)"
-
-#. Español (Spania)
-#. Please do NOT translate those strings to each language. Use the original language instead
-msgid "es_ES"
-msgstr "Español (España)"
-
-#. Español (Venezuela)
-#. Please do NOT translate those strings to each language. Use the original language instead
-msgid "es_VE"
-msgstr "Español (Venezuela)"
-
-#. OK
-msgid "err_quota_0"
-msgstr "OK"
-
-#. Error writing the quota entry !
-msgid "err_quota_1"
-msgstr "Les cuotas de disco no están activadas en este servidor."
-
-#. MySQL Databases
-msgid "quota_mysql"
-msgstr "Bases de datos MySQL"
-
-#. MySQL Users
-#, fuzzy
-msgid "quota_mysql_users"
-msgstr "Usarios MySQL"
-
-#. Disk space
-msgid "quota_web"
-msgstr "Espacio disco (Ko)"
-
-#. Data base name can contain only digits or lowercase alphabetic characters
-msgid "err_mysql_2"
-msgstr ""
-"El nombre de la base de datos sólo puede contener cifras y letras minúsculas."
-
-#. The database does not exist, you'll get an access by creating it.
-msgid "err_mysql_3"
-msgstr "Esta base de datos ya existe, utiliza otro nombre."
-
-#. This database already exists!
-msgid "err_mysql_4"
-msgstr "¡Esta base de datos no existe!"
-
-#. Your backup number is incorrect.
-msgid "err_mysql_5"
-msgstr "¡El número de copias de respaldo es incorrecto!"
-
-#. The folder is incorrect!
-msgid "err_mysql_6"
-msgstr "¡La carpeta es incorrecta!"
-
-#. The file name you chose does not exist or is incorrect.
-msgid "err_mysql_7"
-msgstr "No tienes ninguna base de datos, no puedes cambiar la contraseña."
-
-#. The password is too long (16 chars max)
-msgid "err_mysql_8"
-msgstr "La contraseña es demasiado larga (16 caracteres máximo)."
-
-#. The file is incorrect or does not exist.
-msgid "err_mysql_9"
-msgstr "El archivo especificado no existe o es incorrecto."
-
-# #################################################################
-# m_webaccess
-#. Your cannot create your main database : you still have other dbs !
-msgid "err_mysql_10"
-msgstr "Error: no puedes crear tu base principal. ¡Te quedan otras bases!"
-
-# #################################################################
-# m_webaccess
-#. You have no database, click on 'Databases' to create the first one
-msgid "err_mysql_11"
-msgstr ""
-"No tienes ninguna base de datos disponible. Presiona en «Bases de datos» "
-"para crear una."
-
-# #################################################################
-# m_webaccess
-#. The data base name is too long (64 chars max)
-msgid "err_mysql_12"
-msgstr "No tienes ninguna base de datos disponible."
-
-# #################################################################
-# m_webaccess
-#. You cannot create more MySQL users
-msgid "err_mysql_13"
-msgstr "No tienes ninguna base de datos disponible."
-
-# #################################################################
-# m_webaccess
-#. MySQL users can only have a-z and 0-9 characters.
-msgid "err_mysql_14"
-msgstr "El nombre de usuario sólo puede contener cifras y/o letras minúsculas."
-
-# #################################################################
-# m_webaccess
-#. MySQL users must be less than 16 characters long.
-msgid "err_mysql_15"
-msgstr "Nombre de usuario demasiado largo (16 caracteres máximo)"
-
-# #################################################################
-# m_webaccess
-#. This MySQL user already exists.
-msgid "err_mysql_16"
-msgstr "Ya existe un usuario con el mismo nombre"
-
-# #################################################################
-# m_webaccess
-#. Passwords do not match.
-msgid "err_mysql_17"
-msgstr "Las contraseñas no corresponden."
-
-# #################################################################
-# m_webaccess
-#. The requested MySQL user does not exist.
-msgid "err_mysql_18"
-msgstr "El usuario no existe."
-
-# #################################################################
-# m_webaccess
-#. You have no MySQL users at the moment.
-msgid "err_mysql_19"
-msgstr "Ningún usuario está definido en MySQL."
-
-#. Your MySQL backups are stored in the chosen folder from <code>db.sql.1</
-#. code> to <code>db.sql.19</code><br />your database name replaces 'db'.<br /
-#. >WARNING: If you modify backup settings (backups, compression...) previous 
-#. backups may remain in the backup folder. Go to the file manager to delete 
-#. them.
-msgid "hlp_sql_bck"
-msgstr ""
-"Los respaldos de tu base de datos MySQL se almacenan en la carpeta elegida "
-"con los nombres <code>db.sql.1</code> a <code>db.sql.19</code><br /> donde "
-"'db' se remplaza por el nombre de la base de datos. <br /> CUIDADO: si "
-"modificas los parámetros de respaldo (número de respaldos, compresiones...) "
-"viejos respaldos pueden quedar en la carpta correspondiente. Los puedes "
-"borrar a través del manejador de archivos."
-
-#. Web Statistics
-msgid "quota_sta2"
-msgstr "Estadísticas Web en bruto"
-
-# #################################################################
-# m_webaccess
-#. You cannot create more raw statistic set.
-msgid "err_sta2_1"
-msgstr ""
-"Alcanzaste tu cuota de juegos de estadísticas, ya no puedes crear más. "
-
-#. There is currently no raw statistic set.
-msgid "err_sta2_2"
-msgstr "Ningún juego de estadísticas en bruto."
-
-#. The requested raw statistic set has not been found.
-msgid "err_sta2_3"
-msgstr "No se encuentra este juego de estadísticas en bruto."
-
-#. File or folder name is incorrect
-msgid "err_bro_1"
-msgstr "¡Carpeta o archivo incorrecto!"
-
-#. You cannot move or copy a file to the same folder
-msgid "err_bro_2"
-msgstr "¡No se puede desplazar un archivo hacia la misma carpeta!"
-
-#. If we manage your DNS <br />You can manage your mails elsewhere if you want 
-#. (MX field).<br />Write <b><code>%s</code></b> in this field if your mail 
-#. must be managed by %s<br />or put the IP address or name of the mail server 
-#. used to manage your mails.<small>Warning : if you put nothing in this field, 
-#. your mails will be unavailable</small>
-msgid "help_dns_mx %s %s"
-msgstr ""
-"Si este servidor maneja tu DNS:<br /> Si quieres, puedes manejar tus buzones "
-"de correo en otro lado (campo MX).<br /> Ingresa <b><code>%s</code></b> en "
-"este campo si tus buzones deben ser manejados por %s<br /> o ingresa la "
-"dirección IP o el nombre del servidor de mail utilizado para tus buzones "
-"<small>Cuidado: si no pones nada en este campo, tus direcciones de correo "
-"estarán indisponibles.</small>"
-
-#. If we don't manage the DNS for this domain <br />do we manage your mails?
-msgid "help_dns_mail"
-msgstr ""
-"Si este servidor no maneja el DNS de este dominio <br />¿maneja sus buzones "
-"de correo?"
-
-#. If you want to delete the domain %s, click the button below.Warning : this 
-#. delete all the ftp, mails, mailing-lists ... associated with thisdomain and 
-#. all its subdomains!
-msgid "help_domain_del %s"
-msgstr ""
-"Si quieres borrar el dominio %s, presiona el botón aquí abajo. ¡Cuidado: "
-"esto borrará todas las cuentas FTP, los buzones, las listas de correo, ... "
-"asociadas con el dominio y todos sus subdominios!"
-
-#. You can create various databases<br />Click on 'SQL Admin' in the menu to 
-#. manage them<br />or use the table below to backup, retrieve or delete them:
-msgid "help_sql_list_ok"
-msgstr ""
-"Puedes crear varias bases de datos<br />Presiona en 'Admin SQL' en el menu "
-"para manejarlas<br />o utiliza el menú a continuación para respaldarlas, "
-"restaurarlas o borrarlas:"
-
-#. Your haven't created your main database yet, please enter a password to create it.
-msgid "help_sql_list_no"
-msgstr ""
-"Aún no has creado tu base de datos principal, por favor entra una contraseña "
-"para crearla."
-
-#. This is a date representation : parameters are the date as follow :
-#. $d,$m,$y,$h,$i,$hh,$am
-#.  1  2  3  4  5  6   7
-#. hh is the hour in 12 hours format, and am is 'am' or 'pm'.
-#. eg: english : %3$d/%1$d/%2$d, at %6$d:%5$d %7$s
-msgid "%3$d-%2$d-%1$d %4$d:%5$d"
-msgstr "%1$d/%2$d/%3$d %6$d:%5$d %7$d"
-
-msgid "1 column, detailed"
-msgstr ""
-
-msgid "2 columns, short"
-msgstr ""
-
-msgid "3 columns, short"
-msgstr ""
-
-msgid "Go back to the file manager"
-msgstr ""
-
-msgid "Edit the newly created file"
-msgstr ""
-
-#, fuzzy
-msgid "hlp_login"
-msgstr ""
-"El dominio fue borrado, pero los archivos de tu sitio no fueron destruídos. "
-"<br />Si quieres destruir los archivos del sitio (fuente de las pa?inas web) "
-"Utiliza el manejador de archivos.<br />Más información sobre el manejo de "
-"dominios en la ayuda en línea HELPID_200<br />"
-
-# m_membre
-#, fuzzy
-msgid "err_admin_14"
-msgstr "-- ¡¡Sólo los administradores tienen acceso a estas páginas!! --"
-
-# m_membre
-#, fuzzy
-msgid "err_admin_15"
-msgstr "-- ¡¡Sólo los administradores tienen acceso a estas páginas!! --"
-
-# m_membre
-#, fuzzy
-msgid "err_admin_16"
-msgstr "-- ¡¡Sólo los administradores tienen acceso a estas páginas!! --"
-
-# m_membre
-#, fuzzy
-msgid "err_admin_17"
-msgstr "-- ¡¡Sólo los administradores tienen acceso a estas páginas!! --"
-
-# m_membre
-#, fuzzy
-msgid "err_admin_18"
-msgstr "-- ¡¡Sólo los administradores tienen acceso a estas páginas!! --"
-
-#, fuzzy
-msgid "err_hta_12"
-msgstr "Un archivo .htaccess incompatible se encuentra en la carpeta. "
-
-#, fuzzy
-msgid "err_mail_16"
-msgstr "Conexión LDAP imposible. Intenta más tarde."
-
-#, fuzzy
-msgid "err_mysql_21"
-msgstr ""
-"El nombre de la base de datos sólo puede contener cifras y letras minúsculas."
-
-#, fuzzy
-msgid "err_bro_3"
-msgstr "¡Carpeta o archivo incorrecto!"
-
-#, fuzzy
-msgid "%3$d-%2$d-%1$d"
-msgstr "%1$d/%2$d/%3$d %6$d:%5$d %7$d"
-
-msgid "AlternC's account password"
-msgstr "Mots de passe des comptes AlternC"
-
-msgid "POP/IMAP account passwords"
-msgstr "Mots de passe des comptes POP/IMAP"
-
-msgid "Protected folders passwords"
-msgstr "Mots de passe des dossiers protégés"
 
 #: ../../squirrelmail/alternc_changepass/change.php:39
 msgid "Can't connect to MySQL server on AlternC!"
@@ -3942,6 +3054,15 @@ msgstr "Validar cambios"
 msgid "Domain removal"
 msgstr "Nombre de dominio"
 
+#: ../admin/dom_edit.php:218
+#, php-format
+msgid "help_domain_del %s"
+msgstr ""
+"Si quieres suprimir el dominio %s, presiona en el botón de aquí arriba. "
+"¡Cuidado, esto suprimirá también todas las cuentas FTP, buzones correo, "
+"listas de correos, etc de este dominio, así como todos los subdominios "
+"relacionados!"
+
 #: ../admin/dom_edit.php:221
 #, php-format
 msgid "Delete %s from this server"
@@ -4446,6 +3567,11 @@ msgstr ""
 #, fuzzy
 msgid "Undelete"
 msgstr "borrado"
+
+#: ../admin/mail_list.php:163
+#, php-format
+msgid "%3$d-%2$d-%1$d"
+msgstr ""
 
 #: ../admin/mail_list.php:163 ../admin/main.php:36
 msgid "Never"
@@ -5522,6 +4648,18 @@ msgid ""
 "low-case, up-case, figures and special characters."
 msgstr ""
 
+#: ../class/m_bro.php:68
+msgid "1 column, detailed"
+msgstr ""
+
+#: ../class/m_bro.php:68
+msgid "2 columns, short"
+msgstr ""
+
+#: ../class/m_bro.php:68
+msgid "3 columns, short"
+msgstr ""
+
 #: ../class/m_bro.php:69
 msgid "tar.Z (Unix)"
 msgstr ""
@@ -5537,6 +4675,15 @@ msgstr ""
 #: ../class/m_bro.php:69
 msgid "zip (Windows/Dos)"
 msgstr ""
+
+#: ../class/m_bro.php:71
+msgid "Edit the newly created file"
+msgstr ""
+
+#: ../class/m_bro.php:71
+#, fuzzy
+msgid "Go back to the file manager"
+msgstr "Regresar al manejador de archivos"
 
 #: ../class/m_bro.php:342 ../class/m_bro.php:1004
 msgid "Cannot create the requested directory. Please check the permissions"
@@ -6226,83 +5373,6 @@ msgstr "Animación Flash"
 msgid "Real Media File"
 msgstr "Archivo Real Media"
 
-#~ msgid "help_sta_list"
-#~ msgstr ""
-#~ "Aquí tiene la lista de los juegos de estatísticas installadas en su "
-#~ "cuenta:<br /> Haga clic en 'Modificar' para cambiar la configuración de "
-#~ "las estadísticas<br /> Para suprimir un juego de estadísticas, marque el "
-#~ "cuadro correspondiente y haga clic en el botón 'Suprimir juegos marcados'"
-
-#~ msgid "Web Statistics"
-#~ msgstr "Estadísticas Web"
-
-#~ msgid "You cannot add any new statistics, your quota is over."
-#~ msgstr "No puede crear más estadísticas, su cuota alcanzó su limite."
-
-#~ msgid "Your backup parameters has been successfully changed."
-#~ msgstr "Sus parámetros de copia de seguridad han sido cambiados."
-
-#~ msgid "New Statistics"
-#~ msgstr "Creación de estadísticas"
-
-#~ msgid "Language"
-#~ msgstr "Idioma"
-
-#~ msgid "Create those statistics"
-#~ msgstr "Crear estas estadísticas"
-
-#~ msgid "WARNING"
-#~ msgstr "ADVERTENCIA"
-
-#~ msgid ""
-#~ "The statistics %s has been successfully deleted (the stats files must be "
-#~ "manually deleted)"
-#~ msgstr ""
-#~ "El juego de estatísticas %s a sido borrado (los archivos de estatísticas "
-#~ "deben ser a manos)"
-
-#~ msgid "Delete statistics"
-#~ msgstr "Borrar juego de estadísticas"
-
-#~ msgid "The statistics has been successfully created"
-#~ msgstr "El juego de estadísticas ha sido creado"
-
-#~ msgid "No Statistics selected!"
-#~ msgstr "¡Ningún juego seleccionado!"
-
-#~ msgid "The Statistics has been successfully changed"
-#~ msgstr "El juego de estadísticas ha sido modificado"
-
-#~ msgid "Change the Statistics"
-#~ msgstr "Modificar un juego de estadísticas"
-
-#~ msgid "Change those Statistics."
-#~ msgstr "Modificar este juego de estadísticas."
-
-#~ msgid "Statistics List"
-#~ msgstr "Lista de juegos de estadísticas"
-
-#~ msgid "Create new Statistics"
-#~ msgstr "Crear un nuevo juego de estadísticas"
-
-#~ msgid "Delete the checked Statistics"
-#~ msgstr "Suprimir los juegos marcados"
-
-#~ msgid "Byte"
-#~ msgstr "Byte"
-
-#, fuzzy
-#~ msgid "hlp_sta_add"
-#~ msgstr ""
-#~ "Entrez le nom du domaine dont vous souhaitez obtenir des statistiques de "
-#~ "fréquentation. <br />Choisissez ensuite la langue dans laquelle ces "
-#~ "statistiques devront etre générées. <br />Enfin, entrez le dossier de "
-#~ "votre espace disque dans lequel ces statistiques devront etre stockées "
-#~ "(sous forme de pages html + images).<br /> Il est conseillé que ce "
-#~ "dossier soit accessible depuis l'un de vos domaines ou sous-domaines. De "
-#~ "plus, vous pouvez protéger ce dossier à l'aide du menu 'dossiers "
-#~ "protégés'."
-
 #, fuzzy
 #~ msgid "Create this new awstat account."
 #~ msgstr "Crear estas estadísticas"
@@ -6332,22 +5402,52 @@ msgstr "Archivo Real Media"
 #~ msgid "err_stats_6"
 #~ msgstr "Este idioma no está disponible."
 
-#~ msgid "man_mailman_1"
+#~ msgid "help_sta_list"
 #~ msgstr ""
-#~ "<ul> <li>Mailman es un manejador de listas de discusión/difusión muy "
-#~ "potente. Dispone de una interfaz web de gestión de lista completa, "
-#~ "accesible a través de los diferentes enlaces aquí arrba.</li><li>Mailman "
-#~ "permite moderar una lista: para moderar los futuros suscriptores ir a "
-#~ "\"Opciones de confidencialidad\"->\"Filtros remitente\" y luego elegir  "
-#~ "\"Sí\" en \"¿Los envíos de nuevos suscriptores deben ser moderados por "
-#~ "omisión?\". De hecho, mailman puede moderar CADA suscriptor de una lista."
-#~ "</li><li>Para moderar los NO-suscriptores de una lsita, ir a \"Opciones "
-#~ "de confidencialidad\"->\"Filtros remitente\" y luego elegir entre  "
-#~ "\"Aceptar En espera Rechazar Ignorar\" para \"Acción para los envíos de "
-#~ "los no-suscriptores\"</li><li>Varias otras opciones pueden ser "
-#~ "modificadas en mailman. Para cualquier información, presiona en el enlace "
-#~ "\"Détalles de ...\" abajo de cada elemento configurable, o contacta el "
-#~ "hospedaje.</li></ul>"
+#~ "Aquí tiene la lista de los juegos de estatísticas installadas en su "
+#~ "cuenta:<br /> Haga clic en 'Modificar' para cambiar la configuración de "
+#~ "las estadísticas<br /> Para suprimir un juego de estadísticas, marque el "
+#~ "cuadro correspondiente y haga clic en el botón 'Suprimir juegos marcados'"
+
+#~ msgid "Your backup parameters has been successfully changed."
+#~ msgstr "Sus parámetros de copia de seguridad han sido cambiados."
+
+#~ msgid "Language"
+#~ msgstr "Idioma"
+
+#~ msgid "WARNING"
+#~ msgstr "ADVERTENCIA"
+
+#~ msgid ""
+#~ "The statistics %s has been successfully deleted (the stats files must be "
+#~ "manually deleted)"
+#~ msgstr ""
+#~ "El juego de estatísticas %s a sido borrado (los archivos de estatísticas "
+#~ "deben ser a manos)"
+
+#~ msgid "Delete statistics"
+#~ msgstr "Borrar juego de estadísticas"
+
+#~ msgid "Change the Statistics"
+#~ msgstr "Modificar un juego de estadísticas"
+
+#~ msgid "Change those Statistics."
+#~ msgstr "Modificar este juego de estadísticas."
+
+#~ msgid "Byte"
+#~ msgstr "Byte"
+
+#, fuzzy
+#~ msgid "hlp_sta_add"
+#~ msgstr ""
+#~ "Entrez le nom du domaine dont vous souhaitez obtenir des statistiques de "
+#~ "fréquentation. <br />Choisissez ensuite la langue dans laquelle ces "
+#~ "statistiques devront etre générées. <br />Enfin, entrez le dossier de "
+#~ "votre espace disque dans lequel ces statistiques devront etre stockées "
+#~ "(sous forme de pages html + images).<br /> Il est conseillé que ce "
+#~ "dossier soit accessible depuis l'un de vos domaines ou sous-domaines. De "
+#~ "plus, vous pouvez protéger ce dossier à l'aide du menu 'dossiers "
+#~ "protégés'."
 
 #~ msgid "Public page"
 #~ msgstr "Página pública"
@@ -6367,9 +5467,6 @@ msgstr "Archivo Real Media"
 
 #~ msgid "Initial list password"
 #~ msgstr "Contraseña inicial de la lista"
-
-#~ msgid "err_mysql_20"
-#~ msgstr "Alcanzaste tu cuota de usuarios MySQL, ya no puedes crear uno más."
 
 #, fuzzy
 #~ msgid "Edition of <b>%s</b>"
@@ -6489,6 +5586,10 @@ msgstr "Archivo Real Media"
 #~ msgid "SQL Server"
 #~ msgstr "Servidor SQL"
 
+#, fuzzy
+#~ msgid "err_mysql_13"
+#~ msgstr "Alcanzaste tu cuota de bases MySQL, ya no puedes crear una más."
+
 #~ msgid "New Raw Statistics (apache)"
 #~ msgstr "Nuevo juego de estadísticas en bruto (apache)"
 
@@ -6595,6 +5696,12 @@ msgstr "Archivo Real Media"
 #~ msgid "This account will be deleted on"
 #~ msgstr "no pudo ser borrado"
 
+#~ msgid "help_sql_list_ok"
+#~ msgstr ""
+#~ "Tienes una o más bases de datos.<br> Presiona en 'Admin SQL' en el menú "
+#~ "para administrarlas<br> o utiliza el menú aquí abajo para administrar las "
+#~ "copias de respaldo,<br> las restauraciones o para borrar las bases:"
+
 #, fuzzy
 #~ msgid "Change the MySQL password"
 #~ msgstr "Cambiar contraseña SQL"
@@ -6602,6 +5709,11 @@ msgstr "Archivo Real Media"
 #, fuzzy
 #~ msgid "Get the current MySQL parameters"
 #~ msgstr "Mostrar los parámetros SQL actuales"
+
+#~ msgid "help_sql_list_no"
+#~ msgstr ""
+#~ "Tu base de datos principal no existe, ingresa aquí una contraseña para "
+#~ "crearla"
 
 #~ msgid "Create my main database"
 #~ msgstr "Crear mi base de datos principal"
@@ -6710,8 +5822,22 @@ msgstr "Archivo Real Media"
 #~ msgid "DNS parameters"
 #~ msgstr "Parámetros DNS"
 
+#~ msgid "help_dns_mx %s %s"
+#~ msgstr ""
+#~ "Si este servidor maneja el DNS de este dominio:<br /> Si quieres, puedes "
+#~ "manejar sus buzones de correo en otro lado (campo MX).<br /> Ingresa "
+#~ "<b><code>%s</code></b> en este campo si tus buzones deben ser manejados "
+#~ "por %s<br /> o ingresa la dirección IP o el nombre del servidor de mail "
+#~ "utilizado para tus buzones <small>Cuidado: si no pones nada en este "
+#~ "campo, tus direcciones de correo estarán indisponibles.</small>"
+
 #~ msgid "MX Field"
 #~ msgstr "Campo MX"
+
+#~ msgid "help_dns_mail"
+#~ msgstr ""
+#~ "Si este servidor no maneja el DNS de este dominio <br />¿maneja sus "
+#~ "buzones de correo?"
 
 #~ msgid "Delete %s"
 #~ msgstr "Borrar %s"
@@ -6821,6 +5947,9 @@ msgstr "Archivo Real Media"
 #~ msgstr ""
 #~ "Entra el nombre del archivo que contiene los datos SQL por restaurar en "
 #~ "la base."
+
+#~ msgid "err_mysql_20"
+#~ msgstr "Alcanzaste tu cuota de usuarios MySQL, ya no puedes crear uno más."
 
 #~ msgid "Create this new user"
 #~ msgstr "Crear este nuevo uruario"
