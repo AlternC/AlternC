@@ -211,9 +211,9 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
           <li><b><?php __("Server name: ");?></b> <?php __($mail->srv_smtp); ?></li>
           <li><b><?php __("Username: ");?></b> <?php __("The mail address you want to access <i>(example : myuser@example.tld)</i>");?></li>
           <li><b><?php __("Port: ");?></b> 25</li>
-          <li><b><?php __("Authentication: ");?></b><?php __("FIXME")?></li>
-          <li><b><?php __("Authentication method: ");?></b><?php __("FIXME")?></li>
-          <li><b><?php __("Connection security:");?></b> FIXME</li>
+          <li><b><?php __("Authentication: ");?></b><?php __("Yes")?></li>
+          <li><b><?php __("Authentication method: ");?></b><?php __("Normal Password")?></li>
+          <li><b><?php __("Connection security:");?></b> STARTTLS</li>
         </ul>
       </li>
        <li><b><a href="javascript:;" onClick="$('#cfg-smtps').toggle();"><?php __("SMTPS");?></a></b>
@@ -221,9 +221,9 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
           <li><b><?php __("Server name: ");?></b> <?php __($mail->srv_smtps); ?></li>
           <li><b><?php __("Username: ");?></b> <?php __("The mail address you want to access <i>(example : myuser@example.tld)</i>");?></li>
           <li><b><?php __("Port: ");?></b> 465</li>
-          <li><b><?php __("Authentication: ");?></b><?php __("FIXME")?></li>
-          <li><b><?php __("Authentication method: ");?></b><?php __("FIXME")?></li>
-          <li><b><?php __("Connection security:");?></b> FIXME</li>
+          <li><b><?php __("Authentication: ");?></b><?php __("Yes")?></li>
+          <li><b><?php __("Authentication method: ");?></b><?php __("Normal Password")?></li>
+          <li><b><?php __("Connection security:");?></b> SSL</li>
         </ul>
       </li>
     </ul>
@@ -236,7 +236,7 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
           <li><b><?php __("Port: ");?></b> 143</li>
           <li><b><?php __("Authentication: ");?></b><?php __("Yes")?></li>
           <li><b><?php __("Authentication method: ");?></b><?php __("Normal password")?></li>
-          <li><b><?php __("Connection security:");?></b> FIXME</li>
+          <li><b><?php __("Connection security:");?></b> STARTTLS</li>
         </ul>
       </li>
 
@@ -246,7 +246,7 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
           <li><b><?php __("Port: ");?></b> 993</li>
           <li><b><?php __("Authentication: ");?></b><?php __("Yes")?></li>
           <li><b><?php __("Authentication method: ")?></b><?php __("Normal password")?></li>
-          <li><b><?php __("Connection security:");?></b> STARTTLS</li>
+          <li><b><?php __("Connection security:");?></b> SSL</li>
         </ul>
       </li>
 
@@ -256,7 +256,7 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
           <li><b><?php __("Port: ");?></b> 110</li>
           <li><b><?php __("Authentication: ");?></b><?php __("Yes")?></li>
           <li><b><?php __("Authentication method: ");?></b><?php __("Normal password")?></li>
-          <li><b><?php __("Connection security:");?></b> FIXME</li>
+          <li><b><?php __("Connection security:");?></b> STARTTLS</li>
         </ul>
       </li>
 
@@ -266,7 +266,7 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
           <li><b><?php __("Port: ");?></b> 995</li>
           <li><b><?php __("Authentication: ");?></b><?php __("Yes")?></li>
           <li><b><?php __("Authentication method: ");?></b><?php __("Normal password")?></li>
-          <li><b><?php __("Connection security:");?></b> FIXME</li>
+          <li><b><?php __("Connection security:");?></b> SSL</li>
         </ul>
       </li>
     </ul>
