@@ -6,7 +6,7 @@
   <div class="menu-content" id="menu-lang">
   <ul>
    <?php foreach($locales as $l) { ?>
-    <li><a href="/login.php?setlang=<?php echo $l; ?>" target="_top"><?php __($l); ?></a></li>
+    <li><a href="/login.php?setlang=<?php echo $l; ?>" target="_top"><?php if (isset($lang_translation[$l])) echo $lang_translation[$l]; else echo $l; ?></a></li>
    <?php } ?>
   </ul>
  </div>

@@ -383,6 +383,10 @@ if [ -x /usr/sbin/locale-gen ] ; then
 	echo "en_US.UTF-8 UTF-8" >>/etc/locale.gen
 	LOCALECHANGED=1
     fi
+    if ! grep -q "^it_IT.UTF-8 UTF-8$" /etc/locale.gen ; then
+	echo "it_IT.UTF-8 UTF-8" >>/etc/locale.gen
+	LOCALECHANGED=1
+    fi
     if [ "$LOCALECHANGED" ] ; then
 	locale-gen
     fi

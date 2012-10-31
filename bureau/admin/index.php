@@ -115,7 +115,7 @@ if (isset($url) && $url)  {
 	    <?php 
 		foreach($locales as $l) {
 	    ?>
-	    <a href="?setlang=<?php echo $l; ?>"><?php __($l); ?></a>
+	    <a href="?setlang=<?php echo $l; ?>"><?php if (isset($lang_translation[$l])) echo $lang_translation[$l]; else echo $l;  ?></a>
 	    <?php } ?>
 <br />
 <?php

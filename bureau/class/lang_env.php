@@ -1,5 +1,13 @@
 <?php
 
+$lang_translation=array(
+			"fr_FR" => "Français",
+			"en_US" => "English",
+			"es_ES" => "Español",
+			"it_IT" => "Italiano",
+			"de_DE" => "Deutsch",
+			);
+
 function update_locale($langpath) {
   $locales=array();
   $file=file("/etc/locale.gen", FILE_SKIP_EMPTY_LINES);
