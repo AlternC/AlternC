@@ -80,8 +80,7 @@ EOF
         ln -sf /usr/lib/cgi-bin/awstats.pl \
             /var/alternc/cgi-bin/awstats.pl
     fi
-    alternc.install
-
+    
     logrotate_apache
 
     # Add htpasswd :
@@ -105,6 +104,8 @@ menu_aws.php/" <$MENUFILE >$MENUFILE.alternc_awstats
     echo "*  Add an autorized user called 'admin' in   *"
     echo "*   statistics section, so he will access    *"
     echo "*        every stats of every users          *"
+    echo "*                                            *"
+    echo "* Please run alternc.install to fully deploy *"
     echo "**********************************************"
     ;;
 
