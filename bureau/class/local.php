@@ -1,7 +1,7 @@
 <?php
 
 /* Read global variables (AlternC configuration) */
-$L_VERSION="v. 3.0~rc1";
+$L_VERSION="@@REPLACED_DURING_BUILD@@";
 
 // To be able to have displayer version != help version
 // (usefull during RC, etc...)
