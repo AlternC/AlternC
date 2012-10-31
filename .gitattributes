@@ -454,6 +454,7 @@ debian/po/POTFILES.in -text
 debian/po/de.po -text
 debian/po/es.po -text
 debian/po/fr.po -text
+debian/po/it.po -text
 debian/po/pt.po -text
 debian/po/templates.pot -text
 debian/rules -text

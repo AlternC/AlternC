@@ -42,7 +42,7 @@ class m_roundcube {
     $domain="";
     do { // for each domain part (search panel.alternc.org then alternc.org then org, if the current panel is at www.panel.alternc.org)
       list($host,$dompart)=explode(".",$_SERVER["HTTP_HOST"],$i);
-      // We search for a 'squirrelmail' subdomain in that domain
+      // We search for a 'roundcube' subdomain in that domain
       $db->query("SELECT * FROM sub_domaines s WHERE s.domaine='".addslashes($dompart)."' AND s.type='roundcube';");
       if ($db->next_record()) {
 	$domain=$db->Record;
