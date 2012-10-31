@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: i18n@alternc.org\n"
-"POT-Creation-Date: 2012-10-31 11:38+0100\n"
+"POT-Creation-Date: 2012-10-31 13:43+0100\n"
 "PO-Revision-Date: 2008-09-05 16:50+0200\n"
 "Last-Translator: \n"
 "Language-Team:  <tech@alternc.org>\n"
@@ -1163,7 +1163,7 @@ msgstr ""
 msgid "Add this account to the allowed list"
 msgstr "Añadir esta cuenta a la lista de aquellas autorizadas."
 
-#: ../admin/adm_panel.php:40 ../admin/menu_adm.php:41
+#: ../admin/adm_panel.php:40 ../admin/menu_adm.php:40
 msgid "Admin Control Panel"
 msgstr "Panel Administrador"
 
@@ -2906,10 +2906,18 @@ msgstr "Cambiar la dirección de correo de la cuenta"
 msgid "User Quotas"
 msgstr "Cuotas"
 
-#: ../admin/menu_adm.php:42
+#: ../admin/menu_adm.php:41
 #, fuzzy
 msgid "General PhpMyAdmin"
 msgstr "Admin SQL general"
+
+#: ../admin/menu_adm.php:42
+msgid "Switch debug Off"
+msgstr ""
+
+#: ../admin/menu_adm.php:42
+msgid "Switch debug On"
+msgstr ""
 
 #: ../admin/menu_mem.php:28
 msgid "Logout"
@@ -3863,6 +3871,68 @@ msgstr ""
 msgid "--- Program error --- Lock already obtained!"
 msgstr ""
 
+#: ../class/m_dom.php:1446
+#, fuzzy
+msgid "Locally hosted"
+msgstr "Administrar localmente"
+
+#: ../class/m_dom.php:1447
+#, fuzzy
+msgid "URL redirection"
+msgstr "Dirigir hacia una URL"
+
+#: ../class/m_dom.php:1448
+msgid "IPv4 redirect"
+msgstr ""
+
+#: ../class/m_dom.php:1449
+msgid "Webmail access"
+msgstr "Acceso Webmail"
+
+#: ../class/m_dom.php:1450
+#, fuzzy
+msgid "Squirrelmail Webmail access"
+msgstr "Acceso Webmail"
+
+#: ../class/m_dom.php:1451
+#, fuzzy
+msgid "Roundcube Webmail access"
+msgstr "Acceso Webmail"
+
+#: ../class/m_dom.php:1452
+msgid "IPv6 redirect"
+msgstr ""
+
+#: ../class/m_dom.php:1453
+msgid "CNAME DNS entry"
+msgstr ""
+
+#: ../class/m_dom.php:1454
+msgid "TXT DNS entry"
+msgstr ""
+
+#: ../class/m_dom.php:1455
+msgid "MX DNS entry"
+msgstr ""
+
+#: ../class/m_dom.php:1456
+msgid "secondary MX DNS entry"
+msgstr ""
+
+#: ../class/m_dom.php:1457
+#, fuzzy
+msgid "Default mail server"
+msgstr "Valores por omisión"
+
+#: ../class/m_dom.php:1458
+msgid "Default backup mail server"
+msgstr ""
+
+#: ../class/m_dom.php:1459
+#, fuzzy
+msgid "AlternC panel access"
+msgstr "Lista de cuentas FTP"
+
 #: ../class/m_err.php:66 ../class/m_err.php:98
 msgid "err_"
 msgstr "err_"
@@ -4530,10 +4600,6 @@ msgstr "Archivo Real Media"
 #~ msgid "Local mailbox"
 #~ msgstr "Nueva dirección"
 
-#, fuzzy
-#~ msgid "Redirection"
-#~ msgstr "Dirigir hacia una URL"
-
 #~ msgid "Add a mail to the domain %s"
 #~ msgstr "Añadir una cuenta de correo para el dominio %s"
 
@@ -4718,12 +4784,6 @@ msgstr "Archivo Real Media"
 
 #~ msgid "Add a subdomain"
 #~ msgstr "Añadir un subdominio"
-
-#~ msgid "Locally managed"
-#~ msgstr "Administrar localmente"
-
-#~ msgid "Webmail access"
-#~ msgstr "Acceso Webmail"
 
 #~ msgid "DNS parameters"
 #~ msgstr "Parámetros DNS"

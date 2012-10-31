@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: $Id: admin.po,v 1.10 2004/11/01 15:55:44 anonymous Exp "
 "$\n"
 "Report-Msgid-Bugs-To: i18n@alternc.org\n"
-"POT-Creation-Date: 2012-10-31 11:38+0100\n"
+"POT-Creation-Date: 2012-10-31 13:43+0100\n"
 "PO-Revision-Date: 2002-06-16 13:50CEST\n"
 "Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
 "Language-Team: French <i18n@alternc.org>\n"
@@ -1085,7 +1085,7 @@ msgstr ""
 msgid "Add this account to the allowed list"
 msgstr ""
 
-#: ../admin/adm_panel.php:40 ../admin/menu_adm.php:41
+#: ../admin/adm_panel.php:40 ../admin/menu_adm.php:40
 msgid "Admin Control Panel"
 msgstr ""
 
@@ -2703,8 +2703,16 @@ msgstr ""
 msgid "User Quotas"
 msgstr ""
 
-#: ../admin/menu_adm.php:42
+#: ../admin/menu_adm.php:41
 msgid "General PhpMyAdmin"
+msgstr ""
+
+#: ../admin/menu_adm.php:42
+msgid "Switch debug Off"
+msgstr ""
+
+#: ../admin/menu_adm.php:42
+msgid "Switch debug On"
 msgstr ""
 
 #: ../admin/menu_mem.php:28
@@ -3590,6 +3598,62 @@ msgstr ""
 
 #: ../class/m_dom.php:1307
 msgid "--- Program error --- Lock already obtained!"
+msgstr ""
+
+#: ../class/m_dom.php:1446
+msgid "Locally hosted"
+msgstr ""
+
+#: ../class/m_dom.php:1447
+msgid "URL redirection"
+msgstr ""
+
+#: ../class/m_dom.php:1448
+msgid "IPv4 redirect"
+msgstr ""
+
+#: ../class/m_dom.php:1449
+msgid "Webmail access"
+msgstr ""
+
+#: ../class/m_dom.php:1450
+msgid "Squirrelmail Webmail access"
+msgstr ""
+
+#: ../class/m_dom.php:1451
+msgid "Roundcube Webmail access"
+msgstr ""
+
+#: ../class/m_dom.php:1452
+msgid "IPv6 redirect"
+msgstr ""
+
+#: ../class/m_dom.php:1453
+msgid "CNAME DNS entry"
+msgstr ""
+
+#: ../class/m_dom.php:1454
+msgid "TXT DNS entry"
+msgstr ""
+
+#: ../class/m_dom.php:1455
+msgid "MX DNS entry"
+msgstr ""
+
+#: ../class/m_dom.php:1456
+msgid "secondary MX DNS entry"
+msgstr ""
+
+#: ../class/m_dom.php:1457
+msgid "Default mail server"
+msgstr ""
+
+#: ../class/m_dom.php:1458
+msgid "Default backup mail server"
+msgstr ""
+
+#: ../class/m_dom.php:1459
+msgid "AlternC panel access"
 msgstr ""
 
 #: ../class/m_err.php:66 ../class/m_err.php:98

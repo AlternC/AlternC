@@ -36,11 +36,10 @@ if ($mem->checkRight()) { ?>
 <ul>
 <li><a href="adm_list.php"><span style="color: red;"><?php __("Manage the Alternc accounts"); ?></span></a></li>
 <li><a href="quotas_users.php?mode=4"><span style="color: red;"><?php __("User Quotas"); ?></span></a></li>
-<?php if ($cuid == 2000) { 
-  $llzstr="Switch debug ".($debug_alternc->status?"Off":"On"); ?>
+<?php if ($cuid == 2000) {  ?>
   <li><a href="adm_panel.php"><span style="color: red;"><?php __("Admin Control Panel"); ?></span></a></li>
   <li><a href="/alternc-sql/?server=2"><span style="color: red;"><?php __("General PhpMyAdmin"); ?></span></a></li>
-  <li><a href="alternc_debugme.php?enable=<?php echo $debug_alternc->status?"0":"1"; ?>"><span style="color: red;"><?php __("$llzstr"); ?></span></a></li>
+												       <li><a href="alternc_debugme.php?enable=<?php echo $debug_alternc->status?"0":"1"; ?>"><span style="color: red;"><?php if ($debug_alternc->status) __("Switch debug Off"); else __("Switch debug On");  ?></span></a></li>
 <?php } ?>
 </ul>
 </div>

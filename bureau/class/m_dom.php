@@ -1441,4 +1441,22 @@ class m_dom {
   }
 
 
+  function default_domain_type() {
+    // This function is only used to allow translation of default domain types:
+    _("Locally hosted");
+    _("URL redirection");
+    _("IPv4 redirect");
+    _("Webmail access");
+    _("Squirrelmail Webmail access");
+    _("Roundcube Webmail access");
+    _("IPv6 redirect");
+    _("CNAME DNS entry");
+    _("TXT DNS entry");
+    _("MX DNS entry");
+    _("secondary MX DNS entry");
+    _("Default mail server");
+    _("Default backup mail server");
+    _("AlternC panel access");
+  }
+
 } /* Class m_domains */

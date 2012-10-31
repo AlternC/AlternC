@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: AlternC, hosting control panel\n"
 "Report-Msgid-Bugs-To: https://alternc.org/report/1\n"
 "POT-Creation-Date: 2012-10-17 11:00+0200\n"
-"PO-Revision-Date: 2012-10-31 10:55+0000\n"
+"PO-Revision-Date: 2012-10-31 12:46+0000\n"
 "Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
 "Language-Team: English <i18n@alternc.org>\n"
 "MIME-Version: 1.0\n"
@@ -163,7 +163,7 @@ msgstr "Mot de passe"
 msgid "Create this new awstat account"
 msgstr "Créer cet utilisateur"
 
-#: ../admin/mman_list.php:103
+#: ../admin/mman_list.php:104
 msgid "Change password"
 msgstr "Changer le mot de passe"
 
@@ -258,10 +258,10 @@ msgid "(with mailman)"
 msgstr "(avec mailman)"
 
 #: ../admin/menu_mailman.php:32 ../admin/mman_add.php:34
-#: ../admin/mman_list.php:41 ../admin/mman_passwd.php:37
-#: ../admin/mman_passwd.php:45 ../admin/mman_url.php:38
-#: ../admin/mman_url.php:47 ../admin/mman_url.php:55
-#: ../class/m_mailman.php:499
+#: ../admin/mman_list.php:41 ../admin/mman_list.php:60
+#: ../admin/mman_passwd.php:37 ../admin/mman_passwd.php:45
+#: ../admin/mman_url.php:38 ../admin/mman_url.php:47 ../admin/mman_url.php:55
+#: ../class/m_mailman.php:535
 msgid "Mailing lists"
 msgstr "Listes de discussion"
 
@@ -342,39 +342,39 @@ msgid ""
 "No domain is installed on your account, you cannot create any mailing list!"
 msgstr "Aucun domaine n'est installé sur votre compte, vous ne pouvez pas créer de listes !"
 
-#: ../admin/mman_list.php:68
+#: ../admin/mman_list.php:69
 msgid "Create a list"
 msgstr "Créer une nouvelle liste"
 
-#: ../admin/mman_list.php:77
+#: ../admin/mman_list.php:78
 msgid "Delete"
 msgstr "Effacer"
 
-#: ../admin/mman_list.php:77
+#: ../admin/mman_list.php:78
 msgid "List Status"
 msgstr "État de la liste"
 
-#: ../admin/mman_list.php:77
+#: ../admin/mman_list.php:78
 msgid "List name"
 msgstr "Nom de la liste"
 
-#: ../admin/mman_list.php:88
+#: ../admin/mman_list.php:89
 msgid "List is pending deletion, you can't do anything on it"
 msgstr "La liste est en cours de suppression, aucune action possible."
 
-#: ../admin/mman_list.php:99
+#: ../admin/mman_list.php:100
 msgid "List admin"
 msgstr "Administration"
 
-#: ../admin/mman_list.php:100
+#: ../admin/mman_list.php:101
 msgid "Pending messages"
 msgstr "Messages en attente"
 
-#: ../admin/mman_list.php:104
+#: ../admin/mman_list.php:105
 msgid "Change url"
 msgstr "Changer l'adresse"
 
-#: ../admin/mman_list.php:112
+#: ../admin/mman_list.php:113
 msgid "Delete the checked lists"
 msgstr "Effacer les listes cochées"
 
@@ -420,87 +420,93 @@ msgstr "Nouvelle adresse de la liste"
 msgid "Change the url."
 msgstr "Modifier l'adresse."
 
-#: ../class/m_mailman.php:36
+#: ../class/m_mailman.php:42
 msgid "This list already exist"
 msgstr "la liste existe déjà"
 
-#: ../class/m_mailman.php:37 ../class/m_mailman.php:135
-#: ../class/m_mailman.php:307 ../class/m_mailman.php:407
-#: ../class/m_mailman.php:432 ../class/m_mailman.php:452
+#: ../class/m_mailman.php:43 ../class/m_mailman.php:141
+#: ../class/m_mailman.php:343 ../class/m_mailman.php:443
+#: ../class/m_mailman.php:468 ../class/m_mailman.php:488
 msgid "This list does not exist"
 msgstr "La liste n'existe pas"
 
-#: ../class/m_mailman.php:38
+#: ../class/m_mailman.php:44
 msgid "A fatal error happened when creating the list"
 msgstr "Il y a eu une erreur critique durant la création de la liste"
 
-#: ../class/m_mailman.php:39
+#: ../class/m_mailman.php:45
 msgid "A fatal error happened when deleting the list"
 msgstr "Il y a eu une erreur critique durant la suppression de la liste"
 
-#: ../class/m_mailman.php:40
+#: ../class/m_mailman.php:46
 msgid "A fatal error happened when changing the list password"
 msgstr "Une erreur critique est survenue pendant le changement du mot de passe de la liste"
 
-#: ../class/m_mailman.php:41
+#: ../class/m_mailman.php:47
 msgid "A fatal error happened when getting the list url"
 msgstr "Une erreur critique est survenue pendant la récupération de l'URL de la liste"
 
-#: ../class/m_mailman.php:62 ../class/m_mailman.php:352
-#: ../class/m_mailman.php:383
+#: ../class/m_mailman.php:68 ../class/m_mailman.php:388
+#: ../class/m_mailman.php:419
 msgid "No list defined yet"
 msgstr "Pas de liste définie"
 
-#: ../class/m_mailman.php:184
+#: ../class/m_mailman.php:162
+msgid ""
+"Special mail address for Mailman mailing-lists. <a "
+"href='mman_list.php'>Click here to manage it.</a>"
+msgstr "Adresse Email spéciale pour gérer les listes Mailman <a href='mman_list.php'>Cliquez ici pour la gérer.</a>"
+
+#: ../class/m_mailman.php:217
 #, php-format
 msgid "The mailman address %s does not exists"
 msgstr "L'adresse Mailman %s n'existe pas"
 
-#: ../class/m_mailman.php:207
+#: ../class/m_mailman.php:240
+msgid "Your mailing-list quota is over, you cannot create more mailing-lists."
+msgstr "Votre quota de listes est atteint, vous ne pouvez plus créer de listes de discussion."
+
+#: ../class/m_mailman.php:247
 msgid "The email you entered is syntaxically incorrect"
 msgstr "Le mail que vous avez saisi est syntaxiquement incorrect"
 
-#: ../class/m_mailman.php:222
+#: ../class/m_mailman.php:262
 msgid "The login (left part of the @) is mandatory"
 msgstr "La partie gauche de l'@ sur une adresse mail est obligatoire."
 
-#: ../class/m_mailman.php:226
+#: ../class/m_mailman.php:266
 msgid "The owner email and the password are mandatory"
 msgstr "Le mail est le mot de passe sont obligatoire"
 
-#: ../class/m_mailman.php:230
+#: ../class/m_mailman.php:270
 msgid "This email is incorrect"
 msgstr "Le mail est incorrect"
 
-#: ../class/m_mailman.php:239
+#: ../class/m_mailman.php:279
 msgid "This domain does not exist."
 msgstr "Ce domaine n'existe pas"
 
-#: ../class/m_mailman.php:245
+#: ../class/m_mailman.php:285
 msgid ""
 "A list with the same name already exist on the server. Please choose another"
 " name."
 msgstr "Une liste du même nom existe déjà sur le serveur. Veuillez choisir un autre nom."
 
-#: ../class/m_mailman.php:260
+#: ../class/m_mailman.php:301
 msgid ""
 "This email address (or one of the list-subscribe, list-unsubscribe etc.) are"
 " already used."
 msgstr "Ce mail (ou l'un des mails nécessaire tel que list-subscribe, list-unsubscribe, ...) existe déjà "
 
-#: ../class/m_mailman.php:289
-msgid "Your mailing-list quota is over, you cannot create more mailing-lists."
-msgstr "Votre quota de listes est atteint, vous ne pouvez plus créer de listes de discussion."
-
-#: ../class/m_mailman.php:311
+#: ../class/m_mailman.php:347
 msgid "This list has pending action, you cannot delete it"
 msgstr "Cette liste a des actions en cours, vous ne pouvez pas la supprimer"
 
-#: ../class/m_mailman.php:411
+#: ../class/m_mailman.php:447
 msgid "The passwords are differents, please try again"
 msgstr "Les mots de passe ne correspondent pas, merci de ré-essayer"
 
-#: ../class/m_mailman.php:466
+#: ../class/m_mailman.php:502
 msgid "Mailing lists (mailman)"
 msgstr "Listes de discussion (mailman)"
 
@@ -1459,7 +1465,7 @@ msgstr "Si vous voulez autoriser un compte à synchroniser la liste des domaines
 msgid "Add this account to the allowed list"
 msgstr "Ajouter ce compte à la liste des autorisés."
 
-#: ../admin/adm_panel.php:40 ../admin/menu_adm.php:41
+#: ../admin/adm_panel.php:40 ../admin/menu_adm.php:40
 msgid "Admin Control Panel"
 msgstr "Panneau Administrateur"
 
@@ -2780,14 +2786,14 @@ msgstr "Port : "
 #: ../admin/mail_list.php:247 ../admin/mail_list.php:257
 #: ../admin/mail_list.php:267
 msgid "Authentication: "
-msgstr "Autentification : "
+msgstr "Authentification : "
 
 #: ../admin/mail_list.php:205 ../admin/mail_list.php:215
 #: ../admin/mail_list.php:225 ../admin/mail_list.php:238
 #: ../admin/mail_list.php:248 ../admin/mail_list.php:258
 #: ../admin/mail_list.php:268
 msgid "Authentication method: "
-msgstr "Méthode d'autentification : "
+msgstr "Méthode d'authentification : "
 
 #: ../admin/mail_list.php:205 ../admin/mail_list.php:238
 #: ../admin/mail_list.php:248 ../admin/mail_list.php:258
@@ -3056,9 +3062,17 @@ msgstr "Gérer les comptes AlternC"
 msgid "User Quotas"
 msgstr "Quotas Utilisateurs"
 
-#: ../admin/menu_adm.php:42
+#: ../admin/menu_adm.php:41
 msgid "General PhpMyAdmin"
 msgstr "PhpMyAdmin Général"
+
+#: ../admin/menu_adm.php:42
+msgid "Switch debug Off"
+msgstr "Désactiver le débogage"
+
+#: ../admin/menu_adm.php:42
+msgid "Switch debug On"
+msgstr "Activer le débogage"
 
 #: ../admin/menu_mem.php:28
 msgid "Logout"
@@ -3941,6 +3955,62 @@ msgstr "Ce compte esclave existe déjà "
 #: ../class/m_dom.php:1307
 msgid "--- Program error --- Lock already obtained!"
 msgstr "-- Erreur du programme -- Verrou déjà obtenu !"
+
+#: ../class/m_dom.php:1446
+msgid "Locally hosted"
+msgstr "Géré en local"
+
+#: ../class/m_dom.php:1447
+msgid "URL redirection"
+msgstr "Redirection vers une URL"
+
+#: ../class/m_dom.php:1448
+msgid "IPv4 redirect"
+msgstr "Redirection vers une IPv4"
+
+#: ../class/m_dom.php:1449
+msgid "Webmail access"
+msgstr "Accès au webmail"
+
+#: ../class/m_dom.php:1450
+msgid "Squirrelmail Webmail access"
+msgstr "Accès au webmail Squirrelmail"
+
+#: ../class/m_dom.php:1451
+msgid "Roundcube Webmail access"
+msgstr "Accès au webmail Roundcube"
+
+#: ../class/m_dom.php:1452
+msgid "IPv6 redirect"
+msgstr "Redirection vers une IPv6"
+
+#: ../class/m_dom.php:1453
+msgid "CNAME DNS entry"
+msgstr "Entrée DNS CNAME"
+
+#: ../class/m_dom.php:1454
+msgid "TXT DNS entry"
+msgstr "Entrée DNS TXT"
+
+#: ../class/m_dom.php:1455
+msgid "MX DNS entry"
+msgstr "Entrée DNS M"
+
+#: ../class/m_dom.php:1456
+msgid "secondary MX DNS entry"
+msgstr "Entrée DNS MX secondaire"
+
+#: ../class/m_dom.php:1457
+msgid "Default mail server"
+msgstr "Serveur de mail par défaut"
+
+#: ../class/m_dom.php:1458
+msgid "Default backup mail server"
+msgstr "Serveur de mail de secours"
+
+#: ../class/m_dom.php:1459
+msgid "AlternC panel access"
+msgstr "Accès au panneau de contrôle AlternC"
 
 #: ../class/m_err.php:66 ../class/m_err.php:98
 msgid "err_"
