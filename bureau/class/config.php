@@ -38,6 +38,11 @@
 */
 
 /* * /
+// To enable dispay of PHP errors
+ini_set('display_errors', true);
+/* */
+
+/* * /
 if (getenv("REMOTE_ADDR")!="127.0.0.1") {
   echo "Le bureau AlternC est en vacances jusqu'a minuit pour maintenance.<br>
 Merci de revenir plus tard.";

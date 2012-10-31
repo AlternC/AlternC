@@ -495,8 +495,8 @@ CREATE TABLE IF NOT EXISTS `domaines_type` (
     `only_dns` BOOLEAN DEFAULT FALSE, -- Update_domains modify just the dns, no web configuration
     `need_dns` BOOLEAN DEFAULT TRUE, -- The server need to be the DNS to allow this service
     `advanced` BOOLEAN DEFAULT TRUE, -- It's an advanced option
-    create_tmpdir BOOLEAN NOT NULL DEFAULT FALSE, -- do we create tmp dir ?
-    create_targetdir BOOLEAN NOT NULL DEFAULT FALSE, -- do we create target dir ?
+    `create_tmpdir` BOOLEAN NOT NULL DEFAULT FALSE, -- do we create tmp dir ?
+    `create_targetdir` BOOLEAN NOT NULL DEFAULT FALSE, -- do we create target dir ?
 PRIMARY KEY ( `name` )
 ) COMMENT = 'Type of domains allowed';
 
