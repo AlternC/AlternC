@@ -38,6 +38,9 @@ include_once("head.php");
 <h3><?php if (!$id) { __("New Statistics"); } else { __("Edit Statistics"); } ?></h3>
 <hr id="topbar"/>
 <br />
+<?php __("Awstats will analyze every logs availables for this domain (since its creation).");?>
+<br/>
+<br/>
 <?php
 	if (isset($error) && $error) {
 		echo "<p class=\"error\">$error</p></body></html>";
@@ -87,17 +90,6 @@ foreach($r as $v) {
 }
 
 ?></td></tr>
-<tr><th><?php __("View public"); ?></th><td>
-<select class="inl" name="public" id="public">
-<?php 
-// Public ? 
-$pub=$aws->get_view_public($id);
-if($pub == 0) {
-  echo "<option selected=\"selected\" value=\"0\">"._("Yes")."</option><option value=\"1\">"._("No")."</option>";
-} else {
-  echo "<option selected=\"selected\" value=\"1\">"._("No")."</option><option value=\"0\">"._("Yes")."</option>";
-}
-?>
 </select>
 </td></tr>
 <tr class="trbtn"><td colspan="2">

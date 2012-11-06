@@ -25,17 +25,23 @@
 require_once("../class/config.php");
 
 $fields = array (
-	"prefixe" => array ("request", "string", ""),
-	"login"   => array ("request", "string", ""),
-	"pass"    => array ("request", "string", ""),
+	"prefixe"  => array ("request", "string", ""),
+	"login"    => array ("request", "string", ""),
+	"pass"     => array ("request", "string", ""),
+	"passconf" => array ("request", "string", "")
 );
 getFields($fields);
 
-$r=$aws->add_login($prefixe.(($login)?"_":"").$login,$pass);
-if (!$r) {
-	$error=$err->errstr();
-} else {
-	$error=_("The Awstat account has been successfully created");
+if ($pass != $passconf) {
+        $error = _("Passwords do not match");
+}else{
+	$r=$aws->add_login($prefixe.(($login)?"_":"").$login,$pass);
+
+	if (!$r) {
+		$error=$err->errstr();
+	} else {
+		$error=_("The Awstat account has been successfully created");
+	}
 }
 
 include("aws_users.php");

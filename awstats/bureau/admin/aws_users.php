@@ -48,6 +48,7 @@ if (!$r=$aws->list_login()) {
 	<select class="inl" name="prefixe"><?php $aws->select_prefix_list($prefixe); ?></select>&nbsp;<b>_</b>&nbsp;<input type="text" class="int" name="login" id="login" value="" size="20" maxlength="64" />
 </td></tr>
 <tr><th><label for="pass"><?php __("Password"); ?></label></th><td><input type="password" class="int" name="pass" id="pass" value="" size="20" maxlength="64" /></td></tr>
+<tr><th><label for="passconf"><?php __("Confirm password"); ?></label></th><td><input type="password" class="int" name="passconf" id="passconf" value="" size="20" maxlength="64" /></td></tr>
 <tr class="trbtn"><td colspan="2">
   <input type="submit" class="inb" name="submit" value="<?php __("Create this new awstat account"); ?>" />
   <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='aws_list.php'"/>

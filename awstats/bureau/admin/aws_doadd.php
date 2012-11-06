@@ -28,12 +28,11 @@ $fields = array (
         "hostname"              => array ("post", "string", ""),
         "awsusers"              => array ("post", "array", ""),
         "hostaliases"           => array ("post", "array", ""),
-        "public"                => array ("post", "integer", "")
 );
 getFields($fields);
 
 if ($aws->check_host_available($hostname)) {
-    $r=$aws->add_stats($hostname,$awsusers,$hostaliases,$public);
+    $r=$aws->add_stats($hostname,$awsusers,$hostaliases,1);
     if (!$r) {
         $error=$err->errstr();
         include("aws_add.php");
