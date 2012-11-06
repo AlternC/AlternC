@@ -90,8 +90,6 @@ foreach($r as $v) {
 }
 
 ?></td></tr>
-</select>
-</td></tr>
 <tr class="trbtn"><td colspan="2">
   <input type="submit" class="inb" name="submit" value="<?php if (!$id)  __("Create those statistics"); else __("Edit those statistics"); ?>" />
   <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='aws_list.php'"/>
