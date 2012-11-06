@@ -326,8 +326,11 @@ class m_admin {
       $err->raise("admin", _("Login can only contains characters a-z and 0-9"));
       return false;
     }
-    if (strlen($login) > 16) {
-      $err->raise("admin",_("The login is too long (16 chars max)"));
+    if (strlen($login) > 14) {
+      // Not an arbitrary value : MySQL user names can be up to 16 characters long
+      // If we want to allow people to create a few mysql_user (and we want to!)
+      // we have to limit the login lenght
+      $err->raise("admin",_("The login is too long (14 chars max)"));
       return false;
     }
     // Some login are not allowed...
