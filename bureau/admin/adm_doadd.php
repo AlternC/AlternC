@@ -64,6 +64,7 @@ if (!($u=$admin->add_mem($login, $pass, $nom, $prenom, $nmail, $canpass, $type, 
    *
    * 1 = force = ne tient pas compte du whois ou des droits de tld
    */
+// FIXME: rien à faire ici. Ca devrait être dans la classe.
   if (isset($create_dom) && ($create_dom == 1)  && !is_null($create_dom_list)) {
     // make sure we don't have multiple dots there
     $dom->lock();
