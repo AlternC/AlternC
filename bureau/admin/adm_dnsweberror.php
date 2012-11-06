@@ -104,5 +104,5 @@ print_r($d);
     <td><?php echo $db->f('dns_result');?></td>
 </tr>
 <?php } // end while ?>
-
+</table>
 <?php include_once("foot.php"); ?>

@@ -65,6 +65,7 @@ asort($menu_error);
 
 $menus=array(
 	     "menu_dom" => _("Domains"),
+	     "menu_adm" => _("Administration"),
 	     "menu_mail" => _("Email Addresses"),
 	     "menu_brouteur" => _("File browser"),
 	     "menu_web" => _("Protected folders"),
@@ -86,7 +87,7 @@ $menus=array(
 function tr($name) {
   global $menus;
   $name=basename($name,".php"); 
-  if ($menus[$name]) return $menus[$name];
+  if (isset($menus[$name])) return $menus[$name];
   else return _("Module")." ".$name;
 }
 
