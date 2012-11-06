@@ -50,7 +50,7 @@ class m_authip {
     }
 
     $r = array();
-    $db->query("SELECT * FROM authorised_ip WHERE uid='$cuid';");
+    $db->query("SELECT * FROM authorised_ip WHERE uid='$cuid' order by ip,subnet;");
     while ($db->next_record()) {
       $r[$db->f('id')]=$db->Record;
       if ( (checkip($db->f('ip'))   && $db->f('subnet') == 32) ||
@@ -81,7 +81,7 @@ class m_authip {
     while ($db->next_record()) {
       $this->ip_affected_delete($db->f('id'));
     }
-    if (! $db->query("delete from authorised_ip where id='$id' and uid='$cuid' limit 1;") ) {
+    if (! $db->query("delete from authorised_ip where id='$id' and ( uid='$cuid' or uid=0) limit 1;") ) {
       echo "query failed: ".$db->Error;
       return false;
     }
@@ -178,7 +178,6 @@ class m_authip {
     // Extract subnet from ipsub
     $tmp=explode('/',$ipsub);
     $ip=$tmp[0];
-    $subnet=intval($tmp[1]);
 
     // Error if $ip not an IP
     if ( ! checkip($ip) && ! checkipv6($ip) ) {
@@ -187,7 +186,9 @@ class m_authip {
     }
 
     // Check the subnet, if not defined, give a /32 or a /128
-    if ( ! $subnet ) {
+    if (isset($tmp[1])) {
+      $subnet=intval($tmp[1]);
+    } else {
       if ( checkip($ip) ) $subnet=32;
       else $subnet=128;
     }
