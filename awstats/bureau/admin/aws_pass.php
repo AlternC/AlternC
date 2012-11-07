@@ -27,6 +27,7 @@ require_once("../class/config.php");
 $fields = array (
 	"login" => array ("request", "string", ""),
 	"pass"  => array ("request", "string", ""),
+	"passconf"  => array ("request", "string", ""),
 );
 
 getFields($fields);
@@ -38,12 +39,19 @@ if (!$aws->login_exists($login)) {
 }
 
 if ($pass) {
+    if ($pass != $passconf) {
+	$error = _("Passwords do not match");
+	include("aws_users.php");
+        exit();
+    }else{
 	if (!$aws->change_pass($login,$pass)) {
 		$error=$err->errstr();
 	} else {
+		$error = _("Password successfuly updated");
 		include("aws_users.php");
 		exit();
 	}
+    }
 }
 
 include_once("head.php");
@@ -63,6 +71,7 @@ if (isset($error) && $error) {
 	<code><?php echo $login; ?></code> <input type="hidden" name="login" value="<?php echo $login; ?>" />
 </td></tr>
 <tr><th><label for="pass"><?php __("New Password"); ?></label></th><td><input type="password" class="int" name="pass" id="pass" value="<?php echo $pass; ?>" size="20" maxlength="64" /></td></tr>
+<tr><th><label for="passconf"><?php __("Confirm password"); ?></label></th><td><input type="password" class="int" name="passconf" id="passconf" value="" size="20" maxlength="64" /></td></tr>
 <tr class="trbtn"><td colspan="2">
   <input type="submit" class="inb" name="submit" value="<?php __("Change this user's password"); ?>" />
   <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='aws_users.php'"/>
