@@ -44,16 +44,13 @@ if (is_null($domain_id)) {
 if (!is_null($target_type)) {
   switch ($target_type) {
     case "none":
-      $mail->catchall_del($domain_id);
-      $error = _("Catchall successfully updated");
+      $error=( ($mail->catchall_del($domain_id))?_("Catchall successfully deleted"):$err->errstr() );
       break;
     case "domain":
-      $mail->catchall_set($domain_id, $target_domain);
-      $error = _("Catchall successfully updated");
+      $error=( ($mail->catchall_set($domain_id, $target_domain))?_("Catchall successfully updated"):$err->errstr() );
       break;
     case "mail":
-      $mail->catchall_set($domain_id, $target_mail);
-      $error = _("Catchall successfully updated");
+      $error=( ($mail->catchall_set($domain_id, $target_mail))?_("Catchall successfully updated"):$err->errstr() );
       break;
     default:
       $error=_("Unknown target type");
@@ -68,7 +65,7 @@ $catch=$mail->catchall_getinfos($domain_id);
 <br />
 
 <?php
-if (isset($error)) {
+if (isset($error) && !empty($error) ) {
   	echo "<p class=\"error\">$error</p>";
 }
 
@@ -95,7 +92,7 @@ __("You can choose what to do with emails sent to unexisting address of this dom
     <td style="width: 50%; text-align: justify"><label for='target_type_domain'/><?php echo sprintf(_("Mails sent to john.doe@%s will be redirect to john.doe@anotherdomain.tld"),$catch['domain']);?></label></td>
     <td>
       <p>
-        <input type="text" id="target_domain" name="target_domain" value="<?php if($catch['type']=='domain') { echo substr($catch['target'],1); } ?>" placeholder="example.tld" />
+        <input type="text" id="target_domain" name="target_domain" value="<?php if($catch['type']=='domain') { echo substr($catch['target'],1); } ?>" placeholder="<?php __("example.tld");?>" />
         <ul>
           <?php foreach ( $dom->enum_domains() as $d) { if ($d==$catch['domain']) {continue;} echo "<li><a href=\"javascript:set_target_domain_value('".addslashes($d)."');\">$d</a></li>"; } ?>
         </ul>
@@ -111,7 +108,7 @@ __("You can choose what to do with emails sent to unexisting address of this dom
     <td style="width: 50%; text-align: justify"><label for='target_type_mail'/><?php echo sprintf(_("Mails sent to an unexisting email on '@%s' will be redirect to user@example.tld."),$catch['domain']);?></label></td>
     <td>
       <p>
-        <input type="text" name="target_mail" value="<?php if($catch['type']=='mail') { echo $catch['target']; } ?>" placeholder="john.doe@example.tld" />
+        <input type="text" name="target_mail" value="<?php if($catch['type']=='mail') { echo $catch['target']; } ?>" placeholder="<?php __("john.doe@example.tld");?>" />
       </p>
     </td>
   </tr>
