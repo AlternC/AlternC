@@ -45,12 +45,15 @@ if (!is_null($target_type)) {
   switch ($target_type) {
     case "none":
       $mail->catchall_del($domain_id);
+      $error = _("Catchall successfully updated");
       break;
     case "domain":
       $mail->catchall_set($domain_id, $target_domain);
+      $error = _("Catchall successfully updated");
       break;
     case "mail":
       $mail->catchall_set($domain_id, $target_mail);
+      $error = _("Catchall successfully updated");
       break;
     default:
       $error=_("Unknown target type");
