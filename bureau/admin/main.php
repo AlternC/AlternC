@@ -35,7 +35,7 @@ __("Last Login: ");
 if ($mem->user["lastlogin"]=="0000-00-00 00:00:00") {
   __("Never");
 } else { 
-  echo format_date(_('the %3$d-%2$d-%1$d at %4$d:%5$d'),$mem->user["lastlogin"]); 
+  echo format_date(_('the %3$d-%2$d-%1$d at %4$d:%5$02d'),$mem->user["lastlogin"]); 
   printf("&nbsp;"._('from: <code> %1$s </code>')."<br />",$mem->user["lastip"]);
 }
   echo "</p>";
