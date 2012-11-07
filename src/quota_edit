@@ -7,6 +7,10 @@ MID=$1
 SIZE=$2
 AWK=/usr/bin/awk
 QUOTA=/usr/sbin/setquota
+
+#checking if quotas are installed
+command -v $QUOTA >/dev/null && continue || { echo "Quotas uninstalled"; exit 1; }
+
 if [ $# -ne 2 ] || [[ ! "$MID" =~ ^[0-9]+$ ]] || [[ ! "$SIZE" =~ ^[0-9]+$ ]]; then
   echo "Usage: quota_edit <uid> <size>"
   echo "Edit the quota of the AlternC account having uid <uid> the the available space to <size>"

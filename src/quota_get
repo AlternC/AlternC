@@ -16,6 +16,10 @@ if [ "x$MID" == "x" ] ; then
   exit 1
 fi
 
+#checking if quotas are installed
+command -v $QUOTA >/dev/null && continue || { echo "Quotas uninstalled"; exit 0; }
+
+
 # The second line is the one interesting
 # We look precisely on the HTML directory. Why ? because it's surely
 # the bigger one, and if someone separate it we need to look this one
