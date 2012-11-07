@@ -35,8 +35,7 @@ For now, AlternC can be installed as a Debian package. This package
 depends on other softs used by AlternC. Just add those lines to your
 /etc/apt/sources.list file : 
 
- deb http://debian.alternc.org debian/
- deb-src http://debian.alternc.org debian/
+ deb http://debian.alternc.org/ stable main
 
 then apt-get install alternc
 
