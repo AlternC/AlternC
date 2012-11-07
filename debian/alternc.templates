@@ -232,7 +232,7 @@ _Description: Slave servers
 Template: alternc/use_local_mysql
 Type: boolean
 _Description:
- A local MySQL connexion was established on the server. Do you Want to Use it. If not remote MySQL server connexion parameters will be needed.
+ A local MySQL connection was established on the server. Do you Want to Use it. If not remote MySQL server connection parameters will be needed.
 
 Template: alternc/use_remote_mysql
 Type: boolean
