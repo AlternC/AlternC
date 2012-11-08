@@ -209,3 +209,27 @@ function false_if_empty(id,err_msg) {
     return false;
   }
 }
+
+function generate_password(len){
+	len	= parseInt(len);
+	if(!len)
+		len = 8;
+	var password = "";
+	var chars    = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	var charsN   = chars.length;
+	var nextChar;
+ 
+	for(i=0; i<len; i++){
+		nextChar = chars.charAt(Math.floor(Math.random()*charsN));
+		password += nextChar;
+	}
+	return password;
+}
+
+function generate_password_html(id, size) {
+  $("#"+id).html("<input type='textbox' size=8 disabled value='"+generate_password(size)+"' />&nbsp;<a href='javascript:generate_password_html("+id+","+size+");'><img src='/images/refresh.png' alt='Refresh'/></a>");
+
+
+}
+
+

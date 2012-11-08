@@ -600,6 +600,14 @@ function create_pass($length = 8){
 
 }
 
+function display_div_generate_password($pass_size=8) {
+  $id=rand(1,1000);
+  echo "<div id='$id' style='display:none;'><a href=\"javascript:generate_password_html('$id',$pass_size);\">";
+  __("Clic here to generate a password");
+  echo "</a></div>";
+  echo "<script type='text/javascript'>$('#'+$id).show();</script>";
+  return 0;
+}
 
 
 ?>
