@@ -40,6 +40,12 @@ $dom->lock();
 if (!$r=$dom->get_domain_all($domain)) {
 	$error=$err->errstr();
 }
+if (isset($error) && $error) {
+	// if there is an errpr error, means problems with the domain. We stop
+	echo "<p class=\"error\">$error</p>";
+	include_once("foot.php");
+	die();
+}
 $dom->unlock();
 
 ?>
@@ -66,11 +72,6 @@ function dnsoff() {
 }
 </script>
 <h3><?php printf(_("Editing subdomains of %s"),$domain); ?></h3>
-<?php
-	if (isset($error) && $error) {
-		echo "<p class=\"error\">$error</p>";
-	}
-?>
 <hr id="topbar"/>
 <?php
 
