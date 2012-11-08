@@ -33,11 +33,10 @@ if (!$charset) $charset="UTF-8";
 
 <link rel="stylesheet" href="js/jquery_ui/css/smoothness/jquery-ui-1.8.23.custom.css" type="text/css" />
 <link rel="stylesheet" href="styles/style.css" type="text/css" />
-<!-- <link rel="stylesheet" href="styles/style-hw.css" type="text/css" /> -->
 <link rel="stylesheet" href="styles/passwordStrengthMeter.css" type="text/css" />
 
-<link rel="stylesheet" href="styles/style-hw.css" type="text/css" title="Halloween" />
-<link rel="alternate stylesheet" href="styles/style-empty.css" type="text/css" title="Default - Blue Desktop"/>
+<link rel="stylesheet" href="styles/style-empty.css" type="text/css" title="Default - Blue Desktop"/>
+<link rel="alternate stylesheet" href="styles/style-hw.css" type="text/css" title="Halloween" />
 
 <link rel="Shortcut Icon" href="favicon.ico" type="image/ico" />
 <link rel="icon" href="favicon.ico" type="image/ico" />
