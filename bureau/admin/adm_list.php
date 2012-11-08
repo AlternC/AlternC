@@ -47,14 +47,15 @@ if ($short!=-1) {
   $mem->user["admlist"]=$short;
  }
 
-$subadmin=variable_get("subadmin_restriction");
+$subadmin=variable_get("subadmin_restriction", 0);
 
-if ($subadmin==0 && $show && $cuid != 2000)
-{
+// If we ask for all account but we aren't "admin" and
+// subadmin var is not 1
+if ($show=="all" && !$subadmin==1 && $cuid != 2000) {
+printvar('plop2');
 	__("This page is restricted to authorized staff");
 	exit();
 }
-
 
 $r=$admin->get_list($show == 'all' ? 1 : 0, $creator);
 
@@ -63,7 +64,7 @@ $r=$admin->get_list($show == 'all' ? 1 : 0, $creator);
 <hr id="topbar"/>
 <br />
 <?php
-	if (isset($error) && $error ) {
+	if (isset($error) && !empty($error) ) {
 	  echo "<p class=\"error\">$error</p>";
 	}
 ?>
@@ -71,9 +72,12 @@ $r=$admin->get_list($show == 'all' ? 1 : 0, $creator);
 <?php __("Here is the list of hosted AlternC accounts"); ?> (<?php printf(_("%s accounts"),count($r)); ?>)
 
 &nbsp;
-<?php if($show != 'all') {
+<?php
+
+if ($subadmin==1 || $cuid==2000) {
+if($show != 'all') {
   echo '<p><span class="ina"><a href="adm_list.php?show=all">' . _('List all AlternC accounts') . '</a></span>';
-  if ($subadmin!=0 || $cuid==2000) {
+  if ($subadmin==1 || $cuid==2000) {
     $list_creators = $admin->get_creator_list();
     $infos_creators = array();
 
@@ -88,7 +92,9 @@ $r=$admin->get_list($show == 'all' ? 1 : 0, $creator);
   }
 } else {
   echo '<p><span class="ina"><a href="adm_list.php">' . _('List only my accounts') . '</a></span></p>';
-} ?>
+}
+}// END ($subadmin==1 || $cuid==2000)
+?>
   <p><span class="ina"><a href="adm_add.php"><?php __("Create a new AlternC account"); ?></a></span></p>
 
 <?php
