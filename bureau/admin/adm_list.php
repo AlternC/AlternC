@@ -52,7 +52,6 @@ $subadmin=variable_get("subadmin_restriction", 0);
 // If we ask for all account but we aren't "admin" and
 // subadmin var is not 1
 if ($show=="all" && !$subadmin==1 && $cuid != 2000) {
-printvar('plop2');
 	__("This page is restricted to authorized staff");
 	exit();
 }
