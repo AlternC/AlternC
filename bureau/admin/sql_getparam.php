@@ -72,7 +72,11 @@ if(isset($r['user'])){
 		<td><code><?php echo $r['password']; ?></code></td>
 	</tr>
 	<tr>
-		<td colspan=2 align=center><a href="/alternc-sql/?server=2" target=_blank><?php __("Web interface PhpMyAdmin"); ?></a></td>
+		<td colspan=2 align=center>
+                  <a href="/alternc-sql/?server=2" target=_blank><?php __("Web interface PhpMyAdmin"); ?></a>
+                  <br/>
+                  <xmp>http://<?php echo $L_FQDN; ?>/alternc-sql/?server=2</xmp>
+                </td>
 	</tr>
 <?php
 }
