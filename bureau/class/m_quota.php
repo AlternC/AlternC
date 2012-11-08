@@ -51,6 +51,10 @@ class m_quota {
   function m_quota() {
   }
 
+  function private dummy_for_translation() {
+    _("quota_web");
+  }
+
 
   /* ----------------------------------------------------------------- */
   /** Check if a user can use a ressource.
