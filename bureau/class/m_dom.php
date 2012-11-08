@@ -715,7 +715,7 @@ class m_dom {
     $r["name"]=$dom;
     $db->query("SELECT * FROM domaines WHERE compte='$cuid' AND domaine='$dom'");
     if ($db->num_rows()==0) {
-      $err->raise("dom",1,_("Domain '%s' not found"),$dom);
+      $err->raise("dom",sprintf(_("Domain '%s' not found"),$dom));
       return false;
     }
     $db->next_record();
@@ -976,7 +976,7 @@ class m_dom {
     }
     $t=checkfqdn($dom);
     if ($t) {
-      $err->raise("dom",("The domain name is syntaxically incorrect"));
+      $err->raise("dom",_("The domain name is syntaxically incorrect"));
       return false;
     }
     if (!$r=$this->get_sub_domain_all($dom,$sub,$type)) {

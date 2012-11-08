@@ -533,7 +533,7 @@ class m_bro {
 	  exec("sudo /usr/lib/alternc/fixperms.sh -u ".$cuid." -f '".$absolute."/".$_FILES['userfile']['name']."'");
 	  return $absolute."/".$_FILES['userfile']['name'];
 	} else {
-	  $err->raise("bro",("Cannot create the requested file. Please check the permissions"));
+	  $err->raise("bro",_("Cannot create the requested file. Please check the permissions"));
 	  return false;
 	}
       } else {
@@ -856,7 +856,7 @@ class m_bro {
 	  fputs($f,$texte,strlen($texte));
 	  fclose($f);
 	} else {
-	  $err->raise("bro",("Cannot edit the requested file. Please check the permissions"));
+	  $err->raise("bro",_("Cannot edit the requested file. Please check the permissions"));
 	  return false;
 	}
       }

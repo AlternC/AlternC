@@ -425,7 +425,7 @@ class m_mysql {
       $err->raise("mysql",_("Database name can contain only letters and numbers"));
       return false;
     } elseif (!$db->query("select db from db where db='$base';")){
-      $err->raise("mysql","Database not found");
+      $err->raise("mysql",_("Database not found"));
       return false; 
     }
 
@@ -443,7 +443,7 @@ class m_mysql {
     $db->query("select name from dbusers where name='".$user."' ;");
 
     if(!$db->num_rows()){
-      $err->raise("mysql","Database user not found");
+      $err->raise("mysql",_("Database user not found"));
       return false;
     }
     if($rights == "FILE"){

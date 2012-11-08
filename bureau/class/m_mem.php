@@ -349,7 +349,7 @@ class m_mem {
     $newpass=stripslashes($newpass);
     $newpass2=stripslashes($newpass2);
     if (!$this->user["canpass"]) {
-      $err->raise("mem",("You are not allowed to change your password."));
+      $err->raise("mem",_("You are not allowed to change your password."));
       return false;
     }
     if ($this->user["pass"]!=_md5cr($oldpass,$this->user["pass"])) {
@@ -381,7 +381,7 @@ class m_mem {
     global $db,$err,$cuid;
     $err->log("mem","admlist");
     if (!$this->user["su"]) {
-      $err->raise("mem",("You must be a system administrator to do this."));
+      $err->raise("mem",_("You must be a system administrator to do this."));
       return false;
     }
     $db->query("UPDATE membres SET admlist='$admlist' WHERE uid='$cuid';");
@@ -401,7 +401,7 @@ class m_mem {
     $err->log("mem","send_pass");
     $db->query("SELECT * FROM membres WHERE login='$login';");
     if (!$db->num_rows()) {
-      $err->raise("mem",("This account is locked, contact the administrator."));
+      $err->raise("mem",_("This account is locked, contact the administrator."));
       return false;
     }
     $db->next_record();

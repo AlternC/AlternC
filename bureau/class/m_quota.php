@@ -261,7 +261,7 @@ class m_quota {
     if(empty($type)) return false;
     $type=strtolower($type);
     if (!preg_match("#^[a-z0-9]*$#",$type)) {
-      $err->raise("quota", "Type can only contains characters a-z and 0-9");
+      $err->raise("quota", _("Type can only contains characters a-z and 0-9"));
       return false;
     }
     while (list($key,$val)=each($qlist)) {
