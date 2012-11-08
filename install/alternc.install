@@ -414,6 +414,13 @@ setfacl -b -k -m d:g:alterncpanel:rw- -m g:alterncpanel:rw- "$ALTERNC_LOC/html/"
 
 # Creating admin user if needed
 HAS_ROOT=`mysql --defaults-file=/etc/alternc/my.cnf -e "SELECT COUNT(*) FROM membres WHERE login = 'admin' OR login = 'root' and su = 1" | tail -1`
+
+#creating log file
+if [ ! -e "/var/log/alternc/bureau.log" ]; then
+  touch "/var/log/alternc/bureau.log"
+  chmod 644 "/var/log/alternc/bureau.log"
+fi
+
 if [ "$HAS_ROOT" != "1" ]; then
     echo "Creating admin user..."
     echo ""
