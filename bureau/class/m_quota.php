@@ -51,7 +51,7 @@ class m_quota {
   function m_quota() {
   }
 
-  function private dummy_for_translation() {
+  private function dummy_for_translation() {
     _("quota_web");
   }
 
