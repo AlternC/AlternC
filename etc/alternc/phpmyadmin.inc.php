@@ -22,20 +22,29 @@ $cfg['LoginCookieRecall'] = false;
 
 $i = 1;
 
+// Usual auth with web form
+$cfg['Servers'][$i]['host']          = $GLOBALS['L_MYSQL_HOST']; // MySQL hostname or IP address
+$cfg['Servers'][$i]['connect_type']  = 'tcp';    // How to connect to MySQL server ('tcp' or 'socket')
+$cfg['Servers'][$i]['auth_type']     = 'cookie';    // Authentication method (config, http or cookie based)?
+$cfg['Servers'][$i]['hide_db'] = 'information_schema'; 
+
+$i++;
+// Usual auth with web form
+// two time same thing for backward compatibility
+$cfg['Servers'][$i]['host']          = $GLOBALS['L_MYSQL_HOST']; // MySQL hostname or IP address
+$cfg['Servers'][$i]['connect_type']  = 'tcp';    // How to connect to MySQL server ('tcp' or 'socket')
+$cfg['Servers'][$i]['auth_type']     = 'cookie';    // Authentication method (config, http or cookie based)?
+$cfg['Servers'][$i]['hide_db'] = 'information_schema'; 
+
+
+$i++;
+// Magic auth with AlternC
 $cfg['Servers'][$i]['host']          = $GLOBALS['L_MYSQL_HOST']; // MySQL hostname or IP address
 $cfg['Servers'][$i]['connect_type']  = 'tcp';    // How to connect to MySQL server ('tcp' or 'socket')
 $cfg['Servers'][$i]['auth_type']     = 'config';    // Authentication method (config, http or cookie based)?
 $cfg['Servers'][$i]['user']          = $_COOKIE["REMOTE_USER"];    ;      // MySQL user
 $cfg['Servers'][$i]['password']      = $_COOKIE["REMOTE_PASSWORD"]; ;          // MySQL password (only needed
 $cfg['Servers'][$i]['hide_db'] = 'information_schema'; 
-//                                                    // with 'config' auth_type)
 
-$i++;
-
-// Uncomment to override the default configuration
-$cfg['Servers'][$i]['host']          = $GLOBALS['L_MYSQL_HOST']; // MySQL hostname or IP address
-$cfg['Servers'][$i]['connect_type']  = 'tcp';    // How to connect to MySQL server ('tcp' or 'socket')
-$cfg['Servers'][$i]['auth_type']     = 'cookie';    // Authentication method (config, http or cookie based)?
-$cfg['Servers'][$i]['hide_db'] = 'information_schema'; 
 
 ?>

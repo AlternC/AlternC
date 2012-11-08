@@ -37,7 +37,7 @@ if (!$r=$mysql->php_myadmin_connect()) {
 	setcookie("REMOTE_PASSWORD",$r[0]["pass"],0,"/");
 	if ($lang) $l="&lang=".substr($lang,0,2);
 	// TODO : make it an absolute url ! (even in httpS :))
-	header("Location: /alternc-sql/index.php?server=1");
+	header("Location: /alternc-sql/index.php?server=3");
 	exit();
 }
 

@@ -73,9 +73,9 @@ if(isset($r['user'])){
 	</tr>
 	<tr>
 		<td colspan=2 align=center>
-                  <a href="/alternc-sql/?server=2" target=_blank><?php __("Web interface PhpMyAdmin"); ?></a>
+                  <a href="/alternc-sql/" target=_blank><?php __("Web interface PhpMyAdmin"); ?></a>
                   <br/>
-                  <xmp>http://<?php echo $L_FQDN; ?>/alternc-sql/?server=2</xmp>
+                  <xmp>http://<?php echo $L_FQDN; ?>/alternc-sql/</xmp>
                 </td>
 	</tr>
 <?php
