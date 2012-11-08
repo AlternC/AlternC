@@ -238,9 +238,11 @@ class m_dom {
     $err->log("dom","del_domain",$dom);
     $dom=strtolower($dom);
 
+    $this->lock();
     if (!$r=$this->get_domain_all($dom)) {
       return false;
     }
+    $this->unlock();
 
     // Call Hooks to delete the domain and the MX management:
     // TODO : the 2 calls below are using an OLD hook call, FIXME: remove them when unused
