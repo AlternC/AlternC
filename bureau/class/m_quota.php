@@ -261,7 +261,7 @@ class m_quota {
     if(empty($type)) return false;
     $type=strtolower($type);
     if (!preg_match("#^[a-z0-9]*$#",$type)) {
-      $err->raise("quota", _("Type can only contains characters a-z and 0-9"));
+      $err->raise("quota", "Type can only contains characters a-z and 0-9");
       return false;
     }
     while (list($key,$val)=each($qlist)) {
@@ -401,7 +401,6 @@ class m_quota {
     return $this->_get_sum_sql("SELECT SUM(size) AS sum FROM size_web WHERE uid='$u';");
   }
 
-
   /* sum of mailbox sizes from all domains */
   function get_size_mail_sum_all() {
     return $this->_get_sum_sql("SELECT SUM(bytes) AS sum FROM mailbox;");
@@ -409,7 +408,7 @@ class m_quota {
 
   /* sum of mailbox sizes for one domain */
   function get_size_mail_sum_domain($dom) {
-    return $this->_get_sum_sql("SELECT SUM(quota_dovecot) AS sum FROM dovecot_view WHERE user LIKE '%@{$dom}'"); 
+    return $this->_get_sum_sql("SELECT SUM(quota_dovecot) AS sum FROM dovecot_view WHERE user LIKE '%@{$dom}';"); 
   }
 
   /* count of mailbox sizes from all domains */
@@ -424,9 +423,8 @@ class m_quota {
 
   /* get list of mailbox alias and size for one domain */
   function get_size_mail_details_domain($dom) {
-    return $this->_get_size_and_record_sql("SELECT user as alias,quota_dovecot as size FROM dovecot_view WHERE alias LIKE '%@{$dom}' ORDER BY alias;");
+    return $this->_get_size_and_record_sql("SELECT user as alias,quota_dovecot as size FROM dovecot_view WHERE user LIKE '%@{$dom}' ORDER BY alias;");
   }
-
 
   /* sum of mailman lists sizes from all domains */
   function get_size_mailman_sum_all() {
@@ -458,7 +456,6 @@ class m_quota {
     return $this->_get_size_and_record_sql("SELECT list,size FROM size_mailman WHERE uid='{$u}' ORDER BY list ASC");
   }
 
-
   /* sum of databases sizes from all users */
   function get_size_db_sum_all() {
     return $this->_get_sum_sql("SELECT SUM(size) AS sum FROM size_db;");
@@ -484,7 +481,16 @@ class m_quota {
     return $this->_get_size_and_record_sql("SELECT db,size FROM size_db WHERE db='{$u}' OR db LIKE '{$u}\_%';");
   }
 
-
+  /* Return appropriate value and unit of a size given in Bytes (e.g. 1024 Bytes -> return 1 KB) */
+  function get_size_unit($size) {
+    $units=array(1073741824=>_("GB"), 1048576=>_("MB"), 1024=>_("KB"), 0=>_("B"));
+    foreach($units as $value=>$unit){
+      if($size>=$value){
+        $size=str_pad(round($size/($value ? $value : 1), 1), 5, ' ', STR_PAD_LEFT);
+        return array('size'=>$size, 'unit'=>$unit);
+      }
+    }
+  }
 
   /* ==== Hook functions ==== */
 
