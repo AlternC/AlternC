@@ -417,8 +417,10 @@ HAS_ROOT=`mysql --defaults-file=/etc/alternc/my.cnf -e "SELECT COUNT(*) FROM mem
 
 #creating log file
 if [ ! -e "/var/log/alternc/bureau.log" ]; then
+  test -d "/var/log/alternc/" || mkdir -p "/var/log/alternc/"
   touch "/var/log/alternc/bureau.log"
-  chmod 644 "/var/log/alternc/bureau.log"
+  chmod 640 "/var/log/alternc/bureau.log"
+  chown alterncpanel:adm /var/log/alternc/bureau.log
 fi
 
 if [ "$HAS_ROOT" != "1" ]; then
