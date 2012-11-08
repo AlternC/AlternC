@@ -227,9 +227,9 @@ function generate_password(len){
 }
 
 function generate_password_html(id, size) {
-  $("#"+id).html("<input type='textbox' size=8 disabled value='"+generate_password(size)+"' />&nbsp;<a href='javascript:generate_password_html("+id+","+size+");'><img src='/images/refresh.png' alt='Refresh'/></a>");
-
-
+  $("#"+id).html("<input id='inp"+id+"' type='textbox' size=8 readonly='readonly' value='"+generate_password(size)+"' />&nbsp;<a href='javascript:generate_password_html("+id+","+size+");'><img src='/images/refresh.png' alt='Refresh'/></a>");
+  $("#inp"+id).focus();
+  $("#inp"+id).select();
 }
 
 
