@@ -47,9 +47,10 @@ if(!$domain_id ) {
 $fatal=false;
 
 if ($domain=$dom->get_domain_byid($domain_id)) {
-  if(!($mails_list = $mail->enum_domain_mails($domain_id,$search,$offset,$count,$show_systemmails))) {
+  if(!($mails_list = $mail->enum_domain_mails($domain_id,$search,$offset,$count,$show_systemmails)) && $search) {
     $error=$err->errstr();
   }
+  $allmails_list = $mail->enum_domain_mails($domain_id,$search,$offset,$count,'true');
 } else {
   $error=$err->errstr();
   $fatal=true;
@@ -83,18 +84,17 @@ if ($quota->cancreate("mail")) {
 </td>
 </tr>
 </table>
-<?php
-if (empty($mails_list)) {
-  echo "<p><i>";
-  __("No mails for this domain.");
-  echo "</i></p>";
-} else {
-  ?>
+
 <br />
 <hr id="topbar"/>
 <h3><?php printf(_("Email addresses of the domain %s"),$domain); ?> : </h3>
-
 <?php
+if (empty($allmails_list) && empty($search)) {
+  echo "<p><i>";
+  __("No mails for this domain.");
+  echo "</i></p><br/>";
+} else {
+
 if (isset($error) && !empty($error)) {
   	echo "<p class=\"error\">$error</p>";
 }
@@ -128,7 +128,8 @@ if (isset($error) && !empty($error)) {
 
 $col=1; $i=0;
 //listing of every mail of the current domain.
-while (list($key,$val)=each($mails_list)){
+if(!empty($mails_list)) {
+ while (list($key,$val)=each($mails_list)) {
   $col=3-$col; $grey="";
 	?>
 	<tr class="lst<?php echo $col; ?>">
@@ -166,6 +167,7 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
 	</tr>
 	<?php
    $i++;
+ }
 }
 ?>
 
