@@ -457,7 +457,7 @@ class m_quota {
 
   /* get list of mailman list and size for one user */
   function get_size_mailman_details_user($u) {
-    return $this->_get_size_and_record_sql("SELECT list,size FROM size_mailman WHERE uid='{$u}' ORDER BY list ASC");
+    return $this->_get_size_and_record_sql("SELECT s.size,CONCAT(m.list,'@',m.domain) as list FROM size_mailman s LEFT JOIN mailman m ON s.list=m.name WHERE s.uid='{$u}' ORDER BY s.list ASC");
   }
 
   /* sum of databases sizes from all users */
