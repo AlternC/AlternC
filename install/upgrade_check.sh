@@ -13,7 +13,7 @@
 
 # remove version from filename by stripping the extension
 strip_ext() {
-	echo $1 | sed 's/\.[^.]*$//'| sed 's/[a-z_]*$//'
+	echo $1 | sed -e 's/\.[^.]*$//' -e 's/[a-z_]*$//'
 }
 
 # find the version from a filename by stripping everything but the extension
