@@ -162,6 +162,7 @@ include_once("lang_env.php");
 $mem=new m_mem();
 $err=new m_err();
 $authip=new m_authip();
+$hooks=new m_hooks();
 
 /* Check the User identity (if required) */
 if (!defined('NOCHECK')) {
