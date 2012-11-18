@@ -250,9 +250,11 @@ EOF
 			echo "copy content of /usr/share/doc/examples/example.sudoers into /etc/sudoers.d for to run properly"
 	 fi
 
-    # important: postinst freezes withtout that:
+    # important: postinst freezes without that:
     db_stop
 
+    # instead of preinst, we launch it here : 
+    /usr/lib/alternc/fixperms.sh
     echo "**********************************************"
     echo "*                 ALTERNC:                   *"
     echo "* Please run alternc.install to fully deploy *"

@@ -18,10 +18,10 @@ case "$1" in
 
   upgrade)
     # Set correct rights on files
-    echo "/!\ Warning /!\ Defaults ACL will be applied"
-    echo "If error, please remount $ALTERNC_LOC with ACL"
-    echo "and re-run /usr/lib/alternc/fixperms.sh "
-    /usr/lib/alternc/fixperms.sh
+#    echo "/!\ Warning /!\ Defaults ACL will be applied"
+#    echo "If error, please remount $ALTERNC_LOC with ACL"
+#    echo "and re-run /usr/lib/alternc/fixperms.sh "
+#    /usr/lib/alternc/fixperms.sh
 
     if dpkg --compare-versions "$2" lt "0.9.4"; then
         echo "Upgrading bind configuration"
