@@ -197,6 +197,7 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
 </tr>
 <tr>
   <td valign=top>
+    <?php __("Which protocol would you use?"); ?>
     <ul>
       <li><b><a href="javascript:;" onClick="$('#cfg-submission').toggle();"><?php __("Submission");?></a></b>
         <ul id='cfg-submission'>
@@ -231,6 +232,7 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
     </ul>
   </td>
   <td valign=top>
+    <?php __("Which protocol would you use?"); ?>
     <ul>
       <li><b><a href="javascript:;" onClick="$('#cfg-imap').toggle();"><?php __("IMAP");?></a></b>
         <ul id='cfg-imap'>
