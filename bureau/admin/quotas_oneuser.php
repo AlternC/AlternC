@@ -55,6 +55,7 @@ if (!isset($mode)) { # when included from adm_login, mode is not set
   foreach ($domaines_user as $domaine) { 
     $alias_sizes = $quota->get_size_mail_details_domain($domaine);
     $domsize = 0; 
+    $d = $quota->get_size_unit($domsize);
     foreach ($alias_sizes as $e) {
       if($e['size'] > 0) {
         $domsize += $e['size'];
