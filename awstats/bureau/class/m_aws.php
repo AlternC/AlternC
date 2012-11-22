@@ -463,8 +463,8 @@ class m_aws {
       $err->raise("aws",_("Login incorrect")); // Login incorrect 
       return false;
     }
-    if (!($this->login_exists($login,0))) {
-      $err->raise("aws",_("Login does not exist")); // Login does not exist
+    if ($this->login_exists($login,1)) {
+      $err->raise("aws",_("Login already exist")); // Login already exist
       return false;
     }
     $pass=crypt($pass);

@@ -51,7 +51,7 @@ if (isset($error) && $error) {
 <input type="hidden" name="user" value="<?php echo $user ?>">
 <?php __("Folder"); ?></td><td><code><?php echo $dir; ?></code></td></tr>
 <tr><td><?php __("User"); ?></td><td><code><?php echo $user; ?></code></td></tr>
-<tr><td><label for="newpass"><?php __("New password"); ?></label></td><td><input type="password" class="int" name="newpass" id="newpass" value="" size="20" maxlength="64" /></td></tr>
+<tr><td><label for="newpass"><?php __("New password"); ?></label></td><td><input type="password" class="int" name="newpass" id="newpass" value="" size="20" maxlength="64" /><?php display_div_generate_password(); ?></td></tr>
 <tr><td><label for="newpassconf"><?php __("Confirm password"); ?></label></td><td><input type="password" class="int" name="newpassconf" id="newpassconf" value="" size="20" maxlength="64" /></td></tr>
 <tr><td colspan="2"><input type="submit" class="inb" value="<?php __("Change the password"); ?>" /></td></tr>
 </table>

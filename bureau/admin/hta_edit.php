@@ -104,7 +104,7 @@ for($i=0;$i<count($r);$i++){
 	</tr>
 	<tr>
 		<td><label for="password"><?php __("Password"); ?></label></td>
-		<td><input type="password" class="int" name="password" id="password" value="" size="20" maxlength="64" /></td>
+		<td><input type="password" class="int" name="password" id="password" value="" size="20" maxlength="64" /><?php display_div_generate_password(); ?></td>
 	</tr>
 	<tr>
 		<td><label for="passwordconf"><?php __("Confirm password"); ?></label></td>

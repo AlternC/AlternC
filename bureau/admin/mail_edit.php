@@ -92,7 +92,7 @@ if (isset($error)) {
       </p>
       <div id="poptbl">
 	<table class="tedit" >
-	  <tr><td><label for="pass"><?php __("Enter a POP/IMAP password"); ?></label></td><td><input type="password" class="int" name="pass" id="pass" value="" size="20" maxlength="32" /></td></tr>
+	  <tr><td><label for="pass"><?php __("Enter a POP/IMAP password"); ?></label></td><td><input type="password" class="int" name="pass" id="pass" value="" size="20" maxlength="32" /><?php display_div_generate_password(); ?></td></tr>
 	  <tr><td><label for="passconf"><?php __("Confirm password"); ?></label></td><td><input type="password" class="int" name="passconf" id="passconf" value="" size="20" maxlength="32" /></td></tr>
 	  <tr><td><label for="quotamb"><?php __("Maximum allowed size of this Mailbox"); ?></label></td><td><input type="text" class="int intleft" style="text-align: right" name="quotamb" id="quotamb" value="<?php ehe($quotamb); ?>" size="7" maxlength="6" /><span class="int intright"><?php __("MB"); ?></span></td></tr>
 	</table>

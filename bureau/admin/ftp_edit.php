@@ -66,7 +66,7 @@ if (isset($error) && $error) {
 //  -->
 </script>
 </td></tr>
-<tr><th><label for="pass"><?php __("Password"); ?></label></th><td><input type="password" class="int" name="pass" id="pass" size="20" maxlength="64" value=""/></td></tr>
+<tr><th><label for="pass"><?php __("Password"); ?></label></th><td><input type="password" class="int" name="pass" id="pass" size="20" maxlength="64" value=""/><?php display_div_generate_password(); ?></td></tr>
 <tr><th><label for="passconf"><?php __("Confirm password"); ?></label></th><td><input type="password" class="int" name="passconf" id="passconf" size="20" maxlength="64" value=""/></td></tr>
 
 <tr class="trbtn"><td colspan="2">

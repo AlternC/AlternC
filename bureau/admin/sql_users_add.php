@@ -61,7 +61,7 @@ getFields($fields);
 </tr>
 <tr>
   <th><label for="password"><?php __("Password"); ?></label></th>
-  <td><input type="password" class="int" name="password" id="password" size="26"/></td>
+  <td><input type="password" class="int" name="password" id="password" size="26"/><?php display_div_generate_password(); ?></td>
 </tr>
 <tr>
   <th><label for="password"><?php __("Confirm password"); ?></label></th>

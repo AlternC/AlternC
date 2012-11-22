@@ -65,7 +65,7 @@ if (isset($error) && $error) {
 </td></tr>
 <tr>
 	<th><label for="pass"><?php __("Initial password"); ?></label></th>
-	<td><input type="password" id="pass" name="pass" class="int" value="<?php ehe($pass); ?>" size="20" maxlength="64" /></td>
+	<td><input type="password" id="pass" name="pass" class="int" value="<?php ehe($pass); ?>" size="20" maxlength="64" /><?php display_div_generate_password(); ?></td>
 </tr>
 <tr>
 	<th><label for="passconf"><?php __("Confirm password"); ?></label></th>
