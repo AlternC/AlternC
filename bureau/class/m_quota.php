@@ -182,9 +182,9 @@ class m_quota {
     if (floatval($size)==0) $size="0";
     if (isset($this->disk[$ressource])) {
       // It's a disk resource, update it with shell command
-      exec("/usr/lib/alternc/quota_edit $cuid $size &> /dev/null &");
+      exec("sudo /usr/lib/alternc/quota_edit $cuid $size &> /dev/null &");
       // Now we check that the value has been written properly : 
-      exec("/usr/lib/alternc/quota_get $cuid &> /dev/null &",$a);
+      exec("sudo /usr/lib/alternc/quota_get $cuid &> /dev/null &",$a);
       if ($size!=$a[1]) {
 	$err->raise("quota",_("Error writing the quota entry!"));
 	return false;

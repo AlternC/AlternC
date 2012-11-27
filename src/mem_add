@@ -5,7 +5,7 @@ use strict;
 my ($name,$uid) = @ARGV;
 
 if (!$name || !$uid) {
-    print "Usage: mem_add <name> <uid>\n";
+    print "Usage: sudo mem_add <name> <uid>\n";
     print " Create the AlternC account <name> having uid number <uid>\n";
     exit(1);
 }
@@ -22,8 +22,11 @@ if (!($uid =~ /^([0-9]+)$/)) {
 }
 $uid=$1;
 
-$< = $>;
-$( = $);
+if ( $< != 0 ) {
+    die "please launch mem_add as root (or using sudo)";
+}
+#$< = $>;
+#$( = $);
 
 my $PTH="/var/alternc/html/".substr($name,0,1)."/".$name;
 

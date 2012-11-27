@@ -18,8 +18,11 @@ if (!($name =~ /^([a-z0-9]+)$/)) {
 }
 $name=$1;
 
-$< = $>;
-$( = $);
+if ( $< != 0 ) {
+    die "please launch mem_del as root (or using sudo)";
+}
+#$< = $>;
+#$( = $);
 
 my $PTH="/var/alternc/html/".substr($name,0,1)."/".$name;
 

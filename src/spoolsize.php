@@ -9,7 +9,7 @@ echo "---------------------------\n Generating size-cache for web accounts\n\n";
 $r=mysql_query("SELECT uid,login FROM membres;");
 while ($c=mysql_fetch_array($r)) {
   echo $c["login"]; flush();
-  $size=exec("/usr/lib/alternc/du.pl /var/alternc/html/".substr($c["login"],0,1)."/".$c["login"]);
+  $size=exec("sudo /usr/lib/alternc/du.pl /var/alternc/html/".substr($c["login"],0,1)."/".$c["login"]);
   mysql_query("REPLACE INTO size_web SET uid='".$c["uid"]."',size='$size';");
   echo " done ($size KB) \n"; flush();
 }
@@ -33,9 +33,9 @@ $r=@mysql_query("SELECT uid, name FROM mailman;");
 if ($r) {
   while ($c=mysql_fetch_array($r)) {
     echo $c["uid"]."/".$c["name"]; flush();
-    $size1=exec("/usr/lib/alternc/du.pl /var/lib/mailman/lists/".$c["name"]);
-    $size2=exec("/usr/lib/alternc/du.pl /var/lib/mailman/archives/private/".$c["name"]);
-    $size3=exec("/usr/lib/alternc/du.pl /var/lib/mailman/archives/private/".$c["name"].".mbox");
+    $size1=exec("sudo /usr/lib/alternc/du.pl /var/lib/mailman/lists/".$c["name"]);
+    $size2=exec("sudo /usr/lib/alternc/du.pl /var/lib/mailman/archives/private/".$c["name"]);
+    $size3=exec("sudo /usr/lib/alternc/du.pl /var/lib/mailman/archives/private/".$c["name"].".mbox");
     $size=(intval($size1)+intval($size2)+intval($size3));
     mysql_query("REPLACE INTO size_mailman SET uid='".$c["uid"]."',list='".$c["name"]."', size='$size';");
     echo " done ($size KB) \n"; flush();

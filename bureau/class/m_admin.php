@@ -354,7 +354,7 @@ class m_admin {
       $db->query("INSERT INTO membres (uid,login,pass,mail,creator,canpass,type,created, notes) VALUES ('$uid','$login','$pass','$mail','$cuid','$canpass', '$type', NOW(), '$notes');");
       $db->query("INSERT INTO local(uid,nom,prenom) VALUES('$uid','$nom','$prenom');");
       $this->renew_update($uid, $duration);
-      exec("/usr/lib/alternc/mem_add ".$login." ".$uid);
+      exec("sudo /usr/lib/alternc/mem_add ".$login." ".$uid);
       // Triggering hooks
       $mem->su($uid);
       // TODO: old hook method FIXME: when unused remove this
@@ -562,7 +562,7 @@ EOF;
     
     if (($db->query("DELETE FROM membres WHERE uid='$uid';")) &&
 	($db->query("DELETE FROM local WHERE uid='$uid';"))) {
-      exec("/usr/lib/alternc/mem_del ".$tt["login"]);
+      exec("sudo /usr/lib/alternc/mem_del ".$tt["login"]);
       $mem->unsu();
       // If this user was (one day) an administrator one, he may have a list of his own accounts. Let's associate those accounts to nobody as a creator.
       $db->query("UPDATE membres SET creator=2000 WHERE creator='$uid';");

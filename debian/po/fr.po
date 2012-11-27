@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.3.1\n"
 "Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
-"POT-Creation-Date: 2012-10-17 11:21+0200\n"
+"POT-Creation-Date: 2012-11-27 22:31+0100\n"
 "PO-Revision-Date: 2005-05-15 18:24+0200\n"
 "Last-Translator: Benjamin Sonntag <benjamin@altercn.org>\n"
 "Language-Team: french <dev@alternc.org>\n"
@@ -603,8 +603,8 @@ msgstr ""
 #. Description
 #: ../alternc.templates:30001
 msgid ""
-"A local MySQL connexion was established on the server. Do you Want to Use "
-"it. If not remote MySQL server connexion parameters will be needed."
+"A local MySQL connection was established on the server. Do you Want to Use "
+"it. If not remote MySQL server connection parameters will be needed."
 msgstr ""
 
 #. Type: boolean
