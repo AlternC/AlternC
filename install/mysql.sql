@@ -201,7 +201,7 @@ CREATE TABLE IF NOT EXISTS sessions (
   sid varchar(32) NOT NULL default '',			-- Cookie de session (md5)
   uid int(10) unsigned NOT NULL default '0',		-- UID du membre concerné
   ip varchar(40) NOT NULL default '',		-- Adresse IP de la connexion
-  ts timestamp(14) NOT NULL
+  ts timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=MyISAM COMMENT='Session actives sur le bureau';
 
 --
@@ -439,7 +439,7 @@ PRIMARY KEY ( `login` )
 CREATE TABLE IF NOT EXISTS `size_web` (
   `uid` int(10) unsigned NOT NULL default '0',
   `size` int(10) unsigned NOT NULL default '0',
-  `ts` timestamp(14) NOT NULL,
+  `ts` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY  (`uid`),
   KEY `ts` (`ts`)
 ) ENGINE=MyISAM COMMENT='Web space used by accounts.';
@@ -448,7 +448,7 @@ CREATE TABLE IF NOT EXISTS `size_web` (
 CREATE TABLE IF NOT EXISTS `size_db` (
   `db` varchar(255) NOT NULL default '',
   `size` int(10) unsigned NOT NULL default '0',
-  `ts` timestamp(14) NOT NULL,
+  `ts` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY  (`db`),
   KEY `ts` (`ts`)
 ) ENGINE=MyISAM COMMENT='MySQL Database used space';
