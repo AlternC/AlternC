@@ -36,14 +36,13 @@ CREATE TABLE IF NOT EXISTS `slaveip` (
 `ip` VARCHAR( 40 ) NOT NULL ,
 `class` TINYINT NOT NULL ,
 PRIMARY KEY ( `ip` , `class` )
-) COMMENT = 'Allowed ip for slave dns managment';
+) ENGINE=MyISAM COMMENT = 'Allowed ip for slave dns managment';
 
 CREATE TABLE IF NOT EXISTS `slaveaccount` (
 `login` VARCHAR( 64 ) NOT NULL ,
 `pass`  VARCHAR( 64 ) NOT NULL ,
 PRIMARY KEY ( `login` )
-) COMMENT = 'Allowed account for slave dns managment';
-
+) ENGINE=MyISAM COMMENT = 'Allowed account for slave dns managment';
 
 
 --
@@ -67,7 +66,7 @@ CREATE TABLE IF NOT EXISTS browser (
   golastdir tinyint(4) NOT NULL default '0',		-- Faut-il aller au dernier dossier ou au dossier racine dans le brouteur ?
   lastdir varchar(255) NOT NULL default '',		-- Dernier dossier visité.
   PRIMARY KEY  (uid)
-) TYPE=MyISAM COMMENT='Préférences du gestionnaire de fichiers';
+) ENGINE=MyISAM COMMENT='Préférences du gestionnaire de fichiers';
 
 
 --
@@ -82,7 +81,7 @@ CREATE TABLE IF NOT EXISTS chgmail (
   mail varchar(128) NOT NULL default '',		-- Nouvel Email
   ts bigint(20) unsigned NOT NULL default '0',		-- Timestamp de la demande 
   PRIMARY KEY  (uid)
-) TYPE=MyISAM COMMENT='Demandes de changements de mail en cours';
+) ENGINE=MyISAM COMMENT='Demandes de changements de mail en cours';
 
 --
 -- Structure de la table `db`
@@ -100,7 +99,7 @@ CREATE TABLE IF NOT EXISTS db (
   bck_gzip tinyint(3) unsigned NOT NULL default '0',	-- Faut-il compresser les backups ?
   bck_dir varchar(255) NOT NULL default '',		-- Où stocke-t-on les backups sql ?
   PRIMARY KEY id (id)
-) TYPE=MyISAM COMMENT='Bases MySQL des membres';
+) ENGINE=MyISAM COMMENT='Bases MySQL des membres';
 
 --
 -- Structure de la table `domaines`
@@ -118,7 +117,7 @@ CREATE TABLE IF NOT EXISTS domaines (
   dns_result varchar(255) not null default '',
   PRIMARY KEY (id),
   UNIQUE KEY (domaine)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Structure de la table `ftpusers`
@@ -136,7 +135,7 @@ CREATE TABLE IF NOT EXISTS ftpusers (
   UNIQUE KEY name (name),
   KEY homedir (homedir),
   KEY mid (uid)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Structure de la table `local`
@@ -148,7 +147,7 @@ CREATE TABLE IF NOT EXISTS local (
   nom varchar(128) NOT NULL default '',
   prenom varchar(128) NOT NULL default '',
   PRIMARY KEY  (uid)
-) TYPE=MyISAM COMMENT='Parametres Locaux des membres';
+) ENGINE=MyISAM COMMENT='Parametres Locaux des membres';
 
 --
 -- Structure de la table `membres`
@@ -179,7 +178,7 @@ CREATE TABLE IF NOT EXISTS membres (
   duration int(4) default NULL,
   PRIMARY KEY  (uid),
   UNIQUE KEY k_login (login)
-) TYPE=MyISAM COMMENT='Liste des membres du serveur';
+) ENGINE=MyISAM COMMENT='Liste des membres du serveur';
 
 --
 -- Structure de la table `quotas`
@@ -191,7 +190,7 @@ CREATE TABLE IF NOT EXISTS quotas (
   name varchar(64) NOT NULL default '',			-- Nom du quota
   total bigint(20) unsigned NOT NULL default '0',	-- Quota total (maximum autorisé)
   PRIMARY KEY  (uid,name)
-) TYPE=MyISAM COMMENT='Quotas des Membres';
+) ENGINE=MyISAM COMMENT='Quotas des Membres';
 
 --
 -- Structure de la table `sessions`
@@ -203,7 +202,7 @@ CREATE TABLE IF NOT EXISTS sessions (
   uid int(10) unsigned NOT NULL default '0',		-- UID du membre concerné
   ip varchar(40) NOT NULL default '',		-- Adresse IP de la connexion
   ts timestamp(14) NOT NULL
-) TYPE=MyISAM COMMENT='Session actives sur le bureau';
+) ENGINE=MyISAM COMMENT='Session actives sur le bureau';
 
 --
 -- Structure de la table `sub_domaines`
@@ -223,7 +222,7 @@ CREATE TABLE IF NOT EXISTS sub_domaines (
   PRIMARY KEY (id),
   UNIQUE (compte,domaine,sub,type,valeur)
 --  ,FOREIGN KEY (type) REFERENCES (domaines_type)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Main address table.
@@ -242,7 +241,7 @@ CREATE TABLE IF NOT EXISTS `address` (
   `mail_action` enum('OK','DELETE','DELETING') NOT NULL default 'OK', -- mail_action is DELETE or DELETING when deleting a mailbox by cron
   PRIMARY KEY (`id`),
   UNIQUE INDEX `fk_domain_id` (`domain_id`,`address`)
-) COMMENT = 'This is the main address table. It represents an address as in RFC2822';
+) ENGINE=MyISAM COMMENT = 'This is the main address table. It represents an address as in RFC2822';
 
 --
 -- Mailbox table.
@@ -262,7 +261,7 @@ CREATE TABLE IF NOT EXISTS `mailbox` (
   `mail_action` enum('OK','DELETE','DELETING') NOT NULL default 'OK', -- mail_action is DELETE or DELETING when deleting a mailbox by cron
   PRIMARY KEY (`id`),
   UNIQUE KEY `address_id` (`address_id`)
-) COMMENT = 'Table containing local deliverd mailboxes.';
+) ENGINE=MyISAM COMMENT = 'Table containing local deliverd mailboxes.';
 
 --
 -- Other recipients.
@@ -276,7 +275,7 @@ CREATE TABLE IF NOT EXISTS `recipient` (
   `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- Update date, for technical usage only.
   PRIMARY KEY (`id`),
   UNIQUE KEY `key_id` (`id`,`address_id`)
-) COMMENT = 'Table containing other recipients (aliases) for an address.';
+) ENGINE=MyISAM COMMENT = 'Table containing other recipients (aliases) for an address.';
 
 
 --
@@ -289,7 +288,7 @@ CREATE TABLE IF NOT EXISTS defquotas (
   value bigint(20) unsigned default '0',	-- Valeur du quota
   type  varchar(128) default 'default',		-- Type de compte associée à ce quota
   PRIMARY KEY (quota,type)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Quotas par defaut pour les nouveaux membres
@@ -312,7 +311,7 @@ INSERT IGNORE INTO defquotas (quota,value) VALUES ('mysql',1);
 CREATE TABLE IF NOT EXISTS forbidden_domains (
   domain varchar(255) NOT NULL default '',
   PRIMARY KEY  (domain)
-) TYPE=MyISAM COMMENT='forbidden domains to install';
+) ENGINE=MyISAM COMMENT='forbidden domains to install';
 
 --
 -- Contenu de la table `forbidden_domains`
@@ -355,7 +354,7 @@ CREATE TABLE IF NOT EXISTS tld (
   mode tinyint(4) NOT NULL default '0',		-- Comment est-il autorisé ?
   PRIMARY KEY  (tld),
   KEY mode (mode)
-) TYPE=MyISAM COMMENT='TLD autorises et comment sont-ils autorises ? ';
+) ENGINE=MyISAM COMMENT='TLD autorises et comment sont-ils autorises ? ';
 
 --
 -- Contenu de la table `tld`
@@ -392,7 +391,7 @@ CREATE TABLE IF NOT EXISTS variable (
   comment mediumtext NULL,
   PRIMARY KEY  (name),
   KEY name (name)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 -- hosting_tld: only used, for now, in bureau/admin/adm_*add.php
 INSERT IGNORE INTO `variable` (name, value, comment) VALUES ('hosting_tld', 0,
@@ -426,14 +425,14 @@ CREATE TABLE IF NOT EXISTS `dbusers` (
   `password`  varchar( 64 ),
   `enable` enum ('ACTIVATED', 'HIDDEN', 'ADMIN') NOT NULL DEFAULT 'ACTIVATED', 
   KEY `id` (`id`)
-) TYPE=MyISAM COMMENT='Utilisateurs MySQL des membres';
+) ENGINE=MyISAM COMMENT='Utilisateurs MySQL des membres';
 
 
 CREATE TABLE IF NOT EXISTS `mxaccount` (
 `login` VARCHAR( 64 ) NOT NULL ,
 `pass`  VARCHAR( 64 ) NOT NULL ,
 PRIMARY KEY ( `login` )
-) COMMENT = 'Allowed account for secondary mx managment';
+) ENGINE=MyISAM COMMENT = 'Allowed account for secondary mx managment';
 
 
 -- --------------------------------------------------------
@@ -443,7 +442,7 @@ CREATE TABLE IF NOT EXISTS `size_web` (
   `ts` timestamp(14) NOT NULL,
   PRIMARY KEY  (`uid`),
   KEY `ts` (`ts`)
-) TYPE=MyISAM COMMENT='Web space used by accounts.';
+) ENGINE=MyISAM COMMENT='Web space used by accounts.';
 
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `size_db` (
@@ -452,7 +451,7 @@ CREATE TABLE IF NOT EXISTS `size_db` (
   `ts` timestamp(14) NOT NULL,
   PRIMARY KEY  (`db`),
   KEY `ts` (`ts`)
-) TYPE=MyISAM COMMENT='MySQL Database used space';
+) ENGINE=MyISAM COMMENT='MySQL Database used space';
 
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `size_mailman` (
@@ -498,7 +497,7 @@ CREATE TABLE IF NOT EXISTS `domaines_type` (
     `create_tmpdir` BOOLEAN NOT NULL DEFAULT FALSE, -- do we create tmp dir ?
     `create_targetdir` BOOLEAN NOT NULL DEFAULT FALSE, -- do we create target dir ?
 PRIMARY KEY ( `name` )
-) COMMENT = 'Type of domains allowed';
+) ENGINE=MyISAM COMMENT = 'Type of domains allowed';
 
 INSERT IGNORE INTO `domaines_type` (name, description, target, entry, compatibility, only_dns, need_dns, advanced, enable) values
 ('vhost','Locally hosted', 'DIRECTORY', '%SUB% IN A @@PUBLIC_IP@@', 'txt,defmx,defmx2,mx,mx2', false, false, false, 'ALL'),
@@ -688,7 +687,7 @@ CREATE TABLE IF NOT EXISTS `default_subdomains` (
   `enabled` boolean not null default true,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `unique_row` (`sub`,`domain_type`,`domain_type_parameter`,`concerned`)
-) COMMENT='Contains the defaults subdomains created on domains creation';
+) ENGINE=MyISAM COMMENT='Contains the defaults subdomains created on domains creation';
 
 INSERT IGNORE INTO `default_subdomains` (`sub`, `domain_type`, `domain_type_parameter`, `concerned`) VALUES
 ('www', 'VHOST', '%%DOMAINDIR%%', 'MAIN'),

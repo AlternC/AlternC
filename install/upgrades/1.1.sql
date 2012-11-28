@@ -94,7 +94,7 @@ CREATE TABLE IF NOT EXISTS `address` (
   `mail_action` enum('OK','DELETE','DELETING') NOT NULL default 'OK', -- mail_action is DELETE or DELETING when deleting a mailbox by cron
   PRIMARY KEY (`id`),
   UNIQUE INDEX `fk_domain_id` (`domain_id`,`address`)
-) COMMENT = 'This is the main address table. It represents an address as in RFC2822';
+) ENGINE=MyISAM COMMENT = 'This is the main address table. It represents an address as in RFC2822';
 
 --
 -- Mailbox table.
@@ -114,7 +114,7 @@ CREATE TABLE IF NOT EXISTS `mailbox` (
   `mail_action` enum('OK','DELETE','DELETING') NOT NULL default 'OK', -- mail_action is DELETE or DELETING when deleting a mailbox by cron
   PRIMARY KEY (`id`),
   UNIQUE KEY `address_id` (`address_id`)
-) COMMENT = 'Table containing local deliverd mailboxes.';
+) ENGINE=MyISAM COMMENT = 'Table containing local deliverd mailboxes.';
 
 --
 -- Other recipients.
@@ -128,7 +128,7 @@ CREATE TABLE `recipient` (
   `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- Update date, for technical usage only.
   PRIMARY KEY (`id`),
   UNIQUE KEY `address_id` (`address_id`)
-) COMMENT = 'Table containing other recipients (aliases) for an address.';
+) ENGINE=MyISAM COMMENT = 'Table containing other recipients (aliases) for an address.';
 
 
 -- Regenerate apache conf to enable mpm-itk
@@ -210,7 +210,7 @@ CREATE TABLE IF NOT EXISTS `default_subdomains` (
   `enabled` boolean not null default true,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `unique_row` (`sub`,`domain_type`,`domain_type_parameter`,`concerned`)
-) COMMENT='Contains the defaults subdomains created on domains creation';
+) ENGINE=MyISAM COMMENT='Contains the defaults subdomains created on domains creation';
 
 INSERT IGNORE INTO `default_subdomains` (`sub`, `domain_type`, `domain_type_parameter`, `concerned`) VALUES
 ('www',  'VHOST',   '%%DOMAINDIR%%',             'MAIN'),
