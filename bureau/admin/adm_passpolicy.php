@@ -33,7 +33,7 @@ if (!$admin->enabled) {
 
 $fields = array (
 	"edit"   => array ("request", "string", ""),
-
+	"doedit"   => array ("request", "string", ""),
 	"minsize"    => array ("request", "integer", "0"),
 	"maxsize" => array ("request", "integer", "64"),
 	"classcount" => array ("request", "integer", "0"),
@@ -53,6 +53,7 @@ include_once("head.php");
 	if (isset($error) && $error) {
 	  echo "<p class=\"error\">$error</p>";
 	}
+
 
 $c=$admin->listPasswordPolicies();
 //echo "<pre>"; print_r($c); echo "</pre>";
