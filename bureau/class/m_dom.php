@@ -804,7 +804,14 @@ class m_dom {
         if (empty($value) or is_null($value)) {return true;}
         break;
       case 'URL': 
-        if ( $value == strval($value)) {return true;}
+        if ( $value == strval($value)) {
+          if(filter_var($value, FILTER_VALIDATE_URL)){
+            return true;
+          }else{
+	    $err->raise("dom",_("invalid url"));
+            return false;
+          }
+        }
         break;
       case 'DIRECTORY': 
         if (substr($value,0,1)!="/") {
@@ -817,18 +824,39 @@ class m_dom {
         return true;
         break;
       case 'IP': 
-        if (checkip($value)) {return true;}
+        if (checkip($value)) {
+          return true;
+        }else{
+          $err->raise("dom",_("The ip address is invalid"));
+          return false;          
+        }
         break;
       case 'IPV6': 
-        if (checkipv6($value)) {return true;}
+        if (checkip($value)) {
+          return true;
+        }else{
+          $err->raise("dom",_("The ip address is invalid"));
+          return false;          
+        }
         break;
       case 'DOMAIN': 
-        if (checkcname($value)) {return true;}
+        if (checkcname($value)) {
+          return true;
+        }else{
+          $err->raise("dom",_("The name you entered is incorrect"));
+          return false;
+        }
         break;
       case 'TXT':
-        if ( $value == strval($value)) {return true;}
+        if ( $value == strval($value)) {
+          return true;
+        }else{
+          $err->raise("dom",_("The TXT value you entered is incorrect"));
+          return false;
+        }
         break;
       default:
+        $err->raise("dom",_("Invalid domain type selected, please check"));
         return false;
         break;
     }
@@ -904,7 +932,8 @@ class m_dom {
     }
 
     if (! $this->check_type_value($type,$dest)) {
-      $err->raise("dom",_("Invalid domain type selected, please check"));
+      //plutot verifier si la chaine d'erreur est vide avant de raise sinon sa veut dire que l(erruer est deja remonté
+      #$err->raise("dom",_("Invalid domain type selected, please check"));
       return false;
     }
 
