@@ -514,7 +514,10 @@ class m_quota {
    * globals $cuid is the appropriate user
    */
   function hook_admin_add_member() {
+    global $err;
+    $err->log("quota","hook_admin_add_member");
     $this->addquotas();
+    $this->getquota('',true); // actualise quota
   }
 
 

@@ -46,37 +46,17 @@ if ($pass != $passconf) {
 	include("adm_add.php");
 	exit();
 }
-if (!($u=$admin->add_mem($login, $pass, $nom, $prenom, $nmail, $canpass, $type, 0, $notes))) {
+
+// Attemp to create, exit if fail
+if (!($u=$admin->add_mem($login, $pass, $nom, $prenom, $nmail, $canpass, $type, 0, $notes, 0, $create_dom_list))) {
 	$error=$err->errstr();
 	include ("adm_add.php");
 	exit;
-} else {
-
-  // Add here all what you want when an account is created !
-  $mem->su($u);
-  
-  /*
-   * 1 = hébergement dns, en effet, les
-   * domaines *.koumbit.net ne sont pas forcément sur le serveur
-   *
-   * 1 = noerase = empêche à l'utilisateur de modifier le dns ou de
-   * supprimer le domaine
-   *
-   * 1 = force = ne tient pas compte du whois ou des droits de tld
-   */
-// FIXME: rien à faire ici. Ca devrait être dans la classe.
-  if (isset($create_dom) && ($create_dom == 1)  && !is_null($create_dom_list)) {
-    // make sure we don't have multiple dots there
-    $dom->lock();
-    $dom->add_domain($login.".".preg_replace("/^\.\.*/", "", $create_dom_list),1,1,1);
-    $dom->unlock();
-  }
-  $ftp->add_ftp($login,"",$pass,"/");
-  $mem->unsu();
- 
-  $error=_("The new member has been successfully created");
-
- include("adm_list.php");
- exit;
 }
+ 
+$error=_("The new member has been successfully created");
+
+include("adm_list.php");
+exit;
+
 ?>

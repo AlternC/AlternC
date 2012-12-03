@@ -283,7 +283,35 @@ class m_admin {
     return true;
   }
 
+  // When the admin want to delegate a subdomain to an account
+  function add_shared_domain($u, $domain_name) {
+    global $db,$err,$dom,$mem,$cuid;
+    $err->log("admin","add_shared_domain",$u."/".$domain_name);
 
+    if (! $mem->checkright() ) {
+      $err->raise("admin",_("-- Only administrators can do that! --"));
+      return false;
+    } 
+
+    // Check if this domain exist on this admin account
+    if (! in_array($domain_name, $dom->enum_domains())) {
+      $err->raise("admin",_("You don't seem to be allowed to delegate this domain"));
+      $err->log("admin","add_shared_domain","domain not allowed");
+      return false;
+    } 
+
+    // Clean the domain_name 
+    $domain_name=preg_replace("/^\.\.*/", "", $domain_name);
+
+    $mem->su($u);
+    $dom->lock();
+    // option : 1=hébergement dns, 1=noerase, empeche de modifier, 1=force
+    $dom->add_domain($mem->user['login'].".".$domain_name,1,1,1);
+    $dom->unlock();
+    $mem->unsu();
+    return true;
+  }
+    
   /* ----------------------------------------------------------------- */
   /** Creates a new hosted account
    *  
@@ -300,7 +328,7 @@ class m_admin {
    * @pararm $type string Account type for quotas
    * @return boolean Returns FALSE if an error occurs, TRUE if not.
    */
-  function add_mem($login, $pass, $nom, $prenom, $mail, $canpass=1, $type='default', $duration=0, $notes = "", $force=0) {
+  function add_mem($login, $pass, $nom, $prenom, $mail, $canpass=1, $type='default', $duration=0, $notes = "", $force=0, $create_dom=false) {
     global $err,$quota,$classes,$cuid,$mem,$L_MYSQL_DATABASE,$L_MYSQL_LOGIN,$hooks;
     $err->log("admin","add_mem",$login."/".$mail);
     if (!$this->enabled) {
@@ -367,15 +395,20 @@ class m_admin {
       */
       $hooks->invoke("alternc_add_member");
       // New hook way
+      $hooks->invoke("hook_admin_add_member", array(), array('quota')); // First !!! The quota !!! Etherway, we can't be sure to be able to create all
       $hooks->invoke("hook_admin_add_member");
       $mem->unsu();
+
+      if (!empty($create_dom)) { 
+        $this->add_shared_domain($uid, $create_dom); 
+      }
+
       return $uid;
     } else {
       $err->raise("admin",_("This login already exists"));
       return false;
     }
   }
-
 
   /* ----------------------------------------------------------------- */
   /** AlternC's standard function called when a user is created
