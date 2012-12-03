@@ -6,7 +6,7 @@
 /var/log/alternc/bureau.log {
         monthly
         missingok
-        create 0640 www-data www-data
+        create 0640 alterncpanel adm
         rotate 12
         compress
         delaycompress
