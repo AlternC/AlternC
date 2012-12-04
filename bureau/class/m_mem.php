@@ -462,7 +462,7 @@ Quelqu'un (peut-etre vous) a demandé le changement de l'email du compte
 Afin de confirmer que cet email est valide, merci de vous rendre à l'adresse
 ci-dessous :
 
-https://$L_FQDN/admin/mem_cm.php?usr=$cuid&cookie=$COOKIE
+https://$L_FQDN/mem_cm.php?usr=$cuid&cookie=$COOKIE
 
 (attention : si cette adresse est coupée sur 2 lignes, ne pas oublier de
 reconstituer sur une seule ligne). Le bureau vous demandera la clé qui vous
@@ -542,7 +542,7 @@ Cordialement.
       if ($hlp!="hlp_$file") {
 	      $hlp=preg_replace(
 			  "#HELPID_([0-9]*)#",
-			  "<a href=\"javascript:help(\\1);\"><img src=\"/admin/aide/help.png\" width=\"17\" height=\"17\" style=\"vertical-align: middle;\" alt=\""._("Help")."\" /></a>",$hlp);
+			  "<a href=\"javascript:help(\\1);\"><img src=\"/aide/help.png\" width=\"17\" height=\"17\" style=\"vertical-align: middle;\" alt=\""._("Help")."\" /></a>",$hlp);
       	echo "<p class=\"hlp\">".$hlp."</p>";
        	return true;
       }

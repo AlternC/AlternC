@@ -1138,7 +1138,7 @@ class m_dom {
    */
   function add_slave_ip($ip,$class="32") {
   global $db,$err;
-  if (!checkip($ip)) { // FIXME: replace by filter_var (same for checkfqdn ?
+  if (!checkip($ip)) { 
     $err->raise("dom",_("The IP address you entered is incorrect"));
     return false;
   }
