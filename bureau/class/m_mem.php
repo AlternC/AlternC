@@ -456,24 +456,18 @@ Cordialement.
     // et de 6 pour la clé à entrer. ca me semble suffisant...
     $KEY=substr(md5(uniqid(rand(),1)),0,6);
     // TODO : Translate this and insert this in alternc.po
-    $txt="Bonjour,
-Quelqu'un (peut-etre vous) a demandé le changement de l'email du compte
-".$db->f("login")." sur $L_HOSTING
-Afin de confirmer que cet email est valide, merci de vous rendre à l'adresse
-ci-dessous :
+    $txt=_("Hello,
 
 https://$L_FQDN/mem_cm.php?usr=$cuid&cookie=$COOKIE
 
-(attention : si cette adresse est coupée sur 2 lignes, ne pas oublier de
-reconstituer sur une seule ligne). Le bureau vous demandera la clé qui vous
-a été donnée lors de la demande de changement d'email.
+(Warning : if this address is displayed on 2 lines, don't forgot to
+take it on one line).
+The panel will ask you the key given when the email address
+modification was requested.
 
-Note : si vous n'avez pas fait cette demande, cela signifie que quelqu'un
-l'a faite pour vous. Vous pouvez donc ignorer ce message. Si cela se
-reproduit, n'hésitez pas à contacter l'administrateur de votre serveur.
-
-Cordialement.
-";
+If you didn't asked for this modification, it means that someone
+did it instead of you. You should ignore this message. If it happens
+again later, please contact the server's administrator.");
     mail($newmail,"Changement d'email sur $L_HOSTING",$txt,"From: postmaster@$L_FQDN\nReply-to: postmaster@$L_FQDN");
     // Supprime les demandes précédentes de ce compte !
     $db->query("DELETE FROM chgmail WHERE uid='$cuid';");
