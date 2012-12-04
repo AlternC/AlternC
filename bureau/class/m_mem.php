@@ -458,6 +458,10 @@ Cordialement.
     // TODO : Translate this and insert this in alternc.po
     $txt=_("Hello,
 
+Someone (maybe you) requested an email's address modification of the account
+".$db->f("login")." on $L_HOSTING
+To confirm this, thank you to go to this address :
+
 https://$L_FQDN/mem_cm.php?usr=$cuid&cookie=$COOKIE
 
 (Warning : if this address is displayed on 2 lines, don't forgot to
