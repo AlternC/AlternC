@@ -84,7 +84,7 @@ class m_hta {
         return false;
       }
       fseek($file,0);
-      $param="AuthUserFile $absolute/.htpasswd\nAuthName \"Zone Protégée\"\nAuthType Basic\nrequire valid-user\n";
+      $param="AuthUserFile \"$absolute/.htpasswd\"\nAuthName \"Zone Protégée\"\nAuthType Basic\nrequire valid-user\n";
       fwrite($file, $param);
       fclose($file);
     }
