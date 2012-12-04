@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 PERCENT=$1
 DOM="`echo $USER | sed -e 's/.*@//'`"
