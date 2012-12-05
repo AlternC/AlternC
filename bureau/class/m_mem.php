@@ -455,14 +455,14 @@ Cordialement.
     $COOKIE=substr(md5(uniqid(rand(),1)),0,20);
     // et de 6 pour la clé à entrer. ca me semble suffisant...
     $KEY=substr(md5(uniqid(rand(),1)),0,6);
-    // TODO : Translate this and insert this in alternc.po
-    $txt=_("Hello,
+    $link="https://$L_FQDN/mem_cm.php?usr=$cuid&cookie=$COOKIE";
+    $txt=sprintf(_("Hello,
 
 Someone (maybe you) requested an email's address modification of the account
-".$db->f("login")." on $L_HOSTING
-To confirm this, thank you to go to this address :
+%s on %s
+To confirm your request, go to this url :
 
-https://$L_FQDN/mem_cm.php?usr=$cuid&cookie=$COOKIE
+%s
 
 (Warning : if this address is displayed on 2 lines, don't forgot to
 take it on one line).
@@ -470,9 +470,9 @@ The panel will ask you the key given when the email address
 modification was requested.
 
 If you didn't asked for this modification, it means that someone
-did it instead of you. You should ignore this message. If it happens
-again later, please contact the server's administrator.");
-    mail($newmail,"Changement d'email sur $L_HOSTING",$txt,"From: postmaster@$L_FQDN\nReply-to: postmaster@$L_FQDN");
+did it instead of you. You can choose to ignore this message. If it happens
+again later, please contact the server's administrator."), $db->f("login"), $L_HOSTING, $link);
+    mail($newmail,"Email modification request on $L_HOSTING",$txt,"From: postmaster@$L_FQDN\nReply-to: postmaster@$L_FQDN");
     // Supprime les demandes précédentes de ce compte !
     $db->query("DELETE FROM chgmail WHERE uid='$cuid';");
     $db->query("INSERT INTO chgmail (cookie,ckey,uid,mail,ts) VALUES ('$COOKIE','$KEY','$cuid','$newmail',".time().");");
