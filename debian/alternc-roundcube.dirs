@@ -7,4 +7,4 @@ etc/alternc/templates/apache2
 etc/roundcube
 usr/lib/alternc/install.d
 var/alternc/bureau/class
-var/lib/roundcube/skins/default/images
+usr/share/roundcube/skins/default/images
