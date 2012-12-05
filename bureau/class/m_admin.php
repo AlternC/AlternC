@@ -415,14 +415,14 @@ class m_admin {
    * This sends an email if configured through the interface.
    */
   function hook_admin_add_member() {
-    global $cuid, $L_FQDN, $L_HOSTING;
+    global $err, $cuid, $L_FQDN, $L_HOSTING;
     $dest = variable_get('new_email');
     if (!$dest) {
       return false;
     }
     $db=new DB_System();
     if (!$db->query("SELECT m.*, parent.login as parentlogin FROM membres m LEFT JOIN membres parent ON parent.uid=m.creator WHERE m.uid='$cuid'")) {
-      echo "query failed: " . $db->Error;
+      $err->raise("admin",sprintf(_("query failed: %s "), $db->Error));
       return false;
     }
     if ($db->next_record()) {
@@ -449,13 +449,17 @@ EOF;
 				  '%canpass' => $db->Record['canpass'],
 				  '%type' => $db->Record['type'],
 				  '%notes' => $db->Record['notes']));
-       if (mail($dest,"New account (" . $db->Record['login']." from ".$db->Record['parentlogin'].") on $L_HOSTING",$mail,"From: postmaster@$L_FQDN")) {
-         echo "Successfully sent email to $dest";
+       $subject=sprintf(_("New account %s from %s on %s"), $db->Record['login'], $db->Record['parentlogin'], $L_HOSTING);
+       if (mail($dest,$subject,$mail,"From: postmaster@$L_FQDN")) {
+         //sprintf(_("Email successfully sent to %s"), $dest);
+         return true;
        } else {
-         echo "Cannot send email to $dest";
+         $err->raise("admin",sprintf(_("Cannot send email to %s"), $dest));
+         return false;
        } 
     } else {
-      echo "query failed: " . $db->Error;
+       $err->raise("admin",sprintf(_("Query failed: %s"), $db->Error));
+       return false;
     }
   }
 

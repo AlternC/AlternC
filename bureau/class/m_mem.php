@@ -409,28 +409,26 @@ class m_mem {
       $err->raise("mem",_("The new passwords are differents, please retry"));
       return false;
     }
-    $txt="Bonjour,
-Il semblerait que vous ayez demandé à recevoir le mot de passe du
-compte ".$login." sur $L_HOSTING
-Voici donc le nom d'utilisateur et le mot de passe qui vous
-permettront de rentrer sur le bureau virtuel :
+    $txt=sprintf(_("Hello,
+
+You requested the modification of your password for your
+account %s on %s
+Here are your username and password to access the panel :
 
 --------------------------------------
 
-Nom d'utilisateur : ".$db->f("login")."
-
-Mot de passe : ".$db->f("pass")."
+Username : %s
+Password : %s
 
 --------------------------------------
 
-Note : si vous n'avez pas fait cette demande, cela signifie que
-quelqu'un l'a faite pour vous. Vous pouvez donc ignorer ce message.
-Si cela se reproduit, n'hésitez pas à contacter l'administrateur 
-de votre serveur.
+Note : if you didn't requested that modification, it means that
+someone did it instead of you. You can choose to ignore this message.
+If it happens again, please contact your server's Administrator. 
 
-Cordialement.
-";
-    mail($db->f("mail"),"Votre mot de passe sur $L_HOSTING",$txt,"From: postmaster@$L_FQDN\nReply-to: postmaster@$L_FQDN");
+Cordially.
+"), $login, $L_HOSTING, $db->f("login"), $db->f("pass"));
+    mail($db->f("mail"),"Your password on $L_HOSTING",$txt,"From: postmaster@$L_FQDN\nReply-to: postmaster@$L_FQDN");
     $db->query("UPDATE membres SET lastaskpass=".time()." WHERE login='$login';");
     return true;
   }
@@ -471,7 +469,10 @@ modification was requested.
 
 If you didn't asked for this modification, it means that someone
 did it instead of you. You can choose to ignore this message. If it happens
-again later, please contact the server's administrator."), $db->f("login"), $L_HOSTING, $link);
+again, please contact your server's administrator.
+
+Cordially.
+"), $db->f("login"), $L_HOSTING, $link);
     mail($newmail,"Email modification request on $L_HOSTING",$txt,"From: postmaster@$L_FQDN\nReply-to: postmaster@$L_FQDN");
     // Supprime les demandes précédentes de ce compte !
     $db->query("DELETE FROM chgmail WHERE uid='$cuid';");
