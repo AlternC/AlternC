@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 set -e
 
@@ -6,6 +6,7 @@ set -e
 . /usr/share/debconf/confmodule
 
 CONFIGFILE="/etc/alternc/local.sh"
+LOGROTATE="/etc/logrotate.d/roundcube-core"
 
 case "$1" in
     configure)
@@ -13,7 +14,8 @@ case "$1" in
         # add alternc-roundcube user for php-itk special rights
 	if ! getent passwd alternc-roundcube; then
 	    useradd -g nogroup -u 1996 alternc-roundcube -d /usr/share/roundcube
-	fi 	     
+	fi
+	     
 	dpkg-statoverride --list /var/lib/roundcube/temp >/dev/null || 
 	dpkg-statoverride --add alternc-roundcube root 0750 /var/lib/roundcube/temp
 	chown -R alternc-roundcube:root /var/lib/roundcube/temp
@@ -28,6 +30,16 @@ case "$1" in
 	dpkg-statoverride --add alternc-roundcube root 0460 /etc/roundcube/main.inc.php
 	chown -R alternc-roundcube:root /etc/roundcube/main.inc.php
 	chmod -R 460 /etc/roundcube/main.inc.php
+
+	dpkg-statoverride --list /var/log/roundcube >/dev/null ||
+	dpkg-statoverride --add alternc-roundcube root 0750 /var/log/roundcube
+	chown -R alternc-roundcube:adm /var/log/roundcube
+	chmod -R 750 /var/log/roundcube
+
+	# We need to change the logrotate too !	
+	if [ -e $LOGROTATE ] ; then
+		sed -i -e "s#www-data#alternc-roundcube#g" "$LOGROTATE"
+	fi
 
 	echo "**********************************************"
 	echo "*          ALTERNC-ROUNDCUBE:                *"
