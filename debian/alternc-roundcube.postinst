@@ -36,11 +36,6 @@ case "$1" in
 	chown -R alternc-roundcube:root /var/log/roundcube
 	chmod -R 750 /var/log/roundcube
 
-	# We need to change the logrotate too !	
-	if [ -e $LOGROTATE ] ; then
-		sed -i -e "s#www-data adm#alternc-roundcube root#g" "$LOGROTATE"
-	fi
-
 	echo "**********************************************"
 	echo "*          ALTERNC-ROUNDCUBE:                *"
 	echo "* Please run alternc.install to fully deploy *"
