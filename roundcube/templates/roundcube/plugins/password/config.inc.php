@@ -12,21 +12,21 @@ $rcmail_config['password_confirm_current'] = true;
 
 // Require the new password to be a certain length.
 // set to blank to allow passwords of any length
-$rcmail_config['password_minimum_length'] = 0;
+$rcmail_config['password_minimum_length'] = 8;
 
 // Require the new password to contain a letter and punctuation character
 // Change to false to remove this check.
-$rcmail_config['password_require_nonalpha'] = false;
+$rcmail_config['password_require_nonalpha'] = true;
 
 // Enables logging of password changes into logs/password
-$rcmail_config['password_log'] = false;
+$rcmail_config['password_log'] = true;
 
 
 // SQL Driver options
 // ------------------
 // PEAR database DSN for performing the query. By default
 // Roundcube DB settings are used.
-$rcmail_config['password_db_dsn'] = '';
+$rcmail_config['password_db_dsn'] = 'mysql://%%roundcube-login%%:%%roundcube-password%%@%%dbhost%%/%%dbname%%';
 
 // The SQL query used to change the password.
 // The query can contain the following macros that will be expanded as follows:
@@ -45,7 +45,7 @@ $rcmail_config['password_db_dsn'] = '';
 //         (in case the username is an email address)
 // Escaping of macros is handled by this module.
 // Default: "SELECT update_passwd(%c, %u)"
-$rcmail_config['password_query'] = 'SELECT update_passwd(%c, %u)';
+$rcmail_config['password_query'] = 'UPDATE address a LEFT JOIN domaines d ON d.id=a.domain_id SET a.password=%c WHERE d.domaine=%d AND address=%l';
 
 // By default domains in variables are using unicode.
 // Enable this option to use punycoded names
