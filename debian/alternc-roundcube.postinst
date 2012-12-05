@@ -33,12 +33,12 @@ case "$1" in
 
 	dpkg-statoverride --list /var/log/roundcube >/dev/null ||
 	dpkg-statoverride --add alternc-roundcube root 0750 /var/log/roundcube
-	chown -R alternc-roundcube:adm /var/log/roundcube
+	chown -R alternc-roundcube:root /var/log/roundcube
 	chmod -R 750 /var/log/roundcube
 
 	# We need to change the logrotate too !	
 	if [ -e $LOGROTATE ] ; then
-		sed -i -e "s#www-data#alternc-roundcube#g" "$LOGROTATE"
+		sed -i -e "s#www-data adm#alternc-roundcube root#g" "$LOGROTATE"
 	fi
 
 	echo "**********************************************"
