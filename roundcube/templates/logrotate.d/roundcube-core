@@ -1,0 +1,8 @@
+/var/log/roundcube/password /var/log/roundcube/errors /var/log/roundcube/sendmail /var/log/roundcube/userlogins {
+  create 0640 alternc-roundcube root 
+  compress
+  missingok
+  notifempty
+  rotate 52
+  weekly
+}
