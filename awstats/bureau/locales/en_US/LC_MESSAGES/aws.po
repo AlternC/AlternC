@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: $Id: aws.po 3237 2012-08-21 14:59:46Z benjamin $\n"
 "Report-Msgid-Bugs-To: i18n@alternc.org\n"
-"POT-Creation-Date: 2012-10-17 11:00+0200\n"
+"POT-Creation-Date: 2012-12-06 10:22+0100\n"
 "PO-Revision-Date: 2002-06-16 13:50CEST\n"
 "Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
 "Language-Team: English <i18n@alternc.org>\n"
@@ -29,46 +29,40 @@ msgstr "New Statistics"
 msgid "New Statistics"
 msgstr "New Statistics"
 
-#: ../admin/aws_add.php:49 ../admin/aws_list.php:56
+#: ../admin/aws_add.php:41
+msgid ""
+"Awstats will analyze every logs availables for this domain (since its "
+"creation)."
+msgstr ""
+
+#: ../admin/aws_add.php:52 ../admin/aws_list.php:56
 msgid "Domain name"
 msgstr ""
 
-#: ../admin/aws_add.php:56
+#: ../admin/aws_add.php:59
 msgid "Hostaliases"
 msgstr ""
 
-#: ../admin/aws_add.php:70 ../admin/aws_list.php:56
+#: ../admin/aws_add.php:73 ../admin/aws_list.php:56
 msgid "Allowed Users"
 msgstr ""
 
-#: ../admin/aws_add.php:86
+#: ../admin/aws_add.php:89
 msgid ""
 "No users currently defined, you must create login with the 'Manage allowed "
 "users' accounts' menu."
 msgstr ""
 
-#: ../admin/aws_add.php:90
-msgid "View public"
-msgstr ""
-
-#: ../admin/aws_add.php:96 ../admin/aws_add.php:98
-msgid "No"
-msgstr ""
-
-#: ../admin/aws_add.php:96 ../admin/aws_add.php:98
-msgid "Yes"
-msgstr ""
-
-#: ../admin/aws_add.php:104
+#: ../admin/aws_add.php:94
 msgid "Create those statistics"
 msgstr "Create those statistics"
 
-#: ../admin/aws_add.php:104
+#: ../admin/aws_add.php:94
 #, fuzzy
 msgid "Edit those statistics"
 msgstr "Create those statistics"
 
-#: ../admin/aws_add.php:105 ../admin/aws_pass.php:68 ../admin/aws_users.php:53
+#: ../admin/aws_add.php:95 ../admin/aws_pass.php:77 ../admin/aws_users.php:54
 msgid "Cancel"
 msgstr ""
 
@@ -81,7 +75,7 @@ msgstr "The statistics has been successfully created"
 msgid "Please check the statistics set you want to delete"
 msgstr ""
 
-#: ../admin/aws_doadd.php:42
+#: ../admin/aws_doadd.php:41
 msgid "The statistics has been successfully created"
 msgstr "The statistics has been successfully created"
 
@@ -105,7 +99,7 @@ msgstr ""
 msgid "Create new Statistics"
 msgstr "Create new Statistics"
 
-#: ../admin/aws_list.php:56 ../admin/aws_users.php:73
+#: ../admin/aws_list.php:56 ../admin/aws_users.php:74
 msgid "Action"
 msgstr ""
 
@@ -122,24 +116,36 @@ msgstr ""
 msgid "Delete the checked Statistics"
 msgstr "Delete the checked Statistics"
 
-#: ../admin/aws_pass.php:52
+#: ../admin/aws_pass.php:43 ../admin/aws_useradd.php:36
+msgid "Passwords do not match"
+msgstr ""
+
+#: ../admin/aws_pass.php:50
+msgid "Password successfuly updated"
+msgstr ""
+
+#: ../admin/aws_pass.php:60
 msgid "Change a user's password"
 msgstr ""
 
-#: ../admin/aws_pass.php:62 ../admin/aws_users.php:47
-#: ../admin/aws_users.php:73
+#: ../admin/aws_pass.php:70 ../admin/aws_users.php:47
+#: ../admin/aws_users.php:74
 msgid "Username"
 msgstr ""
 
-#: ../admin/aws_pass.php:65
+#: ../admin/aws_pass.php:73
 msgid "New Password"
 msgstr ""
 
-#: ../admin/aws_pass.php:67
+#: ../admin/aws_pass.php:74 ../admin/aws_users.php:51
+msgid "Confirm password"
+msgstr ""
+
+#: ../admin/aws_pass.php:76
 msgid "Change this user's password"
 msgstr ""
 
-#: ../admin/aws_useradd.php:38
+#: ../admin/aws_useradd.php:43
 #, fuzzy
 msgid "The Awstat account has been successfully created"
 msgstr "The statistics has been successfully created"
@@ -157,16 +163,16 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: ../admin/aws_users.php:52
+#: ../admin/aws_users.php:53
 #, fuzzy
 msgid "Create this new awstat account"
 msgstr "Create those statistics"
 
-#: ../admin/aws_users.php:81
+#: ../admin/aws_users.php:82
 msgid "Change password"
 msgstr ""
 
-#: ../admin/aws_users.php:87
+#: ../admin/aws_users.php:88
 #, fuzzy
 msgid "Delete checked accounts"
 msgstr "Delete the checked Statistics"
@@ -223,7 +229,7 @@ msgid "Login incorrect"
 msgstr ""
 
 #: ../class/m_aws.php:467
-msgid "Login does not exist"
+msgid "Login already exist"
 msgstr ""
 
 #: ../class/m_aws.php:512 ../class/m_aws.php:536 ../class/m_aws.php:563

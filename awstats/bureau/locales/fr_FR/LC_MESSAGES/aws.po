@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: $Id: stats.po,v 1.1.1.1 2004/09/01 16:52:49 anonymous "
 "Exp $\n"
 "Report-Msgid-Bugs-To: i18n@alternc.org\n"
-"POT-Creation-Date: 2012-10-17 11:00+0200\n"
+"POT-Creation-Date: 2012-12-06 10:22+0100\n"
 "PO-Revision-Date: 2009-05-24 13:50CEST\n"
 "Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
 "Language-Team: French <i18n@alternc.org>\n"
@@ -29,19 +29,25 @@ msgstr "Modifier un jeu de statistiques"
 msgid "New Statistics"
 msgstr "Créer un jeu de statistiques"
 
-#: ../admin/aws_add.php:49 ../admin/aws_list.php:56
+#: ../admin/aws_add.php:41
+msgid ""
+"Awstats will analyze every logs availables for this domain (since its "
+"creation)."
+msgstr ""
+
+#: ../admin/aws_add.php:52 ../admin/aws_list.php:56
 msgid "Domain name"
 msgstr "Nom de domaine"
 
-#: ../admin/aws_add.php:56
+#: ../admin/aws_add.php:59
 msgid "Hostaliases"
 msgstr "Autres noms de domaine à associer aux stats"
 
-#: ../admin/aws_add.php:70 ../admin/aws_list.php:56
+#: ../admin/aws_add.php:73 ../admin/aws_list.php:56
 msgid "Allowed Users"
 msgstr "Utilisateurs autorisés"
 
-#: ../admin/aws_add.php:86
+#: ../admin/aws_add.php:89
 msgid ""
 "No users currently defined, you must create login with the 'Manage allowed "
 "users' accounts' menu."
@@ -49,27 +55,15 @@ msgstr ""
 "Aucun utilisateur n'est défini pour l'instant. Vous devez créer des "
 "utilisateurs avec le menu 'Gérer les utilisateurs autorisés'."
 
-#: ../admin/aws_add.php:90
-msgid "View public"
-msgstr "Visualisation publique"
-
-#: ../admin/aws_add.php:96 ../admin/aws_add.php:98
-msgid "No"
-msgstr ""
-
-#: ../admin/aws_add.php:96 ../admin/aws_add.php:98
-msgid "Yes"
-msgstr ""
-
-#: ../admin/aws_add.php:104
+#: ../admin/aws_add.php:94
 msgid "Create those statistics"
 msgstr "Créer ce jeu de statistiques"
 
-#: ../admin/aws_add.php:104
+#: ../admin/aws_add.php:94
 msgid "Edit those statistics"
 msgstr "Modifier ce jeu de statistiques"
 
-#: ../admin/aws_add.php:105 ../admin/aws_pass.php:68 ../admin/aws_users.php:53
+#: ../admin/aws_add.php:95 ../admin/aws_pass.php:77 ../admin/aws_users.php:54
 msgid "Cancel"
 msgstr ""
 
@@ -82,7 +76,7 @@ msgstr "Le jeu de statistiques %s a été effacé avec succès"
 msgid "Please check the statistics set you want to delete"
 msgstr "Vous devez cocher les statistiques que vous souhaitez effacer"
 
-#: ../admin/aws_doadd.php:42
+#: ../admin/aws_doadd.php:41
 msgid "The statistics has been successfully created"
 msgstr "Le jeu de statistiques a été créé avec succès"
 
@@ -106,7 +100,7 @@ msgstr "Gérer les utilisateurs autorisés"
 msgid "Create new Statistics"
 msgstr "Créer un jeu de statistiques"
 
-#: ../admin/aws_list.php:56 ../admin/aws_users.php:73
+#: ../admin/aws_list.php:56 ../admin/aws_users.php:74
 msgid "Action"
 msgstr ""
 
@@ -122,24 +116,37 @@ msgstr "Modifier"
 msgid "Delete the checked Statistics"
 msgstr "Effacer les statistiques cochées"
 
-#: ../admin/aws_pass.php:52
+#: ../admin/aws_pass.php:43 ../admin/aws_useradd.php:36
+msgid "Passwords do not match"
+msgstr ""
+
+#: ../admin/aws_pass.php:50
+msgid "Password successfuly updated"
+msgstr ""
+
+#: ../admin/aws_pass.php:60
 msgid "Change a user's password"
 msgstr "Changer le mot de passe d'un utilisateur"
 
-#: ../admin/aws_pass.php:62 ../admin/aws_users.php:47
-#: ../admin/aws_users.php:73
+#: ../admin/aws_pass.php:70 ../admin/aws_users.php:47
+#: ../admin/aws_users.php:74
 msgid "Username"
 msgstr "Nom d'utilisateur"
 
-#: ../admin/aws_pass.php:65
+#: ../admin/aws_pass.php:73
 msgid "New Password"
 msgstr "Nouveau mot de passe"
 
-#: ../admin/aws_pass.php:67
+#: ../admin/aws_pass.php:74 ../admin/aws_users.php:51
+#, fuzzy
+msgid "Confirm password"
+msgstr "Changer le mot de passe"
+
+#: ../admin/aws_pass.php:76
 msgid "Change this user's password"
 msgstr "Changer le mot de passe de cet utilisateur"
 
-#: ../admin/aws_useradd.php:38
+#: ../admin/aws_useradd.php:43
 msgid "The Awstat account has been successfully created"
 msgstr "Le compte utilisateur a été créé avec succès"
 
@@ -156,15 +163,15 @@ msgstr "Liste des utilisateurs autorisés"
 msgid "Password"
 msgstr "Mot de passe"
 
-#: ../admin/aws_users.php:52
+#: ../admin/aws_users.php:53
 msgid "Create this new awstat account"
 msgstr "Créer cet utilisateur"
 
-#: ../admin/aws_users.php:81
+#: ../admin/aws_users.php:82
 msgid "Change password"
 msgstr "Changer le mot de passe"
 
-#: ../admin/aws_users.php:87
+#: ../admin/aws_users.php:88
 msgid "Delete checked accounts"
 msgstr "Effacer les utilisateurs sélectionnés"
 
@@ -225,7 +232,7 @@ msgid "Login incorrect"
 msgstr ""
 
 #: ../class/m_aws.php:467
-msgid "Login does not exist"
+msgid "Login already exist"
 msgstr ""
 
 #: ../class/m_aws.php:512 ../class/m_aws.php:536 ../class/m_aws.php:563
@@ -255,6 +262,9 @@ msgstr ""
 #: ../class/m_aws.php:674
 msgid "Hostname is incorrect"
 msgstr ""
+
+#~ msgid "View public"
+#~ msgstr "Visualisation publique"
 
 #~ msgid "View"
 #~ msgstr "Voir"
