@@ -6,6 +6,8 @@ $lang_translation=array(
 			"es_ES" => "Español",
 			"it_IT" => "Italiano",
 			"de_DE" => "Deutsch",
+			"pt_BR" => "Portuguese",
+			"nl_NL" => "Dutch",
 			);
 
 function update_locale($langpath) {
