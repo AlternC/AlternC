@@ -1,3 +1,48 @@
+alternc (3.0~rc2) unstable; urgency=low
+
+  * 3.0~rc2 release, fixing the following :
+  * #1071 remove email storage stats cache on email removal - closed by squidly
+  * #1325 install on LXC : if no ACL, install CRASHES without explanation - closed by axel
+  * #1327 Probleme dependance alternc et modules - closed by axel
+  * #1334 alternc-roundcube - closed by axel
+  * #1336 Alternc-munin opérationnel pour 3.0 - closed by axel
+  * #1339 bonne suppression des DNS à la suppression d'un compte - closed by squidly
+  * #1343 Affichage listing de mails - closed by squidly
+  * #1344 Notice PHP - closed by fufroma
+  * #1345 Postfix service submission - closed by squidly
+  * #1346 AlternC-Awstats lance alternc.install - closed by axel
+  * #1348 Problème creation membre avec installation de sous domaine - closed by fufroma
+  * #1349 Alternc-roundcube changement password fail - closed by axel
+  * #1354 Bug liste blanche IP - closed by fufroma
+  * #1355 Affichage informations de configuration mail - closed by fufroma
+  * #1357 Ergonomie Alternc-Awstats + champs password à confirmer - closed by axel
+  * #1358 Creation d'un routine de génération de mot de passe - closed by axel
+  * #1359 Creation CatchAll - closed by axel
+  * #1360 Taille négative - closed by axel
+  * #1361 dépendance quotas - closed by squidly
+  * #1362 Un administrateur ne peut voir la page /adm_list.php?show=all - closed by fufroma
+  * #1363 Cron d'alternc ne lance pas les crons utilisateurs - closed by axel
+  * #1365 creation fichier log - closed by squidly
+  * #1366 Inverser les "serveurs" phpmyadmin - closed by fufroma
+  * #1367 "Installer le domaine login.hosting_tld.tld" ne fonctionne pas - closed by fufroma
+  * #1368 adm_edit.php avec domaine inexistant - closed by axel
+  * #1370 Traduction manquante : "quota_web" - closed by fufroma
+  * #1371 Valeur par défaut incorrecte pour le quota_web - closed by axel
+  * #1372 dpkg: mauvaise syntaxe de la version « 0.9.1_migrationldap » : caractère ... - closed by squidly
+  * #1373 Footer absent sur login.php - closed by fufroma
+  * #1374 mail_list.php : Le formulaire de recherche n'est plus affiché si aucun ... - closed by axel
+  * #1376 Bug lors de l'édition d'un sous domaine - closed by fufroma
+  * #1378 Bug choix du webmail page de login - closed by axel
+  * #1379 Dépendance sur dovecot-imapd casse la mise à jour - closed by squidly
+  * #1381 erreur sur /usr/lib/alternc/fixperms.sh - closed by axel
+  * #1385 Template d'apache pour roundcube ne se met pas a jour - closed by axel
+  * #1386 Policy Password bug - closed by squidly
+  * #1387 Ajout de sous-domaines, messages erreur non explicite - closed by squidly
+  * #1390 AlternC roundcube et Roundcubese se melangent les pinceaux a l'install - closed by axel
+  * #1391 alternc : Dépend: dovecot-imapd mais ne sera pas installé - closed by benjamin
+
+ -- Benjamin Sonntag <benjamin@sonntag.fr>  Fri,  7 Dec 2012 18:14:17 +0100
+
 alternc (3.0~rc1) unstable; urgency=low
 
   [ Alan Garcia (fufroma) ]
