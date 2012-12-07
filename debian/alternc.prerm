@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/bash -e -x
 
 # Debian alternc prerm
 # Benjamin Sonntag <benjamin@alternc.org>
