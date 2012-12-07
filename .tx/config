@@ -9,4 +9,5 @@ trans.es_ES = lang/es_ES.po
 trans.pt_BR = lang/pt_BR.po
 trans.de_DE = lang/de_DE.po
 trans.it_IT = lang/it_IT.po
+trans.nl_NL = lang/nl_NL.po
 

@@ -16,7 +16,7 @@
 
 tx pull -a -f
 
-langs="fr_FR de_DE en_US es_ES pt_BR it_IT" 
+langs="fr_FR de_DE en_US es_ES pt_BR it_IT nl_NL"
 
 for lang in $langs
 do
