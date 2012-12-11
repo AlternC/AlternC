@@ -394,9 +394,9 @@ class m_dom {
   function create_default_subdomains($domain,$target_domain=""){
     global $db,$err;
     $err->log("dom","create_default_subdomains",$domain);
-    $query="SELECT sub, domain_type, domain_type_parameter FROM default_subdomains WHERE concerned = 'SLAVE' or concerned = 'BOTH' and enabled=1;";
+    $query="SELECT sub, domain_type, domain_type_parameter FROM default_subdomains WHERE (concerned = 'SLAVE' or concerned = 'BOTH') and enabled=1;";
     if(empty($target_domain)) {
-      $query="SELECT sub, domain_type, domain_type_parameter FROM default_subdomains WHERE concerned = 'MAIN' or concerned = 'BOTH' and enabled=1;";
+      $query="SELECT sub, domain_type, domain_type_parameter FROM default_subdomains WHERE (concerned = 'MAIN' or concerned = 'BOTH') and enabled=1;";
     }
     $domaindir=$this->domdefaultdir($domain);
     $db->query($query);
