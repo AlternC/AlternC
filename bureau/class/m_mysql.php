@@ -678,7 +678,7 @@ class m_mysql {
     }
     $db->query("SELECT * FROM dbusers WHERE name='$user';");
     if ($db->num_rows()) {
-      $err->raise("mysql",_("The database user was not found"));
+      $err->raise("mysql",_("The database user already exists"));
       return false;
     }
     if ($password != $passconf || !$password) {
