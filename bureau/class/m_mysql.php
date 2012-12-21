@@ -133,7 +133,7 @@ class m_mysql {
     $c=array();
     while ($db->next_record()) {
       list($dbu,$dbn)=split_mysql_database_name($db->f("db"));
-      $c[]=array("db"=>$db->f("db"), "name"=>$dbn,"bck"=>$db->f("bck_mode"), "dir"=>$db->f("bck_dir"), "login"=>$db->f("login"), "pass"=>$db->f("pass"));
+      $c[]=array("db"=>$db->f("db"), "name"=>$db->f('db'),"bck"=>$db->f("bck_mode"), "dir"=>$db->f("bck_dir"), "login"=>$db->f("login"), "pass"=>$db->f("pass"));
     }
     return $c;
   }
@@ -309,7 +309,7 @@ class m_mysql {
     $this->dbus->query("DROP DATABASE `$dbname`;");
 
     $db_esc=str_replace('_','\_',$dbname);
-    $db->query("select User from mysql.db where User='".$dbname."' and Db!='".$db_esc."' and (Select_priv='Y' or Insert_priv='Y' or Update_priv='Y' or Delete_priv='Y' or Create_priv='Y' or Drop_priv='Y' or References_priv='Y' or Index_priv='Y' or Alter_priv='Y' or Create_tmp_table_priv='Y' or Lock_tables_priv='Y');");
+    $db->query("select User from mysql.db where User='".$dbname."' and Db='".$db_esc."' and (Select_priv='Y' or Insert_priv='Y' or Update_priv='Y' or Delete_priv='Y' or Create_priv='Y' or Drop_priv='Y' or References_priv='Y' or Index_priv='Y' or Alter_priv='Y' or Create_tmp_table_priv='Y' or Lock_tables_priv='Y');");
     if(!$db->num_rows()){
       $this->del_user($dbname);
     }
@@ -530,11 +530,15 @@ class m_mysql {
   /** 
    * Returns the list of database users of an account
    **/
-  function get_userslist() {
+  function get_userslist($all=null) {
     global $db,$err,$bro,$cuid;
     $err->log("mysql","get_userslist");
     $c=array();
-    $db->query("SELECT name FROM dbusers WHERE uid='$cuid' and enable not in ('ADMIN','HIDDEN') ORDER BY name;");
+    if(!$all){
+   		$db->query("SELECT name FROM dbusers WHERE uid='$cuid' and enable not in ('ADMIN','HIDDEN') ORDER BY name;");
+		}else{
+   		$db->query("SELECT name FROM dbusers WHERE uid='$cuid' ORDER BY name;");
+		}	
     while ($db->next_record()) {
       $pos=strpos($db->f("name"),"_");
       if($pos === false){
@@ -739,14 +743,19 @@ class m_mysql {
    * @param $user the username (we will add "[alternc-account]_" to it) to delete
    * @return TRUE if the user has been deleted in MySQL or FALSE if an error occurred
    **/
-  function del_user($user) {
+  function del_user($user,$all=null) {
     global $db,$err,$mem,$cuid,$L_MYSQL_DATABASE;
     $err->log("mysql","del_user",$user);
     if (!preg_match("#^[0-9a-z]#",$user)) {
       $err->raise("mysql",_("The username can contain only letters and numbers"));
       return false;
     }
-    $db->query("SELECT name FROM dbusers WHERE name='".$user."' and enable not in ('ADMIN','HIDDEN');");
+		if(!$all){
+    	$db->query("SELECT name FROM dbusers WHERE name='".$user."' and enable not in ('ADMIN','HIDDEN');");
+		}else{
+    	$db->query("SELECT name FROM dbusers WHERE name='".$user."' ;");
+		}
+    
     if (!$db->num_rows()) {
       $err->raise("mysql",_("The username was not found"));
       return false;
@@ -959,10 +968,10 @@ class m_mysql {
         $this->del_db($c[$i]["name"]);
       }
     }
-    $d=$this->get_userslist();
+    $d=$this->get_userslist(1);
     if (!empty($d)) {
       for($i=0;$i<count($d);$i++) {
-        $this->del_user($d[$i]["name"]);
+        $this->del_user($d[$i]["name"],1);
       }
     }
     return true;
