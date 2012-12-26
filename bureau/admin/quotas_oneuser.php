@@ -55,11 +55,9 @@ if (!isset($mode)) { # when included from adm_login, mode is not set
   foreach ($domaines_user as $domaine) { 
     $alias_sizes = $quota->get_size_mail_details_domain($domaine);
     $domsize = 0; 
-    $d = $quota->get_size_unit($domsize);
     foreach ($alias_sizes as $e) {
       if($e['size'] > 0) {
         $domsize += $e['size'];
-        $d = $quota->get_size_unit($domsize);
         echo "<tr><td>{$domaine}</td>";
         echo "<td>".str_replace("_","@",$e["alias"])."</td>";
         echo "<td"; if ($mode!=2) echo " style=\"text-align: right\""; echo ">";
@@ -79,6 +77,9 @@ if (!isset($mode)) { # when included from adm_login, mode is not set
         echo "</td></tr>";
       }
     }
+
+    $d = $quota->get_size_unit($domsize);
+
     if ($totalmail) {
       $tpc = intval(100 * $domsize / $totalmail);
     } else {

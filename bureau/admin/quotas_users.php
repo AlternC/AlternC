@@ -89,20 +89,29 @@ if (isset($error) && $error) {
 
             $mlc = $quota->get_size_mailman_count_user($mUID);
             $tmpdb = $quota->get_size_db_sum_user($mData["login"]);
-			$totaldb += $tmpdb;
+            $totaldb += $tmpdb;
             $dbc = $quota->get_size_db_count_user($mData["login"]);
 		}
 
-		$totaltotal=$totalweb+$totallist+$totalmail+($totaldb/1024); // en Ko
+		$tmptotal=$totalweb+$totallist+$totalmail+($totaldb/1024);
+		$totaltotal=$quota->get_size_unit($tmptotal);
 	}
 	else
 	{
-        $totalweb = $quota->get_size_web_sum_all();
-        $totalmail = $quota->get_size_mail_sum_all();
-        $totallist = $quota->get_size_mailman_sum_all();
-        $totaldb = $quota->get_size_db_sum_all();
+        $tmptotalweb = $quota->get_size_web_sum_all();          // In KB
+	$totalweb=$quota->get_size_unit($tmptotalweb * 1024);
 
-		$totaltotal=$totalweb+$totallist+$totalmail+($totaldb/1024); // en Ko
+        $tmptotalmail = $quota->get_size_mail_sum_all();        // In B
+        $totalmail=$quota->get_size_unit($tmptotalmail);
+
+        $tmptotallist = $quota->get_size_mailman_sum_all();     // IN KB
+        $totallist=$quota->get_size_unit($tmptotallist * 1024);
+ 
+        $tmptotaldb = $quota->get_size_db_sum_all();            // IN B
+        $totaldb=$quota->get_size_unit($tmptotaldb);
+
+	$tmptotaltotal=($tmptotalweb*1024)+($tmptotallist*1024)+$tmptotalmail+($tmptotaldb/1024); // IN B
+	$totaltotal=$quota->get_size_unit($tmptotaltotal); 
 
         $dc = $dom->count_domains_all();
         $mc = $quota->get_size_mail_count_all();
@@ -121,28 +130,28 @@ if (isset($error) && $error) {
 <tr>
   <th><?php __("Domains"); ?></th>
  <td><?php echo $dc; ?></td>
- <td><?php echo sprintf("%.1f", $totalweb / 1024); ?>&nbsp;Mo</td>
+ <td><?php echo sprintf("%.1f", $totalweb['size'])."&nbsp;".$totalweb['unit']; ?></td>
 </tr>
 <tr>
  <th><?php __("Email addresses"); ?></th>
  <td><?php echo $mc; ?></td>
- <td><?php echo sprintf("%.1f", $totalmail / 1024); ?>&nbsp;Mo</td>
+ <td><?php echo sprintf("%.1f", $totalmail['size'])."&nbsp;".$totalmail['unit']; ?></td>
 </tr>
 <?php if ($mlc) { ?>
 <tr>
  <th><?php __("Mailman lists"); ?></th>
  <td><?php echo $mlc; ?></td>
- <td><?php echo sprintf("%.1f", $totallist / 1024); ?>&nbsp;Mo</td>
+ <td><?php echo sprintf("%.1f", $totallist['size'])."&nbsp;".$totallist['unit']; ?></td>
 </tr>
 							      <?php } ?>
 <tr>
  <th><?php __("MySQL Databases"); ?></th>
  <td><?php echo $dbc; ?></td>
- <td><?php echo sprintf("%.1f", $totaldb / 1024 / 1024); ?>&nbsp;Mo</td>
+ <td><?php echo sprintf("%.1f", $totaldb['size'])."&nbsp;".$totaldb['unit']; ?></td>
 </tr>
 <tr>
  <th colspan="2"><?php __("Total"); ?></th>
- <td><?php echo sprintf("%.1f", $totaltotal / 1024); ?>&nbsp;Mo</td>
+ <td><?php echo sprintf("%.1f", $totaltotal['size'])."&nbsp;".$totaltotal['unit']; ?></td>
 </tr>
 </tbody>
 </table>
@@ -189,7 +198,7 @@ if ($cuid != 2000)
 	foreach ($mList as $mUID => $mData)
 	{
         $tmpweb = $quota->get_size_web_sum_user($mUID);
-		$totalweb += $tmpweb;
+	$totalweb += $tmpweb;
 
 		if (!empty($mData["domaines"]))
 		{
@@ -197,18 +206,18 @@ if ($cuid != 2000)
 			{
 				$dc++;
 
-                $tmpmail = $quota->get_size_mail_sum_domain($domaine);
+		                $tmpmail = $quota->get_size_mail_sum_domain($domaine);
 				$totalmail += $tmpmail;
-                $mc = $quota->get_size_mail_count_domain($domaine);
+            			$mc = $quota->get_size_mail_count_domain($domaine);
 
-                $tmplist = $quota->get_size_mailman_sum_domain($domaine);
+                		$tmplist = $quota->get_size_mailman_sum_domain($domaine);
 				$totallist += $tmplist;
 			}
 		}
 
         $mlc = $quota->get_size_mailman_count_user($mUID);
         $tmpdb = $quota->get_size_db_sum_user($mData["login"]);
-		$totaldb += $tmpdb;
+	$totaldb += $tmpdb;
         $dbc = $quota->get_size_db_count_user($mData["login"]);
 	}
 
@@ -221,7 +230,7 @@ else
     $totaldb = $quota->get_size_db_sum_all();
 }
 
-$totaltotal=$totalweb+$totallist+$totalmail+($totaldb/1024); // en Ko
+$totaltotal=$totalweb+$totallist+($totalmail/1024)+($totaldb/1024); // In KB
 if ($totaltotal==0) $totaltotal=1;
 
 if ($cuid != 2000) {
@@ -249,6 +258,13 @@ foreach ($membres_list as $c) {
     $mls+=$mlstmp;
   }
 
+  $mailsize=$quota->get_size_unit($ms);
+
+  if($mls !=  0)
+    $mailmansize=$quota->get_size_unit($mls);
+  else
+    $mailmansize=$quota->get_size_unit($quota->get_size_mailman_sum_user($c["uid"]) * 1024);
+
   // Mail Count
   $maildomains_list = $mail->enum_domains($c["uid"]);
   $mc = 0;
@@ -256,17 +272,15 @@ foreach ($membres_list as $c) {
     $mc += $md['nb_mail'];
   }
 
-if (isset($mailman)) {
   // Mailman List Count
   $mlc = $mailman->count_ml_user($c["uid"]);
   echo "</td><td>$dc</td><td>$mc</td><td>$mlc</td><td";
   if ($mode!=2) echo " style=\"text-align: right\"";
   echo ">";
-} // isset mailman
 
   // Espace WEB
   $ws = $quota->get_size_web_sum_user($c["uid"]);
-
+  $webspace=$quota->get_size_unit($ws * 1024);
 	if (isset($totalweb) && $totalweb){
 		$pc=intval(100*$ws/$totalweb);
 	}
@@ -275,7 +289,7 @@ if (isset($mailman)) {
 	}
 
 if ($mode==0) {
-  echo sprintf("%.1f", $ws / 1024)."&nbsp;"._("MB");
+  echo sprintf("%.1f", $webspace['size'])."&nbsp;".$webspace['unit'];
 } elseif ($mode==1) {
   echo sprintf("%.1f",$pc)."&nbsp;%";
 } else {
@@ -293,7 +307,7 @@ else
 	$pc=0;
 
 if ($mode==0) {
-  echo sprintf("%.1f", $ms / 1024)."&nbsp;Mo";
+  echo sprintf("%.1f", $mailsize['size'])."&nbsp;".$mailsize['unit'];
 } elseif ($mode==1) {
   echo sprintf("%.1f",$pc)."&nbsp;%";
 } else {
@@ -311,7 +325,7 @@ else
 	$pc=0;
 
 if ($mode==0) {
-  echo sprintf("%.1f", $mls / 1024)."&nbsp;"._("MB");
+  echo sprintf("%.1f", $mailmansize['size'])."&nbsp;".$mailmansize['unit'];
 } elseif ($mode==1) {
   echo sprintf("%.1f",$pc)."&nbsp;%";
 } else {
@@ -324,6 +338,7 @@ echo ">";
 
 // Espace DB :
 $ds = $quota->get_size_db_sum_user($c["login"]);
+$dbsize=$quota->get_size_unit($ds);
 
 if ($totaldb)
 	$pc=intval(100*$ds/$totaldb);
@@ -331,7 +346,7 @@ else
 	$pc=0;
 
 if ($mode==0) {
-  echo sprintf("%.1f", $ds / 1024/1024)."&nbsp;"._("MB");
+  echo sprintf("%.1f", $dbsize['size'])."&nbsp;".$dbsize['unit'];
 } elseif ($mode==1) {
 	echo sprintf("%.1f",$pc)."&nbsp;%";
 } else {
@@ -342,9 +357,10 @@ echo "</td><td";
 if ($mode!=2) echo " style=\"text-align: right\"";
 echo ">";
 
-$ts=$ds/1024+$ws+$ms+$mls;
+$ts=$ds/1024+$ws+$ms/1024+$mls;                  // In KB
+$totalsize=$quota->get_size_unit($ts * 1024);
 if ($mode==0) {
-  echo sprintf("%.1f", $ts/1024)."&nbsp;"._("MB");
+  echo sprintf("%.1f", $totalsize['size'])."&nbsp;".$totalsize['unit'];
 } elseif ($mode==1) {
 	echo sprintf("%.1f",(100*$ts/$totaltotal))."&nbsp;%";
 } else {
