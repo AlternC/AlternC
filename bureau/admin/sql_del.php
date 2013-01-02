@@ -48,7 +48,7 @@ if ($confirm=="y" ) {
       if (!$r) {
 	$error.=$err->errstr()."<br />";
       } else {
-	$error.=sprintf(_("The database %s has been successfully deleted"),$mem->user["login"].(($val)?"_":"").$val)."<br />";
+	$error.=sprintf(_("The database %s has been successfully deleted"),$val)."<br />";
       }
     }
   }

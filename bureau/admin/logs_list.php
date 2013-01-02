@@ -53,7 +53,7 @@ if(!$list || empty($list['dir'])){
 <?php
 
 $col=1;
-//listing of every mail of the current domain.
+//listing of every logs of the current user.
 echo "<pre>";
 while (list($key,$val)=each($list)){
 	$col=3-$col;
