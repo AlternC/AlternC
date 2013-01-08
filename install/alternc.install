@@ -409,6 +409,11 @@ tar -zcf "$INSTALLED_CONFIG_TAR" -C / $CONFIG_FILES
 # Last touches
 #
 
+# remaining steps are only for the master
+if [ "$slave" = "1" ]; then
+    exit 0
+fi
+
 chown alterncpanel:alterncpanel "$ALTERNC_LOC/html/"*
 setfacl -b -k -m d:g:alterncpanel:rw- -m g:alterncpanel:rw- "$ALTERNC_LOC/html/"*
 
