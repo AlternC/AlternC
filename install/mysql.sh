@@ -59,41 +59,56 @@ CREATE DATABASE IF NOT EXISTS $database; "
 grant_mail="GRANT ALL ON $database.dovecot_view TO '$alternc_mail_user'@'${MYSQL_CLIENT}' IDENTIFIED BY '$alternc_mail_password';"
 grant_mail=$grant_mail"GRANT SELECT ON $database.* TO '$alternc_mail_user'@'${MYSQL_CLIENT}' IDENTIFIED BY '$alternc_mail_password';"
 
-echo -n "Trying debian.cnf: "
-mysql="/usr/bin/mysql --defaults-file=/etc/mysql/debian.cnf"
-# If this call fail, we may be connected to a mysql-server version 5.0.
-# In that case, change mysql parameters and retry. Use root / nopassword.
-if ! $mysql <<EOF
+
+#if mysql_client != localhost means we are connecting to a remote server
+#the remote sql use rshould already be configured but it is a way of confirming it.
+if [ $MYSQL_CLIENT != "localhost" ]; then
+       mysql="/usr/bin/mysql -h$host -u$user -p$password"
+  if ! $mysql << EOF
 $grant
 EOF
-then
-    echo "failed: debian-sys-maintainer doesn't have the right credentials"
-    echo -n "are we doing an upgrade? "
-    mysql="/usr/bin/mysql --defaults-file=$MYSQL_CONFIG"
-    if ! $mysql <<EOF
-$grant
+       then
+               echo "Fail"
+               echo "Can't grant to remote system user $user, aborting";
+               exit 1
+       fi
+else
+  echo -n "Trying debian.cnf: "
+  mysql="/usr/bin/mysql --defaults-file=/etc/mysql/debian.cnf"
+  # If this call fail, we may be connected to a mysql-server version 5.0.
+  # In that case, change mysql parameters and retry. Use root / nopassword.
+  if ! $mysql <<EOF
+  $grant
 EOF
-    then 
-        echo "No"
-        echo -n "Assuming clean install (empty root password)... "
-        mysql="/usr/bin/mysql -h$host -uroot "
-        if ! $mysql <<EOF
-$grant
+  then
+      echo "failed: debian-sys-maintainer doesn't have the right credentials"
+      echo -n "are we doing an upgrade? "
+      mysql="/usr/bin/mysql --defaults-file=$MYSQL_CONFIG"
+      if ! $mysql <<EOF
+  $grant
 EOF
-        then 
-            echo "Failed"
-            echo -n "Assuming pre 0.9.8 version... "
-            mysql="/usr/bin/mysql -h$MYSQL_HOST -u$MYSQL_USER -p$MYSQL_PASS"
-            if ! $mysql <<EOF
-$grant
+      then 
+          echo "No"
+          echo -n "Assuming clean install (empty root password)... "
+          mysql="/usr/bin/mysql -h$host -uroot "
+          if ! $mysql <<EOF
+  $grant
 EOF
-            then
-                echo "No."
-                echo "Can't grant system user $user, aborting"; 
-	        exit 1 
-            fi
-	fi
-    fi
+          then 
+              echo "Failed"
+              echo -n "Assuming pre 0.9.8 version... "
+              mysql="/usr/bin/mysql -h$MYSQL_HOST -u$MYSQL_USER -p$MYSQL_PASS"
+              if ! $mysql <<EOF
+  $grant
+EOF
+              then
+                  echo "No."
+                  echo "Can't grant system user $user, aborting"; 
+  	        exit 1 
+              fi
+  	fi
+      fi
+  fi
 fi
 echo "ok!"
 
