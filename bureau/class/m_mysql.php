@@ -559,7 +559,7 @@ class m_mysql {
     $dbu=$dbn;
     $r=array();
     $dbn=str_replace('_','\_',$dbn);
-    $q=$db->query("Select * from mysql.db where Db='".$dbn."' and User!='".$cuid."_myadm';");
+    $q=$this->dbus->query("Select * from mysql.db where Db='".$dbn."' and User!='".$cuid."_myadm';");
 
     if(!$db->num_rows()){
       return $r;
