@@ -54,7 +54,7 @@ if (isset($error) && $error && !$noftp) {
 
 <?php if ($quota->cancreate("ftp")) { ?>
 <p>
-   <span class="inb"><a href="ftp_add.php"><?php __("Create a new ftp account"); ?></a></span> 
+   <span class="inb"><a href="ftp_edit.php?create=1"><?php __("Create a new ftp account"); ?></a></span> 
 </p>
 <?php  	} ?>
 

@@ -150,9 +150,7 @@ bureau/admin/dom_substatus.php -text
 bureau/admin/domlist.php -text
 bureau/admin/favicon.ico -text
 bureau/admin/foot.php -text
-bureau/admin/ftp_add.php -text
 bureau/admin/ftp_del.php -text
-bureau/admin/ftp_doadd.php -text
 bureau/admin/ftp_doedit.php -text
 bureau/admin/ftp_edit.php -text
 bureau/admin/ftp_list.php -text

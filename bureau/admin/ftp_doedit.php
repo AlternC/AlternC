@@ -30,6 +30,7 @@
 require_once("../class/config.php");
 $fields = array (
 	"id"    		=> array ("post", "integer", ""),
+	"create"    		=> array ("post", "integer", ""),
 	"pass"    		=> array ("post", "string", ""),
 	"passconf"    		=> array ("post", "string", ""),
 	"prefixe"    		=> array ("post", "string", ""),
@@ -39,25 +40,32 @@ $fields = array (
 getFields($fields);
 
 
-if (!$id) {
-	$error=_("No account selected!");
-} else {
-	if ($pass != $passconf) {
-        	$error = _("Passwords do not match");
-        	include("ftp_edit.php");
-        	exit();
-	}
+if ($pass != $passconf) {
+	$error = _("Passwords do not match");
+	include("ftp_edit.php");
+	exit();
+}
 
-	$r=$ftp->put_ftp_details($id,$prefixe,$login,$pass,$dir);
-	if (!$r) {
-		$error=$err->errstr();
-		include("ftp_edit.php");
-		exit();
-	} else {
-		$error=_("The ftp account has been successfully changed");
-		include("ftp_list.php");
-		exit();
-	}
+if (! $id && !$create) { //not a creation and not an edit
+  $error=_("Error: neither a creation nor an edition");
+  include("ftp_list.php");
+  exit();
+}
+
+if (! $id ) { //create
+  $r=$ftp->add_ftp($prefixe,$login,$pass,$dir);
+} else { // edit
+  $r=$ftp->put_ftp_details($id,$prefixe,$login,$pass,$dir);
+}
+
+if (!$r) {
+	$error=$err->errstr();
+	include("ftp_edit.php");
+	exit();
+} else {
+	$error=_("The ftp account has been successfully changed");
+	include("ftp_list.php");
+	exit();
 }
 
 include_once("head.php");

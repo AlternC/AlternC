@@ -31,20 +31,29 @@ require_once("../class/config.php");
 include_once("head.php");
 
 $fields = array (
-	"id"    => array ("request", "integer", ""),
+	"id"      => array ("request", "integer", ""),
+	"create"  => array ("get", "integer", "0"),
+	"dir"     => array ("get", "string", "0"),
 );
 getFields($fields);
 
-if (!$id) {
-	$error=_("No account selected!");
-} else {
-	$r=$ftp->get_ftp_details($id);
-	if (!$r) {
-		$error=$err->errstr();
-	}
+if (!$id && !$create) {
+  $error=_("Neither a creation nor a edition");
+  include_once("foot.php");
+  exit();
 }
+
+if (!$id && $create) { //creation
+  echo "<h3>"._("Create a FTP account")."</h3>";
+} else {
+   echo "<h3>"._("Editing a FTP account")."</h3>";
+  $r=$ftp->get_ftp_details($id);
+  if (!$r) {
+    $error=$err->errstr();
+  }
+}
+
 ?>
-<h3><?php __("Editing an FTP account"); ?></h3>
 <?php
 if (isset($error) && $error) {
 	echo "<p class=\"error\">$error</p>";
@@ -55,10 +64,11 @@ if (isset($error) && $error) {
 <form method="post" action="ftp_doedit.php" name="main" id="main">
 <table border="1" cellspacing="0" cellpadding="4" class="tedit">
 <tr><th><input type="hidden" name="id" value="<?php echo $id ?>" />
+<tr><th><input type="hidden" name="create" value="<?php echo $create ?>" />
 <label for="login"><?php __("Username"); ?></label></th><td>
-	<select class="inl" name="prefixe"><?php $ftp->select_prefix_list($r["prefixe"]); ?></select>&nbsp;<b>_</b>&nbsp;<input type="text" class="int" name="login" id="login" value="<?php ehe($r[0]["login"]); ?>" size="20" maxlength="64" />
+	<select class="inl" name="prefixe"><?php @$ftp->select_prefix_list($r["prefixe"]); ?></select>&nbsp;<b>_</b>&nbsp;<input type="text" class="int" name="login" id="login" value="<?php @ehe($r[0]["login"]); ?>" size="20" maxlength="64" />
 </td></tr>
-<tr><th><label for="dir"><?php __("Folder"); ?></label></th><td><input type="text" class="int" name="dir" id="dir" value="<?php ehe("/".$r[0]["dir"]); ?>" size="20" maxlength="64" />
+<tr><th><label for="dir"><?php __("Folder"); ?></label></th><td><input type="text" class="int" name="dir" id="dir" value="<?php empty($dir)?@ehe("/".$r[0]["dir"]):@ehe($dir); ?>" size="20" maxlength="64" />
 
 <script type="text/javascript">
 <!--
@@ -70,7 +80,7 @@ if (isset($error) && $error) {
 <tr><th><label for="passconf"><?php __("Confirm password"); ?></label></th><td><input type="password" class="int" name="passconf" id="passconf" size="20" maxlength="64" value=""/></td></tr>
 
 <tr class="trbtn"><td colspan="2">
-  <input type="submit" class="inb" name="submit" value="<?php __("Change this FTP account"); ?>" />
+  <input type="submit" class="inb" name="submit" value="<?php __("Save"); ?>" />
   <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='ftp_list.php'"/>
 </td></tr>
 </table>

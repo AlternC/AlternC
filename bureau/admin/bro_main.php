@@ -588,7 +588,7 @@ else {
 else {
 ?>
 <span class="ina">
-    <a href="ftp_add.php?dir=<?php ehe($R); ?>"><?php __("Create an ftp account in this folder"); ?></a>
+    <a href="ftp_edit.php?create=1&dir=<?php ehe($R); ?>"><?php __("Create an ftp account in this folder"); ?></a>
 </span> &nbsp;
 <?php
 }
