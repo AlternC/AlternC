@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # First check that we have a username as $1. If not, ask for the username
 if [ "$#" -eq 0 ]
@@ -30,16 +30,10 @@ fi
 
 
 echo -n "Please enter the new password : "
-oldmodes=`stty -g` 
-stty -echo
-read PASS
-stty $oldmodes 
+read -s PASS
 echo 
 echo -n "Please confirm the new password : "
-oldmodes=`stty -g` 
-stty -echo
-read PASS2
-stty $oldmodes 
+read -s PASS2
 echo
 if [ "$PASS" != "$PASS2" ]
 then
