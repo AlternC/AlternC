@@ -97,12 +97,6 @@ class m_ftp {
     }
   }
 
-  function hook_admin_add_member() {
-    global $mem,$err;
-    $err->log("ftp","hook_admin_add_member");
-    return $this->add_ftp($mem->user['login'],"",$mem->user['pass'],"/");
-  }
-
   /* ----------------------------------------------------------------- */
   /** Retourne les détails d'un compte FTP (voir get_list)
    * Le tableau est celui du compte d'id spécifié
