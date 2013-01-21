@@ -93,7 +93,7 @@ if (!empty($formu) && $formu) {
   <form action="bro_main.php" method="post" name="main" id="main">  
     <input type="hidden" name="formu" value="2" />
     <input type="hidden" name="actdel" value="1" />
-    <input type="hidden" name="R" value="<?php echo $R?>" />
+    <input type="hidden" name="R" value="<?php echo ehe($R)?>" />
     <p class="error"><?php __("WARNING: Confirm the deletion of this files"); ?></p>
 <?php foreach($d as $editfile){ ?>
 	<p><?php echo stripslashes($editfile); ?></p>
@@ -326,7 +326,7 @@ for($i=0;$i<count($c);$i++) {
 $col=3-$col;
 echo "<tr class=\"lst$col\">\n";
 if ($c[$i]["type"]) {
-echo "	<td width=\"28\"><input type=\"checkbox\" class=\"inc\" name=\"d[]\" value=\"".$c[$i]["name"]."\" /></td>";
+echo "	<td width=\"28\"><input type=\"checkbox\" class=\"inc\" name=\"d[]\" value=\"".htmlentities($c[$i]["name"])."\" /></td>";
 if ($p["showicons"]) {
 echo "<td width=\"28\"><img src=\"icon/".$bro->icon($c[$i]["name"])."\" width=\"16\" height=\"16\" alt=\"\" /></td>";
 }
@@ -337,7 +337,7 @@ if ($canedit) {
 } else {
   echo "bro_downloadfile.php?dir=".urlencode($R)."&amp;file=".urlencode($c[$i]["name"]);
 }
-echo "\">".htmlentities($c[$i]["name"])."</a></td>\n";
+echo "\">"; ehe($c[$i]["name"]); echo"</a></td>\n";
 echo "	<td>".format_size($c[$i]["size"])."</td>";
 echo "<td>".format_date(_('%3$d-%2$d-%1$d %4$d:%5$d'),date("Y-m-d H:i:s",$c[$i]["date"]))."<br /></td>";
 if ($p["showtype"]) {

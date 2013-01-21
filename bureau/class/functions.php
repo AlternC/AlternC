@@ -435,7 +435,7 @@ function eoption($values,$cur,$info="") {
  */
 function ehe($str) {
   global $charset;
-  echo htmlspecialchars($str,ENT_COMPAT,$charset); 
+  echo htmlspecialchars($str,ENT_QUOTES,$charset); 
 }
 
 
