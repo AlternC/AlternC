@@ -27,7 +27,7 @@ if (isset($error) && $error) {
 ?>
 <p>
 <?php __("This page shows the space and service count of your AlternC server and each AlternC accounts.");
-echo "<br /><br />"; __('If you want to manage them, go to "Administration -> Manage the Alternc accounts" menu'); ?>
+echo "<br /><br />"; __("If you want to manage them, go to <a href="adm_list.php">Administration -> Manage the Alternc accounts</a>"); ?>
 </p>
 <p>
 <?php printf(_("Sizes are shown as %s"),($mode==0 || $mode==4)?_("MB."):_("% of the total.")); ?>
