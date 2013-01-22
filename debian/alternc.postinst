@@ -249,7 +249,7 @@ EOF
     			echo "*             /!\ WARNING /!\                   *"
     			echo "* Please add yourself the following directive : *"
 			echo "*        #includedir /etc/sudoers.d             *"
-			echo "* in file /etc/sudoers   (use sudoedit command) *"
+			echo "* in file /etc/sudoers   (use visudo command)   *"
 			echo "* Else you'll have troubles with some features  *"
 			echo "*                 of AlternC                    *"
     			echo "*************************************************"
