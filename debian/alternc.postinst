@@ -240,14 +240,24 @@ EOF
     # Apache will not start without this file
     touch /var/alternc/apache-vhost/vhosts_all.conf
 
-				#sudo stuff allowing alterncpanel to use quota
-		if [ -d /etc/sudoers.d ]; then
-			cp /etc/alternc/alternc-sudoers /etc/sudoers.d/alternc-sudoers
-			chmod 0440 /etc/sudoers.d/alternc-sudoers
-		else
-			echo "running an older version of sudo"
-			#FIXME
-			echo "copy content of /usr/share/doc/examples/example.sudoers into /etc/sudoers.d for to run properly"
+	#sudo stuff allowing alterncpanel to use quota
+	if [ -d /etc/sudoers.d ]; then
+		cp /etc/alternc/alternc-sudoers /etc/sudoers.d/alternc-sudoers
+		chmod 0440 /etc/sudoers.d/alternc-sudoers
+		if ! grep -q '#includedir /etc/sudoers.d' "/etc/sudoers"; then
+			echo "*************************************************"
+    			echo "*             /!\ WARNING /!\                   *"
+    			echo "* Please add yourself the following directive : *"
+			echo "*        #includedir /etc/sudoers.d             *"
+			echo "* in file /etc/sudoers   (use sudoedit command) *"
+			echo "* Else you'll have troubles with some features  *"
+			echo "*                 of AlternC                    *"
+    			echo "*************************************************"
+		fi
+	else
+		echo "running an older version of sudo"
+		#FIXME
+		echo "copy content of /usr/share/doc/examples/example.sudoers into /etc/sudoers.d to run properly"
 	 fi
 
     # important: postinst freezes without that:
