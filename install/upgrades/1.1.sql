@@ -121,7 +121,7 @@ CREATE TABLE IF NOT EXISTS `mailbox` (
 --
 -- Other recipients for an address (aliases)
 
-CREATE TABLE `recipient` (
+CREATE TABLE IF NOT EXISTS `recipient` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT, -- Technical id.
   `address_id` bigint(20) unsigned NOT NULL REFERENCES `address`(`id`), -- Reference to address
   `recipients` text NOT NULL, -- Recipients

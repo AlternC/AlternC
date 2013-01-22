@@ -146,6 +146,15 @@ EOF
     sed -e "$SED_SCRIPT" < $CONFIGFILE > $CONFIGFILE.tmp
     mv -f $CONFIGFILE.tmp $CONFIGFILE
 
+    # Erase all apacheconf file
+    # They will be regenerated without the bug by upgrade_check.sh below.
+    if dpkg --compare-versions "$2" le "0.9.3.9-globenet14"; then
+        rm -f /var/alternc/apacheconf/*/*
+    fi
+
+    echo "checking for upgrades"
+    /usr/share/alternc/install/upgrade_check.sh $2
+
     # Setup grants
     db_get "alternc/mysql/host"
     MYSQL_HOST="$RET"
@@ -205,14 +214,6 @@ EOF
            FQDN_LETTER="_"
     fi
 
-    # Erase all apacheconf file
-    # They will be regenerated without the bug by upgrade_check.sh below.
-    if dpkg --compare-versions "$2" le "0.9.3.9-globenet14"; then
-        rm -f /var/alternc/apacheconf/*/*
-    fi
-
-    echo "checking for upgrades"
-    /usr/share/alternc/install/upgrade_check.sh $2
 
     echo "config phpmyadmin"
     # Mise à jour sur une configuration existante
