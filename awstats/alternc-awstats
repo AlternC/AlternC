@@ -23,16 +23,23 @@ function searchdomain {
     U_ID=$(mysql_query "SELECT uid FROM aws WHERE hostname='$1'" | grep -v "^uid")
     U_LOGIN=$(mysql_query "SELECT login FROM membres WHERE uid='$U_ID'" |grep -v "^login")
     DOM_DIR="$LOG_DIR/$U_ID-$U_LOGIN"
-    echo $(find -P "$DOM_DIR" -mindepth 1 -maxdepth 2 -type f -iname "*.log" -print0 | xargs -0)
+    if [ -d "$DOM_DIR" ] ; then
+        echo $(find -P "$DOM_DIR" -mindepth 1 -maxdepth 2 -type f -iname "*.log" -print0 | xargs -0)
+    fi
 }
 
 function dostatgz {
     read DOM
     while [ "$DOM" ]
     do
+      echo -n "processing $DOM"
       LOGAPACHE=$(searchdomain $DOM)
-      echo "processing $DOM (for access files in $LOGAPACHE )"
-      /usr/lib/cgi-bin/awstats.pl -config=$DOM -update -LogFile="/usr/lib/alternc/logresolvemerge.pl $LOGAPACHE* |"
+      if [ -n "$LOGAPACHE" ] ; then
+        echo " (for access files in $LOGAPACHE )"
+        /usr/lib/cgi-bin/awstats.pl -config=$DOM -update -LogFile="/usr/lib/alternc/logresolvemerge.pl $LOGAPACHE* |"
+      else
+        echo "\n No log found"
+      fi
       read DOM
     done
 }
@@ -43,7 +50,11 @@ function dostat {
     do
       echo "processing $DOM"
       LOGAPACHE=$(searchdomain $DOM)
-      /usr/lib/cgi-bin/awstats.pl -config=$DOM  -LogFile="/usr/lib/alternc/logresolvemerge.pl $LOGAPACHE | "
+      if [ -n "$LOGAPACHE" ] ; then
+        /usr/lib/cgi-bin/awstats.pl -config=$DOM  -LogFile="/usr/lib/alternc/logresolvemerge.pl $LOGAPACHE | "
+      else
+        echo "No log found"
+      fi
       read DOM
     done
 }
