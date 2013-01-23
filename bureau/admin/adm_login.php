@@ -58,6 +58,13 @@ if ( empty($id) && isset($_COOKIE["oldid"]) && !empty($_COOKIE["oldid"])) {
     exit();
   }
 
+  if ($r['lastip'] != get_remote_ip() ) {
+    $error=_("Your IP is incorrect.");
+    include("index.php");
+    exit();
+  }
+  // FIXME we should add a peremption date on the cookie
+
   // Ok, so we remove the cookie : 
   setcookie('oldid','',0,'/');
   unset($_COOKIE['oldid']);
@@ -68,6 +75,7 @@ if ( empty($id) && isset($_COOKIE["oldid"]) && !empty($_COOKIE["oldid"])) {
     include("index.php");
     exit();
   }
+
   include_once("adm_list.php");
   exit();
 }

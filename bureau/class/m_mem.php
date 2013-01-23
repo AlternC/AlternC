@@ -119,6 +119,8 @@ class m_mem {
     } else $ip="''";
     /* Close sessions that are more than 2 days old. */
     $db->query("DELETE FROM sessions WHERE DATE_ADD(ts,INTERVAL 2 DAY)<NOW();");
+    /* Delete old impersonation */
+    if ( isset($_COOKIE["oldid"]) ) setcookie('oldid','',0,'/'); 
     /* Open the session : */
     $sess=md5(uniqid(mt_rand()));
     $_REQUEST["session"]=$sess;
