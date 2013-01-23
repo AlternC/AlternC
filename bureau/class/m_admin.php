@@ -75,30 +75,32 @@ class m_admin {
    * table <code>membres</code> and <code>local</code> of the corresponding account.
    * Returns FALSE if an error occurs.
    */
-  function get($uid) {
-    global $err,$db;
+  function get($uid,$recheck=false) {
+    global $err,$db,$lst_users_properties;
     //    $err->log("admin","get",$uid);
     if (!$this->enabled) {
       $err->raise("admin",_("-- Only administrators can access this page! --"));
       return false;
     }
-    $db->query("SELECT m.*, parent.login as parentlogin FROM membres as m LEFT JOIN membres as parent ON (parent.uid = m.creator) WHERE m.uid='$uid';");
-    if ($db->num_rows()) {
-      $db->next_record();
-      $c=$db->Record;
-    } else {
+
+    if (!isset($lst_users_properties) || empty($lst_users_properties) || !is_array($lst_users_properties) || $recheck ) {
+      $lst_users_properties=array();
+      $db->query("SELECT m.*, l.*, parent.login as parentlogin FROM membres as m LEFT JOIN membres as parent ON (parent.uid = m.creator) LEFT JOIN local as l ON (m.uid = l.uid) ;");
+       while ($db->next_record()) {
+         $lst_users_properties[$db->f('uid')]=$db->Record;
+       }
+    }
+
+    if ( !isset($lst_users_properties[$uid]) ) {
+      if ( !$recheck ) {
+        // don't exist, but is not a forced check. Do a forced check
+        return $this->get($uid, true);
+      } 
       $err->raise("admin",_("Account not found"));
       return false;
     }
-    $db->query("SELECT * FROM local WHERE uid='$uid';");
-    if ($db->num_rows()) {
-      $db->next_record();
-      reset($db->Record);
-      while (list($key,$val)=each($db->Record)) {
-	      $c[$key]=$val;
-      }
-    }
-    return $c;
+
+    return $lst_users_properties[$uid];
   }
 
 
