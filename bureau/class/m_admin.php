@@ -85,7 +85,22 @@ class m_admin {
 
     if (!isset($lst_users_properties) || empty($lst_users_properties) || !is_array($lst_users_properties) || $recheck ) {
       $lst_users_properties=array();
-      $db->query("SELECT m.uid as muid, l.*, m.*, parent.login as parentlogin FROM membres as m LEFT JOIN membres as parent ON (parent.uid = m.creator) LEFT JOIN local as l ON (m.uid = l.uid) ;");
+      $db->query("
+	SELECT 
+		m.uid as muid, 
+		l.*, 
+		m.*, 
+		parent.login as parentlogin,
+		m.renewed + INTERVAL m.duration MONTH as expiry,
+		CASE 
+			WHEN m.duration IS NULL THEN 0 
+			WHEN m.renewed + INTERVAL m.duration MONTH <= NOW() THEN 3	
+			WHEN m.renewed <= NOW() THEN 2
+		ELSE 1 END 'status'
+		
+	FROM membres as m 
+		LEFT JOIN membres as parent ON (parent.uid = m.creator) 
+		LEFT JOIN local as l ON (m.uid = l.uid) ;");
        while ($db->next_record()) {
          $lst_users_properties[$db->f('muid')]=$db->Record;
        }
@@ -667,12 +682,9 @@ EOF;
    * @return string The expiry date, a string as printed by MySQL
    */
   function renew_get_expiry($uid) {
-    global $db;
-
-    $db->query("SELECT renewed + INTERVAL duration MONTH 'expiry' FROM membres WHERE uid='$uid' ;");
-    if ($db->num_rows()) {
-      $db->next_record();
-      return $db->Record['expiry'];
+    $jj=$this->get($uid);
+    if ( isset($jj) && isset($jj['expiry']) && ! empty($jj['expiry']) ) {
+      return $jj['expiry'];
     }
     return '';
   }
@@ -688,19 +700,12 @@ EOF;
    *  3: has expired past the duration
    */
   function renew_get_status($uid) {
-    global $db;
+    $jj=$this->get($uid);
 
-    $db->query(
-      "SELECT CASE" .
-      " WHEN duration IS NULL THEN 0" .
-      " WHEN renewed + INTERVAL duration MONTH <= NOW() THEN 3" .
-      " WHEN renewed <= NOW() THEN 2" .
-      " ELSE 1 END 'status' FROM membres where uid=$uid;");
-
-    if($db->num_rows()) {
-      $db->next_record();
-      return $db->Record['status'];
+    if ( isset($jj) && isset($jj['status']) && ! empty($jj['status']) ) {
+      return $jj['status'];
     }
+
     return 0;
   }
 
