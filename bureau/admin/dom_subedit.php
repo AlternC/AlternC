@@ -49,7 +49,7 @@ if (!$isinvited && $dt[strtolower($type)]["enable"] != "ALL" ) {
 }
 
 
-if (!$noread) {
+if (!isset($noread) || !$noread) {
   if (!$r=$dom->get_sub_domain_all($domain,$sub,$type,$value)) {
     $error=$err->errstr();
   }

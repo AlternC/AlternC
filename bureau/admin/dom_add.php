@@ -63,9 +63,11 @@ if (isset($error) && $error) echo "<p class=\"error\">$error</p>";
   $q = $quota->getquota("dom");
 if ($q["u"]>0) {
 ?> 
-<p>
+<fieldset>
+	<legend>
     <?php __("Do you want to point this domain to another domain already installed in your account?"); ?>
-<br />
+	</legend>
+
    <input type="radio" id="newisslave0" name="newisslave" value="0"<?php cbox($newisslave==0); ?>/><label for="newisslave0"><?php __("No: This domain will have its own folder."); ?></label>
 <br />
    <input type="radio" id="newisslave1" name="newisslave" value="1"<?php cbox($newisslave==1); ?>/><label for="newisslave1"><?php __("Yes, redirect this new domain to this one:"); ?> </label> <select name="slavedom" id="slavedom" class="inl">
@@ -78,8 +80,7 @@ $dl=$dom->get_domain_list($cuid);
   }
   eoption($ddl,"slavedom");
 ?></select>
-<br />
-</p>
+</fieldset>
     <?php } ?>
 
 <p>

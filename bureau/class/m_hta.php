@@ -106,21 +106,22 @@ class m_hta {
    */
 
   function ListDir(){
-	  global$err,$mem,$L_ALTERNC_LOC;
-	  $err->log("hta","listdir");
-	  $sortie=array();
-	  $absolute="$L_ALTERNC_LOC/html/".substr($mem->user["login"],0,1)."/".$mem->user["login"];
-	  exec("find $absolute -name .htpasswd|sort",$sortie);
-	  if(!count($sortie)){
-		  $err->raise("hta",_("No protected folder"));
-		  return false;
-	  }
-	  $pattern="/^".preg_quote($L_ALTERNC_LOC,"/")."\/html\/.\/[^\/]*\/(.*)\/\.htpasswd/";
-	  	  for($i=0;$i<count($sortie);$i++){
-		  preg_match($pattern,$sortie[$i],$matches);
-		  $r[$i]=$matches[1]."/";
-	  }
-	  return $r;
+    global$err,$mem,$L_ALTERNC_LOC;
+    $err->log("hta","listdir");
+    $sortie=array();
+    $absolute="$L_ALTERNC_LOC/html/".substr($mem->user["login"],0,1)."/".$mem->user["login"];
+    exec("find $absolute -name .htpasswd|sort",$sortie);
+    if(!count($sortie)){
+      $err->raise("hta",_("No protected folder"));
+      return false;
+    }
+    $pattern="/^".preg_quote($L_ALTERNC_LOC,"/")."\/html\/.\/[^\/]*\/(.*)\/\.htpasswd/";
+      for($i=0;$i<count($sortie);$i++){
+      preg_match($pattern,$sortie[$i],$matches);
+      $tmpm=isset($matches[1])?$matches[1]:'';
+      $r[$i]=$tmpm."/";
+    }
+    return $r;
   }
 
   /*---------------------------------------------------------------------------*/

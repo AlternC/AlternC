@@ -83,7 +83,7 @@ if (!$r=$admin->get($uid)) {
 
 <tr>
 	<th><label for="pass"><?php __("Password"); ?></label></th>
-	<td><input type="password" class="int" id="pass" name="pass" value="" size="20" maxlength="64" /><?php display_div_generate_password(); ?></td>
+	<td><input type="password" class="int" id="pass" name="pass" value="" size="20" maxlength="64" /><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#pass","#passconf"); ?></td>
 </tr>
 <tr>
 	<th><label for="passconf"><?php __("Confirm password"); ?></label></th>

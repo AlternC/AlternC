@@ -70,6 +70,23 @@ function dnsoff() {
 	if (document.forms["fdns"].emailoff.disabled!=null)
 		document.forms["fdns"].emailoff.disabled=false;
 }
+
+function destruction_alert() {
+	// On ne se pose pas de question si le DNS est deja sur NON
+	if (<?php echo (int)$r["dns"]; ?>!=1) {
+		return true;
+	}
+	if (document.forms["fdns"].email[1].checked) {
+		//return confirm('<?php __("Are you sur you want to do this and DELETE ALL the mailboxes, messages and aliases on this domain ?"); ?>');
+		if ( confirm('<?php __("Are you sur you want to do this and DELETE ALL the mailboxes, messages and aliases on this domain ?"); ?>') ) {
+			return confirm('<?php __("Realy ?"); ?>');
+		} else {
+			return false;
+		}
+	} else {
+		return true;
+	}
+}
 </script>
 <h3><?php printf(_("Editing subdomains of %s"),$domain); ?></h3>
 <hr id="topbar"/>
@@ -184,7 +201,7 @@ if (!$r['noerase']) {
 
 <hr />
 <h3><?php __("DNS & Email parameters"); ?></h3>
-<form action="dom_editdns.php?domain=<?php echo urlencode($r["name"]) ?>" method="post" id="fdns" name="fdns">
+<form action="dom_editdns.php?domain=<?php echo urlencode($r["name"]) ?>" method="post" id="fdns" name="fdns" onSubmit="return destruction_alert();">
 
 <table class="tlist">
 <tr>
