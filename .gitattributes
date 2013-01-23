@@ -610,6 +610,7 @@ src/spoolsize.php -text
 src/sqlbackup.sh -text
 src/update_domains.sh -text
 src/update_mails.sh -text
+src/update_quota_mail.sh -text
 /svnup.sh -text
 tests/make_mail_dataset.sh -text
 tests/mechdump.pm -text

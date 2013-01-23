@@ -62,6 +62,10 @@ invoke-rc.d dovecot stop || true
 # We call the migration script (provided by wiki.dovecot.com)
 perl "/usr/lib/alternc/courier-dovecot-migrate.pl" --to-dovecot --convert --recursive "$MAIL_DIR"
 
+
+#We have to resync maildirs quotas with dovecot informations.
+/usr/lib/alternc/update_quota_mail.sh
+
 # Starting dovecot service
 invoke-rc.d dovecot start || true
 ## End of migration part
