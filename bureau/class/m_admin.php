@@ -85,9 +85,9 @@ class m_admin {
 
     if (!isset($lst_users_properties) || empty($lst_users_properties) || !is_array($lst_users_properties) || $recheck ) {
       $lst_users_properties=array();
-      $db->query("SELECT m.*, l.*, parent.login as parentlogin FROM membres as m LEFT JOIN membres as parent ON (parent.uid = m.creator) LEFT JOIN local as l ON (m.uid = l.uid) ;");
+      $db->query("SELECT m.uid as muid, l.*, m.*, parent.login as parentlogin FROM membres as m LEFT JOIN membres as parent ON (parent.uid = m.creator) LEFT JOIN local as l ON (m.uid = l.uid) ;");
        while ($db->next_record()) {
-         $lst_users_properties[$db->f('uid')]=$db->Record;
+         $lst_users_properties[$db->f('muid')]=$db->Record;
        }
     }
 
