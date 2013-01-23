@@ -18,5 +18,5 @@ done
 ALTERNC_LOGS="$ALTERNC_LOC/logs"
 
 #Compress logs older than XX days
-nice 10 find "$ALTERNC_LOGS" -not -name '*.gz' -mtime +$DAYS -exec gzip '{}' \;
+nice -n 10 find "$ALTERNC_LOGS" -not -name '*.gz' -mtime +$DAYS -exec gzip '{}' \;
 
