@@ -30,13 +30,19 @@ for i in $d ; do
 
 	if [ -d "$i" ];then
 	  user=`ls -l $i| tail -n 1|cut -d' ' -f 3` 
-	  size=0
 	  # We grep only mails, not the others files
 	  mails=`find $i -type f | egrep "(^$i)*[0-9]+\.M"`
-	  for j in $mails
-	  do
-	  	size=$(( $size + `du -b $j|awk '{print $1}'`))
-	  done
+
+	  # This part only count mails size
+	  #size=0
+	  #for j in $mails
+	  #do
+	  #	size=$(( $size + `du -b $j|awk '{print $1}'`))
+	  #done
+
+	  # This part count the total mailbox size (mails + sieve scripts + ...)
+	  size=`du -b -s $i|awk '{print $1}'` 
+
 	  mail_count=`echo $mails|wc -w` 
 	  echo "folder : "$i
 	  echo "mail count : "$mail_count
