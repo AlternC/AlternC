@@ -592,16 +592,14 @@ function pager($offset,$count,$total,$url,$before="",$after="") {
 }
 
 function create_pass($length = 8){
-
-	$chars = "1234567890abcdefghijkmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	$i = 0;
+  $chars = "1234567890abcdefghijkmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  $i = 0;
   $password = "";
   while ($i <= $length) {
     $password .= @$chars{mt_rand(0,strlen($chars))};
     $i++;
   }
   return $password;
-
 }
 
 define("DEFAULT_PASS_SIZE", 8);
@@ -612,7 +610,7 @@ function display_div_generate_password($pass_size=DEFAULT_PASS_SIZE, $fields_to_
   echo "<div id='$id' style='display:none;'><a href=\"javascript:generate_password_html('$id',$pass_size,'$fields_to_fill1','$fields_to_fill2');\">";
   __("Clic here to generate a password");
   echo "</a></div>";
-  echo "<script type='text/javascript'>$('#'+$id).show();</script>";
+  echo "<script type='text/javascript'>$('#$id').show();</script>";
   return 0;
 }
 
@@ -631,6 +629,7 @@ function display_browser($dir="", $caller="main.dir", $width=350, $height=450) {
               open: function()
                 {
                     $('.ui-widget-overlay').css('opacity', .70);
+                    $('.ui-dialog-content').css('background-color', '#F0F0FA');
                 },
             });
          
@@ -644,7 +643,7 @@ function display_browser($dir="", $caller="main.dir", $width=350, $height=450) {
           
           
           document.write('&nbsp;<input type=\"button\" id=\"bt".$bid."\" value=\""._("Choose a folder...")."\" class=\"bff\">');
-          document.write('<div id=\"".$bid."\" title=\""._("Choose a folder...")."\">');
+          document.write('<div id=\"".$bid."\" title=\""._("Choose a folder...")."\" style=\"display: none; bgcolor:red;\">');
           document.write('  <iframe src=\"/browseforfolder2.php?caller=".$caller."&file=".ehe($dir, 0)."&bid=".$bid."\" width=\"".($width-25)."\" height=\"".($height-50)."\" frameborder=\"no\" id=\"browseiframe\"></iframe>');
           document.write('</div>');
         //  -->
