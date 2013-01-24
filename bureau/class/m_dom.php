@@ -162,7 +162,6 @@ class m_dom {
 
   function domains_type_update($name, $description, $target, $entry, $compatibility, $enable, $only_dns, $need_dns,$advanced,$create_tmpdir,$create_targetdir) {
     global $err,$cuid,$db;
-    $id=intval($id);
     // The name MUST contain only letter and digits, it's an identifier after all ...
     if (!preg_match("#^[a-z0-9]+$#",$name)) {
       $err->raise("dom", _("The name MUST contain only letter and digits"));
