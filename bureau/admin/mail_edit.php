@@ -92,8 +92,9 @@ if (isset($error)) {
       </p>
       <div id="poptbl">
 	<table class="tedit" >
-	  <tr><td><label for="pass"><?php __("Enter a POP/IMAP password"); ?></label></td><td><input type="password" class="int" name="pass" id="pass" value="" size="20" maxlength="32" /><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#pass","#passconf"); ?></td></tr>
-	  <tr><td><label for="passconf"><?php __("Confirm password"); ?></label></td><td><input type="password" class="int" name="passconf" id="passconf" value="" size="20" maxlength="32" /></td></tr>
+          <tr id='mail_edit_pass' style='display: none;'><td colspan=2><a href='javascript:mail_edit_pass();'><?php __("Click here to edit the existing password");?></a></td></tr>
+	  <tr id='mail_edit_pass1'><td><label for="pass"><?php __("Enter a POP/IMAP password"); ?></label></td><td><input type="password" class="int" name="pass" id="pass" value="" size="20" maxlength="32" /><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#pass","#passconf"); ?></td></tr>
+	  <tr id='mail_edit_pass2'><td><label for="passconf"><?php __("Confirm password"); ?></label></td><td><input type="password" class="int" name="passconf" id="passconf" value="" size="20" maxlength="32" /></td></tr>
 	  <tr><td><label for="quotamb"><?php __("Maximum allowed size of this Mailbox"); ?></label></td><td><input type="text" class="int intleft" style="text-align: right" name="quotamb" id="quotamb" value="<?php ehe($quotamb); ?>" size="7" maxlength="6" /><span class="int intright"><?php __("MB"); ?></span></td></tr>
 	</table>
       </div>
@@ -144,5 +145,18 @@ function popon() {
     $('#quotamb').removeAttr("disabled");
     $('#passconf').removeAttr("disabled");
 }
+
+function mail_edit_pass() {
+  $('#mail_edit_pass').toggle();
+  $('#mail_edit_pass1').toggle();
+  $('#mail_edit_pass2').toggle();
+}
+
 </script>
-<?php include_once("foot.php"); ?>
+<?php 
+if (isset($res) && !empty($res['password']) ) { 
+  echo '<script type="text/javascript">mail_edit_pass();</script>';
+} // if $islocal 
+
+include_once("foot.php"); 
+?>
