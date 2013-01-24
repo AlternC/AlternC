@@ -80,11 +80,8 @@ $dom->unlock();
             break;
           case "DIRECTORY": ?>
             <input type="text" class="int" name="t_<?php echo $dt['name']?>" id="t_<?php echo $dt['name']?>" value="<?php ehe($targval); ?>" size="28" />
-            <script type="text/javascript">
-            <!--
-            document.write("&nbsp;<input type=\"button\" name=\"bff\" onclick=\"browseforfolder('main.t_<?php echo $dt['name'];?>');\" value=\" <?php __("Choose a folder..."); ?> \" class=\"bff\">");
-            //  -->
-            </script><?php
+						<?php display_browser( $targval , "main.t_".$dt['name'] ); ?>
+						<?php
             break;
           case "URL": ?>
 			        <input type="text" class="int" name="t_<?php echo $dt['name']?>" id="t_<?php echo $dt['name']?>" value="<?php ehe( (empty($targval)?'http://':$targval) ); ?>" size="50" />

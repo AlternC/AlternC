@@ -73,11 +73,9 @@ if (isset($error) && $error) {
       <th><label for="dir"><?php __("Folder"); ?></label></th>
       <td>
         <input type="text" class="int" name="dir" id="dir" value="<?php empty($dir)?@ehe("/".$r[0]["dir"]):@ehe($dir); ?>" size="20" maxlength="64" />
-	<script type="text/javascript">
-	<!--
-	  document.write("&nbsp;<input type=\"button\" name=\"bff\" onclick=\"browseforfolder('main.dir');\" value=\" <?php __("Choose a folder..."); ?> \" class=\"bff\">");
-	//  -->
-	</script>
+				<?php display_browser( empty($dir)?("/".$r[0]["dir"]):$dir , "main.dir" ); ?>
+		<p><?php __("This is the root folder for this FTP user. i.e. this FTP user can access to this forlder and all its sub-folders."); ?></p>
+		
       </td>
     </tr>
     <tr>

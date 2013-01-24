@@ -433,11 +433,15 @@ function eoption($values,$cur,$info="") {
  * <input type="text" name="toto" value="<?php ehe($toto); ?>" />
  * Use the charset of the current language for transcription
  */
-function ehe($str) {
+function ehe($str,$affiche=1) {
   global $charset;
-  echo htmlspecialchars($str,ENT_QUOTES,$charset); 
+  $retour = htmlspecialchars($str,ENT_QUOTES,$charset); 
+  if ($affiche) {
+    echo $retour;
+  } else {
+    return $retour;
+  }
 }
-
 
 /* Get the Fields of the posted form from $_REQUEST or POST or GET
  * and check their type
@@ -602,6 +606,7 @@ function create_pass($length = 8){
 
 define("DEFAULT_PASS_SIZE", 8);
 
+/* Affiche un bouton qui permet de generer automatiquement des mots de passes */
 function display_div_generate_password($pass_size=DEFAULT_PASS_SIZE, $fields_to_fill1="", $fields_to_fill2="") {
   $id=rand(1,1000);
   echo "<div id='$id' style='display:none;'><a href=\"javascript:generate_password_html('$id',$pass_size,'$fields_to_fill1','$fields_to_fill2');\">";
@@ -609,6 +614,43 @@ function display_div_generate_password($pass_size=DEFAULT_PASS_SIZE, $fields_to_
   echo "</a></div>";
   echo "<script type='text/javascript'>$('#'+$id).show();</script>";
   return 0;
+}
+
+/* Affiche un bouton pour selectionner un dossier sur le serveur */
+function display_browser($dir="", $caller="main.dir", $width=350, $height=450) {
+  // Browser id
+  $bid="b".rand(1,1000);
+  echo "<script type=\"text/javascript\">
+        <!--
+          $(function() {
+              $( \"#".$bid."\" ).dialog({
+              autoOpen: false,
+              width: ".$width.",
+              height: ".$height.",
+              modal: true,
+              open: function()
+                {
+                    $('.ui-widget-overlay').css('opacity', .70);
+                },
+            });
+         
+            $( \"#bt".$bid."\" )
+              .button()
+              .click(function() {
+                $( \"#".$bid."\" ).dialog( \"open\" );
+                return false;
+              });
+          });
+          
+          
+          document.write('&nbsp;<input type=\"button\" id=\"bt".$bid."\" value=\""._("Choose a folder...")."\" class=\"bff\">');
+          document.write('<div id=\"".$bid."\" title=\""._("Choose a folder...")."\">');
+          document.write('  <iframe src=\"/browseforfolder2.php?caller=".$caller."&file=".ehe($dir, 0)."&bid=".$bid."\" width=\"".($width-25)."\" height=\"".($height-50)."\" frameborder=\"no\" id=\"browseiframe\"></iframe>');
+          document.write('</div>');
+        //  -->
+        </script>
+        ";
+  
 }
 
 
