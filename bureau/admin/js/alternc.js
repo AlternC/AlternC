@@ -94,8 +94,9 @@ function help(hid) {
 }
 
 function browseforfolder(caller) {
-        eval("file=document."+caller+".value");
+		eval("file=document."+caller+".value");
     w=window.open("browseforfolder.php?caller="+caller+"&file="+file,"browseforfolder","width=300,height=400,scrollbars,left=100,top=100");
+		alert("Please contact you administrator (the method 'browseforfolderdeprecated' is normaly deprecated).");
 }
 
 function CheckAll() {

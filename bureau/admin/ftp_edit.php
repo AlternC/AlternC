@@ -73,18 +73,22 @@ if (isset($error) && $error) {
       <th><label for="dir"><?php __("Folder"); ?></label></th>
       <td>
         <input type="text" class="int" name="dir" id="dir" value="<?php empty($dir)?@ehe("/".$r[0]["dir"]):@ehe($dir); ?>" size="20" maxlength="64" />
-				<?php display_browser( empty($dir)?("/".$r[0]["dir"]):$dir , "main.dir" ); ?>
+				<?php display_browser( empty($dir)?("/".( isset($r[0]["dir"])?$r[0]["dir"]:'') ):$dir , "main.dir" ); ?>
 		<p><?php __("This is the root folder for this FTP user. i.e. this FTP user can access to this forlder and all its sub-folders."); ?></p>
 		
       </td>
     </tr>
-    <tr>
+    <tr id='ftp_tr_pass1'>
       <th><label for="pass"><?php __("Password"); ?></label></th>
       <td><input type="password" class="int" name="pass" id="pass" size="20" maxlength="64" value=""/><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#pass","#passconf"); ?></td>
     </tr>
-    <tr>
+    <tr id='ftp_tr_pass2'>
       <th><label for="passconf"><?php __("Confirm password"); ?></label></th>
       <td><input type="password" class="int" name="passconf" id="passconf" size="20" maxlength="64" value=""/></td>
+    </tr>
+    <tr id='ftp_tr_editpass' style='display: none;'>
+      <th><label for="pass"><?php __("Password"); ?></label></th>
+      <td><a href="javascript:ftp_edit_pass_toggle();"><?php __("Click here if you want to edit password");?></a></td>
     </tr>
     <tr class="trbtn">
       <td colspan="2">
@@ -98,5 +102,19 @@ if (isset($error) && $error) {
 <script type="text/javascript">
 document.forms['main'].login.focus();
 document.forms['main'].setAttribute('autocomplete', 'off'); 
+
+function ftp_edit_pass_toggle() {
+  $('#ftp_tr_pass1').toggle();
+  $('#ftp_tr_pass2').toggle();
+  $('#ftp_tr_editpass').toggle();
+}
+
 </script>
-<?php include_once("foot.php"); ?>
+<?php 
+
+if (isset($id) && ! empty($id)) {
+  echo '<script type="text/javascript">ftp_edit_pass_toggle();</script>';
+}
+
+include_once("foot.php"); 
+?>

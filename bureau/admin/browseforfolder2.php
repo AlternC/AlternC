@@ -117,7 +117,7 @@ function retour() {
 </script>
 </head>
 <body onload="popupfile();">
-<h3><?php __("Searching for a folder ($bid)"); ?></h3>
+<h3><?php __("Searching for a folder"); ?></h3>
 <?php
 
 $ar=browseforfolder($file);
