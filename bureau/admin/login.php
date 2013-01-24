@@ -40,7 +40,7 @@ if (!$mem->checkid())
 
 $mem->resetlast();
 
-include("main.php");
+header("Location: main.php");
 exit;
 
 ?>
