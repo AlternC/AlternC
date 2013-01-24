@@ -283,11 +283,7 @@ if (count($c)) {
 <input type="submit" class="ina" name="actmove" value="<?php __("Move"); ?>" />
 <?php __("To"); ?> 
 <input type="text" class="int" name="actmoveto" value="" />
-<script type="text/javascript">
-<!--
-document.write("<input type=\"button\" name=\"bff\" onclick=\"browseforfolder('main.actmoveto');\" value=\" Choisir un r&eacute;pertoire \" class=\"bff\" />");
-//  -->
-</script>
+<?php display_browser( "" , "main.actmoveto" ); ?>
 
 </td></tr>
 
