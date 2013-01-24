@@ -30,27 +30,6 @@ case "$1" in
     # configure /etc/alternc/templates/apache/httpd.conf
     # configure /etc/alternc/templates/apache-ssl/httpd.conf
 
-    # FIXME : ALTERNC DEPENDS ON APACHE2, SO APACHE IS NO LONGER SUPPORTED
-    # REMOVE THE FOLLOWING COMMENTED LINE TO CLEAN THIS FILE
-
-    #if [ -x /usr/sbin/apache ]; then
-    #    if [ ! -h /etc/apache/conf.d/alterncawstats.conf ]; then
-    #        ln -sf /etc/alternc/alterncawstats.conf \
-    #            /etc/apache/conf.d/alterncawstats.conf
-    #    fi
-    #    # build awstats.log.alternc.conf if it does not exist
-    #    if [ ! -f $LOGAPACHE ]; then
-    #        cat > $LOGAPACHE <<EOF
-#LogFile directive isn't important here :
-#Awstats is launched with the good "LogFile" directive when called
-#LogFile="/var/log/apache/access.log"
-#LogFormat="%host %other %logname %time1 %methodurl %code %bytesd %refererquot %uaquot %other %virtualname"
-#EOF
-     #       chown alterncpanel:www-data $LOGAPACHE
-     #       chmod 640 $LOGAPACHE
-     #   fi
-     #fi
-
     if [ -x /usr/sbin/apache2 ]; then
         if [ ! -h /etc/apache2/conf.d/alterncawstats.conf ]; then
             ln -sf /etc/alternc/alterncawstats.conf \
@@ -64,9 +43,9 @@ case "$1" in
 LogFile="/var/log/apache2/access.log"
 LogFormat="%host %other %logname %time1 %methodurl %code %bytesd %refererquot %uaquot %other %virtualname"
 EOF
-            chown alterncpanel:www-data $LOGAPACHE
-            chmod 640 $LOGAPACHE
-        fi
+	fi
+        chown alterncpanel:root $LOGAPACHE
+        chmod 640 $LOGAPACHE
     fi
 
     if [ -x /usr/sbin/apache-ssl ]; then
@@ -89,7 +68,10 @@ EOF
     chmod 640 /etc/alternc/awstats.htpasswd
     chmod 755 /etc/awstats
     mkdir -p /var/cache/awstats
-    chown alterncpanel:www-data /var/cache/awstats
+    chown alterncpanel:root /var/cache/awstats
+
+    # Update rights on previous user's awstats configuration files
+    chown alterncpanel:alterncpanel /etc/awstats/awstats.*.conf > /dev/null 2>&1
 
     # ADD menu item :
     if ! grep -q "^menu_aws.php$" "$MENUFILE"; then
