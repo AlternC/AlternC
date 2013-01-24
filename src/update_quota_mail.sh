@@ -20,7 +20,7 @@ if [ $# -eq 1 ];then
 else
   #Fist we set the quotas no 0 (infinite for each already existing account
   t=`mysql_query "UPDATE mailbox SET quota='0' WHERE quota IS NULL"`
-  d="$ALTERNC_LOC/mail/*/*"
+  d=`find "$ALTERNC_LOC/mail/" -maxdepth 2 -mindepth 2 -type d`
 fi
 
 
@@ -30,10 +30,14 @@ for i in $d ; do
 
 	if [ -d "$i" ];then
 	  user=`ls -l $i| tail -n 1|cut -d' ' -f 3` 
-	  size=`du -s $i|awk '{print $1}'`
-
-	  #when counting mails we exclude specific files
-	  mail_count=`find $i  -type f -printf "%f\n"| egrep '^[0-9]+\.M'|wc -w` 
+	  size=0
+	  # We grep only mails, not the others files
+	  mails=`find $i -type f | egrep "(^$i)*[0-9]+\.M"`
+	  for j in $mails
+	  do
+	  	size=$(( $size + `du -b $j|awk '{print $1}'`))
+	  done
+	  mail_count=`echo $mails|wc -w` 
 	  echo "folder : "$i
 	  echo "mail count : "$mail_count
 	  echo "dir size : "$size
