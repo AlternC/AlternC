@@ -65,7 +65,7 @@ while (list($key,$val)=each($hl)) {
   $ho=$val["hostname"];
   $ty=$val["desc"];
   echo "<input type=\"checkbox\" name=\"hostaliases[]\" id=\"ha_$ho\" value=\"$ho\"";
-  if (in_array($ho,explode(" ",$hatab[0]))) echo " checked=\"checked\"";
+  if (in_array($ho,@explode(" ",$hatab[0]))) echo " checked=\"checked\"";
   echo " /><label for=\"ha_$ho\">$ho ($ty)</label><br />\n";
 }
 ?>
