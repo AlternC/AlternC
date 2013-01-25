@@ -1,5 +1,5 @@
 #!/bin/bash
-. /etc/alternc/local.sh
+set -x
 AWK=/usr/bin/awk
 DF=/bin/df
 SED=/bin/sed
@@ -9,6 +9,7 @@ GREP=/bin/grep
 WC=/usr/bin/wc
 BLKID=/sbin/blkid
 MID=$1
+
 
 if [ "x$MID" == "x" ] ; then
   echo "Usage: quota_get <uid>"
@@ -39,25 +40,22 @@ if [ -z "$QUOTA_PART" ]; then
     UUID=$( $BLKID | grep "$QUOTA_PART" | cut -f2 -s -d" " | sed 's/\(UUID="\)\(.*\)\(\"$\)/\2/')
 fi
 
-#We check that quotas are activated on the right partition
-quot=$(sudo quota -A -wg "$MID" | awk 'NR==3 { print $1; }')
-part=$( $BLKID | grep "$quot" | cut -f2 -s -d" " | sed 's/\(UUID="\)\(.*\)\(\"$\)/\2/')
-
-# If the quotas are activated on another part we return 0 meaning that the quotas are infinite
-if [ "$UUID" != "$part" ]; then
-      echo -e "0\n0"
-      exit 0
-fi
+quot=$(sudo quota -wvg "$MID" | grep "$QUOTA_PART" | $AWK 'NR==1 {print $1;}' )
 
 # Now we get the quota 
-val=$(sudo quota -A -wg "$MID" | awk 'NR==3 { print $2 "\n" $3; }')
-
+#first by testing if the partition is referenced by UUID
+val=$(sudo quota -vwg "$MID" |grep "$UUID" | awk 'END { print $2 "\n" $3; }')
 if [ -z "$val" ] ; then
+    val=$(sudo quota -A -wg "$MID" |grep "$QUOTA_PART" | awk '{ print $2 "\n" $3; }')
+
     # If the quota aren't activated, I return something anyway
-    if [ "$UUID" != "$part" ]; then
-      echo -e "0\n0"
+    if [ -z "$val" ] ; then
+        echo -e "0\n0"
+    else
+        echo -e "0\n0"
     fi
-else
+
+else   
         echo -e "$val"
 fi
 
