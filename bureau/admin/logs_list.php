@@ -37,37 +37,38 @@ $list=$log->list_logs_directory_all($log->get_logs_directory());
 <br />
 <?php
 if (isset($error) && $error) {
-	echo "<p class=\"error\">$error</p>";
+  echo "<p class=\"error\">$error</p>";
 }
 if(!$list || empty($list['dir'])){
-	echo "<p class=\"error\">"._("You have no web logs to list a the moment.")."</p>";  
-	include_once('foot.php');
-	exit;
+  echo "<p class=\"error\">"._("You have no web logs to list a the moment.")."</p>";  
+  include_once('foot.php');
+  exit;
 }
 ?>
 <p>
 <?php __("Here are web logs of your account.<br/>You can download them to do specific extract and statistics.");?>
 </p>
 <table class="tlist">
-<tr><th><?php __("Name");?></th><th align=center><?php __("Creation Date"); ?></th><th><?php __("Size"); ?></th><th><?php __("Download link");?></th></tr>
+  <thead>
+    <tr><th><?php __("Name");?></th><th align=center><?php __("Creation Date"); ?></th><th><?php __("Size"); ?></th><th><?php __("Download link");?></th></tr>
+  </thead>
+  <tbody>
 <?php
-
 $col=1;
 //listing of every logs of the current user.
-echo "<pre>";
 while (list($key,$val)=each($list)){
-	$col=3-$col;
-	foreach($val as $k => $v){
-	?>
-	<tr>
-	<td><?php echo $v['name']; ?></td>	
-	<td><?php echo $v['creation_date']; ?></td>	
-	<td><?php echo format_size($v['filesize']); ?></td>	
-	<td><?php echo "<a href=\"".$v['downlink']."\">"._("Download")."</a>";?></td>
-	</tr>
-
+  foreach($val as $k => $v){
+  $col=3-$col;
+  ?>
+  <tr class="lst<?php echo $col; ?>">
+  <td><?php echo $v['name']; ?></td>  
+  <td><?php echo $v['creation_date']; ?></td>  
+  <td><?php echo format_size($v['filesize']); ?></td>  
+  <td><?php echo "<a href=\"".$v['downlink']."\">"._("Download")."</a>";?></td>
+  </tr>
 <?php
-}
-}
+  } //foreach
+} // while
 ?>
+  </tbody>
 </table>
