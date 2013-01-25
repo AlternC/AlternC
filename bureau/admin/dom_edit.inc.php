@@ -109,7 +109,7 @@ $dom->unlock();
     <?php } // foreach ?>
 
 		<tr class="trbtn">
-			<td colspan="2"><input type="submit" class="inb" name="add" value="<?php
+			<td colspan="2"><input type="submit" class="inb" name="add" onclick='return check_type_selected();' value="<?php
    if ($isedit) {
  __("Edit this subdomain");
 } else {
@@ -121,6 +121,16 @@ $dom->unlock();
 </form>
 
 <script type="text/javascript">
+
+function check_type_selected() {
+  if ( $('input[name=type]:radio:checked').val() ) {
+    // there is a value
+    return true;
+  }
+  alert("<?php __("Please select a type for this sub-domain"); ?>");
+  return false;
+}
+
 function domtype_advanced_hide() { 
   <?php foreach ($lst_advanced as $adv) echo "$(\"#tr_$adv\").hide();\n"?>
   $("#domtype_show").show();
