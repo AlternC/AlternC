@@ -77,7 +77,7 @@ class m_ftp {
     global $db,$err,$cuid;
     $err->log("ftp","get_list");
     $r=array();
-    $db->query("SELECT id, name, homedir FROM ftpusers WHERE uid='$cuid' ORDER BY homedir;");
+    $db->query("SELECT id, name, homedir FROM ftpusers WHERE uid='$cuid' ORDER BY name;");
     if ($db->num_rows()) {
       while ($db->next_record()) {
 	      // On passe /var/alternc/html/u/user

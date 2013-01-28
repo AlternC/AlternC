@@ -30,12 +30,14 @@
 require_once("../class/config.php");
 include_once("head.php");
 
-$fields = array (
-	"id"      => array ("request", "integer", ""),
-	"create"  => array ("get", "integer", "0"),
-	"dir"     => array ("get", "string", "0"),
-);
-getFields($fields);
+if ( !isset($is_include) ) {
+  $fields = array (
+    "id"      => array ("request", "integer", ""),
+    "create"  => array ("get", "integer", "0"),
+    "dir"     => array ("get", "string", "0"),
+  );
+  getFields($fields);
+}
 
 if (!$id && !$create) {
   $error=_("Neither a creation nor a edition");
@@ -47,8 +49,8 @@ if (!$id && $create) { //creation
   echo "<h3>"._("Create a FTP account")."</h3>";
 } else {
    echo "<h3>"._("Editing a FTP account")."</h3>";
-  $r=$ftp->get_ftp_details($id);
-  if (!$r) {
+  $rr=$ftp->get_ftp_details($id);
+  if (!$rr) {
     $error=$err->errstr();
   }
 }
@@ -57,8 +59,6 @@ if (!$id && $create) { //creation
 <?php
 if (isset($error) && $error) {
 	echo "<p class=\"error\">$error</p>";
-	include_once("foot.php");
-	exit();
 }
 ?>
 <form method="post" action="ftp_doedit.php" name="main" id="main">
@@ -67,13 +67,13 @@ if (isset($error) && $error) {
   <table border="1" cellspacing="0" cellpadding="4" class="tedit">
     <tr>
       <th><label for="login"><?php __("Username"); ?></label></th>
-      <td><select class="inl" name="prefixe"><?php @$ftp->select_prefix_list($r["prefixe"]); ?></select>&nbsp;<b>_</b>&nbsp;<input type="text" class="int" name="login" id="login" value="<?php @ehe($r[0]["login"]); ?>" size="20" maxlength="64" /></td>
+      <td><select class="inl" name="prefixe"><?php @$ftp->select_prefix_list($rr[0]["prefixe"]); ?></select>&nbsp;<b>_</b>&nbsp;<input type="text" class="int" name="login" id="login" value="<?php @ehe($rr[0]["login"]); ?>" size="20" maxlength="64" /></td>
     </tr>
     <tr>
       <th><label for="dir"><?php __("Folder"); ?></label></th>
       <td>
-        <input type="text" class="int" name="dir" id="dir" value="<?php empty($dir)?@ehe("/".$r[0]["dir"]):@ehe($dir); ?>" size="20" maxlength="64" />
-				<?php display_browser( empty($dir)?("/".( isset($r[0]["dir"])?$r[0]["dir"]:'') ):$dir , "main.dir" ); ?>
+        <input type="text" class="int" name="dir" id="dir" value="<?php empty($dir)?@ehe("/".$rr[0]["dir"]):@ehe($dir); ?>" size="20" maxlength="64" />
+				<?php display_browser( empty($dir)?("/".( isset($rr[0]["dir"])?$rr[0]["dir"]:'') ):$dir , "main.dir" ); ?>
 		<p><?php __("This is the root folder for this FTP user. i.e. this FTP user can access to this forlder and all its sub-folders."); ?></p>
 		
       </td>
@@ -92,7 +92,7 @@ if (isset($error) && $error) {
     </tr>
     <tr class="trbtn">
       <td colspan="2">
-        <input type="submit" class="inb" name="submit" value="<?php __("Save"); ?>" />
+        <input type="submit" class="inb" name="submit" value="<?php __("Save"); ?>" onclick='return ftp_check_pass();' />
         <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='ftp_list.php'"/>
       </td>
     </tr>
@@ -107,6 +107,20 @@ function ftp_edit_pass_toggle() {
   $('#ftp_tr_pass1').toggle();
   $('#ftp_tr_pass2').toggle();
   $('#ftp_tr_editpass').toggle();
+}
+
+function ftp_check_pass() {
+  if ( $('#pass').val() != $('#passconf').val() ) {
+    alert('<?php __("Password do not match"); ?>');
+    return false;
+  }
+  if ( $('#pass').val() == '' ) {
+    // Check if it's a edtion or a creation
+    if ( <?php echo (isset($id) && ! empty($id))?'true':'false' ?> ) { return true ; }
+    alert('<?php __("Please enter a password"); ?>');
+    return false;
+  }
+  return true;
 }
 
 </script>

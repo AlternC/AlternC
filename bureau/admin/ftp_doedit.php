@@ -29,21 +29,23 @@
 */
 require_once("../class/config.php");
 $fields = array (
-	"id"    		=> array ("post", "integer", ""),
-	"create"    		=> array ("post", "integer", ""),
-	"pass"    		=> array ("post", "string", ""),
-	"passconf"    		=> array ("post", "string", ""),
-	"prefixe"    		=> array ("post", "string", ""),
-	"login"    		=> array ("post", "string", ""),
-	"dir"    		=> array ("post", "string", ""),
+  "id"        => array ("post", "integer", ""),
+  "create"        => array ("post", "integer", ""),
+  "pass"        => array ("post", "string", ""),
+  "passconf"        => array ("post", "string", ""),
+  "prefixe"        => array ("post", "string", ""),
+  "login"        => array ("post", "string", ""),
+  "dir"        => array ("post", "string", ""),
 );
 getFields($fields);
 
 
 if ($pass != $passconf) {
-	$error = _("Passwords do not match");
-	include("ftp_edit.php");
-	exit();
+  $error = _("Passwords do not match");
+  include_once("head.php");
+  echo "<h3>"._("Create a FTP account")."</h3><p class=\"error\">$error</p>";
+  include("foot.php");
+  exit();
 }
 
 if (! $id && !$create) { //not a creation and not an edit
@@ -59,22 +61,17 @@ if (! $id ) { //create
 }
 
 if (!$r) {
-	$error=$err->errstr();
-	include("ftp_edit.php");
-	exit();
+  $error=$err->errstr();
+  $is_include=true;
+  $rr[0]["prefixe"]=$prefixe;
+  $rr[0]["login"]=$login;
+  $rr[0]["dir"]=$dir;
+  include_once("ftp_edit.php");
+  exit();
 } else {
-	$error=_("The ftp account has been successfully changed");
-	include("ftp_list.php");
-	exit();
+  $error=_("The ftp account has been successfully changed");
+  include("ftp_list.php");
+  exit();
 }
 
-include_once("head.php");
-
 ?>
-<div align="center"><h3><?php __("Editing an FTP account"); ?></h3></div>
-<?php
-	if (isset($error) && $error) {
-		echo "<p class=\"error\">$error</p>";
-	}
-?>
-<?php include_once("foot.php"); ?>
