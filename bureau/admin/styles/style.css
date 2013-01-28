@@ -40,7 +40,7 @@ th {
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 11px;
 	color: black;
-	background: #F1F8FD;
+	background: #ABCDE4;
 	font-weight: normal;
 	text-align: left;
 }
@@ -106,32 +106,42 @@ hr {
     background-color: #BFD3E1;
 }
 
-.ina:hover, .ina, .inav, .inav:hover {
+input.ina:hover, input.ina, input.inav, input.inav:hover {
 	border: 1px solid #999;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 10px;
 	padding: 2px 4px 2px 4px;
 	color: black;
 	cursor: pointer;
+	/*float: right;*/
 }
-.ina {
+input.ina, .ina a {
 	background-color: #F1F8FD;
 }
-.ina:hover, .inav {
+input.ina:hover, .ina a:hover,
+input.inav, .inav a {
 	background-color: #CFE3F1;
 }
-.inav:hover {
+input.inav:hover, .inav a:hover, a.inav:hover {
 	background-color: #F1F8FD;
 }
 
-.ina-active {
+.ina-active a, a.ina-active, input.ina-active {
 	background-color: #C1FFCD;
 }
 
-.ina a, .inav a {
-    color: black;
+.ina a, a.ina, .inav a, a.inav {
+	color: black;
+	white-space: nowrap;
+	
+	border: 1px solid #999;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	padding: 4px;
+	color: black;
+	cursor: pointer;
 }
-.ina a:hover, .inav a:hover {
+.ina a:hover, a.ina:hover, .inav a:hover, a.inav:hover {
     text-decoration: none;
     color: black;
 }
@@ -166,10 +176,11 @@ hr {
     padding-left: 0px;
 }
 
-.lst1 {
-	background-color: #F1F8FD;
-}
 .lst2 {
+	/*background-color: #F1F8FD;*/
+	background-color: #E7F0F9;
+}
+.lst1 {
 	background-color: #CFE3F1;
 }
 
@@ -435,11 +446,34 @@ span#emaildom {
             padding: 10px;
  }
 
-.tlist, .tlist td, .tlist th { 
+.tlist, .tlist td, .tlist th,
+.tlist2, .tlist2 td, .tlist2 th { 
          padding: 4px;
          margin: 0;
          border-collapse: collapse;
  }
+
+.tlist {
+	width: 100%;
+	}
+
+.tlistb, .tlistb td, .tlistb th { 
+         padding: 4px;
+         margin: 0;
+         border-collapse: collapse;
+ }
+
+table.tlistb, .tlistb tr {
+	border: solid 1px #AAA;
+}
+
+.tlist tr:hover, .tlist2 tr:hover {
+	background-color: #F1D5CF;
+	}
+
+.tlist th, .tlist2 th {
+	font-weight: bold;
+}
 
 input#dir, input#sub_local { 
        width: 200px;

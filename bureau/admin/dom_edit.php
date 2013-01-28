@@ -114,7 +114,7 @@ if ($r['dns_action']=='UPDATE') {?>
 		 gestion des sous-domaines
  -->
 <table class="tlist">
-<tr><th colspan="2"> </th><th><?php __("Subdomain"); ?></th><th><?php __("Type");?></th><th><?php __("Status")?></th></tr>
+<tr><th colspan="2"> </th><th><?php __("Subdomain"); ?></th><th><?php __("Type");?></th><th><?php __("Status")?></th><th></th></tr>
 <?php
 $col=1;
 $dt=$dom->domains_type_lst();
@@ -203,7 +203,7 @@ if (!$r['noerase']) {
 <h3><?php __("DNS & Email parameters"); ?></h3>
 <form action="dom_editdns.php?domain=<?php echo urlencode($r["name"]) ?>" method="post" id="fdns" name="fdns" onSubmit="return destruction_alert();">
 
-<table class="tlist">
+<table class="tlist2">
 <tr>
   <td><?php __("Manage the DNS on the server ?"); ?></td>
   <td> 
@@ -213,7 +213,7 @@ if (!$r['noerase']) {
 </tr>
 </table>
 
-<table class="tlist">
+<table class="tlist2">
 <tr>
   <td>
     <?php __("Manage the Emails Addresses of this domain on the server?"); ?>

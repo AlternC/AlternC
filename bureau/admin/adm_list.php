@@ -116,7 +116,7 @@ if ($mem->user["admlist"]==0) { // Normal (large) mode
 <?php } ?>
 </td>
 <td  class="trbtn" colspan="4">
-<span class="inav"><a href="adm_list.php?short=1"><?php __("Minimal view"); ?></a></span> &nbsp;
+<span class="ina"><a href="adm_list.php?short=1"><?php __("Minimal view"); ?></a></span> &nbsp;
 </td>
 </tr>
 <tr>
@@ -199,7 +199,7 @@ if ($mem->user["admlist"]==1) { // SHORT MODE
 <?php } ?>
 </td>
 <td  class="trbtn" colspan="5">
-<span class="inav"><a href="adm_list.php?short=0"><?php __("Complete view"); ?></a></span>
+<span class="ina"><a href="adm_list.php?short=0"><?php __("Complete view"); ?></a></span>
 </td>
 </tr>
 <tr>

@@ -61,20 +61,24 @@ $lac = $authip->list_affected();
 
 <table class="tlist">
 <tr>
-  <th><?php __("Protocol");?></th>
-  <th><?php __("Target");?></th>
-  <th><?php __("IP address");?></th>
+  <th><?php __("Authorised IP address or network");?></th>
+  <th><?php __("Access type");?></th>
+  <th></th>
 </tr>
 <?php 
   $col=1;
   foreach ($lac as $ll) {
     $col=3-$col;
     echo "<tr class='lst$col' >";
-    echo "<td>".$ac[$ll['protocol']]['name']."</td>";
-    echo "<td>".(isset($ac[$ll['protocol']]['values'][$ll['parameters']])?$ac[$ll['protocol']]['values'][$ll['parameters']]:'')."</td>";
-    echo "<td>".$list_ip[$ll['authorised_ip_id']]['infos']."<br/>".$list_ip[$ll['authorised_ip_id']]['ip_human']."</td>"; ?>
-    <td><div class="ina"><a href="ip_main.php?delete_affected_id=<?php echo urlencode($ll["id"]) ?>"><img src="images/delete.png" alt="<?php __("Delete")?>" /><?php __("Delete"); ?></a></div></td>
-  <?php
+    echo "<td><pan title=\"{$list_ip[$ll['authorised_ip_id']]['ip_human']}\">".$list_ip[$ll['authorised_ip_id']]['infos'];
+    //echo "<br/>".$list_ip[$ll['authorised_ip_id']]['ip_human'];
+    echo "</span></td>";
+    echo "<td>".$ac[$ll['protocol']]['name'];
+    if (isset($ac[$ll['protocol']]['values'][$ll['parameters']]) && $ac[$ll['protocol']]['values'][$ll['parameters']]) {
+      echo " "._("for")." ".$ac[$ll['protocol']]['values'][$ll['parameters']];
+    }
+    echo "</td>";
+    echo '<td><div class="ina"><a href="ip_main.php?delete_affected_id='.urlencode($ll["id"]).'"><img src="images/delete.png" alt="'._("Delete").'" />'._("Delete").'</a></div></td>';
     echo "</tr>";
   }
 ?>
@@ -84,15 +88,11 @@ $lac = $authip->list_affected();
 <hr/>
 <h3><?php __("Add a new rule"); ?></h3>
 <form method="post" action="ip_main.php" name="main" id="main">
-<table class="tlist">
-  <thead>
-    <th><?php __("Target"); ?></th>
-    <th><?php __("IP address (or subnet)"); ?></th>
-    <td/>
-  </thead>
+<table class="tlistb">
   <tbody>
     <tr valign="top">
-    <td>
+    <th><?php __("Access type"); ?></th>
+    <td class="lst2">
       <?php foreach ($ac as $a) { ?>
         <p>
         <input type="radio" name="s_protocol" id="s_protocol_<?php echo htmlentities($a['protocol']);?>" value="<?php echo htmlentities($a['protocol']);?>" />
@@ -112,78 +112,82 @@ $lac = $authip->list_affected();
         <?php } ?>
         </p>
       <?php } ?>
-    </td><td valign="middle">
+    </td>
+    </tr>
+    <tr>
+    <th><?php __("Authorized IP address or network"); ?></th>
+    <td valign="middle" class="lst2">
       <p>
       <select name="s_ipsub">
         <?php foreach ($list_ip as $li) { ?>
-          <option value="<?php echo $li['id']; ?>"><?php echo htmlentities($li['infos']); echo " - ".$li['ip'] ; if (!($li['subnet']==32 || $li['subnet'] == 128)) echo "/".$li['subnet'];?></option>
+          <option value="<?php echo $li['id']; ?>"><?php echo htmlentities($li['infos']); 
+            //echo " - ".$li['ip'] ; if (!($li['subnet']==32 || $li['subnet'] == 128)) echo "/".$li['subnet'];
+            ?></option>
         <?php } ?>
       </select>
       </p>
     </td>
-    <td valign=middle>
+    </tr>
+    <tr>
+    <th>&nbsp;</th>
+    <td valign=middle class="lst2">
       <input type="submit" class="inb" value="<?php __("Save")?>" />
     </td>
     </tr>
   </tbody>
 </table>
 </form>
-
+<p><?php __("You need to have some 'Known IP and networks' defined below to define a new rule.") ?></p>
+<br/>
 <hr/>
 <h3><?php __("Known IP and networks");?></h3>
 <table class="tlist">
-  <tr>
-    <td valign=top width=40%> 
-      <table>
-      <tr><th><?php __("Type"); ?></th><th><?php __("IP"); ?></th><th><?php __("Informations"); ?></th><th colspan=2/></tr>
-      <?php 
-      $col=1;
-      foreach($list_ip as $i) {
-        $col=3-$col;
-        if (checkip($i['ip'])) {
-          if ($i['subnet']==32) {
-            $txt="Address IPv4";
-          } else {
-            $txt="Subnet IPv4";
-          }
-        } elseif (checkipv6($i['ip'])) {
-          if ($i['subnet']==128) {
-            $txt="Address IPv6";
-          } else {
-            $txt="Subnet IPv6";
-          }
-        } 
-        echo "<tr class='lst$col' ><td>$txt</td><td>{$i['ip_human']}</td><td>{$i['infos']}</td>";
-        ?>
-        <td><div class="ina"><a href="javascript:edit_ip(<?php echo "'".htmlentities($i['id'])."','".htmlentities($i['ip_human'])."','".htmlentities($i['infos'])."'"; ?>);"><img src="images/edit.png" alt="<?php __("Edit"); ?>" /><?php __("Edit"); ?></a></div></td>
-        <td><div class="ina"><a href="ip_main.php?delete_id=<?php echo urlencode($i["id"]) ?>"><img src="images/delete.png" alt="<?php __("Delete"); ?>" /><?php __("Delete"); ?></a></div></td>
-        </tr>
-
-      <?php } ?>
-      </table>
-    </td>
-    <td valign=top width=40%>
-      <fieldset>
-        <legend><?php __("Add an IP");?> - <a href="javascript:edit_ip('','<?php echo htmlentities(get_remote_ip())."','Home IP'";?>);" ><?php echo __("Add my current IP"); ?></a></legend>
-        <span id="form_add_ip">
-        <form method="post" action="ip_main.php" name="main" id="main">
-          <p id="reset_edit_ip" style="display:none;"><a href="javascript:reset_edit_ip();"><?php __("Cancel edit")?></a></p>
-          <input type="hidden" name="id" value="" id="edit_id" >
-          <p>
-            <?php __("Enter here the IP address you want. <br/> <i>IPv4, IPv6 and subnet allowed</i>"); ?> <br/>
-            <input type="text" size=20 maxlength=39 name="ipsub" id="edit_ip" />
-          </p>
-          <p>
-            <?php __("Add a comment");?><br/>
-            <input type="text" size=25 maxlength=200 name="infos" id="edit_infos" />
-          </p>
-          <input type="submit" class="inb" value="<?php __("Save")?>" />
-        </form>
-        </span>
-      </fieldset>
-    </td>
+<tr><th><?php __("Name"); ?></th><th><?php __("IP or network"); ?></th><th><?php __("Type"); ?></th><th colspan=2/></th></tr>
+<?php 
+$col=1;
+foreach($list_ip as $i) {
+  $col=3-$col;
+  if (checkip($i['ip'])) {
+    if ($i['subnet']==32) {
+      $txt="Address IPv4";
+    } else {
+      $txt="Subnet IPv4";
+    }
+  } elseif (checkipv6($i['ip'])) {
+    if ($i['subnet']==128) {
+      $txt="Address IPv6";
+    } else {
+      $txt="Subnet IPv6";
+    }
+  } 
+  echo "<tr class='lst$col' ><td>{$i['infos']}</td><td>{$i['ip_human']}</td><td>$txt</td>";
+  ?>
+  <td><div class="ina"><a href="javascript:edit_ip(<?php echo "'".htmlentities($i['id'])."','".htmlentities($i['ip_human'])."','".htmlentities($i['infos'])."'"; ?>);"><img src="images/edit.png" alt="<?php __("Edit"); ?>" /><?php __("Edit"); ?></a></div></td>
+  <td><div class="ina"><a href="ip_main.php?delete_id=<?php echo urlencode($i["id"]) ?>"><img src="images/delete.png" alt="<?php __("Delete"); ?>" /><?php __("Delete"); ?></a></div></td>
   </tr>
+
+<?php } ?>
 </table>
+<br/>
+<hr/>
+<h3><?php __("Add an IP or a networks");?></h3>
+
+<p><a href="javascript:edit_ip('','<?php echo htmlentities(get_remote_ip())."','Home IP'";?>);" ><?php echo __("Add my current IP"); ?></a></p>
+<span id="form_add_ip">
+<form method="post" action="ip_main.php" name="main" id="main">
+  <p id="reset_edit_ip" style="display:none;"><a href="javascript:reset_edit_ip();"><?php __("Cancel edit")?></a></p>
+
+  <input type="hidden" name="id" value="" id="edit_id" >
+  <table class="tlistb">
+  <tr><th><?php __("Name"); ?></th><th><?php __("IP or network. <i>IPv4, IPv6 and subnet allowed</i>"); ?></th><th></th></tr>
+  
+  <tr class="lst2">
+    <td><input type="text" size=20 maxlength=39 name="ipsub" id="edit_ip" /></td>
+    <td><input type="text" size=25 maxlength=200 name="infos" id="edit_infos" /></td>
+    <td><input type="submit" class="inb" value="<?php __("Save")?>" /></td>
+  </tr>
+</form>
+</span>
 
 <script type="text/javascript">
   function reset_edit_ip() {
