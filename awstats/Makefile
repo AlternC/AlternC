@@ -19,10 +19,10 @@
 install:
 	install -m 0644 -g root -o root alterncawstats.conf $(DESTDIR)/etc/alternc/
 	install -m 0755 -g root -o root logresolvemerge.pl $(DESTDIR)/usr/lib/alternc/
-	install -m 0644 -g alterncpanel -o root awstats_alternc.png $(DESTDIR)/usr/share/awstats/icon/other/
-	install -m 0755 -g alterncpanel -o root alternc-awstats $(DESTDIR)/usr/lib/alternc/
-	install -m 0755 -g alterncpanel -o root awstats.cache.php $(DESTDIR)/usr/lib/alternc/
+	install -m 0644 -g 1999 -o root awstats_alternc.png $(DESTDIR)/usr/share/awstats/icon/other/
+	install -m 0755 -g 1999 -o root alternc-awstats $(DESTDIR)/usr/lib/alternc/
+	install -m 0755 -g 1999 -o root awstats.cache.php $(DESTDIR)/usr/lib/alternc/
 	install -m 0644 awstats.sql $(DESTDIR)/usr/share/alternc/
-	install -m 0644 -g alterncpanel -o root awstats.template.conf $(DESTDIR)/etc/alternc/templates/awstats/
-	install -m 0644 -g alterncpanel -o root awstats.alternc.generic.conf $(DESTDIR)/etc/alternc/
+	install -m 0644 -g 1999 -o root awstats.template.conf $(DESTDIR)/etc/alternc/templates/awstats/
+	install -m 0644 -g 1999 -o root awstats.alternc.generic.conf $(DESTDIR)/etc/alternc/
 	#install -m 0444 lintian-override $(DESTDIR)/usr/share/lintian/overrides/alternc-awstats
