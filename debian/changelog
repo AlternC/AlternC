@@ -7,7 +7,6 @@ alternc (3.0~rc3) unstable; urgency=low
   * #1404 (Erreurs en wheezy lors de alternc.install) closed by axel
   * #1400 (Alternc slavedns ne s'installe pas) closed by axel
   * #1414 (erreur spoolsize.php) closed by axel
-  * #1419 (AlternC 3.0 version Wheezy) created by axel
   * #1413 (Récupération de mails à l'installation d'AlternC - dovecot) closed by axel
   * #1416 (buildstatic.sh produit une erreur) closed by axel
   * #1417 (problème lors de la génération des stats) closed by axel
