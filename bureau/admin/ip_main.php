@@ -131,7 +131,7 @@ $lac = $authip->list_affected();
     <tr>
     <th>&nbsp;</th>
     <td valign=middle class="lst2">
-      <input type="submit" class="inb" value="<?php __("Save")?>" />
+      <input type="submit" class="inb" value="<?php __("Save")?>" onclick='return check_accesstype_selected();' />
     </td>
     </tr>
   </tbody>
@@ -205,6 +205,15 @@ foreach($list_ip as $i) {
     $("#edit_infos").val(infos);
     $("#edit_ip").val(iph);
   }
+
+function check_accesstype_selected() {
+  if ( $('input[name=s_protocol]:radio:checked').val() ) {
+    // there is a value
+    return true;
+  }
+  alert("<?php __("Please select an access type"); ?>");
+  return false;
+}
 
 </script>
 <?php include_once("foot.php"); ?>
