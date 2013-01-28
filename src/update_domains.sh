@@ -166,7 +166,7 @@ for slave in $ALTERNC_SLAVES; do
     fi
 done
 
-rm -f "$LOCK_FILE" "$RELOAD_ZONES" "$RELOAD_WEB" "$DNS_DO_RESTART"
+rm -f "$LOCK_FILE" "$RELOAD_ZONES" "$RELOAD_WEB" "$DNS_DO_RESTART" "$INOTIFY_UPDATE_DOMAIN"
 
 exit 0
 

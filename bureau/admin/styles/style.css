@@ -502,3 +502,8 @@ input#dir, input#sub_local {
 .grey, .grey td {
   color: #999;
 }
+
+.retour-auto {
+  max-width:220px; 
+  word-wrap:break-word;
+}

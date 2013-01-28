@@ -88,6 +88,7 @@ bureau/admin/adm_tldadd.php -text
 bureau/admin/adm_tlddoadd.php -text
 bureau/admin/adm_tlddoedit.php -text
 bureau/admin/adm_tldedit.php -text
+bureau/admin/adm_update_domains.php -text
 bureau/admin/adm_variables.php -text
 bureau/admin/aide/files/browser_set.png -text
 bureau/admin/aide/files/ftp_add.png -text
@@ -488,6 +489,7 @@ etc/alternc/templates/default/saslauthd -text
 etc/alternc/templates/dovecot/dovecot-dict-quota.conf -text
 etc/alternc/templates/dovecot/dovecot-sql.conf -text
 etc/alternc/templates/dovecot/dovecot.conf -text
+etc/alternc/templates/incron.d/alternc -text
 etc/alternc/templates/postfix/ca.der -text
 etc/alternc/templates/postfix/master.cf -text
 etc/alternc/templates/postfix/myalias.cf -text
@@ -532,6 +534,7 @@ install/upgrades/1.0.sql -text
 install/upgrades/1.1.php -text
 install/upgrades/1.1.sh -text
 install/upgrades/1.1.sql -text
+install/upgrades/3.0.sh -text
 install/upgrades/README -text
 lang/.svnignore -text
 lang/README -text
@@ -596,6 +599,7 @@ src/fixperms.sh -text
 src/functions.sh -text
 src/functions_dns.sh -text
 src/functions_hosting.sh -text
+src/inotify_update_domains.sh -text
 src/mem_add -text
 src/mem_del -text
 src/popimap-log-login.sh -text

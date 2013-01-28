@@ -115,6 +115,9 @@ SQLBACKUP_OVERWRITE=""
 
 # known slave servers, empty for none, localhost is special (no ssh)
 ALTERNC_SLAVES=""
+
+# File to look at for forced launch of update_domain (use incron)
+INOTIFY_UPDATE_DOMAIN="/var/run/alternc/inotify_update_domain.lock"
 EOF
 
         chown root:alterncpanel $CONFIGFILE

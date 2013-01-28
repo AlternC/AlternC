@@ -39,7 +39,8 @@ if ($mem->checkRight()) { ?>
 <?php if ($cuid == 2000) {  ?>
   <li><a href="adm_panel.php"><span style="color: red;"><?php __("Admin Control Panel"); ?></span></a></li>
   <li><a href="/alternc-sql/"><span style="color: red;"><?php __("General PhpMyAdmin"); ?></span></a></li>
-												       <li><a href="alternc_debugme.php?enable=<?php echo $debug_alternc->status?"0":"1"; ?>"><span style="color: red;"><?php if ($debug_alternc->status) __("Switch debug Off"); else __("Switch debug On");  ?></span></a></li>
+  <li><a href="alternc_debugme.php?enable=<?php echo $debug_alternc->status?"0":"1"; ?>"><span style="color: red;"><?php if ($debug_alternc->status) __("Switch debug Off"); else __("Switch debug On");  ?></span></a></li>
+  <li><a href="/adm_update_domains.php"><span style="color: red;"><?php __("Force a reload"); ?></span></a></li>
 <?php } ?>
 </ul>
 </div>

@@ -64,7 +64,7 @@ TEMPLATE_DIR="/etc/alternc/templates"
 
 # Find needed configuration files (without the initial '/')
 # replace this one unconditionnally
-CONFIG_FILES="etc/alternc/bureau.conf"
+CONFIG_FILES="etc/alternc/bureau.conf etc/incron.d/alternc"
 
 if [ -e /etc/bind/named.conf ]; then
     CONFIG_FILES="$CONFIG_FILES etc/bind/templates/zone.template
@@ -228,6 +228,10 @@ done
 
 # also backup main.cf since we're doing major changes to it
 BACKUPS="$BACKUPS etc/postfix/main.cf"
+
+# also backup /etc/incron.allow
+BACKUPS="$BACKUPS etc/incron.allow"
+
 tar -zcf "$BACKUP_FILE" -C / $BACKUPS 2>/dev/null || true
 
 #######################################################################
@@ -342,6 +346,16 @@ done
 # Bug #1215: configure mydestination when $FQDN is not in
 OLDDESTINATION=`postconf mydestination | awk -F '=' '{print $2}'`
 echo "$OLDDESTINATION" | grep -q -v "$FQDN" && postconf -e "mydestination = $FQDN, $OLDDESTINATION"
+
+if [ ! -f "/etc/incron.allow" ] 
+then
+  echo "Missing /etc/incron.allow ."
+  echo "Did you install incron ?"
+  exit 1
+fi
+
+grep -q ^root /etc/incron.allow || echo "root" >> /etc/incron.allow
+SERVICES="$SERVICES incron"
  
 if [ -e /etc/proftpd.conf ] ; then
     chmod 640 /etc/proftpd/proftpd.conf

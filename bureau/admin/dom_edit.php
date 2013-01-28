@@ -136,15 +136,17 @@ for($i=0;$i<$r["nsub"];$i++) {
 <?php } ?>
 		</td>
     <?php } // end IF ==DELETE ?>
-		<td><a href="http://<?php ecif($r["sub"][$i]["name"],$r["sub"][$i]["name"]."."); echo $r["name"] ?>" target="_blank"><?php ecif($r["sub"][$i]["name"],$r["sub"][$i]["name"]."."); echo $r["name"] ?></a></td>
-		<td><?php __($r['sub'][$i]['type_desc']); ?>
+		<td><div class="retour-auto"><a href="http://<?php ecif($r["sub"][$i]["name"],$r["sub"][$i]["name"]."."); echo $r["name"] ?>" target="_blank"><?php 
+				echo ecif($r["sub"][$i]["name"] , $r["sub"][$i]["name"]."." , "" , 0) . $r["name"];
+			?></a></div></td>
+		<td><div class="retour-auto"><?php __($r['sub'][$i]['type_desc']); ?>
  <?php 
  if ($r["sub"][$i]['type'] === 'VHOST') {
   echo '<br /><a href="bro_main.php?R='.urlencode($r["sub"][$i]["dest"]).'">'.htmlspecialchars($r["sub"][$i]["dest"]).'</a>';
 } else {
   if ($r["sub"][$i]['type']) echo "<br />".htmlspecialchars($r["sub"][$i]["dest"]);
 }
-?></td>
+?></div></td>
 		<td><?php 
 			if (!(!$isinvited && $dt[strtolower($r["sub"][$i]["type"])]["enable"] != "ALL" )) {
 				if ( $r['sub'][$i]['web_action'] !='DELETE') { 

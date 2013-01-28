@@ -246,11 +246,16 @@ function selected($bool) {
   }
 }
 
-function ecif($test,$tr,$fa="") {
+function ecif($test,$tr,$fa="",$affiche=1) {
   if ($test)
-    echo $tr;
+    $retour = $tr;
   else
-    echo $fa;
+    $retour = $fa;
+    
+  if ($affiche) 
+    echo $retour;
+  else
+    return $retour;
 }
 
 function __($str) {
@@ -653,5 +658,18 @@ function display_browser($dir="", $caller="main.dir", $width=350, $height=450) {
   
 }
 
+// Insere un $wrap_string tous les $max caracteres dans $message
+function auto_wrap($message="",$max=10,$wrap_string="<wbr/>") {
+  $cpt = 0;
+  $mot = split(" ",$message);
+  while (isset($mot[$cpt]) && ($mot[$cpt] != "")){
+    if(@strlen($mot[$cpt]) > $max){
+      $nvmot = chunk_split ($mot[$cpt], $max, $wrap_string );
+      $message = str_replace($mot[$cpt], $nvmot, $message);
+    }
+    $cpt++;
+  }
+  return $message;
+}
 
 ?>
