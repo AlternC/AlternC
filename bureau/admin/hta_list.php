@@ -58,7 +58,7 @@ else {
 
 <p>
 <?php 
-__("You can set passwords to protect some of your folders.<br/>This will create .htaccess and .htpassword files that restrict access to these directory and to any sub-elements.");
+__("You can set passwords to protect some of your folders.<br/>This will create .htaccess and .htpasswd files that restrict access to these directory and to any sub-elements.");
 // __("help_hta_list");
 $mem->show_help("hta_list2");
 ?>

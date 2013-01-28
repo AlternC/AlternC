@@ -37,16 +37,14 @@ if ($q["t"] > 0 || $q['u'] > 0)
 <div class="menu-content" id="menu-dom">
 <ul>
 <?php if ($quota->cancreate("dom")) { ?>
-     <li><a href="dom_add.php"><img src="images/new.png" alt="<?php __("Add a domain"); ?>" />&nbsp;<?php __("Add a domain"); ?></a></li>
+  <li><a href="dom_add.php"><img src="images/new.png" alt="<?php __("Add a domain"); ?>" />&nbsp;<?php __("Add a domain"); ?></a></li>
 <?php }
 
 /* Enumeration des domaines : */
 $domlist = $dom->enum_domains();
 reset($domlist);
-while (list($key, $val) = each($domlist))
-{
-?>
-	<li><a href="dom_edit.php?domain=<?php echo urlencode($val) ?>"><?php echo $val ?></a></li>
+while (list($key, $val) = each($domlist)) { ?>
+  <li><a href="dom_edit.php?domain=<?php echo urlencode($val) ?>" title="<?php echo htmlentities($val); ?>"><?php echo $val; ?></a></li>
 <?php } ?>
 </ul>
 </div>

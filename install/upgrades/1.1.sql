@@ -200,6 +200,9 @@ ALTER TABLE `domaines_type` ADD create_tmpdir BOOLEAN NOT NULL DEFAULT FALSE ;
 ALTER TABLE `domaines_type` ADD create_targetdir BOOLEAN NOT NULL DEFAULT FALSE ;
 UPDATE domaines_type SET create_tmpdir=true, create_targetdir=true WHERE target='DIRECTORY';
 
+-- Allow 255 caracters in the tld
+ALTER IGNORE TABLE domaines MODIFY domaine VARCHAR(255);
+
 -- Defaults subdomains to create when a domain is added
 CREATE TABLE IF NOT EXISTS `default_subdomains` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,

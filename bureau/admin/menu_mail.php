@@ -43,7 +43,7 @@ if ($q["u"] > 0 || ( $r["u"] > 0 && $q['t'] > 0 )) {
 $domlist = $mail->enum_domains();
 foreach($domlist as $l => $v){
 ?>
-	<li><a href="mail_list.php?domain_id=<?php echo urlencode($v["id"]) ?>"><?php echo $v["domaine"] ?> (<?php echo $v["nb_mail"]; ?>)</a></li>
+  <li><a href="mail_list.php?domain_id=<?php echo urlencode($v["id"]) ?>" title='<?php echo htmlentities($v["domaine"]).'&nbsp;'.htmlentities("(".$v["nb_mail"].")"); ?>'><?php echo $v['domaine']; ?> (<?php echo $v["nb_mail"]; ?>)</a></li>
 <?php
 }?>
 </ul>
