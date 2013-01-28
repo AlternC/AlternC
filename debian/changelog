@@ -1,3 +1,36 @@
+alternc (3.0~rc3) unstable; urgency=low
+
+  * 3.0~rc3 release, fixing the following :
+  * #1422 (Dovecot: Bug si quota Trash:storage<24M) closed by nahuel
+  * #1412 (Probleme avec les quotas (VM Xen)) closed by axel
+  * #1403 (Confirmation lors de la désactivation des mails d'un domaine) closed by axel
+  * #1404 (Erreurs en wheezy lors de alternc.install) closed by axel
+  * #1400 (Alternc slavedns ne s'installe pas) closed by axel
+  * #1414 (erreur spoolsize.php) closed by axel
+  * #1419 (AlternC 3.0 version Wheezy) created by axel
+  * #1413 (Récupération de mails à l'installation d'AlternC - dovecot) closed by axel
+  * #1416 (buildstatic.sh produit une erreur) closed by axel
+  * #1417 (problème lors de la génération des stats) closed by axel
+  * #1415 (erreur de scripts compress_logs.sh et delete_logs.sh) closed by axel
+  * #1369 (Faire la conf de roundcube managesieved + password) closed by axel
+  * #1405 (forcer les minuscules dans local.sh) closed by axel
+  * #1407 (Problème deploiement alternc-sudoers) closed by axel
+  * #1406 (Problème installation dovecot) closed by axel
+  * #1401 (Controle d'accès pas clair) closed by axel
+  * #1398 (Quotas pas ergonomique) closed by axel
+  * #1399 (Traduction de la date) closed by axel
+  * #1337 (alternc-slavedns depends on sh features) closed by fufroma
+  * #1411 (Navigateur fichier fonctionne mal) closed by fufroma
+  * #1402 (Choix du répertoire lors de création de compte FTP) closed by fufroma
+  * #1331 (alternc-slavedns erreur de configuration a l'install) closed by axel
+  * #1341 (Problème longueur login user MySQL) closed by axel
+  * #1395 (2 dbusers avec le même name) closed by squidly
+  * #1392 (Mauvais message d'erreur à la création d'un utilisateur MySQL déjà ...) closed by squidly
+  * #1393 (Gestion quotas disques) closed by squidly
+  * #1394 ("_" interdit dans les noms de domaines) closed by fufroma
+
+ -- Benjamin Sonntag <benjamin@sonntag.fr>  Mon, 28 Jan 2013 11:20:47 +0100
+
 alternc (3.0~rc2) unstable; urgency=low
 
   * 3.0~rc2 release, fixing the following :
