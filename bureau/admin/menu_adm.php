@@ -40,7 +40,11 @@ if ($mem->checkRight()) { ?>
   <li><a href="adm_panel.php"><span style="color: red;"><?php __("Admin Control Panel"); ?></span></a></li>
   <li><a href="/alternc-sql/"><span style="color: red;"><?php __("General PhpMyAdmin"); ?></span></a></li>
   <li><a href="alternc_debugme.php?enable=<?php echo $debug_alternc->status?"0":"1"; ?>"><span style="color: red;"><?php if ($debug_alternc->status) __("Switch debug Off"); else __("Switch debug On");  ?></span></a></li>
+<?php if ( file_exists($L_INOTIFY_UPDATE_DOMAIN) ) { ?>
+  <li><a href='javascript:alert("<?php __("Reload allready in progress"); ?>");'><span style="color: red;"><?php __("Reload in progress..."); ?></span></a></li>
+<?php } else { // file L_INOTIFY_UPDATE_DOMAIN don't exist ?>
   <li><a href="/adm_update_domains.php"><span style="color: red;"><?php __("Force a reload"); ?></span></a></li>
+<?php } // file exist L_INOTIFY_UPDATE_DOMAIN ?>
 <?php } ?>
 </ul>
 </div>
