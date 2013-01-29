@@ -17,6 +17,7 @@ case "$1" in
   purge)
     rm -f /etc/alternc/local.sh /etc/alternc/my_mail.cnf /etc/alternc/bureau.conf
     rm -f /var/backups/alternc/etc-installed.tar.gz
+    rm -f /etc/incron.d/alternc
 
     # FIXME : remove following commented lines if we are sure
     # to not drop database and remove files (except /etc/alternc)
