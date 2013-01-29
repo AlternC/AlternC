@@ -35,7 +35,7 @@ if (!$admin->enabled) {
 }
 
 if (! isset($L_INOTIFY_UPDATE_DOMAIN)) {
-  __("Missing INOTIFY_UPDATE_DOMAIN var in /etc/alternc/local/sh . Fix it!");
+  __("Missing INOTIFY_UPDATE_DOMAIN var in /etc/alternc/local.sh . Fix it!");
   die();
 }
 

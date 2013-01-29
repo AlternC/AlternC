@@ -43,7 +43,7 @@ if ($mem->checkRight()) { ?>
 <?php if ( empty($L_INOTIFY_UPDATE_DOMAIN) || file_exists("$L_INOTIFY_UPDATE_DOMAIN") ) { ?>
   <li><a href='javascript:alert("<?php __("Reload already in progress"); ?>");'><span style="color: red;"><?php __("Reload in progress..."); ?></span></a></li>
 <?php } else { // file L_INOTIFY_UPDATE_DOMAIN don't exist ?>
-  <li><a href="/adm_update_domains.php"><span style="color: red;"><?php __("Force a reload"); ?></span></a></li>
+  <li><a href="/adm_update_domains.php" onClick='return confirm("<?php echo addslashes(_("Server configuration is regenerate every 5 minutes (if there is changes). Do you want to force a regeneration right now?"));?>");'><span style="color: red;"><?php __("Force a reload"); ?></span></a></li>
 <?php } // file exist L_INOTIFY_UPDATE_DOMAIN ?>
 <?php } ?>
 </ul>

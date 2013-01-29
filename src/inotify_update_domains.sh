@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 # Launch update_domains.sh if $INOTIFY_UPDATE_DOMAIN exist
 
