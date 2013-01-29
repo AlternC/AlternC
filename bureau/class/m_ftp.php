@@ -146,6 +146,28 @@ class m_ftp {
     return $r;
   }
 
+  // Check if the login is fine (syntax)
+  function check_login($l) {
+    global $err;
+
+    // special chars and the max numbers of them allowed
+    // to be able to give a specific error
+    $vv = array('_'=>'1', ' '=>0);
+    foreach ($vv as $k=>$n) {
+      if (substr_count($l, $k) > $n ) { // if there is more than $n $k
+        $err->raise('ftp', sprintf(_("FTP login is incorrect: too many '%s'"), $k));
+        return false;
+     }
+    }
+
+    // Explicitly look for only allowed chars
+    if ( ! preg_match("/^[A-Za-z0-9_\.\-]+$/", $l) ) { 
+      $err->raise('ftp', _("FTP login is incorrect"));
+      return false;
+    }
+    return true;
+  }
+
   /* ----------------------------------------------------------------- */
   /** Affiche (ECHO) la liste des prefixes disponibles sous forme de champs d'option
    * Les champs sont affichés sous la forme <option>prefixe</option>...
@@ -192,8 +214,10 @@ class m_ftp {
     }
     $lo=$mem->user["login"];
     $l=substr($lo,0,1);
-    if ($login) $login="_".$login;
-    $db->query("SELECT COUNT(*) AS cnt FROM ftpusers WHERE id!='$id' AND name='$prefixe$login';");
+    $full_login=$prefixe;
+    if ($login) $full_login.="_".$login;
+    if (! $this->check_login($full_login) ) return false;
+    $db->query("SELECT COUNT(*) AS cnt FROM ftpusers WHERE id!='$id' AND name='$full_login';");
     $db->next_record();
     if ($db->f("cnt")) {
       $err->raise("ftp",_("This FTP account already exists"));
@@ -216,9 +240,9 @@ class m_ftp {
         }
       }
       $encrypted_password = crypt($pass,strrev(microtime(true)));
-      $db->query("UPDATE ftpusers SET name='".$prefixe.$login."', password='', encrypted_password='$encrypted_password', homedir='$absolute', uid='$cuid' WHERE id='$id';");
+      $db->query("UPDATE ftpusers SET name='".$full_login."', password='', encrypted_password='$encrypted_password', homedir='$absolute', uid='$cuid' WHERE id='$id';");
     } else {
-      $db->query("UPDATE ftpusers SET name='".$prefixe.$login."', homedir='$absolute', uid='$cuid' WHERE id='$id';");
+      $db->query("UPDATE ftpusers SET name='".$full_login."', homedir='$absolute', uid='$cuid' WHERE id='$id';");
     }
     return true;
   }
@@ -264,8 +288,10 @@ class m_ftp {
       $err->raise("ftp",_("The chosen prefix is not allowed"));
       return false;
     }
-    if ($login) $login="_".$login;
-    $db->query("SELECT count(*) AS cnt FROM ftpusers WHERE name='".$prefixe.$login."'");
+    $full_login=$prefixe;
+    if ($login) $full_login.="_".$login;
+    if ( !$this->check_login($full_login) ) return false;
+    $db->query("SELECT count(*) AS cnt FROM ftpusers WHERE name='".$full_login."'");
     $db->next_record();
     if ($db->f("cnt")) {
       $err->raise("ftp",_("This FTP account already exists"));
@@ -286,14 +312,14 @@ class m_ftp {
 
     // Check this password against the password policy using common API : 
     if (is_callable(array($admin,"checkPolicy"))) {
-      if (!$admin->checkPolicy("ftp",$prefixe.$login,$pass)) {
+      if (!$admin->checkPolicy("ftp",$full_login,$pass)) {
 	      return false; // The error has been raised by checkPolicy()
       }
     }
 
     if ($quota->cancreate("ftp")) {
       $encrypted_password = crypt($pass,strrev(microtime(true)));
-      $db->query("INSERT INTO ftpusers (name,password, encrypted_password,homedir,uid) VALUES ('".$prefixe.$login."', '', '$encrypted_password', '$absolute', '$cuid')");
+      $db->query("INSERT INTO ftpusers (name,password, encrypted_password,homedir,uid) VALUES ('".$full_login."', '', '$encrypted_password', '$absolute', '$cuid')");
       return true;
     } else {
       $err->raise("ftp",_("Your FTP account quota is over. You cannot create more ftp accounts"));

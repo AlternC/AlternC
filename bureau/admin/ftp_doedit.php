@@ -69,7 +69,7 @@ if (!$r) {
   include_once("ftp_edit.php");
   exit();
 } else {
-  $error=_("The ftp account has been successfully changed");
+  $error=_("The ftp account has been successfully saved");
   include("ftp_list.php");
   exit();
 }
