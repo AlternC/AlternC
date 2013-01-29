@@ -95,6 +95,15 @@ _Description: AlternC's mysql account:
  AlternC will create a mysql administrator account. Please choose it's
  username here. The default value should be good in most case.
 
+Template: alternc/mysql/remote_user
+Type: string
+_Description: AlternC's mysql account:
+ Using a remote mysql installation requires the AlternC user to be configured in advance
+ with root access to the mysql installation.
+ .
+ The alternc sql user is responsible for granting access to user generated databases,
+ that is why it needs root access on the mysql installation.
+
 Template: alternc/mysql/password
 Type: password
 _Description: Password of the AlternC's mysql account:
@@ -105,6 +114,13 @@ _Description: Password of the AlternC's mysql account:
  Please choose a quite complex password since it will have full access to
  the system database !!!
 
+Template: alternc/mysql/remote_password
+Type: password
+_Description: Password of the AlternC's mysql account:
+ Specify the remote mysql user password
+ .
+ Please choose a quite complex password since it will have full access to
+ the system database !!!
 
 Template: alternc/mysql/alternc_mail_user
 Type: string
