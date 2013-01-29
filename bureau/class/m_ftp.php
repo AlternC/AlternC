@@ -284,6 +284,10 @@ class m_ftp {
       $dir=substr($dir,1);
     }
     $r=$this->prefix_list();
+    if (empty($pass)) {
+      $err->raise("ftp",_("Password can't be empty"));
+      return false;
+    }
     if (!in_array($prefixe,$r) || $prefixe=="") {
       $err->raise("ftp",_("The chosen prefix is not allowed"));
       return false;
