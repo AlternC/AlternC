@@ -229,9 +229,6 @@ done
 # also backup main.cf since we're doing major changes to it
 BACKUPS="$BACKUPS etc/postfix/main.cf"
 
-# also backup /etc/incron.allow
-BACKUPS="$BACKUPS etc/incron.allow"
-
 tar -zcf "$BACKUP_FILE" -C / $BACKUPS 2>/dev/null || true
 
 #######################################################################
@@ -347,14 +344,7 @@ done
 OLDDESTINATION=`postconf mydestination | awk -F '=' '{print $2}'`
 echo "$OLDDESTINATION" | grep -q -v "$FQDN" && postconf -e "mydestination = $FQDN, $OLDDESTINATION"
 
-if [ ! -f "/etc/incron.allow" ] 
-then
-  echo "Missing /etc/incron.allow ."
-  echo "Did you install incron ?"
-  exit 1
-fi
-
-grep -q ^root /etc/incron.allow || echo "root" >> /etc/incron.allow
+# Reload incron. Useless, but who know?
 SERVICES="$SERVICES incron"
  
 if [ -e /etc/proftpd.conf ] ; then
