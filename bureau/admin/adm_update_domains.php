@@ -34,6 +34,11 @@ if (!$admin->enabled) {
 	exit();
 }
 
+if (! isset($L_INOTIFY_UPDATE_DOMAIN)) {
+  __("Missing INOTIFY_UPDATE_DOMAIN var in /etc/alternc/local/sh . Fix it!");
+  die();
+}
+
 touch($L_INOTIFY_UPDATE_DOMAIN);
 
 Header('Location: /main.php');
