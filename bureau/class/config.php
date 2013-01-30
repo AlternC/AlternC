@@ -28,11 +28,9 @@
  ----------------------------------------------------------------------
 */
 
-/* */
-if ( "@@REPLACED_DURING_BUILD@@"==$L_VERSION ) {
-  // To enable dispay of PHP errors
-  ini_set('display_errors', true);
-}
+/* * /
+// To enable dispay of PHP errors
+ini_set('display_errors', true);
 /* */
 
 /*
