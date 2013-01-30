@@ -61,7 +61,7 @@ class m_debug_alternc {
     if ( $cuid!=2000 ) return false;
     if ( ! $this->status ) return false;
 
-    echo "<div style='background-color: grey;'>";
+    echo "<fieldset style='background-color: silver;'>";
     echo "<pre>";
     echo "+++ BEGIN Debug Mode+++\n\n";
     print_r("\n--- Total SQL Query : ".$this->nb_sql_query." ---\n");
@@ -76,7 +76,7 @@ class m_debug_alternc {
     print_r($_SERVER);
     echo "\n\n+++ END Debug Mode+++";
     echo "</pre>";
-    echo "</div>";
+    echo "</fieldset>";
     return true;
   }
 
