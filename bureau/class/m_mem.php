@@ -582,8 +582,38 @@ Cordially.
     return $str;
   }
 
+/*
+  // Embryon pour stocker une variable "le temps d'une session".
+  // Mis en pause car il faudrait faire session_start pour avoir $_SESSION
+  // Donc peux y avoir des effets de bords... fun...
+  function session_tempo_params_get($v) {
+    $sid=$_COOKIE['session'];
+    if ( empty($_SESSION[$sid]) ) { // si pas de session de params tempo
+      return false;
+    }
+    $j=$_SESSION[$sid];
+    $j=unserialize($j);
+    if ( ! empty( $j[$v] ) ) { // si on a bien qque chose a retourner :)
+      return $j[$v];
+    }
+    return false;
+  }
 
+  function session_tempo_params_set($k, $v, $ecrase=false) {
+    $sid=$_COOKIE['session'];
+    $p=Array();
+    if ( ! empty($_SESSION[$sid]) ) {
+      $p = unserialize($_SESSION[$sid]);
+    }
+    if (! $ecrase && (isset($p[$k]) && is_array($p[$k])) && is_array($v) ) { 
+      $v=array_merge($p[$k], $v); // overwrite entry with the same name
+    }
 
+    $p[$k]=$v;
+    $_SESSION[$sid]=serialize($p);
+    return true;
+  }
+*/
 
 } /* Classe Membre */
 

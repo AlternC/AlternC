@@ -202,6 +202,16 @@ function is_valid_mail(arg) {
 
 function menu_toggle(id) {
   $("#"+id).toggle();
+
+/* Pour quand on voudra enregistrer l'etat du menu ;)
+  var tmp = {};
+  if( $('#'+id).is(':visible') ) {
+    tmp[''+id] = 'visible';
+  } else {
+    tmp[''+id] = 'hidden';
+  }
+  $.post('tempovars.php', { 'key' : 'menu_toggle', 'val' : tmp })
+*/
 }
 
 function false_if_empty(id,err_msg) {
