@@ -36,33 +36,38 @@ include_once("head.php");
 <br />
 <?php
 $q=$quota->getquota();
-if (!is_array($q)) {
-	echo "<p class=\"error\">"._("No quotas for this account, or quotas currently unavailable!")."</p>";
-} else {
-	echo "<table cellspacing=\"0\" cellpadding=\"4\"><tr><th>"._("Quota")."</th><th>"._("Used")."</th><th>"._("Total")."</th></tr>";
-	$qlist=$quota->qlist();
-	reset($qlist);
-	$col=1;
- 	while (list($key,$val)=each($qlist)) {
-		if ( !isset($q[$key]) || !$q[$key]["t"]) continue;
- 		$col=3-$col;
- 		echo "<tr class=\"lst$col\">";
- 		echo "<td>";
-		if ($q[$key]["u"] >= $q[$key]["t"]) echo "<font class=\"over\">";
- 		echo _($val);
-		if ($q[$key]["u"] >= $q[$key]["t"]) echo "</font>";
+if (!is_array($q) || empty($q) ) {
+  echo "<p class=\"error\">"._("No quotas for this account, or quotas currently unavailable!")."</p>";
+  include_once("foot.php");
+  die();
+} 
 
-		if ($key == 'bw_web') {              
-			echo "&nbsp;</td><td align=\"center\">". format_size($q[$key]["u"]) ."&nbsp;</td><td align=\"center\">". format_size($q[$key]["t"]) ."&nbsp;</td>";
-		} elseif ($key == 'web') {
-			echo "&nbsp;</td><td align=\"center\">". format_size($q[$key]["u"] * 1024) . "&nbsp;</td><td align=\"center\">". format_size($q[$key]["t"] * 1024) ."&nbsp;</td>";
-		} else {
-			echo "&nbsp;</td><td align=\"center\">".$q[$key]["u"]."&nbsp;</td><td align=\"center\">".$q[$key]["t"]."&nbsp;</td>";
-		}
+echo "<table cellspacing=\"0\" cellpadding=\"4\" class='tlist'>";
+echo "<tr><th>"._("Quota")."</th><th>"._("Used")."</th><th>"._("Total")."</th></tr>";
+$qlist=$quota->qlist();
+reset($qlist);
+$col=1;
+ while (list($key,$val)=each($qlist)) {
+  if ( !isset($q[$key]) || !$q[$key]["t"]) continue;
+   $col=3-$col;
+   echo "<tr class=\"lst$col\">";
+   echo "<td>";
+  if ($q[$key]["u"] >= $q[$key]["t"]) echo "<font class=\"over\">";
+   echo _($val);
+  if ($q[$key]["u"] >= $q[$key]["t"]) echo "</font>";
 
- 		echo "</tr>";
- 	}
-	echo "</table>";
-}
+  if ($key == 'bw_web') {              
+    echo "&nbsp;</td><td>". format_size($q[$key]["u"]) ."&nbsp;</td><td>". format_size($q[$key]["t"]) ."&nbsp;</td>";
+  } elseif ($key == 'web') {
+    echo "&nbsp;</td><td>". format_size($q[$key]["u"] * 1024) . "&nbsp;</td><td>". format_size($q[$key]["t"] * 1024) ."&nbsp;</td>";
+  } else {
+    echo "&nbsp;</td><td>".$q[$key]["u"]."&nbsp;</td><td>".$q[$key]["t"]."&nbsp;</td>";
+  }
+
+   echo "</tr>";
+ }
+echo "</table>";
+
+include_once("foot.php"); 
+
 ?>
-<?php include_once("foot.php"); ?>
