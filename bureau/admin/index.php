@@ -55,7 +55,8 @@ if (!$charset) $charset="UTF-8";
     <p id="logo">  <img src="logo.png" border="0" alt="<?php __("Web Hosting Control Panel"); ?>" title="<?php __("Web Hosting Control Panel"); ?>" /></a>
     </p>
 <p>&nbsp;</p>
-<?php if (isset($error) && $error) echo "<font color=red>$error</font>"; ?>
+<?php if (isset($error) && $error) echo "<div class='error'>$error</div>"; ?>
+<br/>
 <?php
 if (isset($_GET['authip_token'])) $authip_token=$_GET['authip_token'];
 /*

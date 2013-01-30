@@ -25,7 +25,9 @@
 
 ?>
 <div class="menu-box">
-<div class="menu-title"><img src="images/logs.png" alt="<?php __("Logs"); ?>" width="16" height="16" />&nbsp;<a href="logs_list.php"><?php __("Logs"); ?></a> </div>
+	<a href="logs_list.php">
+		<div class="menu-title"><img src="images/logs.png" alt="<?php __("Logs"); ?>" width="16" height="16" />&nbsp;<?php __("Logs"); ?></div>
+	</a>
 </div>
 
 

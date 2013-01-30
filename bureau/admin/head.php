@@ -35,7 +35,8 @@ if (!$charset) $charset="UTF-8";
 <link rel="stylesheet" href="styles/style.css" type="text/css" />
 <link rel="stylesheet" href="styles/passwordStrengthMeter.css" type="text/css" />
 
-<link rel="stylesheet" href="styles/style-empty.css" type="text/css" title="Default - Blue Desktop"/>
+<link rel="stylesheet" href="styles/style-empty.css" type="text/css" title="Default - Desktop TNG"/>
+<link rel="alternate stylesheet" href="styles/style-bluedesktop10.css" type="text/css" title="Blue Desktop 1.0" />
 <link rel="alternate stylesheet" href="styles/style-hw.css" type="text/css" title="Halloween" />
 
 <link rel="Shortcut Icon" href="favicon.ico" type="image/ico" />

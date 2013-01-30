@@ -22,8 +22,12 @@
 */
 ?>
 <div class="menu-box">
-<div class="menu-title"><img src="images/config.png" alt="<?php __("Settings"); ?>" />&nbsp;<a href="mem_param.php"><?php __("Settings"); ?></a></div>
+<a href="mem_param.php">
+	<div class="menu-title"><img src="images/config.png" alt="<?php __("Settings"); ?>" />&nbsp;<?php __("Settings"); ?></div>
+</a>
 </div>
 <div class="menu-box">
-<div class="menu-title"><img src="images/exit.png" alt="<?php __("Logout"); ?>" />&nbsp;<a href="mem_logout.php" target="_parent"><?php __("Logout"); ?></a></div>
+<a href="mem_logout.php" target="_parent">
+	<div class="menu-title"><img src="images/exit.png" alt="<?php __("Logout"); ?>" />&nbsp;<?php __("Logout"); ?></div>
+</a>
 </div>

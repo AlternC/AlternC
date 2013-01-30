@@ -28,11 +28,11 @@ if ($q['t'] > 0 || $q['u'] > 0)  {
 
 ?>
 <div class="menu-box">
-<div class="menu-title">
 <a href="cron.php">
+<div class="menu-title">
 <img src="images/schedule.png" alt="<?php __("Scheduled tasks"); ?>" width=16px height=16px/>&nbsp;<?php __("Scheduled tasks"); ?> (<?php echo $q["u"].'/'.$q["t"]; ?>)
-</a>
 </div>
+</a>
 </div>
 <?php
 } // fin du if pour les quotas 

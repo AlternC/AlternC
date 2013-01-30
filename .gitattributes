@@ -158,7 +158,6 @@ bureau/admin/ftp_edit.php -text
 bureau/admin/ftp_list.php -text
 bureau/admin/head.php -text
 bureau/admin/hippo_bleue.gif -text
-bureau/admin/hoster.png -text
 bureau/admin/hta_add.php -text
 bureau/admin/hta_adduser.php -text
 bureau/admin/hta_del.php -text
@@ -285,6 +284,7 @@ bureau/admin/js/prototype.js -text
 bureau/admin/login.php -text
 bureau/admin/logo.png -text
 bureau/admin/logo2.png -text
+bureau/admin/logo3.png -text
 bureau/admin/logs_download.php -text
 bureau/admin/logs_list.php -text
 bureau/admin/mail_add.php -text
@@ -350,6 +350,7 @@ bureau/admin/sql_users_password.php -text
 bureau/admin/sql_users_rights.php -text
 bureau/admin/stats_members.php -text
 bureau/admin/styles/passwordStrengthMeter.css -text
+bureau/admin/styles/style-bluedesktop10.css -text
 bureau/admin/styles/style-empty.css -text
 bureau/admin/styles/style-hw.css -text
 bureau/admin/styles/style.css -text

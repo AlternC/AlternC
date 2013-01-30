@@ -634,7 +634,7 @@ function display_browser($dir="", $caller="main.dir", $width=350, $height=450) {
               open: function()
                 {
                     $('.ui-widget-overlay').css('opacity', .70);
-                    $('.ui-dialog-content').css('background-color', '#F0F0FA');
+                    $('.ui-dialog-content').css('background-color', '#F0F0F4');
                 },
             });
          

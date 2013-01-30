@@ -7,11 +7,16 @@ body {
   font-family: Verdana, Arial, Helvetica, sans-serif;
   font-size: 11px;
   color: #000000;
-  background-color: #B2CFE4;
+  background-color: #F0F0FA;
+/*   background-color: cyan; */
 }
 
 body.light {
-  background-color: #F0F0F4;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  color: #000000;
+  background-color: #F0F0FA;
+/*   background-color: cyan; */
 }
 
 .hlp {
@@ -35,21 +40,20 @@ th {
   font-family: Verdana, Arial, Helvetica, sans-serif;
   font-size: 11px;
   color: black;
-  background: #B2CFE4;
+  background: #ABCDE4;
   font-weight: normal;
   text-align: left;
 }
 
 h3 {
   font-family: Verdana, Arial, Helvetica, sans-serif;
-  font-size: 23px;
-  font-weight: normal;
-  color: #444;
+  font-size: 18px;
+  font-weight: bold;
+  color: #10507C;
   text-align: left;
   padding: 11px;
   padding-left: 0;
   margin: 0px;
-  word-wrap: break-word;
 }
 
 .trbtn {
@@ -64,15 +68,9 @@ h4 {
 }
 
 hr {
-  /*color: #007799;*/
+  color: #007799;
   height: 1px;
-  /*border: 1px solid #007799;*/
-  border: 1px solid #555;
-  border-width: 1px 0 0 0;
-}
-
-fieldset {
-  border: 1px solid #555;
+  border: 1px solid #007799;
 }
 
 .inp {
@@ -135,21 +133,13 @@ input.inav:hover, .inav a:hover, a.inav:hover {
 .ina a, a.ina, .inav a, a.inav {
   color: black;
   white-space: nowrap;
+  
   border: 1px solid #999;
   font-family: Verdana, Arial, Helvetica, sans-serif;
   font-size: 10px;
-  padding: 4px 10px;
+  padding: 4px;
   color: black;
   cursor: pointer;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;  
-}
-input[type=button],
-input[type=submit] {
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;  
 }
 .ina a:hover, a.ina:hover, .inav a:hover, a.inav:hover {
   text-decoration: none;
@@ -209,12 +199,8 @@ img {
 }
 
 .error {
-  color: #800;
+  color: red;
   font-weight: bold;
-  background-color: #FFEEDD; 
-  border: 1px solid #CC9966; 
-  padding: 20px; 
-  text-align: center;
 }
 
 /* Over quota class */
@@ -236,12 +222,12 @@ img {
   margin-top: 20px;
   margin-bottom: 20px;
   width: 1020px;
-  border: 1px solid #888;
+  border: 5px solid #1D6A9F;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   border-radius: 10px;  
-  box-shadow: 1px 1px 15px #555;
-  background-color: #F0F0F4;
+  background-color: #F0F0FA;
+/*   background: #F1F8FD url(/admin/images/bgborder.gif) repeat-y scroll top left; */
 }
 
 /* Main container */
@@ -251,8 +237,7 @@ img {
 }
 
 #tdMenu {
-  border-right: 1px solid #888;
-  padding: 0;
+  border-right: 1px dotted #1D6A9F;
 }
 
 #content {
@@ -274,46 +259,31 @@ img {
   padding-right: 10px;
   padding-bottom: 10px;
   padding-left: 10px;
-  background-color: #EEE;
-  border-radius: 10px 0 0 10px;
-  -webkit-border-radius: 10px 0 0 10px;
-  -moz-border-radius: 10px 0 0 10px;
 }
 
 .menu-box {
   margin-bottom: 10px;
   font-size: 11px;
-  background-color: #F4F4FA;
-  box-shadow: 1px 1px 5px #555;
-  border-radius: 4px 4px 0 0;
-  -webkit-border-radius: 4px 4px 0 0;
-  -moz-border-radius: 4px 4px 0 0;
 }
 
 .menu-box .menu-title {
   color: #000000;
-  border-bottom: 2px solid #AAA;
-  background-color: #CFE3F1;
+  border: 1px solid #1D6A9F;
+  background-color: #C0DCF0;
   padding: 3px;
-  -webkit-border-radius: 4px 4px 0 0;
-  -moz-border-radius: 4px 4px 0 0;
-  border-radius: 4px 4px 0 0;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
 }
 
-.menu-box a .menu-title {
-}
-
-.menu-box .menu-conmargin: {
-  margin: 0 5px 5px 5px;
+.menu-box .menu-content {
+  margin-top: 1px;
 }
 
 .menu-box ul {
   margin: 0px;
-  padding: 5px 0 5px 0;
+  padding: 0px;
   list-style-type: none;
-}
-
-.menu-box li {
 }
 
 .menu-box a {
@@ -321,21 +291,20 @@ img {
   color: #0D5689;
 }
 
-.menu-box a:hover,
-.menu-box a:hover .menu-title {
-  text-decoration: none;
-  background-color: #DFEEF8;
+.menu-box a:hover {
+  text-decoration: underline;
+  color: #000000;
 }
 
 .menu-box li a {
   display: block;
-  padding: 5px 5px 5px 10px;
+  padding-top: 6px;
+  padding-bottom: 6px;
   color: #0D5689;
+  padding-left: 2px;
   text-decoration: none;
-  border: 1px solid transparent;
-  border-width: 1px 0;
+  border: 1px solid #F1F8FD;
   line-height: 0.75em;
-  height: 10px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -354,8 +323,7 @@ img {
 
 .menu-box li a:hover {
   color: #000000;
-  border: 1px solid #C1D8E9;
-  border-width: 1px 0;
+  border: 1px solid #1D6A9F;
   text-decoration: none;
   background-color: #DFEEF8;
 }
@@ -491,7 +459,6 @@ span#emaildom {
 
 .tlist {
   width: 100%;
-  border: 1px solid #C1D8E9;
 }
 
 .tlistb, .tlistb td, .tlistb th { 
@@ -501,7 +468,7 @@ span#emaildom {
 }
 
 table.tlistb, .tlistb tr {
-  border: solid 1px #C1D8E9;
+  border: solid 1px #AAA;
 }
 
 .tlist tr:hover, .tlist2 tr:hover {
@@ -509,7 +476,7 @@ table.tlistb, .tlistb tr {
 }
 
 .tlist th, .tlist2 th {
-  font-size: 125%;
+  font-weight: bold;
 }
 
 input#dir, input#sub_local { 
@@ -539,29 +506,4 @@ input#dir, input#sub_local {
 .retour-auto {
   max-width:220px; 
   word-wrap:break-word;
-}
-
-.menutoplogo {
-  margin: 10px 0 0 5px;
-  width: 190px;
-}
-
-.currentuser {
-  margin: 5px 5px 10px 5px;
-  color:#444;
-}
-
-.adminmenu {
-  color: #800;
-}
-
-.menu-quota dd {
-  margin: 5px 5px 5px 10px;
-}
-
-.menu-quota div.progress-bar {
-  width: 180px;
-  background: #fff;
-  border: solid 1px #CACACA;
-  padding-bottom
 }

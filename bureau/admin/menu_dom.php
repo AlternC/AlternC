@@ -29,11 +29,12 @@ if ($q["t"] > 0 || $q['u'] > 0)
 
 ?>
 <div class="menu-box">
-<div class="menu-title" id="test">
-  <a href="javascript:menu_toggle('menu-dom');">
+<a href="javascript:menu_toggle('menu-dom');">
+  <div class="menu-title" id="test">
     <img src="images/dom.png" alt="<?php __("Domains"); ?>" />&nbsp;<?php __("Domains"); ?> (<?php echo $q["u"]; ?>/<?php echo $q["t"]; ?>)
-    <img src="images/row-down.png" alt="" style="float:right;"/></a>
-</div>
+    <img src="images/row-down.png" alt="" style="float:right;"/>
+  </div>
+</a>
 <div class="menu-content" id="menu-dom">
 <ul>
 <?php if ($quota->cancreate("dom")) { ?>

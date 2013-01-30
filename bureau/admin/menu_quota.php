@@ -21,53 +21,60 @@
  ----------------------------------------------------------------------
 */
 ?>
-<div class="menu-box">
-<div class="menu-title"><img src="images/quota.png" alt="<?php __("Show my quotas"); ?>" />&nbsp;<a href="quota_show.php"><?php __("Show my quotas"); ?></a>
-<?php
-$q=$quota->getquota();
+<div class="menu-box menu-quota">
+<a href="quota_show.php">
+  <div class="menu-title">
+    <img src="images/quota.png" alt="<?php __("Show my quotas"); ?>" />&nbsp;<?php __("Show my quotas"); ?>
+  </div>
+</a>
+  <?php
+  $q=$quota->getquota();
 
-$qlist=$quota->qlist();
-reset($qlist);
-$col=1;
+  $qlist=$quota->qlist();
+  reset($qlist);
+  $col=1;
 
 
-if (!is_array($q) || empty($q) ) {
-  // "No quotas for this account, or quotas currently unavailable
-  return;
-}
-
-$first=true;
-while (list($key,$val)=each($qlist)) {
-  $col=3-$col;
-
-  // FIXME: rewrite it
-  if (($key == 'bw_web' || $key == 'web') && (isset($q[$key]["t"]) && $q[$key]["t"] > 0)) {
-    if ($first) {
-      echo '<dt id="#quotas">' . _("Quotas") . '</dt>';
-      $first=false;
-    }
-
-    if ($key == 'web') {
-      $q[$key]["u"] = $q[$key]["u"] * 1024;
-      $q[$key]["t"] = $q[$key]["t"] * 1024;
-    }
-
-    $usage_percent = (int) ($q[$key]["u"] / $q[$key]["t"] * 100);
-    $usage_color = ($q[$key]["u"] > $q[$key]["t"] ? '#f00' : '#0f0');
-    $usage_color = ((85 < $usage_percent && $usage_percent < 100) ? '#ff0' : $usage_color); // yellow
-
-    $url = ($key == 'bw_web' ? 'stats_show_per_month.php' : 'quota_show.php');
-
-    echo "<dd>";
-    echo '<div><a href="' . $url . '">' . /* _($val) */  $key . ' ' . $usage_percent . '%' . ' (' . format_size($q[$key]["u"]) . ' / ' . format_size($q[$key]["t"]) . ')</a></div>';
-    echo "</dd>";
-    echo "<dd>";
-    echo '<div style="width: 100%; background: #fff;">';
-    echo '<div style="width: ' . ($usage_percent > 100 ? 100 : $usage_percent) . '%; background: ' . $usage_color . ';">&nbsp;</div>';
-    echo '</div>';
-    echo "</dd>";
+  if (!is_array($q) || empty($q) ) {
+    // "No quotas for this account, or quotas currently unavailable
+    return;
   }
-}
-?>
-</div>
+
+  $first=true;
+  while (list($key,$val)=each($qlist)) {
+    $col=3-$col;
+
+    // FIXME: rewrite it
+    if (($key == 'bw_web' || $key == 'web') && (isset($q[$key]["t"]) && $q[$key]["t"] > 0)) {
+  /*
+      // Quite useless, so i commented it out
+      if ($first) {
+        echo '<dt id="#quotas">' . _("Quotas") . '</dt>';
+        $first=false;
+      }
+  */
+
+      if ($key == 'web') {
+        $q[$key]["u"] = $q[$key]["u"] * 1024;
+        $q[$key]["t"] = $q[$key]["t"] * 1024;
+      }
+
+      $usage_percent = (int) ($q[$key]["u"] / $q[$key]["t"] * 100);
+      $usage_color = ($q[$key]["u"] > $q[$key]["t"] ? '#f00' : '#0f0');
+      $usage_color = ((85 < $usage_percent && $usage_percent < 100) ? '#ff0' : $usage_color); // yellow
+
+      $url = ($key == 'bw_web' ? 'stats_show_per_month.php' : 'quota_show.php');
+
+      echo "<dd>";
+      echo '<div><a href="' . $url . '">' . /* _($val) */  $key . ' ' . $usage_percent . '%' . ' (' . format_size($q[$key]["u"]) . ' / ' . format_size($q[$key]["t"]) . ')</a></div>';
+      echo "</dd>";
+      echo "<dd>";
+      echo '<div class="progress-bar">';
+      echo '<div style="width: ' . ($usage_percent > 100 ? 100 : $usage_percent) . '%; background: ' . $usage_color . ';">&nbsp;</div>';
+      echo '</div>';
+      echo "</dd>";
+    }
+  }
+  ?>
+  <div style="height: 5px;">&nbsp;</div>
 </div>

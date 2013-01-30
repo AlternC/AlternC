@@ -30,10 +30,13 @@
 require_once("../class/config.php");
 
 ?>
-<h3>Menu <?php echo $mem->user["login"]; ?></h3>
+<img src="logo3.png" class="menutoplogo" border="0" alt="AlternC" alt="<?php __("AlternC"); ?>"/>
+<p class="currentuser"><?php echo sprintf(_("Welcome %s"),$mem->user["login"]); ?></p>
 
 <div class="menu-box">
-    <div class="menu-title"><img src="images/home.png" alt="<?php  __("Home / Information"); ?>" />&nbsp;<a href="main.php"><?php  __("Home / Information"); ?></a></div>
+  <a href="main.php">
+    <div class="menu-title"><img src="images/home.png" alt="<?php  __("Home / Information"); ?>" />&nbsp;<?php  __("Home / Information"); ?></div>
+  </a>
 </div>
 <?php
 // Force rebuilding quota, in case of add or edit of the quota and cache not up-to-date

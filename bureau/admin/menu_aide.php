@@ -22,5 +22,7 @@
 */
 ?>
 <div class="menu-box">
-<div class="menu-title"><img src="images/help.png" alt="<?php __("Online help"); ?>" />&nbsp;<a href="<?php echo $help_baseurl; ?>" target="help"><?php __("Online help"); ?></a></div>
+	<a href="<?php echo $help_baseurl; ?>" target="help">
+		<div class="menu-title"><img src="images/help.png" alt="<?php __("Online help"); ?>" />&nbsp;<?php __("Online help"); ?></div>
+	</a>
 </div>

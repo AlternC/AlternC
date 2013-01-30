@@ -25,6 +25,9 @@
 
 ?>
 <div class="menu-box">
-<div class="menu-title"><img src="images/ip.png" alt="<?php __("Access security"); ?>" width="16" height="16" />&nbsp;<a href="ip_main.php"><?php __("Access security"); ?></a> </div>
+<a href="ip_main.php">
+	<div class="menu-title">
+		<img src="images/ip.png" alt="<?php __("Access security"); ?>" width="16" height="16" />&nbsp;<?php __("Access security"); ?>
+	</div>
+</a>
 </div>
-

@@ -29,7 +29,7 @@ $lst_cron = $cron->lst_cron();
 <form method="post" action="cron.php" id="main" name="cron" >
 
 
-<table>
+<table class="tlist">
 <!--
   <tr>
     <th/>
@@ -47,7 +47,7 @@ if ( sizeof($lst_cron) > $max_cron ) $max_cron=sizeof($lst_cron);
 
 for ($i=0; $i < $max_cron ; $i++) { 
 ?>
-  <tr>
+  <tr class="<?php echo ($i%2)?"lst1":"lst2"; ?>">
     <?php if (isset($lst_cron[$i])) echo "<input type='hidden' name='cronupdate[$i][id]' value='".$lst_cron[$i]['id']."' />"; ?> 
     <td rowspan=2>
       <?php if (isset($lst_cron[$i])) { echo '#'.$lst_cron[$i]['id']; } ?><br/>
@@ -71,19 +71,14 @@ foreach ($cron->schedule() as $cs) {
       </select>
       <?php if (isset($lst_cron[$i])) {__("Next execution: "); echo $lst_cron[$i]['next_execution'];}?>
     </td>
-  </tr><tr>
+  </tr><tr class="<?php echo ($i%2)?"lst1":"lst2"; ?>">
     <td><input type="text" placeholder="<?php __("HTTP user (optionnal)"); ?>" id="crup_user_<?php echo $i?>" name="<?php echo "cronupdate[$i][user]";?>" size="20" maxlength="64" value="<?php if (isset($lst_cron[$i]['user'])) { echo htmlentities($lst_cron[$i]['user']);} ?>"/></td>
     <td><input type="text" placeholder="<?php __("HTTP password (optionnal)"); ?>" id="crup_pass_<?php echo $i?>" name="<?php echo "cronupdate[$i][password]";?>" size="20" maxlength="64" value="<?php if (isset($lst_cron[$i]['password'])) { echo htmlentities($lst_cron[$i]['password']);} ?>"/></td>
     <td><input type="text" placeholder="<?php __("Mail address (optionnal)"); ?>" id="crup_mail_<?php echo $i?>" name="<?php echo "cronupdate[$i][email]";?>" size="25" maxlength="64" value="<?php if (isset($lst_cron[$i]['email'])) { echo htmlentities($lst_cron[$i]['email']);} ?>"/></td>
   </tr>
-  <tr><td colspan=4><hr/></td></tr>
 <?php } //foreach ?>
-  <tr>
-    <td/>
-    <td>
-      <input type="submit" name="submit" class="inb" value="<?php __("Apply the modifications"); ?>" />
-    </td>
 </table>
+<p><input type="submit" name="submit" class="inb" value="<?php __("Apply the modifications"); ?>" /></p>
 
 </form>
 

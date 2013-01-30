@@ -195,17 +195,17 @@ class m_mem {
     return false;
   }
 
-/* Faut finir de l'implémenter :)
+/* Faut finir de l'implémenter :) * /
   function authip_class() {
     global $cuid;
     $c = Array();
     $c['name']="Panel access";
-    $c['protocol']="panel";
+    $c['protocol']="mem";
     $c['values']=Array($cuid=>'');
 
     return $c;
   }
-*/
+/* */
 
   /* ----------------------------------------------------------------- */
   /** Vérifie que la session courante est correcte (cookie ok et ip valide).
@@ -220,6 +220,10 @@ class m_mem {
   function checkid() {
     global $db,$err,$cuid,$restrictip,$authip;
     if (isset($_REQUEST["username"])) {
+      if ( empty($_REQUEST['password']) ) {
+        $err->raise("mem",_("Missing password"));
+        return false;
+      }
       if ($_REQUEST["username"] && $_REQUEST["password"]) {
       	return $this->login($_REQUEST["username"],$_REQUEST["password"],$_REQUEST["restrictip"]);
       }

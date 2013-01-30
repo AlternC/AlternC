@@ -226,7 +226,7 @@ if (!$r['noerase']) {
   </td>
 </table>
 <div style="padding-left: 30px; padding-bottom: 20px" class="error">    <?php __("Warning: If you set this to 'no', all your email accounts and aliases on this domain will be immediately deleted."); ?></div>
-
+<br/>
 <input type="submit" class="inb" name="submit" value="<?php __("Submit the changes"); ?>" />
 	</form>
 

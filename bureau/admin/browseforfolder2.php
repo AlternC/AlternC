@@ -116,7 +116,7 @@ function retour() {
 }
 </script>
 </head>
-<body onload="popupfile();">
+<body class="light" onload="popupfile();">
 <h3><?php __("Searching for a folder"); ?></h3>
 <?php
 

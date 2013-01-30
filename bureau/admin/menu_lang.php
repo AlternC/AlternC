@@ -1,8 +1,10 @@
 <div class="menu-box">
- <div class="menu-title">
-  <img src="/images/lang.png" alt="<?php __("Languages"); ?>" />&nbsp;<a href="javascript:menu_toggle('menu-lang');"><?php __("Languages"); ?>
-  <img src="/images/row-down.png" alt="" style="float:right;"/></a>
-  </div>
+  <a href="javascript:menu_toggle('menu-lang');">
+   <div class="menu-title">
+    <img src="/images/lang.png" alt="<?php __("Languages"); ?>" />&nbsp;<?php __("Languages"); ?>
+    <img src="/images/row-down.png" alt="" style="float:right;"/>
+   </div>
+  </a>
   <div class="menu-content" id="menu-lang">
   <ul>
    <?php foreach($locales as $l) { ?>

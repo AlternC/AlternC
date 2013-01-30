@@ -27,6 +27,7 @@ class m_debug_alternc {
   var $infos="";
   var $status=false;
   var $nb_sql_query=0;
+  var $tps_sql_query=0;
 
   /*---------------------------------------------------------------------------*/
   /** Constructor
@@ -37,6 +38,7 @@ class m_debug_alternc {
       ini_set('display_errors', true);
     }
     $this->nb_sql_query=0;
+    $this->tps_sql_query=0;
   }
 
   function activate() {
@@ -64,7 +66,7 @@ class m_debug_alternc {
     echo "<fieldset style='background-color: silver;'>";
     echo "<pre>";
     echo "+++ BEGIN Debug Mode+++\n\n";
-    print_r("\n--- Total SQL Query : ".$this->nb_sql_query." ---\n");
+    print_r("\n--- Total SQL Query : ".$this->nb_sql_query." req / ".$this->tps_sql_query." ms ---\n");
     print_r($this->infos);
     echo "\n\n--- GET ---\n";
     print_r($_GET);
