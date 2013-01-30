@@ -165,6 +165,7 @@ class DB_Sql {
 
     if (isset($debug_alternc)) {
       $debug_alternc->add("SQL Query : (".substr($debug_chrono_start,0,5)." ms)\t $Query_String");
+      $debug_alternc->nb_sql_query++;
     }
 
     # Will return nada if it fails. That's fine.
