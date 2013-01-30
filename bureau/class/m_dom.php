@@ -831,7 +831,7 @@ class m_dom {
         }
         break;
       case 'IPV6': 
-        if (checkip($value)) {
+        if (checkipv6($value)) {
           return true;
         }else{
           $err->raise("dom",_("The ip address is invalid"));
