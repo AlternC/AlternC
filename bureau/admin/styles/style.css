@@ -274,7 +274,6 @@ img {
   padding-right: 10px;
   padding-bottom: 10px;
   padding-left: 10px;
-  background-color: #EEE;
   border-radius: 10px 0 0 10px;
   -webkit-border-radius: 10px 0 0 10px;
   -moz-border-radius: 10px 0 0 10px;
@@ -564,4 +563,16 @@ input#dir, input#sub_local {
   background: #fff;
   border: solid 1px #CACACA;
   padding-bottom
+}
+
+.ombrage {
+  border: 1px solid #888;
+  box-shadow: 1px 1px 15px #555;
+}
+
+.petit,
+.petit p,
+.petit th,
+.petit td {
+  font-size:95%;
 }

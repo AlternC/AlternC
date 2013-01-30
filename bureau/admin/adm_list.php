@@ -109,16 +109,13 @@ if (!is_array($r)) {
 
 if ($mem->user["admlist"]==0) { // Normal (large) mode
 ?>
-<table class="tlist">
-<tr><td colspan="6">
+<p>
+<span class="ina" style="float: right;"><a href="adm_list.php?short=1"><?php __("Minimal view"); ?></a></span> &nbsp;
 <?php  if (count($r)>5) { ?>
 <input type="submit" class="inb" name="submit" value="<?php __("Delete checked accounts"); ?>" />
 <?php } ?>
-</td>
-<td  class="trbtn" colspan="4">
-<span class="ina"><a href="adm_list.php?short=1"><?php __("Minimal view"); ?></a></span> &nbsp;
-</td>
-</tr>
+</p>
+<table class="tlist" style="clear: both;">
 <tr>
 <th></th>
 <th><?php __("Account"); ?></th>
@@ -192,16 +189,13 @@ if ($mem->user["admlist"]==1) { // SHORT MODE
   [&nbsp;<?php __("E"); ?>&nbsp;] <?php __("Edit"); ?> &nbsp; &nbsp; 
   [&nbsp;<?php __("Q"); ?>&nbsp;] <?php __("Quotas"); ?> &nbsp; &nbsp; 
 
-<table class="tlist">
-<tr><td colspan="4">
+<p>
+<span class="ina" style="float:right;"><a href="adm_list.php?short=0"><?php __("Complete view"); ?></a></span> &nbsp;
 <?php  if (count($r)>50) { ?>
 <input type="submit" class="inb" name="submit" value="<?php __("Delete checked accounts"); ?>" />
 <?php } ?>
-</td>
-<td  class="trbtn" colspan="5">
-<span class="ina"><a href="adm_list.php?short=0"><?php __("Complete view"); ?></a></span>
-</td>
-</tr>
+</p>
+<table class="tlist" style="clear:both;">
 <tr>
    <th colspan="2"> </th><th><?php __("Account"); ?></th>
    <th colspan="2"> </th><th><?php __("Account"); ?></th>
@@ -281,8 +275,8 @@ if (is_array($val)) {
 
 
 ?>
-<tr><td colspan="10"><input type="submit" class="inb" name="submit" value="<?php __("Delete checked accounts"); ?>" /></td></tr>
 </table>
+<p><input type="submit" class="inb" name="submit" value="<?php __("Delete checked accounts"); ?>" /></p>
 </form>
 <?php
  }

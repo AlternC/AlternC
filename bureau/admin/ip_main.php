@@ -73,7 +73,7 @@ $lac = $authip->list_affected();
     echo "<td><pan title=\"{$list_ip[$ll['authorised_ip_id']]['ip_human']}\">".$list_ip[$ll['authorised_ip_id']]['infos'];
     //echo "<br/>".$list_ip[$ll['authorised_ip_id']]['ip_human'];
     echo "</span></td>";
-    echo "<td>".$ac[$ll['protocol']]['name'];
+    echo "<td>".@$ac[$ll['protocol']]['name'];
     if (isset($ac[$ll['protocol']]['values'][$ll['parameters']]) && $ac[$ll['protocol']]['values'][$ll['parameters']]) {
       echo " "._("for")." ".$ac[$ll['protocol']]['values'][$ll['parameters']];
     }

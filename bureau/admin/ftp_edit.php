@@ -90,13 +90,11 @@ if (isset($error) && $error) {
       <th><label for="pass"><?php __("Password"); ?></label></th>
       <td><a href="javascript:ftp_edit_pass_toggle();"><?php __("Click here if you want to edit password");?></a></td>
     </tr>
-    <tr class="trbtn">
-      <td colspan="2">
-        <input type="submit" class="inb" name="submit" value="<?php __("Save"); ?>" onclick='return ftp_check_pass();' />
-        <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='ftp_list.php'"/>
-      </td>
-    </tr>
   </table>
+  <p>
+    <input type="submit" class="inb" name="submit" value="<?php __("Save"); ?>" onclick='return ftp_check_pass();' /> &nbsp; 
+    <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='ftp_list.php'"/>
+  </p>
 </form>
 
 <script type="text/javascript">

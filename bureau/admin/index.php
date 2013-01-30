@@ -125,7 +125,7 @@ if (isset($url) && $url)  {
 </td>
 <td>
 <p>
-<a href="http://www.alternc.com/"><img src="alternc.jpg" width="128" height="32" alt="powered by AlternC" /></a>
+<a href="http://www.alternc.com/"><img src="powered_by_alternc2.png" width="128" height="32" alt="Powered by AlternC" /></a>
 </p>
 </td>
 </tr>

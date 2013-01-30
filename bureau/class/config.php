@@ -28,19 +28,17 @@
  ----------------------------------------------------------------------
 */
 
-/* Toutes les pages du bureau passent ici. On utilise une sémaphore pour 
-   s'assurer que personne ne pourra accéder à 2 pages du bureau en même temps.
-*/
+/* */
+if ( "@@REPLACED_DURING_BUILD@@"==$L_VERSION ) {
+  // To enable dispay of PHP errors
+  ini_set('display_errors', true);
+}
+/* */
 
 /*
   Si vous voulez mettre le bureau en maintenance, décommentez le code ci-dessous
   et mettez votre ip dans le IF pour que seule votre ip puisse accéder au bureau : 
 */
-
-/* * /
-// To enable dispay of PHP errors
-ini_set('display_errors', true);
-/* */
 
 /* * /
 if (getenv("REMOTE_ADDR")!="127.0.0.1") {
@@ -57,6 +55,9 @@ define('ALTERNC_PANEL',    "/var/alternc/bureau");
 define('ALTERNC_LOGS',     "/var/alternc/logs");
 define('ALTERNC_LOCALES',  "/var/alternc/bureau/locales");
 
+/* Toutes les pages du bureau passent ici. On utilise une sémaphore pour 
+   s'assurer que personne ne pourra accéder à 2 pages du bureau en même temps.
+*/
 // 1. Get a semaphore id for the alternc magic number (18577)
 $alternc_sem = sem_get ( 18577 );
 // 2. Declare the shutdown function, that release the semaphore

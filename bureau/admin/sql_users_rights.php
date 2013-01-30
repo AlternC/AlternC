@@ -51,8 +51,8 @@ if ($r) {
 
 <form method="post" action="sql_users_dorights.php">
 <input type="hidden" name="id" value="<?php echo $id; ?>" />
-<table cellspacing="0" cellpadding="4" class="tlist">
-   <tr>
+<table cellspacing="0" cellpadding="4" class="tlist ombrage">
+   <tr class="petit">
      <th>&nbsp;</th>
      <th>&nbsp;</th>
      <th>SELECT</th>
@@ -96,11 +96,11 @@ for($i=0;$i<count($r);$i++) {
 
  }
 ?>
-<tr><td colspan="5">
-   <input type="submit" value="<?php __("Apply"); ?>" class="inb" />
-  <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='sql_users_list.php'"/>
-</td></tr>
 </table>
+<p>
+  <input type="submit" value="<?php __("Apply"); ?>" class="inb" />
+  <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='sql_users_list.php'"/>
+</p>
 </form>
 <p>&nbsp;</p>
 <script type="text/javascript">

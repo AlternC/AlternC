@@ -89,8 +89,8 @@ while (list($key,$val)=each($r))
 <?php
 	}
 ?>
-<tr><td colspan="5"><input type="submit" name="submit" class="inb" value="<?php __("Delete checked accounts"); ?>" /></td></tr>
 </table>
+<p><input type="submit" name="submit" class="inb" value="<?php __("Delete checked accounts"); ?>" /></p>
 </form>
 
 <?php

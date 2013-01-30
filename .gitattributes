@@ -328,6 +328,8 @@ bureau/admin/piwik_sitelist.php -text
 bureau/admin/piwik_user_dodel.php -text
 bureau/admin/piwik_userlist.php -text
 bureau/admin/powered2.jpg -text
+bureau/admin/powered_by_alternc.png -text
+bureau/admin/powered_by_alternc2.png -text
 bureau/admin/quota_show.php -text
 bureau/admin/quotas_oneuser.php -text
 bureau/admin/quotas_users.php -text
