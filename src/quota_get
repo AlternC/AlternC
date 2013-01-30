@@ -46,13 +46,13 @@ quot=$(sudo quota -wvg "$MID" | grep "$QUOTA_PART" | $AWK 'NR==1 {print $1;}' )
 #first by testing if the partition is referenced by UUID
 val=$(sudo quota -vwg "$MID" |grep "$UUID" | awk 'END { print $2 "\n" $3; }')
 if [ -z "$val" ] ; then
-    val=$(sudo quota -A -wg "$MID" |grep "$QUOTA_PART" | awk '{ print $2 "\n" $3; }')
+    val=$(sudo quota -A -wg "$MID" |grep "$QUOTA_PART" | awk 'END { print $2 "\n" $3; }')
 
     # If the quota aren't activated, I return something anyway
     if [ -z "$val" ] ; then
         echo -e "0\n0"
     else
-        echo -e "0\n0"
+        echo -e "$val"
     fi
 
 else   
