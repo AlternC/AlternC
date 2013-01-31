@@ -62,8 +62,8 @@ include_once("head.php");
 <form action="bro_pref.php" method="post">
 
 
-<table cellpadding="6" border="1" cellspacing="0">
-<tr><td><?php __("Horizontal window size"); ?></td><td><select class="inl" name="editsizex">
+<table cellpadding="6" border="1" cellspacing="0" class='tedit'>
+<tr><th><?php __("Horizontal window size"); ?></th><td><select class="inl" name="editsizex">
 <?php
 for($i=50;$i<=200;$i+=10) {
 	echo "<option";
@@ -71,7 +71,7 @@ for($i=50;$i<=200;$i+=10) {
 	echo ">$i";
 }
 ?></select></td></tr>
-<tr><td><?php __("Vertical window size"); ?></td><td><select class="inl" name="editsizey">
+<tr><th><?php __("Vertical window size"); ?></th><td><select class="inl" name="editsizey">
 <?php
 for($i=4;$i<=80;$i+=2) {
 	echo "<option";
@@ -79,7 +79,7 @@ for($i=4;$i<=80;$i+=2) {
 	echo ">$i";
 }
 ?></select></td></tr>
-<tr><td><?php __("File editor font name"); ?></td><td><select class="inl" name="editor_font">
+<tr><th><?php __("File editor font name"); ?></th><td><select class="inl" name="editor_font">
 <?php
 for($i=0;$i<count($bro->l_editor_font);$i++) {
 	echo "<option";
@@ -87,7 +87,7 @@ for($i=0;$i<count($bro->l_editor_font);$i++) {
 	echo ">"._($bro->l_editor_font[$i]);
 }
 ?></select></td></tr>
-<tr><td><?php __("File editor font size"); ?></td><td><select class="inl" name="editor_size">
+<tr><th><?php __("File editor font size"); ?></th><td><select class="inl" name="editor_size">
 <?php
 for($i=0;$i<count($bro->l_editor_size);$i++) {
 	echo "<option";
@@ -95,7 +95,7 @@ for($i=0;$i<count($bro->l_editor_size);$i++) {
 	echo ">"._($bro->l_editor_size[$i]);
 }
 ?></select></td></tr>
-<tr><td><?php __("File list view"); ?></td><td><select class="inl" name="listmode">
+<tr><th><?php __("File list view"); ?></th><td><select class="inl" name="listmode">
 <?php
 for($i=0;$i<count($bro->l_mode);$i++) {
 	echo "<option";
@@ -103,7 +103,7 @@ for($i=0;$i<count($bro->l_mode);$i++) {
 	echo " value=\"$i\">"._($bro->l_mode[$i])."</option>";
 }
 ?></select></td></tr>
-<tr><td><?php __("Downloading file format"); ?></td><td><select class="inl" name="downfmt">
+<tr><th><?php __("Downloading file format"); ?></th><td><select class="inl" name="downfmt">
 <?php
 for($i=0;$i<count($bro->l_tgz);$i++) {
 	echo "<option";
@@ -111,7 +111,7 @@ for($i=0;$i<count($bro->l_tgz);$i++) {
 	echo " value=\"$i\">"._($bro->l_tgz[$i])."</option>";
 }
 ?></select></td></tr>
-<tr><td><?php __("What to do after creating a file"); ?></td><td><select class="inl" name="createfile">
+<tr><th><?php __("What to do after creating a file"); ?></th><td><select class="inl" name="createfile">
 <?php
 for($i=0;$i<count($bro->l_createfile);$i++) {
 	echo "<option";
@@ -119,7 +119,7 @@ for($i=0;$i<count($bro->l_createfile);$i++) {
 	echo " value=\"$i\">"._($bro->l_createfile[$i])."</option>";
 }
 ?></select></td></tr>
-<tr><td><?php __("Show icons?"); ?></td><td><select class="inl" name="showicons">
+<tr><th><?php __("Show icons?"); ?></th><td><select class="inl" name="showicons">
 <?php
 for($i=0;$i<count($bro->l_icons);$i++) {
 	echo "<option";
@@ -127,7 +127,7 @@ for($i=0;$i<count($bro->l_icons);$i++) {
 	echo " value=\"$i\">"._($bro->l_icons[$i])."</option>";
 }
 ?></select></td></tr>
-<tr><td><?php __("Show file types?"); ?></td><td><select class="inl" name="showtype">
+<tr><th><?php __("Show file types?"); ?></th><td><select class="inl" name="showtype">
 <?php
 for($i=0;$i<count($bro->l_icons);$i++) {
 	echo "<option";
@@ -135,7 +135,7 @@ for($i=0;$i<count($bro->l_icons);$i++) {
 	echo " value=\"$i\">"._($bro->l_icons[$i])."</option>";
 }
 ?></select></td></tr>
-<tr><td><?php __("Remember last visited directory?"); ?></td><td><select class="inl" name="golastdir">
+<tr><th><?php __("Remember last visited directory?"); ?></th><td><select class="inl" name="golastdir">
 <?php
 for($i=0;$i<count($bro->l_icons);$i++) {
 	echo "<option";
@@ -143,13 +143,12 @@ for($i=0;$i<count($bro->l_icons);$i++) {
 	echo " value=\"$i\">"._($bro->l_icons[$i])."</option>";
 }
 ?></select></td></tr>
+</table>
+<br/>
 
-<tr class="trbtn"><td colspan="2">
   <input type="submit" name="submit" class="inb" value="<?php __("Change my settings"); ?>" />
   <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='bro_main.php'"/>
 
-</td></tr>
-</table>
 
 </form>
 <?php include_once("foot.php"); ?>
