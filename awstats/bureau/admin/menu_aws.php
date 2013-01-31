@@ -32,9 +32,10 @@
 $q = $quota->getquota("aws");
 $r = $quota->getquota("dom");
 if (isset($q["t"]) && isset($r["u"]) && $q["t"] > 0 && $r["u"] > 0) {
-
 ?>
 <div class="menu-box">
-<div class="menu-title"><img src="images/stat.png" alt="<?php __("Web Statistics"); ?>" />&nbsp;<a href="aws_list.php"><?php __("Web Statistics"); ?></a> (<?= $q["u"]; ?>/<?= $q["t"]; ?>)</div>
+  <a href="aws_list.php">
+    <div class="menu-title"><img src="images/stat.png" alt="<?php __("Web Statistics"); ?>" />&nbsp;<?php __("Web Statistics"); ?> (<?= $q["u"]; ?>/<?= $q["t"]; ?>)</div>
+  </a>
 </div>
 <?php } ?>

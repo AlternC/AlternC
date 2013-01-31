@@ -368,8 +368,8 @@ class m_aws {
           $this->allow_login($v,$id, 1);
         }
       }
-      $this->_createconf($id);
-      $this->_createhtpasswd();
+      if (!$this->_createconf($id) ) return false;
+      if (!$this->_createhtpasswd() ) return false;
       mkdir($this->CACHEDIR."/".$hostname,0777);
       return true;
     } else {
@@ -468,9 +468,9 @@ class m_aws {
       return false;
     }
     $pass=crypt($pass);
+    // FIXME retourner une erreur l'insert se passe pas bien
     $db->query("INSERT INTO aws_users (uid,login,pass) VALUES ('$cuid','$login','$pass');");
-    $this->_createhtpasswd();
-    return true;
+    return $this->_createhtpasswd();
   }
 
 
@@ -489,8 +489,7 @@ class m_aws {
     }
     $pass=crypt($pass);
     $db->query("UPDATE aws_users SET pass='$pass' WHERE login='$login';");
-    $this->_createhtpasswd();
-    return true;
+    return $this->_createhtpasswd();
   }
 
 
@@ -590,10 +589,9 @@ class m_aws {
     foreach ($t as $i) {
       $this->_delconf($i);
     }
-    $this->_createhtpasswd();
     $db->query("DELETE FROM aws_access WHERE uid='$cuid'");
     $db->query("DELETE FROM aws_users WHERE uid='$cuid';");
-    return true;
+    return $this->_createhtpasswd();
   }
 
 
@@ -616,8 +614,7 @@ class m_aws {
       $db->query("DELETE FROM aws_access WHERE uid='$cuid' AND id='".$i[1]."';");
       $this->_delconf($i[0]);
     }
-    $this->_createhtpasswd();
-    return true;
+    return $this->_createhtpasswd();
   }
 
 
@@ -685,7 +682,11 @@ class m_aws {
    */
   function _createconf($id,$nochk=0) {
     global $db,$err,$cuid;
-    $s=implode("",file($this->TEMPLATEFILE));
+    $s=@implode("",file($this->TEMPLATEFILE));
+    if (!$s) {
+      $err->raise("aws",_("Problem to create the configuration"));
+      return false;
+    }
     if ($nochk) {
         $db->query("SELECT * FROM aws WHERE id='$id';");
     } else { 
@@ -716,14 +717,18 @@ class m_aws {
 
   /* ----------------------------------------------------------------- */
   function _createhtpasswd() {
-    global $db;
-    $f=fopen($this->HTAFILE,"wb");
+    global $db, $err;
+    $f=@fopen($this->HTAFILE,"wb");
     if ($f) {
       $db->query("SELECT login,pass FROM aws_users;");
       while ($db->next_record()) {
         fputs($f,$db->f("login").":".$db->f("pass")."\n");
       }
       fclose($f);
+      return true;
+    } else {
+      $err->raise("aws",sprintf(_("Problem to edit file %s"), $this->HTAFILE));
+      return false;
     }
   }
 

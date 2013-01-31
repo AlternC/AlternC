@@ -24,6 +24,14 @@
 */
 require_once("../class/config.php");
 include_once("head.php");
+?>
+
+<h3><?php __("Statistics List"); ?></h3>
+<hr id="topbar"/>
+<br />
+<?php if (!empty($error)) { echo "<p class=\"error\">$error</p>"; $error=''; } ?>
+<p>
+<?php
 
 $nosta=false;
 if (!$r=$aws->get_list()) {
@@ -31,25 +39,18 @@ if (!$r=$aws->get_list()) {
 	$nosta=true;
 }
 
+if (!empty($error)) { echo "<p class=\"error\">$error</p>"; $error=''; } 
 ?>
-<h3><?php __("Statistics List"); ?></h3>
-<hr id="topbar"/>
-<br />
-<p>
-		<span class="ina"><a href="aws_users.php"><?php __("Manage allowed users' accounts"); ?></a></span><br /><br />
-<?php
-	if ($quota->cancreate("aws")) { ?>
-		<span class="ina"><a href="aws_add.php"><?php __("Create new Statistics"); ?></a></span><br />
-<?php  	}
-?>
-</p>
-<?php
-	if (isset($error) && $error) {
-		echo "<p class=\"error\">$error</p>";
-	}
 
-if (!$nosta) {
-?>
+<span class="ina"><a href="aws_users.php"><?php __("Manage allowed users' accounts"); ?></a></span><br /><br />
+
+<?php
+if ($quota->cancreate("aws")) { ?>
+  <span class="ina"><a href="aws_add.php"><?php __("Create new Statistics"); ?></a></span><br />
+<?php } // cancreate ?>
+</p>
+
+<?php if (!$nosta) { ?>
 
 <form method="post" action="aws_del.php">
 <table cellspacing="0" cellpadding="4">
@@ -57,27 +58,23 @@ if (!$nosta) {
 <?php
 reset($r);
 $col=1;
-while (list($key,$val)=each($r))
-	{
+while (list($key,$val)=each($r)) {
 	$col=3-$col;
 ?>
 	<tr class="lst<?php echo $col; ?>">
 		<td><input type="checkbox" class="inc" id="del_<?php echo $val["id"]; ?>" name="del_<?php echo $val["id"]; ?>" value="<?php echo $val["id"]; ?>" /></td>
 	   <td><div class="ina"><a href="aws_edit.php?id=<?php echo $val["id"] ?>"><img src="images/edit.png" alt="<?php __("Edit"); ?>" title="<?php __("Edit"); ?>" /><?php __("Edit"); ?></a></div></td>
-		<td><label for="del_<?php echo $val["id"]; ?>"><?php echo $val["hostname"] ?></label></td>
+		<td><label for="del_<?php echo $val["id"]; ?>" class="retour-auto"><?php echo $val["hostname"] ?></label></td>
 		<td><?php echo $val["users"] ?></td>
-		<td><div class="ina"><img src="images/stat.png" alt="<?php __("View the statistics"); ?>" /><a href="/cgi-bin/awstats.pl?config=<?php echo $val["hostname"]; ?>"><?php __("View the statistics"); ?></a></div></td>
+		<td><div class="ina"><a href="/cgi-bin/awstats.pl?config=<?php echo $val["hostname"]; ?>"><img src="images/stat.png" alt="<?php __("View the statistics"); ?>" /><?php __("View the statistics"); ?></a></div></td>
 	</tr>
-<?php
-	}
+<?php } // while ?>
 
-?>
-
-<tr><td colspan="5"><input type="submit" class="inb" name="submit" value="<?php __("Delete the checked Statistics"); ?>" /></td></tr>
+<tr><td colspan="5"><input type="submit" class="inb" name="submit" onClick='return confirm("<?php __("Are you sure you want to delete the selected statistics?");?>");' value="<?php __("Delete the checked Statistics"); ?>" /></td></tr>
 </table>
 </form>
 <?php
-}
+} // if !nosta
 
+include_once("foot.php"); 
 ?>
-<?php include_once("foot.php"); ?>

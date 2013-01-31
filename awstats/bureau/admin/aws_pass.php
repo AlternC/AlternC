@@ -61,7 +61,7 @@ include_once("head.php");
 <?php
 if (isset($error) && $error) {
 ?>
-<p class="error"><?php echo $error ?></p>
+<p class="error"><?php echo $error ; $error=''; ?></p>
 <?php } ?>
 
 <form method="post" action="aws_pass.php" name="main" id="main">
@@ -70,7 +70,7 @@ if (isset($error) && $error) {
 <?php __("Username"); ?></th><td>
 	<code><?php echo $login; ?></code> <input type="hidden" name="login" value="<?php echo $login; ?>" />
 </td></tr>
-<tr><th><label for="pass"><?php __("New Password"); ?></label></th><td><input type="password" class="int" name="pass" id="pass" value="<?php echo $pass; ?>" size="20" maxlength="64" /><?php display_div_generate_password(); ?></td></tr>
+<tr><th><label for="pass"><?php __("New Password"); ?></label></th><td><input type="password" class="int" name="pass" id="pass" value="<?php echo $pass; ?>" size="20" maxlength="64" /><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#pass","#passconf"); ?></td></tr>
 <tr><th><label for="passconf"><?php __("Confirm password"); ?></label></th><td><input type="password" class="int" name="passconf" id="passconf" value="" size="20" maxlength="64" /></td></tr>
 <tr class="trbtn"><td colspan="2">
   <input type="submit" class="inb" name="submit" value="<?php __("Change this user's password"); ?>" />

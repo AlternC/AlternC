@@ -25,18 +25,22 @@
 require_once("../class/config.php");
 include_once("head.php");
 
+?>
+<h3><?php __("Awstats allowed user list"); ?></h3>
+<hr id="topbar"/>
+<br />
+<?php
+
+if (isset($error) && $error) { ?>
+<p class="error"><?php echo $error; $error=''; ?></p>
+<?php }
+
 $nologin=false;
 if (!$r=$aws->list_login()) {
 	$nologin=true;
 	$error=$err->errstr();
 }
 
-?>
-<h3><?php __("Awstats allowed user list"); ?></h3>
-<hr id="topbar"/>
-<br />
-
-<?php
 	if ($quota->cancreate("aws")) { ?>
 <p><span class="ina"><a href="aws_add.php"><?php __("Create new Statistics"); ?></a></span></p>
 <?php  	} ?>
@@ -47,10 +51,10 @@ if (!$r=$aws->list_login()) {
 <label for="login"><?php __("Username"); ?></label></th><td>
 	<select class="inl" name="prefixe"><?php $aws->select_prefix_list($prefixe); ?></select>&nbsp;<b>_</b>&nbsp;<input type="text" class="int" name="login" id="login" value="" size="20" maxlength="64" />
 </td></tr>
-<tr><th><label for="pass"><?php __("Password"); ?></label></th><td><input type="password" class="int" name="pass" id="pass" value="" size="20" maxlength="64" /><?php display_div_generate_password(); ?></td></tr>
+<tr><th><label for="pass"><?php __("Password"); ?></label></th><td><input type="password" class="int" name="pass" id="pass" value="" size="20" maxlength="64" /><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#pass","#passconf"); ?></td></tr>
 <tr><th><label for="passconf"><?php __("Confirm password"); ?></label></th><td><input type="password" class="int" name="passconf" id="passconf" value="" size="20" maxlength="64" /></td></tr>
 <tr class="trbtn"><td colspan="2">
-  <input type="submit" class="inb" name="submit" value="<?php __("Create this new awstat account"); ?>" />
+  <input type="submit" class="inb" name="submit" value="<?php __("Create this new Awstats user"); ?>" />
   <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='aws_list.php'"/>
 
 </td></tr>
@@ -85,7 +89,7 @@ foreach ($r as $val) {
 <?php
 	}
 ?>
-<tr><td colspan="5"><input type="submit" name="submit" class="inb" value="<?php __("Delete checked accounts"); ?>" /></td></tr>
+<tr><td colspan="5"><input type="submit" name="submit" class="inb" onClick='return confirm("<?php __("Are you sure you want to delete the selected accounts?");?>");' value="<?php __("Delete checked accounts"); ?>" /></td></tr>
 </table>
 </form>
 

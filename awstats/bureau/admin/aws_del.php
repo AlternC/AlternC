@@ -29,16 +29,16 @@ $error="";
 reset($_POST);
 $found=false;
 while (list($key,$val)=each($_POST)) {
-	if (substr($key,0,4)=="del_") {
-		// Effacement du jeu de stats $val
-		$r=$aws->delete_stats($val);
-		$found=true;
-		if (!$r) {
-			$error.=$err->errstr()."<br />";
-		} else {
-			$error.=sprintf(_("The statistics %s has been successfully deleted"),$r)."<br />";
-		}
-	}
+  if (substr($key,0,4)=="del_") {
+    // Effacement du jeu de stats $val
+    $r=$aws->delete_stats($val);
+    $found=true;
+    if (!$r) {
+      $error.=$err->errstr()."<br />";
+    } else {
+      $error.=sprintf(_("The statistics %s has been successfully deleted"),$r)."<br />";
+    }
+  }
 }
 
 if (!$found) {
