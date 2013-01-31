@@ -216,6 +216,14 @@ class m_hta {
   function add_user($user,$password,$dir) {
     global $err, $bro, $admin;
     $err->log("hta","add_user",$user."/".$dir);
+    if (empty($user)) {	
+      $err->raise('hta',_("Please enter a user"));
+      return false;
+    }
+    if (empty($password)) {	
+      $err->raise('hta',_("Please enter a password"));
+      return false;
+    }
     $absolute=$bro->convertabsolute($dir,0);
     if (!file_exists($absolute)) {
       $err->raise("hta",printf(("The folder '%s' does not exist"),$dir));

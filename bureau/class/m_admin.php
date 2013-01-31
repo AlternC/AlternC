@@ -1123,6 +1123,16 @@ EOF;
    */
   function checkPolicy($policy,$login,$password) {
     global $db,$err;
+
+    if (empty($login)) {
+      $err->raise("admin",_("-- Program error -- CheckPolicy need a login"));
+      return false;
+    }
+    if (empty($password)) {
+      $err->raise("admin",_("-- Program error -- CheckPolicy need a password"));
+      return false;
+    }
+
     $pol=$this->listPasswordPolicies();
     if (!$pol[$policy]) {
       $err->raise("admin",_("-- Program error -- The requested password policy does not exist!"));

@@ -43,12 +43,6 @@ if ($password != $passwordconf) {
 	exit();
 }
 
-if (empty($password)) {
-	$error=_("Please enter a password");
-	include ("hta_adduser.php");
-	exit();
-}
-
 if (!$hta->add_user($user, $password, $dir)) {
 	$error=$err->errstr();
 	include ("hta_adduser.php");
