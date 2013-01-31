@@ -136,6 +136,9 @@ function dobck() {
             ext=""
         fi
 
+        # The target directory must exist
+        test -d "$target_dir" || mkdir -p "$target_dir"
+
         # if $SQLBACKUP_TYPE is set to "rotate" classical rotation files methode will be used
         # use incrementale number in the name of files where the highest number indicate
         # the oldest files
