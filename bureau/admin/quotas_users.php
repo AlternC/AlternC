@@ -274,10 +274,12 @@ foreach ($membres_list as $c) {
   }
 
   // Mailman List Count
-  $mlc = $mailman->count_ml_user($c["uid"]);
-  echo "</td><td>$dc</td><td>$mc</td><td>$mlc</td><td";
-  if ($mode!=2) echo " style=\"text-align: right\"";
-  echo ">";
+  if (isset($mailman)) {
+    $mlc = $mailman->count_ml_user($c["uid"]);
+    echo "</td><td>$dc</td><td>$mc</td><td>$mlc</td><td";
+    if ($mode!=2) echo " style=\"text-align: right\"";
+    echo ">";
+  }
 
   // Espace WEB
   $ws = $quota->get_size_web_sum_user($c["uid"]);
