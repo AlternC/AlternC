@@ -56,7 +56,7 @@ if (!$dir) {
 	  
 ?>
 <form method="post" action="hta_dodeluser.php">
-<table cellspacing="0" cellpadding="4">
+<table cellspacing="0" cellpadding="4" class='tlist'>
 	<tr>
    <th colspan="2" ><input type="hidden" name="dir" value="<?php echo $dir?>"> </th>
 		<th><?php __("Username"); ?></th>
@@ -95,19 +95,19 @@ for($i=0;$i<count($r);$i++){
 <form method="post" action="hta_doadduser.php" name="main" id="main">
 <table class="tedit">
 	<tr>
-		<td><input type="hidden" name="dir" value="<?php echo $dir ?>" /><?php __("Folder"); ?></td>
+		<th><input type="hidden" name="dir" value="<?php echo $dir ?>" /><?php __("Folder"); ?></th>
 		<td><code><?php echo $dir; ?></code></td>
 	</tr>
 	<tr>
-		<td><label for="user"><?php __("Username"); ?></label></td>
+		<th><label for="user"><?php __("Username"); ?></label></th>
 		<td><input type="text" class="int" name="user" id="user" value="" size="20" maxlength="64" /></td>
 	</tr>
 	<tr>
-		<td><label for="password"><?php __("Password"); ?></label></td>
+		<th><label for="password"><?php __("Password"); ?></label></th>
 		<td><input type="password" class="int" name="password" id="password" value="" size="20" maxlength="64" /><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#password","#passwordconf"); ?></td>
 	</tr>
 	<tr>
-		<td><label for="passwordconf"><?php __("Confirm password"); ?></label></td>
+		<th><label for="passwordconf"><?php __("Confirm password"); ?></label></th>
 		<td><input type="password" class="int" name="passwordconf" id="passwordconf" value="" size="20" maxlength="64" /></td>
 	</tr>
 </table>
