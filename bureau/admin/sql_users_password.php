@@ -41,7 +41,7 @@ getFields($fields);
 <?php
 $r=$mysql->get_user_dblist($id);
 if (!$r) {
-  $error=_("This user doesn't exist");
+  $error=$err->errstr();
 }
 
 if (! empty($error) ) {

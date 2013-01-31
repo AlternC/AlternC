@@ -34,15 +34,19 @@ $fields = array (
 	"id" => array ("request", "string", ""),
 );
 getFields($fields);
-
-$r=$mysql->get_user_dblist($id);
 ?>
 <h3><?php printf(_("MySQL Rights for %s"),$id) ?></h3>
 <hr id="topbar"/>
 <br />
 <?php
-if (isset($error) && $error) {
-	echo "<p class=\"error\">$error</p><p>&nbsp;</p>";
+$r=$mysql->get_user_dblist($id);
+if (!$r) {
+  $error=$err->errstr();
+}
+
+if (!empty($error)) {
+  echo "<p class=\"error\">$error</p><p>&nbsp;</p>";
+  require_once('foot.php');
 }
 
 if ($r) {
