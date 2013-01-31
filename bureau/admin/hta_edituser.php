@@ -40,24 +40,37 @@ getFields($fields);
 <h3><?php printf(_("Editing user %s in the protected folder %s"),$user,$dir); ?></h3>
 <hr id="topbar"/>
 <br />
-<?php
-if (isset($error) && $error) {
-	echo "<p class=\"error\">$error</p>";
-}
-?>
+
+<?php if (!empty($error) ) { echo "<p class=\"error\">$error</p>"; } ?>
+
 <form method="post" action="hta_doedituser.php" name="main" id="main">
-<table border="1" cellspacing="0" cellpadding="4">
-<tr><td><input type="hidden" name="dir" value="<?php echo $dir ?>">
-<input type="hidden" name="user" value="<?php echo $user ?>">
-<?php __("Folder"); ?></td><td><code><?php echo $dir; ?></code></td></tr>
-<tr><td><?php __("User"); ?></td><td><code><?php echo $user; ?></code></td></tr>
-<tr><td><label for="newpass"><?php __("New password"); ?></label></td><td><input type="password" class="int" name="newpass" id="newpass" value="" size="20" maxlength="64" /><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#newpass","#newpassconf"); ?></td></tr>
-<tr><td><label for="newpassconf"><?php __("Confirm password"); ?></label></td><td><input type="password" class="int" name="newpassconf" id="newpassconf" value="" size="20" maxlength="64" /></td></tr>
-<tr><td colspan="2"><input type="submit" class="inb" value="<?php __("Change the password"); ?>" /></td></tr>
-</table>
+  <input type="hidden" name="dir" value="<?php echo $dir ?>">
+  <input type="hidden" name="user" value="<?php echo $user ?>">
+  <table border="1" cellspacing="0" cellpadding="4" class='tedit'>
+    <tr>
+      <th><?php __("Folder"); ?></th>
+      <td><code><?php echo $dir; ?></code></td>
+    </tr>
+    <tr>
+      <th><?php __("User"); ?></th>
+      <td><code><?php echo $user; ?></code></td>
+    </tr>
+    <tr>
+      <th><label for="newpass"><?php __("New password"); ?></label></th>
+      <td><input type="password" class="int" name="newpass" id="newpass" value="" size="20" maxlength="64" /><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#newpass","#newpassconf"); ?></td>
+    </tr>
+    <tr>
+      <th><label for="newpassconf"><?php __("Confirm password"); ?></label></th>
+      <td><input type="password" class="int" name="newpassconf" id="newpassconf" value="" size="20" maxlength="64" /></td>
+    </tr>
+  </table>
+  <br/>
+  <input type="submit" class="inb" value="<?php __("Change the password"); ?>" />
 </form>
+
 <script type="text/javascript">
-document.forms['main'].newpass.focus();
-document.forms['main'].setAttribute('autocomplete', 'off');
+  document.forms['main'].newpass.focus();
+  document.forms['main'].setAttribute('autocomplete', 'off');
 </script>
+
 <?php include_once("foot.php"); ?>

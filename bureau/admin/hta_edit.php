@@ -70,7 +70,7 @@ for($i=0;$i<count($r);$i++){
 	<tr class="lst<?php echo $col; ?>">
 		<td align="center"><input type="checkbox" class="inc" name="d[]" value="<?php echo $r[$i]?>" /></td>
 		<td>
-<div class="ina"><a href="hta_edituser.php?user=<?php echo $r[$i]?>&amp;dir=<?php echo $dir?>"><img src="icon/encrypted.png" alt="<?php __("Change this user's password"); ?>" /><?php __("Change this user's password"); ?></a></div>
+<div class="ina"><a href="hta_edituser.php?user=<?php echo urlencode($r[$i])?>&amp;dir=<?php echo urlencode($dir); ?>"><img src="icon/encrypted.png" alt="<?php __("Change this user's password"); ?>" /><?php __("Change this user's password"); ?></a></div>
 </td>
 		<td><?php echo $r[$i]; ?></td>
 	</tr>
