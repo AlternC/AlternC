@@ -783,6 +783,12 @@ class m_mysql {
   function get_user_dblist($user){
     global $db,$err,$mem,$cuid;
 
+    $this->dbus->query("SELECT * FROM mysql.user WHERE User='".$user."' AND Host='".$this->dbus->Client."';");
+    if (!$this->dbus->next_record() ) {
+      $err->raise('mysql',_("This user does not exist in the MySQL/User database"));
+      return false;
+    }  
+
     $r=array();
     $db->free();
     $dblist=$this->get_dblist();

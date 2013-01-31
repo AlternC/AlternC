@@ -34,38 +34,39 @@ $fields = array (
 	"id" => array ("request", "string", ""),
 );
 getFields($fields);
-
-$r=$mysql->get_user_dblist($id);
-
 ?>
 <h3><?php __("Change this user's password"); echo " - ".$id ?></h3>
 <hr id="topbar"/>
 <br />
 <?php
-	if (isset($error) && $error) {
-		echo "<p class=\"error\">$error</p><p>&nbsp;</p>";
-	}
+$r=$mysql->get_user_dblist($id);
+if (!$r) {
+  $error=_("This user doesn't exist");
+}
+
+if (! empty($error) ) {
+  echo "<p class=\"error\">$error</p>";
+  require_once('foot.php');
+  die();
+}
 
 ?>
 
 <form method="post" action="sql_users_dopassword.php">
 <input type="hidden" name="id" value="<?php echo $id; ?>" />
-<table cellspacing="0" cellpadding="4">
+<table cellspacing="0" cellpadding="4" class="tedit">
   <tr>
-    <td><label for="password"><?php __("Password"); ?></label></td>
+    <th><label for="password"><?php __("Password"); ?></label></th>
     <td><input type="password" class="int" name="password" id="password" value="" size="20" maxlength="64" /><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#password","#passwordconf"); ?></td>
   </tr>
   <tr>
-    <td><label for="passwordconf"><?php __("Confirm password"); ?></label></td>
+    <th><label for="passwordconf"><?php __("Confirm password"); ?></label></th>
     <td><input type="password" class="int" name="passwordconf" id="passwordconf" value="" size="20" maxlength="64" /></td>
   </tr>
-  <tr>
-    <td>
-      <input type="submit" class="inb" value="<?php __("Change user password"); ?>" />
-      <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='sql_users_list.php'"/>
-    </td>
-  </tr>
 </table>
+<br/>
+<input type="submit" class="inb" value="<?php __("Change user password"); ?>" />
+<input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='sql_users_list.php'"/>
 </form>
 
 <?php include_once("foot.php"); ?>
