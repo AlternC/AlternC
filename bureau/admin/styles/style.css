@@ -283,7 +283,8 @@ img {
   margin-bottom: 10px;
   font-size: 11px;
   background-color: #F4F4FA;
-  box-shadow: 1px 1px 5px #555;
+  border: 1px solid #888;
+  box-shadow: 1px 1px 5px #888;
   border-radius: 4px 4px 0 0;
   -webkit-border-radius: 4px 4px 0 0;
   -moz-border-radius: 4px 4px 0 0;
@@ -561,7 +562,7 @@ input#dir, input#sub_local {
 .menu-quota div.progress-bar {
   width: 180px;
   background: #fff;
-  border: solid 1px #CACACA;
+  border: solid 1px #AAA;
   padding-bottom
 }
 
