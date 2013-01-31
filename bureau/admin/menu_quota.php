@@ -66,7 +66,7 @@
       $url = ($key == 'bw_web' ? 'stats_show_per_month.php' : 'quota_show.php');
 
       echo "<dd>";
-      echo '<div><a href="' . $url . '">' . /* _($val) */  $key . ' ' . $usage_percent . '%' . ' (' . format_size($q[$key]["u"]) . ' / ' . format_size($q[$key]["t"]) . ')</a></div>';
+      echo '<div><a href="' . $url . '">' . /* _($val) */  _("quota_".$key) . ' ' . $usage_percent . '%' . ' (' . format_size($q[$key]["u"]) . ' / ' . format_size($q[$key]["t"]) . ')</a></div>';
       echo "</dd>";
       echo "<dd>";
       echo '<div class="progress-bar">';

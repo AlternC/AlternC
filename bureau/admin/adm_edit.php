@@ -112,14 +112,7 @@ if (!$r=$admin->get($uid)) {
 	<th><label for="type"><?php __("Account type"); ?></label></th>
 	<td><select name="type" id="type" class="inl">
 	<?php
-	$db->query("SELECT distinct(type) FROM defquotas ORDER by type");
-	while($db->next_record()) {
-	  $type = $db->f("type");
-	  echo "<option value=\"$type\"";
-	  if($type == $r['type'])
-	    echo " selected";
-	  echo ">$type</option>";
-	}
+        eoption($quota->listtype(), $r['type'], true);
 ?></select>&nbsp; <input type="checkbox" name="reset_quotas" id="reset_quotas" class="inc" /><label for="reset_quotas"><?php __("Reset quotas to default?") ?></label></td>
 </tr>
 <tr>

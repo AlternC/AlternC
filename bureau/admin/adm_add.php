@@ -95,14 +95,7 @@ if (isset($error) && $error) {
 	<th><label for="type"><?php __("Account type"); ?></label></th>
 	<td><select name="type" id="type" class="inl">
 	<?php
-	$db->query("SELECT distinct(type) FROM defquotas ORDER by type");
-	while($db->next_record()) {
-	  $type = $db->f("type");
-	  echo "<option value=\"$type\"";
-	  if($type == 'default')
-	    echo " selected=\"selected\"";
-	  echo ">$type</option>";
-	}
+	eoption($quota->listtype(), 'default', true);
 ?></select>
 </td>
 </tr>
