@@ -1,5 +1,4 @@
 #!/bin/bash
-set -x
 AWK=/usr/bin/awk
 DF=/bin/df
 SED=/bin/sed

@@ -147,6 +147,8 @@ class m_quota {
 	while (list($key,$val)=each($this->disk)) {
 	  $a=array(); 
 	  exec("/usr/lib/alternc/quota_get ".$cuid ,$a);
+          $a[0]=intval($a[0]);
+          $a[1]=intval($a[1]);
 	  $this->quotas[$val]=array("name"=>"$val", 'description'=>_("quota_".$val), "t"=>$a[1],"u"=>$a[0]);
 	}   
 
