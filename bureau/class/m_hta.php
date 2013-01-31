@@ -244,7 +244,7 @@ class m_hta {
 	}
       }
       fseek($file,SEEK_END);
-      if (substr($t[1],-1)!="\n") {
+      if ( empty($t[1]) || substr($t[1],-1)!="\n") {
 	fwrite($file,"\n");
       }
       fwrite($file, "$user:"._md5cr($password)."\n");

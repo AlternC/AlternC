@@ -79,11 +79,12 @@ include_once("head.php");
   $content=$bro->content($R,$editfile);
   if (empty($content)) { 
     $failed=true;
+    $error=_("This file is empty");
   } else {
     echo $content;  
   }
 ?></textarea>
-<?php if ($failed) echo "<p class=\"error\">".$err->errstr()."</p>"; ?>
+<?php if (!empty($error)) echo "<p class=\"error\">".$error."</p>"; ?>
 	<input type="hidden" name="editfile" value="<?php echo str_replace("\"","&quot;",$editfile); ?>" />
 	<input type="hidden" name="R" value="<?php echo str_replace("\"","&quot;",$R); ?>" />
 

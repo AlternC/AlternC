@@ -45,9 +45,9 @@ include_once("head.php");
 	}
 ?>
 <form method="post" action="hta_doadd.php" name="main" id="main">
-<table border="1" cellspacing="0" cellpadding="4">
+<table border="1" cellspacing="0" cellpadding="4" class='tedit'>
 <tr>
-	<td><label for="dir"><?php __("Folder"); ?></label></td>
+	<th><label for="dir"><?php __("Folder"); ?></label></th>
 	<td><input type="text" class="int" name="dir" id="dir" value="<?php (isset($dir)) ? : $dir="";ehe($dir); ?>" maxlength="255" />
 			<?php display_browser( ehe($dir,0) , "main.dir" ); ?>
 </td>
