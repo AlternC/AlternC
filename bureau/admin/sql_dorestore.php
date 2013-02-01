@@ -35,33 +35,36 @@ $fields = array (
 	"restfile"    		=> array ("post", "string", ""),
 );
 getFields($fields);
+?>
 
+<h3><?php __("MySQL Databases"); ?></h3>
+<hr id="topbar"/>
+<br />
+
+<?php
 
 if (!$r=$mysql->get_mysql_details($id)) {
         $error=$err->errstr();
 }
+if (! $r["enabled"]) { 
+  echo "<p class=\"error\">"._("You currently have no database defined")."</p>";
+  include_once("foot.php");
+  die();
+}
 ?>
-<h3><?php __("MySQL Databases"); ?></h3>
-<hr id="topbar"/>
-<br />
-<?php
-if ($r["enabled"]) {
-?>
+
 <h3><?php __("Restore a SQL backup"); ?></h3>
+
 <p>
 <?php
 if (!$mysql->restore($restfile,true,$id))  {
-	$error=$err->errstr();
+  $error=$err->errstr();
 } else {
-	$error=_("Your database has been restored, check out the previous text for error messages.");
-}
+  $error=_("Your database has been restored, check out the previous text for error messages.");
+} // if mysql->restore
 
 echo "<p class=\"error\">$error</p><p>&nbsp;</p>";
-} else {
 
-__("You currently have no database defined");
-
-}
 ?>
 </p>
 <?php include_once("foot.php"); ?>

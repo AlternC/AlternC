@@ -487,6 +487,11 @@ class m_mysql {
       $err->raise("mysql",_("File not found"));
       return false; 
     }
+    if (!file_exists($fi)) {
+      $err->raise("mysql",_("File not found"));
+      return false; 
+    }
+
     if (substr($fi,-3)==".gz") {
       $exe="/bin/gzip -d -c <".escapeshellarg($fi)." | /usr/bin/mysql -h".escapeshellarg($L_MYSQL_HOST)." -u".escapeshellarg($r["login"])." -p".escapeshellarg($r["pass"])." ".escapeshellarg($r["db"]); 
     } elseif (substr($fi,-4)==".bz2") { 

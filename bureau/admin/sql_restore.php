@@ -59,8 +59,18 @@ echo "</p>";
 <form action="sql_dorestore.php" method="post">
 <input type="hidden" name="id" value="<?php echo $id ?>" />
 <p><label for="restfile"><?php __("Please enter the path and the filename containing SQL data to be restored."); ?></label></p>
-<p><input type="text" class="int" id="restfile" name="restfile" size="35" maxlength="255" value="" /> <input class="inb" type="submit" name="submit" value="<?php __("Restore my database"); ?>" /></p>
+<p><input type="text" class="int" id="restfile" name="restfile" size="35" maxlength="255" value="" /> <input class="inb" type="submit" name="submit" onClick='return restfilenotempty();' value="<?php __("Restore my database"); ?>" /></p>
 </form>
+<script type="text/javascript">
+  function restfilenotempty() {
+    if ( $('#restfile').val() == '' ) {
+      alert("<?php __("Please the complete path of the filename");?>");
+      return false;
+    } else {
+      return true;
+    }
+  }
+</script>
 <?php
 echo "<p>";
 __("Note: If the filename ends with .gz, it will be uncompressed before.");
