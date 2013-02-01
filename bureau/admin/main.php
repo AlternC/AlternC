@@ -44,6 +44,7 @@ if ($mem->user["lastfail"]) {
 	printf(_("%1\$d login failed since last login")."<br />",$mem->user["lastfail"]);
 }
 
+if (!empty($error) ) { echo "<p class='error'>$error</p>";$error=''; } 
 ?>
 <center>
 <?php

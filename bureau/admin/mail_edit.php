@@ -82,7 +82,7 @@ if (isset($error)) {
 <p><?php printf(_('This mailbox is currently using %1$s / %2$s'),format_size($used),format_size($quotabytes)); ?></p>
 <?php } ?>
 <?php if ($mailbox_action=="DELETE") { ?>
-<p><span class="error"><?php __("This mailbox is pending deletion. You can recover its mails by setting it to 'Yes' NOW!"); ?></span></p>
+<p class="error"><?php __("This mailbox is pending deletion. You can recover its mails by setting it to 'Yes' NOW!"); ?></p>
 <?php } ?>
 </td>
     <td>

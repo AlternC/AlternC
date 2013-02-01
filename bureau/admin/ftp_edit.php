@@ -41,6 +41,8 @@ if ( !isset($is_include) ) {
 
 if (!$id && !$create) {
   $error=_("Neither a creation nor a edition");
+  echo "<h3>"._("Create a FTP account")."</h3>";
+  echo "<p class=\"error\">$error</p>";
   include_once("foot.php");
   exit();
 }

@@ -476,6 +476,10 @@ class m_mysql {
   function restore($file,$stdout,$id) { 
     // TODO don't work with the separated sql serveur for dbusers
     global $err,$bro,$mem,$L_MYSQL_HOST;
+    if (empty($file)) {
+      $err->raise("mysql",_("No file specified"));
+      return false; 
+    }
     if (!$r=$this->get_mysql_details($id)) { 
       return false; 
     } 
