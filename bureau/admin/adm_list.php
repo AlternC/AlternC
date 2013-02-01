@@ -219,10 +219,10 @@ $val=$r[$z];
  <td align="center"><input type="checkbox" class="inc" name="d[]" value="<?php echo $val["uid"]; ?>" /></td>
 <?php } ?>
 		<td align="center">
-		   <a href="adm_login.php?id=<?php echo $val["uid"];?>" target="_parent">[&nbsp;<?php __("C"); ?>&nbsp;]</a>
-		   <a href="adm_edit.php?uid=<?php echo $val["uid"] ?>">[&nbsp;<?php __("E"); ?>&nbsp;]</a>
+		   <a href="adm_login.php?id=<?php echo $val["uid"];?>" target="_parent" title="<?php __("Connect as"); ?>">[&nbsp;<?php __("C"); ?>&nbsp;]</a>
+		   <a href="adm_edit.php?uid=<?php echo $val["uid"] ?>" title="<?php __("Edit"); ?>">[&nbsp;<?php __("E"); ?>&nbsp;]</a>
 <?php		  if($admin->checkcreator($val['uid'])) { ?>
-		   <a href="adm_quotaedit.php?uid=<?php echo $val["uid"] ?>">[&nbsp;<?php __("Q"); ?>&nbsp;]</a>
+		   <a href="adm_quotaedit.php?uid=<?php echo $val["uid"] ?>" title="<?php __("Quotas"); ?>">[&nbsp;<?php __("Q"); ?>&nbsp;]</a>
 							  <?php } ?>
 		</td>
 		<td style="padding-right: 2px; border-right: 1px solid black; <?php if ($val["su"]) echo "color: red"; ?>"><b><?php echo $val["login"] ?></b></td>
