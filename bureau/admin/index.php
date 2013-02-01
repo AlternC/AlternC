@@ -27,8 +27,8 @@
 require_once("../class/config_nochk.php");
 
 if (!$mem->del_session()) {
-	// No need to draw an error message ...
-	//$error=$err->errstr();
+  // No need to draw an error message ...
+  //$error=$err->errstr();
 }
 
 $H=getenv("HTTP_HOST");
@@ -46,97 +46,106 @@ if (!$charset) $charset="UTF-8";
 <title>AlternC Desktop</title>
 <link rel="stylesheet" href="styles/style.css" type="text/css" />
 <script type="text/javascript" src="js/alternc.js"></script>
+<script src="js/jquery.min.js" type="text/javascript"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $charset; ?>" />
 </head>
 <body>
-	<div id="global">
+  <div id="global">
 
-		<div id="content" style="width:100%;">
+    <div id="content" style="width:100%;">
 
-			<p id="logo">  <img src="logo.png" border="0" alt="<?php __("Web Hosting Control Panel"); ?>" title="<?php __("Web Hosting Control Panel"); ?>" /></a>
-			</p>
-			<p>&nbsp;</p>
-		<?php if (isset($error) && $error) echo "<div class='error'>$error</div>"; ?>
-		<br/>
-		<?php
-		if (isset($_GET['authip_token'])) $authip_token=$_GET['authip_token'];
-		/*
-		if (!$_SERVER[HTTPS]) {
-			echo "<h4>ATTENTION : vous allez accéder à votre panel en mode *non sécurisé*<br/>
-		<a href=\"https://".$_SERVER["HTTP_HOST"]."/\">Cliquez ici pour passer en mode sécurisé</a></h4>"; 
-		}
-		*/
-		?>
-		<div style="margin: 0 auto 30px auto; width: 700px;">
-			<table width="100%"><tr><td>
-				<?php __("To connect to the hosting control panel, enter your AlternC's login and password in the following form and click 'Enter'"); ?>
-				<?php if (!empty($authip_token)) { echo "<p style='color:red;'>";__("You are attemping to connect without IP restriction."); echo "</p>"; } ?>
-				</td><td>
-					<form action="login.php" method="post" name="loginform" target="_top">
-						<table border="0" style="border: 1px solid #202020;" cellspacing="0" cellpadding="3" width="300px" >
-						<tr><td colspan="2" align="center"><b><?php __("AlternC access"); ?></b></td></tr>
-						<tr><td align="right"><label for="username"><?php echo _("Username"); ?></label></td><td><input type="text" class="int" name="username" id="username" value="" maxlength="128" size="15" /></td></tr>
-						<tr><td align="right"><label for="password"><?php echo _("Password"); ?></label></td><td><input type="password" class="int" name="password" id="password" value="" maxlength="128" size="15" /></td></tr>
-						<tr><td colspan="2" align="center"><input type="submit" class="inb" name="submit" value="<?php __("Enter"); ?>" /><input type="hidden" id="restrictip" name="restrictip" value="1" /></td></tr>
-						</table>
-						<input type="hidden" id="authip_token" name="authip_token" value="<?php echo htmlentities( (empty($authip_token)?'':$authip_token) ) ?>" />
-					</form>
+      <p id="logo">  <img src="logo.png" border="0" alt="<?php __("Web Hosting Control Panel"); ?>" title="<?php __("Web Hosting Control Panel"); ?>" /></a>
+      </p>
+      <p>&nbsp;</p>
+    <?php if (isset($error) && $error) echo "<div class='error'>$error</div>"; ?>
+    <br/>
+    <?php
+    if (isset($_GET['authip_token'])) $authip_token=$_GET['authip_token'];
+    /*
+    if (!$_SERVER[HTTPS]) {
+      echo "<h4>ATTENTION : vous allez accéder à votre panel en mode *non sécurisé*<br/>
+    <a href=\"https://".$_SERVER["HTTP_HOST"]."/\">Cliquez ici pour passer en mode sécurisé</a></h4>"; 
+    }
+    */
+    ?>
+    <div style="margin: 0 auto 30px auto; width: 700px;">
+      <table width="100%"><tr><td>
+        <?php __("To connect to the hosting control panel, enter your AlternC's login and password in the following form and click 'Enter'"); ?>
+        <?php if (!empty($authip_token)) { echo "<p style='color:red;'>";__("You are attemping to connect without IP restriction."); echo "</p>"; } ?>
+        </td><td>
+          <form action="login.php" method="post" name="loginform" target="_top">
+            <table border="0" style="border: 1px solid #202020;" cellspacing="0" cellpadding="3" width="300px" >
+            <tr><td colspan="2" align="center"><b><?php __("AlternC access"); ?></b></td></tr>
+            <tr><td align="right"><label for="username"><?php echo _("Username"); ?></label></td><td><input type="text" class="int" name="username" id="username" value="" maxlength="128" size="15" /></td></tr>
+            <tr><td align="right"><label for="password"><?php echo _("Password"); ?></label></td><td><input type="password" class="int" name="password" id="password" value="" maxlength="128" size="15" /></td></tr>
+            <tr><td colspan="2" align="center"><input type="submit" class="inb" name="submit" onClick='return logmein();' value="<?php __("Enter"); ?>" /><input type="hidden" id="restrictip" name="restrictip" value="1" /></td></tr>
+            </table>
+            <input type="hidden" id="authip_token" name="authip_token" value="<?php echo htmlentities( (empty($authip_token)?'':$authip_token) ) ?>" />
+          </form>
 
-				</td></tr>
-				<tr><td>
+        </td></tr>
+        <tr><td>
 
-				<?php
+        <?php
 
-					// Here we used to have a form to enter the squirrelmail's webmail.
-					// Following the "rule of less astonishment, we try to put it here again, even though the webmail is now a plugin.
-					$res=$hooks->invoke("hook_admin_webmail");
-				if (($wr=variable_get("webmail_redirect")) && isset($res[$wr]) && $res[$wr]) {
-					$url=$res[$wr];
-				} else {
-					foreach($res as $r) if ($r!==false) { $url=$r; break; }
-				}
-				if (isset($url) && $url)  {
-				?>
-					<p><a href="<?php echo $url; ?>"><?php __("To read your mail in a browser, click here to go to your server's Webmail"); ?></a></p>
-				<?php
-				}
-				?></td><td>
+          // Here we used to have a form to enter the squirrelmail's webmail.
+          // Following the "rule of less astonishment, we try to put it here again, even though the webmail is now a plugin.
+          $res=$hooks->invoke("hook_admin_webmail");
+        if (($wr=variable_get("webmail_redirect")) && isset($res[$wr]) && $res[$wr]) {
+          $url=$res[$wr];
+        } else {
+          foreach($res as $r) if ($r!==false) { $url=$r; break; }
+        }
+        if (isset($url) && $url)  {
+        ?>
+          <p><a href="<?php echo $url; ?>"><?php __("To read your mail in a browser, click here to go to your server's Webmail"); ?></a></p>
+        <?php
+        }
+        ?></td><td>
 
-				</td></tr>
+        </td></tr>
 
-			</table>
-
-
-			<table width="100%" style="border: 0">
-				<tr><td style="text-align: left; font-size: 10px">
-				<?php __("You must accept the session cookie to log-in"); ?>
-				<br />
-				<?php echo "If you want to use a different language, choose it in the list below"; ?>
-				<br />
-							<?php 
-						foreach($locales as $l) {
-							?>
-							<a href="?setlang=<?php echo $l; ?>"><?php if (isset($lang_translation[$l])) echo $lang_translation[$l]; else echo $l;  ?></a>
-							<?php } ?>
-				<br />
-				<?php
-				 $mem->show_help("login",true); 
-				?>
-				</td>
-				<td>
-				<p>
-				<a href="http://www.alternc.com/"><img src="powered_by_alternc2.png" width="128" height="32" alt="Powered by AlternC" /></a>
-				</p>
-				</td>
-				</tr>
-			</table>
+      </table>
 
 
-		</div>
-		<script>
-		document.forms['loginform'].username.focus();
-		</script>
+      <table width="100%" style="border: 0">
+        <tr><td style="text-align: left; font-size: 10px">
+        <?php __("You must accept the session cookie to log-in"); ?>
+        <br />
+        <?php echo "If you want to use a different language, choose it in the list below"; ?>
+        <br />
+              <?php 
+            foreach($locales as $l) {
+              ?>
+              <a href="?setlang=<?php echo $l; ?>"><?php if (isset($lang_translation[$l])) echo $lang_translation[$l]; else echo $l;  ?></a>
+              <?php } ?>
+        <br />
+        <?php
+         $mem->show_help("login",true); 
+        ?>
+        </td>
+        <td>
+        <p>
+        <a href="http://www.alternc.com/"><img src="powered_by_alternc2.png" width="128" height="32" alt="Powered by AlternC" /></a>
+        </p>
+        </td>
+        </tr>
+      </table>
 
-	</div>
+
+    </div>
+    <script>
+    document.forms['loginform'].username.focus();
+
+    function logmein(){
+      if ( $('#username').val() =='' || $('#password').val() =='' ) {
+        alert('<?php __("Need a login and a password"); ?>');
+        return false;
+      }
+      return true;
+    }
+    </script>
+
+  </div>
 </body>
 </html>
