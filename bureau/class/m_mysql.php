@@ -90,7 +90,7 @@ class DB_users extends DB_Sql {
     // c'est pas étanche : $db se retrouve avec Database de $sql->dbu . Danger, faut comprendre pourquoi
     // Si on veux que ca marche, il faut Database=alternc.
     //$this->Database = "mysql";
-    $this->Database = "alternc";
+    $this->Database = "mysql_schema"; #if dbus is on a different  host the alternc database will not be there and trying to use it might cause an error
     $this->HumanHostname = $human_hostname;
 
   }
@@ -474,8 +474,7 @@ class m_mysql {
    * @return boolean TRUE if the database has been restored, or FALSE if an error occurred
    */
   function restore($file,$stdout,$id) { 
-    // TODO don't work with the separated sql serveur for dbusers
-    global $err,$bro,$mem,$L_MYSQL_HOST;
+    global $err,$bro,$mem,$L_MYSQL_HOST,$db;
     if (empty($file)) {
       $err->raise("mysql",_("No file specified"));
       return false; 
@@ -493,11 +492,11 @@ class m_mysql {
     }
 
     if (substr($fi,-3)==".gz") {
-      $exe="/bin/gzip -d -c <".escapeshellarg($fi)." | /usr/bin/mysql -h".escapeshellarg($L_MYSQL_HOST)." -u".escapeshellarg($r["login"])." -p".escapeshellarg($r["pass"])." ".escapeshellarg($r["db"]); 
+      $exe="/bin/gzip -d -c <".escapeshellarg($fi)." | /usr/bin/mysql -h".escapeshellarg($this->dbus->Host)." -u".escapeshellarg($r["login"])." -p".escapeshellarg($r["pass"])." ".escapeshellarg($r["db"]); 
     } elseif (substr($fi,-4)==".bz2") { 
-      $exe="/usr/bin/bunzip2 -d -c <".escapeshellarg($fi)." | /usr/bin/mysql -h".escapeshellarg($L_MYSQL_HOST)." -u".escapeshellarg($r["login"])." -p".escapeshellarg($r["pass"])." ".escapeshellarg($r["db"]); 
+      $exe="/usr/bin/bunzip2 -d -c <".escapeshellarg($fi)." | /usr/bin/mysql -h".escapeshellarg($this->dbus->Host)." -u".escapeshellarg($r["login"])." -p".escapeshellarg($r["pass"])." ".escapeshellarg($r["db"]); 
     } else { 
-      $exe="/usr/bin/mysql -h".escapeshellarg($L_MYSQL_HOST)." -u".escapeshellarg($r["login"])." -p".escapeshellarg($r["pass"])." ".escapeshellarg($r["db"])." <".escapeshellarg($fi); 
+      $exe="/usr/bin/mysql -h".escapeshellarg($this->dbus->Host)." -u".escapeshellarg($r["login"])." -p".escapeshellarg($r["pass"])." ".escapeshellarg($r["db"])." <".escapeshellarg($fi); 
     }
     $exe .= " 2>&1";
 
