@@ -133,12 +133,16 @@ if(!empty($mails_list)) {
   $col=3-$col; $grey="";
 	?>
 	<tr class="lst<?php echo $col; ?>">
-	   <?php if ($val["mail_action"]=="DELETING") { $grey="grey"; ?>
-	  <td colspan="3"><?php __("Deleting..."); ?></td>
+	  <?php if ($val["mail_action"]=="DELETING") { $grey="grey"; ?>
+	    <td colspan="3"><?php __("Deleting..."); ?></td>
 	  <?php } else if ($val["mail_action"]=="DELETE") { $grey="grey"; ?>
-	  <td></td>
-	  <td><div class="ina"><a href="mail_undelete.php?search=<?php ehe($search); ?>&amp;offset=<?php ehe($offset); ?>&amp;count=<?php ehe($count); ?>&amp;domain_id=<?php ehe($domain_id);  ?>&amp;mail_id=<?php echo $val["id"] ?>" title="<?php __("This email will be deleted soon. You may still be able to undelete it by clicking here"); ?>"><img src="images/undelete.png" alt="<?php __("Undelete"); ?>" /><?php __("Undelete"); ?></a></div></td>
-	  <td><img src="images/check_no.png" alt="<?php __("Disabled"); ?>" /></td>	  
+	    <td></td>
+	    <td> 
+              <?php if ($val['type'] =='') { ?>
+                <div class="ina"><a href="mail_undelete.php?search=<?php ehe($search); ?>&amp;offset=<?php ehe($offset); ?>&amp;count=<?php ehe($count); ?>&amp;domain_id=<?php ehe($domain_id);  ?>&amp;mail_id=<?php echo $val["id"] ?>" title="<?php __("This email will be deleted soon. You may still be able to undelete it by clicking here"); ?>"><img src="images/undelete.png" alt="<?php __("Undelete"); ?>" /><?php __("Undelete"); ?></a></div>
+              <?php } // if val[type] ?>
+            </td>
+	    <td><img src="images/check_no.png" alt="<?php __("Disabled"); ?>" /></td>	  
 	  <?php } else if (!$val["type"]) { ?>
           <td align="center">
 	    <input class="inc" type="checkbox" id="del_<?php echo $i; ?>" name="d[]" value="<?php ehe($val["id"]); ?>" />
