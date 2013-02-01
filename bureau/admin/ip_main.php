@@ -52,7 +52,7 @@ $lac = $authip->list_affected();
 <br />
 
 <?php if (isset($error) && $error) { ?>
-  <p class="error"><?php echo $error ?></p>
+  <p class="error"><?php echo $error ; $error=''; ?></p>
 <?php } ?>
 
 <p><?php __("Here you can add rules to restrict access to AlternC's services, filtered by IP. First, add trusted IPs in the 'Known IP and networks' list. Then, add rules to grant access on services to the chosen IPs from this list.") ?></p>

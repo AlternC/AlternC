@@ -319,14 +319,23 @@ class m_authip {
    * @return boolean Retourne TRUE
    */
   function call_hooks($function, $affectation_id) {
-    global $hooks;
+    global $hooks,$err;
 
     // On récure l'objet dont on parle
     $d = $this->list_affected();
+    if (! isset($d[$affectation_id] )) {
+      $err->raise('authip', _("Object not available"));
+      return false;
+    }
+
     $affectation = $d[$affectation_id];
 
     // On en déduis la classe qui le concerne
     $e = $this->get_auth_class();
+    if (! isset($e[$affectation['protocol']])) {
+      $err->raise('authip', sprintf(_("Can't identified class for the protocole %s"), $affectation['protocol']));
+      return false;
+    }
     $c = $e[$affectation['protocol']]['class'];
 
     // On appelle le hooks de cette classe
