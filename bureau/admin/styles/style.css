@@ -144,15 +144,15 @@ input.inav:hover, .inav a:hover, a.inav:hover {
   padding: 4px 10px;
   color: black;
   cursor: pointer;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;  
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;  
 }
 input[type=button],
 input[type=submit] {
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;  
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;  
 }
 .ina a:hover, a.ina:hover, .inav a:hover, a.inav:hover {
   text-decoration: none;
