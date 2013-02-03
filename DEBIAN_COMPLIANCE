@@ -1,0 +1,70 @@
+
+2013: We are now trying to make AlternC enter Debian repositories and follow Debian rules :) 
+
+The main issues we know as of today are:  
+
+- the static UID/GID of AlternC-panel (uid/gid 1999) need to be dynamic and allocated when needed.
+
+- the control panel is located in /var/alternc/bureau => move it to /usr/lib/alternc/www ?
+
+- the html data are in /var/alternc/html/[a-z0-9] => move them to /var/www/[a-z0-9]
+
+- the mail data are in /var/alternc/mail/[a-z0-9] => move them to /var/mail/[a-z0-9]
+
+- the bind zones, apache vhosts and other dynamic data are in /var/alternc/(bind|apache-vhost)/ => move them to /var/lib/alternc/(samename)
+
+- we don't need our own php session folder don't we ? (or maybe for alternc-panel writable only ?) 
+  W: alternc: non-standard-dir-perm var/alternc/sessions/ 1733 != 0755
+
+- some binaries / scripts don't have a man page
+
+- we are packaging some JS library ourself : 
+  W: alternc: embedded-javascript-library var/alternc/bureau/admin/js/prototype.js
+  W: alternc: embedded-javascript-library var/alternc/bureau/admin/js/jquery.min.js
+
+- W: alternc: virtual-package-depends-without-real-package-depends depends: mailx
+
+
+Easy to fix NOW :  
+E: alternc: dir-or-file-in-var-run var/run/alternc/
+W: alternc: binary-without-manpage usr/bin/alternc_get_path
+W: alternc: binary-without-manpage usr/bin/alternc_reload
+W: alternc: script-not-executable usr/lib/alternc/functions.sh
+W: alternc: script-not-executable usr/lib/alternc/functions_dns.sh
+W: alternc: script-not-executable usr/lib/alternc/functions_hosting.sh
+W: alternc: script-not-executable var/alternc/bureau/class/export_account.php
+W: alternc: command-with-path-in-maintainer-script config:205 /usr/bin/awk
+W: alternc: maintainer-script-ignores-errors prerm
+E: alternc-upnp: php-script-but-no-phpX-cli-dep usr/lib/alternc/update_upnp.sh
+W: alternc-upnp: executable-not-elf-or-script usr/lib/alternc/install.d/upnp-install
+W: alternc-awstats: possible-debconf-note-abuse preinst:13 alternc-awstats/errorinstall
+W: executable-is-not-world-readable /usr/lib/alternc/update_quota_mail.sh 0750
+W: alternc-slave: debian-news-entry-has-unknown-version 0.9.10
+W: alternc-slave: debian-changelog-line-too-long line 4
+W: alternc-slave: debian-changelog-line-too-long line 8
+W: alternc-slave: debian-changelog-line-too-long line 25
+
+E: alternc: duplicate-conffile etc/cron.d/alternc
+E: alternc: duplicate-conffile etc/logrotate.d/alternc
+W: alternc: malformed-prompt-in-templates alternc/slaves
+W: alternc: malformed-question-in-templates alternc/use_local_mysql
+W: alternc: malformed-question-in-templates alternc/use_remote_mysql
+W: alternc: malformed-question-in-templates alternc/remote_mysql_error
+W: alternc: using-question-in-extended-description-in-templates alternc/remote_mysql_error
+W: alternc: malformed-question-in-templates alternc/use_private_ip
+W: alternc: using-question-in-extended-description-in-templates alternc/use_private_ip
+W: alternc source: out-of-date-standards-version 3.9.1 (current is 3.9.2)
+W: alternc source: dh-clean-k-is-deprecated
+W: alternc source: maintainer-script-lacks-debhelper-token debian/alternc-roundcube.postinst
+W: alternc source: maintainer-script-lacks-debhelper-token debian/alternc-squirrelmail.postinst
+
+W: alternc source: debhelper-but-no-misc-depends alternc-upnp
+W: alternc source: debhelper-but-no-misc-depends alternc-slave
+W: alternc source: debhelper-but-no-misc-depends alternc-roundcube
+W: alternc source: debhelper-but-no-misc-depends alternc-squirrelmail
+W: alternc source: debhelper-but-no-misc-depends alternc
+W: alternc source: debhelper-but-no-misc-depends alternc-awstats
+
+W: alternc source: obsolete-relation-form-in-source in alternc conflicts: alternc-awstats (< 1.0)
+W: alternc source: obsolete-relation-form-in-source in alternc conflicts: alternc-mailman (< 2.0)
+W: alternc source: obsolete-relation-form-in-source in alternc-roundcube conflicts: alternc (< 1.1)

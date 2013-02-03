@@ -3,6 +3,7 @@
 .tx/config -text
 /CODING_CONVENTION.php -text
 /COPYING -text
+/DEBIAN_COMPLIANCE -text
 /README -text
 aide/bin/build.sh -text
 aide/bin/frames.dsl -text
