@@ -23,7 +23,7 @@
 install:
 	# alternc-squirrelmail files install
 	install -m 644 templates/squirrelmail/* $(DESTDIR)/etc/alternc/templates/squirrelmail/
-	install -m 750 squirrelmail-install $(DESTDIR)/usr/lib/alternc/install.d/
+	install -m 755 squirrelmail-install $(DESTDIR)/usr/lib/alternc/install.d/
 	# domaintype template: 
 	install -m 644 templates/apache2/squirrelmail.conf $(DESTDIR)/etc/alternc/templates/apache2/squirrelmail.conf
 	# Desktop files

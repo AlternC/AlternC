@@ -28,4 +28,3 @@ install:
 	chown root:1999 $(BIN)
 	chmod 755 $(BIN)
 	install -o root -g 1999 -m0755 $(SCRIPTS) $(BIN)
-	install -o root -g 1999 -m0644 $(BIN)
