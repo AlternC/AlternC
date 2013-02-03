@@ -29,6 +29,10 @@ in a debian server could help finding the right way to do it (eg: bind9 ) ;)
 
 - W: alternc: virtual-package-depends-without-real-package-depends depends: mailx
 
+- We should NOT ask for "do you REALLY want to install AlternC blabla" since we don't launch alternc.install at postinst anymore.
+  This question MAY be asked to the user when launching alternc installer manually (on an interactive shell)
+
+
 
 Easy to fix NOW :  
 E: alternc: dir-or-file-in-var-run var/run/alternc/
@@ -39,21 +43,13 @@ W: alternc: maintainer-script-ignores-errors prerm
 E: alternc-upnp: php-script-but-no-phpX-cli-dep usr/lib/alternc/update_upnp.sh
 W: alternc-upnp: executable-not-elf-or-script usr/lib/alternc/install.d/upnp-install
 W: alternc-awstats: possible-debconf-note-abuse preinst:13 alternc-awstats/errorinstall
-W: executable-is-not-world-readable /usr/lib/alternc/update_quota_mail.sh 0750
 
 E: alternc: duplicate-conffile etc/cron.d/alternc
 E: alternc: duplicate-conffile etc/logrotate.d/alternc
 W: alternc: malformed-prompt-in-templates alternc/slaves
-W: alternc: malformed-question-in-templates alternc/use_local_mysql
-W: alternc: malformed-question-in-templates alternc/use_remote_mysql
-W: alternc: malformed-question-in-templates alternc/remote_mysql_error
-W: alternc: using-question-in-extended-description-in-templates alternc/remote_mysql_error
-W: alternc: malformed-question-in-templates alternc/use_private_ip
-W: alternc: using-question-in-extended-description-in-templates alternc/use_private_ip
-W: alternc source: out-of-date-standards-version 3.9.1 (current is 3.9.2)
-W: alternc source: dh-clean-k-is-deprecated
-W: alternc source: maintainer-script-lacks-debhelper-token debian/alternc-roundcube.postinst
-W: alternc source: maintainer-script-lacks-debhelper-token debian/alternc-squirrelmail.postinst
+
+
+
 
 
 ********************************************************************************
@@ -80,3 +76,19 @@ W: alternc source: debhelper-but-no-misc-depends alternc-roundcube
 W: alternc source: debhelper-but-no-misc-depends alternc-squirrelmail
 W: alternc source: debhelper-but-no-misc-depends alternc
 W: alternc source: debhelper-but-no-misc-depends alternc-awstats
+
+W: alternc source: out-of-date-standards-version 3.9.1 (current is 3.9.2)
+
+W: alternc source: maintainer-script-lacks-debhelper-token debian/alternc-roundcube.postinst
+W: alternc source: maintainer-script-lacks-debhelper-token debian/alternc-squirrelmail.postinst
+
+W: alternc source: dh-clean-k-is-deprecated
+
+W: alternc: using-question-in-extended-description-in-templates alternc/remote_mysql_error
+W: alternc: using-question-in-extended-description-in-templates alternc/use_private_ip
+
+W: executable-is-not-world-readable /usr/lib/alternc/update_quota_mail.sh 0750
+W: alternc: malformed-question-in-templates alternc/use_local_mysql
+W: alternc: malformed-question-in-templates alternc/use_remote_mysql
+W: alternc: malformed-question-in-templates alternc/remote_mysql_error
+W: alternc: malformed-question-in-templates alternc/use_private_ip

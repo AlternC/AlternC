@@ -41,7 +41,8 @@ install: DH_OPTIONS=
 install: build
 	dh_testdir
 	dh_testroot
-	dh_clean -k
+# FIXME: if alternc still works with this commented out : remove it :-D    
+#	dh_clean -k
 	dh_installdirs
 
 	# Install

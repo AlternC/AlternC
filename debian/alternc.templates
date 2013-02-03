@@ -1,16 +1,3 @@
-Template: alternc/welcomeconfirm
-Type: boolean
-Default: true
-_Description: Do you REALLY want to install AlternC on this computer ?
- You are currently trying to install AlternC on your computer. Be aware
- that this package will overwrite critical system files, including but not
- limited to the config files of bind, postfix, dovecot, squirrelmail and proftpd.
- .
- A backup of your old configuration will be stored in
- "/var/backups/alternc/etc-original-`date`.tar.gz".
- .
- YOU HAVE BEEN WARNED.
-
 Template: alternc/warningaclquota
 Type: note
 _Description: AlternC need ACL and QUOTA activated
@@ -218,22 +205,22 @@ _Description: POP Before SMTP deprecated
 
 Template: alternc/postrm_remove_databases
 Type: boolean
-_Description: Should AlternC remove all databases (/var/lib/mysql/) ?
+_Description: Should AlternC remove all databases (/var/lib/mysql/)?
  All users databases will be trashed
 
 Template: alternc/postrm_remove_datafiles
 Type: boolean
-_Description: Should AlternC remove users datas ?
+_Description: Should AlternC remove users datas?
  The files and apache redirections created by users will be trashed
 
 Template: alternc/postrm_remove_bind
 Type: boolean
-_Description: Should AlternC remove bind zones ?
+_Description: Should AlternC remove bind zones?
  It will delete all bind zones created by AlternC
 
 Template: alternc/postrm_remove_mailboxes
 Type: boolean
-_Description: Should AlternC remove mailboxes ?
+_Description: Should AlternC remove mailboxes?
  If you accept all users e-mails will be deleted
 
 Template: alternc/slaves
@@ -247,21 +234,26 @@ _Description: Slave servers
 
 Template: alternc/use_local_mysql
 Type: boolean
-_Description:
- A local MySQL connection was established on the server. Do you Want to Use it. If not remote MySQL server connection parameters will be needed.
+_Description: Shall we use locally found MySQL server?
+ A local MySQL connection was established on the server.
+ Tell us if you want to use it. If not remote MySQL server
+ connection parameters will be needed.
 
 Template: alternc/use_remote_mysql
 Type: boolean
-_Description:
- No local Mysql server was found. Do you want to use a remote Mysql Server. If not AlternC cannot be installed.
+_Description: Shall we use a remote MySQL server?
+ No local Mysql server was found.
+ Please confirm you want to use a remote Mysql Server.
+ If not AlternC cannot be installed.
 
 Template: alternc/remote_mysql_error
 Type: boolean
-_Description:
- Remote connection failed. Do you want to try again ?
+_Description: MySQL connection error. Try again?
+ Remote connection to the MySQL server failed.
+ Please confirm that we shall try again.
 
 Template: alternc/use_private_ip
 Type: boolean
-_Description:
- The ip appears to be private, do you want to use it anyway ? The server might not be reachable from outside your network.
-
+_Description: Private IP detected, use it anyway?
+ The ip appears to be private, please confirm you want to use it anyway.
+ The server might not be reachable from outside your network.
