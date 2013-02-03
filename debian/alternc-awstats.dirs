@@ -11,5 +11,4 @@ var/alternc/bureau/locales/es_ES/LC_MESSAGES
 usr/lib/alternc
 usr/share/alternc
 usr/share/doc/alternc-awstats
-usr/share/lintian/overrides
 usr/share/awstats/icon/other/

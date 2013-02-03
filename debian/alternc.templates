@@ -181,13 +181,13 @@ _Description: The path where AlternC is installed:
  Please enter the partition name where alternc is installed. This is used
  mainly for disk quotas.
  .
- Warning : Be careful ! It can generate some problems.
+ Warning: Be careful! It can generate some problems.
 
 Template: alternc/monitor_ip
 Type: string
 _Description: The monitoring server:
  The IP address (or ip/prefix) of the server(s) which must be authorized to 
- ping us and access apache status pages. Completely optional.
+ ping the server and access apache status pages. Completely optional.
 
 Template: alternc/pop_before_smtp_warning
 Type: note
