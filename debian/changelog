@@ -1,32 +1,32 @@
 alternc (3.0~rc3) unstable; urgency=low
 
   * 3.0~rc3 release, fixing the following :
-  * #1422 (Dovecot: Bug si quota Trash:storage<24M) closed by nahuel
-  * #1412 (Probleme avec les quotas (VM Xen)) closed by axel
-  * #1403 (Confirmation lors de la désactivation des mails d'un domaine) closed by axel
-  * #1404 (Erreurs en wheezy lors de alternc.install) closed by axel
-  * #1400 (Alternc slavedns ne s'installe pas) closed by axel
-  * #1414 (erreur spoolsize.php) closed by axel
-  * #1413 (Récupération de mails à l'installation d'AlternC - dovecot) closed by axel
-  * #1416 (buildstatic.sh produit une erreur) closed by axel
-  * #1417 (problème lors de la génération des stats) closed by axel
-  * #1415 (erreur de scripts compress_logs.sh et delete_logs.sh) closed by axel
-  * #1369 (Faire la conf de roundcube managesieved + password) closed by axel
-  * #1405 (forcer les minuscules dans local.sh) closed by axel
-  * #1407 (Problème deploiement alternc-sudoers) closed by axel
-  * #1406 (Problème installation dovecot) closed by axel
-  * #1401 (Controle d'accès pas clair) closed by axel
-  * #1398 (Quotas pas ergonomique) closed by axel
-  * #1399 (Traduction de la date) closed by axel
-  * #1337 (alternc-slavedns depends on sh features) closed by fufroma
-  * #1411 (Navigateur fichier fonctionne mal) closed by fufroma
-  * #1402 (Choix du répertoire lors de création de compte FTP) closed by fufroma
-  * #1331 (alternc-slavedns erreur de configuration a l'install) closed by axel
-  * #1341 (Problème longueur login user MySQL) closed by axel
-  * #1395 (2 dbusers avec le même name) closed by squidly
-  * #1392 (Mauvais message d'erreur à la création d'un utilisateur MySQL déjà ...) closed by squidly
-  * #1393 (Gestion quotas disques) closed by squidly
-  * #1394 ("_" interdit dans les noms de domaines) closed by fufroma
+  * #1422 Dovecot: Bug si quota Trash:storage<24M, nahuel
+  * #1412 Probleme avec les quotas (VM Xen), axel
+  * #1403 Confirmation lors de la désactivation des mails d'un domaine, axel
+  * #1404 Erreurs en wheezy lors de alternc.install, axel
+  * #1400 Alternc slavedns ne s'installe pas, axel
+  * #1414 erreur spoolsize.php, axel
+  * #1413 Récupération de mails à l'installation d'AlternC - dovecot, axel
+  * #1416 buildstatic.sh produit une erreur, axel
+  * #1417 problème lors de la génération des stats, axel
+  * #1415 erreur de scripts compress_logs.sh et delete_logs.sh, axel
+  * #1369 Faire la conf de roundcube managesieved + password, axel
+  * #1405 forcer les minuscules dans local.sh, axel
+  * #1407 Problème deploiement alternc-sudoers, axel
+  * #1406 Problème installation dovecot, axel
+  * #1401 Controle d'accès pas clair, axel
+  * #1398 Quotas pas ergonomique, axel
+  * #1399 Traduction de la date, axel
+  * #1337 alternc-slavedns depends on sh features, fufroma
+  * #1411 Navigateur fichier fonctionne mal, fufroma
+  * #1402 Choix du répertoire lors de création de compte FTP, fufroma
+  * #1331 alternc-slavedns erreur de configuration a l'install, axel
+  * #1341 Problème longueur login user MySQL, axel
+  * #1395 2 dbusers avec le même name, squidly
+  * #1392 Mauvais message à la création d'un utilisateur MySQL, squidly
+  * #1393 Gestion quotas disques, squidly
+  * #1394 "_" interdit dans les noms de domaines, fufroma
 
  -- Benjamin Sonntag <benjamin@sonntag.fr>  Mon, 28 Jan 2013 11:20:47 +0100
 
@@ -34,44 +34,56 @@ alternc (3.0~rc2) unstable; urgency=low
 
   * 3.0~rc2 release, fixing the following :
   * #1071 remove email storage stats cache on email removal - closed by squidly
-  * #1325 install on LXC : if no ACL, install CRASHES without explanation - closed by axel
+  * #1325 install on LXC : if no ACL, install CRASHES without explanation
+	- closed by axel
   * #1327 Probleme dependance alternc et modules - closed by axel
   * #1334 alternc-roundcube - closed by axel
   * #1336 Alternc-munin opérationnel pour 3.0 - closed by axel
-  * #1339 bonne suppression des DNS à la suppression d'un compte - closed by squidly
+  * #1339 bonne suppression des DNS à la suppression d'un compte
+	- closed by squidly
   * #1343 Affichage listing de mails - closed by squidly
   * #1344 Notice PHP - closed by fufroma
   * #1345 Postfix service submission - closed by squidly
   * #1346 AlternC-Awstats lance alternc.install - closed by axel
-  * #1348 Problème creation membre avec installation de sous domaine - closed by fufroma
+  * #1348 Problème creation membre avec installation de sous domaine
+	- closed by fufroma
   * #1349 Alternc-roundcube changement password fail - closed by axel
   * #1354 Bug liste blanche IP - closed by fufroma
   * #1355 Affichage informations de configuration mail - closed by fufroma
-  * #1357 Ergonomie Alternc-Awstats + champs password à confirmer - closed by axel
+  * #1357 Ergonomie Alternc-Awstats + champs password à confirmer
+	- closed by axel
   * #1358 Creation d'un routine de génération de mot de passe - closed by axel
   * #1359 Creation CatchAll - closed by axel
   * #1360 Taille négative - closed by axel
   * #1361 dépendance quotas - closed by squidly
-  * #1362 Un administrateur ne peut voir la page /adm_list.php?show=all - closed by fufroma
+  * #1362 Un administrateur ne peut voir la page /adm_list.php?show=all
+	- closed by fufroma
   * #1363 Cron d'alternc ne lance pas les crons utilisateurs - closed by axel
   * #1365 creation fichier log - closed by squidly
   * #1366 Inverser les "serveurs" phpmyadmin - closed by fufroma
-  * #1367 "Installer le domaine login.hosting_tld.tld" ne fonctionne pas - closed by fufroma
+  * #1367 "Installer le domaine login.hosting_tld.tld" ne fonctionne pas
+	- closed by fufroma
   * #1368 adm_edit.php avec domaine inexistant - closed by axel
   * #1370 Traduction manquante : "quota_web" - closed by fufroma
   * #1371 Valeur par défaut incorrecte pour le quota_web - closed by axel
-  * #1372 dpkg: mauvaise syntaxe de la version « 0.9.1_migrationldap » : caractère ... - closed by squidly
+  * #1372 dpkg: mauvaise syntaxe de la version « 0.9.1_migrationldap » :
+	caractère ... - closed by squidly
   * #1373 Footer absent sur login.php - closed by fufroma
-  * #1374 mail_list.php : Le formulaire de recherche n'est plus affiché si aucun ... - closed by axel
+  * #1374 mail_list.php : Le formulaire de recherche n'est plus affiché
+	si aucun ... - closed by axel
   * #1376 Bug lors de l'édition d'un sous domaine - closed by fufroma
   * #1378 Bug choix du webmail page de login - closed by axel
   * #1379 Dépendance sur dovecot-imapd casse la mise à jour - closed by squidly
   * #1381 erreur sur /usr/lib/alternc/fixperms.sh - closed by axel
-  * #1385 Template d'apache pour roundcube ne se met pas a jour - closed by axel
+  * #1385 Template d'apache pour roundcube ne se met pas a jour
+	- closed by axel
   * #1386 Policy Password bug - closed by squidly
-  * #1387 Ajout de sous-domaines, messages erreur non explicite - closed by squidly
-  * #1390 AlternC roundcube et Roundcubese se melangent les pinceaux a l'install - closed by axel
-  * #1391 alternc : Dépend: dovecot-imapd mais ne sera pas installé - closed by benjamin
+  * #1387 Ajout de sous-domaines, messages erreur non explicite
+	- closed by squidly
+  * #1390 AlternC roundcube et Roundcube se se melangent les pinceaux
+	a l'install - closed by axel
+  * #1391 alternc : Dépend: dovecot-imapd mais ne sera pas installé
+	- closed by benjamin
 
  -- Benjamin Sonntag <benjamin@sonntag.fr>  Fri,  7 Dec 2012 18:14:17 +0100
 
@@ -81,13 +93,16 @@ alternc (3.0~rc1) unstable; urgency=low
   * Halloween skin for the desktop
 
   [ Benjamin Sonntag ]
-  * 3.0~rc1 release, change the release to 'unstable' so that http://debian.alternc.org/ have the packages in the right distribution.
+  * 3.0~rc1 release, change the release to 'unstable' so that
+	http://debian.alternc.org/ have the packages in the right distribution.
 
  -- Benjamin Sonntag <benjamin@sonntag.fr>  Wed, 31 Oct 2012 11:34:37 +0100
 
 alternc (1.1+nmu6) stable; urgency=low
 
-  * Squirrelmail plugin is now fully functionnal, including the changepass and filter plugins. it's using a specific MySQL account to change the password.
+  * Squirrelmail plugin is now fully functionnal, including the changepass
+	and filter plugins. it's using a specific MySQL account to change
+	the password.
   * Roundcube plugin now exists, to be tested!
 
  -- Benjamin Sonntag <benjamin@sonntag.fr>  Tue, 16 Oct 2012 17:25:07 +0200
@@ -97,7 +112,8 @@ alternc (1.1+nmu5) stable; urgency=low
   * Modification in alternc package config script.
     * Order of questions changed
     * Check the public IP address according to RFC 1918
-    * checking SQL connectivity ( different procedure for local and remote server )
+    * checking SQL connectivity ( different procedure for local
+	and remote server )
 
  -- squidly <squidly@nnx.com>  Tue, 19 Sep 2012 13:47:47 +0200
 
@@ -133,21 +149,25 @@ alternc (1.1+nmu2) stable; urgency=low
 alternc (1.1+nmu1) stable; urgency=low
 
   * Dev in progres.
-  * New class: m_export allowing account exporting given it's iud and a path : http://www.alternc.org/wiki/AlterncExport
-  * Adding script export_account.php usind the above class to export an account. 
-  * Bugfixes: quota's scripts udpated ( mostly concerning LVM partitions), and lots of others (permissions, browser ...)
+  * New class: m_export allowing account exporting given it's iud and a path:
+	http://www.alternc.org/wiki/AlterncExport
+  * Adding script export_account.php usind the above class to export
+	an account.
+  * Bugfixes: quota's scripts udpated ( mostly concerning LVM partitions),
+	and lots of others (permissions, browser ...)
 
  -- Lerider Steven <squidly@nnx.com>  Tue, 28 Feb 2012 14:57:48 +0100
 
 alternc (1.1) stable; urgency=low
   * Dev in progress
-  * New class : access security. Allow to restrict some function to specific IP or subnet
+  * New class : access security. Allow to restrict some function to specific
+	IP or subnet
   * Access security management on the ftp account.
 
- -- Alan Garcia (nickname) <fufroma@mailfr.com>  Wed, 25 May 2011 09:24:30 +0200
+ -- Alan Garcia <fufroma@mailfr.com>  Wed, 25 May 2011 09:24:30 +0200
 
 alternc (1.0.3) stable; urgency=high
-  * Bugfix : the 'connect' button in the list of installed domains didn't work, make it work
+  * Bugfix : the 'connect' button in the list of installed domains didn't work
 
  -- Benjamin Sonntag <benjamin@alternc.org>  Wed, 12 Oct 2011 18:00:00 +0200
 
@@ -155,7 +175,8 @@ alternc (1.0.2) stable; urgency=high
   * Bugfix : dependency on gamin OR fam : gamin is better for courier-imap
     and fam makes sasl imap auth fail
   * Bugfix : adding french messages for domain new error messages
-  * Bugfix : Fixing domaines types templates issues (incompatibility with pre 1.0 alternc)
+  * Bugfix : Fixing domaines types templates issues
+	(incompatibility with pre 1.0 alternc)
 
  -- Benjamin Sonntag <benjamin@alternc.org>  Thu, 11 Oct 2011 10:17:00 +0200
 
@@ -168,13 +189,17 @@ alternc (1.0) stable; urgency=low
   * Major patch
     * Web & DNS file generation rebuild from scratch
     * Drop of apache 1 support
-    * Big changes in database schema (domaines, sub_domaines, *_standby removal)
+    * Big changes in database schema (domaines, sub_domaines, *_standby
+	removal)
   * Major changes
     * Drop mass virtual hosting, now use full vhost
-    * Panel URL do not need anymore /admin/ (but you can still use it, we put a 301 redirect)
-    * JQuery is now used by AlternC (but not needed for any usual feature usage)
+    * Panel URL do not need anymore /admin/ (but you can still use it,
+	we put a 301 redirect)
+    * JQuery is now used by AlternC (but not needed for any usual feature
+	usage)
   * New features
-    * Domains type are dynamic, the administrator can create domaine type with his own apache template
+    * Domains type are dynamic, the administrator can create domaine type
+	with his own apache template
     * Advanced DNS options (ipv6, cname, txt, mx)
     * Possibility to create a temporary mail (not yet shown, need cron)
     * Admin can connect to other account and go back to their own
@@ -192,15 +217,18 @@ alternc (1.0~rc1) stable; urgency=low
 
   * Major patch
     * Blue desktop using only css, no frameset etc
-    * Sanitizing of get/request/post parameters using getFields function. May allow alternc not to use register_globals some day ...
+    * Sanitizing of get/request/post parameters using getFields function.
+	May allow alternc not to use register_globals some day ...
   * security: passwords are now MANDATORY in MySQL class (whoosh...)
-  * security: now using htmlspecialchars on every form default values ... yes it's 2010 ;)
+  * security: now using htmlspecialchars on every form default values ...
   * i18n: charset is now variable depending on the current language
   * new features:
     * removed the dependency on postgrey, added dnsutils (for domain checks)
-    * added domain check (exists, ns, mx, ip) when listing domains in admin panel.
+    * added domain check (exists, ns, mx, ip) when listing domains in
+	admin panel.
   * bugfixes:
-    * fix a "already exist" error when creating a database containing an hyphen (-)
+    * fix a "already exist" error when creating a database containing
+	an hyphen (-)
     * #1163: fix sqlbackup script call routine to retain backwards
       compatibility
     * fix usage of ISO8859-15 charset (that may NOT be defined in locales...)
@@ -215,7 +243,8 @@ alternc (1.0~rc1) stable; urgency=low
     * send an email on new account creation. the actual email needs to be
       configured through the AlternC variables for this to work.
     * added the password policy management module : you can choose which
-      password complexity you want to force for each place a password is required.
+      password complexity you want to force for each place a password
+	is required.
   * API changes
     * m_mysql->get_db_list() doesn't include size anymore because this
       is a major performance hit on MySQL < 5.1.22 if there are > 1000
@@ -281,12 +310,13 @@ alternc (0.9.8) stable; urgency=high
     * from Trac: #1012, #1082, #1077, #1109
     * fix 0.9.7 regressions: #1079, #1080, #1099, #1076
   * new features:
-    * starting with this release, the old warning signal defaults to "YES" which
-      means that AlternC can be automatically installed without preseeding.
+    * starting with this release, the old warning signal defaults to "YES"
+	which means that AlternC can be automatically installed without
+	preseeding.
     * crude implementation of a permission change interface in the file browser
       (partial implementation of #267)
-    * standardisation of the web interface, along with some esthetic changes, by
-      Marc Angles, sponsored by Koumbit (partial implementation of #37)
+    * standardisation of the web interface, along with some esthetic changes,
+	by Marc Angles, sponsored by Koumbit (partial implementation of #37)
     * styles can now be changed locally in admin/styles/custom.css
     * allow arbitrary error strings in error handlers
     * copy and archive extraction in the file browser (#1043)
@@ -303,11 +333,13 @@ alternc (0.9.7) stable; urgency=low
   * Delete the zonefile properly when destroying a domain (#772)
   * Choose english as default language, (#1047)
   * Proper parameter checking in subdomain creation (#1037)
-  * Changing ownership of /var/alternc/tmp, makes file upload work again (#1058)
+  * Changing ownership of /var/alternc/tmp, makes file upload work again
+	(#1058)
   * Force the restart of apache & apache-ssl (#1000)
   * Redirect are now done on http://$url$1 base, not $url/$1 (#1054)
   * Patch to install properly apache and apache-ssl modules
-  * We copy /etc/squirrelmail/default_pref content for new accounts in _createpop (#1015)
+  * We copy /etc/squirrelmail/default_pref content for new accounts
+	in _createpop (#1015)
   * we configure postfix even if main.cf don't currently exist (#1009)
   * Fixed the 'view' link issues (no urlencode) (#690)
   * Change "move" to "move to" (ergonomic) (#787)
@@ -315,7 +347,8 @@ alternc (0.9.7) stable; urgency=low
   * fix dns install of internal hosting domains (#1056)
   * fix proftpd and saslauthd configuration for Etch (#1046, #1069)
   * fix .eu, .be, .name whois issue (#571)
-  * change apache log format to a working one (using host request), also fix awstats issues.
+  * change apache log format to a working one (using host request),
+	also fix awstats issues.
   * fix modules manipulation rules (#1062)
   * try to support apache2, at least with the right dependencies
   * end explicit mysql-server dependencies, which switches to Recommends,
@@ -350,9 +383,12 @@ alternc (0.9.6.2) stable; urgency=high
 alternc (0.9.6.1) stable; urgency=high
 
   * Emergency release to fix issues with release 0.9.6.
-  * Fix a security issue with override_php.conf not being configured in apache, effectively disabling open_basedir restrictions. Closes: #1005
+  * Fix a security issue with override_php.conf not being configured
+	in apache, effectively disabling open_basedir restrictions.
+	Closes: #1005
   * Show installation warning only once. Closes: #737
-  * Make it possible to erase files and directories in file browser. Closes: #1002.
+  * Make it possible to erase files and directories in file browser.
+	Closes: #1002.
   * Fix mail accounts creation. Closes: #1003.
   * Fix a race condition in update_domains.sh which could allow users to
     bypass openbasedir protection when creating domains. Reported by
@@ -363,8 +399,12 @@ alternc (0.9.6.1) stable; urgency=high
 alternc (0.9.6) stable; urgency=high
 
   * Replacing C setuid scripts by perl-suid one. AlternC is now arch-indep !
-  * Do not overwrite httpd.conf anymore. Everything is now done through includes in the /etc/apache/conf.d/ directory
-  * Fix security issues with file browser and domain management that allowed an attacker to inspect the filesystem, create files in other accounts and perform cross site scripting javascript attacks. Credit: thabob.
+  * Do not overwrite httpd.conf anymore. Everything is now done
+	through includes in the /etc/apache/conf.d/ directory
+  * Fix security issues with file browser and domain management
+	that allowed an attacker to inspect the filesystem, create
+	files in other accounts and perform cross site scripting
+	javascript attacks. Credit: thabob.
   * #563: do not overwrite php.ini anymore. Everything is configured in the
     apache config.
   * All other bugs are postponed to 0.9.7 because of the security issue (hence
@@ -377,7 +417,7 @@ alternc (0.9.5) stable; urgency=low
 
   * maintenance release to fix packaging and security bugs
   * see https://dev.alternc.org/trac/alternc/milestone/0.9.5 for milestone
-  * changelog at https://dev.alternc.org/trac/alternc/query?status=closed&milestone=0.9.5
+  * changelog at https://alternc.org/trac/alternc/query?status=closed&milestone=0.9.5
   However, this version contains mainly :
   * quota management fixes
   * bind now forbid recursion and domain poisoning
@@ -392,9 +432,10 @@ alternc (0.9.4) stable; urgency=low
 
   * maintenance release to fix packaging and security bugs
   * see https://dev.alternc.org/trac/alternc/milestone/0.9.4 for milestone
-  * changelog at https://dev.alternc.org/trac/alternc/query?status=closed&milestone=0.9.4
+  * changelog at https://alternc.org/trac/alternc/query?status=closed&milestone=0.9.4
   However, this version contains mainly :
-  * Integration of Globenet patchs (replacement of do_domains.sh by update_domains.sh and others)
+  * Integration of Globenet patchs (replacement of do_domains.sh by
+	update_domains.sh and others)
   * Changing mysql database creation from uid to login name
   * Major improvements in FHS compliance
   * Major improvements in config file management and debconf idempotency
