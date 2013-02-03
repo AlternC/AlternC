@@ -543,6 +543,7 @@ install/upgrades/README -text
 lang/.svnignore -text
 lang/README -text
 lang/en_US.po -text
+lang/nl_NL.po -text
 man/alternc-admintools.8 -text
 man/alternc-admintools.fr.8 -text
 man/alternc.install.8 -text
