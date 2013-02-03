@@ -419,7 +419,6 @@ bureau/locales/pt_BR/LC_MESSAGES/alternc -text
 bureau/locales/pt_BR/LC_MESSAGES/manual.po -text
 bureau/locales/pt_BR/LC_MESSAGES/messages.po -text
 debian/.svnignore -text
-debian/NEWS -text
 debian/README.Debian -text
 debian/alternc-awstats.cron.d -text
 debian/alternc-awstats.dirs -text
