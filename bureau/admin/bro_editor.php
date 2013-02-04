@@ -75,10 +75,8 @@ include_once("head.php");
 </p>
 <form action="bro_editor.php" method="post"><br />
 <textarea class="int" style="font-family: <?php echo $p["editor_font"]; ?>; font-size: <?php echo $p["editor_size"]; ?>; width: 90%; height: 400px;" name="texte"><?php
-  $failed=false;
   $content=$bro->content($R,$editfile);
   if (empty($content)) { 
-    $failed=true;
     $error=_("This file is empty");
   } else {
     echo $content;  
