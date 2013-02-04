@@ -60,7 +60,9 @@ if ($fatal) {
   echo "<div class=\"error\">$error</div>";
 } else {
 
+  if (!empty($error)) { echo "<p class='error'>$error</p>"; }
 ?>
+
 <table><tr>
 <?php
 // Mail creation form

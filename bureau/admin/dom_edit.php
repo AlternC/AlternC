@@ -225,8 +225,7 @@ if (!$r['noerase']) {
      </td><td><input type="radio" id="noemail" class="inc" name="email" value="0"<?php cbox(!$r["mail"]); ?> />&nbsp;<label for="noemail"><?php __("No"); ?></label>
   </td>
 </table>
-<div style="padding-left: 30px; padding-bottom: 20px" class="error">    <?php __("Warning: If you set this to 'no', all your email accounts and aliases on this domain will be immediately deleted."); ?></div>
-<br/>
+<p class="error">    <?php __("Warning: If you set this to 'no', all your email accounts and aliases on this domain will be immediately deleted."); ?></p>
 <input type="submit" class="inb" name="submit" value="<?php __("Submit the changes"); ?>" />
 	</form>
 

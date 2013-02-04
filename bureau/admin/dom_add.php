@@ -88,8 +88,7 @@ $dl=$dom->get_domain_list($cuid);
 </p>
 
 <p class="error">
-<small>
-<?php __("If you don't want to host in our server the DNS of your domain, don't check the box 'host my dns here'. If you don't know what it mean, leave it checked."); ?></small></p>
+<?php __("If you don't want to host in our server the DNS of your domain, don't check the box 'host my dns here'. If you don't know what it mean, leave it checked."); ?></p>
 <?php $mem->show_help("add_domain"); ?>
 </form>
 <?php

@@ -53,7 +53,7 @@ include_once ("head.php");
 </p>
 
 <form method="post" action="adm_variables.php">
-<table border="0" cellpadding="4" cellspacing="0">
+<table border="0" cellpadding="4" cellspacing="0" class='tlist'>
 <tr><th><?php __("Names"); ?></th><th><?php __("Value"); ?></th><th><?php __("Comment"); ?></th></tr>
 <?php
 $col=1;

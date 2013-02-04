@@ -216,8 +216,8 @@ img {
   font-weight: bold;
   background-color: #FFEEDD; 
   border: 1px solid #CC9966; 
-  padding: 20px; 
-  text-align: center;
+  padding: 10px; 
+  text-align: left;
 }
 
 /* Over quota class */
