@@ -102,7 +102,7 @@ foreach($qlist as $type => $q) {
 ?>
 <div>
 <h4><?php echo _("Accounts of type"). " \"$type\"" ?></h4>
-<table border="0" cellpadding="4" cellspacing="0">
+<table border="0" cellpadding="4" cellspacing="0" class='tlist'>
 <tr><th><?php __("Quotas") ?></th><th><?php __("Default Value"); ?></th></tr>
 <?php
 foreach($q as $name => $value) {
@@ -123,6 +123,7 @@ foreach($q as $name => $value) {
 <?php
 }
 ?>
+<br/>
 <input type="submit" class="inb" value="<?php __("Edit the default quotas"); ?>" />
 </div>
 </form>

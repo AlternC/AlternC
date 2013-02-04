@@ -75,7 +75,7 @@ if (is_array($c)) {
 <?php __("Here is the list of the allowed ip or ip class for slave dns zone transfer requests (AXFR). You must add the ip address of all the slave DNS you have so that those slaves will be allowed to transfer the zone files. There is also some defaults ip from DNS checks made by some third-party technical offices such as afnic (for .fr domains)"); ?>
 </p>
 
-<table border="0" cellpadding="4" cellspacing="0">
+<table border="0" cellpadding="4" cellspacing="0" class='tlist'>
 <tr><th><?php __("Action"); ?></th><th><?php __("IP Address"); ?></th></tr>
 <?php
 $col=1;

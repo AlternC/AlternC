@@ -76,7 +76,7 @@ if (is_array($c)) {
 <?php __("Here is the list of the allowed accounts for secondary mx management. You can configure the alternc-secondarymx package on your secondary mx server and give him the login/pass that will grant him access to your server's mx-hosted domain list. "); ?>
 </p>
 
-<table border="0" cellpadding="4" cellspacing="0">
+<table border="0" cellpadding="4" cellspacing="0" class='tlist'>
 <tr><th><?php __("Action"); ?></th><th><?php __("Login"); ?></th><th><?php __("Password"); ?></th></tr>
 <?php
 $col=1;

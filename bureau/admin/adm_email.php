@@ -58,17 +58,17 @@ if (isset($error) && $error) {
 ?>
 <form method="post" action="adm_email.php">
 
-<table cellspacing="1" cellpadding="4" border="0" align="center">
+<table cellspacing="1" cellpadding="4" border="0" align="center" class='tedit'>
 	<tr>
-	  <td align="right"><b><?php __("From");?></b></td>
+	  <th align="right"><b><?php __("From");?></b></th>
 	  <td><span><input type="text" name="from" size="45" maxlength="100" tabindex="2" value="<?php echo "no-reply@$L_FQDN" ?>" /></span></td>
 	</tr>
 	<tr>
-	  <td align="right"><b><?php __("Subject");?></b></td>
+	  <th align="right"><b><?php __("Subject");?></b></th>
 	  <td><span><input type="text" name="subject" size="45" maxlength="100" tabindex="2" value="" /></span></td>
 	</tr>
 	<tr>
-	  <td align="right" valign="top"> <span><b><?php __("Mail"); ?></b></span>
+	  <th align="right" valign="top"> <span><b><?php __("Mail"); ?></b></span>
 	  <td><span> <textarea name="message" rows="15" cols="35" wrap="virtual" style="width:450px" tabindex="3"></textarea></span>
 	</tr>
 	<tr>

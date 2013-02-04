@@ -52,8 +52,8 @@ if (isset($error) && $error) {
 <?php __("Here is the list of domain types."); ?>
 </p>
 <p><span class="ina"><a href="#" OnClick="alert('Todo. But if you want to play with that, you are advanced enough to do an insert in MySQL');" ><?php __("Create a domain type"); ?></a></span></p>
-<table class="tlist">
-<tr>
+<table class="tlist ombrage">
+<tr class='petit'>
     <th colspan="2"> </th>
     <th><?php __("Name");?></th>
     <th><?php __("Description");?></th>
@@ -66,7 +66,6 @@ if (isset($error) && $error) {
     <th><?php __("Advanced?");?></th>
     <th><?php __("Create tmp directory ?");?></th>
     <th><?php __("create www directory ?");?></th>
-    <th/>
 </tr>
 <?php 
 $pair=0;
