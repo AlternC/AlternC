@@ -56,9 +56,9 @@ _Description: Name of the secondary domain name server:
  be this server since bind is installed and configured by AlternC. Anyway,
  you should have 2 separate DNS servers if you want to provide a high
  quality hosting service.
- .
- You may contact the AlternC's users mailing list if you want to exchange
- dns service with other AlternC's users.
+ . 
+ AlternC's team is providing any user of AlternC with free DNS service.
+ go to http://alternc.net/ to create an account and use it.
 
 Template: alternc/mysql/host
 Type: string
@@ -86,28 +86,28 @@ Template: alternc/mysql/remote_user
 Type: string
 _Description: AlternC's mysql account:
  Using a remote mysql installation requires the AlternC user to be configured in advance
- with root access to the mysql installation.
+ with administrator access to the mysql installation.
  .
  The alternc sql user is responsible for granting access to user generated databases,
  that is why it needs root access on the mysql installation.
 
 Template: alternc/mysql/password
 Type: password
-_Description: Password of the AlternC's mysql account:
+_Description: Password of AlternC's mysql account:
  AlternC requires an administrator account on the mysql server. It will be
  created automatically during the install process. Please choose a password
  for this account.
  .
  Please choose a quite complex password since it will have full access to
- the system database !!!
+ the system database! If you enter nothing, a random password will be created.
 
 Template: alternc/mysql/remote_password
 Type: password
 _Description: Password of the AlternC's mysql account:
  Specify the remote mysql user password
- .
+ . 
  Please choose a quite complex password since it will have full access to
- the system database !!!
+ the system database! If you enter nothing, a random password will be created.
 
 Template: alternc/mysql/alternc_mail_user
 Type: string
@@ -117,7 +117,7 @@ _Description: AlternC's mysql account:
 
 Template: alternc/mysql/alternc_mail_password
 Type: password
-_Description: Password of the AlternC's mysql account:
+_Description: Password of AlternC's mysql account:
  AlternC requires an administrator account on the mysql server. It will be
  created automatically during the install process. Please choose a password
  for this account.
@@ -244,7 +244,7 @@ Type: boolean
 _Description: Shall we use a remote MySQL server?
  No local Mysql server was found.
  Please confirm you want to use a remote Mysql Server.
- If not AlternC cannot be installed.
+ If not, AlternC cannot be installed.
 
 Template: alternc/remote_mysql_error
 Type: boolean
@@ -255,5 +255,5 @@ _Description: MySQL connection error. Try again?
 Template: alternc/use_private_ip
 Type: boolean
 _Description: Private IP detected, use it anyway?
- The ip appears to be private, please confirm you want to use it anyway.
+ The IP address you have appears to be private, please confirm you want to use it anyway.
  The server might not be reachable from outside your network.

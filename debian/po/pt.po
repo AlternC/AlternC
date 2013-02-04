@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AlternC 2.0\n"
 "Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
-"POT-Creation-Date: 2013-02-03 19:37+0100\n"
+"POT-Creation-Date: 2013-02-03 20:41+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: <i18n@alternc.org>\n"
 "Language-Team: <i18n@alternc.org>\n"
@@ -388,7 +388,7 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../alternc.templates:23001
-msgid "Warning : Be careful ! It can generate some problems."
+msgid "Warning: Be careful! It can generate some problems."
 msgstr ""
 
 #. Type: string
@@ -402,7 +402,7 @@ msgstr ""
 #: ../alternc.templates:24001
 msgid ""
 "The IP address (or ip/prefix) of the server(s) which must be authorized to  "
-"ping us and access apache status pages. Completely optional."
+"ping the server and access apache status pages. Completely optional."
 msgstr ""
 
 #. Type: note
@@ -568,7 +568,7 @@ msgid ""
 "You are installing the alternc-awstats package. This package allows any user "
 "to ask for statistics about his web site. Users can ask for a limited number "
 "of statistic set. Please specify the default quota they will have for this "
-"service ?"
+"service."
 msgstr ""
 
 #. Type: note
@@ -582,7 +582,7 @@ msgstr ""
 #: ../alternc-awstats.templates:2001
 msgid ""
 "AlternC-Awstats requires a complete installed AlternC system to get "
-"installed properly !"
+"installed properly!"
 msgstr ""
 
 #. Type: note
@@ -597,7 +597,5 @@ msgstr ""
 #. Description
 #: ../alternc-awstats.templates:2001
 msgid ""
-"Please check out the AlternC installation documentation before proceeding. "
-"Merci de consulter la documentation d'installation d'AlternC avant de "
-"continuer."
+"Please check out the AlternC installation documentation before proceeding."
 msgstr ""

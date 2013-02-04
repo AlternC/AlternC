@@ -12,7 +12,7 @@ This software consist of an automatic install and configuration system,
 a web control panel to manage hosted users and their web services such
 as domains, email accounts, ftp accounts, web statistics ...
 
-Technically, AlternC is based on Debian GNU/Linux distribution, 'Sarge'
+Technically, AlternC is based on Debian GNU/Linux distribution, 'Squeeze'
 version, and it depends on other softwares such as Apache, Postfix, 
 Mailman ... It also contains an API documentation so that users can
 easily customize their web desktop.
@@ -37,9 +37,19 @@ depends on other softs used by AlternC. Just add those lines to your
 
  deb http://debian.alternc.org/ stable main
 
-then apt-get install alternc
+then apt-get install mysql-server alternc
 
 You may download and install additionnal plugins after installing AlternC.
 Let's go to the developper page for more information.
 
 	https://alternc.org/
+
+License
+------------
+
+AlternC is distributed under the GPL v2 or later license. See COPYING.
+
+AlternC's translations (po files) are distributed under the Creative Commons
+CC0 license. Don't participate to the translation if you don't agree to publish
+your translation using that license.
+

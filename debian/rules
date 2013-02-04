@@ -8,7 +8,7 @@
 # Uncomment this to turn on verbose mode. 
 export DH_VERBOSE=1
 MAJOR=$(shell sed -ne 's/^[^(]*(\([^)]*\)).*/\1/;1p' debian/changelog)
-REV=$(shell svn up > /dev/null ; env LANG=C svn info --non-interactive | awk '/^Revision:/ { print $$2 }')
+REV=$(shell env LANG=C svn info --non-interactive | awk '/^Revision:/ { print $$2 }')
 VERSION="${MAJOR}~svn${REV}"
 export VERSION
 
