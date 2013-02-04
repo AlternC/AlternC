@@ -30,7 +30,7 @@ if ($mem->checkRight()) { ?>
 <a href="javascript:menu_toggle('menu-adm');">
   <div class="menu-title">
       <img src="images/admin.png" alt="Administration" />&nbsp;<span class="adminmenu"><?php __("Administration"); ?></span>
-      <img src="images/row-down.png" alt="" style="float:right;"/>
+      <img src="/images/menu_moins.png" alt="" style="float:right;" id="menu-adm-img"/>
   </div>
 </a>
 <div class="menu-content" id ="menu-adm">

@@ -31,7 +31,7 @@ if ($q["t"] > 0 || $q['u'] > 0) {
 <a href="javascript:menu_toggle('menu-ftp');">
 <div class="menu-title">
 <img src="images/ftp.png" alt="<?php __("FTP accounts"); ?>" />&nbsp;<?php __("FTP accounts"); ?> <?php if (!$quota->cancreate("ftp")) { echo '<span class="full">'; } ?>(<?php echo $q["u"]; ?>/<?php echo $q["t"]; ?>)<?php if (!$quota->cancreate("ftp")) { echo '</span>'; } ?>
-<img src="images/row-down.png" alt="" style="float:right;"/>
+<img src="/images/menu_moins.png" alt="" style="float:right;" id="menu-ftp-img"/>
 </div>
 </a>
 <div class="menu-content" id="menu-ftp">

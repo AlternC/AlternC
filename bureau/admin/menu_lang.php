@@ -2,7 +2,7 @@
   <a href="javascript:menu_toggle('menu-lang');">
    <div class="menu-title">
     <img src="/images/lang.png" alt="<?php __("Languages"); ?>" />&nbsp;<?php __("Languages"); ?>
-    <img src="/images/row-down.png" alt="" style="float:right;"/>
+    <img src="/images/menu_moins.png" alt="" style="float:right;" id="menu-lang-img"/>
    </div>
   </a>
   <div class="menu-content" id="menu-lang">

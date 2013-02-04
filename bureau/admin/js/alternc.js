@@ -201,7 +201,14 @@ function is_valid_mail(arg) {
 }
 
 function menu_toggle(id) {
-  $("#"+id).toggle();
+  $("#"+id).toggle(200, function() {
+    // Animation complete.
+		if ($("#"+id).is(":hidden")) {
+			$("#"+id+"-img").attr("src","images/menu_plus.png");
+		} else {
+			$("#"+id+"-img").attr("src","images/menu_moins.png");
+		}
+  });
 
 /* Pour quand on voudra enregistrer l'etat du menu ;)
   var tmp = {};

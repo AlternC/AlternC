@@ -52,7 +52,7 @@ if (!$charset) $charset="UTF-8";
 <body>
   <div id="global">
 
-    <div id="content" style="width:100%;">
+    <div id="content" style="width:1000px;">
 
       <p id="logo">  <img src="logo.png" border="0" alt="<?php __("Web Hosting Control Panel"); ?>" title="<?php __("Web Hosting Control Panel"); ?>" /></a>
       </p>

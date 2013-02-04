@@ -32,7 +32,7 @@ if ($q["t"] > 0 || $q['u'] > 0)
 <a href="javascript:menu_toggle('menu-dom');">
   <div class="menu-title" id="test">
     <img src="images/dom.png" alt="<?php __("Domains"); ?>" />&nbsp;<?php __("Domains"); ?> (<?php echo $q["u"]; ?>/<?php echo $q["t"]; ?>)
-    <img src="images/row-down.png" alt="" style="float:right;"/>
+    <img src="images/menu_moins.png" alt="" style="float:right;" id="menu-dom-img"/>
   </div>
 </a>
 <div class="menu-content" id="menu-dom">

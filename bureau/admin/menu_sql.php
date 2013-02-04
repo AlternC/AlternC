@@ -27,7 +27,7 @@ if ($q["t"] > 0 || $q['u'] >0) {
 <a href="javascript:menu_toggle('menu-sql');">
 <div class="menu-title">
 <img src="images/mysql.png" alt="MySQL" />&nbsp;MySQL (<?php echo $q["u"]; ?>/<?php echo $q["t"]; ?>)
-<img src="/images/row-down.png" alt="" style="float:right;"/>
+<img src="/images/menu_moins.png" alt="" style="float:right;" id="menu-sql-img"/>
 </div>
 </a>
 <div class="menu-content" id="menu-sql">

@@ -43,9 +43,15 @@ if (!$charset) $charset="UTF-8";
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $charset; ?>" />
 </head>
 <body style="margin: 20px;">
-<h3 style="text-align: center"><?php __("Disconnected"); ?></h3>
+  <div id="global">
 
-<?php __("You have been logged out of your administration desktop."); ?><br />
-<a href="../index.php"><?php __("Click here to log in"); ?></a>
+    <div id="content" style="width:1000px;">
+      <h3 style="text-align: center"><?php __("Disconnected"); ?></h3>
+
+      <?php __("You have been logged out of your administration desktop."); ?><br />
+      <p><a href="../index.php"><?php __("Click here to log in"); ?></a></p>
+      <p>&nbsp;</p>
+    </div>
+  </div>
 </body>
 </html>

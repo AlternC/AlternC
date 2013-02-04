@@ -33,7 +33,7 @@ if ($q["u"] > 0 || ( $r["u"] > 0 && $q['t'] > 0 )) {
 <a href="javascript:menu_toggle('menu-mail');">
 	<div class="menu-title">
 	<img src="images/mail.png" alt="<?php __("Email Addresses"); ?>" />&nbsp;<?php __("Email Addresses"); ?> (<?php echo $q["u"]; ?>/<?php echo $q["t"]; ?>)
-	<img src="images/row-down.png" alt="" style="float:right;"/>
+	<img src="/images/menu_moins.png" alt="" style="float:right;" id="menu-mail-img"/>
 	</div>
 </a>
 <div class="menu-content" id="menu-mail">
