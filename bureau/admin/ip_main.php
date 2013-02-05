@@ -87,6 +87,10 @@ $lac = $authip->list_affected();
 
 <hr/>
 <h3><?php __("Add a new rule"); ?></h3>
+
+<?php if (empty($list_ip)) { ?>
+  <p><?php __("You need to have some 'Known IP and networks' defined below to define a new rule.") ?></p>
+<?php } else { ?>
 <form method="post" action="ip_main.php" name="main" id="main">
 <table class="tlistb">
   <tbody>
@@ -137,7 +141,7 @@ $lac = $authip->list_affected();
   </tbody>
 </table>
 </form>
-<p><?php __("You need to have some 'Known IP and networks' defined below to define a new rule.") ?></p>
+<?php } // empty $list_ip ?>
 <br/>
 <hr/>
 <h3><?php __("Known IP and networks");?></h3>
