@@ -1,4 +1,4 @@
-</div> <!-- div content -->
+
 </td>
 </tr>
 </table>

@@ -10,7 +10,7 @@ if (!isset($mode)) { # when included from adm_login, mode is not set
 ?>
 <center>
 
-<p><h3><center><?php __("Account"); ?> <span style="font-weight: bold;"><?php echo $mem->user["login"]; ?></span></center></h3></p>
+<h3><center><?php printf(_("<b>%s</b> account"),$mem->user["login"]); ?></center></h3>
 
 <div style="width: 550px">
 

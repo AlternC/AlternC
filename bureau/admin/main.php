@@ -45,9 +45,7 @@ if ($mem->user["lastfail"]) {
 }
 
 if (!empty($error) ) { echo "<p class='error'>$error</p>";$error=''; } 
-?>
-<center>
-<?php
+
 $feed_url = variable_get('rss_feed');
 if (!empty($feed_url)) {
 $cache_time = 60*5; // 5 minutes
@@ -77,7 +75,7 @@ if ($count < $max) {
 }
 $count++;
 }
-echo "</table>\n</center>";
+echo "</table>\n";
 echo "<br/>";
 
 } // empty feed_url
@@ -103,7 +101,7 @@ if($admin->enabled) {
   }
 
   echo "<hr/><p>";
-  __("You are using the AlternC Panel. You can contact the AlternC community for informations or feedback by joining the mailing-list");
+  __("You are using the AlternC Panel. You can contact the AlternC community for information or feedback by joining the mailing-list");
   echo "&nbsp;<a target=_blank href='http://lists.alternc.org/listinfo/users'>users@alternc.org</a>";
   echo "</p>";
 } // if $admin->enabled
