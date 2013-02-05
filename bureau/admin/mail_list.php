@@ -97,9 +97,6 @@ if (empty($allmails_list) && empty($search)) {
   echo "</i></p><br/>";
 } else {
 
-if (isset($error) && !empty($error)) {
-  	echo "<p class=\"error\">$error</p>";
-}
 ?>
 
 <table class="searchtable"><tr><td>

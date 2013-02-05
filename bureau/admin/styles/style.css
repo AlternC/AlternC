@@ -580,3 +580,10 @@ input#dir, input#sub_local {
 .petit td {
   font-size:95%;
 }
+
+#adm_panel li, #adm_panel_root li {
+    padding: 4px 0 4px 0;
+}
+#adm_panel li:hover, #adm_panel_root li:hover {
+  background-color: #BFD3E1;
+}
