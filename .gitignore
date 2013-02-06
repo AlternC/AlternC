@@ -3,6 +3,7 @@ bureau/locales/de_DE/LC_MESSAGES/alternc.mo
 bureau/locales/en_US/LC_MESSAGES/alternc.mo
 bureau/locales/es_ES/LC_MESSAGES/alternc.mo
 bureau/locales/fr_FR/LC_MESSAGES/alternc.mo
+bureau/locales/nl_NL/LC_MESSAGES/alternc.mo
 bureau/locales/pt_BR/LC_MESSAGES/alternc.mo
 debian/alternc
 debian/alternc-awstats

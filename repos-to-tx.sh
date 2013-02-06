@@ -51,11 +51,14 @@ do
     rm -rf "alternc/trunk/tmp.$lang"
     mkdir "alternc/trunk/tmp.$lang"
     # po-debconf : (they are using only the language code, not lang_country
-    if [ "$sublang" != "en" ] ; then
+#    if [ "$sublang" != "en" ] ; then
 	cp "alternc/trunk/debian/po/${sublang}.po" "alternc/trunk/tmp.$lang/alternc.debconf.po"
 	cp "alternc-mailman/trunk/debian/po/${sublang}.po" "alternc/trunk/tmp.$lang/alternc-mailman.debconf.po"
 #	cp "alternc/trunk/awstats/debian/po/${sublang}.po" "alternc/trunk/tmp.$lang/alternc-awstats.debconf.po"
-    fi
+#    else
+#	cp "alternc/trunk/debian/po/templates.pot" "alternc/trunk/tmp.$lang/alternc.debconf.po"
+#	cp "alternc-mailman/trunk/debian/po/templates.pot" "alternc/trunk/tmp.$lang/alternc-mailman.debconf.po"	
+#    fi
     cp "alternc/trunk/bureau/locales/$lang/LC_MESSAGES/messages.po" \
 	"alternc-mailman/trunk/bureau/locales/$lang/LC_MESSAGES/mailman.po" \
 	"alternc/trunk/awstats/bureau/locales/$lang/LC_MESSAGES/aws.po" \

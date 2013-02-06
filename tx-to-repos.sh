@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 #------------------------------------------------------------
 # Short doc: launch this when people said they translated 
@@ -34,9 +34,13 @@ do
     echo "done"
 done
 
+if [ "$1" != "nocommit" ] 
+then 
 # Now committing 
-svn commit -m "Updating language files from Transifex"
-pushd ../../alternc-mailman/trunk
-svn commit -m "Updating language files from Transifex"
-popd
+    svn commit -m "Updating language files from Transifex"
+    pushd ../../alternc-mailman/trunk
+    svn commit -m "Updating language files from Transifex"
+    popd
+fi
+
 
