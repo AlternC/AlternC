@@ -1,29 +1,19 @@
-Template: alternc/warningaclquota
-Type: note
-_Description: AlternC need ACL and QUOTA activated
- AlternC can't work without ACL activated on his file.
- Please check your /etc/fstab and add "acl" to the options
- of the partition where you will install AlternC.
- .
- Run /usr/lib/alternc/fixperms.sh once it's activated.
- .
- Also, you need to activate group quota (grpquota)
- to be able to use disk quota.
-
 Template: alternc/acluninstalled
 Type: note
-_Description: AlternC need ACL activated
- AlternC can't work without ACL activated on his file system.
- ACL not activated 
+_Description: AlternC need ACL on filesystem
+ AlternC can't work without ACL activated on its filesystem.
+ ACL are currently not enabled.
  .
  Also, you need to activate group quota (grpquota)
- to be able to use disk quota.
+ to be able to use disk quota (but that's not mandatory).
 
 Template: alternc/quotauninstalled
 Type: note
-_Description: AlternC QUOTA not activated
- The QUOTA assigned to each user will be infinite.
+_Description: AlternC QUOTA not enabled
+ As a result, the QUOTA assigned to each user will be infinite.
  .
+ To be able to use space quota in AlternC, enable grpquota in your
+ partition.
 
 Template: alternc/desktopname
 Type: string

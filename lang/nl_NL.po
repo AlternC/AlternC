@@ -645,6 +645,271 @@ msgid ""
 "about the patch at http://wiki.koumbit.net/VirtualMailman."
 msgstr ""
 
+#: ../admin/menu_mailman.php:32
+msgid "(with mailman)"
+msgstr ""
+
+#: ../admin/menu_mailman.php:32 ../admin/mman_add.php:34
+#: ../admin/mman_list.php:41 ../admin/mman_list.php:60
+#: ../admin/mman_passwd.php:37 ../admin/mman_passwd.php:45
+#: ../admin/mman_url.php:38 ../admin/mman_url.php:47 ../admin/mman_url.php:55
+#: ../class/m_mailman.php:535
+msgid "Mailing lists"
+msgstr ""
+
+#: ../admin/mman_add.php:46
+msgid "List's email address"
+msgstr ""
+
+#: ../admin/mman_add.php:49
+msgid "Email of the list's administrator"
+msgstr ""
+
+#: ../admin/mman_add.php:52
+msgid "List password"
+msgstr ""
+
+#: ../admin/mman_add.php:55
+msgid "List password (confirm)"
+msgstr ""
+
+#: ../admin/mman_add.php:59
+msgid "Create the list."
+msgstr ""
+
+#: ../admin/mman_add.php:60 ../admin/mman_url.php:89
+msgid "Cancel"
+msgstr ""
+
+#: ../admin/mman_del.php:51
+msgid "Deleting mailman lists"
+msgstr ""
+
+#: ../admin/mman_del.php:54
+msgid "Please confirm the deletion of the following mailman lists:"
+msgstr ""
+
+#: ../admin/mman_del.php:64
+msgid "Delete the selected mailman lists"
+msgstr ""
+
+#: ../admin/mman_del.php:64
+msgid "Don't delete lists and go back to the mailman list"
+msgstr ""
+
+#: ../admin/mman_del.php:69
+msgid ""
+"Warning: Deleting a mailman list will destroy all the subscribed users, "
+"preferences and archives it contains! You will <b>NOT</b> be able to get "
+"your data back!"
+msgstr ""
+
+#: ../admin/mman_doadd.php:43
+msgid "The mailing list has been successfully created."
+msgstr ""
+
+#: ../admin/mman_dodel.php:55
+#, php-format
+msgid "The list %s has been successfully deleted."
+msgstr ""
+
+#: ../admin/mman_dopasswd.php:41
+msgid "The mailing list password has been successfully changed."
+msgstr ""
+
+#: ../admin/mman_dourl.php:39
+msgid "The mailing list management url has been successfully changed."
+msgstr ""
+
+#: ../admin/mman_list.php:31
+msgid "Password change pending"
+msgstr ""
+
+#: ../admin/mman_list.php:32
+msgid "Url change pending"
+msgstr ""
+
+#: ../admin/mman_list.php:33
+msgid "List creation pending"
+msgstr ""
+
+#: ../admin/mman_list.php:39
+msgid ""
+"No domain is installed on your account, you cannot create any mailing list!"
+msgstr ""
+
+#: ../admin/mman_list.php:69
+msgid "Create a list"
+msgstr ""
+
+#: ../admin/mman_list.php:78
+msgid "Delete"
+msgstr ""
+
+#: ../admin/mman_list.php:78
+msgid "List Status"
+msgstr ""
+
+#: ../admin/mman_list.php:78
+msgid "List name"
+msgstr ""
+
+#: ../admin/mman_list.php:89
+msgid "List is pending deletion, you can't do anything on it"
+msgstr ""
+
+#: ../admin/mman_list.php:100
+msgid "List admin"
+msgstr ""
+
+#: ../admin/mman_list.php:101
+msgid "Pending messages"
+msgstr ""
+
+#: ../admin/mman_list.php:104
+msgid "Change password"
+msgstr ""
+
+#: ../admin/mman_list.php:105
+msgid "Change url"
+msgstr ""
+
+#: ../admin/mman_list.php:113
+msgid "Delete the checked lists"
+msgstr ""
+
+#: ../admin/mman_passwd.php:54
+#, php-format
+msgid "Changing password of list %s"
+msgstr ""
+
+#: ../admin/mman_passwd.php:56
+msgid "New list password"
+msgstr ""
+
+#: ../admin/mman_passwd.php:59
+msgid "Password confirmation"
+msgstr ""
+
+#: ../admin/mman_passwd.php:63
+msgid "Change the password."
+msgstr ""
+
+#: ../admin/mman_url.php:63
+msgid ""
+"This is the current url to access administration and public pages for this "
+"list. If you want to change it, select another url in the list and submit "
+"this form. <br />If you don't know what you are doing, don't change anything "
+"here."
+msgstr ""
+
+#: ../admin/mman_url.php:68
+#, php-format
+msgid "Changing management url of list %s"
+msgstr ""
+
+#: ../admin/mman_url.php:71
+msgid "Current list url"
+msgstr ""
+
+#: ../admin/mman_url.php:75
+msgid "New list management url"
+msgstr ""
+
+#: ../admin/mman_url.php:88
+msgid "Change the url."
+msgstr ""
+
+#: ../class/m_mailman.php:42
+msgid "This list already exist"
+msgstr ""
+
+#: ../class/m_mailman.php:43 ../class/m_mailman.php:141
+#: ../class/m_mailman.php:343 ../class/m_mailman.php:443
+#: ../class/m_mailman.php:468 ../class/m_mailman.php:488
+msgid "This list does not exist"
+msgstr ""
+
+#: ../class/m_mailman.php:44
+msgid "A fatal error happened when creating the list"
+msgstr ""
+
+#: ../class/m_mailman.php:45
+msgid "A fatal error happened when deleting the list"
+msgstr ""
+
+#: ../class/m_mailman.php:46
+msgid "A fatal error happened when changing the list password"
+msgstr ""
+
+#: ../class/m_mailman.php:47
+msgid "A fatal error happened when getting the list url"
+msgstr ""
+
+#: ../class/m_mailman.php:68 ../class/m_mailman.php:388
+#: ../class/m_mailman.php:419
+msgid "No list defined yet"
+msgstr ""
+
+#: ../class/m_mailman.php:162
+msgid ""
+"Special mail address for Mailman mailing-lists. <a href='mman_list."
+"php'>Click here to manage it.</a>"
+msgstr ""
+
+#: ../class/m_mailman.php:217
+#, php-format
+msgid "The mailman address %s does not exists"
+msgstr ""
+
+#: ../class/m_mailman.php:240
+msgid "Your mailing-list quota is over, you cannot create more mailing-lists."
+msgstr ""
+
+#: ../class/m_mailman.php:247
+msgid "The email you entered is syntaxically incorrect"
+msgstr ""
+
+#: ../class/m_mailman.php:262
+msgid "The login (left part of the @) is mandatory"
+msgstr ""
+
+#: ../class/m_mailman.php:266
+msgid "The owner email and the password are mandatory"
+msgstr ""
+
+#: ../class/m_mailman.php:270
+msgid "This email is incorrect"
+msgstr ""
+
+#: ../class/m_mailman.php:279
+msgid "This domain does not exist."
+msgstr ""
+
+#: ../class/m_mailman.php:285
+msgid ""
+"A list with the same name already exist on the server. Please choose another "
+"name."
+msgstr ""
+
+#: ../class/m_mailman.php:301
+msgid ""
+"This email address (or one of the list-subscribe, list-unsubscribe etc.) are "
+"already used."
+msgstr ""
+
+#: ../class/m_mailman.php:347
+msgid "This list has pending action, you cannot delete it"
+msgstr ""
+
+#: ../class/m_mailman.php:447
+msgid "The passwords are differents, please try again"
+msgstr ""
+
+#: ../class/m_mailman.php:502
+msgid "Mailing lists (mailman)"
+msgstr ""
+
 #: ../../squirrelmail/alternc_changepass/change.php:39
 msgid "Can't connect to MySQL server on AlternC!"
 msgstr ""
@@ -849,20 +1114,6 @@ msgstr ""
 msgid "Create this AlternC account"
 msgstr ""
 
-#: ../admin/adm_add.php:123 ../admin/adm_deactivate.php:75
-#: ../admin/adm_domstypeedit.php:134 ../admin/adm_edit.php:124
-#: ../admin/adm_quotaedit.php:88 ../admin/adm_tldadd.php:71
-#: ../admin/adm_tldedit.php:70 ../admin/bro_pref.php:150
-#: ../admin/browseforfolder.php:146 ../admin/browseforfolder2.php:142
-#: ../admin/ftp_del.php:83 ../admin/ftp_edit.php:98
-#: ../admin/hta_adduser.php:68 ../admin/hta_dodeluser.php:65
-#: ../admin/mail_edit.php:116 ../admin/mail_manage_catchall.php:120
-#: ../admin/piwik_user_dodel.php:64 ../admin/sql_bck.php:101
-#: ../admin/sql_users_add.php:73 ../admin/sql_users_password.php:69
-#: ../admin/sql_users_rights.php:106
-msgid "Cancel"
-msgstr ""
-
 #: ../admin/adm_authip_whitelist.php:31 ../admin/adm_menulist.php:76
 #: ../admin/ip_main.php:50 ../admin/menu_ip.php:30
 msgid "Access security"
@@ -926,16 +1177,6 @@ msgstr ""
 #: ../admin/adm_tld.php:82 ../admin/dom_edit.php:129 ../admin/ftp_list.php:82
 #: ../admin/ip_main.php:169 ../admin/mail_list.php:150
 msgid "Edit"
-msgstr ""
-
-#: ../admin/adm_authip_whitelist.php:85 ../admin/adm_doms_def_type.php:60
-#: ../admin/adm_mxaccount.php:88 ../admin/adm_slaveaccount.php:88
-#: ../admin/adm_slaveip.php:87 ../admin/bro_main.php:278 ../admin/cron.php:54
-#: ../admin/dom_edit.php:135 ../admin/ftp_del.php:82
-#: ../admin/hta_dodeluser.php:64 ../admin/ip_main.php:81
-#: ../admin/ip_main.php:170 ../admin/piwik_sitelist.php:74
-#: ../admin/piwik_user_dodel.php:63 ../admin/piwik_userlist.php:87
-msgid "Delete"
 msgstr ""
 
 #: ../admin/adm_deactivate.php:46
@@ -1657,10 +1898,6 @@ msgstr ""
 
 #: ../admin/adm_menulist.php:81 ../admin/menu_piwik.php:31
 msgid "Piwik statistics"
-msgstr ""
-
-#: ../admin/adm_menulist.php:83
-msgid "Mailing lists"
 msgstr ""
 
 #: ../admin/adm_menulist.php:84
@@ -4572,11 +4809,6 @@ msgstr ""
 
 #: ../class/m_hta.php:391
 msgid "An incompatible .htaccess file exists in this folder"
-msgstr ""
-
-#: ../class/m_mail.php:138 ../class/m_mail.php:222 ../class/m_mail.php:307
-#: ../class/m_mail.php:424 ../class/m_mail.php:475
-msgid "The email you entered is syntaxically incorrect"
 msgstr ""
 
 #: ../class/m_mail.php:171
