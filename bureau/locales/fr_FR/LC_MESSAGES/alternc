@@ -1,10 +1,11 @@
-# English AlternC Translation
-# Copyright (c) 2002 the AlternC Development Team
-# <tech@alternc.org>
-# $Id: aws.po 3237 2012-08-21 14:59:46Z benjamin $
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
 # Translators:
 # Benjamin Sonntag <benjamin@alternc.org>, 2004.
 # Benjamin Sonntag <benjamin@sonntag.fr>, 2004,2012-2013.
+# Benjamin Sonntag <benjamin@sonntag.fr>, 2004,2012-2013, 2013.
 # Daniel Viñar Ulriksen <dani@belil.net>, 2008.
 # Eloi DUCLERQ <linkfan@hotmail.fr>, 2013.
 # Fufroma <fufroma@nnx.com>, 2013.
@@ -14,16 +15,628 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AlternC, hosting control panel\n"
 "Report-Msgid-Bugs-To: https://alternc.org/report/1\n"
-"POT-Creation-Date: 2013-02-04 19:45+0100\n"
-"PO-Revision-Date: 2013-02-06 05:55+0000\n"
+"POT-Creation-Date: 2013-02-06 07:35+0100\n"
+"PO-Revision-Date: 2013-02-06 09:12+0000\n"
 "Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
-"Language-Team: English <i18n@alternc.org>\n"
+"Language-Team: English <dev@alternc.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fr_FR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Emacs 21\n"
+
+#. Type: note
+#. Description
+#: ../alternc.templates:1001
+msgid "AlternC need ACL on filesystem"
+msgstr "AlternC requiert les ACL sur le système de fichiers"
+
+#. Type: note
+#. Description
+#: ../alternc.templates:1001
+msgid ""
+"AlternC can't work without ACL activated on its filesystem. ACL are "
+"currently not enabled."
+msgstr "AlternC ne peut pas fonctionner correctement sans les ACL activées sur le système de fichiers. Les ACL ne sont actuellement pas actives."
+
+#. Type: note
+#. Description
+#: ../alternc.templates:1001
+msgid ""
+"Also, you need to activate group quota (grpquota) to be able to use disk "
+"quota (but that's not mandatory)."
+msgstr "De plus, si vous souhaitez utiliser les quotas de disque, vous devez activer les quotas de groupe (grpquota) (mais cela n'est pas obligatoire)."
+
+#. Type: note
+#. Description
+#: ../alternc.templates:2001
+msgid "AlternC QUOTA not enabled"
+msgstr "les QUOTAS ne seront pas actifs dans AlternC "
+
+#. Type: note
+#. Description
+#: ../alternc.templates:2001
+msgid "As a result, the QUOTA assigned to each user will be infinite."
+msgstr "Par conséquent, les QUOTAS d'espace assignés aux utilisateurs seront infinis."
+
+#. Type: note
+#. Description
+#: ../alternc.templates:2001
+msgid ""
+"To be able to use space quota in AlternC, enable grpquota in your partition."
+msgstr "Pour pouvoir utiliser les quotas d'espace dans AlternC, vous devez activer grpquota sur votre partition."
+
+#. Type: string
+#. Description
+#: ../alternc.templates:3001
+msgid "Fully qualified name of the desktop:"
+msgstr "Nom de domaine complet du bureau :"
+
+#. Type: string
+#. Description
+#: ../alternc.templates:3001
+msgid ""
+"Please enter the fully qualified name of your server. This will be the "
+"domain part of the url you will use to access the virtual managment desktop."
+" This (sub)domain MUST point to your server."
+msgstr "Entrez le nom de domaine de votre serveur. Cela correspondra à l'url qu'il faudra saisir pour accéder au panneau d'administration. Ce (sous)domaine DOIT pointer vers votre serveur."
+
+#. Type: string
+#. Description
+#: ../alternc.templates:3001
+msgid "The default should be ok if your machine is correctly configured."
+msgstr "La valeur par défaut doit convenir si votre machine est correctement configurée."
+
+#. Type: string
+#. Description
+#: ../alternc.templates:4001
+msgid "Name of your hosting service:"
+msgstr "Nom de votre service d'hébergement :"
+
+#. Type: string
+#. Description
+#: ../alternc.templates:4001
+msgid ""
+"Please enter the name of your hosting service. It may be your company's name"
+" or your personnal name or whatever you want to ..."
+msgstr "Entrez le nom de votre service d'hébergement. Cela peut être le nom de votre entreprise ou votre nom de famille, ou tout ce que vous voulez..."
+
+#. Type: string
+#. Description
+#: ../alternc.templates:5001
+msgid "Name of the primary domain name server:"
+msgstr "Nom de domaine du serveur de dns primaire :"
+
+#. Type: string
+#. Description
+#: ../alternc.templates:5001
+msgid ""
+"Please enter the fully qualified name of your primary dns server. It can be "
+"this server since bind is installed and configured by AlternC. Anyway, if "
+"your hosting service is quite big, you may have an external primary name "
+"server that keep in sync with your alternc's server(s). . The default value "
+"should be good in most case."
+msgstr "Entrez le nom de domaine de votre serveur de dns primaire. Cela peut être votre serveur puisque bind est installé et configuré par AlternC. Cependant, si votre service d'hébergement est gros, vous pouvez disposer d'un serveur dns primaire externe synchronisé avec vos serveurs sous AlternC. La valeur par défaut devrait convenir dans la plupart des cas."
+
+#. Type: string
+#. Description
+#: ../alternc.templates:6001
+msgid "Name of the secondary domain name server:"
+msgstr "Nom de domaine du serveur de dns secondaire :"
+
+#. Type: string
+#. Description
+#: ../alternc.templates:6001
+msgid ""
+"Please enter the fully qualified name of your secondary dns server. It can "
+"be this server since bind is installed and configured by AlternC. Anyway, "
+"you should have 2 separate DNS servers if you want to provide a high quality"
+" hosting service."
+msgstr "Entrez le nom de domaine de votre serveur de dns secondaire. Cela peut être votre serveur puisque bind est installé et configuré par AlternC. Cependant, vous devriez avoir 2 DNS séparés et indépendants si vous voulez fournir un hébergement de qualité."
+
+#. Type: string
+#. Description
+#: ../alternc.templates:6001
+msgid ""
+"AlternC's team is providing any user of AlternC with free DNS service. go to"
+" http://alternc.net/ to create an account and use it."
+msgstr "L'équipe d'AlternC fournit gratuitement le service de DNS à tout utilisateur d'AlternC. Rendez-vous sur http://alternc.net/ pour créer un compte et en profiter."
+
+#. Type: string
+#. Description
+#: ../alternc.templates:7001
+msgid "Name of the mysql server:"
+msgstr "Nom de domaine du serveur mysql :"
+
+#. Type: string
+#. Description
+#: ../alternc.templates:7001
+msgid ""
+"Please enter the fully qualified name of your mysql server host. This server"
+" MUST be able to access the remote server at standard port (3306). It is "
+"recommended to use \"127.0.0.1\" instead of \"localhost\" if your postfix "
+"installation is configured in a chroot (which is the case, by default)."
+msgstr "Entrez le nom DNS complet de votre serveur MySQL. Ce serveur DOIT accepter les connexions sur le port standard (3306). Nous vous recommandons de laisser \"127.0.0.1\", plutôt que \"localhost\", si postfix est configuré pour être lancé dans un chroot (ce qui est le cas par défaut)."
+
+#. Type: string
+#. Description
+#: ../alternc.templates:8001
+msgid "AlternC's mysql system database:"
+msgstr "Base système mysql d'AlternC : "
+
+#. Type: string
+#. Description
+#: ../alternc.templates:8001
+msgid ""
+"AlternC will create a mysql database to store it's system data. Please "
+"choose the name of this database here. The default value should be good in "
+"most case."
+msgstr "AlternC va créer une base de données pour stocker ses informations. Entrez le nom de la base qui sera créée. La valeur par défaut convient dans la plupart des cas."
+
+#. Type: string
+#. Description
+#. Type: string
+#. Description
+#. Type: string
+#. Description
+#: ../alternc.templates:9001 ../alternc.templates:10001
+#: ../alternc.templates:13001
+msgid "AlternC's mysql account:"
+msgstr "Compte mysql d'AlternC : "
+
+#. Type: string
+#. Description
+#. Type: string
+#. Description
+#: ../alternc.templates:9001 ../alternc.templates:13001
+msgid ""
+"AlternC will create a mysql administrator account. Please choose it's "
+"username here. The default value should be good in most case."
+msgstr "AlternC va créer un compte administrateur sur le serveur mysql. Entrez le nom d'utilisateur qui sera créé. La valeur par défaut convient dans la plupart des cas."
+
+#. Type: string
+#. Description
+#: ../alternc.templates:10001
+msgid ""
+"Using a remote mysql installation requires the AlternC user to be configured"
+" in advance with administrator access to the mysql installation."
+msgstr "L'utilisation d'un MySQL distant nécessite que l'utilisateur AlternC soit pré-configuré et dispose des accès administrateurs à votre MySQL."
+
+#. Type: string
+#. Description
+#: ../alternc.templates:10001
+msgid ""
+"The alternc sql user is responsible for granting access to user generated "
+"databases, that is why it needs root access on the mysql installation."
+msgstr "L'utilisateur MySQL d'AlternC est responsable de la création des bases de données utilisateurs et des directives GRANT, il a donc besoin d'être administrateur de votre serveur MySQL."
+
+#. Type: password
+#. Description
+#. Type: password
+#. Description
+#: ../alternc.templates:11001 ../alternc.templates:14001
+msgid "Password of AlternC's mysql account:"
+msgstr "Mot de passe du compte MySQL d'AlternC :"
+
+#. Type: password
+#. Description
+#. Type: password
+#. Description
+#: ../alternc.templates:11001 ../alternc.templates:14001
+msgid ""
+"AlternC requires an administrator account on the mysql server. It will be "
+"created automatically during the install process. Please choose a password "
+"for this account."
+msgstr "AlternC requiert un compte administrateur du serveur MySQL. Il sera créé automatiquement à l'installation. Entrez le mot de passe mysql de ce compte."
+
+#. Type: password
+#. Description
+#. Type: password
+#. Description
+#: ../alternc.templates:11001 ../alternc.templates:12001
+msgid ""
+"Please choose a quite complex password since it will have full access to the"
+" system database! If you enter nothing, a random password will be created."
+msgstr "Merci de choisir un mot de passe complexe, car il permet d'accéder à la base système ! Si vous n'entrez rien, un mot de asse aléatoire sera généré."
+
+#. Type: password
+#. Description
+#: ../alternc.templates:12001
+msgid "Password of the AlternC's mysql account:"
+msgstr "Mot de passe du compte mysql d'AlternC : "
+
+#. Type: password
+#. Description
+#: ../alternc.templates:12001
+msgid "Specify the remote mysql user password"
+msgstr "Précisez le mot de passe du compte MySQL distant"
+
+#. Type: string
+#. Description
+#: ../alternc.templates:15001
+msgid "The server to GRANT permissions to:"
+msgstr "Le serveur SQL à qui autoriser les permissions:"
+
+#. Type: string
+#. Description
+#: ../alternc.templates:15001
+msgid ""
+"AlternC and MySQL can be installed on different servers. In order to have "
+"GRANT table properly created and manipulated, this parameter must be set to "
+"the hostname or IP the Apache server will appear as connecting from to the "
+"MySQL server."
+msgstr "Lorsque AlternC et MySQL sont installés sur des serveurs distincts, et afin que les GRANT sur les tables soient corrects, ce paramètre est le nom d'hôte ou l'adresse IP depuis laquelle le serveur Apache sera vu quand il se connectera au serveur MySQL."
+
+#. Type: select
+#. Description
+#: ../alternc.templates:16001
+msgid "The way backup rotation is executed"
+msgstr "De quelle façon sont tournés les backups"
+
+#. Type: select
+#. Description
+#: ../alternc.templates:16001
+msgid ""
+"AlternC enables users to configure their own backups, on demand, with "
+"automatic rotation. This option determines how the backups are rotated."
+msgstr "AlternC permet aux utilisateurs de configurer leurs propres backups, à la demande, avec rotation automatique. Cette option détermine la manière dont les backups sont tournés."
+
+#. Type: select
+#. Description
+#: ../alternc.templates:16001
+msgid ""
+"rotate - backup.sql, backup.sql.0, backup.sql.1 date - backup.sql, "
+"backup.sql.20080709, backup.sql.20080708"
+msgstr "rotation - backup.sql, backup.sql.0, backup.sql.1 date - backup.sql, backup.sql.20080709, backup.sql.20080708"
+
+#. Type: select
+#. Description
+#: ../alternc.templates:17001
+msgid "Behavior of the backup script when it encounters a unmanaged file"
+msgstr "Comportement du script de backup quand il rencontre un fichier non géré"
+
+#. Type: select
+#. Description
+#: ../alternc.templates:17001
+msgid ""
+"The SQL backups can rename or overwrite existing files it doesn't know about"
+" when doing backups. The default behavior is to skip those files and ignore "
+"it."
+msgstr "Le script de backup SQL peut renommer ou écraser un fichier préexistant.Le comportement par défaut est de passer ces fichiers et de les ignorer."
+
+#. Type: string
+#. Description
+#: ../alternc.templates:18001
+msgid "The primary IP of this server:"
+msgstr "l'adresse IP principale de ce serveur : "
+
+#. Type: string
+#. Description
+#: ../alternc.templates:18001
+msgid ""
+"AlternC will default the A records for domains it hosts to this address. In "
+"other words, this is the address everyone can reach to server at."
+msgstr "AlternC va donner cette adresse par défaut aux domaines qu'il héberge. Autrement dit, c'est l'adresse à laquelle tout le monde peut contacter le serveur."
+
+#. Type: string
+#. Description
+#: ../alternc.templates:19001
+msgid "The internal IP of this server:"
+msgstr "L'adresse IP interne du serveur : "
+
+#. Type: string
+#. Description
+#: ../alternc.templates:19001
+msgid ""
+"AlternC will configure Apache and other services to listen to this address. "
+"This is usually the same as the primary IP of the server, unless the server "
+"is sitting behind a NAT router."
+msgstr "AlternC va configurer Apache et d'autres services pour écouter sur cette adresse. Normalement, cette adresse est la même que l'adresse principale du serveur, à moins que le serveur soit derrière un router NAT."
+
+#. Type: string
+#. Description
+#: ../alternc.templates:19001
+msgid "In other words, this is the IP address of eth0."
+msgstr "En d'autres mots, ceci est l'adresse assignée à eth0."
+
+#. Type: string
+#. Description
+#: ../alternc.templates:20001
+msgid "The default MX to assign to new domains:"
+msgstr "le MX à assigner aux nouveaux domaines : "
+
+#. Type: string
+#. Description
+#: ../alternc.templates:20001
+msgid ""
+"AlternC will assign this hostname as the MX record for all the domains it "
+"hosts. It is usually better be left alone."
+msgstr "AlternC va assigner ce nom de domaine comme enregistrement MX pour tous les domaines qu'il héberge."
+
+#. Type: string
+#. Description
+#: ../alternc.templates:21001
+msgid "The default Backup MX to assign to new domains:"
+msgstr "le MX de secours à assigner aux nouveaux domaines : "
+
+#. Type: string
+#. Description
+#: ../alternc.templates:21001
+msgid ""
+"AlternC will assign this hostname as the Backup MX record for all the "
+"domains it hosts. Don't set it if you don't know what it is about."
+msgstr "AlternC va assigner ce nom de domaine comme enregistrement MX de secours pour tous les domaines qu'il héberge. Si vous ne savez pas de quoi il s'agit, laissez ce champ vide."
+
+#. Type: string
+#. Description
+#: ../alternc.templates:22001
+msgid "The path where AlternC is installed:"
+msgstr "Emplacement d'AlternC : "
+
+#. Type: string
+#. Description
+#: ../alternc.templates:22001
+msgid ""
+"Please enter the partition name where alternc is installed. This is used "
+"mainly for disk quotas."
+msgstr "Entrez le nom du chemin où AlternC est installé. Cela est nécessaire pour la gestion des quotas d'espace disque."
+
+#. Type: string
+#. Description
+#: ../alternc.templates:22001
+msgid "Warning: Be careful! It can generate some problems."
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../alternc.templates:23001
+msgid "The monitoring server:"
+msgstr "serveur de surveillance : "
+
+#. Type: string
+#. Description
+#: ../alternc.templates:23001
+msgid ""
+"The IP address (or ip/prefix) of the server(s) which must be authorized to  "
+"ping the server and access apache status pages. Completely optional."
+msgstr "L'adresse IP (ou ip/préfixe) du(es) serveur(s) qui doivent être autorisés à envoyer un ping au serveur ou à accéder aux pages d'état d'Apache. Ce paramètre est optionnel."
+
+#. Type: note
+#. Description
+#: ../alternc.templates:24001
+msgid "POP Before SMTP deprecated"
+msgstr "POP Before SMTP déprécié"
+
+#. Type: note
+#. Description
+#: ../alternc.templates:24001
+msgid ""
+"AlternC doesn't automatically configure the pop-before-smtp package anymore,"
+" since it is correctly configured for SASL authentification these days. If "
+"you wish to configure pop-before-smtp, simply find the lines preceded by:"
+msgstr "AlternC ne configure plus automatiquement le package pop-before-smtp. Au lieu de cela, il configure correctement l'authentification SASL. Pour configurer pop-before-smtp, trouvez les lignes précédées par:"
+
+#. Type: note
+#. Description
+#: ../alternc.templates:24001
+msgid "# For Courier-POP3 and Courier-IMAP:"
+msgstr "# For Courier-POP3 and Courier-IMAP:"
+
+#. Type: note
+#. Description
+#: ../alternc.templates:24001
+msgid ""
+"in the /etc/pop-before-smtp/pop-before-smtp.conf and uncomment it. "
+"hash:/var/lib/pop-before-smtp/hosts must also be added to the mynetworks "
+"directive of /etc/postfix/main.cf"
+msgstr "dans le fichier /etc/pop-before-smtp/pop-before-smtp.conf et commentez-les. La chaîne hash:/var/lib/pop-before-smtp/hosts doit aussi être ajoutée à la directive mynetworks dans /etc/postfix/main.cf."
+
+#. Type: boolean
+#. Description
+#: ../alternc.templates:25001
+msgid "Should AlternC remove all databases (/var/lib/mysql/)?"
+msgstr "AlternC doit-il supprimer toutes les bases MySQL (/var/lib/mysql) ?"
+
+#. Type: boolean
+#. Description
+#: ../alternc.templates:25001
+msgid "All users databases will be trashed"
+msgstr "Toutes les bases de données des utilisateurs seront perdues"
+
+#. Type: boolean
+#. Description
+#: ../alternc.templates:26001
+msgid "Should AlternC remove users datas?"
+msgstr "AlternC doit-il effacer les données utilisateur ?"
+
+#. Type: boolean
+#. Description
+#: ../alternc.templates:26001
+msgid "The files and apache redirections created by users will be trashed"
+msgstr "Les fichiers et les redirections d'apache créés par les utilisateurs seront perdus"
+
+#. Type: boolean
+#. Description
+#: ../alternc.templates:27001
+msgid "Should AlternC remove bind zones?"
+msgstr "AlternC doit-il effacer toutes les zones bind ?"
+
+#. Type: boolean
+#. Description
+#: ../alternc.templates:27001
+msgid "It will delete all bind zones created by AlternC"
+msgstr "Cela supprimera toutes les zone de bind créées par AlternC"
+
+#. Type: boolean
+#. Description
+#: ../alternc.templates:28001
+msgid "Should AlternC remove mailboxes?"
+msgstr "AlternC doit-il supprimer toutes les boites mail ?"
+
+#. Type: boolean
+#. Description
+#: ../alternc.templates:28001
+msgid "If you accept all users e-mails will be deleted"
+msgstr "Si vous acceptez, tous les e-mails des utilisateurs seront supprimés"
+
+#. Type: string
+#. Description
+#: ../alternc.templates:29001
+msgid "Slave servers"
+msgstr "Serveurs esclaves"
+
+#. Type: string
+#. Description
+#: ../alternc.templates:29001
+msgid ""
+"This is a space-separated list of servers that are \"slaves\" to the master "
+"server (this server). When writing apache configuration files, the master "
+"server will attempt to reload apache on those remote servers. The alternc-"
+"slave package correctly configures those machines to allow login and reload."
+msgstr "Entre une liste séparée par des espaces des serveurs 'esclaves' du serveur maître (qui est ce serveur). Lors de l'écriture de la configuration d'Apache, ce maître tentera de recharger apache sur les serveurs distants. le package alternc-slave configure ces machines comme il faut pour permettre la connexion distante et le rechargement d'apache. "
+
+#. Type: boolean
+#. Description
+#: ../alternc.templates:30001
+msgid "Shall we use locally found MySQL server?"
+msgstr "Doit-on utiliser le serveur MySQL local automatiquement découvert ?"
+
+#. Type: boolean
+#. Description
+#: ../alternc.templates:30001
+msgid ""
+"A local MySQL connection was established on the server. Tell us if you want "
+"to use it. If not remote MySQL server connection parameters will be needed."
+msgstr "Une connexion locale à MySQL a été trouvée. Dites-nous si vous souhaitez que nous l'utilisions. Sinon, des paramètres d'accès distants à MySQL vous seront demandés."
+
+#. Type: boolean
+#. Description
+#: ../alternc.templates:31001
+msgid "Shall we use a remote MySQL server?"
+msgstr "Doit-on utiliser un serveur MySQL distant ?"
+
+#. Type: boolean
+#. Description
+#: ../alternc.templates:31001
+msgid ""
+"No local Mysql server was found. Please confirm you want to use a remote "
+"Mysql Server. If not, AlternC cannot be installed."
+msgstr "Aucun serveur MySQL local n'a été trouvé. Merci de confirmer que vous souhaitez utiliser un serveur MySQL distant. Sans cela, AlternC ne peut pas être installé."
+
+#. Type: boolean
+#. Description
+#: ../alternc.templates:32001
+msgid "MySQL connection error. Try again?"
+msgstr "Erreur de connexion à MySQL. Réessayer ?"
+
+#. Type: boolean
+#. Description
+#: ../alternc.templates:32001
+msgid ""
+"Remote connection to the MySQL server failed. Please confirm that we shall "
+"try again."
+msgstr "La connexion au serveur MySQL distant a échouée. Merci de confirmer que nous devons réessayer."
+
+#. Type: boolean
+#. Description
+#: ../alternc.templates:33001
+msgid "Private IP detected, use it anyway?"
+msgstr "IP privée détectée, faut-il l'utiliser tout de même ?"
+
+#. Type: boolean
+#. Description
+#: ../alternc.templates:33001
+msgid ""
+"The IP address you have appears to be private, please confirm you want to "
+"use it anyway. The server might not be reachable from outside your network."
+msgstr "L'adresse IP dont vous disposez est privée, merci de confirmer que vous souhaitez tout de même l'utiliser. Le serveur pourrait ne pas être joignable depuis l'extérieur de votre réseau. "
+
+#. Type: string
+#. Description
+#: ../alternc-awstats.templates:1001
+msgid "Default quota value for awstats stats:"
+msgstr "Quotas par défaut assignés aux statistiques web :"
+
+#. Type: string
+#. Description
+#: ../alternc-awstats.templates:1001
+msgid ""
+"You are installing the alternc-awstats package. This package allows any user"
+" to ask for statistics about his web site. Users can ask for a limited "
+"number of statistic set. Please specify the default quota they will have for"
+" this service."
+msgstr "Vous êtes en train d'installer le paquet AlternC-awstats. Ce paquet permet aux utilisateurs de demander des statistiques de leurs sites web. Les utilisateurs peuvent demander un nombre limité de jeux de statistiques. Merci de préciser la valeur par défaut des quotas qui leurs seront assignés pour ce service."
+
+#. Type: note
+#. Description
+#: ../alternc-awstats.templates:2001
+msgid "Error installing AlternC-Awstats"
+msgstr "Erreur à l'installation d'AlternC-Awstats"
+
+#. Type: note
+#. Description
+#: ../alternc-awstats.templates:2001
+msgid ""
+"AlternC-Awstats requires a complete installed AlternC system to get "
+"installed properly!"
+msgstr "AlternC-Awstats requiert une installation complète d'AlternC pour pouvoir être installé !"
+
+#. Type: note
+#. Description
+#: ../alternc-awstats.templates:2001
+msgid ""
+"Please install AlternC and CONFIGURE IT before installing alternc-awstats or"
+" additional modules (don't forget to launch 'alternc.install')."
+msgstr "Merci d'installer et de CONFIGURER AlternC avant d'installer alternc-awstats ou d'autres modules (ne pas ooublier de lancer 'alternc.install')."
+
+#. Type: note
+#. Description
+#: ../alternc-awstats.templates:2001
+msgid ""
+"Please check out the AlternC installation documentation before proceeding."
+msgstr "Merci de lire la documentation d'installation d'AlternC avant de continuer."
+
+#. Type: boolean
+#. Description
+#: ../templates:1001
+msgid "Do you want to patch mailman for virtual support?"
+msgstr "Voulez-vous installer le patch mailman pour le support des listes virtuelles ?"
+
+#. Type: boolean
+#. Description
+#: ../templates:1001
+msgid ""
+"The AlternC mailman plugin can optionally patch mailman to make it support "
+"same-name lists on different domains (ie. allow test@example.com and "
+"test@example.org to coexist). Mailman 2.x, by default, doesn't support that "
+"functionality but Koumbit.org has developped patches to make it."
+msgstr "Le module mailman pour AlternC peut optionnellement modifier (patch) mailman pour qu'il sache gérer des listes du même nom sur des domaines différents (par exemple autoriser test@example.com et test@example.org) Mailman 2.x, par défaut, ne sait pas gérer cela, mais Koumbit.org a développé des patchs qui le permettent."
+
+#. Type: boolean
+#. Description
+#: ../templates:1001
+msgid ""
+"The plugin only supports patching, no way to unpatch right now. Please "
+"understand that this process will modify core Mailman code and might break "
+"some functionality. It is running in production on Koumbit.org."
+msgstr "Ce greffon ne sait que modifier mailman, et un retour en arrière n'est pas possible. Vous devez être conscient que ce processus modifie le coeur du code de mailman et pourrait casser certaines fonctions. Cela dit, Koumbit.org l'utilise en production."
+
+#. Type: boolean
+#. Description
+#: ../templates:1001
+msgid ""
+"Also, note that everytime the mailman package is upgraded or reinstalled, "
+"the patches will need to be reapplied manually. This can be done by "
+"reconfiguring the alternc-mailman package.  ."
+msgstr "Notez aussi qu'à chaque fois que vous mettez à jour ou réinstallez le paquet Mailman, cette modification doit être réappliquée. Cela peut être effectué en reconfigurant le paquet alternc-mailman."
+
+#. Type: boolean
+#. Description
+#: ../templates:1001
+msgid ""
+"The patches are in /usr/share/alternc-mailman/patches. More information "
+"about the patch at http://wiki.koumbit.net/VirtualMailman."
+msgstr "Les patchs sont dans  /usr/share/alternc-mailman/patches. Pour plus d'information sur ce patch rendez-vous sur http://wiki.koumbit.net/VirtualMailman."
 
 #: ../admin/aws_add.php:33
 msgid "You cannot add any new statistics, your quota is over."
@@ -76,7 +689,7 @@ msgstr "Annuler"
 #: ../admin/aws_del.php:39
 #, php-format
 msgid "The statistics %s has been successfully deleted"
-msgstr "Le jeu de statistiques a été créé avec succès"
+msgstr "Le jeu de statistiques %s a été supprimé avec succès"
 
 #: ../admin/aws_del.php:45
 msgid "Please check the statistics set you want to delete"
@@ -162,7 +775,7 @@ msgstr "Le compte utilisateur a été créé avec succès"
 #: ../admin/aws_userdel.php:37
 #, php-format
 msgid "The awstat account %s has been successfully deleted"
-msgstr "Les statistiques ont été créées avec succès"
+msgstr "Le compte awstats %s a été supprimé avec succès"
 
 #: ../admin/aws_users.php:29
 msgid "Awstats allowed user list"

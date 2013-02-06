@@ -1,20 +1,26 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+# Translators:
+# Benjamin Sonntag <benjamin@alternc.org>, 2004.
+#   <benoit.maherault@laposte.net>, 2012.
+# Bruno Marmier <bruno@marmier.net>, 2004.
+#   <poupoule2004@hotmail.com>, 2012.
+#   <stephane.treboux@gmail.com>, 2012.
 msgid ""
 msgstr ""
-"Project-Id-Version: AlternC 2.0\n"
-"Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
+"Project-Id-Version: AlternC, hosting control panel\n"
+"Report-Msgid-Bugs-To: https://alternc.org/report/1\n"
 "POT-Creation-Date: 2013-02-06 07:35+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: <i18n@alternc.org>\n"
-"Language-Team: <i18n@alternc.org>\n"
-"Language: de\n"
+"PO-Revision-Date: 2013-02-06 06:37+0000\n"
+"Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
+"Language-Team: English <dev@alternc.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: de_DE\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Type: note
 #. Description

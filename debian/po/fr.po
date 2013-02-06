@@ -1,75 +1,35 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
 #
-#    Translators, if you are not familiar with the PO format, gettext
-#    documentation is worth reading, especially sections dedicated to
-#    this format, e.g. by running:
-#         info -n '(gettext)PO Files'
-#         info -n '(gettext)Header Entry'
-#
-#    Some information specific to po-debconf are available at
-#            /usr/share/doc/po-debconf/README-trans
-#         or http://www.debian.org/intl/l10n/po-debconf/README-trans
-#
-#    Developers do not need to manually edit POT or PO files.
-#
+# Translators:
+# Benjamin Sonntag <benjamin@alternc.org>, 2004.
+# Benjamin Sonntag <benjamin@sonntag.fr>, 2004,2012-2013.
+# Benjamin Sonntag <benjamin@sonntag.fr>, 2004,2012-2013, 2013.
+# Daniel Viñar Ulriksen <dani@belil.net>, 2008.
+# Eloi DUCLERQ <linkfan@hotmail.fr>, 2013.
+# Fufroma <fufroma@nnx.com>, 2013.
+#   <fufroma@nnx.com>, 2012.
+#   <hubert_bertrand@yahoo.fr>, 2012.
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.3.1\n"
-"Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
+"Project-Id-Version: AlternC, hosting control panel\n"
+"Report-Msgid-Bugs-To: https://alternc.org/report/1\n"
 "POT-Creation-Date: 2013-02-06 07:35+0100\n"
-"PO-Revision-Date: 2005-05-15 18:24+0200\n"
-"Last-Translator: Benjamin Sonntag <benjamin@altercn.org>\n"
-"Language-Team: french <dev@alternc.org>\n"
-"Language: fr\n"
+"PO-Revision-Date: 2013-02-06 09:12+0000\n"
+"Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
+"Language-Team: English <dev@alternc.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#. Type: note
-#. Description
-#: ../alternc.templates:1001
-msgid "AlternC need ACL on filesystem"
-msgstr ""
-
-#. Type: note
-#. Description
-#: ../alternc.templates:1001
-msgid ""
-"AlternC can't work without ACL activated on its filesystem. ACL are "
-"currently not enabled."
-msgstr ""
-
-#. Type: note
-#. Description
-#: ../alternc.templates:1001
-msgid ""
-"Also, you need to activate group quota (grpquota) to be able to use disk "
-"quota (but that's not mandatory)."
-msgstr ""
-
-#. Type: note
-#. Description
-#: ../alternc.templates:2001
-msgid "AlternC QUOTA not enabled"
-msgstr ""
-
-#. Type: note
-#. Description
-#: ../alternc.templates:2001
-msgid "As a result, the QUOTA assigned to each user will be infinite."
-msgstr ""
-
-#. Type: note
-#. Description
-#: ../alternc.templates:2001
-msgid ""
-"To be able to use space quota in AlternC, enable grpquota in your partition."
-msgstr ""
+"Language: fr_FR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. Type: string
 #. Description
 #: ../alternc.templates:3001
 msgid "Fully qualified name of the desktop:"
-msgstr "Nom de domaine du bureau :"
+msgstr "Nom de domaine complet du bureau :"
 
 #. Type: string
 #. Description
@@ -151,45 +111,9 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../alternc.templates:6001
-msgid ""
-"AlternC's team is providing any user of AlternC with free DNS service. go to "
-"http://alternc.net/ to create an account and use it."
-msgstr ""
-
-#. Type: string
-#. Description
 #: ../alternc.templates:7001
 msgid "Name of the mysql server:"
 msgstr "Nom de domaine du serveur mysql :"
-
-#. Type: string
-#. Description
-#: ../alternc.templates:7001
-#, fuzzy
-#| msgid ""
-#| "Please enter the fully qualified name of your mysql server host. On small "
-#| "systems, it IS \"localhost\" since you may have installed a local mysql "
-#| "server. If you are a bigger hosting service, you may put your mysql "
-#| "service on a remote synchronized ring or equivalent. In that case, please "
-#| "enter the hostname of your mysql server. This server MUST be able to "
-#| "access the remote server at standard port (3306). It is recommended to "
-#| "use \"127.0.0.1\" instead of \"localhost\" if your postfix installation "
-#| "is configured in a chroot (which is the case, by default)."
-msgid ""
-"Please enter the fully qualified name of your mysql server host. This server "
-"MUST be able to access the remote server at standard port (3306). It is "
-"recommended to use \"127.0.0.1\" instead of \"localhost\" if your postfix "
-"installation is configured in a chroot (which is the case, by default)."
-msgstr ""
-"Entrez le nom de domaine de votre serveur mysql. Sur des petits systèmes, "
-"mettez \"localhost\" car vous avez surement un serveur mysql local "
-"d'installé. Si vous êtes un plus gros fournisseur d'hébergement, vous "
-"pourriez mettre votre service mysql sur un réseau synchronisé de serveurs. "
-"Dans ce cas, mettez le nom de domaine de votre mysql distant. Ce serveur "
-"DOIT pouvoir accéder à votre mysql par le port standard (3306). Il est "
-"recommendé d'utiliser \"127.0.0.1\" au lieu de \"localhost\" si votre "
-"postfix est configuré en \"chroot\" (ce qui est le cas par défaut)."
 
 #. Type: string
 #. Description
@@ -233,32 +157,6 @@ msgstr ""
 "nom d'utilisateur qui sera créé. La valeur par défaut convient dans la "
 "plupart des cas."
 
-#. Type: string
-#. Description
-#: ../alternc.templates:10001
-msgid ""
-"Using a remote mysql installation requires the AlternC user to be configured "
-"in advance with administrator access to the mysql installation."
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../alternc.templates:10001
-msgid ""
-"The alternc sql user is responsible for granting access to user generated "
-"databases, that is why it needs root access on the mysql installation."
-msgstr ""
-
-#. Type: password
-#. Description
-#. Type: password
-#. Description
-#: ../alternc.templates:11001 ../alternc.templates:14001
-#, fuzzy
-#| msgid "Password of the AlternC's mysql account:"
-msgid "Password of AlternC's mysql account:"
-msgstr "Mot de passe du compte mysql : "
-
 #. Type: password
 #. Description
 #. Type: password
@@ -269,51 +167,20 @@ msgid ""
 "created automatically during the install process. Please choose a password "
 "for this account."
 msgstr ""
-"Entrez le mot de passe mysql du compte qui va être créé automatiquement."
-
-#. Type: password
-#. Description
-#. Type: password
-#. Description
-#: ../alternc.templates:11001 ../alternc.templates:12001
-#, fuzzy
-#| msgid ""
-#| "Please choose a quite complex password since it will have full access to "
-#| "the system database !!!"
-msgid ""
-"Please choose a quite complex password since it will have full access to the "
-"system database! If you enter nothing, a random password will be created."
-msgstr ""
-"Merci de choisir un mot de passe complexe, car ce compte aura un accès "
-"complet à toute la base système !!!"
+"AlternC requiert un compte administrateur du serveur MySQL. Il sera créé "
+"automatiquement à l'installation. Entrez le mot de passe mysql de ce compte."
 
 #. Type: password
 #. Description
 #: ../alternc.templates:12001
 msgid "Password of the AlternC's mysql account:"
-msgstr "Mot de passe du compte mysql : "
-
-#. Type: password
-#. Description
-#: ../alternc.templates:12001
-msgid "Specify the remote mysql user password"
-msgstr ""
+msgstr "Mot de passe du compte mysql d'AlternC : "
 
 #. Type: string
 #. Description
 #: ../alternc.templates:15001
 msgid "The server to GRANT permissions to:"
 msgstr "Le serveur SQL à qui autoriser les permissions:"
-
-#. Type: string
-#. Description
-#: ../alternc.templates:15001
-msgid ""
-"AlternC and MySQL can be installed on different servers. In order to have "
-"GRANT table properly created and manipulated, this parameter must be set to "
-"the hostname or IP the Apache server will appear as connecting from to the "
-"MySQL server."
-msgstr ""
 
 #. Type: select
 #. Description
@@ -331,14 +198,6 @@ msgstr ""
 "AlternC permet aux utilisateurs de configurer leurs propres backups, à la "
 "demande, avec rotation automatique. Cette option détermine la manière dont "
 "les backups sont tournés."
-
-#. Type: select
-#. Description
-#: ../alternc.templates:16001
-msgid ""
-"rotate - backup.sql, backup.sql.0, backup.sql.1 date - backup.sql, backup."
-"sql.20080709, backup.sql.20080708"
-msgstr ""
 
 #. Type: select
 #. Description
@@ -451,30 +310,14 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../alternc.templates:22001
-#, fuzzy
-#| msgid "Warning : Be careful ! It can generate some problems."
 msgid "Warning: Be careful! It can generate some problems."
-msgstr "Attention : Prenez garde ! Cela peut entraîner quelques problèmes."
+msgstr ""
 
 #. Type: string
 #. Description
 #: ../alternc.templates:23001
 msgid "The monitoring server:"
 msgstr "serveur de surveillance : "
-
-#. Type: string
-#. Description
-#: ../alternc.templates:23001
-#, fuzzy
-#| msgid ""
-#| "The IP address (or ip/prefix) of the server(s) which must be authorized "
-#| "to  ping us and access apache status pages. Completely optional."
-msgid ""
-"The IP address (or ip/prefix) of the server(s) which must be authorized to  "
-"ping the server and access apache status pages. Completely optional."
-msgstr ""
-"Adresse IP (ou ip/prefixe) du(des) serveur(s) dont qui pourront pinguer et "
-"accéder au status apache (pour le monitoring de serveur). Facultatif."
 
 #. Type: note
 #. Description
@@ -515,24 +358,8 @@ msgstr ""
 #. Type: boolean
 #. Description
 #: ../alternc.templates:25001
-#, fuzzy
-#| msgid "Should AlternC remove all databases (/var/lib/mysql/) ?"
-msgid "Should AlternC remove all databases (/var/lib/mysql/)?"
-msgstr "Les bases de données doivent elles être supprimés (/var/lib/mysql) ?"
-
-#. Type: boolean
-#. Description
-#: ../alternc.templates:25001
 msgid "All users databases will be trashed"
 msgstr "Toutes les bases de données des utilisateurs seront perdues"
-
-#. Type: boolean
-#. Description
-#: ../alternc.templates:26001
-#, fuzzy
-#| msgid "Should AlternC remove users datas ?"
-msgid "Should AlternC remove users datas?"
-msgstr "Les données des utilisateurs doivent elles êtres supprimés ?"
 
 #. Type: boolean
 #. Description
@@ -545,31 +372,14 @@ msgstr ""
 #. Type: boolean
 #. Description
 #: ../alternc.templates:27001
-#, fuzzy
-#| msgid "Should AlternC remove bind zones ?"
-msgid "Should AlternC remove bind zones?"
-msgstr "Les zones de bind doivent elles être supprimées ?"
-
-#. Type: boolean
-#. Description
-#: ../alternc.templates:27001
 msgid "It will delete all bind zones created by AlternC"
 msgstr "Cela supprimera toutes les zone de bind créées par AlternC"
 
 #. Type: boolean
 #. Description
 #: ../alternc.templates:28001
-#, fuzzy
-#| msgid "Should AlternC remove mailboxes ?"
-msgid "Should AlternC remove mailboxes?"
-msgstr "Les boites mails doivent elles être supprimées ?"
-
-#. Type: boolean
-#. Description
-#: ../alternc.templates:28001
 msgid "If you accept all users e-mails will be deleted"
-msgstr ""
-"Si vous acceptez, toutes les e-mails des utilisateurs seront supprimées"
+msgstr "Si vous acceptez, tous les e-mails des utilisateurs seront supprimés"
 
 #. Type: string
 #. Description
@@ -591,166 +401,3 @@ msgstr ""
 "d'Apache, ce maître tentera de recharger apache sur les serveurs distants. "
 "le package alternc-slave configure ces machines comme il faut pour permettre "
 "la connexion distante et le rechargement d'apache. "
-
-#. Type: boolean
-#. Description
-#: ../alternc.templates:30001
-msgid "Shall we use locally found MySQL server?"
-msgstr ""
-
-#. Type: boolean
-#. Description
-#: ../alternc.templates:30001
-msgid ""
-"A local MySQL connection was established on the server. Tell us if you want "
-"to use it. If not remote MySQL server connection parameters will be needed."
-msgstr ""
-
-#. Type: boolean
-#. Description
-#: ../alternc.templates:31001
-msgid "Shall we use a remote MySQL server?"
-msgstr ""
-
-#. Type: boolean
-#. Description
-#: ../alternc.templates:31001
-msgid ""
-"No local Mysql server was found. Please confirm you want to use a remote "
-"Mysql Server. If not, AlternC cannot be installed."
-msgstr ""
-
-#. Type: boolean
-#. Description
-#: ../alternc.templates:32001
-msgid "MySQL connection error. Try again?"
-msgstr ""
-
-#. Type: boolean
-#. Description
-#: ../alternc.templates:32001
-msgid ""
-"Remote connection to the MySQL server failed. Please confirm that we shall "
-"try again."
-msgstr ""
-
-#. Type: boolean
-#. Description
-#: ../alternc.templates:33001
-msgid "Private IP detected, use it anyway?"
-msgstr ""
-
-#. Type: boolean
-#. Description
-#: ../alternc.templates:33001
-msgid ""
-"The IP address you have appears to be private, please confirm you want to "
-"use it anyway. The server might not be reachable from outside your network."
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../alternc-awstats.templates:1001
-msgid "Default quota value for awstats stats:"
-msgstr ""
-
-#. Type: string
-#. Description
-#: ../alternc-awstats.templates:1001
-msgid ""
-"You are installing the alternc-awstats package. This package allows any user "
-"to ask for statistics about his web site. Users can ask for a limited number "
-"of statistic set. Please specify the default quota they will have for this "
-"service."
-msgstr ""
-
-#. Type: note
-#. Description
-#: ../alternc-awstats.templates:2001
-msgid "Error installing AlternC-Awstats"
-msgstr ""
-
-#. Type: note
-#. Description
-#: ../alternc-awstats.templates:2001
-msgid ""
-"AlternC-Awstats requires a complete installed AlternC system to get "
-"installed properly!"
-msgstr ""
-
-#. Type: note
-#. Description
-#: ../alternc-awstats.templates:2001
-msgid ""
-"Please install AlternC and CONFIGURE IT before installing alternc-awstats or "
-"additional modules (don't forget to launch 'alternc.install')."
-msgstr ""
-
-#. Type: note
-#. Description
-#: ../alternc-awstats.templates:2001
-msgid ""
-"Please check out the AlternC installation documentation before proceeding."
-msgstr ""
-
-#~ msgid ""
-#~ "You may contact the AlternC's users mailing list if you want to exchange "
-#~ "dns service with other AlternC's users."
-#~ msgstr ""
-#~ "N'hésitez pas à contacter la liste de diffusion des utilisateurs "
-#~ "d'AlternC si vous souhaitez échanger des serveurs dns primaires / "
-#~ "secondaires avec d'autres."
-
-#~ msgid "Do you REALLY want to install AlternC on this computer ?"
-#~ msgstr "Êtes-vous CERTAIN de vouloir installer AlternC sur cet ordinateur ?"
-
-#, fuzzy
-#~| msgid ""
-#~| "You are currently trying to install AlternC on your computer. Be aware "
-#~| "that this package will overwrite critical system files, including but "
-#~| "not limited to the config files of bind, postfix, courier, squirrelmail "
-#~| "and proftpd."
-#~ msgid ""
-#~ "You are currently trying to install AlternC on your computer. Be aware "
-#~ "that this package will overwrite critical system files, including but not "
-#~ "limited to the config files of bind, postfix, dovecot, squirrelmail and "
-#~ "proftpd."
-#~ msgstr ""
-#~ "Vous êtes en train d'installer AlternC sur cet ordinateur. Comprenez que "
-#~ "ce paquetage va écraser plusieurs fichiers de configuration critiques, "
-#~ "incluant, sans se limiter à : postfix, bind, courier, squirrelmail, "
-#~ "proftpd et php."
-
-#~ msgid ""
-#~ "A backup of your old configuration will be stored in \"/var/backups/"
-#~ "alternc/etc-original-`date`.tar.gz\"."
-#~ msgstr ""
-#~ "Une sauvegarde de votre ancienne configuration sera stockée dans /usr/lib/"
-#~ "alternc/backups/system.`date +%Y%m%d-%H%M`."
-
-#~ msgid "YOU HAVE BEEN WARNED."
-#~ msgstr "VOUS AVEZ ÉTÉ PRÉVENU !"
-
-#~ msgid "trusted servers for bind:"
-#~ msgstr "serveurs de confiance pour bind : "
-
-#~ msgid ""
-#~ "IP address or prefix of trusted machines for DNS transfers, delimited by "
-#~ "';', optional."
-#~ msgstr ""
-#~ "Adresse IP ou classe d'IP des machines autorisées à utiliser le serveur "
-#~ "DNS, séparées par ';', facultatif."
-
-#~ msgid "SMTP authorized networks:"
-#~ msgstr "réseaux autorisés en SMTP : "
-
-#~ msgid "IP addresses of the networks authorized in SMTP, space-delimited."
-#~ msgstr ""
-#~ "Adresses ip des reseaux autorisés en SMTP (ou ip/prefixe) séparés par "
-#~ "espace."
-
-#~ msgid ""
-#~ "If you still want to proceed with this installation, choose YES here, "
-#~ "otherwise choose NO."
-#~ msgstr ""
-#~ "Si vous savez ce que vous faites, choisissez OUI, sinon, choisissez NON."
