@@ -541,8 +541,8 @@ install/upgrades/1.0.4.sh -text
 install/upgrades/1.0.sql -text
 install/upgrades/1.1.php -text
 install/upgrades/1.1.sh -text
-install/upgrades/1.1.sql -text
 install/upgrades/3.0.sh -text
+install/upgrades/3.0.sql -text
 install/upgrades/README -text
 lang/.svnignore -text
 lang/README -text

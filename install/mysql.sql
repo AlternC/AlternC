@@ -212,7 +212,7 @@ CREATE TABLE IF NOT EXISTS sessions (
 CREATE TABLE IF NOT EXISTS sub_domaines (
   id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   compte int(10) unsigned NOT NULL default '0',
-  domaine varchar(64) NOT NULL default '',
+  domaine varchar(255) NOT NULL default '',
   sub varchar(100) NOT NULL default '',
   valeur varchar(255) default NULL,
   type varchar(30) NOT NULL default 'LOCAL',

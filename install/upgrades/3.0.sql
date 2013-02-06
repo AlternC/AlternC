@@ -202,6 +202,7 @@ UPDATE domaines_type SET create_tmpdir=true, create_targetdir=true WHERE target=
 
 -- Allow 255 caracters in the tld
 ALTER IGNORE TABLE domaines MODIFY domaine VARCHAR(255);
+ALTER IGNORE TABLE sub_domaines MODIFY domaine VARCHAR(255);
 
 -- Defaults subdomains to create when a domain is added
 CREATE TABLE IF NOT EXISTS `default_subdomains` (
