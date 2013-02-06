@@ -364,7 +364,6 @@ bureau/admin/trash_dateselect.php -text
 bureau/admin/webmail-redirect.php -text
 bureau/class/config.php -text
 bureau/class/config_nochk.php -text
-bureau/class/config_real.php -text
 bureau/class/db_mysql.php -text
 bureau/class/functions.php -text
 bureau/class/lang_env.php -text
