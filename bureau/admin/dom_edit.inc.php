@@ -142,10 +142,13 @@ function domtype_advanced_show() {
   $("#domtype_hide").show();
 }
 
-domtype_advanced_hide();
+<?php if (isset($type) && in_array($type, $lst_advanced) ) { // if it's an edit of an advanced option, we need to show the advanced options ?>
+  domtype_advanced_show();
+<?php } else { ?>
+  domtype_advanced_hide();
+<?php } // if advanced ?>
 
 </script>
-
 <?php
 } // sub_domains_edit
 ?>
