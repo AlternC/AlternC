@@ -40,7 +40,7 @@ if (isset($error) && $error) {
   echo "<p class=\"error\">$error</p>";
 }
 if(!$list || empty($list['dir'])){
-  echo "<p class=\"error\">"._("You have no web logs to list a the moment.")."</p>";  
+  echo "<p class=\"error\">"._("You have no web logs to list at the moment.")."</p>";  
   include_once('foot.php');
   exit;
 }

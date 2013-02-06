@@ -72,9 +72,9 @@ foreach ($cron->schedule() as $cs) {
       <?php if (isset($lst_cron[$i])) {__("Next execution: "); echo $lst_cron[$i]['next_execution'];}?>
     </td>
   </tr><tr class="<?php echo ($i%2)?"lst1":"lst2"; ?>">
-    <td><input type="text" placeholder="<?php __("HTTP user (optionnal)"); ?>" id="crup_user_<?php echo $i?>" name="<?php echo "cronupdate[$i][user]";?>" size="20" maxlength="64" value="<?php if (isset($lst_cron[$i]['user'])) { echo htmlentities($lst_cron[$i]['user']);} ?>"/></td>
-    <td><input type="text" placeholder="<?php __("HTTP password (optionnal)"); ?>" id="crup_pass_<?php echo $i?>" name="<?php echo "cronupdate[$i][password]";?>" size="20" maxlength="64" value="<?php if (isset($lst_cron[$i]['password'])) { echo htmlentities($lst_cron[$i]['password']);} ?>"/></td>
-    <td><input type="text" placeholder="<?php __("Mail address (optionnal)"); ?>" id="crup_mail_<?php echo $i?>" name="<?php echo "cronupdate[$i][email]";?>" size="25" maxlength="64" value="<?php if (isset($lst_cron[$i]['email'])) { echo htmlentities($lst_cron[$i]['email']);} ?>"/></td>
+    <td><input type="text" placeholder="<?php __("HTTP user (optional)"); ?>" id="crup_user_<?php echo $i?>" name="<?php echo "cronupdate[$i][user]";?>" size="20" maxlength="64" value="<?php if (isset($lst_cron[$i]['user'])) { echo htmlentities($lst_cron[$i]['user']);} ?>"/></td>
+    <td><input type="text" placeholder="<?php __("HTTP password (optional)"); ?>" id="crup_pass_<?php echo $i?>" name="<?php echo "cronupdate[$i][password]";?>" size="20" maxlength="64" value="<?php if (isset($lst_cron[$i]['password'])) { echo htmlentities($lst_cron[$i]['password']);} ?>"/></td>
+    <td><input type="text" placeholder="<?php __("Mail address (optional)"); ?>" id="crup_mail_<?php echo $i?>" name="<?php echo "cronupdate[$i][email]";?>" size="25" maxlength="64" value="<?php if (isset($lst_cron[$i]['email'])) { echo htmlentities($lst_cron[$i]['email']);} ?>"/></td>
   </tr>
 <?php } //foreach ?>
 </table>

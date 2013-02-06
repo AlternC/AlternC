@@ -35,11 +35,11 @@ if ($mem->checkRight()) { ?>
 </a>
 <div class="menu-content" id ="menu-adm">
 <ul>
-<li><a href="adm_list.php"><span class="adminmenu"><?php __("Manage the Alternc accounts"); ?></span></a></li>
+<li><a href="adm_list.php"><span class="adminmenu"><?php __("Manage AlternC accounts"); ?></span></a></li>
 <li><a href="quotas_users.php?mode=4"><span class="adminmenu"><?php __("User Quotas"); ?></span></a></li>
 <?php if ($cuid == 2000) {  ?>
   <li><a href="adm_panel.php"><span class="adminmenu"><?php __("Admin Control Panel"); ?></span></a></li>
-  <li><a href="/alternc-sql/"><span class="adminmenu"><?php __("General PhpMyAdmin"); ?></span></a></li>
+  <li><a href="/alternc-sql/"><span class="adminmenu"><?php __("PhpMyAdmin"); ?></span></a></li>
   <li><a href="alternc_debugme.php?enable=<?php echo $debug_alternc->status?"0":"1"; ?>"><span class="adminmenu"><?php if ($debug_alternc->status) __("Switch debug Off"); else __("Switch debug On");  ?></span></a></li>
 <?php if ( empty($L_INOTIFY_UPDATE_DOMAIN) || file_exists("$L_INOTIFY_UPDATE_DOMAIN") ) { ?>
   <li><a href='javascript:alert("<?php __("Domain changes are already applying"); ?>");'><span class="adminmenu"><?php __("Applying..."); ?></span></a></li>

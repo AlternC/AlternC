@@ -90,7 +90,7 @@ if (!$r=$admin->get($uid)) {
 	<td><input type="password" class="int" id="passconf" name="passconf" value="" size="20" maxlength="64" /></td>
 </tr>
 <tr>
-	<th><label for="canpass"><?php __("Can he change its password"); ?></label></th>
+	<th><label for="canpass"><?php __("Password change allowed?"); ?></label></th>
 	<td>
         <input type="radio" class="inc" id="canpass0" name="canpass" value="0"<?php cbox($r["canpass"]==0); ?>><label for="canpass0"><?php __("No"); ?></label><br />
 	<input type="radio" class="inc" id="canpass1" name="canpass" value="1"<?php cbox($r["canpass"]==1); ?>><label for="canpass1"><?php __("Yes"); ?></label><br />	

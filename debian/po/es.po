@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AlternC-awstats module 2.0\n"
 "Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
-"POT-Creation-Date: 2013-02-03 20:41+0100\n"
+"POT-Creation-Date: 2013-02-06 06:46+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -145,8 +145,8 @@ msgstr ""
 #. Description
 #: ../alternc.templates:7001
 msgid ""
-"You may contact the AlternC's users mailing list if you want to exchange dns "
-"service with other AlternC's users."
+"AlternC's team is providing any user of AlternC with free DNS service. go to "
+"http://alternc.net/ to create an account and use it."
 msgstr ""
 
 #. Type: string
@@ -206,7 +206,7 @@ msgstr ""
 #: ../alternc.templates:11001
 msgid ""
 "Using a remote mysql installation requires the AlternC user to be configured "
-"in advance with root access to the mysql installation."
+"in advance with administrator access to the mysql installation."
 msgstr ""
 
 #. Type: string
@@ -221,11 +221,8 @@ msgstr ""
 #. Description
 #. Type: password
 #. Description
-#. Type: password
-#. Description
-#: ../alternc.templates:12001 ../alternc.templates:13001
-#: ../alternc.templates:15001
-msgid "Password of the AlternC's mysql account:"
+#: ../alternc.templates:12001 ../alternc.templates:15001
+msgid "Password of AlternC's mysql account:"
 msgstr ""
 
 #. Type: password
@@ -246,7 +243,13 @@ msgstr ""
 #: ../alternc.templates:12001 ../alternc.templates:13001
 msgid ""
 "Please choose a quite complex password since it will have full access to the "
-"system database !!!"
+"system database! If you enter nothing, a random password will be created."
+msgstr ""
+
+#. Type: password
+#. Description
+#: ../alternc.templates:13001
+msgid "Password of the AlternC's mysql account:"
 msgstr ""
 
 #. Type: password
@@ -524,7 +527,7 @@ msgstr ""
 #: ../alternc.templates:32001
 msgid ""
 "No local Mysql server was found. Please confirm you want to use a remote "
-"Mysql Server. If not AlternC cannot be installed."
+"Mysql Server. If not, AlternC cannot be installed."
 msgstr ""
 
 #. Type: boolean
@@ -551,8 +554,8 @@ msgstr ""
 #. Description
 #: ../alternc.templates:34001
 msgid ""
-"The ip appears to be private, please confirm you want to use it anyway. The "
-"server might not be reachable from outside your network."
+"The IP address you have appears to be private, please confirm you want to "
+"use it anyway. The server might not be reachable from outside your network."
 msgstr ""
 
 #. Type: string

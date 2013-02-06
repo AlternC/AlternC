@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.3.1\n"
 "Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
-"POT-Creation-Date: 2013-02-03 20:41+0100\n"
+"POT-Creation-Date: 2013-02-06 06:46+0100\n"
 "PO-Revision-Date: 2005-05-15 18:24+0200\n"
 "Last-Translator: Benjamin Sonntag <benjamin@altercn.org>\n"
 "Language-Team: french <dev@alternc.org>\n"
@@ -169,12 +169,9 @@ msgstr ""
 #. Description
 #: ../alternc.templates:7001
 msgid ""
-"You may contact the AlternC's users mailing list if you want to exchange dns "
-"service with other AlternC's users."
+"AlternC's team is providing any user of AlternC with free DNS service. go to "
+"http://alternc.net/ to create an account and use it."
 msgstr ""
-"N'hésitez pas à contacter la liste de diffusion des utilisateurs d'AlternC "
-"si vous souhaitez échanger des serveurs dns primaires / secondaires avec "
-"d'autres."
 
 #. Type: string
 #. Description
@@ -257,7 +254,7 @@ msgstr ""
 #: ../alternc.templates:11001
 msgid ""
 "Using a remote mysql installation requires the AlternC user to be configured "
-"in advance with root access to the mysql installation."
+"in advance with administrator access to the mysql installation."
 msgstr ""
 
 #. Type: string
@@ -272,11 +269,10 @@ msgstr ""
 #. Description
 #. Type: password
 #. Description
-#. Type: password
-#. Description
-#: ../alternc.templates:12001 ../alternc.templates:13001
-#: ../alternc.templates:15001
-msgid "Password of the AlternC's mysql account:"
+#: ../alternc.templates:12001 ../alternc.templates:15001
+#, fuzzy
+#| msgid "Password of the AlternC's mysql account:"
+msgid "Password of AlternC's mysql account:"
 msgstr "Mot de passe du compte mysql : "
 
 #. Type: password
@@ -296,12 +292,22 @@ msgstr ""
 #. Type: password
 #. Description
 #: ../alternc.templates:12001 ../alternc.templates:13001
+#, fuzzy
+#| msgid ""
+#| "Please choose a quite complex password since it will have full access to "
+#| "the system database !!!"
 msgid ""
 "Please choose a quite complex password since it will have full access to the "
-"system database !!!"
+"system database! If you enter nothing, a random password will be created."
 msgstr ""
 "Merci de choisir un mot de passe complexe, car ce compte aura un accès "
 "complet à toute la base système !!!"
+
+#. Type: password
+#. Description
+#: ../alternc.templates:13001
+msgid "Password of the AlternC's mysql account:"
+msgstr "Mot de passe du compte mysql : "
 
 #. Type: password
 #. Description
@@ -627,7 +633,7 @@ msgstr ""
 #: ../alternc.templates:32001
 msgid ""
 "No local Mysql server was found. Please confirm you want to use a remote "
-"Mysql Server. If not AlternC cannot be installed."
+"Mysql Server. If not, AlternC cannot be installed."
 msgstr ""
 
 #. Type: boolean
@@ -654,8 +660,8 @@ msgstr ""
 #. Description
 #: ../alternc.templates:34001
 msgid ""
-"The ip appears to be private, please confirm you want to use it anyway. The "
-"server might not be reachable from outside your network."
+"The IP address you have appears to be private, please confirm you want to "
+"use it anyway. The server might not be reachable from outside your network."
 msgstr ""
 
 #. Type: string
@@ -702,6 +708,14 @@ msgstr ""
 msgid ""
 "Please check out the AlternC installation documentation before proceeding."
 msgstr ""
+
+#~ msgid ""
+#~ "You may contact the AlternC's users mailing list if you want to exchange "
+#~ "dns service with other AlternC's users."
+#~ msgstr ""
+#~ "N'hésitez pas à contacter la liste de diffusion des utilisateurs "
+#~ "d'AlternC si vous souhaitez échanger des serveurs dns primaires / "
+#~ "secondaires avec d'autres."
 
 #~ msgid "Do you REALLY want to install AlternC on this computer ?"
 #~ msgstr "Êtes-vous CERTAIN de vouloir installer AlternC sur cet ordinateur ?"
