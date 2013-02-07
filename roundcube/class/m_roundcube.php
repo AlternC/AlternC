@@ -73,10 +73,9 @@ class m_roundcube {
    * @return boolean
    */
   function hook_mail_delete_for_real($mail_id, $fullmail) {
-    // FIXME do something !
     // Include Roundcube configuration
     // Delete from the roundcube configuration
-    // Use cleandb.sh filled by roundcube ?
+    // Use cleandb.sh filled by roundcube ? http://trac.roundcube.net/browser/github/bin/cleandb.sh
     printvar($mail_id);
     printvar($fullmail);
   }
