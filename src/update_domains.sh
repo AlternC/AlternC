@@ -68,7 +68,7 @@ IFS="$NEWIFS"
 mysql_query "
 select concat_ws('$IFS',lower(sd.type), if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine), m.mail, sd.valeur )
 from sub_domaines sd,membres m
-where sd.web_action ='UPDATE'
+where sd.compte=m.uid and sd.web_action ='UPDATE'
 ;" | while read type domain mail valeur ; do
     host_create "$type" "$domain" "$mail" "$valeur"
     mysql_query "update sub_domaines sd set web_action='OK',web_result='$?' where lower(sd.type)='$type' and if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine)='$domain' and sd.valeur='$valeur'; "
