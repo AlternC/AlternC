@@ -93,10 +93,18 @@ class m_roundcube {
         break;
     }
 
+    $req = $dbh->query("SELECT user_id FROM users WHERE username = '$fullmail'");
 
-   $count = $dbh->query("select * from session ;");
-   $count2 = $count->fetchAll();
-   // FIXME faire les vraie requetes de suppression
+    foreach ( $req->fetchAll() as $t ) {
+      if (empty($t['user_id'])) continue ;
+      $rcuser_id=$t['user_id'];
+
+      $dbh->query("DELETE from contactgroupmembers where contactgroup_id in (select contactgroup_id from contactgroups where user_id = $rcuser_id) ; ");
+      $dbh->query("DELETE from contactgroups where user_id = $rcuser_id ; ");
+      $dbh->query("DELETE from contacts where user_id = $rcuser_id ; ");
+      $dbh->query("DELETE from identities where user_id = $rcuser_id ; ");
+      $dbh->query("DELETE from users where user_id = $rcuser_id ; ");
+    } //foreach
 
   }
 
