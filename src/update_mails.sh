@@ -43,6 +43,7 @@ echo $$ > "$LOCK_FILE"
 # If process is interrupted, the row isn't deleted. We have to force it by reseting mail_action to 'DELETE'
 mysql_query "SELECT id, quote(replace(path,'!','\\!')) FROM mailbox WHERE mail_action='DELETE';"|while read id path ; do
   mysql_query "UPDATE mailbox set mail_action='DELETING' WHERE id=$id;"
+  /usr/lib/alternc/mail_dodelete.php "$id"
   # Check there is no instruction of changing directory, and check the first part of the string
   if [[ "$path" =~ '../' || "$path" =~ '/..' || ! "'$ALTERNC_MAIL_LOC" == "${path:0:$((${#ALTERNC_MAIL_LOC}+1))}" ]] ; then
     # The path will be empty for mailman addresses

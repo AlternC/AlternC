@@ -65,6 +65,22 @@ class m_roundcube {
 
   }
 
+
+   /* ----------------------------------------------------------------- */
+  /** Hook called when an email is REALLY deleted (by the cron, not just in the panel) 
+   * @param mail_id integer the ID of the mail in the AlternC database
+   * @param fullmail string the deleted mail himself in the form of john@domain.tld
+   * @return boolean
+   */
+  function hook_mail_delete_for_real($mail_id, $fullmail) {
+    // FIXME do something !
+    // Include Roundcube configuration
+    // Delete from the roundcube configuration
+    // Use cleandb.sh filled by roundcube ?
+    printvar($mail_id);
+    printvar($fullmail);
+  }
+
 } /* Class Roundcube */
 
 

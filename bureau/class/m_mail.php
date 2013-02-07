@@ -405,6 +405,16 @@ ORDER BY
     return true;
   }
 
+  // return the alternc account's ID of the mail_id
+  function get_account_by_mail_id($mail_id) {
+    global $db,$err;
+    $db->query("select compte as uid from domaines d, address a where a.domain_id = d.id and a.id = $mail_id");
+    if ( !$db->next_record()) {
+      return false;
+    }  
+    return $db->f('uid');
+  }
+
 
   /* ----------------------------------------------------------------- */
   /** Function used to delete a mail from the db
@@ -428,6 +438,9 @@ ORDER BY
     if (!($mail=$this->is_it_my_mail($mail_id))) {
       return false;
     }
+
+    $mailinfos=$this->get_details($mail_id);
+    $hooks->invoke('hook_mail_delete', array($mail_id, $mailinfos['address'].'@'.$mailinfos['domain'] ));
 
     // Search for that address:
     $db->query("SELECT a.id, a.type, a.mail_action, m.mail_action AS mailbox_action, NOT ISNULL(m.id) AS islocal FROM address a LEFT JOIN mailbox m ON m.address_id=a.id WHERE a.id='$mail_id';");
