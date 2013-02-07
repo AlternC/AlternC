@@ -6,15 +6,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: AlternC, hosting control panel\n"
-"Report-Msgid-Bugs-To: https://alternc.org/report/1\n"
+"Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
 "POT-Creation-Date: 2013-02-06 07:35+0100\n"
 "PO-Revision-Date: 2013-02-06 06:37+0000\n"
 "Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
 "Language-Team: English <dev@alternc.org>\n"
+"Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: nl_NL\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Type: note
