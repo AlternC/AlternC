@@ -586,6 +586,7 @@ squirrelmail/Makefile -text
 squirrelmail/alternc_changepass/change.php -text
 squirrelmail/alternc_changepass/setup.php -text
 squirrelmail/class/m_squirrelmail.php -text
+squirrelmail/procmail_to_sieve.php -text
 squirrelmail/squirrelmail-install -text
 squirrelmail/templates/apache2/squirrelmail.conf -text
 squirrelmail/templates/squirrelmail/alternc-changepass.conf -text
