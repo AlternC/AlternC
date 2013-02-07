@@ -40,17 +40,22 @@ class m_squirrelmail {
     // Search for the domain where the panel is hosted, then search for a webmail in it.
     $i=2;
     $domain="";
-    do { // for each domain part (search panel.alternc.org then alternc.org then org, if the current panel is at www.panel.alternc.org)
-      list($host,$dompart)=explode(".",$_SERVER["HTTP_HOST"],$i);
-      // We search for a 'squirrelmail' subdomain in that domain
-      $db->query("SELECT * FROM sub_domaines s WHERE s.domaine='".addslashes($dompart)."' AND s.type='squirrelmail';");
-      if ($db->next_record()) {
-	$domain=$db->Record;
-	return "http://".$domain["sub"].(($domain["sub"])?".":"").$domain["domaine"];
-      }
-      $i++;
-    } while (strpos($dompart,'.')!==false);
-  
+    if (!empty($_SERVER["HTTP_HOST"]))  { 
+      do { // for each domain part (search panel.alternc.org then alternc.org then org, if the current panel is at www.panel.alternc.org)
+	$expl=explode(".",$_SERVER["HTTP_HOST"],$i);
+	if (count($expl)>=2) {
+	  list($host,$dompart)=$expl;
+	  // We search for a 'squirrelmail' subdomain in that domain
+	  $db->query("SELECT * FROM sub_domaines s WHERE s.domaine='".addslashes($dompart)."' AND s.type='squirrelmail';");
+	  if ($db->next_record()) {
+	    $domain=$db->Record;
+	    return "http://".$domain["sub"].(($domain["sub"])?".":"").$domain["domaine"];
+	  }
+	}
+	$i++;
+      } while (strpos($dompart,'.')!==false);
+    }
+
     // not found: search for a webmail in the admin user account
     $db->query("SELECT * FROM sub_domaines s WHERE s.compte=2000 AND s.type='squirrelmail';");
     if ($db->next_record()) {
