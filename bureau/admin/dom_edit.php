@@ -77,14 +77,10 @@ function destruction_alert() {
 		return true;
 	}
 	if (document.forms["fdns"].email[1].checked) {
-		//return confirm('<?php __("Are you sur you want to do this and DELETE ALL the mailboxes, messages and aliases on this domain ?"); ?>');
-		if ( confirm('<?php __("Are you sur you want to do this and DELETE ALL the mailboxes, messages and aliases on this domain ?"); ?>') ) {
-			return confirm('<?php __("Realy ?"); ?>');
-		} else {
-			return false;
-		}
+		if ( confirm('<?php __("Are you sure you want to do this? This will DELETE ALL the mailboxes, messages and aliases on this domain ?"); ?>') ) {
+		  return false;
 	} else {
-		return true;
+		  return true;
 	}
 }
 </script>

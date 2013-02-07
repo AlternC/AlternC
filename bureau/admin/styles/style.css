@@ -161,7 +161,7 @@ input[type=submit] {
 
 .ina img, .ina img {
   vertical-align: middle;
-  padding: 2px;
+  padding: 2px 2px 5px 0;
 }
 .bff {
   border: 1px solid #999;
