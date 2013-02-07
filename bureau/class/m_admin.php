@@ -1125,11 +1125,11 @@ EOF;
     global $db,$err;
 
     if (empty($login)) {
-      $err->raise("admin",_("-- Program error -- CheckPolicy need a login"));
+      $err->raise("admin",_("Please enter a login"));
       return false;
     }
     if (empty($password)) {
-      $err->raise("admin",_("-- Program error -- CheckPolicy need a password"));
+      $err->raise("admin",_("Please enter a password"));
       return false;
     }
 
