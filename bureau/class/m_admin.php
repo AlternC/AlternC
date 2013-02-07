@@ -24,6 +24,7 @@
 */
 
 /* ----------------------------------------------------------------- */
+
 /**
 * Manage the AlternC's account administration (create/edit/delete)
 */
