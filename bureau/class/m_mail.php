@@ -809,6 +809,20 @@ ORDER BY
     return true;
   }
 
+  /* ----------------------------------------------------------------- */
+  /** hook function called by AlternC when a domain is created for
+   * the current user account 
+   * This function create a postmaster mail which is an alias to LOGIN @ FQDN
+   * wich is a dynamic alias to the alternc's account mail
+   * @param string $domain_id Domain that has just been created
+   * @access private
+   */
+   function hook_dom_add_mx_domain($domain_id) {
+    global $err, $mem, $L_FQDN;
+    $err->log("mail","hook_dom_add_mx_domain",$domain_id);
+    return $this->create_alias($domain_id, 'postmaster', $mem->user['login'].'@'.$L_FQDN );
+  }
+
 
   /* ----------------------------------------------------------------- */
   /** hook function called by AlternC-upnp to know which open 
