@@ -1,0 +1,15 @@
+#!/usr/bin/php
+<?php
+
+if (empty($argv[1])) {
+   echo "Usage: unavelsieve <file or string>\nPrint the content of an avelsieve-encoded string\n";
+   exit();
+}
+if (is_file($argv[1])) {
+   $content=file_get_contents($argv[1]);
+} else {
+   $content=$argv[1];
+}
+
+print_r(unserialize(base64_decode(urldecode($content))));
+

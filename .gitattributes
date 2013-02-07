@@ -592,6 +592,7 @@ squirrelmail/templates/apache2/squirrelmail.conf -text
 squirrelmail/templates/squirrelmail/alternc-changepass.conf -text
 squirrelmail/templates/squirrelmail/apache.conf -text
 squirrelmail/templates/squirrelmail/avelsieve-config.php -text
+squirrelmail/unavelsieve -text
 src/Makefile -text
 src/alternc-check -text
 src/alternc-dboptimize -text
