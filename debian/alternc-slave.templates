@@ -129,20 +129,6 @@ _Description: The monitoring server:
  The IP address (or ip/prefix) of the server(s) which must be authorized to 
  ping us and access apache status pages. Completely optional.
 
-Template:alternc-slave/pop_before_smtp_warning
-Type: note
-_Description: POP Before SMTP deprecated
- AlternC doesn't automatically configure the pop-before-smtp package
- anymore, since it is correctly configured for SASL authentification these
- days. If you wish to configure pop-before-smtp, simply find the lines
- preceded by:
- .
- # For Courier-POP3 and Courier-IMAP:
- .
- in the /etc/pop-before-smtp/pop-before-smtp.conf and uncomment it.
- hash:/var/lib/pop-before-smtp/hosts must also be added to the mynetworks
- directive of /etc/postfix/main.cf
-
 Template:alternc-slave/postrm_remove_databases
 Type: boolean
 _Description: Should AlternC remove all databases (/var/lib/mysql/) ?
