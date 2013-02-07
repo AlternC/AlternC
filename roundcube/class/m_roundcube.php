@@ -75,9 +75,29 @@ class m_roundcube {
   function hook_mail_delete_for_real($mail_id, $fullmail) {
     // Include Roundcube configuration
     // Delete from the roundcube configuration
+
     // Use cleandb.sh filled by roundcube ? http://trac.roundcube.net/browser/github/bin/cleandb.sh
-    printvar($mail_id);
-    printvar($fullmail);
+
+    include_once("/etc/roundcube/debian-db.php");
+
+    switch ($dbtype) {
+      case "sqlite":
+        $rcdb = "sqlite:///$basepath/$dbname?mode=0640";
+        $dbh = new PDO("sqlite:/$basepath/$dbname");
+        break;
+      default:
+        if ($dbport != '') $dbport=":$dbport";
+        if ($dbserver == '') $dbserver="localhost";
+        $dbh= new PDO("$dbtype:host=$dbserver;dbname=$dbname;dbport=$dbport", $dbuser, $dbpass);
+        $rcdb = "$dbtype:$dbuser:$dbpass@$dbserver$dbport/$dbname";
+        break;
+    }
+
+
+   $count = $dbh->query("select * from session ;");
+   $count2 = $count->fetchAll();
+   // FIXME faire les vraie requetes de suppression
+
   }
 
 } /* Class Roundcube */
