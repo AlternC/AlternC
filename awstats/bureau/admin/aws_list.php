@@ -64,7 +64,7 @@ while (list($key,$val)=each($r)) {
 	<tr class="lst<?php echo $col; ?>">
 		<td><input type="checkbox" class="inc" id="del_<?php echo $val["id"]; ?>" name="del_<?php echo $val["id"]; ?>" value="<?php echo $val["id"]; ?>" /></td>
 	   <td><div class="ina"><a href="aws_edit.php?id=<?php echo $val["id"] ?>"><img src="images/edit.png" alt="<?php __("Edit"); ?>" title="<?php __("Edit"); ?>" /><?php __("Edit"); ?></a></div></td>
-		<td><label for="del_<?php echo $val["id"]; ?>" class="retour-auto"><?php echo $val["hostname"] ?></label></td>
+		<td class='retour-auto'><label for="del_<?php echo $val["id"]; ?>" ><?php echo $val["hostname"] ?></label></td>
 		<td><?php echo $val["users"] ?></td>
 		<td><div class="ina"><a href="/cgi-bin/awstats.pl?config=<?php echo $val["hostname"]; ?>"><img src="images/stat.png" alt="<?php __("View the statistics"); ?>" /><?php __("View the statistics"); ?></a></div></td>
 	</tr>
