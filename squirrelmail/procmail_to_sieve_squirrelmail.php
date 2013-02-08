@@ -1,5 +1,5 @@
 <?php
-/*
+/* 
   AlternC - Web Hosting System
   Copyright (C) 2002 by the AlternC Development Team.
   http://alternc.org/
@@ -345,11 +345,11 @@ function describe($rule) {
 
 $acriteria=array(
 		 0 => "Le sujet du message contient ...",
-		 1 => "L'expéditeur du message est contient ...", 
+		 1 => "L'expediteur du message est contient ...", 
 		 2 => "L'un des destinataires du message contient ...", 
 		 3 => "L'en-tete 'List-Post' du message est ...", 
 		 4 => "L'en-tete 'List-Id' du message est ...", 
-		 5 => "SpamAssassin considère qu'il s'agit d'un Spam", 
+		 5 => "SpamAssassin considere qu'il s'agit d'un Spam", 
 		 6 => "L'en-tete 'Delivered-To' du message contient ...", 
 		 );
 $aactions=array(

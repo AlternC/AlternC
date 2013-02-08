@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AlternC, hosting control panel\n"
 "Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
-"POT-Creation-Date: 2013-02-06 07:35+0100\n"
+"POT-Creation-Date: 2013-02-07 19:01+0100\n"
 "PO-Revision-Date: 2013-02-06 06:37+0000\n"
 "Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
 "Language-Team: English <dev@alternc.org>\n"
@@ -393,93 +393,63 @@ msgid ""
 "ping the server and access apache status pages. Completely optional."
 msgstr ""
 
-#. Type: note
-#. Description
-#: ../alternc.templates:24001
-msgid "POP Before SMTP deprecated"
-msgstr ""
-
-#. Type: note
-#. Description
-#: ../alternc.templates:24001
-msgid ""
-"AlternC doesn't automatically configure the pop-before-smtp package anymore, "
-"since it is correctly configured for SASL authentification these days. If "
-"you wish to configure pop-before-smtp, simply find the lines preceded by:"
-msgstr ""
-
-#. Type: note
-#. Description
-#: ../alternc.templates:24001
-msgid "# For Courier-POP3 and Courier-IMAP:"
-msgstr ""
-
-#. Type: note
-#. Description
-#: ../alternc.templates:24001
-msgid ""
-"in the /etc/pop-before-smtp/pop-before-smtp.conf and uncomment it. hash:/var/"
-"lib/pop-before-smtp/hosts must also be added to the mynetworks directive of /"
-"etc/postfix/main.cf"
-msgstr ""
-
 #. Type: boolean
 #. Description
-#: ../alternc.templates:25001
+#: ../alternc.templates:24001
 msgid "Should AlternC remove all databases (/var/lib/mysql/)?"
 msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../alternc.templates:25001
+#: ../alternc.templates:24001
 msgid "All users databases will be trashed"
 msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../alternc.templates:26001
+#: ../alternc.templates:25001
 msgid "Should AlternC remove users datas?"
 msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../alternc.templates:26001
+#: ../alternc.templates:25001
 msgid "The files and apache redirections created by users will be trashed"
 msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../alternc.templates:27001
+#: ../alternc.templates:26001
 msgid "Should AlternC remove bind zones?"
 msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../alternc.templates:27001
+#: ../alternc.templates:26001
 msgid "It will delete all bind zones created by AlternC"
 msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../alternc.templates:28001
+#: ../alternc.templates:27001
 msgid "Should AlternC remove mailboxes?"
 msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../alternc.templates:28001
+#: ../alternc.templates:27001
 msgid "If you accept all users e-mails will be deleted"
 msgstr ""
 
 #. Type: string
 #. Description
-#: ../alternc.templates:29001
+#: ../alternc.templates:28001
 msgid "Slave servers"
 msgstr ""
 
 #. Type: string
 #. Description
-#: ../alternc.templates:29001
+#: ../alternc.templates:28001
 msgid ""
 "This is a space-separated list of servers that are \"slaves\" to the master "
 "server (this server). When writing apache configuration files, the master "
@@ -489,13 +459,13 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../alternc.templates:30001
+#: ../alternc.templates:29001
 msgid "Shall we use locally found MySQL server?"
 msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../alternc.templates:30001
+#: ../alternc.templates:29001
 msgid ""
 "A local MySQL connection was established on the server. Tell us if you want "
 "to use it. If not remote MySQL server connection parameters will be needed."
@@ -503,13 +473,13 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../alternc.templates:31001
+#: ../alternc.templates:30001
 msgid "Shall we use a remote MySQL server?"
 msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../alternc.templates:31001
+#: ../alternc.templates:30001
 msgid ""
 "No local Mysql server was found. Please confirm you want to use a remote "
 "Mysql Server. If not, AlternC cannot be installed."
@@ -517,13 +487,13 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../alternc.templates:32001
+#: ../alternc.templates:31001
 msgid "MySQL connection error. Try again?"
 msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../alternc.templates:32001
+#: ../alternc.templates:31001
 msgid ""
 "Remote connection to the MySQL server failed. Please confirm that we shall "
 "try again."
@@ -531,13 +501,13 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../alternc.templates:33001
+#: ../alternc.templates:32001
 msgid "Private IP detected, use it anyway?"
 msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../alternc.templates:33001
+#: ../alternc.templates:32001
 msgid ""
 "The IP address you have appears to be private, please confirm you want to "
 "use it anyway. The server might not be reachable from outside your network."
