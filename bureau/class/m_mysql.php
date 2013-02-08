@@ -90,7 +90,7 @@ class DB_users extends DB_Sql {
     // c'est pas étanche : $db se retrouve avec Database de $sql->dbu . Danger, faut comprendre pourquoi
     // Si on veux que ca marche, il faut Database=alternc.
     //$this->Database = "mysql";
-    $this->Database = "information_schema"; #if dbus is on a different  host the alternc database will not be there and trying to use it might cause an error
+    $this->Database = "mysql"; #if dbus is on a different  host the alternc database will not be there and trying to use it might cause an error
     $this->HumanHostname = $human_hostname;
 
   }
