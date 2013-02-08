@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # This script look in the database wich mail should be DELETEd
 
 # Source some configuration file
@@ -41,11 +40,11 @@ echo $$ > "$LOCK_FILE"
 # List the local addresses to DELETE
 # Foreach => Mark for deleting and start deleting the files
 # If process is interrupted, the row isn't deleted. We have to force it by reseting mail_action to 'DELETE'
-mysql_query "SELECT id, quote(replace(path,'!','\\!')) FROM mailbox WHERE mail_action='DELETE';"|while read id path ; do
+mysql_query "SELECT id, address_id, quote(replace(path,'!','\\!')) FROM mailbox WHERE mail_action='DELETE';"|while read id address_id path ; do
   mysql_query "UPDATE mailbox set mail_action='DELETING' WHERE id=$id;"
-  /usr/lib/alternc/mail_dodelete.php "$id"
+  /usr/lib/alternc/mail_dodelete.php "$address_id"
   # Check there is no instruction of changing directory, and check the first part of the string
-  if [[ "$path" =~ '../' || "$path" =~ '/..' || ! "'$ALTERNC_MAIL_LOC" == "${path:0:$((${#ALTERNC_MAIL_LOC}+1))}" ]] ; then
+  if [[ "$path" =~ '../' || "$path" =~ '/..' || ! "'$ALTERNC_MAIL_LOC'" == "${path:0:$((${#ALTERNC_MAIL_LOC}+1))}'" ]] ; then
     # The path will be empty for mailman addresses
     if [[ "$path" != "''" ]]; then
     	echo "Error : this directory will not be deleted, pattern incorrect"
@@ -56,7 +55,7 @@ mysql_query "SELECT id, quote(replace(path,'!','\\!')) FROM mailbox WHERE mail_a
   # If no dir, DELETE
   # If dir and rm ok, DELETE
   # Other case, do nothing
-  if [ -d "$path" ] ; then 
+  if [ -d "${path//\'/}" ] ; then 
     $ionice rm -rf "$path" && mysql_query "DELETE FROM mailbox WHERE id=$id AND mail_action='DELETING';"
     # Do the rm again in case of newly added file during delete. Should not be usefull
     test -d "$path" && $ionice rm -rf "$path"
