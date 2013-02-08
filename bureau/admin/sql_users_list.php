@@ -41,7 +41,7 @@ $rdb=$mysql->get_dblist();
 if (isset($error) && $error) {
 	echo "<p class=\"error\">$error</p><p>&nbsp;</p>";
 }
-  if($r){
+  if($r){ // if there is some userlist
 ?>
 <form method="post" action="sql_users_del.php">
 <table cellspacing="0" cellpadding="4" class="tlist">
@@ -76,9 +76,7 @@ for($i=0;$i<count($r);$i++) {
 <br/>
 
 <?php
-  }
+  } // if $r
 ?>
-  <span class="ina"><a href="sql_users_add.php"><?php __("Create a new MySQL user"); ?></a><br /></span>
-<?php
-?>
+  <span class="ina"><a href="sql_users_add.php"><?php __("Create a new MySQL user"); ?></a></span>
 <?php include_once("foot.php"); ?>
