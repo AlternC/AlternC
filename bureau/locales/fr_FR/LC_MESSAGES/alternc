@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: AlternC, hosting control panel\n"
 "Report-Msgid-Bugs-To: https://alternc.org/report/1\n"
 "POT-Creation-Date: 2013-02-07 19:01+0100\n"
-"PO-Revision-Date: 2013-02-08 14:08+0000\n"
+"PO-Revision-Date: 2013-02-08 14:38+0000\n"
 "Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
 "Language-Team: English <dev@alternc.org>\n"
 "MIME-Version: 1.0\n"
@@ -29,7 +29,7 @@ msgstr ""
 #. Description
 #: ../alternc.templates:1001
 msgid "AlternC need ACL on filesystem"
-msgstr "AlternC requiert les ACL sur le système de fichiers"
+msgstr "AlternC requiert les ACL sur le système de fichiersquota"
 
 #. Type: note
 #. Description
@@ -3951,7 +3951,7 @@ msgstr "Compte <b>%s</b>"
 
 #: ../admin/quotas_oneuser.php:24 ../class/m_quota.php:55
 msgid "quota_web"
-msgstr "Quota web"
+msgstr "Espace disque "
 
 #: ../admin/quotas_oneuser.php:36
 msgid "Emails"
