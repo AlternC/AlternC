@@ -1,0 +1,60 @@
+# Dutch AlternC Translation
+# Copyright (c) 2002 the AlternC Development Team
+# <tech@alternc.org>
+# $Id: aws.po 3219 2012-08-21 10:03:31Z benjamin $
+msgid ""
+msgstr ""
+"Project-Id-Version: $Id: stats.po,v 1.1.1.1 2004/09/01 16:52:49 anonymous "
+"Exp $\n"
+"Report-Msgid-Bugs-To: i18n@alternc.org\n"
+"POT-Creation-Date: 2013-02-04 19:45+0100\n"
+"PO-Revision-Date: 2009-05-24 13:50CEST\n"
+"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
+"Language-Team: Dutch <i18n@alternc.org>\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Emacs 21\n"
+
+msgid "quota_aws"
+msgstr "AwStats"
+
+msgid "err_aws_1"
+msgstr "No statistics currently defined"
+
+msgid "err_aws_2"
+msgstr "This statistic does not exist"
+
+msgid "err_aws_3"
+msgstr "This hostname does not exist"
+
+msgid "err_aws_4"
+msgstr "Your stat quota is over..."
+
+msgid "err_aws_5"
+msgstr "Login does not exists"
+
+msgid "err_aws_6"
+msgstr "Login incorrect"
+
+msgid "err_aws_7"
+msgstr "Login already exists."
+
+msgid "err_aws_8"
+msgstr "This login is already allowed for this statistics."
+
+msgid "err_aws_9"
+msgstr "This login is already denied for this statistics."
+
+msgid "err_aws_10"
+msgstr "This prefix is not allowed"
+
+msgid "err_aws_11"
+msgstr "Forbidden characters in the postfix"
+
+msgid "err_aws_12"
+msgstr "The hostname is incorrect"
+
+msgid "err_aws_13"
+msgstr "No user currently defined"

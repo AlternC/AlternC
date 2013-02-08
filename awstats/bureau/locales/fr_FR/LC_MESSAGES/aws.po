@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: $Id: stats.po,v 1.1.1.1 2004/09/01 16:52:49 anonymous "
 "Exp $\n"
 "Report-Msgid-Bugs-To: i18n@alternc.org\n"
-"POT-Creation-Date: 2013-02-04 19:45+0100\n"
+"POT-Creation-Date: 2013-02-08 15:08+0100\n"
 "PO-Revision-Date: 2009-05-24 13:50CEST\n"
 "Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
 "Language-Team: French <i18n@alternc.org>\n"
@@ -230,9 +230,8 @@ msgstr ""
 msgid "No user currently defined"
 msgstr ""
 
-#: ../class/m_aws.php:447 ../class/m_aws.php:487 ../class/m_aws.php:506
-#: ../class/m_aws.php:557
-msgid "Login does not exists"
+#: ../class/m_aws.php:447 ../class/m_aws.php:506
+msgid "Login does not exist"
 msgstr ""
 
 #: ../class/m_aws.php:463 ../class/m_aws.php:483 ../class/m_aws.php:502
@@ -242,6 +241,10 @@ msgstr ""
 
 #: ../class/m_aws.php:467
 msgid "Login already exist"
+msgstr ""
+
+#: ../class/m_aws.php:487 ../class/m_aws.php:557
+msgid "Login does not exists"
 msgstr ""
 
 #: ../class/m_aws.php:511 ../class/m_aws.php:535 ../class/m_aws.php:562

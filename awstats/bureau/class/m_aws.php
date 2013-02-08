@@ -444,7 +444,7 @@ class m_aws {
     global $db,$err,$cuid;
     $err->log("aws","del_login");
     if (!$this->login_exists($login,1)) {
-      $err->raise("aws",_("Login does not exists")); // Login does not exists
+      $err->raise("aws",_("Login does not exist")); 
       return false;
     }
     $db->query("DELETE FROM aws_users WHERE uid='$cuid' AND login='$login';");
@@ -460,11 +460,11 @@ class m_aws {
     $err->log("aws","add_login");
 
     if (!($login=$this->_check($login))) {
-      $err->raise("aws",_("Login incorrect")); // Login incorrect 
+      $err->raise("aws",_("Login incorrect")); 
       return false;
     }
     if ($this->login_exists($login,1)) {
-      $err->raise("aws",_("Login already exist")); // Login already exist
+      $err->raise("aws",_("Login already exist")); 
       return false;
     }
     $pass=crypt($pass);
@@ -499,21 +499,21 @@ class m_aws {
     $err->log("aws","allow_login");
 
     if (!($login=$this->_check($login))) {
-      $err->raise("aws",_("Login incorrect")); // Login incorrect 
+      $err->raise("aws",_("Login incorrect"));
       return false;      
     }
     if (!$this->login_exists($login)) {
-      $err->raise("aws",_("Login does not exists")); // Login does not exists
+      $err->raise("aws",_("Login does not exist"));
       return false;
     }
     $db->query("SELECT id FROM aws WHERE id='$id' AND uid='$cuid'");
     if (!$db->next_record()) {
-      $err->raise("aws",_("The requested statistic does not exist.")); // The requested statistic does not exist.
+      $err->raise("aws",_("The requested statistic does not exist.")); 
       return false;
     }
     $db->query("SELECT login FROM aws_access WHERE id='$id' AND login='$login'");
     if ($db->next_record()) {
-      $err->raise("aws",_("This login is already allowed for this statistics.")); // This login is already allowed for this statistics.
+      $err->raise("aws",_("This login is already allowed for this statistics."));
       return false;
     }
     $db->query("INSERT INTO aws_access (uid,id,login) VALUES ('$cuid','$id','$login');");
@@ -532,7 +532,7 @@ class m_aws {
 
     $db->query("SELECT id FROM aws WHERE id='$id' AND uid='$cuid'");
     if (!$db->next_record()) {
-      $err->raise("aws",_("The requested statistic does not exist.")); // The requested statistic does not exist.
+      $err->raise("aws",_("The requested statistic does not exist.")); 
       return false;
     }
     $db->query("DELETE FROM aws_access WHERE id='$id';");
@@ -559,12 +559,12 @@ class m_aws {
     }
     $db->query("SELECT id FROM aws WHERE id='$id' AND uid='$cuid'");
     if (!$db->next_record()) {
-      $err->raise("aws",_("The requested statistic does not exist.")); // The requested statistic does not exist.
+      $err->raise("aws",_("The requested statistic does not exist."));
       return false;
     }
     $db->query("SELECT login FROM aws_access WHERE id='$id' AND login='$login'");
     if (!$db->next_record()) {
-      $err->raise("aws",_("This login is already denied for this statistics.")); // This login is already denied for this statistics.
+      $err->raise("aws",_("This login is already denied for this statistics."));
       return false;
     }
     $db->query("DELETE FROM aws_access WHERE id='$id' AND login='$login';");
@@ -654,7 +654,7 @@ class m_aws {
       return false;
     } 
    if (!preg_match('/^[0-9a-z_-]*$/', $postfix)){
-      $err->raise("aws",_("Forbidden caracters in the postfix.")); // Forbidden caracters in the postfix.
+      $err->raise("aws",_("Forbidden caracters in the postfix.")); 
       return false;
     }
     return $login;
@@ -668,7 +668,7 @@ class m_aws {
   function _delconf($hostname) {
     global $err;
     if (!preg_match('/^[._a-z0-9-]*$/', $hostname)){
-      $err->raise("aws",_("Hostname is incorrect")); // Hostname is incorrect
+      $err->raise("aws",_("Hostname is incorrect")); 
       return false;
     }
     @unlink($this->CONFDIR."/awstats.".$hostname.".conf");
@@ -693,7 +693,7 @@ class m_aws {
         $db->query("SELECT * FROM aws WHERE id='$id' AND uid='$cuid';");
     }
     if (!$db->num_rows()) {
-      $err->raise("aws",_("This statistic does not exist")); // This statistic does not exist
+      $err->raise("aws",_("This statistic does not exist")); 
       return false;
     }
     $db->next_record();

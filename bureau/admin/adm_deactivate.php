@@ -43,7 +43,7 @@ $fields = array (
 getFields($fields);
 
 if (!$uid) {
-	__("Missing uid");
+	__("Account not found");
 	include_once("foot.php");
 	exit();
 }

@@ -71,7 +71,7 @@ if($action == "add") {
       <input type="hidden" name="action" value="delete" />
       <input type="hidden" name="type" value="<?php echo $type ?>" />
       <input type="hidden" name="del_confirm" value="y" />
-      <p class="error"><?php __("WARNING : Confirm the deletion of the quota"); ?></p>
+      <p class="error"><?php __("WARNING: Confirm the deletion of the quota"); ?></p>
       <p><?php echo $type; ?></p>
       <blockquote>
         <input type="submit" class="inb" name="confirm" value="<?php __("Yes"); ?>" />&nbsp;&nbsp;

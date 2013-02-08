@@ -47,6 +47,8 @@ awstats/bureau/locales/fr_FR/LC_MESSAGES/aws.po -text
 awstats/bureau/locales/fr_FR/LC_MESSAGES/aws_manual.po -text
 awstats/bureau/locales/it_IT/LC_MESSAGES/aws.po -text
 awstats/bureau/locales/it_IT/LC_MESSAGES/aws_manual.po -text
+awstats/bureau/locales/nl_NL/LC_MESSAGES/aws.po -text
+awstats/bureau/locales/nl_NL/LC_MESSAGES/aws_manual.po -text
 awstats/bureau/locales/pt_BR/LC_MESSAGES/aws.po -text
 awstats/bureau/locales/pt_BR/LC_MESSAGES/aws_manual.po -text
 awstats/logresolvemerge.pl -text
