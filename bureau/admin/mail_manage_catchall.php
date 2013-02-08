@@ -95,7 +95,7 @@ __("You can choose what to do with emails sent to unexisting address of this dom
 	<i><?php __("Enter the 'target' domain"); ?></i><br/>
         <input type="text" id="target_domain" name="target_domain" value="<?php if($catch['type']=='domain') { echo substr($catch['target'],1); } ?>" placeholder="<?php __("example.tld");?>" />
       </p>
-	<i><?php __("Or choose one of our own"); ?></i>
+	<i><?php __("Or choose one of your own"); ?></i>
         <ul>
           <?php foreach ( $dom->enum_domains() as $d) { if ($d==$catch['domain']) {continue;} echo "<li><a href=\"javascript:set_target_domain_value('".addslashes($d)."');\">$d</a></li>"; } ?>
         </ul>
@@ -110,20 +110,19 @@ __("You can choose what to do with emails sent to unexisting address of this dom
     <td style="width: 50%; text-align: justify"><label for='target_type_mail'/><?php echo sprintf(_("Mails sent to an unexisting email on '@%s' will be redirect to user@example.tld."),$catch['domain']);?></label></td>
     <td>
       <p>
-        <input type="text" name="target_mail" value="<?php if($catch['type']=='mail') { echo $catch['target']; } ?>" placeholder="<?php __("john.doe@example.tld");?>" />
+        <input type="text" name="target_mail" size="30" value="<?php if($catch['type']=='mail') { echo $catch['target']; } ?>" placeholder="<?php __("john.doe@example.tld");?>" />
       </p>
     </td>
   </tr>
-
-
-  <tr>
-    <td colspan=3 >
-      <input type="submit" class="inb" name="submit" value="<?php __("Save"); ?>" />
-      <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="window.history.go(-1);"/>
-    </td>
-  </tr>
 </table>
+
+<br/>
+
+<input type="submit" class="inb" name="submit" value="<?php __("Save"); ?>" />
+<input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="window.history.go(-1);"/>
+
 </form>
+
 <script type="text/javascript">
   function set_target_domain_value(value) {
     $('#target_domain').val(value);
