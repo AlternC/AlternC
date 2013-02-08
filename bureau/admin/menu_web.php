@@ -27,7 +27,7 @@
 <a href="hta_list.php">
   <div class="menu-title">
     <img src="images/password.png" alt="<?php __("Protected folders"); ?>" />&nbsp;<?php __("Protected folders"); ?>
-    <img src="/images/menu_moins.png" alt="" style="float:right;" id="menu-adm-img"/>
+    <img src="/images/menu_right.png" alt="" style="float:right;" id="menu-adm-img"/>
   </div>
 </a>
 </div>

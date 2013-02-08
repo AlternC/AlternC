@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: $Id: stats.po,v 1.1.1.1 2004/09/01 16:52:49 anonymous "
 "Exp $\n"
 "Report-Msgid-Bugs-To: i18n@alternc.org\n"
-"POT-Creation-Date: 2013-02-08 15:08+0100\n"
+"POT-Creation-Date: 2013-02-08 15:51+0100\n"
 "PO-Revision-Date: 2009-05-24 13:50CEST\n"
 "Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
 "Language-Team: French <i18n@alternc.org>\n"
@@ -184,7 +184,7 @@ msgstr ""
 msgid "Delete checked accounts"
 msgstr "Effacer les utilisateurs sélectionnés"
 
-#: ../admin/menu_aws.php:38
+#: ../admin/menu_aws.php:39
 msgid "Web Statistics"
 msgstr "Statistiques Web"
 

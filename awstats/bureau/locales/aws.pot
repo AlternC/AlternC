@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AlternC 2.0\n"
 "Report-Msgid-Bugs-To: i18n@alternc.org\n"
-"POT-Creation-Date: 2013-02-08 15:08+0100\n"
+"POT-Creation-Date: 2013-02-08 15:51+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -180,7 +180,7 @@ msgstr ""
 msgid "Delete checked accounts"
 msgstr ""
 
-#: ../admin/menu_aws.php:38
+#: ../admin/menu_aws.php:39
 msgid "Web Statistics"
 msgstr ""
 

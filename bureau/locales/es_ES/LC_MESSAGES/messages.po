@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: i18n@alternc.org\n"
-"POT-Creation-Date: 2013-02-08 15:08+0100\n"
+"POT-Creation-Date: 2013-02-08 15:51+0100\n"
 "PO-Revision-Date: 2008-09-05 16:50+0200\n"
 "Last-Translator: \n"
 "Language-Team:  <tech@alternc.org>\n"
@@ -1063,11 +1063,11 @@ msgid "Email Addresses"
 msgstr "Dirección de correo"
 
 #: ../admin/adm_menulist.php:70 ../admin/bro_main.php:158
-#: ../admin/menu_brouteur.php:27
+#: ../admin/menu_brouteur.php:28
 msgid "File browser"
 msgstr "Manejador de archivos"
 
-#: ../admin/adm_menulist.php:71 ../admin/menu_web.php:28
+#: ../admin/adm_menulist.php:71 ../admin/menu_web.php:29
 msgid "Protected folders"
 msgstr "Carpetas protegidas"
 
@@ -1089,11 +1089,11 @@ msgstr "Bases de datos"
 msgid "Show my quotas"
 msgstr "Mostrar cuotas"
 
-#: ../admin/adm_menulist.php:77 ../admin/menu_logs.php:29
+#: ../admin/adm_menulist.php:77 ../admin/menu_logs.php:30
 msgid "Logs"
 msgstr ""
 
-#: ../admin/adm_menulist.php:78 ../admin/menu_aide.php:26
+#: ../admin/adm_menulist.php:78 ../admin/menu_aide.php:27
 msgid "Online help"
 msgstr "Ayuda en línea"
 
@@ -1101,7 +1101,7 @@ msgstr "Ayuda en línea"
 msgid "Languages"
 msgstr "Idiomas"
 
-#: ../admin/adm_menulist.php:80 ../admin/menu_mem.php:26
+#: ../admin/adm_menulist.php:80 ../admin/menu_mem.php:27
 msgid "Settings"
 msgstr "Configuración"
 
@@ -3079,20 +3079,25 @@ msgid ""
 "it right now?"
 msgstr ""
 
-#: ../admin/menu_mem.php:31
+#: ../admin/menu_mem.php:34
 msgid "Logout"
 msgstr "Salir"
 
-#: ../admin/menu_piwik.php:36
+#: ../admin/menu_piwik.php:37
 #, fuzzy
 msgid "Piwik Users"
 msgstr "Usuarios"
 
-#: ../admin/menu_piwik.php:37
+#: ../admin/menu_piwik.php:38
 msgid "Piwik Sites"
 msgstr ""
 
-#: ../admin/menu_quota.php:69 ../class/m_quota.php:79 ../class/m_quota.php:152
+#: ../admin/menu_quota.php:70
+#, php-format
+msgid "%s%% of %s"
+msgstr ""
+
+#: ../admin/menu_quota.php:70 ../class/m_quota.php:79 ../class/m_quota.php:152
 msgid "quota_"
 msgstr "quota_"
 
@@ -3660,41 +3665,41 @@ msgstr "Gb"
 msgid "Tb"
 msgstr "Tb"
 
-#: ../class/functions.php:385
+#: ../class/functions.php:389
 msgid "year"
 msgstr "año"
 
 # Variables used in functions.php3
-#: ../class/functions.php:385
+#: ../class/functions.php:389
 msgid "years"
 msgstr "años"
 
-#: ../class/functions.php:387
+#: ../class/functions.php:391
 msgid "month"
 msgstr "mes"
 
-#: ../class/functions.php:387
+#: ../class/functions.php:391
 msgid "months"
 msgstr "meses"
 
-#: ../class/functions.php:410
+#: ../class/functions.php:414
 msgid "Not managed"
 msgstr "No manejado"
 
-#: ../class/functions.php:537 ../class/functions.php:539
+#: ../class/functions.php:541 ../class/functions.php:543
 msgid "Previous Page"
 msgstr ""
 
-#: ../class/functions.php:593 ../class/functions.php:595
+#: ../class/functions.php:597 ../class/functions.php:599
 msgid "Next Page"
 msgstr ""
 
-#: ../class/functions.php:617
+#: ../class/functions.php:621
 #, fuzzy
 msgid "Clic here to generate a password"
 msgstr "Por favor, entra una contraseña"
 
-#: ../class/functions.php:652 ../class/functions.php:653
+#: ../class/functions.php:656 ../class/functions.php:657
 #, fuzzy
 msgid "Choose a folder..."
 msgstr "Proteger una carpeta"

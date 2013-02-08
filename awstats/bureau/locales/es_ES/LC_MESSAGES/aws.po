@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: $Id: aws.po 3237 2012-08-21 14:59:46Z benjamin $\n"
 "Report-Msgid-Bugs-To: i18n@alternc.org\n"
-"POT-Creation-Date: 2013-02-08 15:08+0100\n"
+"POT-Creation-Date: 2013-02-08 15:51+0100\n"
 "PO-Revision-Date: 2002-06-16 13:50CEST\n"
 "Last-Translator: Bruno <bruno@alternc.org>\n"
 "Language-Team: Espanol <i18n@alternc.org>\n"
@@ -185,7 +185,7 @@ msgstr ""
 msgid "Delete checked accounts"
 msgstr "Suprimir los juegos marcados"
 
-#: ../admin/menu_aws.php:38
+#: ../admin/menu_aws.php:39
 msgid "Web Statistics"
 msgstr "Estadísticas Web"
 
