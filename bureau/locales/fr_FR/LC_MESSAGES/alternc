@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: AlternC, hosting control panel\n"
 "Report-Msgid-Bugs-To: https://alternc.org/report/1\n"
 "POT-Creation-Date: 2013-02-07 19:01+0100\n"
-"PO-Revision-Date: 2013-02-08 14:38+0000\n"
+"PO-Revision-Date: 2013-02-08 14:54+0000\n"
 "Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
 "Language-Team: English <dev@alternc.org>\n"
 "MIME-Version: 1.0\n"
@@ -759,7 +759,7 @@ msgstr "Mot de passe"
 msgid "Create this new Awstats user"
 msgstr "Créer cet utilisateur d'Awstats"
 
-#: ../admin/mman_list.php:104
+#: ../admin/mman_list.php:103
 msgid "Change password"
 msgstr "Changer le mot de passe"
 
@@ -771,7 +771,7 @@ msgstr "Êtes-vous sur de vouloir supprimer les comptes sélectionnés ?"
 msgid "Delete checked accounts"
 msgstr "Effacer les utilisateurs sélectionnés"
 
-#: ../admin/menu_aws.php:38
+#: ../admin/menu_aws.php:39
 msgid "Web Statistics"
 msgstr "Statistiques Web"
 
@@ -870,10 +870,10 @@ msgid "(with mailman)"
 msgstr "(avec mailman)"
 
 #: ../admin/menu_mailman.php:32 ../admin/mman_add.php:34
-#: ../admin/mman_list.php:41 ../admin/mman_list.php:60
+#: ../admin/mman_list.php:40 ../admin/mman_list.php:59
 #: ../admin/mman_passwd.php:37 ../admin/mman_passwd.php:45
-#: ../admin/mman_url.php:38 ../admin/mman_url.php:47 ../admin/mman_url.php:55
-#: ../class/m_mailman.php:535
+#: ../admin/mman_url.php:38 ../admin/mman_url.php:48 ../admin/mman_url.php:57
+#: ../class/m_mailman.php:609
 msgid "Mailing lists"
 msgstr "Listes de discussion"
 
@@ -889,11 +889,11 @@ msgstr "Adresse email de l'administrateur de la liste"
 msgid "List password"
 msgstr "Mot de passe de la liste"
 
-#: ../admin/mman_add.php:55
+#: ../admin/mman_add.php:56
 msgid "List password (confirm)"
 msgstr "Mot de passe de la liste (confirmation)"
 
-#: ../admin/mman_add.php:59
+#: ../admin/mman_add.php:60
 msgid "Create the list."
 msgstr "Créer cette liste."
 
@@ -901,7 +901,7 @@ msgstr "Créer cette liste."
 msgid "Deleting mailman lists"
 msgstr "Suppression de listes mailman"
 
-#: ../admin/mman_del.php:54
+#: ../admin/mman_del.php:54 ../admin/mman_edit.php:55
 msgid "Please confirm the deletion of the following mailman lists:"
 msgstr "Merci de confirmer la suppression des listes mailman suivantes :"
 
@@ -909,11 +909,11 @@ msgstr "Merci de confirmer la suppression des listes mailman suivantes :"
 msgid "Delete the selected mailman lists"
 msgstr "Supprimer les listes mailman cochées"
 
-#: ../admin/mman_del.php:64
+#: ../admin/mman_del.php:64 ../admin/mman_edit.php:66
 msgid "Don't delete lists and go back to the mailman list"
 msgstr "Ne pas supprimer de listes et retourner aux listes mailman"
 
-#: ../admin/mman_del.php:69
+#: ../admin/mman_del.php:69 ../admin/mman_edit.php:71
 msgid ""
 "Warning: Deleting a mailman list will destroy all the subscribed users, "
 "preferences and archives it contains! You will <b>NOT</b> be able to get "
@@ -924,90 +924,99 @@ msgstr "Attention : la suppression d'une liste mailman supprimera l'ensemble de 
 msgid "The mailing list has been successfully created."
 msgstr "La liste a été créée avec succès."
 
-#: ../admin/mman_dodel.php:55
+#: ../admin/mman_dodel.php:55 ../admin/mman_doedit.php:58
+#: ../admin/mman_doedit.php:68
 #, php-format
 msgid "The list %s has been successfully deleted."
 msgstr "La liste %s a été supprimée avec succès."
 
 #: ../admin/mman_dopasswd.php:41
-msgid "The mailing list password has been successfully changed."
+msgid "The mailing list password will be changed in a few minutes."
 msgstr "Le mot de passe de la liste a été changé avec succès."
 
 #: ../admin/mman_dourl.php:39
 msgid "The mailing list management url has been successfully changed."
 msgstr "L'adresse URL de gestion de la liste a été modifiée avec succès."
 
-#: ../admin/mman_list.php:31
+#: ../admin/mman_edit.php:52
+msgid "Editing mailman lists"
+msgstr "Effacement de listes mailman"
+
+#: ../admin/mman_list.php:30
 msgid "Password change pending"
 msgstr "Changement du mot de passe en cours"
 
-#: ../admin/mman_list.php:32
+#: ../admin/mman_list.php:31
 msgid "Url change pending"
 msgstr "Changement d'URL en cours"
 
-#: ../admin/mman_list.php:33
+#: ../admin/mman_list.php:32
 msgid "List creation pending"
 msgstr "Création de la liste en cours"
 
-#: ../admin/mman_list.php:39
+#: ../admin/mman_list.php:38
 msgid ""
 "No domain is installed on your account, you cannot create any mailing list!"
 msgstr "Aucun domaine n'est installé sur votre compte, vous ne pouvez pas créer de listes !"
 
-#: ../admin/mman_list.php:69
+#: ../admin/mman_list.php:68
 msgid "Create a list"
 msgstr "Créer une nouvelle liste"
 
-#: ../admin/mman_list.php:78
+#: ../admin/mman_list.php:77
 msgid "Delete"
 msgstr "Effacer"
 
-#: ../admin/mman_list.php:78
+#: ../admin/mman_list.php:77
 msgid "List Status"
 msgstr "État de la liste"
 
-#: ../admin/mman_list.php:78
+#: ../admin/mman_list.php:77
 msgid "List name"
 msgstr "Nom de la liste"
 
-#: ../admin/mman_list.php:89
+#: ../admin/mman_list.php:88
 msgid "List is pending deletion, you can't do anything on it"
 msgstr "La liste est en cours de suppression, aucune action possible."
 
-#: ../admin/mman_list.php:100
+#: ../admin/mman_list.php:99
 msgid "List admin"
 msgstr "Administration"
 
-#: ../admin/mman_list.php:101
+#: ../admin/mman_list.php:100
 msgid "Pending messages"
 msgstr "Messages en attente"
 
-#: ../admin/mman_list.php:105
+#: ../admin/mman_list.php:104
 msgid "Change url"
 msgstr "Changer l'adresse"
 
 #: ../admin/mman_list.php:113
-msgid "Delete the checked lists"
-msgstr "Supprimer les listes cochées"
+msgid "-- Choose an action --"
+msgstr "-- Choisir une action --"
 
-#: ../admin/mman_passwd.php:54
+#: ../admin/mman_list.php:117
+msgid "Validate"
+msgstr "Valider"
+
+#: ../admin/mman_passwd.php:55
 #, php-format
 msgid "Changing password of list %s"
 msgstr "Modification du mot de passe de la liste %s"
 
-#: ../admin/mman_passwd.php:56
+#: ../admin/mman_passwd.php:57
 msgid "New list password"
 msgstr "Nouveau mot de passe de la liste"
 
-#: ../admin/mman_passwd.php:59
+#: ../admin/mman_passwd.php:61
 msgid "Password confirmation"
 msgstr "Confirmation du mot de passe"
 
-#: ../admin/mman_passwd.php:63
+#: ../admin/mman_passwd.php:65
 msgid "Change the password."
 msgstr "Modifier le mot de passe."
 
-#: ../admin/mman_url.php:63
+#: ../admin/mman_url.php:65
 msgid ""
 "This is the current url to access administration and public pages for this "
 "list. If you want to change it, select another url in the list and submit "
@@ -1015,20 +1024,20 @@ msgid ""
 " here."
 msgstr "Voici l'adresse permettant d'accéder aux pages administration et publiques. Si vous souhaitez la changer, choisissez une autre adresse dans la liste ci-dessous et validez. <br />Si vous ne savez pas de quoi il s'agit, ne touchez à rien."
 
-#: ../admin/mman_url.php:68
+#: ../admin/mman_url.php:70
 #, php-format
 msgid "Changing management url of list %s"
 msgstr "Modification de l'adresse de gestion de la liste %s"
 
-#: ../admin/mman_url.php:71
+#: ../admin/mman_url.php:73
 msgid "Current list url"
 msgstr "Adresse actuelle de la liste"
 
-#: ../admin/mman_url.php:75
+#: ../admin/mman_url.php:77
 msgid "New list management url"
 msgstr "Nouvelle adresse de la liste"
 
-#: ../admin/mman_url.php:88
+#: ../admin/mman_url.php:90
 msgid "Change the url."
 msgstr "Changer l'adresse."
 
@@ -1037,8 +1046,9 @@ msgid "This list already exist"
 msgstr "la liste existe déjà"
 
 #: ../class/m_mailman.php:43 ../class/m_mailman.php:141
-#: ../class/m_mailman.php:343 ../class/m_mailman.php:443
-#: ../class/m_mailman.php:468 ../class/m_mailman.php:488
+#: ../class/m_mailman.php:355 ../class/m_mailman.php:400
+#: ../class/m_mailman.php:517 ../class/m_mailman.php:542
+#: ../class/m_mailman.php:562
 msgid "This list does not exist"
 msgstr "La liste n'existe pas"
 
@@ -1058,8 +1068,8 @@ msgstr "Une erreur critique est survenue en changeant le mot de passe de la list
 msgid "A fatal error happened when getting the list url"
 msgstr "Une erreur critique est survenue en récupérant l'adresse de la liste"
 
-#: ../class/m_mailman.php:68 ../class/m_mailman.php:388
-#: ../class/m_mailman.php:419
+#: ../class/m_mailman.php:68 ../class/m_mailman.php:462
+#: ../class/m_mailman.php:493
 msgid "No list defined yet"
 msgstr "Pas de liste définie"
 
@@ -1074,51 +1084,51 @@ msgstr "Adresse Email spéciale pour gérer les listes Mailman <a href='mman_lis
 msgid "The mailman address %s does not exist"
 msgstr "L'adresse Mailman %s n'existe pas"
 
-#: ../class/m_mailman.php:240
+#: ../class/m_mailman.php:242
 msgid "Your mailing-list quota is over, you cannot create more mailing-lists."
 msgstr "Votre quota de listes est atteint, vous ne pouvez plus créer de listes de discussion."
 
-#: ../class/m_mailman.php:247
+#: ../class/m_mailman.php:249
 msgid "The email you entered is syntaxically incorrect"
 msgstr "Le mail que vous avez saisi est syntaxiquement incorrect"
 
-#: ../class/m_mailman.php:262
+#: ../class/m_mailman.php:264
 msgid "The login (left part of the @) is mandatory"
 msgstr "La partie gauche de l'@ sur une adresse mail est obligatoire."
 
-#: ../class/m_mailman.php:266
+#: ../class/m_mailman.php:268
 msgid "The owner email and the password are mandatory"
 msgstr "Le mail est le mot de passe sont obligatoire"
 
-#: ../class/m_mailman.php:270
+#: ../class/m_mailman.php:272
 msgid "This email is incorrect"
 msgstr "Le mail est incorrect"
 
-#: ../class/m_mailman.php:279
+#: ../class/m_mailman.php:281
 msgid "This domain does not exist."
 msgstr "Ce domaine n'existe pas"
 
-#: ../class/m_mailman.php:285
+#: ../class/m_mailman.php:287
 msgid ""
 "A list with the same name already exist on the server. Please choose another"
 " name."
 msgstr "Une liste du même nom existe déjà sur le serveur. Veuillez choisir un autre nom."
 
-#: ../class/m_mailman.php:301
+#: ../class/m_mailman.php:320
 msgid ""
 "This email address (or one of the list-subscribe, list-unsubscribe etc.) are"
 " already used."
 msgstr "Ce mail (ou l'un des mails nécessaire tel que list-subscribe, list-unsubscribe, ...) existe déjà "
 
-#: ../class/m_mailman.php:347
+#: ../class/m_mailman.php:359 ../class/m_mailman.php:404
 msgid "This list has pending action, you cannot delete it"
 msgstr "Cette liste a des actions en cours, vous ne pouvez pas la supprimer"
 
-#: ../class/m_mailman.php:447
+#: ../class/m_mailman.php:521
 msgid "The passwords are differents, please try again"
 msgstr "Les mots de passe ne correspondent pas, merci de réessayer"
 
-#: ../class/m_mailman.php:502
+#: ../class/m_mailman.php:576
 msgid "Mailing lists (mailman)"
 msgstr "Listes de discussion (mailman)"
 
@@ -2011,11 +2021,11 @@ msgid "Email Addresses"
 msgstr "Adresses email"
 
 #: ../admin/adm_menulist.php:70 ../admin/bro_main.php:158
-#: ../admin/menu_brouteur.php:27
+#: ../admin/menu_brouteur.php:28
 msgid "File browser"
 msgstr "Gestionnaire de fichiers"
 
-#: ../admin/adm_menulist.php:71 ../admin/menu_web.php:28
+#: ../admin/adm_menulist.php:71 ../admin/menu_web.php:29
 msgid "Protected folders"
 msgstr "Répertoires protégés"
 
@@ -2037,11 +2047,11 @@ msgstr "Bases de données"
 msgid "Show my quotas"
 msgstr "Quotas du compte"
 
-#: ../admin/adm_menulist.php:77 ../admin/menu_logs.php:29
+#: ../admin/adm_menulist.php:77 ../admin/menu_logs.php:30
 msgid "Logs"
 msgstr "Journaux"
 
-#: ../admin/adm_menulist.php:78 ../admin/menu_aide.php:26
+#: ../admin/adm_menulist.php:78 ../admin/menu_aide.php:27
 msgid "Online help"
 msgstr "Aide en ligne"
 
@@ -2049,7 +2059,7 @@ msgstr "Aide en ligne"
 msgid "Languages"
 msgstr "Langues"
 
-#: ../admin/adm_menulist.php:80 ../admin/menu_mem.php:26
+#: ../admin/adm_menulist.php:80 ../admin/menu_mem.php:27
 msgid "Settings"
 msgstr "Configuration"
 
@@ -3846,19 +3856,24 @@ msgid ""
 "it right now?"
 msgstr "La configuration est regénéré toute les 5 minutes. Voulez-vous forcer une regénération tout de suite ?"
 
-#: ../admin/menu_mem.php:31
+#: ../admin/menu_mem.php:34
 msgid "Logout"
 msgstr "Se déconnecter"
 
-#: ../admin/menu_piwik.php:36
+#: ../admin/menu_piwik.php:37
 msgid "Piwik Users"
 msgstr "Utilisateurs Piwik"
 
-#: ../admin/menu_piwik.php:37
+#: ../admin/menu_piwik.php:38
 msgid "Piwik Sites"
 msgstr "Sites Piwik"
 
-#: ../admin/menu_quota.php:69 ../class/m_quota.php:79 ../class/m_quota.php:152
+#: ../admin/menu_quota.php:70
+#, php-format
+msgid "%s%% of %s"
+msgstr "%s%% de %s"
+
+#: ../admin/menu_quota.php:70 ../class/m_quota.php:79 ../class/m_quota.php:152
 msgid "quota_"
 msgstr "quota_"
 
@@ -4371,39 +4386,39 @@ msgstr "Go"
 msgid "Tb"
 msgstr "To"
 
-#: ../class/functions.php:385
+#: ../class/functions.php:389
 msgid "year"
 msgstr "an"
 
-#: ../class/functions.php:385
+#: ../class/functions.php:389
 msgid "years"
 msgstr "ans"
 
-#: ../class/functions.php:387
+#: ../class/functions.php:391
 msgid "month"
 msgstr "mois"
 
-#: ../class/functions.php:387
+#: ../class/functions.php:391
 msgid "months"
 msgstr "mois"
 
-#: ../class/functions.php:410
+#: ../class/functions.php:414
 msgid "Not managed"
 msgstr "Non géré"
 
-#: ../class/functions.php:537 ../class/functions.php:539
+#: ../class/functions.php:541 ../class/functions.php:543
 msgid "Previous Page"
 msgstr "Page précédente"
 
-#: ../class/functions.php:593 ../class/functions.php:595
+#: ../class/functions.php:597 ../class/functions.php:599
 msgid "Next Page"
 msgstr "Page suivante"
 
-#: ../class/functions.php:617
+#: ../class/functions.php:621
 msgid "Clic here to generate a password"
 msgstr "Cliquez ici pour générer un mot de passe"
 
-#: ../class/functions.php:652 ../class/functions.php:653
+#: ../class/functions.php:656 ../class/functions.php:657
 msgid "Choose a folder..."
 msgstr "Choisir un répertoire ..."
 
@@ -5478,6 +5493,9 @@ msgstr "Fichier Real Media"
 
 #~ msgid "Byte"
 #~ msgstr "Byte"
+
+#~ msgid "Delete the checked lists"
+#~ msgstr "Delete the checked lists"
 
 #~ msgid "Public page"
 #~ msgstr "Public page"
