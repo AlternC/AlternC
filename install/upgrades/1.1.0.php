@@ -24,8 +24,6 @@ if ($db->num_rows()) {
   echo "This script is in /usr/lib/alternc/procmail_to_sieve.php once to migrate\n";
   echo "PRESS ENTER TO CONTINUE\n";
   echo "################################################################################\n";
-  $f=fopen("php://stdin","rb");fgets($f,10); fclose($f);
-  
 }
 
 //updating db and dbusers tables
