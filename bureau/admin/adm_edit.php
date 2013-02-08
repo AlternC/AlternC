@@ -131,7 +131,7 @@ if (!$r=$admin->get($uid)) {
 <p>
 <form method="post" action="adm_dorenew.php">
 <input type="hidden" name="uid" value="<?php echo $uid ?>" />
-<table border="1" cellspacing="0" cellpadding="4">
+<table border="1" cellspacing="0" cellpadding="4" class="tedit">
 <tr>
 	<th><label for="periods"><?php __("Renew for") ?></label></th>
 	<td><input name="periods" id="periods" type="text" size="2" value="1"/><?php echo ' ' . _('period(s)') ?></td>
