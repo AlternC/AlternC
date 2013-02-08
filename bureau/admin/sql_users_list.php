@@ -66,20 +66,19 @@ for($i=0;$i<count($r);$i++) {
  }
 ?>
 
-<tr><td colspan="5">
-   <input type="submit" name="sub" value="<?php __("Delete the checked users"); ?>" class="inb" />
-</td></tr>
 </table>
+
+<br/>
+<input type="submit" name="sub" value="<?php __("Delete the checked users"); ?>" class="inb" />
 </form>
 
-<p>&nbsp;</p>
+<br/>
+<br/>
 
 <?php
   }
 ?>
-<p>
   <span class="ina"><a href="sql_users_add.php"><?php __("Create a new MySQL user"); ?></a><br /></span>
-</p>
 <?php
 ?>
 <?php include_once("foot.php"); ?>
