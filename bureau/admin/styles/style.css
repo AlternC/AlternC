@@ -589,7 +589,7 @@ input#dir, input#sub_local {
   width: 180px;
   background: #fff;
   border: solid 1px #AAA;
-  padding-bottom
+  margin-left: 10px;
 }
 
 .ombrage {

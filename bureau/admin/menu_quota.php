@@ -61,19 +61,19 @@
       }
 
       $usage_percent = (int) ($q[$key]["u"] / $q[$key]["t"] * 100);
-      $usage_color = ($q[$key]["u"] > $q[$key]["t"] ? '#f00' : '#0f0');
-      $usage_color = ((85 < $usage_percent && $usage_percent < 100) ? '#ff0' : $usage_color); // yellow
+      $usage_color = ($q[$key]["u"] > $q[$key]["t"] ? '#800' : '#080');
+      $usage_color = ((85 < $usage_percent && $usage_percent <= 100) ? '#ff8800' : $usage_color); // yellow
 
       $url = ($key == 'bw_web' ? 'stats_show_per_month.php' : 'quota_show.php');
 
-      echo "<dd>";
-      echo '<div><a href="' . $url . '">' . /* _($val) */  _("quota_".$key) . ' ' . $usage_percent . '%' . ' <small>(' . format_size($q[$key]["u"],true) . '&nbsp;/&nbsp;' . format_size($q[$key]["t"],true) . ')</small></a></div>';
-      echo "</dd>";
-      echo "<dd>";
+      echo '<ul><li>';
+      echo '<div><a href="' . $url . '">' . /* _($val) */  _("quota_".$key) . " " . sprintf(_("%s%% of %s"),$usage_percent,format_size($q[$key]["t"])) . '</a></div>';
+      echo "</li>\n";
+      echo '<li>';
       echo '<div class="progress-bar">';
       echo '<div style="width: ' . ($usage_percent > 100 ? 100 : $usage_percent) . '%; background: ' . $usage_color . ';">&nbsp;</div>';
       echo '</div>';
-      echo "</dd>";
+      echo '</li></ul>';
     }
   }
   ?>
