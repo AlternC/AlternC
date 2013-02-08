@@ -1,21 +1,26 @@
 <?php
 
-$lang_translation=array(
+$lang_translation=array( # If you comment lang here, it won't be displayed. 
 			"fr_FR" => "Français",
 			"en_US" => "English",
-			"es_ES" => "Español",
-			"it_IT" => "Italiano",
-			"de_DE" => "Deutsch",
-			"pt_BR" => "Portuguese",
+#			"es_ES" => "Español",
+#			"it_IT" => "Italiano",
+#			"de_DE" => "Deutsch",
+#			"pt_BR" => "Portuguese",
 			"nl_NL" => "Dutch",
 			);
 
+global $arr_lang_translation ;
+$arr_lang_translation = $lang_translation; // not pretty but I don't want side effect right now
+
 function update_locale($langpath) {
+  global $arr_lang_translation;
   $locales=array();
   $file=file("/etc/locale.gen", FILE_SKIP_EMPTY_LINES);
   if (! is_array($file) ) return $locales;
   foreach ($file as $v ) {
     if ( (preg_match("/^([a-z][a-z]_[A-Z][A-Z])/",trim($v),$mat) && file_exists($langpath . '/' . $mat[1]) ) ) {
+      if (! array_key_exists($mat[1], $arr_lang_translation) ) continue;
       $locales[$mat[1]]=$mat[1];
     }
   }
