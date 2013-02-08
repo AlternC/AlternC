@@ -257,7 +257,7 @@ if [ -x /usr/sbin/apache2 ]; then
     run-parts --arg=apache2 /usr/lib/alternc/install.d 
     
     s=""
-    # unused from AlternC 1.1, FIXME: remove it later
+    # unused from AlternC 1.0, FIXME: remove it later
     if [ -L /etc/apache2/mods-enabled/vhost_alias.load ]
     then
         a2dismod vhost_alias
@@ -454,8 +454,7 @@ if [ "$HAS_ROOT" != "1" ]; then
       echo "*                                         *"
       echo "*******************************************"
     else
-      # FIXME must be translated
-      echo "Il a été impossible de créer un nouveau membre alternc. newone.php a retourné un code d'erreur $?. Vérifiez si la base MySQL, PHP, ainsi que le fichier local.sh sont bien configurés. Vérifiez aussi si des erreurs ne sont pas apparues plus haut dans l'installation."
+	echo "Unable to create the first AlternC account (named 'admin'). newone.php returned $?. Check your MySQL database, PHP, and the /etc/alternc/local.sh file. Also check for any error above during install."
     fi
 fi
 
