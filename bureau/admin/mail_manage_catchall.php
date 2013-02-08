@@ -92,11 +92,13 @@ __("You can choose what to do with emails sent to unexisting address of this dom
     <td style="width: 50%; text-align: justify"><label for='target_type_domain'/><?php echo sprintf(_("Mails sent to john.doe@%s will be redirect to john.doe@anotherdomain.tld"),$catch['domain']);?></label></td>
     <td>
       <p>
+	<i><?php __("Enter the 'target' domain"); ?></i><br/>
         <input type="text" id="target_domain" name="target_domain" value="<?php if($catch['type']=='domain') { echo substr($catch['target'],1); } ?>" placeholder="<?php __("example.tld");?>" />
+      </p>
+	<i><?php __("Or choose one of our own"); ?></i>
         <ul>
           <?php foreach ( $dom->enum_domains() as $d) { if ($d==$catch['domain']) {continue;} echo "<li><a href=\"javascript:set_target_domain_value('".addslashes($d)."');\">$d</a></li>"; } ?>
         </ul>
-      </p>
     </td>
   </tr>
 
