@@ -17,7 +17,15 @@ $admin->enabled=1;
 
 $db->query("SELECT * FROM sub_domaines WHERE type='webmail'");
 if ($db->num_rows()) {
-  echo "WARNING: You have webmail domain-types, you need to install alternc-squirrelmail or alternc-roundcube to be able to use them again. They will work but may break until you do that\n";
+  echo "################################################################################\n";
+  echo "WARNING: You have WEBMAIL domain-types, you need to install alternc-squirrelmail or alternc-roundcube\n";
+  echo "to be able to use them again. those subdomains will be broken until you do that\n";
+  echo "Also, a script converts your procmail-builder filters to the new SIEVE protocol.\n";
+  echo "This script is in /usr/lib/alternc/procmail_to_sieve.php once to migrate\n";
+  echo "PRESS ENTER TO CONTINUE\n";
+  echo "################################################################################\n";
+  $f=fopen("php://stdin","rb");fgets($f,10); fclose($f);
+  
 }
 
 //updating db and dbusers tables

@@ -586,7 +586,6 @@ squirrelmail/Makefile -text
 squirrelmail/alternc_changepass/change.php -text
 squirrelmail/alternc_changepass/setup.php -text
 squirrelmail/class/m_squirrelmail.php -text
-squirrelmail/procmail_to_sieve_squirrelmail.php -text
 squirrelmail/squirrelmail-install -text
 squirrelmail/templates/apache2/squirrelmail.conf -text
 squirrelmail/templates/squirrelmail/alternc-changepass.conf -text
@@ -615,6 +614,7 @@ src/mail_dodelete.php -text
 src/mem_add -text
 src/mem_del -text
 src/popimap-log-login.sh -text
+src/procmail_to_sieve.php -text
 src/quota-warning.sh -text
 src/quota_delete -text
 src/quota_edit -text
