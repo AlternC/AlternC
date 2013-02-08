@@ -80,8 +80,8 @@ class m_squirrelmail {
       "$fullmail2.abook", 
       "$fullmail2.pref");
 
-    foreach ( $todel as $t ) { 
-      if (file_exists($t) ) {
+    foreach ( $todel as $t ) {
+      if (file_exists("/var/lib/squirrelmail/data/$t") ) {
         @unlink("/var/lib/squirrelmail/data/$t");
       }
     }
