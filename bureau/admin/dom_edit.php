@@ -137,8 +137,12 @@ for($i=0;$i<$r["nsub"];$i++) {
 			?></a></div></td>
 		<td><div class="retour-auto"><?php __($r['sub'][$i]['type_desc']); ?>
  <?php 
- if ($r["sub"][$i]['type'] === 'VHOST') {
-  echo '<br /><a href="bro_main.php?R='.urlencode($r["sub"][$i]["dest"]).'">'.htmlspecialchars($r["sub"][$i]["dest"]).'</a>';
+ //if ($r["sub"][$i]['type'] === 'VHOST') {
+ if ( $dt[$r["sub"][$i]['type']]['target'] === 'DIRECTORY') {
+  $iidir=$r["sub"][$i]["dest"];
+  if ($iidir=='') $iidir='/';
+  echo '<br /><a href="bro_main.php?R='.urlencode($iidir).'">'.htmlspecialchars($iidir).'</a>';
+  if ( ! file_exists($bro->convertabsolute($iidir,0))) { echo " <i style='color:red;'>"._("Directory not found")."</i>"; }
 } else {
   if ($r["sub"][$i]['type']) echo "<br />".htmlspecialchars($r["sub"][$i]["dest"]);
 }
