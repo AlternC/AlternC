@@ -1,3 +1,48 @@
+alternc (3.0) stable; urgency=low
+
+  * RELEASE of AlternC 3.0
+    Installation doc in French: http://alternc.org/wiki/Documentation/Fr/Administrateur/Installer-3.0
+    More on AlternC 3.0 upgrade, installation instructions etc: http://www.alternc.com/
+  * #1380 (double avertissement sur les quotas) closed by squidly
+  * #1350 (Suppression preferences webmail a la suppression d'un compte mail) closed by axel
+  * #1448 (ordre des mise à jour) closed by fufroma
+  * #1262 (Upgrade script for procmail rules) closed by benjamin
+  * #1446 (manque des écrasement de conf) closed by benjamin
+  * #1445 (upgrade missing webmail) closed by benjamin
+  * #1420 (Questions Debconf pas claires) closed by benjamin
+  * #1019 (conflit entre la config de bind et /etc/resolv.conf) closed by benjamin
+  * #1429 (templatisation local.sh) closed by benjamin
+  * #1409 (Problème openbasedir altern-squirrelmail) closed by benjamin
+  * #1375 (Problème ergonomie quota) closed by benjamin
+  * #1259 (Tester la séparation db user/system) closed by benjamin
+  * #1255 (List successfully created return a 550 in specific conditions) closed by benjamin
+  * #1329 (alternc slavedns utilise un fichier flag, un nouveau champ dans la bdd ...) closed by benjamin
+  * #1447 (Droits de l'utilisateur SQL) closed by fufroma
+  * #1444 (/etc/alternc/bureau.conf lors d'une maj) closed by fufroma
+  * #1437 (Modif de checkpolicy) closed by benjamin
+  * #1382 (update_domains trop long) closed by fufroma
+  * #1443 (Questions debian) closed by fufroma
+  * #1418 (Notices PHP sur le bureau) closed by fufroma
+  * #1440 (config_real.php encore utilisé ?) closed by fufroma
+  * #1442 (Langue Dutch (Netherlands) manquante) closed by fufroma
+  * #1441 (Finitions TNG) closed by fufroma
+  * #1439 (Mysql restore dans le cas de serveurs MySQL utilisateur distinct du ...) closed by squidly
+  * #1434 (erreur dans les scripts) closed by squidly
+  * #1389 (test migration ALternc 0.9.8 vers 3.0~RC1) closed by squidly
+  * #1435 (Alternc-mailman) closed by fufroma
+  * #1425 (Alternc-mailman) closed by squidly
+  * #1424 (Alias mailman) closed by squidly
+  * #1430 (Erreur à l'install alternc) closed by squidly
+  * #1383 (Erreurs à l'upgrade) closed by squidly
+  * #1432 (Impossible d'ajout un host ipv6) closed by fufroma
+  * #1433 (Création d'un host multi-ip) closed by fufroma
+  * #1410 (problème quotas mail après migration 1.0 => 3.0 rc2) closed by squidly
+  * #1423 (page blanche réaction compte ftp) closed by fufroma
+  * #1426 (module ftp) closed by fufroma
+  * #1427 (Scrollbar horizontale à l'édition d'un domaine) closed by fufroma
+
+ -- Benjamin Sonntag <benjamin@sonntag.fr>  Fri,  8 Feb 2013 17:09:00 +0100
+
 alternc (3.0~rc3) unstable; urgency=low
 
   * 3.0~rc3 release, fixing the following :
