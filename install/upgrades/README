@@ -1,6 +1,16 @@
 Fonctionnement des scripts de mise-à-jour d'AlternC
 ===================================================
 
+/!\ ATTENTION /!\
+Votre script DOIT etre numéroté sur trois chiffres, pas plus, pas moins.
+Donc : 
+ 1.0.1.sql -> OK
+ 1.0.2.5.sql -> PAS OK
+ 1.0.sql -> PAS OK
+
+Sinon, ca sera dans n'importe quel ordre.
+
+
 Il a été décidé que des mises-à-jour pourront être "accrochées" à
 certaines versions en les mettant dans le dossier upgrades. Lors de
 l'installation d'un paquet, un script (upggrade_check.sh) examine ce
