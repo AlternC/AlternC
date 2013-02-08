@@ -26,9 +26,13 @@ do
     # merge the po for debconf into the relevant file for the modules : 
     if [ "$lang" != "en_US" ]
     then
-	msgcat --use-first --less-than=3 --more-than=1 -o tmp.po  "lang/${lang}.po" "debian/po/${sublang}.po"
+	cat "debian/po/${sublang}.po" | sed -e 's/msgstr ""/msgstr "**DUMMY**"/'  >tmp-debconf.po
+	msgcat --use-first --less-than=3 --more-than=1 -o tmp.po  "lang/${lang}.po" "tmp-debconf.po"
+	rm "tmp-debconf.po"
 	mv -f tmp.po "debian/po/${sublang}.po"
-	msgcat --use-first --less-than=3 --more-than=1 -o tmp.po  "lang/${lang}.po" "../../alternc-mailman/trunk/debian/po/${sublang}.po"
+	cat "../../alternc-mailman/trunk/debian/po/${sublang}.po" | sed -e 's/msgstr ""/msgstr "**DUMMY**"/'  >tmp-debconf.po
+	msgcat --use-first --less-than=3 --more-than=1 -o tmp.po  "lang/${lang}.po" "tmp-debconf.po"
+	rm "tmp-debconf.po"
 	mv -f tmp.po "../../alternc-mailman/trunk/debian/po/${sublang}.po"
     fi
     echo "done"
