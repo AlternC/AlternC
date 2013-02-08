@@ -203,6 +203,7 @@ s\\%%ns2_ip%%\\$NS2_IP\\;
 EOF
 
 # hook 
+test -d /usr/lib/alternc/install.d || mkdir -p /usr/lib/alternc/install.d
 run-parts --arg=templates /usr/lib/alternc/install.d 
 
 
@@ -391,6 +392,10 @@ if [ -x /usr/sbin/locale-gen ] ; then
 	echo "it_IT.UTF-8 UTF-8" >>/etc/locale.gen
 	LOCALECHANGED=1
     fi
+    if ! grep -q "^nl_NL.UTF-8 UTF-8$" /etc/locale.gen ; then
+	echo "nl_NL.UTF-8 UTF-8" >>/etc/locale.gen
+	LOCALECHANGED=1
+    fi
     if [ "$LOCALECHANGED" ] ; then
 	locale-gen
     fi
@@ -449,6 +454,7 @@ if [ "$HAS_ROOT" != "1" ]; then
       echo "*                                         *"
       echo "*******************************************"
     else
+      # FIXME must be translated
       echo "Il a été impossible de créer un nouveau membre alternc. newone.php a retourné un code d'erreur $?. Vérifiez si la base MySQL, PHP, ainsi que le fichier local.sh sont bien configurés. Vérifiez aussi si des erreurs ne sont pas apparues plus haut dans l'installation."
     fi
 fi
