@@ -1,3 +1,4 @@
+#!/usr/bin/php
 <?php
 /* 
   AlternC - Web Hosting System
