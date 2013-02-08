@@ -35,7 +35,10 @@ if (isset($q["t"]) && isset($r["u"]) && $q["t"] > 0 && $r["u"] > 0) {
 ?>
 <div class="menu-box">
   <a href="aws_list.php">
-    <div class="menu-title"><img src="images/stat.png" alt="<?php __("Web Statistics"); ?>" />&nbsp;<?php __("Web Statistics"); ?> (<?= $q["u"]; ?>/<?= $q["t"]; ?>)</div>
+    <div class="menu-title">
+      <img src="images/stat.png" alt="<?php __("Web Statistics"); ?>" />&nbsp;<?php __("Web Statistics"); ?> (<?= $q["u"]; ?>/<?= $q["t"]; ?>)
+			<img src="images/menu_right.png" alt="" style="float:right;" class="menu-right"/>
+    </div>
   </a>
 </div>
 <?php } ?>

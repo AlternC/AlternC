@@ -26,7 +26,10 @@
 ?>
 <div class="menu-box">
 	<a href="logs_list.php">
-		<div class="menu-title"><img src="images/logs.png" alt="<?php __("Logs"); ?>" width="16" height="16" />&nbsp;<?php __("Logs"); ?></div>
+		<div class="menu-title">
+			<img src="images/logs.png" alt="<?php __("Logs"); ?>" width="16" height="16" />&nbsp;<?php __("Logs"); ?>
+			<img src="images/menu_right.png" alt="" style="float:right;" class="menu-right"/>
+		</div>
 	</a>
 </div>
 

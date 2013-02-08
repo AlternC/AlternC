@@ -25,6 +25,7 @@
 <a href="quota_show.php">
   <div class="menu-title">
     <img src="images/quota.png" alt="<?php __("Show my quotas"); ?>" />&nbsp;<?php __("Show my quotas"); ?>
+    <img src="images/menu_right.png" alt="" style="float:right;" class="menu-right"/>
   </div>
 </a>
   <?php
@@ -66,7 +67,7 @@
       $url = ($key == 'bw_web' ? 'stats_show_per_month.php' : 'quota_show.php');
 
       echo "<dd>";
-      echo '<div><a href="' . $url . '">' . /* _($val) */  _("quota_".$key) . ' ' . $usage_percent . '%' . ' (' . format_size($q[$key]["u"]) . ' / ' . format_size($q[$key]["t"]) . ')</a></div>';
+      echo '<div><a href="' . $url . '">' . /* _($val) */  _("quota_".$key) . ' ' . $usage_percent . '%' . ' <small>(' . format_size($q[$key]["u"],true) . '&nbsp;/&nbsp;' . format_size($q[$key]["t"],true) . ')</small></a></div>';
       echo "</dd>";
       echo "<dd>";
       echo '<div class="progress-bar">';

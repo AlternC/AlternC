@@ -30,7 +30,8 @@ if ($q['t'] > 0 || $q['u'] > 0)  {
 <div class="menu-box">
 <a href="cron.php">
 <div class="menu-title">
-<img src="images/schedule.png" alt="<?php __("Scheduled tasks"); ?>" width=16px height=16px/>&nbsp;<?php __("Scheduled tasks"); ?> (<?php echo $q["u"].'/'.$q["t"]; ?>)
+  <img src="images/schedule.png" alt="<?php __("Scheduled tasks"); ?>" width=16px height=16px/>&nbsp;<?php __("Scheduled tasks"); ?> (<?php echo $q["u"].'/'.$q["t"]; ?>)
+  <img src="images/menu_right.png" alt="" style="float:right;" class="menu-right"/>
 </div>
 </a>
 </div>

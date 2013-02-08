@@ -24,6 +24,9 @@
 ?>
 <div class="menu-box">
 	<a href="bro_main.php">
-		<div class="menu-title"><img src="images/folder.png" alt="<?php __("File browser"); ?>" />&nbsp;<?php __("File browser"); ?></div>
+		<div class="menu-title">
+			<img src="images/folder.png" alt="<?php __("File browser"); ?>" />&nbsp;<?php __("File browser"); ?>
+			<img src="images/menu_right.png" alt="" style="float:right;" class="menu-right"/>
+		</div>
 	</a>
 </div>

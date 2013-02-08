@@ -28,6 +28,7 @@
 <a href="ip_main.php">
 	<div class="menu-title">
 		<img src="images/ip.png" alt="<?php __("Access security"); ?>" width="16" height="16" />&nbsp;<?php __("Access security"); ?>
+		<img src="images/menu_right.png" alt="" style="float:right;" class="menu-right"/>
 	</div>
 </a>
 </div>

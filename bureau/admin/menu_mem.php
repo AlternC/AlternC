@@ -23,7 +23,10 @@
 ?>
 <div class="menu-box">
 <a href="mem_param.php">
-	<div class="menu-title"><img src="images/config.png" alt="<?php __("Settings"); ?>" />&nbsp;<?php __("Settings"); ?></div>
+	<div class="menu-title">
+		<img src="images/config.png" alt="<?php __("Settings"); ?>" />&nbsp;<?php __("Settings"); ?>
+		<img src="images/menu_right.png" alt="" style="float:right;" class="menu-right"/>
+	</div>
 </a>
 </div>
 <div class="menu-box">

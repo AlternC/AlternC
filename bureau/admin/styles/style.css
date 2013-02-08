@@ -71,6 +71,16 @@ hr {
   border-width: 1px 0 0 0;
 }
 
+a {
+  text-decoration: none;
+  color: #0D5689;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #000000;
+}
+
 fieldset {
   border: 1px solid #555;
 }
@@ -93,22 +103,34 @@ fieldset {
 }
 
 .inb {
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;  
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;  
   border: 1px solid #999;
   font-family: Verdana, Arial, Helvetica, sans-serif;
   font-size: 11px;
-  padding: 4px;
-  padding-left: 6px;
-  padding-right: 6px;
+  padding: 4px 6px;
   color: black;
   background-color: #CFE3F1;
   cursor: pointer;
   margin-right: 4px;
+  height: 25px;
+  vertical-align: middle;
 }
 .inb:hover {
   background-color: #BFD3E1;
+}
+.ina a, .ina a:hover, .inb a, .inb a:hover {
+  color: #000;
+  text-decoration: none;
+  vertical-align: middle;
+  line-height: 15px;
+}
+
+span.inb {
+  display: inline-block;
+  height: 15px;
+  padding: 4px 6px;
 }
 
 input.ina:hover, input.ina, input.inav, input.inav:hover {
@@ -147,12 +169,17 @@ input.inav:hover, .inav a:hover, a.inav:hover {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;  
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 15px;
+  height: 15px;
 }
 input[type=button],
 input[type=submit] {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;  
+  height: 25px;
 }
 .ina a:hover, a.ina:hover, .inav a:hover, a.inav:hover {
   text-decoration: none;
@@ -161,7 +188,8 @@ input[type=submit] {
 
 .ina img, .ina img {
   vertical-align: middle;
-  padding: 2px 2px 5px 0;
+  padding: 0 2px 0 0;
+  float: left;
 }
 .bff {
   border: 1px solid #999;
@@ -218,6 +246,11 @@ img {
   border: 1px solid #CC9966; 
   padding: 10px; 
   text-align: left;
+}
+
+.alerte {
+  color: #A00;
+  font-style: italic;
 }
 
 /* Over quota class */
@@ -406,16 +439,6 @@ table.searchtable td {
   text-align: center;
   margin-left: auto;
   margin-right: auto;
-}
-
-a {
-  text-decoration: none;
-  color: #0D5689;
-}
-
-a:hover {
-  text-decoration: underline;
-  color: #000000;
 }
 
 .border {

@@ -269,7 +269,7 @@ function ife($test,$tr,$fa="") {
     return $fa;
 }
 
-function format_size($size) {
+function format_size($size,$html=0) {
   // Retourne une taille formattée en Octets, Kilo-octets, Méga-octets ou Giga-Octets, avec 2 décimales.
   if ("-" == $size) {
     return $size;
@@ -300,7 +300,11 @@ function format_size($size) {
       }
     }
   }
-  return $r;
+  if ($html) {
+    return str_replace(" ","&nbsp;",$r);
+  }else{
+    return $r;
+  }
 }
 
 function getlinkhelp($hid) {
@@ -635,7 +639,7 @@ function display_browser($dir="", $caller="main.dir", $width=350, $height=450) {
               open: function()
                 {
                     $('.ui-widget-overlay').css('opacity', .70);
-                    $('.ui-dialog-content').css('background-color', '#F0F0F4');
+                    $('.ui-dialog-content').css('background-color', '#F0F0FA');
                 },
             });
          

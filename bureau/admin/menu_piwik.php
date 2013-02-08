@@ -28,7 +28,8 @@ if (!empty($piwik->piwik_server_uri) && ($q["t"] > 0 || $r["u"] > 0)) {
 <div class="menu-box">
 <a href="javascript:menu_toggle('menu-piwik');">
 	<div class="menu-title">
-	<img src="images/stat.png" alt="<?php __("Piwik statistics"); ?>" />&nbsp;<?php __("Piwik statistics"); ?>&nbsp;(<?php echo $q["u"]; ?>/<?php echo $q["t"]; ?>)
+		<img src="images/stat.png" alt="<?php __("Piwik statistics"); ?>" />&nbsp;<?php __("Piwik statistics"); ?>&nbsp;(<?php echo $q["u"]; ?>/<?php echo $q["t"]; ?>)
+		<img src="images/menu_right.png" alt="" style="float:right;" class="menu-right"/>
 	</div>
 </a>
 <div class="menu-content" id="menu-piwik">

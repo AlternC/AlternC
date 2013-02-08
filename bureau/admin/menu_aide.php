@@ -23,6 +23,9 @@
 ?>
 <div class="menu-box">
 	<a href="<?php echo $help_baseurl; ?>" target="help">
-		<div class="menu-title"><img src="images/help.png" alt="<?php __("Online help"); ?>" />&nbsp;<?php __("Online help"); ?></div>
+		<div class="menu-title">
+			<img src="images/help.png" alt="<?php __("Online help"); ?>" />&nbsp;<?php __("Online help"); ?>
+			<img src="images/menu_right.png" alt="" style="float:right;" class="menu-right"/>
+		</div>
 	</a>
 </div>
