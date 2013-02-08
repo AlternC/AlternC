@@ -1,5 +1,4 @@
 #!/bin/bash
-set -x
 . /etc/alternc/local.sh
 # Set disk quota to an user
 # Won't work over NFS
