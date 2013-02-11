@@ -37,9 +37,10 @@ $db->query("select distinct uid,login,pass from db;");
 //on insere dans dbusers avec enabled = admin
 $query=array();
 while($db->next_record()){
- $query[]="insert or update into dbusers values('',".$db->f('uid').",'".$db->f('login')."','".$db->f('pass')."',\"ADMIN\");";
+ $query[]="insert into dbusers values('',".$db->f('uid').",'".$db->f('login')."','".$db->f('pass')."',\"ADMIN\");";
 }
 foreach ($query as $q){
+print_r($q);
 $db->query($q);
 }
 
