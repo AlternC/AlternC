@@ -27,6 +27,8 @@
 # Purpose of file: Parse the mysql logs to give the n most active users
 # ----------------------------------------------------------------------
 #
+echo "This script does not work with this AlternC version"
+exit 1
 PATH=""
 PROG_NAME=top_mysql_users
 PROG_VERSION=0.1.0

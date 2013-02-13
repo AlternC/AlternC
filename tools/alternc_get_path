@@ -1,5 +1,7 @@
 #! /bin/sh -e
 
+echo "This script is not working with this AlternC version" 
+exit 0
 path="$1"
 account=`echo "$path" | sed 's#/var/alternc/html/./##' | cut -d '/' -f 1`
 relpath=`echo "$path" | sed 's#/var/alternc/html/./[^/]*##'`
