@@ -1,12 +1,36 @@
-#! /bin/sh -e
+#! /bin/bash
 
-echo "This script is not working with this AlternC version" 
-exit 0
 path="$1"
+
+if [ -z "$path" ] ; then
+  echo "Give a full-path directory to this script, it will tell"
+  echo "you if you can access it with a website"
+  echo ""
+  echo "Missing parameters"
+  echo "Usage: $0 <directory>"
+  echo "Example: $0 /var/alternc/html/a/admin/mydir/"
+  exit 0
+fi
+
 account=`echo "$path" | sed 's#/var/alternc/html/./##' | cut -d '/' -f 1`
 relpath=`echo "$path" | sed 's#/var/alternc/html/./[^/]*##'`
 
-request="SELECT membres.login AS user, CONCAT('http://', s.sub, '.', s.domaine, s.valeur) AS fqdn FROM sub_domaines s INNER JOIN membres ON s.compte=uid WHERE login='$account' AND s.type = 0 AND '$relpath' LIKE CONCAT(s.valeur,'%') ORDER BY sub ASC;"
+request="SELECT
+  m.login AS user,
+  CONCAT('http://', s.sub, if(s.sub='','','.'), s.domaine, s.valeur) AS fqdn
+FROM
+  sub_domaines s,
+  membres m,
+  domaines_type dt
+WHERE
+  m.login='$account'
+  AND m.uid = s.compte
+  AND s.type = dt.name
+  AND dt.target = 'DIRECTORY'
+  AND '$relpath' LIKE CONCAT( if(s.valeur='','/',s.valeur) ,'%')
+ORDER BY sub ASC
+;
+"
 
 mysql --defaults-file=/etc/alternc/my.cnf -B -e "$request"
 
