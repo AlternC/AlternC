@@ -150,10 +150,6 @@ if (isset($actextract) && $actextract) {
   }
 }
 
-/* Creation de la liste des fichiers courants */
-$c=$bro->filelist($R, $showdirsize );
-if ($c===false) $error=$err->errstr();
-
 ?>
 <h3><?php __("File browser"); ?></h3>
 <table border="0" width="100%" cellspacing="0">
@@ -161,12 +157,21 @@ if ($c===false) $error=$err->errstr();
 
 <hr />
 
-
 <p class="breadcrumb">
 <?php __("Path"); ?> / <a href="bro_main.php?R=/"><?php echo $mem->user["login"]; ?></a>&nbsp;/&nbsp;<?php echo $bro->PathList($R,"bro_main.php") ?>
 </p>
 
-<?php if (isset($error) && $error) echo "<p class=\"error\">$error</p>"; ?>
+<?php
+/* Creation de la liste des fichiers courants */
+$c=$bro->filelist($R, $showdirsize );
+if ($c===false) {
+  echo "<p class=\"error\">".$err->errstr()."</p>";
+  require_once('foot.php');
+  exit;
+}
+
+if (isset($error) && $error) echo "<p class=\"error\">$error</p>"; 
+?>
 
 <table><tr>
 <td class="formcell">

@@ -160,9 +160,13 @@ class m_bro {
    * @return array le tableau contenant les fichiers de $dir, et
    */
   function filelist($dir="", $showdirsize = false) {
-    global $db,$cuid;
+    global $db,$cuid,$err;
     $db->query("UPDATE browser SET lastdir='$dir' WHERE uid='$cuid';");
     $absolute=$this->convertabsolute($dir,0);
+    if (! file_exists($absolute)) {
+      $err->raise('bro',_("This directory do not exist"));
+      return false;
+    }
     if ($dir = @opendir($absolute)) {
       while (($file = readdir($dir)) !== false) {
 	if ($file!="." && $file!="..") {
