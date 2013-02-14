@@ -338,6 +338,7 @@ class m_mem {
     $hooks->invoke("alternc_del_session");
     
     session_unset();
+    @session_destroy();
     return true;
   }
 
