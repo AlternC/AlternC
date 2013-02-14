@@ -216,7 +216,7 @@ $val=$r[$z];
 <?php if ($val["su"]) { ?>
 			<td>&nbsp;</td>
 <?php } else { ?>
- <td align="center"><input type="checkbox" class="inc" name="d[]" value="<?php echo $val["uid"]; ?>" /></td>
+ <td align="center"><input type="checkbox" class="inc" name="d[]" value="<?php echo $val["uid"]; ?>" id="id_c_<?php echo $val["uid"]; ?>" /></td>
 <?php } ?>
 		<td align="center">
 		   <a href="adm_login.php?id=<?php echo $val["uid"];?>" title="<?php __("Connect as"); ?>">[&nbsp;<?php __("C"); ?>&nbsp;]</a>
@@ -225,7 +225,7 @@ $val=$r[$z];
 		   <a href="adm_quotaedit.php?uid=<?php echo $val["uid"] ?>" title="<?php __("Quotas"); ?>">[&nbsp;<?php __("Q"); ?>&nbsp;]</a>
 							  <?php } ?>
 		</td>
-		<td style="padding-right: 2px; border-right: 1px solid black; <?php if ($val["su"]) echo "color: red"; ?>"><b><?php echo $val["login"] ?></b></td>
+		<td style="padding-right: 2px; border-right: 1px solid black; <?php if ($val["su"]) echo "color: red"; ?>"><b><label for="id_c_<?php echo $val["uid"]; ?>"><?php echo $val["login"] ?></label></b></td>
 <?php
 $val=$r[$z+$rz];
 if (is_array($val)) {
@@ -233,7 +233,7 @@ if (is_array($val)) {
 <?php if ($val["su"]) { ?>
 			<td>&nbsp;</td>
 <?php } else { ?>
- <td align="center"><input type="checkbox" class="inc" name="d[]" value="<?php echo $val["uid"]; ?>"></td>
+ <td align="center"><input type="checkbox" class="inc" name="d[]" value="<?php echo $val["uid"]; ?>" id="id_c_<?php echo $val["uid"]; ?>" /></td>
 <?php } ?>
 		<td align="center">
 		   <a href="adm_login.php?id=<?php echo $val["uid"];?>" title="<?php __("Connect as"); ?>">[&nbsp;<?php __("C"); ?>&nbsp;]</a>
@@ -242,7 +242,7 @@ if (is_array($val)) {
 		   <a href="adm_quotaedit.php?uid=<?php echo $val["uid"] ?>" title="<?php __("Quotas"); ?>">[&nbsp;<?php __("Q"); ?>&nbsp;]</a>
 							  <?php } ?>
 		</td>
-		<td style="padding-right: 2px; border-right: 1px solid black; <?php if ($val["su"]) echo "color: red"; ?>"><b><?php echo $val["login"] ?></b></td>
+		<td style="padding-right: 2px; border-right: 1px solid black; <?php if ($val["su"]) echo "color: red"; ?>"><b><label for="id_c_<?php echo $val["uid"]; ?>"><?php echo $val["login"] ?></label></b></td>
 <?php
 
 } else echo "<td style=\"padding-right: 2px; border-right: 1px solid;\" colspan=\"3\"></td></tr>";
@@ -257,7 +257,7 @@ if (is_array($val)) {
 <?php if ($val["su"]) { ?>
 			<td>&nbsp;</td>
 <?php } else { ?>
- <td align="center"><input type="checkbox" class="inc" name="d[]" value="<?php echo $val["uid"]; ?>"></td>
+ <td align="center"><input type="checkbox" class="inc" name="d[]" value="<?php echo $val["uid"]; ?>" id="id_c_<?php echo $val["uid"]; ?>" /></td>
 <?php } ?>
 		<td align="center">
 		   <a href="adm_login.php?id=<?php echo $val["uid"];?>" title="<?php __("Connect as"); ?>">[&nbsp;<?php __("C"); ?>&nbsp;]</a>
@@ -266,7 +266,7 @@ if (is_array($val)) {
 		   <a href="adm_quotaedit.php?uid=<?php echo $val["uid"] ?>" title="<?php __("Quotas"); ?>">[&nbsp;<?php __("Q"); ?>&nbsp;]</a>
 							  <?php } ?>
 		</td>
-		<td style="padding-right: 2px; border-right: 1px solid black; <?php if ($val["su"]) echo "color: red"; ?>"><b><?php echo $val["login"] ?></b></td>
+		<td style="padding-right: 2px; border-right: 1px solid black; <?php if ($val["su"]) echo "color: red"; ?>"><b><label for="id_c_<?php echo $val["uid"]; ?>"><?php echo $val["login"] ?></label></b></td>
 	</tr>
 <?php
 	} else echo "<td style=\"padding-right: 2px; border-right: 1px solid;\" colspan=\"3\"></td></tr>";

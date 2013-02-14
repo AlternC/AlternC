@@ -68,7 +68,7 @@ $dom->unlock();
     ?>
     <tr id="tr_<?php echo $dt['name']; ?>">
       <td>
-        <input type="radio" id="r_<?php echo $dt['name']?>" class="inc" name="type" value="<?php echo $dt['name']; ?>" <?php cbox(strtoupper($type)==strtoupper($dt['name'])); ?> />
+        <input type="radio" id="r_<?php echo $dt['name']?>" class="inc" name="type" value="<?php echo $dt['name']; ?>" <?php cbox(strtoupper($type)==strtoupper($dt['name'])); ?> OnClick="getElementById('t_<?php echo $dt['name']?>').focus();"/>
         <label for="r_<?php echo $dt['name']?>"><?php __($dt['description']); ?></label>
       </td>
       <td>
