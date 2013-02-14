@@ -582,10 +582,6 @@ Cordially.
     return $str;
   }
 
-/*
-  // Embryon pour stocker une variable "le temps d'une session".
-  // Mis en pause car il faudrait faire session_start pour avoir $_SESSION
-  // Donc peux y avoir des effets de bords... fun...
   function session_tempo_params_get($v) {
     $sid=$_COOKIE['session'];
     if ( empty($_SESSION[$sid]) ) { // si pas de session de params tempo
@@ -613,7 +609,6 @@ Cordially.
     $_SESSION[$sid]=serialize($p);
     return true;
   }
-*/
 
 } /* Classe Membre */
 

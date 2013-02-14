@@ -13,6 +13,3 @@
   </ul>
  </div>
 </div>
-<script type="text/javascript">
-  menu_toggle('menu-lang');
-</script>

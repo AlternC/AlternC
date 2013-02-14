@@ -33,6 +33,8 @@
 ini_set('display_errors', true);
 /* */
 
+session_start();
+
 /*
   Si vous voulez mettre le bureau en maintenance, décommentez le code ci-dessous
   et mettez votre ip dans le IF pour que seule votre ip puisse accéder au bureau : 

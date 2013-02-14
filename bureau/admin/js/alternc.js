@@ -202,23 +202,18 @@ function is_valid_mail(arg) {
 
 function menu_toggle(id) {
   $("#"+id).toggle(200, function() {
+    var tmpi = {};
     // Animation complete.
-		if ($("#"+id).is(":hidden")) {
-			$("#"+id+"-img").attr("src","images/menu_plus.png");
-		} else {
-			$("#"+id+"-img").attr("src","images/menu_moins.png");
-		}
+    if ($("#"+id).is(":hidden")) {
+      $("#"+id+"-img").attr("src","images/menu_plus.png");
+      tmpi[''+id] = 'hidden';
+    } else {
+      $("#"+id+"-img").attr("src","images/menu_moins.png");
+      tmpi[''+id] = 'visible';
+    }
+    $.post('tempovars.php', { 'key' : 'menu_toggle', 'val' : tmpi })
   });
 
-/* Pour quand on voudra enregistrer l'etat du menu ;)
-  var tmp = {};
-  if( $('#'+id).is(':visible') ) {
-    tmp[''+id] = 'visible';
-  } else {
-    tmp[''+id] = 'hidden';
-  }
-  $.post('tempovars.php', { 'key' : 'menu_toggle', 'val' : tmp })
-*/
 }
 
 function false_if_empty(id,err_msg) {

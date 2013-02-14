@@ -1,7 +1,5 @@
 <?php 
 
-die();
-
 // Faut finir de le developper. Se fait appeler avec en POST les infos a stocker dans la variable de session
 // Mis en pause => voir commentaire en bas de la classe m_mem
 
@@ -23,6 +21,7 @@ if (empty($val)) {
 if ( $mem->session_tempo_params_set($key, $val) ) {
   die('0');
 }
+
 die('3');
 
 

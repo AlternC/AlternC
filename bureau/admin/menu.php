@@ -55,3 +55,14 @@ foreach($file as $v) {
 echo "$L_VERSION";
 ?>
 </p>
+
+<script type="text/javascript">
+<?php 
+foreach( $mem->session_tempo_params_get('menu_toggle') as $k => $v ) {
+  if ($v == 'hidden') echo "menu_toggle('$k');\n";
+}
+?>
+</script>
+
+
+
