@@ -52,7 +52,7 @@ Merci de revenir plus tard.";
 // FIXME: Some constant, we put them here so that we can change them later ;) LFS 
 define('ALTERNC_MAIL',     "/var/alternc/mail");
 define('ALTERNC_HTML',     "/var/alternc/html");
-define('ALTERNC_PANEL',    "/var/alternc/bureau");
+define('ALTERNC_PANEL',    "/usr/lib/alternc/panel");
 define('ALTERNC_LOGS',     "/var/alternc/logs");
 define('ALTERNC_LOCALES',  "/var/alternc/bureau/locales");
 

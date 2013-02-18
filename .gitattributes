@@ -5,15 +5,6 @@
 /COPYING -text
 /DEBIAN_COMPLIANCE -text
 /README -text
-aide/bin/build.sh -text
-aide/bin/frames.dsl -text
-aide/brouteur.sgml -text
-aide/domain.sgml -text
-aide/ftp.sgml -text
-aide/index.sgml -text
-aide/sommaire.sgml -text
-aide/stats.sgml -text
-aide/test.sgml -text
 awstats/Makefile -text
 awstats/alternc-awstats -text
 awstats/alterncawstats.conf -text
