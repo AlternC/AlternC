@@ -459,6 +459,8 @@ etc/alternc/phpmyadmin.inc.php -text
 etc/alternc/templates/alternc/apache2.conf -text
 etc/alternc/templates/alternc/apache_logformat.conf -text
 etc/alternc/templates/alternc/bureau.conf -text
+etc/alternc/templates/alternc/postfix/postfix-slave.cf -text
+etc/alternc/templates/alternc/postfix/postfix.cf -text
 etc/alternc/templates/apache2/panel.conf -text
 etc/alternc/templates/apache2/url.conf -text
 etc/alternc/templates/apache2/vhost.conf -text
@@ -484,8 +486,6 @@ etc/alternc/templates/postfix/myrelay-domain.cf -text
 etc/alternc/templates/postfix/myrelay.cf -text
 etc/alternc/templates/postfix/mytransport.cf -text
 etc/alternc/templates/postfix/myvirtual.cf -text
-etc/alternc/templates/postfix/postfix-slave.cf -text
-etc/alternc/templates/postfix/postfix.cf -text
 etc/alternc/templates/postfix/sasl/smtpd.conf -text
 etc/alternc/templates/proftpd/modules.conf -text
 etc/alternc/templates/proftpd/proftpd.conf -text

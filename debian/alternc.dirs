@@ -1,6 +1,7 @@
 etc/alternc
 etc/alternc/apache-panel.d
 etc/alternc/templates
+etc/alternc/postfix
 etc/alternc/templates/apache2
 etc/alternc/functions_hosting
 etc/bind
