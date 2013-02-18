@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # ----------------------------------------------------------------------
 # AlternC - Web Hosting System
@@ -479,7 +479,7 @@ chgrp vmail /etc/dovecot/dovecot.conf
 chmod g+r /etc/dovecot/dovecot.conf
 
 # Changing owner of web panel's files
-chown -R alterncpanel:alterncpanel "$ALTERNC_LOC/bureau"
+chown -R alterncpanel:alterncpanel "/usr/share/alternc/panel/"
 
 # We force the re-computing of the DNS zones, since we may have changed the IP address (see #460)
 /usr/bin/mysql --defaults-file="/etc/alternc/my.cnf" -B -e "update domaines set dns_action='update';"
