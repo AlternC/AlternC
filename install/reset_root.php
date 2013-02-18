@@ -30,8 +30,8 @@
 */
 
 // Ne vérifie pas ma session :)
-chdir("/var/alternc/bureau");
-require("/var/alternc/bureau/class/config_nochk.php");
+chdir("/usr/lib/alternc/panel/");
+require("/usr/lib/alternc/panel/class/config_nochk.php");
 
 // On passe super-admin
 $admin->enabled=1;

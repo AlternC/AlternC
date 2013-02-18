@@ -1,7 +1,7 @@
 #!/usr/bin/php -q
 <?php
 
-require_once("/var/alternc/bureau/class/config_nochk.php");
+require_once("/usr/lib/alternc/panel/class/config_nochk.php");
 // On déverrouile le bureau AlternC :) 
 @alternc_shutdown();
 
@@ -9,7 +9,7 @@ echo "---------------------------\n Generating size-cache for web accounts\n\n";
 $r=mysql_query("SELECT uid,login FROM membres;");
 while ($c=mysql_fetch_array($r)) {
   echo $c["login"]; flush();
-  $size=exec("sudo /usr/lib/alternc/du.pl /var/alternc/html/".substr($c["login"],0,1)."/".$c["login"]);
+  $size=exec("sudo /usr/lib/alternc/du.pl ".ALTERNC_HTML."/".substr($c["login"],0,1)."/".$c["login"]);
   mysql_query("REPLACE INTO size_web SET uid='".$c["uid"]."',size='$size';");
   echo " done ($size KB) \n"; flush();
 }

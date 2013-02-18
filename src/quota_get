@@ -28,7 +28,7 @@ command -v $QUOTA >/dev/null || { echo "Quotas uninstalled"; exit 0; }
 DATA_PART=`$DF "${ALTERNC_LOC}/html" 2>/dev/null | $AWK 'NR==2 { print $1 }'`
 
 # quota will give over NFS will print the partition using the full NFS name
-# (e.g. 10.0.0.1:/var/alternc) so we need to lookup first with mount
+# (e.g. 10.0.0.1:/var/www/alternc) so we need to lookup first with mount
 # to convert DATA_PART if needed.
 
 QUOTA_PART=`$MOUNT | $SED -n -e "s,\([^ ]*\) on ${DATA_PART} type nfs.*,\1,p"`

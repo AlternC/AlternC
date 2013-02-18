@@ -48,7 +48,7 @@ install: build
 	# Install
 	cp -r etc/* debian/alternc/etc
 	cp -r install/* debian/alternc/usr/share/alternc/install
-	mkdir debian/alternc/usr/lib/alternc/panel
+	test -d debian/alternc/usr/lib/alternc/panel || mkdir debian/alternc/usr/lib/alternc/panel
 	cp -r bureau/* debian/alternc/usr/lib/alternc/panel
 	(cd src && $(MAKE) install DESTDIR=$(CURDIR)/debian/alternc)
 
@@ -64,14 +64,12 @@ install: build
 	chmod 1733 debian/alternc/var/alternc/sessions
 	chmod -R 644 debian/alternc/usr/lib/alternc/panel
 	chmod -R a+X debian/alternc/usr/lib/alternc/panel
-	chown -R www-data:www-data debian/alternc/var/alternc/html debian/alternc/var/log/alternc debian/alternc/var/alternc/tmp
+	chown -R www-data:www-data debian/alternc/var/log/alternc debian/alternc/var/alternc/tmp
 	chmod a+x debian/alternc/usr/share/alternc/install/alternc.install debian/alternc/usr/share/alternc/install/dopo.sh debian/alternc/usr/share/alternc/install/mysql.sh debian/alternc/usr/share/alternc/install/newone.php debian/alternc/usr/share/alternc/install/reset_root.php debian/alternc/usr/share/alternc/install/upgrade_check.sh debian/alternc/usr/share/alternc/install/upgrades/*.php debian/alternc/usr/share/alternc/install/upgrades/*.sh
 
 	#log directory
 	mkdir -p debian/alternc/var/alternc/logs
 	chown 1999:1999 debian/alternc/var/alternc/logs
-	# Group and user 1999 reference alterncpanel
-	chown 1999:1999 debian/alternc/var/alternc/html/*
 	mkdir -p debian/alternc/var/run/alternc/
 	chown 1999:1999 debian/alternc/var/run/alternc/
 

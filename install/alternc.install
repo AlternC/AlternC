@@ -503,6 +503,7 @@ for service in $SERVICES; do
 done
 
 #launch fixperms 
+echo "Fix all the permission. May be quite long..."
 /usr/lib/alternc/fixperms.sh
 
 # hook 

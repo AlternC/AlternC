@@ -7,7 +7,7 @@ if (empty($mail_id) ) {
   die('You must specified a valid mail id (integer)');
 }
 
-require_once("/var/alternc/bureau/class/config_nochk.php");
+require_once("/usr/lib/alternc/panel/class/config_nochk.php");
 
 // Wich account should I be ?
 $uid=$mail->get_account_by_mail_id($mail_id);

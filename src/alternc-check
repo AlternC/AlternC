@@ -68,7 +68,7 @@ if ($r=="1" || $r=="a") {
   $r=mysql_query("SELECT  DISTINCT(path),uid from mail_users;");
   while ($c=mysql_fetch_array($r)) {
     echo $c["path"]." ".$c["uid"]."\n";
-    if (substr($c["path"],0,17)=="/var/alternc/mail") {
+    if (substr($c["path"],0,17)==ALTERNC_MAIL) {
       if (is_dir($c["path"])) {
 	exec("chown -R 33.".$c["uid"]." ".escapeshellarg($c["path"]));
       } else {
@@ -88,27 +88,27 @@ if ($r=="2" || $r=="a") {
   $r=mysql_query("SELECT uid,login FROM membres;");
   while ($c=mysql_fetch_array($r)) {
     echo $c["login"]." ".$c["uid"]."\n";
-    if (is_dir("/var/alternc/html/".substr($c["login"],0,1)."/".$c["login"])) { 
-      exec("chown -R 33.".$c["uid"]." ".escapeshellarg("/var/alternc/html/".substr($c["login"],0,1)."/".$c["login"]));
+    if (is_dir(ALTERNC_HTML."/".substr($c["login"],0,1)."/".$c["login"])) { 
+      exec("chown -R 33.".$c["uid"]." ".escapeshellarg(ALTERNC_HTML."/".substr($c["login"],0,1)."/".$c["login"]));
     } else {
-      echo "WARNING: Folder "."/var/alternc/html/".substr($c["login"],0,1)."/".$c["login"]." does not exist. Please do relevant check to delete associated alternc account, or recreate the folder\n";
+      echo "WARNING: Folder ".ALTERNC_HTML."/".substr($c["login"],0,1)."/".$c["login"]." does not exist. Please do relevant check to delete associated alternc account, or recreate the folder\n";
     }
   }
   echo "========== ".$checks[2]." ENDING (".date("d/m/Y H:i:s").")\n";
 }
 
 
-// Remove non-existent pop accounts in /var/alternc/mail
+// Remove non-existent pop accounts in ALTERNC_MAIL
 if ($r=="3" || $r=="a") {
   echo "========== ".$checks[3]." STARTING (".date("d/m/Y H:i:s").")\n";
-  $mail="/var/alternc/mail";
+  $mail=ALTERNC_MAIL;
   $d1=opendir($mail);
   while (($c1=readdir($d1))!==false) {
     if (substr($c1,0,1)!="." && is_dir($mail."/".$c1)) {
       $d2=opendir($mail."/".$c1);
       while ($c2=readdir($d2)) {
 	if (substr($c2,0,1)!="." && is_dir($mail."/".$c1."/".$c2)) {
-	  // Ok, we have a mail folder in /var/alternc/mail/p/popaccount_domain.tld/ Let's check it in the db : 
+	  // Ok, we have a mail folder in /var/mail/alternc/p/popaccount_domain.tld/ Let's check it in the db : 
 	  list($alias)=@mysql_fetch_array(mysql_query("SELECT alias FROM mail_users WHERE path='".addslashes($mail."/".$c1."/".$c2)."';"));
 	  if (!$alias) {
 	    echo "WARNING: NOT FOUND: ".$mail."/".$c1."/".$c2.", deleting old pop folder.\n";
@@ -131,17 +131,17 @@ if ($r=="3" || $r=="a") {
 }
 
 
-// Remove non-existent alternc accounts in /var/alternc/html
+// Remove non-existent alternc accounts in ALTERNC_HTML
 if ($r=="4" || $r=="a") {
   echo "========== ".$checks[4]." STARTING (".date("d/m/Y H:i:s").")\n";
-  $html="/var/alternc/html";
+  $html=ALTERNC_HTML;
   $d1=opendir($html);
   while (($c1=readdir($d1))!==false) {
     if (substr($c1,0,1)!="." && is_dir($html."/".$c1)) {
       $d2=opendir($html."/".$c1);
       while ($c2=readdir($d2)) {
 	if (substr($c2,0,1)!="." && is_dir($html."/".$c1."/".$c2)) {
-	  // Ok, we have a html folder in /var/alternc/html/u/user/ Let's check it in the db : 
+	  // Ok, we have a html folder in ALTERNC_HTML/u/user/ Let's check it in the db : 
 	  if (substr($c2,0,1)!=$c1) {
 	    echo "WARNING: html folder is inconsistent in ".$html."/".$c1."/".$c2." YOU SHOULD FIX IT MANUALLY !\n";
 	  } else {

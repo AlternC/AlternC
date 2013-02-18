@@ -232,10 +232,10 @@ stop;
 function readrules($user="") {
   if (!$user) $user=$this->user;
   $u=substr($user,0,1);
-  if (!file_exists("/var/alternc/mail/$u/$user/.procmailrc")) {
+  if (!file_exists(ALTERNC_MAIL."/$u/$user/.procmailrc")) {
     return false;
   }
-  $f=fopen("/var/alternc/mail/$u/$user/.procmailrc","rb");
+  $f=fopen(ALTERNC_MAIL."/$u/$user/.procmailrc","rb");
   $state=0;	$rulenum=0;	$ligne=0;
   $res=array();
   while (!feof($f)) {
@@ -364,7 +364,9 @@ $aactions=array(
 
 /* ----------------------------------------------------------------- */
 // CONFIGURATION : 
-$ROOT="/var/alternc/mail";
+include_once('/usr/lib/alternc/panel/class/local.php');
+$ROOT=$L_ALTERNC_MAIL;
+
 $SIEVEROOT="/var/lib/dovecot/sieve";
 // GO !
 procmail2sieve();
