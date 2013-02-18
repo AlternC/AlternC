@@ -27,7 +27,7 @@ in a debian server could help finding the right way to do it (eg: bind9 ) ;)
   This question MAY be asked to the user when launching alternc installer manually (on an interactive shell)
 
 Partially fixed:
-- the control panel is located in /var/alternc/bureau => move it to /usr/lib/alternc/panel
+- the control panel is located in /var/alternc/bureau => move it to /usr/share/alternc/panel
 - the html data are in /var/alternc/html/[a-z0-9] => move them to /var/www/alternc/[a-z0-9]
 - the mail data are in /var/alternc/mail/[a-z0-9] => move them to /var/mail/alternc/[a-z0-9]
 

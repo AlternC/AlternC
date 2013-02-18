@@ -98,7 +98,7 @@ require_once(dirname(__FILE__)."/local.php");
 define('ALTERNC_MAIL',     "$L_ALTERNC_MAIL");
 define('ALTERNC_HTML',     "$L_ALTERNC_HTML");
 define('ALTERNC_LOGS',     "$L_ALTERNC_LOGS");
-define('ALTERNC_PANEL',    "/usr/lib/alternc/panel");
+define('ALTERNC_PANEL',    "/usr/share/alternc/panel");
 define('ALTERNC_LOCALES',  ALTERNC_PANEL."/locales");
 
 /* PHPLIB inclusions : */

@@ -3,5 +3,5 @@ etc/alternc/templates/squirrelmail
 etc/alternc/templates/apache2
 etc/squirrelmail
 usr/lib/alternc/install.d
-usr/lib/alternc/panel/class
+usr/share/alternc/panel/class
 usr/share/squirrelmail/plugins/alternc_changepass

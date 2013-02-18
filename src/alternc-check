@@ -6,7 +6,7 @@
 echo "Connecting to AlternC MySQL database... "; flush();
 
 define('NOCHECK', 1);
-require_once("/usr/lib/alternc/panel/class/config.php");
+require_once("/usr/share/alternc/panel/class/config.php");
 
 echo "done.\n";
 echo "------------------------------------------------------------\n";

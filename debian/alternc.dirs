@@ -11,7 +11,7 @@ etc/postfix
 etc/sudoers.d
 usr/bin
 usr/lib/alternc
-usr/lib/alternc/panel
+usr/share/alternc/panel
 usr/lib/alternc/install.d
 usr/sbin
 usr/share/alternc/install

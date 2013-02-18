@@ -14,7 +14,7 @@
  * /etc/phpmyadmin/config.inc.php
  */
 
-include_once('/usr/lib/alternc/panel/class/local.php');
+include_once('/usr/share/alternc/panel/class/local.php');
 $cfg['SuhosinDisableWarning'] = true;
 $cfg['ShowCreateDb'] = false; 
 $cfg['ShowChgPassword'] = false; 

@@ -27,6 +27,6 @@ install:
 	# domaintype template: 
 	install -m 644 templates/apache2/squirrelmail.conf $(DESTDIR)/etc/alternc/templates/apache2/squirrelmail.conf
 	# Desktop files
-	install -o 1999 -g 1999 -m 644 class/m_squirrelmail.php $(DESTDIR)/usr/lib/alternc/panel/class/
+	install -o 1999 -g 1999 -m 644 class/m_squirrelmail.php $(DESTDIR)/usr/share/alternc/panel/class/
 	# Squirrelmail Change Password Plugin
 	install -m 644 alternc_changepass/setup.php alternc_changepass/change.php $(DESTDIR)/usr/share/squirrelmail/plugins/alternc_changepass/

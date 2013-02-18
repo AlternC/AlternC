@@ -48,22 +48,22 @@ install: build
 	# Install
 	cp -r etc/* debian/alternc/etc
 	cp -r install/* debian/alternc/usr/share/alternc/install
-	test -d debian/alternc/usr/lib/alternc/panel || mkdir debian/alternc/usr/lib/alternc/panel
-	cp -r bureau/* debian/alternc/usr/lib/alternc/panel
+	test -d debian/alternc/usr/share/alternc/panel || mkdir debian/alternc/usr/share/alternc/panel
+	cp -r bureau/* debian/alternc/usr/share/alternc/panel
 	(cd src && $(MAKE) install DESTDIR=$(CURDIR)/debian/alternc)
 
 	# we don't use the full VERSION intepreted but only what's in the changelog
-	sed -i -e "s/@@REPLACED_DURING_BUILD@@/${MAJOR}/" debian/alternc/usr/lib/alternc/panel/class/local.php
-	echo ${VERSION} > debian/alternc/usr/lib/alternc/panel/class/.svn-infos
+	sed -i -e "s/@@REPLACED_DURING_BUILD@@/${MAJOR}/" debian/alternc/usr/share/alternc/panel/class/local.php
+	echo ${VERSION} > debian/alternc/usr/share/alternc/panel/class/.svn-infos
 
 	# Fix permisions
 	chmod 755 debian/alternc/etc/alternc
 	chmod 644 debian/alternc/etc/alternc/phpmyadmin.inc.php
 	# Group and user 1999 reference alterncpanel
-	chown -R 1999:1999 debian/alternc/usr/lib/alternc/panel
+	chown -R 1999:1999 debian/alternc/usr/share/alternc/panel
 	chmod 1733 debian/alternc/var/alternc/sessions
-	chmod -R 644 debian/alternc/usr/lib/alternc/panel
-	chmod -R a+X debian/alternc/usr/lib/alternc/panel
+	chmod -R 644 debian/alternc/usr/share/alternc/panel
+	chmod -R a+X debian/alternc/usr/share/alternc/panel
 	chown -R www-data:www-data debian/alternc/var/log/alternc debian/alternc/var/alternc/tmp
 	chmod a+x debian/alternc/usr/share/alternc/install/alternc.install debian/alternc/usr/share/alternc/install/dopo.sh debian/alternc/usr/share/alternc/install/mysql.sh debian/alternc/usr/share/alternc/install/newone.php debian/alternc/usr/share/alternc/install/reset_root.php debian/alternc/usr/share/alternc/install/upgrade_check.sh debian/alternc/usr/share/alternc/install/upgrades/*.php debian/alternc/usr/share/alternc/install/upgrades/*.sh
 
@@ -84,7 +84,7 @@ install: build
 	install -m 644 po/fr/LC_MESSAGES/alternc-admintools.mo debian/alternc/usr/share/locale/fr/LC_MESSAGES/
 
 	# Remove helpers files from l18n dir
-	find debian/alternc/usr/lib/alternc/panel/locales/ \
+	find debian/alternc/usr/share/alternc/panel/locales/ \
 		-maxdepth 1 -type f -exec rm -f {} \;
 	# Remove CVS directories
 	/usr/bin/find debian/alternc -depth -type d -name CVS -exec rm {} -rf \;
@@ -106,14 +106,14 @@ install: build
 	cd ..
 
 	# Copy the desk files
-	cp -r awstats/bureau debian/alternc-awstats/usr/lib/alternc/panel
-	find debian/alternc-awstats/usr/lib/alternc/panel/ -depth -iname ".svn" -exec rm -rf "{}" \; 
-	rm -f debian/alternc-awstats/usr/lib/alternc/panel/locales/Makefile
+	cp -r awstats/bureau debian/alternc-awstats/usr/share/alternc/panel
+	find debian/alternc-awstats/usr/share/alternc/panel/ -depth -iname ".svn" -exec rm -rf "{}" \; 
+	rm -f debian/alternc-awstats/usr/share/alternc/panel/locales/Makefile
 
 	# Fix permisions
-	chown -R root:www-data debian/alternc-awstats/usr/lib/alternc/panel
-	chmod -R 644 debian/alternc-awstats/usr/lib/alternc/panel
-	chmod -R a+X debian/alternc-awstats/usr/lib/alternc/panel
+	chown -R root:www-data debian/alternc-awstats/usr/share/alternc/panel
+	chmod -R 644 debian/alternc-awstats/usr/share/alternc/panel
+	chmod -R a+X debian/alternc-awstats/usr/share/alternc/panel
 	touch debian/alternc-awstats/var/cache/awstats/.placeholder
 	chown www-data:www-data debian/alternc-awstats/var/cache/awstats
 	chmod 755 debian/alternc-awstats/var/cache/awstats
