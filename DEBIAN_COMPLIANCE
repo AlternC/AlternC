@@ -10,7 +10,14 @@ launching :
 # grep -l adduser /var/lib/dpkg/info/*postinst /var/lib/dpkg/info/*preinst
 in a debian server could help finding the right way to do it (eg: bind9 ) ;) 
 
-- the bind zones, apache vhosts and other dynamic data are in /var/alternc/(bind|apache-vhost)/ => move them to /var/lib/alternc/(samename)
+Questions:
+  - are we all OK to delete /var/alternc/sessions/ and use standart session ?
+    -> we must if alternc can work with memcached sessions
+  - there is /var/alternc/cgi-bin/ . Should we forget it and use /usr/lib/cgi-bin/ ? If we must have
+    a specific directory, /var/lib/cgi-bin-alternc ?
+  - what do we do about /var/alternc/exec.usr/ ?
+  - is /var/alternc/mla still used ? What do we do about it ?
+  - 
 
 - we don't need our own php session folder don't we ? (or maybe for alternc-panel writable only ?) 
   W: alternc: non-standard-dir-perm var/alternc/sessions/ 1733 != 0755
@@ -26,10 +33,6 @@ in a debian server could help finding the right way to do it (eg: bind9 ) ;)
 - We should NOT ask for "do you REALLY want to install AlternC blabla" since we don't launch alternc.install at postinst anymore.
   This question MAY be asked to the user when launching alternc installer manually (on an interactive shell)
 
-Partially fixed:
-- the control panel is located in /var/alternc/bureau => move it to /usr/share/alternc/panel
-- the html data are in /var/alternc/html/[a-z0-9] => move them to /var/www/alternc/[a-z0-9]
-- the mail data are in /var/alternc/mail/[a-z0-9] => move them to /var/mail/alternc/[a-z0-9]
 
 Easy to fix NOW :  
 E: alternc: dir-or-file-in-var-run var/run/alternc/
@@ -45,9 +48,12 @@ E: alternc: duplicate-conffile etc/cron.d/alternc
 E: alternc: duplicate-conffile etc/logrotate.d/alternc
 W: alternc: malformed-prompt-in-templates alternc/slaves
 
-
-
-
+********************************************************************************
+Should be fixed, need more test:
+- the control panel is located in /var/alternc/bureau => move it to /usr/share/alternc/panel
+- the html data are in /var/alternc/html/[a-z0-9] => move them to /var/www/alternc/[a-z0-9]
+- the mail data are in /var/alternc/mail/[a-z0-9] => move them to /var/mail/alternc/[a-z0-9]
+- the bind zones, apache vhosts and other dynamic data are in /var/alternc/(bind|apache-vhost)/ => move them to /var/lib/alternc/(samename)
 
 ********************************************************************************
 FIXED:
