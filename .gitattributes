@@ -459,8 +459,8 @@ etc/alternc/functions_hosting/hosting_massvhost.sh -text
 etc/alternc/phpmyadmin.inc.php -text
 etc/alternc/postfix-slave.cf -text
 etc/alternc/postfix.cf -text
+etc/alternc/templates/alternc/apache2.conf -text
 etc/alternc/templates/alternc/bureau.conf -text
-etc/alternc/templates/apache2/apache2.conf -text
 etc/alternc/templates/apache2/panel.conf -text
 etc/alternc/templates/apache2/url.conf -text
 etc/alternc/templates/apache2/vhost.conf -text
