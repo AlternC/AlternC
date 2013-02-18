@@ -259,12 +259,14 @@ EOF
 		chmod 0440 /etc/sudoers.d/alternc-sudoers
 		if ! grep -q '#includedir /etc/sudoers.d' "/etc/sudoers"; then
 			echo "*************************************************"
+                        echo "*                                               *"
     			echo "*             /!\ WARNING /!\                   *"
     			echo "* Please add yourself the following directive : *"
 			echo "*        #includedir /etc/sudoers.d             *"
 			echo "* in file /etc/sudoers   (use visudo command)   *"
 			echo "* Else you'll have troubles with some features  *"
 			echo "*                 of AlternC                    *"
+                        echo "*                                               *"
     			echo "*************************************************"
 		fi
 	else
@@ -279,8 +281,13 @@ EOF
     # instead of preinst, we launch it here : 
     /usr/lib/alternc/fixperms.sh
     echo "**********************************************"
+    echo "*                                            *"
+    echo "* /!\                                    /!\ *"
     echo "*                 ALTERNC:                   *"
     echo "* Please run alternc.install to fully deploy *"
+    echo "*                                            *"
+    echo "*                                            *"
+    echo "*                                            *"
     echo "**********************************************"
     ;;
 
