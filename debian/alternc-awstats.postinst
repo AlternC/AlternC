@@ -54,11 +54,6 @@ EOF
       fi
     fi
 
-    if [ ! -h /var/alternc/cgi-bin/awstats.pl ]; then
-        ln -sf /usr/lib/cgi-bin/awstats.pl \
-            /var/alternc/cgi-bin/awstats.pl
-    fi
-    
     logrotate_apache
 
     # Add htpasswd :

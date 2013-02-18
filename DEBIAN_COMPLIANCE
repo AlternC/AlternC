@@ -11,8 +11,6 @@ launching :
 in a debian server could help finding the right way to do it (eg: bind9 ) ;) 
 
 Questions:
-  - there is /var/alternc/cgi-bin/ . Should we forget it and use /usr/lib/cgi-bin/ ? If we must have
-    a specific directory, /var/lib/cgi-bin-alternc ?
   - what do we do about /var/alternc/exec.usr/ ?
 
 - we don't need our own php session folder don't we ? (or maybe for alternc-panel writable only ?) 
@@ -53,6 +51,7 @@ Should be fixed, need more test:
 - the bind zones, apache vhosts and other dynamic data are in /var/alternc/(bind|apache-vhost)/ => move them to /var/lib/alternc/(samename)
 - /var/alternc/db => not used anymore, drop
 - /var/alternc/mla => not used anymore, drop
+- there is /var/alternc/cgi-bin/ is forgotten and now we use the standard /usr/lib/cgi-bin/ 
 
 ********************************************************************************
 FIXED:
