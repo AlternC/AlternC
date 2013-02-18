@@ -19,7 +19,6 @@ usr/share/alternc/install
 usr/share/locale/fr/LC_MESSAGES
 var/alternc/cgi-bin
 var/alternc/exec.usr
-var/alternc/sessions
 var/alternc/tmp
 var/backups/alternc
 /var/lib/alternc/apache-vhost

@@ -61,7 +61,6 @@ install: build
 	chmod 644 debian/alternc/etc/alternc/phpmyadmin.inc.php
 	# Group and user 1999 reference alterncpanel
 	chown -R 1999:1999 debian/alternc/usr/share/alternc/panel
-	chmod 1733 debian/alternc/var/alternc/sessions
 	chmod -R 644 debian/alternc/usr/share/alternc/panel
 	chmod -R a+X debian/alternc/usr/share/alternc/panel
 	chown -R www-data:www-data debian/alternc/var/log/alternc debian/alternc/var/alternc/tmp

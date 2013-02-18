@@ -24,9 +24,5 @@
 # Once a week at 7am, optimise the AlternC database
 0 1 * * 7	alterncpanel  	/usr/lib/alternc/alternc-dboptimize
 
-# We change the session directory... debian's patch modified :
-# Look for and purge old sessions every 30 minutes
-09,39 * * * *	root		[ -x /usr/lib/php5/maxlifetime ] && [ -d /var/lib/php5 ] && find /var/alternc/sessions/ -type f -cmin +$(/usr/lib/php5/maxlifetime) -delete
-
 # Every 30 minutes, do cron_users actions
 00,30 * * * *	alterncpanel	/usr/lib/alternc/cron_users.sh
