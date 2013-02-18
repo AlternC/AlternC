@@ -30,4 +30,4 @@ install:
 	# domaintype template: 
 	install -m 644 templates/apache2/roundcube.conf $(DESTDIR)/etc/alternc/templates/apache2/
 	# Desktop files
-	install -o 1999 -g 1999 -m 644 class/m_roundcube.php $(DESTDIR)/var/alternc/bureau/class/
+	install -o 1999 -g 1999 -m 644 class/m_roundcube.php $(DESTDIR)/usr/share/alternc/panel/class/

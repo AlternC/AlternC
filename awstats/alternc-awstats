@@ -13,16 +13,13 @@ then
     ./awstats.cache.php
 fi
 
-# FIXME : set this var in local.sh
-LOG_DIR="/var/alternc/logs"
-
 CACHEDIR="/var/cache/awstats" # Dans la sarge par defaut les données awstats sont stockées dans /var/lib/awstats ...
 mkdir -p $CACHEDIR
 
 function searchdomain {
     U_ID=$(mysql_query "SELECT uid FROM aws WHERE hostname='$1'" | grep -v "^uid")
     U_LOGIN=$(mysql_query "SELECT login FROM membres WHERE uid='$U_ID'" |grep -v "^login")
-    DOM_DIR="$LOG_DIR/$U_ID-$U_LOGIN"
+    DOM_DIR="$ALTERNC_LOGS/$U_ID-$U_LOGIN"
     if [ -d "$DOM_DIR" ] ; then
         echo $(find -P "$DOM_DIR" -mindepth 1 -maxdepth 2 -type f -iname "*.log" -print0 | xargs -0)
     fi

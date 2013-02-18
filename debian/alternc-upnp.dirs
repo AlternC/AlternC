@@ -1,6 +1,6 @@
 etc/cron.d
-var/alternc/bureau/class/
-var/alternc/bureau/admin/
+usr/share/alternc/panel/class/
+usr/share/alternc/panel/admin/
 usr/lib/alternc/
 usr/lib/alternc/install.d
 usr/share/alternc/install/

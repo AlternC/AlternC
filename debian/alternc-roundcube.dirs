@@ -6,5 +6,5 @@ etc/alternc/templates/roundcube/plugins/password
 etc/alternc/templates/apache2
 etc/roundcube
 usr/lib/alternc/install.d
-var/alternc/bureau/class
+usr/share/alternc/panel/class
 usr/share/roundcube/skins/default/images

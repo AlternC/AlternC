@@ -114,7 +114,7 @@ class m_bro {
     } else {
       // si on ne strip pas, il faut enlever le chemin rel 
       // et mettre la racine d'alternc pour viter les
-      // problmes de lien depuis /var/alternc ! 
+      // problmes de lien depuis /var /alternc ! 
       $dir=$root_alternc . substr($dir,strlen($root));
     }
     if (substr($dir,-1)=="/") {

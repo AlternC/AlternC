@@ -54,7 +54,7 @@ Description: Hosting software managment suite for Debian
  for the softwares used by it. 
  .
  This package is designed for frontend nodes in a load balancing setup, where
- the /var/alternc directory is not touched and managed over NFS.
+ the AlternC directory is not touched and managed over NFS.
  . 
  More information at http://www.alternc.com/
 Homepage: http://www.alternc.com/

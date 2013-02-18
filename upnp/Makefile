@@ -22,9 +22,9 @@
 
 install:
 	# Desktop files
-	install -m 644 m_upnp.php $(DESTDIR)/var/alternc/bureau/class/
-	install -m 644 upnp_list.php upnp_change.php $(DESTDIR)/var/alternc/bureau/admin/
-	install -m 644 adminmenu_upnp.php $(DESTDIR)/var/alternc/bureau/admin/
+	install -m 644 m_upnp.php $(DESTDIR)/usr/share/alternc/panel/class/
+	install -m 644 upnp_list.php upnp_change.php $(DESTDIR)/usr/share/alternc/panel/admin/
+	install -m 644 adminmenu_upnp.php $(DESTDIR)/usr/share/alternc/panel/admin/
 	# Cron
 	install -m 755 update_upnp.sh $(DESTDIR)/usr/lib/alternc/
 	# Install script

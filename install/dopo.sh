@@ -10,10 +10,10 @@
 # eg: alternc-procmailbuilder, alternc-mailman ...
 # $id$
 #
-# This script build one "alternc.mo" file per language in /var/alternc/bureau/locales/
+# This script build one "alternc.mo" file per language in /usr/share/alternc/panel/locales
 # Each alternc.mo file is build with msgfmt from a alternc.po file.
 # Each alternc.po file is build from a serie of .po files located in 
-# /var/alternc/bureau/locales/<lang>/LC_MESSAGES/*.po
+# /usr/share/alternc/panel/locales/<lang>/LC_MESSAGES/*.po
 # main.txt is included before all others .po to construct a complete alternc.po file.
 
 #  - Advantages : 
