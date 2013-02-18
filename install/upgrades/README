@@ -5,6 +5,8 @@ Fonctionnement des scripts de mise-à-jour d'AlternC
 Votre script DOIT etre numéroté sur trois chiffres, pas plus, pas moins.
 Donc : 
  1.0.1.sql -> OK
+ 1.0.2~1.sql -> OK
+ 1.0.2~a.sql -> OK
  1.0.2.5.sql -> PAS OK
  1.0.sql -> PAS OK
 
@@ -24,6 +26,10 @@ c'est-à-dire sous la forme \d(\.\d+)* (en expression régulière), par
 exemple: 0.9.1.sh, 1.0.php, etc. De plus, le fichier est considéré
 seulement si la version avec laquelle il est nommé tombe entre la
 version de départ et d'arrivée du package.
+Afin de forcer les scripts d'une même version a ce lancer dans un ordre précis,
+on peut rajouter ~x avant l'extension du script où x est un charctère alphanumérique
+([0-9][a-z]). Par exemple pour forcer un script d'upgrade php a s'executer avant
+un autre, il suffit de le rennomer X.X.X~1.php et X.X.X~2.php
 
 Voir ci-bas pour des exemples.
 
