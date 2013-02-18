@@ -15,8 +15,7 @@ done
 
 LOCK_FILE="/var/run/alternc/update_mails"
 
-#FIXME: this var should be define by local.sh
-ALTERNC_MAIL_LOC="/var/alternc/mail"
+# ALTERNC_MAIL is from local.sh
 
 # Somes check before start operations
 if [ `id -u` -ne 0 ]; then
@@ -44,7 +43,7 @@ mysql_query "SELECT id, address_id, quote(replace(path,'!','\\!')) FROM mailbox 
   mysql_query "UPDATE mailbox set mail_action='DELETING' WHERE id=$id;"
   /usr/lib/alternc/mail_dodelete.php "$address_id"
   # Check there is no instruction of changing directory, and check the first part of the string
-  if [[ "$path" =~ '../' || "$path" =~ '/..' || ! "'$ALTERNC_MAIL_LOC'" == "${path:0:$((${#ALTERNC_MAIL_LOC}+1))}'" ]] ; then
+  if [[ "$path" =~ '../' || "$path" =~ '/..' || ! "'$ALTERNC_MAIL'" == "${path:0:$((${#ALTERNC_MAIL}+1))}'" ]] ; then
     # The path will be empty for mailman addresses
     if [[ "$path" != "''" ]]; then
     	echo "Error : this directory will not be deleted, pattern incorrect"

@@ -6,7 +6,7 @@
 echo "Connecting to AlternC MySQL database... "; flush();
 
 define('NOCHECK', 1);
-require_once("/var/alternc/bureau/class/config.php");
+require_once("/usr/lib/alternc/panel/class/config.php");
 
 echo "done.\n";
 echo "------------------------------------------------------------\n";
@@ -35,8 +35,8 @@ if (!$m1 && !$m2 && !$m3 && !$m4 && !$m5) {
 $checks=array(
 	      "1" => "Change owner and group of pop mail accounts",
 	      "2" => "Change owner and group of html folders",
-	      "3" => "Remove non-existent pop accounts in /var/alternc/mail",
-	      "4" => "Remove non-existent alternc accounts in /var/alternc/html",
+	      "3" => "Remove non-existent pop accounts in ALTERNC_MAIL",
+	      "4" => "Remove non-existent alternc accounts in ALTERNC_HTML",
 	      "5" => "Delete subdomains of non-existents folders pointers (dangling links)",
 	      "6" => "Delete ftp accounts of non-existents folders",
 	      "7" => "Delete mailman mailing-lists in mailman alternc table who does not exists anymore in /var/lib/mailman/lists",

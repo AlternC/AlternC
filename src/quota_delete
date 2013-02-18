@@ -17,7 +17,7 @@ if ($argc!=2) {
 
 $name=$argv[1];
 
-include("/var/alternc/bureau/class/local.php");
+include("/usr/lib/alternc/panel/class/local.php");
 
 if (!mysql_connect($L_MYSQL_HOST,$L_MYSQL_LOGIN,$L_MYSQL_PWD)) {
 	echo "Cannot connect to Mysql !\n";
