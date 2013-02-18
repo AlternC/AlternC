@@ -360,6 +360,7 @@ bureau/class/m_hta.php -text
 bureau/class/m_log.php -text
 bureau/class/m_mail.php -text
 bureau/class/m_mem.php -text
+bureau/class/m_menu.php -text
 bureau/class/m_mysql.php -text
 bureau/class/m_piwik.php -text
 bureau/class/m_quota.php -text
