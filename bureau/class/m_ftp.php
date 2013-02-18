@@ -106,15 +106,12 @@ class m_ftp {
    * @return array Retourne le tableau des comptes ou FALSE si une erreur s'est produite.
    */
   function get_list() {
-    global $db,$err,$cuid;
+    global $db,$err,$cuid, $bro;
     $err->log("ftp","get_list");
     $r=array();
     $db->query("SELECT id, name, homedir FROM ftpusers WHERE uid='$cuid' ORDER BY name;");
     if ($db->num_rows()) {
       while ($db->next_record()) {
-	      // On passe /var/alternc/html/u/user
-              // FIXME: utiliser getuserpath()
-	      $tr=preg_match("/^\/var\/alternc\/html\/.\/[^\/]*\/(.*)$/", $db->f("homedir"),$match);    /* " */
 	      $r[]=array(
 		        "id"=>$db->f("id"),
 		        "login"=>$db->f("name"),
@@ -142,8 +139,10 @@ class m_ftp {
     $db->query("SELECT id, name, homedir FROM ftpusers WHERE uid='$cuid' AND id='$id';");
     if ($db->num_rows()) {
       $db->next_record();
-      // FIXME: utiliser getuserpath
-      $tr=preg_match("/^\/var\/alternc\/html\/.\/[^\/]*\/(.*)$/", $db->f("homedir"),$match);
+
+      $regexp="/^".preg_quote(getuserpath(),"/")."\/(.*)$/";
+      $tr=preg_match($regexp, $db->f("homedir"),$match);
+
       $lg=explode("_",$db->f("name"));
       if ((!is_array($lg)) || (count($lg)!=2)) {
 	      $lg[0]=$db->f("name");

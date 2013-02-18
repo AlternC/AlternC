@@ -570,7 +570,7 @@ class m_bro {
    * @return boolean != 0 on error
    */
   function ExtractFile($file, $dest=null) {
-    global $err,$cuid,$mem,$L_ALTERNC_LOC;
+    global $err,$cuid,$mem;
     $file = $this->convertabsolute($file,0);
     if (is_null($dest)) {
       $dest = dirname($file);
@@ -889,7 +889,7 @@ class m_bro {
    * @return void NE RETOURNE RIEN, et il faut Quitter le script immdiatement aprs
    */
   function DownloadZ($dir="") {
-    global $mem,$L_ALTERNC_LOC;
+    global $mem;
     header("Content-Disposition: attachment; filename=".$mem->user["login"].".Z");
     header("Content-Type: application/x-Z");
     header("Content-Transfer-Encoding: binary");
@@ -905,7 +905,7 @@ class m_bro {
    * @return void NE RETOURNE RIEN, et il faut Quitter le script immdiatement aprs
    */
   function DownloadTGZ($dir="") {
-    global $mem,$L_ALTERNC_LOC;
+    global $mem;
     header("Content-Disposition: attachment; filename=".$mem->user["login"].".tgz");
     header("Content-Type: application/x-tgz");
     header("Content-Transfer-Encoding: binary");
@@ -921,7 +921,7 @@ class m_bro {
    * @return void NE RETOURNE RIEN, et il faut Quitter le script immdiatement aprs
    */
   function DownloadTBZ($dir="") {
-    global $mem,$L_ALTERNC_LOC;
+    global $mem;
     header("Content-Disposition: attachment; filename=".$mem->user["login"].".tar.bz2");
     header("Content-Type: application/x-bzip2");
     header("Content-Transfer-Encoding: binary");
@@ -937,7 +937,7 @@ class m_bro {
    * @return void NE RETOURNE RIEN, et il faut Quitter le script immdiatement aprs
    */
   function DownloadZIP($dir="") {
-    global $mem,$L_ALTERNC_LOC;
+    global $mem;
     header("Content-Disposition: attachment; filename=".$mem->user["login"].".zip");
     header("Content-Type: application/x-zip");
     header("Content-Transfer-Encoding: binary");
@@ -1012,7 +1012,7 @@ class m_bro {
    *@param : le chemin destination du tarball produit.
    */
   function alternc_export_data($dir){
-    global $mem,$L_ALTERNC_LOC,$err;
+    global $mem,$err;
     $err->log("bro","export_data");
     $dir.="html/";
     if(!is_dir($dir)){ 

@@ -218,10 +218,8 @@ function checkuserpath($path) {
  * @args string $user the username, if null will use the global $mem. no
  * security checks performed on path
  * @returns string the actual absolute path
- * @see $L_ALTERNC_LOC
  */
 function getuserpath($user = null) {
-  global $L_ALTERNC_LOC;
   if (is_null($user)) {
     global $mem;
     $user = $mem->user['login'];

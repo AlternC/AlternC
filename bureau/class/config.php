@@ -96,7 +96,7 @@ require_once(dirname(__FILE__)."/local.php");
 // Define constants from vars of /etc/alternc/local.sh
 // The you can't choose where is the AlternC Panel 
 define('ALTERNC_MAIL',     "$L_ALTERNC_MAIL");
-define('ALTERNC_HTML',     "$L_ALTERNC_LOC");
+define('ALTERNC_HTML',     "$L_ALTERNC_HTML");
 define('ALTERNC_LOGS',     "$L_ALTERNC_LOGS");
 define('ALTERNC_PANEL',    "/usr/lib/alternc/panel");
 define('ALTERNC_LOCALES',  ALTERNC_PANEL."/locales");
