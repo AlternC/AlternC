@@ -234,7 +234,7 @@ if (!$r['noerase']) {
 <h3><?php __("Domain removal"); ?></h3>
 
 <br />
-<?php printf(_("help_domain_del %s"),$domain); ?><br />
+<?php printf(_("If you want to destroy the domain %s, click on the button below. Warning: this also deletes all FTP accounts, email, mailing lists associated with the domain and subdomains."),$domain); ?><br />
 <form action="dom_dodel.php?domain=<?php echo urlencode($domain) ?>" method="post">
 <p>
 <input type="submit" class="inb" name="detruire" value="<?php printf(_("Delete %s from this server"),$domain); ?>" />

@@ -54,7 +54,7 @@ define('ALTERNC_MAIL',     "/var/alternc/mail");
 define('ALTERNC_HTML',     "/var/alternc/html");
 define('ALTERNC_PANEL',    "/usr/lib/alternc/panel");
 define('ALTERNC_LOGS',     "/var/alternc/logs");
-define('ALTERNC_LOCALES',  "/var/alternc/bureau/locales");
+define('ALTERNC_LOCALES',  ALTERNC_PANEL."/locales");
 
 /* Toutes les pages du bureau passent ici. On utilise une sémaphore pour 
    s'assurer que personne ne pourra accéder à 2 pages du bureau en même temps.
