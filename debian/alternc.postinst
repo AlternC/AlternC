@@ -201,7 +201,7 @@ EOF
             echo "Creating alternc account"
             adduser --quiet --system --uid 342 --home $ALTERNC_HTML --shell /bin/false --ingroup adm alternc
         fi
-        chown alternc /var/alternc
+        chown alternc "$ALTERNC_USER_HOME"
         if [ -r ~root/.ssh/id_dsa.pub ]; then
             key=`cat ~root/.ssh/id_dsa.pub`
             if ! grep -q "$key" $ALTERNC_USER_HOME/.ssh/authorized_keys ; then
@@ -251,7 +251,7 @@ EOF
     touch /var/run/alternc/refresh_slave
     /usr/lib/alternc/slave_dns
     # Apache will not start without this file
-    touch /var/alternc/apache-vhost/vhosts_all.conf
+    touch /var/lib/alternc/apache-vhost/vhosts_all.conf
 
 	#sudo stuff allowing alterncpanel to use quota
 	if [ -d /etc/sudoers.d ]; then

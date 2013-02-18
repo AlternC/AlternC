@@ -67,9 +67,6 @@ install: build
 	chown -R www-data:www-data debian/alternc/var/log/alternc debian/alternc/var/alternc/tmp
 	chmod a+x debian/alternc/usr/share/alternc/install/alternc.install debian/alternc/usr/share/alternc/install/dopo.sh debian/alternc/usr/share/alternc/install/mysql.sh debian/alternc/usr/share/alternc/install/newone.php debian/alternc/usr/share/alternc/install/reset_root.php debian/alternc/usr/share/alternc/install/upgrade_check.sh debian/alternc/usr/share/alternc/install/upgrades/*.php debian/alternc/usr/share/alternc/install/upgrades/*.sh
 
-	#log directory
-	mkdir -p debian/alternc/var/alternc/logs
-	chown 1999:1999 debian/alternc/var/alternc/logs
 	mkdir -p debian/alternc/var/run/alternc/
 	chown 1999:1999 debian/alternc/var/run/alternc/
 
