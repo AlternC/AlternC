@@ -33,6 +33,7 @@ echo "Deleting complete"
 
 echo "Set flag to rebuild"
 mysql_query "update sub_domaines set web_action = 'UPDATE';"
+mysql_query "update     domaines set dns_action = 'UPDATE';"
 
 echo "Launch update_domains to rebuild."
 /usr/lib/alternc/update_domains.sh
