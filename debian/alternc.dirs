@@ -17,9 +17,7 @@ usr/sbin
 usr/share/alternc/install
 usr/share/locale/fr/LC_MESSAGES
 var/alternc/cgi-bin
-var/alternc/db
 var/alternc/exec.usr
-var/alternc/mla
 var/alternc/sessions
 var/alternc/tmp
 var/backups/alternc

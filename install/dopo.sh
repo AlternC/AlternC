@@ -41,7 +41,7 @@ dolangs() {
 }
 
 # Apply the function to each language
-find /var/alternc/bureau/locales -maxdepth 1 -mindepth 1 -type d -name "*_*" | dolangs
+find /usr/share/alternc/panel/locales -maxdepth 1 -mindepth 1 -type d -name "*_*" | dolangs
 
 # Relance les apache pour qu'ils vident leur cache GetText
 if [ -x /usr/sbin/apache2 ]; then

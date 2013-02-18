@@ -1,5 +1,7 @@
 #! /bin/bash
 
+source /usr/lib/alternc/functions.sh
+
 path="$1"
 
 if [ -z "$path" ] ; then
@@ -8,12 +10,12 @@ if [ -z "$path" ] ; then
   echo ""
   echo "Missing parameters"
   echo "Usage: $0 <directory>"
-  echo "Example: $0 /var/alternc/html/a/admin/mydir/"
+  echo "Example: $0 $ALTERNC_HTML/admin/mydir/"
   exit 0
 fi
 
-account=`echo "$path" | sed 's#/var/alternc/html/./##' | cut -d '/' -f 1`
-relpath=`echo "$path" | sed 's#/var/alternc/html/./[^/]*##'`
+account=`echo "$path" | sed "s#$ALTERNC_HTML/./##" | cut -d '/' -f 1`
+relpath=`echo "$path" | sed "s#$ALTERNC_HTML/./[^/]*##"`
 
 request="SELECT
   m.login AS user,

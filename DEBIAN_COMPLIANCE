@@ -11,16 +11,14 @@ launching :
 in a debian server could help finding the right way to do it (eg: bind9 ) ;) 
 
 Questions:
-  - are we all OK to delete /var/alternc/sessions/ and use standart session ?
-    -> we must if alternc can work with memcached sessions
   - there is /var/alternc/cgi-bin/ . Should we forget it and use /usr/lib/cgi-bin/ ? If we must have
     a specific directory, /var/lib/cgi-bin-alternc ?
   - what do we do about /var/alternc/exec.usr/ ?
-  - is /var/alternc/mla still used ? What do we do about it ?
-  - 
 
 - we don't need our own php session folder don't we ? (or maybe for alternc-panel writable only ?) 
   W: alternc: non-standard-dir-perm var/alternc/sessions/ 1733 != 0755
+  => /var/alternc/tmp => not easy to decide, cf #1458
+  => we must check if alternc can work with memcached sessions (or force disks sessions)
 
 - some binaries / scripts don't have a man page
 
@@ -38,7 +36,6 @@ Easy to fix NOW :
 E: alternc: dir-or-file-in-var-run var/run/alternc/
 W: alternc: binary-without-manpage usr/bin/alternc_get_path
 W: alternc: binary-without-manpage usr/bin/alternc_reload
-W: alternc: command-with-path-in-maintainer-script config:205 /usr/bin/awk
 W: alternc: maintainer-script-ignores-errors prerm
 E: alternc-upnp: php-script-but-no-phpX-cli-dep usr/lib/alternc/update_upnp.sh
 W: alternc-upnp: executable-not-elf-or-script usr/lib/alternc/install.d/upnp-install
@@ -54,6 +51,8 @@ Should be fixed, need more test:
 - the html data are in /var/alternc/html/[a-z0-9] => move them to /var/www/alternc/[a-z0-9]
 - the mail data are in /var/alternc/mail/[a-z0-9] => move them to /var/mail/alternc/[a-z0-9]
 - the bind zones, apache vhosts and other dynamic data are in /var/alternc/(bind|apache-vhost)/ => move them to /var/lib/alternc/(samename)
+- /var/alternc/db => not used anymore, drop
+- /var/alternc/mla => not used anymore, drop
 
 ********************************************************************************
 FIXED:
@@ -95,3 +94,6 @@ W: alternc: malformed-question-in-templates alternc/use_local_mysql
 W: alternc: malformed-question-in-templates alternc/use_remote_mysql
 W: alternc: malformed-question-in-templates alternc/remote_mysql_error
 W: alternc: malformed-question-in-templates alternc/use_private_ip
+
+W: alternc: command-with-path-in-maintainer-script config:205 /usr/bin/awk
+

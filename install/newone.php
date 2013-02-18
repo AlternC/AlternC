@@ -36,9 +36,9 @@ if(!function_exists('mysql_connect'))  {
 }
 
 // Ne vérifie pas ma session :)
-if(!chdir("/var/alternc/bureau"))
+if(!chdir("/usr/share/alternc/panel"))
   exit(1);
-require("/var/alternc/bureau/class/config_nochk.php");
+require("/usr/share/alternc/panel/class/config_nochk.php");
 
 // On passe super-admin
 $admin->enabled=1;

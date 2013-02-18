@@ -3,6 +3,10 @@
 $ENV{PATH} = "/usr/bin:/bin"; 
 $ENV{CDPATH} = "";
 
+printf "FIXME: do not work with Debian Compliance";
+exit(1);
+
+
 $A=$ARGV[0];
 sub untaint {
  my @list = @_;
