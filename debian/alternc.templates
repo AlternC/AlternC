@@ -50,6 +50,26 @@ _Description: Name of the secondary domain name server:
  AlternC's team is providing any user of AlternC with free DNS service.
  go to http://alternc.net/ to create an account and use it.
 
+Template: alternc/alternc_html
+Type: string
+_Description: The path where alternc's users html files will be put
+ Please enter the directory name where you want html user files to be put.
+ The default value should be good in most cases.
+ . 
+ This directory wil contain every alternc users personnal directories.
+
+Template: alternc/alternc_mail
+Type: string
+_Description: The path where alternc's users mails will be put
+ Please enter the directory name where you want to put your users maildirs.
+ The default value should be good in most cases.
+
+Template: alternc/alternc_logs
+Type: string
+_Description: The path where alternc's logs files will be placed
+ Please enter the directory name where you want to put your log files.
+ The default value should be good in most cases.
+
 Template: alternc/mysql/host
 Type: string
 _Description: Name of the mysql server:
