@@ -33,7 +33,7 @@ fi
 # the upgrade script we are considering
 extensions="*.sql *.sh *.php"
 cd /usr/share/alternc/install/upgrades
-for file in $( echo $extensions | sort -n ) ; do
+for file in $( ls $extensions | sort -n ) ; do
 	if [ -r $file ]; then
                 # the version in the filename
 		upvers=`strip_ext $file`
