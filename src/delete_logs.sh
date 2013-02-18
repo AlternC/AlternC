@@ -14,7 +14,6 @@ for CONFIG_FILE in \
     . "$CONFIG_FILE"
 done
 
-# FIXME this var should be define in local.sh
-ALTERNC_LOGS="$ALTERNC_LOC/logs"
+# ALTERNC_LOGS is from local.sh
 
 nice 10 -n find "$ALTERNC_LOGS" -mtime +$DAYS -delete

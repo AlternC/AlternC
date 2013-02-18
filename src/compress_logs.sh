@@ -14,8 +14,7 @@ for CONFIG_FILE in \
     . "$CONFIG_FILE"
 done
 
-#FIXME: should be define in local.sh
-ALTERNC_LOGS="$ALTERNC_LOC/logs"
+# ALTERNC_LOGS is from local.sh
 
 #Compress logs older than XX days
 nice -n 10 find "$ALTERNC_LOGS" -type f -name '*.log' -mtime +$DAYS -exec gzip '{}' \;

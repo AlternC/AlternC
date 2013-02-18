@@ -16,7 +16,7 @@ done
 
 # Some vars
 umask 022
-LOCK_FILE="$ALTERNC_LOC/bureau/cron.lock"
+LOCK_FILE="/usr/share/alternc/panel/cron.lock" # FIXME doesn't seem clean to be here
 OLDIFS="$IFS"
 NEWIFS=" "
 LOGFORMAT_FILE="/etc/alternc/apache_logformat.conf"

@@ -245,9 +245,9 @@ EOF
     #find /var/alternc/dns/ -type l -lname /var/alternc/bureau -exec rm {} \;
 
     # Bind stuff
-    touch /var/alternc/bind/automatic.conf /var/alternc/bind/slaveip.conf
-    chown root:bind /var/alternc/bind/automatic.conf /var/alternc/bind/slaveip.conf
-    chmod 640 /var/alternc/bind/automatic.conf /var/alternc/bind/slaveip.conf
+    touch           /var/lib/alternc/bind/automatic.conf /var/lib/alternc/bind/slaveip.conf
+    chown root:bind /var/lib/alternc/bind/automatic.conf /var/lib/alternc/bind/slaveip.conf
+    chmod 640       /var/lib/alternc/bind/automatic.conf /var/lib/alternc/bind/slaveip.conf
     touch /var/run/alternc/refresh_slave
     /usr/lib/alternc/slave_dns
     # Apache will not start without this file

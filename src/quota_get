@@ -25,7 +25,7 @@ command -v $QUOTA >/dev/null || { echo "Quotas uninstalled"; exit 0; }
 # the bigger one, and if someone separate it we need to look this one
 # particulary. It should be interesting to cumulate quota of all mounted directory.
 
-DATA_PART=`$DF "${ALTERNC_LOC}/html" 2>/dev/null | $AWK 'NR==2 { print $1 }'`
+DATA_PART=`$DF "${ALTERNC_HTML}" 2>/dev/null | $AWK 'NR==2 { print $1 }'`
 
 # quota will give over NFS will print the partition using the full NFS name
 # (e.g. 10.0.0.1:/var/www/alternc) so we need to lookup first with mount

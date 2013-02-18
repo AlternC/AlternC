@@ -32,7 +32,7 @@ echo $QUOTA_PART
 if [ -z "$QUOTA_PART" ]; then
   `sudo $QUOTA -r -g $MID $SIZE $SIZE 0 0 $DATA_PART 2>/dev/null || echo "Group quota are not enabled on $ALTERNC_HTML." >&2`
 else
-  `sudo $QUOTA -r -g $MID $SIZE $SIZE 0 0 "$ALTERNC_LOC/html" 2>/dev/null || echo "Group quota are not enabled on $ALTERNC_HTML." >&2`
+  `sudo $QUOTA -r -g $MID $SIZE $SIZE 0 0 "$ALTERNC_HTML" 2>/dev/null || echo "Group quota are not enabled on $ALTERNC_HTML." >&2`
 fi
 
 

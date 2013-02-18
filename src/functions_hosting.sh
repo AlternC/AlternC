@@ -5,8 +5,8 @@
 TEMPLATE_DIR="/etc/alternc/templates/apache2"
 HOSTING_DIR="/etc/alternc/functions_hosting"
 
-HTML_HOME="$ALTERNC_LOC/html"
-VHOST_DIR="$ALTERNC_LOC/apache-vhost"
+HTML_HOME="$ALTERNC_HTML"
+VHOST_DIR="/var/lib/alternc/apache-vhost"
 
 launch_hooks() {
   local ACTION=$1

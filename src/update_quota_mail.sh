@@ -20,7 +20,7 @@ if [ $# -eq 1 ];then
 else
   #Fist we set the quotas no 0 (infinite for each already existing account
   t=`mysql_query "UPDATE mailbox SET quota='0' WHERE quota IS NULL"`
-  d=`find "$ALTERNC_LOC/mail/" -maxdepth 2 -mindepth 2 -type d`
+  d=`find "$ALTERNC_MAIL/" -maxdepth 2 -mindepth 2 -type d`
 fi
 
 

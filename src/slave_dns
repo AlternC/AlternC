@@ -5,7 +5,7 @@
 
 FLAGFILE="/var/run/alternc/refresh_slave";
 TPL="/etc/alternc/templates/bind/slaveip.conf"
-TARGET="/var/alternc/bind/slaveip.conf"
+TARGET="/var/lib/alternc/bind/slaveip.conf"
 TMP=$(mktemp /tmp/slaveip.conf.XXXX)
 
 if [ ! -e "$FLAGFILE" ] ; then 

@@ -8,10 +8,10 @@
 # Init some other vars
 ZONE_TEMPLATE="/etc/alternc/templates/bind/templates/zone.template"
 NAMED_TEMPLATE="/etc/alternc/templates/bind/templates/named.template"
-NAMED_CONF="/var/alternc/bind/automatic.conf"
+NAMED_CONF="/var/lib/alternc/bind/automatic.conf"
 
 dns_zone_file() {
-    echo "$ALTERNC_LOC/bind/zones/$1"
+    echo "/var/lib/alternc/bind/zones/$1"
 }
 
 dns_is_locked() {
