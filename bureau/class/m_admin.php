@@ -64,6 +64,74 @@ class m_admin {
 			 );
   }
 
+  function hook_menu() {
+    global $mem, $cuid, $debug_alternc, $L_INOTIFY_UPDATE_DOMAIN;
+    if (!$mem->checkRight()) return false;
+
+    $obj = array(
+      'title'       => _("Administration"),
+      'ico'         => 'images/admin.png',
+      'link'        => 'toggle',
+      'class'       => 'adminmenu',
+      'pos'         => 10,
+      'links'       => 
+        array(
+          array(
+           'txt'   => _("Manage AlternC accounts"), 
+           'url'   => 'adm_list.php',
+           'class' => 'adminmenu'
+          ),
+          array(
+           'txt'   => _("User Quotas"), 
+           'url'   => 'quotas_users.php?mode=4',
+           'class' => 'adminmenu'
+          ),
+        )
+     ) ;
+
+    if ($cuid == 2000) {
+      $obj['links'][] = 
+        array(
+           'txt'   => _("Admin Control Panel"), 
+           'url'   => 'adm_panel.php',
+           'class' => 'adminmenu'
+          );
+      $obj['links'][] = 
+        array(
+           'txt'   => _("PhpMyAdmin"), 
+           'url'   => '/alternc-sql/',
+           'class' => 'adminmenu'
+          );
+      $obj['links'][] = 
+        array(
+           'txt'   => ($debug_alternc->status)?_("Switch debug Off"):_("Switch debug On"),
+           'url'   => "alternc_debugme.php?enable=".($debug_alternc->status?"0":"1"), 
+           'class' => 'adminmenu'
+          );
+      if (empty($L_INOTIFY_UPDATE_DOMAIN) || file_exists("$L_INOTIFY_UPDATE_DOMAIN") ) {
+        $obj['links'][] =
+          array(
+             'txt'     => _("Applying..."),
+             'url'     => 'javascript:alert(\''._("Domain changes are already applying").'\');',
+             'class'   => 'adminmenu',
+            );
+      } else {
+        $obj['links'][] =
+          array(
+             'txt'     => _("Apply changes"),
+             'url'     => 'adm_update_domains.php',
+             'class'   => 'adminmenu',
+             'onclick' => 'return confirm("'.addslashes(_("Server configuration changes are applied every 5 minutes. Do you want to do it right now?")).'");',
+            );
+
+      } // L_INOTIFY_UPDATE_DOMAIN
+
+    } // cuid == 2000
+
+
+    return $obj;
+  }
+
 
   /* ----------------------------------------------------------------- */
   /** Returns the known information about a hosted account

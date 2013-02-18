@@ -85,6 +85,38 @@ class m_dom {
   function m_dom() {
   }
 
+  function hook_menu() {
+    global $quota;
+    $obj = array( 
+      'title'       => _("Domains"),
+      'ico'         => 'images/dom.png',
+      'link'        => 'toggle',
+      'pos'         => 20,
+      'links'       => array(),
+     ) ;
+
+     if ( $quota->cancreate("dom") ) {
+       $obj['links'][] =
+         array (
+           'ico' => 'images/new.png',
+           'txt' => _("Add a domain"),
+           'url' => "dom_add.php",
+         );
+     }
+
+     foreach ($this->enum_domains() as $d) {
+       $obj['links'][] =
+         array (
+           'txt' => htmlentities($d),
+           'url' => "dom_edit.php?domain=".urlencode($d),
+         );
+     }
+
+     return $obj;
+  }
+
+
+
   /* ----------------------------------------------------------------- */
   /**
    * Retourne un tableau contenant les types de domaines

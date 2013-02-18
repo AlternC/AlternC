@@ -69,13 +69,6 @@ case "$1" in
             echo "/etc/bind/master was not empty. Please remove it manually."
     fi
 
-    if [ ! -e /etc/alternc/menulist.txt ]; then
-        if [ -f /var/alternc/bureau/admin/menulist.txt ]; then
-            mv -f /var/alternc/bureau/admin/menulist.txt \
-                  /etc/alternc/menulist.txt
-        fi
-    fi
-
     ;;
 
   abort-upgrade)

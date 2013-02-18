@@ -45,6 +45,38 @@ class m_ftp {
     return array("ftp"=>"FTP accounts");
   }
 
+  function hook_menu() {
+    global $quota;
+    $q = $quota->getquota("ftp");
+
+    $obj = array( 
+      'title'       => _("FTP accounts"),
+      'ico'         => 'images/ftp.png',
+      'link'        => 'toggle',
+      'pos'         => 60,
+      'links'       => array(),
+     ) ;
+
+     if ( $quota->cancreate("ftp") ) {
+       $obj['links'][] =
+         array (
+           'ico' => 'images/new.png',
+           'txt' => _("Create a new ftp account"),
+           'url' => "ftp_edit.php?create=1",
+           'class' => '',
+         );
+     }
+
+     if ( $q['u'] > 0 ) { // if there are some FTP accounts
+       $obj['links'][] =
+         array (
+           'txt' => _("FTP accounts list"),
+           'url' => "ftp_list.php"
+         );
+     }
+
+     return $obj;
+  }
 
   // Return the values needed to activate security access. See get_auth_class()
   // in authip for more informations
@@ -352,17 +384,14 @@ class m_ftp {
   }
 
   /* ----------------------------------------------------------------- */
-  /** Fonction appellée par domains quand un deomaine est supprimé pour le membre
+  /** Fonction appellée par domains quand un domaine est supprimé pour le membre
    * @param string $dom Domaine à détruire.
    * @access private
    */
   function alternc_del_domain($dom) {
     global $db,$err,$cuid;
-    $err->log("ftp","del_dom",$dom);
-    $db->query("SELECT COUNT(*) AS cnt FROM ftpusers WHERE uid='$cuid' AND name LIKE '$dom%'");
-    $db->next_record();
-    $cnt=$db->Record["cnt"];
-    $db->query("DELETE FROM ftpusers WHERE uid='$cuid' AND name LIKE '$dom%'");
+    $err->log("ftp","alternc_del_domain",$dom);
+    $db->query("DELETE FROM ftpusers WHERE uid='$cuid' AND ( name LIKE '$dom\_%' OR name LIKE '$dom') ");
     return true;
   }
 
@@ -373,7 +402,7 @@ class m_ftp {
    */
   function alternc_del_member() {
     global $db,$err,$cuid;
-    $err->log("ftp","del_member");
+    $err->log("ftp","alternc_del_member");
     $db->query("DELETE FROM ftpusers WHERE uid='$cuid'");
     return true;
   }

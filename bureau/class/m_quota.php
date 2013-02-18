@@ -55,6 +55,28 @@ class m_quota {
     _("quota_web");
   }
 
+  function hook_menu() {
+    global $quota;
+    $obj = array(
+      'title'       => _("Show my quotas"),
+      'ico'         => 'images/quota.png',
+      'link'        => 'quota_show.php',
+      'pos'         => 110,
+      'divclass'    => 'menu-quota',
+      'links'       => array(),
+     ) ;
+
+    $q=$quota->getquota();
+
+    foreach ( array('web', 'bw_web') as $key ) {
+      if ( empty($q[$key]["t"])) continue;
+      $usage_percent = (int) ($q[$key]["u"] / $q[$key]["t"] * 100);
+      $obj['links'][] = array( 'txt'=>_("quota_".$key) . " " . sprintf(_("%s%% of %s"),$usage_percent,format_size($q[$key]["t"]*1024)), 'url'=>($key == 'bw_web' ? 'stats_show_per_month.php' : 'quota_show.php') );
+      $obj['links'][] = array( 'txt'=>'progressbar', 'total' => $q[$key]["t"], 'used' => $q[$key]["u"]);
+    } 
+   
+     return $obj;
+  }
 
   /* ----------------------------------------------------------------- */
   /** Check if a user can use a ressource.

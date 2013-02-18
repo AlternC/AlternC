@@ -31,6 +31,22 @@ class m_piwik {
   var $piwik_admin_token;
 
 
+  function hook_menu() {
+    global $quota;
+    $obj = array(
+      'title'       => _("Piwik statistics"),
+      'ico'         => 'images/stat.png',
+      'link'        => 'toggle',
+      'pos'         => 115,
+      'links'       => array(
+         array( 'txt' => _("Piwik Users"), 'url' => 'piwik_userlist.php'),
+         array( 'txt' => _("Piwik Sites"), 'url' => 'piwik_sitelist.php'),
+       ),
+     ) ;
+
+     return $obj;
+  }
+
   /*---------------------------------------------------------------------------*/
   /** Constructor
   */

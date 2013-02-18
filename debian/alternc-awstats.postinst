@@ -3,7 +3,6 @@
 # Uses debconf
 . /usr/share/debconf/confmodule
 
-MENUFILE="/etc/alternc/menulist.txt"
 LOGAPACHE="/etc/alternc/awstats.log.alternc.conf"
 APACHEROTATE="/etc/logrotate.d/apache2"
 
@@ -72,14 +71,6 @@ EOF
 
     # Update rights on previous user's awstats configuration files
     chown alterncpanel:alterncpanel /etc/awstats/awstats.*.conf > /dev/null 2>&1
-
-    # ADD menu item :
-    if ! grep -q "^menu_aws.php$" "$MENUFILE"; then
-        rm -f $MENUFILE.alternc_awstats
-        sed -e "s/menu_cron.php/&\\
-menu_aws.php/" <$MENUFILE >$MENUFILE.alternc_awstats
-        mv -f $MENUFILE.alternc_awstats $MENUFILE
-    fi
 
     echo "**********************************************"
     echo "*              ALTERNC-AWSTATS               *"

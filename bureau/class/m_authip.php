@@ -35,6 +35,17 @@ class m_authip {
     return $this->list_ip(true); 
   }
 
+  function hook_menu() {
+    $obj = array(
+      'title'       => _("Access security"),
+      'ico'         => 'images/ip.png',
+      'link'        => 'ip_main.php',
+      'pos'         => 120,
+     ) ;
+
+     return $obj;
+  }
+
   /*
    * Retourne la liste des ip spécifiées par cet utilisateur
    *

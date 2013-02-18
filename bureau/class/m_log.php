@@ -55,6 +55,17 @@ class m_log {
 
   }//list_logs
 
+  function hook_menu() {
+    $obj = array(
+      'title'       => _("Logs"),
+      'ico'         => 'images/logs.png',
+      'link'        => 'logs_list.php',
+      'pos'         => 130,
+     ) ;
+
+     return $obj;
+  }
+
   function list_logs_directory_all($dirs){
     global $err;
     $err->log("log","get_logs_directory_all");

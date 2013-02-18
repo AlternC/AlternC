@@ -58,6 +58,16 @@ class m_mem {
     return array("mem"=>"AlternC's account password");
   }
 
+  function hook_menu() {
+    $obj = array(
+      'title'       => _("Settings"),
+      'ico'         => 'images/config.png',
+      'link'        => 'mem_param.php',
+      'pos'         => 160,
+     ) ;
+
+     return $obj;
+  }
 
   /* ----------------------------------------------------------------- */
   /** Check that the current user is an admnistrator.
@@ -589,8 +599,8 @@ Cordially.
       return false;
     }
     $j=$_SESSION[$sid];
-    $j=unserialize($j);
-    if ( ! empty( $j[$v] ) ) { // si on a bien qque chose a retourner :)
+    $j=json_decode($j, true);
+    if ( ! empty($j[$v] ) ) { // si on a bien qque chose a retourner :)
       return $j[$v];
     }
     return false;
@@ -600,14 +610,14 @@ Cordially.
     $sid=$_COOKIE['session'];
     $p=Array();
     if ( ! empty($_SESSION[$sid]) ) {
-      $p = unserialize($_SESSION[$sid]);
+      $p = json_decode($_SESSION[$sid], true);
     }
     if (! $ecrase && (isset($p[$k]) && is_array($p[$k])) && is_array($v) ) { 
       $v=array_merge($p[$k], $v); // overwrite entry with the same name
     }
 
     $p[$k]=$v;
-    $_SESSION[$sid]=serialize($p);
+    $_SESSION[$sid]=json_encode($p);
     return true;
   }
 

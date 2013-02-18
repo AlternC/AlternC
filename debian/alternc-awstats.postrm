@@ -9,11 +9,6 @@ case "$1" in
     # unconfigure /etc/alternc/templates/apache-ssl/httpd.conf
     alternc.install
 
-    if grep -qs "menu_aws.php" $MENUFILE; then
-	rm -f $MENUFILE.alternc_awstats
-	cat $MENUFILE | grep -v "menu_aws.php" >$MENUFILE.alternc_awstats
-        mv -f $MENUFILE.alternc_awstats $MENUFILE
-    fi
     ;;
   purge)
     #/usr/lib/alternc/quota_delete aws

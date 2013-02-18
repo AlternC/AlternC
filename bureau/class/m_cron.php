@@ -67,6 +67,16 @@ class m_cron {
     return $r;
   }
 
+  function hook_menu() {
+    $obj = array(
+      'title'       => _("Scheduled tasks"),
+      'ico'         => 'images/schedule.png',
+      'link'        => 'cron.php',
+      'pos'         => 90,
+     ) ;
+
+     return $obj;
+  }
 
   /*---------------------------------------------------------------------------*/
   /** update the crontab 

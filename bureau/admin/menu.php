@@ -33,21 +33,72 @@ require_once("../class/config.php");
 <img src="logo3.png" class="menutoplogo" border="0" alt="AlternC" alt="<?php __("AlternC"); ?>"/>
 <p class="currentuser"><?php echo sprintf(_("Welcome %s"),$mem->user["login"]); ?></p>
 
-<div class="menu-box">
-  <a href="main.php">
-    <div class="menu-title"><img src="images/home.png" alt="<?php  __("Home / Information"); ?>" />&nbsp;<?php  __("Home / Information"); ?></div>
-  </a>
-</div>
 <?php
-// Force rebuilding quota, in case of add or edit of the quota and cache not up-to-date
-$quota->getquota("",true); // rebuild quota
 
-$MENUPATH=ALTERNC_PANEL."/admin/";
-$file=file("/etc/alternc/menulist.txt", FILE_SKIP_EMPTY_LINES);
-foreach($file as $v) {
-  $v=trim($v);
-  if ( file_exists($MENUPATH.$v)) include($MENUPATH.$v);
+$obj_menu = $menu->getmenu();
+
+foreach ($obj_menu as $k => $m ) {
+  echo "<div class='menu-box ".(!empty($m['divclass'])?$m['divclass']:'')."'>\n";
+  echo "  <a href=\"".$m['link']."\"";
+  if (!empty($m['target'])) echo " target='". $m['target']."' ";
+  echo ">\n";
+  echo "    <div class='menu-title'>\n";
+  echo "      <img src='".$m['ico']."' alt=\"".$m['title']."\" width='16' height='16' />&nbsp;";
+  echo "        <span class='";
+  if (!empty($m['class'])) echo $m['class']." ";
+  echo "'>"; // fin span ouvrant
+  echo $m['title'];
+  if (isset($m['quota_total'])) {
+    if (!$quota->cancreate($k)) { echo '<span class="full">' ; } else { echo "<span>"; }
+    echo " (".$m['quota_used']."/".$m['quota_total'].")";
+    echo "</span>\n";
+  } // if there are some quota
+  if ( empty($m['links'])) {
+    $i = "images/menu_right.png";
+    // img machin
+  } else {
+    if ( $m['visibility'] ) {
+      $i="/images/menu_moins.png";
+    } else {
+      $i="/images/menu_plus.png";
+    }
+  }
+  echo "      <img src='$i' alt='' style='float:right;' id='menu-$k-img'/>\n";
+  echo "      </span>";
+  echo "    </div>\n";
+  echo "  </a>\n";
+
+  if (!empty($m['links'])) {
+    echo "<div class='menu-content' id='menu-$k'>";
+    echo "  <ul>";
+    foreach( $m['links'] as $l ) {
+      if ( $l['txt'] == 'progressbar' ) {
+        $usage_percent = (int) ($l['used'] / $l['total'] * 100);
+        $usage_color = ( $l['used'] > $l['total'] ? '#800' : '#080');
+        $usage_color = ((85 < $usage_percent && $usage_percent <= 100) ? '#ff8800' : $usage_color); // yellow
+        echo "<li>";
+        echo '<div class="progress-bar">';
+        echo '<div style="width: ' . ($usage_percent > 100 ? 100 : $usage_percent) . '%; background: ' . $usage_color . ';">&nbsp;</div>';
+        echo '</div>';
+        echo "</ul>";
+        continue;
+      } // progressbar
+      echo "<li><a href=\"".$l['url']."\" ";
+      if (!empty($l['onclick'])) echo " onClick='". $l['onclick']."' ";
+      if (!empty($l['target'])) echo " target='". $l['target']."' ";
+      echo " ><span class='".(empty($l['class'])?'':$l['class'])."'>";
+      if (!empty($l['ico'])) echo "<img src='".$l['ico']."' alt='' />&nbsp;";
+      echo $l['txt'];
+      echo "</span></a></li>";
+    }
+    echo "  </ul>";
+    echo "</div>";
+  }
+  echo "</div>";
+  if (! $m['visibility']) echo "<script type='text/javascript'>menu_toggle('menu-$k');</script>\n";
+
 }
+
 ?>
 <p class="center"><a href="about.php"><img src="logo2.png" class="menulogo" border="0" alt="AlternC" title="<?php __("About"); ?>"/></a>
 <br />
@@ -55,14 +106,5 @@ foreach($file as $v) {
 echo "$L_VERSION";
 ?>
 </p>
-
-<script type="text/javascript">
-<?php 
-foreach( $mem->session_tempo_params_get('menu_toggle') as $k => $v ) {
-  if ($v == 'hidden') echo "menu_toggle('$k');\n";
-}
-?>
-</script>
-
 
 

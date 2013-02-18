@@ -71,6 +71,18 @@ class m_bro {
     $this->l_createfile=array( 0=>_("Go back to the file manager"), 1=>_("Edit the newly created file") );
   }
 
+  function hook_menu() {
+    $obj = array( 
+      'title'       => _("File browser"),
+      'ico'         => 'images/folder.png',
+      'link'        => 'bro_main.php',
+      'pos'         => 40,
+     ) ;
+
+     return $obj;
+  }
+
+
 
   /* ----------------------------------------------------------------- */
   /** Verifie un dossier relatif au dossier de l'utilisateur courant

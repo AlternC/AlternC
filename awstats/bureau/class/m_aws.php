@@ -54,6 +54,16 @@ class m_aws {
   function m_aws() {
   }
 
+  function hook_menu() {
+    $obj = array(
+      'title'       => _("Web Statistics"),
+      'ico'         => 'images/stat.png',
+      'link'        => 'aws_list.php',
+      'pos'         => 80,
+     ) ;
+
+     return $obj;
+  }
 
   /* ----------------------------------------------------------------- */  
   /**

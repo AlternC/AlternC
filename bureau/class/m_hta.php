@@ -55,6 +55,17 @@ class m_hta {
     return array("hta"=>"Protected folders passwords");
   }
 
+  function hook_menu() {
+    $obj = array(
+      'title'       => _("Protected folders"),
+      'ico'         => 'images/password.png',
+      'link'        => 'hta_list.php',
+      'pos'         => 50,
+     ) ;
+
+     return $obj;
+  }
+
 
   /*---------------------------------------------------------------------------*/
   /**

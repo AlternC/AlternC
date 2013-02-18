@@ -90,6 +90,26 @@ class m_mail {
     $this->srv_pop3s      = variable_get('mail_human_pop3s',      $L_FQDN,'Human name for POP3s mail server');
   }
 
+  function hook_menu() {
+    $obj = array(
+      'title'       => _("Email Addresses"),
+      'ico'         => 'images/mail.png',
+      'link'        => 'toggle',
+      'pos'         => 30,
+      'links'       => array(),
+     ) ;
+
+     foreach ($this->enum_domains() as $d) {
+       $obj['links'][] =
+         array (
+           'txt' => htmlentities($d["domaine"]).'&nbsp;'.htmlentities("(".$d["nb_mail"].")"),
+           'url' => "mail_list.php?domain_id=".urlencode($d['id']),
+         );
+     }
+
+     return $obj;
+  }
+
   // FIXME documenter
   function catchall_getinfos($domain_id) {
     global $dom, $db;

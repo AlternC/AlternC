@@ -28,7 +28,7 @@
  ----------------------------------------------------------------------
 */
 
-/* * /
+/* */
 // To enable dispay of PHP errors
 ini_set('display_errors', true);
 /* */

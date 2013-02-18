@@ -78,7 +78,6 @@ bureau/admin/adm_edit.php -text
 bureau/admin/adm_email.php -text
 bureau/admin/adm_list.php -text
 bureau/admin/adm_login.php -text
-bureau/admin/adm_menulist.php -text
 bureau/admin/adm_mxaccount.php -text
 bureau/admin/adm_panel.php -text
 bureau/admin/adm_passpolicy.php -text
@@ -310,21 +309,6 @@ bureau/admin/mem_logout.php -text
 bureau/admin/mem_param.php -text
 bureau/admin/mem_passwd.php -text
 bureau/admin/menu.php -text
-bureau/admin/menu_adm.php -text
-bureau/admin/menu_aide.php -text
-bureau/admin/menu_brouteur.php -text
-bureau/admin/menu_cron.php -text
-bureau/admin/menu_dom.php -text
-bureau/admin/menu_ftp.php -text
-bureau/admin/menu_ip.php -text
-bureau/admin/menu_lang.php -text
-bureau/admin/menu_logs.php -text
-bureau/admin/menu_mail.php -text
-bureau/admin/menu_mem.php -text
-bureau/admin/menu_piwik.php -text
-bureau/admin/menu_quota.php -text
-bureau/admin/menu_sql.php -text
-bureau/admin/menu_web.php -text
 bureau/admin/mxlist.php -text
 bureau/admin/nowebmail.php -text
 bureau/admin/phpinfo.php -text
@@ -481,7 +465,6 @@ etc/alternc/apache2.conf -text
 etc/alternc/apache_logformat.conf -text
 etc/alternc/dbusers.cnf.sample -text
 etc/alternc/functions_hosting/hosting_massvhost.sh -text
-etc/alternc/menulist.txt -text
 etc/alternc/phpmyadmin.inc.php -text
 etc/alternc/postfix-slave.cf -text
 etc/alternc/postfix.cf -text

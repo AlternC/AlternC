@@ -108,6 +108,40 @@ class m_mysql {
     $this->dbus = new DB_users();
   }
 
+  function hook_menu() {
+    global $quota;
+    $q = $quota->getquota("mysql");
+
+    $obj = array( 
+      'title'       => _("MySQL"),
+      'ico'         => 'images/mysql.png',
+      'link'        => 'toggle',
+      'pos'         => 100,
+      'links'       => array(),
+     ) ;
+
+     $obj['links'][] =
+       array (
+         'txt' => _("Databases"),
+         'url' => "sql_list.php",
+       );
+     $obj['links'][] =
+       array (
+         'txt' => _("MySQL Users"),
+         'url' => "sql_users_list.php",
+       );
+     if ($q["u"] > 0 ) {
+       $obj['links'][] =
+         array (
+           'txt' => _("PhpMyAdmin"),
+           'url' => "sql_admin.php",
+           'target' => '_blank',
+         );
+     }
+     return $obj;
+  }
+
+
 
   /* ----------------------------------------------------------------- */
   /**
