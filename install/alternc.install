@@ -123,10 +123,19 @@ fi
 chown :alterncpanel /etc/alternc/local.sh
 . /etc/alternc/local.sh
 
+# Create the target directory
+for i in "$ALTERNC_HTML" "$ALTERNC_MAIL" "$ALTERNC_LOGS" ; do
+  test -d "$i" || mkdir -p "$i"
+done
+
+chown alterncpanel:adm "$ALTERNC_LOGS"
+chown www-data:www-data "$ALTERNC_HTML"
+chown vmail:vmail "$ALTERNC_MAIL"
+
 # Check ACL
-aclcheckfile="$ALTERNC_LOC/test-acl"
+aclcheckfile="$ALTERNC_HTML/test-acl"
 touch "$aclcheckfile"
-setfacl -m u:root:rwx "$aclcheckfile" 2>/dev/null || ( echo "Error : ACL aren't activated on $ALTERNC_LOC . AlternC can't work without it." ; exit 2)
+setfacl -m u:root:rwx "$aclcheckfile" 2>/dev/null || ( echo "Error : ACL aren't activated on $ALTERNC_HTML . AlternC can't work without it." ; exit 2)
 
 # XXX: copy-paste from debian/config
 if [ -r /etc/alternc/my.cnf ]; then
@@ -195,11 +204,13 @@ s\\%%dbuser%%\\$MYSQL_USER\\;
 s\\%%dbpwd%%\\$MYSQL_PASS\\;
 s\\%%db_mail_user%%\\$MYSQL_MAIL_USER\\;
 s\\%%db_mail_pwd%%\\$MYSQL_MAIL_PASS\\;
-s\\%%ALTERNC_LOC%%\\$ALTERNC_LOC\\;
 s\\%%warning_message%%\\$WARNING\\;
 s\\%%fqdn_lettre%%\\$FQDN_LETTER\\;
 s\\%%version%%\\$VERSION\\;
 s\\%%ns2_ip%%\\$NS2_IP\\;
+s\\%%ALTERNC_HTML%%\\$ALTERNC_HTML\\;
+s\\%%ALTERNC_MAIL%%\\$ALTERNC_MAIL\\;
+s\\%%ALTERNC_LOGS%%\\$ALTERNC_LOGS\\;
 EOF
 
 # hook 
@@ -423,8 +434,8 @@ if [ "$slave" = "1" ]; then
     exit 0
 fi
 
-chown alterncpanel:alterncpanel "$ALTERNC_LOC/html/"*
-setfacl -b -k -m d:g:alterncpanel:rw- -m g:alterncpanel:rw- "$ALTERNC_LOC/html/"*
+chown alterncpanel:alterncpanel "$ALTERNC_HTML/"*
+setfacl -b -k -m d:g:alterncpanel:rw- -m g:alterncpanel:rw- "$ALTERNC_HTML/"*
 
 #creating log file
 if [ ! -e "/var/log/alternc/bureau.log" ]; then

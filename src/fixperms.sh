@@ -73,23 +73,22 @@ while getopts "l:u:f:d:" optname
     esac
   done
 
-CONFIG_FILE="/etc/alternc/local.sh"
 
 PATH=/sbin:/bin:/usr/sbin:/usr/bin
-
 umask 022
 
+CONFIG_FILE="/usr/lib/alternc/functions.sh"
 if [ ! -r "$CONFIG_FILE" ]; then
     echo "Can't access $CONFIG_FILE."
     exit 1
 fi
+source "$CONFIG_FILE"
 
 if [ `id -u` -ne 0 ]; then
-    echo "fixperms.sh must be launched as root"
+    echo "$0 must be launched as root"
     exit 1
 fi
 
-. "$CONFIG_FILE"
 
 doone() {
     read GID LOGIN || true
@@ -97,8 +96,7 @@ doone() {
       if [ "$DEBUG" ]; then
         echo "Setting rights and ownership for user $LOGIN having gid $GID"
       fi
-      INITIALE=`echo $LOGIN |cut -c1`
-      REP="$ALTERNC_LOC/html/$INITIALE/$LOGIN/$sub_dir"
+      REP="$(get_html_path_by_name "$name")"
 
       # Set the file readable only for the AlternC User
       mkdir -p "$REP"

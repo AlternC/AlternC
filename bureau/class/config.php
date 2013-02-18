@@ -49,13 +49,6 @@ Merci de revenir plus tard.";
 }
 /* */
 
-// FIXME: Some constant, we put them here so that we can change them later ;) LFS 
-define('ALTERNC_MAIL',     "/var/alternc/mail");
-define('ALTERNC_HTML',     "/var/alternc/html");
-define('ALTERNC_PANEL',    "/usr/lib/alternc/panel");
-define('ALTERNC_LOGS',     "/var/alternc/logs");
-define('ALTERNC_LOCALES',  ALTERNC_PANEL."/locales");
-
 /* Toutes les pages du bureau passent ici. On utilise une sémaphore pour 
    s'assurer que personne ne pourra accéder à 2 pages du bureau en même temps.
 */
@@ -99,6 +92,15 @@ $host=getenv("HTTP_HOST");
 
 /* Global variables (AlternC configuration) */
 require_once(dirname(__FILE__)."/local.php");
+
+// Define constants from vars of /etc/alternc/local.sh
+// The you can't choose where is the AlternC Panel 
+define('ALTERNC_MAIL',     "$L_ALTERNC_MAIL");
+define('ALTERNC_HTML',     "$L_ALTERNC_LOC");
+define('ALTERNC_LOGS',     "$L_ALTERNC_LOGS");
+define('ALTERNC_PANEL',    "/usr/lib/alternc/panel");
+define('ALTERNC_LOCALES',  ALTERNC_PANEL."/locales");
+
 /* PHPLIB inclusions : */
 $root=ALTERNC_PANEL."/";
 

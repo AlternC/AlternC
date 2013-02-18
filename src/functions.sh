@@ -48,6 +48,15 @@ print_domain_letter() {
   fi 
 }
 
+# Return the html path for a account name
+get_html_path_by_name() {
+  local name="$1"
+  if [[ ! "$name" =~ ^([a-z0-9]+)$ ]] ; then
+    echo "Account name is incorrect."
+    exit 2
+  fi
+  echo "$ALTERNC_HTML/${name:0:1}/$name"
+}
 
 # echoes the first letter of an alternc account name.
 print_user_letter() {

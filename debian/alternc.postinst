@@ -47,9 +47,8 @@ case "$1" in
     dpkg-statoverride --quiet --update --add root sasl 710 /var/spool/postfix/var/run/saslauthd  || true
 
 
-    db_get "alternc/alternc_location"
+    db_get "alternc/alternc_mail"
     VMAIL_HOME="$RET"
-    #Create Dovecot user for mail handling FIXME change home with ALTERNC_LOC
     if ! getent group vmail; then
        addgroup --gid 1998 vmail
     fi
@@ -103,9 +102,6 @@ DEFAULT_SECONDARY_MX=""
 # quels clients mysql sont permis (%, localhost, etc)
 MYSQL_CLIENT=""
 
-# Folder holding data (used for quota management)
-ALTERNC_LOC=""
-
 # the type of backup created by the sql backup script
 # valid options are "rotate" (newsyslog-style) or "date" (suffix is the date)
 SQLBACKUP_TYPE=""
@@ -118,6 +114,12 @@ ALTERNC_SLAVES=""
 
 # File to look at for forced launch of update_domain (use incron)
 INOTIFY_UPDATE_DOMAIN="/var/run/alternc/inotify_update_domain.lock"
+
+# AlternC Locations
+ALTERNC_HTML=""
+ALTERNC_MAIL=""
+ALTERNC_LOGS=""
+
 EOF
 
         chown root:alterncpanel $CONFIGFILE
@@ -144,8 +146,10 @@ EOF
     update_var alternc/mysql/client MYSQL_CLIENT 
     update_var alternc/sql/backup_type SQLBACKUP_TYPE
     update_var alternc/sql/backup_overwrite SQLBACKUP_OVERWRITE
-    update_var alternc/alternc_location ALTERNC_LOC
     update_var alternc/slaves ALTERNC_SLAVES
+    update_var alternc/alternc_html ALTERNC_HTML
+    update_var alternc/alternc_mail ALTERNC_MAIL
+    update_var alternc/alternc_logs ALTERNC_LOGS
     sed -e "$SED_SCRIPT" < $CONFIGFILE > $CONFIGFILE.tmp
     mv -f $CONFIGFILE.tmp $CONFIGFILE
 
@@ -187,20 +191,21 @@ EOF
     # multi-server configuration: we create an alternc account with
     # authorized keys. since this is the master, we do not give him a
     # valid shell, but we still need the user for proper perms
+    ALTERNC_USER_HOME="$ALTERNC_HTML"
     if [ ! -z "$ALTERNC_SLAVES" ] && [ "$ALTERNC_SLAVES" != "localhost" ] ; then
         if ! grep -q alternc /etc/passwd ; then
             echo "Creating alternc account"
-            adduser --quiet --system --uid 342 --home $ALTERNC_LOC --shell /bin/false --ingroup adm alternc
+            adduser --quiet --system --uid 342 --home $ALTERNC_HTML --shell /bin/false --ingroup adm alternc
         fi
         chown alternc /var/alternc
         if [ -r ~root/.ssh/id_dsa.pub ]; then
             key=`cat ~root/.ssh/id_dsa.pub`
-            if ! grep -q "$key" $ALTERNC_LOC/.ssh/authorized_keys ; then
+            if ! grep -q "$key" $ALTERNC_USER_HOME/.ssh/authorized_keys ; then
                 echo "Authorizing root ssh key to access the common alternc account"
-                mkdir -p $ALTERNC_LOC/.ssh
-                echo "$key" >> $ALTERNC_LOC/.ssh/authorized_keys
-                chown -R alternc:adm $ALTERNC_LOC/.ssh
-                chmod -R og-rwx $ALTERNC_LOC/.ssh
+                mkdir -p $ALTERNC_USER_HOME/.ssh
+                echo "$key" >> $ALTERNC_USER_HOME/.ssh/authorized_keys
+                chown -R alternc:adm $ALTERNC_USER_HOME/.ssh
+                chmod -R og-rwx $ALTERNC_USER_HOME/.ssh
             fi
         else
             echo "No SSH key in "~root/.ssh/id_dsa.pub
