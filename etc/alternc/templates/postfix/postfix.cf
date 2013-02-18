@@ -1,5 +1,6 @@
 # Postfix Configuration options
 # Used by alternc.install with postconf
+# CAREFULL this script is not used directly by postfix.
 home_mailbox = Maildir/
 smtpd_banner = $myhostname ESMTP
 header_checks = regexp:/etc/postfix/header_checks
@@ -37,7 +38,7 @@ virtual_alias_domains =
 virtual_mailbox_domains = proxy:mysql:/etc/postfix/mydomain.cf
 virtual_mailbox_maps = proxy:mysql:/etc/postfix/myvirtual.cf
 virtual_mailbox_limit_maps = proxy:mysql:/etc/postfix/myquota.cf
-virtual_mailbox_base = /var/alternc/mail
+virtual_mailbox_base = %%ALTERNC_MAIL%%
 virtual_minimum_uid = 2000
 virtual_gid_maps = proxy:mysql:/etc/postfix/mygid.cf
 virtual_uid_maps = proxy:mysql:/etc/postfix/mygid.cf
