@@ -52,7 +52,8 @@ print_domain_letter() {
 get_html_path_by_name() {
   local name="$1"
   if [[ ! "$name" =~ ^([a-z0-9]+)$ ]] ; then
-    echo "Account name is incorrect."
+    # Error on error flux
+    echo "Account name is incorrect." >&2
     exit 2
   fi
   echo "$ALTERNC_HTML/${name:0:1}/$name"

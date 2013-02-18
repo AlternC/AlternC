@@ -1,31 +1,27 @@
-#!/usr/bin/perl 
+#!/bin/bash
 
-use strict;
+if [ $# -ne 2 ] ; then
+    echo "Usage: mem_del <name>"
+    echo " Delete the AlternC account <name>"
+    exit 1
+fi
 
-my ($name) = @ARGV;
+name="$1"
 
-if (!$name) {
-    print "Usage: mem_del <name>\n";
-    print " Delete the AlternC account <name>\n";
-    exit(1);
-}
+if [[ ! "$name" =~ ^([a-z0-9]+)$ ]] ; then
+  echo "Account name is incorrect."
+  exit 2
+fi
 
-$ENV{PATH} = "";
-delete @ENV{'IFS', 'CDPATH', 'ENV', 'BASH_ENV'};
 
-if (!($name =~ /^([a-z0-9]+)$/)) {
-    die "Account name is incorrect.";
-}
-$name=$1;
+if [[ ! "$(id -u)" == "0" ]] ; then
+  echo "please launch mem_add as root (or using sudo)"
+  exit 4
+fi
 
-if ( $< != 0 ) {
-    die "please launch mem_del as root (or using sudo)";
-}
-#$< = $>;
-#$( = $);
+# Get the vars and some functions
+source /usr/lib/alternc/functions.sh
+target="$(get_html_path_by_name "$name")"
 
-my $PTH="/var/alternc/html/".substr($name,0,1)."/".$name;
+test -d "$target" && rm -rf "$target"
 
-system("/bin/rm -rf '$PTH'");
-
-0;
