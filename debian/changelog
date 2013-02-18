@@ -1,3 +1,10 @@
+alternc (3.1~alpha1) experimental; urgency=low
+
+  * menu became dynamic with a class
+  * /var/alternc disapear to became Debian-compliant
+
+ -- Alan Garcia <fufroma@nnx.com>  Mon, 18 Feb 2013 16:09:58 +0100
+
 alternc (3.0) stable; urgency=low
 
   * RELEASE of AlternC 3.0

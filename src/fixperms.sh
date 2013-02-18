@@ -96,7 +96,7 @@ doone() {
       if [ "$DEBUG" ]; then
         echo "Setting rights and ownership for user $LOGIN having gid $GID"
       fi
-      REP="$(get_html_path_by_name "$name")"
+      REP="$(get_html_path_by_name "$LOGIN")"
 
       # Set the file readable only for the AlternC User
       mkdir -p "$REP"
