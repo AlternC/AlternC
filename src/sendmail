@@ -20,7 +20,8 @@ while ($A ne "") {
    chomp($A=<STDIN>);
 }
 
-$ENV{'PWD'}=~/^\/var\/alternc\/html\/.\/([^\/]*)/;
+$home=quotemeta $ENV{'ALTERNC_HTML'};
+$ENV{'PWD'}=~/^$home\/.\/([^\/]*)/;
 $user=$1;
 
 if (!$fr) {

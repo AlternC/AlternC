@@ -461,6 +461,7 @@ etc/alternc/templates/alternc/apache_logformat.conf -text
 etc/alternc/templates/alternc/bureau.conf -text
 etc/alternc/templates/alternc/postfix/postfix-slave.cf -text
 etc/alternc/templates/alternc/postfix/postfix.cf -text
+etc/alternc/templates/apache2/envvars -text
 etc/alternc/templates/apache2/panel.conf -text
 etc/alternc/templates/apache2/url.conf -text
 etc/alternc/templates/apache2/vhost.conf -text
