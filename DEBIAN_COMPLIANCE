@@ -11,12 +11,6 @@ launching :
 in a debian server could help finding the right way to do it (eg: bind9 ) ;) 
 
 Questions:
-  - what do we do about /var/alternc/exec.usr/ ?
-
-- we don't need our own php session folder don't we ? (or maybe for alternc-panel writable only ?) 
-  W: alternc: non-standard-dir-perm var/alternc/sessions/ 1733 != 0755
-  => /var/alternc/tmp => not easy to decide, cf #1458
-  => we must check if alternc can work with memcached sessions (or force disks sessions)
 
 - some binaries / scripts don't have a man page
 
@@ -52,6 +46,8 @@ Should be fixed, need more test:
 - /var/alternc/db => not used anymore, drop
 - /var/alternc/mla => not used anymore, drop
 - there is /var/alternc/cgi-bin/ is forgotten and now we use the standard /usr/lib/cgi-bin/ 
+- /var/alternc/exec.usr/ => usr/lib/alternc/safe_mode_exec_dir
+- /var/alternc/sessions/ disapear for the standard PHP sessions dir.
 
 ********************************************************************************
 FIXED:
