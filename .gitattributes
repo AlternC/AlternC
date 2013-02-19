@@ -477,7 +477,6 @@ etc/alternc/templates/dovecot/dovecot-dict-quota.conf -text
 etc/alternc/templates/dovecot/dovecot-sql.conf -text
 etc/alternc/templates/dovecot/dovecot.conf -text
 etc/alternc/templates/incron.d/alternc -text
-etc/alternc/templates/postfix/ca.der -text
 etc/alternc/templates/postfix/master.cf -text
 etc/alternc/templates/postfix/myalias.cf -text
 etc/alternc/templates/postfix/mydomain.cf -text
