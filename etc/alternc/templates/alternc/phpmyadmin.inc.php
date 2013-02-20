@@ -1,5 +1,10 @@
 <?php
 
+# AUTO GENERATED FILE
+# Modify template in /etc/alternc/templates/
+# and launch alternc.install if you want 
+# to modify this file.
+
 /**
  * Special phpmyadmin configuration for AlternC
  *
@@ -19,6 +24,7 @@ $cfg['SuhosinDisableWarning'] = true;
 $cfg['ShowCreateDb'] = false; 
 $cfg['ShowChgPassword'] = false; 
 $cfg['LoginCookieRecall'] = false;
+$cfg['blowfish_secret'] = '%%PHPMYADMIN_BLOWFISH%%';
 
 $i = 1;
 

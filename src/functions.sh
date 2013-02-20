@@ -90,3 +90,12 @@ log_error() {
   exit 1
 }
 
+generate_string() {
+  local size=$1
+  if [ -z "$size" ] ; then
+    size=20
+  fi
+  < /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-$size}
+  echo
+}
+

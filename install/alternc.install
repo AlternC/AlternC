@@ -64,7 +64,7 @@ TEMPLATE_DIR="/etc/alternc/templates"
 
 # Find needed configuration files (without the initial '/')
 # replace this one unconditionnally
-CONFIG_FILES="etc/alternc/bureau.conf etc/incron.d/alternc etc/apache2/envvars etc/alternc/apache2.conf etc/alternc/apache_logformat.conf"
+CONFIG_FILES="etc/alternc/bureau.conf etc/incron.d/alternc etc/apache2/envvars etc/alternc/apache2.conf etc/alternc/apache_logformat.conf etc/alternc/phpmyadmin.inc.php"
 
 if [ -e /etc/bind/named.conf ]; then
     CONFIG_FILES="$CONFIG_FILES etc/bind/templates/zone.template
@@ -191,6 +191,9 @@ fi
 
 PUBLIC_IP_BEGIN=$(echo $PUBLIC_IP|cut -c 1)
 
+# Secret for PhpMyAdmin sessions
+PHPMYADMIN_BLOWFISH="$(generate_string 24)"
+
 # XXX: I assume this is secure if /tmp is sticky (+t)
 # we should have a better way to deal with templating, of course.
 SED_SCRIPT="/tmp/alternc.install.sedscript"
@@ -217,6 +220,7 @@ s\\%%ns2_ip%%\\$NS2_IP\\;
 s\\%%ALTERNC_HTML%%\\$ALTERNC_HTML\\;
 s\\%%ALTERNC_MAIL%%\\$ALTERNC_MAIL\\;
 s\\%%ALTERNC_LOGS%%\\$ALTERNC_LOGS\\;
+s\\%%PHPMYADMIN_BLOWFISH%%\\$PHPMYADMIN_BLOWFISH\\;
 EOF
 
 # hook 

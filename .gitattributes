@@ -455,10 +455,10 @@ etc/alternc/alternc.ini -text
 etc/alternc/apache2-ssl.conf -text
 etc/alternc/dbusers.cnf.sample -text
 etc/alternc/functions_hosting/hosting_massvhost.sh -text
-etc/alternc/phpmyadmin.inc.php -text
 etc/alternc/templates/alternc/apache2.conf -text
 etc/alternc/templates/alternc/apache_logformat.conf -text
 etc/alternc/templates/alternc/bureau.conf -text
+etc/alternc/templates/alternc/phpmyadmin.inc.php -text
 etc/alternc/templates/alternc/postfix/postfix-slave.cf -text
 etc/alternc/templates/alternc/postfix/postfix.cf -text
 etc/alternc/templates/apache2/envvars -text
