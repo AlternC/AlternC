@@ -58,7 +58,6 @@ install: build
 
 	# Fix permisions
 	chmod 755 debian/alternc/etc/alternc
-	chmod 644 debian/alternc/etc/alternc/phpmyadmin.inc.php
 	# Group and user 1999 reference alterncpanel
 	chown -R 1999:1999 debian/alternc/usr/share/alternc/panel
 	chmod -R 644 debian/alternc/usr/share/alternc/panel

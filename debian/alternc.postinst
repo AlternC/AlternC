@@ -226,20 +226,6 @@ EOF
            FQDN_LETTER="_"
     fi
 
-
-    echo "config phpmyadmin"
-    # Mise à jour sur une configuration existante
-    # recherche la chaine include_str (avec les / echappées) et supprime les <?php ?>
-    # ${include_str//\//\\/}"'\) c'est uniquement BASH, on est en SH/DASH 
-    include_str='include("/etc/alternc/phpmyadmin.inc.php")'
-    pma_config='/etc/phpmyadmin/config.inc.php'
-    bash -c "include_str='include(\"/etc/alternc/phpmyadmin.inc.php\")';pma_config='/etc/phpmyadmin/config.inc.php';sed 's/<?php \('\"\${include_str//\//\\/}\"'\) ?>/\1;/g' \$pma_config > \$pma_config'_2' && mv \$pma_config'_2' \$pma_config"
-
-    # Sur une configuration vierge, inclure la configuration alternc
-    if ! grep -e "$include_str" $pma_config > /dev/null 2>&1; then
-        echo "$include_str;" >> $pma_config
-    fi
-
     #clean old access to the management panel
     # We don't use this anymore : (FIXME : shall we remove /var/alternc/dns while upgrading ?)
     #find /var/alternc/dns/ -type l -lname /var/alternc/bureau -exec rm {} \;
