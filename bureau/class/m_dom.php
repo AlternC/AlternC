@@ -1001,7 +1001,6 @@ class m_dom {
 	}
       }
     }
-// Error: can't create /var/www/alternc/a/adminhttps://webmail.somme-communication.fr
     if ($db->f('create_targetdir')) {
       $dirr=$dest_root.$dest;
       $dirr=str_replace('//','/',$dirr);
