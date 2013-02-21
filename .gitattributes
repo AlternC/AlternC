@@ -47,6 +47,7 @@ bureau/admin/about.php -text
 bureau/admin/adm_add.php -text
 bureau/admin/adm_authip_whitelist.php -text
 bureau/admin/adm_cancel.php -text
+bureau/admin/adm_db_servers.php -text
 bureau/admin/adm_deactivate.php -text
 bureau/admin/adm_defquotas.php -text
 bureau/admin/adm_del.php -text
@@ -453,7 +454,6 @@ debian/rules -text
 etc/alternc/alternc-sudoers -text
 etc/alternc/alternc.ini -text
 etc/alternc/apache2-ssl.conf -text
-etc/alternc/dbusers.cnf.sample -text
 etc/alternc/functions_hosting/hosting_massvhost.sh -text
 etc/alternc/templates/alternc/apache2.conf -text
 etc/alternc/templates/alternc/apache_logformat.conf -text
@@ -521,6 +521,8 @@ install/upgrades/3.0.0~1.sql -text
 install/upgrades/3.0.0~2.sh -text
 install/upgrades/3.0.0~3.php -text
 install/upgrades/3.0.0~4.sh -text
+install/upgrades/3.1.0~a.sql -text
+install/upgrades/3.1.0~b.php -text
 install/upgrades/README -text
 lang/.svnignore -text
 lang/README -text

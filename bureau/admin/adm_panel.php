@@ -67,6 +67,7 @@ if (isset($error) && $error) {
  <li class="lst2"><a href="adm_doms_def_type.php"><?php __("Manage defaults domains type"); ?></a></li>
  <li class="lst1"><a href="adm_domstype.php"><?php __("Manage domains type"); ?></a></li>
  <li class="lst2"><a href="adm_dnsweberror.php"><?php __("DNS and website having errors"); ?></a></li>
+ <li class="lst1"><a href="adm_db_servers.php"><?php __("Manage databases servers"); ?></a></li>
 <!--  <li class="lst2"><a href="stats_members.php"><?php __("Account creation statistics"); ?></a></li> -->
 
 <?php

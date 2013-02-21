@@ -366,6 +366,16 @@ done
 OLDDESTINATION=`postconf mydestination | awk -F '=' '{print $2}'`
 echo "$OLDDESTINATION" | grep -q -v "$FQDN" && postconf -e "mydestination = $FQDN, $OLDDESTINATION"
 
+# Configure PHPMyAdmin
+include_str='include("/etc/alternc/phpmyadmin.inc.php")'
+pma_config='/etc/phpmyadmin/config.inc.php'
+
+# Sur une configuration vierge, inclure la configuration alternc
+if ! grep -e "${include_str/\"/\\\"}" $pma_config > /dev/null 2>&1; then
+    echo "$include_str;" >> $pma_config
+fi
+
+
 # Reload incron. Useless, but who know?
 SERVICES="$SERVICES incron"
  

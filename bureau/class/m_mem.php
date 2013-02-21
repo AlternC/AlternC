@@ -156,7 +156,7 @@ class m_mem {
    * @return boolean TRUE if the user has been successfully connected, FALSE else.
    */
   function setid($id) {
-    global $db,$err,$cuid;
+    global $db,$err,$cuid,$mysql;
     $err->log("mem","setid",$id);
     $db->query("select * from membres where uid='$id';");
     if ($db->num_rows()==0) {
@@ -166,6 +166,9 @@ class m_mem {
     $db->next_record();
     $this->user=$db->Record;
     $cuid=$db->f("uid");
+    // And recreate the $db->dbus 
+    $mysql->reload_dbus();
+
     $ip=get_remote_ip();
     $sess=md5(uniqid(mt_rand()));
     $_REQUEST["session"]=$sess;
@@ -276,7 +279,7 @@ class m_mem {
    * @return TRUE si la session est correcte, FALSE sinon.
    */
   function su($uid) {
-    global $cuid,$db,$err;
+    global $cuid,$db,$err,$mysql;
     if (!$this->olduid)
 	    $this->olduid=$cuid;
     $db->query("select * from membres where uid='$uid';");
@@ -287,6 +290,9 @@ class m_mem {
     $db->next_record();
     $this->user=$db->Record;
     $cuid=$db->f("uid");
+
+    // And recreate the $db->dbus 
+    $mysql->reload_dbus();
     return true;
   }
 
@@ -300,6 +306,8 @@ class m_mem {
 	return false;
     $this->su($this->olduid);
     $this->olduid=0;
+    // And recreate the $db->dbus 
+    $mysql->reload_dbus();
     return true;
   }
 

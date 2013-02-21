@@ -41,57 +41,22 @@ class DB_users extends DB_Sql {
    * Creator
    */
   function DB_users() {
+    global $cuid, $db, $err;
+    $db->query("select db_servers.* from db_servers, membres where membres.uid=$cuid and membres.db_server_id=db_servers.id;");
 
-# Use the dbusers file if exist, else use default alternc configuration
-    if ( is_readable("/etc/alternc/dbusers.cnf") ) {
-      $mysqlconf=file_get_contents("/etc/alternc/dbusers.cnf");
-    } else {
-      $mysqlconf=file_get_contents("/etc/alternc/my.cnf");
-    }
-    $mysqlconf=explode("\n",$mysqlconf);
-
-# Read the configuration
-    foreach ($mysqlconf as $line) {
-# First, read the "standard" configuration
-      if (preg_match('/^([A-Za-z0-9_]*) *= *"?(.*?)"?$/', trim($line), $regs)) {
-        switch ($regs[1]) {
-          case "user":
-            $user = $regs[2];
-          break;
-          case "password":
-            $password = $regs[2];
-          break;
-          case "host":
-            $host = $regs[2];
-          break;
-        }
-      }
-# Then, read specific alternc configuration
-      if (preg_match('/^#alternc_var ([A-Za-z0-9_]*) *= *"?(.*?)"?$/', trim($line), $regs)) {
-        $$regs[1]=$regs[2];
-      }
+    if (!$db->next_record()) {
+      $err->raise('db_user', _("There are no databases in db_servers for this user. Please contact your administrator."));
+      die();
     }
 
-# Set value of human_host if unset
-    if (! isset($human_hostname) || empty($human_hostname)) {
-      if ( checkip($host) || checkipv6($host) ) {
-        $human_hostname = gethostbyaddr($host);
-      } else {
-        $human_hostname = $host;
-      }
-    }
+    # Create the object
+    $this->HumanHostname = $db->f('name');
+    $this->Host          = $db->f('host');
+    $this->User          = $db->f('login');
+    $this->Password      = $db->f('password');
+    $this->Client        = $db->f('client');
 
-# Create the object
-    $this->Host     = $host;
-    $this->User     = $user;
-    $this->Password = $password;
-    $this->Client   = $GLOBALS['L_MYSQL_CLIENT'];
-    // TODO BUG BUG BUG
-    // c'est pas étanche : $db se retrouve avec Database de $sql->dbu . Danger, faut comprendre pourquoi
-    // Si on veux que ca marche, il faut Database=alternc.
-    //$this->Database = "mysql";
-    $this->Database = "mysql"; #if dbus is on a different  host the alternc database will not be there and trying to use it might cause an error
-    $this->HumanHostname = $human_hostname;
+    $this->Database = "mysql"; # We have to define a dabatase when we connect, and the database must exist.
 
   }
 }
@@ -105,7 +70,24 @@ class m_mysql {
    * m_mysql([$mid]) Constructeur de la classe m_mysql, initialise le membre concerne
    */
   function m_mysql() {
+    global $cuid;
+    if (!empty($cuid)) { 
+      $this->dbus = new DB_users();
+    }
+  }
+
+  function reload_dbus() {
     $this->dbus = new DB_users();
+  }
+
+  function list_db_servers() {
+    global $db;
+    $db->query("select db_servers.*, count(*) as nb_users from db_servers, membres where membres.db_server_id = db_servers.id group by db_server_id order by name,id;");
+    $c=array();
+    while ($db->next_record()) {
+      $c[]=$db->Record;
+    }
+    return $c;
   }
 
   function hook_menu() {
@@ -150,7 +132,6 @@ class m_mysql {
   function alternc_password_policy() {
     return array("mysql"=>"MySQL users");
   }
-
 
   /*---------------------------------------------------------------------------*/
   /** Get the list of the database for the current user.
