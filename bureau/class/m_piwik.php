@@ -33,6 +33,8 @@ class m_piwik {
 
   function hook_menu() {
     global $quota;
+    if ( empty($this->piwik_server_uri) || empty($this->piwik_admin_token)) return false;
+
     $obj = array(
       'title'       => _("Piwik statistics"),
       'ico'         => 'images/stat.png',
