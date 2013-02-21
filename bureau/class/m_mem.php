@@ -301,7 +301,7 @@ class m_mem {
    * @return TRUE si la session est correcte, FALSE sinon.
    */
   function unsu() {
-    global $cuid;
+    global $cuid,$mysql;
     if (!$this->olduid)
 	return false;
     $this->su($this->olduid);

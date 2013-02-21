@@ -99,6 +99,24 @@ if (isset($error) && $error) {
 ?></select>
 </td>
 </tr>
+<tr>
+    <th>
+        <?php 
+          __("Wich database server for this user ?");
+          echo "<br/>";
+          echo "<i>"._("Warning: you can't change it after the creation of the user.")."</i>";
+        ?>
+     </th>
+     <td><?php
+          echo "<select name='db_server_id' id='db_server_id' >";
+          foreach ($mysql->list_db_servers() as $ldb ) {
+            echo "<option value='".$ldb['id']."'>".$ldb['name']."</option>";
+          }
+          echo "</select>";
+        ?>
+    </td>
+</tr>
+
 <?php if (variable_get('hosting_tld') || $dom->enum_domains()) { ?>
 <tr>
     <th colspan="2">

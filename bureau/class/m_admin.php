@@ -160,6 +160,7 @@ class m_admin {
 		l.*, 
 		m.*, 
 		parent.login as parentlogin,
+		dbs.name as db_server_name,
 		m.renewed + INTERVAL m.duration MONTH as expiry,
 		CASE 
 			WHEN m.duration IS NULL THEN 0 
@@ -169,6 +170,7 @@ class m_admin {
 		
 	FROM membres as m 
 		LEFT JOIN membres as parent ON (parent.uid = m.creator) 
+		LEFT JOIN db_servers as dbs ON (m.db_server_id = dbs.id)
 		LEFT JOIN local as l ON (m.uid = l.uid) ;");
        while ($db->next_record()) {
          $lst_users_properties[$db->f('muid')]=$db->Record;
@@ -414,11 +416,15 @@ class m_admin {
    * @pararm $type string Account type for quotas
    * @return boolean Returns FALSE if an error occurs, TRUE if not.
    */
-  function add_mem($login, $pass, $nom, $prenom, $mail, $canpass=1, $type='default', $duration=0, $notes = "", $force=0, $create_dom=false) {
+  function add_mem($login, $pass, $nom, $prenom, $mail, $canpass=1, $type='default', $duration=0, $notes = "", $force=0, $create_dom=false, $db_server_id) {
     global $err,$quota,$classes,$cuid,$mem,$L_MYSQL_DATABASE,$L_MYSQL_LOGIN,$hooks;
     $err->log("admin","add_mem",$login."/".$mail);
     if (!$this->enabled) {
       $err->raise("admin",_("-- Only administrators can access this page! --"));
+      return false;
+    }
+    if (empty($db_server_id)) {
+      $err->raise("admin",_("Missing db_server field"));
       return false;
     }
     if (($login=="")||($pass=="")) {
@@ -465,7 +471,7 @@ class m_admin {
 	      $uid=$db->Record["nextid"];
 	      if ($uid<=2000) $uid=2000;
       }
-      $db->query("INSERT INTO membres (uid,login,pass,mail,creator,canpass,type,created, notes) VALUES ('$uid','$login','$pass','$mail','$cuid','$canpass', '$type', NOW(), '$notes');");
+      $db->query("INSERT INTO membres (uid,login,pass,mail,creator,canpass,type,created,notes,db_server_id) VALUES ('$uid','$login','$pass','$mail','$cuid','$canpass', '$type', NOW(), '$notes', '$db_server_id');");
       $db->query("INSERT INTO local(uid,nom,prenom) VALUES('$uid','$nom','$prenom');");
       $this->renew_update($uid, $duration);
       exec("sudo /usr/lib/alternc/mem_add ".$login." ".$uid);

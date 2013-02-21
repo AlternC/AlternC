@@ -156,7 +156,7 @@ while (list($key,$val)=each($r))
 	</tr>
 
 <tr class="lst<?php echo $col; ?>" >
-<td></td><td></td>
+<td/><td ><i><?php echo _("DB:").' '.$val['db_server_name']?></i></td>
 <td colspan="8" >
 <div id="admlistbtn">
 <span class="ina<?php if ($col==2) echo "v"; ?> lst<?php echo $col; ?>">

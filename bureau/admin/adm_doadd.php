@@ -31,6 +31,7 @@ $fields = array (
 	"pass"    		=> array ("post", "string", ""),
 	"passconf"    		=> array ("post", "string", ""),
 	"canpass"    		=> array ("post", "integer", ""),
+	"db_server_id"          => array ("post", "integer", ""),
 	"notes"    		=> array ("post", "string", ""),
 	"nom"    		=> array ("post", "string", ""),
 	"prenom"    		=> array ("post", "string", ""),
@@ -48,7 +49,7 @@ if ($pass != $passconf) {
 }
 
 // Attemp to create, exit if fail
-if (!($u=$admin->add_mem($login, $pass, $nom, $prenom, $nmail, $canpass, $type, 0, $notes, 0, $create_dom_list))) {
+if (!($u=$admin->add_mem($login, $pass, $nom, $prenom, $nmail, $canpass, $type, 0, $notes, 0, $create_dom_list, $db_server_id))) {
 	$error=$err->errstr();
 	include ("adm_add.php");
 	exit;
