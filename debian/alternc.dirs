@@ -14,6 +14,7 @@ usr/bin
 usr/share/alternc/panel
 usr/lib/alternc
 usr/lib/alternc/install.d
+usr/lib/alternc/reload.d
 usr/lib/alternc/safe_mode_exec_dir
 usr/sbin
 usr/share/alternc/install

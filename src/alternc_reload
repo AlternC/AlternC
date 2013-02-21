@@ -69,9 +69,6 @@ if [ ! -z "$RELOAD_ZONES" ]; then
         $sudo rndc reload || echo "Cannot reload bind" 
         apache_reload # keep for compatibility
         ;;
-      "dns_daemon")
-        dns_restart
-        ;;
       "apache")
         apache_reload
         ;;

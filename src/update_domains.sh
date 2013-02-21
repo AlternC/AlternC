@@ -20,12 +20,9 @@ LOCK_FILE="/usr/share/alternc/panel/cron.lock" # FIXME doesn't seem clean to be 
 OLDIFS="$IFS"
 NEWIFS=" "
 LOGFORMAT_FILE="/etc/alternc/apache_logformat.conf"
-RELOAD_ZONES="$(mktemp /tmp/alternc_reload_zones.XXXX)"
 RELOAD_WEB="$(mktemp /tmp/alternc_reload_web.XXXX)"
-DNS_DO_RESTART="/tmp/alternc.do_do_restart.$$"
 B="µµ§§" # Strange letters to make split in query
 
-echo "" > "$RELOAD_ZONES"
 echo "" > "$RELOAD_WEB"
 
 # Somes check before start operations
@@ -95,7 +92,6 @@ for dom in `mysql_query "select domaine from domaines where dns_action = 'UPDATE
 do
     dns_delete $dom
     mysql_query "update domaines set dns_action = 'OK', dns_result = '$?' where domaine = '$dom'"
-    echo -n " $dom " >> "$RELOAD_ZONES"
 done
 
 # Domains we have to update the dns :
@@ -105,7 +101,6 @@ do
     echo "dns_regenerate : domain=/$dom/"
     dns_regenerate $dom
     mysql_query "update domaines set dns_action = 'OK', dns_result = '$?' where domaine = '$dom'"
-    echo -n " $dom " >> "$RELOAD_ZONES"
 done
 
 # Domains we want to delete completely, now we do it
@@ -115,11 +110,9 @@ do
     dns_delete $dom
     # Web configurations have already bean cleaned previously
     mysql_query "delete from sub_domaines where domaine='$dom'; delete from domaines where domaine='$dom';"
-    echo -n " $dom " >> "$RELOAD_ZONES"
 done
 
 if [ ! -z "$(cat "$RELOAD_WEB")" ] ; then
-  echo " apache " >> "$RELOAD_ZONES"
 
   # Just to encourage user to use THIS directory and not another one
   test -d "$VHOST_MANUALCONF" || mkdir -p "$VHOST_MANUALCONF"
@@ -150,23 +143,21 @@ if [ ! -z "$(cat "$RELOAD_WEB")" ] ; then
   fi
   mv "$tempo" "$VHOST_FILE"
 
+  # We must reload apache
+  # we assume we run apache on the master
+  /usr/bin/alternc_reload apache || true
+  # Launch hooks for apache reload
+  run-parts --arg=web_reload /usr/lib/alternc/reload.d
 fi
 
-# What do we reload ?
-lst_zones=$(cat "$RELOAD_ZONES"|tr '\n' ' ')
-if [ -e "$DNS_DO_RESTART" ] ; then
-  lst_zones="dns_daemon $lst_zones" 
-fi
+## FIXME : move the slave part into the /usr/lib/alternc/reload.d directory to be an hook
+#for slave in $ALTERNC_SLAVES; do
+#    if [ "$slave" != "localhost" ]; then
+#        ssh alternc@$slave alternc_reload 'apache' || true
+#    fi
+#done
 
-# we assume we run apache and bind on the master
-/usr/bin/alternc_reload $lst_zones || true
-for slave in $ALTERNC_SLAVES; do
-    if [ "$slave" != "localhost" ]; then
-        ssh alternc@$slave alternc_reload $lst_zones || true
-    fi
-done
-
-rm -f "$LOCK_FILE" "$RELOAD_ZONES" "$RELOAD_WEB" "$DNS_DO_RESTART" "$INOTIFY_UPDATE_DOMAIN"
+rm -f "$LOCK_FILE" "$RELOAD_ZONES" "$RELOAD_WEB" "$INOTIFY_UPDATE_DOMAIN"
 
 exit 0
 

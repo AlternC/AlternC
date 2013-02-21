@@ -9,6 +9,7 @@
 ZONE_TEMPLATE="/etc/alternc/templates/bind/templates/zone.template"
 NAMED_TEMPLATE="/etc/alternc/templates/bind/templates/named.template"
 NAMED_CONF="/var/lib/alternc/bind/automatic.conf"
+RNDC="/usr/sbin/rndc"
 
 dns_zone_file() {
     echo "/var/lib/alternc/bind/zones/$1"
@@ -56,18 +57,21 @@ dns_named_conf() {
     tempo=${tempo/@@DOMAINE@@/$domain}
     tempo=${tempo/@@ZONE_FILE@@/$(dns_zone_file $domain)}
     echo $tempo >> "$NAMED_CONF"
+    # Kindly ask Bind to reload his configuration
+    # (the zone file is allready created and populate)
+    $RNDC reconfig
+    # Hook it !
+    run-parts --arg=dns_reconfig  /usr/lib/alternc/reload.d
   fi
 
-  # Ask for restart of dns server
-  touch "$DNS_DO_RESTART"
 }
 
 dns_delete() {
   local domain=$1
 
   # Delete the zone file
-  if [ -w $(dns_zone_file $domain) ] ; then
-    rm -f $(dns_zone_file $domain)
+  if [ -w "$(dns_zone_file $domain)" ] ; then
+    rm -f "$(dns_zone_file $domain)"
   fi
 
   # Remove from the named conf
@@ -75,7 +79,9 @@ dns_delete() {
   echo -e "$file" |grep -v "\"$domain\"" > "$NAMED_CONF"
 
   # Ask for restart of dns server
-  touch "$DNS_DO_RESTART"
+  $RNDC reconfig
+  # Hook it !
+  run-parts --arg=dns_reconfig  /usr/lib/alternc/reload.d
 }
 
 # DNS regenerate
@@ -142,4 +148,9 @@ dns_regenerate() {
     dns_chmod $domain
     # Add it to named conf
     dns_named_conf $domain
+
+    # Kindly bind to reload the zone
+    $RNDC reload $domain
+    # Hook it !
+    run-parts --arg=dns_reload_zone --arg="$domain" /usr/lib/alternc/reload.d
 }
