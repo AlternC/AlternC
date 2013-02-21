@@ -1001,12 +1001,15 @@ class m_dom {
 	}
       }
     }
+// Error: can't create /var/www/alternc/a/adminhttps://webmail.somme-communication.fr
     if ($db->f('create_targetdir')) {
       $dirr=$dest_root.$dest;
+      $dirr=str_replace('//','/',$dirr);
+
       if (! is_dir($dirr)) {
       $old = umask(0);
-	if(!mkdir($dirr,0770,true)){
-	  $err->raise("dom",_("Cannot write to the destination folder"));
+        if(!@mkdir($dirr,0770,true)){
+          $err->raise("dom",_("Cannot write to the destination folder"));
         }
         umask($old);
       }

@@ -55,6 +55,9 @@ function checkhostallow($domain,$dns) {
       }
     }
   }
+  $tld_no_check_at_all = variable_get('tld_no_check_at_all', 0,'Set to 1 to disable ALL check on the TLD (users will be able to add any domain)');
+  if ( $tld_no_check_at_all )
+    return 0; // OK , the boss say that you can.
 
   if (!$found || $fmode==0)			// TLD not allowed at all
     return -1;
