@@ -59,7 +59,12 @@ class m_menu {
     $mop = $mem->session_tempo_params_get('menu_toggle') ;
 
     foreach( $lst as $k => $v ) {
-      
+
+      if (empty($v)) {
+        unset($lst[$k]);  
+        continue;
+      }
+
       // Set the javascript toggle link for menu asking for it
       if ($v['link'] == 'toggle') {
         $lst[$k]['link'] = 'javascript:menu_toggle(\'menu-'.$k.'\');';
