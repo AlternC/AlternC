@@ -129,9 +129,9 @@ for i in "$ALTERNC_HTML" "$ALTERNC_MAIL" "$ALTERNC_LOGS" ; do
   test -d "$i" || mkdir -p "$i"
 done
 
-chown alterncpanel:adm "$ALTERNC_LOGS"
-chown www-data:www-data "$ALTERNC_HTML"
-chown vmail:vmail "$ALTERNC_MAIL"
+find $ALTERNC_LOGS -maxdepth 1 -type d -exec chown alterncpanel:adm {} \; 
+find $ALTERNC_HTML -maxdepth 1 -type d -exec chown alterncpanel:alterncpanel {} \; 
+find $ALTERNC_MAIL -maxdepth 1 -type d -exec chown vmail:vmail {} \;
 
 for i in a b c d e f g h i j k l m n o p q r s t u v w x y z _ 0 1 2 3 4 5 6 7 8 9; do
   test -d "$ALTERNC_HTML/$i" || ( mkdir -p "$ALTERNC_HTML/$i" && chown www-data:www-data "$ALTERNC_HTML/$i" )
@@ -454,8 +454,7 @@ if [ "$slave" = "1" ]; then
     exit 0
 fi
 
-chown alterncpanel:alterncpanel "$ALTERNC_HTML/"*
-setfacl -b -k -m d:g:alterncpanel:rw- -m g:alterncpanel:rw- "$ALTERNC_HTML/"*
+find $ALTERNC_HTML -maxdepth 1 -type d -exec setfacl -b -k -m d:g:alterncpanel:rw- -m g:alterncpanel:rw- {} \;
 
 #creating log file
 if [ ! -e "/var/log/alternc/bureau.log" ]; then
