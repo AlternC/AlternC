@@ -172,6 +172,7 @@ CREATE TABLE IF NOT EXISTS membres (
   warnfailed tinyint(4) default '0',			-- TODO L`utilisateur veut-il recevoir un mail quand on tente de se logguer sur son compte ?
   admlist tinyint(4) default '0',			-- Mode d`affichage de la liste des membres pour les super admins
   type varchar(128) default 'default',
+  db_server_id int(10) DEFAULT NULL,
   notes TEXT NOT NULL,
   created datetime default NULL, 
   renewed datetime default NULL, 
@@ -697,4 +698,15 @@ INSERT IGNORE INTO `default_subdomains` (`sub`, `domain_type`, `domain_type_para
 ('mail', 'URL', 'http://mail.%%TARGETDOM%%', 'SLAVE'),
 ('', 'URL', 'http://%%TARGETDOM%%', 'SLAVE');
 
+
+-- Table for the MySQL servers
+CREATE TABLE IF NOT EXISTS `db_servers` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `name` varchar(255) NOT NULL,
+  `host` varchar(255) NOT NULL,
+  `login` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `client` varchar(255) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM COMMENT='List of the databases servers';
 
