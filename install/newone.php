@@ -44,7 +44,8 @@ require("/usr/share/alternc/panel/class/config_nochk.php");
 $admin->enabled=1;
 
 // On crée le compte admin : 
-if (!$admin->add_mem("admin","admin","Administrateur", "Admin", "postmaster@".$L_FQDN,1,'default',0,'',1)) {
+//FIXME the last parameter should not be chosen by default: it has to match an entry in the db_servers table
+if (!$admin->add_mem("admin","admin","Administrateur", "Admin", "postmaster@".$L_FQDN,1,'default',0,'',0 ,'',1)) {
 	echo $err->errstr()."\n";
 	exit(1);
 }
