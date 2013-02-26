@@ -6,7 +6,6 @@
 FLAGFILE="/var/run/alternc/refresh_slave";
 TPL="/etc/alternc/templates/bind/slaveip.conf"
 TARGET="/var/lib/alternc/bind/slaveip.conf"
-TMP=$(mktemp /tmp/slaveip.conf.XXXX)
 
 if [ ! -e "$FLAGFILE" ] ; then 
   # Nothing to do
@@ -15,6 +14,8 @@ fi
 
 # Source some functions
 . /usr/lib/alternc/functions.sh
+
+TMP=$(mktemp /tmp/slaveip.conf.XXXX)
 
 # Get the slave IP. Remove the "newline" caracters
 val=$(mysql_query "SELECT concat(ip,'::',class,'; ') FROM slaveip;"|tr '\n' ' ')
