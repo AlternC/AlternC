@@ -29,11 +29,14 @@
 class m_ftp {
 
 
+  var $srv_name;
   /* ----------------------------------------------------------------- */
   /**
    * Constructeur
    */
   function m_ftp() {
+    global $L_FQDN;
+    $this->srv_name = variable_get('ftp_human_name', $L_FQDN,'Human name for FTP server');
   }
 
 

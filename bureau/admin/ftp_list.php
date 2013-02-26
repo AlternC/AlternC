@@ -93,6 +93,20 @@ while (list($key,$val)=each($r))
 <p><input type="submit" name="submit" class="inb" value="<?php __("Delete checked accounts"); ?>" /></p>
 </form>
 
+<br/>
+<hr/>
+
+<h3><?php __("FTP configuration informations");?></h3>
+
+<?php __("Here are some configuration informations you'll need to configure your FTP application.");?>
+
+<ul>
+  <li><?php echo '<b>'._("Server:").'</b> '.$ftp->srv_name; ?></li>
+  <li><?php echo '<b>'._("FTP mode for data transfert:").'</b> '._("passive");?></li>
+  <li><?php echo '<b>'._("User/password:").'</b> '._("the one you specified when you created the account. You can edit them in the panel.");?></li>
+<ul>
+<br/>
+
 <?php
 $mem->show_help("ftp_list");
 ?>
