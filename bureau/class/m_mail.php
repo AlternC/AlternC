@@ -786,7 +786,7 @@ ORDER BY
    */
   function echo_domain_list() {
   global $db,$err;
-  $db->query("SELECT domaine FROM domaines WHERE gesdns=1 ORDER BY domaine");
+  $db->query("SELECT domaine FROM domaines WHERE gesmx=1 ORDER BY domaine");
   while ($db->next_record()) {
     echo $db->f("domaine")."\n";
   }
