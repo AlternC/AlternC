@@ -1,8 +1,14 @@
 alternc (3.0.1) stable; urgency=low
 
+  [ squidly ]
   * r4112 : bugfixing upgrade script 3.0.0~3.php to add the phpmyadmin special user to table dbuser
+  [ Benjamin Sonntag ]
+  * [3146]: fix a bug at install time regarding the desktop access logs in /var/log/alternc/
+  * Fixed a bug in alternc.config which doesn't tell when you DON'T have ACL enabled in your alternc partition
+  * [4130] Fixed a bug in the email list of a domain
+  * [4068] Fixed the order of the script launch in upgrades/*
 
- -- squidly <squidly@nnx.com>  Thu, 21 Feb 2013 17:46:09 +0100
+ -- Benjamin Sonntag <benjamin@sonntag.fr>  Wed, 27 Feb 2013 09:43:08 +0100
 
 alternc (3.0) stable; urgency=low
 
