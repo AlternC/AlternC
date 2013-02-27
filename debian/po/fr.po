@@ -29,7 +29,7 @@ msgstr ""
 #. Description
 #: ../alternc.templates:1001
 msgid "AlternC need ACL on filesystem"
-msgstr "AlternC requiert les ACL sur le système de fichiersquota"
+msgstr "AlternC requiert les ACL sur le système de fichiers"
 
 #. Type: note
 #. Description
