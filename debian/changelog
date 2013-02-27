@@ -1,4 +1,4 @@
-alternc (3.0+nmu1) stable; urgency=low
+alternc (3.0.1) stable; urgency=low
 
   * r4112 : bugfixing upgrade script 3.0.0~3.php to add the phpmyadmin special user to table dbuser
 
