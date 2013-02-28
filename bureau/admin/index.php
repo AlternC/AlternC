@@ -53,8 +53,12 @@ if (!$charset) $charset="UTF-8";
   <div id="global">
 
     <div id="content" style="width:1000px;">
+      <?php
+      $logo = variable_get('logo_login', 0 ,'You can specify a logo for the login page, example /images/my_logo.png . Set 0 or empty to reset it. ');
+      if ( empty($logo) ||  ! $logo ) { $logo = 'images/logo.png'; }
+      ?>
 
-      <p id="logo">  <img src="logo.png" border="0" alt="<?php __("Web Hosting Control Panel"); ?>" title="<?php __("Web Hosting Control Panel"); ?>" /></a>
+      <p id="logo">  <img src="<?php echo $logo; ?>" border="0" alt="<?php __("Web Hosting Control Panel"); ?>" title="<?php __("Web Hosting Control Panel"); ?>" /></a>
       </p>
       <p>&nbsp;</p>
     <?php if (isset($error) && $error) echo "<div class='error'>$error</div>"; ?>
