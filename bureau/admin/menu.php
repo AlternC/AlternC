@@ -29,8 +29,14 @@
 */
 require_once("../class/config.php");
 
+$logo = variable_get('menu_logo', 0 ,'You can specify a logo for your AlternC, example /images/my_logo.png . Set 0 or empty to reset it. ');
+
+if ( empty($logo) ||  ! $logo ) {
+  $logo = 'images/logo3.png';
+}
+
 ?>
-<img src="logo3.png" class="menutoplogo" border="0" alt="AlternC" alt="<?php __("AlternC"); ?>"/>
+<img src="<?php echo $logo; ?>" class="menutoplogo" border="0" alt="AlternC" alt="<?php __("AlternC"); ?>"/>
 <p class="currentuser"><?php echo sprintf(_("Welcome %s"),$mem->user["login"]); ?></p>
 
 <?php
