@@ -161,7 +161,7 @@ if(!empty($mails_list)) {
 	<?php if ($val["type"]) { ?>
 	<td colspan="3"><?php echo $val["typedata"]; ?></td>
 	<?php } else { ?>
-	<td class="<?php echo $grey; ?>"><?php if ($val["islocal"]) echo format_size($val["used"])."/".format_size($val["quotabytes"]); else __("No"); ?></td>
+	<td class="<?php echo $grey; ?>"><?php if ($val["islocal"]) echo format_size($val["used"]).( ($val["quotabytes"]==0)?'':"/".format_size($val["quotabytes"])) ; else __("No"); ?></td>
 	<td class="<?php echo $grey; ?>"><?php echo $val["recipients"]; /* TODO : if >60chars, use "..." + js close/open */ ?></td>
   <td class="<?php echo $grey; ?>"><?php if ($val["islocal"]) { 
 if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"],11,5); else if (substr($val["lastlogin"],0,10)=="0000-00-00") __("Never"); else echo format_date(_('%3$d-%2$d-%1$d'),$val["lastlogin"]);
