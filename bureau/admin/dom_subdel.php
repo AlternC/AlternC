@@ -31,10 +31,7 @@ require_once("../class/config.php");
 include_once("head.php");
 
 $fields = array (
-	"domain"    => array ("request", "string", ""),
-	"sub"       => array ("request", "string", ""),
-	"type"      => array ("request", "string", ""),
-	"value"     => array ("request", "string", ""),
+	"sub_domain_id"       => array ("request", "integer", ""),
 );
 getFields($fields);
 
@@ -46,15 +43,13 @@ if (!$isinvited && $dt[strtolower($type)]["enable"] != "ALL" ) {
 
 
 $dom->lock();
-if (!$r=$dom->get_sub_domain_all($domain,$sub,$type)) {
+if (!$r=$dom->get_sub_domain_all($sub_domain_id)) {
 	$error=$err->errstr();
 }
 $dom->unlock();
 
-
-
 ?>
-<h3><?php printf(_("Deleting subdomain %s"),"http://".ife($sub,$sub.".").$domain); ?> : </h3>
+<h3><?php printf(_("Deleting subdomain %s"),"http://".ife($r['name'],$r['name'].".").$r['domain']); ?> : </h3>
 <?php
 	if (isset($error) && $error) {
 		echo "<p class=\"error\">$error</p>";
@@ -69,12 +64,9 @@ $dom->unlock();
  -->
 <form action="dom_subdodel.php" method="post">
 	<p class="error">
-	<input type="hidden" name="domain" value="<?php echo $domain ?>" />
-	<input type="hidden" name="sub" value="<?php echo $sub ?>" />
-	<input type="hidden" name="type" value="<?php echo $type ?>" />
-	<input type="hidden" name="value" value="<?php echo $value ?>" />
+	<input type="hidden" name="sub_domain_id" value="<?php echo $sub_domain_id ?>" />
 <?php __("WARNING : Confirm the deletion of the subdomain"); ?> : </p>
-	<p><?php ecif($sub,$sub."."); echo $domain; ?></p>
+	<p><?php ecif($r['name'],$r['name']."."); echo $r['domain']; ?></p>
 	<blockquote>
 	<input type="submit" class="inb" name="confirm" value="<?php __("Yes"); ?>" />&nbsp;&nbsp;
 	<input type="button" class="inb" name="cancel" value="<?php __("No"); ?>" onclick="history.back();" />

@@ -6,7 +6,7 @@ include_once("head.php");
 # Function to create/edit subdomain
 # Take the values of the subdomain in arguments
 
-function sub_domains_edit($domain, $sub=false,$type=false,$value=false) {
+function sub_domains_edit($domain, $sub_domain_id=false) {
   global $admin, $err, $oldid, $isedit;
 
 $dom=new m_dom();
@@ -21,7 +21,10 @@ if (! empty($sub)) {
    }
 }
 */
-$sd=$dom->get_sub_domain_all($domain,$sub,$type,$value);
+$sd=$dom->get_sub_domain_all($sub_domain_id);
+
+$type=$sd['type'];
+$sub=$sd['name'];
 
 $dom->unlock();
 ?>
@@ -30,10 +33,8 @@ $dom->unlock();
 	<table border="0">
 		<tr>
 			<td>
-			<input type="hidden" name="domain" value="<?php ehe($domain); ?>" />
-			<input type="hidden" name="sub_old" value="<?php ehe($sub); ?>" />
-			<input type="hidden" name="type_old" value="<?php ehe($type); ?>" />
-			<input type="hidden" name="value_old" value="<?php ehe($value); ?>" />
+			<input type="hidden" name="domain" value="<?php ehe($domain) ?>" />
+			<input type="hidden" name="sub_domain_id" value="<?php echo $sub_domain_id ?>" />
 			<input type="hidden" name="action" value="add" />
   <?php
    if ($isedit) {

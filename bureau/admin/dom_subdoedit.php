@@ -32,10 +32,8 @@ require_once("../class/config.php");
 $fields = array (
 	"domain"    => array ("request", "string", ""),
 	"sub"       => array ("request", "string", ""),
-	"sub_old"   => array ("request", "string", ""),
 	"type"      => array ("request", "string", $dom->type_local),
-	"type_old"  => array ("request", "string", ""),
-  	"value_old" => array ("request", "string", ""),
+  	"sub_domain_id" => array ("request", "integer", ""),
 );
 getFields($fields);
 
@@ -58,7 +56,7 @@ if ( (!isset($isinvited) || !$isinvited) && $dt[strtolower($type)]["enable"] != 
 
 
 
-$r=$dom->set_sub_domain($domain,$sub,$type,$value, $type_old, $sub_old, $value_old);
+$r=$dom->set_sub_domain($domain,$sub,$type,$value, $sub_domain_id);
 
 $dom->unlock();
 

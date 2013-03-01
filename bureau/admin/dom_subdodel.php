@@ -31,10 +31,7 @@ require_once("../class/config.php");
 include_once("head.php");
 
 $fields = array (
-	"domain"    => array ("request", "string", ""),
-	"sub"       => array ("request", "string", ""),
-	"type"      => array ("request", "string", ""),
-	"value"     => array ("request", "string", ""),
+	"sub_domain_id"    => array ("request", "integer", ""),
 );
 getFields($fields);
 
@@ -46,15 +43,18 @@ if (!$isinvited && $dt[strtolower($type)]["enable"] != "ALL" ) {
 
 
 $dom->lock();
+if (!$r=$dom->get_sub_domain_all($sub_domain_id)) {
+        $error=$err->errstr();
+}
 
-if (!$dom->del_sub_domain($domain,$sub,$type,$value)) {
+if (!$dom->del_sub_domain($sub_domain_id)) {
 	$error=$err->errstr();
 }
 
 $dom->unlock();
 
 ?>
-<h3><?php echo sprintf(_("Deleting the subdomain %s:"),"http://".(($sub)?$sub.".":$sub).$domain); ?></h3>
+<h3><?php echo sprintf(_("Deleting the subdomain %s:"),"http://".(($r['name'])?$r['name'].".":$r['name']).$r['domain']); ?></h3>
 <hr id="topbar"/>
 <br />
 <?php
@@ -69,5 +69,5 @@ $dom->unlock();
 	    echo "<p class=\"error\">".$error."</p>";
 	}
 ?>
-<p><span class="ina"><a href="dom_edit.php?domain=<?php echo urlencode($domain) ?>"><?php __("Click here to continue"); ?></a></span></p>
+<p><span class="ina"><a href="dom_edit.php?domain=<?php echo urlencode($r['domain']) ?>"><?php __("Click here to continue"); ?></a></span></p>
 <?php include_once("foot.php"); ?>

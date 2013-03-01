@@ -32,15 +32,11 @@ include_once("head.php");
 
 
 $fields = array (
-	"domain"    => array ("request", "string", ""),
-	"sub"       => array ("request", "string", ""),
-	"type"      => array ("request", "string", $dom->type_local),
-	"value"     => array ("request", "string",  ""),
+	"sub_domain_id"    => array ("request", "integer", ""),
 );
 getFields($fields);
 
 $dom->lock();
-$domroot=$dom->get_domain_all($domain);
 
 $dt=$dom->domains_type_lst();
 if (!$isinvited && $dt[strtolower($type)]["enable"] != "ALL" ) {
@@ -48,16 +44,17 @@ if (!$isinvited && $dt[strtolower($type)]["enable"] != "ALL" ) {
   exit();
 }
 
-
 if (!isset($noread) || !$noread) {
-  if (!$r=$dom->get_sub_domain_all($domain,$sub,$type,$value)) {
+  if (!$r=$dom->get_sub_domain_all($sub_domain_id)) {
     $error=$err->errstr();
   }
 }
 
+$domroot=$dom->get_domain_all($r['domain']);
+
 echo "<h3>";
 __("Editing subdomain");
-echo " http://"; ecif($sub,$sub."."); echo $domain."</h3>";
+echo " http://"; ecif($r['name'],$r['name']."."); echo $r['domain']."</h3>";
 if (isset($error) && $error) {
   echo "<p class=\"error\">$error</p>";
   include_once("foot.php");
@@ -71,7 +68,8 @@ $dom->unlock();
 <?php 
   $isedit=true;
 require_once('dom_edit.inc.php');
-sub_domains_edit($domain,$sub,$type,$value);
+printvar($r);
+sub_domains_edit($r['domain'],$sub_domain_id);
 
 include_once("foot.php"); 
 ?>

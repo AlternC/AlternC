@@ -768,6 +768,7 @@ class m_dom {
     for($i=0;$i<$r["nsub"];$i++) {
       $db->next_record();
       $r["sub"][$i]=array();
+      $r["sub"][$i]["id"]=$db->Record["id"];
       $r["sub"][$i]["name"]=$db->Record["sub"];
       $r["sub"][$i]["dest"]=$db->Record["valeur"];
       $r["sub"][$i]["type"]=$db->Record["type"];
@@ -785,8 +786,7 @@ class m_dom {
   /**
    * Retourne TOUTES les infos d'un sous domaine du compte courant.
    *
-   * @param string $dom Domaine fqdn concerné
-   * @param string $sub Sous-domaine dont on souhaite les informations
+   * @param integer sub_domain_id id du subdomain
    * @return arrray Retourne un tableau associatif contenant les
    *  informations du sous-domaine demandé.<pre>
    *  $r["name"]= nom du sous-domaine (NON-complet)
@@ -795,36 +795,33 @@ class m_dom {
    *  $r["type"]= Type (0-n) de la redirection.
    *  Retourne FALSE si une erreur s'est produite.
    */
-  function get_sub_domain_all($dom,$sub, $type="", $value='') {
+  function get_sub_domain_all($sub_domain_id) {
     global $db,$err,$cuid;
-    $err->log("dom","get_sub_domain_all",$dom."/".$sub);
+    $err->log("dom","get_sub_domain_all",$sub_domain_id);
     // Locked ?
     if (!$this->islocked) {
       $err->raise("dom",_("--- Program error --- No lock on the domains!"));
       return false;
     }
-    $t=checkfqdn($dom);
-    if ($t) {
-      $err->raise("dom",_("The domain name is syntaxically incorrect"));
-      return false;
-    }
-    $db->query("select sd.*, dt.description as type_desc, dt.only_dns from sub_domaines sd, domaines_type dt where compte='$cuid' and domaine='$dom' and sub='$sub' and ( length('$type')=0 or type='$type') and (length('$value')=0 or '$value'=valeur) and upper(dt.name)=upper(sd.type);");
+    $db->query("select sd.*, dt.description as type_desc, dt.only_dns from sub_domaines sd, domaines_type dt where compte='$cuid' and sd.id='$sub_domain_id'  and upper(dt.name)=upper(sd.type);");
     if ($db->num_rows()==0) {
       $err->raise("dom",_("The sub-domain does not exist"));
       return false;
     }
     $db->next_record();
     $r=array();
+    $r["id"]=$db->Record["id"];
     $r["name"]=$db->Record["sub"];
+    $r["domain"]=$db->Record["domaine"];
     $r["dest"]=$db->Record["valeur"];
     $r["enable"]=$db->Record["enable"];
+    $r["type"]=$db->Record["type"];
     $r["type_desc"]=$db->Record["type_desc"];
     $r["only_dns"]=$db->Record["only_dns"];
     $r["web_action"]=$db->Record["web_action"];
     $db->free();
     return $r;
   } // get_sub_domain_all
-
 
   function check_type_value($type, $value) {
     global $db,$err,$cuid;
@@ -904,7 +901,7 @@ class m_dom {
    * @param string $sub SUBdomain 
    * @return boolean tell you if the subdomain can be installed there 
    */
-  function can_create_subdomain($dom,$sub,$type,$type_old='', $value_old='') {
+  function can_create_subdomain($dom,$sub,$type,$sub_domain_id='null') {
     global $db,$err,$cuid;
     $err->log("dom","can_create_subdomain",$dom."/".$sub);
 
@@ -914,7 +911,7 @@ class m_dom {
     $compatibility_lst = explode(",",$db->f('compatibility'));
 
     // Get the list of type of subdomains already here who have the same name
-    $db->query("select * from sub_domaines where sub='$sub' and domaine='$dom' and not (type='$type_old' and valeur='$value_old') and web_action != 'DELETE'");
+    $db->query("select * from sub_domaines where sub='$sub' and domaine='$dom' and not id = $sub_domain_id and web_action != 'DELETE'");
     #$db->query("select * from sub_domaines where sub='$sub' and domaine='$dom';");
     while ($db->next_record()) {
       // And if there is a domain with a incompatible type, return false
@@ -941,7 +938,7 @@ class m_dom {
    *  de $type (url, ip, dossier...)
    * @return boolean Retourne FALSE si une erreur s'est produite, TRUE sinon.
    */
-  function set_sub_domain($dom,$sub,$type,$dest, $type_old=null,$sub_old=null,$value_old=null) {
+  function set_sub_domain($dom,$sub,$type,$dest, $sub_domain_id=null) {
     global $db,$err,$cuid,$bro;
     $err->log("dom","set_sub_domain",$dom."/".$sub."/".$type."/".$dest);
     // Locked ?
@@ -974,13 +971,13 @@ class m_dom {
       return false;
     }
 
-    if (! $this->can_create_subdomain($dom,$sub,$type,$type_old,$value_old)) { 
+    if (! $this->can_create_subdomain($dom,$sub,$type,$sub_domain_id)) { 
       $err->raise("dom", _("The parameters for this subdomain and domain type are invalid. Please check for subdomain entries incompatibility"));
       return false;
     }
 
-    if (! is_null($type_old )) { // It's not a creation, it's an edit. Delete the old one
-      $db->query("update sub_domaines set web_action='DELETE' where domaine='$dom' and sub='$sub_old' and upper(type)=upper('$type_old') and valeur='$value_old';");
+    if (! is_null($sub_domain_id )) { // It's not a creation, it's an edit. Delete the old one
+      $this->del_sub_domain($sub_domain_id);
     }
 
     // Re-create the one we want
@@ -1030,25 +1027,20 @@ class m_dom {
    * @return boolean Retourne FALSE si une erreur s'est produite, TRUE sinon.
    *
    */
-  function del_sub_domain($dom,$sub,$type,$value='') {
+  function del_sub_domain($sub_domain_id) {
     global $db,$err,$cuid;
-    $err->log("dom","del_sub_domain",$dom."/".$sub);
+    $err->log("dom","del_sub_domain",$sub_domain_id);
     // Locked ?
     if (!$this->islocked) {
       $err->raise("dom",_("--- Program error --- No lock on the domains!"));
       return false;
     }
-    $t=checkfqdn($dom);
-    if ($t) {
-      $err->raise("dom",_("The domain name is syntaxically incorrect"));
-      return false;
-    }
-    if (!$r=$this->get_sub_domain_all($dom,$sub,$type)) {
+    if (!$r=$this->get_sub_domain_all($sub_domain_id)) {
       $err->raise("dom",_("The sub-domain does not exist"));
       return false;
     } else {
-      $db->query("update sub_domaines set web_action='DELETE' where domaine='$dom' and sub='$sub' and type='$type' and ( length('$value')=0 or valeur='$value') ");
-      $db->query("update domaines set dns_action='UPDATE' where domaine='$dom';");
+      $db->query("update sub_domaines set web_action='DELETE' where id='$sub_domain_id'; ");
+      $db->query("update domaines set dns_action='UPDATE' where domaine='".$r['domain']."';");
     }
     return true;
   } // del_sub_domain
