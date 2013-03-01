@@ -189,6 +189,7 @@ FROM
   domaines d LEFT JOIN address a ON (d.id=a.domain_id AND a.type='')
 WHERE
   d.compte = $uid
+  and d.gesmx = 1
 GROUP BY
   d.id
 ORDER BY
