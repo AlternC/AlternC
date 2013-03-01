@@ -386,7 +386,8 @@ class m_dom {
       return false;
     }
     if ($noerase) $noerase="1"; else $noerase="0";
-    $db->query("INSERT INTO domaines (compte,domaine,gesdns,gesmx,noerase,dns_action) VALUES ('$cuid','$domain','$dns','1','$noerase','UPDATE');");
+    if ($dns) $gesmx="1"; else $gesmx="0"; // do not host mx by default if not hosting the DNS
+    $db->query("INSERT INTO domaines (compte,domaine,gesdns,gesmx,noerase,dns_action) VALUES ('$cuid','$domain','$dns','$gesmx','$noerase','UPDATE');");
     if (!($id=$db->lastid())) {
       $err->raise("dom",_("An unexpected error occured when creating the domain"));
       return false;
@@ -409,13 +410,13 @@ class m_dom {
 
     // TODO: Old hooks, FIXME: when unused remove them
     $hooks->invoke("alternc_add_domain",array($domain));
-    $hooks->invoke("alternc_add_mx_domain",array($domain));
+    if ($gesmx) $hooks->invoke("alternc_add_mx_domain",array($domain));
     if ($isslave) {
       $hooks->invoke("alternc_add_slave_domain",array($domain));
     }
     // New Hooks: 
     $hooks->invoke("hook_dom_add_domain",array($id));
-    $hooks->invoke("hook_dom_add_mx_domain",array($id));
+    if ($gesmx) $hooks->invoke("hook_dom_add_mx_domain",array($id));
     if ($isslave) {
       $hooks->invoke("hook_dom_add_slave_domain",array($id, $slavedom));
     }
@@ -1116,16 +1117,10 @@ class m_dom {
     }
       
     if ($gesmx && !$r["mail"]) {
-      // TODO: old hooks, FIXME: remove when unused
-      $hooks->invoke("alternc_add_mx_domain",array($domain));
-      // New Hooks: 
       $hooks->invoke("hook_dom_add_mx_domain",array($r["id"]));
     }
     
     if (!$gesmx && $r["mail"]) { // on a dissocié le MX : on détruit donc l'entree dans LDAP
-      // TODO: old hooks, FIXME: remove when unused
-      $hooks->invoke("alternc_del_mx_domain",array($domain));
-      // New Hooks: 
       $hooks->invoke("hook_dom_del_mx_domain",array($r["id"]));
     }
     
