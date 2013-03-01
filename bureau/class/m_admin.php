@@ -100,7 +100,8 @@ class m_admin {
         array(
            'txt'   => _("PhpMyAdmin"), 
            'url'   => '/alternc-sql/',
-           'class' => 'adminmenu'
+           'class' => 'adminmenu',
+           'target' => '_blank',
           );
       $obj['links'][] = 
         array(
