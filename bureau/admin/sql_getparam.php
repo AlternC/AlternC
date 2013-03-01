@@ -52,9 +52,10 @@ $r=$mysql->get_defaultsparam($dbname);
 ?>
 <p><?php __("Your current connection settings are"); ?> : </p>
 <table class="tedit">
+	<th colspan=2 style='text-align:center;'><?php echo '<h1>'.$mysql->dbus->HumanHostname.'</h1>'; ?></th>
 	<tr>
 		<th><?php __("Mysql Server"); ?></th>
-		<td><code><?php echo $mysql->dbus->HumanHostname; ?></code></td>
+		<td><code><?php echo $mysql->dbus->Host; ?></code></td>
 	</tr>
 	<tr>
 		<th><?php __("Database"); ?></th>
