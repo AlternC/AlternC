@@ -28,26 +28,26 @@
  ----------------------------------------------------------------------
 */
 require_once("../class/config.php");
-// include_once ("head.php");
 
 if (!$r=$mysql->php_myadmin_connect()) {
 	$error=$err->errstr();
 } else {
-	setcookie("REMOTE_USER",$r[0]["login"],0,"/");
-	setcookie("REMOTE_PASSWORD",$r[0]["pass"],0,"/");
-	if ($lang) $l="&lang=".substr($lang,0,2);
-	// TODO : make it an absolute url ! (even in httpS :))
-	header("Location: /alternc-sql/index.php?server=3");
-	exit();
+  // SSO of PhpMyAdmin
+  $_SESSION['PMA_single_signon_user'] = $r["login"];
+  $_SESSION['PMA_single_signon_password'] = $r["pass"];
+  $_SESSION['PMA_single_signon_host'] = $r["host"]; // pma >= 2.11
+
+  // finally redirect to phpMyAdmin :
+  header("Location: /alternc-sql/");
+  exit();
 }
 
 include_once("head.php");
+echo '<h3>'._("SQL Admin").'</h3>';
+
+if (!empty($error)) {
+  echo "<p class=\"error\">$error</p>";
+}
+include_once("foot.php"); 
 
 ?>
-<h3><?php __("SQL Admin"); ?></h3>
-<?php
-	if (isset($error) && $error) {
-		echo "<p class=\"error\">$error</p>";
-	}
-?>
-<?php include_once("foot.php"); ?>

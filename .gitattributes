@@ -316,7 +316,6 @@ bureau/admin/powered_by_alternc2.png -text
 bureau/admin/quota_show.php -text
 bureau/admin/quotas_oneuser.php -text
 bureau/admin/quotas_users.php -text
-bureau/admin/sql_admin.php -text
 bureau/admin/sql_bck.php -text
 bureau/admin/sql_del.php -text
 bureau/admin/sql_doadd.php -text
@@ -324,6 +323,7 @@ bureau/admin/sql_dobck.php -text
 bureau/admin/sql_dorestore.php -text
 bureau/admin/sql_getparam.php -text
 bureau/admin/sql_list.php -text
+bureau/admin/sql_pma_sso.php -text
 bureau/admin/sql_restore.php -text
 bureau/admin/sql_users_add.php -text
 bureau/admin/sql_users_del.php -text

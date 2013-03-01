@@ -375,6 +375,19 @@ if ! grep -e "${include_str/\"/\\\"}" $pma_config > /dev/null 2>&1; then
     echo "$include_str;" >> $pma_config
 fi
 
+# Le template de /etc/alternc/phpmyadmin.inc.php viens d'être réappliqué, on 
+# regénére la liste des serveurs MySQL disponible dedans.
+mysql_query "select id,host,name from db_servers;" | while read id host name ; do
+echo "
+// Server #$id in db_servers
+\$i++;
+\$cfg['Servers'][\$i]['connect_type']  = 'tcp';    // How to connect to MySQL server ('tcp' or 'socket')
+\$cfg['Servers'][\$i]['auth_type']     = 'cookie';    // Authentication method (config, http or cookie based)?
+\$cfg['Servers'][\$i]['hide_db']       = 'information_schema';
+\$cfg['Servers'][\$i]['verbose']       = '$name'; // human name
+\$cfg['Servers'][\$i]['host']          = '$host'; // MySQL hostname or IP address
+" >> '/etc/alternc/phpmyadmin.inc.php'
+done
 
 # Reload incron. Useless, but who know?
 SERVICES="$SERVICES incron"

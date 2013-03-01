@@ -74,6 +74,9 @@ foreach ( $lst_db_servers as $l) {
 echo "<p>";
 __("To add a database server, do an INSERT into the db_servers table");
 echo "</p>";
+echo "<p>";
+__("To update the list of the server on the PhpMyAdmin login page, launch alternc.install");
+echo "</p>";
 
 include_once('foot.php');
 ?>

@@ -33,6 +33,7 @@
 if (file_exists('/etc/alternc/alternc_display_php_error')) {
   ini_set('display_errors', true);
 }
+session_name('AlternC_Panel'); 
 session_start();
 
 /*

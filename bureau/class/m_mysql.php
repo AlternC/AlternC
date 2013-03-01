@@ -116,7 +116,7 @@ class m_mysql {
        $obj['links'][] =
          array (
            'txt' => _("PhpMyAdmin"),
-           'url' => "sql_admin.php",
+           'url' => "sql_pma_sso.php",
            'target' => '_blank',
          );
      }
@@ -161,16 +161,16 @@ class m_mysql {
   function php_myadmin_connect(){
     global $db,$cuid,$err;
     $err->log("mysql","php_myadmin_connect");
-    $db->query("SELECT  name,password FROM dbusers WHERE uid='$cuid' and enable='ADMIN';");
+    $db->query("SELECT dbu.name,dbu.password, dbs.host FROM dbusers dbu, db_servers dbs, membres m WHERE dbu.uid='$cuid' and enable='ADMIN' and dbs.id=m.db_server_id and m.uid='$cuid';");
     if (!$db->num_rows()) {
       $err->raise("mysql",_("Cannot connect to PhpMyAdmin"));
       return false;
     }
     $db->next_record();
-    $info=array();
-    $info[]=array(
+    $info=array(
         "login"=>$db->f("name"),
-        "pass"=>$db->f("password")
+        "pass"=>$db->f("password"),
+        "host"=>$db->f("host")
         );
     return $info;
   }
