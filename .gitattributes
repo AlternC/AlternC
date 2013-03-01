@@ -150,6 +150,7 @@ bureau/admin/ftp_del.php -text
 bureau/admin/ftp_doedit.php -text
 bureau/admin/ftp_edit.php -text
 bureau/admin/ftp_list.php -text
+bureau/admin/ftp_switch_enable.php -text
 bureau/admin/head.php -text
 bureau/admin/hippo_bleue.gif -text
 bureau/admin/hta_add.php -text

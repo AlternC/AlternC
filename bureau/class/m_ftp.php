@@ -98,6 +98,30 @@ class m_ftp {
     return $c;
   }
 
+  // Switch enabled status of an account
+  function switch_enabled($id,$status=null) {
+    global $cuid, $db, $err;
+    if (! $jj = $this->get_ftp_details($id)) {
+      $err->raise('ftp', _("This account do not exist or is not of this account"));
+      return false;
+    } 
+    if ( $status == null ){
+      if ($jj[0]['enabled'] == true ) { $status=0;}
+      else { $status=1; }
+    } 
+
+    // Be sure what is in $status, in case of it was a parameter
+    $status = ($status?'true':'false');
+
+    if ( ! $db->query("UPDATE ftpusers SET enabled = $status WHERE uid = '$cuid' AND id = '$id' ;") ) {
+      $err->raise('ftp', _("Error during update"));
+      return false;
+    } else {
+      return true ;
+    }
+  }
+
+
   /* ----------------------------------------------------------------- */
   /** Retourne la liste des comptes FTP du compte hébergé
    * Retourne la liste des comptes FTP sous forme de tableau indexé de
@@ -112,12 +136,13 @@ class m_ftp {
     global $db,$err,$cuid, $bro;
     $err->log("ftp","get_list");
     $r=array();
-    $db->query("SELECT id, name, homedir FROM ftpusers WHERE uid='$cuid' ORDER BY name;");
+    $db->query("SELECT id, name, homedir, enabled FROM ftpusers WHERE uid='$cuid' ORDER BY name;");
     if ($db->num_rows()) {
       while ($db->next_record()) {
 	      $r[]=array(
 		        "id"=>$db->f("id"),
 		        "login"=>$db->f("name"),
+		        "enabled"=>$db->f("enabled"),
 		        //"dir"=>$match[1]
 		        "dir"=>$db->f("homedir")
 		   );
@@ -139,7 +164,7 @@ class m_ftp {
     global $db,$err,$cuid;
     $err->log("ftp","get_ftp_details",$id);
     $r=array();
-    $db->query("SELECT id, name, homedir FROM ftpusers WHERE uid='$cuid' AND id='$id';");
+    $db->query("SELECT id, name, homedir, enabled FROM ftpusers WHERE uid='$cuid' AND id='$id';");
     if ($db->num_rows()) {
       $db->next_record();
 
@@ -155,7 +180,8 @@ class m_ftp {
 		   "id"=>$db->f("id"),
 		   "prefixe"=> $lg[0],
 		   "login"=>$lg[1],
-		   "dir"=>$match[1]
+		   "dir"=>$match[1],
+		   "enabled"=>$db->f("enabled")
 		   );
 	return $r;
     } else {

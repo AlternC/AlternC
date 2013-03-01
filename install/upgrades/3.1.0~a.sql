@@ -12,3 +12,6 @@ CREATE TABLE IF NOT EXISTS `db_servers` (
 -- Alter table membres to add 
 ALTER TABLE `membres` ADD db_server_id int(10) DEFAULT NULL;
 
+-- Alter table FTP to add 'enabled' 
+ALTER TABLE `ftpusers` ADD `enabled` boolean NOT NULL DEFAULT TRUE ;
+

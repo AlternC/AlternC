@@ -69,7 +69,7 @@ if (isset($error) && $error && !$noftp) {
 
 <form method="post" action="ftp_del.php">
 <table class="tlist">
-  <tr><th colspan="2"> </th><th><?php __("Username"); ?></th><th><?php __("Folder"); ?></th></tr>
+  <tr><th colspan="2"> </th><th><?php __("Enabled"); ?></th><th><?php __("Username"); ?></th><th><?php __("Folder"); ?></th></tr>
 <?php
 reset($r);
 $col=1;
@@ -81,6 +81,15 @@ while (list($key,$val)=each($r))
 		<td align="center"><input type="checkbox" class="inc" id="del_<?php echo $val["id"]; ?>" name="del_<?php echo $val["id"]; ?>" value="<?php echo $val["id"]; ?>" /></td>
 <td><div class="ina"><a href="ftp_edit.php?id=<?php echo $val["id"] ?>"><img src="images/edit.png" alt="<?php __("Edit"); ?>" /><?php __("Edit"); ?></a></div></td>
 
+		<td><a href='ftp_switch_enable.php?id=<?php echo $val['id'].'&status='.( ($val['enabled'])?'0':'1' ) ;?>' onClick='return confirm("<?php __("Are you sure you want to change his status?"); ?>");'><?php 
+if ( $val['enabled']) {
+  echo "<img src='images/check_ok.png' alt=\""._("Enabled")."\"/>";
+} else {
+  echo "<img src='images/check_no.png' alt=\""._("Disabled")."\"/>";
+}
+
+
+?></a></td>
 		<td><label for="del_<?php echo $val["id"]; ?>"><?php echo $val["login"] ?></label>
                   <input type='hidden' name='names[<?php echo $val['id'];?>]' value='<?php echo $val["login"] ?>' >
                 </td>
