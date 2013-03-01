@@ -72,16 +72,19 @@ function dnsoff() {
 }
 
 function destruction_alert() {
-	// On ne se pose pas de question si le DNS est deja sur NON
-	if (<?php echo (int)$r["dns"]; ?>!=1) {
-		return true;
-	}
-	if (document.forms["fdns"].email[1].checked) {
-		if ( confirm('<?php __("Are you sure you want to do this? This will DELETE ALL the mailboxes, messages and aliases on this domain ?"); ?>') ) {
-		  return false;
-	} else {
-		  return true;
-	}
+  // On ne se pose pas de question si le DNS est deja sur NON
+  if (<?php echo (int)$r["dns"]; ?>!=1) {
+    return true;
+  }
+  if (document.forms["fdns"].email[1].checked) {
+    if ( confirm("<?php __("Are you sure you want to do this? This will DELETE ALL the mailboxes, messages and aliases on this domain ?"); ?>") ) {
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+      return true;
+  }
 }
 </script>
 <h3><?php printf(_("Editing subdomains of %s"),$domain); ?></h3>

@@ -126,6 +126,17 @@ $dom->unlock();
 function check_type_selected() {
   if ( $('input[name=type]:radio:checked').val() ) {
     // there is a value
+    var ll = $('input[name=type]:radio:checked').val();
+    var tt = $('#t_'+ll);
+    if ( tt.length == 0 ) {
+      // this element do not exist, so OK
+      return true;
+    }
+    if ( tt.val() == '' ) {
+      alert("<?php __("Missing value for this sub-domain"); ?>");
+      return false;
+    }
+  
     return true;
   }
   alert("<?php __("Please select a type for this sub-domain"); ?>");

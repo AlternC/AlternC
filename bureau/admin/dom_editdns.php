@@ -58,6 +58,6 @@ $dom->unlock();
 // XXX: we assume the cron job is at every 5 minutes
   print strtr(_("The modifications will take effect at %time.  Server time is %now."), array('%now' => date('H:i:s', $t), '%time' => date('H:i:s', ($t-($t%300)+300)))); 
 ?><br /><br />
-<span class="ina"><a href="login.php" target="_top"><?php __("Click here to continue"); ?></a></span>
+<span class="ina"><a href="dom_edit.php?domain=<?php echo urlencode($domain) ?>" ><?php __("Click here to continue"); ?></a></span>
 </p>
 <?php include_once("foot.php"); ?>
