@@ -141,7 +141,8 @@ done
 # Check ACL
 aclcheckfile="$ALTERNC_HTML/test-acl"
 touch "$aclcheckfile"
-setfacl -m u:root:rwx "$aclcheckfile" 2>/dev/null || ( echo "Error : ACL aren't activated on $ALTERNC_HTML . AlternC can't work without it." ; exit 2)
+setfacl -m u:root:rwx "$aclcheckfile" 2>/dev/null || ( echo "Error : ACL aren't activated on $ALTERNC_HTML . AlternC can't work without it." ; test -e "$aclcheckfile" && rm -f "$aclcheckfile" ; exit 2)
+test -e "$aclcheckfile" && rm -f "$aclcheckfile"
 
 # XXX: copy-paste from debian/config
 if [ -r /etc/alternc/my.cnf ]; then
