@@ -49,7 +49,7 @@ class DB_users extends DB_Sql {
       die();
     }
 
-    # Create the object
+# Create the object
     $this->HumanHostname = $db->f('name');
     $this->Host          = $db->f('host');
     $this->User          = $db->f('login');
@@ -95,32 +95,32 @@ class m_mysql {
     $q = $quota->getquota("mysql");
 
     $obj = array( 
-      'title'       => _("MySQL"),
-      'ico'         => 'images/mysql.png',
-      'link'        => 'toggle',
-      'pos'         => 100,
-      'links'       => array(),
-     ) ;
+        'title'       => _("MySQL"),
+        'ico'         => 'images/mysql.png',
+        'link'        => 'toggle',
+        'pos'         => 100,
+        'links'       => array(),
+          ) ;
 
-     $obj['links'][] =
-       array (
-         'txt' => _("Databases"),
-         'url' => "sql_list.php",
-       );
-     $obj['links'][] =
-       array (
-         'txt' => _("MySQL Users"),
-         'url' => "sql_users_list.php",
-       );
-     if ($q["u"] > 0 ) {
-       $obj['links'][] =
-         array (
-           'txt' => _("PhpMyAdmin"),
-           'url' => "sql_pma_sso.php",
-           'target' => '_blank',
-         );
-     }
-     return $obj;
+    $obj['links'][] =
+      array (
+          'txt' => _("Databases"),
+          'url' => "sql_list.php",
+            );
+    $obj['links'][] =
+      array (
+          'txt' => _("MySQL Users"),
+          'url' => "sql_users_list.php",
+            );
+    if ($q["u"] > 0 ) {
+      $obj['links'][] =
+        array (
+            'txt' => _("PhpMyAdmin"),
+            'url' => "sql_pma_sso.php",
+            'target' => '_blank',
+              );
+    }
+    return $obj;
   }
 
 
@@ -171,7 +171,7 @@ class m_mysql {
         "login"=>$db->f("name"),
         "pass"=>$db->f("password"),
         "host"=>$db->f("host")
-        );
+         );
     return $info;
   }
 
@@ -558,10 +558,10 @@ class m_mysql {
     $err->log("mysql","get_userslist");
     $c=array();
     if(!$all){
-   		$db->query("SELECT name FROM dbusers WHERE uid='$cuid' and enable not in ('ADMIN','HIDDEN') ORDER BY name;");
-		}else{
-   		$db->query("SELECT name FROM dbusers WHERE uid='$cuid' ORDER BY name;");
-		}	
+      $db->query("SELECT name FROM dbusers WHERE uid='$cuid' and enable not in ('ADMIN','HIDDEN') ORDER BY name;");
+    }else{
+      $db->query("SELECT name FROM dbusers WHERE uid='$cuid' ORDER BY name;");
+    }  
     while ($db->next_record()) {
       $pos=strpos($db->f("name"),"_");
       if($pos === false){
@@ -590,7 +590,7 @@ class m_mysql {
     while ($db->next_record()) {       
       $variable = $db->Record;     
       if($variable['User'] == $dbu){
-        $r['Host']=$db->f('Host');		
+        $r['Host']=$db->f('Host');    
 
         if($db->f('Select_priv') !== "Y"){
           return $r;
@@ -773,12 +773,12 @@ class m_mysql {
       $err->raise("mysql",_("The username can contain only letters and numbers"));
       return false;
     }
-		if(!$all){
-    	$db->query("SELECT name FROM dbusers WHERE name='".$user."' and enable not in ('ADMIN','HIDDEN');");
-		}else{
-    	$db->query("SELECT name FROM dbusers WHERE name='".$user."' ;");
-		}
-    
+    if(!$all){
+      $db->query("SELECT name FROM dbusers WHERE name='".$user."' and enable not in ('ADMIN','HIDDEN');");
+    }else{
+      $db->query("SELECT name FROM dbusers WHERE name='".$user."' ;");
+    }
+
     if (!$db->num_rows()) {
       $err->raise("mysql",_("The username was not found"));
       return false;
@@ -822,23 +822,23 @@ class m_mysql {
       }else{
         $dbname=str_replace('_','\_',$tab['db']);
         $this->dbus->query("SELECT * FROM mysql.db WHERE User='".$user."' AND Host='".$this->dbus->Client."' AND Db='".$dbname."';");
-      }	
+      }  
       if ($this->dbus->next_record()){
-        $r[]=array("db"=>$tab["db"], "select"=>$this->dbus->f("Select_priv"), "insert"=>$this->dbus->f("Insert_priv"),	"update"=>$this->dbus->f("Update_priv"), "delete"=>$this->dbus->f("Delete_priv"), "create"=>$this->dbus->f("Create_priv"), "drop"=>$this->dbus->f("Drop_priv"), "references"=>$this->dbus->f("References_priv"), "index"=>$this->dbus->f("Index_priv"), "alter"=>$this->dbus->f("Alter_priv"), "create_tmp"=>$this->dbus->f("Create_tmp_table_priv"), "lock"=>$this->dbus->f("Lock_tables_priv"),
-        "create_view"=>$this->dbus->f("Create_view_priv"),
-        "show_view"=>$this->dbus->f("Show_view_priv"),
-        "create_routine"=>$this->dbus->f("Create_routine_priv"),
-        "alter_routine"=>$this->dbus->f("Alter_routine_priv"),
-        "execute"=>$this->dbus->f("Execute_priv"),
-        "event"=>$this->dbus->f("Event_priv"),
-        "trigger"=>$this->dbus->f("Trigger_priv")
-        );
+        $r[]=array("db"=>$tab["db"], "select"=>$this->dbus->f("Select_priv"), "insert"=>$this->dbus->f("Insert_priv"),  "update"=>$this->dbus->f("Update_priv"), "delete"=>$this->dbus->f("Delete_priv"), "create"=>$this->dbus->f("Create_priv"), "drop"=>$this->dbus->f("Drop_priv"), "references"=>$this->dbus->f("References_priv"), "index"=>$this->dbus->f("Index_priv"), "alter"=>$this->dbus->f("Alter_priv"), "create_tmp"=>$this->dbus->f("Create_tmp_table_priv"), "lock"=>$this->dbus->f("Lock_tables_priv"),
+            "create_view"=>$this->dbus->f("Create_view_priv"),
+            "show_view"=>$this->dbus->f("Show_view_priv"),
+            "create_routine"=>$this->dbus->f("Create_routine_priv"),
+            "alter_routine"=>$this->dbus->f("Alter_routine_priv"),
+            "execute"=>$this->dbus->f("Execute_priv"),
+            "event"=>$this->dbus->f("Event_priv"),
+            "trigger"=>$this->dbus->f("Trigger_priv")
+            );
       }else{
         $r[]=array("db"=>$tab['db'], "select"=>"N", "insert"=>"N", "update"=>"N", "delete"=>"N", "create"=>"N", "drop"=>"N", "references"=>"N", "index"=>"N", "alter"=>"N", "Create_tmp"=>"N", "lock"=>"N","create_view"=>"N","show_view"=>"N","create_routine"=>"N","alter_routine"=>"N","execute"=>"N","event"=>"N","trigger"=>"N");
 
       }
 
-    }	
+    }  
     return $r;
   }
 
