@@ -284,15 +284,26 @@ if (count($c)) {
     <input type="submit" class="ina" name="actrename" value="<?php __("Rename"); ?>" />
     <input type="submit" class="ina" name="actperms" value="<?php __("Permissions"); ?>" /> 
     &nbsp; |&nbsp;
-  <input type="submit" class="ina" name="actcopy" value="<?php __("Copy"); ?>" />
-    <input type="submit" class="ina" name="actmove" value="<?php __("Move"); ?>" />
+  <input type="submit" class="ina" name="actcopy" value="<?php __("Copy"); ?>" onClick=" return actmoveto_not_empty();"/>
+    <input type="submit" class="ina" name="actmove" value="<?php __("Move"); ?>" onClick=" return actmoveto_not_empty();"/>
     <?php __("To"); ?> 
-    <input type="text" class="int" name="actmoveto" value="" />
+    <input type="text" class="int" id='actmoveto' name="actmoveto" value="" />
     <?php display_browser( "" , "main.actmoveto" ); ?>
 
     </td></tr>
 
     </table>
+
+<script type="text/javascript">
+function actmoveto_not_empty() {
+  if ( $('#actmoveto').val() =='' ) {
+    alert("<?php __("Please select a destination folder");?>");
+    return false;
+  }
+  return true;
+}
+</script>
+
 
 
     <?php
@@ -365,7 +376,7 @@ if (count($c)) {
             }
             echo "<td><b><a href=\"";
             echo "bro_main.php?R=".urlencode($R."/".$c[$i]["name"]);
-            echo "\">".htmlentities($c[$i]["name"])."/</a></b></td>\n";
+            echo "\">"; ehe($c[$i]["name"]); echo "/</a></b></td>\n";
             echo "  <td>".format_size($c[$i]["size"])."</td>";
             echo "<td>".format_date(_('%3$d-%2$d-%1$d %4$d:%5$d'),date("Y-m-d h:i:s",$c[$i]["date"]))."<br /></td>";
             if ($p["showtype"]) {
