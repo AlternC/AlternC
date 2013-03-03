@@ -819,6 +819,16 @@ class m_bro {
     return false;
   }
 
+  // return true if file is a sql dump (end with .sql or .sql.gz)
+  function is_sqlfile($dir,$name) {
+    if ($parts = explode(".", $name)) {
+      $ext = array_pop($parts);
+      $ext2 = array_pop($parts) . '.'.$ext;
+      if ( $ext=='sql' or $ext2=='sql.gz') return true;
+    }
+    return false;
+  }
+
 
   /* ----------------------------------------------------------------- */
   /**

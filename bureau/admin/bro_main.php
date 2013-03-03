@@ -284,15 +284,26 @@ if (count($c)) {
     <input type="submit" class="ina" name="actrename" value="<?php __("Rename"); ?>" />
     <input type="submit" class="ina" name="actperms" value="<?php __("Permissions"); ?>" /> 
     &nbsp; |&nbsp;
-  <input type="submit" class="ina" name="actcopy" value="<?php __("Copy"); ?>" />
-    <input type="submit" class="ina" name="actmove" value="<?php __("Move"); ?>" />
+  <input type="submit" class="ina" name="actcopy" value="<?php __("Copy"); ?>" onClick=" return actmoveto_not_empty();"/>
+    <input type="submit" class="ina" name="actmove" value="<?php __("Move"); ?>" onClick=" return actmoveto_not_empty();"/>
     <?php __("To"); ?> 
-    <input type="text" class="int" name="actmoveto" value="" />
+    <input type="text" class="int" id='actmoveto' name="actmoveto" value="" />
     <?php display_browser( "" , "main.actmoveto" ); ?>
 
     </td></tr>
 
     </table>
+
+<script type="text/javascript">
+function actmoveto_not_empty() {
+  if ( $('#actmoveto').val() =='' ) {
+    alert("<?php __("Please select a destination folder");?>");
+    return false;
+  }
+  return true;
+}
+</script>
+
 
 
     <?php
@@ -356,6 +367,20 @@ if (count($c)) {
               echo _("Extract");
               echo "</a>";
             }
+            $ez = $bro->is_sqlfile($R,$c[$i]["name"]);
+            if ($ez) {
+              echo " <a href=\"javascript:;\" onClick=\"$('#rest_db_$i').toggle();\">";
+              echo _("Restore SQL");
+              echo "</a>";
+              echo "<div id='rest_db_$i' style='display:none;'><fieldset><legend>"._("Restore SQL")."</legend>"._("In which database to you want to restore this dump?");
+              echo "<br/>";
+              echo "<input type='hidden' name ='filename' value='".htmlentities($R."/".$c[$i]["name"])."' />";
+              $dbl=array(); foreach ($mysql->get_dblist() as $v) { $dbl[]=$v['db'];}
+              echo "<select id='db_name_$i'>"; eoption($dbl,'',true); echo "</select>" ;
+              echo "<a href='javascript:;' onClick='window.location=\"sql_restore.php?filename=".urlencode($R."/".$c[$i]["name"])."&id=\"+encodeURIComponent($(\"#db_name_$i\").val()) ;'>"._("Restore it")."</a>";
+              echo "</form>";
+              echo "</fieldset></div>";
+            }
 
             echo "</td>\n";
           } else {           // DOSSIER :
@@ -365,7 +390,7 @@ if (count($c)) {
             }
             echo "<td><b><a href=\"";
             echo "bro_main.php?R=".urlencode($R."/".$c[$i]["name"]);
-            echo "\">".htmlentities($c[$i]["name"])."/</a></b></td>\n";
+            echo "\">"; ehe($c[$i]["name"]) ;"/</a></b></td>\n";
             echo "  <td>".format_size($c[$i]["size"])."</td>";
             echo "<td>".format_date(_('%3$d-%2$d-%1$d %4$d:%5$d'),date("Y-m-d h:i:s",$c[$i]["date"]))."<br /></td>";
             if ($p["showtype"]) {
