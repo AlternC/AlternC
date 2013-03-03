@@ -45,11 +45,15 @@ if (!$r=$mysql->get_mysql_details($id)) {
 <hr id="topbar"/>
 <br />
 <?php
-	if (isset($error) && $error) {
-		echo "<p class=\"error\">$error</p><p>&nbsp;</p>";
-	}
+if (!empty($error)) {
+	echo "<p class=\"error\">$error</p><p>&nbsp;</p>";
+}
 
-if (is_array($r)) {
+if (!is_array($r)) {
+  echo "<p>"._("You currently have no database defined")."</p>";
+  include_once("foot.php");
+  exit;
+}
 ?>
 <h3><?php printf(_("Restore a MySQL backup for database %s"),$r["db"]); ?></h3>
 <?php
@@ -60,7 +64,7 @@ echo "</p>";
 <form action="sql_dorestore.php" method="post">
 <input type="hidden" name="id" value="<?php echo $id ?>" />
 <p><label for="restfile"><?php __("Please enter the path and the filename containing SQL data to be restored."); ?></label></p>
-<p><input type="text" class="int" id="restfile" name="restfile" size="35" maxlength="255" value="<?php ehe($filename); ?>" /> <input class="inb" type="submit" name="submit" onClick='return restfilenotempty();' value="<?php __("Restore my database"); ?>" /></p>
+<p><input type="text" class="int" id="restfile" name="restfile" size="35" maxlength="255" value="<?php ehe($filename); ?>" /> <input class="inb" type="submit" name="submit" onClick='return restfilenotempty();' value="<?php __("Restore my database"); ?>" /><i><?php __("Tip: you can restore a file directly in the File Browser");?></i></p>
 </form>
 <script type="text/javascript">
   function restfilenotempty() {
@@ -76,12 +80,5 @@ echo "</p>";
 echo "<p>";
 __("Note: If the filename ends with .gz, it will be uncompressed before.");
 echo "</p>";
-	} else {
-
-echo "<p>";
-__("You currently have no database defined");
- echo "</p>";
-
-	}
 ?>
 <?php include_once("foot.php"); ?>
