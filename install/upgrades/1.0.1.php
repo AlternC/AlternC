@@ -7,10 +7,14 @@ if(!function_exists('mysql_connect'))  {
     exit(1);
 }
 
-// we don't check our AlternC session
-if(!chdir("/var/alternc/bureau"))
-  exit(1);
-require("/var/alternc/bureau/class/config_nochk.php");
+// If we upgrade directly to 3.1 the panel directory change
+$panel='';
+if(chdir("/usr/share/alternc/panel")) $panel='/usr/share/alternc/panel';
+elseif (chdir("/var/alternc/bureau")) $panel='/var/alternc/bureau';
+
+if (empty($panel)) { echo "Problem to load panel library"; exit(1); }
+
+require("$panel/class/config_nochk.php");
 
 // we go super-admin
 $admin->enabled=1;
