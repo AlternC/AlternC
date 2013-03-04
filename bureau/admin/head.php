@@ -45,7 +45,6 @@ if (!$charset) $charset="UTF-8";
 <script src="js/alternc.js" type="text/javascript" ></script>
 <script src="js/jquery.min.js" type="text/javascript"></script>
 <script src="js/jquery_ui/js/jquery-ui-1.8.23.custom.min.js" type="text/javascript"></script>
-<script src="js/passwordStrengthMeter.js" type="text/javascript"></script>
 <?php
 $lang_date_picker="js/jquery_ui/js/jquery.ui.datepicker-".substr($lang,0,2).".js";
 if (file_exists($lang_date_picker)) 
@@ -57,7 +56,8 @@ if (file_exists($lang_date_picker))
 
 if ($isinvited && isset($oldid) && !empty($oldid) && $oldid!=$cuid ) {
   echo "<div align=center><p class='error'>";
-  __("Administrator session. you may <a href='adm_login.php'>return to your account</a> or <a href='adm_cancel.php'>cancel this feature</a>");
+  __("Administrator session. you may <a href='adm_login.php'>return to your account</a> or <a href='adm_cancel.php'>cancel this feature</a>.");
+  if ($oldid == 2000) echo ' '._("You can also <a href='adm_update_domains.php'>apply changes</a>."); // Yes, hardcoded uid. We will rewrite permissions another day
   echo "</p></div>";
 }
 ?>

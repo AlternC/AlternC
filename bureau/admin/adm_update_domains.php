@@ -30,8 +30,10 @@
 require_once("../class/config.php");
 
 if (!$admin->enabled) {
-	__("This page is restricted to authorized staff");
-	exit();
+  if ( ! ( $isinvited && isset($oldid) && !empty($oldid) && $oldid==2000) ) { // Allow sub admins
+    __("This page is restricted to authorized staff");
+    exit();
+  }
 }
 
 if (! isset($L_INOTIFY_UPDATE_DOMAIN)) {
