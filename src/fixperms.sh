@@ -97,6 +97,10 @@ doone() {
         echo "Setting rights and ownership for user $LOGIN having gid $GID"
       fi
       REP="$(get_html_path_by_name "$LOGIN")"
+  
+      # Clean the line, then add a ligne indicating current working directory
+      printf '\r%*s' "${COLUMNS:-$(tput cols)}" ''
+      printf "\r%${COLUMNS}s" "AlternC fixperms.sh -> working on $REP"
 
       # Set the file readable only for the AlternC User
       mkdir -p "$REP"
@@ -111,6 +115,7 @@ doone() {
 
       read GID LOGIN || true
     done
+    echo -e "\nDone" 
 }
 
 fixfile() {
