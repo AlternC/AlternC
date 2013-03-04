@@ -38,9 +38,16 @@ $fields = array (
 	"nmail"    		=> array ("post", "string", ""),
 	"type"    		=> array ("post", "string", ""),
 	"create_dom_list"    	=> array ("post", "string", ""),
+	"create_dom"    	=> array ("post", "integer", 0),
 	"submit"    		=> array ("post", "string", ""),
 );
 getFields($fields);
+
+if ($create_dom && !empty($create_dom_list) ) {
+  $dom_to_create = $create_dom_list;
+} else {
+  $dom_to_create = false;
+}
 
 if ($pass != $passconf) {
 	$error = _("Passwords do not match");
@@ -49,7 +56,7 @@ if ($pass != $passconf) {
 }
 
 // Attemp to create, exit if fail
-if (!($u=$admin->add_mem($login, $pass, $nom, $prenom, $nmail, $canpass, $type, 0, $notes, 0, $create_dom_list, $db_server_id))) {
+if (!($u=$admin->add_mem($login, $pass, $nom, $prenom, $nmail, $canpass, $type, 0, $notes, 0, $dom_to_create, $db_server_id))) {
 	$error=$err->errstr();
 	include ("adm_add.php");
 	exit;
