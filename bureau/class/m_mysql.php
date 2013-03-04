@@ -74,6 +74,7 @@ class m_mysql {
     if (!empty($cuid)) { 
       $this->dbus = new DB_users();
     }
+    variable_get('sql_allow_users_backups', 1,'Set 1 to allow users to configure backup of their databases, 0 if you want do disable this feature. Warning: it will not stop configured backup made by sqlbackup.sh');
   }
 
   function reload_dbus() {
@@ -346,6 +347,12 @@ class m_mysql {
   function put_mysql_backup($dbn,$bck_mode,$bck_history,$bck_gzip,$bck_dir) {
     global $db,$err,$mem,$bro,$cuid;
     $err->log("mysql","put_mysql_backup");
+
+    if ( ! variable_get('sql_allow_users_backups') ) {
+      $err->raise("mysql",_("User aren't allowed to configure their backups"));
+      return false;
+    }
+
     $pos=strpos($dbn,'_');
     if($pos === false){
       $dbname=$dbn;

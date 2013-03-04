@@ -30,6 +30,18 @@
 require_once("../class/config.php");
 include_once("head.php");
 
+?>
+<h3><?php __("MySQL Databases - Configure backups"); ?></h3>
+<hr id="topbar"/>
+<br />
+<?php
+
+if ( ! variable_get('sql_allow_users_backups') ) {
+  echo "<p class=\"error\">"._("You aren't allowed to access this page. Contact your administrator if you want to.")."</p>";
+  include_once('foot.php');
+  exit;
+}
+
 $fields = array (
 	"id"     => array ("request", "string", ""),
 	"bck_mode" => array ("request", "integer", 0),
@@ -44,14 +56,9 @@ if (!$r=$mysql->get_mysql_details($id)) {
 	$error=$err->errstr();
 }
 
-?>
-<h3><?php __("MySQL Databases"); ?></h3>
-<hr id="topbar"/>
-<br />
-<?php
-	if (isset($error) && $error) {
-		echo "<p class=\"error\">$error</p><p>&nbsp;</p>";
-	}
+if (isset($error) && $error) {
+	echo "<p class=\"error\">$error</p><p>&nbsp;</p>";
+}
 
 if (is_array($r)) {
 ?>

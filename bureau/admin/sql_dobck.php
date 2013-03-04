@@ -29,6 +29,14 @@
 */
 require_once("../class/config.php");
 
+if ( ! variable_get('sql_allow_users_backups') ) {
+  include_once('head.php');
+  echo "<p class=\"error\">"._("You aren't allowed to access this page. Contact your administrator if you want to.")."</p>";
+  include_once('foot.php');
+  exit;
+}
+
+
 $fields = array (
 	"id"     => array ("request", "string", ""),
 	"bck_mode" => array ("request", "integer", 0),
