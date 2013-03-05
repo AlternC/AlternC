@@ -67,8 +67,7 @@ TEMPLATE_DIR="/etc/alternc/templates"
 CONFIG_FILES="etc/alternc/bureau.conf etc/incron.d/alternc etc/apache2/envvars etc/alternc/apache2.conf etc/alternc/apache_logformat.conf etc/alternc/phpmyadmin.inc.php"
 
 if [ -e /etc/bind/named.conf ]; then
-    CONFIG_FILES="$CONFIG_FILES etc/bind/templates/zone.template
-                  etc/bind/templates/named.template etc/bind/named.conf.options"
+    CONFIG_FILES="$CONFIG_FILES etc/bind/named.conf.options"
 fi
 if [ -d /etc/postfix ]; then
     CONFIG_FILES="$CONFIG_FILES etc/postfix/master.cf etc/postfix/myalias.cf etc/postfix/myrelay.cf
