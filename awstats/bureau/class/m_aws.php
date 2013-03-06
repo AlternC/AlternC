@@ -712,6 +712,8 @@ class m_aws {
     $f=fopen($this->CONFDIR."/awstats.".$hostname.".conf","wb");
     fputs($f,$s,strlen($s));
     fclose($f);
+
+    return true;
   }
 
 

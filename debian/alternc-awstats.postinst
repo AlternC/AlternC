@@ -71,7 +71,8 @@ EOF
     chown alterncpanel:root /var/cache/awstats
 
     # Update rights on previous user's awstats configuration files
-    chown alterncpanel:alterncpanel /etc/awstats/awstats.*.conf > /dev/null 2>&1
+    chown alterncpanel:root /etc/awstats/awstats.*.conf > /dev/null 2>&1
+    chown alterncpanel:alterncpanel /var/cache/awstats/* > /dev/null 2>&1
 
     # ADD menu item :
     if ! grep -q "^menu_aws.php$" "$MENUFILE"; then
