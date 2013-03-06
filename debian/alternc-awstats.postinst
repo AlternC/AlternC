@@ -65,7 +65,8 @@ EOF
     chown alterncpanel:root /var/cache/awstats
 
     # Update rights on previous user's awstats configuration files
-    chown alterncpanel:alterncpanel /etc/awstats/awstats.*.conf > /dev/null 2>&1
+    chown alterncpanel:root /etc/awstats/awstats.*.conf > /dev/null 2>&1
+	chown alterncpanel:root /var/cache/awstats/* > /dev/null 2>&1
 
     echo "**********************************************"
     echo "*              ALTERNC-AWSTATS               *"
