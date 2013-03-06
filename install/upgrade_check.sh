@@ -28,6 +28,22 @@ if [ -z "$oldvers" -o "$oldvers" = '<unknown>' ]; then
 	exit 0
 fi
 
+#Checking the form of the version variable. it should be x.x.x with x as a digit.
+#If it is not we correct it.
+if echo $oldvers | grep -qi '[0-9]\.[0-9]\.[0-9].*' ; then
+  echo upgrading from : $oldvers
+else
+  old_ifs="$IFS"
+  IFS='~'
+  read PART1 PART2 <<EOF
+  $oldvers
+EOF
+  IFS="$old_ifs"
+  oldvers=$PART1".0"
+  echo upgrading from : $oldvers
+fi
+
+
 . /etc/alternc/local.sh
 
 # the upgrade script we are considering
