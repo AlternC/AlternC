@@ -135,11 +135,11 @@ if (!$charset) $charset="UTF-8";
 
     </div>
     <script>
-    document.forms['loginform'].username.focus();
+    $('#username').focus();
 
     function logmein(){
       if ( $('#username').val() =='' || $('#password').val() =='' ) {
-        alert('<?php __("Need a login and a password"); ?>');
+        alert("<?php __("Need a login and a password"); ?>");
         return false;
       }
       return true;
