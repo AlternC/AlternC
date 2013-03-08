@@ -258,7 +258,7 @@ class m_hta {
 	$s=fgets($file,1024);
 	$t=explode(":",$s);
 	if ($t[0]==$user) {
-	  $err->raise("hta",printf(_("The user '%s' already exist for this folder"),$user));
+	  $err->raise("hta",_("The user '%s' already exist for this folder"),$user);
 	  return false;
 	}
       }
