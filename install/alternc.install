@@ -356,8 +356,25 @@ else
     postfix_conf=/etc/alternc/postfix/postfix.cf
 fi
 grep -v '^\ *#' $postfix_conf |while read line ; do
-   postconf -e "$line"
-done 
+   if echo "$line" | grep -qi '^smtpd_tls_cert_file' ;then
+     line_strip=`echo "$line"|tr -d '[:blank:]'`
+     pattern="*="
+     cert_file=${line_strip#$pattern}
+     if [ -e $cert_file ];then
+        postconf -e "$line"
+     else
+        echo "****************************************"
+        echo "The certificate file : $cert_file does not exists"
+        echo "please go to https://alternc.org/wiki/SSL to get information on how to create a certificate"
+        echo "Then edit the file /etc/alternc/postfix/postfix.cf to add"
+        echo "the cert file path name to the key :smtpd_tls_cert_file"
+        echo "Finally relaunch alternc.install"
+        echo "****************************************"
+     fi
+  else
+        postconf -e "$line"
+  fi
+done
 
 # Conviguring delivery used by Postfix
 /usr/lib/alternc/alternc_add_policy_dovecot
