@@ -852,10 +852,20 @@ ORDER BY
    * @access private
    */
    function hook_dom_add_mx_domain($domain_id) {
-    global $err, $mem, $L_FQDN;
+    global $err, $mem, $L_FQDN,$db;
     $err->log("mail","hook_dom_add_mx_domain",$domain_id);
-    return $this->create_alias($domain_id, 'postmaster', $mem->user['login'].'@'.$L_FQDN );
+
+    $db->query("SELECT value FROM variable where name='mailname_bounce';");
+    if (!$db->next_record()) {
+      $err->raise("mail",_("The email %s does not exist, it can't be deleted"),$mail);
+      return false;
+    }
+    $mailname=$db->f("value");
+    printvar($mailname);
+
+    return $this->create_alias($domain_id, 'postmaster', $mem->user['login'].'@'.$mailname );
   }
+
 
 
   /* ----------------------------------------------------------------- */
