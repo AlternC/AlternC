@@ -4,7 +4,11 @@
 
 . /etc/alternc/local.sh
 
-test -x /usr/bin/logger && /usr/bin/logger -t ALTERNC Panel manual launch update_domain
+LOGGER="/usr/bin/logger"
 
-test -e "$INOTIFY_UPDATE_DOMAIN" && /usr/lib/alternc/update_domains.sh
-
+if [ -e "$INOTIFY_UPDATE_DOMAIN" ] ; then
+    if [ -x "$LOGGER" ] ; then
+         $LOGGER -t ALTERNC Panel manual launch update_domain
+    fi
+    /usr/lib/alternc/update_domains.sh
+fi
