@@ -68,7 +68,6 @@ $dom->unlock();
 <?php 
   $isedit=true;
 require_once('dom_edit.inc.php');
-printvar($r);
 sub_domains_edit($r['domain'],$sub_domain_id);
 
 include_once("foot.php"); 

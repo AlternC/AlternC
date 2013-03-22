@@ -861,7 +861,6 @@ ORDER BY
       return false;
     }
     $mailname=$db->f("value");
-    printvar($mailname);
 
     return $this->create_alias($domain_id, 'postmaster', $mem->user['login'].'@'.$mailname );
   }
