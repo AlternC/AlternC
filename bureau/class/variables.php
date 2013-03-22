@@ -109,14 +109,15 @@ function variable_get($name, $default = null, $createit_comment = null) {
  *   of serialization as necessary.
  */
 function variable_set($name, $value, $comment=null) {
-  global $conf, $db;
+  global $conf, $db, $err;
+  $err->log('variable', 'variable_set', '+'.serialize($value).'+'.$comment.'+'); 
 
   $conf[$name] = $value;
   if (is_object($value) || is_array($value)) {
     $value = serialize($value);
   }
 
-  if ( is_null($comment) ) {
+  if ( empty($comment) ) {
     $query = "INSERT INTO variable (name, value) values ('".$name."', '".$value."') on duplicate key update name='$name', value='$value';";
   } else {
     $comment=mysql_real_escape_string($comment);
