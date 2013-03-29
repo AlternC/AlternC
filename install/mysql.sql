@@ -650,6 +650,11 @@ union
 select distinct concat(`m`.`login`,'@',`v`.`value`) AS `mail`,
 `m`.`mail` AS `alias`
 from ((`membres` `m` join `variable` `v`) join `domaines` `d`)
+where (`v`.`name` = 'mailname_bounce')
+union
+select distinct concat('alterncpanel','@',`v`.`value`) AS `mail`,
+`m`.`mail` AS `alias`
+from ((`membres` `m` join `variable` `v`) join `domaines` `d`)
 where (`v`.`name` = 'mailname_bounce');
 
 --
