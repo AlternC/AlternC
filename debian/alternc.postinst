@@ -123,6 +123,7 @@ INOTIFY_UPDATE_DOMAIN="/var/run/alternc/inotify_update_domain.lock"
 ALTERNC_HTML=""
 ALTERNC_MAIL=""
 ALTERNC_LOGS=""
+WEBSERVERS_LOGS=""
 
 EOF
 
@@ -154,6 +155,7 @@ EOF
     update_var alternc/alternc_html ALTERNC_HTML
     update_var alternc/alternc_mail ALTERNC_MAIL
     update_var alternc/alternc_logs ALTERNC_LOGS
+    update_var alternc/alternc_logs WEBSERVERS_LOGS
     sed -e "$SED_SCRIPT" < $CONFIGFILE > $CONFIGFILE.tmp
     mv -f $CONFIGFILE.tmp $CONFIGFILE
 
