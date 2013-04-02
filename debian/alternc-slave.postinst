@@ -134,27 +134,6 @@ EOF
     sed -e "$SED_SCRIPT" < $CONFIGFILE > $CONFIGFILE.tmp
     mv -f $CONFIGFILE.tmp $CONFIGFILE
 
-    # Setup grants
-    db_get "alternc-slave/mysql/host"
-    MYSQL_HOST="$RET"
-    if [ "$MYSQL_HOST" != "localhost" -o -e /usr/sbin/mysqld ]; then
-        # compatibility shims with my.cnf
-        host="$RET"
-        db_get "alternc-slave/mysql/db"
-        database="$RET"
-        db_get "alternc-slave/mysql/user"
-        user="$RET"
-        db_get "alternc-slave/mysql/password"
-        password="$RET"
-        
-        # we source (instead of forking) mysql.sh so that it gets the local environment above
-        . /usr/share/alternc/install/mysql.sh
-    fi
-
-    # forget the password
-    db_reset alternc-slave/mysql/password || true
-    db_fset alternc-slave/mysql/password "seen" "false" || true
-
     if [ -e $CONFIGFILE ]; then
       # source local.sh variables
       . $CONFIGFILE
