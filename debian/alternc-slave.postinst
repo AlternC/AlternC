@@ -40,6 +40,15 @@ update_var() {
 case "$1" in
   configure)
 
+    # Create AlternC Panel user for web server
+    if ! getent group alterncpanel; then
+        addgroup --system --gid 1999 alterncpanel
+    fi
+    if ! getent passwd alterncpanel; then
+        adduser --system --home "/etc/alternc/.alterncpanel" \
+            --disabled-password --uid 1999 --ingroup alterncpanel alterncpanel
+    fi
+
     # ajoute l'user postfix au groupe sasl
     adduser --quiet postfix sasl
 
