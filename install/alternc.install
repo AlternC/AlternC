@@ -466,6 +466,11 @@ if [ -x /usr/sbin/locale-gen ] ; then
     fi
 fi
 
+# remaining steps are only for the master
+if [ "$slave" = "1" ]; then
+    exit 0
+fi
+
 #######################################################################
 # populate alternc database with the mailname used by postfix to send mail for each vhost
 #
@@ -482,11 +487,6 @@ tar -zcf "$INSTALLED_CONFIG_TAR" -C / $CONFIG_FILES
 #######################################################################
 # Last touches
 #
-
-# remaining steps are only for the master
-if [ "$slave" = "1" ]; then
-    exit 0
-fi
 
 find $ALTERNC_HTML -maxdepth 1 -type d -exec setfacl -b -k -m d:g:alterncpanel:rw- -m g:alterncpanel:rw- {} \;
 
