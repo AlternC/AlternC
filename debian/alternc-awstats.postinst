@@ -44,7 +44,7 @@ LogFormat="%host %other %logname %time1 %methodurl %code %bytesd %refererquot %u
 EOF
 	fi
         chown alterncpanel:root $LOGAPACHE
-        chmod 640 $LOGAPACHE
+        chmod 644 $LOGAPACHE
     fi
 
     if [ -x /usr/sbin/apache-ssl ]; then
@@ -62,11 +62,12 @@ EOF
     chmod 640 /etc/alternc/awstats.htpasswd
     chmod 755 /etc/awstats
     mkdir -p /var/cache/awstats
-    chown alterncpanel:root /var/cache/awstats
+    chown alterncpanel:www-data /var/cache/awstats
+    chmod 770 /var/cache/awstats
 
     # Update rights on previous user's awstats configuration files
     chown alterncpanel:root /etc/awstats/awstats.*.conf > /dev/null 2>&1
-	chown alterncpanel:alterncpanel /var/cache/awstats/* > /dev/null 2>&1
+    chmod 644 /etc/awstats/awstats.log.alternc.conf
 
     echo "**********************************************"
     echo "*              ALTERNC-AWSTATS               *"
