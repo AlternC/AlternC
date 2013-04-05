@@ -66,8 +66,7 @@ EOF
     chmod 770 /var/cache/awstats
 
     # Update rights on previous user's awstats configuration files
-    chown alterncpanel:root /etc/awstats/awstats.*.conf > /dev/null 2>&1
-    chmod 644 /etc/awstats/awstats.log.alternc.conf
+    chown alterncpanel:root /etc/awstats/awstats.*.conf > /dev/null 2>&1 || true
 
     echo "**********************************************"
     echo "*              ALTERNC-AWSTATS               *"
