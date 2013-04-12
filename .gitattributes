@@ -494,6 +494,7 @@ etc/alternc/templates/postfix/sasl/smtpd.conf -text
 etc/alternc/templates/proftpd/modules.conf -text
 etc/alternc/templates/proftpd/proftpd.conf -text
 etc/alternc/templates/proftpd/welcome.msg -text
+etc/xinetd.d/alternc_lxc -text
 install/alternc.install -text
 install/body_checks -text
 install/domaines.template -text
@@ -582,6 +583,7 @@ src/alternc-check -text
 src/alternc-dboptimize -text
 src/alternc-passwd -text
 src/alternc_add_policy_dovecot -text
+src/alternc_lxc_remote -text
 src/alternc_reload -text
 src/compress_logs.sh -text
 src/courier-dovecot-migrate.pl -text

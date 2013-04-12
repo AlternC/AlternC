@@ -1,0 +1,14 @@
+#!/usr/bin/env perl
+
+my $line = <>;
+
+my $nb = int(rand(42));
+
+if ($nb % 2 == 0) {
+	print "Error message here::\n";
+} else {
+	print "Ok|127.0.0.1:4242|localhost:4242\n";
+	my ($action,$login,$pass,$uid) = split /|/, $line;
+	printf("Hi %s (%d) do you want to %s? -> btw your pass is %s\n", $login, $uid, $action, $pass);
+}
+
