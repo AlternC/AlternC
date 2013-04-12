@@ -88,3 +88,8 @@ EOF
     
 fi
 
+#This is necessary because upgrading roundcube from 7.1 to 7.2 changes this setting
+if [ "$1" = "end" ]; then
+  chown alternc-roundcube:root /etc/roundcube/main.inc.php
+fi
+
