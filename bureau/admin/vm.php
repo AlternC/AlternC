@@ -16,7 +16,8 @@ getFields($fields);
 
 if (in_array($action, array('start', 'stop', 'monit')))
 {
-	call_user_func(array($lxc, $action));
+	$res = call_user_func(array($lxc, $action));
+	var_dump ($res);
 }
 
 ?>
