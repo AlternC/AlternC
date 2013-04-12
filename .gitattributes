@@ -341,6 +341,7 @@ bureau/admin/styles/style-hw.css -text
 bureau/admin/styles/style.css -text
 bureau/admin/tempovars.php -text
 bureau/admin/trash_dateselect.php -text
+bureau/admin/vm.php -text
 bureau/admin/webmail-redirect.php -text
 bureau/class/config.php -text
 bureau/class/config_nochk.php -text
@@ -360,6 +361,7 @@ bureau/class/m_ftp.php -text
 bureau/class/m_hooks.php -text
 bureau/class/m_hta.php -text
 bureau/class/m_log.php -text
+bureau/class/m_lxc.php -text
 bureau/class/m_mail.php -text
 bureau/class/m_mem.php -text
 bureau/class/m_menu.php -text
@@ -370,6 +372,7 @@ bureau/class/m_trash.php -text
 bureau/class/mime.php -text
 bureau/class/reset_stats_conf.php -text
 bureau/class/variables.php -text
+bureau/class/vm.php -text
 bureau/index.php -text
 bureau/locales/Makefile -text
 bureau/locales/README -text
