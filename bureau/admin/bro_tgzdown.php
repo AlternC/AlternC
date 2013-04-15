@@ -29,6 +29,12 @@
 */
 require_once("../class/config.php");
 
+$fields = array (
+	"dir"    => array ("get", "string", "/"),
+);
+getFields($fields);
+
+
 $p=$bro->GetPrefs();
 switch ($p["downfmt"]) {
 	case 0:
