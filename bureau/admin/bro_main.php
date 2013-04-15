@@ -592,7 +592,7 @@ if ($hta->is_protected($R)) {
   echo "<a href=\"hta_edit.php?dir=".(($R)?$R:"/")."\">"._("Edit this folder's protection")."</a>";
 }
 else {
-  echo "<a href=\"hta_add.php?value=".(($R)?$R:"/")."\">"._("Protect this folder")."</a>";
+  echo "<a href=\"hta_add.php?dir=".(($R)?$R:"/")."\">"._("Protect this folder")."</a>";
 }
 ?></span> <?php __("with a login and a password"); ?>
 </p><p>

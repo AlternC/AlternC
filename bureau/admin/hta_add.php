@@ -30,6 +30,11 @@
 require_once("../class/config.php");
 include_once("head.php");
 
+$fields = array (
+	"dir"      => array ("request", "string", ""),
+);
+getFields($fields);
+
 ?>
 <h3><?php __("Protect a folder"); ?></h3>
 <hr id="topbar"/>
