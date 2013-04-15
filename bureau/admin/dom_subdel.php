@@ -35,18 +35,17 @@ $fields = array (
 );
 getFields($fields);
 
-$dt=$dom->domains_type_lst();
-if (!$isinvited && $dt[strtolower($type)]["enable"] != "ALL" ) {
-  __("This page is restricted to authorized staff");
-  exit();
-}
-
-
 $dom->lock();
 if (!$r=$dom->get_sub_domain_all($sub_domain_id)) {
 	$error=$err->errstr();
 }
 $dom->unlock();
+
+$dt=$dom->domains_type_lst();
+if (!$isinvited && $dt[strtolower($r['type'])]["enable"] != "ALL" ) {
+  __("This page is restricted to authorized staff");
+  exit();
+}
 
 ?>
 <h3><?php printf(_("Deleting subdomain %s"),"http://".ife($r['name'],$r['name'].".").$r['domain']); ?> : </h3>
