@@ -35,8 +35,15 @@ $fields = array (
 );
 getFields($fields);
 
+$dom->lock();
+if (!$r=$dom->get_sub_domain_all($sub_domain_id)) {
+        $error=$err->errstr();
+}
+$dom->unlock();
+
+
 $dt=$dom->domains_type_lst();
-if (!$isinvited && $dt[strtolower($type)]["enable"] != "ALL" ) {
+if (!$isinvited && $dt[strtolower($r['type'])]["enable"] != "ALL" ) {
   __("This page is restricted to authorized staff");
   exit();
 }
