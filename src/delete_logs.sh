@@ -17,4 +17,4 @@ done
 # FIXME this var should be define in local.sh
 ALTERNC_LOGS="$ALTERNC_LOC/logs"
 
-nice 10 -n find "$ALTERNC_LOGS" -mtime +$DAYS -delete
+nice -n 10 find "$ALTERNC_LOGS" -mtime +$DAYS -delete
