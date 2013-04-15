@@ -25,9 +25,9 @@ if (in_array($action, array('start', 'stop', 'monit')))
 <h1>Dev only</h1>
 <form method="post">
 	<p>Action: <select name="action"><option value="monit">Monitoring</option><option value="start">Start</option><option value="stop">Stop</option></select></p>
-	<p>Login: <input type="text" name="login" /></p>
-	<p>Pass (hash): <input type="text" name="pass" /></p>
-	<p>Uid: <input type="text" name="uid" /></p>
+	<p>Login: <input type="text" name="login" value="<?php echo $mem->user['login']; ?>" /></p>
+	<p>Pass (hash): <input type="text" name="pass" value="<?php echo $mem->user['pass']; ?>" /></p>
+	<p>Uid: <input type="text" name="uid" value="<?php echo $mem->user['uid']; ?>" /></p>
 	<p><input type="submit" name="tester" /></p>
 
 </form>
