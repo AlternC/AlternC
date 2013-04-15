@@ -38,16 +38,16 @@ getFields($fields);
 
 $dom->lock();
 
-$dt=$dom->domains_type_lst();
-if (!$isinvited && $dt[strtolower($type)]["enable"] != "ALL" ) {
-  __("This page is restricted to authorized staff");
-  exit();
-}
-
 if (!isset($noread) || !$noread) {
   if (!$r=$dom->get_sub_domain_all($sub_domain_id)) {
     $error=$err->errstr();
   }
+}
+
+$dt=$dom->domains_type_lst();
+if (!$isinvited && $dt[strtolower($r['type'])]["enable"] != "ALL" ) {
+  __("This page is restricted to authorized staff");
+  exit();
 }
 
 $domroot=$dom->get_domain_all($r['domain']);
