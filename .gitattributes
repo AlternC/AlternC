@@ -372,6 +372,7 @@ bureau/class/m_trash.php -text
 bureau/class/mime.php -text
 bureau/class/reset_stats_conf.php -text
 bureau/class/variables.php -text
+bureau/class/vm.class.php -text
 bureau/class/vm.php -text
 bureau/index.php -text
 bureau/locales/Makefile -text
