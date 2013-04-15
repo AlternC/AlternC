@@ -1,3 +1,32 @@
+alternc (3.0.2) stable; urgency=low
+
+  [ Fufroma ]
+  * [4142] Bug dans les templates de VHOST pour le upload_tmp_dir
+  * [4152] Oh le beau bug dans le listage des domaines ayant des mails...
+  * [4161] Bug pour l'affichage des nom de dossiers avec accents - Alerte pour copy or move de fichiers sans indiquer de destination
+  * [4178] Bug sur le focus au chargement de la page de login
+
+  [ Squidly ]
+  * [4163] Backporting new way of checking acl activation upon installation from alternc-3.1~alpha1
+  * [4164] Backporting remote sql server configuration bugfix from 3.1~alpha1
+  * [4172] Bugfixing update_check.sh to make sur the version number is well formed
+  * [4179] Updating alternc.install script to check if the certificate used by postfix exists.
+  * [4183] Updating domain mail creation to use the mailname_bounce variable for the first alias
+  * [4185] Updating vhost creation configuration parameter to make the sendmail argument to be login@<mailname_bounce> - The purpose is to hide the user real mail address while not receiving his bounces.
+  * [4194] adding an alias for alterncpanel mails to the admin account mail address
+  * [4223] Fixes #1482 (nice: 10: Aucun fichier ou dossier de ce type)
+  * [4209] Fixes #1480 (màj du paquet roundcube/squeeze-backports 0.7.1 vers 0.7.2 casse alternc-roundcube)
+
+  [ Axel ]
+  * [4176] Bugfixes awstats
+  * [4182] A debug printf was there...
+  * [4196] Fixes #1460 (Droit sur les dossier : awstats)
+  * [4203] Update Rights on previous awstats configuration files IF EXISTS
+  * [4204] Don't log "manual launch of update_domain" if we don't do it...
+  * [4222] Bugfix téléchargement d'un répertoire
+
+ -- Axel Roger <axel@nnx.com>  Mon, 15 Apr 2013 15:50:17 +0200
+
 alternc (3.0.1) stable; urgency=low
 
   [ squidly ]
