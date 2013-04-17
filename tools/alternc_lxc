@@ -1,0 +1,80 @@
+#!/usr/bin/php
+<?php
+
+
+require_once("/var/lib/alternc-lxc/alternc_lxc.class.php");
+
+function help() {
+  echo "Actions:\n";
+  echo " * ".$_SERVER['SCRIPT_NAME']." start login password_hash UID\n";
+  echo " * ".$_SERVER['SCRIPT_NAME']." stop vm\n";
+  echo " * ".$_SERVER['SCRIPT_NAME']." stopall\n";
+  echo " * ".$_SERVER['SCRIPT_NAME']." monit\n";
+  echo " * ".$_SERVER['SCRIPT_NAME']." list\n";
+  echo " * ".$_SERVER['SCRIPT_NAME']." lock\n";
+  echo " * ".$_SERVER['SCRIPT_NAME']." unlock\n";
+  echo "\n";
+}
+
+# Must be launched as root
+if (shell_exec("/usr/bin/id -u") != 0 ) {
+  echo "Script must be launch as root.\n";
+  die();
+}
+
+# There must be at least one parameters
+if (empty($argv[1])) {
+  help();
+  die();
+}
+
+$filename = '/etc/alternc-lxc/vms.json';
+$conf = json_decode(file_get_contents($filename), TRUE);
+
+$lxc = new alternc_lxc();
+$lxc->conf=$conf;
+
+# Here we go
+switch ($argv[1]) {
+  case "start":
+    if (empty($argv[2]) || empty($argv[3]) || empty($argv[4])) {
+      help();
+      die();
+    }
+    $r = $lxc->start_vm($argv[2], $argv[3], $argv[4]);
+    echo serialize($r);
+    break;
+  case "stopall":
+    $r=$lxc->stopall_vm();
+    echo serialize($r);
+    break;
+  case "stop":
+    if (empty($argv[2])) {
+      help();
+      die();
+    }
+    $r=$lxc->stop_vm($argv[2]);
+    echo serialize($r);
+    break;
+  case "unlock":
+    $r=$lxc->unlock();
+    echo serialize($r);
+    break;
+  case "lock":
+    $r=$lxc->lock();
+    echo serialize($r);
+    break;
+  case "monit":
+    $r=$lxc->monit();
+    echo serialize($r);
+    break;
+  case "list":
+    $r=$lxc->listvm();
+    echo "$r";
+    break;
+  default:
+    help();
+    die();
+}
+
+?>

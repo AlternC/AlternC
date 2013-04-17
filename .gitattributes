@@ -456,6 +456,7 @@ debian/po/nl.po -text
 debian/po/pt.po -text
 debian/po/templates.pot -text
 debian/rules -text
+etc/alternc-lxc/vms.json -text
 etc/alternc/alternc-sudoers -text
 etc/alternc/alternc.ini -text
 etc/alternc/apache2-ssl.conf -text
@@ -622,6 +623,7 @@ tests/mechdump.pm -text
 tests/test_demo.pl -text
 tests/whois_test.php -text
 tools/alternc_get_path -text
+tools/alternc_lxc -text
 tools/get_account_by_domain -text
 tools/get_domains_by_account -text
 tools/top_ftp_users -text

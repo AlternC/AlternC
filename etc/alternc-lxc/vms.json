@@ -1,0 +1,24 @@
+{
+"vm1":{
+	"hostname":"vm1.test.fr",
+	"network":{
+		"eth0":{
+			"link":"brdummy",
+			"ip":"10.50.0.2\/24"
+		},
+		"eth1":{
+			"link":"brdummy2",
+			"ip":"10.55.0.2\/24"
+		}
+	}
+},
+"vm2":{
+	"hostname":"vm2.test.fr",
+	"network":{
+		"eth0":{
+			"link":"brdummy",
+			"ip":"10.51.0.2\/24"
+		}
+	}
+}
+}
