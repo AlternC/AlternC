@@ -106,15 +106,15 @@ class m_bro {
     // verifier que le repertoire est dans le home de l'usgaer
     if (substr($dir,0,strlen($root))!=$root) {
       return false;
-    } 
-
+    }
+ 
     // recomposer le chemin
     $dir = $dir . '/' . $file;
 
-    # Si on tente de mettre un '..' alors erreur
-    if ( preg_match("/\/\.\.\//", $dir) || preg_match("/\/\.\.$/", $dir) ) {
-      return false;
-    }
+    # Si on tente de mettre un '..' alors erreur 
+    if ( preg_match("/\/\.\.\//", $dir) || preg_match("/\/\.\.$/", $dir) ) { 
+      return false; 
+    } 
 
     if ($strip) {
       $dir=substr($dir,strlen($root));
@@ -472,7 +472,7 @@ class m_bro {
 
     if ($new[0] != '/') {
       $new = $old . '/' . $new;
-    } 
+    }
     $new = $this->convertabsolute($new,0);
 
     if (!$new) {
