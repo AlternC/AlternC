@@ -107,8 +107,15 @@ class m_bro {
     if (substr($dir,0,strlen($root))!=$root) {
       return false;
     } 
+
     // recomposer le chemin
     $dir = $dir . '/' . $file;
+
+    # Si on tente de mettre un '..' alors erreur
+    if ( preg_match("/\/\.\.\//", $dir) || preg_match("/\/\.\.$/", $dir) ) {
+      return false;
+    }
+
     if ($strip) {
       $dir=substr($dir,strlen($root));
     } else {
@@ -465,9 +472,8 @@ class m_bro {
 
     if ($new[0] != '/') {
       $new = $old . '/' . $new;
-    } else {
-      $new = $this->convertabsolute($new,0);
-    }
+    } 
+    $new = $this->convertabsolute($new,0);
 
     if (!$new) {
       $err->raise("bro",_("File or folder name is incorrect"));
