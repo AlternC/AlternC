@@ -42,23 +42,41 @@ class DB_users extends DB_Sql {
    */
   function DB_users() {
     global $cuid, $db, $err;
-    $db->query("select db_servers.* from db_servers, membres where membres.uid=$cuid and membres.db_server_id=db_servers.id;");
 
-    if (!$db->next_record()) {
-      $err->raise('db_user', _("There are no databases in db_servers for this user. Please contact your administrator."));
-      die();
+    // Check if function got args
+    $num=func_num_args();
+
+    switch($num) {
+      case 5 :
+         # Create the object
+           $this->HumanHostname = func_get_arg(0);
+           $this->Host          = func_get_arg(1);
+           $this->User          = func_get_arg(2);
+           $this->Password      = func_get_arg(3);
+           $this->Client        = func_get_arg(4);
+
+           $this->Database = "mysql"; # We have to define a dabatase when we connect, and the database must exists.
+           break;
+
+      default :
+          $db->query("select db_servers.* from db_servers, membres where membres.uid=$cuid and membres.db_server_id=db_servers.id;");
+          if (!$db->next_record()) {
+            $err->raise('db_user', _("There are no databases in db_servers for this user. Please contact your administrator."));
+            die();
+          }
+
+      # Create the object
+          $this->HumanHostname = $db->f('name');
+          $this->Host          = $db->f('host');
+          $this->User          = $db->f('login');
+          $this->Password      = $db->f('password');
+          $this->Client        = $db->f('client');
+
+          $this->Database = "mysql"; # We have to define a dabatase when we connect, and the database must exist.
+          break;
     }
-
-# Create the object
-    $this->HumanHostname = $db->f('name');
-    $this->Host          = $db->f('host');
-    $this->User          = $db->f('login');
-    $this->Password      = $db->f('password');
-    $this->Client        = $db->f('client');
-
-    $this->Database = "mysql"; # We have to define a dabatase when we connect, and the database must exist.
-
   }
+
 }
 
 
@@ -1079,6 +1097,34 @@ class m_mysql {
     }
   }
 
+  /* ----------------------------------------------------------------- */
+  /**
+   * Return the size of each databases in a SQL Host given in parameter
+   * @param $db_name the human name of the host
+   * @param $db_host the host hosting the SQL databases
+   * @param $db_login the login to access the SQL db
+   * @param $db_password the password to access the SQL db
+   * @param $db_client the client to access the SQL db
+   * @return an array associating the name of the databases to their sizes : array(dbname=>size)
+   */ 
+  function get_dbus_size($db_name,$db_host,$db_login,$db_password,$db_client) {
+    global $db,$err;
+    $err->log("mysql","get_dbus_size",$db_host);
+    $this->dbus=new DB_users($db_name,$db_host,$db_login,$db_password,$db_client);
+    $this->dbus->query("show databases;");
+    $res=array();
+    $d=array();
+    while($this->dbus->next_record()) {
+      $dbname=$this->dbus->f("Database");
+      $c=mysql_query("SHOW TABLE STATUS FROM $dbname;");
+      $size=0;
+      while ($d=mysql_fetch_array($c)) {
+        $size+=$d["Data_length"]+$d["Index_length"];
+      }
+      $res["$dbname"]="$size";
+    }
+    return $res;
+  }
 
 } /* Class m_mysql */
 
