@@ -95,7 +95,7 @@ for($i=0;$i<count($r);$i++){
     <table class="tedit">
       <tr>
         <th><input type="hidden" name="dir" value="<?php echo $dir ?>" /><?php __("Folder"); ?></th>
-        <td><code><?php echo $dir; ?></code></td>
+        <td><?php echo '<a href="bro_main.php?R='.urlencode($dir).'">'.htmlspecialchars($dir).'</a>'; ?></td>
       </tr>
       <tr>
         <th><label for="user"><?php __("Username"); ?></label></th>

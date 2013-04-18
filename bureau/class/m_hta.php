@@ -129,7 +129,7 @@ class m_hta {
     $pattern="/^".preg_quote(ALTERNC_HTML,"/")."\/.\/[^\/]*\/(.*)\/\.htpasswd/";
       for($i=0;$i<count($sortie);$i++){
       preg_match($pattern,$sortie[$i],$matches);
-      $tmpm=isset($matches[1])?$matches[1]:'';
+      $tmpm=isset($matches[1])?'/'.$matches[1]:'';
       $r[$i]=$tmpm."/";
     }
     return $r;

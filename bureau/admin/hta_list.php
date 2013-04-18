@@ -79,7 +79,7 @@ for($i=0;$i<count($r);$i++){
 		<td>
 <div class="ina"><a href="hta_edit.php?dir=<?php echo $r[$i]?>"><img src="icon/encrypted.png" alt="<?php __("Edit login and passwords"); ?>" /><?php __("Edit login and passwords"); ?></a></div>
 </td>
-		<td><code><?php echo "$r[$i]"?></code></td>
+		<td><?php echo '<a href="bro_main.php?R='.urlencode($r[$i]).'">'.htmlspecialchars($r[$i]).'</a>'; ?></td>
 	</tr>
     <?php
 	}
