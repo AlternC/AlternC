@@ -715,3 +715,14 @@ CREATE TABLE IF NOT EXISTS `db_servers` (
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM COMMENT='List of the databases servers';
 
+CREATE TABLE IF NOT EXISTS `actions` (
+ id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+ type enum ('CREATE_FILE','CREATE_DIR','DELETE','MOVE'),
+ parameters longtext default NULL,
+ creation timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+ begin timestamp,
+ end timestamp,
+ user varchar(255) default NULL,
+ status int(8) unsigned default NULL,
+ PRIMARY KEY ( `id` )
+) ENGINE=MyISAM COMMENT = 'generic actions';
