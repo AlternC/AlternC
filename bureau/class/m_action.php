@@ -63,19 +63,41 @@ class m_action {
   */
   function set($type,$parameters) {
     global $db;
+    
+    switch($type){
+    case 'create_file':
+      //do some shit
+    case 'create_dir':
+     //do more shit
+    case 'move':
+     //do more shit
+    case 'delete':
+     //do more shit
+    case 'archive':
+     //do more shit
+    default:
+      return false;
+    }
   }
+
   /*
   * function returning the first not locked line of the action table 
   */
   function get_action() {
     global $db;
-    return true;
+    $db->query('select * from (select * form actions where end="" and begin="" order by id) x group by id');
+    if ($db->next_record()){
+      $tab[]=$db->Record;
+      return $tab;
+    }else
+      return false;
   }
   /*
   * function locking an entry while it is being executed by the action script
   */
   function begin($id) {
     global $db;
+    $db->query("update actions set begin=".date()." where id=$id ");
     return true;
   }
   /*
@@ -83,6 +105,7 @@ class m_action {
   */
   function finish($id) {
     global $db;
+    $db->query("update actions set end=".date()." where id=$id ");
     return true;
   }
   /*
@@ -90,6 +113,7 @@ class m_action {
   */
   function cancel($id) {
     global $db;
+    $db->query("update actions set end=".date()." where id=$id ");
     return true;
   }
 
