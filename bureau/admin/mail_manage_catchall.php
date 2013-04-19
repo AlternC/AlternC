@@ -80,16 +80,16 @@ __("You can choose what to do with emails sent to unexisting address of this dom
     <th colspan="3"><b><?php __("No catch-all");?></b></th>
   </tr>
   <tr>
-    <td width=1px><input type="radio" name="target_type" id='target_type_none' value="none" <?php if ($catch['type']=='none') {echo 'checked';}?> /></td>
-    <td colspan='2' style="width: 50%; text-align: justify"><label for='target_type_none'/><?php echo __("No catch-all for this domain.");?></label></td>
+    <td width="1px"><input type="radio" name="target_type" id='target_type_none' value="none" <?php if ($catch['type']=='none') {echo 'checked="checked"';}?> /></td>
+    <td colspan='2' style="width: 50%; text-align: justify"><label for='target_type_none'><?php echo __("No catch-all for this domain.");?></label></td>
   </tr>
 
   <tr>
     <th colspan="3"><b><?php __("Redirect to same address on a different domain");?></b></th>
   </tr>
   <tr>
-    <td width=1px><input type="radio" name="target_type" id='target_type_domain' value="domain" <?php if ($catch['type']=='domain') {echo 'checked';}?> />
-    <td style="width: 50%; text-align: justify"><label for='target_type_domain'/><?php echo sprintf(_("Mails sent to john.doe@%s will be redirect to john.doe@anotherdomain.tld"),$catch['domain']);?></label></td>
+    <td width="1px"><input type="radio" name="target_type" id='target_type_domain' value="domain" <?php if ($catch['type']=='domain') {echo 'checked="checked"';}?> /></td>
+    <td style="width: 50%; text-align: justify"><label for='target_type_domain'><?php echo sprintf(_("Mails sent to john.doe@%s will be redirect to john.doe@anotherdomain.tld"),$catch['domain']);?></label></td>
     <td>
       <p>
 	<i><?php __("Enter the 'target' domain"); ?></i><br/>
@@ -106,8 +106,8 @@ __("You can choose what to do with emails sent to unexisting address of this dom
     <th colspan="3"><b><?php __("Redirect to a specific email");?></b></th>
   </tr>
   <tr>
-    <td width=1px><input type="radio" name="target_type" id='target_type_mail' value="mail" <?php if ($catch['type']=='mail') {echo 'checked';}?> />
-    <td style="width: 50%; text-align: justify"><label for='target_type_mail'/><?php echo sprintf(_("Mails sent to an unexisting email on '@%s' will be redirect to user@example.tld."),$catch['domain']);?></label></td>
+    <td width="1px"><input type="radio" name="target_type" id='target_type_mail' value="mail" <?php if ($catch['type']=='mail') {echo 'checked="checked"';}?> /></td>
+    <td style="width: 50%; text-align: justify"><label for='target_type_mail'><?php echo sprintf(_("Mails sent to an unexisting email on '@%s' will be redirect to user@example.tld."),$catch['domain']);?></label></td>
     <td>
       <p>
         <input type="text" name="target_mail" size="30" value="<?php if($catch['type']=='mail') { echo $catch['target']; } ?>" placeholder="<?php __("john.doe@example.tld");?>" />

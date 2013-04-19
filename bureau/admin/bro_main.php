@@ -321,7 +321,7 @@ function actmoveto_not_empty() {
         </script>
           </th>
           <?php if ($p["showicons"]) { ?>
-              <th><?php if (!empty($R)) { echo "<a href=''>".$bro->PathList($R,"bro_main.php",true)."</a>";  }?></th>
+              <th style="text-align: center;"><?php if (!empty($R)) { echo $bro->PathList($R,"bro_main.php",true);  }?></th>
               <?php } ?>
               <th><?php __("Filename"); ?></th>
               <th><?php __("Size"); ?></th>
@@ -340,7 +340,7 @@ function actmoveto_not_empty() {
           if ($c[$i]["type"]) {
             echo "  <td width=\"28\"><input type=\"checkbox\" class=\"inc\" name=\"d[]\" value=\"".htmlentities($c[$i]["name"])."\" /></td>";
             if ($p["showicons"]) {
-              echo "<td width=\"28\"><img src=\"icon/".$bro->icon($c[$i]["name"])."\" width=\"16\" height=\"16\" alt=\"\" /></td>";
+              echo "<td style='text-align: center;' width=\"28\"><img src=\"icon/".$bro->icon($c[$i]["name"])."\" width=\"16\" height=\"16\" alt=\"\" /></td>";
             }
             echo "<td><a href=\"";
             $canedit = $bro->can_edit($R,$c[$i]["name"]);
@@ -613,7 +613,7 @@ if ($id=$ftp->is_ftp($R)) {
 else {
   ?>
     <span class="ina">
-    <a href="ftp_edit.php?create=1&dir=<?php ehe($R); ?>"><?php __("Create an ftp account in this folder"); ?></a>
+    <a href="ftp_edit.php?create=1&amp;dir=<?php ehe($R); ?>"><?php __("Create an ftp account in this folder"); ?></a>
     </span> &nbsp;
   <?php
 }

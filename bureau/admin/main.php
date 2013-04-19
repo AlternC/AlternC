@@ -69,8 +69,8 @@ foreach ($xml->channel->item as $val) {
 if ($count < $max) {
   echo '
   <tr>
-    <td '.(empty($val->pubDate)?'colpan=2':'').'><a target=_blank href="'.$val->link.'">'.$val->title.'</a></td>';
-    if (!empty($val->pubDate)) { echo '<td>'.strftime("%d/%m/%Y" , strtotime($val->pubDate)).'</td></td>'; }
+    <td '.(empty($val->pubDate)?'colpan=2':'').'><a target="_blank" href="'.$val->link.'">'.$val->title.'</a></td>';
+    if (!empty($val->pubDate)) { echo '<td>'.strftime("%d/%m/%Y" , strtotime($val->pubDate)).'</td>'; }
   echo '</tr>';
 }
 $count++;
@@ -88,12 +88,13 @@ if($admin->enabled) {
     echo "<table cellspacing=\"2\" cellpadding=\"4\">\n";
     echo "<tr><th>"._("uid")."</th><th>"._("Last name, surname")."</th><th>"._("Expiry")."</th></tr>\n";
     if (is_array($expiring)) {
-	    foreach($expiring as $account) {
-      echo "<tr class=\"exp{$account['status']}\"><td>{$account['uid']}</td>";
-      if($admin->checkcreator($account['uid']))
-	echo "<td><a href=\"adm_edit.php?uid={$account['uid']}\">{$account['nom']}, {$account['prenom']}</a></td>";
-      else
-	echo "<td>{$account['nom']}, {$account['prenom']}</td>";
+      foreach($expiring as $account) {
+        echo "<tr class=\"exp{$account['status']}\"><td>{$account['uid']}</td>";
+        if($admin->checkcreator($account['uid'])) {
+          echo "<td><a href=\"adm_edit.php?uid={$account['uid']}\">{$account['nom']}, {$account['prenom']}</a></td>";
+        }else{
+          echo "<td>{$account['nom']}, {$account['prenom']}</td>";
+        }
         echo "<td>{$account['expiry']}</td></tr>\n";
       }
     }
@@ -102,7 +103,7 @@ if($admin->enabled) {
 
   echo "<hr/><p>";
   __("You are using the AlternC Panel. You can contact the AlternC community for information or feedback by joining the mailing-list");
-  echo "&nbsp;<a target=_blank href='http://lists.alternc.org/listinfo/users'>users@alternc.org</a>";
+  echo "&nbsp;<a target='_blank' href='http://lists.alternc.org/listinfo/users'>users@alternc.org</a>";
   echo "</p>";
 } // if $admin->enabled
 

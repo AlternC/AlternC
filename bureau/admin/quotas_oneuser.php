@@ -10,7 +10,7 @@ if (!isset($mode)) { # when included from adm_login, mode is not set
 ?>
 <center>
 
-<h3><center><?php printf(_("<b>%s</b> account"),$mem->user["login"]); ?></center></h3>
+<h3 style="text-align:center;"><?php printf(_("<b>%s</b> account"),$mem->user["login"]); ?></h3>
 
 <div style="width: 550px">
 
@@ -48,9 +48,6 @@ if (!isset($mode)) { # when included from adm_login, mode is not set
   }
 
   $t=$quota->get_size_unit($totalmail);
-  echo "<p>"._("Mailboxes size:")." ";
-  echo sprintf("%.1f", $t['size'])."&nbsp;".$t['unit'];
-  echo "</p>";
 
   foreach ($domaines_user as $domaine) { 
     $alias_sizes = $quota->get_size_mail_details_domain($domaine);
