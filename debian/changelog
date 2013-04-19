@@ -26,7 +26,10 @@ alternc (3.0.2) stable; urgency=low
   * [4204] Don't log "manual launch of update_domain" if we don't do it...
   * [4222] Bugfix directory's download
 
- -- Axel Roger <axel@nnx.com>  Thu, 18 Apr 2013 16:34:15 +0200
+  [ Benjamin ]
+  * Fixing a crash in .config script if / mountpoint does not exist (typically on vserver/LXC/chroots)
+
+ -- Benjamin Sonntag <benjamin@sonntag.fr>  Thu, 19 Apr 2013 14:06:00 +0200
 
 alternc (3.0.1) stable; urgency=low
 
