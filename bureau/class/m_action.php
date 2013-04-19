@@ -31,50 +31,60 @@ class m_action {
   /*
   * function to set the cration of a file 
   */
-  function create_file($file,$user="root") {
-    return $this->set('create_file', array('file'=>$file, 'user'=>$user));
+  function create_file($file,$content,$user="root") {
+    return $this->set('create_file',$user, array('file'=>$file,'content'=>$content));
   }
   /*
   * function to set the cration of a file 
   */
   function create_dir($dir,$user="root") {
-    return $this->set('create_dir', array('dir'=>$dir,'user'=>$user));
+    return $this->set('create_dir',$user, array('dir'=>$dir));
   }
   /*
   * function to delete file / folder
   */
   function del($dir) {
-    return $this->set('delete', array('dir'=>$dir,'user'=>$user));
+    return $this->set('delete',$user, array('dir'=>$dir));
   }
   /*
   * function returning the first not locked line of the action table 
   */
   function move($src,$dest) {
-    return $this->set('move', array('src'=>$src, 'dst'=>$dst,'user'=>$user));
+    return $this->set('move',$user, array('src'=>$src, 'dst'=>$dst));
   }
   /*
   * function archiving a directory ( upon account deletion )
   */
-  function archive($dir) {
-    return $this->set('archive', array('dir'=>$dir,'user'=>$user));
+  function archive($archive) {
+    global $cuid;
+    //utiliser la function move après avoir construit le chemin
+    $today=getdate();
+    $dest=$BACKUP_DIR.'/'.$today["year"].'-'.$today["mon"].'/'.$uidlogin.'/';
+    $this->move($archive,$dest);
   }
   /*
   *function inserting the action in the sql table 
   */
-  function set($type,$parameters) {
+  function set($type,$user,$parameters) {
     global $db;
     
+    $serialized=serialize($parameters);
     switch($type){
     case 'create_file':
       //do some shit
+      $db->query("insert into actions values ('','CREATE_FILE','$serialized','','','','$user','');"); 
     case 'create_dir':
      //do more shit
+      $db->query("insert into actions values ('','CREATE_DIR','$serialized','','','','$user','');"); 
     case 'move':
      //do more shit
+      $db->query("insert into actions values ('','MOVE','$serialized','','','','$user','');"); 
     case 'delete':
      //do more shit
+      $db->query("insert into actions values ('','DELETE','$serialized','','','','$user','');"); 
     case 'archive':
      //do more shit
+      $db->query("insert into actions values ('','ARCHIVE','$serialized','','','','$user','');"); 
     default:
       return false;
     }
@@ -85,6 +95,8 @@ class m_action {
   */
   function get_action() {
     global $db;
+
+    $tab=array();
     $db->query('select * from (select * form actions where end="" and begin="" order by id) x group by id');
     if ($db->next_record()){
       $tab[]=$db->Record;
