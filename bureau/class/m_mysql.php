@@ -40,40 +40,33 @@ class DB_users extends DB_Sql {
   /**
    * Creator
    */
-  function DB_users() {
+  function DB_users($empty=false) {
     global $cuid, $db, $err;
 
-    // Check if function got args
-    $num=func_num_args();
+    if (!$empty){
+    $db->query("select db_servers.* from db_servers, membres where membres.uid=$cuid and membres.db_server_id=db_servers.id;");
+    if (!$db->next_record()) {
+      $err->raise('db_user', _("There are no databases in db_servers for this user. Please contact your administrator."));
+      die();
+    }
 
-    switch($num) {
-      case 5 :
-         # Create the object
-           $this->HumanHostname = func_get_arg(0);
-           $this->Host          = func_get_arg(1);
-           $this->User          = func_get_arg(2);
-           $this->Password      = func_get_arg(3);
-           $this->Client        = func_get_arg(4);
+    # Create the object
+    $this->HumanHostname = $db->f('name');
+    $this->Host          = $db->f('host');
+    $this->User          = $db->f('login');
+    $this->Password      = $db->f('password');
+    $this->Client        = $db->f('client');
 
-           $this->Database = "mysql"; # We have to define a dabatase when we connect, and the database must exists.
-           break;
+    $this->Database = "mysql"; # We have to define a dabatase when we connect, and the database must exist.
+    }else{
+          # Create the object without any parameter
+    $this->HumanHostname = "";
+    $this->Host          = "";
+    $this->User          = "";
+    $this->Password      = "";
+    $this->Client        = "";
 
-      default :
-          $db->query("select db_servers.* from db_servers, membres where membres.uid=$cuid and membres.db_server_id=db_servers.id;");
-          if (!$db->next_record()) {
-            $err->raise('db_user', _("There are no databases in db_servers for this user. Please contact your administrator."));
-            die();
-          }
-
-      # Create the object
-          $this->HumanHostname = $db->f('name');
-          $this->Host          = $db->f('host');
-          $this->User          = $db->f('login');
-          $this->Password      = $db->f('password');
-          $this->Client        = $db->f('client');
-
-          $this->Database = "mysql"; # We have to define a dabatase when we connect, and the database must exist.
-          break;
+    $this->Database = "mysql"; # We have to define a dabatase when we connect, and the database must exist.
     }
   }
 
@@ -1110,7 +1103,16 @@ class m_mysql {
   function get_dbus_size($db_name,$db_host,$db_login,$db_password,$db_client) {
     global $db,$err;
     $err->log("mysql","get_dbus_size",$db_host);
-    $this->dbus=new DB_users($db_name,$db_host,$db_login,$db_password,$db_client);
+
+    # We create the object with empty parameters
+    $this->dbus=new DB_users(true);
+    # Modify the object with right parameters
+    $this->dbus->HumanHostname = $db_name;
+    $this->dbus->Host          = $db_host;
+    $this->dbus->User          = $db_login;
+    $this->dbus->Password      = $db_password;
+    $this->dbus->Client        = $db_client;
+
     $this->dbus->query("show databases;");
     $res=array();
     $d=array();
