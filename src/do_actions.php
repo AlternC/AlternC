@@ -39,7 +39,6 @@ require_once("/usr/share/alternc/panel/class/config_nochk.php");
 $LOCK_FILE='/var/run/alternc/do_actions_cron.lock';
 $SCRIPT='php do_actions';
 $MY_PID=getmypid();
-$BACKUP_DIR='/var/backup/alternc/';
 
 // Check if script isn't already running
 if (($PID=file_get_contents($LOCK_FILE)) !== false){
@@ -64,11 +63,11 @@ if (file_put_contents($LOCK_FILE,$MY_PID) === false){
 //We get the next action to do
 while ($r=$action->get_action()){
   // We lock the action
-  $action->begin($r[id]);
+  $action->begin($r["id"]);
   // We process it
-  $params=array($r["parameters"]);
+  $params=$r["parameters"];
   // We exec with the specified user
-  exec("su ".$params["user"]);
+  exec("su ".$r["user"]);
   switch ($r["type"]){
     case "CREATE_FILE" :
       $return=file_put_contents($params["file"],$params["contents"]);
