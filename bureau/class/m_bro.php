@@ -676,12 +676,15 @@ class m_bro {
    * @param string $action Page web de destination des liens
    * @return string le code HTML ainsi obtenu.
    */
-  function PathList($path,$action) {
+  function PathList($path,$action, $justparent=false) {
     $path=$this->convertabsolute($path,1);
     $a=explode("/",$path);
     if (!is_array($a)) $a=array($a);
     $c='';
     $R='';
+    if ($justparent) {
+      return "<a href=\"$action?R=".urlencode($a[count($a)-2].'/')."\">&uarr;</a>";
+    }
     for($i=0;$i<count($a);$i++) {
       if ($a[$i]) {
 	$R.=$a[$i]."/";

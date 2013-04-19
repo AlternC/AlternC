@@ -327,6 +327,7 @@ img {
 }
 
 .menu-box .menu-title {
+  display: block;
   color: #000000;
   border-bottom: 2px solid #AAA;
   background-color: #CFE3F1;

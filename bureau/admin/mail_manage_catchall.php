@@ -81,7 +81,7 @@ __("You can choose what to do with emails sent to unexisting address of this dom
   </tr>
   <tr>
     <td width=1px><input type="radio" name="target_type" id='target_type_none' value="none" <?php if ($catch['type']=='none') {echo 'checked';}?> /></td>
-    <td colspan=2 style="width: 50%; text-align: justify"><label for='target_type_none'/><?php echo __("No catch-all for this domain.");?></label></td>
+    <td colspan='2' style="width: 50%; text-align: justify"><label for='target_type_none'/><?php echo __("No catch-all for this domain.");?></label></td>
   </tr>
 
   <tr>

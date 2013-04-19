@@ -321,7 +321,7 @@ function actmoveto_not_empty() {
         </script>
           </th>
           <?php if ($p["showicons"]) { ?>
-            <th></th>
+              <th><?php if (!empty($R)) { echo "<a href=''>".$bro->PathList($R,"bro_main.php",true)."</a>";  }?></th>
               <?php } ?>
               <th><?php __("Filename"); ?></th>
               <th><?php __("Size"); ?></th>
@@ -349,7 +349,8 @@ function actmoveto_not_empty() {
             } else {
               echo "bro_downloadfile.php?dir=".urlencode($R)."&amp;file=".urlencode($c[$i]["name"]);
             }
-            echo "\">"; ehe($c[$i]["name"]); echo"</a></td>\n";
+            echo "\">"; ehe($c[$i]["name"]); 
+            echo"</a></td>\n";
             echo "  <td>".format_size($c[$i]["size"])."</td>";
             echo "<td>".format_date(_('%3$d-%2$d-%1$d %4$d:%5$d'),date("Y-m-d H:i:s",$c[$i]["date"]))."<br /></td>";
             if ($p["showtype"]) {
@@ -377,8 +378,7 @@ function actmoveto_not_empty() {
               echo "<input type='hidden' name ='filename' value='".htmlentities($R."/".$c[$i]["name"])."' />";
               $dbl=array(); foreach ($mysql->get_dblist() as $v) { $dbl[]=$v['db'];}
               echo "<select id='db_name_$i'>"; eoption($dbl,'',true); echo "</select>" ;
-              echo "<a href='javascript:;' onClick='window.location=\"sql_restore.php?filename=".urlencode($R."/".$c[$i]["name"])."&id=\"+encodeURIComponent($(\"#db_name_$i\").val()) ;'>"._("Restore it")."</a>";
-              echo "</form>";
+              echo "<a href='javascript:;' onClick='window.location=\"sql_restore.php?filename=".urlencode($R."/".$c[$i]["name"])."&amp;id=\"+encodeURIComponent($(\"#db_name_$i\").val()) ;'>"._("Restore it")."</a>";
               echo "</fieldset></div>";
             }
 
@@ -390,7 +390,7 @@ function actmoveto_not_empty() {
             }
             echo "<td><b><a href=\"";
             echo "bro_main.php?R=".urlencode($R."/".$c[$i]["name"]);
-            echo "\">"; ehe($c[$i]["name"]) ;"/</a></b></td>\n";
+            echo "\">"; ehe($c[$i]["name"]); echo "/</a></b></td>\n";
             echo "  <td>".format_size($c[$i]["size"])."</td>";
             echo "<td>".format_date(_('%3$d-%2$d-%1$d %4$d:%5$d'),date("Y-m-d h:i:s",$c[$i]["date"]))."<br /></td>";
             if ($p["showtype"]) {
@@ -585,7 +585,7 @@ else {
 <br/>
 
 <p>
-<span class="ina"><a href="bro_main.php?R=<?php echo $R; ?>&showdirsize=1"><?php __("Show size of directories"); ?></a></span> <?php __("(slow)"); ?>
+<span class="ina"><a href="bro_main.php?R=<?php echo $R; ?>&amp;showdirsize=1"><?php __("Show size of directories"); ?></a></span> <?php __("(slow)"); ?>
 </p><p>&nbsp;</p><p>
 <span class="ina"><?php
 if ($hta->is_protected($R)) {
@@ -600,14 +600,13 @@ else {
 <a href="bro_tgzdown.php?dir=<?php echo $R; ?>"><?php __("Download this folder"); ?></a>
 </span> &nbsp; 
 <?php printf(_("as a %s file"),$bro->l_tgz[$p["downfmt"]]); ?>
-</span>
 </p>  
 <?php
 
 if ($id=$ftp->is_ftp($R)) {
   ?>
     <span class="ina">
-    <a href="ftp_edit.php?id=<?php ehe($id); ?>"><?php __("Edit the ftp account"); ?></a> 
+    <a href="ftp_edit.php?amp;id=<?php ehe($id); ?>"><?php __("Edit the ftp account"); ?></a> 
     </span> &nbsp; <?php __("that exists in this folder"); ?>
     <?php
 }

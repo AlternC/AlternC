@@ -61,7 +61,7 @@ $list_ip = $authip->list_ip_whitelist();
  
 </p>
       <table class='tlist'>
-      <tr><th><?php __("Type"); ?></th><th><?php __("IP"); ?></th><th><?php __("Informations"); ?></th><th colspan=2/></tr>
+      <tr><th><?php __("Type"); ?></th><th><?php __("IP"); ?></th><th><?php __("Informations"); ?></th><th colspan='2' /></tr>
       <?php 
       $col=1;
       foreach($list_ip as $i) {

@@ -45,7 +45,7 @@ foreach ($obj_menu as $k => $m ) {
   echo "  <a href=\"".$m['link']."\"";
   if (!empty($m['target'])) echo " target='". $m['target']."' ";
   echo ">\n";
-  echo "    <div class='menu-title'>\n";
+  echo "    <span class='menu-title'>\n";
   echo "      <img src='".$m['ico']."' alt=\"".$m['title']."\" width='16' height='16' />&nbsp;";
   echo "        <span class='";
   if (!empty($m['class'])) echo $m['class']." ";
@@ -68,7 +68,7 @@ foreach ($obj_menu as $k => $m ) {
   }
   echo "      <img src='$i' alt='' style='float:right;' id='menu-$k-img'/>\n";
   echo "      </span>";
-  echo "    </div>\n";
+  echo "    </span>\n";
   echo "  </a>\n";
 
   if (!empty($m['links'])) {

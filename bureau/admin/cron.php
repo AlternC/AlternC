@@ -49,11 +49,11 @@ for ($i=0; $i < $max_cron ; $i++) {
 ?>
   <tr class="<?php echo ($i%2)?"lst1":"lst2"; ?>">
     <?php if (isset($lst_cron[$i])) echo "<input type='hidden' name='cronupdate[$i][id]' value='".$lst_cron[$i]['id']."' />"; ?> 
-    <td rowspan=2>
+    <td rowspan='2'>
       <?php if (isset($lst_cron[$i])) { echo '#'.$lst_cron[$i]['id']; } ?><br/>
       <a href="javascript:cleancron('<?php echo $i ?>');"><img src="images/delete.png" alt="<?php __("Delete");?>" title="<?php __("Delete");?>"/></a>
     </td>
-    <td colspan=2>
+    <td colspan='2'>
       <input type="text" placeholder="<?php __("Called URL"); ?>" id="crup_url_<?php echo $i?>" name="<?php echo "cronupdate[$i][url]";?>" size="40" maxlength="255" value="<?php if (isset($lst_cron[$i]['url'])) { echo htmlentities($lst_cron[$i]['url']);} ?>"/>
     </td>
     <td>
