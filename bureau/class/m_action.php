@@ -38,13 +38,13 @@ class m_action {
   * function to set the cration of a file 
   */
   function create_dir($dir,$user="root") {
-    return $this->set('create_dir', array('dir'=>$dir,'user'=$user));
+    return $this->set('create_dir', array('dir'=>$dir,'user'=>$user));
   }
   /*
   * function to delete file / folder
   */
   function del($dir) {
-    return $this->set('delete', array('dir'=>$dir,'user'=$user));
+    return $this->set('delete', array('dir'=>$dir,'user'=>$user));
   }
   /*
   * function returning the first not locked line of the action table 
@@ -56,7 +56,7 @@ class m_action {
   * function archiving a directory ( upon account deletion )
   */
   function archive($dir) {
-    return $this->set('archive', array('dir'=>$dir,'user'=$user));
+    return $this->set('archive', array('dir'=>$dir,'user'=>$user));
   }
   /*
   *function inserting the action in the sql table 
