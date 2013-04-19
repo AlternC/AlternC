@@ -594,6 +594,7 @@ src/courier-dovecot-migrate.pl -text
 src/cron_users.sh -text
 src/cron_users_doit.sh -text
 src/delete_logs.sh -text
+src/do_actions.php -text
 src/du.pl -text
 src/export_account.php -text
 src/fixperms.sh -text
