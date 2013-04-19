@@ -52,7 +52,9 @@ $r=$mysql->get_defaultsparam($dbname);
 ?>
 <p><?php __("Your current connection settings are"); ?> : </p>
 <table class="tedit">
-	<th colspan=2 style='text-align:center;'><?php echo '<h1>'.$mysql->dbus->HumanHostname.'</h1>'; ?></th>
+        <tr>
+	<th colspan="2" style='text-align:center;'><?php echo '<h1>'.$mysql->dbus->HumanHostname.'</h1>'; ?></th>
+        </tr>
 	<tr>
 		<th><?php __("Mysql Server"); ?></th>
 		<td><code><?php echo $mysql->dbus->Host; ?></code></td>
@@ -73,10 +75,11 @@ if(isset($r['user'])){
 		<td><code><?php echo $r['password']; ?></code></td>
 	</tr>
 	<tr>
-		<td colspan=2 align=center>
-                  <a href="/alternc-sql/" target=_blank><?php __("Web interface PhpMyAdmin"); ?></a>
-                  <br/>
-                  <xmp>http://<?php echo $L_FQDN; ?>/alternc-sql/</xmp>
+		<td colspan="2" align="center">
+                  <a href="/alternc-sql/" target="_blank"><?php __("Web interface PhpMyAdmin"); ?></a>
+                  <p>
+                  <code>http://<?php echo $L_FQDN; ?>/alternc-sql/</code>
+                  </p>
                 </td>
 	</tr>
 <?php

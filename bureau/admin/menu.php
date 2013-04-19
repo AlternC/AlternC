@@ -33,7 +33,7 @@ $logo = variable_get('logo_menu', 0 ,'You can specify a logo for the menu, examp
 if ( empty($logo) ||  ! $logo ) { $logo = 'images/logo3.png'; }
 
 ?>
-<img src="<?php echo $logo; ?>" class="menutoplogo" border="0" alt="AlternC" alt="<?php __("AlternC"); ?>"/>
+<img src="<?php echo $logo; ?>" class="menutoplogo" border="0" alt="AlternC" />
 <p class="currentuser"><?php echo sprintf(_("Welcome %s"),$mem->user["login"]); ?></p>
 
 <?php
@@ -83,11 +83,11 @@ foreach ($obj_menu as $k => $m ) {
         echo '<div class="progress-bar">';
         echo '<div style="width: ' . ($usage_percent > 100 ? 100 : $usage_percent) . '%; background: ' . $usage_color . ';">&nbsp;</div>';
         echo '</div>';
-        echo "</ul>";
+        echo "</li>";
         continue;
       } // progressbar
       echo "<li><a href=\"".$l['url']."\" ";
-      if (!empty($l['onclick'])) echo " onClick='". $l['onclick']."' ";
+      if (!empty($l['onclick'])) echo " onclick='". $l['onclick']."' ";
       if (!empty($l['target'])) echo " target='". $l['target']."' ";
       echo " ><span class='".(empty($l['class'])?'':$l['class'])."'>";
       if (!empty($l['ico'])) echo "<img src='".$l['ico']."' alt='' />&nbsp;";

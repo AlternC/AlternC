@@ -92,12 +92,13 @@ for($i=0;$i<count($rdb);$i++) {
 <p>  <span class="ina"><a href="sql_doadd.php"><?php __("Create a new MySQL database"); ?></a></span> </p>
 <?php }else{
 ?>
-<form method="post" action="sql_doadd.php" id="main" name="main">
+<form method="post" action="sql_doadd.php" id="main2" name="main2">
 <table class="tedit">
 <tr>
   <th><label for="dbn"><?php __("MySQL Database"); ?></label></th>
   <td>
 	<span class="int" id="dbnpfx"><?php echo $mem->user["login"]; ?>_</span><input type="text" class="int" name="dbn" id="dbn" value="" size="20" maxlength="30" />
+  </td>
 </tr>
 </table>
 <br />

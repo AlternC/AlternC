@@ -61,8 +61,8 @@ $dom->unlock();
           if ($first_advanced) {
             $first_advanced=false;
 	    echo "<tr><td colspan=\"2\" class=\"advdom\"></td></tr>";
-            echo "<tr id='domtype_show' onClick=\"domtype_advanced_show();\"><td colspan=2><a href=\"javascript:domtype_advanced_show();\"><b>+ "; __("Show advanced options"); echo "</b></a></td></tr>";
-            echo "<tr id='domtype_hide' onClick=\"domtype_advanced_hide();\" style='display:none'><td colspan=2><a href=\"javascript:domtype_advanced_hide();\"><b>- "; __("Hide advanced options"); echo "</b></a></td></tr>";
+            echo "<tr id='domtype_show' onClick=\"domtype_advanced_show();\"><td colspan='2'><a href=\"javascript:domtype_advanced_show();\"><b>+ "; __("Show advanced options"); echo "</b></a></td></tr>";
+            echo "<tr id='domtype_hide' onClick=\"domtype_advanced_hide();\" style='display:none'><td colspan='2'><a href=\"javascript:domtype_advanced_hide();\"><b>- "; __("Hide advanced options"); echo "</b></a></td></tr>";
 	    echo "<tr><td colspan=\"2\" class=\"advdom\"></td></tr>";
           }
         }
@@ -98,7 +98,7 @@ $dom->unlock();
               break;
           case 'TXT':?>
 		        <input type="text" class="int" name="t_<?php echo $dt['name']?>" id="t_<?php echo $dt['name']?>" value="<?php ehe($targval);?>" size="32" onKeyPress="getElementById('r_<?php echo $dt['name']?>').checked=true;" />
-            <small><?php __("(enter a TXT informations for this domain)"); ?></small></td><?php
+            <small><?php __("(enter a TXT informations for this domain)"); ?></small><?php
               break;
           case 'DOMAIN':?>
 		        <input type="text" class="int" name="t_<?php echo $dt['name']?>" id="t_<?php echo $dt['name']?>" value="<?php ehe($targval);?>" size="32" onKeyPress="getElementById('r_<?php echo $dt['name']?>').checked=true;" /> 

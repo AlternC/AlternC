@@ -618,10 +618,10 @@ define("DEFAULT_PASS_SIZE", 8);
 /* Affiche un bouton qui permet de generer automatiquement des mots de passes */
 function display_div_generate_password($pass_size=DEFAULT_PASS_SIZE, $fields_to_fill1="", $fields_to_fill2="") {
   $id=rand(1,1000);
-  echo "<div id='$id' style='display:none;'><a href=\"javascript:generate_password_html('$id',$pass_size,'$fields_to_fill1','$fields_to_fill2');\">";
+  echo "<div id='z$id' style='display:none;'><a href=\"javascript:generate_password_html('$id',$pass_size,'$fields_to_fill1','$fields_to_fill2');\">";
   __("Clic here to generate a password");
   echo "</a></div>";
-  echo "<script type='text/javascript'>$('#$id').show();</script>";
+  echo "<script type='text/javascript'>$('#z$id').show();</script>";
   return 0;
 }
 

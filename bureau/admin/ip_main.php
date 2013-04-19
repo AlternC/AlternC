@@ -70,7 +70,7 @@ $lac = $authip->list_affected();
   foreach ($lac as $ll) {
     $col=3-$col;
     echo "<tr class='lst$col' >";
-    echo "<td><pan title=\"{$list_ip[$ll['authorised_ip_id']]['ip_human']}\">".$list_ip[$ll['authorised_ip_id']]['infos'];
+    echo "<td><span title=\"{$list_ip[$ll['authorised_ip_id']]['ip_human']}\">".$list_ip[$ll['authorised_ip_id']]['infos'];
     //echo "<br/>".$list_ip[$ll['authorised_ip_id']]['ip_human'];
     echo "</span></td>";
     echo "<td>".@$ac[$ll['protocol']]['name'];
@@ -83,7 +83,6 @@ $lac = $authip->list_affected();
   }
 ?>
 </table>
-</p>
 
 <hr/>
 <h3><?php __("Add a new rule"); ?></h3>
@@ -111,7 +110,7 @@ $lac = $authip->list_affected();
         <?php } else { ?>
           <?php foreach ($a['values'] as $k => $v) { ?>
             <label><b><?php echo htmlentities($v); ?></b></label> 
-            <input type=hidden name="s_affect_<?php echo htmlentities($a['protocol']);?>" id="s_affect_<?php echo htmlentities($a['protocol']);?>" value="<?php echo htmlentities($k); ?>" readonly>
+            <input type=hidden name="s_affect_<?php echo htmlentities($a['protocol']);?>" id="s_affect_<?php echo htmlentities($a['protocol']);?>" value="<?php echo htmlentities($k); ?>" readonly />
           <?php  } ?>
         <?php } ?>
         </p>
@@ -134,7 +133,7 @@ $lac = $authip->list_affected();
     </tr>
     <tr>
     <th>&nbsp;</th>
-    <td valign=middle class="lst2">
+    <td valign='middle' class="lst2">
       <input type="submit" class="inb" value="<?php __("Save")?>" onclick='return check_accesstype_selected();' />
     </td>
     </tr>
@@ -146,7 +145,7 @@ $lac = $authip->list_affected();
 <hr/>
 <h3><?php __("Known IP and networks");?></h3>
 <table class="tlist">
-<tr><th><?php __("Name"); ?></th><th><?php __("IP or network"); ?></th><th><?php __("Type"); ?></th><th colspan=2/></th></tr>
+<tr><th><?php __("Name"); ?></th><th><?php __("IP or network"); ?></th><th><?php __("Type"); ?></th><th colspan='2'></th></tr>
 <?php 
 $col=1;
 foreach($list_ip as $i) {
@@ -178,18 +177,19 @@ foreach($list_ip as $i) {
 
 <p><a href="javascript:edit_ip('','<?php echo htmlentities(get_remote_ip())."','Home IP'";?>);" ><?php echo __("Add my current IP"); ?></a></p>
 <span id="form_add_ip">
-<form method="post" action="ip_main.php" name="main" id="main">
+<form method="post" action="ip_main.php" name="main" >
   <p id="reset_edit_ip" style="display:none;"><a href="javascript:reset_edit_ip();"><?php __("Cancel edit")?></a></p>
 
-  <input type="hidden" name="id" value="" id="edit_id" >
+  <input type="hidden" name="id" value="" id="edit_id" />
   <table class="tlistb">
   <tr><th><?php __("Name"); ?></th><th><?php __("IP or network. <i>IPv4, IPv6 and subnet allowed</i>"); ?></th><th></th></tr>
   
   <tr class="lst2">
-    <td><input type="text" size=20 maxlength=39 name="ipsub" id="edit_ip" /></td>
-    <td><input type="text" size=25 maxlength=200 name="infos" id="edit_infos" /></td>
+    <td><input type="text" size='20' maxlength='39' name="ipsub" id="edit_ip" /></td>
+    <td><input type="text" size='25' maxlength='200' name="infos" id="edit_infos" /></td>
     <td><input type="submit" class="inb" value="<?php __("Save")?>" /></td>
   </tr>
+  </table>
 </form>
 </span>
 

@@ -69,8 +69,7 @@ $r=$admin->get_list($show == 'all' ? 1 : 0, $creator);
 ?>
 <p>
 <?php __("Here is the list of hosted AlternC accounts"); ?> (<?php printf(_("%s accounts"),count($r)); ?>)
-
-&nbsp;
+</p>
 <?php
 
 if ($subadmin==1 || $cuid==2000) {
@@ -140,7 +139,7 @@ while (list($key,$val)=each($r))
 
 <?php
  if ($val["su"]) { ?>
-		   <td>&nbsp;</td>
+		   <td id="user_<?php echo $val["uid"]; ?>">&nbsp;</td>
 <?php } else { ?>
  <td><input type="checkbox" class="inc" name="d[]" id="user_<?php echo $val["uid"]; ?>" value="<?php echo $val["uid"]; ?>" /></td>
 <?php } ?>
@@ -158,7 +157,7 @@ while (list($key,$val)=each($r))
 <tr class="lst<?php echo $col; ?>" >
 <td/><td ><i><?php echo _("DB:").' '.$val['db_server_name']?></i></td>
 <td colspan="8" >
-<div id="admlistbtn">
+<div name="admlistbtn">
 <span class="ina<?php if ($col==2) echo "v"; ?> lst<?php echo $col; ?>">
   <a href="adm_login.php?id=<?php echo $val["uid"];?>"><?php __("Connect as"); ?></a>
 </span>&nbsp;
@@ -255,7 +254,7 @@ if (isset($r[$z+2*$rz])) {
 if (is_array($val)) {
 ?>
 <?php if ($val["su"]) { ?>
-			<td>&nbsp;</td>
+			<td id="id_c_<?php echo $val["uid"]; ?>">&nbsp;</td>
 <?php } else { ?>
  <td align="center"><input type="checkbox" class="inc" name="d[]" value="<?php echo $val["uid"]; ?>" id="id_c_<?php echo $val["uid"]; ?>" /></td>
 <?php } ?>

@@ -81,7 +81,7 @@ while (list($key,$val)=each($r))
 		<td align="center"><input type="checkbox" class="inc" id="del_<?php echo $val["id"]; ?>" name="del_<?php echo $val["id"]; ?>" value="<?php echo $val["id"]; ?>" /></td>
 <td><div class="ina"><a href="ftp_edit.php?id=<?php echo $val["id"] ?>"><img src="images/edit.png" alt="<?php __("Edit"); ?>" /><?php __("Edit"); ?></a></div></td>
 
-		<td><a href='ftp_switch_enable.php?id=<?php echo $val['id'].'&status='.( ($val['enabled'])?'0':'1' ) ;?>' onClick='return confirm("<?php __("Are you sure you want to change his status?"); ?>");'><?php 
+		<td><a href='ftp_switch_enable.php?id=<?php echo $val['id'].'&amp;status='.( ($val['enabled'])?'0':'1' ) ;?>' onClick='return confirm("<?php __("Are you sure you want to change his status?"); ?>");'><?php 
 if ( $val['enabled']) {
   echo "<img src='images/check_ok.png' alt=\""._("Enabled")."\"/>";
 } else {
@@ -91,7 +91,7 @@ if ( $val['enabled']) {
 
 ?></a></td>
 		<td><label for="del_<?php echo $val["id"]; ?>"><?php echo $val["login"] ?></label>
-                  <input type='hidden' name='names[<?php echo $val['id'];?>]' value='<?php echo $val["login"] ?>' >
+                  <input type='hidden' name='names[<?php echo $val['id'];?>]' value='<?php echo $val["login"] ?>' />
                 </td>
 		<td><code><?php echo str_replace(getuserpath(),'', $val["dir"]) ?></code></td>
 	</tr>
@@ -109,12 +109,13 @@ if ( $val['enabled']) {
 
 <?php __("Here are some configuration informations you'll need to configure your FTP application.");?>
 
+<p>
 <ul>
   <li><?php echo '<b>'._("Server:").'</b> '.$ftp->srv_name; ?></li>
   <li><?php echo '<b>'._("FTP mode for data transfert:").'</b> '._("passive");?></li>
   <li><?php echo '<b>'._("User/password:").'</b> '._("the one you specified when you created the account. You can edit them in the panel.");?></li>
-<ul>
-<br/>
+</ul>
+</p>
 
 <?php
 $mem->show_help("ftp_list");

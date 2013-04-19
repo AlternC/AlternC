@@ -82,7 +82,7 @@ if ($quota->cancreate("mail")) {
 <?php 
 }
 ?>
-<td valign=bottom>
+<td valign='bottom'>
 </td>
 </tr>
 </table>
@@ -108,7 +108,7 @@ if (empty($allmails_list) && empty($search)) {
 <?php pager($offset,$count,$mail->total,"mail_list.php?domain_id=".$domain_id."&amp;count=".$count."&amp;search=".urlencode($search)."&amp;offset=%%offset%%"); ?>
 </td>
 <td style="text-align:center">
-  <input type="checkbox" id="show_systemmails" name="show_systemmails" <?php if($show_systemmails) {echo "checked";}?> value="1"onclick="document.getElementById('formlist1').submit();" ><label for="show_systemmails" ><?php __("Show system emails");?></label>
+  <input type="checkbox" id="show_systemmails" name="show_systemmails" <?php if($show_systemmails) {echo "checked";}?> value="1"onclick="document.getElementById('formlist1').submit();" /><label for="show_systemmails" ><?php __("Show system emails");?></label>
 </td>
 </form>
 <td style="text-align:right">
@@ -189,17 +189,17 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
 <br/>
 <br/>
 
-<table width=100% class="tedit">
+<table width='100%' class="tedit">
 <tr>
-<th width=50%>
+<th width='50%'>
   <b><?php __("Outgoing mail (SMTP)"); ?></b> 
 </th>
-<th width=50%>
+<th width='50%'>
   <b><?php __("Incoming mails"); ?></b>
 </th>
 </tr>
 <tr>
-  <td valign=top>
+  <td valign='top'>
     <?php __("Which protocol would you use?"); ?>
     <ul>
       <li><b><a href="javascript:;" onClick="$('#cfg-submission').toggle();"><?php __("Submission");?></a></b>
@@ -234,7 +234,7 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
       </li>
     </ul>
   </td>
-  <td valign=top>
+  <td valign='top'>
     <?php __("Which protocol would you use?"); ?>
     <ul>
       <li><b><a href="javascript:;" onClick="$('#cfg-imap').toggle();"><?php __("IMAP");?></a></b>

@@ -58,7 +58,7 @@ if (!$charset) $charset="UTF-8";
       if ( empty($logo) ||  ! $logo ) { $logo = 'images/logo.png'; }
       ?>
 
-      <p id="logo">  <img src="<?php echo $logo; ?>" border="0" alt="<?php __("Web Hosting Control Panel"); ?>" title="<?php __("Web Hosting Control Panel"); ?>" /></a>
+      <p id="logo">  <img src="<?php echo $logo; ?>" border="0" alt="<?php __("Web Hosting Control Panel"); ?>" title="<?php __("Web Hosting Control Panel"); ?>" />
       </p>
       <p>&nbsp;</p>
     <?php if (isset($error) && $error) echo "<div class='error'>$error</div>"; ?>
@@ -82,7 +82,7 @@ if (!$charset) $charset="UTF-8";
             <tr><td colspan="2" align="center"><b><?php __("AlternC access"); ?></b></td></tr>
             <tr><td align="right"><label for="username"><?php echo _("Username"); ?></label></td><td><input type="text" class="int" name="username" id="username" value="" maxlength="128" size="15" /></td></tr>
             <tr><td align="right"><label for="password"><?php echo _("Password"); ?></label></td><td><input type="password" class="int" name="password" id="password" value="" maxlength="128" size="15" /></td></tr>
-            <tr><td colspan="2" align="center"><input type="submit" class="inb" name="submit" onClick='return logmein();' value="<?php __("Enter"); ?>" /><input type="hidden" id="restrictip" name="restrictip" value="1" /></td></tr>
+            <tr><td colspan="2" align="center"><input type="submit" class="inb" name="submit" onclick='return logmein();' value="<?php __("Enter"); ?>" /><input type="hidden" id="restrictip" name="restrictip" value="1" /></td></tr>
             </table>
             <input type="hidden" id="authip_token" name="authip_token" value="<?php echo htmlentities( (empty($authip_token)?'':$authip_token) ) ?>" />
           </form>
@@ -138,7 +138,7 @@ if (!$charset) $charset="UTF-8";
 
 
     </div>
-    <script>
+    <script type="text/javascript">
     $('#username').focus();
 
     function logmein(){
@@ -150,6 +150,7 @@ if (!$charset) $charset="UTF-8";
     }
     </script>
 
+  </div>
   </div>
 </body>
 </html>

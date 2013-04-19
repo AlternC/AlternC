@@ -75,7 +75,7 @@ if (!$mem->user["canpass"]) {
 </form>
 <br />
 <?php } ?>
-<hr id="topbar"/>
+<hr id="topbar2"/>
 <form method="post" action="mem_chgmail.php">
 	<table border="1" cellspacing="0" cellpadding="4" class="tedit">
 		<tr><td colspan="2"><?php __("Change the email of the account"); ?><br />
@@ -86,7 +86,7 @@ if (!$mem->user["canpass"]) {
 	</table>
 </form>
 <br />
-<hr id="topbar"/>
+<hr id="topbar3"/>
 <form method="post" action="mem_param.php">
 	<table border="1" cellspacing="0" cellpadding="4" class="tedit">
 		<tr><td colspan="2"><?php __("Online help settings"); ?><br />
@@ -99,7 +99,7 @@ if (!$mem->user["canpass"]) {
 <?php
 if ($mem->user["su"]) {
 ?>
-<hr id="topbar"/>
+<hr id="topbar4"/>
 <p>
 <?php __("Admin preferences"); ?> :
 </p>
@@ -114,7 +114,7 @@ if ($mem->user["su"]) {
 </form>
 <br />
 <?php } ?>
-<hr id="topbar"/>
+<hr id="topbar5"/>
 <script type="text/javascript">
 document.forms['main'].oldpass.focus();
 </script>

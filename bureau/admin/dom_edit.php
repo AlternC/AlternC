@@ -122,7 +122,7 @@ for($i=0;$i<$r["nsub"];$i++) {
 
 ?>
 	<tr class="lst<?php echo $col; ?>">
-    <?php if ( $r['sub'][$i]['web_action'] =='DELETE') { echo "<td colspan=2 />"; } else { ?>
+    <?php if ( $r['sub'][$i]['web_action'] =='DELETE') { echo "<td colspan='2' />"; } else { ?>
 		<td class="center">
     <?php  if (!(!$isinvited && $dt[strtolower($r["sub"][$i]["type"])]["enable"] != "ALL" )) { ?>
 			<div class="ina"><a href="dom_subedit.php?sub_domain_id=<?php echo urlencode($r["sub"][$i]["id"]) ?>"><img src="images/edit.png" alt="<?php __("Edit"); ?>" /><?php __("Edit"); ?></a></div>
@@ -163,7 +163,7 @@ for($i=0;$i<$r["nsub"];$i++) {
 							break;
 						case 'DISABLED':
 							__("Disabled");
-							echo "<br/><a href='dom_substatus.php?domain=".urlencode($r["name"])."&amp;sub=".urlencode($r["sub"][$i]["name"])."&amp;type=".urlencode($r["sub"][$i]["type"])."&amp;value=".urlencode($r["sub"][$i]['dest'])."&status=enable'>";__("Enable");echo "</a>";
+							echo "<br/><a href='dom_substatus.php?domain=".urlencode($r["name"])."&amp;sub=".urlencode($r["sub"][$i]["name"])."&amp;type=".urlencode($r["sub"][$i]["type"])."&amp;value=".urlencode($r["sub"][$i]['dest'])."&amp;status=enable'>";__("Enable");echo "</a>";
 							break;
 						case 'DISABLE':
 							__("Desactivation pending");
@@ -205,7 +205,7 @@ if (!$r['noerase']) {
 ?>
 
 <hr />
-<h3><?php __("DNS & Email parameters"); ?></h3>
+<h3><?php __("DNS &amp; Email parameters"); ?></h3>
 <form action="dom_editdns.php?domain=<?php echo urlencode($r["name"]) ?>" method="post" id="fdns" name="fdns" onSubmit="return destruction_alert();">
 
 <table class="tlist2">
@@ -227,6 +227,7 @@ if (!$r['noerase']) {
      <input type="radio" id="yesemail" class="inc" name="email" value="1"<?php cbox($r["mail"]); ?> />&nbsp;<label for="yesemail"><?php __("Yes"); ?></label>
      </td><td><input type="radio" id="noemail" class="inc" name="email" value="0"<?php cbox(!$r["mail"]); ?> />&nbsp;<label for="noemail"><?php __("No"); ?></label>
   </td>
+</tr>
 </table>
 <p class="error">    <?php __("Warning: If you set this to 'no', all your email accounts and aliases on this domain will be immediately deleted."); ?></p>
 <input type="submit" class="inb" name="submit" value="<?php __("Submit the changes"); ?>" />
