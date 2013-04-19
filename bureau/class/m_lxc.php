@@ -5,11 +5,31 @@ include_once(dirname(__FILE__) . '/vm.php');
 
 class m_lxc implements vm
 {
-	// TODO Paramétrer IP / Port
-	public $IP = '127.0.0.1';
-	public $PORT = 6504;
-	public $TIMEOUT = 5;
-	public $error = array();
+  // TODO Paramétrer IP / Port
+  public $IP;
+  public $PORT;
+  public $TIMEOUT = 5;
+  public $error = array();
+
+  function m_lxc() {
+    $this->IP   = variable_get('lxc_ip', '', "IP address of the Alternc's LXC server. If empty, no LXC server.");
+    $this->PORT = variable_get('lxc_port', '6504', "Port of the Alternc's LXC server");
+  }
+
+
+  function hook_menu() {
+    if ( empty($this->IP)) return ; # No menu if no server
+
+    $obj = array(
+      'title'       => _("Virtual server"),
+      'ico'         => 'images/ssh.png',
+      'link'        => 'vm.php',
+      'pos'         => 95,
+     ) ;
+
+     return $obj;
+  }
+
 
 	private function sendMessage($action, $user, $password, $uid)
 	{
