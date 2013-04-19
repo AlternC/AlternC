@@ -406,7 +406,7 @@ function duration_list($name, $selected=0) {
   foreach(array(0, 1, 2, 3, 4, 6, 12, 24) as $dur) {
     $res .= "<option value=\"$dur\"";
     if($selected == $dur) {
-      $res .= ' selected';
+      $res .= ' selected="selected" ';
     }
 
     $res .= '>';

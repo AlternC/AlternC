@@ -386,7 +386,7 @@ function actmoveto_not_empty() {
           } else {           // DOSSIER :
             echo "  <td width=\"28\"><input type=\"checkbox\" class=\"inc\" name=\"d[]\" value=\"".htmlentities($c[$i]["name"])."\" /></td>";
             if ($p["showicons"]) {
-              echo "<td width=\"28\"><img src=\"icon/folder.png\" width=\"16\" height=\"16\" alt=\"\" /></td>";
+              echo "<td width=\"28\" style='text-align: center;'><img src=\"icon/folder.png\" width=\"16\" height=\"16\" alt=\"\" /></td>";
             }
             echo "<td><b><a href=\"";
             echo "bro_main.php?R=".urlencode($R."/".$c[$i]["name"]);

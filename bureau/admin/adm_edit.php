@@ -70,13 +70,13 @@ if (!$r=$admin->get($uid)) {
 	<td><?php echo $r["login"]; ?></td>
 </tr>
 <tr>
-	<th><label for="enabled"><?php __("Account Enabled?"); ?></label></th>
+	<th><label><?php __("Account Enabled?"); ?></label></th>
 	<td>
 	<?php if ($r["uid"]==$mem->user["uid"]) { ?>
   <?php __("You cannot disable your own account."); ?>
   <?php } else { ?>
-        <input type="radio" class="inc" id="enabled0" name="enabled" value="0"<?php cbox($r["enabled"]==0); ?>><label for="enabled0"><?php __("No"); ?></label><br />
-	<input type="radio" class="inc" id="enabled1" name="enabled" value="1"<?php cbox($r["enabled"]==1); ?>><label for="enabled1"><?php __("Yes"); ?></label><br />	
+        <input type="radio" class="inc" id="enabled0" name="enabled" value="0"<?php cbox($r["enabled"]==0); ?> /><label for="enabled0"><?php __("No"); ?></label><br />
+	<input type="radio" class="inc" id="enabled1" name="enabled" value="1"<?php cbox($r["enabled"]==1); ?> /><label for="enabled1"><?php __("Yes"); ?></label><br />	
 	<?php } ?>
 	</td>
 </tr>
@@ -90,10 +90,10 @@ if (!$r=$admin->get($uid)) {
 	<td><input type="password" class="int" id="passconf" name="passconf" value="" size="20" maxlength="64" /></td>
 </tr>
 <tr>
-	<th><label for="canpass"><?php __("Password change allowed?"); ?></label></th>
+	<th><label><?php __("Password change allowed?"); ?></label></th>
 	<td>
-        <input type="radio" class="inc" id="canpass0" name="canpass" value="0"<?php cbox($r["canpass"]==0); ?>><label for="canpass0"><?php __("No"); ?></label><br />
-	<input type="radio" class="inc" id="canpass1" name="canpass" value="1"<?php cbox($r["canpass"]==1); ?>><label for="canpass1"><?php __("Yes"); ?></label><br />	
+        <input type="radio" class="inc" id="canpass0" name="canpass" value="0"<?php cbox($r["canpass"]==0); ?>/><label for="canpass0"><?php __("No"); ?></label><br />
+	<input type="radio" class="inc" id="canpass1" name="canpass" value="1"<?php cbox($r["canpass"]==1); ?>/><label for="canpass1"><?php __("Yes"); ?></label><br />	
 	</td>
 </tr>
  <tr>
@@ -127,8 +127,9 @@ if (!$r=$admin->get($uid)) {
 </table>
 </form>
 
+<br/>
+
 <?php if($r['duration']) { ?>
-<p>
 <form method="post" action="adm_dorenew.php">
 <input type="hidden" name="uid" value="<?php echo $uid ?>" />
 <table border="1" cellspacing="0" cellpadding="4" class="tedit">
@@ -142,7 +143,6 @@ if (!$r=$admin->get($uid)) {
 </tr>
 </table>
 </form>
-</p>
 <?php } /* Renouvellement */ ?>
 
 <p>
@@ -150,15 +150,17 @@ if (!$r=$admin->get($uid)) {
 if ($mem->user["uid"]==2000 && $r["uid"]!=2000) {  // Only ADMIN (2000) can change the admin status of accounts
 if ($r["su"]) {
 ?>
-<p><b><?php __("This account is a super-admin account"); ?></b></p>
+<b><?php __("This account is a super-admin account"); ?></b>
+<br/>
+<br/>
 <?php if ($admin->onesu()) {
   __("There is only one administrator account, you cannot turn this account back to normal");
 } else {
 ?>
-<p><span class="ina"><a href="adm_donosu.php?uid=<?php echo $r["uid"]; ?>"><?php __("Turn this account back to normal"); ?></a></span></p>
+<span class="ina"><a href="adm_donosu.php?uid=<?php echo $r["uid"]; ?>"><?php __("Turn this account back to normal"); ?></a></span>
 <?php }
 } else { ?>
-<p><span class="ina"><a href="adm_dosu.php?uid=<?php echo $r["uid"]; ?>"><?php __("Make this account a super admin one"); ?></a></span></p>
+<span class="ina"><a href="adm_dosu.php?uid=<?php echo $r["uid"]; ?>"><?php __("Make this account a super admin one"); ?></a></span>
 <?php } ?>
 </p>
 

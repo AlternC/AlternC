@@ -48,8 +48,8 @@ if ( sizeof($lst_cron) > $max_cron ) $max_cron=sizeof($lst_cron);
 for ($i=0; $i < $max_cron ; $i++) { 
 ?>
   <tr class="<?php echo ($i%2)?"lst1":"lst2"; ?>">
-    <?php if (isset($lst_cron[$i])) echo "<input type='hidden' name='cronupdate[$i][id]' value='".$lst_cron[$i]['id']."' />"; ?> 
     <td rowspan='2'>
+      <?php if (isset($lst_cron[$i])) echo "<input type='hidden' name='cronupdate[$i][id]' value='".$lst_cron[$i]['id']."' />"; ?> 
       <?php if (isset($lst_cron[$i])) { echo '#'.$lst_cron[$i]['id']; } ?><br/>
       <a href="javascript:cleancron('<?php echo $i ?>');"><img src="images/delete.png" alt="<?php __("Delete");?>" title="<?php __("Delete");?>"/></a>
     </td>
@@ -62,7 +62,7 @@ for ($i=0; $i < $max_cron ; $i++) {
 foreach ($cron->schedule() as $cs) {
   echo "<option value='".$cs['unit']."'";
   if (isset($lst_cron[$i]['schedule']) && ($lst_cron[$i]['schedule'] == $cs['unit'])){  
-  echo " selected ";
+  echo " selected='selected' ";
   }
   echo " >".$cs['name'];
   echo "</option>";

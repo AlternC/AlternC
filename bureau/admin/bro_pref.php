@@ -67,39 +67,39 @@ include_once("head.php");
 <?php
 for($i=50;$i<=200;$i+=10) {
 	echo "<option";
-	if ($p["editsizex"]==$i) echo " selected";
-	echo ">$i";
+	if ($p["editsizex"]==$i) echo " selected='selected'";
+	echo ">$i</option>";
 }
 ?></select></td></tr>
 <tr><th><?php __("Vertical window size"); ?></th><td><select class="inl" name="editsizey">
 <?php
 for($i=4;$i<=80;$i+=2) {
 	echo "<option";
-	if ($p["editsizey"]==$i) echo " selected";
-	echo ">$i";
+	if ($p["editsizey"]==$i) echo " selected='selected'";
+	echo ">$i</option>";
 }
 ?></select></td></tr>
 <tr><th><?php __("File editor font name"); ?></th><td><select class="inl" name="editor_font">
 <?php
 for($i=0;$i<count($bro->l_editor_font);$i++) {
 	echo "<option";
-	if ($p["editor_font"]==$bro->l_editor_font[$i]) echo " selected";
-	echo ">"._($bro->l_editor_font[$i]);
+	if ($p["editor_font"]==$bro->l_editor_font[$i]) echo " selected='selected'";
+	echo ">"._($bro->l_editor_font[$i])."</option>";
 }
 ?></select></td></tr>
 <tr><th><?php __("File editor font size"); ?></th><td><select class="inl" name="editor_size">
 <?php
 for($i=0;$i<count($bro->l_editor_size);$i++) {
 	echo "<option";
-	if ($p["editor_size"]==$bro->l_editor_size[$i]) echo " selected";
-	echo ">"._($bro->l_editor_size[$i]);
+	if ($p["editor_size"]==$bro->l_editor_size[$i]) echo " selected='selected'";
+	echo ">"._($bro->l_editor_size[$i])."</option>";
 }
 ?></select></td></tr>
 <tr><th><?php __("File list view"); ?></th><td><select class="inl" name="listmode">
 <?php
 for($i=0;$i<count($bro->l_mode);$i++) {
 	echo "<option";
-	if ($p["listmode"]==$i) echo " selected";
+	if ($p["listmode"]==$i) echo " selected='selected'";
 	echo " value=\"$i\">"._($bro->l_mode[$i])."</option>";
 }
 ?></select></td></tr>
@@ -107,7 +107,7 @@ for($i=0;$i<count($bro->l_mode);$i++) {
 <?php
 for($i=0;$i<count($bro->l_tgz);$i++) {
 	echo "<option";
-	if ($p["downfmt"]==$i) echo " selected";
+	if ($p["downfmt"]==$i) echo " selected='selected'";
 	echo " value=\"$i\">"._($bro->l_tgz[$i])."</option>";
 }
 ?></select></td></tr>
@@ -115,7 +115,7 @@ for($i=0;$i<count($bro->l_tgz);$i++) {
 <?php
 for($i=0;$i<count($bro->l_createfile);$i++) {
 	echo "<option";
-	if ($p["createfile"]==$i) echo " selected";
+	if ($p["createfile"]==$i) echo " selected='selected'";
 	echo " value=\"$i\">"._($bro->l_createfile[$i])."</option>";
 }
 ?></select></td></tr>
@@ -123,7 +123,7 @@ for($i=0;$i<count($bro->l_createfile);$i++) {
 <?php
 for($i=0;$i<count($bro->l_icons);$i++) {
 	echo "<option";
-	if ($p["showicons"]==$i) echo " selected";
+	if ($p["showicons"]==$i) echo " selected='selected'";
 	echo " value=\"$i\">"._($bro->l_icons[$i])."</option>";
 }
 ?></select></td></tr>
@@ -131,7 +131,7 @@ for($i=0;$i<count($bro->l_icons);$i++) {
 <?php
 for($i=0;$i<count($bro->l_icons);$i++) {
 	echo "<option";
-	if ($p["showtype"]==$i) echo " selected";
+	if ($p["showtype"]==$i) echo " selected='selected'";
 	echo " value=\"$i\">"._($bro->l_icons[$i])."</option>";
 }
 ?></select></td></tr>
@@ -139,7 +139,7 @@ for($i=0;$i<count($bro->l_icons);$i++) {
 <?php
 for($i=0;$i<count($bro->l_icons);$i++) {
 	echo "<option";
-	if ($p["golastdir"]==$i) echo " selected";
+	if ($p["golastdir"]==$i) echo " selected='selected'";
 	echo " value=\"$i\">"._($bro->l_icons[$i])."</option>";
 }
 ?></select></td></tr>

@@ -93,7 +93,10 @@ if ( $val['enabled']) {
 		<td><label for="del_<?php echo $val["id"]; ?>"><?php echo $val["login"] ?></label>
                   <input type='hidden' name='names[<?php echo $val['id'];?>]' value='<?php echo $val["login"] ?>' />
                 </td>
-		<td><code><?php echo str_replace(getuserpath(),'', $val["dir"]) ?></code></td>
+		<td>
+                  <a href="bro_main.php?R=<?php echo urlencode(str_replace(getuserpath(),'', $val["dir"])); ?>"><code><?php echo str_replace(getuserpath(),'', $val["dir"]) ?></code></a>
+                  <?php if ( ! file_exists($val['dir'])) { echo " <span class=\"alerte\">"._("Directory not found")."</span>"; } ?>
+                </td>
 	</tr>
 <?php
 	}
