@@ -350,6 +350,7 @@ bureau/class/db_mysql.php -text
 bureau/class/functions.php -text
 bureau/class/lang_env.php -text
 bureau/class/local.php -text
+bureau/class/m_action.php -text
 bureau/class/m_admin.php -text
 bureau/class/m_authip.php -text
 bureau/class/m_bro.php -text
