@@ -40,7 +40,7 @@ class DB_users extends DB_Sql {
   /**
    * Creator
    */
-  function DB_users($empty=false) {
+  function DB_users($empty=false) { // Sometimes we need to create this object with empty parameters, but by default we fill them with those of the current user's DB
     global $cuid, $db, $err;
 
     if (!$empty){
