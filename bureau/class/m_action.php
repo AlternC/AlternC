@@ -50,7 +50,7 @@ class m_action {
   * function returning the first not locked line of the action table 
   */
   function move($src,$dest) {
-    return $this->set('move', array('src'=>$src, 'dst'=>$dst,'user'=$user));
+    return $this->set('move', array('src'=>$src, 'dst'=>$dst,'user'=>$user));
   }
   /*
   * function archiving a directory ( upon account deletion )
