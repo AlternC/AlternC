@@ -318,7 +318,6 @@ class m_mem {
    */
   function del_session() {
     global $db,$user,$err,$cuid,$classes,$hooks;
-    $err->log("mem","del_session");
     $_COOKIE["session"]=addslashes(isset($_COOKIE["session"])?$_COOKIE["session"]:'');
     setcookie("session","",0,"/");
     setcookie("oldid","",0,"/");
@@ -560,7 +559,6 @@ Cordially.
      */
   function show_help($file,$force=false) {
     global $err;
-    $err->log("mem","show_help");
     if ($this->user["show_help"] || $force) {
       $hlp=_("hlp_$file");
       if ($hlp!="hlp_$file") {
