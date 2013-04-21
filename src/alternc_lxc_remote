@@ -3,5 +3,6 @@
 my $line = <>;
 
 my ($action,$login,$pass,$uid) = split /\|/, $line;
-print `alternc_lxc $action $login $pass $uid`;
+my @command = ('alternc_lxc', $action, $login, $pass, $uid);
 
+system (@command);
