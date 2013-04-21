@@ -21,7 +21,7 @@ class m_lxc implements vm
     if ( empty($this->IP)) return ; # No menu if no server
 
     $obj = array(
-      'title'       => _("Virtual server"),
+      'title'       => _("Console access"),
       'ico'         => 'images/ssh.png',
       'link'        => 'vm.php',
       'pos'         => 95,
@@ -38,7 +38,7 @@ class m_lxc implements vm
   }
 
 
-	private function sendMessage($action, $user, $password, $uid)
+	private function sendMessage($action, $user = FALSE, $password=FALSE, $uid=FALSE)
 	{
 		$fp = fsockopen($this->IP, $this->PORT, $errno, $errstr, $this->TIMEOUT);
 		if (!$fp) 
@@ -75,7 +75,14 @@ class m_lxc implements vm
 
 	public function start($login = FALSE, $pass = FALSE, $uid = FALSE)
 	{
-		global $mem, $db;
+		
+		global $mem, $db, $err;
+
+		if ($this->getvm() !== FALSE)
+		{
+			$err->raise('lxc', _('VM already started'));
+			return FALSE;
+		}
 
 		$user = $login ? $login : $mem->user['login'];
 		$pass = $pass  ? $pass  : $mem->user['pass'];
@@ -92,6 +99,12 @@ class m_lxc implements vm
 			$msg = $data['msg'];
 			$date_start = 'NOW()';
 			$uid = $mem->user['uid'];
+
+			if ((int)$data['error'] != 0)
+			{
+				$err->raise('lxc', _($data['msg']));
+				return FALSE;
+			}
 
 			$db->query("INSERT INTO vm_history (ip,date_start,uid,serialized_object) VALUES ('$hostname', $date_start, '$uid', '$res')");
 
@@ -125,9 +138,20 @@ class m_lxc implements vm
 
 	public function stop()
 	{
-		global $mem;
-                printvar($mem);
-		echo "lxc::stop";
+		global $db, $mem;
 
+		$vm = $this->getvm();
+
+		if ($vm === FALSE)
+			return TRUE;
+
+		$vm_id = $vm['serialized_object']['vm'];
+		$uid = $mem->user['uid'];
+		$vid = $vm['id'];
+
+		if ($this->sendMessage('stop', $vm_id, FALSE, FALSE) === FALSE)
+			return FALSE;
+
+		return $db->query("UPDATE vm_history SET date_end = NOW() WHERE uid = '$uid' AND id = '$vid' LIMIT 1");
 	}
 }
