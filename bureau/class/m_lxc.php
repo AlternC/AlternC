@@ -93,9 +93,7 @@ class m_lxc implements vm
 	public function stop()
 	{
 		global $mem;
-echo '<pre>';
-		var_dump($mem);
-echo '</pre>';
+                printvar($mem);
 		echo "lxc::stop";
 
 	}
