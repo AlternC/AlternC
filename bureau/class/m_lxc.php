@@ -53,41 +53,74 @@ class m_lxc implements vm
 			$this->error[] = 'Unable to send data';
 			return FALSE;
 		}
-
+		$resp = '';
+		#while (($resp .= fgets($fp, 4096)) !== FALSE);
 		$resp = fgets($fp, 4096);
 		fclose ($fp);
 
-		list ($status, $ip, $hostname) = explode('|', $resp);
-		if (stripos($resp, 'error', 0) === 0)
+
+		return $resp;
+	
+		if (stripos($resp, 'error') > 0)
 		{
-			$this->error[] = $status;
+			$data = unserialize($resp);
+			$this->error[] = $data['msg'];
 			return FALSE;
 		}
 		else
 		{
-			return array('status' => $status, 'ip' => $ip, 'hostname' => $hostname); 
+			return $resp;
 		}
 	}
 
 	public function start($login = FALSE, $pass = FALSE, $uid = FALSE)
 	{
-		global $mem;
+		global $mem, $db;
 
 		$user = $login ? $login : $mem->user['login'];
 		$pass = $pass  ? $pass  : $mem->user['pass'];
-		$uid = $uid    ? $uid   : $mem->user['uid'];
+		$uid  = $uid   ? $uid   : $mem->user['uid'];
 
 		$res = $this->sendMessage('start', $user, $pass, $uid);
 		if ($res === FALSE)
 			return $this->error[0];
 		else
+		{
+			$data = unserialize($res);
+			$error = $data['error'];
+			$hostname = $data['hostname'];
+			$msg = $data['msg'];
+			$date_start = 'NOW()';
+			$uid = $mem->user['uid'];
+
+			$db->query("INSERT INTO vm_history (ip,date_start,uid,serialized_object) VALUES ('$hostname', $date_start, '$uid', '$res')");
+
 			return $res;
+		}
 	}
 
 
 	public function monit()
 	{
-		echo "1 / 5 used";
+		echo "1 / 5 used ";
+	}
+
+	public function getvm()
+	{
+		global $db, $mem;
+
+		$uid = $mem->user['uid'];
+		$res = array();
+
+		$res = $db->query("SELECT * FROM vm_history WHERE date_end IS NULL AND uid= '$uid' ORDER BY id DESC LIMIT 1");
+
+		if ($db->next_record())
+		{
+			$db->Record['serialized_object'] = unserialize($db->Record['serialized_object']);
+			return $db->Record;
+		}
+		else
+			return FALSE;
 	}
 
 	public function stop()
