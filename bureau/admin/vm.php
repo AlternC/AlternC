@@ -16,7 +16,8 @@ getFields($fields);
 
 if (in_array($action, array('start', 'stop', 'monit')))
 {
-	$res = call_user_func(array($lxc, $action));
+	#$res = call_user_func(array($lxc, $action));
+        $res = $hooks->invoke($action, array(), 'lxc');
 	var_dump ($res);
 }
 
