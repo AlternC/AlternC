@@ -1031,8 +1031,9 @@ class m_mysql {
    a @access private
    */
   function alternc_del_session() {
-    setcookie("REMOTE_USER","");
-    setcookie("REMOTE_PASSWORD","");
+    $_SESSION['PMA_single_signon_user'] = '';
+    $_SESSION['PMA_single_signon_password'] = '';
+    $_SESSION['PMA_single_signon_host'] = '';
   }
 
 
