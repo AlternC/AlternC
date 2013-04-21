@@ -1,11 +1,10 @@
 <?php
 
-include_once(dirname(__FILE__) . '/vm.php');
+include_once(dirname(__FILE__) . '/vm.class.php');
 # include('vm.php'); // This one fails ...
 
 class m_lxc implements vm
 {
-  // TODO Paramétrer IP / Port
   public $IP;
   public $PORT;
   public $TIMEOUT = 5;
@@ -72,12 +71,19 @@ class m_lxc implements vm
 
 	public function start($login = FALSE, $pass = FALSE, $uid = FALSE)
 	{
-		$res = $this->sendMessage('start', 'fser', 'pass', 42);
+		global $mem;
+
+		$user = $login ? $login : $mem->user['login'];
+		$pass = $pass  ? $pass  : $mem->user['pass'];
+		$uid = $uid    ? $uid   : $mem->user['uid'];
+
+		$res = $this->sendMessage('start', $user, $pass, $uid);
 		if ($res === FALSE)
 			return $this->error[0];
 		else
 			return $res;
 	}
+
 
 	public function monit()
 	{
