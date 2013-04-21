@@ -14,6 +14,7 @@ class m_lxc implements vm
   function m_lxc() {
     $this->IP   = variable_get('lxc_ip', '', "IP address of the Alternc's LXC server. If empty, no LXC server.");
     $this->PORT = variable_get('lxc_port', '6504', "Port of the Alternc's LXC server");
+    $this->KEY  = variable_get('lxc_key', '', "Shared key with the Alternc's LXC server");
   }
 
 
@@ -28,6 +29,13 @@ class m_lxc implements vm
      ) ;
 
      return $obj;
+  }
+
+  function hook_admin_del_member() {
+    global $db,$err,$cuid;
+    $err->log("lxc","alternc_del_member");
+    $db->query("DELETE FROM vm_history WHERE uid='$cuid'");
+    return true;
   }
 
 
