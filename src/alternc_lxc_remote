@@ -2,6 +2,6 @@
 
 my $line = <>;
 
-my ($action,$login,$pass,$uid) = split /|/, $line;
-print `alterc_lxc $action $login $pass $uid`;
+my ($action,$login,$pass,$uid) = split /\|/, $line;
+print `alternc_lxc $action $login $pass $uid`;
 
