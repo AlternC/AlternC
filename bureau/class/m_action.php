@@ -43,7 +43,7 @@ class m_action {
   /*
   * function to delete file / folder
   */
-  function del($dir) {
+  function del($dir,$user="root") {
     return $this->set('delete',$user, array('dir'=>$dir));
   }
   /*
@@ -102,13 +102,12 @@ class m_action {
       $err->raise("action",_("Error setting actions"));
 			return false;
     }
-    $purge="delete from actions where HOUR(now()) - HOUR(creation) > 1;";
+    $purge="select * from actions where TO_DAYS(curdate()) - TO_DAYS(creation) > 2;";
 		if(!$db->query($purge)){ 
       $err->raise("action",_("Error purging old actions"));
 			return false;
     }
     return true;
-
   }
 
   /*
@@ -123,7 +122,6 @@ class m_action {
       $tab[]=$db->Record;
       return $tab;
     }else{
-      $err->raise("action",_("Error selecting new action"));
       return false;
     }
   }
@@ -132,8 +130,8 @@ class m_action {
   */
   function begin($id) {
     global $db,$err;
-    if($db->query("update actions set begin=now() where id=$id ")){
-      $err->raise("action",_("Error in setting locking the action : $id"));
+    if(!$db->query("update actions set begin=now() where id=$id ;")){
+      $err->raise("action",_("Error locking the action : $id"));
       return false;
     }
     return true;
@@ -143,8 +141,7 @@ class m_action {
   */
   function finish($id,$return=0) {
     global $db,$err;
-    $return=intval($return);
-    if($db->query("update actions set end=now(),status=$return where id=$id")){
+    if(!$db->query("update actions set end=now(),status='$return' where id=$id ;")){
       $err->raise("action",_("Error unlocking the action : $id"));
       return false;
     }
