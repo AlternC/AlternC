@@ -56,7 +56,7 @@ class m_action {
   * function archiving a directory ( upon account deletion )
   */
   function archive($archive,$dir) {
-    global $cuid,$db;
+    global $cuid,$db,$err;
     $db->query("select login from membres where uid=$cuid;");    
     $db->next_record();
     if (!$db->Record["login"]) {
@@ -75,36 +75,39 @@ class m_action {
   *function inserting the action in the sql table 
   */
   function set($type,$user,$parameters) {
-    global $db;
+    global $db,$err;
     
     $serialized=serialize($parameters);
     switch($type){
     case 'create_file':
       //do some shit
-      $query="insert into actions values ('','CREATE_FILE','$serialized','','','','$user','');"; 
+      $query="insert into actions values ('','CREATE_FILE','$serialized',now(),'','','$user','');"; 
       break;
     case 'create_dir':
      //do more shit
-      $query="insert into actions values ('','CREATE_DIR','$serialized','','','','$user','');"; 
+      $query="insert into actions values ('','CREATE_DIR','$serialized',now(),'','','$user','');"; 
       break;
     case 'move':
      //do more shit
-      $query="insert into actions values ('','MOVE','$serialized','','','','$user','');"; 
+      $query="insert into actions values ('','MOVE','$serialized',now(),'','','$user','');"; 
       break;
     case 'delete':
      //do more shit
-      $query="insert into actions values ('','DELETE','$serialized','','','','$user','');"; 
-      break;
-    case 'archive':
-     //do more shit
-      $query="insert into actions values ('','ARCHIVE','$serialized','','','','$user','');"; 
+      $query="insert into actions values ('','DELETE','$serialized',now(),'','','$user','');"; 
       break;
     default:
       return false;
     }
-		if(!$db->query($query)) 
+		if(!$db->query($query)){ 
+      $err->raise("action",_("Error setting actions"));
 			return false;
-    return true
+    }
+    $purge="delete actions where HOUR(now()) - HOUR(creation) > 1;";
+		if(!$db->query($purge)){ 
+      $err->raise("action",_("Error purging old actions"));
+			return false;
+    }
+    return true;
 
   }
 
@@ -112,31 +115,39 @@ class m_action {
   * function returning the first not locked line of the action table 
   */
   function get_action() {
-    global $db;
+    global $db,$err;
 
     $tab=array();
     $db->query('select * from actions where end is null and begin is null order by id limit 1;');
     if ($db->next_record()){
       $tab[]=$db->Record;
       return $tab;
-    }else
+    }else{
+      $err->raise("action",_("Error selecting new action"));
       return false;
+    }
   }
   /*
   * function locking an entry while it is being executed by the action script
   */
   function begin($id) {
-    global $db;
-    $db->query("update actions set begin=now() where id=$id ");
+    global $db,$err;
+    if($db->query("update actions set begin=now() where id=$id ")){
+      $err->raise("action",_("Error in setting locking the action : $id"));
+      return false;
+    }
     return true;
   }
   /*
   * function locking an entry while it is being executed by the action script
   */
   function finish($id,$return=0) {
-    global $db;
+    global $db,$err;
     $return=intval($return);
-    $db->query("update actions set end=now(),status=$return where id=$id");
+    if($db->query("update actions set end=now(),status=$return where id=$id")){
+      $err->raise("action",_("Error unlocking the action : $id"));
+      return false;
+    }
     return true;
   }
   /*
