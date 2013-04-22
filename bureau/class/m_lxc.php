@@ -90,7 +90,7 @@ class m_lxc implements vm
 
 		$res = $this->sendMessage('start', $user, $pass, $uid);
 		if ($res === FALSE)
-			return $this->error[0];
+			return $this->error;
 		else
 		{
 			$data = unserialize($res);

@@ -1,21 +1,35 @@
 <?php
 
 require_once("../class/config.php");
-include_once("head.php");
 
 $fields = array (
 	"action" => array ("get", "string", ''),
+	"script" => array ("get", "boolean", 0),
 );
 getFields($fields);
 
 if (in_array($action, array('start', 'stop', 'monit'))) {
         $res = $hooks->invoke($action, array(), 'lxc');
-printvar($res);
 }
 
 $infos = $lxc->getvm();
 
+if ($script) {
+  // FIXME afficher les variables pertinentes de manière pertinente pour quelqu'un qui veux scripter :)
+  print_r($infos);
+  if (isset($res)) print_r($res);
+  die();
+}
+
+# Show the header after the "if script" ;)
+include_once("head.php");
+
+# Debug
+echo "<fieldset><legend>debug</legend>res<br/>";
+if (isset($res)) { printvar($res); }
+echo "infos getvm";
 printvar($infos);
+echo "</fieldset>";
 ?>
 
 <h3><?php __('Console access'); ?></h3>
@@ -49,6 +63,24 @@ printvar($infos);
 } // empty infos ?>
 </div>
 
+<br/>
+<br/>
+<hr/>
+<br/>
+<fieldset><legend><?php __("Tips");?></legend>
+<?php __("You can script the launch the console access in command line by using this url:"); ?>
+<pre>
+http://<?php echo $mem->user['login'].':ALTERNC_PASSWORD@'.$host.'/vm.php?http_auth=1&amp;script=1&amp;action=start' ?>
+</pre>
+<?php __("You can halt the vm by using:"); ?>
+<pre>
+http://<?php echo $mem->user['login'].':ALTERNC_PASSWORD@'.$host.'/vm.php?http_auth=1&amp;script=1&amp;action=stop' ?>
+</pre>
+<?php __("And you can see existing vm informations (if exist) by using:"); ?>
+<pre>
+http://<?php echo $mem->user['login'].':ALTERNC_PASSWORD@'.$host.'/vm.php?http_auth=1&amp;script=1' ?>
+</pre>
+</fieldset>
 <?php
 include_once("foot.php");
 ?>

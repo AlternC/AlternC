@@ -238,7 +238,7 @@ class m_mem {
         return false;
       }
       if ($_REQUEST["username"] && $_REQUEST["password"]) {
-      	return $this->login($_REQUEST["username"],$_REQUEST["password"],$_REQUEST["restrictip"]);
+      	return $this->login($_REQUEST["username"],$_REQUEST["password"], (isset($_REQUEST["restrictip"])?$_REQUEST["restrictip"]:0) );
       }
     } // end isset
     $_COOKIE["session"]=isset($_COOKIE["session"])?addslashes($_COOKIE["session"]):"";
