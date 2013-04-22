@@ -31,7 +31,7 @@ class m_action {
   /*
   * function to set the cration of a file 
   */
-  function create_file($file,$content,$user="root") {
+  function create_file($file,$content="",$user="root") {
     return $this->set('create_file',$user, array('file'=>$file,'content'=>$content));
   }
   /*
@@ -49,14 +49,23 @@ class m_action {
   /*
   * function returning the first not locked line of the action table 
   */
-  function move($src,$dest) {
+  function move($src,$dst,$user="root") {
     return $this->set('move',$user, array('src'=>$src, 'dst'=>$dst));
   }
   /*
   * function archiving a directory ( upon account deletion )
   */
-  function archive($archive) {
-    global $cuid;
+  function archive($archive,$dir) {
+    global $cuid,$db;
+    $db->query("select login from membres where uid=$cuid;");    
+    $db->next_record();
+    if (!$db->Record["login"]) {
+      $err->raise("action",_("Login corresponding to $cuid not found"));
+      return false;
+    }
+    $uidlogin=$cuid."-".$db->Record["login"];
+
+    $BACKUP_DIR="/tmp/backup/$dir";
     //utiliser la function move après avoir construit le chemin
     $today=getdate();
     $dest=$BACKUP_DIR.'/'.$today["year"].'-'.$today["mon"].'/'.$uidlogin.'/';
@@ -73,18 +82,23 @@ class m_action {
     case 'create_file':
       //do some shit
       $db->query("insert into actions values ('','CREATE_FILE','$serialized','','','','$user','');"); 
+      break;
     case 'create_dir':
      //do more shit
       $db->query("insert into actions values ('','CREATE_DIR','$serialized','','','','$user','');"); 
+      break;
     case 'move':
      //do more shit
       $db->query("insert into actions values ('','MOVE','$serialized','','','','$user','');"); 
+      break;
     case 'delete':
      //do more shit
       $db->query("insert into actions values ('','DELETE','$serialized','','','','$user','');"); 
+      break;
     case 'archive':
      //do more shit
       $db->query("insert into actions values ('','ARCHIVE','$serialized','','','','$user','');"); 
+      break;
     default:
       return false;
     }
@@ -117,7 +131,7 @@ class m_action {
   */
   function finish($id) {
     global $db;
-    $db->query("update actions set end=".date()." where id=$id ");
+    $db->query("update actions set end=".date()." where id=$id");
     return true;
   }
   /*
