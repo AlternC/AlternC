@@ -65,10 +65,10 @@ class m_action {
     }
     $uidlogin=$cuid."-".$db->Record["login"];
 
-    $BACKUP_DIR="/tmp/backup/$dir";
+    $BACKUP_DIR="/tmp/backup/";
     //utiliser la function move après avoir construit le chemin
     $today=getdate();
-    $dest=$BACKUP_DIR.'/'.$today["year"].'-'.$today["mon"].'/'.$uidlogin.'/';
+    $dest=$BACKUP_DIR.'/'.$today["year"].'-'.$today["mon"].'/'.$uidlogin.'/'.$dir;
     $this->move($archive,$dest);
   }
   /*
@@ -129,9 +129,9 @@ class m_action {
   /*
   * function locking an entry while it is being executed by the action script
   */
-  function finish($id) {
+  function finish($id,$return) {
     global $db;
-    $db->query("update actions set end=".date()." where id=$id");
+    $db->query("update actions set end=".date().",status=$return where id=$id");
     return true;
   }
   /*
