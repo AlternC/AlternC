@@ -19,7 +19,7 @@
 # ----------------------------------------------------------------------
 # Purpose of file: Makefile des binaires de /usr/lib/alternc
 # ----------------------------------------------------------------------
-SCRIPTS=sqlbackup.sh quota_init quota_delete update_domains.sh slave_dns sendmail spoolsize.php fixperms.sh alternc-dboptimize export_account.php cron_users_doit.sh cron_users.sh compress_logs.sh delete_logs.sh quota-warning.sh update_mails.sh alternc_add_policy_dovecot rebuild_all_webconf.sh courier-dovecot-migrate.pl popimap-log-login.sh mem_add mem_del quota_edit quota_get du.pl update_quota_mail.sh inotify_update_domains.sh functions.sh functions_hosting.sh functions_dns.sh mail_dodelete.php procmail_to_sieve.php
+SCRIPTS=sqlbackup.sh quota_init quota_delete update_domains.sh slave_dns sendmail spoolsize.php fixperms.sh alternc-dboptimize export_account.php cron_users_doit.sh cron_users.sh compress_logs.sh delete_logs.sh quota-warning.sh update_mails.sh alternc_add_policy_dovecot rebuild_all_webconf.sh courier-dovecot-migrate.pl popimap-log-login.sh mem_add mem_del quota_edit quota_get du.pl update_quota_mail.sh inotify_update_domains.sh functions.sh functions_hosting.sh functions_dns.sh mail_dodelete.php procmail_to_sieve.php lxc_stopexpired.php
 BIN=$(DESTDIR)/usr/lib/alternc/
 
 install: 

@@ -14,6 +14,7 @@ class m_lxc implements vm
     $this->IP   = variable_get('lxc_ip', '', "IP address of the Alternc's LXC server. If empty, no LXC server.");
     $this->PORT = variable_get('lxc_port', '6504', "Port of the Alternc's LXC server");
     $this->KEY  = variable_get('lxc_key', '', "Shared key with the Alternc's LXC server");
+    $this->maxtime = variable_get('lxc_maxtime', '4', "How many hours do we allow to have a server before shutting it down");
   }
 
 
@@ -35,6 +36,29 @@ class m_lxc implements vm
     $err->log("lxc","alternc_del_member");
     $db->query("DELETE FROM vm_history WHERE uid='$cuid'");
     return true;
+  }
+
+  // Stop VMs running since more than MAXTIME hours
+  function stop_expired($force=false) {
+    global $mem,$err;
+    # Need to be distinct of $db (calling subfunctions)
+    $db2 = new DB_system();
+
+    if (! $mem->checkright() ) {
+      $err->raise("lxc",_("-- Only administrators can do that! --"));
+      return false;
+    }
+
+    # If force, maxtime = 0
+    $time = ($force?0:$this->maxtime);
+
+    $db2->query("select * from vm_history where date_end is null and date_start < subdate( now() , interval $time hour);");
+
+    while ($db2->next_record()) {
+      $mem->su($db2->Record['uid']);
+      $this->stop();
+      $mem->unsu();
+    }
   }
 
 
@@ -121,20 +145,32 @@ class m_lxc implements vm
 
   public function getvm()
   {
-    global $db, $mem;
+    global $db, $mem, $cuid;
 
-    $uid = $mem->user['uid'];
-    $res = array();
+    $db->query("SELECT * FROM vm_history WHERE date_end IS NULL AND uid= $cuid ORDER BY id DESC LIMIT 1");
 
-    $res = $db->query("SELECT * FROM vm_history WHERE date_end IS NULL AND uid= '$uid' ORDER BY id DESC LIMIT 1");
-
-    if ($db->next_record())
-    {
+    if ($db->next_record()){
       $db->Record['serialized_object'] = unserialize($db->Record['serialized_object']);
       return $db->Record;
     }
-    else
+    else {
       return FALSE;
+    }
+  }
+
+  # Stop all VMs
+  public function stopall() {
+    global $mem, $db, $err;
+
+    if (! $mem->checkright() ) {
+      $err->raise("lxc",_("-- Only administrators can do that! --"));
+      return false;
+    }
+
+    if ($this->sendMessage(array('action' => 'stopall' )) === FALSE)
+      return FALSE;
+
+    return $db->query("UPDATE vm_history SET date_end = NOW() WHERE date_end is null;");
   }
 
   public function stop()
