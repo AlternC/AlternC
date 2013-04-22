@@ -102,7 +102,7 @@ class m_action {
       $err->raise("action",_("Error setting actions"));
 			return false;
     }
-    $purge="delete actions where HOUR(now()) - HOUR(creation) > 1;";
+    $purge="delete from actions where HOUR(now()) - HOUR(creation) > 1;";
 		if(!$db->query($purge)){ 
       $err->raise("action",_("Error purging old actions"));
 			return false;
@@ -118,7 +118,7 @@ class m_action {
     global $db,$err;
 
     $tab=array();
-    $db->query('select * from actions where end is null and begin is null order by id limit 1;');
+    $db->query('select * from actions where end =0 and begin = 0 order by id limit 1;');
     if ($db->next_record()){
       $tab[]=$db->Record;
       return $tab;
