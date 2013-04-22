@@ -61,9 +61,12 @@ include_once("head.php");
  echo "<table class='tedit'>";
  echo "<tr><th>"._("Hostname")."</th><td>".$infos['serialized_object']['hostname']."</td></tr>";
  echo "<tr><th>"._("Start time")."</th><td>".$infos['date_start']."</td></tr>";
+ echo "<tr><th>"._("Usefull command")."</th><td><pre>";
+   echo "ssh ".$mem->user['login']."@".$infos['serialized_object']['hostname']."\n";
+   echo "rsync ".$mem->user['login']."@".$infos['serialized_object']['hostname']."\n";
+ echo "</pre></td></tr>";
  echo "<tr><td colspan='2'><a href='vm.php?action=stop'>"._("Click here to stop the machine")."</a></td></tr>";
  echo "</table>"; 
-
 
 } // empty infos ?>
 </div>

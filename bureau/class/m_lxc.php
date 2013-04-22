@@ -38,120 +38,121 @@ class m_lxc implements vm
   }
 
 
-	private function sendMessage($action, $user = FALSE, $password=FALSE, $uid=FALSE)
-	{
-		$fp = fsockopen($this->IP, $this->PORT, $errno, $errstr, $this->TIMEOUT);
-		if (!$fp) 
-		{
-			$this->error[] = 'Unable to connect';
-			return FALSE;
-		}
+  private function sendMessage($params) {
+    $fp = fsockopen($this->IP, $this->PORT, $errno, $errstr, $this->TIMEOUT);
+    if (!$fp) 
+    {
+      $this->error[] = 'Unable to connect';
+      return FALSE;
+    }
 
-		$msg = sprintf("%s|%s|%s|%d\n", $action, $user, $password, $uid);
-		if (fwrite ($fp, $msg) < 0)
-		{
-			$this->error[] = 'Unable to send data';
-			return FALSE;
-		}
-		$resp = '';
-		#while (($resp .= fgets($fp, 4096)) !== FALSE);
-		$resp = fgets($fp, 4096);
-		fclose ($fp);
+    $msg = sprintf("%s\n", serialize($params) );
+    if (fwrite ($fp, $msg) < 0)
+    {
+      $this->error[] = 'Unable to send data';
+      return FALSE;
+    }
+    $resp = '';
+    #while (($resp .= fgets($fp, 4096)) !== FALSE);
+    $resp = fgets($fp, 4096);
+    fclose ($fp);
+
+    return $resp;
+  
+    if (stripos($resp, 'error') > 0)
+    {
+      $data = unserialize($resp);
+      $this->error[] = $data['msg'];
+      return FALSE;
+    }
+    else
+    {
+      return $resp;
+    }
+  }
+
+  public function start($login = FALSE, $pass = FALSE, $uid = FALSE)
+  {
+    
+    global $mem, $db, $err, $mysql;
+
+    if ($this->getvm() !== FALSE)
+    {
+      $err->raise('lxc', _('VM already started'));
+      return FALSE;
+    }
+
+    $login = $login ? $login : $mem->user['login'];
+    $pass  = $pass  ? $pass  : $mem->user['pass'];
+    $uid   = $uid   ? $uid   : $mem->user['uid'];
+
+    $msgg = array('action'=>'start', 'login'=>$login, 'pass' => $pass, 'uid'=> $uid);  
+    $msgg['mysql_host'] = $mysql->dbus->Host;
+
+    $res = $this->sendMessage($msgg);
+    if ($res === FALSE)
+      return $this->error;
+    else
+    {
+      $data = unserialize($res);
+      $error = $data['error'];
+      $hostname = $data['hostname'];
+      $msg = $data['msg'];
+      $date_start = 'NOW()';
+      $uid = $mem->user['uid'];
+
+      if ((int)$data['error'] != 0)
+      {
+        $err->raise('lxc', _($data['msg']));
+        return FALSE;
+      }
+
+      $db->query("INSERT INTO vm_history (ip,date_start,uid,serialized_object) VALUES ('$hostname', $date_start, '$uid', '$res')");
+
+      return $res;
+    }
+  }
 
 
-		return $resp;
-	
-		if (stripos($resp, 'error') > 0)
-		{
-			$data = unserialize($resp);
-			$this->error[] = $data['msg'];
-			return FALSE;
-		}
-		else
-		{
-			return $resp;
-		}
-	}
+  public function monit()
+  {
+    echo "1 / 5 used ";
+  }
 
-	public function start($login = FALSE, $pass = FALSE, $uid = FALSE)
-	{
-		
-		global $mem, $db, $err;
+  public function getvm()
+  {
+    global $db, $mem;
 
-		if ($this->getvm() !== FALSE)
-		{
-			$err->raise('lxc', _('VM already started'));
-			return FALSE;
-		}
+    $uid = $mem->user['uid'];
+    $res = array();
 
-		$user = $login ? $login : $mem->user['login'];
-		$pass = $pass  ? $pass  : $mem->user['pass'];
-		$uid  = $uid   ? $uid   : $mem->user['uid'];
+    $res = $db->query("SELECT * FROM vm_history WHERE date_end IS NULL AND uid= '$uid' ORDER BY id DESC LIMIT 1");
 
-		$res = $this->sendMessage('start', $user, $pass, $uid);
-		if ($res === FALSE)
-			return $this->error;
-		else
-		{
-			$data = unserialize($res);
-			$error = $data['error'];
-			$hostname = $data['hostname'];
-			$msg = $data['msg'];
-			$date_start = 'NOW()';
-			$uid = $mem->user['uid'];
+    if ($db->next_record())
+    {
+      $db->Record['serialized_object'] = unserialize($db->Record['serialized_object']);
+      return $db->Record;
+    }
+    else
+      return FALSE;
+  }
 
-			if ((int)$data['error'] != 0)
-			{
-				$err->raise('lxc', _($data['msg']));
-				return FALSE;
-			}
+  public function stop()
+  {
+    global $db, $mem;
 
-			$db->query("INSERT INTO vm_history (ip,date_start,uid,serialized_object) VALUES ('$hostname', $date_start, '$uid', '$res')");
+    $vm = $this->getvm();
 
-			return $res;
-		}
-	}
+    if ($vm === FALSE)
+      return TRUE;
 
+    $vm_id = $vm['serialized_object']['vm'];
+    $uid = $mem->user['uid'];
+    $vid = $vm['id'];
 
-	public function monit()
-	{
-		echo "1 / 5 used ";
-	}
+    if ($this->sendMessage(array('action' => 'stop', 'vm' => $vm_id)) === FALSE)
+      return FALSE;
 
-	public function getvm()
-	{
-		global $db, $mem;
-
-		$uid = $mem->user['uid'];
-		$res = array();
-
-		$res = $db->query("SELECT * FROM vm_history WHERE date_end IS NULL AND uid= '$uid' ORDER BY id DESC LIMIT 1");
-
-		if ($db->next_record())
-		{
-			$db->Record['serialized_object'] = unserialize($db->Record['serialized_object']);
-			return $db->Record;
-		}
-		else
-			return FALSE;
-	}
-
-	public function stop()
-	{
-		global $db, $mem;
-
-		$vm = $this->getvm();
-
-		if ($vm === FALSE)
-			return TRUE;
-
-		$vm_id = $vm['serialized_object']['vm'];
-		$uid = $mem->user['uid'];
-		$vid = $vm['id'];
-
-		if ($this->sendMessage('stop', $vm_id, FALSE, FALSE) === FALSE)
-			return FALSE;
-
-		return $db->query("UPDATE vm_history SET date_end = NOW() WHERE uid = '$uid' AND id = '$vid' LIMIT 1");
-	}
+    return $db->query("UPDATE vm_history SET date_end = NOW() WHERE uid = '$uid' AND id = '$vid' LIMIT 1");
+  }
 }
