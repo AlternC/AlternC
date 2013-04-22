@@ -336,6 +336,7 @@ class m_mysql {
     $this->dbus->query("DROP DATABASE `$dbname`;");
 
     $db_esc=str_replace('_','\_',$dbname);
+    $db->query("DELETE FROM mysql.db WHERE Db='$db_esc';");
     $db->query("select User from mysql.db where User='".$dbname."' and Db='".$db_esc."' and (Select_priv='Y' or Insert_priv='Y' or Update_priv='Y' or Delete_priv='Y' or Create_priv='Y' or Drop_priv='Y' or References_priv='Y' or Index_priv='Y' or Alter_priv='Y' or Create_tmp_table_priv='Y' or Lock_tables_priv='Y');");
     if(!$db->num_rows()){
       $this->del_user($dbname);
