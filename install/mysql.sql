@@ -656,7 +656,7 @@ union
 select distinct concat('alterncpanel','@',`v`.`value`) AS `mail`,
 `m`.`mail` AS `alias`
 from ((`membres` `m` join `variable` `v`) join `domaines` `d`)
-where (`v`.`name` = 'mailname_bounce');
+where (`v`.`name` = 'mailname_bounce' AND `m`.`uid`=2000);
 
 --
 -- Structure de la table `piwik_users`
