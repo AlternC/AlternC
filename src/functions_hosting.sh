@@ -100,6 +100,7 @@ host_create() {
     DOCUMENT_ROOT2="`echo $DOCUMENT_ROOT | sed -e 's/\\\\/\\\\\\\\/g' -e 's/#/\\\\#/g' -e 's/&/\\\\\\&/g'`"
     ACCOUNT_ROOT2="`echo $ACCOUNT_ROOT | sed -e 's/\\\\/\\\\\\\\/g' -e 's/#/\\\\#/g' -e 's/&/\\\\\\&/g'`"	
     REDIRECT2="`echo $REDIRECT | sed -e 's/\\\\/\\\\\\\\/g' -e 's/#/\\\\#/g' -e 's/&/\\\\\\&/g'`"
+    USER2="`echo $USER | sed -e 's/\\\\/\\\\\\\\/g' -e 's/#/\\\\#/g' -e 's/&/\\\\\\&/g'`"    
 
     # Put the good value in the conf file
         sed -i \
@@ -111,6 +112,7 @@ host_create() {
         -e "s#%%UID%%#$U_ID#g" \
         -e "s#%%GID%%#$G_ID#g" \
         -e "s#%%mail_account%%#$MAIL_ACCOUNT#g" \
+        -e "s#%%user%%#$USER2#g" \        
         $TMP_FILE
 
     # Check if all is right in the conf file
