@@ -70,7 +70,7 @@ while ($r=$action->get_action()){
   exec("su ".$r["user"]);
   switch ($r["type"]){
     case "CREATE_FILE" :
-      $return=file_put_contents($params["file"],$params["contents"]);
+      $return=file_put_contents($params["file"],$params["content"]);
       break;
     case "CREATE_DIR" :
       $return=mkdir($params["dir"]));
@@ -80,6 +80,9 @@ while ($r=$action->get_action()){
       break;
     case "MOVE" :
       $return=rename($params["src"],$params["dst"]);
+      break;
+    case "PERMFIX" :
+      // TODO 
       break;
     default :
       break;
