@@ -111,7 +111,7 @@ class m_action {
     global $db;
 
     $tab=array();
-    $db->query('select * from (select * form actions where end="" and begin="" order by id) x group by id');
+    $db->query('select * from actions where end="0000-00-00 00:00:00" and begin="0000-00-00 00:00:00" order by id limit 1;');
     if ($db->next_record()){
       $tab[]=$db->Record;
       return $tab;
