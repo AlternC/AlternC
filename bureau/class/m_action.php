@@ -81,27 +81,31 @@ class m_action {
     switch($type){
     case 'create_file':
       //do some shit
-      $db->query("insert into actions values ('','CREATE_FILE','$serialized','','','','$user','');"); 
+      $query="insert into actions values ('','CREATE_FILE','$serialized','','','','$user','');"; 
       break;
     case 'create_dir':
      //do more shit
-      $db->query("insert into actions values ('','CREATE_DIR','$serialized','','','','$user','');"); 
+      $query="insert into actions values ('','CREATE_DIR','$serialized','','','','$user','');"; 
       break;
     case 'move':
      //do more shit
-      $db->query("insert into actions values ('','MOVE','$serialized','','','','$user','');"); 
+      $query="insert into actions values ('','MOVE','$serialized','','','','$user','');"; 
       break;
     case 'delete':
      //do more shit
-      $db->query("insert into actions values ('','DELETE','$serialized','','','','$user','');"); 
+      $query="insert into actions values ('','DELETE','$serialized','','','','$user','');"; 
       break;
     case 'archive':
      //do more shit
-      $db->query("insert into actions values ('','ARCHIVE','$serialized','','','','$user','');"); 
+      $query="insert into actions values ('','ARCHIVE','$serialized','','','','$user','');"; 
       break;
     default:
       return false;
     }
+		if(!$db->query($query)) 
+			return false;
+    return true
+
   }
 
   /*
@@ -111,7 +115,7 @@ class m_action {
     global $db;
 
     $tab=array();
-    $db->query('select * from actions where end="0000-00-00 00:00:00" and begin="0000-00-00 00:00:00" order by id limit 1;');
+    $db->query('select * from actions where end is null and begin is null order by id limit 1;');
     if ($db->next_record()){
       $tab[]=$db->Record;
       return $tab;
@@ -123,15 +127,16 @@ class m_action {
   */
   function begin($id) {
     global $db;
-    $db->query("update actions set begin=".date()." where id=$id ");
+    $db->query("update actions set begin=now() where id=$id ");
     return true;
   }
   /*
   * function locking an entry while it is being executed by the action script
   */
-  function finish($id,$return) {
+  function finish($id,$return=0) {
     global $db;
-    $db->query("update actions set end=".date().",status=$return where id=$id");
+    $return=intval($return);
+    $db->query("update actions set end=now(),status=$return where id=$id");
     return true;
   }
   /*
@@ -139,7 +144,7 @@ class m_action {
   */
   function cancel($id) {
     global $db;
-    $db->query("update actions set end=".date()." where id=$id ");
+    $this->finish($id, 666);
     return true;
   }
 
