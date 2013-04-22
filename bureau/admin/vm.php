@@ -15,21 +15,26 @@ if (in_array($action, array('start', 'stop', 'monit'))) {
 $infos = $lxc->getvm();
 
 if ($script) {
-  // FIXME afficher les variables pertinentes de manière pertinente pour quelqu'un qui veux scripter :)
-  print_r($infos);
-  if (isset($res)) print_r($res);
+  if (isset($res)) {
+  echo "ACTION:".$action."\n";
+  echo "RETURN:".intval($res['lxc'])."\n";
+  }
+  if ($infos) {
+    echo "VM_STATUS:OK";
+    echo "VM_START:".$infos['date_start']."\n";
+    echo "VM_RETURN_CODE:".intval($infos['serialized_object']['error'])."\n";
+    echo "VM_ID:".$infos['serialized_object']['vm']."\n";
+    echo "VM_HOSTNAME:".$infos['serialized_object']['hostname']."\n";
+    echo "VM_MSG:".$infos['serialized_object']['msg']."\n";
+  } else {
+    echo "VM_STATUS:NONE";
+  }
   die();
 }
 
 # Show the header after the "if script" ;)
 include_once("head.php");
 
-# Debug
-echo "<fieldset><legend>debug</legend>res<br/>";
-if (isset($res)) { printvar($res); }
-echo "infos getvm";
-printvar($infos);
-echo "</fieldset>";
 ?>
 
 <h3><?php __('Console access'); ?></h3>
