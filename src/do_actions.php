@@ -35,7 +35,7 @@
  */
 
 // Put this var to 1 if you want to enable debug prints
-$debug=1;
+$debug=0;
 
 // Debug function that print infos
 function d($mess){
@@ -72,7 +72,8 @@ if (file_exists($LOCK_FILE) !== false){
         die("Cannot open/write $LOCK_FILE");
       }
 
-      // Get the action that was processing when previous script failed
+      // Get the action(s) that was processing when previous script failed
+      // (Normally, there will be at most 1 job pending... but who know?)
       while($cc=$action->get_job()){
         $c=$cc[0];
         // We can resume these types of action, so we reset the job to process it later
