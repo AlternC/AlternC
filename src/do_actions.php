@@ -37,19 +37,20 @@
 require_once("/usr/share/alternc/panel/class/config_nochk.php");
 
 $LOCK_FILE='/var/run/alternc/do_actions_cron.lock';
-$SCRIPT='php do_actions';
+$SCRIPT='/usr/bin/php do_actions.php';
 $MY_PID=getmypid();
 
 // Check if script isn't already running
-if (($PID=file_get_contents($LOCK_FILE)) !== false){
+if (file_exists($LOCK_FILE) !== false){
     // Check if file is in process list
+    $PID=file_get_contents($LOCK_FILE);
     if ($PID == exec("pidof $SCRIPT | grep -v $MY_PID")){
       // Previous cron is not finished yet, just exit
-      exit 0;
+      echo "Previous cron is not finished yet, just exit\n";
+      exit(0);
     }else{
       // Previous cron failed!
-      // Send an error mail to the admin and tell him what action failed
-      mail("postmaster@$L_FQDN",'Cron do_actions.php failed!',"Hello\n\nPrevious cron /usr/lib/alternc/do_actions.php seems to have failed (I found the lock file but the cron is not running anymore)\nIts PID was: $PID\nI'll remove the lock file and continue to do performed actions, beginning to the right next action after the failed one.");
+      echo "Previous cron failed!\n";
       // Delete the lock and continue to the next action
       unlink($LOCK_FILE);
     }
@@ -61,25 +62,43 @@ if (file_put_contents($LOCK_FILE,$MY_PID) === false){
 }
 
 //We get the next action to do
-while ($r=$action->get_action()){
+while ($rr=$action->get_action()){
+  $r=$rr[0];
+  $return="OK";
   // We lock the action
+  echo "-----------\nBeginning action n°".$r["id"]."\n";
   $action->begin($r["id"]);
   // We process it
-  $params=$r["parameters"];
+  $params=unserialize($r["parameters"]);
+  // Remove all previous error message...
+  @trigger_error("");
   // We exec with the specified user
-  exec("su ".$r["user"]);
+  echo "Executing action '".$r["type"]."' with user '".$r["user"]."'\n";
+  // For now, this script only work for user 'root'
+  if($r["user"] != "root"){
+    if(exec("su ".$r["user"])){ // TODO
+      echo "Login successfull, now processing the action...\n";
+    }else{
+      echo "Error: can't login as ".$r["user"]."\n";
+      $action->finish($r["id"],"Can't login as user ".$r["user"]);
+      continue;
+    }
+  }
   switch ($r["type"]){
     case "CREATE_FILE" :
-      $return=file_put_contents($params["file"],$params["content"]);
+      @file_put_contents($params["file"],$params["content"]);
       break;
     case "CREATE_DIR" :
-      $return=mkdir($params["dir"]));
+      @mkdir($params["dir"],0777,true);
       break;
     case "DELETE" :
-      $return=exec("rm -rf ".$params["dir"]);
+      @exec("rm -rf ".$params["dir"]." 2>&1", $output);
       break;
     case "MOVE" :
-      $return=rename($params["src"],$params["dst"]);
+      // If destination dir does not exists, create it
+      if(!is_dir($params["dst"]))
+        @mkdir($params["dst"],0777,true);
+      @exec("mv -f ".$params["src"]." ".$params["dst"]." 2>&1", $output);
       break;
     case "PERMFIX" :
       // TODO 
@@ -87,10 +106,21 @@ while ($r=$action->get_action()){
     default :
       break;
   }
-  // We finished the action, notify the DB
+  // Get the last error if exists.
+  if(isset($output[0]))
+    $return=$output[0];
+  else
+    if($error=error_get_last())
+      if($error["message"]!="")
+        $return=$error["message"];
+  echo "Finishing... return value is : $return\n\n";
+  // We finished the action, notify the DB.
   $action->finish($r["id"],$return);
 }
 
 // Unlock the script
 unlink($LOCK_FILE);
+
+// Exit this script
+exit(0);
 ?>
