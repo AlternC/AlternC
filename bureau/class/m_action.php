@@ -41,6 +41,12 @@ class m_action {
     return $this->set('create_dir',$user, array('dir'=>$dir));
   }
   /*
+  * function to set the cration of a file 
+  */
+  function fix_dir($dir,$user="root") {
+    return $this->set('fix_dir',$user, array('dir'=>$dir));
+  }
+  /*
   * function to delete file / folder
   */
   function del($dir,$user="root") {
@@ -80,19 +86,18 @@ class m_action {
     $serialized=serialize($parameters);
     switch($type){
     case 'create_file':
-      //do some shit
       $query="insert into actions values ('','CREATE_FILE','$serialized',now(),'','','$user','');"; 
       break;
     case 'create_dir':
-     //do more shit
       $query="insert into actions values ('','CREATE_DIR','$serialized',now(),'','','$user','');"; 
       break;
     case 'move':
-     //do more shit
       $query="insert into actions values ('','MOVE','$serialized',now(),'','','$user','');"; 
       break;
+    case 'fix_dir':
+      $query="insert into actions values ('','FIXDIR','$serialized',now(),'','','$user','');"; 
+      break;
     case 'delete':
-     //do more shit
       $query="insert into actions values ('','DELETE','$serialized',now(),'','','$user','');"; 
       break;
     default:
@@ -146,6 +151,28 @@ class m_action {
       return false;
     }
     return true;
+  }
+
+  function reset_job($id) {
+    global $db,$err;
+    if(!$db->query("update actions set end=0,begin=0,status='' where id=$id ;")){
+      $err->raise("action",_("Error unlocking the action : $id"));
+      return false;
+    }
+    return true;
+  }
+
+  function get_job() {
+    global $db,$err;
+
+		$tab=array();
+    $db->query("Select id,type from actions where begin !=0 and end = 0 ;");
+    if ($db->next_record()){
+      $tab[]=$db->Record;
+      return $tab;
+    }else{
+      return false;
+    }
   }
   /*
   * function locking an entry while it is being executed by the action script
