@@ -46,9 +46,8 @@ include_once("head.php");
 	}
 
 ?>
-<p>
+<br/>
 <h3><?php __("List of the websites having errors in the domain database."); ?></h3>
-</p>
 <table class="tlist">
   <tr>
   <th><?php __("Uid"); ?></th>
