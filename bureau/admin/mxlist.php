@@ -29,19 +29,29 @@
 */
 require_once("../class/config_nochk.php");
 
+$fields = array (
+	"json"    => array ("get", "boolean", "0"),
+);
+getFields($fields);
+
+
 // Check for the http authentication
 if (!isset($_SERVER['PHP_AUTH_USER'])) {
  header('WWW-Authenticate: Basic realm="MX List Authentication"');
  header('HTTP/1.0 401 Unauthorized');
  exit;
- } else {
-	if ($mail->check_slave_account($_SERVER['PHP_AUTH_USER'],$_SERVER['PHP_AUTH_PW'])) {
-		$mail->echo_domain_list();
-	} else {
- header('WWW-Authenticate: Basic realm="MX List Authentication"');
- header('HTTP/1.0 401 Unauthorized');
- exit;
-	}
+} else {
+  if ($mail->check_slave_account($_SERVER['PHP_AUTH_USER'],$_SERVER['PHP_AUTH_PW'])) {
+    if (!$json) {
+      $mail->echo_domain_list();
+    } else {
+      print_r($mail->echo_domain_list("json"));
+    }
+  } else {
+    header('WWW-Authenticate: Basic realm="MX List Authentication"');
+    header('HTTP/1.0 401 Unauthorized');
+    exit;
   }
+}
 
 ?>

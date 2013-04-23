@@ -785,13 +785,28 @@ ORDER BY
   /* ----------------------------------------------------------------- */
   /** Out (echo) the complete hosted domain list : 
    */
-  function echo_domain_list() {
-  global $db,$err;
-  $db->query("SELECT domaine FROM domaines WHERE gesmx=1 ORDER BY domaine");
-  while ($db->next_record()) {
-    echo $db->f("domaine")."\n";
-  }
-  return true;
+  function echo_domain_list($format=null) {
+    global $db,$err;
+    $db->query("SELECT domaine FROM domaines WHERE gesmx=1 ORDER BY domaine");
+    $lst=array();
+    $tt="";
+    while ($db->next_record()) {
+      $lst[]=$db->f("domaine");
+      $tt.=$db->f("domaine");
+    }
+
+    # Generate an integrity check 
+    $obj=array('integrity'=>md5($tt),'items'=>$lst);
+
+    switch($format) {
+      case "json":
+        return json_encode($obj);
+        break;
+      default:
+        foreach ($lst as $l) { echo $l."\n"; }
+        return true;
+        break;
+    } // switch
   }
 
 
