@@ -20,14 +20,14 @@ if ($script) {
   echo "RETURN:".intval($res['lxc'])."\n";
   }
   if ($infos) {
-    echo "VM_STATUS:OK";
+    echo "VM_STATUS:OK\n";
     echo "VM_START:".$infos['date_start']."\n";
     echo "VM_RETURN_CODE:".intval($infos['serialized_object']['error'])."\n";
     echo "VM_ID:".$infos['serialized_object']['vm']."\n";
     echo "VM_HOSTNAME:".$infos['serialized_object']['hostname']."\n";
     echo "VM_MSG:".$infos['serialized_object']['msg']."\n";
   } else {
-    echo "VM_STATUS:NONE";
+    echo "VM_STATUS:NONE\n";
   }
   die();
 }
@@ -74,8 +74,10 @@ include_once("head.php");
 <br/>
 <br/>
 <hr/>
-<br/>
-<fieldset><legend><?php __("Tips");?></legend>
+<h3><?php __("Tips"); ?></h3>
+<a href="javascript:;" onclick="$('#tips-script').toggle();"><?php __("Can I start or stop my console access with a script?"); ?></a>
+<div id='tips-script'>
+<fieldset>
 <?php __("You can script the launch the console access in command line by using this url:"); ?>
 <pre>
 http://<?php echo $mem->user['login'].':ALTERNC_PASSWORD@'.$host.'/vm.php?http_auth=1&amp;script=1&amp;action=start' ?>
@@ -88,7 +90,23 @@ http://<?php echo $mem->user['login'].':ALTERNC_PASSWORD@'.$host.'/vm.php?http_a
 <pre>
 http://<?php echo $mem->user['login'].':ALTERNC_PASSWORD@'.$host.'/vm.php?http_auth=1&amp;script=1' ?>
 </pre>
+<i><?php __("Warning: if you do not use HTTPS, your password will be transfered without any protection"); ?></i>
 </fieldset>
+</div>
+
+<br/>
+<a href="javascript:;" onclick="$('#tips-soft').toggle();"><?php __("Which software can I use?"); ?></a>
+<div id='tips-soft'>
+<fieldset>
+<?php __("To have a remote console with SSH, you can use Putty. To transfert files, you can use Filezilla."); ?>
+</fieldset>
+</div>
+
+<script type="text/javascript">
+$('#tips-script').toggle();
+$('#tips-soft').toggle();
+</script>
+
 <?php
 include_once("foot.php");
 ?>
