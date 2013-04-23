@@ -51,7 +51,7 @@ __("AlternC is an automatic hosting software suite. It features a PHP-based admi
 </li>
 
 <hr/>
-<p class="center"><a href="http://www.alternc.com" target="_blank"><img src="logo2.png" border="0" alt="AlternC" /></a>
+<p class="center"><a href="http://www.alternc.com" target="_blank"><img src="images/logo2.png" border="0" alt="AlternC" /></a>
 <br />
 <?php 
 __("You are currently using AlternC ");

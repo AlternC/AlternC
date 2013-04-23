@@ -130,7 +130,7 @@ if (!$charset) $charset="UTF-8";
         </td>
         <td>
         <p>
-        <a href="http://www.alternc.com/"><img src="powered_by_alternc2.png" width="128" height="32" alt="Powered by AlternC" /></a>
+        <a href="http://www.alternc.com/"><img src="images/powered_by_alternc2.png" width="128" height="32" alt="Powered by AlternC" /></a>
         </p>
         </td>
         </tr>

@@ -103,7 +103,7 @@ foreach ($obj_menu as $k => $m ) {
 }
 
 ?>
-<p class="center"><a href="about.php"><img src="logo2.png" class="menulogo" border="0" alt="AlternC" title="<?php __("About"); ?>" width='150px' height='102px' /></a>
+<p class="center"><a href="about.php"><img src="images/logo2.png" class="menulogo" border="0" alt="AlternC" title="<?php __("About"); ?>" width='150px' height='102px' /></a>
 <br />
 <?php 
 echo "$L_VERSION";

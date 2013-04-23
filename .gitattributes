@@ -119,9 +119,6 @@ bureau/admin/aide/inline/docbook.css -text
 bureau/admin/aide/inline/frameset.html -text
 bureau/admin/aide/inline/plus.gif -text
 bureau/admin/aide/inline/tiret.gif -text
-bureau/admin/alternc.jpg -text
-bureau/admin/alternc.png -text
-bureau/admin/alternc3.png -text
 bureau/admin/alternc_debugme.php -text
 bureau/admin/bro_downloadfile.php -text
 bureau/admin/bro_editor.php -text
@@ -216,6 +213,7 @@ bureau/admin/images/home.png -text
 bureau/admin/images/ip.png -text
 bureau/admin/images/lang.png -text
 bureau/admin/images/logo.png -text
+bureau/admin/images/logo2.png -text
 bureau/admin/images/logo3.png -text
 bureau/admin/images/logs.png -text
 bureau/admin/images/mail.png -text
@@ -250,6 +248,7 @@ bureau/admin/images/orig/stat.png -text
 bureau/admin/images/password.png -text
 bureau/admin/images/passwordstrength.jpg -text
 bureau/admin/images/plus.png -text
+bureau/admin/images/powered_by_alternc2.png -text
 bureau/admin/images/pumpkin.png -text
 bureau/admin/images/quota.png -text
 bureau/admin/images/refresh.png -text
@@ -283,7 +282,6 @@ bureau/admin/js/jquery_ui/js/jquery-1.7.2.min.js -text
 bureau/admin/js/jquery_ui/js/jquery-ui-1.8.23.custom.min.js -text
 bureau/admin/js/prototype.js -text
 bureau/admin/login.php -text
-bureau/admin/logo2.png -text
 bureau/admin/logs_download.php -text
 bureau/admin/logs_list.php -text
 bureau/admin/mail_add.php -text
@@ -305,15 +303,17 @@ bureau/admin/mem_passwd.php -text
 bureau/admin/menu.php -text
 bureau/admin/mxlist.php -text
 bureau/admin/nowebmail.php -text
+bureau/admin/oldimg/alternc.jpg -text
+bureau/admin/oldimg/alternc.png -text
+bureau/admin/oldimg/alternc3.png -text
+bureau/admin/oldimg/powered2.jpg -text
+bureau/admin/oldimg/powered_by_alternc.png -text
 bureau/admin/phpinfo.php -text
 bureau/admin/piwik_addaccount.php -text
 bureau/admin/piwik_addsites.php -text
 bureau/admin/piwik_sitelist.php -text
 bureau/admin/piwik_user_dodel.php -text
 bureau/admin/piwik_userlist.php -text
-bureau/admin/powered2.jpg -text
-bureau/admin/powered_by_alternc.png -text
-bureau/admin/powered_by_alternc2.png -text
 bureau/admin/quota_show.php -text
 bureau/admin/quotas_oneuser.php -text
 bureau/admin/quotas_users.php -text
