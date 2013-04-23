@@ -22,7 +22,7 @@ Description: Hosting software managment suite for Debian
  web statistics, mailing-lists, jabber accounts, etc.
  .
  AlternC is mainly a PHP based administration interface and some conf files
- for the softwares used by it. 
+ for the software used by it. 
  .
  More information at http://www.alternc.com/
 Homepage: http://www.alternc.com/
@@ -51,7 +51,7 @@ Description: Hosting software managment suite for Debian
  web statistics, mailing-lists, jabber accounts, etc.
  .
  AlternC is mainly a PHP based administration interface and some conf files
- for the softwares used by it. 
+ for the software used by it. 
  .
  This package is designed for frontend nodes in a load balancing setup, where
  the AlternC directory is not touched and managed over NFS.
@@ -147,7 +147,7 @@ Description: Awstats statistics module for AlternC
  web statistics, mailing-lists, jabber accounts, etc.
  .
  This package is an optional module that adds awstats statistics
- managment to the virtual desktop.
+ to the virtual desktop.
  .
  More information on http://www.alternc.com/.
 
