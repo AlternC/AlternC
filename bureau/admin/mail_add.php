@@ -34,6 +34,7 @@ $fields = array (
 	"mail_arg"  => array ("request", "string", ""),
 );
 getFields($fields);
+?>
 
 
 <h3><?php printf(_("Add %s mail to the domain %s"),$mail_arg,$domain_id); ?> : </h3>
