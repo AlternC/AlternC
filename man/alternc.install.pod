@@ -1,0 +1,41 @@
+=head1 NAME
+
+alternc.install - Deploys AlternC and associated services configuration files 
+
+=head1 SYNOPSIS
+
+alternc.install [B<--force>] |B<--slave>]
+
+=head1 DESCRIPTION
+
+AlternC is a hosting control panel that automatically configure your services based on optimal mass-hosting parameters. alternc.install is a script that do this automatic configuration.
+
+alternc.install use variables from /etc/alternc/local.sh and replace them in files found in /etc/alternc/templates/ then push those interpreted files into /etc. It also backup every file into /var/lib/alternc/backups/ before replacing them.
+
+This script now assumes it has MySQL connectivity through /etc/alternc/my.cnf
+
+It Also launches scripts in /usr/lib/alternc/install.d/  with an argument telling where you are in alternc.install argument will be : startup, templates, apache2, before-reload, end
+
+=head1 OPTIONS
+
+=over 2
+
+=item B<--force>
+
+If any file in /etc has been manually changed (instead of changing its template in /etc/alternc), alternc.install will refuse to overwrite them. use B<--force> to overwrite them anyway.
+
+=item B<--slave>
+
+When you launch alternc.install, any AlternC slave instance defined in /etc/alternc/local.sh has its own alternc.install launch with this parameter. You should not use it yourself unless you know what you are doing
+
+=back
+
+=head1 AUTHOR
+
+Benjamin Sonntag for AlternC Team <team@alternc.org>
+
+=head1 SEE ALSO
+
+Go to http://www.alternc.org/ or join #alternc IRC channel on Freenode for more information on AlternC.
+
+=cut

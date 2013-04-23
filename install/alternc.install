@@ -22,13 +22,6 @@
 # Purpose of file: Main install script, launch it anytime ;) 
 # ----------------------------------------------------------------------
 
-# This script now assumes it has MySQL connectivity through
-# /etc/alternc/my.cnf
-
-# Also launches scripts in /usr/lib/alternc/install.d/ 
-# with an argument telling where you are in alternc.install
-# argument will be : startup, templates, apache2, before-reload, end
-
 # Somes check before start operations
 if [ `id -u` -ne 0 ]; then
     echo "must be launched as root"
@@ -87,7 +80,7 @@ if [ -e /etc/dovecot/dovecot.conf ]; then
     CONFIG_FILES="$CONFIG_FILES etc/dovecot/dovecot.conf etc/dovecot/dovecot-sql.conf etc/dovecot/dovecot-dict-quota.conf"
 fi
 
-INSTALLED_CONFIG_TAR="/var/backups/alternc/etc-installed.tar.gz"
+INSTALLED_CONFIG_TAR="/var/lib/alternc/backups/etc-installed.tar.gz"
 
 #######################################################################
 # Look for modified configuration files
@@ -234,14 +227,14 @@ run-parts --arg=templates /usr/lib/alternc/install.d
 
 ######################################################################
 # Backup the Main database
-DB_BACKUP="/var/backups/alternc/${MYSQL_DATABASE}-db-`date +%Y%m%d-%H:%M:%S`.gz"
+DB_BACKUP="/var/lib/alternc/backups/${MYSQL_DATABASE}-db-`date +%Y%m%d-%H:%M:%S`.gz"
 db_dump="mysqldump --defaults-file=/etc/alternc/my.cnf --add-drop-table --allow-keywords --quote-names --force --quick --add-locks --lock-tables --extended-insert ${MYSQL_DATABASE}"
 $db_dump | /bin/gzip -c > $DB_BACKUP || echo "backup of the main database failed"
 
 #######################################################################
 # Backup configuration files
 #
-BACKUP_FILE="/var/backups/alternc/etc-original-`date +%Y%m%d-%H%M`.tar.gz"
+BACKUP_FILE="/var/lib/alternc/backups/etc-original-`date +%Y%m%d-%H%M`.tar.gz"
 
 # Only backup what we are really going to replace
 BACKUPS=""

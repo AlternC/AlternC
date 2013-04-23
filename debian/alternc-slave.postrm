@@ -16,13 +16,13 @@ set -e
 case "$1" in
   purge)
     rm -f /etc/alternc/local.sh /etc/alternc/my.cnf /etc/alternc/bureau.conf
-    rm -f /var/backups/alternc/etc-installed.tar.gz
+    rm -f /var/lib/alternc/backups/etc-installed.tar.gz
 
     db_input high alternc/postrm_remove_datafiles || true
     db_go
     db_get alternc/postrm_remove_datafiles || true
     if [ "$RET" = "true" ]; then
-      rm -rf /var/backups/alternc
+      rm -rf /var/lib/alternc/backups/
     fi
 
     rm -f /etc/apache/conf.d/override_php.conf /etc/apache/conf.d/alternc-ssl.conf /etc/apache/conf.d/alternc.conf

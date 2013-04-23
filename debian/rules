@@ -12,162 +12,18 @@ REV=$(shell env LANG=C svn info --non-interactive | awk '/^Revision:/ { print $$
 VERSION="${MAJOR}~svn${REV}"
 export VERSION
 
-ifneq (,$(findstring debug,$(DEB_BUILD_OPTIONS)))
-	CFLAGS += -g
-endif
-ifeq (,$(findstring nostrip,$(DEB_BUILD_OPTIONS)))
-	INSTALL_PROGRAM += -s
-endif
+override_dh_install:
+#dh install
+	$(MAKE) install-alternc DESTDIR=$(CURDIR)/debian/alternc
+	$(MAKE) install-squirrelmail DESTDIR=$(CURDIR)/debian/alternc-squirrelmail
+	$(MAKE) install-roundcube DESTDIR=$(CURDIR)/debian/alternc-roundcube
+	$(MAKE) install-upnp DESTDIR=$(CURDIR)/debian/alternc-upnp
+	$(MAKE) install-awstats DESTDIR=$(CURDIR)/debian/alternc-awstats
+	$(MAKE) install-slave DESTDIR=$(CURDIR)/debian/alternc-slave
 
-# This has to be exported to make some magic below work.
-export DH_OPTIONS
+%:
+	dh $@
 
-build: build-stamp
-build-stamp:
-	dh_testdir
-	/usr/bin/msgfmt po/fr/LC_MESSAGES/alternc-admintools.po -o po/fr/LC_MESSAGES/alternc-admintools.mo
-	find bureau/locales -mindepth 2 -maxdepth 2 -type d -name "LC_MESSAGES" -exec msgfmt "{}/alternc" -o "{}/alternc.mo"  \; 
-	touch build-stamp
-
-clean:
-	dh_testdir
-	dh_testroot
-	rm -f build-stamp
-	debconf-updatepo
-	dh_clean
-	find bureau/locales -mindepth 3	-maxdepth 3 -type d -name "alternc.mo" -delete
-
-install: DH_OPTIONS=
-install: build
-	dh_testdir
-	dh_testroot
-# FIXME: if alternc still works with this commented out : remove it :-D    
-#	dh_clean -k
-	dh_installdirs
-
-	# Install
-	cp -r etc/* debian/alternc/etc
-	cp -r install/* debian/alternc/usr/share/alternc/install
-	test -d debian/alternc/usr/share/alternc/panel || mkdir debian/alternc/usr/share/alternc/panel
-	cp -r bureau/* debian/alternc/usr/share/alternc/panel
-	(cd src && $(MAKE) install DESTDIR=$(CURDIR)/debian/alternc)
-
-	# we don't use the full VERSION intepreted but only what's in the changelog
-	sed -i -e "s/@@REPLACED_DURING_BUILD@@/${MAJOR}/" debian/alternc/usr/share/alternc/panel/class/local.php
-	echo ${VERSION} > debian/alternc/usr/share/alternc/panel/class/.svn-infos
-
-	# Fix permisions
-	chmod 755 debian/alternc/etc/alternc
-	# Group and user 1999 reference alterncpanel
-	chown -R 1999:1999 debian/alternc/usr/share/alternc/panel
-	chmod -R 644 debian/alternc/usr/share/alternc/panel
-	chmod -R a+X debian/alternc/usr/share/alternc/panel
-	chown -R www-data:www-data debian/alternc/var/log/alternc 
-	chmod a+x debian/alternc/usr/share/alternc/install/alternc.install debian/alternc/usr/share/alternc/install/dopo.sh debian/alternc/usr/share/alternc/install/mysql.sh debian/alternc/usr/share/alternc/install/newone.php debian/alternc/usr/share/alternc/install/reset_root.php debian/alternc/usr/share/alternc/install/upgrade_check.sh debian/alternc/usr/share/alternc/install/upgrades/*.php debian/alternc/usr/share/alternc/install/upgrades/*.sh
-
-	mkdir -p debian/alternc/var/run/alternc/
-	chown 1999:1999 debian/alternc/var/run/alternc/
-
-	# Ex old alternc-admintools
-	install tools/top_http_users debian/alternc/usr/bin
-	install tools/top_mysql_users debian/alternc/usr/bin
-	install tools/top_ftp_users debian/alternc/usr/bin
-	install tools/get_domains_by_account debian/alternc/usr/bin
-	install tools/get_account_by_domain debian/alternc/usr/bin
-	install tools/alternc_get_path debian/alternc/usr/bin
-	install src/alternc_reload debian/alternc/usr/bin
-	install -m 644 po/fr/LC_MESSAGES/alternc-admintools.mo debian/alternc/usr/share/locale/fr/LC_MESSAGES/
-
-	# Remove helpers files from l18n dir
-	find debian/alternc/usr/share/alternc/panel/locales/ \
-		-maxdepth 1 -type f -exec rm -f {} \;
-	# Remove CVS directories
-	/usr/bin/find debian/alternc -depth -type d -name CVS -exec rm {} -rf \;
-	/usr/bin/find debian/alternc -depth -type d -name .svn -exec rm {} -rf \;
-#	cp debian/alternc.lintian debian/alternc/usr/share/lintian/overrides/alternc
-#	cp debian/alternc-slave.lintian debian/alternc/usr/share/lintian/overrides/alternc-slave
-
-	# alternc-squirrelmail:
-	(cd squirrelmail && $(MAKE) install DESTDIR=$(CURDIR)/debian/alternc-squirrelmail)
-
-	# alternc-roundcube:
-	(cd roundcube && $(MAKE) install DESTDIR=$(CURDIR)/debian/alternc-roundcube)
-
-	# alternc-upnp
-	(cd upnp && $(MAKE) install DESTDIR=$(CURDIR)/debian/alternc-upnp)
-
-	# alternc-awstats:
-	(cd awstats && $(MAKE) install DESTDIR=$(CURDIR)/debian/alternc-awstats)
-	cd ..
-
-	# Copy the desk files
-	cp -r awstats/bureau/* debian/alternc-awstats/usr/share/alternc/panel
-	find debian/alternc-awstats/usr/share/alternc/panel/ -depth -iname ".svn" -exec rm -rf "{}" \; 
-	rm -f debian/alternc-awstats/usr/share/alternc/panel/locales/Makefile
-
-	# Fix permisions
-	chown -R root:www-data debian/alternc-awstats/usr/share/alternc/panel
-	chmod -R 644 debian/alternc-awstats/usr/share/alternc/panel
-	chmod -R a+X debian/alternc-awstats/usr/share/alternc/panel
-	touch debian/alternc-awstats/var/cache/awstats/.placeholder
-	chown www-data:www-data debian/alternc-awstats/var/cache/awstats
-	chmod 755 debian/alternc-awstats/var/cache/awstats
-	mkdir -p debian/alternc-awstats/var/cache/awstats
-
-# This single target is used to build all the packages, all at once, or
-# one at a time. So keep in mind: any options passed to commands here will
-# affect _all_ packages. Anything you want to only affect one package
-# should be put in another target, such as the install target.
-
-binary-common: build install
-	dh_testdir
-	dh_testroot
-	dh_installchangelogs
-	dh_installdocs
-#	dh_installexamples
-#	dh_installmenu
-	dh_installdebconf
-	dh_installlogrotate
-#	dh_installemacsen
-#	dh_installpam
-#	dh_installmime
-#	dh_installinit
-	dh_installman man/*
-	dh_installcron
-#	dh_installinfo
-	dh_install -i --sourcedir=$(CURDIR)/debian/alternc
-	dh_strip
-	dh_link
-	dh_compress
-#we handle our own perms
-#	dh_fixperms
-#	dh_makeshlibs
-	dh_installdeb
-	dh_perl
-	dh_shlibdeps
-	dh_gencontrol -- -cdebian/control
-	dh_md5sums
-	dh_builddeb
-
-# Build architecture independant packages using the common target.
-binary-indep: build install binary-common
-# (Uncomment this next line if you have such packages.)
-#	 $(MAKE) -f debian/rules DH_OPTIONS=-i binary-common
-
-# Build architecture dependant packages using the common target.
-binary-arch: build install binary-common
-#	$(MAKE) -f debian/rules DH_OPTIONS=-a binary-common
-
-# Any other binary targets build just one binary package at a time.
-# binary-%: build install
-#	make -f debian/rules binary-common DH_OPTIONS=-p$*
-
-# binary: binary-indep binary-arch
-# .PHONY: build clean binary-indep binary-arch binary install
-
-binary: binary-common
-
-.PHONY: build clean binary install
 
 build-snapshot:
 	@echo "building a package based on the current snapshot (${VERSION})"

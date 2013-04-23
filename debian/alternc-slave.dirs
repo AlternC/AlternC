@@ -9,7 +9,7 @@ usr/bin
 usr/lib/alternc
 usr/sbin
 usr/share/alternc/install
+usr/share/man/man8/
 usr/share/locale/fr/LC_MESSAGES
-var/backups/alternc
+var/lib/alternc/backups
 var/log/alternc
-var/run/alternc

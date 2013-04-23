@@ -52,21 +52,21 @@ _Description: Name of the secondary domain name server:
 
 Template: alternc/alternc_html
 Type: string
-_Description: The path where alternc's users html files will be put
+_Description: Path where AlternC's users html files will be located:
  Please enter the directory name where you want html user files to be put.
  The default value should be good in most cases.
  . 
- This directory wil contain every alternc users personnal directories.
+ This directory will contain every AlternC users personal directories.
 
 Template: alternc/alternc_mail
 Type: string
-_Description: The path where alternc's users mails will be put
+_Description: Path where AlternC's users mails will be located:
  Please enter the directory name where you want to put your users maildirs.
  The default value should be good in most cases.
 
 Template: alternc/alternc_logs
 Type: string
-_Description: The path where alternc's logs files will be placed
+_Description: Path where alternc's logs files will be located:
  Please enter the directory name where you want to put your log files.
  The default value should be good in most cases.
 
@@ -221,23 +221,23 @@ _Description: Should AlternC remove mailboxes?
 
 Template: alternc/slaves
 Type: string
-_Description: Slave servers
+_Description: Slave servers:
  This is a space-separated list of servers that are "slaves" to the
- master server (this server). When writing apache configuration files,
- the master server will attempt to reload apache on those remote
+ master server (this server). When writing Apache configuration files,
+ the master server will attempt to reload Apache on those remote
  servers. The alternc-slave package correctly configures those machines
  to allow login and reload.
 
 Template: alternc/use_local_mysql
 Type: boolean
-_Description: Shall we use locally found MySQL server?
+_Description: Use locally found MySQL server?
  A local MySQL connection was established on the server.
- Tell us if you want to use it. If not remote MySQL server
+ Please tell if you want to use it. If not remote MySQL server
  connection parameters will be needed.
 
 Template: alternc/use_remote_mysql
 Type: boolean
-_Description: Shall we use a remote MySQL server?
+_Description: Use a remote MySQL server?
  No local Mysql server was found.
  Please confirm you want to use a remote Mysql Server.
  If not, AlternC cannot be installed.
@@ -246,10 +246,12 @@ Template: alternc/remote_mysql_error
 Type: boolean
 _Description: MySQL connection error. Try again?
  Remote connection to the MySQL server failed.
- Please confirm that we shall try again.
+ Please confirm to try again.
 
 Template: alternc/use_private_ip
 Type: boolean
 _Description: Private IP detected, use it anyway?
- The IP address you have appears to be private, please confirm you want to use it anyway.
- The server might not be reachable from outside your network.
+ The IP address of the machine appears to be private, please confirm that
+ this is an expected situation, since the server might not be reachable
+ from outside your network.
+

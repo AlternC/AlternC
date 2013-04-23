@@ -21,12 +21,12 @@
 # ----------------------------------------------------------------------
 
 install:
-	# Desktop files
+# Desktop files
 	install -m 644 m_upnp.php $(DESTDIR)/usr/share/alternc/panel/class/
 	install -m 644 upnp_list.php upnp_change.php $(DESTDIR)/usr/share/alternc/panel/admin/
 	install -m 644 adminmenu_upnp.php $(DESTDIR)/usr/share/alternc/panel/admin/
-	# Cron
+# Cron
 	install -m 755 update_upnp.sh $(DESTDIR)/usr/lib/alternc/
-	# Install script
+# Install script
 	install -m 644 upnp.sql $(DESTDIR)/usr/share/alternc/install/
 	install -m 755 upnp-install $(DESTDIR)/usr/lib/alternc/install.d

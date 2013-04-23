@@ -1,8 +1,0 @@
-etc/*
-usr/bin/*
-usr/lib/alternc/*
-#usr/sbin/*
-usr/share/alternc/install/*
-usr/share/locale/fr/LC_MESSAGES/alternc-admintools.mo
-usr/share/man/fr/man8/*
-usr/share/man/man8/*

@@ -17,11 +17,11 @@ usr/lib/alternc/install.d
 usr/lib/alternc/reload.d
 usr/lib/alternc/safe_mode_exec_dir
 usr/sbin
+usr/share/man/man8/
 usr/share/alternc/install
 usr/share/locale/fr/LC_MESSAGES
-var/backups/alternc
-/var/lib/alternc/apache-vhost
-/var/lib/alternc/bind
-/var/lib/alternc/bind/zones
+var/lib/alternc/backups
+var/lib/alternc/apache-vhost
+var/lib/alternc/bind
+var/lib/alternc/bind/zones
 var/log/alternc
-var/run/alternc

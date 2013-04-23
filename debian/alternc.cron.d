@@ -1,3 +1,7 @@
+
+# Create /var/run/ folder : it may be a ramdrive
+@reboot	 root	   mkdir -p /var/run/alternc && chown alterncpanel:alterncpanel /var/run/alternc 
+
 # Every 2 days compress log files
 0 4 * * *	alterncpanel	/usr/lib/alternc/compress_logs.sh
 
