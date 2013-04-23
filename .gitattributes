@@ -281,7 +281,6 @@ bureau/admin/js/jquery_ui/css/smoothness/jquery-ui-1.8.23.custom.css -text
 bureau/admin/js/jquery_ui/index.html -text
 bureau/admin/js/jquery_ui/js/jquery-1.7.2.min.js -text
 bureau/admin/js/jquery_ui/js/jquery-ui-1.8.23.custom.min.js -text
-bureau/admin/js/passwordStrengthMeter.js -text
 bureau/admin/js/prototype.js -text
 bureau/admin/login.php -text
 bureau/admin/logo2.png -text
@@ -336,13 +335,11 @@ bureau/admin/sql_users_list.php -text
 bureau/admin/sql_users_password.php -text
 bureau/admin/sql_users_rights.php -text
 bureau/admin/stats_members.php -text
-bureau/admin/styles/passwordStrengthMeter.css -text
 bureau/admin/styles/style-bluedesktop10.css -text
 bureau/admin/styles/style-empty.css -text
 bureau/admin/styles/style-hw.css -text
 bureau/admin/styles/style.css -text
 bureau/admin/tempovars.php -text
-bureau/admin/trash_dateselect.php -text
 bureau/admin/vm.php -text
 bureau/admin/webmail-redirect.php -text
 bureau/class/config.php -text
@@ -371,7 +368,6 @@ bureau/class/m_menu.php -text
 bureau/class/m_mysql.php -text
 bureau/class/m_piwik.php -text
 bureau/class/m_quota.php -text
-bureau/class/m_trash.php -text
 bureau/class/mime.php -text
 bureau/class/reset_stats_conf.php -text
 bureau/class/variables.php -text

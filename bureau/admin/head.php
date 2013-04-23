@@ -31,9 +31,8 @@ if (!$charset) $charset="UTF-8";
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $charset; ?>" />
 <title><?php __("AlternC Control Panel"); ?></title>
 
-<link rel="stylesheet" href="js/jquery_ui/css/smoothness/jquery-ui-1.8.23.custom.css" type="text/css" />
 <link rel="stylesheet" href="styles/style.css" type="text/css" />
-<link rel="stylesheet" href="styles/passwordStrengthMeter.css" type="text/css" />
+<link rel="stylesheet" href="js/jquery_ui/css/smoothness/jquery-ui-1.8.23.custom.css" type="text/css" />
 
 <link rel="stylesheet" href="styles/style-empty.css" type="text/css" title="Default - Desktop TNG"/>
 <link rel="alternate stylesheet" href="styles/style-bluedesktop10.css" type="text/css" title="Blue Desktop 1.0" />
@@ -45,11 +44,7 @@ if (!$charset) $charset="UTF-8";
 <script src="js/alternc.js" type="text/javascript" ></script>
 <script src="js/jquery.min.js" type="text/javascript"></script>
 <script src="js/jquery_ui/js/jquery-ui-1.8.23.custom.min.js" type="text/javascript"></script>
-<?php
-$lang_date_picker="js/jquery_ui/js/jquery.ui.datepicker-".substr($lang,0,2).".js";
-if (file_exists($lang_date_picker)) 
-  echo "<script src=\"$lang_date_picker\" type=\"text/javascript\"></script>";
-?>
+
 </head>
 <body>
 <?
