@@ -34,6 +34,16 @@
  * @copyright AlternC-Team 2002-2013 http://alternc.org/
  */
 
+// Put this var to 1 if you want to enable debug prints
+$debug=1;
+
+// Debug function that print infos
+function d($mess){
+  global $debug;
+  if ($debug == 1)
+    echo "$mess\n";
+}
+
 require_once("/usr/share/alternc/panel/class/config_nochk.php");
 
 $LOCK_FILE='/var/run/alternc/do_actions_cron.lock';
@@ -42,23 +52,50 @@ $MY_PID=getmypid();
 
 // Check if script isn't already running
 if (file_exists($LOCK_FILE) !== false){
+    d("Lock file already exists. ");
     // Check if file is in process list
     $PID=file_get_contents($LOCK_FILE);
-    if ($PID == exec("pidof $SCRIPT | grep -v $MY_PID")){
+    d("My PID is $MY_PID, PID in the lock file is $PID");
+    if ($PID == exec("pidof $SCRIPT | tr ' ' '\n' | grep -v $MY_PID")){
       // Previous cron is not finished yet, just exit
-      echo "Previous cron is not finished yet, just exit\n";
+      d("Previous cron is already running, we just exit and let it finish :-)");
       exit(0);
     }else{
       // Previous cron failed!
-      echo "Previous cron failed!\n";
+      d("No process with PID $PID found! Previous cron failed...\nRemoving lock file and trying to process the failed action...");
       // Delete the lock and continue to the next action
       unlink($LOCK_FILE);
-    }
-}
 
-// We lock the script
-if (file_put_contents($LOCK_FILE,$MY_PID) === false){
-  die("Cannot open/write $LOCK_FILE");
+      // Lock with the current script's PID
+      d("Lock the script...");
+      if (file_put_contents($LOCK_FILE,$MY_PID) === false){
+        die("Cannot open/write $LOCK_FILE");
+      }
+
+      // Get the action that was processing when previous script failed
+      while($cc=$action->get_job()){
+        $c=$cc[0];
+        // We can resume these types of action, so we reset the job to process it later
+        d("Previous job was the n°".$c["id"]." : '".$c["type"]."'");
+        if($c["type"] == "CREATE_FILE" || $c["type"] == "CREATE_DIR" || $c["type"] == "DELETE"){
+          d("Reset of the job! So it will be resumed...");
+          $action->reset_job($c["id"]);
+        }else{
+          // We can't resume the others types, notify the fail and finish this action
+          d("Can't resume the job, finishing it with a fail status.");
+          if(!$action->finish($c["id"],"Fail: Previous script crashed while processing this action, cannot resume it.")){
+            d("FINISH FAILED!");
+            break; // Else we go into an infinite loop... AAAAHHHHHH
+          }
+        }
+      }
+    }
+}else{
+  // Lock with the current script's PID
+  d("Lock the script...");
+  if (file_put_contents($LOCK_FILE,$MY_PID) === false){
+    die("Cannot open/write $LOCK_FILE");
+  }
 }
 
 //We get the next action to do
@@ -66,21 +103,24 @@ while ($rr=$action->get_action()){
   $r=$rr[0];
   $return="OK";
   // We lock the action
-  echo "-----------\nBeginning action n°".$r["id"]."\n";
+  d("-----------\nBeginning action n°".$r["id"]);
   $action->begin($r["id"]);
   // We process it
   $params=unserialize($r["parameters"]);
   // Remove all previous error message...
   @trigger_error("");
   // We exec with the specified user
-  echo "Executing action '".$r["type"]."' with user '".$r["user"]."'\n";
+  d("Executing action '".$r["type"]."' with user '".$r["user"]."'");
   // For now, this script only work for user 'root'
   if($r["user"] != "root"){
     if(exec("su ".$r["user"])){ // TODO
-      echo "Login successfull, now processing the action...\n";
+      d("Login successfull, now processing the action...");
     }else{
-      echo "Error: can't login as ".$r["user"]."\n";
-      $action->finish($r["id"],"Can't login as user ".$r["user"]);
+      d("Error: cannot login as ".$r["user"]);
+      if(!$action->finish($r["id"],"Fail: Cannot login as user ".$r["user"])){
+        d("FINISH FAILED!");
+        break; // Else we go into an infinite loop... AAAAHHHHHH
+      }
       continue;
     }
   }
@@ -89,9 +129,11 @@ while ($rr=$action->get_action()){
       @file_put_contents($params["file"],$params["content"]);
       break;
     case "CREATE_DIR" :
+      // Create the directory and make parent directories as needed
       @mkdir($params["dir"],0777,true);
       break;
     case "DELETE" :
+      // Delete file/directory and its contents recursively
       @exec("rm -rf ".$params["dir"]." 2>&1", $output);
       break;
     case "MOVE" :
@@ -104,6 +146,7 @@ while ($rr=$action->get_action()){
       // TODO 
       break;
     default :
+      $output=array("Fail: Sorry dude, i don't know this type of action");
       break;
   }
   // Get the last error if exists.
@@ -113,12 +156,16 @@ while ($rr=$action->get_action()){
     if($error=error_get_last())
       if($error["message"]!="")
         $return=$error["message"];
-  echo "Finishing... return value is : $return\n\n";
   // We finished the action, notify the DB.
-  $action->finish($r["id"],$return);
+  d("Finishing... return value is : $return\n");
+  if(!$action->finish($r["id"],addslashes($return))){
+    d("FINISH FAILED!");
+    break; // Else we go into an infinite loop... AAAAHHHHHH
+  }
 }
 
 // Unlock the script
+d("Unlock the script...");
 unlink($LOCK_FILE);
 
 // Exit this script
