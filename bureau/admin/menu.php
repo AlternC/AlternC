@@ -33,7 +33,7 @@ $logo = variable_get('logo_menu', 0 ,'You can specify a logo for the menu, examp
 if ( empty($logo) ||  ! $logo ) { $logo = 'images/logo3.png'; }
 
 ?>
-<img src="<?php echo $logo; ?>" class="menutoplogo" border="0" alt="AlternC" />
+<img src="<?php echo $logo; ?>" class="menutoplogo" border="0" alt="AlternC" width='190px' height='46px' />
 <p class="currentuser"><?php echo sprintf(_("Welcome %s"),$mem->user["login"]); ?></p>
 
 <?php
@@ -46,7 +46,7 @@ foreach ($obj_menu as $k => $m ) {
   if (!empty($m['target'])) echo " target='". $m['target']."' ";
   echo ">\n";
   echo "    <span class='menu-title'>\n";
-  echo "      <img src='".$m['ico']."' alt=\"".$m['title']."\" width='16' height='16' />&nbsp;";
+  echo "      <img src='".$m['ico']."' alt=\"".$m['title']."\" width='16px' height='16px' />&nbsp;";
   echo "        <span class='";
   if (!empty($m['class'])) echo $m['class']." ";
   echo "'>"; // fin span ouvrant
@@ -66,7 +66,7 @@ foreach ($obj_menu as $k => $m ) {
       $i="/images/menu_plus.png";
     }
   }
-  echo "      <img src='$i' alt='' style='float:right;' id='menu-$k-img'/>\n";
+  echo "      <img src='$i' alt='' style='float:right;' width='16px' height='16px' id='menu-$k-img'/>\n";
   echo "      </span>";
   echo "    </span>\n";
   echo "  </a>\n";
@@ -103,7 +103,7 @@ foreach ($obj_menu as $k => $m ) {
 }
 
 ?>
-<p class="center"><a href="about.php"><img src="logo2.png" class="menulogo" border="0" alt="AlternC" title="<?php __("About"); ?>"/></a>
+<p class="center"><a href="about.php"><img src="logo2.png" class="menulogo" border="0" alt="AlternC" title="<?php __("About"); ?>" width='150px' height='102px' /></a>
 <br />
 <?php 
 echo "$L_VERSION";
