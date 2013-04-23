@@ -73,7 +73,7 @@ if (isset($doedit) && $doedit) {
   }
 }
 
-if ($edit) {
+if (!empty($edit)) {
   if (!$c[$edit]) {
     echo "<p class=\"error\">"._("Policy not found")."</p>";
   } else {
@@ -83,7 +83,7 @@ if ($edit) {
 
 																	     <p><b><?php echo $c[$edit]["description"]; ?></b></p>
 
-<form method="post" name="adm_passpolicy.php">
+<form method="post" action="adm_passpolicy.php">
 <input type="hidden" name="doedit" value="<?php echo $edit; ?>"/> 
 <table class="tlist">
 <tr>
