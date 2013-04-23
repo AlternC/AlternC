@@ -150,7 +150,6 @@ bureau/admin/ftp_edit.php -text
 bureau/admin/ftp_list.php -text
 bureau/admin/ftp_switch_enable.php -text
 bureau/admin/head.php -text
-bureau/admin/hippo_bleue.gif -text
 bureau/admin/hta_add.php -text
 bureau/admin/hta_adduser.php -text
 bureau/admin/hta_del.php -text
@@ -209,6 +208,7 @@ bureau/admin/images/folder.png -text
 bureau/admin/images/folderhta.png -text
 bureau/admin/images/ftp.png -text
 bureau/admin/images/help.png -text
+bureau/admin/images/hippo_bleue.gif -text
 bureau/admin/images/home.png -text
 bureau/admin/images/ip.png -text
 bureau/admin/images/lang.png -text

@@ -520,6 +520,17 @@ class m_quota {
     }
   }
 
+  // Cette fonction doit disparaitre quand on refera les pages d'affichage du quota
+  // trop sale
+  function quota_displaybar($usage) {
+    $usage_color = '#A0CFEC';
+    $usage_color = ((85 < $usage && $usage <= 100) ? '#82CAFF' : $usage_color); // yellow
+    echo '<div class="progress-bar">';
+    echo '<div style="width:'.$usage.'%; background: ' . $usage_color . '; text-align:center; font-weight: bold;" >'.$usage.'%</div>';
+    echo '</div>';
+  }
+
+
   /* ==== Hook functions ==== */
 
   /* ----------------------------------------------------------------- */

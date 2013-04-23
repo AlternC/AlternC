@@ -29,7 +29,7 @@ if (!isset($mode)) { # when included from adm_login, mode is not set
 
 <!-- Mails -->
 
-<table class="tedit">
+<table class="tedit" width="90%">
 <thead>
 <tr>
    <th><?php __("Domains"); ?></th>
@@ -60,7 +60,7 @@ if (!isset($mode)) { # when included from adm_login, mode is not set
         echo "<td"; if ($mode!=2) echo " style=\"text-align: right\""; echo ">";
         $ms = $quota->get_size_unit($e['size']);
         if ($totalmail) {
-          $pc=intval(100*($ms['size']/$totalmail));
+          $pc=intval(100*($e['size']/$totalmail));
         } else {
           $pc=0;
         }
@@ -69,7 +69,7 @@ if (!isset($mode)) { # when included from adm_login, mode is not set
         } elseif ($mode==1) {
           echo sprintf("%.1f", $pc)."&nbsp;%";
         } else {
-          echo "<img src=\"hippo_bleue.gif\" style=\"width: ".(2*$pc)."px; height: 16px\" alt=\"".$pc."%\" title=\"".$pc."\"/>";
+          $quota->quota_displaybar($pc);
         }
         echo "</td></tr>";
       }
@@ -92,7 +92,7 @@ if (!isset($mode)) { # when included from adm_login, mode is not set
     } elseif ($mode==1) {
       echo sprintf("%.1f", $tpc)."&nbsp;%";
     } else {
-      echo "<img src=\"hippo_bleue.gif\" style=\"width: ".(2*$tpc)."px; height: 16px\" alt=\"".$tpc."%\" title=\"".$tpc."\"/>";
+      $quota->quota_displaybar($tpc);
     }
     echo "</i></td></tr>";
   }
@@ -112,11 +112,11 @@ if (!isset($mode)) { # when included from adm_login, mode is not set
   echo "</p>";
 ?>
 
-<table class="tedit">
+<table class="tedit" width="50%">
 <thead>
 <tr>
-  <th><?php __("DB"); ?></th>
-  <th><?php __("Space"); ?></th>
+  <th width='50%'><?php __("DB"); ?></th>
+  <th width='50%'><?php __("Space"); ?></th>
 </tr>
 </thead>
 <tbody>
@@ -129,7 +129,7 @@ if (!isset($mode)) { # when included from adm_login, mode is not set
     echo ">";
     $ds = $quota->get_size_unit($d["size"]);
     if ($totaldb) {
-      $pc=intval(100*$ds['size']/$totaldb);
+      $pc=intval(100*$d['size']/$totaldb);
     } else {
       $pc=0;
     }
@@ -138,7 +138,7 @@ if (!isset($mode)) { # when included from adm_login, mode is not set
     } elseif (isset($mode) &&$mode==1) {
       echo sprintf("%.1f", $pc)."&nbsp;%";
     } else {
-      echo "<img src=\"hippo_bleue.gif\" style=\"width: ".(2*$pc)."px; height: 16px\" alt=\"".$pc."%\" title=\"".$pc."%\"/>";
+      $quota->quota_displaybar(2*$pc);
     }
     echo "</td></tr>";
   }
@@ -158,7 +158,7 @@ if (!isset($mode)) { # when included from adm_login, mode is not set
     echo "</p>";
 ?>
 
-<table class="tedit">
+<table class="tedit" width='60%'>
 <thead>
 <tr>
   <th><?php __("Lists"); ?></th>
@@ -184,7 +184,7 @@ if (!isset($mode)) { # when included from adm_login, mode is not set
     } elseif ($mode==1) {
       echo sprintf("%.1f", $pc)."&nbsp;%";
     } else {
-      echo "<img src=\"hippo_bleue.gif\" style=\"width: ".(2*$pc)."px; height: 16px\" alt=\"".$pc."%\" title=\"".$pc."%\"/>";
+      $quota->quota_displaybar($pc);
     }
     echo "</td></tr>";
   }
