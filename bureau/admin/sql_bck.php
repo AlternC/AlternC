@@ -67,13 +67,13 @@ if (is_array($r)) {
 <form action="sql_dobck.php" method="post" id="main" name="main">
 <table class="tedit">
 <tr>
-	<th><label for="bck_mode"><?php __("Do MySQL backup?"); ?></label></th>
+	<th><label><?php __("Do MySQL backup?"); ?></label></th>
 	<td>
         <input type="hidden" name="id" value="<?php echo $id; ?>" />
-        <input type="radio" class="inc" id="bck_mode0" name="bck_mode" value="0"<?php cbox($r["bck"]==0); ?>><label for="bck_mode0"><?php __("No backup"); ?></label><br />
-	<input type="radio" class="inc" id="bck_mode1" name="bck_mode" value="1"<?php cbox($r["bck"]==1); ?>><label for="bck_mode1"><?php __("Weekly backup"); ?></label><br />
-	<input type="radio" class="inc" id="bck_mode2" name="bck_mode" value="2"<?php cbox($r["bck"]==2); ?>><label for="bck_mode2"><?php __("Daily backup"); ?></label><br />
-	</select></td>
+        <input type="radio" class="inc" id="bck_mode0" name="bck_mode" value="0"<?php cbox($r["bck"]==0); ?>/><label for="bck_mode0"><?php __("No backup"); ?></label><br />
+	<input type="radio" class="inc" id="bck_mode1" name="bck_mode" value="1"<?php cbox($r["bck"]==1); ?>/><label for="bck_mode1"><?php __("Weekly backup"); ?></label><br />
+	<input type="radio" class="inc" id="bck_mode2" name="bck_mode" value="2"<?php cbox($r["bck"]==2); ?>/><label for="bck_mode2"><?php __("Daily backup"); ?></label><br />
+	</td>
 </tr>
 <tr>
 	<th><label for="bck_history"><?php __("How many backups should be kept?"); ?></label></th>
@@ -88,11 +88,11 @@ if (is_array($r)) {
 	</select></td>
 </tr>
 <tr>
-	<th><label for="bck_gzip"><?php __("Compress the backups? (gzip)"); ?></label></th>
+	<th><label><?php __("Compress the backups? (gzip)"); ?></label></th>
 	<td>
 
-        <input type="radio" class="inc" id="bck_gzip0" name="bck_gzip" value="0"<?php cbox($r["gzip"]==0); ?>><label for="bck_gzip0"><?php __("No"); ?></label><br />
-	<input type="radio" class="inc" id="bck_gzip1" name="bck_gzip" value="1"<?php cbox($r["gzip"]==1); ?>><label for="bck_gzip1"><?php __("Yes"); ?></label><br />
+        <input type="radio" class="inc" id="bck_gzip0" name="bck_gzip" value="0"<?php cbox($r["gzip"]==0); ?>/><label for="bck_gzip0"><?php __("No"); ?></label><br />
+	<input type="radio" class="inc" id="bck_gzip1" name="bck_gzip" value="1"<?php cbox($r["gzip"]==1); ?>/><label for="bck_gzip1"><?php __("Yes"); ?></label><br />
 
 </td>
 </tr>

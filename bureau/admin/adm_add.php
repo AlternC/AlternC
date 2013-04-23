@@ -73,10 +73,10 @@ if (isset($error) && $error) {
 	<td><input type="password" id="passconf" name="passconf" class="int" value="<?php ehe($passconf); ?>" size="20" maxlength="64" /></td>
 </tr>
 <tr>
-	<th><label for="canpass"><?php __("Can he change its password"); ?></label></th>
+	<th><label><?php __("Can he change its password"); ?></label></th>
 	<td>
-        <input type="radio" class="inc" id="canpass0" name="canpass" value="0"<?php cbox($canpass==0); ?>><label for="canpass0"><?php __("No"); ?></label><br />
-	<input type="radio" class="inc" id="canpass1" name="canpass" value="1"<?php cbox($canpass==1); ?>><label for="canpass1"><?php __("Yes"); ?></label><br />	
+        <input type="radio" class="inc" id="canpass0" name="canpass" value="0"<?php cbox($canpass==0); ?>/><label for="canpass0"><?php __("No"); ?></label><br />
+	<input type="radio" class="inc" id="canpass1" name="canpass" value="1"<?php cbox($canpass==1); ?>/><label for="canpass1"><?php __("Yes"); ?></label><br />	
 	</td>
 </tr>
 <tr>

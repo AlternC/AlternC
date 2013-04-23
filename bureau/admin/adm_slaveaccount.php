@@ -104,6 +104,7 @@ for($i=0;$i<count($c);$i++) {
 </tr>
 <tr class="trbtn"><td colspan="2">
 	<input type="submit" value="<?php __("Add this account to the allowed list"); ?>" class="inb" />
+  </td></tr>
 </table>
 <script type="text/javascript">
 document.forms['main'].newlogin.focus();

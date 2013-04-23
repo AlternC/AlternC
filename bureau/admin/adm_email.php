@@ -68,8 +68,8 @@ if (isset($error) && $error) {
 	  <td><span><input type="text" name="subject" size="45" maxlength="100" tabindex="2" value="" /></span></td>
 	</tr>
 	<tr>
-	  <th align="right" valign="top"> <span><b><?php __("Mail"); ?></b></span>
-	  <td><span> <textarea name="message" rows="15" cols="35" wrap="virtual" style="width:450px" tabindex="3"></textarea></span>
+	  <th align="right" valign="top"> <span><b><?php __("Mail"); ?></b></span></th>
+	  <td><span> <textarea name="message" rows="15" cols="35" wrap="virtual" style="width:450px" tabindex="3"></textarea></span></td>
 	</tr>
 	<tr>
 	  <td class="catBottom" align="center" colspan="2"><input type="submit" value="<?php __("Send");?>" name="submit" /></td>

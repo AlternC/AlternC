@@ -39,27 +39,27 @@ $list_ip = $authip->list_ip_whitelist();
   <p class="error"><?php __("Warning"); echo "<br/>"; __("The IP and subnet you have here are allowed for ALL users and ALL usages"); ?></p>
 </center>
 
-<p>
+<br/>
       <fieldset>
         <legend><?php __("Add an IP");?> - <a href="javascript:edit_ip('','<?php echo htmlentities(get_remote_ip())."','Home IP'";?>);" ><?php echo __("Add my current IP"); ?></a></legend>
         <span id="form_add_ip">
         <form method="post" action="adm_authip_whitelist.php" name="main" id="main">
           <p id="reset_edit_ip" style="display:none;"><a href="javascript:reset_edit_ip();"><?php __("Cancel edit")?></a></p>
-          <input type="hidden" name="id" value="" id="edit_id" >
+          <input type="hidden" name="id" value="" id="edit_id" />
           <p>
             <?php __("Enter here the IP address you want. <br/> <i>IPv4, IPv6 and subnet allowed</i>"); ?> <br/>
-            <input type="text" size=20 maxlength=39 name="ipsub" id="edit_ip" />
+            <input type="text" size='20' maxlength='39' name="ipsub" id="edit_ip" />
           </p>
           <p>
             <?php __("Add a comment");?><br/>
-            <input type="text" size=25 maxlength=200 name="infos" id="edit_infos" />
+            <input type="text" size='25' maxlength='200' name="infos" id="edit_infos" />
           </p>
           <input type="submit" class="inb" value="<?php __("Save")?>" />
         </form>
         </span>
       </fieldset>
  
-</p>
+<br/>
       <table class='tlist'>
       <tr><th><?php __("Type"); ?></th><th><?php __("IP"); ?></th><th><?php __("Informations"); ?></th><th colspan='2' /></tr>
       <?php 

@@ -95,7 +95,6 @@ $db->query("select d.compte, m.login, d.domaine, d.dns_result from domaines d, m
 
 while($db->next_record()) { 
 ++$pair;
-print_r($d);
 ?>
 <tr class="lst<?php echo $pair%2+1 ?>">
     <td><?php echo $db->f('compte');?></td>

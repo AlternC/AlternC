@@ -66,7 +66,7 @@ $c=$admin->dom_list(true,$forcecheck);
 </p>
 <form method="post" action="adm_dodom.php" name="main" id="main">
 <table class="tlist">
-    <tr><th></th><th><?php __("Action"); ?></th><th><?php __("Domain"); ?></th><th><?php __("Creator"); ?></th><th><?php __("Connect as"); ?><th><?php __("OK?"); ?></th><th><?php __("Status"); ?></th></tr>
+    <tr><th></th><th><?php __("Action"); ?></th><th><?php __("Domain"); ?></th><th><?php __("Creator"); ?></th><th><?php __("Connect as"); ?></th><th><?php __("OK?"); ?></th><th><?php __("Status"); ?></th></tr>
 <?php
 $col=1;
 for($i=0;$i<count($c);$i++) {

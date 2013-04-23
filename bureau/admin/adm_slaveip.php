@@ -102,6 +102,7 @@ for($i=0;$i<count($c);$i++) {
 </tr>
 <tr><td colspan="2">
 	<input type="submit" value="<?php __("Add this ip to the slave list"); ?>" class="inb" />
+</td></tr>
 </table>
 </form>
 <script type="text/javascript">

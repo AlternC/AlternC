@@ -57,8 +57,6 @@ if ($newlogin) {
 
 include_once("head.php");
 ?>
-</head>
-<body>
 <h3><?php __("Manage allowed accounts for secondary mx"); ?></h3>
 <hr id="topbar"/>
 <br />
@@ -104,6 +102,7 @@ for($i=0;$i<count($c);$i++) {
 </tr>
 <tr class="trbtn"><td colspan="2">
 	<input type="submit" value="<?php __("Add this account to the allowed list"); ?>" class="inb" />
+  </td></tr>
 </table>
 
 </form>
