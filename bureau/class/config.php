@@ -97,6 +97,8 @@ require_once(dirname(__FILE__)."/local.php");
 // The you can't choose where is the AlternC Panel 
 define('ALTERNC_MAIL',     "$L_ALTERNC_MAIL");
 define('ALTERNC_HTML',     "$L_ALTERNC_HTML");
+if(isset($L_ALTERNC_LOGS_ARCHIVE))
+  define('ALTERNC_LOGS_ARCHIVE',  "$L_ALTERNC_LOGS_ARCHIVE");
 define('ALTERNC_LOGS',     "$L_ALTERNC_LOGS");
 define('WEBSERVERS_LOGS',  "$L_WEBSERVERS_LOGS");
 define('ALTERNC_PANEL',    "/usr/share/alternc/panel");

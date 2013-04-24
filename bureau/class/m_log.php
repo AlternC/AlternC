@@ -81,7 +81,11 @@ class m_log {
     global $cuid,$mem,$err;
     $err->log("log","get_logs_directory");
     // Return an array to allow multiple directory in the future
-    $c=array("dir"=>WEBSERVERS_LOGS."/".$cuid."-".$mem->user["login"]);
+    if(defined('ALTERNC_LOGS_ARCHIVE')){
+      $c=array("dir"=>ALTERNC_LOGS_ARCHIVE."/".$cuid."-".$mem->user["login"]);
+    }else{
+      $c=array("dir"=>ALTERNC_LOGS."/".$cuid."-".$mem->user["login"]);
+    }
     return $c;
   }
   

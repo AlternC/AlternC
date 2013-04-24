@@ -126,8 +126,12 @@ INOTIFY_UPDATE_DOMAIN="/var/run/alternc/inotify_do_action.lock"
 ALTERNC_HTML=""
 ALTERNC_MAIL=""
 ALTERNC_LOGS=""
-WEBSERVERS_LOGS=""
 
+# Custom directory for archived logs. ALTERNC_LOGS is used by default to view logs files on the panel.
+# But you may merge your logs in other directory. In order to view them,
+# Uncomment and complete the following variable to use it instead of ALTERNC_LOGS.
+#ALTERNC_LOGS_ARCHIVE=""
+ 
 EOF
 
         chown root:alterncpanel $CONFIGFILE
@@ -158,7 +162,6 @@ EOF
     update_var alternc/alternc_html ALTERNC_HTML
     update_var alternc/alternc_mail ALTERNC_MAIL
     update_var alternc/alternc_logs ALTERNC_LOGS
-    update_var alternc/alternc_logs WEBSERVERS_LOGS
     sed -e "$SED_SCRIPT" < $CONFIGFILE > $CONFIGFILE.tmp
     mv -f $CONFIGFILE.tmp $CONFIGFILE
 
