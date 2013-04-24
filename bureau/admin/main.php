@@ -26,8 +26,6 @@ require_once("../class/config.php");
 
 include_once("head.php");
 
-include_once("menu.php");
-
 // Show last login information :
 echo "<p>";
 __("Last Login: ");
