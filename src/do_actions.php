@@ -49,6 +49,7 @@ require_once("/usr/share/alternc/panel/class/config_nochk.php");
 $LOCK_FILE='/var/run/alternc/do_actions_cron.lock';
 $SCRIPT='/usr/bin/php do_actions.php';
 $MY_PID=getmypid();
+$FIXPERM='/usr/lib/alternc/fixperms.sh';
 
 // Check if script isn't already running
 if (file_exists($LOCK_FILE) !== false){
@@ -62,7 +63,8 @@ if (file_exists($LOCK_FILE) !== false){
       exit(0);
     }else{
       // Previous cron failed!
-      d("No process with PID $PID found! Previous cron failed...\nRemoving lock file and trying to process the failed action...");
+      echo "No process with PID $PID found! Previous cron failed...\n";
+      d("Removing lock file and trying to process the failed action...");
       // Delete the lock and continue to the next action
       unlink($LOCK_FILE);
 
@@ -76,16 +78,17 @@ if (file_exists($LOCK_FILE) !== false){
       // (Normally, there will be at most 1 job pending... but who know?)
       while($cc=$action->get_job()){
         $c=$cc[0];
+        $params=unserialize($c["parameters"]);
         // We can resume these types of action, so we reset the job to process it later
         d("Previous job was the n°".$c["id"]." : '".$c["type"]."'");
-        if($c["type"] == "CREATE_FILE" || $c["type"] == "CREATE_DIR" || $c["type"] == "DELETE"){
+        if($c["type"] == "CREATE_FILE" && is_dir(dirname($params["file"])) || $c["type"] == "CREATE_DIR" || $c["type"] == "DELETE" || $c["type"] == "FIXDIR"){
           d("Reset of the job! So it will be resumed...");
           $action->reset_job($c["id"]);
         }else{
           // We can't resume the others types, notify the fail and finish this action
-          d("Can't resume the job, finishing it with a fail status.");
+          echo "Can't resume the job n°".$c["id"]." action '".$c["type"]."', finishing it with a fail status.\n";
           if(!$action->finish($c["id"],"Fail: Previous script crashed while processing this action, cannot resume it.")){
-            d("FINISH FAILED!");
+            echo "Cannot finish the action! Error while inserting the error value in the DB for action n°".$c["id"]." : action '".$c["type"]."'\n";
             break; // Else we go into an infinite loop... AAAAHHHHHH
           }
         }
@@ -103,6 +106,7 @@ if (file_exists($LOCK_FILE) !== false){
 while ($rr=$action->get_action()){
   $r=$rr[0];
   $return="OK";
+  unset($output);
   // We lock the action
   d("-----------\nBeginning action n°".$r["id"]);
   $action->begin($r["id"]);
@@ -114,20 +118,14 @@ while ($rr=$action->get_action()){
   d("Executing action '".$r["type"]."' with user '".$r["user"]."'");
   // For now, this script only work for user 'root'
   if($r["user"] != "root"){
-    if(exec("su ".$r["user"])){ // TODO
-      d("Login successfull, now processing the action...");
-    }else{
-      d("Error: cannot login as ".$r["user"]);
-      if(!$action->finish($r["id"],"Fail: Cannot login as user ".$r["user"])){
-        d("FINISH FAILED!");
-        break; // Else we go into an infinite loop... AAAAHHHHHH
-      }
-      continue;
-    }
+    // TODO
   }
   switch ($r["type"]){
     case "CREATE_FILE" :
-      @file_put_contents($params["file"],$params["content"]);
+      if(!file_exists($params["file"]))
+        @file_put_contents($params["file"],$params["content"]);
+      else
+        $output=array("Fail: file already exists");
       break;
     case "CREATE_DIR" :
       // Create the directory and make parent directories as needed
@@ -142,12 +140,17 @@ while ($rr=$action->get_action()){
       if(!is_dir($params["dst"]))
         @mkdir($params["dst"],0777,true);
       @exec("mv -f ".$params["src"]." ".$params["dst"]." 2>&1", $output);
+      // If MOVE failed, we have to notify the cron
+      if(isset($output[0]))
+        echo "Action n°".$r["id"]." 'MOVE' failed!\nuser: ".$r["user"]."\nsource: ".$params["src"]."\ndestination: ".$params["dst"]."\n";
       break;
-    case "PERMFIX" :
-      // TODO 
+    case "FIXDIR" :
+      @exec("$FIXPERM -f ".$params["dir"]." 2>&1", $trash, $code);
+      if($code!=0)
+        $output[0]=$code;
       break;
     default :
-      $output=array("Fail: Sorry dude, i don't know this type of action");
+      $output=array("Fail: Sorry dude, i do not know this type of action");
       break;
   }
   // Get the last error if exists.
@@ -160,7 +163,7 @@ while ($rr=$action->get_action()){
   // We finished the action, notify the DB.
   d("Finishing... return value is : $return\n");
   if(!$action->finish($r["id"],addslashes($return))){
-    d("FINISH FAILED!");
+    echo "Cannot finish the action! Error while inserting the error value in the DB for action n°".$c["id"]." : action '".$c["type"]."'\nReturn value: ".addslashes($return)."\n";
     break; // Else we go into an infinite loop... AAAAHHHHHH
   }
 }
