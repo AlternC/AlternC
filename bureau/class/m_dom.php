@@ -676,40 +676,44 @@ class m_dom {
   /* ----------------------------------------------------------------- */
   /**
    *  vérifie la presence d'un champs mx valide sur un serveur DNS
+   * $domaine est le domaine dont on veux véririfer les MX
+   * $ref_domaine est le domaine avec lequel on veux comparer les MX
+   *              si $ref_domaine == false, on prend les MX par default
    *
   */  
-  function checkmx($domaine,$mx) {
-    //initialise variables
-    $mxhosts = array();
-    
+  function checkmx($domaine,$ref_domain=false) {
+    global $L_DEFAULT_MX, $L_DEFAULT_SECONDARY_MX ;
+
+    if ( $ref_domain ) {
+      getmxrr($ref_domain, $ref_mx);
+    } else {
+      $ref_mx = array($L_DEFAULT_MX, $L_DEFAULT_SECONDARY_MX);
+    }
+
+    if (empty($ref_mx)) {
+      // No reference mx
+      return 3;
+    }
+
     //récupére les champs mx
     if (!getmxrr($domaine,$mxhosts)) {
-      //aucune hôte mx spécifié
+      //aucun hôte mx spécifié
+      return 1;
+    } 
+
+    if ( empty($mxhosts) ) {
+      // no mx on the target domaine
       return 1;
     }
-    else {
-      //vérifie qu'un des hôtes est bien sur alternc
-      $bolmx = 0;
-      //décompose les différents champ MX coté alternc
-      $arrlocalmx = split(",",$mx);
-      //parcours les différents champ MX retournés
-      foreach($mxhosts as $mxhost) {
-        foreach($arrlocalmx as $localmx) {
-          if ($mxhost==$localmx) {
-            $bolmx = 1;
-          }
-        }
-      }
-      //définition de l'erreur selon reponse du parcours de mxhosts
-      if ($bolmx == 0) {
-        //aucun des champs MX ne correspond au serveur
-        return 2;          
-      }
-      else {
-        //un champ mx correct a été trouvé
-        return 0;
-      }
+
+    $intersect = array_intersect($mxhosts, $ref_mx);
+
+    if ( empty($intersect) ) {
+      // no shared mx server
+      return 2;
     }
+    
+    return 0;
   } //checkmx
 
 
@@ -1103,7 +1107,7 @@ class m_dom {
       
     //si gestion mx uniquement, vérification du dns externe
     if ($dns=="0" && $gesmx=="1" && !$force) {
-      $vmx = $this->checkmx($dom,$mx);
+      $vmx = $this->checkmx($dom);
       if ($vmx == 1) {
 	$err->raise("dom",_("There is no MX record pointing to this server, and you are asking us to host the mail here. Please fix your MX DNS pointer"));
 	return false;
