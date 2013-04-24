@@ -28,36 +28,48 @@ class m_action {
   */
   function m_action() {
   }
+
   /*
   * function to set the cration of a file 
   */
+  function do_action(){
+    global $err, $L_INOTIFY_DO_ACTION;
+    $err->log("admin","do_action");
+    touch($L_INOTIFY_DO_ACTION);
+  }
+
   function create_file($file,$content="",$user="root") {
     return $this->set('create_file',$user, array('file'=>$file,'content'=>$content));
   }
+
   /*
   * function to set the cration of a file 
   */
   function create_dir($dir,$user="root") {
     return $this->set('create_dir',$user, array('dir'=>$dir));
   }
+
   /*
   * function to set the cration of a file 
   */
   function fix_dir($dir,$user="root") {
     return $this->set('fix_dir',$user, array('dir'=>$dir));
   }
+
   /*
   * function to delete file / folder
   */
   function del($dir,$user="root") {
     return $this->set('delete',$user, array('dir'=>$dir));
   }
+
   /*
   * function returning the first not locked line of the action table 
   */
   function move($src,$dst,$user="root") {
     return $this->set('move',$user, array('src'=>$src, 'dst'=>$dst));
   }
+
   /*
   * function archiving a directory ( upon account deletion )
   */
@@ -77,6 +89,7 @@ class m_action {
     $dest=$BACKUP_DIR.'/'.$today["year"].'-'.$today["mon"].'/'.$uidlogin.'/'.$dir;
     $this->move($archive,$dest);
   }
+
   /*
   *function inserting the action in the sql table 
   */
@@ -102,17 +115,36 @@ class m_action {
       break;
     default:
       return false;
-    }
-		if(!$db->query($query)){ 
+    }	
+    if(!$db->query($query)){ 
       $err->raise("action",_("Error setting actions"));
+      return false;
+    }
+    $this->do_action();
+    return true;
+  }
+  
+  function get_old($all= null){
+    global $err,$db;
+
+    $purge="select * from actions where TO_DAYS(curdate()) - TO_DAYS(creation) > 2;";
+		if(!$db->query($purge)){ 
+      $err->raise("action",_("Error selecting  old actions"));
 			return false;
     }
-    $purge="select * from actions where TO_DAYS(curdate()) - TO_DAYS(creation) > 2;";
+  }
+
+  function purge($all=null){
+    global $err,$db;
+    if(is_null($all)){
+      $purge="delete from actions where TO_DAYS(curdate()) - TO_DAYS(creation) > 2 and status = 0;";
+    }else{
+      $purge="delete from actions where TO_DAYS(curdate()) - TO_DAYS(creation) > 2;";
+   }
 		if(!$db->query($purge)){ 
       $err->raise("action",_("Error purging old actions"));
 			return false;
     }
-    return true;
   }
 
   /*
@@ -130,6 +162,7 @@ class m_action {
       return false;
     }
   }
+
   /*
   * function locking an entry while it is being executed by the action script
   */
@@ -141,6 +174,7 @@ class m_action {
     }
     return true;
   }
+
   /*
   * function locking an entry while it is being executed by the action script
   */
@@ -164,9 +198,8 @@ class m_action {
 
   function get_job() {
     global $db,$err;
-
 		$tab=array();
-    $db->query("Select id,type from actions where begin !=0 and end = 0 ;");
+    $db->query("Select * from actions where begin !=0 and end = 0 ;");
     if ($db->next_record()){
       $tab[]=$db->Record;
       return $tab;
@@ -174,6 +207,7 @@ class m_action {
       return false;
     }
   }
+
   /*
   * function locking an entry while it is being executed by the action script
   */
