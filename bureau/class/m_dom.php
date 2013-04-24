@@ -1210,11 +1210,17 @@ class m_dom {
   /* ----------------------------------------------------------------- */
   /** Out (echo) the complete hosted domain list : 
    */
-  function echo_domain_list() {
+  function echo_domain_list($integrity=false) {
   global $db,$err;
   $db->query("SELECT domaine FROM domaines WHERE gesdns=1 ORDER BY domaine");
+  $tt="";
   while ($db->next_record()) {
-    echo $db->f("domaine")."\n";
+    #echo $db->f("domaine")."\n";
+    $tt.=$db->f("domaine")."\n";
+  }
+  echo $tt;  
+  if ($integrity) {
+    echo md5($tt)."\n";
   }
   return true;
   }

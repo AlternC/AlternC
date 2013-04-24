@@ -29,6 +29,11 @@
 */
 require_once("../class/config_nochk.php");
 
+$fields = array (
+	"integrity"    => array ("get", "boolean", "0"),
+);
+getFields($fields);
+
 // Check for the http authentication
 if (!isset($_SERVER['PHP_AUTH_USER'])) {
   header('WWW-Authenticate: Basic realm="Domain List Authentication"');
@@ -36,7 +41,11 @@ if (!isset($_SERVER['PHP_AUTH_USER'])) {
   exit;
 } else {
   if ($dom->check_slave_account($_SERVER['PHP_AUTH_USER'],$_SERVER['PHP_AUTH_PW'])) {
-    $dom->echo_domain_list();
+    if (!$integrity) {
+      $dom->echo_domain_list();
+    } else {
+      $dom->echo_domain_list(true);
+    }
   } else {
     header('WWW-Authenticate: Basic realm="Domain List Authentication"');
     header('HTTP/1.0 401 Unauthorized');
