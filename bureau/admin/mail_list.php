@@ -73,9 +73,9 @@ if ($quota->cancreate("mail")) {
 	<form method="post" action="mail_doadd.php" id="main" name="mail_create">
 		<input type="text" class="int intleft" style="text-align: right" name="mail_arg" value="<?php ehe($mail_arg); ?>" size="32" id="mail_arg" maxlength="255" /><span id="emaildom" class="int intright"><?php echo "@".$domain; ?></span>
 		<input type="hidden" name="domain_id"  value="<?php echo $domain_id;?>" />
-		<input type="submit" name="submit" class="inb" value="<?php __("Create this email address"); ?>"  onClick="return false_if_empty('mail_arg', '<?php echo addslashes(_("Can't have empty mail."));?>');" />
+		<input type="submit" name="submit" class="inb add" value="<?php __("Create this email address"); ?>"  onClick="return false_if_empty('mail_arg', '<?php echo addslashes(_("Can't have empty mail."));?>');" />
 <?php }?>
-<span class="inb"><a href="mail_manage_catchall.php?domain_id=<?php echo $domain_id?>"><?php __("Manage Catch-all for this domain");?></a></span> 
+<span class="inb configure"><a href="mail_manage_catchall.php?domain_id=<?php echo $domain_id?>"><?php __("Manage Catch-all for this domain");?></a></span> 
 <?php if ($quota->cancreate("mail")) { ?>
 	</form>
 </td>
@@ -175,7 +175,7 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
 ?>
 
 </table>
-  <p><input type="submit" class="inb" name="submit" value="<?php __("Delete the checked email addresses"); ?>" /></p>
+  <p><input type="submit" class="inb delete" name="submit" value="<?php __("Delete the checked email addresses"); ?>" /></p>
 </form>
 
 <?php

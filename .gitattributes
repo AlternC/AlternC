@@ -128,9 +128,14 @@ bureau/admin/hta_doedituser.php -text
 bureau/admin/hta_edit.php -text
 bureau/admin/hta_edituser.php -text
 bureau/admin/hta_list.php -text
+bureau/admin/icon/add.png -text
 bureau/admin/icon/browse.png -text
+bureau/admin/icon/cancel.png -text
+bureau/admin/icon/configure.png -text
 bureau/admin/icon/delfile.png -text
 bureau/admin/icon/doc.png -text
+bureau/admin/icon/down.png -text
+bureau/admin/icon/edit.png -text
 bureau/admin/icon/encrypted.png -text
 bureau/admin/icon/exe.png -text
 bureau/admin/icon/file.png -text
@@ -142,6 +147,7 @@ bureau/admin/icon/move.png -text
 bureau/admin/icon/newfile.png -text
 bureau/admin/icon/newfolder.png -text
 bureau/admin/icon/newhtml.png -text
+bureau/admin/icon/ok.png -text
 bureau/admin/icon/openfold.png -text
 bureau/admin/icon/pdf.png -text
 bureau/admin/icon/php.png -text
@@ -149,6 +155,7 @@ bureau/admin/icon/ppt.png -text
 bureau/admin/icon/properties.png -text
 bureau/admin/icon/protect.png -text
 bureau/admin/icon/ra.png -text
+bureau/admin/icon/save.png -text
 bureau/admin/icon/selall.png -text
 bureau/admin/icon/sort0.png -text
 bureau/admin/icon/sort1.png -text
@@ -158,6 +165,7 @@ bureau/admin/icon/sxd.png -text
 bureau/admin/icon/sxi.png -text
 bureau/admin/icon/sxw.png -text
 bureau/admin/icon/txt.png -text
+bureau/admin/icon/up.png -text
 bureau/admin/icon/wav.png -text
 bureau/admin/icon/winresize.gif -text
 bureau/admin/icon/xls.png -text
@@ -176,7 +184,6 @@ bureau/admin/images/folder.png -text
 bureau/admin/images/folderhta.png -text
 bureau/admin/images/ftp.png -text
 bureau/admin/images/help.png -text
-bureau/admin/images/hippo_bleue.gif -text
 bureau/admin/images/home.png -text
 bureau/admin/images/ip.png -text
 bureau/admin/images/lang.png -text

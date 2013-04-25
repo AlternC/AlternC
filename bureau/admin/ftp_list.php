@@ -54,7 +54,7 @@ if (isset($error) && $error && !$noftp) {
 
 <?php if ($quota->cancreate("ftp")) { ?>
 <p>
-   <span class="inb"><a href="ftp_edit.php?create=1"><?php __("Create a new ftp account"); ?></a></span> 
+   <span class="inb add"><a href="ftp_edit.php?create=1"><?php __("Create a new ftp account"); ?></a></span> 
 </p>
 <?php  	} ?>
 
@@ -102,7 +102,7 @@ if ( $val['enabled']) {
 	}
 ?>
 </table>
-<p><input type="submit" name="submit" class="inb" value="<?php __("Delete checked accounts"); ?>" /></p>
+<p><input type="submit" name="submit" class="inb delete" value="<?php __("Delete checked accounts"); ?>" /></p>
 </form>
 
 <br/>

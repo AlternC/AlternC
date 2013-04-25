@@ -230,7 +230,7 @@ if (!$r['noerase']) {
 </tr>
 </table>
 <p class="error">    <?php __("Warning: If you set this to 'no', all your email accounts and aliases on this domain will be immediately deleted."); ?></p>
-<input type="submit" class="inb" name="submit" value="<?php __("Submit the changes"); ?>" />
+<input type="submit" class="inb ok" name="submit" value="<?php __("Submit the changes"); ?>" />
 	</form>
 
 <p>&nbsp;</p>
@@ -241,7 +241,7 @@ if (!$r['noerase']) {
 <?php printf(_("If you want to destroy the domain %s, click on the button below. Warning: this also deletes all FTP accounts, email, mailing lists associated with the domain and subdomains."),$domain); ?><br />
 <form action="dom_dodel.php?domain=<?php echo urlencode($domain) ?>" method="post">
 <p>
-<input type="submit" class="inb" name="detruire" value="<?php printf(_("Delete %s from this server"),$domain); ?>" />
+<input type="submit" class="inb delete" name="detruire" value="<?php printf(_("Delete %s from this server"),$domain); ?>" />
 </p>
 </form>
 

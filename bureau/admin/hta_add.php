@@ -59,7 +59,7 @@ getFields($fields);
 </tr>
 </table>
 <br />
-<input type="submit" class="inb" value="<?php __("Protect this folder"); ?>" />
+<input type="submit" class="inb lock" value="<?php __("Protect this folder"); ?>" />
 </form>
 <script type="text/javascript">
 document.forms['main'].dir.focus();

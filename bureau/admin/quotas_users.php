@@ -296,7 +296,8 @@ if ($mode==0) {
 } elseif ($mode==1) {
   echo sprintf("%.1f",$pc)."&nbsp;%";
 } else {
-  echo "<img src=\"images/hippo_bleue.gif\" style=\"width: ".(1*$pc)."px; height: 16px\" alt=\"".$pc."%\" title=\"".$pc."\"/>";
+  #echo "<img src=\"images/hippo_bleue.gif\" style=\"width: ".(1*$pc)."px; height: 16px\" alt=\"".$pc."%\" title=\"".$pc."\"/>";
+  $quota->quota_displaybar($pc);
 }
   echo "</td><td";
   if ($mode!=2) echo " style=\"text-align: right\"";
@@ -314,7 +315,8 @@ if ($mode==0) {
 } elseif ($mode==1) {
   echo sprintf("%.1f",$pc)."&nbsp;%";
 } else {
-  echo "<img src=\"images/hippo_bleue.gif\" style=\"width: ".(1*$pc)."px; height: 16px\" alt=\"".$pc."%\" title=\"".$pc."%\"/>";
+  #echo "<img src=\"images/hippo_bleue.gif\" style=\"width: ".(1*$pc)."px; height: 16px\" alt=\"".$pc."%\" title=\"".$pc."%\"/>";
+  $quota->quota_displaybar($pc);
 }
 
   echo "</td><td";
@@ -332,7 +334,8 @@ if ($mode==0) {
 } elseif ($mode==1) {
   echo sprintf("%.1f",$pc)."&nbsp;%";
 } else {
-  echo "<img src=\"images/hippo_bleue.gif\" style=\"width: ".(1*$pc)."px; height: 16px\" alt=\"".$pc."%\" title=\"".$pc."%\"/>";
+  #echo "<img src=\"images/hippo_bleue.gif\" style=\"width: ".(1*$pc)."px; height: 16px\" alt=\"".$pc."%\" title=\"".$pc."%\"/>";
+  $quota->quota_displaybar($pc);
 }
 
 echo "</td><td";
@@ -353,7 +356,8 @@ if ($mode==0) {
 } elseif ($mode==1) {
 	echo sprintf("%.1f",$pc)."&nbsp;%";
 } else {
-	echo "<img src=\"images/hippo_bleue.gif\" style=\"width: ".(1*$pc)."px; height: 16px\" alt=\"".$pc."%\" title=\"".$pc."%\"/>";
+	#echo "<img src=\"images/hippo_bleue.gif\" style=\"width: ".(1*$pc)."px; height: 16px\" alt=\"".$pc."%\" title=\"".$pc."%\"/>";
+        $quota->quota_displaybar($pc);
 }
 
 echo "</td><td";
@@ -372,7 +376,8 @@ if ($mode==0) {
   } else {
     $pc=0;
   }
-	echo "<img src=\"images/hippo_bleue.gif\" style=\"width: ".(1*$pc)."px; height: 16px\" alt=\"".$pc."%\" title=\"".$pc."%\"/>";
+	#echo "<img src=\"images/hippo_bleue.gif\" style=\"width: ".(1*$pc)."px; height: 16px\" alt=\"".$pc."%\" title=\"".$pc."%\"/>";
+	$quota->quota_displaybar($pc);
 }
 
 

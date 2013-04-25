@@ -78,7 +78,7 @@ foreach ($cron->schedule() as $cs) {
   </tr>
 <?php } //foreach ?>
 </table>
-<p><input type="submit" name="submit" class="inb" value="<?php __("Apply the modifications"); ?>" /></p>
+<p><input type="submit" name="submit" class="inb ok" value="<?php __("Apply the modifications"); ?>" /></p>
 
 </form>
 

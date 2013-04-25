@@ -94,8 +94,8 @@ if (isset($error) && $error) {
     </tr>
   </table>
   <p>
-    <input type="submit" class="inb" name="submit" value="<?php __("Save"); ?>" onclick='return ftp_check_pass();' /> &nbsp; 
-    <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='ftp_list.php'"/>
+    <input type="submit" class="inb ok" name="submit" value="<?php __("Save"); ?>" onclick='return ftp_check_pass();' /> &nbsp; 
+    <input type="button" class="inb cancel" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='ftp_list.php'"/>
   </p>
 </form>
 

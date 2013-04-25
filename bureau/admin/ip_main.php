@@ -134,7 +134,7 @@ $lac = $authip->list_affected();
     <tr>
     <th>&nbsp;</th>
     <td valign='middle' class="lst2">
-      <input type="submit" class="inb" value="<?php __("Save")?>" onclick='return check_accesstype_selected();' />
+      <input type="submit" class="inb ok" value="<?php __("Save")?>" onclick='return check_accesstype_selected();' />
     </td>
     </tr>
   </tbody>
@@ -187,7 +187,7 @@ foreach($list_ip as $i) {
   <tr class="lst2">
     <td><input type="text" size='20' maxlength='39' name="ipsub" id="edit_ip" /></td>
     <td><input type="text" size='25' maxlength='200' name="infos" id="edit_infos" /></td>
-    <td><input type="submit" class="inb" value="<?php __("Save")?>" /></td>
+    <td><input type="submit" class="inb ok" value="<?php __("Save")?>" /></td>
   </tr>
   </table>
 </form>

@@ -656,7 +656,7 @@ function display_browser($dir="", $caller="main.dir", $width=350, $height=450) {
           
           document.write('&nbsp;<input type=\"button\" id=\"bt".$bid."\" value=\""._("Choose a folder...")."\" class=\"ina\">');
           document.write('<div id=\"".$bid."\" title=\""._("Choose a folder...")."\" style=\"display: none; bgcolor:red;\">');
-          document.write('  <iframe src=\"/browseforfolder2.php?caller=".$caller."&file=".ehe($dir, 0)."&bid=".$bid."\" width=\"".($width-25)."\" height=\"".($height-50)."\" frameborder=\"no\" id=\"browseiframe\"></iframe>');
+          document.write('  <iframe src=\"/browseforfolder2.php?caller=".$caller."&amp;file=".ehe($dir, 0)."&amp;bid=".$bid."\" width=\"".($width-25)."\" height=\"".($height-50)."\" frameborder=\"no\" id=\"browseiframe\"></iframe>');
           document.write('</div>');
         //  -->
         </script>

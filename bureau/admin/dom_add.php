@@ -84,7 +84,7 @@ $dl=$dom->get_domain_list($cuid);
     <?php } ?>
 
 <p>
-  <input type="submit" class="inb" name="submit" value="<?php __("Add this domain"); ?>" />
+  <input type="submit" class="inb ok" name="submit" value="<?php __("Add this domain"); ?>" />
 </p>
 
 <p class="error">

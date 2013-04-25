@@ -133,7 +133,7 @@ span.inb {
   padding: 4px 6px;
 }
 
-input.ina:hover, input.ina, input.inav, input.inav:hover {
+input.ina, input.inav {
   border: 1px solid #999;
   font-family: Verdana, Arial, Helvetica, sans-serif;
   font-size: 10px;
@@ -142,6 +142,16 @@ input.ina:hover, input.ina, input.inav, input.inav:hover {
   cursor: pointer;
   /*float: right;*/
 }
+
+input.ina:hover, input.ina, input.inav, input.inav:hover {
+  border: 1px solid #999;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 10px;
+  color: black;
+  cursor: pointer;
+  /*float: right;*/
+}
+
 input.ina, .ina a {
   background-color: #F1F8FD;
 }
@@ -174,6 +184,11 @@ input.inav:hover, .inav a:hover, a.inav:hover {
   line-height: 15px;
   height: 15px;
 }
+
+.inb a, a.inb {
+  padding: 4px 10px;
+}
+
 input[type=button],
 input[type=submit] {
   -webkit-border-radius: 3px;
@@ -612,24 +627,80 @@ input#dir, input#sub_local {
   background-color: #BFD3E1;
 }
 
-.edit a, a.edit {
+.edit a, a.edit, input.edit {
   background-image: url(../images/edit.png);
   background-repeat: no-repeat;
   background-position: 8px 3px;
-  padding-left: 25px;
+  padding-left: 30px;
 }
 
-.delete a, a.delete {
+.delete a, a.delete, input.delete {
   background-image: url(../images/delete.png);
   background-repeat: no-repeat;
   background-position: 8px 3px;
-  padding-left: 25px;
+  padding-left: 30px;
 }
 
-.lock a, a.lock {
+.lock a, a.lock, input.lock {
   background-image: url(../icon/encrypted.png);
   background-repeat: no-repeat;
   background-position: 8px 3px;
-  padding-left: 25px;
+  padding-left: 30px;
+}
+
+.ok a, a.ok, input.ok {
+  background-image: url(../icon/ok.png);
+  background-repeat: no-repeat;
+  background-position: 8px 3px;
+  padding-left: 30px;
+}
+
+.cancel a, a.cancel, input.cancel {
+  background-image: url(../icon/cancel.png);
+  background-repeat: no-repeat;
+  background-position: 8px 3px;
+  padding-left: 30px;
+}
+
+.add a, a.add, input.add {
+  background-image: url(../icon/add.png);
+  background-repeat: no-repeat;
+  background-position: 8px 3px;
+  padding-left: 30px;
+}
+
+.configure a, a.configure, input.configure {
+  background-image: url(../icon/configure.png);
+  background-repeat: no-repeat;
+  background-position: 8px 3px;
+  padding-left: 30px;
+}
+
+.edit a, a.edit, input.edit {
+  background-image: url(../icon/edit.png);
+  background-repeat: no-repeat;
+  background-position: 8px 3px;
+  padding-left: 30px;
+}
+
+.save a, a.save, input.save {
+  background-image: url(../icon/save.png);
+  background-repeat: no-repeat;
+  background-position: 8px 3px;
+  padding-left: 30px;
+}
+
+.down a, a.down, input.down {
+  background-image: url(../icon/save.png);
+  background-repeat: no-repeat;
+  background-position: 8px 3px;
+  padding-left: 30px;
+}
+
+.up a, a.up, input.up {
+  background-image: url(../icon/up.png);
+  background-repeat: no-repeat;
+  background-position: 8px 3px;
+  padding-left: 30px;
 }
 

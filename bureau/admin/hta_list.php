@@ -86,8 +86,8 @@ for($i=0;$i<count($r);$i++){
 ?>
 </table>
 <br />
-<input type="submit" class="ina" name="submit" value="<?php __("Unprotect the checked folders"); ?>" />
-			<span class="ina"><a href="hta_add.php"><?php __("Protect a folder"); ?></a></span>
+<input type="submit" class="ina up" name="submit" value="<?php __("Unprotect the checked folders"); ?>" />
+			<span class="ina add"><a href="hta_add.php"><?php __("Protect a folder"); ?></a></span>
 </form>
 
 <p>
