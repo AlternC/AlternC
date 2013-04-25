@@ -540,7 +540,7 @@ class m_bro {
    * @returns the path where the file resides or false if upload failed
    */
   function UploadFile($R) {
-    global $_FILES,$err,$cuid;
+    global $_FILES,$err,$cuid,$action;
     $absolute=$this->convertabsolute($R,0);
     if (!$absolute) {
       $err->raise("bro",_("File or folder name is incorrect"));
@@ -552,7 +552,7 @@ class m_bro {
           @touch($absolute."/".$_FILES['userfile']['name']);
         }
         if (@move_uploaded_file($_FILES['userfile']['tmp_name'], $absolute."/".$_FILES['userfile']['name'])) {
-	  exec("sudo /usr/lib/alternc/fixperms.sh -u ".$cuid." -f '".$absolute."/".$_FILES['userfile']['name']."'");
+          $action->fix_dir($absolute."/".$_FILES['userfile']['name']);
 	  return $absolute."/".$_FILES['userfile']['name'];
 	} else {
 	  $err->raise("bro",_("Cannot create the requested file. Please check the permissions"));
@@ -576,7 +576,7 @@ class m_bro {
    * @return boolean != 0 on error
    */
   function ExtractFile($file, $dest=null) {
-    global $err,$cuid,$mem;
+    global $err,$cuid,$mem,$action;
     $file = $this->convertabsolute($file,0);
     if (is_null($dest)) {
       $dest = dirname($file);
@@ -588,8 +588,9 @@ class m_bro {
       return 1;
     }
     $file = escapeshellarg($file);
+    $dest_to_fix = $dest;
     $dest = escapeshellarg($dest);
-    $dest_to_fix=str_replace(getuserpath(),'',$dest);
+    #$dest_to_fix=str_replace(getuserpath(),'',$dest);
 	 
     // TODO new version of tar supports `tar xf ...` so there is no
     //     need to specify the compression format
@@ -609,7 +610,7 @@ class m_bro {
       $err->raise("bro",_("I cannot find a way to extract the file %s, it is an unsupported compressed format"), $file);
     }
     // fix the perms of the extracted archive TODO: does it work???
-    exec("sudo /usr/lib/alternc/fixperms.sh -u ".$cuid." -d ".$dest_to_fix);
+    $action->fix_dir($dest_to_fix);
     return $ret;
   }
 

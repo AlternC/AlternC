@@ -30,7 +30,8 @@ file=""
 # Two optionals argument
 # -l string : a specific login to fix
 # -u integer : a specific uid to fix
-# -f integer : a specific file to fix according to a given uid 
+# -f string : a specific file to fix according to a given uid 
+# -d string : a specific folder to fix according to a given uid 
 
 while getopts "l:u:f:d:" optname
   do
@@ -118,6 +119,30 @@ doone() {
     echo -e "\nDone" 
 }
 
+fixdir() {
+    read GID LOGIN || true
+      if [ "$DEBUG" ]; then
+        echo "Setting rights and ownership for user $LOGIN having gid $GID"
+      fi
+      REP="$sub_dir"
+  
+      # Clean the line, then add a ligne indicating current working directory
+      printf '\r%*s' "${COLUMNS:-$(tput cols)}" ''
+      printf "\r%${COLUMNS}s" "AlternC fixperms.sh -> working on $REP"
+
+      # Set the file readable only for the AlternC User
+      mkdir -p "$REP"
+      chown -R alterncpanel:$GID "$REP"
+      chmod 2770 -R "$REP"
+
+      # Delete existings ACL
+      # Set the defaults acl on all the files
+      setfacl -b -k -n -R -m d:g:alterncpanel:rwx -m d:u::rwx -m d:g::rwx -m d:u:$GID:rwx -m d:g:$GID:rwx -m d:o::--- -m d:mask:rwx\
+                    -Rm   g:alterncpanel:rwx -m u:$GID:rwx -m g:$GID:rwx -m mask:rwx\
+               "$REP"
+    echo -e "\nDone" 
+}
+
 fixfile() {
 	read GID LOGIN
 	/usr/bin/setfacl -bk "$file"
@@ -129,11 +154,18 @@ fixfile() {
 	echo file ownership and ACLs changed
 }
 
+
 if [[ "$file" != "" ]]; then
 	if [ -e "$file" ]; then
 		mysql --defaults-file=/etc/alternc/my.cnf --skip-column-names -B -e "$query" |fixfile
 	else
 		echo "file not found"
+	fi
+elif [[ "$sub_dir" != "" ]]; then
+	if [ -d "$sub_dir" ]; then
+		mysql --defaults-file=/etc/alternc/my.cnf --skip-column-names -B -e "$query" |fixdir
+	else
+		echo "dir not found"
 	fi
 else
 	mysql --defaults-file=/etc/alternc/my.cnf --skip-column-names -B -e "$query" |doone

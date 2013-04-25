@@ -31,5 +31,8 @@
 # Every 30 minutes, do cron_users actions
 00,30 * * * *	alterncpanel	/usr/lib/alternc/cron_users.sh
 
+# Every 20 minutes, do actions
+00,20 * * * *	root	/usr/lib/alternc/do_actions.php
+
 # Every hour, stop expired VMs
 10 * * * *	alterncpanel	/usr/lib/alternc/lxc_stopexpired.php

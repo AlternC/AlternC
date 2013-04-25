@@ -34,7 +34,7 @@ class m_action {
   */
   function do_action(){
     global $err, $L_INOTIFY_DO_ACTION;
-    $err->log("admin","do_action");
+    $err->log("action","do_action");
     touch($L_INOTIFY_DO_ACTION);
   }
 
@@ -110,7 +110,6 @@ class m_action {
     case 'fix_dir':
       $query="insert into actions values ('','FIXDIR','$serialized',now(),'','','$user','');"; 
       break;
-    case 'delete':
       $query="insert into actions values ('','DELETE','$serialized',now(),'','','$user','');"; 
       break;
     default:

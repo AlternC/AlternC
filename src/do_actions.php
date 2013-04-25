@@ -35,13 +35,20 @@
  */
 
 // Put this var to 1 if you want to enable debug prints
-$debug=0;
+$debug=1;
+$error_raise='';
 
 // Debug function that print infos
 function d($mess){
   global $debug;
   if ($debug == 1)
     echo "$mess\n";
+}
+
+// Function to mail the panel's administrator if something failed
+function mail_it(){
+  global $error_raise;
+  mail("alterncpanel",'Cron do_actions.php failed!',$error_raise);
 }
 
 require_once("/usr/share/alternc/panel/class/config_nochk.php");
@@ -63,7 +70,7 @@ if (file_exists($LOCK_FILE) !== false){
       exit(0);
     }else{
       // Previous cron failed!
-      echo "No process with PID $PID found! Previous cron failed...\n";
+      $error_raise.="No process with PID $PID found! Previous cron failed...\n";
       d("Removing lock file and trying to process the failed action...");
       // Delete the lock and continue to the next action
       unlink($LOCK_FILE);
@@ -71,7 +78,9 @@ if (file_exists($LOCK_FILE) !== false){
       // Lock with the current script's PID
       d("Lock the script...");
       if (file_put_contents($LOCK_FILE,$MY_PID) === false){
-        die("Cannot open/write $LOCK_FILE");
+        $error_raise.="Cannot open/write $LOCK_FILE\n";
+        mail_it();
+        exit(1);
       }
 
       // Get the action(s) that was processing when previous script failed
@@ -86,9 +95,9 @@ if (file_exists($LOCK_FILE) !== false){
           $action->reset_job($c["id"]);
         }else{
           // We can't resume the others types, notify the fail and finish this action
-          echo "Can't resume the job n°".$c["id"]." action '".$c["type"]."', finishing it with a fail status.\n";
+          $error_raise.="Can't resume the job n°".$c["id"]." action '".$c["type"]."', finishing it with a fail status.\n";
           if(!$action->finish($c["id"],"Fail: Previous script crashed while processing this action, cannot resume it.")){
-            echo "Cannot finish the action! Error while inserting the error value in the DB for action n°".$c["id"]." : action '".$c["type"]."'\n";
+            $error_raise.="Cannot finish the action! Error while inserting the error value in the DB for action n°".$c["id"]." : action '".$c["type"]."'\n";
             break; // Else we go into an infinite loop... AAAAHHHHHH
           }
         }
@@ -98,7 +107,9 @@ if (file_exists($LOCK_FILE) !== false){
   // Lock with the current script's PID
   d("Lock the script...");
   if (file_put_contents($LOCK_FILE,$MY_PID) === false){
-    die("Cannot open/write $LOCK_FILE");
+    $error_raise.="Cannot open/write $LOCK_FILE\n";
+    mail_it();
+    exit(1);
   }
 }
 
@@ -106,72 +117,71 @@ if (file_exists($LOCK_FILE) !== false){
 while ($rr=$action->get_action()){
   $r=$rr[0];
   $return="OK";
+  // Do we have to do this action with a specific user?
+  if($r["user"] != "root")
+    $SU="su ".$r["user"]." 2>&1 ;";
+  else
+    $SU="";
   unset($output);
   // We lock the action
   d("-----------\nBeginning action n°".$r["id"]);
   $action->begin($r["id"]);
   // We process it
   $params=unserialize($r["parameters"]);
-  // Remove all previous error message...
-  @trigger_error("");
   // We exec with the specified user
   d("Executing action '".$r["type"]."' with user '".$r["user"]."'");
-  // For now, this script only work for user 'root'
-  if($r["user"] != "root"){
-    // TODO
-  }
   switch ($r["type"]){
     case "CREATE_FILE" :
       if(!file_exists($params["file"]))
-        @file_put_contents($params["file"],$params["content"]);
+        @exec("$SU touch ".$params["file"]." 2>&1 ; echo '".$params["content"]."' > '".$params["file"]."' 2>&1", $output);
       else
         $output=array("Fail: file already exists");
       break;
     case "CREATE_DIR" :
       // Create the directory and make parent directories as needed
-      @mkdir($params["dir"],0777,true);
+      @exec("$SU mkdir -p ".$params["dir"]." 2>&1",$output);
       break;
     case "DELETE" :
       // Delete file/directory and its contents recursively
-      @exec("rm -rf ".$params["dir"]." 2>&1", $output);
+      @exec("$SU rm -rf ".$params["dir"]." 2>&1", $output);
       break;
     case "MOVE" :
       // If destination dir does not exists, create it
       if(!is_dir($params["dst"]))
-        @mkdir($params["dst"],0777,true);
-      @exec("mv -f ".$params["src"]." ".$params["dst"]." 2>&1", $output);
-      // If MOVE failed, we have to notify the cron
-      if(isset($output[0]))
-        echo "Action n°".$r["id"]." 'MOVE' failed!\nuser: ".$r["user"]."\nsource: ".$params["src"]."\ndestination: ".$params["dst"]."\n";
+        @exec("$SU mkdir -p ".$params["dst"]." 2>&1",$output);
+      if(!isset($output[0]))
+        @exec("$SU mv -f ".$params["src"]." ".$params["dst"]." 2>&1", $output);
       break;
     case "FIXDIR" :
-      @exec("$FIXPERM -f ".$params["dir"]." 2>&1", $trash, $code);
+      @exec("$SU $FIXPERM -d ".$params["dir"]." 2>&1", $trash, $code);
       if($code!=0)
-        $output[0]=$code;
+        $output[0]="Fixperms.sh failed, returned error code : $code";
       break;
     default :
       $output=array("Fail: Sorry dude, i do not know this type of action");
       break;
   }
-  // Get the last error if exists.
-  if(isset($output[0]))
+  // Get the error (if exists).
+  if(isset($output[0])){
     $return=$output[0];
-  else
-    if($error=error_get_last())
-      if($error["message"]!="")
-        $return=$error["message"];
+    $error_raise.="Action n°".$r["id"]." '".$r["type"]."' failed! With user: ".$r["user"]."\nHere is the complete output:\n".print_r($output);
+  }
   // We finished the action, notify the DB.
   d("Finishing... return value is : $return\n");
   if(!$action->finish($r["id"],addslashes($return))){
-    echo "Cannot finish the action! Error while inserting the error value in the DB for action n°".$c["id"]." : action '".$c["type"]."'\nReturn value: ".addslashes($return)."\n";
+    $error_raise.="Cannot finish the action! Error while inserting the error value in the DB for action n°".$c["id"]." : action '".$c["type"]."'\nReturn value: ".addslashes($return)."\n";
     break; // Else we go into an infinite loop... AAAAHHHHHH
   }
 }
 
+// If something have failed, notify it to the admin
+if($error_raise === '')
+  mail_it(); 
+
 // Unlock the script
 d("Unlock the script...");
 unlink($LOCK_FILE);
-
+mail("alterncpanel@$L_FQDN","test do_actions.php","ceci est un test!\n\nProut?");
 // Exit this script
 exit(0);
 ?>
