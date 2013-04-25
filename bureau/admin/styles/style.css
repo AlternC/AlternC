@@ -611,3 +611,25 @@ input#dir, input#sub_local {
 #adm_panel li:hover, #adm_panel_root li:hover {
   background-color: #BFD3E1;
 }
+
+.edit a, a.edit {
+  background-image: url(../images/edit.png);
+  background-repeat: no-repeat;
+  background-position: 8px 3px;
+  padding-left: 25px;
+}
+
+.delete a, a.delete {
+  background-image: url(../images/delete.png);
+  background-repeat: no-repeat;
+  background-position: 8px 3px;
+  padding-left: 25px;
+}
+
+.lock a, a.lock {
+  background-image: url(../icon/encrypted.png);
+  background-repeat: no-repeat;
+  background-position: 8px 3px;
+  padding-left: 25px;
+}
+

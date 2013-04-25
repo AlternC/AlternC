@@ -125,13 +125,13 @@ for($i=0;$i<$r["nsub"];$i++) {
     <?php if ( $r['sub'][$i]['web_action'] =='DELETE') { echo "<td colspan='2' />"; } else { ?>
 		<td class="center">
     <?php  if (!(!$isinvited && $dt[strtolower($r["sub"][$i]["type"])]["enable"] != "ALL" )) { ?>
-			<div class="ina"><a href="dom_subedit.php?sub_domain_id=<?php echo urlencode($r["sub"][$i]["id"]) ?>"><img src="images/edit.png" alt="<?php __("Edit"); ?>" /><?php __("Edit"); ?></a></div>
+			<div class="ina edit"><a href="dom_subedit.php?sub_domain_id=<?php echo urlencode($r["sub"][$i]["id"]) ?>"><?php __("Edit"); ?></a></div>
   <?php } ?>
 
 
 			</td><td class="center">
     <?php  if (!(!$isinvited && $dt[strtolower($r["sub"][$i]["type"])]["enable"] != "ALL" )) { ?>
-			<div class="ina"><a href="dom_subdel.php?sub_domain_id=<?php echo urlencode($r["sub"][$i]["id"]) ?>"><img src="images/delete.png" alt="<?php __("Delete"); ?>" /><?php __("Delete"); ?></a></div>
+			<div class="ina delete"><a href="dom_subdel.php?sub_domain_id=<?php echo urlencode($r["sub"][$i]["id"]) ?>"><?php __("Delete"); ?></a></div>
 <?php } ?>
 		</td>
     <?php } // end IF ==DELETE ?>

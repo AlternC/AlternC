@@ -147,7 +147,7 @@ if(!empty($mails_list)) {
 	    <input class="inc" type="checkbox" id="del_<?php echo $i; ?>" name="d[]" value="<?php ehe($val["id"]); ?>" />
 	</td>
 	<td class="<?php echo $grey; ?>">
-	  <div class="ina"><a href="mail_edit.php?mail_id=<?php echo $val["id"] ?>"><img src="images/edit.png" alt="<?php __("Edit"); ?>" /><?php __("Edit"); ?></a></div></td>
+	  <div class="ina edit"><a href="mail_edit.php?mail_id=<?php echo $val["id"] ?>"><?php __("Edit"); ?></a></div></td>
 	<td class="<?php echo $grey; ?>"><?php if ($val["enabled"] ) { ?>
 			<img src="images/check_ok.png" alt="<?php __("Enabled"); ?>" />
 		<?php } else { ?>

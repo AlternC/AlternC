@@ -73,7 +73,7 @@ foreach($dom->domains_type_lst() as $d) {
 ++$pair;
 ?>
 <tr class="lst<?php echo $pair%2+1 ?>">
-    <td><div class="ina"><a href="adm_domstypeedit.php?name=<?php echo urlencode($d['name']); ?>"><img style="padding-bottom: 5px" src="images/edit.png" alt="<?php __("Edit"); ?>" /><?php __("Edit"); ?></a></div></td>
+    <td><div class="ina edit"><a href="adm_domstypeedit.php?name=<?php echo urlencode($d['name']); ?>"><?php __("Edit"); ?></a></div></td>
     <td><div class="ina"><a href="adm_domstyperegenerate.php?name=<?php echo urlencode($d['name']);?>"><?php __("Regenerate");?></a></div></td> 
     <td><?php echo $d['name'];?></td>
     <td><?php echo $d['description'];?></td>

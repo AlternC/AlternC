@@ -59,7 +59,7 @@ for($i=0;$i<count($tab)+1;$i++) {?>
     echo "<input type='hidden' name='domup[$i][id]' value='".$val['id']."' />";  
     }
 ?>
-  <div class="ina"><a href='dom_defdel.php?id=<?php echo $val['id']; ?>' type=''><img src="images/delete.png" alt="<?php __("Delete"); ?>" /><?php __("Delete"); ?></a></div>
+  <div class="ina delete"><a href='dom_defdel.php?id=<?php echo $val['id']; ?>' type=''><?php __("Delete"); ?></a></div>
   </td>
 
   <td><input type='text' size="16" name='domup[<?php echo $i; ?>][sub]' value="<?php echo $val['sub']; ?>"/></td>

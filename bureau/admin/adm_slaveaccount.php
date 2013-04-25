@@ -85,7 +85,7 @@ for($i=0;$i<count($c);$i++) {
 ?>
 
 <tr class="lst<?php echo $col; ?>">
-   <td class="center"><div class="ina"><a href="adm_slaveaccount.php?delaccount=<?php echo urlencode($c[$i]["login"]); ?>"><img src="images/delete.png" alt="<?php __("Delete"); ?>" /><?php __("Delete"); ?></a></div></td>
+   <td class="center"><div class="ina delete"><a href="adm_slaveaccount.php?delaccount=<?php echo urlencode($c[$i]["login"]); ?>"><?php __("Delete"); ?></a></div></td>
   <td><?php ehe($c[$i]["login"]); ?></td>
   <td><?php ehe($c[$i]["pass"]); ?></td>
 </tr>

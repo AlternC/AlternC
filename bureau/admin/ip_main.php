@@ -78,7 +78,7 @@ $lac = $authip->list_affected();
       echo " "._("for")." ".$ac[$ll['protocol']]['values'][$ll['parameters']];
     }
     echo "</td>";
-    echo '<td><div class="ina"><a href="ip_main.php?delete_affected_id='.urlencode($ll["id"]).'"><img src="images/delete.png" alt="'._("Delete").'" />'._("Delete").'</a></div></td>';
+    echo '<td><div class="ina delete"><a href="ip_main.php?delete_affected_id='.urlencode($ll["id"]).'">'._("Delete").'</a></div></td>';
     echo "</tr>";
   }
 ?>
@@ -165,8 +165,8 @@ foreach($list_ip as $i) {
   } 
   echo "<tr class='lst$col' ><td>{$i['infos']}</td><td>{$i['ip_human']}</td><td>$txt</td>";
   ?>
-  <td><div class="ina"><a href="javascript:edit_ip(<?php echo "'".htmlentities($i['id'])."','".htmlentities($i['ip_human'])."','".htmlentities($i['infos'])."'"; ?>);"><img src="images/edit.png" alt="<?php __("Edit"); ?>" /><?php __("Edit"); ?></a></div></td>
-  <td><div class="ina"><a href="ip_main.php?delete_id=<?php echo urlencode($i["id"]) ?>"><img src="images/delete.png" alt="<?php __("Delete"); ?>" /><?php __("Delete"); ?></a></div></td>
+  <td><div class="ina edit"><a href="javascript:edit_ip(<?php echo "'".htmlentities($i['id'])."','".htmlentities($i['ip_human'])."','".htmlentities($i['infos'])."'"; ?>);"><?php __("Edit"); ?></a></div></td>
+  <td><div class="ina delete"><a href="ip_main.php?delete_id=<?php echo urlencode($i["id"]) ?>"><?php __("Delete"); ?></a></div></td>
   </tr>
 
 <?php } ?>

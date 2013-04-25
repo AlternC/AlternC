@@ -150,7 +150,7 @@ $col=1;
 
 <tr class="lst<?php echo $col; ?>">
 <td class="center">
-   <div class="ina"><a href="adm_passpolicy.php?edit=<?php echo urlencode($v["name"]); ?>"><img src="images/edit.png" alt="<?php __("Edit"); ?>" /><?php __("Edit"); ?></a></div>
+   <div class="ina edit"><a href="adm_passpolicy.php?edit=<?php echo urlencode($v["name"]); ?>"><?php __("Edit"); ?></a></div>
 </td>
  <td><?php echo $v["description"]; ?></td>
  <td class="center"><?php echo $v["minsize"]; ?></td>

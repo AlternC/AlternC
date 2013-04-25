@@ -81,8 +81,8 @@ $list_ip = $authip->list_ip_whitelist();
         } 
         echo "<tr class='lst$col'><td>$txt</td><td>{$i['ip_human']}</td><td>{$i['infos']}</td>";
         ?>
-        <td><div class="ina"><a href="javascript:edit_ip(<?php echo "'".htmlentities($i['id'])."','".htmlentities($i['ip_human'])."','".htmlentities($i['infos'])."'"; ?>);"><img src="images/edit.png" alt="<?php __("Edit"); ?>" /><?php __("Edit"); ?></a></div></td>
-        <td><div class="ina"><a href="adm_authip_whitelist.php?delete_id=<?php echo urlencode($i["id"]) ?>"><img src="images/delete.png" alt="<?php __("Delete"); ?>" /><?php __("Delete"); ?></a></div></td>
+        <td><div class="ina edit"><a href="javascript:edit_ip(<?php echo "'".htmlentities($i['id'])."','".htmlentities($i['ip_human'])."','".htmlentities($i['infos'])."'"; ?>);"><?php __("Edit"); ?></a></div></td>
+        <td><div class="ina delete"><a href="adm_authip_whitelist.php?delete_id=<?php echo urlencode($i["id"]) ?>"><?php __("Delete"); ?></a></div></td>
         </tr>
 
       <?php } ?>

@@ -84,7 +84,7 @@ for($i=0;$i<count($c);$i++) {
 ?>
 
 <tr class="lst<?php echo $col; ?>">
-   <td class="center"><div class="ina"><a href="adm_slaveip.php?delip=<?php echo urlencode($c[$i]['ip']); ?>"><img src="images/delete.png" alt="<?php __("Delete"); ?>" /><?php __("Delete"); ?></a></div></td>
+   <td class="center"><div class="ina delete"><a href="adm_slaveip.php?delip=<?php echo urlencode($c[$i]['ip']); ?>"><?php __("Delete"); ?></a></div></td>
 <td><?php echo $c[$i]["ip"]."/".$c[$i]["class"]; ?></td>
 </tr>
 <?php
@@ -97,11 +97,11 @@ for($i=0;$i<count($c);$i++) {
 <table class="tedit">
 <tr><th><label for="newip"><?php __("IP Address"); ?></label></th><th><label for="newclass"><?php __("Prefix"); ?></label></th></tr>
 <tr>
-	<td style="text-align: right"><input type="text" class="int" value="<?php ehe( (isset($newip)?$newip:'') ); ?>" id="newip" name="newip" maxlength="15" size="20" style="text-align:right" /> / </td>
-	<td><input type="text" class="int" value="<?php ehe( (isset($newclass)?$newclass:'') ); ?>" id="newclass" name="newclass" maxlength="2" size="3" /></td>
+  <td style="text-align: right"><input type="text" class="int" value="<?php ehe( (isset($newip)?$newip:'') ); ?>" id="newip" name="newip" maxlength="15" size="20" style="text-align:right" /> / </td>
+  <td><input type="text" class="int" value="<?php ehe( (isset($newclass)?$newclass:'') ); ?>" id="newclass" name="newclass" maxlength="2" size="3" /></td>
 </tr>
 <tr><td colspan="2">
-	<input type="submit" value="<?php __("Add this ip to the slave list"); ?>" class="inb" />
+  <input type="submit" value="<?php __("Add this ip to the slave list"); ?>" class="inb" />
 </td></tr>
 </table>
 </form>
