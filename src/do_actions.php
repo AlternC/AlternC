@@ -35,7 +35,7 @@
  */
 
 // Put this var to 1 if you want to enable debug prints
-$debug=1;
+$debug=0;
 $error_raise='';
 
 // Debug function that print infos
@@ -48,7 +48,7 @@ function d($mess){
 // Function to mail the panel's administrator if something failed
 function mail_it(){
   global $error_raise;
-  mail("alterncpanel",'Cron do_actions.php failed!',$error_raise);
+  mail("alterncpanel@$L_FQDN",'Cron do_actions.php failed!',$error_raise);
 }
 
 require_once("/usr/share/alternc/panel/class/config_nochk.php");
@@ -181,7 +181,7 @@ if($error_raise === '')
 // Unlock the script
 d("Unlock the script...");
 unlink($LOCK_FILE);
-mail("alterncpanel@$L_FQDN","test do_actions.php","ceci est un test!\n\nProut?");
+
 // Exit this script
 exit(0);
 ?>
