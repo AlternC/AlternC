@@ -51,7 +51,11 @@ class m_hooks {
     if (is_null($hclass)) {
       global $classes;
     } else {
-      $classes = array($hclass);
+      if (is_array($hclass)) {
+        $classes = $hclass;
+      } else {
+        $classes = array($hclass);
+      }
     }
 
     // On parcourt les classes, si la fonction qu'on cherche
