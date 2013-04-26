@@ -35,7 +35,7 @@
  */
 
 // Put this var to 1 if you want to enable debug prints
-$debug=0;
+$debug=1;
 $error_raise='';
 
 // Debug function that print infos
@@ -127,7 +127,7 @@ while ($rr=$action->get_action()){
   d("-----------\nBeginning action n°".$r["id"]);
   $action->begin($r["id"]);
   // We process it
-  $params=unserialize($r["parameters"]);
+  $params=@unserialize($r["parameters"]);
   // We exec with the specified user
   d("Executing action '".$r["type"]."' with user '".$r["user"]."'");
   switch ($r["type"]){
@@ -153,12 +153,12 @@ while ($rr=$action->get_action()){
         @exec("$SU mv -f ".$params["src"]." ".$params["dst"]." 2>&1", $output);
       break;
     case "FIXDIR" :
-      @exec("$SU $FIXPERM -d ".$params["dir"]." 2>&1", $trash, $code);
+      @exec("$FIXPERM -d ".$params["dir"]." 2>&1", $trash, $code);
       if($code!=0)
         $output[0]="Fixperms.sh failed, returned error code : $code";
       break;
     case "FIXFILE" :
-      @exec("$SU $FIXPERM -f ".$params["file"]." 2>&1", $trash, $code);
+      @exec("$FIXPERM -f ".$params["file"]." 2>&1", $trash, $code);
       if($code!=0)
         $output[0]="Fixperms.sh failed, returned error code : $code";
       break;
