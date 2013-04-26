@@ -47,8 +47,8 @@ function d($mess){
 
 // Function to mail the panel's administrator if something failed
 function mail_it(){
-  global $error_raise;
-  mail("alterncpanel@$L_FQDN",'Cron do_actions.php failed!',$error_raise);
+  global $error_raise,$L_FQDN;
+  mail("alterncpanel@$L_FQDN",'Script do_actions.php issues',"\n Errors reporting mail:\n\n$error_raise");
 }
 
 require_once("/usr/share/alternc/panel/class/config_nochk.php");
@@ -70,7 +70,7 @@ if (file_exists($LOCK_FILE) !== false){
       exit(0);
     }else{
       // Previous cron failed!
-      $error_raise.="No process with PID $PID found! Previous cron failed...\n";
+      $error_raise.="Lock file already exists. No process with PID $PID found! Previous cron failed...\n";
       d("Removing lock file and trying to process the failed action...");
       // Delete the lock and continue to the next action
       unlink($LOCK_FILE);
@@ -175,7 +175,7 @@ while ($rr=$action->get_action()){
 }
 
 // If something have failed, notify it to the admin
-if($error_raise === '')
+if($error_raise !== '')
   mail_it(); 
 
 // Unlock the script
