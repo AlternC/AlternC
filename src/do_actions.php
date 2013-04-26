@@ -90,7 +90,7 @@ if (file_exists($LOCK_FILE) !== false){
         $params=unserialize($c["parameters"]);
         // We can resume these types of action, so we reset the job to process it later
         d("Previous job was the n°".$c["id"]." : '".$c["type"]."'");
-        if($c["type"] == "CREATE_FILE" && is_dir(dirname($params["file"])) || $c["type"] == "CREATE_DIR" || $c["type"] == "DELETE" || $c["type"] == "FIXDIR"){
+        if($c["type"] == "CREATE_FILE" && is_dir(dirname($params["file"])) || $c["type"] == "CREATE_DIR" || $c["type"] == "DELETE" || $c["type"] == "FIXDIR" || $c["type"] == "FIXFILE"){
           d("Reset of the job! So it will be resumed...");
           $action->reset_job($c["id"]);
         }else{
@@ -154,6 +154,11 @@ while ($rr=$action->get_action()){
       break;
     case "FIXDIR" :
       @exec("$SU $FIXPERM -d ".$params["dir"]." 2>&1", $trash, $code);
+      if($code!=0)
+        $output[0]="Fixperms.sh failed, returned error code : $code";
+      break;
+    case "FIXFILE" :
+      @exec("$SU $FIXPERM -f ".$params["file"]." 2>&1", $trash, $code);
       if($code!=0)
         $output[0]="Fixperms.sh failed, returned error code : $code";
       break;
