@@ -77,11 +77,10 @@ foreach ($obj_menu as $k => $m ) {
     foreach( $m['links'] as $l ) {
       if ( $l['txt'] == 'progressbar' ) {
         $usage_percent = (int) ($l['used'] / $l['total'] * 100);
-        $usage_color = ( $l['used'] > $l['total'] ? '#800' : '#080');
-        $usage_color = ((85 < $usage_percent && $usage_percent <= 100) ? '#ff8800' : $usage_color); // yellow
         echo "<li>";
         echo '<div class="progress-bar">';
-        echo '<div style="width: ' . ($usage_percent > 100 ? 100 : $usage_percent) . '%; background: ' . $usage_color . ';">&nbsp;</div>';
+        echo '<div class="barre" style="width:'.$usage_percent.'%; background-color:'.PercentToColor($usage_percent).'" ></div>';
+        //echo '<div class="txt">'.$usage.' %</div>';
         echo '</div>';
         echo "</li>";
         continue;

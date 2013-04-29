@@ -7,12 +7,13 @@ if (!defined("QUOTASONE")) return;
 if (!isset($mode)) { # when included from adm_login, mode is not set
   $mode = 0;
 }
+// $mode = 4; // Pour Debuguer le mode "graphique" des quotas
 ?>
 <center>
 
 <h3 style="text-align:center;"><?php printf(_("<b>%s</b> account"),$mem->user["login"]); ?></h3>
 
-<div style="width: 550px">
+<div style="width: 600px">
 
 <!-- Webspaces -->
 
@@ -29,7 +30,7 @@ if (!isset($mode)) { # when included from adm_login, mode is not set
 
 <!-- Mails -->
 
-<table class="tedit" width="90%">
+<table class="tedit" width="100%">
 <thead>
 <tr>
    <th><?php __("Domains"); ?></th>
@@ -101,6 +102,7 @@ if (!isset($mode)) { # when included from adm_login, mode is not set
 </tbody>
 </table>
 
+<p>&nbsp;</p>
 <!-- Databases -->
 
 <?php
@@ -112,7 +114,7 @@ if (!isset($mode)) { # when included from adm_login, mode is not set
   echo "</p>";
 ?>
 
-<table class="tedit" width="50%">
+<table class="tedit" width="100%">
 <thead>
 <tr>
   <th width='50%'><?php __("DB"); ?></th>
@@ -138,7 +140,7 @@ if (!isset($mode)) { # when included from adm_login, mode is not set
     } elseif (isset($mode) &&$mode==1) {
       echo sprintf("%.1f", $pc)."&nbsp;%";
     } else {
-      $quota->quota_displaybar(2*$pc);
+      $quota->quota_displaybar(2*$pc, 0);
     }
     echo "</td></tr>";
   }

@@ -520,13 +520,24 @@ class m_quota {
     }
   }
 
-  // Cette fonction doit disparaitre quand on refera les pages d'affichage du quota
-  // trop sale
-  function quota_displaybar($usage) {
-    $usage_color = '#A0CFEC';
-    $usage_color = ((85 < $usage && $usage <= 100) ? '#82CAFF' : $usage_color); // yellow
+  // Affiche des barres de progression
+  // color_type :
+  //   0 = Pas de changement de couleur
+  //   1 = Progression du vert vers le rouge en fonction du porcentage
+  //   2 = Progression du rouge vers le vert en fonction du porcentage
+  function quota_displaybar($usage, $color_type=1) {
+    if ($color_type == 1) {
+      $csscolor = " background-color:".PercentToColor($usage);
+    } elseif ($color_type == 2) {
+      $csscolor = " background-color:".PercentToColor(100-$usage);
+    } else {
+      $csscolor = "";
+    }
+
+    
     echo '<div class="progress-bar">';
-    echo '<div style="width:'.$usage.'%; background: ' . $usage_color . '; text-align:center; font-weight: bold;" >'.$usage.'%</div>';
+    echo '<div class="barre" style="width:'.$usage.'%;'.$csscolor.'" ></div>';
+    echo '<div class="txt">'.$usage.'%</div>';
     echo '</div>';
   }
 

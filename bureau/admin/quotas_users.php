@@ -122,8 +122,8 @@ echo "<br /><br />"; printf(_("If you want to manage them, go to")."&nbsp;<a hre
 
 ?>
 <center>
-<div style="width: 650px">
-<table class="tedit">
+<div>
+<table class="tedit" width="100%">
 <thead>
    <tr><th>&nbsp;</th><th><?php __("Count"); ?></th><th><?php __("Space"); ?></th></tr>
 </thead>
@@ -163,8 +163,8 @@ echo "<br /><br />"; printf(_("If you want to manage them, go to")."&nbsp;<a hre
 ?>
 <center>
 
-<div style="width: 650px">
-<table  class="tedit">
+<div>
+<table  class="tedit" width="100%">
 <thead>
 	    <tr><th rowspan="2"><?php __("Account"); ?></th><th colspan="3"><?php __("Count"); ?></th><th colspan="5"><?php __("Space"); ?></th></tr>
 <tr>
