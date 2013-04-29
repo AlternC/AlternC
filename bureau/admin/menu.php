@@ -41,12 +41,12 @@ if ( empty($logo) ||  ! $logo ) { $logo = 'images/logo3.png'; }
 $obj_menu = $menu->getmenu();
 
 foreach ($obj_menu as $k => $m ) {
-  echo "<div class='menu-box ".(!empty($m['divclass'])?$m['divclass']:'')."'>\n";
+  echo "<div class='menu-box {$k}-menu ".(!empty($m['divclass'])?$m['divclass']:'')."'>\n";
   echo "  <a href=\"".$m['link']."\"";
   if (!empty($m['target'])) echo " target='". $m['target']."' ";
   echo ">\n";
   echo "    <span class='menu-title'>\n";
-  echo "      <img src='".$m['ico']."' alt=\"".$m['title']."\" width='16px' height='16px' />&nbsp;";
+  //echo "      <img src='".$m['ico']."' alt=\"".$m['title']."\" width='16px' height='16px' />&nbsp;";
   echo "        <span class='";
   if (!empty($m['class'])) echo $m['class']." ";
   echo "'>"; // fin span ouvrant

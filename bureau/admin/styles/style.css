@@ -353,6 +353,7 @@ img {
 }
 
 .menu-box a .menu-title {
+  min-height: 16px;
 }
 
 .menu-box .menu-conmargin {
@@ -635,7 +636,7 @@ input#dir, input#sub_local {
 }
 
 .delete a, a.delete, input.delete {
-  background-image: url(../images/delete.png);
+  background-image: url(../icon/delete.png);
   background-repeat: no-repeat;
   background-position: 8px 3px;
   padding-left: 30px;
@@ -699,6 +700,132 @@ input#dir, input#sub_local {
 
 .up a, a.up, input.up {
   background-image: url(../icon/up.png);
+  background-repeat: no-repeat;
+  background-position: 8px 3px;
+  padding-left: 30px;
+}
+
+.back a, a.back, input.back {
+  background-image: url(../icon/back.png);
+  background-repeat: no-repeat;
+  background-position: 8px 3px;
+  padding-left: 30px;
+}
+
+.admin a, a.admin, input.admin, .admin-menu .menu-title {
+  background-image: url(../images/admin.png);
+  background-repeat: no-repeat;
+  background-position: 8px 3px;
+  padding-left: 30px;
+}
+
+.home a, a.home, input.home, .home-menu .menu-title {
+  background-image: url(../images/home.png);
+  background-repeat: no-repeat;
+  background-position: 8px 3px;
+  padding-left: 30px;
+}
+
+.dom a, a.dom, input.dom, .dom-menu .menu-title {
+  background-image: url(../images/dom.png);
+  background-repeat: no-repeat;
+  background-position: 8px 3px;
+  padding-left: 30px;
+}
+
+.mail a, a.mail, input.mail, .mail-menu .menu-title {
+  background-image: url(../images/mail.png);
+  background-repeat: no-repeat;
+  background-position: 8px 3px;
+  padding-left: 30px;
+}
+
+.bro a, a.bro, input.bro, .bro-menu .menu-title {
+  background-image: url(../images/folder.png);
+  background-repeat: no-repeat;
+  background-position: 8px 3px;
+  padding-left: 30px;
+}
+
+.hta a, a.hta, input.hta, .hta-menu .menu-title {
+  background-image: url(../images/password.png);
+  background-repeat: no-repeat;
+  background-position: 8px 3px;
+  padding-left: 30px;
+}
+
+.ftp a, a.ftp, input.ftp, .ftp-menu .menu-title {
+  background-image: url(../images/ftp.png);
+  background-repeat: no-repeat;
+  background-position: 8px 3px;
+  padding-left: 30px;
+}
+
+.cron a, a.cron, input.cron, .cron-menu .menu-title {
+  background-image: url(../images/schedule.png);
+  background-repeat: no-repeat;
+  background-position: 8px 3px;
+  padding-left: 30px;
+}
+
+.lxc a, a.lxc, input.lxc, .lxc-menu .menu-title {
+  background-image: url(../images/ssh.png);
+  background-repeat: no-repeat;
+  background-position: 8px 3px;
+  padding-left: 30px;
+}
+
+.mysql a, a.mysql, input.mysql, .mysql-menu .menu-title {
+  background-image: url(../images/mysql.png);
+  background-repeat: no-repeat;
+  background-position: 8px 3px;
+  padding-left: 30px;
+}
+
+.quota a, a.quota, input.quota, .quota-menu .menu-title {
+  background-image: url(../images/quota.png);
+  background-repeat: no-repeat;
+  background-position: 8px 3px;
+  padding-left: 30px;
+}
+
+.authip a, a.authip, input.authip, .authip-menu .menu-title {
+  background-image: url(../images/ip.png);
+  background-repeat: no-repeat;
+  background-position: 8px 3px;
+  padding-left: 30px;
+}
+
+.log a, a.log, input.log, .log-menu .menu-title {
+  background-image: url(../images/logs.png);
+  background-repeat: no-repeat;
+  background-position: 8px 3px;
+  padding-left: 30px;
+}
+
+.help a, a.help, input.help, .help-menu .menu-title {
+  background-image: url(../images/help.png);
+  background-repeat: no-repeat;
+  background-position: 8px 3px;
+  padding-left: 30px;
+}
+
+.lang a, a.lang, input.lang, .lang-menu .menu-title {
+  background-image: url(../images/lang.png);
+  background-repeat: no-repeat;
+  background-position: 8px 3px;
+  padding-left: 30px;
+}
+
+.mem a, a.mem, input.mem, .mem-menu .menu-title {
+  background-image: url(../images/config.png);
+  background-repeat: no-repeat;
+  background-position: 8px 3px;
+  padding-left: 30px;
+}
+
+.logout a, a.logout, input.logout, .logout-menu .menu-title {
+  background-image: url(../images/exit.png);
   background-repeat: no-repeat;
   background-position: 8px 3px;
   padding-left: 30px;

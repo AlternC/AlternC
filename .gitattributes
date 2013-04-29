@@ -129,9 +129,11 @@ bureau/admin/hta_edit.php -text
 bureau/admin/hta_edituser.php -text
 bureau/admin/hta_list.php -text
 bureau/admin/icon/add.png -text
+bureau/admin/icon/back.png -text
 bureau/admin/icon/browse.png -text
 bureau/admin/icon/cancel.png -text
 bureau/admin/icon/configure.png -text
+bureau/admin/icon/delete.png -text
 bureau/admin/icon/delfile.png -text
 bureau/admin/icon/doc.png -text
 bureau/admin/icon/down.png -text

@@ -91,7 +91,7 @@ if(!isset($r['user'])){
 	echo "<p class=\"error\">";__("You changed the MySQL User base configuration. Please refer to your configuration");echo"</p><p>&nbsp;</p>";
 }
 ?>
-<p><span class="ina"><a href="sql_list.php"><?php __("Back to the MySQL database list"); ?></a></span></p>
+<p><span class="ina back"><a href="sql_list.php"><?php __("Back to the MySQL database list"); ?></a></span></p>
 
 
 <?php
