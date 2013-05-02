@@ -547,6 +547,7 @@ install/upgrades/3.0.0~2.sh -text
 install/upgrades/3.0.0~3.php -text
 install/upgrades/3.0.0~4.sh -text
 install/upgrades/3.0.1.php -text
+install/upgrades/3.0.3~a.sql -text
 install/upgrades/README -text
 lang/.svnignore -text
 lang/README -text
