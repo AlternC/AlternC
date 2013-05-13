@@ -100,7 +100,6 @@ define('ALTERNC_HTML',     "$L_ALTERNC_HTML");
 if(isset($L_ALTERNC_LOGS_ARCHIVE))
   define('ALTERNC_LOGS_ARCHIVE',  "$L_ALTERNC_LOGS_ARCHIVE");
 define('ALTERNC_LOGS',     "$L_ALTERNC_LOGS");
-define('WEBSERVERS_LOGS',  "$L_WEBSERVERS_LOGS");
 define('ALTERNC_PANEL',    "/usr/share/alternc/panel");
 define('ALTERNC_LOCALES',  ALTERNC_PANEL."/locales");
 
