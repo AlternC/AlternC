@@ -28,6 +28,7 @@ class m_debug_alternc {
   var $status=false;
   var $nb_sql_query=0;
   var $tps_sql_query=0;
+  var $generation_started=null;
 
   /*---------------------------------------------------------------------------*/
   /** Constructor
@@ -39,6 +40,7 @@ class m_debug_alternc {
     }
     $this->nb_sql_query=0;
     $this->tps_sql_query=0;
+    $this->generation_started=microtime(true);
   }
 
   function activate() {
@@ -63,9 +65,12 @@ class m_debug_alternc {
     if ( $cuid!=2000 ) return false;
     if ( ! $this->status ) return false;
 
+    $generation_time = (microtime(true) - $this->generation_started) * 1000;
+
     echo "<fieldset style='background-color: silver;'>";
     echo "<pre>";
-    echo "+++ BEGIN Debug Mode+++\n\n";
+    echo "+++ BEGIN Debug Mode+++\n";
+    echo "Total generation time : $generation_time ms\n";
     print_r("\n--- Total SQL Query : ".$this->nb_sql_query." req / ".$this->tps_sql_query." ms ---\n");
     print_r($this->infos);
     echo "\n\n--- GET ---\n";
