@@ -1,5 +1,5 @@
 #!/bin/bash
-. /etc/alternc/local.sh
+source /etc/alternc/local.sh
 # Set disk quota to an user
 # Won't work over NFS
 
@@ -11,7 +11,6 @@ SED=/bin/sed
 QUOTA=/usr/sbin/setquota
 DF=/bin/df
 
-source /etc/alternc/local.sh
 
 #checking if quotas are installed
 command -v $QUOTA >/dev/null || { echo "Quotas uninstalled"; exit 1; }
