@@ -9,6 +9,7 @@ WC=/usr/bin/wc
 BLKID=/sbin/blkid
 MID=$1
 
+. /etc/alternc/local.sh
 
 if [ "x$MID" == "x" ] ; then
   echo "Usage: quota_get <uid>"
