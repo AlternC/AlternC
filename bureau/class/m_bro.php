@@ -552,7 +552,7 @@ class m_bro {
           @touch($absolute."/".$_FILES['userfile']['name']);
         }
         if (@move_uploaded_file($_FILES['userfile']['tmp_name'], $absolute."/".$_FILES['userfile']['name'])) {
-          $action->fix_dir($absolute."/".$_FILES['userfile']['name']);
+          $action->fix_file($absolute."/".$_FILES['userfile']['name']);
 	  return $absolute."/".$_FILES['userfile']['name'];
 	} else {
 	  $err->raise("bro",_("Cannot create the requested file. Please check the permissions"));

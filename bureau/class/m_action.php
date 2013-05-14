@@ -57,6 +57,13 @@ class m_action {
   }
 
   /*
+  * function to set the cration of a file 
+  */
+  function fix_file($file,$user="root") {
+    return $this->set('fix_file',$user, array('file'=>$file));
+  }
+
+  /*
   * function to delete file / folder
   */
   function del($dir,$user="root") {
@@ -95,6 +102,7 @@ class m_action {
   */
   function set($type,$user,$parameters) {
     global $db,$err;
+    $err->log("action","set",$type);
     
     $serialized=serialize($parameters);
     switch($type){
@@ -106,6 +114,9 @@ class m_action {
       break;
     case 'move':
       $query="insert into actions values ('','MOVE','$serialized',now(),'','','$user','');"; 
+      break;
+    case 'fix_file':
+      $query="insert into actions values ('','FIXFILE','$serialized',now(),'','','$user','');"; 
       break;
     case 'fix_dir':
       $query="insert into actions values ('','FIXDIR','$serialized',now(),'','','$user','');"; 

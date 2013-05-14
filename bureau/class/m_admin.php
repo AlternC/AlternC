@@ -418,7 +418,7 @@ class m_admin {
    * @return boolean Returns FALSE if an error occurs, TRUE if not.
    */
   function add_mem($login, $pass, $nom, $prenom, $mail, $canpass=1, $type='default', $duration=0, $notes = "", $force=0, $create_dom=false, $db_server_id) {
-    global $err,$quota,$classes,$cuid,$mem,$L_MYSQL_DATABASE,$L_MYSQL_LOGIN,$hooks;
+    global $err,$quota,$classes,$cuid,$mem,$L_MYSQL_DATABASE,$L_MYSQL_LOGIN,$hooks,$action;
     $err->log("admin","add_mem",$login."/".$mail);
     if (!$this->enabled) {
       $err->raise("admin",_("-- Only administrators can access this page! --"));
@@ -475,7 +475,10 @@ class m_admin {
       $db->query("INSERT INTO membres (uid,login,pass,mail,creator,canpass,type,created,notes,db_server_id) VALUES ('$uid','$login','$pass','$mail','$cuid','$canpass', '$type', NOW(), '$notes', '$db_server_id');");
       $db->query("INSERT INTO local(uid,nom,prenom) VALUES('$uid','$nom','$prenom');");
       $this->renew_update($uid, $duration);
-      exec("sudo /usr/lib/alternc/mem_add ".$login." ".$uid);
+      #exec("sudo /usr/lib/alternc/mem_add ".$login." ".$uid);
+      $action->create_dir(getuserpath("$login"));
+      $action->fix_dir(getuserpath("$login"));
+      
       // Triggering hooks
       $mem->su($uid);
       // TODO: old hook method FIXME: when unused remove this
@@ -663,7 +666,7 @@ EOF;
    * @return boolean Returns FALSE if an error occurs, TRUE if not.
    */
   function del_mem($uid) {
-    global $err,$quota,$classes,$cuid,$mem,$dom,$hooks;
+    global $err,$quota,$classes,$cuid,$mem,$dom,$hooks,$action;
     $err->log("admin","del_mem",$uid);
 
     if (!$this->enabled) {
@@ -687,12 +690,24 @@ EOF;
       }
     }
     */
+
+    /* 
+     * New way of deleting or backup delted user html folders using action class
+     */
+    $archive=variable_get('archive_del_data');
+    $path=getuserpath($tt['login']);
+    if($archive == 1 ){
+     echo("archive");
+     $action->archive($path,"html"); 	
+    }else{
+     echo("del");
+     $action->del($path); 	
+    }
     $hooks->invoke("alternc_del_member");
     $hooks->invoke("hook_admin_del_member");
     
     if (($db->query("DELETE FROM membres WHERE uid='$uid';")) &&
 	($db->query("DELETE FROM local WHERE uid='$uid';"))) {
-      exec("sudo /usr/lib/alternc/mem_del ".$tt["login"]);
       $mem->unsu();
       // If this user was (one day) an administrator one, he may have a list of his own accounts. Let's associate those accounts to nobody as a creator.
       $db->query("UPDATE membres SET creator=2000 WHERE creator='$uid';");
