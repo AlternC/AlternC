@@ -1,8 +1,6 @@
 
- </div>
-</td>
-</tr>
-</table>
+</div> <!-- div content -->
+<div style="clear:both;" />
 </div> <!-- div global -->
 <?php 
 if ( isset($debug_alternc) && $debug_alternc->status ) {

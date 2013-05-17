@@ -151,6 +151,7 @@ if (!$charset) $charset="UTF-8";
     </script>
 
   </div>
+  <div style="clear:both;" />
   </div>
 </body>
 </html>

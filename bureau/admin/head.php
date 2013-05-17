@@ -57,7 +57,5 @@ if ($isinvited && isset($oldid) && !empty($oldid) && $oldid!=$cuid ) {
 }
 ?>
 <div id="global">
-<table>
-<tr>
-<td id="tdMenu"><div id="menu"><?php include_once("menu.php"); ?></div></td>
-<td id="tdContent"><div id="content">
+<div id="menu"><?php include_once("menu.php"); ?></div>
+<div id="content">
