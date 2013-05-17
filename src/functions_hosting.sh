@@ -112,7 +112,7 @@ host_create() {
         -e "s#%%UID%%#$U_ID#g" \
         -e "s#%%GID%%#$G_ID#g" \
         -e "s#%%mail_account%%#$MAIL_ACCOUNT#g" \
-        -e "s#%%user%%#$USER2#g" \        
+        -e "s#%%user%%#$USER2#g" \
         $TMP_FILE
 
     # Check if all is right in the conf file
