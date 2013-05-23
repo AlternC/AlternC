@@ -52,7 +52,7 @@ if (!$charset) $charset="UTF-8";
       <p><a href="index.php"><?php __("Click here to log in"); ?></a></p>
       <p>&nbsp;</p>
     </div>
-  <div style="clear:both;" />
+  <div style="clear:both;" ></div>
   </div>
 <script type="text/javascript">
 function redirect_panel() {
