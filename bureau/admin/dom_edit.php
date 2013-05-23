@@ -115,13 +115,11 @@ if ($r['dns_action']=='UPDATE') {?>
 <table class="tlist">
 <tr><th colspan="2"> </th><th><?php __("Subdomain"); ?></th><th><?php __("Type");?></th><th><?php __("Status")?></th><th></th></tr>
 <?php
-$col=1;
 $dt=$dom->domains_type_lst();
 for($i=0;$i<$r["nsub"];$i++) {
-	$col=3-$col;
 
 ?>
-	<tr class="lst<?php echo $col; ?>">
+	<tr class="lst">
     <?php if ( $r['sub'][$i]['web_action'] =='DELETE') { echo "<td colspan='2' />"; } else { ?>
 		<td class="center">
     <?php  if (!(!$isinvited && $dt[strtolower($r["sub"][$i]["type"])]["enable"] != "ALL" )) { ?>

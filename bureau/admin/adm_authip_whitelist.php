@@ -63,9 +63,7 @@ $list_ip = $authip->list_ip_whitelist();
       <table class='tlist'>
       <tr><th><?php __("Type"); ?></th><th><?php __("IP"); ?></th><th><?php __("Informations"); ?></th><th colspan='2' /></tr>
       <?php 
-      $col=1;
       foreach($list_ip as $i) {
-        $col=3-$col;
         if (checkip($i['ip'])) {
           if ($i['subnet']==32) {
             $txt="Address IPv4";
@@ -79,7 +77,7 @@ $list_ip = $authip->list_ip_whitelist();
             $txt="Subnet IPv6";
           }
         } 
-        echo "<tr class='lst$col'><td>$txt</td><td>{$i['ip_human']}</td><td>{$i['infos']}</td>";
+        echo "<tr class='lst'><td>$txt</td><td>{$i['ip_human']}</td><td>{$i['infos']}</td>";
         ?>
         <td><div class="ina edit"><a href="javascript:edit_ip(<?php echo "'".htmlentities($i['id'])."','".htmlentities($i['ip_human'])."','".htmlentities($i['infos'])."'"; ?>);"><?php __("Edit"); ?></a></div></td>
         <td><div class="ina delete"><a href="adm_authip_whitelist.php?delete_id=<?php echo urlencode($i["id"]) ?>"><?php __("Delete"); ?></a></div></td>

@@ -68,12 +68,10 @@ $c=$admin->dom_list(true,$forcecheck);
 <table class="tlist">
     <tr><th></th><th><?php __("Action"); ?></th><th><?php __("Domain"); ?></th><th><?php __("Creator"); ?></th><th><?php __("Connect as"); ?></th><th><?php __("OK?"); ?></th><th><?php __("Status"); ?></th></tr>
 <?php
-$col=1;
 for($i=0;$i<count($c);$i++) {
- $col=3-$col;
 ?>
 
-<tr class="lst<?php echo $col; ?>">
+<tr class="lst">
 				    <td><?php if ($c[$i]["noerase"]) {
 			echo "<img src=\"icon/encrypted.png\" width=\"16\" height=\"16\" alt=\""._("Locked Domain")."\" />";
 				    } ?></td>

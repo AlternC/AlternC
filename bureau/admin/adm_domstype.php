@@ -43,7 +43,7 @@ include_once("head.php");
 
 <br />
 <?php
-if (isset($error) && $error) {
+if (!empty($error)) {
   echo "<p class=\"error\">$error</p>";
 }
 
@@ -68,11 +68,9 @@ if (isset($error) && $error) {
     <th><?php __("create www directory ?");?></th>
 </tr>
 <?php 
-$pair=0;
 foreach($dom->domains_type_lst() as $d) { 
-++$pair;
 ?>
-<tr class="lst<?php echo $pair%2+1 ?>">
+<tr class="lst">
     <td><div class="ina edit"><a href="adm_domstypeedit.php?name=<?php echo urlencode($d['name']); ?>"><?php __("Edit"); ?></a></div></td>
     <td><div class="ina"><a href="adm_domstyperegenerate.php?name=<?php echo urlencode($d['name']);?>"><?php __("Regenerate");?></a></div></td> 
     <td><?php echo $d['name'];?></td>

@@ -72,12 +72,8 @@ if (isset($error) && $error && !$noftp) {
   <tr><th colspan="2"> </th><th><?php __("Enabled"); ?></th><th><?php __("Username"); ?></th><th><?php __("Folder"); ?></th></tr>
 <?php
 reset($r);
-$col=1;
-while (list($key,$val)=each($r))
-	{
-	$col=3-$col;
-?>
-	<tr class="lst<?php echo $col; ?>">
+while (list($key,$val)=each($r)) { ?>
+	<tr class="lst">
 		<td align="center"><input type="checkbox" class="inc" id="del_<?php echo $val["id"]; ?>" name="del_<?php echo $val["id"]; ?>" value="<?php echo $val["id"]; ?>" /></td>
 <td><div class="ina edit"><a href="ftp_edit.php?id=<?php echo $val["id"] ?>"><?php __("Edit"); ?></a></div></td>
 

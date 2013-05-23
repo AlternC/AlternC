@@ -46,11 +46,9 @@ echo "<table cellspacing=\"0\" cellpadding=\"4\" class='tlist'>";
 echo "<tr><th>"._("Quota")."</th><th>"._("Used")."</th><th>"._("Total")."</th></tr>";
 $qlist=$quota->qlist();
 reset($qlist);
-$col=1;
  while (list($key,$val)=each($qlist)) {
   if ( !isset($q[$key]) || !$q[$key]["t"]) continue;
-   $col=3-$col;
-   echo "<tr class=\"lst$col\">";
+   echo "<tr class=\"lst\">";
    echo "<td>";
   if ($q[$key]["u"] >= $q[$key]["t"]) echo "<font class=\"over\">";
    echo _($val);

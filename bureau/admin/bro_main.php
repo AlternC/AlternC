@@ -333,10 +333,8 @@ function actmoveto_not_empty() {
                   </tr>
                   <?php
 
-                  $col=1;
         for($i=0;$i<count($c);$i++) {
-          $col=3-$col;
-          echo "<tr class=\"lst$col\">\n";
+          echo "<tr class=\"lst\">\n";
           if ($c[$i]["type"]) {
             echo "  <td width=\"28\"><input type=\"checkbox\" class=\"inc\" name=\"d[]\" value=\"".htmlentities($c[$i]["name"])."\" /></td>";
             if ($p["showicons"]) {
@@ -410,10 +408,8 @@ function actmoveto_not_empty() {
         echo "<table width=\"100%\" border=0 cellpadding=0 cellspacing=0>";
         echo "<tr><td valign=\"top\" width=\"50%\">";
         echo "<table width=\"100%\" border=0 cellpadding=0 cellspacing=0>";
-        $col=1;
         for($i=0;$i<round(count($c)/2);$i++) {
-          $col=3-$col;
-          echo "<tr class=\"lst$col\">\n";
+          echo "<tr class=\"lst\">\n";
           if ($c[$i]["type"]) {
             echo "  <td width=\"28\"><input type=\"checkbox\" class=\"inc\" name=\"d[]\" value=\"".$c[$i]["name"]."\" /></td><td><a href=\"";
             echo "bro_editor.php?editfile=".urlencode($c[$i]["name"])."&amp;R=".urlencode($R);
@@ -440,10 +436,8 @@ function actmoveto_not_empty() {
         echo "</table>";
         echo "</td><td valign=\"top\" width=\"50%\">";
         echo "<table width=\"100%\" border=0 cellpadding=0 cellspacing=0>";
-        $col=1;
         for($i=round(count($c)/2);$i<count($c);$i++) {
-          $col=3-$col;
-          echo "<tr class=\"lst$col\">\n";
+          echo "<tr class=\"lst\">\n";
           if ($c[$i]["type"]) {
             echo "  <td width=\"28\"><input TYPE=checkbox class=\"inc\" name=\"d[]\" value=\"".$c[$i]["name"]."\"></td><td><a href=\"";
             echo "bro_editor.php?editfile=".urlencode($c[$i]["name"])."&amp;R=".urlencode($R);
@@ -477,10 +471,8 @@ function actmoveto_not_empty() {
         echo "<table width=\"100%\" border=0 cellpadding=0 cellspacing=0>";
         echo "<tr><td valign=\"top\" width=\"33%\">";
         echo "<table width=\"100%\" border=0 cellpadding=0 cellspacing=0>";
-        $col=1;
         for($i=0;$i<round(count($c)/3);$i++) {
-          $col=3-$col;
-          echo "<tr class=\"lst$col\">\n";
+          echo "<tr class=\"lst\">\n";
           if ($c[$i]["type"]) {
             echo "  <td width=\"28\"><input TYPE=checkbox class=\"inc\" name=\"d[]\" value=\"".$c[$i]["name"]."\"></td><td><a href=\"";
             echo "bro_editor.php?editfile=".urlencode($c[$i]["name"])."&amp;R=".urlencode($R);
@@ -507,10 +499,8 @@ function actmoveto_not_empty() {
         echo "</table>";
         echo "</td><td valign=\"top\" width=\"33%\">";
         echo "<table width=\"100%\" border=0 cellpadding=0 cellspacing=0>";
-        $col=1;
         for($i=round(count($c)/3);$i<round(2*count($c)/3);$i++) {
-          $col=3-$col;
-          echo "<tr class=\"lst$col\">\n";
+          echo "<tr class=\"lst\">\n";
           if ($c[$i]["type"]) {
             echo "  <td width=\"28\"><input TYPE=checkbox class=\"inc\" name=\"d[]\" value=\"".$c[$i]["name"]."\"></td><td><a href=\"";
             echo "bro_editor.php?editfile=".urlencode($c[$i]["name"])."&amp;R=".urlencode($R);
@@ -538,10 +528,8 @@ function actmoveto_not_empty() {
         echo "</table>";
         echo "</td><td valign=\"top\" width=\"33%\">";
         echo "<table width=\"100%\" border=0 cellpadding=0 cellspacing=0>";
-        $col=1;
         for($i=round(2*count($c)/3);$i<count($c);$i++) {
-          $col=3-$col;
-          echo "<tr class=\"lst$col\">\n";
+          echo "<tr class=\"lst\">\n";
           if ($c[$i]["type"]) {
             echo "  <td width=\"28\"><input TYPE=checkbox class=\"inc\" name=\"d[]\" value=\"".$c[$i]["name"]."\"></td><td><a href=\"";
             echo "bro_editor.php?editfile=".urlencode($c[$i]["name"])."&amp;R=".urlencode($R);

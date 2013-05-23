@@ -66,10 +66,8 @@ $lac = $authip->list_affected();
   <th></th>
 </tr>
 <?php 
-  $col=1;
   foreach ($lac as $ll) {
-    $col=3-$col;
-    echo "<tr class='lst$col' >";
+    echo "<tr class='lst' >";
     echo "<td><span title=\"{$list_ip[$ll['authorised_ip_id']]['ip_human']}\">".$list_ip[$ll['authorised_ip_id']]['infos'];
     //echo "<br/>".$list_ip[$ll['authorised_ip_id']]['ip_human'];
     echo "</span></td>";
@@ -147,9 +145,7 @@ $lac = $authip->list_affected();
 <table class="tlist">
 <tr><th><?php __("Name"); ?></th><th><?php __("IP or network"); ?></th><th><?php __("Type"); ?></th><th colspan='2'></th></tr>
 <?php 
-$col=1;
 foreach($list_ip as $i) {
-  $col=3-$col;
   if (checkip($i['ip'])) {
     if ($i['subnet']==32) {
       $txt="Address IPv4";
@@ -163,7 +159,7 @@ foreach($list_ip as $i) {
       $txt="Subnet IPv6";
     }
   } 
-  echo "<tr class='lst$col' ><td>{$i['infos']}</td><td>{$i['ip_human']}</td><td>$txt</td>";
+  echo "<tr class='lst' ><td>{$i['infos']}</td><td>{$i['ip_human']}</td><td>$txt</td>";
   ?>
   <td><div class="ina edit"><a href="javascript:edit_ip(<?php echo "'".htmlentities($i['id'])."','".htmlentities($i['ip_human'])."','".htmlentities($i['infos'])."'"; ?>);"><?php __("Edit"); ?></a></div></td>
   <td><div class="ina delete"><a href="ip_main.php?delete_id=<?php echo urlencode($i["id"]) ?>"><?php __("Delete"); ?></a></div></td>

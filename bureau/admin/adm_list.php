@@ -202,16 +202,13 @@ if ($mem->user["admlist"]==1) { // SHORT MODE
 </tr>
 <?php
 reset($r);
-$col=1;
 
 $rz=ceil(count($r)/3);
 
-for($z=0;$z<$rz;$z++)
-	{
-	$col=3-$col;
-$val=$r[$z];
+for($z=0;$z<$rz;$z++){
+  $val=$r[$z];
 ?>
-	<tr class="lst<?php echo $col; ?>">
+	<tr class="lst">
 <?php if ($val["su"]) { ?>
 			<td>&nbsp;</td>
 <?php } else { ?>

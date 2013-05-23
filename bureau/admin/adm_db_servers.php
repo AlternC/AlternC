@@ -55,10 +55,8 @@ echo "</p>";
     <th><?php __("Users"); ?></th>
   </tr>
 <?php 
-$col=2;
 foreach ( $lst_db_servers as $l) { 
-  $col=3-$col;
-  echo "<tr class='lst$col'>"; ?>
+  echo "<tr class='lst'>"; ?>
     <td><?php echo $l['id']; ?></td>
     <td><?php echo $l['name']; ?></td>
     <td><?php echo $l['host']; ?></td>

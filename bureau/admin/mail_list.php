@@ -125,13 +125,13 @@ if (empty($allmails_list) && empty($search)) {
 <tr><th></th><th></th><th><?php __("Enabled");?></th><th style="text-align:right"><?php __("Address"); ?></th><th><?php __("Pop/Imap"); ?></th><th><?php __("Other recipients"); ?></th><th><?php __("Last login time"); ?></th></tr>
 <?php
 
-$col=1; $i=0;
+$i=0;
 //listing of every mail of the current domain.
 if(!empty($mails_list)) {
  while (list($key,$val)=each($mails_list)) {
-  $col=3-$col; $grey="";
+  $grey="";
 	?>
-	<tr class="lst<?php echo $col; ?>">
+	<tr class="lst">
 	  <?php if ($val["mail_action"]=="DELETING") { $grey="grey"; ?>
 	    <td colspan="3"><?php __("Deleting..."); ?></td>
 	  <?php } else if ($val["mail_action"]=="DELETE") { $grey="grey"; ?>

@@ -32,8 +32,7 @@ include_once("head.php");
 
 if (!$r=$hta->ListDir()) {
 	$error=$err->errstr();
-}
-else {
+} else {
 	reset($r);
 }
 
@@ -68,13 +67,11 @@ $mem->show_help("hta_list2");
 <table class="tlist">
   <tr><th colspan="2"> </th><th><?php __("Folder"); ?></th></tr>
 <?php
-$col=1;
 
 
 for($i=0;$i<count($r);$i++){
-	$col=3-$col;
 ?>
-	<tr  class="lst<?php echo $col; ?>">
+	<tr  class="lst">
 		<td align="center"><input type="checkbox" class="inc" name="del_<?php echo $r[$i] ?>" value="<?php echo $r[$i] ?>" /></td>
 		<td>
 <div class="ina lock"><a href="hta_edit.php?dir=<?php echo $r[$i]?>"><?php __("Edit login and passwords"); ?></a></div>

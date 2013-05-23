@@ -54,13 +54,11 @@ if(!$list || empty($list['dir'])){
   </thead>
   <tbody>
 <?php
-$col=1;
 //listing of every logs of the current user.
 while (list($key,$val)=each($list)){
   foreach($val as $k => $v){
-  $col=3-$col;
   ?>
-  <tr class="lst<?php echo $col; ?>">
+  <tr class="lst">
   <td><?php echo $v['name']; ?></td>  
   <td><?php echo $v['creation_date']; ?></td>  
   <td><?php echo format_size($v['filesize']); ?></td>  

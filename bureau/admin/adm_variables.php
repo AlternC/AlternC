@@ -56,13 +56,10 @@ include_once ("head.php");
 <table border="0" cellpadding="4" cellspacing="0" class='tlist'>
 <tr><th><?php __("Names"); ?></th><th><?php __("Value"); ?></th><th><?php __("Comment"); ?></th></tr>
 <?php
-$col=1;
 
-foreach( variables_list() as $vars) {
- $col=3-$col;
- ?>
+foreach( variables_list() as $vars) {  ?>
 
- <tr class="lst<?php echo $col; ?>">
+ <tr class="lst">
  <td><?php echo $vars['name']; ?></td>
  <td><input type="text" name="<?php ehe($vars['name']); ?>" value="<?php ehe($vars['value']); ?>" /></td>
  <td><?php echo $vars['comment']; ?></td>

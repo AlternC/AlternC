@@ -77,12 +77,9 @@ if (is_array($c)) {
 <table border="0" cellpadding="4" cellspacing="0" class='tlist'>
 <tr><th><?php __("Action"); ?></th><th><?php __("Login"); ?></th><th><?php __("Password"); ?></th></tr>
 <?php
-$col=1;
-for($i=0;$i<count($c);$i++) {
- $col=3-$col;
-?>
+for($i=0;$i<count($c);$i++) { ?>
 
-<tr class="lst<?php echo $col; ?>">
+<tr class="lst">
 <td class="center"><div class="ina delete"><a href="adm_mxaccount.php?delaccount=<?php echo urlencode($c[$i]["login"]); ?>"><?php __("Delete"); ?></a></div></td>
 <td><?php echo $c[$i]["login"]; ?></td>
 <td><?php echo $c[$i]["pass"]; ?></td>

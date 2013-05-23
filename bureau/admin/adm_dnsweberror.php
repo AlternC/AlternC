@@ -63,10 +63,8 @@ include_once("head.php");
 $pair=0;
 $db->query("select sd.compte, m.login, sd.domaine, if(length(sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine) as fqdn, sd.valeur, dt.description, sd.web_result from sub_domaines sd,membres m, domaines_type dt where sd.web_action='OK' and length(sd.web_result)<>0 and upper(dt.name)=upper(sd.type) order by sd.domaine, sd.sub, sd.valeur;");
 
-while($db->next_record()) { 
-++$pair;
-?>
-<tr class="lst<?php echo $pair%2+1 ?>">
+while($db->next_record()) {  ?>
+<tr class="lst">
     <td><?php echo $db->f('compte');?></td>
     <td><?php echo $db->f('login');?> </td>
     <td><?php echo $db->f('domaine');?> </td>
@@ -92,10 +90,8 @@ while($db->next_record()) {
 $pair=0;
 $db->query("select d.compte, m.login, d.domaine, d.dns_result from domaines d, membres m where d.dns_action='OK' and dns_result <> 0 and dns_result <> '' and m.uid = d.compte;");
 
-while($db->next_record()) { 
-++$pair;
-?>
-<tr class="lst<?php echo $pair%2+1 ?>">
+while($db->next_record()) { ?>
+<tr class="lst">
     <td><?php echo $db->f('compte');?></td>
     <td><?php echo $db->f('login');?> </td>
     <td><?php echo $db->f('domaine');?> </td>

@@ -143,12 +143,10 @@ if (is_array($c)) {
   <th><?php __("Allow Password=Login?"); ?></th>
 </tr>
 <?php
-$col=1;
- foreach($c as $v) {
- $col=3-$col;
+foreach($c as $v) {
 ?>
 
-<tr class="lst<?php echo $col; ?>">
+<tr class="lst">
 <td class="center">
    <div class="ina edit"><a href="adm_passpolicy.php?edit=<?php echo urlencode($v["name"]); ?>"><?php __("Edit"); ?></a></div>
 </td>

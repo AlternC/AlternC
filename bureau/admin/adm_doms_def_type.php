@@ -47,14 +47,12 @@ $tab=$dom->lst_default_subdomains();
 <table class="tlist">
    <tr><th>&nbsp;</th><th><?php __("Sub"); ?></th><th><?php __("Type"); ?></th><th><?php __("settings"); ?></th><th><?php __("Concerned"); ?></th><th><?php __("Activation"); ?></th></tr>
 <?php
-$col=1;
 for($i=0;$i<count($tab)+1;$i++) {?>
-	<tr  class="lst<?php echo $col; ?>">
+	<tr  class="lst">
   <td>
 
 <?php
   @$val=$tab[$i];
-  $col=3-$col;
     if (isset($tab[$i])){ 
     echo "<input type='hidden' name='domup[$i][id]' value='".$val['id']."' />";  
     }

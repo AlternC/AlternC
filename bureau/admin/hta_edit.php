@@ -61,11 +61,8 @@ if (!$dir) {
     <th><?php __("Username"); ?></th>
   </tr>
 <?php
-$col=1;
-
-for($i=0;$i<count($r);$i++){
-  $col=3-$col; ?>
-  <tr class="lst<?php echo $col; ?>">
+for($i=0;$i<count($r);$i++){ ?>
+  <tr class="lst">
     <td align="center"><input type="checkbox" class="inc" name="d[]" value="<?php echo $r[$i]?>" /></td>
     <td>
       <div class="ina"><a href="hta_edituser.php?user=<?php echo urlencode($r[$i])?>&amp;dir=<?php echo urlencode($dir); ?>"><img src="icon/encrypted.png" alt="<?php __("Change this user's password"); ?>" /><?php __("Change this user's password"); ?></a></div>

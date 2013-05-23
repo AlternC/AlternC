@@ -80,13 +80,11 @@ if ($r) {
   </tr>
 
 <?php
-$col=1;
 $sql_right=$mysql->available_sql_rights();
 for($i=0;$i<count($r);$i++) {
   $val=$r[$i];
-  $col=3-$col;
 ?>
-	<tr class="lst<?php echo $col; ?>">
+	<tr class="lst">
     <td><strong><?php echo $val["db"] ?></strong></td>
     <td><a href="javascript:inverse_sql_right('<?php echo htmlentities($val["db"]);?>');"><?php __('Reverse selection');?></a></td>
     <?php foreach($sql_right as $sr) { ?>

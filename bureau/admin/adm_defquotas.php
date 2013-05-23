@@ -70,7 +70,7 @@ if (isset($error) && $error) {
 ?>
 <form method="post" action="adm_dodefquotas.php">
 <table border="0" cellpadding="4" cellspacing="0">
-<tr class="lst1">
+<tr class="lst">
 <td>
 <input type="hidden" name="action" value="delete" />
 <select name="type" id="type" class="inl">
@@ -93,7 +93,6 @@ foreach($quota->listtype() as $type) {
 <div>
 <input type="hidden" name="action" value="modify" />
 <?php
-$col=1;
 $qarray=$quota->qlist();
 $qlist=$quota->getdefaults();
 reset($qlist);
@@ -107,10 +106,9 @@ foreach($qlist as $type => $q) {
 foreach($q as $name => $value) {
 	if (!isset($qarray[$name])) continue;
 	$key = $type . ":" . $name;
-	$col=3-$col;
 ?>
 
-<tr class="lst<?php echo $col; ?>">
+<tr class="lst">
 <td><label for="<?php echo $key; ?>"><?php echo $qarray[$name] ; ?></label></td>
 <td><input type="text" class="int" size="16" maxlength="16" name="<?php echo $key; ?>" id="<?php echo $key;?>" value="<?php ehe($value); ?>" /></td></tr>
 

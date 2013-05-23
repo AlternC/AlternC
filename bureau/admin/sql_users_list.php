@@ -47,12 +47,10 @@ if (isset($error) && $error) {
 <table cellspacing="0" cellpadding="4" class="tlist">
    <tr><th>&nbsp;</th><th><?php __("User"); ?></th><th><?php __("Rights"); ?></th><th><?php __("Password");?></th></tr>
 <?php
-$col=1;
 for($i=0;$i<count($r);$i++) {
   $val=$r[$i];
-  $col=3-$col;
 ?>
-	<tr class="lst<?php echo $col; ?>">
+	<tr class="lst">
 	  <td align="center">
             <input type="checkbox" class="inc" id="del_<?php echo $val["name"]; ?>" name="del_<?php echo $val["name"]; ?>" value="<?php echo $val["name"]; ?>" />
           </td>

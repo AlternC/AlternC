@@ -54,13 +54,11 @@ if($rdb){
    <tr><th>&nbsp;</th><th><?php __("Database"); ?></th><?php if ( variable_get('sql_allow_users_backups') ) { ?><th><?php __("Backup"); ?></th><?php } // sql_allow_users_backups ?><th><?php __("Restore"); ?></th><th><?php __("Show Settings"); ?></th><th><?php __("Size"); ?></th></tr>
 
 <?php
-$col=1;
 for($i=0;$i<count($rdb);$i++) {
   $val=$rdb[$i];
   $val['size'] = $mysql->get_db_size($val['db']);
-  $col=3-$col;
 ?>
-	<tr  class="lst<?php echo $col; ?>">
+	<tr  class="lst">
 		<td align="center"><input type="checkbox" class="inc" id="del_<?php echo $val["db"]; ?>" name="del_<?php echo $val["db"]; ?>" value="<?php echo ($val["db"]); ?>" /></td>
 	   	<td><label for="del_<?php echo $val["db"]; ?>"><?php echo $val["db"]; ?></label></td>
 <?php if ( variable_get('sql_allow_users_backups') ) { ?>
