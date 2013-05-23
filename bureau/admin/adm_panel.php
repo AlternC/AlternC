@@ -60,14 +60,13 @@ if (isset($error) && $error) {
  <h3><?php __("Advanced features"); ?></h3>
 
 <ul id="adm_panel_root">
- <li class="lst2"><a href="adm_slaveip.php"><?php __("Manage allowed ip for slave zone transfers"); ?></a></li>
- <li class="lst1"><a href="adm_slaveaccount.php"><?php __("Manage allowed accounts for slave zone transfers"); ?></a></li>
- <li class="lst2"><a href="adm_mxaccount.php"><?php __("Manage allowed accounts for secondary mx"); ?></a></li>
- <li class="lst1"><a href="adm_variables.php"><?php __("Configure AlternC variables"); ?></a></li>
- <li class="lst2"><a href="adm_doms_def_type.php"><?php __("Manage defaults domains type"); ?></a></li>
- <li class="lst1"><a href="adm_domstype.php"><?php __("Manage domains type"); ?></a></li>
- <li class="lst2"><a href="adm_dnsweberror.php"><?php __("DNS and website having errors"); ?></a></li>
- <li class="lst1"><a href="adm_db_servers.php"><?php __("Manage databases servers"); ?></a></li>
+ <li class="lst2"><a href="adm_slavedns.php"><?php __("Manage slave DNS"); ?></a></li>
+ <li class="lst1"><a href="adm_mxaccount.php"><?php __("Manage allowed accounts for secondary mx"); ?></a></li>
+ <li class="lst2"><a href="adm_variables.php"><?php __("Configure AlternC variables"); ?></a></li>
+ <li class="lst1"><a href="adm_doms_def_type.php"><?php __("Manage defaults domains type"); ?></a></li>
+ <li class="lst2"><a href="adm_domstype.php"><?php __("Manage domains type"); ?></a></li>
+ <li class="lst1"><a href="adm_dnsweberror.php"><?php __("DNS and website having errors"); ?></a></li>
+ <li class="lst2"><a href="adm_db_servers.php"><?php __("Manage databases servers"); ?></a></li>
 <!--  <li class="lst2"><a href="stats_members.php"><?php __("Account creation statistics"); ?></a></li> -->
 
 <?php
