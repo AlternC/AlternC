@@ -853,7 +853,7 @@ class m_mysql {
             "trigger"=>$this->dbus->f("Trigger_priv")
             );
       }else{
-        $r[]=array("db"=>$tab['db'], "select"=>"N", "insert"=>"N", "update"=>"N", "delete"=>"N", "create"=>"N", "drop"=>"N", "references"=>"N", "index"=>"N", "alter"=>"N", "Create_tmp"=>"N", "lock"=>"N","create_view"=>"N","show_view"=>"N","create_routine"=>"N","alter_routine"=>"N","execute"=>"N","event"=>"N","trigger"=>"N");
+        $r[]=array("db"=>$tab['db'], "select"=>"N", "insert"=>"N", "update"=>"N", "delete"=>"N", "create"=>"N", "drop"=>"N", "references"=>"N", "index"=>"N", "alter"=>"N", "create_tmp"=>"N", "lock"=>"N","create_view"=>"N","show_view"=>"N","create_routine"=>"N","alter_routine"=>"N","execute"=>"N","event"=>"N","trigger"=>"N");
 
       }
 
