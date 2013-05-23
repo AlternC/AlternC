@@ -76,8 +76,7 @@ bureau/admin/adm_panel.php -text
 bureau/admin/adm_passpolicy.php -text
 bureau/admin/adm_quotadoedit.php -text
 bureau/admin/adm_quotaedit.php -text
-bureau/admin/adm_slaveaccount.php -text
-bureau/admin/adm_slaveip.php -text
+bureau/admin/adm_slavedns.php -text
 bureau/admin/adm_tld.php -text
 bureau/admin/adm_tldadd.php -text
 bureau/admin/adm_tlddoadd.php -text
