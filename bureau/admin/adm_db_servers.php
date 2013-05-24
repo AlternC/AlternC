@@ -50,7 +50,6 @@ echo "</p>";
     <th><?php __("Name"); ?></th>
     <th><?php __("Hostname"); ?></th>
     <th><?php __("Login"); ?></th>
-    <th><?php __("Password"); ?></th>
     <th><?php __("Client"); ?></th>
     <th><?php __("Users"); ?></th>
   </tr>
@@ -61,7 +60,6 @@ foreach ( $lst_db_servers as $l) {
     <td><?php echo $l['name']; ?></td>
     <td><?php echo $l['host']; ?></td>
     <td><?php echo $l['login']; ?></td>
-    <td><?php echo $l['password']; ?></td>
     <td><?php echo $l['client']; ?></td>
     <td><?php echo $l['nb_users']; ?></td>
   </tr>
