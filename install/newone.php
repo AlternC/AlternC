@@ -29,34 +29,48 @@
  ----------------------------------------------------------------------
 */
 
-// On vérifie que mysql.so est bien chargé, sinon on essaye de le charger
 if(!function_exists('mysql_connect'))  {
   if(!dl("mysql.so"))
     exit(1);
 }
 
-// Ne vérifie pas ma session :)
+// don't check my authentication !
 if(!chdir("/usr/share/alternc/panel"))
   exit(1);
 require("/usr/share/alternc/panel/class/config_nochk.php");
 
-// On passe super-admin
+// We go root 
 $admin->enabled=1;
 
-// On crée le compte admin : 
-//FIXME the last parameter should not be chosen by default: it has to match an entry in the db_servers table
-if (!$admin->add_mem("admin","admin","Administrateur", "Admin", "postmaster@".$L_FQDN,1,'default',0,'',0 ,'',1)) {
+// We Create the default mysql server if needed : 
+$db->query("SELECT MIN(id) AS id FROM db_servers;");
+$db->next_record();
+if(!intval($db->Record["id"])) {
+  echo "No default db_servers, creating one\n";
+  // No db_servers ? We create one from the local MySQL parameters
+  if ($L_MYSQL_HOST=="localhost") $client="localhost"; else $client="%";
+  $db->query("INSERT INTO db_servers SET `name`='Default', `host`='$L_MYSQL_HOST', `login`='$L_MYSQL_LOGIN', `password`='$L_MYSQL_PWD', `client`='$client';");
+  $db->query("SELECT MIN(id) AS id FROM db_servers;");
+  $db->next_record();
+}
+$dbs=$db->Record["id"];
+
+// And create the admin account
+if (!$admin->add_mem("admin","admin","Administrateur", "Admin", "postmaster@".$L_FQDN,
+		     1,'default',0,'',0 ,'', 
+		     $dbs 
+		     )) {
 	echo $err->errstr()."\n";
 	exit(1);
 }
 
-if(!$db->query("update membres set su=1 where login='admin';"))
+if(!$db->query("UPDATE membres SET su=1 WHERE login='admin';"))
   exit(1);
 
-// On lui attribue des quotas par defaut
+// Give admin account some default quota:
 if(!$quota->synchronise_user_profile()) {
   exit(1);
 }
 
 exit(0);
-?>
+

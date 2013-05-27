@@ -242,6 +242,7 @@ EOF
     touch           /var/lib/alternc/bind/automatic.conf /var/lib/alternc/bind/slaveip.conf
     chown root:bind /var/lib/alternc/bind/automatic.conf /var/lib/alternc/bind/slaveip.conf
     chmod 640       /var/lib/alternc/bind/automatic.conf /var/lib/alternc/bind/slaveip.conf
+    mkdir -p /var/run/alternc && chown alterncpanel:alterncpanel /var/run/alternc
     touch /var/run/alternc/refresh_slave
     /usr/lib/alternc/slave_dns
     # Apache will not start without this file
