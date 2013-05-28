@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Migrate a svn repository to WHEEZY
 
