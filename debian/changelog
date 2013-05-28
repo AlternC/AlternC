@@ -1,9 +1,12 @@
-alternc (3.1~alpha1) experimental; urgency=low
+alternc (3.1~alpha012) experimental; urgency=low
 
   * menu became dynamic with a class
-  * /var/alternc disapear to became Debian-compliant
+  * /var/alternc disapear to became Debian-compliant (but we upgrade properly, keeping an existing /var/alternc)
+  * fix detection of ACL using pre-depends
+  * fix dovecot SSL certificate (was pointing to an non-existing file)
+  * configure dovecot properly when using /etc/alternc/alternc.pem
 
- -- Alan Garcia <fufroma@nnx.com>  Mon, 18 Feb 2013 16:09:58 +0100
+ -- Benjamin Sonntag <benjamin@sonntag.fr>  Thu, 28 May 2013 06:09:00 +0100
 
 alternc (3.0) stable; urgency=low
 

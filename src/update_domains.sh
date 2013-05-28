@@ -143,9 +143,9 @@ if [ ! -z "$(cat "$RELOAD_WEB")" ] ; then
   fi
   mv "$tempo" "$VHOST_FILE"
 
-  # We must reload apache
+  # We must reload apache
   # we assume we run apache on the master
-  /usr/bin/alternc_reload apache || true
+  /usr/lib/alternc/alternc_reload apache || true
   # Launch hooks for apache reload
   run-parts --arg=web_reload /usr/lib/alternc/reload.d
 fi
