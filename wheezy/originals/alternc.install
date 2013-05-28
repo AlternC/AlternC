@@ -1,0 +1,567 @@
+#!/bin/bash
+
+# ----------------------------------------------------------------------
+# AlternC - Web Hosting System
+# Copyright (C) 2000-2012 by the AlternC Development Team.
+# https://alternc.org/
+# ----------------------------------------------------------------------
+# LICENSE
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License (GPL)
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# To read the license please visit http://www.gnu.org/copyleft/gpl.html
+# ----------------------------------------------------------------------
+# Purpose of file: Main install script, launch it anytime ;) 
+# ----------------------------------------------------------------------
+
+# Somes check before start operations
+if [ `id -u` -ne 0 ]; then
+    echo "must be launched as root"
+    exit 1
+fi
+
+set -e 
+
+for i in $*; do
+    case "$i" in
+        -f|--force)
+            export force=1; shift;;
+        -s|--slave)
+            export slave=1; shift;;
+        --)
+            break;;
+        *)
+            echo "unknown option $i"; shift;;
+    esac
+done
+
+. /usr/lib/alternc/functions.sh
+
+# hook 
+run-parts --arg=startup /usr/lib/alternc/install.d 
+
+#######################################################################
+# Script configuration
+#
+
+# Configuration template location
+TEMPLATE_DIR="/etc/alternc/templates"
+
+# Find needed configuration files (without the initial '/')
+# replace this one unconditionnally
+CONFIG_FILES="etc/alternc/bureau.conf etc/incron.d/alternc etc/apache2/envvars etc/alternc/apache2.conf etc/alternc/apache_logformat.conf etc/alternc/phpmyadmin.inc.php"
+
+if [ -e /etc/bind/named.conf ]; then
+    CONFIG_FILES="$CONFIG_FILES etc/bind/named.conf.options"
+fi
+if [ -d /etc/postfix ]; then
+    CONFIG_FILES="$CONFIG_FILES etc/postfix/master.cf etc/postfix/myalias.cf etc/postfix/myrelay.cf
+                  etc/postfix/mydomain.cf etc/postfix/myrelay-domain.cf etc/postfix/mygid.cf etc/postfix/myquota.cf
+                  etc/postfix/myvirtual.cf etc/postfix/mytransport.cf etc/postfix/sasl/smtpd.conf
+                  etc/alternc/postfix/postfix.cf etc/alternc/postfix/postfix-slave.cf"
+fi
+if [ -e /etc/proftpd/proftpd.conf ]; then
+    CONFIG_FILES="$CONFIG_FILES etc/proftpd/proftpd.conf etc/proftpd/welcome.msg etc/proftpd/modules.conf"
+fi
+
+if [ -e /etc/default/saslauthd ]; then
+    CONFIG_FILES="$CONFIG_FILES etc/default/saslauthd"
+fi
+
+if [ -e /etc/dovecot/dovecot.conf ]; then
+    CONFIG_FILES="$CONFIG_FILES etc/dovecot/alternc-sql.conf etc/dovecot/alternc-dict-quota.conf etc/dovecot/conf.d/95_alternc.conf"
+fi
+
+INSTALLED_CONFIG_TAR="/var/lib/alternc/backups/etc-installed.tar.gz"
+
+#######################################################################
+# Look for modified configuration files
+#
+if [ -f "$INSTALLED_CONFIG_TAR" ]; then
+    CHANGED="`env LANG=C tar -zdf "$INSTALLED_CONFIG_TAR" -C / 2> /dev/null | 
+              grep -v 'postfix/main.cf' | grep -v 'Uid differs'|grep -v 'Gid differs'  |grep -v 'Mode differs' | 
+              sed -e 's/^\([^:]*\).*/    \1/' | sort -u`"
+    # " shutup emacs
+    if [ ! -z "$CHANGED" ]; then
+        echo "The following configuration files has changed since last AlternC"
+        echo "installation :"
+        echo "$CHANGED"
+        echo ""
+        if [ "$force" = "1" ]; then
+            echo "Replacing them as you requested."
+        else
+            echo "These configuration files should normally be modified by"
+            echo "changing the template in $TEMPLATE_DIR and then calling"
+            echo "$0 to perform the update."
+            echo ""
+            echo "Please examine the situation closely and call '$0 -f'"
+            echo "if you still want to actually overwrite these files."
+            exit 1
+        fi
+    fi
+fi
+
+#######################################################################
+# Prepare template expansions
+#
+
+chown :alterncpanel /etc/alternc/local.sh
+. /etc/alternc/local.sh
+
+# Create the target directory
+for i in "$ALTERNC_HTML" "$ALTERNC_MAIL" "$ALTERNC_LOGS" ; do
+  test -d "$i" || mkdir -p "$i"
+done
+
+find $ALTERNC_LOGS -maxdepth 1 -type d -exec chown alterncpanel:adm {} \; 
+find $ALTERNC_HTML -maxdepth 1 -type d -exec chown alterncpanel:alterncpanel {} \; 
+find $ALTERNC_MAIL -maxdepth 1 -type d -exec chown vmail:vmail {} \;
+
+for i in a b c d e f g h i j k l m n o p q r s t u v w x y z _ 0 1 2 3 4 5 6 7 8 9; do
+  test -d "$ALTERNC_HTML/$i" || ( mkdir -p "$ALTERNC_HTML/$i" && chown www-data:www-data "$ALTERNC_HTML/$i" )
+  test -d "$ALTERNC_MAIL/$i" || ( mkdir -p "$ALTERNC_MAIL/$i" && chown vmail:vmail "$ALTERNC_MAIL/$i" && chmod 775 "$ALTERNC_MAIL/$i" )
+done
+
+
+# Check ACL
+aclcheckfile="$ALTERNC_HTML/test-acl"
+touch "$aclcheckfile"
+setfacl -m u:root:rwx "$aclcheckfile" 2>/dev/null || ( echo "Error : ACL aren't activated on $ALTERNC_HTML . AlternC can't work without it." ; test -e "$aclcheckfile" && rm -f "$aclcheckfile" ; exit 2)
+test -e "$aclcheckfile" && rm -f "$aclcheckfile"
+
+# XXX: copy-paste from debian/config
+if [ -r /etc/alternc/my.cnf ]; then
+    # make mysql configuration available as shell variables
+    # to convert from .cnf to shell syntax, we:
+    # * match only lines with "equal" in them (/=/)
+    # * remove whitespace around the = and add a left quote operator ' (;s)
+    # * add a right quote operator at the end of line (;s)
+    # * convert mysql variables into our MYSQL_ naming convention (;s)
+    # * print the result (;p)
+    eval `sed -n -e "/=/{s/ *= *\"\?/='/;s/\"\?\$/'/;s/host/MYSQL_HOST/;s/user/MYSQL_USER/;s/password/MYSQL_PASS/;s/database/MYSQL_DATABASE/;p}" /etc/alternc/my.cnf`
+    chown root:alterncpanel /etc/alternc/my.cnf
+    chmod 640 /etc/alternc/my.cnf
+fi
+
+if [ -r /etc/alternc/my_mail.cnf ]; then
+    # make mysql configuration available as shell variables
+    # to convert from .cnf to shell syntax, we:
+    # * match only lines with "equal" in them (/=/)
+    # * remove whitespace around the = and add a left quote operator ' (;s)
+    # * add a right quote operator at the end of line (;s)
+    # * convert mysql variables into our MYSQL_ naming convention (;s)
+    # * print the result (;p)
+    eval `sed -n -e "/=/{s/ *= *\"\?/='/;s/\"\?\$/'/;s/host/MYSQL_HOST/;s/user/MYSQL_MAIL_USER/;s/password/MYSQL_MAIL_PASS/;s/database/MYSQL_DATABASE/;p}" /etc/alternc/my_mail.cnf`
+    chown root:alterncpanel /etc/alternc/my_mail.cnf
+    chmod 640 /etc/alternc/my_mail.cnf
+fi
+
+WARNING="WARNING: Do not edit this file, edit the one in /etc/alternc/templates and launch alternc.install again."
+
+if [ "$slave" = "1" ]; then
+    VERSION="`dpkg -s alternc-slave | sed -n -e 's/^Version: \(.*\)/\1/p'`"
+else
+    VERSION="`dpkg -s alternc | sed -n -e 's/^Version: \(.*\)/\1/p'`"
+fi
+
+# /var/ alternc/dns/d/www.example.com
+FQDN_LETTER="`echo $FQDN | sed -e 's/.*\.\([^\.]\)[^\.]*\.[^\.]*$/\1/'`"
+if [ "$FQDN_LETTER" = "$FQDN" ] 
+then
+       FQDN_LETTER="_" 
+fi
+
+NS2_IP=`perl -e "\\$h = (gethostbyname(\"$NS2_HOSTNAME\"))[4];
+                 @ip = unpack('C4', \\$h);
+                 print join (\".\", @ip);"`
+
+if [ -z "$MONITOR_IP" ]; then
+    MONITOR_IP="127.0.0.1"
+fi
+
+PUBLIC_IP_BEGIN=$(echo $PUBLIC_IP|cut -c 1)
+
+# Secret for PhpMyAdmin sessions
+PHPMYADMIN_BLOWFISH="$(generate_string 24)"
+
+# XXX: I assume this is secure if /tmp is sticky (+t)
+# we should have a better way to deal with templating, of course.
+SED_SCRIPT="/tmp/alternc.install.sedscript"
+cat > $SED_SCRIPT <<EOF
+s\\%%hosting%%\\$HOSTING\\;
+s\\%%fqdn%%\\$FQDN\\;
+s\\%%public_ip%%\\$PUBLIC_IP\\;
+s\\%%public_ip_begin%%\\$PUBLIC_IP_BEGIN\\;
+s\\%%internal_ip%%\\$INTERNAL_IP\\;
+s\\%%monitor_ip%%\\$MONITOR_IP\\;
+s\\%%ns1%%\\$NS1_HOSTNAME\\;
+s\\%%ns2%%\\$NS2_HOSTNAME\\;
+s\\%%mx%%\\$DEFAULT_MX\\;
+s\\%%dbhost%%\\$MYSQL_HOST\\;
+s\\%%dbname%%\\$MYSQL_DATABASE\\;
+s\\%%dbuser%%\\$MYSQL_USER\\;
+s\\%%dbpwd%%\\$MYSQL_PASS\\;
+s\\%%db_mail_user%%\\$MYSQL_MAIL_USER\\;
+s\\%%db_mail_pwd%%\\$MYSQL_MAIL_PASS\\;
+s\\%%warning_message%%\\$WARNING\\;
+s\\%%fqdn_lettre%%\\$FQDN_LETTER\\;
+s\\%%version%%\\$VERSION\\;
+s\\%%ns2_ip%%\\$NS2_IP\\;
+s\\%%ALTERNC_HTML%%\\$ALTERNC_HTML\\;
+s\\%%ALTERNC_MAIL%%\\$ALTERNC_MAIL\\;
+s\\%%ALTERNC_LOGS%%\\$ALTERNC_LOGS\\;
+s\\%%PHPMYADMIN_BLOWFISH%%\\$PHPMYADMIN_BLOWFISH\\;
+EOF
+
+# hook 
+test -d /usr/lib/alternc/install.d || mkdir -p /usr/lib/alternc/install.d
+run-parts --arg=templates /usr/lib/alternc/install.d 
+
+
+######################################################################
+# Backup the Main database
+DB_BACKUP="/var/lib/alternc/backups/${MYSQL_DATABASE}-db-`date +%Y%m%d-%H:%M:%S`.gz"
+db_dump="mysqldump --defaults-file=/etc/alternc/my.cnf --add-drop-table --allow-keywords --quote-names --force --quick --add-locks --lock-tables --extended-insert ${MYSQL_DATABASE}"
+$db_dump | /bin/gzip -c > $DB_BACKUP || echo "backup of the main database failed"
+
+#######################################################################
+# Backup configuration files
+#
+BACKUP_FILE="/var/lib/alternc/backups/etc-original-`date +%Y%m%d-%H%M`.tar.gz"
+
+# Only backup what we are really going to replace
+BACKUPS=""
+for file in $CONFIG_FILES; do
+    TEMPLATE="$TEMPLATE_DIR/${file##etc/}"
+    if [ -f "$TEMPLATE" ]; then
+        BACKUPS="$BACKUPS $file"
+    fi
+done
+
+# also backup main.cf since we're doing major changes to it
+BACKUPS="$BACKUPS etc/postfix/main.cf"
+
+tar -zcf "$BACKUP_FILE" -C / $BACKUPS 2>/dev/null || true
+
+#######################################################################
+# Expand templates in the right place
+#
+echo -n "Expanding variables in configuration files:"
+for file in $CONFIG_FILES; do
+    TEMPLATE="$TEMPLATE_DIR/${file##etc/}"
+    echo -n " $file"
+    if [ -f "$TEMPLATE" ]; then
+        sed -f "$SED_SCRIPT" < $TEMPLATE > /$file
+    fi
+done
+echo "."
+rm -f $SED_SCRIPT
+
+######################################################################## 
+# Ad-hoc fixes
+#
+
+php="`ls /usr/lib/apache*/*/*php*.so | sed -e 's/^.*libphp\(.\)\.so$/php\1/' | tail -1`"
+ln -fs /etc/alternc/alternc.ini /etc/$php/conf.d/alternc.ini || true
+if [ -x /usr/sbin/apache2 ]; then
+    # hook 
+    run-parts --arg=apache2 /usr/lib/alternc/install.d 
+    
+    s=""
+    # unused from AlternC 1.0, FIXME: remove it later
+    if [ -L /etc/apache2/mods-enabled/vhost_alias.load ]
+    then
+        a2dismod vhost_alias
+        s="apache2"
+    fi 
+    if ! [ -L /etc/apache2/mods-enabled/$php.load ]
+    then
+	    a2enmod $php
+    fi
+    if ! [ -L /etc/apache2/mods-enabled/rewrite.load ]
+    then
+	    a2enmod rewrite
+    fi
+    if [ -e /etc/alternc/apache.pem ]; then
+        # We enable proftpd tls module
+        cat /etc/proftpd/modules.conf | sed -e 's/^#LoadModule mod_tls.c/LoadModule mod_tls.c/' > /etc/proftpd/modules.conf.alternc-new
+        mv /etc/proftpd/modules.conf.alternc-new /etc/proftpd/modules.conf 
+        cp /etc/proftpd/modules.conf /etc/alternc/templates/proftpd/
+        # We enable apache2 SSL : 
+        if [ ! -L /etc/apache2/mods-enabled/ssl.load ] ; then
+            a2enmod ssl
+            s="apache2"
+        fi
+        if [ ! -h /etc/apache2/conf.d/alternc-ssl.conf ] && [ -e /etc/apache2/conf.d/ ]; then
+            ln -sf /etc/alternc/apache2-ssl.conf /etc/apache2/conf.d/alternc-ssl.conf
+            s="apache2"
+        fi
+
+	# We enable dovecot SSL certificate instructions: (on wheezy we should use a new file in /etc/dovecot/conf.d/ )
+	( echo "ssl_cert = </etc/alternc/apache.pem" ; echo "ssl_key = </etc/alternc/apache.pem" ) >/etc/dovecot/conf.d/96_ssl.conf
+
+    else
+        # We disable proftpd tls module
+        cat /etc/proftpd/modules.conf | sed -e 's/^LoadModule mod_tls.c/#LoadModule mod_tls.c/' > /etc/proftpd/modules.conf.alternc-new
+        mv /etc/proftpd/modules.conf.alternc-new /etc/proftpd/modules.conf 
+        cp /etc/proftpd/modules.conf /etc/alternc/templates/proftpd/
+
+	# We disable dovecot SSL certificate instructions: (on wheezy we should remove a file in /etc/dovecot/conf.d/ )
+	( echo "ssl_cert = </etc/ssl/certs/ssl-cert-snakeoil.pem" ; echo "ssl_key = </etc/ssl/private/ssl-cert-snakeoil.key" ) >/etc/dovecot/conf.d/96_ssl.conf
+
+        echo "SSL not configured"
+        echo "create a certificate in /etc/alternc/apache.pem and rerun alternc.install"
+    fi
+    if [ ! -h /etc/apache2/conf.d/alternc.conf ] && [ -e /etc/apache2/conf.d/ ]; then
+        ln -sf /etc/alternc/apache2.conf /etc/apache2/conf.d/alternc.conf
+        s="apache2"
+    fi
+    if [ -e /etc/apache2/sites-enabled/000-default ]; then
+        a2dissite default
+        s="apache2"
+    fi
+    SERVICES="$SERVICES $s"
+fi
+
+# Copy postfix *_checks if they do not exist
+for file in body_checks header_checks; do
+    if [ ! -e "/etc/postfix/$file" ]; then
+        cp /usr/share/alternc/install/$file /etc/postfix
+    fi
+done
+
+# Attribute the correct rights to critical postfix files
+if [ -e /etc/postfix/myalias.cf -o -e /etc/postfix/mydomain.cf -o -e /etc/postfix/mygid.cf -o -e /etc/postfix/myrelay-domain.sh -o -e /etc/postfix/myvirtual.cf -o -e /etc/postfix/myrelay.cf -o -e /etc/postfix/myquota.cf ]; then
+    chown root:postfix /etc/postfix/my*
+    chmod 640 /etc/postfix/my*
+fi
+
+if [ ! -f /etc/postfix/main.cf ]
+then
+    echo "****************************************"
+    echo "POSTFIX is NOT configured properly"
+    echo "please launch dpkg-reconfigure -plow postfix" 
+    echo "and choose 'Internet Site'"
+    echo "then launch alternc.install again"
+    echo "****************************************"
+    exit 1
+fi
+
+# configure Postfix appropriatly for our needs
+if [ "$slave" = "1" ]; then
+    postfix_conf=/etc/alternc/postfix/postfix-slave.cf
+else
+    postfix_conf=/etc/alternc/postfix/postfix.cf
+fi
+grep -v '^\ *#' $postfix_conf |while read line ; do
+   if echo "$line" | grep -qi '^smtpd_tls_cert_file' ;then
+     line_strip=`echo "$line"|tr -d '[:blank:]'`
+     pattern="*="
+     cert_file=${line_strip#$pattern}
+     if [ -e $cert_file ];then
+        postconf -e "$line"
+     else
+        echo "****************************************"
+        echo "The certificate file : $cert_file does not exists"
+        echo "please go to https://alternc.org/wiki/SSL to get information on how to create a certificate"
+        echo "Then edit the file /etc/alternc/postfix/postfix.cf to add"
+        echo "the cert file path name to the key :smtpd_tls_cert_file"
+        echo "Finally relaunch alternc.install"
+        echo "****************************************"
+     fi
+  else
+        postconf -e "$line"
+  fi
+done
+
+# Conviguring delivery used by Postfix
+/usr/lib/alternc/alternc_add_policy_dovecot
+
+# Bug #1215: configure mydestination when $FQDN is not in
+OLDDESTINATION=`postconf mydestination | awk -F '=' '{print $2}'`
+echo "$OLDDESTINATION" | grep -q -v "$FQDN" && postconf -e "mydestination = $FQDN, $OLDDESTINATION"
+
+# Configure PHPMyAdmin
+include_str='include("/etc/alternc/phpmyadmin.inc.php")'
+pma_config='/etc/phpmyadmin/config.inc.php'
+
+# Sur une configuration vierge, inclure la configuration alternc
+if ! grep -e "${include_str/\"/\\\"}" $pma_config > /dev/null 2>&1; then
+    echo "$include_str;" >> $pma_config
+fi
+
+# Le template de /etc/alternc/phpmyadmin.inc.php viens d'être réappliqué, on 
+# regénére la liste des serveurs MySQL disponible dedans.
+mysql_query "select id,host,name from db_servers;" | while read id host name ; do
+echo "
+// Server #$id in db_servers
+\$i++;
+\$cfg['Servers'][\$i]['connect_type']  = 'tcp';    // How to connect to MySQL server ('tcp' or 'socket')
+\$cfg['Servers'][\$i]['auth_type']     = 'cookie';    // Authentication method (config, http or cookie based)?
+\$cfg['Servers'][\$i]['hide_db']       = 'information_schema';
+\$cfg['Servers'][\$i]['verbose']       = '$name'; // human name
+\$cfg['Servers'][\$i]['host']          = '$host'; // MySQL hostname or IP address
+" >> '/etc/alternc/phpmyadmin.inc.php'
+done
+
+# Reload incron. Useless, but who know?
+SERVICES="$SERVICES incron"
+ 
+if [ -e /etc/proftpd.conf ] ; then
+    chmod 640 /etc/proftpd/proftpd.conf
+fi
+
+if [ -x /usr/sbin/locale-gen ] ; then
+    touch /etc/locale.gen
+    LOCALECHANGED=""
+    # Add de_DE ISO-8859-1, en_US ISO-8859-1, es_ES ISO-8859-1, fr_FR ISO-8859-1 to the locales : 
+    if ! grep -q "^de_DE ISO-8859-1$" /etc/locale.gen ; then
+	echo "de_DE ISO-8859-1" >>/etc/locale.gen
+	LOCALECHANGED=1
+    fi
+    if ! grep -q "^en_US ISO-8859-1$" /etc/locale.gen ; then
+	echo "en_US ISO-8859-1" >>/etc/locale.gen
+	LOCALECHANGED=1
+    fi
+    if ! grep -q "^es_ES ISO-8859-1$" /etc/locale.gen ; then
+	echo "es_ES ISO-8859-1" >>/etc/locale.gen
+	LOCALECHANGED=1
+    fi
+    if ! grep -q "^fr_FR ISO-8859-1$" /etc/locale.gen ; then 
+	echo "fr_FR ISO-8859-1" >>/etc/locale.gen
+	LOCALECHANGED=1
+    fi
+    if ! grep -q "^de_DE.UTF-8 UTF-8$" /etc/locale.gen ; then
+	echo "de_DE.UTF-8 UTF-8" >>/etc/locale.gen
+	LOCALECHANGED=1
+    fi
+    if ! grep -q "^fr_FR.UTF-8 UTF-8$" /etc/locale.gen ; then
+	echo "fr_FR.UTF-8 UTF-8" >>/etc/locale.gen
+	LOCALECHANGED=1
+    fi
+    if ! grep -q "^es_ES.UTF-8 UTF-8$" /etc/locale.gen ; then
+	echo "es_ES.UTF-8 UTF-8" >>/etc/locale.gen
+	LOCALECHANGED=1
+    fi
+    if ! grep -q "^en_US.UTF-8 UTF-8$" /etc/locale.gen ; then
+	echo "en_US.UTF-8 UTF-8" >>/etc/locale.gen
+	LOCALECHANGED=1
+    fi
+    if ! grep -q "^it_IT.UTF-8 UTF-8$" /etc/locale.gen ; then
+	echo "it_IT.UTF-8 UTF-8" >>/etc/locale.gen
+	LOCALECHANGED=1
+    fi
+    if ! grep -q "^nl_NL.UTF-8 UTF-8$" /etc/locale.gen ; then
+	echo "nl_NL.UTF-8 UTF-8" >>/etc/locale.gen
+	LOCALECHANGED=1
+    fi
+    if [ "$LOCALECHANGED" ] ; then
+	locale-gen
+    fi
+fi
+
+# remaining steps are only for the master
+if [ "$slave" = "1" ]; then
+    exit 0
+fi
+
+#######################################################################
+# populate alternc database with the mailname used by postfix to send mail for each vhost
+#
+mailname=`cat /etc/mailname`
+mysql_query "update variable SET value='"$mailname"' where name='mailname_bounce';" 
+# Allow for all the users to view /etc/mailname
+chmod +r "/etc/mailname"
+
+#######################################################################
+# Save installed files to check them during next install
+#
+tar -zcf "$INSTALLED_CONFIG_TAR" -C / $CONFIG_FILES
+
+#######################################################################
+# Last touches
+#
+
+find $ALTERNC_HTML -maxdepth 1 -type d -exec setfacl -b -k -m d:g:alterncpanel:rw- -m g:alterncpanel:rw- {} \;
+
+#creating log file
+if [ ! -e "/var/log/alternc/bureau.log" ]; then
+  test -d "/var/log/alternc/" || mkdir -p "/var/log/alternc/"
+  touch "/var/log/alternc/bureau.log"
+fi
+
+if [ ! -e "/var/log/alternc/update_domains.log" ]; then
+  test -d "/var/log/alternc/" || mkdir -p "/var/log/alternc/"
+  touch "/var/log/alternc/update_domains.log"
+fi
+
+# Be sure of the owner of the logs files
+chmod 640 /var/log/alternc/bureau.log /var/log/alternc/update_domains.log
+chown alterncpanel:adm /var/log/alternc/bureau.log /var/log/alternc/update_domains.log
+
+# Creating admin user if needed
+HAS_ROOT=`mysql --defaults-file=/etc/alternc/my.cnf -e "SELECT COUNT(*) FROM membres WHERE login = 'admin' OR login = 'root' and su = 1" | tail -1`
+
+if [ "$HAS_ROOT" != "1" ]; then
+    echo "Creating admin user..."
+    echo ""
+
+    if su - alterncpanel -s /bin/bash -c /usr/share/alternc/install/newone.php
+      then
+      echo "*******************************************"
+      echo "*                                         *"
+      echo "*               Admin account             *"
+      echo "*               ------------              *"
+      echo "*                                         *"
+      echo "* user: admin             password: admin *"
+      echo "*                                         *"
+      echo "* Please change this as soon as possible! *"
+      echo "*                                         *"
+      echo "*******************************************"
+    else
+	echo "Unable to create the first AlternC account (named 'admin'). newone.php returned $?. Check your MySQL database, PHP, and the /etc/alternc/local.sh file. Also check for any error above during install."
+    fi
+fi
+
+#giving vmail user read access on dovecot sql file
+chgrp vmail /etc/dovecot/dovecot.conf
+chmod g+r /etc/dovecot/dovecot.conf
+
+# Changing owner of web panel's files
+chown -R alterncpanel:alterncpanel "/usr/share/alternc/panel/"
+
+# We force the re-computing of the DNS zones, since we may have changed the IP address (see #460)
+/usr/bin/mysql --defaults-file="/etc/alternc/my.cnf" -B -e "update domaines set dns_action='update';"
+
+# hook 
+run-parts --arg=before-reload /usr/lib/alternc/install.d 
+
+#######################################################################
+# Reload services
+#
+for service in postfix bind9 apache2 dovecot cron proftpd; do
+    invoke-rc.d $service force-reload || true
+done
+
+# We should restart apaches after all configuration stuff ...
+for service in $SERVICES; do
+    test -x /etc/init.d/$service && invoke-rc.d $service stop || true
+done
+for service in $SERVICES; do
+    test -x /etc/init.d/$service && invoke-rc.d $service start || true
+done
+
+#launch fixperms 
+echo "Fix all the permission. May be quite long..."
+/usr/lib/alternc/fixperms.sh
+
+# hook 
+run-parts --arg=end /usr/lib/alternc/install.d 

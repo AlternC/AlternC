@@ -608,3 +608,11 @@ upnp/upnp-install -text
 upnp/upnp.sql -text
 upnp/upnp_change.php -text
 upnp/upnp_list.php -text
+wheezy/95_alternc.conf -text
+wheezy/alternc-dict-quota.conf -text
+wheezy/alternc-sql.conf -text
+wheezy/alternc.install.diff -text
+wheezy/control.diff -text
+wheezy/originals/alternc.install -text
+wheezy/originals/control -text
+wheezy/patch.sh -text
