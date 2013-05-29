@@ -77,7 +77,7 @@ if [ -e /etc/default/saslauthd ]; then
 fi
 
 if [ -e /etc/dovecot/dovecot.conf ]; then
-    CONFIG_FILES="$CONFIG_FILES etc/dovecot/dovecot.conf etc/dovecot/dovecot-sql.conf etc/dovecot/dovecot-dict-quota.conf"
+    CONFIG_FILES="$CONFIG_FILES etc/dovecot/alternc-sql.conf etc/dovecot/alternc-dict-quota.conf etc/dovecot/conf.d/95_alternc.conf"
 fi
 
 INSTALLED_CONFIG_TAR="/var/lib/alternc/backups/etc-installed.tar.gz"
@@ -306,7 +306,7 @@ if [ -x /usr/sbin/apache2 ]; then
         fi
 
 	# We enable dovecot SSL certificate instructions: (on wheezy we should use a new file in /etc/dovecot/conf.d/ )
-	sed -i -e 's#/etc/ssl/certs/ssl-cert-snakeoil.pem#/etc/alternc/apache.pem#' -e 's#/etc/ssl/private/ssl-cert-snakeoil.key# /etc/alternc/apache.pem#' /etc/dovecot/dovecot.conf
+	( echo "ssl_cert = </etc/alternc/apache.pem" ; echo "ssl_key = </etc/alternc/apache.pem" ) >/etc/dovecot/conf.d/96_ssl.conf
 
     else
         # We disable proftpd tls module
@@ -315,7 +315,7 @@ if [ -x /usr/sbin/apache2 ]; then
         cp /etc/proftpd/modules.conf /etc/alternc/templates/proftpd/
 
 	# We disable dovecot SSL certificate instructions: (on wheezy we should remove a file in /etc/dovecot/conf.d/ )
-	sed -i -e 's#^ssl_cert_file.*$#ssl_cert_file = /etc/ssl/certs/ssl-cert-snakeoil.pem#' -e 's#^ssl_key_file.*$#ssl_key_file = /etc/ssl/private/ssl-cert-snakeoil.key#' /etc/dovecot/dovecot.conf
+	( echo "ssl_cert = </etc/ssl/certs/ssl-cert-snakeoil.pem" ; echo "ssl_key = </etc/ssl/private/ssl-cert-snakeoil.key" ) >/etc/dovecot/conf.d/96_ssl.conf
 
         echo "SSL not configured"
         echo "create a certificate in /etc/alternc/apache.pem and rerun alternc.install"
@@ -562,6 +562,8 @@ done
 #launch fixperms 
 echo "Fix all the permission. May be quite long..."
 /usr/lib/alternc/fixperms.sh
+echo "Compile PO files"
+/usr/shate/alternc/install/dopo.sh
 
 # hook 
 run-parts --arg=end /usr/lib/alternc/install.d 
