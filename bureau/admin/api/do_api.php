@@ -63,7 +63,7 @@ class AC_Rest_Api {
         $this->_did_execute = true;
         switch ($this->_request_object) {
             case 'raw':
-                $api_ret = $api->call_raw($this->_request_parts['class'], $this->_request_parts['method']);
+                $api_ret = $api->call_raw($this->_request_parts['class'], $this->_request_parts['method'], $this->_arg);
                 $this->_output = $api_ret;
                 break;
         }
@@ -150,6 +150,7 @@ class AC_Rest_Api {
      * @return array Parsed result
      */
     function _parse_request($path) {
+        global $_GET, $_POST;
         $parts = explode('/', $path);
 #        print_r($parts);
         $req_obj = $parts[1];   # « 0 » is empty
@@ -162,6 +163,7 @@ class AC_Rest_Api {
                 }
                 $this->_request_object = 'raw';
                 $this->_request_parts = array ('class' => $parts[2], 'method' => $parts[3]);
+                $this->_arg = ($this->_method == 'GET') ? $_GET : $_POST;
                 break;
             default:
                 $this->_err_code = 404;
