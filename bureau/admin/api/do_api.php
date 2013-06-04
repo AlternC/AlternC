@@ -125,10 +125,10 @@ class AC_Rest_Api {
      * @return string The chosen output format
      */
     function _choose_output_format($accept) {
-        $accepts = split(',', $accept);
+        $accepts = explode(',', $accept);
         $found = false;
         foreach ($accepts as $acc) {
-            $acc_split = split(';', $acc);
+            $acc_split = explode(';', $acc);
             $value = $acc_split[0];
             if (in_array($value, array ('text/html', 'text/plain', 'application/json'))) {
                 $output = $value;
@@ -150,7 +150,7 @@ class AC_Rest_Api {
      * @return array Parsed result
      */
     function _parse_request($path) {
-        $parts = split('/', $path);
+        $parts = explode('/', $path);
 #        print_r($parts);
         $req_obj = $parts[1];   # « 0 » is empty
         switch ($req_obj) {
