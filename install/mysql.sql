@@ -131,6 +131,7 @@ CREATE TABLE IF NOT EXISTS ftpusers (
   encrypted_password VARCHAR(32) default NULL,
   homedir varchar(128) NOT NULL default '',
   uid int(10) unsigned NOT NULL default '0',
+  enabled boolean NOT NULL DEFAULT TRUE,
   PRIMARY KEY  (id),
   UNIQUE KEY name (name),
   KEY homedir (homedir),
