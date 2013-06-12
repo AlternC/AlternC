@@ -37,9 +37,9 @@
  */
 class m_quota {
 
-  var $disk=Array(  /* disk resource for which we will manage quotas */
-		  "web"=>"web");
+  var $disk=Array();  /* disk resource for which we will manage quotas */
 
+  var $disk_quota_enable;
   var $quotas;
   var $clquota; // Which class manage which quota.
 
@@ -49,6 +49,11 @@ class m_quota {
    * Constructor
    */
   function m_quota() {
+    $this->disk_quota_enable = variable_get('disk_quota_enable', 1,'Are disk quota enabled for this server');
+    if ( $this->disk_quota_enable ) {
+      $this->disk = Array( "web"=>"web" );
+    }
+
   }
 
   private function dummy_for_translation() {
@@ -56,7 +61,6 @@ class m_quota {
   }
 
   function hook_menu() {
-    global $quota;
     $obj = array(
       'title'       => _("Show my quotas"),
       'ico'         => 'images/quota.png',
@@ -66,10 +70,10 @@ class m_quota {
       'links'       => array(),
      ) ;
 
-    $q=$quota->getquota();
+    $q=$this->getquota();
 
     foreach ( array('web', 'bw_web') as $key ) {
-      if ( empty($q[$key]["t"])) continue;
+      if ( ! isset($q[$key]["u"]) || empty($q[$key]["t"])) continue;
       $usage_percent = (int) ($q[$key]["u"] / $q[$key]["t"] * 100);
       $obj['links'][] = array( 'txt'=>_("quota_".$key) . " " . sprintf(_("%s%% of %s"),$usage_percent,format_size($q[$key]["t"]*1024)), 'url'=>($key == 'bw_web' ? 'stats_show_per_month.php' : 'quota_show.php') );
       $obj['links'][] = array( 'txt'=>'progressbar', 'total' => $q[$key]["t"], 'used' => $q[$key]["u"]);
@@ -149,7 +153,7 @@ class m_quota {
    * @Return array the quota used and total for this ressource (or for all ressource if unspecified)
    */
   function getquota($ressource="",$recheck=false) {
-    global $db,$err,$cuid,$get_quota_cache,$hooks;
+    global $db,$err,$cuid,$get_quota_cache,$hooks,$mem;
     $err->log("quota","getquota",$ressource);
     if ($recheck) { // rebuilding quota
       $get_quota_cache=null;
@@ -166,13 +170,30 @@ class m_quota {
           $this->quotas[$r['name']]['t']=0; // Default quota = 0
 	}
 	reset($this->disk);
-	while (list($key,$val)=each($this->disk)) {
-	  $a=array(); 
-	  exec("/usr/lib/alternc/quota_get ".$cuid ,$a);
-          $a[0]=intval($a[0]);
-          $a[1]=@intval($a[1]);
-	  $this->quotas[$val]=array("name"=>"$val", 'description'=>_("quota_".$val), "t"=>$a[1],"u"=>$a[0]);
-	}   
+
+        if (!empty ($this->disk)) { // Check if there are some disk quota to check
+          // Look if there are some cached value
+          $disk_cached = $mem->session_tempo_params_get('quota_cache_disk');
+
+          while (list($key,$val)=each($this->disk)) {
+            $a=array(); 
+            if ( 
+              isset($disk_cached[$val]) 
+              && !empty($disk_cached[$val]) 
+              && $disk_cached[$val]['timestamp'] > ( time() - (90) ) // Cache, en seconde
+            ) {
+              // If there is a cached value
+              $a = $disk_cached[$val];
+            } else {
+              exec("/usr/lib/alternc/quota_get ".$cuid ,$ak);
+              $a['u']=intval($ak[0]);
+              $a['t']=@intval($ak[1]);
+              $a['timestamp'] = time();
+              $disk_cached = $mem->session_tempo_params_set('quota_cache_disk', array($val=>$a));
+            }
+            $this->quotas[$val]=array("name"=>"$val", 'description'=>_("quota_".$val), "t"=>$a['t'],"u"=>$a['u']);
+          }   
+        }
 
         // Get the allowed quota from database.
         $db->query("select name, total from quotas where uid='$cuid';");
