@@ -94,7 +94,7 @@ class m_mysql {
 
   function list_db_servers() {
     global $db;
-    $db->query("select db_servers.*, count(*) as nb_users from db_servers, membres where membres.db_server_id = db_servers.id group by db_server_id order by name,id;");
+    $db->query("select d.*,  count(*) as nb_users from db_servers d left join membres m on  d.id = m.db_server_id group by d.id,m.db_server_id order by d.name,d.id;");
     $c=array();
     while ($db->next_record()) {
       $c[]=$db->Record;
@@ -458,7 +458,7 @@ class m_mysql {
     if(!preg_match("#^[0-9a-z_\\*\\\\]*$#",$base)){
       $err->raise("mysql",_("Database name can contain only letters and numbers"));
       return false;
-    } elseif (!$db->query("select db from db where db='$base';")){
+    } elseif (!$this->dbus->query("select db from db where db='$base';")){
       $err->raise("mysql",_("Database not found"));
       return false; 
     }
@@ -772,7 +772,7 @@ class m_mysql {
         return false; // The error has been raised by checkPolicy()
       }
     }
-    $db->query("SET PASSWORD FOR '".$user."'@'".$this->dbus->Client."' = PASSWORD('".$pass."');");
+    $this->dbus->query("SET PASSWORD FOR '".$user."'@'".$this->dbus->Client."' = PASSWORD('".$pass."');");
     $db->query("UPDATE dbusers set password='".$pass."' where name='".$usern."' and uid=$cuid ;");
     return true;
   }
@@ -806,10 +806,11 @@ class m_mysql {
     $login=$db->f("name");
 
     // Ok, database exists and dbname is compliant. Let's proceed
-    $db->query("REVOKE ALL PRIVILEGES ON *.* FROM '".$user."'@'".$this->dbus->Client."';");
-    $db->query("DELETE FROM mysql.db WHERE User='".$user."' AND Host='".$this->dbus->Client."';");
-    $db->query("DELETE FROM mysql.user WHERE User='".$user."' AND Host='".$this->dbus->Client."';");
-    $db->query("FLUSH PRIVILEGES");
+    $this->dbus->query("REVOKE ALL PRIVILEGES ON *.* FROM '".$user."'@'".$this->dbus->Client."';");
+    $this->dbus->query("DELETE FROM mysql.db WHERE User='".$user."' AND Host='".$this->dbus->Client."';");
+    $this->dbus->query("DELETE FROM mysql.user WHERE User='".$user."' AND Host='".$this->dbus->Client."';");
+    $this->dbus->query("FLUSH PRIVILEGES");
+
     $db->query("DELETE FROM dbusers WHERE uid='$cuid' AND name='".$user."';");
     return true;
   }
