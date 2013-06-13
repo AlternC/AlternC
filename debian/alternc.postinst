@@ -120,7 +120,7 @@ ALTERNC_SLAVES=""
 INOTIFY_UPDATE_DOMAIN="/var/run/alternc/inotify_update_domain.lock"
 
 # File to look at for forced launch of do_actions (use incron)
-INOTIFY_UPDATE_DOMAIN="/var/run/alternc/inotify_do_action.lock"
+INOTIFY_DO_ACTION="/var/run/alternc/inotify_do_action.lock"
 
 # AlternC Locations
 ALTERNC_HTML=""
