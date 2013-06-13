@@ -63,8 +63,6 @@ if($action == "add") {
   }else{
     include("head.php");
     ?>
-    </head>
-    <body>
     <h3><?php printf(_("Deleting quota %s"),$type); ?> : </h3>
 
     <form action="adm_dodefquotas.php" method="post">
@@ -78,9 +76,8 @@ if($action == "add") {
         <input type="button" class="inb" name="cancel" value="<?php __("No"); ?>" onclick="document.location='adm_defquotas.php';" />
       </blockquote>
     </form>
-    </body>
-    </html>
     <?php
+    include("foot.php");
   }
 } else if($action == "modify") {
   reset($_POST);

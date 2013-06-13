@@ -13,3 +13,4 @@ $dom->del_default_type($id);
 include_once("adm_doms_def_type.php");
 
 
+include_once("foot.php");

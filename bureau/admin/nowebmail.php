@@ -25,7 +25,8 @@
 
 require_once("../class/config.php");
 require_once("head.php");
-$error="_("There is currently no webmail configured. If you need one, contact your server administrator");
+$error=_("There is currently no webmail configured. If you need one, contact your server administrator");
 
 include("index.php"); 
 
+require_once("foot.php");

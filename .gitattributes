@@ -260,7 +260,6 @@ bureau/admin/js/prototype.js -text
 bureau/admin/login.php -text
 bureau/admin/logs_download.php -text
 bureau/admin/logs_list.php -text
-bureau/admin/mail_add.php -text
 bureau/admin/mail_del.php -text
 bureau/admin/mail_doadd.php -text
 bureau/admin/mail_doedit.php -text

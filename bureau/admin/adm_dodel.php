@@ -88,9 +88,8 @@ if($del_confirm == "y"){
         <input type="button" class="inb" name="cancel" value="<?php __("No"); ?>" onclick="document.location='adm_list.php';" />
       </blockquote>
     </form>
-    </body>
-    </html>
     <?php  
+    include('foot.php');
 }
 
 ?>
