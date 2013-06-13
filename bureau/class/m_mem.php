@@ -156,7 +156,7 @@ class m_mem {
    * @return boolean TRUE if the user has been successfully connected, FALSE else.
    */
   function setid($id) {
-    global $db,$err,$cuid,$mysql;
+    global $db,$err,$cuid,$mysql,$quota;
     $err->log("mem","setid",$id);
     $db->query("select * from membres where uid='$id';");
     if ($db->num_rows()==0) {
@@ -181,6 +181,7 @@ class m_mem {
       $db->next_record();
       $this->local=$db->Record;
     }
+    $quota->getquota('', true);
     return true;
   }
 
@@ -600,11 +601,12 @@ Cordially.
   }
 
   function session_tempo_params_get($v) {
+    global $uid;
     $sid=$_COOKIE['session'];
-    if ( empty($_SESSION[$sid]) ) { // si pas de session de params tempo
+    if ( empty($_SESSION[$sid.'-'.$uid]) ) { // si pas de session de params tempo
       return false;
     }
-    $j=$_SESSION[$sid];
+    $j=$_SESSION[$sid.'-'.$uid];
     $j=json_decode($j, true);
     if ( ! empty($j[$v] ) ) { // si on a bien qque chose a retourner :)
       return $j[$v];
@@ -613,17 +615,18 @@ Cordially.
   }
 
   function session_tempo_params_set($k, $v, $ecrase=false) {
+    global $uid;
     $sid=$_COOKIE['session'];
     $p=Array();
-    if ( ! empty($_SESSION[$sid]) ) {
-      $p = json_decode($_SESSION[$sid], true);
+    if ( ! empty($_SESSION[$sid.'-'.$uid]) ) {
+      $p = json_decode($_SESSION[$sid.'-'.$uid], true);
     }
     if (! $ecrase && (isset($p[$k]) && is_array($p[$k])) && is_array($v) ) { 
       $v=array_merge($p[$k], $v); // overwrite entry with the same name
     }
 
     $p[$k]=$v;
-    $_SESSION[$sid]=json_encode($p);
+    $_SESSION[$sid.'-'.$uid]=json_encode($p);
     return true;
   }
 
