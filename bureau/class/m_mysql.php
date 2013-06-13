@@ -94,7 +94,7 @@ class m_mysql {
 
   function list_db_servers() {
     global $db;
-    $db->query("select d.*,  count(*) as nb_users from db_servers d left join membres m on  d.id = m.db_server_id group by d.id,m.db_server_id order by d.name,d.id;");
+    $db->query("select d.*, IFNULL(count(m.uid),0) as nb_users from db_servers d left join membres m on  d.id = m.db_server_id group by d.id,m.db_server_id order by d.name,d.id;");
     $c=array();
     while ($db->next_record()) {
       $c[]=$db->Record;
