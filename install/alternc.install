@@ -306,7 +306,7 @@ if [ -x /usr/sbin/apache2 ]; then
         fi
 
 	# We enable dovecot SSL certificate instructions: (on wheezy we should use a new file in /etc/dovecot/conf.d/ )
-	sed -i -e 's#/etc/ssl/certs/ssl-cert-snakeoil.pem#/etc/alternc/apache.pem#' -e 's#/etc/ssl/private/ssl-cert-snakeoil.key# /etc/alternc/apache.pem#' /etc/dovecot/dovecot.conf
+	sed -i -e 's#^ssl_cert_file.*$#ssl_cert_file = /etc/ssl/certs/ssl-cert-snakeoil.pem#' -e 's#^ssl_key_file.*$#ssl_key_file = /etc/ssl/private/ssl-cert-snakeoil.key#' /etc/dovecot/dovecot.conf
 
     else
         # We disable proftpd tls module
