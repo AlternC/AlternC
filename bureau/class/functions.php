@@ -227,7 +227,7 @@ function getuserpath($user = null) {
     global $mem;
     $user = $mem->user['login'];
   }
-  return ALTERNC_HTML."/".substr($user,0,1)."/".$user;
+  return rtrim(ALTERNC_HTML,"/")."/".substr($user,0,1)."/".$user;
 }
 
 /* ECHOes checked="checked" only if the parameter is true
