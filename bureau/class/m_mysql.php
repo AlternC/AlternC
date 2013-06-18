@@ -320,7 +320,7 @@ class m_mysql {
    *  an error occured, such as db does not exist.
    */
   function del_db($dbn) {
-    global $db,$err,$mem,$cuid;
+    global $db,$err,$mem,$cuid,$L_MYSQL_DATABASE;
     $err->log("mysql","del_db",$dbn);
     $dbname=addslashes($dbn);
     $db->query("SELECT uid FROM db WHERE db='$dbname';");
@@ -336,11 +336,14 @@ class m_mysql {
     $this->dbus->query("DROP DATABASE `$dbname`;");
 
     $db_esc=str_replace('_','\_',$dbname);
-    $db->query("DELETE FROM mysql.db WHERE Db='$db_esc';");
-    $db->query("select User from mysql.db where User='".$dbname."' and Db='".$db_esc."' and (Select_priv='Y' or Insert_priv='Y' or Update_priv='Y' or Delete_priv='Y' or Create_priv='Y' or Drop_priv='Y' or References_priv='Y' or Index_priv='Y' or Alter_priv='Y' or Create_tmp_table_priv='Y' or Lock_tables_priv='Y');");
-    if(!$db->num_rows()){
-      $this->del_user($dbname);
-    }
+    $this->dbus->query("DELETE FROM mysql.db WHERE Db='$db_esc';");
+
+      #We test if the user created with the database is associated with more than 1 database.
+      $this->dbus->query("select User from mysql.db where User='".$dbname."' and (Select_priv='Y' or Insert_priv='Y' or Update_priv='Y' or Delete_priv='Y' or Create_priv='Y' or Drop_priv='Y' or References_priv='Y' or Index_priv='Y' or Alter_priv='Y' or Create_tmp_table_priv='Y' or Lock_tables_priv='Y');");
+      if(($this->dbus->num_rows()) == 0){
+        #If not we can delete it.
+        $this->del_user($dbname);
+      }
     return true;
   }
 
@@ -480,11 +483,8 @@ class m_mysql {
       $err->raise("mysql",_("Database user not found"));
       return false;
     }
-    if($rights == "FILE"){
-      $grant="grant ".$rights." on ".$base.".".$table." to '".$user."'@'".$this->dbus->Client."'" ;
-    }else{
-      $grant="grant ".$rights." on `".$base."`.".$table." to '".$user."'@'".$this->dbus->Client."'" ;
-    }
+
+    $grant="grant ".$rights." on `".$base."`.".$table." to '".$user."'@'".$this->dbus->Client."'" ;
 
     if($pass){
       $grant .= " identified by '".$pass."';";
@@ -795,7 +795,7 @@ class m_mysql {
     if(!$all){
       $db->query("SELECT name FROM dbusers WHERE name='".$user."' and enable not in ('ADMIN','HIDDEN');");
     }else{
-      $db->query("SELECT name FROM dbusers WHERE name='".$user."' ;");
+      $db->query("SELECT name FROM dbusers WHERE uid='".$cuid."' ;");
     }
 
     if (!$db->num_rows()) {
