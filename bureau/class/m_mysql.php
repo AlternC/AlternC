@@ -320,7 +320,7 @@ class m_mysql {
    *  an error occured, such as db does not exist.
    */
   function del_db($dbn) {
-    global $db,$err,$mem,$cuid,$L_MYSQL_DATABASE;
+    global $db,$err,$mem,$cuid;
     $err->log("mysql","del_db",$dbn);
     $dbname=addslashes($dbn);
     $db->query("SELECT uid FROM db WHERE db='$dbname';");
@@ -338,12 +338,12 @@ class m_mysql {
     $db_esc=str_replace('_','\_',$dbname);
     $this->dbus->query("DELETE FROM mysql.db WHERE Db='$db_esc';");
 
-      #We test if the user created with the database is associated with more than 1 database.
-      $this->dbus->query("select User from mysql.db where User='".$dbname."' and (Select_priv='Y' or Insert_priv='Y' or Update_priv='Y' or Delete_priv='Y' or Create_priv='Y' or Drop_priv='Y' or References_priv='Y' or Index_priv='Y' or Alter_priv='Y' or Create_tmp_table_priv='Y' or Lock_tables_priv='Y');");
-      if(($this->dbus->num_rows()) == 0){
-        #If not we can delete it.
-        $this->del_user($dbname);
-      }
+    #We test if the user created with the database is associated with more than 1 database.
+    $this->dbus->query("select User from mysql.db where User='".$dbname."' and (Select_priv='Y' or Insert_priv='Y' or Update_priv='Y' or Delete_priv='Y' or Create_priv='Y' or Drop_priv='Y' or References_priv='Y' or Index_priv='Y' or Alter_priv='Y' or Create_tmp_table_priv='Y' or Lock_tables_priv='Y');");
+    if(($this->dbus->num_rows()) == 0){
+      #If not we can delete it.
+      $this->del_user($dbname);
+    }
     return true;
   }
 
@@ -786,7 +786,7 @@ class m_mysql {
    * @return TRUE if the user has been deleted in MySQL or FALSE if an error occurred
    **/
   function del_user($user,$all=null) {
-    global $db,$err,$mem,$cuid,$L_MYSQL_DATABASE;
+    global $db,$err,$mem,$cuid;
     $err->log("mysql","del_user",$user);
     if (!preg_match("#^[0-9a-z]#",$user)) {
       $err->raise("mysql",_("The username can contain only letters and numbers"));
