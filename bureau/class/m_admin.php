@@ -697,10 +697,10 @@ EOF;
     $archive=variable_get('archive_del_data');
     $path=getuserpath($tt['login']);
     if($archive == 1 ){
-     echo("archive");
+     #echo("archive");
      $action->archive($path,"html"); 	
     }else{
-     echo("del");
+     #echo("del");
      $action->del($path); 	
     }
     $hooks->invoke("alternc_del_member");
