@@ -27,3 +27,18 @@
  
          echo "SSL not configured"
          echo "create a certificate in /etc/alternc/apache.pem and rerun alternc.install"
+@@ -531,9 +531,11 @@
+     fi
+ fi
+ 
+-#giving vmail user read access on dovecot sql file
+-chgrp vmail /etc/dovecot/dovecot.conf
+-chmod g+r /etc/dovecot/dovecot.conf
++# giving vmail user read access on dovecot sql file
++chgrp vmail /etc/dovecot/alternc-sql.conf
++chmod g+r /etc/dovecot/alternc-sql.conf
++# Override some dovecot 2.0 configuration that may have happened during dovecot postinst:
++sed -i -e 's/^ *!include/#!include/' /etc/dovecot/conf.d/10-auth.conf
+ 
+ # Changing owner of web panel's files
+ chown -R alterncpanel:alterncpanel "/usr/share/alternc/panel/"
