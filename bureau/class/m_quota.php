@@ -180,6 +180,7 @@ class m_quota {
             if ( 
               isset($disk_cached[$val]) 
               && !empty($disk_cached[$val]) 
+              && $disk_cached[$val]['uid'] == $cuid
               && $disk_cached[$val]['timestamp'] > ( time() - (90) ) // Cache, en seconde
             ) {
               // If there is a cached value
@@ -189,6 +190,7 @@ class m_quota {
               $a['u']=intval($ak[0]);
               $a['t']=@intval($ak[1]);
               $a['timestamp'] = time();
+              $a['uid'] = $cuid;
               $disk_cached = $mem->session_tempo_params_set('quota_cache_disk', array($val=>$a));
             }
             $this->quotas[$val]=array("name"=>"$val", 'description'=>_("quota_".$val), "t"=>$a['t'],"u"=>$a['u']);
