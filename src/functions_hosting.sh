@@ -91,6 +91,12 @@ host_create() {
     # If TEMPLATE is empty, stop right here
     [ ! "$TEMPLATE" ] && return 6
 
+    # Forbid generation for website with UID/GID == 0
+    if [[ $U_ID == 0 || $G_ID == 0 ]] ; then
+      log_error "Fatal error: update_domains/function_dns/host_create : FQDN = $FQDN - TYPE = $VTYPE - UID = $U_ID - GID = $G_ID . Stopping generation"
+      return 7
+    fi
+
     # Create a new conf file
     local TMP_FILE=$(mktemp "/tmp/alternc_host.XXXXXX")
     cp "$TEMPLATE" "$TMP_FILE"
