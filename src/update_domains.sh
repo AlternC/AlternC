@@ -63,26 +63,26 @@ done
 # sub_domaines.web_action = update and sub_domains.only_dns = false
 IFS="$NEWIFS"
 mysql_query "
-select concat_ws('$IFS',lower(sd.type), if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine), concat_ws('@',m.login,v.value), sd.valeur )
+select concat_ws('$IFS',sd.id, lower(sd.type), if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine), concat_ws('@',m.login,v.value), sd.valeur )
 from sub_domaines sd,membres m,variable v
 where sd.compte=m.uid and sd.web_action ='UPDATE' and v.name='mailname_bounce'
-;" | while read type domain mail valeur ; do
+;" | while read sdid type domain mail valeur ; do
     host_create "$type" "$domain" "$mail" "$valeur"
-    mysql_query "update sub_domaines sd set web_action='OK',web_result='$?' where lower(sd.type)='$type' and if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine)='$domain' and sd.valeur='$valeur'; "
+    mysql_query "update sub_domaines sd set web_action='OK',web_result='$?' where sd.id = '$sdid' ; "
     echo 1 > "$RELOAD_WEB"
 done
 
 # Domaine to enable
-mysql_query "select concat_ws('$IFS',lower(sd.type),if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine),sd.valeur) from sub_domaines sd where sd.enable ='ENABLE' ;"|while read type domain valeur ; do
+mysql_query "select concat_ws('$IFS',sd.id, lower(sd.type),if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine),sd.valeur) from sub_domaines sd where sd.enable ='ENABLE' ;"|while read sdid type domain valeur ; do
     host_enable "$type" "$domain" "$valeur"
-    mysql_query "update sub_domaines sd set enable='ENABLED' where lower(sd.type)='$type' and if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine)='$domain' and sd.valeur='$valeur';"
+    mysql_query "update sub_domaines sd set enable='ENABLED' where sd.id = '$sdid' ;"
     echo 1 > "$RELOAD_WEB"
 done
 
 # Domains to disable
-mysql_query "select concat_ws('$IFS',lower(sd.type),if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine),sd.valeur) from sub_domaines sd where sd.enable ='DISABLE' ;"|while read type domain valeur ; do
+mysql_query "select concat_ws('$IFS', sd.id, lower(sd.type),if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine),sd.valeur) from sub_domaines sd where sd.enable ='DISABLE' ;"|while read sdid type domain valeur ; do
     host_disable "$type" "$domain" "$valeur"
-    mysql_query "update sub_domaines sd set enable='DISABLED' where lower(sd.type)='$type' and if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine)='$domain' and sd.valeur='$valeur';"
+    mysql_query "update sub_domaines sd set enable='DISABLED' where sd.id = '$sdid' ;"
     echo 1 > "$RELOAD_WEB"
 done
 
