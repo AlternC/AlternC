@@ -206,13 +206,15 @@ class m_dom {
     return true;
   }   
 
-  function sub_domain_change_status($domain,$sub,$type,$value,$status) {
+  function sub_domain_change_status($sub_id,$status) {
     global $db,$err,$cuid;
     $err->log("dom","sub_domain_change_status");
+    $sub_id=intval($sub_id);
     $status=strtoupper($status);
     if (! in_array($status,array('ENABLE', 'DISABLE'))) return false;
+    // FIXME: add check with can_create_subdomain
 
-    $db->query("update sub_domaines set enable='$status' where domaine='$domain' and sub='$sub' and lower(type)=lower('$type') and valeur='$value'");
+    $db->query("update sub_domaines set enable='$status' where id = '$sub_id'");
 
     return true;
   } 
@@ -916,7 +918,7 @@ class m_dom {
     $compatibility_lst = explode(",",$db->f('compatibility'));
 
     // Get the list of type of subdomains already here who have the same name
-    $db->query("select * from sub_domaines where sub='$sub' and domaine='$dom' and not id = $sub_domain_id and web_action != 'DELETE'");
+    $db->query("select * from sub_domaines where sub='$sub' and domaine='$dom' and not id = $sub_domain_id and web_action != 'DELETE' and enabled not in ('DISABLED', 'DISABLE') ");
     #$db->query("select * from sub_domaines where sub='$sub' and domaine='$dom';");
     while ($db->next_record()) {
       // And if there is a domain with a incompatible type, return false

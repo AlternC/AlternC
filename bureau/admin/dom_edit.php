@@ -31,8 +31,8 @@ require_once("../class/config.php");
 include_once("head.php");
 
 $fields = array (
-	"domain"    => array ("request", "string", ""),
-	"sub"       => array ("request", "string", ""),
+	"domain"    => array ("request", "string", (empty($domain)?"":$domain) ),
+	"sub"       => array ("request", "string", (empty($sub)?"":$sub) ),
 );
 getFields($fields);
 
@@ -154,14 +154,14 @@ for($i=0;$i<$r["nsub"];$i++) {
 					switch ($r['sub'][$i]['enable']) {
 						case 'ENABLED':
 							__("Enabled");
-							echo "<br/><a href='dom_substatus.php?domain=".urlencode($r["name"])."&amp;sub=".urlencode($r["sub"][$i]["name"])."&amp;type=".urlencode($r["sub"][$i]["type"])."&amp;value=".urlencode($r["sub"][$i]['dest'])."&amp;status=disable'>";__("Disable");echo "</a>";
+							echo "<br/><a href='dom_substatus.php?sub_id=".urlencode($r["sub"][$i]["id"])."&amp;status=disable'>";__("Disable");echo "</a>";
 							break;
 						case 'ENABLE':
 							__("Activation pending");
 							break;
 						case 'DISABLED':
 							__("Disabled");
-							echo "<br/><a href='dom_substatus.php?domain=".urlencode($r["name"])."&amp;sub=".urlencode($r["sub"][$i]["name"])."&amp;type=".urlencode($r["sub"][$i]["type"])."&amp;value=".urlencode($r["sub"][$i]['dest'])."&amp;status=enable'>";__("Enable");echo "</a>";
+							echo "<br/><a href='dom_substatus.php?sub_id=".urlencode($r["sub"][$i]["id"])."&amp;status=enable'>";__("Enable");echo "</a>";
 							break;
 						case 'DISABLE':
 							__("Desactivation pending");

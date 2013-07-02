@@ -2,17 +2,19 @@
 require_once("../class/config.php");
 
 $fields = array (
-	"domain"    => array ("request", "string", ""),
-	"sub"       => array ("request", "string", ""),
-	"type"      => array ("request", "string", ""),
-  "value"     => array ("request", "string", ""),
+  "sub_id"    => array ("request", "integer", ""),
   "status"    => array ("request", "string", ""),
 );
 getFields($fields);
 
 $dom->lock();
 
-$r=$dom->sub_domain_change_status($domain,$sub,$type,$value,$status);
+$r=$dom->sub_domain_change_status($sub_id,$status);
+
+# Usefull for dom_edit
+$domi = $dom->get_sub_domain_all($sub_id);
+$domain=$domi['domain'];
+$sub=$domi['name'];
 
 $dom->unlock();
 
