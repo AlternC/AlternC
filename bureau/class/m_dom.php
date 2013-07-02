@@ -212,7 +212,14 @@ class m_dom {
     $sub_id=intval($sub_id);
     $status=strtoupper($status);
     if (! in_array($status,array('ENABLE', 'DISABLE'))) return false;
-    // FIXME: add check with can_create_subdomain
+
+    if ($status == 'ENABLE') { // check compatibility with existing sub_domains
+      $jh = $this->get_sub_domain_all($sub_id);
+      if (! $this->can_create_subdomain($jh['domain'], $jh['name'], $jh['type'], $sub_id) ) {
+        $err->raise("dom", _("The parameters for this subdomain and domain type are invalid. Please check for subdomain entries incompatibility"));
+        return false;
+      }
+    } 
 
     $db->query("update sub_domaines set enable='$status' where id = '$sub_id'");
 
