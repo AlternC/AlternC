@@ -115,6 +115,7 @@ CREATE TABLE IF NOT EXISTS domaines (
   noerase tinyint(4) NOT NULL default '0',
   dns_action enum ('OK','UPDATE','DELETE') NOT NULL default 'UPDATE',
   dns_result varchar(255) not null default '',
+  zonettl int(10) unsigned NOT NULL default '86400',
   PRIMARY KEY (id),
   UNIQUE KEY (domaine)
 ) ENGINE=MyISAM;

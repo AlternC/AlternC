@@ -40,3 +40,7 @@ CREATE TABLE IF NOT EXISTS `actions` (
  status int(8) unsigned default NULL,
  PRIMARY KEY ( `id` )
 ) ENGINE=MyISAM COMMENT = 'generic actions';
+
+-- Alter table domaines to add zone ttl field
+ALTER TABLE `domaines` ADD zonettl int(10) unsigned NOT NULL default '86400';
+
