@@ -216,6 +216,17 @@ if (!$r['noerase']) {
 </tr>
 </table>
 
+<?php if ($r["dns"]) { ?>
+<table class="tlist2">
+<tr>
+  <td><?php __("Define TTL for the zone records"); ?>&nbsp;: </td>
+  <td> 
+     <input type="text" id="ttldns" class="inc" name="ttl" size="6" value="<?php echo ($r["zonettl"]); ?>" /> <?php __("seconds"); ?>
+  </td>
+</tr>
+</table>
+<?php } ?>
+
 <table class="tlist2">
 <tr>
   <td>

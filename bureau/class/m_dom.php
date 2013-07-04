@@ -771,6 +771,7 @@ class m_dom {
     $r["dns_action"]=$db->Record["dns_action"];
     $r["dns_result"]=$db->Record["dns_result"];
     $r["mail"]=$db->Record["gesmx"];
+    $r["zonettl"]=$db->Record["zonettl"];
     $r['noerase']=$db->Record['noerase'];
     $db->free();
     $db->query("SELECT COUNT(*) AS cnt FROM sub_domaines WHERE compte='$cuid' AND domaine='$dom'");
@@ -1073,7 +1074,7 @@ class m_dom {
    *  TRUE sinon.
    *
    */
-  function edit_domain($dom,$dns,$gesmx,$force=0) {
+  function edit_domain($dom,$dns,$gesmx,$force=0,$ttl=86400) {
     global $db,$err,$L_MX,$classes,$cuid,$hooks;
     $err->log("dom","edit_domain",$dom."/".$dns."/".$gesmx);
     // Locked ?
@@ -1109,7 +1110,7 @@ class m_dom {
     }
     if ($dns!="1") $dns="0";
     // On vérifie que des modifications ont bien eu lieu :)
-    if ($r["dns"]==$dns && $r["mail"]==$gesmx) {
+    if ($r["dns"]==$dns && $r["mail"]==$gesmx && $r["zonettl"]==$ttl) {
       $err->raise("dom",_("No change has been requested..."));
       return false;
     }
@@ -1137,7 +1138,7 @@ class m_dom {
       $hooks->invoke("hook_dom_del_mx_domain",array($r["id"]));
     }
     
-    $db->query("UPDATE domaines SET gesdns='$dns', gesmx='$gesmx' WHERE domaine='$dom'");
+    $db->query("UPDATE domaines SET gesdns='$dns', gesmx='$gesmx', zonettl='$ttl' WHERE domaine='$dom'");
     $db->query("UPDATE domaines set dns_action='UPDATE' where domaine='$dom';");
     
     return true;

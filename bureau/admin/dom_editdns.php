@@ -34,12 +34,13 @@ $fields = array (
 	"domain"    => array ("request", "string", ""),
 	"dns"       => array ("request", "integer", 1),
 	"email"     => array ("request", "integer", 1),
+	"ttl"       => array ("request", "integer", 86400),
 );
 getFields($fields);
 
 $dom->lock();
 
-if (!$dom->edit_domain($domain,$dns,$email)) {
+if (!$dom->edit_domain($domain,$dns,$email,0,$ttl)) {
   $error=$err->errstr();
   include("dom_edit.php");
   $dom->unlock();
