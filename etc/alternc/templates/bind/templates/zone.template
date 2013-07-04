@@ -1,4 +1,4 @@
-$TTL 1D
+$TTL @@ZONETTL@@
 ;
 ; BIND data file for domain @@DOMAINE@@
 ;

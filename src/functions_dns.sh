@@ -35,6 +35,21 @@ dns_get_serial() {
     fi
 }
 
+dns_get_zonettl() {
+    local domain=$1
+    local zonettl=$(
+        $MYSQL_DO "SELECT zonettl FROM domaines d WHERE d.domaine='$domain';"
+        )
+    # default value
+    if [ "$zonettl" == "" ] ; then
+        zonettl="86400"
+    fi
+    if [ "$zonettl" -eq "0" ] ; then
+        zonettl="86400"
+    fi
+    echo $zonettl
+}
+
 dns_chmod() {
     local domain=$1
     chgrp bind $(dns_zone_file $domain)
@@ -100,6 +115,9 @@ dns_regenerate() {
     # Get the serial number if there is one
     local serial=$(dns_get_serial "$domain")
 
+    # Get the zone ttl
+    local zonettl=$(dns_get_zonettl "$domain")
+
     # Generate the headers with the template
     local file=$(cat "$ZONE_TEMPLATE")
 
@@ -129,7 +147,9 @@ dns_regenerate() {
             s/@@DEFAULT_SECONDARY_MX@@/$DEFAULT_SECONDARY_MX/g;
             s/@@DOMAINE@@/$domain/g;
             s/@@SERIAL@@/$serial/g;
-            s/@@PUBLIC_IP@@/$PUBLIC_IP/g")
+            s/@@PUBLIC_IP@@/$PUBLIC_IP/g;
+            s/@@ZONETTL@@/$zonettl/g;
+            " )
     
     # Add the manual lines
     if [ -r "$zone_file" ] ; then
