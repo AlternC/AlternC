@@ -8,12 +8,12 @@
 # Do not use parameters, Dovecot give environnment vars
 # The only parameters is the expected binary server
 
-CONFIG_FILE="/usr/lib/alternc/functions.sh"
-if [ ! -r "$CONFIG_FILE" ]; then
-    echo "Can't access $CONFIG_FILE."
+ALTERNC_CONFIG_FILE="/usr/lib/alternc/functions.sh"
+if [ ! -r "$ALTERNC_CONFIG_FILE" ]; then
+    echo "Can't access $ALTERNC_CONFIG_FILE."
     exit 1
 fi
-. "$CONFIG_FILE"
+. "$ALTERNC_CONFIG_FILE"
 
 mysql_query "update address a, domaines d, mailbox m set m.lastlogin=now() where a.domain_id=d.id and m.address_id=a.id and concat_ws('@',a.address,d.domaine) = '$USER';"
 
