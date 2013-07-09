@@ -1,12 +1,13 @@
-alternc (3.1~alpha012) experimental; urgency=low
+alternc (3.1~alpha014) experimental; urgency=low
 
   * menu became dynamic with a class
-  * /var/alternc disapear to became Debian-compliant (but we upgrade properly, keeping an existing /var/alternc)
+  * /var/alternc disapear to become Debian-compliant (but we upgrade properly, keeping an existing /var/alternc)
   * fix detection of ACL using pre-depends
   * fix dovecot SSL certificate (was pointing to an non-existing file)
   * configure dovecot properly when using /etc/alternc/alternc.pem
+  * 3.1 can be built for Squeeze or Wheezy (with dovecot 1.2 or 2.0) although the 2 versions slightly differs
 
- -- Benjamin Sonntag <benjamin@sonntag.fr>  Thu, 28 May 2013 06:09:00 +0100
+ -- Benjamin Sonntag <benjamin@sonntag.fr>  Thu, 15 Jun 2013 09:09:00 +0200
 
 alternc (3.0) stable; urgency=low
 

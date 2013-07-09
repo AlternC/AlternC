@@ -601,7 +601,7 @@ ORDER BY
    */ 
   function set_details($mail_id, $islocal, $quotamb, $recipients,$delivery="dovecot",$dontcheck=false) {
     global $err,$db,$cuid,$quota,$dom,$hooks;
-    $delivery=mysql_escape_string($delivery);
+    $delivery=mysql_real_escape_string($delivery);
     $err->log("mail","set_details");
     if (!($me=$this->get_details($mail_id))) {
       return false;
@@ -772,8 +772,8 @@ ORDER BY
    */
   function check_slave_account($login,$pass) {
     global $db,$err;
-    $login=mysql_escape_string($login);
-    $pass=mysql_escape_string($pass);
+    $login=mysql_real_escape_string($login);
+    $pass=mysql_real_escape_string($pass);
     $db->query("SELECT * FROM mxaccount WHERE login='$login' AND pass='$pass';");
     if ($db->next_record()) {
         return true;
@@ -819,8 +819,8 @@ ORDER BY
    */
   function add_slave_account($login,$pass) {
     global $db,$err;
-    $login=mysql_escape_string($login);
-    $pass=mysql_escape_string($pass);
+    $login=mysql_real_escape_string($login);
+    $pass=mysql_real_escape_string($pass);
     $db->query("SELECT * FROM mxaccount WHERE login='$login'");
     if ($db->next_record()) {
       $err->raise("mail",_("The slave MX account was not found"));
@@ -838,7 +838,7 @@ ORDER BY
    */
   function del_slave_account($login) {
     global $db,$err;
-    $login=mysql_escape_string($login);
+    $login=mysql_real_escape_string($login);
     $db->query("DELETE FROM mxaccount WHERE login='$login'");
     return true;
   }
