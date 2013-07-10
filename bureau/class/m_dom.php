@@ -1098,6 +1098,10 @@ class m_dom {
         return false;
       }
     }
+
+    # Can't have ttl == 0. There is also a check in function_dns
+    if ( $ttl == 0 ) { $ttl = 86400; }
+
     $t=checkfqdn($dom);
     if ($t) {
       $err->raise("dom",_("The domain name is syntaxically incorrect"));
@@ -1462,26 +1466,26 @@ class m_dom {
       $s=$this->get_domain_all($d);
       $this->unlock();
       if(empty($s["dns"])){
-	$s[dns]="non"; 
+	$s["dns"]="non"; 
       }else{
-	$s[dns]="oui";
+	$s["dns"]="oui";
       }
-      $str.="   <dns>".$s[dns]."</dns>\n";
+      $str.="   <dns>".$s["dns"]."</dns>\n";
       
-      if(empty($s[mx])){
-	$s[mx]="non"; 
+      if(empty($s["mx"])){
+	$s["mx"]="non"; 
       }else{
-	$s[mx]="oui";
+	$s["mx"]="oui";
       }
       
-      $str.="   <mx>".$s[mx]."</mx>\n";
+      $str.="   <mx>".$s["mx"]."</mx>\n";
       
-      if(empty($s[mail])){
-	$s[mail]="non"; 
+      if(empty($s["mail"])){
+	$s["mail"]="non"; 
       }
-      $str.="   <mail>".$s[mail]."</mail>\n";
-      if (is_array($s[sub])) {
-	foreach ($s[sub] as $sub) {
+      $str.="   <mail>".$s["mail"]."</mail>\n";
+      if (is_array($s["sub"])) {
+	foreach ($s["sub"] as $sub) {
 	  $str.="     <subdomain>\n";
 	  $str.="       <enabled>".$sub["enable"]." </enabled>\n";
 	  $str.="       <destination>".$sub["dest"]." </destination>\n";
