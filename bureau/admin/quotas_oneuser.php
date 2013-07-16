@@ -19,13 +19,13 @@ if (!isset($mode)) { # when included from adm_login, mode is not set
 
 <?php
 
-  $totalweb = $quota->get_size_web_sum_user($mem->user["uid"]);
-  // $totalweb is in KB, so we call get_size_unit() with it in Bytes
-  $t=$quota->get_size_unit($totalweb * 1024);
-  echo "<p>"._("quota_web")." "; // use quota_web because it's the magically translated string
-  echo sprintf("%.1f", $t['size'])."&nbsp;".$t['unit'];
-  echo "</p>";
-
+  $totalweb = $quota->getquota('web');
+  if ( $totalweb['u'] > 0 ) {
+    $t=$quota->get_size_unit($totalweb['u'] * 1024);
+    echo "<p>"._("quota_web")." "; // use quota_web because it's the magically translated string
+    echo sprintf("%.1f", $t['size'])."&nbsp;".$t['unit'];
+    echo "</p>";
+  }
 ?>
 
 <!-- Mails -->
