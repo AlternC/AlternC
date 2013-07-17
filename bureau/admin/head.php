@@ -56,6 +56,6 @@ if ($isinvited && isset($oldid) && !empty($oldid) && $oldid!=$cuid ) {
   echo "</p></div>";
 }
 ?>
-<div id="global">
+<div id="global" class="clearfix">
 <div id="menu"><?php include_once("menu.php"); ?></div>
 <div id="content">
