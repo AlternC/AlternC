@@ -876,6 +876,8 @@ div.progress-bar div.txt {
   padding-left: 30px;
 }
 
+/* Jquery-ui */
+
 body .ui-widget-content {
 /*  margin-top: 15px; */
 }
@@ -898,7 +900,6 @@ body .ui-state-active, body .ui-widget-content, body .ui-state-active, body .ui-
 
 body .ui-state-active a, body .ui-state-active a:link {
   color: black;
-  font-weight: none;
 }
 
 body .ui-tabs .ui-tabs-panel {
@@ -919,3 +920,6 @@ body .ui-dialog .ui-dialog-title {
   color: black;
 }
 
+body .ui-widget-content a {
+  color: #0D5689;
+}
