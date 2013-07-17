@@ -573,7 +573,7 @@ else {
 <br/>
 
 <p>
-<span class="ina"><a href="bro_main.php?R=<?php echo $R; ?>&amp;showdirsize=1"><?php __("Show size of directories"); ?></a></span> <?php __("(slow)"); ?>
+<span class="ina"><a href="bro_main.php?R=<?php echo (($R)?$R:"/"); ?>&amp;showdirsize=1"><?php __("Show size of directories"); ?></a></span> <?php __("(slow)"); ?>
 </p><p>&nbsp;</p><p>
 <span class="ina"><?php
 if ($hta->is_protected($R)) {
@@ -585,7 +585,7 @@ else {
 ?></span> <?php __("with a login and a password"); ?>
 </p><p>
 <span class="ina">
-<a href="bro_tgzdown.php?dir=<?php echo $R; ?>"><?php __("Download this folder"); ?></a>
+<a href="bro_tgzdown.php?dir=<?php echo (($R)?$R:"/") ?>"><?php __("Download this folder"); ?></a>
 </span> &nbsp; 
 <?php printf(_("as a %s file"),$bro->l_tgz[$p["downfmt"]]); ?>
 </p>  
@@ -594,7 +594,7 @@ else {
 if ($id=$ftp->is_ftp($R)) {
   ?>
     <span class="ina">
-    <a href="ftp_edit.php?amp;id=<?php ehe($id); ?>"><?php __("Edit the ftp account"); ?></a> 
+    <a href="ftp_edit.php?id=<?php ehe($id); ?>"><?php __("Edit the ftp account"); ?></a> 
     </span> &nbsp; <?php __("that exists in this folder"); ?>
     <?php
 }
