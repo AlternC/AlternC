@@ -110,7 +110,7 @@ $dom->unlock();
     <?php } // foreach ?>
 
 		<tr class="trbtn">
-			<td colspan="2"><input type="submit" class="inb" name="add" onclick='return check_type_selected();' value="<?php
+			<td colspan="2"><input type="submit" class="inb ok" name="add" onclick='return check_type_selected();' value="<?php
    if ($isedit) {
  __("Edit this subdomain");
 } else {

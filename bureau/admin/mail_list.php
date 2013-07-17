@@ -189,31 +189,31 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
 <br/>
 <br/>
 
-<table width='100%' class="tedit">
-<tr>
-<th width='50%'>
-  <b><?php __("Outgoing mail (SMTP)"); ?></b> 
-</th>
-<th width='50%'>
-  <b><?php __("Incoming mails"); ?></b>
-</th>
-</tr>
-<tr>
-  <td valign='top'>
+<div id="tabs-mailhelp">
+
+<ul>
+  <li class="help"><a href="#tabs-mailhelp-out"><?php __("Outgoing mail (SMTP)"); ?></a></li>
+  <li class="help"><a href="#tabs-mailhelp-in"><?php __("Incoming mails"); ?></a></li>
+</ul>
+
+<div id="tabs-mailhelp-out">
+
     <?php __("Which protocol would you use?"); ?>
-    <ul>
-      <li><b><a href="javascript:;" onClick="$('#cfg-submission').toggle();"><?php __("Submission");?></a></b>
-        <ul id='cfg-submission'>
-          <li><b><?php __("Server name: ");?></b> <?php __($mail->srv_submission); ?></li>
-          <li><b><?php __("Username: ");?></b> <?php __("The mail address you want to access <i>(example : myuser@example.tld)</i>");?></li>
-          <li><b><?php __("Port: ");?></b> 587</li>
-          <li><b><?php __("Authentication: ");?></b><?php __("Yes")?></li>
-          <li><b><?php __("Authentication method: ");?></b><?php __("Normal password")?></li>
-          <li><b><?php __("Connection security:");?></b> STARTTLS</li>
+    <div id="accordion-mailout">
+      <h4><?php __("Submission");?></h4>
+      <div>
+        <ul>
+        <li><b><?php __("Server name: ");?></b> <?php __($mail->srv_submission); ?></li>
+        <li><b><?php __("Username: ");?></b> <?php __("The mail address you want to access <i>(example : myuser@example.tld)</i>");?></li>
+        <li><b><?php __("Port: ");?></b> 587</li>
+        <li><b><?php __("Authentication: ");?></b><?php __("Yes")?></li>
+        <li><b><?php __("Authentication method: ");?></b><?php __("Normal password")?></li>
+        <li><b><?php __("Connection security:");?></b> STARTTLS</li>
         </ul>
-      </li>
-      <li><b><a href="javascript:;" onClick="$('#cfg-smtp').toggle();"><?php __("SMTP");?></a></b>
-        <ul id='cfg-smtp'>
+      </div>
+      <h4><?php __("SMTP");?></h4>
+      <div>
+        <ul>
           <li><b><?php __("Server name: ");?></b> <?php __($mail->srv_smtp); ?></li>
           <li><b><?php __("Username: ");?></b> <?php __("The mail address you want to access <i>(example : myuser@example.tld)</i>");?></li>
           <li><b><?php __("Port: ");?></b> 25</li>
@@ -221,9 +221,10 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
           <li><b><?php __("Authentication method: ");?></b><?php __("Normal Password")?></li>
           <li><b><?php __("Connection security:");?></b> STARTTLS</li>
         </ul>
-      </li>
-       <li><b><a href="javascript:;" onClick="$('#cfg-smtps').toggle();"><?php __("SMTPS");?></a></b>
-        <ul id='cfg-smtps'>
+      </div>
+      <h4><?php __("SMTPS");?></h4>
+      <div>
+        <ul>
           <li><b><?php __("Server name: ");?></b> <?php __($mail->srv_smtps); ?></li>
           <li><b><?php __("Username: ");?></b> <?php __("The mail address you want to access <i>(example : myuser@example.tld)</i>");?></li>
           <li><b><?php __("Port: ");?></b> 465</li>
@@ -231,64 +232,80 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
           <li><b><?php __("Authentication method: ");?></b><?php __("Normal Password")?></li>
           <li><b><?php __("Connection security:");?></b> SSL</li>
         </ul>
-      </li>
-    </ul>
-  </td>
-  <td valign='top'>
+      </div>
+    </div><!-- accordion-mailout -->
+
+</div><!-- tabs-mailhelp-out -->
+
+<div id="tabs-mailhelp-in">
+
     <?php __("Which protocol would you use?"); ?>
-    <ul>
-      <li><b><a href="javascript:;" onClick="$('#cfg-imap').toggle();"><?php __("IMAP");?></a></b>
-        <ul id='cfg-imap'>
+    <div id="accordion-mailin">
+      <h4><?php __("IMAP");?></h4>
+      <div>
+        <ul>
           <li><b><?php __("Server name: ");?></b> <?php __($mail->srv_imap); ?></li>
           <li><b><?php __("Port: ");?></b> 143</li>
           <li><b><?php __("Authentication: ");?></b><?php __("Yes")?></li>
           <li><b><?php __("Authentication method: ");?></b><?php __("Normal password")?></li>
           <li><b><?php __("Connection security:");?></b> STARTTLS</li>
         </ul>
-      </li>
+      </div>
 
-      <li><b><a href="javascript:;" onClick="$('#cfg-imaps').toggle();"><?php __("IMAPS");?></a></b>
-        <ul id='cfg-imaps'>
+      <h4><?php __("IMAPS");?></h4>
+      <div>
+        <ul>
           <li><b><?php __("Server name: ");?></b> <?php __($mail->srv_imaps); ?></li>
           <li><b><?php __("Port: ");?></b> 993</li>
           <li><b><?php __("Authentication: ");?></b><?php __("Yes")?></li>
           <li><b><?php __("Authentication method: ")?></b><?php __("Normal password")?></li>
           <li><b><?php __("Connection security:");?></b> SSL</li>
         </ul>
-      </li>
+      </div>
 
-      <li><b><a href="javascript:;" onClick="$('#cfg-pop3').toggle();"><?php __("POP3");?></a></b>
-        <ul id='cfg-pop3'>
+      <h4><?php __("POP3");?></h4>
+      <div>
+        <ul>
           <li><b><?php __("Server name: ");?></b> <?php __($mail->srv_pop3); ?></li>
           <li><b><?php __("Port: ");?></b> 110</li>
           <li><b><?php __("Authentication: ");?></b><?php __("Yes")?></li>
           <li><b><?php __("Authentication method: ");?></b><?php __("Normal password")?></li>
           <li><b><?php __("Connection security:");?></b> STARTTLS</li>
         </ul>
-      </li>
+      </div>
 
-      <li><b><a href="javascript:;" onClick="$('#cfg-pop3s').toggle();"><?php __("POP3S");?></a></b>
-        <ul id='cfg-pop3s'>
+      <h4><?php __("POP3S");?></h4>
+      <div>
+        <ul>
           <li><b><?php __("Server name: ");?></b> <?php __($mail->srv_pop3s); ?></li>
           <li><b><?php __("Port: ");?></b> 995</li>
           <li><b><?php __("Authentication: ");?></b><?php __("Yes")?></li>
           <li><b><?php __("Authentication method: ");?></b><?php __("Normal password")?></li>
           <li><b><?php __("Connection security:");?></b> SSL</li>
         </ul>
-      </li>
-    </ul>
-  </td>
-</tr>
-</table>
+      </div>
+    </div>
+</div><!-- tabs-mailhelp-in -->
+</div><!-- tabs-mailhelp -->
+
 
 <script type="text/javascript">
-  $('#cfg-submission').toggle();
-  $('#cfg-smtp').toggle();
-  $('#cfg-smtps').toggle();
-  $('#cfg-imap').toggle();
-  $('#cfg-imaps').toggle();
-  $('#cfg-pop3').toggle();
-  $('#cfg-pop3s').toggle();
+
+  $(function() {
+    $( "#accordion-mailout" ).accordion({
+      collapsible: true, active: false, header: "h4", heightStyle: "content"
+    });
+  });
+
+  $(function() {
+    $( "#accordion-mailin" ).accordion({
+      collapsible: true, active: false, header: "h4", heightStyle: "content"
+    });
+  });
+
+
+$(function() {$( "#tabs-mailhelp" ).tabs();});
+
 </script>
 
 

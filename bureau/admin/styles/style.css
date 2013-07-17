@@ -687,6 +687,13 @@ div.progress-bar div.txt {
   padding-left: 30px;
 }
 
+.settings a, a.settings, input.settings {
+  background-image: url(../icon/settings.png);
+  background-repeat: no-repeat;
+  background-position: 8px 3px;
+  padding-left: 30px;
+}
+
 .ok a, a.ok, input.ok {
   background-image: url(../icon/ok.png);
   background-repeat: no-repeat;
@@ -856,7 +863,7 @@ div.progress-bar div.txt {
 }
 
 .mem a, a.mem, input.mem, .mem-menu .menu-title {
-  background-image: url(../images/config.png);
+  background-image: url(../images/settings.png);
   background-repeat: no-repeat;
   background-position: 8px 3px;
   padding-left: 30px;
@@ -867,5 +874,48 @@ div.progress-bar div.txt {
   background-repeat: no-repeat;
   background-position: 8px 3px;
   padding-left: 30px;
+}
+
+body .ui-widget-content {
+/*  margin-top: 15px; */
+}
+
+body .ui-widget-header {
+  background: #CFE3F1;
+}
+
+body .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited {
+  color: #0D5689;
+}
+
+body .ui-state-default, body .ui-widget-content .ui-state-default, body .ui-widget-header .ui-state-default {
+  background: #F0F0F4;
+}
+
+body .ui-state-active, body .ui-widget-content, body .ui-state-active, body .ui-widget-header .ui-state-active {
+  background: #F0F0F4;
+}
+
+body .ui-state-active a, body .ui-state-active a:link {
+  color: black;
+  font-weight: none;
+}
+
+body .ui-tabs .ui-tabs-panel {
+  background: #F0F0F4;
+}
+
+body .ui-tabs .ui-tabs-nav li a {
+  padding: .5em 1em .5em 30px;
+}
+
+body .ui-state-active, body .ui-widget-content .ui-state-active, body .ui-widget-header .ui-state-active,
+body ui-state-hover, body .ui-widget-content .ui-state-hover, body .ui-widget-header .ui-state-hover, body .ui-state-focus, body .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus,
+body .ui-state-default, body .ui-widget-content .ui-state-default, body .ui-widget-header .ui-state-default {
+  font-weight: normal;
+}
+
+body .ui-dialog .ui-dialog-title {
+  color: black;
 }
 

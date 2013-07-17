@@ -87,8 +87,9 @@ function destruction_alert() {
   }
 }
 </script>
-<h3><?php printf(_("Editing subdomains of %s"),$domain); ?></h3>
-<hr id="topbar"/>
+
+<h3><img src="images/dom.png" alt="" />&nbsp;<?php printf(_("Manage %s"),$domain); ?></h3>
+
 <?php
 
 if ($r['dns_action']=='UPDATE') {?>
@@ -108,10 +109,20 @@ if ($r['dns_action']=='UPDATE') {?>
 }
 
 ?>
-<br />
-<!-- *****************************************
-		 gestion des sous-domaines
- -->
+
+
+<div id="tabsdom">
+
+<ul>
+  <li class="edit"><a href="#tabsdom-editsub"><?php __("Edit subdomains");?></a></li>
+  <li class="add"><a href="#tabsdom-addsub"><?php __("Add subdomains");?></a></li>
+  <li class="settings"><a href="#tabsdom-params"><?php __("Settings");?></a></li>
+  <li class="delete"><a href="#tabsdom-delete"><?php __("Delete");?></a></li>
+</ul>
+
+
+<div id="tabsdom-editsub">
+<h3><?php printf(_("Editing subdomains of %s"),$domain); ?></h3>
 <table class="tlist">
 <tr><th colspan="2"> </th><th><?php __("Subdomain"); ?></th><th><?php __("Type");?></th><th><?php __("Status")?></th><th></th></tr>
 <?php
@@ -185,8 +196,11 @@ for($i=0;$i<$r["nsub"];$i++) {
 	</tr>
 <?php } ?>
 </table>
-<br />
-<hr/>
+</div>
+
+
+<div id="tabsdom-addsub">
+<h3><?php printf(_("Add a subdomains to %s"),$domain); ?></h3>
 <?php
 $isedit=false;
 require_once('dom_edit.inc.php');
@@ -194,7 +208,6 @@ sub_domains_edit($domain);
 ?>
 <br />
 <?php $mem->show_help("edit_domain"); ?>
-<p>&nbsp;</p>
 <!-- *****************************************
 		 modification des parametres dns
  -->
@@ -202,7 +215,8 @@ sub_domains_edit($domain);
 if (!$r['noerase']) {
 ?>
 
-<hr />
+</div>
+<div id="tabsdom-params">
 <h3><?php __("DNS &amp; Email parameters"); ?></h3>
 <form action="dom_editdns.php?domain=<?php echo urlencode($r["name"]) ?>" method="post" id="fdns" name="fdns" onSubmit="return destruction_alert();">
 
@@ -242,22 +256,20 @@ if (!$r['noerase']) {
 <input type="submit" class="inb ok" name="submit" value="<?php __("Submit the changes"); ?>" />
 	</form>
 
-<p>&nbsp;</p>
-<hr />
-<h3><?php __("Domain removal"); ?></h3>
-
-<br />
-<?php printf(_("If you want to destroy the domain %s, click on the button below. Warning: this also deletes all FTP accounts, email, mailing lists associated with the domain and subdomains."),$domain); ?><br />
-<form action="dom_dodel.php?domain=<?php echo urlencode($domain) ?>" method="post">
-<p>
-<input type="submit" class="inb delete" name="detruire" value="<?php printf(_("Delete %s from this server"),$domain); ?>" />
-</p>
-</form>
-
-<br />
-<hr />
+</div>
+<div id="tabsdom-delete">
+  <h3><?php __("Domain removal"); ?></h3>
+  <?php printf(_("If you want to destroy the domain %s, click on the button below. Warning: this also deletes all FTP accounts, email, mailing lists associated with the domain and subdomains."),$domain); ?><br />
+  <form action="dom_dodel.php?domain=<?php echo urlencode($domain) ?>" method="post">
+    <p>
+      <input type="submit" class="inb delete" name="detruire" value="<?php printf(_("Delete %s from this server"),$domain); ?>" />
+    </p>
+  </form>
+</div> <!-- tabsdom-delete -->
+</div> <!-- tabsdom -->
 <?php } // noerase ?>
 <script type="text/javascript">
 document.forms['main'].sub.focus();
+$(function() {$( "#tabsdom" ).tabs();});
 </script>
 <?php include_once("foot.php"); ?>

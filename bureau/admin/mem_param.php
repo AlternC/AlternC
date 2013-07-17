@@ -52,17 +52,29 @@ if (!empty($help_setting)) {
 		exit();
 	}
 ?>
-<hr id="topbar"/>
-<p>
-<?php __("Password change"); ?> : <br />
-<?php
 
+<div id="tabsmem">
+<ul>
+<li class="hta"><a href="#tabsmem-password"><?php __("Password"); ?></a></li>
+<li class="mail"><a href="#tabsmem-mail"><?php __("Mail"); ?></a></li>
+<li class="help"><a href="#tabsmem-help"><?php __("Help"); ?></a></li>
+<?php
+if ($mem->user["su"]) { ?>
+<li class="admin"><a href="#tabsmem-admin"><?php __("Administrator"); ?></a></li> <?php
+}
+?>
+</ul>
+
+<div id="tabsmem-password">
+<h3><?php __("Password change"); ?></h3>
+<?php
 if (!$mem->user["canpass"]) {
+  echo "<p>";
   __("You cannot change your password");
   echo "</p>";
 
 } else {
-
+echo "<p>";
  __("help_chg_passwd"); ?>
 </p>
 <form method="post" action="mem_passwd.php" name="main" id="main">
@@ -70,53 +82,55 @@ if (!$mem->user["canpass"]) {
 <tr><th><?php __("Old password"); ?></th><td><input type="password" class="int" name="oldpass" value="<?php isset($oldpass) ? : $oldpass=""; echo $oldpass; ?>" size="20" maxlength="128" /></td></tr>
 <tr><th><?php __("New password"); ?> (1)</th><td><input type="password" class="int" id="newpass" name="newpass" value="<?php isset($newpass) ? : $newpass=""; echo $newpass;  ?>" size="20" maxlength="60" /><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#newpass","#newpass2"); ?></td></tr>
 <tr><th><?php __("New password"); ?> (2)</th><td><input type="password" class="int" id="newpass2" name="newpass2" value="<?php isset($newpass2) ? : $newpass2=""; echo $newpass2;?>" size="20" maxlength="61" /></td></tr>
-<tr class="trbtn"><td colspan="3"><input type="submit" class="inb" name="submit" value="<?php __("Change my password"); ?>" /></td></tr>
+<tr class="trbtn"><td colspan="3"><input type="submit" class="inb ok" name="submit" value="<?php __("Change my password"); ?>" /></td></tr>
 </table>
 </form>
 <br />
 <?php } ?>
-<hr id="topbar2"/>
+</div> <!-- tabsmem-password -->
+<div id="tabsmem-mail">
+<h3><?php __("Change the email of the account"); ?></h3>
 <form method="post" action="mem_chgmail.php">
 	<table border="1" cellspacing="0" cellpadding="4" class="tedit">
-		<tr><td colspan="2"><?php __("Change the email of the account"); ?><br />
-		<?php __("help_chg_mail"); ?></td></tr>
+		<tr><td colspan="2"><?php __("help_chg_mail"); ?></td></tr>
 		<tr><th><?php __("Current mailbox"); ?></th><td><big><code><?php echo $mem->user["mail"]; ?></code></big></td></tr>
 		<tr><th><?php __("New mailbox"); ?></th><td><input type="text" class="int" name="newmail" value="<?php   isset($newmail) ? : $newmail=""; echo $newmail;?>" size="40" maxlength="128" /></td></tr>
-		<tr class="trbtn"><td colspan="3"><input type="submit" class="inb" name="submit" value="<?php __("Change my email address"); ?>" /></td></tr>
+		<tr class="trbtn"><td colspan="3"><input type="submit" class="inb ok" name="submit" value="<?php __("Change my email address"); ?>" /></td></tr>
 	</table>
 </form>
-<br />
-<hr id="topbar3"/>
+</div> <!-- tabsmem-mail -->
+<div id="tabsmem-help">
+		<h3><?php __("Online help settings"); ?></h3>
 <form method="post" action="mem_param.php">
 	<table border="1" cellspacing="0" cellpadding="4" class="tedit">
-		<tr><td colspan="2"><?php __("Online help settings"); ?><br />
-		<?php __("help_help_settings"); ?></td></tr>
+                <tr><td colspan="2"><?php __("help_help_settings"); ?></td></tr>
 		<tr><th><label for="showhelp"><?php __("Do you want to see the help texts and links on each page?"); ?></label></th><td><input type="checkbox" class="inc" id="showhelp" name="showhelp" value="1" <?php if ($mem->get_help_param()) echo "checked=\"checked\""; ?> /></td></tr>
-		<tr class="trbtn"><td colspan="3"><input type="submit" class="inb" name="help_setting" value="<?php __("Change these settings"); ?>" /></td></tr>
+		<tr class="trbtn"><td colspan="3"><input type="submit" class="inb ok" name="help_setting" value="<?php __("Change these settings"); ?>" /></td></tr>
 	</table>
 </form>
-<br />
+</div> <!-- tabsmem-help -->
 <?php
 if ($mem->user["su"]) {
 ?>
-<hr id="topbar4"/>
-<p>
-<?php __("Admin preferences"); ?> :
-</p>
+<div id="tabsmem-admin">
+<h3><?php __("Admin preferences"); ?></h3>
 <form method="post" action="mem_admin.php">
 <table border="1" cellspacing="0" cellpadding="4" class="tedit">
 <tr><th><?php __("Members list view"); ?></th><td><select name="admlist" class="inl">
 <option value="0"<?php if ($mem->user["admlist"]==0) echo " selected=\"selected\""; ?>><?php __("Large view"); ?></option>
 <option value="1"<?php if ($mem->user["admlist"]==1) echo " selected=\"selected\""; ?>><?php __("Short view"); ?></option>
 </select></td></tr>
-<tr class="trbtn"><td colspan="2"><input type="submit" class="inb" name="submit" value="<?php __("Change my admin preferences"); ?>" /></td></tr>
+<tr class="trbtn"><td colspan="2"><input type="submit" class="inb ok" name="submit" value="<?php __("Change my admin preferences"); ?>" /></td></tr>
 </table>
 </form>
-<br />
+</div> <!-- tabsmem-admin -->
 <?php } ?>
-<hr id="topbar5"/>
+
+</div> <!-- tabsmem -->
+
 <script type="text/javascript">
 document.forms['main'].oldpass.focus();
+$(function() {$( "#tabsmem" ).tabs();});
 </script>
 
 <?php include_once("foot.php"); ?>

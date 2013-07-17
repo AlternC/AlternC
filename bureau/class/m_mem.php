@@ -61,7 +61,7 @@ class m_mem {
   function hook_menu() {
     $obj = array(
       'title'       => _("Settings"),
-      'ico'         => 'images/config.png',
+      'ico'         => 'images/settings.png',
       'link'        => 'mem_param.php',
       'pos'         => 160,
      ) ;
