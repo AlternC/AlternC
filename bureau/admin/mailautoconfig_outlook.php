@@ -1,18 +1,16 @@
 <?php
-// Created by Alesandro Slepcevic - alesandro@plus.hr
-//header(':', true, 405);
-if ( $_SERVER['REQUEST_METHOD'] === 'POST' ){ 
-    $postText = file_get_contents('php://input'); 
-$string = $postText;
-$matches = array();
-$pattern = '/[A-Za-z0-9_-]+@[A-Za-z0-9_-]+.([A-Za-z0-9_-][A-Za-z0-9_]+)/'; 
-preg_match($pattern, $string, $matches); 
-$emailDomain = explode('@', $matches[0]);
+require_once("../class/config_nochk.php");
 
-$f=fopen("/tmp/autodiscover.log","ab");
-fputs($f,"Posted: \n".$string."\n");
-fclose($f);
+// Created by Alesandro Slepcevic - alesandro@plus.hr
+if ( $_SERVER['REQUEST_METHOD'] === 'POST' ){ 
+  $postText = file_get_contents('php://input'); 
+  $string = $postText;
+  $matches = array();
+  $pattern = '/[A-Za-z0-9_-]+@[A-Za-z0-9_-]+.([A-Za-z0-9_-][A-Za-z0-9_]+)/'; 
+  preg_match($pattern, $string, $matches); 
+  $emailDomain = explode('@', $matches[0]);
 }
+
 header("Content-type: text/xml");
 echo "<?xml version='1.0' encoding='UTF-8'?> \n";
 ?>
@@ -23,7 +21,7 @@ echo "<?xml version='1.0' encoding='UTF-8'?> \n";
 	<Action>settings</Action>
 	<Protocol>
 		<Type>IMAP</Type>
-		<Server><?php echo exec('hostname -f');?></Server>
+		<Server><?php echo $mail->srv_imaps;?></Server>
 		<Port>993</Port>
 		<LoginName><?php echo $matches[0];?></LoginName>
 		<DomainName><?php echo $emailDomain[1];?></DomainName>
@@ -33,7 +31,7 @@ echo "<?xml version='1.0' encoding='UTF-8'?> \n";
 	</Protocol>
 	<Protocol>
 		<Type>SMTP</Type>
-		<Server><?php echo exec('hostname -f');?></Server>
+		<Server><?php echo $mail->srv_smtps;?></Server>
 		<Port>587</Port>
 		<SPA>off</SPA>
 		<SSL>on</SSL>
