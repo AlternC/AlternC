@@ -1,6 +1,9 @@
 <?php
 require_once("../class/config_nochk.php");
 
+# Test it :
+# wget http://FQDN/mailautoconfig_outlook.php -O - --post-data="test@example.tls" -q
+
 // Created by Alesandro Slepcevic - alesandro@plus.hr
 if ( $_SERVER['REQUEST_METHOD'] === 'POST' ){ 
   $postText = file_get_contents('php://input'); 

@@ -3,6 +3,9 @@ require_once("../class/config_nochk.php");
 
 header ("Content-Type:text/xml");
 
+# Test it :
+# wget -O - -q  http://FQDN/mailautoconfig_thunderbird.php?emailaddress=test@example.tld
+
 if (empty($_GET['emailaddress'])) die(_("Error: Missing GET of emailaddress"));
 
 $emailDomain = explode('@', rawurldecode($_GET['emailaddress']));
