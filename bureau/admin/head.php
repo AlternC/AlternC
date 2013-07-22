@@ -33,6 +33,11 @@ if (!$charset) $charset="UTF-8";
 
 <link rel="stylesheet" href="js/jquery_ui/css/redmond/jquery-ui-1.10.3.custom.min.css" type="text/css" />
 <link rel="stylesheet" href="styles/style.css" type="text/css" />
+<?php
+if (file_exists("styles/style-custom.css") ) {
+  echo '<link rel="stylesheet" href="styles/style-custom.css" type="text/css" />';
+}
+?>
 
 <link rel="stylesheet" href="styles/style-empty.css" type="text/css" title="Default - Desktop TNG"/>
 <link rel="alternate stylesheet" href="styles/style-bluedesktop10.css" type="text/css" title="Blue Desktop 1.0" />

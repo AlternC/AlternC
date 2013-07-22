@@ -45,6 +45,12 @@ if (!$charset) $charset="UTF-8";
 <head>
 <title>AlternC Desktop</title>
 <link rel="stylesheet" href="styles/style.css" type="text/css" />
+<?php
+if (file_exists("styles/style-custom.css") ) {
+  echo '<link rel="stylesheet" href="styles/style-custom.css" type="text/css" />';
+}
+?>
+
 <script type="text/javascript" src="js/alternc.js"></script>
 <script src="js/jquery.min.js" type="text/javascript"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $charset; ?>" />
