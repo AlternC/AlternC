@@ -127,10 +127,19 @@ dns_regenerate() {
         $MYSQL_DO "select distinct replace(replace(dt.entry,'%TARGET%',sd.valeur), '%SUB%', if(length(sd.sub)>0,sd.sub,'@')) as entry from sub_domaines sd,domaines_type dt where sd.type=dt.name and sd.domaine='$domain' and sd.enable in ('ENABLE', 'ENABLED') order by entry ;"
     )
 
-    # Get some usefull vars
-
-# Deprecated ?
-#    local mx=$( $MYSQL_DO "select mx from domaines where domaine='$domain' limit 1;")
+    ##### Mail autodetect for thunderbird / outlook - START
+    # If $file contain DEFAULT_MX
+    if [ ! -z "$(echo -e "$file" |egrep 'DEFAULT_MX' )" ] ; then 
+      # If $file ! contain autoconfig -> add entry
+      if [ -z "$(echo -e "$file" |egrep '^autoconfig' )" ] ; then 
+        file="$(echo -e "$file" ; echo -e "autoconfig IN CNAME $FQDN.\n")"
+      fi
+      # if $file ! contain autodiscover -> add entry
+      if [ -z "$(echo -e "$file" |egrep '^autodiscover' )" ] ; then 
+        file="$(echo -e "$file" ; echo -e "autodiscover IN CNAME $FQDN.\n")"
+      fi
+    fi # End if containt DEFAULT_MX 
+    ##### Mail autodetect for thunderbird / outlook - END
 
     # Replace the vars by their values
     # Here we can add dynamic value for the default MX

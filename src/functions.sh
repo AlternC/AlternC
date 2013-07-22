@@ -71,6 +71,10 @@ get_uid_by_name() {
   mysql_query 'SELECT uid FROM membres WHERE login="'"$1"'" LIMIT 1;'
 }
 
+get_variable_from_db() {
+  mysql_query 'SELECT value FROM membres WHERE name="'"$1"'" LIMIT 1;'
+}
+
 
 # imprime le nom d'usager associé au domaine
 get_account_by_domain() {

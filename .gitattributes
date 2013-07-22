@@ -469,7 +469,6 @@ etc/alternc/templates/apache2/vhost.conf -text
 etc/alternc/templates/bind/automatic.conf -text
 etc/alternc/templates/bind/named.conf.options -text
 etc/alternc/templates/bind/slaveip.conf -text
-etc/alternc/templates/bind/templates/mx.template -text
 etc/alternc/templates/bind/templates/named.template -text
 etc/alternc/templates/bind/templates/slave.template -text
 etc/alternc/templates/bind/templates/zone.template -text
