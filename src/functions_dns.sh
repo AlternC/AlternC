@@ -169,8 +169,9 @@ dns_regenerate() {
     # Add it to named conf
     dns_named_conf $domain
 
-    # Kindly bind to reload the zone
-    $RNDC reload $domain
     # Hook it !
     run-parts --arg=dns_reload_zone --arg="$domain" /usr/lib/alternc/reload.d
+
+    # Kindly bind to reload the zone
+    $RNDC reload $domain
 }
