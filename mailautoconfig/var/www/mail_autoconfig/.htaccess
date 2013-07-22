@@ -1,0 +1,8 @@
+RewriteEngine On
+RewriteRule ^mail/mailautoconfig.xml$ /thunderbird.php [L]
+RewriteRule ^mail/config-v1.1.xml$ /thunderbird.php [L]
+RewriteRule ^autodiscover/autodiscover.xml$ /outlook.php [L]
+RewriteRule ^Autodiscover/Autodiscover.xml$ /outlook.php [L]
+RewriteRule ^Autodiscover.xml$ outlook.php [L]
+RewriteRule ^autodiscover.xml$ outlook.php [L]
+

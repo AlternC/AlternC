@@ -1,0 +1,62 @@
+#!/bin/bash
+
+# cron pouvant servir au cas ou la foinctionnalite n est pas intergre a alternc
+
+PUBLIC_IP="`awk -F'"' '/^PUBLIC_IP/ {print $2}' /etc/alternc/local.sh`"
+
+if [ -d "/var/alternc/bind/zones" ]
+then
+ BINDDIR="/var/alternc/bind/zones"
+fi
+if [ -d "/var/lib/alternc/bind/zones" ]
+then
+ BINDDIR="/var/lib/alternc/bind/zones"
+fi
+BINDRELOAD=0
+
+while read domaine gesmx gesdns
+do
+ # for debug 
+ #echo $domaine $gesmx $gesdns 
+ if [ $gesdns -eq 0 ]
+ then
+  sed -i '/^autodiscover/d' $BINDDIR/$domaine
+  sed -i '/^autoconfig/d' $BINDDIR/$domaine
+ else
+  if [ $gesmx -eq 0 ]
+  then
+   sed -i '/^autodiscover/d' $BINDDIR/$domaine
+   sed -i '/^autoconfig/d' $BINDDIR/$domaine
+  else
+   ZNSERIAL="`awk '/; serial/ {print $1}' $BINDDIR/$domaine`"
+   NEWZNSERIAL=$((ZNSERIAL+1))
+   # for debug
+   #echo $ZNSERIAL $NEWZNSERIAL $BINDDIR
+   if [ `grep "^autodiscover " $BINDDIR/$domaine | wc -l` -ge 1 ]
+   then
+    echo -e "autodiscover IN A $PUBLIC_IP" >> /dev/null
+   else
+    echo -e "autodiscover IN A $PUBLIC_IP" >> $BINDDIR/$domaine
+    sed -i '/; serial[ \t]*$/ s/'$ZNSERIAL'/'$NEWZNSERIAL'/' $BINDDIR/$domaine
+   fi
+   if [ `grep "^autoconfig " $BINDDIR/$domaine | wc -l` -ge 1 ]
+   then
+    echo -e "autoconfig IN A $PUBLIC_IP" >> /dev/null
+   else
+    echo -e "autoconfig IN A $PUBLIC_IP" >> $BINDDIR/$domaine
+    sed -i '/; serial[ \t]*$/ s/'$ZNSERIAL'/'$NEWZNSERIAL'/' $BINDDIR/$domaine
+   fi
+  fi
+ fi
+if [ `awk '/; serial/ {print $1}' $BINDDIR/$domaine` -gt $ZNSERIAL ]
+then
+ BINDRELOAD=$((BINDRELOAD+1))
+fi
+done < <(mysql --defaults-file=/etc/alternc/my.cnf -e "select domaine,gesmx,gesdns from domaines;" alternc | grep -v \| | tail --lines=+2)
+
+if [ $BINDRELOAD -ne 0 ]
+then
+ /usr/sbin/rndc reload
+fi 
+
+
