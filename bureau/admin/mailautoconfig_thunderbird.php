@@ -2,11 +2,15 @@
 require_once("../class/config_nochk.php");
 
 header ("Content-Type:text/xml");
+
+if (empty($_GET['emailaddress'])) die(_("Error: Missing GET of emailaddress"));
+
 $emailDomain = explode('@', rawurldecode($_GET['emailaddress']));
+if (empty($emailDomain)) die(_('Error: Empty $emailDomain'));
 ?>
 <clientConfig version="1.1">
 <emailProvider id="<?php echo $L_FQDN ?>">
-<domain><?php echo $emailDomain;?></domain>
+<domain><?php echo $emailDomain[1];?></domain>
 <displayName><?php echo $L_FQDN ?></displayName>
 <displayShortName><?php echo $L_FQDN ?></displayShortName>
 	<incomingServer type="imap">

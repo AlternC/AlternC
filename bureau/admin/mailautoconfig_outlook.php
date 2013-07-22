@@ -9,6 +9,8 @@ if ( $_SERVER['REQUEST_METHOD'] === 'POST' ){
   $pattern = '/[A-Za-z0-9_-]+@[A-Za-z0-9_-]+.([A-Za-z0-9_-][A-Za-z0-9_]+)/'; 
   preg_match($pattern, $string, $matches); 
   $emailDomain = explode('@', $matches[0]);
+} else {
+  die(_('Missing POST of the mail address'));
 }
 
 header("Content-type: text/xml");
