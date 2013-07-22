@@ -460,6 +460,11 @@ class m_dom {
     return "/www/".$this->domshort($domain);
   }
 
+  function dump_axfr($domain, $ns='localhost') {
+    exec('/usr/bin/dig AXFR "'.escapeshellcmd($domain).'" @"'.escapeshellcmd($ns).'"', $axfr);
+    return $axfr;
+  }
+
 
   function lst_default_subdomains(){
     global $db,$err;
