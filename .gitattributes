@@ -290,6 +290,8 @@ bureau/admin/mail_edit.php -text
 bureau/admin/mail_list.php -text
 bureau/admin/mail_manage_catchall.php -text
 bureau/admin/mail_undelete.php -text
+bureau/admin/mailautoconfig_outlook.php -text
+bureau/admin/mailautoconfig_thunderbird.php -text
 bureau/admin/main.php -text
 bureau/admin/mem_admin.php -text
 bureau/admin/mem_chgmail.php -text
@@ -534,9 +536,7 @@ mailautoconfig/apache_mail-autoconfig.conf -text
 mailautoconfig/cron_bash -text
 mailautoconfig/var/www/mail_autoconfig/.htaccess -text
 mailautoconfig/var/www/mail_autoconfig/index.html -text
-mailautoconfig/var/www/mail_autoconfig/outlook.php -text
 mailautoconfig/var/www/mail_autoconfig/outlook.php__DYN -text
-mailautoconfig/var/www/mail_autoconfig/thunderbird.php -text
 mailautoconfig/var/www/mail_autoconfig/thunderbird.php__DYN -text
 man/alternc-admintools.8 -text
 man/alternc-admintools.fr.8 -text
