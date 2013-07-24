@@ -44,3 +44,8 @@ CREATE TABLE IF NOT EXISTS `actions` (
 -- Alter table domaines to add zone ttl field
 ALTER TABLE `domaines` ADD zonettl int(10) unsigned NOT NULL default '86400';
 
+-- Alter table sub_domaines pour contenir au nouveau schema
+alter table sub_domaines drop primary key;
+alter table sub_domaines add UNIQUE (compte,domaine,sub,type,valeur);
+alter table sub_domaines add id bigint(20) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST;
+
