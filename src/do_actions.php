@@ -76,7 +76,6 @@ if (file_exists($LOCK_FILE) !== false){
       unlink($LOCK_FILE);
 
       // Lock with the current script's PID
-      d("Lock the script...");
       if (file_put_contents($LOCK_FILE,$MY_PID) === false){
         $error_raise.="Cannot open/write $LOCK_FILE\n";
         mail_it();
@@ -184,7 +183,6 @@ if($error_raise !== '')
   mail_it(); 
 
 // Unlock the script
-d("Unlock the script...");
 unlink($LOCK_FILE);
 
 // Exit this script
