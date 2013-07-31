@@ -1128,14 +1128,12 @@ class m_dom {
     if ($dns=="0" && $gesmx=="1" && !$force) {
       $vmx = $this->checkmx($dom);
       if ($vmx == 1) {
-	$err->raise("dom",_("There is no MX record pointing to this server, and you are asking us to host the mail here. Please fix your MX DNS pointer"));
-	return false;
+	$err->raise("dom",_("There is no MX record pointing to this server, and you are asking us to host the mail here. Make sure to update your MX entries or no mail will be received"));
       }
       
       if ($vmx == 2) {
         // Serveur non spécifié parmi les champx mx
-	$err->raise("dom",_("There is no MX record pointing to this server, and you are asking us to host the mail here. Please fix your MX DNS pointer"));
-	return false;
+	$err->raise("dom",_("There is no MX record pointing to this server, and you are asking us to host the mail here. Make sure to update your MX entries or no mail will be received"));
       }
     }
       
