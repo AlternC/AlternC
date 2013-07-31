@@ -362,10 +362,13 @@ else
     postfix_conf=/etc/alternc/postfix/postfix.cf
 fi
 grep -v '^\ *#' $postfix_conf |while read line ; do
-   if echo "$line" | grep -qi '^smtpd_tls_cert_file' ;then
+   if echo "$line" | grep -qi '^smtpd_tls_dcert_file' ;then
      line_strip=`echo "$line"|tr -d '[:blank:]'`
      pattern="*="
      cert_file=${line_strip#$pattern}
+     echo $cert_file
+     echo $line
+     echo $line_strip
      if [ -e $cert_file ];then
         postconf -e "$line"
      else
