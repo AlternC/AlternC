@@ -48,6 +48,22 @@ print_domain_letter() {
   fi 
 }
 
+get_uid_by_path() {
+local path="$1"
+local sizepath=${#path}
+local lastcar=${ALTERNC_HTML: -1}
+
+if [ "$lastcar" != "/" ]
+then
+  ALTERNC_HTML=$ALTERNC_HTML"/"
+fi
+
+local sizebasepath=${#ALTERNC_HTML}
+local basepath=${path:0:($sizebasepath +2)}
+local uid=`ls -n $basepath | head -n 2|tail -n 1| awk '{print $3}'`
+echo $uid
+}
+
 # Return the html path for a account name
 get_html_path_by_name() {
   local name="$1"

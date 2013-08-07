@@ -1,4 +1,5 @@
 #!/bin/bash -e
+set -x
 #
 # ----------------------------------------------------------------------
 # AlternC - Web Hosting System
@@ -105,7 +106,7 @@ doone() {
 
       # Set the file readable only for the AlternC User
       mkdir -p "$REP"
-      chown -R alterncpanel:$GID "$REP"
+      chown -R $GID:$GID "$REP"
       chmod 2770 -R "$REP"
 
       # Delete existings ACL
@@ -125,20 +126,21 @@ fixdir() {
         echo "Setting rights and ownership for user $LOGIN having gid $GID"
       fi
       REP="$sub_dir"
-  
+      #  
+      REP_ID="$(get_uid_by_path "$REP")"
       # Clean the line, then add a ligne indicating current working directory
       printf '\r%*s' "${COLUMNS:-$(tput cols)}" ''
       printf "\r%${COLUMNS}s" "AlternC fixperms.sh -> working on $REP"
 
       # Set the file readable only for the AlternC User
       mkdir -p "$REP"
-      chown -R alterncpanel:$GID "$REP"
+      chown -R $REP_ID:$REP_ID "$REP"
       chmod 2770 -R "$REP"
 
       # Delete existings ACL
       # Set the defaults acl on all the files
-      setfacl -b -k -n -R -m d:g:alterncpanel:rwx -m d:u::rwx -m d:g::rwx -m d:u:$GID:rwx -m d:g:$GID:rwx -m d:o::--- -m d:mask:rwx\
-                    -Rm   g:alterncpanel:rwx -m u:$GID:rwx -m g:$GID:rwx -m mask:rwx\
+      setfacl -b -k -n -R -m d:g:alterncpanel:rwx -m d:u::rwx -m d:g::rwx -m d:u:$REP_ID:rwx -m d:g:$REP_ID:rwx -m d:o::--- -m d:mask:rwx\
+                    -Rm   g:alterncpanel:rwx -m u:$REP_ID:rwx -m g:$REP_ID:rwx -m mask:rwx\
                "$REP"
     echo -e "\nDone" 
 }
@@ -148,9 +150,10 @@ fixfile() {
 	/usr/bin/setfacl -bk "$file"
 	echo "gid: $GID"
 	echo "file: $file"
-	chown alterncpanel:$GID "$file"
+	chown $GID:$GID "$file"
 	chmod 0770 "$file"
-	/usr/bin/setfacl  -m u:$GID:rw- -m g:$GID:rw- -m g:alterncpanel:rw- -m u:$GID:rw- -m g:$GID:rw- "$file"
+  REP_ID="$(get_uid_by_path "$file")"
+	/usr/bin/setfacl  -m u:$REP_ID:rw- -m g:$REP_ID:rw- -m g:alterncpanel:rw- -m u:$REP_ID:rw- -m g:$REP_ID:rw- "$file"
 	echo file ownership and ACLs changed
 }
 
