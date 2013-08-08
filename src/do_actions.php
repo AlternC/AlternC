@@ -104,7 +104,6 @@ if (file_exists($LOCK_FILE) !== false){
     }
 }else{
   // Lock with the current script's PID
-  d("Lock the script...");
   if (file_put_contents($LOCK_FILE,$MY_PID) === false){
     $error_raise.="Cannot open/write $LOCK_FILE\n";
     mail_it();
@@ -130,6 +129,10 @@ while ($rr=$action->get_action()){
   // We exec with the specified user
   d("Executing action '".$r["type"]."' with user '".$r["user"]."'");
   switch ($r["type"]){
+    case "FIX_USER" :
+      // Create the directory and make parent directories as needed
+      @exec("$FIXPERM -u ".$params["uid"]." 2>&1", $trash, $code);
+      break;
     case "CREATE_FILE" :
       if(!file_exists($params["file"]))
         @exec("$SU touch ".$params["file"]." 2>&1 ; echo '".$params["content"]."' > '".$params["file"]."' 2>&1", $output);

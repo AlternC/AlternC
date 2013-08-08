@@ -477,7 +477,7 @@ class m_admin {
       $this->renew_update($uid, $duration);
       #exec("sudo /usr/lib/alternc/mem_add ".$login." ".$uid);
       $action->create_dir(getuserpath("$login"));
-      $action->fix_dir(getuserpath("$login"));
+      $action->fix_user($uid);
       
       // Triggering hooks
       $mem->su($uid);

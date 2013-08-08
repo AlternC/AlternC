@@ -50,6 +50,12 @@ class m_action {
   }
 
   /*
+  * function to set the perms upon user creation
+  */
+  function fix_user($uid,$user="root") {
+    return $this->set('fix_user',$user, array('uid'=>$uid));
+  }
+  /*
   * function to set the cration of a file 
   */
   function fix_dir($dir,$user="root") {
@@ -115,12 +121,16 @@ class m_action {
     case 'move':
       $query="insert into actions values ('','MOVE','$serialized',now(),'','','$user','');"; 
       break;
+    case 'fix_user':
+      $query="insert into actions values ('','FIX_USER','$serialized',now(),'','','$user','');"; 
+      break;
     case 'fix_file':
       $query="insert into actions values ('','FIXFILE','$serialized',now(),'','','$user','');"; 
       break;
     case 'fix_dir':
       $query="insert into actions values ('','FIXDIR','$serialized',now(),'','','$user','');"; 
       break;
+    case 'delete':
       $query="insert into actions values ('','DELETE','$serialized',now(),'','','$user','');"; 
       break;
     default:
