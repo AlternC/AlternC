@@ -24,56 +24,64 @@ set -x
 # ----------------------------------------------------------------------
 #
 
-# Default Query : fixperms for all account
-query="SELECT uid,login FROM membres"
-sub_dir=""
-file=""
-# Two optionals argument
+# four optionals argument to chose from
 # -l string : a specific login to fix
 # -u integer : a specific uid to fix
 # -f string : a specific file to fix according to a given uid 
-# -d string : a specific folder to fix according to a given uid 
+# -d string : a specific subdirectory to fix according to a given uid 
+
+# The u and l switch are used to fix a given user whole directory including his base directory ($ALTERNC_HTML/<letter>/<login>/
+# The f and d switch are used to fix a given file or directory under the user's base directory. They use the base directory to get the permissions they should use.
+# Be sure to have correct base directory permissions before attemplting to fix use those two switch 
+
+query="SELECT uid,login FROM membres"
+sub_dir=""
+file=""
 
 while getopts "l:u:f:d:" optname
-  do
-    case "$optname" in
-      "l")
-		if [[ "$OPTARG" =~ ^[a-zA-Z0-9_]+$ ]] ; then
-        	query="SELECT uid,login FROM membres WHERE login LIKE '$OPTARG'"
-		else	
-			echo "Bad login provided"
-			exit
-		fi
-        ;;
-      "u")
-		if [[ "$OPTARG" =~ ^[0-9]+$ ]] ; then
-			query="SELECT uid,login FROM membres WHERE uid LIKE '$OPTARG'"
-		else
-			echo "Bad uid provided"
-			exit
-		fi
-        ;;
-      "f")
-		  file="$OPTARG"
-        ;;
-      "d")
-        sub_dir="$OPTARG"
-        ;;
-      "?")
-        echo "Unknown option $OPTARG - stop processing"
-        exit
-        ;;
-      ":")
-        echo "No argument value for option $OPTARG - stop processing"
-        exit
-        ;;
-      *)
-      # Should not occur
-        echo "Unknown error while processing options"
-        exit
-        ;;
-    esac
-  done
+do
+  case "$optname" in
+  "l")
+    if [[ "$OPTARG" =~ ^[a-zA-Z0-9_]+$ ]] ; then
+      query="SELECT uid,login FROM membres WHERE login LIKE '$OPTARG'"
+    else	
+      echo "Bad login provided"
+      exit
+    fi
+  ;;
+  "u")
+    if [[ "$OPTARG" =~ ^[0-9]+$ ]] ; then
+      query="SELECT uid,login FROM membres WHERE uid LIKE '$OPTARG'"
+    else
+      echo "Bad uid provided"
+      exit
+    fi
+  ;;
+  "f")
+    #Is this kinf of escaping enough ?
+    file=$(printf %q $OPTARG)
+    echo $file
+  ;;
+  "d")
+    #Is this kinf of escaping enough ?
+    sub_dir=$(printf %q $OPTARG)
+    echo $sub_dir
+  ;;
+  "?")
+    echo "Unknown option $OPTARG - stop processing"
+    exit
+  ;;
+  ":")
+    echo "No argument value for option $OPTARG - stop processing"
+    exit
+  ;;
+  *)
+    # Should not occur
+    echo "Unknown error while processing options"
+    exit
+  ;;
+  esac
+done
 
 
 PATH=/sbin:/bin:/usr/sbin:/usr/bin
@@ -121,12 +129,11 @@ doone() {
 }
 
 fixdir() {
-    read GID LOGIN || true
       if [ "$DEBUG" ]; then
         echo "Setting rights and ownership for user $LOGIN having gid $GID"
       fi
       REP="$sub_dir"
-      #  
+      # We assume that the owner of the directory should be the one from the html user base directory ( $ALTERNC_HTML/<letter>/<login>) 
       REP_ID="$(get_uid_by_path "$REP")"
       # Clean the line, then add a ligne indicating current working directory
       printf '\r%*s' "${COLUMNS:-$(tput cols)}" ''
@@ -142,34 +149,34 @@ fixdir() {
       setfacl -b -k -n -R -m d:g:alterncpanel:rwx -m d:u::rwx -m d:g::rwx -m d:u:$REP_ID:rwx -m d:g:$REP_ID:rwx -m d:o::--- -m d:mask:rwx\
                     -Rm   g:alterncpanel:rwx -m u:$REP_ID:rwx -m g:$REP_ID:rwx -m mask:rwx\
                "$REP"
-    echo -e "\nDone" 
+      echo -e "\nDone" 
 }
 
 fixfile() {
-	read GID LOGIN
-	/usr/bin/setfacl -bk "$file"
-	echo "gid: $GID"
-	echo "file: $file"
-	chown $GID:$GID "$file"
-	chmod 0770 "$file"
-  REP_ID="$(get_uid_by_path "$file")"
-	/usr/bin/setfacl  -m u:$REP_ID:rw- -m g:$REP_ID:rw- -m g:alterncpanel:rw- -m u:$REP_ID:rw- -m g:$REP_ID:rw- "$file"
-	echo file ownership and ACLs changed
+      /usr/bin/setfacl -bk "$file"
+      # We assume that the owner of the file should be the one from the html user base directory ( $ALTERNC_HTML/<letter>/<login>) 
+      REP_ID="$(get_uid_by_path "$file")"
+      chown $REP_ID:$REP_ID "$file"
+      chmod 0770 "$file"
+      /usr/bin/setfacl  -m u:$REP_ID:rw- -m g:$REP_ID:rw- -m g:alterncpanel:rw- -m u:$REP_ID:rw- -m g:$REP_ID:rw- "$file"
+      echo file ownership and ACLs changed
 }
 
-
-if [[ "$file" != "" ]]; then
+#Start of the script actions
+if [[ "$file" != "" ]]; then # if we are dealing with a file
 	if [ -e "$file" ]; then
-		mysql --defaults-file=/etc/alternc/my.cnf --skip-column-names -B -e "$query" |fixfile
+	  fixfile
 	else
 		echo "file not found"
 	fi
-elif [[ "$sub_dir" != "" ]]; then
+elif [[ "$sub_dir" != "" ]]; then #if we are dealing with a directory
 	if [ -d "$sub_dir" ]; then
-		mysql --defaults-file=/etc/alternc/my.cnf --skip-column-names -B -e "$query" |fixdir
+	  fixdir
 	else
 		echo "dir not found"
 	fi
 else
+  #we are fixing the whole html directory
+  #either for all user (default) or a specific one ( -u or -l switch )
 	mysql --defaults-file=/etc/alternc/my.cnf --skip-column-names -B -e "$query" |doone
 fi
