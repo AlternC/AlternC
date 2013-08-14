@@ -62,6 +62,7 @@ class m_admin {
 			 4 => _("Domain can be installed, no check at all"),
 			 5 => _("Domain can be installed, force NO DNS hosting"),
 			 );
+    $archive=variable_get('archive_del_data','','If folder specified html folder of deleted user is archived, else it is deleted. ');
   }
 
   function hook_menu() {
@@ -682,27 +683,10 @@ EOF;
     // WE MUST call m_dom before all others because of conflicts ...
     $dom->hook_admin_del_member();
 
-    // TODO: old hook method, FIXME: remove when unused
-    /*
-    foreach($classes as $c) {
-      if (method_exists($GLOBALS[$c],"alternc_del_member")) {
-	$GLOBALS[$c]->alternc_del_member();
-      }
-    }
-    */
-
-    /* 
-     * New way of deleting or backup delted user html folders using action class
-     */
-    $archive=variable_get('archive_del_data');
+    # New way of deleting or backup delted user html folders using action class
     $path=getuserpath($tt['login']);
-    if($archive == 1 ){
-     #echo("archive");
-     $action->archive($path,"html"); 	
-    }else{
-     #echo("del");
-     $action->del($path); 	
-    }
+    $action->archive($path); 	
+
     $hooks->invoke("alternc_del_member");
     $hooks->invoke("hook_admin_del_member");
     

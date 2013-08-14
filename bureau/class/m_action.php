@@ -19,9 +19,15 @@
  ----------------------------------------------------------------------
 */
 /**
- * 
- * @copyright    AlternC-Team 2002-2013 http://alternc.org/
- */
+* This class manage actions to be performed on the file system on behalf of alternc Classes
+* It primary use is to store the actions to be performed ( creating file or folder, deleting, setting permissions etc..) in the action sql table. 
+* The script /usr/lib/alternc/do_actions.php handled by cron and incron is then used to perform those actions.
+* 
+* Copyleft {@link http://alternc.org/ AlternC Team}
+* 
+* @copyright    AlternC-Team 2013-8-13 http://alternc.org/
+* 
+*/
 class m_action {
   /*---------------------------------------------------------------------------*/
   /** Constructor
@@ -85,9 +91,19 @@ class m_action {
 
   /*
   * function archiving a directory ( upon account deletion )
+  * @param: $archive : directory to archive within the archive_del_data global variable folder if set.
+  * If archive_del_data is not set we delete the folder.
+  * @param: $dir : sub_directory of the archive directory
   */
-  function archive($archive,$dir) {
+  function archive($archivei,$dir="html") {
     global $cuid,$db,$err;
+
+    $arch=variable_get('archive_del_data');
+    if(empty($arch)) {
+      $this->del($archive);
+      return true; 
+    }
+    $BACKUP_DIR=$arch;
     $db->query("select login from membres where uid=$cuid;");    
     $db->next_record();
     if (!$db->Record["login"]) {
@@ -96,11 +112,11 @@ class m_action {
     }
     $uidlogin=$cuid."-".$db->Record["login"];
 
-    $BACKUP_DIR="/tmp/backup/";
-    //utiliser la function move après avoir construit le chemin
+    //The path will look like /<archive_del_data>/YYYY-MM/<uid>-<login>/<folder>
     $today=getdate();
     $dest=$BACKUP_DIR.'/'.$today["year"].'-'.$today["mon"].'/'.$uidlogin.'/'.$dir;
     $this->move($archive,$dest);
+    return true;
   }
 
   /*
