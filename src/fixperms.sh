@@ -162,6 +162,24 @@ fixfile() {
       echo file ownership and ACLs changed
 }
 
+ctrl_c() {
+  echo -e "\n***** INTERRUPT *****"
+  echo "$0 was interrupted. Default is to return an error code."
+  echo "Do you want to *ignore* the error code (y/n)?"
+  echo "(default is n)"
+  read -N 1 ans
+  case "$ans" in 
+    y|Y )
+      exit 0
+      ;;
+    * )
+      exit -5
+      ;;
+  esac
+}
+
+trap ctrl_c SIGINT
+
 #Start of the script actions
 if [[ "$file" != "" ]]; then # if we are dealing with a file
 	if [ -e "$file" ]; then
