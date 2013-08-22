@@ -72,8 +72,8 @@ dns_named_conf() {
     tempo=${tempo/@@DOMAINE@@/$domain}
     tempo=${tempo/@@ZONE_FILE@@/$(dns_zone_file $domain)}
     echo $tempo >> "$NAMED_CONF"
-    # Kindly ask Bind to reload his configuration
-    # (the zone file is allready created and populate)
+    # Kindly ask Bind to reload its configuration
+    # (the zone file is already created and populated)
     $RNDC reconfig
     # Hook it !
     run-parts --arg=dns_reconfig  /usr/lib/alternc/reload.d
@@ -93,7 +93,7 @@ dns_delete() {
   local file=$(cat "$NAMED_CONF")
   echo -e "$file" |grep -v "\"$domain\"" > "$NAMED_CONF"
 
-  # Ask for restart of dns server
+  # Ask the dns server for restart
   $RNDC reconfig
   # Hook it !
   run-parts --arg=dns_reconfig  /usr/lib/alternc/reload.d
@@ -127,10 +127,10 @@ dns_regenerate() {
         $MYSQL_DO "select distinct replace(replace(dt.entry,'%TARGET%',sd.valeur), '%SUB%', if(length(sd.sub)>0,sd.sub,'@')) as entry from sub_domaines sd,domaines_type dt where sd.type=dt.name and sd.domaine='$domain' and sd.enable in ('ENABLE', 'ENABLED') order by entry ;"
     )
 
-    ##### Mail autodetect for thunderbird / outlook - START
-    # If $file contain DEFAULT_MX
+    ##### Mail autodetect for thunderbird / outlook - START
+    # If $file contain DEFAULT_MX
     if [ ! -z "$(echo -e "$file" |egrep 'DEFAULT_MX' )" ] ; then 
-      # If $file ! contain autoconfig -> add entry
+      # If $file ! contain autoconfig -> add entry
       if [ -z "$(echo -e "$file" |egrep '^autoconfig' )" ] ; then 
         file="$(echo -e "$file" ; echo -e "autoconfig IN CNAME $FQDN.\n")"
       fi
@@ -139,7 +139,7 @@ dns_regenerate() {
         file="$(echo -e "$file" ; echo -e "autodiscover IN CNAME $FQDN.\n")"
       fi
     fi # End if containt DEFAULT_MX 
-    ##### Mail autodetect for thunderbird / outlook - END
+    ##### Mail autodetect for thunderbird / outlook - END
 
     # Replace the vars by their values
     # Here we can add dynamic value for the default MX
@@ -160,14 +160,17 @@ dns_regenerate() {
             s/@@ZONETTL@@/$zonettl/g;
             " )
     
-    # Add the manual lines
+    # Add the manually entered resource records (after the special tag ;;; END ALTERNC AUTOGENERATE CONFIGURATION)
     if [ -r "$zone_file" ] ; then
         file=$(
             echo -e "$file"
             grep -A 10000 "$manual_tag" "$zone_file"
             )
-    else
-        file=$(echo -e "$file"; echo "$manual_tag")
+    fi
+    # Add the special tag at the end of the zone, if it is not here yet:
+    if ! echo -e "$file" | grep -q "$manual_tag"
+    then
+	file=$(echo -e "$file"; echo "$manual_tag")
     fi
 
     # Init the file
@@ -181,6 +184,6 @@ dns_regenerate() {
     # Hook it !
     run-parts --arg=dns_reload_zone --arg="$domain" /usr/lib/alternc/reload.d
 
-    # Kindly bind to reload the zone
+    # ask bind to reload the zone
     $RNDC reload $domain
 }
