@@ -117,11 +117,13 @@ doone() {
       chown -R $GID:$GID "$REP"
       chmod 2770 -R "$REP"
 
-      # Delete existings ACL
-      # Set the defaults acl on all the files
-      setfacl -b -k -n -R -m d:g:alterncpanel:rwx -m d:u::rwx -m d:g::rwx -m d:u:$GID:rwx -m d:g:$GID:rwx -m d:o::--- -m d:mask:rwx\
-                    -Rm   g:alterncpanel:rwx -m u:$GID:rwx -m g:$GID:rwx -m mask:rwx\
-               "$REP"
+#      # Delete existings ACL
+#      # Set the defaults acl on all the files
+#      setfacl -b -k -n -R -m d:g:alterncpanel:rwx -m d:u::rwx -m d:g::rwx -m d:u:$GID:rwx -m d:g:$GID:rwx -m d:o::--- -m d:mask:rwx\
+#                    -Rm   g:alterncpanel:rwx -m u:$GID:rwx -m g:$GID:rwx -m mask:rwx\
+#               "$REP"
+      setfacl -bknR -m d:u:alterncpanel:rwx -m d:g:alterncpanel:rwx -m u:alterncpanel:rwx -m g:alterncpanel:rwx -m d:o::--- -m o::---\
+                    -m d:u:$GID:rwx -m d:g:$GID:rwx -m u:$GID:rwx -m g:$GID:rwx -m d:mask:rwx -m mask:rwx "$REP"
 
       read GID LOGIN || true
     done
@@ -146,9 +148,12 @@ fixdir() {
 
       # Delete existings ACL
       # Set the defaults acl on all the files
-      setfacl -b -k -n -R -m d:g:alterncpanel:rwx -m d:u::rwx -m d:g::rwx -m d:u:$REP_ID:rwx -m d:g:$REP_ID:rwx -m d:o::--- -m d:mask:rwx\
-                    -Rm   g:alterncpanel:rwx -m u:$REP_ID:rwx -m g:$REP_ID:rwx -m mask:rwx\
-               "$REP"
+#      setfacl -b -k -n -R -m d:g:alterncpanel:rwx -m d:u::rwx -m d:g::rwx -m d:u:$REP_ID:rwx -m d:g:$REP_ID:rwx -m d:o::--- -m d:mask:rwx\
+#                    -Rm   g:alterncpanel:rwx -m u:$REP_ID:rwx -m g:$REP_ID:rwx -m mask:rwx\
+#               "$REP"
+      setfacl -bknR -m d:u:alterncpanel:rwx -m d:g:alterncpanel:rwx -m u:alterncpanel:rwx -m g:alterncpanel:rwx -m d:o::--- -m o::---\
+                    -m d:u:$GID:rwx -m d:g:$GID:rwx -m u:$GID:rwx -m g:$GID:rwx -m d:mask:rwx -m mask:rwx "$REP"
+
       echo -e "\nDone" 
 }
 
@@ -158,7 +163,7 @@ fixfile() {
       REP_ID="$(get_uid_by_path "$file")"
       chown $REP_ID:$REP_ID "$file"
       chmod 0770 "$file"
-      /usr/bin/setfacl  -m u:$REP_ID:rw- -m g:$REP_ID:rw- -m g:alterncpanel:rw- -m u:$REP_ID:rw- -m g:$REP_ID:rw- "$file"
+      /usr/bin/setfacl  -m u:$REP_ID:rw- -m g:$REP_ID:rw- -m u:alterncpanel:rw- -m g:alterncpanel:rw- "$file"
       echo file ownership and ACLs changed
 }
 
