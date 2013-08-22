@@ -472,12 +472,14 @@ etc/alternc/templates/bind/slaveip.conf -text
 etc/alternc/templates/bind/templates/named.template -text
 etc/alternc/templates/bind/templates/slave.template -text
 etc/alternc/templates/bind/templates/zone.template -text
+etc/alternc/templates/default/opendkim -text
 etc/alternc/templates/default/saslauthd -text
 etc/alternc/templates/dovecot/dovecot-dict-quota.conf -text
 etc/alternc/templates/dovecot/dovecot-sql.conf -text
 etc/alternc/templates/dovecot/dovecot.conf -text
 etc/alternc/templates/incron.d/alternc_do_action -text
 etc/alternc/templates/incron.d/alternc_update_domains -text
+etc/alternc/templates/opendkim.conf -text
 etc/alternc/templates/postfix/master.cf -text
 etc/alternc/templates/postfix/myalias.cf -text
 etc/alternc/templates/postfix/mydomain.cf -text

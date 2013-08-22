@@ -65,7 +65,7 @@ dns_named_conf() {
     return 1
   fi
 
-  # Add the entry
+  # Add the entry
   grep -q "\"$domain\"" "$NAMED_CONF"
   if [ $? -ne 0 ] ; then
     local tempo=$(cat "$NAMED_TEMPLATE")
@@ -140,6 +140,27 @@ dns_regenerate() {
       fi
     fi # End if containt DEFAULT_MX 
     ##### Mail autodetect for thunderbird / outlook - END
+
+    ##### OpenDKIM signature management - START
+    # If $file contain DEFAULT_MX
+    if [ ! -z "$(echo -e "$file" |egrep 'DEFAULT_MX' )" ] ; then 
+	# If necessary, we generate the key: 
+	if [ ! -d "/etc/opendkim/keys/$domain" ] ; then
+	    mkdir -p "/etc/opendkim/keys/$domain"
+
+	    pushd "/etc/opendkim/keys/$domain" >/dev/null
+	    opendkim-genkey -r -d "$domain" -s "alternc"
+	    chown opendkim:opendkim alternc.private
+	    popd
+
+	    grep -q "^$domain\$" /etc/opendkim/TrustedHosts || echo "$domain" >>/etc/opendkim/TrustedHosts
+	    grep -q "^alternc._domainkey.$domain " /etc/opendkim/KeyTable || echo "alternc._domainkey.$domain $domain:alternc:/etc/opendkim/keys/$domain/alternc.private" >> /etc/opendkim/KeyTable
+	    grep -q "^$domain alternc._domainkey.$domain\$" /etc/opendkim/SigningTable || echo "$domain alternc._domainkey.$domain" >> /etc/opendkim/SigningTable
+	fi
+	# we add alternc._domainkey with the proper key
+	file="$(echo -e "$file" ; cat "/etc/opendkim/keys/$domain/alternc.txt")"
+    fi
+    ##### OpenDKIM signature management - END
 
     # Replace the vars by their values
     # Here we can add dynamic value for the default MX

@@ -66,7 +66,8 @@ if [ -d /etc/postfix ]; then
     CONFIG_FILES="$CONFIG_FILES etc/postfix/master.cf etc/postfix/myalias.cf etc/postfix/myrelay.cf
                   etc/postfix/mydomain.cf etc/postfix/myrelay-domain.cf etc/postfix/mygid.cf etc/postfix/myquota.cf
                   etc/postfix/myvirtual.cf etc/postfix/mytransport.cf etc/postfix/sasl/smtpd.conf
-                  etc/alternc/postfix/postfix.cf etc/alternc/postfix/postfix-slave.cf"
+                  etc/alternc/postfix/postfix.cf etc/alternc/postfix/postfix-slave.cf
+                  etc/opendkim.conf etc/default/opendkim"
 fi
 if [ -e /etc/proftpd/proftpd.conf ]; then
     CONFIG_FILES="$CONFIG_FILES etc/proftpd/proftpd.conf etc/proftpd/welcome.msg etc/proftpd/modules.conf"
@@ -89,7 +90,6 @@ if [ -f "$INSTALLED_CONFIG_TAR" ]; then
     CHANGED="`env LANG=C tar -zdf "$INSTALLED_CONFIG_TAR" -C / 2> /dev/null | 
               grep -v 'postfix/main.cf' | grep -v 'Uid differs'|grep -v 'Gid differs'  |grep -v 'Mode differs' | 
               sed -e 's/^\([^:]*\).*/    \1/' | sort -u`"
-    # " shutup emacs
     if [ ! -z "$CHANGED" ]; then
         echo "The following configuration files has changed since last AlternC"
         echo "installation :"
@@ -543,13 +543,18 @@ chown -R alterncpanel:alterncpanel "/usr/share/alternc/panel/"
 # We force the re-computing of the DNS zones, since we may have changed the IP address (see #460)
 /usr/bin/mysql --defaults-file="/etc/alternc/my.cnf" -B -e "update domaines set dns_action='update';"
 
+# We ensure localhost is trusted to opendkim
+mkdir -p "/etc/opendkim/keys"
+grep -q "^127.0.0.1\$" /etc/opendkim/TrustedHosts || echo "127.0.0.1" >>/etc/opendkim/TrustedHosts
+grep -q "^localhost\$" /etc/opendkim/TrustedHosts || echo "localhost" >>/etc/opendkim/TrustedHosts
+
 # hook 
 run-parts --arg=before-reload /usr/lib/alternc/install.d 
 
 #######################################################################
 # Reload services
 #
-for service in postfix bind9 apache2 dovecot cron proftpd; do
+for service in postfix bind9 apache2 dovecot cron proftpd opendkim; do
     invoke-rc.d $service force-reload || true
 done
 
@@ -561,7 +566,6 @@ for service in $SERVICES; do
     test -x /etc/init.d/$service && invoke-rc.d $service start || true
 done
 
-#launch fixperms 
 echo "Fix all the permission. May be quite long..."
 /usr/lib/alternc/fixperms.sh
 echo "Compile PO files"
