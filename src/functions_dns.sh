@@ -93,6 +93,12 @@ dns_delete() {
   local file=$(cat "$NAMED_CONF")
   echo -e "$file" |grep -v "\"$domain\"" > "$NAMED_CONF"
 
+  # Remove the conf from openDKIM
+  rm -rf "/etc/opendkim/keys/$domain"
+  grep -v "^$domain\$" /etc/opendkim/TrustedHosts >/etc/opendkim/TrustedHosts.alternc-tmp && mv /etc/opendkim/TrustedHosts.alternc-tmp /etc/opendkim/TrustedHosts
+  grep -v "^alternc._domainkey.$domain " /etc/opendkim/KeyTable >/etc/opendkim/KeyTable.alternc-tmp && mv /etc/opendkim/KeyTable.alternc-tmp /etc/opendkim/KeyTable
+  grep -v "^$domain alternc._domainkey.$domain\$" /etc/opendkim/SigningTable >/etc/opendkim/SigningTable.alternc-tmp && mv /etc/opendkim/SigningTable.alternc-tmp /etc/opendkim/SigningTable
+  
   # Ask the dns server for restart
   $RNDC reconfig
   # Hook it !
