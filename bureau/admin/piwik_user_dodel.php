@@ -23,8 +23,8 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file: Benjamin Sonntag
- Purpose of file: Delete ftp accounts
+ Original Author of file: François Serman
+ Purpose of file: Delete piwik accounts
  ----------------------------------------------------------------------
 */
 require_once("../class/config.php");
@@ -36,20 +36,25 @@ $fields = array (
 getFields($fields);
 
 if (empty($login)) {
-    $error=_("Missing login parameters");
-    include('piwik_userlist.php'); 
-    exit;
-  
-}
+  $error=_("Missing login parameters");
+  include('piwik_userlist.php'); 
+  exit;
+} 
 
-if(!empty($confirm_del) ) {
+if(!empty($confirm_del)) {
   if (! $piwik->user_delete($login) ) {
     $error=$err->errstr();
-    include('piwik_userlist.php'); 
-    exit;
+  } else {
+    include_once('head.php');
+    printf("Utilisateur %s supprimé avec succès\n", $login);
   }
-} else {
-  include_once('head.php');
+
+  include('piwik_userlist.php'); 
+  exit;
+}
+
+include_once('head.php');
+
 ?>
 <h3><?php __("Piwik accounts deletion confirm"); ?></h3>
 <hr id="topbar"/>
@@ -67,6 +72,4 @@ if(!empty($confirm_del) ) {
 <?php
   include_once('foot.php');
   exit();
-}
-
 ?>

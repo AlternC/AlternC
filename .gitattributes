@@ -312,9 +312,12 @@ bureau/admin/oldimg/powered_by_alternc.png -text
 bureau/admin/phpinfo.php -text
 bureau/admin/piwik_addaccount.php -text
 bureau/admin/piwik_addsites.php -text
+bureau/admin/piwik_site_dodel.php -text
 bureau/admin/piwik_sitelist.php -text
 bureau/admin/piwik_user_dodel.php -text
+bureau/admin/piwik_useradmin.php -text
 bureau/admin/piwik_userlist.php -text
+bureau/admin/piwik_utils.php -text
 bureau/admin/quota_show.php -text
 bureau/admin/quotas_oneuser.php -text
 bureau/admin/quotas_users.php -text

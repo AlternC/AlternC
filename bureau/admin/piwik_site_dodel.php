@@ -1,6 +1,6 @@
 <?php
 /*
- $Id: piwik_addaccount.php,v 1.5 2006/01/12 01:10:48 anarcat Exp $
+ $Id: piwik_site_dodel.php,v 1.2 2003/06/10 06:45:16 root Exp $
  ----------------------------------------------------------------------
  AlternC - Web Hosting System
  Copyright (C) 2002 by the AlternC Development Team.
@@ -23,49 +23,55 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file: Benjamin Sonntag
- Purpose of file: Ask the required values to add a ftp account
+ Original Author of file: François Serman
+ Purpose of file: Delete piwik websites
  ----------------------------------------------------------------------
 */
 require_once("../class/config.php");
-include_once("head.php");
-
-if (!$quota->cancreate("piwik")) {
-	$error=_("You cannot add any new Piwik account, your quota is over.");
-	$fatal=1;
-}
 
 $fields = array (
-	"account_name" 		=> array ("post", "string", ""),
+  "confirm_del"    	=> array ("post", "string", ""),
+  "siteid"    		=> array ("request", "integer", -1),
 );
 getFields($fields);
 
-if (empty($account_name)) {
-  echo "<p class=\"error\">"._("Error : missing arguments.")."</p>";
-  include_once("foot.php");
-  exit;
+if ($siteid === -1) {
+    $error=_("Missing site parameters");
+    include('piwik_sitelist.php'); 
+    exit;
 }
+
+if(!empty($confirm_del) ) {
+
+  if (! $piwik->site_delete($siteid) ) {
+    $error=$err->errstr();
+  } else {
+    include_once('head.php');
+    __("Site supprimé avec succès\n");
+  }
+
+  include('piwik_sitelist.php'); 
+  exit;
+
+}
+
+include_once('head.php');
 
 ?>
-<h3><?php printf(_("Creation of Piwik account \"%s\""),$account_name); ?></h3>
+<h3><?php __("Piwik site deletion confirm"); ?></h3>
 <hr id="topbar"/>
 <br />
-<?php
-$infos = $piwik->user_add($account_name);
-if (!$infos)
-{
-    $error = $err->errstr();
-    //if (isset($error) && $error) {
-    echo "<p class=\"error\">$error</p>";
-    if (isset($fatal) && $fatal) {
-      include_once("foot.php");
-      exit();
-    }
-}
-else
-{
-	printf("%s %s\n", _('Successfully added piwik user'), $account_name);
-}
+  <?php __("Do you really want to delete this Piwik website ?");?>
+<br />
+<br />
 
-include_once("foot.php"); 
+  <form method="post" action="piwik_site_dodel.php" name="main" id="main">
+    <input type="hidden" name="siteid"  value="<?php echo $siteid;?>" />
+    <input type="submit" class="inb" name="confirm_del" value="<?php __("Delete")?>" />
+    <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='piwik_sitelist.php'" />
+  </form>
+  
+<?php
+  include_once('foot.php');
+  exit();
 ?>

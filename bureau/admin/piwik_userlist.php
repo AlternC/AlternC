@@ -47,7 +47,6 @@ if ($quota->cancreate("piwik")) {
 <br/>
 <hr/>
 <?php
-} // cancreate piwik
 
 if ($quotapiwik['u']>0) {
 ?>
@@ -60,6 +59,7 @@ if ($quotapiwik['u']>0) {
 <br/>
 <hr/>
 <?php
+} // quota > 0
 } // cancreate piwik
 ?>
 
