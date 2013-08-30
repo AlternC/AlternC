@@ -98,6 +98,7 @@ bureau/admin/browseforfolder2.php -text
 bureau/admin/cron.php -text
 bureau/admin/dom_add.php -text
 bureau/admin/dom_defdel.php -text
+bureau/admin/dom_dnsdump.php -text
 bureau/admin/dom_doadd.php -text
 bureau/admin/dom_dodel.php -text
 bureau/admin/dom_edit.inc.php -text

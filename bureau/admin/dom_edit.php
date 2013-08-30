@@ -117,6 +117,7 @@ if ($r['dns_action']=='UPDATE') {?>
   <li class="edit"><a href="#tabsdom-editsub"><?php __("Edit subdomains");?></a></li>
   <li class="add"><a href="#tabsdom-addsub"><?php __("Add subdomains");?></a></li>
   <li class="settings"><a href="#tabsdom-params"><?php __("Settings");?></a></li>
+  <li class=""><a href="#tabsdom-view" onClick="update_dns_content();"><?php __("View");?></a></li> 
   <li class="delete"><a href="#tabsdom-delete"><?php __("Delete");?></a></li>
 </ul>
 
@@ -257,6 +258,20 @@ if (!$r['noerase']) {
 	</form>
 
 </div>
+
+
+<div id="tabsdom-view">
+<p>
+<?php __("Here is the actual DNS zone running on the AlternC server. If you just made some changes, you have to wait for it."); ?>
+</p>
+
+<pre><span class="petit" id="divdumpdns">
+<a target="_blank" href="dom_dnsdump.php?domain=<?php echo urlencode($domain) ?>"><?php __("Click here to view the dump");?></a>
+</span>
+</pre>
+
+</div>
+
 <div id="tabsdom-delete">
   <h3><?php __("Domain removal"); ?></h3>
   <?php printf(_("If you want to destroy the domain %s, click on the button below. Warning: this also deletes all FTP accounts, email, mailing lists associated with the domain and subdomains."),$domain); ?><br />
@@ -270,6 +285,24 @@ if (!$r['noerase']) {
 <?php } // noerase ?>
 <script type="text/javascript">
 document.forms['main'].sub.focus();
-$(function() {$( "#tabsdom" ).tabs();});
+
+$(function() {
+  $("#tabsdom").tabs();
+});
+
+get_dns_content = 1;
+function update_dns_content(){
+  if ( get_dns_content == 1 ) {
+    get_dns_content = 0;
+
+    $.ajax({
+      url: "dom_dnsdump.php?domain=<?php echo urlencode($domain)?>",
+      }).done(function( html ) {
+      $("#divdumpdns").html(html);
+    });
+  }
+}
+
+
 </script>
 <?php include_once("foot.php"); ?>
