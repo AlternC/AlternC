@@ -1041,6 +1041,9 @@ class m_bro {
     }
     $timestamp=date("H:i:s");
 
+    // relacher le lock global sinon ce download va geler alternc pour
+    // tout le monde
+    alternc_shutdown();
     if(exec("/bin/tar cvf -  ".getuserpath()."/ | gzip -9c > ".$dir."/".$mem->user['login']."_html_".$timestamp.".tar.gz")){
       $err->log("bro","export_data_succes");
     }else{

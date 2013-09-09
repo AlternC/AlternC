@@ -36,6 +36,9 @@ getFields($fields);
 
 
 $p=$bro->GetPrefs();
+// need to release the giant lock, otherwise those downloads will hang
+// AlternC for all users!
+alternc_shutdown();
 switch ($p["downfmt"]) {
 	case 0:
 		$bro->DownloadTGZ($dir);
