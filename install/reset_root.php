@@ -42,4 +42,6 @@ if (!$admin->update_mem(2000,"postmaster@".$L_FQDN,"Administrateur", "Admin", $a
     exit();
 }
 
+echo "\nThe password was successfully reset to 'admin' for the 'admin' account.\n";
+
 ?>
