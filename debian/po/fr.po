@@ -3,26 +3,28 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-# Benjamin Sonntag <benjamin@alternc.org>, 2004.
-# Benjamin Sonntag <benjamin@sonntag.fr>, 2004,2012-2013.
-# Benjamin Sonntag <benjamin@sonntag.fr>, 2004,2012-2013, 2013.
-# Daniel Viñar Ulriksen <dani@belil.net>, 2008.
-# Eloi DUCLERQ <linkfan@hotmail.fr>, 2013.
-# Fufroma <fufroma@nnx.com>, 2013.
-#   <fufroma@nnx.com>, 2012.
-#   <hubert_bertrand@yahoo.fr>, 2012.
+# Benjamin Sonntag <benjamin@alternc.org>, 2004
+# Benjamin Sonntag <benjamin@sonntag.fr>, 2004,2012-2013
+# Benjamin Sonntag <benjamin@sonntag.fr>, 2013
+# Daniel Viñar Ulriksen <dani@belil.net>, 2008
+# boukman <linkfan@hotmail.fr>, 2013
+# fufroma <fufroma@nnx.com>, 2013
+# fufroma <fufroma@nnx.com>, 2012
+# supra63200 <guillaume63200@hotmail.fr>, 2013
+# Balise <hubert_bertrand@yahoo.fr>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: AlternC, hosting control panel\n"
-"Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
+"Report-Msgid-Bugs-To: https://alternc.org/report/1\n"
 "POT-Creation-Date: 2013-02-07 19:01+0100\n"
-"PO-Revision-Date: 2013-02-08 14:54+0000\n"
-"Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
-"Language-Team: English <dev@alternc.org>\n"
-"Language: fr_FR\n"
+"PO-Revision-Date: 2013-09-12 16:18+0000\n"
+"Last-Translator: fufroma <fufroma@nnx.com>\n"
+"Language-Team: French (France) (http://www.transifex.com/projects/p/alternc/"
+"language/fr_FR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: fr_FR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. Type: note
@@ -257,7 +259,7 @@ msgstr ""
 #. Description
 #: ../alternc.templates:11001 ../alternc.templates:14001
 msgid "Password of AlternC's mysql account:"
-msgstr "Mot de passe du compte mysql d'AlternC : "
+msgstr "Mot de passe du compte MySQL d'AlternC :"
 
 #. Type: password
 #. Description
