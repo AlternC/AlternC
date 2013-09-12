@@ -103,6 +103,7 @@ define('ALTERNC_LOGS',     "$L_ALTERNC_LOGS");
 define('ALTERNC_PANEL',    "/usr/share/alternc/panel");
 define('ALTERNC_LOCALES',  ALTERNC_PANEL."/locales");
 define('ALTERNC_LOCK_JOBS', '/var/run/alternc/jobs-lock');
+define('ALTERNC_LOCK_PANEL', '/var/lib/alternc/panel/nologin.lock');
 
 /* PHPLIB inclusions : */
 $root=ALTERNC_PANEL."/";

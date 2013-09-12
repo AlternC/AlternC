@@ -60,6 +60,11 @@ if ($isinvited && isset($oldid) && !empty($oldid) && $oldid!=$cuid ) {
   if ($oldid == 2000) echo ' '._("You can also <a href='adm_update_domains.php'>apply changes</a>."); // Yes, hardcoded uid. We will rewrite permissions another day
   echo "</p></div>";
 }
+if ( panel_islocked() ) {
+  echo "<div align=center><p class='error'>";
+    __("Panel is locked! No one can login!");
+  echo "</p></div>";
+}
 ?>
 <div id="global" class="clearfix">
 <div id="menu"><?php include_once("menu.php"); ?></div>

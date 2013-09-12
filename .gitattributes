@@ -70,6 +70,7 @@ bureau/admin/adm_dosu.php -text
 bureau/admin/adm_edit.php -text
 bureau/admin/adm_email.php -text
 bureau/admin/adm_list.php -text
+bureau/admin/adm_lockpanel.php -text
 bureau/admin/adm_login.php -text
 bureau/admin/adm_mxaccount.php -text
 bureau/admin/adm_panel.php -text

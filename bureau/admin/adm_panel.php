@@ -89,4 +89,14 @@ closedir($d);
 ?>
 </ul>
 
+<?php if ($cuid == 2000) { ?>
+  <p class="error">
+    <?php if (panel_islocked()) { ?>
+      <a href="adm_lockpanel.php?action=unlock"><?php __("Click here to unlock the panel and allow user to login.");?></a>
+    <?php } else { ?>
+      <a href="adm_lockpanel.php?action=lock" onClick='return confirm("<?php echo addslashes(_("Are you sure you want to kick everyone?"));?>");' ><?php __("Click here to lock the panel and force logout of all the user.");?></a>
+    <?php } ?>
+  </p>
+<?php } //cuid 2000 ?>
+
 <?php include_once("foot.php"); ?>

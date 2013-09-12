@@ -63,6 +63,8 @@ case "$1" in
     chmod g+rxw "$VMAIL_HOME" 
     chmod g+rxw "$VMAIL_HOME"/* 2>/dev/null || true # It may be empty
 
+    chown alterncpanel.alterncpanel "/var/lib/alternc/panel"
+
     # build local.sh if it does not exist
     if [ ! -f $CONFIGFILE ]; then
         cat > $CONFIGFILE <<EOF

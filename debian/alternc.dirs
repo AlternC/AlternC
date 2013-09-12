@@ -24,4 +24,5 @@ var/lib/alternc/backups
 var/lib/alternc/apache-vhost
 var/lib/alternc/bind
 var/lib/alternc/bind/zones
+var/lib/alternc/panel
 var/log/alternc

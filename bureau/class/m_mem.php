@@ -86,7 +86,7 @@ class m_mem {
    * @return boolean TRUE if the user has been successfully connected, or FALSE if an error occured.
    */
   function login($username,$password,$restrictip=0,$authip_token=false) {
-    global $db,$err,$cuid, $authip;
+    global $db,$err,$cuid,$authip,$admin;
     $err->log("mem","login",$username);
     //    $username=addslashes($username);
     //    $password=addslashes($password);
@@ -107,6 +107,11 @@ class m_mem {
     }
     $this->user=$db->Record;
     $cuid=$db->f("uid");
+
+    if (panel_islocked() && $cuid != 2000) {
+      $err->raise("mem",_("This website is currently under maintenance, login is currently disabled."));
+      return false;
+    }
 
     // AuthIP
     $allowed_ip=false;
@@ -261,6 +266,12 @@ class m_mem {
       }
     }
     $cuid=$db->f("uid");
+
+    if (panel_islocked() && $cuid != 2000) {
+      $err->raise("mem",_("This website is currently under maintenance, login is currently disabled."));
+      return false;
+    }
+
     $db->query("select * from membres where uid='$cuid';");
     $db->next_record();
     $this->user=$db->Record;

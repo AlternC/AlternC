@@ -750,4 +750,21 @@ function PercentToColor($p=0) {
   
   return $color;
 }
+
+function panel_lock() {
+  global $err,$mem,$cuid;
+  if ($cuid!=2000) return false;
+  return touch(ALTERNC_LOCK_PANEL);
+}
+
+function panel_unlock() {
+  global $err,$mem,$cuid;
+  if ($cuid!=2000) return false;
+  return unlink(ALTERNC_LOCK_PANEL);
+}
+
+function panel_islocked() {
+  return file_exists(ALTERNC_LOCK_PANEL);
+}
+
 ?>

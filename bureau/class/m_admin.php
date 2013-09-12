@@ -44,6 +44,8 @@ class m_admin {
    */
   public $tldmode=array();
 
+  var $archive='';
+
 
   /* ----------------------------------------------------------------- */
   /** Constructor
@@ -62,7 +64,7 @@ class m_admin {
 			 4 => _("Domain can be installed, no check at all"),
 			 5 => _("Domain can be installed, force NO DNS hosting"),
 			 );
-    $archive=variable_get('archive_del_data','','If folder specified html folder of deleted user is archived, else it is deleted. ');
+    $this->archive=variable_get('archive_del_data','','If folder specified html folder of deleted user is archived, else it is deleted. ');
   }
 
   function hook_menu() {
@@ -360,7 +362,6 @@ class m_admin {
     }
     return $creators;
   }
-
 
   /* ----------------------------------------------------------------- */
   /** Check if I am the creator of the member $uid
