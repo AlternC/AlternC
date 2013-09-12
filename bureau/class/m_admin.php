@@ -600,7 +600,10 @@ EOF;
 
     if (($db->query("UPDATE local SET nom='$nom', prenom='$prenom' WHERE uid='$uid';"))
 	     &&($db->query("UPDATE membres SET mail='$mail', canpass='$canpass', enabled='$enabled', `type`='$type', notes='$notes' $ssq WHERE uid='$uid';"))){
-      if($reset_quotas == "on") $quota->addquotas();
+      if($reset_quotas == "on") {
+        $quota->addquotas();
+        $quota->synchronise_user_profile();
+      }
       $this->renew_update($uid, $duration);
       return true;
     }
