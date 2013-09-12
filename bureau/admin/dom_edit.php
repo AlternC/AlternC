@@ -117,7 +117,7 @@ if ($r['dns_action']=='UPDATE') {?>
   <li class="edit"><a href="#tabsdom-editsub"><?php __("Edit subdomains");?></a></li>
   <li class="add"><a href="#tabsdom-addsub"><?php __("Add subdomains");?></a></li>
   <li class="settings"><a href="#tabsdom-params"><?php __("Settings");?></a></li>
-  <li class=""><a href="#tabsdom-view" onClick="update_dns_content();"><?php __("View");?></a></li> 
+  <li class="view"><a href="#tabsdom-view" onClick="update_dns_content();"><?php __("View");?></a></li> 
   <li class="delete"><a href="#tabsdom-delete"><?php __("Delete");?></a></li>
 </ul>
 

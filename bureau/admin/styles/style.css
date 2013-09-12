@@ -673,6 +673,13 @@ div.progress-bar div.txt {
   padding-left: 30px;
 }
 
+.view a, a.view, input.view {
+  background-image: url(../images/code.png);
+  background-repeat: no-repeat;
+  background-position: 8px 3px;
+  padding-left: 30px;
+}
+
 .delete a, a.delete, input.delete {
   background-image: url(../icon/delete.png);
   background-repeat: no-repeat;
