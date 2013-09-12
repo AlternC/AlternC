@@ -134,6 +134,14 @@ class m_admin {
     return $obj;
   }
 
+  function stop_if_jobs_locked() {
+    if ( file_exists(ALTERNC_LOCK_JOBS)) {
+      echo "There is a file ".ALTERNC_LOCK_JOBS."\n";
+      echo "So no jobs are allowed\n";
+      echo "Did you launch alternc.install ?\n";
+      die();
+    }
+  }
 
   /* ----------------------------------------------------------------- */
   /** Returns the known information about a hosted account

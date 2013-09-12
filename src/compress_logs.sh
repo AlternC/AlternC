@@ -14,6 +14,8 @@ for CONFIG_FILE in \
     . "$CONFIG_FILE"
 done
 
+stop_if_jobs_locked
+
 # ALTERNC_LOGS is from local.sh
 
 #Compress logs older than XX days

@@ -14,6 +14,8 @@ for CONFIG_FILE in \
     . "$CONFIG_FILE"
 done
 
+stop_if_jobs_locked
+
 # Some vars
 umask 022
 LOCK_FILE="/usr/share/alternc/panel/cron.lock" # FIXME doesn't seem clean to be here

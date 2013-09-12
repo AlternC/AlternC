@@ -53,6 +53,8 @@ function mail_it(){
 
 require_once("/usr/share/alternc/panel/class/config_nochk.php");
 
+$admin->stop_if_jobs_locked();
+
 $LOCK_FILE='/var/run/alternc/do_actions_cron.lock';
 $SCRIPT='/usr/bin/php do_actions.php';
 $MY_PID=getmypid();

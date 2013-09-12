@@ -14,6 +14,7 @@ for CONFIG_FILE in \
     . "$CONFIG_FILE"
 done
 
-# ALTERNC_LOGS is from local.sh
+stop_if_jobs_locked
 
+# ALTERNC_LOGS is from local.sh
 nice 10 -n find "$ALTERNC_LOGS" -mtime +$DAYS -delete

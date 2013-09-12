@@ -45,6 +45,9 @@ done
 
 . /usr/lib/alternc/functions.sh
 
+# Lock the jobs !
+lock_jobs
+
 # hook 
 run-parts --arg=startup /usr/lib/alternc/install.d 
 
@@ -573,3 +576,6 @@ echo "Compile PO files"
 
 # hook 
 run-parts --arg=end /usr/lib/alternc/install.d 
+
+# Unlock jobs !
+unlock_jobs

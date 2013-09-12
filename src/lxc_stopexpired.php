@@ -30,6 +30,8 @@
  */
 require_once("/usr/share/alternc/panel/class/config_nochk.php");
 
+$admin->stop_if_jobs_locked();
+
 # Be super user
 #$mem->setid(2000);
 $admin->enabled=1;

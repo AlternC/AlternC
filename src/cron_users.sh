@@ -13,6 +13,8 @@ for CONFIG_FILE in \
     . "$CONFIG_FILE"
 done
 
+stop_if_jobs_locked
+
 max_process=2
 
 tasks () {

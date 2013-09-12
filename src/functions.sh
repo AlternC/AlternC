@@ -32,6 +32,7 @@ mysql_query() { /usr/bin/mysql --defaults-file=/etc/alternc/my.cnf -Bs -e "$@" ;
 DOMAIN_LOG_FILE="/var/log/alternc/update_domains.log"
 VHOST_FILE="$VHOST_DIR/vhosts_all.conf" 
 VHOST_MANUALCONF="$VHOST_DIR/manual/"
+LOCK_JOBS="/var/run/alternc/jobs-lock"
 
 
 # Some useful miscellaneous shell functions
@@ -119,3 +120,23 @@ generate_string() {
   echo
 }
 
+lock_jobs() {
+  test -d "$(dirname "$LOCK_JOBS")" || mkdir -p "$(dirname "$LOCK_JOBS")"
+  touch "$LOCK_JOBS"
+}
+
+unlock_jobs() {
+  test -e "$LOCK_JOBS" && rm -f "$LOCK_JOBS"
+}
+
+are_jobs_locked() {
+  return $(test -e "$LOCK_JOBS")
+}
+
+stop_if_jobs_locked() {
+  are_jobs_locked || return
+  echo "There is a file $LOCK_JOBS"
+  echo "So no jobs are allowed, not even for $0"
+  echo "Did you launch alternc.install ?"
+  exit 42
+}
