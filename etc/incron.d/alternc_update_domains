@@ -1,0 +1,1 @@
+/var/run/alternc/ IN_CREATE,IN_ATTRIB,IN_NO_LOOP /usr/lib/alternc/inotify_update_domains.sh
