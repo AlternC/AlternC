@@ -117,7 +117,9 @@ if ($r['dns_action']=='UPDATE') {?>
   <li class="edit"><a href="#tabsdom-editsub"><?php __("Edit subdomains");?></a></li>
   <li class="add"><a href="#tabsdom-addsub"><?php __("Add subdomains");?></a></li>
   <li class="settings"><a href="#tabsdom-params"><?php __("Settings");?></a></li>
+<?php if ( $r["dns"] ) { ?>
   <li class="view"><a href="#tabsdom-view" onClick="update_dns_content();"><?php __("View");?></a></li> 
+<?php } //if gesdns ?>
   <li class="delete"><a href="#tabsdom-delete"><?php __("Delete");?></a></li>
 </ul>
 
@@ -259,7 +261,7 @@ if (!$r['noerase']) {
 
 </div>
 
-
+<?php if ( $r["dns"] ) { ?>
 <div id="tabsdom-view">
 <p>
 <?php __("Here is the actual DNS zone running on the AlternC server. If you just made some changes, you have to wait for it."); ?>
@@ -271,6 +273,7 @@ if (!$r['noerase']) {
 </pre>
 
 </div>
+<?php } // if dns ?>
 
 <div id="tabsdom-delete">
   <h3><?php __("Domain removal"); ?></h3>
