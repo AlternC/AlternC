@@ -419,7 +419,6 @@ class m_dom {
 
     // TODO: Old hooks, FIXME: when unused remove them
     $hooks->invoke("alternc_add_domain",array($domain));
-    if ($gesmx) $hooks->invoke("alternc_add_mx_domain",array($domain));
     if ($isslave) {
       $hooks->invoke("alternc_add_slave_domain",array($domain));
     }
@@ -1410,9 +1409,10 @@ class m_dom {
   /** Declare that a domain's emails are hosted in this server : 
    * This adds 2 MX entries in this domain (if required)
    */
-  function alternc_add_mx_domain($domain) {
+  function hook_dom_add_mx_domain($dom_id) {
     global $err;
-    $err->log("dom","alternc_add_mx_domain");
+    $domain = $this->get_domain_byid($dom_id);
+    $err->log("dom","hook_dom_add_mx_domain");
     $this->set_sub_domain($domain, '', $this->type_defmx, '');
     if (! empty($GLOBALS['L_DEFAULT_SECONDARY_MX'])) {
       $this->set_sub_domain($domain, '', $this->type_defmx2, '');
