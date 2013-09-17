@@ -1,15 +1,47 @@
 <?php
 
-include_once(dirname(__FILE__) . '/vm.class.php');
-# include('vm.php'); // This one fails ...
+/* 
+ ----------------------------------------------------------------------
+ AlternC - Web Hosting System
+ Copyright (C) 2000-2013 by the AlternC Development Team.
+ https://alternc.org/
+ ----------------------------------------------------------------------
+ LICENSE
 
-class m_lxc implements vm
-{
+ This program is free software; you can redistribute it and/or
+ modify it under the terms of the GNU General Public License (GPL)
+ as published by the Free Software Foundation; either version 2
+ of the License, or (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ To read the license please visit http://www.gnu.org/copyleft/gpl.html
+ ----------------------------------------------------------------------
+ Purpose of file: Manage LXC-based virtual machine through an inetd-based protocol
+ ----------------------------------------------------------------------
+*/
+
+include_once(dirname(__FILE__) . '/vm.class.php');
+
+
+/**
+ * Manage AlternC's virtual machine start/stop using our own inetd-based protocol.
+ */
+class m_lxc implements vm {
+
+
   public $IP;
   public $PORT;
   public $TIMEOUT = 5;
   public $error = array();
 
+
+  /** 
+   * Constructor, initialize the class informations from AlternC's variables
+   */
   function m_lxc() {
     $this->IP   = variable_get('lxc_ip', '', "IP address of the Alternc's LXC server. If empty, no LXC server.");
     $this->PORT = variable_get('lxc_port', '6504', "Port of the Alternc's LXC server");
@@ -18,8 +50,11 @@ class m_lxc implements vm
   }
 
 
+  /**
+   * HOOK: add the "Console Access" to AlternC's main menu
+   */
   function hook_menu() {
-    if ( empty($this->IP)) return ; # No menu if no server
+    if ( empty($this->IP)) return ; // No menu if no server
 
     $obj = array(
       'title'       => _("Console access"),
@@ -31,6 +66,10 @@ class m_lxc implements vm
      return $obj;
   }
 
+
+  /**
+   * HOOK: remove VM history for AlternC account
+   */
   function hook_admin_del_member() {
     global $db,$err,$cuid;
     $err->log("lxc","alternc_del_member");
@@ -38,70 +77,53 @@ class m_lxc implements vm
     return true;
   }
 
-  // Stop VMs running since more than MAXTIME hours
-  function stop_expired($force=false) {
-    global $mem,$err;
-    # Need to be distinct of $db (calling subfunctions)
-    $db2 = new DB_system();
 
-    if (! $mem->checkright() ) {
-      $err->raise("lxc",_("-- Only administrators can do that! --"));
-      return false;
-    }
-
-    # If force, maxtime = 0
-    $time = ($force?0:$this->maxtime);
-
-    $db2->query("select * from vm_history where date_end is null and date_start < subdate( now() , interval $time hour);");
-
-    while ($db2->next_record()) {
-      $mem->su($db2->Record['uid']);
-      $this->stop();
-      $mem->unsu();
-    }
-  }
-
-
+  /** 
+   * Send a message to a remote VM manager instance
+   * $params are the parameters to send as serialized data
+   * to the listening server. 
+   * Return the unserialized response data, if the message has been sent successfully
+   * or FALSE if an error occurred. In that case $error[] is set.
+   */
   private function sendMessage($params) {
+    global $L_FQDN;
     $fp = fsockopen($this->IP, $this->PORT, $errno, $errstr, $this->TIMEOUT);
-    if (!$fp) 
-    {
+    if (!$fp) {
       $this->error[] = 'Unable to connect';
       return FALSE;
     }
+    // Authenticate:
+    $params['server']=$L_FQDN;
+    $params['key']=$this->KEY;
 
     $msg = sprintf("%s\n", serialize($params) );
-    if (fwrite ($fp, $msg) < 0)
-    {
+    if (fwrite ($fp, $msg) < 0) {
       $this->error[] = 'Unable to send data';
       return FALSE;
     }
     $resp = '';
-    #while (($resp .= fgets($fp, 4096)) !== FALSE);
     $resp = fgets($fp, 4096);
     fclose ($fp);
 
-    return $resp;
+    $data = @unserialize($resp);
   
-    if (stripos($resp, 'error') > 0)
-    {
-      $data = unserialize($resp);
+    if (isset($data['error']) && $data['error']>0) {
       $this->error[] = $data['msg'];
       return FALSE;
-    }
-    else
-    {
+    } else {
       return $resp;
     }
   }
 
-  public function start($login = FALSE, $pass = FALSE, $uid = FALSE)
-  {
-    
+
+  /** 
+   * START a Virtual Machine on the remote VM manager
+   * for user $login having hashed password $pass and uid $uid
+   */
+  public function start($login = FALSE, $pass = FALSE, $uid = FALSE) {
     global $mem, $db, $err, $mysql;
 
-    if ($this->getvm() !== FALSE)
-    {
+    if ($this->getvm() !== FALSE) {
       $err->raise('lxc', _('VM already started'));
       return FALSE;
     }
@@ -114,10 +136,9 @@ class m_lxc implements vm
     $msgg['mysql_host'] = $mysql->dbus->Host;
 
     $res = $this->sendMessage($msgg);
-    if ($res === FALSE)
+    if ($res === FALSE) {
       return $this->error;
-    else
-    {
+    } else {
       $data = unserialize($res);
       $error = $data['error'];
       $hostname = $data['hostname'];
@@ -125,70 +146,44 @@ class m_lxc implements vm
       $date_start = 'NOW()';
       $uid = $mem->user['uid'];
 
-      if ((int)$data['error'] != 0)
-      {
+      if ((int)$data['error'] != 0) {
         $err->raise('lxc', _($data['msg']));
         return FALSE;
       }
-
       $db->query("INSERT INTO vm_history (ip,date_start,uid,serialized_object) VALUES ('$hostname', $date_start, '$uid', '$res')");
-
       return $res;
     }
   }
 
 
-  public function monit()
-  {
-    echo "1 / 5 used ";
-  }
-
-  public function getvm()
-  {
+  /**
+   * 
+   */
+  public function getvm($login = FALSE) {
     global $db, $mem, $cuid;
 
-    $db->query("SELECT * FROM vm_history WHERE date_end IS NULL AND uid= $cuid ORDER BY id DESC LIMIT 1");
-
-    if ($db->next_record()){
-      $db->Record['serialized_object'] = unserialize($db->Record['serialized_object']);
-      return $db->Record;
-    }
-    else {
-      return FALSE;
-    }
+    $login = $login ? $login : $mem->user['login'];
+    $msgg = array('action'=>'get', 'login'=>$login);  
+    $res = $this->sendMessage($msgg);
+    if (!$res) return FALSE;
+    return unserialize($res);
   }
 
-  # Stop all VMs
-  public function stopall() {
-    global $mem, $db, $err;
 
-    if (! $mem->checkright() ) {
-      $err->raise("lxc",_("-- Only administrators can do that! --"));
-      return false;
-    }
-
-    if ($this->sendMessage(array('action' => 'stopall' )) === FALSE)
-      return FALSE;
-
-    return $db->query("UPDATE vm_history SET date_end = NOW() WHERE date_end is null;");
-  }
-
-  public function stop()
-  {
+  /** 
+   * Stop the currently running VM
+   */
+  public function stop() {
     global $db, $mem;
-
     $vm = $this->getvm();
-
     if ($vm === FALSE)
-      return TRUE;
-
-    $vm_id = $vm['serialized_object']['vm'];
-    $uid = $mem->user['uid'];
-    $vid = $vm['id'];
-
-    if ($this->sendMessage(array('action' => 'stop', 'vm' => $vm_id)) === FALSE)
       return FALSE;
 
-    return $db->query("UPDATE vm_history SET date_end = NOW() WHERE uid = '$uid' AND id = '$vid' LIMIT 1");
+    if ($this->sendMessage(array('action' => 'stop', 'vm' => $vm['vm'])) === FALSE)
+      return FALSE;
+    return TRUE;
   }
-}
+
+
+
+} // class m_lxc

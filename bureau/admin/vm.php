@@ -3,29 +3,38 @@
 require_once("../class/config.php");
 
 $fields = array (
-	"action" => array ("get", "string", ''),
-	"script" => array ("get", "boolean", 0),
+	"action" => array ("request", "string", ''),
+	"script" => array ("request", "boolean", 0),
 );
 getFields($fields);
 
 if (in_array($action, array('start', 'stop', 'monit'))) {
         $res = $hooks->invoke($action, array(), 'lxc');
 }
+switch ($action) {
+case "start":
+  $lxc->start();
+  break;
+case "stop":
+  $lxc->stop();
+  break;
+}
+if ($lxc->error && !$script) {
+  $error=$lxc->error;
+}
 
 $infos = $lxc->getvm();
 
 if ($script) {
+  header("Content-Type: text/plain");
   if (isset($res)) {
   echo "ACTION:".$action."\n";
   echo "RETURN:".intval($res['lxc'])."\n";
   }
   if ($infos) {
     echo "VM_STATUS:OK\n";
-    echo "VM_START:".$infos['date_start']."\n";
-    echo "VM_RETURN_CODE:".intval($infos['serialized_object']['error'])."\n";
-    echo "VM_ID:".$infos['serialized_object']['vm']."\n";
-    echo "VM_HOSTNAME:".$infos['serialized_object']['hostname']."\n";
-    echo "VM_MSG:".$infos['serialized_object']['msg']."\n";
+    echo "VM_START:".$infos['starttime']."\n";
+    echo "VM_HOSTNAME:".$infos['hostname']."\n";
   } else {
     echo "VM_STATUS:NONE\n";
   }
@@ -41,33 +50,42 @@ include_once("head.php");
 <hr/>
 <br/>
 
-<?php if (isset($res) && ! $res['lxc']) { ?>
+<?php if ($error) { ?>
 <div>
 <span class="error">
-  <?php echo $err->errstr(); ?>
+   <?php echo implode('<br />', $error); ?>
 </span>
 </div>
 <br/>
 <br/>
-<?php } //isset $res ?>
+<?php } ?>
 
 <div>
 <?php if (empty($infos)) { 
-  echo '<span class="error">';
-  __("You can start a virtual machine.");
-  echo "<a href='vm.php?action=start'>"._("Click here to do so.")."</a>";
-  echo '</span>';
+?>
+<p class="error"><?php __("You can start a virtual machine."); ?></p>
+<form method="post" action="vm.php">
+   <input type="hidden" name="action" value="start" />
+<input type="submit" class="inb" name="go" value="<?php __("Click here to start a virtual machine."); ?>" />
+</form>
+<?php
 } else {
  echo "<table class='tedit'>";
- echo "<tr><th>"._("Hostname")."</th><td>".$infos['serialized_object']['hostname']."</td></tr>";
- echo "<tr><th>"._("Start time")."</th><td>".$infos['date_start']."</td></tr>";
- echo "<tr><th>"._("Usefull command")."</th><td><pre>";
-   echo "ssh ".$mem->user['login']."@".$infos['serialized_object']['hostname']."\n";
-   echo "rsync ".$mem->user['login']."@".$infos['serialized_object']['hostname']."\n";
+ echo "<tr><th>"._("Hostname")."</th><td>".$infos['hostname']."</td></tr>";
+ echo "<tr><th>"._("Start time")."</th><td>".date('Y-m-d H:i:s',$infos['starttime'])."</td></tr>";
+ echo "<tr><th>"._("SSH Fingerprint")."</th><td style=\"font-family: Courier, fixed;\">".implode('<br />',$infos['ssh-keys'])."</td></tr>";
+ echo "<tr><th>"._("Useful command")."</th><td><pre>";
+   echo "ssh ".$mem->user['login']."@".$infos['hostname']."\n";
+   echo "rsync ".$mem->user['login']."@".$infos['hostname']."\n";
  echo "</pre></td></tr>";
- echo "<tr><td colspan='2'><a href='vm.php?action=stop'>"._("Click here to stop the machine")."</a></td></tr>";
- echo "</table>"; 
-
+ echo "</table>";
+?>
+<p class="error"><?php __("You can stop your virtual machine."); ?></p>
+<form method="post" action="vm.php">
+   <input type="hidden" name="action" value="stop" />
+<input type="submit" class="inb" name="go" value="<?php __("Click here to stop your running virtual machine."); ?>" />
+</form>
+<?php
 } // empty infos ?>
 </div>
 
