@@ -145,6 +145,17 @@ class m_admin {
     }
   }
 
+  # return the uid of an alternc account
+  function get_uid_by_login($login) {
+    global $db;
+    $db->query("SELECT uid FROM membres WHERE login='$login';");
+    if (! $db->next_record()) {
+      return null;
+    }
+    return $db->f('uid');
+  }
+
+
   /* ----------------------------------------------------------------- */
   /** Returns the known information about a hosted account
    * 

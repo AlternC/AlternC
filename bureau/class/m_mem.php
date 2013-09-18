@@ -613,6 +613,7 @@ Cordially.
 
   function session_tempo_params_get($v) {
     global $uid;
+    if (empty($_COOKIE['session'])) return false;
     $sid=$_COOKIE['session'];
     if ( empty($_SESSION[$sid.'-'.$uid]) ) { // si pas de session de params tempo
       return false;
@@ -627,6 +628,7 @@ Cordially.
 
   function session_tempo_params_set($k, $v, $ecrase=false) {
     global $uid;
+    if (empty($_COOKIE['session'])) return false;
     $sid=$_COOKIE['session'];
     $p=Array();
     if ( ! empty($_SESSION[$sid.'-'.$uid]) ) {
