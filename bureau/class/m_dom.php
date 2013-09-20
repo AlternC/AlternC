@@ -240,7 +240,7 @@ class m_dom {
         $val['comment'] = "Became a redirect to $dst_url";
         $val['entry_new']['type'] = 'URL';
         $val['entry_new']['sub'] = $ret['sub'];
-        $val['entry_new']['value'] = $url;
+        $val['entry_new']['value'] = $dst_url;
       } else {
         $val['status'] = 'ok';
         $val['comment'] = "Create entry A with ".$ret['sub']." go to ".$ret['target']." with ttl ".$ret['ttl'];
@@ -284,7 +284,7 @@ class m_dom {
         $val['comment'] = "Became a redirect to $dst_url";
         $val['entry_new']['type'] = 'URL';
         $val['entry_new']['sub'] = $ret['sub'];
-        $val['entry_new']['value'] = $url;
+        $val['entry_new']['value'] = $dst_url;
       } else {
         $val['status'] = 'ok';
         $val['comment'] = "Create entry CNAME with ".$ret['sub']." go to ".$ret['target']." with ttl ".$ret['ttl'];
