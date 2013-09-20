@@ -169,6 +169,266 @@ class m_dom {
     }
   }
 
+  function import_manual_dns_zone($zone, $domain, $detect_redirect=true, $save=false) {
+    global $err;
+    if ($save) {
+      if (! $this->import_manual_dns_prep_zone($domain) ) {
+        $err->raise('dom', _("Err: failed to prepare the zone"));
+        return false;
+      }
+    }
+
+    $val = array();
+    foreach (explode("\n", $zone) as $z) {
+      $z=trim($z);
+      if (empty($z)) continue; 
+      $val[] = $this->import_manual_dns_entry($z,$domain,$detect_redirect,$save);
+    }
+    return $val;
+  }
+
+  function import_manual_dns_entry($zone, $domain, $detect_redirect=true, $save=false) {
+    global $cuid, $err;
+    $err->log("dom","import_manual_dns_entry");
+    $zone=trim($zone);
+    if (empty($zone)) return false;
+
+    $domain=trim($domain);
+    if ( empty($domain) ) {
+      $err->raise("dom", _("Missing domain name"));
+      return false;
+    }
+
+    $val = array(
+      'status'    => 'err', // can be 'ok', 'err', 'warn'
+      'comment'   => 'no val',
+      'entry_old' => $zone,
+      'entry_new' => array('domain'=>$domain),
+    );
+
+    // Examples:
+    // ; hello comment
+    if ( preg_match('/^;/', $zone, $ret) ) {
+      $val['status'] = 'ok';
+      $val['comment'] = 'Just a comment, do not import';
+    } else
+    // Examples:
+    // $TTL 86400'
+    if ( preg_match('/^\$TTL\h+(?P<ttl>[\dMHDmhd]+)/', $zone, $ret) ) {
+      $val['status'] = 'ok';
+      $val['comment'] = 'Set TTL to '.$ret['ttl'];
+      $val['entry_new']['type'] = 'set_ttl';
+      $val['entry_new']['value'] = $ret['ttl'];
+    } else
+
+    // Examples:
+    // @ IN A 127.2.1.5
+    // reseau IN A 145.214.44.55
+    if ( preg_match('/^(?P<sub>[\w\.@\-]*)\h*(?P<ttl>\d*)\h*IN\h+A\h+(?P<target>\d+\.\d+\.\d+\.\d+)/i', $zone, $ret) ) {
+      // Check if it is just a redirect
+      if ( substr($ret['sub'], -1) == '.' ) { // if ending by a "." it is allready a FQDN
+        $url="http://".$ret['sub'];
+      } else {
+        if ( $ret['sub'] == '@' || empty($ret['sub']) ) {
+          $url="http://".$domain;
+        } else {
+          $url="http://".$ret['sub'].".".$domain;
+        }
+      }
+      if ( $detect_redirect && $dst_url = $this->is_it_a_redirect($url) ) {
+        $val['status'] = 'warn';
+        $val['comment'] = "Became a redirect to $dst_url";
+        $val['entry_new']['type'] = 'URL';
+        $val['entry_new']['sub'] = $ret['sub'];
+        $val['entry_new']['value'] = $url;
+      } else {
+        $val['status'] = 'ok';
+        $val['comment'] = "Create entry A with ".$ret['sub']." go to ".$ret['target']." with ttl ".$ret['ttl'];
+        $val['entry_new']['type'] = 'IP';
+        $val['entry_new']['sub'] = $ret['sub'];
+        $val['entry_new']['value'] = $ret['target'];
+      }
+    } else
+
+    // Examples:
+    // @ IN NS ns.example.tld.
+    // ns 3600 IN NS 145.214.44.55
+    if ( preg_match('/^(?P<sub>[\w\.@]*)\h*(?P<ttl>\d*)\h*IN\h+NS\h+(?P<target>[\w\.]+)/i', $zone, $ret) ) {
+      if ( empty($ret['sub']) || $ret['sub'] == '@' ) {
+        $val['status'] = 'warn';
+        $val['comment'] = "Won't migrate it, there will get a new value";
+      } else {
+        $val['status'] = 'ok';
+        $val['comment'] = "Create entry NS with ".$ret['sub']." go to ".$ret['target']." with ttl ".$ret['ttl'];
+        $val['entry_new']['type'] = 'FIXME-NS';
+        $val['entry_new']['sub'] = $ret['sub'];
+        $val['entry_new']['value'] = $ret['target'];
+      }
+    } else
+
+    // Examples:
+    // agenda IN CNAME ghs.google.com.
+    // www 3600 IN CNAME @
+    if ( preg_match('/^(?P<sub>[-\w\.@]*)\h*(?P<ttl>\d*)\h*IN\h+CNAME\h+(?P<target>[@\w+\.]+)/i', $zone, $ret) ) {
+      if ( substr($ret['sub'], -1) == '.' ) { // if ending by a "." it is allready a FQDN
+        $url="http://".$ret['sub'];
+      } else {
+        if ( $ret['sub'] == '@' || empty($ret['sub']) ) {
+          $url="http://".$domain;
+        } else {
+          $url="http://".$ret['sub'].".".$domain;
+        }
+      }
+      if ( $detect_redirect && $dst_url = $this->is_it_a_redirect($url) ) {
+        $val['status'] = 'warn';
+        $val['comment'] = "Became a redirect to $dst_url";
+        $val['entry_new']['type'] = 'URL';
+        $val['entry_new']['sub'] = $ret['sub'];
+        $val['entry_new']['value'] = $url;
+      } else {
+        $val['status'] = 'ok';
+        $val['comment'] = "Create entry CNAME with ".$ret['sub']." go to ".$ret['target']." with ttl ".$ret['ttl'];
+        $val['entry_new']['type'] = 'CNAME';
+        $val['entry_new']['sub'] = $ret['sub'];
+        $val['entry_new']['value'] = $ret['target'];
+      }
+    } else
+
+    // Examples:
+    // @ IN MX 10 aspmx.l.google.com.
+    // arf 3600 IN MX 20 pouet.fr.
+    if ( preg_match('/^(?P<sub>[-\w\.@]*)\h*(?P<ttl>\d*)\h*IN\h+MX\h+(?P<weight>\d+)\h+(?P<target>[@\w+\.]+)/i', $zone, $ret) ) {
+      $val['status'] = 'ok';
+      $val['comment'] = "Create entry MX with ".$ret['sub']." go to ".$ret['target']." with ttl ".$ret['ttl']." and weight ".$ret['weight'];
+      $val['entry_new']['type'] = 'MX';
+      $val['entry_new']['sub'] = $ret['sub'];
+      $val['entry_new']['value'] = $ret['target'];
+    } else
+
+    // Examples:
+    // _sip._tcp  IN      SRV             1 100 5061 sip.example.tld.
+    if ( preg_match('/^(?P<sub>[_\w\.@]+)\h+(?P<ttl>\d*)\h*IN\h+SRV\h+/i', $zone, $ret) ) {
+      $val['status']='err';
+      $val['comment'] = "Please add yourself the entry $zone";
+    } else
+
+    // Examples:
+    // @       IN      TXT             "google-site-verification=jjjjjjjjjjjjjjjjjjjjjjjjsdsdjlksjdljdslgNj5"
+    if ( preg_match('/^(?P<sub>[_\w\.@]*)\h*(?P<ttl>\d*)\h*IN\h+TXT\h+\"(?P<target>.+)\"/i', $zone, $ret) ) {
+      $val['status']='ok';
+      $val['comment'] = "Create TXT entry with ".$ret['sub']." go to ".$ret['target'];
+      $val['entry_new']['type'] = 'TXT';
+      $val['entry_new']['sub'] = $ret['sub'];
+      $val['entry_new']['value'] = $ret['target'];
+    } else {
+
+      // WTF can it be ?
+      $val['comment'] = "Unknow: $zone";
+    }
+
+    if ($save) {
+      return $this->import_manual_dns_entry_doit($val); 
+    }
+
+    return $val;
+  }
+
+  private function import_manual_dns_entry_doit($entry) {
+    global $err;
+    if ( $entry['status'] == 'err' ) return false;
+
+    $val=$entry['entry_new'];
+
+    if (empty($val['type'])) return false;
+
+    switch($val['type']) {
+      case "set_ttl":
+        $entry['did_it'] = $this->set_ttl($this->get_domain_byname($val['domain']), $val['value']);
+        return $entry;
+        break;
+    }
+
+    // If it is a know domains type
+    if (! array_key_exists( strtolower($val['type']), $this->domains_type_lst() ) ) {
+      echo "what is this shit ?\n";
+      print_r($entry);
+      return $entry;
+    }
+
+    // If the subdomain is @, we want an empty subdomain
+    if ($val['sub'] == '@') $val['sub'] = '';
+
+    $this->lock();
+    $entry['did_it'] = $this->set_sub_domain($val['domain'], $val['sub'], $val['type'], $val['value']);
+    $this->unlock();
+
+    return $entry;
+  }
+
+  private function import_manual_dns_prep_zone($domain) {
+    global $err;
+    // Prepare a domain to be importer : 
+    // * create the domain
+    // * delete all automatic subdomain
+    // * set no mx
+    $this->lock();
+
+    // function add_domain($domain,$dns,$noerase=0,$force=0,$isslave=0,$slavedom="") 
+    if (! $this->add_domain($domain, true, false, 1) ) {
+      $err->raise('dom', "Error adding domain");
+      return false;
+    }
+
+    // Set no mx
+    $this->edit_domain($domain, true, false);
+
+    $d = $this->get_domain_all($domain);
+    foreach( $d['sub'] as $sd) {
+      $this->del_sub_domain($sd['id']);
+    }
+
+    $this->unlock();
+ 
+    return true;
+  }
+
+  // Take an URL, and return FALSE is there is no redirection,
+  // and the target URL if there is one (HTTP CODE 301 & 302)
+  // CURL is needed
+  function is_it_a_redirect($url) {
+    try {
+      $params = array('http' => array(
+        'method' => 'HEAD',
+        'ignore_errors' => true
+        ));
+
+      $context = stream_context_create($params);
+      $fp = @fopen($url, 'rb', false, $context);
+      $result = @stream_get_contents($fp);
+
+      if ($result === false) {
+        throw new Exception("Could not read data from {$url}");
+        return false;
+      } 
+      if ( strstr($http_response_header[0], '301') || strstr($http_response_header[0], '302')) {
+        // This is a redirection
+       if ( preg_match( '/Location:\h+(?P<target>[\w:\/.\?\=.]+)/', implode("\n",$http_response_header), $ret ) ) {
+         // check if it is a redirection to himself
+         preg_match('/\/\/(?P<host>[\w\.\-]+)\//', ( substr($url,-1)=='/'?$url:$url.'/') , $original_cname);
+         preg_match('/\/\/(?P<host>[\w\.\-]+)\//', $ret['target'], $target_url);
+         if ($target_url['host'] == $original_cname['host']) { // if it's a redirection to himself (sub pages, http to https...)
+           return false; // do not do a redirection (we must point to the server)
+         }
+         return $ret['target'];
+       } 
+      } else { // it isn't a redirection 
+        return false;
+      }
+    } catch (Exception $e) {
+      return false;
+    }
+  }
+
   function domains_type_regenerate($name) {
     global $db,$err,$cuid; 
     $name=mysql_real_escape_string($name);
@@ -784,6 +1044,7 @@ class m_dom {
     $db->free();
     $db->query("SELECT sd.*, dt.description AS type_desc, dt.only_dns FROM sub_domaines sd, domaines_type dt WHERE compte='$cuid' AND domaine='$dom' AND UPPER(dt.name)=UPPER(sd.type) ORDER BY sd.sub,sd.type");
     // Pas de webmail, on le cochera si on le trouve.
+    $r["sub"]=array();
     for($i=0;$i<$r["nsub"];$i++) {
       $db->next_record();
       $r["sub"][$i]=array();
@@ -1012,7 +1273,7 @@ class m_dom {
     $db->next_record();
     if ($db->f('create_tmpdir')) {
       if (! is_dir($dest_root . "/tmp")) {
-	if(!mkdir($dest_root . "/tmp",0770,true)){
+	if(!@mkdir($dest_root . "/tmp",0770,true)){
 	  $err->raise("dom",_("Cannot write to the destination folder"));
 	}
       }
@@ -1064,6 +1325,18 @@ class m_dom {
     return true;
   } // del_sub_domain
 
+
+  function set_ttl($dom_id, $ttl) {
+    global $err;
+    $err->log("dom","set_ttl","$dom_id / $ttl");
+    $this->lock();
+    $domaine = $this->get_domain_byid($dom_id);
+    $d = $this->get_domain_all($domaine);
+
+    $j = $this->edit_domain($domaine, $d['dns'], $d['mail'], 0, $ttl);
+    $this->unlock();
+    return $j;
+  }
 
   /* ----------------------------------------------------------------- */
   /**

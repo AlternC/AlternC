@@ -2,7 +2,6 @@
 require_once("../class/config.php");
 include_once("head.php");
 
-
 # Function to create/edit subdomain
 # Take the values of the subdomain in arguments
 

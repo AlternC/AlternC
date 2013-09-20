@@ -85,6 +85,16 @@ fieldset {
   border: 1px solid #555;
 }
 
+pre {
+  overflow: auto;
+  background-color: #ddd;
+  padding: 10px;
+  border: solid 1px #999;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+}
+
 .inp {
   /* Should not be use anymore !!! */
   border-color: blue;
@@ -566,6 +576,16 @@ table.tlistb, .tlistb tr {
 
 input#dir, input#sub_local { 
   width: 200px;
+}
+
+.tab-ok {
+  background-color: lightgreen;
+}
+.tab-err {
+  background-color: red;
+}
+.tab-warn {
+  background-color: coral;
 }
 
 .warningmsg {

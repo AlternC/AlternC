@@ -105,6 +105,7 @@ bureau/admin/dom_dodel.php -text
 bureau/admin/dom_edit.inc.php -text
 bureau/admin/dom_edit.php -text
 bureau/admin/dom_editdns.php -text
+bureau/admin/dom_import.php -text
 bureau/admin/dom_subdel.php -text
 bureau/admin/dom_subdodel.php -text
 bureau/admin/dom_subdoedit.php -text
