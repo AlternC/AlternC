@@ -335,7 +335,10 @@ class m_dom {
 
   private function import_manual_dns_entry_doit($entry) {
     global $err;
-    if ( $entry['status'] == 'err' ) return false;
+    if ( $entry['status'] == 'err' ) {
+      $entry['did_it'] = 0;
+      return $entry;
+    }
 
     $val=$entry['entry_new'];
 
