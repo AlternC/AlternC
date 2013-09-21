@@ -96,13 +96,13 @@ class m_lxc implements vm {
     $params['server']=$L_FQDN;
     $params['key']=$this->KEY;
 
-    $msg = sprintf("%s\n", serialize($params) );
+    $msg = sprintf("%s\n", $crypto->encrypt(serialize($params), $this->KEY) );
     if (fwrite ($fp, $msg) < 0) {
       $this->error[] = 'Unable to send data';
       return FALSE;
     }
     $resp = '';
-    $resp = fgets($fp, 4096);
+    $resp = fgets($fp, 8192);
     fclose ($fp);
 
     $data = @unserialize($resp);

@@ -38,6 +38,7 @@ $fields = array (
 	"show"    => array ("request", "string", ""),
 	"creator" => array("request", "integer", 0),
 	"short"   => array("request", "integer", -1),
+	"pattern" => array("request", "string", FALSE),
 );
 getFields($fields);
 
@@ -56,15 +57,35 @@ if ($show=="all" && !$subadmin==1 && $cuid != 2000) {
 	exit();
 }
 
-$r=$admin->get_list($show == 'all' ? 1 : 0, $creator);
 
+if ($pattern)
+	$r=$admin->get_list($show == 'all' ? 1 : 0, $creator, $pattern);
+else
+	$r = FALSE;
 ?>
+
 <h3><?php __("AlternC account list"); ?></h3>
 <hr id="topbar"/>
 <br />
+
+  <p><span class="ina"><a href="adm_add.php"><?php __("Create a new AlternC account"); ?></a></span></p>
+
+<p>
+
+<form method="get">
+	<label for="pattern"><?php __("Login pattern"); ?></label>&nbsp;
+	<input type="text" id="pattern" name="pattern" value="<?php echo $pattern ? $pattern : '*'; ?>"/> <input type="submit" class="inb" value="<?php __("submit"); ?>" />
+</form>
+
+</p>
+
 <?php
 	if (isset($error) && !empty($error) ) {
-	  echo "<p class=\"error\">$error</p>";
+	  echo '<p class="error">' , $error, '</p>';
+	}
+	if (!$r) {
+		__("Enter a pattern for login list");
+		exit (0);
 	}
 ?>
 <p>
@@ -92,14 +113,12 @@ if($show != 'all') {
   echo '<p><span class="ina"><a href="adm_list.php">' . _('List only my accounts') . '</a></span></p>';
 }
 }// END ($subadmin==1 || $cuid==2000)
-?>
-  <p><span class="ina"><a href="adm_add.php"><?php __("Create a new AlternC account"); ?></a></span></p>
 
-<?php
 if (!is_array($r)) {
-  echo "<p class=\"error\">"._("No account defined for now")."</p>";
+  echo '<p class="error">' , _("No account defined for now"), '</p>';
 } else {
 ?>
+
 
 <form method="post" action="adm_dodel.php">
 <?php
@@ -143,7 +162,7 @@ while (list($key,$val)=each($r))
 <?php } else { ?>
  <td><input type="checkbox" class="inc" name="d[]" id="user_<?php echo $val["uid"]; ?>" value="<?php echo $val["uid"]; ?>" /></td>
 <?php } ?>
-		<td <?php if ($val["su"]) echo "style=\"color: red\""; ?>><label for="user_<?php echo $val["uid"]; ?>"><b><?php echo $val["login"] ?></b></label></td>
+		<td <?php if ($val["su"]) echo 'style="color: red"'; ?>><label for="user_<?php echo $val["uid"]; ?>"><b><?php echo $val["login"] ?></b></label></td>
 		<td><a href="mailto:<?php echo $val["mail"]; ?>"><?php echo $val["nom"]." ".$val["prenom"] ?></a>&nbsp;</td>
 		<td><?php echo $val["parentlogin"] ?></td>
 		<td><?php echo format_date(_('%3$d-%2$d-%1$d'),$val["created"]); ?></td>
@@ -180,7 +199,6 @@ while (list($key,$val)=each($r))
 	}
 
 } // NORMAL MODE
-
 if ($mem->user["admlist"]==1) { // SHORT MODE
 ?>
 
@@ -241,7 +259,7 @@ if (is_array($val)) {
 		<td style="padding-right: 2px; border-right: 1px solid black; <?php if ($val["su"]) echo "color: red"; ?>"><b><label for="id_c_<?php echo $val["uid"]; ?>"><?php echo $val["login"] ?></label></b></td>
 <?php
 
-} else echo "<td style=\"padding-right: 2px; border-right: 1px solid;\" colspan=\"3\"></td></tr>";
+} else echo '<td style="padding-right: 2px; border-right: 1px solid;" colspan="3"></td></tr>';
 
 $val=null;
 if (isset($r[$z+2*$rz])) {
@@ -265,7 +283,7 @@ if (is_array($val)) {
 		<td style="padding-right: 2px; border-right: 1px solid black; <?php if ($val["su"]) echo "color: red"; ?>"><b><label for="id_c_<?php echo $val["uid"]; ?>"><?php echo $val["login"] ?></label></b></td>
 	</tr>
 <?php
-	} else echo "<td style=\"padding-right: 2px; border-right: 1px solid;\" colspan=\"3\"></td></tr>";
+	} else echo '<td style="padding-right: 2px; border-right: 1px solid;" colspan="3"></td></tr>';
 } // for loop
 } // Short Mode
 

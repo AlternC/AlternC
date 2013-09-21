@@ -29,7 +29,8 @@
 class m_piwik {
   var $piwik_server_uri;
   var $piwik_admin_token;
-
+  var $alternc_users;
+  var $alternc_sites;
 
   function hook_menu() {
     global $quota;
@@ -37,7 +38,7 @@ class m_piwik {
 
     $obj = array(
       'title'       => _("Piwik statistics"),
-      'ico'         => 'images/stat.png',
+      'ico'         => 'images/piwik.png',
       'link'        => 'toggle',
       'pos'         => 115,
       'links'       => array(
@@ -55,6 +56,8 @@ class m_piwik {
   function m_piwik() {
     $this->piwik_server_uri=variable_get('piwik_server_uri',null,'Remote Piwik server uri');
     $this->piwik_admin_token=variable_get('piwik_admin_token',null,'Remote Piwik super-admin token');
+    $this->alternc_users = $this->get_alternc_users();
+    $this->alternc_sites = $this->get_alternc_sites();
   }
 
   /* ----------------------------------------------------------------- */
@@ -100,7 +103,7 @@ class m_piwik {
         $user_login = $this->clean_user_name($user_login);
 	$user_pass  = create_pass();
 	$user_mail  = $user_mail ? $user_mail : $mem->user['mail'];
-	$user_mail = create_pass(4) . $user_mail;
+	$user_mail = create_pass(4) . '@gmail.com'; // FIXME $user_mail; Unicité sur les emails ... Soit on ajoute + random soit, on prompt
 	$user_alias = $user_login;
 
 	$api_data = $this->call_privileged_page('API', 'UsersManager.addUser', array('userLogin' => $user_login, 'password' => $user_pass, 'email' => $user_mail, 'alias' => $user_alias), 'JSON'); 
@@ -108,7 +111,7 @@ class m_piwik {
 	  if ($api_data->result === 'success') {
 	    $user = $this->get_user($user_login);
 	    $user_creation_date = $user->date_registered;
-	    $db->query("INSERT INTO piwik_users (uid, login, created_date) VALUES ('$cuid', '$user_login', '$user_creation_date')");
+	    return $db->query("INSERT INTO piwik_users (uid, login, created_date) VALUES ('$cuid', '$user_login', '$user_creation_date')");
 	  }
 	} else { // api_data = false -> error is already filled
 	  return FALSE;
@@ -122,6 +125,34 @@ class m_piwik {
     return true;
   }
 
+  function get_site_access($user_login) {
+	return $this->call_privileged_page('API', 'UsersManager.getSitesAccessFromUser', array('userLogin' => $user_login));
+  }
+
+  function get_users_access_from_site($site_id) {
+	global $err, $cuid;
+
+	if (!is_numeric($site_id)) {
+		$err->raise('piwik', 'site_id must be numeric');
+		return FALSE;
+	}
+	if (!in_array($site_id, $this->alternc_sites)) {
+		$err->raise('piwik', "you don't own this piwik website");
+		return FALSE;
+	}
+
+	$api_data = $this->call_privileged_page('API', 'UsersManager.getUsersAccessFromSite', array('idSite' => $site_id));
+	if ($api_data !== FALSE) {
+		$api_data = $api_data[0]; // Data is in the first column
+		foreach ($this->alternc_users AS $key=>$user) {
+			if (!array_key_exists($user, $api_data)) {                                                            
+                                $api_data->$user = 'noaccess';                                                                
+                        } 
+		}
+		return $api_data;
+	}
+	else return FALSE; 
+  }
 
   function get_user($user_login) {
     $api_data = $this->call_privileged_page('API', 'UsersManager.getUser', array('userLogin' => $user_login));
@@ -132,7 +163,16 @@ class m_piwik {
       return FALSE;
   }
 
+  function get_alternc_users() {
+	global $db, $cuid;
 
+	static $alternc_users = array();
+	$db->query("SELECT login FROM piwik_users WHERE uid='$cuid'");
+	while ($db->next_record())
+		array_push($alternc_users, $db->f('login'));
+	
+	return $alternc_users;
+  }
   // Supprime l'utilisateur Piwik passé en parametre
   // Ne le supprime pas localement tant que pas supprimé en remote
   function user_delete($piwik_user_login) {
@@ -142,20 +182,17 @@ class m_piwik {
     $db->next_record();
 
     if ($db->f('cnt') == 1) {
-	$api_data = $this->call_privileged_page('API', 'UsersManager.getUser', array('userLogin' => $piwik_user_login));
-	printvar($api_data);
-	if ($api_data[0]->date_registered == $db->f('created_date'))
-	  echo "equals";
-	else
-	  echo "non equals";
-	// $api_data = $this->call_privileged_page('API', 'UsersManager.deleteUser', array('idSite' => $site_id));	
+	$api_data = $this->call_privileged_page('API', 'UsersManager.deleteUser', array('userLogin' => $piwik_user_login));
+	if ($api_data->result == 'success') {
+		return $db->query("DELETE FROM piwik_users WHERE uid='$cuid' AND login='$piwik_user_login'");
+	}
+	else {
+		return FALSE;
+	}
     } else {
       $err->raise("piwik", _("You are not allowed to delete the statistics of this website"));
       return FALSE;
     }
-    //SitesManager.deleteSite (idSite)
-    //FIXME
-    return true;
   }
  
 
@@ -206,6 +243,9 @@ class m_piwik {
     if($api_data) {
       foreach ($api_data AS $site) {
 
+        if (!in_array($site->idsite, $this->alternc_sites)) 
+	   continue;
+
 	$item = new stdClass();
 
 	$item->id       = $site->idsite;
@@ -214,11 +254,11 @@ class m_piwik {
 
 	$user_data = $this->call_privileged_page('API', 'UsersManager.getUsersAccessFromSite', array('idSite' => $site->idsite));
 
-	if (is_array($user_data)) {
-	    printvar($user_data);
-	  } else if(is_object($user_data)) {
-	    $item->rights = json_decode($user_data[0]);
-	  }
+	//if (is_array($user_data)) {
+	    // printvar($user_data);
+	  //} else if(is_object($user_data)) {
+	    $item->rights = $user_data[0];
+	  //}
 
 	$data[] = $item;
       }
@@ -227,7 +267,25 @@ class m_piwik {
       return FALSE;
   }
 
+  function site_js_tag($site_id) {
+	return $this->call_privileged_page('API', 'SitesManager.getJavascriptTag', array('idSite' => $site_id, 'piwikUrl' => $this->piwik_server_uri))->value;
+  }
 
+  function get_alternc_sites() {
+        global $db, $cuid;
+
+        static $alternc_sites = array();
+        $db->query("SELECT piwik_id AS site_id FROM piwik_sites WHERE uid='$cuid'");
+        while ($db->next_record())
+                array_push($alternc_sites, $db->f('site_id'));
+
+        return $alternc_sites;
+  }
+
+  function get_site_list()
+  {
+       return $this->call_privileged_page('API', 'SitesManager.getAllSites');
+  }
   // Ajoute un site à Piwik
   // can't figure out how to pass multiple url through the API
   function site_add($siteName, $urls, $ecommerce = FALSE) {
@@ -238,6 +296,7 @@ class m_piwik {
   }
 
 
+  //SitesManager.deleteSite (idSite)
   // Supprime un site de Piwik
   function site_delete($site_id) {
     global $db, $cuid, $err;
@@ -247,19 +306,34 @@ class m_piwik {
 
     if ($db->f('cnt') == 1) {
 	$api_data = $this->call_privileged_page('API', 'SitesManager.deleteSite', array('idSite' => $site_id));
-	printvar($api_data);
-	
+ 	
+	if ($api_data->result == 'success') {
+		return $db->query("DELETE FROM piwik_sites where uid='$cuid' AND piwik_id='$site_id' LIMIT 1");
+	} else {
+		return FALSE;
+	}
     } else {
 	$err->raise("piwik", _("You are not allowed to delete the statistics of this website"));
 	return FALSE;
     }
 
-    //SitesManager.deleteSite (idSite)
-    //FIXME
     return true;
   }
  
 
+    function site_set_user_right($site_id, $login, $right)
+    {
+	global $err;
+	if (!in_array($right, array('noaccess', 'view', 'admin')))
+		return FALSE;
+	$api_data = $this->call_privileged_page('API', 'UsersManager.setUserAccess', array('userLogin' => $login, 'access' => $right, 'idSites' => $site_id));
+	if ($api_data->result == 'success') {
+		return TRUE;
+	} else {
+		$err->raise('piwik', $api_data->messsage);
+		return FALSE;
+	}
+    }
   // Ajoute un alias sur un site existant
   function site_alias_add() {
     // FIXME
@@ -287,16 +361,14 @@ class m_piwik {
 	foreach ($arguments AS $k=>$v)
 	  $url .= sprintf('&%s=%s', urlencode($k), $v); //  urlencode($v));
 
-	echo $url;
 	$page_content = file_get_contents($url);
 	if ($page_content === FALSE) {
 	  $err->raise("piwik", _("Unable to reach the API"));
 	  return FALSE;
 	}
-
 	if ($output == 'JSON') {
 	  $api_data = json_decode($page_content);
-	  if ($api_data == FALSE) {
+	  if ($api_data === FALSE) {
 	    $err->raise("piwik", _("Error while decoding response from the API"));
 	    return FALSE;
 	  }

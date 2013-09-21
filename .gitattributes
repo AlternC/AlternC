@@ -361,6 +361,7 @@ bureau/class/m_admin.php -text
 bureau/class/m_authip.php -text
 bureau/class/m_bro.php -text
 bureau/class/m_cron.php -text
+bureau/class/m_crypto.php -text
 bureau/class/m_debug_alternc.php -text
 bureau/class/m_dom.php -text
 bureau/class/m_err.php -text

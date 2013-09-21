@@ -281,7 +281,7 @@ class m_admin {
    * table <code>membres</code> and <code>local</code> of all the accounts.
    * Returns FALSE if an error occurs.
    */
-  function get_list($all=0,$creator=0) {
+  function get_list($all=0,$creator=0,$pattern=FALSE) {
     global $err,$mem,$cuid;
     $err->log("admin","get_list");
     if (!$this->enabled) {
@@ -289,7 +289,21 @@ class m_admin {
       return false;
     }
     $db=new DB_System();
-    if ($creator) {
+
+    $request = 'SELECT uid FROM membres WHERE 1';
+
+    if ($pattern && preg_match('/[a-zA-Z0-9]+/', $pattern))
+	$request .= sprintf(' AND login LIKE "%%%s%%"', $pattern);
+
+    if ($creator) 
+	$request .= sprintf(' AND creator = "%s"', $creator);
+    if ($mem->user['uid']!=2000 && !$all)
+	$request .= sprintf(' AND creator = "%s"', $cuid);
+
+    $request .= ' ORDER BY login;';
+
+/*    if ($creator)
+    {
       // Limit listing to a specific reseller
       $db->query("SELECT uid FROM membres WHERE creator='".$creator."' ORDER BY login;");
     } elseif ($mem->user['uid']==2000 || $all) {
@@ -297,6 +311,10 @@ class m_admin {
     } else {
       $db->query("SELECT uid FROM membres WHERE creator='".$cuid."' ORDER BY login;");
     }
+*/
+
+    $db->query($request);
+
     if ($db->num_rows()) {
       while ($db->next_record()) {
 	$c[]=$this->get($db->f("uid"));
