@@ -74,7 +74,7 @@ else
 
 <form method="get">
 	<span><?php __("Pattern"); ?></span>
-	<label for="pattern_type_login">Login</label><input type="radio" name="pattern_type" value="login" id="pattern_type_login" <?php if ($pattern_type === 'login') echo ' checked="checked" '; ?>/>&nbsp;
+	<label for="pattern_type_login">Login</label><input type="radio" name="pattern_type" value="login" id="pattern_type_login" <?php if (!$pattern_type || $pattern_type === 'login') echo ' checked="checked" '; ?>/>&nbsp;
 	<label for="pattern_type_domain">Domaine</label><input type="radio" name="pattern_type" value="domaine" id="pattern_type_domain" <?php if ($pattern_type === 'domaine') echo ' checked="checked" '; ?>/>
 <!--	<label for="pattern"><?php __("Login pattern"); ?></label>&nbsp; -->
 	<input type="text" id="pattern" name="pattern" value="<?php echo $pattern ? $pattern : '*'; ?>"/> <input type="submit" class="inb" value="<?php __("submit"); ?>" />
