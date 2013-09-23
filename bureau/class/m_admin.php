@@ -300,6 +300,8 @@ class m_admin {
 	   if ($pattern && preg_match('/[.a-zA-Z0-9]+/', $pattern))
 		$request .= sprintf(' AND domaine LIKE "%%%s%%"', $pattern);
 
+	   $request .= ' GROUP BY uid';
+
         } elseif ($pattern_type === 'login') {
 
 	   $request = 'SELECT uid FROM membres WHERE 1';
