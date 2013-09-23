@@ -413,7 +413,11 @@ class m_admin {
         $creators[] = $this->get_creator($db->f("creator"));
       }
     }
-    return $creators;
+    $creators2 = array();
+    foreach ($creators as $cc ) {
+      $creators2[$cc['uid']] = $cc;
+    }
+    return $creators2;
   }
 
   /* ----------------------------------------------------------------- */

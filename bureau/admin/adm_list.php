@@ -38,8 +38,8 @@ $fields = array (
 	"show"    => array ("request", "string", ""),
 	"creator" => array("request", "integer", 0),
 	"short"   => array("request", "integer", -1),
-	"pattern" => array("request", "string", FALSE),
-        "pattern_type" => array("request", "string", FALSE),
+	"pattern" => array("post", "string", "*"),
+        "pattern_type" => array("post", "string", "login"),
 );
 getFields($fields);
 
@@ -54,8 +54,9 @@ $subadmin=variable_get("subadmin_restriction", 0);
 // If we ask for all account but we aren't "admin" and
 // subadmin var is not 1
 if ($show=="all" && !$subadmin==1 && $cuid != 2000) {
-	__("This page is restricted to authorized staff");
-	exit();
+  __("This page is restricted to authorized staff");
+  include('foot.php');
+  exit();
 }
 
 if ($pattern && $pattern_type) {
@@ -72,35 +73,35 @@ else
 
 <p>
 
-<form method="get">
+<form method="post">
 	<span><?php __("Pattern"); ?></span>
 	<label for="pattern_type_login">Login</label><input type="radio" name="pattern_type" value="login" id="pattern_type_login" <?php if (!$pattern_type || $pattern_type === 'login') echo ' checked="checked" '; ?>/>&nbsp;
 	<label for="pattern_type_domain">Domaine</label><input type="radio" name="pattern_type" value="domaine" id="pattern_type_domain" <?php if ($pattern_type === 'domaine') echo ' checked="checked" '; ?>/>
 <!--	<label for="pattern"><?php __("Login pattern"); ?></label>&nbsp; -->
-	<input type="text" id="pattern" name="pattern" value="<?php echo $pattern ? $pattern : '*'; ?>"/> <input type="submit" class="inb" value="<?php __("submit"); ?>" />
+	<input type="text" id="pattern" name="pattern" value="<?php echo $pattern ?>"/> <input type="submit" class="inb" value="<?php __("submit"); ?>" />
 </form>
 
 </p>
 
 <?php
-	if (isset($error) && !empty($error) ) {
-	  echo '<p class="error">' , $error, '</p>';
-	}
-	if (!$r) {
-		__("Enter a pattern for login list");
-		exit (0);
-	}
+if ( !empty($error) ) {
+  echo '<p class="error">' , $error, '</p>';
+}
+if (!$r) {
+  __("Enter a pattern for login list");
+  exit (0);
+}
 ?>
 <p>
 <?php __("Here is the list of hosted AlternC accounts"); ?> (<?php printf(_("%s accounts"),count($r)); ?>)
 </p>
 <?php
+$list_creators = $admin->get_creator_list();
 
 if ($subadmin==1 || $cuid==2000) {
 if($show != 'all') {
   echo '<p><span class="ina"><a href="adm_list.php?show=all">' . _('List all AlternC accounts') . '</a></span>';
   if ($subadmin==1 || $cuid==2000) {
-    $list_creators = $admin->get_creator_list();
     $infos_creators = array();
 
     foreach ($list_creators as $key => $val) {
@@ -241,8 +242,9 @@ for($z=0;$z<$rz;$z++){
 <?php		  if($admin->checkcreator($val['uid'])) { ?>
 		   <a href="adm_quotaedit.php?uid=<?php echo $val["uid"] ?>" title="<?php __("Quotas"); ?>">[&nbsp;<?php __("Q"); ?>&nbsp;]</a>
 							  <?php } ?>
+<?php $creator_name = ( ($val['creator'] == '0')?_("himself"):$list_creators[$val['creator']]['login']) ?>
 		</td>
-		<td style="padding-right: 2px; border-right: 1px solid black; <?php if ($val["su"]) echo "color: red"; ?>"><b><label for="id_c_<?php echo $val["uid"]; ?>"><?php echo $val["login"] ?></label></b></td>
+		<td style="padding-right: 2px; border-right: 1px solid black; <?php if ($val["su"]) echo "color: red"; ?>"><b><label title="<?php printf(_("Creator: %s"), $creator_name);?>" for="id_c_<?php echo $val["uid"]; ?>"><?php echo $val["login"] ?></label></b></td>
 <?php
 $val=$r[$z+$rz];
 if (is_array($val)) {
@@ -259,7 +261,8 @@ if (is_array($val)) {
 		   <a href="adm_quotaedit.php?uid=<?php echo $val["uid"] ?>" title="<?php __("Quotas"); ?>">[&nbsp;<?php __("Q"); ?>&nbsp;]</a>
 							  <?php } ?>
 		</td>
-		<td style="padding-right: 2px; border-right: 1px solid black; <?php if ($val["su"]) echo "color: red"; ?>"><b><label for="id_c_<?php echo $val["uid"]; ?>"><?php echo $val["login"] ?></label></b></td>
+<?php $creator_name = ( ($val['creator'] == '0')?_("himself"):$list_creators[$val['creator']]['login']) ?>
+		<td style="padding-right: 2px; border-right: 1px solid black; <?php if ($val["su"]) echo "color: red"; ?>"><b><label title="<?php printf(_("Creator: %s"), $creator_name);?>" for="id_c_<?php echo $val["uid"]; ?>"><?php echo $val["login"] ?></label></b></td>
 <?php
 
 } else echo '<td style="padding-right: 2px; border-right: 1px solid;" colspan="3"></td></tr>';
@@ -283,7 +286,8 @@ if (is_array($val)) {
 		   <a href="adm_quotaedit.php?uid=<?php echo $val["uid"] ?>" title="<?php __("Quotas"); ?>">[&nbsp;<?php __("Q"); ?>&nbsp;]</a>
 							  <?php } ?>
 		</td>
-		<td style="padding-right: 2px; border-right: 1px solid black; <?php if ($val["su"]) echo "color: red"; ?>"><b><label for="id_c_<?php echo $val["uid"]; ?>"><?php echo $val["login"] ?></label></b></td>
+<?php $creator_name = ( ($val['creator'] == '0')?_("himself"):$list_creators[$val['creator']]['login']) ?>
+		<td style="padding-right: 2px; border-right: 1px solid black; <?php if ($val["su"]) echo "color: red"; ?>"><b><label title="<?php printf(_("Creator: %s"), $creator_name);?>" for="id_c_<?php echo $val["uid"]; ?>"><?php echo $val["login"] ?></label></b></td>
 	</tr>
 <?php
 	} else echo '<td style="padding-right: 2px; border-right: 1px solid;" colspan="3"></td></tr>';
