@@ -47,7 +47,7 @@ getFields($fields);
 if ($short!=-1) {
   $mem->adminpref($short);
   $mem->user["admlist"]=$short;
- }
+}
 
 $subadmin=variable_get("subadmin_restriction", 0);
 
@@ -60,38 +60,34 @@ if ($show=="all" && !$subadmin==1 && $cuid != 2000) {
 }
 
 if ($pattern && $pattern_type) {
-	$r=$admin->get_list($show == 'all' ? 1 : 0, $creator, $pattern, $pattern_type);
+  $r=$admin->get_list($show == 'all' ? 1 : 0, $creator, $pattern, $pattern_type);
+} else {
+  $r = FALSE;
 }
-else
-	$r = FALSE;
 ?>
+
 <h3><?php __("AlternC account list"); ?></h3>
 <hr id="topbar"/>
 <br />
 
-  <p><span class="ina"><a href="adm_add.php"><?php __("Create a new AlternC account"); ?></a></span></p>
+<p><span class="ina"><a href="adm_add.php"><?php __("Create a new AlternC account"); ?></a></span></p>
 
 <p>
-
 <form method="post">
-	<span><?php __("Pattern"); ?></span>
-	<label for="pattern_type_login">Login</label><input type="radio" name="pattern_type" value="login" id="pattern_type_login" <?php if (!$pattern_type || $pattern_type === 'login') echo ' checked="checked" '; ?>/>&nbsp;
-	<label for="pattern_type_domain">Domaine</label><input type="radio" name="pattern_type" value="domaine" id="pattern_type_domain" <?php if ($pattern_type === 'domaine') echo ' checked="checked" '; ?>/>
-<!--	<label for="pattern"><?php __("Login pattern"); ?></label>&nbsp; -->
-	<input type="text" id="pattern" name="pattern" value="<?php echo $pattern ?>"/> <input type="submit" class="inb" value="<?php __("submit"); ?>" />
+  <span><?php __("Pattern"); ?></span>
+  <label for="pattern_type_login">Login</label><input type="radio" name="pattern_type" value="login" id="pattern_type_login" <?php if (!$pattern_type || $pattern_type === 'login') echo ' checked="checked" '; ?>/>&nbsp;
+  <label for="pattern_type_domain">Domaine</label><input type="radio" name="pattern_type" value="domaine" id="pattern_type_domain" <?php if ($pattern_type === 'domaine') echo ' checked="checked" '; ?>/>
+  <input type="text" id="pattern" name="pattern" value="<?php echo $pattern ?>"/> <input type="submit" class="inb" value="<?php __("submit"); ?>" />
 </form>
-
 </p>
 
 <?php
 if ( !empty($error) ) {
   echo '<p class="error">' , $error, '</p>';
 }
-if (!$r) {
-  __("Enter a pattern for login list");
-  exit (0);
-}
+
 ?>
+
 <p>
 <?php __("Here is the list of hosted AlternC accounts"); ?> (<?php printf(_("%s accounts"),count($r)); ?>)
 </p>
@@ -113,20 +109,19 @@ if($show != 'all') {
     }
     echo "</p>";
   }
-} else {
+} else { // if show != all
   echo '<p><span class="ina"><a href="adm_list.php">' . _('List only my accounts') . '</a></span></p>';
-}
+} 
 }// END ($subadmin==1 || $cuid==2000)
 
-if (!is_array($r)) {
-  echo '<p class="error">' , _("No account defined for now"), '</p>';
-} else {
+if (!is_array($r) || empty($r) ) {
+  echo '<p class="error">'._("No account defined for now").'</p>';
+  include('foot');
+} 
 ?>
-
 
 <form method="post" action="adm_dodel.php">
 <?php
-
 // Depending on the admin's choice, let's show a short list or a long list.
 
 if ($mem->user["admlist"]==0) { // Normal (large) mode
@@ -154,28 +149,27 @@ if ($mem->user["admlist"]==0) { // Normal (large) mode
 reset($r);
 
 $col=1;
-while (list($key,$val)=each($r))
-	{
+while (list($key,$val)=each($r)) {
 	$col=3-$col;
 ?>
 	<tr class="lst<?php echo $col; ?>">
 
 <?php
  if ($val["su"]) { ?>
-		   <td id="user_<?php echo $val["uid"]; ?>">&nbsp;</td>
+   <td id="user_<?php echo $val["uid"]; ?>">&nbsp;</td>
 <?php } else { ?>
- <td><input type="checkbox" class="inc" name="d[]" id="user_<?php echo $val["uid"]; ?>" value="<?php echo $val["uid"]; ?>" /></td>
-<?php } ?>
-		<td <?php if ($val["su"]) echo 'style="color: red"'; ?>><label for="user_<?php echo $val["uid"]; ?>"><b><?php echo $val["login"] ?></b></label></td>
-		<td><a href="mailto:<?php echo $val["mail"]; ?>"><?php echo $val["nom"]." ".$val["prenom"] ?></a>&nbsp;</td>
-		<td><?php echo $val["parentlogin"] ?></td>
-		<td><?php echo format_date(_('%3$d-%2$d-%1$d'),$val["created"]); ?></td>
-		<td><?php echo $val["type"] ?></td>
-		<td><?php echo $val["lastlogin"] ?></td>
-                <td><?php echo $val["lastip"] ?></td>
-		<td><?php echo $val["lastfail"] ?></td>
-		<td><div class="<?php echo 'exp' . $admin->renew_get_status($val['uid']) ?>"><?php echo $admin->renew_get_expiry($val['uid']) ?></div></td>
-	</tr>
+   <td><input type="checkbox" class="inc" name="d[]" id="user_<?php echo $val["uid"]; ?>" value="<?php echo $val["uid"]; ?>" /></td>
+<?php } // val['su'] ?>
+    <td <?php if ($val["su"]) echo 'style="color: red"'; ?>><label for="user_<?php echo $val["uid"]; ?>"><b><?php echo $val["login"] ?></b></label></td>
+    <td><a href="mailto:<?php echo $val["mail"]; ?>"><?php echo $val["nom"]." ".$val["prenom"] ?></a>&nbsp;</td>
+    <td><?php echo $val["parentlogin"] ?></td>
+    <td><?php echo format_date(_('%3$d-%2$d-%1$d'),$val["created"]); ?></td>
+    <td><?php echo $val["type"] ?></td>
+    <td><?php echo $val["lastlogin"] ?></td>
+    <td><?php echo $val["lastip"] ?></td>
+    <td><?php echo $val["lastfail"] ?></td>
+    <td><div class="<?php echo 'exp' . $admin->renew_get_status($val['uid']) ?>"><?php echo $admin->renew_get_expiry($val['uid']) ?></div></td>
+  </tr>
 
 <tr class="lst<?php echo $col; ?>" >
 <td/><td ><i><?php echo _("DB:").' '.$val['db_server_name']?></i></td>
@@ -200,7 +194,7 @@ while (list($key,$val)=each($r))
 </td>
 </tr>
 <?php
-	}
+} // while (list($key,$val)=each($r)) {      
 
 } // NORMAL MODE
 if ($mem->user["admlist"]==1) { // SHORT MODE
@@ -213,9 +207,10 @@ if ($mem->user["admlist"]==1) { // SHORT MODE
 <p>
 <span class="ina" style="float:right;"><a href="adm_list.php?short=0"><?php __("Complete view"); ?></a></span> &nbsp;
 <?php  if (count($r)>50) { ?>
-<input type="submit" class="inb" name="submit" value="<?php __("Delete checked accounts"); ?>" />
-<?php } ?>
+  <input type="submit" class="inb" name="submit" value="<?php __("Delete checked accounts"); ?>" />
+<?php } // finc count > 50 ?>
 </p>
+
 <table class="tlist" style="clear:both;">
 <tr>
    <th colspan="2"> </th><th><?php __("Account"); ?></th>
@@ -225,81 +220,33 @@ if ($mem->user["admlist"]==1) { // SHORT MODE
 <?php
 reset($r);
 
-$rz=ceil(count($r)/3);
+$count_r = 0;
+foreach ($r as $val) { 
+  if ( ($count_r % 3) == 0 ) { echo '<tr class="lst">'; } 
 
-for($z=0;$z<$rz;$z++){
-  $val=$r[$z];
-?>
-	<tr class="lst">
-<?php if ($val["su"]) { ?>
-			<td>&nbsp;</td>
-<?php } else { ?>
- <td align="center"><input type="checkbox" class="inc" name="d[]" value="<?php echo $val["uid"]; ?>" id="id_c_<?php echo $val["uid"]; ?>" /></td>
-<?php } ?>
-		<td align="center">
-		   <a href="adm_login.php?id=<?php echo $val["uid"];?>" title="<?php __("Connect as"); ?>">[&nbsp;<?php __("C"); ?>&nbsp;]</a>
-		   <a href="adm_edit.php?uid=<?php echo $val["uid"] ?>" title="<?php __("Edit"); ?>">[&nbsp;<?php __("E"); ?>&nbsp;]</a>
-<?php		  if($admin->checkcreator($val['uid'])) { ?>
-		   <a href="adm_quotaedit.php?uid=<?php echo $val["uid"] ?>" title="<?php __("Quotas"); ?>">[&nbsp;<?php __("Q"); ?>&nbsp;]</a>
-							  <?php } ?>
-<?php $creator_name = ( ($val['creator'] == '0')?_("himself"):$list_creators[$val['creator']]['login']) ?>
-		</td>
-		<td style="padding-right: 2px; border-right: 1px solid black; <?php if ($val["su"]) echo "color: red"; ?>"><b><label title="<?php printf(_("Creator: %s"), $creator_name);?>" for="id_c_<?php echo $val["uid"]; ?>"><?php echo $val["login"] ?></label></b></td>
-<?php
-$val=$r[$z+$rz];
-if (is_array($val)) {
-?>
-<?php if ($val["su"]) { ?>
-			<td>&nbsp;</td>
-<?php } else { ?>
- <td align="center"><input type="checkbox" class="inc" name="d[]" value="<?php echo $val["uid"]; ?>" id="id_c_<?php echo $val["uid"]; ?>" /></td>
-<?php } ?>
-		<td align="center">
-		   <a href="adm_login.php?id=<?php echo $val["uid"];?>" title="<?php __("Connect as"); ?>">[&nbsp;<?php __("C"); ?>&nbsp;]</a>
-		   <a href="adm_edit.php?uid=<?php echo $val["uid"] ?>" title="<?php __("Edit"); ?>">[&nbsp;<?php __("E"); ?>&nbsp;]</a>
-<?php		  if($admin->checkcreator($val['uid'])) { ?>
-		   <a href="adm_quotaedit.php?uid=<?php echo $val["uid"] ?>" title="<?php __("Quotas"); ?>">[&nbsp;<?php __("Q"); ?>&nbsp;]</a>
-							  <?php } ?>
-		</td>
-<?php $creator_name = ( ($val['creator'] == '0')?_("himself"):$list_creators[$val['creator']]['login']) ?>
-		<td style="padding-right: 2px; border-right: 1px solid black; <?php if ($val["su"]) echo "color: red"; ?>"><b><label title="<?php printf(_("Creator: %s"), $creator_name);?>" for="id_c_<?php echo $val["uid"]; ?>"><?php echo $val["login"] ?></label></b></td>
-<?php
-
-} else echo '<td style="padding-right: 2px; border-right: 1px solid;" colspan="3"></td>';
-
-$val=null;
-if (isset($r[$z+2*$rz])) {
-  $val=$r[$z+2*$rz];
-}
- 
-if (is_array($val)) {
-?>
-<?php if ($val["su"]) { ?>
-			<td id="id_c_<?php echo $val["uid"]; ?>">&nbsp;</td>
-<?php } else { ?>
- <td align="center"><input type="checkbox" class="inc" name="d[]" value="<?php echo $val["uid"]; ?>" id="id_c_<?php echo $val["uid"]; ?>" /></td>
-<?php } ?>
-		<td align="center">
-		   <a href="adm_login.php?id=<?php echo $val["uid"];?>" title="<?php __("Connect as"); ?>">[&nbsp;<?php __("C"); ?>&nbsp;]</a>
-		   <a href="adm_edit.php?uid=<?php echo $val["uid"] ?>" title="<?php __("Edit"); ?>">[&nbsp;<?php __("E"); ?>&nbsp;]</a>
-<?php		  if($admin->checkcreator($val['uid'])) { ?>
-		   <a href="adm_quotaedit.php?uid=<?php echo $val["uid"] ?>" title="<?php __("Quotas"); ?>">[&nbsp;<?php __("Q"); ?>&nbsp;]</a>
-							  <?php } ?>
-		</td>
-<?php $creator_name = ( ($val['creator'] == '0')?_("himself"):$list_creators[$val['creator']]['login']) ?>
-		<td style="padding-right: 2px; border-right: 1px solid black; <?php if ($val["su"]) echo "color: red"; ?>"><b><label title="<?php printf(_("Creator: %s"), $creator_name);?>" for="id_c_<?php echo $val["uid"]; ?>"><?php echo $val["login"] ?></label></b></td>
-	</tr>
-<?php
-	} else echo '<td style="padding-right: 2px; border-right: 1px solid;" colspan="3"></td></tr>';
-} // for loop
-} // Short Mode
-
-
+  if ($val["su"]) { 
+    echo '<td>&nbsp;</td>'; 
+  } else { 
+    echo '<td align="center"><input type="checkbox" class="inc" name="d[]" value="'.$val["uid"].'" id="id_c_'.$val["uid"].'" /></td>';
+  } // if $val["su"] ?>
+  <td align="center">
+    <a href="adm_login.php?id=<?php echo $val["uid"];?>" title="<?php __("Connect as"); ?>">[&nbsp;<?php __("C"); ?>&nbsp;]</a>
+    <a href="adm_edit.php?uid=<?php echo $val["uid"] ?>" title="<?php __("Edit"); ?>">[&nbsp;<?php __("E"); ?>&nbsp;]</a>
+    <?php if($admin->checkcreator($val['uid'])) { ?>
+      <a href="adm_quotaedit.php?uid=<?php echo $val["uid"] ?>" title="<?php __("Quotas"); ?>">[&nbsp;<?php __("Q"); ?>&nbsp;]</a><?php 
+    } // $admin->checkcreator
+    $creator_name = ( ($val['creator'] == '0')?_("himself"):$list_creators[$val['creator']]['login']) ?>
+  </td>
+  <td style="padding-right: 2px; border-right: 1px solid black; <?php if ($val["su"]) echo "color: red"; ?>"><b><label title="<?php printf(_("Creator: %s"), $creator_name);?>" for="id_c_<?php echo $val["uid"]; ?>"><?php echo $val["login"] ?></label></b></td>
+  <?php 
+  if ( ($count_r % 3) == 2 ) { echo '</tr>'; }
+  ++$count_r;
+} // foreach $r 
 ?>
 </table>
 <p><input type="submit" class="inb" name="submit" value="<?php __("Delete checked accounts"); ?>" /></p>
 </form>
 <?php
- }
+} // SHORT MODE
+include_once("foot.php"); 
 ?>
-<?php include_once("foot.php"); ?>
