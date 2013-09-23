@@ -39,6 +39,7 @@ $fields = array (
 	"creator" => array("request", "integer", 0),
 	"short"   => array("request", "integer", -1),
 	"pattern" => array("request", "string", FALSE),
+        "pattern_type" => array("request", "string", FALSE),
 );
 getFields($fields);
 
@@ -57,13 +58,12 @@ if ($show=="all" && !$subadmin==1 && $cuid != 2000) {
 	exit();
 }
 
-
-if ($pattern)
-	$r=$admin->get_list($show == 'all' ? 1 : 0, $creator, $pattern);
+if ($pattern && $pattern_type) {
+	$r=$admin->get_list($show == 'all' ? 1 : 0, $creator, $pattern, $pattern_type);
+}
 else
 	$r = FALSE;
 ?>
-
 <h3><?php __("AlternC account list"); ?></h3>
 <hr id="topbar"/>
 <br />
@@ -73,7 +73,10 @@ else
 <p>
 
 <form method="get">
-	<label for="pattern"><?php __("Login pattern"); ?></label>&nbsp;
+	<span><?php __("Pattern"); ?></span>
+	<label for="pattern_type_login">Login</label><input type="radio" name="pattern_type" value="login" id="pattern_type_login" <?php if ($pattern_type === 'login') echo ' checked="checked" '; ?>/>&nbsp;
+	<label for="pattern_type_domain">Domaine</label><input type="radio" name="pattern_type" value="domaine" id="pattern_type_domain" <?php if ($pattern_type === 'domaine') echo ' checked="checked" '; ?>/>
+<!--	<label for="pattern"><?php __("Login pattern"); ?></label>&nbsp; -->
 	<input type="text" id="pattern" name="pattern" value="<?php echo $pattern ? $pattern : '*'; ?>"/> <input type="submit" class="inb" value="<?php __("submit"); ?>" />
 </form>
 

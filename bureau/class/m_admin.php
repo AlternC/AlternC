@@ -281,7 +281,7 @@ class m_admin {
    * table <code>membres</code> and <code>local</code> of all the accounts.
    * Returns FALSE if an error occurs.
    */
-  function get_list($all=0,$creator=0,$pattern=FALSE) {
+  function get_list($all=0,$creator=0,$pattern=FALSE,$pattern_type=FALSE) {
     global $err,$mem,$cuid;
     $err->log("admin","get_list");
     if (!$this->enabled) {
@@ -290,28 +290,50 @@ class m_admin {
     }
     $db=new DB_System();
 
-    $request = 'SELECT uid FROM membres WHERE 1';
 
-    if ($pattern && preg_match('/[a-zA-Z0-9]+/', $pattern))
-	$request .= sprintf(' AND login LIKE "%%%s%%"', $pattern);
+    if ($pattern) {
 
-    if ($creator) 
-	$request .= sprintf(' AND creator = "%s"', $creator);
-    if ($mem->user['uid']!=2000 && !$all)
-	$request .= sprintf(' AND creator = "%s"', $cuid);
+  	if ($pattern_type === 'domaine') {
 
-    $request .= ' ORDER BY login;';
+	   $request = 'SELECT compte AS uid FROM domaines WHERE 1';
 
-/*    if ($creator)
-    {
-      // Limit listing to a specific reseller
-      $db->query("SELECT uid FROM membres WHERE creator='".$creator."' ORDER BY login;");
-    } elseif ($mem->user['uid']==2000 || $all) {
-      $db->query("SELECT uid FROM membres ORDER BY login;");
+	   if ($pattern && preg_match('/[.a-zA-Z0-9]+/', $pattern))
+		$request .= sprintf(' AND domaine LIKE "%%%s%%"', $pattern);
+
+        } elseif ($pattern_type === 'login') {
+
+	   $request = 'SELECT uid FROM membres WHERE 1';
+
+           if ($pattern && preg_match('/[a-zA-Z0-9]+/', $pattern))
+		$request .= sprintf(' AND login LIKE "%%%s%%"', $pattern);
+
+	   if ($creator) 
+		$request .= sprintf(' AND creator = "%s"', $creator);
+
+	   if ($mem->user['uid']!=2000 && !$all)
+		$request .= sprintf(' AND creator = "%s"', $cuid);
+
+	   $request .= ' ORDER BY login;';
+
+	} else {
+
+ 	   $err->raise("admin", _("Invalid pattern type provided. Are you even performing a legitimate action?"));
+	   return FALSE;
+
+        }
+
     } else {
-      $db->query("SELECT uid FROM membres WHERE creator='".$cuid."' ORDER BY login;");
+  
+	if ($creator)
+	{
+      	    // Limit listing to a specific reseller
+     	    $request = "SELECT uid FROM membres WHERE creator='".$creator."' ORDER BY login;";
+	} elseif ($mem->user['uid']==2000 || $all) {
+	      $request = "SELECT uid FROM membres ORDER BY login;";
+        } else {
+              $request = "SELECT uid FROM membres WHERE creator='".$cuid."' ORDER BY login;";
+        }
     }
-*/
 
     $db->query($request);
 
