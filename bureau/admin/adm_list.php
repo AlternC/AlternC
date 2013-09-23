@@ -265,7 +265,7 @@ if (is_array($val)) {
 		<td style="padding-right: 2px; border-right: 1px solid black; <?php if ($val["su"]) echo "color: red"; ?>"><b><label title="<?php printf(_("Creator: %s"), $creator_name);?>" for="id_c_<?php echo $val["uid"]; ?>"><?php echo $val["login"] ?></label></b></td>
 <?php
 
-} else echo '<td style="padding-right: 2px; border-right: 1px solid;" colspan="3"></td></tr>';
+} else echo '<td style="padding-right: 2px; border-right: 1px solid;" colspan="3"></td>';
 
 $val=null;
 if (isset($r[$z+2*$rz])) {
