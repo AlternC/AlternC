@@ -30,8 +30,9 @@ require_once("../class/config.php");
 include_once("head.php");
 
 if (!$admin->enabled) {
-	__("This page is restricted to authorized staff");
-	exit();
+  __("This page is restricted to authorized staff");
+  include_once('foot.php');
+  exit();
 }
 
 $fields = array (
@@ -72,14 +73,14 @@ if ($pattern && $pattern_type) {
 
 <p><span class="ina"><a href="adm_add.php"><?php __("Create a new AlternC account"); ?></a></span></p>
 
+<form method="post" action="adm_list.php" >
 <p>
-<form method="post">
   <span><?php __("Pattern"); ?></span>
   <label for="pattern_type_login">Login</label><input type="radio" name="pattern_type" value="login" id="pattern_type_login" <?php if (!$pattern_type || $pattern_type === 'login') echo ' checked="checked" '; ?>/>&nbsp;
   <label for="pattern_type_domain">Domaine</label><input type="radio" name="pattern_type" value="domaine" id="pattern_type_domain" <?php if ($pattern_type === 'domaine') echo ' checked="checked" '; ?>/>
   <input type="text" id="pattern" name="pattern" value="<?php echo $pattern ?>"/> <input type="submit" class="inb" value="<?php __("submit"); ?>" />
-</form>
 </p>
+</form>
 
 <?php
 if ( !empty($error) ) {
@@ -107,8 +108,8 @@ if($show != 'all') {
     if (count($infos_creators)) {
       echo ' ('._("Or only the accounts of:")." ". implode(', ', $infos_creators) . ')';
     }
-    echo "</p>";
   }
+  echo "</p>";
 } else { // if show != all
   echo '<p><span class="ina"><a href="adm_list.php">' . _('List only my accounts') . '</a></span></p>';
 } 
@@ -132,7 +133,7 @@ if ($mem->user["admlist"]==0) { // Normal (large) mode
 <input type="submit" class="inb" name="submit" value="<?php __("Delete checked accounts"); ?>" />
 <?php } ?>
 </p>
-<table class="tlist" style="clear: both;">
+<table class="tlist" style="clear:both;">
 <tr>
 <th></th>
 <th><?php __("Account"); ?></th>
@@ -174,7 +175,7 @@ while (list($key,$val)=each($r)) {
 <tr class="lst<?php echo $col; ?>" >
 <td/><td ><i><?php echo _("DB:").' '.$val['db_server_name']?></i></td>
 <td colspan="8" >
-<div name="admlistbtn">
+<div id="admlistbtn">
 <span class="ina<?php if ($col==2) echo "v"; ?> lst<?php echo $col; ?>">
   <a href="adm_login.php?id=<?php echo $val["uid"];?>"><?php __("Connect as"); ?></a>
 </span>&nbsp;
@@ -195,6 +196,7 @@ while (list($key,$val)=each($r)) {
 </tr>
 <?php
 } // while (list($key,$val)=each($r)) {      
+echo '</table></form>';
 
 } // NORMAL MODE
 if ($mem->user["admlist"]==1) { // SHORT MODE
