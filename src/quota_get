@@ -23,7 +23,7 @@ command -v $QUOTA >/dev/null || { echo "Quotas uninstalled"; exit 0; }
 
 # The second line is the one interesting
 # We look precisely on the HTML directory. Why ? because it's surely
-# the bigger one, and if someone separate it we need to look this one
+# the bigger one, and if someone separate it we need to look this one
 # particulary. It should be interesting to cumulate quota of all mounted directory.
 
 DATA_PART=`$DF "${ALTERNC_HTML}" 2>/dev/null | $AWK 'NR==2 { print $1 }'`

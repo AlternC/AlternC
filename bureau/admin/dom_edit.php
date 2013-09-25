@@ -79,7 +79,7 @@ function destruction_alert() {
   if (document.forms["fdns"].email[1].checked) {
     if ( confirm("<?php __("Are you sure you want to do this? This will DELETE ALL the mailboxes, messages and aliases on this domain ?"); ?>") ) {
       return true;
-    } else {
+    } else {
       return false;
     }
   } else {

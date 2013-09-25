@@ -861,7 +861,7 @@ ORDER BY
   /* ----------------------------------------------------------------- */
   /** hook function called by AlternC when a domain is created for
    * the current user account 
-   * This function create a postmaster mail which is an alias to LOGIN @ FQDN
+   * This function create a postmaster mail which is an alias to LOGIN @ FQDN
    * wich is a dynamic alias to the alternc's account mail
    * @param string $domain_id Domain that has just been created
    * @access private

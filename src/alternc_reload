@@ -73,7 +73,7 @@ if [ ! -z "$RELOAD_ZONES" ]; then
         apache_reload
         ;;
       *)
-        # FIXME: should reload only concerned zones
+        # FIXME: should reload only concerned zones
         #$sudo rndc reload "$zone" || echo "Cannot reload bind for zone $zone" 
         $sudo rndc reload || echo "Cannot reload bind for zone $zone" 
         ;;

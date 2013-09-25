@@ -30,7 +30,7 @@ launch_hooks() {
 }
 
 host_conffile() {
-    # Return the absolute path of a conf file for a FQDN
+    # Return the absolute path of a conf file for a FQDN
     local FQDN="$1"
     local U_ID=$(get_uid_by_domain "$FQDN")
     local CONFFILE="$VHOST_DIR/${U_ID:(-1)}/$U_ID/$FQDN.conf"

@@ -160,7 +160,7 @@ while (list($key,$val)=each($r)) {
    <td id="user_<?php echo $val["uid"]; ?>">&nbsp;</td>
 <?php } else { ?>
    <td><input type="checkbox" class="inc" name="d[]" id="user_<?php echo $val["uid"]; ?>" value="<?php echo $val["uid"]; ?>" /></td>
-<?php } // val['su'] ?>
+<?php } // val['su'] ?>
     <td <?php if ($val["su"]) echo 'style="color: red"'; ?>><label for="user_<?php echo $val["uid"]; ?>"><b><?php echo $val["login"] ?></b></label></td>
     <td><a href="mailto:<?php echo $val["mail"]; ?>"><?php echo $val["nom"]." ".$val["prenom"] ?></a>&nbsp;</td>
     <td><?php echo $val["parentlogin"] ?></td>

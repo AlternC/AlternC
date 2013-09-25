@@ -399,7 +399,7 @@ if ! grep -e "${include_str/\"/\\\"}" $pma_config > /dev/null 2>&1; then
 fi
 
 # Le template de /etc/alternc/phpmyadmin.inc.php viens d'être réappliqué, on 
-# regénére la liste des serveurs MySQL disponible dedans.
+# regénére la liste des serveurs MySQL disponible dedans.
 mysql_query "select id,host,name from db_servers;" | while read id host name ; do
 echo "
 // Server #$id in db_servers

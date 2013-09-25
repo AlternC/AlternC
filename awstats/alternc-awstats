@@ -4,7 +4,7 @@
 # Appelé avec "all" lance les stats avec tous les fichiers .gz situés dans /var/log/apache
 # Appelé avec un nom de domaine en paramètre, rescanne tous les fichiers .gz pour ce domaine uniquement.
 
-# Include some usefull functions
+# Include some usefull functions
 . /usr/lib/alternc/functions.sh
 
 # Regenerate the awstat etc cache files :

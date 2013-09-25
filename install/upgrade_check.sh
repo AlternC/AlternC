@@ -70,7 +70,7 @@ for file in $( ls $extensions | sort -n ) ; do
 		  	sh $file || true
 			;;
                   *)
-			# Do nothing
+			# Do nothing
 			;;
 		  esac
 		fi
