@@ -39,7 +39,7 @@ include("head.php");
 <h4><?php __("FTP accounts"); ?></h4>
 
 <table>
-   <tr><th><?php __("login") ;></th><th><?php __("password"); ?></th><th><?php __("root directory"); ?></th></tr>
+   <tr><th><?php __("login"); ?></th><th><?php __("password"); ?></th><th><?php __("root directory"); ?></th></tr>
 
 <?php
 
