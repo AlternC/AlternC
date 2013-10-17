@@ -29,11 +29,11 @@
 */
 require_once("../../class/config_nochk.php");
 $fields = array (
-        "hid"                => array ("post", "integer", ""),
+        "hid"                => array ("request", "integer", ""),
 );
 getFields($fields);
 
-header("Location: ".$help_baseurl."go?version=".urlencode($L_VERSION_HELP)."&hid=$hid");
+header("Location: ".$help_baseurl."go.php?version=".urlencode($L_VERSION_HELP)."&lang=".$lang."&hid=".$hid);
 
 exit();
 

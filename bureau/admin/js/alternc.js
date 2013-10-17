@@ -88,8 +88,8 @@ function checkObj(name)
 function help(hid) {
 	var top=100; /* (10-screen.height); */
 	var left=100; /*(10-screen.width); */
-	var largeur=700;
-	var hauteur=550;
+	var largeur=800;
+	var hauteur=700;
 	window.open('./aide/help.php?hid='+hid,'help','top='+top+',left='+left+',width='+largeur+',height='+hauteur+',scrollbars=yes');
 }
 
