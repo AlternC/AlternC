@@ -117,7 +117,7 @@ if($show != 'all') {
 
 if (!is_array($r) || empty($r) ) {
   echo '<p class="error">'._("No account defined for now").'</p>';
-  include('foot');
+  include('foot.php');
 } 
 ?>
 
