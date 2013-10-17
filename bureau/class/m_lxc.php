@@ -86,7 +86,7 @@ class m_lxc implements vm {
    * or FALSE if an error occurred. In that case $error[] is set.
    */
   private function sendMessage($params) {
-    global $L_FQDN;
+    global $L_FQDN,$hooks;
     $fp = fsockopen($this->IP, $this->PORT, $errno, $errstr, $this->TIMEOUT);
     if (!$fp) {
       $this->error[] = 'Unable to connect';
@@ -95,9 +95,15 @@ class m_lxc implements vm {
     // Authenticate:
     $params['server']=$L_FQDN;
     $params['key']=$this->KEY;
+    // MySQL Host for this user ? 
+    $moreparams=$hooks->invoke("lxc_params",array($params));
+    foreach($moreparams as $p) {
+      foreach($p as $k=>$v) 
+	$params[$k]=$v;
+    }
 
-    $msg = sprintf("%s\n", $crypto->encrypt(serialize($params), $this->KEY) );
-    if (fwrite ($fp, $msg) < 0) {
+    $msg = serialize($params);
+    if (fwrite ($fp, $msg."\n") < 0) {
       $this->error[] = 'Unable to send data';
       return FALSE;
     }

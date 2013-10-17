@@ -959,6 +959,25 @@ class m_mysql {
 
 
   /* ----------------------------------------------------------------- */
+  /** Hook function called by the lxc class to set mysql_host and port 
+   * parameters 
+   * @param $name string name of the quota
+   * @return integer the number of service used or false if an error occured
+   * @access private
+   */
+  function hook_lxc_params($params) {
+    global $err;
+    $err->log("mysql","alternc_get_quota");
+    $p=array();
+    if (isset($this->dbus["Host"]) && $this->dbus["Host"]!="") {
+      $p["mysql_host"] = $this->dbus["Host"];
+      $p["mysql_port"] = 3306;
+    }
+    return $p;
+  }
+  
+
+  /* ----------------------------------------------------------------- */
   /** Hook function called by the quota class to compute user used quota
    * Returns the used quota for the $name service for the current user.
    * @param $name string name of the quota
