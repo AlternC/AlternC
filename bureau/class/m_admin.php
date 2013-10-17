@@ -664,9 +664,11 @@ EOF;
       $ssq="";
     }
 
+    $old_mem = $this->get($uid);
+
     if (($db->query("UPDATE local SET nom='$nom', prenom='$prenom' WHERE uid='$uid';"))
 	     &&($db->query("UPDATE membres SET mail='$mail', canpass='$canpass', enabled='$enabled', `type`='$type', notes='$notes' $ssq WHERE uid='$uid';"))){
-      if($reset_quotas == "on") {
+      if($reset_quotas == "on" || $type != $old_mem['type'] ) {
         $quota->addquotas();
         $quota->synchronise_user_profile();
       }
