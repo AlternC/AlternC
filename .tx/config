@@ -1,5 +1,5 @@
 [main]
-host = https://www.transifex.net
+host = https://www.transifex.com
 
 [alternc.alternc]
 source_file = lang/en_US.po

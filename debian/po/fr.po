@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: AlternC, hosting control panel\n"
 "Report-Msgid-Bugs-To: https://alternc.org/report/1\n"
 "POT-Creation-Date: 2013-03-22 12:11+0000\n"
-"PO-Revision-Date: 2013-09-12 16:18+0000\n"
-"Last-Translator: fufroma <fufroma@nnx.com>\n"
+"PO-Revision-Date: 2013-10-17 16:55+0000\n"
+"Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
 "Language-Team: French (France) (http://www.transifex.com/projects/p/alternc/"
 "language/fr_FR/)\n"
 "MIME-Version: 1.0\n"
@@ -173,77 +173,44 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../alternc.templates:7001
-#, fuzzy
-#| msgid "The path where AlternC is installed:"
 msgid "The path where alternc's users html files will be put"
-msgstr "Emplacement d'AlternC : "
+msgstr ""
 
 #. Type: string
 #. Description
 #: ../alternc.templates:7001
-#, fuzzy
-#| msgid ""
-#| "AlternC will create a mysql administrator account. Please choose it's "
-#| "username here. The default value should be good in most case."
 msgid ""
 "Please enter the directory name where you want html user files to be put. "
 "The default value should be good in most cases."
 msgstr ""
-"AlternC va créer un compte administrateur sur le serveur mysql. Entrez le "
-"nom d'utilisateur qui sera créé. La valeur par défaut convient dans la "
-"plupart des cas."
 
 #. Type: string
 #. Description
-#: ../alternc.templates:7001
-msgid "This directory wil contain every alternc users personnal directories."
+#: ../alternc.templates:8001
+msgid "The path where alternc's users mails will be put"
 msgstr ""
 
 #. Type: string
 #. Description
 #: ../alternc.templates:8001
-#, fuzzy
-#| msgid "The path where AlternC is installed:"
-msgid "The path where alternc's users mails will be put"
-msgstr "Emplacement d'AlternC : "
-
-#. Type: string
-#. Description
-#: ../alternc.templates:8001
-#, fuzzy
-#| msgid ""
-#| "AlternC will create a mysql administrator account. Please choose it's "
-#| "username here. The default value should be good in most case."
 msgid ""
 "Please enter the directory name where you want to put your users maildirs. "
 "The default value should be good in most cases."
 msgstr ""
-"AlternC va créer un compte administrateur sur le serveur mysql. Entrez le "
-"nom d'utilisateur qui sera créé. La valeur par défaut convient dans la "
-"plupart des cas."
 
 #. Type: string
 #. Description
 #: ../alternc.templates:9001
-#, fuzzy
-#| msgid "The path where AlternC is installed:"
 msgid "The path where alternc's logs files will be placed"
-msgstr "Emplacement d'AlternC : "
+msgstr ""
 
 #. Type: string
 #. Description
 #: ../alternc.templates:9001
-#, fuzzy
-#| msgid ""
-#| "AlternC will create a mysql administrator account. Please choose it's "
-#| "username here. The default value should be good in most case."
 msgid ""
 "Please enter the directory name where you want to put your log files. The "
 "default value should be good in most cases."
 msgstr ""
-"AlternC va créer un compte administrateur sur le serveur mysql. Entrez le "
-"nom d'utilisateur qui sera créé. La valeur par défaut convient dans la "
-"plupart des cas."
 
 #. Type: string
 #. Description
