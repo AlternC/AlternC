@@ -167,6 +167,40 @@ if (is_array($c)) { ?>
 <script type="text/javascript">
   document.forms['main'].setAttribute('autocomplete', 'off');
   document.forms['main'].newip.focus();
+$(function(){
+	$(".toggle-next").on("click",function(){
+
+		var next = $(this).next();
+		next.toggle();
+	})
+
+});
 </script>
 
+<style>
+
+.info {
+    background: none repeat scroll 0 0 white;
+    border: 1px solid #CCCCCC;
+    border-radius: 15px 15px 15px 15px;
+    margin: 16px 0;
+    padding: 0 16px;
+}
+.info-hide{
+display:none;	
+}
+</style>
+<div class="info">
+<h4 class="toggle toggle-next"><a href="javascript:void(0)" class="btn"> <?= _("In need of DNS Slave servers?")?> &#9660;</a></h4>
+<div class="info-hide">
+<p><?= _("We offer free of charge DNS servers for alternc users."); ?></p>
+<h4>How does it work? </h4>
+<ol>
+	<li><?= sprintf(_("<strong>Allow the servers to access your server.</strong> Follow the instructions on <a href='%s' target='blank'>this page</a>"),"http://aide-alternc.org") ?></li>
+	<li><?= sprintf(_("<strong>Subscribe to alternc.net.</strong> Go to <a href='%s' target='_blank' class='btn btn-inline btn-link'>this site</a> to use the DNS servers provided for free by the AlternC association."),"http://aide-alternc.org/")?> </li>
+</ol>i
+<br />
+<p><?= _("The alternc.net servers will take care of transfering and distributing to the world your domains zones.") ?> </p>
+</div><!-- info-hide -->
+</div><!-- info  -->
 <?php include_once("foot.php"); ?>
