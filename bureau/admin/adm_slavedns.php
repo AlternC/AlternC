@@ -191,14 +191,14 @@ display:none;
 }
 </style>
 <div class="info">
-<h4 class="toggle toggle-next"><a href="javascript:void(0)" class="btn"> <?= _("In need of DNS Slave servers?")?> &#9660;</a></h4>
+<h4 class="toggle toggle-next"><a href="javascript:void(0)" class="btn"> <?= _("Need open DNS Slave servers?")?> &#9660;</a></h4>
 <div class="info-hide">
 <p><?= _("We offer free of charge DNS servers for alternc users."); ?></p>
-<h4>How does it work? </h4>
+<h2><?= _("How does it work?") ?> </h2>
 <ol>
-	<li><?= sprintf(_("<strong>Allow the servers to access your server.</strong> Follow the instructions on <a href='%s' target='blank'>this page</a>"),"http://aide-alternc.org") ?></li>
-	<li><?= sprintf(_("<strong>Subscribe to alternc.net.</strong> Go to <a href='%s' target='_blank' class='btn btn-inline btn-link'>this site</a> to use the DNS servers provided for free by the AlternC association."),"http://aide-alternc.org/")?> </li>
-</ol>i
+	<li><?= sprintf(_("<strong>Give access to the alternc.net servers.</strong> Follow the instructions on <a href='%s' target='blank'>this page</a>. They will help you to configure this page and configure your alternc.net account."),"http://aide-alternc.org/go.php?hid=400") ?></li>
+	<li><?= sprintf(_("<strong>Subscribe to alternc.net.</strong> Go to <a href='%s' target='_blank' class='btn btn-inline btn-link'>the alternc.net site</a> to use the DNS servers provided for free by the AlternC association and enter the required informations for each server you want to connect to the service."),"http://alternc.net/")?> </li>
+</ol>
 <br />
 <p><?= _("The alternc.net servers will take care of transfering and distributing to the world your domains zones.") ?> </p>
 </div><!-- info-hide -->
