@@ -138,7 +138,7 @@ class m_action {
       $query="insert into actions values ('','MOVE','$serialized',now(),'','','$user','');"; 
       break;
     case 'fix_user':
-      $query="insert into actions values ('','FIX_USER','$serialized',now(),'','','$user','');"; 
+      $query="insert into actions values ('','FIXUSER','$serialized',now(),'','','$user','');"; 
       break;
     case 'fix_file':
       $query="insert into actions values ('','FIXFILE','$serialized',now(),'','','$user','');"; 
