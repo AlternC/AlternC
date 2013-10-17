@@ -50,7 +50,7 @@ if (!$ftp_accounts) {
 }
 else {
   foreach ($ftp_accounts AS $single_ftp_account)
-    echo '<tr><td>' . $single_ftp_account['login'] . '</td><td>' . $single_ftp_account['password'] . '</td><td>' . $single_ftp_account['dir'] . '</td></tr>';
+    echo '<tr><td>' . $single_ftp_account['login'] . '</td><td>' . $single_ftp_account['pass'] . '</td><td>' . $single_ftp_account['dir'] . '</td></tr>';
 }
 ?>
 </table>
