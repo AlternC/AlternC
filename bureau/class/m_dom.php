@@ -224,6 +224,37 @@ class m_dom {
     } else
 
     // Examples:
+    // @ IN AAAA 127.2.1.5
+    // reseau IN AAAA 145.214.44.55
+    if ( preg_match('/^(?P<sub>[\w\.@\-]*)\h*(?P<ttl>\d*)\h*IN\h+AAAA\h+(?P<target>[0-9A-F:]{2,40})/i', $zone, $ret) ) {
+
+      // Check if it is just a redirect
+      if ( substr($ret['sub'], -1) == '.' ) { // if ending by a "." it is allready a FQDN
+        $url="http://".$ret['sub'];
+      } else {
+        if ( $ret['sub'] == '@' || empty($ret['sub']) ) {
+          $url="http://".$domain;
+        } else {
+          $url="http://".$ret['sub'].".".$domain;
+        }
+      }
+      if ( $detect_redirect && $dst_url = $this->is_it_a_redirect($url) ) {
+        $val['status'] = 'warn';
+        $val['comment'] = "Became a redirect to $dst_url";
+        $val['entry_new']['type'] = 'URL';
+        $val['entry_new']['sub'] = $ret['sub'];
+        $val['entry_new']['value'] = $dst_url;
+      } else {
+        $val['status'] = 'ok';
+        $val['comment'] = "Create entry AAAA with ".$ret['sub']." go to ".$ret['target']." with ttl ".$ret['ttl'];
+        $val['entry_new']['type'] = 'IPV6';
+        $val['entry_new']['sub'] = $ret['sub'];
+        $val['entry_new']['value'] = $ret['target'];
+      }
+    } else
+
+
+    // Examples:
     // @ IN A 127.2.1.5
     // reseau IN A 145.214.44.55
     if ( preg_match('/^(?P<sub>[\w\.@\-]*)\h*(?P<ttl>\d*)\h*IN\h+A\h+(?P<target>\d+\.\d+\.\d+\.\d+)/i', $zone, $ret) ) {
@@ -877,7 +908,7 @@ class m_dom {
       $found = true;
     }
     break;
-        case "eu":
+  case "eu":
   case "be":
           $ligne=preg_replace("/^ *([^ ]*) \(.*\)$/","\\1",trim($ligne));
           if($found)
