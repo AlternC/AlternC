@@ -42,7 +42,7 @@ while getopts "l:u:f:d:" optname
 do
   case "$optname" in
   "l")
-    if [[ "$OPTARG" =~ ^[a-zA-Z0-9_\-]+$ ]] ; then
+    if [[ "$OPTARG" =~ ^[a-zA-Z0-9_]+$ ]] ; then
       query="SELECT uid,login FROM membres WHERE login LIKE '$OPTARG'"
     else	
       echo "Bad login provided"

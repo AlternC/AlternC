@@ -510,7 +510,7 @@ class m_admin {
       }
     }
     $login=strtolower($login);
-    if (!preg_match("#^[a-z0-9\-]+$#",$login)) { //$
+    if (!preg_match("#^[a-z0-9]+$#",$login)) { //$
       $err->raise("admin", _("Login can only contains characters a-z and 0-9"));
       return false;
     }
