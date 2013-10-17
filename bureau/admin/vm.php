@@ -104,7 +104,7 @@ http://<?php echo $mem->user['login'].':ALTERNC_PASSWORD@'.$host.'/vm.php?http_a
 <pre>
 http://<?php echo $mem->user['login'].':ALTERNC_PASSWORD@'.$host.'/vm.php?http_auth=1&amp;script=1&amp;action=stop' ?>
 </pre>
-<?php __("And you can see existing vm informations (if exist) by using:"); ?>
+<?php __("And you can see existing vm information (if the vm is running) by using:"); ?>
 <pre>
 http://<?php echo $mem->user['login'].':ALTERNC_PASSWORD@'.$host.'/vm.php?http_auth=1&amp;script=1' ?>
 </pre>
@@ -116,7 +116,7 @@ http://<?php echo $mem->user['login'].':ALTERNC_PASSWORD@'.$host.'/vm.php?http_a
 <a href="javascript:;" onclick="$('#tips-soft').toggle();"><?php __("Which software can I use?"); ?></a>
 <div id='tips-soft'>
 <fieldset>
-<?php __("To have a remote console with SSH, you can use Putty. To transfert files, you can use Filezilla."); ?>
+<?php __("To access a remote console with SSH, you can use Putty. To transfer files, you can use Filezilla in SFTP mode."); ?>
 </fieldset>
 </div>
 

@@ -183,9 +183,9 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
 ?>
 <hr/>
 
-<h3><?php __("Mails configuration informations");?></h3>
+<h3><?php __("Mails configuration information");?></h3>
 
-<?php __("Here are some configuration informations you'll need to configure your mail application.");?>
+<?php __("Here are some configuration information you will need to configure your mail application.");?>
 <br/>
 <br/>
 
@@ -193,12 +193,12 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
 
 <ul>
   <li class="help"><a href="#tabs-mailhelp-out"><?php __("Outgoing mail (SMTP)"); ?></a></li>
-  <li class="help"><a href="#tabs-mailhelp-in"><?php __("Incoming mails"); ?></a></li>
+  <li class="help"><a href="#tabs-mailhelp-in"><?php __("Incoming mail"); ?></a></li>
 </ul>
 
 <div id="tabs-mailhelp-out">
 
-    <?php __("Which protocol would you use?"); ?>
+    <?php __("Which protocol shall you use?"); ?>
     <div id="accordion-mailout">
       <h4><?php __("Submission");?></h4>
       <div>
@@ -239,7 +239,7 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
 
 <div id="tabs-mailhelp-in">
 
-    <?php __("Which protocol would you use?"); ?>
+    <?php __("Which protocol shall you use?"); ?>
     <div id="accordion-mailin">
       <h4><?php __("IMAP");?></h4>
       <div>

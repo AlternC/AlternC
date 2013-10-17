@@ -97,7 +97,7 @@ $dom->unlock();
               break;
           case 'TXT':?>
 		        <input type="text" class="int" name="t_<?php echo $dt['name']?>" id="t_<?php echo $dt['name']?>" value="<?php ehe($targval);?>" size="32" onKeyPress="getElementById('r_<?php echo $dt['name']?>').checked=true;" />
-            <small><?php __("(enter a TXT informations for this domain)"); ?></small><?php
+            <small><?php __("(enter a TXT content for this domain)"); ?></small><?php
               break;
           case 'DOMAIN':?>
 		        <input type="text" class="int" name="t_<?php echo $dt['name']?>" id="t_<?php echo $dt['name']?>" value="<?php ehe($targval);?>" size="32" onKeyPress="getElementById('r_<?php echo $dt['name']?>').checked=true;" /> 
