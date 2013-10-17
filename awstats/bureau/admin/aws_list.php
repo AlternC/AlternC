@@ -66,7 +66,7 @@ while (list($key,$val)=each($r)) {
 	   <td><div class="ina"><a href="aws_edit.php?id=<?php echo $val["id"] ?>"><img src="images/edit.png" alt="<?php __("Edit"); ?>" title="<?php __("Edit"); ?>" /><?php __("Edit"); ?></a></div></td>
 		<td class='retour-auto'><label for="del_<?php echo $val["id"]; ?>" ><?php echo $val["hostname"] ?></label></td>
 		<td><?php echo $val["users"] ?></td>
-		<td><div class="ina"><a href="/cgi-bin/awstats.pl?config=<?php echo $val["hostname"]; ?>"><img src="images/stat.png" alt="<?php __("View the statistics"); ?>" /><?php __("View the statistics"); ?></a></div></td>
+		<td><div class="ina"><a href="/cgi-bin/awstats.pl?config=<?php echo $val["hostname"]; ?>" target="_blank" ><img src="images/stat.png" alt="<?php __("View the statistics"); ?>" /><?php __("View the statistics"); ?></a></div></td>
 	</tr>
 <?php } // while ?>
 
