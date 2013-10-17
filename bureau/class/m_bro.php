@@ -103,7 +103,7 @@ class m_bro {
     $file = basename($dir);
     $dir = dirname($dir);
     $dir=realpath($root."/".$dir);
-    // verifier que le repertoire est dans le home de l'usgaer
+    // verifier que le repertoire est dans le home de l'usager
     if (substr($dir,0,strlen($root))!=$root) {
       return false;
     }
@@ -486,7 +486,8 @@ class m_bro {
     for ($i=0;$i<count($d);$i++) {
       $d[$i]=ssla($d[$i]); // strip slashes if needed
       if (!strpos($d[$i],"/") && file_exists($old."/".$d[$i]) && !file_exists($new."/".$d[$i])) {  
-        @rename($old."/".$d[$i],$new."/".$d[$i]);
+        if (!@rename($old."/".$d[$i],$new."/".$d[$i]))
+          $err->raise("bro", "error renaming $old/$d[$i] -> $new/$d[$i]");
       }
     }
     return true;
