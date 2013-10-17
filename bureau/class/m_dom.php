@@ -1396,7 +1396,7 @@ class m_dom {
     // On vérifie que des modifications ont bien eu lieu :)
     if ($r["dns"]==$dns && $r["mail"]==$gesmx && $r["zonettl"]==$ttl) {
       $err->raise("dom",_("No change has been requested..."));
-      return false;
+      return true;
     }
       
     //si gestion mx uniquement, vérification du dns externe
