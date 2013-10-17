@@ -78,11 +78,13 @@ class m_dom {
   var $action_update= "1";
   var $action_delete = "2";
 
+  var $tld_no_check_at_all = "1";
   /* ----------------------------------------------------------------- */
   /**
    * Constructeur
    */
   function m_dom() {
+    $this->tld_no_check_at_all = variable_get('tld_no_check_at_all', 0,'Set to 1 to disable ALL check on the TLD (users will be able to add any domain)');
   }
 
   function hook_menu() {

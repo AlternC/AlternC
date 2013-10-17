@@ -41,7 +41,7 @@ function compare_logname($a, $b) {
  or a string for the index in $tld
 */
 function checkhostallow($domain,$dns) {
-  global $L_NS1,$L_NS2,$db;
+  global $L_NS1,$L_NS2,$db,$dom;
   $sizefound=0;
   $found="";
   $db->query("SELECT tld,mode FROM tld;");
@@ -55,8 +55,7 @@ function checkhostallow($domain,$dns) {
       }
     }
   }
-  $tld_no_check_at_all = variable_get('tld_no_check_at_all', 0,'Set to 1 to disable ALL check on the TLD (users will be able to add any domain)');
-  if ( $tld_no_check_at_all )
+  if ( $dom->tld_no_check_at_all )
     return 0; // OK , the boss say that you can.
 
   if (!$found || $fmode==0)			// TLD not allowed at all
