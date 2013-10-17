@@ -325,7 +325,6 @@ bureau/admin/piwik_utils.php -text
 bureau/admin/quota_show.php -text
 bureau/admin/quotas_oneuser.php -text
 bureau/admin/quotas_users.php -text
-bureau/admin/recapitulatif.php -text
 bureau/admin/sql_bck.php -text
 bureau/admin/sql_del.php -text
 bureau/admin/sql_doadd.php -text

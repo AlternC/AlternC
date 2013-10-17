@@ -128,7 +128,6 @@ class m_ftp {
    * tableaus associatifs comme suit :
    * $a["id"]= ID du compte ftp
    * $a["login"]= Nom de login du compte
-   * $a["pass"]= Mot de passe du compte
    * $a["dir"]= Dossier relatif à la racine du compte de l'utilisateur
    * @return array Retourne le tableau des comptes ou FALSE si une erreur s'est produite.
    */
@@ -136,13 +135,12 @@ class m_ftp {
     global $db,$err,$cuid, $bro;
     $err->log("ftp","get_list");
     $r=array();
-    $db->query("SELECT id, name, password, homedir, enabled FROM ftpusers WHERE uid='$cuid' ORDER BY name;");
+    $db->query("SELECT id, name, homedir, enabled FROM ftpusers WHERE uid='$cuid' ORDER BY name;");
     if ($db->num_rows()) {
       while ($db->next_record()) {
 	      $r[]=array(
 		        "id"=>$db->f("id"),
 		        "login"=>$db->f("name"),
-          "pass"=>$db->f("password"),
 		        "enabled"=>$db->f("enabled"),
 		        //"dir"=>$match[1]
 		        "dir"=>$db->f("homedir")
