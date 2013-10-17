@@ -68,7 +68,7 @@ echo $uid
 # Return the html path for a account name
 get_html_path_by_name() {
   local name="$1"
-  if [[ ! "$name" =~ ^([a-z0-9]+)$ ]] ; then
+  if [[ ! "$name" =~ ^([a-z0-9\-]+)$ ]] ; then
     # Error on error flux
     echo "Account name is incorrect." >&2
     exit 2

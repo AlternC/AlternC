@@ -196,7 +196,7 @@ while (list($key,$val)=each($r)) {
 </tr>
 <?php
 } // while (list($key,$val)=each($r)) {      
-echo '</table></form>';
+echo '</table></form><br/>';
 
 } // NORMAL MODE
 if ($mem->user["admlist"]==1) { // SHORT MODE
