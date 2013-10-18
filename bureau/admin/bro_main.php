@@ -53,7 +53,6 @@ $fields = array (
     );
 getFields($fields);
 
-
 $p=$bro->GetPrefs();
 if (! isset($R)) $R='';
 if (!$R && $p["golastdir"]) {
@@ -95,10 +94,13 @@ if (!empty($formu) && $formu) {
             <input type="hidden" name="actdel" value="1" />
             <input type="hidden" name="R" value="<?php echo ehe($R)?>" />
             <p class="error"><?php __("WARNING: Confirm the deletion of this files"); ?></p>
+            <h2><?php echo $mem->user["login"].$R."/"; ?></h2>
+            <ul>
             <?php foreach($d as $editfile){ ?>
-              <p><?php echo stripslashes($editfile); ?></p>
-                <input type="hidden" name="d[]" value="<?php echo htmlentities(stripslashes($editfile)); ?>" />
-                <?php } ?>
+              <li> <?php echo stripslashes($editfile); ?></li>
+              <input type="hidden" name="d[]" value="<?php echo htmlentities(stripslashes($editfile)); ?>" />
+            <?php } ?>
+            </ul>
                 <blockquote>
                 <input type="submit" class="inb" name="del_confirm" value="<?php __("Yes"); ?>" />&nbsp;&nbsp;
           <input type="submit" class="inb" name="cancel" value="<?php __("No"); ?>" />
