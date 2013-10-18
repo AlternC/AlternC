@@ -245,7 +245,7 @@ bureau/admin/images/undelete.png -text
 bureau/admin/index.php -text
 bureau/admin/ip_main.php -text
 bureau/admin/js/alternc.js -text
-bureau/admin/js/jquery.min.js -text
+bureau/admin/js/jquery.min_embedded.js -text
 bureau/admin/js/jquery_ui/css/redmond/images/animated-overlay.gif -text
 bureau/admin/js/jquery_ui/css/redmond/images/ui-bg_flat_0_aaaaaa_40x100.png -text
 bureau/admin/js/jquery_ui/css/redmond/images/ui-bg_flat_55_fbec88_40x100.png -text

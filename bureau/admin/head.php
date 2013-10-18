@@ -47,7 +47,7 @@ if (file_exists("styles/style-custom.css") ) {
 <link rel="icon" href="favicon.ico" type="image/ico" />
 
 <script src="js/alternc.js" type="text/javascript" ></script>
-<script src="js/jquery.min.js" type="text/javascript"></script>
+<script src="js/jquery.min_embedded.js" type="text/javascript"></script>
 <script src="js/jquery_ui/js/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
 
 </head>
