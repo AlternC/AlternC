@@ -116,6 +116,7 @@ doone() {
       mkdir -p "$REP"
       chown -R $GID:$GID "$REP"
       chmod 2770 -R "$REP"
+      test -d "$REP/tmp" || mkdir "$REP/tmp"
 
 #      # Delete existings ACL
 #      # Set the defaults acl on all the files
@@ -125,6 +126,7 @@ doone() {
       setfacl -bknR -m d:u:alterncpanel:rwx -m d:g:alterncpanel:rwx -m u:alterncpanel:rwx -m g:alterncpanel:rwx -m d:o::--- -m o::---\
                     -m d:u:$GID:rwx -m d:g:$GID:rwx -m u:$GID:rwx -m g:$GID:rwx -m d:mask:rwx -m mask:rwx "$REP"
 
+      chmod 777 "$REP/tmp"
       read GID LOGIN || true
     done
     echo -e "\nDone" 
@@ -144,7 +146,12 @@ fixdir() {
       # Set the file readable only for the AlternC User
       mkdir -p "$REP"
       chown -R $REP_ID:$REP_ID "$REP"
-      chmod 2770 -R "$REP"
+      test_tmp=$(basename $REP)
+      if [ "$test_tmp" != "tmp" ]; then 
+        chmod 2770 -R "$REP"
+      else
+        chmod 2777 -R "$REP"
+      fi
 
       # Delete existings ACL
       # Set the defaults acl on all the files
