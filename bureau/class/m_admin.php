@@ -528,6 +528,7 @@ class m_admin {
     }
     $pass=_md5cr($pass);
     $db=new DB_System();
+    $notes = mysql_real_escape_string($notes);
     // Already exist?
     $db->query("SELECT count(*) AS cnt FROM membres WHERE login='$login';");
     $db->next_record();
