@@ -10,5 +10,5 @@ INOTIFY_UPDATE_DOMAIN="/var/run/alternc/inotify_update_domain.lock"
 ' >> /etc/alternc/local.sh
 fi
 
-chown alterncpanel /var/run/alternc/
+mkdir -p /var/run/alternc && chown alterncpanel /var/run/alternc
 
