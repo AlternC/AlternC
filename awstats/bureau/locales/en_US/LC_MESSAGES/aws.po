@@ -18,16 +18,15 @@ msgstr ""
 
 #: ../admin/aws_add.php:33
 msgid "You cannot add any new statistics, your quota is over."
-msgstr "You cannot add any new statistics, your quota is over."
+msgstr ""
 
 #: ../admin/aws_add.php:38
-#, fuzzy
 msgid "Edit Statistics"
-msgstr "New Statistics"
+msgstr ""
 
 #: ../admin/aws_add.php:38
 msgid "New Statistics"
-msgstr "New Statistics"
+msgstr ""
 
 #: ../admin/aws_add.php:41
 msgid ""
@@ -55,21 +54,20 @@ msgstr ""
 
 #: ../admin/aws_add.php:94
 msgid "Create those statistics"
-msgstr "Create those statistics"
+msgstr ""
 
 #: ../admin/aws_add.php:94
-#, fuzzy
 msgid "Edit those statistics"
-msgstr "Create those statistics"
+msgstr ""
 
 #: ../admin/aws_add.php:95 ../admin/aws_pass.php:77 ../admin/aws_users.php:58
 msgid "Cancel"
 msgstr ""
 
 #: ../admin/aws_del.php:39
-#, fuzzy, php-format
+#, php-format
 msgid "The statistics %s has been successfully deleted"
-msgstr "The statistics has been successfully created"
+msgstr ""
 
 #: ../admin/aws_del.php:45
 msgid "Please check the statistics set you want to delete"
@@ -77,19 +75,19 @@ msgstr ""
 
 #: ../admin/aws_doadd.php:41
 msgid "The statistics has been successfully created"
-msgstr "The statistics has been successfully created"
+msgstr ""
 
 #: ../admin/aws_doedit.php:36 ../admin/aws_edit.php:33
 msgid "No Statistics selected!"
-msgstr "No Statistics selected!"
+msgstr ""
 
 #: ../admin/aws_doedit.php:48
 msgid "The Statistics has been successfully changed"
-msgstr "The Statistics has been successfully changed"
+msgstr ""
 
 #: ../admin/aws_list.php:29
 msgid "Statistics List"
-msgstr "Statistics List"
+msgstr ""
 
 #: ../admin/aws_list.php:45
 msgid "Manage allowed users' accounts"
@@ -97,16 +95,15 @@ msgstr ""
 
 #: ../admin/aws_list.php:49 ../admin/aws_users.php:45
 msgid "Create new Statistics"
-msgstr "Create new Statistics"
+msgstr ""
 
 #: ../admin/aws_list.php:57 ../admin/aws_users.php:78
 msgid "Action"
 msgstr ""
 
 #: ../admin/aws_list.php:57 ../admin/aws_list.php:69
-#, fuzzy
 msgid "View the statistics"
-msgstr "Create those statistics"
+msgstr ""
 
 #: ../admin/aws_list.php:66
 msgid "Edit"
@@ -118,7 +115,7 @@ msgstr ""
 
 #: ../admin/aws_list.php:73
 msgid "Delete the checked Statistics"
-msgstr "Delete the checked Statistics"
+msgstr ""
 
 #: ../admin/aws_pass.php:43 ../admin/aws_useradd.php:36
 msgid "Passwords do not match"
@@ -150,14 +147,13 @@ msgid "Change this user's password"
 msgstr ""
 
 #: ../admin/aws_useradd.php:43
-#, fuzzy
 msgid "The Awstat account has been successfully created"
-msgstr "The statistics has been successfully created"
+msgstr ""
 
 #: ../admin/aws_userdel.php:37
-#, fuzzy, php-format
+#, php-format
 msgid "The awstat account %s has been successfully deleted"
-msgstr "The statistics has been successfully created"
+msgstr ""
 
 #: ../admin/aws_users.php:29
 msgid "Awstats allowed user list"
@@ -168,9 +164,8 @@ msgid "Password"
 msgstr ""
 
 #: ../admin/aws_users.php:57
-#, fuzzy
 msgid "Create this new Awstats user"
-msgstr "Create those statistics"
+msgstr ""
 
 #: ../admin/aws_users.php:86
 msgid "Change password"
@@ -181,13 +176,12 @@ msgid "Are you sure you want to delete the selected accounts?"
 msgstr ""
 
 #: ../admin/aws_users.php:92
-#, fuzzy
 msgid "Delete checked accounts"
-msgstr "Delete the checked Statistics"
+msgstr ""
 
 #: ../admin/menu_aws.php:39 ../class/m_aws.php:59
 msgid "Web Statistics"
-msgstr "Web Statistics"
+msgstr ""
 
 #: ../class/m_aws.php:82
 msgid ""
@@ -198,9 +192,8 @@ msgid ""
 msgstr ""
 
 #: ../class/m_aws.php:123
-#, fuzzy
 msgid "No statistics currently defined"
-msgstr "No Statistics selected!"
+msgstr ""
 
 #: ../class/m_aws.php:163 ../class/m_aws.php:324 ../class/m_aws.php:706
 msgid "This statistic does not exist"
@@ -279,54 +272,3 @@ msgstr ""
 #, php-format
 msgid "Problem to edit file %s"
 msgstr ""
-
-#, fuzzy
-#~ msgid "Create this new awstat account."
-#~ msgstr "Create those statistics"
-
-#~ msgid "quota_stats"
-#~ msgstr "Web Statistics (awstats)"
-
-#~ msgid "err_stats_1"
-#~ msgstr "No statistic set found."
-
-#~ msgid "err_stats_2"
-#~ msgstr "This statistic set does not exist."
-
-#~ msgid "err_stats_3"
-#~ msgstr "The chosen prefix is not allowed here"
-
-#~ msgid "err_stats_4"
-#~ msgstr "This statistic set already exists !"
-
-#~ msgid "err_stats_5"
-#~ msgstr ""
-#~ "Your statistic set quota is over. You cannot create more statistic sets."
-
-#~ msgid "err_stats_6"
-#~ msgstr "This language is not supported."
-
-#~ msgid "Language"
-#~ msgstr "Language"
-
-#~ msgid "WARNING"
-#~ msgstr "WARNING"
-
-#~ msgid ""
-#~ "The statistics %s has been successfully deleted (the stats files must be "
-#~ "manually deleted)"
-#~ msgstr ""
-#~ "The statistics %s has been successfully deleted (the stats files must be "
-#~ "manually deleted)"
-
-#~ msgid "Delete statistics"
-#~ msgstr "Delete statistics"
-
-#~ msgid "Change the Statistics"
-#~ msgstr "Change the Statistics"
-
-#~ msgid "Change those Statistics."
-#~ msgstr "Change those Statistics."
-
-#~ msgid "Byte"
-#~ msgstr "Byte"

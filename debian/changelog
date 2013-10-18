@@ -1,4 +1,4 @@
-alternc (3.1~alpha024) experimental; urgency=low
+alternc (3.1~alpha026) experimental; urgency=low
 
   * menu became dynamic with a class
   * /var/alternc disapear to become Debian-compliant
@@ -12,6 +12,7 @@ alternc (3.1~alpha024) experimental; urgency=low
   * openDKIM now supported and automagically configured
   * autoconfig of emails using autoconfig.$domain vhost and xml/php scripts
     for Outlook & Thunderbird
+  * fix (one more time) the translation system
 
  -- Benjamin Sonntag <benjamin@sonntag.fr>  Thu, 15 Jun 2013 09:09:00 +0200
 
