@@ -42,7 +42,7 @@ $r=$mysql->get_userslist();
 		echo "<p class=\"alert alert-danger\">$error</p>";
 	}
   if(!$r || empty($r)){
-    echo "<p class=\"alert alert-warning\">"._("You have no sql user at the moment.")."</p>";  
+    echo "<p class=\"alert alert-info\">"._("You have no sql user at the moment.")."</p>";  
   }
 ?>
 
