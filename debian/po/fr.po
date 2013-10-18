@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AlternC, hosting control panel\n"
 "Report-Msgid-Bugs-To: https://alternc.org/report/1\n"
-"POT-Creation-Date: 2013-03-22 12:11+0000\n"
-"PO-Revision-Date: 2013-10-18 09:28+0000\n"
+"POT-Creation-Date: 2013-10-18 11:47+0200\n"
+"PO-Revision-Date: 2013-10-18 09:53+0000\n"
 "Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
 "Language-Team: French (France) (http://www.transifex.com/projects/p/alternc/"
 "language/fr_FR/)\n"
@@ -173,14 +173,6 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../alternc.templates:7001
-msgid "The path where alternc's users html files will be put"
-msgstr ""
-"Dossier dans lequel les fichiers HTML des utilisateurs d'AlternC seront "
-"stockés"
-
-#. Type: string
-#. Description
-#: ../alternc.templates:7001
 msgid ""
 "Please enter the directory name where you want html user files to be put. "
 "The default value should be good in most cases."
@@ -191,9 +183,10 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../alternc.templates:8001
-msgid "The path where alternc's users mails will be put"
-msgstr "Répertoire dans lequel on stockera les mails des utilisateurs"
+#: ../alternc.templates:7001
+msgid "This directory will contain every AlternC users personal directories."
+msgstr ""
+"Ce répertoire contiendra les dossiers personnels de tous les comptes AlternC."
 
 #. Type: string
 #. Description
@@ -205,12 +198,6 @@ msgstr ""
 "Merci d'entrer le nom du répertoire où vous souhaitez stocker les maildirs "
 "des utilisateurs. La valeur par défaut doit convenir dans la majorité des "
 "cas."
-
-#. Type: string
-#. Description
-#: ../alternc.templates:9001
-msgid "The path where alternc's logs files will be placed"
-msgstr "Répertoire dans lequel les fichiers logs d'AlternC seront stockés"
 
 #. Type: string
 #. Description
@@ -265,10 +252,7 @@ msgstr ""
 #. Description
 #. Type: string
 #. Description
-#. Type: string
-#. Description
-#: ../alternc.templates:12001 ../alternc.templates:13001
-#: ../alternc.templates:16001
+#: ../alternc.templates:12001 ../alternc.templates:16001
 msgid "AlternC's mysql account:"
 msgstr "Compte mysql d'AlternC : "
 
@@ -289,11 +273,13 @@ msgstr ""
 #. Description
 #: ../alternc.templates:13001
 msgid ""
-"Using a remote mysql installation requires the AlternC user to be configured "
-"in advance with administrator access to the mysql installation."
+"Using a remote mysql installation requires root access to the remote "
+"database. A root user is required to create the alternc user with grant "
+"options."
 msgstr ""
-"L'utilisation d'un MySQL distant nécessite que l'utilisateur AlternC soit "
-"pré-configuré et dispose des accès administrateurs à votre MySQL."
+"L'utilisation d'un mysql distant requiert un accès root aux bases distantes. "
+"Un utilisateur root est requis pour créer l'utilisateur alternc avec "
+"l'option GRANT."
 
 #. Type: string
 #. Description
@@ -338,12 +324,6 @@ msgid ""
 msgstr ""
 "Merci de choisir un mot de passe complexe, car il permet d'accéder à la base "
 "système ! Si vous n'entrez rien, un mot de asse aléatoire sera généré."
-
-#. Type: password
-#. Description
-#: ../alternc.templates:15001
-msgid "Password of the AlternC's mysql account:"
-msgstr "Mot de passe du compte mysql d'AlternC : "
 
 #. Type: password
 #. Description
@@ -579,50 +559,6 @@ msgstr "AlternC doit-il supprimer toutes les boites mail ?"
 msgid "If you accept all users e-mails will be deleted"
 msgstr "Si vous acceptez, tous les e-mails des utilisateurs seront supprimés"
 
-#. Type: string
-#. Description
-#: ../alternc.templates:31001
-msgid "Slave servers"
-msgstr "Serveurs esclaves"
-
-#. Type: string
-#. Description
-#: ../alternc.templates:31001
-msgid ""
-"This is a space-separated list of servers that are \"slaves\" to the master "
-"server (this server). When writing apache configuration files, the master "
-"server will attempt to reload apache on those remote servers. The alternc-"
-"slave package correctly configures those machines to allow login and reload."
-msgstr ""
-"Entre une liste séparée par des espaces des serveurs 'esclaves' du serveur "
-"maître (qui est ce serveur). Lors de l'écriture de la configuration "
-"d'Apache, ce maître tentera de recharger apache sur les serveurs distants. "
-"le package alternc-slave configure ces machines comme il faut pour permettre "
-"la connexion distante et le rechargement d'apache. "
-
-#. Type: boolean
-#. Description
-#: ../alternc.templates:32001
-msgid "Shall we use locally found MySQL server?"
-msgstr "Doit-on utiliser le serveur MySQL local automatiquement découvert ?"
-
-#. Type: boolean
-#. Description
-#: ../alternc.templates:32001
-msgid ""
-"A local MySQL connection was established on the server. Tell us if you want "
-"to use it. If not remote MySQL server connection parameters will be needed."
-msgstr ""
-"Une connexion locale à MySQL a été trouvée. Dites-nous si vous souhaitez que "
-"nous l'utilisions. Sinon, des paramètres d'accès distants à MySQL vous "
-"seront demandés."
-
-#. Type: boolean
-#. Description
-#: ../alternc.templates:33001
-msgid "Shall we use a remote MySQL server?"
-msgstr "Doit-on utiliser un serveur MySQL distant ?"
-
 #. Type: boolean
 #. Description
 #: ../alternc.templates:33001
@@ -642,30 +578,9 @@ msgstr "Erreur de connexion à MySQL. Réessayer ?"
 
 #. Type: boolean
 #. Description
-#: ../alternc.templates:34001
-msgid ""
-"Remote connection to the MySQL server failed. Please confirm that we shall "
-"try again."
-msgstr ""
-"La connexion au serveur MySQL distant a échouée. Merci de confirmer que nous "
-"devons réessayer."
-
-#. Type: boolean
-#. Description
 #: ../alternc.templates:35001
 msgid "Private IP detected, use it anyway?"
 msgstr "IP privée détectée, faut-il l'utiliser tout de même ?"
-
-#. Type: boolean
-#. Description
-#: ../alternc.templates:35001
-msgid ""
-"The IP address you have appears to be private, please confirm you want to "
-"use it anyway. The server might not be reachable from outside your network."
-msgstr ""
-"L'adresse IP dont vous disposez est privée, merci de confirmer que vous "
-"souhaitez tout de même l'utiliser. Le serveur pourrait ne pas être joignable "
-"depuis l'extérieur de votre réseau. "
 
 #. Type: string
 #. Description

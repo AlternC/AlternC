@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: i18n@alternc.org\n"
-"POT-Creation-Date: 2013-10-18 11:06+0200\n"
+"POT-Creation-Date: 2013-10-18 11:47+0200\n"
 "PO-Revision-Date: 2012-10-17 09:52+0200\n"
 "Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
 "Language-Team: Dutch <team@alternc.org>\n"
@@ -163,7 +163,7 @@ msgstr ""
 #: ../admin/adm_domstype.php:85 ../admin/adm_domstype.php:86
 #: ../admin/adm_edit.php:78 ../admin/adm_edit.php:95
 #: ../admin/adm_passpolicy.php:113 ../admin/adm_passpolicy.php:157
-#: ../admin/bro_main.php:104 ../admin/dom_dodel.php:74
+#: ../admin/bro_main.php:106 ../admin/dom_dodel.php:74
 #: ../admin/dom_edit.php:231 ../admin/dom_edit.php:254
 #: ../admin/dom_subdel.php:71 ../admin/mail_edit.php:90
 #: ../admin/mail_list.php:164 ../admin/sql_bck.php:94 ../admin/sql_del.php:90
@@ -177,7 +177,7 @@ msgstr ""
 #: ../admin/adm_domstype.php:85 ../admin/adm_domstype.php:86
 #: ../admin/adm_edit.php:79 ../admin/adm_edit.php:96
 #: ../admin/adm_passpolicy.php:114 ../admin/adm_passpolicy.php:157
-#: ../admin/bro_main.php:103 ../admin/dom_dodel.php:74
+#: ../admin/bro_main.php:105 ../admin/dom_dodel.php:74
 #: ../admin/dom_edit.php:230 ../admin/dom_edit.php:253
 #: ../admin/dom_subdel.php:70 ../admin/mail_edit.php:91
 #: ../admin/mail_list.php:209 ../admin/mail_list.php:220
@@ -307,7 +307,7 @@ msgstr ""
 
 #: ../admin/adm_authip_whitelist.php:83 ../admin/adm_doms_def_type.php:60
 #: ../admin/adm_mxaccount.php:83 ../admin/adm_slavedns.php:101
-#: ../admin/adm_slavedns.php:145 ../admin/bro_main.php:283
+#: ../admin/adm_slavedns.php:145 ../admin/bro_main.php:285
 #: ../admin/cron.php:54 ../admin/dom_edit.php:123 ../admin/dom_edit.php:146
 #: ../admin/ftp_del.php:82 ../admin/hta_dodeluser.php:64
 #: ../admin/ip_main.php:79 ../admin/ip_main.php:165
@@ -1415,7 +1415,7 @@ msgid "Save variables"
 msgstr ""
 
 #: ../admin/bro_editor.php:54 ../admin/bro_editor.php:63
-#: ../admin/bro_main.php:353 ../admin/bro_main.php:393
+#: ../admin/bro_main.php:355 ../admin/bro_main.php:395
 #, php-format
 msgid "%3$d-%2$d-%1$d %4$d:%5$d"
 msgstr ""
@@ -1441,191 +1441,191 @@ msgstr ""
 msgid "Quit"
 msgstr ""
 
-#: ../admin/bro_main.php:92
+#: ../admin/bro_main.php:91
 #, php-format
 msgid "Deleting files and/or directories"
 msgstr ""
 
-#: ../admin/bro_main.php:97
+#: ../admin/bro_main.php:96
 msgid "WARNING: Confirm the deletion of this files"
 msgstr ""
 
-#: ../admin/bro_main.php:142
+#: ../admin/bro_main.php:144
 msgid "extracting..."
 msgstr ""
 
-#: ../admin/bro_main.php:146
+#: ../admin/bro_main.php:148
 msgid "failed"
 msgstr ""
 
-#: ../admin/bro_main.php:149
+#: ../admin/bro_main.php:151
 msgid "done"
 msgstr ""
 
-#: ../admin/bro_main.php:154 ../class/m_bro.php:76
+#: ../admin/bro_main.php:156 ../class/m_bro.php:76
 msgid "File browser"
 msgstr ""
 
-#: ../admin/bro_main.php:161
+#: ../admin/bro_main.php:163
 msgid "Path"
 msgstr ""
 
-#: ../admin/bro_main.php:183
+#: ../admin/bro_main.php:185
 msgid "Send one file:"
 msgstr ""
 
-#: ../admin/bro_main.php:187
+#: ../admin/bro_main.php:189
 msgid "Send this file"
 msgstr ""
 
-#: ../admin/bro_main.php:188
+#: ../admin/bro_main.php:190
 #, php-format
 msgid "Warning: max size: %s"
 msgstr ""
 
-#: ../admin/bro_main.php:195
+#: ../admin/bro_main.php:197
 msgid "New file or folder:"
 msgstr ""
 
-#: ../admin/bro_main.php:200 ../admin/piwik_sitelist.php:86
+#: ../admin/bro_main.php:202 ../admin/piwik_sitelist.php:86
 #: ../admin/piwik_userlist.php:44 ../admin/piwik_userlist.php:56
 msgid "Create"
 msgstr ""
 
-#: ../admin/bro_main.php:202 ../admin/bro_main.php:242
+#: ../admin/bro_main.php:204 ../admin/bro_main.php:244
 msgid "File"
 msgstr ""
 
-#: ../admin/bro_main.php:203 ../admin/bro_main.php:395
+#: ../admin/bro_main.php:205 ../admin/bro_main.php:397
 #: ../admin/ftp_edit.php:75 ../admin/ftp_list.php:72 ../admin/hta_add.php:55
 #: ../admin/hta_adduser.php:50 ../admin/hta_edit.php:94
 #: ../admin/hta_edituser.php:51 ../admin/hta_list.php:68
 msgid "Folder"
 msgstr ""
 
-#: ../admin/bro_main.php:220 ../admin/bro_main.php:226
-#: ../admin/bro_main.php:284
+#: ../admin/bro_main.php:222 ../admin/bro_main.php:228
+#: ../admin/bro_main.php:286
 msgid "Rename"
 msgstr ""
 
-#: ../admin/bro_main.php:236 ../admin/bro_main.php:242
-#: ../admin/bro_main.php:285
+#: ../admin/bro_main.php:238 ../admin/bro_main.php:244
+#: ../admin/bro_main.php:287
 msgid "Permissions"
 msgstr ""
 
-#: ../admin/bro_main.php:256
+#: ../admin/bro_main.php:258
 msgid "write"
 msgstr ""
 
-#: ../admin/bro_main.php:264
+#: ../admin/bro_main.php:266
 msgid "Change permissions"
 msgstr ""
 
-#: ../admin/bro_main.php:287
+#: ../admin/bro_main.php:289
 msgid "Copy"
 msgstr ""
 
-#: ../admin/bro_main.php:288
+#: ../admin/bro_main.php:290
 msgid "Move"
 msgstr ""
 
-#: ../admin/bro_main.php:289
+#: ../admin/bro_main.php:291
 msgid "To"
 msgstr ""
 
-#: ../admin/bro_main.php:300
+#: ../admin/bro_main.php:302
 msgid "Please select a destination folder"
 msgstr ""
 
-#: ../admin/bro_main.php:326
+#: ../admin/bro_main.php:328
 msgid "Filename"
 msgstr ""
 
-#: ../admin/bro_main.php:327 ../admin/logs_list.php:53
+#: ../admin/bro_main.php:329 ../admin/logs_list.php:53
 #: ../admin/sql_list.php:54
 msgid "Size"
 msgstr ""
 
-#: ../admin/bro_main.php:328
+#: ../admin/bro_main.php:330
 msgid "Last modification"
 msgstr ""
 
-#: ../admin/bro_main.php:330
+#: ../admin/bro_main.php:332
 msgid "File Type"
 msgstr ""
 
-#: ../admin/bro_main.php:359 ../admin/bro_main.php:540
+#: ../admin/bro_main.php:361 ../admin/bro_main.php:542
 #: ../admin/dom_edit.php:121
 msgid "View"
 msgstr ""
 
-#: ../admin/bro_main.php:366
+#: ../admin/bro_main.php:368
 msgid "Extract"
 msgstr ""
 
-#: ../admin/bro_main.php:372 ../admin/bro_main.php:374
+#: ../admin/bro_main.php:374 ../admin/bro_main.php:376
 msgid "Restore SQL"
 msgstr ""
 
-#: ../admin/bro_main.php:374
+#: ../admin/bro_main.php:376
 msgid "In which database to you want to restore this dump?"
 msgstr ""
 
-#: ../admin/bro_main.php:379
+#: ../admin/bro_main.php:381
 msgid "Restore it"
 msgstr ""
 
-#: ../admin/bro_main.php:420 ../admin/bro_main.php:448
-#: ../admin/bro_main.php:483 ../admin/bro_main.php:511
+#: ../admin/bro_main.php:422 ../admin/bro_main.php:450
+#: ../admin/bro_main.php:485 ../admin/bro_main.php:513
 msgid "V"
 msgstr ""
 
-#: ../admin/bro_main.php:566
+#: ../admin/bro_main.php:568
 msgid "No files in this folder"
 msgstr ""
 
-#: ../admin/bro_main.php:576
+#: ../admin/bro_main.php:578
 msgid "(slow)"
 msgstr ""
 
-#: ../admin/bro_main.php:576
+#: ../admin/bro_main.php:578
 msgid "Show size of directories"
 msgstr ""
 
-#: ../admin/bro_main.php:580
+#: ../admin/bro_main.php:582
 msgid "Edit this folder's protection"
 msgstr ""
 
-#: ../admin/bro_main.php:583 ../admin/hta_add.php:62
+#: ../admin/bro_main.php:585 ../admin/hta_add.php:62
 msgid "Protect this folder"
 msgstr ""
 
-#: ../admin/bro_main.php:585
+#: ../admin/bro_main.php:587
 msgid "with a login and a password"
 msgstr ""
 
-#: ../admin/bro_main.php:588
+#: ../admin/bro_main.php:590
 msgid "Download this folder"
 msgstr ""
 
-#: ../admin/bro_main.php:590
+#: ../admin/bro_main.php:592
 #, php-format
 msgid "as a %s file"
 msgstr ""
 
-#: ../admin/bro_main.php:597
+#: ../admin/bro_main.php:599
 msgid "Edit the ftp account"
 msgstr ""
 
-#: ../admin/bro_main.php:598
+#: ../admin/bro_main.php:600
 msgid "that exists in this folder"
 msgstr ""
 
-#: ../admin/bro_main.php:604
+#: ../admin/bro_main.php:606
 msgid "Create an ftp account in this folder"
 msgstr ""
 
-#: ../admin/bro_main.php:613
+#: ../admin/bro_main.php:615
 msgid "Configure the file editor"
 msgstr ""
 
@@ -3717,15 +3717,15 @@ msgstr ""
 msgid "Choose a folder..."
 msgstr ""
 
-#: ../class/m_action.php:156
+#: ../class/m_action.php:157
 msgid "Error setting actions"
 msgstr ""
 
-#: ../class/m_action.php:168
+#: ../class/m_action.php:169
 msgid "Error selecting  old actions"
 msgstr ""
 
-#: ../class/m_action.php:181
+#: ../class/m_action.php:182
 msgid "Error purging old actions"
 msgstr ""
 

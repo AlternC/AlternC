@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AlternC, hosting control panel\n"
 "Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
-"POT-Creation-Date: 2013-03-22 12:11+0000\n"
+"POT-Creation-Date: 2013-10-18 11:47+0200\n"
 "PO-Revision-Date: 2013-02-08 14:51+0000\n"
 "Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
 "Language-Team: English <dev@alternc.org>\n"
@@ -137,7 +137,7 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../alternc.templates:7001
-msgid "The path where alternc's users html files will be put"
+msgid "Path where AlternC's users html files will be located:"
 msgstr ""
 
 #. Type: string
@@ -151,13 +151,13 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../alternc.templates:7001
-msgid "This directory wil contain every alternc users personnal directories."
+msgid "This directory will contain every AlternC users personal directories."
 msgstr ""
 
 #. Type: string
 #. Description
 #: ../alternc.templates:8001
-msgid "The path where alternc's users mails will be put"
+msgid "Path where AlternC's users mails will be located:"
 msgstr ""
 
 #. Type: string
@@ -171,7 +171,7 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../alternc.templates:9001
-msgid "The path where alternc's logs files will be placed"
+msgid "Path where alternc's logs files will be located:"
 msgstr ""
 
 #. Type: string
@@ -217,10 +217,7 @@ msgstr ""
 #. Description
 #. Type: string
 #. Description
-#. Type: string
-#. Description
-#: ../alternc.templates:12001 ../alternc.templates:13001
-#: ../alternc.templates:16001
+#: ../alternc.templates:12001 ../alternc.templates:16001
 msgid "AlternC's mysql account:"
 msgstr ""
 
@@ -237,9 +234,16 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../alternc.templates:13001
+msgid "Remote root mysql user account:"
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../alternc.templates:13001
 msgid ""
-"Using a remote mysql installation requires the AlternC user to be configured "
-"in advance with administrator access to the mysql installation."
+"Using a remote mysql installation requires root access to the remote "
+"database. A root user is required to create the alternc user with grant "
+"options."
 msgstr ""
 
 #. Type: string
@@ -282,7 +286,7 @@ msgstr ""
 #. Type: password
 #. Description
 #: ../alternc.templates:15001
-msgid "Password of the AlternC's mysql account:"
+msgid "Password of the remote root mysql user account:"
 msgstr ""
 
 #. Type: password
@@ -492,7 +496,7 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../alternc.templates:31001
-msgid "Slave servers"
+msgid "Slave servers:"
 msgstr ""
 
 #. Type: string
@@ -500,29 +504,30 @@ msgstr ""
 #: ../alternc.templates:31001
 msgid ""
 "This is a space-separated list of servers that are \"slaves\" to the master "
-"server (this server). When writing apache configuration files, the master "
-"server will attempt to reload apache on those remote servers. The alternc-"
+"server (this server). When writing Apache configuration files, the master "
+"server will attempt to reload Apache on those remote servers. The alternc-"
 "slave package correctly configures those machines to allow login and reload."
 msgstr ""
 
 #. Type: boolean
 #. Description
 #: ../alternc.templates:32001
-msgid "Shall we use locally found MySQL server?"
+msgid "Use locally found MySQL server?"
 msgstr ""
 
 #. Type: boolean
 #. Description
 #: ../alternc.templates:32001
 msgid ""
-"A local MySQL connection was established on the server. Tell us if you want "
-"to use it. If not remote MySQL server connection parameters will be needed."
+"A local MySQL connection was established on the server. Please tell if you "
+"want to use it. If not remote MySQL server connection parameters will be "
+"needed."
 msgstr ""
 
 #. Type: boolean
 #. Description
 #: ../alternc.templates:33001
-msgid "Shall we use a remote MySQL server?"
+msgid "Use a remote MySQL server?"
 msgstr ""
 
 #. Type: boolean
@@ -543,8 +548,7 @@ msgstr ""
 #. Description
 #: ../alternc.templates:34001
 msgid ""
-"Remote connection to the MySQL server failed. Please confirm that we shall "
-"try again."
+"Remote connection to the MySQL server failed. Please confirm to try again."
 msgstr ""
 
 #. Type: boolean
@@ -557,8 +561,9 @@ msgstr ""
 #. Description
 #: ../alternc.templates:35001
 msgid ""
-"The IP address you have appears to be private, please confirm you want to "
-"use it anyway. The server might not be reachable from outside your network."
+"The IP address of the machine appears to be private, please confirm that "
+"this is an expected situation, since the server might not be reachable from "
+"outside your network."
 msgstr ""
 
 #. Type: string

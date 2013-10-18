@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AlternC, hosting control panel\n"
 "Report-Msgid-Bugs-To: https://alternc.org/report/1\n"
-"POT-Creation-Date: 2013-03-22 12:11+0000\n"
-"PO-Revision-Date: 2013-10-18 09:22+0000\n"
+"POT-Creation-Date: 2013-10-18 11:47+0200\n"
+"PO-Revision-Date: 2013-10-18 09:47+0000\n"
 "Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
 "Language-Team: German (Germany) (http://www.transifex.com/projects/p/alternc/language/de_DE/)\n"
 "MIME-Version: 1.0\n"
@@ -143,7 +143,7 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../alternc.templates:7001
-msgid "The path where alternc's users html files will be put"
+msgid "Path where AlternC's users html files will be located:"
 msgstr ""
 
 #. Type: string
@@ -157,13 +157,13 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../alternc.templates:7001
-msgid "This directory wil contain every alternc users personnal directories."
+msgid "This directory will contain every AlternC users personal directories."
 msgstr ""
 
 #. Type: string
 #. Description
 #: ../alternc.templates:8001
-msgid "The path where alternc's users mails will be put"
+msgid "Path where AlternC's users mails will be located:"
 msgstr ""
 
 #. Type: string
@@ -177,7 +177,7 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../alternc.templates:9001
-msgid "The path where alternc's logs files will be placed"
+msgid "Path where alternc's logs files will be located:"
 msgstr ""
 
 #. Type: string
@@ -223,10 +223,7 @@ msgstr ""
 #. Description
 #. Type: string
 #. Description
-#. Type: string
-#. Description
-#: ../alternc.templates:12001 ../alternc.templates:13001
-#: ../alternc.templates:16001
+#: ../alternc.templates:12001 ../alternc.templates:16001
 msgid "AlternC's mysql account:"
 msgstr ""
 
@@ -243,9 +240,16 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../alternc.templates:13001
+msgid "Remote root mysql user account:"
+msgstr ""
+
+#. Type: string
+#. Description
+#: ../alternc.templates:13001
 msgid ""
-"Using a remote mysql installation requires the AlternC user to be configured"
-" in advance with administrator access to the mysql installation."
+"Using a remote mysql installation requires root access to the remote "
+"database. A root user is required to create the alternc user with grant "
+"options."
 msgstr ""
 
 #. Type: string
@@ -288,7 +292,7 @@ msgstr ""
 #. Type: password
 #. Description
 #: ../alternc.templates:15001
-msgid "Password of the AlternC's mysql account:"
+msgid "Password of the remote root mysql user account:"
 msgstr ""
 
 #. Type: password
@@ -498,7 +502,7 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../alternc.templates:31001
-msgid "Slave servers"
+msgid "Slave servers:"
 msgstr ""
 
 #. Type: string
@@ -506,29 +510,30 @@ msgstr ""
 #: ../alternc.templates:31001
 msgid ""
 "This is a space-separated list of servers that are \"slaves\" to the master "
-"server (this server). When writing apache configuration files, the master "
-"server will attempt to reload apache on those remote servers. The alternc-"
+"server (this server). When writing Apache configuration files, the master "
+"server will attempt to reload Apache on those remote servers. The alternc-"
 "slave package correctly configures those machines to allow login and reload."
 msgstr ""
 
 #. Type: boolean
 #. Description
 #: ../alternc.templates:32001
-msgid "Shall we use locally found MySQL server?"
+msgid "Use locally found MySQL server?"
 msgstr ""
 
 #. Type: boolean
 #. Description
 #: ../alternc.templates:32001
 msgid ""
-"A local MySQL connection was established on the server. Tell us if you want "
-"to use it. If not remote MySQL server connection parameters will be needed."
+"A local MySQL connection was established on the server. Please tell if you "
+"want to use it. If not remote MySQL server connection parameters will be "
+"needed."
 msgstr ""
 
 #. Type: boolean
 #. Description
 #: ../alternc.templates:33001
-msgid "Shall we use a remote MySQL server?"
+msgid "Use a remote MySQL server?"
 msgstr ""
 
 #. Type: boolean
@@ -549,8 +554,7 @@ msgstr ""
 #. Description
 #: ../alternc.templates:34001
 msgid ""
-"Remote connection to the MySQL server failed. Please confirm that we shall "
-"try again."
+"Remote connection to the MySQL server failed. Please confirm to try again."
 msgstr ""
 
 #. Type: boolean
@@ -563,8 +567,9 @@ msgstr ""
 #. Description
 #: ../alternc.templates:35001
 msgid ""
-"The IP address you have appears to be private, please confirm you want to "
-"use it anyway. The server might not be reachable from outside your network."
+"The IP address of the machine appears to be private, please confirm that "
+"this is an expected situation, since the server might not be reachable from "
+"outside your network."
 msgstr ""
 
 #. Type: string
@@ -1309,7 +1314,7 @@ msgstr ""
 #: ../admin/adm_domstype.php:85 ../admin/adm_domstype.php:86
 #: ../admin/adm_edit.php:78 ../admin/adm_edit.php:95
 #: ../admin/adm_passpolicy.php:113 ../admin/adm_passpolicy.php:157
-#: ../admin/bro_main.php:104 ../admin/dom_dodel.php:74
+#: ../admin/bro_main.php:106 ../admin/dom_dodel.php:74
 #: ../admin/dom_edit.php:231 ../admin/dom_edit.php:254
 #: ../admin/dom_subdel.php:71 ../admin/mail_edit.php:90
 #: ../admin/mail_list.php:164 ../admin/sql_bck.php:94 ../admin/sql_del.php:90
@@ -1323,7 +1328,7 @@ msgstr "Nein"
 #: ../admin/adm_domstype.php:85 ../admin/adm_domstype.php:86
 #: ../admin/adm_edit.php:79 ../admin/adm_edit.php:96
 #: ../admin/adm_passpolicy.php:114 ../admin/adm_passpolicy.php:157
-#: ../admin/bro_main.php:103 ../admin/dom_dodel.php:74
+#: ../admin/bro_main.php:105 ../admin/dom_dodel.php:74
 #: ../admin/dom_edit.php:230 ../admin/dom_edit.php:253
 #: ../admin/dom_subdel.php:70 ../admin/mail_edit.php:91
 #: ../admin/mail_list.php:209 ../admin/mail_list.php:220
@@ -1431,7 +1436,7 @@ msgstr "Typ"
 
 #: ../admin/adm_authip_whitelist.php:83 ../admin/adm_doms_def_type.php:60
 #: ../admin/adm_mxaccount.php:83 ../admin/adm_slavedns.php:101
-#: ../admin/adm_slavedns.php:145 ../admin/bro_main.php:283
+#: ../admin/adm_slavedns.php:145 ../admin/bro_main.php:285
 #: ../admin/cron.php:54 ../admin/dom_edit.php:123 ../admin/dom_edit.php:146
 #: ../admin/ftp_del.php:82 ../admin/hta_dodeluser.php:64
 #: ../admin/ip_main.php:79 ../admin/ip_main.php:165
@@ -2510,7 +2515,7 @@ msgid "Save variables"
 msgstr "Variablen Abspeichern"
 
 #: ../admin/bro_editor.php:54 ../admin/bro_editor.php:63
-#: ../admin/bro_main.php:353 ../admin/bro_main.php:393
+#: ../admin/bro_main.php:355 ../admin/bro_main.php:395
 #, php-format
 msgid "%3$d-%2$d-%1$d %4$d:%5$d"
 msgstr ""
@@ -2536,191 +2541,191 @@ msgstr ""
 msgid "Quit"
 msgstr "Beenden"
 
-#: ../admin/bro_main.php:92
+#: ../admin/bro_main.php:91
 #, php-format
 msgid "Deleting files and/or directories"
 msgstr "Löschen von Dateien und/oder Verzeichnissen "
 
-#: ../admin/bro_main.php:97
+#: ../admin/bro_main.php:96
 msgid "WARNING: Confirm the deletion of this files"
 msgstr "HINWEIS: Bestätigen der Löschung von diesen Dateien"
 
-#: ../admin/bro_main.php:142
+#: ../admin/bro_main.php:144
 msgid "extracting..."
 msgstr "Entpacker arbeitet..."
 
-#: ../admin/bro_main.php:146
+#: ../admin/bro_main.php:148
 msgid "failed"
 msgstr "Fehler"
 
-#: ../admin/bro_main.php:149
+#: ../admin/bro_main.php:151
 msgid "done"
 msgstr "Fertig"
 
-#: ../admin/bro_main.php:154 ../class/m_bro.php:76
+#: ../admin/bro_main.php:156 ../class/m_bro.php:76
 msgid "File browser"
 msgstr "Dateimanager"
 
-#: ../admin/bro_main.php:161
+#: ../admin/bro_main.php:163
 msgid "Path"
 msgstr "Verzeichnis weg"
 
-#: ../admin/bro_main.php:183
+#: ../admin/bro_main.php:185
 msgid "Send one file:"
 msgstr "Datei verschicken:"
 
-#: ../admin/bro_main.php:187
+#: ../admin/bro_main.php:189
 msgid "Send this file"
 msgstr "Verschicke diese Datei"
 
-#: ../admin/bro_main.php:188
+#: ../admin/bro_main.php:190
 #, php-format
 msgid "Warning: max size: %s"
 msgstr "HINWEIS: maximale grösse: %s"
 
-#: ../admin/bro_main.php:195
+#: ../admin/bro_main.php:197
 msgid "New file or folder:"
 msgstr "Neue Datei oder Verzechnis:"
 
-#: ../admin/bro_main.php:200 ../admin/piwik_sitelist.php:86
+#: ../admin/bro_main.php:202 ../admin/piwik_sitelist.php:86
 #: ../admin/piwik_userlist.php:44 ../admin/piwik_userlist.php:56
 msgid "Create"
 msgstr "Erstellen"
 
-#: ../admin/bro_main.php:202 ../admin/bro_main.php:242
+#: ../admin/bro_main.php:204 ../admin/bro_main.php:244
 msgid "File"
 msgstr "Datei"
 
-#: ../admin/bro_main.php:203 ../admin/bro_main.php:395
+#: ../admin/bro_main.php:205 ../admin/bro_main.php:397
 #: ../admin/ftp_edit.php:75 ../admin/ftp_list.php:72 ../admin/hta_add.php:55
 #: ../admin/hta_adduser.php:50 ../admin/hta_edit.php:94
 #: ../admin/hta_edituser.php:51 ../admin/hta_list.php:68
 msgid "Folder"
 msgstr "Verzeichnis"
 
-#: ../admin/bro_main.php:220 ../admin/bro_main.php:226
-#: ../admin/bro_main.php:284
+#: ../admin/bro_main.php:222 ../admin/bro_main.php:228
+#: ../admin/bro_main.php:286
 msgid "Rename"
 msgstr "Umbenennen"
 
-#: ../admin/bro_main.php:236 ../admin/bro_main.php:242
-#: ../admin/bro_main.php:285
+#: ../admin/bro_main.php:238 ../admin/bro_main.php:244
+#: ../admin/bro_main.php:287
 msgid "Permissions"
 msgstr "Berechtigungen"
 
-#: ../admin/bro_main.php:256
+#: ../admin/bro_main.php:258
 msgid "write"
 msgstr "schreiben"
 
-#: ../admin/bro_main.php:264
+#: ../admin/bro_main.php:266
 msgid "Change permissions"
 msgstr "Berechtigungen ändern"
 
-#: ../admin/bro_main.php:287
+#: ../admin/bro_main.php:289
 msgid "Copy"
 msgstr "Kopieren"
 
-#: ../admin/bro_main.php:288
+#: ../admin/bro_main.php:290
 msgid "Move"
 msgstr "Bewegen"
 
-#: ../admin/bro_main.php:289
+#: ../admin/bro_main.php:291
 msgid "To"
 msgstr "Zu"
 
-#: ../admin/bro_main.php:300
+#: ../admin/bro_main.php:302
 msgid "Please select a destination folder"
 msgstr ""
 
-#: ../admin/bro_main.php:326
+#: ../admin/bro_main.php:328
 msgid "Filename"
 msgstr "Dateiname"
 
-#: ../admin/bro_main.php:327 ../admin/logs_list.php:53
+#: ../admin/bro_main.php:329 ../admin/logs_list.php:53
 #: ../admin/sql_list.php:54
 msgid "Size"
 msgstr "Grösse"
 
-#: ../admin/bro_main.php:328
+#: ../admin/bro_main.php:330
 msgid "Last modification"
 msgstr "Letzte Änderung"
 
-#: ../admin/bro_main.php:330
+#: ../admin/bro_main.php:332
 msgid "File Type"
 msgstr "Datei Typ"
 
-#: ../admin/bro_main.php:359 ../admin/bro_main.php:540
+#: ../admin/bro_main.php:361 ../admin/bro_main.php:542
 #: ../admin/dom_edit.php:121
 msgid "View"
 msgstr "Ansicht"
 
-#: ../admin/bro_main.php:366
+#: ../admin/bro_main.php:368
 msgid "Extract"
 msgstr "Entpackt"
 
-#: ../admin/bro_main.php:372 ../admin/bro_main.php:374
+#: ../admin/bro_main.php:374 ../admin/bro_main.php:376
 msgid "Restore SQL"
 msgstr ""
 
-#: ../admin/bro_main.php:374
+#: ../admin/bro_main.php:376
 msgid "In which database to you want to restore this dump?"
 msgstr ""
 
-#: ../admin/bro_main.php:379
+#: ../admin/bro_main.php:381
 msgid "Restore it"
 msgstr ""
 
-#: ../admin/bro_main.php:420 ../admin/bro_main.php:448
-#: ../admin/bro_main.php:483 ../admin/bro_main.php:511
+#: ../admin/bro_main.php:422 ../admin/bro_main.php:450
+#: ../admin/bro_main.php:485 ../admin/bro_main.php:513
 msgid "V"
 msgstr "V"
 
-#: ../admin/bro_main.php:566
+#: ../admin/bro_main.php:568
 msgid "No files in this folder"
 msgstr "Keine Dateien in diesem Verzeichnis"
 
-#: ../admin/bro_main.php:576
+#: ../admin/bro_main.php:578
 msgid "(slow)"
 msgstr "(langsam)"
 
-#: ../admin/bro_main.php:576
+#: ../admin/bro_main.php:578
 msgid "Show size of directories"
 msgstr "Zeige grösse des Verzeichnisses"
 
-#: ../admin/bro_main.php:580
+#: ../admin/bro_main.php:582
 msgid "Edit this folder's protection"
 msgstr "Bearbeite diese Verzeichnis Sicherung"
 
-#: ../admin/bro_main.php:583 ../admin/hta_add.php:62
+#: ../admin/bro_main.php:585 ../admin/hta_add.php:62
 msgid "Protect this folder"
 msgstr "Verzeichnisschutz"
 
-#: ../admin/bro_main.php:585
+#: ../admin/bro_main.php:587
 msgid "with a login and a password"
 msgstr "mit einem Login und einem Passwort"
 
-#: ../admin/bro_main.php:588
+#: ../admin/bro_main.php:590
 msgid "Download this folder"
 msgstr "Herunterladen dieses Verzeichnisses"
 
-#: ../admin/bro_main.php:590
+#: ../admin/bro_main.php:592
 #, php-format
 msgid "as a %s file"
 msgstr "als ein %s Datei"
 
-#: ../admin/bro_main.php:597
+#: ../admin/bro_main.php:599
 msgid "Edit the ftp account"
 msgstr "Bearbeite des FTP-Kontos"
 
-#: ../admin/bro_main.php:598
+#: ../admin/bro_main.php:600
 msgid "that exists in this folder"
 msgstr "es ist schon vorhanden im Verzeichnis"
 
-#: ../admin/bro_main.php:604
+#: ../admin/bro_main.php:606
 msgid "Create an ftp account in this folder"
 msgstr "Erstelle ein FTP-Konto für dieses Verzeichnis"
 
-#: ../admin/bro_main.php:613
+#: ../admin/bro_main.php:615
 msgid "Configure the file editor"
 msgstr "Konfiguriere den Datei EDITOR"
 
@@ -4806,15 +4811,15 @@ msgstr ""
 msgid "Choose a folder..."
 msgstr "Wähle ein Verzeichnis"
 
-#: ../class/m_action.php:156
+#: ../class/m_action.php:157
 msgid "Error setting actions"
 msgstr ""
 
-#: ../class/m_action.php:168
+#: ../class/m_action.php:169
 msgid "Error selecting  old actions"
 msgstr ""
 
-#: ../class/m_action.php:181
+#: ../class/m_action.php:182
 msgid "Error purging old actions"
 msgstr ""
 
