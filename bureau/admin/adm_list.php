@@ -23,7 +23,6 @@
  ----------------------------------------------------------------------
  Original Author of file: Benjamin Sonntag
  Purpose of file: Show the member list
- TODO : Add a Next / Previous system in case of big lists...
  ----------------------------------------------------------------------
 */
 require_once("../class/config.php");
@@ -76,9 +75,8 @@ if ($pattern && $pattern_type) {
 
 <form method="post" action="adm_list.php" >
 <p>
-  <span><?php __("Pattern"); ?></span>
-  <label for="pattern_type_login">Login</label><input type="radio" name="pattern_type" value="login" id="pattern_type_login" <?php if (!$pattern_type || $pattern_type === 'login') echo ' checked="checked" '; ?>/>&nbsp;
-  <label for="pattern_type_domain">Domaine</label><input type="radio" name="pattern_type" value="domaine" id="pattern_type_domain" <?php if ($pattern_type === 'domaine') echo ' checked="checked" '; ?>/>
+  <label for="pattern_type_login"><?php __("Search for a Login"); ?></label><input type="radio" name="pattern_type" value="login" id="pattern_type_login" <?php if (!$pattern_type || $pattern_type === 'login') echo ' checked="checked" '; ?>/>&nbsp;
+<label for="pattern_type_domain"><?php __("Search for a Domain"); ?></label><input type="radio" name="pattern_type" value="domaine" id="pattern_type_domain" <?php if ($pattern_type === 'domaine') echo ' checked="checked" '; ?>/>
   <input type="text" id="pattern" name="pattern" value="<?php echo $pattern ?>"/> <input type="submit" class="inb" value="<?php __("submit"); ?>" />
 </p>
 </form>
