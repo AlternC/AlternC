@@ -152,7 +152,6 @@ class m_action {
     default:
       return false;
     }	
-    printvar($query);
     if(!$db->query($query)){ 
       $err->raise("action",_("Error setting actions"));
       return false;
