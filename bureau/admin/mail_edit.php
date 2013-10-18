@@ -112,8 +112,8 @@ foreach($html as $h) echo $h;
 
 ?>
 <tr class="trbtn"><td colspan="2">
-  <input type="submit" class="inb" name="submit" value="<?php __("Change this email address"); ?>" />
-  <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="window.history.go(-1);"/>
+  <input type="submit" class="inb ok" name="submit" value="<?php __("Change this email address"); ?>" />
+  <input type="button" class="inb cancel" name="cancel" value="<?php __("Cancel"); ?>" onclick="window.history.go(-1);"/>
 </td></tr>
 </table>
 </form>

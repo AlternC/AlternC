@@ -109,7 +109,8 @@ for($i=0;$i<count($r);$i++){ ?>
     </table>
 
     <br />
-    <input type="submit" class="inb" value="<?php __("Add this user"); ?>" />
+    <input type="submit" class="inb ok" value="<?php __("Add this user"); ?>" />
+  <input type="button" class="inb cancel" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='hta_list.php';"/>
   </form>
 </fieldset>
   

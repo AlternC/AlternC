@@ -100,8 +100,8 @@ for($i=0;$i<count($r);$i++) {
 ?>
 </table>
 <p>
-  <input type="submit" value="<?php __("Apply"); ?>" class="inb" />
-  <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='sql_users_list.php'"/>
+  <input type="submit" class="inb ok" value="<?php __("Apply"); ?>"/>
+  <input type="button" class="inb cancel" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='sql_users_list.php'"/>
 </p>
 </form>
 <p>&nbsp;</p>

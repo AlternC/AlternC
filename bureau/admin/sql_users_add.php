@@ -69,8 +69,8 @@ getFields($fields);
 </tr>
 
 <tr class="trbtn"><td colspan="2">
-  <input type="submit" class="inb" name="submit" value="<?php __("Create this new MySQL user"); ?>" />
-  <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='sql_users_list.php'"/>
+  <input type="submit" class="inb ok" name="submit" value="<?php __("Create this new MySQL user"); ?>" />
+  <input type="button" class="inb cancel" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='sql_users_list.php'"/>
 </td></tr>
 </table>
 </form>
