@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 #------------------------------------------------------------
 # Short doc: launch this when people said they translated 
