@@ -575,7 +575,16 @@ done
 echo "Fix all the permission. May be quite long..."
 /usr/lib/alternc/fixperms.sh
 echo "Compile PO files"
-/usr/share/alternc/install/dopo.sh
+
+# TODO : includes the .MO in debian package ;) 
+find /usr/share/alternc/panel/locales -maxdepth 1 -mindepth 1 -type d -name "*_*" | while read A
+do 
+    B="$A/LC_MESSAGES"
+    cd $B
+    rm -f alternc.mo
+    msgfmt alternc -o alternc.mo
+done
+
 
 # hook 
 run-parts --arg=end /usr/lib/alternc/install.d 
