@@ -58,7 +58,7 @@ include_once("head.php");
 <h3><?php __("MySQL users"); ?></h3>
 <hr id="topbar"/>
 <br />
-<p class="error"><?php __("WARNING"); ?></big><br /><?php __("Confirm the deletion of the following MySQL users"); ?><br />
+<p class="alert alert-warning"><?php __("WARNING"); ?></big><br /><?php __("Confirm the deletion of the following MySQL users"); ?><br />
 </p>
 <form method="post" action="sql_users_del.php" id="main">
 <p>

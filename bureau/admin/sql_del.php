@@ -72,7 +72,7 @@ if (!$found) {
 <h3><?php __("MySQL Databases"); ?></h3>
 <hr id="topbar"/>
 <br />
-<p class="error"><?php __("WARNING"); ?></big><br /><?php __("Confirm the deletion of the following SQL databases"); ?><br />
+<p class="alert alert-warning"><?php __("WARNING"); ?></big><br /><?php __("Confirm the deletion of the following SQL databases"); ?><br />
 <?php __("This will delete all the tables currently in those db."); ?></p>
 <form method="post" action="sql_del.php" id="main">
 <p>

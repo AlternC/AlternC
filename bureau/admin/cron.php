@@ -23,7 +23,7 @@ $lst_cron = $cron->lst_cron();
 <br />
 
 <?php if (isset($error) && $error) { ?>
-  <p class="error"><?php echo $error ?></p>
+  <p class="alert alert-danger"><?php echo $error ?></p>
 <?php } ?>
 
 <form method="post" action="cron.php" id="main" name="cron" >

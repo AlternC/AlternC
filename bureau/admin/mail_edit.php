@@ -82,7 +82,7 @@ if (isset($error)) {
 <p><?php printf(_('This mailbox is currently using %1$s / %2$s'),format_size($used),format_size($quotabytes)); ?></p>
 <?php } ?>
 <?php if ($mailbox_action=="DELETE") { ?>
-<p class="error"><?php __("This mailbox is pending deletion. You can recover its mails by setting it to 'Yes' NOW!"); ?></p>
+<p class="alert alert-warning"><?php __("This mailbox is pending deletion. You can recover its mails by setting it to 'Yes' NOW!"); ?></p>
 <?php } ?>
 </td>
     <td>
@@ -100,7 +100,7 @@ if (isset($error)) {
       </div>
   </td></tr>
   <?php if ($islocal) { ?>
-<tr id="turnoff"><td colspan="2" class="error"><?php __("WARNING: turning POP/IMAP off will DELETE the stored messages in this email address."); ?></td></tr>
+<tr id="turnoff"><td colspan="2" class="alert alert-warning"><?php __("WARNING: turning POP/IMAP off will DELETE the stored messages in this email address."); ?></td></tr>
 <?php } ?>
   <tr><th colspan="2"><b><?php __("Is it a redirection to other email addresses?"); ?></b></th></tr>
 

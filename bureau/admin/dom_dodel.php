@@ -64,7 +64,7 @@ if ($del_confirm!="y") {
 <h3><?php printf(_("Confirm the deletion of domain %s"),$domain); ?></h3>
 <hr id="topbar"/>
 <br />
-<p class="error"><?php __("WARNING"); ?><br /><?php printf(_("Confirm the deletion of domain %s"),$domain); ?><br />
+<p class="alert alert-warning"><?php __("WARNING"); ?><br /><?php printf(_("Confirm the deletion of domain %s"),$domain); ?><br />
 
 <?php __("This will delete the related sub-domains too."); ?></p>
 <form method="post" action="dom_dodel.php" id="main">

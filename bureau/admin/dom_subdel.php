@@ -62,7 +62,7 @@ if (!$isinvited && $dt[strtolower($r['type'])]["enable"] != "ALL" ) {
 		 gestion du sous-domaine
  -->
 <form action="dom_subdodel.php" method="post">
-	<p class="error">
+	<p class="alert alert-warning">
 	<input type="hidden" name="sub_domain_id" value="<?php echo $sub_domain_id ?>" />
 <?php __("WARNING : Confirm the deletion of the subdomain"); ?> : </p>
 	<p><?php ecif($r['name'],$r['name']."."); echo $r['domain']; ?></p>

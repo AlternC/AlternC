@@ -90,7 +90,7 @@ closedir($d);
 </ul>
 
 <?php if ($cuid == 2000) { ?>
-  <p class="error">
+  <p class="alert alert-info">
     <?php if (panel_islocked()) { ?>
       <a href="adm_lockpanel.php?action=unlock"><?php __("Click here to unlock the panel and allow user to login.");?></a>
     <?php } else { ?>

@@ -46,13 +46,13 @@ $domain=trim($domain);
 
 <?php
 if (!empty($error)) {
-  echo '<p class="error">'.$error.'</p>';
+  echo '<p class="alert alert-danger">'.$error.'</p>';
 } 
 ?>
 
 <?php if ( !empty($zone) ) { 
 if ( empty($domain) ) {
-  echo '<p class="error">'._("The domain field seems to be empty").'</p>';
+  echo '<p class="alert alert-danger">'._("The domain field seems to be empty").'</p>';
 } else { ?>
   <?php __("Here is my proposition. Modify your zone until my proposition seems good to you"); ?>
   <table class="tlist">

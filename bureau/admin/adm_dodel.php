@@ -74,7 +74,7 @@ if($del_confirm == "y"){
     <form action="adm_dodel.php" method="post">
       <input type="hidden" name="action" value="delete" />
       <input type="hidden" name="del_confirm" value="y" />
-      <p class="error"><?php __("WARNING : Confirm the deletion of the users"); ?></p>
+      <p class="alert alert-warning"><?php __("WARNING : Confirm the deletion of the users"); ?></p>
       <p>
       <?php
         foreach($d as $userid){

@@ -49,7 +49,7 @@ if (!$r=$ftp->get_list($domain)) {
 <?php
 if (isset($error) && $error && !$noftp) {
 ?>
-<p class="error"><?php echo $error ?></p>
+<p class="alert alert-danger"><?php echo $error ?></p>
 <?php } ?>
 
 <?php if ($quota->cancreate("ftp")) { ?>

@@ -46,7 +46,7 @@ if (!isset($dns)) $dns="1";
 <hr />
 <?php
 if (!$quota->cancreate("dom")) { ?>
-<p class="error"><?php echo _("You cannot add any new domain, your quota is over.")." "._("Contact your administrator for more information."); ?></p>
+<p class="alert alert-danger"><?php echo _("You cannot add any new domain, your quota is over.")." "._("Contact your administrator for more information."); ?></p>
 <?php
 exit();
 }
@@ -87,7 +87,7 @@ $dl=$dom->get_domain_list($cuid);
   <input type="submit" class="inb ok" name="submit" value="<?php __("Add this domain"); ?>" />
 </p>
 
-<p class="error">
+<p class="alert alert-info">
 <?php __("If you don't want to host in our server the DNS of your domain, don't check the box 'host my dns here'. If you don't know what it mean, leave it checked."); ?></p>
 <?php $mem->show_help("add_domain"); ?>
 </form>

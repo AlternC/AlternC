@@ -33,10 +33,10 @@ $list_ip = $authip->list_ip_whitelist();
 <br />
 
 <?php if (isset($error) && $error) { ?>
-  <p class="error"><?php echo $error ?></p>
+  <p class="alert alert-danger"><?php echo $error ?></p>
 <?php } ?>
 <center>
-  <p class="error"><?php __("Warning"); echo "<br/>"; __("The IP and subnet you have here are allowed for ALL users and ALL usages"); ?></p>
+  <p class="alert alert-warning"><?php __("Warning"); echo "<br/>"; __("The IP and subnet you have here are allowed for ALL users and ALL usages"); ?></p>
 </center>
 
 <br/>

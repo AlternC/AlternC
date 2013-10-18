@@ -52,7 +52,7 @@ include_once("head.php");
 
 <?php if (!empty($error)) { ?>
 <div>
-<span class="error">
+<span class="alert alert-danger">
    <?php echo implode(" - ", array_unique($error)); ?>
 
 </span>
@@ -63,7 +63,7 @@ include_once("head.php");
 <div>
 <?php if (empty($infos)) { 
 ?>
-<p class="error"><?php __("You can start a virtual machine."); ?></p>
+<p class="alert alert-info"><?php __("You can start a virtual machine."); ?></p>
 <form method="post" action="vm.php">
    <input type="hidden" name="action" value="start" />
 <input type="submit" class="inb" name="go" value="<?php __("Click here to start a virtual machine."); ?>" />
@@ -80,7 +80,7 @@ include_once("head.php");
  echo "</pre></td></tr>";
  echo "</table>";
 ?>
-<p class="error"><?php __("You can stop your virtual machine."); ?></p>
+<p class="alert alert-info"><?php __("You can stop your virtual machine."); ?></p>
 <form method="post" action="vm.php">
    <input type="hidden" name="action" value="stop" />
 <input type="submit" class="inb" name="go" value="<?php __("Click here to stop your running virtual machine."); ?>" />

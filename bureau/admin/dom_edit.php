@@ -93,10 +93,10 @@ function destruction_alert() {
 <?php
 
 if ($r['dns_action']=='UPDATE') {?>
-  <p class="error"><?php __("This domain have some DNS change pending. Please wait."); ?></p>
+  <p class="alert alert-info"><?php __("This domain have some DNS change pending. Please wait."); ?></p>
 <?php
 } elseif ($r['dns_action']=='DELETE') {?>
-  <p class="error"><?php printf(_("You requested deletion of domain %s."), $domain);?></p>
+  <p class="alert alert-warning"><?php printf(_("You requested deletion of domain %s."), $domain);?></p>
 <?php
 /*
   // Link hidden as long as the del_domain_cancel function is not complete
@@ -255,7 +255,7 @@ if (!$r['noerase']) {
   </td>
 </tr>
 </table>
-<p class="error">    <?php __("Warning: If you set this to 'no', all your email accounts and aliases on this domain will be immediately deleted."); ?></p>
+<p class="alert alert-warning">    <?php __("Warning: If you set this to 'no', all your email accounts and aliases on this domain will be immediately deleted."); ?></p>
 <input type="submit" class="inb ok" name="submit" value="<?php __("Submit the changes"); ?>" />
 	</form>
 
