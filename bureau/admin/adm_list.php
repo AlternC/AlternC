@@ -175,18 +175,18 @@ while (list($key,$val)=each($r)) {
 <td/><td ><i><?php echo _("DB:").' '.$val['db_server_name']?></i></td>
 <td colspan="8" >
 <div id="admlistbtn">
-<span class="ina<?php if ($col==2) echo "v"; ?> lst<?php echo $col; ?>">
+<span class="ina<?php if ($col==2) echo "v"; ?>">
   <a href="adm_login.php?id=<?php echo $val["uid"];?>"><?php __("Connect as"); ?></a>
 </span>&nbsp;
 	&nbsp;
-<span class="ina<?php if ($col==2) echo "v"; ?> lst<?php echo $col; ?>" >
+<span class="ina<?php if ($col==2) echo "v"; ?>" >
   <a href="adm_edit.php?uid=<?php echo $val["uid"] ?>"><?php __("Edit"); ?></a>
 </span>&nbsp;
-<span class="ina<?php if ($col==2) echo "v"; ?> lst<?php echo $col; ?>" >
+<span class="ina<?php if ($col==2) echo "v"; ?>" >
   <a href="adm_quotaedit.php?uid=<?php echo $val["uid"] ?>"><?php __("Quotas"); ?></a>
 </span>&nbsp;
 	<?php if (!$val["su"]) { ?>
-<span class="ina<?php if ($col==2) echo "v"; ?> lst<?php echo $col; ?>" >
+<span class="ina<?php if ($col==2) echo "v"; ?>" >
   <a href="adm_deactivate.php?uid=<?php echo $val["uid"] ?>"><?php __("Disable"); ?></a>
 </span>&nbsp;
 	  <?php } ?>
