@@ -95,7 +95,7 @@ class m_action {
   * If archive_del_data is not set we delete the folder.
   * @param: $dir : sub_directory of the archive directory
   */
-  function archive($archivei,$dir="html") {
+  function archive($archive,$dir="html") {
     global $cuid,$db,$err;
 
     $arch=variable_get('archive_del_data');
