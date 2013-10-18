@@ -162,7 +162,7 @@ while (list($key,$val)=each($r)) {
    <td><input type="checkbox" class="inc" name="d[]" id="user_<?php echo $val["uid"]; ?>" value="<?php echo $val["uid"]; ?>" /></td>
 <?php } // val['su'] ?>
     <td <?php if ($val["su"]) echo 'style="color: red"'; ?>><label for="user_<?php echo $val["uid"]; ?>"><b><?php echo $val["login"] ?></b></label></td>
-    <td><a href="mailto:<?php echo $val["mail"]; ?>"><?php echo $val["nom"]." ".$val["prenom"] ?></a>&nbsp;</td>
+    <td><a title="<?php __("Send an email");?>" href="mailto:<?php echo $val["mail"]; ?>"><?php echo $val["nom"]." ".$val["prenom"] ?></a>&nbsp;</td>
     <td><?php echo $val["parentlogin"] ?></td>
     <td><?php echo format_date(_('%3$d-%2$d-%1$d'),$val["created"]); ?></td>
     <td><?php echo $val["type"] ?></td>
