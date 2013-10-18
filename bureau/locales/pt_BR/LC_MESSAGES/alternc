@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: AlternC, hosting control panel\n"
 "Report-Msgid-Bugs-To: https://alternc.org/report/1\n"
 "POT-Creation-Date: 2013-10-18 11:47+0200\n"
-"PO-Revision-Date: 2013-10-18 09:47+0000\n"
+"PO-Revision-Date: 2013-10-18 13:02+0000\n"
 "Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/alternc/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -1458,7 +1458,7 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: ../admin/adm_db_servers.php:51 ../admin/vm.php:74
+#: ../admin/adm_db_servers.php:51 ../admin/vm.php:77
 msgid "Hostname"
 msgstr ""
 
@@ -1565,9 +1565,9 @@ msgstr ""
 msgid "Default Value"
 msgstr ""
 
-#: ../admin/adm_defquotas.php:104 ../admin/adm_list.php:142
-#: ../admin/adm_list.php:186 ../admin/adm_list.php:206
-#: ../admin/adm_list.php:237
+#: ../admin/adm_defquotas.php:104 ../admin/adm_list.php:159
+#: ../admin/adm_list.php:203 ../admin/adm_list.php:223
+#: ../admin/adm_list.php:253
 msgid "Quotas"
 msgstr "Quotas"
 
@@ -1588,8 +1588,8 @@ msgid "Uid"
 msgstr ""
 
 #: ../admin/adm_dnsweberror.php:54 ../admin/adm_dnsweberror.php:84
-#: ../admin/adm_list.php:138 ../admin/adm_list.php:217
-#: ../admin/adm_list.php:218 ../admin/adm_list.php:219
+#: ../admin/adm_list.php:155 ../admin/adm_list.php:233
+#: ../admin/adm_list.php:234 ../admin/adm_list.php:235
 #: ../admin/quotas_users.php:169
 msgid "Account"
 msgstr ""
@@ -1712,8 +1712,8 @@ msgstr ""
 msgid "Show domain list with refreshed checked NS, MX, IP information"
 msgstr ""
 
-#: ../admin/adm_doms.php:69 ../admin/adm_doms.php:85 ../admin/adm_list.php:179
-#: ../admin/adm_list.php:204 ../admin/adm_list.php:234
+#: ../admin/adm_doms.php:69 ../admin/adm_doms.php:85 ../admin/adm_list.php:196
+#: ../admin/adm_list.php:221 ../admin/adm_list.php:250
 msgid "Connect as"
 msgstr "Conectar como"
 
@@ -2012,117 +2012,121 @@ msgstr "Mandar"
 msgid "AlternC account list"
 msgstr ""
 
-#: ../admin/adm_list.php:74
-msgid "Create a new AlternC account"
+#: ../admin/adm_list.php:77
+msgid "Minimal view"
 msgstr ""
 
-#: ../admin/adm_list.php:78
+#: ../admin/adm_list.php:81
+msgid "Complete view"
+msgstr ""
+
+#: ../admin/adm_list.php:87
+msgid "Filters"
+msgstr ""
+
+#: ../admin/adm_list.php:90
 msgid "Search for a Login"
 msgstr ""
 
-#: ../admin/adm_list.php:79
+#: ../admin/adm_list.php:91
 msgid "Search for a Domain"
 msgstr ""
 
-#: ../admin/adm_list.php:80 ../admin/piwik_sitelist.php:170
+#: ../admin/adm_list.php:92 ../admin/piwik_sitelist.php:170
 msgid "submit"
 msgstr ""
 
-#: ../admin/adm_list.php:92
+#: ../admin/adm_list.php:100
+msgid "List all AlternC accounts"
+msgstr ""
+
+#: ../admin/adm_list.php:110
+msgid "Or only the accounts of:"
+msgstr ""
+
+#: ../admin/adm_list.php:115
+msgid "List only my accounts"
+msgstr ""
+
+#: ../admin/adm_list.php:129
 #, php-format
 msgid "%s accounts"
 msgstr ""
 
-#: ../admin/adm_list.php:92
+#: ../admin/adm_list.php:129
 msgid "Here is the list of hosted AlternC accounts"
 msgstr ""
 
-#: ../admin/adm_list.php:99
-msgid "List all AlternC accounts"
+#: ../admin/adm_list.php:132
+msgid "Create a new AlternC account"
 msgstr ""
 
-#: ../admin/adm_list.php:108
-msgid "Or only the accounts of:"
-msgstr ""
-
-#: ../admin/adm_list.php:113
-msgid "List only my accounts"
-msgstr ""
-
-#: ../admin/adm_list.php:118
+#: ../admin/adm_list.php:136
 msgid "No account defined for now"
 msgstr ""
 
-#: ../admin/adm_list.php:130
-msgid "Minimal view"
-msgstr ""
-
-#: ../admin/adm_list.php:139
+#: ../admin/adm_list.php:156
 msgid "Manager"
 msgstr ""
 
-#: ../admin/adm_list.php:140
+#: ../admin/adm_list.php:157
 msgid "Created by"
 msgstr ""
 
-#: ../admin/adm_list.php:141
+#: ../admin/adm_list.php:158
 msgid "Created on"
 msgstr ""
 
-#: ../admin/adm_list.php:143
+#: ../admin/adm_list.php:160
 msgid "Last login"
 msgstr ""
 
-#: ../admin/adm_list.php:144
+#: ../admin/adm_list.php:161
 msgid "Last ip"
 msgstr ""
 
-#: ../admin/adm_list.php:145
+#: ../admin/adm_list.php:162
 msgid "Fails"
 msgstr ""
 
-#: ../admin/adm_list.php:146 ../admin/main.php:87
+#: ../admin/adm_list.php:163 ../admin/main.php:87
 msgid "Expiry"
 msgstr ""
 
-#: ../admin/adm_list.php:164
+#: ../admin/adm_list.php:181
 msgid "Send an email"
 msgstr ""
 
-#: ../admin/adm_list.php:166 ../admin/mail_list.php:167
+#: ../admin/adm_list.php:183 ../admin/mail_list.php:167
 #, php-format
 msgid "%3$d-%2$d-%1$d"
 msgstr "%1$02d/%2$02d/%3$04d"
 
-#: ../admin/adm_list.php:175
+#: ../admin/adm_list.php:192
 msgid "DB:"
 msgstr ""
 
-#: ../admin/adm_list.php:190 ../admin/dom_edit.php:171
+#: ../admin/adm_list.php:207 ../admin/dom_edit.php:171
 msgid "Disable"
 msgstr ""
 
-#: ../admin/adm_list.php:204 ../admin/adm_list.php:234
+#: ../admin/adm_list.php:221 ../admin/adm_list.php:250
 msgid "C"
 msgstr ""
 
-#: ../admin/adm_list.php:205 ../admin/adm_list.php:235
+#: ../admin/adm_list.php:222 ../admin/adm_list.php:251
 msgid "E"
 msgstr ""
 
-#: ../admin/adm_list.php:206 ../admin/adm_list.php:237
+#: ../admin/adm_list.php:223 ../admin/adm_list.php:253
 msgid "Q"
 msgstr ""
 
-#: ../admin/adm_list.php:209
-msgid "Complete view"
-msgstr ""
-
-#: ../admin/adm_list.php:239
+#: ../admin/adm_list.php:255
 msgid "himself"
 msgstr ""
 
-#: ../admin/adm_list.php:241
+#: ../admin/adm_list.php:257
 #, php-format
 msgid "Creator: %s"
 msgstr ""
@@ -3029,6 +3033,10 @@ msgstr ""
 
 #: ../admin/dom_edit.php:130
 msgid "Subdomain"
+msgstr ""
+
+#: ../admin/dom_edit.php:153
+msgid "ERROR, please check your server setup"
 msgstr ""
 
 #: ../admin/dom_edit.php:160 ../admin/ftp_list.php:94
@@ -4673,76 +4681,76 @@ msgstr ""
 msgid "during the month"
 msgstr ""
 
-#: ../admin/vm.php:49 ../class/m_lxc.php:60
+#: ../admin/vm.php:52 ../class/m_lxc.php:60
 msgid "Console access"
 msgstr ""
 
-#: ../admin/vm.php:66
+#: ../admin/vm.php:69
 msgid "You can start a virtual machine."
 msgstr ""
 
-#: ../admin/vm.php:69
+#: ../admin/vm.php:72
 msgid "Click here to start a virtual machine."
 msgstr ""
 
-#: ../admin/vm.php:75
+#: ../admin/vm.php:78
 msgid "Start time"
 msgstr ""
 
-#: ../admin/vm.php:76
+#: ../admin/vm.php:79
 msgid "SSH Fingerprint"
 msgstr ""
 
-#: ../admin/vm.php:77
+#: ../admin/vm.php:80
 msgid "Useful command"
 msgstr ""
 
-#: ../admin/vm.php:83
+#: ../admin/vm.php:86
 msgid "You can stop your virtual machine."
 msgstr ""
 
-#: ../admin/vm.php:86
+#: ../admin/vm.php:89
 msgid "Click here to stop your running virtual machine."
 msgstr ""
 
-#: ../admin/vm.php:96
+#: ../admin/vm.php:99
 msgid "Tips"
 msgstr ""
 
-#: ../admin/vm.php:101
+#: ../admin/vm.php:104
 msgid "Available softwares"
 msgstr ""
 
-#: ../admin/vm.php:102
+#: ../admin/vm.php:105
 msgid "Remotely start/stop a VM"
 msgstr ""
 
-#: ../admin/vm.php:107
+#: ../admin/vm.php:110
 msgid ""
 "You can script the launch the console access in command line by using this "
 "url:"
 msgstr ""
 
-#: ../admin/vm.php:109
+#: ../admin/vm.php:112
 msgid "You can halt the vm by using:"
 msgstr ""
 
-#: ../admin/vm.php:111
+#: ../admin/vm.php:114
 msgid ""
 "And you can see existing vm information (if the vm is running) by using:"
 msgstr ""
 
-#: ../admin/vm.php:113
+#: ../admin/vm.php:116
 msgid ""
 "Warning: if you do not use HTTPS, your password will be transfered without "
 "any protection"
 msgstr ""
 
-#: ../admin/vm.php:117
+#: ../admin/vm.php:120
 msgid "To access a remote console with SSH, you can use Putty."
 msgstr ""
 
-#: ../admin/vm.php:119
+#: ../admin/vm.php:122
 msgid "To transfer files, you can use Filezilla in SFTP mode."
 msgstr ""
 
@@ -4806,15 +4814,15 @@ msgstr ""
 msgid "Choose a folder..."
 msgstr ""
 
-#: ../class/m_action.php:157
+#: ../class/m_action.php:156
 msgid "Error setting actions"
 msgstr ""
 
-#: ../class/m_action.php:169
+#: ../class/m_action.php:168
 msgid "Error selecting  old actions"
 msgstr ""
 
-#: ../class/m_action.php:182
+#: ../class/m_action.php:181
 msgid "Error purging old actions"
 msgstr ""
 
@@ -5564,8 +5572,8 @@ msgstr ""
 msgid "Missing password"
 msgstr ""
 
-#: ../class/m_mem.php:252 ../class/m_mem.php:341
-msgid "Cookie incorrect, please accept the session cookie"
+#: ../class/m_mem.php:252
+msgid "Identity lost or unknown, please login"
 msgstr ""
 
 #: ../class/m_mem.php:258 ../class/m_mem.php:347
@@ -5574,6 +5582,10 @@ msgstr ""
 
 #: ../class/m_mem.php:264 ../class/m_mem.php:352
 msgid "IP address incorrect, please contact the administrator"
+msgstr ""
+
+#: ../class/m_mem.php:341
+msgid "Cookie incorrect, please accept the session cookie"
 msgstr ""
 
 #: ../class/m_mem.php:388
