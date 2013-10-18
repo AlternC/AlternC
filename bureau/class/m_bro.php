@@ -516,12 +516,11 @@ class m_bro {
 
         // pour l'instant on se limite a "write" pour owner, puisque c'est le seul
         // cas interessant compte tenu de la conf de Apache pour AlternC..
-        if ($perm[$i]['w']) {
-          $m = $m | 128;
+         if ($perm[$i]['w']) {
+          $m = $m | 0220; // ug+w
         } else {
-	  $m = $m ^ 128;
+	  $m = $m ^ 0222; // ugo-w
         }
-        $m = $m | ($perm[$i]['w'] ? 128 : 0); // 0600
         chmod($absolute."/".$d[$i], $m);
 	if ($verbose) {
 	  echo "chmod " . sprintf('%o', $m) . " file, was " . sprintf('%o', fileperms($absolute."/". $d[$i])). " -- " . $perm[$i]['w'];
