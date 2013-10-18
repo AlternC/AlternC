@@ -133,6 +133,7 @@ class m_lxc implements vm {
       $err->raise('lxc', _('VM already started'));
       return FALSE;
     }
+    unset($this->error);
 
     $login = $login ? $login : $mem->user['login'];
     $pass  = $pass  ? $pass  : $mem->user['pass'];

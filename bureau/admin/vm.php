@@ -69,7 +69,7 @@ include_once("head.php");
 <p class="alert alert-info"><?php __("You can start a virtual machine."); ?></p>
 <form method="post" action="vm.php">
    <input type="hidden" name="action" value="start" />
-<input type="submit" class="inb" name="go" value="<?php __("Click here to start a virtual machine."); ?>" />
+<input type="submit" class="inb ok" name="go" value="<?php __("Click here to start a virtual machine."); ?>" />
 </form>
 <?php
    } else {
@@ -86,7 +86,7 @@ include_once("head.php");
 <p class="alert alert-info"><?php __("You can stop your virtual machine."); ?></p>
 <form method="post" action="vm.php">
    <input type="hidden" name="action" value="stop" />
-<input type="submit" class="inb" name="go" value="<?php __("Click here to stop your running virtual machine."); ?>" />
+<input type="submit" class="inb cancel" name="go" value="<?php __("Click here to stop your running virtual machine."); ?>" />
 </form>
 <?php
 } // empty infos ?>
