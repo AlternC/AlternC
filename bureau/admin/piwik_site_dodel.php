@@ -47,7 +47,7 @@ if(!empty($confirm_del) ) {
     $error=$err->errstr();
   } else {
     include_once('head.php');
-    __("Site supprimé avec succès\n");
+    __("Site successfully deleted");
   }
 
   include('piwik_sitelist.php'); 

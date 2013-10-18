@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: AlternC, hosting control panel\n"
 "Report-Msgid-Bugs-To: https://alternc.org/report/1\n"
 "POT-Creation-Date: 2013-03-22 12:11+0000\n"
-"PO-Revision-Date: 2013-10-17 16:55+0000\n"
+"PO-Revision-Date: 2013-10-18 07:15+0000\n"
 "Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
 "Language-Team: French (France) (http://www.transifex.com/projects/p/alternc/language/fr_FR/)\n"
 "MIME-Version: 1.0\n"
@@ -147,7 +147,7 @@ msgstr "L'équipe d'AlternC fournit gratuitement le service de DNS à tout utili
 #. Description
 #: ../alternc.templates:7001
 msgid "The path where alternc's users html files will be put"
-msgstr ""
+msgstr "Dossier dans lequel les fichiers HTML des utilisateurs d'AlternC seront stockés"
 
 #. Type: string
 #. Description
@@ -155,19 +155,19 @@ msgstr ""
 msgid ""
 "Please enter the directory name where you want html user files to be put. "
 "The default value should be good in most cases."
-msgstr ""
+msgstr "Merci d'entrer le nom du répertoire dans lequel vous souhaitez voir stockés les fichiers HTML des utilisateurs. La valeur par défaut doit convenir dans la majorité des cas."
 
 #. Type: string
 #. Description
 #: ../alternc.templates:7001
 msgid "This directory wil contain every alternc users personnal directories."
-msgstr ""
+msgstr "Ce répertoire contiendra les dossiers personnels de tous les comptes AlternC."
 
 #. Type: string
 #. Description
 #: ../alternc.templates:8001
 msgid "The path where alternc's users mails will be put"
-msgstr ""
+msgstr "Répertoire dans lequel on stockera les mails des utilisateurs"
 
 #. Type: string
 #. Description
@@ -175,13 +175,13 @@ msgstr ""
 msgid ""
 "Please enter the directory name where you want to put your users maildirs. "
 "The default value should be good in most cases."
-msgstr ""
+msgstr "Merci d'entrer le nom du répertoire où vous souhaitez stocker les maildirs des utilisateurs. La valeur par défaut doit convenir dans la majorité des cas."
 
 #. Type: string
 #. Description
 #: ../alternc.templates:9001
 msgid "The path where alternc's logs files will be placed"
-msgstr ""
+msgstr "Répertoire dans lequel les fichiers logs d'AlternC seront stockés"
 
 #. Type: string
 #. Description
@@ -189,7 +189,7 @@ msgstr ""
 msgid ""
 "Please enter the directory name where you want to put your log files. The "
 "default value should be good in most cases."
-msgstr ""
+msgstr "Merci d'entrer le nom du répertoire où vous souhaitez stocker les fichiers de logs d'AlternC. La valeur par défaut doit convenir dans la majorité des cas."
 
 #. Type: string
 #. Description
@@ -2006,7 +2006,7 @@ msgstr "Créer un nouveau compte AlternC"
 
 #: ../admin/adm_list.php:78
 msgid "Pattern"
-msgstr ""
+msgstr "Motif"
 
 #: ../admin/adm_list.php:81 ../admin/piwik_sitelist.php:170
 msgid "submit"
@@ -2100,12 +2100,12 @@ msgstr "Affichage détaillé"
 
 #: ../admin/adm_list.php:240
 msgid "himself"
-msgstr ""
+msgstr "lui-même"
 
 #: ../admin/adm_list.php:242
 #, php-format
 msgid "Creator: %s"
-msgstr ""
+msgstr "Créateur : %s"
 
 #: ../admin/adm_login.php:49 ../admin/adm_login.php:56
 msgid "Your authentication information are incorrect"
@@ -2374,11 +2374,11 @@ msgstr "Si vous voulez autoriser un compte à synchroniser la liste des domaines
 
 #: ../admin/adm_slavedns.php:194
 msgid "In need of DNS Slave servers?"
-msgstr ""
+msgstr "Vous avez besoin de serveur DNS esclave ?"
 
 #: ../admin/adm_slavedns.php:196
 msgid "We offer free of charge DNS servers for alternc users."
-msgstr ""
+msgstr "Nous vous offrons un serveur DNS gratuit pour les utilisateurs d'AlternC."
 
 #: ../admin/adm_slavedns.php:199
 #, php-format
@@ -2399,7 +2399,7 @@ msgstr ""
 msgid ""
 "The alternc.net servers will take care of transfering and distributing to "
 "the world your domains zones."
-msgstr ""
+msgstr "Les serveurs d'alternc.net se chargerons de transférer et distribuer vos zones DNS au monde entier."
 
 #: ../admin/adm_tld.php:47
 msgid "Some TLD cannot be deleted..."
@@ -2824,7 +2824,7 @@ msgstr "Vous ne pouvez plus héberger de domaine, votre quota est atteint."
 
 #: ../admin/dom_add.php:57
 msgid "Advanced import"
-msgstr ""
+msgstr "Import avancé"
 
 #: ../admin/dom_add.php:60
 msgid "host my dns here"
@@ -2936,7 +2936,7 @@ msgstr "(entrez une adresse IPv6, par exemple 2001:0910::0)"
 
 #: ../admin/dom_edit.inc.php:100
 msgid "(enter a TXT content for this domain)"
-msgstr ""
+msgstr "(entrez un contenu TXT pour ce domaine)"
 
 #: ../admin/dom_edit.inc.php:104
 msgid "(enter a domain name or subdomain)"
@@ -3112,38 +3112,38 @@ msgstr "Les modifications seront prises en comptes à %time. L'heure du serveur 
 
 #: ../admin/dom_import.php:43
 msgid "Import a DNS zone"
-msgstr ""
+msgstr "Importer une zone DNS"
 
 #: ../admin/dom_import.php:55
 msgid "The domain field seems to be empty"
-msgstr ""
+msgstr "Le champ domaine semble vide"
 
 #: ../admin/dom_import.php:57
 msgid ""
 "Here is my proposition. Modify your zone until my proposition seems good to "
 "you"
-msgstr ""
+msgstr "Voici ma proposition, modifiez votre zone jusqu'à ce que ma proposition vous aille"
 
 #: ../admin/dom_import.php:59
 #, php-format
 msgid "Working on %s"
-msgstr ""
+msgstr "Préparation de %s"
 
 #: ../admin/dom_import.php:61
 msgid "Generated entry"
-msgstr ""
+msgstr "Entrées générées"
 
 #: ../admin/dom_import.php:61
 msgid "Result"
-msgstr ""
+msgstr "Résultat"
 
 #: ../admin/dom_import.php:61
 msgid "Zone"
-msgstr ""
+msgstr "Zone"
 
 #: ../admin/dom_import.php:74
 msgid "ERROR"
-msgstr ""
+msgstr "ERREUR"
 
 #: ../admin/dom_import.php:74 ../admin/mem_cm.php:56
 msgid "OK"
@@ -3151,23 +3151,23 @@ msgstr "OK"
 
 #: ../admin/dom_import.php:93
 msgid "Enter the domain you want to import"
-msgstr ""
+msgstr "Entrez le domaine que vous souhaitez importer"
 
 #: ../admin/dom_import.php:96
 msgid "Do you want to detect the redirection?"
-msgstr ""
+msgstr "Voulez-vous détecter les redirections ?"
 
 #: ../admin/dom_import.php:99
 msgid "Paste your DNS zone here"
-msgstr ""
+msgstr "Collez le contenu de votre zone DNS ici"
 
 #: ../admin/dom_import.php:104
 msgid "Do you want to import the zone as it?"
-msgstr ""
+msgstr "Voulez-vous importer la zone telle quelle ? "
 
 #: ../admin/dom_import.php:108
 msgid "Submit"
-msgstr ""
+msgstr "Envoyer"
 
 #: ../admin/dom_subdel.php:51
 #, php-format
@@ -3257,13 +3257,13 @@ msgstr "Êtes-vous sur de vouloir changer son statut ?"
 
 #: ../admin/ftp_list.php:107
 msgid "FTP configuration information"
-msgstr ""
+msgstr "Informations de configuration FTP"
 
 #: ../admin/ftp_list.php:109
 msgid ""
 "Here are some configuration information you will need to configure your FTP "
 "application."
-msgstr ""
+msgstr "Voici quelques informations de configuration dont vous aurez besoin dans votre client FTP."
 
 #: ../admin/ftp_list.php:112
 msgid "Server:"
@@ -3271,7 +3271,7 @@ msgstr "Serveur:"
 
 #: ../admin/ftp_list.php:113
 msgid "FTP mode for data transfer:"
-msgstr ""
+msgstr "Mode de transfert de données FTP :"
 
 #: ../admin/ftp_list.php:113
 msgid "passive"
@@ -3714,13 +3714,13 @@ msgstr "Supprimer les adresses email cochées"
 
 #: ../admin/mail_list.php:186
 msgid "Mails configuration information"
-msgstr ""
+msgstr "Information de configuration des emails"
 
 #: ../admin/mail_list.php:188
 msgid ""
 "Here are some configuration information you will need to configure your mail"
 " application."
-msgstr ""
+msgstr "Voici quelques informations de configuration dont vous aurez besoin dans votre logiciel de mail"
 
 #: ../admin/mail_list.php:195
 msgid "Outgoing mail (SMTP)"
@@ -3728,11 +3728,11 @@ msgstr "Serveur Sortant (SMTP)"
 
 #: ../admin/mail_list.php:196
 msgid "Incoming mail"
-msgstr ""
+msgstr "Mail entrant"
 
 #: ../admin/mail_list.php:201 ../admin/mail_list.php:242
 msgid "Which protocol shall you use?"
-msgstr ""
+msgstr "Quel protocole voulez-vous utiliser ?"
 
 #: ../admin/mail_list.php:203
 msgid "Submission"
@@ -3896,7 +3896,7 @@ msgstr "Il manque le POST de l'adresse mail"
 
 #: ../admin/mailautoconfig_thunderbird.php:9
 msgid "Error: Missing GET of emailaddress"
-msgstr ""
+msgstr "Erreur: le paramètre emailaddress est manquant"
 
 #: ../admin/mailautoconfig_thunderbird.php:12
 msgid "Error: Empty $emailDomain"
@@ -4102,7 +4102,7 @@ msgstr "Création du compte Piwik \"%s\""
 
 #: ../admin/piwik_addaccount.php:67
 msgid "Successfully added piwik user"
-msgstr ""
+msgstr "Utilisateur piwik ajouté avec succès"
 
 #: ../admin/piwik_addsites.php:44
 msgid "Error while adding website.<br/>"
@@ -4191,7 +4191,7 @@ msgstr ""
 
 #: ../admin/piwik_useradmin.php:71
 msgid "success"
-msgstr ""
+msgstr "succès"
 
 #: ../admin/piwik_useradmin.php:75
 msgid "This right does not exist"
@@ -4207,15 +4207,15 @@ msgstr "Ajouter les droits à l'utilisateur"
 
 #: ../admin/piwik_useradmin.php:139
 msgid "admin"
-msgstr ""
+msgstr "admin"
 
 #: ../admin/piwik_useradmin.php:139
 msgid "noacces"
-msgstr ""
+msgstr "pas d'accès"
 
 #: ../admin/piwik_useradmin.php:139
 msgid "view"
-msgstr ""
+msgstr "voir"
 
 #: ../admin/piwik_userlist.php:41
 msgid "Create a new piwik account"
@@ -4651,7 +4651,7 @@ msgstr "Vous pouvez démarrer une machine virtuelle"
 
 #: ../admin/vm.php:69
 msgid "Click here to start a virtual machine."
-msgstr ""
+msgstr "Cliquez ici pour démarrer une machine virtuelle"
 
 #: ../admin/vm.php:75
 msgid "Start time"
@@ -4659,19 +4659,19 @@ msgstr "Heure de démarrage"
 
 #: ../admin/vm.php:76
 msgid "SSH Fingerprint"
-msgstr ""
+msgstr "Empreinte SSH"
 
 #: ../admin/vm.php:77
 msgid "Useful command"
-msgstr ""
+msgstr "Commandes utile"
 
 #: ../admin/vm.php:83
 msgid "You can stop your virtual machine."
-msgstr ""
+msgstr "Vous pouvez arrêter votre machine virtuelle"
 
 #: ../admin/vm.php:86
 msgid "Click here to stop your running virtual machine."
-msgstr ""
+msgstr "Cliquer ici pour arrêter la machine"
 
 #: ../admin/vm.php:95
 msgid "Tips"
@@ -4685,7 +4685,7 @@ msgstr "Puis-je démarrer ou arrêter mon accès console avec un script?"
 msgid ""
 "You can script the launch the console access in command line by using this "
 "url:"
-msgstr ""
+msgstr "Vous pouvez utiliser un script pour lancer l'accès SSH via une commande en utilisant cette url :"
 
 #: ../admin/vm.php:103
 msgid "You can halt the vm by using:"
@@ -4694,7 +4694,7 @@ msgstr "Vous pouvez arrêter la VM en utilisant:"
 #: ../admin/vm.php:107
 msgid ""
 "And you can see existing vm information (if the vm is running) by using:"
-msgstr ""
+msgstr "Et vous pouvez voir les informations des VM existantes (si il y en a) en utilisant :"
 
 #: ../admin/vm.php:111
 msgid ""
@@ -4710,7 +4710,7 @@ msgstr "Quel logiciel puis-je utiliser?"
 msgid ""
 "To access a remote console with SSH, you can use Putty. To transfer files, "
 "you can use Filezilla in SFTP mode."
-msgstr ""
+msgstr "Pour avoir un accès distant avec SSH vous pouvez utiliser Putty. Pour transférer les fichiers vous pouvez utiliser FileZilla en mode SFTP."
 
 #: ../class/functions.php:282
 msgid "Bytes"
@@ -4770,7 +4770,7 @@ msgstr "Choisir un répertoire ..."
 
 #: ../class/m_action.php:156
 msgid "Error setting actions"
-msgstr ""
+msgstr "Erreur lors de la création d'un action"
 
 #: ../class/m_action.php:168
 msgid "Error selecting  old actions"
@@ -4856,7 +4856,7 @@ msgstr "-- Seuls les administrateurs peuvent accéder à cette page ! --"
 #: ../class/m_admin.php:322
 msgid ""
 "Invalid pattern type provided. Are you even performing a legitimate action?"
-msgstr ""
+msgstr "Un motif invalide a été entré. Qu'essayez-vous de faire ?"
 
 #: ../class/m_admin.php:372
 msgid "Subject, message and sender are mandatory"
@@ -5093,11 +5093,11 @@ msgstr "Problème d'identité"
 
 #: ../class/m_dom.php:176
 msgid "Err: failed to prepare the zone"
-msgstr ""
+msgstr "Err : échec à la préparation de la zone"
 
 #: ../class/m_dom.php:198
 msgid "Missing domain name"
-msgstr ""
+msgstr "Nom de domaine manquant"
 
 #: ../class/m_dom.php:462
 msgid "The name MUST contain only letter and digits"

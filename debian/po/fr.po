@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: AlternC, hosting control panel\n"
 "Report-Msgid-Bugs-To: https://alternc.org/report/1\n"
 "POT-Creation-Date: 2013-03-22 12:11+0000\n"
-"PO-Revision-Date: 2013-10-17 16:55+0000\n"
+"PO-Revision-Date: 2013-10-18 07:15+0000\n"
 "Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
 "Language-Team: French (France) (http://www.transifex.com/projects/p/alternc/"
 "language/fr_FR/)\n"
@@ -175,6 +175,8 @@ msgstr ""
 #: ../alternc.templates:7001
 msgid "The path where alternc's users html files will be put"
 msgstr ""
+"Dossier dans lequel les fichiers HTML des utilisateurs d'AlternC seront "
+"stockés"
 
 #. Type: string
 #. Description
@@ -183,12 +185,15 @@ msgid ""
 "Please enter the directory name where you want html user files to be put. "
 "The default value should be good in most cases."
 msgstr ""
+"Merci d'entrer le nom du répertoire dans lequel vous souhaitez voir stockés "
+"les fichiers HTML des utilisateurs. La valeur par défaut doit convenir dans "
+"la majorité des cas."
 
 #. Type: string
 #. Description
 #: ../alternc.templates:8001
 msgid "The path where alternc's users mails will be put"
-msgstr ""
+msgstr "Répertoire dans lequel on stockera les mails des utilisateurs"
 
 #. Type: string
 #. Description
@@ -197,12 +202,15 @@ msgid ""
 "Please enter the directory name where you want to put your users maildirs. "
 "The default value should be good in most cases."
 msgstr ""
+"Merci d'entrer le nom du répertoire où vous souhaitez stocker les maildirs "
+"des utilisateurs. La valeur par défaut doit convenir dans la majorité des "
+"cas."
 
 #. Type: string
 #. Description
 #: ../alternc.templates:9001
 msgid "The path where alternc's logs files will be placed"
-msgstr ""
+msgstr "Répertoire dans lequel les fichiers logs d'AlternC seront stockés"
 
 #. Type: string
 #. Description
@@ -211,6 +219,9 @@ msgid ""
 "Please enter the directory name where you want to put your log files. The "
 "default value should be good in most cases."
 msgstr ""
+"Merci d'entrer le nom du répertoire où vous souhaitez stocker les fichiers "
+"de logs d'AlternC. La valeur par défaut doit convenir dans la majorité des "
+"cas."
 
 #. Type: string
 #. Description
