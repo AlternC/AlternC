@@ -50,13 +50,13 @@ include_once("head.php");
 <hr/>
 <br/>
 
-<?php if ($error) { ?>
+<?php if (!empty($error)) { ?>
 <div>
 <span class="error">
-   <?php echo implode('<br />', $error); ?>
+   <?php echo implode(" - ", array_unique($error)); ?>
+
 </span>
 </div>
-<br/>
 <br/>
 <?php } ?>
 
@@ -92,37 +92,37 @@ include_once("head.php");
 <br/>
 <br/>
 <hr/>
+
 <h3><?php __("Tips"); ?></h3>
-<a href="javascript:;" onclick="$('#tips-script').toggle();"><?php __("Can I start or stop my console access with a script?"); ?></a>
-<div id='tips-script'>
-<fieldset>
-<?php __("You can script the launch the console access in command line by using this url:"); ?>
-<pre>
-http://<?php echo $mem->user['login'].':ALTERNC_PASSWORD@'.$host.'/vm.php?http_auth=1&amp;script=1&amp;action=start' ?>
-</pre>
-<?php __("You can halt the vm by using:"); ?>
-<pre>
-http://<?php echo $mem->user['login'].':ALTERNC_PASSWORD@'.$host.'/vm.php?http_auth=1&amp;script=1&amp;action=stop' ?>
-</pre>
-<?php __("And you can see existing vm information (if the vm is running) by using:"); ?>
-<pre>
-http://<?php echo $mem->user['login'].':ALTERNC_PASSWORD@'.$host.'/vm.php?http_auth=1&amp;script=1' ?>
-</pre>
-<i><?php __("Warning: if you do not use HTTPS, your password will be transfered without any protection"); ?></i>
-</fieldset>
+
+<div id="tabs-tips-vm">
+
+<ul>
+  <li class="help"><a href="#tabs-tips-soft"><?php __("Available softwares"); ?></a></li>
+  <li class="help"><a href="#tabs-tips-script"><?php __("Remotely start/stop a VM"); ?></a></li>
+</ul>
+
+
+<div id='tabs-tips-script'>
+  <?php __("You can script the launch the console access in command line by using this url:"); ?>
+  <pre>http://<?php echo $mem->user['login'].':ALTERNC_PASSWORD@'.$host.'/vm.php?http_auth=1&amp;script=1&amp;action=start' ?></pre>
+  <?php __("You can halt the vm by using:"); ?>
+  <pre>http://<?php echo $mem->user['login'].':ALTERNC_PASSWORD@'.$host.'/vm.php?http_auth=1&amp;script=1&amp;action=stop' ?></pre>
+  <?php __("And you can see existing vm information (if the vm is running) by using:"); ?>
+  <pre>http://<?php echo $mem->user['login'].':ALTERNC_PASSWORD@'.$host.'/vm.php?http_auth=1&amp;script=1' ?></pre>
+  <i><?php __("Warning: if you do not use HTTPS, your password will be transfered without any protection"); ?></i>
 </div>
 
-<br/>
-<a href="javascript:;" onclick="$('#tips-soft').toggle();"><?php __("Which software can I use?"); ?></a>
-<div id='tips-soft'>
-<fieldset>
-<?php __("To access a remote console with SSH, you can use Putty. To transfer files, you can use Filezilla in SFTP mode."); ?>
-</fieldset>
+<div id='tabs-tips-soft'>
+  <?php __("To access a remote console with SSH, you can use Putty.");?>
+  <br/>
+  <?php __("To transfer files, you can use Filezilla in SFTP mode."); ?>
 </div>
+
+</div><!-- tabs-tips-vm -->
 
 <script type="text/javascript">
-$('#tips-script').toggle();
-$('#tips-soft').toggle();
+  $(function() {$( "#tabs-tips-vm" ).tabs();});
 </script>
 
 <?php

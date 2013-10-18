@@ -87,7 +87,7 @@ class m_lxc implements vm {
    */
   private function sendMessage($params) {
     global $L_FQDN,$hooks;
-    $fp = fsockopen($this->IP, $this->PORT, $errno, $errstr, $this->TIMEOUT);
+    $fp = @fsockopen($this->IP, $this->PORT, $errno, $errstr, $this->TIMEOUT);
     if (!$fp) {
       $this->error[] = 'Unable to connect';
       return FALSE;
