@@ -249,7 +249,7 @@ class m_mem {
     } // end isset
     $_COOKIE["session"]=isset($_COOKIE["session"])?addslashes($_COOKIE["session"]):"";
     if (strlen($_COOKIE["session"])!=32) {
-      $err->raise("mem",_("Cookie incorrect, please accept the session cookie"));
+      $err->raise("mem",_("Identity lost or unknown, please login"));
       return false;
     }
     $ip=get_remote_ip();
