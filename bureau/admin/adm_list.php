@@ -69,18 +69,55 @@ if ($pattern && $pattern_type) {
 
 <h3><?php __("AlternC account list"); ?></h3>
 <hr id="topbar"/>
-<br />
 
-<p><span class="ina"><a href="adm_add.php"><?php __("Create a new AlternC account"); ?></a></span></p>
+<?php
+// Depending on the admin's choice, let's show a short list or a long list.
+if ($mem->user["admlist"]==0) { // Normal (large) mode
+?>
+  <p><span class="ina" style="float: right;"><a href="adm_list.php?short=1"><?php __("Minimal view"); ?></a></span></p>
+<?php
+} else {
+?>
+  <p><span class="ina" style="float:right;"><a href="adm_list.php?short=0"><?php __("Complete view"); ?></a></span></p>
+<?php
+}
+?>
 
-<form method="post" action="adm_list.php" >
-<p>
-  <label for="pattern_type_login"><?php __("Search for a Login"); ?></label><input type="radio" name="pattern_type" value="login" id="pattern_type_login" <?php if (!$pattern_type || $pattern_type === 'login') echo ' checked="checked" '; ?>/>&nbsp;
-<label for="pattern_type_domain"><?php __("Search for a Domain"); ?></label><input type="radio" name="pattern_type" value="domaine" id="pattern_type_domain" <?php if ($pattern_type === 'domaine') echo ' checked="checked" '; ?>/>
-  <input type="text" id="pattern" name="pattern" value="<?php echo $pattern ?>"/> <input type="submit" class="inb" value="<?php __("submit"); ?>" />
-</p>
-</form>
+<fieldset style="clear:both;">
+  <legend><?php __("Filters"); ?></legend>
+  <form method="post" action="adm_list.php" >
+  <p>
+    <label for="pattern_type_login"><?php __("Search for a Login"); ?></label><input type="radio" name="pattern_type" value="login" id="pattern_type_login" <?php if (!$pattern_type || $pattern_type === 'login') echo ' checked="checked" '; ?>/>&nbsp;
+    <label for="pattern_type_domain"><?php __("Search for a Domain"); ?></label><input type="radio" name="pattern_type" value="domaine" id="pattern_type_domain" <?php if ($pattern_type === 'domaine') echo ' checked="checked" '; ?>/>
+    <input type="text" id="pattern" name="pattern" value="<?php echo $pattern ?>"/> <input type="submit" class="inb filter" value="<?php __("submit"); ?>" />
+  </p>
+  </form>
+  <?php
+  $list_creators = $admin->get_creator_list();
 
+  if ($subadmin==1 || $cuid==2000) {
+    if($show != 'all') {
+      echo '<p><span class="inb filter"><a href="adm_list.php?show=all">' . _('List all AlternC accounts') . '</a></span>';
+      
+      if ($subadmin==1 || $cuid==2000) {
+        $infos_creators = array();
+
+        foreach ($list_creators as $key => $val) {
+          $infos_creators[] = '<a href="adm_list.php?creator=' . $val['uid'] . '">' . $val['login'] . '</a>';
+        }
+
+        if (count($infos_creators)) {
+          echo ' ('._("Or only the accounts of:")." ". implode(', ', $infos_creators) . ')';
+        }
+      }
+      echo "</p>";
+    } else { // if show != all
+      echo '<p><span class="ina filter"><a href="adm_list.php">' . _('List only my accounts') . '</a></span></p>';
+    } 
+  }// END ($subadmin==1 || $cuid==2000)
+  ?>
+</fieldset>
+  
 <?php
 if ( !empty($error) ) {
   echo '<p class="alert alert-danger">' , $error, '</p>';
@@ -91,29 +128,10 @@ if ( !empty($error) ) {
 <p>
 <?php __("Here is the list of hosted AlternC accounts"); ?> (<?php printf(_("%s accounts"),count($r)); ?>)
 </p>
+
+<p><span class="ina add"><a href="adm_add.php"><?php __("Create a new AlternC account"); ?></a></span></p>
+
 <?php
-$list_creators = $admin->get_creator_list();
-
-if ($subadmin==1 || $cuid==2000) {
-if($show != 'all') {
-  echo '<p><span class="ina"><a href="adm_list.php?show=all">' . _('List all AlternC accounts') . '</a></span>';
-  if ($subadmin==1 || $cuid==2000) {
-    $infos_creators = array();
-
-    foreach ($list_creators as $key => $val) {
-      $infos_creators[] = '<a href="adm_list.php?creator=' . $val['uid'] . '">' . $val['login'] . '</a>';
-    }
-
-    if (count($infos_creators)) {
-      echo ' ('._("Or only the accounts of:")." ". implode(', ', $infos_creators) . ')';
-    }
-  }
-  echo "</p>";
-} else { // if show != all
-  echo '<p><span class="ina"><a href="adm_list.php">' . _('List only my accounts') . '</a></span></p>';
-} 
-}// END ($subadmin==1 || $cuid==2000)
-
 if (!is_array($r) || empty($r) ) {
   echo '<p class="alert alert-danger">'._("No account defined for now").'</p>';
   include('foot.php');
@@ -127,9 +145,8 @@ if (!is_array($r) || empty($r) ) {
 if ($mem->user["admlist"]==0) { // Normal (large) mode
 ?>
 <p>
-<span class="ina" style="float: right;"><a href="adm_list.php?short=1"><?php __("Minimal view"); ?></a></span> &nbsp;
 <?php  if (count($r)>5) { ?>
-<input type="submit" class="inb" name="submit" value="<?php __("Delete checked accounts"); ?>" />
+<input type="submit" class="inb delete" name="submit" value="<?php __("Delete checked accounts"); ?>" />
 <?php } ?>
 </p>
 <table class="tlist" style="clear:both;">
@@ -206,7 +223,6 @@ if ($mem->user["admlist"]==1) { // SHORT MODE
   [&nbsp;<?php __("Q"); ?>&nbsp;] <?php __("Quotas"); ?> &nbsp; &nbsp; 
 
 <p>
-<span class="ina" style="float:right;"><a href="adm_list.php?short=0"><?php __("Complete view"); ?></a></span> &nbsp;
 <?php  if (count($r)>50) { ?>
   <input type="submit" class="inb" name="submit" value="<?php __("Delete checked accounts"); ?>" />
 <?php } // finc count > 50 ?>

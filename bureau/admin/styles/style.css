@@ -95,14 +95,6 @@ pre {
   -moz-border-radius: 4px;
 }
 
-
-.filter a, a.edit, input.filter {
-  background-image: url(../icon/filter.png);
-  background-repeat: no-repeat;
-  background-position: 8px 3px;
-  padding-left: 30px;
-}
-
 .inp {
   /* Should not be use anymore !!! */
   border-color: blue;
@@ -355,7 +347,8 @@ img {
 
 /* Alert icons */
 #content .alert {
-    background-position: 16px 16px;
+    background-position: 12px 10px;
+    background-repeat: no-repeat;
     padding-left: 48px;
 }
 #content .alert-danger {
@@ -994,6 +987,13 @@ div.progress-bar div.txt {
 
 .logout a, a.logout, input.logout, .logout-menu .menu-title {
   background-image: url(../images/exit.png);
+  background-repeat: no-repeat;
+  background-position: 8px 3px;
+  padding-left: 30px;
+}
+
+.filter a, a.edit, input.filter {
+  background-image: url(../icon/filter.png);
   background-repeat: no-repeat;
   background-position: 8px 3px;
   padding-left: 30px;

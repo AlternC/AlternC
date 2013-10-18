@@ -2,7 +2,7 @@
 20131018 [alban] 
 	icons:
 	*    abort.png
-	*    alert.png
+	*    warning.png
 	*    danger.png
 	*    success.png
 	24x24 Free Application Icons
