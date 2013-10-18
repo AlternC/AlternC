@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: i18n@alternc.org\n"
-"POT-Creation-Date: 2013-10-18 15:02+0200\n"
+"POT-Creation-Date: 2013-10-18 15:40+0200\n"
 "PO-Revision-Date: 2008-09-05 16:50+0200\n"
 "Last-Translator: \n"
 "Language-Team:  <tech@alternc.org>\n"
@@ -177,34 +177,28 @@ msgstr "Confirmar contraseña"
 msgid "Can he change its password"
 msgstr "¿Puede cambiar su contraseña?"
 
-#: ../admin/adm_add.php:78 ../admin/adm_dodefquotas.php:76
-#: ../admin/adm_dodel.php:88 ../admin/adm_domstype.php:82
+#: ../admin/adm_add.php:78 ../admin/adm_domstype.php:82
 #: ../admin/adm_domstype.php:83 ../admin/adm_domstype.php:84
 #: ../admin/adm_domstype.php:85 ../admin/adm_domstype.php:86
 #: ../admin/adm_edit.php:78 ../admin/adm_edit.php:95
 #: ../admin/adm_passpolicy.php:113 ../admin/adm_passpolicy.php:157
-#: ../admin/bro_main.php:106 ../admin/dom_dodel.php:74
 #: ../admin/dom_edit.php:231 ../admin/dom_edit.php:254
 #: ../admin/dom_subdel.php:71 ../admin/mail_edit.php:90
-#: ../admin/mail_list.php:164 ../admin/sql_bck.php:94 ../admin/sql_del.php:90
-#: ../admin/sql_users_del.php:76 ../class/m_bro.php:70
+#: ../admin/mail_list.php:164 ../admin/sql_bck.php:94 ../class/m_bro.php:70
 msgid "No"
 msgstr "No"
 
-#: ../admin/adm_add.php:79 ../admin/adm_dodefquotas.php:75
-#: ../admin/adm_dodel.php:87 ../admin/adm_domstype.php:82
+#: ../admin/adm_add.php:79 ../admin/adm_domstype.php:82
 #: ../admin/adm_domstype.php:83 ../admin/adm_domstype.php:84
 #: ../admin/adm_domstype.php:85 ../admin/adm_domstype.php:86
 #: ../admin/adm_edit.php:79 ../admin/adm_edit.php:96
 #: ../admin/adm_passpolicy.php:114 ../admin/adm_passpolicy.php:157
-#: ../admin/bro_main.php:105 ../admin/dom_dodel.php:74
 #: ../admin/dom_edit.php:230 ../admin/dom_edit.php:253
 #: ../admin/dom_subdel.php:70 ../admin/mail_edit.php:91
 #: ../admin/mail_list.php:209 ../admin/mail_list.php:220
 #: ../admin/mail_list.php:231 ../admin/mail_list.php:249
 #: ../admin/mail_list.php:260 ../admin/mail_list.php:271
-#: ../admin/mail_list.php:282 ../admin/sql_bck.php:95 ../admin/sql_del.php:90
-#: ../admin/sql_users_del.php:76 ../class/m_bro.php:70
+#: ../admin/mail_list.php:282 ../admin/sql_bck.php:95 ../class/m_bro.php:70
 msgid "Yes"
 msgstr "Sí"
 
@@ -256,10 +250,11 @@ msgstr "Crear la cuenta FTP."
 #: ../admin/browseforfolder.php:146 ../admin/browseforfolder2.php:142
 #: ../admin/ftp_del.php:83 ../admin/ftp_edit.php:98
 #: ../admin/hta_adduser.php:68 ../admin/hta_dodeluser.php:65
-#: ../admin/mail_edit.php:116 ../admin/mail_manage_catchall.php:122
-#: ../admin/piwik_site_dodel.php:71 ../admin/piwik_user_dodel.php:69
-#: ../admin/sql_bck.php:108 ../admin/sql_users_add.php:73
-#: ../admin/sql_users_password.php:69 ../admin/sql_users_rights.php:104
+#: ../admin/hta_edit.php:113 ../admin/mail_edit.php:116
+#: ../admin/mail_manage_catchall.php:122 ../admin/piwik_site_dodel.php:71
+#: ../admin/piwik_user_dodel.php:69 ../admin/sql_bck.php:108
+#: ../admin/sql_users_add.php:73 ../admin/sql_users_password.php:69
+#: ../admin/sql_users_rights.php:104
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -578,6 +573,16 @@ msgstr "Supresión de la cuota %s"
 msgid "WARNING: Confirm the deletion of the quota"
 msgstr "ADVERTENCIA : Confirma la supresión de la cuota"
 
+#: ../admin/adm_dodefquotas.php:75
+#, fuzzy
+msgid "Yes, delete this default quota"
+msgstr "Modificar las cuotas por omisión"
+
+#: ../admin/adm_dodefquotas.php:76
+#, fuzzy
+msgid "No, don't delete this default quota"
+msgstr "no pudo ser borrado"
+
 #: ../admin/adm_dodefquotas.php:94
 msgid "Default quotas successfully changed"
 msgstr "Cuotas por omisión modificadas con éxito"
@@ -609,6 +614,16 @@ msgstr "Suprimir un usuario"
 #: ../admin/adm_dodel.php:77
 msgid "WARNING : Confirm the deletion of the users"
 msgstr "ADVERTENCIA : Confirma la supresión de este usuario"
+
+#: ../admin/adm_dodel.php:87
+#, fuzzy
+msgid "Yes, delete those accounts"
+msgstr "Suprimir las cuentas marcadas"
+
+#: ../admin/adm_dodel.php:88
+#, fuzzy
+msgid "No, don't delete those accounts"
+msgstr "Suprimir las cuentas marcadas"
 
 #: ../admin/adm_doedit.php:77
 msgid "The member has been successfully edited"
@@ -1577,6 +1592,14 @@ msgstr "Borrar archivos y/o carpetas"
 msgid "WARNING: Confirm the deletion of this files"
 msgstr "ADVERTENCIA : Confirma la supresión de estos archivos"
 
+#: ../admin/bro_main.php:105
+msgid "Yes, delte those files/folders"
+msgstr ""
+
+#: ../admin/bro_main.php:106
+msgid "No, don't delete those files/folders"
+msgstr ""
+
 #: ../admin/bro_main.php:144
 msgid "extracting..."
 msgstr "extrayendo..."
@@ -1963,7 +1986,7 @@ msgid "Your new domain %s has been successfully installed"
 msgstr "Tu nuevo dominio %s fue instalado con éxito"
 
 #: ../admin/dom_doadd.php:55 ../admin/dom_dodel.php:56
-#: ../admin/dom_dodel.php:85 ../admin/dom_editdns.php:62
+#: ../admin/dom_dodel.php:86 ../admin/dom_editdns.php:62
 #: ../admin/dom_import.php:87 ../admin/dom_subdodel.php:79
 #: ../admin/hta_doedituser.php:62
 msgid "Click here to continue"
@@ -1989,12 +2012,22 @@ msgid "This will delete the related sub-domains too."
 msgstr ""
 "Esto va a suprimir todos los emails y los subdominios correspondientes.."
 
-#: ../admin/dom_dodel.php:80
+#: ../admin/dom_dodel.php:74
+#, fuzzy
+msgid "Yes, delete this domain name"
+msgstr "Instalar el dominio <b>login.%s</b>"
+
+#: ../admin/dom_dodel.php:75
+#, fuzzy
+msgid "No, don't delete this domain name"
+msgstr "Instalar el dominio <b>login.%s</b>"
+
+#: ../admin/dom_dodel.php:81
 #, php-format
 msgid "Domain %s deleted"
 msgstr "Dominio %s borrado"
 
-#: ../admin/dom_dodel.php:84
+#: ../admin/dom_dodel.php:85
 #, php-format
 msgid "The domain %s has been successfully deleted."
 msgstr "El dominio %s fue borrado."
@@ -2265,24 +2298,29 @@ msgstr ""
 msgid "OK"
 msgstr "OK"
 
-#: ../admin/dom_import.php:93
-msgid "Enter the domain you want to import"
-msgstr ""
-
 #: ../admin/dom_import.php:96
+#, fuzzy
+msgid "Enter the domain name you want to import"
+msgstr "¡El buzón <b>%s</b> no existe!"
+
+#: ../admin/dom_import.php:104
 #, fuzzy
 msgid "Do you want to detect the redirection?"
 msgstr "¿Quieres ver los textos de ayuda y los enlaces en cada página?"
 
-#: ../admin/dom_import.php:99
-msgid "Paste your DNS zone here"
+#: ../admin/dom_import.php:115
+msgid "Paste your existing DNS zone here."
 msgstr ""
 
-#: ../admin/dom_import.php:104
+#: ../admin/dom_import.php:117
+msgid "If you don't know what it is, don't submit this form."
+msgstr ""
+
+#: ../admin/dom_import.php:122
 msgid "Do you want to import the zone as it?"
 msgstr ""
 
-#: ../admin/dom_import.php:108
+#: ../admin/dom_import.php:126
 #, fuzzy
 msgid "Submit"
 msgstr "Permisos"
@@ -3683,6 +3721,16 @@ msgstr "Confirmar la supresión de las bases de datos SQL siguientes"
 msgid "This will delete all the tables currently in those db."
 msgstr "Esto borrará todas las tablas contenidas dentro de estas bases."
 
+#: ../admin/sql_del.php:90
+#, fuzzy
+msgid "No, don't delete the database"
+msgstr "Borrar las bases de datos seleccionadas"
+
+#: ../admin/sql_del.php:90
+#, fuzzy
+msgid "Yes, delete the database"
+msgstr "Borrar las bases de datos seleccionadas"
+
 #: ../admin/sql_doadd.php:37
 #, fuzzy
 msgid "Can't create a database: your quota is over"
@@ -3839,6 +3887,16 @@ msgstr "Usuarios MySQL"
 #: ../admin/sql_users_del.php:61
 msgid "Confirm the deletion of the following MySQL users"
 msgstr "Confirmar la supresión de los usuarios MySQL siguientes"
+
+#: ../admin/sql_users_del.php:76
+#, fuzzy
+msgid "No, don't delete the MySQL user"
+msgstr "Crear un nuevo usuario MySQL"
+
+#: ../admin/sql_users_del.php:76
+#, fuzzy
+msgid "Yes, delete the MySQL user"
+msgstr "Crear un nuevo usuario MySQL"
 
 #: ../admin/sql_users_dorights.php:54
 msgid "The rights has been successfully applied to the user"

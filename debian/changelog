@@ -1,5 +1,8 @@
-alternc (3.1~alpha030) experimental; urgency=low
+alternc (3.1) stable; urgency=low
 
+  * feature: import of existing DNS zone
+  * feature: display of current DNS zone in dom_edit
+  * LXC-host module in AlternC client-side. alternc-lxc package is server-side
   * menu became dynamic with a class
   * /var/alternc disapear to become Debian-compliant
     but we upgrade properly, keeping an existing /var/alternc
@@ -14,7 +17,7 @@ alternc (3.1~alpha030) experimental; urgency=low
     for Outlook & Thunderbird
   * fix (one more time) the translation system
 
- -- Benjamin Sonntag <benjamin@sonntag.fr>  Thu, 15 Jun 2013 09:09:00 +0200
+ -- Benjamin Sonntag <benjamin@sonntag.fr>  Thu, 18 Oct 2013 15:17:00 +0200
 
 alternc (3.0) stable; urgency=low
 

@@ -653,6 +653,7 @@ wheezy/95_alternc.conf -text
 wheezy/alternc-dict-quota.conf -text
 wheezy/alternc-sql.conf -text
 wheezy/alternc.install.diff -text
+wheezy/changelog.diff -text
 wheezy/control.diff -text
 wheezy/originals/alternc.install -text
 wheezy/originals/control -text

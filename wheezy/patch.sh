@@ -9,6 +9,7 @@ cd `dirname $0`
 
 pushd ../debian 
 patch <../wheezy/control.diff
+patch <../wheezy/changelog.diff
 popd
 pushd ../install
 patch <../wheezy/alternc.install.diff

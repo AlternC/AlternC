@@ -102,7 +102,7 @@ if (!empty($formu) && $formu) {
             <?php } ?>
             </ul>
                 <blockquote>
-                <input type="submit" class="inb ok" name="del_confirm" value="<?php __("Yes, delte those files/folders"); ?>" />&nbsp;&nbsp;
+                <input type="submit" class="inb ok" name="del_confirm" value="<?php __("Yes, delete those files/folders"); ?>" />&nbsp;&nbsp;
           <input type="submit" class="inb cancel" name="cancel" value="<?php __("No, don't delete those files/folders"); ?>" />
             </blockquote>
             </form>
