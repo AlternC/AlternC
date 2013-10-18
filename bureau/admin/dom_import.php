@@ -90,22 +90,41 @@ if ($save) {
 
 
 <form method="post" action="dom_import.php">
-  <label><?php __("Enter the domain you want to import") ; ?></label>
-  <input type="text" name="domain" value="<?php echo $domain; ?>" />
+  <table>
+    <tr>
+      <td>
+        <label for="domain"><?php __("Enter the domain name you want to import") ; ?></label>
+      </td>
+      <td>
+        <input type="text" size="40" name="domain" value="<?php echo $domain; ?>" />
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label for="detect_redirect"><?php __("Do you want to detect the redirection?"); ?></label>
+      </td>
+      <td>
+        <input name="detect_redirect" type="checkbox" value="1" <?php cbox($detect_redirect); ?> />
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
 
-  <label><?php __("Do you want to detect the redirection?"); ?></label>
-  <input name="detect_redirect" type="checkbox" value="1" <?php cbox($detect_redirect); ?> />
+        <p>
+          <label for="zone"><?php 
+          __("Paste your existing DNS zone here.");
+          echo '<br/>';
+          __("If you don't know what it is, don't submit this form.");?></label>
+          <textarea cols=100 rows=20 name="zone"><?php echo $zone; ?></textarea>
+        </p>
 
-  <fieldset><legend><?php __("Paste your DNS zone here");?></legend>
-    <textarea cols=80 rows=20 name="zone"><?php echo $zone; ?></textarea>
-  </fieldset>
+        <?php if ( ! empty($zone) && ! empty($domain) ) { // only if you reviewed ?>
+          <label><?php __("Do you want to import the zone as it?"); ?></label>
+          <input name="save" type="checkbox" value="1" />
+        <?php } ?>
 
-  <?php if ( ! empty($zone) && ! empty($domain) ) { // only if you reviewed ?>
-    <label><?php __("Do you want to import the zone as it?"); ?></label>
-    <input name="save" type="checkbox" value="1" />
-  <?php } ?>
-
-  <p><input type="submit" name="submit" class="inb ok" value="<?php __("Submit"); ?>" /></p>
+        <p><input type="submit" name="submit" class="inb ok" value="<?php __("Submit"); ?>" /></p>
+      </td>
 </form>
 
 <?php 
