@@ -589,8 +589,9 @@ done
 # hook 
 run-parts --arg=end /usr/lib/alternc/install.d 
 
+# Unlock jobs !
+unlock_jobs
+
 # Rebuild all web configuration
 /usr/lib/alternc/rebuild_all_webconf.sh --force
 
-# Unlock jobs !
-unlock_jobs
