@@ -43,8 +43,9 @@ install-common:
 # Configuration Files
 	test -d $(DESTDIR)/etc || mkdir -p $(DESTDIR)/etc
 	cp -r etc/alternc $(DESTDIR)/etc
-	find $(DESTDIR)/etc/alternc -depth -type d -name ".svn" -exec rm {} -rf \;
-	chmod 755 $(DESTDIR)/etc/alternc
+	cp -r etc/incron.d $(DESTDIR)/etc
+	find $(DESTDIR)/etc/ -depth -type d -name ".svn" -exec rm {} -rf \;
+	chmod 755 $(DESTDIR)/etc/alternc etc/incron.d
 
 # Installer and upgrade scripts 
 	test -d $(DESTDIR)/usr/share/alternc/install || mkdir -p $(DESTDIR)/usr/share/alternc/install
