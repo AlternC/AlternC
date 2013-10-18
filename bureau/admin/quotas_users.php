@@ -22,7 +22,7 @@ include_once ("head.php");
 <br />
 <?php
 if (isset($error) && $error) {
-  echo "<p class=\"error\">$error</p>";
+  echo "<p class=\"alert alert-warning\">$error</p>";
 }
 ?>
 <p>
@@ -51,7 +51,7 @@ echo "<br /><br />"; printf(_("If you want to manage them, go to")."&nbsp;<a hre
 </p>
 
 <?php if ($mode == 4) {
-	// Mode : affichage des données globales
+	// Mode : affichage des donnï¿½es globales
 
 	if ($cuid != 2000)
 	{

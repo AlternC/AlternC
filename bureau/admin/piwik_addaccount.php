@@ -41,7 +41,7 @@ $fields = array (
 getFields($fields);
 
 if (empty($account_name)) {
-  echo "<p class=\"error\">"._("Error : missing arguments.")."</p>";
+  echo "<p class=\"alert alert-danger\">"._("Error : missing arguments.")."</p>";
   include_once("foot.php");
   exit;
 }
@@ -56,7 +56,7 @@ if (!$infos)
 {
     $error = $err->errstr();
     //if (isset($error) && $error) {
-    echo "<p class=\"error\">$error</p>";
+    echo "<p class=\"alert alert-danger\">$error</p>";
     if (isset($fatal) && $fatal) {
       include_once("foot.php");
       exit();

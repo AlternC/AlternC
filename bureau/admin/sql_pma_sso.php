@@ -46,7 +46,7 @@ include_once("head.php");
 echo '<h3>'._("SQL Admin").'</h3>';
 
 if (!empty($error)) {
-  echo "<p class=\"error\">$error</p>";
+  echo "<p class=\"alert alert-danger\">$error</p>";
 }
 include_once("foot.php"); 
 

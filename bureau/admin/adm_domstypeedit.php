@@ -62,7 +62,7 @@ if (! $d=$dom->domains_type_get($name)) {
 <br />
 <?php
 if (isset($error_edit) && $error_edit) {
-	echo "<p class=\"error\">$error_edit</p>";
+	echo "<p class=\"alert alert-danger\">$error_edit</p>";
 	$error_edit="";
 
 } ?>

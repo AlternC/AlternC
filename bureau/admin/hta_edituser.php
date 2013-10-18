@@ -41,7 +41,7 @@ getFields($fields);
 <hr id="topbar"/>
 <br />
 
-<?php if (!empty($error) ) { echo "<p class=\"error\">$error</p>"; } ?>
+<?php if (!empty($error) ) { echo "<p class=\"alert alert-danger\">$error</p>"; } ?>
 
 <form method="post" action="hta_doedituser.php" name="main" id="main">
   <input type="hidden" name="dir" value="<?php echo $dir ?>">

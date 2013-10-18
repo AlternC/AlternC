@@ -57,7 +57,7 @@ $mem->unsu();
 <br />
 <?php
 	if (isset($error) && $error) {
-	  echo "<p class=\"error\">$error</p>";
+	  echo "<p class=\"alert alert-danger\">$error</p>";
 	  include_once("foot.php");
 	  exit();
 	}

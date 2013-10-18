@@ -46,7 +46,7 @@ if (!$r=$mysql->get_dblist()) {
 <br />
 <?php
 	if (isset($error) && $error) {
-		echo "<p class=\"error\">$error</p><p>&nbsp;</p>";
+		echo "<p class=\"alert alert-danger\">$error</p><p>&nbsp;</p>";
 	}
 $r=$mysql->get_defaultsparam($dbname);
 ?>
@@ -88,7 +88,7 @@ if(isset($r['user'])){
 </table>
 <?php
 if(!isset($r['user'])){
-	echo "<p class=\"error\">";__("You changed the MySQL User base configuration. Please refer to your configuration");echo"</p><p>&nbsp;</p>";
+	echo "<p class=\"alert alert-warning\">";__("You changed the MySQL User base configuration. Please refer to your configuration");echo"</p><p>&nbsp;</p>";
 }
 ?>
 <p><span class="ina back"><a href="sql_list.php"><?php __("Back to the MySQL database list"); ?></a></span></p>

@@ -39,10 +39,10 @@ $r=$mysql->get_userslist();
 <br />
 <?php
 	if (isset($error) && $error) {
-		echo "<p class=\"error\">$error</p>";
+		echo "<p class=\"alert alert-danger\">$error</p>";
 	}
   if(!$r || empty($r)){
-    echo "<p class=\"error\">"._("You have no sql user at the moment.")."</p>";  
+    echo "<p class=\"alert alert-warning\">"._("You have no sql user at the moment.")."</p>";  
   }
 ?>
 

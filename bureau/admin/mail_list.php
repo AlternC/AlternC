@@ -57,10 +57,10 @@ if ($domain=$dom->get_domain_byid($domain_id)) {
 }
 
 if ($fatal) {
-  echo "<div class=\"error\">$error</div>";
+  echo "<div class=\"alert alert-danger\">$error</div>";
 } else {
 
-  if (!empty($error)) { echo "<p class='error'>$error</p>"; }
+  if (!empty($error)) { echo "<p class='alert alert-danger'>$error</p>"; }
 ?>
 
 <table><tr>

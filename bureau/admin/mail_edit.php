@@ -57,7 +57,7 @@ if (!$res=$mail->get_details($mail_id)) {
 
 <?php
 if (isset($error)) {
-  	echo "<p class=\"error\">$error</p>";
+  	echo "<p class=\"alert alert-danger\">$error</p>";
 }
 ?>
 

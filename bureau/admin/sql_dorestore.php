@@ -47,7 +47,7 @@ if (!$r=$mysql->get_mysql_details($id)) {
         $error=$err->errstr();
 }
 if (! $r["enabled"]) { 
-  echo "<p class=\"error\">"._("You currently have no database defined")."</p>";
+  echo "<p class=\"alert alert-danger\">"._("You currently have no database defined")."</p>";
   include_once("foot.php");
   die();
 }
@@ -63,7 +63,7 @@ if (!$mysql->restore($restfile,true,$id))  {
   $error=_("Your database has been restored, check out the previous text for error messages.");
 } // if mysql->restore
 
-echo "<p class=\"error\">$error</p><p>&nbsp;</p>";
+echo "<p class=\"alert alert-danger\">$error</p><p>&nbsp;</p>";
 
 ?>
 </p>

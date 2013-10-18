@@ -40,7 +40,7 @@ getFields($fields);
 <h3><?php printf(_("Adding a username in %s"),$dir); ?></h3>
 <?php
 	if (isset($error) && $error) {
-		echo "<p class=\"error\">$error</p>";
+		echo "<p class=\"alert alert-danger\">$error</p>";
 	}
 ?>
 

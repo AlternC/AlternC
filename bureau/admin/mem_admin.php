@@ -46,7 +46,7 @@ include_once("head.php");
 <h3><?php __("Admin preferences"); ?></h3>
 <?php
 	if (isset($error) && $error) {
-		echo "<p class=\"error\">$error</p>";
+		echo "<p class=\"alert alert-danger\">$error</p>";
 	}
 ?>
 <?php include_once("foot.php"); ?>

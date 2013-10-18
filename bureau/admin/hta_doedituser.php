@@ -54,7 +54,7 @@ if (!$hta->change_pass($user,$newpass,$dir)) {
 <br />
 <?php
 	if (isset($error) && $error) {
-		echo "<p class=\"error\">$error</p>";
+		echo "<p class=\"alert alert-danger\">$error</p>";
 	}
 	else {
 		echo "<p>".sprintf(_("The password of the user %s has been successfully changed"),$user)."</p>";

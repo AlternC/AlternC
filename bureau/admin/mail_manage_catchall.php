@@ -34,7 +34,7 @@ $fields = array (
 getFields($fields);
 
 if (is_null($domain_id)) { 
-  echo "<p class=\"error\">";
+  echo "<p alert alert-danger\>";
   __("Problem with the domain");
   echo"</p>";
   include_once("foot.php"); 
@@ -66,7 +66,7 @@ $catch=$mail->catchall_getinfos($domain_id);
 
 <?php
 if (isset($error) && !empty($error) ) {
-  	echo "<p class=\"error\">$error</p>";
+  	echo "<p class=\"alert alert-danger\">$error</p>";
 }
 
 __("You can choose what to do with emails sent to unexisting address of this domain");

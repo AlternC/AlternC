@@ -25,7 +25,7 @@
    ----------------------------------------------------------------------
    Original Author of file: Benjamin Sonntag, Remi
    Purpose of file: Online file Browser of AlternC
-   TODO : Voir ??? + Déplacer / Copier 
+   TODO : Voir ??? + Dï¿½placer / Copier 
    ----------------------------------------------------------------------
  */
 require_once("../class/config.php");
@@ -62,13 +62,13 @@ $R=$bro->convertabsolute($R,1);
 // on fait ?
 if (!empty($formu) && $formu) {
   switch ($formu) {
-    case 1:  // Créer le répertoire $R.$nomfich
+    case 1:  // Crï¿½er le rï¿½pertoire $R.$nomfich
       if (!$bro->CreateDir($R,$nomfich)) {
         $error = $err->errstr();
       }
       $p=$bro->GetPrefs();
       break;
-    case 6: // Créer le fichier $R.$nomfich
+    case 6: // Crï¿½er le fichier $R.$nomfich
       if (!$bro->CreateFile($R,$nomfich)) {
         $error = $err->errstr();
       }
@@ -93,7 +93,7 @@ if (!empty($formu) && $formu) {
             <input type="hidden" name="formu" value="2" />
             <input type="hidden" name="actdel" value="1" />
             <input type="hidden" name="R" value="<?php echo ehe($R)?>" />
-            <p class="error"><?php __("WARNING: Confirm the deletion of this files"); ?></p>
+            <p class="alert alert-warning"><?php __("WARNING: Confirm the deletion of this files"); ?></p>
             <h2><?php echo $mem->user["login"].$R."/"; ?></h2>
             <ul>
             <?php foreach($d as $editfile){ ?>
@@ -143,7 +143,7 @@ if (!empty($formu) && $formu) {
 if (isset($actextract) && $actextract) {
   print _("extracting...")."<br />\n"; flush();
   if ($bro->ExtractFile($R. '/' . $fileextract, $R)) {
-    echo "<p class=\"error\">";
+    echo "<p class=\"alert alert-danger\">";
     print $err->errstr();
     print _("failed")."<br />\n";
     echo "</p>";
@@ -167,12 +167,12 @@ if (isset($actextract) && $actextract) {
 /* Creation de la liste des fichiers courants */
 $c=$bro->filelist($R, $showdirsize );
 if ($c===false) {
-  echo "<p class=\"error\">".$err->errstr()."</p>";
+  echo "<p class=\"alert alert-danger\">".$err->errstr()."</p>";
   require_once('foot.php');
   exit;
 }
 
-if (isset($error) && $error) echo "<p class=\"error\">$error</p>"; 
+if (isset($error) && $error) echo "<p class=\"alert alert-danger\">$error</p>"; 
 ?>
 
 <table><tr>
@@ -213,7 +213,7 @@ if (isset($error) && $error) echo "<p class=\"error\">$error</p>";
 <tr><td valign="top">
 
 <?php
-/* Renommer / Copier / Déplacer les fichiers : */
+/* Renommer / Copier / Dï¿½placer les fichiers : */
 if (isset($formu) && $formu==2 && isset($actrename) && $actrename && count($d)) {
   echo "<table cellpadding=\"6\">\n";
   echo "<form action=\"bro_main.php\" method=\"post\">\n";
@@ -565,7 +565,7 @@ function actmoveto_not_empty() {
     <?php
 } // is there any files here ?
 else {
-  echo "<p class=\"error\">"._("No files in this folder")."</p>";
+  echo "<p class=\"alert alert-info\">"._("No files in this folder")."</p>";
 }
 ?>
 

@@ -42,7 +42,7 @@ if ( !isset($is_include) ) {
 if (!$id && !$create) {
   $error=_("Neither a creation nor a edition");
   echo "<h3>"._("Create a FTP account")."</h3>";
-  echo "<p class=\"error\">$error</p>";
+  echo "<p class=\"alert alert-danger\">$error</p>";
   include_once("foot.php");
   exit();
 }
@@ -60,7 +60,7 @@ if (!$id && $create) { //creation
 ?>
 <?php
 if (isset($error) && $error) {
-	echo "<p class=\"error\">$error</p>";
+	echo "<p class=\"alert alert-danger\">$error</p>";
 }
 ?>
 <form method="post" action="ftp_doedit.php" name="main" id="main">

@@ -45,7 +45,7 @@ if (!$r) {
 }
 
 if (! empty($error) ) {
-  echo "<p class=\"error\">$error</p>";
+  echo "<p class=\"alert alert-danger\">$error</p>";
   require_once('foot.php');
   die();
 }

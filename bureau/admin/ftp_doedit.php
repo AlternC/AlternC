@@ -43,7 +43,7 @@ getFields($fields);
 if ($pass != $passconf) {
   $error = _("Passwords do not match");
   include_once("head.php");
-  echo "<h3>"._("Create a FTP account")."</h3><p class=\"error\">$error</p>";
+  echo "<h3>"._("Create a FTP account")."</h3><p class=\"alert alert-danger\">$error</p>";
   include("foot.php");
   exit();
 }

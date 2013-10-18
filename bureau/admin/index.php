@@ -67,14 +67,14 @@ if (file_exists("styles/style-custom.css") ) {
       <p id="logo">  <img src="<?php echo $logo; ?>" border="0" alt="<?php __("Web Hosting Control Panel"); ?>" title="<?php __("Web Hosting Control Panel"); ?>" />
       </p>
       <p>&nbsp;</p>
-    <?php if (isset($error) && $error) echo "<div class='error'>$error</div>"; ?>
+    <?php if (isset($error) && $error) echo "<div class='alert alert-danger'>$error</div>"; ?>
     <br/>
     <?php
     if (isset($_GET['authip_token'])) $authip_token=$_GET['authip_token'];
     /*
     if (!$_SERVER[HTTPS]) {
-      echo "<h4>ATTENTION : vous allez accéder à votre panel en mode *non sécurisé*<br/>
-    <a href=\"https://".$_SERVER["HTTP_HOST"]."/\">Cliquez ici pour passer en mode sécurisé</a></h4>"; 
+      echo "<h4>ATTENTION : vous allez accï¿½der ï¿½ votre panel en mode *non sï¿½curisï¿½*<br/>
+    <a href=\"https://".$_SERVER["HTTP_HOST"]."/\">Cliquez ici pour passer en mode sï¿½curisï¿½</a></h4>"; 
     }
     */
     ?>

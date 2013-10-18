@@ -37,7 +37,7 @@ include_once("head.php");
 <?php
 
 if ( ! variable_get('sql_allow_users_backups') ) {
-  echo "<p class=\"error\">"._("You aren't allowed to access this page. Contact your administrator if you want to.")."</p>";
+  echo "<p class=\"alert alert-danger\">"._("You aren't allowed to access this page. Contact your administrator if you want to.")."</p>";
   include_once('foot.php');
   exit;
 }
@@ -57,7 +57,7 @@ if (!$r=$mysql->get_mysql_details($id)) {
 }
 
 if (isset($error) && $error) {
-	echo "<p class=\"error\">$error</p><p>&nbsp;</p>";
+	echo "<p class=\"alert alert-danger\">$error</p><p>&nbsp;</p>";
 }
 
 if (is_array($r)) {

@@ -66,14 +66,14 @@ $dom->unlock();
 <br />
 <?php
 	if (isset($error) && $error) {
-		echo "<p class=\"error\">$error</p>";
+		echo "<p class=\"alert alert-danger\">$error</p>";
 		include_once("foot.php");
 		exit();
 	} else {
         $t = time();
 	// XXX: we assume the cron job is at every 5 minutes
         $error=strtr(_("The modifications will take effect at %time.  Server time is %now."), array('%now' => date('H:i:s', $t), '%time' => date('H:i:s', ($t-($t%300)+300)))); 
-	    echo "<p class=\"error\">".$error."</p>";
+	    echo "<p class=\"alert alert-info\">".$error."</p>";
 	}
 ?>
 <p><span class="ina"><a href="dom_edit.php?domain=<?php echo urlencode($r['domain']) ?>"><?php __("Click here to continue"); ?></a></span></p>

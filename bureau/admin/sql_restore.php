@@ -46,7 +46,7 @@ if (!$r=$mysql->get_mysql_details($id)) {
 <br />
 <?php
 if (!empty($error)) {
-	echo "<p class=\"error\">$error</p><p>&nbsp;</p>";
+	echo "<p class=\"alert alert-danger\">$error</p><p>&nbsp;</p>";
 }
 
 if (!is_array($r)) {

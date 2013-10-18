@@ -83,7 +83,7 @@ if ($pattern && $pattern_type) {
 
 <?php
 if ( !empty($error) ) {
-  echo '<p class="error">' , $error, '</p>';
+  echo '<p class="alert alert-danger">' , $error, '</p>';
 }
 
 ?>
@@ -115,7 +115,7 @@ if($show != 'all') {
 }// END ($subadmin==1 || $cuid==2000)
 
 if (!is_array($r) || empty($r) ) {
-  echo '<p class="error">'._("No account defined for now").'</p>';
+  echo '<p class="alert alert-danger">'._("No account defined for now").'</p>';
   include('foot.php');
 } 
 ?>

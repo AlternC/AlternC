@@ -51,7 +51,7 @@ if (!$isinvited && $dt[strtolower($r['type'])]["enable"] != "ALL" ) {
 <h3><?php printf(_("Deleting subdomain %s"),"http://".ife($r['name'],$r['name'].".").$r['domain']); ?> : </h3>
 <?php
 	if (isset($error) && $error) {
-		echo "<p class=\"error\">$error</p>";
+		echo "<p class=\"alert alert-danger\">$error</p>";
 		include_once("foot.php");
 		exit();
 	}

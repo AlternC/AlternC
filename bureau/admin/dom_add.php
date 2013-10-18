@@ -50,7 +50,7 @@ if (!$quota->cancreate("dom")) { ?>
 <?php
 exit();
 }
-if (isset($error) && $error) echo "<p class=\"error\">$error</p>";
+if (isset($error) && $error) echo "<p class=\"alert alert-danger\">$error</p>";
 ?>
 <form method="post" action="dom_doadd.php" id="main">
 <p>

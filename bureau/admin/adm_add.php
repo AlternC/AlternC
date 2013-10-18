@@ -3,7 +3,7 @@
  $Id: adm_add.php,v 1.9 2006/01/24 05:03:30 joe Exp $
  ----------------------------------------------------------------------
  AlternC - Web Hosting System
- Copyright (C) 2006 Le réseau Koumbit Inc.
+ Copyright (C) 2006 Le rï¿½seau Koumbit Inc.
  http://koumbit.org/
  Copyright (C) 2002 by the AlternC Development Team.
  http://alternc.org/
@@ -56,7 +56,7 @@ getFields($fields);
 <br />
 <?php
 if (isset($error) && $error) {
-	echo "<p class=\"error\">$error</p>";
+	echo "<p class=\"alert alert-danger\">$error</p>";
 }
 ?>
 <form method="post" action="adm_doadd.php" id="main" name="main">

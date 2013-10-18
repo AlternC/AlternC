@@ -39,7 +39,7 @@ $rdb=$mysql->get_dblist();
 <br />
 <?php
 if (isset($error) && $error) {
-	echo "<p class=\"error\">$error</p><p>&nbsp;</p>";
+	echo "<p class=\"alert alert-danger\">$error</p><p>&nbsp;</p>";
 }
   if($r){ // if there is some userlist
 ?>

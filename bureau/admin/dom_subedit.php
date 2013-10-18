@@ -56,7 +56,7 @@ echo "<h3>";
 __("Editing subdomain");
 echo " http://"; ecif($r['name'],$r['name']."."); echo $r['domain']."</h3>";
 if (isset($error) && $error) {
-  echo "<p class=\"error\">$error</p>";
+  echo "<p class=\"alert alert-danger\">$error</p>";
   include_once("foot.php");
   exit();
 } 

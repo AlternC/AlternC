@@ -69,7 +69,7 @@ if ($right !== FALSE) {
 
 /* If something went wrong, display error message, but continue with the page rendering */
 if (isset($error) && $error) {
-  	echo "<p class=\"error\">$error</p>";
+  	echo "<p class=\"alert alert-danger\">$error</p>";
 }
 
 /* Does current user still has quota ? */

@@ -52,7 +52,7 @@ if ( !empty($submit) ) {
 }
 
 if (isset($error) && $error) {
-        echo "<p class=\"error\">$error</p>";
+        echo "<p class=\"alert alert-danger\">$error</p>";
 }
 
 ?>

@@ -76,7 +76,7 @@ if ($newip) {
 include_once("head.php");
 
 if (!empty($error)) {
-  echo "<p class=\"error\">$error</p>";
+  echo "<p class=\"alert alert-danger\">$error</p>";
 }
 
 ?>

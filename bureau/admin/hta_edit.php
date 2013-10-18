@@ -50,7 +50,7 @@ if (!$dir) {
 <br />
 <?php
   if (!count($r)) {
-    echo "<p class=\"error\">".sprintf(_("No authorized user in %s"),$dir)."</p>";
+    echo "<p class=\"alert alert-warning\">".sprintf(_("No authorized user in %s"),$dir)."</p>";
   } else {
      reset($r);
 ?>

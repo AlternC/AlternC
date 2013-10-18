@@ -42,7 +42,7 @@ getFields($fields);
 <h3><?php __("Change the email of the account"); ?></h3>
 <?php
 if (isset($error) && $error) {
-		echo "<p class=\"error\">$error</p>";
+		echo "<p class=\"alert alert-danger\">$error</p>";
 		include_once("foot.php");
 		exit();
 	}

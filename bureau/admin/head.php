@@ -55,13 +55,13 @@ if (file_exists("styles/style-custom.css") ) {
 <?
 
 if ($isinvited && isset($oldid) && !empty($oldid) && $oldid!=$cuid ) {
-  echo "<div align=center><p class='error'>";
+  echo "<div align=center><p class='alert alert-info'>";
   __("Administrator session. you may <a href='adm_login.php'>return to your account</a> or <a href='adm_cancel.php'>cancel this feature</a>.");
   if ($oldid == 2000) echo ' '._("You can also <a href='adm_update_domains.php'>apply changes</a>."); // Yes, hardcoded uid. We will rewrite permissions another day
   echo "</p></div>";
 }
 if ( panel_islocked() ) {
-  echo "<div align=center><p class='error'>";
+  echo "<div align=center><p class='alert alert-warning'>";
     __("Panel is locked! No one can login!");
   echo "</p></div>";
 }

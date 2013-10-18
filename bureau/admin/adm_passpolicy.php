@@ -51,7 +51,7 @@ include_once("head.php");
 <br />
 <?php
 	if (isset($error) && $error) {
-	  echo "<p class=\"error\">$error</p>";
+	  echo "<p class=\"alert alert-danger\">$error</p>";
 	}
 
 
@@ -60,7 +60,7 @@ $c=$admin->listPasswordPolicies();
 
 if (isset($doedit) && $doedit) {
   if (!$c[$doedit]) {
-    echo "<p class=\"error\">"._("Policy not found")."</p>";
+    echo "<p class=\"alert alert-danger\">"._("Policy not found")."</p>";
   } else {
     // Change it ;) 
     if ($admin->editPolicy($doedit,$minsize,$maxsize,$classcount,$allowlogin)) {
@@ -68,14 +68,14 @@ if (isset($doedit) && $doedit) {
       unset($edit);
       $c=$admin->listPasswordPolicies();
     } else {
-      echo "<p class=\"error\">"._("Cannot edit the policy, an error occurred")."</p>";
+      echo "<p class=\"alert alert-danger\">"._("Cannot edit the policy, an error occurred")."</p>";
     }
   }
 }
 
 if (!empty($edit)) {
   if (!$c[$edit]) {
-    echo "<p class=\"error\">"._("Policy not found")."</p>";
+    echo "<p class=\"alert alert-danger\">"._("Policy not found")."</p>";
   } else {
 ?>
 

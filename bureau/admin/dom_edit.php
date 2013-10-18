@@ -39,12 +39,12 @@ getFields($fields);
 $dom->lock();
 if (!$r=$dom->get_domain_all($domain)) {
 	$error=$err->errstr();
-	echo "<p class=\"error\">$error</p>";
+	echo "<p class=\"alert alert-danger\">$error</p>";
 	include('foot.php');
 	die();
 }
 if (isset($error) && $error ) {
-	echo "<p class=\"error\">$error</p>";
+	echo "<p class=\"alert alert-danger\">$error</p>";
 }
 $dom->unlock();
 

@@ -70,7 +70,7 @@ include_once("head.php");
 
 ?>
 <p>
-<?php if (isset($error) && $error) echo "<p class=\"error\">$error</p>"; ?>
+<?php if (isset($error) && $error) echo "<p class=\"alert alert-danger\">$error</p>"; ?>
 <h3><?php echo _("File editing")." <code>$R/<b>$editfile</b></code><br />"; ?></h3>
 </p>
 <form action="bro_editor.php" method="post"><br />
@@ -82,7 +82,7 @@ include_once("head.php");
     echo $content;  
   }
 ?></textarea>
-<?php if (!empty($error)) echo "<p class=\"error\">".$error."</p>"; ?>
+<?php if (!empty($error)) echo "<p class=\"alert alert-danger\">".$error."</p>"; ?>
 	<input type="hidden" name="editfile" value="<?php echo str_replace("\"","&quot;",$editfile); ?>" />
 	<input type="hidden" name="R" value="<?php echo str_replace("\"","&quot;",$R); ?>" />
 

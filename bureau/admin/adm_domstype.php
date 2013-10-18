@@ -44,7 +44,7 @@ include_once("head.php");
 <br />
 <?php
 if (!empty($error)) {
-  echo "<p class=\"error\">$error</p>";
+  echo "<p class=\"alert alert-danger\">$error</p>";
 }
 
 ?>
