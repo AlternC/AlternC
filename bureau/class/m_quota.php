@@ -64,7 +64,7 @@ class m_quota {
     $obj = array(
       'title'       => _("Show my quotas"),
       'ico'         => 'images/quota.png',
-      'link'        => 'quota_show.php',
+      'link'        => 'toggle',
       'pos'         => 110,
       'divclass'    => 'menu-quota',
       'links'       => array(),
@@ -78,7 +78,7 @@ class m_quota {
       $obj['links'][] = array( 'txt'=>_("quota_".$key) . " " . sprintf(_("%s%% of %s"),$usage_percent,format_size($q[$key]["t"]*1024)), 'url'=>($key == 'bw_web' ? 'stats_show_per_month.php' : 'quota_show.php') );
       $obj['links'][] = array( 'txt'=>'progressbar', 'total' => $q[$key]["t"], 'used' => $q[$key]["u"]);
     } 
-   
+  
      return $obj;
   }
 
