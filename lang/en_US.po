@@ -2556,7 +2556,7 @@ msgid "WARNING: Confirm the deletion of this files"
 msgstr ""
 
 #: ../admin/bro_main.php:105
-msgid "Yes, delte those files/folders"
+msgid "Yes, delete those files/folders"
 msgstr ""
 
 #: ../admin/bro_main.php:106

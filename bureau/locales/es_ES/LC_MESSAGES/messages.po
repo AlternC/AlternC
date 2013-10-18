@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: i18n@alternc.org\n"
-"POT-Creation-Date: 2013-10-18 15:40+0200\n"
+"POT-Creation-Date: 2013-10-18 15:42+0200\n"
 "PO-Revision-Date: 2008-09-05 16:50+0200\n"
 "Last-Translator: \n"
 "Language-Team:  <tech@alternc.org>\n"
@@ -1593,8 +1593,9 @@ msgid "WARNING: Confirm the deletion of this files"
 msgstr "ADVERTENCIA : Confirma la supresión de estos archivos"
 
 #: ../admin/bro_main.php:105
-msgid "Yes, delte those files/folders"
-msgstr ""
+#, fuzzy
+msgid "Yes, delete those files/folders"
+msgstr "Suprimir las cuentas marcadas"
 
 #: ../admin/bro_main.php:106
 msgid "No, don't delete those files/folders"
