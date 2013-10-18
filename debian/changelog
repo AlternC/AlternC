@@ -1,4 +1,4 @@
-alternc (3.1~alpha028) experimental; urgency=low
+alternc (3.1~alpha030) experimental; urgency=low
 
   * menu became dynamic with a class
   * /var/alternc disapear to become Debian-compliant

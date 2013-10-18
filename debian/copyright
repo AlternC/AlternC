@@ -1,25 +1,29 @@
-This package was debianized by Benjamin Sonntag <benjamin@alternc.org> on
-Tue, 27 Aug 2002 19:31:26 +0200.
 
-It was downloaded from http://alternc.org/
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: AlternC
+Source: https://alternc.org/svn/alternc/
 
-Upstream Authors: AlternC Development team <dev@alternc.org>
-
-Copyright (c) 2002-2008 AlternC Development team <dev@alternc.org>
-
-
- LICENSE
-
- This program is free software; you can redistribute it and/or
- modify it under the terms of the GNU General Public License (GPL)
- as published by the Free Software Foundation; either version 2
- of the License, or (at your option) any later version.
-
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- On Debian systems, the complete text of the GNU General Public
- License can be found in /usr/share/common-licenses/GPL file.
+Files: *
+Copyright: Copyright 2001-2013 AlternC's development Team <team@alternc.org>
+License: GPL-2+
+ This program is free software; you can redistribute it
+ and/or modify it under the terms of the GNU General Public
+ License as published by the Free Software Foundation; either
+ version 2 of the License, or (at your option) any later
+ version.
+ .
+ This program is distributed in the hope that it will be
+ useful, but WITHOUT ANY WARRANTY; without even the implied
+ warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+ PURPOSE.  See the GNU General Public License for more
+ details.
+ .
+ You should have received a copy of the GNU General Public
+ License along with this package; if not, write to the Free
+ Software Foundation, Inc., 51 Franklin St, Fifth Floor,
+ Boston, MA  02110-1301 USA
+ .
+ On Debian systems, the full text of the GNU General Public
+ License version 2 can be found in the file
+ `/usr/share/common-licenses/GPL-2'.
 
