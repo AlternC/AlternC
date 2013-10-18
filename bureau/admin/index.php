@@ -52,7 +52,7 @@ if (file_exists("styles/style-custom.css") ) {
 ?>
 
 <script type="text/javascript" src="js/alternc.js"></script>
-<script src="js/jquery.min.js" type="text/javascript"></script>
+<script src="js/jquery.min_embedded.js" type="text/javascript"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $charset; ?>" />
 </head>
 <body>
