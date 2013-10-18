@@ -1309,7 +1309,7 @@ class m_dom {
     $db->next_record();
     if ($db->f('create_tmpdir')) {
       if (! is_dir($dest_root . "/tmp")) {
-	if(!@mkdir($dest_root . "/tmp",0770,true)){
+	if(!@mkdir($dest_root . "/tmp",0777,true)){
 	  $err->raise("dom",_("Cannot write to the destination folder"));
 	}
       }
