@@ -44,6 +44,7 @@ $fields = array (
 );
 getFields($fields);
 
+if (empty($pattern)) $pattern="*";
 
 if ($short!=-1) {
   $mem->adminpref($short);
