@@ -95,6 +95,14 @@ pre {
   -moz-border-radius: 4px;
 }
 
+
+.filter a, a.edit, input.filter {
+  background-image: url(../icon/filter.png);
+  background-repeat: no-repeat;
+  background-position: 8px 3px;
+  padding-left: 30px;
+}
+
 .inp {
   /* Should not be use anymore !!! */
   border-color: blue;
@@ -267,6 +275,7 @@ img {
   vertical-align: middle;
 }
 
+/* Alerts */
 .alert {
     border: 1px solid transparent;
     border-radius: 4px 4px 4px 4px;
@@ -298,47 +307,70 @@ img {
 .alert-success {
     background-color: #DFF0D8;
     border-color: #D6E9C6;
-    color: #468847;
+    color: #356635;
 }
 .alert-success hr {
     border-top-color: #C9E2B3;
 }
-.alert-success .alert-link {
-    color: #356635;
+.alert-success .alert-link,
+.alert-success a{
+    color: #234323;
 }
 .alert-info {
     background-color: #D9EDF7;
     border-color: #BCE8F1;
-    color: #3A87AD;
-}
+    color: #2D6987;}
 .alert-info hr {
     border-top-color: #A6E1EC;
 }
-.alert-info .alert-link {
-    color: #2D6987;
+.alert-info .alert-link,
+.alert-info a
+{
+    color: #193B4D;
 }
 .alert-warning {
     background-color: #FCF8E3;
     border-color: #FBEED5;
-    color: #C09853;
+    color: #A47E3C;
 }
 .alert-warning hr {
     border-top-color: #F8E5BE;
 }
-.alert-warning .alert-link {
-    color: #A47E3C;
+.alert-warning .alert-link,
+.alert-warning a {
+    color: #6C5228;
 }
 .alert-danger {
     background-color: #F2DEDE;
     border-color: #EED3D7;
-    color: #B94A48;
+    color: #953B39;
 }
 .alert-danger hr {
     border-top-color: #E6C1C7;
 }
-.alert-danger .alert-link {
-    color: #953B39;
+.alert-danger .alert-link,
+.alert-danger a{
+    color: #6F2B2A;
 }
+
+/* Alert icons */
+#content .alert {
+    background-position: 16px 16px;
+    padding-left: 48px;
+}
+#content .alert-danger {
+    background-image: url("../images/danger.png");
+}
+#content .alert-info{
+    background-image: url("../images/info.png");
+}
+#content .alert-success {
+    background-image: url("../images/success.png");
+}
+#content .alert-warning {
+    background-image: url("../images/warning.png");
+}
+
 
 .alerte {
   color: #A00;
