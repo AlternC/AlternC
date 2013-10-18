@@ -1,0 +1,11 @@
+
+20131018 [alban] 
+	icons:
+	*    abort.png
+	*    alert.png
+	*    danger.png
+	*    success.png
+	24x24 Free Application Icons
+	This icon set is free for use in personal and commercial projects.
+	Product page: http://www.small-icons.com/stock-icons/24x24-free-application-icons.htm
+	Copyright © 2009 Aha-Soft. All rights reserved. 

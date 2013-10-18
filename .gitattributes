@@ -176,12 +176,15 @@ bureau/admin/icon/winresize.gif -text
 bureau/admin/icon/xls.png -text
 bureau/admin/icon/zip.png -text
 bureau/admin/images/admin.png -text
+bureau/admin/images/alert.png -text
 bureau/admin/images/bgborder.gif -text
 bureau/admin/images/blank.gif -text
 bureau/admin/images/check_no.png -text
 bureau/admin/images/check_ok.png -text
 bureau/admin/images/code.png -text
 bureau/admin/images/config.png -text
+bureau/admin/images/copyrights.txt -text
+bureau/admin/images/danger.png -text
 bureau/admin/images/delete.png -text
 bureau/admin/images/dom.png -text
 bureau/admin/images/edit.png -text
@@ -191,6 +194,7 @@ bureau/admin/images/folderhta.png -text
 bureau/admin/images/ftp.png -text
 bureau/admin/images/help.png -text
 bureau/admin/images/home.png -text
+bureau/admin/images/info.png -text
 bureau/admin/images/ip.png -text
 bureau/admin/images/lang.png -text
 bureau/admin/images/logo.png -text
@@ -241,6 +245,7 @@ bureau/admin/images/search.png -text
 bureau/admin/images/settings.png -text
 bureau/admin/images/ssh.png -text
 bureau/admin/images/stat.png -text
+bureau/admin/images/success.png -text
 bureau/admin/images/undelete.png -text
 bureau/admin/index.php -text
 bureau/admin/ip_main.php -text
