@@ -284,7 +284,6 @@ bureau/admin/js/jquery_ui/index.html -text
 bureau/admin/js/jquery_ui/js/jquery-1.9.1.js -text
 bureau/admin/js/jquery_ui/js/jquery-ui-1.10.3.custom.js -text
 bureau/admin/js/jquery_ui/js/jquery-ui-1.10.3.custom.min.js -text
-bureau/admin/js/prototype.js -text
 bureau/admin/login.php -text
 bureau/admin/logs_download.php -text
 bureau/admin/logs_list.php -text
