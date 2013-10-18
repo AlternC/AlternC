@@ -50,19 +50,18 @@ print_domain_letter() {
 }
 
 get_uid_by_path() {
-local path="$1"
-local sizepath=${#path}
-local lastcar=${ALTERNC_HTML: -1}
+  local path="$1"
+  local sizepath=${#path}
+  local lastcar=${ALTERNC_HTML: -1}
 
-if [ "$lastcar" != "/" ]
-then
-  ALTERNC_HTML=$ALTERNC_HTML"/"
-fi
+  local sizebasepath=${#ALTERNC_HTML}
+  if [ "${ALTERNC_HTML:-1}" != "/" ] ; then
+    sizebasepath=$(( $sizebasepath + 1 ))
+  fi
 
-local sizebasepath=${#ALTERNC_HTML}
-local basepath=${path:0:($sizebasepath +2)}
-local uid=`ls -n $basepath | head -n 2|tail -n 1| awk '{print $3}'`
-echo $uid
+  local login=$(echo ${path:$sizebasepath} | cut -d '/' -f 2)
+
+  get_uid_by_name $login
 }
 
 # Return the html path for a account name
@@ -85,7 +84,23 @@ print_user_letter() {
 
 # return the uid of an alternc account
 get_uid_by_name() {
-  mysql_query 'SELECT uid FROM membres WHERE login="'"$1"'" LIMIT 1;'
+  local name=$1
+  if [[ ! "$name" =~ ^([a-z0-9]+)$ ]] ; then
+    # Error on error flux
+    echo "Account name is incorrect." >&2
+    exit 2
+  fi
+   mysql_query 'SELECT uid FROM membres WHERE login="'"$name"'" LIMIT 1;'
+}
+
+get_name_by_uid() {
+  local id=$1
+  if [[ ! "$id" =~ ^([0-9]+)$ ]] ; then
+    # Error on error flux
+    echo "Account name is incorrect." >&2
+    exit 2
+  fi
+  mysql_query 'SELECT login FROM membres WHERE uid="'"$id"'" LIMIT 1;'
 }
 
 get_variable_from_db() {

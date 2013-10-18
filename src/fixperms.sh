@@ -116,7 +116,6 @@ doone() {
       mkdir -p "$REP"
       chown -R $GID:$GID "$REP"
       chmod 2770 -R "$REP"
-      test -d "$REP/tmp" || mkdir "$REP/tmp"
 
 #      # Delete existings ACL
 #      # Set the defaults acl on all the files
@@ -126,7 +125,7 @@ doone() {
       setfacl -bknR -m d:u:alterncpanel:rwx -m d:g:alterncpanel:rwx -m u:alterncpanel:rwx -m g:alterncpanel:rwx -m d:o::--- -m o::---\
                     -m d:u:$GID:rwx -m d:g:$GID:rwx -m u:$GID:rwx -m g:$GID:rwx -m d:mask:rwx -m mask:rwx "$REP"
 
-      chmod 777 "$REP/tmp"
+      fixtmp $GID
       read GID LOGIN || true
     done
     echo -e "\nDone" 
@@ -134,8 +133,10 @@ doone() {
 
 fixdir() {
       if [ "$DEBUG" ]; then
-        echo "Setting rights and ownership for user $LOGIN having gid $GID"
+        echo "Setting rights with fixdir"
       fi
+
+      # sub_dir is global
       REP="$sub_dir"
       # We assume that the owner of the directory should be the one from the html user base directory ( $ALTERNC_HTML/<letter>/<login>) 
       REP_ID="$(get_uid_by_path "$REP")"
@@ -146,12 +147,6 @@ fixdir() {
       # Set the file readable only for the AlternC User
       mkdir -p "$REP"
       chown -R $REP_ID:$REP_ID "$REP"
-      test_tmp=$(basename $REP)
-      if [ "$test_tmp" != "tmp" ]; then 
-        chmod 2770 -R "$REP"
-      else
-        chmod 2777 -R "$REP"
-      fi
 
       # Delete existings ACL
       # Set the defaults acl on all the files
@@ -159,9 +154,24 @@ fixdir() {
 #                    -Rm   g:alterncpanel:rwx -m u:$REP_ID:rwx -m g:$REP_ID:rwx -m mask:rwx\
 #               "$REP"
       setfacl -bknR -m d:u:alterncpanel:rwx -m d:g:alterncpanel:rwx -m u:alterncpanel:rwx -m g:alterncpanel:rwx -m d:o::--- -m o::---\
-                    -m d:u:$GID:rwx -m d:g:$GID:rwx -m u:$GID:rwx -m g:$GID:rwx -m d:mask:rwx -m mask:rwx "$REP"
+                    -m d:u:$REP_ID:rwx -m d:g:$REP_ID:rwx -m u:$REP_ID:rwx -m g:$REP_ID:rwx -m d:mask:rwx -m mask:rwx "$REP"
 
+      fixtmp $REP_ID
       echo -e "\nDone" 
+}
+
+fixtmp() {
+  REP_ID=$1
+  local REP=$(get_html_path_by_name $(get_name_by_uid $REP_ID))
+
+  if [ "$REP/tmp" == "/tmp" ] ; then 
+    echo ERROR 
+    exit 0
+  fi
+  
+  test -d "$REP/tmp" || ( mkdir "$REP/tmp" && setfacl -bkn -m d:u:alterncpanel:rwx -m d:g:alterncpanel:rwx -m u:alterncpanel:rwx -m g:alterncpanel:rwx -m d:o::--- -m o::--- -m d:u:$REP_ID:rwx -m d:g:$REP_ID:rwx -m u:$REP_ID:rwx -m g:$REP_ID:rwx -m d:mask:rwx -m mask:rwx "$REP" )  
+
+  chmod 777 "$REP/tmp"
 }
 
 fixfile() {
@@ -194,16 +204,16 @@ trap ctrl_c SIGINT
 
 #Start of the script actions
 if [[ "$file" != "" ]]; then # if we are dealing with a file
-	if [ -e "$file" ]; then
-	  fixfile
-	else
+  if [ -e "$file" ]; then
+    fixfile
+  else
 		echo "file not found"
 	fi
 elif [[ "$sub_dir" != "" ]]; then #if we are dealing with a directory
 	if [ -d "$sub_dir" ]; then
 	  fixdir
 	else
-		echo "dir not found"
+echo "dir not found"
 	fi
 else
   #we are fixing the whole html directory
