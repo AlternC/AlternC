@@ -35,6 +35,9 @@ if ($script) {
     echo "VM_STATUS:OK\n";
     echo "VM_START:".$infos['starttime']."\n";
     echo "VM_HOSTNAME:".$infos['hostname']."\n";
+    foreach($infos['ssh-keys'] as $k) 
+      if (trim($k))
+	echo "VM_SSHKEY:".trim($k)."\n";
   } else {
     echo "VM_STATUS:NONE\n";
   }
@@ -69,7 +72,7 @@ include_once("head.php");
 <input type="submit" class="inb" name="go" value="<?php __("Click here to start a virtual machine."); ?>" />
 </form>
 <?php
-} else {
+   } else {
  echo "<table class='tedit'>";
  echo "<tr><th>"._("Hostname")."</th><td>".$infos['hostname']."</td></tr>";
  echo "<tr><th>"._("Start time")."</th><td>".date('Y-m-d H:i:s',$infos['starttime'])."</td></tr>";

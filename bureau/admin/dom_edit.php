@@ -150,7 +150,7 @@ for($i=0;$i<$r["nsub"];$i++) {
 		<td><div class="retour-auto"><a href="http://<?php ecif($r["sub"][$i]["name"],$r["sub"][$i]["name"]."."); echo $r["name"] ?>" target="_blank"><?php 
 				echo ecif($r["sub"][$i]["name"] , $r["sub"][$i]["name"]."." , "" , 0) . $r["name"];
 			?></a></div></td>
-		<td><div class="retour-auto"><?php __($r['sub'][$i]['type_desc']); ?>
+  <td><div class="retour-auto"><?php if ($r['sub'][$i]['type_desc']) { __($r['sub'][$i]['type_desc']); } else { echo __("ERROR, please check your server setup"); } ?>
  <?php 
  //if ($r["sub"][$i]['type'] === 'VHOST') {
  if ( @$dt[$r["sub"][$i]['type']]['target'] === 'DIRECTORY') {
