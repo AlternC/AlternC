@@ -91,7 +91,7 @@ class m_action {
 
   /*
   * function archiving a directory ( upon account deletion )
-  * @param: $archive : directory to archive within the archive_del_data global variable folder if set.
+  * @param: $archive : directory to archive within the archive_del_data folder if set in variable sql table.
   * If archive_del_data is not set we delete the folder.
   * @param: $dir : sub_directory of the archive directory
   */
@@ -138,13 +138,13 @@ class m_action {
       $query="insert into actions values ('','MOVE','$serialized',now(),'','','$user','');"; 
       break;
     case 'fix_user':
-      $query="insert into actions values ('','FIXUSER','$serialized',now(),'','','$user','');"; 
+      $query="insert into actions values ('','FIX_USER','$serialized',now(),'','','$user','');"; 
       break;
     case 'fix_file':
-      $query="insert into actions values ('','FIXFILE','$serialized',now(),'','','$user','');"; 
+      $query="insert into actions values ('','FIX_FILE','$serialized',now(),'','','$user','');"; 
       break;
     case 'fix_dir':
-      $query="insert into actions values ('','FIXDIR','$serialized',now(),'','','$user','');"; 
+      $query="insert into actions values ('','FIX_DIR','$serialized',now(),'','','$user','');"; 
       break;
     case 'delete':
       $query="insert into actions values ('','DELETE','$serialized',now(),'','','$user','');"; 
@@ -152,6 +152,7 @@ class m_action {
     default:
       return false;
     }	
+    printvar($query);
     if(!$db->query($query)){ 
       $err->raise("action",_("Error setting actions"));
       return false;

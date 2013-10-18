@@ -733,7 +733,7 @@ CREATE TABLE IF NOT EXISTS `vm_history` (
 
 CREATE TABLE IF NOT EXISTS `actions` (
  id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
- type enum ('CREATE_FILE','FIX_USER','CREATE_DIR','DELETE','MOVE','FIXDIR','FIXFILE'),
+ type enum ('CREATE_FILE','FIX_USER','CREATE_DIR','DELETE','MOVE','FIX_DIR','FIX_FILE'),
  parameters longtext default NULL,
  creation timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
  begin timestamp,
