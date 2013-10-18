@@ -114,8 +114,8 @@ if (!empty($edit)) {
       <input type="radio" name="allowlogin" id="allowlogin1" value="1" <?php cbox($c[$edit]["allowlogin"]); ?> />&nbsp;<?php __("Yes"); ?>
 </td></tr>
 </table>
-<p><input type="submit" class="inb" name="go" value="<?php __("Apply this password policy"); ?>" /> &nbsp; 
-<input type="button" class="inb" name="cancel" value="<?php __("Cancel and go back to the policy list"); ?>" onclick="document.location='adm_passpolicy.php'" /></p>
+<p><input type="submit" class="inb ok" name="go" value="<?php __("Apply this password policy"); ?>" /> &nbsp; 
+<input type="button" class="inb cancel" name="cancel" value="<?php __("Cancel and go back to the policy list"); ?>" onclick="document.location='adm_passpolicy.php'" /></p>
 </form>
 
       <p><?php __("The classes of characters are : <br />1. Low-case letters (a-z)<br />2. Upper-case letters (A-Z)<br />3. Figures (0-9)<br />4. Ascii symbols (!\"#$%&'()*+,-./:;<=>?@[\\]^_`)<br />5. Non-Ascii symbols (accents...)"); ?></p>

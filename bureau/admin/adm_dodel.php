@@ -84,8 +84,8 @@ if($del_confirm == "y"){
       ?>
       </p>
       <blockquote>
-        <input type="submit" class="inb" name="confirm" value="<?php __("Yes"); ?>" />&nbsp;&nbsp;
-        <input type="button" class="inb" name="cancel" value="<?php __("No"); ?>" onclick="document.location='adm_list.php';" />
+	  <input type="submit" class="inb ok" name="confirm" value="<?php __("Yes, delete those accounts"); ?>" />&nbsp;&nbsp;
+    <input type="button" class="inb cancel" name="cancel" value="<?php __("No, don't delete those accounts"); ?>" onclick="document.location='adm_list.php';" />
       </blockquote>
     </form>
     <?php  

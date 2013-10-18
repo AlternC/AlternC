@@ -85,7 +85,7 @@ if (isset($error) && $error) {
 </tr>
 <tr>
         	<th><label for="nom"><?php echo _("Surname")."</label> / <label for=\"prenom\">"._("First Name"); ?></label></th>
-	<td><input class="int" type="text" id="nom" name="nom" value="<?php ehe($nom); ?>" size="20" maxlength="128" />&nbsp;/&nbsp;<input type="text" name="prenom" id="prenom" value="<?php ehe($prenom); ?>" class="int" size="20" maxlength="128" /></td>
+	<td><input class="int" type="text" id="nom" name="nom" value="<?php ehe($nom); ?>" size="16" maxlength="128" />&nbsp;/&nbsp;<input type="text" name="prenom" id="prenom" value="<?php ehe($prenom); ?>" class="int" size="16" maxlength="128" /></td>
 </tr>
 <tr>
 	<th><label for="nmail"><?php __("Email address"); ?></label></th>
@@ -137,8 +137,8 @@ if (isset($error) && $error) {
 </tr>
  <?php } ?>
 <tr class="trbtn"><td colspan="2">
-  <input type="submit" class="inb" name="submit" value="<?php __("Create this AlternC account"); ?>" />
-  <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='adm_list.php'" />
+  <input type="submit" class="inb ok" name="submit" value="<?php __("Create this AlternC account"); ?>" />
+  <input type="button" class="inb cancel" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='adm_list.php'" />
 </td></tr>
 </table>
 </form>

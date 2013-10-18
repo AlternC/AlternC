@@ -71,7 +71,8 @@ if ($del_confirm!="y") {
 <p>
 <input type="hidden" name="del_confirm" value="y" />
 <input type="hidden" name="domain" value="<?php echo $domain ?>" />
-<input type="submit" class="inb" name="submit" value="<?php __("Yes"); ?>" /> - <input type="button" class="inb" name="non" value="<?php __("No"); ?>" onclick="history.back()" />
+ <input type="submit" class="inb ok" name="submit" value="<?php __("Yes, delete this domain name"); ?>" />
+ <input type="button" class="inb cancel" name="non" value="<?php __("No, don't delete this domain name"); ?>" onclick="history.back()" />
 </form>
 <?php include_once("foot.php");
 	exit();

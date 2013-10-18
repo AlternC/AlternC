@@ -84,8 +84,8 @@ while (list($key,$val)=each($ql)) {
 }
 ?>
 <tr class="trbtn"><td colspan="3">
-  <input class="inb" type="submit" name="submit" value="<?php __("Edit the quotas"); ?>" />
-  <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='adm_list.php'" />
+  <input class="inb ok" type="submit" name="submit" value="<?php __("Edit the quotas"); ?>" />
+  <input type="button" class="inb cancel" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='adm_list.php'" />
 
 </td></tr>
 </table>

@@ -104,8 +104,8 @@ if (is_array($r)) {
 </tr>
 
 <tr class="trbtn"><td colspan="2">
-  <input class="inb" type="submit" name="submit" value="<?php __("Change the MySQL backup parameters"); ?>" />
-  <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='sql_list.php'"/>
+  <input class="inb ok" type="submit" name="submit" value="<?php __("Change the MySQL backup parameters"); ?>" />
+  <input type="button" class="inb cancel" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='sql_list.php'"/>
 </td></tr>
 </table>
 </form>

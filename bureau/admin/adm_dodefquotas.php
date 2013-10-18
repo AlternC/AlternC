@@ -72,8 +72,8 @@ if($action == "add") {
       <p class="alert alert-warning"><?php __("WARNING: Confirm the deletion of the quota"); ?></p>
       <p><?php echo $type; ?></p>
       <blockquote>
-        <input type="submit" class="inb" name="confirm" value="<?php __("Yes"); ?>" />&nbsp;&nbsp;
-        <input type="button" class="inb" name="cancel" value="<?php __("No"); ?>" onclick="document.location='adm_defquotas.php';" />
+      <input type="submit" class="inb ok" name="confirm" value="<?php __("Yes, delete this default quota"); ?>" />&nbsp;&nbsp;
+      <input type="button" class="inb cancel" name="cancel" value="<?php __("No, don't delete this default quota"); ?>" onclick="document.location='adm_defquotas.php';" />
       </blockquote>
     </form>
     <?php

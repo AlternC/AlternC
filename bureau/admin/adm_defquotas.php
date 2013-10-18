@@ -121,7 +121,7 @@ foreach($q as $name => $value) {
 }
 ?>
 <br/>
-<input type="submit" class="inb" value="<?php __("Edit the default quotas"); ?>" />
+<input type="submit" class="inb ok" value="<?php __("Edit the default quotas"); ?>" />
 </div>
 </form>
 <?php include_once("foot.php"); ?>
