@@ -501,6 +501,7 @@ img {
   white-space: nowrap;
   text-overflow: ellipsis;
   -o-text-overflow: ellipsis; /* Opera 9*/
+  outline:none;
 }
 
 .menu-box li a img {
@@ -1045,4 +1046,12 @@ body .ui-dialog .ui-dialog-title {
 
 body .ui-widget-content a {
   color: #0D5689;
+}
+
+.ui-tabs .ui-tabs-nav li.ui-tabs-active a, .ui-tabs .ui-tabs-nav li.ui-state-disabled a, .ui-tabs .ui-tabs-nav li.ui-tabs-loading a {
+  outline:none;
+}
+
+.ui-tabs .ui-tabs-nav li a, .ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-active a {
+  outline:none;
 }

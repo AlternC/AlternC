@@ -125,6 +125,8 @@ if ($save) {
 
         <p><input type="submit" name="submit" class="inb ok" value="<?php __("Submit"); ?>" /></p>
       </td>
+    </tr>
+  </table>
 </form>
 
 <?php 
