@@ -691,7 +691,7 @@ class m_aws {
    * @access private
    */
   function _createconf($id,$nochk=0) {
-    global $db,$err,$cuid;
+    global $db,$err,$cuid,$L_ALTERNC_LOGS;
     $s=@implode("",file($this->TEMPLATEFILE));
     if (!$s) {
       $err->raise("aws",_("Problem to create the configuration"));
@@ -707,23 +707,37 @@ class m_aws {
       return false;
     }
     $db->next_record();
+    $uid = $db->f('uid');
     $hostname=$db->f("hostname");
     $hostaliases=$db->f("hostaliases");
     $public=$db->f("public");
+    $db->query("SELECT login FROM membres WHERE uid = '$uid'");
+    $db->next_record();
+    $username = $db->f('login');
     $db->query("SELECT login FROM aws_access WHERE id='$id';");
     $users="";
     while ($db->next_record()) {
         $users.=$db->f("login")." ";
     }
-    $s=str_replace("%%HOSTNAME%%",$hostname,$s);
-    $s=str_replace("%%PUBLIC%%",$public,$s);
-    $s=str_replace("%%HOSTALIASES%%",$hostaliases,$s);
-    $s=str_replace("%%USERS%%",$users,$s);
+
+    $replace_vars = array(
+        '%%UID%%' => $uid,
+        '%%USER%%' => $username,
+        '%%ALTERNC_LOGS%%' => $L_ALTERNC_LOGS,
+        '%%PUBLIC%%' => $public,
+        '%%HOSTNAME%%' => $hostname,
+        '%%HOSTALIASES%%' => $hostaliases,
+        '%%USERS%%' => $users,
+    );
+    foreach ($replace_vars as $k=>$v){
+        $s=str_replace($k,$v,$s);
+    }
+
     $f=fopen($this->CONFDIR."/awstats.".$hostname.".conf","wb");
     fputs($f,$s,strlen($s));
     fclose($f);
 
-	return true;
+    return true;
   }
 
 
