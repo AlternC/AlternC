@@ -317,7 +317,7 @@ class m_aws {
    * @return string the domain name of the deleted statistic set, or FALSE if an error occurred
    */
   function delete_stats($id) {
-    global $db,$err,$cuid;
+    global $db,$err,$cuid,$action;
     $err->log("aws","delete_stats",$id);
     $db->query("SELECT hostname FROM aws WHERE id='$id' and uid='$cuid';");
     if (!$db->num_rows()) {
@@ -329,7 +329,7 @@ class m_aws {
     $this->delete_allowed_login($id,1);
     $this->_delconf($hostname);
     $db->query("DELETE FROM aws WHERE id='$id'");
-    system("rm ".$this->CACHEDIR."/$hostname/ -rf");
+    $action->del($this->CACHEDIR. DIRECTORY_SEPARATOR . $hostname . DIRECTORY_SEPARATOR);
     return $hostname;
 
   }
