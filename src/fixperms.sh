@@ -33,7 +33,7 @@
 # The f and d switch are used to fix a given file or directory under the user's base directory. They use the base directory to get the permissions they should use.
 # Be sure to have correct base directory permissions before attemplting to fix use those two switch 
 
-query="SELECT uid,login FROM membres"
+query="SELECT uid,login FROM membres ORDER BY login"
 sub_dir=""
 file=""
 
@@ -42,7 +42,7 @@ do
   case "$optname" in
   "l")
     if [[ "$OPTARG" =~ ^[a-zA-Z0-9_]+$ ]] ; then
-      query="SELECT uid,login FROM membres WHERE login LIKE '$OPTARG'"
+      query="SELECT uid,login FROM membres WHERE login LIKE '$OPTARG' ORDER BY login"
     else	
       echo "Bad login provided"
       exit
@@ -50,7 +50,7 @@ do
   ;;
   "u")
     if [[ "$OPTARG" =~ ^[0-9]+$ ]] ; then
-      query="SELECT uid,login FROM membres WHERE uid LIKE '$OPTARG'"
+      query="SELECT uid,login FROM membres WHERE uid LIKE '$OPTARG' ORDER BY login"
     else
       echo "Bad uid provided"
       exit
