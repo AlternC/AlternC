@@ -41,6 +41,7 @@ if ( empty($logo) ||  ! $logo ) { $logo = 'images/logo3.png'; }
 $obj_menu = $menu->getmenu();
 
 foreach ($obj_menu as $k => $m ) {
+  echo "<style>.$k-menu .menu-title { background-image: url('".$m['ico']."'); background-repeat: no-repeat; background-position: 8px 3px; padding-left: 30px;} </style>";
   echo "<div class='menu-box {$k}-menu ".(!empty($m['divclass'])?$m['divclass']:'')."'>\n";
   echo "  <a href=\"".$m['link']."\"";
   if (!empty($m['target'])) echo " target='". $m['target']."' ";
