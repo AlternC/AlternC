@@ -1,4 +1,4 @@
-<?php
+><?php
 /*
  ----------------------------------------------------------------------
  AlternC - Web Hosting System
@@ -676,12 +676,12 @@ class m_aws {
    * @access private
    */
   function _delconf($hostname) {
-    global $err;
+    global $err,$action;
     if (!preg_match('/^[._a-z0-9-]*$/', $hostname)){
       $err->raise("aws",_("Hostname is incorrect")); 
       return false;
     }
-    @unlink($this->CONFDIR."/awstats.".$hostname.".conf");
+    $action->del($this->CONFDIR. DIRECTORY_SEPARATOR . "awstats.".$hostname.".conf");
   }
 
 
