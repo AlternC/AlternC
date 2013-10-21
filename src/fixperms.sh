@@ -36,6 +36,18 @@
 query="SELECT uid,login FROM membres ORDER BY login"
 sub_dir=""
 file=""
+LOCK_FIXPERMS="/etc/alternc/disable_all_fixperms"
+
+if [ -f "$LOCK_FIXPERMS" ] ; then
+  (
+  echo "    -------------    "
+  echo '/!\    WARNING    /!\ ' 
+  echo "The fixperms script is disabled"
+  echo "To enable it, delete $LOCK_FIXPERMS "
+  echo "    -------------    "
+  ) 1>&2
+  exit 0
+fi
 
 while getopts "l:u:f:d:" optname
 do
