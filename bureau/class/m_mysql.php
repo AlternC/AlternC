@@ -456,7 +456,7 @@ class m_mysql {
    **/
   function grant($base,$user,$rights=null,$pass=null,$table='*'){
     global $err,$db;
-    $err->log("mysql","grant",$base."-".$user);
+    $err->log("mysql","grant",$base."-".$rights."-".$user);
 
     if(!preg_match("#^[0-9a-z_\\*\\\\]*$#",$base)){
       $err->raise("mysql",_("Database name can contain only letters and numbers"));
@@ -742,7 +742,7 @@ class m_mysql {
     // We add him to the user table 
     $db->query("INSERT INTO dbusers (uid,name,password,enable) VALUES($cuid,'$user','$password','ACTIVATED');");
     // We create the user account (the "file" right is the only one we need globally to be able to use load data into outfile)
-    $this->grant("*",$user,"FILE",$pass);
+    $this->grant("'*'",$user,"FILE",$pass);
     return true;
   }
 
