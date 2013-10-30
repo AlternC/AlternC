@@ -484,7 +484,10 @@ class m_mysql {
       return false;
     }
 
-    $grant="grant ".$rights." on `".$base."`.".$table." to '".$user."'@'".$this->dbus->Client."'" ;
+    # Protect database name if not wildcard
+    if ($base != '*' ) $base = "`".$base."`" ;
+
+    $grant="grant ".$rights." on ".$base.".".$table." to '".$user."'@'".$this->dbus->Client."'" ;
 
     if($pass){
       $grant .= " identified by '".$pass."';";
@@ -741,8 +744,8 @@ class m_mysql {
 
     // We add him to the user table 
     $db->query("INSERT INTO dbusers (uid,name,password,enable) VALUES($cuid,'$user','$password','ACTIVATED');");
-    // We create the user account (the "file" right is the only one we need globally to be able to use load data into outfile)
-    $this->grant("'*'",$user,"FILE",$pass);
+
+    $this->grant("*",$user,"USAGE",$pass);
     return true;
   }
 
