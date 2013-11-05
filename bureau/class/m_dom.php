@@ -286,7 +286,7 @@ class m_dom {
     // Examples:
     // @ IN NS ns.example.tld.
     // ns 3600 IN NS 145.214.44.55
-    if ( preg_match('/^(?P<sub>[\w\.@]*)\h*(?P<ttl>\d*)\h*IN\h+NS\h+(?P<target>[\w\.]+)/i', $zone, $ret) ) {
+    if ( preg_match('/^(?P<sub>[\-\w\.@]*)\h*(?P<ttl>\d*)\h*IN\h+NS\h+(?P<target>[\w\.\-]+)/i', $zone, $ret) ) {
       if ( empty($ret['sub']) || $ret['sub'] == '@' ) {
         $val['status'] = 'warn';
         $val['comment'] = "Won't migrate it, there will get a new value";
@@ -302,7 +302,7 @@ class m_dom {
     // Examples:
     // agenda IN CNAME ghs.google.com.
     // www 3600 IN CNAME @
-    if ( preg_match('/^(?P<sub>[-\w\.@]*)\h*(?P<ttl>\d*)\h*IN\h+CNAME\h+(?P<target>[@\w+\.]+)/i', $zone, $ret) ) {
+    if ( preg_match('/^(?P<sub>[\-\w\.@]*)\h*(?P<ttl>\d*)\h*IN\h+CNAME\h+(?P<target>[@\w+\.\-]+)/i', $zone, $ret) ) {
       if ( substr($ret['sub'], -1) == '.' ) { // if ending by a "." it is allready a FQDN
         $url="http://".$ret['sub'];
       } else {
@@ -330,7 +330,7 @@ class m_dom {
     // Examples:
     // @ IN MX 10 aspmx.l.google.com.
     // arf 3600 IN MX 20 pouet.fr.
-    if ( preg_match('/^(?P<sub>[-\w\.@]*)\h*(?P<ttl>\d*)\h*IN\h+MX\h+(?P<weight>\d+)\h+(?P<target>[@\w+\.]+)/i', $zone, $ret) ) {
+    if ( preg_match('/^(?P<sub>[\-\w\.@]*)\h*(?P<ttl>\d*)\h*IN\h+MX\h+(?P<weight>\d+)\h+(?P<target>[@\w+\.\-]+)/i', $zone, $ret) ) {
       $val['status'] = 'ok';
       $val['comment'] = "Create entry MX with ".$ret['sub']." go to ".$ret['target']." with ttl ".$ret['ttl']." and weight ".$ret['weight'];
       $val['entry_new']['type'] = 'MX';
@@ -340,14 +340,14 @@ class m_dom {
 
     // Examples:
     // _sip._tcp  IN      SRV             1 100 5061 sip.example.tld.
-    if ( preg_match('/^(?P<sub>[_\w\.@]+)\h+(?P<ttl>\d*)\h*IN\h+SRV\h+/i', $zone, $ret) ) {
+    if ( preg_match('/^(?P<sub>[\_\w\.@\-]+)\h+(?P<ttl>\d*)\h*IN\h+SRV\h+/i', $zone, $ret) ) {
       $val['status']='err';
       $val['comment'] = "Please add yourself the entry $zone";
     } else
 
     // Examples:
     // @       IN      TXT             "google-site-verification=jjjjjjjjjjjjjjjjjjjjjjjjsdsdjlksjdljdslgNj5"
-    if ( preg_match('/^(?P<sub>[_\w\.@]*)\h*(?P<ttl>\d*)\h*IN\h+TXT\h+\"(?P<target>.+)\"/i', $zone, $ret) ) {
+    if ( preg_match('/^(?P<sub>[\_\w\.@\-]*)\h*(?P<ttl>\d*)\h*IN\h+TXT\h+\"(?P<target>.+)\"/i', $zone, $ret) ) {
       $val['status']='ok';
       $val['comment'] = "Create TXT entry with ".$ret['sub']." go to ".$ret['target'];
       $val['entry_new']['type'] = 'TXT';
@@ -368,8 +368,8 @@ class m_dom {
 
   private function import_manual_dns_entry_doit($entry) {
     global $err;
+    $entry['did_it'] = 0;
     if ( $entry['status'] == 'err' ) {
-      $entry['did_it'] = 0;
       return $entry;
     }
 
@@ -448,12 +448,18 @@ class m_dom {
       } 
       if ( strstr($http_response_header[0], '301') || strstr($http_response_header[0], '302')) {
         // This is a redirection
-       if ( preg_match( '/Location:\h+(?P<target>[\w:\/.\?\=.]+)/', implode("\n",$http_response_header), $ret ) ) {
+       if ( preg_match( '/Location:\h+(?P<target>[\-\w:\/.\?\=.]+)/', implode("\n",$http_response_header), $ret ) ) {
          // check if it is a redirection to himself
          preg_match('/\/\/(?P<host>[\w\.\-]+)\//', ( substr($url,-1)=='/'?$url:$url.'/') , $original_cname);
          preg_match('/\/\/(?P<host>[\w\.\-]+)\//', $ret['target'], $target_url);
-         if ($target_url['host'] == $original_cname['host']) { // if it's a redirection to himself (sub pages, http to https...)
+         if ( isset($target_url['host']) && ( $target_url['host'] == $original_cname['host'] ) ) { // if it's a redirection to himself (sub pages, http to https...)
            return false; // do not do a redirection (we must point to the server)
+         }
+
+         // If it is a redirection to a sub directory
+         // (we know it is a redirection to a sub directory because it's not a complete URI)
+         if ( substr($ret['target'],0,4) != 'http' ) {
+           return 'http://'.$original_cname['host'].'/'.$ret['target'];
          }
          return $ret['target'];
        } 
