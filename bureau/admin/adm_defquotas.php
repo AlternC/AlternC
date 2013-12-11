@@ -98,8 +98,9 @@ $qlist=$quota->getdefaults();
 reset($qlist);
 foreach($qlist as $type => $q) {
 ?>
-<div>
-<h4><?php echo _("Accounts of type"). " \"$type\"" ?></h4>
+<div class="info-toggle">
+<h4 class="toggle-next"><?php echo _("Accounts of type"). " \"$type\"" ?>▼</h4>
+<div class="info-hide" id="div-quot-<?php echo md5($type);?>">
 <table border="0" cellpadding="4" cellspacing="0" class='tlist'>
 <tr><th><?php __("Quotas") ?></th><th><?php __("Default Value"); ?></th></tr>
 <?php
@@ -113,9 +114,14 @@ foreach($q as $name => $value) {
 <td><input type="text" class="int" size="16" maxlength="16" name="<?php echo $key; ?>" id="<?php echo $key;?>" value="<?php ehe($value); ?>" /></td></tr>
 
 <?php
-  }
+  } //foreach 
 ?>
 </table>
+<br/>
+</div>
+<script type="text/javascript">
+  $("#div-quot-<?php echo md5($type);?>").toggle();
+</script>
 </div>
 <?php
 }
@@ -124,4 +130,12 @@ foreach($q as $name => $value) {
 <input type="submit" class="inb ok" value="<?php __("Edit the default quotas"); ?>" />
 </div>
 </form>
+<script type="text/javascript">
+$(function(){
+  $(".toggle-next").on("click",function(){
+    var next = $(this).next();
+    next.toggle();
+  })
+}); 
+</script>
 <?php include_once("foot.php"); ?>

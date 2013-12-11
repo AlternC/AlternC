@@ -1055,3 +1055,11 @@ body .ui-widget-content a {
 .ui-tabs .ui-tabs-nav li a, .ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-active a {
   outline:none;
 }
+
+.info-toggle {
+  background: none repeat scroll 0 0 #CFE3F1;
+  border: 1px solid #CCCCCC;
+  border-radius: 15px 15px 15px 15px;
+  margin: 16px 0;
+  padding: 0 16px;
+}
