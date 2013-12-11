@@ -73,9 +73,11 @@ if (file_exists($LOCK_FILE) !== false){
     }else{
       // Previous cron failed!
       $error_raise.="Lock file already exists. No process with PID $PID found! Previous cron failed...\n";
-      d("Removing lock file and trying to process the failed action...");
+
+      // No need to remove anything, we're going to recreate it
+      //d("Removing lock file and trying to process the failed action...");
       // Delete the lock and continue to the next action
-      unlink($LOCK_FILE);
+      //unlink($LOCK_FILE);
 
       // Lock with the current script's PID
       if (file_put_contents($LOCK_FILE,$MY_PID) === false){
