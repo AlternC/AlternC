@@ -300,6 +300,13 @@ class m_admin {
 	   if ($pattern && preg_match('/[.a-zA-Z0-9]+/', $pattern))
 		$request .= sprintf(' AND domaine LIKE "%%%s%%"', $pattern);
 
+	   if ($creator) 
+		$request .= sprintf(' AND compte in (select uid from membres where creator = "%s" ) ', $creator);
+
+	   if ($mem->user['uid']!=2000 && !$all)
+		$request .= sprintf(' AND compte in (select uid from membres where creator = "%s") ', $cuid);
+
+
 	   $request .= ' GROUP BY uid';
 
         } elseif ($pattern_type === 'login') {
