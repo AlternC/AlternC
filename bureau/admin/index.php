@@ -59,10 +59,16 @@ if (file_exists("styles/style-custom.css") ) {
   <div id="global">
 
     <div id="content" style="width:1000px;">
-      <?php
-      $logo = variable_get('logo_login', 0 ,'You can specify a logo for the login page, example /images/my_logo.png . Set 0 or empty to reset it. ');
-      if ( empty($logo) ||  ! $logo ) { $logo = 'images/logo.png'; }
-      ?>
+<?php
+// Getting logo
+$logo = variable_get('logo_login_'.strtolower($_SERVER['HTTP_HOST']), '', 'You can specify a logo for the login page for a specific URL of the panel');
+if ( empty($logo) ||  ! $logo ) {
+  $logo = variable_get('logo_login', '' ,'You can specify a logo for the login page, example /images/my_logo.png . Set 0 or empty to reset it. ');
+}
+if ( empty($logo) ||  ! $logo ) { 
+  $logo = 'images/logo.png'; 
+}
+?>
 
       <p id="logo">  <img src="<?php echo $logo; ?>" border="0" alt="<?php __("Web Hosting Control Panel"); ?>" title="<?php __("Web Hosting Control Panel"); ?>" />
       </p>

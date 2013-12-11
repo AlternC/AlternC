@@ -29,8 +29,14 @@
 */
 require_once("../class/config.php");
 
-$logo = variable_get('logo_menu', 0 ,'You can specify a logo for the menu, example /images/my_logo.png . Set 0 or empty to reset it. ');
-if ( empty($logo) ||  ! $logo ) { $logo = 'images/logo3.png'; }
+// Getting logo
+$logo = variable_get('logo_menu_'.strtolower($_SERVER['HTTP_HOST']), '', 'You can specify a logo for the menu for a specific URL of the panel');
+if ( empty($logo) ||  ! $logo ) {
+  $logo = variable_get('logo_menu', '' ,'You can specify a logo for the menu, example /images/my_logo.png . Set 0 or empty to reset it. ');
+}
+if ( empty($logo) ||  ! $logo ) { 
+  $logo = 'images/logo3.png'; 
+}
 
 ?>
 <img src="<?php echo $logo; ?>" class="menutoplogo" border="0" alt="AlternC" width='190px' height='46px' />
