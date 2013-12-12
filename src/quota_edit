@@ -1,5 +1,6 @@
 #!/bin/bash
 source /etc/alternc/local.sh
+set -x
 # Set disk quota to an user
 # Won't work over NFS
 
@@ -11,7 +12,6 @@ SED=/bin/sed
 QUOTA=/usr/sbin/setquota
 DF=/bin/df
 
-
 #checking if quotas are installed
 command -v $QUOTA >/dev/null || { echo "Quotas uninstalled"; exit 1; }
 
@@ -21,19 +21,14 @@ if [ $# -ne 2 ] || [[ ! "$MID" =~ ^[0-9]+$ ]] || [[ ! "$SIZE" =~ ^[0-9]+$ ]]; th
   exit 1
 fi
 
-DATA_PART=`$DF "${ALTERNC_HTML}" 2>/dev/null | $AWK 'NR==2 { print $1 }'`
+DATA_PART=`$DF -P "${ALTERNC_HTML}" 2>/dev/null | $AWK 'NR==2 { print $NF }'`
 
-# quota will give over NFS will print the partition using the full NFS name
-# (e.g. 10.0.0.1:/var/www/alternc) so we need to lookup first with mount
-# to convert DATA_PART if needed.
-
-QUOTA_PART=`$MOUNT | $SED -n -e "s,\([^ ]*\) on ${ALTERNC_HTML} type nfs.*,\1,p"`
-echo $QUOTA_PART
-
-if [ -z "$QUOTA_PART" ]; then
-  `sudo $QUOTA -r -g $MID $SIZE 0 0 0 $DATA_PART 2>/dev/null || echo "Group quota are not enabled on $ALTERNC_HTML." >&2`
-else
-  `sudo $QUOTA -r -g $MID $SIZE 0 0 0 "$ALTERNC_HTML" 2>/dev/null || echo "Group quota are not enabled on $ALTERNC_HTML." >&2`
+if [[ ! -e $DATA_PART"/aquota.group" ]]; then
+  echo "Group quota are not enabled on $DATA_PART filesystem "
+  exit 2
 fi
+
+
+sudo $QUOTA -r -g $MID $SIZE 0 0 0 $DATA_PART 2>/dev/null || echo "Group quota are not enabled on $ALTERNC_HTML." >&2
 
 
