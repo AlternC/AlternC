@@ -67,7 +67,7 @@ done
 
 # List the adresses to DELETE
 # Delete if only if there isn't any mailbox refering to it
-mysql_query "DELETE FROM a USING address a, mailbox m  WHERE (a.mail_action='DELETE' OR a.mail_action='DELETING') AND a.id != m.address_id;"
+mysql_query "DELETE FROM address LEFT JOIN mailbox ON address.id = mailbox.address_id WHERE mailbox.id IS NULL AND (address.mail_action = 'DELETE' OR address.mail_action = 'DELETING');" 
 
 # Delete the lock
 rm -f "$LOCK_FILE"
