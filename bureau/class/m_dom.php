@@ -1818,6 +1818,97 @@ class m_dom {
   }
   
 
+/**
+  * Return an array with all the needed parameters to generate the apache conf
+  * of a vhost.
+  * If no parameters, return the parameters for ALL the vhost.
+  * Optionnal parameters: id of the sub_domaines
+  *
+  **/
+function generation_parameters($id=null) {
+  global $db,$err;
+  $err->log("dom","generation_parameters");
+  $params="";
+  if (! is_null($id) && intval($id)==$id ) {
+    $id=intval($id);
+    $params=" AND sd.id = $id ";
+  }
+  $db->query("select sd.id as sub_id, lower(sd.type) as type, m.login, m.uid as uid, if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine) as fqdn, concat_ws('@',m.login,v.value) as mail, sd.valeur  from sub_domaines sd,membres m,variable v, domaines_type dt where sd.compte=m.uid and v.name='mailname_bounce' and lower(dt.name) = lower(sd.type) and dt.only_dns is false $params order by m.login, sd.domaine, sd.sub ;");
+  $r = array();
+  while ($db->next_record()) {
+    $r[ $db->Record['sub_id'] ] = $db->Record;
+  }
+  return $r;
+}
+
+/**
+  * Return an array with all informations of the domains_type
+  * used to generate Apache conf.
+  * Die if templates missing.
+  * Warning: an Apache domains_type must have 'only_dns' == TRUE
+  *
+  **/
+function generation_domains_type() {
+  global $dom;
+  $d= array();
+  foreach ($dom->domains_type_lst() as $k => $v) {
+    if ( $v['only_dns'] == true ) continue;
+    if (! $j = file_get_contents(ALTERNC_APACHE2_GEN_TMPL_DIR.'/'.strtolower($k).'.conf') ) {
+      die("Error: missing file for $k");
+    }
+    $d[$k] = $v;
+    $d[$k]['tpl'] = $j;
+  }
+  return $d;
+}
+
+/**
+  * Generate apache configuration.
+  * Die if a specific FQDN have 2 vhost conf.
+  *
+  **/
+function generate_apacheconf($p = null) {
+  // Get the parameters
+  $lst = $this->generation_parameters($p);
+
+  $gdt = $this->generation_domains_type();
+
+  // Initialize duplicate check
+  $check_dup = array();
+
+  $ret='';
+  foreach ($lst as $p ) {
+    // Check if duplicate
+    if ( in_array($p['fqdn'], $check_dup) ) {
+      die("Error: duplicate fqdn : ".$p['fqdn']);
+    } else {
+      $check_dup[] = $p['fqdn'];
+    }
+
+    // Get the needed template
+    $tpl = $gdt[ $p['type'] ] ['tpl'];
+
+    // Replace needed vars
+    $tpl = strtr($tpl, array(
+      "%%LOGIN%%"=> $p['login'],
+      "%%fqdn%%"=> $p['fqdn'],
+      "%%document_root%%"=> getuserpath($p['login']).$p['valeur'],
+      "%%account_root%%"=> getuserpath($p['login']),
+      "%%redirect%%"=> $p['valeur'],
+      "%%UID%%"=> $p['uid'],
+      "%%GID%%"=> $p['uid'],
+      "%%mail_account%%"=> $p['mail'],
+      "%%user%%"=> "FIXME",
+    ));
+  
+    // Return the conf
+    $ret.= "# Sub_id: ".$p['sub_id']."\n".$tpl;
+  }
+
+  return $ret;
+}
+
+
   /* ----------------------------------------------------------------- */
   /** hook function called by AlternC-upnp to know which open 
    * tcp or udp ports this class requires or suggests
