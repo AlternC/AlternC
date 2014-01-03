@@ -105,6 +105,10 @@ define('ALTERNC_LOCALES',  ALTERNC_PANEL."/locales");
 define('ALTERNC_LOCK_JOBS', '/var/run/alternc/jobs-lock');
 define('ALTERNC_LOCK_PANEL', '/var/lib/alternc/panel/nologin.lock');
 define('ALTERNC_APACHE2_GEN_TMPL_DIR', '/etc/alternc/templates/apache2/');
+define('ALTERNC_VHOST_DIR',"/var/lib/alternc/apache-vhost/");
+define('ALTERNC_VHOST_FILE',ALTERNC_VHOST_DIR."vhosts_all.conf");
+define('ALTERNC_VHOST_MANUALCONF',ALTERNC_VHOST_DIR."manual/");
+
 
 /* PHPLIB inclusions : */
 $root=ALTERNC_PANEL."/";

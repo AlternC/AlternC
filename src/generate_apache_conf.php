@@ -19,9 +19,6 @@ ini_set("display_errors", 1);
 
 FIXME : 
   - add security check
-  - add hooks
-  - make better retro compatibility
-
 */
 
 // Check if we can modify Apache conf
@@ -39,6 +36,8 @@ if ( ! in_array('force', $argv) && $nb_todo < 1) {
   die('0');
 }
 
+$todo = $dom->generation_todo();
+$parameters = $dom->generation_parameters();
 
 // Generate apache conf
 $conf = $dom->generate_apacheconf();
@@ -65,6 +64,13 @@ $conf2.="\n$conf\n\n###END OF ALTERNC AUTO-GENERATED FILE - DO NOT EDIT MANUALLY
 // Write the conf !
 if (! file_put_contents(ALTERNC_VHOST_FILE, $conf2) ) {
   die("Error: writing content\n");
+}
+
+// Hooks !
+foreach (array('DELETE', 'CREATE', 'UPDATE', 'ENABLE', 'DISABLE') as $y) {
+  if (!isset($todo[$y]) || empty($todo[$y])) continue;
+  $dom->generate_conf_oldhook($y, $todo); // old hooks for compatibility
+  $hooks->invoke("hook_genconf", array($y, $todo[$y], $parameters)); // modern hooks
 }
 
 echo $nb_todo;

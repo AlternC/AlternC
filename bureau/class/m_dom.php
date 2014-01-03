@@ -1819,13 +1819,13 @@ class m_dom {
   
 
 /**
-  * Return an array with all the needed parameters to generate the apache conf
+  * Return an array with all the needed parameters to generate conf 
   * of a vhost.
   * If no parameters, return the parameters for ALL the vhost.
   * Optionnal parameters: id of the sub_domaines
   *
   **/
-function generation_parameters($id=null) {
+function generation_parameters($id=null, $only_apache=true) {
   global $db,$err;
   $err->log("dom","generation_parameters");
   $params="";
@@ -1833,7 +1833,33 @@ function generation_parameters($id=null) {
     $id=intval($id);
     $params=" AND sd.id = $id ";
   }
-  $db->query("select sd.id as sub_id, lower(sd.type) as type, m.login, m.uid as uid, if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine) as fqdn, concat_ws('@',m.login,v.value) as mail, sd.valeur  from sub_domaines sd,membres m,variable v, domaines_type dt where sd.compte=m.uid and v.name='mailname_bounce' and lower(dt.name) = lower(sd.type) and dt.only_dns is false $params order by m.login, sd.domaine, sd.sub ;");
+  if ($only_apache) {
+    $params.=" and dt.only_dns is false ";
+  }
+// BUG BUG BUG FIXME
+// Suppression de comptes -> membres existe pas -> domaines a supprimer ne sont pas lister
+  $db->query("
+select 
+  sd.id as sub_id, 
+  lower(sd.type) as type, 
+  m.login, 
+  m.uid as uid, 
+  if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine) as fqdn, 
+  concat_ws('@',m.login,v.value) as mail, 
+  sd.valeur  
+from 
+  sub_domaines sd left join membres m on sd.compte=m.uid,
+  variable v, 
+  domaines_type dt 
+where 
+  v.name='mailname_bounce' 
+  and lower(dt.name) = lower(sd.type) 
+  $params 
+order by 
+  m.login, 
+  sd.domaine, 
+  sd.sub 
+;");
   $r = array();
   while ($db->next_record()) {
     $r[ $db->Record['sub_id'] ] = $db->Record;
@@ -1860,6 +1886,33 @@ function generation_domains_type() {
     $d[$k]['tpl'] = $j;
   }
   return $d;
+}
+
+// Launch old fashionned hooks as there was in AlternC 1.0
+function generate_conf_oldhook($action, $lst_sub, $sub_obj=null) {
+  if (is_null($sub_obj)) $sub_obj=$this->generation_parameters(null, false);
+
+  if (!isset($lst_sub[strtoupper($action)]) || empty( $lst_sub[strtoupper($action)] )) {
+    return false;
+  }
+
+  $lst_by_type = $lst_sub[strtoupper($action)] ;
+
+  foreach ( $lst_by_type as $type => $lid_arr) {
+    $script = "/etc/alternc/functions_hosting/hosting_".strtolower($type).".sh";
+    if (! @is_executable($script) ) {
+      continue;
+    }
+    foreach ($lid_arr as $lid ) {
+      $o = $sub_obj[$lid];
+      $cmd  = $script." ".escapeshellcmd(strtolower($action))." ";
+      $cmd .= escapeshellcmd($o['fqdn'])." ".escapeshellcmd($o['valeur']);
+
+      system($cmd);
+    }
+  } // foreach $lst_by_type
+
+
 }
 
 /**
@@ -1908,6 +1961,17 @@ function generate_apacheconf($p = null) {
   return $ret;
 }
 
+  // Return an array with the list of id of sub_domains waiting for an action
+  function generation_todo() {
+    global $db,$err;
+    $err->log("dom","generation_todo");
+    $db->query("select id as sub_id, web_action, type from sub_domaines where web_action !='ok';");
+    $r = array();
+    while ($db->next_record()) {
+      $r[ strtoupper($db->Record['web_action']) ][ strtoupper($db->Record['type']) ][] = $db->f('sub_id');
+    }
+    return $r;
+  }
 
   /* ----------------------------------------------------------------- */
   /** hook function called by AlternC-upnp to know which open 
