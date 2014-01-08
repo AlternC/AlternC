@@ -17,4 +17,4 @@ done
 stop_if_jobs_locked
 
 # ALTERNC_LOGS is from local.sh
-nice 10 -n find "$ALTERNC_LOGS" -mtime +$DAYS -delete
+nice -n 10 find "$ALTERNC_LOGS" -mtime +$DAYS -delete
