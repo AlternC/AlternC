@@ -1973,6 +1973,20 @@ function generate_apacheconf($p = null) {
     return $r;
   }
 
+  function subdomain_modif_are_done($sub_domain_id, $action) {
+    global $db;
+    $sub_domain_id=intval($sub_domain_id);
+    switch (strtolower($action)) {
+      case "delete":
+        $sql="DELETE FROM sub_domaines WHERE id =$sub_domain_id;"; 
+        break;
+      default:
+        $sql="UPDATE sub_domaines SET web_action='OK' WHERE id='$sub_domain_id'; ";
+    }
+    $db->query($sql);
+    return true;
+  }
+
   /* ----------------------------------------------------------------- */
   /** hook function called by AlternC-upnp to know which open 
    * tcp or udp ports this class requires or suggests

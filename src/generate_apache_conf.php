@@ -22,6 +22,7 @@ FIXME :
 */
 
 // Check if we can modify Apache conf
+@touch(ALTERNC_VHOST_FILE);
 if ( ! is_writable( ALTERNC_VHOST_FILE )) {
   die("Error: ".ALTERNC_VHOST_FILE." is not writable\n");
 }
@@ -65,6 +66,9 @@ $conf2.="\n$conf\n\n###END OF ALTERNC AUTO-GENERATED FILE - DO NOT EDIT MANUALLY
 if (! file_put_contents(ALTERNC_VHOST_FILE, $conf2) ) {
   die("Error: writing content\n");
 }
+
+// Update the database to inform that we did the job
+array_walk_recursive($todo, 'm_dom::subdomain_modif_are_done');
 
 // Hooks !
 foreach (array('DELETE', 'CREATE', 'UPDATE', 'ENABLE', 'DISABLE') as $y) {
