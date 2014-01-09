@@ -88,6 +88,7 @@ function variable_init_maybe() {
  */
 function variable_get($name, $default = null, $createit_comment = null) {
   global $conf;
+  $name=str_replace('.', '_', $name); // Php can't handle POST var with a '.'
 
   variable_init_maybe();
 
@@ -111,6 +112,8 @@ function variable_get($name, $default = null, $createit_comment = null) {
 function variable_set($name, $value, $comment=null) {
   global $conf, $db, $err;
   $err->log('variable', 'variable_set', '+'.serialize($value).'+'.$comment.'+'); 
+
+  $name=str_replace('.', '_', $name); // Php can't handle POST var with a '.'
 
   $conf[$name] = $value;
   if (is_object($value) || is_array($value)) {
@@ -137,6 +140,7 @@ function variable_set($name, $value, $comment=null) {
  */
 function variable_del($name) {
   global $conf, $db;
+  $name=str_replace('.', '_', $name); // Php can't handle POST var with a '.'
 
   $db->query("DELETE FROM `variable` WHERE name = '".$name."'");
 
