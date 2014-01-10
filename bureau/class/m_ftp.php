@@ -298,7 +298,7 @@ class m_ftp {
           return false; // The error has been raised by checkPolicy()
         }
       }
-      $encrypted_password = crypt($pass,strrev(microtime(true)));
+      $encrypted_password = _md5cr($pass,strrev(microtime(true)));
       $db->query("UPDATE ftpusers SET name='".$full_login."', password='', encrypted_password='$encrypted_password', homedir='$absolute', uid='$cuid' WHERE id='$id';");
     } else {
       $db->query("UPDATE ftpusers SET name='".$full_login."', homedir='$absolute', uid='$cuid' WHERE id='$id';");
@@ -381,7 +381,7 @@ class m_ftp {
     }
 
     if ($quota->cancreate("ftp")) {
-      $encrypted_password = crypt($pass,strrev(microtime(true)));
+      $encrypted_password = _md5cr($pass,strrev(microtime(true)));
       $db->query("INSERT INTO ftpusers (name,password, encrypted_password,homedir,uid) VALUES ('".$full_login."', '', '$encrypted_password', '$absolute', '$cuid')");
       return true;
     } else {

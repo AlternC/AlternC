@@ -477,7 +477,7 @@ class m_aws {
       $err->raise("aws",_("Login already exist")); 
       return false;
     }
-    $pass=crypt($pass);
+    $pass=_md5cr($pass);
     // FIXME retourner une erreur l'insert se passe pas bien
     $db->query("INSERT INTO aws_users (uid,login,pass) VALUES ('$cuid','$login','$pass');");
     return $this->_createhtpasswd();
@@ -497,7 +497,7 @@ class m_aws {
       $err->raise("aws",_("Login does not exists")); // Login does not exists
       return false;
     }
-    $pass=crypt($pass);
+    $pass=_md5c($pass);
     $db->query("UPDATE aws_users SET pass='$pass' WHERE login='$login';");
     return $this->_createhtpasswd();
   }
