@@ -887,11 +887,7 @@ class m_bro {
     if (!strpos($file,"/")) {
       $absolute.="/".$file;
       if (file_exists($absolute)) {
-	$f=@fopen($absolute,"wb");
-       	if ($f) {
-	  fputs($f,$texte,strlen($texte));
-	  fclose($f);
-	} else {
+       	if (! file_put_contents($absolute, $texte ) ) {
 	  $err->raise("bro",_("Cannot edit the requested file. Please check the permissions"));
 	  return false;
 	}
