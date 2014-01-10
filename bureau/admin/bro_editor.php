@@ -49,6 +49,7 @@ if (isset($cancel) && $cancel) {
 	include("bro_main.php");
 	exit();
 }
+
 if (isset($saveret) && $saveret) {
   if ($bro->Save($editfile,$R,$texte)) {
     $error=sprintf(_("Your file %s has been saved"),$editfile)." (".format_date(_('%3$d-%2$d-%1$d %4$d:%5$d'),date("Y-m-d H:i:s")).")";
@@ -73,15 +74,35 @@ include_once("head.php");
 <?php if (isset($error) && $error) echo "<p class=\"alert alert-danger\">$error</p>"; ?>
 <h3><?php echo _("File editing")." <code>$R/<b>$editfile</b></code><br />"; ?></h3>
 </p>
+
+<?php
+$content=$bro->content($R,$editfile);
+?>
+
 <form action="bro_editor.php" method="post"><br />
-<textarea class="int" style="font-family: <?php echo $p["editor_font"]; ?>; font-size: <?php echo $p["editor_size"]; ?>; width: 90%; height: 400px;" name="texte"><?php
-  $content=$bro->content($R,$editfile);
+<div id="tabsfile">
+  <ul>
+    <li class="view"><a href="#tabsfile-view"><?php __("View"); ?></a></li>
+    <li class="edit"><a href="#tabsfile-edit"><?php __("Edit"); ?></a></li>
+  </ul>
+
+<div id="tabsfile-view">
+<?php
+echo "<pre class='prettyprint' id='file_content_view' >$content</pre>";
+?>
+</div>
+
+<div id="tabsfile-edit">
+<textarea id='file_content_editor' class="int" style="font-family: <?php echo $p["editor_font"]; ?>; font-size: <?php echo $p["editor_size"]; ?>; width: 90%; height: 400px;" name="texte"><?php
   if (empty($content)) { 
     $error=_("This file is empty");
   } else {
     echo $content;  
   }
 ?></textarea>
+</div>
+</div><!-- tabsfile -->
+<br/>
 <?php if (!empty($error)) echo "<p class=\"alert alert-danger\">".$error."</p>"; ?>
 	<input type="hidden" name="editfile" value="<?php echo str_replace("\"","&quot;",$editfile); ?>" />
 	<input type="hidden" name="R" value="<?php echo str_replace("\"","&quot;",$R); ?>" />
@@ -91,4 +112,18 @@ include_once("head.php");
 	<input type="submit" class="inb" value="<?php __("Quit"); ?>" name="cancel" />
 <br />
 </form>
+
+<script src="/prettify/run_prettify.js"></script>
+<script type="text/javascript">
+$(function() {$( "#tabsfile" ).tabs();});
+
+$('#tabsfile').on('tabsbeforeactivate', function(event, ui){
+  var b = $('#file_content_editor').val();
+  $('#file_content_view').text( b );
+  $('#file_content_view').removeClass('prettyprinted');
+  PR.prettyPrint();
+});
+</script>
+
+
 <?php include_once("foot.php"); ?>
