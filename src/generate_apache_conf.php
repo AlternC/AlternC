@@ -68,7 +68,13 @@ if (! file_put_contents(ALTERNC_VHOST_FILE, $conf2) ) {
 }
 
 // Update the database to inform that we did the job
-array_walk_recursive($todo, 'm_dom::subdomain_modif_are_done');
+foreach ( $todo as $taction=>$tlist){
+  foreach ($tlist as $ttype) {
+    foreach($ttype as $tid) { 
+      $dom->subdomain_modif_are_done($tid, $taction);
+    }
+  }
+}
 
 // Hooks !
 foreach (array('DELETE', 'CREATE', 'UPDATE', 'ENABLE', 'DISABLE') as $y) {
