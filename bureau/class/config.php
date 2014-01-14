@@ -52,6 +52,7 @@ Merci de revenir plus tard.";
 /* Toutes les pages du bureau passent ici. On utilise une sémaphore pour 
    s'assurer que personne ne pourra accéder à 2 pages du bureau en même temps.
 */
+/* * /
 // 1. Get a semaphore id for the alternc magic number (18577)
 $alternc_sem = sem_get ( 18577 );
 // 2. Declare the shutdown function, that release the semaphore
@@ -63,6 +64,7 @@ function alternc_shutdown() {
 register_shutdown_function("alternc_shutdown");
 // 4. Acquire the semaphore : with that process, 
 sem_acquire( $alternc_sem );
+/* */
 
 if (ini_get("safe_mode")) {
   echo "SAFE MODE IS ENABLED for the web panel ! It's a bug in your php or apache configuration, please fix it !!";
