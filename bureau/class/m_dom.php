@@ -1953,6 +1953,12 @@ function generate_apacheconf($p = null) {
       "%%mail_account%%"=> $p['mail'],
       "%%user%%"=> "FIXME",
     ));
+
+    // Security check
+    if ( $p['uid'] < 1999 ) { // if UID is not an AlternC uid
+      $ret.= "# ERROR: Sub_id: ".$p['sub_id']."- The uid seem to be dangerous\n";
+      continue;
+    }
   
     // Return the conf
     $ret.= "# Sub_id: ".$p['sub_id']."\n".$tpl;
