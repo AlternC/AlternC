@@ -795,7 +795,7 @@ class m_bro {
     }
     $finfo = finfo_open(FILEINFO_MIME_TYPE); 
     $mime = finfo_file($finfo,$absolute);
-    if ( substr($mime,0,5)=="text/" || $mime == "application/x-empty") {
+    if ( substr($mime,0,5)=="text/" || $mime == "application/x-empty" || $mime == "inode/x-empty") {
       return true;
     }
     return false;
