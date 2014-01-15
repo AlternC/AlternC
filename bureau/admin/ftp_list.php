@@ -68,8 +68,10 @@ if (isset($error) && $error && !$noftp) {
 ?>
 
 <form method="post" action="ftp_del.php">
-<table class="tlist">
+<table class="tlist" id="ftp_list_table">
+<thead>
   <tr><th colspan="2"> </th><th><?php __("Enabled"); ?></th><th><?php __("Username"); ?></th><th><?php __("Folder"); ?></th></tr>
+</thead>
 <?php
 reset($r);
 while (list($key,$val)=each($r)) { ?>
@@ -80,10 +82,11 @@ while (list($key,$val)=each($r)) { ?>
 		<td><a href='ftp_switch_enable.php?id=<?php echo $val['id'].'&amp;status='.( ($val['enabled'])?'0':'1' ) ;?>' onClick='return confirm("<?php __("Are you sure you want to change his status?"); ?>");'><?php 
 if ( $val['enabled']) {
   echo "<img src='images/check_ok.png' alt=\""._("Enabled")."\"/>";
+  echo "<span style='display:none;'>ENABLED</span>"; // for tablesorter
 } else {
   echo "<img src='images/check_no.png' alt=\""._("Disabled")."\"/>";
+  echo "<span style='display:none;'>DISABLED</span>"; // for tablesorter
 }
-
 
 ?></a></td>
 		<td><label for="del_<?php echo $val["id"]; ?>"><?php echo $val["login"] ?></label>
@@ -117,4 +120,13 @@ if ( $val['enabled']) {
 <?php
 $mem->show_help("ftp_list");
 ?>
+<script type="text/javascript">
+
+$(document).ready(function() 
+    { 
+        $("#ftp_list_table").tablesorter(); 
+    } 
+); 
+</script>
+
 <?php include_once("foot.php"); ?>

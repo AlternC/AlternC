@@ -177,6 +177,7 @@ bureau/admin/icon/winresize.gif -text
 bureau/admin/icon/xls.png -text
 bureau/admin/icon/zip.png -text
 bureau/admin/images/admin.png -text
+bureau/admin/images/asc.gif -text
 bureau/admin/images/bgborder.gif -text
 bureau/admin/images/blank.gif -text
 bureau/admin/images/check_no.png -text
@@ -186,6 +187,7 @@ bureau/admin/images/config.png -text
 bureau/admin/images/copyrights.txt -text
 bureau/admin/images/danger.png -text
 bureau/admin/images/delete.png -text
+bureau/admin/images/desc.gif -text
 bureau/admin/images/dom.png -text
 bureau/admin/images/edit.png -text
 bureau/admin/images/exit.png -text
@@ -252,6 +254,7 @@ bureau/admin/index.php -text
 bureau/admin/ip_main.php -text
 bureau/admin/js/alternc.js -text
 bureau/admin/js/jquery.min_embedded.js -text
+bureau/admin/js/jquery.tablesorter.min.js -text
 bureau/admin/js/jquery_ui/css/redmond/images/animated-overlay.gif -text
 bureau/admin/js/jquery_ui/css/redmond/images/ui-bg_flat_0_aaaaaa_40x100.png -text
 bureau/admin/js/jquery_ui/css/redmond/images/ui-bg_flat_55_fbec88_40x100.png -text

@@ -50,6 +50,8 @@ if (file_exists("styles/style-custom.css") ) {
 <script src="js/jquery.min_embedded.js" type="text/javascript"></script>
 <script src="js/jquery_ui/js/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
 
+<script src="js/jquery.tablesorter.min.js" type="text/javascript"></script>
+
 </head>
 <body>
 <?

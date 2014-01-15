@@ -126,8 +126,10 @@ if ($r['dns_action']=='UPDATE') {?>
 
 <div id="tabsdom-editsub">
 <h3><?php printf(_("Editing subdomains of %s"),$domain); ?></h3>
-<table class="tlist">
+<table class="tlist" id="dom_edit_table">
+<thead>
 <tr><th colspan="2"> </th><th><?php __("Subdomain"); ?></th><th><?php __("Type");?></th><th><?php __("Status")?></th><th></th></tr>
+</thead>
 <?php
 $dt=$dom->domains_type_lst();
 for($i=0;$i<$r["nsub"];$i++) {
@@ -271,6 +273,7 @@ if (!$r['noerase']) {
 <a target="_blank" href="dom_dnsdump.php?domain=<?php echo urlencode($domain) ?>"><?php __("Click here to view the dump");?></a>
 </span>
 </pre>
+<a href="javascript:force_update_dns_content();"><?php __("Refresh");?></a>
 
 </div>
 <?php } // if dns ?>
@@ -306,6 +309,17 @@ function update_dns_content(){
   }
 }
 
+function force_update_dns_content(){
+  get_dns_content = 1;
+  $("#divdumpdns").html('In progress...');
+  update_dns_content();
+}
+
+$(document).ready(function() 
+    { 
+        $("#dom_edit_table").tablesorter(); 
+    } 
+); 
 
 </script>
 <?php include_once("foot.php"); ?>

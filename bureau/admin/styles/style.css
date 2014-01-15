@@ -1063,3 +1063,19 @@ body .ui-widget-content a {
   margin: 16px 0;
   padding: 0 16px;
 }
+
+th.headerSortUp { 
+  background-image: url(../images/asc.gif); 
+  background-repeat: no-repeat;
+  background-position: right; 
+  cursor: pointer; 
+  background-color: #3399FF; 
+} 
+
+th.headerSortDown { 
+  background-image: url(../images/desc.gif); 
+  background-repeat: no-repeat;
+  background-position: right; 
+  cursor: pointer; 
+  background-color: #3399FF; 
+} 
