@@ -164,7 +164,10 @@ dns_regenerate() {
 	    grep -q "^$domain alternc._domainkey.$domain\$" /etc/opendkim/SigningTable || echo "$domain alternc._domainkey.$domain" >> /etc/opendkim/SigningTable
 	fi
 	# we add alternc._domainkey with the proper key
-	file="$(echo -e "$file" ; cat "/etc/opendkim/keys/$domain/alternc.txt")"
+
+        if [ -r "/etc/opendkim/keys/$domain/alternc.txt" ] ; then
+	  file="$(echo -e "$file" ; cat "/etc/opendkim/keys/$domain/alternc.txt")"
+        fi
     fi
     ##### OpenDKIM signature management - END
 
