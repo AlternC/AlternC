@@ -52,7 +52,8 @@ if (!empty($error)) {
 <?php __("Here is the list of domain types."); ?>
 </p>
 <p><span class="ina"><a href="#" OnClick="alert('Todo. But if you want to play with that, you are advanced enough to do an insert in MySQL');" ><?php __("Create a domain type"); ?></a></span></p>
-<table class="tlist ombrage">
+<table class="tlist ombrage" id="table_domtype">
+<thead>
 <tr class='petit'>
     <th colspan="2"> </th>
     <th><?php __("Name");?></th>
@@ -67,6 +68,7 @@ if (!empty($error)) {
     <th><?php __("Create tmp directory ?");?></th>
     <th><?php __("create www directory ?");?></th>
 </tr>
+</thead>
 <?php 
 foreach($dom->domains_type_lst() as $d) { 
 ?>
@@ -88,5 +90,14 @@ foreach($dom->domains_type_lst() as $d) {
 <?php } // end foreach 
 ?>
 </table>
+
+<script type="text/javascript">
+
+$(document).ready(function() 
+    { 
+        $("#table_domtype").tablesorter(); 
+    } 
+); 
+</script>
 
 <?php include_once("foot.php"); ?>
