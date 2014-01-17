@@ -331,8 +331,8 @@ class m_dom {
     // @ IN MX 10 aspmx.l.google.com.
     // arf 3600 IN MX 20 pouet.fr.
     if ( preg_match('/^(?P<sub>[\-\w\.@]*)\h*(?P<ttl>\d*)\h*IN\h+MX\h+(?P<weight>\d+)\h+(?P<target>[@\w+\.\-]+)/i', $zone, $ret) ) {
-      $val['status'] = 'ok';
-      $val['comment'] = "Create entry MX with ".$ret['sub']." go to ".$ret['target']." with ttl ".$ret['ttl']." and weight ".$ret['weight'];
+      $val['status'] = 'warn';
+      $val['comment'] = "Create entry MX with ".$ret['sub']." go to ".$ret['target']." with ttl ".$ret['ttl']." and weight 5 (initial weight was ".$ret['weight'].")";
       $val['entry_new']['type'] = 'MX';
       $val['entry_new']['sub'] = $ret['sub'];
       $val['entry_new']['value'] = $ret['target'];
