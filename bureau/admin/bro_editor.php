@@ -113,7 +113,6 @@ echo "<pre class='prettyprint' id='file_content_view' >$content</pre>";
 <br />
 </form>
 
-<script src="/prettify/run_prettify.js"></script>
 <script type="text/javascript">
 $(function() {$( "#tabsfile" ).tabs();});
 

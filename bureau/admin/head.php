@@ -52,8 +52,11 @@ if (file_exists("styles/style-custom.css") ) {
 
 <script src="js/jquery.tablesorter.min.js" type="text/javascript"></script>
 
+<link href="prettify/prettify.css" type="text/css" rel="stylesheet" />
+<script src="prettify/prettify.js" type="text/javascript"></script>
+
 </head>
-<body>
+<body onload="prettyPrint()">
 <?
 
 if ($isinvited && isset($oldid) && !empty($oldid) && $oldid!=$cuid ) {
