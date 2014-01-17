@@ -94,7 +94,6 @@ bureau/admin/bro_main.php -text
 bureau/admin/bro_pref.php -text
 bureau/admin/bro_tgzdown.php -text
 bureau/admin/bro_view.php -text
-bureau/admin/browseforfolder.php -text
 bureau/admin/browseforfolder2.php -text
 bureau/admin/cron.php -text
 bureau/admin/dom_add.php -text
