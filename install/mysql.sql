@@ -502,18 +502,18 @@ CREATE TABLE IF NOT EXISTS `domaines_type` (
 PRIMARY KEY ( `name` )
 ) ENGINE=MyISAM COMMENT = 'Type of domains allowed';
 
-INSERT IGNORE INTO `domaines_type` (name, description, target, entry, compatibility, only_dns, need_dns, advanced, enable) values
-('vhost','Locally hosted', 'DIRECTORY', '%SUB% IN A @@PUBLIC_IP@@', 'txt,defmx,defmx2,mx,mx2', false, false, false, 'ALL'),
-('url','URL redirection', 'URL', '%SUB% IN A @@PUBLIC_IP@@','txt,defmx,defmx2', true, false, false, 'ALL'),
-('ip','IPv4 redirect', 'IP', '%SUB% IN A %TARGET%','url,ip,ipv6,txt,mx,mx2,defmx,defmx2', false, true, false, 'ALL'),
-('ipv6','IPv6 redirect', 'IPV6', '%SUB% IN AAAA %TARGET%','ip,ipv6,txt,mx,mx2,defmx,defmx2',true, true, true , 'ALL'),
-('cname', 'CNAME DNS entry', 'DOMAIN', '%SUB% CNAME %TARGET%', 'txt,mx,mx2,defmx,defmx2',true, true, true , 'ALL'),
-('txt', 'TXT DNS entry', 'TXT', '%SUB% IN TXT "%TARGET%"','vhost,url,ip,ipv6,cname,txt,mx,mx2,defmx,defmx2',true, true, true, 'ALL'),
-('mx', 'MX DNS entry', 'DOMAIN', '%SUB% IN MX 5 %TARGET%', 'vhost,url,ip,ipv6,cname,txt,mx,mx2',true, false, true, 'ALL'),
-('mx2', 'secondary MX DNS entry', 'DOMAIN', '%SUB% IN MX 10 %TARGET%', 'vhost,url,ip,ipv6,cname,txt,mx,mx2',true, false, true, 'ALL'),
-('defmx', 'Default mail server', 'NONE', '%SUB% IN MX 5 @@DEFAULT_MX@@.', 'vhost,url,ip,ipv6,cname,txt,defmx2',true, false, true, 'ADMIN'),
-('defmx2', 'Default backup mail server', 'NONE', '%SUB% IN MX 10 @@DEFAULT_SECONDARY_MX@@.', 'vhost,url,ip,ipv6,cname,txt,defmx',true, false, true, 'ADMIN'),
-('panel', 'AlternC panel access', 'NONE', '%SUB% IN A @@PUBLIC_IP@@', 'vhost,url,ip,ipv6,cname,txt,mx,mx2,defmx,defmx2',true, false, true, 'ALL')
+INSERT IGNORE INTO `domaines_type` (name, description, target, entry,                             compatibility,                               only_dns, need_dns, advanced, enable) values
+('vhost',  'Locally hosted',             'DIRECTORY', '%SUB% IN A @@PUBLIC_IP@@',                 'txt,defmx,defmx2,mx,mx2',                   false,    false,    false, 'ALL'),
+('url',    'URL redirection',            'URL',       '%SUB% IN A @@PUBLIC_IP@@',                 'txt,defmx,defmx2',                          false,    false,    false, 'ALL'),
+('ip',     'IPv4 redirect',              'IP',        '%SUB% IN A %TARGET%',                      'url,ip,ipv6,txt,mx,mx2,defmx,defmx2',       true,     true,     false, 'ALL'),
+('ipv6',   'IPv6 redirect',              'IPV6',      '%SUB% IN AAAA %TARGET%',                   'ip,ipv6,txt,mx,mx2,defmx,defmx2',           true,     true,     true,  'ALL'),
+('cname',  'CNAME DNS entry',            'DOMAIN',    '%SUB% CNAME %TARGET%',                     '',                                          true,     true,     true,  'ALL'),
+('txt',    'TXT DNS entry',              'TXT',       '%SUB% IN TXT "%TARGET%"',                  'vhost,url,ip,ipv6,txt,mx,mx2,defmx,defmx2', true,     true,     true,  'ALL'),
+('mx',     'MX DNS entry',               'DOMAIN',    '%SUB% IN MX 5 %TARGET%',                   'vhost,url,ip,ipv6,txt,mx,mx2',              true,     true,     true,  'ALL'),
+('mx2',    'secondary MX DNS entry',     'DOMAIN',    '%SUB% IN MX 10 %TARGET%',                  'vhost,url,ip,ipv6,txt,mx,mx2',              true,     true,     true,  'ALL'),
+('defmx',  'Default mail server',        'NONE',      '%SUB% IN MX 5 @@DEFAULT_MX@@.',            'vhost,url,ip,ipv6,txt,defmx2',              true,     true,     true,  'ADMIN'),
+('defmx2', 'Default backup mail server', 'NONE',      '%SUB% IN MX 10 @@DEFAULT_SECONDARY_MX@@.', 'vhost,url,ip,ipv6,txt,defmx',               true,     true,     true,  'ADMIN'),
+('panel',  'AlternC panel access',       'NONE',      '%SUB% IN A @@PUBLIC_IP@@',                 'vhost,url,ip,ipv6,txt,mx,mx2,defmx,defmx2', false,    false,    true,  'ALL')
 ;
 UPDATE domaines_type SET create_tmpdir=true, create_targetdir=true WHERE target='DIRECTORY';
 
