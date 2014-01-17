@@ -1079,3 +1079,7 @@ th.headerSortDown {
   cursor: pointer; 
   background-color: #3399FF; 
 } 
+
+.sub-disabled {
+  text-decoration: line-through;
+}

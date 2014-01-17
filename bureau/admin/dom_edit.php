@@ -134,6 +134,8 @@ if ($r['dns_action']=='UPDATE') {?>
 $dt=$dom->domains_type_lst();
 for($i=0;$i<$r["nsub"];$i++) {
 
+$disabled_class=in_array(strtoupper($r['sub'][$i]['enable']),array('DISABLED','DISABLE') )?'sub-disabled':'';
+
 ?>
 	<tr class="lst">
     <?php if ( $r['sub'][$i]['web_action'] =='DELETE') { echo "<td colspan='2' />"; } else { ?>
@@ -149,10 +151,10 @@ for($i=0;$i<$r["nsub"];$i++) {
 <?php } ?>
 		</td>
     <?php } // end IF ==DELETE ?>
-		<td><div class="retour-auto"><a href="http://<?php ecif($r["sub"][$i]["name"],$r["sub"][$i]["name"]."."); echo $r["name"] ?>" target="_blank"><?php 
+		<td><div class="retour-auto <?php echo $disabled_class; ?>"><a href="http://<?php ecif($r["sub"][$i]["name"],$r["sub"][$i]["name"]."."); echo $r["name"] ?>" target="_blank"><?php 
 				echo ecif($r["sub"][$i]["name"] , $r["sub"][$i]["name"]."." , "" , 0) . $r["name"];
 			?></a></div></td>
-  <td><div class="retour-auto"><?php if ($r['sub'][$i]['type_desc']) { __($r['sub'][$i]['type_desc']); } else { echo __("ERROR, please check your server setup"); } ?>
+  <td><div class="retour-auto <?php echo $disabled_class; ?>"><?php if ($r['sub'][$i]['type_desc']) { __($r['sub'][$i]['type_desc']); } else { echo __("ERROR, please check your server setup"); } ?>
  <?php 
  //if ($r["sub"][$i]['type'] === 'VHOST') {
  if ( @$dt[$r["sub"][$i]['type']]['target'] === 'DIRECTORY') {
