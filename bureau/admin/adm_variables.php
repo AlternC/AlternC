@@ -34,10 +34,10 @@ if (!$admin->enabled) {
 	exit();
 }
 
-$conf = variable_init();
+$conf = $variables->variable_init();
 foreach ($conf as $name => $val) {
   if (isset($GLOBALS['_POST'][$name])) {
-    variable_set($name, $GLOBALS['_POST'][$name]);
+    $variables->variable_set($name, $GLOBALS['_POST'][$name]);
   }
 }
 
@@ -57,7 +57,7 @@ include_once ("head.php");
 <tr><th><?php __("Names"); ?></th><th><?php __("Value"); ?></th><th><?php __("Comment"); ?></th></tr>
 <?php
 
-foreach( variables_list() as $vars) {  ?>
+foreach( $variables->variables_list() as $vars) {  ?>
 
  <tr class="lst">
  <td><?php echo $vars['name']; ?></td>

@@ -117,7 +117,6 @@ $root=ALTERNC_PANEL."/";
 
 require_once($root."/class/db_mysql.php");
 require_once($root."/class/functions.php");
-require_once($root."class/variables.php");
 
 // Redirection si appel à https://(!fqdn)/
 if (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"]=="on" && $host!=$L_FQDN) {
@@ -167,13 +166,14 @@ while ($di=readdir($c)) {
 }
 closedir($c);
 /* THE DEFAULT CLASSES ARE :
-   dom, ftp, mail, quota, bro, admin, mem, mysql, err
+   dom, ftp, mail, quota, bro, admin, mem, mysql, err, variables
 */
 
 
 /* Language */
 include_once("lang_env.php");
 
+$variables=new m_variables();
 $mem=new m_mem();
 $err=new m_err();
 $authip=new m_authip();

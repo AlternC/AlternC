@@ -35,6 +35,11 @@ function compare_logname($a, $b) {
   return strcmp($a['name'],$b['name']);
 }
 
+function variable_get($name, $default = null, $createit_comment = null) {
+  global $variables;
+  return $variables->variable_get($name, $default, $createit_comment);
+}
+
 /*
  Check if a domain can be hosted on this server :
  Return a negative value in case of an error,

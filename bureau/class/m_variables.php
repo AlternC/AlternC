@@ -33,6 +33,7 @@
  * @link http://cvs.drupal.org/viewcvs/drupal/drupal/includes/bootstrap.inc?rev=1.38&view=auto
  */
 
+class m_variables {
 /**
  * Load the persistent variable table.
  *
@@ -67,7 +68,7 @@ function variable_init($conf = array()) {
 function variable_init_maybe() {
   global $conf;
   if (!isset($conf)) {
-    $conf = variable_init();
+    $conf = $this->variable_init();
   }
 }
 
@@ -90,12 +91,12 @@ function variable_get($name, $default = null, $createit_comment = null) {
   global $conf;
   $name=str_replace('.', '_', $name); // Php can't handle POST var with a '.'
 
-  variable_init_maybe();
+  $this->variable_init_maybe();
 
   if (isset($conf[$name])) {
     return $conf[$name];
   } elseif (!is_null($createit_comment)) {
-    variable_set($name, $default, $createit_comment);
+    $this->variable_set($name, $default, $createit_comment);
   }
   return $default;
 }
@@ -129,7 +130,7 @@ function variable_set($name, $value, $comment=null) {
 
   $db->query("$query");
 
-  variable_init();
+  $this->variable_init();
 }
 
 /**
@@ -157,4 +158,5 @@ function variables_list() {
   return $t;
 }
 
+} /* Class m_variables */
 ?>

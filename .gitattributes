@@ -415,9 +415,9 @@ bureau/class/m_menu.php -text
 bureau/class/m_mysql.php -text
 bureau/class/m_piwik.php -text
 bureau/class/m_quota.php -text
+bureau/class/m_variables.php -text
 bureau/class/mime.php -text
 bureau/class/reset_stats_conf.php -text
-bureau/class/variables.php -text
 bureau/class/vm.class.php -text
 bureau/index.php -text
 bureau/locales/Makefile -text
