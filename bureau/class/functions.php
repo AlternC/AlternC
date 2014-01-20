@@ -66,8 +66,8 @@ function checkhostallow($domain,$dns) {
     return $found;
   $n1=false;	$n2=false;
   for ($i=0;$i<count($dns);$i++) {
-    if ($dns[$i]==$L_NS1) $n1=true;
-    if ($dns[$i]==$L_NS2) $n2=true;
+    if (strtolower($dns[$i])==strtolower($L_NS1)) $n1=true;
+    if (strtolower($dns[$i])==strtolower($L_NS2)) $n2=true;
   }
   if ($fmode==1 && $n1)		// OK
     return $found;
