@@ -117,13 +117,7 @@ class m_err {
    */
   function logerr() {
     global $mem;
-    $f=@fopen($this->logfile,"ab");
-    if ($f) {
-      fputs($f,date("d/m/Y H:i:s")." - ERROR - ");
-      fputs($f,$mem->user["login"]." - ");
-      fputs($f,$this->errstr());
-      fclose($f);
-    }
+    @file_put_contents($this->logfile, date("d/m/Y H:i:s")." - ERROR - ".$mem->user["login"]." - ".$this->errstr(), FILE_APPEND );
   }
 
   /**
@@ -140,16 +134,7 @@ class m_err {
    */
   function log($clsid,$function,$param="") {
     global $mem,$cuid;
-    $f=@fopen($this->logfile,"ab");
-    if ($f) {
-      fputs($f,date("d/m/Y H:i:s")." - " .get_remote_ip(). " - CALL - ");
-      fputs($f,$mem->user["login"]." - ");
-      fputs($f,$clsid." - ".$function." - ".$param."\n");
-      fclose($f);
-      return true;
-    } else {
-      return false;
-    }
+    return @file_put_contents($this->logfile,date("d/m/Y H:i:s")." - " .get_remote_ip(). " - CALL - ".$mem->user["login"]." - $clsid - $function - $param\n", FILE_APPEND );
   }
 
 }; /* Classe m_err */
