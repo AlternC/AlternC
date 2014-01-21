@@ -46,36 +46,37 @@ if (!empty($error) ) { echo "<p class='alert alert-danger'>$error</p>";$error=''
 
 $feed_url = variable_get('rss_feed');
 if (!empty($feed_url)) {
-$cache_time = 60*5; // 5 minutes
-$cache_file = "/tmp/alterncpanel_cache_main.rss";
-$timedif = @(time() - filemtime($cache_file));
+  $cache_time = 60*5; // 5 minutes
+  $cache_file = "/tmp/alterncpanel_cache_main.rss";
+  $timedif = @(time() - filemtime($cache_file));
 
-if (file_exists($cache_file) && $timedif < $cache_time) {
-  $string = file_get_contents($cache_file);
-} else {
-  $string = file_get_contents("$feed_url");
-  file_put_contents($cache_file,$string);
-}
-$xml = @simplexml_load_string($string);
+  if (file_exists($cache_file) && $timedif < $cache_time) {
+    $string = file_get_contents($cache_file);
+  } else {
+    $string = file_get_contents("$feed_url");
+    file_put_contents($cache_file,$string);
+  }
+  $xml = @simplexml_load_string($string);
 
-echo '<div align="center"><table class="tedit" cellspacing="0" cellpadding="6">';
-echo "<tr><th colspan='2'><a target='_blank' style='font-size: 18px;font-weight: bold;color: #10507C;' href='".$xml->channel->link."'>".$xml->channel->title."</a><br/><i>".$xml->channel->description."</i></th></tr>";
-//echo '<tr><th>'._("Title").'</th><th>'._("Date").'</th></tr>';
-$count = 0;
-$max = 5;
-foreach ($xml->channel->item as $val) {
-if ($count < $max) {
-  echo '
-  <tr>
-    <td '.(empty($val->pubDate)?'colpan=2':'').'><a target="_blank" href="'.$val->link.'">'.$val->title.'</a></td>';
-    if (!empty($val->pubDate)) { echo '<td>'.strftime("%d/%m/%Y" , strtotime($val->pubDate)).'</td>'; }
-  echo '</tr>';
-}
-$count++;
-}
-echo "</table></div>\n";
-echo "<br/>";
-
+  if ( ! $xml === FALSE ) {
+    echo '<div align="center"><table class="tedit" cellspacing="0" cellpadding="6">';
+    echo "<tr><th colspan='2'><a target='_blank' style='font-size: 18px;font-weight: bold;color: #10507C;' href='".$xml->channel->link."'>".$xml->channel->title."</a><br/><i>".$xml->channel->description."</i></th></tr>";
+    //echo '<tr><th>'._("Title").'</th><th>'._("Date").'</th></tr>';
+    $count = 0;
+    $max = 5;
+    foreach ($xml->channel->item as $val) {
+      if ($count < $max) {
+        echo "<tr>\n<td ".(empty($val->pubDate)?'colpan=2':'').'><a target="_blank" href="'.$val->link.'">'.$val->title.'</a></td>';
+        if (!empty($val->pubDate)) { 
+          echo '<td>'.strftime("%d/%m/%Y" , strtotime($val->pubDate)).'</td>'; 
+        }
+        echo '</tr>';
+      }
+      $count++;
+    } //foreach
+    echo "</table></div>\n";
+    echo "<br/>";
+  } // $xml === FALSE
 } // empty feed_url
 
 if($admin->enabled) {
