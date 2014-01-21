@@ -61,10 +61,7 @@ if (file_exists("styles/style-custom.css") ) {
     <div id="content" style="width:1000px;">
 <?php
 // Getting logo
-$logo = variable_get('logo_login_'.strtolower($_SERVER['HTTP_HOST']), '', 'You can specify a logo for the login page for a specific URL of the panel');
-if ( empty($logo) ||  ! $logo ) {
-  $logo = variable_get('logo_login', '' ,'You can specify a logo for the login page, example /images/my_logo.png . Set 0 or empty to reset it. ');
-}
+$logo = variable_get('logo_login', '' ,'You can specify a logo for the login page, example /images/my_logo.png . Set 0 or empty to reset it. ');
 if ( empty($logo) ||  ! $logo ) { 
   $logo = 'images/logo.png'; 
 }

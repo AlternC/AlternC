@@ -30,10 +30,7 @@
 require_once("../class/config.php");
 
 // Getting logo
-$logo = variable_get('logo_menu_'.strtolower($_SERVER['HTTP_HOST']), '', 'You can specify a logo for the menu for a specific URL of the panel');
-if ( empty($logo) ||  ! $logo ) {
-  $logo = variable_get('logo_menu', '' ,'You can specify a logo for the menu, example /images/my_logo.png . Set 0 or empty to reset it. ');
-}
+$logo = variable_get('logo_menu', '' ,'You can specify a logo for the menu, example /images/my_logo.png . Set 0 or empty to reset it. ');
 if ( empty($logo) ||  ! $logo ) { 
   $logo = 'images/logo3.png'; 
 }
