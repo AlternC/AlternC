@@ -348,7 +348,7 @@ class m_admin {
 
     if ($db->num_rows()) {
       while ($db->next_record()) {
-	$c[]=$this->get($db->f("uid"));
+	$c[$db->f("uid")]=$this->get($db->f("uid"));
       }
       return $c;
     } else {

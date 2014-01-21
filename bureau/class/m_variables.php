@@ -34,129 +34,212 @@
  */
 
 class m_variables {
-/**
- * Load the persistent variable table.
- *
- * The variable table is composed of values that have been saved in the table
- * with variable_set() as well as those explicitly specified in the configuration
- * file.
- */
-function variable_init($conf = array()) {
-  global $db;
-  $result = $db->query('SELECT * FROM `variable`');
-  while ($db->next_record($result)) {
-    /* maybe the data is *not* serialized, in that case, take it verbatim */
-    $variable = $db->Record;
-    if (($variables[$variable['name']] = @unserialize($variable['value'])) === FALSE) {
-      $variables[$variable['name']] = $variable['value'];
+  var $strata_order = array('DEFAULT','GLOBAL','FQDN_CREATOR','FQDN','CREATOR','MEMBER','DOMAIN');
+
+  // used by get_impersonated to merge array. Son value overwrite father's value
+  private function variable_merge($father, $son) {
+    if (! is_array($son)) return $father;
+    foreach ($son as $k=>$v) {
+      $father[$k] = $v;
+    }
+    return $father;
+  }
+
+  /**
+   * Load the persistent variable table.
+   *
+   * The variable table is composed of values that have been saved in the table
+   * with variable_set() as well as those explicitly specified in the configuration
+   * file.
+   */
+  function variable_init() {
+    global $cuid;
+    if ($cuid > 1999) {
+      $mid = $cuid;
+    } else {
+      $mid = null;
+    }
+    return $this->get_impersonated($_SERVER['HTTP_HOST'], $mid);
+  }
+
+
+  function get_impersonated($fqdn, $uid=null, $var=null) {
+    global $db, $err;
+
+    $arr_var=$this->variables_list();
+  
+    // Get some vars we are going to need.
+    $sub_infos=m_dom::get_sub_domain_id_and_member_by_name( strtolower($fqdn) );
+    if ( $uid != NULL ) {
+      $creator=m_mem::get_creator_by_uid($uid);
+    } else {
+      $creator=false;
+    }
+   
+    $variables = array();
+    // Browse the array in the specific order of the strata
+    foreach ( $this->strata_order as $strata) {
+      if (! isset($arr_var[$strata]) || !is_array($arr_var[$strata])) continue;
+      switch($strata) {
+        case 'DEFAULT':
+          $variables = $this->variable_merge(array(),$arr_var['DEFAULT'][NULL]);
+          break;
+        case 'GLOBAL':
+          $variables = $this->variable_merge($variables, $arr_var['GLOBAL'][NULL]);
+          break;
+        case 'FQDN_CREATOR':
+          if ( is_array($sub_infos) && isset($arr_var['FQDN_CREATOR'][$sub_infos['member_id']]) && is_array($arr_var['FQDN_CREATOR'][$sub_infos['member_id']])) {
+            $variables = $this->variable_merge($variables, $arr_var['FQDN_CREATOR'][$sub_infos['member_id']]);
+          }
+          break;
+        case 'FQDN':
+          if ( is_array($sub_infos) && isset($arr_var['FQDN'][$sub_infos['sub_id']]) && is_array($arr_var['FQDN'][$sub_infos['sub_id']])) {
+            $variables = $this->variable_merge($variables, $arr_var['FQDN'][$sub_infos['sub_id']]);
+          }
+          break;
+        case 'CREATOR':
+          if ( $creator && isset($arr_var['CREATOR'][$creator]) && is_array($arr_var['CREATOR'][$creator])) {
+            $variables = $this->variable_merge($variables, $arr_var['CREATOR'][$creator] );
+          }
+          break;
+        case 'MEMBER':
+          if ( $uid && isset($arr_var['MEMBER'][$uid]) && is_array($arr_var['MEMBER'][$uid])) {
+            $variables = $this->variable_merge($variables, $arr_var['MEMBER'][$uid] );
+          }
+          break;
+        case 'MEMBER':
+          //FIXME TODO
+          break;
+      } //switch
+
+    } //foreach
+
+  #printvar($variables);die();
+    if ($var && isset($variables[$var])) {
+      return $variables[$var];
+    } else {
+       return $variables;
     }
   }
-  
-  foreach ($conf as $name => $value) {
-    $variables[$name] = $value;
+
+  /**
+   * Initialize the global $conf array if necessary
+   *
+   * @global $conf the global conf array
+   * @uses variable_init()
+   */
+  function variable_init_maybe($force=false) {
+    global $conf;
+    if ($force || !isset($conf)) {
+      $conf = $this->variable_init();
+    }
   }
 
-  return $variables;
-}
+  /**
+   * Return a persistent variable.
+   *
+   * @param $name
+   *   The name of the variable to return.
+   * @param $default
+   *   The default value to use if this variable has never been set.
+   * @param $createit_comment 
+   *   If variable doesn't exist, create it with the default value
+   *   and createit_comment value as comment
+   * @return
+   *   The value of the variable.
+   * @global $conf
+   *   A cache of the configuration.
+   */
+  function variable_get($name, $default = null, $createit_comment = null) {
+    global $conf;
+    $name=str_replace('.', '_', $name); // Php can't handle POST var with a '.'
 
-/**
- * Initialize the global $conf array if necessary
- *
- * @global $conf the global conf array
- * @uses variable_init()
- */
-function variable_init_maybe() {
-  global $conf;
-  if (!isset($conf)) {
-    $conf = $this->variable_init();
-  }
-}
+    $this->variable_init_maybe();
 
-/**
- * Return a persistent variable.
- *
- * @param $name
- *   The name of the variable to return.
- * @param $default
- *   The default value to use if this variable has never been set.
- * @param $createit_comment 
- *   If variable doesn't exist, create it with the default value
- *   and createit_comment value as comment
- * @return
- *   The value of the variable.
- * @global $conf
- *   A cache of the configuration.
- */
-function variable_get($name, $default = null, $createit_comment = null) {
-  global $conf;
-  $name=str_replace('.', '_', $name); // Php can't handle POST var with a '.'
-
-  $this->variable_init_maybe();
-
-  if (isset($conf[$name])) {
-    return $conf[$name];
-  } elseif (!is_null($createit_comment)) {
-    $this->variable_set($name, $default, $createit_comment);
-  }
-  return $default;
-}
-
-/**
- * Set a persistent variable.
- *
- * @param $name
- *   The name of the variable to set.
- * @param $value
- *   The value to set. This can be any PHP data type; these functions take care
- *   of serialization as necessary.
- */
-function variable_set($name, $value, $comment=null) {
-  global $conf, $db, $err;
-  $err->log('variable', 'variable_set', '+'.serialize($value).'+'.$comment.'+'); 
-
-  $name=str_replace('.', '_', $name); // Php can't handle POST var with a '.'
-
-  $conf[$name] = $value;
-  if (is_object($value) || is_array($value)) {
-    $value = serialize($value);
+    if (isset($conf[$name])) {
+      return $conf[$name]['value'];
+    } elseif (!is_null($createit_comment)) {
+      $this->variable_set($name, $default, $createit_comment);
+    }
+    return $default;
   }
 
-  if ( empty($comment) ) {
-    $query = "INSERT INTO variable (name, value) values ('".$name."', '".$value."') on duplicate key update name='$name', value='$value';";
-  } else {
-    $comment=mysql_real_escape_string($comment);
-    $query = "INSERT INTO variable (name, value, comment) values ('".$name."', '".$value."', '$comment') on duplicate key update name='$name', value='$value', comment='$comment';";
+  /**
+   * Set a persistent variable.
+   *
+   * @param $name
+   *   The name of the variable to set.
+   * @param $value
+   *   The value to set. This can be any PHP data type; these functions take care
+   *   of serialization as necessary.
+   */
+  function variable_set($name, $value, $comment=null) {
+    global $conf, $db, $err;
+    $err->log('variable', 'variable_set', '+'.serialize($value).'+'.$comment.'+'); 
+
+    $name=str_replace('.', '_', $name); // Php can't handle POST var with a '.'
+
+    $conf[$name] = $value;
+    if (is_object($value) || is_array($value)) {
+      $value = serialize($value);
+    }
+
+    if ( empty($comment) ) {
+      $query = "INSERT INTO variable (name, value) values ('".$name."', '".$value."') on duplicate key update name='$name', value='$value';";
+    } else {
+      $comment=mysql_real_escape_string($comment);
+      $query = "INSERT INTO variable (name, value, comment) values ('".$name."', '".$value."', '$comment') on duplicate key update name='$name', value='$value', comment='$comment';";
+    }
+
+  #  $db->query("$query");
+    printvar($query);
+
+    $this->variable_init();
   }
 
-  $db->query("$query");
-
-  $this->variable_init();
-}
-
-/**
- * Unset a persistent variable.
- *
- * @param $name
- *   The name of the variable to undefine.
- */
-function variable_del($name) {
-  global $conf, $db;
-  $name=str_replace('.', '_', $name); // Php can't handle POST var with a '.'
-
-  $db->query("DELETE FROM `variable` WHERE name = '".$name."'");
-
-  unset($conf[$name]);
-}
-
-function variables_list() {
-  global $db;
-  $t=array();
-  $db->query("SELECT * FROM `variable` WHERE `comment` IS NOT NULL ORDER BY `name`");
-  while ($db->next_record()) {
-    $t[]=$db->Record;
+  /**
+   * Unset a persistent variable.
+   *
+   * @param $name
+   *   The name of the variable to undefine.
+   */
+  function variable_del($id) {
+    global $db;
+    $db->query("DELETE FROM `variable` WHERE id = '".intval($id)."'");
+    $this->variable_init_maybe(true);
   }
-  return $t;
-}
+
+  function variables_list_name() {
+    global $db;
+
+    $result = $db->query('SELECT name, comment FROM `variable` order by name');
+    $t=array();
+    while ($db->next_record($result)) {
+      $tname = $db->f('name');
+      // If not listed of if listed comment is shorter
+      if ( ! isset( $t[$tname] ) || strlen($t[$tname]) < $db->f('comment') ) {
+        $t[$db->f('name')] = $db->f('comment');
+      }
+    }
+    return $t;
+  }
+
+  function variables_list() {
+    global $db;
+
+    $result = $db->query('SELECT * FROM `variable`');
+
+    $arr_var=array();
+    while ($db->next_record($result)) {
+      // Unserialize value if needed
+      if ( ($value = @unserialize($db->f('value'))) === FALSE) {
+        $value=$db->f('value');
+      }
+      $arr_var[$db->f('strata')][$db->f('strata_id')][$db->f('name')] = array('id'=>$db->f('id') ,'name'=>$db->f('name'), 'value'=>$value, 'comment'=>$db->f('comment'));
+    }
+ 
+    return $arr_var;
+  }
 
 } /* Class m_variables */
 ?>

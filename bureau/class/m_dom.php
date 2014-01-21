@@ -87,6 +87,26 @@ class m_dom {
     $this->tld_no_check_at_all = variable_get('tld_no_check_at_all', 0,'Set to 1 to disable ALL check on the TLD (users will be able to add any domain)');
   }
 
+  function get_panel_url_list() {
+    global $db,$err;
+    $err->log("dom","get_panel_url_list");
+    $db->query("SELECT sd.id as sub_id, if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine) as fqdn from sub_domaines sd where type = 'PANEL';");
+    $t=array();
+    while ($db->next_record()) {
+      $t[intval($db->f('sub_id'))] = $db->f('fqdn');
+    }
+    return $t;
+  }
+
+  function get_sub_domain_id_and_member_by_name($fqdn) {
+    global $db,$err,$cuid;
+    $err->log("dom","get_sub_domain_by_name");
+    $fqdn=mysql_real_escape_string($fqdn);
+    $db->query("select sd.* from sub_domaines sd where if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine) = '$fqdn';");
+    if (! $db->next_record()) return false;
+    return array('sub_id'=>intval($db->f('id')), 'member_id'=> intval($db->f('compte') ));
+  }
+
   function hook_menu() {
     global $quota;
     $obj = array( 

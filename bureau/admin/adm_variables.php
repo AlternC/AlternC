@@ -33,6 +33,11 @@ if (!$admin->enabled) {
 	__("This page is restricted to authorized staff");
 	exit();
 }
+$fields = array (
+  "member_id"   => array ("post", "integer", null),
+  "fqdn_id"     => array ("post", "integer", null),
+);
+getFields($fields);
 
 $conf = $variables->variable_init();
 foreach ($conf as $name => $val) {
@@ -54,18 +59,93 @@ include_once ("head.php");
 
 <form method="post" action="adm_variables.php">
 <table border="0" cellpadding="4" cellspacing="0" class='tlist'>
-<tr><th><?php __("Names"); ?></th><th><?php __("Value"); ?></th><th><?php __("Comment"); ?></th></tr>
+<thead>
+  <tr>
+    <th><?php __("Names"); ?></th>
+    <th><?php __("Comment"); ?></th>
+    <th><?php __("Default value"); ?></th>
+    <th><?php __("Global value"); ?></th>
+    <th><?php __("Actual value used"); ?></th>
+  </tr>
+</thead>
 <?php
 
-foreach( $variables->variables_list() as $vars) {  ?>
+$allvars = $variables->variables_list();
+foreach( $variables->variables_list_name() as $varname => $varcomment) {  ?>
 
  <tr class="lst">
- <td><?php echo $vars['name']; ?></td>
+ <td><?php echo $varname; ?></td>
+ <td><?php echo $varcomment; ?></td>
+ <td><?php echo $allvars['DEFAULT'][NULL][$varname]['value']; ?></td>
+ <td><?php if (isset($allvars['GLOBAL'][NULL][$varname]['value'])) { echo $allvars['GLOBAL'][NULL][$varname]['value']; } ?></td>
+ <td><?php echo variable_get($varname); ?></td>
+
+<!--
  <td><input type="text" name="<?php ehe($vars['name']); ?>" value="<?php ehe($vars['value']); ?>" /></td>
- <td><?php echo $vars['comment']; ?></td>
+-->
  </tr>
 <?php } ?>
 </table>
+<!--
 <p><input type="submit" class="inb" value="<?php __("Save variables"); ?>" /></p>
+-->
 </form>
+
+<br/> <br/><br/>
+
+<hr/>
+<h3 id="overwrited_vars"><?php __("Overwrited vars"); ?></h3>
+<form method="post" action="adm_variables.php#overwrited_vars">
+<?php
+$creator=$mem->get_creator_by_uid($uid);
+
+
+$ml=array();
+foreach($admin->get_list() as $mid=>$mlogin) {
+  $ml[$mid] = $mlogin['login'];
+}
+echo _("See the vars for the account")." ";
+echo "<select name='member_id'>";eoption($ml, $member_id);echo "</select>";
+echo " "._("logged via")." ";
+echo "<select name='fqdn_id'>";eoption($dom->get_panel_url_list(), $fqdn_id  );echo "</select> ";
+echo "<input type='submit' class='ina' value=\""; echo ehe(_("View")); echo "\" />";
+
+?>
+</form>
+<br/>
+
+<?php 
+$sub_infos=$dom->get_sub_domain_all($fqdn_id);
+$fqdn=$dom->get_panel_url_list()[$fqdn_id];
+$impersonated_conf=$variables->get_impersonated($fqdn, $member_id);
+
+echo sprintf(_("Here are values for members %s logged via %s"), '<b>'.$ml[$member_id].'</b>', "<b>$fqdn</b>") ;?>
+<table class='tlist'>
+<?php
+echo "<thead><tr>";
+echo "<th>"._("Var")."</th>";
+foreach( $variables->strata_order as $st) {  
+  echo "<th>$st</th>";
+} // foeach
+echo "<th>"._("Used value")."</th>";
+echo "</tr></thead>";
+foreach( $variables->variables_list_name() as $varname => $varcomment) {  ?>
+ <tr class="lst">
+   <td><?php echo $varname; ?></td>
+   <td><?php echo $allvars['DEFAULT'][NULL][$varname]['value']; ?></td>
+   <td><?php if (isset($allvars['GLOBAL'][NULL][$varname]['value'])) { echo $allvars['GLOBAL'][NULL][$varname]['value']; } ?></td>
+   <td><?php if (isset($allvars['FQDN_CREATOR'][$sub_infos['member_id']][$varname]['value'])) { echo $allvars['FQDN_CREATOR'][$sub_infos['member_id']][$varname]['value']; } ?></td>
+   <td><?php if (isset($allvars['FQDN'][$sub_infos['id']][$varname]['value'])) { echo $allvars['FQDN'][$sub_infos['id']][$varname]['value']; } ?></td>
+   <td><?php if (isset($allvars['CREATOR'][$creator][$varname]['value'])) { echo $allvars['CREATOR'][$creator][$varname]['value']; } ?></td>
+   <td><?php if (isset($allvars['MEMBER'][$member_id][$varname]['value'])) { echo $allvars['MEMBER'][$member_id][$varname]['value']; } ?></td>
+   <td><?php if (isset($allvars['DOMAIN']['FIXME'][$varname]['value'])) { echo $allvars['DOMAIN']['FIXME'][$varname]['value']; } ?></td>
+   <td><?php echo $impersonated_conf[$varname]['value']; ?></td>
+ </tr>
+<?php
+} //foreach 
+?>
+</table>
+
+<br/>
+
 <?php include_once("foot.php"); ?>

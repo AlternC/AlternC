@@ -586,6 +586,15 @@ Cordially.
     }
   }
 
+  function get_creator_by_uid($uid) {
+    global $db,$err;
+    $err->log("dom","get_creator_by_uid");
+    $uid=mysql_real_escape_string(intval($uid));
+    $db->query("select creator from membres where uid = '$uid';");
+    if (! $db->next_record()) return false;
+    return intval($db->f('creator') );
+  }
+
 
   /* ----------------------------------------------------------------- */
   /**
