@@ -157,14 +157,13 @@ class m_variables {
    */
   function variable_get($name, $default = null, $createit_comment = null) {
     global $conf;
-    $name=str_replace('.', '_', $name); // Php can't handle POST var with a '.'
 
     $this->variable_init_maybe();
 
     if (isset($conf[$name])) {
       return $conf[$name]['value'];
     } elseif (!is_null($createit_comment)) {
-      $this->variable_set($name, $default, $createit_comment);
+      $this->variable_update_or_create($name, $value, 'DEFAULT', null, null, $createit_comment);
     }
     return $default;
   }
@@ -181,8 +180,6 @@ class m_variables {
   function variable_set($name, $value, $comment=null) {
     global $conf, $db, $err;
     $err->log('variable', 'variable_set', '+'.serialize($value).'+'.$comment.'+'); 
-
-    $name=str_replace('.', '_', $name); // Php can't handle POST var with a '.'
 
     $conf[$name] = $value;
     if (is_object($value) || is_array($value)) {
@@ -202,7 +199,7 @@ class m_variables {
     $this->variable_init();
   }
 
-  function variable_update_or_create($var_name, $var_value, $strata=null, $strata_id=null, $var_id=null) {
+  function variable_update_or_create($var_name, $var_value, $strata=null, $strata_id=null, $var_id=null, $comment=null) {
     global $db, $err;
     $err->log('variable', 'variable_update_or_create');
     
@@ -214,12 +211,13 @@ class m_variables {
         return false;
       }
       $sql="INSERT INTO 
-              variable (name, value, strata, strata_id) 
+              variable (name, value, strata, strata_id, comment) 
             VALUES (
               '".mysql_real_escape_string($var_name)."', 
               '".mysql_real_escape_string($var_value)."', 
               '".mysql_real_escape_string($strata)."', 
-              '".mysql_real_escape_string($strata_id)."' );";
+              '".mysql_real_escape_string($strata_id)."', 
+              '".mysql_real_escape_string($comment)."' );";
     }
 
     $db->query("$sql");
