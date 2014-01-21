@@ -63,13 +63,18 @@ class m_variables {
   }
 
 
-  function get_impersonated($fqdn, $uid=null, $var=null) {
+  function get_impersonated($fqdn=null, $uid=null, $var=null) {
     global $db, $err;
 
     $arr_var=$this->variables_list();
   
     // Get some vars we are going to need.
-    $sub_infos=m_dom::get_sub_domain_id_and_member_by_name( strtolower($fqdn) );
+    if ($fqdn != NULL) {
+      $sub_infos=m_dom::get_sub_domain_id_and_member_by_name( strtolower($fqdn) );
+    } else {
+      $sub_infos=false;
+    }
+
     if ( $uid != NULL ) {
       $creator=m_mem::get_creator_by_uid($uid);
     } else {

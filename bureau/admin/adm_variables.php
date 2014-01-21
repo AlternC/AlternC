@@ -39,13 +39,6 @@ $fields = array (
 );
 getFields($fields);
 
-$conf = $variables->variable_init();
-foreach ($conf as $name => $val) {
-  if (isset($GLOBALS['_POST'][$name])) {
-    $variables->variable_set($name, $GLOBALS['_POST'][$name]);
-  }
-}
-
 include_once ("head.php");
 
 ?>
@@ -57,8 +50,7 @@ include_once ("head.php");
 <?php __("Here are the internal AlternC variables that are currently being used."); ?>
 </p>
 
-<form method="post" action="adm_variables.php">
-<table border="0" cellpadding="4" cellspacing="0" class='tlist'>
+<table border="0" cellpadding="4" cellspacing="0" class='tlist' id="tab_listvar_glob">
 <thead>
   <tr>
     <th><?php __("Names"); ?></th>
@@ -71,27 +63,21 @@ include_once ("head.php");
 <?php
 
 $allvars = $variables->variables_list();
+$global_conf=$variables->get_impersonated();
 foreach( $variables->variables_list_name() as $varname => $varcomment) {  ?>
 
  <tr class="lst">
- <td><?php echo $varname; ?></td>
- <td><?php echo $varcomment; ?></td>
- <td><?php echo $allvars['DEFAULT'][NULL][$varname]['value']; ?></td>
- <td><?php if (isset($allvars['GLOBAL'][NULL][$varname]['value'])) { echo $allvars['GLOBAL'][NULL][$varname]['value']; } ?></td>
- <td><?php echo variable_get($varname); ?></td>
-
-<!--
- <td><input type="text" name="<?php ehe($vars['name']); ?>" value="<?php ehe($vars['value']); ?>" /></td>
--->
+   <td><?php echo $varname; ?></td>
+   <td><?php echo $varcomment; ?></td>
+   <td><?php echo $allvars['DEFAULT'][NULL][$varname]['value']; ?></td>
+   <td><?php if (isset($allvars['GLOBAL'][NULL][$varname]['value'])) { echo $allvars['GLOBAL'][NULL][$varname]['value']; } ?></td>
+   <td><?php echo $global_conf[$varname]['value']; ?></td>
+   <td><a href='adm_editvar.php?var=<?php echo urlencode($varname)?>&amp;strata=global'><?php __("Edit"); ?></a></td>
  </tr>
 <?php } ?>
 </table>
-<!--
-<p><input type="submit" class="inb" value="<?php __("Save variables"); ?>" /></p>
--->
-</form>
 
-<br/> <br/><br/>
+<br/><br/><br/>
 
 <hr/>
 <h3 id="overwrited_vars"><?php __("Overwrited vars"); ?></h3>
@@ -115,12 +101,13 @@ echo "<input type='submit' class='ina' value=\""; echo ehe(_("View")); echo "\" 
 <br/>
 
 <?php 
+if ( $member_id && $fqdn_id ) {
 $sub_infos=$dom->get_sub_domain_all($fqdn_id);
 $fqdn=$dom->get_panel_url_list()[$fqdn_id];
 $impersonated_conf=$variables->get_impersonated($fqdn, $member_id);
 
 echo sprintf(_("Here are values for members %s logged via %s"), '<b>'.$ml[$member_id].'</b>', "<b>$fqdn</b>") ;?>
-<table class='tlist'>
+<table class='tlist' id="tab_listvar_impers">
 <?php
 echo "<thead><tr>";
 echo "<th>"._("Var")."</th>";
@@ -140,6 +127,7 @@ foreach( $variables->variables_list_name() as $varname => $varcomment) {  ?>
    <td><?php if (isset($allvars['MEMBER'][$member_id][$varname]['value'])) { echo $allvars['MEMBER'][$member_id][$varname]['value']; } ?></td>
    <td><?php if (isset($allvars['DOMAIN']['FIXME'][$varname]['value'])) { echo $allvars['DOMAIN']['FIXME'][$varname]['value']; } ?></td>
    <td><?php echo $impersonated_conf[$varname]['value']; ?></td>
+   <td><a href='adm_editvar.php?var=<?php echo urlencode($varname)."&amp;member_id=$member_id&amp;fqdn_id=$fqdn_id"?>'><?php __("Edit"); ?></a></td>
  </tr>
 <?php
 } //foreach 
@@ -147,5 +135,15 @@ foreach( $variables->variables_list_name() as $varname => $varcomment) {  ?>
 </table>
 
 <br/>
+<?php } // if $member_id && $fqdn_id  ?>
+<script type="text/javascript">
+
+$(document).ready(function() 
+    { 
+        $("#tab_listvar_impers").tablesorter(); 
+        $("#tab_listvar_glob").tablesorter(); 
+    } 
+); 
+</script>
 
 <?php include_once("foot.php"); ?>
