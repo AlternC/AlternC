@@ -10,5 +10,6 @@ if ( isset($debug_alternc) && $debug_alternc->status ) {
 </body>
 </html>
 <?php 
+require_once("xhprof_footer.php");
 exit(); // case of include('foot.php');
 ?>
