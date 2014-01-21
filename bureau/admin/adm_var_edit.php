@@ -110,56 +110,64 @@ foreach ( $variables->strata_order as $strata) {
       break;
     case 'FQDN_CREATOR':
       echo "<td>";
-      foreach ($allvars['FQDN_CREATOR'] as $ttk => $ttv ) {
-        if ( isset($ttv[$var]) && is_array( $ttv[$var])) {
-          echo sprintf(_("Overwritted by %s"), $members[$ttk]['login'])." &rarr; ";
-          echo "<a href='javascript:edit_var(".$ttv[$var]['id'].");'>".$ttv[$var]['value']."</a>";
-          edit_var($ttv[$var]);
+      if (isset($allvars['FQDN_CREATOR']) && is_array($allvars['FQDN_CREATOR'])) {
+        foreach ($allvars['FQDN_CREATOR'] as $ttk => $ttv ) {
+          if ( isset($ttv[$var]) && is_array( $ttv[$var])) {
+            echo sprintf(_("Overwritted by %s"), $members[$ttk]['login'])." &rarr; ";
+            echo "<a href='javascript:edit_var(".$ttv[$var]['id'].");'>".$ttv[$var]['value']."</a>";
+            edit_var($ttv[$var]);
+          }
+          echo "<br/>";
         }
-        echo "<br/>";
-      }
+      } // isset
       echo "<a href='javascript:add_var(\"$strata\");'>"._("Add")."</a>";
       add_var($strata, $members_list);
       echo "</td>";
       break;
     case 'FQDN':
       echo "<td>";
-      foreach ($allvars['FQDN'] as $ttk => $ttv ) {
-        if ( isset($ttv[$var]) && is_array( $ttv[$var])) {
-          echo sprintf(_("Overwritted by %s"), $panel_url[$ttk])." &rarr; ";
-          echo "<a href='javascript:edit_var(".$ttv[$var]['id'].");'>".$ttv[$var]['value']."</a>";
-          edit_var($ttv[$var]);
+      if ( isset($allvars['FQDN']) && is_array($allvars['FQDN'])) {
+        foreach ($allvars['FQDN'] as $ttk => $ttv ) {
+          if ( isset($ttv[$var]) && is_array( $ttv[$var])) {
+            echo sprintf(_("Overwritted by %s"), $panel_url[$ttk])." &rarr; ";
+            echo "<a href='javascript:edit_var(".$ttv[$var]['id'].");'>".$ttv[$var]['value']."</a>";
+            edit_var($ttv[$var]);
+          }
+          echo "<br/>";
         }
-        echo "<br/>";
-      }
+      } //isset
       echo "<a href='javascript:add_var(\"$strata\");'>"._("Add")."</a>";
       add_var($strata, $panel_url);
       echo "</td>";
       break;
     case 'CREATOR':
       echo "<td>";
-      foreach ($allvars['CREATOR'] as $ttk => $ttv ) {
-        if ( isset($ttv[$var]) && is_array( $ttv[$var])) {
-          echo sprintf(_("Overwritted by %s"), $members[$ttk]['login'])." &rarr; ";
-          echo "<a href='javascript:edit_var(".$ttv[$var]['id'].");'>".$ttv[$var]['value']."</a>";
-          edit_var($ttv[$var]);
+      if (isset($allvars['CREATOR']) && is_array($allvars['CREATOR'])) {
+        foreach ($allvars['CREATOR'] as $ttk => $ttv ) {
+          if ( isset($ttv[$var]) && is_array( $ttv[$var])) {
+            echo sprintf(_("Overwritted by %s"), $members[$ttk]['login'])." &rarr; ";
+            echo "<a href='javascript:edit_var(".$ttv[$var]['id'].");'>".$ttv[$var]['value']."</a>";
+            edit_var($ttv[$var]);
+          }
+          echo "<br/>";
         }
-        echo "<br/>";
-      }
+      } //isset
       echo "<a href='javascript:add_var(\"$strata\");'>"._("Add")."</a>";
       add_var($strata, $creators_list );
       echo "</td>";
       break;
     case 'MEMBER':
       echo "<td>";
-      foreach ($allvars['MEMBER'] as $ttk => $ttv ) {
-        if ( isset($ttv[$var]) && is_array( $ttv[$var])) {
-          echo sprintf(_("Overwritted by %s"), $members[$ttk]['login'])." &rarr; ";
-          echo "<a href='javascript:edit_var(".$ttv[$var]['id'].");'>".$ttv[$var]['value']."</a>";
-          edit_var($ttv[$var]);
+      if (isset($allvars['MEMBER']) && is_array($allvars['MEMBER'])) {
+        foreach ($allvars['MEMBER'] as $ttk => $ttv ) {
+          if ( isset($ttv[$var]) && is_array( $ttv[$var])) {
+            echo sprintf(_("Overwritted by %s"), $members[$ttk]['login'])." &rarr; ";
+            echo "<a href='javascript:edit_var(".$ttv[$var]['id'].");'>".$ttv[$var]['value']."</a>";
+            edit_var($ttv[$var]);
+          }
+          echo "<br/>";
         }
-        echo "<br/>";
-      }
+      } //isset
       echo "<a href='javascript:add_var(\"$strata\");'>"._("Add")."</a>";
       add_var($strata, $members_list);
       echo "</td>";
