@@ -44,7 +44,7 @@ if ($mem->user["lastfail"]) {
 
 if (!empty($error) ) { echo "<p class='alert alert-danger'>$error</p>";$error=''; } 
 
-$feed_url = variable_get('rss_feed');
+$feed_url = variable_get('rss_feed', 0, 'This is an RSS feed that will be displayed on the users homepages when they log in. Set this to 0 or a "false" string to ignore.');
 if (!empty($feed_url)) {
   $cache_time = 60*5; // 5 minutes
   $cache_file = "/tmp/alterncpanel_cache_main.rss";

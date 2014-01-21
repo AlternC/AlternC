@@ -384,16 +384,18 @@ INSERT IGNORE INTO tld VALUES ('asia', 1);
 --
 -- Table structure for table 'variable'
 --
--- Taken from http://cvs.drupal.org/viewcvs/drupal/drupal/database/database.mysql?rev=1.164&view=auto
---
 -- if comment is null, then the variable is internal and will not show
 -- up in the generic configuration panel
-CREATE TABLE IF NOT EXISTS variable (
-  name varchar(48) NOT NULL default '',
-  value longtext NOT NULL,
-  comment mediumtext NULL,
-  PRIMARY KEY  (name),
-  KEY name (name)
+CREATE TABLE `variable` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(48) NOT NULL DEFAULT '',
+  `value` longtext NOT NULL,
+  `comment` mediumtext,
+  `strata` enum('DEFAULT','GLOBAL','FQDN','FQDN_CREATOR','CREATOR','MEMBER','DOMAIN') NOT NULL DEFAULT 'DEFAULT',
+  `strata_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name_2` (`name`,`strata`,`strata_id`),
+  KEY `name` (`name`)
 ) ENGINE=MyISAM;
 
 -- hosting_tld: only used, for now, in bureau/admin/adm_*add.php
@@ -406,13 +408,6 @@ the user creation dialog requesting the creator if he wants to create
 the domain "username.example.com".
 
 If this is set to 0 or a "false" string, it will be ignored.');
-
-INSERT IGNORE INTO `variable` (name, value, comment) VALUES ('rss_feed', 0,
-'This is an RSS feed that will be displayed on the users homepages when
-they log in. Set this to 0 or a "false" string to ignore.');
-
-INSERT IGNORE INTO `variable` (name, value, comment) VALUES ('new_email', 0,
-'An email will be sent to this address when new accounts are created if set.');
 
 INSERT IGNORE INTO `variable` (name, value, comment) VALUES ('mailname_bounce', '',
 'FQDN of the mail server, used to create vhost virtual mail_adress.');

@@ -163,7 +163,7 @@ class m_variables {
     if (isset($conf[$name])) {
       return $conf[$name]['value'];
     } elseif (!is_null($createit_comment)) {
-      $this->variable_update_or_create($name, $value, 'DEFAULT', null, null, $createit_comment);
+      $this->variable_update_or_create($name, $default, 'DEFAULT', null, null, $createit_comment);
     }
     return $default;
   }
