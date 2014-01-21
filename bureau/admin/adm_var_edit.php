@@ -59,7 +59,7 @@ echo "<br/>";
 function edit_var($var_arr) {
   echo "<div id='edit_var_div_{$var_arr['id']}'><form method=post>";
   echo "<input type='hidden' name='var_id' value='";ehe($var_arr['id']);echo "'  />";
-  echo "<input type='text' class='int' name='var_value' value='";ehe($var_arr['value']); echo "' size='20' maxlength='16' />";
+  echo "<input type='text' class='int' name='var_value' value='";ehe($var_arr['value']); echo "' size='30' />";
   echo "<br/>";
   echo "<input type='button' class='inb cancel' name='cancel' value='"._('Cancel')."' onclick=\"$('#edit_var_div_{$var_arr['id']}').toggle();\" />";
   echo "<input type='submit' class='inb delete' name='delete' value='"._("Delete")."' onclick=\"return confirm('"; ehe(_("Are you sure you want to delete it.")); echo "')\" />";
@@ -79,7 +79,7 @@ function add_var($stratatata, $stratatata_arr=null) {
     eoption($stratatata_arr, null);
     echo "</select> ";
   }
-  echo "<input type='text' class='int' name='var_value' value='' size='20' maxlength='16' />";
+  echo "<input type='text' class='int' name='var_value' value='' size='30' />";
   echo "<br/>";
   echo "<input type='button' class='inb cancel' name='cancel' value='"._('Cancel')."' onclick=\"$('#add_var_div_$stratatata').toggle();\" />";
   echo "<input type='submit' class='inb ok' value='"._("Apply")."'/>";
