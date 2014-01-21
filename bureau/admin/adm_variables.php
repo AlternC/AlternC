@@ -82,8 +82,7 @@ foreach( $variables->variables_list_name() as $varname => $varcomment) {  ?>
 <h3 id="overwrited_vars"><?php __("Overwrited vars"); ?></h3>
 <form method="post" action="adm_variables.php#overwrited_vars">
 <?php
-$creator=$mem->get_creator_by_uid($uid);
-
+$creator=$mem->get_creator_by_uid($member_id);
 
 $ml=array();
 foreach($admin->get_list() as $mid=>$mlogin) {
