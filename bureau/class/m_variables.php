@@ -112,7 +112,7 @@ class m_variables {
             $variables = $this->variable_merge($variables, $arr_var['MEMBER'][$uid] );
           }
           break;
-        case 'MEMBER':
+        case 'DOMAIN':
           //FIXME TODO
           break;
       } //switch
@@ -202,13 +202,39 @@ class m_variables {
     $this->variable_init();
   }
 
+  function variable_update_or_create($var_name, $var_value, $strata=null, $strata_id=null, $var_id=null) {
+    global $db, $err;
+    $err->log('variable', 'variable_update_or_create');
+    
+    if ($var_id) {
+      $sql="UPDATE variable SET value='".mysql_real_escape_string($var_value)."' WHERE id = ".intval($var_id);
+    } else {
+      if ( empty($strata) ) {
+        $err->raise('variables', _("Err: Missing strata when creating var"));
+        return false;
+      }
+      $sql="INSERT INTO 
+              variable (name, value, strata, strata_id) 
+            VALUES (
+              '".mysql_real_escape_string($var_name)."', 
+              '".mysql_real_escape_string($var_value)."', 
+              '".mysql_real_escape_string($strata)."', 
+              '".mysql_real_escape_string($strata_id)."' );";
+    }
+
+    $db->query("$sql");
+
+    $this->variable_init_maybe(true);
+    return true;
+  }
+
   /**
    * Unset a persistent variable.
    *
    * @param $name
    *   The name of the variable to undefine.
    */
-  function variable_del($id) {
+  function del($id) {
     global $db;
     $db->query("DELETE FROM `variable` WHERE id = '".intval($id)."'");
     $this->variable_init_maybe(true);

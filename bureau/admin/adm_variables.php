@@ -67,12 +67,11 @@ $global_conf=$variables->get_impersonated();
 foreach( $variables->variables_list_name() as $varname => $varcomment) {  ?>
 
  <tr class="lst">
-   <td><?php echo $varname; ?></td>
+   <td><a href='adm_var_edit.php?var=<?php echo urlencode($varname)?>'><?php echo $varname; ?></a></td>
    <td><?php echo $varcomment; ?></td>
    <td><?php echo $allvars['DEFAULT'][NULL][$varname]['value']; ?></td>
    <td><?php if (isset($allvars['GLOBAL'][NULL][$varname]['value'])) { echo $allvars['GLOBAL'][NULL][$varname]['value']; } ?></td>
    <td><?php echo $global_conf[$varname]['value']; ?></td>
-   <td><a href='adm_editvar.php?var=<?php echo urlencode($varname)?>&amp;strata=global'><?php __("Edit"); ?></a></td>
  </tr>
 <?php } ?>
 </table>
@@ -118,7 +117,7 @@ echo "<th>"._("Used value")."</th>";
 echo "</tr></thead>";
 foreach( $variables->variables_list_name() as $varname => $varcomment) {  ?>
  <tr class="lst">
-   <td><?php echo $varname; ?></td>
+   <td><a href='adm_var_edit.php?var=<?php echo urlencode($varname); ?>'><?php echo $varname; ?></a></td>
    <td><?php echo $allvars['DEFAULT'][NULL][$varname]['value']; ?></td>
    <td><?php if (isset($allvars['GLOBAL'][NULL][$varname]['value'])) { echo $allvars['GLOBAL'][NULL][$varname]['value']; } ?></td>
    <td><?php if (isset($allvars['FQDN_CREATOR'][$sub_infos['member_id']][$varname]['value'])) { echo $allvars['FQDN_CREATOR'][$sub_infos['member_id']][$varname]['value']; } ?></td>
@@ -127,7 +126,6 @@ foreach( $variables->variables_list_name() as $varname => $varcomment) {  ?>
    <td><?php if (isset($allvars['MEMBER'][$member_id][$varname]['value'])) { echo $allvars['MEMBER'][$member_id][$varname]['value']; } ?></td>
    <td><?php if (isset($allvars['DOMAIN']['FIXME'][$varname]['value'])) { echo $allvars['DOMAIN']['FIXME'][$varname]['value']; } ?></td>
    <td><?php echo $impersonated_conf[$varname]['value']; ?></td>
-   <td><a href='adm_editvar.php?var=<?php echo urlencode($varname)."&amp;member_id=$member_id&amp;fqdn_id=$fqdn_id"?>'><?php __("Edit"); ?></a></td>
  </tr>
 <?php
 } //foreach 

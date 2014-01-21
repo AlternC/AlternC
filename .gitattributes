@@ -68,7 +68,6 @@ bureau/admin/adm_donosu.php -text
 bureau/admin/adm_dorenew.php -text
 bureau/admin/adm_dosu.php -text
 bureau/admin/adm_edit.php -text
-bureau/admin/adm_editvar.php -text
 bureau/admin/adm_email.php -text
 bureau/admin/adm_list.php -text
 bureau/admin/adm_lockpanel.php -text
@@ -85,6 +84,7 @@ bureau/admin/adm_tlddoadd.php -text
 bureau/admin/adm_tlddoedit.php -text
 bureau/admin/adm_tldedit.php -text
 bureau/admin/adm_update_domains.php -text
+bureau/admin/adm_var_edit.php -text
 bureau/admin/adm_variables.php -text
 bureau/admin/aide/help.php -text
 bureau/admin/aide/help.png -text
