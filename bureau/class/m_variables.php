@@ -216,7 +216,7 @@ class m_variables {
               '".mysql_real_escape_string($var_name)."', 
               '".mysql_real_escape_string($var_value)."', 
               '".mysql_real_escape_string($strata)."', 
-              '".mysql_real_escape_string($strata_id)."', 
+              ".( is_null($strata_id)?'null':"'".mysql_real_escape_string($strata_id)."'").",
               '".mysql_real_escape_string($comment)."' );";
     }
 
