@@ -31,13 +31,13 @@ require_once("../class/config.php");
 include_once("head.php");
 
 $fields = array (
-	"sub_domain_id"       => array ("request", "integer", ""),
+  "sub_domain_id"       => array ("request", "integer", ""),
 );
 getFields($fields);
 
 $dom->lock();
 if (!$r=$dom->get_sub_domain_all($sub_domain_id)) {
-	$error=$err->errstr();
+  $error=$err->errstr();
 }
 $dom->unlock();
 
@@ -48,27 +48,36 @@ if (!$isinvited && $dt[strtolower($r['type'])]["enable"] != "ALL" ) {
 }
 
 ?>
-<h3><?php printf(_("Deleting subdomain %s"),"http://".ife($r['name'],$r['name'].".").$r['domain']); ?> : </h3>
+<h3><?php printf(_("Deleting subdomain %s"),ife($r['name'],$r['name'].".").$r['domain']); ?> : </h3>
 <?php
-	if (isset($error) && $error) {
-		echo "<p class=\"alert alert-danger\">$error</p>";
-		include_once("foot.php");
-		exit();
-	}
+if (isset($error) && $error) {
+  echo "<p class=\"alert alert-danger\">$error</p>";
+  include_once("foot.php");
+  exit();
+}
 ?>
 <hr id="topbar"/>
 <br />
-<!-- *****************************************
-		 gestion du sous-domaine
- -->
 <form action="dom_subdodel.php" method="post">
-	<p class="alert alert-warning">
-	<input type="hidden" name="sub_domain_id" value="<?php echo $sub_domain_id ?>" />
-<?php __("WARNING : Confirm the deletion of the subdomain"); ?> : </p>
-	<p><?php ecif($r['name'],$r['name']."."); echo $r['domain']; ?></p>
-	<blockquote>
-	<input type="submit" class="inb" name="confirm" value="<?php __("Yes"); ?>" />&nbsp;&nbsp;
-	<input type="button" class="inb" name="cancel" value="<?php __("No"); ?>" onclick="history.back();" />
-	</blockquote>
+  <p class="alert alert-warning">
+    <input type="hidden" name="sub_domain_id" value="<?php echo $sub_domain_id ?>" />
+    <?php __("WARNING : You are going to delete a sub-domain."); ?></p>
+    <p><?php 
+      __("Informations about the subdomain you're going to delete:");
+      echo "<ul>";
+      echo "<li>"._("Entry:")." ".( empty($r['name'])?'':$r['name'].".").$r['domain']."</li>";
+      echo "<li>"._("Type:")." "._($r['type_desc'])."</li>";
+      if (!empty($r['dest'])) {
+        echo "<li>"._("Value:")." "._($r['dest'])."</li>";
+      }
+      echo "</ul>";
+      echo "<br/>";
+      __("Do you really want to delete it?");
+      ?>
+    </p>
+    <blockquote>
+      <input type="submit" class="inb" name="confirm" value="<?php __("Yes"); ?>" />&nbsp;&nbsp;
+      <input type="button" class="inb" name="cancel" value="<?php __("No"); ?>" onclick="history.back();" />
+    </blockquote>
 </form>
 <?php include_once("foot.php"); ?>
