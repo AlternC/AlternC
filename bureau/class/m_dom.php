@@ -1598,6 +1598,21 @@ class m_dom {
   return $res;
   }
 
+  function get_domain_all_summary() {
+    global $db,$err;
+    $res=array();
+    $db->query("SELECT domaine, gesdns, gesmx, dns_action, zonettl FROM domaines ORDER BY domaine");
+    while ($db->next_record()) {
+      $res[$db->f("domaine")] = array(
+          "gesdns"     => $db->f("gesdns"),
+          "gesmx"      => $db->f("gesmx"),
+          "dns_action" => $db->f("dns_action"),
+          "zonettl"    => $db->f("zonettl"),
+        );
+    }
+    return $res;
+  }
+
 
   /* ----------------------------------------------------------------- */
   /** Returns the name of a domain for the current user, from it's domain_id
