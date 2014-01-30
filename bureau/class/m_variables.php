@@ -59,7 +59,12 @@ class m_variables {
     } else {
       $mid = null;
     }
-    return $this->get_impersonated($_SERVER['HTTP_HOST'], $mid);
+    if (isset($_SERVER['HTTP_HOST'])) {
+      $host=$_SERVER['HTTP_HOST'];
+    } else {
+      $host=null;
+    }
+    return $this->get_impersonated($host, $mid);
   }
 
 
