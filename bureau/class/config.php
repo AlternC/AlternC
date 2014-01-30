@@ -29,7 +29,7 @@
 */
 
 define('DO_XHPROF_STATS', FALSE);
-require_once('xhprof_header.php');
+if (DO_XHPROF_STATS) require_once('xhprof_header.php');
 
 // To enable the display of the alternc debug error, do the following :
 // # touch /etc/alternc/alternc_display_php_error
