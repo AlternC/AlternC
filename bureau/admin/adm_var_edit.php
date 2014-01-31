@@ -121,13 +121,16 @@ function var_input($infotype, $name, $value='') {
   echo "<label for='add_$id'>".$infotype['desc']."</label>";
   switch(strtolower($infotype['type'])) {
     case "string":
-      echo "<input type='text' class='int' id='add_$id' name='$name' value='";ehe($value); echo "' size='30' />";
+      echo "<input type='text' class='int' id='add_$id' name='$name' value='";ehe($value); echo "' size='30' />&nbsp;";
+      echo "<em>"._("Value expected: string")."</em>";
       break;
     case "integer":
-      echo "<input type='text' class='int' id='add_$id' name='$name' value='";ehe($value); echo "' size='10' pattern='[0-9]+'/>";
+      echo "<input type='text' class='int' id='add_$id' name='$name' value='";ehe($value); echo "' size='10' pattern='[0-9]+'/>&nbsp;";
+      echo "<em>"._("Value expected: integer")."</em>";
       break;
     case "ip":
-      echo "<input type='text' class='int' id='add_$id' name='$name' value='";ehe($value); echo "' size='15' pattern='[0-9\.:]+' />";
+      echo "<input type='text' class='int' id='add_$id' name='$name' value='";ehe($value); echo "' size='15' pattern='[0-9\.:]+' />&nbsp;";
+      echo "<em>"._("Value expected: IP address")."</em>";
       break;
     case "boolean":
       echo "<input type='hidden' name='$name' value='0' />"; // This way, there is allways something send, even if checkbox is unchecked
