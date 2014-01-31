@@ -21,6 +21,11 @@ $fields = array (
 );
 getFields($fields);
 
+variable_get("aaa_test3", 
+array("ns1"=> array("ns"=>"ns1.%%FQDN%%", "ip"=>"%%PUBLIC_IP%%", "enabled"=>"%%ENABLED%%"), "ns2"=>array("ns"=>"fdsffsd", "ip"=>"fdsfdfds", "enabled"=>"fds"), 'ns55'=> 'arf' ),
+"This is a test!", 
+array("ns1"=> array("ns"=>"ns name", "ip"=>"ip address", "enabled"=>"enabled"), "ns2"=>array("ns"=>"ns name", "ip"=>"ip address", "enabled"=>"enabled"), 'ns3'=>'toto' ) 
+); 
 
 if (empty($var)) {
   echo "<p class='error'>";__("Missing var name");echo "</p>";
@@ -72,8 +77,20 @@ function edit_var($var_arr) {
     echo "<ul>";
     foreach ($allvars['DEFAULT'][null][$var_arr['name']]['type'] as $kk => $vv) {
       echo "<li>";
-      echo "<label for='edit_for_${var_arr['id']}'>".$vv."</label>";
-      echo "<input type='text' class='int' id='edit_for_${var_arr['id']}' name='var_value_arr[$kk]' value='";ehe($var_arr['value'][$kk]); echo "' size='30' />";
+      if ( is_array($vv)) {
+        echo $kk;
+        echo "<ul>";
+        foreach ($vv as $ll => $mm ) {
+          echo "<li>";
+          echo "<label for='add_for_${ll}_$mm'>$mm</label>";
+          echo "<input type='text' class='int' id='add_for_${ll}_$mm' name='var_value_arr[$kk][$ll]' value='";ehe($var_arr['value'][$kk][$ll]); echo "' size='30' />";
+          echo "</li>";
+        }
+        echo "</ul>";
+      } else {
+        echo "<label for='edit_for_${var_arr['id']}'>".$vv."</label>";
+        echo "<input type='text' class='int' id='edit_for_${var_arr['id']}' name='var_value_arr[$kk]' value='";ehe($var_arr['value'][$kk]); echo "' size='30' />";
+      }
       echo "</li>";
     }
     echo "</ul>";
@@ -104,8 +121,20 @@ function add_var($stratatata, $stratatata_arr=null) {
     echo "<ul>";
     foreach ($allvars['DEFAULT'][null][$var]['type'] as $kk => $vv) {
       echo "<li>";
-      echo "<label for='add_for_$var'>$vv</label>";
-      echo "<input type='text' class='int' id='add_for_$var' name='var_value_arr[$kk]' value='' size='30' />";
+      if ( is_array($vv)) {
+        echo $kk;
+        echo "<ul>";
+        foreach ($vv as $ll => $mm ) {
+          echo "<li>";
+          echo "<label for='add_for_${ll}_$mm'>$mm</label>";
+          echo "<input type='text' class='int' id='add_for_${ll}_$mm' name='var_value_arr[$kk][$ll]' value='' size='30' />";
+          echo "</li>";
+        }
+        echo "</ul>";
+      } else {
+        echo "<label for='add_for_$var'>$vv</label>";
+        echo "<input type='text' class='int' id='add_for_$var' name='var_value_arr[$kk]' value='' size='30' />";
+      }
       echo "</li>";
     }
     echo "</ul>";

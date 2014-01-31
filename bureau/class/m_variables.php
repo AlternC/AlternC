@@ -245,12 +245,32 @@ class m_variables {
           echo "<li>";
           if (! is_numeric($k)) {
             if (is_null($varname)) {
-              echo "$k =>";
+              echo "$k";
             } else {
-              echo $this->variables_list()['DEFAULT'][null][$varname]['type'][$k]. " => ";
+              if ( !isset($this->variables_list()['DEFAULT'][null][$varname]['type'][$k]) ||  is_array( $this->variables_list()['DEFAULT'][null][$varname]['type'][$k] ) ) {
+                echo $k;
+              } else {
+                echo $this->variables_list()['DEFAULT'][null][$varname]['type'][$k];
+              }
             }
           }
-          echo "$l</li>";
+          if (is_array($l)) {
+            echo "<ul>";
+            foreach ($l as $m => $n ) {
+              echo "<li>";
+              if ( is_numeric($m)) {
+                echo "$m";
+              } else {
+                echo $this->variables_list()['DEFAULT'][null][$varname]['type'][$k][$m];
+              }
+              echo " => $n";
+              echo "</li>";
+            }
+            echo "</ul>";
+          } else {
+            echo " => $l";
+          }
+          echo "</li>";
         }
         echo "</ul>";
       } // empty $v
