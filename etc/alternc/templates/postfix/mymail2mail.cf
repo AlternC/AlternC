@@ -1,0 +1,13 @@
+# AUTO GENERATED FILE
+# Modify template in /etc/alternc/templates/
+# and launch alternc.install if you want 
+# to modify this file.
+#
+
+user = %%db_mail_user%%
+password = %%db_mail_pwd%%
+hosts =%%dbhost%%
+dbname = %%dbname%%
+query = concat(`address`.`address`,'@',`domaines`.`domaine`) AS `mail` from address,domaines where `address`.`enabled` = 1 and `address`.`domain_id` = domaines.id and concat(`address`.`address`,'@',`domaines`.`domaine`) = '%s';
+ 
+

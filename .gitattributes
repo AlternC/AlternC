@@ -532,6 +532,7 @@ etc/alternc/templates/postfix/master.cf -text
 etc/alternc/templates/postfix/myalias.cf -text
 etc/alternc/templates/postfix/mydomain.cf -text
 etc/alternc/templates/postfix/mygid.cf -text
+etc/alternc/templates/postfix/mymail2mail.cf -text
 etc/alternc/templates/postfix/myquota.cf -text
 etc/alternc/templates/postfix/myrelay-domain.cf -text
 etc/alternc/templates/postfix/myrelay.cf -text

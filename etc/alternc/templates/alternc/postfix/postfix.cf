@@ -32,7 +32,7 @@ smtpd_sasl_auth_enable=yes
 #Virtual Maping
 alias_maps = hash:/etc/aliases
 alias_database = hash:/etc/aliases
-virtual_alias_maps = proxy:mysql:/etc/postfix/myalias.cf
+virtual_alias_maps = proxy:mysql:/etc/postfix/myalias.cf,proxy:mysql:/etc/postfix/mymail2mail.cf
 virtual_alias_domains = 
 virtual_mailbox_domains = proxy:mysql:/etc/postfix/mydomain.cf
 virtual_mailbox_maps = proxy:mysql:/etc/postfix/myvirtual.cf
