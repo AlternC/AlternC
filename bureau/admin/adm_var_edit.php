@@ -22,10 +22,57 @@ $fields = array (
 getFields($fields);
 
 variable_get("aaa_test3", 
-array("ns1"=> array("ns"=>"ns1.%%FQDN%%", "ip"=>"%%PUBLIC_IP%%", "enabled"=>"%%ENABLED%%"), "ns2"=>array("ns"=>"fdsffsd", "ip"=>"fdsfdfds", "enabled"=>"fds"), 'ns55'=> 'arf' ),
+array(
+  "ns1"=> 
+    array(
+      "ns"=>"ns1.%%FQDN%%", 
+      "ip"=>"%%PUBLIC_IP%%", 
+      "enabled"=>"%%ENABLED%%"), 
+  "ns2"=>
+    array(
+      "ns"=>"fdsffsd", 
+      "ip"=>"fdsfdfds", 
+      "enabled"=>"fds"), 
+  'ns55'=> 'arf' 
+),
 "This is a test!", 
-array("ns1"=> array("ns"=>"ns name", "ip"=>"ip address", "enabled"=>"enabled"), "ns2"=>array("ns"=>"ns name", "ip"=>"ip address", "enabled"=>"enabled"), 'ns3'=>'toto' ) 
-); 
+array(
+  "ns1"=> 
+    array(
+      "ns"=>
+        array(
+          'desc'=>"ns name", 
+          'type'=>'string'), 
+      "ip"=>
+        array(
+          'desc'=>"ip address", 
+          'type'=>'ip'),
+      "enabled"=>
+        array(
+          'desc'=>"enabled",
+          'type'=>"boolean"), 
+   ),
+  "ns2"=>array(
+      "ns"=>
+        array(
+          'desc'=>"ns name", 
+          'type'=>'string'), 
+      "ip"=>
+        array(
+          'desc'=>"ip address", 
+          'type'=>'ip'),
+      "enabled"=>
+        array(
+          'desc'=>"enabled",
+          'type'=>"boolean"), 
+   ),
+   "ns3"=>array(
+     "desc"=>"here another",
+     "type"=>"integer",
+   ),
+)
+ ); 
+
 
 if (empty($var)) {
   echo "<p class='error'>";__("Missing var name");echo "</p>";
@@ -69,27 +116,50 @@ echo "</fieldset>";
 
 echo "<br/>";
 
+function var_input($infotype, $name, $value='') {
+  $id = rand();
+  echo "<label for='add_$id'>".$infotype['desc']."</label>";
+  switch(strtolower($infotype['type'])) {
+    case "string":
+      echo "<input type='text' class='int' id='add_$id' name='$name' value='";ehe($value); echo "' size='30' />";
+      break;
+    case "integer":
+      echo "<input type='text' class='int' id='add_$id' name='$name' value='";ehe($value); echo "' size='10' pattern='[0-9]+'/>";
+      break;
+    case "ip":
+      echo "<input type='text' class='int' id='add_$id' name='$name' value='";ehe($value); echo "' size='15' pattern='[0-9\.:]+' />";
+      break;
+    case "boolean":
+      echo "<input type='hidden' name='$name' value='0' />"; // This way, there is allways something send, even if checkbox is unchecked
+      echo "<input type='checkbox' id='add_$id' name='$name' value='1' ";cbox($value);echo " />"; 
+      break;
+    default:
+      echo "WTF ? Dunno what to do with a ".$infotype['type'];
+      break;
+  }
+}
+
 function edit_var($var_arr) {
   global $allvars;
   echo "<div id='edit_var_div_{$var_arr['id']}'><form method=post>";
   echo "<input type='hidden' name='var_id' value='";ehe($var_arr['id']);echo "'  />";
   if (is_array( $allvars['DEFAULT'][null][$var_arr['name']]['type'] )) {
     echo "<ul>";
-    foreach ($allvars['DEFAULT'][null][$var_arr['name']]['type'] as $kk => $vv) {
+    $infotype = $allvars['DEFAULT'][null][$var_arr['name']]['type'];
+    //foreach ($allvars['DEFAULT'][null][$var_arr['name']]['type'] as $kk => $vv) {
+    foreach ($var_arr['value'] as $kk => $vv) {
       echo "<li>";
       if ( is_array($vv)) {
         echo $kk;
         echo "<ul>";
         foreach ($vv as $ll => $mm ) {
           echo "<li>";
-          echo "<label for='add_for_${ll}_$mm'>$mm</label>";
-          echo "<input type='text' class='int' id='add_for_${ll}_$mm' name='var_value_arr[$kk][$ll]' value='";ehe($var_arr['value'][$kk][$ll]); echo "' size='30' />";
+          var_input($infotype[$kk][$ll], "var_value_arr[$kk][$ll]", $var_arr['value'][$kk][$ll] );
           echo "</li>";
         }
         echo "</ul>";
       } else {
-        echo "<label for='edit_for_${var_arr['id']}'>".$vv."</label>";
-        echo "<input type='text' class='int' id='edit_for_${var_arr['id']}' name='var_value_arr[$kk]' value='";ehe($var_arr['value'][$kk]); echo "' size='30' />";
+        var_input($infotype[$kk], "var_value_arr[$kk]", $var_arr['value'][$kk]);
       }
       echo "</li>";
     }
@@ -100,8 +170,8 @@ function edit_var($var_arr) {
 
   echo "<br/>";
   echo "<input type='button' class='inb cancel' name='cancel' value='"._('Cancel')."' onclick=\"$('#edit_var_div_{$var_arr['id']}').toggle();\" />";
-  echo "<input type='submit' class='inb delete' name='delete' value='"._("Delete")."' onclick=\"return confirm('"; ehe(_("Are you sure you want to delete it.")); echo "')\" />";
   echo "<input type='submit' class='inb ok' value='"._("Apply")."'/>";
+  echo "<input type='submit' class='inb delete' name='delete' value='"._("Delete")."' onclick=\"return confirm('"; ehe(_("Are you sure you want to delete it.")); echo "')\" />";
   echo "</form></div>";
   echo "<script type='text/javascript'>$('#edit_var_div_{$var_arr['id']}').toggle();</script>";
   
@@ -117,23 +187,22 @@ function add_var($stratatata, $stratatata_arr=null) {
     eoption($stratatata_arr, null);
     echo "</select> ";
   }
-  if (is_array( $allvars['DEFAULT'][null][$var]['type'] )) {
+  $infotype = $allvars['DEFAULT'][null][$var]['type'];
+  if (is_array( $infotype )) {
     echo "<ul>";
     foreach ($allvars['DEFAULT'][null][$var]['type'] as $kk => $vv) {
       echo "<li>";
-      if ( is_array($vv)) {
+      if ( is_array($vv) && ! (isset($vv['desc']) && isset($vv['type'])) ) { // if is an array but not the last array, used to contain DESC and TYPE
         echo $kk;
         echo "<ul>";
         foreach ($vv as $ll => $mm ) {
           echo "<li>";
-          echo "<label for='add_for_${ll}_$mm'>$mm</label>";
-          echo "<input type='text' class='int' id='add_for_${ll}_$mm' name='var_value_arr[$kk][$ll]' value='' size='30' />";
+          var_input($infotype[$kk][$ll], "var_value_arr[$kk][$ll]" );
           echo "</li>";
         }
         echo "</ul>";
       } else {
-        echo "<label for='add_for_$var'>$vv</label>";
-        echo "<input type='text' class='int' id='add_for_$var' name='var_value_arr[$kk]' value='' size='30' />";
+        var_input($infotype[$kk], "var_value_arr[$kk]" );
       }
       echo "</li>";
     }

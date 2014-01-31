@@ -261,7 +261,7 @@ class m_variables {
               if ( is_numeric($m)) {
                 echo "$m";
               } else {
-                echo $this->variables_list()['DEFAULT'][null][$varname]['type'][$k][$m];
+                echo $this->variables_list()['DEFAULT'][null][$varname]['type'][$k][$m]['desc'];
               }
               echo " => $n";
               echo "</li>";
