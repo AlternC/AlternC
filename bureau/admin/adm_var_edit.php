@@ -22,9 +22,6 @@ $fields = array (
 getFields($fields);
 
 
-variable_get("aaa_test2", array("ns"=>"", "enabled"=>""), "This is a test!", array("ns"=>"ns name", "ip"=>"ip address", "enabled"=>"enabled"));
-
-
 if (empty($var)) {
   echo "<p class='error'>";__("Missing var name");echo "</p>";
   include_once("foot.php");
