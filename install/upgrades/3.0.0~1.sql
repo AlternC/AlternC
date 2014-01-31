@@ -361,6 +361,19 @@ update mail_domain, domaines, mail_users
         and mail_domain.pop = 1;
 
 -- Here we should have inserted all local managed mailboxes and their aliases.
+-- Insert catchall alias only adresses.
+insert into address (domain_id, address, type, password)
+    select domaines.id as domain_id,
+    substring_index(mail_domain.mail, '@', 1) as address,
+    'catchall' as type,
+    '' as password
+    from domaines
+        join mail_domain
+            on domaines.domaine = substring_index(mail_domain.mail, '@', -1)
+    where mail_domain.mail like '@%'
+        and mail_domain.type = 0
+        and mail_domain.pop = 0
+        and substring_index(mail_domain.mail, '@', 1) ='';
 
 -- Insert alias only adresses.
 insert into address (domain_id, address, type, password)
@@ -373,7 +386,8 @@ insert into address (domain_id, address, type, password)
             on domaines.domaine = substring_index(mail_domain.mail, '@', -1)
     where mail_domain.mail like '%@%'
         and mail_domain.type = 0
-        and mail_domain.pop = 0;
+        and mail_domain.pop = 0
+        and substring_index(mail_domain.mail, '@', 1) != '';
 
 insert into recipient (address_id, recipients)
     select address.id as address_id,
@@ -399,6 +413,9 @@ update mail_domain, domaines
         and mail_domain.mail like '%@%'
         and mail_domain.type = 0
         and mail_domain.pop = 0;
+~
+
+
 
 -- Insert procmail managed addresses.
 -- Note: those addresses should be treated as local managed adresses.
