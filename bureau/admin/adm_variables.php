@@ -69,9 +69,9 @@ foreach( $variables->variables_list_name() as $varname => $varcomment) {  ?>
  <tr class="lst">
    <td><a href='adm_var_edit.php?var=<?php echo urlencode($varname)?>'><?php echo $varname; ?></a></td>
    <td><?php echo $varcomment; ?></td>
-   <td><?php echo $allvars['DEFAULT'][NULL][$varname]['value']; ?></td>
-   <td><?php if (isset($allvars['GLOBAL'][NULL][$varname]['value'])) { echo $allvars['GLOBAL'][NULL][$varname]['value']; } ?></td>
-   <td><?php echo $global_conf[$varname]['value']; ?></td>
+   <td><?php $variables->display_value_html($allvars, 'DEFAULT', NULL, $varname);?></td>
+   <td><?php $variables->display_value_html($allvars, 'GLOBAL',  NULL, $varname);?></td>
+   <td><?php if (isset($global_conf[$varname]['value'])) { $variables->display_valueraw_html($global_conf[$varname]['value'], $varname); } ?></td>
  </tr>
 <?php } ?>
 </table>
@@ -117,14 +117,14 @@ echo "</tr></thead>";
 foreach( $variables->variables_list_name() as $varname => $varcomment) {  ?>
  <tr class="lst">
    <td><a href='adm_var_edit.php?var=<?php echo urlencode($varname); ?>'><?php echo $varname; ?></a></td>
-   <td><?php echo $allvars['DEFAULT'][NULL][$varname]['value']; ?></td>
-   <td><?php if (isset($allvars['GLOBAL'][NULL][$varname]['value'])) { echo $allvars['GLOBAL'][NULL][$varname]['value']; } ?></td>
-   <td><?php if (isset($allvars['FQDN_CREATOR'][$sub_infos['member_id']][$varname]['value'])) { echo $allvars['FQDN_CREATOR'][$sub_infos['member_id']][$varname]['value']; } ?></td>
-   <td><?php if (isset($allvars['FQDN'][$sub_infos['id']][$varname]['value'])) { echo $allvars['FQDN'][$sub_infos['id']][$varname]['value']; } ?></td>
-   <td><?php if (isset($allvars['CREATOR'][$creator][$varname]['value'])) { echo $allvars['CREATOR'][$creator][$varname]['value']; } ?></td>
-   <td><?php if (isset($allvars['MEMBER'][$member_id][$varname]['value'])) { echo $allvars['MEMBER'][$member_id][$varname]['value']; } ?></td>
-   <td><?php if (isset($allvars['DOMAIN']['FIXME'][$varname]['value'])) { echo $allvars['DOMAIN']['FIXME'][$varname]['value']; } ?></td>
-   <td><?php echo $impersonated_conf[$varname]['value']; ?></td>
+   <td><?php $variables->display_value_html($allvars, 'DEFAULT', NULL, $varname); ?></td>
+   <td><?php $variables->display_value_html($allvars, 'GLOBAL', NULL, $varname); ?></td>
+   <td><?php $variables->display_value_html($allvars, 'FQDN_CREATOR', $sub_infos['member_id'], $varname); ?></td>
+   <td><?php $variables->display_value_html($allvars, 'FQDN', $sub_infos['id'], $varname); ?></td>
+   <td><?php $variables->display_value_html($allvars, 'CREATOR', $creator, $varname); ?></td>
+   <td><?php $variables->display_value_html($allvars, 'MEMBER', $member_id, $varname); ?></td>
+   <td><?php $variables->display_value_html($allvars, 'DOMAIN', 'FIXME', $varname); ?></td>
+   <td><?php $variables->display_valueraw_html($impersonated_conf[$varname]['value'], $varname); ?></td>
  </tr>
 <?php
 } //foreach 

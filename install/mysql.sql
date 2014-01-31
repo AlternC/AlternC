@@ -393,6 +393,7 @@ CREATE TABLE `variable` (
   `comment` mediumtext,
   `strata` enum('DEFAULT','GLOBAL','FQDN','FQDN_CREATOR','CREATOR','MEMBER','DOMAIN') NOT NULL DEFAULT 'DEFAULT',
   `strata_id` bigint(20) DEFAULT NULL,
+  `type` text,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_2` (`name`,`strata`,`strata_id`),
   KEY `name` (`name`)

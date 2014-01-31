@@ -35,6 +35,7 @@
 
 class m_variables {
   var $strata_order = array('DEFAULT','GLOBAL','FQDN_CREATOR','FQDN','CREATOR','MEMBER','DOMAIN');
+  var $cache_variable_list = false;
 
   // used by get_impersonated to merge array. Son value overwrite father's value
   private function variable_merge($father, $son) {
@@ -59,6 +60,8 @@ class m_variables {
     } else {
       $mid = null;
     }
+
+    // In case we launch it in a script, there is no $_SERVER
     if (isset($_SERVER['HTTP_HOST'])) {
       $host=$_SERVER['HTTP_HOST'];
     } else {
@@ -67,7 +70,15 @@ class m_variables {
     return $this->get_impersonated($host, $mid);
   }
 
-
+   /**
+   * Return the var for a specific environnement :
+   *   * logged via $fqdn url
+   *   * the user is $uid
+   *   * $var if we want only 1 var instead of all of them
+   * 
+   * If $fqdn and $uid aren't specified, return the default value
+   * 
+   */
   function get_impersonated($fqdn=null, $uid=null, $var=null) {
     global $db, $err;
 
@@ -140,6 +151,7 @@ class m_variables {
   function variable_init_maybe($force=false) {
     global $conf;
     if ($force || !isset($conf)) {
+      $this->cache_variable_list = false;
       $conf = $this->variable_init();
     }
   }
@@ -159,7 +171,7 @@ class m_variables {
    * @global $conf
    *   A cache of the configuration.
    */
-  function variable_get($name, $default = null, $createit_comment = null) {
+  function variable_get($name, $default = null, $createit_comment = null, $type=null) {
     global $conf;
 
     $this->variable_init_maybe();
@@ -167,48 +179,21 @@ class m_variables {
     if (isset($conf[$name])) {
       return $conf[$name]['value'];
     } elseif (!is_null($createit_comment)) {
-      $this->variable_update_or_create($name, $default, 'DEFAULT', 'null', 'null', $createit_comment);
+      $this->variable_update_or_create($name, $default, 'DEFAULT', 'null', 'null', $createit_comment, $type);
     }
     return $default;
   }
 
-  /**
-   * Set a persistent variable.
-   *
-   * @param $name
-   *   The name of the variable to set.
-   * @param $value
-   *   The value to set. This can be any PHP data type; these functions take care
-   *   of serialization as necessary.
-   */
-  function variable_set($name, $value, $comment=null) {
-    global $conf, $db, $err;
-    $err->log('variable', 'variable_set', '+'.serialize($value).'+'.$comment.'+'); 
-
-    $conf[$name] = $value;
-    if (is_object($value) || is_array($value)) {
-      $value = serialize($value);
-    }
-
-    if ( empty($comment) ) {
-      $query = "INSERT INTO variable (name, value) values ('".$name."', '".$value."') on duplicate key update name='$name', value='$value';";
-    } else {
-      $comment=mysql_real_escape_string($comment);
-      $query = "INSERT INTO variable (name, value, comment) values ('".$name."', '".$value."', '$comment') on duplicate key update name='$name', value='$value', comment='$comment';";
-    }
-
-  #  $db->query("$query");
-    printvar($query);
-
-    $this->variable_init();
-  }
-
-  function variable_update_or_create($var_name, $var_value, $strata=null, $strata_id=null, $var_id=null, $comment=null) {
+  // Create or update a variable.
+  function variable_update_or_create($var_name, $var_value, $strata=null, $strata_id=null, $var_id=null, $comment=null, $type=null) {
     global $db, $err;
     $err->log('variable', 'variable_update_or_create');
     if ( strtolower($var_id) == 'null' ) $var_id = null;
     if ( strtolower($strata_id) == 'null' ) $strata_id = null;
 
+    if (is_object($type) || is_array($type)) {
+      $type = serialize($type);
+    }
     if (is_object($var_value) || is_array($var_value)) {
       $var_value = serialize($var_value);
     }
@@ -221,13 +206,14 @@ class m_variables {
         return false;
       }
       $sql="INSERT INTO 
-              variable (name, value, strata, strata_id, comment) 
+              variable (name, value, strata, strata_id, comment, type) 
             VALUES (
               '".mysql_real_escape_string($var_name)."', 
               '".mysql_real_escape_string($var_value)."', 
               '".mysql_real_escape_string($strata)."', 
               ".( is_null($strata_id)?'NULL':"'".mysql_real_escape_string($strata_id)."'").",
-              '".mysql_real_escape_string($comment)."' );";
+              '".mysql_real_escape_string($comment)."',
+              '".mysql_real_escape_string($type)."' );";
     }
 
     $db->query("$sql");
@@ -248,6 +234,45 @@ class m_variables {
     $this->variable_init_maybe(true);
   }
 
+  // echo HTML code to display a variable passed in parameters
+  function display_valueraw_html($v,$varname) {
+    if (is_array($v)) {
+      if (empty($v)) {
+        echo "<em>"._("Empty array")."</em>";
+      } else {
+        echo "<ul>";
+        foreach ( $v as $k=>$l) {
+          echo "<li>";
+          if (! is_numeric($k)) {
+            if (is_null($varname)) {
+              echo "$k =>";
+            } else {
+              echo $this->variables_list()['DEFAULT'][null][$varname]['type'][$k]. " => ";
+            }
+          }
+          echo "$l</li>";
+        }
+        echo "</ul>";
+      } // empty $v
+    } else if (empty($v)) {
+      echo "<em>"._("Empty")."</em>";
+    } else {
+      echo $v;
+    }
+  }
+
+  // Display a variable if is set
+  function display_value_html($tab, $strata, $id, $varname) {
+    if (isset($tab[$strata][$id][$varname]['value'])) {
+      $v = $tab[$strata][$id][$varname]['value'];
+      $this->display_valueraw_html($v, $varname);
+    } else {
+      echo "<em>"._("None defined")."</em>";
+    }
+
+  }
+
+  // return hashtable with variable_name => comment for all the vars
   function variables_list_name() {
     global $db;
 
@@ -263,21 +288,28 @@ class m_variables {
     return $t;
   }
 
+  // return a multidimensionnal array used to build vars
   function variables_list() {
     global $db;
+    if ( ! $this->cache_variable_list ) {
 
-    $result = $db->query('SELECT * FROM `variable`');
+      $result = $db->query('SELECT * FROM `variable`');
 
-    $arr_var=array();
-    while ($db->next_record($result)) {
-      // Unserialize value if needed
-      if ( ($value = @unserialize($db->f('value'))) === FALSE) {
-        $value=$db->f('value');
+      $arr_var=array();
+      while ($db->next_record($result)) {
+        // Unserialize value if needed
+        if ( ($value = @unserialize($db->f('value'))) === FALSE) {
+          $value=$db->f('value');
+        }
+        if ( ($type = @unserialize($db->f('type'))) === FALSE) {
+          $type=$db->f('type');
+        }
+        $arr_var[$db->f('strata')][$db->f('strata_id')][$db->f('name')] = array('id'=>$db->f('id') ,'name'=>$db->f('name'), 'value'=>$value, 'comment'=>$db->f('comment'), 'type'=>$type);
       }
-      $arr_var[$db->f('strata')][$db->f('strata_id')][$db->f('name')] = array('id'=>$db->f('id') ,'name'=>$db->f('name'), 'value'=>$value, 'comment'=>$db->f('comment'));
+      $this->cache_variable_list = $arr_var;
     }
- 
-    return $arr_var;
+      
+    return $this->cache_variable_list;
   }
 
 } /* Class m_variables */

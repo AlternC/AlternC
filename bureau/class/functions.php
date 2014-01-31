@@ -35,9 +35,9 @@ function compare_logname($a, $b) {
   return strcmp($a['name'],$b['name']);
 }
 
-function variable_get($name, $default = null, $createit_comment = null) {
+function variable_get($name, $default = null, $createit_comment = null, $type=null) {
   global $variables;
-  return $variables->variable_get($name, $default, $createit_comment);
+  return $variables->variable_get($name, $default, $createit_comment, $type);
 }
 
 /*

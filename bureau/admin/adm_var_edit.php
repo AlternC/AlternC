@@ -13,6 +13,7 @@ $fields = array (
         "var"       => array ("get", "string", null),
         "var_id"    => array ("post", "integer", null),
         "var_value" => array ("post", "string", null),
+        "var_value_arr" => array ("post", "array", null),
         "var_name"  => array ("post", "string", null),
         "strata"    => array ("post", "string", null),
         "strata_id" => array ("post", "integer", null),
@@ -20,17 +21,27 @@ $fields = array (
 );
 getFields($fields);
 
+
+variable_get("aaa_test2", array("ns"=>"", "enabled"=>""), "This is a test!", array("ns"=>"ns name", "ip"=>"ip address", "enabled"=>"enabled"));
+
+
 if (empty($var)) {
   echo "<p class='error'>";__("Missing var name");echo "</p>";
   include_once("foot.php");
 }
 
+// Which one between var_value and var_value_arr ?
+$var_v = null;
+if (!is_null($var_value)) $var_v = $var_value;
+if (!is_null($var_value_arr)) $var_v = $var_value_arr;
+
+
 if ( $var_id && $delete ) {
   $variables->del($var_id);
-} else if ( $strata && $var_name && $var_value ) {
-  $variables->variable_update_or_create($var_name, $var_value, $strata, $strata_id);
-} else if ( $var_id && $var_value ) {
-  $variables->variable_update_or_create($var_name, $var_value, null, null, $var_id);
+} else if ( $strata && $var_name && $var_v ) {
+  $variables->variable_update_or_create($var_name, $var_v, $strata, $strata_id);
+} else if ( $var_id && $var_v ) {
+  $variables->variable_update_or_create($var_name, $var_v, null, null, $var_id);
 }
 
 echo "<h3>";echo sprintf(_("Edition of var %s"), $var); echo "</h3>";
@@ -57,9 +68,22 @@ echo "</fieldset>";
 echo "<br/>";
 
 function edit_var($var_arr) {
+  global $allvars;
   echo "<div id='edit_var_div_{$var_arr['id']}'><form method=post>";
   echo "<input type='hidden' name='var_id' value='";ehe($var_arr['id']);echo "'  />";
-  echo "<input type='text' class='int' name='var_value' value='";ehe($var_arr['value']); echo "' size='30' />";
+  if (is_array( $allvars['DEFAULT'][null][$var_arr['name']]['type'] )) {
+    echo "<ul>";
+    foreach ($allvars['DEFAULT'][null][$var_arr['name']]['type'] as $kk => $vv) {
+      echo "<li>";
+      echo "<label for='edit_for_${var_arr['id']}'>".$vv."</label>";
+      echo "<input type='text' class='int' id='edit_for_${var_arr['id']}' name='var_value_arr[$kk]' value='";ehe($var_arr['value'][$kk]); echo "' size='30' />";
+      echo "</li>";
+    }
+    echo "</ul>";
+  } else {
+    echo "<input type='text' class='int' name='var_value' value='";ehe($var_arr['value']); echo "' size='30' />";
+  }
+
   echo "<br/>";
   echo "<input type='button' class='inb cancel' name='cancel' value='"._('Cancel')."' onclick=\"$('#edit_var_div_{$var_arr['id']}').toggle();\" />";
   echo "<input type='submit' class='inb delete' name='delete' value='"._("Delete")."' onclick=\"return confirm('"; ehe(_("Are you sure you want to delete it.")); echo "')\" />";
@@ -70,7 +94,7 @@ function edit_var($var_arr) {
 }
 
 function add_var($stratatata, $stratatata_arr=null) {
-  global $var;
+  global $var, $allvars;
   echo "<div id='add_var_div_$stratatata'><form method=post>";
   echo "<input type='hidden' name='strata' value='";ehe($stratatata);echo "'  />";
   echo "<input type='hidden' name='var_name' value='";ehe($var);echo "'  />";
@@ -79,7 +103,18 @@ function add_var($stratatata, $stratatata_arr=null) {
     eoption($stratatata_arr, null);
     echo "</select> ";
   }
-  echo "<input type='text' class='int' name='var_value' value='' size='30' />";
+  if (is_array( $allvars['DEFAULT'][null][$var]['type'] )) {
+    echo "<ul>";
+    foreach ($allvars['DEFAULT'][null][$var]['type'] as $kk => $vv) {
+      echo "<li>";
+      echo "<label for='add_for_$var'>$vv</label>";
+      echo "<input type='text' class='int' id='add_for_$var' name='var_value_arr[$kk]' value='' size='30' />";
+      echo "</li>";
+    }
+    echo "</ul>";
+  } else {
+    echo "<input type='text' class='int' name='var_value' value='' size='30' />";
+  }
   echo "<br/>";
   echo "<input type='button' class='inb cancel' name='cancel' value='"._('Cancel')."' onclick=\"$('#add_var_div_$stratatata').toggle();\" />";
   echo "<input type='submit' class='inb ok' value='"._("Apply")."'/>";
@@ -95,12 +130,12 @@ foreach ( $variables->strata_order as $strata) {
   echo "<td>"; __($strata); echo "</td>";
   switch($strata) {
     case 'DEFAULT':
-      echo "<td>".$allvars['DEFAULT'][null][$var]['value']."</td>";
+      echo "<td>"; $variables->display_value_html($allvars, 'DEFAULT', null, $var); echo "</td>";
       break;
     case 'GLOBAL':
       echo "<td>";
       if ( isset($allvars['GLOBAL'][null][$var]) && is_array($allvars['GLOBAL'][null][$var])){
-        echo "<a href='javascript:edit_var(".$allvars['GLOBAL'][null][$var]['id'].");'>".$allvars['GLOBAL'][null][$var]['value']."</a>";
+        echo "<a href='javascript:edit_var(".$allvars['GLOBAL'][null][$var]['id'].");'>"; $variables->display_value_html($allvars, 'GLOBAL', null, $var); echo "</a>";
         edit_var($allvars['GLOBAL'][null][$var]);
       } else {
         echo "<a href='javascript:add_var(\"$strata\");'>"._("Add")."</a>";
@@ -114,7 +149,7 @@ foreach ( $variables->strata_order as $strata) {
         foreach ($allvars['FQDN_CREATOR'] as $ttk => $ttv ) {
           if ( isset($ttv[$var]) && is_array( $ttv[$var])) {
             echo sprintf(_("Overwritted by %s"), $members[$ttk]['login'])." &rarr; ";
-            echo "<a href='javascript:edit_var(".$ttv[$var]['id'].");'>".$ttv[$var]['value']."</a>";
+            echo "<a href='javascript:edit_var(".$ttv[$var]['id'].");'>"; echo $variables->display_valueraw_html($ttv[$var]['value'], $var);echo "</a>";
             edit_var($ttv[$var]);
           }
           echo "<br/>";
@@ -130,7 +165,7 @@ foreach ( $variables->strata_order as $strata) {
         foreach ($allvars['FQDN'] as $ttk => $ttv ) {
           if ( isset($ttv[$var]) && is_array( $ttv[$var])) {
             echo sprintf(_("Overwritted by %s"), $panel_url[$ttk])." &rarr; ";
-            echo "<a href='javascript:edit_var(".$ttv[$var]['id'].");'>".$ttv[$var]['value']."</a>";
+            echo "<a href='javascript:edit_var(".$ttv[$var]['id'].");'>"; echo $variables->display_valueraw_html($ttv[$var]['value'], $var);echo "</a>";
             edit_var($ttv[$var]);
           }
           echo "<br/>";
@@ -146,7 +181,7 @@ foreach ( $variables->strata_order as $strata) {
         foreach ($allvars['CREATOR'] as $ttk => $ttv ) {
           if ( isset($ttv[$var]) && is_array( $ttv[$var])) {
             echo sprintf(_("Overwritted by %s"), $members[$ttk]['login'])." &rarr; ";
-            echo "<a href='javascript:edit_var(".$ttv[$var]['id'].");'>".$ttv[$var]['value']."</a>";
+            echo "<a href='javascript:edit_var(".$ttv[$var]['id'].");'>"; echo $variables->display_valueraw_html($ttv[$var]['value'], $var);echo "</a>";
             edit_var($ttv[$var]);
           }
           echo "<br/>";
@@ -162,7 +197,7 @@ foreach ( $variables->strata_order as $strata) {
         foreach ($allvars['MEMBER'] as $ttk => $ttv ) {
           if ( isset($ttv[$var]) && is_array( $ttv[$var])) {
             echo sprintf(_("Overwritted by %s"), $members[$ttk]['login'])." &rarr; ";
-            echo "<a href='javascript:edit_var(".$ttv[$var]['id'].");'>".$ttv[$var]['value']."</a>";
+            echo "<a href='javascript:edit_var(".$ttv[$var]['id'].");'>"; echo $variables->display_valueraw_html($ttv[$var]['value'], $var);echo "</a>";
             edit_var($ttv[$var]);
           }
           echo "<br/>";
