@@ -72,7 +72,7 @@ class m_variables {
     global $db, $err;
 
     $arr_var=$this->variables_list();
-  
+
     // Get some vars we are going to need.
     if ($fqdn != NULL) {
       $sub_infos=m_dom::get_sub_domain_id_and_member_by_name( strtolower($fqdn) );
@@ -124,7 +124,6 @@ class m_variables {
 
     } //foreach
 
-  #printvar($variables);die();
     if ($var && isset($variables[$var])) {
       return $variables[$var];
     } else {
@@ -207,8 +206,14 @@ class m_variables {
   function variable_update_or_create($var_name, $var_value, $strata=null, $strata_id=null, $var_id=null, $comment=null) {
     global $db, $err;
     $err->log('variable', 'variable_update_or_create');
+    if ( strtolower($var_id) == 'null' ) $var_id = null;
+    if ( strtolower($strata_id) == 'null' ) $strata_id = null;
+
+    if (is_object($var_value) || is_array($var_value)) {
+      $var_value = serialize($var_value);
+    }
     
-    if ($var_id) {
+    if ( ! is_null($var_id) ) {
       $sql="UPDATE variable SET value='".mysql_real_escape_string($var_value)."' WHERE id = ".intval($var_id);
     } else {
       if ( empty($strata) ) {
@@ -221,7 +226,7 @@ class m_variables {
               '".mysql_real_escape_string($var_name)."', 
               '".mysql_real_escape_string($var_value)."', 
               '".mysql_real_escape_string($strata)."', 
-              ".( is_null($strata_id)?'null':"'".mysql_real_escape_string($strata_id)."'").",
+              ".( is_null($strata_id)?'NULL':"'".mysql_real_escape_string($strata_id)."'").",
               '".mysql_real_escape_string($comment)."' );";
     }
 
