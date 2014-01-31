@@ -21,6 +21,8 @@ $fields = array (
 );
 getFields($fields);
 
+/* * /
+// Variable pour test
 variable_get("aaa_test3", 
 array(
   "ns1"=> 
@@ -71,7 +73,8 @@ array(
      "type"=>"integer",
    ),
 )
- ); 
+); 
+/* */
 
 
 if (empty($var)) {
