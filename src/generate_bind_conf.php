@@ -132,9 +132,11 @@ class m_bind_regenerate {
 
   function dkim_delete($domain) {
     $target_dir = "/etc/opendkim/keys/$domain";
-    @unlink("$target_dir/alternc_private");
-    @unlink("$target_dir/alternc.txt");
-    @rmdir($target_dir);
+    if (file_exists($target_dir)) {
+      @unlink("$target_dir/alternc_private");
+      @unlink("$target_dir/alternc.txt");
+      @rmdir($target_dir);
+    }
     return true;
   }
 
@@ -344,13 +346,16 @@ class m_bind_regenerate {
   // Regenerate bind configuration and load it
   function regenerate_conf($all=false) {
     foreach ($this->get_domain_summary() as $domain => $ds ) {
-      if ( ! $ds['gesdns'] ) continue; // Skip if we do not manage DNS for this domain
+      if ( ! $ds['gesdns'] && strtoupper($ds['dns_action']) == 'OK' ) continue; // Skip if we do not manage DNS and is up-to-date for this domain
 
-      if ( strtoupper($ds['dns_action']) == 'DELETE' ) { 
+      if ( (strtoupper($ds['dns_action']) == 'DELETE' ) || 
+           (strtoupper($ds['dns_action']) == 'UPDATE' && $ds['gesdns']==false ) // in case we update the zone to disable DNS management
+         ) { 
         $this->delete_zone($domain);
+        continue;
       }
 
-      if ($all || strtoupper($ds['dns_action']) == 'UPDATE' ) {
+      if ($all || ( strtoupper($ds['dns_action']) == 'UPDATE' && $ds['gesdns'] )) {
         $this->save_zone($domain);
         $this->reload_zone($domain);
         // FIXME reload zone hooks
