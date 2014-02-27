@@ -160,8 +160,7 @@ $classes=array();
 /* CLASSES PHP : automatic include : */
 foreach ( glob( $root."class/m_*.php") as $di ) {
   if (preg_match("#${root}class/m_(.*)\\.php$#",$di,$match)) { // $
-    $name=$match[1];
-    $classes[]=$name;
+    $classes[]=$match[1];
     require_once($di);
   }
 }
