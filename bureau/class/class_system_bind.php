@@ -271,7 +271,10 @@ class system_bind {
   }
 
   function reload_zone($domain) {
-    exec($this->RNDC." reload ".escapeshellarg($domain));
+    exec($this->RNDC." reload ".escapeshellarg($domain), $output, $return_value);
+    if ($return_value != 0 ) {
+      echo "ERROR: Reload zone failed for zone $domain\n";
+    }
   }
 
   // return true if zone is locked
@@ -348,7 +351,7 @@ class system_bind {
         continue;
       }
 
-      if ($all || ( strtoupper($ds['dns_action']) == 'UPDATE' && $ds['gesdns'] )) {
+      if ( ( $all || strtoupper($ds['dns_action']) == 'UPDATE' ) && $ds['gesdns'] ) {
         $this->save_zone($domain);
         $this->reload_zone($domain);
         $hooks->invoke_scripts("/usr/lib/alternc/reload.d", array('dns_reload_zone', $domain)  );
