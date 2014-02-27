@@ -15,7 +15,7 @@ fi
 
 
 if [[ ! "$(id -u)" == "0" ]] ; then
-  echo "please launch mem_add as root (or using sudo)"
+  echo "please launch mem_del as root (or using sudo)"
   exit 4
 fi
 
