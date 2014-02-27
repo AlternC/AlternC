@@ -5,7 +5,7 @@
   *
   * Generate Bind configuration for AlternC
   *
-  * To force generation, /launch/generate_bind_conf.php force
+  * To force generation, /launch/generate_bind_conf.php --force
   *
   *
  **/
@@ -15,6 +15,10 @@ ini_set("display_errors", 1);
 
 $bind = new system_bind();
 
-//$bind->regenerate_conf(true); // use it to force regeneration
-$bind->regenerate_conf();
+$force = false;
+if (in_array('--force', $argv)) { // Want to force
+  $force=true;
+}
+
+$bind->regenerate_conf($force);
 
