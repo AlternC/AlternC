@@ -391,6 +391,7 @@ bureau/admin/vm.php -text
 bureau/admin/webmail-redirect.php -text
 bureau/admin/xhprof_footer.php -text
 bureau/admin/xhprof_header.php -text
+bureau/class/class_system_bind.php -text
 bureau/class/config.php -text
 bureau/class/config_nochk.php -text
 bureau/class/db_mysql.php -text

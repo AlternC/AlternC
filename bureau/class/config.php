@@ -158,20 +158,25 @@ $cuid=0;
 
 $classes=array();
 /* CLASSES PHP : automatic include : */
-$c=opendir($root."class/");
-while ($di=readdir($c)) {
-  if (preg_match("#^m_(.*)\\.php$#",$di,$match)) { // $
-    $name1="m_".$match[1];
-    $name2=$match[1];
-    $classes[]=$name2;
-    require_once($root."class/".$name1.".php");
+foreach ( glob( $root."class/m_*.php") as $di ) {
+  if (preg_match("#${root}class/m_(.*)\\.php$#",$di,$match)) { // $
+    $name=$match[1];
+    $classes[]=$name;
+    require_once($di);
   }
 }
-closedir($c);
 /* THE DEFAULT CLASSES ARE :
    dom, ftp, mail, quota, bro, admin, mem, mysql, err, variables
 */
 
+// Load file for the system class.
+// Those class will not be build by default.
+// They may contain forbidden action for the panel, for example: exec, system
+// or files operations
+// We can imagine load those class only for command-line scripts.
+foreach ( glob( $root."class/class_system_*.php") as $fcs ) {
+  if (is_readable($fcs)) require_once($fcs);
+}
 
 /* Language */
 include_once("lang_env.php");

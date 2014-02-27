@@ -45,32 +45,7 @@ echo $$ > "$LOCK_FILE"
 # set sub_domaines.web_action = delete where domaines.dns_action = DELETE
 mysql_query "update sub_domaines sd, domaines d set sd.web_action = 'DELETE' where sd.domaine = d.domaine and sd.compte=d.compte and d.dns_action = 'DELETE';"
 
-# Domains we do not want to be the DNS serveur anymore :
-# domaines.dns_action = UPDATE and domaines.gesdns = 0
-for dom in `mysql_query "select domaine from domaines where dns_action = 'UPDATE' and gesdns = 0;"| tr '\n' ' '`
-do
-    dns_delete $dom
-    mysql_query "update domaines set dns_action = 'OK', dns_result = '$?' where domaine = '$dom'"
-done
-
-# Domains we have to update the dns :
-# domaines.dns_action = UPDATE
-for dom in `mysql_query "select domaine from domaines where dns_action = 'UPDATE';" | tr '\n' ' '`
-do
-    echo "dns_regenerate : domain=/$dom/"
-    dns_regenerate $dom
-    mysql_query "update domaines set dns_action = 'OK', dns_result = '$?' where domaine = '$dom'"
-done
-
-# Domains we want to delete completely, now we do it
-# domaines.dns_action = DELETE
-for dom in `mysql_query "select domaine from domaines where dns_action = 'DELETE';" | tr '\n' ' '`
-do
-    dns_delete $dom
-    # Web configurations have already bean cleaned previously
-    mysql_query "delete from sub_domaines where domaine='$dom'; delete from domaines where domaine='$dom';"
-done
-
+# Launc apache script. If the script said so, reload apache.
 if [ $(/usr/lib/alternc/generate_apache_conf.php) -gt 0 ] ; then
 
   # We must reload apache
@@ -78,15 +53,12 @@ if [ $(/usr/lib/alternc/generate_apache_conf.php) -gt 0 ] ; then
   /usr/lib/alternc/alternc_reload apache || true
 
   # Launch hooks for apache reload
+  # In this directory, you can add you remote web server control
   run-parts --arg=web_reload /usr/lib/alternc/reload.d
 fi
 
-## FIXME : move the slave part into the /usr/lib/alternc/reload.d directory to be an hook
-#for slave in $ALTERNC_SLAVES; do
-#    if [ "$slave" != "localhost" ]; then
-#        ssh alternc@$slave alternc_reload 'apache' || true
-#    fi
-#done
+# Do bind updates
+/usr/lib/alternc/generate_bind_conf.php
 
 rm -f "$LOCK_FILE" "$RELOAD_ZONES" "$INOTIFY_UPDATE_DOMAIN"
 

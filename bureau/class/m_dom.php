@@ -1947,8 +1947,6 @@ function generate_conf_oldhook($action, $lst_sub, $sub_obj=null) {
       system($cmd);
     }
   } // foreach $lst_by_type
-
-
 }
 
 /**

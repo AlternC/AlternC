@@ -74,5 +74,38 @@ class m_hooks {
     return $val;
   }
 
+  // $scripts a script or a directory
+  // invoke each executable script of the directory (or the specified script)
+  // with the parameters 
+  function invoke_scripts($scripts, $parameters) {
+
+    // First, build the list of script we want to launch
+    $to_launch=array();
+    if (is_file($scripts)) {
+      if (is_executable($script)) {
+        $to_launch[]=$scripts;
+      }
+    } else if (is_dir($scripts)) {
+      foreach ( scandir($scripts) as $ccc ) {
+        if (is_file($ccc) && is_executable($ccc)) {
+          $to_launch[]=$ccc;
+        }
+      }
+    } else {
+      // not a file nor a directory
+      return false;
+    } 
+  
+    // Protect each parameters
+    $parameters = array_map('escapeshellarg', $parameters);
+    $params = implode(" ", $parameters);
+
+    // Launch !
+    foreach($to_launch as $fi) {
+      system($fi." ".$params);
+    }
+    return true;
+  }
+
 } /* Class hooks */
 
