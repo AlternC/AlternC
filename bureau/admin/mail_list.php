@@ -63,28 +63,30 @@ if ($fatal) {
   if (!empty($error)) { echo "<p class='alert alert-danger'>$error</p>"; }
 ?>
 
-<table><tr>
-<?php
-// Mail creation form
-if ($quota->cancreate("mail")) {
-?>
-<td>
-<h3><?php __("Create a new mail account");?></h3>
-	<form method="post" action="mail_doadd.php" id="main" name="mail_create">
-		<input type="text" class="int intleft" style="text-align: right" name="mail_arg" value="<?php ehe($mail_arg); ?>" size="32" id="mail_arg" maxlength="255" /><span id="emaildom" class="int intright"><?php echo "@".$domain; ?></span>
-		<input type="hidden" name="domain_id"  value="<?php echo $domain_id;?>" />
-		<input type="submit" name="submit" class="inb add" value="<?php __("Create this email address"); ?>"  onClick="return false_if_empty('mail_arg', '<?php echo addslashes(_("Can't have empty mail."));?>');" />
-<?php }?>
-<span class="inb configure"><a href="mail_manage_catchall.php?domain_id=<?php echo $domain_id?>"><?php __("Manage Catch-all for this domain");?></a></span> 
+<table>
+  <tr>
+    <td colspan=2>
+<?php if ($quota->cancreate("mail")) {
+  echo '<h3>'._("Create a new mail account")."</h3>";
+} else {
+  echo '<h3>'._("Manage Catch-all")."</h3>";
+} ?>
+    </td>
+  </tr>
+  <tr>
+    <td>
 <?php if ($quota->cancreate("mail")) { ?>
-	</form>
-</td>
-<?php 
-}
-?>
-<td valign='bottom'>
-</td>
-</tr>
+    <form method="post" action="mail_doadd.php" id="main" name="mail_create">
+      <input type="text" class="int intleft" style="text-align: right" name="mail_arg" value="<?php ehe($mail_arg); ?>" size="32" id="mail_arg" maxlength="255" /><span id="emaildom" class="int intright"><?php echo "@".$domain; ?></span>
+      <input type="hidden" name="domain_id"  value="<?php echo $domain_id;?>" />
+      <input type="submit" name="submit" class="inb add" value="<?php __("Create this email address"); ?>"  onClick="return false_if_empty('mail_arg', '<?php echo addslashes(_("Can't have empty mail."));?>');" />
+    </form>
+<?php } // $quota->cancreate("mail") ?>
+    </td>
+    <td>
+      <span class="inb configure" valign='bottom'><a href="mail_manage_catchall.php?domain_id=<?php echo $domain_id?>"><?php __("Manage Catch-all for this domain");?></a></span> 
+    </td>
+  </tr>
 </table>
 
 <br />
