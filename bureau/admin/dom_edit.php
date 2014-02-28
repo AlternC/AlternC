@@ -292,7 +292,7 @@ if (!$r['noerase']) {
 </div> <!-- tabsdom -->
 <?php } // noerase ?>
 <script type="text/javascript">
-document.forms['main'].sub.focus();
+//document.forms['main'].sub.focus(); // not with tabs
 
 $(function() {
   $("#tabsdom").tabs();
