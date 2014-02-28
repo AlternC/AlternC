@@ -30,11 +30,6 @@ mt_srand((float) $sec + ((float) $usec * 100000));
 /* Format a field value for input or textarea : */
 function fl($str) { return str_replace("<","&lt;",str_replace("\"","&quot;",$str)); }
 
-/* Used by class/m_log.php for usort */
-function compare_logname($a, $b) {
-  return strcmp($a['name'],$b['name']);
-}
-
 function variable_get($name, $default = null, $createit_comment = null, $type=null) {
   global $variables;
   return $variables->variable_get($name, $default, $createit_comment, $type);

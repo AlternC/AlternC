@@ -36,24 +36,23 @@ class m_log {
     $err->log("log","list_logs_directory");
 
     $c=array();
-    $dir2=$dir;
-    if ($dir = @opendir($dir)) {
-      while (($file = readdir($dir)) !== false) {
-        if ($file!="." && $file!=".." && realpath($dir2 . "/" . $file) == $dir2 . "/" . $file){
-          $absfile=$dir2."/".$file;
-          $c[]=array("name"=>$file, 
-                     "creation_date"=>date("F d Y H:i:s.", filectime($absfile)),
-                     "filesize"=>filesize($absfile),
-                     "downlink"=>"logs_download.php?file=".urlencode($file),
-                    );
-        }    
-      }
-      closedir($dir);
+    foreach( glob("${dir}/*log*") as $absfile) {
+        $c[]=array("name"=>basename($absfile), 
+                   "creation_date"=>date("F d Y H:i:s.", filectime($absfile)),
+                   "filesize"=>filesize($absfile),
+                   "downlink"=>"logs_download.php?file=".urlencode(basename($absfile)),
+                  );
     }
-    usort($c,"compare_logname");
+    usort($c,"m_log::compare_logname");
     return $c;
 
   }//list_logs
+
+  // Used by list_logs_directory to sort
+  private function compare_logname($a, $b) {
+    return strcmp($a['name'],$b['name']);
+  }
+
 
   function hook_menu() {
     $obj = array(
