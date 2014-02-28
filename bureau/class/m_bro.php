@@ -547,7 +547,7 @@ class m_bro {
       return false;
     }
     if (!strpos($_FILES['userfile']['name'],"/")) {
-      if (is_uploaded_file($_FILES['userfile']['tmp_name'])) {
+      if ($_FILES['userfile']['error'] ==  UPLOAD_ERR_OK && is_uploaded_file($_FILES['userfile']['tmp_name'])) {
         if (!file_exists($absolute."/".$_FILES['userfile']['name'])) {
           @touch($absolute."/".$_FILES['userfile']['name']);
         }
@@ -559,7 +559,23 @@ class m_bro {
 	  return false;
 	}
       } else {
-	$err->log("bro","uploadfile","Tentative d'attaque : ".$_FILES['userfile']['tmp_name']);
+        // there was an error, raise it
+	$err->log("bro","uploadfile","Problem when uploading a file");
+        switch ( $_FILES['userfile']['error'] ) {
+          case UPLOAD_ERR_INI_SIZE:
+            $erstr=_("The uploaded file exceeds the max file size allowed");
+            break;
+          case UPLOAD_ERR_FORM_SIZE:
+          case UPLOAD_ERR_PARTIAL:
+          case UPLOAD_ERR_NO_FILE:
+          case UPLOAD_ERR_NO_TMP_DIR:
+          case UPLOAD_ERR_CANT_WRITE:
+          case UPLOAD_ERR_EXTENSION:
+          default:
+            $erstr=_("Undefined error ").$_FILES['userfile']['error'];
+            break;
+        }
+        $err->raise("bro",_("Error during the upload of the file: ").$erstr);
         return false;
       }
     }
@@ -1049,6 +1065,9 @@ class m_bro {
 
   }
 
+  function getMaxAllowedUploadSize() {
+     return min(ini_get('post_max_size'), ini_get('upload_max_filesize'));
+  }
 
 } /* Class Browser */
 

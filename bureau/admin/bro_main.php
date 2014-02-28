@@ -184,10 +184,9 @@ if (isset($error) && $error) echo "<p class=\"alert alert-danger\">$error</p>";
 
 <?php __("Send one file:"); ?><br />
 <input class="int" name="userfile" type="file" />
-<input type="hidden" name="MAX_FILE_SIZE" value="10000000" /><?php ### WTF ???? ?>
 <br />
 <input type="submit" id="sendthisfile" class="ina" value="<?php __("Send this file"); ?>" />
-<?php echo sprintf(_("Warning: max size: %s"),ini_get('upload_max_filesize')); ?>
+<?php echo sprintf(_("Warning: max size: %s"),$bro->getMaxAllowedUploadSize() ); ?>
 </form>
 
 </td>
