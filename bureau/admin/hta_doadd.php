@@ -35,6 +35,12 @@ $fields = array (
 );
 getFields($fields);
 
+if(empty($dir)) {
+	$error=_("No directory specified");
+	include("hta_list.php");
+	exit();
+}
+
 if(!$hta->CreateDir($dir)) {
 	$error=$err->errstr();
 	include("hta_add.php");

@@ -38,30 +38,33 @@ getFields($fields);
 ?>
 <h3><?php __("Protect a folder"); ?></h3>
 <hr id="topbar"/>
-<br />
+<br/>
 <p>
 <?php __("Enter the name of the folder you want to protect. It must already exists."); ?>
 </p>
 <?php
-	if (isset($error) && $error) {
-		echo "<p class=\"alert alert-danger\">$error</p>";
-		include_once("foot.php");
-		exit;
-	}
-?>
+if (isset($error) && $error) {
+  echo "<p class=\"alert alert-danger\">$error</p>";
+  include_once("foot.php");
+  exit;
+} ?>
+
 <form method="post" action="hta_doadd.php" name="main" id="main">
-<table border="1" cellspacing="0" cellpadding="4" class='tedit'>
-<tr>
-	<th><label for="dir"><?php __("Folder"); ?></label></th>
-	<td><input type="text" class="int" name="dir" id="dir" value="<?php (isset($dir)) ? : $dir="";ehe($dir); ?>" maxlength="255" />
-			<?php display_browser( ehe($dir,0) , "main.dir" ); ?>
-</td>
-</tr>
-</table>
-<br />
-<input type="submit" class="inb lock" value="<?php __("Protect this folder"); ?>" />
+  <table border="1" cellspacing="0" cellpadding="4" class='tedit'>
+    <tr>
+      <th><label for="dir"><?php __("Folder"); ?></label></th>
+      <td>
+        <input type="text" class="int" name="dir" id="dir" value="<?php (isset($dir)) ? : $dir="";ehe($dir); ?>" maxlength="255" />
+        <?php display_browser( ehe($dir,0) , "main.dir" ); ?>
+      </td>
+    </tr>
+  </table>
+  <br />
+  <input type="submit" class="inb lock" value="<?php __("Protect this folder"); ?>" onClick="return false_if_empty('dir', '<?php echo addslashes(_("Can't have empty directory."));?>');" />
 </form>
+
 <script type="text/javascript">
-document.forms['main'].dir.focus();
+  document.forms['main'].dir.focus();
 </script>
+
 <?php include_once("foot.php"); ?>
