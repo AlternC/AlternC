@@ -312,7 +312,7 @@ function actmoveto_not_empty() {
       case 0:
         /* AFFICHE 1 COLONNE DETAILLEE */
         reset($c);
-        echo "<table width=\"100%\" class=\"tlist\" style=\"border: 0px\" cellpadding=\"2\" cellspacing=\"0\">";
+        echo "<table width=\"100%\" id='tab_files_w_details' class=\"tlist\" style=\"border: 0px\" cellpadding=\"2\" cellspacing=\"0\"><thead>";
         ?>
           <tr><th>
           <script type="text/javascript">
@@ -331,7 +331,7 @@ function actmoveto_not_empty() {
                 <th><?php __("File Type"); ?></th>
                   <?php } ?>
                   <th></th>
-                  </tr>
+                  </tr></thead><tbody>
                   <?php
 
         for($i=0;$i<count($c);$i++) {
@@ -401,7 +401,7 @@ function actmoveto_not_empty() {
 
           echo "</tr>\n";
         }
-        echo "</table>";
+        echo "</tbody></table>";
         break;
       case 1:
         /* AFFICHE 2 COLONNES COURTES */
@@ -615,4 +615,9 @@ else {
 </span> 
 </p>
 </td></tr></table>
+
+<script type="text/javascript">
+$(document).ready(function() {  $("#tab_files_w_details").tablesorter(); } ); 
+</script>
+
 <?php include_once("foot.php"); ?>
