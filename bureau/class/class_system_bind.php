@@ -291,7 +291,7 @@ class system_bind {
 
     // Do not save if the zone is LOCKED
     if ( $this->is_locked($domain)) {
-      $dom->set_dns_result($domain,"The zone file of this domain is locked");
+      $dom->set_dns_result($domain, "The zone file of this domain is locked. Contact your administrator."); // If edit, change dummy_for_translation
       $dom->set_dns_action($domain, 'OK');
       return false;
     }
@@ -366,6 +366,10 @@ class system_bind {
     $this->reload_named();
 
     return;
+  }
+
+  private function dummy_for_translation() {
+    _("The zone file of this domain is locked. Contact your administrator.");
   }
 
 } // class
