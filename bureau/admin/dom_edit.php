@@ -130,12 +130,22 @@ if (! empty($r['dns_result']) && $r['dns_result'] != '0') {
 
 <div id="tabsdom-editsub">
 <h3><?php printf(_("Editing subdomains of %s"),$domain); ?></h3>
+<?php
+$dt=$dom->domains_type_lst();
+
+$problems = $dom->get_problems($domain);
+if ( ! empty($problems) ) {
+  echo '<p class="alert alert-danger">';
+  foreach ($problems as $p) echo $p."</br>";
+  echo "</p>";
+}
+
+?>
 <table class="tlist" id="dom_edit_table">
 <thead>
 <tr><th colspan="2"> </th><th><?php __("Subdomain"); ?></th><th><?php __("Type");?></th><th><?php __("Status")?></th><th></th></tr>
 </thead>
 <?php
-$dt=$dom->domains_type_lst();
 for($i=0;$i<$r["nsub"];$i++) {
 
 $disabled_class=in_array(strtoupper($r['sub'][$i]['enable']),array('DISABLED','DISABLE') )?'sub-disabled':'';
@@ -155,9 +165,7 @@ $disabled_class=in_array(strtoupper($r['sub'][$i]['enable']),array('DISABLED','D
 <?php } ?>
 		</td>
     <?php } // end IF ==DELETE ?>
-		<td><div class="retour-auto <?php echo $disabled_class; ?>"><a href="http://<?php ecif($r["sub"][$i]["name"],$r["sub"][$i]["name"]."."); echo $r["name"] ?>" target="_blank"><?php 
-				echo ecif($r["sub"][$i]["name"] , $r["sub"][$i]["name"]."." , "" , 0) . $r["name"];
-			?></a></div></td>
+		<td><div class="retour-auto <?php echo $disabled_class; ?>"><a href="http://<?php echo $r["sub"][$i]["fqdn"] ?>" target="_blank"><?php echo $r["sub"][$i]["fqdn"]; ?></a></div></td>
   <td><div class="retour-auto <?php echo $disabled_class; ?>"><?php if ($r['sub'][$i]['type_desc']) { __($r['sub'][$i]['type_desc']); } else { echo __("ERROR, please check your server setup"); } ?>
  <?php 
  //if ($r["sub"][$i]['type'] === 'VHOST') {

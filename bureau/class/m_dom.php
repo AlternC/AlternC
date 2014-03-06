@@ -1119,6 +1119,7 @@ class m_dom {
       $r["sub"][$i]["type_desc"]=$db->Record["type_desc"];
       $r["sub"][$i]["only_dns"]=$db->Record["only_dns"];
       $r["sub"][$i]["web_action"]=$db->Record["web_action"];
+      $r["sub"][$i]["fqdn"]= ((!empty($r["sub"][$i]["name"]))?$r["sub"][$i]["name"].".": "").$r["name"] ;
     }
     $db->free();
     return $r;
@@ -1481,7 +1482,7 @@ class m_dom {
     }
     
     $db->query("UPDATE domaines SET gesdns='$dns', gesmx='$gesmx', zonettl='$ttl' WHERE domaine='$dom'");
-    $db->query("UPDATE domaines set dns_action='UPDATE' where domaine='$dom';");
+    $dom->set_dns_action($dom, 'UPDATE');
     
     return true;
   } // edit_domain
@@ -2052,6 +2053,32 @@ function generate_apacheconf($p = null) {
 		 );
   }
 
+  // List if there is problems in the domains.
+  // Problems can appear when editing domains type properties
+  function get_problems($domain) {
+    $this->lock();
+    $da = $this->get_domain_all($domain);
+    $this->unlock();
+
+    $errors = array();
+    // Check if there is more than 1 apache conf
+    // by subdomain
+    $tmp = array();
+    foreach ( $da['sub'] as $sub ) {
+      if ( ! $sub['only_dns'] ) {
+        if (!isset($tmp[$sub['fqdn']])) {
+          $tmp[$sub['fqdn']] = 0;
+        }
+        $tmp[$sub['fqdn']]++;
+        if ($tmp[$sub['fqdn']] >= 2 ) {
+          $errors[$sub['fqdn']]=sprintf(_("Problem on %s: there is more than 1 web configuration going to be generated for this sub-domain."), $sub['fqdn']);
+        }
+      }
+    }
+    // TODO: add a full compatibility check.
+   
+    return $errors;
+  }
 
   function default_domain_type() {
     // This function is only used to allow translation of default domain types:
