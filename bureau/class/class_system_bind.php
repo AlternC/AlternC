@@ -279,7 +279,7 @@ class system_bind {
 
   // return true if zone is locked
   function is_locked($domain) {
-    preg_match_all("/(\;\s*LOCKED:YES)/i", $this->get_zone($domain), $output_array);
+    preg_match_all("/(\;\s*LOCKED:YES)/i", $this->get_zone_file($domain), $output_array);
     if (isset($output_array[1][0]) && !empty($output_array[1][0])) {
       return true;
     }
@@ -287,10 +287,14 @@ class system_bind {
   }  
 
   function save_zone($domain) {
-    global $db;
+    global $db, $dom;
 
     // Do not save if the zone is LOCKED
-    if ( $this->is_locked($domain)) return false;
+    if ( $this->is_locked($domain)) {
+      $dom->set_dns_result($domain,"The zone file of this domain is locked");
+      $dom->set_dns_action($domain, 'OK');
+      return false;
+    }
  
     // Save file, and apply chmod/chown
     $file=$this->get_zone_file_uri($domain);
@@ -298,7 +302,7 @@ class system_bind {
     chown($file, 'bind');
     chmod($file, 0640);
 
-    $db->query("UPDATE domaines SET dns_action = 'OK' WHERE domaine = '".mysql_escape_string($domain)."';");
+    $dom->set_dns_action($domain, 'OK');
     return true; // fixme add tests
   }
 

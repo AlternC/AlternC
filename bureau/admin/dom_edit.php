@@ -108,6 +108,10 @@ if ($r['dns_action']=='UPDATE') {?>
   die();
 }
 
+if (! empty($r['dns_result']) && $r['dns_result'] != '0') {
+  echo '<p class="alert alert-warning">'; __($r['dns_result']); echo '</p>';
+}
+
 ?>
 
 

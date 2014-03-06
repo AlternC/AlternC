@@ -544,7 +544,7 @@ class m_dom {
     } 
 
     $db->query("update sub_domaines set enable='$status' where id = '".intval($sub_id)."';");
-    $db->query("UPDATE domaines SET dns_action='UPDATE'  WHERE domaine='".mysql_escape_string($jh['domain'])."';");
+    $this->set_dns_action($jh['domain'], 'UPDATE');
 
     return true;
   } 
@@ -577,7 +577,7 @@ class m_dom {
     $err->log("dom","del_domaini_canl",$dom);
     $dom=strtolower($dom);
     $db->query("UPDATE sub_domaines SET web_action='UPDATE'  WHERE domaine='$dom';");
-    $db->query("UPDATE domaines SET dns_action='UPDATE'  WHERE domaine='$dom';");
+    $this->set_dns_action($dom, 'UPDATE');
 
     # TODO : some work with domain sensitive classes
 
@@ -617,7 +617,7 @@ class m_dom {
 
     // Now mark the domain for deletion:
     $db->query("UPDATE sub_domaines SET web_action='DELETE'  WHERE domaine='$dom';");
-    $db->query("UPDATE domaines SET dns_action='DELETE'  WHERE domaine='$dom';");
+    $this->set_dns_action($dom, 'DELETE');
 
     return true;
   }
@@ -2024,6 +2024,18 @@ function generate_apacheconf($p = null) {
         $sql="UPDATE sub_domaines SET web_action='OK' WHERE id='$sub_domain_id'; ";
     }
     $db->query($sql);
+    return true;
+  }
+
+  function set_dns_action($domain, $dns_action) {
+    global $db;
+    $db->query("UPDATE domaines SET dns_action='".mysql_escape_string($dns_action)."' WHERE domaine='".mysql_escape_string($domain)."'; ");
+    return true;
+  }
+
+  function set_dns_result($domain, $dns_result) {
+    global $db;
+    $db->query("UPDATE domaines SET dns_result='".mysql_escape_string($dns_result)."' WHERE domaine='".mysql_escape_string($domain)."'; ");
     return true;
   }
 
