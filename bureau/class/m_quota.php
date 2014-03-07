@@ -459,7 +459,8 @@ class m_quota {
 
   /* sum of mailbox sizes for one domain */
   function get_size_mail_sum_domain($dom) {
-    return $this->_get_sum_sql("SELECT SUM(quota_dovecot) AS sum FROM dovecot_view WHERE user LIKE '%@{$dom}';"); 
+    global $mail;
+    return $mail->get_total_size_for_domain($dom);
   }
 
   /* count of mailbox sizes from all domains */

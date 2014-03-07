@@ -75,6 +75,7 @@ class m_mail {
   var $srv_pop3;
   var $srv_pop3s;
 
+  var $cache_domain_mail_size = array();
   /* ----------------------------------------------------------------- */
   /** 
    * Constructeur
@@ -108,6 +109,19 @@ class m_mail {
      }
 
      return $obj;
+  }
+
+  function get_total_size_for_domain($domain) {
+    global $db;
+    if (empty($this->cache_domain_mail_size)) {
+      $db->query("SELECT SUBSTRING_INDEX(user,'@', -1) as domain, SUM(quota_dovecot) AS sum FROM dovecot_view group by domain ;");
+      while ($db->next_record() ) {
+        $dd = $db->f('domain');
+        $this->cache_domain_mail_size[ $dd ] = $db->f('sum');
+      }
+    }
+    if ( isset( $this->cache_domain_mail_size[$domain]) ) return $this->cache_domain_mail_size[$domain];
+    return 0;
   }
 
   // FIXME documenter
