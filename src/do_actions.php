@@ -34,6 +34,18 @@
  * @copyright AlternC-Team 2002-2013 http://alternc.org/
  */
 
+
+////////////////////////////////// 
+/*
+Fixme
+
+ - handle error correctly
+ - check all those cases
+
+
+*/
+///////////////////////////////////
+
 // Put this var to 1 if you want to enable debug prints
 $debug=1;
 $error_raise='';
@@ -49,6 +61,27 @@ function d($mess){
 function mail_it(){
   global $error_raise,$L_FQDN;
   mail("alterncpanel@$L_FQDN",'Script do_actions.php issues',"\n Errors reporting mail:\n\n$error_raise");
+}
+
+/*
+ * $command: the command
+ * $parameters: of the command (they are going to be protected)
+ * return array('output'=>'output of exec', 'return_var'=>'returned integer of exec') 
+ */
+function execute_cmd($command, $parameters=array()) {
+  $cmd_line = "$command ";
+  if (!empty($parameters)) {
+    if (is_array($parameters)) {
+      foreach($parameters as $pp) {
+        $cmd_line.= " ".escapeshellarg($pp)." ";
+      }
+    } else {
+      $cmd_line.= " ".escapeshellarg($parameters)." " ;
+    }
+  }
+  $cmd_line.= " 2>&1";
+  exec($cmd_line, $output, $code);
+  return array('executed' => $cmd_line, 'output'=>$output, 'return_var'=>$code);
 }
 
 require_once("/usr/share/alternc/panel/class/config_nochk.php");
@@ -135,38 +168,53 @@ while ($rr=$action->get_action()){
   switch ($r["type"]){
     case "FIX_USER" :
       // Create the directory and make parent directories as needed
-      @exec("$FIXPERM -u ".$params["uid"]." 2>&1", $trash, $code);
+      #@exec("$FIXPERM -u ".$params["uid"]." 2>&1", $trash, $code);
+      $returned = execute_cmd("$FIXPERM -u", $params["uid"]);
       break;
     case "CREATE_FILE" :
-      if(!file_exists($params["file"]))
-        @exec("$SU touch ".$params["file"]." 2>&1 ; echo '".$params["content"]."' > '".$params["file"]."' 2>&1", $output);
-      else
-        $output=array("Fail: file already exists");
+      if(!file_exists($params["file"])) {
+        #@exec("$SU touch ".$params["file"]." 2>&1 ; echo '".$params["content"]."' > '".$params["file"]."' 2>&1", $output);
+        if ( file_put_contents($params["file"], $params["content"]) === false ) {
+          $log_error=array("Fail: can't write into file ".$params["file"]);
+        } else {
+          if (!chown($params["file"], $r["user"])) {
+            $log_error=array("Fail: cannot chown ".$params["file"]);
+          }
+        }
+      } else {
+        $log_error=array("Fail: file already exists ".$params["file"]);
+      }
       break;
     case "CREATE_DIR" :
       // Create the directory and make parent directories as needed
-      @exec("$SU mkdir -p ".$params["dir"]." 2>&1",$output);
+      #@exec("$SU mkdir -p ".$params["dir"]." 2>&1",$output);
+      $returned = execute_cmd("$SU mkdir", array('-p', $params["dir"]));
       break;
     case "DELETE" :
       // Delete file/directory and its contents recursively
-      @exec("$SU rm -rf ".$params["dir"]." 2>&1", $output);
+      #@exec("$SU rm -rf ".$params["dir"]." 2>&1", $output);
+      $returned = execute_cmd("$SU rm", array('-rf', $params["dir"]));
       break;
     case "MOVE" :
       // If destination dir does not exists, create it
       if(!is_dir($params["dst"]))
-        @exec("$SU mkdir -p ".$params["dst"]." 2>&1",$output);
-      if(!isset($output[0]))
-        @exec("$SU mv -f ".$params["src"]." ".$params["dst"]." 2>&1", $output);
+        if ( @mkdir($params["dst"], 0777, true)) {
+          if ( @chown($params["dst"], $r["user"]) ) {
+            $returned = execute_cmd("$SU mv -f", array($params["src"], $params["dst"])); 
+          }
+        } else { //is_dir false
+          $log_error=array("Fail: cannot create ".$params["dst"]);
+        } // is_dir
+        
       break;
     case "FIX_DIR" :
-      @exec("$FIXPERM -d ".$params["dir"]." 2>&1", $trash, $code);
-      if($code!=0)
-        $output[0]="Fixperms.sh failed, returned error code : $code";
+      $returned = execute_cmd($FIXPERM, array('-d', $params["dir"]));
+      if($returned['return_val'] != 0) $log_error=array("Fixperms.sh failed, returned error code : ".$returned['return_val']);
       break;
     case "FIX_FILE" :
-      @exec("$FIXPERM -f ".$params["file"]." 2>&1", $trash, $code);
-      if($code!=0)
-        $output[0]="Fixperms.sh failed, returned error code : $code";
+      #@exec("$FIXPERM -f ".$params["file"]." 2>&1", $trash, $code);
+      $returned = execute_cmd($FIXPERM, array('-f', $params["file"]));
+      if($returned['return_val'] != 0) $log_error=array("Fixperms.sh failed, returned error code : ".$returned['return_val']);
       break;
     default :
       $output=array("Fail: Sorry dude, i do not know this type of action");
@@ -186,8 +234,9 @@ while ($rr=$action->get_action()){
 }
 
 // If something have failed, notify it to the admin
-if($error_raise !== '')
+if($error_raise !== '') {
   mail_it(); 
+}
 
 // Unlock the script
 unlink($LOCK_FILE);
