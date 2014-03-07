@@ -6,4 +6,5 @@ ALTER TABLE variable ADD strata_id bigint DEFAULT NULL;
 ALTER TABLE variable ADD type text DEFAULT '';
 ALTER TABLE variable ADD UNIQUE (name, strata, strata_id);
 
+ALTER TABLE actions MODIFY COLUMN type enum('CREATE_FILE','FIX_USER','CREATE_DIR','DELETE','MOVE','FIX_DIR','FIX_FILE');
 

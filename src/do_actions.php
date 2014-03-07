@@ -93,7 +93,7 @@ if (file_exists($LOCK_FILE) !== false){
         $params=unserialize($c["parameters"]);
         // We can resume these types of action, so we reset the job to process it later
         d("Previous job was the n°".$c["id"]." : '".$c["type"]."'");
-        if($c["type"] == "CREATE_FILE" && is_dir(dirname($params["file"])) || $c["type"] == "CREATE_DIR" || $c["type"] == "DELETE" || $c["type"] == "FIXDIR" || $c["type"] == "FIXFILE"){
+        if($c["type"] == "CREATE_FILE" && is_dir(dirname($params["file"])) || $c["type"] == "CREATE_DIR" || $c["type"] == "DELETE" || $c["type"] == "FIX_DIR" || $c["type"] == "FIX_FILE"){
           d("Reset of the job! So it will be resumed...");
           $action->reset_job($c["id"]);
         }else{
@@ -158,12 +158,12 @@ while ($rr=$action->get_action()){
       if(!isset($output[0]))
         @exec("$SU mv -f ".$params["src"]." ".$params["dst"]." 2>&1", $output);
       break;
-    case "FIXDIR" :
+    case "FIX_DIR" :
       @exec("$FIXPERM -d ".$params["dir"]." 2>&1", $trash, $code);
       if($code!=0)
         $output[0]="Fixperms.sh failed, returned error code : $code";
       break;
-    case "FIXFILE" :
+    case "FIX_FILE" :
       @exec("$FIXPERM -f ".$params["file"]." 2>&1", $trash, $code);
       if($code!=0)
         $output[0]="Fixperms.sh failed, returned error code : $code";
