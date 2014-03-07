@@ -67,7 +67,7 @@ if [ -e /etc/bind/named.conf ]; then
 fi
 if [ -d /etc/postfix ]; then
     CONFIG_FILES="$CONFIG_FILES etc/postfix/master.cf etc/postfix/myalias.cf etc/postfix/myrelay.cf
-                  etc/postfix/mydomain.cf etc/postfix/myrelay-domain.cf etc/postfix/mygid.cf etc/postfix/myquota.cf
+                  etc/postfix/mydomain.cf etc/postfix/myrelay-domain.cf etc/postfix/mymail2mail.cf etc/postfix/mygid.cf etc/postfix/myquota.cf
                   etc/postfix/myvirtual.cf etc/postfix/mytransport.cf etc/postfix/sasl/smtpd.conf
                   etc/alternc/postfix/postfix.cf etc/alternc/postfix/postfix-slave.cf
                   etc/opendkim.conf etc/default/opendkim"
