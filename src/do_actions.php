@@ -175,7 +175,7 @@ while ($rr=$action->get_action()){
   // Get the error (if exists).
   if(isset($output[0])){
     $return=$output[0];
-    $error_raise.="Action n°".$r["id"]." '".$r["type"]."' failed! With user: ".$r["user"]."\nHere is the complete output:\n".print_r($output);
+    $error_raise.="\nAction n°".$r["id"]." '".$r["type"]."' failed! With user: ".$r["user"]."\nHere is the complete output:\n".print_r($output);
   }
   // We finished the action, notify the DB.
   d("Finishing... return value is : $return\n");
