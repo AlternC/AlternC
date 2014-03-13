@@ -643,6 +643,7 @@ src/delete_logs.sh -text
 src/do_actions.php -text
 src/du.pl -text
 src/export_account.php -text
+src/fix_dovecot_quota.php -text
 src/fixperms.sh -text
 src/functions.sh -text
 src/functions_dns.sh -text
