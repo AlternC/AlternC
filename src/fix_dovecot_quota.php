@@ -52,7 +52,7 @@ function FixQuotaDovecot($conditions){
         $id=$db->f("id");
         $size = exec ( "/usr/bin/du -sb $dir|cut -f1" ); // FIXME check return value
         if(!$db2->query("UPDATE mailbox set bytes=".intval($size)." where id=".intval($id).";")){
-            echo "Fail updating quota for mailbox : $id\n");
+            echo "Fail updating quota for mailbox : $id\n";
         }
     }
 
@@ -73,7 +73,7 @@ switch($opt){
           usage("the login you entered is syntaxically incorrect");
           exit(1);
         }
-        $cond = "membres.login = ".mysql_real_escape_string($login) );
+        $cond = "membres.login = ".mysql_real_escape_string($login) ;
         break;
     case "d":
         if(checkfqdn($val) != 0){
