@@ -151,12 +151,16 @@ for($i=0;$i<$r["nsub"];$i++) {
 $disabled_class=in_array(strtoupper($r['sub'][$i]['enable']),array('DISABLED','DISABLE') )?'sub-disabled':'';
 
 ?>
-	<tr class="lst">
+	<tr class="lst" data-fqdn="<?php echo $r["sub"][$i]["fqdn"]; ?>">
     <?php if ( $r['sub'][$i]['web_action'] =='DELETE') { echo "<td colspan='2' />"; } else { ?>
 		<td class="center">
     <?php  if (!(!$isinvited && $dt[strtolower($r["sub"][$i]["type"])]["enable"] != "ALL" )) { ?>
-			<div class="ina edit"><a href="dom_subedit.php?sub_domain_id=<?php echo urlencode($r["sub"][$i]["id"]) ?>"><?php __("Edit"); ?></a></div>
-  <?php } ?>
+      <?php if ( isset($problems[$r["sub"][$i]["fqdn"]])) {  // if this subdomain have problem, can't modify it, only delete it
+              __("Forbidden");
+            } else { ?>
+			<div class="ina edit"><a href="dom_subedit.php?sub_domain_id=<?php echo urlencode($r["sub"][$i]["id"]) ?>"><?php __("Edit"); ?></a></div><?php
+            } // isset problems
+        } ?>
 
 
 			</td><td class="center">
@@ -215,6 +219,12 @@ $disabled_class=in_array(strtoupper($r['sub'][$i]['enable']),array('DISABLED','D
 	</tr>
 <?php } ?>
 </table>
+<?php
+// Add a class on the sub_domains who have a problem
+foreach ($problems as $pr => $lm) { // $problems can be empty but can't be null/false
+  echo "<script type='text/javascript'>$(\"tr[data-fqdn='".$pr."']\").addClass('alert-danger-tr');</script>\n";
+}
+?>
 </div>
 
 

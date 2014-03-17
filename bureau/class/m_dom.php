@@ -1105,7 +1105,8 @@ class m_dom {
     $db->next_record();
     $r["nsub"]=$db->Record["cnt"];
     $db->free();
-    $db->query("SELECT sd.*, dt.description AS type_desc, dt.only_dns FROM sub_domaines sd, domaines_type dt WHERE compte='$cuid' AND domaine='$dom' AND UPPER(dt.name)=UPPER(sd.type) ORDER BY sd.sub,sd.type");
+    #$db->query("SELECT sd.*, dt.description AS type_desc, dt.only_dns FROM sub_domaines sd, domaines_type dt WHERE compte='$cuid' AND domaine='$dom' AND UPPER(dt.name)=UPPER(sd.type) ORDER BY sd.sub,sd.type");
+    $db->query("SELECT sd.*, dt.description AS type_desc, dt.only_dns FROM sub_domaines sd LEFT JOIN domaines_type dt on  UPPER(dt.name)=UPPER(sd.type) WHERE compte='$cuid' AND domaine='$dom'  ORDER BY sd.sub,sd.type ;");
     // Pas de webmail, on le cochera si on le trouve.
     $r["sub"]=array();
     for($i=0;$i<$r["nsub"];$i++) {
@@ -2075,6 +2076,15 @@ function generate_apacheconf($p = null) {
         }
       }
     }
+
+    // Check if we know each type of subdomain
+    // Example: we may not know WEBMAIL if we upgrade from a previous setup
+    foreach ( $da['sub'] as $sub ) {
+      if (is_null($sub['type_desc'])) {
+        $errors[$sub['fqdn']]=sprintf(_("Problem on %s: we do not know domain's type <b>%s</b>."),$sub['fqdn'], $sub['type']);
+      }
+    }
+
     // TODO: add a full compatibility check.
    
     return $errors;
