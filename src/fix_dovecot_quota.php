@@ -31,7 +31,6 @@ if ( $nb2 != 1 ){
     exit(1);
 }
 
-
 #function taking a query used to select the mailbox(es) root and updating their quotas into the mailbox table
 function FixQuotaDovecot($conditions){
     global $db;
@@ -41,7 +40,7 @@ function FixQuotaDovecot($conditions){
               mailbox 
               join address on address.id = mailbox.address_id 
               join domaines on domaines.id = address.domain_id
-            WHERE $conditions ;";
+              $conditions ;";
 
     if(!$db->query($query)){
         usage("failed"); // FIXME real error
@@ -65,7 +64,7 @@ switch($opt){
             usage("The email you entered is syntaxically incorrect");
             exit(1);
         }
-        $cond = "concat(address.address,'@',domaines.domaine) ='".$val ;
+        $cond = "WHERE concat(address.address,'@',domaines.domaine) ='".$val."'" ;
         break;
     case "l":
         $login=strtolower($val);
@@ -73,14 +72,14 @@ switch($opt){
           usage("the login you entered is syntaxically incorrect");
           exit(1);
         }
-        $cond = "membres.login = ".mysql_real_escape_string($login) ;
+        $cond = "join membres on domaines.compte = membres.uid WHERE membres.login = '".mysql_real_escape_string($login)."'";
         break;
     case "d":
         if(checkfqdn($val) != 0){
             usage("The domain you entered is syntaxically incorrect");
             exit(1);
         }
-        $cond = "domaines.domaine = ".mysql_real_escape_string($val) ;
+        $cond = "WHERE domaines.domaine = '".mysql_real_escape_string($val)."'" ;
         break;
     default:
         usage();
