@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS chgmail (
   cookie varchar(20) NOT NULL default '',		-- Cookie du mail
   ckey varchar(6) NOT NULL default '',			-- Clé de vérif
   mail varchar(128) NOT NULL default '',		-- Nouvel Email
-  ts bigint(20) unsigned NOT NULL default '0',		-- Timestamp de la demande 
+  ts int(10) unsigned NOT NULL default '0',		-- Timestamp de la demande 
   PRIMARY KEY  (uid)
 ) ENGINE=MyISAM COMMENT='Demandes de changements de mail en cours';
 
@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS chgmail (
 -- Contient les bases mysql des membres, + login / pass en clair
 
 CREATE TABLE IF NOT EXISTS db (
-  id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  id int(10) unsigned NOT NULL AUTO_INCREMENT,
   uid int(10) unsigned NOT NULL default '0',		-- Numéro de l`utilisateur
   login varchar(16) NOT NULL default '',		-- Nom d`utilisateur mysql
   pass varchar(16) NOT NULL default '',			-- Mot de passe mysql
@@ -107,7 +107,7 @@ CREATE TABLE IF NOT EXISTS db (
 -- Liste des domaines hébergés
 
 CREATE TABLE IF NOT EXISTS domaines (
-  id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  id int(10) unsigned NOT NULL AUTO_INCREMENT,
   compte int(10) unsigned NOT NULL default '0',
   domaine varchar(64) NOT NULL default '',
   gesdns int(1) NOT NULL default '1',
@@ -163,7 +163,7 @@ CREATE TABLE IF NOT EXISTS membres (
   enabled tinyint(4) NOT NULL default '1',		-- Le compte est-il actif ?
   su tinyint(4) NOT NULL default '0',			-- Le compte est-il super-admin ?
   mail varchar(128) NOT NULL default '',		-- Adresse email du possesseur
-  lastaskpass bigint(20) unsigned default '0',		-- Date de dernière demande du pass par mail
+  lastaskpass int(10) unsigned default '0',		-- Date de dernière demande du pass par mail
   show_help tinyint(4) NOT NULL default '1',		-- Faut-il afficher l`aide dans le bureau
   lastlogin datetime NOT NULL default '0000-00-00 00:00:00',	-- Date du dernier login
   lastfail tinyint(4) NOT NULL default '0',		-- Nombre d`échecs depuis le dernier login
@@ -191,7 +191,7 @@ CREATE TABLE IF NOT EXISTS membres (
 CREATE TABLE IF NOT EXISTS quotas (
   uid int(10) unsigned NOT NULL default '0',		-- Numéro GID du membre concerné
   name varchar(64) NOT NULL default '',			-- Nom du quota
-  total bigint(20) unsigned NOT NULL default '0',	-- Quota total (maximum autorisé)
+  total int(10) unsigned NOT NULL default '0',	-- Quota total (maximum autorisé)
   PRIMARY KEY  (uid,name)
 ) ENGINE=MyISAM COMMENT='Quotas des Membres';
 
@@ -213,7 +213,7 @@ CREATE TABLE IF NOT EXISTS sessions (
 -- Sous-domaines des membres
 
 CREATE TABLE IF NOT EXISTS sub_domaines (
-  id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  id int(10) unsigned NOT NULL AUTO_INCREMENT,
   compte int(10) unsigned NOT NULL default '0',
   domaine varchar(255) NOT NULL default '',
   sub varchar(100) NOT NULL default '',
@@ -222,8 +222,7 @@ CREATE TABLE IF NOT EXISTS sub_domaines (
   web_action enum ('OK','UPDATE','DELETE') NOT NULL default 'UPDATE',
   web_result varchar(255) not null default '',
   enable enum ('ENABLED', 'ENABLE', 'DISABLED', 'DISABLE') NOT NULL DEFAULT 'ENABLED',
-  PRIMARY KEY (id),
-  UNIQUE (compte,domaine,sub,type,valeur)
+  PRIMARY KEY (id)
 --  ,FOREIGN KEY (type) REFERENCES (domaines_type)
 ) ENGINE=MyISAM;
 
@@ -233,8 +232,8 @@ CREATE TABLE IF NOT EXISTS sub_domaines (
 -- Addresses for domain.
 
 CREATE TABLE IF NOT EXISTS `address` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT, -- Technical id.
-  `domain_id` bigint(20) unsigned NOT NULL REFERENCES `domaines`(`id`), -- FK to domaines.
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT, -- Technical id.
+  `domain_id` int(10) unsigned NOT NULL REFERENCES `domaines`(`id`), -- FK to domaines.
   `address` varchar(255) NOT NULL, -- The address.
   `type` char(8) NOT NULL, -- standard emails are '', other may be 'mailman' or 'sympa' ...
   `password` varchar(255) DEFAULT NULL, -- The password associated to the address.
@@ -252,13 +251,13 @@ CREATE TABLE IF NOT EXISTS `address` (
 -- Local delivered mailboxes.
 
 CREATE TABLE IF NOT EXISTS `mailbox` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT, -- Technical id.
-  `address_id` bigint(20) unsigned NOT NULL REFERENCES `address`(`id`), -- Reference to address.
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT, -- Technical id.
+  `address_id` int(10) unsigned NOT NULL REFERENCES `address`(`id`), -- Reference to address.
   `path` varchar(255) NOT NULL, -- Relative path to the mailbox.
-  `quota` bigint(20) unsigned DEFAULT NULL, -- Quota for this mailbox.
+  `quota` int(10) unsigned DEFAULT NULL, -- Quota for this mailbox.
   `delivery` varchar(255) NOT NULL, -- Delivery transport.
   `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- Update date, for technical usage only.
-  `bytes` bigint(20) NOT NULL DEFAULT '0', -- number of bytes in the mailbox, filled by dovecot
+  `bytes` int(10) NOT NULL DEFAULT '0', -- number of bytes in the mailbox, filled by dovecot
   `messages` int(11) NOT NULL DEFAULT '0', -- number of messages in the mailbox, filled by dovecot 
   `lastlogin` datetime NOT NULL, -- Last login, filled by dovecot
   `mail_action` enum('OK','DELETE','DELETING') NOT NULL default 'OK', -- mail_action is DELETE or DELETING when deleting a mailbox by cron
@@ -272,8 +271,8 @@ CREATE TABLE IF NOT EXISTS `mailbox` (
 -- Other recipients for an address (aliases)
 
 CREATE TABLE IF NOT EXISTS `recipient` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT, -- Technical id.
-  `address_id` bigint(20) unsigned NOT NULL REFERENCES `address`(`id`), -- Reference to address
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT, -- Technical id.
+  `address_id` int(10) unsigned NOT NULL REFERENCES `address`(`id`), -- Reference to address
   `recipients` text NOT NULL, -- Recipients
   `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- Update date, for technical usage only.
   PRIMARY KEY (`id`),
@@ -288,7 +287,7 @@ CREATE TABLE IF NOT EXISTS `recipient` (
 
 CREATE TABLE IF NOT EXISTS defquotas (
   quota varchar(128),				-- Nom du quota
-  value bigint(20) unsigned default '0',	-- Valeur du quota
+  value int(10) unsigned default '0',	-- Valeur du quota
   type  varchar(128) default 'default',		-- Type de compte associée à ce quota
   PRIMARY KEY (quota,type)
 ) ENGINE=MyISAM;
@@ -387,12 +386,12 @@ INSERT IGNORE INTO tld VALUES ('asia', 1);
 -- if comment is null, then the variable is internal and will not show
 -- up in the generic configuration panel
 CREATE TABLE `variable` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(48) NOT NULL DEFAULT '',
   `value` longtext NOT NULL,
   `comment` mediumtext,
   `strata` enum('DEFAULT','GLOBAL','FQDN','FQDN_CREATOR','CREATOR','MEMBER','DOMAIN') NOT NULL DEFAULT 'DEFAULT',
-  `strata_id` bigint(20) DEFAULT NULL,
+  `strata_id` int(10) DEFAULT NULL,
   `type` text,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_2` (`name`,`strata`,`strata_id`),
@@ -713,14 +712,13 @@ CREATE TABLE IF NOT EXISTS `piwik_sites` (
 
 -- Defaults subdomains to create when a domain is added
 CREATE TABLE IF NOT EXISTS `default_subdomains` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `sub` varchar(255) NOT NULL,
   `domain_type` varchar(255) NOT NULL,
   `domain_type_parameter` varchar(255) NOT NULL,
   `concerned` enum('BOTH','MAIN','SLAVE') NOT NULL DEFAULT 'MAIN',
   `enabled` boolean not null default true,
-  PRIMARY KEY  (`id`),
-  UNIQUE KEY `unique_row` (`sub`,`domain_type`,`domain_type_parameter`,`concerned`)
+  PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM COMMENT='Contains the defaults subdomains created on domains creation';
 
 INSERT IGNORE INTO `default_subdomains` (`sub`, `domain_type`, `domain_type_parameter`, `concerned`) VALUES
@@ -758,7 +756,7 @@ CREATE TABLE IF NOT EXISTS `vm_history` (
 
 
 CREATE TABLE IF NOT EXISTS `actions` (
- id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+ id int(10) unsigned NOT NULL AUTO_INCREMENT,
  type enum ('CREATE_FILE','FIX_USER','CREATE_DIR','DELETE','MOVE','FIX_DIR','FIX_FILE'),
  parameters longtext default NULL,
  creation timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
