@@ -1,9 +1,151 @@
 <?php
-$pathList = array_merge( array("."),explode(PATH_SEPARATOR,get_include_path()));
+
+// *****************************************************************************
+// 
+// Alternc bootstrapping                  
+// bureau/class/config.php file is -not- test friendly
+// @todo streamline test and prod 
+// 
+// *****************************************************************************
+
+// Autoloading 
+// ***********
+$pathList                               = array_merge( array("."),explode(PATH_SEPARATOR,get_include_path()));
 set_include_path(implode(PATH_SEPARATOR, $pathList));
 require_once('AutoLoader.php');
-// Register the directory to your include files
 AutoLoader::registerDirectory('lib');
 AutoLoader::registerDirectory('../bureau/class');
 AutoLoader::registerDirectory('.');
+
+define('ALTERNC_PANEL',                 "../bureau"); // Custom
+require_once ALTERNC_PANEL."/class/db_mysql.php";
+require_once ALTERNC_PANEL."/class/functions.php";
+
+
+// General variables setup
+// *********************
+if(is_readable('local.sh')){
+    $configFile                         = file_get_contents('local.sh', 'r');
+} else if(is_readable('/etc/alternc/local.sh')){
+    $configFile                         = file_get_contents('/etc/alternc/local.sh', 'r');
+} else {
+    throw new Exception("You must provide a local.sh file", 1 );
+}
+$configFile                             = explode("\n",$configFile);
+$compat                                 = array('DEFAULT_MX'   => 'MX',
+    'MYSQL_USER'   => 'MYSQL_LOGIN',
+    'MYSQL_PASS'   => 'MYSQL_PWD',
+    'NS1_HOSTNAME' => 'NS1',
+    'NS2_HOSTNAME' => 'NS2'
+);
+foreach ($configFile as $line) {
+    if (preg_match('/^([A-Za-z0-9_]*) *= *"?(.*?)"?$/', trim($line), $matches)) {
+        $GLOBALS['L_'.$matches[1]]      = $matches[2];
+        if (isset($compat[$matches[1]])) {
+            $GLOBALS['L_'.$compat[$matches[1]]]  =      $matches[2];
+        }
+    }
+}
+
+
+// Constants and globals
+// ********************
+
+// Define constants from vars of /etc/alternc/local.sh
+define('ALTERNC_MAIL',                  "$L_ALTERNC_MAIL");
+define('ALTERNC_HTML',                  "$L_ALTERNC_HTML");
+if(isset($L_ALTERNC_LOGS_ARCHIVE)){
+    define('ALTERNC_LOGS_ARCHIVE',      "$L_ALTERNC_LOGS_ARCHIVE");
+}
+define('ALTERNC_LOGS',                  "$L_ALTERNC_LOGS");
+define('ALTERNC_LOCALES',               ALTERNC_PANEL."/locales");
+define('ALTERNC_LOCK_JOBS',             '/var/run/alternc/jobs-lock');
+define('ALTERNC_LOCK_PANEL',            '/var/lib/alternc/panel/nologin.lock');
+define('ALTERNC_APACHE2_GEN_TMPL_DIR',  '/etc/alternc/templates/apache2/');
+define('ALTERNC_VHOST_DIR',             "/var/lib/alternc/apache-vhost/");
+define('ALTERNC_VHOST_FILE',            ALTERNC_VHOST_DIR."vhosts_all.conf");
+define('ALTERNC_VHOST_MANUALCONF',      ALTERNC_VHOST_DIR."manual/");
+$root                                   = ALTERNC_PANEL."/";
+
+
+// Database variables setup
+// ***********************
+if ( is_readable("my.cnf") ) {
+  $mysqlConfigFile                      = file_get_contents("my.cnf");
+} else if ( is_readable("/etc/alternc/dbusers.cnf") ) {
+  $mysqlConfigFile                      = file_get_contents("/etc/alternc/dbusers.cnf");
+} else if ( is_readable("/etc/alternc/my.cnf") ) {
+  $mysqlConfigFile                      = file_get_contents("/etc/alternc/my.cnf");
+} else {
+    throw new Exception("You must provide a mysql configuration file", 1 );
+}
+$mysqlConfigFile                        = explode("\n",$mysqlConfigFile);
+foreach ($mysqlConfigFile as $line) {
+  if (preg_match('/^([A-Za-z0-9_]*) *= *"?(.*?)"?$/', trim($line), $matches)) {
+      switch ($matches[1]) {
+      case "user":
+        $user                           = $matches[2];
+      break;
+      case "password":
+        $password                       = $matches[2];
+      break;
+      case "database":
+        $database                       = $matches[2];
+      break;
+    }
+  }
+  if (preg_match('/^#alternc_var ([A-Za-z0-9_]*) *= *"?(.*?)"?$/', trim($line), $matches)) {
+    $$matches[1] =     $matches[2];
+  }
+}
+
+// Database default 
+// ********************************************
+
+if( ! $database ){
+	$database 							= "alternc_phpunit";
+}
+
+/**
+* Class for MySQL management in the bureau 
+*
+* This class heriting from the db class of the phplib manages
+* the connection to the MySQL database.
+*/
+class DB_system extends DB_Sql {
+    var $Host,$Database,$User,$Password;
+    /**
+        * Constructor
+        */
+    function DB_system($user,$database,$password) {
+        global $L_MYSQL_HOST,$L_MYSQL_DATABASE,$L_MYSQL_LOGIN,$L_MYSQL_PWD;
+        $this->Host                     = "127.0.0.1";
+        $this->Database                 = $database;
+        $this->User                     = $user;
+        $this->Password                 = $password;
+    }
+}
+
+
+// Creates database from schema 
+// *********************************************
+
+$queryList = array(
+    "mysql -u $user --password='$password' -e 'DROP DATABASE IF EXISTS $database '",
+    "mysql -u $user --password='$password' -e 'CREATE DATABASE $database'",
+    "mysql -u $user --password='$password' $database < ".__DIR__."/../install/mysql.sql"
+);
+foreach ($queryList as $exec_command) {
+    exec($exec_command,$output,$return_var);
+    if(  $return_var){
+        throw new \Exception("[!] Mysql exec error : $exec_command \n Error : \n ".print_r($output,1));
+    }
+}
+$db                                     = new \DB_system($user,$database,$password);
+$cuid                                   = 0;
+$variables                              = new \m_variables();
+$mem                                    = new \m_mem();
+$err                                    = new \m_err();
+$authip                                 = new \m_authip();
+$hooks                                  = new \m_hooks();
 

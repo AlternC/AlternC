@@ -77,7 +77,7 @@ class DummyTest extends AlterncTest
      */
     public function testDependance()
     {
-         $this->assertTrue(FALSE);
+         $this->assertTrue(TRUE);
          return TRUE;
     }
     
