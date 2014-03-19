@@ -1,4 +1,9 @@
 <phpunit
          bootstrap="bootstrap.php"
 >
+<testsuites>
+    <testsuite name="AlternCTests">
+      <directory>tests/bureau</directory>
+    </testsuite>
+  </testsuites>
 </phpunit>
