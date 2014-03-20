@@ -84,7 +84,8 @@ class m_dom {
    * Constructeur
    */
   function m_dom() {
-    $this->tld_no_check_at_all = variable_get('tld_no_check_at_all', 0,'Set to 1 to disable ALL check on the TLD (users will be able to add any domain)');
+    $this->tld_no_check_at_all = variable_get('tld_no_check_at_all', 0,'Disable ALL check on the TLD (users will be able to add any domain)', array(array('desc'=>'Disabled','type'=>'boolean')));
+    variable_get('mailname_bounce', '%%FQDN%%','FQDN of the mail server, used to create vhost virtual mail_adress.', array(array('desc'=>'FQDN','type'=>'string')));
   }
 
   function get_panel_url_list() {

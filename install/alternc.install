@@ -488,8 +488,6 @@ fi
 test -e "/etc/mailname" || hostname -f > "/etc/mailname" 
 # Allow for all the users to view /etc/mailname
 chmod +r "/etc/mailname"
-mailname=`cat /etc/mailname`
-mysql_query "update variable SET value='"$mailname"' where name='mailname_bounce';" 
 
 #######################################################################
 # Save installed files to check them during next install

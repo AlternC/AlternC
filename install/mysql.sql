@@ -409,9 +409,6 @@ the domain "username.example.com".
 
 If this is set to 0 or a "false" string, it will be ignored.');
 
-INSERT IGNORE INTO `variable` (name, value, comment) VALUES ('mailname_bounce', '',
-'FQDN of the mail server, used to create vhost virtual mail_adress.');
-
 --
 -- Table structure for table `dbusers`
 --

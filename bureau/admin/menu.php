@@ -30,7 +30,7 @@
 require_once("../class/config.php");
 
 // Getting logo
-$logo = variable_get('logo_menu', '' ,'You can specify a logo for the menu, example /images/my_logo.png . Set 0 or empty to reset it. ');
+$logo = variable_get('logo_menu', '' ,'You can specify a logo for the menu, example /images/my_logo.png .', array(array('desc'=>'URL','type'=>'string')));
 if ( empty($logo) ||  ! $logo ) { 
   $logo = 'images/logo3.png'; 
 }
