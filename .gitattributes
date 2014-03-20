@@ -1,5 +1,6 @@
 * text=auto !eol
 /.svnignore -text
+/.travis.yml -text
 .tx/config -text
 /CODING_CONVENTION.php -text
 /COPYING -text
