@@ -148,17 +148,19 @@ $lac = $authip->list_affected();
 foreach($list_ip as $i) {
   if (checkip($i['ip'])) {
     if ($i['subnet']==32) {
-      $txt="Address IPv4";
+      $txt=_("Address IPv4");
     } else {
-      $txt="Subnet IPv4";
+      $txt=_("Subnet IPv4");
     }
   } elseif (checkipv6($i['ip'])) {
     if ($i['subnet']==128) {
-      $txt="Address IPv6";
+      $txt=_("Address IPv6");
     } else {
-      $txt="Subnet IPv6";
+      $txt=_("Subnet IPv6");
     }
-  } 
+  } else {
+    $txt=_("Error with this IP");
+  }
   echo "<tr class='lst' ><td>{$i['infos']}</td><td>{$i['ip_human']}</td><td>$txt</td>";
   ?>
   <td><div class="ina edit"><a href="javascript:edit_ip(<?php echo "'".htmlentities($i['id'])."','".htmlentities($i['ip_human'])."','".htmlentities($i['infos'])."'"; ?>);"><?php __("Edit"); ?></a></div></td>

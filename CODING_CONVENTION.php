@@ -60,8 +60,8 @@ class m_mailman {
 ## when raising an error, use the following syntax ##
     $err->raise("classname",_("text in english"));
   }
-
-## at the end of a php-only file, we don't put a ?> ##
+}
+/* at the end of a php-only file, we don't put a ?> */
 
 ?>
 
