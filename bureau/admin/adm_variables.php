@@ -133,6 +133,18 @@ foreach( $variables->variables_list_name() as $varname => $varcomment) {  ?>
 
 <br/>
 <?php } // if $member_id && $fqdn_id  ?>
+
+<hr/>
+<h3><?php __("Magical values");?></h3>
+<?php __("Those var are automatically replaced by the value indicated"); ?>
+<ul>
+<?php 
+foreach ($variables->replace_array as $vrepk => $vrepvalue) {
+  echo "<li><code>$vrepk</code> => $vrepvalue</li>";
+}
+?>
+</ul>
+
 <script type="text/javascript">
 
 $(document).ready(function() 

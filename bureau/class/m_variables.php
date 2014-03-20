@@ -36,6 +36,14 @@
 class m_variables {
   var $strata_order = array('DEFAULT','GLOBAL','FQDN_CREATOR','FQDN','CREATOR','MEMBER','DOMAIN');
   var $cache_variable_list = false;
+  var $replace_array = array();
+
+  function m_variables() {
+    global $L_FQDN;
+    $this->replace_array = array(
+      "%%FQDN%%"=> $L_FQDN,
+    );
+  }
 
   // used by get_impersonated to merge array. Son value overwrite father's value
   private function variable_merge($father, $son) {
@@ -134,6 +142,14 @@ class m_variables {
       } //switch
 
     } //foreach
+
+    // Replace needed vars
+    foreach ($variables as $vv => $hh) {
+      if (!isset($hh['value'])) {
+        continue;
+      }
+      $variables[$vv]['value'] = strtr($hh['value'], $this->replace_array );
+    }
 
     if ($var && isset($variables[$var])) {
       return $variables[$var];
