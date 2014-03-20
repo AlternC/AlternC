@@ -37,12 +37,14 @@ class m_hooks {
   function m_hooks() {
   }
 
+  /*---------------------------------------------------------------------------*/
   /** 
     * invoke() permet de lancer une fonction donné en parametre dans toute les classes
     * connues de alternc, avec les parametres donnés.
-    * $hname nom de la fonction "hooks" que l'on cherche dans les classes
-    * $hparam tableau contenant les parametres
-    * $hclass tableau contenant les classes spécifique qu'on veux appeler (si on veux pas TOUTE les appeler)
+    * @param string $hname nom de la fonction "hooks" que l'on cherche dans les classes
+    * @param array $hparam tableau contenant les parametres
+    * @param array|string $hclass tableau contenant les classes spécifique qu'on veux appeler (si on veux pas TOUTE les appeler)
+    * @return array with the return of each classes
   */
   function invoke($hname, $hparam = array(), $hclass = null) {
 
@@ -74,10 +76,14 @@ class m_hooks {
     return $val;
   }
 
-  // $scripts a script or a directory
-  // invoke each executable script of the directory (or the specified script)
-  // with the parameters 
-  function invoke_scripts($scripts, $parameters) {
+  /*---------------------------------------------------------------------------*/
+  /** 
+    * invoke each executable script of the directory (or the specified script)
+    * @param string $scripts a script or a directory
+    * @param array $parameters parameters for the scripts
+    * @return boolean TRUE
+  */
+   function invoke_scripts($scripts, $parameters=array()) {
 
     // First, build the list of script we want to launch
     $to_launch=array();
@@ -104,6 +110,8 @@ class m_hooks {
     foreach($to_launch as $fi) {
       system($fi." ".$params);
     }
+
+    // TODO: return something more interesting than true
     return true;
   }
 
