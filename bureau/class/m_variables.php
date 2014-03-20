@@ -248,10 +248,18 @@ class m_variables {
               echo "$k";
             } else {
               if ( !isset($this->variables_list()['DEFAULT'][null][$varname]['type'][$k]) ||  is_array( $this->variables_list()['DEFAULT'][null][$varname]['type'][$k] ) ) {
-                echo $k;
+                if (isset($this->variables_list()['DEFAULT'][null][$varname]['type'][$k]['desc'])) {
+                  echo $this->variables_list()['DEFAULT'][null][$varname]['type'][$k]['desc'];
+                } else {
+                  echo $k;
+                }
               } else {
                 echo $this->variables_list()['DEFAULT'][null][$varname]['type'][$k];
               }
+            }
+          } else {
+            if (isset($this->variables_list()['DEFAULT'][null][$varname]['type'][$k]['desc'] )) {
+              echo $this->variables_list()['DEFAULT'][null][$varname]['type'][$k]['desc'];
             }
           }
           if (is_array($l)) {
@@ -274,7 +282,7 @@ class m_variables {
         }
         echo "</ul>";
       } // empty $v
-    } else if (empty($v)) {
+    } else if (empty($v) && $v != '0') {
       echo "<em>"._("Empty")."</em>";
     } else {
       echo $v;

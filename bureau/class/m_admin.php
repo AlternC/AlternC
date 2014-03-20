@@ -587,7 +587,7 @@ class m_admin {
    */
   function hook_admin_add_member() {
     global $err, $cuid, $L_FQDN, $L_HOSTING;
-    $dest = variable_get('new_email', 0, 'An email will be sent to this address when new accounts are created if set.');
+    $dest = variable_get('new_email', '0', 'An email will be sent to this address when new accounts are created if set.', array(array('desc'=>'Enabled','type'=>'boolean')));
     if (!$dest) {
       return false;
     }
