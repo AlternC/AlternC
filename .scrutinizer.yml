@@ -1,7 +1,3 @@
-tools:
-    php_analyzer: true
-    external_code_coverage: true
-
 filter:
     excluded_paths:
         - 'vendor/*'
@@ -11,6 +7,7 @@ filter:
         - 'library/*'
     paths: {  }
 tools:
+    external_code_coverage: true
     php_analyzer:
         enabled: true
         extensions:
@@ -26,14 +23,11 @@ tools:
         path_configs: {  }
     php_cpd:
         enabled: true
-    external_code_coverage:
-        enabled: true
         excluded_dirs: {  }
         names:
             - '*.php'
         min_lines: 5
         min_tokens: 70
-        timeout: 300
         filter:
             excluded_paths:
                 - 'vendor/*'
@@ -56,8 +50,13 @@ tools:
                 - 'bin/*'
                 - 'library/*'
             paths: {  }
-            excluded_paths: {  }
-
 changetracking:
     bug_patterns:
         - '\bfix(?:es|ed)?\b'
+    feature_patterns:
+        - '\badd(?:s|ed)?\b'
+        - '\bimplement(?:s|ed)?\b'
+before_commands: {  }
+after_commands: {  }
+artifacts: {  }
+build_failure_conditions: {  }
