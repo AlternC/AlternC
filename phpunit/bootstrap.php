@@ -26,8 +26,8 @@ require_once ALTERNC_PANEL."/class/functions.php";
 // *********************
 if(is_readable('local.sh')){
     $configFile                         = file_get_contents('local.sh', 'r');
-} else if(is_readable('/etc/alternc/local.sh')){
-    $configFile                         = file_get_contents('/etc/alternc/local.sh', 'r');
+} else if(is_readable('local.sh_generic')){
+    $configFile                         = file_get_contents('local.sh_generic', 'r');
 } else {
     throw new Exception("You must provide a local.sh file", 1 );
 }
@@ -40,7 +40,8 @@ $compat                                 = array('DEFAULT_MX'   => 'MX',
 );
 foreach ($configFile as $line) {
     if (preg_match('/^([A-Za-z0-9_]*) *= *"?(.*?)"?$/', trim($line), $matches)) {
-        $GLOBALS['L_'.$matches[1]]      = $matches[2];
+        //$GLOBALS['L_'.$matches[1]]      = $matches[2];
+        eval('$L_'.$matches[1].' = $matches[2];'); # Ugly, but work with phpunit...
         if (isset($compat[$matches[1]])) {
             $GLOBALS['L_'.$compat[$matches[1]]]  =      $matches[2];
         }
@@ -51,14 +52,10 @@ foreach ($configFile as $line) {
 // Constants and globals
 // ********************
 
-// Define constants from vars of /etc/alternc/local.sh
-if( isset ($L_ALTERNC_MAIL) ) {
-    define('ALTERNC_MAIL',              "$L_ALTERNC_MAIL");
-}if( isset ($ALTERNC_HTML) ) {
-    define('ALTERNC_HTML',              "$ALTERNC_HTML");
-}if( isset ($ALTERNC_LOGS) ) {
-    define('ALTERNC_LOGS',              "$ALTERNC_LOGS");
-}
+// Define constants from vars of local.sh
+define('ALTERNC_MAIL',              "$L_ALTERNC_MAIL");
+define('ALTERNC_HTML',              "$L_ALTERNC_HTML");
+define('ALTERNC_LOGS',              "$L_ALTERNC_LOGS");
 if(isset($L_ALTERNC_LOGS_ARCHIVE)){
     define('ALTERNC_LOGS_ARCHIVE',      "$L_ALTERNC_LOGS_ARCHIVE");
 }
@@ -71,6 +68,12 @@ define('ALTERNC_VHOST_FILE',            ALTERNC_VHOST_DIR."vhosts_all.conf");
 define('ALTERNC_VHOST_MANUALCONF',      ALTERNC_VHOST_DIR."manual/");
 $root                                   = ALTERNC_PANEL."/";
 
+// Create test directory
+foreach (array(ALTERNC_MAIL, ALTERNC_HTML, ALTERNC_LOGS) as $crdir ) {
+  if (! is_dir($crdir)) {
+    mkdir($crdir, 0777, true);
+  }
+}
 
 // Database variables setup
 // ***********************
@@ -81,6 +84,9 @@ $password                               = "";
 // Local override
 if ( is_readable("my.cnf") ) {
     $mysqlConfigFile                      = file("my.cnf");
+} else if(is_readable('my.cnf_generic')){
+    $mysqlConfigFile                      = file('my.cnf_generic');
+
     foreach ($mysqlConfigFile as $line) {
       if (preg_match('/^([A-Za-z0-9_]*) *= *"?(.*?)"?$/', trim($line), $matches)) {
           switch ($matches[1]) {
