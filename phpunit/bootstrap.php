@@ -70,41 +70,33 @@ $root                                   = ALTERNC_PANEL."/";
 
 // Database variables setup
 // ***********************
+// Default values
+$database                               = "alternc_test";
+$user                                   = "root";
+$password                               = "";
+// Local override
 if ( is_readable("my.cnf") ) {
-  $mysqlConfigFile                      = file_get_contents("my.cnf");
-} else if ( is_readable("/etc/alternc/dbusers.cnf") ) {
-  $mysqlConfigFile                      = file_get_contents("/etc/alternc/dbusers.cnf");
-} else if ( is_readable("/etc/alternc/my.cnf") ) {
-  $mysqlConfigFile                      = file_get_contents("/etc/alternc/my.cnf");
-} else {
-    throw new Exception("You must provide a mysql configuration file", 1 );
-}
-$mysqlConfigFile                        = explode("\n",$mysqlConfigFile);
-foreach ($mysqlConfigFile as $line) {
-  if (preg_match('/^([A-Za-z0-9_]*) *= *"?(.*?)"?$/', trim($line), $matches)) {
-      switch ($matches[1]) {
-      case "user":
-        $user                           = $matches[2];
-      break;
-      case "password":
-        $password                       = $matches[2];
-      break;
-      case "database":
-        $database                       = $matches[2];
-      break;
+    $mysqlConfigFile                      = file("my.cnf");
+    foreach ($mysqlConfigFile as $line) {
+      if (preg_match('/^([A-Za-z0-9_]*) *= *"?(.*?)"?$/', trim($line), $matches)) {
+          switch ($matches[1]) {
+          case "user":
+            $user                           = $matches[2];
+          break;
+          case "password":
+            $password                       = $matches[2];
+          break;
+          case "database":
+            $database                       = $matches[2];
+          break;
+        }
+      }
+      if (preg_match('/^#alternc_var ([A-Za-z0-9_]*) *= *"?(.*?)"?$/', trim($line), $matches)) {
+        $$matches[1]                        = $matches[2];
+      }
     }
-  }
-  if (preg_match('/^#alternc_var ([A-Za-z0-9_]*) *= *"?(.*?)"?$/', trim($line), $matches)) {
-    $$matches[1] =     $matches[2];
-  }
-}
+} 
 
-// Database default 
-// ********************************************
-
-if( ! $database ){
-	$database 							= "alternc_phpunit";
-}
 
 /**
 * Class for MySQL management in the bureau 
