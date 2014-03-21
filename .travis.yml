@@ -1,4 +1,6 @@
 language: php
+before_script:
+  - cd phpunit
 php:
   - 5.5
   - 5.4
