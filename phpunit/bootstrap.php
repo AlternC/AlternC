@@ -52,12 +52,16 @@ foreach ($configFile as $line) {
 // ********************
 
 // Define constants from vars of /etc/alternc/local.sh
-define('ALTERNC_MAIL',                  "$L_ALTERNC_MAIL");
-define('ALTERNC_HTML',                  "$L_ALTERNC_HTML");
+if( isset ($L_ALTERNC_MAIL) ) {
+    define('ALTERNC_MAIL',              "$L_ALTERNC_MAIL");
+}if( isset ($ALTERNC_HTML) ) {
+    define('ALTERNC_HTML',              "$ALTERNC_HTML");
+}if( isset ($ALTERNC_LOGS) ) {
+    define('ALTERNC_LOGS',              "$ALTERNC_LOGS");
+}
 if(isset($L_ALTERNC_LOGS_ARCHIVE)){
     define('ALTERNC_LOGS_ARCHIVE',      "$L_ALTERNC_LOGS_ARCHIVE");
 }
-define('ALTERNC_LOGS',                  "$L_ALTERNC_LOGS");
 define('ALTERNC_LOCALES',               ALTERNC_PANEL."/locales");
 define('ALTERNC_LOCK_JOBS',             '/var/run/alternc/jobs-lock');
 define('ALTERNC_LOCK_PANEL',            '/var/lib/alternc/panel/nologin.lock');
