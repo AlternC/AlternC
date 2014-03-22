@@ -59,6 +59,7 @@ class DummyTest extends AlterncTest
      */
     protected function tearDown()
     {
+        parent::tearDown();
     }
     
     

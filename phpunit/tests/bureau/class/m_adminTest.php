@@ -15,6 +15,7 @@ class m_adminTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
+        parent::setUp();
         $this->object = new m_admin;
     }
 
@@ -24,6 +25,7 @@ class m_adminTest extends PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        parent::tearDown();
     }
 
     /**

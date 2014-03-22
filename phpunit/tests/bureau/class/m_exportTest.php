@@ -15,6 +15,7 @@ class m_exportTest extends PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
+        parent::setUp();
         $this->object = new m_export;
     }
 
@@ -24,6 +25,7 @@ class m_exportTest extends PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        parent::tearDown();
     }
 
     /**
