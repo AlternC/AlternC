@@ -1,0 +1,22 @@
+membres:
+  - 
+    uid : 0
+    login : admin
+    pass : admin
+    enabled : 1
+    su : 1
+    mail : root@alternc.org
+    show_help : 0
+    lastlogin : 2014-01-01 00:00:00
+    lastfail : 0
+    lastip : 127.0.0.1
+  - 
+    login : phpunit
+    pass : phpunit
+    enabled : 1
+    su : 0
+    mail : phpunit@alternc.org
+    show_help : 1
+    lastlogin : 2014-01-01 00:00:00
+    lastfail : 0
+    lastip : 127.0.0.1

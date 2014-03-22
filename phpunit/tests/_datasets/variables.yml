@@ -1,0 +1,9 @@
+variable:
+  -
+    id: 999
+    name : "phpunit"
+    value : "phpunit"
+    comment : "phpunit"
+    strata : "DEFAULT"
+    strata_id : "0"
+    type : "phpunit"
