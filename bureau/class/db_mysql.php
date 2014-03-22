@@ -159,6 +159,13 @@ class DB_Sql {
     $this->Row   = 0;
     $this->Errno = mysql_errno();
     $this->Error = mysql_error();
+    if( 0 != $this->Errno ){
+        if( defined("THROW_EXCEPTIONS") && THROW_EXCEPTIONS ){
+            throw new \Exception("Mysql query failed : $this->Error");
+        }
+        $this->halt("SQL Error: ".$Query_String);
+        return FALSE;
+    }
     if (!$this->Query_ID) {
       $this->halt("Invalid SQL: ".$Query_String);
     }
