@@ -88,26 +88,26 @@ if ( is_readable("my.cnf") ) {
     $mysqlConfigFile                      = file("my.cnf");
 } else if(is_readable('my.cnf_generic')){
     $mysqlConfigFile                      = file('my.cnf_generic');
-
-    foreach ($mysqlConfigFile as $line) {
-      if (preg_match('/^([A-Za-z0-9_]*) *= *"?(.*?)"?$/', trim($line), $matches)) {
-          switch ($matches[1]) {
-          case "user":
-            $user                           = $matches[2];
-          break;
-          case "password":
-            $password                       = $matches[2];
-          break;
-          case "database":
-            $database                       = $matches[2];
-          break;
-        }
-      }
-      if (preg_match('/^#alternc_var ([A-Za-z0-9_]*) *= *"?(.*?)"?$/', trim($line), $matches)) {
-        $$matches[1]                        = $matches[2];
-      }
-    }
 } 
+
+foreach ($mysqlConfigFile as $line) {
+  if (preg_match('/^([A-Za-z0-9_]*) *= *"?(.*?)"?$/', trim($line), $matches)) {
+      switch ($matches[1]) {
+      case "user":
+        $user                           = $matches[2];
+      break;
+      case "password":
+        $password                       = $matches[2];
+      break;
+      case "database":
+        $database                       = $matches[2];
+      break;
+    }
+  }
+  if (preg_match('/^#alternc_var ([A-Za-z0-9_]*) *= *"?(.*?)"?$/', trim($line), $matches)) {
+    $$matches[1]                        = $matches[2];
+  }
+}
 
 
 /**
