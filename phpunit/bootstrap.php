@@ -17,7 +17,8 @@ AutoLoader::registerDirectory('lib');
 AutoLoader::registerDirectory('../bureau/class');
 AutoLoader::registerDirectory('.');
 
-define('ALTERNC_PANEL',                 "../bureau"); // Custom
+define('ALTERNC_PANEL',realpath(__DIR__."/../bureau"));; // Custom
+define('PHPUNIT_DATASETS_PATH',realpath(__DIR__."/tests/_datasets"));
 require_once ALTERNC_PANEL."/class/db_mysql.php";
 require_once ALTERNC_PANEL."/class/functions.php";
 
@@ -66,6 +67,7 @@ define('ALTERNC_APACHE2_GEN_TMPL_DIR',  '/etc/alternc/templates/apache2/');
 define('ALTERNC_VHOST_DIR',             "/var/lib/alternc/apache-vhost/");
 define('ALTERNC_VHOST_FILE',            ALTERNC_VHOST_DIR."vhosts_all.conf");
 define('ALTERNC_VHOST_MANUALCONF',      ALTERNC_VHOST_DIR."manual/");
+define("THROW_EXCEPTIONS",              TRUE);
 $root                                   = ALTERNC_PANEL."/";
 
 // Create test directory
@@ -144,6 +146,7 @@ foreach ($queryList as $exec_command) {
     }
 }
 $db                                     = new \DB_system($user,$database,$password);
+$db->connect();
 $cuid                                   = 0;
 $variables                              = new \m_variables();
 $mem                                    = new \m_mem();
