@@ -32,12 +32,15 @@
  * @author Drupal Developpement Team
  * @link http://cvs.drupal.org/viewcvs/drupal/drupal/includes/bootstrap.inc?rev=1.38&view=auto
  */
-
 class m_variables {
   var $strata_order = array('DEFAULT','GLOBAL','FQDN_CREATOR','FQDN','CREATOR','MEMBER','DOMAIN');
   var $cache_variable_list = false;
   var $replace_array = array();
 
+  /**
+   * 
+   * @global type $L_FQDN
+   */
   function m_variables() {
     global $L_FQDN;
     $this->replace_array = array(
@@ -45,7 +48,15 @@ class m_variables {
     );
   }
 
-  // used by get_impersonated to merge array. Son value overwrite father's value
+  
+  
+  /**
+   *  used by get_impersonated to merge array. Son value overwrite father's value 
+   * 
+   * @param array $father
+   * @param array $son
+   * @return array
+   */
   private function variable_merge($father, $son) {
     if (! is_array($son)) return $father;
     foreach ($son as $k=>$v) {
@@ -60,6 +71,9 @@ class m_variables {
    * The variable table is composed of values that have been saved in the table
    * with variable_set() as well as those explicitly specified in the configuration
    * file.
+   * 
+   * @global int $cuid
+   * @return array
    */
   function variable_init() {
     global $cuid;
@@ -86,6 +100,12 @@ class m_variables {
    * 
    * If $fqdn and $uid aren't specified, return the default value
    * 
+   * @global type $db
+   * @global type $err
+   * @param type $fqdn
+   * @param type $uid
+   * @param type $var
+   * @return array
    */
   function get_impersonated($fqdn=null, $uid=null, $var=null) {
     global $db, $err;
@@ -111,7 +131,10 @@ class m_variables {
       if (! isset($arr_var[$strata]) || !is_array($arr_var[$strata])) continue;
       switch($strata) {
         case 'DEFAULT':
-          $variables = $this->variable_merge(array(),$arr_var['DEFAULT'][NULL]);
+            
+//          $variables = $this->variable_merge(array(),$arr_var['DEFAULT'][NULL]);
+            $variablesList = current($arr_var["DEFAULT"]);
+          $variables = $this->variable_merge(array(),$variablesList);
           break;
         case 'GLOBAL':
           $variables = $this->variable_merge($variables, $arr_var['GLOBAL'][NULL]);
@@ -200,7 +223,20 @@ class m_variables {
     return $default;
   }
 
-  // Create or update a variable.
+  /**
+   * Create or update a variable
+   * 
+   * @global type $db
+   * @global type $err
+   * @param type $var_name
+   * @param type $var_value
+   * @param type $strata
+   * @param null $strata_id
+   * @param null $var_id
+   * @param type $comment
+   * @param type $type
+   * @return boolean
+   */
   function variable_update_or_create($var_name, $var_value, $strata=null, $strata_id=null, $var_id=null, $comment=null, $type=null) {
     global $db, $err;
     $err->log('variable', 'variable_update_or_create');
@@ -246,77 +282,108 @@ class m_variables {
    */
   function del($id) {
     global $db;
-    $db->query("DELETE FROM `variable` WHERE id = '".intval($id)."'");
+    $result = $db->query("DELETE FROM `variable` WHERE id = '".intval($id)."'");
     $this->variable_init_maybe(true);
+    return $result;
   }
 
-  // echo HTML code to display a variable passed in parameters
-  function display_valueraw_html($v,$varname) {
+  /**
+   * echo HTML code to display a variable passed in parameters
+   * 
+   * @param type $v
+   * @param type $varname
+   * @param type $echo
+   * @return type
+   */
+  function display_valueraw_html($v,$varname,$echo = true) {
+    $output                     = "";
     if (is_array($v)) {
       if (empty($v)) {
-        echo "<em>"._("Empty array")."</em>";
+        $output .= "<em>"._("Empty array")."</em>";
       } else {
-        echo "<ul>";
+        $output .= "<ul>";
         foreach ( $v as $k=>$l) {
-          echo "<li>";
+          $output .= "<li>";
           if (! is_numeric($k)) {
             if (is_null($varname)) {
-              echo "$k";
+              $output .= "$k";
             } else {
               if ( !isset($this->variables_list()['DEFAULT'][null][$varname]['type'][$k]) ||  is_array( $this->variables_list()['DEFAULT'][null][$varname]['type'][$k] ) ) {
                 if (isset($this->variables_list()['DEFAULT'][null][$varname]['type'][$k]['desc'])) {
-                  echo $this->variables_list()['DEFAULT'][null][$varname]['type'][$k]['desc'];
+                  $output .= $this->variables_list()['DEFAULT'][null][$varname]['type'][$k]['desc'];
                 } else {
-                  echo $k;
+                  $output .= $k;
                 }
               } else {
-                echo $this->variables_list()['DEFAULT'][null][$varname]['type'][$k];
+                $output .= $this->variables_list()['DEFAULT'][null][$varname]['type'][$k];
               }
             }
           } else {
             if (isset($this->variables_list()['DEFAULT'][null][$varname]['type'][$k]['desc'] )) {
-              echo $this->variables_list()['DEFAULT'][null][$varname]['type'][$k]['desc'];
+              $output .= $this->variables_list()['DEFAULT'][null][$varname]['type'][$k]['desc'];
             }
           }
           if (is_array($l)) {
-            echo "<ul>";
+            $output .= "<ul>";
             foreach ($l as $m => $n ) {
-              echo "<li>";
+              $output .= "<li>";
               if ( is_numeric($m)) {
-                echo "$m";
+                $output .= "$m";
               } else {
-                echo $this->variables_list()['DEFAULT'][null][$varname]['type'][$k][$m]['desc'];
+                $output .= $this->variables_list()['DEFAULT'][null][$varname]['type'][$k][$m]['desc'];
               }
-              echo " => $n";
-              echo "</li>";
+              $output .= " => $n";
+              $output .= "</li>";
             }
-            echo "</ul>";
+            $output .= "</ul>";
           } else {
-            echo " => $l";
+            $output .= " => $l";
           }
-          echo "</li>";
+          $output .= "</li>";
         }
-        echo "</ul>";
+        $output .= "</ul>";
       } // empty $v
     } else if (empty($v) && $v != '0') {
-      echo "<em>"._("Empty")."</em>";
+      $output .= "<em>"._("Empty")."</em>";
     } else {
-      echo $v;
+      $output .= $v;
     }
+    if( $echo ){
+        echo $output;
+    }
+    return $output;
   }
 
-  // Display a variable if is set
-  function display_value_html($tab, $strata, $id, $varname) {
+  /**
+   *  Display a variable if is set
+   * 
+   * @param type $tab
+   * @param type $strata
+   * @param type $id
+   * @param type $varname
+   * @param type $echo
+   * @return string
+   */
+  function display_value_html($tab, $strata, $id, $varname, $echo = TRUE) {
+    $output = "";
     if (isset($tab[$strata][$id][$varname]['value'])) {
       $v = $tab[$strata][$id][$varname]['value'];
-      $this->display_valueraw_html($v, $varname);
+      $output .= $this->display_valueraw_html($v, $varname);
     } else {
-      echo "<em>"._("None defined")."</em>";
+      $output .= "<em>"._("None defined")."</em>";
     }
-
+    if( $echo){
+        echo $output;
+    }
+    return $output;
   }
 
-  // return hashtable with variable_name => comment for all the vars
+  /**
+   * return hashtable with variable_name => comment for all the vars
+   * 
+   * @global type $db
+   * @return type
+   */
   function variables_list_name() {
     global $db;
 
@@ -332,7 +399,12 @@ class m_variables {
     return $t;
   }
 
-  // return a multidimensionnal array used to build vars
+  /**
+   * return a multidimensionnal array used to build vars
+   * 
+   * @global type $db
+   * @return type
+   */
   function variables_list() {
     global $db;
     if ( ! $this->cache_variable_list ) {
@@ -357,4 +429,3 @@ class m_variables {
   }
 
 } /* Class m_variables */
-?>
