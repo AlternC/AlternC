@@ -1,0 +1,10 @@
+actions:
+  -
+    id:  999
+    type:  "file"
+    parameters:  "phpunit"
+    creation: "2000-01-01 00:00:00"
+    begin:  "0000-00-00 00:00:00"
+    end:  "0000-00-00 00:00:00"
+    user:  "phpunit"
+    status:  0
