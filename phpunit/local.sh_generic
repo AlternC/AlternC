@@ -49,9 +49,9 @@ SQLBACKUP_OVERWRITE="no"
 ALTERNC_SLAVES=""
 
 # File to look at for forced launch of update_domain (use incron)
-INOTIFY_UPDATE_DOMAIN="/var/run/alternc/inotify_update_domain.lock"
+INOTIFY_UPDATE_DOMAIN="/tmp/inotify_update_domain.lock"
 
-INOTIFY_DO_ACTION="/var/run/alternc/inotify_do_action.lock"
+INOTIFY_DO_ACTION="/tmp/inotify_do_action.lock"
 
 # Folder holding data (used for quota management)
 ALTERNC_HTML="/tmp/var/www/alternc"
