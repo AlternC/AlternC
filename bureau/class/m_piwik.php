@@ -357,6 +357,10 @@ class m_piwik {
   }
 
 
+  /**
+   * @param string $module
+   * @param string $method
+   */
   function call_page($module, $method, $arguments=array(), $output = 'JSON') {
     global $err;
 	$url = sprintf('%s/?module=%s&method=%s&format=%s', $this->piwik_server_uri, $module, $method, $output);

@@ -151,6 +151,9 @@ class m_mail {
     return $rr;
   }
 
+  /**
+   * @param string $domain_id
+   */
   function catchall_del($domain_id) {
     $catch = $this->catchall_getinfos($domain_id);
     if (empty($catch['mail_id'])) return false;
@@ -613,7 +616,7 @@ ORDER BY
    * @param $mail_id integer the number of the email to delete
    * @param integer $islocal boolean is it a POP/IMAP mailbox ?
    * @param integer $quotamb integer if islocal=1, quota in MB
-   * @param $recipients string recipients, one mail per line.
+   * @param string $recipients string recipients, one mail per line.
    * @return boolean if the email has been properly edited
    * or false if an error occured ($err is filled accordingly)
    */ 
@@ -701,6 +704,7 @@ ORDER BY
    * @ param : $type, the type of the alias created
    * @param string $m
    * @param string $alias
+   * @param string $dom_id
    */
   function create_alias($dom_id,$m,$alias,$type="",$dontcheck=false) {
     global $err,$db,$mail;
