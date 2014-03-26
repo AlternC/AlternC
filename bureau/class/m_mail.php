@@ -158,6 +158,7 @@ class m_mail {
   }
 
   function catchall_set($domain_id, $target) {
+    global $err;
     // target :
     $target=rtrim($target);
     if ( substr_count($target,'@') == 0 ) { // Pas de @
@@ -885,7 +886,7 @@ ORDER BY
 
     $db->query("SELECT value FROM variable where name='mailname_bounce';");
     if (!$db->next_record()) {
-      $err->raise("mail",_("The email %s does not exist, it can't be deleted"),$mail);
+      $err->raise("mail",_("Problem: can't create default bounce mail"));
       return false;
     }
     $mailname=$db->f("value");

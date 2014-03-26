@@ -79,6 +79,8 @@ class m_dom {
   var $action_delete = "2";
 
   var $tld_no_check_at_all = "1";
+
+  var $cache_domains_type_lst=false;
   /* ----------------------------------------------------------------- */
   /**
    * Constructeur
@@ -148,14 +150,16 @@ class m_dom {
    *  authorisé. Retourne FALSE si une erreur s'est produite.
    */
   function domains_type_lst() {
-    global $db,$err,$cuid;
+    global $db,$err;
     $err->log("dom","domains_type_lst");
-    $db->query("select * from domaines_type order by advanced;");
-    $this->domains_type_lst=false;
-    while ($db->next_record()) {
-      $this->domains_type_lst[strtolower($db->Record["name"])] = $db->Record;
+    if (empty($this->cache_domains_type_lst)) {
+      $db->query("select * from domaines_type order by advanced;");
+      $this->cache_domains_type_lst=array();
+      while ($db->next_record()) {
+        $this->cache_domains_type_lst[strtolower($db->Record["name"])] = $db->Record;
+      }
     }
-    return $this->domains_type_lst;
+    return $this->cache_domains_type_lst;
   }
 
   function domains_type_enable_values() {
@@ -405,7 +409,7 @@ class m_dom {
         break;
     }
 
-    // If it is a know domains type
+    // If it is an unknown domains type
     if (! array_key_exists( strtolower($val['type']), $this->domains_type_lst() ) ) {
       echo "what is this shit ?\n";
       print_r($entry);

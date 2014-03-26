@@ -60,7 +60,7 @@ if ($fatal) {
   echo "<div class=\"alert alert-danger\">$error</div>";
 } else {
 
-  if (!empty($error)) { echo "<p class='alert alert-danger'>$error</p>"; }
+  if (isset($error) && !empty($error)) { echo "<p class='alert alert-danger'>$error</p>"; }
 ?>
 
 <table>

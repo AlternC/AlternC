@@ -157,7 +157,7 @@ class m_quota {
     $err->log("quota","getquota",$ressource);
     if ($recheck) { // rebuilding quota
       $get_quota_cache=null;
-      $this->quota=array();
+      $this->quotas=array();
     }
     if (! empty($get_quota_cache[$cuid]) ) {
       // This function is called many time each webpage, so I cache the result
@@ -346,7 +346,6 @@ class m_quota {
    */
   function deltype($type) {
     global $db;
-    $qlist=$this->qlist();
     
     if($db->query("UPDATE membres SET type='default' WHERE type='$type'") &&
        $db->query("DELETE FROM defquotas WHERE type='$type'")) {

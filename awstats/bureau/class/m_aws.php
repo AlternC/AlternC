@@ -139,7 +139,6 @@ class m_aws {
   function get_stats_details($id) {
     global $db,$err,$cuid;
     $err->log("aws","get_stats_details",$id);
-    $r=array();
     $db->query("SELECT id, hostname, hostaliases, public FROM aws WHERE uid='$cuid' AND id='$id';");
     if ($db->num_rows()) {
       $db->next_record();
@@ -295,7 +294,7 @@ class m_aws {
    */
   function put_stats_details($id,$users,$hostaliases,$public) {
     global $err,$db,$cuid;
-    if ($c=$this->get_stats_details($id)) {
+    if ($this->get_stats_details($id)) {
       $this->delete_allowed_login($id, 1);
       if (is_array($users)) {
         foreach($users as $v) {
@@ -306,7 +305,9 @@ class m_aws {
       $this->_createconf($id);
       $this->_createhtpasswd();
       return true;
-    } else return false;
+    } else {
+      return false;
+    }
   }
 
 

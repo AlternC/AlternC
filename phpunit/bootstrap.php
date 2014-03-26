@@ -26,9 +26,9 @@ require_once ALTERNC_PANEL."/class/functions.php";
 // General variables setup
 // *********************
 if(is_readable('local.sh')){
-    $configFile                         = file_get_contents('local.sh', 'r');
+    $configFile                         = file_get_contents('local.sh';
 } else if(is_readable('local.sh_generic')){
-    $configFile                         = file_get_contents('local.sh_generic', 'r');
+    $configFile                         = file_get_contents('local.sh_generic');
 } else {
     throw new Exception("You must provide a local.sh file", 1 );
 }
@@ -88,7 +88,9 @@ if ( is_readable("my.cnf") ) {
     $mysqlConfigFile                      = file("my.cnf");
 } else if(is_readable('my.cnf_generic')){
     $mysqlConfigFile                      = file('my.cnf_generic');
-} 
+} else {
+    throw new Exception("You must provide a my.cnf file", 1 );
+}
 
 foreach ($mysqlConfigFile as $line) {
   if (preg_match('/^([A-Za-z0-9_]*) *= *"?(.*?)"?$/', trim($line), $matches)) {

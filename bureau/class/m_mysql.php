@@ -219,7 +219,6 @@ class m_mysql {
       $err->raise("mysql",_("Database %s not found"),$dbn);
       return array("enabled"=>false);
     }
-    $c=array();
     $db->next_record();
     list($dbu,$dbn)=split_mysql_database_name($db->f("db"));
     return array("enabled"=>true,"login"=>$db->f("login"),"db"=>$db->f("db"), "name"=>$dbn,"bck"=>$db->f("bck_mode"), "dir"=>substr($db->f("bck_dir"),strlen($root)), "size"=>$size, "pass"=>$db->f("pass"), "history"=>$db->f("bck_history"), "gzip"=>$db->f("bck_gzip"));
@@ -604,7 +603,7 @@ class m_mysql {
     $dbu=$dbn;
     $r=array();
     $dbn=str_replace('_','\_',$dbn);
-    $q=$this->dbus->query("Select * from mysql.db where Db='".$dbn."' and User!='".$cuid."_myadm';");
+    $this->dbus->query("Select * from mysql.db where Db='".$dbn."' and User!='".$cuid."_myadm';");
 
     if(!$db->num_rows()){
       return $r;
@@ -1073,14 +1072,14 @@ class m_mysql {
     $err->log("mysql","export");
     $db->query("SELECT login, pass, db, bck_mode, bck_dir, bck_history, bck_gzip FROM db WHERE uid='$cuid';");
     if ($db->next_record()) {
-      $str.=" <sql>\n";
+      $str =" <sql>\n";
       $str.="   <login>".$db->Record["login"]."</login>\n";
       $str.="   <pass>".$db->Record["pass"]."</pass>\n";
       do {
         $filename=$tmpdir."/mysql.".$db->Record["db"].".sql.gz";
         $str.="   <database>".($db->Record["db"])."</database>\n";
         $str.="   <password>".($db->Record["pass"])."</password>\n";
-        if ($s["bck_mode"]!=0) {
+        if ($s["bck_mode"]!=0) { // FIXME what is $s ?
           $str.="   <backup-mode>".($db->Record["bck_mode"])."</backup-mode>\n";
           $str.="   <backup-dir>".($db->Record["bck_dir"])."</backup-dir>\n";
           $str.="   <backup-history>".($db->Record["bck_history"])."</backup-history>\n";
@@ -1140,7 +1139,6 @@ class m_mysql {
 
     $this->dbus->query("show databases;");
     $res=array();
-    $d=array();
     while($this->dbus->next_record()) {
       $dbname=$this->dbus->f("Database");
       $c=mysql_query("SHOW TABLE STATUS FROM $dbname;");

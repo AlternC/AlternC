@@ -39,7 +39,6 @@ class m_squirrelmail {
     global $db;
     // Search for the domain where the panel is hosted, then search for a webmail in it.
     $i=2;
-    $domain="";
     if (!empty($_SERVER["HTTP_HOST"]))  { 
       do { // for each domain part (search panel.alternc.org then alternc.org then org, if the current panel is at www.panel.alternc.org)
 	$expl=explode(".",$_SERVER["HTTP_HOST"],$i);

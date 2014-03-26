@@ -39,7 +39,6 @@ class m_roundcube {
     global $db;
     // Search for the domain where the panel is hosted, then search for a webmail in it.
     $i=2;
-    $domain="";
     if (!empty($_SERVER["HTTP_HOST"]))  { 
       do { // for each domain part (search panel.alternc.org then alternc.org then org, if the current panel is at www.panel.alternc.org)
 	$expl=explode(".",$_SERVER["HTTP_HOST"],$i);
@@ -79,6 +78,11 @@ class m_roundcube {
     // Use cleandb.sh filled by roundcube ? http://trac.roundcube.net/browser/github/bin/cleandb.sh
 
     include_once("/etc/roundcube/debian-db.php");
+    if (! isset($dbtype)) {
+      global $err;
+      $err->raise("roundcube::hook_mail_delete_for_real",_("Problem: missing var in Debian Roundcube configuration file"));
+      return false;
+    }
 
     switch ($dbtype) {
       case "sqlite":
@@ -89,7 +93,7 @@ class m_roundcube {
         if ($dbport != '') $dbport=":$dbport";
         if ($dbserver == '') $dbserver="localhost";
         $dbh= new PDO("$dbtype:host=$dbserver;dbname=$dbname;dbport=$dbport", $dbuser, $dbpass);
-        $rcdb = "$dbtype:$dbuser:$dbpass@$dbserver$dbport/$dbname";
+        #$rcdb = "$dbtype:$dbuser:$dbpass@$dbserver$dbport/$dbname";
         break;
     }
 

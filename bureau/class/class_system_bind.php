@@ -136,7 +136,7 @@ class system_bind {
    * @param string $domain
    * @return string 
    */
-  function get_zone_header($domain) {
+  function get_zone_header() {
     return file_get_contents($this->ZONE_TEMPLATE);
   }
   
@@ -315,7 +315,7 @@ class system_bind {
   function get_zone($domain) {
     global $L_FQDN, $L_NS1_HOSTNAME, $L_NS2_HOSTNAME, $L_DEFAULT_MX, $L_DEFAULT_SECONDARY_MX, $L_PUBLIC_IP;
 
-    $zone =$this->get_zone_header($domain);
+    $zone =$this->get_zone_header();
     $zone.=implode("\n",$this->conf_from_db($domain));
     $zone.="\n;;;HOOKED ENTRY\n";
 

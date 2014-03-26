@@ -168,7 +168,7 @@ class m_ftp {
       $db->next_record();
 
       $regexp="/^".preg_quote(getuserpath(),"/")."\/(.*)$/";
-      $tr=preg_match($regexp, $db->f("homedir"),$match);
+      preg_match($regexp, $db->f("homedir"),$match);
 
       $lg=explode("_",$db->f("name"));
       if ((!is_array($lg)) || (count($lg)!=2)) {
@@ -272,7 +272,7 @@ class m_ftp {
       return false;
     }
     $lo=$mem->user["login"];
-    $l=substr($lo,0,1);
+
     $full_login=$prefixe;
     if ($login) $full_login.="_".$login;
     if (! $this->check_login($full_login) ) return false;
@@ -363,10 +363,9 @@ class m_ftp {
     $db->query("SELECT login FROM membres WHERE uid='$cuid';");
     $db->next_record();
     $lo=$db->f("login");
-    $l=substr($lo,0,1);
     $absolute=getuserpath()."/$dir";
     if (!file_exists($absolute)) {
-      system("/bin/mkdir -p $absolute");
+      system("/bin/mkdir -p $absolute"); // FIXME replace with action
     }
     if (!is_dir($absolute)) {
       $err->raise("ftp",_("The directory cannot be created"));
@@ -399,7 +398,6 @@ class m_ftp {
     global $mem,$db,$err;
     $err->log("ftp","is_ftp",$dir);
     $lo=$mem->user["login"];
-    $l=substr($lo,0,1);
     if (substr($dir,0,1)=="/") $dir=substr($dir,1);
     $db->query("SELECT id FROM ftpusers WHERE homedir='".getuserpath()."/$dir';");
     if ($db->num_rows()) {
