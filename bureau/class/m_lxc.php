@@ -34,7 +34,9 @@ class m_lxc implements vm {
 
 
   public $IP;
+  public $KEY;
   public $PORT;
+  public $maxtime;
   public $TIMEOUT = 5;
   public $error = array();
 
@@ -107,7 +109,6 @@ class m_lxc implements vm {
       $this->error[] = 'Unable to send data';
       return FALSE;
     }
-    $resp = '';
     $resp = fgets($fp, 8192);
     fclose ($fp);
 
@@ -147,14 +148,14 @@ class m_lxc implements vm {
       return $this->error;
     } else {
       $data = unserialize($res);
-      $error = $data['error'];
+      $error = (int)$data['error'];
       $hostname = $data['hostname'];
       $msg = $data['msg'];
       $date_start = 'NOW()';
       $uid = $mem->user['uid'];
 
-      if ((int)$data['error'] != 0) {
-        $err->raise('lxc', _($data['msg']));
+      if ($error != 0) {
+        $err->raise('lxc', _($msg));
         return FALSE;
       }
       $db->query("INSERT INTO vm_history (ip,date_start,uid,serialized_object) VALUES ('$hostname', $date_start, '$uid', '$res')");

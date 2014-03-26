@@ -76,6 +76,7 @@ class m_mail {
   var $srv_pop3s;
 
   var $cache_domain_mail_size = array();
+  var $enum_domains=array();
   /* ----------------------------------------------------------------- */
   /** 
    * Constructeur
@@ -674,7 +675,7 @@ ORDER BY
       }
     }
     $db->query("DELETE FROM recipient WHERE address_id=".$mail_id.";");
-    if ($m) {
+    if (isset($m) && $m) {
       $db->query("INSERT INTO recipient SET address_id=".$mail_id.", recipients='".addslashes($red)."';");
     }
     return true;
@@ -738,13 +739,11 @@ ORDER BY
     $err->log("mail","export");
     $domain=$this->enum_domains();
     $str="<mail>\n";
-    $onepop=false;
     foreach ($domain as $d) {
       $str.="  <domain>\n    <name>".xml_entities($d["domain"])."</name>\n";
       $s=$this->enum_domain_mails($d["id"]);
       if (count($s)) {
 	while (list($key,$val)=each($s)){
-	  $test=$this->get_details($val['id']);
 	  $str.="    <address>\n";
 	  $str.="      <name>".xml_entities($val["address"])."</name>\n";
 	  $str.="      <enabled>".xml_entities($val["enabled"])."</enabled>\n";

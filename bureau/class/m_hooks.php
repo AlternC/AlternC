@@ -88,7 +88,7 @@ class m_hooks {
     // First, build the list of script we want to launch
     $to_launch=array();
     if (is_file($scripts)) {
-      if (is_executable($script)) {
+      if (is_executable($scripts)) {
         $to_launch[]=$scripts;
       }
     } else if (is_dir($scripts)) {

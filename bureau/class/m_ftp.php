@@ -271,7 +271,6 @@ class m_ftp {
       $err->raise("ftp",_("The chosen prefix is not allowed"));
       return false;
     }
-    $lo=$mem->user["login"];
 
     $full_login=$prefixe;
     if ($login) $full_login.="_".$login;
@@ -362,7 +361,6 @@ class m_ftp {
     }
     $db->query("SELECT login FROM membres WHERE uid='$cuid';");
     $db->next_record();
-    $lo=$db->f("login");
     $absolute=getuserpath()."/$dir";
     if (!file_exists($absolute)) {
       system("/bin/mkdir -p $absolute"); // FIXME replace with action
@@ -397,7 +395,6 @@ class m_ftp {
   function is_ftp($dir) {
     global $mem,$db,$err;
     $err->log("ftp","is_ftp",$dir);
-    $lo=$mem->user["login"];
     if (substr($dir,0,1)=="/") $dir=substr($dir,1);
     $db->query("SELECT id FROM ftpusers WHERE homedir='".getuserpath()."/$dir';");
     if ($db->num_rows()) {

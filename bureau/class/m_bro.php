@@ -182,7 +182,7 @@ class m_bro {
     global $db,$cuid,$err;
     $db->query("UPDATE browser SET lastdir='$dir' WHERE uid='$cuid';");
     $absolute=$this->convertabsolute($dir,0);
-    if (! file_exists($absolute)) {
+    if (!$absolute || !file_exists($absolute)) {
       $err->raise('bro',_("This directory do not exist"));
       return false;
     }
@@ -239,11 +239,11 @@ class m_bro {
     $listmode=intval($listmode);	$showicons=intval($showicons);
     $showtype=intval($showtype);	$downfmt=intval($downfmt);
     $createfile=intval($createfile);	$golastdir=intval($golastdir);
-    $db->query("SELECT * FROM browser WHERE uid='$cuid';");
+    $db->query("SELECT * FROM browser WHERE uid='".intval($cuid)."';");
     if ($db->num_rows()==0) {
-      $db->query("INSERT INTO browser (editsizex, editsizey, listmode, showicons, downfmt, createfile, showtype, uid, editor_font, editor_size, golastdir) VALUES (70, 21, 0, 0, 0, 0, 0, '".$this->uid."','Arial, Helvetica, Sans-serif','12px',1);");
+      $db->query("INSERT INTO browser (editsizex, editsizey, listmode, showicons, downfmt, createfile, showtype, uid, editor_font, editor_size, golastdir) VALUES (70, 21, 0, 0, 0, 0, 0, '".intval($cuid)."','Arial, Helvetica, Sans-serif','12px',1);");
     }
-    $db->query("UPDATE browser SET editsizex='$editsizex', editsizey='$editsizey', listmode='$listmode', showicons='$showicons', downfmt='$downfmt', createfile='$createfile', showtype='$showtype', editor_font='$editor_font', editor_size='$editor_size', golastdir='$golastdir' WHERE uid='$cuid';");
+    $db->query("UPDATE browser SET editsizex='$editsizex', editsizey='$editsizey', listmode='$listmode', showicons='$showicons', downfmt='$downfmt', createfile='$createfile', showtype='$showtype', editor_font='$editor_font', editor_size='$editor_size', golastdir='$golastdir' WHERE uid='".intval($cuid)."';");
     return true;
   }
 
@@ -721,11 +721,11 @@ class m_bro {
   function content($R,$file) {
     global $err;
     $absolute=$this->convertabsolute($R,0);
-    $std="";
     if (!strpos($file,"/")) {
       $absolute.="/".$file;
       if (file_exists($absolute)) {
 	$std=str_replace("<","&lt;",str_replace("&","&amp;",file_get_contents($absolute)));
+        return $std;
       } else {
 	$err->raise("bro",_("Cannot read the requested file. Please check the permissions"));
 	return false;
@@ -734,7 +734,6 @@ class m_bro {
       $err->raise("bro",_("File or folder name is incorrect"));
       return false;
     }
-    return $std;
   }
 
 
@@ -970,7 +969,7 @@ class m_bro {
     header("Content-Disposition: attachment; filename=".$mem->user["login"].".zip");
     header("Content-Type: application/x-zip");
     header("Content-Transfer-Encoding: binary");
-    $d=escapeshellarg($this->convertabsolute($dir,0));
+    $d=escapeshellarg($this->convertabsolute($dir,false));
     set_time_limit(0);
     passthru("/usr/bin/zip -r - $d");
   }
@@ -1020,7 +1019,7 @@ class m_bro {
     global $db,$err;
     $err->log("bro","export_conf");
     $str="<table border=\"1\"><caption> Browser </caption>\n";
-    $str="  <browser>\n";
+    $str.="  <browser>\n";
     $pref=$this->GetPrefs();
     
     $i=1;

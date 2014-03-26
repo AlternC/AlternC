@@ -486,9 +486,9 @@ Cordially.
     $db->next_record();
 
     // un cookie de 20 caractères pour le mail
-    $COOKIE=substr(md5(uniqid(rand(),1)),0,20);
+    $COOKIE=substr(md5(uniqid(rand(), true)),0,20);
     // et de 6 pour la clé à entrer. ca me semble suffisant...
-    $KEY=substr(md5(uniqid(rand(),1)),0,6);
+    $KEY=substr(md5(uniqid(rand(), true)),0,6);
     $link="https://$L_FQDN/mem_cm.php?usr=$cuid&cookie=$COOKIE";
     $txt=sprintf(_("Hello,
 

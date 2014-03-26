@@ -147,11 +147,9 @@ class m_hta {
     global $mem,$err;
     $err->log("hta","is_protected",$dir);
     $absolute=ALTERNC_HTML."/".substr($mem->user["login"],0,1)."/".$mem->user["login"]."/$dir";
-    $sortie=array();
     if (file_exists("$absolute/.htpasswd")){
       return true;
-    }
-    else {
+    } else {
       return false;
     }
   }

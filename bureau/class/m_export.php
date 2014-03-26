@@ -11,7 +11,6 @@ Class m_export {
 
     function export_conf(){
         global $hooks;
-        $conf = array(); 
         $conf=$hooks->invoke('alternc_export_conf');
         return $conf;
     }

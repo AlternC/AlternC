@@ -8,6 +8,7 @@ if (!$admin->enabled) {
 }
 
 $db->query("SELECT id,hostname FROM stats;");
+$d=array();
 while ($db->next_record()) {
  $d[]=$db->Record;
 }

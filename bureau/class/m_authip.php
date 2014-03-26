@@ -251,7 +251,6 @@ class m_authip {
    */
   function get_auth_class() {
     global $hooks;
-    $authclass=array();
     $authclass = $hooks->invoke('authip_class');
 
     // Je rajoute la class DANS l'objet parce que
