@@ -223,7 +223,6 @@ class m_action {
      * 
      * @global m_err $err
      * @global m_mysql $db
-     * @param type $all
      * @return boolean
      */
     function get_old() {

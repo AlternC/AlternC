@@ -292,6 +292,7 @@ class DB_Sql {
 
   /**
    * @param string $Name
+   * @return integer
    */
   function f($Name) {
     return $this->Record[$Name];

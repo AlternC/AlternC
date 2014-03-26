@@ -99,8 +99,8 @@ class m_bro {
    * @param string $dir 
    * @global    m_mem   $mem
    * @param     string  $dir    Dossier absolu que l'on souhaite vérifier
-   * @param     boolean $strip
-   * @return    boolean|string  Retourne le nom du dossier vrifi, relatif au
+   * @param     integer $strip
+   * @return    false|string  Retourne le nom du dossier vrifi, relatif au
    * dossier de l'utilisateur courant, ventuellement corrig.
    * ou FALSE si le dossier n'est pas dans le dossier de l'utilisateur.
    */
@@ -543,8 +543,6 @@ class m_bro {
    * 
    * @global    m_err   $err
    * @param     string  $R          Dossier dans lequel se trouve les fichiers  renommer.
-   * @param     array   $old        Ancien nom des fichiers
-   * @param     array   $new        Nouveau nom des fichiers
    * @param     boolean $verbose    Shall we 'echo' what we did ?
    * @return    boolean TRUE        Si les fichiers ont t renomms, FALSE si une erreur s'est produite.
    */
@@ -645,7 +643,7 @@ class m_bro {
    * @param     string $file    Full or relative path to the archive
    * @param     string $dest    Path of the extract destination, the
    *                            same directory as the archive by default
-   * @return    boolean         != 0 on error
+   * @return    integer|null         != 0 on error
    */
   function ExtractFile($file, $dest=null) {
     global $err,$cuid,$mem,$action;
@@ -786,7 +784,7 @@ class m_bro {
    * @global    m_err   $err
    * @param     string  $R      Dossier dans lequel on cherche le fichier
    * @param     string  $file   Fichier dont on souhaite obtenir le contenu.
-   * @return    boolean         TRUE si le fichier a bien été mis sur
+   * @return    string|false         TRUE si le fichier a bien été mis sur
    *                            echo, ou FALSE si une erreur est survenue.
    */
   function content($R,$file) {
@@ -869,7 +867,7 @@ class m_bro {
    * @global    m_err   $err
    * @param     string  $dir
    * @param     string  $name
-   * @return boolean
+   * @return null|boolean
    */
   function can_edit($dir,$name) {
     global $mem,$err;
@@ -958,7 +956,7 @@ class m_bro {
    * @global    m_err   $err
    * @param     string  $R
    * @param     string  $file
-   * @return    boolean
+   * @return    null|false
    */
   function content_send($R,$file) {
     global $err;
@@ -985,7 +983,7 @@ class m_bro {
    *                            écrasé sans confirmation.
    * @param     string  $R      Dossier dans lequel on modifie le fichier
    * @param     string  $texte  Texte du fichier à sauver dedans
-   * @return    boolean         TRUE si tout s'est bien pass, FALSE si une erreur s'est produite.
+   * @return    false|null         TRUE si tout s'est bien pass, FALSE si une erreur s'est produite.
    */
   function save($file,$R,$texte) {
     global $err;
@@ -1152,7 +1150,7 @@ class m_bro {
    * @global    m_mem   $mem
    * @global    m_err   $err
    * @param     string  $dir    Le chemin destination du tarball produit
-   * @return    boolean
+   * @return    boolean|null
    */
   function alternc_export_data($dir){
     global $mem,$err;

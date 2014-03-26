@@ -312,8 +312,8 @@ class m_admin {
    * @global	   type $err
    * @global	   type $mem
    * @global	   type $cuid
-   * @param     boolean $all
-   * @param     boolean $creator
+   * @param     integer $all
+   * @param     integer $creator
    * @param     string $pattern
    * @param     string $pattern_type
    * @return    boolean | array an associative array containing all the fields of the
@@ -564,11 +564,11 @@ class m_admin {
    * @param     string  $prenom         First name of the account owner
    * @param     string  $mail           Email address of the account owner, useful to get
    *                                    one's lost password
-   * @param     boolean $canpass
+   * @param     integer $canpass
    * @param     string  $type           Account type for quotas
    * @param     int     $duration
    * @param     string  $notes
-   * @param     boolean $force
+   * @param     integer $force
    * @param     boolean $create_dom
    * @param     int     $db_server_id
    * @return boolean Returns FALSE if an error occurs, TRUE if not.
@@ -1413,7 +1413,7 @@ EOF;
    * @param     int     $maxsize    Maximum Password size
    * @param     int     $classcount How many class of characters must this password have
    * @param     boolean $allowlogin Do we allow the password to be like the login ? 
-   * @return    booleanTRUE if the policy has been edited, or FALSE if an error occured.
+   * @return    boolean if the policy has been edited, or FALSE if an error occured.
    */
   function editPolicy($policy,$minsize,$maxsize,$classcount,$allowlogin) {
     global $db;
