@@ -238,7 +238,6 @@ _Description: Use locally found MySQL server?
 Template: alternc/use_remote_mysql
 Type: boolean
 _Description: Use a remote MySQL server?
- No local Mysql server was found.
  Please confirm you want to use a remote Mysql Server.
  If not, AlternC cannot be installed.
 
