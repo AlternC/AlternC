@@ -154,6 +154,9 @@ class m_piwik {
 	else return FALSE; 
   }
 
+  /**
+   * @param string $user_login
+   */
   function get_user($user_login) {
     $api_data = $this->call_privileged_page('API', 'UsersManager.getUser', array('userLogin' => $user_login));
 
@@ -380,6 +383,10 @@ class m_piwik {
   }
 
 
+  /**
+   * @param string $module
+   * @param string $method
+   */
   function call_privileged_page($module, $method, $arguments=array(), $output = 'JSON') {
 	$arguments['token_auth'] = $this->piwik_admin_token;
 	return $this->call_page($module, $method, $arguments, $output);

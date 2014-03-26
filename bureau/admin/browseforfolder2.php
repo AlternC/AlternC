@@ -44,6 +44,10 @@ $fields = array (
     );
 getFields($fields);
 
+/**
+ * @param integer $pos
+ * @param integer $level
+ */
 function _subbrowse($curdir,$pos,$level) {
   global $maxlevel,$root,$brlist;
   if ($level>$maxlevel)

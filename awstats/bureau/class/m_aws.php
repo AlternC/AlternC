@@ -537,6 +537,10 @@ class m_aws {
 
 
   /* ----------------------------------------------------------------- */
+
+  /**
+   * @param integer $id
+   */
   function delete_allowed_login($id,$noconf=0) {
     global $db,$err,$cuid;
     $err->log("aws","delete_allowed_login");
@@ -633,7 +637,6 @@ class m_aws {
   /** 
    * This function is called when we are asked to compute the used quota
    * for a service
-   * @param integer $id The userid whose quota should be computed.
    */
   function hook_quota_get() {
     global $db,$err,$cuid;

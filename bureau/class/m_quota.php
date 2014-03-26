@@ -86,6 +86,7 @@ class m_quota {
   /** Check if a user can use a ressource.
    * @param string $ressource the ressource name (a named quota)
    * @Return TRUE if the user can create a ressource (= is there any quota left ?)
+   * @return boolean
    */
   function cancreate($ressource="") {
     $t=$this->getquota($ressource);

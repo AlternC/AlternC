@@ -141,7 +141,7 @@ class m_hta {
   /**
    * Tells if a folder is protected.
    * @param string $dir Folder to check
-   * @return TRUE if the folder is protected, or FALSE if it is not
+   * @return boolean if the folder is protected, or FALSE if it is not
    */
   function is_protected($dir){
     global $mem,$err;
@@ -221,7 +221,6 @@ class m_hta {
   /*---------------------------------------------------------------------------*/
   /**
    * Add a user to a protected folder
-   * @param string $login The user login to add
    * @param string $password The password to add (cleartext)
    * @param string $dir The folder we add it to (relative to user root).
    * @return boolean TRUE if the user has been added, or FALSE if an error occurred

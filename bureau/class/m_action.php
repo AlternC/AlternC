@@ -94,7 +94,7 @@ class m_action {
      * 
      * @param string $dir
      * @param m_user $user
-     * @return type
+     * @return boolean
      */
     function fix_dir($dir, $user = "root") {
         return $this->set('fix_dir', $user, array('dir' => $dir));
@@ -105,7 +105,7 @@ class m_action {
      * 
      * @param string $file
      * @param m_user $user
-     * @return type
+     * @return boolean
      */
     function fix_file($file, $user = "root") {
         return $this->set('fix_file', $user, array('file' => $file));
@@ -116,7 +116,7 @@ class m_action {
      * 
      * @param string $dir
      * @param m_user $user
-     * @return type
+     * @return boolean
      */
     function del($dir, $user = "root") {
         return $this->set('delete', $user, array('dir' => $dir));
@@ -128,7 +128,7 @@ class m_action {
      * @param string $src
      * @param string $dst
      * @param m_user $user
-     * @return type
+     * @return boolean
      */
     function move($src, $dst, $user = "root") {
         return $this->set('move', $user, array('src' => $src, 'dst' => $dst));
@@ -304,7 +304,7 @@ class m_action {
      * @global m_mysql $db
      * @global m_err $err
      * @param int $id
-     * @param type $return
+     * @param integer $return
      * @return boolean
      */
     function finish($id, $return = 0) {

@@ -104,7 +104,7 @@ function checkhostallow($domain,$dns) {
  * Check that a domain can be hosted in that server, 
  *   without DNS managment. 
  * @global m_mysql $db
- * @param type $domain
+ * @param string $domain
  * @return int
  */
 function checkhostallow_nodns($domain) {
@@ -340,7 +340,7 @@ function selected($bool, $echo = TRUE) {
  * @param boolean $test
  * @param string $tr
  * @param string $fa
- * @param boolean $affiche
+ * @param integer $affiche
  * @return string
  */
 function ecif($test,$tr,$fa="",$affiche=1) {
@@ -381,7 +381,7 @@ function ife($test,$tr,$fa="") {
 /**
  * 
  * @param int|string $size
- * @param string $html
+ * @param integer $html
  * @return string
  */
 function format_size($size,$html=0) {
@@ -512,7 +512,7 @@ function xml_entities($string) {
 
 /* ----------------------------------------------------------------- */
 /** Converti un nombre de mois en une chaine plus lisible
- * @param  number $months Nombre de mois
+ * @param  integer $months Nombre de mois
  * @return string Cha�ne repr�sentant le nombre de mois
  * @access private
  */

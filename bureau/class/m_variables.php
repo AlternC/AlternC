@@ -296,7 +296,7 @@ class m_variables {
    * @param mixed $v
    * @param string $varname
    * @param boolean $echo
-   * @return type
+   * @return string
    */
   function display_valueraw_html($v,$varname,$echo = true) {
     $output                     = "";

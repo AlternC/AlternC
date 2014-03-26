@@ -51,14 +51,14 @@ class DB_Sql {
   }
 
   /**
-  * @return the class variable Link_ID
+  * @return resource class variable Link_ID
   */
   function link_id() {
     return $this->Link_ID;
   }
 
   /**
-  * @return the class variable Query_ID
+  * @return integer class variable Query_ID
   */
   function query_id() {
     return $this->Query_ID;
@@ -289,6 +289,9 @@ class DB_Sql {
     print $this->num_rows();
   }
 
+  /**
+   * @param string $Name
+   */
   function f($Name) {
     return $this->Record[$Name];
   }

@@ -258,7 +258,7 @@ class m_admin {
 
 
   /* ----------------------------------------------------------------- */
-  /** @return TRUE if there's only ONE admin account
+  /** @return boolean if there's only ONE admin account
    * @return boolean TRUE if there is only one admin account
    * (allow the program to prevent the destruction of the last admin account)
    */
@@ -363,7 +363,7 @@ class m_admin {
    * @param $subject string Subject of the email to send
    * @param $message string Message to send 
    * @param $from string expeditor of that email.
-   * @return true if the mail has been successfully sent.
+   * @return boolean if the mail has been successfully sent.
    */ 
   function mailallmembers($subject,$message,$from) {
     global $err,$mem,$cuid,$db;
@@ -448,6 +448,10 @@ class m_admin {
   }
 
   // When the admin want to delegate a subdomain to an account
+
+  /**
+   * @param boolean $domain_name
+   */
   function add_shared_domain($u, $domain_name) {
     global $db,$err,$dom,$mem,$cuid;
     $err->log("admin","add_shared_domain",$u."/".$domain_name);
@@ -812,7 +816,7 @@ EOF;
   /* ----------------------------------------------------------------- */
   /** Update the duration information for an account
    * @param $uid integer the uid number of the account we want to update
-   * @param $duration integer the new duration, in months, of the account
+   * @param integer $duration integer the new duration, in months, of the account
    * @return boolean Returns FALSE if an error occurs, TRUE if not.
    */
   function renew_update($uid, $duration) {
@@ -894,7 +898,7 @@ EOF;
   /** Turns a common account into a super-admin account
    * @param $uid integer the uid number of the common account we want to turn into a
    *  super-admin account.
-   * @return Returns FALSE if an error occurs, TRUE if not.
+   * @return boolean FALSE if an error occurs, TRUE if not.
    */
   function normal2su($uid) {
     global $err,$db;

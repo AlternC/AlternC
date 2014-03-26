@@ -17,7 +17,7 @@ abstract class AlterncTest extends PHPUnit_Extensions_Database_TestCase
     
     /**
      * 
-     * @param type $file_name
+     * @param string $file_name
      * @return \PHPUnit_Extensions_Database_DataSet_YamlDataSet
      * @throws \Exception
      */

@@ -586,7 +586,7 @@ class m_bro {
    * @param string $file is the full or relative path to the archive
    * @param string $dest is the path of the extract destination, the
    * same directory as the archive by default
-   * @return boolean != 0 on error
+   * @return integer|null != 0 on error
    */
   function ExtractFile($file, $dest=null) {
     global $err,$cuid,$mem,$action;
@@ -715,7 +715,7 @@ class m_bro {
    * du fichier est reformat pour pouvoir entrer dans un champs TextArea
    * @param string $R Dossier dans lequel on cherche le fichier
    * @param string $file Fichier dont on souhaite obtenir le contenu.
-   * @return boolean retourne TRUE si le fichier a bien t mis sur
+   * @return false|string retourne TRUE si le fichier a bien t mis sur
    * echo, ou FALSE si une erreur est survenue.
    */
   function content($R,$file) {
@@ -892,7 +892,7 @@ class m_bro {
    *  cras sans confirmation.
    * @param string $R Dossier dans lequel on modifie le fichier
    * @param string $texte texte du fichier  sauver dedans
-   * @return boolean TRUE si tout s'est bien pass, FALSE si une erreur s'est produite.
+   * @return false|null TRUE si tout s'est bien pass, FALSE si une erreur s'est produite.
    */
   function save($file,$R,$texte) {
     global $err;

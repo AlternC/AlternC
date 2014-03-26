@@ -22,6 +22,10 @@ class AutoLoader {
         }
     }
  
+    /**
+     * @param string $className
+     * @param string $fileName
+     */
     public static function registerClass($className, $fileName) {
         AutoLoader::$classNames[$className] = $fileName;
     }

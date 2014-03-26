@@ -157,6 +157,10 @@ class m_mail {
     return $this->delete($catch['mail_id']);
   }
 
+  /**
+   * @param string $domain_id
+   * @param string $target
+   */
   function catchall_set($domain_id, $target) {
     global $err;
     // target :
@@ -427,7 +431,7 @@ ORDER BY
   /** Hook called when the DOMAIN class will delete a domain.
    *
    * @param $dom integer the number of the email to delete
-   * @return true if the email has been properly deleted 
+   * @return boolean if the email has been properly deleted 
    * or false if an error occured ($err is filled accordingly)
    */ 
   function hook_dom_del_mx_domain($dom_id) {
@@ -456,7 +460,7 @@ ORDER BY
    * should be used by the web interface, not by third-party programs.
    *
    * @param $mail_id integer the number of the email to delete
-   * @return true if the email has been properly deleted 
+   * @return boolean if the email has been properly deleted 
    * or false if an error occured ($err is filled accordingly)
    */ 
   function delete($mail_id){
@@ -510,7 +514,7 @@ ORDER BY
    * should be used by the web interface, not by third-party programs.
    *
    * @param $mail_id integer the email id
-   * @return true if the email has been properly undeleted 
+   * @return boolean if the email has been properly undeleted 
    * or false if an error occured ($err is filled accordingly)
    */ 
   function undelete($mail_id){
@@ -607,10 +611,10 @@ ORDER BY
    * should be used by the web interface, not by third-party programs.
    *
    * @param $mail_id integer the number of the email to delete
-   * @param $islocal boolean is it a POP/IMAP mailbox ?
-   * @param $quotamb integer if islocal=1, quota in MB
+   * @param integer $islocal boolean is it a POP/IMAP mailbox ?
+   * @param integer $quotamb integer if islocal=1, quota in MB
    * @param $recipients string recipients, one mail per line.
-   * @return true if the email has been properly edited
+   * @return boolean if the email has been properly edited
    * or false if an error occured ($err is filled accordingly)
    */ 
   function set_details($mail_id, $islocal, $quotamb, $recipients,$delivery="dovecot",$dontcheck=false) {
@@ -695,6 +699,8 @@ ORDER BY
    * @ param : $m , the alias we want to create
    * @ param : $alias , the already existing aliased address
    * @ param : $type, the type of the alias created
+   * @param string $m
+   * @param string $alias
    */
   function create_alias($dom_id,$m,$alias,$type="",$dontcheck=false) {
     global $err,$db,$mail;

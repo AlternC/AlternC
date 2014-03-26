@@ -2,6 +2,9 @@
 <?php
 require_once("/usr/share/alternc/panel/class/config_nochk.php");
 
+/**
+ * @param string $msg
+ */
 function usage($msg=null) {
     if ($msg) {
       echo "Error:\n$msg";

@@ -64,6 +64,7 @@ function procmail2sieve() {
 
 /* ----------------------------------------------------------------- */
 /** Parse ONE procmailrc, and write its sieve rules
+ * @param string $user
  */
 function parseOneProcmail($user) {
   global $SIEVEROOT;

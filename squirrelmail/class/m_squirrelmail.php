@@ -69,7 +69,7 @@ class m_squirrelmail {
   /** Hook called when an email is REALLY deleted (by the cron, not just in the panel) 
    * @param mail_id integer the ID of the mail in the AlternC database
    * @param fullmail string the deleted mail himself in the form of john@domain.tld
-   * @return boolean
+   * @return boolean|null
    */
   function hook_mail_delete_for_real($mail_id, $fullmail) {
     $fullmail2 = str_replace('@','_',$fullmail); // fullname with _ instead of @ (compatibility)

@@ -133,7 +133,6 @@ class system_bind {
   
   /**
    * 
-   * @param string $domain
    * @return string 
    */
   function get_zone_header() {
@@ -177,7 +176,7 @@ class system_bind {
    * Generate the domain DKIM key
    * 
    * @param string $domain
-   * @return boolean
+   * @return null|boolean
    */
   function dkim_generate_key($domain) {
     // Stop here if we do not manage the mail

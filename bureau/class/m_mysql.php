@@ -191,7 +191,7 @@ class m_mysql {
   /*---------------------------------------------------------------------------*/
   /** Returns the details of a user's database.
    * $dbn is the name of the database (after the _) or nothing for the database "$user"
-   * @return array returns an associative array as follow : 
+   * @return string returns an associative array as follow : 
    *  "db" => Name of the database 
    *  "bck" => Current bckup mode 
    *  "dir" => Backup directory
@@ -234,7 +234,7 @@ class m_mysql {
   /*---------------------------------------------------------------------------*/
   /** Create a new database for the current user.
    * @param $dbn string Database name ($user_$dbn is the mysql db name)
-   * @return TRUE if the database $user_$db has been successfully created, or FALSE if 
+   * @return boolean if the database $user_$db has been successfully created, or FALSE if 
    * an error occured, such as over quota user.
    */
   function add_db($dbn) {
@@ -315,7 +315,7 @@ class m_mysql {
   /*---------------------------------------------------------------------------*/
   /** Delete a database for the current user.
    * @param $dbn string Name of the database to delete. The db name is $user_$dbn
-   * @return TRUE if the database $user_$db has been successfully deleted, or FALSE if 
+   * @return boolean if the database $user_$db has been successfully deleted, or FALSE if 
    *  an error occured, such as db does not exist.
    */
   function del_db($dbn) {
@@ -688,9 +688,9 @@ class m_mysql {
   /** 
    * Create a new user in MySQL rights tables
    * @param $usern the username (we will add _[alternc-account] to it)
-   * @param $password The password for this username
-   * @param $passconf The password confirmation
-   * @return TRUE if the user has been created in MySQL or FALSE if an error occurred
+   * @param string $password The password for this username
+   * @param string $passconf The password confirmation
+   * @return boolean if the user has been created in MySQL or FALSE if an error occurred
    **/
   function add_user($usern,$password,$passconf) {
     global $db,$err,$quota,$mem,$cuid,$admin;
@@ -754,7 +754,7 @@ class m_mysql {
    * @param $usern the username 
    * @param $password The password for this username
    * @param $passconf The password confirmation
-   * @return TRUE if the password has been changed in MySQL or FALSE if an error occurred
+   * @return boolean if the password has been changed in MySQL or FALSE if an error occurred
    **/
   function change_user_password($usern,$password,$passconf) {
     global $db,$err,$quota,$mem,$cuid,$admin;
@@ -785,7 +785,8 @@ class m_mysql {
   /** 
    * Delete a user in MySQL rights tables
    * @param $user the username (we will add "[alternc-account]_" to it) to delete
-   * @return TRUE if the user has been deleted in MySQL or FALSE if an error occurred
+   * @param integer $all
+   * @return boolean if the user has been deleted in MySQL or FALSE if an error occurred
    **/
   function del_user($user,$all=null) {
     global $db,$err,$mem,$cuid;
