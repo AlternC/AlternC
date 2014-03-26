@@ -2,7 +2,7 @@
          bootstrap="bootstrap.php"
 >
 <testsuites>
-    <testsuite name="AlternCTests">
+    <testsuite name="library">
       <directory>tests/bureau</directory>
     </testsuite>
   </testsuites>
