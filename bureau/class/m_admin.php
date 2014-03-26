@@ -380,7 +380,7 @@ class m_admin {
       $err->raise("admin",_("Subject, message and sender are mandatory"));
       return false;
     }
-
+    //@todo remove cf functions.php
     if (checkmail($from) != 0) {
       $err->raise("admin",_("Sender is syntaxically incorrect"));
       return false;
@@ -512,6 +512,7 @@ class m_admin {
 	$err->raise("admin",_("All fields are mandatory"));
 	      return false;
       }
+        //@todo remove cf functions.php
       if (checkmail($mail)!=0){
 	$err->raise("admin",_("Please enter a valid email address"));
 	      return false;

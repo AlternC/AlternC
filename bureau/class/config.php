@@ -40,8 +40,8 @@ session_name('AlternC_Panel');
 session_start();
 
 /*
-  Si vous voulez mettre le bureau en maintenance, décommentez le code ci-dessous
-  et mettez votre ip dans le IF pour que seule votre ip puisse accéder au bureau : 
+  Si vous voulez mettre le bureau en maintenance, dï¿½commentez le code ci-dessous
+  et mettez votre ip dans le IF pour que seule votre ip puisse accï¿½der au bureau : 
 */
 
 /* * /
@@ -52,8 +52,8 @@ Merci de revenir plus tard.";
 }
 /* */
 
-/* Toutes les pages du bureau passent ici. On utilise une sémaphore pour 
-   s'assurer que personne ne pourra accéder à 2 pages du bureau en même temps.
+/* Toutes les pages du bureau passent ici. On utilise une sï¿½maphore pour 
+   s'assurer que personne ne pourra accï¿½der ï¿½ 2 pages du bureau en mï¿½me temps.
 */
 /* * /
 // 1. Get a semaphore id for the alternc magic number (18577)
@@ -100,6 +100,7 @@ require_once(dirname(__FILE__)."/local.php");
 
 // Define constants from vars of /etc/alternc/local.sh
 // The you can't choose where is the AlternC Panel 
+define("DEFAULT_PASS_SIZE", 8);
 define('ALTERNC_MAIL',     "$L_ALTERNC_MAIL");
 define('ALTERNC_HTML',     "$L_ALTERNC_HTML");
 if(isset($L_ALTERNC_LOGS_ARCHIVE))
@@ -121,13 +122,13 @@ $root=ALTERNC_PANEL."/";
 require_once($root."/class/db_mysql.php");
 require_once($root."/class/functions.php");
 
-// Redirection si appel à https://(!fqdn)/
+// Redirection si appel ï¿½ https://(!fqdn)/
 if (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"]=="on" && $host!=$L_FQDN) {
   header("Location: https://$L_FQDN/");
 }
 
 
-// Classe héritée de la classe db de la phplib.
+// Classe hï¿½ritï¿½e de la classe db de la phplib.
 /**
 * Class for MySQL management in the bureau 
 *

@@ -178,7 +178,7 @@ class m_hta {
     if (!$file) {
       return false;
     }
-    // TODO: Tester la validité du .htpasswd
+    // TODO: Tester la validitï¿½ du .htpasswd
     while (!feof($file)) {
       $s=fgets($file,1024);
       $t=explode(":",$s);
@@ -242,6 +242,7 @@ class m_hta {
       $err->raise("hta",printf(("The folder '%s' does not exist"),$dir));
       return false;
     }
+    // @todo delete cf!. functions.php checkloginemail definition
     if (checkloginmail($user)){
       // Check this password against the password policy using common API : 
       if (is_callable(array($admin,"checkPolicy"))) {

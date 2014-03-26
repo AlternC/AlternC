@@ -27,19 +27,43 @@
 list($usec, $sec) = explode(' ', microtime());
 mt_srand((float) $sec + ((float) $usec * 100000));
 
-/* Format a field value for input or textarea : */
+/**
+ * Format a field value for input or textarea : 
+ * 
+ * @param string $str
+ * @return string
+ */
 function fl($str) { return str_replace("<","&lt;",str_replace("\"","&quot;",$str)); }
 
+/**
+ * 
+ * @global array $variables
+ * @param string $name
+ * @param mixed $default
+ * @param string $createit_comment
+ * @param struing $type
+ * @return mixed
+ */
 function variable_get($name, $default = null, $createit_comment = null, $type=null) {
   global $variables;
   return $variables->variable_get($name, $default, $createit_comment, $type);
 }
 
-/*
- Check if a domain can be hosted on this server :
- Return a negative value in case of an error,
- or a string for the index in $tld
-*/
+
+
+/**
+ *  Check if a domain can be hosted on this server :
+ * Return a negative value in case of an error,
+ * or a string for the index in $tld
+ * 
+ * @global string $L_NS1
+ * @global string $L_NS2
+ * @global m_mysql $db
+ * @global m_dom $dom
+ * @param string $domain
+ * @param array $dns
+ * @return int
+ */
 function checkhostallow($domain,$dns) {
   global $L_NS1,$L_NS2,$db,$dom;
   $sizefound=0;
@@ -76,9 +100,13 @@ function checkhostallow($domain,$dns) {
   return -3;	// DNS incorrect in the whois
 }
 
-/* Check that a domain can be hosted in that server, 
-without DNS managment. 
-*/
+/**
+ * Check that a domain can be hosted in that server, 
+ *   without DNS managment. 
+ * @global m_mysql $db
+ * @param type $domain
+ * @return int
+ */
 function checkhostallow_nodns($domain) {
   global $db;
   $sizefound=0;
@@ -103,13 +131,21 @@ function checkhostallow_nodns($domain) {
   return 0;
 }
 
+/**
+ * @return string
+ */
 function get_remote_ip() {
   // Return the remote IP.
   // If you are behind a proxy, use X_FORWARDED_FOR instead of REMOTE_ADDR
   return getenv('REMOTE_ADDR');
 }
 
-/* Check that $url is a correct url (http:// or https:// or ftp://)  */
+/**
+ * Check that $url is a correct url (http:// or https:// or ftp://) 
+ * 
+ * @param type $url
+ * @return boolean
+ */
 function checkurl($url) {
   // TODO : add a path/file check
   if (substr($url,0,7)!="http://" && substr($url,0,8)!="https://" && substr($url,0,6)!="ftp://") return false;
@@ -123,44 +159,73 @@ function checkurl($url) {
   return true;
 }
 
-/* Check that TXT domain is correct */
+/**
+ * Check that TXT domain is correct 
+ * 
+ * @param string $txt
+ * @return boolean
+ */
 function checksubtxt($txt) {
 	return true;
 }
-/* Check that CNAME domain is correct */
+/**
+ * Check that CNAME domain is correct 
+ * @param string $cname
+ * @return boolean
+ */
 function checkcname($cname) {
 	return true;
 }
 
-/* Check that $ip is a correct 4 Dotted ip */
+/**
+ * Check that $ip is a correct 4 Dotted ip
+ * @param string $ip
+ * @return type
+ */
 function checkip($ip) {
   // return true or false whether the ip is correctly formatted
   return filter_var($ip,FILTER_VALIDATE_IP, FILTER_FLAG_IPV4);
 }
 
-/* Check that $ip is a correct ipv6 ip */
+/**
+ * Check that $ip is a correct ipv6 ip 
+ * @param string $ip
+ * @return type
+ */
 function checkipv6($ip) {
   // return true or false whether the ip is correctly formatted
   return filter_var($ip,FILTER_VALIDATE_IP, FILTER_FLAG_IPV6);
 }
 
-/* Check a login mail, cf http://www.bortzmeyer.org/arreter-d-interdire-des-adresses-legales.html */
-/* FIXME: check who is using that function and delete it when unused */
+/**
+ * Check a login mail, cf http://www.bortzmeyer.org/arreter-d-interdire-des-adresses-legales.html 
+ * @todo Check who is using that function and delete it when unused 
+ * @param string $mail
+ * @return boolean
+ */
 function checkloginmail($mail) {
   return true;
 }
 
-/* Check an email address, use filter_var with emails, which works great ;)  */
-/* FIXME: check who is using that function and delete it when unused */
+/**
+ * Check an email address, use filter_var with emails, which works great ;) 
+ * @todo  check who is using that function and delete it when unused 
+ * @param string $mail
+ * @return boolean
+ */
 function checkmail($mail) {
   if (filter_var($mail,FILTER_VALIDATE_EMAIL)) {
-    return 0;
+    return FALSE;
   } else {
-    return 1;
+    return TRUE;
   }
 }
 
-/* Check that a domain name is fqdn compliant */
+/**
+ * Check that a domain name is fqdn compliant 
+ * @param string $fqdn
+ * @return int
+ */
 function checkfqdn($fqdn) {
   // (RFC 1035 http://www.ietf.org/rfc/rfc1035.txt)
   // Retourne 0 si tout va bien, sinon, retourne un code erreur...
@@ -186,12 +251,16 @@ function checkfqdn($fqdn) {
   return $ret;
 }
 
+/**
+ * 
+ * @global m_mem $mem
+ * @param string $path
+ * @return int 
+ * return 0 if the path is not in the user's space
+ * return 1 if this is a directory
+ * return 2 if this is a regular file
+ */
 function checkuserpath($path) {
-  /*
-    return 0 if the path is not in the user's space
-    return 1 if this is a directory
-    return 2 if this is a regular file
-  */
   global $mem;
   $user=$mem->user["login"];
   $usar=substr($user,0,1);
@@ -217,9 +286,10 @@ function checkuserpath($path) {
 /**
  * get the home of the user
  *
+ * @global m_mem $mem
  * @args string $user the username, if null will use the global $mem. no
  * security checks performed on path
- * @returns string the actual absolute path
+ * @return string the actual absolute path
  */
 function getuserpath($user = null) {
   if (is_null($user)) {
@@ -229,48 +299,93 @@ function getuserpath($user = null) {
   return rtrim(ALTERNC_HTML,"/")."/".substr($user,0,1)."/".$user;
 }
 
-/* ECHOes checked="checked" only if the parameter is true
+/**
+* ECHOes checked="checked" only if the parameter is true
  * useful for checkboxes and radio buttons
+ * 
+ * @param boolean $test
+ * @param boolean $echo
  */
-function cbox($test) {
-  if ($test) echo (" checked=\"checked\"");
-}
-
-
-/* ECHOes selected="selected" only if the parameter is true
- * useful for checkboxes and radio buttons
- */
-function selected($bool) {
-  if ($bool) {
-    echo " selected=\"selected\"";
+function cbox($test, $echo = TRUE) {
+  if ($test) {
+      $return = " checked=\"checked\"";
   }
+  if( $echo ){
+      echo $return;
+  }
+  return $return;
 }
 
+
+/**
+ * ECHOes selected="selected" only if the parameter is true
+ * useful for checkboxes and radio buttons
+ * 
+ * @param boolean $bool
+ * @param boolean $echo
+ * @return string
+ */
+function selected($bool, $echo = TRUE) {
+  if ($bool) {
+      $return = " selected=\"selected\"";
+  }
+  if( $echo ){
+      echo $return;
+  }
+  return $return;
+}
+
+/**
+ * 
+ * @param boolean $test
+ * @param string $tr
+ * @param string $fa
+ * @param boolean $affiche
+ * @return string
+ */
 function ecif($test,$tr,$fa="",$affiche=1) {
-  if ($test)
-    $retour = $tr;
-  else
-    $retour = $fa;
-    
-  if ($affiche) 
-    echo $retour;
-  else
+    if ($test){
+        $retour = $tr;
+    }
+    else{
+        $retour = $fa;
+    }
+    if ($affiche) {
+      echo $retour;
+    }
     return $retour;
 }
 
+/**
+ * 
+ * @param string $str
+ */
 function __($str) {
   echo _($str);
 }
 
+/**
+ * 
+ * @param boolean $test
+ * @param string $tr
+ * @param string $fa
+ * @return string
+ */
 function ife($test,$tr,$fa="") {
-  if ($test)
-    return $tr;
-  else
+    if ($test){
+        return $tr;
+    } 
     return $fa;
 }
 
+/**
+ * 
+ * @param int|string $size
+ * @param string $html
+ * @return string
+ */
 function format_size($size,$html=0) {
-  // Retourne une taille formattée en Octets, Kilo-octets, Méga-octets ou Giga-Octets, avec 2 décimales.
+  // Retourne une taille formattï¿½e en Octets, Kilo-octets, Mï¿½ga-octets ou Giga-Octets, avec 2 dï¿½cimales.
   if ("-" == $size) {
     return $size;
   }
@@ -307,13 +422,27 @@ function format_size($size,$html=0) {
   }
 }
 
+/**
+ * 
+ * @param int $hid
+ * @return string
+ */
 function getlinkhelp($hid) {
   return "(<a href=\"javascript:help($hid);\">?</a>)";
 }
+/**
+ * 
+ * @param int $hid
+ */
 function linkhelp($hid) {
   echo getlinkhelp($hid);
 }
-
+/**
+ * 
+ * @param string $format
+ * @param string $date
+ * @return string
+ */
 function format_date($format,$date) {
   $d=substr($date,8,2);
   $m=substr($date,5,2);
@@ -330,7 +459,11 @@ function format_date($format,$date) {
   return sprintf($format,$d,$m,$y,$h,$i,$hh,$am);
 }
 
-/* Strip slashes if needed : */
+/**
+ * Strip slashes if needed : 
+ * @param string $str
+ * @return string
+ */
 function ssla($str) {
   if (get_magic_quotes_gpc()) {
     return stripslashes($str);
@@ -340,9 +473,9 @@ function ssla($str) {
 }
 
   /* ----------------------------------------------------------------- */
-  /** Hashe un mot de passe en clair en MD5 avec un salt aléatoire
-   * @param string $pass Mot de passe à crypter (max 32 caractères)
-   * @return string Retourne le mot de passe crypté
+  /** Hashe un mot de passe en clair en MD5 avec un salt alï¿½atoire
+   * @param string $pass Mot de passe ï¿½ crypter (max 32 caractï¿½res)
+   * @return string Retourne le mot de passe cryptï¿½
    * @access private
    */
   function _md5cr($pass,$salt="") {
@@ -368,9 +501,9 @@ function split_mysql_database_name($dbname) {
 
 
 /* ----------------------------------------------------------------- */
-/** Echappe les caractères pouvant perturber un flux XML standard : 
- * @param string $string Chaine de caractère à encoder en valeur xml.
- * @return string Retourne la chaîne modifiée si besoin.
+/** Echappe les caractï¿½res pouvant perturber un flux XML standard : 
+ * @param string $string Chaine de caractï¿½re ï¿½ encoder en valeur xml.
+ * @return string Retourne la chaï¿½ne modifiï¿½e si besoin.
  * @access private
  */
 function xml_entities($string) {
@@ -380,7 +513,7 @@ function xml_entities($string) {
 /* ----------------------------------------------------------------- */
 /** Converti un nombre de mois en une chaine plus lisible
  * @param  number $months Nombre de mois
- * @return string Chaîne représentant le nombre de mois
+ * @return string Chaï¿½ne reprï¿½sentant le nombre de mois
  * @access private
  */
 function pretty_months($months) {
@@ -393,9 +526,9 @@ function pretty_months($months) {
 }
 
 /* ----------------------------------------------------------------- */
-/** Fabrique un drop-down pour les durées de comptes
+/** Fabrique un drop-down pour les durï¿½es de comptes
  * @name string $name Nom pour le composasnt
- * @selected number Option selectionée du composant
+ * @selected number Option selectionï¿½e du composant
  * @return string Code html pour le drop-down
  * @access private
  */
@@ -422,10 +555,15 @@ function duration_list($name, $selected=0) {
   return $res;
 }
 
-/* select_values($arr,$cur) echo des <option> du tableau $values ou de la table sql $values
-   selectionne $current par defaut. 
-   Si on lui demande poliement, il prend un tableau a une dimension
-*/
+/**
+ * select_values($arr,$cur) echo des <option> du tableau $values ou de la table sql $values
+ *  selectionne $current par defaut. 
+ *  Si on lui demande poliement, il prend un tableau a une dimension
+ * 
+ * @param array $values
+ * @param string $cur
+ * @param boolean $onedim
+ */
 function eoption($values,$cur,$onedim=false) {
   if (is_array($values)) {
     foreach ($values as $k=>$v) {
@@ -438,23 +576,34 @@ function eoption($values,$cur,$onedim=false) {
 }
 
 
+/**
 /* Echo the HTMLSpecialChars version of a value. 
  * Must be called when pre-filling fields values in forms such as : 
  * <input type="text" name="toto" value="<?php ehe($toto); ?>" />
  * Use the charset of the current language for transcription
+ * 
+ * @global string $charset
+ * @param string $str
+ * @param boolean $affiche
+ * @return string
  */
-function ehe($str,$affiche=1) {
-  global $charset;
-  $retour = htmlspecialchars($str,ENT_QUOTES,$charset); 
-  if ($affiche) {
-    echo $retour;
-  } else {
+function ehe($str,$affiche = TRUE) {
+    global $charset;
+    $retour = htmlspecialchars($str,ENT_QUOTES,$charset); 
+    if ($affiche) {
+      echo $retour;
+    } 
     return $retour;
-  }
 }
 
 /* Get the Fields of the posted form from $_REQUEST or POST or GET
  * and check their type
+ */
+/**
+ * 
+ * @param array $fields
+ * @param boolean $requestOnly
+ * @return array
  */
 function getFields($fields, $requestOnly = false) {
   $vars = array();
@@ -500,11 +649,21 @@ function getFields($fields, $requestOnly = false) {
   return $vars;
 }
 
+/**
+ * 
+ * @param array $array
+ */
 function printVar($array) {
   echo "<pre style=\"border: 1px solid black; text-align: left; font-size: 9px\">\n";
   print_r($array);
   echo "</pre>\n";
 }
+/**
+ * 
+ * @param array $a
+ * @param array $b
+ * @return int
+ */
 function list_properties_order($a, $b) {
   if ( $a['label'] == $b['label']) {
     return 0;
@@ -513,16 +672,29 @@ function list_properties_order($a, $b) {
 } // end private function list_properties_order
 
 
-/** Show a pager as 
-  Previous page 0 1 2 ... 16 17 18 19 20 ... 35 36 37 Next page
-  Arguments are as follow : 
-  $offset = the current offset from 0 
-  $count = The number of elements shown per page 
-  $total = The total number of elements 
-  $url = The url to show for each page. %%offset%% will be replace by the proper offset
-  $before & $after are HTML code to show before and after the pager **only if the pager is to be shown**
-  */
-function pager($offset,$count,$total,$url,$before="",$after="") {
+
+/**
+ * Shows a pager : Previous page 0 1 2 ... 16 17 18 19 20 ... 35 36 37 Next page
+ * 
+ * 
+ * Arguments are as follow : 
+ * $offset = the current offset from 0 
+ * $count = The number of elements shown per page 
+ * $total = The total number of elements 
+ * $url = The url to show for each page. %%offset%% will be replace by the proper offset
+ * $before & $after are HTML code to show before and after the pager **only if the pager is to be shown
+ * 
+ * @param int $offset
+ * @param int $count
+ * @param int $total
+ * @param string $url
+ * @param string $before
+ * @param string $after
+ * @param boolean $echo
+ * @return string
+ */
+function pager($offset,$count,$total,$url,$before="",$after="",$echo = TRUE) {
+    $return = "";
   $offset=intval($offset); 
   $count=intval($count); 
   $total=intval($total); 
@@ -534,73 +706,83 @@ function pager($offset,$count,$total,$url,$before="",$after="") {
   if ($total<=$count) { // When there is less element than 1 complete page, just don't do anything :-D
     return true;
   }
-  echo $before;
+  $return .= $before;
   // Shall-we show previous page link ?
   if ($offset) {
-    $o=max($offset-$count,0);
-    echo "<a href=\"".str_replace("%%offset%%",$o,$url)."\" alt=\"(Ctl/Alt-p)\" title=\"(Alt-p)\" accesskey=\"p\">"._("Previous Page")."</a> ";
+    $o = max($offset-$count,0);
+    $return .= "<a href=\"".str_replace("%%offset%%",$o,$url)."\" alt=\"(Ctl/Alt-p)\" title=\"(Alt-p)\" accesskey=\"p\">"._("Previous Page")."</a> ";
   } else {
-    echo _("Previous Page")." ";
+    $return .= _("Previous Page")." ";
   }
 
   if ($total>(2*$count)) { // On n'affiche le pager central (0 1 2 ...) s'il y a au moins 2 pages.
-    echo " - ";
+    $return .= " - ";
     if (($total<($count*10)) && ($total>$count)) {  // moins de 10 pages : 
       for($i=0;$i<$total/$count;$i++) {
 	$o=$i*$count;
 	if ($offset==$o) {
-	  echo $i." "; 
+	  $return .= $i." "; 
 	} else {
-	  echo "<a href=\"".str_replace("%%offset%%",$o,$url)."\">$i</a> ";
+	  $return .= "<a href=\"".str_replace("%%offset%%",$o,$url)."\">$i</a> ";
 	}
       }
-    } else { // Plus de 10 pages, on affiche 0 1 2 , 2 avant et 2 après la page courante, et les 3 dernieres
+    } else { // Plus de 10 pages, on affiche 0 1 2 , 2 avant et 2 aprï¿½s la page courante, et les 3 dernieres
       for($i=0;$i<=2;$i++) {
 	$o=$i*$count;
 	if ($offset==$o) {
-	  echo $i." "; 
+	  $return .= $i." "; 
 	} else {
-	  echo "<a href=\"".str_replace("%%offset%%",$o,$url)."\">$i</a> ";
+	  $return .= "<a href=\"".str_replace("%%offset%%",$o,$url)."\">$i</a> ";
 	}
       }
       if ($offset>=$count && $offset<($total-2*$count)) { // On est entre les milieux ...
-	// On affiche 2 avant jusque 2 après l'offset courant mais sans déborder sur les indices affichés autour
+	// On affiche 2 avant jusque 2 aprï¿½s l'offset courant mais sans dï¿½border sur les indices affichï¿½s autour
 	$start=max(3,intval($offset/$count)-2);
 	$end=min(intval($offset/$count)+3,intval($total/$count)-3);
-	if ($start!=3) echo " ... ";
+	if ($start!=3) $return .= " ... ";
 	for($i=$start;$i<$end;$i++) {
 	  $o=$i*$count;
 	  if ($offset==$o) {
-	    echo $i." "; 
+	    $return .= $i." "; 
 	  } else {
-	    echo "<a href=\"".str_replace("%%offset%%",$o,$url)."\">$i</a> ";
+	    $return .= "<a href=\"".str_replace("%%offset%%",$o,$url)."\">$i</a> ";
 	  }
 	}
-	if ($end!=intval($total/$count)-3) echo " ... ";
+	if ($end!=intval($total/$count)-3) $return .= " ... ";
       } else {
-	echo " ... ";
+	$return .= " ... ";
       }
       for($i=intval($total/$count)-3;$i<$total/$count;$i++) {
 	$o=$i*$count;
 	if ($offset==$o) {
-	  echo $i." "; 
+	  $return .= $i." "; 
 	} else {
-	  echo "<a href=\"".str_replace("%%offset%%",$o,$url)."\">$i</a> ";
+	  $return .= "<a href=\"".str_replace("%%offset%%",$o,$url)."\">$i</a> ";
 	}
       }
-    echo " - ";
+    $return .= " - ";
     } // More than 10 pages?
   }
   // Shall-we show the next page link ?
   if ($offset+$count<$total) {
     $o=$offset+$count;
-    echo "<a href=\"".str_replace("%%offset%%",$o,$url)."\" alt=\"(Ctl/Alt-s)\" title=\"(Alt-s)\" accesskey=\"s\">"._("Next Page")."</a> ";
+    $return .= "<a href=\"".str_replace("%%offset%%",$o,$url)."\" alt=\"(Ctl/Alt-s)\" title=\"(Alt-s)\" accesskey=\"s\">"._("Next Page")."</a> ";
   } else {
-    echo _("Next Page")." ";
+    $return .= _("Next Page")." ";
   }
-  echo $after;
+  $return .= $after;
+  if( $echo ){
+      echo $return;
+  }
+  return $return;
+  
 }
 
+/**
+ * 
+ * @param int $length
+ * @return string
+ */
 function create_pass($length = 8){
   $chars = "1234567890abcdefghijkmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
   $i = 0;
@@ -612,9 +794,16 @@ function create_pass($length = 8){
   return $password;
 }
 
-define("DEFAULT_PASS_SIZE", 8);
 
-/* Affiche un bouton qui permet de generer automatiquement des mots de passes */
+
+/**
+ *  Affiche un bouton qui permet de generer automatiquement des mots de passes 
+ * 
+ * @param int $pass_size
+ * @param string $fields_to_fill1
+ * @param string $fields_to_fill2
+ * @return int
+ */
 function display_div_generate_password($pass_size=DEFAULT_PASS_SIZE, $fields_to_fill1="", $fields_to_fill2="") {
   $id=rand(1,1000);
   echo "<div id='z$id' style='display:none;'><a href=\"javascript:generate_password_html('$id',$pass_size,'$fields_to_fill1','$fields_to_fill2');\">";
@@ -624,7 +813,14 @@ function display_div_generate_password($pass_size=DEFAULT_PASS_SIZE, $fields_to_
   return 0;
 }
 
-/* Affiche un bouton pour selectionner un dossier sur le serveur */
+/**
+ * Affiche un bouton pour selectionner un dossier sur le serveur 
+ * 
+ * @param string    $dir
+ * @param string    $caller
+ * @param int       $width
+ * @param int       $height
+ */
 function display_browser($dir="", $caller="main.dir", $width=350, $height=450) {
   // Browser id
   $bid="b".rand(1,1000);
@@ -663,7 +859,14 @@ function display_browser($dir="", $caller="main.dir", $width=350, $height=450) {
   
 }
 
-// Insere un $wrap_string tous les $max caracteres dans $message
+/**
+ * Insere un $wrap_string tous les $max caracteres dans $message
+ * 
+ * @param string    $message
+ * @param int       $max
+ * @param string    $wrap_string
+ * @return string   
+ */
 function auto_wrap($message="",$max=10,$wrap_string="<wbr/>") {
   $cpt = 0;
   $mot = split(" ",$message);
@@ -677,19 +880,23 @@ function auto_wrap($message="",$max=10,$wrap_string="<wbr/>") {
   return $message;
 }
 
-/*
-**  Converts HSV to RGB values
-** -----------------------------------------------------
-**  Reference: http://en.wikipedia.org/wiki/HSL_and_HSV
-**  Purpose:   Useful for generating colours with
-**             same hue-value for web designs.
-**  Input:     Hue        (H) Integer 0-360
-**             Saturation (S) Integer 0-100
-**             Lightness  (V) Integer 0-100
-**  Output:    String "R,G,B"
-**             Suitable for CSS function RGB().
-*/
-
+/**
+ *  Converts HSV to RGB values
+ * -----------------------------------------------------
+ *  Reference: http://en.wikipedia.org/wiki/HSL_and_HSV
+ *  Purpose:   Useful for generating colours with
+ *             same hue-value for web designs.
+ *  Input:     Hue        (H) Integer 0-360
+ *             Saturation (S) Integer 0-100
+ *             Lightness  (V) Integer 0-100
+ *  Output:    String "R,G,B"
+ *             Suitable for CSS function RGB().
+ *  
+ * @param int   $iH
+ * @param int   $iS
+ * @param int   $iV
+ * @return array
+ */
 function fHSVtoRGB($iH, $iS, $iV) {
 
   if($iH < 0)   $iH = 0;   // Hue:
@@ -732,12 +939,22 @@ function fHSVtoRGB($iH, $iS, $iV) {
   return array('r'=>round($dR), 'g'=>round($dG), 'b'=>round($dB) );
 }
 
+/**
+ * 
+ * @param int   $hex
+ * @return int  
+ */
 function hexa($hex)
 {
   $num = dechex($hex);
   return (strlen("$num") >= 2) ? "$num" : "0$num";
 }
 
+/**
+ * 
+ * @param int   $p
+ * @return string
+ */
 function PercentToColor($p=0) {
   if ($p>100) $p=100;
   if ($p<0) $p=0;
@@ -750,18 +967,36 @@ function PercentToColor($p=0) {
   return $color;
 }
 
+/**
+ * 
+ * @global m_err    $err
+ * @global m_mem    $mem
+ * @global int          $cuid
+ * @return boolean
+ */
 function panel_lock() {
   global $err,$mem,$cuid;
   if ($cuid!=2000) return false;
   return touch(ALTERNC_LOCK_PANEL);
 }
 
+/**
+ * 
+ * @global m_err    $err
+ * @global m_mem    $mem
+ * @global int          $cuid
+ * @return boolean
+ */
 function panel_unlock() {
   global $err,$mem,$cuid;
   if ($cuid!=2000) return false;
   return unlink(ALTERNC_LOCK_PANEL);
 }
 
+/**
+ * 
+ * @return boolean
+ */
 function panel_islocked() {
   return file_exists(ALTERNC_LOCK_PANEL);
 }

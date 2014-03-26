@@ -129,6 +129,8 @@ class m_cron {
     $user=urlencode($user);
     if (empty($user)) $password='';
     $password=urlencode($password);
+    
+    //@todo remove checkmail cf functions.php
     if (!empty($email) && ! checkmail($email) == 0 ){ 
         $err->raise("cron",_("Email address is not valid"));
       return false;
