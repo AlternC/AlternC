@@ -26,13 +26,13 @@
 require_once("../class/config_nochk.php");
 
 
-  $res=$hooks->invoke("hook_admin_webmail");
+$res=$hooks->invoke("hook_admin_webmail");
 if (($wr=variable_get("webmail_redirect")) && isset($res[$wr]) && $res[$wr]) {
   $url=$res[$wr];
 } else {
   foreach($res as $r) if ($r!==false) { $url=$r; break; }
 }
-if ($url)  {
+if (isset($url) && $url)  {
   header("Location: $url"); 
 } else {
   header("Location: /nowebmail");

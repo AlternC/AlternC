@@ -34,7 +34,7 @@ if (DO_XHPROF_STATS) require_once('/usr/share/alternc/panel/admin/xhprof_header.
 // To enable the display of the alternc debug error, do the following :
 // # touch /etc/alternc/alternc_display_php_error
 if (file_exists('/etc/alternc/alternc_display_php_error')) {
-  ini_set('display_errors', true);
+  ini_set('display_errors', '1');
 }
 session_name('AlternC_Panel'); 
 session_start();
@@ -137,7 +137,10 @@ if (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"]=="on" && $host!=$L_FQDN) {
 */
 
 class DB_system extends DB_Sql {
-  var $Host,$Database,$User,$Password = null;
+  var $Host = null;
+  var $Database = null;
+  var $User = null; 
+  var $Password = null;
 
   /**
   * Creator

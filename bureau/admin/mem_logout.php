@@ -31,7 +31,7 @@ require_once("../class/config.php");
 
 $mem->del_session();
 
-if (!$charset) $charset="UTF-8";
+if (!isset($charset) || ! $charset) $charset="UTF-8";
 @header("Content-Type: text/html; charset=$charset");
 
 ?>

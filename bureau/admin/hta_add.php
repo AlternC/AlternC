@@ -55,7 +55,7 @@ if (isset($error) && $error) {
       <th><label for="dir"><?php __("Folder"); ?></label></th>
       <td>
         <input type="text" class="int" name="dir" id="dir" value="<?php (isset($dir)) ? : $dir="";ehe($dir); ?>" maxlength="255" />
-        <?php display_browser( ehe($dir,0) , "main.dir" ); ?>
+        <?php display_browser( ehe($dir,false) , "main.dir" ); ?>
       </td>
     </tr>
   </table>

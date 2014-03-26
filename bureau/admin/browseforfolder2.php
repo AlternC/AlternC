@@ -70,6 +70,9 @@ function _subbrowse($curdir,$pos,$level) {
   }
 }
 
+/**
+ * @param string $curdir
+ */
 function browseforfolder($curdir) {
   global $maxlevel,$root,$brlist;
   $maxlevel=0;

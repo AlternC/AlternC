@@ -36,7 +36,9 @@ $fields = array (
 getFields($fields);
 
 if (!$dir) {
-  $error=_("No folder selected!");
+  echo "<p class=\"alert alert-warning\">"._("No folder selected!")."</p>";
+  require_once('foot.php');
+  die();
 } else {
   $r=$hta->get_hta_detail($dir);
   if (!$r) {
