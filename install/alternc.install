@@ -554,13 +554,16 @@ mkdir -p "/etc/opendkim/keys"
 grep -q "^127.0.0.1\$" /etc/opendkim/TrustedHosts || echo "127.0.0.1" >>/etc/opendkim/TrustedHosts
 grep -q "^localhost\$" /etc/opendkim/TrustedHosts || echo "localhost" >>/etc/opendkim/TrustedHosts
 
+# Add opendkim to service to restart
+SERVICES="$SERVICES incron"
+
 # hook 
 run-parts --arg=before-reload /usr/lib/alternc/install.d 
 
 #######################################################################
 # Reload services
 #
-for service in postfix bind9 apache2 dovecot cron proftpd opendkim; do
+for service in postfix bind9 apache2 dovecot cron proftpd ; do
     invoke-rc.d $service force-reload || true
 done
 
