@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  $Id: m_authip.php
  ----------------------------------------------------------------------
  LICENSE
@@ -20,14 +20,16 @@
  ----------------------------------------------------------------------
 */
 /**
-* Classe de gestion des IP authorisée
+* Classe de gestion des IP authorisÃ©e
+ * @group alternc
 **/
 class m_authip {
 
-  /*
+  /**
    * Retourne la liste des ip whitelist
    *
-   * @return array retourne un tableau indexé des ip de l'utilisateur
+   * @global    m_mem   $mem
+   * @return array retourne un tableau indexÃ© des ip de l'utilisateur
    */
   function list_ip_whitelist() {
     global $mem;
@@ -35,6 +37,10 @@ class m_authip {
     return $this->list_ip(true); 
   }
 
+  /**
+   * 
+   * @return array
+   */
   function hook_menu() {
     $obj = array(
       'title'       => _("Access security"),
@@ -46,10 +52,15 @@ class m_authip {
      return $obj;
   }
 
-  /*
-   * Retourne la liste des ip spécifiées par cet utilisateur
+  /**
+   * Retourne la liste des ip spÃ©cifiÃ©es par cet utilisateur
    *
-   * @return array retourne un tableau indexé des ip de l'utilisateur
+   * 
+   * @global    m_mysql $db
+   * @global    m_mem   $mem
+   * @global int $cuid
+   * @param     boolean $whitelist
+   * @return    array   Retourne un tableau indexÃ© des ip de l'utilisateur
    */
   function list_ip($whitelist=false) {
     global $db, $mem;
@@ -77,12 +88,17 @@ class m_authip {
 
 
 
-  /*
+  /**
    * Supprime une IP des IP de l'utilisateur
-   * et supprime les droits attaché en cascade
+   * et supprime les droits attachÃ© en cascade
    *
-   * @param integer $id id de la ligne à supprimer
-   * @return boolean Retourne FALSE si erreur, sinon TRUE
+   * @param integer $id 
+   * @return boolean 
+   * 
+   * @global    m_mysql $db
+   * @global int $cuid
+   * @param     int     $id     id de la ligne Ã  supprimer
+   * @return    boolean         Retourne FALSE si erreur, sinon TRUE
    */
   function ip_delete($id) {
     global $db, $cuid;
@@ -99,12 +115,14 @@ class m_authip {
     return true;
   }
 
-  /*
-   * Liste les IP et subnet authorisés
-   * pour une classe donnée
-   *
-   * @param string $s classe concernée
-   * @return array Retourne un tableau
+  /**
+   * Liste les IP et subnet authorisÃ©s
+   * pour une classe donnÃ©e
+   * 
+   * @global    m_mysql $db
+   * @global int $cuid
+   * @param     string  $s      Classe concernÃ©e
+   * @return    array
    */
   function get_allowed($s) {
     global $db, $cuid;
@@ -119,6 +137,12 @@ class m_authip {
     return $r;
   }
 
+  /**
+   * 
+   * @global    m_mysql $db
+   * @param     string  $ip
+   * @return    boolean
+   */
   function is_wl($ip) {
     global $db;
     if (! $db->query("select ai.ip, ai.subnet from authorised_ip ai where ai.uid='0';") ) {
@@ -131,9 +155,13 @@ class m_authip {
     return false;
   }
 
-  /*
+  /**
    * Retourne si l'ip appartient au subnet.
    *
+   * @param     string  $o
+   * @param     string  $ip
+   * @param     string  $sub
+   * @return boolean
    */
    function is_in_subnet($o, $ip, $sub) {
     $o = inet_pton($o);
@@ -144,16 +172,10 @@ class m_authip {
     return false;
   }
 
-  /*
-   * Sauvegarde une IP dans les IP TOUJOURS authorisée
+  /**
+   * Sauvegarde une IP dans les IP TOUJOURS authorisÃ©e
    *
-   * @param integer $id id de la ligne à modifier. Si vide ou
-   *        égal à 0, alors c'est une insertion
-   * @param string $ipsub IP (v4 ou v6), potentiellement avec un subnet ( /24)
-   * @param string $infos commentaire pour l'utilisateur
-   * @param integer $uid Si $uid=0 et qu'on est super-admin, insertion avec uid=0
-   *        ce qui correspond a une ip toujours authorisée 
-   * @return boolean Retourne FALSE si erreur, sinon TRUE
+   * @global    m_mem   $mem
    */
   function ip_save_whitelist($id, $ipsub, $infos) {
     global $mem;
@@ -161,16 +183,20 @@ class m_authip {
     return $this->ip_save($id, $ipsub, $infos, 0);
   }
 
-  /*
-   * Sauvegarde une IP dans les IP authorisée
-   *
-   * @param integer $id id de la ligne à modifier. Si vide ou
-   *        égal à 0, alors c'est une insertion
-   * @param string $ipsub IP (v4 ou v6), potentiellement avec un subnet ( /24)
-   * @param string $infos commentaire pour l'utilisateur
-   * @param integer $uid Si $uid=0 et qu'on est super-admin, insertion avec uid=0
-   *        ce qui correspond a une ip toujours authorisée 
-   * @return boolean Retourne FALSE si erreur, sinon TRUE
+  /**
+   * Sauvegarde une IP dans les IP authorisÃ©e
+   * 
+   * @global    m_mysql $db
+   * @global    m_mem   $mem
+   * @global int $cuid
+   * @param     int     $id     id de la ligne Ã  modifier. Si vide ou
+   *                            Ã©gal Ã  0, alors c'est une insertion
+   * @param     string  $ipsub  IP (v4 ou v6), potentiellement avec un subnet ( /24)
+   * @param     string  $infos  Commentaire pour l'utilisateur
+   * @param     int     $uid    Si $uid=0 et qu'on est super-admin, insertion avec uid=0
+   *                            ce qui correspond a une ip toujours authorisÃ©e 
+   * @return    boolean         Retourne FALSE si erreur, sinon TRUE
+   * 
    */
   function ip_save($id, $ipsub, $infos, $uid=null) {
     global $db, $mem;
@@ -228,10 +254,12 @@ class m_authip {
     return true;
   }
 
-  /*
-   * Fonction appelée par Alternc lors de la suppression d'un utilisateur
+  /**
+   * Fonction appelÃ©e par Alternc lors de la suppression d'un utilisateur
    *
-   * @return boolean Retourne TRUE
+   * @global    int     $cuid
+   * @global    m_mysql $db
+   * @return    boolean         Retourne TRUE
    */
   function alternc_del_member() {
     global $cuid,$db;
@@ -243,11 +271,11 @@ class m_authip {
   }
 
 
-  /*
-   * Analyse les classes et récupéres les informations
+  /**
+   * Analyse les classes et rÃ©cupÃ©res les informations
    * des classes voulant de la restriction IP
    *
-   * @return array Retourne un tableau compliqué
+   * @return array Retourne un tableau compliquÃ©
    */
   function get_auth_class() {
     global $hooks;
@@ -262,16 +290,17 @@ class m_authip {
     return $authclass;
   }
 
-  /*
+  /**
    * Enregistre ou modifie une affectation ip<=>ressource
    * Nota : lance des hooks sur la classe correspondante pour
-   * informer de l'édition/création
+   * informer de l'Ã©dition/crÃ©ation
    *
-   * @param integer $authorised_ip_id id de l'ip affecté
-   * @param string $protocol nom du protocole (définie dans la classe correspondante)
-   * @param string $parameters information propre au protocole
-   * @param integer $id présent si c'est une édition
-   * @return boolean Retourne FALSE si erreur, sinon TRUE
+   * @global    m_mysql $db
+   * @param     int     $authorised_ip_id   id de l'ip affectÃ©
+   * @param     string  $protocol           nom du protocole (dÃ©finie dans la classe correspondante)
+   * @param     string  $parameters         information propre au protocole
+   * @param     int     $id                 $id prÃ©sent si c'est une Ã©dition
+   * @return    boolean                     Retourne FALSE si erreur, sinon TRUE
    */
   function ip_affected_save($authorised_ip_id, $protocol, $parameters, $id=null) {
     global $db;
@@ -297,13 +326,14 @@ class m_authip {
     return true;
   }
 
-  /*
+  /**
    * Supprime une affectation ip<=>ressource
    * Nota : lance des hooks dans la classe correspondante
    * pour informer de la suppression
    *
-   * @param integer $id id de la ligne à supprimer
-   * @return boolean Retourne FALSE si erreur, sinon TRUE
+   * @global    m_mysql $db
+   * @param     int     $id     id de la ligne Ã  supprimer
+   * @return    boolean         Retourne FALSE si erreur, sinon TRUE
    */
   function ip_affected_delete($id) {
     global $db;
@@ -320,18 +350,20 @@ class m_authip {
   }
 
 
-  /*
-   * Appel les hooks demandé avec en parametres les 
+  /**
+   * Appel les hooks demandÃ© avec en parametres les 
    * affectationt ip<=>ressource dont l'id est en parametre
    *
-   * @param string $function nom de la fonction a rechercher et appeller dans les classes
-   * @param integer $affectation_id id de l'affectation correspondante
-   * @return boolean Retourne TRUE
+   * @global    m_hooks $hooks
+   * @global    m_err   $err
+   * @param     string  $function       Nom de la fonction a rechercher et appeller dans les classes
+   * @param     integer $affectation_id Id de l'affectation correspondante
+   * @return    boolean                 Retourne TRUE
    */
   function call_hooks($function, $affectation_id) {
     global $hooks,$err;
 
-    // On récure l'objet dont on parle
+    // On rÃ©cure l'objet dont on parle
     $d = $this->list_affected();
     if (! isset($d[$affectation_id] )) {
       $err->raise('authip', _("Object not available"));
@@ -340,7 +372,7 @@ class m_authip {
 
     $affectation = $d[$affectation_id];
 
-    // On en déduis la classe qui le concerne
+    // On en dÃ©duis la classe qui le concerne
     $e = $this->get_auth_class();
     if (! isset($e[$affectation['protocol']])) {
       $err->raise('authip', sprintf(_("Can't identified class for the protocole %s"), $affectation['protocol']));
@@ -354,10 +386,13 @@ class m_authip {
     return true;
   }
 
-  /*
+  /**
    * Liste les affectation ip<=>ressource d'un utilisateur
    *
-   * @return array Retourne un tableau de valeurs
+   * @global    m_mysql $db
+   * @global    int     $cuid
+   * @param     int     $ip_id
+   * @return    array           Retourne un tableau de valeurs
    */
   function list_affected($ip_id=null) {
     global $db, $cuid;

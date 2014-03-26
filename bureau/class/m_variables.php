@@ -40,7 +40,7 @@ class m_variables {
 
   /**
    * 
-   * @global type $L_FQDN
+   * @global    string  $L_FQDN
    */
   function m_variables() {
     global $L_FQDN;

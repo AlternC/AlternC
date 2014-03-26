@@ -46,9 +46,11 @@ class m_admin {
 
   var $archive='';
 
-
-  /* ----------------------------------------------------------------- */
-  /** Constructor
+  /**
+   * Constructor
+   * 
+   * @global	type $db
+   * @global	type $cuid
    */
   function m_admin() {
     global $db,$cuid;
@@ -66,7 +68,14 @@ class m_admin {
 			 );
     $this->archive=variable_get('archive_del_data','','If folder specified html folder of deleted user is archived, else it is deleted. ');
   }
-
+  /**
+   * 
+   * @global	type $mem
+   * @global	type $cuid
+   * @global	type $debug_alternc
+   * @global	type $L_INOTIFY_UPDATE_DOMAIN
+   * @return boolean|string
+   */
   function hook_menu() {
     global $mem, $cuid, $debug_alternc, $L_INOTIFY_UPDATE_DOMAIN;
     if (!$mem->checkRight()) return false;
@@ -136,6 +145,9 @@ class m_admin {
     return $obj;
   }
 
+  /**
+   * 
+   */
   function stop_if_jobs_locked() {
     if ( file_exists(ALTERNC_LOCK_JOBS)) {
       echo "There is a file ".ALTERNC_LOCK_JOBS."\n";
@@ -145,7 +157,13 @@ class m_admin {
     }
   }
 
-  # return the uid of an alternc account
+  /**
+   * return the uid of an alternc account
+   * 
+   * @global	type $db
+   * @param type $login
+   * @return null
+   */
   function get_uid_by_login($login) {
     global $db;
     $db->query("SELECT uid FROM membres WHERE login='$login';");
@@ -156,14 +174,19 @@ class m_admin {
   }
 
 
-  /* ----------------------------------------------------------------- */
-  /** Returns the known information about a hosted account
+  /**
+   * Returns the known information about a hosted account
    * 
    * Returns all what we know about an account (contents of the tables
    *  <code>membres</code> et <code>local</code>)
    * Ckecks if the account is super-admin
-   * @param integer $uid a unique integer identifying the account
-   * @return an associative array containing all the fields of the
+   * 
+   * @global	   type $err
+   * @global	   type $db
+   * @global	   string     $lst_users_properties
+   * @param     int         $uid a unique integer identifying the account
+   * @param     boolean     $recheck
+   * @return array|boolean an associative array containing all the fields of the
    * table <code>membres</code> and <code>local</code> of the corresponding account.
    * Returns FALSE if an error occurs.
    */
@@ -213,9 +236,15 @@ class m_admin {
   }
 
 
-  /* ----------------------------------------------------------------- */
-  /** Returns the known information about a specific hosted account
+  /**
+   * Returns the known information about a specific hosted account
+   * 
    * Similar to get_list() but for creators/resellers.
+   * 
+   * @global	   type $err
+   * @global	   type $db
+   * @param     int     $uid
+   * @return    boolean
    */
   function get_creator($uid) {
     global $err,$db;
@@ -257,8 +286,9 @@ class m_admin {
   }
 
 
-  /* ----------------------------------------------------------------- */
-  /** @return boolean if there's only ONE admin account
+  /**
+   * 
+   * @global	type $db
    * @return boolean TRUE if there is only one admin account
    * (allow the program to prevent the destruction of the last admin account)
    */
@@ -270,14 +300,23 @@ class m_admin {
   }
 
 
-  /* ----------------------------------------------------------------- */
-  /** Returns the list of the hosted accounts
+  /** 
+   * Returns the list of the hosted accounts
    * 
    * Returns all what we know about ALL the accounts (contents of the tables
    *  <code>membres</code> et <code>local</code>)
    * Check for super-admin accounts
    * @param
-   * @return an associative array containing all the fields of the
+   * @return 
+   * 
+   * @global	   type $err
+   * @global	   type $mem
+   * @global	   type $cuid
+   * @param     boolean $all
+   * @param     boolean $creator
+   * @param     string $pattern
+   * @param     string $pattern_type
+   * @return    boolean | array an associative array containing all the fields of the
    * table <code>membres</code> and <code>local</code> of all the accounts.
    * Returns FALSE if an error occurs.
    */
@@ -358,13 +397,18 @@ class m_admin {
   }
 
 
-  /* ----------------------------------------------------------------- */
-  /** Send an email to all AlternC's accounts
-   * @param $subject string Subject of the email to send
-   * @param $message string Message to send 
-   * @param $from string expeditor of that email.
-   * @return boolean if the mail has been successfully sent.
-   */ 
+  /**
+   * Send an email to all AlternC's accounts
+   * 
+   * @global	   type $err
+   * @global	   type $mem
+   * @global	   type $cuid
+   * @global	   type $db
+   * @param     string  $subject    Subject of the email to send
+   * @param     string  $message    Message to send
+   * @param     string  $from       Expeditor of that email
+   * @return    boolean
+   */
   function mailallmembers($subject,$message,$from) {
     global $err,$mem,$cuid,$db;
     $err->log("admin","mailallmembers");
@@ -397,11 +441,16 @@ class m_admin {
   }
 
 
-  /* ----------------------------------------------------------------- */
-  /** Returns an array with the known information about resellers (uid, login, number of accounts)
+  /** 
+   * Returns an array with the known information about resellers (uid, login, number of accounts)
    * Does not include account 2000 in the list.
    * May only be called by the admin account (2000)
    * If there are no reseller accounts, returns an empty array.
+   * 
+   * @global    type $err
+   * @global    type $mem
+   * @global    type $cuid
+   * @return    boolean
    */
   function get_creator_list() {
     global $err,$mem,$cuid;
@@ -428,10 +477,15 @@ class m_admin {
     return $creators2;
   }
 
-  /* ----------------------------------------------------------------- */
-  /** Check if I am the creator of the member $uid
-   * @param integer $uid a unique integer identifying the account
-   * @return boolean TRUE if I am the creator of that account. FALSE else.
+  /** 
+   * Check if I am the creator of the member $uid
+   * 
+   * @global    type $err
+   * @global    type $mem
+   * @global    type $db
+   * @global    type $cuid
+   * @param     int     $uid   a unique integer identifying the account
+   * @return    boolean         TRUE if I am the creator of that account. FALSE else.
    */
   function checkcreator($uid) {
     global $err,$mem,$db,$cuid;
@@ -447,10 +501,17 @@ class m_admin {
     return true;
   }
 
-  // When the admin want to delegate a subdomain to an account
-
   /**
-   * @param boolean $domain_name
+   * When the admin want to delegate a subdomain to an account
+   * 
+   * @global    m_mysql $db
+   * @global    m_err   $err
+   * @global    m_dom   $dom
+   * @global    m_mem   $mem
+   * @global    int     $cuid
+   * @param     string $u
+   * @param     string $domain_name
+   * @return boolean
    */
   function add_shared_domain($u, $domain_name) {
     global $db,$err,$dom,$mem,$cuid;
@@ -487,13 +548,29 @@ class m_admin {
    * and <code>local</code>). Prevents any manipulation of the account if
    * the account $mid is not super-admin.
    *
-   * @param $login string Login name like [a-z][a-z0-9]*
-   * @param $pass string Password (max. 64 characters)
-   * @param $nom string Name of the account owner
-   * @param $prenom string First name of the account owner
-   * @param $mail string Email address of the account owner, useful to get
-   * one's lost password
-   * @pararm $type string Account type for quotas
+   * 
+   * @global    m_err   $err
+   * @global    m_quota $quota
+   * @global    array   $classes
+   * @global    int     $cuid
+   * @global    m_mem   $mem
+   * @global    string  $L_MYSQL_DATABASE
+   * @global    string  $L_MYSQL_LOGIN
+   * @global    m_hooks $hooks
+   * @global    m_action $action
+   * @param     string  $login          Login name like [a-z][a-z0-9]*
+   * @param     string  $pass           Password (max. 64 characters)
+   * @param     string  $nom            Name of the account owner
+   * @param     string  $prenom         First name of the account owner
+   * @param     string  $mail           Email address of the account owner, useful to get
+   *                                    one's lost password
+   * @param     boolean $canpass
+   * @param     string  $type           Account type for quotas
+   * @param     int     $duration
+   * @param     string  $notes
+   * @param     boolean $force
+   * @param     boolean $create_dom
+   * @param     int     $db_server_id
    * @return boolean Returns FALSE if an error occurs, TRUE if not.
    */
   function add_mem($login, $pass, $nom, $prenom, $mail, $canpass=1, $type='default', $duration=0, $notes = "", $force=0, $create_dom=false, $db_server_id) {
@@ -587,9 +664,15 @@ class m_admin {
     }
   }
 
-  /* ----------------------------------------------------------------- */
-  /** AlternC's standard function called when a user is created
+  /** 
+   * AlternC's standard function called when a user is created
    * This sends an email if configured through the interface.
+   * 
+   * @global    m_err   $err
+   * @global    int     $cuid
+   * @global    string     $L_FQDN
+   * @global    string     $L_HOSTING
+   * @return    boolean
    */
   function hook_admin_add_member() {
     global $err, $cuid, $L_FQDN, $L_HOSTING;
@@ -641,23 +724,29 @@ EOF;
   }
 
 
-  /* ----------------------------------------------------------------- */
-  /** Edit an account
+  /** 
+   * Edit an account
    *  
    * Change an account (in the tables <code>membres</code>
    * and <code>local</code>). Prevents any manipulation of the account if
    * the account $mid is not super-admin.
-   *
-   * @param $uid integer the uid number of the account we want to modify
-   * @param login string new login name like [a-z][a-z0-9]*
-   * @param $pass string new password (max. 64 characters)
-   * @param $nom string new name of the account owner
-   * @param $prenom string new first name of the account owner
-   * @param $mail string new email address of the account owner
-   * @param $enabled integer (value: 0 or 1) activates or desactivates the
-   * @param $type string new type of account
-   * access to the virtual desktop of this account.
-   * @return boolean Returns FALSE if an error occurs, TRUE if not.
+   *  
+   * @global    m_err   $err
+   * @global    m_mysql $db
+   * @global    int     $cuid
+   * @global    m_quota $quota
+   * @param     int     $uid        The uid number of the account we want to modify
+   * @param     string  $mail       New email address of the account owner
+   * @param     string  $nom        New name of the account owner
+   * @param     string  $prenom     New first name of the account owner
+   * @param     string  $pass       New password (max. 64 characters)
+   * @param     string  $enabled    (value: 0 or 1) activates or desactivates the
+   * @param     boolean $canpass
+   * @param     int     $type       New type of account
+   * @param     int     $duration   
+   * @param     string  $notes
+   * @param     boolean $reset_quotas
+   * @return    boolean Returns     FALSE if an error occurs, TRUE if not
    */
   function update_mem($uid, $mail, $nom, $prenom, $pass, $enabled, $canpass, $type='default', $duration=0, $notes = "",$reset_quotas=false) {
     global $err,$db;
@@ -696,11 +785,15 @@ EOF;
   }
 
 
-  /* ----------------------------------------------------------------- */
-  /** Lock an account
+  /** 
+   * Lock an account
+   * 
    * Lock an account and prevent the user to access its account.
-   * @param $uid integer the uid number of the account we want to lock
-   * @return boolean Returns FALSE if an error occurs, TRUE if not.
+   * 
+   * @global    m_err   $err
+   * @global    m_mysql $db
+   * @param     int     $uid    The uid number of the account 
+   * @return    boolean         Returns FALSE if an error occurs, TRUE if not.
    */
   function lock_mem($uid) {
     global $err,$db;
@@ -720,11 +813,16 @@ EOF;
   }
 
 
-  /* ----------------------------------------------------------------- */
-  /** UnLock an account
+  /** 
+   * UnLock an account
+   * 
    * UnLock an account and prevent the user to access its account.
-   * @param $uid integer the uid number of the account we want to unlock
-   * @return boolean Returns FALSE if an error occurs, TRUE if not.
+   * 
+   * 
+   * @global    m_err   $err
+   * @global    m_mysql $db
+   * @param     int     $uid    The uid number of the account 
+   * @return    boolean         Returns FALSE if an error occurs, TRUE if not.
    */
   function unlock_mem($uid) {
     global $err,$db;
@@ -748,8 +846,17 @@ EOF;
   /** Deletes an account
    * Deletes the specified account. Prevents any manipulation of the account if
    * the account $mid is not super-admin.
-   * @param $uid integer the uid number of the account we want to delete
-   * @return boolean Returns FALSE if an error occurs, TRUE if not.
+   * 
+   * @global    m_err   $err
+   * @global    m_quota $quota
+   * @global    array   $classes
+   * @global    int     $cuid
+   * @global    m_mem   $mem
+   * @global    m_dom   $dom
+   * @global    m_hooks $hooks
+   * @global    m_action $action
+   * @param     int     $uid    The uid number of the account 
+   * @return    boolean         Returns FALSE if an error occurs, TRUE if not.
    */
   function del_mem($uid) {
     global $err,$quota,$classes,$cuid,$mem,$dom,$hooks,$action;
@@ -789,12 +896,16 @@ EOF;
   }
 
 
-  /* ----------------------------------------------------------------- */
-  /** Renew an account
+  /** 
+   * Renew an account
+   * 
    * Renew an account for its duration
-   * @param $uid integer the uid number of the account we want to renew
-   * @param $periods integer the number of periods we renew for
-   * @return boolean Returns FALSE if an error occurs, TRUE if not.
+   * 
+   * @global    m_err   $err
+   * @global    m_mysql $db
+   * @param     int     $uid        The uid number of the account 
+   * @param     int     $periods    The new duration, in months, of the account
+   * @return    boolean             Returns FALSE if an error occurs, TRUE if not.
    */
   function renew_mem($uid, $periods=1) {
     global $err,$db;
@@ -813,11 +924,14 @@ EOF;
   }
 
 
-  /* ----------------------------------------------------------------- */
-  /** Update the duration information for an account
-   * @param $uid integer the uid number of the account we want to update
-   * @param integer $duration integer the new duration, in months, of the account
-   * @return boolean Returns FALSE if an error occurs, TRUE if not.
+  /** 
+   * Update the duration information for an account
+   * 
+   * @global    m_err   $err
+   * @global    m_mysql $db
+   * @param     int     $uid        The uid number of the account 
+   * @param     int     $duration   The new duration, in months, of the account
+   * @return    boolean             Returns FALSE if an error occurs, TRUE if not.
    */
   function renew_update($uid, $duration) {
     global $err,$db;
@@ -836,10 +950,11 @@ EOF;
   }
 
 
-  /* ----------------------------------------------------------------- */
-  /** Get the expiry date for an account
-   * @param $uid integer The uid number of the account
-   * @return string The expiry date, a string as printed by MySQL
+  /** 
+   * Get the expiry date for an account
+   * 
+   * @param     int     $uid        The uid number of the account 
+   * @return    string              The expiry date, a string as printed by MySQL
    */
   function renew_get_expiry($uid) {
     $jj=$this->get($uid);
@@ -851,9 +966,11 @@ EOF;
 
 
   /* ----------------------------------------------------------------- */
-  /** Get the expiry status for an account
-   * @param $uid integer The uid number of the account
-   * @return integer The expiry status:
+  /** 
+   * Get the expiry status for an account
+   * 
+   * @param     int     $uid        The uid number of the account 
+   * @return    integer             The expiry status:
    *  0: account does not expire
    *  1: expires in more than duration,
    *  2: expires within the duration
@@ -870,9 +987,11 @@ EOF;
   }
 
 
-  /* ----------------------------------------------------------------- */
-  /** Get the expired/about to expire accounts.
-   * @return resource The recordset of the corresponding accounts
+  /** 
+   * Get the expired/about to expire accounts.
+   * 
+   * @global    m_mysql $db
+   * @return    array               The recordset of the corresponding accounts
    */
   function renew_get_expiring_accounts() {
     global $db;
@@ -894,11 +1013,13 @@ EOF;
   }
 
 
-  /* ----------------------------------------------------------------- */
-  /** Turns a common account into a super-admin account
-   * @param $uid integer the uid number of the common account we want to turn into a
-   *  super-admin account.
-   * @return boolean FALSE if an error occurs, TRUE if not.
+  /** 
+   * Turns a common account into a super-admin account
+   * 
+   * @global    m_err   $err
+   * @global    m_mysql $db
+   * @param     int     $uid        The uid number of the account 
+   * @return    boolean    
    */
   function normal2su($uid) {
     global $err,$db;
@@ -916,11 +1037,13 @@ EOF;
   }
 
 
-  /* ----------------------------------------------------------------- */
-  /** Turns a super-admin account into a common account
-   * @param $uid integer the uid number of the super-admin account we want to turn into a
-   * common account.
-   * @return boolean Returns FALSE if an error occurs, TRUE if not.
+  /** 
+   * Turns a super-admin account into a common account
+   * 
+   * @global    m_err   $err
+   * @global    m_mysql $db
+   * @param     int     $uid        The uid number of the account 
+   * @return boolean                Returns FALSE if an error occurs, TRUE if not.
    */
   function su2normal($uid) {
     global $err,$db;
@@ -938,15 +1061,17 @@ EOF;
   }
 
 
-  /* ----------------------------------------------------------------- */
-  /** List of the authorized TLDs
+  /**
+   * List of the authorized TLDs
    * Returns the list of the authorized TLDs and also the way they are
    * authorized. A TLD is the last members (or the last two) of a
    * domain. For example, "com", "org" etc... AlternC keeps a table
    * containing the list of the TLDs authorized to be installed on the
    * server with the instructions to validate the installation of a
    * domain for each TLD (if necessary).
-   * @return array An associative array like $r["tld"], $r["mode"] where tld
+   * 
+   * @global    m_mysql $db
+   * @return    array   An associative array like $r["tld"], $r["mode"] where tld
    * is the tld and mode is the authorized mode.
    */
   function listtld() {
@@ -960,11 +1085,14 @@ EOF;
   }
 
 
-  /* ----------------------------------------------------------------- */
-  /** List the hosted domains on this server
+  /**
+   * List the hosted domains on this server
+   * 
    * Return the list of hosted domains on this server, (an array of associative arrays)
-   * @param boolean $alsocheck Returns also errstr and errno telling the domains dig checks
-   * @param boolean $forcecheck Force the check of dig domain even if a cache exists.
+   * 
+   * @global    m_mysql $db
+   * @param     boolean     $alsocheck      Returns also errstr and errno telling the domains dig checks
+   * @param     boolean     $forcecheck     Force the check of dig domain even if a cache exists.
    * @return array $r[$i] / [domaine][member][noerase][gesdns][gesmx]
    */
   function dom_list($alsocheck=false,$forcecheck=false) {
@@ -994,8 +1122,15 @@ EOF;
   }
 
 
-  /* ----------------------------------------------------------------- */
-  /** Check all the domains for their NS MX and IPs
+  /** 
+   * Check all the domains for their NS MX and IPs
+   * 
+   * @global    m_mysql $db
+   * @global    string  $L_NS1
+   * @global    string  $L_NS2
+   * @global    string  $L_MX
+   * @global    string  $L_PUBLIC_IP
+   * @return    int
    */
   function checkalldom() {
     global $db,$L_NS1,$L_NS2,$L_MX,$L_PUBLIC_IP;
@@ -1062,12 +1197,16 @@ EOF;
   }
 
 
-  /* ----------------------------------------------------------------- */
-  /** Lock / Unlock a domain 
+  /**
+   * Lock / Unlock a domain 
+   * 
    * Lock (or unlock) a domain, so that the member will be (not be) able to delete it
    * from its account
-   * @param $dom string Domain name to lock / unlock
-   * @return boolean TRUE if the domain has been locked/unlocked or FALSE if it does not exist.
+   * 
+   * @global    m_mysql $db
+   * @global    m_err   $err
+   * @param     string  $domain     Domain name to lock / unlock
+   * @return    boolean             TRUE if the domain has been locked/unlocked or FALSE if it does not exist.
    */
   function dom_lock($domain) {
     global $db,$err;
@@ -1081,13 +1220,14 @@ EOF;
   }
 
 
-  /* ----------------------------------------------------------------- */
-  /** Add a new TLD to the list of the authorized TLDs 
-   *
-   * @param $tld string top-level domain to add (org, com...)
-   * @param $mode integer number of the authorized mode (0 to 5)
-   * @return boolean TRUE if the tld has been successfully added, FALSE if not.
-   */ 
+  /** 
+   * Add a new TLD to the list of the authorized TLDs 
+   * 
+   * @global    m_mysql $db
+   * @global    m_err   $err
+   * @param     string      $tld    top-level domain to add (org, com...)
+   * @return    boolean             TRUE if the tld has been successfully added, FALSE if not.
+   */
   function gettld($tld) {
     global $db,$err;
     $db->query("SELECT mode FROM tld WHERE tld='$tld';");
@@ -1099,9 +1239,10 @@ EOF;
   }
 
 
-  /* ----------------------------------------------------------------- */
-  /** Prints the list of the actually authorized TLDs
-   * @param $current integer Value to select in the list
+  /** 
+   * Prints the list of the actually authorized TLDs
+   * 
+   * @param     boolean $current   Value to select in the list
    */
   function selecttldmode($current=false) {
     for($i=0;$i<count($this->tldmode);$i++) {
@@ -1112,12 +1253,15 @@ EOF;
   }
 
 
-  /* ----------------------------------------------------------------- */
-  /** Deletes the specified tld in the list of the authorized TLDs
+  /** 
+   * Deletes the specified tld in the list of the authorized TLDs
    * <b>Note</b> : This function does not delete the domains depending
    * on this TLD
-   * @param $tld string The TLD you want to delete
-   * @return boolean returns true if the TLD has been deleted, or
+   * 
+   * @global    m_mysql $db
+   * @global    m_err   $err
+   * @param     string  $tld   The TLD you want to delete
+   * @return    boolean         returns true if the TLD has been deleted, or
    * false if an error occured.
    */
   function deltld($tld) {
@@ -1134,12 +1278,16 @@ EOF;
 
   /* ----------------------------------------------------------------- */
   /** Add a TLD to the list of the authorized TLDs during the installation
-   * @param $tld string TLD we want to authorize
-   * @param $mode integer Controls to make on this TLD.
+   * 
    * <b>Note: </b> If you check in the whois, be sure that
    *  <code>m_domains</code> knows how to name the whois of the specified
-   *  domain !
-   * @return boolean TRUE if the TLD has been successfully
+   *  domain!
+   * 
+   * @global    m_mysql $db
+   * @global    m_err   $err
+   * @param     string  $tld        string TLD we want to authorize
+   * @param     boolean $mode       Controls to make on this TLD.
+   * @return    boolean             TRUE if the TLD has been successfully
    *  added. FALSE if not.
    */
   function addtld($tld,$mode) {
@@ -1163,12 +1311,16 @@ EOF;
   }
 
 
-  /* ----------------------------------------------------------------- */
-  /** Modify a TLD of the list of the authorized TLDs 
-   * @param $tld string TLD we want to modify
-   * @param $mode integer Controls to make on this TLD.
-   * @return boolean TRUE if the TLD has been successfully
+  /** 
+   * Modify a TLD of the list of the authorized TLDs 
+   * 
+   * @global    m_mysql $db
+   * @global    m_err   $err
+   * @param     string  $tld    TLD we want to modify
+   * @param     int     $mode   Controls to make on this TLD.
+   * @return    boolean         TRUE if the TLD has been successfully
    * modified. FALSE if not.
+
    */
   function edittld($tld,$mode) {
     global $db,$err;
@@ -1184,9 +1336,11 @@ EOF;
   }
 
 
-  /* ----------------------------------------------------------------- */
-  /** Get the login name of the main administrator account
-   * @return string the login name of admin, like 'root' for older alterncs
+  /** 
+   * Get the login name of the main administrator account
+   * 
+   * @global    m_mysql $db
+   * @return string     the login name of admin, like 'root' for older alterncs
    */
   function getadmin() {
     global $db;
@@ -1196,9 +1350,13 @@ EOF;
   }
 
 
-  /* ----------------------------------------------------------------- */
-  /** List the password policies currently installed in the policy table
-   * @return array an indexed array of associative array from the MySQL "policy" table
+  /** 
+   * List the password policies currently installed in the policy table
+   * 
+   * @global    m_mysql $db
+   * @global    array   $classes
+   * @global    m_hooks $hooks
+   * @return array              an indexed array of associative array from the MySQL "policy" table
    */
   function listPasswordPolicies() {
     global $db,$classes,$hooks;
@@ -1246,15 +1404,16 @@ EOF;
   }
 
 
-  /* ----------------------------------------------------------------- */
-  /** Change a password policy for one kind of password
+  /** 
+   * Change a password policy for one kind of password
    * 
-   * @param $policy string Name of the policy to edit
-   * @param $minsize integer Minimum Password size
-   * @param $maxsize integer Maximum Password size
-   * @param $classcount integer How many class of characters must this password have
-   * @param $allowlogin boolean Do we allow the password to be like the login ? 
-   * @return boolean TRUE if the policy has been edited, or FALSE if an error occured.
+   * @global    m_mysql $db
+   * @param     string  $policy     Name of the policy to edit
+   * @param     int     $minsize    Minimum Password size
+   * @param     int     $maxsize    Maximum Password size
+   * @param     int     $classcount How many class of characters must this password have
+   * @param     boolean $allowlogin Do we allow the password to be like the login ? 
+   * @return    booleanTRUE if the policy has been edited, or FALSE if an error occured.
    */
   function editPolicy($policy,$minsize,$maxsize,$classcount,$allowlogin) {
     global $db;
@@ -1276,12 +1435,14 @@ EOF;
   }
 
 
-  /* ----------------------------------------------------------------- */
-  /** Check a password and a login for a specific policy 
-   * @param $policy string Name of the policy to check for
-   * @param $login The login that will be set
-   * @param $password The password we have to check
-   * @return boolean TRUE if the password if OK for this login and this policy, FALSE if it is not.
+  /**
+   * 
+   * @global    m_mysql $db
+   * @global    m_err   $err
+   * @param     string  $policy     Name of the policy to check for
+   * @param     string  $login      The login that will be set
+   * @param     string  $password   The password we have to check
+   * @return    boolean             TRUE if the password if OK for this login and this policy, FALSE if it is not.
    */
   function checkPolicy($policy,$login,$password) {
     global $db,$err;
@@ -1352,11 +1513,12 @@ EOF;
   }
 
 
-  /* ----------------------------------------------------------------- */
-  /** hook function called by AlternC-upnp to know which open 
+  /** 
+   * hook function called by AlternC-upnp to know which open 
    * tcp or udp ports this class requires or suggests
-   * @return array a key => value list of port protocol name mandatory values
+   * 
    * @access private
+   * @return array a key => value list of port protocol name mandatory values
    */
   function hook_upnp_list() {
     return array(
