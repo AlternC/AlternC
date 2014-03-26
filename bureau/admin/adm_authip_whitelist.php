@@ -76,7 +76,9 @@ $list_ip = $authip->list_ip_whitelist();
           } else {
             $txt="Subnet IPv6";
           }
-        } 
+        } else {
+          $txt = "Unknow IP";
+        }
         echo "<tr class='lst'><td>$txt</td><td>{$i['ip_human']}</td><td>{$i['infos']}</td>";
         ?>
         <td><div class="ina edit"><a href="javascript:edit_ip(<?php echo "'".htmlentities($i['id'])."','".htmlentities($i['ip_human'])."','".htmlentities($i['infos'])."'"; ?>);"><?php __("Edit"); ?></a></div></td>

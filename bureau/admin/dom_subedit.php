@@ -41,6 +41,9 @@ $dom->lock();
 if (!isset($noread) || !$noread) {
   if (!$r=$dom->get_sub_domain_all($sub_domain_id)) {
     $error=$err->errstr();
+    echo "<p class=\"alert alert-danger\">$error</p>";
+    include_once('foot.php');
+    die();
   }
 }
 
