@@ -186,6 +186,7 @@ class m_bro {
       $err->raise('bro',_("This directory do not exist"));
       return false;
     }
+    $c=array();
     if ($dir = @opendir($absolute)) {
       while (($file = readdir($dir)) !== false) {
 	if ($file!="." && $file!="..") {
@@ -194,12 +195,8 @@ class m_bro {
       }
       closedir($dir);
     }
-    if (isset ($c) && is_array($c)) {
-      usort ($c, array("m_bro","_sort_filelist_name"));
-      return $c;
-    } else {
-      return array();
-    }
+    usort ($c, array("m_bro","_sort_filelist_name"));
+    return $c;
   }
 
 

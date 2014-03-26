@@ -475,6 +475,7 @@ class DB_Sql {
   function table_names() {
     $this->query("SHOW TABLES");
     $i=0;
+    $return=array();
     while ($info=mysql_fetch_row($this->Query_ID))
      {
       $return[$i]["table_name"]= $info[0];

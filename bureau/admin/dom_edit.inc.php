@@ -46,6 +46,7 @@ $dom->unlock();
 		</tr>
     <?php 
       $first_advanced=true;
+      $lst_advanced=array();
       foreach($dom->domains_type_lst() as $dt) { 
         // If this type is disabled AND it's not the type in use here, continue
         if ( $dt['enable'] == 'NONE' && strtoupper($type)!=strtoupper($dt['name'])) continue ;

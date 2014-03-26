@@ -37,6 +37,7 @@ class system_bind {
           sd.type=dt.name 
           and sd.enable in ('ENABLE', 'ENABLED') 
         order by entry ;");
+      $t=array();
       while ($db->next_record()) {
         $t[$db->f('domaine')][] = $db->f('entry');
       }

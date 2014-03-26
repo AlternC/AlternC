@@ -347,6 +347,7 @@ class m_admin {
     $db->query($request);
 
     if ($db->num_rows()) {
+      $c=array();
       while ($db->next_record()) {
 	$c[$db->f("uid")]=$this->get($db->f("uid"));
       }
@@ -764,7 +765,7 @@ EOF;
 
     # New way of deleting or backup delted user html folders using action class
     $path=getuserpath($tt['login']);
-    $action->archive($path); 	
+    $action->archive($path);
 
     $hooks->invoke("alternc_del_member");
     $hooks->invoke("hook_admin_del_member");
@@ -946,6 +947,7 @@ EOF;
   function listtld() {
     global $db;
     $db->query("SELECT tld,mode FROM tld ORDER BY tld;");
+    $c=array();
     while ($db->next_record()) {
       $c[]=$db->Record;
     }
@@ -974,6 +976,7 @@ EOF;
       }
     }
     $db->query("SELECT m.uid,m.login,d.domaine,d.gesdns,d.gesmx,d.noerase FROM domaines d LEFT JOIN membres m ON m.uid=d.compte ORDER BY domaine;");
+    $c=array();
     while ($db->next_record()) {
       $tmp=$db->Record;
       if ($alsocheck) {

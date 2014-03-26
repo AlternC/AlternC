@@ -306,7 +306,6 @@ class m_piwik {
 
     if ($db->f('cnt') == 1) {
 	$api_data = $this->call_privileged_page('API', 'SitesManager.deleteSite', array('idSite' => $site_id));
- 	
 	if ($api_data->result == 'success') {
 		return $db->query("DELETE FROM piwik_sites where uid='$cuid' AND piwik_id='$site_id' LIMIT 1");
 	} else {
