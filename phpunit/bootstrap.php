@@ -54,21 +54,22 @@ foreach ($configFile as $line) {
 // ********************
 
 // Define constants from vars of local.sh
-define('ALTERNC_MAIL',              "$L_ALTERNC_MAIL");
-define('ALTERNC_HTML',              "$L_ALTERNC_HTML");
-define('ALTERNC_LOGS',              "$L_ALTERNC_LOGS");
+if( !defined("ALTERNC_MAIL") ) { define('ALTERNC_MAIL', "$L_ALTERNC_MAIL"); };
+if( !defined("ALTERNC_HTML") ) { define('ALTERNC_HTML', "$L_ALTERNC_HTML"); };
+if( !defined("ALTERNC_LOGS") ) { define('ALTERNC_LOGS', "$L_ALTERNC_LOGS"); };
 if(isset($L_ALTERNC_LOGS_ARCHIVE)){
-    define('ALTERNC_LOGS_ARCHIVE',      "$L_ALTERNC_LOGS_ARCHIVE");
+ define('ALTERNC_LOGS_ARCHIVE', "$L_ALTERNC_LOGS_ARCHIVE");
 }
-define('ALTERNC_LOCALES',               ALTERNC_PANEL."/locales");
-define('ALTERNC_LOCK_JOBS',             '/var/run/alternc/jobs-lock');
-define('ALTERNC_LOCK_PANEL',            '/var/lib/alternc/panel/nologin.lock');
-define('ALTERNC_APACHE2_GEN_TMPL_DIR',  '/etc/alternc/templates/apache2/');
-define('ALTERNC_VHOST_DIR',             "/var/lib/alternc/apache-vhost/");
-define('ALTERNC_VHOST_FILE',            ALTERNC_VHOST_DIR."vhosts_all.conf");
-define('ALTERNC_VHOST_MANUALCONF',      ALTERNC_VHOST_DIR."manual/");
-define("THROW_EXCEPTIONS",              TRUE);
-$root                                   = ALTERNC_PANEL."/";
+if( !defined("ALTERNC_LOCALES") ) { define('ALTERNC_LOCALES', ALTERNC_PANEL."/locales"); };
+if( !defined("ALTERNC_LOCK_JOBS") ) { define('ALTERNC_LOCK_JOBS', '/var/run/alternc/jobs-lock'); };
+if( !defined("ALTERNC_LOCK_PANEL") ) { define('ALTERNC_LOCK_PANEL', '/var/lib/alternc/panel/nologin.lock'); };
+if( !defined("ALTERNC_APACHE2_GEN_TMPL_DIR") ) { define('ALTERNC_APACHE2_GEN_TMPL_DIR', '/etc/alternc/templates/apache2/'); };
+if( !defined("ALTERNC_VHOST_DIR") ) { define('ALTERNC_VHOST_DIR', "/var/lib/alternc/apache-vhost/"); };
+if( !defined("ALTERNC_VHOST_FILE") ) { define('ALTERNC_VHOST_FILE', ALTERNC_VHOST_DIR."vhosts_all.conf"); };
+if( !defined("ALTERNC_VHOST_MANUALCONF") ) { define('ALTERNC_VHOST_MANUALCONF', ALTERNC_VHOST_DIR."manual/"); };
+define("THROW_EXCEPTIONS", TRUE);
+
+$root = ALTERNC_PANEL."/";
 
 // Create test directory
 foreach (array(ALTERNC_MAIL, ALTERNC_HTML, ALTERNC_LOGS) as $crdir ) {
