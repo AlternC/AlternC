@@ -125,6 +125,10 @@ class m_mail {
   }
 
   // FIXME documenter
+
+  /**
+   * @param string $domain_id
+   */
   function catchall_getinfos($domain_id) {
     global $dom, $db;
     $rr=array(

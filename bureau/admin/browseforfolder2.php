@@ -47,6 +47,7 @@ getFields($fields);
 /**
  * @param integer $pos
  * @param integer $level
+ * @param string $curdir
  */
 function _subbrowse($curdir,$pos,$level) {
   global $maxlevel,$root,$brlist;
