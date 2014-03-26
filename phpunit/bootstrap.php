@@ -26,7 +26,7 @@ require_once ALTERNC_PANEL."/class/functions.php";
 // General variables setup
 // *********************
 if(is_readable('local.sh')){
-    $configFile                         = file_get_contents('local.sh';
+    $configFile                         = file_get_contents('local.sh');
 } else if(is_readable('local.sh_generic')){
     $configFile                         = file_get_contents('local.sh_generic');
 } else {
