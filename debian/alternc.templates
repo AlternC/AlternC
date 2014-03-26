@@ -1,11 +1,14 @@
 Template: alternc/acluninstalled
-Type: note
+Type: error
 _Description: AlternC need ACL on filesystem
  AlternC can't work without ACL activated on its filesystem.
  ACL are currently not enabled.
  .
  Also, you need to activate group quota (grpquota)
  to be able to use disk quota (but that's not mandatory).
+ .
+ This is a fatal error and will cause the package installation
+ to fail.
 
 Template: alternc/quotauninstalled
 Type: note
