@@ -113,9 +113,9 @@ $creators_list=array();
 foreach($admin->get_creator_list() as $mid=>$mlogin) {
   $creators_list[$mid] = $mlogin['login'];
 }
-
+$variablesList              = $variables->variables_list_name();
 echo "<fieldset><legend>"._("Description")."</legend>";
-echo "<p>".$variables->variables_list_name()[$var]."</p>";
+echo "<p>".$variablesList[$var]."</p>";
 echo "</fieldset>";
 
 echo "<br/>";

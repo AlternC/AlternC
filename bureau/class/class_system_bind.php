@@ -181,7 +181,8 @@ class system_bind {
    */
   function dkim_generate_key($domain) {
     // Stop here if we do not manage the mail
-    if ( !  $this->get_domain_summary($domain)['gesmx'] ) return;
+    $domainInfo = $this->get_domain_summary($domain);
+    if ( !  $domainInfo['gesmx'] ) return;
 
     $target_dir = "/etc/opendkim/keys/$domain";
 
@@ -266,7 +267,8 @@ class system_bind {
    */
   function dkim_entry($domain) {
     $keyfile="/etc/opendkim/keys/$domain/alternc.txt";
-    if (! file_exists($keyfile) &&  $this->get_domain_summary($domain)['gesmx'] ) {
+    $domainInfo         = $this->get_domain_summary($domain);
+    if (! file_exists($keyfile) &&  $domainInfo['gesmx'] ) {
       $this->dkim_generate_key($domain);
     }
     return @file_get_contents($keyfile);
@@ -283,7 +285,8 @@ class system_bind {
     $zone= implode("\n",$this->conf_from_db($domain))."\n".$this->get_persistent($domain);
 
     $entry='';
-    if ( $this->get_domain_summary($domain)['gesmx'] ) {
+    $domainInfo                 = $this->get_domain_summary($domain);
+    if ( $domainInfo['gesmx'] ) {
       // If we manage the mail
 
       // Check if there is no the same entry (defined or manual)
@@ -324,6 +327,7 @@ class system_bind {
 
     $zone.="\n;;;END ALTERNC AUTOGENERATE CONFIGURATION";
     $zone.=$this->get_persistent($domain);
+    $domainInfo = $this->get_domain_summary($domain);
 
     // FIXME check those vars
     $zone = strtr($zone, array(
@@ -340,7 +344,7 @@ class system_bind {
             "@@DOMAINE@@"=>"$domain",
             "@@SERIAL@@"=>$this->get_serial($domain),
             "@@PUBLIC_IP@@"=>"$L_PUBLIC_IP",
-            "@@ZONETTL@@"=> $this->get_domain_summary($domain)['zonettl'],
+            "@@ZONETTL@@"=> $domainInfo['zonettl'],
           ));
 
     return $zone;

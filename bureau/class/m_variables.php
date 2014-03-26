@@ -31,6 +31,7 @@
  *
  * @author Drupal Developpement Team
  * @link http://cvs.drupal.org/viewcvs/drupal/drupal/includes/bootstrap.inc?rev=1.38&view=auto
+ * @
  */
 class m_variables {
   var $strata_order = array('DEFAULT','GLOBAL','FQDN_CREATOR','FQDN','CREATOR','MEMBER','DOMAIN');
@@ -299,6 +300,7 @@ class m_variables {
    */
   function display_valueraw_html($v,$varname,$echo = true) {
     $output                     = "";
+    $varList                    = $this->variables_list();
     if (is_array($v)) {
       if (empty($v)) {
         $output .= "<em>"._("Empty array")."</em>";
@@ -310,19 +312,19 @@ class m_variables {
             if (is_null($varname)) {
               $output .= "$k";
             } else {
-              if ( !isset($this->variables_list()['DEFAULT'][null][$varname]['type'][$k]) ||  is_array( $this->variables_list()['DEFAULT'][null][$varname]['type'][$k] ) ) {
-                if (isset($this->variables_list()['DEFAULT'][null][$varname]['type'][$k]['desc'])) {
-                  $output .= $this->variables_list()['DEFAULT'][null][$varname]['type'][$k]['desc'];
+                if ( !isset($varList['DEFAULT'][null][$varname]['type'][$k]) ||  is_array( $varList['DEFAULT'][null][$varname]['type'][$k] ) ) {
+                if (isset($varList['DEFAULT'][null][$varname]['type'][$k]['desc'])) {
+                  $output .= $varList['DEFAULT'][null][$varname]['type'][$k]['desc'];
                 } else {
                   $output .= $k;
                 }
               } else {
-                $output .= $this->variables_list()['DEFAULT'][null][$varname]['type'][$k];
+                $output .= $varList['DEFAULT'][null][$varname]['type'][$k];
               }
             }
           } else {
-            if (isset($this->variables_list()['DEFAULT'][null][$varname]['type'][$k]['desc'] )) {
-              $output .= $this->variables_list()['DEFAULT'][null][$varname]['type'][$k]['desc'];
+            if (isset($varList['DEFAULT'][null][$varname]['type'][$k]['desc'] )) {
+              $output .= $varList['DEFAULT'][null][$varname]['type'][$k]['desc'];
             }
           }
           if (is_array($l)) {
@@ -332,7 +334,7 @@ class m_variables {
               if ( is_numeric($m)) {
                 $output .= "$m";
               } else {
-                $output .= $this->variables_list()['DEFAULT'][null][$varname]['type'][$k][$m]['desc'];
+                $output .= $varList['DEFAULT'][null][$varname]['type'][$k][$m]['desc'];
               }
               $output .= " => $n";
               $output .= "</li>";

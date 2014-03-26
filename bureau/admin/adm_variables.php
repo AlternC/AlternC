@@ -101,7 +101,8 @@ echo "<input type='submit' class='ina' value=\""; echo ehe(_("View")); echo "\" 
 <?php 
 if ( $member_id && $fqdn_id ) {
 $sub_infos=$dom->get_sub_domain_all($fqdn_id);
-$fqdn=$dom->get_panel_url_list()[$fqdn_id];
+$domList = $dom->get_panel_url_list();
+$fqdn=$domList[$fqdn_id];
 $impersonated_conf=$variables->get_impersonated($fqdn, $member_id);
 
 echo sprintf(_("Here are values for members %s logged via %s"), '<b>'.$ml[$member_id].'</b>', "<b>$fqdn</b>") ;?>
