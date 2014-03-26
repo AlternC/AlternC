@@ -715,8 +715,7 @@ CREATE TABLE IF NOT EXISTS `default_subdomains` (
   `domain_type_parameter` varchar(255) NOT NULL,
   `concerned` enum('BOTH','MAIN','SLAVE') NOT NULL DEFAULT 'MAIN',
   `enabled` boolean not null default true,
-  PRIMARY KEY  (`id`),
-  UNIQUE KEY `unique_row` (`sub`,`domain_type`,`domain_type_parameter`,`concerned`)
+  PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM COMMENT='Contains the defaults subdomains created on domains creation';
 
 INSERT IGNORE INTO `default_subdomains` (`sub`, `domain_type`, `domain_type_parameter`, `concerned`) VALUES
