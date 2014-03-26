@@ -108,7 +108,7 @@ class m_upnp {
   /** cron launched every minute to check the status of UPnP forwarding
    */
   function cron() {
-    global $hooks,$L_INTERNAL_IP,$PUBLIC_IP;
+    global $hooks,$db,$L_INTERNAL_IP,$PUBLIC_IP;
     // if we check anything less than 5 minutes ago, or if the upnp table is empty, let's make a check...
     $db->query("SELECT UNIX_TIMESTAMP(lastcheck) AS lc, * FROM upnp ORDER BY lastcheck ASC;");
     $forwards=array();
