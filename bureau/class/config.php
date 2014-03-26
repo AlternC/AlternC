@@ -136,7 +136,7 @@ if (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"]=="on" && $host!=$L_FQDN) {
 */
 
 class DB_system extends DB_Sql {
-  var $Host,$Database,$User,$Password;
+  var $Host,$Database,$User,$Password = null;
 
   /**
   * Creator
@@ -190,7 +190,7 @@ $hooks=new m_hooks();
 if (!defined('NOCHECK')) {
   if (!$mem->checkid()) {
     $error=$err->errstr();
-    include("index.php");
+    include("$root/admin/index.php");
     exit();
   }
 } 

@@ -124,7 +124,7 @@ foreach( $variables->variables_list_name() as $varname => $varcomment) {  ?>
    <td><?php $variables->display_value_html($allvars, 'CREATOR', $creator, $varname); ?></td>
    <td><?php $variables->display_value_html($allvars, 'MEMBER', $member_id, $varname); ?></td>
    <td><?php $variables->display_value_html($allvars, 'DOMAIN', 'FIXME', $varname); ?></td>
-   <td><?php $variables->display_valueraw_html($impersonated_conf[$varname]['value'], $varname); ?></td>
+   <td><b><?php $variables->display_valueraw_html($impersonated_conf[$varname]['value'], $varname); ?></b></td>
  </tr>
 <?php
 } //foreach 

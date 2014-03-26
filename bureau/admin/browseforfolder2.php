@@ -69,7 +69,6 @@ function _subbrowse($curdir,$pos,$level) {
 function browseforfolder($curdir) {
   global $maxlevel,$root,$brlist;
   $maxlevel=0;
-  $pat=explode("/",$curdir);
   $brlist=array(array("dir"=>"/","level"=>0,"put"=> ife($curdir=="/","","/") ));
   _subbrowse($curdir,0,1);
   return $brlist;

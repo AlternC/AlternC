@@ -80,6 +80,7 @@ array(
 if (empty($var)) {
   echo "<p class='error'>";__("Missing var name");echo "</p>";
   include_once("foot.php");
+  die();
 }
 
 // Which one between var_value and var_value_arr ?

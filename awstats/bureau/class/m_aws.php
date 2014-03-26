@@ -611,7 +611,7 @@ class m_aws {
    * @param string $dom the domain to uninstall
    */
   function alternc_del_domain($dom) {
-    global $db,$err,$cuid;
+    global $err,$cuid;
     $err->log("aws","alternc_del_domain",$dom);
     $db=new DB_System();
     $db->query("SELECT id,hostname FROM aws WHERE uid='$cuid' AND (hostname='$dom' OR hostname like '%.$dom')");
