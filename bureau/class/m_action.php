@@ -33,7 +33,8 @@
 class m_action {
     /* --------------------------------------------------------------------------- */
 
-    /** Constructor
+    /** 
+     * Constructor
      */
     function m_action() {
         
@@ -42,8 +43,8 @@ class m_action {
     /**
      * Plans the cration of a file 
      * 
-     * @global type $err
-     * @global type $L_INOTIFY_DO_ACTION
+     * @global \m_err $err
+     * @global string $L_INOTIFY_DO_ACTION
      * @return boolean
      */
     function do_action() {
@@ -58,7 +59,7 @@ class m_action {
     /**
      * Plans a file creation
      * 
-     * @param string $file
+     * @param string  $file
      * @param string $content
      * @param int $user
      * @return boolean
@@ -91,8 +92,8 @@ class m_action {
     /**
      * Plans a dir fix
      * 
-     * @param type $dir
-     * @param type $user
+     * @param string $dir
+     * @param m_user $user
      * @return type
      */
     function fix_dir($dir, $user = "root") {
@@ -102,8 +103,8 @@ class m_action {
     /**
      * Plans a file fix
      * 
-     * @param type $file
-     * @param type $user
+     * @param string $file
+     * @param m_user $user
      * @return type
      */
     function fix_file($file, $user = "root") {
@@ -113,8 +114,8 @@ class m_action {
     /**
      * function to delete file / folder
      * 
-     * @param type $dir
-     * @param type $user
+     * @param string $dir
+     * @param m_user $user
      * @return type
      */
     function del($dir, $user = "root") {
@@ -124,9 +125,9 @@ class m_action {
     /**
      * function returning the first not locked line of the action table 
      * 
-     * @param type $src
-     * @param type $dst
-     * @param type $user
+     * @param string $src
+     * @param string $dst
+     * @param m_user $user
      * @return type
      */
     function move($src, $dst, $user = "root") {
@@ -137,12 +138,12 @@ class m_action {
      * 
      * function archiving a directory ( upon account deletion )
      * 
-     * @global type $cuid
-     * @global type $db
-     * @global type $err
-     * @param type $archive Directory to archive within the archive_del_data folder if set in variable sql table
+     * @global int $cuid
+     * @global m_mysql $db
+     * @global m_err $err
+     * @param string $archive Directory to archive within the archive_del_data folder if set in variable sql table
      *                      If archive_del_data is not set we delete the folder
-     * @param type $dir  sub_directory of the archive directory
+     * @param string $dir  sub_directory of the archive directory
      * @return boolean
      */
     function archive($archive, $dir = "html") {
@@ -172,11 +173,11 @@ class m_action {
     /**
      * function inserting the action in the sql table
      * 
-     * @global type $db
-     * @global type $err
-     * @param type $type
-     * @param type $user
-     * @param type $parameters
+     * @global m_mysql $db
+     * @global m_err $err
+     * @param string $type
+     * @param m_user $user
+     * @param mixed $parameters
      * @return boolean
      */
     function set($type, $user, $parameters) {
@@ -220,8 +221,8 @@ class m_action {
     /**
      * This seems to be unused ?
      * 
-     * @global type $err
-     * @global type $db
+     * @global m_err $err
+     * @global m_mysql $db
      * @param type $all
      * @return boolean
      */
@@ -239,8 +240,8 @@ class m_action {
 
     /**
      * 
-     * @global type $err
-     * @global type $db
+     * @global m_err $err
+     * @global m_mysql $db
      * @param type $all
      * @return boolean
      */
@@ -263,8 +264,8 @@ class m_action {
     /**
      *  function returning the first not locked line of the action table 
      * 
-     * @global type $db
-     * @global type $err
+     * @global m_mysql $db
+     * @global m_err $err
      * @return boolean or array
      */
     function get_action() {
@@ -283,9 +284,9 @@ class m_action {
     /**
      * function locking an entry while it is being executed by the action script
      * 
-     * @global type $db
-     * @global type $err
-     * @param type $id
+     * @global m_mysql $db
+     * @global m_err $err
+     * @param int $id
      * @return boolean
      */
     function begin($id) {
@@ -300,9 +301,9 @@ class m_action {
     /**
      *  function locking an entry while it is being executed by the action script
      * 
-     * @global type $db
-     * @global type $err
-     * @param type $id
+     * @global m_mysql $db
+     * @global m_err $err
+     * @param int $id
      * @param type $return
      * @return boolean
      */
@@ -317,9 +318,9 @@ class m_action {
     
     /**
      * 
-     * @global type $db
-     * @global type $err
-     * @param type $id
+     * @global m_mysql $db
+     * @global m_err $err
+     * @param int $id
      * @return boolean
      */
     function reset_job($id) {
@@ -334,8 +335,8 @@ class m_action {
     /**
      * Returns a list of actions marked as executable and ready for execution
      * 
-     * @global type $db
-     * @global type $err
+     * @global m_mysql $db
+     * @global m_err $err
      * @return boolean 
      */
     function get_job() {
@@ -353,8 +354,8 @@ class m_action {
     /**
      *  function locking an entry while it is being executed by the action script
      * 
-     * @global type $db
-     * @param type $id
+     * @global m_mysql $db
+     * @param int $id
      * @return boolean
      */
     function cancel($id) {

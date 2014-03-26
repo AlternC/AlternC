@@ -100,11 +100,11 @@ class m_variables {
    * 
    * If $fqdn and $uid aren't specified, return the default value
    * 
-   * @global type $db
-   * @global type $err
-   * @param type $fqdn
-   * @param type $uid
-   * @param type $var
+   * @global m_mysql $db
+   * @global m_err $err
+   * @param string $fqdn
+   * @param int $uid
+   * @param string $var
    * @return array
    */
   function get_impersonated($fqdn=null, $uid=null, $var=null) {
@@ -186,6 +186,7 @@ class m_variables {
    *
    * @global $conf the global conf array
    * @uses variable_init()
+   * @param boolean $force
    */
   function variable_init_maybe($force=false) {
     global $conf;
@@ -198,16 +199,16 @@ class m_variables {
   /**
    * Return a persistent variable.
    *
-   * @param $name
+   * @param  string $name
    *   The name of the variable to return.
-   * @param $default
+   * @param mixed $default
    *   The default value to use if this variable has never been set.
-   * @param $createit_comment 
+   * @param string $createit_comment 
    *   If variable doesn't exist, create it with the default value
    *   and createit_comment value as comment
-   * @return
+   * @return mixed
    *   The value of the variable.
-   * @global $conf
+   * @global array $conf
    *   A cache of the configuration.
    */
   function variable_get($name, $default = null, $createit_comment = null, $type=null) {
@@ -226,15 +227,15 @@ class m_variables {
   /**
    * Create or update a variable
    * 
-   * @global type $db
-   * @global type $err
-   * @param type $var_name
-   * @param type $var_value
-   * @param type $strata
-   * @param null $strata_id
-   * @param null $var_id
-   * @param type $comment
-   * @param type $type
+   * @global m_mysql $db
+   * @global m_err $err
+   * @param string $var_name
+   * @param mixed $var_value
+   * @param string $strata
+   * @param int $strata_id
+   * @param int $var_id
+   * @param string $comment
+   * @param string $type
    * @return boolean
    */
   function variable_update_or_create($var_name, $var_value, $strata=null, $strata_id=null, $var_id=null, $comment=null, $type=null) {
@@ -276,9 +277,10 @@ class m_variables {
 
   /**
    * Unset a persistent variable.
-   *
-   * @param $name
-   *   The name of the variable to undefine.
+   * 
+   * @global m_mysql $db
+   * @param int $id
+   * @return type
    */
   function del($id) {
     global $db;
@@ -290,9 +292,9 @@ class m_variables {
   /**
    * echo HTML code to display a variable passed in parameters
    * 
-   * @param type $v
-   * @param type $varname
-   * @param type $echo
+   * @param mixed $v
+   * @param string $varname
+   * @param boolean $echo
    * @return type
    */
   function display_valueraw_html($v,$varname,$echo = true) {
@@ -357,11 +359,11 @@ class m_variables {
   /**
    *  Display a variable if is set
    * 
-   * @param type $tab
-   * @param type $strata
-   * @param type $id
-   * @param type $varname
-   * @param type $echo
+   * @param array $tab
+   * @param string $strata
+   * @param int $id
+   * @param string $varname
+   * @param boolean $echo
    * @return string
    */
   function display_value_html($tab, $strata, $id, $varname, $echo = TRUE) {
@@ -381,7 +383,7 @@ class m_variables {
   /**
    * return hashtable with variable_name => comment for all the vars
    * 
-   * @global type $db
+   * @global m_mysql $db
    * @return type
    */
   function variables_list_name() {
@@ -402,7 +404,7 @@ class m_variables {
   /**
    * return a multidimensionnal array used to build vars
    * 
-   * @global type $db
+   * @global m_mysql $db
    * @return type
    */
   function variables_list() {
