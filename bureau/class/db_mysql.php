@@ -27,6 +27,7 @@ class DB_Sql {
   /* public: result array and current row number */
   var $Record   = array();
   var $Row;
+  var $num_rows;
 
   /* public: current error number and error text */
   var $Errno    = 0;

@@ -1091,6 +1091,7 @@ class m_dom {
       $err->raise("dom",_("The domain name is syntaxically incorrect"));
       return false;
     }
+    $r=array();
     $r["name"]=$dom;
     $db->query("SELECT * FROM domaines WHERE compte='$cuid' AND domaine='$dom'");
     if ($db->num_rows()==0) {
@@ -1509,6 +1510,7 @@ class m_dom {
   if (!$db->next_record()) {
     return false;
   }
+  $res=array();
   do {
     $res[]=$db->Record;
   } while ($db->next_record());

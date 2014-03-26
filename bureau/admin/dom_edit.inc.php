@@ -29,12 +29,12 @@ $dom->unlock();
 ?>
 
 <form action="dom_subdoedit.php" method="post" name="main" id="main">
-	<table border="0">
-		<tr>
-			<td>
-			<input type="hidden" name="domain" value="<?php ehe($domain) ?>" />
-			<input type="hidden" name="sub_domain_id" value="<?php echo $sub_domain_id ?>" />
-			<input type="hidden" name="action" value="add" />
+    <table border="0">
+        <tr>
+            <td>
+            <input type="hidden" name="domain" value="<?php ehe($domain) ?>" />
+            <input type="hidden" name="sub_domain_id" value="<?php echo $sub_domain_id ?>" />
+            <input type="hidden" name="action" value="add" />
   <?php
    if ($isedit) {
      __("Edit a subdomain:"); 
@@ -43,7 +43,7 @@ $dom->unlock();
    }
 ?></td><td>
 <input type="text" class="int" name="sub" style="text-align:right" value="<?php ehe($sub); ?>" size="22" id="sub" /><span class="int" id="newsubname">.<?php echo $domain; ?></span></td>
-		</tr>
+        </tr>
     <?php 
       $first_advanced=true;
       $lst_advanced=array();
@@ -60,10 +60,10 @@ $dom->unlock();
           $lst_advanced[]=$dt['name'];
           if ($first_advanced) {
             $first_advanced=false;
-	    echo "<tr><td colspan=\"2\" class=\"advdom\"></td></tr>";
+            echo "<tr><td colspan=\"2\" class=\"advdom\"></td></tr>";
             echo "<tr id='domtype_show' onClick=\"domtype_advanced_show();\"><td colspan='2'><a href=\"javascript:domtype_advanced_show();\"><b>+ "; __("Show advanced options"); echo "</b></a></td></tr>";
             echo "<tr id='domtype_hide' onClick=\"domtype_advanced_hide();\" style='display:none'><td colspan='2'><a href=\"javascript:domtype_advanced_hide();\"><b>- "; __("Hide advanced options"); echo "</b></a></td></tr>";
-	    echo "<tr><td colspan=\"2\" class=\"advdom\"></td></tr>";
+            echo "<tr><td colspan=\"2\" class=\"advdom\"></td></tr>";
           }
         }
     ?>
@@ -76,20 +76,16 @@ $dom->unlock();
         <?php 
 
         switch ($dt['target']) {
-          case "NONE":
-          default:
-            break;
           case "DIRECTORY": ?>
             <input type="text" class="int" name="t_<?php echo $dt['name']?>" id="t_<?php echo $dt['name']?>" value="<?php ehe($targval); ?>" size="28" onKeyPress="getElementById('r_<?php echo $dt['name']?>').checked=true;" />
-						<?php display_browser( $targval , "main.t_".$dt['name'] ); ?>
-						<?php
+            <?php display_browser( $targval , "main.t_".$dt['name'] ); 
             break;
           case "URL": ?>
-			        <input type="text" class="int" name="t_<?php echo $dt['name']?>" id="t_<?php echo $dt['name']?>" value="<?php ehe( (empty($targval)?'http://':$targval) ); ?>" size="50" onKeyPress="getElementById('r_<?php echo $dt['name']?>').checked=true;" />
+              <input type="text" class="int" name="t_<?php echo $dt['name']?>" id="t_<?php echo $dt['name']?>" value="<?php ehe( (empty($targval)?'http://':$targval) ); ?>" size="50" onKeyPress="getElementById('r_<?php echo $dt['name']?>').checked=true;" />
               <small><?php __("(enter an URL here)"); ?></small><?php
               break;;
           case 'IP':?>
-		        <input type="text" class="int" name="t_<?php echo $dt['name']?>" id="t_<?php echo $dt['name']?>"  value="<?php ehe($targval); ?>" size="16" onKeyPress="getElementById('r_<?php echo $dt['name']?>').checked=true;" />
+              <input type="text" class="int" name="t_<?php echo $dt['name']?>" id="t_<?php echo $dt['name']?>"  value="<?php ehe($targval); ?>" size="16" onKeyPress="getElementById('r_<?php echo $dt['name']?>').checked=true;" />
             <small><?php __("(enter an IPv4 address, for example 192.168.1.2)"); ?></small><?php
               break;
           case 'IPV6':?>
@@ -97,28 +93,31 @@ $dom->unlock();
             <small><?php __("(enter an IPv6 address, for example 2001:0910::0)"); ?></small><?php
               break;
           case 'TXT':?>
-		        <input type="text" class="int" name="t_<?php echo $dt['name']?>" id="t_<?php echo $dt['name']?>" value="<?php ehe($targval);?>" size="32" onKeyPress="getElementById('r_<?php echo $dt['name']?>').checked=true;" />
+              <input type="text" class="int" name="t_<?php echo $dt['name']?>" id="t_<?php echo $dt['name']?>" value="<?php ehe($targval);?>" size="32" onKeyPress="getElementById('r_<?php echo $dt['name']?>').checked=true;" />
             <small><?php __("(enter a TXT content for this domain)"); ?></small><?php
               break;
           case 'DOMAIN':?>
-		        <input type="text" class="int" name="t_<?php echo $dt['name']?>" id="t_<?php echo $dt['name']?>" value="<?php ehe($targval);?>" size="32" onKeyPress="getElementById('r_<?php echo $dt['name']?>').checked=true;" /> 
+              <input type="text" class="int" name="t_<?php echo $dt['name']?>" id="t_<?php echo $dt['name']?>" value="<?php ehe($targval);?>" size="32" onKeyPress="getElementById('r_<?php echo $dt['name']?>').checked=true;" /> 
             <small><?php __("(enter a domain name or subdomain)"); ?></small><?php
               break;
+          case "NONE":
+          default:
+            break;
         } // switch ?>
       </td>
     </tr>
     <?php } // foreach ?>
 
-		<tr class="trbtn">
-			<td colspan="2"><input type="submit" class="inb ok" name="add" onclick='return check_type_selected();' value="<?php
+        <tr class="trbtn">
+            <td colspan="2"><input type="submit" class="inb ok" name="add" onclick='return check_type_selected();' value="<?php
    if ($isedit) {
  __("Edit this subdomain");
 } else {
  __("Add this subdomain");
 } 
 ?>" /></td>
-		</tr>
-	</table>
+        </tr>
+    </table>
 </form>
 
 <script type="text/javascript">

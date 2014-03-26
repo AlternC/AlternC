@@ -1072,12 +1072,13 @@ class m_mysql {
     global $db,$err,$cuid;
     $err->log("mysql","export");
     $db->query("SELECT login, pass, db, bck_mode, bck_dir, bck_history, bck_gzip FROM db WHERE uid='$cuid';");
+    $str="";
     if ($db->next_record()) {
-      $str =" <sql>\n";
+      $str.=" <sql>\n";
       $str.="   <login>".$db->Record["login"]."</login>\n";
       $str.="   <pass>".$db->Record["pass"]."</pass>\n";
       do {
-        $filename=$tmpdir."/mysql.".$db->Record["db"].".sql.gz";
+        $filename=$tmpdir."/mysql.".$db->Record["db"].".sql.gz"; // FIXME not used
         $str.="   <database>".($db->Record["db"])."</database>\n";
         $str.="   <password>".($db->Record["pass"])."</password>\n";
         if ($s["bck_mode"]!=0) { // FIXME what is $s ?

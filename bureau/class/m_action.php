@@ -176,7 +176,7 @@ class m_action {
      * @global m_mysql $db
      * @global m_err $err
      * @param string $type
-     * @param m_user $user
+     * @param string|integer $user wich user do we impersonate?
      * @param mixed $parameters
      * @return boolean
      */
@@ -226,7 +226,7 @@ class m_action {
      * @param type $all
      * @return boolean
      */
-    function get_old($all = null) {
+    function get_old() {
         global $err, $db;
 
         $purge = "select * from actions where TO_DAYS(curdate()) - TO_DAYS(creation) > 2;";

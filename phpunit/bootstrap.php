@@ -145,7 +145,7 @@ $queryList = array(
 foreach ($queryList as $exec_command) {
     exec($exec_command,$output,$return_var);
     if(  $return_var){
-        throw new \Exception("[!] Mysql exec error : $exec_command \n Error : \n ".print_r($output,1));
+        throw new \Exception("[!] Mysql exec error : $exec_command \n Error : \n ".print_r($output,true));
     }
 }
 $db                                     = new \DB_system($user,$database,$password);
