@@ -228,7 +228,7 @@ while ($rr=$action->get_action()){
   // We finished the action, notify the DB.
   d("Finishing... return value is : $return\n");
   if(!$action->finish($r["id"],addslashes($return))){
-    $error_raise.="Cannot finish the action! Error while inserting the error value in the DB for action n°".$c["id"]." : action '".$c["type"]."'\nReturn value: ".addslashes($return)."\n";
+    $error_raise.="Cannot finish the action! Error while inserting the error value in the DB for action n°".$r["id"]." : action '".$c["type"]."'\nReturn value: ".addslashes($return)."\n";
     break; // Else we go into an infinite loop... AAAAHHHHHH
   }
 }

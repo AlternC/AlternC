@@ -2,8 +2,6 @@
 <?php
 
 require_once("/usr/share/alternc/panel/class/config_nochk.php");
-// On déverrouile le bureau AlternC :) 
-@alternc_shutdown();
 
 global $db;
 
@@ -32,7 +30,7 @@ echo "\n---------------------------\n Generating size-cache for MySQL databases\
 
 echo "---------------------------\n Generating size-cache for mailman\n\n";
 if ($db->query("SELECT uid, name FROM mailman;")) {
-  $c=array();
+  $cc=array();
   $d=array();
   if($db->num_rows()){
     while ($db->next_record()) {
@@ -50,7 +48,5 @@ if ($db->query("SELECT uid, name FROM mailman;")) {
   }
 }
 
-// On relocke le bureau pour éviter un msg d'erreur.
-@sem_acquire( $alternc_sem );
 
 ?>
