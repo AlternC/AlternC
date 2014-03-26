@@ -42,26 +42,27 @@ getFields($fields);
 
 
 if($del_confirm == "y"){
-  if (!is_array($d)) {
-    $d[]=$d;
+  if (!is_array($accountList)) {
+    $accountList[] = $accountList;
   }
 
-  reset($d);
-  while (list($key,$val)=each($d)) {
+  reset($accountList);
+  while (list($key,$val)=each($accountList)) {
     if (!$admin->checkcreator($val)) {
       __("This page is restricted to authorized staff");
       exit();
     }
+    $error = "";
     if (!($u=$admin->get($val)) || !$admin->del_mem($val)) {
-      $error=sprintf(_("Member '%s' does not exist"),$val)."<br />";
+      $error .= sprintf(_("Member '%s' does not exist"),$val)."<br />";
     } else {
-      $error=sprintf(_("Member %s successfully deleted"),$u["login"])."<br />";
+      $error .= sprintf(_("Member %s successfully deleted"),$u["login"])."<br />";
     }
   }
   include("adm_list.php");
   exit();
 } else {
-  if (!is_array($d) || count($d)==0) {
+  if (!is_array($accountList) || count($accountList)==0) {
     $error=_("Please check the accounts you want to delete");
     require("adm_list.php");
     exit();
@@ -77,8 +78,8 @@ if($del_confirm == "y"){
       <p class="alert alert-warning"><?php __("WARNING : Confirm the deletion of the users"); ?></p>
       <p>
       <?php
-        foreach($d as $userid){
-          $membre=$admin->get($userid);
+        foreach($accountList as $userid){
+          $membre   = $admin->get($userid);
           echo "<input type=\"hidden\" name=\"d[]\" value=\"$userid\" />".$membre['login']."<br/>";
         }
       ?>
