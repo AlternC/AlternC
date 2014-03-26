@@ -47,5 +47,6 @@ where
 ;
 
 
-
+-- We didn't migrate existing catchall address properly (sniff)
+UPDATE address SET TYPE="catchall" WHERE address="";
 
