@@ -216,14 +216,13 @@ CREATE TABLE IF NOT EXISTS sub_domaines (
   id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   compte int(10) unsigned NOT NULL default '0',
   domaine varchar(255) NOT NULL default '',
-  sub varchar(100) NOT NULL default '',
+  sub varchar(255) NOT NULL default '',
   valeur varchar(255) default NULL,
   type varchar(30) NOT NULL default 'LOCAL',
   web_action enum ('OK','UPDATE','DELETE') NOT NULL default 'UPDATE',
   web_result varchar(255) not null default '',
   enable enum ('ENABLED', 'ENABLE', 'DISABLED', 'DISABLE') NOT NULL DEFAULT 'ENABLED',
-  PRIMARY KEY (id),
-  UNIQUE (compte,domaine,sub,type,valeur) 
+  PRIMARY KEY (id)
 --  ,FOREIGN KEY (type) REFERENCES (domaines_type)
 ) ENGINE=MyISAM;
 
