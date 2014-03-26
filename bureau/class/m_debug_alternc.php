@@ -36,7 +36,7 @@ class m_debug_alternc {
   function m_debug_alternc() {
     if ( isset($_COOKIE['alternc_debugme']) && $_COOKIE['alternc_debugme'] ) {
       $this->status=true;
-      ini_set('display_errors', true);
+      ini_set('display_errors', '1');
     }
     $this->nb_sql_query=0;
     $this->tps_sql_query=0;
@@ -44,13 +44,13 @@ class m_debug_alternc {
   }
 
   function activate() {
-    setcookie('alternc_debugme',true, time()+3600); // expire in 1 hour
+    setcookie('alternc_debugme','1', time()+3600); // expire in 1 hour
     $this->status="";
     return true;
   }
 
   function desactivate() {
-    setcookie('alternc_debugme',false);
+    setcookie('alternc_debugme','0');
     $this->status=false;
     return true;
   }
