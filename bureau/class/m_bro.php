@@ -99,12 +99,12 @@ class m_bro {
    * @param     string  $dir 
    * @global    m_mem   $mem
    * @param     string  $dir    Dossier absolu que l'on souhaite vérifier
-   * @param     integer $strip
+   * @param     boolean $strip
    * @return    false|string  Retourne le nom du dossier vérifié, relatif au
    * dossier de l'utilisateur courant, éventuellement corrigé.
    * ou FALSE si le dossier n'est pas dans le dossier de l'utilisateur.
    */
-  function convertabsolute($dir,$strip = 1) {
+  function convertabsolute($dir,$strip = true) {
     global $mem;
     $root                               = $this->get_user_root($mem->user["login"]);
     // Sauvegarde du chemin de base.
@@ -200,7 +200,7 @@ class m_bro {
   function filelist($dir = "", $showdirsize = false) {
     global $db,$cuid,$err;
     $db->query("UPDATE browser SET lastdir = '$dir' WHERE uid = '$cuid';");
-    $absolute                           = $this->convertabsolute($dir,0);
+    $absolute                           = $this->convertabsolute($dir,false);
     if (!$absolute || !file_exists($absolute)) {
       $err->raise('bro',_("This directory do not exist"));
       return false;
@@ -395,7 +395,7 @@ class m_bro {
   function CreateDir($dir,$file) {
     global $db,$cuid,$err;
     $file                               = ssla($file);
-    $absolute                           = $this->convertabsolute($dir."/".$file,0);
+    $absolute                           = $this->convertabsolute($dir."/".$file,false);
     #echo "$absolute";
     if ($absolute && (!file_exists($absolute))) {
       if (!mkdir($absolute,00777,true)) {
@@ -424,7 +424,7 @@ class m_bro {
   function CreateFile($dir,$file) {
     global $db,$err,$cuid;
     $file                               = ssla($file);
-    $absolute                           = $this->convertabsolute($dir."/".$file,0);
+    $absolute                           = $this->convertabsolute($dir."/".$file,false);
     if (!$absolute || file_exists($absolute)) {
       $err->raise("bro",_("File or folder name is incorrect"));
       return false;
@@ -452,7 +452,7 @@ class m_bro {
   function DeleteFile($file_list,$R) {
     global $err, $mem;
     $root                               = realpath(getuserpath());
-    $absolute                           = $this->convertabsolute($R,0);
+    $absolute                           = $this->convertabsolute($R,false);
     if (!$absolute && strpos($root,$absolute) === 0 && strlen($absolute) > (strlen($root)+1) ) {
       $err->raise("bro",_("File or folder name is incorrect"));
       return false;
@@ -478,7 +478,7 @@ class m_bro {
    */
   function RenameFile($R,$old,$new) {
     global $err;
-    $absolute                           = $this->convertabsolute($R,0);
+    $absolute                           = $this->convertabsolute($R,false);
     if (!$absolute) {
       $err->raise("bro",_("File or folder name is incorrect"));
       return false;
@@ -512,7 +512,7 @@ class m_bro {
    */
   function MoveFile($d,$old,$new) {
     global $err;
-    $old                                = $this->convertabsolute($old,0);
+    $old                                = $this->convertabsolute($old,false);
     if (!$old) {
       $err->raise("bro",_("File or folder name is incorrect"));
       return false;
@@ -521,7 +521,7 @@ class m_bro {
     if ($new[0] != '/') {
       $new                              = $old . '/' . $new;
     }
-    $new                                = $this->convertabsolute($new,0);
+    $new                                = $this->convertabsolute($new,false);
 
     if (!$new) {
       $err->raise("bro",_("File or folder name is incorrect"));
@@ -552,7 +552,7 @@ class m_bro {
    */
   function ChangePermissions($R,$d,$perm,$verbose = false) {
     global $err;
-    $absolute                           = $this->convertabsolute($R,0);
+    $absolute                           = $this->convertabsolute($R,false);
     if (!$absolute) {
       $err->raise("bro",_("File or folder name is incorrect"));
       return false;
@@ -595,7 +595,7 @@ class m_bro {
    */
   function UploadFile($R) {
     global $_FILES,$err,$cuid,$action;
-    $absolute                           = $this->convertabsolute($R,0);
+    $absolute                           = $this->convertabsolute($R,false);
     if (!$absolute) {
       $err->raise("bro",_("File or folder name is incorrect"));
       return false;
@@ -651,11 +651,11 @@ class m_bro {
    */
   function ExtractFile($file, $dest = null) {
     global $err,$cuid,$mem,$action;
-    $file                               = $this->convertabsolute($file,0);
+    $file                               = $this->convertabsolute($file,false);
     if (is_null($dest)) {
       $dest                             = dirname($file);
     } else {
-      $dest                             = $this->convertabsolute($dest,0);
+      $dest                             = $this->convertabsolute($dest,false);
     }
     if (!$file || !$dest) {
       $err->raise("bro",_("File or folder name is incorrect"));
@@ -700,12 +700,12 @@ class m_bro {
    */
   function CopyFile($d,$old,$new) {
     global $err;
-    $old                                = $this->convertabsolute($old,0);
+    $old                                = $this->convertabsolute($old,false);
     if (!$old) {
       $err->raise("bro",_("File or folder name is incorrect"));
       return false;
     }
-    $new                                = $this->convertabsolute($new,0);
+    $new                                = $this->convertabsolute($new,false);
     if (!$new) {
       $err->raise("bro",_("File or folder name is incorrect"));
       return false;
@@ -761,7 +761,7 @@ class m_bro {
    * @return    string              Le code HTML ainsi obtenu.
    */
   function PathList($path,$action, $justparent = false) {
-    $path                               = $this->convertabsolute($path,1);
+    $path                               = $this->convertabsolute($path,true);
     $a                                  = explode("/",$path);
     if (!is_array($a)) $a = array($a);
     $c                                  = '';
@@ -793,7 +793,7 @@ class m_bro {
    */
   function content($R,$file) {
     global $err;
-    $absolute                           = $this->convertabsolute($R,0);
+    $absolute                           = $this->convertabsolute($R,false);
     if (!strpos($file,"/")) {
       $absolute .= "/".$file;
       if (file_exists($absolute)) {
@@ -876,7 +876,7 @@ class m_bro {
   function can_edit($dir,$name) {
     global $mem,$err;
     $absolute                           = "$dir/$name";
-    $absolute                           = $this->convertabsolute($absolute,0);
+    $absolute                           = $this->convertabsolute($absolute,false);
     if (!$absolute) {
       $err->raise('bro',_("File not in authorized directory"));
       include('foot.php');
@@ -964,7 +964,7 @@ class m_bro {
    */
   function content_send($R,$file) {
     global $err;
-    $absolute                           = $this->convertabsolute($R,0);
+    $absolute                           = $this->convertabsolute($R,false);
     if (!strpos($file,"/")) {
       $absolute .= "/".$file;
       if (file_exists($absolute)) {
@@ -991,7 +991,7 @@ class m_bro {
    */
   function save($file,$R,$texte) {
     global $err;
-    $absolute                           = $this->convertabsolute($R,0);
+    $absolute                           = $this->convertabsolute($R,false);
     if (!strpos($file,"/")) {
       $absolute .= "/".$file;
       if (file_exists($absolute)) {
@@ -1019,7 +1019,7 @@ class m_bro {
     header("Content-Disposition: attachment; filename = ".$mem->user["login"].".Z");
     header("Content-Type: application/x-Z");
     header("Content-Transfer-Encoding: binary");
-    $d                                  = escapeshellarg(".".$this->convertabsolute($dir,1));
+    $d                                  = escapeshellarg(".".$this->convertabsolute($dir,true));
     set_time_limit(0);
     passthru("/bin/tar -cZ -C ".getuserpath()."/".$mem->user["login"]."/ $d");
   }
@@ -1037,7 +1037,7 @@ class m_bro {
     header("Content-Disposition: attachment; filename = ".$mem->user["login"].".tgz");
     header("Content-Type: application/x-tgz");
     header("Content-Transfer-Encoding: binary");
-    $d                                  = escapeshellarg(".".$this->convertabsolute($dir,1));
+    $d                                  = escapeshellarg(".".$this->convertabsolute($dir,true));
     set_time_limit(0);
     passthru("/bin/tar -cz -C ".getuserpath()."/ $d");
   }
@@ -1055,7 +1055,7 @@ class m_bro {
     header("Content-Disposition: attachment; filename = ".$mem->user["login"].".tar.bz2");
     header("Content-Type: application/x-bzip2");
     header("Content-Transfer-Encoding: binary");
-    $d                                  = escapeshellarg(".".$this->convertabsolute($dir,1));
+    $d                                  = escapeshellarg(".".$this->convertabsolute($dir,true));
     set_time_limit(0);
     passthru("/bin/tar -cj -C ".getuserpath()."/ $d");
   }
