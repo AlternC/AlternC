@@ -21,7 +21,7 @@ get_ext() {
 # Reading the current version in the DB.
 # If the DB exist but the alternc_status table doesn't, we will initialize it below
 # In that case we search where we upgrade from in /var/lib/alternc/backups/lastversion from debian.postinstall script
-oldvers="`mysql --defaults-file=/etc/alternc/my.cnf --skip-column-name -e "SELECT value FROM alternc_status WHERE name='alternc_version'"'`"
+oldvers="`mysql --defaults-file=/etc/alternc/my.cnf --skip-column-name -e "SELECT value FROM alternc_status WHERE name='alternc_version'"||true`"
 if [ -z "$oldvers" ]
 then
     # no version number, we check from /var/lib/alternc
