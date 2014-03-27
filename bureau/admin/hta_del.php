@@ -35,11 +35,12 @@ reset($_POST);
 while (list($key,$val)=each($_POST)) {
 	if (substr($key,0,4)=="del_") {
 		// Effacement du dossier $val
-		$r=$hta->DelDir($val);
-		if (!$r) {
-			$error.=$err->errstr()."<br />";
+//		$r=$hta->DelDir($val);
+		$return = $hta->DelDir($val);
+		if (!$return) {
+			$error.= $err->errstr()."<br />";
 		} else {
-			$error.=sprintf(_("The protected folder %s has been successfully unprotected"),$val)."<br />";
+			$error.= sprintf(_("The protected folder %s has been successfully unprotected"),$val)."<br />";
 		}
 	}
 }
