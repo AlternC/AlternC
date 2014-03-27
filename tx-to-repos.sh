@@ -32,13 +32,21 @@ do
 	msgcat --use-first --less-than=3 --more-than=1 -o tmp.po  "lang/${lang}.po" "tmp-debconf.po"
 	rm "tmp-debconf.po"
 	mv -f tmp.po "debian/po/${sublang}.po"
+
 	cat "../alternc-mailman/debian/po/${sublang}.po" | sed -e 's/msgstr ""/msgstr "**DUMMY**"/'  >tmp-debconf.po
 	msgcat --use-first --less-than=3 --more-than=1 -o tmp.po  "lang/${lang}.po" "tmp-debconf.po"
 	rm "tmp-debconf.po"
 	mv -f tmp.po "../alternc-mailman/debian/po/${sublang}.po"
+
+	cat "../alternc-mailman/bureau/locales/$lang/LC_MESSAGES/mailman.po" | sed -e 's/msgstr ""/msgstr "**DUMMY**"/'  >tmp-mailman.po
+	msgcat --use-first --less-than=3 --more-than=1 -o tmp.po  "lang/${lang}.po" "tmp-mailman.po"
+	rm "tmp-mailman.po"
+	mv -f tmp.po "../alternc-mailman/bureau/locales/$lang/LC_MESSAGES/mailman.po"
     fi
     echo "done"
 done
+
+exit 0
 
 if [ "$1" != "nocommit" ] 
 then 
