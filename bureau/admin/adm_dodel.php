@@ -35,12 +35,10 @@ if (!$admin->enabled) {
 }
 
 $fields = array (
-		 "d" => array ("request", "array", array()),
+		 "accountList" => array ("request", "array", array()),
 		 "del_confirm" => array("request", "string", ""),
 );
 getFields($fields);
-
-$accountList = $d;
 
 if($del_confirm == "y"){
   $error = "";
@@ -77,7 +75,7 @@ if($del_confirm == "y"){
 			  <?php
 				foreach($accountList as $userid){
 				  $membre   = $admin->get($userid);
-				  echo "<li><input type=\"hidden\" name=\"d[]\" value=\"$userid\" />".$membre['login']."</li>";
+				  echo "<li><input type=\"hidden\" name=\"accountList[]\" value=\"$userid\" />".$membre['login']."</li>";
 				}
 			  ?>
 		  </ul>

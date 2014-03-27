@@ -174,7 +174,7 @@ if (!is_array($accountList) || empty($accountList)) {
                     <?php if ($val["su"]) { ?>
                         <td id="user_<?php echo $val["uid"]; ?>">&nbsp;</td>
                     <?php } else { ?>
-                        <td><input type="checkbox" class="inc" name="d[]" id="user_<?php echo $val["uid"]; ?>" value="<?php echo $val["uid"]; ?>" /></td>
+                        <td><input type="checkbox" class="inc" name="accountList[]" id="user_<?php echo $val["uid"]; ?>" value="<?php echo $val["uid"]; ?>" /></td>
                     <?php } // val['su']  ?>
                     <td <?php if ($val["su"]) echo 'style="color: red"'; ?>><label for="user_<?php echo $val["uid"]; ?>"><b><?php echo $val["login"] ?></b></label></td>
                     <td><a title="<?php __("Send an email"); ?>" href="mailto:<?php echo $val["mail"]; ?>"><?php echo $val["nom"] . " " . $val["prenom"] ?></a>&nbsp;</td>
@@ -250,7 +250,7 @@ if ($mem->user["admlist"] == 1) { // SHORT MODE
             if ($val["su"]) {
                 echo '<td>&nbsp;</td>';
             } else {
-                echo '<td align="center"><input type="checkbox" class="inc" name="d[]" value="' . $val["uid"] . '" id="id_c_' . $val["uid"] . '" /></td>';
+                echo '<td align="center"><input type="checkbox" class="inc" name="accountList[]" value="' . $val["uid"] . '" id="id_c_' . $val["uid"] . '" /></td>';
             } // if $val["su"] 
             ?>
             <td align="center">
