@@ -664,6 +664,7 @@ src/quota-warning.sh -text
 src/quota_delete -text
 src/quota_edit -text
 src/quota_get -text
+src/quota_get_all -text
 src/quota_init -text
 src/rebuild_all_webconf.sh -text
 src/sendmail -text

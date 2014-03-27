@@ -1,0 +1,29 @@
+#!/bin/bash
+# List quotas of all users in 3 columns :
+# id used quota
+
+source /etc/alternc/local.sh
+
+#checking if quotas are installed
+command -v /usr/sbin/repquota >/dev/null || { echo "Quotas uninstalled"; exit 0; }
+
+get_quota() {
+  quotadir="$1"
+  if [ "$quotadir" = "/" ] ; then
+    sudo repquota -g -v -n -p "$quotadir" 2>/dev/null || (echo "Error: can't get quota"; exit 1)
+  else
+    sudo repquota -g -v -n -p "$quotadir" 2>/dev/null || get_quota "$(dirname $quotadir)"
+  fi
+}
+
+# Some help : this is what we must parse
+#                        Block limits                File limits
+#Group           used    soft    hard  grace    used  soft  hard  grace
+#----------------------------------------------------------------------
+#root      -- 1612116       0       0          96181     0     0       
+#adm       --   14532       0       0            226     0     0  
+
+get_quota "$ALTERNC_HTML" | egrep "^\#[0-9]+"|while read gid blank bused bsoft bhard bgrace fused fsoft fhard fgrace ; do
+  echo ${gid/\#/} $bused $bhard
+done
+
