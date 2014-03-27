@@ -50,3 +50,7 @@ where
 -- We didn't migrate existing catchall address properly (sniff)
 UPDATE address SET TYPE="catchall" WHERE address="";
 
+UPDATE domaines_type SET only_dns=1 WHERE name='ip';
+UPDATE domaines_type SET only_dns=0 WHERE name='url';
+UPDATE domaines_type SET only_dns=0 WHERE name='panel';
+
