@@ -46,34 +46,34 @@ class m_bro {
 
   /** internal cache
    */
-  var $mime_desc=array();
+  var $mime_desc                        = array();
 
   /** internal cache
    */
-  var $mime_icon=array();
+  var $mime_icon                        = array();
 
   /** internal cache
    */
-  var $mime_type=array();
+  var $mime_type                        = array();
 
   /** Internal cache for viewurl
    */
-   var $cacheurl=array();
+   var $cacheurl                        = array();
 
   /** Font choice in the editor */
-  var $l_editor_font=array("Arial, Helvetica, Sans-serif","Times, Bookman, Serif","Courier New, Courier, Fixed");
+  var $l_editor_font                    = array("Arial, Helvetica, Sans-serif","Times, Bookman, Serif","Courier New, Courier, Fixed");
 
   /** font size in the editor */
-  var $l_editor_size=array("18px","14px","12px","10px","8px","0.8em","0.9em","1em","1.1em","1.2em");
+  var $l_editor_size                    = array("18px","14px","12px","10px","8px","0.8em","0.9em","1em","1.1em","1.2em");
 
   /**
    * Constructor 
    **/
   function m_bro() {
-    $this->l_mode=array( 0=>_("1 column, detailed"), 1=>_("2 columns, short"), 2=>_("3 columns, short") );
-    $this->l_tgz=array( 0=>_("tgz (Linux)"), 1=>_("tar.bz2 (Linux)"), 2=>_("zip (Windows/Dos)"), 3=>_("tar.Z (Unix)") );
-    $this->l_icons=array( 0=>_("No"), 1=>_("Yes") );
-    $this->l_createfile=array( 0=>_("Go back to the file manager"), 1=>_("Edit the newly created file") );
+    $this->l_mode                       = array( 0=>_("1 column, detailed"), 1=>_("2 columns, short"), 2=>_("3 columns, short") );
+    $this->l_tgz                        = array( 0=>_("tgz (Linux)"), 1=>_("tar.bz2 (Linux)"), 2=>_("zip (Windows/Dos)"), 3=>_("tar.Z (Unix)") );
+    $this->l_icons                      = array( 0=>_("No"), 1=>_("Yes") );
+    $this->l_createfile                 = array( 0=>_("Go back to the file manager"), 1=>_("Edit the newly created file") );
   }
 
   /**
@@ -81,7 +81,7 @@ class m_bro {
    * @return array
    */
   function hook_menu() {
-    $obj = array( 
+    $obj                                = array( 
       'title'       => _("File browser"),
       'ico'         => 'images/folder.png',
       'link'        => 'bro_main.php',
@@ -96,32 +96,32 @@ class m_bro {
   /**
    * Verifie un dossier relatif au dossier de l'utilisateur courant
    *
-   * @param string $dir 
+   * @param     string  $dir 
    * @global    m_mem   $mem
    * @param     string  $dir    Dossier absolu que l'on souhaite vérifier
-   * @param     boolean $strip
-   * @return    false|string  Retourne le nom du dossier vrifi, relatif au
-   * dossier de l'utilisateur courant, ventuellement corrig.
+   * @param     integer $strip
+   * @return    false|string  Retourne le nom du dossier vérifié, relatif au
+   * dossier de l'utilisateur courant, éventuellement corrigé.
    * ou FALSE si le dossier n'est pas dans le dossier de l'utilisateur.
    */
-  function convertabsolute($dir,$strip=true) {
+  function convertabsolute($dir,$strip = 1) {
     global $mem;
-    $root=$this->get_user_root($mem->user["login"]);
+    $root                               = $this->get_user_root($mem->user["login"]);
     // Sauvegarde du chemin de base.
-    $root_alternc = $root ;
+    $root_alternc                       = $root ;
     // Passage du root en chemin rel (diffrent avec un lien)
-    $root=realpath($root) ;
+    $root                               = realpath($root) ;
     // separer le chemin entre le repertoire et le fichier
-    $file = basename($dir);
-    $dir = dirname($dir);
-    $dir=realpath($root."/".$dir);
+    $file                               = basename($dir);
+    $dir                                = dirname($dir);
+    $dir                                = realpath($root."/".$dir);
     // verifier que le repertoire est dans le home de l'usager
-    if (substr($dir,0,strlen($root))!=$root) {
+    if (substr($dir,0,strlen($root)) != $root) {
       return false;
     }
  
     // recomposer le chemin
-    $dir = $dir . '/' . $file;
+    $dir                                = $dir . '/' . $file;
 
     # Si on tente de mettre un '..' alors erreur 
     if ( preg_match("/\/\.\.\//", $dir) || preg_match("/\/\.\.$/", $dir) ) { 
@@ -129,14 +129,14 @@ class m_bro {
     } 
 
     if ($strip) {
-      $dir=substr($dir,strlen($root));
+      $dir                              = substr($dir,strlen($root));
     } else {
       // si on ne strip pas, il faut enlever le chemin rel 
       // et mettre la racine d'alternc pour viter les
       // problmes de lien depuis /var /alternc ! 
-      $dir=$root_alternc . substr($dir,strlen($root));
+      $dir                              = $root_alternc . substr($dir,strlen($root));
     }
-    if (substr($dir,-1)=="/") {
+    if (substr($dir,-1) == "/") {
       return substr($dir,0,strlen($dir)-1);
     } else
       return $dir;
@@ -171,10 +171,10 @@ class m_bro {
   function get_userid_root($uid) {
     global $admin;
 
-    $old_enabled = $admin->enabled;
-    $admin->enabled = true;
-    $member = $admin->get($uid);
-    $admin->enabled = $old_enabled;
+    $old_enabled                        = $admin->enabled;
+    $admin->enabled                     = true;
+    $member                             = $admin->get($uid);
+    $admin->enabled                     = $old_enabled;
 
     return $this->get_user_root($member['login']);
   }
@@ -185,10 +185,10 @@ class m_bro {
    * 
    * Ce tableau contient tous les paramtres des fichiers du dossier courant
    * sous la forme d'un tableau index de tableaux associatifs comme suit :
-   * $a["name"]=nom du fichier / dossier
-   * $a["size"]=Taille totale du fichier / dossier + sous-dossier
-   * $a["date"]=Date de dernire modification
-   * $a["type"]=Type du fichier (1 pour fichier, 0 pour dossier)
+   * $a["name"] = nom du fichier / dossier
+   * $a["size"] = Taille totale du fichier / dossier + sous-dossier
+   * $a["date"] = Date de dernire modification
+   * $a["type"] = Type du fichier (1 pour fichier, 0 pour dossier)
    * 
    * @global    m_mysql $db
    * @global    int     $cuid
@@ -197,19 +197,19 @@ class m_bro {
    * @param     boolean $showdirsize
    * @return    array               Le tableau contenant les fichiers de $dir, et
    */
-  function filelist($dir="", $showdirsize = false) {
+  function filelist($dir = "", $showdirsize = false) {
     global $db,$cuid,$err;
-    $db->query("UPDATE browser SET lastdir='$dir' WHERE uid='$cuid';");
-    $absolute=$this->convertabsolute($dir,false);
+    $db->query("UPDATE browser SET lastdir = '$dir' WHERE uid = '$cuid';");
+    $absolute                           = $this->convertabsolute($dir,0);
     if (!$absolute || !file_exists($absolute)) {
       $err->raise('bro',_("This directory do not exist"));
       return false;
     }
-    $c=array();
+    $c                                  = array();
     if ($dir = @opendir($absolute)) {
       while (($file = readdir($dir)) !== false) {
 	if ($file!="." && $file!="..") {
-	  $c[]=array("name"=>$file, "size"=>$this->fsize($absolute."/".$file, $showdirsize), "date"=>filemtime($absolute."/".$file), "type"=> (!is_dir($absolute."/".$file)) );
+	  $c[] = array("name"=>$file, "size"=>$this->fsize($absolute."/".$file, $showdirsize), "date"=>filemtime($absolute."/".$file), "type"=> (!is_dir($absolute."/".$file)) );
 	}
       }
       closedir($dir);
@@ -231,10 +231,10 @@ class m_bro {
    */
   function GetPrefs() {
     global $db,$cuid;
-    $db->query("SELECT * FROM browser WHERE uid='$cuid';");
-    if ($db->num_rows()==0) {
+    $db->query("SELECT * FROM browser WHERE uid = '$cuid';");
+    if ($db->num_rows() == 0) {
       $db->query("INSERT INTO browser (editsizex, editsizey, listmode, showicons, downfmt, createfile, showtype, uid, editor_font, editor_size) VALUES (70, 21, 0, 0, 0, 0, 0, '$cuid','Arial, Helvetica, Sans-serif','12px');");
-      $db->query("SELECT * FROM browser WHERE uid='$cuid';");
+      $db->query("SELECT * FROM browser WHERE uid = '$cuid';");
     }
     $db->next_record();
     return $db->Record;
@@ -260,15 +260,19 @@ class m_bro {
    */
   function SetPrefs($editsizex, $editsizey, $listmode, $showicons, $downfmt, $createfile, $showtype, $editor_font, $editor_size, $golastdir) {
     global $db,$cuid;
-    $editsizex=intval($editsizex);	$editsizey=intval($editsizey);
-    $listmode=intval($listmode);	$showicons=intval($showicons);
-    $showtype=intval($showtype);	$downfmt=intval($downfmt);
-    $createfile=intval($createfile);	$golastdir=intval($golastdir);
-    $db->query("SELECT * FROM browser WHERE uid='".intval($cuid)."';");
-    if ($db->num_rows()==0) {
+    $editsizex                          = intval($editsizex);	
+    $editsizey                          = intval($editsizey);
+    $listmode                           = intval($listmode);	
+    $showicons                          = intval($showicons);
+    $showtype                           = intval($showtype);	
+    $downfmt                            = intval($downfmt);
+    $createfile                         = intval($createfile);	
+    $golastdir                          = intval($golastdir);
+    $db->query("SELECT * FROM browser WHERE uid = '".intval($cuid)."';");
+    if ($db->num_rows() == 0) {
       $db->query("INSERT INTO browser (editsizex, editsizey, listmode, showicons, downfmt, createfile, showtype, uid, editor_font, editor_size, golastdir) VALUES (70, 21, 0, 0, 0, 0, 0, '".intval($cuid)."','Arial, Helvetica, Sans-serif','12px',1);");
     }
-    $db->query("UPDATE browser SET editsizex='$editsizex', editsizey='$editsizey', listmode='$listmode', showicons='$showicons', downfmt='$downfmt', createfile='$createfile', showtype='$showtype', editor_font='$editor_font', editor_size='$editor_size', golastdir='$golastdir' WHERE uid='".intval($cuid)."';");
+    $db->query("UPDATE browser SET editsizex = '$editsizex', editsizey = '$editsizey', listmode = '$listmode', showicons = '$showicons', downfmt = '$downfmt', createfile = '$createfile', showtype = '$showtype', editor_font = '$editor_font', editor_size = '$editor_size', golastdir = '$golastdir' WHERE uid = '".intval($cuid)."';");
     return true;
   }
 
@@ -286,11 +290,11 @@ class m_bro {
     if (!strpos($file,".") && substr($file,0,1)!=".") {
       return "file.png";
     }
-    $t=explode(".",$file);
+    $t                                  = explode(".",$file);
     if (!is_array($t))
-      $ext=$t;
+      $ext                              = $t;
     else
-      $ext=$t[count($t)-1];
+      $ext                              = $t[count($t)-1];
     // Now seek the extension
     if (!isset($bro_icon[$ext]) || ! $bro_icon[$ext]) {
       return "file.png";
@@ -314,11 +318,11 @@ class m_bro {
     if (!strpos($file,".") && substr($file,0,1)!=".") {
       return "File";
     }
-    $t=explode(".",$file);
+    $t                                  = explode(".",$file);
     if (!is_array($t))
-      $ext=$t;
+      $ext                              = $t;
     else
-      $ext=$t[count($t)-1];
+      $ext                              = $t[count($t)-1];
     // Now seek the extension
     if (empty($bro_type[$ext])) {
       return "File";
@@ -358,11 +362,11 @@ class m_bro {
    * @return    integer         The total size in bytes.
    */
   function dirsize($dir) {
-    $totalsize = 0;
+    $totalsize                          = 0;
 
     if ($handle = opendir($dir)) {
       while (false !== ($file = readdir($handle))) {
-        $nextpath = $dir . '/' . $file;
+        $nextpath                       = $dir . '/' . $file;
 
 	if ($file != '.' && $file != '..' && !is_link($nextpath)) {
           if (is_dir($nextpath)) {
@@ -390,15 +394,15 @@ class m_bro {
    */
   function CreateDir($dir,$file) {
     global $db,$cuid,$err;
-    $file=ssla($file);
-    $absolute=$this->convertabsolute($dir."/".$file,false);
+    $file                               = ssla($file);
+    $absolute                           = $this->convertabsolute($dir."/".$file,0);
     #echo "$absolute";
     if ($absolute && (!file_exists($absolute))) {
       if (!mkdir($absolute,00777,true)) {
 	$err->raise("bro",_("Cannot create the requested directory. Please check the permissions"));
 	return false;
       }
-      $db->query("UPDATE browser SET crff=1 WHERE uid='$cuid';");
+      $db->query("UPDATE browser SET crff = 1 WHERE uid = '$cuid';");
       return true;
     } else {
       $err->raise("bro",_("File or folder name is incorrect"));
@@ -419,8 +423,8 @@ class m_bro {
    */
   function CreateFile($dir,$file) {
     global $db,$err,$cuid;
-    $file=ssla($file);
-    $absolute=$this->convertabsolute($dir."/".$file,false);
+    $file                               = ssla($file);
+    $absolute                           = $this->convertabsolute($dir."/".$file,0);
     if (!$absolute || file_exists($absolute)) {
       $err->raise("bro",_("File or folder name is incorrect"));
       return false;
@@ -431,7 +435,7 @@ class m_bro {
 	return false;
       }
     }
-    $db->query("UPDATE browser SET crff=0 WHERE uid='$cuid';");
+    $db->query("UPDATE browser SET crff = 0 WHERE uid = '$cuid';");
     return true;
   }
 
@@ -447,14 +451,14 @@ class m_bro {
    */
   function DeleteFile($file_list,$R) {
     global $err, $mem;
-    $root=realpath(getuserpath());
-    $absolute=$this->convertabsolute($R,false);
+    $root                               = realpath(getuserpath());
+    $absolute                           = $this->convertabsolute($R,0);
     if (!$absolute && strpos($root,$absolute) === 0 && strlen($absolute) > (strlen($root)+1) ) {
       $err->raise("bro",_("File or folder name is incorrect"));
       return false;
     }
-    for ($i=0;$i<count($file_list);$i++) {
-      $file_list[$i]=ssla($file_list[$i]);
+    for ($i = 0;$i<count($file_list);$i++) {
+      $file_list[$i] = ssla($file_list[$i]);
       if (!strpos($file_list[$i],"/") && file_exists($absolute."/".$file_list[$i])) { // Character / forbidden in a FILE name
 	$this->_delete($absolute."/".$file_list[$i]);
       }
@@ -474,20 +478,20 @@ class m_bro {
    */
   function RenameFile($R,$old,$new) {
     global $err;
-    $absolute=$this->convertabsolute($R,false);
+    $absolute                           = $this->convertabsolute($R,0);
     if (!$absolute) {
       $err->raise("bro",_("File or folder name is incorrect"));
       return false;
     }
-    $alea=".".time().rand(1000,9999);
-    for ($i=0;$i<count($old);$i++) {
-      $old[$i]=ssla($old[$i]); // strip slashes if needed
-      $new[$i]=ssla($new[$i]);
+    $alea                               = ".".time().rand(1000,9999);
+    for ($i = 0;$i<count($old);$i++) {
+      $old[$i] = ssla($old[$i]); // strip slashes if needed
+      $new[$i] = ssla($new[$i]);
       if (!strpos($old[$i],"/") && !strpos($new[$i],"/")) {  // caractre / interdit dans old ET dans new...
 	@rename($absolute."/".$old[$i],$absolute."/".$old[$i].$alea);
       }
     }
-    for ($i=0;$i<count($old);$i++) {
+    for ($i = 0;$i<count($old);$i++) {
       if (!strpos($old[$i],"/") && !strpos($new[$i],"/")) {  // caractre / interdit dans old ET dans new...
       	@rename($absolute."/".$old[$i].$alea,$absolute."/".$new[$i]);
       }
@@ -508,27 +512,27 @@ class m_bro {
    */
   function MoveFile($d,$old,$new) {
     global $err;
-    $old=$this->convertabsolute($old,false);
+    $old                                = $this->convertabsolute($old,0);
     if (!$old) {
       $err->raise("bro",_("File or folder name is incorrect"));
       return false;
     }
 
     if ($new[0] != '/') {
-      $new = $old . '/' . $new;
+      $new                              = $old . '/' . $new;
     }
-    $new = $this->convertabsolute($new,false);
+    $new                                = $this->convertabsolute($new,0);
 
     if (!$new) {
       $err->raise("bro",_("File or folder name is incorrect"));
       return false;
     }
-    if ($old==$new) {
+    if ($old == $new) {
       $err->raise("bro",_("You cannot move or copy a file to the same folder"));
       return false;
     }
-    for ($i=0;$i<count($d);$i++) {
-      $d[$i]=ssla($d[$i]); // strip slashes if needed
+    for ($i = 0;$i<count($d);$i++) {
+      $d[$i] = ssla($d[$i]); // strip slashes if needed
       if (!strpos($d[$i],"/") && file_exists($old."/".$d[$i]) && !file_exists($new."/".$d[$i])) {  
         if (!rename($old."/".$d[$i],$new."/".$d[$i]))
           $err->raise("bro", "error renaming $old/$d[$i] -> $new/$d[$i]");
@@ -546,22 +550,22 @@ class m_bro {
    * @param     boolean $verbose    Shall we 'echo' what we did ?
    * @return    boolean TRUE        Si les fichiers ont t renomms, FALSE si une erreur s'est produite.
    */
-  function ChangePermissions($R,$d,$perm,$verbose=false) {
+  function ChangePermissions($R,$d,$perm,$verbose = false) {
     global $err;
-    $absolute=$this->convertabsolute($R,false);
+    $absolute                           = $this->convertabsolute($R,0);
     if (!$absolute) {
       $err->raise("bro",_("File or folder name is incorrect"));
       return false;
     }
-    for ($i=0;$i<count($d);$i++) {
-      $d[$i]=ssla($d[$i]); // strip slashes if needed
+    for ($i = 0;$i<count($d);$i++) {
+      $d[$i] = ssla($d[$i]); // strip slashes if needed
       if (!strpos($d[$i],"/")) {  // caractre / interdit dans le nom du fichier
-        $m = fileperms($absolute."/". $d[$i]);
+        $m                              = fileperms($absolute."/". $d[$i]);
 
         // pour l'instant on se limite a "write" pour owner, puisque c'est le seul
         // cas interessant compte tenu de la conf de Apache pour AlternC..
          if ($perm[$i]['w']) {
-          $m = $m | 0220; // ug+w
+          $m                            = $m | 0220; // ug+w
         } else {
 	  $m = $m ^ 0222; // ugo-w
         }
@@ -591,7 +595,7 @@ class m_bro {
    */
   function UploadFile($R) {
     global $_FILES,$err,$cuid,$action;
-    $absolute=$this->convertabsolute($R,false);
+    $absolute                           = $this->convertabsolute($R,0);
     if (!$absolute) {
       $err->raise("bro",_("File or folder name is incorrect"));
       return false;
@@ -613,7 +617,7 @@ class m_bro {
 	$err->log("bro","uploadfile","Problem when uploading a file");
         switch ( $_FILES['userfile']['error'] ) {
           case UPLOAD_ERR_INI_SIZE:
-            $erstr=_("The uploaded file exceeds the max file size allowed");
+            $erstr                      = _("The uploaded file exceeds the max file size allowed");
             break;
           case UPLOAD_ERR_FORM_SIZE:
           case UPLOAD_ERR_PARTIAL:
@@ -622,7 +626,7 @@ class m_bro {
           case UPLOAD_ERR_CANT_WRITE:
           case UPLOAD_ERR_EXTENSION:
           default:
-            $erstr=_("Undefined error ").$_FILES['userfile']['error'];
+            $erstr                      = _("Undefined error ").$_FILES['userfile']['error'];
             break;
         }
         $err->raise("bro",_("Error during the upload of the file: ").$erstr);
@@ -645,22 +649,22 @@ class m_bro {
    *                            same directory as the archive by default
    * @return    integer|null         != 0 on error
    */
-  function ExtractFile($file, $dest=null) {
+  function ExtractFile($file, $dest = null) {
     global $err,$cuid,$mem,$action;
-    $file = $this->convertabsolute($file,false);
+    $file                               = $this->convertabsolute($file,0);
     if (is_null($dest)) {
-      $dest = dirname($file);
+      $dest                             = dirname($file);
     } else {
-      $dest = $this->convertabsolute($dest,false);
+      $dest                             = $this->convertabsolute($dest,0);
     }
     if (!$file || !$dest) {
       $err->raise("bro",_("File or folder name is incorrect"));
       return 1;
     }
-    $file = escapeshellarg($file);
-    $dest_to_fix = $dest;
-    $dest = escapeshellarg($dest);
-    #$dest_to_fix=str_replace(getuserpath(),'',$dest);
+    $file                               = escapeshellarg($file);
+    $dest_to_fix                        = $dest;
+    $dest                               = escapeshellarg($dest);
+    #$dest_to_fix = str_replace(getuserpath(),'',$dest);
 	 
     // TODO new version of tar supports `tar xf ...` so there is no
     //     need to specify the compression format
@@ -669,11 +673,11 @@ class m_bro {
       exec("tar -xjf $file -C $dest", $void, $ret);
     }
     if ($ret) {
-      $cmd = "unzip -o $file -d $dest";
+      $cmd                              = "unzip -o $file -d $dest";
       exec($cmd, $void, $ret);
     }
     if ($ret) {
-      $cmd = "gunzip $file";
+      $cmd                              = "gunzip $file";
       exec($cmd, $void, $ret);
     }
     if ($ret) {
@@ -696,22 +700,22 @@ class m_bro {
    */
   function CopyFile($d,$old,$new) {
     global $err;
-    $old=$this->convertabsolute($old,false);
+    $old                                = $this->convertabsolute($old,0);
     if (!$old) {
       $err->raise("bro",_("File or folder name is incorrect"));
       return false;
     }
-    $new=$this->convertabsolute($new,false);
+    $new                                = $this->convertabsolute($new,0);
     if (!$new) {
       $err->raise("bro",_("File or folder name is incorrect"));
       return false;
     }
-    if ($old==$new) {
+    if ($old == $new) {
       $err->raise("bro",_("You cannot move or copy a file to the same folder"));
       return false;
     }
-    for ($i=0;$i<count($d);$i++) {
-      $d[$i]=ssla($d[$i]); // strip slashes if needed
+    for ($i = 0;$i<count($d);$i++) {
+      $d[$i] = ssla($d[$i]); // strip slashes if needed
       if (!strpos($d[$i],"/") && file_exists($old."/".$d[$i]) && !file_exists($new."/".$d[$i])) {  
         $this->CopyOneFile($old."/".$d[$i],$new);
       }
@@ -734,8 +738,8 @@ class m_bro {
    */
   function CopyOneFile($src, $dest)  {
     global $err;
-    $src = escapeshellarg($src);
-    $dest = escapeshellarg($dest);
+    $src                                = escapeshellarg($src);
+    $dest                               = escapeshellarg($dest);
     exec("cp -Rpf $src $dest", $void, $ret);
     if ($ret) {
       $err->raise("bro","Errors happened while copying the source to destination. cp return value: %d", $ret);
@@ -749,26 +753,26 @@ class m_bro {
    * Affiche le chemin et les liens de la racine au dossier $path
    * Affiche autant de liens HTML (anchor) que le chemin $path contient de
    * niveaux de dossier. Chaque lien est associ  la page web $action
-   *  laquelle on ajoute le paramtre R=+Le nom du dossier courant.
+   *  laquelle on ajoute le paramtre R = +Le nom du dossier courant.
    * 
    * @param     string  $path       Dossier vers lequel on trace le chemin
    * @param     string  $action     Page web de destination des liens
    * @param     boolean $justparent
    * @return    string              Le code HTML ainsi obtenu.
    */
-  function PathList($path,$action, $justparent=false) {
-    $path=$this->convertabsolute($path,true);
-    $a=explode("/",$path);
-    if (!is_array($a)) $a=array($a);
-    $c='';
-    $R='';
+  function PathList($path,$action, $justparent = false) {
+    $path                               = $this->convertabsolute($path,1);
+    $a                                  = explode("/",$path);
+    if (!is_array($a)) $a = array($a);
+    $c                                  = '';
+    $R                                  = '';
     if ($justparent) {
-      return "<a href=\"$action?R=".urlencode($a[count($a)-2].'/')."\">&uarr;</a>";
+      return "<a href = \"$action?R = ".urlencode($a[count($a)-2].'/')."\">&uarr;</a>";
     }
-    for($i=0;$i<count($a);$i++) {
+    for($i = 0;$i<count($a);$i++) {
       if ($a[$i]) {
-	$R.=$a[$i]."/";
-	$c.="<a href=\"$action?R=".urlencode($R)."\">".$a[$i]."</a>&nbsp;/&nbsp;";
+	$R .= $a[$i]."/";
+	$c .= "<a href = \"$action?R = ".urlencode($R)."\">".$a[$i]."</a>&nbsp;/&nbsp;";
       }
     }
     return $c;
@@ -789,11 +793,11 @@ class m_bro {
    */
   function content($R,$file) {
     global $err;
-    $absolute=$this->convertabsolute($R,false);
+    $absolute                           = $this->convertabsolute($R,0);
     if (!strpos($file,"/")) {
-      $absolute.="/".$file;
+      $absolute .= "/".$file;
       if (file_exists($absolute)) {
-	$std=str_replace("<","&lt;",str_replace("&","&amp;",file_get_contents($absolute)));
+	$std = str_replace("<","&lt;",str_replace("&","&amp;",file_get_contents($absolute)));
         return $std;
       } else {
 	$err->raise("bro",_("Cannot read the requested file. Please check the permissions"));
@@ -825,32 +829,32 @@ class m_bro {
   function viewurl($dir,$name) {
     global $db,$cuid;
     // Is it in cache ?
-    if (substr($dir,0,1)=="/") $dir=substr($dir,1);
-    if (substr($dir,-1)=="/") $dir=substr($dir,0,-1);
-    $dir=str_replace("%2F", "/", urlencode($dir));
-    $name=urlencode($name);
+    if (substr($dir,0,1) == "/") $dir = substr($dir,1);
+    if (substr($dir,-1) == "/") $dir = substr($dir,0,-1);
+    $dir                                = str_replace("%2F", "/", urlencode($dir));
+    $name                               = urlencode($name);
     if (!@$this->cacheurl["d".$dir]) {
       // On parcours $dir en remontant les /
-      $end="";	$beg=$dir;	$tofind=true;
+      $end                              = "";	$beg = $dir;	$tofind = true;
       while ($tofind) {
-        $db->query("SELECT sub,domaine FROM sub_domaines WHERE compte='$cuid'
-             AND type=0 AND (valeur='/$beg/' or valeur='/$beg');");
+        $db->query("SELECT sub,domaine FROM sub_domaines WHERE compte = '$cuid'
+             AND type                   = 0 AND (valeur = '/$beg/' or valeur = '/$beg');");
         $db->next_record();
         if ($db->num_rows()) {
-          $tofind=false;
-          $this->cacheurl["d".$dir]="http://".$db->f("sub").ife($db->f("sub"),".").$db->f("domaine").$end;
+          $tofind                       = false;
+          $this->cacheurl["d".$dir] = "http://".$db->f("sub").ife($db->f("sub"),".").$db->f("domaine").$end;
         }
         if (!$beg && $tofind) {
-          $tofind=false;
-          $this->cacheurl["d".$dir]="-";
+          $tofind                       = false;
+          $this->cacheurl["d".$dir] = "-";
 	  // We did not find it ;(
         }
-        if (($tt=strrpos($beg,"/"))!==false) {
-          $end=substr($beg,$tt).$end; // = /topdir$end so $end starts AND ends with /
-          $beg=substr($beg,0,$tt);
+        if (($tt = strrpos($beg,"/"))!==false) {
+          $end                          = substr($beg,$tt).$end; // = /topdir$end so $end starts AND ends with /
+          $beg                          = substr($beg,0,$tt);
         } else {
-          $end="/".$beg.$end;
-          $beg="/";
+          $end                          = "/".$beg.$end;
+          $beg                          = "/";
         }
       }
     }
@@ -871,16 +875,16 @@ class m_bro {
    */
   function can_edit($dir,$name) {
     global $mem,$err;
-    $absolute="$dir/$name";
-    $absolute=$this->convertabsolute($absolute,0);
+    $absolute                           = "$dir/$name";
+    $absolute                           = $this->convertabsolute($absolute,0);
     if (!$absolute) {
       $err->raise('bro',_("File not in authorized directory"));
       include('foot.php');
       exit;
     }
-    $finfo = finfo_open(FILEINFO_MIME_TYPE); 
-    $mime = finfo_file($finfo,$absolute);
-    if ( substr($mime,0,5)=="text/" || $mime == "application/x-empty" || $mime == "inode/x-empty") {
+    $finfo                              = finfo_open(FILEINFO_MIME_TYPE); 
+    $mime                               = finfo_file($finfo,$absolute);
+    if ( substr($mime,0,5) == "text/" || $mime == "application/x-empty" || $mime == "inode/x-empty") {
       return true;
     }
     return false;
@@ -896,7 +900,7 @@ class m_bro {
    */
   function is_extractable($dir,$name) {
     if ($parts = explode(".", $name)) {
-      $ext = array_pop($parts);
+      $ext                              = array_pop($parts);
       switch ($ext) {
       case "gz":
       case "bz":
@@ -927,9 +931,9 @@ class m_bro {
    */
   function is_sqlfile($dir,$name) {
     if ($parts = explode(".", $name)) {
-      $ext = array_pop($parts);
-      $ext2 = array_pop($parts) . '.'.$ext;
-      if ( $ext=='sql' or $ext2=='sql.gz') return true;
+      $ext                              = array_pop($parts);
+      $ext2                             = array_pop($parts) . '.'.$ext;
+      if ( $ext == 'sql' or $ext2 == 'sql.gz') return true;
     }
     return false;
   }
@@ -943,7 +947,7 @@ class m_bro {
   function download_link($dir,$file){
     global $err;
     $err->log("bro","download_link");
-    header("Content-Disposition: attachment; filename=$file");
+    header("Content-Disposition: attachment; filename = $file");
     header("Content-Type: application/force-download");
     header("Content-Transfer-Encoding: binary");
     $this->content_send($dir,$file);
@@ -960,9 +964,9 @@ class m_bro {
    */
   function content_send($R,$file) {
     global $err;
-    $absolute=$this->convertabsolute($R,0);
+    $absolute                           = $this->convertabsolute($R,0);
     if (!strpos($file,"/")) {
-      $absolute.="/".$file;
+      $absolute .= "/".$file;
       if (file_exists($absolute)) {
 	readfile($absolute);
       }
@@ -987,9 +991,9 @@ class m_bro {
    */
   function save($file,$R,$texte) {
     global $err;
-    $absolute=$this->convertabsolute($R,false);
+    $absolute                           = $this->convertabsolute($R,0);
     if (!strpos($file,"/")) {
-      $absolute.="/".$file;
+      $absolute .= "/".$file;
       if (file_exists($absolute)) {
        	if (! file_put_contents($absolute, $texte ) ) {
 	  $err->raise("bro",_("Cannot edit the requested file. Please check the permissions"));
@@ -1010,12 +1014,12 @@ class m_bro {
    * @param     string  $dir    Dossier à dumper, relatif  la racine du compte du membre.
    * @return    void            NE RETOURNE RIEN, et il faut Quitter le script immdiatement aprs
    */
-  function DownloadZ($dir="") {
+  function DownloadZ($dir = "") {
     global $mem;
-    header("Content-Disposition: attachment; filename=".$mem->user["login"].".Z");
+    header("Content-Disposition: attachment; filename = ".$mem->user["login"].".Z");
     header("Content-Type: application/x-Z");
     header("Content-Transfer-Encoding: binary");
-    $d=escapeshellarg(".".$this->convertabsolute($dir,true));
+    $d                                  = escapeshellarg(".".$this->convertabsolute($dir,1));
     set_time_limit(0);
     passthru("/bin/tar -cZ -C ".getuserpath()."/".$mem->user["login"]."/ $d");
   }
@@ -1028,12 +1032,12 @@ class m_bro {
    * @param     string  $dir    Dossier à dumper, relatif  la racine du compte du membre.
    * @return    void            NE RETOURNE RIEN, et il faut Quitter le script immdiatement aprs
    */
-  function DownloadTGZ($dir="") {
+  function DownloadTGZ($dir = "") {
     global $mem;
-    header("Content-Disposition: attachment; filename=".$mem->user["login"].".tgz");
+    header("Content-Disposition: attachment; filename = ".$mem->user["login"].".tgz");
     header("Content-Type: application/x-tgz");
     header("Content-Transfer-Encoding: binary");
-    $d=escapeshellarg(".".$this->convertabsolute($dir,true));
+    $d                                  = escapeshellarg(".".$this->convertabsolute($dir,1));
     set_time_limit(0);
     passthru("/bin/tar -cz -C ".getuserpath()."/ $d");
   }
@@ -1046,12 +1050,12 @@ class m_bro {
    * @param     string  $dir    Dossier à dumper, relatif  la racine du compte du membre.
    * @return    void            NE RETOURNE RIEN, et il faut Quitter le script immdiatement aprs
    */
-  function DownloadTBZ($dir="") {
+  function DownloadTBZ($dir = "") {
     global $mem;
-    header("Content-Disposition: attachment; filename=".$mem->user["login"].".tar.bz2");
+    header("Content-Disposition: attachment; filename = ".$mem->user["login"].".tar.bz2");
     header("Content-Type: application/x-bzip2");
     header("Content-Transfer-Encoding: binary");
-    $d=escapeshellarg(".".$this->convertabsolute($dir,true));
+    $d                                  = escapeshellarg(".".$this->convertabsolute($dir,1));
     set_time_limit(0);
     passthru("/bin/tar -cj -C ".getuserpath()."/ $d");
   }
@@ -1065,12 +1069,12 @@ class m_bro {
    * @param     string  $dir    Dossier à dumper, relatif  la racine du compte du membre.
    * @return    void            NE RETOURNE RIEN, et il faut Quitter le script immdiatement aprs
    */
-  function DownloadZIP($dir="") {
+  function DownloadZIP($dir = "") {
     global $mem;
-    header("Content-Disposition: attachment; filename=".$mem->user["login"].".zip");
+    header("Content-Disposition: attachment; filename = ".$mem->user["login"].".zip");
     header("Content-Type: application/x-zip");
     header("Content-Transfer-Encoding: binary");
-    $d=escapeshellarg($this->convertabsolute($dir,false));
+    $d                                  = escapeshellarg($this->convertabsolute($dir,false));
     set_time_limit(0);
     passthru("/usr/bin/zip -r - $d");
   }
@@ -1102,7 +1106,7 @@ class m_bro {
     @set_time_limit(0);
     //chmod($file,0777);
     if (is_dir($file)) {
-      $handle = opendir($file);
+      $handle                           = opendir($file);
       while($filename = readdir($handle)) {
 	if ($filename != "." && $filename != "..") {
 	  $this->_delete($file."/".$filename);
@@ -1127,18 +1131,18 @@ class m_bro {
   function alternc_export_conf() {
     global $db,$err;
     $err->log("bro","export_conf");
-    $str="<table border=\"1\"><caption> Browser </caption>\n";
-    $str.="  <browser>\n";
-    $pref=$this->GetPrefs();
+    $str                                = "<table border = \"1\"><caption> Browser </caption>\n";
+    $str .= "  <browser>\n";
+    $pref                               = $this->GetPrefs();
     
-    $i=1;
+    $i                                  = 1;
     foreach ($pref as $k=>$v) {
-      if (($i % 2)==0){
-	$str.="   <$k>$v</$k>\n"; 
+      if (($i % 2) == 0){
+	$str .= "   <$k>$v</$k>\n"; 
       }
       $i++;
     }
-    $str.=" </browser>\n";
+    $str .= " </browser>\n";
     
     return $str;
   }
@@ -1155,12 +1159,12 @@ class m_bro {
   function alternc_export_data($dir){
     global $mem,$err;
     $err->log("bro","export_data");
-    $dir.="html/";
+    $dir .= "html/";
     if(!is_dir($dir)){ 
       if(!mkdir($dir))
 	$err->raise("bro",_("Cannot create the requested directory. Please check the permissions"));
     }
-    $timestamp=date("H:i:s");
+    $timestamp                          = date("H:i:s");
 
     // relacher le lock global sinon ce download va geler alternc pour
     // tout le monde
