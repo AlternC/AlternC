@@ -435,7 +435,7 @@ class m_dom {
     $this->lock();
 
     // function add_domain($domain,$dns,$noerase=0,$force=0,$isslave=0,$slavedom="") 
-    if (! $this->add_domain($domain, true, false, 1) ) {
+    if (! $this->add_domain($domain, true, false, true) ) {
       $err->raise('dom', "Error adding domain");
       return false;
     }
@@ -646,13 +646,13 @@ class m_dom {
    * appellée lors de l'installation d'un nouveau domaine.</p>
    *
    * @param string $dom nom fqdn du domaine à installer
-   * @param integer $dns 1 ou 0 pour héberger le DNS du domaine ou pas.
-   * @param integer $noerase 1 ou 0 pour rendre le domaine inamovible ou non
-   * @param integer $force 1 ou 0, si 1, n'effectue pas les tests de DNS.
+   * @param boolean $dns 1 ou 0 pour héberger le DNS du domaine ou pas.
+   * @param boolean $noerase 1 ou 0 pour rendre le domaine inamovible ou non
+   * @param boolean $force 1 ou 0, si 1, n'effectue pas les tests de DNS.
    *  force ne devrait être utilisé que par le super-admin.
    $ @return boolean Retourne FALSE si une erreur s'est produite, TRUE sinon.
   */
-  function add_domain($domain,$dns,$noerase=0,$force=0,$isslave=0,$slavedom="") {
+  function add_domain($domain,$dns,$noerase=false,$force=false,$isslave=false,$slavedom="") {
     global $db,$err,$quota,$classes,$L_MX,$L_FQDN,$tld,$cuid,$bro,$hooks;
     $err->log("dom","add_domain",$domain);
 
@@ -1608,6 +1608,10 @@ class m_dom {
   return $res;
   }
 
+  /**
+   * 
+   * @return array
+   */
   function get_domain_all_summary() {
     global $db,$err;
     $res=array();

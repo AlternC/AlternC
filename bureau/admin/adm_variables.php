@@ -92,7 +92,7 @@ echo _("See the vars for the account")." ";
 echo "<select name='member_id'>";eoption($ml, $member_id);echo "</select>";
 echo " "._("logged via")." ";
 echo "<select name='fqdn_id'>";eoption($dom->get_panel_url_list(), $fqdn_id  );echo "</select> ";
-echo "<input type='submit' class='ina' value=\""; echo ehe(_("View")); echo "\" />";
+echo "<input type='submit' class='ina' value=\""; ehe(_("View")); echo "\" />";
 
 ?>
 </form>

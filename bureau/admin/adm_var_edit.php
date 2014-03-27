@@ -138,7 +138,7 @@ function var_input($infotype, $name, $value='') {
       break;
     case "boolean":
       echo "<input type='hidden' name='$name' value='0' />"; // This way, there is allways something send, even if checkbox is unchecked
-      echo "<input type='checkbox' id='add_$id' name='$name' value='1' ";cbox($value);echo " />"; 
+      echo "<input type='checkbox' id='add_$id' name='$name' value='1' ";cbox((bool)$value);echo " />"; 
       break;
     default:
       echo "WTF ? Dunno what to do with a ".$infotype['type'];
@@ -251,7 +251,7 @@ foreach ( $variables->strata_order as $strata) {
         foreach ($allvars['FQDN_CREATOR'] as $ttk => $ttv ) {
           if ( isset($ttv[$var]) && is_array( $ttv[$var])) {
             echo sprintf(_("Overwritted by %s"), $members[$ttk]['login'])." &rarr; ";
-            echo "<a href='javascript:edit_var(".$ttv[$var]['id'].");'>"; echo $variables->display_valueraw_html($ttv[$var]['value'], $var);echo "</a>";
+            echo "<a href='javascript:edit_var(".$ttv[$var]['id'].");'>"; $variables->display_valueraw_html($ttv[$var]['value'], $var);echo "</a>";
             edit_var($ttv[$var]);
           }
           echo "<br/>";
@@ -267,7 +267,7 @@ foreach ( $variables->strata_order as $strata) {
         foreach ($allvars['FQDN'] as $ttk => $ttv ) {
           if ( isset($ttv[$var]) && is_array( $ttv[$var])) {
             echo sprintf(_("Overwritted by %s"), $panel_url[$ttk])." &rarr; ";
-            echo "<a href='javascript:edit_var(".$ttv[$var]['id'].");'>"; echo $variables->display_valueraw_html($ttv[$var]['value'], $var);echo "</a>";
+            echo "<a href='javascript:edit_var(".$ttv[$var]['id'].");'>"; $variables->display_valueraw_html($ttv[$var]['value'], $var);echo "</a>";
             edit_var($ttv[$var]);
           }
           echo "<br/>";
@@ -283,7 +283,7 @@ foreach ( $variables->strata_order as $strata) {
         foreach ($allvars['CREATOR'] as $ttk => $ttv ) {
           if ( isset($ttv[$var]) && is_array( $ttv[$var])) {
             echo sprintf(_("Overwritted by %s"), $members[$ttk]['login'])." &rarr; ";
-            echo "<a href='javascript:edit_var(".$ttv[$var]['id'].");'>"; echo $variables->display_valueraw_html($ttv[$var]['value'], $var);echo "</a>";
+            echo "<a href='javascript:edit_var(".$ttv[$var]['id'].");'>"; $variables->display_valueraw_html($ttv[$var]['value'], $var);echo "</a>";
             edit_var($ttv[$var]);
           }
           echo "<br/>";
@@ -299,7 +299,7 @@ foreach ( $variables->strata_order as $strata) {
         foreach ($allvars['MEMBER'] as $ttk => $ttv ) {
           if ( isset($ttv[$var]) && is_array( $ttv[$var])) {
             echo sprintf(_("Overwritted by %s"), $members[$ttk]['login'])." &rarr; ";
-            echo "<a href='javascript:edit_var(".$ttv[$var]['id'].");'>"; echo $variables->display_valueraw_html($ttv[$var]['value'], $var);echo "</a>";
+            echo "<a href='javascript:edit_var(".$ttv[$var]['id'].");'>"; $variables->display_valueraw_html($ttv[$var]['value'], $var);echo "</a>";
             edit_var($ttv[$var]);
           }
           echo "<br/>";

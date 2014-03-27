@@ -9,6 +9,9 @@ class m_htaTest extends PHPUnit_Framework_TestCase
      */
     protected $object;
 
+    const PATH_HTACCESS             = "/tmp/.htaccess";
+    const PATH_HTPASSWD             = "/tmp/.htpasswd";
+    
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
@@ -16,6 +19,10 @@ class m_htaTest extends PHPUnit_Framework_TestCase
     protected function setUp()
     {
         parent::setUp();
+        touch(self::PATH_HTACCESS);
+        touch(self::PATH_HTPASSWD);
+        $file_content = "AuthUserFile \"/tmp/.htpasswd\"\nAuthName \"Restricted area\"\nAuthType Basic\nrequire valid-user\n";
+        file_put_contents(self::PATH_HTACCESS,$file_content);
         $this->object = new m_hta;
     }
 
@@ -26,6 +33,12 @@ class m_htaTest extends PHPUnit_Framework_TestCase
     protected function tearDown()
     {
         parent::tearDown();
+        if(file_exists(self::PATH_HTACCESS)){
+            unlink (self::PATH_HTACCESS);
+        }
+        if(file_exists(self::PATH_HTPASSWD)){
+            unlink (self::PATH_HTPASSWD);
+        }
     }
 
     /**
@@ -114,14 +127,26 @@ class m_htaTest extends PHPUnit_Framework_TestCase
 
     /**
      * @covers m_hta::DelDir
-     * @todo   Implement testDelDir().
      */
     public function testDelDir()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $result                             = $this->object->DelDir("/tmp",TRUE);
+        $this->assertTrue($result);
+        $this->assertFileNotExists(self::PATH_HTACCESS);
+        $this->assertFileNotExists(self::PATH_HTPASSWD);
+    }
+
+    /**
+     * @covers m_hta::DelDir
+     */
+    public function testDelDirNotEmpty()
+    {
+        file_put_contents(self::PATH_HTACCESS, "\nphpunit", FILE_APPEND);
+        $result                             = $this->object->DelDir("/tmp",TRUE);
+        $this->assertTrue($result);
+        $this->assertFileExists(self::PATH_HTACCESS);
+        $this->assertFileNotExists(self::PATH_HTPASSWD);
+        $this->assertTrue("phpunit" == trim(file_get_contents(self::PATH_HTACCESS)));
     }
 
     /**

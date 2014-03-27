@@ -569,11 +569,11 @@ class m_admin {
    * @param     int     $duration
    * @param     string  $notes
    * @param     integer $force
-   * @param     boolean $create_dom
+   * @param     string  $create_dom
    * @param     int     $db_server_id
    * @return boolean Returns FALSE if an error occurs, TRUE if not.
    */
-  function add_mem($login, $pass, $nom, $prenom, $mail, $canpass=1, $type='default', $duration=0, $notes = "", $force=0, $create_dom=false, $db_server_id) {
+  function add_mem($login, $pass, $nom, $prenom, $mail, $canpass=1, $type='default', $duration=0, $notes = "", $force=0, $create_dom='', $db_server_id) {
     global $err,$quota,$classes,$cuid,$mem,$L_MYSQL_DATABASE,$L_MYSQL_LOGIN,$hooks,$action;
     $err->log("admin","add_mem",$login."/".$mail);
     if (!$this->enabled) {
@@ -1135,7 +1135,7 @@ EOF;
   function checkalldom() {
     global $db,$L_NS1,$L_NS2,$L_MX,$L_PUBLIC_IP;
     $checked=array();
-    $r=$db->query("SELECT * FROM domaines ORDER BY domaine;");
+    $db->query("SELECT * FROM domaines ORDER BY domaine;");
     $dl=array();
     while ($db->next_record()) {
       $dl[$db->Record["domaine"]]=$db->Record;
@@ -1179,10 +1179,14 @@ EOF;
 	          // Check the IP: 
 	          $out=array();
 	          exec("dig +short A ".escapeshellarg($d["sub"].(($d["sub"]!="")?".":"").$c["domaine"]),$out);
-	          if (!in_array($L_PUBLIC_IP,$out)) {
-	            $errstr.="subdomain '".$d["sub"]."' don't point to $L_PUBLIC_IP but to ".implode(",",$out)."\n";
-	            $errno=1;
-	          }
+                  if (! is_array($out)) { // exec dig can fail
+                    $errno=1; $errstr.="Fail to get the DNS information. Try again.\n";
+                  } else {
+	            if (!in_array($L_PUBLIC_IP,$out)) {
+	              $errstr.="subdomain '".$d["sub"]."' don't point to $L_PUBLIC_IP but to ".implode(",",$out)."\n";
+	              $errno=1;
+	            }
+                  }
 	        }
 	      }
       }
@@ -1362,7 +1366,6 @@ EOF;
     global $db,$classes,$hooks;
     $tmp1=array();
     $tmp2=array();
-    $tmp3=array();
     $policies=array();
     $db->query("SELECT * FROM policy;");
     while ($db->next_record()) {

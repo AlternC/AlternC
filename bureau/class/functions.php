@@ -44,7 +44,7 @@ function fl($str) { return str_replace("<","&lt;",str_replace("\"","&quot;",$str
  * @param struing $type
  * @return mixed
  */
-function variable_get($name, $default = null, $createit_comment = null, $type=null) {
+function variable_get($name, $default = null, $createit_comment = null, $type = null) {
   global $variables;
   return $variables->variable_get($name, $default, $createit_comment, $type);
 }
@@ -66,16 +66,16 @@ function variable_get($name, $default = null, $createit_comment = null, $type=nu
  */
 function checkhostallow($domain,$dns) {
   global $L_NS1,$L_NS2,$db,$dom;
-  $sizefound=0;
-  $found="";
+  $sizefound = 0;
+  $found = "";
   $db->query("SELECT tld,mode FROM tld;");
   while ($db->next_record()) {
-    list($key,$val)=$db->Record;
+    list($key,$val) = $db->Record;
     if (substr($domain,-1-strlen($key))==".".$key) {
       if ($sizefound<strlen($key)) {
-	$sizefound=strlen($key);
-	$found=$key;
-	$fmode=$val;
+	$sizefound = strlen($key);
+	$found = $key;
+	$fmode = $val;
       }
     }
   }
@@ -88,10 +88,10 @@ function checkhostallow($domain,$dns) {
     return -2;
   if ($fmode>2)		// OK, in the case 3 4 5
     return $found;
-  $n1=false;	$n2=false;
-  for ($i=0;$i<count($dns);$i++) {
-    if (strtolower($dns[$i])==strtolower($L_NS1)) $n1=true;
-    if (strtolower($dns[$i])==strtolower($L_NS2)) $n2=true;
+  $n1 = false;	$n2 = false;
+  for ($i = 0;$i<count($dns);$i++) {
+    if (strtolower($dns[$i])==strtolower($L_NS1)) $n1 = true;
+    if (strtolower($dns[$i])==strtolower($L_NS2)) $n2 = true;
   }
   if ($fmode==1 && $n1)		// OK
     return $found;
@@ -109,16 +109,16 @@ function checkhostallow($domain,$dns) {
  */
 function checkhostallow_nodns($domain) {
   global $db;
-  $sizefound=0;
-  $found="";
+  $sizefound = 0;
+  $found = "";
   $db->query("SELECT tld,mode FROM tld;");
   while ($db->next_record()) {
-    list($key,$val)=$db->Record;
+    list($key,$val) = $db->Record;
     if (substr($domain,-1-strlen($key))==".".$key) {
       if ($sizefound<strlen($key)) {
-	$sizefound=strlen($key);
-	$found=$key;
-	$fmode=$val;
+	$sizefound = strlen($key);
+	$found = $key;
+	$fmode = $val;
       }
     }
   }
@@ -149,12 +149,12 @@ function get_remote_ip() {
 function checkurl($url) {
   // TODO : add a path/file check
   if (substr($url,0,7)!="http://" && substr($url,0,8)!="https://" && substr($url,0,6)!="ftp://") return false;
-  if (substr($url,0,7)=="http://" ) $fq=substr($url,7);
-  if (substr($url,0,8)=="https://") $fq=substr($url,8);
-  if (substr($url,0,6)=="ftp://"  ) $fq=substr($url,6);
-  $f=explode("/",$fq);
-  if (!is_array($f)) $f=array($f);
-  $t=checkfqdn($f[0]);
+  if (substr($url,0,7)=="http://" ) $fq = substr($url,7);
+  if (substr($url,0,8)=="https://") $fq = substr($url,8);
+  if (substr($url,0,6)=="ftp://"  ) $fq = substr($url,6);
+  $f = explode("/",$fq);
+  if (!is_array($f)) $f = array($f);
+  $t = checkfqdn($f[0]);
   if ($t) return false;
   return true;
 }
@@ -235,8 +235,8 @@ function checkfqdn($fqdn) {
   // 4. Le fqdn ne fait qu'un seul membre (il n'est donc pas fq...)
   if (strlen($fqdn)>255)
     return 1;
-  $members=explode(".", $fqdn);
-  if (count($members)>1) $ret=0; else $ret=4;
+  $members = explode(".", $fqdn);
+  if (count($members)>1) $ret = 0; else $ret = 4;
   reset($members);
   while (list ($key, $val) = each ($members)) {
     if (strlen($val)>63)
@@ -262,10 +262,10 @@ function checkfqdn($fqdn) {
  */
 function checkuserpath($path) {
   global $mem;
-  $user=$mem->user["login"];
-  $usar=substr($user,0,1);
+  $user = $mem->user["login"];
+  $usar = substr($user,0,1);
   if (substr($path,0,1)!="/")
-    $path="/".$path;
+    $path = "/".$path;
 
   $rpath = realpath(ALTERNC_HTML."/$usar/$user$path");
   if (!$rpath) { // if file or directory does not exist
@@ -310,7 +310,7 @@ function cbox($test, $echo = TRUE) {
   if ($test) {
     $return = " checked=\"checked\"";
   } else {
-    $return='';
+    $return = '';
   }
   if( $echo ){
     echo $return;
@@ -331,7 +331,7 @@ function selected($bool, $echo = TRUE) {
   if ($bool) {
     $return = " selected=\"selected\"";
   } else {
-    $return='';
+    $return = '';
   }
   if( $echo ){
     echo $return;
@@ -347,7 +347,7 @@ function selected($bool, $echo = TRUE) {
  * @param integer $affiche
  * @return string
  */
-function ecif($test,$tr,$fa="",$affiche=1) {
+function ecif($test,$tr,$fa = "",$affiche = 1) {
     if ($test){
         $retour = $tr;
     }
@@ -375,7 +375,7 @@ function __($str) {
  * @param string $fa
  * @return string
  */
-function ife($test,$tr,$fa="") {
+function ife($test,$tr,$fa = "") {
     if ($test){
         return $tr;
     } 
@@ -388,33 +388,33 @@ function ife($test,$tr,$fa="") {
  * @param integer $html
  * @return string
  */
-function format_size($size,$html=0) {
+function format_size($size,$html = 0) {
   // Retourne une taille formatt�e en Octets, Kilo-octets, M�ga-octets ou Giga-Octets, avec 2 d�cimales.
   if ("-" == $size) {
     return $size;
   }
-  $size=(float)$size;
+  $size = (float)$size;
   if ($size<1024) {
-    $r=$size;
+    $r = $size;
     if ($size!=1) {
       $r.=" "._("Bytes");
     } else {
       $r.=" "._("Byte");
     }
   } else {
-    $size=$size/1024;
+    $size = $size/1024;
     if ($size<1024) {
-      $r=round($size,2)." "._("Kb");
+      $r = round($size,2)." "._("Kb");
     } else {
-      $size=$size/1024;
+      $size = $size/1024;
       if ($size<1024) {
-	$r=round($size,2)." "._("Mb");
+	$r = round($size,2)." "._("Mb");
       } else {
-	$size=$size/1024;
+	$size = $size/1024;
 	if ($size<1024) {
-	  $r=round($size,2)." "._("Gb");
+	  $r = round($size,2)." "._("Gb");
 	} else {
-	  $r=round($size/1024,2)." "._("Tb");
+	  $r = round($size/1024,2)." "._("Tb");
 	}
       }
     }
@@ -448,17 +448,17 @@ function linkhelp($hid) {
  * @return string
  */
 function format_date($format,$date) {
-  $d=substr($date,8,2);
-  $m=substr($date,5,2);
-  $y=substr($date,0,4);
-  $h=substr($date,11,2);
-  $i=substr($date,14,2);
+  $d = substr($date,8,2);
+  $m = substr($date,5,2);
+  $y = substr($date,0,4);
+  $h = substr($date,11,2);
+  $i = substr($date,14,2);
   if ($h>12) {
-    $hh=$h-12;
-    $am="pm";
+    $hh = $h-12;
+    $am = "pm";
   } else {
-    $hh=$h;
-    $am="am";
+    $hh = $h;
+    $am = "am";
   }
   return sprintf($format,$d,$m,$y,$h,$i,$hh,$am);
 }
@@ -482,13 +482,13 @@ function ssla($str) {
    * @return string Retourne le mot de passe crypt�
    * @access private
    */
-  function _md5cr($pass,$salt="") {
+  function _md5cr($pass,$salt = "") {
     if (!$salt) {
-      $chars="./0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-      for ($i=0;$i<12;$i++) {
+      $chars = "./0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      for ($i = 0;$i<12;$i++) {
 	$salt.=substr($chars,(mt_rand(0,strlen($chars))),1);
       }
-      $salt="$1$".$salt;
+      $salt = "$1$".$salt;
     }
     return crypt($pass,$salt);
   }
@@ -536,7 +536,7 @@ function pretty_months($months) {
  * @return string Code html pour le drop-down
  * @access private
  */
-function duration_list($name, $selected=0) {
+function duration_list($name, $selected = 0) {
   $res = "<select name=\"$name\" id=\"$name\" class=\"inl\">";
 
   foreach(array(0, 1, 2, 3, 4, 6, 12, 24) as $dur) {
@@ -568,10 +568,10 @@ function duration_list($name, $selected=0) {
  * @param string $cur
  * @param boolean $onedim
  */
-function eoption($values,$cur,$onedim=false) {
+function eoption($values,$cur,$onedim = false) {
   if (is_array($values)) {
     foreach ($values as $k=>$v) {
-      if ( $onedim ) $k=$v;
+      if ( $onedim ) $k = $v;
       echo "<option value=\"$k\"";
       if ($k==$cur) echo " selected=\"selected\"";
       echo ">".$v."</option>";
@@ -697,15 +697,15 @@ function list_properties_order($a, $b) {
  * @param boolean $echo
  * @return string
  */
-function pager($offset,$count,$total,$url,$before="",$after="",$echo = TRUE) {
+function pager($offset,$count,$total,$url,$before = "",$after = "",$echo = TRUE) {
     $return = "";
-  $offset=intval($offset); 
-  $count=intval($count); 
-  $total=intval($total); 
-  if ($offset<=0) $offset="0";
-  if ($count<=1) $count="1";
-  if ($total<=0) $total="0";
-  if ($total<$offset) $offset=max(0,$total-$count);
+  $offset = intval($offset); 
+  $count = intval($count); 
+  $total = intval($total); 
+  if ($offset<=0) $offset = "0";
+  if ($count<=1) $count = "1";
+  if ($total<=0) $total = "0";
+  if ($total<$offset) $offset = max(0,$total-$count);
 
   if ($total<=$count) { // When there is less element than 1 complete page, just don't do anything :-D
     return true;
@@ -722,17 +722,17 @@ function pager($offset,$count,$total,$url,$before="",$after="",$echo = TRUE) {
   if ($total>(2*$count)) { // On n'affiche le pager central (0 1 2 ...) s'il y a au moins 2 pages.
     $return .= " - ";
     if (($total<($count*10)) && ($total>$count)) {  // moins de 10 pages : 
-      for($i=0;$i<$total/$count;$i++) {
-	$o=$i*$count;
+      for($i = 0;$i<$total/$count;$i++) {
+	$o = $i*$count;
 	if ($offset==$o) {
 	  $return .= $i." "; 
 	} else {
-	  $return .= "<a href=\"".str_replace("%%offset%%",$o,$url)."\">$i</a> ";
+	  $return .= "<a href = \"".str_replace("%%offset%%",$o,$url)."\">$i</a> ";
 	}
       }
     } else { // Plus de 10 pages, on affiche 0 1 2 , 2 avant et 2 apr�s la page courante, et les 3 dernieres
-      for($i=0;$i<=2;$i++) {
-	$o=$i*$count;
+      for($i = 0;$i<=2;$i++) {
+	$o = $i*$count;
 	if ($offset==$o) {
 	  $return .= $i." "; 
 	} else {
@@ -741,11 +741,11 @@ function pager($offset,$count,$total,$url,$before="",$after="",$echo = TRUE) {
       }
       if ($offset>=$count && $offset<($total-2*$count)) { // On est entre les milieux ...
 	// On affiche 2 avant jusque 2 apr�s l'offset courant mais sans d�border sur les indices affich�s autour
-	$start=max(3,intval($offset/$count)-2);
-	$end=min(intval($offset/$count)+3,intval($total/$count)-3);
+	$start = max(3,intval($offset/$count)-2);
+	$end = min(intval($offset/$count)+3,intval($total/$count)-3);
 	if ($start!=3) $return .= " ... ";
-	for($i=$start;$i<$end;$i++) {
-	  $o=$i*$count;
+	for($i = $start;$i<$end;$i++) {
+	  $o = $i*$count;
 	  if ($offset==$o) {
 	    $return .= $i." "; 
 	  } else {
@@ -756,8 +756,8 @@ function pager($offset,$count,$total,$url,$before="",$after="",$echo = TRUE) {
       } else {
 	$return .= " ... ";
       }
-      for($i=intval($total/$count)-3;$i<$total/$count;$i++) {
-	$o=$i*$count;
+      for($i = intval($total/$count)-3;$i<$total/$count;$i++) {
+	$o = $i*$count;
 	if ($offset==$o) {
 	  $return .= $i." "; 
 	} else {
@@ -769,7 +769,7 @@ function pager($offset,$count,$total,$url,$before="",$after="",$echo = TRUE) {
   }
   // Shall-we show the next page link ?
   if ($offset+$count<$total) {
-    $o=$offset+$count;
+    $o = $offset+$count;
     $return .= "<a href=\"".str_replace("%%offset%%",$o,$url)."\" alt=\"(Ctl/Alt-s)\" title=\"(Alt-s)\" accesskey=\"s\">"._("Next Page")."</a> ";
   } else {
     $return .= _("Next Page")." ";
@@ -808,8 +808,8 @@ function create_pass($length = 8){
  * @param string $fields_to_fill2
  * @return int
  */
-function display_div_generate_password($pass_size=DEFAULT_PASS_SIZE, $fields_to_fill1="", $fields_to_fill2="") {
-  $id=rand(1,1000);
+function display_div_generate_password($pass_size = DEFAULT_PASS_SIZE, $fields_to_fill1 = "", $fields_to_fill2 = "") {
+  $id = rand(1,1000);
   echo "<div id='z$id' style='display:none;'><a href=\"javascript:generate_password_html('$id',$pass_size,'$fields_to_fill1','$fields_to_fill2');\">";
   __("Clic here to generate a password");
   echo "</a></div>";
@@ -825,9 +825,9 @@ function display_div_generate_password($pass_size=DEFAULT_PASS_SIZE, $fields_to_
  * @param int       $width
  * @param int       $height
  */
-function display_browser($dir="", $caller="main.dir", $width=350, $height=450) {
+function display_browser($dir = "", $caller = "main.dir", $width = 350, $height = 450) {
   // Browser id
-  $bid="b".rand(1,1000);
+  $bid = "b".rand(1,1000);
   echo "<script type=\"text/javascript\">
         <!--
           $(function() {
@@ -861,27 +861,6 @@ function display_browser($dir="", $caller="main.dir", $width=350, $height=450) {
         </script>
         ";
   
-}
-
-/**
- * Insere un $wrap_string tous les $max caracteres dans $message
- * 
- * @param string    $message
- * @param int       $max
- * @param string    $wrap_string
- * @return string   
- */
-function auto_wrap($message="",$max=10,$wrap_string="<wbr/>") {
-  $cpt = 0;
-  $mot = split(" ",$message);
-  while (isset($mot[$cpt]) && ($mot[$cpt] != "")){
-    if(@strlen($mot[$cpt]) > $max){
-      $nvmot = chunk_split ($mot[$cpt], $max, $wrap_string );
-      $message = str_replace($mot[$cpt], $nvmot, $message);
-    }
-    $cpt++;
-  }
-  return $message;
 }
 
 /**
@@ -959,9 +938,9 @@ function hexa($hex)
  * @param int   $p
  * @return string
  */
-function PercentToColor($p=0) {
-  if ($p>100) $p=100;
-  if ($p<0) $p=0;
+function PercentToColor($p = 0) {
+  if ($p>100) $p = 100;
+  if ($p<0) $p = 0;
   // Pour aller de vert a rouge en passant par jaune et orange
   $h = 1+((100-$p)*130/100);
   

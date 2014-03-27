@@ -6,12 +6,22 @@ require_once("/usr/share/alternc/panel/class/config_nochk.php");
 global $db;
 
 echo "\n---------------------------\n Generating size-cache for web accounts\n\n";
-$r=mysql_query("SELECT uid,login FROM membres;");
-while ($c=mysql_fetch_array($r)) {
-  echo $c["login"]; flush();
-  $size=exec("sudo /usr/lib/alternc/du.pl ".ALTERNC_HTML."/".substr($c["login"],0,1)."/".$c["login"]);
-  $db->query("REPLACE INTO size_web SET uid='".$c["uid"]."',size='$size';");
-  echo " done ($size KB) \n"; flush();
+exec("/usr/lib/alternc/quota_get_all", $list_quota_tmp);
+$list_quota=array();
+foreach ($list_quota_tmp as $qt) {
+  $qt = explode(" ", $qt);
+  $list_quota[$qt[0]] = array('used'=>$qt[1], 'quota'=>$qt[2]);
+}
+
+if ($db->query("SELECT uid,login FROM membres;")) {
+  $db2 = new DB_system();
+  while ($db->next_record()) {
+    if (isset($list_quota[$db->f('uid')])) {
+      $qu=$list_quota[$db->f('uid')];
+      $db2->query("INSERT OR REPLACE INTO size_web SET uid='".intval($db->f('uid'))."',size='".intval($qu['used'])."';");
+      echo $db->f('login')." (".$qu['used']." B)\n";
+    }  
+  }
 }
 
 echo "\n---------------------------\n Generating size-cache for MySQL databases\n\n";

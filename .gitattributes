@@ -605,6 +605,7 @@ nightlybuild/READMEFIRST -text
 nightlybuild/build.sh -text
 nightlybuild/mchroot.sh -text
 nightlybuild/nightly.key -text
+phpunit/tests/_datasets/domaines.yml -text
 po/alternc-admintools.pot -text
 po/fr/LC_MESSAGES/.svnignore -text
 po/fr/LC_MESSAGES/alternc-admintools.po -text
@@ -614,7 +615,6 @@ roundcube/class/m_roundcube.php -text
 roundcube/roundcube-install -text
 roundcube/roundcube_alternc_logo.png -text
 roundcube/templates/apache2/roundcube.conf -text
-roundcube/templates/logrotate.d/roundcube-core -text
 roundcube/templates/roundcube/main.inc.php -text
 roundcube/templates/roundcube/plugins/managesieve/config.inc.php -text
 roundcube/templates/roundcube/plugins/password/config.inc.php -text
@@ -663,6 +663,7 @@ src/quota-warning.sh -text
 src/quota_delete -text
 src/quota_edit -text
 src/quota_get -text
+src/quota_get_all -text
 src/quota_init -text
 src/rebuild_all_webconf.sh -text
 src/sendmail -text

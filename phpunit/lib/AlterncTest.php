@@ -21,13 +21,24 @@ abstract class AlterncTest extends PHPUnit_Extensions_Database_TestCase
      * @return \PHPUnit_Extensions_Database_DataSet_YamlDataSet
      * @throws \Exception
      */
-    public function loadDataSet($file_name)
+    public function loadDataSet($fileList)
     {
-        $file               =  PHPUNIT_DATASETS_PATH."/$file_name";
-        if( !is_file($file) ){
-            throw new \Exception("missing $file");
+        if (empty($fileList)) {
+            throw new \Exception("No files specified");
         }
-        $dataSet            = new PHPUnit_Extensions_Database_DataSet_YamlDataSet($file);
+        if( !is_array($fileList)){
+            $fileList       = array($fileList);
+        }
+        $datasetList        = array();
+        foreach ($fileList as $file_name) {
+            $file               =  PHPUNIT_DATASETS_PATH."/$file_name";
+            if( !is_file($file) ){
+                throw new \Exception("missing $file");
+            }
+            $dataSet            = new PHPUnit_Extensions_Database_DataSet_YamlDataSet($file);
+            $datasetList[]      = $dataSet;
+        }
+        $compositeDataSet            = new PHPUnit_Extensions_Database_DataSet_CompositeDataSet($datasetList);
         return $dataSet;
     } 
 

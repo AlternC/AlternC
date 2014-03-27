@@ -134,7 +134,7 @@ class m_variables {
         case 'DEFAULT':
             
 //          $variables = $this->variable_merge(array(),$arr_var['DEFAULT'][NULL]);
-            $variablesList = current($arr_var["DEFAULT"]);
+          $variablesList = current($arr_var["DEFAULT"]);
           $variables = $this->variable_merge(array(),$variablesList);
           break;
         case 'GLOBAL':
@@ -372,7 +372,7 @@ class m_variables {
     $output = "";
     if (isset($tab[$strata][$id][$varname]['value'])) {
       $v = $tab[$strata][$id][$varname]['value'];
-      $output .= $this->display_valueraw_html($v, $varname);
+      $output .= $this->display_valueraw_html($v, $varname, false);
     } else {
       $output .= "<em>"._("None defined")."</em>";
     }
