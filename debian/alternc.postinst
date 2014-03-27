@@ -173,8 +173,9 @@ EOF
         rm -f /var/alternc/apacheconf/*/*  # Old AlternC version
     fi
 
-    echo "checking for upgrades"
-    /usr/share/alternc/install/upgrade_check.sh $2
+    # we store the version where we upgrade from, for AlternC < 3.1.1 || < 3.2.1
+    # where we switch to database-based version control
+    echo "$2" >/var/lib/alternc/backups/lastversion
 
     # Setup grants
     db_get "alternc/mysql/host"

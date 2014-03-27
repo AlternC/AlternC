@@ -765,3 +765,15 @@ CREATE TABLE IF NOT EXISTS `actions` (
  status int(8) unsigned default NULL,
  PRIMARY KEY ( `id` )
 ) ENGINE=MyISAM COMMENT = 'generic actions';
+
+
+-- version control now in MySQL
+CREATE TABLE IF NOT EXISTS `alternc_status` (
+  `name` varchar(48) NOT NULL DEFAULT '',
+  `value` longtext NOT NULL,
+  PRIMARY KEY (`name`),
+  KEY `name` (`name`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+INSERT INTO alternc_status SET name='alternc_version',value='3.1.0~b.php';
+

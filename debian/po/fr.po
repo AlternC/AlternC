@@ -3,22 +3,26 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
+# Balise <hubert_bertrand@yahoo.fr>, 2012
 # Benjamin Sonntag <benjamin@alternc.org>, 2004
 # Benjamin Sonntag <benjamin@sonntag.fr>, 2004,2012-2013
 # Benjamin Sonntag <benjamin@sonntag.fr>, 2013
+# boukman <linkfan@hotmail.fr>, 2013
 # Daniel Viñar Ulriksen <dani@belil.net>, 2008
 # boukman <linkfan@hotmail.fr>, 2013
-# fufroma <fufroma@nnx.com>, 2013
+# fufroma <fufroma@nnx.com>, 2012-2013
+# fufroma <fufroma@nnx.com>, 2013-2014
 # fufroma <fufroma@nnx.com>, 2012
 # supra63200 <guillaume63200@hotmail.fr>, 2013
 # Balise <hubert_bertrand@yahoo.fr>, 2012
+# supra63200 <guillaume63200@hotmail.fr>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: AlternC, hosting control panel\n"
-"Report-Msgid-Bugs-To: https://alternc.org/report/1\n"
+"Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
 "POT-Creation-Date: 2013-10-18 11:47+0200\n"
-"PO-Revision-Date: 2013-10-18 14:04+0000\n"
-"Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
+"PO-Revision-Date: 2014-03-27 15:42+0000\n"
+"Last-Translator: fufroma <fufroma@nnx.com>\n"
 "Language-Team: French (France) (http://www.transifex.com/projects/p/alternc/"
 "language/fr_FR/)\n"
 "MIME-Version: 1.0\n"

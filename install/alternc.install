@@ -112,6 +112,10 @@ if [ -f "$INSTALLED_CONFIG_TAR" ]; then
     fi
 fi
 
+# Upgrade the DATA and DB SCHEMA
+/usr/share/alternc/install/upgrade_check.sh
+
+
 #######################################################################
 # Prepare template expansions
 #
@@ -555,7 +559,7 @@ grep -q "^127.0.0.1\$" /etc/opendkim/TrustedHosts || echo "127.0.0.1" >>/etc/ope
 grep -q "^localhost\$" /etc/opendkim/TrustedHosts || echo "localhost" >>/etc/opendkim/TrustedHosts
 
 # Add opendkim to service to restart
-SERVICES="$SERVICES incron"
+SERVICES="$SERVICES opendkim"
 
 # hook 
 run-parts --arg=before-reload /usr/lib/alternc/install.d 

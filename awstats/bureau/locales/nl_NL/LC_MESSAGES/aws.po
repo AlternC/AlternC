@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: $Id: stats.po,v 1.1.1.1 2004/09/01 16:52:49 anonymous "
 "Exp $\n"
 "Report-Msgid-Bugs-To: i18n@alternc.org\n"
-"POT-Creation-Date: 2013-07-22 17:35+0200\n"
+"POT-Creation-Date: 2014-03-27 16:28+0100\n"
 "PO-Revision-Date: 2009-05-24 13:50CEST\n"
 "Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
 "Language-Team: Dutch <i18n@alternc.org>\n"
@@ -196,80 +196,80 @@ msgstr ""
 msgid "No statistics currently defined"
 msgstr ""
 
-#: ../class/m_aws.php:163 ../class/m_aws.php:324 ../class/m_aws.php:706
+#: ../class/m_aws.php:162 ../class/m_aws.php:325 ../class/m_aws.php:710
 msgid "This statistic does not exist"
 msgstr ""
 
-#: ../class/m_aws.php:263
+#: ../class/m_aws.php:262
 msgid "Host already managed by awstats!"
 msgstr ""
 
-#: ../class/m_aws.php:358
+#: ../class/m_aws.php:359
 msgid "This hostname does not exist (Domain name)"
 msgstr ""
 
-#: ../class/m_aws.php:366
+#: ../class/m_aws.php:367
 msgid "This hostname does not exist (Hostaliases)"
 msgstr ""
 
-#: ../class/m_aws.php:386
+#: ../class/m_aws.php:387
 msgid "Your stat quota is over..."
 msgstr ""
 
-#: ../class/m_aws.php:399
+#: ../class/m_aws.php:400
 msgid "No user currently defined"
 msgstr ""
 
-#: ../class/m_aws.php:457 ../class/m_aws.php:516
+#: ../class/m_aws.php:458 ../class/m_aws.php:517
 msgid "Login does not exist"
 msgstr ""
 
-#: ../class/m_aws.php:473 ../class/m_aws.php:493 ../class/m_aws.php:512
-#: ../class/m_aws.php:563
+#: ../class/m_aws.php:474 ../class/m_aws.php:494 ../class/m_aws.php:513
+#: ../class/m_aws.php:568
 msgid "Login incorrect"
 msgstr ""
 
-#: ../class/m_aws.php:477
+#: ../class/m_aws.php:478
 msgid "Login already exist"
 msgstr ""
 
-#: ../class/m_aws.php:497 ../class/m_aws.php:567
+#: ../class/m_aws.php:498 ../class/m_aws.php:572
 msgid "Login does not exists"
 msgstr ""
 
-#: ../class/m_aws.php:521 ../class/m_aws.php:545 ../class/m_aws.php:572
+#: ../class/m_aws.php:522 ../class/m_aws.php:550 ../class/m_aws.php:577
 msgid "The requested statistic does not exist."
 msgstr ""
 
-#: ../class/m_aws.php:526
+#: ../class/m_aws.php:527
 msgid "This login is already allowed for this statistics."
 msgstr ""
 
-#: ../class/m_aws.php:577
+#: ../class/m_aws.php:582
 msgid "This login is already denied for this statistics."
 msgstr ""
 
-#: ../class/m_aws.php:641
+#: ../class/m_aws.php:645
 msgid "Awstats"
 msgstr ""
 
-#: ../class/m_aws.php:663
+#: ../class/m_aws.php:667
 msgid "prefix not allowed."
 msgstr ""
 
-#: ../class/m_aws.php:667
+#: ../class/m_aws.php:671
 msgid "Forbidden caracters in the postfix."
 msgstr ""
 
-#: ../class/m_aws.php:681
+#: ../class/m_aws.php:685
 msgid "Hostname is incorrect"
 msgstr ""
 
-#: ../class/m_aws.php:697
+#: ../class/m_aws.php:701
 msgid "Problem to create the configuration"
 msgstr ""
 
-#: ../class/m_aws.php:742
+#: ../class/m_aws.php:760
 #, php-format
 msgid "Problem to edit file %s"
 msgstr ""
