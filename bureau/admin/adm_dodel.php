@@ -40,19 +40,15 @@ $fields = array (
 );
 getFields($fields);
 
+$accountList = $d;
 
 if($del_confirm == "y"){
-  if (!is_array($accountList)) {
-    $accountList[] = $accountList;
-  }
-
-  reset($accountList);
-  while (list($key,$val)=each($accountList)) {
+  $error = "";
+  foreach ($accountList as $key => $val) {
     if (!$admin->checkcreator($val)) {
       __("This page is restricted to authorized staff");
       exit();
     }
-    $error = "";
     if (!($u=$admin->get($val)) || !$admin->del_mem($val)) {
       $error .= sprintf(_("Member '%s' does not exist"),$val)."<br />";
     } else {
@@ -77,12 +73,14 @@ if($del_confirm == "y"){
       <input type="hidden" name="del_confirm" value="y" />
       <p class="alert alert-warning"><?php __("WARNING : Confirm the deletion of the users"); ?></p>
       <p>
-      <?php
-        foreach($accountList as $userid){
-          $membre   = $admin->get($userid);
-          echo "<input type=\"hidden\" name=\"d[]\" value=\"$userid\" />".$membre['login']."<br/>";
-        }
-      ?>
+		  <ul>
+			  <?php
+				foreach($accountList as $userid){
+				  $membre   = $admin->get($userid);
+				  echo "<li><input type=\"hidden\" name=\"d[]\" value=\"$userid\" />".$membre['login']."</li>";
+				}
+			  ?>
+		  </ul>
       </p>
       <blockquote>
 	  <input type="submit" class="inb ok" name="confirm" value="<?php __("Yes, delete those accounts"); ?>" />&nbsp;&nbsp;
