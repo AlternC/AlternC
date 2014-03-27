@@ -320,7 +320,6 @@ class m_mailTest extends AlterncTest
     public function testCreate_alias()
     {
        // Test #1580
-       $this->object->
     }
 
     /**
