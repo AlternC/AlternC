@@ -62,10 +62,10 @@ for file in $( ls $extensions | sort -n ) ; do
                   # run the proper program to interpret the upgrade script
 		  case "$ext" in
 		      sql)
-			  ( echo "BEGIN"
+			  ( echo "BEGIN;"
 			      cat $file
-			      echo "UPDATE alternc_status SET value='$file' WHERE name='alternc_version'"
-			      echo "COMMIT"
+			      echo "UPDATE alternc_status SET value='$file' WHERE name='alternc_version';"
+			      echo "COMMIT;"
 			  ) | mysql --defaults-file=/etc/alternc/my.cnf
 			  ;;
 		      php)
