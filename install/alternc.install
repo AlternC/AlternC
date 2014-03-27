@@ -588,13 +588,14 @@ find /usr/share/alternc/panel/locales -maxdepth 1 -mindepth 1 -type d -name "*_*
 do 
     B="$A/LC_MESSAGES"
     cd $B
-    rm -f alternc.mo
-    msgfmt alternc -o alternc.mo
+    rm -f alternc.mo alternc.po
+    msgcat --use-first *.po alternc >alternc.po
+    msgfmt alternc.po -o alternc.mo
 done
 
 # Fix some perms
 # Fix phpmyadmin import trac#1557
-test -d "/var/lib/phpmyadmin/tmp" && dpkg-statoverride --update --add www-data alterncpanel 0775 "/var/lib/phpmyadmin/tmp"
+test -d "/var/lib/phpmyadmin/tmp" && dpkg-statoverride --update --add www-data alterncpanel 0775 "/var/lib/phpmyadmin/tmp" 2>/dev/null || true
 
 # hook 
 run-parts --arg=end /usr/lib/alternc/install.d 
