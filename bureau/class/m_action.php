@@ -50,7 +50,7 @@ class m_action {
     function do_action() {
         global $err, $L_INOTIFY_DO_ACTION;
         $err->log("action", "do_action");
-        if( ! touch($L_INOTIFY_DO_ACTION) ){
+        if( ! @touch($L_INOTIFY_DO_ACTION) ){
             return FALSE;
         }
         return TRUE;

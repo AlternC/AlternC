@@ -25,6 +25,8 @@ if ( $nb != 1 ){
 }
 
 #we check that  for that type only one option is specified
+# FIXME je doute que ca fasse un truc pertinent ce morceau
+$nb2=0;
 foreach($options as $opt => $val){
     $nb2=count($options[$opt]);
 }
@@ -61,6 +63,7 @@ function FixQuotaDovecot($conditions){
 }
 
 #We construct a sql query to get the mailbox root based on the option.
+// FIXME where does $opt come from ??
 switch($opt){
     case "m":
         if (!filter_var($val,FILTER_VALIDATE_EMAIL)) {

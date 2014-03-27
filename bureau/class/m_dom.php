@@ -435,7 +435,7 @@ class m_dom {
     $this->lock();
 
     // function add_domain($domain,$dns,$noerase=0,$force=0,$isslave=0,$slavedom="") 
-    if (! $this->add_domain($domain, true, false, 1) ) {
+    if (! $this->add_domain($domain, true, false, true) ) {
       $err->raise('dom', "Error adding domain");
       return false;
     }
@@ -652,7 +652,7 @@ class m_dom {
    *  force ne devrait être utilisé que par le super-admin.
    $ @return boolean Retourne FALSE si une erreur s'est produite, TRUE sinon.
   */
-  function add_domain($domain,$dns,$noerase=0,$force=0,$isslave=0,$slavedom="") {
+  function add_domain($domain,$dns,$noerase=false,$force=false,$isslave=false,$slavedom="") {
     global $db,$err,$quota,$classes,$L_MX,$L_FQDN,$tld,$cuid,$bro,$hooks;
     $err->log("dom","add_domain",$domain);
 
@@ -1608,6 +1608,10 @@ class m_dom {
   return $res;
   }
 
+  /**
+   * 
+   * @return array
+   */
   function get_domain_all_summary() {
     global $db,$err;
     $res=array();

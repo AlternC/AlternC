@@ -99,12 +99,12 @@ class m_bro {
    * @param string $dir 
    * @global    m_mem   $mem
    * @param     string  $dir    Dossier absolu que l'on souhaite vérifier
-   * @param     integer $strip
+   * @param     boolean $strip
    * @return    false|string  Retourne le nom du dossier vrifi, relatif au
    * dossier de l'utilisateur courant, ventuellement corrig.
    * ou FALSE si le dossier n'est pas dans le dossier de l'utilisateur.
    */
-  function convertabsolute($dir,$strip=1) {
+  function convertabsolute($dir,$strip=true) {
     global $mem;
     $root=$this->get_user_root($mem->user["login"]);
     // Sauvegarde du chemin de base.

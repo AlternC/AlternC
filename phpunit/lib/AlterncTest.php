@@ -23,6 +23,9 @@ abstract class AlterncTest extends PHPUnit_Extensions_Database_TestCase
      */
     public function loadDataSet($fileList)
     {
+        if (empty($fileList)) {
+            throw new \Exception("No files specified");
+        }
         if( !is_array($fileList)){
             $fileList       = array($fileList);
         }

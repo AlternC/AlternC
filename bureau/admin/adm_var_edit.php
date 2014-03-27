@@ -138,7 +138,7 @@ function var_input($infotype, $name, $value='') {
       break;
     case "boolean":
       echo "<input type='hidden' name='$name' value='0' />"; // This way, there is allways something send, even if checkbox is unchecked
-      echo "<input type='checkbox' id='add_$id' name='$name' value='1' ";cbox($value);echo " />"; 
+      echo "<input type='checkbox' id='add_$id' name='$name' value='1' ";cbox((bool)$value);echo " />"; 
       break;
     default:
       echo "WTF ? Dunno what to do with a ".$infotype['type'];

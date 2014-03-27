@@ -51,7 +51,7 @@ if ($newlogin) {
 	// Add an account
 	if ($mail->add_slave_account($newlogin,$newpass)) { 
 		$error=_("The requested account address has been created. It is now allowed.");
-		$newlogin=false;$newpass=false;
+		$newlogin='';$newpass='';
 	}
 }
 
