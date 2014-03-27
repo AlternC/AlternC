@@ -936,6 +936,7 @@ class m_dom {
                 $egal = "domain = ";
                 break;
         }
+        $serveurList = array();
         // pour ajouter un nouveau TLD, utiliser le code ci-dessous.
         //  echo "serveur : $serveur <br />";
         if (($fp = @fsockopen($serveur, 43)) > 0) {
@@ -958,7 +959,7 @@ class m_dom {
                             $found = true;
                             $tmp = strtolower(str_replace(chr(10), "", str_replace(chr(13), "", str_replace(" ", "", str_replace("Name Server:", "", $ligne)))));
                             if ($tmp)
-                                $server[] = $tmp;
+                                $serveurList[] = $tmp;
                         }
                         break;
                     case "cx":
@@ -966,7 +967,7 @@ class m_dom {
                         if ($ligne == "" && $state == 1)
                             $state = 2;
                         if ($state == 1)
-                            $server[] = strtolower($ligne);
+                            $serveurList[] = strtolower($ligne);
                         if ($ligne == "Nameservers:" && $state == 0) {
                             $state = 1;
                             $found = true;
@@ -978,7 +979,7 @@ class m_dom {
                         if ($found)
                             $tmp = trim($ligne);
                         if ($tmp)
-                            $server[] = $tmp;
+                            $serveurList[] = $tmp;
                         if ($ligne == "Nameservers:") {
                             $state = 1;
                             $found = true;
@@ -991,7 +992,7 @@ class m_dom {
                             $tmp = strtolower(preg_replace('/Name Server: ([^ ]+)\..$/', "\\1", $ligne));
                             $tmp = preg_replace('/[^-_a-z0-9\.]/', '', $tmp);
                             if ($tmp)
-                                $server[] = $tmp;
+                                $serveurList[] = $tmp;
                         }
                         break;
                     case "it":
@@ -999,7 +1000,7 @@ class m_dom {
                             $found = true;
                             $tmp = strtolower(preg_replace("/nserver:\s*[^ ]*\s*([^\s]*)$/", "\\1", $ligne));
                             if ($tmp)
-                                $server[] = $tmp;
+                                $serveurList[] = $tmp;
                         }
                         break;
                     case "fr":
@@ -1008,7 +1009,7 @@ class m_dom {
                             $found = true;
                             $tmp = strtolower(preg_replace("#nserver:\s*([^\s]*)\s*.*$#", "\\1", $ligne));
                             if ($tmp)
-                                $server[] = $tmp;
+                                $serveurList[] = $tmp;
                         }
                         break;
                     case "ca":
@@ -1020,14 +1021,14 @@ class m_dom {
                             if (preg_match('#^[^%]#', $ligne) && $ligne = preg_replace('#[[:space:]]#', "", $ligne)) {
                                 // first non-whitespace line is considered to be the nameservers themselves
                                 $found = true;
-                                $server[] = $ligne;
+                                $serveurList[] = $ligne;
                             }
                         }
                         break;
                     case "coop":
                         if (preg_match('#Host Name:\s*([^\s]+)#', $ligne, $matches)) {
                             $found = true;
-                            $server[] = $matches[1];
+                            $serveurList[] = $matches[1];
                         }
                 } // switch
             } // while
@@ -1038,7 +1039,7 @@ class m_dom {
         }
 
         if ($found) {
-            return $server;
+            return $serveurList;
         } else {
             $err->raise("dom", _("The domain cannot be found in the Whois database"));
             return false;
