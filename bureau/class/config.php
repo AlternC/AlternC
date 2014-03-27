@@ -214,4 +214,12 @@ if ($oldid && $oldid!=$cuid) {
   $isinvited=true;
 }
 
+
+// Init some vars
+variable_get('hosting_tld', '','This is a FQDN that designates the main hostname of the service. For example, hosting_tld determines in what TLD the "free" user domain is created. If this is set to "example.com", a checkbox will appear in the user creation dialog requesting the creator if he wants to create the domain "username.example.com".', array(array('desc'=>'Wanted FQDN','type'=>'string')));
+
+variable_get('subadmin_restriction', '0', "This variable set the way the account list works for accounts other than 'admin' (2000). 0 (default) = admin other than admin/2000 can see their own account, but not the other one 1 = admin other than admin/2000 can see any account by clicking the ''show all accounts'' link.", array(array('desc'=>'Shared access activated?','type'=>'boolean')));
+
+variable_get('auth_ip_ftp_default_yes', '1', "This variable set if you want to allow all IP address to access FTP by default. If the user start to define some IP or subnet in the allow list, only those he defined will be allowed.", array(array('desc'=>'Allow by default?','type'=>'boolean')));
+
 ?>

@@ -398,17 +398,6 @@ CREATE TABLE `variable` (
   KEY `name` (`name`)
 ) ENGINE=MyISAM;
 
--- hosting_tld: only used, for now, in bureau/admin/adm_*add.php
-INSERT IGNORE INTO `variable` (name, value, comment) VALUES ('hosting_tld', 0,
-'This is a FQDN that designates the main hostname of the service.
-
-For example, hosting_tld determines in what TLD the "free" user domain
-is created. If this is set to "example.com", a checkbox will appear in
-the user creation dialog requesting the creator if he wants to create
-the domain "username.example.com".
-
-If this is set to 0 or a "false" string, it will be ignored.');
-
 --
 -- Table structure for table `dbusers`
 --
@@ -470,13 +459,6 @@ CREATE TABLE IF NOT EXISTS `policy` (
   `allowlogin` tinyint(3) unsigned NOT NULL,
   PRIMARY KEY  (`name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='The password policies for services';
-
-
-INSERT IGNORE INTO `variable` (`name` ,`value` ,`comment`)
-VALUES (
-'subadmin_restriction', '', 
-'This variable set the way the account list works for accounts other than "admin" (2000). 0 (default) = admin other than admin/2000 can see their own account, but not the other one 1 = admin other than admin/2000 can see any account by clicking the ''show all accounts'' link. '
-);
 
 -- Domains type
 CREATE TABLE IF NOT EXISTS `domaines_type` (
@@ -584,13 +566,6 @@ CREATE TABLE IF NOT EXISTS `authorised_ip_affected` (
   `parameters` varchar(30) default '',
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM COMMENT='Table with list of protocol <-> authorised ip and subnet';
-
-INSERT IGNORE INTO `variable` (`name` ,`value` ,`comment`)
-VALUES (
-'auth_ip_ftp_default_yes', '1',
-'This variable set if you want to allow all IP address to access FTP by default. If the user start to define some IP or subnet in the allow list, only those he defined will be allowed. This variable can take two value : 0 or 1.'
-);
-
 
 --
 -- Structure de la table `cron`
@@ -764,7 +739,6 @@ CREATE TABLE IF NOT EXISTS `actions` (
  PRIMARY KEY ( `id` )
 ) ENGINE=MyISAM COMMENT = 'generic actions';
 
-
 -- version control now in MySQL
 CREATE TABLE IF NOT EXISTS `alternc_status` (
   `name` varchar(48) NOT NULL DEFAULT '',
@@ -774,4 +748,3 @@ CREATE TABLE IF NOT EXISTS `alternc_status` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 INSERT INTO alternc_status SET name='alternc_version',value='3.1.0~b.php';
-
