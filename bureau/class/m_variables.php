@@ -169,7 +169,7 @@ class m_variables {
 
     // Replace needed vars
     foreach ($variables as $vv => $hh) {
-      if (!isset($hh['value'])) {
+      if (!isset($hh['value']) || !empty($hh['value'])) {
         continue;
       }
       $variables[$vv]['value'] = strtr($hh['value'], $this->replace_array );
