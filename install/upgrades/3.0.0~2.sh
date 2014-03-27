@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Upgrading script to AlternC 1.1
 
 CONFIG_FILE="/etc/alternc/local.sh"

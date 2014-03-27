@@ -68,7 +68,7 @@ case "$1" in
     # build local.sh if it does not exist
     if [ ! -f $CONFIGFILE ]; then
         cat > $CONFIGFILE <<EOF
-#!/bin/sh
+#!/bin/bash
 #
 # AlternC - Web Hosting System - Configuration
 # This file will be modified on package configuration

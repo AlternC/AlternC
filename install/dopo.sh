@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 #### THIS SCRIPT IS NO LONGER USED
 #### AND HAVE NO EFFECT!

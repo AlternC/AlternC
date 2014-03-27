@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 VERSION="1.0"
 # We launch this script inside the home directory of the "nigthly build user"

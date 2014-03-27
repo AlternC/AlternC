@@ -72,7 +72,7 @@ for file in $( ls $extensions | sort -n ) ; do
 		  	  php -q $file
 			  ;;
 		      sh)
-		  	  sh $file
+		  	  bash $file
 			  ;;
                       *)
 			  echo "skipping $file, not recognized !"
