@@ -1,6 +1,6 @@
 membres:
   - 
-    uid : 0
+    uid : 2000
     login : admin
     pass : admin
     enabled : 1
@@ -11,6 +11,7 @@ membres:
     lastfail : 0
     lastip : 127.0.0.1
   - 
+    uid : 2001
     login : phpunit
     pass : phpunit
     enabled : 1

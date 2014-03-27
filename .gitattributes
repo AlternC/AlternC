@@ -605,6 +605,7 @@ nightlybuild/READMEFIRST -text
 nightlybuild/build.sh -text
 nightlybuild/mchroot.sh -text
 nightlybuild/nightly.key -text
+phpunit/tests/_datasets/domaines.yml -text
 po/alternc-admintools.pot -text
 po/fr/LC_MESSAGES/.svnignore -text
 po/fr/LC_MESSAGES/alternc-admintools.po -text
