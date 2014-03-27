@@ -669,6 +669,7 @@ ORDER BY
       $db->query("UPDATE mailbox SET quota=".intval($quotamb)." WHERE address_id=".$mail_id.";");
     }
 
+    $recipients=preg_replace('/[\r\t\s]/', "\n", $recipients); // Handle space AND new line
     $r=explode("\n",$recipients);
     $red="";
     foreach($r as $m) {
