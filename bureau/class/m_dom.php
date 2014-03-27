@@ -646,9 +646,9 @@ class m_dom {
    * appellée lors de l'installation d'un nouveau domaine.</p>
    *
    * @param string $dom nom fqdn du domaine à installer
-   * @param integer $dns 1 ou 0 pour héberger le DNS du domaine ou pas.
-   * @param integer $noerase 1 ou 0 pour rendre le domaine inamovible ou non
-   * @param integer $force 1 ou 0, si 1, n'effectue pas les tests de DNS.
+   * @param boolean $dns 1 ou 0 pour héberger le DNS du domaine ou pas.
+   * @param boolean $noerase 1 ou 0 pour rendre le domaine inamovible ou non
+   * @param boolean $force 1 ou 0, si 1, n'effectue pas les tests de DNS.
    *  force ne devrait être utilisé que par le super-admin.
    $ @return boolean Retourne FALSE si une erreur s'est produite, TRUE sinon.
   */
