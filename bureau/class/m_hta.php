@@ -215,7 +215,7 @@ class m_hta {
    * @param     boolean $skip   For testing purpose mainly, skips the full user path search
    * @return    boolean         TRUE if the folder has been unprotected, or FALSE if an error occurred
    */
-  function DelDir($dir,$skip = 0) {
+  function DelDir($dir,$skip = false) {
     global $mem,$bro,$err;
     $err->log("hta","deldir",$dir);
     $dir = $bro->convertabsolute($dir,$skip);
@@ -256,7 +256,6 @@ class m_hta {
         file_put_contents($htaccess_file, implode("\n",$fileLines));
     }
     $htpasswd_file              = "$dir/.htpasswd";
-    $perms                      = substr(sprintf('%o', fileperms($dir)), -4);
     if( ! is_writable($htpasswd_file)){
         $err->raise("hta",printf(_("I cannot read the file '%s'"),$htpasswd_file));
     }

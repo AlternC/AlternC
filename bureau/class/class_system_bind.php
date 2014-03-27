@@ -143,7 +143,7 @@ class system_bind {
    * 
    * @global m_dom $dom
    * @param string $domain
-   * @return array
+   * @return array Retourne un tableau 
    */
   function get_domain_summary($domain=false) {
     global $dom;
