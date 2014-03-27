@@ -615,7 +615,6 @@ roundcube/class/m_roundcube.php -text
 roundcube/roundcube-install -text
 roundcube/roundcube_alternc_logo.png -text
 roundcube/templates/apache2/roundcube.conf -text
-roundcube/templates/logrotate.d/roundcube-core -text
 roundcube/templates/roundcube/main.inc.php -text
 roundcube/templates/roundcube/plugins/managesieve/config.inc.php -text
 roundcube/templates/roundcube/plugins/password/config.inc.php -text

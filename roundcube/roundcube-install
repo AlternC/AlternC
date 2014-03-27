@@ -28,7 +28,7 @@ then
 #    cp -f /etc/alternc/templates/roundcube/avelsieve-config.php /etc/alternc/templates/roundcube/apache.conf /etc/roundcube/
 #    cp -f /etc/alternc/templates/javascript-common/javascript-common.conf /etc/javascript-common/
 
-    LOGIN="2000_roundcube"
+    LOGIN="0000_roundcube"
     PASSWORD="`perl -e 'print map{("a".."z","A".."Z",0..9)[int(rand(62))]}(1..10)'`"
     DESKEY="`perl -e 'print map{("a".."z","A".."Z",0..9)[int(rand(62))]}(1..24)'`"
 
@@ -40,7 +40,6 @@ then
     # Configuration template location
     TEMPLATE_DIR="/etc/alternc/templates"
     CONFIG_FILES="etc/roundcube/main.inc.php etc/roundcube/plugins/password/config.inc.php etc/roundcube/plugins/managesieve/config.inc.php"
-    LOGROTATE_FILES="etc/logrotate.d/roundcube-core"
 
     cat > $SED_SCRIPT <<EOF
 s\\%%ALTERNC_LOC%%\\$ALTERNC_LOC\\;
@@ -61,14 +60,6 @@ EOF
     rm -f $SED_SCRIPT
 
     echo "    Done"
-
-    for file in $LOGROTATE_FILES; do
-        TEMPLATE="$TEMPLATE_DIR/${file##etc/}"
-        echo -n " $file"
-        if [ -f "$TEMPLATE" ]; then
-            cat $TEMPLATE > /$file
-        fi
-    done
 
     echo "    Done"
 
@@ -98,11 +89,4 @@ EOF
     echo "    Done"
     
 fi
-
-#This is necessary because upgrading roundcube from 7.1 to 7.2 changes this setting
-if [ "$1" = "end" ]; then
-  chown alternc-roundcube:root /etc/roundcube/main.inc.php
-fi
-
-
 
