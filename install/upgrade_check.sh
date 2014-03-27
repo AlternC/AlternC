@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/bash -e
 
 # this script will look for upgrade scripts in
 # /usr/share/alternc/install/upgrades and execute them based on the
