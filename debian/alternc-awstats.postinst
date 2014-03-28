@@ -68,14 +68,15 @@ EOF
     # Update rights on previous user's awstats configuration files
     chown alterncpanel:root /etc/awstats/awstats.*.conf > /dev/null 2>&1 || true
 
-    echo "**********************************************"
-    echo "*              ALTERNC-AWSTATS               *"
-    echo "*  Add an autorized user called 'admin' in   *"
-    echo "*   statistics section, so he will access    *"
+    echo -e "\033[31m**********************************************"
+    echo "*  ALTERNC-AWSTATS   ACTION REQUESTED        *"
+    echo "* If you add an autorized user called 'admin'*"
+    echo "* in statistics section, he will access      *"
     echo "*        every stats of every users          *"
     echo "*                                            *"
     echo "* Please run alternc.install to fully deploy *"
     echo "**********************************************"
+    echo -e "\033[0m"
     ;;
 
   abort-upgrade|abort-remove|abort-deconfigure)

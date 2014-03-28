@@ -254,8 +254,6 @@ EOF
     # important: postinst freezes without that:
     db_stop
 
-    # instead of preinst, we launch it here : 
-    /usr/lib/alternc/fixperms.sh
     echo -e "\033[31m**********************************************"
     echo "*                                            *"
     echo "*   ALTERNC          ACTION REQUESTED        *"

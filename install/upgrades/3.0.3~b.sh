@@ -12,7 +12,7 @@ if [ ! -r "$CONFIG_FILE" ]; then
 fi
 
 if [ `id -u` -ne 0 ]; then
-    echo "fixperms.sh must be launched as root"
+    echo "3.0.3~b.sh must be launched as root"
     exit 1
 fi
 

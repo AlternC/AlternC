@@ -12,7 +12,7 @@ if [ ! -r "$CONFIG_FILE" ]; then
 fi
 
 if [ `id -u` -ne 0 ]; then
-    echo "fixperms.sh must be launched as root"
+    echo "3.0.0~2.sh must be launched as root"
     exit 1
 fi
 
@@ -39,7 +39,7 @@ mysql --defaults-file=/etc/alternc/my.cnf --skip-column-names -B -e "$query" |fi
 ## This part does the migration from Courier IMAP and POP3, preserving IMAP UIDs and POP3 UIDLs. ##
 ## It reads Courier's 'courierimapuiddb' and 'courierpop3dsizelist' files and produces 'dovecot-uidlist' file from it. ##
 # We warn user it will take some time to migrate all indexes
-echo "                                                "
+echo -e "\033[31m"
 echo "################################################"
 echo "# /!\ CONVERTING COURIER INDEXES TO DOVECOT /!\ "
 echo "# /!\        THIS MAY TAKE A WHILE !        /!\ "
@@ -54,7 +54,8 @@ echo "#                                               "
 echo "# Add \"--overwrite\" option if you want to     "
 echo "# overwrite ALL 'dovecot-uidlist' indexes       "
 echo "################################################"
-echo "                                                "
+echo -e "\033[0m"
+
 
 # Stoping dovecot service
 invoke-rc.d dovecot stop || true
