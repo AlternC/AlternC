@@ -113,6 +113,121 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
+	<td>link=test1.vm1.alternc.eu</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//a[contains(text(),'Delete')])[4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=p.error</td>
+	<td>WARNING : Confirm the deletion of the subdomain :</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=confirm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Click here to continue</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=tr.lst1 &gt; td.center &gt; div.ina &gt; a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=r_vhost</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=t_vhost</td>
+	<td>/test1vm1alternceu/</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=FTP accounts list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#content &gt; h3</td>
+	<td>FTP accounts list</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=span.inb &gt; a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#content &gt; h3</td>
+	<td>Create a new ftp account</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=dir</td>
+	<td>/</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=pass</td>
+	<td>poipoi</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=passconf</td>
+	<td>poipoi</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=p.error</td>
+	<td>The FTP account has been successfully created</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Databases</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#content &gt; p</td>
+	<td>Your haven't created your main database yet, please enter a password to create it.</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=pass</td>
+	<td>poipoi</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=p.error</td>
+	<td>Your database has been successfully created</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
 	<td>link=test1.vm1.alternc.eu (1)</td>
 	<td></td>
 </tr>
@@ -282,11 +397,70 @@
 	<td>4 Bytes</td>
 </tr>
 <tr>
-	<td>break</td>
-	<td></td>
+	<td>clickAndWait</td>
+	<td>css=a &gt; span</td>
 	<td></td>
 </tr>
-
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Quotas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=q_mailman</td>
+	<td>10</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=p.error</td>
+	<td>The quotas has been successfully edited</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Mailing lists</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#content &gt; h3</td>
+	<td>Mailing lists</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Create a list</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=login</td>
+	<td>newsletter</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=owner</td>
+	<td>user1@test1.vm1.alternc.eu</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=pass</td>
+	<td>poipoi</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=pass2</td>
+	<td>poipoi</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
 </tbody></table>
 </body>
 </html>

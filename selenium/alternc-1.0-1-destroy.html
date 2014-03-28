@@ -197,11 +197,50 @@
 	<td>The requested TLD has been deleted</td>
 </tr>
 <tr>
-	<td>break</td>
-	<td></td>
+	<td>clickAndWait</td>
+	<td>link=FTP accounts list</td>
 	<td></td>
 </tr>
-
+<tr>
+	<td>click</td>
+	<td>//div[@id='content']/form/table/tbody/tr[2]/td/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Databases</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=del_</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=sub</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=p.error</td>
+	<td>WARNING<br />Confirm the deletion of the following SQL databases<br /> This will delete all the tables currently in those db.</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=sub</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=p.error</td>
+	<td>The database admin__ has been successfully deleted</td>
+</tr>
 </tbody></table>
 </body>
 </html>

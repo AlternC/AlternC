@@ -1,6 +1,4 @@
-#!/bin/bash 
-
-set -e
+#!/bin/bash -e
 
 # Source debconf library.
 . /usr/share/debconf/confmodule
