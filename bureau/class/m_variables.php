@@ -37,6 +37,7 @@ class m_variables {
   var $strata_order = array('DEFAULT','GLOBAL','FQDN_CREATOR','FQDN','CREATOR','MEMBER','DOMAIN');
   var $cache_variable_list = false;
   var $replace_array = array();
+  var $cache_conf = array();
 
   /**
    * 
@@ -169,7 +170,7 @@ class m_variables {
 
     // Replace needed vars
     foreach ($variables as $vv => $hh) {
-      if (!isset($hh['value']) || !empty($hh['value'])) {
+      if (!isset($hh['value']) || empty($hh['value'])) {
         continue;
       }
       $variables[$vv]['value'] = strtr($hh['value'], $this->replace_array );
@@ -178,22 +179,20 @@ class m_variables {
     if ($var && isset($variables[$var])) {
       return $variables[$var];
     } else {
-       return $variables;
+      return $variables;
     }
   }
 
   /**
-   * Initialize the global $conf array if necessary
+   * Initialize the global conf
    *
-   * @global $conf the global conf array
    * @uses variable_init()
    * @param boolean $force
    */
   function variable_init_maybe($force=false) {
-    global $conf;
-    if ($force || !isset($conf)) {
+    if ($force || empty($this->cache_conf) ) {
       $this->cache_variable_list = false;
-      $conf = $this->variable_init();
+      $this->cache_conf = $this->variable_init();
     }
   }
 
@@ -209,19 +208,17 @@ class m_variables {
    *   and createit_comment value as comment
    * @return mixed
    *   The value of the variable.
-   * @global array $conf
-   *   A cache of the configuration.
    */
   function variable_get($name, $default = null, $createit_comment = null, $type=null) {
-    global $conf;
 
     $this->variable_init_maybe();
 
-    if (isset($conf[$name])) {
-      return $conf[$name]['value'];
+    if (isset($this->cache_conf[$name])) {
+      return $this->cache_conf[$name]['value'];
     } elseif (!is_null($createit_comment)) {
       $this->variable_update_or_create($name, $default, 'DEFAULT', 'null', 'null', $createit_comment, $type);
     }
+
     return $default;
   }
 
@@ -256,6 +253,7 @@ class m_variables {
       $sql="UPDATE variable SET value='".mysql_real_escape_string($var_value)."' WHERE id = ".intval($var_id);
     } else {
       if ( empty($strata) ) {
+        $this->variable_init_maybe(true);
         $err->raise('variables', _("Err: Missing strata when creating var"));
         return false;
       }
@@ -412,7 +410,6 @@ class m_variables {
   function variables_list() {
     global $db;
     if ( ! $this->cache_variable_list ) {
-
       $result = $db->query('SELECT * FROM `variable`');
 
       $arr_var=array();

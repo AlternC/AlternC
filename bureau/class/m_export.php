@@ -11,8 +11,8 @@ Class m_export {
 
     function export_conf(){
         global $hooks;
-        $conf=$hooks->invoke('alternc_export_conf');
-        return $conf;
+        $config=$hooks->invoke('alternc_export_conf');
+        return $config;
     }
 
 /** le repertoire de base est passé en paramettre puis en construit une arborescence de la forme
