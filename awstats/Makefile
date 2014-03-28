@@ -28,5 +28,6 @@ install:
 	install -m 0644 -g 1999 -o root awstats.alternc.generic.conf $(DESTDIR)/etc/alternc/
 	install -m 0644 -g 1999 -o root bureau/class/m_aws.php $(DESTDIR)/usr/share/alternc/panel/class/
 	install -m 0644 -g 1999 -o root bureau/admin/* $(DESTDIR)/usr/share/alternc/panel/admin/
+	install -m 750 awstats-install $(DESTDIR)/usr/lib/alternc/install.d/
 
 	#install -m 0444 lintian-override $(DESTDIR)/usr/share/lintian/overrides/alternc-awstats

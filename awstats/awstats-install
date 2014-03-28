@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # ----------------------------------------------------------------------
 # AlternC - Web Hosting System
 # Copyright (C) 2000-2012 by the AlternC Development Team.
@@ -17,18 +19,14 @@
 #
 # To read the license please visit http://www.gnu.org/copyleft/gpl.html
 # ----------------------------------------------------------------------
-# Purpose of file: Install the files of alternc-roundcube packages
+# Purpose of file: Install awstat conf files.
 # ----------------------------------------------------------------------
 
-install:
-	# alternc-roundcube files install
-	install -m 644 templates/roundcube/main.inc.php $(DESTDIR)/etc/alternc/templates/roundcube/
-	install -m 644 templates/roundcube/plugins/password/config.inc.php $(DESTDIR)/etc/alternc/templates/roundcube/plugins/password/
-	install -m 644 templates/roundcube/plugins/managesieve/config.inc.php $(DESTDIR)/etc/alternc/templates/roundcube/plugins/managesieve/
-	install -m 644 roundcube_alternc_logo.png $(DESTDIR)/usr/share/roundcube/skins/default/images/
-	install -m 750 awstats.cache.php $(DESTDIR)/usr/lib/alternc/
-	install -m 750 roundcube-install $(DESTDIR)/usr/lib/alternc/install.d/
-	# domaintype template: 
-	install -m 644 templates/apache2/roundcube.conf $(DESTDIR)/etc/alternc/templates/apache2/
-	# Desktop files
-	install -o 1999 -g 1999 -m 644 class/m_roundcube.php $(DESTDIR)/usr/share/alternc/panel/class/
+if [ "$1" = "before-reload" ]
+then
+    if [ -f /usr/lib/alternc/awstats.cache.php ]
+        then
+        /usr/lib/alternc/awstats.cache.php
+    fi
+fi
+
