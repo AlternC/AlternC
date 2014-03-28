@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 # ----------------------------------------------------------------------
 # AlternC - Web Hosting System
@@ -27,8 +27,6 @@ if [ `id -u` -ne 0 ]; then
     echo "must be launched as root"
     exit 1
 fi
-
-set -e 
 
 for i in $*; do
     case "$i" in
@@ -114,6 +112,8 @@ fi
 
 # Upgrade the DATA and DB SCHEMA
 /usr/share/alternc/install/upgrade_check.sh
+# Launch upgrade of alternc modules 
+run-parts --arg=upgrade /usr/lib/alternc/install.d
 
 
 #######################################################################
@@ -340,6 +340,26 @@ if [ -x /usr/sbin/apache2 ]; then
     SERVICES="$SERVICES $s"
 fi
 
+# Manage sudoers.d include appearing in Squeeze:
+# if the "includedir" is not here, we add it ONLY IF visudo -c is happy.
+if ! grep -q "#includedir */etc/sudoers.d" /etc/sudoers ; then
+    if ! cat /etc/sudoers.d/* | visudo -c -f -  >/dev/null ; then
+	echo -e "\033[31m**********************************************"
+	echo "*                                            *"
+	echo "*   ALTERNC  ACTION REQUESTED                *"
+	echo "*                                            *"
+	echo "* SUDO is NOT configured properly            *"
+	echo "* check your files in /etc/sudoers.d !       *" 
+	echo "* then launch alternc.install again          *"
+	echo "*                                            *"
+	echo "**********************************************"
+	echo -e "\033[0m"
+	exit 1
+    else 
+	echo "#includedir */etc/sudoers.d" >>/etc/sudoers
+    fi
+fi
+
 # Copy postfix *_checks if they do not exist
 for file in body_checks header_checks; do
     if [ ! -e "/etc/postfix/$file" ]; then
@@ -355,12 +375,17 @@ fi
 
 if [ ! -f /etc/postfix/main.cf ]
 then
-    echo "****************************************"
-    echo "POSTFIX is NOT configured properly"
-    echo "please launch dpkg-reconfigure -plow postfix" 
-    echo "and choose 'Internet Site'"
-    echo "then launch alternc.install again"
-    echo "****************************************"
+    echo -e "\033[31m**********************************************"
+    echo "*                                            *"
+    echo "*   ALTERNC  ACTION REQUESTED                *"
+    echo "*                                            *"
+    echo "* POSTFIX is NOT configured properly         *"
+    echo "* launch dpkg-reconfigure -plow postfix      *" 
+    echo "* and choose 'Internet Site'                 *"
+    echo "* then launch alternc.install again          *"
+    echo "*                                            *"
+    echo "**********************************************"
+    echo -e "\033[0m"
     exit 1
 fi
 
@@ -381,13 +406,14 @@ grep -v '^\ *#' $postfix_conf |while read line ; do
      if [ -e $cert_file ];then
         postconf -e "$line"
      else
-        echo "****************************************"
-        echo "The certificate file : $cert_file does not exists"
-        echo "please go to https://alternc.org/wiki/SSL to get information on how to create a certificate"
-        echo "Then edit the file /etc/alternc/postfix/postfix.cf to add"
-        echo "the cert file path name to the key :smtpd_tls_cert_file"
-        echo "Finally relaunch alternc.install"
-        echo "****************************************"
+        echo -e "\033[31m*****************************************************"
+        echo "* The certificate file : $cert_file does not exists *"
+	echo "* If you want to be able to use SSL/TLS             *"
+        echo "* please go to https://alternc.org/wiki/SSL         *"
+	echo "* to get information on how to create a certificate *"
+        echo "* Finally relaunch alternc.install                  *"
+        echo "*****************************************************"
+	echo -e "\033[0m"
      fi
   else
         postconf -e "$line"

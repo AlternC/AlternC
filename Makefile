@@ -44,6 +44,8 @@ install-common:
 	test -d $(DESTDIR)/etc || mkdir -p $(DESTDIR)/etc
 	cp -r etc/alternc $(DESTDIR)/etc
 	cp -r etc/incron.d $(DESTDIR)/etc
+	install -o root -g root -m 440 etc/sudoers.d/alternc $(DESTDIR)/etc/sudoers.d
+# SVN cleanup (bad if installing without DESTDIR, FIXME)
 	find $(DESTDIR)/etc/ -depth -type d -name ".svn" -exec rm {} -rf \;
 	chmod 755 $(DESTDIR)/etc/alternc etc/incron.d
 

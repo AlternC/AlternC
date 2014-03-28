@@ -1,3 +1,4 @@
+etc/sudoers.d
 etc/alternc
 etc/alternc/apache-panel.d
 etc/alternc/templates
