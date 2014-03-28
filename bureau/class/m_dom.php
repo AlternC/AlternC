@@ -180,6 +180,9 @@ class m_dom {
         return $r;
     }
 
+    /**
+     * @param integer $type
+     */
     function domains_type_target_values($type = null) {
         global $db, $err, $cuid;
         $err->log("dom", "domains_type_target_values");
@@ -825,6 +828,9 @@ class m_dom {
         }
     }
 
+    /**
+     * @param string $domain
+     */
     function domdefaultdir($domain) {
         global $bro, $cuid;
         $dest_root = $bro->get_userid_root($cuid);
@@ -1476,7 +1482,7 @@ class m_dom {
         $domaine = $this->get_domain_byid($dom_id);
         $d = $this->get_domain_all($domaine);
 
-        $j = $this->edit_domain($domaine, $d['dns'], $d['mail'], 0, $ttl);
+        $j = $this->edit_domain($domaine, $d['dns'], $d['mail'], false, $ttl);
         $this->unlock();
         return $j;
     }

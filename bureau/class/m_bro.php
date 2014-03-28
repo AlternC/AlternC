@@ -894,11 +894,10 @@ class m_bro {
   /**
    * Return a HTML snippet representing an extraction function only if the mimetype of $name is supported
    * 
-   * @param     string  $dir
    * @param     string  $name
    * @return    boolean
    */
-  function is_extractable($dir,$name) {
+  function is_extractable($name) {
     if ($parts = explode(".", $name)) {
       $ext                              = array_pop($parts);
       switch ($ext) {
@@ -929,10 +928,10 @@ class m_bro {
    * @param type $name
    * @return boolean
    */
-  function is_sqlfile($dir,$name) {
+  function is_sqlfile($name) {
     if ($parts = explode(".", $name)) {
-      $ext                              = array_pop($parts);
-      $ext2                             = array_pop($parts) . '.'.$ext;
+      $ext  = array_pop($parts);
+      $ext2 = array_pop($parts) . '.'.$ext;
       if ( $ext == 'sql' or $ext2 == 'sql.gz') return true;
     }
     return false;

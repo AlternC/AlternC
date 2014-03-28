@@ -209,6 +209,9 @@ class m_mem {
     return md5("$i--".$db->f('pass'));
   }
 
+  /**
+   * @param boolean $t
+  */
   function authip_tokencheck($t) {
     if ($t==$this->authip_token() || $t==$this->authip_token(true) ) return true;
     return false;
@@ -234,7 +237,7 @@ class m_mem {
    * et AVANT d'émettre des données. (un cookie peut être envoyé)
    * @global string $session Le cookie de session eventuel
    * @global string $username/password le login/pass de l'utilisateur
-   * @return TRUE si la session est correcte, FALSE sinon.
+   * @return boolean TRUE si la session est correcte, FALSE sinon.
    */
   function checkid() {
     global $db,$err,$cuid,$restrictip,$authip;
@@ -310,7 +313,7 @@ class m_mem {
 
   /* ----------------------------------------------------------------- */
   /** Retourne a l'identite d'origine de l'utilisateur apres su.
-   * @return TRUE si la session est correcte, FALSE sinon.
+   * @return boolean TRUE si la session est correcte, FALSE sinon.
    */
   function unsu() {
     global $cuid,$mysql;
@@ -524,7 +527,7 @@ Cordially.
      * @param string $COOKIE Cookie envoyé par mail
      * @param string $KEY clé affichée à l'écran
      * @param integer $uid Utilisateur concerné (on est hors session)
-     * @return TRUE si le mail a bien été modifié, FALSE sinon
+     * @return boolean TRUE si le mail a bien été modifié, FALSE sinon
      */
     function ChangeMail2($COOKIE,$KEY,$uid) {
       global $err,$db,$L_HOSTING,$L_FQDN;
@@ -567,7 +570,7 @@ Cordially.
     /* ----------------------------------------------------------------- */
     /** Affiche (echo) l'aide contextuelle
      * @param integer $file Numéro de fichier d'aide à afficher.
-     * @return TRUE si l'aide contextuelle a été trouvée, FALSE sinon
+     * @return boolean TRUE si l'aide contextuelle a été trouvée, FALSE sinon
      */
   function show_help($file,$force=false) {
     global $err;
@@ -586,6 +589,9 @@ Cordially.
     }
   }
 
+  /**
+   * @param integer $uid
+  */
   function get_creator_by_uid($uid) {
     global $db,$err;
     $err->log("dom","get_creator_by_uid");
