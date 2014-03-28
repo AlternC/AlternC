@@ -1,11 +1,14 @@
 Template: alternc/acluninstalled
-Type: note
+Type: error
 _Description: AlternC need ACL on filesystem
  AlternC can't work without ACL activated on its filesystem.
  ACL are currently not enabled.
  .
  Also, you need to activate group quota (grpquota)
  to be able to use disk quota (but that's not mandatory).
+ .
+ This is a fatal error and will cause the package installation
+ to fail.
 
 Template: alternc/quotauninstalled
 Type: note
@@ -238,11 +241,10 @@ _Description: Use locally found MySQL server?
 Template: alternc/use_remote_mysql
 Type: boolean
 _Description: Use a remote MySQL server?
- No local Mysql server was found.
  Please confirm you want to use a remote Mysql Server.
  If not, AlternC cannot be installed.
 
-Template: alternc/remote_mysql_error
+Template: alternc/retry_remote_mysql
 Type: boolean
 _Description: MySQL connection error. Try again?
  Remote connection to the MySQL server failed.
@@ -255,3 +257,10 @@ _Description: Private IP detected, use it anyway?
  this is an expected situation, since the server might not be reachable
  from outside your network.
 
+Template: alternc/remote_mysql_error
+Type: error
+_Description: Remote mysql: connection error
+ Connection to the remote MySQL server failed.
+ .
+ This is a fatal error and will cause the package installation
+ to fail.
