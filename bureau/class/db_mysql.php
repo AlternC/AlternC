@@ -91,13 +91,13 @@ class DB_Sql {
     /* establish connection, select database */
     if ( 0 == $this->Link_ID ) {
     
-      $this->Link_ID=mysqli_connect("p:$Host", $User, $Password);
+      $this->Link_ID=mysql_pconnect($Host, $User, $Password);
       if (!$this->Link_ID) {
         $this->halt("pconnect($Host, $User, \$Password) failed.");
         return 0;
       }
 
-      if (!@mysqli_select_db($Database,$this->Link_ID)) {
+      if (!@mysql_select_db($Database,$this->Link_ID)) {
         $this->halt("cannot use database ".$this->Database);
         return 0;
       }
@@ -105,9 +105,9 @@ class DB_Sql {
 
     //persistent connection don't conserve database selection
     //if needed do a correct database selection
-    $db_connected = @mysqli_fetch_array(@mysqli_query("SELECT DATABASE();",$this->Link_ID));
+    $db_connected = @mysql_fetch_array(@mysql_query("SELECT DATABASE();",$this->Link_ID));
     if ($db_connected[0] != $this->Database)
-      mysqli_select_db($Database,$this->Link_ID);
+      mysql_select_db($Database,$this->Link_ID);
     
     return $this->Link_ID;
   }
@@ -118,7 +118,7 @@ class DB_Sql {
   * This function discards the last query result.
   */
   function free() {
-      @mysqli_free_result($this->Query_ID);
+      @mysql_free_result($this->Query_ID);
       $this->Query_ID = 0;
   }
 
@@ -155,11 +155,11 @@ class DB_Sql {
       printf("Debug: query = %s<br />\n", $Query_String);
 
     $debug_chrono_start = microtime(true);
-    $this->Query_ID = @mysqli_query($Query_String,$this->Link_ID);
+    $this->Query_ID = @mysql_query($Query_String,$this->Link_ID);
     $debug_chrono_start = (microtime(true) - $debug_chrono_start)*1000;
     $this->Row   = 0;
-    $this->Errno = mysqli_errno();
-    $this->Error = mysqli_error();
+    $this->Errno = mysql_errno();
+    $this->Error = mysql_error();
     if( 0 != $this->Errno ){
         if( defined("THROW_EXCEPTIONS") && THROW_EXCEPTIONS ){
             throw new \Exception("Mysql query failed : $this->Error");
@@ -195,10 +195,10 @@ class DB_Sql {
       return 0;
     }
 
-    $this->Record = @mysqli_fetch_array($this->Query_ID);
+    $this->Record = @mysql_fetch_array($this->Query_ID);
     $this->Row   += 1;
-    $this->Errno  = mysqli_errno();
-    $this->Error  = mysqli_error();
+    $this->Errno  = mysql_errno();
+    $this->Error  = mysql_error();
 
     $stat = is_array($this->Record);
     if (!$stat && $this->Auto_Free) {
@@ -213,7 +213,7 @@ class DB_Sql {
   */
 
   function seek($pos = 0) {
-    $status = @mysqli_data_seek($this->Query_ID, $pos);
+    $status = @mysql_data_seek($this->Query_ID, $pos);
     if ($status)
       $this->Row = $pos;
     else {
@@ -223,7 +223,7 @@ class DB_Sql {
        * but do not consider this documented or even
        * desireable behaviour.
        */
-      @mysqli_data_seek($this->Query_ID, $this->num_rows());
+      @mysql_data_seek($this->Query_ID, $this->num_rows());
       $this->Row = $this->num_rows;
       return 0;
     }
@@ -248,7 +248,7 @@ class DB_Sql {
     } else {
       $query.="$table $mode";
     }
-    $res = @mysqli_query($query, $this->Link_ID);
+    $res = @mysql_query($query, $this->Link_ID);
     if (!$res) {
       $this->halt("lock($table, $mode) failed.");
       return 0;
@@ -259,7 +259,7 @@ class DB_Sql {
   function unlock() {
     $this->connect();
 
-    $res = @mysqli_query("unlock tables", $this->Link_ID);
+    $res = @mysql_query("unlock tables", $this->Link_ID);
     if (!$res) {
       $this->halt("unlock() failed.");
       return 0;
@@ -270,15 +270,15 @@ class DB_Sql {
 
   /* public: evaluate the result (size, width) */
   function affected_rows() {
-    return @mysqli_affected_rows($this->Link_ID);
+    return @mysql_affected_rows($this->Link_ID);
   }
 
   function num_rows() {
-    return @mysqli_num_rows($this->Query_ID);
+    return @mysql_num_rows($this->Query_ID);
   }
 
   function num_fields() {
-    return @mysqli_num_fields($this->Query_ID);
+    return @mysql_num_fields($this->Query_ID);
   }
 
   /* public: shorthand notation */
@@ -303,7 +303,7 @@ class DB_Sql {
   }
 
   function lastid() {
-  	return @mysqli_insert_id($this->Link_ID);
+  	return @mysql_insert_id($this->Link_ID);
   }
 
   /* public: sequence numbers */
@@ -315,8 +315,8 @@ class DB_Sql {
       $q  = sprintf("select nextid from %s where seq_name = '%s'",
                 $this->Seq_Table,
                 $seq_name);
-      $id  = @mysqli_query($q, $this->Link_ID);
-      $res = @mysqli_fetch_array($id);
+      $id  = @mysql_query($q, $this->Link_ID);
+      $res = @mysql_fetch_array($id);
       
       /* No current value, make one */
       if (!is_array($res)) {
@@ -325,7 +325,7 @@ class DB_Sql {
                  $this->Seq_Table,
                  $seq_name,
                  $currentid);
-        @mysqli_query($q, $this->Link_ID);
+        @mysql_query($q, $this->Link_ID);
       } else {
         $currentid = $res["nextid"];
       }
@@ -334,7 +334,7 @@ class DB_Sql {
                $this->Seq_Table,
                $nextid,
                $seq_name);
-      @mysqli_query($q, $this->Link_ID);
+      @mysql_query($q, $this->Link_ID);
       $this->unlock();
     } else {
       $this->halt("cannot lock ".$this->Seq_Table." - has it been created?");
@@ -411,7 +411,7 @@ class DB_Sql {
     }
 
     // free the result only if we were called on a table
-    if ($table) @mysqli_free_result($id);
+    if ($table) @mysql_free_result($id);
     return $res;
   }
 
@@ -457,8 +457,8 @@ class DB_Sql {
 /********************************************************************************************************/
   /* private: error handling */
   function halt($msg) {
-    $this->Error = @mysqli_error($this->Link_ID);
-    $this->Errno = @mysqli_errno($this->Link_ID);
+    $this->Error = @mysql_error($this->Link_ID);
+    $this->Errno = @mysql_errno($this->Link_ID);
     if ($this->Halt_On_Error == "no")
       return;
 
