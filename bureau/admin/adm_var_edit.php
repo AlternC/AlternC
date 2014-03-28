@@ -150,9 +150,12 @@ function edit_var($var_arr) {
   global $allvars;
   echo "<div id='edit_var_div_{$var_arr['id']}'><form method=post>";
   echo "<input type='hidden' name='var_id' value='";ehe($var_arr['id']);echo "'  />";
-  if (is_array( $allvars['DEFAULT'][null][$var_arr['name']]['type'] )) {
+  $infotype = $allvars['DEFAULT'][null][$var_arr['name']]['type'];
+
+  if (is_array( $infotype ) && ( isset($infotype['type']) && isset($infotype['desc']))) {
+    var_input($infotype, "var_value", $var_arr['value']);
+  } else if (is_array( $infotype )) {
     echo "<ul>";
-    $infotype = $allvars['DEFAULT'][null][$var_arr['name']]['type'];
     //foreach ($allvars['DEFAULT'][null][$var_arr['name']]['type'] as $kk => $vv) {
     foreach ($var_arr['value'] as $kk => $vv) {
       echo "<li>";
@@ -195,7 +198,9 @@ function add_var($stratatata, $stratatata_arr=null) {
     echo "</select> ";
   }
   $infotype = $allvars['DEFAULT'][null][$var]['type'];
-  if (is_array( $infotype )) {
+  if (is_array( $infotype ) && (isset($infotype['desc']) && isset($infotype['type'])) ) {
+        var_input($infotype, "var_value");
+  } else if (is_array( $infotype ) && ! (isset($infotype['desc']) && isset($infotype['type'])) ) {
     echo "<ul>";
     foreach ($allvars['DEFAULT'][null][$var]['type'] as $kk => $vv) {
       echo "<li>";

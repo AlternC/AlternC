@@ -38,7 +38,7 @@ if (file_exists("styles/style-custom.css") ) {
   echo '<link rel="stylesheet" href="styles/style-custom.css" type="text/css" />';
 }
 
-$favicon = variable_get('favicon', 'favicon.ico' ,'You can specify a favicon, for example /images/my_logo.ico', array(array('desc'=>'URL','type'=>'string')));
+$favicon = variable_get('favicon', 'favicon.ico' ,'You can specify a favicon, for example /images/my_logo.ico', array('desc'=>'URL','type'=>'string'));
 
 ?>
 

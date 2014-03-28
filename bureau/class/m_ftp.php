@@ -36,7 +36,7 @@ class m_ftp {
    */
   function m_ftp() {
     global $L_FQDN;
-    $this->srv_name = variable_get('ftp_human_name', '%%FQDN%%','Human name for FTP server', array(array('desc'=>'Name','type'=>'string')));
+    $this->srv_name = variable_get('ftp_human_name', '%%FQDN%%','Human name for FTP server', array('desc'=>'Name','type'=>'string'));
   }
 
 
