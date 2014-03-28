@@ -328,7 +328,7 @@ class DB_Sql {
                  $this->Seq_Table,
                  $seq_name,
                  $currentid);
-        $id = @mysql_query($q, $this->Link_ID);
+        @mysql_query($q, $this->Link_ID);
       } else {
         $currentid = $res["nextid"];
       }
@@ -337,7 +337,7 @@ class DB_Sql {
                $this->Seq_Table,
                $nextid,
                $seq_name);
-      $id = @mysql_query($q, $this->Link_ID);
+      @mysql_query($q, $this->Link_ID);
       $this->unlock();
     } else {
       $this->halt("cannot lock ".$this->Seq_Table." - has it been created?");
@@ -348,8 +348,6 @@ class DB_Sql {
 
   /* public: return table metadata */
   function metadata($table='',$full=false) {
-    $count = 0;
-    $id    = 0;
     $res   = array();
 
     /*

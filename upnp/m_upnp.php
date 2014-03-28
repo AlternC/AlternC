@@ -168,19 +168,21 @@ class m_upnp {
     $status=array(); $statusout=array(); $bad=false;
     unset($out);
     exec("upnpc -l 2>&1",$res,$out);
-    foreach($out as $line) {
-      // example line:  1 TCP   222->192.168.0.5:22   'libminiupnpc' ''
-      if (preg_match("#^ *([0-9]+) (TCP|UDP) *([0-9]+)\-\>([0-9\.]+):([0-9]+) *#",$line,$mat)) {
-	if ($mat[4]==$L_INTERNAL_IP) {
-	  $status[]=array("protocol" => $mat[2], "port" => $mat[3]);
-	} else {
-	  $statusout[]=array("protocol" => $mat[2], "port" => $mat[3], "ip" => $mat[4]);
-	}
-      }
-      if (preg_match("#No IGD UPnP Device found on the network#",$line)) {
-	$bad=true;
-      }
-    } // For each line in upnpc -l (check list)
+    if ( is_array($out) && !empty($out)) {
+      foreach($out as $line) {
+        // example line:  1 TCP   222->192.168.0.5:22   'libminiupnpc' ''
+        if (preg_match("#^ *([0-9]+) (TCP|UDP) *([0-9]+)\-\>([0-9\.]+):([0-9]+) *#",$line,$mat)) {
+  	if ($mat[4]==$L_INTERNAL_IP) {
+  	  $status[]=array("protocol" => $mat[2], "port" => $mat[3]);
+  	} else {
+  	  $statusout[]=array("protocol" => $mat[2], "port" => $mat[3], "ip" => $mat[4]);
+  	}
+        }
+        if (preg_match("#No IGD UPnP Device found on the network#",$line)) {
+  	$bad=true;
+        }
+      } // For each line in upnpc -l (check list)
+    }
 
     // No UPnP peripheral !! maybe you should not have installed AlternC-upnp altogether ? 
     if ($bad) {
