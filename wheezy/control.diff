@@ -1,24 +1,22 @@
-Index: ../debian/control
-===================================================================
---- ../debian/control	(révision 4414)
-+++ control	(copie de travail)
-@@ -10,8 +10,8 @@
+--- control.squeeze	2014-03-28 17:27:11.698414971 +0100
++++ control	2014-03-28 17:27:42.055068548 +0100
+@@ -9,7 +9,7 @@
  Package: alternc
  Architecture: all
  Pre-depends: debconf (>= 0.5.00) | debconf-2.0, bash (>= 4), acl
 -Depends: debianutils (>= 1.13.1), apache2-mpm-itk, libapache2-mod-php5, php5-mysql, phpmyadmin, postfix, proftpd-mod-mysql, proftpd-basic, bind9, wget, rsync, ca-certificates, locales, perl-suid | perl, postfix-mysql, wwwconfig-common, sasl2-bin, libsasl2-modules, php5-cli, lockfile-progs (>= 0.1.9), gettext (>= 0.10.40-5), sudo, adduser, mysql-client, dnsutils, dovecot-common (>=1:1.2.15), dovecot-common(<< 1:2.0), dovecot-imapd (>= 1:1.2.15), dovecot-pop3d (>= 1:1.2.15), vlogger, mailutils | mailx, incron, cron, opendkim, mysql-client(>= 5.0), ${misc:Depends}
--Recommends: mysql-server(>= 5.0), ntp, quota, unzip, bzip2
-+Depends: debianutils (>= 1.13.1), apache2-mpm-itk, libapache2-mod-php5, php5-mysql, phpmyadmin, postfix, proftpd-mod-mysql, proftpd-basic, bind9, wget, rsync, ca-certificates, locales, perl-suid | perl, postfix-mysql, wwwconfig-common, sasl2-bin, libsasl2-modules, php5-cli, lockfile-progs (>= 0.1.9), gettext (>= 0.10.40-5), sudo, adduser, mysql-client, dnsutils, dovecot-common (>=1:2.1.7), dovecot-imapd, dovecot-pop3d, dovecot-mysql, vlogger, mailutils | mailx, incron, cron, opendkim, opendkim-tools, ${misc:Depends}
-+Recommends: mysql-server(>= 5.0), ntp, quota, unzip, bzip2, dovecot-sieve, dovecot-managesieved
++Depends: debianutils (>= 1.13.1), apache2-mpm-itk, libapache2-mod-php5, php5-mysql, phpmyadmin, postfix, proftpd-mod-mysql, proftpd-basic, bind9, wget, rsync, ca-certificates, locales, perl-suid | perl, postfix-mysql, wwwconfig-common, sasl2-bin, libsasl2-modules, php5-cli, lockfile-progs (>= 0.1.9), gettext (>= 0.10.40-5), sudo, adduser, mysql-client, dnsutils, dovecot-common (>=1:2.1.7), dovecot-imapd, dovecot-pop3d, dovecot-mysql, vlogger, mailutils | mailx, incron, cron, opendkim, opendkim-tools, dovecot-sieve, dovecot-managesieved, ${misc:Depends}
+ Recommends: mysql-server(>= 5.0), ntp, quota, unzip, bzip2
  Conflicts: alternc-admintools, alternc-awstats (<< 1.0), alternc-webalizer (<= 0.9.4), alternc-mailman (<< 2.0), courier-authlib
  Provides: alternc-admintools
- Replaces: alternc-admintools
-@@ -39,7 +39,7 @@
+@@ -38,8 +38,8 @@
  Package: alternc-slave
  Architecture: all
  Pre-depends: debconf (>= 0.5.00) | debconf-2.0, acl
 -Depends: debianutils (>= 1.13.1), apache2-mpm-itk, libapache2-mod-php5, php5-mysql, phpmyadmin, postfix, proftpd-mod-mysql, proftpd-basic, postfix-tls, bind9, wget, rsync, ca-certificates, locales, perl-suid, perl, postfix-mysql, wwwconfig-common, sasl2-bin, libsasl2-modules, php5-cli, lockfile-progs (>= 0.1.9), gettext (>= 0.10.40-5), adduser, mysql-client, sudo, dovecot-common (>= 1:1.2.15), dovecot-imapd, dovecot-pop3d, vlogger, mailutils | mailx, incron, cron, opendkim, ${misc:Depends}
-+Depends: debianutils (>= 1.13.1), apache2-mpm-itk, libapache2-mod-php5, php5-mysql, phpmyadmin, postfix, proftpd-mod-mysql, proftpd-basic, postfix-tls, bind9, wget, rsync, ca-certificates, locales, perl-suid, perl, postfix-mysql, wwwconfig-common, sasl2-bin, libsasl2-modules, php5-cli, lockfile-progs (>= 0.1.9), gettext (>= 0.10.40-5), adduser, mysql-client, sudo, dovecot-common (>= 1:2.1.7), dovecot-imapd, dovecot-pop3d, dovecot-mysql, vlogger, mailutils | mailx, incron, cron, opendkim, opendkim-tools, ${misc:Depends}
- Recommends: dovecot-managesieved, dovecot-sieve, dovecot-mysql, quota
+-Recommends: dovecot-managesieved, dovecot-sieve, dovecot-mysql, quota
++Depends: debianutils (>= 1.13.1), apache2-mpm-itk, libapache2-mod-php5, php5-mysql, phpmyadmin, postfix, proftpd-mod-mysql, proftpd-basic, postfix-tls, bind9, wget, rsync, ca-certificates, locales, perl-suid, perl, postfix-mysql, wwwconfig-common, sasl2-bin, libsasl2-modules, php5-cli, lockfile-progs (>= 0.1.9), gettext (>= 0.10.40-5), adduser, mysql-client, sudo, dovecot-common (>= 1:2.1.7), dovecot-imapd, dovecot-pop3d, dovecot-mysql, vlogger, mailutils | mailx, incron, cron, opendkim, opendkim-tools, dovecot-managesieved, dovecot-sieve, dovecot-mysql, ${misc:Depends}
++Recommends: quota
  Conflicts: alternc-admintools, alternc-awstats (<= 0.3.2), alternc-webalizer (<= 0.9.4), alternc
  Provides: alternc
+ Replaces: alternc
