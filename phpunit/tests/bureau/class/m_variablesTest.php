@@ -62,8 +62,7 @@ class m_variablesTest extends AlterncTest
     public function testVariable_init_maybe()
     {
         $this->object->variable_init_maybe();
-        global $conf;
-        $this->assertTrue(is_array($conf));
+        $this->assertTrue( (is_array($this->object->cache_conf) && !empty($this->object->cache_conf)) );
     }
 
     /**
