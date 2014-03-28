@@ -1,4 +1,4 @@
-alternc (3.1) stable; urgency=low
+alternc (3.1.1) stable; urgency=low
 
   * feature: import of existing DNS zone
   * feature: display of current DNS zone in dom_edit
