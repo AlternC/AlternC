@@ -73,6 +73,22 @@ class m_variablesTest extends AlterncTest
     {
         $result                     = $this->object->variable_get("phpunit");
         $this->assertStringMatchesFormat("phpunit",$result);
+
+/*
+        // Check old way
+        $this->object->variable_get('phpunit1', 'toto','plop');
+        $result = $this->object->variable_get('phpunit1');
+        $this->assertSame("toto",$result);
+
+        // New way
+        $this->object->variable_get('phpunit2', 'here','comment', array('desc'=>'Want a string','type'=>'string'));
+        $result = $this->object->variable_get('phpunit2');
+        $this->assertSame("here",$result);
+
+        $this->object->variable_get('phpunit3', array("ns1"=>'ns1.tld',"ip"=>"1.2.3.4"),'comment', array("ns1"=>array('desc'=>'ns name','type'=>'string'),"ip"=>array("desc"=>"here an ip", "type"=>"ip")));
+        $result = $this->object->variable_get('phpunit2');
+        $this->assertSame(array('ns1'=>"ns1.tld", "ip"=>"1.2.3.4"),$result);
+*/
     }
 
     /**

@@ -137,6 +137,7 @@ class DB_system extends DB_Sql {
 // Creates database from schema 
 // *********************************************
 
+echo "*** In progress: importing mysql.sql\n";
 $queryList = array(
     "mysql -u $user --password='$password' -e 'DROP DATABASE IF EXISTS $database '",
     "mysql -u $user --password='$password' -e 'CREATE DATABASE $database'",
@@ -148,6 +149,8 @@ foreach ($queryList as $exec_command) {
         throw new \Exception("[!] Mysql exec error : $exec_command \n Error : \n ".print_r($output,true));
     }
 }
+echo "*** In progress: mysql.sql imported\n";
+
 $db                                     = new \DB_system($user,$database,$password);
 $db->connect();
 $cuid                                   = 0;
