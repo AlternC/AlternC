@@ -39,6 +39,11 @@ class m_variables {
   var $replace_array = array();
   var $cache_conf = array();
 
+  const TYPE_STRING                 = "string";
+  const TYPE_BOOLEAN                = "boolean";
+  const TYPE_INTEGER                = "integer";
+  const TYPE_IP                     = "ip";
+  
   /**
    * 
    * @global    string  $L_FQDN
@@ -170,10 +175,17 @@ class m_variables {
 
     // Replace needed vars
     foreach ($variables as $vv => $hh) {
-      if (!isset($hh['value']) || empty($hh['value'])) {
-        continue;
-      }
-      $variables[$vv]['value'] = strtr($hh['value'], $this->replace_array );
+        if (!isset($hh['value']) || empty($hh['value'])) {
+            continue;
+        }
+        if(  is_array($hh['value'])){
+            foreach($hh["value"] as $key => $val){
+                $variables[$vv]['value'][$key]    = strtr($hh['value'][$key], $this->replace_array );
+            }
+        }
+        else{
+            $variables[$vv]['value']    = strtr($hh['value'], $this->replace_array );
+        }
     }
 
     if ($var && isset($variables[$var])) {
@@ -199,23 +211,30 @@ class m_variables {
   /**
    * Return a persistent variable.
    *
-   * @param  string $name
-   *   The name of the variable to return.
-   * @param mixed $default
-   *   The default value to use if this variable has never been set.
-   * @param string $createit_comment 
-   *   If variable doesn't exist, create it with the default value
-   *   and createit_comment value as comment
-   * @return mixed
-   *   The value of the variable.
+   * @param     string  $name               The name of the variable to return.
+   * @param     mixed   $default            The default value to use if this variable has never been set.
+   * @param     string  $createit_comment   If variable doesn't exist, create it with the default value
+   *                                        and createit_comment value as comment
+   * @param     array   $type               An array defining the variable definition 
+   *                                        ex: array("ns1"=>array('desc'=>'ns name','type'=>'string'),"ip"=>array("desc"=>"here an ip", "type"=>"ip")
+   *                                        ex: array('desc'=>'ns name','type'=>'string')
+   *                                        Types can be either 
+   *                                        self::TYPE_BOOLEAN
+   *                                        self::TYPE_INTEGER
+   *                                        self::TYPE_IP
+   *                                        self::TYPE_STRING
+   * 
+   * @return    mixed                       The value of the variable.
    */
-  function variable_get($name, $default = null, $createit_comment = null, $type=null) {
+  function variable_get($name, $default = null, $createit_comment = null, $type = null) {
 
     $this->variable_init_maybe();
 
-    if (isset($this->cache_conf[$name])) {
-      return $this->cache_conf[$name]['value'];
-    } elseif (!is_null($createit_comment)) {
+    // Attempts to retrieve $name
+    if (array_key_exists("$name", $this->cache_conf) && !is_null($this->cache_conf["$name"])) {
+        return $this->cache_conf["$name"]["value"];
+    } 
+    if (!is_null($createit_comment)) {
       $this->variable_update_or_create($name, $default, 'DEFAULT', 'null', 'null', $createit_comment, $type);
     }
 
