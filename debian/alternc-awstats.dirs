@@ -11,4 +11,5 @@ usr/share/alternc/panel/locales/es_ES/LC_MESSAGES
 usr/lib/alternc
 usr/share/alternc
 usr/share/doc/alternc-awstats
-usr/share/awstats/icon/other/
+usr/share/awstats/icon/other
+usr/lib/alternc/install.d
