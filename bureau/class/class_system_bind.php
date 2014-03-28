@@ -224,9 +224,9 @@ class system_bind {
       $keytable_new    .="alternc._domainkey.$domain $domain:alternc:/etc/opendkim/keys/$domain/alternc.private\n";
       $signingtable_new.="$domain alternc._domainkey.$domain\n";
     }
-    $trusted_host_new.="# END AUTOMATIC FILE. ADD YOUR CHANGES AFTER THIS LINE";
-    $keytable_new    .="# END AUTOMATIC FILE. ADD YOUR CHANGES AFTER THIS LINE";
-    $signingtable_new.="# END AUTOMATIC FILE. ADD YOUR CHANGES AFTER THIS LINE";
+    $trusted_host_new.="# END AUTOMATIC FILE. ADD YOUR CHANGES AFTER THIS LINE\n";
+    $keytable_new    .="# END AUTOMATIC FILE. ADD YOUR CHANGES AFTER THIS LINE\n";
+    $signingtable_new.="# END AUTOMATIC FILE. ADD YOUR CHANGES AFTER THIS LINE\n";
 
     # Get old files
     $trusted_host_old=@file_get_contents($this->dkim_trusted_host_file);
@@ -324,7 +324,7 @@ class system_bind {
     $zone.= $this->dkim_entry($domain);
     $zone.= $this->mail_autoconfig_entry($domain);
 
-    $zone.="\n;;;END ALTERNC AUTOGENERATE CONFIGURATION";
+    $zone.="\n;;;END ALTERNC AUTOGENERATE CONFIGURATION\n";
     $zone.=$this->get_persistent($domain);
     $domainInfo = $this->get_domain_summary($domain);
 
