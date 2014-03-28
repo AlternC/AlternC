@@ -205,7 +205,11 @@ class m_ftp {
     return $r;
   }
 
-  // Check if the login is fine (syntax)
+  /**
+   * Check if the login is fine (syntax)
+   * 
+   * @param string $l
+  */
   function check_login($l) {
     global $err;
 
@@ -419,7 +423,6 @@ class m_ftp {
 
   /* ----------------------------------------------------------------- */
   /** Fonction appellée par membres quand un membre est effacé.
-   * @param integer $uid Numéro de membre effacé.
    * @access private
    */
   function alternc_del_member() {

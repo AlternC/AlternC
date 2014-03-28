@@ -14,7 +14,19 @@ class m_variablesTest extends AlterncTest
      */
     public function getDataSet()
     {
-        return parent::loadDataSet("variables.yml");
+        $list = array(
+            "testVariable_getNewWayArray"   => "variables-empty.yml",
+            "testVariable_getNewWayString"  => "variables-empty.yml",
+            "testVariable_getOldWay"        => "variables-empty.yml",
+            "default"                       => "variables.yml"
+        );
+        if (isset($list[$this->getName()])) {
+            $dataset_file = $list[$this->getName()];
+        } else {
+            $dataset_file = "variables.yml";
+        }
+        return parent::loadDataSet($dataset_file);
+
     } 
 
     /**
@@ -72,22 +84,41 @@ class m_variablesTest extends AlterncTest
     {
         $result                     = $this->object->variable_get("phpunit");
         $this->assertStringMatchesFormat("phpunit",$result);
+    }
+    
+    /**
+     * @covers m_variables::variable_get
+     */
+    public function testVariable_getOldWay()
+    {
 
-/*
-        // Check old way
-        $this->object->variable_get('phpunit1', 'toto','plop');
-        $result = $this->object->variable_get('phpunit1');
-        $this->assertSame("toto",$result);
+        $this->object->variable_get('phpunit', 'phpunit-default','phpunit-comment');
+        $result                             = $this->object->variable_get('phpunit');
+        $this->assertSame("phpunit-default",$result);
+        
+    }
+    
+    /**
+     * @covers m_variables::variable_get
+     */
+    public function testVariable_getNewWayString()
+    {
 
         // New way
-        $this->object->variable_get('phpunit2', 'here','comment', array('desc'=>'Want a string','type'=>'string'));
-        $result = $this->object->variable_get('phpunit2');
-        $this->assertSame("here",$result);
-
-        $this->object->variable_get('phpunit3', array("ns1"=>'ns1.tld',"ip"=>"1.2.3.4"),'comment', array("ns1"=>array('desc'=>'ns name','type'=>'string'),"ip"=>array("desc"=>"here an ip", "type"=>"ip")));
-        $result = $this->object->variable_get('phpunit2');
-        $this->assertSame(array('ns1'=>"ns1.tld", "ip"=>"1.2.3.4"),$result);
-*/
+        $this->object->variable_get('phpunit', 'phpunit-default','comment', array('desc'=>'Want a string','type'=>'string'));
+        $result = $this->object->variable_get('phpunit');
+        $this->assertSame("phpunit-default",$result);
+    }
+    
+    /**
+     * @covers m_variables::variable_get
+     */
+    public function testVariable_getNewWayArray()
+    {
+        $phpunitArray = array("ns1"=>'ns1.tld',"ip"=>"1.2.3.4");
+        $this->object->variable_get('phpunit', $phpunitArray,'phpunit-comment', array("ns1"=>array('desc'=>'ns name','type'=>'string'),"ip"=>array("desc"=>"here an ip", "type"=>"ip")));
+        $result = $this->object->variable_get('phpunit');
+        $this->assertSame($phpunitArray,$result);
     }
 
     /**

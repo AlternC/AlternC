@@ -361,13 +361,13 @@ function actmoveto_not_empty() {
             } else {
               echo "<td>&nbsp;";
             }
-            $e = $bro->is_extractable($R,$c[$i]["name"]);
+            $e = $bro->is_extractable($c[$i]["name"]);
             if ($e) {
               echo " <a href=\"bro_main.php?actextract=1&amp;fileextract=".urlencode($c[$i]["name"])."&amp;R=".urlencode($R)."\">";
               echo _("Extract");
               echo "</a>";
             }
-            $ez = $bro->is_sqlfile($R,$c[$i]["name"]);
+            $ez = $bro->is_sqlfile($c[$i]["name"]);
             if ($ez) {
               echo " <a href=\"javascript:;\" onClick=\"$('#rest_db_$i').toggle();\">";
               echo _("Restore SQL");

@@ -4,7 +4,7 @@
 // EXPERIMENTAL : user data export.
 die('Proof of concept');
 
-include("config.php");
+require_once("/usr/share/alternc/panel/class/config_nochk.php");
 
 sem_release($alternc_sem);
 
