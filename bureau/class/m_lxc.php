@@ -45,10 +45,10 @@ class m_lxc implements vm {
    * Constructor, initialize the class informations from AlternC's variables
    */
   function m_lxc() {
-    $this->IP   = variable_get('lxc_ip', '', "IP address of the Alternc's LXC server. If empty, no LXC server.", array(array('desc'=>'IP address','type'=>'ip')));
-    $this->PORT = variable_get('lxc_port', '6504', "Port of the Alternc's LXC server", array(array('desc'=>'Port','type'=>'integer')));
-    $this->KEY  = variable_get('lxc_key', '', "Shared key with the Alternc's LXC server", array(array('desc'=>'Shared key','type'=>'string')));
-    $this->maxtime = variable_get('lxc_maxtime', '4', "How many hours do we allow to have a server before shutting it down", array(array('desc'=>'Max time','type'=>'integer')));
+    $this->IP   = variable_get('lxc_ip', '', "IP address of the Alternc's LXC server. If empty, no LXC server.", array('desc'=>'IP address','type'=>'ip'));
+    $this->PORT = variable_get('lxc_port', '6504', "Port of the Alternc's LXC server", array('desc'=>'Port','type'=>'integer'));
+    $this->KEY  = variable_get('lxc_key', '', "Shared key with the Alternc's LXC server", array('desc'=>'Shared key','type'=>'string'));
+    $this->maxtime = variable_get('lxc_maxtime', '4', "How many hours do we allow to have a server before shutting it down", array('desc'=>'Max time','type'=>'integer'));
   }
 
 
