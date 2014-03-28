@@ -305,7 +305,7 @@ ORDER BY
          WHERE $where AND d.id=a.domain_id $limit ;");
     if (! $db->next_record()) {
       $err->raise("mail",_("No email found for this query"));
-      return false;
+      return array();
     }
     $res=array();
     do {

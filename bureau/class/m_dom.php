@@ -27,10 +27,10 @@
 define('SLAVE_FLAG', "/var/run/alternc/refresh_slave");
 
 /**
- * Classe de gestion des domaines de l'h�berg�.
+ * Classe de gestion des domaines de l'hébergé.
  * 
- * Cette classe permet de g�rer les domaines / sous-domaines, redirections
- * dns et mx des domaines d'un membre h�berg�.<br />
+ * Cette classe permet de gérer les domaines / sous-domaines, redirections
+ * dns et mx des domaines d'un membre hébergé.<br />
  */
 class m_dom {
 
@@ -39,18 +39,18 @@ class m_dom {
      */
     var $domains;
 
-    /** $dns : Liste des dns trouv�s par la fonction whois
+    /** $dns : Liste des dns trouvés par la fonction whois
      * @access private
      */
     var $dns;
 
-    /** Flag : a-t-on trouv� un sous-domaine Webmail pour ce domaine ?
+    /** Flag : a-t-on trouvé un sous-domaine Webmail pour ce domaine ?
      * @access private
      */
     var $webmail;
 
     /**
-     * Syst�me de verrouillage du cron
+     * Systéme de verrouillage du cron
      * Ce fichier permet de verrouiller le cron en attendant la validation
      * du domaine par update_domains.sh
      * @access private
@@ -58,8 +58,8 @@ class m_dom {
     var $fic_lock_cron = "/var/run/alternc/cron.lock";
 
     /**
-     * Le cron a-t-il �t� bloqu� ?
-     * Il faut appeler les fonctions priv�es lock et unlock entre les
+     * Le cron a-t-il été bloqué ?
+     * Il faut appeler les fonctions privées lock et unlock entre les
      * appels aux domaines.
      * @access private
      */
@@ -145,8 +145,8 @@ class m_dom {
     /**
      * Retourne un tableau contenant les types de domaines
      *
-     * @return array retourne un tableau index� contenant la liste types de domaines 
-     *  authoris�. Retourne FALSE si une erreur s'est produite.
+     * @return array retourne un tableau indexé contenant la liste types de domaines 
+     *  authorisé. Retourne FALSE si une erreur s'est produite.
      */
     function domains_type_lst() {
         global $db, $err;
@@ -575,10 +575,10 @@ class m_dom {
 
     /**
      * Retourne un tableau contenant les domaines d'un membre.
-     * Par d�faut le membre connect�
+     * Par défaut le membre connecté
      *
-     * @return array retourne un tableau index� contenant la liste des
-     *  domaines h�berg�s sur le compte courant. Retourne FALSE si une
+     * @return array retourne un tableau indexé contenant la liste des
+     *  domaines hébergés sur le compte courant. Retourne FALSE si une
      *  erreur s'est produite.
      */
     function enum_domains($uid = -1) {
@@ -615,11 +615,11 @@ class m_dom {
      *  Efface un domaine du membre courant, et tous ses sous-domaines
      *
      * Cette fonction efface un domaine et tous ses sous-domaines, ainsi que
-     * les autres services attach�s � celui-ci. Elle appelle donc les autres
-     * classe. Chaque classe peut d�clarer une fonction del_dom qui sera
-     * appell�e lors de la destruction d'un domaine.
+     * les autres services attachés é celui-ci. Elle appelle donc les autres
+     * classe. Chaque classe peut déclarer une fonction del_dom qui sera
+     * appellée lors de la destruction d'un domaine.
      *
-     * @param string $dom nom de domaine � effacer
+     * @param string $dom nom de domaine é effacer
      * @return boolean Retourne FALSE si une erreur s'est produite, TRUE sinon.
      */
     function del_domain($dom) {
@@ -657,21 +657,21 @@ class m_dom {
     /**
      *  Installe un domaine sur le compte courant.
      *
-     * <p>Si le domaine existe d�j� ou est interdit, ou est celui du serveur,
-     * l'installation est refus�e. Si l'h�bergement DNS est demand�, la fonction
-     * checkhostallow v�rifiera que le domaine peut �tre install� conform�ment
+     * <p>Si le domaine existe déjé ou est interdit, ou est celui du serveur,
+     * l'installation est refusée. Si l'hébergement DNS est demandé, la fonction
+     * checkhostallow vérifiera que le domaine peut étre installé conformément
      * aux demandes des super-admin.
-     * Si le dns n'est pas demand�, le domaine peut �tre install� s'il est en
+     * Si le dns n'est pas demandé, le domaine peut étre installé s'il est en
      * seconde main d'un tld (exemple : test.eu.org ou test.com, mais pas
      * toto.test.org ou test.test.asso.fr)</p>
-     * <p>Chaque classe peut d�finir une fonction add_dom($dom) qui sera
-     * appell�e lors de l'installation d'un nouveau domaine.</p>
+     * <p>Chaque classe peut définir une fonction add_dom($dom) qui sera
+     * appellée lors de l'installation d'un nouveau domaine.</p>
      *
-     * @param string $dom nom fqdn du domaine � installer
-     * @param boolean $dns 1 ou 0 pour h�berger le DNS du domaine ou pas.
+     * @param string $dom nom fqdn du domaine é installer
+     * @param boolean $dns 1 ou 0 pour héberger le DNS du domaine ou pas.
      * @param boolean $noerase 1 ou 0 pour rendre le domaine inamovible ou non
      * @param boolean $force 1 ou 0, si 1, n'effectue pas les tests de DNS.
-     *  force ne devrait �tre utilis� que par le super-admin.
+     *  force ne devrait étre utilisé que par le super-admin.
       $ @return boolean Retourne FALSE si une erreur s'est produite, TRUE sinon.
      */
     function add_domain($domain, $dns, $noerase = false, $force = false, $isslave = false, $slavedom = "") {
@@ -690,7 +690,7 @@ class m_dom {
             $err->raise("dom", _("The domain name is syntaxically incorrect"));
             return false;
         }
-        // Interdit les domaines cl�s (table forbidden_domains) sauf en cas FORCE
+        // Interdit les domaines clés (table forbidden_domains) sauf en cas FORCE
         $db->query("SELECT domain FROM forbidden_domains WHERE domain='$domain'");
         if ($db->num_rows() && !$force) {
             $err->raise("dom", _("The requested domain is forbidden in this server, please contact the administrator"));
@@ -890,17 +890,17 @@ class m_dom {
     /* ----------------------------------------------------------------- */
 
     /**
-     * Retourne les entr�es DNS du domaine $domain issues du WHOIS.
+     * Retourne les entrées DNS du domaine $domain issues du WHOIS.
      *
      * Cette fonction effectue un appel WHOIS($domain) sur Internet,
-     * et extrait du whois les serveurs DNS du domaine demand�. En fonction
+     * et extrait du whois les serveurs DNS du domaine demandé. En fonction
      * du TLD, on sait (ou pas) faire le whois correspondant.
-     * Actuellement, les tld suivants sont support�s :
+     * Actuellement, les tld suivants sont supportés :
      * .com .net .org .be .info .ca .cx .fr .biz .name
      *
      * @param string $domain Domaine fqdn dont on souhaite les serveurs DNS
-     * @return array Retourne un tableau index� avec les NOMS fqdn des dns
-     *   du domaine demand�. Retourne FALSE si une erreur s'est produite.
+     * @return array Retourne un tableau indexé avec les NOMS fqdn des dns
+     *   du domaine demandé. Retourne FALSE si une erreur s'est produite.
      *
      */
     function whois($domain) {
@@ -1052,16 +1052,16 @@ class m_dom {
     /* ----------------------------------------------------------------- */
 
     /**
-     *  v�rifie la presence d'un champs mx valide sur un serveur DNS
-     * $domaine est le domaine dont on veux v�ririfer les MX
+     *  vérifie la presence d'un champs mx valide sur un serveur DNS
+     * $domaine est le domaine dont on veux véririfer les MX
      * $ref_domaine est le domaine avec lequel on veux comparer les MX
-     *              si $ref_domaine == false, on prend les MX par default
+     *              si $ref_domaine == '', on prend les MX par default
      *
      */
-    function checkmx($domaine, $ref_domain = false) {
+    function checkmx($domaine, $ref_domain = '') {
         global $L_DEFAULT_MX, $L_DEFAULT_SECONDARY_MX;
 
-        if ($ref_domain) {
+        if (!empty($ref_domain)) {
             getmxrr($ref_domain, $ref_mx);
         } else {
             $ref_mx = array($L_DEFAULT_MX, $L_DEFAULT_SECONDARY_MX);
@@ -1072,9 +1072,9 @@ class m_dom {
             return 3;
         }
 
-        //r�cup�re les champs mx
+        //récupére les champs mx
         if (!getmxrr($domaine, $mxhosts)) {
-            //aucun h�te mx sp�cifi�
+            //aucun héte mx spécifié
             return 1;
         }
 
@@ -1181,7 +1181,7 @@ class m_dom {
      *
      * @param integer sub_domain_id id du subdomain
      * @return arrray Retourne un tableau associatif contenant les
-     *  informations du sous-domaine demand�.<pre>
+     *  informations du sous-domaine demandé.<pre>
      *  $r["name"]= nom du sous-domaine (NON-complet)
      *  $r["dest"]= Destination (url, ip, local ...)
      *  </pre>
@@ -1327,17 +1327,17 @@ class m_dom {
     /* ----------------------------------------------------------------- */
 
     /**
-     * Modifier les information du sous-domaine demand�.
+     * Modifier les information du sous-domaine demandé.
      *
-     * <b>Note</b> : si le sous-domaine $sub.$dom n'existe pas, il est cr��.<br />
-     * <b>Note : TODO</b> : v�rification de concordance de $dest<br />
+     * <b>Note</b> : si le sous-domaine $sub.$dom n'existe pas, il est créé.<br />
+     * <b>Note : TODO</b> : vérification de concordance de $dest<br />
      *
      * @param string $dom Domaine dont on souhaite modifier/ajouter un sous domaine
-     * @param string $subk Sous domaine � modifier / cr�er
+     * @param string $subk Sous domaine é modifier / créer
      * @param integer $type Type de sous-domaine (local, ip, url ...)
      * @param string $action Action : vaut "add" ou "edit" selon que l'on
-     *  Cr�e (add) ou Modifie (edit) le sous-domaine
-     * @param string $dest Destination du sous-domaine, d�pend de la valeur
+     *  Crée (add) ou Modifie (edit) le sous-domaine
+     * @param string $dest Destination du sous-domaine, dépend de la valeur
      *  de $type (url, ip, dossier...)
      * @return boolean Retourne FALSE si une erreur s'est produite, TRUE sinon.
      */
@@ -1363,12 +1363,12 @@ class m_dom {
         }
 
         if (!$this->check_type_value($type, $dest)) {
-            //plutot verifier si la chaine d'erreur est vide avant de raise sinon sa veut dire que l(erruer est deja remont�
+            //plutot verifier si la chaine d'erreur est vide avant de raise sinon sa veut dire que l(erruer est deja remonté
             #$err->raise("dom",_("Invalid domain type selected, please check"));
             return false;
         }
 
-        // On a �pur� $dir des probl�mes eventuels ... On est en DESSOUS du dossier de l'utilisateur.
+        // On a épuré $dir des problémes eventuels ... On est en DESSOUS du dossier de l'utilisateur.
         if ($t = checkfqdn($dom)) {
             $err->raise("dom", _("The domain name is syntaxically incorrect"));
             return false;
@@ -1426,7 +1426,7 @@ class m_dom {
     /* ----------------------------------------------------------------- */
 
     /**
-     *  Supprime le sous-domaine demand�
+     *  Supprime le sous-domaine demandé
      *
      * @param string $dom Domaine dont on souhaite supprimer un sous-domaine
      * @param string $sub Sous-domaine que l'on souhaite supprimer
@@ -1468,11 +1468,11 @@ class m_dom {
     /* ----------------------------------------------------------------- */
 
     /**
-     * Modifie les information du domaine pr�cis�.
+     * Modifie les information du domaine précisé.
      *
      * @param string $dom Domaine du compte courant que l'on souhaite modifier
-     * @param integer $dns Vaut 1 ou 0 pour h�berger ou pas le DNS du domaine
-     * @param integer $gesmx H�berge-t-on le emails du domaines sur ce serveur ?
+     * @param boolean $dns Vaut 1 ou 0 pour héberger ou pas le DNS du domaine
+     * @param boolean $gesmx Héberge-t-on le emails du domaines sur ce serveur ?
      * @param boolean $force Faut-il passer les checks DNS ou MX ? (admin only)
      * @return boolean appelle $mail->add_dom ou $ma->del_dom si besoin, en
      *  fonction du champs MX. Retourne FALSE si une erreur s'est produite,
@@ -1487,7 +1487,7 @@ class m_dom {
             $err->raise("dom", _("--- Program error --- No lock on the domains!"));
             return false;
         }
-        if ($dns == 1 && !$force) {
+        if ($dns == true && !$force) {
             $this->dns = $this->whois($dom);
             $v = checkhostallow($dom, $this->dns);
             if ($v == -1) {
@@ -1521,13 +1521,13 @@ class m_dom {
         }
         if ($dns != "1")
             $dns = "0";
-        // On v�rifie que des modifications ont bien eu lieu :)
+        // On vérifie que des modifications ont bien eu lieu :)
         if ($r["dns"] == $dns && $r["mail"] == $gesmx && $r["zonettl"] == $ttl) {
             $err->raise("dom", _("No change has been requested..."));
             return true;
         }
 
-        //si gestion mx uniquement, v�rification du dns externe
+        //si gestion mx uniquement, vérification du dns externe
         if ($dns == "0" && $gesmx == "1" && !$force) {
             $vmx = $this->checkmx($dom);
             if ($vmx == 1) {
@@ -1535,7 +1535,7 @@ class m_dom {
             }
 
             if ($vmx == 2) {
-                // Serveur non sp�cifi� parmi les champx mx
+                // Serveur non spécifié parmi les champx mx
                 $err->raise("dom", _("There is no MX record pointing to this server, and you are asking us to host the mail here. Make sure to update your MX entries or no mail will be received"));
             }
         }
@@ -1544,12 +1544,12 @@ class m_dom {
             $hooks->invoke("hook_dom_add_mx_domain", array($r["id"]));
         }
 
-        if (!$gesmx && $r["mail"]) { // on a dissoci� le MX : on d�truit donc l'entree dans LDAP
+        if (!$gesmx && $r["mail"]) { // on a dissocié le MX : on détruit donc l'entree dans LDAP
             $hooks->invoke("hook_dom_del_mx_domain", array($r["id"]));
         }
 
         $db->query("UPDATE domaines SET gesdns='$dns', gesmx='$gesmx', zonettl='$ttl' WHERE domaine='$dom'");
-        $dom->set_dns_action($dom, 'UPDATE');
+        $this->set_dns_action($dom, 'UPDATE');
 
         return true;
     }
@@ -1662,8 +1662,9 @@ class m_dom {
         global $db, $err;
         $uid = intval($uid);
         $res = array();
+        $sql = "";
         if ($uid != -1) {
-            $sql = " AND compte='$uid' ";
+            $sql .= " AND compte='$uid' ";
         }
         $db->query("SELECT domaine FROM domaines WHERE gesdns=1 $sql ORDER BY domaine");
         while ($db->next_record()) {
@@ -1891,8 +1892,9 @@ class m_dom {
         global $db, $err;
         $err->log("dom", "export");
         $this->enum_domains();
+        $str="";
         foreach ($this->domains as $d) {
-            $str = "  <domaines>\n";
+            $str.= "  <domaines>\n";
             $str.="   <nom>" . $d . "</nom>\n";
             $this->lock();
             $s = $this->get_domain_all($d);

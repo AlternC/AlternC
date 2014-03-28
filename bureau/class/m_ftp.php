@@ -129,7 +129,7 @@ class m_ftp {
    * $a["id"]= ID du compte ftp
    * $a["login"]= Nom de login du compte
    * $a["dir"]= Dossier relatif à la racine du compte de l'utilisateur
-   * @return array Retourne le tableau des comptes ou FALSE si une erreur s'est produite.
+   * @return array Retourne le tableau des comptes 
    */
   function get_list() {
     global $db,$err,$cuid, $bro;
@@ -149,7 +149,7 @@ class m_ftp {
       return $r;
     } else {
       $err->raise("ftp",_("No FTP account found"));
-      return false;
+      return array();
     }
   }
 
