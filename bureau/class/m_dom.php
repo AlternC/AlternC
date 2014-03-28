@@ -100,6 +100,9 @@ class m_dom {
         return $t;
     }
 
+    /**
+     * @param string $fqdn
+     */
     function get_sub_domain_id_and_member_by_name($fqdn) {
         global $db, $err, $cuid;
         $err->log("dom", "get_sub_domain_by_name");
@@ -219,6 +222,9 @@ class m_dom {
         return $val;
     }
 
+    /**
+     * @param string $zone
+     */
     function import_manual_dns_entry($zone, $domain, $detect_redirect = true, $save = false) {
         global $cuid, $err;
         $err->log("dom", "import_manual_dns_entry");
@@ -464,6 +470,10 @@ class m_dom {
     // Take an URL, and return FALSE is there is no redirection,
     // and the target URL if there is one (HTTP CODE 301 & 302)
     // CURL is needed
+
+    /**
+     * @param string $url
+     */
     function is_it_a_redirect($url) {
         try {
             $params = array('http' => array(
@@ -667,7 +677,6 @@ class m_dom {
      * <p>Chaque classe peut définir une fonction add_dom($dom) qui sera
      * appellée lors de l'installation d'un nouveau domaine.</p>
      *
-     * @param string $dom nom fqdn du domaine é installer
      * @param boolean $dns 1 ou 0 pour héberger le DNS du domaine ou pas.
      * @param boolean $noerase 1 ou 0 pour rendre le domaine inamovible ou non
      * @param boolean $force 1 ou 0, si 1, n'effectue pas les tests de DNS.
@@ -792,6 +801,9 @@ class m_dom {
         return true;
     }
 
+    /**
+     * @param string $domain
+     */
     function create_default_subdomains($domain, $target_domain = "") {
         global $db, $err;
         $err->log("dom", "create_default_subdomains", $domain);
@@ -1057,6 +1069,7 @@ class m_dom {
      * $ref_domaine est le domaine avec lequel on veux comparer les MX
      *              si $ref_domaine == '', on prend les MX par default
      *
+     * @param string $domaine
      */
     function checkmx($domaine, $ref_domain = '') {
         global $L_DEFAULT_MX, $L_DEFAULT_SECONDARY_MX;
@@ -1180,7 +1193,7 @@ class m_dom {
      * Retourne TOUTES les infos d'un sous domaine du compte courant.
      *
      * @param integer sub_domain_id id du subdomain
-     * @return arrray Retourne un tableau associatif contenant les
+     * @return array Retourne un tableau associatif contenant les
      *  informations du sous-domaine demandé.<pre>
      *  $r["name"]= nom du sous-domaine (NON-complet)
      *  $r["dest"]= Destination (url, ip, local ...)
@@ -1218,6 +1231,10 @@ class m_dom {
 
 // get_sub_domain_all
 
+    /**
+     * @param integer $type
+     * @param string $value
+     */
     function check_type_value($type, $value) {
         global $db, $err, $cuid;
 
@@ -1333,10 +1350,8 @@ class m_dom {
      * <b>Note : TODO</b> : vérification de concordance de $dest<br />
      *
      * @param string $dom Domaine dont on souhaite modifier/ajouter un sous domaine
-     * @param string $subk Sous domaine é modifier / créer
+     * @param string $sub Sous domaine é modifier / créer
      * @param integer $type Type de sous-domaine (local, ip, url ...)
-     * @param string $action Action : vaut "add" ou "edit" selon que l'on
-     *  Crée (add) ou Modifie (edit) le sous-domaine
      * @param string $dest Destination du sous-domaine, dépend de la valeur
      *  de $type (url, ip, dossier...)
      * @return boolean Retourne FALSE si une erreur s'est produite, TRUE sinon.
@@ -1428,8 +1443,6 @@ class m_dom {
     /**
      *  Supprime le sous-domaine demandé
      *
-     * @param string $dom Domaine dont on souhaite supprimer un sous-domaine
-     * @param string $sub Sous-domaine que l'on souhaite supprimer
      * @return boolean Retourne FALSE si une erreur s'est produite, TRUE sinon.
      *
      */
@@ -1453,6 +1466,9 @@ class m_dom {
 
 // del_sub_domain
 
+    /**
+     * @param integer $dom_id
+     */
     function set_ttl($dom_id, $ttl) {
         global $err;
         $err->log("dom", "set_ttl", "$dom_id / $ttl");
@@ -1479,7 +1495,7 @@ class m_dom {
      *  TRUE sinon.
      *
      */
-    function edit_domain($dom, $dns, $gesmx, $force = 0, $ttl = 86400) {
+    function edit_domain($dom, $dns, $gesmx, $force = false, $ttl = 86400) {
         global $db, $err, $L_MX, $classes, $cuid, $hooks;
         $err->log("dom", "edit_domain", $dom . "/" . $dns . "/" . $gesmx);
         // Locked ?
@@ -2107,6 +2123,9 @@ order by
         return true;
     }
 
+    /**
+     * @param string $dns_action
+     */
     function set_dns_action($domain, $dns_action) {
         global $db;
         $db->query("UPDATE domaines SET dns_action='" . mysql_escape_string($dns_action) . "' WHERE domaine='" . mysql_escape_string($domain) . "'; ");
