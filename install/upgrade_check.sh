@@ -28,6 +28,11 @@ then
     if [ -f "/var/lib/alternc/backups/lastversion" ]
     then
 	oldvers="`cat /var/lib/alternc/backups/lastversion`"
+	# this is a *version number*, not a *last upgrade script* we have this *border case*
+	if [ "$oldvers" = "3.1" ]
+	then
+	    oldvers="3.1.0~b.php"
+	fi
     else
 	echo "##############################################"
 	echo "# NO VERSION FOUND TO UPGRADE FROM, ABORTING #"

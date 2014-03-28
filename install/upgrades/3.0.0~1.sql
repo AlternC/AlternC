@@ -413,9 +413,6 @@ update mail_domain, domaines
         and mail_domain.mail like '%@%'
         and mail_domain.type = 0
         and mail_domain.pop = 0;
-~
-
-
 
 -- Insert procmail managed addresses.
 -- Note: those addresses should be treated as local managed adresses.
