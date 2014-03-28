@@ -295,7 +295,10 @@ class DB_Sql {
    * @return integer
    */
   function f($Name) {
-    return $this->Record[$Name];
+    if (isset($this->Record[$Name]))
+      return $this->Record[$Name];
+    else
+      return false;
   }
 
   function p($Name) {
