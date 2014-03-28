@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://vm1.alternc.eu/" />
+<title>destroy</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">destroy</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Français (France)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=English (United States)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h3</td>
+	<td>Menu admin</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=File browser</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=test1vm1alternceu/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=d[]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=actdel</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=del_confirm</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=p.error</td>
+	<td>No files in this folder</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=test1.vm1.alternc.eu (4)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=del_0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=content</td>
+	<td>Deleting mail accounts : <br /> <br /> Please confirm the deletion of the following mail accounts:<br /> @test1.vm1.alternc.eu<br /><br /> - <br /> Warning: Deleting an email address will destroy all the messages it contains! You will NOT be able to get it back!</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=p.error</td>
+	<td>The email address @test1.vm1.alternc.eu has been deleted!</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=del_1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=del_2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#main &gt; p</td>
+	<td>user1@test1.vm1.alternc.eu<br />user2@test1.vm1.alternc.eu</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=p.error</td>
+	<td>The email address user1@test1.vm1.alternc.eu has been deleted!<br />The email address user2@test1.vm1.alternc.eu has been deleted!</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=test1.vm1.alternc.eu</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=detruire</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=p.error</td>
+	<td>WARNING<br />Confirm the deletion of domain test1.vm1.alternc.eu<br /> This will delete the related sub-domains too.</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#content &gt; p</td>
+	<td>The domain test1.vm1.alternc.eu has been successfully deleted.<br /><br /> Click here to continue</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Click here to continue</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='menu-adm']/ul/li[3]/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Manage allowed domains (TLD)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#content &gt; h3</td>
+	<td>Manage allowed domains (TLD)</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=sel13</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.inb</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=p.error</td>
+	<td>The requested TLD has been deleted</td>
+</tr>
+<tr>
+	<td>break</td>
+	<td></td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

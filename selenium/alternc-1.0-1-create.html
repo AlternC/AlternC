@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://vm1.alternc.eu/" />
+<title>create</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">create</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=username</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=password</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h3</td>
+	<td>Menu admin</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='menu-adm']/ul/li[3]/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Manage allowed domains (TLD)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#content &gt; h3</td>
+	<td>Manage allowed domains (TLD)</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add a new TLD</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='content']/h3[2]</td>
+	<td>Add a new TLD</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tld</td>
+	<td>vm1.alternc.eu</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=mode</td>
+	<td>label=Domain can be installed, no check at all</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.inb</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=p.error</td>
+	<td>The TLD has been successfully added</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add a domain</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#content &gt; h3</td>
+	<td>Domain hosting</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=newdomain</td>
+	<td>test1.vm1.alternc.eu</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#content &gt; p</td>
+	<td>Your new domain test1.vm1.alternc.eu has been successfully installed<br /><br /> Click here to continue</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Click here to continue</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=test1.vm1.alternc.eu (1)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#content &gt; h3</td>
+	<td>Email addresses of the domain test1.vm1.alternc.eu :</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add a mailbox on test1.vm1.alternc.eu</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#content &gt; h3</td>
+	<td>Add a mail to the domain test1.vm1.alternc.eu :</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=pop1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=email</td>
+	<td>user1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=pass</td>
+	<td>poipoi</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=passconf</td>
+	<td>poipoi</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=p.error</td>
+	<td>The email address user1@test1.vm1.alternc.eu has been successfully created</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add a mailbox on test1.vm1.alternc.eu</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#content &gt; h3</td>
+	<td>Add a mail to the domain test1.vm1.alternc.eu :</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=email</td>
+	<td>user2</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=pop0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=alias</td>
+	<td>user1@test1.vm1.alternc.eu</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=p.error</td>
+	<td>The email address user2@test1.vm1.alternc.eu has been successfully created</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Add a mailbox on test1.vm1.alternc.eu</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=pop1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=pass</td>
+	<td>poipoi</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=passconf</td>
+	<td>poipoi</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=p.error</td>
+	<td>The email address @test1.vm1.alternc.eu has been successfully created</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=File browser</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#content &gt; h3</td>
+	<td>File browser</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=test1vm1alternceu/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=nomfich</td>
+	<td>index.html</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Create']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>link=index.html</td>
+	<td>index.html</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=index.html</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#content &gt; p</td>
+	<td>File editing /test1vm1alternceu/index.html</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=texte</td>
+	<td>coin</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=saveret</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//form[@id='main']/table[2]/tbody/tr[2]/td[3]</td>
+	<td>4 Bytes</td>
+</tr>
+<tr>
+	<td>break</td>
+	<td></td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
