@@ -30,13 +30,22 @@
  */
 class m_menu {
 
-  /*---------------------------------------------------------------------------*/
   /** Constructor
   * menu([$mid]) Constructeur de la classe menu, ne fait rien pour le moment
   */
+   /**
+    * 
+    */
   function m_menu() {
   }
 
+   /**
+    * 
+    * @global m_hooks     $hooks
+    * @global m_quota     $quota
+    * @global    m_mem   $mem
+    * @return type
+    */
   function getmenu() {
     global $hooks, $quota, $mem;
 
@@ -97,11 +106,23 @@ class m_menu {
     return $lst;
   } //getmenu
 
+   /**
+    * 
+    * @param type $a
+    * @param type $b
+    * @return type
+    */
   function order_menu($a, $b) {
     // Use to order the menu with a usort
     return $a['pos'] > $b['pos'];
   }
 
+   /**
+    * @global string      $help_baseurl
+    * @global array       $lang_translation
+    * @global array       $locales
+    * @return type
+    */
   function system_menu() {
     // Here some needed menu who don't have a class
     global $help_baseurl, $lang_translation, $locales; 

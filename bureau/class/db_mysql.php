@@ -172,7 +172,7 @@ class DB_Sql {
     }
 
     if (isset($debug_alternc)) {
-      $debug_alternc->add("SQL Query : (".substr($debug_chrono_start,0,5)." ms)\t $Query_String");
+      $debug_alternc->add("SQL Query : (".substr($debug_chrono_start,0,5)." ms)     $Query_String");
       $debug_alternc->nb_sql_query++;
       $debug_alternc->tps_sql_query += $debug_chrono_start;
     }

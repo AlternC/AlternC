@@ -29,12 +29,18 @@
 class m_cron {
 
 
-  /*---------------------------------------------------------------------------*/
   /** Constructor
   */
+    /**
+     * 
+     */
   function m_cron() {
   }
 
+    /**
+     * 
+     * @return type
+     */
   function schedule() {
     return Array(
 		 Array('unit'=>1440, 'name'=>_("Daily")),
@@ -44,10 +50,16 @@ class m_cron {
   }
 
   
-  /*---------------------------------------------------------------------------*/
   /** List the crontab for the current user.
    * @return array an hash for each crontab.
    */
+    /**
+     * 
+     * @global m_mem       $mem
+     * @global m_mysql     $db
+     * @global m_err       $err
+     * @return type
+     */
   function lst_cron() {
     global $cuid,$db,$err;
     $err->log("cron","lst_cron");
@@ -67,6 +79,10 @@ class m_cron {
     return $r;
   }
 
+    /**
+     * 
+     * @return int
+     */
   function hook_menu() {
     $obj = array(
       'title'       => _("Scheduled tasks"),
@@ -78,11 +94,15 @@ class m_cron {
      return $obj;
   }
 
-  /*---------------------------------------------------------------------------*/
   /** update the crontab 
    * @param $arr array the crontab information, including its ID
    * @return boolean TRUE if the crontab has been edited
   */
+    /**
+     * 
+     * @param type $arr
+     * @return boolean
+     */
   function update($arr) {
     $ok=true;
     foreach ($arr as $a) {
@@ -96,11 +116,18 @@ class m_cron {
   }
   
 
-  /*---------------------------------------------------------------------------*/
   /** delete a crontab 
    * @param $id the id of the crontab to delete
    * @return boolean TRUE if the crontab has been deleted
   */
+    /**
+     * 
+     * @global m_mysql     $db
+     * @global m_err       $err
+     * @global m_mem       $mem
+     * @param type $id
+     * @return type
+     */
   function delete_one($id) {
     global $db,$err,$cuid;
     $err->log("cron","delete_one");
@@ -108,10 +135,23 @@ class m_cron {
   }
   
 
-  /*---------------------------------------------------------------------------*/
   /** update a crontab, 
    * @return boolean TRUE if the crontab has been edited
   */
+  /**
+   * 
+   * @global m_mysql     $db
+   * @global m_err       $err
+   * @global m_quota     $quota
+   * @global m_mem       $mem
+   * @param type $url
+   * @param type $user
+   * @param type $password
+   * @param type $email
+   * @param type $schedule
+   * @param type $id
+   * @return boolean|string
+   */
   private function _update_one($url, $user, $password, $email, $schedule, $id=null) {
     global $db,$err,$quota,$cuid;
     $err->log("cron","update_one");
@@ -159,11 +199,15 @@ class m_cron {
   }
 
 
-  /*---------------------------------------------------------------------------*/
   /** validate a crontab schedule
    * @param $s array schedule paramters
    * @return boolean TRUE if the schedule is valid
   */
+    /**
+     * 
+     * @param type $s
+     * @return boolean
+     */
   function valid_schedule($s) {
     $s2 = intval($s);
     if ($s2 != $s) return false;
@@ -174,9 +218,15 @@ class m_cron {
     return $r;
   }
 
-  /*---------------------------------------------------------------------------*/
   /** hook for quota computation
    */
+    /**
+     * 
+     * @global m_mem       $mem
+     * @global m_mysql     $db
+     * @global m_err       $err
+     * @return type
+     */
   function hook_quota_get() {
     global $cuid,$db,$err;
     $err->log("cron","alternc_get_quota");

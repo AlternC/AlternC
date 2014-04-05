@@ -23,7 +23,7 @@
  ----------------------------------------------------------------------
 */
 
-/* ----------------------------------------------------------------- */
+
 
 /**
 * Manage the AlternC's account administration (create/edit/delete)
@@ -31,12 +31,12 @@
 class m_admin {
 
 
-  /* ----------------------------------------------------------------- */
+
   /** $enabled tells if the logged user is super-admin or not
    */
   var $enabled=0;
 
-  /* ----------------------------------------------------------------- */
+
   /** List of the controls made for each TLD
    *
    * $tldmode is used by the administration panel, while choosing
@@ -505,7 +505,7 @@ class m_admin {
    * When the admin want to delegate a subdomain to an account
    * 
    * @global    m_mysql $db
-   * @global    m_err   $err
+   * @global m_err       $err
    * @global    m_dom   $dom
    * @global    m_mem   $mem
    * @global    int     $cuid
@@ -541,7 +541,7 @@ class m_admin {
     return true;
   }
     
-  /* ----------------------------------------------------------------- */
+
   /** Creates a new hosted account
    *  
    * Creates a new hosted account (in the tables <code>membres</code>
@@ -549,7 +549,7 @@ class m_admin {
    * the account $mid is not super-admin.
    *
    * 
-   * @global    m_err   $err
+   * @global m_err       $err
    * @global    m_quota $quota
    * @global    array   $classes
    * @global    int     $cuid
@@ -668,7 +668,7 @@ class m_admin {
    * AlternC's standard function called when a user is created
    * This sends an email if configured through the interface.
    * 
-   * @global    m_err   $err
+   * @global m_err       $err
    * @global    int     $cuid
    * @global    string     $L_FQDN
    * @global    string     $L_HOSTING
@@ -731,7 +731,7 @@ EOF;
    * and <code>local</code>). Prevents any manipulation of the account if
    * the account $mid is not super-admin.
    *  
-   * @global    m_err   $err
+   * @global m_err       $err
    * @global    m_mysql $db
    * @global    int     $cuid
    * @global    m_quota $quota
@@ -790,7 +790,7 @@ EOF;
    * 
    * Lock an account and prevent the user to access its account.
    * 
-   * @global    m_err   $err
+   * @global m_err       $err
    * @global    m_mysql $db
    * @param     int     $uid    The uid number of the account 
    * @return    boolean         Returns FALSE if an error occurs, TRUE if not.
@@ -819,7 +819,7 @@ EOF;
    * UnLock an account and prevent the user to access its account.
    * 
    * 
-   * @global    m_err   $err
+   * @global m_err       $err
    * @global    m_mysql $db
    * @param     int     $uid    The uid number of the account 
    * @return    boolean         Returns FALSE if an error occurs, TRUE if not.
@@ -842,12 +842,12 @@ EOF;
   }
 
 
-  /* ----------------------------------------------------------------- */
+
   /** Deletes an account
    * Deletes the specified account. Prevents any manipulation of the account if
    * the account $mid is not super-admin.
    * 
-   * @global    m_err   $err
+   * @global m_err       $err
    * @global    m_quota $quota
    * @global    array   $classes
    * @global    int     $cuid
@@ -901,7 +901,7 @@ EOF;
    * 
    * Renew an account for its duration
    * 
-   * @global    m_err   $err
+   * @global m_err       $err
    * @global    m_mysql $db
    * @param     int     $uid        The uid number of the account 
    * @param     int     $periods    The new duration, in months, of the account
@@ -927,7 +927,7 @@ EOF;
   /** 
    * Update the duration information for an account
    * 
-   * @global    m_err   $err
+   * @global m_err       $err
    * @global    m_mysql $db
    * @param     int     $uid        The uid number of the account 
    * @param     int     $duration   The new duration, in months, of the account
@@ -965,7 +965,7 @@ EOF;
   }
 
 
-  /* ----------------------------------------------------------------- */
+
   /** 
    * Get the expiry status for an account
    * 
@@ -1016,7 +1016,7 @@ EOF;
   /** 
    * Turns a common account into a super-admin account
    * 
-   * @global    m_err   $err
+   * @global m_err       $err
    * @global    m_mysql $db
    * @param     int     $uid        The uid number of the account 
    * @return    boolean    
@@ -1040,7 +1040,7 @@ EOF;
   /** 
    * Turns a super-admin account into a common account
    * 
-   * @global    m_err   $err
+   * @global m_err       $err
    * @global    m_mysql $db
    * @param     int     $uid        The uid number of the account 
    * @return boolean                Returns FALSE if an error occurs, TRUE if not.
@@ -1208,7 +1208,7 @@ EOF;
    * from its account
    * 
    * @global    m_mysql $db
-   * @global    m_err   $err
+   * @global m_err       $err
    * @param     string  $domain     Domain name to lock / unlock
    * @return    boolean             TRUE if the domain has been locked/unlocked or FALSE if it does not exist.
    */
@@ -1228,7 +1228,7 @@ EOF;
    * Add a new TLD to the list of the authorized TLDs 
    * 
    * @global    m_mysql $db
-   * @global    m_err   $err
+   * @global m_err       $err
    * @param     string      $tld    top-level domain to add (org, com...)
    * @return    boolean             TRUE if the tld has been successfully added, FALSE if not.
    */
@@ -1263,7 +1263,7 @@ EOF;
    * on this TLD
    * 
    * @global    m_mysql $db
-   * @global    m_err   $err
+   * @global m_err       $err
    * @param     string  $tld   The TLD you want to delete
    * @return    boolean         returns true if the TLD has been deleted, or
    * false if an error occured.
@@ -1280,7 +1280,7 @@ EOF;
   }
 
 
-  /* ----------------------------------------------------------------- */
+
   /** Add a TLD to the list of the authorized TLDs during the installation
    * 
    * <b>Note: </b> If you check in the whois, be sure that
@@ -1288,7 +1288,7 @@ EOF;
    *  domain!
    * 
    * @global    m_mysql $db
-   * @global    m_err   $err
+   * @global m_err       $err
    * @param     string  $tld        string TLD we want to authorize
    * @param     boolean $mode       Controls to make on this TLD.
    * @return    boolean             TRUE if the TLD has been successfully
@@ -1319,7 +1319,7 @@ EOF;
    * Modify a TLD of the list of the authorized TLDs 
    * 
    * @global    m_mysql $db
-   * @global    m_err   $err
+   * @global m_err       $err
    * @param     string  $tld    TLD we want to modify
    * @param     int     $mode   Controls to make on this TLD.
    * @return    boolean         TRUE if the TLD has been successfully
@@ -1371,16 +1371,6 @@ EOF;
     while ($db->next_record()) {
       $tmp1[$db->Record["name"]]=$db->Record;
     }
-/* * /
-    foreach($classes as $c) {
-      if (method_exists($GLOBALS[$c],"alternc_password_policy")) {
-	$res=$GLOBALS[$c]->alternc_password_policy(); // returns an array
-	foreach($res as $k=>$v) {
-	  $tmp2[$k]=$v;
-	}
-      }
-    }
-/* */
     $tmp3=$hooks->invoke("alternc_password_policy");
     foreach ($tmp3 as $v) {
       foreach ($v as $l=>$m) {
@@ -1441,7 +1431,7 @@ EOF;
   /**
    * 
    * @global    m_mysql $db
-   * @global    m_err   $err
+   * @global m_err       $err
    * @param     string  $policy     Name of the policy to check for
    * @param     string  $login      The login that will be set
    * @param     string  $password   The password we have to check

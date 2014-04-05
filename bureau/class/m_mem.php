@@ -39,25 +39,34 @@ class m_mem {
   var $user;
   /** Tableau contenant les champs de la table "local" du membre courant
    * Ce tableau est utilisable globalement par toutes les classes filles.
-   * Note : les champs de "local" sont spécifiques à l'hébergeur.
+   * Note : les champs de "local" sont spï¿½cifiques ï¿½ l'hï¿½bergeur.
    */
   var $local;
 
-  /* ----------------------------------------------------------------- */
   /**
    * Constructeur
    */
+   /**
+    * 
+    */
   function m_mem() {
   }
 
-  /* ----------------------------------------------------------------- */
   /**
    * Password kind used in this class (hook for admin class)
    */
+   /**
+    * 
+    * @return type
+    */
   function alternc_password_policy() {
     return array("mem"=>"AlternC's account password");
   }
 
+   /**
+    * 
+    * @return type
+    */
   function hook_menu() {
     $obj = array(
       'title'       => _("Settings"),
@@ -69,15 +78,17 @@ class m_mem {
      return $obj;
   }
 
-  /* ----------------------------------------------------------------- */
   /** Check that the current user is an admnistrator.
    * @return boolean TRUE if we are super user, or FALSE if we are not.
    */
+   /**
+    * 
+    * @return type
+    */
   function checkright() {
     return ($this->user["su"]=="1");
   }
 
-  /* ----------------------------------------------------------------- */
   /** Start a session in the web desktop. Check username and password.
    * <b>Note : </b>If the user entered a bas password, the failure will be logged
    * and told to the corresponding user on next successfull login.
@@ -85,11 +96,22 @@ class m_mem {
    * @param $password string User Password.
    * @return boolean TRUE if the user has been successfully connected, or FALSE if an error occured.
    */
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @global m_mem       $mem
+    * @global m_authip    $authip
+    * @global m_admin     $admin
+    * @param type $username
+    * @param type $password
+    * @param type $restrictip
+    * @param type $authip_token
+    * @return boolean
+    */
   function login($username,$password,$restrictip=0,$authip_token=false) {
     global $db,$err,$cuid,$authip,$admin;
     $err->log("mem","login",$username);
-    //    $username=addslashes($username);
-    //    $password=addslashes($password);
     $db->query("select * from membres where login='$username';");
     if ($db->num_rows()==0) {
       $err->raise("mem",_("User or password incorrect"));
@@ -113,7 +135,6 @@ class m_mem {
       return false;
     }
 
-    // AuthIP
     $allowed_ip=false;
     if ( $authip_token ) $allowed_ip = $this->authip_tokencheck($authip_token);
 
@@ -122,27 +143,21 @@ class m_mem {
       if ( $authip->is_in_subnet(get_remote_ip(), $v['ip'], $v['subnet']) ) $allowed=true ;
     }
 
-    // Error if there is rules, the IP is not allowed and it's not in the whitelisted IP
     if ( sizeof($aga)>1 && !$allowed_ip && !$authip->is_wl(get_remote_ip()) ) {
       $err->raise("mem",_("Your IP isn't allowed to connect"));
       return false;
     }
-    // End AuthIP
 
     if ($restrictip) {
       $ip="'".get_remote_ip()."'";
     } else $ip="''";
-    /* Close sessions that are more than 2 days old. */
     $db->query("DELETE FROM sessions WHERE DATE_ADD(ts,INTERVAL 2 DAY)<NOW();");
-    /* Delete old impersonation */
     if ( isset($_COOKIE["oldid"]) ) setcookie('oldid','',0,'/'); 
-    /* Open the session : */
     $sess=md5(uniqid(mt_rand()));
     $_REQUEST["session"]=$sess;
     $db->query("insert into sessions (sid,ip,uid) values ('$sess',$ip,'$cuid');");
     setcookie("session",$sess,0,"/");
     $err->error=0;
-    /* Fill in $local */
     $db->query("SELECT * FROM local WHERE uid='$cuid';");
     if ($db->num_rows()) {
       $db->next_record();
@@ -151,7 +166,6 @@ class m_mem {
     return true;
   }
 
-  /* ----------------------------------------------------------------- */
   /** Start a session as another user from an administrator account.
    * This function is not the same as su. setid connect the current user in the destination
    * account (for good), and su allow any user to become another account for some commands only.
@@ -160,6 +174,16 @@ class m_mem {
    * @param $id integer User id where we will connect to.
    * @return boolean TRUE if the user has been successfully connected, FALSE else.
    */
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @global m_mem       $mem
+    * @global m_mysql     $mysql
+    * @global m_quota     $quota
+    * @param type $id
+    * @return boolean
+    */
   function setid($id) {
     global $db,$err,$cuid,$mysql,$quota;
     $err->log("mem","setid",$id);
@@ -171,7 +195,6 @@ class m_mem {
     $db->next_record();
     $this->user=$db->Record;
     $cuid=$db->f("uid");
-    // And recreate the $db->dbus 
     $mysql->reload_dbus();
 
     $ip=get_remote_ip();
@@ -180,7 +203,6 @@ class m_mem {
     $db->query("insert into sessions (sid,ip,uid) values ('$sess','$ip','$cuid');");
     setcookie("session",$sess,0,"/");
     $err->error=0;
-    /* Fill in $local */
     $db->query("SELECT * FROM local WHERE uid='$cuid';");
     if ($db->num_rows()) {
       $db->next_record();
@@ -190,9 +212,13 @@ class m_mem {
     return true;
   }
 
-  /* ----------------------------------------------------------------- */
-  /** Suite à la connexion de l'utilisateur, réinitialise ses paramètres de dernière connexion
+  /** Suite ï¿½ la connexion de l'utilisateur, rï¿½initialise ses paramï¿½tres de derniï¿½re connexion
    */
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_mem       $mem
+    */
   function resetlast() {
     global $db,$cuid;
     $ip=addslashes(getenv("REMOTE_HOST"));
@@ -200,6 +226,13 @@ class m_mem {
     $db->query("UPDATE membres SET lastlogin=NOW(), lastfail=0, lastip='$ip' WHERE uid='$cuid';");
   }
 
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_mem       $mem
+    * @param type $bis
+    * @return type
+    */
   function authip_token($bis=false) {
     global $db,$cuid;
     $db->query("select pass from membres where uid='$cuid';");
@@ -212,12 +245,22 @@ class m_mem {
   /**
    * @param boolean $t
   */
+   /**
+    * 
+    * @param type $t
+    * @return boolean
+    */
   function authip_tokencheck($t) {
     if ($t==$this->authip_token() || $t==$this->authip_token(true) ) return true;
     return false;
   }
 
-/* Faut finir de l'implémenter :) * /
+// Faut finir de l'implï¿½menter :) * 
+   /**
+    * 
+    * @global m_mem       $mem
+    * @return string
+    */
   function authip_class() {
     global $cuid;
     $c = Array();
@@ -227,20 +270,26 @@ class m_mem {
 
     return $c;
   }
-/* */
+// *
 
-  /* ----------------------------------------------------------------- */
-  /** Vérifie que la session courante est correcte (cookie ok et ip valide).
-   * Si besoin, et si réception des champs username & password, crée une nouvelle
-   * session pour l'utilisateur annoncé.
-   * Cette fonction doit être appellée à chaque page devant être authentifiée.
-   * et AVANT d'émettre des données. (un cookie peut être envoyé)
+  /** Vï¿½rifie que la session courante est correcte (cookie ok et ip valide).
+   * Si besoin, et si rï¿½ception des champs username & password, crï¿½e une nouvelle
+   * session pour l'utilisateur annoncï¿½.
+   * Cette fonction doit ï¿½tre appellï¿½e ï¿½ chaque page devant ï¿½tre authentifiï¿½e.
+   * et AVANT d'ï¿½mettre des donnï¿½es. (un cookie peut ï¿½tre envoyï¿½)
    * @global string $session Le cookie de session eventuel
    * @global string $username/password le login/pass de l'utilisateur
    * @return boolean TRUE si la session est correcte, FALSE sinon.
    */
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @global m_mem       $mem
+    * @return boolean
+    */
   function checkid() {
-    global $db,$err,$cuid,$restrictip,$authip;
+    global $db,$err,$cuid;
     if (isset($_REQUEST["username"])) {
       if ( empty($_REQUEST['password']) ) {
         $err->raise("mem",_("Missing password"));
@@ -279,7 +328,6 @@ class m_mem {
     $db->next_record();
     $this->user=$db->Record;
     $err->error=0;
-    /* Remplissage de $local */
     $db->query("SELECT * FROM local WHERE uid='$cuid';");
     if ($db->num_rows()) {
       $db->next_record();
@@ -288,11 +336,19 @@ class m_mem {
     return true;
   }
 
-  /* ----------------------------------------------------------------- */
-  /** Change l'identité d'un utilisateur temporairement.
-   * @global string $uid Utilisateur dont on prends l'identité
+  /** Change l'identitï¿½ d'un utilisateur temporairement.
+   * @global string $uid Utilisateur dont on prends l'identitï¿½
    * @return TRUE si la session est correcte, FALSE sinon.
    */
+   /**
+    * 
+    * @global m_mem       $mem
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @global m_mysql     $mysql
+    * @param type $uid
+    * @return boolean
+    */
   function su($uid) {
     global $cuid,$db,$err,$mysql;
     if (!$this->olduid)
@@ -306,33 +362,44 @@ class m_mem {
     $this->user=$db->Record;
     $cuid=$db->f("uid");
 
-    // And recreate the $db->dbus 
     $mysql->reload_dbus();
     return true;
   }
 
-  /* ----------------------------------------------------------------- */
   /** Retourne a l'identite d'origine de l'utilisateur apres su.
    * @return boolean TRUE si la session est correcte, FALSE sinon.
    */
+   /**
+    * 
+    * @global m_mem       $mem
+    * @global m_mysql     $mysql
+    * @return boolean
+    */
   function unsu() {
     global $cuid,$mysql;
     if (!$this->olduid)
 	return false;
     $this->su($this->olduid);
     $this->olduid=0;
-    // And recreate the $db->dbus 
     $mysql->reload_dbus();
     return true;
   }
 
 
-  /* ----------------------------------------------------------------- */
   /** Termine une session du bureau virtuel (logout)
-   * @return boolean TRUE si la session a bien été détruite, FALSE sinon.
+   * @return boolean TRUE si la session a bien ï¿½tï¿½ dï¿½truite, FALSE sinon.
    */
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @global m_mem       $mem
+    * @global array       $classes
+    * @global m_hooks     $hooks
+    * @return boolean
+    */
   function del_session() {
-    global $db,$user,$err,$cuid,$classes,$hooks;
+    global $db,$err,$cuid,$classes,$hooks;
     $_COOKIE["session"]=addslashes(isset($_COOKIE["session"])?$_COOKIE["session"]:'');
     setcookie("session","",0,"/");
     setcookie("oldid","",0,"/");
@@ -360,13 +427,7 @@ class m_mem {
     $err->error=0;
     
     # Invoker le logout dans toutes les autres classes
-    /*
-    foreach($classes as $c) {
-      if (method_exists($GLOBALS[$c],"alternc_del_session")) {
-	    $GLOBALS[$c]->alternc_del_session();
-      }
-    }
-    */
+
     $hooks->invoke("alternc_del_session");
     
     session_unset();
@@ -374,13 +435,23 @@ class m_mem {
     return true;
   }
 
-  /* ----------------------------------------------------------------- */
   /** Change le mot de passe de l'utilisateur courant.
    * @param string $oldpass Ancien mot de passe.
    * @param string $newpass Nouveau mot de passe
-   * @param string $newpass2 Nouveau mot de passe (à nouveau)
-   * @return boolean TRUE si le mot de passe a été changé, FALSE sinon.
+   * @param string $newpass2 Nouveau mot de passe (ï¿½ nouveau)
+   * @return boolean TRUE si le mot de passe a ï¿½tï¿½ changï¿½, FALSE sinon.
    */
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_err   $err
+    * @global m_mem       $mem
+    * @global m_admin     $admin
+    * @param type $oldpass
+    * @param type $newpass
+    * @param type $newpass2
+    * @return boolean
+    */
   function passwd($oldpass,$newpass,$newpass2) {
     global $db,$err,$cuid,$admin;
     $err->log("mem","passwd");
@@ -411,11 +482,18 @@ class m_mem {
     return true;
   }
 
-  /* ----------------------------------------------------------------- */
-  /** Change les préférences administrateur d'un compte
+  /** Change les prï¿½fï¿½rences administrateur d'un compte
    * @param integer $admlist Mode de visualisation des membres (0=large 1=courte)
-   * @return boolean TRUE si les préférences ont été changées, FALSE sinon.
+   * @return boolean TRUE si les prï¿½fï¿½rences ont ï¿½tï¿½ changï¿½es, FALSE sinon.
    */
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @global m_mem       $mem
+    * @param type $admlist
+    * @return boolean
+    */
   function adminpref($admlist) {
     global $db,$err,$cuid;
     $err->log("mem","admlist");
@@ -428,13 +506,21 @@ class m_mem {
     return true;
   }
 
-  /* ----------------------------------------------------------------- */
   /** Envoie en mail le mot de passe d'un compte.
    * <b>Note : </b>On ne peut demander le mot de passe qu'une seule fois par jour.
    * TODO : Translate this mail into the localization program.
    * TODO : Check this function's !
-   * @return boolean TRUE si le mot de passe a été envoyé avec succès, FALSE sinon.
+   * @return boolean TRUE si le mot de passe a ï¿½tï¿½ envoyï¿½ avec succï¿½s, FALSE sinon.
    */
+   /**
+    * 
+    * @global m_err       $err
+    * @global m_mysql     $db
+    * @global string      $L_HOSTING
+    * @global string      $L_FQDN
+    * @param type $login
+    * @return boolean
+    */
   function send_pass($login) {
     global $err,$db,$L_HOSTING,$L_FQDN;
     $err->log("mem","send_pass");
@@ -472,12 +558,21 @@ Cordially.
     return true;
   }
 
-  /* ----------------------------------------------------------------- */
-  /** Change le mail d'un membre (première etape, envoi du CookiE)
+  /** Change le mail d'un membre (premiï¿½re etape, envoi du CookiE)
    * TODO : insert this mail string into the localization system
-   * @param string $newmail Nouveau mail souhaité pour le membre.
-   * @return string le cookie si le mail a bien été envoyé, FALSE sinon
+   * @param string $newmail Nouveau mail souhaitï¿½ pour le membre.
+   * @return string le cookie si le mail a bien ï¿½tï¿½ envoyï¿½, FALSE sinon
    */
+   /**
+    * 
+    * @global m_err       $err
+    * @global m_mysql     $db
+    * @global string      $L_HOSTING
+    * @global string      $L_FQDN
+    * @global m_mem       $mem
+    * @param type $newmail
+    * @return boolean
+    */
   function ChangeMail1($newmail) {
     global $err,$db,$L_HOSTING,$L_FQDN,$cuid;
     $err->log("mem","changemail1",$newmail);
@@ -488,9 +583,7 @@ Cordially.
     }
     $db->next_record();
 
-    // un cookie de 20 caractères pour le mail
     $COOKIE=substr(md5(uniqid(rand(), true)),0,20);
-    // et de 6 pour la clé à entrer. ca me semble suffisant...
     $KEY=substr(md5(uniqid(rand(), true)),0,6);
     $link="https://$L_FQDN/mem_cm.php?usr=$cuid&cookie=$COOKIE";
     $txt=sprintf(_("Hello,
@@ -513,22 +606,30 @@ again, please contact your server's administrator.
 Cordially.
 "), $db->f("login"), $L_HOSTING, $link);
     mail($newmail,"Email modification request on $L_HOSTING",$txt,"From: postmaster@$L_FQDN\nReply-to: postmaster@$L_FQDN");
-    // Supprime les demandes précédentes de ce compte !
     $db->query("DELETE FROM chgmail WHERE uid='$cuid';");
     $db->query("INSERT INTO chgmail (cookie,ckey,uid,mail,ts) VALUES ('$COOKIE','$KEY','$cuid','$newmail',".time().");");
-    // Supprime les cookies de la veille :)
     $lts=time()-86400;
     $db->query("DELETE FROM chgmail WHERE ts<'$lts';");
     return $KEY;
   }
 
-  /* ----------------------------------------------------------------- */
-    /** Change le mail d'un membre (seconde etape, CookiE+clé = application)
-     * @param string $COOKIE Cookie envoyé par mail
-     * @param string $KEY clé affichée à l'écran
-     * @param integer $uid Utilisateur concerné (on est hors session)
-     * @return boolean TRUE si le mail a bien été modifié, FALSE sinon
+    /** Change le mail d'un membre (seconde etape, CookiE+clï¿½ = application)
+     * @param string $COOKIE Cookie envoyï¿½ par mail
+     * @param string $KEY clï¿½ affichï¿½e ï¿½ l'ï¿½cran
+     * @param integer $uid Utilisateur concernï¿½ (on est hors session)
+     * @return boolean TRUE si le mail a bien ï¿½tï¿½ modifiï¿½, FALSE sinon
      */
+     /**
+      * 
+      * @global m_err       $err
+      * @global m_mysql     $db
+      * @global string      $L_HOSTING
+      * @global string      $L_FQDN
+      * @param type $COOKIE
+      * @param type $KEY
+      * @param type $uid
+      * @return boolean
+      */
     function ChangeMail2($COOKIE,$KEY,$uid) {
       global $err,$db,$L_HOSTING,$L_FQDN;
       $err->log("mem","changemail2",$uid);
@@ -539,39 +640,52 @@ Cordially.
       }
       $db->next_record();
 
-      // met à jour le compte :
       $db->query("UPDATE membres SET mail='".$db->f("mail")."' WHERE uid='$uid';");
 
       $db->query("DELETE FROM chgmail WHERE uid='$uid';");
-      // Supprime les cookies de la veille :)
       $lts=time()-86400;
       $db->query("DELETE FROM chgmail WHERE ts<'$lts';");
       return true;
     }
 
-    /* ----------------------------------------------------------------- */
-    /** Modifie le paramètre d'aide en ligne (1/0)
+    /** Modifie le paramï¿½tre d'aide en ligne (1/0)
      * @param integer $show Faut-il (1) ou non (0) afficher l'aide en ligne
      */
+     /**
+      * 
+      * @global m_mysql     $db
+      * @global m_err       $err
+      * @global m_mem       $mem
+      * @param type $show
+      */
     function set_help_param($show) {
       global $db,$err,$cuid;
       $err->log("mem","set_help_param",$show);
       $db->query("UPDATE membres SET show_help='$show' WHERE uid='$cuid';");
     }
 
-    /* ----------------------------------------------------------------- */
-    /** Dit si l'aide en ligne est demandée
-     * @return boolean TRUE si l'aide en ligne est demandée, FALSE sinon.
+    /** Dit si l'aide en ligne est demandï¿½e
+     * @return boolean TRUE si l'aide en ligne est demandï¿½e, FALSE sinon.
      */
+     /**
+      * 
+      * @return type
+      */
     function get_help_param() {
       return $this->user["show_help"];
     }
 
-    /* ----------------------------------------------------------------- */
     /** Affiche (echo) l'aide contextuelle
-     * @param integer $file Numéro de fichier d'aide à afficher.
-     * @return boolean TRUE si l'aide contextuelle a été trouvée, FALSE sinon
+     * @param integer $file Numï¿½ro de fichier d'aide ï¿½ afficher.
+     * @return boolean TRUE si l'aide contextuelle a ï¿½tï¿½ trouvï¿½e, FALSE sinon
      */
+   /**
+    * 
+    * @global m_err       $err
+    * @param type $file
+    * @param type $force
+    * @return boolean
+    */
   function show_help($file,$force=false) {
     global $err;
     if ($this->user["show_help"] || $force) {
@@ -592,6 +706,13 @@ Cordially.
   /**
    * @param integer $uid
   */
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @param type $uid
+    * @return boolean
+    */
   function get_creator_by_uid($uid) {
     global $db,$err;
     $err->log("dom","get_creator_by_uid");
@@ -602,11 +723,16 @@ Cordially.
   }
 
 
-  /* ----------------------------------------------------------------- */
   /**
    * Exports all the personnal user related information for an account.
    * @access private
    */
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @return string
+    */
   function alternc_export_conf() {
     global $db,$err;
     $err->log("mem","export");
@@ -626,6 +752,12 @@ Cordially.
     return $str;
   }
 
+   /**
+    * 
+    * @global   int     $uid
+    * @param type $v
+    * @return boolean
+    */
   function session_tempo_params_get($v) {
     global $uid;
     if (empty($_COOKIE['session'])) return false;
@@ -641,6 +773,14 @@ Cordially.
     return false;
   }
 
+   /**
+    * 
+    * @global   int     $uid
+    * @param type $k
+    * @param type $v
+    * @param type $ecrase
+    * @return boolean
+    */
   function session_tempo_params_set($k, $v, $ecrase=false) {
     global $uid;
     if (empty($_COOKIE['session'])) return false;
@@ -659,5 +799,3 @@ Cordially.
   }
 
 } /* Classe Membre */
-
-?>

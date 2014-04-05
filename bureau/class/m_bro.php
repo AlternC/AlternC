@@ -192,7 +192,7 @@ class m_bro {
    * 
    * @global    m_mysql $db
    * @global    int     $cuid
-   * @global    m_err   $err
+   * @global m_err       $err
    * @param     string  $dir        Dossier relatif au dossier racine du compte du membre courant
    * @param     boolean $showdirsize
    * @return    array               Le tableau contenant les fichiers de $dir, et
@@ -387,7 +387,7 @@ class m_bro {
    * 
    * @global    m_mysql $db
    * @global    int     $cuid
-   * @global    m_err   $err
+   * @global m_err       $err
    * @param     string  $dir     Dossier dans lequel on veut crer un sous-dossier
    * @param     string  $file    Nom du dossier à créer
    * @return    boolean         TRUE si le dossier a été créé, FALSE si une erreur s'est produite.
@@ -415,7 +415,7 @@ class m_bro {
    * Crée un fichier vide dans un dossier
    * 
    * @global    m_mysql $db
-   * @global    m_err   $err
+   * @global m_err       $err
    * @global    int     $cuid
    * @param     string  $dir     Dossier dans lequel on veut crer un sous-dossier
    * @param     string  $file    Nom du dossier à créer
@@ -443,7 +443,7 @@ class m_bro {
   /**
    * Efface les fichiers du tableau $file_list dans le dossier $R
    * 
-   * @global    m_err   $err
+   * @global m_err       $err
    * @global    m_mem   $mem
    * @param     array   $file_list  Liste des fichiers  effacer.
    * @param     string  $R          Dossier dans lequel on efface les fichiers
@@ -470,7 +470,7 @@ class m_bro {
   /**
    * Renomme les fichier de $old du dossier $R en $new
    * 
-   * @global    m_err   $err
+   * @global m_err       $err
    * @param     string  $R      Dossier dans lequel se trouve les fichiers  renommer.
    * @param     array   $old    Ancien nom des fichiers
    * @param     array   $new    Nouveau nom des fichiers
@@ -504,7 +504,7 @@ class m_bro {
   /**
    * Déplace les fichier de $d du dossier $old vers $new
    * 
-   * @global    m_err   $err
+   * @global m_err       $err
    * @param     array   $d      Liste des fichiers du dossier $old  dplacer
    * @param     string  $old    Dossier dans lequel se trouve les fichiers  dplacer.
    * @param     string  $new    Dossier vers lequel seront dplacs les fichiers.
@@ -545,7 +545,7 @@ class m_bro {
   /**
    * Change les droits d'acces aux fichier de $d du dossier $R en $p
    * 
-   * @global    m_err   $err
+   * @global m_err       $err
    * @param     string  $R          Dossier dans lequel se trouve les fichiers  renommer.
    * @param     boolean $verbose    Shall we 'echo' what we did ?
    * @return    boolean TRUE        Si les fichiers ont t renomms, FALSE si une erreur s'est produite.
@@ -587,7 +587,7 @@ class m_bro {
    * 
    * 
    * @global    array   $_FILES
-   * @global    m_err   $err
+   * @global m_err       $err
    * @global    int     $cuid
    * @global    m_action $action
    * @param     string $R   Dossier dans lequel on upload le fichier
@@ -640,7 +640,7 @@ class m_bro {
   /**
    * Extract an archive by using GNU and non-GNU tools
    * 
-   * @global    m_err   $err
+   * @global m_err       $err
    * @global    int     $cuid
    * @global    m_mem   $mem
    * @global    m_action $action
@@ -692,7 +692,7 @@ class m_bro {
   /**
    * Copy many files from point A to point B
    * 
-   * @global    m_err   $err
+   * @global m_err       $err
    * @param     array   $d      List of files to move
    * @param     string  $old    
    * @param     string  $new    
@@ -731,7 +731,7 @@ class m_bro {
    *
    * Note that we assume that the inputs have been convertabsolute()'d
    * 
-   * @global    m_err   $err
+   * @global m_err       $err
    * @param     string $src     Path or URL
    * @param     string $dest    Absolute path inside the users directory
    * @return    boolean         false on error
@@ -785,7 +785,7 @@ class m_bro {
    * Affiche le contenu du fichier $file dans le dossier $R. Le contenu
    * du fichier est reformat pour pouvoir entrer dans un champs TextArea
    * 
-   * @global    m_err   $err
+   * @global m_err       $err
    * @param     string  $R      Dossier dans lequel on cherche le fichier
    * @param     string  $file   Fichier dont on souhaite obtenir le contenu.
    * @return    string|false         TRUE si le fichier a bien été mis sur
@@ -868,7 +868,7 @@ class m_bro {
   /**
    * 
    * @global    m_mem   $mem
-   * @global    m_err   $err
+   * @global m_err       $err
    * @param     string  $dir
    * @param     string  $name
    * @return null|boolean
@@ -939,7 +939,7 @@ class m_bro {
 
   /**
    * 
-   * @global    m_err   $err
+   * @global m_err       $err
    * @param     string  $dir
    * @param     string  $file
    */
@@ -956,7 +956,7 @@ class m_bro {
   /**
    * Echoes the content of the file $file located in directory $R
    * 
-   * @global    m_err   $err
+   * @global m_err       $err
    * @param     string  $R
    * @param     string  $file
    * @return    null|false
@@ -981,7 +981,7 @@ class m_bro {
    * le contenu est issu d'un textarea, et ne DOIT PAS contenir de \ ajouts
    * automatiquement par addslashes
    * 
-   * @global    m_err   $err
+   * @global m_err       $err
    * @param     string  $file   Nom du fichier  sauver. S'il existe déjà, il sera
    *                            écrasé sans confirmation.
    * @param     string  $R      Dossier dans lequel on modifie le fichier
@@ -1124,7 +1124,7 @@ class m_bro {
    * Produit en sorti un tableau formatté ( pour le moment) en HTML
    * 
    * @global    m_mysql $db
-   * @global    m_err   $err
+   * @global m_err       $err
    * @return    string
    */
   function alternc_export_conf() {
@@ -1151,7 +1151,7 @@ class m_bro {
    *  Function d'exportation des données appelé par la classe m_export via un hooks
    * 
    * @global    m_mem   $mem
-   * @global    m_err   $err
+   * @global m_err       $err
    * @param     string  $dir    Le chemin destination du tarball produit
    * @return    boolean|null
    */

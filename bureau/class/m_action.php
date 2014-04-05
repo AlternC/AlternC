@@ -31,7 +31,7 @@
  * 
  */
 class m_action {
-    /* --------------------------------------------------------------------------- */
+
 
     /** 
      * Constructor
@@ -222,7 +222,7 @@ class m_action {
      * This seems to be unused ?
      * 
      * @global m_err $err
-     * @global m_mysql $db
+     * @global m_mysql     $db
      * @return boolean
      */
     function get_old() {

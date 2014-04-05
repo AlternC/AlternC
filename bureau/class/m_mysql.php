@@ -40,6 +40,13 @@ class DB_users extends DB_Sql {
   /**
    * Creator
    */
+   /**
+    * 
+    * @global m_mem       $mem
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @param type $empty
+    */
   function DB_users($empty=false) { // Sometimes we need to create this object with empty parameters, but by default we fill them with those of the current user's DB
     global $cuid, $db, $err;
 
@@ -80,6 +87,10 @@ class m_mysql {
   /** Constructor
    * m_mysql([$mid]) Constructeur de la classe m_mysql, initialise le membre concerne
    */
+   /**
+    * 
+    * @global m_mem       $mem
+    */
   function m_mysql() {
     global $cuid;
     if (!empty($cuid)) { 
@@ -88,10 +99,18 @@ class m_mysql {
     variable_get('sql_allow_users_backups', 1,'Set 1 to allow users to configure backup of their databases, 0 if you want do disable this feature. Warning: it will not stop configured backup made by sqlbackup.sh');
   }
 
+   /**
+    * 
+    */
   function reload_dbus() {
     $this->dbus = new DB_users();
   }
 
+   /**
+    * 
+    * @global m_mysql     $db
+    * @return type
+    */
   function list_db_servers() {
     global $db;
     $db->query("select d.*, IFNULL(count(m.uid),0) as nb_users from db_servers d left join membres m on  d.id = m.db_server_id group by d.id,m.db_server_id order by d.name,d.id;");
@@ -102,6 +121,11 @@ class m_mysql {
     return $c;
   }
 
+   /**
+    * 
+    * @global m_quota     $quota
+    * @return type
+    */
   function hook_menu() {
     global $quota;
     $q = $quota->getquota("mysql");
@@ -141,6 +165,10 @@ class m_mysql {
   /**
    * Password kind used in this class (hook for admin class)
    */
+   /**
+    * 
+    * @return type
+    */
   function alternc_password_policy() {
     return array("mysql"=>"MySQL users");
   }
@@ -152,6 +180,14 @@ class m_mysql {
    *  "dir" => Backup folder.
    *  Returns an array (empty) if no databases
    */
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @global m_bro       $bro
+    * @global m_mem       $mem
+    * @return type
+    */
   function get_dblist() {
     global $db,$err,$bro,$cuid;
     $err->log("mysql","get_dblist");
@@ -170,6 +206,13 @@ class m_mysql {
    * @return array returns an associative array with login and password 
    *  Returns FALSE if error
    */
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_mem       $mem
+    * @global m_err       $err
+    * @return boolean
+    */
   function php_myadmin_connect(){
     global $db,$cuid,$err;
     $err->log("mysql","php_myadmin_connect");
@@ -201,6 +244,16 @@ class m_mysql {
    *  "gzip" => Does we compress the dumps ?
    *  Returns FALSE if the user has no database of if the database does not exist.
    */
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @global m_bro       $bro
+    * @global    m_mem   $mem
+    * @global m_mem       $mem
+    * @param type $dbn
+    * @return type
+    */
   function get_mysql_details($dbn) {
     global $db,$err,$bro,$mem,$cuid;
     $root=getuserpath();
@@ -224,6 +277,13 @@ class m_mysql {
     return array("enabled"=>true,"login"=>$db->f("login"),"db"=>$db->f("db"), "name"=>$dbn,"bck"=>$db->f("bck_mode"), "dir"=>substr($db->f("bck_dir"),strlen($root)), "size"=>$size, "pass"=>$db->f("pass"), "history"=>$db->f("bck_history"), "gzip"=>$db->f("bck_gzip"));
   }
 
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @global m_mem       $mem
+    * @param type $dbname
+    */
   function test_get_param($dbname){
     global $db,$err,$cuid;
     $db->query("SELECT ");
@@ -237,6 +297,17 @@ class m_mysql {
    * @return boolean if the database $user_$db has been successfully created, or FALSE if 
    * an error occured, such as over quota user.
    */
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @global m_quota     $quota
+    * @global    m_mem   $mem
+    * @global m_mem       $mem
+    * @global m_admin     $admin
+    * @param type $dbn
+    * @return boolean
+    */
   function add_db($dbn) {
     global $db,$err,$quota,$mem,$cuid,$admin;
     $err->log("mysql","add_db",$dbn);
@@ -318,6 +389,15 @@ class m_mysql {
    * @return boolean if the database $user_$db has been successfully deleted, or FALSE if 
    *  an error occured, such as db does not exist.
    */
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @global    m_mem   $mem
+    * @global m_mem       $mem
+    * @param type $dbn
+    * @return boolean
+    */
   function del_db($dbn) {
     global $db,$err,$mem,$cuid;
     $err->log("mysql","del_db",$dbn);
@@ -358,6 +438,20 @@ class m_mysql {
    * @param $bck_dir string Directory relative to the user account where the backup will be stored
    * @return boolean true if the backup parameters has been successfully changed, false if not.
    */
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @global    m_mem   $mem
+    * @global m_bro       $bro
+    * @global m_mem       $mem
+    * @param type $dbn
+    * @param type $bck_mode
+    * @param type $bck_history
+    * @param type $bck_gzip
+    * @param type $bck_dir
+    * @return boolean
+    */
   function put_mysql_backup($dbn,$bck_mode,$bck_history,$bck_gzip,$bck_dir) {
     global $db,$err,$mem,$bro,$cuid;
     $err->log("mysql","put_mysql_backup");
@@ -411,6 +505,16 @@ class m_mysql {
    * @param $password string new password (cleartext)
    * @return boolean TRUE if the password has been successfully changed, FALSE else.
    */
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @global    m_mem   $mem
+    * @global m_mem       $mem
+    * @global m_admin     $admin
+    * @param type $password
+    * @return boolean
+    */
   function put_mysql_details($password) {
     global $db,$err,$mem,$cuid,$admin;
     $err->log("mysql","put_mysql_details");
@@ -453,6 +557,17 @@ class m_mysql {
    * @pass : user password ( optional, if not given the pass stays the same, else it takes the new value )
    * @table : sql tables to apply rights
    **/
+   /**
+    * 
+    * @global m_err       $err
+    * @global m_mysql     $db
+    * @param string $base
+    * @param type $user
+    * @param string $rights
+    * @param type $pass
+    * @param type $table
+    * @return boolean
+    */
   function grant($base,$user,$rights=null,$pass=null,$table='*'){
     global $err,$db;
     $err->log("mysql","grant",$base."-".$rights."-".$user);
@@ -509,6 +624,18 @@ class m_mysql {
    * @param $id integer The ID of the database to dump to.
    * @return boolean TRUE if the database has been restored, or FALSE if an error occurred
    */
+   /**
+    * 
+    * @global m_err       $err
+    * @global m_bro       $bro
+    * @global    m_mem   $mem
+    * @global string      $L_MYSQL_HOST
+    * @global m_mysql     $db
+    * @param type $file
+    * @param type $stdout
+    * @param type $id
+    * @return boolean
+    */
   function restore($file,$stdout,$id) { 
     global $err,$bro,$mem,$L_MYSQL_HOST,$db;
     if (empty($file)) {
@@ -557,6 +684,13 @@ class m_mysql {
    * @return integer database size
    * @access private
    */
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @param type $dbname
+    * @return type
+    */
   function get_db_size($dbname) {
     global $db,$err;
 
@@ -574,6 +708,15 @@ class m_mysql {
   /** 
    * Returns the list of database users of an account
    **/
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @global m_bro       $bro
+    * @global m_mem       $mem
+    * @param type $all
+    * @return type
+    */
   function get_userslist($all=null) {
     global $db,$err,$bro,$cuid;
     $err->log("mysql","get_userslist");
@@ -596,6 +739,15 @@ class m_mysql {
     return $c;
   }
 
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @global m_bro       $bro
+    * @global m_mem       $mem
+    * @param type $dbn
+    * @return array
+    */
   function get_defaultsparam($dbn){
     global $db,$err,$bro,$cuid;
     $err->log("mysql","getdefaults");
@@ -692,6 +844,19 @@ class m_mysql {
    * @param string $passconf The password confirmation
    * @return boolean if the user has been created in MySQL or FALSE if an error occurred
    **/
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @global m_quota     $quota
+    * @global    m_mem   $mem
+    * @global m_mem       $mem
+    * @global m_admin     $admin
+    * @param type $usern
+    * @param type $password
+    * @param type $passconf
+    * @return boolean
+    */
   function add_user($usern,$password,$passconf) {
     global $db,$err,$quota,$mem,$cuid,$admin;
     $err->log("mysql","add_user",$usern);
@@ -756,6 +921,19 @@ class m_mysql {
    * @param $passconf The password confirmation
    * @return boolean if the password has been changed in MySQL or FALSE if an error occurred
    **/
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @global m_quota     $quota
+    * @global    m_mem   $mem
+    * @global m_mem       $mem
+    * @global m_admin     $admin
+    * @param type $usern
+    * @param type $password
+    * @param type $passconf
+    * @return boolean
+    */
   function change_user_password($usern,$password,$passconf) {
     global $db,$err,$quota,$mem,$cuid,$admin;
     $err->log("mysql","change_user_pass",$usern);
@@ -788,6 +966,16 @@ class m_mysql {
    * @param integer $all
    * @return boolean if the user has been deleted in MySQL or FALSE if an error occurred
    **/
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @global    m_mem   $mem
+    * @global m_mem       $mem
+    * @param type $user
+    * @param type $all
+    * @return boolean
+    */
   function del_user($user,$all=null) {
     global $db,$err,$mem,$cuid;
     $err->log("mysql","del_user",$user);
@@ -826,6 +1014,15 @@ class m_mysql {
    * @return array An array of database name and rights
    **/
 
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @global    m_mem   $mem
+    * @global m_mem       $mem
+    * @param type $user
+    * @return boolean|string
+    */
   function get_user_dblist($user){
     global $db,$err,$mem,$cuid;
 
@@ -874,6 +1071,16 @@ class m_mysql {
    * @return boolean TRUE if the rights has been applied or FALSE if an error occurred
    * 
    **/
+   /**
+    * 
+    * @global    m_mem   $mem
+    * @global m_err       $err
+    * @global m_mysql     $db
+    * @param type $user
+    * @param type $dbn
+    * @param type $rights
+    * @return boolean
+    */
   function set_user_rights($user,$dbn,$rights) {
     global $mem,$err,$db;
     $err->log("mysql","set_user_rights");
@@ -881,7 +1088,7 @@ class m_mysql {
     $usern=addslashes($user);
     $dbname=addslashes($dbn);
     $dbname=str_replace('_','\_',$dbname);
-    // On génère les droits en fonction du tableau de droits
+    // On gï¿½nï¿½re les droits en fonction du tableau de droits
     $strrights="";
     for( $i=0 ; $i<count($rights) ; $i++ ) {
       switch ($rights[$i]) {
@@ -954,6 +1161,10 @@ class m_mysql {
     return TRUE;
   }
 
+   /**
+    * 
+    * @return type
+    */
   function available_sql_rights(){
     return Array('select','insert','update','delete','create','drop','references','index','alter','create_tmp','lock','create_view','show_view','create_routine','alter_routine','execute','event','trigger');
 
@@ -968,6 +1179,12 @@ class m_mysql {
    * @return integer the number of service used or false if an error occured
    * @access private
    */
+   /**
+    * 
+    * @global m_err       $err
+    * @param type $params
+    * @return int
+    */
   function hook_lxc_params($params) {
     global $err;
     $err->log("mysql","alternc_get_quota");
@@ -987,6 +1204,13 @@ class m_mysql {
    * @return integer the number of service used or false if an error occured
    * @access private
    */
+   /**
+    * 
+    * @global m_err       $err
+    * @global m_mysql     $db
+    * @global m_mem       $mem
+    * @return type
+    */
   function hook_quota_get() {
     global $err,$db,$cuid;
     $err->log("mysql","alternc_get_quota");
@@ -1003,6 +1227,14 @@ class m_mysql {
    * AlternC's standard function that create a member
    * @access private
    */
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @global m_mem       $mem
+    * @global    m_mem   $mem
+    * @return boolean
+    */
   function alternc_add_member() {
     global $db,$err,$cuid,$mem;
     $err->log("mysql","alternc_add_member");
@@ -1030,6 +1262,13 @@ class m_mysql {
    * AlternC's standard function that delete a member
    * @access private
    */
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @global m_mem       $mem
+    * @return boolean
+    */
   function alternc_del_member() {
     global $db,$err,$cuid;
     $err->log("mysql","alternc_del_member");
@@ -1054,6 +1293,9 @@ class m_mysql {
    * We just remove the cookie created in admin/sql_admin.php
    a @access private
    */
+   /**
+    * 
+    */
   function alternc_del_session() {
     $_SESSION['PMA_single_signon_user'] = '';
     $_SESSION['PMA_single_signon_password'] = '';
@@ -1067,6 +1309,13 @@ class m_mysql {
    * @access private
    * EXPERIMENTAL 'sid' function ;) 
    */
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @global m_mem       $mem
+    * @return string
+    */
   function alternc_export_conf() {
     //TODO don't work with separated sql server for dbusers
     global $db,$err,$cuid;
@@ -1099,6 +1348,14 @@ class m_mysql {
    * @access private
    * EXPERIMENTAL 'sid' function ;) 
    */
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @global m_mem       $mem
+    * @global    m_mem   $mem
+    * @param string $dir
+    */
   function alternc_export_data ($dir){
     global $db, $err, $cuid,$mem;
     $err->log("mysql","export_data");
@@ -1126,6 +1383,17 @@ class m_mysql {
    * @param $db_client the client to access the SQL db
    * @return an array associating the name of the databases to their sizes : array(dbname=>size)
    */ 
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @param type $db_name
+    * @param type $db_host
+    * @param type $db_login
+    * @param type $db_password
+    * @param type $db_client
+    * @return type
+    */
   function get_dbus_size($db_name,$db_host,$db_login,$db_password,$db_client) {
     global $db,$err;
     $err->log("mysql","get_dbus_size",$db_host);
@@ -1155,4 +1423,3 @@ class m_mysql {
 
 } /* Class m_mysql */
 
-?>

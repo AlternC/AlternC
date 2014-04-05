@@ -61,6 +61,13 @@ class m_err {
    * @return boolean TRUE si l'erreur est connue, FALSE sinon.
    *
    */
+   /**
+    * 
+    * @param type $clsid
+    * @param type $error
+    * @param type $param
+    * @return boolean
+    */
   function raise($clsid,$error,$param="") {
     /* Leve une exception. Si elle existe, sinon, stocke un message d'erreur sur erreur ...*/
     if (_("err_".$clsid."_".$error)!="err_".$clsid."_".$error || is_string($error)) {
@@ -89,6 +96,11 @@ class m_err {
    * @return string Chaine d'erreur.
    *
    */
+   /**
+    * 
+    * @return type
+    * 
+    */
   function errstr() {
     if (is_string($this->error)) {
       // new way of handling errors: message directly in the class
@@ -115,6 +127,10 @@ class m_err {
    * Elle est appelée automatiquement par error
    * @access private
    */
+   /**
+    * 
+    * @global    m_mem   $mem
+    */
   function logerr() {
     global $mem;
     @file_put_contents($this->logfile, date("d/m/Y H:i:s")." - ERROR - ".$mem->user["login"]." - ".$this->errstr(), FILE_APPEND );
@@ -132,6 +148,15 @@ class m_err {
    * @return boolean TRUE si le log a été ajouté, FALSE sinon
    *
    */
+   /**
+    * 
+    * @global    m_mem   $mem
+    * @global m_mem       $mem
+    * @param type $clsid
+    * @param type $function
+    * @param type $param
+    * @return type
+    */
   function log($clsid,$function,$param="") {
     global $mem,$cuid;
     return @file_put_contents($this->logfile,date("d/m/Y H:i:s")." - " .get_remote_ip(). " - CALL - ".$mem->user["login"]." - $clsid - $function - $param\n", FILE_APPEND );
@@ -139,4 +164,3 @@ class m_err {
 
 }; /* Classe m_err */
 
-?>

@@ -79,16 +79,25 @@ class m_dom {
     var $tld_no_check_at_all = "1";
     var $cache_domains_type_lst = false;
 
-    /* ----------------------------------------------------------------- */
+
 
     /**
      * Constructeur
      */
+     /**
+      * 
+      */
     function m_dom() {
         $this->tld_no_check_at_all = variable_get('tld_no_check_at_all', 0, 'Disable ALL check on the TLD (users will be able to add any domain)', array('desc' => 'Disabled', 'type' => 'boolean'));
         variable_get('mailname_bounce', '%%FQDN%%', 'FQDN of the mail server, used to create vhost virtual mail_adress.', array('desc' => 'FQDN', 'type' => 'string'));
     }
 
+     /**
+      * 
+      * @global m_mysql     $db
+      * @global m_err       $err
+      * @return type
+      */
     function get_panel_url_list() {
         global $db, $err;
         $err->log("dom", "get_panel_url_list");
@@ -103,6 +112,9 @@ class m_dom {
     /**
      * @param string $fqdn
      */
+     /**
+      * 
+      */
     function get_sub_domain_id_and_member_by_name($fqdn) {
         global $db, $err, $cuid;
         $err->log("dom", "get_sub_domain_by_name");
@@ -113,6 +125,9 @@ class m_dom {
         return array('sub_id' => intval($db->f('id')), 'member_id' => intval($db->f('compte')));
     }
 
+     /**
+      * 
+      */
     function hook_menu() {
         global $quota;
         $obj = array(
@@ -143,7 +158,6 @@ class m_dom {
         return $obj;
     }
 
-    /* ----------------------------------------------------------------- */
 
     /**
      * Retourne un tableau contenant les types de domaines
@@ -151,6 +165,12 @@ class m_dom {
      * @return array retourne un tableau indexé contenant la liste types de domaines 
      *  authorisé. Retourne FALSE si une erreur s'est produite.
      */
+     /**
+      * 
+      * @global m_mysql     $db
+      * @global m_err       $err
+      * @return type
+      */
     function domains_type_lst() {
         global $db, $err;
         $err->log("dom", "domains_type_lst");
@@ -164,6 +184,13 @@ class m_dom {
         return $this->cache_domains_type_lst;
     }
 
+     /**
+      * 
+      * @global m_mysql     $db
+      * @global m_err       $err
+      * @global m_mem       $mem
+      * @return type
+      */
     function domains_type_enable_values() {
         global $db, $err, $cuid;
         $err->log("dom", "domains_type_target_values");
@@ -183,6 +210,14 @@ class m_dom {
     /**
      * @param integer $type
      */
+     /**
+      * 
+      * @global m_mysql     $db
+      * @global m_err       $err
+      * @global m_mem       $mem
+      * @param type $type
+      * @return boolean
+      */
     function domains_type_target_values($type = null) {
         global $db, $err, $cuid;
         $err->log("dom", "domains_type_target_values");
@@ -206,6 +241,15 @@ class m_dom {
         }
     }
 
+     /**
+      * 
+      * @global m_err       $err
+      * @param type $zone
+      * @param type $domain
+      * @param type $detect_redirect
+      * @param type $save
+      * @return boolean
+      */
     function import_manual_dns_zone($zone, $domain, $detect_redirect = true, $save = false) {
         global $err;
         if ($save) {
@@ -228,6 +272,9 @@ class m_dom {
     /**
      * @param string $zone
      */
+     /**
+      * 
+      */
     function import_manual_dns_entry($zone, $domain, $detect_redirect = true, $save = false) {
         global $cuid, $err;
         $err->log("dom", "import_manual_dns_entry");
@@ -405,7 +452,7 @@ class m_dom {
 
         return $val;
     }
-
+    
     private function import_manual_dns_entry_doit($entry) {
         global $err;
         $entry['did_it'] = 0;
@@ -477,7 +524,13 @@ class m_dom {
     /**
      * @param string $url
      */
+    /**
+     * 
+     * @param type $url
+     * @return boolean
+     */
     function is_it_a_redirect($url) {
+        
         try {
             $params = array('http' => array(
                     'method' => 'HEAD',
@@ -517,6 +570,14 @@ class m_dom {
         }
     }
 
+     /**
+      * 
+      * @global m_mysql     $db
+      * @global m_err       $err
+      * @global m_mem       $mem
+      * @param type $name
+      * @return boolean
+      */
     function domains_type_regenerate($name) {
         global $db, $err, $cuid;
         $name = mysql_real_escape_string($name);
@@ -525,6 +586,14 @@ class m_dom {
         return true;
     }
 
+     /**
+      * 
+      * @global m_mysql     $db
+      * @global m_err       $err
+      * @global m_mem       $mem
+      * @param type $name
+      * @return type
+      */
     function domains_type_get($name) {
         global $db, $err, $cuid;
         $name = mysql_real_escape_string($name);
@@ -533,6 +602,14 @@ class m_dom {
         return $db->Record;
     }
 
+     /**
+      * 
+      * @global m_mysql     $db
+      * @global m_err       $err
+      * @global m_mem       $mem
+      * @param type $name
+      * @return boolean
+      */
     function domains_type_del($name) {
         global $db, $err, $cuid;
         $name = mysql_real_escape_string($name);
@@ -540,6 +617,24 @@ class m_dom {
         return true;
     }
 
+     /**
+      * 
+      * @global m_err       $err
+      * @global m_mem       $mem
+      * @global m_mysql     $db
+      * @param type $name
+      * @param type $description
+      * @param type $target
+      * @param type $entry
+      * @param type $compatibility
+      * @param type $enable
+      * @param type $only_dns
+      * @param type $need_dns
+      * @param type $advanced
+      * @param type $create_tmpdir
+      * @param type $create_targetdir
+      * @return boolean
+      */
     function domains_type_update($name, $description, $target, $entry, $compatibility, $enable, $only_dns, $need_dns, $advanced, $create_tmpdir, $create_targetdir) {
         global $err, $cuid, $db;
         // The name MUST contain only letter and digits, it's an identifier after all ...
@@ -562,6 +657,15 @@ class m_dom {
         return true;
     }
 
+     /**
+      * 
+      * @global m_mysql     $db
+      * @global m_err       $err
+      * @global m_mem       $mem
+      * @param type $sub_id
+      * @param type $status
+      * @return boolean
+      */
     function sub_domain_change_status($sub_id, $status) {
         global $db, $err, $cuid;
         $err->log("dom", "sub_domain_change_status");
@@ -584,7 +688,7 @@ class m_dom {
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
+
 
     /**
      * Retourne un tableau contenant les domaines d'un membre.
@@ -594,6 +698,14 @@ class m_dom {
      *  domaines hébergés sur le compte courant. Retourne FALSE si une
      *  erreur s'est produite.
      */
+     /**
+      * 
+      * @global m_mysql     $db
+      * @global m_err       $err
+      * @global m_mem       $mem
+      * @param type $uid
+      * @return type
+      */
     function enum_domains($uid = -1) {
         global $db, $err, $cuid;
         $err->log("dom", "enum_domains");
@@ -610,6 +722,15 @@ class m_dom {
         return $this->domains;
     }
 
+     /**
+      * 
+      * @global m_mysql     $db
+      * @global m_err       $err
+      * @global array       $classes
+      * @global m_mem       $mem
+      * @param type $dom
+      * @return boolean
+      */
     function del_domain_cancel($dom) {
         global $db, $err, $classes, $cuid;
         $err->log("dom", "del_domaini_canl", $dom);
@@ -622,7 +743,7 @@ class m_dom {
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
+
 
     /**
      *  Efface un domaine du membre courant, et tous ses sous-domaines
@@ -635,6 +756,16 @@ class m_dom {
      * @param string $dom nom de domaine é effacer
      * @return boolean Retourne FALSE si une erreur s'est produite, TRUE sinon.
      */
+     /**
+      * 
+      * @global m_mysql     $db
+      * @global m_err       $err
+      * @global array       $classes
+      * @global m_mem       $mem
+      * @global m_hooks     $hooks
+      * @param type $dom
+      * @return boolean
+      */
     function del_domain($dom) {
         global $db, $err, $classes, $cuid, $hooks;
         $err->log("dom", "del_domain", $dom);
@@ -661,11 +792,17 @@ class m_dom {
         return true;
     }
 
+     /**
+      * 
+      * @param type $dom
+      * @param type $sub
+      * @return type
+      */
     function domshort($dom, $sub = "") {
         return str_replace("-", "", str_replace(".", "", empty($sub) ? "" : "$sub.") . $dom);
     }
 
-    /* ----------------------------------------------------------------- */
+
 
     /**
      *  Installe un domaine sur le compte courant.
@@ -686,6 +823,26 @@ class m_dom {
      *  force ne devrait étre utilisé que par le super-admin.
       $ @return boolean Retourne FALSE si une erreur s'est produite, TRUE sinon.
      */
+     /**
+      * 
+      * @global m_mysql     $db
+      * @global m_err       $err
+      * @global m_quota     $quota
+      * @global array       $classes
+      * @global string      $L_MX
+      * @global string      $L_FQDN
+      * @global array       $tld
+      * @global m_mem       $mem
+      * @global m_bro       $bro
+      * @global m_hooks     $hooks
+      * @param type $domain
+      * @param type $dns
+      * @param type $noerase
+      * @param type $force
+      * @param type $isslave
+      * @param type $slavedom
+      * @return boolean
+      */
     function add_domain($domain, $dns, $noerase = false, $force = false, $isslave = false, $slavedom = "") {
         global $db, $err, $quota, $classes, $L_MX, $L_FQDN, $tld, $cuid, $bro, $hooks;
         $err->log("dom", "add_domain", $domain);
@@ -807,6 +964,13 @@ class m_dom {
     /**
      * @param string $domain
      */
+     /**
+      * 
+      * @global m_mysql     $db
+      * @global m_err       $err
+      * @param type $domain
+      * @param type $target_domain
+      */
     function create_default_subdomains($domain, $target_domain = "") {
         global $db, $err;
         $err->log("dom", "create_default_subdomains", $domain);
@@ -831,6 +995,13 @@ class m_dom {
     /**
      * @param string $domain
      */
+     /**
+      * 
+      * @global m_bro       $bro
+      * @global m_mem       $mem
+      * @param type $domain
+      * @return type
+      */
     function domdefaultdir($domain) {
         global $bro, $cuid;
         $dest_root = $bro->get_userid_root($cuid);
@@ -838,11 +1009,23 @@ class m_dom {
         return "/www/" . $this->domshort($domain);
     }
 
+     /**
+      * 
+      * @param type $domain
+      * @param type $ns
+      * @return type
+      */
     function dump_axfr($domain, $ns = 'localhost') {
         exec('/usr/bin/dig AXFR "' . escapeshellcmd($domain) . '" @"' . escapeshellcmd($ns) . '"', $axfr);
         return $axfr;
     }
 
+     /**
+      * 
+      * @global m_mysql     $db
+      * @global m_err       $err
+      * @return type
+      */
     function lst_default_subdomains() {
         global $db, $err;
         $err->log("dom", "lst_default_subdomains");
@@ -862,6 +1045,12 @@ class m_dom {
         return $c;
     }
 
+     /**
+      * 
+      * @global m_err       $err
+      * @param type $arr
+      * @return boolean
+      */
     function update_default_subdomains($arr) {
         global $err;
         $err->log("dom", "update_default_subdomains");
@@ -881,6 +1070,18 @@ class m_dom {
         return $ok;
     }
 
+     /**
+      * 
+      * @global m_mysql     $db
+      * @global m_err       $err
+      * @param type $domain_type
+      * @param type $sub
+      * @param type $domain_type_parameter
+      * @param type $concerned
+      * @param type $enabled
+      * @param type $id
+      * @return boolean
+      */
     function update_one_default($domain_type, $sub, $domain_type_parameter, $concerned, $enabled, $id = null) {
         global $db, $err;
         $err->log("dom", "update_one_default");
@@ -893,6 +1094,13 @@ class m_dom {
         //update
     }
 
+     /**
+      * 
+      * @global m_err       $err
+      * @global m_mysql     $db
+      * @param type $id
+      * @return boolean
+      */
     function del_default_type($id) {
         global $err, $db;
         $err->log("dom", "del_default_type");
@@ -905,7 +1113,7 @@ class m_dom {
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
+
 
     /**
      * Retourne les entrées DNS du domaine $domain issues du WHOIS.
@@ -921,6 +1129,13 @@ class m_dom {
      *   du domaine demandé. Retourne FALSE si une erreur s'est produite.
      *
      */
+     /**
+      * 
+      * @global m_mysql     $db
+      * @global m_err       $err
+      * @param type $domain
+      * @return boolean
+      */
     function whois($domain) {
         global $db, $err;
         $err->log("dom", "whois", $domain);
@@ -1067,7 +1282,7 @@ class m_dom {
 // whois
 
 
-    /* ----------------------------------------------------------------- */
+
 
     /**
      *  vérifie la presence d'un champs mx valide sur un serveur DNS
@@ -1077,6 +1292,14 @@ class m_dom {
      *
      * @param string $domaine
      */
+     /**
+      * 
+      * @global string      $L_DEFAULT_MX
+      * @global string      $L_DEFAULT_SECONDARY_MX
+      * @param type $domaine
+      * @param type $ref_domain
+      * @return int
+      */
     function checkmx($domaine, $ref_domain = '') {
         global $L_DEFAULT_MX, $L_DEFAULT_SECONDARY_MX;
 
@@ -1115,7 +1338,7 @@ class m_dom {
 //checkmx
 
 
-    /* ----------------------------------------------------------------- */
+
 
     /**
      *  retourne TOUTES les infos d'un domaine
@@ -1136,6 +1359,14 @@ class m_dom {
      *  Retourne FALSE si une erreur s'est produite.
      *
      */
+     /**
+      * 
+      * @global m_mysql     $db
+      * @global m_err       $err
+      * @global m_mem       $mem
+      * @param type $dom
+      * @return boolean|string
+      */
     function get_domain_all($dom) {
         global $db, $err, $cuid;
         $err->log("dom", "get_domain_all", $dom);
@@ -1193,7 +1424,7 @@ class m_dom {
 // get_domain_all
 
 
-    /* ----------------------------------------------------------------- */
+
 
     /**
      * Retourne TOUTES les infos d'un sous domaine du compte courant.
@@ -1207,6 +1438,14 @@ class m_dom {
      *  $r["type"]= Type (0-n) de la redirection.
      *  Retourne FALSE si une erreur s'est produite.
      */
+     /**
+      * 
+      * @global m_mysql     $db
+      * @global m_err       $err
+      * @global m_mem       $mem
+      * @param type $sub_domain_id
+      * @return boolean
+      */
     function get_sub_domain_all($sub_domain_id) {
         global $db, $err, $cuid;
         $err->log("dom", "get_sub_domain_all", $sub_domain_id);
@@ -1241,6 +1480,15 @@ class m_dom {
      * @param integer $type
      * @param string $value
      */
+     /**
+      * 
+      * @global m_mysql     $db
+      * @global m_err       $err
+      * @global m_mem       $mem
+      * @param type $type
+      * @param string $value
+      * @return boolean
+      */
     function check_type_value($type, $value) {
         global $db, $err, $cuid;
 
@@ -1314,7 +1562,7 @@ class m_dom {
 //check_type_value
 
 
-    /* ----------------------------------------------------------------- */
+
 
     /**
      * Check the compatibility of the POSTed parameters with the chosen
@@ -1324,6 +1572,17 @@ class m_dom {
      * @param string $sub SUBdomain 
      * @return boolean tell you if the subdomain can be installed there 
      */
+     /**
+      * 
+      * @global m_mysql     $db
+      * @global m_err       $err
+      * @global m_mem       $mem
+      * @param type $dom
+      * @param type $sub
+      * @param type $type
+      * @param type $sub_domain_id
+      * @return boolean
+      */
     function can_create_subdomain($dom, $sub, $type, $sub_domain_id = 'null') {
         global $db, $err, $cuid;
         $err->log("dom", "can_create_subdomain", $dom . "/" . $sub);
@@ -1347,7 +1606,7 @@ class m_dom {
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
+
 
     /**
      * Modifier les information du sous-domaine demandé.
@@ -1362,6 +1621,19 @@ class m_dom {
      *  de $type (url, ip, dossier...)
      * @return boolean Retourne FALSE si une erreur s'est produite, TRUE sinon.
      */
+     /**
+      * 
+      * @global m_mysql     $db
+      * @global m_err       $err
+      * @global m_mem       $mem
+      * @global m_bro       $bro
+      * @param type $dom
+      * @param type $sub
+      * @param type $type
+      * @param type $dest
+      * @param type $sub_domain_id
+      * @return boolean
+      */
     function set_sub_domain($dom, $sub, $type, $dest, $sub_domain_id = null) {
         global $db, $err, $cuid, $bro;
         $err->log("dom", "set_sub_domain", $dom . "/" . $sub . "/" . $type . "/" . $dest);
@@ -1444,7 +1716,7 @@ class m_dom {
 // set_sub_domain
 
 
-    /* ----------------------------------------------------------------- */
+
 
     /**
      *  Supprime le sous-domaine demandé
@@ -1452,6 +1724,14 @@ class m_dom {
      * @return boolean Retourne FALSE si une erreur s'est produite, TRUE sinon.
      *
      */
+     /**
+      * 
+      * @global m_mysql     $db
+      * @global m_err       $err
+      * @global m_mem       $mem
+      * @param type $sub_domain_id
+      * @return boolean
+      */
     function del_sub_domain($sub_domain_id) {
         global $db, $err, $cuid;
         $err->log("dom", "del_sub_domain", $sub_domain_id);
@@ -1475,6 +1755,13 @@ class m_dom {
     /**
      * @param integer $dom_id
      */
+     /**
+      * 
+      * @global m_err       $err
+      * @param type $dom_id
+      * @param type $ttl
+      * @return type
+      */
     function set_ttl($dom_id, $ttl) {
         global $err;
         $err->log("dom", "set_ttl", "$dom_id / $ttl");
@@ -1487,7 +1774,7 @@ class m_dom {
         return $j;
     }
 
-    /* ----------------------------------------------------------------- */
+
 
     /**
      * Modifie les information du domaine précisé.
@@ -1501,6 +1788,21 @@ class m_dom {
      *  TRUE sinon.
      *
      */
+     /**
+      * 
+      * @global m_mysql     $db
+      * @global m_err       $err
+      * @global string      $L_MX
+      * @global array       $classes
+      * @global m_mem       $mem
+      * @global m_hooks     $hooks
+      * @param type $dom
+      * @param string $dns
+      * @param type $gesmx
+      * @param type $force
+      * @param int $ttl
+      * @return boolean
+      */
     function edit_domain($dom, $dns, $gesmx, $force = false, $ttl = 86400) {
         global $db, $err, $L_MX, $classes, $cuid, $hooks;
         $err->log("dom", "edit_domain", $dom . "/" . $dns . "/" . $gesmx);
@@ -1584,11 +1886,17 @@ class m_dom {
     /*     * ************************* */
 
 
-    /* ----------------------------------------------------------------- */
+
 
     /** Return the list of ip addresses and classes that are allowed access to domain list
      * through AXFR Transfers from the bind server.
      */
+     /**
+      * 
+      * @global m_mysql     $db
+      * @global m_err       $err
+      * @return boolean
+      */
     function enum_slave_ip() {
         global $db, $err;
         $db->query("SELECT * FROM slaveip;");
@@ -1602,10 +1910,18 @@ class m_dom {
         return $res;
     }
 
-    /* ----------------------------------------------------------------- */
+
 
     /** Add an ip address (or a ip class) to the list of allowed slave ip access list.
      */
+     /**
+      * 
+      * @global m_mysql     $db
+      * @global m_err       $err
+      * @param type $ip
+      * @param type $class
+      * @return boolean
+      */
     function add_slave_ip($ip, $class = "32") {
         global $db, $err;
         if (!checkip($ip)) {
@@ -1627,10 +1943,17 @@ class m_dom {
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
+
 
     /** Remove an ip address (or a ip class) from the list of allowed slave ip access list.
      */
+     /**
+      * 
+      * @global m_mysql     $db
+      * @global m_err       $err
+      * @param type $ip
+      * @return boolean
+      */
     function del_slave_ip($ip) {
         global $db, $err;
         if (!checkip($ip)) {
@@ -1644,10 +1967,18 @@ class m_dom {
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
+
 
     /** Check for a slave account
      */
+     /**
+      * 
+      * @global m_mysql     $db
+      * @global m_err       $err
+      * @param type $login
+      * @param type $pass
+      * @return boolean
+      */
     function check_slave_account($login, $pass) {
         global $db, $err;
         $db->query("SELECT * FROM slaveaccount WHERE login='$login' AND pass='$pass';");
@@ -1657,10 +1988,17 @@ class m_dom {
         return false;
     }
 
-    /* ----------------------------------------------------------------- */
+
 
     /** Out (echo) the complete hosted domain list : 
      */
+     /**
+      * 
+      * @global m_mysql     $db
+      * @global m_err       $err
+      * @param type $integrity
+      * @return boolean
+      */
     function echo_domain_list($integrity = false) {
         global $db, $err;
         $db->query("SELECT domaine FROM domaines WHERE gesdns=1 ORDER BY domaine");
@@ -1676,10 +2014,17 @@ class m_dom {
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
+
 
     /** Returns the complete hosted domain list : 
      */
+     /**
+      * 
+      * @global m_mysql     $db
+      * @global m_err       $err
+      * @param type $uid
+      * @return type
+      */
     function get_domain_list($uid = -1) {
         global $db, $err;
         $uid = intval($uid);
@@ -1699,6 +2044,12 @@ class m_dom {
      * 
      * @return array
      */
+     /**
+      * 
+      * @global m_mysql     $db
+      * @global m_err       $err
+      * @return type
+      */
     function get_domain_all_summary() {
         global $db, $err;
         $res = array();
@@ -1714,12 +2065,20 @@ class m_dom {
         return $res;
     }
 
-    /* ----------------------------------------------------------------- */
+
 
     /** Returns the name of a domain for the current user, from it's domain_id
      * @param $dom_id integer the domain_id to search for
      * @return string the domain name, or false with an error raised.
      */
+     /**
+      * 
+      * @global m_mysql     $db
+      * @global m_err       $err
+      * @global m_mem       $mem
+      * @param type $dom_id
+      * @return boolean
+      */
     function get_domain_byid($dom_id) {
         global $db, $err, $cuid;
         $dom_id = intval($dom_id);
@@ -1738,12 +2097,20 @@ class m_dom {
         }
     }
 
-    /* ----------------------------------------------------------------- */
+
 
     /** Returns the id of a domain for the current user, from it's domain name
      * @param $domain string the domain name to search for
      * @return integer the domain id, or false with an error raised.
      */
+     /**
+      * 
+      * @global m_mysql     $db
+      * @global m_err       $err
+      * @global m_mem       $mem
+      * @param type $domain
+      * @return boolean
+      */
     function get_domain_byname($domain) {
         global $db, $err, $cuid;
         $domain = trim($domain);
@@ -1762,10 +2129,17 @@ class m_dom {
         }
     }
 
-    /* ----------------------------------------------------------------- */
+
 
     /** Count all domains, for all users
      */
+     /**
+      * 
+      * @global m_mysql     $db
+      * @global m_err       $err
+      * @global m_mem       $mem
+      * @return int
+      */
     function count_domains_all() {
         global $db, $err, $cuid;
         $db->query("SELECT COUNT(*) AS count FROM domaines;");
@@ -1776,10 +2150,16 @@ class m_dom {
         }
     }
 
-    /* ----------------------------------------------------------------- */
+
 
     /** Return the list of allowed slave accounts 
      */
+     /**
+      * 
+      * @global m_mysql     $db
+      * @global m_err       $err
+      * @return boolean
+      */
     function enum_slave_account() {
         global $db, $err;
         $db->query("SELECT * FROM slaveaccount;");
@@ -1792,10 +2172,18 @@ class m_dom {
         return $res;
     }
 
-    /* ----------------------------------------------------------------- */
+
 
     /** Add a slave account that will be allowed to access the domain list
      */
+     /**
+      * 
+      * @global m_mysql     $db
+      * @global m_err       $err
+      * @param type $login
+      * @param type $pass
+      * @return boolean
+      */
     function add_slave_account($login, $pass) {
         global $db, $err;
         $db->query("SELECT * FROM slaveaccount WHERE login='$login'");
@@ -1807,10 +2195,17 @@ class m_dom {
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
+
 
     /** Remove a slave account
      */
+     /**
+      * 
+      * @global m_mysql     $db
+      * @global m_err       $err
+      * @param type $login
+      * @return boolean
+      */
     function del_slave_account($login) {
         global $db, $err;
         $db->query("DELETE FROM slaveaccount WHERE login='$login'");
@@ -1822,11 +2217,17 @@ class m_dom {
     /*     * ********** */
 
 
-    /* ----------------------------------------------------------------- */
+
 
     /** Try to lock a domain
      * @access private
      */
+     /**
+      * 
+      * @global m_mysql     $db
+      * @global m_err       $err
+      * @return boolean
+      */
     function lock() {
         global $db, $err;
         $err->log("dom", "lock");
@@ -1840,12 +2241,18 @@ class m_dom {
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
+
 
     /** Unlock the cron for domain management
      * return true
      * @access private
      */
+     /**
+      * 
+      * @global m_mysql     $db
+      * @global m_err       $err
+      * @return boolean
+      */
     function unlock() {
         global $db, $err;
         $err->log("dom", "unlock");
@@ -1856,11 +2263,17 @@ class m_dom {
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
+
 
     /** Declare that a domain's emails are hosted in this server : 
      * This adds 2 MX entries in this domain (if required)
      */
+     /**
+      * 
+      * @global m_err       $err
+      * @param type $dom_id
+      * @return boolean
+      */
     function hook_dom_add_mx_domain($dom_id) {
         global $err;
         $domain = $this->get_domain_byid($dom_id);
@@ -1872,11 +2285,16 @@ class m_dom {
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
+
 
     /**
      * Delete an account (all his domains)
      */
+     /**
+      * 
+      * @global m_err       $err
+      * @return boolean
+      */
     function hook_admin_del_member() {
         global $err;
         $err->log("dom", "alternc_del_member");
@@ -1887,13 +2305,14 @@ class m_dom {
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
+
 
     /** Returns the used quota for the $name service for the current user.
      * @param $name string name of the quota
      * @return integer the number of service used or false if an error occured
      * @access private
      */
+     /**
     function hook_quota_get() {
         global $db, $err, $cuid;
         $err->log("dom", "get_quota");
@@ -1905,11 +2324,17 @@ class m_dom {
         return $q;
     }
 
-    /* --------------------------------------------------------------------- */
+
 
     /** Returns the global domain(s) configuration(s) of a particular user
      * No parameters needed 
      * */
+     /**
+      * 
+      * @global m_mysql     $db
+      * @global m_err       $err
+      * @return string
+      */
     function alternc_export_conf() {
         global $db, $err;
         $err->log("dom", "export");
@@ -1961,6 +2386,15 @@ class m_dom {
      * Optionnal parameters: id of the sub_domaines
      *
      * */
+     /**
+      * 
+      * @global m_mysql     $db
+      * @global m_err       $err
+      * @param type $id
+      * @param type $only_apache
+      * @return type
+      * 
+      */
     function generation_parameters($id = null, $only_apache = true) {
         global $db, $err;
         $err->log("dom", "generation_parameters");
@@ -2010,6 +2444,11 @@ order by
      * Warning: an Apache domains_type must have 'only_dns' == TRUE
      *
      * */
+     /**
+      * 
+      * @global m_dom       $dom
+      * @return type
+      */
     function generation_domains_type() {
         global $dom;
         $d = array();
@@ -2026,6 +2465,13 @@ order by
     }
 
 // Launch old fashionned hooks as there was in AlternC 1.0
+     /**
+      * 
+      * @param type $action
+      * @param type $lst_sub
+      * @param type $sub_obj
+      * @return boolean
+      */
     function generate_conf_oldhook($action, $lst_sub, $sub_obj = null) {
         if (is_null($sub_obj))
             $sub_obj = $this->generation_parameters(null, false);
@@ -2056,6 +2502,11 @@ order by
      * Die if a specific FQDN have 2 vhost conf.
      *
      * */
+     /**
+      * 
+      * @param type $p
+      * @return string
+      */
     function generate_apacheconf($p = null) {
         // Get the parameters
         $lst = $this->generation_parameters($p);
@@ -2104,6 +2555,12 @@ order by
     }
 
     // Return an array with the list of id of sub_domains waiting for an action
+     /**
+      * 
+      * @global m_mysql     $db
+      * @global m_err       $err
+      * @return type
+      */
     function generation_todo() {
         global $db, $err;
         $err->log("dom", "generation_todo");
@@ -2115,6 +2572,13 @@ order by
         return $r;
     }
 
+     /**
+      * 
+      * @global m_mysql     $db
+      * @param type $sub_domain_id
+      * @param type $action
+      * @return boolean
+      */
     function subdomain_modif_are_done($sub_domain_id, $action) {
         global $db;
         $sub_domain_id = intval($sub_domain_id);
@@ -2132,25 +2596,43 @@ order by
     /**
      * @param string $dns_action
      */
+     /**
+      * 
+      * @global m_mysql     $db
+      * @param type $domain
+      * @param type $dns_action
+      * @return boolean
+      */
     function set_dns_action($domain, $dns_action) {
         global $db;
         $db->query("UPDATE domaines SET dns_action='" . mysql_escape_string($dns_action) . "' WHERE domaine='" . mysql_escape_string($domain) . "'; ");
         return true;
     }
 
+     /**
+      * 
+      * @global m_mysql     $db
+      * @param type $domain
+      * @param type $dns_result
+      * @return boolean
+      */
     function set_dns_result($domain, $dns_result) {
         global $db;
         $db->query("UPDATE domaines SET dns_result='" . mysql_escape_string($dns_result) . "' WHERE domaine='" . mysql_escape_string($domain) . "'; ");
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
+
 
     /** hook function called by AlternC-upnp to know which open 
      * tcp or udp ports this class requires or suggests
      * @return array a key => value list of port protocol name mandatory values
      * @access private
      */
+     /**
+      * 
+      * @return type
+      */
     function hook_upnp_list() {
         return array(
             "dns-tcp" => array("port" => 53, "protocol" => "tcp", "mandatory" => 1),
@@ -2160,6 +2642,11 @@ order by
 
     // List if there is problems in the domains.
     // Problems can appear when editing domains type properties
+     /**
+      * 
+      * @param type $domain
+      * @return type
+      */
     function get_problems($domain) {
         $this->lock();
         $da = $this->get_domain_all($domain);
@@ -2194,6 +2681,9 @@ order by
         return $errors;
     }
 
+     /**
+      * 
+      */
     function default_domain_type() {
         // This function is only used to allow translation of default domain types:
         _("Locally hosted");

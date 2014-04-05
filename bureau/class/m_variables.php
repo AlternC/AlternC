@@ -79,7 +79,7 @@ class m_variables {
    * with variable_set() as well as those explicitly specified in the configuration
    * file.
    * 
-   * @global int $cuid
+   * @global    int     $cuid
    * @return array
    */
   function variable_init() {

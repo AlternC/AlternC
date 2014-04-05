@@ -1,5 +1,8 @@
 <?php
 interface vm {
+        /**
+    	  * @return boolean
+         */
 	public function start();
 
 	/**

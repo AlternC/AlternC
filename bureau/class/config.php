@@ -50,7 +50,7 @@ if (getenv("REMOTE_ADDR")!="127.0.0.1") {
 Merci de revenir plus tard.";
   exit();
 }
-/* */
+
 
 /* Toutes les pages du bureau passent ici. On utilise une s�maphore pour 
    s'assurer que personne ne pourra acc�der � 2 pages du bureau en m�me temps.
@@ -67,7 +67,7 @@ function alternc_shutdown() {
 register_shutdown_function("alternc_shutdown");
 // 4. Acquire the semaphore : with that process, 
 sem_acquire( $alternc_sem );
-/* */
+
 
 if (ini_get("safe_mode")) {
   echo "SAFE MODE IS ENABLED for the web panel ! It's a bug in your php or apache configuration, please fix it !!";

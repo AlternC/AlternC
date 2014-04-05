@@ -476,7 +476,7 @@ function ssla($str) {
   }
 }
 
-  /* ----------------------------------------------------------------- */
+
   /** Hashe un mot de passe en clair en MD5 avec un salt al�atoire
    * @param string $pass Mot de passe � crypter (max 32 caract�res)
    * @return string Retourne le mot de passe crypt�
@@ -504,7 +504,7 @@ function split_mysql_database_name($dbname) {
 }
 
 
-/* ----------------------------------------------------------------- */
+
 /** Echappe les caract�res pouvant perturber un flux XML standard : 
  * @param string $string Chaine de caract�re � encoder en valeur xml.
  * @return string Retourne la cha�ne modifi�e si besoin.
@@ -514,7 +514,7 @@ function xml_entities($string) {
   return str_replace("<","&lt;",str_replace(">","&gt;",str_replace("&","&amp;",$string)));
 }
 
-/* ----------------------------------------------------------------- */
+
 /** Converti un nombre de mois en une chaine plus lisible
  * @param  integer $months Nombre de mois
  * @return string Cha�ne repr�sentant le nombre de mois
@@ -529,7 +529,7 @@ function pretty_months($months) {
   }
 }
 
-/* ----------------------------------------------------------------- */
+
 /** Fabrique un drop-down pour les dur�es de comptes
  * @name string $name Nom pour le composasnt
  * @selected number Option selection�e du composant

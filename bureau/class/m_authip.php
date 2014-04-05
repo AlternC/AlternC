@@ -355,7 +355,7 @@ class m_authip {
    * affectationt ip<=>ressource dont l'id est en parametre
    *
    * @global    m_hooks $hooks
-   * @global    m_err   $err
+   * @global m_err       $err
    * @param     string  $function       Nom de la fonction a rechercher et appeller dans les classes
    * @param     integer $affectation_id Id de l'affectation correspondante
    * @return    boolean                 Retourne TRUE

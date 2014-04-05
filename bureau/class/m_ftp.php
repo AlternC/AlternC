@@ -24,7 +24,7 @@
 */
 
 /**
-* Classe de gestion des comptes FTP de l'hébergé.
+* Classe de gestion des comptes FTP de l'hï¿½bergï¿½.
 */
 class m_ftp {
 
@@ -34,6 +34,10 @@ class m_ftp {
   /**
    * Constructeur
    */
+   /**
+    * 
+    * @global string      $L_FQDN
+    */
   function m_ftp() {
     global $L_FQDN;
     $this->srv_name = variable_get('ftp_human_name', '%%FQDN%%','Human name for FTP server', array('desc'=>'Name','type'=>'string'));
@@ -44,10 +48,19 @@ class m_ftp {
   /**
    * Password kind used in this class (hook for admin class)
    */
+   /**
+    * 
+    * @return type
+    */
   function alternc_password_policy() {
     return array("ftp"=>"FTP accounts");
   }
 
+   /**
+    * 
+    * @global m_quota     $quota
+    * @return string
+    */
   function hook_menu() {
     global $quota;
     $q = $quota->getquota("ftp");
@@ -83,6 +96,10 @@ class m_ftp {
 
   // Return the values needed to activate security access. See get_auth_class()
   // in authip for more informations
+   /**
+    * 
+    * @return array
+    */
   function authip_class() {
     $c = Array();
     $c['name']="FTP";
@@ -99,6 +116,15 @@ class m_ftp {
   }
 
   // Switch enabled status of an account
+   /**
+    * 
+    * @global m_mem       $mem
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @param type $id
+    * @param type $status
+    * @return boolean
+    */
   function switch_enabled($id,$status=null) {
     global $cuid, $db, $err;
     if (! $jj = $this->get_ftp_details($id)) {
@@ -123,14 +149,22 @@ class m_ftp {
 
 
   /* ----------------------------------------------------------------- */
-  /** Retourne la liste des comptes FTP du compte hébergé
-   * Retourne la liste des comptes FTP sous forme de tableau indexé de
+  /** Retourne la liste des comptes FTP du compte hï¿½bergï¿½
+   * Retourne la liste des comptes FTP sous forme de tableau indexï¿½ de
    * tableaus associatifs comme suit :
    * $a["id"]= ID du compte ftp
    * $a["login"]= Nom de login du compte
-   * $a["dir"]= Dossier relatif à la racine du compte de l'utilisateur
+   * $a["dir"]= Dossier relatif ï¿½ la racine du compte de l'utilisateur
    * @return array Retourne le tableau des comptes 
    */
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @global m_mem       $mem
+    * @global m_bro       $bro
+    * @return type
+    */
   function get_list() {
     global $db,$err,$cuid, $bro;
     $err->log("ftp","get_list");
@@ -154,11 +188,19 @@ class m_ftp {
   }
 
   /* ----------------------------------------------------------------- */
-  /** Retourne les détails d'un compte FTP (voir get_list)
-   * Le tableau est celui du compte d'id spécifié
-   * @param integer $id Numéro du compte dont on souhaite obtenir les détails
+  /** Retourne les dï¿½tails d'un compte FTP (voir get_list)
+   * Le tableau est celui du compte d'id spï¿½cifiï¿½
+   * @param integer $id Numï¿½ro du compte dont on souhaite obtenir les dï¿½tails
    * @return array Tableau associatif contenant les infos du comptes ftp
    */
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @global m_mem       $mem
+    * @param type $id
+    * @return string|boolean
+    */
   function get_ftp_details($id) {
     global $db,$err,$cuid;
     $err->log("ftp","get_ftp_details",$id);
@@ -194,6 +236,13 @@ class m_ftp {
    * @return array tableau contenant la liste des prefixes (domaines + login)
    *  du compte actuel.
    */
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global    m_mem   $mem
+    * @global m_mem       $mem
+    * @return type
+    */
   function prefix_list() {
     global $db,$mem,$cuid;
     $r=array();
@@ -210,6 +259,12 @@ class m_ftp {
    * 
    * @param string $l
   */
+   /**
+    * 
+    * @global m_err       $err
+    * @param type $l
+    * @return boolean
+    */
   function check_login($l) {
     global $err;
 
@@ -233,11 +288,16 @@ class m_ftp {
 
   /* ----------------------------------------------------------------- */
   /** Affiche (ECHO) la liste des prefixes disponibles sous forme de champs d'option
-   * Les champs sont affichés sous la forme <option>prefixe</option>...
-   * La valeur $current se voit affublée de la balise SELECTED.
-   * @param string $current Prefixe sélectionné par défaut
+   * Les champs sont affichï¿½s sous la forme <option>prefixe</option>...
+   * La valeur $current se voit affublï¿½e de la balise SELECTED.
+   * @param string $current Prefixe sï¿½lectionnï¿½ par dï¿½faut
    * @return boolean TRUE.
    */
+   /**
+    * 
+    * @param type $current
+    * @return boolean
+    */
   function select_prefix_list($current) {
     $r=$this->prefix_list();
     reset($r);
@@ -249,14 +309,29 @@ class m_ftp {
   }
 
   /* ----------------------------------------------------------------- */
-  /** Modifie les paramètres du comptes FTP $id.
-   * @param integer $id Numéro du compte dont on veut modifier les paramètres
+  /** Modifie les paramï¿½tres du comptes FTP $id.
+   * @param integer $id Numï¿½ro du compte dont on veut modifier les paramï¿½tres
    * @param string $prefixe Prefixe du compte FTP
-   * @param string $login login ajouté au préfixe ($prefixe_$login)
+   * @param string $login login ajoutï¿½ au prï¿½fixe ($prefixe_$login)
    * @param string $pass mot de passe
-   * @param string $dir Répertoire racine du compte
-   * @return boolean TRUE si le compte a été modifié, FALSE si une erreur est survenue.
+   * @param string $dir Rï¿½pertoire racine du compte
+   * @return boolean TRUE si le compte a ï¿½tï¿½ modifiï¿½, FALSE si une erreur est survenue.
    */
+   /**
+    * 
+    * @global    m_mem   $mem
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @global m_bro       $bro
+    * @global m_mem       $mem
+    * @global m_admin     $admin
+    * @param type $id
+    * @param type $prefixe
+    * @param type $login
+    * @param type $pass
+    * @param type $dir
+    * @return boolean
+    */
   function put_ftp_details($id,$prefixe,$login,$pass,$dir) {
     global $mem,$db,$err,$bro,$cuid,$admin;
     $err->log("ftp","put_ftp_details",$id);
@@ -311,10 +386,18 @@ class m_ftp {
 
 
   /* ----------------------------------------------------------------- */
-  /** Efface le compte ftp spécifié.
-   * @param integer $id Numéro du compte FTP à supprimer.
-   * @return boolean TRUE si le compte a été effacé, FALSE sinon.
+  /** Efface le compte ftp spï¿½cifiï¿½.
+   * @param integer $id Numï¿½ro du compte FTP ï¿½ supprimer.
+   * @return boolean TRUE si le compte a ï¿½tï¿½ effacï¿½, FALSE sinon.
    */
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @global m_mem       $mem
+    * @param type $id
+    * @return boolean
+    */
   function delete_ftp($id) {
     global $db,$err,$cuid;
     $err->log("ftp","delete_ftp",$id);
@@ -330,14 +413,29 @@ class m_ftp {
   }
 
   /* ----------------------------------------------------------------- */
-  /** Crée un nouveau compte FTP.
+  /** Crï¿½e un nouveau compte FTP.
    * @param string $prefixe Prefixe au login
    * @param string $login Login ftp (login=prefixe_login)
    * @param string $pass Mot de passe FTP
-   * @param string $dir Répertoire racine du compte relatif à la racine du membre
-   * @return boolean TRUE si le compte a été créé, FALSE sinon.
+   * @param string $dir Rï¿½pertoire racine du compte relatif ï¿½ la racine du membre
+   * @return boolean TRUE si le compte a ï¿½tï¿½ crï¿½ï¿½, FALSE sinon.
    *
    */
+   /**
+    * 
+    * @global    m_mem   $mem
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @global m_quota     $quota
+    * @global m_bro       $bro
+    * @global m_mem       $mem
+    * @global m_admin     $admin
+    * @param type $prefixe
+    * @param type $login
+    * @param type $pass
+    * @param type $dir
+    * @return boolean
+    */
   function add_ftp($prefixe,$login,$pass,$dir) {
     global $mem,$db,$err,$quota,$bro,$cuid,$admin;
     $err->log("ftp","add_ftp",$prefixe."_".$login);
@@ -392,10 +490,18 @@ class m_ftp {
   }
 
   /* ----------------------------------------------------------------- */
-  /** Retourne TRUE si $dir possède un compte FTP
-   * @param string $dir Dossier à tester, relatif à la racine du compte courant
-   * @return boolean retourne TRUE si $dir à un compte FTP, FALSE sinon.
+  /** Retourne TRUE si $dir possï¿½de un compte FTP
+   * @param string $dir Dossier ï¿½ tester, relatif ï¿½ la racine du compte courant
+   * @return boolean retourne TRUE si $dir ï¿½ un compte FTP, FALSE sinon.
    */
+   /**
+    * 
+    * @global    m_mem   $mem
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @param type $dir
+    * @return boolean
+    */
   function is_ftp($dir) {
     global $mem,$db,$err;
     $err->log("ftp","is_ftp",$dir);
@@ -410,10 +516,18 @@ class m_ftp {
   }
 
   /* ----------------------------------------------------------------- */
-  /** Fonction appellée par domains quand un domaine est supprimé pour le membre
-   * @param string $dom Domaine à détruire.
+  /** Fonction appellï¿½e par domains quand un domaine est supprimï¿½ pour le membre
+   * @param string $dom Domaine ï¿½ dï¿½truire.
    * @access private
    */
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @global m_mem       $mem
+    * @param type $dom
+    * @return boolean
+    */
   function alternc_del_domain($dom) {
     global $db,$err,$cuid;
     $err->log("ftp","alternc_del_domain",$dom);
@@ -422,9 +536,16 @@ class m_ftp {
   }
 
   /* ----------------------------------------------------------------- */
-  /** Fonction appellée par membres quand un membre est effacé.
+  /** Fonction appellï¿½e par membres quand un membre est effacï¿½.
    * @access private
    */
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @global m_mem       $mem
+    * @return boolean
+    */
   function alternc_del_member() {
     global $db,$err,$cuid;
     $err->log("ftp","alternc_del_member");
@@ -439,6 +560,13 @@ class m_ftp {
    * @return integer the number of service used or false if an error occured
    * @access private
    */
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @global m_mem       $mem
+    * @return type
+    */
   function hook_quota_get() {
     global $db,$err,$cuid;
     $err->log("ftp","getquota");
@@ -457,6 +585,12 @@ class m_ftp {
    * @access private
    * EXPERIMENTAL 'sid' function ;) 
    */
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @return string
+    */
   function alternc_export_conf() {
     global $db,$err;
     $err->log("ftp","export");
@@ -478,6 +612,10 @@ class m_ftp {
    * @return array a key => value list of port protocol name mandatory values
    * @access private
    */
+   /**
+    * 
+    * @return type
+    */
   function hook_upnp_list() {
     return array(
 		 "ftp" => array("port" => 21, "protocol" => "tcp", "mandatory" => 1),

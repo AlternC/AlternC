@@ -36,14 +36,14 @@
 class m_mail {
 
 
-  /* ----------------------------------------------------------------- */
+
   /** domain list for this account
    * @access private
    */
   var $domains;
 
 
-  /* ----------------------------------------------------------------- */
+
   /** If an email has those chars, 'not nice in shell env' ;) 
    * we don't store the email in $mail/u/{user}_domain, but in $mail/_/{address_id}_domain
    * @access private
@@ -51,7 +51,7 @@ class m_mail {
   var $specialchars=array('"',"'",'\\','/');
 
 
-  /* ----------------------------------------------------------------- */
+
   /** If an email has those chars, we will ONLY allow RECIPIENTS, NOT POP/IMAP for DOVECOT !
    * Since Dovecot doesn't allow those characters
    * @access private
@@ -59,7 +59,7 @@ class m_mail {
   var $forbiddenchars=array('"',"'",'\\','/','?','!','*','$','|','#','+');
 
 
-  /* ----------------------------------------------------------------- */
+
   /** Number of results for a pager display
    * @access public
    */
@@ -77,10 +77,13 @@ class m_mail {
 
   var $cache_domain_mail_size = array();
   var $enum_domains=array();
-  /* ----------------------------------------------------------------- */
+
   /** 
    * Constructeur
    */
+   /**
+    * 
+    */
   function m_mail() {
     $this->srv_submission = variable_get('mail_human_submission', '%%FQDN%%','Human name for mail server (submission protocol)', array('desc'=>'Name','type'=>'string'));
     $this->srv_smtp       = variable_get('mail_human_smtp',       '%%FQDN%%','Human name for mail server (SMTP protocol)', array('desc'=>'Name','type'=>'string'));
@@ -91,6 +94,10 @@ class m_mail {
     $this->srv_pop3s      = variable_get('mail_human_pop3s',      '%%FQDN%%','Human name for POP3s mail server', array('desc'=>'Name','type'=>'string'));
   }
 
+   /**
+    * 
+    * @return string
+    */
   function hook_menu() {
     $obj = array(
       'title'       => _("Email Addresses"),
@@ -111,6 +118,12 @@ class m_mail {
      return $obj;
   }
 
+   /**
+    * 
+    * @global m_mysql     $db
+    * @param type $domain
+    * @return int
+    */
   function get_total_size_for_domain($domain) {
     global $db;
     if (empty($this->cache_domain_mail_size)) {
@@ -129,6 +142,13 @@ class m_mail {
   /**
    * @param string $domain_id
    */
+   /**
+    * 
+    * @global m_dom       $dom
+    * @global m_mysql     $db
+    * @param type $domain_id
+    * @return string
+    */
   function catchall_getinfos($domain_id) {
     global $dom, $db;
     $rr=array(
@@ -159,6 +179,11 @@ class m_mail {
   /**
    * @param string $domain_id
    */
+   /**
+    * 
+    * @param type $domain_id
+    * @return boolean
+    */
   function catchall_del($domain_id) {
     $catch = $this->catchall_getinfos($domain_id);
     if (empty($catch['mail_id'])) return false;
@@ -169,6 +194,13 @@ class m_mail {
    * @param string $domain_id
    * @param string $target
    */
+   /**
+    * 
+    * @global m_err       $err
+    * @param type $domain_id
+    * @param type $target
+    * @return boolean
+    */
   function catchall_set($domain_id, $target) {
     global $err;
     // target :
@@ -190,13 +222,20 @@ class m_mail {
   }
 
 
-  /* ----------------------------------------------------------------- */
+
   /** get_quota (hook for quota class), returns the number of used 
    * service for a quota-bound service
    * @param $name string the named quota we want
    * @return the number of used service for the specified quota, 
    * or false if I'm not the one for the named quota
    */
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @global m_mem       $mem
+    * @return type
+    */
   function hook_quota_get() {
     global $db,$err,$cuid;
     $err->log("mail","getquota");
@@ -209,19 +248,31 @@ class m_mail {
   }
 
 
-  /* ----------------------------------------------------------------- */
+
   /** Password policy kind used in this class (hook for admin class)
    * @return array an array of policykey => "policy name (for humans)"
    */
+   /**
+    * 
+    * @return type
+    */
   function alternc_password_policy() {
     return array("pop"=>_("Email account password"));
   }
 
 
-  /* ----------------------------------------------------------------- */
+
   /** Returns the list of mail-hosting domains for a user
    * @return array indexed array of hosted domains
    */
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @global m_mem       $mem
+    * @param type $uid
+    * @return type
+    */
   function enum_domains($uid=-1) {
       global $db,$err,$cuid;
       $err->log("mail","enum_domains");
@@ -250,12 +301,20 @@ ORDER BY
   }
 
 
-  /* ----------------------------------------------------------------- */
+
   /** available: tells if an email address can be installed in the server
    * check the domain part (is it mine too), the syntax, and the availability.
    * @param $mail string email to check
    * @return boolean true if the email can be installed on the server 
    */  
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @global m_dom       $dom
+    * @param type $mail
+    * @return boolean
+    */
   function available($mail){
     global $db,$err,$dom;
     $err->log("mail","available");    
@@ -279,7 +338,7 @@ ORDER BY
   }
 
 
-  /* ----------------------------------------------------------------- */
+
   /* function used to list every mail address hosted on a domain.
    * @param $dom_id integer the domain id.
    * @param $search string search that string in recipients or address.
@@ -287,6 +346,19 @@ ORDER BY
    * @param $count integer return no more than THAT much emails. -1 for ALL. Offset is ignored then.
    * @result an array of each mail hosted under the domain.
    */
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @global m_mem       $mem
+    * @global m_hooks     $hooks
+    * @param type $dom_id
+    * @param type $search
+    * @param type $offset
+    * @param type $count
+    * @param type $show_systemmails
+    * @return type
+    */
   function enum_domain_mails($dom_id = null, $search="", $offset=0, $count=30, $show_systemmails=false){
     global $db,$err,$cuid,$hooks;
     $err->log("mail","enum_domains_mail");
@@ -321,12 +393,17 @@ ORDER BY
   }
 
 
+   /**
+    * 
+    * @param type $detail
+    * @return type
+    */
   function hook_mail_get_details($detail) {
     if ($detail['type']=='catchall') return _(sprintf("Special mail address for catch-all. <a href='mail_manage_catchall.php?domain_id=%s'>Click here to manage it.</a>",$detail['domain_id']));
   }
 
 
-  /* ----------------------------------------------------------------- */
+
   /** Function used to insert a new mail into the db
    * should be used by the web interface, not by third-party programs.
    *
@@ -339,6 +416,20 @@ ORDER BY
    * @return an hashtable containing the database id of the newly created mail, 
    * or false if an error occured ($err is filled accordingly)
    */ 
+   /**
+    * 
+    * @global m_err       $err
+    * @global m_mysql     $db
+    * @global m_mem       $mem
+    * @global m_quota     $quota
+    * @global m_dom       $dom
+    * @global m_hooks     $hooks
+    * @param type $dom_id
+    * @param type $mail
+    * @param type $type
+    * @param type $dontcheck
+    * @return boolean
+    */
   function create($dom_id, $mail,$type="",$dontcheck=false){
     global $err,$db,$cuid,$quota,$dom,$hooks;
     $err->log("mail","create",$mail);
@@ -382,11 +473,20 @@ ORDER BY
   }
 
 
-  /* ----------------------------------------------------------------- */
+
   /** function used to get every information we can on a mail 
   * @param $mail_id integer
   * @return array a hashtable with all the informations for that email
   */
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @global m_mem       $mem
+    * @global m_hooks     $hooks
+    * @param type $mail_id
+    * @return boolean
+    */
   function get_details($mail_id) {
     global $db, $err, $cuid, $hooks;
     $err->log("mail","get_details");
@@ -412,13 +512,21 @@ ORDER BY
 
   private $isitmy_cache=array(); 
 
-  /* ----------------------------------------------------------------- */
+
   /** Check if an email is mine ...
    *
    * @param $mail_id integer the number of the email to check
    * @return string the complete email address if that's mine, false if not
    * ($err is filled accordingly)
    */ 
+   /**
+    * 
+    * @global m_err       $err
+    * @global m_mysql     $db
+    * @global m_mem       $mem
+    * @param type $mail_id
+    * @return type
+    */
   function is_it_my_mail($mail_id){
     global $err,$db,$cuid;
     $mail_id=intval($mail_id);
@@ -435,13 +543,18 @@ ORDER BY
   }
 
 
-  /* ----------------------------------------------------------------- */
+
   /** Hook called when the DOMAIN class will delete a domain.
    *
    * @param $dom integer the number of the email to delete
    * @return boolean if the email has been properly deleted 
    * or false if an error occured ($err is filled accordingly)
    */ 
+   /**
+    * 
+    * @param type $dom_id
+    * @return boolean
+    */
   function hook_dom_del_mx_domain($dom_id) {
     $list=$this->enum_domain_mails($dom_id,"",0,-1);
     if (is_array($list)) {
@@ -453,6 +566,13 @@ ORDER BY
   }
 
   // return the alternc account's ID of the mail_id
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @param type $mail_id
+    * @return boolean
+    */
   function get_account_by_mail_id($mail_id) {
     global $db,$err;
     $db->query("select compte as uid from domaines d, address a where a.domain_id = d.id and a.id = $mail_id");
@@ -463,7 +583,7 @@ ORDER BY
   }
 
 
-  /* ----------------------------------------------------------------- */
+
   /** Function used to delete a mail from the db
    * should be used by the web interface, not by third-party programs.
    *
@@ -471,6 +591,17 @@ ORDER BY
    * @return boolean if the email has been properly deleted 
    * or false if an error occured ($err is filled accordingly)
    */ 
+   /**
+    * 
+    * @global m_err       $err
+    * @global m_mysql     $db
+    * @global m_mem       $mem
+    * @global m_quota     $quota
+    * @global m_dom       $dom
+    * @global m_hooks     $hooks
+    * @param type $mail_id
+    * @return boolean
+    */
   function delete($mail_id){
     global $err,$db,$cuid,$quota,$dom,$hooks;
     $err->log("mail","delete");
@@ -517,7 +648,7 @@ ORDER BY
   }
 
 
-  /* ----------------------------------------------------------------- */
+
   /** Function used to undelete a pending deletion mail from the db
    * should be used by the web interface, not by third-party programs.
    *
@@ -525,6 +656,17 @@ ORDER BY
    * @return boolean if the email has been properly undeleted 
    * or false if an error occured ($err is filled accordingly)
    */ 
+   /**
+    * 
+    * @global m_err       $err
+    * @global m_mysql     $db
+    * @global m_mem       $mem
+    * @global m_quota     $quota
+    * @global m_dom       $dom
+    * @global m_hooks     $hooks
+    * @param type $mail_id
+    * @return boolean
+    */
   function undelete($mail_id){
     global $err,$db,$cuid,$quota,$dom,$hooks;
     $err->log("mail","undelete");
@@ -569,12 +711,21 @@ ORDER BY
   }
 
 
-  /* ----------------------------------------------------------------- */
+
   /** set the password of an email address.
    * @param $mail_id integer email ID 
    * @param $pass string the new password.
    * @return boolean true if the password has been set, false else, raise an error.
    */  
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @global m_admin     $admin
+    * @param type $mail_id
+    * @param type $pass
+    * @return boolean
+    */
   function set_passwd($mail_id,$pass){
     global $db,$err,$admin;
     $err->log("mail","setpasswd");
@@ -586,11 +737,18 @@ ORDER BY
   }
 
 
-  /* ----------------------------------------------------------------- */
+
   /** Enables an email address.
    * @param $mail_id integer Email ID
    * @return boolean true if the email has been enabled.
    */  
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @param type $mail_id
+    * @return boolean
+    */
   function enable($mail_id){
     global $db,$err;
     $err->log("mail","enable");
@@ -600,11 +758,18 @@ ORDER BY
   }
 
 
-  /* ----------------------------------------------------------------- */
+
   /** Disables an email address.
    * @param $mail_id integer Email ID
    * @return boolean true if the email has been enabled.
    */ 
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @param type $mail_id
+    * @return boolean
+    */
   function disable($mail_id){
     global $db,$err;
     $err->log("mail","disable");
@@ -614,7 +779,7 @@ ORDER BY
   }
 
 
-  /* ----------------------------------------------------------------- */
+
   /** Function used to update an email settings
    * should be used by the web interface, not by third-party programs.
    *
@@ -625,6 +790,22 @@ ORDER BY
    * @return boolean if the email has been properly edited
    * or false if an error occured ($err is filled accordingly)
    */ 
+   /**
+    * 
+    * @global m_err       $err
+    * @global m_mysql     $db
+    * @global m_mem       $mem
+    * @global m_quota     $quota
+    * @global m_dom       $dom
+    * @global m_hooks     $hooks
+    * @param type $mail_id
+    * @param type $islocal
+    * @param type $quotamb
+    * @param type $recipients
+    * @param type $delivery
+    * @param type $dontcheck
+    * @return boolean
+    */
   function set_details($mail_id, $islocal, $quotamb, $recipients,$delivery="dovecot",$dontcheck=false) {
     global $err,$db,$cuid,$quota,$dom,$hooks;
     $delivery=mysql_real_escape_string($delivery);
@@ -669,7 +850,7 @@ ORDER BY
       $db->query("UPDATE mailbox SET quota=".intval($quotamb)." WHERE address_id=".$mail_id.";");
     }
 
-    $recipients=preg_replace('/[\r\t\s]/', "\n", $recipients); // Handle space AND new line
+    $recipients=preg_replace('/[\r    \s]/', "\n", $recipients); // Handle space AND new line
     $r=explode("\n",$recipients);
     $red="";
     foreach($r as $m) {
@@ -686,13 +867,22 @@ ORDER BY
     return true;
   }
 
-  /* ----------------------------------------------------------------- */
+
   /** A wrapper used by mailman class to create it's needed addresses 
    * @ param : $dom_id , the domain id associated to a given address
    * @ param : $m , the left part of the  mail address being created
    * @ param : $delivery , the delivery used to deliver the mail
    */
 
+   /**
+    * 
+    * @global m_err       $err
+    * @global m_mysql     $db
+    * @global m_mail      $mail
+    * @param type $dom_id
+    * @param type $m
+    * @param type $delivery
+    */
   function add_wrapper($dom_id,$m,$delivery){
     global $err,$db,$mail;
     $err->log("mail","add_wrapper","creating $delivery $m address");
@@ -702,7 +892,7 @@ ORDER BY
     // FIXME return error code
   }
 
-  /* ----------------------------------------------------------------- */
+
   /** A function used to create an alias for a specific address
    * @ param : $dom_id , the domain sql identifier
    * @ param : $m , the alias we want to create
@@ -712,6 +902,17 @@ ORDER BY
    * @param string $alias
    * @param string $dom_id
    */
+   /**
+    * 
+    * @global m_err       $err
+    * @global m_mysql     $db
+    * @global m_mail      $mail
+    * @param type $dom_id
+    * @param type $m
+    * @param type $alias
+    * @param type $type
+    * @param type $dontcheck
+    */
   function create_alias($dom_id,$m,$alias,$type="",$dontcheck=false) {
     global $err,$db,$mail;
     $err->log("mail","create_alias","creating $m alias for $alias type $type");
@@ -723,22 +924,35 @@ ORDER BY
 
 
 
-  /* ----------------------------------------------------------------- */
+
   /** A wrapper used by mailman class to create it's needed addresses 
    * @ param : $mail_id , the mysql id of the mail address we want to delete
    * of the email for the current acccount.
    */
+   /**
+    * 
+    * @global m_err       $err
+    * @global m_mysql     $db
+    * @param type $mail_id
+    */
   function del_wrapper($mail_id){
     global $err,$db;
     $err->log("mail","del_wrapper");
     $this->delete($mail_id);
   }
 
-  /* ----------------------------------------------------------------- */
+
   /** Export the mail information of an account 
    * @return: str, string containing the complete configuration 
    * of the email for the current acccount.
    */
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @global m_mail      $mail_localbox
+    * @return string
+    */
   function alternc_export_conf() {
     global $db,$err,$mail_localbox;
     $err->log("mail","export");
@@ -775,11 +989,17 @@ ORDER BY
    }
  
 
-  /* ----------------------------------------------------------------- */
+
   /**
    * Return the list of allowed slave accounts (secondary-mx)
    * @return array
    */
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @return boolean
+    */
   function enum_slave_account() {
     global $db,$err;
     $db->query("SELECT login,pass FROM mxaccount;");
@@ -791,13 +1011,21 @@ ORDER BY
     return $res;
   }
 
-  /* ----------------------------------------------------------------- */
+
   /**
    * Check for a slave account (secondary mx)
    * @param string $login the login to check
    * @param string $pass the password to check
    * @return boolean TRUE if the password is correct, or FALSE if an error occurred.
    */
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @param type $login
+    * @param type $pass
+    * @return boolean
+    */
   function check_slave_account($login,$pass) {
     global $db,$err;
     $login=mysql_real_escape_string($login);
@@ -810,9 +1038,16 @@ ORDER BY
   }
 
 
-  /* ----------------------------------------------------------------- */
+
   /** Out (echo) the complete hosted domain list : 
    */
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @param type $format
+    * @return boolean
+    */
   function echo_domain_list($format=null) {
     global $db,$err;
     $db->query("SELECT domaine FROM domaines WHERE gesmx=1 ORDER BY domaine");
@@ -838,13 +1073,21 @@ ORDER BY
   }
 
 
-  /* ----------------------------------------------------------------- */
+
   /**
    * Add a slave account that will be allowed to access the mxdomain list
    * @param string $login the login to add
    * @param string $pass the password to add
    * @return boolean TRUE if the account has been created, or FALSE if an error occurred.
    */
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @param type $login
+    * @param type $pass
+    * @return boolean
+    */
   function add_slave_account($login,$pass) {
     global $db,$err;
     $login=mysql_real_escape_string($login);
@@ -859,11 +1102,18 @@ ORDER BY
   }
 
 
-  /* ----------------------------------------------------------------- */
+
   /**
    * Remove a slave account
    * @param string $login the login to delete
    */
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_err       $err
+    * @param type $login
+    * @return boolean
+    */
   function del_slave_account($login) {
     global $db,$err;
     $login=mysql_real_escape_string($login);
@@ -871,7 +1121,7 @@ ORDER BY
     return true;
   }
 
-  /* ----------------------------------------------------------------- */
+
   /** hook function called by AlternC when a domain is created for
    * the current user account using the SLAVE DOMAIN feature
    * This function create a CATCHALL to the master domain
@@ -879,6 +1129,13 @@ ORDER BY
    * @param string $target_domain Master domain 
    * @access private
    */
+   /**
+    * 
+    * @global m_err       $err
+    * @param type $domain_id
+    * @param type $target_domain
+    * @return boolean
+    */
   function hook_dom_add_slave_domain($domain_id,$target_domain) { 
     global $err;
     $err->log("mail","hook_dom_add_slave_domain",$domain_id);
@@ -886,7 +1143,7 @@ ORDER BY
     return true;
   }
 
-  /* ----------------------------------------------------------------- */
+
   /** hook function called by AlternC when a domain is created for
    * the current user account 
    * This function create a postmaster mail which is an alias to LOGIN @ FQDN
@@ -894,6 +1151,15 @@ ORDER BY
    * @param string $domain_id Domain that has just been created
    * @access private
    */
+    /**
+     * 
+     * @global m_err       $err
+     * @global    m_mem   $mem
+     * @global string      $L_FQDN
+     * @global m_mysql     $db
+     * @param type $domain_id
+     * @return boolean
+     */
    function hook_dom_add_mx_domain($domain_id) {
     global $err, $mem, $L_FQDN,$db;
     $err->log("mail","hook_dom_add_mx_domain",$domain_id);
@@ -910,12 +1176,16 @@ ORDER BY
 
 
 
-  /* ----------------------------------------------------------------- */
+
   /** hook function called by AlternC-upnp to know which open 
    * tcp or udp ports this class requires or suggests
    * @return array a key => value list of port protocol name mandatory values
    * @access private
    */
+   /**
+    * 
+    * @return type
+    */
   function hook_upnp_list() {
     return array(
 		 "imap" => array("port" => 143, "protocol" => "tcp", "mandatory" => 1),

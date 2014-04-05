@@ -32,6 +32,11 @@ class m_piwik {
   var $alternc_users;
   var $alternc_sites;
 
+   /**
+    * 
+    * @global m_quota     $quota
+    * @return boolean|int
+    */
   function hook_menu() {
     global $quota;
     if ( empty($this->piwik_server_uri) || empty($this->piwik_admin_token)) return false;
@@ -50,9 +55,11 @@ class m_piwik {
      return $obj;
   }
 
-  /*---------------------------------------------------------------------------*/
   /** Constructor
   */
+   /**
+    * 
+    */
   function m_piwik() {
     $this->piwik_server_uri=variable_get('piwik_server_uri',null,'Remote Piwik server uri');
     $this->piwik_admin_token=variable_get('piwik_admin_token',null,'Remote Piwik super-admin token');
@@ -60,21 +67,31 @@ class m_piwik {
     $this->alternc_sites = $this->get_alternc_sites();
   }
 
-  /* ----------------------------------------------------------------- */
+
   /** hook called when an AlternC account is deleted
    */
+   /**
+    * 
+    * @return boolean
+    */
   function hook_admin_del_member() {
     //FIXME : implement the hook_admin_del_member for piwik
     return true;
   }
 
 
-  /* ----------------------------------------------------------------- */
+
   /** Returns the used quota for the $name service for the current user.
    * @param $name string name of the quota 
    * @return integer the number of service used or false if an error occured
    * @access private
    */
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_mem       $mem
+    * @return type
+    */
   function hook_quota_get() {
     global $db, $cuid;
     $db->query("SELECT COUNT(id) AS nb FROM piwik_users WHERE uid='$cuid'");
@@ -86,6 +103,10 @@ class m_piwik {
   }
 
 
+   /**
+    * 
+    * @return type
+    */
   function url() {
     return $this->piwik_server_uri;
   }
@@ -96,6 +117,16 @@ class m_piwik {
   /***********************/
 
 
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global    m_mem   $mem
+    * @global m_mem       $mem
+    * @global m_err       $err
+    * @param type $user_login
+    * @param type $user_mail
+    * @return boolean
+    */
   function user_add($user_login, $user_mail = null) {
 
         global $db, $mem, $cuid, $err;
@@ -120,15 +151,31 @@ class m_piwik {
 
 
   // Edite un user
+   /**
+    * 
+    * @return boolean
+    */
   function user_edit() {
     //FIXME
     return true;
   }
 
+   /**
+    * 
+    * @param type $user_login
+    * @return type
+    */
   function get_site_access($user_login) {
 	return $this->call_privileged_page('API', 'UsersManager.getSitesAccessFromUser', array('userLogin' => $user_login));
   }
 
+   /**
+    * 
+    * @global m_err       $err
+    * @global m_mem       $mem
+    * @param type $site_id
+    * @return boolean
+    */
   function get_users_access_from_site($site_id) {
 	global $err, $cuid;
 
@@ -157,6 +204,11 @@ class m_piwik {
   /**
    * @param string $user_login
    */
+   /**
+    * 
+    * @param type $user_login
+    * @return boolean
+    */
   function get_user($user_login) {
     $api_data = $this->call_privileged_page('API', 'UsersManager.getUser', array('userLogin' => $user_login));
 
@@ -166,6 +218,13 @@ class m_piwik {
       return FALSE;
   }
 
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_mem       $mem
+    * @staticvar array $alternc_users
+    * @return array
+    */
   function get_alternc_users() {
 	global $db, $cuid;
 
@@ -178,6 +237,14 @@ class m_piwik {
   }
   // Supprime l'utilisateur Piwik passé en parametre
   // Ne le supprime pas localement tant que pas supprimé en remote
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_mem       $mem
+    * @global m_err       $err
+    * @param type $piwik_user_login
+    * @return boolean
+    */
   function user_delete($piwik_user_login) {
     global $db, $cuid, $err;
     
@@ -199,6 +266,12 @@ class m_piwik {
   }
  
 
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_mem       $mem
+    * @return type
+    */
   function users_list() { 
     global $db, $cuid;
     $db->query("SELECT login FROM piwik_users WHERE uid = '$cuid'");
@@ -212,6 +285,11 @@ class m_piwik {
 
 
   // Verifie que l'utilisateur existe bien dans piwik
+   /**
+    * 
+    * @param type $puser_id
+    * @return boolean
+    */
   function user_checkremote($puser_id) {
     //FIXME
     return true;
@@ -219,12 +297,20 @@ class m_piwik {
 
 
   // Récupére un token pour le SSO avec piwik pour l'user
+   /**
+    * 
+    * @return boolean
+    */
   function user_remoteauth() {
     //FIXME
     return true;
   }
 
   // Montre la liste des site pour lesques un user à accés
+   /**
+    * 
+    * @return boolean
+    */
   function user_access() {
     // FIXME
     return true;
@@ -239,6 +325,10 @@ class m_piwik {
   /***********************/
 
 
+   /**
+    * 
+    * @return \stdClass|boolean
+    */
   function site_list() {
     $api_data = $this->call_privileged_page('API', 'SitesManager.getAllSites');
     $data = array();
@@ -270,10 +360,22 @@ class m_piwik {
       return FALSE;
   }
 
+   /**
+    * 
+    * @param type $site_id
+    * @return type
+    */
   function site_js_tag($site_id) {
 	return $this->call_privileged_page('API', 'SitesManager.getJavascriptTag', array('idSite' => $site_id, 'piwikUrl' => $this->piwik_server_uri))->value;
   }
 
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_mem       $mem
+    * @staticvar array $alternc_sites
+    * @return array
+    */
   function get_alternc_sites() {
         global $db, $cuid;
 
@@ -285,12 +387,23 @@ class m_piwik {
         return $alternc_sites;
   }
 
+   /**
+    * 
+    * @return type
+    */
   function get_site_list()
   {
        return $this->call_privileged_page('API', 'SitesManager.getAllSites');
   }
   // Ajoute un site à Piwik
   // can't figure out how to pass multiple url through the API
+   /**
+    * 
+    * @param type $siteName
+    * @param type $urls
+    * @param type $ecommerce
+    * @return boolean
+    */
   function site_add($siteName, $urls, $ecommerce = FALSE) {
     $urls = is_array($urls) ? implode(',', $urls) : $urls;
     $api_data = $this->call_privileged_page('API', 'SitesManager.addSite', array('siteName' => $siteName, 'urls' => $urls));
@@ -301,6 +414,14 @@ class m_piwik {
 
   //SitesManager.deleteSite (idSite)
   // Supprime un site de Piwik
+   /**
+    * 
+    * @global m_mysql     $db
+    * @global m_mem       $mem
+    * @global m_err       $err
+    * @param type $site_id
+    * @return boolean
+    */
   function site_delete($site_id) {
     global $db, $cuid, $err;
     
@@ -323,6 +444,14 @@ class m_piwik {
   }
  
 
+     /**
+      * 
+      * @global m_err       $err
+      * @param type $site_id
+      * @param type $login
+      * @param type $right
+      * @return boolean
+      */
     function site_set_user_right($site_id, $login, $right)
     {
 	global $err;
@@ -337,6 +466,10 @@ class m_piwik {
 	}
     }
   // Ajoute un alias sur un site existant
+   /**
+    * 
+    * @return boolean
+    */
   function site_alias_add() {
     // FIXME
     return true;
@@ -346,11 +479,19 @@ class m_piwik {
 
   /* Helper code FIXME: rename those function using "private" + "_" prefix  */
 
+   /**
+    * 
+    * @param type $username
+    * @return type
+    */
   function clean_user_name($username) {
     return mysql_real_escape_string(trim($username));
   }
 
 
+   /**
+    * 
+    */
   function dev() {
     // $this->call_page('module', 'method', array('user' => 'fser', 'pass' => 'toto'));
     // return $this->users_list();
@@ -361,6 +502,15 @@ class m_piwik {
    * @param string $module
    * @param string $method
    */
+   /**
+    * 
+    * @global m_err       $err
+    * @param type $module
+    * @param type $method
+    * @param type $arguments
+    * @param type $output
+    * @return boolean
+    */
   function call_page($module, $method, $arguments=array(), $output = 'JSON') {
     global $err;
 	$url = sprintf('%s/?module=%s&method=%s&format=%s', $this->piwik_server_uri, $module, $method, $output);
@@ -391,6 +541,14 @@ class m_piwik {
    * @param string $module
    * @param string $method
    */
+   /**
+    * 
+    * @param type $module
+    * @param type $method
+    * @param array $arguments
+    * @param type $output
+    * @return type
+    */
   function call_privileged_page($module, $method, $arguments=array(), $output = 'JSON') {
 	$arguments['token_auth'] = $this->piwik_admin_token;
 	return $this->call_page($module, $method, $arguments, $output);

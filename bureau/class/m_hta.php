@@ -79,7 +79,7 @@ class m_hta {
    * 
    * @global    m_mem   $mem
    * @global    m_bro   $bro
-   * @global    m_err   $err
+   * @global m_err       $err
    * @param     string  $dir
    * @return    boolean
    */
@@ -123,7 +123,7 @@ class m_hta {
     /**
    * Returns the list of all user folder currently protected by a .htpasswd file
    * 
-   * @global    m_err   $err
+   * @global m_err       $err
    * @global    m_mem   $mem
    * @return    array           Array containing user folder list
    */
@@ -152,7 +152,7 @@ class m_hta {
    * Tells if a folder is protected.
    * 
    * @global    m_mem   $mem
-   * @global    m_err   $err
+   * @global m_err       $err
    * @param     string  $dir    Folder to check
    * @return    boolean         If the folder is protected, or FALSE if it is not
    */
@@ -172,7 +172,7 @@ class m_hta {
    * Returns the list of login for a protected folder.
    * 
    * @global    m_mem   $mem
-   * @global    m_err   $err
+   * @global m_err       $err
    * @param     string  $dir    The folder to lookup (relative to user root)
    * @return    array           An array containing the list of logins from the .htpasswd file, or FALSE
    */
@@ -210,7 +210,7 @@ class m_hta {
    * 
    * @global    m_mem   $mem
    * @global    m_bro   $bro
-   * @global    m_err   $err
+   * @global m_err       $err
    * @param     string  $dir    Folder to unprotect, relative to user root
    * @param     boolean $skip   For testing purpose mainly, skips the full user path search
    * @return    boolean         TRUE if the folder has been unprotected, or FALSE if an error occurred
@@ -271,7 +271,7 @@ class m_hta {
     /**
    * Add a user to a protected folder
    * 
-   * @global    m_err   $err
+   * @global m_err       $err
    * @global    m_bro   $bro
    * @global    m_admin $admin
    * @param     string  $user
@@ -340,7 +340,7 @@ class m_hta {
    * Delete a user from a protected folder.
    * 
    * @global    m_bro   $bro
-   * @global    m_err   $err
+   * @global m_err       $err
    * @param     array   $lst    An array with login to delete.
    * @param     string  $dir    The folder, relative to user root, where we want to delete users.
    * @return    boolean         TRUE if users has been deleted, or FALSE if an error occurred.
@@ -388,7 +388,7 @@ class m_hta {
    * Change the password of a user in a protected folder
    * 
    * @global    m_bro   $bro
-   * @global    m_err   $err
+   * @global m_err       $err
    * @global    m_admin $admin
    * @param     string  $user
    * @param     string  $newpass
@@ -437,7 +437,7 @@ class m_hta {
     /**
    * Check that a .htaccess file is valid (for authentication)
    * 
-   * @global    m_err   $err
+   * @global m_err       $err
    * @param     type    $absolute
    * @param     string  $absolute   Folder we want to check (relative to user root)
    * @return    boolean             TRUE is the .htaccess is protecting this folder, or FALSE else

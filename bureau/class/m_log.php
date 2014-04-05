@@ -28,9 +28,19 @@
 */
 class m_log {
 
+   /**
+    * 
+    */
   function m_log(){
   }
 
+   /**
+    * 
+    * @global m_mem       $mem
+    * @global m_err       $err
+    * @param type $dir
+    * @return type
+    */
   function list_logs_directory($dir){
     global $cuid,$err;
     $err->log("log","list_logs_directory");
@@ -54,6 +64,10 @@ class m_log {
   }
 
 
+   /**
+    * 
+    * @return string
+    */
   function hook_menu() {
     $obj = array(
       'title'       => _("Logs"),
@@ -65,6 +79,12 @@ class m_log {
      return $obj;
   }
 
+   /**
+    * 
+    * @global m_err       $err
+    * @param type $dirs
+    * @return type
+    */
   function list_logs_directory_all($dirs){
     global $err;
     $err->log("log","get_logs_directory_all");
@@ -76,6 +96,13 @@ class m_log {
 
   }
   
+   /**
+    * 
+    * @global m_mem       $mem
+    * @global    m_mem   $mem
+    * @global m_err       $err
+    * @return string
+    */
   function get_logs_directory(){
     global $cuid,$mem,$err;
     $err->log("log","get_logs_directory");
@@ -88,6 +115,12 @@ class m_log {
     return $c;
   }
   
+   /**
+    * 
+    * @global m_err       $err
+    * @global    m_mem   $mem
+    * @param type $file
+    */
   function download_link($file){
     global $err,$mem;
     $err->log("log","download_link");

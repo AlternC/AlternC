@@ -30,14 +30,15 @@
  */
 class m_hooks {
 
-  /*---------------------------------------------------------------------------*/
   /** Constructor
   * hooks([$mid]) Constructeur de la classe hooks, ne fait rien pour le moment
   */
+   /**
+    * 
+    */
   function m_hooks() {
   }
 
-  /*---------------------------------------------------------------------------*/
   /** 
     * invoke() permet de lancer une fonction donné en parametre dans toute les classes
     * connues de alternc, avec les parametres donnés.
@@ -46,6 +47,14 @@ class m_hooks {
     * @param array|string $hclass tableau contenant les classes spécifique qu'on veux appeler (si on veux pas TOUTE les appeler)
     * @return array with the return of each classes
   */
+   /**
+    * 
+    * @global array       $classes
+    * @param type $hname
+    * @param type $hparam
+    * @param type $hclass
+    * @return type
+    */
   function invoke($hname, $hparam = array(), $hclass = null) {
 
     // Si $hclass est defini, on veut appeler le hooks QUE pour UNE 
@@ -76,13 +85,18 @@ class m_hooks {
     return $val;
   }
 
-  /*---------------------------------------------------------------------------*/
   /** 
     * invoke each executable script of the directory (or the specified script)
     * @param string $scripts a script or a directory
     * @param array $parameters parameters for the scripts
     * @return boolean TRUE
   */
+    /**
+     * 
+     * @param type $scripts
+     * @param type $parameters
+     * @return boolean
+     */
    function invoke_scripts($scripts, $parameters=array()) {
 
     // First, build the list of script we want to launch

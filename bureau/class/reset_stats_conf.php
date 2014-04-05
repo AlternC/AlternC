@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * @todo Is this the right place for such a script
+ */
 include("config.php");
 
 if (!$admin->enabled) {

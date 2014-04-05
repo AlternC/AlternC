@@ -44,6 +44,7 @@ class m_lxc implements vm {
   /** 
    * Constructor, initialize the class informations from AlternC's variables
    */
+   /**
   function m_lxc() {
     $this->IP   = variable_get('lxc_ip', '', "IP address of the Alternc's LXC server. If empty, no LXC server.", array('desc'=>'IP address','type'=>'ip'));
     $this->PORT = variable_get('lxc_port', '6504', "Port of the Alternc's LXC server", array('desc'=>'Port','type'=>'integer'));
@@ -55,6 +56,7 @@ class m_lxc implements vm {
   /**
    * HOOK: add the "Console Access" to AlternC's main menu
    */
+   /**
   function hook_menu() {
     if ( empty($this->IP)) return ; // No menu if no server
 
@@ -72,6 +74,7 @@ class m_lxc implements vm {
   /**
    * HOOK: remove VM history for AlternC account
    */
+   /**
   function hook_admin_del_member() {
     global $db,$err,$cuid;
     $err->log("lxc","alternc_del_member");
