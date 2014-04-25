@@ -10,7 +10,7 @@
 /***********************************************************************/
 
 // managesieve server port
-$rcmail_config['managesieve_port'] = 2000;
+$rcmail_config['managesieve_port'] = 4190;
 
 // managesieve server address, default is localhost.
 // Replacement variables supported in host name:
