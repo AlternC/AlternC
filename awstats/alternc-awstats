@@ -1,11 +1,12 @@
 #!/bin/bash
 
-# Appelé seul, lance les stats AWStats du jour.
-# Appelé avec "all" lance les stats avec tous les fichiers .gz situés dans /var/log/apache
-# Appelé avec un nom de domaine en paramètre, rescanne tous les fichiers .gz pour ce domaine uniquement.
+# Called with no parameters, launch the daily awstats stats
+# called with "all", launch all stats with all apache log files from /var/log/alternc/sites/
+# called with a domain name, launch the stats for this domain from all apache log files 
 
-# Include some usefull functions
-. /usr/lib/alternc/functions.sh
+cd /usr/lib/alternc 
+# AlternC system functions
+. ./functions.sh
 
 # Regenerate the awstat etc cache files :
 if [ -x ./awstats.cache.php ]
