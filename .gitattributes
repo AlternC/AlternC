@@ -654,6 +654,7 @@ src/generate_apache_conf.php -text
 src/generate_bind_conf.php -text
 src/inotify_do_actions.sh -text
 src/inotify_update_domains.sh -text
+src/mail_add.php -text
 src/mail_dodelete.php -text
 src/mem_add -text
 src/mem_del -text
