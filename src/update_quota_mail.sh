@@ -4,29 +4,67 @@
 #You can call this script either without arguments, inwich case each maildir quotas will be recalculated
 #or you can call it with a directory reffering to a maildir to just sync one mailbox
 
-#basic checks
-if [ $# -gt 1 ]; then
-  echo "usage : update_quota_mail.sh (Maildir)."
-  exit
-fi
-
-if [ $# -eq 1 ];then
-  if [ ! -d "$1" ];then
-    echo "$1 is not a directory, aborting."
+#gerer les options : tout , 1boite , un domaine, un compte
+while getopts "a:m:d:c:" optname
+do
+  case "$optname" in
+  "a")
+    maildirs=`find "$ALTERNC_MAIL/" -maxdepth 2 -mindepth 2 -type d`
+  ;;
+  "m")
+    if [[ "$OPTARG" =~ ^[^\@]*@[^\@]*$ ]] ; then
+      if [[ "$(mysql_query "select userdb_home from dovecot_view where user = '$OPTARG'")" ]]; then
+        maildirs=$(mysql_query "select userdb_home from dovecot_view where user = '$OPTARG'")
+      else
+        echo "Bad mail provided"
+      fi
+    else
+      echo "Bad mail provided"
+    fi
+  ;;
+  "d")
+    if [[ "$OPTARG" =~ ^[a-z\-]+(\.[a-z\-]+)+$ ]] ; then
+      if [[ "$(mysql_query "select domaine from domaines where domaine = '$OPTARG'")" ]]; then
+          maildirs=$(mysql_query "select userdb_home from dovecot_view where user like '%@$OPTARG'")
+	    else
+        echo "Bad domain provided"
+      fi  
+    else
+      echo "Bad domain provided 2"
+    fi
+  ;;
+  "c")
+    if [[ "$OPTARG" =~ ^[a-z]*$ ]] ; then
+      if [[ "$(mysql_query "select domaine from domaines where domaine = '$1'")" ]]; then
+          maildirs=$(mysql_query "select userdb_home from dovecot_view where userdb_uid = $OPTARG")
+      else
+        echo "Bad account provided"
+      fi
+    else
+      echo "Bad account provided"
+    fi
+  ;;
+  "?")
+    echo "Unknown option $OPTARG - stop processing"
     exit
-  else
-    d="$1"
-  fi
-else
-  #Fist we set the quotas no 0 (infinite for each already existing account
-  t=`mysql_query "UPDATE mailbox SET quota='0' WHERE quota IS NULL"`
-  d=`find "$ALTERNC_MAIL/" -maxdepth 2 -mindepth 2 -type d`
-fi
+  ;;
+  ":")
+    echo "No argument value for option $OPTARG - stop processing"
+    exit
+  ;;
+  *)
+    # Should not occur
+    echo "Unknown error while processing options"
+    exit
+  ;;
+  esac
+done
+
 
 
 
 #Then we loop through every maildir to get the maildir size
-for i in $d ; do
+for i in $maildirs ; do
 
 	if [ -d "$i" ];then
 	  user=`ls -l $i| tail -n 1|cut -d' ' -f 3` 
