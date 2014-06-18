@@ -75,7 +75,7 @@ if ( empty($logo) ||  ! $logo ) {
     <?php
     if (isset($_GET['authip_token'])) $authip_token=$_GET['authip_token'];
     if (variable_get('https_warning', true, 'warn users to switch to HTTPS') && !isset($_SERVER['HTTPS'])) {
-      echo __('<h4>WARNING: you are trying to access the control panel insecurely, click <a href="%s">here</a> to go to secure mode</h4>', $_SERVER["HTTP_HOST"]);
+      echo '<h4>' . sprintf(_('WARNING: you are trying to access the control panel insecurely, click <a href="https://%s">here</a> to go to secure mode'), $_SERVER["HTTP_HOST"]) . '</h4>';
     }
     ?>
     <div style="margin: 0 auto 30px auto; width: 700px;">
