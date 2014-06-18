@@ -292,9 +292,10 @@ class m_piwik {
   // Ajoute un site à Piwik
   // can't figure out how to pass multiple url through the API
   function site_add($siteName, $urls, $ecommerce = FALSE) {
+    global $db, $cuid;
     $urls = is_array($urls) ? implode(',', $urls) : $urls;
     $api_data = $this->call_privileged_page('API', 'SitesManager.addSite', array('siteName' => $siteName, 'urls' => $urls));
-    printvar($api_data);
+    $db->query("INSERT INTO piwik_sites set uid='$cuid', piwik_id='{$api_data->value}'");
     return TRUE;
   }
 
