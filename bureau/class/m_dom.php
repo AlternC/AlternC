@@ -2170,6 +2170,7 @@ order by
         // by subdomain
         $tmp = array();
         foreach ($da['sub'] as $sub) {
+          if ($sub['web_action']!='OK') continue;
             if (!$sub['only_dns']) {
                 if (!isset($tmp[$sub['fqdn']])) {
                     $tmp[$sub['fqdn']] = 0;
