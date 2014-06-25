@@ -1,8 +1,5 @@
 #!/bin/bash
 
-echo Not used anymore
-exit 1
-
 . /usr/lib/alternc/functions.sh
 
 TEMPLATE_DIR="/etc/alternc/templates/apache2"
