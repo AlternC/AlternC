@@ -69,7 +69,7 @@ class DB_Sql {
    */
   function connect($Database = "", $Host = "", $User = "", $Password = "") {
      global $err;
-     $err->log('Mysql', 'Legacy', 'This function should no longer be used');
+     $this->halt('Mysql::connect() : This function should no longer be used');
      /* Handle defaults */
      if ("" == $Database)
         $Database = $this->Database;
@@ -86,7 +86,7 @@ class DB_Sql {
         try {
            $this->pdo_instance = new PDO($dsn, $User, $Password);
         } catch (PDOException $e) {
-           $err->log("Mysql", "PDO instance", $e->getMessage());
+           $this->halt("Mysql::PDO_instance" . $e->getMessage());
            return FALSE;
         }
     }
