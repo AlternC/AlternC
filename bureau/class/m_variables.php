@@ -410,7 +410,7 @@ class m_variables {
 
     $result = $db->query('SELECT name, comment FROM `variable` order by name');
     $t=array();
-    while ($db->next_record($result)) {
+    while ($db->next_record()) {
       $tname = $db->f('name');
       // If not listed of if listed comment is shorter
       if ( ! isset( $t[$tname] ) || strlen($t[$tname]) < $db->f('comment') ) {
@@ -432,7 +432,7 @@ class m_variables {
       $result = $db->query('SELECT * FROM `variable`');
 
       $arr_var=array();
-      while ($db->next_record($result)) {
+      while ($db->next_record()) {
         // Unserialize value if needed
         if ( ($value = @unserialize($db->f('value'))) === FALSE) {
           $value=$db->f('value');
