@@ -79,7 +79,7 @@ if [ -e /etc/default/saslauthd ]; then
 fi
 
 if [ -e /etc/dovecot/dovecot.conf ]; then
-    CONFIG_FILES="$CONFIG_FILES etc/dovecot/dovecot.conf etc/dovecot/dovecot-sql.conf etc/dovecot/dovecot-dict-quota.conf"
+    CONFIG_FILES="$CONFIG_FILES etc/dovecot/alternc-sql.conf etc/dovecot/alternc-dict-quota.conf etc/dovecot/conf.d/95_alternc.conf"
 fi
 
 INSTALLED_CONFIG_TAR="/var/lib/alternc/backups/etc-installed.tar.gz"
@@ -315,7 +315,7 @@ if [ -x /usr/sbin/apache2 ]; then
         fi
 
 	# We enable dovecot SSL certificate instructions: (on wheezy we should use a new file in /etc/dovecot/conf.d/ )
-	sed -i -e 's#^ssl_cert_file.*$#ssl_cert_file = /etc/ssl/certs/ssl-cert-snakeoil.pem#' -e 's#^ssl_key_file.*$#ssl_key_file = /etc/ssl/private/ssl-cert-snakeoil.key#' /etc/dovecot/dovecot.conf
+	( echo "ssl_cert = </etc/alternc/apache.pem" ; echo "ssl_key = </etc/alternc/apache.pem" ) >/etc/dovecot/conf.d/96_ssl.conf
 
     else
         # We disable proftpd tls module
@@ -324,7 +324,7 @@ if [ -x /usr/sbin/apache2 ]; then
         cp /etc/proftpd/modules.conf /etc/alternc/templates/proftpd/
 
 	# We disable dovecot SSL certificate instructions: (on wheezy we should remove a file in /etc/dovecot/conf.d/ )
-        sed -i -e 's#^ssl_cert_file.*$#ssl_cert_file = /etc/ssl/certs/ssl-cert-snakeoil.pem#' -e 's#^ssl_key_file.*$#ssl_key_file = /etc/ssl/private/ssl-cert-snakeoil.key#' /etc/dovecot/dovecot.conf
+	( echo "ssl_cert = </etc/ssl/certs/ssl-cert-snakeoil.pem" ; echo "ssl_key = </etc/ssl/private/ssl-cert-snakeoil.key" ) >/etc/dovecot/conf.d/96_ssl.conf
 
         echo "SSL not configured"
         echo "create a certificate in /etc/alternc/apache.pem and rerun alternc.install"
@@ -569,9 +569,11 @@ if [ "$HAS_ROOT" != "1" ]; then
     fi
 fi
 
-#giving vmail user read access on dovecot sql file
-chgrp vmail /etc/dovecot/dovecot.conf
-chmod g+r /etc/dovecot/dovecot.conf
+# giving vmail user read access on dovecot sql file
+chgrp vmail /etc/dovecot/alternc-sql.conf
+chmod g+r /etc/dovecot/alternc-sql.conf
+# Override some dovecot 2.0 configuration that may have happened during dovecot postinst:
+sed -i -e 's/^ *!include/#!include/' /etc/dovecot/conf.d/10-auth.conf
 
 # Changing owner of web panel's files
 chown -R alterncpanel:alterncpanel "/usr/share/alternc/panel/"
