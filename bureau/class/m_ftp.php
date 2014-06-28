@@ -279,7 +279,7 @@ class m_ftp {
     }
 
     // Explicitly look for only allowed chars
-    if ( ! preg_match("/^[A-Za-z0-9_\.\-]+$/", $l) ) { 
+    if ( ! preg_match("/^[A-Za-z0-9]+[A-Za-z0-9_\.\-]*$/", $l) ) { 
       $err->raise('ftp', _("FTP login is incorrect"));
       return false;
     }

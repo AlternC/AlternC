@@ -2,7 +2,7 @@ membres:
   - 
     uid : 2000
     login : admin
-    pass : admin
+    pass : $1$GB4d6Hq7$HxND.Qbn5xDuO3xCbW/dV/
     enabled : 1
     su : 1
     mail : root@alternc.org
@@ -13,7 +13,7 @@ membres:
   - 
     uid : 2001
     login : phpunit
-    pass : phpunit
+    pass : phqzC1nAjK7Vs
     enabled : 1
     su : 0
     mail : phpunit@alternc.org

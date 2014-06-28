@@ -1,1 +1,1 @@
-30 4 * * *       root        /usr/lib/alternc/alternc-awstats
+30 4 * * *      root    /usr/lib/alternc/alternc-awstats

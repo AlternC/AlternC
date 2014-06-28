@@ -68,9 +68,11 @@ class m_admin {
 			 );
     $this->archive=variable_get('archive_del_data','','If folder specified html folder of deleted user is archived, else it is deleted. ');
   }
+  
   /**
+   * Builds the admin menu
    * 
-   * @global	type $mem
+   * @global	m_mem $mem
    * @global	type $cuid
    * @global	type $debug_alternc
    * @global	type $L_INOTIFY_UPDATE_DOMAIN
@@ -173,6 +175,21 @@ class m_admin {
     return $db->f('uid');
   }
 
+  /**
+   * return the name of an alternc account
+   *
+   * @global	type $db
+   * @param type $uid
+   * @return null if missing
+   */
+  function get_login_by_uid($uid) {
+    global $db;
+    $db->query("SELECT login FROM membres WHERE uid=$uid;");
+    if (! $db->next_record()) {
+      return null;
+    }
+    return $db->f('login');
+  }
 
   /**
    * Returns the known information about a hosted account

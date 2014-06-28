@@ -202,6 +202,7 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
 
     <?php __("Which protocol shall you use?"); ?>
     <div id="accordion-mailout">
+      <?php if ($mail->srv_submission) { ?>
       <h4><?php __("Submission");?></h4>
       <div>
         <ul>
@@ -213,6 +214,8 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
         <li><b><?php __("Connection security:");?></b> STARTTLS</li>
         </ul>
       </div>
+      <?php } ?>
+      <?php if ($mail->srv_smtp) { ?>
       <h4><?php __("SMTP");?></h4>
       <div>
         <ul>
@@ -224,6 +227,8 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
           <li><b><?php __("Connection security:");?></b> STARTTLS</li>
         </ul>
       </div>
+      <?php } ?>
+      <?php if ($mail->srv_smtps) { ?>
       <h4><?php __("SMTPS");?></h4>
       <div>
         <ul>
@@ -235,6 +240,7 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
           <li><b><?php __("Connection security:");?></b> SSL</li>
         </ul>
       </div>
+      <?php } ?>
     </div><!-- accordion-mailout -->
 
 </div><!-- tabs-mailhelp-out -->
