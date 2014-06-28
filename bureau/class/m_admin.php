@@ -173,6 +173,21 @@ class m_admin {
     return $db->f('uid');
   }
 
+  /**
+   * return the name of an alternc account
+   *
+   * @global	type $db
+   * @param type $uid
+   * @return null if missing
+   */
+  function get_login_by_uid($uid) {
+    global $db;
+    $db->query("SELECT login FROM membres WHERE uid=$uid;");
+    if (! $db->next_record()) {
+      return null;
+    }
+    return $db->f('login');
+  }
 
   /**
    * Returns the known information about a hosted account

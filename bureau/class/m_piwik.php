@@ -102,8 +102,7 @@ class m_piwik {
 
         $user_login = $this->clean_user_name($user_login);
 	$user_pass  = create_pass();
-	$user_mail  = $user_mail ? $user_mail : $mem->user['mail'];
-	$user_mail = create_pass(4) . '@gmail.com'; // FIXME $user_mail; Unicité sur les emails ... Soit on ajoute + random soit, on prompt
+	$user_mail  = $mem->user['mail'];
 	$user_alias = $user_login;
 
 	$api_data = $this->call_privileged_page('API', 'UsersManager.addUser', array('userLogin' => $user_login, 'password' => $user_pass, 'email' => $user_mail, 'alias' => $user_alias), 'JSON'); 
@@ -292,9 +291,10 @@ class m_piwik {
   // Ajoute un site à Piwik
   // can't figure out how to pass multiple url through the API
   function site_add($siteName, $urls, $ecommerce = FALSE) {
+    global $db, $cuid;
     $urls = is_array($urls) ? implode(',', $urls) : $urls;
     $api_data = $this->call_privileged_page('API', 'SitesManager.addSite', array('siteName' => $siteName, 'urls' => $urls));
-    printvar($api_data);
+    $db->query("INSERT INTO piwik_sites set uid='$cuid', piwik_id='{$api_data->value}'");
     return TRUE;
   }
 
@@ -344,10 +344,10 @@ class m_piwik {
 
 
 
-  /* Helper code FIXME: rename those function using "private" + "_" prefix  */
-
+  /* return a clean username with a unique prefix per account */
   function clean_user_name($username) {
-    return mysql_real_escape_string(trim($username));
+    global $admin, $cuid;
+    return 'alternc_' . $admin->get_login_by_uid($cuid) . '_' . mysql_real_escape_string(trim($username));
   }
 
 

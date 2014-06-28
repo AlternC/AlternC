@@ -118,10 +118,13 @@ class m_ftpTest extends PHPUnit_Framework_TestCase
      */
     public function testCheck_login()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+      // Allowed
+      $this->assertTrue($this->object->check_login('plop')); 
+      $this->assertTrue($this->object->check_login('00')); 
+
+      // Forbidden
+      $this->assertFalse($this->object->check_login('_plop')); 
+      $this->assertFalse($this->object->check_login('arf+')); 
     }
 
     /**
@@ -238,9 +241,6 @@ class m_ftpTest extends PHPUnit_Framework_TestCase
      */
     public function testHook_upnp_list()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertArrayHasKey('ftp', $this->object->hook_upnp_list());
     }
 }
