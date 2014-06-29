@@ -27,13 +27,15 @@ class Alternc_Diagnostic_Data {
     
     
     /**
+     * Sets 
      * 
-     * @param array $options a module name => data
+     * @param string $sectionname
+     * @param Alternc_Diagnostic_Data $data
      * @return boolean
      */
-    function addData( $name, Alternc_Diagnostic_Data $data){
-        $this->index[]         = $name;
-        $this->data[$name]    = $data;
+    function addData( $sectionname, Alternc_Diagnostic_Data $data){
+        $this->index[]                  = $sectionname;
+        $this->data[$sectionname]       = $data;
         return true;
     }
     
@@ -97,4 +99,20 @@ class Alternc_Diagnostic_Data {
         return $this->metadata;
     }
 
+    /**
+     * Retrieves a given section of the data
+     * 
+     * 
+     * @param string $section_name
+     * @return boolean
+     */
+    public function getSection( $section_name ){
+        
+        if( !in_array($section_name, $this->index)){
+            return FALSE;
+        }
+        return $this->data[$section_name];
+        
+    }
+    
 }

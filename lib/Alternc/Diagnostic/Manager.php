@@ -22,6 +22,7 @@ class Alternc_Diagnostic_Manager{
      * @throws \Exception
      */
     public function __construct($options) {
+        
         // Attempts to retrieve formatInstance
         if (isset($options["formatInstance"]) && ! is_null($options["formatInstance"])) {
             $this->formatInstance       = $options["formatInstance"];
@@ -35,6 +36,7 @@ class Alternc_Diagnostic_Manager{
         } else {
             throw new \Exception("Missing parameter directoryInstance");
         }
+        
     }
     
     /**

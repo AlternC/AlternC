@@ -8,7 +8,7 @@ abstract class Alternc_Diagnostic_Service_Abstract{
     /** @var Alternc_Diagnostic_Data*/
     protected $data;
     
-    /** @var m_mysql */
+    /** @var DB_Sql*/
     public $db;
 
     /** @var m_mysql */
@@ -92,8 +92,14 @@ abstract class Alternc_Diagnostic_Service_Abstract{
         return $output;
     }
 
-    
-    protected function filterRegexp($pattern,$result){
+    /**
+     * Filters lines of a result to only include the matching lines
+     * 
+     * @param string $pattern
+     * @param array $result
+     * @return type
+     */
+    protected function filterRegexp($result,$pattern){
         $returnArray                    = array();
         foreach ($result as $line) {
             $captures_count             = preg_match($pattern, $line, $matches);
@@ -128,7 +134,7 @@ abstract class Alternc_Diagnostic_Service_Abstract{
      * @param mixed $content
      * @return boolean
      */
-    function addDataSection( $name, $content){
+    function writeSectionData( $name, $content){
         
         $section                        = new Alternc_Diagnostic_Data(Alternc_Diagnostic_Data::TYPE_SECTION,$content);
         $this->data->addData($name, $section);

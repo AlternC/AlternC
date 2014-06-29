@@ -40,9 +40,14 @@
 
 */
 
-//include "Console.php";
-
-
+/**
+ * Attempts to load a class in multiple path, the PSR-0 or old style way
+ * 
+ * @staticvar array $srcPathList
+ * @staticvar boolean $init
+ * @param string $class_name
+ * @return boolean
+ */
 function __autoload($class_name)
 {
     // Contains (Namespace) => directory
@@ -95,11 +100,31 @@ function __autoload($class_name)
             return true;
         }
     }
+    
     // Failed to find file
     return false;
 }
 
 
+// ==================================================================
+// ==================================================================
+// alternc config
+// ==================================================================
+// ==================================================================
+
+require_once("/usr/share/alternc/panel/class/config_nochk.php");
+
+
+
+$directoryInstance                      = new Alternc_Diagnostic_Directory("/tmp/diagnostic");
+
+
+// instanciation of the diagnosticManager service
+
+$diagnosticManager                      = new Alternc_Diagnostic_Manager( array(
+    "directoryInstance"         => $directoryInstance,
+    "formatInstance"            => new Alternc_Diagnostic_Format_Json($directoryInstance)
+));
 
 
 // ==================================================================
@@ -108,22 +133,21 @@ function __autoload($class_name)
 // ==================================================================
 // ==================================================================
 
-$consoleParser                          = new Alternc_Diagnostic_Console(array(
-    'description' => "Handles diagnostics of an alternc server.",
-    'version'     => '0.0.1', 
-));
+$consoleParser                          = new Alternc_Diagnostic_Console();
 
 
 $createCommmand                         = $consoleParser->addCommand('create', array('multiple'=>true,"alias"=>"c","description" => "Creates a new diagnostic"));
+
 $createCommmand->addOption('services', array(
    'short_name'  => '-s',
    'long_name'   => '--services',
    'action'      => 'StoreString',
-   'default'     => 'apache2,dns,email,system,mailman,mysql,panel,ftp',
+   'default'     => 'apache2,dns,mail,system,mailman,mysql,panel,ftp',
    'description' => 'Sets the services to use for diagnostics separated by comma
-   ex: -d apache2,dns,email',
+   ex: -d apache2,dns,mail',
     'help_name'   => 'services'
     ));
+
 $createCommmand->addOption('format', array(
    'short_name'  => '-f',
    'long_name'   => '--format',
@@ -139,16 +163,8 @@ $compareCommmand                        = $consoleParser->addCommand('show', arr
 $deleteCommmand                         = $consoleParser->addCommand('delete', array('multiple'=>false,"alias"=>"d","description" => "Deletes diagnostic files"));
 
 
-$directoryInstance                      = new Alternc_Diagnostic_Directory("/tmp/diagnostic");
-$diagnosticManager                      = new Alternc_Diagnostic_Manager( array(
-    "directoryInstance"         => $directoryInstance,
-    "formatInstance"            => new Alternc_Diagnostic_Format_Json($directoryInstance)
-));
 
-
-//require_once("/usr/share/alternc/panel/class/config_nochk.php");
-require_once("../bureau/class/config_nochk.php");
-
+// Attempts to parse command line
 try {
     $result                             = $consoleParser->parse();
     if ($result->command_name){

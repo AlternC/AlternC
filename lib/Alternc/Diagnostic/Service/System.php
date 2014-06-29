@@ -11,7 +11,7 @@ class Alternc_Diagnostic_Service_System
 
     public $name                        = "system";
     function run(){
-        $this->addDataSection("ip list", $this->execCmd("ip a"));
+        $this->writeSectionData("ip list", $this->execCmd("ip a"));
         return $this->data;
     }
 }
