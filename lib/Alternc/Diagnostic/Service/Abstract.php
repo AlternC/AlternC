@@ -142,5 +142,71 @@ abstract class Alternc_Diagnostic_Service_Abstract{
         
     }
 
+    /**
+     * Reads an array of URL and returns the CURL results
+     * 
+     * @param array $urlList
+     * @param array $fieldsList curlInfo array keys
+     * @param int $sockets_max
+     * @return array
+     */
+    function curlRequest($urlList,$fieldsList = array("http_code","url"),$sockets_max = 8){
+        $returnArray                    = array();
+        
+        // Attempts to retrive a multi connection curl handle
+        $multiCurlHandle                = curl_multi_init();
+        for ($index = 0; $index < $sockets_max; $index++) {
+            $ch                         = "ch".$index;
+            $$ch                        = curl_init();
+            curl_setopt($$ch, CURLOPT_HEADER,         1);
+            curl_setopt($$ch, CURLOPT_FOLLOWLOCATION, 1);
+            curl_setopt($$ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($$ch, CURLOPT_TIMEOUT,        3);
+            curl_setopt($$ch, CURLOPT_NOBODY,         1);
+            curl_multi_add_handle($multiCurlHandle,$$ch);
+        }
+        
+        $url_count                      = count($urlList);
+        $url_pointer                    = 0;
+
+        while( $url_pointer < $url_count){
+            $sockets                    = $url_count - $url_pointer > $sockets_max ? $sockets_max : $url_count - $url_pointer ;
+            $loopUrlList                = array();
+            for ($index2 = 0; $index2 < $sockets; $index2++) {
+                $ch                     = "ch".$index2;
+                $url                    = $urlList[$url_pointer];
+                $loopUrlList[$index2]   = $url;
+                curl_setopt($$ch, CURLOPT_URL, $url);
+                $url_pointer++;
+            }
+            
+            do {
+                curl_multi_exec($multiCurlHandle, $running);
+                curl_multi_select($multiCurlHandle);
+            } while ($running > 0);
+            
+            for ($index3 = 0; $index3 < $sockets; $index3++) {
+                $ch                     = "ch".$index3;
+                $url                    = $loopUrlList[$index3];
+                $curlInfo               = curl_getinfo($$ch);
+                $urlInfo                = array();
+                foreach ($fieldsList as $field) {
+                    $urlInfo[$field]    = $curlInfo[$field];
+                }
+                $returnArray[]          = $urlInfo;
+            }
+            
+        }
+        
+        //close the handles
+        curl_multi_close($multiCurlHandle);
+        for ($index = 0; $index < $sockets_max; $index++) {
+            $ch                         = "ch".$index;
+            curl_close($$ch);
+        }
+        
+        return $returnArray;
+        
+    }
     
 }
