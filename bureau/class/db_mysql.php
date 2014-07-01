@@ -37,8 +37,8 @@ class DB_Sql {
   
 
   /* PDO related variables */
-  private $pdo_instance = FALSE;
-  private $pdo_query = FALSE;
+  private $pdo_instance = NULL;
+  private $pdo_query = NULL;
 
   /**
    * Constructor 
