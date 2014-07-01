@@ -28,7 +28,7 @@ class DB_Sql {
    private $num_rows;
 
    /* public: current error number and error text */
-   private $Errno = 0;
+   private $Errno;
    private $Error;
 
 
@@ -265,7 +265,7 @@ class DB_Sql {
   }
 
   function lastid() {
-     return $this->pdo_query->lastInsertId();
+     return $this->pdo_instance->lastInsertId();
   }
 
   /* public: sequence numbers */
