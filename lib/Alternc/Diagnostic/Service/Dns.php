@@ -32,8 +32,12 @@ class Alternc_Diagnostic_Service_Dns
         
         /** @var m_dom */
         global $dom;
-        
-        $this->domainList               = $dom->get_domain_all_summary();
+       
+	if( !is_a($dom, "system_bind")){
+
+	    $this->data->setMetadata("Alternc 1.x: can't read DNS"); 
+	    return $this->data;
+	}
         
         // Writes the domains list 
         $this->writeSectionData (self::SECTION_LIST,$this->domainList);
