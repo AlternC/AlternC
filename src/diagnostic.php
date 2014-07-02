@@ -91,7 +91,7 @@ function __autoload($class_name)
     } else {
         $file_name                      = $class_name . '.php';        
     }
-    
+   
     // Attempts to find file in namespace
     foreach($srcPathList as $namespace => $path ){
         $file_path                      = $path.DIRECTORY_SEPARATOR.$file_name;
@@ -112,7 +112,15 @@ function __autoload($class_name)
 // ==================================================================
 // ==================================================================
 
-require_once("/usr/share/alternc/panel/class/config_nochk.php");
+// alternc 1.0
+if(is_file("/usr/share/alternc/panel/class/config_nochk.php")){
+    require_once("/usr/share/alternc/panel/class/config_nochk.php");
+
+}else{
+    require_once("/var/alternc/bureau/class/config_nochk.php");
+    include "../bureau/class/class_system_bind.php";
+}
+
 
 
 
