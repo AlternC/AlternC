@@ -130,7 +130,7 @@ foreach ($domains as $key => $domain) {
 	  
 # 2.2 change the subdomain to redirect to http://spam.koumbit.org/
 	  $dom->lock();
-	  if (!$dom->set_sub_domain($domain, $sub, $dom->type_url, "edit", $redirect)) {
+	  if (!$dom->set_sub_domain($domain, $sub, $dom->type_url, $redirect)) {
 	    print "-- error in $sub.$domain: " . $err->errstr() . "\n";
 	  }
 	  $dom->unlock();
