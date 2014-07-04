@@ -71,7 +71,7 @@ for file in $( ls $extensions | sort -n ) ; do
 			      cat $file
 			      echo "UPDATE alternc_status SET value='$file' WHERE name='alternc_version';"
 			      echo "COMMIT;"
-			  ) | mysql -f --defaults-file=/etc/alternc/my.cnf
+			  ) | mysql --defaults-file=/etc/alternc/my.cnf -f
 			  ;;
 		      php)
 		  	  php -q $file
