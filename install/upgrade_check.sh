@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash
 
 # this script will look for upgrade scripts in
 # /usr/share/alternc/install/upgrades and execute them based on the
@@ -31,7 +31,7 @@ then
 	# this is a *version number*, not a *last upgrade script* we have this *border case*
 	if [ "$oldvers" = "3.1" ]
 	then
-	    oldvers="3.1.0~b.php"
+	    oldvers="3.1.0~c.sh"
 	fi
     else
 	echo "##############################################"
@@ -71,7 +71,7 @@ for file in $( ls $extensions | sort -n ) ; do
 			      cat $file
 			      echo "UPDATE alternc_status SET value='$file' WHERE name='alternc_version';"
 			      echo "COMMIT;"
-			  ) | mysql --defaults-file=/etc/alternc/my.cnf
+			  ) | mysql -f --defaults-file=/etc/alternc/my.cnf
 			  ;;
 		      php)
 		  	  php -q $file
