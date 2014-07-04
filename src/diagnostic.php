@@ -112,13 +112,13 @@ function __autoload($class_name)
 // ==================================================================
 // ==================================================================
 
-$version				= "3.0";
+$version				= "3.2";
 
 // alternc 1.0
 if(is_file("/usr/share/alternc/panel/class/config_nochk.php")){
     require_once("/usr/share/alternc/panel/class/config_nochk.php");
-    $version				= "1.0";
 }else{
+    $version				= "1.0";				
     require_once("/var/alternc/bureau/class/config_nochk.php");
     include "../bureau/class/class_system_bind.php";
 }
