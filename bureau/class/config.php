@@ -136,24 +136,14 @@ if (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"]=="on" && $host!=$L_FQDN) {
  */ 
   
 class DB_system extends DB_Sql { 
-   var $Host = null; 
-   var $Database = null; 
-   var $User = null;  
-   var $Password = null; 
-   
-   /** 
-    * Creator 
-    */ 
-   function DB_system() { 
+  function __construct() { 
       global $L_MYSQL_HOST,$L_MYSQL_DATABASE,$L_MYSQL_LOGIN,$L_MYSQL_PWD; 
-      $this->Host     = $L_MYSQL_HOST; 
-      $this->Database = $L_MYSQL_DATABASE; 
-      $this->User     = $L_MYSQL_LOGIN; 
-      $this->Password = $L_MYSQL_PWD; 
+      parent::__construct($L_MYSQL_DATABASE, $L_MYSQL_HOST, $L_MYSQL_LOGIN, $L_MYSQL_PWD);
    } 
 } 
 
-$db= new DB_Sql($L_MYSQL_DATABASE, $L_MYSQL_HOST, $L_MYSQL_LOGIN, $L_MYSQL_PWD);
+$db = new DB_system();
+// $db = new Sql($L_MYSQL_DATABASE, $L_MYSQL_HOST, $L_MYSQL_LOGIN, $L_MYSQL_PWD);
 
 // Current User ID = the user whose commands are made on behalf of.
 $cuid=0;
