@@ -15,6 +15,9 @@ class Alternc_Diagnostic_Manager{
      */
     public $directoryInstance;
 
+    /** @var string the Alternc version */
+    public $version;
+
     /**
      * Constructor with dependancy injection
      * 
@@ -30,11 +33,18 @@ class Alternc_Diagnostic_Manager{
             throw new \Exception("Missing parameter formatInstance");
         }
         
-        // Attempts to retrieve directoryInstance
+         // Attempts to retrieve directoryInstance
         if (isset($options["directoryInstance"]) && ! is_null($options["directoryInstance"])) {
             $this->directoryInstance    = $options["directoryInstance"];
         } else {
             throw new \Exception("Missing parameter directoryInstance");
+        }
+
+        // Attempts to retrieve version 
+        if (isset($options["version"]) && ! is_null($options["version"])) {
+            $this->version		= $options["version"];
+        } else {
+            throw new \Exception("Missing parameter version");
         }
         
     }
@@ -58,7 +68,7 @@ class Alternc_Diagnostic_Manager{
                 throw new \Exception("Invalid service $service");
             }
             /** @var Alternc_Diagnostic_Service_Interface */
-            $serviceAgent                = new $class_name;
+            $serviceAgent                = new $class_name( array("service" => $this) );
             
             // Runs the service agent and store the results
             $diagnosticData->addData($serviceAgent->name, $serviceAgent->run());
