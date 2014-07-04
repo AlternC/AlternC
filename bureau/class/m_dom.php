@@ -1972,8 +1972,6 @@ class m_dom {
         if ($only_apache) {
             $params.=" and dt.only_dns is false ";
         }
-// BUG BUG BUG FIXME
-// Suppression de comptes -> membres existe pas -> domaines a supprimer ne sont pas lister
         $db->query("
 select 
   sd.id as sub_id, 
