@@ -29,11 +29,13 @@ class Alternc_Diagnostic_Service_Dns
         /** @var m_dom */
         global $dom;
       
-        $this->bind                     = new system_bind();
 	$version			= $this->service->version;
 	if( $version < 3 ) {
+	    $this->bind                     = new system_bind(array(
+		"zone_file_directory"       => "/var/alternc/bind/zones/"));
 	    $this->domainList			= $this->get_domain_all_summary();
 	}else{
+	    $this->bind                     = new system_bind();
 	    $this->domainList               = $dom->get_domain_all_summary();
 
 	}
