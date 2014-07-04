@@ -1,6 +1,7 @@
 <?php 
 
 /**
+ * This abstract defines properties and provides helpers to service classes
  * 
  */
 abstract class Alternc_Diagnostic_Service_Abstract{
