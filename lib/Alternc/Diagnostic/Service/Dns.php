@@ -31,13 +31,12 @@ class Alternc_Diagnostic_Service_Dns
       
         $this->bind                     = new system_bind();
 	$version			= $this->service->version;
-	if( $version < 3 ) {
+	
+	if( $version < 3.2 ) {
 	    $this->domainList			= $this->get_domain_all_summary();
 	}else{
 	    $this->domainList               = $dom->get_domain_all_summary();
-
 	}
-        
 	// Writes the domains list 
 	$this->writeSectionData (self::SECTION_LIST,$this->domainList);
         // Writes the domains hosts 
@@ -61,13 +60,12 @@ class Alternc_Diagnostic_Service_Dns
     function get_domain_all_summary() {
         global $db, $err;
         $res = array();
-        $db->query("SELECT domaine, gesdns, gesmx, dns_action, zonettl FROM domaines ORDER BY domaine");
+        $db->query("SELECT domaine, gesdns, gesmx, dns_action FROM domaines ORDER BY domaine");
         while ($db->next_record()) {
             $res[$db->f("domaine")] = array(
                 "gesdns" => $db->f("gesdns"),
                 "gesmx" => $db->f("gesmx"),
                 "dns_action" => $db->f("dns_action"),
-                "zonettl" => $db->f("zonettl"),
             );
         }
         return $res;
