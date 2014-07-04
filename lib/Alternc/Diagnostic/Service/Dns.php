@@ -30,7 +30,7 @@ class Alternc_Diagnostic_Service_Dns
         global $dom;
       
 	$version			= $this->service->version;
-	if( $version < 3 ) {
+	if( $version < 3.2 ) {
 	    $this->bind                     = new system_bind(array(
 		"zone_file_directory"       => "/var/alternc/bind/zones/"));
 	    $this->domainList			= $this->get_domain_all_summary();
