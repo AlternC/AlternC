@@ -2170,15 +2170,24 @@ order by
         // by subdomain
         $tmp = array();
         foreach ($da['sub'] as $sub) {
-          if ($sub['web_action']!='OK') continue;
-            if (!$sub['only_dns']) {
-                if (!isset($tmp[$sub['fqdn']])) {
-                    $tmp[$sub['fqdn']] = 0;
-                }
-                $tmp[$sub['fqdn']]++;
-                if ($tmp[$sub['fqdn']] >= 2) {
-                    $errors[$sub['fqdn']] = sprintf(_("Problem on %s: there is more than 1 web configuration going to be generated for this sub-domain."), $sub['fqdn']);
-                }
+            // Skip when disable or deleted
+            if ($sub['enable']=='DISABLE') continue;
+            if ($sub['enable']=='DISABLED') continue;
+            if ($sub['web_action']=='DELETE') continue;
+
+            // Skip if "only_dns" and no conf generated
+            if ($sub['only_dns']) continue;
+
+            // Init the value in the tmp array
+            if (!isset($tmp[$sub['fqdn']])) {
+                $tmp[$sub['fqdn']] = 0;
+            }
+            // Increment value
+            $tmp[$sub['fqdn']]++;
+
+            // If there is more than 1 configuration file for this FQDN, alert !
+            if ($tmp[$sub['fqdn']] >= 2) {
+                $errors[$sub['fqdn']] = sprintf(_("Problem on %s: there is more than 1 web configuration going to be generated for this sub-domain."), $sub['fqdn']);
             }
         }
 
