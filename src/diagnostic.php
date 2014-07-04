@@ -112,10 +112,12 @@ function __autoload($class_name)
 // ==================================================================
 // ==================================================================
 
+$version				= "3.0";
+
 // alternc 1.0
 if(is_file("/usr/share/alternc/panel/class/config_nochk.php")){
     require_once("/usr/share/alternc/panel/class/config_nochk.php");
-
+    $version				= "1.0";
 }else{
     require_once("/var/alternc/bureau/class/config_nochk.php");
     include "../bureau/class/class_system_bind.php";
@@ -131,7 +133,8 @@ $directoryInstance                      = new Alternc_Diagnostic_Directory("/tmp
 
 $diagnosticManager                      = new Alternc_Diagnostic_Manager( array(
     "directoryInstance"         => $directoryInstance,
-    "formatInstance"            => new Alternc_Diagnostic_Format_Json($directoryInstance)
+    "formatInstance"            => new Alternc_Diagnostic_Format_Json($directoryInstance),
+    "version"			=> $version 
 ));
 
 

@@ -40,7 +40,10 @@ abstract class Alternc_Diagnostic_Service_Abstract{
     /** @var m_quota */
     protected $quota;
 
-    public function __construct() {
+    /** @var Alternc_Diagnostic_Service */
+    protected $service;
+
+    public function __construct( $options ) {
         $this->data                     = new Alternc_Diagnostic_Data(Alternc_Diagnostic_Data::TYPE_DOMAIN);
         
         global $db;
@@ -75,6 +78,10 @@ abstract class Alternc_Diagnostic_Service_Abstract{
 
         global $admin;
         $this->admin= $admin;
+
+	if( array_key_exists("service",$options) && is_object($options["service"]  ) ){
+	    $this->service	    = $options["service"];
+	}
 
     }
     

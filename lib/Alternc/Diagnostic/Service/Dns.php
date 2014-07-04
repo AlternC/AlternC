@@ -23,24 +23,23 @@ class Alternc_Diagnostic_Service_Dns
     const SECTION_ZONES                 = "zones";
     const SECTION_ZONES_LOCKED          = "zones_locked";
     const SECTION_SLAVES                = "slaves";
-    public function __construct() {
-        parent::__construct();
-        $this->bind                     = new system_bind();
-    }
     
     function run(){
         
         /** @var m_dom */
         global $dom;
-       
-	if( !is_a($dom, "system_bind")){
+      
+        $this->bind                     = new system_bind();
+	$version			= $this->service->version;
+	if( $version < 3 ) {
+	    $this->domainList			= $this->get_domain_all_summary();
+	}else{
+	    $this->domainList               = $dom->get_domain_all_summary();
 
-	    $this->data->setMetadata("Alternc 1.x: can't read DNS"); 
-	    return $this->data;
 	}
         
-        // Writes the domains list 
-        $this->writeSectionData (self::SECTION_LIST,$this->domainList);
+	// Writes the domains list 
+	$this->writeSectionData (self::SECTION_LIST,$this->domainList);
         // Writes the domains hosts 
         $this->writeSectionData (self::SECTION_HOST,  $this->getHosts());
         // Writes the domains nameservers
@@ -54,7 +53,26 @@ class Alternc_Diagnostic_Service_Dns
         $this->writeSectionData (self::SECTION_SLAVES,$this->getSlaves());
         return $this->data;
     }
-    
+   
+    /**
+     *  Local override if not available (1.0)
+     * @return array
+     */
+    function get_domain_all_summary() {
+        global $db, $err;
+        $res = array();
+        $db->query("SELECT domaine, gesdns, gesmx, dns_action, zonettl FROM domaines ORDER BY domaine");
+        while ($db->next_record()) {
+            $res[$db->f("domaine")] = array(
+                "gesdns" => $db->f("gesdns"),
+                "gesmx" => $db->f("gesmx"),
+                "dns_action" => $db->f("dns_action"),
+                "zonettl" => $db->f("zonettl"),
+            );
+        }
+        return $res;
+    }
+ 
     function getHosts(){
         $resultArray                    = array();
         foreach ($this->domainList as $domain => $domainInfo) {
