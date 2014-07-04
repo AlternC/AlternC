@@ -1989,6 +1989,8 @@ from
   domaines_type dt 
 where 
   v.name='mailname_bounce' 
+  and sd.web_action in ('OK', 'UPDATE')
+  and sd.enable in ('ENABLE', 'ENABLED')
   and lower(dt.name) = lower(sd.type) 
   $params 
 order by 
