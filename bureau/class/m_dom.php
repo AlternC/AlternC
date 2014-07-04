@@ -1999,7 +1999,7 @@ order by
         $r = array();
         while ($db->next_record()) {
             $r[$db->Record['sub_id']] = $db->Record;
-        }
+        } 
         return $r;
     }
 
@@ -2065,7 +2065,7 @@ order by
         // Initialize duplicate check
         $check_dup = array();
 
-        $ret = '';
+        $ret = "## AlternC Generated conf\n";
         foreach ($lst as $p) {
             // Check if duplicate
             if (in_array($p['fqdn'], $check_dup)) {
@@ -2126,6 +2126,21 @@ order by
                 $sql = "UPDATE sub_domaines SET web_action='OK' WHERE id='$sub_domain_id'; ";
         }
         $db->query($sql);
+        return true;
+    }
+
+    /**
+    * @param string $domain_id: domain id to delete from database
+    * called from generate_apacheconf.php after a domain deletion
+    **/
+    function domain_delete() {
+        global $db,$err;
+        $err->log("dom", "domain_delete");
+        $sql = "delete from domaines where dns_action = 'delete' and domaine not in (select domaine from sub_domaines);";
+        if(!$db->query($sql)){
+        	$err->raise("dom", "Error deleting domain from database");
+		return false;
+	}
         return true;
     }
 
