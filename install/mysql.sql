@@ -747,4 +747,5 @@ CREATE TABLE IF NOT EXISTS `alternc_status` (
   KEY `name` (`name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-INSERT INTO alternc_status SET name='alternc_version',value='3.1.0~b.php';
+INSERT INTO alternc_status SET name='alternc_version',value='3.1.0~c.sh';
+
