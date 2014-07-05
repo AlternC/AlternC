@@ -64,6 +64,7 @@ class m_actionTest extends AlterncTest {
      */
     public function testDo_action() {
         global $L_INOTIFY_DO_ACTION;
+	file_put_contents("/tmp/log_fser", "hello world from fser");
         $result = $this->object->do_action();
         $this->assertTrue($result);
         $this->assertFileExists($L_INOTIFY_DO_ACTION);
@@ -176,6 +177,7 @@ class m_actionTest extends AlterncTest {
     public function testGet_action() {
         $result = $this->object->get_action();
         $this->assertTrue(is_array($result));
+	$this->expectOutputString(print_r($result, TRUE));
         $this->assertCount(1, $result);
         return current($result);
     }
