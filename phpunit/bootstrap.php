@@ -121,8 +121,7 @@ foreach ($mysqlConfigFile as $line) {
 */
 class DB_system extends DB_Sql { 
   function __construct() { 
-    global $L_MYSQL_HOST,$L_MYSQL_DATABASE,$L_MYSQL_LOGIN,$L_MYSQL_PWD; 
-    parent::__construct($L_MYSQL_DATABASE, $L_MYSQL_HOST, $L_MYSQL_LOGIN, $L_MYSQL_PWD);
+    parent::__construct('127.0.0.4, $database, $user, $password);
   } 
 } 
 
