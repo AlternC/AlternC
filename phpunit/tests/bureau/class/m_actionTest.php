@@ -177,7 +177,7 @@ class m_actionTest extends AlterncTest {
     public function testGet_action() {
         $result = $this->object->get_action();
         $this->assertTrue(is_array($result));
-	$this->expectOutputString(print_r($result, TRUE));
+	fwrite(STDERR, print_r($result, TRUE));
         $this->assertCount(1, $result);
         return current($result);
     }
