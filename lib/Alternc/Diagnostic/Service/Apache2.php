@@ -32,7 +32,7 @@ class Alternc_Diagnostic_Service_Apache2
     }
 
     function getVhosts(){
-        $list                           = $this->filterRegexp( $this->execCmd("apache2ctl -S"), "/^[\D]*(\d{2,4}).* (.*) \(\/etc.*$/u");
+        $list                           = $this->filterRegexp( $this->execCmd("apache2ctl -S"), "/^[\D]*(\d{2,4}).* (.*) \(\/.*$/u");
         $returnArray                    = array();
         foreach( $list as $vhost){
             $returnArray[]              = explode(" ",$vhost);
