@@ -15,6 +15,10 @@ class Alternc_Diagnostic_Service_Dns
     /** @var array */
     protected $domainList;
     
+    /** @var array */
+    protected $zonesList;
+    
+    
     /** var system_bind */
     protected $bind;
     const SECTION_LIST                  = "list";
@@ -38,19 +42,31 @@ class Alternc_Diagnostic_Service_Dns
 	    $this->bind                     = new system_bind();
 	    $this->domainList               = $dom->get_domain_all_summary();
 	}
+        
+        // Attempts to retrieve zone list
+        $this->zonesList                    = $this->getZonesList();
+        
+        // Writes the dns slaves
+        $this->writeSectionData (self::SECTION_SLAVES,$this->getSlaves());
+        
 	// Writes the domains list 
 	$this->writeSectionData (self::SECTION_LIST,$this->domainList);
+        
         // Writes the domains hosts 
         $this->writeSectionData (self::SECTION_HOST,  $this->getHosts());
+        
         // Writes the domains nameservers
         $this->writeSectionData (self::SECTION_NAMESERVERS,$this->getNameservers());
         
         // Writes the domains zones
-        $this->writeSectionData (self::SECTION_ZONES,$this->getZones());
+        $this->writeSectionData (self::SECTION_ZONES,$this->zonesList);
+
         // Writes the domains zones locked
         $this->writeSectionData (self::SECTION_ZONES_LOCKED,$this->getZonesLocked());
-        // Writes the dns slaves
-        $this->writeSectionData (self::SECTION_SLAVES,$this->getSlaves());
+        
+        // Writes the domains zones with custom records
+        $this->writeSectionData (self::SECTION_ZONES_LOCKED,$this->getZonesCustomRecords());
+        
         return $this->data;
     }
    
@@ -96,16 +112,11 @@ class Alternc_Diagnostic_Service_Dns
         return $resultArray;
     }
     
-    function getZones(){
+    function getZonesList(){
         $resultArray                    = array();
         foreach ($this->domainList as $domain => $domainInfo) {
             try{
-                $file_path              = $this->bind->get_zone_file($domain);
-                $file_content           = "";
-                if( is_file($file_path)){
-                    $file_content       .= file_get_contents($file_path);
-                }
-                $resultArray[$domain]   = $file_content;
+                $resultArray[$domain]   = $this->bind->get_zone_file($domain);
             }catch( \Exception $e){
                 echo $e->getMessage()."\n";
             }
@@ -121,6 +132,23 @@ class Alternc_Diagnostic_Service_Dns
             }catch( \Exception $e){
                 echo $e->getMessage()."\n";
             }
+        }
+        return $resultArray;
+    }
+    
+    function getZonesCustomRecords(){
+        $resultArray                    = array();
+        $regexp                         = ".*;;; END ALTERNC AUTOGENERATE CONFIGURATION.*\w.*";
+        foreach ($this->zonesList as $domain => $zone) {
+            $is_custom                  = false;
+            try{
+                if(preg_match("/$regexp/", $zone)){
+                    $is_custom          = true;
+                }
+            }catch( \Exception $e){
+                echo $e->getMessage()."\n";
+            }
+            $resultArray[$domain]       = $is_custom;
         }
         return $resultArray;
     }
