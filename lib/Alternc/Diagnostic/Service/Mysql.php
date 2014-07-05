@@ -43,12 +43,12 @@ class Alternc_Diagnostic_Service_Mysql
         $this->db->query("SELECT login,pass,db, bck_mode, bck_dir FROM db ORDER BY db;");
         if ($this->db->num_rows()) {
             while ($this->db->next_record()) {
-                list($dbu,$dbn)             = split_mysql_database_name($this->db->f("db"));
-                $returnArray[]              = array(
-                    "db"        => $this->db->f("db"), 
-                    "name"      => $this->db->f('db'),
-                    "bck"       => $this->db->f("bck_mode"), 
-                    "dir"       => $this->db->f("bck_dir"), 
+                $db                         = $this->db->f("db");
+                list($dbu,$dbn)             = split_mysql_database_name($db);
+                $returnArray[$db]           = array(
+                    "user"      => $dbu,
+                    "bck_mode"  => $this->db->f("bck_mode"), 
+                    "bck_dir"   => $this->db->f("bck_dir"), 
                     "login"     => $this->db->f("login"), 
                     "pass"      => $this->db->f("pass")
                 );
@@ -59,29 +59,30 @@ class Alternc_Diagnostic_Service_Mysql
 
     function getUsersList() {
         $returnArray = array();
-//        $this->db->query("SELECT id, name, homedir, enabled FROM ftpusers ORDER BY name;");
-//        if ($this->db->num_rows()) {
-//            while ($this->db->next_record()) {
-//                $returnArray[$this->db->f("name")] = array(
-//                    "enabled" => $this->db->f("enabled"),
-//                    "dir" => $this->db->f("homedir")
-//                );
-//            }
-//        }
+        $this->db->query("SELECT name, password, enable FROM dbusers ORDER BY name;");
+        if ($this->db->num_rows()) {
+            while ($this->db->next_record()) {
+                $returnArray[$this->db->f("name")] = array(
+                    "enable" => $this->db->f("enable"),
+                    "password" => $this->db->f("password")
+                );
+            }
+        }
         return $returnArray;
     }    
 
     function getServersList() {
         $returnArray = array();
-//        $this->db->query("SELECT id, name, homedir, enabled FROM ftpusers ORDER BY name;");
-//        if ($this->db->num_rows()) {
-//            while ($this->db->next_record()) {
-//                $returnArray[$this->db->f("name")] = array(
-//                    "enabled" => $this->db->f("enabled"),
-//                    "dir" => $this->db->f("homedir")
-//                );
-//            }
-//        }
+        $this->db->query("SELECT name, host, login, password FROM db_servers ORDER BY host;");
+        if ($this->db->num_rows()) {
+            while ($this->db->next_record()) {
+                $returnArray[$this->db->f("name")] = array(
+                    "host" => $this->db->f("host"),
+                    "login" => $this->db->f("login"),
+                    "password" => $this->db->f("password")
+                );
+            }
+        }
         return $returnArray;
     }    
 }
