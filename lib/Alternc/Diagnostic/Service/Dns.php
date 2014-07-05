@@ -88,6 +88,10 @@ class Alternc_Diagnostic_Service_Dns
         return $res;
     }
  
+    /**
+     * Lists domains `host $DOMAIN` data 
+     * @return array
+     */
     function getHosts(){
         $resultArray                    = array();
         foreach ($this->domainList as $domain => $domainInfo) {
@@ -100,6 +104,11 @@ class Alternc_Diagnostic_Service_Dns
         return $resultArray;
     }
     
+    /**
+     * Lists domains NS
+     * 
+     * @return array
+     */
     function getNameservers(){
         $resultArray                    = array();
         foreach ($this->domainList as $domain => $domainInfo) {
@@ -112,6 +121,11 @@ class Alternc_Diagnostic_Service_Dns
         return $resultArray;
     }
     
+    /**
+     * Lists zones content
+     * 
+     * @return array
+     */
     function getZonesList(){
         $resultArray                    = array();
         foreach ($this->domainList as $domain => $domainInfo) {
@@ -124,6 +138,11 @@ class Alternc_Diagnostic_Service_Dns
         return $resultArray;        
     }
     
+    /**
+     * Lists which domains zones are locked
+     * 
+     * @return array
+     */
     function getZonesLocked(){
         $resultArray                    = array();
         foreach ($this->domainList as $domain => $domainInfo) {
@@ -136,14 +155,19 @@ class Alternc_Diagnostic_Service_Dns
         return $resultArray;
     }
     
+    /**
+     * Lists which domains zones have custom records
+     * 
+     * @return array
+     */
     function getZonesCustomRecords(){
         $resultArray                    = array();
-        $regexp                         = ".*;;; END ALTERNC AUTOGENERATE CONFIGURATION.*\w.*";
+        $regexp                         = ";;; END ALTERNC AUTOGENERATE CONFIGURATION\n(.+\w+.+)";
         foreach ($this->zonesList as $domain => $zone) {
             $is_custom                  = false;
             try{
-                if(preg_match("/$regexp/", $zone)){
-                    $is_custom          = true;
+                if(preg_match("/$regexp/ms", $zone, $matches)){
+                    $is_custom          = $matches[1];
                 }
             }catch( \Exception $e){
                 echo $e->getMessage()."\n";
@@ -152,7 +176,12 @@ class Alternc_Diagnostic_Service_Dns
         }
         return $resultArray;
     }
-    
+
+    /**
+     * Lists servers DNS slaves accounts
+     * 
+     * @return array
+     */
     function getSlaves(){
         return $this->dom->enum_slave_account();
     }
