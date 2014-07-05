@@ -185,37 +185,23 @@ class m_action {
         $err->log("action", "set", $type);
 
         $serialized = serialize($parameters);
-        switch ($type) {
-            case 'create_file':
-                $query = "insert into actions values ('','CREATE_FILE','$serialized',now(),'','','$user','');";
-                break;
-            case 'create_dir':
-                $query = "insert into actions values ('','CREATE_DIR','$serialized',now(),'','','$user','');";
-                break;
-            case 'move':
-                $query = "insert into actions values ('','MOVE','$serialized',now(),'','','$user','');";
-                break;
-            case 'fix_user':
-                $query = "insert into actions values ('','FIX_USER','$serialized',now(),'','','$user','');";
-                break;
-            case 'fix_file':
-                $query = "insert into actions values ('','FIX_FILE','$serialized',now(),'','','$user','');";
-                break;
-            case 'fix_dir':
-                $query = "insert into actions values ('','FIX_DIR','$serialized',now(),'','','$user','');";
-                break;
-            case 'delete':
-                $query = "insert into actions values ('','DELETE','$serialized',now(),'','','$user','');";
-                break;
-            default:
-                return false;
-        }
+	$type = strtoupper($type);
+	if (in_array($type, array('CREATE_FILE', 
+				  'CREATE_DIR', 
+				  'MOVE', 
+				  'FIX_USER', 
+				  'FIX_FILE', 
+				  'FIX_DIR', 
+				  'DELETE'))) {
+	  $query = "INSERT INTO `actions` (type, parameters, creation, user) VALUES('$type', '$serialized', now(), '$user');";
+	} else {
+	  return False;
+	}
         if (!$db->query($query)) {
             $err->raise("action", _("Error setting actions"));
             return false;
         }
-        $this->do_action();
-        return true;
+        return $this->do_action();
     }
 
     /**
