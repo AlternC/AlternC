@@ -119,8 +119,7 @@ foreach ($mysqlConfigFile as $line) {
 * the connection to the MySQL database.
 */
 class DB_system extends DB_Sql { 
-  function __construct() { 
-    global $database, $user, $password;
+  function __construct($database, $user, $password) { 
     parent::__construct($database, '127.0.0.1', $user, $password);
   } 
 } 
@@ -142,7 +141,7 @@ foreach ($queryList as $exec_command) {
 }
 echo "*** In progress: mysql.sql imported\n";
 
-$db                                     = new \DB_system();
+$db                                     = new \DB_system($database, $user, $password);
 $cuid                                   = 0;
 $variables                              = new \m_variables();
 $mem                                    = new \m_mem();
