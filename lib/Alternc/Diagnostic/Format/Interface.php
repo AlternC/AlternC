@@ -14,7 +14,7 @@ interface Alternc_Diagnostic_Format_Interface{
     /**
      * Writes a Data object to file
      * 
-     * @return boolean
+     * @return string file_name
      */
     function write();
     
