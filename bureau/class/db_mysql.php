@@ -108,7 +108,7 @@ class DB_Sql {
   }
 
   function last_error() {
-    return $this->error;
+    return $this->Error;
   }
   /** 
    * Perform a query 
