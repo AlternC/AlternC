@@ -107,6 +107,9 @@ class DB_Sql {
      return $this->pdo_instance != FALSE;
   }
 
+  function last_error() {
+    return $this->error;
+  }
   /** 
    * Perform a query 
    * 
