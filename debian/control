@@ -14,7 +14,18 @@ Recommends: mysql-server(>= 5.0), ntp, quota, unzip, bzip2
 Conflicts: alternc-admintools, alternc-awstats (<< 1.0), alternc-webalizer (<= 0.9.4), alternc-mailman (<< 2.0), courier-authlib
 Provides: alternc-admintools
 Replaces: alternc-admintools
-Suggests: alternc-awstats, alternc-mailman, alternc-changepass, amavisd-new, clamav-daemon, spamassassin, pop-before-smtp, magpierss, zip, ncompress, alternc-squirrelmail, alternc-roundcube
+Suggests: alternc-awstats
+       , alternc-mailman
+       , alternc-changepass
+       , amavisd-new
+       , clamav-daemon
+       , spamassassin
+       , pop-before-smtp
+       , magpierss
+       , zip
+       , ncompress
+       , alternc-squirrelmail
+       , alternc-roundcube
 Description: Hosting software managment suite for Debian
  AlternC is a mutualized hosting software manager for Linux.
  It allows you to manage your websites, domains, ftp, emails, aliases,
@@ -38,12 +49,65 @@ Description-fr.UTF-8: Suite logicielle d'hébergement mutualisé pour Debian
 Package: alternc-slave
 Architecture: all
 Pre-depends: debconf (>= 0.5.00) | debconf-2.0, acl
-Depends: debianutils (>= 1.13.1), apache2-mpm-itk, libapache2-mod-php5, php5-mysql, phpmyadmin, postfix, proftpd-mod-mysql, proftpd-basic, postfix-tls, bind9, wget, rsync, ca-certificates, locales, perl-suid, perl, postfix-mysql, wwwconfig-common, sasl2-bin, libsasl2-modules, php5-cli, lockfile-progs (>= 0.1.9), gettext (>= 0.10.40-5), adduser, mysql-client, sudo, dovecot-common (>= 1:2.1.7), dovecot-imapd, dovecot-pop3d, dovecot-mysql, vlogger, mailutils | mailx, incron, cron, opendkim, opendkim-tools, dovecot-managesieved, dovecot-sieve, dovecot-mysql, ${misc:Depends}
-Recommends: quota
-Conflicts: alternc-admintools, alternc-awstats (<= 0.3.2), alternc-webalizer (<= 0.9.4), alternc
+Depends: debianutils (>= 1.13.1),
+         apache2-mpm-itk,
+         libapache2-mod-php5,
+         php5-mysql,
+         phpmyadmin,
+         postfix,
+         proftpd-mod-mysql,
+         proftpd-basic,
+         postfix-tls,
+         bind9,
+         wget,
+         rsync,
+         ca-certificates,
+         locales,
+         perl-suid,
+         perl,
+         postfix-mysql,
+         wwwconfig-common,
+         sasl2-bin,
+         libsasl2-modules,
+         php5-cli,
+         lockfile-progs (>= 0.1.9),
+         gettext (>= 0.10.40-5),
+         adduser,
+         mysql-client,
+         sudo,
+         dovecot-common (>= 1:2.1.7),
+         dovecot-imapd,
+         dovecot-pop3d,
+         dovecot-mysql,
+         vlogger,
+         mailutils | mailx,
+         incron,
+         cron,
+         opendkim,
+         opendkim-tools,
+         dovecot-managesieved,
+         dovecot-sieve,
+         dovecot-mysql,
+         ${misc:Depends}
+Recommends:
+         quota
+Conflicts: alternc-admintools,
+         alternc-awstats (<= 0.3.2),
+         alternc-webalizer (<= 0.9.4),
+         alternc
 Provides: alternc
 Replaces: alternc
-Suggests: alternc-awstats, alternc-mailman, alternc-changepass, amavisd-new, clamav-daemon, spamassassin, pop-before-smtp, magpierss, zip, ncompress, bzip2
+Suggests: alternc-awstats,
+         alternc-mailman,
+         alternc-changepass,
+         amavisd-new,
+         clamav-daemon,
+         spamassassin,
+         pop-before-smtp,
+         magpierss,
+         zip,
+         ncompress,
+         bzip2
 Description: Hosting software managment suite for Debian
  AlternC is a mutualized hosting software manager for Linux.
  It allows you to manage your websites, domains, ftp, emails, aliases,
@@ -74,8 +138,14 @@ Description-fr.UTF-8: Suite logicielle d'hébergement mutualisé pour Debian
 Package: alternc-squirrelmail
 Architecture: all
 Pre-depends: debconf (>= 0.5.00) | debconf-2.0
-Depends: debianutils (>= 1.13.1), alternc (>= 3.0~rc1), squirrelmail, squirrelmail-locales, avelsieve, ${misc:Depends}
-Conflicts: alternc (<= 1.0.3), alternc-changepass
+Depends: debianutils (>= 1.13.1)
+       , alternc (>= 3.0~rc1)
+       , squirrelmail
+       , squirrelmail-locales
+       , avelsieve
+       , ${misc:Depends}
+Conflicts: alternc (<= 1.0.3)
+       , alternc-changepass
 Provides: alternc-webmail
 Suggests: 
 Description: Squirrelmail-Webmail plugin and configuration for AlternC
@@ -105,7 +175,13 @@ Description-fr.UTF-8: Webmail Squirrelmail pour AlternC
 Package: alternc-roundcube
 Architecture: all
 Pre-depends: debconf (>= 0.5.00) | debconf-2.0
-Depends: debianutils (>= 1.13.1), alternc (>= 3.0~rc1), roundcube (>= 0.7.1), roundcube-mysql (>= 0.7.1), roundcube-plugins (>= 0.7.1), imagemagick, ${misc:Depends}
+Depends: debianutils (>= 1.13.1)
+       , alternc (>= 3.0~rc1)
+       , roundcube (>= 0.7.1)
+       , roundcube-mysql (>= 0.7.1)
+       , roundcube-plugins (>= 0.7.1)
+       , imagemagick
+       , ${misc:Depends}
 Conflicts: alternc (<< 1.1)
 Provides: alternc-webmail
 Suggests: 
@@ -138,7 +214,10 @@ Priority: optional
 Section: admin
 Architecture: all
 Pre-depends: debconf
-Depends: alternc (>= 3.0~rc1), awstats (>=6.1-1), php5-cli, ${misc:Depends}
+Depends: alternc (>= 3.0~rc1)
+       , awstats (>=6.1-1)
+       , php5-cli
+       , ${misc:Depends}
 Suggests: apachemerge
 Description: Awstats statistics module for AlternC
  AlternC is a mutualized hosting software manager for Linux.
@@ -153,7 +232,11 @@ Description: Awstats statistics module for AlternC
 Package: alternc-upnp
 Architecture: all
 Pre-depends: debconf (>= 0.5.00) | debconf-2.0
-Depends: debianutils (>= 1.13.1), alternc (>= 3.0~rc1), miniupnpc, php5-cli, ${misc:Depends}
+Depends: debianutils (>= 1.13.1)
+       , alternc (>= 3.0~rc1)
+       , miniupnpc
+       , php5-cli
+       , ${misc:Depends}
 Description: UPnP client for AlternC 
  AlternC is a mutualized hosting software manager for Linux.
  It allows you to manage your websites, domains, ftp, emails, aliases,
