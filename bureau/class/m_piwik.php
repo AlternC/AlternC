@@ -256,11 +256,7 @@ class m_piwik {
 
 	$user_data = $this->call_privileged_page('API', 'UsersManager.getUsersAccessFromSite', array('idSite' => $site->idsite));
 
-	//if (is_array($user_data)) {
-	    // printvar($user_data);
-	  //} else if(is_object($user_data)) {
-	    $item->rights = $user_data[0];
-	  //}
+	@$item->rights = $user_data[0];
 
 	$data[] = $item;
       }
