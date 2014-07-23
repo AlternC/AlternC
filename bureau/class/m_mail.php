@@ -85,10 +85,10 @@ class m_mail {
     $this->srv_submission = variable_get('mail_human_submission', '%%FQDN%%','Human name for mail server (submission protocol), leave empty to disable help', array('desc'=>'Name','type'=>'string'));
     $this->srv_smtp       = variable_get('mail_human_smtp',       '%%FQDN%%','Human name for mail server (SMTP protocol), leave empty to disable help', array('desc'=>'Name','type'=>'string'));
     $this->srv_smtps      = variable_get('mail_human_smtps',      '%%FQDN%%','Human name for mail server (SMTPS protocol), leave empty to disable help', array('desc'=>'Name','type'=>'string'));
-    $this->srv_imap       = variable_get('mail_human_imap',       '%%FQDN%%','Human name for IMAP mail server', array('desc'=>'Name','type'=>'string'));
-    $this->srv_imaps      = variable_get('mail_human_imaps',      '%%FQDN%%','Human name for IMAPS mail server', array('desc'=>'Name','type'=>'string'));
-    $this->srv_pop3       = variable_get('mail_human_pop3',       '%%FQDN%%','Human name for POP3 mail server', array('desc'=>'Name','type'=>'string'));
-    $this->srv_pop3s      = variable_get('mail_human_pop3s',      '%%FQDN%%','Human name for POP3s mail server', array('desc'=>'Name','type'=>'string'));
+    $this->srv_imap       = variable_get('mail_human_imap',       '%%FQDN%%','Human name for IMAP mail server, leave empty to disable help', array('desc'=>'Name','type'=>'string'));
+    $this->srv_imaps      = variable_get('mail_human_imaps',      '%%FQDN%%','Human name for IMAPS mail server, leave empty to disable help', array('desc'=>'Name','type'=>'string'));
+    $this->srv_pop3       = variable_get('mail_human_pop3',       '%%FQDN%%','Human name for POP3 mail server, leave empty to disable help', array('desc'=>'Name','type'=>'string'));
+    $this->srv_pop3s      = variable_get('mail_human_pop3s',      '%%FQDN%%','Human name for POP3s mail server, leave empty to disable help', array('desc'=>'Name','type'=>'string'));
   }
 
   function hook_menu() {
