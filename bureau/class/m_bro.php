@@ -1105,15 +1105,19 @@ class m_bro {
    * @access    private
    */
   function _delete($file) {
+    global $err;
     // permet d'effacer de nombreux fichiers
     @set_time_limit(0);
     //chmod($file,0777);
+    $err->log("bro", "_delete($file)");
     if (is_dir($file)) {
-      $handle                           = opendir($file);
-      while($filename = readdir($handle)) {
-	if ($filename != "." && $filename != "..") {
-	  $this->_delete($file."/".$filename);
-	}
+      $handle = opendir($file);
+      $filename = readdir($handle);
+      while( $filename !== FALSE ) {
+        if ($filename != "." && $filename != "..") {
+          $this->_delete($file."/".$filename);
+        }
+        $filename = readdir($handle);
       }
       closedir($handle);
       rmdir($file);
