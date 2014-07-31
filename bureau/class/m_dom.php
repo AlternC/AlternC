@@ -734,7 +734,7 @@ class m_dom {
                 return false;
             }
             if ($dns && $v == -3) {
-                $err->raise("dom", _("The domain cannot be found in the whois database"));
+                $err->raise("dom", _("The name servers referenced by this domain do not match those referenced by this AlternC instance"));
                 return false;
             }
 
