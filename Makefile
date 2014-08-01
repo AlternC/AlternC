@@ -27,7 +27,6 @@ export VERSION
 
 build:
 # gettext are built at runtime, to be able to MERGE them from CORE + MODULES before msgfmt
-	pod2man --center "" --date "" --release "AlternC" --section=8 man/alternc.install.pod >man/alternc.install.8
 
 install: 
 #install-alternc install-squirrelmail install-roundcube install-upnp install-awstats
@@ -78,7 +77,7 @@ install-alternc: install-common
 
 install-slave: install-common
 # Man pages
-	install -o root -g root -m 644 man/alternc.install.8 $(DESTDIR)/usr/share/man/man8/
+	pod2man --center "" --date "" --release "AlternC" --section=8 man/alternc.install.pod >$(DESTDIR)/usr/share/man/man8/alternc.install.8
 
 
 # Then its modules : 
