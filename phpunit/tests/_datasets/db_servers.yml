@@ -1,0 +1,8 @@
+db_servers:
+  - 
+    id: 1
+    name: Default
+    host: 127.0.0.1
+    login: sysusr
+    password: Z4SYPRiCDQ
+    client: %
