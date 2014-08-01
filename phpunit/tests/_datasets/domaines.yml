@@ -1,8 +1,18 @@
 domaines:
   - 
     id : 1
+    compte : 2000     
+    domaine : admin.tld
+    gesdns : 1
+    gesmx : 1
+    noerase : 0
+    dns_action : OK
+    dns_result : 0
+    zonettl : 86400
+  - 
+    id : 2
     compte : 2001     
-    domaine : example.tld
+    domaine : domain1.tld
     gesdns : 1
     gesmx : 1
     noerase : 0
