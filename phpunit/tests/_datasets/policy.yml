@@ -1,0 +1,13 @@
+policy:
+  - 
+    name : ftp
+    minsize : 0
+    maxsize : 66
+    classcount : 0
+    allowlogin : 0
+  - 
+    name : mem
+    minsize : 0
+    maxsize : 64
+    classcount : 0
+    allowlogin: 0

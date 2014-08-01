@@ -1,0 +1,65 @@
+quotas:
+  - 
+    uid : 2000
+    name : cron
+    total : 0
+  - 
+    uid: 2000
+    name: dom
+    total: 1
+  - 
+    uid: 2000
+    name: ftp
+    total: 2
+  - 
+    uid: 2000
+    name: mail
+    total: 10
+  - 
+    uid: 2000
+    name: mysql
+    total: 1
+  - 
+    uid: 2000
+    name: piwik
+    total: 0
+  - 
+    uid: 2000
+    name: stats
+    total: 1
+  - 
+    uid : 2000
+    name : web
+    total : 51200
+
+    uid : 2001
+    name : cron
+    total : 0
+  - 
+    uid: 2001
+    name: dom
+    total: 1
+  - 
+    uid: 2001
+    name: ftp
+    total: 2
+  - 
+    uid: 2001
+    name: mail
+    total: 10
+  - 
+    uid: 2001
+    name: mysql
+    total: 1
+  - 
+    uid: 2001
+    name: piwik
+    total: 0
+  - 
+    uid: 2001
+    name: stats
+    total: 1
+  - 
+    uid : 2001
+    name : web
+    total : 51200
