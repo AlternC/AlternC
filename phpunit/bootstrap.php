@@ -50,6 +50,20 @@ foreach ($configFile as $line) {
 }
 
 
+// Class list global array
+//***********************
+$dirroot= ALTERNC_PANEL;
+$classes=array();
+global $classes;
+/* CLASSES PHP : automatic include : */
+foreach ( glob( $dirroot."/class/m_*.php") as $di ) {
+  if (preg_match("#${dirroot}/class/m_(.*)\\.php$#",$di,$match)) { // $
+    $classes[]=$match[1];
+  }
+}
+
+
+
 // Constants and globals
 // ********************
 
@@ -151,6 +165,16 @@ foreach ($queryList as $exec_command) {
 }
 echo "*** In progress: mysql.sql imported\n";
 
+global $db;
+global $cuid;
+global $variables;
+global $err;
+global $mem;
+global $admin;
+global $mysql;
+global $ftp;
+global $quota;
+global $db;
 $db                                     = new \DB_system($user,$database,$password);
 $db->connect();
 $cuid                                   = 0;
@@ -160,3 +184,7 @@ $err                                    = new \m_err();
 $authip                                 = new \m_authip();
 $hooks                                  = new \m_hooks();
 $bro                                    = new \m_bro();
+$admin                                    = new \m_admin();
+$mysql                                    = new \m_mysql();
+$ftp                                    = new \m_ftp();
+$quota                                    = new \m_quota();
