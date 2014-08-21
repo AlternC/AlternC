@@ -92,7 +92,7 @@ if (!empty($formu) && $formu) {
             <form action="bro_main.php" method="post" name="main" id="main">  
             <input type="hidden" name="formu" value="2" />
             <input type="hidden" name="actdel" value="1" />
-            <input type="hidden" name="R" value="<?php echo ehe($R)?>" />
+            <input type="hidden" name="R" value="<?php ehe($R)?>" />
             <p class="alert alert-warning"><?php __("WARNING: Confirm the deletion of this files"); ?></p>
             <h2><?php echo $mem->user["login"].$R."/"; ?></h2>
             <ul>
