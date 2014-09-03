@@ -10,7 +10,7 @@ now=$5
 user=$6
 password=$7
 
-timeout=5
+timeout=3600
 
 for CONFIG_FILE in \
       /etc/alternc/local.sh \
@@ -55,7 +55,7 @@ tmpfile=$(mktemp /tmp/altern-cron-id$id-$$.XXX)
 (
 echo -e "Here the report for the scheduled task for the cron #$id in your AlternC configuration (from http://$FQDN)\n\n"
 echo -e "\n---------- BEGIN ----------"
-bash -c "wget -O - --no-check-certificate --http-user=$(urldecode $user) --http-password=$(urldecode $password) \"$(urldecode $url)\" --timeout=$timeout 2>&1"
+bash -c "wget --tries=1 -O - --no-check-certificate --http-user=$(urldecode $user) --http-password=$(urldecode $password) \"$(urldecode $url)\" --timeout=$timeout 2>&1"
 echo -e "\n----------  END  ----------"
 ) > "$tmpfile"
 
