@@ -546,6 +546,7 @@ class m_bro {
    * Change les droits d'acces aux fichier de $d du dossier $R en $p
    * 
    * @global m_err $err
+   * @global m_action $action
    * @param string $R Dossier dans lequel se trouve les fichiers renommer.
    * @param boolean $verbose Shall we 'echo' what we did ?
    * @return boolean TRUE Si les fichiers ont t renomms, FALSE si une erreur s'est produite.
@@ -569,7 +570,7 @@ class m_bro {
 	} else {
 	  $m=$m ^ 0222; // ugo-w
 	}
-	chmod($absolute."/".$d[$i], $m);
+        $action->chmod($absolute."/".$d[$i], $m);
 	if ($verbose) {
 	  echo "chmod ".sprintf('%o', $m)." file, was ".sprintf('%o', fileperms($absolute."/". $d[$i])). " -- ".$perm[$i]['w'];
 	}

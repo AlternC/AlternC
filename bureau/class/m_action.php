@@ -69,7 +69,19 @@ class m_action {
     }
 
     /**
-     * Plans the cration of a dir 
+     * Plans the a chmod on file or dir
+     * 
+     * @param string $filename
+     * @param int $perms
+     * @param string $user
+     * @return boolean
+     */
+    function chmod($filename, $perms, $user = "root") {
+        return $this->set('chmod', $user, array('filename' => $filename,"perms"=>$perms));
+    }
+    
+    /**
+     * Plans the creation of a dir 
      * 
      * @param string $dir
      * @param int $user
@@ -186,6 +198,9 @@ class m_action {
 
         $serialized = serialize($parameters);
         switch ($type) {
+            case 'chmod':
+                $query = "insert into actions values ('','CHMOD','$serialized',now(),'','','$user','');";
+                break;
             case 'create_file':
                 $query = "insert into actions values ('','CREATE_FILE','$serialized',now(),'','','$user','');";
                 break;
