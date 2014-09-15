@@ -12,7 +12,7 @@ if [ ! -r "$CONFIG_FILE" ]; then
 fi
 
 if [ `id -u` -ne 0 ]; then
-    echo "3.0.3~b.sh must be launched as root"
+    echo "$0 must be launched as root"
     exit 1
 fi
 
@@ -28,5 +28,5 @@ test -d /var/alternc/bind/zones/ || exit 0
 cp --no-clobber /var/alternc/bind/zones/* /var/lib/alternc/bind/zones/
 
 # No need to regenerate zone, we are launched by upgrade_check,
-# launched by alternc.install, and alternc.install regenerate everything
+# launched by alternc.install, and alternc.install regenerate everything
 # when it end

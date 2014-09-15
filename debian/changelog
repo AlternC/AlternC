@@ -11,6 +11,11 @@ alternc (3.2.1) stable; urgency=low
   * Includes a small dovecot patch / dependency for dovecot 2.0 for Wheezy
 
  -- Benjamin Sonntag <benjamin@sonntag.fr>  Thu, 28 Mar 2014 18:19:00 +0200
+alternc (3.1.2) oldstable; urgency=low
+
+  * fix a bug when installing (doing patches from 3.1~rc)
+
+ -- Benjamin Sonntag <benjamin@sonntag.fr>  Fri,  4 Jul 2014 12:44:12 +0100
 
 alternc (3.1.1) oldstable; urgency=low
 

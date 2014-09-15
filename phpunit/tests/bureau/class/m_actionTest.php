@@ -70,6 +70,15 @@ class m_actionTest extends AlterncTest {
     }
 
     /**
+     * @covers m_action::chmod
+     */
+    public function testChmod() {
+        $result = $this->object->chmod(self::TEST_FILE, 0777,"phpunit");
+        $this->assertEquals(1, $this->getConnection()->getRowCount('actions'));
+
+    }
+
+    /**
      * @covers m_action::create_file
      */
     public function testCreate_file() {

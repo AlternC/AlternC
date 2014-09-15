@@ -69,7 +69,19 @@ class m_action {
     }
 
     /**
-     * Plans the cration of a dir 
+     * Plans the a chmod on file or dir
+     * 
+     * @param string $filename
+     * @param int $perms
+     * @param string $user
+     * @return boolean
+     */
+    function chmod($filename, $perms, $user = "root") {
+        return $this->set('chmod', $user, array('filename' => $filename,"perms"=>$perms));
+    }
+    
+    /**
+     * Plans the creation of a dir 
      * 
      * @param string $dir
      * @param int $user
@@ -185,18 +197,35 @@ class m_action {
         $err->log("action", "set", $type);
 
         $serialized = serialize($parameters);
-	$type = strtoupper($type);
-	if (in_array($type, array('CREATE_FILE', 
-				  'CREATE_DIR', 
-				  'MOVE', 
-				  'FIX_USER', 
-				  'FIX_FILE', 
-				  'FIX_DIR', 
-				  'DELETE'))) {
-	  $query = "INSERT INTO `actions` (type, parameters, creation, user) VALUES('$type', '$serialized', now(), '$user');";
-	} else {
-	  return False;
-	}
+
+        switch ($type) {
+            case 'chmod':
+                $query = "insert into actions values ('','CHMOD','$serialized',now(),'','','$user','');";
+                break;
+            case 'create_file':
+                $query = "insert into actions values ('','CREATE_FILE','$serialized',now(),'','','$user','');";
+                break;
+            case 'create_dir':
+                $query = "insert into actions values ('','CREATE_DIR','$serialized',now(),'','','$user','');";
+                break;
+            case 'move':
+                $query = "insert into actions values ('','MOVE','$serialized',now(),'','','$user','');";
+                break;
+            case 'fix_user':
+                $query = "insert into actions values ('','FIX_USER','$serialized',now(),'','','$user','');";
+                break;
+            case 'fix_file':
+                $query = "insert into actions values ('','FIX_FILE','$serialized',now(),'','','$user','');";
+                break;
+            case 'fix_dir':
+                $query = "insert into actions values ('','FIX_DIR','$serialized',now(),'','','$user','');";
+                break;
+            case 'delete':
+                $query = "insert into actions values ('','DELETE','$serialized',now(),'','','$user','');";
+                break;
+            default:
+                return false;
+        }
         if (!$db->query($query)) {
             $err->raise("action", _("Error setting actions"));
             return false;
