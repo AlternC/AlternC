@@ -226,6 +226,7 @@ class m_action {
             default:
                 return false;
         }
+
         if (!$db->query($query)) {
             $err->raise("action", _("Error setting actions"));
             return false;
