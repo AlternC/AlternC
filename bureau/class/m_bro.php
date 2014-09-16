@@ -556,7 +556,7 @@ class m_bro {
    * @return boolean TRUE Si les fichiers ont t renomms, FALSE si une erreur s'est produite.
    */
   function ChangePermissions($R,$d,$perm,$verbose=false) {
-    global $err;
+    global $err, $action;
     $absolute=$this->convertabsolute($R,false);
     if (!$absolute) {
       $err->raise("bro",_("File or folder name is incorrect"));
