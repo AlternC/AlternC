@@ -6,6 +6,13 @@
  */
 class Alternc_Api_Response {
 
+  /** 
+   * Error codes
+   */
+  const ERR_DISABLED_ACCOUNT = 221801; 
+  const ERR_INVALID_AUTH = 221802; 
+
+
     /**
      * Result code. 0 means success
      *
@@ -34,16 +41,30 @@ class Alternc_Api_Response {
      */
     public $metadata; 
     
+
+    /**
+     * initialize a response object
+     * @param options any of the public above
+     */
+    public function __constructor($options=array()) {
+      $os=array("code","message","content","metadata");
+      foreach ($os as $o) {
+	if (isset($options[$o])) $this->$o=$options[$o];
+      }
+    }
+
+
     /**
      * Formats response to json
      * 
      * @return string
      */
-    public function toJson (){
-        
+    public function toJson (){       
         return json_encode(get_object_vars($this));
-        
     }
 
+
+
     
-}
+} // class Alternc_Api_Response
+
