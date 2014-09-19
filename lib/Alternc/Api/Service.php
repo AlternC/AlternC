@@ -18,6 +18,9 @@ class Alternc_Api_Service {
   const ERR_INVALID_ANSWER = 111803;
   const ERR_SETUID_FORBIDDEN = 111804;
   const ERR_SETUID_USER_NOT_FOUND = 111805;
+  const ERR_OBJECT_NOT_FOUND = 111806;
+  const ERR_ACTION_NOT_FOUND = 111807;
+  const ERR_INVALID_TOKEN = 111808;
 
   /**
    * Constructor of the Api Service Wrapper
@@ -119,11 +122,33 @@ class Alternc_Api_Service {
   /** 
    * Manage an API Call
    * @param Alternc_Api_Request $request The API call
+   *   the request must have "object" and "action" elements, and a "token" to authenticate
+   *   "options" are sent as it is to the Api Call. 
    * @return Alternc_Api_Response an API response
    */
   function call($request) {
+    if (!$request instanceof Alternc_Api_Request) 
+      throw new \Exception("request must be an Alternc_Api_Request object", self::ERR_INVALID_ARGUMENT);
+
+
+    $token = Alternc_Api_Token::tokenGet($request->token_hash,$this->db);
+    if ($token instanceof Alternc_Api_Response)  // bad token
+      return $token;
+
+    $className = "Alternc_Api_Object_".ucfirst(strtolower($request->object));
+    if (!class_exists($className)) 
+      return new Alternc_Api_Response( array("code" => self::ERR_OBJECT_NOT_FOUND, "message" => "Object not found in this AlternC's instance") );
     
-    return new Alternc_Api_Response();
+    $object = new $className($this);
+
+    $action=$request->action;
+    if (!method_exists($object, $action)) 
+      return new Alternc_Api_Response( array("code" => self::ERR_ACTiON_NOT_FOUND, "message" => "Action not found for this object in this AlternC's instance") );
+
+    $request->token=$token; // we receive $request->token_hash as a STRING, but we transmit its object as an Alternc_Api_Token.
+
+    // TODO: log this Api Call
+    return $object->$action($request);
   }
 
 

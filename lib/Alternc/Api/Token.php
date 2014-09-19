@@ -10,6 +10,7 @@ class Alternc_Api_Token {
   const ERR_DATABASE_ERROR=112001;
   const ERR_INVALID_ARGUMENT=112002;
   const ERR_MISSING_ARGUMENT=112003;
+  const ERR_INVALID_TOKEN=112004;
   
     /**
      * AlternC User-Id
@@ -110,7 +111,7 @@ class Alternc_Api_Token {
 	throw new \Exception("No DB Object, can't create",self::ERR_DATABASE_ERROR);
       }
       if (!is_string($token) || !preg_match("#^[a-zA-Z0-9]{32}$#",$token)) {
-	throw new \Exception("Invalid argument (token)",self::ERR_INVALID_ARGUMENT);
+	return new Alternc_Api_Response( array("code" => self::ERR_INVALID_TOKEN, "message" => "Invalid token") );
       }
       
       foreach($db->query("SELECT * FROM token WHERE token=?", array($token)) as $tok) {
