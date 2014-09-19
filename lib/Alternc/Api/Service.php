@@ -1,6 +1,7 @@
 <?php
 
-
+/* TODO: implements logger !
+ */
 
 /**
  * Service API used by server to export API methods
@@ -14,6 +15,9 @@ class Alternc_Api_Service {
 
   const ERR_INVALID_ARGUMENT = 111801;
   const ERR_METHOD_DENIED = 111802;
+  const ERR_INVALID_ANSWER = 111803;
+  const ERR_SETUID_FORBIDDEN = 111804;
+  const ERR_SETUID_USER_NOT_FOUND = 111805;
 
   /**
    * Constructor of the Api Service Wrapper
@@ -79,13 +83,36 @@ class Alternc_Api_Service {
     if (count($this->allowedAuth) && !in_array($auth["method"],$this->allowedAuth)) {
       throw new \Exception("Method not allowed", self::ERR_METHOD_DENIED);
     }
+    if (isset($auth["options"]["uid"]) && !is_int($auth["options"]["uid"])) {
+      throw new \Exception("Invalid UID", self::ERR_INVALID_ARGUMENT);
+    }
 
     $adapterName = "Alternc_Api_Auth_".ucfirst(strtolower($auth["method"]));
     $authAdapter = new $adapterName($this);
 
-    return $authAdapter->auth($auth["options"]);
-    //    table des tokens : token, expire, json_encode('uid','is_admin')
-    // return new Alternc_Api_Token();
+    $token = $authAdapter->auth($auth["options"]);
+
+    // something went wrong user-side
+    if ($token instanceof Alternc_Api_Response) 
+      return $token;
+    // something went *really* wrong (bad type): 
+    if (!$token instanceof Alternc_Api_Token) 
+      throw new \Exception("Invalid answer from Api_Auth_Interface", self::ERR_INVALID_ANSWER);
+
+    if (isset($auth["options"]["uid"])) {
+      if (!$token->isAdmin) {
+	// Non-admin are not allowed to setuid
+	return new Alternc_Api_Response( array("code" => self::ERR_SETUID_FORBIDDEN, "message" => "This user is not allowed to set his uid") );
+      } 
+      // Search for the requested user. We allow using *disabled* account here since we are admin 
+      foreach($db->query("SELECT uid FROM membres WHERE uid=?",array($auth["options"]["uid"])) as $setuid) {
+	$token->uid=$setuid;
+	$db->exec("UPDATE token SET uid=? WHERE token=?",array( $token->uid, $token->token) );
+	return $token;
+      } 
+      return new Alternc_Api_Response( array("code" => self::ERR_SETUID_USER_NOT_FOUND, "message" => "Can't find the user you want to setuid to") );
+    }
+    return $token;
   }
 
 
@@ -107,7 +134,8 @@ class Alternc_Api_Service {
   function getDb() {
     return $this->db;
   }
- 
+
+
 
 
 } // class Alternc_Api_Service

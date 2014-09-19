@@ -10,6 +10,11 @@ class Alternc_Api_Auth_Sharedsecret implements Alternc_Api_Auth_Interface {
   private $db; // PDO object
 
   const ERR_INVALID_ARGUMENT = 1111801;
+  const ERR_INVALID_SECRET = 1111802;
+  const ERR_INVALID_LOGIN = 1111803;
+  const ERR_INVALID_LOGIN = 1111804;
+  const ERR_DISABLED_ACCOUNT = 1111805;
+
 
   /**
    * Constructor of the Shared Secret Api Auth
@@ -43,24 +48,35 @@ class Alternc_Api_Auth_Sharedsecret implements Alternc_Api_Auth_Interface {
       throw new \Exception("Missing required parameter secret", self::ERR_INVALID_ARGUMENT);
     }
     if (!preg_match("#^[0-9a-zA-Z]{32}$#",$options["secret"])) {
-      throw new \Exception("Invalid shared secret", self::ERR_INVALID_ARGUMENT);
+      return new Alternc_Api_Response( array("code" => self::ERR_INVALID_SECRET, "message" => "Invalid shared secret syntax") );
     }
 
     if (!preg_match("#^[0-9a-zA-Z-]{1,32}$#",$options["login"])) { // FIXME : normalize this on AlternC !!!
-      throw new \Exception("Invalid login", self::ERR_INVALID_LOGIN);
+      return new Alternc_Api_Response( array("code" => self::ERR_INVALID_LOGIN, "message" => "Invalid login") );
     }
 
     $stmt = $db->query("SELECT m.enabled,m.uid,m.login,m.su FROM membres m, sharedsecret s WHERE s.uid=m.uid AND m.login=? AND s.secret=?;",array($options["login"],$options["secret"]),PDO::FETCH_CLASS);
     $me=$stmt->fetch();
     if (!$me) 
-      return new Alternc_Api_Response(array("code"=>ERR_INVALID_AUTH, "message" => "Invalid shared secret"));
+      return new Alternc_Api_Response( array("code" => self::ERR_INVALID_AUTH, "message" => "Invalid shared secret") );
     if (!$me->enabled) 
-      return new Alternc_Api_Response(array("code"=>ERR_DISABLED_ACCOUNT, "message" => "Account is disabled"));
+      return new Alternc_Api_Response( array("code" => self::ERR_DISABLED_ACCOUNT, "message" => "Account is disabled") );
 
     return Alternc_Api_Token::tokenGenerate(
 					     array("uid"=>$me->uid, "isAdmin"=>($me->su!=0) ), 
 					     $this->db
 					     );
+  }
+
+
+  /** 
+   * instructions on how to use this Auth class
+   * @return array("fields" => array("fields to send, required or not"), "description" => "description of this auth")
+   */
+  function instructions() {
+    return array("fields" => array("login" => "AlternC user account", "secret" => "API Key, Shared secrets, valid for this account, stored in sharedsecret table."),
+		 "description" => "Authenticate against an Api Key, also called SharedSecret. distinct from the account's password, can be plenty and revoked independently"
+		 );
   }
 
 
