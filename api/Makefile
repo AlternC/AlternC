@@ -20,6 +20,6 @@ install:
 	install -m 0644 -g root -o root api.conf $(DESTDIR)/etc/alternc/apache-panel.d
 	install -m 0644 api.sql $(DESTDIR)/usr/share/alternc/
 	install -m 0644 -g 1999 -o root panel/* $(DESTDIR)/usr/share/alternc/panel/admin/api/
-	install -m 0644 ../lib/Alternc/Api/* $(DESTDIR)/usr/share/php/Alternc/Api/
-	install -m 0644 ../lib/Alternc/Api/Auth/* $(DESTDIR)/usr/share/php/Alternc/Api/Auth/
+	install -m 0644 ../lib/Alternc/Api/*.php $(DESTDIR)/usr/share/php/Alternc/Api/
+	install -m 0644 ../lib/Alternc/Api/Auth/*.php $(DESTDIR)/usr/share/php/Alternc/Api/Auth/
 
