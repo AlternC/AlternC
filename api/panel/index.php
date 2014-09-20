@@ -13,7 +13,11 @@
  *  ->object = the Alternc_Api_Object_<classname> to call
  *  ->action = the method to call in this class
  *  ->options = an object passed as it is while calling the method.
- * 
+ *
+ * Authentication is done by asking for /api/auth/<method>?option1=value1&option2=value2
+ * or POSTED data
+ * a token is returned for this session
+ *
  */
 
 
@@ -55,12 +59,47 @@ function apicall($data,$token,$mode) {
   }
 }
 
-// Authentication is done by asking for /api/auth/<method>?option1=value1&option2=value2 
-// or POSTED data
-// a token is returned for this session
+function apiauth($data,$mode) {
+  global $dbh;
+  $options["databaseAdapter"]=$dbh;
+  // TODO (no loggerAdapter PSR3-Interface-compliant class as of now)
+  try {
+
+    $service=new Alternc_Api_Service($options);
+
+    $response = $service->auth($data);
+
+    header("Content-Type: application/json");
+    echo $response->toJson();
+    exit();
+
+  } catch (Exception $e) {
+    // something went wrong, we spit out the exception as an Api_Response
+    // TODO : Don't do that on production! spit out a generic "fatal error" code and LOG the exception !
+    header("Content-Type: application/json");
+    $response=new Alternc_Api_Response(array("code" => $e->code, "message" => $e->message));
+    echo $response->toJson();
+    exit();
+  }
+}
+
+
+// Authentication 
+if (preg_match("#^/api/auth/([^/]*)/?#$",$_SERVER["REQUEST_URI"],$mat)) {
+  if ($_SERVER["REQUEST_METHOD"]=="POST") {
+    $data=array("options" => $_POST,
+		"method" => $mat[1]);
+    apiauth($data,API_CALL_GET);
+    exit(); 
+  } else {
+    $data=array("options" => $_GET, 
+		"method" => $mat[1]);
+    apiauth($data,API_CALL_POST);
+    exit(); 
+  }  
+}
 
 // We support 4 api calls methods:
-
 if ($_SERVER["REQUEST_URI"]=="/api/post") {
   // simple ?q or POST of json data
   if ($_SERVER["REQUEST_METHOD"]=="POST") {
