@@ -130,11 +130,11 @@ class Alternc_Api_Service {
     if (!$request instanceof Alternc_Api_Request) 
       throw new \Exception("request must be an Alternc_Api_Request object", self::ERR_INVALID_ARGUMENT);
 
-
-    $token = Alternc_Api_Token::tokenGet($request->token_hash,$this->db);
-    if ($token instanceof Alternc_Api_Response)  // bad token
-      return $token;
-
+    // we set the token in the Service object, so that other classes can use it :) 
+    $this->token = Alternc_Api_Token::tokenGet($request->token_hash,$this->db);
+    if ($this->token instanceof Alternc_Api_Response)  // bad token
+      return $this->token;
+    
     $className = "Alternc_Api_Object_".ucfirst(strtolower($request->object));
     if (!class_exists($className)) 
       return new Alternc_Api_Response( array("code" => self::ERR_OBJECT_NOT_FOUND, "message" => "Object not found in this AlternC's instance") );
@@ -143,9 +143,9 @@ class Alternc_Api_Service {
 
     $action=$request->action;
     if (!method_exists($object, $action)) 
-      return new Alternc_Api_Response( array("code" => self::ERR_ACTiON_NOT_FOUND, "message" => "Action not found for this object in this AlternC's instance") );
+      return new Alternc_Api_Response( array("code" => self::ERR_ACTION_NOT_FOUND, "message" => "Action not found for this object in this AlternC's instance") );
 
-    $request->token=$token; // we receive $request->token_hash as a STRING, but we transmit its object as an Alternc_Api_Token.
+    $request->token=$this->token; // we receive $request->token_hash as a STRING, but we transmit its object as an Alternc_Api_Token.
 
     // TODO: log this Api Call
     return $object->$action($request);

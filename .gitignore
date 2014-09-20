@@ -10,6 +10,9 @@ debian/alternc-awstats
 debian/alternc-awstats.debhelper.log
 debian/alternc-awstats.postrm.debhelper
 debian/alternc-awstats.substvars
+debian/alternc-api
+debian/alternc-api.debhelper.log
+debian/alternc-api.substvars
 debian/alternc-roundcube
 debian/alternc-roundcube.debhelper.log
 debian/alternc-roundcube.substvars
