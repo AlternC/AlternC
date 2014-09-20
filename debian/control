@@ -311,3 +311,22 @@ Description-fr.UTF-8: Client UPnP pour AlternC
  .
  Pour plus d'informations, consultez http://www.alternc.com/
 
+Package: alternc-api
+Architecture: all
+Pre-depends: debconf (>= 0.5.00) | debconf-2.0
+Depends: debianutils (>= 1.13.1)
+       , alternc (>= 3.0)
+       , ${misc:Depends}
+Conflicts: alternc (<< 3.0)
+Description: Rest or get/post API for AlternC
+ AlternC is a mutualized hosting software manager for Linux.
+ It allows you to manage your websites, domains, ftp, emails, aliases,
+ web statistics, mailing-lists, jabber accounts, etc.
+ .
+ This extension to AlternC is installing and configuring properly the
+ GET/POST/REST API. You can then use https://yourpanel/api/ as an endpoint
+ to launch remotely any functions of the hosting control panel.
+ .
+ More information at http://www.alternc.com/
+Homepage: http://www.alternc.com/
+

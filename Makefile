@@ -93,3 +93,6 @@ install-squirrelmail:
 install-upnp:
 	make -C upnp install DESTDIR=$(DESTDIR) 
 
+install-api:
+	make -C api install DESTDIR=$(DESTDIR) 
+

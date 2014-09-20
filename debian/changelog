@@ -2,8 +2,9 @@ alternc (3.3~rc1) stable; urgency=low
 
   * unofficial Prerelease of AlternC 3.3
   * update_domaines now in PHP and using classes and hooks instead of BASH
+  * AlternC-API package is now included. Compatibile with alternc >= 3.0
 
- -- Benjamin Sonntag <benjamin@sonntag.fr>  Thu, 26 Jun 2014 15:13:00 +0200
+ -- Benjamin Sonntag <benjamin@sonntag.fr>  Thu, 20 Sep 2014 18:13:00 +0200
 
 alternc (3.2.1) stable; urgency=low
 

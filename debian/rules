@@ -20,6 +20,7 @@ override_dh_install:
 	$(MAKE) install-upnp DESTDIR=$(CURDIR)/debian/alternc-upnp
 	$(MAKE) install-awstats DESTDIR=$(CURDIR)/debian/alternc-awstats
 	$(MAKE) install-slave DESTDIR=$(CURDIR)/debian/alternc-slave
+	$(MAKE) install-api DESTDIR=$(CURDIR)/debian/alternc-api
 
 %:
 	dh $@
