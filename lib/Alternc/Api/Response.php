@@ -46,7 +46,7 @@ class Alternc_Api_Response {
      * initialize a response object
      * @param options any of the public above
      */
-    public function __constructor($options=array()) {
+    public function __construct($options=array()) {
       $os=array("code","message","content","metadata");
       foreach ($os as $o) {
 	if (isset($options[$o])) $this->$o=$options[$o];

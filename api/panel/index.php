@@ -103,7 +103,7 @@ function apicall($data,$token,$mode) {
   $options["loginAdapterList"]=array("sharedsecret","login");
   // TODO (no loggerAdapter PSR3-Interface-compliant class as of now)
   try {
-
+    $data["token_hash"]=$token;
     $service=new Alternc_Api_Service($options);
 
     $response = $service->call(
@@ -118,7 +118,7 @@ function apicall($data,$token,$mode) {
     // something went wrong, we spit out the exception as an Api_Response
     // TODO : Don't do that on production! spit out a generic "fatal error" code and LOG the exception !
     header("Content-Type: application/json");
-    $response=new Alternc_Api_Response(array("code" => $e->code, "message" => $e->message));
+    $response=new Alternc_Api_Response(array("code" => $e->getCode(), "message" => $e->getMessage() ));
     echo $response->toJson();
     exit();
   }
@@ -185,8 +185,7 @@ if ($_SERVER["REQUEST_URI"]=="/api/post") {
     exit();
   }
 }
-
-if (preg_match("#^/api/rest/([^/]*)/([^/\?]*)[/\?]?$#",$_SERVER["REQUEST_URI"],$mat)) {
+if (preg_match("#^/api/rest/([^/]*)/([^/\?]*)[/\?]?#",$_SERVER["REQUEST_URI"],$mat)) {
   if ($_SERVER["REQUEST_METHOD"]=="POST") {
     $data=array("options" => $_POST, 
 		"object" => $mat[1],
@@ -205,3 +204,5 @@ if (preg_match("#^/api/rest/([^/]*)/([^/\?]*)[/\?]?$#",$_SERVER["REQUEST_URI"],$
     exit(); 
   }
 }
+
+echo "I did nothing. Did you call the api properly?";

@@ -114,8 +114,9 @@ class Alternc_Api_Token {
       if (!is_string($token) || !preg_match("#^[a-zA-Z0-9]{32}$#",$token)) {
 	return new Alternc_Api_Response( array("code" => self::ERR_INVALID_TOKEN, "message" => "Invalid token") );
       }
-      
-      foreach($db->query("SELECT * FROM token WHERE token=?", array($token)) as $tok) {
+      $stmt=$db->prepare("SELECT * FROM token WHERE token=?");
+      $stmt->execute(array($token));
+      while ($tok=$stmt->fetch(PDO::FETCH_OBJ)) {
 	return new Alternc_Api_Token( json_decode($tok->data,true) );
       } 
 

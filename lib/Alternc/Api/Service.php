@@ -86,7 +86,7 @@ class Alternc_Api_Service {
     if (count($this->allowedAuth) && !in_array($auth["method"],$this->allowedAuth)) {
       throw new \Exception("Method not allowed", self::ERR_METHOD_DENIED);
     }
-    if (isset($auth["options"]["uid"]) && !is_int($auth["options"]["uid"])) {
+    if (isset($auth["options"]["uid"]) && !intval($auth["options"]["uid"])) {
       throw new \Exception("Invalid UID", self::ERR_INVALID_ARGUMENT);
     }
 
@@ -109,9 +109,10 @@ class Alternc_Api_Service {
 	return new Alternc_Api_Response( array("code" => self::ERR_SETUID_FORBIDDEN, "message" => "This user is not allowed to set his uid") );
       } 
       // Search for the requested user. We allow using *disabled* account here since we are admin 
-      foreach($db->query("SELECT uid FROM membres WHERE uid=?",array($auth["options"]["uid"])) as $setuid) {
-	$token->uid=$setuid;
-	$db->exec("UPDATE token SET uid=? WHERE token=?",array( $token->uid, $token->token) );
+      foreach($this->db->query("SELECT uid FROM membres WHERE uid=".intval($auth["options"]["uid"])) as $setuid) {
+	$token->uid=intval($setuid['uid']);
+	$stmt=$this->db->prepare("UPDATE token SET data=? WHERE token=?");
+	$stmt->execute(array( $token->toJson(), $token->token));
 	return $token;
       } 
       return new Alternc_Api_Response( array("code" => self::ERR_SETUID_USER_NOT_FOUND, "message" => "Can't find the user you want to setuid to") );
@@ -149,7 +150,7 @@ class Alternc_Api_Service {
     $request->token=$this->token; // we receive $request->token_hash as a STRING, but we transmit its object as an Alternc_Api_Token.
 
     // TODO: log this Api Call
-    return $object->$action($request);
+    return $object->$action($request->options);
   }
 
 
