@@ -37,7 +37,7 @@ class Alternc_Api_Service {
    */
 
   function __construct($options) {
-        
+
     // What DB shall we connect to?
     // Note: it MUST be in this mode : $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     if (isset($options["databaseAdapter"]) && $options["databaseAdapter"] instanceof PDO) {
@@ -91,6 +91,7 @@ class Alternc_Api_Service {
     }
 
     $adapterName = "Alternc_Api_Auth_".ucfirst(strtolower($auth["method"]));
+
     $authAdapter = new $adapterName($this);
 
     $token = $authAdapter->auth($auth["options"]);

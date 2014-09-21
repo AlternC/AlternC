@@ -39,7 +39,7 @@ class Alternc_Api_Token {
      *
      * @var int
      */
-    public static $tokenDuration = 2678400; // default is a month
+    public $tokenDuration = 2678400; // default is a month
 
 
     /**
@@ -47,7 +47,7 @@ class Alternc_Api_Token {
      * @param options any of the public above
      *   may contain a dbAdapter, in that case create() will be available
      */
-    public function __constructor($options=array()) {
+    public function __construct($options=array()) {
 
       if (isset($options["uid"]) && is_int($options["uid"])) 
 	$this->uid=$options["uid"];
@@ -84,14 +84,15 @@ class Alternc_Api_Token {
       if (!isset($options["uid"]) || !isset($options["isAdmin"])) {
 	throw new \Exception("Missing Arguments (uid,isAdmin)",self::ERR_MISSING_ARGUMENT);
       }
-
+      
       $token=new Alternc_Api_Token($options);
 
       do {
 	$token->token = $token->tokenRandom();
-	$rows = $db->exec("INSERT IGNORE INTO token SET token=?, expire=DATE_ADD(NOW(), INTERVAL ? SECONDS), data=?",
-			  array($token,$token->tokenDuration, $token->toJson())
-		   );
+	$stmt=$db->prepare("INSERT IGNORE INTO token SET token=?, expire=DATE_ADD(NOW(), INTERVAL ? SECOND), data=?");
+	$stmt->execute(array($token->token,$token->tokenDuration, $token->toJson()));
+	$rows = $stmt->rowCount();
+	
       } while ($rows==0); // prevent collisions
 
       return $token;

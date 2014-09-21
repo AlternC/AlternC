@@ -12,8 +12,7 @@ class Alternc_Api_Auth_Sharedsecret implements Alternc_Api_Auth_Interface {
   const ERR_INVALID_ARGUMENT = 1111801;
   const ERR_INVALID_SECRET = 1111802;
   const ERR_INVALID_LOGIN = 1111803;
-  const ERR_INVALID_LOGIN = 1111804;
-  const ERR_DISABLED_ACCOUNT = 1111805;
+  const ERR_DISABLED_ACCOUNT = 1111804;
 
 
   /**
@@ -22,7 +21,7 @@ class Alternc_Api_Auth_Sharedsecret implements Alternc_Api_Auth_Interface {
    * @param $service an Alternc_Api_Service object
    * @return create the object
    */
-  function __constructor($service) {
+  function __construct($service) {
 
     if (!($service instanceof Alternc_Api_Service))
       throw new \Exception("Invalid argument (service)",ERR_INVALID_ARGUMENT);
@@ -55,15 +54,16 @@ class Alternc_Api_Auth_Sharedsecret implements Alternc_Api_Auth_Interface {
       return new Alternc_Api_Response( array("code" => self::ERR_INVALID_LOGIN, "message" => "Invalid login") );
     }
 
-    $stmt = $db->query("SELECT m.enabled,m.uid,m.login,m.su FROM membres m, sharedsecret s WHERE s.uid=m.uid AND m.login=? AND s.secret=?;",array($options["login"],$options["secret"]),PDO::FETCH_CLASS);
-    $me=$stmt->fetch();
+    $stmt = $this->db->prepare("SELECT m.enabled,m.uid,m.login,m.su FROM membres m, sharedsecret s WHERE s.uid=m.uid AND m.login=? AND s.secret=?;");
+    $stmt->execute(array($options["login"],$options["secret"]) );
+    $me=$stmt->fetch(PDO::FETCH_OBJ);
     if (!$me) 
       return new Alternc_Api_Response( array("code" => self::ERR_INVALID_AUTH, "message" => "Invalid shared secret") );
     if (!$me->enabled) 
       return new Alternc_Api_Response( array("code" => self::ERR_DISABLED_ACCOUNT, "message" => "Account is disabled") );
 
     return Alternc_Api_Token::tokenGenerate(
-					     array("uid"=>$me->uid, "isAdmin"=>($me->su!=0) ), 
+					    array("uid"=>(int)$me->uid, "isAdmin"=>($me->su!=0) ), 
 					     $this->db
 					     );
   }

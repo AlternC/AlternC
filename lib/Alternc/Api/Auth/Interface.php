@@ -10,7 +10,7 @@ interface Alternc_Api_Auth_Interface {
    * contructor :
    * $service is an Alternc_Api_Service object having a getDb() method
    */
-  function __constructor($service);
+  function __construct($service);
 
 
   /**
