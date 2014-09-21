@@ -21,7 +21,6 @@ $root=ALTERNC_PANEL."/";
 
 require_once($root."class/db_mysql.php");
 require_once($root."class/functions.php");
-require_once($root."class/variables.php");
 
 
 global $L_MYSQL_HOST,$L_MYSQL_DATABASE,$L_MYSQL_LOGIN,$L_MYSQL_PWD;
@@ -71,6 +70,7 @@ closedir($c);
 /* Language */
 //include_once("../../class/lang_env.php");
 
+$variables=new m_variables();
 $mem=new m_mem();
 $err=new m_err();
 $authip=new m_authip();
