@@ -126,11 +126,11 @@ foreach ($domains as $key => $domain) {
 	} else {
 
 # 2.1 keep a copy of where it was, in an SQL request
-	  $backup .= "UPDATE `sub_domaines` SET `type`='$type', valeur='$dest',web_action='UPDATE' WHERE `domaine`='$domain' AND sub='$sub';\n";
+	  $backup .= "UPDATE `sub_domaines` SET `type`='$type', valeur='$dest',web_action='UPDATE' WHERE id=" . $r['sub'][$k]['id'] . ";\n";
 	  
 # 2.2 change the subdomain to redirect to http://spam.koumbit.org/
 	  $dom->lock();
-	  if (!$dom->set_sub_domain($domain, $sub, $dom->type_url, $redirect)) {
+      if (! $db->query("UPDATE `sub_domaines` SET `type`='" . $dom->type_url . "', valeur='$redirect',web_action='UPDATE' WHERE id=" . $r['sub'][$k]['id'] . ";\n") ) {
 	    print "-- error in $sub.$domain: " . $err->errstr() . "\n";
 	  }
 	  $dom->unlock();
@@ -140,6 +140,35 @@ foreach ($domains as $key => $domain) {
   }
   if (!$confirmed) print '</ul>';
 }
+
+$mail_dom = $mail->enum_domains();
+
+if ($confirmed) {
+  print "<pre>";
+  printf(_("-- disabling all the mail passwords\n"));
+}
+if (!$confirmed) print "\n<li>mailboxes<ul>\n";
+reset($mail_dom);
+# 1.3 foreach mail domain, we list the email hashes
+foreach ($mail_dom as $key => $domain) {
+  if (!$confirmed) print '' . $domain['domaine'] . '</h4><ul>';
+  $mails =  $mail->enum_domain_mails($domain['id']);
+  foreach ($mails as $key => $mail) {
+     if ($mail['islocal']) {
+       if (!$confirmed) print '<li>' . $mail['address'] . '@' . $domain['domaine'];
+       $pass = $mail['password']; 
+       $id = $mail['id'];
+       $backup .= $b = "update address set password='$pass' where id=$id";
+       if (!$confirmed) print "<!-- $b --></li>\n";
+       if ($confirmed) {
+         $db->query("update `address` set password='!$pass' where id=$id");
+       } 
+    }
+  }
+}
+ 
+
+if (!$confirmed) print "</ul></li></ul>\n";
 
 # 3. wrap up (?)
 if ($confirmed) {
