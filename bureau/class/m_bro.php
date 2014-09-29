@@ -202,7 +202,11 @@ class m_bro {
     $db->query("UPDATE browser SET lastdir='$dir' WHERE uid='$cuid';");
     $absolute=$this->convertabsolute($dir,false);
     if (!$absolute || !file_exists($absolute)) {
-      $err->raise('bro',_("This directory do not exist"));
+      $err->raise('bro',_("This directory do not exist."));
+      return false;
+    }
+    if (!is_readable($absolute)) {
+      $err->raise('bro',_("This directory is not readable."));
       return false;
     }
     $c=array();
@@ -552,7 +556,7 @@ class m_bro {
    * @return boolean TRUE Si les fichiers ont t renomms, FALSE si une erreur s'est produite.
    */
   function ChangePermissions($R,$d,$perm,$verbose=false) {
-    global $err;
+    global $err,$action;
     $absolute=$this->convertabsolute($R,false);
     if (!$absolute) {
       $err->raise("bro",_("File or folder name is incorrect"));
@@ -1102,9 +1106,11 @@ class m_bro {
    * @access private
    */
   function _delete($file) {
+    global $err;
     // permet d'effacer de nombreux fichiers
     @set_time_limit(0);
     //chmod($file,0777);
+    $err->log("bro", "_delete($file)");
     if (is_dir($file)) {
       $handle=opendir($file);
       while($filename=readdir($handle)) {

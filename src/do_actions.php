@@ -198,19 +198,19 @@ while ($rr=$action->get_action()){
       $returned = execute_cmd("$FIXPERM -u", $params["uid"]);
       break;
     case "CHMOD" :
-        $filename=$params["file"];
+        $filename=$params["filename"];
         $perms=$params["perms"];
         // Checks the file or directory exists
         if( !is_dir($filename) && ! is_file($filename)){
-            $errorsList=array("Fail: cannot create ".$params["dst"]);
+            $errorsList=array("Fail: cannot retrieve CHMOD filename" );
         }
         // Checks the perms are correct
         else if ( !is_int( $perms)){
-            $errorsList=array("Fail: cannot create ".$params["dst"]);
+            $errorsList=array("Fail: Incorrect perms : $perms");
         }
         // Attempts to change the rights on the file or directory
         else if( !chmod($filename, $perms)) {
-            $errorsList=array("Fail: cannot create ".$params["dst"]);
+            $errorsList=array("Fail: cannot change perms ($perms) on filename ($filename)");
         }
         
       break;
@@ -282,7 +282,12 @@ while ($rr=$action->get_action()){
 
 // If an error occured, notify it to the admin
 if(count($errorsList)) {
-  mail_it(); 
+  mail_it();
+if( (php_sapi_name() === 'cli') ){
+   echo _("errors were met");
+   var_dump($errorsList);
+
+} 
 }
 
 // Unlock the script

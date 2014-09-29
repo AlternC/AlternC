@@ -48,7 +48,7 @@ class m_action {
      * @return boolean
      */
     function do_action() {
-        global $err, $L_INOTIFY_DO_ACTION;
+	global $err, $L_INOTIFY_DO_ACTION;
         $err->log("action", "do_action");
         if( ! @touch($L_INOTIFY_DO_ACTION) ){
             return FALSE;
@@ -195,7 +195,6 @@ class m_action {
     function set($type, $user, $parameters) {
         global $db, $err;
         $err->log("action", "set", $type);
-
         $serialized = serialize($parameters);
         switch ($type) {
             case 'chmod':
@@ -229,8 +228,7 @@ class m_action {
             $err->raise("action", _("Error setting actions"));
             return false;
         }
-        $this->do_action();
-        return true;
+        return $this->do_action();
     }
 
     /**
