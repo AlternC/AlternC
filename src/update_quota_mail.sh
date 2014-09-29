@@ -9,21 +9,21 @@ function showhelp() {
   exit
 }
 
+# FIXME: storing THAT amount of data in MAILDIRS (on BIG install like Lautre.net) may crash the shell?
 
 # Generate the $maildirs list based on the arguments
-while getopts "a:m:d:c:" optname
+while getopts "am:d:c:" optname
 do
   case "$optname" in
   "a")
     # All mails
-    # FIXME replace it by a select in da DB
-    maildirs=`find "$ALTERNC_MAIL/" -maxdepth 2 -mindepth 2 -type d`
+    maildirs=$(mysql_query "select userdb_home from dovecot_view order by 1")  
   ;;
   "m")
     # An email
     if [[ "$OPTARG" =~ ^[^\@]*@[^\@]*$ ]] ; then
       if [[ "$(mysql_query "select userdb_home from dovecot_view where user = '$OPTARG'")" ]]; then
-        maildirs=$(mysql_query "select userdb_home from dovecot_view where user = '$OPTARG'")
+        maildirs=$(mysql_query "select userdb_home from dovecot_view where user = '$OPTARG' order by 1")
       else
         echo "Bad mail provided"
         showhelp
@@ -49,13 +49,13 @@ do
       showhelp
     fi  
 
-    maildirs=$(mysql_query "select userdb_home from dovecot_view where user like '%@$OPTARG'")
+    maildirs=$(mysql_query "select userdb_home from dovecot_view where user like '%@$OPTARG' order by 1")
   ;;
   "c")
     # An account
     if [[ "$OPTARG" =~ ^[a-z]*$ ]] ; then
       if [[ "$(mysql_query "select domaine from domaines where domaine = '$1'")" ]]; then
-          maildirs=$(mysql_query "select userdb_home from dovecot_view where userdb_uid = $OPTARG")
+          maildirs=$(mysql_query "select userdb_home from dovecot_view where userdb_uid = $OPTARG order by 1")
       else
         echo "Bad account provided"
         showhelp
@@ -112,3 +112,5 @@ for i in $maildirs ; do
 	mysql_query "UPDATE mailbox SET messages=$mail_count WHERE path='$i' ; " 
 done
 
+# may cause a problem, let's fix this here :) 
+mysql_query "UPDATE mailbox SET quota=0 WHERE quota IS NULL;"
