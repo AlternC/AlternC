@@ -52,15 +52,10 @@ urldecode() {
 tmpfile=$(mktemp /tmp/altern-cron-id$id-$$.XXX)
 
 # Don't really understand why it must be called this way...
-(
-echo -e "Here the report for the scheduled task for the cron #$id in your AlternC configuration (from http://$FQDN)\n\n"
-echo -e "\n---------- BEGIN ----------"
-bash -c "wget --tries=1 -O - --no-check-certificate --http-user=$(urldecode $user) --http-password=$(urldecode $password) \"$(urldecode $url)\" --timeout=$timeout 2>&1"
-echo -e "\n----------  END  ----------"
-) > "$tmpfile"
+wget -q --tries=1 -O - --no-check-certificate --http-user=$(urldecode $user) --http-password=$(urldecode $password) "$(urldecode $url)" --timeout=$timeout > "$tmpfile" 2>&1
 
 # If there is an email specified, mail it
-if [ ! "x$email" == "x" -a ! "$email" == "null" ] ; then
+if [ -s "$tmpfile" && ! "x$email" == "x" -a ! "$email" == "null" ] ; then
   date=$(date +%x\ %X)
   cat "$tmpfile" | mailx -s "AlternC Cron #$id - Report $date" -r "$from" "$(urldecode $email)"
 fi
