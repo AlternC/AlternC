@@ -1,8 +1,13 @@
 alternc (3.1.2) oldstable; urgency=low
 
   * fix a bug when installing (doing patches from 3.1~rc)
+  * #1622 fix a bug in debian/alternc.config : overwrote mysql sysusr password all the time
+  * fix some (5) bugs in the file manager: permission, editor, file deletion... (commit c96f928 81aae4c beebd51)
+  * #1573 fix dependencies on dovecot-managesieved
+  * fix LASTLOGIN not working on Wheezy for Dovecot (commit d4d746b)
+  * fix NOT migrating automatically from /var/alternc/* to /var/(www|mail)/* (commit 4749974)
 
- -- Benjamin Sonntag <benjamin@sonntag.fr>  Fri,  4 Jul 2014 12:44:12 +0100
+ -- Benjamin Sonntag <benjamin@sonntag.fr>  Mon, 29 Sep 2014 17:44:12 +0200
 
 alternc (3.1.1) oldstable; urgency=low
 
