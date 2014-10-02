@@ -45,7 +45,8 @@ fclose($f);
 $ALTERNC_ROOT=rtrim($ALTERNC_ROOT,"/");
 
 
-if (!file_exists("/usr/bin/opendkim-genkey")) {
+if (!file_exists("/usr/bin/opendkim-genkey")
+    && !file_exists("/usr/sbin/opendkim-genkey")) {
   echo "opendkim-tools not installed, please launch:\n";
   echo "apt-get install opendkim-tools\n";
   exit(1);
