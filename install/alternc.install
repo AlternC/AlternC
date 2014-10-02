@@ -577,7 +577,7 @@ chmod g+r /etc/dovecot/dovecot.conf
 chown -R alterncpanel:alterncpanel "/usr/share/alternc/panel/"
 
 # We force the re-computing of the DNS zones, since we may have changed the IP address (see #460)
-/usr/bin/mysql --defaults-file="/etc/alternc/my.cnf" -B -e "update domaines set dns_action='update';"
+/usr/bin/mysql --defaults-file="/etc/alternc/my.cnf" -B -e "update domaines set dns_action='UPDATE' WHERE gesdns=1;"
 
 # We ensure localhost is trusted to opendkim
 mkdir -p "/etc/opendkim/keys"
