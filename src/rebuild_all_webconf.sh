@@ -15,8 +15,8 @@ fi
 echo "++ Start rebuilding ++"
 
 echo "Set flag to rebuild"
-mysql_query "update sub_domaines set web_action = 'UPDATE' and web_action != 'DELETE';"
-mysql_query "update     domaines set dns_action = 'UPDATE' and dns_action != 'DELETE';"
+mysql_query "update sub_domaines set web_action = 'UPDATE' WHERE web_action != 'DELETE';"
+mysql_query "update     domaines set dns_action = 'UPDATE' WHERE dns_action != 'DELETE';"
 
 echo "Now launching update_domains to rebuild."
 /usr/lib/alternc/update_domains.sh
