@@ -40,3 +40,4 @@ mysql --defaults-file=/etc/alternc/my.cnf -f -e "ALTER TABLE variable ADD PRIMAR
 # and we fix variable if needed : 
 mysql --defaults-file=/etc/alternc/my.cnf -f -e "UPDATE variable SET value='$FQDN' WHERE value='%%FQDN%%'"
 
+mysql --defaults-file=/etc/alternc/my.cnf -f -e "INSERT IGNORE INTO variable SET name='mailname_bounce', value='$FQDN', comment='FQDN of the mail server, used to create vhost virtual mail_adress.';"
