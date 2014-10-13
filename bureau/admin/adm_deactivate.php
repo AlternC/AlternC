@@ -141,7 +141,7 @@ foreach ($domains as $key => $domain) {
   if (!$confirmed) print '</ul>';
 }
 
-$mail_dom = $dom->enum_domains();
+$mail_dom = $mail->enum_domains();
 
 if ($confirmed) {
   print "<pre>";
@@ -152,12 +152,12 @@ reset($mail_dom);
 # 1.3 foreach mail domain, we list the email hashes
 foreach ($mail_dom as $key => $domain) {
   if (!$confirmed) print '' . $domain['domaine'] . '</h4><ul>';
-  $mails =  $dom->enum_domain_mails($domain['id']);
-  foreach ($mails as $key => $mail) {
-     if ($mail['islocal']) {
-       if (!$confirmed) print '<li>' . $mail['address'] . '@' . $domain['domaine'];
-       $pass = $mail['password']; 
-       $id = $mail['id'];
+  $mails =  $mail->enum_domain_mails($domain['id']);
+  foreach ($mails as $key => $add) {
+     if ($add['islocal']) {
+       if (!$confirmed) print '<li>' . $add['address'] . '@' . $domain['domaine'];
+       $pass = $add['password']; 
+       $id = $add['id'];
        $backup .= $b = "update address set password='$pass' where id=$id";
        if (!$confirmed) print "<!-- $b --></li>\n";
        if ($confirmed) {
@@ -165,6 +165,7 @@ foreach ($mail_dom as $key => $domain) {
        } 
     }
   }
+  if (!$confirmed) print "</ul>";
 }
  
 
