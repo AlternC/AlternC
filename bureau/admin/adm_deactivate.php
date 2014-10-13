@@ -158,10 +158,10 @@ foreach ($mail_dom as $key => $domain) {
        if (!$confirmed) print '<li>' . $add['address'] . '@' . $domain['domaine'];
        $pass = $add['password']; 
        $id = $add['id'];
-       $backup .= $b = "update address set password='$pass' where id=$id";
+       $backup .= $b = "update address set password='$pass' where id=$id;\n";
        if (!$confirmed) print "<!-- $b --></li>\n";
        if ($confirmed) {
-         $db->query("update `address` set password='!$pass' where id=$id");
+         $db->query("update `address` set password='!$pass' where id=$id;\n");
        } 
     }
   }
