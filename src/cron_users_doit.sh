@@ -23,8 +23,6 @@ for CONFIG_FILE in \
     . "$CONFIG_FILE"
 done
 
-from="noreply@$FQDN"
-
 if [ "x$url" == "x" ] ; then
   echo Missing arguments
   exit 0
@@ -62,7 +60,7 @@ echo -e "\n----------  END  ----------"
 # If there is an email specified, mail it
 if [ ! "x$email" == "x" -a ! "$email" == "null" ] ; then
   date=$(date +%x\ %X)
-  cat "$tmpfile" | mailx -s "AlternC Cron #$id - Report $date" -r "$from" "$(urldecode $email)"
+  cat "$tmpfile" | mailx -s "AlternC Cron #$id - Report $date" -a "From: noreply@$FQDN" "$(urldecode $email)"
 fi
 
 rm -f "$tmpfile"
