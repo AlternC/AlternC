@@ -60,7 +60,7 @@ echo -e "\n----------  END  ----------"
 # If there is an email specified, mail it
 if [ ! "x$email" == "x" -a ! "$email" == "null" ] ; then
   date=$(date +%x\ %X)
-  cat "$tmpfile" | mailx -s "AlternC Cron #$id - Report $date" -a "From: noreply@$FQDN" "$(urldecode $email)"
+  mailx -s "AlternC Cron #$id - Report $date" -a "From: noreply@$FQDN" "$(urldecode $email)" < "$tmpfile"
 fi
 
 rm -f "$tmpfile"
