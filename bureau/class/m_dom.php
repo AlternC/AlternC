@@ -996,7 +996,7 @@ class m_dom {
                         $ligne = preg_replace("/^ *([^ ]*) \(.*\)$/", "\\1", trim($ligne));
                         if ($found)
                             $tmp = trim($ligne);
-                        if ($tmp)
+                        if (isset($tmp) && $tmp)
                             $serveurList[] = $tmp;
                         if ($ligne == "Nameservers:") {
                             $state = 1;
