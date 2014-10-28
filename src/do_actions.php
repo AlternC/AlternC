@@ -85,12 +85,8 @@ function d($mess){
  */
 function mail_it(){
   global $errorsList,$L_FQDN;
-  // Forces array
-  if( !is_array($errorsList)){
-      $errorsList = array($errorsList);
-  }
   // Builds message from array
-  $msg = implode("\n", $errorsList);
+  $msg = var_export($errorsList, TRUE);
   // Attempts to send email
   // @todo log if fails 
   mail("alterncpanel@$L_FQDN",'Script do_actions.php issues',"\n Errors reporting mail:\n\n$msg");
