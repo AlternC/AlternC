@@ -7,4 +7,4 @@
 #
 # Uncomment to specify an alternate socket
 # Note that setting this will override any Socket value in opendkim.conf
-SOCKET="inet:8891:localhost"
+SOCKET="inet:8891@127.0.0.1"
