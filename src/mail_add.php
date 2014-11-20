@@ -19,7 +19,7 @@ global $cuid;
 // those will be tried in order, the first one to return more than 7
 // chars will win
 $generators = array('pwqgen', 'pwgen');
-$dryrun = false;
+$dryrun = true;
 // 1GB default quota
 $default_quotas = 1024; // in MB because using bytes would be too
                         // precise (try to guess AlternC, just you try)
