@@ -32,13 +32,18 @@ require_once("../class/config.php");
 if (!$r=$mysql->php_myadmin_connect()) {
 	$error=$err->errstr();
 } else {
+  session_write_close();
   // SSO of PhpMyAdmin
+  session_set_cookie_params(0, '/', '', 0);
+  session_name('AlternC_Panel');
+  session_start();
   $_SESSION['PMA_single_signon_user'] = $r["login"];
   $_SESSION['PMA_single_signon_password'] = $r["pass"];
   $_SESSION['PMA_single_signon_host'] = $r["host"]; // pma >= 2.11
 
+  session_write_close();
   // finally redirect to phpMyAdmin :
-  header("Location: /alternc-sql/");
+  header("Location: /alternc-sql/index.php?server=1");
   exit();
 }
 
