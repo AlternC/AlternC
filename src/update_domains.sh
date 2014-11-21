@@ -114,7 +114,7 @@ do
     mysql_query "delete from sub_domaines where domaine='$dom'; delete from domaines where domaine='$dom';"
 done
 
-if [ ! -z "$(cat "$RELOAD_WEB")" ] ; then
+if [ ! -z "$(cat "$RELOAD_WEB")" ] || [ "$1" = "force" ]; then
 
   # Just to encourage user to use THIS directory and not another one
   test -d "$VHOST_MANUALCONF" || mkdir -p "$VHOST_MANUALCONF"
