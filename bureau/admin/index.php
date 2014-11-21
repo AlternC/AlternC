@@ -36,7 +36,7 @@ $H=getenv("HTTP_HOST");
 if (!isset($restrictip)) {
   $restrictip=1;
 }
-if (!$charset) $charset="UTF-8";
+if (!isset($charset) || ! $charset) $charset="UTF-8";
 @header("Content-Type: text/html; charset=$charset");
 
 ?>
