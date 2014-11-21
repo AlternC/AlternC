@@ -93,7 +93,7 @@ class DB_Sql {
     
       $this->Link_ID=mysql_connect($Host, $User, $Password);
       if (!$this->Link_ID) {
-        $this->halt("pconnect($Host, $User, \$Password) failed.");
+        $this->halt("connect($Host, $User, \$Password) failed.");
         return 0;
       }
 
