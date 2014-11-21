@@ -1025,6 +1025,9 @@ class m_bro {
     header("Content-Transfer-Encoding: binary");
     $d=escapeshellarg(".".$this->convertabsolute($dir,true));
     set_time_limit(0);
+    // relacher le lock global sinon ce download va geler alternc pour
+    // tout le monde
+    alternc_shutdown();
     passthru("/bin/tar -cZ -C ".getuserpath()."/".$mem->user["login"]."/ $d");
   }
 
@@ -1043,6 +1046,9 @@ class m_bro {
     header("Content-Transfer-Encoding: binary");
     $d=escapeshellarg(".".$this->convertabsolute($dir,true));
     set_time_limit(0);
+    // relacher le lock global sinon ce download va geler alternc pour
+    // tout le monde
+    alternc_shutdown();
     passthru("/bin/tar -cz -C ".getuserpath()."/ $d");
   }
  
@@ -1061,6 +1067,9 @@ class m_bro {
     header("Content-Transfer-Encoding: binary");
     $d=escapeshellarg(".".$this->convertabsolute($dir,true));
     set_time_limit(0);
+    // relacher le lock global sinon ce download va geler alternc pour
+    // tout le monde
+    alternc_shutdown();
     passthru("/bin/tar -cj -C ".getuserpath()."/ $d");
   }
 
@@ -1172,6 +1181,9 @@ class m_bro {
     }
     $timestamp=date("H:i:s");
 
+    // relacher le lock global sinon ce download va geler alternc pour
+    // tout le monde
+    alternc_shutdown();
     if(exec("/bin/tar cvf - ".getuserpath()."/ | gzip -9c > ".$dir."/".$mem->user['login']."_html_".$timestamp.".tar.gz")){
       $err->log("bro","export_data_succes");
     }else{
