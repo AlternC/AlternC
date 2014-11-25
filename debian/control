@@ -49,6 +49,7 @@ Depends: debianutils (>= 1.13.1)
        , cron
        , opendkim
        , mysql-client(>= 5.0)
+       , php5-curl
        , ${misc:Depends}
 Recommends: mysql-server(>= 5.0)
           , ntp
@@ -133,6 +134,7 @@ Depends: debianutils (>= 1.13.1)
          , cron
          , opendkim
          , mysql-client(>= 5.0)
+         , php5-curl
          , ${misc:Depends}
 Recommends:
          quota

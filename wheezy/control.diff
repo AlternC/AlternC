@@ -21,7 +21,7 @@
 +       , dovecot-sieve
 +       , dovecot-managesieved
         , mysql-client(>= 5.0)
-        , ${misc:Depends}
+        , php5-curl
  Recommends: mysql-server(>= 5.0)
 @@ -123,16 +126,20 @@
           , adduser
@@ -46,6 +46,6 @@
 +         , dovecot-sieve
 +         , dovecot-mysql
 +         , mysql-client(>= 5.0)
-          , ${misc:Depends}
+          , php5-curl
  Recommends:
           quota
