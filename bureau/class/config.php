@@ -40,8 +40,8 @@ session_name('AlternC_Panel');
 session_start();
 
 /*
-  Si vous voulez mettre le bureau en maintenance, d�commentez le code ci-dessous
-  et mettez votre ip dans le IF pour que seule votre ip puisse acc�der au bureau : 
+  Si vous voulez mettre le bureau en maintenance, decommentez le code ci-dessous
+  et mettez votre ip dans le IF pour que seule votre ip puisse acceder au bureau : 
 */
 
 /* * /
@@ -72,6 +72,9 @@ if (!empty($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_PW'])) {
   $_REQUEST["password"]=$_SERVER['PHP_AUTH_PW'];
  }
 
+// proper srand (not using time(), which is what PHP does!)
+list($usec, $sec) = explode(" ", microtime());
+srand($usec*1000000);
 
 $help_baseurl="http://www.aide-alternc.org/";
 

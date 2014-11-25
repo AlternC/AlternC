@@ -1,3 +1,11 @@
+alternc (3.1.3) oldstable; urgency=low
+
+  * fix opendkim listening on *
+  * fix a probable privilege escalation in cron management
+  * fix a random number generation issue in PHP (rand automatically initialized by time(), not better!)
+
+ -- Benjamin Sonntag <benjamin@sonntag.fr>  Mon, 24 Nov 2014 11:17:12 +0100
+
 alternc (3.1.2) oldstable; urgency=low
 
   * fix a bug when installing (doing patches from 3.1~rc)
