@@ -1,26 +1,24 @@
-#!/bin/bash
+#!/usr/bin/php -q
+<?php
 
-# FIXME relecture + commentaires
+/**
+ * Launch the users crontab for AlternC
+ * php, parallel-curl, secured mode.
+ **/
 
-for CONFIG_FILE in \
-      /etc/alternc/local.sh \
-      /usr/lib/alternc/functions.sh 
-  do
-    if [ ! -r "$CONFIG_FILE" ]; then
-        echo "Can't access $CONFIG_FILE."
-        exit 1
-    fi
-    . "$CONFIG_FILE"
-done
+require_once("/usr/share/alternc/panel/class/config_nochk.php");
+ini_set("display_errors", 1);
 
-stop_if_jobs_locked
-
-max_process=2
-
-tasks () {
-$MYSQL_DO "select id, url, if(length(email)>0,email,'null'), schedule, UNIX_TIMESTAMP(), user, password as now from cron c where next_execution <= now();" | while read id url email schedule now user password ; do
-  echo $id $url \"$email\" $schedule $now \"$user\" \"$password\" 
-done
+if (file_exists("/var/run/alternc/jobs-lock")) {
+  echo "jobs-lock exists, did you ran alternc.install?\n";
+  echo "canceling cron_users\n";
+  exit(1);
 }
 
-tasks | xargs -n 7 -P $max_process --no-run-if-empty /usr/lib/alternc/cron_users_doit.sh 
+if (isset($argv[1]) && $argv[1]=="debug") {
+  $GLOBALS["DEBUG"]=true;
+}
+
+$cron->execute_cron();
+
+
