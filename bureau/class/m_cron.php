@@ -198,11 +198,14 @@ class m_cron {
   function execute_cron() {
     global $db;
 
+    if (!isset($GLOBALS["DEBUG"])) $GLOBALS["DEBUG"]=false;
     $db->query("SELECT id, url, email, schedule, user, password FROM cron WHERE next_execution <= NOW();");
     $urllist=array();
     
     while ($db->next_record()) {
-      $db->Record["url"]=urldecode($db->Record["url"]);
+      $db->Record["url"]=urldecode($db->Record["url"]);      $db->Record["user"]=urldecode($db->Record["user"]);
+      $db->Record["email"]=urldecode($db->Record["email"]);      $db->Record["password"]=urldecode($db->Record["password"]);
+
       // we support only http or https schemes:
       if (substr($db->Record["url"],0,7)=="http://" || substr($db->Record["url"],0,8)=="https://") {
 	$u=array(
@@ -214,6 +217,7 @@ class m_cron {
 	  $u["login"]=$db->Record["user"]; 
 	  $u["password"]=$db->Record["password"]; 
 	}
+	if ($GLOBALS["DEBUG"]) echo "Will run cron :\n".print_r($u,true)."\n";
 	$urllist[]=$u;
       }
       
@@ -244,7 +248,9 @@ class m_cron {
       $ok=false;
     }
     if (isset($url["email"]) && $url["email"] && $content) {
-      mail($url["email"],"AlternC Cron #$id - Report ".date("%r"),"Please find below the stdout content produced by your cron task.\n------------------------------------------------------------\n\n".$content,"From: postmaster@$L_FQDN");
+      if (!mail($url["email"],"AlternC Cron #$id - Report ".date("r"),"Please find below the stdout content produced by your cron task.\n------------------------------------------------------------\n\n".$content,"From: postmaster@$L_FQDN")) {
+	echo "Error sending mail for cron #$id to address '".$url["email"]."'\n";
+      }
     }
     // now schedule it for next run:
     $db->query("UPDATE cron SET next_execution=FROM_UNIXTIME( UNIX_TIMESTAMP(NOW()) + schedule * 60) WHERE id=$id");
@@ -298,7 +304,7 @@ class m_cron {
       }
       if (isset($urls[$i]["login"]) && isset($urls[$i]["password"])) { // set basic http authentication
 	curl_setopt($ch,CURLOPT_HTTPAUTH,CURLAUTH_BASIC);
-	curl_setopt($ch,CURLOPT_USERPWD,urlencode($urls[$i]["login"]).":".urlencode($urls[$i]["password"]));
+	curl_setopt($ch,CURLOPT_USERPWD,$urls[$i]["login"].":".$urls[$i]["password"]);
 	if ($GLOBALS["DEBUG"]) echo "set basic auth\n";
       }
       curl_multi_add_handle($master, $ch);
