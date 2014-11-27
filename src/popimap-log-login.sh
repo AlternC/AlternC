@@ -15,7 +15,10 @@ if [ ! -r "$ALTERNC_CONFIG_FILE" ]; then
 fi
 . "$ALTERNC_CONFIG_FILE"
 
-mysql_query "update address a, domaines d, mailbox m set m.lastlogin=now() where a.domain_id=d.id and m.address_id=a.id and concat_ws('@',a.address,d.domaine) = '$USER';"
+addr=$(echo $USER | sed 's/@.*//')
+dom=$(echo $USER | sed 's/^.*@//')
+
+mysql_query "update address a, domaines d, mailbox m set m.lastlogin=now() where a.domain_id=d.id and m.address_id=a.id and a.address='$addr' and d.domaine='$dom';"
 
 # Now launch the expected binary server
 exec "$@"
