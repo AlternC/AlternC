@@ -103,7 +103,7 @@ class m_dom {
     /**
      * @param string $fqdn
      */
-    function get_sub_domain_id_and_member_by_name($fqdn) {
+    public static function get_sub_domain_id_and_member_by_name($fqdn) {
         global $db, $err, $cuid;
         $err->log("dom", "get_sub_domain_by_name");
         $fqdn = mysql_real_escape_string($fqdn);
@@ -112,6 +112,7 @@ class m_dom {
             return false;
         return array('sub_id' => intval($db->f('id')), 'member_id' => intval($db->f('compte')));
     }
+
 
     function hook_menu() {
         global $quota;
