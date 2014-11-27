@@ -192,7 +192,7 @@ class system_bind {
     // Generate the key
     $old_dir=getcwd();
     chdir($target_dir);
-    exec('opendkim-genkey -r -d "'.escapeshellarg($domain).'" -s "alternc" ');
+    exec('opendkim-genkey -r -d '.escapeshellarg($domain).' -s "alternc" ');
     chdir($old_dir);
 
     // opendkim must be owner of the key

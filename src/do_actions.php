@@ -194,7 +194,6 @@ while ($rr=$action->get_action()){
   switch ($r["type"]){
     case "FIX_USER" :
       // Create the directory and make parent directories as needed
-      #@exec("$FIXPERM -u ".$params["uid"]." 2>&1", $trash, $code);
       $returned = execute_cmd("$FIXPERM -u", $params["uid"]);
       break;
     case "CHMOD" :
@@ -216,7 +215,6 @@ while ($rr=$action->get_action()){
       break;
     case "CREATE_FILE" :
       if(!file_exists($params["file"])) {
-        #@exec("$SU touch ".$params["file"]." 2>&1 ; echo '".$params["content"]."' > '".$params["file"]."' 2>&1", $output);
         if ( file_put_contents($params["file"], $params["content"]) === false ) {
           $errorsList=array("Fail: can't write into file ".$params["file"]);
         } else {
@@ -230,12 +228,10 @@ while ($rr=$action->get_action()){
       break;
     case "CREATE_DIR" :
       // Create the directory and make parent directories as needed
-      #@exec("$SU mkdir -p ".$params["dir"]." 2>&1",$output);
       $returned = execute_cmd("$SU mkdir", array('-p', $params["dir"]));
       break;
     case "DELETE" :
       // Delete file/directory and its contents recursively
-      #@exec("$SU rm -rf ".$params["dir"]." 2>&1", $output);
       $returned = execute_cmd("$SU rm", array('-rf', $params["dir"]));
       break;
     case "MOVE" :
@@ -257,7 +253,6 @@ while ($rr=$action->get_action()){
       }
       break;
     case "FIX_FILE" :
-      #@exec("$FIXPERM -f ".$params["file"]." 2>&1", $trash, $code);
       $returned = execute_cmd($FIXPERM, array('-f', $params["file"]));
       if($returned['return_val'] != 0){
           $errorsList=array("Fixperms.sh failed, returned error code : ".$returned['return_val']);

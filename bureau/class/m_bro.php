@@ -673,16 +673,16 @@ class m_bro {
 	 
     // TODO new version of tar supports `tar xf ...` so there is no
     // need to specify the compression format
-    exec("tar -xf $file -C $dest", $void, $ret);
+    exec("tar -xf ".escapeshellarg($file)." -C ".escapeshellarg($dest), $void, $ret);
     if ($ret) {
-      exec("tar -xjf $file -C $dest", $void, $ret);
+      exec("tar -xjf ".escapeshellarg($file)." -C ".escapeshellarg($dest), $void, $ret);
     }
     if ($ret) {
-      $cmd="unzip -o $file -d $dest";
+      $cmd="unzip -o ".escapeshellarg($file)." -d ".escapeshellarg($dest);
       exec($cmd, $void, $ret);
     }
     if ($ret) {
-      $cmd="gunzip $file";
+      $cmd="gunzip ".escapeshellarg($file);
       exec($cmd, $void, $ret);
     }
     if ($ret) {
@@ -745,7 +745,7 @@ class m_bro {
     global $err;
     $src=escapeshellarg($src);
     $dest=escapeshellarg($dest);
-    exec("cp -Rpf $src $dest", $void, $ret);
+    exec("cp -Rpf ".escapeshellarg($src)." ".escapeshellarg($dest), $void, $ret);
     if ($ret) {
       $err->raise("bro","Errors happened while copying the source to destination. cp return value: %d", $ret);
       return false;
@@ -1172,11 +1172,10 @@ class m_bro {
     }
     $timestamp=date("H:i:s");
 
-    if(exec("/bin/tar cvf - ".getuserpath()."/ | gzip -9c > ".$dir."/".$mem->user['login']."_html_".$timestamp.".tar.gz")){
+    if(exec("/bin/tar cvf - ".escapeshellarg(getuserpath()."/")."| gzip -9c > ".escapeshellarg($dir."/".$mem->user['login']."_html_".$timestamp.".tar.gz"))) {
       $err->log("bro","export_data_succes");
-    }else{
+    } else {
       $err->log("bro","export_data_failed");
-
     }
 
   }

@@ -132,7 +132,7 @@ class m_hta {
     $err->log("hta","listdir");
     $sortie = array();
     $absolute = ALTERNC_HTML."/".substr($mem->user["login"],0,1)."/".$mem->user["login"];
-    exec("find $absolute -name .htpasswd|sort",$sortie);
+    exec("find ".escapeshellarg($absolute)." -name .htpasswd|sort",$sortie);
     if(!count($sortie)){
       $err->raise("hta",_("No protected folder"));
       return false;

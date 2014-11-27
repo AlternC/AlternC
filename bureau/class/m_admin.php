@@ -648,7 +648,6 @@ class m_admin {
       $db->query("INSERT INTO membres (uid,login,pass,mail,creator,canpass,type,created,notes,db_server_id) VALUES ('$uid','$login','$pass','$mail','$cuid','$canpass', '$type', NOW(), '$notes', '$db_server_id');");
       $db->query("INSERT INTO local(uid,nom,prenom) VALUES('$uid','$nom','$prenom');");
       $this->renew_update($uid, $duration);
-      #exec("sudo /usr/lib/alternc/mem_add ".$login." ".$uid);
       $action->create_dir(getuserpath("$login"));
       $action->fix_user($uid);
       

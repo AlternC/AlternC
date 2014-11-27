@@ -48,9 +48,9 @@ if ($db->query("SELECT uid, name FROM mailman;")) {
     }
     foreach ($cc as $c){
       echo $c["uid"]."/".$c["name"]; flush();
-      $size1=exec("sudo /usr/lib/alternc/du.pl /var/lib/mailman/lists/".$c["name"]);
-      $size2=exec("sudo /usr/lib/alternc/du.pl /var/lib/mailman/archives/private/".$c["name"]);
-      $size3=exec("sudo /usr/lib/alternc/du.pl /var/lib/mailman/archives/private/".$c["name"].".mbox");
+      $size1=exec("sudo /usr/lib/alternc/du.pl ".escapeshellarg("/var/lib/mailman/lists/".$c["name"]));
+      $size2=exec("sudo /usr/lib/alternc/du.pl ".escapeshellarg("/var/lib/mailman/archives/private/".$c["name"]));
+      $size3=exec("sudo /usr/lib/alternc/du.pl ".escapeshellarg("/var/lib/mailman/archives/private/".$c["name"].".mbox"));
       $size=(intval($size1)+intval($size2)+intval($size3));
       $db->query("REPLACE INTO size_mailman SET uid='".$c["uid"]."',list='".$c["name"]."', size='$size';");
       echo " done ($size KB) \n"; flush();

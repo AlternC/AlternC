@@ -187,7 +187,7 @@ class m_quota {
               // If there is a cached value
               $a = $disk_cached[$val];
             } else {
-              exec("/usr/lib/alternc/quota_get ".$cuid ,$ak);
+              exec("/usr/lib/alternc/quota_get ".intval($cuid) ,$ak);
               $a['u']=intval($ak[0]);
               $a['t']=@intval($ak[1]);
               $a['timestamp'] = time();
@@ -230,9 +230,9 @@ class m_quota {
     if (floatval($size)==0) $size="0";
     if (isset($this->disk[$ressource])) {
       // It's a disk resource, update it with shell command
-      exec("sudo /usr/lib/alternc/quota_edit $cuid $size &> /dev/null &");
+      exec("sudo /usr/lib/alternc/quota_edit ".intval($cuid)." ".intval($size)." &> /dev/null &");
       // Now we check that the value has been written properly : 
-      exec("sudo /usr/lib/alternc/quota_get $cuid &> /dev/null &",$a);
+      exec("sudo /usr/lib/alternc/quota_get ".intval($cuid)." &> /dev/null &",$a);
       if (!isset($a[1]) || $size!=$a[1]) {
 	$err->raise("quota",_("Error writing the quota entry!"));
 	return false;
