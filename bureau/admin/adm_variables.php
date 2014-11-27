@@ -33,11 +33,13 @@ if (!$admin->enabled) {
 	__("This page is restricted to authorized staff");
 	exit();
 }
-$fields = array (
-  "member_id"   => array ("post", "integer", null),
-  "fqdn_id"     => array ("post", "integer", null),
-);
-getFields($fields);
+
+$conf = variable_init();
+foreach ($conf as $name => $val) {
+  if (isset($GLOBALS['_POST'][$name])) {
+    variable_set($name, $GLOBALS['_POST'][$name]);
+  }
+}
 
 include_once ("head.php");
 
@@ -50,110 +52,20 @@ include_once ("head.php");
 <?php __("Here are the internal AlternC variables that are currently being used."); ?>
 </p>
 
-<table border="0" cellpadding="4" cellspacing="0" class='tlist' id="tab_listvar_glob">
-<thead>
-  <tr>
-    <th><?php __("Names"); ?></th>
-    <th><?php __("Comment"); ?></th>
-    <th><?php __("Default value"); ?></th>
-    <th><?php __("Global value"); ?></th>
-    <th><?php __("Actual value used"); ?></th>
-  </tr>
-</thead>
+<form method="post" action="adm_variables.php">
+<table border="0" cellpadding="4" cellspacing="0" class='tlist'>
+<tr><th><?php __("Names"); ?></th><th><?php __("Value"); ?></th><th><?php __("Comment"); ?></th></tr>
 <?php
 
-$allvars = $variables->variables_list();
-$global_conf=$variables->get_impersonated();
-foreach( $variables->variables_list_name() as $varname => $varcomment) {  ?>
+foreach( variables_list() as $vars) {  ?>
 
  <tr class="lst">
-   <td><a href='adm_var_edit.php?var=<?php echo urlencode($varname)?>'><?php echo $varname; ?></a></td>
-   <td><?php echo $varcomment; ?></td>
-   <td><?php $variables->display_value_html($allvars, 'DEFAULT', NULL, $varname);?></td>
-   <td><?php $variables->display_value_html($allvars, 'GLOBAL',  NULL, $varname);?></td>
-   <td><?php if (isset($global_conf[$varname]['value'])) { $variables->display_valueraw_html($global_conf[$varname]['value'], $varname); } ?></td>
+ <td><?php echo $vars['name']; ?></td>
+ <td><input type="text" name="<?php ehe($vars['name']); ?>" value="<?php ehe($vars['value']); ?>" /></td>
+ <td><?php echo $vars['comment']; ?></td>
  </tr>
 <?php } ?>
 </table>
-
-<br/><br/><br/>
-
-<hr/>
-<h3 id="overwrited_vars"><?php __("Overwrited vars"); ?></h3>
-<form method="post" action="adm_variables.php#overwrited_vars">
-<?php
-$creator=$mem->get_creator_by_uid($member_id);
-
-$ml=array();
-foreach($admin->get_list() as $mid=>$mlogin) {
-  $ml[$mid] = $mlogin['login'];
-}
-echo _("See the vars for the account")." ";
-echo "<select name='member_id'>";eoption($ml, $member_id);echo "</select>";
-echo " "._("logged via")." ";
-echo "<select name='fqdn_id'>";eoption($dom->get_panel_url_list(), $fqdn_id  );echo "</select> ";
-echo "<input type='submit' class='ina' value=\""; ehe(_("View")); echo "\" />";
-
-?>
+<p><input type="submit" class="inb" value="<?php __("Save variables"); ?>" /></p>
 </form>
-<br/>
-
-<?php 
-if ( $member_id && $fqdn_id ) {
-$sub_infos=$dom->get_sub_domain_all($fqdn_id);
-$domList = $dom->get_panel_url_list();
-$fqdn=$domList[$fqdn_id];
-$impersonated_conf=$variables->get_impersonated($fqdn, $member_id);
-
-echo sprintf(_("Here are values for members %s logged via %s"), '<b>'.$ml[$member_id].'</b>', "<b>$fqdn</b>") ;?>
-<table class='tlist' id="tab_listvar_impers">
-<?php
-echo "<thead><tr>";
-echo "<th>"._("Var")."</th>";
-foreach( $variables->strata_order as $st) {  
-  echo "<th>$st</th>";
-} // foeach
-echo "<th>"._("Used value")."</th>";
-echo "</tr></thead>";
-foreach( $variables->variables_list_name() as $varname => $varcomment) {  ?>
- <tr class="lst">
-   <td><a href='adm_var_edit.php?var=<?php echo urlencode($varname); ?>'><?php echo $varname; ?></a></td>
-   <td><?php $variables->display_value_html($allvars, 'DEFAULT', NULL, $varname); ?></td>
-   <td><?php $variables->display_value_html($allvars, 'GLOBAL', NULL, $varname); ?></td>
-   <td><?php $variables->display_value_html($allvars, 'FQDN_CREATOR', $sub_infos['member_id'], $varname); ?></td>
-   <td><?php $variables->display_value_html($allvars, 'FQDN', $sub_infos['id'], $varname); ?></td>
-   <td><?php $variables->display_value_html($allvars, 'CREATOR', $creator, $varname); ?></td>
-   <td><?php $variables->display_value_html($allvars, 'MEMBER', $member_id, $varname); ?></td>
-   <td><?php $variables->display_value_html($allvars, 'DOMAIN', 'FIXME', $varname); ?></td>
-   <td><b><?php $variables->display_valueraw_html($impersonated_conf[$varname]['value'], $varname); ?></b></td>
- </tr>
-<?php
-} //foreach 
-?>
-</table>
-
-<br/>
-<?php } // if $member_id && $fqdn_id  ?>
-
-<hr/>
-<h3><?php __("Magical values");?></h3>
-<?php __("Those var are automatically replaced by the value indicated"); ?>
-<ul>
-<?php 
-foreach ($variables->replace_array as $vrepk => $vrepvalue) {
-  echo "<li><code>$vrepk</code> => $vrepvalue</li>";
-}
-?>
-</ul>
-
-<script type="text/javascript">
-
-$(document).ready(function() 
-    { 
-        $("#tab_listvar_impers").tablesorter(); 
-        $("#tab_listvar_glob").tablesorter(); 
-    } 
-); 
-</script>
-
 <?php include_once("foot.php"); ?>
