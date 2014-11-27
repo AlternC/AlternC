@@ -583,6 +583,7 @@ chown -R alterncpanel:alterncpanel "/usr/share/alternc/panel/"
 mkdir -p "/etc/opendkim/keys"
 grep -q "^127.0.0.1\$" /etc/opendkim/TrustedHosts || echo "127.0.0.1" >>/etc/opendkim/TrustedHosts
 grep -q "^localhost\$" /etc/opendkim/TrustedHosts || echo "localhost" >>/etc/opendkim/TrustedHosts
+touch /etc/opendkim/TrustedHosts /etc/opendkim/SigningTable /etc/opendkim/KeyTable
 
 # Add opendkim to service to restart
 SERVICES="$SERVICES opendkim"
@@ -631,4 +632,3 @@ unlock_jobs
 
 # Rebuild all web configuration
 /usr/lib/alternc/rebuild_all_webconf.sh --force
-
