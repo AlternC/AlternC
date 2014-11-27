@@ -35,21 +35,6 @@ mt_srand((float) $sec + ((float) $usec * 100000));
  */
 function fl($str) { return str_replace("<","&lt;",str_replace("\"","&quot;",$str)); }
 
-/**
- * 
- * @global array $variables
- * @param string $name
- * @param mixed $default
- * @param string $createit_comment
- * @param struing $type
- * @return mixed
- */
-function variable_get($name, $default = null, $createit_comment = null, $type = null) {
-  global $variables;
-  return $variables->variable_get($name, $default, $createit_comment, $type);
-}
-
-
 
 /**
  *  Check if a domain can be hosted on this server :
