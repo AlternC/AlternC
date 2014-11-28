@@ -111,6 +111,11 @@ class m_bro {
     $root_alternc=$root ;
     // Passage du root en chemin rel (diffrent avec un lien)
     $root=realpath($root) ;
+    if (! $root=realpath($root)) {
+      // Guillaume: it needed to work.. if file doesn't exist it need to crash
+      // gently
+      $root=$root_alternc;
+    }
     // separer le chemin entre le repertoire et le fichier
     $file=basename($dir);
     $dir=dirname($dir);
