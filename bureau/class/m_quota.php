@@ -172,7 +172,7 @@ class m_quota {
 	}
 	reset($this->disk);
 
-        if (!empty ($this->disk)) { // Check if there are some disk quota to check
+        if ($this->disk_quota_enable && !empty ($this->disk)) { // Check if there are some disk quota to check
           // Look if there are some cached value
           $disk_cached = $mem->session_tempo_params_get('quota_cache_disk');
 
