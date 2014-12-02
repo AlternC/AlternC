@@ -530,7 +530,7 @@ tar -zcf "$INSTALLED_CONFIG_TAR" -C / $CONFIG_FILES
 # Last touches
 #
 
-find $ALTERNC_HTML -maxdepth 1 -type d -exec setfacl -b -k -m d:g:alterncpanel:rw- -m d:u:alterncpanel:rw- -m u:alterncpanel:rw- -m g:alterncpanel:rw- {} \;
+find $ALTERNC_HTML -maxdepth 1 -type d -exec setfacl -b -k -m d:g:alterncpanel:rwx -m d:u:alterncpanel:rwx -m u:alterncpanel:rwx -m g:alterncpanel:rwx {} \;
 
 #creating log file
 if [ ! -e "/var/log/alternc/bureau.log" ]; then
