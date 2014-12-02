@@ -32,6 +32,10 @@ if (!$mem->del_session()) {
 }
 
 $H=getenv("HTTP_HOST");
+if (variable_get('https_redirect', false, 'switch users to HTTPS') && !isset($_SERVER['HTTPS'])) {
+  header("Location: https://$H/");
+  exit();
+}
 
 if (!isset($restrictip)) {
   $restrictip=1;
