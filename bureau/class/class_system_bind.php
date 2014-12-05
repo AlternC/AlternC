@@ -114,7 +114,7 @@ class system_bind {
   }
 
   /**
-   * Return lines that are after ;;;END ALTERNC AUTOGENERATE CONFIGURATION
+   * Return lines that are after ;;; END ALTERNC AUTOGENERATE CONFIGURATION
    * 
    * @param string $domain
    * @return string
@@ -324,7 +324,7 @@ class system_bind {
     $zone.= $this->dkim_entry($domain);
     $zone.= $this->mail_autoconfig_entry($domain);
 
-    $zone.="\n;;;END ALTERNC AUTOGENERATE CONFIGURATION\n";
+    $zone.="\n;;; END ALTERNC AUTOGENERATE CONFIGURATION\n";
     $zone.=$this->get_persistent($domain);
     $domainInfo = $this->get_domain_summary($domain);
 
