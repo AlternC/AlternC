@@ -25,7 +25,17 @@ class Alternc_Diagnostic_Directory {
     function getList( $max = null){
         
         $dir                    = new DirectoryIterator($this->file_path);
-        
+	$fileList		= array();
+	while($dir->valid()) {
+	    if( $dir->isDot() ){
+		$dir->next();
+		continue;
+	    }
+	    $file_name		= $dir->getFilename();
+	    $fileList[]		= $file_name;
+	    $dir->next();
+	}   
+	return $fileList;
     }
  
     /**
@@ -34,6 +44,35 @@ class Alternc_Diagnostic_Directory {
     public function setFile_path($file_path) {
         $this->file_path                = $file_path;
         return $this;
+    }
+
+
+    // @todo Confirm usefulness
+    public function getFileContent( $id ) {
+	$fileList		= $this->getList();
+	if( array_key_exists( $id, $fileList ) ){
+	    return file_get_contents( $this->file_path."/".$fileList[$id]);
+	}
+	if( in_array($id, $fileList)){
+	    $key		= array_search( $id, $fileList );
+	    return file_get_contents( $this->file_path."/".$fileList[$key]);
+	}
+	throw new \Exception("Could not find diagnostic for id : $id");
+    }
+
+    function getFileInfo($id){
+
+	$fileList		= $this->getList();
+
+	if( array_key_exists( $id, $fileList ) ){
+	    $file_path		= $this->file_path."/".$fileList[$id];
+	}
+	if( in_array($id, $fileList)){
+	    $key		= array_search( $id, $fileList );
+	    $file_path		= $this->file_path."/".$fileList[$key];
+	}
+	$fileInfos		= pathinfo( $file_path );
+	return ($fileInfos);
     }
 
     /**

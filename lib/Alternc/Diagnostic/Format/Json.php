@@ -19,28 +19,30 @@ class Alternc_Diagnostic_Format_Json
     /**
      * @inherit
      */
-    function read( $file_reference ){
-        
+    function contentToData( $content ){
+       
+	$arrayData = json_decode( $content , true);
+	$dataInstance			= new Alternc_Diagnostic_Data(Alternc_Diagnostic_Data::TYPE_ROOT);
+	$this->data			= $dataInstance->buildFromArray( $arrayData );
+	return $this->data;
+
     }
     
     
     /**
      * @inherit
      */
-    function write(Alternc_Diagnostic_Data $data = null ){
+    function dataToContent(Alternc_Diagnostic_Data $data = null ){
         
         if( $data ){
             $this->setData($data);
         }
-        $file_content                   = json_encode($this->getData());
+        $content			= json_encode($this->getData());
         $filename                       = $this->getFilename();
         if(json_last_error()){
             throw new \Exception("Json conversion failed with error #".json_last_error()."for data".serialize($this->getData()));
        }
-        if( ! file_put_contents($filename, $file_content) ){
-            throw new \Exception("Failed to write in json format to file $filename for data".serialize($this->getData()));
-        }
-        return true;
+	return $content;
     }
     
     

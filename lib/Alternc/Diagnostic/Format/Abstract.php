@@ -83,6 +83,40 @@ class Alternc_Diagnostic_Format_Abstract {
         return $this->directory;
     }
 
+    
+    /**
+     * Writes a Data object to file
+     * 
+     * @return boolean 
+     */
+    public function write( Alternc_Diagnostic_Data $data = null  ){
 
+	if( null == $data ){
+	    if( ! $this->data ){
+		throw new \Exception( "A format cannot be written without a Data");
+	    }
+	    $data = $this->data;
+	}
+	$content			= $this->dataToContent( $data );
+        $filename                       = $this->getFilename();
+        if( ! file_put_contents($filename, $content) ){
+            throw new \Exception("Failed to write in json format to file $filename" );
+        }
+        return true;
+
+    }
+
+    /**
+     * 
+     * @param   string file_name
+     * @return  Alternc_Diagnostic_Data A diagnostic structure 
+     */
+    function read( $file_name ){
+       
+	$content    = $this->directory->getFileContent( $file_name );
+	return $this->contentToData( $content );	
+
+    }
+    
 }
 

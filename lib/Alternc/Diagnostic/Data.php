@@ -24,7 +24,46 @@ class Alternc_Diagnostic_Data {
         }
         
     }
-    
+
+    // recursive rebuild
+    function buildFromArray( $content ){
+
+	if( ! $this->isValidArrayData( $content ) ) { 
+	    return $content;
+	}
+	$type				= $content["type"];
+	$newInstance			= new Alternc_Diagnostic_Data( $type );
+	$newInstance->index		= $content["index"];
+	$newInstance->metadata		= $content["metadata"];
+	$data				= $content["data"];
+	// The content is raw
+	if( $type === self::TYPE_SECTION){
+	    $newInstance->data		= $data;
+	}
+	// The content is made of services or sections
+	else foreach( $content["data"] as $section_name => $sectionData ){
+		$sectionContent		= $this->buildFromArray( $sectionData );
+		$newInstance->addData( $section_name, $sectionContent );
+	}
+	return $newInstance;
+
+    }
+
+	// Make sure we have a valid format result
+    function isValidArrayData( $content ){
+	if(
+	    !is_array($content)
+	    || !array_key_exists( "type", $content ) 
+	    || !array_key_exists("metadata",$content) 
+	    || !array_key_exists("index",$content) 
+	    || !array_key_exists("data",$content)  
+	    || ! in_array( $content["type"], array(self::TYPE_ROOT,self::TYPE_DOMAIN,self::TYPE_SECTION) ) ){
+	
+	    return false;
+	
+	}
+	return true;
+    }
     
     /**
      * Sets 
