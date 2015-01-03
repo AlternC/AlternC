@@ -127,14 +127,16 @@ class Alternc_Api_Object_Account {
           if ($result) $result=array($result);
       }
       if (!$result && isset($options["login"])) {
-              $result=$this->admin->get_list(1/*ALL*/, "", $options["login"], "login");
-
+          $result=$this->admin->get_list(1/*ALL*/, "", $options["login"], "login");
       }
       if (!$result && isset($options["domain"])) {
-              $result=$this->admin->get_list(1/*ALL*/, "", $options["domain"], "domaine");
+          $result=$this->admin->get_list(1/*ALL*/, "", $options["domain"], "domaine");
       }
       if (!$result && isset($options["creator"])) {
-              $result=$this->admin->get_list(1/*ALL*/, intval($options["creator"]));
+          $result=$this->admin->get_list(1/*ALL*/, intval($options["creator"]));
+      }
+      if (!$result) {          // everybody
+          $result=$this->admin->get_list(1/*ALL*/, "");
       }
       
       if (!$result) {
