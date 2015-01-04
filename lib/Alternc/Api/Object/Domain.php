@@ -25,6 +25,8 @@ class Alternc_Api_Object_Domain {
     // We use the global $admin & $dom from AlternC legacy classes
     $this->admin=$admin;
     $this->dom=$dom;
+    // Set the legacy rights:
+    $this->admin->enabled=$this->isAdmin;
   }
 
   
@@ -33,7 +35,8 @@ class Alternc_Api_Object_Domain {
    * may be "uid" to only return domains for a specific user-id
    * (if you are not admin, this WILL only list YOUR domains anyway)
    * may be "offset" and/or "count" to do paging.
-   * @return Alternc_Api_Response whose content is the list of hosted domains on this server
+   * @return Alternc_Api_Response whose content is the list of hosted domains on this server 
+   * (no more details as of now)
    */
   function find($options) {      
       global $cuid;
@@ -73,5 +76,61 @@ class Alternc_Api_Object_Domain {
     return new Alternc_Api_Response( array("code" => self::ERR_ALTERNC_FUNCTION, "message" => "[".$err->clsid."] ".$err->error) );
   }
 
+  
+  /** API Method from legacy class method dom->add_domain()
+   * @param $options a hash with parameters transmitted to legacy call
+   * mandatory parameters: domain(str), dns(bool)
+   * non-mandatory: noerase(bool, only admins), force(bool, only admins), isslave(bool), slavedom(str)
+   * @return Alternc_Api_Response whose content is the newly created DOMAIN id
+   */
+  function add($options) {      
+      $mandatory=array("domain","dns");
+      $defaults=array("noerase"=>false, "force"=>false, "isslave"=>false, "slavedom"=>"");
+      $missing="";
+      foreach ($mandatory as $key) {
+          if (!isset($options[$key])) {
+              $missing.=$key." ";
+          }
+      }
+      if ($missing) {
+          return new Alternc_Api_Response( array("code" => self::ERR_INVALID_ARGUMENT, "message" => "Missing or invalid argument: ".$missing) );
+      }
+      foreach ($defaults as $key => $value) {
+          if (!isset($options[$key])) {
+              $options[$key]=$value;
+          }
+      }
+      if (!$this->isAdmin) { // only admin can change the options below:
+          $options["noerase"]=false;
+          $options["force"]=false;
+      }
+      $did=$this->dom->add_domain($options["domain"], $options["dns"], $options["noerase"], 
+              $options["force"], $options["isslave"], $options["slavedom"]);
+      if (!$did) {
+          return $this->alterncLegacyErrorManager();
+      } else {
+          return new Alternc_Api_Response( array("content" => $did ) );
+      }
+  }
 
+
+
+  /** API Method from legacy class method dom->del_domain()
+   * @param $options a hash with parameters transmitted to legacy call
+   * mandatory parameters: domain
+   * @return Alternc_Api_Response TRUE if the domain has been marked for deletion.
+   */
+  function del($options) {      
+      if (!isset($options["domain"])) {
+          return new Alternc_Api_Response( array("code" => self::ERR_ALTERNC_FUNCTION, "message" => "Missing or invalid argument: DOMAIN") );
+      }
+      $result=$this->dom->del_domain($options["domain"]);
+      if (!$result) {
+          return $this->alterncLegacyErrorManager();
+      } else {
+          return new Alternc_Api_Response( array("content" => true ) );
+      }
+  }
+
+  
 } // class Alternc_Api_Object_Ssl

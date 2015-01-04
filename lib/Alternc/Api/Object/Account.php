@@ -23,6 +23,8 @@ class Alternc_Api_Object_Account {
     $this->isAdmin=$service->token->isAdmin;
     // We use the global $admin from AlternC legacy classes
     $this->admin=$admin;
+    // Set the legacy rights:
+    $this->admin->enabled=$this->isAdmin;
   }
 
   
