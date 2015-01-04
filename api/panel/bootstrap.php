@@ -70,7 +70,12 @@ closedir($c);
 /* Language */
 //include_once("../../class/lang_env.php");
 
-$variables=new m_variables();
+// Adaptation to BOTH version of the variables managed by AlternC 1/3/4                                                                    
+if (is_file($root."/class/variables.php")) {
+  require_once($root."/class/variables.php");
+} else {
+  $variables=new m_variables();
+}
 $mem=new m_mem();
 $err=new m_err();
 $authip=new m_authip();
