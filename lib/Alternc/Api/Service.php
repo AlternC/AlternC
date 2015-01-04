@@ -12,6 +12,7 @@ class Alternc_Api_Service {
   private $db; // PDO object
   private $loggerList; // List of loggers
   private $allowedAuth; // list of allowed authenticators
+  public $token; // Token (useful for called classes)
 
   const ERR_INVALID_ARGUMENT = 111801;
   const ERR_METHOD_DENIED = 111802;

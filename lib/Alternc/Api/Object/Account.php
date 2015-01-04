@@ -9,14 +9,19 @@ class Alternc_Api_Object_Account {
   const ERR_ALTERNC_FUNCTION = 1115102;
   const ERR_NOT_FOUND = 1115103;
 
+  var $admin; // m_admin instance
+  var $cuid; // current user id
+  var $isAdmin; // is it an Admin account?
+  
   function __construct($service) {
     global $admin,$cuid;
     if (!($service instanceof Alternc_Api_Service)) {
       throw new \Exception("Bad argument: service is not an Alternc_Api_Service", self::ERR_INVALID_ARGUMENT);
     }
     // We store the global $cuid to AlternC legacy classes
-    $cuid=$service->token->uid;
-    // We use the global $ssl from AlternC legacy classes
+    $this->cuid=$cuid=$service->token->uid;
+    $this->isAdmin=$service->token->isAdmin;
+    // We use the global $admin from AlternC legacy classes
     $this->admin=$admin;
   }
 
@@ -165,4 +170,4 @@ class Alternc_Api_Object_Account {
   }
 
 
-} // class Alternc_Api_Object_Ssl
+} // class Alternc_Api_Object_Account
