@@ -22,4 +22,5 @@ install:
 	install -m 0644 -g 1999 -o root panel/* $(DESTDIR)/usr/share/alternc/panel/admin/api/
 	install -m 0644 ../lib/Alternc/Api/*.php $(DESTDIR)/usr/share/php/Alternc/Api/
 	install -m 0644 ../lib/Alternc/Api/Auth/*.php $(DESTDIR)/usr/share/php/Alternc/Api/Auth/
+	install -m 0644 ../lib/Alternc/Api/Object/*.php $(DESTDIR)/usr/share/php/Alternc/Api/Object/
 
