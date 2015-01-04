@@ -116,11 +116,10 @@ class Alternc_Api_Token {
       }
       $stmt=$db->prepare("SELECT * FROM token WHERE token=?");
       $stmt->execute(array($token));
-      while ($tok=$stmt->fetch(PDO::FETCH_OBJ)) {
-	return new Alternc_Api_Token( json_decode($tok->data,true) );
-      } 
-
-      return null;
+       if (  $tok=$stmt->fetch(PDO::FETCH_OBJ)  ) {
+        return new Alternc_Api_Token( json_decode($tok->data,true) );
+      }
+      return new Alternc_Api_Response( array("code" => self::ERR_INVALID_TOKEN, "message" => "Invalid token") );
     }
 
 

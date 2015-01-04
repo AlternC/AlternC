@@ -13,7 +13,7 @@ class Alternc_Api_Auth_Sharedsecret implements Alternc_Api_Auth_Interface {
   const ERR_INVALID_SECRET = 1111802;
   const ERR_INVALID_LOGIN = 1111803;
   const ERR_DISABLED_ACCOUNT = 1111804;
-
+  const ERR_INVALID_AUTH = 1111805;
 
   /**
    * Constructor of the Shared Secret Api Auth
