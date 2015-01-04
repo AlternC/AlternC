@@ -7,7 +7,6 @@ class Alternc_Api_Object_Domain {
     
   const ERR_INVALID_ARGUMENT = 1115401;
   const ERR_ALTERNC_FUNCTION = 1115402;
-  const ERR_NOT_FOUND = 1115403;
   
   var $admin; // m_admin instance
   var $dom; // m_dom instance
@@ -66,16 +65,6 @@ class Alternc_Api_Object_Domain {
       }
   }
   
-
-
-  /** return a proper Alternc_Api_Response from an error class and error string 
-   * from AlternC legacy class
-   */
-  private function alterncLegacyErrorManager() {
-    global $err;
-    return new Alternc_Api_Response( array("code" => self::ERR_ALTERNC_FUNCTION, "message" => "[".$err->clsid."] ".$err->error) );
-  }
-
   
   /** API Method from legacy class method dom->add_domain()
    * @param $options a hash with parameters transmitted to legacy call
@@ -112,8 +101,45 @@ class Alternc_Api_Object_Domain {
           return new Alternc_Api_Response( array("content" => $did ) );
       }
   }
-
-
+  
+  
+  
+  /** API Method from legacy class method dom->edit_domain()
+   * @param $options a hash with parameters transmitted to legacy call
+   * mandatory parameters: domain(str), dns(bool)
+   * non-mandatory: noerase(bool, only admins), force(bool, only admins), isslave(bool), slavedom(str)
+   * @return Alternc_Api_Response whose content is the newly created DOMAIN id
+   */
+  function update($options) {      
+      $mandatory=array("domain","dns","gesmx");
+      $defaults=array("force"=>false, "ttl"=>86400);
+      $missing="";
+      foreach ($mandatory as $key) {
+          if (!isset($options[$key])) {
+              $missing.=$key." ";
+          }
+      }
+      if ($missing) {
+          return new Alternc_Api_Response( array("code" => self::ERR_INVALID_ARGUMENT, "message" => "Missing or invalid argument: ".$missing) );
+      }
+      foreach ($defaults as $key => $value) {
+          if (!isset($options[$key])) {
+              $options[$key]=$value;
+          }
+      }
+      if (!$this->isAdmin) { // only admin can change the options below:
+          $options["force"]=false;
+      }
+      $did=$this->dom->edit_domain($options["domain"], $options["dns"], $options["gesmx"], 
+              $options["force"], $options["ttl"]);
+      if (!$did) {
+          return $this->alterncLegacyErrorManager();
+      } else {
+          return new Alternc_Api_Response( array("content" => $did ) );
+      }
+  }
+  
+  
 
   /** API Method from legacy class method dom->del_domain()
    * @param $options a hash with parameters transmitted to legacy call
@@ -133,4 +159,13 @@ class Alternc_Api_Object_Domain {
   }
 
   
-} // class Alternc_Api_Object_Ssl
+  /** return a proper Alternc_Api_Response from an error class and error string 
+   * from AlternC legacy class
+   */
+  private function alterncLegacyErrorManager() {
+    global $err;
+    return new Alternc_Api_Response( array("code" => self::ERR_ALTERNC_FUNCTION, "message" => "[".$err->clsid."] ".$err->error) );
+  }
+
+  
+} // class Alternc_Api_Object_Domain
