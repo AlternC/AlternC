@@ -3,30 +3,16 @@
 /**
  * Domain Api of AlternC, used by alternc-api package
  */
-class Alternc_Api_Object_Domain {
+class Alternc_Api_Object_Domain extends Alternc_Api_Legacyobject {
     
-  const ERR_INVALID_ARGUMENT = 1115401;
-  const ERR_ALTERNC_FUNCTION = 1115402;
   
-  var $admin; // m_admin instance
-  var $dom; // m_dom instance
-  var $cuid; // current user id
-  var $isAdmin; // is it an Admin account?
+  protected $dom; // m_dom instance
   
   function __construct($service) {
-    global $admin,$cuid,$dom;
-    if (!($service instanceof Alternc_Api_Service)) {
-      throw new \Exception("Bad argument: service is not an Alternc_Api_Service", self::ERR_INVALID_ARGUMENT);
-    }
-    // We store the global $cuid to AlternC legacy classes
-    $this->cuid=$cuid=$service->token->uid;
-    $this->isAdmin=$service->token->isAdmin;
-    // We use the global $admin & $dom from AlternC legacy classes
-    $this->admin=$admin;
+    global $dom;
+    parent::__construct($service);
     $this->dom=$dom;
-    // Set the legacy rights:
-    $this->admin->enabled=$this->isAdmin;
-  }
+    }
 
   
   /** API Method from legacy class method dom->get_domain_list()
@@ -156,15 +142,6 @@ class Alternc_Api_Object_Domain {
       } else {
           return new Alternc_Api_Response( array("content" => true ) );
       }
-  }
-
-  
-  /** return a proper Alternc_Api_Response from an error class and error string 
-   * from AlternC legacy class
-   */
-  private function alterncLegacyErrorManager() {
-    global $err;
-    return new Alternc_Api_Response( array("code" => self::ERR_ALTERNC_FUNCTION, "message" => "[".$err->clsid."] ".$err->error) );
   }
 
   

@@ -3,15 +3,10 @@
 /**
  * Account Api of AlternC, used by alternc-api package
  */
-class Alternc_Api_Object_Account {
+class Alternc_Api_Object_Account extends Alternc_Api_Legacyobject {
     
-  const ERR_INVALID_ARGUMENT = 1115101;
-  const ERR_ALTERNC_FUNCTION = 1115102;
   const ERR_NOT_FOUND = 1115103;
 
-  var $admin; // m_admin instance
-  var $cuid; // current user id
-  var $isAdmin; // is it an Admin account?
   
   function __construct($service) {
     global $admin,$cuid;
@@ -74,7 +69,6 @@ class Alternc_Api_Object_Account {
    * non-mandatory: pass, canpass, type, duration, notes, force, create_dom, db_server_id
    * @return Alternc_Api_Response whose content is the updated UID
    */
-//    function update_mem($uid, $mail, $nom, $prenom, $pass, $enabled, $canpass, $type='default', $duration=0, $notes = "",$reset_quotas=false) {
   function update($options) {      
       $defaults=array("nom","prenom","mail","canpass", "enabled","type","duration", "notes");
       if (!isset($options["uid"])) {
@@ -159,16 +153,6 @@ class Alternc_Api_Object_Account {
           }
           return new Alternc_Api_Response( array("content" =>$result) );
       }
-  }
-
-
-
-  /** return a proper Alternc_Api_Response from an error class and error string 
-   * from AlternC legacy class
-   */
-  private function alterncLegacyErrorManager() {
-    global $err;
-    return new Alternc_Api_Response( array("code" => self::ERR_ALTERNC_FUNCTION, "message" => "[".$err->clsid."] ".$err->error) );
   }
 
 
