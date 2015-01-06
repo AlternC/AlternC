@@ -5,6 +5,7 @@
 CREATE TABLE IF NOT EXISTS `sharedsecret` (
   `uid` int(10) unsigned NOT NULL,
   `secret` varchar(32) NOT NULL,
+  `application` varchar(255) NOT NULL,
   PRIMARY KEY (`uid`,`secret`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Shared secrets used by Alternc_Api_Auth_Sharedsecret';
 
