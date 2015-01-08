@@ -35,11 +35,18 @@ class Alternc_Api_Object_Domain extends Alternc_Api_Legacyobject {
       } else {
         $uid=$cuid;
       }
-      $result=$this->dom->get_domain_list($uid);
-      if (!$result) {
-          return $this->alterncLegacyErrorManager();
+      if ($uid!=-1) {
+          $sql=" WHERE compte=$uid ";
       } else {
-          $offset=-1; $count=-1;
+          $sql="";
+      }
+      $stmt = $this->db->prepare("SELECT * FROM domaines $sql ORDER BY domaine");
+      $stmt->execute();
+      $result = array();
+      while ($me = $stmt->fetch(PDO::FETCH_OBJ)) {
+         $result[$me->domaine] = $me;
+      }
+      $offset=-1; $count=-1;
           if (isset($options["count"])) $count=intval($options["count"]);
           if (isset($options["offset"])) $offset=intval($options["offset"]);
           if ($offset!=-1 || $count!=-1) {
@@ -48,7 +55,6 @@ class Alternc_Api_Object_Domain extends Alternc_Api_Legacyobject {
               $result=  array_slice($result, $offset, $count);
           }
           return new Alternc_Api_Response( array("content" =>$result) );
-      }
   }
   
   

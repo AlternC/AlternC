@@ -11,7 +11,8 @@ class Alternc_Api_Legacyobject {
   protected $admin; // m_admin instance
   protected $cuid; // current user id
   protected $isAdmin; // is it an Admin account?
-    
+  protected $db; // PDO DB access to AlternC's database.
+  
   const ERR_INVALID_ARGUMENT = 111201;
   const ERR_ALTERNC_FUNCTION = 111202;
   
@@ -21,6 +22,7 @@ class Alternc_Api_Legacyobject {
       throw new \Exception("Bad argument: service is not an Alternc_Api_Service", self::ERR_INVALID_ARGUMENT);
     }
     // We store the global $cuid to AlternC legacy classes
+    $this->db=$service->db;
     $this->cuid=$cuid=$service->token->uid;
     $this->isAdmin=$service->token->isAdmin;
     // We use the global $admin from AlternC legacy classes

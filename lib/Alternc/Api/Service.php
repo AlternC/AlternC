@@ -9,7 +9,7 @@
 class Alternc_Api_Service {
     
 
-  private $db; // PDO object
+  public $db; // PDO object
   private $loggerList; // List of loggers
   private $allowedAuth; // list of allowed authenticators
   public $token; // Token (useful for called classes)
