@@ -46,7 +46,7 @@ class Alternc_Api_Object_Ftp extends Alternc_Api_Legacyobject {
    * @return Alternc_Api_Response whose content is the updated UID
    */
   function update($options) {      
-      $defaults=array("prefix","login","pass","dir");
+      $defaults=array("prefix","login","dir");
       if (!isset($options["id"])) {
           return new Alternc_Api_Response( array("code" => self::ERR_INVALID_ARGUMENT, "message" => "Missing or invalid argument: ID") ); 
       }
@@ -61,7 +61,7 @@ class Alternc_Api_Object_Ftp extends Alternc_Api_Legacyobject {
           }
       }
       if (!isset($options["pass"])) $options["pass"]="";
-      $result=$this->ftp->put_ftp_details($id, $options["prefixe"], $options["login"], $options["pass"], $options["dir"]);
+      $result=$this->ftp->put_ftp_details($id, $options["prefix"], $options["login"], $options["pass"], $options["dir"]);
       if (!$result) {
           return $this->alterncLegacyErrorManager();
       } else {
@@ -79,7 +79,7 @@ class Alternc_Api_Object_Ftp extends Alternc_Api_Legacyobject {
       if (!isset($options["id"])) {
           return new Alternc_Api_Response( array("code" => self::ERR_ALTERNC_FUNCTION, "message" => "Missing or invalid argument: ID") );
       }
-      $result=$this->admin->delete_ftp(intval($options["id"]));
+      $result=$this->ftp->delete_ftp(intval($options["id"]));
       if (!$result) {
           return $this->alterncLegacyErrorManager();
       } else {
