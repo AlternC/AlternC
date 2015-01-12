@@ -96,17 +96,8 @@ class Alternc_Api_Object_Ftp extends Alternc_Api_Legacyobject {
         if (!$result) {
             return $this->alterncLegacyErrorManager();
         } else {
-            $offset = -1;
-            $count = -1;
-            if (isset($options["count"]))
-                $count = intval($options["count"]);
-            if (isset($options["offset"]))
-                $offset = intval($options["offset"]);
+            list($offset, $count) = $this->offsetAndCount($options, count($result));
             if ($offset != -1 || $count != -1) {
-                if ($offset < 0 || $offset > count($result))
-                    $offset = 0;
-                if ($count < 0 || $count > 1000)
-                    $count = 1000;
                 $result = array_slice($result, $offset, $count);
             }
             return new Alternc_Api_Response(array("content" => $result));

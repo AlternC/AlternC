@@ -39,6 +39,25 @@ class Alternc_Api_Legacyobject {
         return new Alternc_Api_Response(array("code" => self::ERR_ALTERNC_FUNCTION, "message" => "[" . $err->clsid . "] " . $err->error));
     }
 
+    /** ensure that offset & count are set properly from $options.
+     */
+    protected function offsetAndCount($options, $max) {
+        $offset = -1;
+        $count = -1;
+        if (isset($options["count"]))
+            $count = intval($options["count"]);
+        if (isset($options["offset"]))
+            $offset = intval($options["offset"]);
+        if ($offset != -1 || $count != -1) {
+            if ($offset < 0 || $offset > $max)
+                $offset = 0;
+            if ($count < 0 || $count > 1000)
+                $count = 1000;
+        }
+        return array($offset, $count);
+    }
+
 }
 
-/* Aternc_Api_Legacyobject */
+// Aternc_Api_Legacyobject 
+
