@@ -15,6 +15,7 @@ class Alternc_Api_Legacyobject {
 
     const ERR_INVALID_ARGUMENT = 111201;
     const ERR_ALTERNC_FUNCTION = 111202;
+    const ERR_NOT_FOUND = 111203;
 
     function __construct($service) {
         global $admin, $cuid;

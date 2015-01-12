@@ -5,21 +5,6 @@
  */
 class Alternc_Api_Object_Account extends Alternc_Api_Legacyobject {
 
-    const ERR_NOT_FOUND = 1115103;
-
-    function __construct($service) {
-        global $admin, $cuid;
-        if (!($service instanceof Alternc_Api_Service)) {
-            throw new \Exception("Bad argument: service is not an Alternc_Api_Service", self::ERR_INVALID_ARGUMENT);
-        }
-        // We store the global $cuid to AlternC legacy classes
-        $this->cuid = $cuid = $service->token->uid;
-        $this->isAdmin = $service->token->isAdmin;
-        // We use the global $admin from AlternC legacy classes
-        $this->admin = $admin;
-        // Set the legacy rights:
-        $this->admin->enabled = $this->isAdmin;
-    }
 
     /** API Method from legacy class method admin->add_mem()
      * @param $options a hash with parameters transmitted to legacy call
