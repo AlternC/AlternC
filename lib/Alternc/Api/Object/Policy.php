@@ -37,8 +37,7 @@ class Alternc_Api_Object_Policy extends Alternc_Api_Legacyobject {
         if ($missing) {
             return new Alternc_Api_Response(array("code" => self::ERR_INVALID_ARGUMENT, "message" => "Missing or invalid argument: " . $missing));
         }
-        $result = $this->admin->editPolicy($options["policy"], 
-                $options["minsize"], $options["maxsize"], $options["classcount"], $options["allowlogin"]);
+        $result = $this->admin->editPolicy($options["policy"], $options["minsize"], $options["maxsize"], $options["classcount"], $options["allowlogin"]);
         if (!$result) {
             return $this->alterncLegacyErrorManager();
         } else {
@@ -58,6 +57,30 @@ class Alternc_Api_Object_Policy extends Alternc_Api_Legacyobject {
             return $this->alterncLegacyErrorManager();
         } else {
             return new Alternc_Api_Response(array("content" => $result));
+        }
+    }
+
+    /** API Method from legacy class method admin->checkPolicy($policy,$login,$password)
+     * @param $options a hash with parameters transmitted to legacy call
+     * mandatory parameters: policy login password
+     * @return Alternc_Api_Response TRUE if the password match the policy
+     */
+    function check($options) {
+        $mandatory = array("policy", "login", "password");
+        $missing = "";
+        foreach ($mandatory as $key) {
+            if (!isset($options[$key])) {
+                $missing.=$key . " ";
+            }
+        }
+        if ($missing) {
+            return new Alternc_Api_Response(array("code" => self::ERR_INVALID_ARGUMENT, "message" => "Missing or invalid argument: " . $missing));
+        }
+        $result = $this->admin->checkPolicy($options["policy"], $options["login"], $options["password"]);
+        if (!$result) {
+            return $this->alterncLegacyErrorManager();
+        } else {
+            return new Alternc_Api_Response(array("content" => true));
         }
     }
 
