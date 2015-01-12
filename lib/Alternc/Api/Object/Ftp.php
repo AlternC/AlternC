@@ -104,6 +104,23 @@ class Alternc_Api_Object_Ftp extends Alternc_Api_Legacyobject {
         }
     }
 
+    /** API Method from legacy class method ftp->is_ftp()
+     * @param $options a hash with parameters transmitted to legacy call
+     * mandatory parameters: DIR
+     * @return Alternc_Api_Response Integer the ID of the account in this folder, or FALSE
+     */
+    function isFtp($options) {
+        if (!isset($options["dir"])) {
+            return new Alternc_Api_Response(array("code" => self::ERR_INVALID_ARGUMENT, "message" => "Missing or invalid argument: DIR"));
+        }
+        $result = $this->ftp->is_ftp($options["dir"]);
+        if (!$result) {
+            return $this->alterncLegacyErrorManager();
+        } else {
+            return new Alternc_Api_Response(array("content" => $result));
+        }
+    }
+
 }
 
 // class Alternc_Api_Object_Ftp
