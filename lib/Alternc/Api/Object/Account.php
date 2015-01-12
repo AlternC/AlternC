@@ -141,6 +141,40 @@ class Alternc_Api_Object_Account extends Alternc_Api_Legacyobject {
         }
     }
 
+    /** API Method from legacy class method admin->normal2su()
+     * @param $options a hash with parameters transmitted to legacy call
+     * mandatory parameters: uid
+     * @return Alternc_Api_Response TRUE if the account has been set to be an administator 
+     */
+    function setAdmin($options) {
+        if (!isset($options["uid"])) {
+            return new Alternc_Api_Response(array("code" => self::ERR_ALTERNC_FUNCTION, "message" => "Missing or invalid argument: UID"));
+        }
+        $result = $this->admin->normal2su(intval($options["uid"]));
+        if (!$result) {
+            return $this->alterncLegacyErrorManager();
+        } else {
+            return new Alternc_Api_Response(array("content" => true));
+        }
+    }
+
+    /** API Method from legacy class method admin->su2normal()
+     * @param $options a hash with parameters transmitted to legacy call
+     * mandatory parameters: uid
+     * @return Alternc_Api_Response TRUE if the account has been set to NOT be an administrator
+     */
+    function unsetAdmin($options) {
+        if (!isset($options["uid"])) {
+            return new Alternc_Api_Response(array("code" => self::ERR_ALTERNC_FUNCTION, "message" => "Missing or invalid argument: UID"));
+        }
+        $result = $this->admin->su2normal(intval($options["uid"]));
+        if (!$result) {
+            return $this->alterncLegacyErrorManager();
+        } else {
+            return new Alternc_Api_Response(array("content" => true));
+        }
+    }
+
     /** API Method from legacy class method admin->get_list()
      * @param $options a hash with parameters transmitted to legacy call
      * non-mandatory parameters: ONE OF: 
