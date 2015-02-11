@@ -51,3 +51,6 @@ milter_default_action = accept
 milter_protocol = 6
 smtpd_milters = inet:127.0.0.1:8891
 non_smtpd_milters = inet:127.0.0.1:8891
+message_size_limit = 100000000
+mailbox_size_limit = 0
+enable_original_recipient = no
