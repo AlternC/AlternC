@@ -38,12 +38,13 @@ class m_log {
     $c=array();
     foreach( glob("${dir}/*log*") as $absfile) {
         $c[]=array("name"=>basename($absfile), 
-                   "creation_date"=>date("F d Y H:i:s.", filectime($absfile)),
+                   "creation_date"=>date("F d Y H:i:s", filectime($absfile)),
+		   "mtime" => filemtime($absfile),
                    "filesize"=>filesize($absfile),
-                   "downlink"=>"logs_download.php?file=".urlencode(basename($absfile)),
+                   "downlink"=>urlencode(basename($absfile)),
                   );
     }
-    usort($c,"m_log::compare_logname");
+    usort($c,"m_log::compare_logtime");
     return $c;
 
   }//list_logs
@@ -51,6 +52,11 @@ class m_log {
   // Used by list_logs_directory to sort
   private function compare_logname($a, $b) {
     return strcmp($a['name'],$b['name']);
+  }
+
+  // Used by list_logs_directory to sort
+  private function compare_logtime($a, $b) {
+    return $b['mtime']-$a['mtime'];
   }
 
 
@@ -91,13 +97,24 @@ class m_log {
   function download_link($file){
     global $err,$mem;
     $err->log("log","download_link");
-    header("Content-Disposition: attachment; filename=".$file); 
+    header("Content-Disposition: attachment; filename=".$file.""); 
     header("Content-Type: application/force-download");
     header("Content-Transfer-Encoding: binary");
     $f=$this->get_logs_directory();
     $ff=$f['dir']."/".basename($file);
     set_time_limit(0);
     readfile($ff);
+  }
+
+  function tail($file,$lines=20) {
+    global $err,$mem;
+    $err->log("log","tail");
+    $lines=intval($lines); if ($lines<=0) $lines=20;
+    $f=$this->get_logs_directory();
+    $ff=$f['dir']."/".basename($file);
+    unset($out);
+    exec("tail -".$lines." ".escapeshellarg($ff),$out);
+    return implode("\n",$out);
   }
 
 

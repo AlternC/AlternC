@@ -62,7 +62,11 @@ while (list($key,$val)=each($list)){
   <td><?php echo $v['name']; ?></td>  
   <td><?php echo $v['creation_date']; ?></td>  
   <td><?php echo format_size($v['filesize']); ?></td>  
-  <td><?php echo "<a href=\"".$v['downlink']."\">"._("Download")."</a>";?></td>
+  <td><?php echo "<a href=\"logs_download.php?file=".$v['downlink']."\">"._("Download")."</a>";
+    if ((time()-14400)<$v['mtime']) {
+      echo " &nbsp; <a href=\"logs_tail.php?file=".$v['downlink']."\">"._("Follow")."</a>";
+    }
+?></td>
   </tr>
 <?php
   } //foreach
