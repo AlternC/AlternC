@@ -54,11 +54,11 @@ if (!$string) {
   <input type="hidden" name="autoreload" value="<?php echo $autoreload; ?>" />
 <?php if ($autoreload) {
 ?>
-<input type="button" class="inb" name="autoreload" value="<?php __("Stop Auto Reload"); ?>" onclick="document.location='logs_tail.php?file=<?php echo $file; ?>&autoreload=0'"/>
+<input type="button" class="inb" name="autoreload" value="<?php __("Stop Auto Reload"); ?>" onclick="document.location='logs_tail.php?file=<?php echo $file; ?>&autoreload=0&lines=<?php echo $lines; ?>'"/>
 <?php
 } else {
 ?>
-<input type="button" class="inb" name="autoreload" value="<?php __("Auto Reload"); ?>" onclick="document.location='logs_tail.php?file=<?php echo $file; ?>'"/>
+<input type="button" class="inb" name="autoreload" value="<?php __("Auto Reload"); ?>" onclick="document.location='logs_tail.php?file=<?php echo $file; ?>&autoreload=1&lines=<?php echo $lines; ?>'"/>
 <?php
 } ?>
 <select id="lines" name="lines" onchange="document.forms['update'].submit()">
