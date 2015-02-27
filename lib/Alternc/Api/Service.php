@@ -143,6 +143,11 @@ class Alternc_Api_Service {
         $object = new $className($this);
 
         $action = $request->action;
+
+        if (strpos($action,"-")!==false) {
+            // replace - by an uppercase letter:
+            $action = lcfirst(str_replace(" ", "", implode("", array_map("ucfirst", explode("-", $action)))));
+        }
         if (!method_exists($object, $action))
             return new Alternc_Api_Response(array("code" => self::ERR_ACTION_NOT_FOUND, "message" => "Action not found for this object in this AlternC's instance"));
 
