@@ -8,7 +8,7 @@ domaines:
     noerase : 0
     dns_action : OK
     dns_result : 0
-    zonettl : 86400
+    zonettl : 3600
   - 
     id : 2
     compte : 2001     
@@ -18,4 +18,4 @@ domaines:
     noerase : 0
     dns_action : OK
     dns_result : 0
-    zonettl : 86400
+    zonettl : 3600

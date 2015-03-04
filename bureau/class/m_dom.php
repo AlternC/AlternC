@@ -1501,7 +1501,7 @@ class m_dom {
      *  TRUE sinon.
      *
      */
-    function edit_domain($dom, $dns, $gesmx, $force = false, $ttl = 86400) {
+    function edit_domain($dom, $dns, $gesmx, $force = false, $ttl = 3600) {
         global $db, $err, $L_MX, $classes, $cuid, $hooks;
         $err->log("dom", "edit_domain", $dom . "/" . $dns . "/" . $gesmx);
         // Locked ?
@@ -1528,7 +1528,7 @@ class m_dom {
 
         # Can't have ttl == 0. There is also a check in function_dns
         if ($ttl == 0) {
-            $ttl = 86400;
+            $ttl = 3600;
         }
 
         $t = checkfqdn($dom);
