@@ -578,7 +578,8 @@ class m_dom {
             }
         }
 
-        $db->query("update sub_domaines set enable='$status' where id = '" . intval($sub_id) . "';");
+        $db->query("update sub_domaines set enable='$status',web_action='UPDATE' where id = '" . intval($sub_id) . "';"); // UGLY patch fix activate deactivate sub-domains #1645
+
         $this->set_dns_action($jh['domain'], 'UPDATE');
 
         return true;
@@ -2124,6 +2125,12 @@ order by
                 break;
             default:
                 $sql = "UPDATE sub_domaines SET web_action='OK' WHERE id='$sub_domain_id'; ";
+		//UGLY PATCH activate / deactivate sub-domains #1645
+		$sqla= " UPDATE sub_domaines SET enable='ENABLED' WHERE id =$sub_domain_id and enable='ENABLE'; ";
+		$db->query($sqla);
+		$sqlb= " UPDATE sub_domaines SET enable='DISABLED' WHERE id =$sub_domain_id and enable='DISABLE'; ";
+		$db->query($sqlb);
+		//UGLY PATCH activate / deactivate sub-domains #1645
         }
         $db->query($sql);
         return true;
