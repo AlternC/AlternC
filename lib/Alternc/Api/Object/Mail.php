@@ -306,6 +306,32 @@ class Alternc_Api_Object_Mail extends Alternc_Api_Legacyobject {
         }
     }
 
+
+    /** API Method for email authentication
+     * @param $options a hash with email and password parameters.
+     * @return Alternc_Api_Response whose content is true / false if the auth 
+     * to this email was successfull.
+     */
+    function login($options) {
+        global $cuid;
+        $uid = $cuid;
+        if ($this->isAdmin && isset($options["uid"])) {
+            $uid = intval($options["uid"]);
+        }
+	if (!isset($options["email"]) || !isset($options["password"])) {
+	  return new Alternc_Api_Response(array("code" => self::ERR_INVALID_ARGUMENT, "message" => "Missing email or password argument"));
+	}
+	list($address,$domain)=explode("@",$options["email"],2);
+	$stmt = $this->db->prepare("SELECT enabled FROM domaines d,address a WHERE a.domain_id=d.id AND address=? AND domaine=? AND password=encrypt(?,password);");
+	$stmt->execute(array($address,$domain,$options["password"]));
+	$me = $stmt->fetch(PDO::FETCH_OBJ);
+        if ($me && $me->enabled) {
+            return new Alternc_Api_Response(array("content" => true));
+        } else {
+            return new Alternc_Api_Response(array("content" => false));
+        }
+    }
+
 }
 
 // class Alternc_Api_Object_Mail
