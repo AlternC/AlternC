@@ -28,8 +28,6 @@ class Alternc_Api_Auth_Sharedsecret implements Alternc_Api_Auth_Interface {
         $this->db = $service->getDb();
     }
 
-// __construct
-
     /**
      * Authenticate a user
      *
@@ -67,10 +65,10 @@ class Alternc_Api_Auth_Sharedsecret implements Alternc_Api_Auth_Interface {
     }
 
     /**
-     * instructions on how to use this Auth class
+     * Api Documentation
      * @return array("fields" => array("fields to send, required or not"), "description" => "description of this auth")
      */
-    function instructions() {
+    function documentation() {
         return array("fields" => array("login" => "AlternC user account", "secret" => "API Key, Shared secrets, valid for this account, stored in sharedsecret table."),
             "description" => "Authenticate against an Api Key, also called SharedSecret. distinct from the account's password, can be plenty and revoked independently"
         );

@@ -5,6 +5,8 @@
 
 /**
  * Service API used by server to export API methods
+ * this class can be used to implement an API service / endpoint
+ * a REST and POST api is provided as an example
  */
 class Alternc_Api_Service {
 
@@ -63,8 +65,6 @@ class Alternc_Api_Service {
             }
         }
     }
-
-// __construct
 
     /**
      * Authenticate into an AlternC server
@@ -144,7 +144,7 @@ class Alternc_Api_Service {
 
         $action = $request->action;
 
-        if (strpos($action,"-")!==false) {
+        if (strpos($action, "-") !== false) {
             // replace - by an uppercase letter:
             $action = lcfirst(str_replace(" ", "", implode("", array_map("ucfirst", explode("-", $action)))));
         }
@@ -154,6 +154,33 @@ class Alternc_Api_Service {
         $request->token = $this->token; // we receive $request->token_hash as a STRING, but we transmit its object as an Alternc_Api_Token.
         // TODO: log this Api Call
         return $object->$action($request->options);
+    }
+
+    /**
+     * Return documentation of the API, either general (no parameters) 
+     * or for a specific action or auth class
+     * @param string $element the name of the object for which documentation is requested
+     * @return array a documentation hash (key/value)
+     */
+    function doc($element) {
+        if (substr($element, 0, 5) == "auth/") {
+            $adapterName = "Alternc_Api_Auth_" . ucfirst(strtolower(substr($element, 5)));
+            if (!class_exists($adapterName))
+                return false;
+            $authAdapter = new $adapterName($this);
+            return $authAdapter->documentation();
+        } else {
+            list($class, $action) = explode("/", $element);
+            $className = "Alternc_Api_Object_" . ucfirst(strtolower($class));
+            if (!class_exists($className))
+                return false;
+            $object = new $className($this);
+            if (!$action) {
+                return $authAdapter->documentation();
+            } else {
+                return $authAdapter->documentation($action);
+            }
+        }
     }
 
     /**
@@ -167,4 +194,3 @@ class Alternc_Api_Service {
 }
 
 // class Alternc_Api_Service
-

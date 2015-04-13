@@ -9,17 +9,8 @@ class Alternc_Api_Object_Mysql extends Alternc_Api_Legacyobject {
 
     function __construct($service) {
         global $mysql;
-        if (!($service instanceof Alternc_Api_Service)) {
-            throw new \Exception("Bad argument: service is not an Alternc_Api_Service", self::ERR_INVALID_ARGUMENT);
-        }
-        // We store the global $cuid to AlternC legacy classes
-        $this->cuid = $cuid = $service->token->uid;
-        $this->isAdmin = $service->token->isAdmin;
-        // We use the global $admin from AlternC legacy classes
-        $this->admin = $admin;
+        parent::__construct($service);
         $this->mysql = $mysql;
-        // Set the legacy rights:
-        $this->admin->enabled = $this->isAdmin;
     }
 
     /** API Method from legacy class method admin->add_mem()
@@ -216,4 +207,4 @@ class Alternc_Api_Object_Mysql extends Alternc_Api_Legacyobject {
 
 }
 
-// class Alternc_Api_Object_Account
+// class Alternc_Api_Object_Mysql

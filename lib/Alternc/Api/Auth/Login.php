@@ -1,7 +1,8 @@
 <?php
 
 /**
- * Authentication API used by server to authenticate a user using its alternc login and password
+ * Authentication API used by server to authenticate a user 
+ * using his alternc login and password
  */
 class Alternc_Api_Auth_Login implements Alternc_Api_Auth_Interface {
 
@@ -27,7 +28,7 @@ class Alternc_Api_Auth_Login implements Alternc_Api_Auth_Interface {
      * Authenticate a user
      *
      * @param $options options, depending on the auth scheme, including uid for setuid users
-     *   here, login is the alternc username, and password is the password for this username.
+     *   here, login is the AlternC username, and password is the password for this username.
      * @return an Alternc_Api_Token
      */
     function auth($options) {
@@ -56,10 +57,10 @@ class Alternc_Api_Auth_Login implements Alternc_Api_Auth_Interface {
     }
 
     /**
-     * instructions on how to use this Auth class
+     * Api Documentation
      * @return array("fields" => array("fields to send, required or not"), "description" => "description of this auth")
      */
-    function instructions() {
+    function documentation() {
         return array("fields" => array("login" => "AlternC user account", "password" => "AlternC's user password stored in membres table."),
             "description" => "Authenticate against an AlternC user and password, the same as for the control panel"
         );
