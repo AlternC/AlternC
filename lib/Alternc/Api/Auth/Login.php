@@ -57,10 +57,10 @@ class Alternc_Api_Auth_Login implements Alternc_Api_Auth_Interface {
     }
 
     /**
-     * Api Documentation
+     * instructions on how to use this Auth class
      * @return array("fields" => array("fields to send, required or not"), "description" => "description of this auth")
      */
-    function documentation() {
+    function instructions() {
         return array("fields" => array("login" => "AlternC user account", "password" => "AlternC's user password stored in membres table."),
             "description" => "Authenticate against an AlternC user and password, the same as for the control panel"
         );

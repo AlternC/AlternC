@@ -19,8 +19,8 @@ interface Alternc_Api_Auth_Interface {
     function auth($options);
 
     /**
-     * Api Documentation
+     * instructions on how to use this Auth class
      * @return array("fields" => array("fields to send, required or not"), "description" => "description of this auth")
      */
-    function documentation();
+    function instructions();
 }

@@ -193,24 +193,4 @@ if (preg_match("#^/api/rest/([^/]*)/([^/\?]*)[/\?]?#", $_SERVER["REQUEST_URI"], 
     }
 }
 
-function doc($data) {
-    global $dbh;
-    $options["databaseAdapter"] = $dbh;
-    try {
-        $service = new Alternc_Api_Service($options);
-
-        $response = $service->documentation($data);
-        return $response;
-    } catch (Exception $e) {
-        // something went wrong, we spit out the exception as an Api_Response
-        // TODO : Don't do that on production! spit out a generic "fatal error" code and LOG the exception !
-        header("Content-Type: application/json");
-        $response = new Alternc_Api_Response(array("code" => $e->getCode(), "message" => $e->getMessage()));
-        echo $response->toJson();
-        exit();
-    }
-}
-
-doc("auth/login");
-
 echo "I did nothing. Did you call the api properly?";

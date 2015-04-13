@@ -65,10 +65,10 @@ class Alternc_Api_Auth_Sharedsecret implements Alternc_Api_Auth_Interface {
     }
 
     /**
-     * Api Documentation
+     * instructions on how to use this Auth class
      * @return array("fields" => array("fields to send, required or not"), "description" => "description of this auth")
      */
-    function documentation() {
+    function instructions() {
         return array("fields" => array("login" => "AlternC user account", "secret" => "API Key, Shared secrets, valid for this account, stored in sharedsecret table."),
             "description" => "Authenticate against an Api Key, also called SharedSecret. distinct from the account's password, can be plenty and revoked independently"
         );

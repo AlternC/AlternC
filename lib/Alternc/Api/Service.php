@@ -184,6 +184,33 @@ class Alternc_Api_Service {
     }
 
     /**
+     * Return documentation of the API, either general (no parameters) 
+     * or for a specific action or auth class
+     * @param string $element the name of the object for which documentation is requested
+     * @return array a documentation hash (key/value)
+     */
+    function doc($element) {
+        if (substr($element, 0, 5) == "auth/") {
+            $adapterName = "Alternc_Api_Auth_" . ucfirst(strtolower(substr($element, 5)));
+            if (!class_exists($adapterName))
+                return false;
+            $authAdapter = new $adapterName($this);
+            return $authAdapter->documentation();
+        } else {
+            list($class, $action) = explode("/", $element);
+            $className = "Alternc_Api_Object_" . ucfirst(strtolower($class));
+            if (!class_exists($className))
+                return false;
+            $object = new $className($this);
+            if (!$action) {
+                return $authAdapter->documentation();
+            } else {
+                return $authAdapter->documentation($action);
+            }
+        }
+    }
+
+    /**
      * Getter for the databaseAdapter 
      * (used by authAdapter)
      */
