@@ -322,16 +322,59 @@ class Alternc_Api_Object_Mail extends Alternc_Api_Legacyobject {
 	  return new Alternc_Api_Response(array("code" => self::ERR_INVALID_ARGUMENT, "message" => "Missing email or password argument"));
 	}
 	list($address,$domain)=explode("@",$options["email"],2);
-	$stmt = $this->db->prepare("SELECT enabled FROM domaines d,address a WHERE a.domain_id=d.id AND address=? AND domaine=? AND password=encrypt(?,password);");
-	$stmt->execute(array($address,$domain,$options["password"]));
+	$stmt = $this->db->prepare("SELECT enabled,password FROM domaines d,address a WHERE a.domain_id=d.id AND address=? AND domaine=?;");
+	$stmt->execute(array($address,$domain));
 	$me = $stmt->fetch(PDO::FETCH_OBJ);
         if ($me && $me->enabled) {
-            return new Alternc_Api_Response(array("content" => true));
+	  // Check password : 
+	  return new Alternc_Api_Response(array("content" => $this->check_password($options["password"],$me->password)  ));
         } else {
             return new Alternc_Api_Response(array("content" => false));
         }
     }
 
+
+    function check_password($password, $hash)    {
+      if ($hash == '') { // no password
+	  return FALSE;
+	}
+ 
+      if ($hash{0} != '{') { // plaintext or crypt() password ? 
+	if ($hash{0} == '$' ) {
+	  if (crypt($password,$hash)==$hash) 
+	    return TRUE;
+	} else { // plaintext ? (NOT RECOMMENDED !!!)
+	  if ($password == $hash)
+	    return TRUE;
+	}
+	return FALSE;
+      }
+      
+      if (substr($hash,0,7) == '{crypt}') {
+	if (crypt($password, substr($hash,7)) == substr($hash,7))
+	  return TRUE;
+	return FALSE;
+      }
+      elseif (substr($hash,0,5) == '{MD5}') {
+	$encrypted_password = '{MD5}' . base64_encode(md5( $password,TRUE));
+      }
+      elseif (substr($hash,0,6) == '{SHA1}') {
+	$encrypted_password = '{SHA}' . base64_encode(sha1( $password, TRUE ));
+      }
+      elseif (substr($hash,0,6) == '{SSHA}') {
+	$salt = substr(base64_decode(substr($hash,6)),20);
+	$encrypted_password = '{SSHA}' . base64_encode(sha1( $password.$salt, TRUE ). $salt);
+      } else {
+	echo "Unsupported password hash format";
+	return FALSE;
+      }
+      
+      if ($hash == $encrypted_password)
+	return TRUE;
+      
+      return FALSE;
+    }
+    
 }
 
 // class Alternc_Api_Object_Mail
