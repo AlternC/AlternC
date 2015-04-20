@@ -77,7 +77,7 @@ if ($fatal) {
     <td>
 <?php if ($quota->cancreate("mail")) { ?>
     <form method="post" action="mail_doadd.php" id="main" name="mail_create">
-      <input type="text" class="int intleft" style="text-align: right" name="mail_arg" value="<?php ehe($mail_arg); ?>" size="32" id="mail_arg" maxlength="255" /><span id="emaildom" class="int intright"><?php echo "@".$domain; ?></span>
+      <input type="text" class="int intleft" style="text-align: right" name="mail_arg" value="<?php ehe($mail_arg); ?>" size="24" id="mail_arg" maxlength="255" /><span id="emaildom" class="int intright"><?php echo "@".$domain; ?></span>
       <input type="hidden" name="domain_id"  value="<?php echo $domain_id;?>" />
       <input type="submit" name="submit" class="inb add" value="<?php __("Create this email address"); ?>"  onClick="return false_if_empty('mail_arg', '<?php echo addslashes(_("Can't have empty mail."));?>');" />
     </form>
