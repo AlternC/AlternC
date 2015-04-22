@@ -666,25 +666,24 @@ class m_bro {
       $err->raise("bro",_("File or folder name is incorrect"));
       return 1;
     }
-    $file=escapeshellarg($file);
-    $dest_to_fix=$dest;
-    $dest=escapeshellarg($dest);
-    #$dest_to_fix=str_replace(getuserpath(),'',$dest);
-	 
-    // TODO new version of tar supports `tar xf ...` so there is no
-    // need to specify the compression format
-    exec("tar -xf ".escapeshellarg($file)." -C ".escapeshellarg($dest), $void, $ret);
-    if ($ret) {
-      exec("tar -xjf ".escapeshellarg($file)." -C ".escapeshellarg($dest), $void, $ret);
+    $lfile=strtolower($file);
+    if (substr($lfile,-4)==".tar" || substr($lfile,-8)==".tar.bz2" || substr($lfile,-7)==".tar.gz" || substr($lfile,-6)==".tar.z") {
+      // TODO new version of tar supports `tar xf ...` so there is no
+      // need to specify the compression format
+      echo "<p>"._("Uncompressing through TAR")."</p><pre style=\"overflow: scroll; height: 200px\">";
+      passthru("tar -xf ".escapeshellarg($file)." -C ".escapeshellarg($dest)." 2>&1", $ret);
     }
-    if ($ret) {
-      $cmd="unzip -o ".escapeshellarg($file)." -d ".escapeshellarg($dest);
-      exec($cmd, $void, $ret);
+    if (substr($lfile,-4)==".zip") {
+      echo "<p>"._("Uncompressing through UNZIP")."</p><pre style=\"overflow: scroll; height: 200px\">";
+      $cmd="unzip -o ".escapeshellarg($file)." -d ".escapeshellarg($dest)." 2>&1";
+      passthru($cmd, $ret);
     }
-    if ($ret) {
-      $cmd="gunzip ".escapeshellarg($file);
-      exec($cmd, $void, $ret);
+    if (substr($lfile,-3)==".gz") {
+      echo "<p>"._("Uncompressing through GUNZIP")."</p><pre style=\"overflow: scroll; height: 200px\">";
+      $cmd="gunzip ".escapeshellarg($file)." 2>&1";
+      passthru($cmd, $ret);
     }
+    echo "</pre>";
     if ($ret) {
       $err->raise("bro",_("I cannot find a way to extract the file %s, it is an unsupported compressed format"), $file);
     }

@@ -141,7 +141,6 @@ if (!empty($formu) && $formu) {
 }
 
 if (isset($actextract) && $actextract) {
-  print _("extracting...")."<br />\n"; flush();
   if ($bro->ExtractFile($R. '/' . $fileextract, $R)) {
     echo "<p class=\"alert alert-danger\">";
     print $err->errstr();
