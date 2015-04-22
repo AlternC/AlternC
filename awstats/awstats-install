@@ -28,5 +28,8 @@ then
         then
         /usr/lib/alternc/awstats.cache.php
     fi
+    # we disable the package-installed awstats cron to prevent bothering us with error emails
+    echo "Removing awstats packge-installed crontab, in favor of AlternC's one"
+    rm -f /etc/cron.d/awstats
 fi
 
