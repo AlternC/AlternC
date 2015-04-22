@@ -8,6 +8,6 @@
 +
 + -- Benjamin Sonntag <benjamin@sonntag.fr>  Thu, 22 Apr 2015 18:19:00 +0100
 +
-alternc (3.1.4) oldstable; urgency=low
-
-  * ensure that values in sub_domaines are prefixed by / for hosting subdomains
+ alternc (3.1.4) oldstable; urgency=low
+ 
+   * ensure that values in sub_domaines are prefixed by / for hosting subdomains
