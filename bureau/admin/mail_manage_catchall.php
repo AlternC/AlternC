@@ -44,13 +44,28 @@ if (is_null($domain_id)) {
 if (!is_null($target_type)) {
   switch ($target_type) {
     case "none":
-      $error=( ($mail->catchall_del($domain_id))?_("Catchall successfully deleted"):$err->errstr() );
+      $mail->catchall_del($domain_id);
+      $error=_("Catchall successfully deleted");
+      require_once("mail_list.php");
+      exit();
       break;
     case "domain":
-      $error=( ($mail->catchall_set($domain_id, $target_domain))?_("Catchall successfully updated"):$err->errstr() );
+      if ($mail->catchall_set($domain_id, $target_domain)) {
+	$error=_("Catchall successfully updated");
+	require_once("mail_list.php");
+	exit();
+      } else {
+        $error=$err->errstr();
+      }
       break;
     case "mail":
-      $error=( ($mail->catchall_set($domain_id, $target_mail))?_("Catchall successfully updated"):$err->errstr() );
+      if ($mail->catchall_set($domain_id, $target_mail)) {
+	$error=_("Catchall successfully updated");
+	require_once("mail_list.php");
+	exit();
+      } else {
+        $error=$err->errstr();
+      }
       break;
     default:
       $error=_("Unknown target type");

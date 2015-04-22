@@ -8,6 +8,7 @@ alternc (3.1.4) oldstable; urgency=low
   * default message size limit to 100M, no mailbox size limit in postfix
   * fix removal of awstats-package crontab in favor of AlternC's one
   * fix unzip/untar/ungzip of files from the browser (double escapeshellarg)
+  * fix catchall management (bugguy & crappy error messages)
 
  -- Benjamin Sonntag <benjamin@sonntag.fr>  Mon, 20 Apr 2015 18:00:12 +0200
 

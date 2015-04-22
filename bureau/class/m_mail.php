@@ -187,6 +187,7 @@ class m_mail {
       }
     }
     $this->catchall_del($domain_id);
+    $err->error="";
     return $this->create_alias($domain_id, '', $target, "catchall", true);
   }
 
@@ -718,8 +719,9 @@ ORDER BY
     $err->log("mail","create_alias","creating $m alias for $alias type $type");
 
     $mail_id=$mail->create($dom_id,$m,$type,$dontcheck);
+    if (!$mail_id) return false;
     $this->set_details($mail_id,0,0,$alias,"dovecot",$dontcheck);
-    // FIXME return error code
+    return true; 
   }
 
 
