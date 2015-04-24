@@ -7,7 +7,6 @@ password = %%db_mail_pwd%%
 hosts =%%dbhost%%
 dbname = %%dbname%%
 
-query = select delivery from mailbox join address on address.id = mailbox.address_id join domaines on domaines.id = address.domain_id where concat(address.address,'@',domaines.domaine) ='%s'
+query = SELECT delivery FROM mailbox JOIN address ON address.id = mailbox.address_id JOIN domaines ON domaines.id = address.domain_id WHERE address.address=SUBSTRING_INDEX('%s','@',1) AND domaines.domaine=SUBSTRING_INDEX('%s','@',1)
 
- 
 

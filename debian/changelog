@@ -9,6 +9,7 @@ alternc (3.1.4) oldstable; urgency=low
   * fix removal of awstats-package crontab in favor of AlternC's one
   * fix unzip/untar/ungzip of files from the browser (double escapeshellarg)
   * fix catchall management (bugguy & crappy error messages)
+  * fix #1646 transport sql is not using indexes
 
  -- Benjamin Sonntag <benjamin@sonntag.fr>  Mon, 20 Apr 2015 18:00:12 +0200
 
