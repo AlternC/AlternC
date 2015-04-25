@@ -77,7 +77,7 @@ if (isset($error) && $error) {
       <td>
         <input type="text" class="int" name="dir" id="dir" value="<?php empty($dir)?@ehe("/".$rr[0]["dir"]):@ehe($dir); ?>" size="20" maxlength="64" />
 				<?php display_browser( empty($dir)?("/".( isset($rr[0]["dir"])?$rr[0]["dir"]:'') ):$dir , "main.dir" ); ?>
-		<p><?php __("This is the root folder for this FTP user. i.e. this FTP user can access to this forlder and all its sub-folders."); ?></p>
+		<p><?php __("This is the root folder for this FTP user. i.e. this FTP user can access to this folder and all its sub-folders."); ?></p>
 		
       </td>
     </tr>

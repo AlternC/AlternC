@@ -229,7 +229,7 @@ foreach ($problems as $pr => $lm) { // $problems can be empty but can't be null/
 
 
 <div id="tabsdom-addsub">
-<h3><?php printf(_("Add a subdomains to %s"),$domain); ?></h3>
+<h3><?php printf(_("Add a subdomain to %s"),$domain); ?></h3>
 <?php
 $isedit=false;
 require_once('dom_edit.inc.php');
