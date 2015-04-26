@@ -10,7 +10,7 @@ msgstr ""
 "$\n"
 "Report-Msgid-Bugs-To: i18n@alternc.org\n"
 "POT-Creation-Date: 2014-03-28 16:38+0100\n"
-"PO-Revision-Date: 2015-04-25 19:01+0200\n"
+"PO-Revision-Date: 2015-04-26 19:38+0200\n"
 "Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
 "Language-Team: français <team@alternc.org>\n"
 "Language: fr\n"
@@ -3850,12 +3850,10 @@ msgstr ""
 "ci-dessus."
 
 #: ../admin/sql_getparam.php:53
-#, fuzzy
 msgid "Your current connection settings are"
-msgstr "Voici vos paramètres actuels"
+msgstr "Vos paramètres de connexion actuels sont"
 
 #: ../admin/sql_getparam.php:59
-#, fuzzy
 msgid "Mysql Server"
 msgstr "Serveur MySQL"
 
@@ -3864,15 +3862,16 @@ msgid "Database"
 msgstr "Base de données"
 
 #: ../admin/sql_getparam.php:79
-#, fuzzy
 msgid "Web interface PhpMyAdmin"
-msgstr "PhpMyAdmin Général"
+msgstr "Interface web PhpMyAdmin "
 
 #: ../admin/sql_getparam.php:91
 msgid ""
 "You changed the MySQL User base configuration. Please refer to your "
 "configuration"
 msgstr ""
+"Vous avez changé vos paramètres de bases de MySQL, référez-vous à vos "
+"paramètres"
 
 #: ../admin/sql_getparam.php:94
 msgid "Back to the MySQL database list"
@@ -3880,7 +3879,7 @@ msgstr "Retour à la liste des bases MySQL"
 
 #: ../admin/sql_list.php:45
 msgid "You have no sql user at the moment."
-msgstr ""
+msgstr "Vous n'avez pas d'utilisateur SQL pour le moment."
 
 #: ../admin/sql_list.php:54 ../admin/sql_list.php:65
 msgid "Backup"
@@ -3891,9 +3890,8 @@ msgid "Restore"
 msgstr "Restauration"
 
 #: ../admin/sql_list.php:54 ../admin/sql_list.php:68
-#, fuzzy
 msgid "Show Settings"
-msgstr "Configuration"
+msgstr "Afficher les paramètres"
 
 #: ../admin/sql_list.php:77
 msgid "Delete the checked databases"
@@ -3909,7 +3907,7 @@ msgstr "Base de données MySQL"
 
 #: ../admin/sql_list.php:107
 msgid "Can't have empty MySQL suffix"
-msgstr ""
+msgstr "Le suffixe du nom de base ne peut pas être vide"
 
 #: ../admin/sql_list.php:107
 msgid "Create this new MySQL database."
@@ -3948,10 +3946,12 @@ msgstr "Restaurer ma base de données"
 #: ../admin/sql_restore.php:67
 msgid "Tip: you can restore a file directly in the File Browser"
 msgstr ""
+"Astuce : vous pouvez restaurer un fichier directement dans le gestionnaire "
+"de fichiers"
 
 #: ../admin/sql_restore.php:72
 msgid "Please the complete path of the filename"
-msgstr ""
+msgstr "Entrez le chemin complet du fichier"
 
 #: ../admin/sql_restore.php:81
 msgid "Note: If the filename ends with .gz, it will be uncompressed before."
@@ -3980,14 +3980,12 @@ msgid "Confirm the deletion of the following MySQL users"
 msgstr "Confirmez l'effacement des utilisateurs MySQL suivants"
 
 #: ../admin/sql_users_del.php:76
-#, fuzzy
 msgid "No, don't delete the MySQL user"
-msgstr "Créer ce nouvel utilisateur MySQL"
+msgstr "Non, ne pas effacer cet utilisateur MySQL"
 
 #: ../admin/sql_users_del.php:76
-#, fuzzy
 msgid "Yes, delete the MySQL user"
-msgstr "Créer ce nouvel utilisateur MySQL"
+msgstr "Oui, effacer cet utilisateur MySQL"
 
 #: ../admin/sql_users_dorights.php:54
 msgid "The rights has been successfully applied to the user"
@@ -4039,85 +4037,89 @@ msgid "during the month"
 msgstr "durant le mois"
 
 #: ../admin/vm.php:52 ../class/m_lxc.php:62
-#, fuzzy
 msgid "Console access"
-msgstr "Accès à AlternC"
+msgstr "Accès à un Terminal"
 
 #: ../admin/vm.php:69
 msgid "You can start a virtual machine."
-msgstr ""
+msgstr "Vous pouvez démarrer une machine virtuelle"
 
 #: ../admin/vm.php:72
-#, fuzzy
 msgid "Click here to start a virtual machine."
-msgstr "Cliquez ici pour continuer"
+msgstr "Cliquez ici pour démarrer une machine virtuelle"
 
 #: ../admin/vm.php:78
 msgid "Start time"
-msgstr ""
+msgstr "Heure de démarrage"
 
 #: ../admin/vm.php:79
 msgid "SSH Fingerprint"
-msgstr ""
+msgstr "Empreinte SSH"
 
 #: ../admin/vm.php:80
 msgid "Useful command"
-msgstr ""
+msgstr "Commandes utiles"
 
 #: ../admin/vm.php:86
 msgid "You can stop your virtual machine."
-msgstr ""
+msgstr "Vous pouvez éteindre votre machine virtuelle"
 
 #: ../admin/vm.php:89
-#, fuzzy
 msgid "Click here to stop your running virtual machine."
-msgstr "Cliquez ici pour continuer"
+msgstr "Cliquez ici pour éteindre votre machine virtuelle"
 
 #: ../admin/vm.php:99
 msgid "Tips"
-msgstr ""
+msgstr "Astuce"
 
 #: ../admin/vm.php:104
 msgid "Available softwares"
-msgstr ""
+msgstr "Logiciels disponibles"
 
 #: ../admin/vm.php:105
 msgid "Remotely start/stop a VM"
-msgstr ""
+msgstr "Pour démarrer ou arrêter un VM à distance"
 
 #: ../admin/vm.php:110
 msgid ""
 "You can script the launch the console access in command line by using this "
 "url:"
 msgstr ""
+"Vous pouvez lancer votre accès à un terminal en ligne de commande en "
+"utilisant cette url : "
 
 #: ../admin/vm.php:112
 msgid "You can halt the vm by using:"
-msgstr ""
+msgstr "Vous pouvez arrêter la VM via :"
 
 #: ../admin/vm.php:114
 msgid ""
 "And you can see existing vm information (if the vm is running) by using:"
 msgstr ""
+"Vous pouvez connaître les informations de votre VM (si elle tourne) via :"
 
 #: ../admin/vm.php:116
 msgid ""
 "Warning: if you do not use HTTPS, your password will be transfered without "
 "any protection"
 msgstr ""
+"Attention : si vous n'utilisez pas HTTPS, votre mot de passe sera transmis "
+"en clair sur Internet"
 
 #: ../admin/vm.php:120
 msgid "To access a remote console with SSH, you can use Putty."
-msgstr ""
+msgstr "Pour accéder à un terminal via SSH, vous pouvez utiliser Putty."
 
 #: ../admin/vm.php:122
 msgid "To transfer files, you can use Filezilla in SFTP mode."
 msgstr ""
+"Pour transférer des fichiers, vous pouvez utiliser Filezilla avec le "
+"protocole SFTP."
 
 #: ../class/class_system_bind.php:485
-#, fuzzy
 msgid "The zone file of this domain is locked. Contact your administrator."
-msgstr "Ce compte est maintenant un compte administrateur"
+msgstr ""
+"La zone DNS de ce domaine est verrouillée, contactez votre administrateur."
 
 # Variables used in functions.php3
 #: ../class/functions.php:400
@@ -4174,9 +4176,8 @@ msgid "Next Page"
 msgstr "Page suivante"
 
 #: ../class/functions.php:814
-#, fuzzy
 msgid "Clic here to generate a password"
-msgstr "Veuillez entrer un mot de passe"
+msgstr "Cliquez ici pour générer un mot de passe"
 
 #: ../class/functions.php:856 ../class/functions.php:857
 msgid "Choose a folder..."
@@ -4184,16 +4185,15 @@ msgstr "Choisir un répertoire ..."
 
 #: ../class/m_action.php:214
 msgid "Error setting actions"
-msgstr ""
+msgstr "Erreur lors du lancement de l'action"
 
 #: ../class/m_action.php:234
-#, fuzzy
 msgid "Error selecting  old actions"
-msgstr "Paramètres de votre compte AlternC"
+msgstr "Erreur lors de la sélection de l'ancienne action"
 
 #: ../class/m_action.php:256
 msgid "Error purging old actions"
-msgstr ""
+msgstr "Erreur lors de la suppression des anciennes actions."
 
 #: ../class/m_admin.php:62
 msgid "This TLD is forbidden"
@@ -4216,7 +4216,6 @@ msgid "Domain can be installed, no check at all"
 msgstr "Le domaine peut être installé sans aucun contrôle"
 
 #: ../class/m_admin.php:67
-#, fuzzy
 msgid "Domain can be installed, force NO DNS hosting"
 msgstr "Le domaine peut être installé, (ne gère pas les DNS cependant)"
 
@@ -4225,7 +4224,6 @@ msgid "Administration"
 msgstr "Administration"
 
 #: ../class/m_admin.php:92
-#, fuzzy
 msgid "Manage AlternC accounts"
 msgstr "Gérer les comptes AlternC"
 
@@ -4239,221 +4237,222 @@ msgstr "PhpMyAdmin"
 
 #: ../class/m_admin.php:120
 msgid "Switch debug Off"
-msgstr ""
+msgstr "Arrêter le Debug"
 
 #: ../class/m_admin.php:120
 msgid "Switch debug On"
-msgstr ""
+msgstr "Activer le Debug"
 
 #: ../class/m_admin.php:127
-#, fuzzy
 msgid "Applying..."
-msgstr "extraction..."
+msgstr "En cours..."
 
 #: ../class/m_admin.php:128
 msgid "Domain changes are already applying"
-msgstr ""
+msgstr "L'application des changements est déjà en cours"
 
 #: ../class/m_admin.php:134
-#, fuzzy
 msgid "Apply changes"
-msgstr "Politique de mot de passe modifiée"
+msgstr "Appliquer les modifications"
 
 #: ../class/m_admin.php:137
 msgid ""
 "Server configuration changes are applied every 5 minutes. Do you want to do "
 "it right now?"
 msgstr ""
+"L'application des modifications sur les serveurs a lieu toutes les 5 "
+"minutes. Voulez-vous les appliquer maintenant ?"
 
 #: ../class/m_admin.php:197 ../class/m_admin.php:253 ../class/m_admin.php:327
 #: ../class/m_admin.php:416 ../class/m_admin.php:462 ../class/m_admin.php:498
 #: ../class/m_admin.php:580 ../class/m_admin.php:759 ../class/m_admin.php:802
 #: ../class/m_admin.php:831 ../class/m_admin.php:866
 msgid "-- Only administrators can access this page! --"
-msgstr ""
+msgstr "-- Seuls les administrateurs peuvent accéder à cette page ! --"
 
 #: ../class/m_admin.php:368
 msgid ""
 "Invalid pattern type provided. Are you even performing a legitimate action?"
 msgstr ""
+"Type de motif invalide. Êtes-vous sûr de demander une action légitime ?"
 
 #: ../class/m_admin.php:424
 msgid "Subject, message and sender are mandatory"
-msgstr ""
+msgstr "Le sujet, le message et l'expéditeur sont obligatoires"
 
 #: ../class/m_admin.php:429
 msgid "Sender is syntaxically incorrect"
-msgstr ""
+msgstr "L'expéditeur est syntaxiquement incorrect"
 
 #: ../class/m_admin.php:521
 msgid "-- Only administrators can do that! --"
-msgstr ""
+msgstr "-- Seuls les administrateurs peuvent faire cela ! --"
 
 #: ../class/m_admin.php:527
-#, fuzzy
 msgid "You don't seem to be allowed to delegate this domain"
-msgstr "Vous avez demandé la suppression du domaine %s"
+msgstr "Il semble que vous n'êtes pas autorisé à déléguer ce domaine"
 
 #: ../class/m_admin.php:584
 msgid "Missing db_server field"
-msgstr ""
+msgstr "Le champ db_server manque"
 
 #: ../class/m_admin.php:588 ../class/m_admin.php:593
 msgid "All fields are mandatory"
-msgstr ""
+msgstr "Tous les champs sont requis"
 
 #: ../class/m_admin.php:598
-#, fuzzy
 msgid "Please enter a valid email address"
-msgstr "Ajouter cette adresse email"
+msgstr "Merci d'entrer une adresse email valide"
 
 #: ../class/m_admin.php:604
 msgid "Login can only contains characters a-z and 0-9"
-msgstr ""
+msgstr "Le nom d'utilisateur ne peut contenir que les caractères a-z et 0-9"
 
 #: ../class/m_admin.php:611
 msgid "The login is too long (14 chars max)"
-msgstr ""
+msgstr "Le nom d'utilisateur est trop long (14 caractères maximum)"
 
 #: ../class/m_admin.php:616
 msgid "Login can only contains characters a-z, 0-9 and -"
-msgstr ""
+msgstr "Le nom d'utilisateur ne peut contenir que les caractères a-z, 0-9 et -"
 
 #: ../class/m_admin.php:662
 msgid "This login already exists"
-msgstr ""
+msgstr "Ce nom d'utilisateur existe déjà"
 
 #: ../class/m_admin.php:685
 #, php-format
 msgid "query failed: %s "
-msgstr ""
+msgstr "Une requête a échoué : %s"
 
 #: ../class/m_admin.php:712
 #, php-format
 msgid "New account %s from %s on %s"
-msgstr ""
+msgstr "Nouveau compte %s de %s à %s"
 
 #: ../class/m_admin.php:717
 #, php-format
 msgid "Cannot send email to %s"
-msgstr ""
+msgstr "Impossible d'envoyer un mail à %s"
 
 #: ../class/m_admin.php:721
 #, php-format
 msgid "Query failed: %s"
-msgstr ""
+msgstr "Une requête a échoué : %s"
 
 #: ../class/m_admin.php:1032
-#, fuzzy
 msgid "This account is ALREADY an administrator account"
-msgstr "Ce compte est maintenant un compte administrateur"
+msgstr "Ce compte est DÉJÀ un compte administrateur"
 
 #: ../class/m_admin.php:1056
-#, fuzzy
 msgid "This account is NOT an administrator account!"
-msgstr "Ce compte est maintenant un compte administrateur"
+msgstr "Ce compte n'est PAS un compte administrateur"
 
 #: ../class/m_admin.php:1219
-#, fuzzy, php-format
+#, php-format
 msgid "Domain '%s' not found."
-msgstr "Politique non trouvée"
+msgstr "Domaine '%s' non trouvé."
 
 #: ../class/m_admin.php:1239 ../class/m_admin.php:1275
 #: ../class/m_admin.php:1333
-#, fuzzy
 msgid "This TLD does not exist"
-msgstr "L'utilisateur n'existe pas"
+msgstr "Ce TLD n'existe pas"
 
 #: ../class/m_admin.php:1300
 msgid "The TLD name is mandatory"
-msgstr ""
+msgstr "Le nom du TLD est requis"
 
 #: ../class/m_admin.php:1307
 msgid "This TLD already exist"
-msgstr ""
+msgstr "Ce TLD existe déjà"
 
 #: ../class/m_admin.php:1454
-#, fuzzy
 msgid "Please enter a login"
-msgstr "Veuillez entrer un mot de passe"
+msgstr "Veuillez entrer un nom d'utilisateur"
 
 #: ../class/m_admin.php:1464
 msgid "-- Program error -- The requested password policy does not exist!"
 msgstr ""
+"-- Erreur du programme -- La politique de mot de passe demandée n'existe "
+"pas !"
 
 #: ../class/m_admin.php:1472
 msgid "The password length is too short according to the password policy"
 msgstr ""
+"Le mot de passe est trop court conformément à la politique de mot de passe"
 
 #: ../class/m_admin.php:1477
 msgid "The password is too long according to the password policy"
 msgstr ""
+"Le mot de passe est trop long conformément à la politique de mot de passe"
 
 #: ../class/m_admin.php:1487
 msgid ""
 "The password policy prevents you to use your login name inside your password"
 msgstr ""
+"La politique de mots de passe interdit l'utilisation de votre nom "
+"d'utilisateur dans votre mot de passe"
 
 #: ../class/m_admin.php:1511
 msgid ""
 "Your password contains not enough different classes of character, between "
 "low-case, up-case, figures and special characters."
 msgstr ""
+"Votre mot de passe ne contient pas assez de classes de caractères, entre les "
+"majuscules, minuscules, chiffres et caractères spéciaux."
 
 #: ../class/m_authip.php:369
 msgid "Object not available"
-msgstr ""
+msgstr "Objet non disponible"
 
 #: ../class/m_authip.php:378
 #, php-format
 msgid "Can't identified class for the protocole %s"
-msgstr ""
+msgstr "Impossible d'identifier una classe pour le protocole %s"
 
 #: ../class/m_bro.php:73
 msgid "1 column, detailed"
-msgstr ""
+msgstr "1 colonne, détaillé"
 
 #: ../class/m_bro.php:73
 msgid "2 columns, short"
-msgstr ""
+msgstr "2 colonnes, court"
 
 #: ../class/m_bro.php:73
 msgid "3 columns, short"
-msgstr ""
+msgstr "3 colonnes, court"
 
 #: ../class/m_bro.php:74
 msgid "tar.Z (Unix)"
-msgstr ""
+msgstr ".tar.Z (Unix)"
 
 #: ../class/m_bro.php:74
 msgid "tar.bz2 (Linux)"
-msgstr ""
+msgstr ".tar.bz2 (Linux)"
 
 #: ../class/m_bro.php:74
 msgid "tgz (Linux)"
-msgstr ""
+msgstr "tgz (Linux)"
 
 #: ../class/m_bro.php:74
 msgid "zip (Windows/Dos)"
-msgstr ""
+msgstr "zip (Windows/Dos)"
 
 #: ../class/m_bro.php:76
 msgid "Edit the newly created file"
-msgstr ""
+msgstr "Modifier le fichier récemment créé"
 
 #: ../class/m_bro.php:76
-#, fuzzy
 msgid "Go back to the file manager"
 msgstr "Retour au gestionnaire de fichiers"
 
 #: ../class/m_bro.php:205
-#, fuzzy
 msgid "This directory do not exist"
-msgstr "L'utilisateur n'existe pas"
+msgstr "Le dossier n'existe pas"
 
 #: ../class/m_bro.php:402 ../class/m_bro.php:1165
 msgid "Cannot create the requested directory. Please check the permissions"
-msgstr ""
+msgstr "Impossible de créer le dossier demandé, vérifiez les droits d'accès"
 
 #: ../class/m_bro.php:408 ../class/m_bro.php:429 ../class/m_bro.php:457
 #: ../class/m_bro.php:483 ../class/m_bro.php:517 ../class/m_bro.php:527
@@ -4461,27 +4460,27 @@ msgstr ""
 #: ../class/m_bro.php:705 ../class/m_bro.php:710 ../class/m_bro.php:807
 #: ../class/m_bro.php:974 ../class/m_bro.php:1004
 msgid "File or folder name is incorrect"
-msgstr ""
+msgstr "Nom de fichier ou de dossier incorrect"
 
 #: ../class/m_bro.php:434 ../class/m_bro.php:612
 msgid "Cannot create the requested file. Please check the permissions"
-msgstr ""
+msgstr "Impossible de créer le fichier demandé, vérifiez les droits d'accès"
 
 #: ../class/m_bro.php:531 ../class/m_bro.php:714
 msgid "You cannot move or copy a file to the same folder"
-msgstr ""
+msgstr "Vous ne pouvez pas déplacer ou copier un fichier dans le même dossier"
 
 #: ../class/m_bro.php:620
 msgid "The uploaded file exceeds the max file size allowed"
-msgstr ""
+msgstr "Les fichiers téléchargés dépassent la taille maximale autorisée"
 
 #: ../class/m_bro.php:629
 msgid "Undefined error "
-msgstr ""
+msgstr "erreur non définie"
 
 #: ../class/m_bro.php:632
 msgid "Error during the upload of the file: "
-msgstr ""
+msgstr "Une erreur est survenue lors de l'envoi du fichier : "
 
 #: ../class/m_bro.php:684
 #, php-format
@@ -4489,191 +4488,198 @@ msgid ""
 "I cannot find a way to extract the file %s, it is an unsupported compressed "
 "format"
 msgstr ""
+"Je ne trouve pas de moyen d'extraire le fichiers %s, il semble être dans un "
+"format de compression non géré"
 
 #: ../class/m_bro.php:803
 msgid "Cannot read the requested file. Please check the permissions"
-msgstr ""
+msgstr "Impossible de lire le fichier demandé. Vérifiez les droits d'accès"
 
 #: ../class/m_bro.php:881
-#, fuzzy
 msgid "File not in authorized directory"
-msgstr "Ajout d'un utilisateur autorisé"
+msgstr "Le fichier n'est pas dans un dossier autorisé"
 
 #: ../class/m_bro.php:999
 msgid "Cannot edit the requested file. Please check the permissions"
-msgstr ""
+msgstr "Impossible de modifier le fichier demandé. Vérifiez les droits d'accès"
 
 #: ../class/m_cron.php:40
 msgid "Daily"
-msgstr ""
+msgstr "Quotidien"
 
 #: ../class/m_cron.php:41
-#, fuzzy
 msgid "Hour"
-msgstr "Heures"
+msgstr "Heure"
 
 #: ../class/m_cron.php:42
 msgid "Half Hour"
-msgstr ""
+msgstr "Demi-Heure"
 
 #: ../class/m_cron.php:125
 msgid "URL not valid"
-msgstr ""
+msgstr "URL invalide"
 
 #: ../class/m_cron.php:135
-#, fuzzy
 msgid "Email address is not valid"
-msgstr "Liste des adresses emails du domaine %s"
+msgstr "Adresse email invalide"
 
 #: ../class/m_cron.php:144
 msgid "You quota of cron entries is over. You cannot create more cron entries"
 msgstr ""
+"Votre quota de tâches planifiées est atteint. Vous ne pouvez pas créer plus "
+"de tâches"
 
 #: ../class/m_cron.php:153
 msgid "Identity problem"
-msgstr ""
+msgstr "Problème d'identification"
 
 #: ../class/m_dom.php:210
 msgid "Err: failed to prepare the zone"
-msgstr ""
+msgstr "Erreur : impossible de préparer la zone "
 
 #: ../class/m_dom.php:237
-#, fuzzy
 msgid "Missing domain name"
-msgstr "Edition du domaine %s"
+msgstr "Nom de domaine manquant"
 
 #: ../class/m_dom.php:544
 msgid "The name MUST contain only letter and digits"
-msgstr ""
+msgstr "Le nom ne doit contenir QUE des lettres ou chiffres"
 
 #: ../class/m_dom.php:573 ../class/m_dom.php:1393
 msgid ""
 "The parameters for this subdomain and domain type are invalid. Please check "
 "for subdomain entries incompatibility"
 msgstr ""
+"Les paramètres de ce sous-domaine sont invalides. Vérifiez la compatibilité "
+"de vos entrées avec d'autres sous-domaines"
 
 #: ../class/m_dom.php:692 ../class/m_dom.php:1138 ../class/m_dom.php:1209
 #: ../class/m_dom.php:1364 ../class/m_dom.php:1454 ../class/m_dom.php:1503
 #: ../class/m_dom.php:1847
 msgid "--- Program error --- No lock on the domains!"
-msgstr ""
+msgstr "--- Erreur du programme --- Pas de verrou sur le domaine !"
 
 #: ../class/m_dom.php:699 ../class/m_dom.php:1143 ../class/m_dom.php:1388
 #: ../class/m_dom.php:1530
 msgid "The domain name is syntaxically incorrect"
-msgstr ""
+msgstr "Le nom du domaine est syntaxiquement incorrect"
 
 #: ../class/m_dom.php:705 ../class/m_dom.php:750 ../class/m_dom.php:1614
 msgid ""
 "The requested domain is forbidden in this server, please contact the "
 "administrator"
 msgstr ""
+"Vous n'avez pas le droit d'installer ce nom de domaine sur le serveur, "
+"conactez l'administrateur"
 
 #: ../class/m_dom.php:709
 msgid "This domain is the server's domain! You cannot host it on your account!"
 msgstr ""
+"Ce nom de domaine est celui du serveur ! Vous ne pouvez pas l'héberger sur "
+"votre compte ! "
 
 #: ../class/m_dom.php:714 ../class/m_dom.php:719
-#, fuzzy
 msgid "The domain already exist"
-msgstr "Edition de fichier"
+msgstr "Ce domaine existe déjà"
 
 #: ../class/m_dom.php:726 ../class/m_dom.php:1510
 msgid ""
 "The last member of the domain name is incorrect or cannot be hosted in that "
 "server"
 msgstr ""
+"Le dernier membre du domaine est incorrect ou ne peut pas être hébergé sur "
+"ce serveur"
 
 #: ../class/m_dom.php:730 ../class/m_dom.php:734
-#, fuzzy
 msgid "The domain cannot be found in the whois database"
-msgstr "Liste des noms de domaines en erreur dans la base des domaines."
+msgstr "Le nom de domaine n'a pas été trouvé dans la base whois"
 
 #: ../class/m_dom.php:757
 msgid "Your domain quota is over, you cannot create more domain names"
 msgstr ""
+"Votre quota de noms de domaines est attein, vous ne pouvez pas créer plus de "
+"noms de domaines"
 
 #: ../class/m_dom.php:770
 msgid "An unexpected error occured when creating the domain"
 msgstr ""
+"Une erreur inattendu est survenue lors de l'installation du nom de domaine "
 
 #: ../class/m_dom.php:779 ../class/m_dom.php:1150
-#, fuzzy, php-format
+#, php-format
 msgid "Domain '%s' not found"
-msgstr "Politique non trouvée"
+msgstr "Domaine '%s' non trouvé"
 
 #: ../class/m_dom.php:895
-#, fuzzy
 msgid "Could not delete default type"
-msgstr "n'a pas pu être effacé"
+msgstr "Impossible d'effacer le type par défaut"
 
 #: ../class/m_dom.php:1049
 msgid "The Whois database is unavailable, please try again later"
 msgstr ""
+"La base Whois n'est pas disponible pour l'instant. Merci de réessayer "
+"ultérieurement"
 
 #: ../class/m_dom.php:1056 ../class/m_dom.php:1514
-#, fuzzy
 msgid "The domain cannot be found in the Whois database"
-msgstr "Liste des noms de domaines en erreur dans la base des domaines."
+msgstr "Le nom de domaine n'a pas été trouvé dans la base whois"
 
 #: ../class/m_dom.php:1214 ../class/m_dom.php:1458
-#, fuzzy
 msgid "The sub-domain does not exist"
-msgstr "L'adresse email <b>%s</b> n'existe pas&nbsp;!"
+msgstr "Ce sous-domaine n'existe pas"
 
 #: ../class/m_dom.php:1253
 msgid "invalid url"
-msgstr ""
+msgstr "url invalide"
 
 #: ../class/m_dom.php:1263
-#, fuzzy
 msgid "The folder you entered is incorrect or does not exist"
-msgstr "Vos informations d'identification sont incorrectes"
+msgstr "Le dossier que vous avez entré est incorrect ou n'existe pas"
 
 #: ../class/m_dom.php:1272 ../class/m_dom.php:1280
-#, fuzzy
 msgid "The ip address is invalid"
-msgstr "Liste des adresses emails du domaine %s"
+msgstr "Adresse IP invalide"
 
 #: ../class/m_dom.php:1288
-#, fuzzy
 msgid "The name you entered is incorrect"
-msgstr "Vos informations d'identification sont incorrectes"
+msgstr "Le nom que vous avez entré est incorrect"
 
 #: ../class/m_dom.php:1296
-#, fuzzy
 msgid "The TXT value you entered is incorrect"
-msgstr "Vos informations d'identification sont incorrectes"
+msgstr "La valeur TXT entrée est incorrecte"
 
 #: ../class/m_dom.php:1301
 msgid "Invalid domain type selected, please check"
-msgstr ""
+msgstr "Type de domaine invalide, réessayez"
 
 #: ../class/m_dom.php:1376
 msgid ""
 "There is some forbidden characters in the sub domain (only A-Z 0-9 and - are "
 "allowed)"
 msgstr ""
+"Vous avez utilisé des caractères interdits pour le sous-domaine. (seuls A-Z "
+"0-9 et - sont autorisés)"
 
 #: ../class/m_dom.php:1415 ../class/m_dom.php:1426
 msgid "Cannot write to the destination folder"
-msgstr ""
+msgstr "Impossible d'écrire dans le dossier cible"
 
 #: ../class/m_dom.php:1518
 msgid ""
 "The DNS of this domain do not match the server's DNS. Please change your "
 "domain's DNS before you install it again"
 msgstr ""
+"Les DNS du domaine ne correspondent pas à ceux du serveur. Modifiez les DNS "
+"de votre domaine avant de tenter à nouveau"
 
 #: ../class/m_dom.php:1535
-#, fuzzy, php-format
+#, php-format
 msgid "The domain name %s does not exist"
-msgstr "L'adresse email <b>%s</b> n'existe pas"
+msgstr "Le domaine %s n'existe pas"
 
 #: ../class/m_dom.php:1542
-#, fuzzy
 msgid "No change has been requested..."
-msgstr "Vos paramètres d'aide ont été modifiés."
+msgstr "Aucune modification n'a été demandée"
 
 #: ../class/m_dom.php:1550 ../class/m_dom.php:1555
 msgid ""
@@ -4681,21 +4687,22 @@ msgid ""
 "the mail here. Make sure to update your MX entries or no mail will be "
 "received"
 msgstr ""
+"Il n'y a pas d'enregistrement DNS MX pointant sur ce serveur, et vous nous "
+"demander d'héberger le mail. Assurez-vous que les entrées MX pointent sur ce "
+"serveur où vous ne pourrez pas recevoir de mail."
 
 #: ../class/m_dom.php:1606 ../class/m_dom.php:1631
-#, fuzzy
 msgid "The IP address you entered is incorrect"
-msgstr "Vos informations d'identification sont incorrectes"
+msgstr "L'adresse IP entrée est incorrecte"
 
 #: ../class/m_dom.php:1724 ../class/m_dom.php:1730 ../class/m_dom.php:1748
 #: ../class/m_dom.php:1754
-#, fuzzy
 msgid "This domain is not installed in your account"
-msgstr "Ce compte est maintenant un compte normal"
+msgstr "Ce domaine n'est pas installé sur votre compte"
 
 #: ../class/m_dom.php:1797
 msgid "The specified slave account already exists"
-msgstr ""
+msgstr "Ce compte DNS secondaire existe déjà"
 
 #: ../class/m_dom.php:1828
 msgid "--- Program error --- Lock already obtained!"
@@ -4707,16 +4714,16 @@ msgid ""
 "Problem on %s: there is more than 1 web configuration going to be generated "
 "for this sub-domain."
 msgstr ""
+"Probleme sur %s : il y a plus d'une configuration web pour ce sous-domaine !"
 
 #: ../class/m_dom.php:2182
 #, php-format
 msgid "Problem on %s: we do not know domain's type <b>%s</b>."
-msgstr ""
+msgstr "Problème sur %s : type de domaine inconnu <b>%s</b>."
 
 #: ../class/m_dom.php:2193
-#, fuzzy
 msgid "Locally hosted"
-msgstr "Non géré"
+msgstr "Hébergé localement"
 
 #: ../class/m_dom.php:2194
 #, fuzzy
@@ -4725,59 +4732,51 @@ msgstr "Redirection vers l'URL : "
 
 #: ../class/m_dom.php:2195
 msgid "IPv4 redirect"
-msgstr ""
+msgstr "Adresse IPv4"
 
 #: ../class/m_dom.php:2196
-#, fuzzy
 msgid "Webmail access"
 msgstr "Accès au webmail"
 
 #: ../class/m_dom.php:2197
-#, fuzzy
 msgid "Squirrelmail Webmail access"
-msgstr "Accès au webmail"
+msgstr "Accès au webmail Squirrelmail"
 
 #: ../class/m_dom.php:2198
-#, fuzzy
 msgid "Roundcube Webmail access"
-msgstr "Accès au webmail"
+msgstr "Accès au webmail Roundcube"
 
 #: ../class/m_dom.php:2199
 msgid "IPv6 redirect"
-msgstr ""
+msgstr "Adresse IPv6"
 
 #: ../class/m_dom.php:2200
 msgid "CNAME DNS entry"
-msgstr ""
+msgstr "Entrée DNS CNAME"
 
 #: ../class/m_dom.php:2201
-#, fuzzy
 msgid "TXT DNS entry"
-msgstr "Crée seulement l'entrée DNS"
+msgstr "Entrée DNS TXT"
 
 #: ../class/m_dom.php:2202
-#, fuzzy
 msgid "MX DNS entry"
-msgstr "Crée seulement l'entrée DNS"
+msgstr "Entrée DNS TXT"
 
 #: ../class/m_dom.php:2203
-#, fuzzy
 msgid "secondary MX DNS entry"
-msgstr "Crée seulement l'entrée DNS"
+msgstr "Entrée DNS MX Secondaire"
 
 #: ../class/m_dom.php:2204
-#, fuzzy
 msgid "Default mail server"
-msgstr "Valeur par défaut"
+msgstr "Serveur de mail par défaut"
 
 #: ../class/m_dom.php:2205
 msgid "Default backup mail server"
-msgstr ""
+msgstr "Serveur de mail de secours par défaut"
 
 #: ../class/m_dom.php:2206
-#, fuzzy
 msgid "AlternC panel access"
-msgstr "Accès à AlternC"
+msgstr "Accès au Bureau AlternC"
 
 #: ../class/m_err.php:66 ../class/m_err.php:98
 msgid "err_"
@@ -4788,129 +4787,118 @@ msgid "FTP accounts"
 msgstr "Comptes FTP"
 
 #: ../class/m_ftp.php:105
-#, fuzzy
 msgid "This account do not exist or is not of this account"
-msgstr "Ce compte est maintenant un compte normal"
+msgstr "Ce compte n'existe pas ou n'est pas à vous"
 
 #: ../class/m_ftp.php:117
 msgid "Error during update"
-msgstr ""
+msgstr "Erreur lors de la mise à jour"
 
 #: ../class/m_ftp.php:151
-#, fuzzy
 msgid "No FTP account found"
-msgstr "Aucun compte n'existe pour l'instant"
+msgstr "Aucun compte FTP"
 
 #: ../class/m_ftp.php:187 ../class/m_ftp.php:262 ../class/m_ftp.php:321
-#, fuzzy
 msgid "This FTP account does not exist"
-msgstr "L'utilisateur n'existe pas"
+msgstr "Ce compte FTP n'existe pas"
 
 #: ../class/m_ftp.php:217
 #, php-format
 msgid "FTP login is incorrect: too many '%s'"
-msgstr ""
+msgstr "Nom d'utilisateur FTP incorrect : trop de '%s'"
 
 #: ../class/m_ftp.php:224
-#, fuzzy
 msgid "FTP login is incorrect"
-msgstr "Vos informations d'identification sont incorrectes"
+msgstr "Nom d'utilisateur FTP incorrect"
 
 #: ../class/m_ftp.php:271 ../class/m_ftp.php:350
 msgid "The chosen prefix is not allowed"
-msgstr ""
+msgstr "Le prefix demandé n'est pas autorisé"
 
 #: ../class/m_ftp.php:281 ../class/m_ftp.php:359
-#, fuzzy
 msgid "This FTP account already exists"
-msgstr "Retour à la liste des adresses email"
+msgstr "Ce compte FTP existe déjà"
 
 #: ../class/m_ftp.php:289 ../class/m_ftp.php:369
-#, fuzzy
 msgid "The directory cannot be created"
-msgstr "n'a pas pu être effacé"
+msgstr "Le dossier n'a pas pu être créé"
 
 #: ../class/m_ftp.php:346
-#, fuzzy
 msgid "Password can't be empty"
-msgstr "Changer le mot de passe"
+msgstr "Le mot de passe ne peut être vide"
 
 #: ../class/m_ftp.php:385
 msgid "Your FTP account quota is over. You cannot create more ftp accounts"
 msgstr ""
+"Votre quota de comptes FTP est atteint. Vous ne pouvez pas créer d'autres "
+"comptes FTP"
 
 #: ../class/m_hta.php:65
 msgid "Protected folders"
 msgstr "Répertoires protégés"
 
 #: ../class/m_hta.php:91 ../class/m_hta.php:353 ../class/m_hta.php:403
-#, fuzzy, php-format
+#, php-format
 msgid "The folder '%s' does not exist"
-msgstr "Le membre '%s' n'existe pas"
+msgstr "Le dossier '%s' n'existe pas"
 
 #: ../class/m_hta.php:99 ../class/m_hta.php:104 ../class/m_hta.php:114
 #: ../class/m_hta.php:311 ../class/m_hta.php:360 ../class/m_hta.php:418
-#, fuzzy
 msgid "File already exist"
-msgstr "Edition de fichier"
+msgstr "Ce fichier existe déjà"
 
 #: ../class/m_hta.php:108
 msgid "Restricted area"
-msgstr ""
+msgstr "Zone protégée"
 
 #: ../class/m_hta.php:137
-#, fuzzy
 msgid "No protected folder"
-msgstr "Répertoires protégés"
+msgstr "Aucun dossier protégé"
 
 #: ../class/m_hta.php:228 ../class/m_hta.php:260
 #, php-format
 msgid "I cannot read the file '%s'"
-msgstr ""
+msgstr "Impossible de lire le fichier '%s'"
 
 #: ../class/m_hta.php:248
 #, php-format
 msgid "Unexpected: No changes made to '%s'"
-msgstr ""
+msgstr "Inattendu : aucune modification effectuée sur '%s'"
 
 #: ../class/m_hta.php:253
-#, fuzzy, php-format
+#, php-format
 msgid "I could not delete the file '%s'"
-msgstr "n'a pas pu être effacé"
+msgstr "Impossible d'effacer le fichier '%s'"
 
 #: ../class/m_hta.php:263
 #, php-format
 msgid "I cannot delete the file '%s/.htpasswd'"
-msgstr ""
+msgstr "Impossible d'effacer le fichier '%s/.htpasswd'"
 
 #: ../class/m_hta.php:288
-#, fuzzy
 msgid "Please enter a user"
-msgstr "Veuillez entrer un mot de passe"
+msgstr "Veuillez entrer un nom d'utilisateur"
 
 #: ../class/m_hta.php:319
-#, fuzzy, php-format
+#, php-format
 msgid "The user '%s' already exist for this folder"
-msgstr "qui existe dans ce répertoire"
+msgstr "L'utilisateur '%s' existe déjà dans ce dossier"
 
 #: ../class/m_hta.php:331
-#, fuzzy
 msgid "Please enter a valid username"
-msgstr "Veuillez entrer un mot de passe"
+msgstr "Veuillez entrer un nom d'utilisateur valide"
 
 #: ../class/m_hta.php:474
-#, fuzzy
 msgid "An incompatible .htaccess file exists in this folder"
-msgstr "qui existe dans ce répertoire"
+msgstr "Un fichier .htaccess incompatible existe dans ce dossier"
 
 #: ../class/m_log.php:59
 msgid "Logs"
 msgstr "Journaux"
 
 #: ../class/m_lxc.php:134
-#, fuzzy
 msgid "VM already started"
-msgstr "Désactiver"
+msgstr "VM déjà démarrée"
 
 #: ../class/m_mail.php:96
 msgid "Email Addresses"
@@ -4919,65 +4907,64 @@ msgstr "Adresses email"
 #: ../class/m_mail.php:184 ../class/m_mail.php:269 ../class/m_mail.php:354
 #: ../class/m_mail.php:481 ../class/m_mail.php:535
 msgid "The email you entered is syntaxically incorrect"
-msgstr ""
+msgstr "L'adresse email entrée est syntaxiquement incorrecte"
 
 #: ../class/m_mail.php:217
-#, fuzzy
 msgid "Email account password"
-msgstr "Gérer les utilisateurs et mots de passe"
+msgstr "Mot de passe du compte mail"
 
 #: ../class/m_mail.php:307
-#, fuzzy
 msgid "No email found for this query"
-msgstr "Ajout d'un mail sur le domaine %s"
+msgstr "Aucun email trouvé pour cette requête "
 
 #: ../class/m_mail.php:366
-#, fuzzy
 msgid "You cannot create email addresses: your quota is over"
-msgstr "Vous ne pouvez plus créer de statistiques, votre quota est atteint."
+msgstr "Vous ne pouvez plus créer d'adresses email, votre quota est atteint."
 
 #: ../class/m_mail.php:372
-#, fuzzy
 msgid "This email address already exists"
-msgstr "Retour à la liste des adresses email"
+msgstr "Cette adresse email existe déjà"
 
 #: ../class/m_mail.php:378
 msgid "An unexpected error occured when creating the email"
 msgstr ""
+"Une erreur inattendue est survenue lors de la création de l'adresse email"
 
 #: ../class/m_mail.php:432
 msgid "This email is not yours, you can't change anything on it"
-msgstr ""
+msgstr "Cette adresse email n'est pas à vous, vous ne pouvez pas la modifier"
 
 #: ../class/m_mail.php:495
-#, fuzzy, php-format
+#, php-format
 msgid "The email %s does not exist, it can't be deleted"
-msgstr "L'adresse email <b>%s</b> n'existe pas&nbsp;!"
+msgstr "L'adresse email <b>%s</b> n'existe pas, et ne peut pas être effacée"
 
 #: ../class/m_mail.php:499
 #, php-format
 msgid "The email %s is already marked for deletion, it can't be deleted"
 msgstr ""
+"L'adresse email %s est déjà marquée pour effacement, et ne peut pas être "
+"effacée"
 
 #: ../class/m_mail.php:508
-#, fuzzy, php-format
+#, php-format
 msgid "The email %s has been marked for deletion"
-msgstr "Le domaine %s a été effacé avec succès."
+msgstr "L'adresse email %s a été marquée pour effacement"
 
 #: ../class/m_mail.php:514
-#, fuzzy, php-format
+#, php-format
 msgid "The email %s has been successfully deleted"
-msgstr "Le domaine %s a été effacé avec succès."
+msgstr "L'adresse email %s a été effacée avec succès"
 
 #: ../class/m_mail.php:546
 #, php-format
 msgid "The email %s does not exist, it can't be undeleted"
-msgstr ""
+msgstr "L'adresse email %s n'existe pas, et ne peut pas être restaurée"
 
 #: ../class/m_mail.php:550
 #, php-format
 msgid "The email %s is special, it can't be undeleted"
-msgstr ""
+msgstr "L'adresse email %s est spéciale et ne peut pas être restaurée"
 
 #: ../class/m_mail.php:554
 #, php-format
@@ -4985,11 +4972,13 @@ msgid ""
 "Sorry, deletion of email %s is already in progress, or not marked for "
 "deletion, it can't be undeleted"
 msgstr ""
+"Désolé, l'effacement de l'adresse %s est déjà en cours, ou l'adresse n'est "
+"pas effacée. Elle ne peut pas être restaurée"
 
 #: ../class/m_mail.php:563
-#, fuzzy, php-format
+#, php-format
 msgid "The email %s has been undeleted"
-msgstr "L'adresse email <b>%s</b> a été supprimée&nbsp;!"
+msgstr "L'adresse email <b>%s</b> a été restaurée"
 
 #: ../class/m_mail.php:566
 #, php-format
@@ -5001,71 +4990,72 @@ msgid ""
 "There is forbidden characters in your email address. You can't make it a POP/"
 "IMAP account, you can only use it as redirection to other emails"
 msgstr ""
+"Vous utilisez des caractères interdits dans votre adresse email. Vous ne "
+"pouvez pas en faire un compte POP/IMAP, mais uniquement une redirection vers "
+"d'autres adresses"
 
 #: ../class/m_mail.php:667
 msgid ""
 "You set a quota smaller than the current mailbox size. Since it's not "
 "allowed, we set the quota to the current mailbox size"
 msgstr ""
+"Vous avez fixé le quota d'espace à une taille inférieure à la taille "
+"actuelle. C'est impossible, le quota a donc été fixé à la taille actuelle de "
+"la boîte"
 
 #: ../class/m_mail.php:854
-#, fuzzy
 msgid "The slave MX account was not found"
-msgstr "Politique non trouvée"
+msgstr "Le compte MX secondaire n'a pas été trouvé"
 
 #: ../class/m_mail.php:903
 msgid "Problem: can't create default bounce mail"
-msgstr ""
+msgstr "Problème : impossible de créer l'adresse email de bounce"
 
 #: ../class/m_mem.php:95 ../class/m_mem.php:101 ../class/m_mem.php:168
 #: ../class/m_mem.php:299
 msgid "User or password incorrect"
-msgstr ""
+msgstr "Utilisateur ou mot de passe incorrect"
 
 #: ../class/m_mem.php:105 ../class/m_mem.php:483
-#, fuzzy
 msgid "This account is locked, contact the administrator"
-msgstr "Ce compte est maintenant un compte administrateur"
+msgstr "Ce compte est verrouillé, contactez l'administrateur"
 
 #: ../class/m_mem.php:112 ../class/m_mem.php:271
 msgid ""
 "This website is currently under maintenance, login is currently disabled."
-msgstr ""
+msgstr "Ce site est actuellement en maintenance, la connexion est désactivée."
 
 #: ../class/m_mem.php:127
 msgid "Your IP isn't allowed to connect"
-msgstr ""
+msgstr "Votre adresse IP n'est pas autorisée à se connecter"
 
 #: ../class/m_mem.php:243
-#, fuzzy
 msgid "Missing password"
-msgstr "Mot de passe initial"
+msgstr "Mot de passe manquant"
 
 #: ../class/m_mem.php:252
 msgid "Identity lost or unknown, please login"
-msgstr ""
+msgstr "Identité perdue ou inconnue, merci de vous connecter"
 
 #: ../class/m_mem.php:258 ../class/m_mem.php:347
 msgid "Session unknown, contact the administrator"
-msgstr ""
+msgstr "Session inconnue, contactez l'administrateur"
 
 #: ../class/m_mem.php:264 ../class/m_mem.php:352
 msgid "IP address incorrect, please contact the administrator"
-msgstr ""
+msgstr "Adresse IP incorrecte, merci de contacter l'administrateur"
 
 #: ../class/m_mem.php:341
-#, fuzzy
 msgid "Cookie incorrect, please accept the session cookie"
 msgstr "Vous devez accepter le cookie de session pour pouvoir vous connecter"
 
 #: ../class/m_mem.php:388
-#, fuzzy
 msgid "You are not allowed to change your password."
-msgstr "Vous ne pouvez pas changer votre mot de passe"
+msgstr "Vous ne pouvez pas changer votre mot de passe."
 
 #: ../class/m_mem.php:392
 msgid "The old password is incorrect"
-msgstr ""
+msgstr "L'ancien mot de passe est incorrect"
 
 # Change Mail Password plugin for Squirrelmail / AlternC
 # Copyright (C) 2004 Benjamin Sonntag <benjamin@octopuce.com>
@@ -5073,18 +5063,16 @@ msgstr ""
 # Benjamin Sonntag 2004 <benjamin@octopuc.com>
 #
 #: ../class/m_mem.php:396 ../class/m_mem.php:445
-#, fuzzy
 msgid "The new passwords are differents, please retry"
-msgstr "Vos nouveaux mots de passes sont différents, réessayez."
+msgstr "Vos nouveaux mots de passes sont différents, réessayez"
 
 #: ../class/m_mem.php:420
 msgid "You must be a system administrator to do this."
-msgstr ""
+msgstr "Vous devez être administrateur du système pour effectuer cela."
 
 #: ../class/m_mem.php:440
-#, fuzzy
 msgid "This account is locked, contact the administrator."
-msgstr "Ce compte est maintenant un compte administrateur"
+msgstr "Ce compte est verrouillé, contactez l'administrateur."
 
 #: ../class/m_mem.php:448
 #, php-format
@@ -5108,6 +5096,24 @@ msgid ""
 "\n"
 "Cordially.\n"
 msgstr ""
+"Bonjour,\n"
+"\n"
+"Vous avez demandé la modification de votre mot de passe pour le compte %s "
+"sur le serveur %s\n"
+"Voici votre nom d'utilisateur et votre mot de passe d'accès au bureau :\n"
+"\n"
+"--------------------------------------\n"
+"\n"
+"Nom d'utilisateur : %s\n"
+"Mot de passe : %s\n"
+"\n"
+"--------------------------------------\n"
+"\n"
+"Note : si vous n'avez pas demandé cette modification, cela signifie que "
+"quelqu'un l'a fait à votre place. Vous pouvez ignorer ce message. Si cela se "
+"reproduit, merci de contacter l'administrateur du serveur.\n"
+"\n"
+"Cordialement.\n"
 
 #: ../class/m_mem.php:493
 #, php-format
@@ -5132,11 +5138,28 @@ msgid ""
 "\n"
 "Cordially.\n"
 msgstr ""
+"Bonjour,\n"
+"\n"
+"Quelqu'un (peut-être vous) a demandé la modification de l'adresse email du "
+"compte %s sur le serveur %s\n"
+"Pour confirmer cette requête, rendez-vous à l'adresse : \n"
+"\n"
+"%s\n"
+"\n"
+"(Attention : Si l'adresse est affichée sur 2 lignes, remettez là sur une "
+"ligne avant d'y accéder)\n"
+"Le bureau vous demandera la clé affichée à l'écran quand l'adresse email a "
+"été modifiée.\n"
+"\n"
+"Note : si vous n'avez pas demandé cette modification, cela signifie que "
+"quelqu'un l'a fait à votre place. Vous pouvez ignorer ce message. Si cela se "
+"reproduit, merci de contacter l'administrateur du serveur.\n"
+"\n"
+"Cordialement.\n"
 
 #: ../class/m_mem.php:534
-#, fuzzy
 msgid "The information you entered is incorrect."
-msgstr "Vos informations d'identification sont incorrectes"
+msgstr "Les informations que vous avez entré sont incorrectes."
 
 #: ../class/m_menu.php:113
 msgid "Home / Information"
@@ -5159,11 +5182,12 @@ msgid ""
 "There are no databases in db_servers for this user. Please contact your "
 "administrator."
 msgstr ""
+"Il n'y a pas de base dans db_servers pour cet utilisateur. Contactez "
+"l'administrateur."
 
 #: ../class/m_mysql.php:110
-#, fuzzy
 msgid "MySQL"
-msgstr "Utilisateurs MySQL"
+msgstr "MySQL"
 
 #: ../class/m_mysql.php:119
 msgid "Databases"
@@ -5171,12 +5195,12 @@ msgstr "Bases de données"
 
 #: ../class/m_mysql.php:178
 msgid "Cannot connect to PhpMyAdmin"
-msgstr ""
+msgstr "Impossible de se connecter à PhpMyAdmin"
 
 #: ../class/m_mysql.php:219 ../class/m_mysql.php:384
-#, fuzzy, php-format
+#, php-format
 msgid "Database %s not found"
-msgstr "Politique non trouvée"
+msgstr "Base de données %s non trouvée"
 
 #: ../class/m_mysql.php:245
 msgid "Your databases quota is over. You cannot create more databases"

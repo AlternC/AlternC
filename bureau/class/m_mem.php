@@ -102,7 +102,7 @@ class m_mem {
       return false;
     } 
     if (!$db->f("enabled")) {
-      $err->raise("mem",_("This account is locked, contact the administrator"));
+      $err->raise("mem",_("This account is locked, contact the administrator."));
       return false;
     }
     $this->user=$db->Record;
@@ -483,7 +483,7 @@ Cordially.
     $err->log("mem","changemail1",$newmail);
     $db->query("SELECT * FROM membres WHERE uid='$cuid';");
     if (!$db->num_rows()) {
-      $err->raise("mem",_("This account is locked, contact the administrator"));
+      $err->raise("mem",_("This account is locked, contact the administrator."));
       return false;
     }
     $db->next_record();
