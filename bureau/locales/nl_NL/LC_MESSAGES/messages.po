@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: i18n@alternc.org\n"
-"POT-Creation-Date: 2014-03-28 16:38+0100\n"
+"POT-Creation-Date: 2015-04-27 09:02+0200\n"
 "PO-Revision-Date: 2012-10-17 09:52+0200\n"
 "Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
 "Language-Team: Dutch <team@alternc.org>\n"
@@ -137,7 +137,7 @@ msgstr ""
 #: ../admin/adm_add.php:64 ../admin/adm_edit.php:69
 #: ../admin/adm_quotaedit.php:68 ../admin/ftp_edit.php:72
 #: ../admin/ftp_list.php:73 ../admin/hta_adduser.php:54
-#: ../admin/hta_edit.php:63 ../admin/hta_edit.php:100 ../admin/index.php:92
+#: ../admin/hta_edit.php:63 ../admin/hta_edit.php:100 ../admin/index.php:89
 #: ../admin/piwik_userlist.php:79 ../admin/sql_users_add.php:59
 msgid "Username"
 msgstr ""
@@ -175,10 +175,10 @@ msgstr ""
 #: ../admin/adm_passpolicy.php:114 ../admin/adm_passpolicy.php:157
 #: ../admin/dom_edit.php:256 ../admin/dom_edit.php:279
 #: ../admin/dom_subdel.php:79 ../admin/mail_edit.php:91
-#: ../admin/mail_list.php:211 ../admin/mail_list.php:222
-#: ../admin/mail_list.php:233 ../admin/mail_list.php:251
-#: ../admin/mail_list.php:262 ../admin/mail_list.php:273
-#: ../admin/mail_list.php:284 ../admin/sql_bck.php:95 ../class/m_bro.php:75
+#: ../admin/mail_list.php:212 ../admin/mail_list.php:225
+#: ../admin/mail_list.php:238 ../admin/mail_list.php:257
+#: ../admin/mail_list.php:268 ../admin/mail_list.php:279
+#: ../admin/mail_list.php:290 ../admin/sql_bck.php:95 ../class/m_bro.php:75
 msgid "Yes"
 msgstr ""
 
@@ -229,7 +229,7 @@ msgstr ""
 #: ../admin/browseforfolder2.php:149 ../admin/ftp_del.php:83
 #: ../admin/ftp_edit.php:99 ../admin/hta_adduser.php:68
 #: ../admin/hta_dodeluser.php:65 ../admin/hta_edit.php:115
-#: ../admin/mail_edit.php:116 ../admin/mail_manage_catchall.php:122
+#: ../admin/mail_edit.php:116 ../admin/mail_manage_catchall.php:137
 #: ../admin/piwik_site_dodel.php:71 ../admin/piwik_user_dodel.php:69
 #: ../admin/sql_bck.php:108 ../admin/sql_users_add.php:73
 #: ../admin/sql_users_password.php:69 ../admin/sql_users_rights.php:104
@@ -275,7 +275,7 @@ msgstr ""
 #: ../admin/adm_authip_whitelist.php:57 ../admin/adm_doms_def_type.php:88
 #: ../admin/bro_editor.php:110 ../admin/ftp_edit.php:98
 #: ../admin/ip_main.php:135 ../admin/ip_main.php:188
-#: ../admin/mail_manage_catchall.php:121
+#: ../admin/mail_manage_catchall.php:136
 msgid "Save"
 msgstr ""
 
@@ -304,7 +304,7 @@ msgstr ""
 #: ../admin/adm_authip_whitelist.php:85 ../admin/adm_doms_def_type.php:60
 #: ../admin/adm_mxaccount.php:83 ../admin/adm_slavedns.php:101
 #: ../admin/adm_slavedns.php:145 ../admin/adm_var_edit.php:184
-#: ../admin/bro_main.php:284 ../admin/cron.php:54 ../admin/dom_edit.php:127
+#: ../admin/bro_main.php:283 ../admin/cron.php:54 ../admin/dom_edit.php:127
 #: ../admin/dom_edit.php:168 ../admin/ftp_del.php:82
 #: ../admin/hta_dodeluser.php:64 ../admin/ip_main.php:79
 #: ../admin/ip_main.php:167 ../admin/piwik_site_dodel.php:70
@@ -359,11 +359,11 @@ msgid ""
 "alternc.install"
 msgstr ""
 
-#: ../admin/adm_deactivate.php:46 ../class/m_admin.php:231
-#: ../class/m_admin.php:263 ../class/m_admin.php:782 ../class/m_admin.php:810
-#: ../class/m_admin.php:839 ../class/m_admin.php:892 ../class/m_admin.php:921
-#: ../class/m_admin.php:948 ../class/m_admin.php:1028
-#: ../class/m_admin.php:1052
+#: ../admin/adm_deactivate.php:46 ../class/m_admin.php:246
+#: ../class/m_admin.php:278 ../class/m_admin.php:796 ../class/m_admin.php:824
+#: ../class/m_admin.php:853 ../class/m_admin.php:906 ../class/m_admin.php:935
+#: ../class/m_admin.php:962 ../class/m_admin.php:1042
+#: ../class/m_admin.php:1066
 msgid "Account not found"
 msgstr ""
 
@@ -469,7 +469,7 @@ msgid "Account"
 msgstr ""
 
 #: ../admin/adm_dnsweberror.php:55 ../admin/adm_dnsweberror.php:85
-#: ../admin/dom_add.php:57 ../class/m_dom.php:1894
+#: ../admin/dom_add.php:57 ../class/m_dom.php:1902
 msgid "Domain name"
 msgstr ""
 
@@ -477,7 +477,7 @@ msgstr ""
 msgid "FQDN"
 msgstr ""
 
-#: ../admin/adm_dnsweberror.php:57
+#: ../admin/adm_dnsweberror.php:57 ../admin/adm_variables.php:57
 msgid "Value"
 msgstr ""
 
@@ -838,7 +838,7 @@ msgstr ""
 #: ../admin/adm_mxaccount.php:95 ../admin/adm_slavedns.php:140
 #: ../admin/adm_slavedns.php:158 ../admin/cron.php:39 ../admin/ftp_edit.php:85
 #: ../admin/ftp_edit.php:93 ../admin/hta_adduser.php:58
-#: ../admin/hta_edit.php:104 ../admin/index.php:93 ../admin/mem_param.php:58
+#: ../admin/hta_edit.php:104 ../admin/index.php:90 ../admin/mem_param.php:58
 #: ../admin/sql_getparam.php:74 ../admin/sql_users_add.php:63
 #: ../admin/sql_users_list.php:48 ../admin/sql_users_password.php:59
 msgid "Password"
@@ -1119,7 +1119,7 @@ msgstr ""
 msgid "Manage slave DNS"
 msgstr ""
 
-#: ../admin/adm_panel.php:65 ../admin/adm_variables.php:45
+#: ../admin/adm_panel.php:65 ../admin/adm_variables.php:47
 msgid "Configure AlternC variables"
 msgstr ""
 
@@ -1463,71 +1463,24 @@ msgstr ""
 msgid "Back to the var list"
 msgstr ""
 
-#: ../admin/adm_variables.php:50
+#: ../admin/adm_variables.php:52
 msgid "Here are the internal AlternC variables that are currently being used."
-msgstr ""
-
-#: ../admin/adm_variables.php:56
-msgid "Names"
 msgstr ""
 
 #: ../admin/adm_variables.php:57
 msgid "Comment"
 msgstr ""
 
-#: ../admin/adm_variables.php:58
-msgid "Default value"
+#: ../admin/adm_variables.php:57
+msgid "Names"
 msgstr ""
 
-#: ../admin/adm_variables.php:59
-msgid "Global value"
-msgstr ""
-
-#: ../admin/adm_variables.php:60
-msgid "Actual value used"
-msgstr ""
-
-#: ../admin/adm_variables.php:82
-msgid "Overwrited vars"
-msgstr ""
-
-#: ../admin/adm_variables.php:91
-msgid "See the vars for the account"
-msgstr ""
-
-#: ../admin/adm_variables.php:93
-msgid "logged via"
-msgstr ""
-
-#: ../admin/adm_variables.php:95 ../admin/bro_editor.php:85
-#: ../admin/bro_main.php:360 ../admin/bro_main.php:541
-#: ../admin/dom_edit.php:125
-msgid "View"
-msgstr ""
-
-#: ../admin/adm_variables.php:108
-#, php-format
-msgid "Here are values for members %s logged via %s"
-msgstr ""
-
-#: ../admin/adm_variables.php:112
-msgid "Var"
-msgstr ""
-
-#: ../admin/adm_variables.php:116
-msgid "Used value"
-msgstr ""
-
-#: ../admin/adm_variables.php:139
-msgid "Magical values"
-msgstr ""
-
-#: ../admin/adm_variables.php:140
-msgid "Those var are automatically replaced by the value indicated"
+#: ../admin/adm_variables.php:69
+msgid "Save variables"
 msgstr ""
 
 #: ../admin/bro_editor.php:55 ../admin/bro_editor.php:64
-#: ../admin/bro_main.php:354 ../admin/bro_main.php:394
+#: ../admin/bro_main.php:353 ../admin/bro_main.php:393
 #, php-format
 msgid "%3$d-%2$d-%1$d %4$d:%5$d"
 msgstr ""
@@ -1539,6 +1492,11 @@ msgstr ""
 
 #: ../admin/bro_editor.php:75
 msgid "File editing"
+msgstr ""
+
+#: ../admin/bro_editor.php:85 ../admin/bro_main.php:359
+#: ../admin/bro_main.php:540 ../admin/dom_edit.php:125
+msgid "View"
 msgstr ""
 
 #: ../admin/bro_editor.php:98
@@ -1570,177 +1528,173 @@ msgstr ""
 msgid "No, don't delete those files/folders"
 msgstr ""
 
-#: ../admin/bro_main.php:144
-msgid "extracting..."
-msgstr ""
-
-#: ../admin/bro_main.php:148
+#: ../admin/bro_main.php:147
 msgid "failed"
 msgstr ""
 
-#: ../admin/bro_main.php:151
+#: ../admin/bro_main.php:150
 msgid "done"
 msgstr ""
 
-#: ../admin/bro_main.php:156 ../class/m_bro.php:85
+#: ../admin/bro_main.php:155 ../class/m_bro.php:85
 msgid "File browser"
 msgstr ""
 
-#: ../admin/bro_main.php:163
+#: ../admin/bro_main.php:162
 msgid "Path"
 msgstr ""
 
-#: ../admin/bro_main.php:185
+#: ../admin/bro_main.php:184
 msgid "Send one file:"
 msgstr ""
 
-#: ../admin/bro_main.php:188
+#: ../admin/bro_main.php:187
 msgid "Send this file"
 msgstr ""
 
-#: ../admin/bro_main.php:189
+#: ../admin/bro_main.php:188
 #, php-format
 msgid "Warning: max size: %s"
 msgstr ""
 
-#: ../admin/bro_main.php:196
+#: ../admin/bro_main.php:195
 msgid "New file or folder:"
 msgstr ""
 
-#: ../admin/bro_main.php:201 ../admin/piwik_sitelist.php:86
+#: ../admin/bro_main.php:200 ../admin/piwik_sitelist.php:86
 #: ../admin/piwik_userlist.php:44 ../admin/piwik_userlist.php:56
 msgid "Create"
 msgstr ""
 
-#: ../admin/bro_main.php:203 ../admin/bro_main.php:243
+#: ../admin/bro_main.php:202 ../admin/bro_main.php:242
 msgid "File"
 msgstr ""
 
-#: ../admin/bro_main.php:204 ../admin/bro_main.php:396
+#: ../admin/bro_main.php:203 ../admin/bro_main.php:395
 #: ../admin/ftp_edit.php:76 ../admin/ftp_list.php:73 ../admin/hta_add.php:55
 #: ../admin/hta_adduser.php:50 ../admin/hta_edit.php:96
 #: ../admin/hta_edituser.php:51 ../admin/hta_list.php:68
 msgid "Folder"
 msgstr ""
 
-#: ../admin/bro_main.php:221 ../admin/bro_main.php:227
-#: ../admin/bro_main.php:285
+#: ../admin/bro_main.php:220 ../admin/bro_main.php:226
+#: ../admin/bro_main.php:284
 msgid "Rename"
 msgstr ""
 
-#: ../admin/bro_main.php:237 ../admin/bro_main.php:243
-#: ../admin/bro_main.php:286
+#: ../admin/bro_main.php:236 ../admin/bro_main.php:242
+#: ../admin/bro_main.php:285
 msgid "Permissions"
 msgstr ""
 
-#: ../admin/bro_main.php:257
+#: ../admin/bro_main.php:256
 msgid "write"
 msgstr ""
 
-#: ../admin/bro_main.php:265
+#: ../admin/bro_main.php:264
 msgid "Change permissions"
 msgstr ""
 
-#: ../admin/bro_main.php:288
+#: ../admin/bro_main.php:287
 msgid "Copy"
 msgstr ""
 
-#: ../admin/bro_main.php:289
+#: ../admin/bro_main.php:288
 msgid "Move"
 msgstr ""
 
-#: ../admin/bro_main.php:290
+#: ../admin/bro_main.php:289
 msgid "To"
 msgstr ""
 
-#: ../admin/bro_main.php:301
+#: ../admin/bro_main.php:300
 msgid "Please select a destination folder"
 msgstr ""
 
-#: ../admin/bro_main.php:327
+#: ../admin/bro_main.php:326
 msgid "Filename"
 msgstr ""
 
-#: ../admin/bro_main.php:328 ../admin/logs_list.php:53
+#: ../admin/bro_main.php:327 ../admin/logs_list.php:53
 #: ../admin/sql_list.php:54
 msgid "Size"
 msgstr ""
 
-#: ../admin/bro_main.php:329
+#: ../admin/bro_main.php:328
 msgid "Last modification"
 msgstr ""
 
-#: ../admin/bro_main.php:331
+#: ../admin/bro_main.php:330
 msgid "File Type"
 msgstr ""
 
-#: ../admin/bro_main.php:367
+#: ../admin/bro_main.php:366
 msgid "Extract"
 msgstr ""
 
-#: ../admin/bro_main.php:373 ../admin/bro_main.php:375
+#: ../admin/bro_main.php:372 ../admin/bro_main.php:374
 msgid "Restore SQL"
 msgstr ""
 
-#: ../admin/bro_main.php:375
+#: ../admin/bro_main.php:374
 msgid "In which database to you want to restore this dump?"
 msgstr ""
 
-#: ../admin/bro_main.php:380
+#: ../admin/bro_main.php:379
 msgid "Restore it"
 msgstr ""
 
-#: ../admin/bro_main.php:421 ../admin/bro_main.php:449
-#: ../admin/bro_main.php:484 ../admin/bro_main.php:512
+#: ../admin/bro_main.php:420 ../admin/bro_main.php:448
+#: ../admin/bro_main.php:483 ../admin/bro_main.php:511
 msgid "V"
 msgstr ""
 
-#: ../admin/bro_main.php:567
+#: ../admin/bro_main.php:566
 msgid "No files in this folder"
 msgstr ""
 
-#: ../admin/bro_main.php:577
+#: ../admin/bro_main.php:576
 msgid "(slow)"
 msgstr ""
 
-#: ../admin/bro_main.php:577
+#: ../admin/bro_main.php:576
 msgid "Show size of directories"
 msgstr ""
 
-#: ../admin/bro_main.php:581
+#: ../admin/bro_main.php:580
 msgid "Edit this folder's protection"
 msgstr ""
 
-#: ../admin/bro_main.php:584 ../admin/hta_add.php:63
+#: ../admin/bro_main.php:583 ../admin/hta_add.php:63
 msgid "Protect this folder"
 msgstr ""
 
-#: ../admin/bro_main.php:586
+#: ../admin/bro_main.php:585
 msgid "with a login and a password"
 msgstr ""
 
-#: ../admin/bro_main.php:589
+#: ../admin/bro_main.php:588
 msgid "Download this folder"
 msgstr ""
 
-#: ../admin/bro_main.php:591
+#: ../admin/bro_main.php:590
 #, php-format
 msgid "as a %s file"
 msgstr ""
 
-#: ../admin/bro_main.php:598
+#: ../admin/bro_main.php:597
 msgid "Edit the ftp account"
 msgstr ""
 
-#: ../admin/bro_main.php:599
+#: ../admin/bro_main.php:598
 msgid "that exists in this folder"
 msgstr ""
 
-#: ../admin/bro_main.php:605
+#: ../admin/bro_main.php:604
 msgid "Create an ftp account in this folder"
 msgstr ""
 
-#: ../admin/bro_main.php:614
+#: ../admin/bro_main.php:613
 msgid "Configure the file editor"
 msgstr ""
 
@@ -1812,7 +1766,7 @@ msgstr ""
 msgid "Select"
 msgstr ""
 
-#: ../admin/cron.php:21 ../class/m_cron.php:72 ../class/m_cron.php:183
+#: ../admin/cron.php:21 ../class/m_cron.php:74 ../class/m_cron.php:185
 msgid "Scheduled tasks"
 msgstr ""
 
@@ -1917,7 +1871,7 @@ msgstr ""
 msgid "Error: no domain"
 msgstr ""
 
-#: ../admin/dom_doadd.php:52 ../class/m_dom.php:130
+#: ../admin/dom_doadd.php:52 ../class/m_dom.php:132
 msgid "Add a domain"
 msgstr ""
 
@@ -2101,7 +2055,7 @@ msgstr ""
 
 #: ../admin/dom_edit.php:232
 #, php-format
-msgid "Add a subdomains to %s"
+msgid "Add a subdomain to %s"
 msgstr ""
 
 #: ../admin/dom_edit.php:249
@@ -2327,7 +2281,7 @@ msgstr ""
 #: ../admin/ftp_edit.php:80
 msgid ""
 "This is the root folder for this FTP user. i.e. this FTP user can access to "
-"this forlder and all its sub-folders."
+"this folder and all its sub-folders."
 msgstr ""
 
 #: ../admin/ftp_edit.php:94
@@ -2338,7 +2292,7 @@ msgstr ""
 msgid "Password do not match"
 msgstr ""
 
-#: ../admin/ftp_edit.php:121 ../class/m_admin.php:1458 ../class/m_hta.php:292
+#: ../admin/ftp_edit.php:121 ../class/m_admin.php:1472 ../class/m_hta.php:292
 msgid "Please enter a password"
 msgstr ""
 
@@ -2520,34 +2474,41 @@ msgstr ""
 msgid "Web Hosting Control Panel"
 msgstr ""
 
-#: ../admin/index.php:86
+#: ../admin/index.php:78
+#, php-format
+msgid ""
+"WARNING: you are trying to access the control panel insecurely, click <a "
+"href=\"https://%s\">here</a> to go to secure mode"
+msgstr ""
+
+#: ../admin/index.php:83
 msgid ""
 "To connect to the hosting control panel, enter your AlternC's login and "
 "password in the following form and click 'Enter'"
 msgstr ""
 
-#: ../admin/index.php:87
+#: ../admin/index.php:84
 msgid "You are attemping to connect without IP restriction."
 msgstr ""
 
-#: ../admin/index.php:91
+#: ../admin/index.php:88
 msgid "AlternC access"
 msgstr ""
 
-#: ../admin/index.php:94
+#: ../admin/index.php:91
 msgid "Enter"
 msgstr ""
 
-#: ../admin/index.php:114
+#: ../admin/index.php:111
 msgid ""
 "To read your mail in a browser, click here to go to your server's Webmail"
 msgstr ""
 
-#: ../admin/index.php:126
+#: ../admin/index.php:123
 msgid "You must accept the session cookie to log-in"
 msgstr ""
 
-#: ../admin/index.php:155
+#: ../admin/index.php:152
 msgid "Need a login and a password"
 msgstr ""
 
@@ -2650,8 +2611,41 @@ msgstr ""
 msgid "Download link"
 msgstr ""
 
-#: ../admin/logs_list.php:65
+#: ../admin/logs_list.php:65 ../admin/logs_tail.php:71
 msgid "Download"
+msgstr ""
+
+#: ../admin/logs_list.php:67
+msgid "Follow"
+msgstr ""
+
+#: ../admin/logs_tail.php:47
+msgid "unknown"
+msgstr ""
+
+#: ../admin/logs_tail.php:50
+msgid "Follow a recent log"
+msgstr ""
+
+#: ../admin/logs_tail.php:51
+#, php-format
+msgid "Please find below the last lines of file <b>%s</b>"
+msgstr ""
+
+#: ../admin/logs_tail.php:57
+msgid "Stop Auto Reload"
+msgstr ""
+
+#: ../admin/logs_tail.php:61
+msgid "Auto Reload"
+msgstr ""
+
+#: ../admin/logs_tail.php:69
+msgid "Last lines shown"
+msgstr ""
+
+#: ../admin/logs_tail.php:72
+msgid "Back to the logs list"
 msgstr ""
 
 #: ../admin/mail_del.php:54
@@ -2864,91 +2858,91 @@ msgstr ""
 msgid "Incoming mail"
 msgstr ""
 
-#: ../admin/mail_list.php:203 ../admin/mail_list.php:244
+#: ../admin/mail_list.php:203 ../admin/mail_list.php:250
 msgid "Which protocol shall you use?"
 msgstr ""
 
-#: ../admin/mail_list.php:205
+#: ../admin/mail_list.php:206
 msgid "Submission"
 msgstr ""
 
-#: ../admin/mail_list.php:208 ../admin/mail_list.php:219
-#: ../admin/mail_list.php:230 ../admin/mail_list.php:249
-#: ../admin/mail_list.php:260 ../admin/mail_list.php:271
-#: ../admin/mail_list.php:282
+#: ../admin/mail_list.php:209 ../admin/mail_list.php:222
+#: ../admin/mail_list.php:235 ../admin/mail_list.php:255
+#: ../admin/mail_list.php:266 ../admin/mail_list.php:277
+#: ../admin/mail_list.php:288
 msgid "Server name: "
 msgstr ""
 
-#: ../admin/mail_list.php:209 ../admin/mail_list.php:220
-#: ../admin/mail_list.php:231
+#: ../admin/mail_list.php:210 ../admin/mail_list.php:223
+#: ../admin/mail_list.php:236
 msgid ""
 "The mail address you want to access <i>(example : myuser@example.tld)</i>"
 msgstr ""
 
-#: ../admin/mail_list.php:209 ../admin/mail_list.php:220
-#: ../admin/mail_list.php:231
+#: ../admin/mail_list.php:210 ../admin/mail_list.php:223
+#: ../admin/mail_list.php:236
 msgid "Username: "
 msgstr ""
 
-#: ../admin/mail_list.php:210 ../admin/mail_list.php:221
-#: ../admin/mail_list.php:232 ../admin/mail_list.php:250
-#: ../admin/mail_list.php:261 ../admin/mail_list.php:272
-#: ../admin/mail_list.php:283
+#: ../admin/mail_list.php:211 ../admin/mail_list.php:224
+#: ../admin/mail_list.php:237 ../admin/mail_list.php:256
+#: ../admin/mail_list.php:267 ../admin/mail_list.php:278
+#: ../admin/mail_list.php:289
 msgid "Port: "
 msgstr ""
 
-#: ../admin/mail_list.php:211 ../admin/mail_list.php:222
-#: ../admin/mail_list.php:233 ../admin/mail_list.php:251
-#: ../admin/mail_list.php:262 ../admin/mail_list.php:273
-#: ../admin/mail_list.php:284
+#: ../admin/mail_list.php:212 ../admin/mail_list.php:225
+#: ../admin/mail_list.php:238 ../admin/mail_list.php:257
+#: ../admin/mail_list.php:268 ../admin/mail_list.php:279
+#: ../admin/mail_list.php:290
 msgid "Authentication: "
 msgstr ""
 
-#: ../admin/mail_list.php:212 ../admin/mail_list.php:223
-#: ../admin/mail_list.php:234 ../admin/mail_list.php:252
-#: ../admin/mail_list.php:263 ../admin/mail_list.php:274
-#: ../admin/mail_list.php:285
+#: ../admin/mail_list.php:213 ../admin/mail_list.php:226
+#: ../admin/mail_list.php:239 ../admin/mail_list.php:258
+#: ../admin/mail_list.php:269 ../admin/mail_list.php:280
+#: ../admin/mail_list.php:291
 msgid "Authentication method: "
 msgstr ""
 
-#: ../admin/mail_list.php:212 ../admin/mail_list.php:252
-#: ../admin/mail_list.php:263 ../admin/mail_list.php:274
-#: ../admin/mail_list.php:285
+#: ../admin/mail_list.php:213 ../admin/mail_list.php:258
+#: ../admin/mail_list.php:269 ../admin/mail_list.php:280
+#: ../admin/mail_list.php:291
 msgid "Normal password"
 msgstr ""
 
-#: ../admin/mail_list.php:213 ../admin/mail_list.php:224
-#: ../admin/mail_list.php:235 ../admin/mail_list.php:253
-#: ../admin/mail_list.php:264 ../admin/mail_list.php:275
-#: ../admin/mail_list.php:286
+#: ../admin/mail_list.php:214 ../admin/mail_list.php:227
+#: ../admin/mail_list.php:240 ../admin/mail_list.php:259
+#: ../admin/mail_list.php:270 ../admin/mail_list.php:281
+#: ../admin/mail_list.php:292
 msgid "Connection security:"
 msgstr ""
 
-#: ../admin/mail_list.php:216
+#: ../admin/mail_list.php:219
 msgid "SMTP"
 msgstr ""
 
-#: ../admin/mail_list.php:223 ../admin/mail_list.php:234
+#: ../admin/mail_list.php:226 ../admin/mail_list.php:239
 msgid "Normal Password"
 msgstr ""
 
-#: ../admin/mail_list.php:227
+#: ../admin/mail_list.php:232
 msgid "SMTPS"
 msgstr ""
 
-#: ../admin/mail_list.php:246
+#: ../admin/mail_list.php:252
 msgid "IMAP"
 msgstr ""
 
-#: ../admin/mail_list.php:257
+#: ../admin/mail_list.php:263
 msgid "IMAPS"
 msgstr ""
 
-#: ../admin/mail_list.php:268
+#: ../admin/mail_list.php:274
 msgid "POP3"
 msgstr ""
 
-#: ../admin/mail_list.php:279
+#: ../admin/mail_list.php:285
 msgid "POP3S"
 msgstr ""
 
@@ -2956,71 +2950,71 @@ msgstr ""
 msgid "Problem with the domain"
 msgstr ""
 
-#: ../admin/mail_manage_catchall.php:47
+#: ../admin/mail_manage_catchall.php:48
 msgid "Catchall successfully deleted"
 msgstr ""
 
-#: ../admin/mail_manage_catchall.php:50 ../admin/mail_manage_catchall.php:53
+#: ../admin/mail_manage_catchall.php:54 ../admin/mail_manage_catchall.php:63
 msgid "Catchall successfully updated"
 msgstr ""
 
-#: ../admin/mail_manage_catchall.php:56
+#: ../admin/mail_manage_catchall.php:71
 msgid "Unknown target type"
 msgstr ""
 
-#: ../admin/mail_manage_catchall.php:63
+#: ../admin/mail_manage_catchall.php:78
 #, php-format
 msgid "Manage catch-all configuration of %s"
 msgstr ""
 
-#: ../admin/mail_manage_catchall.php:72
+#: ../admin/mail_manage_catchall.php:87
 msgid ""
 "You can choose what to do with emails sent to unexisting address of this "
 "domain"
 msgstr ""
 
-#: ../admin/mail_manage_catchall.php:80
+#: ../admin/mail_manage_catchall.php:95
 msgid "No catch-all"
 msgstr ""
 
-#: ../admin/mail_manage_catchall.php:84
+#: ../admin/mail_manage_catchall.php:99
 msgid "No catch-all for this domain."
 msgstr ""
 
-#: ../admin/mail_manage_catchall.php:88
+#: ../admin/mail_manage_catchall.php:103
 msgid "Redirect to same address on a different domain"
 msgstr ""
 
-#: ../admin/mail_manage_catchall.php:92
+#: ../admin/mail_manage_catchall.php:107
 #, php-format
 msgid ""
 "Mails sent to john.doe@%s will be redirect to john.doe@anotherdomain.tld"
 msgstr ""
 
-#: ../admin/mail_manage_catchall.php:95
+#: ../admin/mail_manage_catchall.php:110
 msgid "Enter the 'target' domain"
 msgstr ""
 
-#: ../admin/mail_manage_catchall.php:96
+#: ../admin/mail_manage_catchall.php:111
 msgid "example.tld"
 msgstr ""
 
-#: ../admin/mail_manage_catchall.php:98
+#: ../admin/mail_manage_catchall.php:113
 msgid "Or choose one of your own"
 msgstr ""
 
-#: ../admin/mail_manage_catchall.php:106
+#: ../admin/mail_manage_catchall.php:121
 msgid "Redirect to a specific email"
 msgstr ""
 
-#: ../admin/mail_manage_catchall.php:110
+#: ../admin/mail_manage_catchall.php:125
 #, php-format
 msgid ""
 "Mails sent to an unexisting email on '@%s' will be redirect to user@example."
 "tld."
 msgstr ""
 
-#: ../admin/mail_manage_catchall.php:113
+#: ../admin/mail_manage_catchall.php:128
 msgid "john.doe@example.tld"
 msgstr ""
 
@@ -3125,7 +3119,7 @@ msgstr ""
 msgid "Settings of your account"
 msgstr ""
 
-#: ../admin/mem_param.php:60 ../class/m_mem.php:579
+#: ../admin/mem_param.php:60 ../class/m_mem.php:582
 msgid "Help"
 msgstr ""
 
@@ -3385,7 +3379,7 @@ msgid "quota_web"
 msgstr ""
 
 #: ../admin/quotas_oneuser.php:36 ../admin/quotas_users.php:132
-#: ../class/m_dom.php:119
+#: ../class/m_dom.php:121
 msgid "Domains"
 msgstr ""
 
@@ -3490,7 +3484,7 @@ msgstr ""
 msgid "Count"
 msgstr ""
 
-#: ../admin/quotas_users.php:137 ../class/m_mail.php:203
+#: ../admin/quotas_users.php:137 ../class/m_mail.php:205
 msgid "Email addresses"
 msgstr ""
 
@@ -3864,75 +3858,75 @@ msgstr ""
 msgid "The zone file of this domain is locked. Contact your administrator."
 msgstr ""
 
-#: ../class/functions.php:400
+#: ../class/functions.php:385
 msgid "Bytes"
 msgstr ""
 
-#: ../class/functions.php:402
+#: ../class/functions.php:387
 msgid "Byte"
 msgstr ""
 
-#: ../class/functions.php:407
+#: ../class/functions.php:392
 msgid "Kb"
 msgstr ""
 
-#: ../class/functions.php:411
+#: ../class/functions.php:396
 msgid "Mb"
 msgstr ""
 
-#: ../class/functions.php:415
+#: ../class/functions.php:400
 msgid "Gb"
 msgstr ""
 
-#: ../class/functions.php:417
+#: ../class/functions.php:402
 msgid "Tb"
 msgstr ""
 
-#: ../class/functions.php:526
+#: ../class/functions.php:511
 msgid "year"
 msgstr ""
 
-#: ../class/functions.php:526
+#: ../class/functions.php:511
 msgid "years"
 msgstr ""
 
-#: ../class/functions.php:528
+#: ../class/functions.php:513
 msgid "month"
 msgstr ""
 
-#: ../class/functions.php:528
+#: ../class/functions.php:513
 msgid "months"
 msgstr ""
 
-#: ../class/functions.php:551
+#: ../class/functions.php:536
 msgid "Not managed"
 msgstr ""
 
-#: ../class/functions.php:717 ../class/functions.php:719
+#: ../class/functions.php:702 ../class/functions.php:704
 msgid "Previous Page"
 msgstr ""
 
-#: ../class/functions.php:773 ../class/functions.php:775
+#: ../class/functions.php:758 ../class/functions.php:760
 msgid "Next Page"
 msgstr ""
 
-#: ../class/functions.php:814
+#: ../class/functions.php:799
 msgid "Clic here to generate a password"
 msgstr ""
 
-#: ../class/functions.php:856 ../class/functions.php:857
+#: ../class/functions.php:841 ../class/functions.php:842
 msgid "Choose a folder..."
 msgstr ""
 
-#: ../class/m_action.php:214
+#: ../class/m_action.php:228
 msgid "Error setting actions"
 msgstr ""
 
-#: ../class/m_action.php:234
+#: ../class/m_action.php:247
 msgid "Error selecting  old actions"
 msgstr ""
 
-#: ../class/m_action.php:256
+#: ../class/m_action.php:269
 msgid "Error purging old actions"
 msgstr ""
 
@@ -4002,130 +3996,130 @@ msgid ""
 "it right now?"
 msgstr ""
 
-#: ../class/m_admin.php:197 ../class/m_admin.php:253 ../class/m_admin.php:327
-#: ../class/m_admin.php:416 ../class/m_admin.php:462 ../class/m_admin.php:498
-#: ../class/m_admin.php:580 ../class/m_admin.php:759 ../class/m_admin.php:802
-#: ../class/m_admin.php:831 ../class/m_admin.php:866
+#: ../class/m_admin.php:212 ../class/m_admin.php:268 ../class/m_admin.php:342
+#: ../class/m_admin.php:431 ../class/m_admin.php:477 ../class/m_admin.php:513
+#: ../class/m_admin.php:595 ../class/m_admin.php:773 ../class/m_admin.php:816
+#: ../class/m_admin.php:845 ../class/m_admin.php:880
 msgid "-- Only administrators can access this page! --"
 msgstr ""
 
-#: ../class/m_admin.php:368
+#: ../class/m_admin.php:383
 msgid ""
 "Invalid pattern type provided. Are you even performing a legitimate action?"
 msgstr ""
 
-#: ../class/m_admin.php:424
+#: ../class/m_admin.php:439
 msgid "Subject, message and sender are mandatory"
 msgstr ""
 
-#: ../class/m_admin.php:429
+#: ../class/m_admin.php:444
 msgid "Sender is syntaxically incorrect"
 msgstr ""
 
-#: ../class/m_admin.php:521
+#: ../class/m_admin.php:536
 msgid "-- Only administrators can do that! --"
 msgstr ""
 
-#: ../class/m_admin.php:527
+#: ../class/m_admin.php:542
 msgid "You don't seem to be allowed to delegate this domain"
 msgstr ""
 
-#: ../class/m_admin.php:584
+#: ../class/m_admin.php:599
 msgid "Missing db_server field"
 msgstr ""
 
-#: ../class/m_admin.php:588 ../class/m_admin.php:593
+#: ../class/m_admin.php:603 ../class/m_admin.php:608
 msgid "All fields are mandatory"
 msgstr ""
 
-#: ../class/m_admin.php:598
+#: ../class/m_admin.php:613
 msgid "Please enter a valid email address"
 msgstr ""
 
-#: ../class/m_admin.php:604
+#: ../class/m_admin.php:619
 msgid "Login can only contains characters a-z and 0-9"
 msgstr ""
 
-#: ../class/m_admin.php:611
+#: ../class/m_admin.php:626
 msgid "The login is too long (14 chars max)"
 msgstr ""
 
-#: ../class/m_admin.php:616
+#: ../class/m_admin.php:631
 msgid "Login can only contains characters a-z, 0-9 and -"
 msgstr ""
 
-#: ../class/m_admin.php:662
+#: ../class/m_admin.php:676
 msgid "This login already exists"
 msgstr ""
 
-#: ../class/m_admin.php:685
+#: ../class/m_admin.php:699
 #, php-format
 msgid "query failed: %s "
 msgstr ""
 
-#: ../class/m_admin.php:712
+#: ../class/m_admin.php:726
 #, php-format
 msgid "New account %s from %s on %s"
 msgstr ""
 
-#: ../class/m_admin.php:717
+#: ../class/m_admin.php:731
 #, php-format
 msgid "Cannot send email to %s"
 msgstr ""
 
-#: ../class/m_admin.php:721
+#: ../class/m_admin.php:735
 #, php-format
 msgid "Query failed: %s"
 msgstr ""
 
-#: ../class/m_admin.php:1032
+#: ../class/m_admin.php:1046
 msgid "This account is ALREADY an administrator account"
 msgstr ""
 
-#: ../class/m_admin.php:1056
+#: ../class/m_admin.php:1070
 msgid "This account is NOT an administrator account!"
 msgstr ""
 
-#: ../class/m_admin.php:1219
+#: ../class/m_admin.php:1233
 #, php-format
 msgid "Domain '%s' not found."
 msgstr ""
 
-#: ../class/m_admin.php:1239 ../class/m_admin.php:1275
-#: ../class/m_admin.php:1333
+#: ../class/m_admin.php:1253 ../class/m_admin.php:1289
+#: ../class/m_admin.php:1347
 msgid "This TLD does not exist"
 msgstr ""
 
-#: ../class/m_admin.php:1300
+#: ../class/m_admin.php:1314
 msgid "The TLD name is mandatory"
 msgstr ""
 
-#: ../class/m_admin.php:1307
+#: ../class/m_admin.php:1321
 msgid "This TLD already exist"
 msgstr ""
 
-#: ../class/m_admin.php:1454
+#: ../class/m_admin.php:1468
 msgid "Please enter a login"
 msgstr ""
 
-#: ../class/m_admin.php:1464
+#: ../class/m_admin.php:1478
 msgid "-- Program error -- The requested password policy does not exist!"
 msgstr ""
 
-#: ../class/m_admin.php:1472
+#: ../class/m_admin.php:1486
 msgid "The password length is too short according to the password policy"
 msgstr ""
 
-#: ../class/m_admin.php:1477
+#: ../class/m_admin.php:1491
 msgid "The password is too long according to the password policy"
 msgstr ""
 
-#: ../class/m_admin.php:1487
+#: ../class/m_admin.php:1501
 msgid ""
 "The password policy prevents you to use your login name inside your password"
 msgstr ""
 
-#: ../class/m_admin.php:1511
+#: ../class/m_admin.php:1525
 msgid ""
 "Your password contains not enough different classes of character, between "
 "low-case, up-case, figures and special characters."
@@ -4177,308 +4171,324 @@ msgid "Go back to the file manager"
 msgstr ""
 
 #: ../class/m_bro.php:205
-msgid "This directory do not exist"
+msgid "This directory do not exist."
 msgstr ""
 
-#: ../class/m_bro.php:402 ../class/m_bro.php:1165
+#: ../class/m_bro.php:209
+msgid "This directory is not readable."
+msgstr ""
+
+#: ../class/m_bro.php:406 ../class/m_bro.php:1170
 msgid "Cannot create the requested directory. Please check the permissions"
 msgstr ""
 
-#: ../class/m_bro.php:408 ../class/m_bro.php:429 ../class/m_bro.php:457
-#: ../class/m_bro.php:483 ../class/m_bro.php:517 ../class/m_bro.php:527
-#: ../class/m_bro.php:557 ../class/m_bro.php:600 ../class/m_bro.php:661
-#: ../class/m_bro.php:705 ../class/m_bro.php:710 ../class/m_bro.php:807
-#: ../class/m_bro.php:974 ../class/m_bro.php:1004
+#: ../class/m_bro.php:412 ../class/m_bro.php:433 ../class/m_bro.php:461
+#: ../class/m_bro.php:487 ../class/m_bro.php:521 ../class/m_bro.php:531
+#: ../class/m_bro.php:562 ../class/m_bro.php:605 ../class/m_bro.php:666
+#: ../class/m_bro.php:709 ../class/m_bro.php:714 ../class/m_bro.php:811
+#: ../class/m_bro.php:977 ../class/m_bro.php:1007
 msgid "File or folder name is incorrect"
 msgstr ""
 
-#: ../class/m_bro.php:434 ../class/m_bro.php:612
+#: ../class/m_bro.php:438 ../class/m_bro.php:617
 msgid "Cannot create the requested file. Please check the permissions"
 msgstr ""
 
-#: ../class/m_bro.php:531 ../class/m_bro.php:714
+#: ../class/m_bro.php:535 ../class/m_bro.php:718
 msgid "You cannot move or copy a file to the same folder"
 msgstr ""
 
-#: ../class/m_bro.php:620
+#: ../class/m_bro.php:625
 msgid "The uploaded file exceeds the max file size allowed"
 msgstr ""
 
-#: ../class/m_bro.php:629
+#: ../class/m_bro.php:634
 msgid "Undefined error "
 msgstr ""
 
-#: ../class/m_bro.php:632
+#: ../class/m_bro.php:637
 msgid "Error during the upload of the file: "
 msgstr ""
 
-#: ../class/m_bro.php:684
+#: ../class/m_bro.php:673
+msgid "Uncompressing through TAR"
+msgstr ""
+
+#: ../class/m_bro.php:677
+msgid "Uncompressing through UNZIP"
+msgstr ""
+
+#: ../class/m_bro.php:682
+msgid "Uncompressing through GUNZIP"
+msgstr ""
+
+#: ../class/m_bro.php:688
 #, php-format
 msgid ""
 "I cannot find a way to extract the file %s, it is an unsupported compressed "
 "format"
 msgstr ""
 
-#: ../class/m_bro.php:803
+#: ../class/m_bro.php:807
 msgid "Cannot read the requested file. Please check the permissions"
 msgstr ""
 
-#: ../class/m_bro.php:881
+#: ../class/m_bro.php:885
 msgid "File not in authorized directory"
 msgstr ""
 
-#: ../class/m_bro.php:999
+#: ../class/m_bro.php:1002
 msgid "Cannot edit the requested file. Please check the permissions"
 msgstr ""
 
-#: ../class/m_cron.php:40
+#: ../class/m_cron.php:42
 msgid "Daily"
 msgstr ""
 
-#: ../class/m_cron.php:41
+#: ../class/m_cron.php:43
 msgid "Hour"
 msgstr ""
 
-#: ../class/m_cron.php:42
+#: ../class/m_cron.php:44
 msgid "Half Hour"
 msgstr ""
 
-#: ../class/m_cron.php:125
+#: ../class/m_cron.php:127
 msgid "URL not valid"
 msgstr ""
 
-#: ../class/m_cron.php:135
+#: ../class/m_cron.php:137
 msgid "Email address is not valid"
 msgstr ""
 
-#: ../class/m_cron.php:144
+#: ../class/m_cron.php:146
 msgid "You quota of cron entries is over. You cannot create more cron entries"
 msgstr ""
 
-#: ../class/m_cron.php:153
+#: ../class/m_cron.php:155
 msgid "Identity problem"
 msgstr ""
 
-#: ../class/m_dom.php:210
+#: ../class/m_dom.php:215
 msgid "Err: failed to prepare the zone"
 msgstr ""
 
-#: ../class/m_dom.php:237
+#: ../class/m_dom.php:242
 msgid "Missing domain name"
 msgstr ""
 
-#: ../class/m_dom.php:544
+#: ../class/m_dom.php:549
 msgid "The name MUST contain only letter and digits"
 msgstr ""
 
-#: ../class/m_dom.php:573 ../class/m_dom.php:1393
+#: ../class/m_dom.php:578 ../class/m_dom.php:1401
 msgid ""
 "The parameters for this subdomain and domain type are invalid. Please check "
 "for subdomain entries incompatibility"
 msgstr ""
 
-#: ../class/m_dom.php:692 ../class/m_dom.php:1138 ../class/m_dom.php:1209
-#: ../class/m_dom.php:1364 ../class/m_dom.php:1454 ../class/m_dom.php:1503
-#: ../class/m_dom.php:1847
+#: ../class/m_dom.php:697 ../class/m_dom.php:1146 ../class/m_dom.php:1217
+#: ../class/m_dom.php:1372 ../class/m_dom.php:1462 ../class/m_dom.php:1511
+#: ../class/m_dom.php:1855
 msgid "--- Program error --- No lock on the domains!"
 msgstr ""
 
-#: ../class/m_dom.php:699 ../class/m_dom.php:1143 ../class/m_dom.php:1388
-#: ../class/m_dom.php:1530
+#: ../class/m_dom.php:704 ../class/m_dom.php:1151 ../class/m_dom.php:1396
+#: ../class/m_dom.php:1538
 msgid "The domain name is syntaxically incorrect"
 msgstr ""
 
-#: ../class/m_dom.php:705 ../class/m_dom.php:750 ../class/m_dom.php:1614
+#: ../class/m_dom.php:710 ../class/m_dom.php:755 ../class/m_dom.php:1622
 msgid ""
 "The requested domain is forbidden in this server, please contact the "
 "administrator"
 msgstr ""
 
-#: ../class/m_dom.php:709
+#: ../class/m_dom.php:714
 msgid "This domain is the server's domain! You cannot host it on your account!"
 msgstr ""
 
-#: ../class/m_dom.php:714 ../class/m_dom.php:719
+#: ../class/m_dom.php:719 ../class/m_dom.php:724
 msgid "The domain already exist"
 msgstr ""
 
-#: ../class/m_dom.php:726 ../class/m_dom.php:1510
+#: ../class/m_dom.php:731 ../class/m_dom.php:1518
 msgid ""
 "The last member of the domain name is incorrect or cannot be hosted in that "
 "server"
 msgstr ""
 
-#: ../class/m_dom.php:730 ../class/m_dom.php:734
+#: ../class/m_dom.php:735 ../class/m_dom.php:739
 msgid "The domain cannot be found in the whois database"
 msgstr ""
 
-#: ../class/m_dom.php:757
+#: ../class/m_dom.php:762
 msgid "Your domain quota is over, you cannot create more domain names"
 msgstr ""
 
-#: ../class/m_dom.php:770
+#: ../class/m_dom.php:775
 msgid "An unexpected error occured when creating the domain"
 msgstr ""
 
-#: ../class/m_dom.php:779 ../class/m_dom.php:1150
+#: ../class/m_dom.php:784 ../class/m_dom.php:1158
 #, php-format
 msgid "Domain '%s' not found"
 msgstr ""
 
-#: ../class/m_dom.php:895
+#: ../class/m_dom.php:903
 msgid "Could not delete default type"
 msgstr ""
 
-#: ../class/m_dom.php:1049
+#: ../class/m_dom.php:1057
 msgid "The Whois database is unavailable, please try again later"
 msgstr ""
 
-#: ../class/m_dom.php:1056 ../class/m_dom.php:1514
+#: ../class/m_dom.php:1064 ../class/m_dom.php:1522
 msgid "The domain cannot be found in the Whois database"
 msgstr ""
 
-#: ../class/m_dom.php:1214 ../class/m_dom.php:1458
+#: ../class/m_dom.php:1222 ../class/m_dom.php:1466
 msgid "The sub-domain does not exist"
 msgstr ""
 
-#: ../class/m_dom.php:1253
+#: ../class/m_dom.php:1261
 msgid "invalid url"
 msgstr ""
 
-#: ../class/m_dom.php:1263
+#: ../class/m_dom.php:1271
 msgid "The folder you entered is incorrect or does not exist"
 msgstr ""
 
-#: ../class/m_dom.php:1272 ../class/m_dom.php:1280
+#: ../class/m_dom.php:1280 ../class/m_dom.php:1288
 msgid "The ip address is invalid"
 msgstr ""
 
-#: ../class/m_dom.php:1288
+#: ../class/m_dom.php:1296
 msgid "The name you entered is incorrect"
 msgstr ""
 
-#: ../class/m_dom.php:1296
+#: ../class/m_dom.php:1304
 msgid "The TXT value you entered is incorrect"
 msgstr ""
 
-#: ../class/m_dom.php:1301
+#: ../class/m_dom.php:1309
 msgid "Invalid domain type selected, please check"
 msgstr ""
 
-#: ../class/m_dom.php:1376
+#: ../class/m_dom.php:1384
 msgid ""
 "There is some forbidden characters in the sub domain (only A-Z 0-9 and - are "
 "allowed)"
 msgstr ""
 
-#: ../class/m_dom.php:1415 ../class/m_dom.php:1426
+#: ../class/m_dom.php:1423 ../class/m_dom.php:1434
 msgid "Cannot write to the destination folder"
 msgstr ""
 
-#: ../class/m_dom.php:1518
+#: ../class/m_dom.php:1526
 msgid ""
 "The DNS of this domain do not match the server's DNS. Please change your "
 "domain's DNS before you install it again"
 msgstr ""
 
-#: ../class/m_dom.php:1535
+#: ../class/m_dom.php:1543
 #, php-format
 msgid "The domain name %s does not exist"
 msgstr ""
 
-#: ../class/m_dom.php:1542
+#: ../class/m_dom.php:1550
 msgid "No change has been requested..."
 msgstr ""
 
-#: ../class/m_dom.php:1550 ../class/m_dom.php:1555
+#: ../class/m_dom.php:1558 ../class/m_dom.php:1563
 msgid ""
 "There is no MX record pointing to this server, and you are asking us to host "
 "the mail here. Make sure to update your MX entries or no mail will be "
 "received"
 msgstr ""
 
-#: ../class/m_dom.php:1606 ../class/m_dom.php:1631
+#: ../class/m_dom.php:1614 ../class/m_dom.php:1639
 msgid "The IP address you entered is incorrect"
 msgstr ""
 
-#: ../class/m_dom.php:1724 ../class/m_dom.php:1730 ../class/m_dom.php:1748
-#: ../class/m_dom.php:1754
+#: ../class/m_dom.php:1732 ../class/m_dom.php:1738 ../class/m_dom.php:1756
+#: ../class/m_dom.php:1762
 msgid "This domain is not installed in your account"
 msgstr ""
 
-#: ../class/m_dom.php:1797
+#: ../class/m_dom.php:1805
 msgid "The specified slave account already exists"
 msgstr ""
 
-#: ../class/m_dom.php:1828
+#: ../class/m_dom.php:1836
 msgid "--- Program error --- Lock already obtained!"
 msgstr ""
 
-#: ../class/m_dom.php:2173
+#: ../class/m_dom.php:2182
 #, php-format
 msgid ""
 "Problem on %s: there is more than 1 web configuration going to be generated "
 "for this sub-domain."
 msgstr ""
 
-#: ../class/m_dom.php:2182
+#: ../class/m_dom.php:2191
 #, php-format
 msgid "Problem on %s: we do not know domain's type <b>%s</b>."
 msgstr ""
 
-#: ../class/m_dom.php:2193
+#: ../class/m_dom.php:2202
 msgid "Locally hosted"
 msgstr ""
 
-#: ../class/m_dom.php:2194
+#: ../class/m_dom.php:2203
 msgid "URL redirection"
 msgstr ""
 
-#: ../class/m_dom.php:2195
+#: ../class/m_dom.php:2204
 msgid "IPv4 redirect"
 msgstr ""
 
-#: ../class/m_dom.php:2196
+#: ../class/m_dom.php:2205
 msgid "Webmail access"
 msgstr ""
 
-#: ../class/m_dom.php:2197
+#: ../class/m_dom.php:2206
 msgid "Squirrelmail Webmail access"
 msgstr ""
 
-#: ../class/m_dom.php:2198
+#: ../class/m_dom.php:2207
 msgid "Roundcube Webmail access"
 msgstr ""
 
-#: ../class/m_dom.php:2199
+#: ../class/m_dom.php:2208
 msgid "IPv6 redirect"
 msgstr ""
 
-#: ../class/m_dom.php:2200
+#: ../class/m_dom.php:2209
 msgid "CNAME DNS entry"
 msgstr ""
 
-#: ../class/m_dom.php:2201
+#: ../class/m_dom.php:2210
 msgid "TXT DNS entry"
 msgstr ""
 
-#: ../class/m_dom.php:2202
+#: ../class/m_dom.php:2211
 msgid "MX DNS entry"
 msgstr ""
 
-#: ../class/m_dom.php:2203
+#: ../class/m_dom.php:2212
 msgid "secondary MX DNS entry"
 msgstr ""
 
-#: ../class/m_dom.php:2204
+#: ../class/m_dom.php:2213
 msgid "Default mail server"
 msgstr ""
 
-#: ../class/m_dom.php:2205
+#: ../class/m_dom.php:2214
 msgid "Default backup mail server"
 msgstr ""
 
-#: ../class/m_dom.php:2206
+#: ../class/m_dom.php:2215
 msgid "AlternC panel access"
 msgstr ""
 
@@ -4486,7 +4496,7 @@ msgstr ""
 msgid "err_"
 msgstr ""
 
-#: ../class/m_ftp.php:56 ../class/m_ftp.php:442
+#: ../class/m_ftp.php:56 ../class/m_ftp.php:445
 msgid "FTP accounts"
 msgstr ""
 
@@ -4502,36 +4512,36 @@ msgstr ""
 msgid "No FTP account found"
 msgstr ""
 
-#: ../class/m_ftp.php:187 ../class/m_ftp.php:262 ../class/m_ftp.php:321
+#: ../class/m_ftp.php:187 ../class/m_ftp.php:266 ../class/m_ftp.php:325
 msgid "This FTP account does not exist"
 msgstr ""
 
-#: ../class/m_ftp.php:217
+#: ../class/m_ftp.php:221
 #, php-format
 msgid "FTP login is incorrect: too many '%s'"
 msgstr ""
 
-#: ../class/m_ftp.php:224
+#: ../class/m_ftp.php:228
 msgid "FTP login is incorrect"
 msgstr ""
 
-#: ../class/m_ftp.php:271 ../class/m_ftp.php:350
+#: ../class/m_ftp.php:275 ../class/m_ftp.php:354
 msgid "The chosen prefix is not allowed"
 msgstr ""
 
-#: ../class/m_ftp.php:281 ../class/m_ftp.php:359
+#: ../class/m_ftp.php:285 ../class/m_ftp.php:363
 msgid "This FTP account already exists"
 msgstr ""
 
-#: ../class/m_ftp.php:289 ../class/m_ftp.php:369
+#: ../class/m_ftp.php:293 ../class/m_ftp.php:373
 msgid "The directory cannot be created"
 msgstr ""
 
-#: ../class/m_ftp.php:346
+#: ../class/m_ftp.php:350
 msgid "Password can't be empty"
 msgstr ""
 
-#: ../class/m_ftp.php:385
+#: ../class/m_ftp.php:389
 msgid "Your FTP account quota is over. You cannot create more ftp accounts"
 msgstr ""
 
@@ -4594,7 +4604,7 @@ msgstr ""
 msgid "An incompatible .htaccess file exists in this folder"
 msgstr ""
 
-#: ../class/m_log.php:59
+#: ../class/m_log.php:65
 msgid "Logs"
 msgstr ""
 
@@ -4602,116 +4612,116 @@ msgstr ""
 msgid "VM already started"
 msgstr ""
 
-#: ../class/m_mail.php:96
+#: ../class/m_mail.php:97
 msgid "Email Addresses"
 msgstr ""
 
-#: ../class/m_mail.php:184 ../class/m_mail.php:269 ../class/m_mail.php:354
-#: ../class/m_mail.php:481 ../class/m_mail.php:535
+#: ../class/m_mail.php:185 ../class/m_mail.php:271 ../class/m_mail.php:356
+#: ../class/m_mail.php:483 ../class/m_mail.php:537
 msgid "The email you entered is syntaxically incorrect"
 msgstr ""
 
-#: ../class/m_mail.php:217
+#: ../class/m_mail.php:219
 msgid "Email account password"
 msgstr ""
 
-#: ../class/m_mail.php:307
+#: ../class/m_mail.php:309
 msgid "No email found for this query"
 msgstr ""
 
-#: ../class/m_mail.php:366
+#: ../class/m_mail.php:368
 msgid "You cannot create email addresses: your quota is over"
 msgstr ""
 
-#: ../class/m_mail.php:372
+#: ../class/m_mail.php:374
 msgid "This email address already exists"
 msgstr ""
 
-#: ../class/m_mail.php:378
+#: ../class/m_mail.php:380
 msgid "An unexpected error occured when creating the email"
 msgstr ""
 
-#: ../class/m_mail.php:432
+#: ../class/m_mail.php:434
 msgid "This email is not yours, you can't change anything on it"
 msgstr ""
 
-#: ../class/m_mail.php:495
+#: ../class/m_mail.php:497
 #, php-format
 msgid "The email %s does not exist, it can't be deleted"
 msgstr ""
 
-#: ../class/m_mail.php:499
+#: ../class/m_mail.php:501
 #, php-format
 msgid "The email %s is already marked for deletion, it can't be deleted"
 msgstr ""
 
-#: ../class/m_mail.php:508
+#: ../class/m_mail.php:510
 #, php-format
 msgid "The email %s has been marked for deletion"
 msgstr ""
 
-#: ../class/m_mail.php:514
+#: ../class/m_mail.php:516
 #, php-format
 msgid "The email %s has been successfully deleted"
 msgstr ""
 
-#: ../class/m_mail.php:546
+#: ../class/m_mail.php:548
 #, php-format
 msgid "The email %s does not exist, it can't be undeleted"
 msgstr ""
 
-#: ../class/m_mail.php:550
+#: ../class/m_mail.php:552
 #, php-format
 msgid "The email %s is special, it can't be undeleted"
 msgstr ""
 
-#: ../class/m_mail.php:554
+#: ../class/m_mail.php:556
 #, php-format
 msgid ""
 "Sorry, deletion of email %s is already in progress, or not marked for "
 "deletion, it can't be undeleted"
 msgstr ""
 
-#: ../class/m_mail.php:563
+#: ../class/m_mail.php:565
 #, php-format
 msgid "The email %s has been undeleted"
 msgstr ""
 
-#: ../class/m_mail.php:566
+#: ../class/m_mail.php:568
 #, php-format
 msgid "-- Program Error -- The email %s can't be undeleted"
 msgstr ""
 
-#: ../class/m_mail.php:647
+#: ../class/m_mail.php:649
 msgid ""
 "There is forbidden characters in your email address. You can't make it a POP/"
 "IMAP account, you can only use it as redirection to other emails"
 msgstr ""
 
-#: ../class/m_mail.php:667
+#: ../class/m_mail.php:669
 msgid ""
 "You set a quota smaller than the current mailbox size. Since it's not "
 "allowed, we set the quota to the current mailbox size"
 msgstr ""
 
-#: ../class/m_mail.php:854
+#: ../class/m_mail.php:857
 msgid "The slave MX account was not found"
 msgstr ""
 
-#: ../class/m_mail.php:903
+#: ../class/m_mail.php:906
 msgid "Problem: can't create default bounce mail"
 msgstr ""
 
 #: ../class/m_mem.php:95 ../class/m_mem.php:101 ../class/m_mem.php:168
-#: ../class/m_mem.php:299
+#: ../class/m_mem.php:302
 msgid "User or password incorrect"
 msgstr ""
 
-#: ../class/m_mem.php:105 ../class/m_mem.php:483
-msgid "This account is locked, contact the administrator"
+#: ../class/m_mem.php:105 ../class/m_mem.php:443 ../class/m_mem.php:486
+msgid "This account is locked, contact the administrator."
 msgstr ""
 
-#: ../class/m_mem.php:112 ../class/m_mem.php:271
+#: ../class/m_mem.php:112 ../class/m_mem.php:274
 msgid ""
 "This website is currently under maintenance, login is currently disabled."
 msgstr ""
@@ -4720,47 +4730,43 @@ msgstr ""
 msgid "Your IP isn't allowed to connect"
 msgstr ""
 
-#: ../class/m_mem.php:243
+#: ../class/m_mem.php:246
 msgid "Missing password"
 msgstr ""
 
-#: ../class/m_mem.php:252
+#: ../class/m_mem.php:255
 msgid "Identity lost or unknown, please login"
 msgstr ""
 
-#: ../class/m_mem.php:258 ../class/m_mem.php:347
+#: ../class/m_mem.php:261 ../class/m_mem.php:350
 msgid "Session unknown, contact the administrator"
 msgstr ""
 
-#: ../class/m_mem.php:264 ../class/m_mem.php:352
+#: ../class/m_mem.php:267 ../class/m_mem.php:355
 msgid "IP address incorrect, please contact the administrator"
 msgstr ""
 
-#: ../class/m_mem.php:341
+#: ../class/m_mem.php:344
 msgid "Cookie incorrect, please accept the session cookie"
 msgstr ""
 
-#: ../class/m_mem.php:388
+#: ../class/m_mem.php:391
 msgid "You are not allowed to change your password."
 msgstr ""
 
-#: ../class/m_mem.php:392
+#: ../class/m_mem.php:395
 msgid "The old password is incorrect"
 msgstr ""
 
-#: ../class/m_mem.php:396 ../class/m_mem.php:445
+#: ../class/m_mem.php:399 ../class/m_mem.php:448
 msgid "The new passwords are differents, please retry"
 msgstr ""
 
-#: ../class/m_mem.php:420
+#: ../class/m_mem.php:423
 msgid "You must be a system administrator to do this."
 msgstr ""
 
-#: ../class/m_mem.php:440
-msgid "This account is locked, contact the administrator."
-msgstr ""
-
-#: ../class/m_mem.php:448
+#: ../class/m_mem.php:451
 #, php-format
 msgid ""
 "Hello,\n"
@@ -4783,7 +4789,7 @@ msgid ""
 "Cordially.\n"
 msgstr ""
 
-#: ../class/m_mem.php:493
+#: ../class/m_mem.php:496
 #, php-format
 msgid ""
 "Hello,\n"
@@ -4807,7 +4813,7 @@ msgid ""
 "Cordially.\n"
 msgstr ""
 
-#: ../class/m_mem.php:534
+#: ../class/m_mem.php:537
 msgid "The information you entered is incorrect."
 msgstr ""
 
@@ -4981,7 +4987,7 @@ msgstr ""
 msgid "Statistics through Piwik accounts"
 msgstr ""
 
-#: ../class/m_piwik.php:196 ../class/m_piwik.php:318
+#: ../class/m_piwik.php:195 ../class/m_piwik.php:318
 msgid "You are not allowed to delete the statistics of this website"
 msgstr ""
 
@@ -5024,22 +5030,6 @@ msgstr ""
 
 #: ../class/m_quota.php:538
 msgid "KB"
-msgstr ""
-
-#: ../class/m_variables.php:257
-msgid "Err: Missing strata when creating var"
-msgstr ""
-
-#: ../class/m_variables.php:304
-msgid "Empty array"
-msgstr ""
-
-#: ../class/m_variables.php:349
-msgid "Empty"
-msgstr ""
-
-#: ../class/m_variables.php:375
-msgid "None defined"
 msgstr ""
 
 #: ../class/mime.php:135
