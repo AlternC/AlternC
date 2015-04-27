@@ -10,7 +10,7 @@ msgstr ""
 "$\n"
 "Report-Msgid-Bugs-To: i18n@alternc.org\n"
 "POT-Creation-Date: 2014-03-28 16:38+0100\n"
-"PO-Revision-Date: 2015-04-26 19:38+0200\n"
+"PO-Revision-Date: 2015-04-27 09:01+0200\n"
 "Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
 "Language-Team: français <team@alternc.org>\n"
 "Language: fr\n"
@@ -5205,131 +5205,122 @@ msgstr "Base de données %s non trouvée"
 #: ../class/m_mysql.php:245
 msgid "Your databases quota is over. You cannot create more databases"
 msgstr ""
+"Votre quota de bases de données est atteint, vous ne pouvez pas en créer de "
+"nouvelles"
 
 #: ../class/m_mysql.php:256
 msgid "Database can't have empty suffix"
-msgstr ""
+msgstr "Les bases de données ne peuvent pas avoir de suffixe vide"
 
 #: ../class/m_mysql.php:261 ../class/m_mysql.php:379 ../class/m_mysql.php:461
 msgid "Database name can contain only letters and numbers"
 msgstr ""
+"Le nom d'une base de donnée ne peut contenir que des lettres et chiffres"
 
 #: ../class/m_mysql.php:267
 msgid "Database name cannot exceed 64 characters"
-msgstr ""
+msgstr "Les noms de base ne peuvent dépasser 64 caractères"
 
 #: ../class/m_mysql.php:272
-#, fuzzy, php-format
+#, php-format
 msgid "Database %s already exists"
-msgstr "Edition de fichier"
+msgstr "La base de donnée %s existe déjà"
 
 #: ../class/m_mysql.php:290
 msgid ""
 "There is a problem with the special PhpMyAdmin user. Contact the "
 "administrator"
 msgstr ""
+"Un problème a été détecté avec l'utilisateur spécial PhpMyAdmin. Contactez "
+"l'administrateur"
 
 #: ../class/m_mysql.php:309
-#, fuzzy
 msgid "An error occured. The database could not be created"
-msgstr "n'a pas pu être effacé"
+msgstr "Une erreur est survenur, la base de données n'a pas pu être créée"
 
 #: ../class/m_mysql.php:327
-#, fuzzy
 msgid "The database was not found. I can't delete it"
-msgstr "La base de données %s a été effacée avec succès"
+msgstr "Base de données non trouvée. Impossible de l'effacer"
 
 #: ../class/m_mysql.php:366
-#, fuzzy
 msgid "User aren't allowed to configure their backups"
-msgstr "Vous ne pouvez pas changer votre mot de passe"
+msgstr "Vous n'êtes pas autorisé à paramétrer vos sauvegardes"
 
 #: ../class/m_mysql.php:397
 msgid "You have to choose how many backups you want to keep"
-msgstr ""
+msgstr "Vous devez choisir combien de sauvegardes vous souhaitez conserver"
 
 #: ../class/m_mysql.php:401
-#, fuzzy
 msgid "Directory does not exist"
-msgstr "L'utilisateur n'existe pas"
+msgstr "Dossier non trouvé"
 
 #: ../class/m_mysql.php:419 ../class/m_mysql.php:464
-#, fuzzy
 msgid "Database not found"
-msgstr "Politique non trouvée"
+msgstr "Base de données non trouvée"
 
 #: ../class/m_mysql.php:426 ../class/m_mysql.php:713
-#, fuzzy
 msgid "The password is mandatory"
-msgstr "Les mots de passe ne correspondent pas"
+msgstr "Le mot de passe est obligatoire"
 
 #: ../class/m_mysql.php:431
 msgid "MySQL password cannot exceed 16 characters"
-msgstr ""
+msgstr "Les mots de passe MySQL ne peuvent pas dépasser 16 caractères"
 
 #: ../class/m_mysql.php:471
 msgid "Databases rights are not correct"
-msgstr ""
+msgstr "Les droits sur les bases de données sont incorrects"
 
 #: ../class/m_mysql.php:476
 msgid "The username can contain only letters and numbers."
-msgstr ""
+msgstr "Le nom d'utilisateur ne peut contenir que lettres ou chiffres"
 
 #: ../class/m_mysql.php:482
-#, fuzzy
 msgid "Database user not found"
-msgstr "Politique non trouvée"
+msgstr "Utilisateur de la base de données non trouvé"
 
 #: ../class/m_mysql.php:497
 msgid "Could not grant rights"
-msgstr ""
+msgstr "Impossible de donner des droits "
 
 #: ../class/m_mysql.php:515
-#, fuzzy
 msgid "No file specified"
-msgstr "Aucun répertoire sélectionné !"
+msgstr "Aucun fichier sélectionné"
 
 #: ../class/m_mysql.php:522 ../class/m_mysql.php:526
-#, fuzzy
 msgid "File not found"
-msgstr "Politique non trouvée"
+msgstr "Fichier non trouvé"
 
 #: ../class/m_mysql.php:709
 msgid "The username is mandatory"
-msgstr ""
+msgstr "Le nom d'utilisateur est obligatoire"
 
 #: ../class/m_mysql.php:717 ../class/m_mysql.php:795
 msgid "The username can contain only letters and numbers"
-msgstr ""
+msgstr "Le nom d'utilisateur ne peut contenir que des lettres ou chiffres"
 
 #: ../class/m_mysql.php:724
 msgid "MySQL username cannot exceed 16 characters"
-msgstr ""
+msgstr "Le nom d'utilisateur MySQL ne peut dépasser 16 caractères"
 
 #: ../class/m_mysql.php:729
-#, fuzzy
 msgid "The database user already exists"
-msgstr "Edition de fichier"
+msgstr "Le nom d'utilisateur pour cette base existe déjà"
 
 #: ../class/m_mysql.php:733 ../class/m_mysql.php:767
-#, fuzzy
 msgid "The passwords do not match"
 msgstr "Les mots de passe ne correspondent pas"
 
 #: ../class/m_mysql.php:805
-#, fuzzy
 msgid "The username was not found"
-msgstr "Politique non trouvée"
+msgstr "Nom d'utilisateur non trouvé"
 
 #: ../class/m_mysql.php:834
-#, fuzzy
 msgid "This user does not exist in the MySQL/User database"
-msgstr "Liste des noms de domaines en erreur dans la base des domaines."
+msgstr "Ce nom d'utilisateur n'existe pas dans la base MySQL"
 
 #: ../class/m_mysql.php:1109
-#, fuzzy
 msgid "The directory could not be created"
-msgstr "n'a pas pu être effacé"
+msgstr "Le dossier n'a pas pu être créé"
 
 #: ../class/m_piwik.php:40
 #, fuzzy
@@ -5372,29 +5363,27 @@ msgstr "Quotas du compte AlternC"
 #: ../class/m_quota.php:78
 #, php-format
 msgid "%s%% of %s"
-msgstr ""
+msgstr "%s% de %s"
 
 #: ../class/m_quota.php:78 ../class/m_quota.php:106 ../class/m_quota.php:197
 msgid "quota_"
 msgstr "quota_"
 
 #: ../class/m_quota.php:237
-#, fuzzy
 msgid "Error writing the quota entry!"
-msgstr "Modification des quotas d'un compte AlternC"
+msgstr "Erreur lors de l'écriture du quota !"
 
 #: ../class/m_quota.php:538
-#, fuzzy
 msgid "B"
-msgstr "Mo"
+msgstr "o"
 
 #: ../class/m_quota.php:538
 msgid "GB"
-msgstr ""
+msgstr "Go"
 
 #: ../class/m_quota.php:538
 msgid "KB"
-msgstr ""
+msgstr "Ko"
 
 #: ../class/m_variables.php:257
 msgid "Err: Missing strata when creating var"
