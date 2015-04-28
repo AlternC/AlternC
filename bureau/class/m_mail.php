@@ -682,7 +682,7 @@ ORDER BY
       }
     }
     $db->query("DELETE FROM recipient WHERE address_id=".$mail_id.";");
-    if (isset($m) && $m) {
+    if (isset($red) && $red) {
       $db->query("INSERT INTO recipient SET address_id=".$mail_id.", recipients='".addslashes($red)."';");
     }
     return true;
