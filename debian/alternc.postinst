@@ -131,7 +131,12 @@ ALTERNC_LOGS=""
 # But you may merge your logs in other directory. In order to view them,
 # Uncomment and complete the following variable to use it instead of ALTERNC_LOGS.
 #ALTERNC_LOGS_ARCHIVE=""
- 
+
+# Shall we enable QUOTA over NFS ? 
+# the default is NO, since this dramatically block /usr/lib/alternc/quota* functions
+# called from the panel. To enable quota-over-NFS, put yes here
+NFS_QUOTA=no
+
 EOF
 
         chown root:alterncpanel $CONFIGFILE
@@ -164,6 +169,13 @@ EOF
     update_var alternc/alternc_logs ALTERNC_LOGS
     sed -e "$SED_SCRIPT" < $CONFIGFILE > $CONFIGFILE.tmp
     mv -f $CONFIGFILE.tmp $CONFIGFILE
+
+    # Add NFS_QUOTA instructions if they are not in the config file:
+    grep -Eq "^ *NFS_QUOTA=" $CONFIGFILE || echo "
+# Shall we enable QUOTA over NFS ? 
+# the default is NO, since this dramatically block /usr/lib/alternc/quota* functions
+# called from the panel. To enable quota-over-NFS, put yes here
+NFS_QUOTA=no" >> $CONFIGFILE
 
     # Erase all apacheconf file
     # They will be regenerated without the bug by upgrade_check.sh below.

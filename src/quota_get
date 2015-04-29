@@ -17,6 +17,12 @@ if [ "x$MID" == "x" ] ; then
   exit 1
 fi
 
+QUOTA_OPTIONS="-l"
+if [ "$NFS_QUOTA" = "yes" -o "$NFS_QUOTA" = "YES" -o "$NFS_QUOTA" = "Yes" ]
+then
+    QUOTA_OPTIONS=""
+fi
+
 #checking if quotas are installed
 command -v $QUOTA >/dev/null || { echo "Quotas uninstalled"; exit 0; }
 
@@ -40,13 +46,13 @@ if [ -z "$QUOTA_PART" ]; then
     UUID=$( $BLKID | grep "$QUOTA_PART" | cut -f2 -s -d" " | sed 's/\(UUID="\)\(.*\)\(\"$\)/\2/')
 fi
 
-quot=$(sudo quota -wvg "$MID" | grep "$QUOTA_PART" | $AWK 'NR==1 {print $1;}' )
+quot=$(sudo quota $QUOTA_OPTIONS -wvg "$MID" | grep "$QUOTA_PART" | $AWK 'NR==1 {print $1;}' )
 
 # Now we get the quota 
 #first by testing if the partition is referenced by UUID
-val=$(sudo quota -vwg "$MID" |grep "$UUID" | awk 'END { print $2 "\n" $3; }')
+val=$(sudo quota $QUOTA_OPTIONS -vwg "$MID" |grep "$UUID" | awk 'END { print $2 "\n" $3; }')
 if [ -z "$val" ] ; then
-    val=$(sudo quota -A -wg "$MID" |grep "$QUOTA_PART" | awk 'END { print $2 "\n" $3; }')
+    val=$(sudo quota $QUOTA_OPTIONS -A -wg "$MID" |grep "$QUOTA_PART" | awk 'END { print $2 "\n" $3; }')
 
     # If the quota aren't activated, I return something anyway
     if [ -z "$val" ] ; then

@@ -2,6 +2,7 @@ alternc (3.1.5) oldstable; urgency=low
 
   * fix alias changes not working in some cases
   * fix ;;; END ALTERNC zones bug also for older versions
+  * fix manage remote NFS-based quota when *explicitely* stated in local.sh (QUOTA_NFS=y)
 
  -- Benjamin Sonntag <benjamin@sonntag.fr>  Wed, 29 Apr 2015 10:30:01 +0200
 
