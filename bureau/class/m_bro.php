@@ -662,7 +662,7 @@ class m_bro {
     } else {
       $dest=$this->convertabsolute($dest,false);
     }
-    if (!$file || !$dest) {
+    if (!$file || !$dest || !is_readable($file)) {
       $err->raise("bro",_("File or folder name is incorrect"));
       return 1;
     }
@@ -742,8 +742,6 @@ class m_bro {
    */
   function CopyOneFile($src, $dest) {
     global $err;
-    $src=escapeshellarg($src);
-    $dest=escapeshellarg($dest);
     exec("cp -Rpf ".escapeshellarg($src)." ".escapeshellarg($dest), $void, $ret);
     if ($ret) {
       $err->raise("bro","Errors happened while copying the source to destination. cp return value: %d", $ret);
