@@ -1,3 +1,10 @@
+alternc (3.1.5) oldstable; urgency=low
+
+  * fix alias changes not working in some cases
+  * fix ;;; END ALTERNC zones bug also for older versions
+
+ -- Benjamin Sonntag <benjamin@sonntag.fr>  Wed, 29 Apr 2015 10:30:01 +0200
+
 alternc (3.1.4) oldstable; urgency=low
 
   * ensure that values in sub_domaines are prefixed by / for hosting subdomains

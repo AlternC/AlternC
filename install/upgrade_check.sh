@@ -75,9 +75,13 @@ for file in $( ls $extensions | sort -n ) ; do
 			  ;;
 		      php)
 		  	  php -q $file
+			  echo "UPDATE alternc_status SET value='$file' WHERE name='alternc_version';" | 
+			    mysql --defaults-file=/etc/alternc/my.cnf -f
 			  ;;
 		      sh)
 		  	  bash $file
+			  echo "UPDATE alternc_status SET value='$file' WHERE name='alternc_version';" | 
+			    mysql --defaults-file=/etc/alternc/my.cnf -f
 			  ;;
                       *)
 			  echo "skipping $file, not recognized !"
