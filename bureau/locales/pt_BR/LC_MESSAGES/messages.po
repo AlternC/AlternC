@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: $Id: admin.po,v 1.2 2003/06/09 14:36:08 root Exp $\n"
 "Report-Msgid-Bugs-To: i18n@alternc.org\n"
-"POT-Creation-Date: 2015-04-27 09:02+0200\n"
+"POT-Creation-Date: 2015-04-29 14:23+0200\n"
 "PO-Revision-Date: 2007-10-25 23:50-0400\n"
 "Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
 "Language-Team: English <i18n@alternc.org>\n"
@@ -238,8 +238,7 @@ msgstr "Criar está nova conta FTP."
 #: ../admin/adm_add.php:141 ../admin/adm_deactivate.php:75
 #: ../admin/adm_domstypeedit.php:134 ../admin/adm_edit.php:124
 #: ../admin/adm_quotaedit.php:88 ../admin/adm_tldadd.php:71
-#: ../admin/adm_tldedit.php:70 ../admin/adm_var_edit.php:182
-#: ../admin/adm_var_edit.php:226 ../admin/bro_pref.php:150
+#: ../admin/adm_tldedit.php:70 ../admin/bro_pref.php:150
 #: ../admin/browseforfolder2.php:149 ../admin/ftp_del.php:83
 #: ../admin/ftp_edit.php:99 ../admin/hta_adduser.php:68
 #: ../admin/hta_dodeluser.php:65 ../admin/hta_edit.php:115
@@ -319,13 +318,12 @@ msgstr "Editar"
 
 #: ../admin/adm_authip_whitelist.php:85 ../admin/adm_doms_def_type.php:60
 #: ../admin/adm_mxaccount.php:83 ../admin/adm_slavedns.php:101
-#: ../admin/adm_slavedns.php:145 ../admin/adm_var_edit.php:184
-#: ../admin/bro_main.php:283 ../admin/cron.php:54 ../admin/dom_edit.php:127
-#: ../admin/dom_edit.php:168 ../admin/ftp_del.php:82
-#: ../admin/hta_dodeluser.php:64 ../admin/ip_main.php:79
-#: ../admin/ip_main.php:167 ../admin/piwik_site_dodel.php:70
-#: ../admin/piwik_sitelist.php:128 ../admin/piwik_user_dodel.php:68
-#: ../admin/piwik_userlist.php:87
+#: ../admin/adm_slavedns.php:145 ../admin/bro_main.php:283
+#: ../admin/cron.php:54 ../admin/dom_edit.php:127 ../admin/dom_edit.php:168
+#: ../admin/ftp_del.php:82 ../admin/hta_dodeluser.php:64
+#: ../admin/ip_main.php:79 ../admin/ip_main.php:167
+#: ../admin/piwik_site_dodel.php:70 ../admin/piwik_sitelist.php:128
+#: ../admin/piwik_user_dodel.php:68 ../admin/piwik_userlist.php:87
 msgid "Delete"
 msgstr "Suprimir"
 
@@ -509,7 +507,7 @@ msgid "Value"
 msgstr ""
 
 #: ../admin/adm_dnsweberror.php:58 ../admin/adm_domstype.php:60
-#: ../admin/adm_domstypeedit.php:78 ../admin/adm_var_edit.php:117
+#: ../admin/adm_domstypeedit.php:78
 msgid "Description"
 msgstr "Descição"
 
@@ -1515,58 +1513,6 @@ msgstr "Editar este TLD"
 #: ../admin/adm_update_domains.php:40
 msgid "Missing INOTIFY_UPDATE_DOMAIN var in /etc/alternc/local.sh . Fix it!"
 msgstr ""
-
-#: ../admin/adm_var_edit.php:81
-#, fuzzy
-msgid "Missing var name"
-msgstr "Editando o domínio %s"
-
-#: ../admin/adm_var_edit.php:100
-#, fuzzy, php-format
-msgid "Edition of var %s"
-msgstr "Editando o domínio %s"
-
-#: ../admin/adm_var_edit.php:129
-msgid "Value expected: string"
-msgstr ""
-
-#: ../admin/adm_var_edit.php:133
-msgid "Value expected: integer"
-msgstr ""
-
-#: ../admin/adm_var_edit.php:137
-msgid "Value expected: IP address"
-msgstr ""
-
-#: ../admin/adm_var_edit.php:183 ../admin/adm_var_edit.php:227
-#: ../admin/sql_users_rights.php:103
-msgid "Apply"
-msgstr ""
-
-#: ../admin/adm_var_edit.php:184
-#, fuzzy
-msgid "Are you sure you want to delete it."
-msgstr ""
-"Por favor entrar o nome de arquivo que contem os dados do SQL que precisam "
-"restaurar."
-
-#: ../admin/adm_var_edit.php:248 ../admin/adm_var_edit.php:265
-#: ../admin/adm_var_edit.php:281 ../admin/adm_var_edit.php:297
-#: ../admin/adm_var_edit.php:313
-#, fuzzy
-msgid "Add"
-msgstr "Endereço email"
-
-#: ../admin/adm_var_edit.php:258 ../admin/adm_var_edit.php:274
-#: ../admin/adm_var_edit.php:290 ../admin/adm_var_edit.php:306
-#, php-format
-msgid "Overwritted by %s"
-msgstr ""
-
-#: ../admin/adm_var_edit.php:329
-#, fuzzy
-msgid "Back to the var list"
-msgstr "Lista de contas FTP"
 
 #: ../admin/adm_variables.php:52
 msgid "Here are the internal AlternC variables that are currently being used."
@@ -4063,6 +4009,10 @@ msgstr ""
 msgid "Reverse selection"
 msgstr ""
 
+#: ../admin/sql_users_rights.php:103
+msgid "Apply"
+msgstr ""
+
 #: ../admin/stats_members.php:32
 msgid ""
 "Image_Graph not installed. use 'aptitude install php-pear' then 'pear "
@@ -4501,15 +4451,15 @@ msgstr "Membro '%s' não existe"
 msgid "This directory is not readable."
 msgstr "Membro '%s' não existe"
 
-#: ../class/m_bro.php:406 ../class/m_bro.php:1170
+#: ../class/m_bro.php:406 ../class/m_bro.php:1168
 msgid "Cannot create the requested directory. Please check the permissions"
 msgstr ""
 
 #: ../class/m_bro.php:412 ../class/m_bro.php:433 ../class/m_bro.php:461
 #: ../class/m_bro.php:487 ../class/m_bro.php:521 ../class/m_bro.php:531
 #: ../class/m_bro.php:562 ../class/m_bro.php:605 ../class/m_bro.php:666
-#: ../class/m_bro.php:709 ../class/m_bro.php:714 ../class/m_bro.php:811
-#: ../class/m_bro.php:977 ../class/m_bro.php:1007
+#: ../class/m_bro.php:709 ../class/m_bro.php:714 ../class/m_bro.php:809
+#: ../class/m_bro.php:975 ../class/m_bro.php:1005
 msgid "File or folder name is incorrect"
 msgstr ""
 
@@ -4552,16 +4502,16 @@ msgid ""
 "format"
 msgstr ""
 
-#: ../class/m_bro.php:807
+#: ../class/m_bro.php:805
 msgid "Cannot read the requested file. Please check the permissions"
 msgstr ""
 
-#: ../class/m_bro.php:885
+#: ../class/m_bro.php:883
 #, fuzzy
 msgid "File not in authorized directory"
 msgstr "No authorized user in %s"
 
-#: ../class/m_bro.php:1002
+#: ../class/m_bro.php:1000
 msgid "Cannot edit the requested file. Please check the permissions"
 msgstr ""
 
@@ -5548,6 +5498,28 @@ msgstr ""
 #: ../class/mime.php:172 ../class/mime.php:173 ../class/mime.php:174
 msgid "Real Media File"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Missing var name"
+#~ msgstr "Editando o domínio %s"
+
+#, fuzzy
+#~ msgid "Edition of var %s"
+#~ msgstr "Editando o domínio %s"
+
+#, fuzzy
+#~ msgid "Are you sure you want to delete it."
+#~ msgstr ""
+#~ "Por favor entrar o nome de arquivo que contem os dados do SQL que "
+#~ "precisam restaurar."
+
+#, fuzzy
+#~ msgid "Add"
+#~ msgstr "Endereço email"
+
+#, fuzzy
+#~ msgid "Back to the var list"
+#~ msgstr "Lista de contas FTP"
 
 #, fuzzy
 #~ msgid "See the vars for the account"
