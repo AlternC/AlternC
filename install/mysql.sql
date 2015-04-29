@@ -392,7 +392,7 @@ CREATE TABLE `variable` (
   `comment` mediumtext,
   `type` text,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`),
+  UNIQUE KEY `name` (`name`)
 ) ENGINE=MyISAM;
 
 --
