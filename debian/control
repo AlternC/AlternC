@@ -15,47 +15,49 @@ Pre-depends: debconf (>= 0.5.00) | debconf-2.0
            , bash (>= 4)
            , acl
 Depends: debianutils (>= 1.13.1)
+       , adduser
        , apache2-mpm-itk
+       , bind9
+       , bzip2
+       , ca-certificates
+       , cron
+       , dnsutils
+       , dovecot-common (>=1:2.1.7)
+       , dovecot-imapd
+       , dovecot-managesieved
+       , dovecot-mysql
+       , dovecot-pop3d
+       , dovecot-sieve
+       , gettext (>= 0.10.40-5)
+       , incron
        , libapache2-mod-php5
+       , libsasl2-modules
+       , locales
+       , lockfile-progs (>= 0.1.9)
+       , mailutils | mailx
+       , mysql-client(>= 5.0)
+       , opendkim
+       , opendkim-tools
+       , perl-suid | perl
+       , php5-cli
+       , php5-curl
        , php5-mysql
        , phpmyadmin
        , postfix
-       , proftpd-mod-mysql
-       , proftpd-basic
-       , bind9
-       , wget
-       , rsync
-       , ca-certificates
-       , locales
-       , perl-suid | perl
        , postfix-mysql
-       , wwwconfig-common
+       , proftpd-basic
+       , proftpd-mod-mysql
+       , rsync
        , sasl2-bin
-       , libsasl2-modules
-       , php5-cli
-       , lockfile-progs (>= 0.1.9)
-       , gettext (>= 0.10.40-5)
        , sudo
-       , adduser
-       , mysql-client
-       , dnsutils
-       , dovecot-common (>=1:1.2.15)
-       , dovecot-common(<< 1:2.0)
-       , dovecot-imapd (>= 1:1.2.15)
-       , dovecot-pop3d (>= 1:1.2.15)
+       , unzip
        , vlogger
-       , mailutils | mailx
-       , incron
-       , cron
-       , opendkim
-       , mysql-client(>= 5.0)
-       , php5-curl
+       , wget
+       , wwwconfig-common
        , ${misc:Depends}
 Recommends: mysql-server(>= 5.0)
           , ntp
           , quota
-          , unzip
-          , bzip2
 Conflicts: alternc-admintools
         , alternc-awstats (<< 1.0)
         , alternc-webalizer (<= 0.9.4)
@@ -65,16 +67,16 @@ Provides: alternc-admintools
 Replaces: alternc-admintools
 Suggests: alternc-awstats
        , alternc-mailman
-       , alternc-changepass
+       , alternc-roundcube
+       , alternc-squirrelmail
+       , alternc-api
+       , alternc-ssl
        , amavisd-new
        , clamav-daemon
-       , spamassassin
-       , pop-before-smtp
-       , magpierss
-       , zip
        , ncompress
-       , alternc-squirrelmail
-       , alternc-roundcube
+       , pop-before-smtp
+       , spamassassin
+       , zip
 Description: Hosting software managment suite for Debian
  AlternC is a mutualized hosting software manager for Linux.
  It allows you to manage your websites, domains, ftp, emails, aliases,
@@ -99,42 +101,46 @@ Package: alternc-slave
 Architecture: all
 Pre-depends: debconf (>= 0.5.00) | debconf-2.0, acl
 Depends: debianutils (>= 1.13.1)
+         , adduser
          , apache2-mpm-itk
+         , bind9
+         , bzip2
+         , ca-certificates
+         , cron
+         , dovecot-common (>= 1:2.1.7)
+         , dovecot-imapd
+         , dovecot-managesieved
+         , dovecot-mysql
+         , dovecot-pop3d
+         , dovecot-sieve
+         , gettext (>= 0.10.40-5)
+         , incron
          , libapache2-mod-php5
+         , libsasl2-modules
+         , locales
+         , lockfile-progs (>= 0.1.9)
+         , mailutils | mailx
+         , mysql-client(>= 5.0)
+         , opendkim
+         , opendkim-tools
+         , perl
+         , perl-suid
+         , php5-cli
+         , php5-curl
          , php5-mysql
          , phpmyadmin
          , postfix
-         , proftpd-mod-mysql
-         , proftpd-basic
-         , postfix-tls
-         , bind9
-         , wget
-         , rsync
-         , ca-certificates
-         , locales
-         , perl-suid
-         , perl
          , postfix-mysql
-         , wwwconfig-common
+         , postfix-tls
+         , proftpd-basic
+         , proftpd-mod-mysql
+         , rsync
          , sasl2-bin
-         , libsasl2-modules
-         , php5-cli
-         , lockfile-progs (>= 0.1.9)
-         , gettext (>= 0.10.40-5)
-         , adduser
-         , mysql-client
          , sudo
-         , dovecot-common (>=1:1.2.15)
-         , dovecot-common(<< 1:2.0)
-         , dovecot-imapd (>= 1:1.2.15)
-         , dovecot-pop3d (>= 1:1.2.15)
+         , unzip
          , vlogger
-         , mailutils | mailx
-         , incron
-         , cron
-         , opendkim
-         , mysql-client(>= 5.0)
-         , php5-curl
+         , wget
+         , wwwconfig-common
          , ${misc:Depends}
 Recommends:
          quota
@@ -146,15 +152,16 @@ Provides: alternc
 Replaces: alternc
 Suggests: alternc-awstats
          , alternc-mailman
-         , alternc-changepass
+         , alternc-roundcube
+         , alternc-squirrelmail
+         , alternc-api
+         , alternc-ssl
          , amavisd-new
          , clamav-daemon
-         , spamassassin
-         , pop-before-smtp
-         , magpierss
-         , zip
          , ncompress
-         , bzip2
+         , pop-before-smtp
+         , spamassassin
+         , zip
 Description: Hosting software managment suite for Debian
  AlternC is a mutualized hosting software manager for Linux.
  It allows you to manage your websites, domains, ftp, emails, aliases,

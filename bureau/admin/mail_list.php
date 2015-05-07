@@ -249,6 +249,7 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
 
     <?php __("Which protocol shall you use?"); ?>
     <div id="accordion-mailin">
+      <?php if ($mail->srv_imap) { ?>
       <h4><?php __("IMAP");?></h4>
       <div>
         <ul>
@@ -259,7 +260,7 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
           <li><b><?php __("Connection security:");?></b> STARTTLS</li>
         </ul>
       </div>
-
+      <?php } if ($mail->srv_imaps) { ?>
       <h4><?php __("IMAPS");?></h4>
       <div>
         <ul>
@@ -270,7 +271,7 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
           <li><b><?php __("Connection security:");?></b> SSL</li>
         </ul>
       </div>
-
+      <?php } if ($mail->srv_pop3) { ?>
       <h4><?php __("POP3");?></h4>
       <div>
         <ul>
@@ -281,7 +282,7 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
           <li><b><?php __("Connection security:");?></b> STARTTLS</li>
         </ul>
       </div>
-
+      <?php } if ($mail->srv_pop3s) { ?>
       <h4><?php __("POP3S");?></h4>
       <div>
         <ul>
@@ -292,6 +293,7 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
           <li><b><?php __("Connection security:");?></b> SSL</li>
         </ul>
       </div>
+      <?php } ?>
     </div>
 </div><!-- tabs-mailhelp-in -->
 </div><!-- tabs-mailhelp -->

@@ -1,3 +1,10 @@
+alternc (3.5~rc1) stable; urgency=low
+
+  * unofficial Prerelease of AlternC 3.5
+  * update_domaines now in PHP and using classes and hooks instead of BASH
+
+ -- Benjamin Sonntag <benjamin@sonntag.fr>  Thu,  7 May 2015 20:03:00 +0200
+
 alternc (3.1.6) oldstable; urgency=low
 
   * add SSL and API alternc packages (Beta)

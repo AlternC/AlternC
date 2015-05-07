@@ -55,7 +55,7 @@ $infos = $piwik->user_add($account_name);
 if (!$infos)
 {
     $error = $err->errstr();
-    //if (isset($error) && $error) {
+    if (!$error) { $error = 'undefined error from piwik'; }
     echo "<p class=\"alert alert-danger\">$error</p>";
     if (isset($fatal) && $fatal) {
       include_once("foot.php");

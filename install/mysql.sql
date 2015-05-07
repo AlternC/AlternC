@@ -115,7 +115,7 @@ CREATE TABLE IF NOT EXISTS domaines (
   noerase tinyint(4) NOT NULL default '0',
   dns_action enum ('OK','UPDATE','DELETE') NOT NULL default 'UPDATE',
   dns_result varchar(255) not null default '',
-  zonettl int(10) unsigned NOT NULL default '86400',
+  zonettl int(10) unsigned NOT NULL default '3600',
   PRIMARY KEY (id),
   UNIQUE KEY (domaine)
 ) ENGINE=MyISAM;
@@ -745,5 +745,3 @@ CREATE TABLE IF NOT EXISTS `alternc_status` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 INSERT INTO alternc_status SET name='alternc_version',value='3.4.1.sh';
-
-

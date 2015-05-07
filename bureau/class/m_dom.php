@@ -580,7 +580,8 @@ class m_dom {
             }
         }
 
-        $db->query("update sub_domaines set enable='$status' where id = '" . intval($sub_id) . "';");
+        $db->query("update sub_domaines set enable='$status',web_action='UPDATE' where id = '" . intval($sub_id) . "';"); // UGLY patch fix activate deactivate sub-domains #1645
+
         $this->set_dns_action($jh['domain'], 'UPDATE');
 
         return true;
@@ -736,7 +737,7 @@ class m_dom {
                 return false;
             }
             if ($dns && $v == -3) {
-                $err->raise("dom", _("The domain cannot be found in the whois database"));
+                $err->raise("dom", _("The name servers referenced by this domain do not match those referenced by this AlternC instance"));
                 return false;
             }
 
@@ -998,7 +999,7 @@ class m_dom {
                         $ligne = preg_replace("/^ *([^ ]*) \(.*\)$/", "\\1", trim($ligne));
                         if ($found)
                             $tmp = trim($ligne);
-                        if ($tmp)
+                        if (isset($tmp) && $tmp)
                             $serveurList[] = $tmp;
                         if ($ligne == "Nameservers:") {
                             $state = 1;
@@ -1503,7 +1504,7 @@ class m_dom {
      *  TRUE sinon.
      *
      */
-    function edit_domain($dom, $dns, $gesmx, $force = false, $ttl = 86400) {
+    function edit_domain($dom, $dns, $gesmx, $force = false, $ttl = 3600) {
         global $db, $err, $L_MX, $classes, $cuid, $hooks;
         $err->log("dom", "edit_domain", $dom . "/" . $dns . "/" . $gesmx);
         // Locked ?
@@ -1530,7 +1531,7 @@ class m_dom {
 
         # Can't have ttl == 0. There is also a check in function_dns
         if ($ttl == 0) {
-            $ttl = 86400;
+            $ttl = 3600;
         }
 
         $t = checkfqdn($dom);
@@ -1974,8 +1975,6 @@ class m_dom {
         if ($only_apache) {
             $params.=" and dt.only_dns is false ";
         }
-// BUG BUG BUG FIXME
-// Suppression de comptes -> membres existe pas -> domaines a supprimer ne sont pas lister
         $db->query("
 select 
   sd.id as sub_id, 
@@ -1991,6 +1990,8 @@ from
   domaines_type dt 
 where 
   v.name='mailname_bounce' 
+  and sd.web_action in ('OK', 'UPDATE')
+  and sd.enable in ('ENABLE', 'ENABLED')
   and lower(dt.name) = lower(sd.type) 
   $params 
 order by 
@@ -2001,7 +2002,7 @@ order by
         $r = array();
         while ($db->next_record()) {
             $r[$db->Record['sub_id']] = $db->Record;
-        }
+        } 
         return $r;
     }
 
@@ -2067,7 +2068,7 @@ order by
         // Initialize duplicate check
         $check_dup = array();
 
-        $ret = '';
+        $ret = "## AlternC Generated conf\n";
         foreach ($lst as $p) {
             // Check if duplicate
             if (in_array($p['fqdn'], $check_dup)) {
@@ -2126,8 +2127,29 @@ order by
                 break;
             default:
                 $sql = "UPDATE sub_domaines SET web_action='OK' WHERE id='$sub_domain_id'; ";
+		//UGLY PATCH activate / deactivate sub-domains #1645
+		$sqla= " UPDATE sub_domaines SET enable='ENABLED' WHERE id =$sub_domain_id and enable='ENABLE'; ";
+		$db->query($sqla);
+		$sqlb= " UPDATE sub_domaines SET enable='DISABLED' WHERE id =$sub_domain_id and enable='DISABLE'; ";
+		$db->query($sqlb);
+		//UGLY PATCH activate / deactivate sub-domains #1645
         }
         $db->query($sql);
+        return true;
+    }
+
+    /**
+    * @param string $domain_id: domain id to delete from database
+    * called from generate_apacheconf.php after a domain deletion
+    **/
+    function domain_delete() {
+        global $db,$err;
+        $err->log("dom", "domain_delete");
+        $sql = "delete from domaines where dns_action = 'delete' and domaine not in (select domaine from sub_domaines);";
+        if(!$db->query($sql)){
+        	$err->raise("dom", "Error deleting domain from database");
+		return false;
+	}
         return true;
     }
 
@@ -2172,15 +2194,24 @@ order by
         // by subdomain
         $tmp = array();
         foreach ($da['sub'] as $sub) {
-          if ($sub['web_action']!='OK') continue;
-            if (!$sub['only_dns']) {
-                if (!isset($tmp[$sub['fqdn']])) {
-                    $tmp[$sub['fqdn']] = 0;
-                }
-                $tmp[$sub['fqdn']]++;
-                if ($tmp[$sub['fqdn']] >= 2) {
-                    $errors[$sub['fqdn']] = sprintf(_("Problem on %s: there is more than 1 web configuration going to be generated for this sub-domain."), $sub['fqdn']);
-                }
+            // Skip when disable or deleted
+            if ($sub['enable']=='DISABLE') continue;
+            if ($sub['enable']=='DISABLED') continue;
+            if ($sub['web_action']=='DELETE') continue;
+
+            // Skip if "only_dns" and no conf generated
+            if ($sub['only_dns']) continue;
+
+            // Init the value in the tmp array
+            if (!isset($tmp[$sub['fqdn']])) {
+                $tmp[$sub['fqdn']] = 0;
+            }
+            // Increment value
+            $tmp[$sub['fqdn']]++;
+
+            // If there is more than 1 configuration file for this FQDN, alert !
+            if ($tmp[$sub['fqdn']] >= 2) {
+                $errors[$sub['fqdn']] = sprintf(_("Problem on %s: there is more than 1 web configuration going to be generated for this sub-domain."), $sub['fqdn']);
             }
         }
 

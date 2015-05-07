@@ -39,7 +39,7 @@ abstract class AlterncTest extends PHPUnit_Extensions_Database_TestCase
             $datasetList[]      = $dataSet;
         }
         $compositeDataSet            = new PHPUnit_Extensions_Database_DataSet_CompositeDataSet($datasetList);
-        return $dataSet;
+        return $compositeDataSet;
     } 
 
     

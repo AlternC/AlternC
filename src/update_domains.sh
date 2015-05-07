@@ -114,7 +114,7 @@ do
     mysql_query "delete from sub_domaines where domaine='$dom'; delete from domaines where domaine='$dom';"
 done
 
-if [ ! -z "$(cat "$RELOAD_WEB")" ] ; then
+if [ ! -z "$(cat "$RELOAD_WEB")" ] || [ "$1" = "force" ]; then
 
   # Just to encourage user to use THIS directory and not another one
   test -d "$VHOST_MANUALCONF" || mkdir -p "$VHOST_MANUALCONF"
@@ -132,7 +132,7 @@ if [ ! -z "$(cat "$RELOAD_WEB")" ] ; then
     else
       echo "Include \"$LOGFORMAT_FILE\""
     fi
-    find "$VHOST_DIR" -mindepth 2 -type f -iname "*.conf" -print0 | xargs -0 cat 
+    find "$VHOST_DIR/" -mindepth 2 -type f -iname "*.conf" -print0 | xargs -0 cat 
     echo "###END OF ALTERNC AUTO-GENERATED FILE - DO NOT EDIT MANUALLY###" 
   ) > "$tempo"
 

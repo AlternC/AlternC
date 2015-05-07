@@ -42,10 +42,10 @@ dns_get_zonettl() {
         )
     # default value
     if [ "$zonettl" == "" ] ; then
-        zonettl="86400"
+        zonettl="3600"
     fi
     if [ "$zonettl" -eq "0" ] ; then
-        zonettl="86400"
+        zonettl="3600"
     fi
     echo $zonettl
 }

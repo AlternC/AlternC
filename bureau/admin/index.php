@@ -32,6 +32,10 @@ if (!$mem->del_session()) {
 }
 
 $H=getenv("HTTP_HOST");
+if (variable_get('https_redirect', false, 'switch users to HTTPS') && !isset($_SERVER['HTTPS'])) {
+  header("Location: https://$H/");
+  exit();
+}
 
 if (!isset($restrictip)) {
   $restrictip=1;
@@ -74,7 +78,7 @@ if ( empty($logo) ||  ! $logo ) {
     <br/>
     <?php
     if (isset($_GET['authip_token'])) $authip_token=$_GET['authip_token'];
-    if (variable_get('https_warning', true, 'warn users to switch to HTTPS') && !isset($_SERVER['HTTPS'])) {
+    if (!isset($_SERVER['HTTPS'])) {
       echo '<h4>' . sprintf(_('WARNING: you are trying to access the control panel insecurely, click <a href="https://%s">here</a> to go to secure mode'), $_SERVER["HTTP_HOST"]) . '</h4>';
     }
     ?>

@@ -85,12 +85,8 @@ function d($mess){
  */
 function mail_it(){
   global $errorsList,$L_FQDN;
-  // Forces array
-  if( !is_array($errorsList)){
-      $errorsList = array($errorsList);
-  }
   // Builds message from array
-  $msg = implode("\n", $errorsList);
+  $msg = var_export($errorsList, TRUE);
   // Attempts to send email
   // @todo log if fails 
   mail("alterncpanel@$L_FQDN",'Script do_actions.php issues',"\n Errors reporting mail:\n\n$msg");
@@ -259,13 +255,8 @@ while ($rr=$action->get_action()){
       }
       break;
     default :
-      $output=array("Fail: Sorry dude, i do not know this type of action");
+      $errorsList[]=array("Fail: Sorry, i do not know this type of action: ". $r['type']);
       break;
-  }
-  // Get the error (if exists).
-  if(isset($output[0])){
-    $return=$output[0];
-    $errorsList[]="\nAction n°".$r["id"]." '".$r["type"]."' failed! With user: ".$r["user"]."\nHere is the complete output:\n".print_r($output);
   }
   // We finished the action, notify the DB.
   d("Finishing... return value is : $return\n");

@@ -111,6 +111,11 @@ class m_bro {
     $root_alternc=$root ;
     // Passage du root en chemin rel (diffrent avec un lien)
     $root=realpath($root) ;
+    if (! $root=realpath($root)) {
+      // Guillaume: it needed to work.. if file doesn't exist it need to crash
+      // gently
+      $root=$root_alternc;
+    }
     // separer le chemin entre le repertoire et le fichier
     $file=basename($dir);
     $dir=dirname($dir);
@@ -556,7 +561,7 @@ class m_bro {
    * @return boolean TRUE Si les fichiers ont t renomms, FALSE si une erreur s'est produite.
    */
   function ChangePermissions($R,$d,$perm,$verbose=false) {
-    global $err,$action;
+    global $err, $action;
     $absolute=$this->convertabsolute($R,false);
     if (!$absolute) {
       $err->raise("bro",_("File or folder name is incorrect"));
@@ -1022,6 +1027,9 @@ class m_bro {
     header("Content-Transfer-Encoding: binary");
     $d=escapeshellarg(".".$this->convertabsolute($dir,true));
     set_time_limit(0);
+    // relacher le lock global sinon ce download va geler alternc pour
+    // tout le monde
+    alternc_shutdown();
     passthru("/bin/tar -cZ -C ".getuserpath()."/".$mem->user["login"]."/ $d");
   }
 
@@ -1040,6 +1048,9 @@ class m_bro {
     header("Content-Transfer-Encoding: binary");
     $d=escapeshellarg(".".$this->convertabsolute($dir,true));
     set_time_limit(0);
+    // relacher le lock global sinon ce download va geler alternc pour
+    // tout le monde
+    alternc_shutdown();
     passthru("/bin/tar -cz -C ".getuserpath()."/ $d");
   }
  
@@ -1058,6 +1069,9 @@ class m_bro {
     header("Content-Transfer-Encoding: binary");
     $d=escapeshellarg(".".$this->convertabsolute($dir,true));
     set_time_limit(0);
+    // relacher le lock global sinon ce download va geler alternc pour
+    // tout le monde
+    alternc_shutdown();
     passthru("/bin/tar -cj -C ".getuserpath()."/ $d");
   }
 

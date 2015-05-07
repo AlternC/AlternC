@@ -76,6 +76,12 @@ foreach ( $todo as $taction=>$tlist){
   }
 }
 
+/**
+* This function is used to delete a domain from the database
+* after all it's sub domains were deleted.
+**/
+$dom->domain_delete();
+
 // Hooks !
 foreach (array('DELETE', 'CREATE', 'UPDATE', 'ENABLE', 'DISABLE') as $y) {
   if (!isset($todo[$y]) || empty($todo[$y])) continue;

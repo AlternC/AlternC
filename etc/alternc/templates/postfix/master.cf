@@ -113,5 +113,7 @@ mailman   unix  -       n       n       -       -       pipe
 #dovecot LDA, as explained here: http://wiki.dovecot.org/LDA/Postfix
 dovecot unix    -       n       n       -       0   pipe
   flags=DRhu  user=vmail:vmail argv=/usr/bin/sudo /usr/lib/dovecot/deliver -f ${sender} -a ${recipient} -d ${user}@${nexthop}
-
-
+#smtp      inet  n       -       n       -       1       postscreen
+#smtpd     pass  -       -       n       -       -       smtpd
+#dnsblog   unix  -       -       n       -       0       dnsblog
+#tlsproxy  unix  -       -       n       -       0       tlsproxy

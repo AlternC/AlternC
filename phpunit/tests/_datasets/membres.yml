@@ -9,6 +9,7 @@ membres:
     show_help : 0
     lastlogin : 2014-01-01 00:00:00
     lastfail : 0
+    db_server_id: 1
     lastip : 127.0.0.1
   - 
     uid : 2001
@@ -17,6 +18,7 @@ membres:
     enabled : 1
     su : 0
     mail : phpunit@alternc.org
+    db_server_id: 1
     show_help : 1
     lastlogin : 2014-01-01 00:00:00
     lastfail : 0

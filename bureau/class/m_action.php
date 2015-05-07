@@ -196,6 +196,7 @@ class m_action {
         global $db, $err;
         $err->log("action", "set", $type);
         $serialized = serialize($parameters);
+
         switch ($type) {
             case 'chmod':
                 $query = "insert into actions values ('','CHMOD','$serialized',now(),'','','$user','');";
@@ -224,6 +225,7 @@ class m_action {
             default:
                 return false;
         }
+
         if (!$db->query($query)) {
             $err->raise("action", _("Error setting actions"));
             return false;

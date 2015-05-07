@@ -112,6 +112,10 @@ class m_piwik {
 	    $user_creation_date = $user->date_registered;
 	    return $db->query("INSERT INTO piwik_users (uid, login, created_date) VALUES ('$cuid', '$user_login', '$user_creation_date')");
 	  }
+	  else {
+	    $err->raise('piwik', $api_data->message);
+            return FALSE;
+          }
 	} else { // api_data = false -> error is already filled
 	  return FALSE;
 	}
@@ -256,11 +260,7 @@ class m_piwik {
 
 	$user_data = $this->call_privileged_page('API', 'UsersManager.getUsersAccessFromSite', array('idSite' => $site->idsite));
 
-	//if (is_array($user_data)) {
-	    // printvar($user_data);
-	  //} else if(is_object($user_data)) {
-	    $item->rights = $user_data[0];
-	  //}
+	@$item->rights = $user_data[0];
 
 	$data[] = $item;
       }

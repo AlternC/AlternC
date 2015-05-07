@@ -2,27 +2,54 @@
 
 
 class system_bind {
-  var $ZONE_TEMPLATE ="/etc/alternc/templates/bind/templates/zone.template";
-  var $NAMED_TEMPLATE ="/etc/alternc/templates/bind/templates/named.template";
-  var $NAMED_CONF ="/var/lib/alternc/bind/automatic.conf";
-  var $RNDC ="/usr/sbin/rndc";
+  var $ZONE_TEMPLATE                    = "/etc/alternc/templates/bind/templates/zone.template";
+  var $NAMED_TEMPLATE                   = "/etc/alternc/templates/bind/templates/named.template";
+  var $NAMED_CONF                       = "/var/lib/alternc/bind/automatic.conf";
+  var $RNDC                             = "/usr/sbin/rndc";
 
-  var $dkim_trusted_host_file = "/etc/opendkim/TrustedHosts";
-  var $dkim_keytable_file = "/etc/opendkim/KeyTable";
-  var $dkim_signingtable_file = "/etc/opendkim/SigningTable";
+  var $dkim_trusted_host_file           = "/etc/opendkim/TrustedHosts";
+  var $dkim_keytable_file               = "/etc/opendkim/KeyTable";
+  var $dkim_signingtable_file           = "/etc/opendkim/SigningTable";
 
-  var $cache_conf_db = array();
-  var $cache_get_persistent = array();
-  var $cache_zone_file = array();
-  var $cache_domain_summary = array();
-  var $zone_file_directory = '/var/lib/alternc/bind/zones/';
+  var $cache_conf_db                    = array();
+  var $cache_get_persistent             = array();
+  var $cache_zone_file                  = array();
+  var $cache_domain_summary             = array();
+  var $zone_file_directory              = '/var/lib/alternc/bind/zones/';
 
   /**
    * 
+   * @param array $options optional parameters
    */
-  function system_bind() {
-    // Constructeur
-  }
+  public function __construct($options = null) {
+
+        if (isset($options["ZONE_TEMPLATE"])) {
+            $this->ZONE_TEMPLATE            = $options["ZONE_TEMPLATE"];
+        }
+        if (isset($options["NAMED_TEMPLATE"])) {
+            $this->NAMED_TEMPLATE           = $options["NAMED_TEMPLATE"];
+        }
+        if (isset($options["NAMED_CONF"])) {
+            $this->NAMED_CONF               = $options["NAMED_CONF"];
+        }
+        if (isset($options["RNDC"])) {
+            $this->RNDC                     = $options["RNDC"];
+        }
+
+        if (isset($options["dkim_trusted_host_file"])) {
+            $this->dkim_trusted_host_file   = $options["dkim_trusted_host_file"];
+        }
+        if (isset($options["dkim_keytable_file"])) {
+            $this->dkim_keytable_file       = $options["dkim_keytable_file"];
+        }
+        if (isset($options["dkim_signingtable_file"])) {
+            $this->dkim_signingtable_file   = $options["dkim_signingtable_file"];
+        }
+        if (isset($options["zone_file_directory"])) {
+            $this->zone_file_directory      = $options["zone_file_directory"];
+        }
+    }
+
 
   /**
    * Return the part of the conf we got from the database
@@ -43,14 +70,14 @@ class system_bind {
           sub_domaines sd,
           domaines_type dt 
         where 
-          sd.type=dt.name 
+          sd.type                       = dt.name 
           and sd.enable in ('ENABLE', 'ENABLED') 
         order by entry ;");
-      $t=array();
+      $t                                = array();
       while ($db->next_record()) {
         $t[$db->f('domaine')][] = $db->f('entry');
       }
-      $this->cache_conf_db = $t;
+      $this->cache_conf_db              = $t;
     }
     if ($domain) {
       if (isset($this->cache_conf_db[$domain])) {
@@ -99,14 +126,14 @@ class system_bind {
     // Choose between a generated and an incremented.
     
     // Calculated :
-    $calc = date('Ymd').'00'."\n";
+    $calc                               = date('Ymd').'00'."\n";
 
     // Old one :
-    $old=$calc; // default value
-    $file = $this->get_zone_file($domain);
+    $old                                = $calc; // default value
+    $file                               = $this->get_zone_file($domain);
     preg_match_all("/\s*(\d{10})\s+\;\sserial\s?/", $file, $output_array);
     if (isset($output_array[1][0]) && !empty($output_array[1][0])) {
-      $old = $output_array[1][0];
+      $old                              = $output_array[1][0];
     }
 
     // Return max between newly calculated, and old one incremented
@@ -150,7 +177,7 @@ class system_bind {
 
     // Use cache if is filled, if not, fill it
     if (empty($this->cache_domain_summary)) {
-      $this->cache_domain_summary = $dom->get_domain_all_summary();
+      $this->cache_domain_summary         = $dom->get_domain_all_summary();
     }
 
     if ($domain) return $this->cache_domain_summary[$domain];
@@ -163,7 +190,7 @@ class system_bind {
    * @return boolean
    */
   function dkim_delete($domain) {
-    $target_dir = "/etc/opendkim/keys/$domain";
+    $target_dir                         = "/etc/opendkim/keys/$domain";
     if (file_exists($target_dir)) {
       @unlink("$target_dir/alternc_private");
       @unlink("$target_dir/alternc.txt");
@@ -180,17 +207,17 @@ class system_bind {
    */
   function dkim_generate_key($domain) {
     // Stop here if we do not manage the mail
-    $domainInfo = $this->get_domain_summary($domain);
+    $domainInfo                         = $this->get_domain_summary($domain);
     if ( !  $domainInfo['gesmx'] ) return;
 
-    $target_dir = "/etc/opendkim/keys/$domain";
+    $target_dir                         = "/etc/opendkim/keys/$domain";
 
     if (file_exists($target_dir.'/alternc.txt')) return; // Do not generate if exist
 
     if (! is_dir($target_dir)) mkdir($target_dir); // create dir
 
     // Generate the key
-    $old_dir=getcwd();
+    $old_dir                            = getcwd();
     chdir($target_dir);
     exec('opendkim-genkey -r -d '.escapeshellarg($domain).' -s "alternc" ');
     chdir($old_dir);
@@ -207,9 +234,9 @@ class system_bind {
    */
   function dkim_refresh_list() { 
     // so ugly... but there is only 1 pass, not 3. Still ugly.
-    $trusted_host_new = "# WARNING: this file is auto generated by AlternC.\n# Add your changes after the last line\n";
-    $keytable_new     = "# WARNING: this file is auto generated by AlternC.\n# Add your changes after the last line\n";
-    $signingtable_new = "# WARNING: this file is auto generated by AlternC.\n# Add your changes after the last line\n";
+    $trusted_host_new                   = "# WARNING: this file is auto generated by AlternC.\n# Add your changes after the last line\n";
+    $keytable_new                       = "# WARNING: this file is auto generated by AlternC.\n# Add your changes after the last line\n";
+    $signingtable_new                   = "# WARNING: this file is auto generated by AlternC.\n# Add your changes after the last line\n";
 
     # Generate automatic entry
     foreach ($this->get_domain_summary() as $domain => $ds ) {
@@ -220,31 +247,31 @@ class system_bind {
       if (! file_exists("/etc/opendkim/keys/$domain/alternc.txt")) continue; 
 
       // Modif the files.
-      $trusted_host_new.="$domain\n";
-      $keytable_new    .="alternc._domainkey.$domain $domain:alternc:/etc/opendkim/keys/$domain/alternc.private\n";
-      $signingtable_new.="$domain alternc._domainkey.$domain\n";
+      $trusted_host_new                .= "$domain\n";
+      $keytable_new                    .= "alternc._domainkey.$domain $domain:alternc:/etc/opendkim/keys/$domain/alternc.private\n";
+      $signingtable_new                .= "$domain alternc._domainkey.$domain\n";
     }
-    $trusted_host_new.="# END AUTOMATIC FILE. ADD YOUR CHANGES AFTER THIS LINE\n";
-    $keytable_new    .="# END AUTOMATIC FILE. ADD YOUR CHANGES AFTER THIS LINE\n";
-    $signingtable_new.="# END AUTOMATIC FILE. ADD YOUR CHANGES AFTER THIS LINE\n";
+    $trusted_host_new                  .= "# END AUTOMATIC FILE. ADD YOUR CHANGES AFTER THIS LINE\n";
+    $keytable_new                      .= "# END AUTOMATIC FILE. ADD YOUR CHANGES AFTER THIS LINE\n";
+    $signingtable_new                  .= "# END AUTOMATIC FILE. ADD YOUR CHANGES AFTER THIS LINE\n";
 
     # Get old files
-    $trusted_host_old=@file_get_contents($this->dkim_trusted_host_file);
-    $keytable_old    =@file_get_contents($this->dkim_keytable_file);
-    $signingtable_old=@file_get_contents($this->dkim_signingtable_file);
+    $trusted_host_old                   = @file_get_contents($this->dkim_trusted_host_file);
+    $keytable_old                       = @file_get_contents($this->dkim_keytable_file);
+    $signingtable_old                   = @file_get_contents($this->dkim_signingtable_file);
     
     # Keep manuel entry
     preg_match_all('/\#\s*END\ AUTOMATIC\ FILE\.\ ADD\ YOUR\ CHANGES\ AFTER\ THIS\ LINE(.*)/s', $trusted_host_old, $output_array);
     if (isset($output_array[1][0]) && !empty($output_array[1][0])) {
-      $trusted_host_new.=$output_array[1][0];
+      $trusted_host_new                .= $output_array[1][0];
     } 
     preg_match_all('/\#\s*END\ AUTOMATIC\ FILE\.\ ADD\ YOUR\ CHANGES\ AFTER\ THIS\ LINE(.*)/s', $keytable_old, $output_array);
     if (isset($output_array[1][0]) && !empty($output_array[1][0])) {
-      $keytable_new.=$output_array[1][0];
+      $keytable_new                    .= $output_array[1][0];
     } 
     preg_match_all('/\#\s*END\ AUTOMATIC\ FILE\.\ ADD\ YOUR\ CHANGES\ AFTER\ THIS\ LINE(.*)/s', $signingtable_old, $output_array);
     if (isset($output_array[1][0]) && !empty($output_array[1][0])) {
-      $signingtable_new.=$output_array[1][0];
+      $signingtable_new                .= $output_array[1][0];
     } 
     
     // Save if there are some diff
@@ -265,8 +292,8 @@ class system_bind {
    * @return string
    */
   function dkim_entry($domain) {
-    $keyfile="/etc/opendkim/keys/$domain/alternc.txt";
-    $domainInfo         = $this->get_domain_summary($domain);
+    $keyfile                            = "/etc/opendkim/keys/$domain/alternc.txt";
+    $domainInfo                         = $this->get_domain_summary($domain);
     if (! file_exists($keyfile) &&  $domainInfo['gesmx'] ) {
       $this->dkim_generate_key($domain);
     }
@@ -281,20 +308,20 @@ class system_bind {
    * @return string
    */
   function mail_autoconfig_entry($domain) {
-    $zone= implode("\n",$this->conf_from_db($domain))."\n".$this->get_persistent($domain);
+    $zone                               = implode("\n",$this->conf_from_db($domain))."\n".$this->get_persistent($domain);
 
-    $entry='';
-    $domainInfo                 = $this->get_domain_summary($domain);
+    $entry                              = '';
+    $domainInfo                         = $this->get_domain_summary($domain);
     if ( $domainInfo['gesmx'] ) {
       // If we manage the mail
 
       // Check if there is no the same entry (defined or manual)
       // can be toto IN A or toto.fqdn.tld. IN A
       if (! preg_match("/autoconfig(\s|\.".str_replace('.','\.',$domain)."\.)/", $zone )) {
-        $entry.="autoconfig IN CNAME %%fqdn%%.\n";
+        $entry                         .= "autoconfig IN CNAME %%fqdn%%.\n";
       }
       if (! preg_match("/autodiscover(\s|\.".str_replace('.','\.',$domain)."\.)/", $zone )) {
-        $entry.="autodiscover IN CNAME %%fqdn%%.\n";
+        $entry                         .= "autodiscover IN CNAME %%fqdn%%.\n";
       }
     } // if gesmx
     return $entry;
@@ -317,19 +344,19 @@ class system_bind {
   function get_zone($domain) {
     global $L_FQDN, $L_NS1_HOSTNAME, $L_NS2_HOSTNAME, $L_DEFAULT_MX, $L_DEFAULT_SECONDARY_MX, $L_PUBLIC_IP;
 
-    $zone =$this->get_zone_header();
-    $zone.=implode("\n",$this->conf_from_db($domain));
-    $zone.="\n;;;HOOKED ENTRY\n";
+    $zone                               = $this->get_zone_header();
+    $zone                              .= implode("\n",$this->conf_from_db($domain));
+    $zone                              .= "\n;;;HOOKED ENTRY\n";
 
-    $zone.= $this->dkim_entry($domain);
-    $zone.= $this->mail_autoconfig_entry($domain);
+    $zone                              .= $this->dkim_entry($domain);
+    $zone                              .= $this->mail_autoconfig_entry($domain);
 
     $zone.="\n;;; END ALTERNC AUTOGENERATE CONFIGURATION\n";
     $zone.=$this->get_persistent($domain);
     $domainInfo = $this->get_domain_summary($domain);
 
     // FIXME check those vars
-    $zone = strtr($zone, array(
+    $zone                               = strtr($zone, array(
             "%%fqdn%%"=>"$L_FQDN",
             "%%ns1%%"=>"$L_NS1_HOSTNAME",
             "%%ns2%%"=>"$L_NS2_HOSTNAME",
@@ -392,7 +419,7 @@ class system_bind {
     }
  
     // Save file, and apply chmod/chown
-    $file=$this->get_zone_file_uri($domain);
+    $file                               = $this->get_zone_file_uri($domain);
     file_put_contents($file, $this->get_zone($domain));
     chown($file, 'bind');
     chmod($file, 0640);
@@ -408,7 +435,7 @@ class system_bind {
    * @return boolean
    */
   function delete_zone($domain) {
-    $file=$this->get_zone_file_uri($domain);
+    $file                               = $this->get_zone_file_uri($domain);
     if (file_exists($file)) {
       unlink($file);
     }
@@ -424,15 +451,15 @@ class system_bind {
   function reload_named() {
     global $hooks;
     // Generate the new conf file
-    $new_named_conf="// DO NOT EDIT\n// This file is generated by Alternc.\n// Every changes you'll make will be overwrited.\n";
-    $tpl=file_get_contents($this->NAMED_TEMPLATE);
+    $new_named_conf                     = "// DO NOT EDIT\n// This file is generated by Alternc.\n// Every changes you'll make will be overwrited.\n";
+    $tpl                                = file_get_contents($this->NAMED_TEMPLATE);
     foreach ($this->get_domain_summary() as $domain => $ds ) {
       if ( ! $ds['gesdns'] || strtoupper($ds['dns_action']) == 'DELETE' ) continue;
-      $new_named_conf.=strtr($tpl, array("@@DOMAINE@@"=>$domain, "@@ZONE_FILE@@"=>$this->get_zone_file_uri($domain)));
+      $new_named_conf                  .= strtr($tpl, array("@@DOMAINE@@"=>$domain, "@@ZONE_FILE@@"=>$this->get_zone_file_uri($domain)));
     }
 
     // Get the actual conf file
-    $old_named_conf = @file_get_contents($this->NAMED_CONF);
+    $old_named_conf                     = @file_get_contents($this->NAMED_CONF);
 
     // Apply new configuration only if there are some differences
     if ($old_named_conf != $new_named_conf ) {
