@@ -10,6 +10,8 @@ debian/alternc*.postrm.debhelper
 debian/alternc*.substvars
 debian/alternc*.postrm.debhelper
 debian/alternc
+debian/alternc-api
+debian/alternc-ssl
 debian/alternc-awstats
 debian/alternc-roundcube
 debian/alternc-slave
