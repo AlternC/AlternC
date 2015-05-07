@@ -1,0 +1,16 @@
+HOME                    = .
+RANDFILE                = $ENV::HOME/.rnd
+oid_section             = new_oids
+[ new_oids ]
+[ req ]
+default_md		= sha256
+default_bits            = 2048
+default_keyfile         = privkey.pem
+distinguished_name      = req_distinguished_name
+attributes              = req_attributes
+string_mask = nombstr
+
+[ req_distinguished_name ]
+commonName                      = Your domain name
+commonName_max                  = 256
+[ req_attributes ]

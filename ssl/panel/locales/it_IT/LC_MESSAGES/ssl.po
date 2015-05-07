@@ -1,0 +1,513 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR AlternC Team
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: AlternC 2.0\n"
+"Report-Msgid-Bugs-To: i18n@alternc.org\n"
+"POT-Creation-Date: 2015-02-13 18:04+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: it_IT\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../admin/ssl_delete.php:43
+msgid "Your SSL Certificate has been deleted"
+msgstr ""
+
+#: ../admin/ssl_doimport.php:39
+msgid "Please enter an ssl key and a certificate"
+msgstr ""
+
+#: ../admin/ssl_donew.php:38
+msgid "Please enter a proper domain name"
+msgstr ""
+
+#: ../admin/ssl_finalize.php:49
+msgid "Your ssl certificate has been imported successfully"
+msgstr ""
+
+#: ../admin/ssl_list.php:51 ../admin/ssl_view.php:50
+msgid "Pending Certificate"
+msgstr ""
+
+#: ../admin/ssl_list.php:52
+msgid "Valid"
+msgstr ""
+
+#: ../admin/ssl_list.php:53
+msgid "Expired"
+msgstr ""
+
+#: ../admin/ssl_list.php:59
+msgid ""
+"Some of your hosting are using a <b>self-signed</b> certificate. <br>Your "
+"browser will not let you surf those domains properly<br>To fix this, buy a "
+"properly signed certificate"
+msgstr ""
+
+#: ../admin/ssl_list.php:71
+msgid "Your Certificates"
+msgstr ""
+
+#: ../admin/ssl_list.php:73
+msgid ""
+"Please find below your SSL Certificates. Some may be provided by the "
+"administrator of the server, some may be Expired or Pending (waiting for a "
+"CRT from your Certificate Provider)"
+msgstr ""
+
+#: ../admin/ssl_list.php:75
+msgid "Only show the following certificates:"
+msgstr ""
+
+#: ../admin/ssl_list.php:76
+msgid "Pending Certificates"
+msgstr ""
+
+#: ../admin/ssl_list.php:77
+msgid "Valid Certificates"
+msgstr ""
+
+#: ../admin/ssl_list.php:78
+msgid "Expired Certificates"
+msgstr ""
+
+#: ../admin/ssl_list.php:80
+msgid "Certificates Shared by the Administrator"
+msgstr ""
+
+#: ../admin/ssl_list.php:82
+msgid "Filter"
+msgstr ""
+
+#: ../admin/ssl_list.php:85
+msgid "Domain Name"
+msgstr ""
+
+#: ../admin/ssl_list.php:85
+msgid "Status"
+msgstr ""
+
+#: ../admin/ssl_list.php:85
+msgid "Used by"
+msgstr ""
+
+#: ../admin/ssl_list.php:85
+msgid "Validity period"
+msgstr ""
+
+#: ../admin/ssl_list.php:91
+msgid "Details"
+msgstr ""
+
+#: ../admin/ssl_list.php:97
+msgid "(shared)"
+msgstr ""
+
+#: ../admin/ssl_list.php:102 ../admin/ssl_list.php:106
+#: ../admin/ssl_list.php:112 ../admin/ssl_view.php:65
+#: ../admin/ssl_view.php:119 ../admin/ssl_view.php:133
+#, php-format
+msgid "%3$d-%2$d-%1$d %4$d:%5$d"
+msgstr ""
+
+#: ../admin/ssl_list.php:111
+msgid "Requested on: "
+msgstr ""
+
+#: ../admin/ssl_list.php:129
+msgid "Create one"
+msgstr ""
+
+#: ../admin/ssl_list.php:130
+msgid ""
+"This hosting has no valid certificate<br>a self-signed one has been created"
+msgstr ""
+
+#: ../admin/ssl_list.php:140
+msgid "Create or Import a new SSL Certificate"
+msgstr ""
+
+#: ../admin/ssl_new.php:42
+msgid "New SSL Certificate"
+msgstr ""
+
+#: ../admin/ssl_new.php:50
+msgid ""
+"An SSL certificate is a file which must be obtained from a Certificate "
+"Authority, and allow you to enable HTTPS encryption on a domain name."
+msgstr ""
+
+#: ../admin/ssl_new.php:53
+msgid ""
+"To obtain one, you need to generate a <i>Certificate Request</i> (CSR) and a "
+"<i>RSA Key</i> (KEY) here, then give the CSR to the Certificate Authority, "
+"which will give you a certificate (CRT) and also often a chained certificate "
+"(CHAIN)."
+msgstr ""
+
+#: ../admin/ssl_new.php:56
+msgid ""
+"If you already know what it is and already have all those files (CRT/KEY/"
+"CHAIN) You can import them here too."
+msgstr ""
+
+#: ../admin/ssl_new.php:64
+msgid "Create a CSR/KEY"
+msgstr ""
+
+#: ../admin/ssl_new.php:65
+msgid "Import existing files"
+msgstr ""
+
+#: ../admin/ssl_new.php:69
+msgid "Create a CSR/KEY for a given domain name"
+msgstr ""
+
+#: ../admin/ssl_new.php:71
+msgid ""
+"Use this form to generate a <i>Certificate Request file</i> (CSR) and a "
+"<i>RSA Key file</i> (KEY) for a given domain name"
+msgstr ""
+
+#: ../admin/ssl_new.php:98
+msgid ""
+"Please choose the domain name for which you want a SSL Certificate, or enter "
+"it manually"
+msgstr ""
+
+#: ../admin/ssl_new.php:101 ../admin/ssl_view.php:60
+msgid "Fully Qualified Domain Name"
+msgstr ""
+
+#: ../admin/ssl_new.php:104
+msgid "--- Choose here ---"
+msgstr ""
+
+#: ../admin/ssl_new.php:110
+msgid "... or click here to enter it manually"
+msgstr ""
+
+#: ../admin/ssl_new.php:117 ../admin/ssl_new.php:151 ../admin/ssl_view.php:82
+msgid "Save"
+msgstr ""
+
+#: ../admin/ssl_new.php:118 ../admin/ssl_new.php:152 ../admin/ssl_view.php:83
+msgid "Cancel"
+msgstr ""
+
+#: ../admin/ssl_new.php:123
+msgid ""
+"<i>(If you want to get a valid certificate for all the subdomains of a "
+"domain, use a wildcard notation (eg: *.example.com). Please note that a "
+"wildcard certificate is usually more expensive than normal one.)</i>"
+msgstr ""
+
+#: ../admin/ssl_new.php:123
+msgid ""
+"Please note that a SSL Certificate is only valid for one fully qualified "
+"domain name. As a result, a certificate for <code>www.example.com</code> is "
+"NOT valid for <code>intranet.example.com</code> or <code>intranet.www."
+"example.com</code> !"
+msgstr ""
+
+#: ../admin/ssl_new.php:130
+msgid "Import existing Key Certificate and Chain files"
+msgstr ""
+
+#: ../admin/ssl_new.php:132
+msgid ""
+"If you already have a RSA Key file, a Certificate for this key and (maybe) a "
+"Chained certificate, please paste their content here."
+msgstr ""
+
+#: ../admin/ssl_new.php:133
+msgid ""
+"We will verify the content of those files and add them in your certificate "
+"repository"
+msgstr ""
+
+#: ../admin/ssl_new.php:138
+msgid "RSA Key"
+msgstr ""
+
+#: ../admin/ssl_new.php:142 ../admin/ssl_view.php:73 ../admin/ssl_view.php:159
+msgid "SSL Certificate"
+msgstr ""
+
+#: ../admin/ssl_new.php:146 ../admin/ssl_view.php:77 ../admin/ssl_view.php:164
+msgid "Chained Certificate<br />(not mandatory)"
+msgstr ""
+
+#: ../admin/ssl_share.php:30
+msgid "This page is restricted to authorized staff"
+msgstr ""
+
+#: ../admin/ssl_view.php:52
+msgid ""
+"Your <i>Certificate Request File</i> (CSR) has been created, along with its "
+"<i>private RSA Key</i> (KEY). Please find below the CSR you must send to "
+"your SSL Certificate provider."
+msgstr ""
+
+#: ../admin/ssl_view.php:54
+msgid ""
+"Once you'll have your <i>Certificate File</i> (CRT) and a <i>Chained "
+"Certificate File</i> (CHAIN), please paste them here to finish the "
+"enrollment."
+msgstr ""
+
+#: ../admin/ssl_view.php:64
+msgid "Date of the request"
+msgstr ""
+
+#: ../admin/ssl_view.php:68 ../admin/ssl_view.php:154
+msgid "Certificate Request File"
+msgstr ""
+
+#: ../admin/ssl_view.php:85 ../admin/ssl_view.php:213
+msgid "Delete"
+msgstr ""
+
+#: ../admin/ssl_view.php:86
+msgid ""
+"Please confirm that you want to delete this certificate request AND ITS "
+"PRIVATE KEY!"
+msgstr ""
+
+#: ../admin/ssl_view.php:97
+msgid "Valid Certificate"
+msgstr ""
+
+#: ../admin/ssl_view.php:98
+msgid "Please find below your valid certificate data."
+msgstr ""
+
+#: ../admin/ssl_view.php:104
+msgid "EXPIRED Certificate"
+msgstr ""
+
+#: ../admin/ssl_view.php:105
+msgid ""
+"Your certificate is EXPIRED. You should not use it for any purpose. Please "
+"find below its data."
+msgstr ""
+
+#: ../admin/ssl_view.php:113
+msgid "Back to my SSL Certificates"
+msgstr ""
+
+#: ../admin/ssl_view.php:117
+msgid "Valid From:"
+msgstr ""
+
+#: ../admin/ssl_view.php:123
+#, php-format
+msgid "(%d days ago)"
+msgstr ""
+
+#: ../admin/ssl_view.php:126
+#, php-format
+msgid "(%d month ago)"
+msgstr ""
+
+#: ../admin/ssl_view.php:131
+msgid "Valid Until:"
+msgstr ""
+
+#: ../admin/ssl_view.php:137
+#, php-format
+msgid "(%d days from now)"
+msgstr ""
+
+#: ../admin/ssl_view.php:140
+#, php-format
+msgid "(%d month from now)"
+msgstr ""
+
+#: ../admin/ssl_view.php:145
+msgid "FQDN:"
+msgstr ""
+
+#: ../admin/ssl_view.php:149
+msgid "Other Valid FQDN:"
+msgstr ""
+
+#: ../admin/ssl_view.php:173
+msgid ""
+"As an administrator you can allow any account on this server to use this "
+"certificate to host his services. <br />(This is only useful for wildcard or "
+"multi-domain certificates)."
+msgstr ""
+
+#: ../admin/ssl_view.php:177
+msgid "This certificate is currently <b>shared</b>"
+msgstr ""
+
+#: ../admin/ssl_view.php:184
+msgid "Click here to stop sharing this certificate"
+msgstr ""
+
+#: ../admin/ssl_view.php:189 ../admin/ssl_view.php:205
+msgid ""
+"You are not the owner of this certificate, only its owner can share/unshare "
+"this certificate."
+msgstr ""
+
+#: ../admin/ssl_view.php:193
+msgid "This certificate is currently <b>NOT shared</b>"
+msgstr ""
+
+#: ../admin/ssl_view.php:200
+msgid "Click here to share this certificate"
+msgstr ""
+
+#: ../admin/ssl_view.php:214
+msgid ""
+"Please confirm that you want to delete this certificate AND ITS PRIVATE KEY!"
+msgstr ""
+
+#: ../class/m_ssl.php:69 ../class/m_ssl.php:418
+msgid "SSL Certificates"
+msgstr ""
+
+#: ../class/m_ssl.php:79
+msgid "New SSL certificate"
+msgstr ""
+
+#: ../class/m_ssl.php:93
+msgid "List SSL Certificates"
+msgstr ""
+
+#: ../class/m_ssl.php:152
+msgid "No SSL certificates available"
+msgstr ""
+
+#: ../class/m_ssl.php:175
+msgid "You currently have no hosting using SSL certificate"
+msgstr ""
+
+#: ../class/m_ssl.php:196
+msgid "Bad FQDN domain name"
+msgstr ""
+
+#: ../class/m_ssl.php:202 ../class/m_ssl.php:774
+msgid "Can't generate a private key (1)"
+msgstr ""
+
+#: ../class/m_ssl.php:207 ../class/m_ssl.php:779
+msgid "Can't generate a private key (2)"
+msgstr ""
+
+#: ../class/m_ssl.php:218
+msgid "Can't generate a CSR"
+msgstr ""
+
+#: ../class/m_ssl.php:234 ../class/m_ssl.php:250 ../class/m_ssl.php:273
+msgid "Can't find this Certificate"
+msgstr ""
+
+#: ../class/m_ssl.php:353
+msgid "Can't save the Key/Crt/Chain now. Please try later."
+msgstr ""
+
+#: ../class/m_ssl.php:390
+msgid "Can't save the Crt/Chain now. Please try later."
+msgstr ""
+
+#: ../class/m_ssl.php:618
+msgid "Alias already exists"
+msgstr ""
+
+#: ../class/m_ssl.php:637
+msgid "Alias not found"
+msgstr ""
+
+#: ../class/m_ssl.php:666
+msgid ""
+"Can't find the private key in the certificate table, please check your form."
+msgstr ""
+
+#: ../class/m_ssl.php:675
+msgid ""
+"The certificate must begin by BEGIN CERTIFICATE and end by END CERTIFICATE "
+"lines. Please check you pasted it in PEM form."
+msgstr ""
+
+#: ../class/m_ssl.php:680
+msgid ""
+"The chained certificate must begin by BEGIN CERTIFICATE and end by END "
+"CERTIFICATE lines. Please check you pasted it in PEM form."
+msgstr ""
+
+#: ../class/m_ssl.php:686
+msgid ""
+"The private key must begin by BEGIN (RSA )PRIVATE KEY and end by END (RSA )"
+"PRIVATE KEY lines. Please check you pasted it in PEM form."
+msgstr ""
+
+#: ../class/m_ssl.php:722
+#, php-format
+msgid "The %d-th certificate in the chain is invalid"
+msgstr ""
+
+#: ../class/m_ssl.php:730
+msgid "The certificate is invalid."
+msgstr ""
+
+#: ../class/m_ssl.php:735
+msgid "The private key is invalid."
+msgstr ""
+
+#: ../class/m_ssl.php:740
+msgid "The private key is not the one signed inside the certificate."
+msgstr ""
+
+#: ../class/m_ssl.php:746
+msgid "Can't export your certificate as a string, please check its syntax."
+msgstr ""
+
+#: ../class/m_ssl.php:751
+msgid ""
+"Can't export one of your chained certificates as a string, please check its "
+"syntax."
+msgstr ""
+
+#: ../class/m_ssl.php:757
+msgid "Can't export your private key as a string, please check its syntax."
+msgstr ""
+
+#: ../class/m_ssl.php:800
+msgid "Locally hosted forcing HTTPS"
+msgstr ""
+
+#: ../class/m_ssl.php:801
+msgid "Locally hosted HTTP and HTTPS"
+msgstr ""
+
+#: ../class/m_ssl.php:802
+msgid "HTTPS AlternC panel access"
+msgstr ""
+
+#: ../class/m_ssl.php:803
+msgid "HTTPS Roundcube Webmail"
+msgstr ""
+
+#: ../class/m_ssl.php:804
+msgid "HTTPS Squirrelmail Webmail"
+msgstr ""
+
+#: ../class/m_ssl.php:805
+msgid "php52 forcing HTTPS"
+msgstr ""
+
+#: ../class/m_ssl.php:806
+msgid "php52 HTTP and HTTPS"
+msgstr ""

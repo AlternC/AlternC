@@ -1,0 +1,4 @@
+etc/alternc/apache-panel.d
+usr/share/alternc/panel/admin/api
+usr/share/php/Alternc/Api/Auth
+usr/share/php/Alternc/Api/Object
