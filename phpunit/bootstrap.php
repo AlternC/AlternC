@@ -1,5 +1,4 @@
 <?php
-
 // *****************************************************************************
 // 
 // Alternc bootstrapping                  
@@ -133,20 +132,11 @@ foreach ($mysqlConfigFile as $line) {
 * This class heriting from the db class of the phplib manages
 * the connection to the MySQL database.
 */
-class DB_system extends DB_Sql {
-    var $Host,$Database,$User,$Password;
-    /**
-        * Constructor
-        */
-    function DB_system($user,$database,$password) {
-        global $L_MYSQL_HOST,$L_MYSQL_DATABASE,$L_MYSQL_LOGIN,$L_MYSQL_PWD;
-        $this->Host                     = "127.0.0.1";
-        $this->Database                 = $database;
-        $this->User                     = $user;
-        $this->Password                 = $password;
-    }
-}
-
+class DB_system extends DB_Sql { 
+  function __construct($database, $user, $password) { 
+    parent::__construct($database, '127.0.0.1', $user, $password);
+  } 
+} 
 
 // Creates database from schema 
 // *********************************************
@@ -175,8 +165,10 @@ global $mysql;
 global $ftp;
 global $quota;
 global $db;
-$db                                     = new \DB_system($user,$database,$password);
-$db->connect();
+
+// this class is defined above ^^^
+$db                                     = new \DB_system($database, $user, $password);
+
 $cuid                                   = 0;
 $variables                              = new \m_variables();
 $mem                                    = new \m_mem();
