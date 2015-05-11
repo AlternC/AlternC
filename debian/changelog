@@ -1,6 +1,7 @@
 alternc (3.1.6) oldstable; urgency=low
 
   * add SSL and API alternc packages (Beta)
+  * fix french translation misunderstanding
 
  -- Benjamin Sonntag <benjamin@sonntag.fr>  Thu,  7 May 2015 17:44:12 +0200
 
