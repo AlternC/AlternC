@@ -5499,11 +5499,11 @@ msgstr "Hébergé localement"
 
 #: ../class/m_dom.php:2203
 msgid "URL redirection"
-msgstr "Redirection vers l'URL :"
+msgstr "Redirection vers l'URL"
 
 #: ../class/m_dom.php:2203
 msgid "URL redirection, HTTP & HTTPS"
-msgstr "Redirection HTTP & HTTPS vers l'URL :"
+msgstr "Redirection HTTP & HTTPS vers l'URL"
 
 #: ../class/m_dom.php:2204
 msgid "IPv4 redirect"
@@ -5535,7 +5535,7 @@ msgstr "Entrée DNS TXT"
 
 #: ../class/m_dom.php:2211
 msgid "MX DNS entry"
-msgstr "Entrée DNS TXT"
+msgstr "Entrée DNS MX"
 
 #: ../class/m_dom.php:2212
 msgid "secondary MX DNS entry"
