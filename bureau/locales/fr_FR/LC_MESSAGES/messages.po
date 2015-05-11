@@ -224,9 +224,8 @@ msgid "Password"
 msgstr "Mot de passe"
 
 #: ../../awstats/bureau/admin/aws_users.php:57
-#, fuzzy
 msgid "Create this new Awstats user"
-msgstr "Créer cet utilisateur"
+msgstr "Créer cet utilisateur de Awstats"
 
 #: ../../awstats/bureau/admin/aws_users.php:86
 msgid "Change password"
@@ -244,9 +243,8 @@ msgstr "Supprimer les comptes AlternC cochés"
 
 #: ../../awstats/bureau/admin/menu_aws.php:39
 #: ../../awstats/bureau/class/m_aws.php:59
-#, fuzzy
 msgid "Web Statistics"
-msgstr "Statistiques web brutes"
+msgstr "Statistiques Web"
 
 #: ../../awstats/bureau/class/m_aws.php:82
 msgid ""
@@ -262,9 +260,8 @@ msgstr ""
 "nombreuses langues."
 
 #: ../../awstats/bureau/class/m_aws.php:123
-#, fuzzy
 msgid "No statistics currently defined"
-msgstr "Aucun jeu de sélectionné !"
+msgstr "Aucun jeu de statistique pour l'instant"
 
 #: ../../awstats/bureau/class/m_aws.php:162
 #: ../../awstats/bureau/class/m_aws.php:325
@@ -2939,7 +2936,7 @@ msgid "Deletion pending"
 msgstr "Suppression en attente"
 
 #: ../admin/dom_edit.php:232
-#, fuzzy, php-format
+#, php-format
 msgid "Add a subdomain to %s"
 msgstr "Ajouter un sous-domaine à %s"
 
@@ -3180,7 +3177,6 @@ msgid "Editing a FTP account"
 msgstr "Modification d'un compte FTP"
 
 #: ../admin/ftp_edit.php:80
-#, fuzzy
 msgid ""
 "This is the root folder for this FTP user. i.e. this FTP user can access to "
 "this folder and all its sub-folders."
@@ -3569,14 +3565,12 @@ msgid "Auto Reload"
 msgstr ""
 
 #: ../admin/logs_tail.php:69
-#, fuzzy
 msgid "Last lines shown"
-msgstr "Dernière connexion"
+msgstr "Dernière lignes montrées"
 
 #: ../admin/logs_tail.php:72
-#, fuzzy
 msgid "Back to the logs list"
-msgstr "Retour à la liste des variables"
+msgstr "Retour à la liste des journaux"
 
 #: ../admin/mail_del.php:54
 msgid "Deleting mail accounts"
@@ -5209,12 +5203,10 @@ msgid "Go back to the file manager"
 msgstr "Retour au gestionnaire de fichiers"
 
 #: ../class/m_bro.php:205
-#, fuzzy
-msgid "This directory do not exist."
+msgid "This directory does not exist."
 msgstr "Le dossier n'existe pas"
 
 #: ../class/m_bro.php:209
-#, fuzzy
 msgid "This directory is not readable."
 msgstr "Le dossier n'existe pas"
 
@@ -5506,9 +5498,12 @@ msgid "Locally hosted"
 msgstr "Hébergé localement"
 
 #: ../class/m_dom.php:2203
-#, fuzzy
 msgid "URL redirection"
-msgstr "Redirection vers l'URL : "
+msgstr "Redirection vers l'URL :"
+
+#: ../class/m_dom.php:2203
+msgid "URL redirection, HTTP & HTTPS"
+msgstr "Redirection HTTP & HTTPS vers l'URL :"
 
 #: ../class/m_dom.php:2204
 msgid "IPv4 redirect"

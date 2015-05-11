@@ -202,7 +202,7 @@ class m_bro {
     $db->query("UPDATE browser SET lastdir='$dir' WHERE uid='$cuid';");
     $absolute=$this->convertabsolute($dir,false);
     if (!$absolute || !file_exists($absolute)) {
-      $err->raise('bro',_("This directory do not exist."));
+      $err->raise('bro',_("This directory does not exist."));
       return false;
     }
     if (!is_readable($absolute)) {

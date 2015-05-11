@@ -30,6 +30,9 @@ if ($argv[1] == "before-reload") {
     $db->query("INSERT IGNORE INTO `domaines_type` (name, description, target, entry, compatibility, enable, only_dns, need_dns, advanced ) VALUES
             ('panel-ssl', 'HTTPS AlternC panel access', 'NONE', '%SUB% IN A @@PUBLIC_IP@@', 'ip,ipv6,cname,txt,mx,mx2,defmx,defmx2', 'ALL', 0, 0, 1);");
 
+    $db->query("INSERT IGNORE INTO `domaines_type` (name, description, target, entry, compatibility, enable, only_dns, need_dns, advanced ) VALUES
+            ('url-ssl', 'URL redirection, HTTP & HTTPS', 'NONE', '%SUB% IN A @@PUBLIC_IP@@', 'ip,ipv6,cname,txt,mx,mx2,defmx,defmx2', 'ALL', 0, 0, 1);");
+
     $db->query("SELECT * FROM domaines_type WHERE name='roundcube';");
     if ($db->next_record()) {
         $db->query("INSERT IGNORE INTO `domaines_type` (name, description, target, entry, compatibility, enable, only_dns, need_dns, advanced ) VALUES
