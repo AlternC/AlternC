@@ -788,6 +788,3 @@ msgstr "POP/IMAP account passwords"
 
 msgid "Protected folders passwords"
 msgstr "Protected folders passwords"
-
-#~ msgid "err_mem_13"
-#~ msgstr "Your IP address is not allowed here."

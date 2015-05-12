@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AlternC 2.0\n"
 "Report-Msgid-Bugs-To: i18n@alternc.org\n"
-"POT-Creation-Date: 2015-05-11 14:54+0200\n"
+"POT-Creation-Date: 2015-05-12 15:54+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,328 +16,6 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#: ../../awstats/bureau/admin/aws_add.php:33
-msgid "You cannot add any new statistics, your quota is over."
-msgstr ""
-
-#: ../../awstats/bureau/admin/aws_add.php:38
-msgid "Edit Statistics"
-msgstr ""
-
-#: ../../awstats/bureau/admin/aws_add.php:38
-msgid "New Statistics"
-msgstr ""
-
-#: ../../awstats/bureau/admin/aws_add.php:41
-msgid ""
-"Awstats will analyze every logs availables for this domain (since its "
-"creation)."
-msgstr ""
-
-#: ../../awstats/bureau/admin/aws_add.php:52
-#: ../../awstats/bureau/admin/aws_list.php:57 ../admin/adm_dnsweberror.php:55
-#: ../admin/adm_dnsweberror.php:85 ../admin/dom_add.php:57
-#: ../class/m_dom.php:1902
-msgid "Domain name"
-msgstr ""
-
-#: ../../awstats/bureau/admin/aws_add.php:59
-msgid "Hostaliases"
-msgstr ""
-
-#: ../../awstats/bureau/admin/aws_add.php:73
-#: ../../awstats/bureau/admin/aws_list.php:57
-msgid "Allowed Users"
-msgstr ""
-
-#: ../../awstats/bureau/admin/aws_add.php:89
-msgid ""
-"No users currently defined, you must create login with the 'Manage allowed "
-"users' accounts' menu."
-msgstr ""
-
-#: ../../awstats/bureau/admin/aws_add.php:94
-msgid "Create those statistics"
-msgstr ""
-
-#: ../../awstats/bureau/admin/aws_add.php:94
-msgid "Edit those statistics"
-msgstr ""
-
-#: ../../awstats/bureau/admin/aws_add.php:95
-#: ../../awstats/bureau/admin/aws_pass.php:77
-#: ../../awstats/bureau/admin/aws_users.php:58
-#: ../../ssl/panel/admin/ssl_new.php:118 ../../ssl/panel/admin/ssl_new.php:152
-#: ../../ssl/panel/admin/ssl_view.php:83 ../admin/adm_add.php:141
-#: ../admin/adm_deactivate.php:75 ../admin/adm_domstypeedit.php:134
-#: ../admin/adm_edit.php:124 ../admin/adm_quotaedit.php:88
-#: ../admin/adm_tldadd.php:71 ../admin/adm_tldedit.php:70
-#: ../admin/bro_pref.php:150 ../admin/browseforfolder2.php:149
-#: ../admin/ftp_del.php:83 ../admin/ftp_edit.php:99
-#: ../admin/hta_adduser.php:68 ../admin/hta_dodeluser.php:65
-#: ../admin/hta_edit.php:115 ../admin/mail_edit.php:116
-#: ../admin/mail_manage_catchall.php:137 ../admin/piwik_site_dodel.php:71
-#: ../admin/piwik_user_dodel.php:69 ../admin/sql_bck.php:108
-#: ../admin/sql_users_add.php:73 ../admin/sql_users_password.php:69
-#: ../admin/sql_users_rights.php:104
-msgid "Cancel"
-msgstr ""
-
-#: ../../awstats/bureau/admin/aws_del.php:39
-#, php-format
-msgid "The statistics %s has been successfully deleted"
-msgstr ""
-
-#: ../../awstats/bureau/admin/aws_del.php:45
-msgid "Please check the statistics set you want to delete"
-msgstr ""
-
-#: ../../awstats/bureau/admin/aws_doadd.php:41
-msgid "The statistics has been successfully created"
-msgstr ""
-
-#: ../../awstats/bureau/admin/aws_doedit.php:36
-#: ../../awstats/bureau/admin/aws_edit.php:33
-msgid "No Statistics selected!"
-msgstr ""
-
-#: ../../awstats/bureau/admin/aws_doedit.php:48
-msgid "The Statistics has been successfully changed"
-msgstr ""
-
-#: ../../awstats/bureau/admin/aws_list.php:29
-msgid "Statistics List"
-msgstr ""
-
-#: ../../awstats/bureau/admin/aws_list.php:45
-msgid "Manage allowed users' accounts"
-msgstr ""
-
-#: ../../awstats/bureau/admin/aws_list.php:49
-#: ../../awstats/bureau/admin/aws_users.php:45
-msgid "Create new Statistics"
-msgstr ""
-
-#: ../../awstats/bureau/admin/aws_list.php:57
-#: ../../awstats/bureau/admin/aws_users.php:78 ../admin/adm_doms.php:69
-#: ../admin/adm_mxaccount.php:78 ../admin/adm_slavedns.php:95
-#: ../admin/adm_slavedns.php:140
-msgid "Action"
-msgstr ""
-
-#: ../../awstats/bureau/admin/aws_list.php:57
-#: ../../awstats/bureau/admin/aws_list.php:69
-msgid "View the statistics"
-msgstr ""
-
-#: ../../awstats/bureau/admin/aws_list.php:66
-#: ../admin/adm_authip_whitelist.php:84 ../admin/adm_domstype.php:76
-#: ../admin/adm_list.php:199 ../admin/adm_list.php:226
-#: ../admin/adm_list.php:258 ../admin/adm_passpolicy.php:151
-#: ../admin/adm_tld.php:80 ../admin/bro_editor.php:86
-#: ../admin/dom_edit.php:161 ../admin/ftp_list.php:80 ../admin/ip_main.php:166
-#: ../admin/mail_list.php:152
-msgid "Edit"
-msgstr ""
-
-#: ../../awstats/bureau/admin/aws_list.php:73
-msgid "Are you sure you want to delete the selected statistics?"
-msgstr ""
-
-#: ../../awstats/bureau/admin/aws_list.php:73
-msgid "Delete the checked Statistics"
-msgstr ""
-
-#: ../../awstats/bureau/admin/aws_pass.php:43
-#: ../../awstats/bureau/admin/aws_useradd.php:36 ../admin/adm_doadd.php:53
-#: ../admin/adm_doedit.php:64 ../admin/ftp_doedit.php:44
-#: ../admin/hta_doadduser.php:41 ../admin/hta_doedituser.php:42
-#: ../admin/mail_doedit.php:57
-msgid "Passwords do not match"
-msgstr ""
-
-#: ../../awstats/bureau/admin/aws_pass.php:50
-msgid "Password successfuly updated"
-msgstr ""
-
-#: ../../awstats/bureau/admin/aws_pass.php:60
-msgid "Change a user's password"
-msgstr ""
-
-#: ../../awstats/bureau/admin/aws_pass.php:70
-#: ../../awstats/bureau/admin/aws_users.php:51
-#: ../../awstats/bureau/admin/aws_users.php:78 ../admin/adm_add.php:64
-#: ../admin/adm_edit.php:69 ../admin/adm_quotaedit.php:68
-#: ../admin/ftp_edit.php:72 ../admin/ftp_list.php:73
-#: ../admin/hta_adduser.php:54 ../admin/hta_edit.php:63
-#: ../admin/hta_edit.php:100 ../admin/index.php:89
-#: ../admin/piwik_userlist.php:79 ../admin/sql_users_add.php:59
-msgid "Username"
-msgstr ""
-
-#: ../../awstats/bureau/admin/aws_pass.php:73
-msgid "New Password"
-msgstr ""
-
-#: ../../awstats/bureau/admin/aws_pass.php:74
-#: ../../awstats/bureau/admin/aws_users.php:55 ../admin/adm_add.php:72
-#: ../admin/adm_edit.php:89 ../admin/ftp_edit.php:89
-#: ../admin/hta_adduser.php:62 ../admin/hta_edit.php:108
-#: ../admin/hta_edituser.php:63 ../admin/mail_edit.php:97
-#: ../admin/sql_users_add.php:67 ../admin/sql_users_password.php:63
-msgid "Confirm password"
-msgstr ""
-
-#: ../../awstats/bureau/admin/aws_pass.php:76 ../admin/hta_edit.php:70
-#: ../admin/sql_users_password.php:38
-msgid "Change this user's password"
-msgstr ""
-
-#: ../../awstats/bureau/admin/aws_useradd.php:43
-msgid "The Awstat account has been successfully created"
-msgstr ""
-
-#: ../../awstats/bureau/admin/aws_userdel.php:37
-#, php-format
-msgid "The awstat account %s has been successfully deleted"
-msgstr ""
-
-#: ../../awstats/bureau/admin/aws_users.php:29
-msgid "Awstats allowed user list"
-msgstr ""
-
-#: ../../awstats/bureau/admin/aws_users.php:54 ../admin/adm_edit.php:85
-#: ../admin/adm_mxaccount.php:78 ../admin/adm_mxaccount.php:95
-#: ../admin/adm_slavedns.php:140 ../admin/adm_slavedns.php:158
-#: ../admin/cron.php:39 ../admin/ftp_edit.php:85 ../admin/ftp_edit.php:93
-#: ../admin/hta_adduser.php:58 ../admin/hta_edit.php:104 ../admin/index.php:90
-#: ../admin/mem_param.php:58 ../admin/sql_getparam.php:74
-#: ../admin/sql_users_add.php:63 ../admin/sql_users_list.php:48
-#: ../admin/sql_users_password.php:59
-msgid "Password"
-msgstr ""
-
-#: ../../awstats/bureau/admin/aws_users.php:57
-msgid "Create this new Awstats user"
-msgstr ""
-
-#: ../../awstats/bureau/admin/aws_users.php:86
-msgid "Change password"
-msgstr ""
-
-#: ../../awstats/bureau/admin/aws_users.php:92
-msgid "Are you sure you want to delete the selected accounts?"
-msgstr ""
-
-#: ../../awstats/bureau/admin/aws_users.php:92 ../admin/adm_list.php:149
-#: ../admin/adm_list.php:218 ../admin/adm_list.php:231
-#: ../admin/adm_list.php:274 ../admin/ftp_list.php:104
-msgid "Delete checked accounts"
-msgstr ""
-
-#: ../../awstats/bureau/admin/menu_aws.php:39
-#: ../../awstats/bureau/class/m_aws.php:59
-msgid "Web Statistics"
-msgstr ""
-
-#: ../../awstats/bureau/class/m_aws.php:82
-msgid ""
-"The stats module allows any user to ask for statistics about his web site. "
-"Statistics are web pages generated daily based on the visits of the day "
-"before. Awstats is the soft used to produce those stats. The statistics are "
-"then protected by a login and a password."
-msgstr ""
-
-#: ../../awstats/bureau/class/m_aws.php:123
-msgid "No statistics currently defined"
-msgstr ""
-
-#: ../../awstats/bureau/class/m_aws.php:162
-#: ../../awstats/bureau/class/m_aws.php:325
-#: ../../awstats/bureau/class/m_aws.php:710
-msgid "This statistic does not exist"
-msgstr ""
-
-#: ../../awstats/bureau/class/m_aws.php:262
-msgid "Host already managed by awstats!"
-msgstr ""
-
-#: ../../awstats/bureau/class/m_aws.php:359
-msgid "This hostname does not exist (Domain name)"
-msgstr ""
-
-#: ../../awstats/bureau/class/m_aws.php:367
-msgid "This hostname does not exist (Hostaliases)"
-msgstr ""
-
-#: ../../awstats/bureau/class/m_aws.php:387
-msgid "Your stat quota is over..."
-msgstr ""
-
-#: ../../awstats/bureau/class/m_aws.php:400
-msgid "No user currently defined"
-msgstr ""
-
-#: ../../awstats/bureau/class/m_aws.php:458
-#: ../../awstats/bureau/class/m_aws.php:517
-msgid "Login does not exist"
-msgstr ""
-
-#: ../../awstats/bureau/class/m_aws.php:474
-#: ../../awstats/bureau/class/m_aws.php:494
-#: ../../awstats/bureau/class/m_aws.php:513
-#: ../../awstats/bureau/class/m_aws.php:568
-msgid "Login incorrect"
-msgstr ""
-
-#: ../../awstats/bureau/class/m_aws.php:478
-msgid "Login already exist"
-msgstr ""
-
-#: ../../awstats/bureau/class/m_aws.php:498
-#: ../../awstats/bureau/class/m_aws.php:572
-msgid "Login does not exists"
-msgstr ""
-
-#: ../../awstats/bureau/class/m_aws.php:522
-#: ../../awstats/bureau/class/m_aws.php:550
-#: ../../awstats/bureau/class/m_aws.php:577
-msgid "The requested statistic does not exist."
-msgstr ""
-
-#: ../../awstats/bureau/class/m_aws.php:527
-msgid "This login is already allowed for this statistics."
-msgstr ""
-
-#: ../../awstats/bureau/class/m_aws.php:582
-msgid "This login is already denied for this statistics."
-msgstr ""
-
-#: ../../awstats/bureau/class/m_aws.php:645
-msgid "Awstats"
-msgstr ""
-
-#: ../../awstats/bureau/class/m_aws.php:667
-msgid "prefix not allowed."
-msgstr ""
-
-#: ../../awstats/bureau/class/m_aws.php:671
-msgid "Forbidden caracters in the postfix."
-msgstr ""
-
-#: ../../awstats/bureau/class/m_aws.php:685
-msgid "Hostname is incorrect"
-msgstr ""
-
-#: ../../awstats/bureau/class/m_aws.php:701
-msgid "Problem to create the configuration"
-msgstr ""
-
-#: ../../awstats/bureau/class/m_aws.php:760
-#, php-format
-msgid "Problem to edit file %s"
-msgstr ""
 
 #: ../../squirrelmail/alternc_changepass/change.php:39
 msgid "Can't connect to MySQL server on AlternC!"
@@ -392,545 +70,6 @@ msgstr ""
 msgid "Change the password of your email account."
 msgstr ""
 
-#: ../../ssl/panel/admin/ssl_delete.php:43
-msgid "Your SSL Certificate has been deleted"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_doimport.php:39
-msgid "Please enter an ssl key and a certificate"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_donew.php:38
-msgid "Please enter a proper domain name"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_finalize.php:49
-msgid "Your ssl certificate has been imported successfully"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_list.php:51 ../../ssl/panel/admin/ssl_view.php:50
-msgid "Pending Certificate"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_list.php:52
-msgid "Valid"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_list.php:53
-msgid "Expired"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_list.php:59
-msgid ""
-"Some of your hosting are using a <b>self-signed</b> certificate. <br>Your "
-"browser will not let you surf those domains properly<br>To fix this, buy a "
-"properly signed certificate"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_list.php:71
-msgid "Your Certificates"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_list.php:73
-msgid ""
-"Please find below your SSL Certificates. Some may be provided by the "
-"administrator of the server, some may be Expired or Pending (waiting for a "
-"CRT from your Certificate Provider)"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_list.php:75
-msgid "Only show the following certificates:"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_list.php:76
-msgid "Pending Certificates"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_list.php:77
-msgid "Valid Certificates"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_list.php:78
-msgid "Expired Certificates"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_list.php:80
-msgid "Certificates Shared by the Administrator"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_list.php:82
-msgid "Filter"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_list.php:85
-msgid "Domain Name"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_list.php:85 ../admin/adm_doms.php:69
-#: ../admin/dom_edit.php:146
-msgid "Status"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_list.php:85
-msgid "Used by"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_list.php:85
-msgid "Validity period"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_list.php:91
-msgid "Details"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_list.php:97
-msgid "(shared)"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_list.php:102
-#: ../../ssl/panel/admin/ssl_list.php:106
-#: ../../ssl/panel/admin/ssl_list.php:112
-#: ../../ssl/panel/admin/ssl_view.php:65
-#: ../../ssl/panel/admin/ssl_view.php:117
-#: ../../ssl/panel/admin/ssl_view.php:131 ../admin/bro_editor.php:55
-#: ../admin/bro_editor.php:64 ../admin/bro_main.php:353
-#: ../admin/bro_main.php:393
-#, php-format
-msgid "%3$d-%2$d-%1$d %4$d:%5$d"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_list.php:111
-msgid "Requested on: "
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_list.php:129
-msgid "Create one"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_list.php:130
-msgid ""
-"This hosting has no valid certificate<br>a self-signed one has been created"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_list.php:140
-msgid "Create or Import a new SSL Certificate"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_new.php:42
-msgid "New SSL Certificate"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_new.php:50
-msgid ""
-"An SSL certificate is a file which must be obtained from a Certificate "
-"Authority, and allow you to enable HTTPS encryption on a domain name."
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_new.php:53
-msgid ""
-"To obtain one, you need to generate a <i>Certificate Request</i> (CSR) and a "
-"<i>RSA Key</i> (KEY) here, then give the CSR to the Certificate Authority, "
-"which will give you a certificate (CRT) and also often a chained certificate "
-"(CHAIN)."
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_new.php:56
-msgid ""
-"If you already know what it is and already have all those files (CRT/KEY/"
-"CHAIN) You can import them here too."
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_new.php:64
-msgid "Create a CSR/KEY"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_new.php:65
-msgid "Import existing files"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_new.php:69
-msgid "Create a CSR/KEY for a given domain name"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_new.php:71
-msgid ""
-"Use this form to generate a <i>Certificate Request file</i> (CSR) and a "
-"<i>RSA Key file</i> (KEY) for a given domain name"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_new.php:98
-msgid ""
-"Please choose the domain name for which you want a SSL Certificate, or enter "
-"it manually"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_new.php:101 ../../ssl/panel/admin/ssl_view.php:60
-msgid "Fully Qualified Domain Name"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_new.php:104
-msgid "--- Choose here ---"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_new.php:110
-msgid "... or click here to enter it manually"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_new.php:117 ../../ssl/panel/admin/ssl_new.php:151
-#: ../../ssl/panel/admin/ssl_view.php:82 ../admin/adm_authip_whitelist.php:57
-#: ../admin/adm_doms_def_type.php:88 ../admin/bro_editor.php:110
-#: ../admin/ftp_edit.php:98 ../admin/ip_main.php:135 ../admin/ip_main.php:188
-#: ../admin/mail_manage_catchall.php:136
-msgid "Save"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_new.php:123
-msgid ""
-"<i>(If you want to get a valid certificate for all the subdomains of a "
-"domain, use a wildcard notation (eg: *.example.com). Please note that a "
-"wildcard certificate is usually more expensive than normal one.)</i>"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_new.php:123
-msgid ""
-"Please note that a SSL Certificate is only valid for one fully qualified "
-"domain name. As a result, a certificate for <code>www.example.com</code> is "
-"NOT valid for <code>intranet.example.com</code> or <code>intranet.www."
-"example.com</code> !"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_new.php:130
-msgid "Import existing Key Certificate and Chain files"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_new.php:132
-msgid ""
-"If you already have a RSA Key file, a Certificate for this key and (maybe) a "
-"Chained certificate, please paste their content here."
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_new.php:133
-msgid ""
-"We will verify the content of those files and add them in your certificate "
-"repository"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_new.php:138
-msgid "RSA Key"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_new.php:142 ../../ssl/panel/admin/ssl_view.php:73
-#: ../../ssl/panel/admin/ssl_view.php:157
-msgid "SSL Certificate"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_new.php:146 ../../ssl/panel/admin/ssl_view.php:77
-#: ../../ssl/panel/admin/ssl_view.php:162
-msgid "Chained Certificate<br />(not mandatory)"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_share.php:30 ../admin/adm_add.php:36
-#: ../admin/adm_db_servers.php:30 ../admin/adm_deactivate.php:35
-#: ../admin/adm_deactivate.php:52 ../admin/adm_defquotas.php:35
-#: ../admin/adm_dnsweberror.php:33 ../admin/adm_doadd.php:26
-#: ../admin/adm_dodefquotas.php:35 ../admin/adm_dodel.php:33
-#: ../admin/adm_dodel.php:47 ../admin/adm_doedit.php:35
-#: ../admin/adm_doedit.php:59 ../admin/adm_domlock.php:33
-#: ../admin/adm_doms.php:33 ../admin/adm_doms_def_type.php:5
-#: ../admin/adm_domstype.php:33 ../admin/adm_domstypedoedit.php:4
-#: ../admin/adm_domstypeedit.php:32 ../admin/adm_domstyperegenerate.php:4
-#: ../admin/adm_donosu.php:33 ../admin/adm_dorenew.php:34
-#: ../admin/adm_dorenew.php:45 ../admin/adm_dosu.php:33
-#: ../admin/adm_edit.php:36 ../admin/adm_edit.php:48 ../admin/adm_email.php:30
-#: ../admin/adm_list.php:32 ../admin/adm_list.php:59
-#: ../admin/adm_lockpanel.php:33 ../admin/adm_login.php:86
-#: ../admin/adm_login.php:93 ../admin/adm_mxaccount.php:33
-#: ../admin/adm_panel.php:33 ../admin/adm_passpolicy.php:30
-#: ../admin/adm_quotadoedit.php:33 ../admin/adm_quotaedit.php:34
-#: ../admin/adm_slavedns.php:33 ../admin/adm_tld.php:33
-#: ../admin/adm_tldadd.php:33 ../admin/adm_tlddoadd.php:33
-#: ../admin/adm_tlddoedit.php:39 ../admin/adm_tldedit.php:33
-#: ../admin/adm_update_domains.php:34 ../admin/adm_variables.php:33
-#: ../admin/dom_subdel.php:46 ../admin/dom_subdodel.php:47
-#: ../admin/dom_subdoedit.php:53 ../admin/dom_subedit.php:58
-#: ../admin/quotas_users.php:13 ../class/reset_stats_conf.php:6
-msgid "This page is restricted to authorized staff"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_view.php:52
-msgid ""
-"Your <i>Certificate Request File</i> (CSR) has been created, along with its "
-"<i>private RSA Key</i> (KEY). Please find below the CSR you must send to "
-"your SSL Certificate provider."
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_view.php:54
-msgid ""
-"Once you'll have your <i>Certificate File</i> (CRT) and a <i>Chained "
-"Certificate File</i> (CHAIN), please paste them here to finish the "
-"enrollment."
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_view.php:64
-msgid "Date of the request"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_view.php:68
-#: ../../ssl/panel/admin/ssl_view.php:152
-msgid "Certificate Request File"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_view.php:85
-#: ../../ssl/panel/admin/ssl_view.php:211 ../admin/adm_authip_whitelist.php:85
-#: ../admin/adm_doms_def_type.php:60 ../admin/adm_mxaccount.php:83
-#: ../admin/adm_slavedns.php:101 ../admin/adm_slavedns.php:145
-#: ../admin/bro_main.php:283 ../admin/cron.php:54 ../admin/dom_edit.php:127
-#: ../admin/dom_edit.php:168 ../admin/ftp_del.php:82
-#: ../admin/hta_dodeluser.php:64 ../admin/ip_main.php:79
-#: ../admin/ip_main.php:167 ../admin/piwik_site_dodel.php:70
-#: ../admin/piwik_sitelist.php:128 ../admin/piwik_user_dodel.php:68
-#: ../admin/piwik_userlist.php:87
-msgid "Delete"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_view.php:86
-msgid ""
-"Please confirm that you want to delete this certificate request AND ITS "
-"PRIVATE KEY!"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_view.php:97
-msgid "Valid Certificate"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_view.php:98
-msgid "Please find below your valid certificate data."
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_view.php:104
-msgid "EXPIRED Certificate"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_view.php:105
-msgid ""
-"Your certificate is EXPIRED. You should not use it for any purpose. Please "
-"find below its data."
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_view.php:111
-msgid "Back to my SSL Certificates"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_view.php:115
-msgid "Valid From:"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_view.php:121
-#, php-format
-msgid "(%d days ago)"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_view.php:124
-#, php-format
-msgid "(%d month ago)"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_view.php:129
-msgid "Valid Until:"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_view.php:135
-#, php-format
-msgid "(%d days from now)"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_view.php:138
-#, php-format
-msgid "(%d month from now)"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_view.php:143
-msgid "FQDN:"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_view.php:147
-msgid "Other Valid FQDN:"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_view.php:171
-msgid ""
-"As an administrator you can allow any account on this server to use this "
-"certificate to host his services. <br />(This is only useful for wildcard or "
-"multi-domain certificates)."
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_view.php:175
-msgid "This certificate is currently <b>shared</b>"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_view.php:182
-msgid "Click here to stop sharing this certificate"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_view.php:187
-#: ../../ssl/panel/admin/ssl_view.php:203
-msgid ""
-"You are not the owner of this certificate, only its owner can share/unshare "
-"this certificate."
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_view.php:191
-msgid "This certificate is currently <b>NOT shared</b>"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_view.php:198
-msgid "Click here to share this certificate"
-msgstr ""
-
-#: ../../ssl/panel/admin/ssl_view.php:212
-msgid ""
-"Please confirm that you want to delete this certificate AND ITS PRIVATE KEY!"
-msgstr ""
-
-#: ../../ssl/panel/class/m_ssl.php:69 ../../ssl/panel/class/m_ssl.php:418
-msgid "SSL Certificates"
-msgstr ""
-
-#: ../../ssl/panel/class/m_ssl.php:79
-msgid "New SSL certificate"
-msgstr ""
-
-#: ../../ssl/panel/class/m_ssl.php:93
-msgid "List SSL Certificates"
-msgstr ""
-
-#: ../../ssl/panel/class/m_ssl.php:152
-msgid "No SSL certificates available"
-msgstr ""
-
-#: ../../ssl/panel/class/m_ssl.php:175
-msgid "You currently have no hosting using SSL certificate"
-msgstr ""
-
-#: ../../ssl/panel/class/m_ssl.php:196
-msgid "Bad FQDN domain name"
-msgstr ""
-
-#: ../../ssl/panel/class/m_ssl.php:202 ../../ssl/panel/class/m_ssl.php:782
-msgid "Can't generate a private key (1)"
-msgstr ""
-
-#: ../../ssl/panel/class/m_ssl.php:207 ../../ssl/panel/class/m_ssl.php:787
-msgid "Can't generate a private key (2)"
-msgstr ""
-
-#: ../../ssl/panel/class/m_ssl.php:218
-msgid "Can't generate a CSR"
-msgstr ""
-
-#: ../../ssl/panel/class/m_ssl.php:234 ../../ssl/panel/class/m_ssl.php:250
-#: ../../ssl/panel/class/m_ssl.php:273
-msgid "Can't find this Certificate"
-msgstr ""
-
-#: ../../ssl/panel/class/m_ssl.php:353
-msgid "Can't save the Key/Crt/Chain now. Please try later."
-msgstr ""
-
-#: ../../ssl/panel/class/m_ssl.php:390
-msgid "Can't save the Crt/Chain now. Please try later."
-msgstr ""
-
-#: ../../ssl/panel/class/m_ssl.php:626
-msgid "Alias already exists"
-msgstr ""
-
-#: ../../ssl/panel/class/m_ssl.php:645
-msgid "Alias not found"
-msgstr ""
-
-#: ../../ssl/panel/class/m_ssl.php:674
-msgid ""
-"Can't find the private key in the certificate table, please check your form."
-msgstr ""
-
-#: ../../ssl/panel/class/m_ssl.php:683
-msgid ""
-"The certificate must begin by BEGIN CERTIFICATE and end by END CERTIFICATE "
-"lines. Please check you pasted it in PEM form."
-msgstr ""
-
-#: ../../ssl/panel/class/m_ssl.php:688
-msgid ""
-"The chained certificate must begin by BEGIN CERTIFICATE and end by END "
-"CERTIFICATE lines. Please check you pasted it in PEM form."
-msgstr ""
-
-#: ../../ssl/panel/class/m_ssl.php:694
-msgid ""
-"The private key must begin by BEGIN (RSA )PRIVATE KEY and end by END (RSA )"
-"PRIVATE KEY lines. Please check you pasted it in PEM form."
-msgstr ""
-
-#: ../../ssl/panel/class/m_ssl.php:730
-#, php-format
-msgid "The %d-th certificate in the chain is invalid"
-msgstr ""
-
-#: ../../ssl/panel/class/m_ssl.php:738
-msgid "The certificate is invalid."
-msgstr ""
-
-#: ../../ssl/panel/class/m_ssl.php:743
-msgid "The private key is invalid."
-msgstr ""
-
-#: ../../ssl/panel/class/m_ssl.php:748
-msgid "The private key is not the one signed inside the certificate."
-msgstr ""
-
-#: ../../ssl/panel/class/m_ssl.php:754
-msgid "Can't export your certificate as a string, please check its syntax."
-msgstr ""
-
-#: ../../ssl/panel/class/m_ssl.php:759
-msgid ""
-"Can't export one of your chained certificates as a string, please check its "
-"syntax."
-msgstr ""
-
-#: ../../ssl/panel/class/m_ssl.php:765
-msgid "Can't export your private key as a string, please check its syntax."
-msgstr ""
-
-#: ../../ssl/panel/class/m_ssl.php:808
-msgid "Locally hosted forcing HTTPS"
-msgstr ""
-
-#: ../../ssl/panel/class/m_ssl.php:809
-msgid "Locally hosted HTTP and HTTPS"
-msgstr ""
-
-#: ../../ssl/panel/class/m_ssl.php:810
-msgid "HTTPS AlternC panel access"
-msgstr ""
-
-#: ../../ssl/panel/class/m_ssl.php:811
-msgid "HTTPS Roundcube Webmail"
-msgstr ""
-
-#: ../../ssl/panel/class/m_ssl.php:812
-msgid "HTTPS Squirrelmail Webmail"
-msgstr ""
-
-#: ../../ssl/panel/class/m_ssl.php:813
-msgid "php52 forcing HTTPS"
-msgstr ""
-
-#: ../../ssl/panel/class/m_ssl.php:814
-msgid "php52 HTTP and HTTPS"
-msgstr ""
-
 #: ../admin/about.php:36
 msgid "About AlternC"
 msgstr ""
@@ -964,12 +103,54 @@ msgstr ""
 msgid "You are currently using AlternC "
 msgstr ""
 
+#: ../admin/adm_add.php:36 ../admin/adm_db_servers.php:30
+#: ../admin/adm_deactivate.php:35 ../admin/adm_deactivate.php:52
+#: ../admin/adm_defquotas.php:35 ../admin/adm_dnsweberror.php:33
+#: ../admin/adm_doadd.php:26 ../admin/adm_dodefquotas.php:35
+#: ../admin/adm_dodel.php:33 ../admin/adm_dodel.php:47
+#: ../admin/adm_doedit.php:35 ../admin/adm_doedit.php:59
+#: ../admin/adm_domlock.php:33 ../admin/adm_doms.php:33
+#: ../admin/adm_doms_def_type.php:5 ../admin/adm_domstype.php:33
+#: ../admin/adm_domstypedoedit.php:4 ../admin/adm_domstypeedit.php:32
+#: ../admin/adm_domstyperegenerate.php:4 ../admin/adm_donosu.php:33
+#: ../admin/adm_dorenew.php:34 ../admin/adm_dorenew.php:45
+#: ../admin/adm_dosu.php:33 ../admin/adm_edit.php:36 ../admin/adm_edit.php:48
+#: ../admin/adm_email.php:30 ../admin/adm_list.php:32 ../admin/adm_list.php:59
+#: ../admin/adm_lockpanel.php:33 ../admin/adm_login.php:86
+#: ../admin/adm_login.php:93 ../admin/adm_mxaccount.php:33
+#: ../admin/adm_panel.php:33 ../admin/adm_passpolicy.php:30
+#: ../admin/adm_quotadoedit.php:33 ../admin/adm_quotaedit.php:34
+#: ../admin/adm_slavedns.php:33 ../admin/adm_tld.php:33
+#: ../admin/adm_tldadd.php:33 ../admin/adm_tlddoadd.php:33
+#: ../admin/adm_tlddoedit.php:39 ../admin/adm_tldedit.php:33
+#: ../admin/adm_update_domains.php:34 ../admin/adm_variables.php:33
+#: ../admin/dom_subdel.php:46 ../admin/dom_subdodel.php:47
+#: ../admin/dom_subdoedit.php:53 ../admin/dom_subedit.php:58
+#: ../admin/quotas_users.php:13 ../class/reset_stats_conf.php:6
+msgid "This page is restricted to authorized staff"
+msgstr ""
+
 #: ../admin/adm_add.php:54
 msgid "New AlternC account"
 msgstr ""
 
+#: ../admin/adm_add.php:64 ../admin/adm_edit.php:69
+#: ../admin/adm_quotaedit.php:68 ../admin/ftp_edit.php:72
+#: ../admin/ftp_list.php:73 ../admin/hta_adduser.php:54
+#: ../admin/hta_edit.php:63 ../admin/hta_edit.php:100 ../admin/index.php:89
+#: ../admin/piwik_userlist.php:79 ../admin/sql_users_add.php:59
+msgid "Username"
+msgstr ""
+
 #: ../admin/adm_add.php:68
 msgid "Initial password"
+msgstr ""
+
+#: ../admin/adm_add.php:72 ../admin/adm_edit.php:89 ../admin/ftp_edit.php:89
+#: ../admin/hta_adduser.php:62 ../admin/hta_edit.php:108
+#: ../admin/hta_edituser.php:63 ../admin/mail_edit.php:97
+#: ../admin/sql_users_add.php:67 ../admin/sql_users_password.php:63
+msgid "Confirm password"
 msgstr ""
 
 #: ../admin/adm_add.php:76
@@ -1040,6 +221,20 @@ msgstr ""
 msgid "Create this AlternC account"
 msgstr ""
 
+#: ../admin/adm_add.php:141 ../admin/adm_deactivate.php:75
+#: ../admin/adm_domstypeedit.php:134 ../admin/adm_edit.php:124
+#: ../admin/adm_quotaedit.php:88 ../admin/adm_tldadd.php:71
+#: ../admin/adm_tldedit.php:70 ../admin/bro_pref.php:150
+#: ../admin/browseforfolder2.php:149 ../admin/ftp_del.php:83
+#: ../admin/ftp_edit.php:99 ../admin/hta_adduser.php:68
+#: ../admin/hta_dodeluser.php:65 ../admin/hta_edit.php:115
+#: ../admin/mail_edit.php:116 ../admin/mail_manage_catchall.php:137
+#: ../admin/piwik_site_dodel.php:71 ../admin/piwik_user_dodel.php:69
+#: ../admin/sql_bck.php:108 ../admin/sql_users_add.php:73
+#: ../admin/sql_users_password.php:69 ../admin/sql_users_rights.php:104
+msgid "Cancel"
+msgstr ""
+
 #: ../admin/adm_authip_whitelist.php:31 ../admin/ip_main.php:50
 #: ../class/m_authip.php:46
 msgid "Access security"
@@ -1076,6 +271,13 @@ msgstr ""
 msgid "Add a comment"
 msgstr ""
 
+#: ../admin/adm_authip_whitelist.php:57 ../admin/adm_doms_def_type.php:88
+#: ../admin/bro_editor.php:110 ../admin/ftp_edit.php:98
+#: ../admin/ip_main.php:135 ../admin/ip_main.php:188
+#: ../admin/mail_manage_catchall.php:136
+msgid "Save"
+msgstr ""
+
 #: ../admin/adm_authip_whitelist.php:64
 msgid "IP"
 msgstr ""
@@ -1087,6 +289,26 @@ msgstr ""
 #: ../admin/adm_authip_whitelist.php:64 ../admin/adm_doms_def_type.php:48
 #: ../admin/dom_edit.php:146 ../admin/ip_main.php:146
 msgid "Type"
+msgstr ""
+
+#: ../admin/adm_authip_whitelist.php:84 ../admin/adm_domstype.php:76
+#: ../admin/adm_list.php:199 ../admin/adm_list.php:226
+#: ../admin/adm_list.php:258 ../admin/adm_passpolicy.php:151
+#: ../admin/adm_tld.php:80 ../admin/bro_editor.php:86
+#: ../admin/dom_edit.php:161 ../admin/ftp_list.php:80 ../admin/ip_main.php:166
+#: ../admin/mail_list.php:152
+msgid "Edit"
+msgstr ""
+
+#: ../admin/adm_authip_whitelist.php:85 ../admin/adm_doms_def_type.php:60
+#: ../admin/adm_mxaccount.php:83 ../admin/adm_slavedns.php:101
+#: ../admin/adm_slavedns.php:145 ../admin/bro_main.php:283
+#: ../admin/cron.php:54 ../admin/dom_edit.php:127 ../admin/dom_edit.php:168
+#: ../admin/ftp_del.php:82 ../admin/hta_dodeluser.php:64
+#: ../admin/ip_main.php:79 ../admin/ip_main.php:167
+#: ../admin/piwik_site_dodel.php:70 ../admin/piwik_sitelist.php:128
+#: ../admin/piwik_user_dodel.php:68 ../admin/piwik_userlist.php:87
+msgid "Delete"
 msgstr ""
 
 #: ../admin/adm_db_servers.php:35
@@ -1244,6 +466,11 @@ msgstr ""
 msgid "Account"
 msgstr ""
 
+#: ../admin/adm_dnsweberror.php:55 ../admin/adm_dnsweberror.php:85
+#: ../admin/dom_add.php:57 ../class/m_dom.php:1902
+msgid "Domain name"
+msgstr ""
+
 #: ../admin/adm_dnsweberror.php:56
 msgid "FQDN"
 msgstr ""
@@ -1267,6 +494,12 @@ msgstr ""
 
 #: ../admin/adm_dnsweberror.php:86
 msgid "DNS Result field"
+msgstr ""
+
+#: ../admin/adm_doadd.php:53 ../admin/adm_doedit.php:64
+#: ../admin/ftp_doedit.php:44 ../admin/hta_doadduser.php:41
+#: ../admin/hta_doedituser.php:42 ../admin/mail_doedit.php:57
+msgid "Passwords do not match"
 msgstr ""
 
 #: ../admin/adm_doadd.php:65
@@ -1377,6 +610,11 @@ msgstr ""
 msgid "Show domain list with refreshed checked NS, MX, IP information"
 msgstr ""
 
+#: ../admin/adm_doms.php:69 ../admin/adm_mxaccount.php:78
+#: ../admin/adm_slavedns.php:95 ../admin/adm_slavedns.php:140
+msgid "Action"
+msgstr ""
+
 #: ../admin/adm_doms.php:69 ../admin/adm_doms.php:85 ../admin/adm_list.php:195
 #: ../admin/adm_list.php:225 ../admin/adm_list.php:257
 msgid "Connect as"
@@ -1392,6 +630,10 @@ msgstr ""
 
 #: ../admin/adm_doms.php:69
 msgid "OK?"
+msgstr ""
+
+#: ../admin/adm_doms.php:69 ../admin/dom_edit.php:146
+msgid "Status"
 msgstr ""
 
 #: ../admin/adm_doms.php:76
@@ -1590,6 +832,16 @@ msgstr ""
 msgid "You cannot disable your own account."
 msgstr ""
 
+#: ../admin/adm_edit.php:85 ../admin/adm_mxaccount.php:78
+#: ../admin/adm_mxaccount.php:95 ../admin/adm_slavedns.php:140
+#: ../admin/adm_slavedns.php:158 ../admin/cron.php:39 ../admin/ftp_edit.php:85
+#: ../admin/ftp_edit.php:93 ../admin/hta_adduser.php:58
+#: ../admin/hta_edit.php:104 ../admin/index.php:90 ../admin/mem_param.php:58
+#: ../admin/sql_getparam.php:74 ../admin/sql_users_add.php:63
+#: ../admin/sql_users_list.php:48 ../admin/sql_users_password.php:59
+msgid "Password"
+msgstr ""
+
 #: ../admin/adm_edit.php:93
 msgid "Password change allowed?"
 msgstr ""
@@ -1724,6 +976,12 @@ msgstr ""
 
 #: ../admin/adm_list.php:136
 msgid "No account defined for now"
+msgstr ""
+
+#: ../admin/adm_list.php:149 ../admin/adm_list.php:218
+#: ../admin/adm_list.php:231 ../admin/adm_list.php:274
+#: ../admin/ftp_list.php:104
+msgid "Delete checked accounts"
 msgstr ""
 
 #: ../admin/adm_list.php:156
@@ -2171,6 +1429,12 @@ msgstr ""
 
 #: ../admin/adm_variables.php:69
 msgid "Save variables"
+msgstr ""
+
+#: ../admin/bro_editor.php:55 ../admin/bro_editor.php:64
+#: ../admin/bro_main.php:353 ../admin/bro_main.php:393
+#, php-format
+msgid "%3$d-%2$d-%1$d %4$d:%5$d"
 msgstr ""
 
 #: ../admin/bro_editor.php:55 ../admin/bro_editor.php:64
@@ -3107,6 +2371,10 @@ msgstr ""
 #: ../admin/hta_edit.php:55
 #, php-format
 msgid "No authorized user in %s"
+msgstr ""
+
+#: ../admin/hta_edit.php:70 ../admin/sql_users_password.php:38
+msgid "Change this user's password"
 msgstr ""
 
 #: ../admin/hta_edit.php:80 ../admin/sql_users_list.php:70
@@ -4859,7 +4127,7 @@ msgid "Go back to the file manager"
 msgstr ""
 
 #: ../class/m_bro.php:205
-msgid "This directory do not exist."
+msgid "This directory does not exist."
 msgstr ""
 
 #: ../class/m_bro.php:209

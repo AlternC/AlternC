@@ -805,67 +805,6 @@ msgstr "Mots de passe des comptes POP/IMAP"
 msgid "Protected folders passwords"
 msgstr "Mots de passe des dossiers protégés"
 
-#~ msgid "err_dom_26"
-#~ msgstr ""
-#~ "Le nom des types de domaines ne doit être composé que de chiffres ou de "
-#~ "lettres."
-
-#~ msgid "err_dom_27"
-#~ msgstr "Un type de domaine invalide a été sélectionné, merci de vérifier."
-
-#~ msgid "err_dom_28"
-#~ msgstr ""
-#~ "Les paramètres pour ce sous-domaine et ce type de domaine sont invalide. "
-#~ "Vérifiez qu'aucune incompatibilité n'existe sur ce sous-domaine."
-
-#~ msgid "err_bro_4"
-#~ msgstr ""
-#~ "Impossible de créer le répertoire demandé. Vérifiez les permissions."
-
-#~ msgid "err_bro_5"
-#~ msgstr ""
-#~ "Impossible de modifier le fichier demandé. Vérifiez les permissions."
-
-#~ msgid "err_bro_6"
-#~ msgstr "Impossible de lire le fichier demandé. Vérifiez les permissions."
-
-#~ msgid "AlternC panel access"
-#~ msgstr "Accès au bureau AlternC"
-
-#~ msgid "Locally hosted"
-#~ msgstr "Géré en local"
-
-#~ msgid "URL redirection"
-#~ msgstr "Redirection vers une url"
-
-#~ msgid "IPv4 redirect"
-#~ msgstr "Redirection vers une IPv4"
-
-#~ msgid "Webmail access"
-#~ msgstr "Accès au webmail"
-
-#~ msgid "IPv6 redirect"
-#~ msgstr "Redirection vers une IPv6"
-
-#~ msgid "CNAME DNS entry"
-#~ msgstr "Entrée DNS CNAME"
-
-#~ msgid "TXT DNS entry"
-#~ msgstr "Entrée DNS TXT"
-
-#~ msgid "MX DNS entry"
-#~ msgstr "Entrée DNS MX"
-
-#~ msgid "secondary MX DNS entry"
-#~ msgstr "Entrée DNS MX secondaire"
-
-#~ msgid "Default mail server"
-#~ msgstr "Serveur de mail par défaut"
-
-#~ msgid "Default backup mail server"
-#~ msgstr "Serveur de mail de secours"
-
-
 msgid "quota_aws"
 msgstr "Statistiques Web Awstats"
 
@@ -908,6 +847,3 @@ msgstr "Le nom de domaine est incorrect"
 
 msgid "err_aws_13"
 msgstr "Aucun utilisateur de défini pour l'instant"
-
-#~ msgid "Awstats Web Statistics"
-#~ msgstr "Statistiques web par Awstats"
