@@ -4,8 +4,9 @@ alternc (3.1.6) oldstable; urgency=low
   * fix french translation misunderstanding
   * fix translation not working for strings that disappeared in the past
   * fix browseForFolder not working on domaines_type having a - in their name
+  * fix SSL url-ssl template missing
 
- -- Benjamin Sonntag <benjamin@sonntag.fr>  Thu,  7 May 2015 17:44:12 +0200
+ -- Benjamin Sonntag <benjamin@sonntag.fr>  Thu, 12 May 2015 17:37:12 +0200
 
 alternc (3.1.5) oldstable; urgency=low
 
