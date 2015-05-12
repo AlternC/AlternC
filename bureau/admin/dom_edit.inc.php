@@ -78,7 +78,7 @@ $dom->unlock();
         switch ($dt['target']) {
           case "DIRECTORY": ?>
             <input type="text" class="int" name="t_<?php echo $dt['name']?>" id="t_<?php echo $dt['name']?>" value="<?php ehe($targval); ?>" size="28" onKeyPress="getElementById('r_<?php echo $dt['name']?>').checked=true;" />
-            <?php display_browser( $targval , "main.t_".$dt['name'] ); 
+            <?php display_browser( $targval , "t_".$dt['name'] ); 
             break;
           case "URL": ?>
               <input type="text" class="int" name="t_<?php echo $dt['name']?>" id="t_<?php echo $dt['name']?>" value="<?php ehe( (empty($targval)?'http://':$targval) ); ?>" size="50" onKeyPress="getElementById('r_<?php echo $dt['name']?>').checked=true;" />

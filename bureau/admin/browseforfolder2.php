@@ -117,10 +117,11 @@ function addslashes(ch) {
 
 /* Fontion de retour de la valeur selectionnee */
 function retour() {
-  window.parent.document.<?php echo $caller; ?>.value = addslashes( $("#file").val() );
+  window.parent.jQuery('#<?php echo $caller; ?>').val( $("#file").val() );
   window.parent.jQuery('#<?php echo $bid; ?>').dialog('close');
   return false;
 }
+
 </script>
 </head>
 <body class="light" onload="popupfile();">
