@@ -208,10 +208,12 @@ if ($cert["status"] == $ssl::STATUS_PENDING) {
      if ($cert["uid"] == $cuid) {
     ?>
                 <p>
+    <form method="post" action="ssl_finalize.php" name="main" id="main">
+        <input type="hidden" name="id" id="id" value="<?php echo $cert["id"]; ?>"/>
             <input type="submit" class="inb delete" name="delete" value="<?php __("Delete"); ?>" onclick="return confirm('<?php 
             echo addslashes(_("Please confirm that you want to delete this certificate AND ITS PRIVATE KEY!")); 
             ?>');"/>
-
+       </form>
         </p>
     <?php
      }
