@@ -127,24 +127,24 @@ if (isset($error) && $error) {
 
 
         <div id="tabsssl-import">
-            <h3><?php __("Import existing Key Certificate and Chain files"); ?></h3>
+            <h3><?php __("Import existing Private Key, Certificate and Chain files"); ?></h3>
 
-            <p><?php __("If you already have a RSA Key file, a Certificate for this key and (maybe) a Chained certificate, please paste their content here."); ?></p>
+            <p><?php __("If you already have a RSA Private Key file, a Certificate for this key and (maybe) a Chained certificate, please paste their content here."); ?></p>
             <p><?php __("We will verify the content of those files and add them in your certificate repository"); ?></p>
 
             <form method="post" action="ssl_doimport.php" name="main" id="main">
                 <table border="1" cellspacing="0" cellpadding="4" class="tedit">
                     <tr>
-                        <th><label for="key"><?php __("RSA Key"); ?></label></th>
-                        <td><textarea class="int" name="key" id="key" style="width: 420px; height: 120px;"></textarea></td>
+                        <th><label for="key"><?php __("RSA Private Key"); ?></label></th>
+                        <td><textarea class="int" name="key" id="key" style="width: 420px; height: 120px;"><?php echo htmlentities($key); ?></textarea></td>
                     </tr>
                     <tr>
                         <th><label for="crt"><?php __("SSL Certificate"); ?></label></th>
-                        <td><textarea class="int" name="crt" id="crt" style="width: 420px; height: 120px;"></textarea></td>
+                        <td><textarea class="int" name="crt" id="crt" style="width: 420px; height: 120px;"><?php echo htmlentities($crt); ?></textarea></td>
                     </tr>
                     <tr>
                         <th><label for="chain"><?php __("Chained Certificate<br />(not mandatory)"); ?></label></th>
-                        <td><textarea class="int" name="chain" id="chain" style="width: 420px; height: 120px;"></textarea></td>
+                        <td><textarea class="int" name="chain" id="chain" style="width: 420px; height: 120px;"><?php echo htmlentities($chain); ?></textarea></td>
                     </tr>
                 </table>
                 <p>
@@ -157,7 +157,9 @@ if (isset($error) && $error) {
     </div>
 </div>
 <script type="text/javascript">
-    $("#tabsssl").tabs(<?php if ($crt != "" and $key != "") echo "{ active: 'tabsssl-import' }"; ?>);
+		  $(function() {
+		      $("#tabsssl").tabs(<?php if ($crt != "" and $key != "") echo "{ active: 1 }"; ?>);
+		    });
 </script>
 <?php
 include_once("foot.php");

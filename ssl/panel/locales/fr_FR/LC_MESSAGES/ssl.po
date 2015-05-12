@@ -250,15 +250,15 @@ msgstr ""
 "www.example.com</code> !"
 
 #: ../admin/ssl_new.php:130
-msgid "Import existing Key Certificate and Chain files"
-msgstr "Importer une Clé, un Certificat et une Chaîne existants"
+msgid "Import existing Private Key, Certificate and Chain files"
+msgstr "Importer une Clé Privée, un Certificat et une Chaîne existants"
 
 #: ../admin/ssl_new.php:132
 msgid ""
-"If you already have a RSA Key file, a Certificate for this key and (maybe) a "
+"If you already have a RSA Private Key file, a Certificate for this key and (maybe) a "
 "Chained certificate, please paste their content here."
 msgstr ""
-"Si vous disposez déjà d'une clé RSA, d'un Certificat et (peut-être) d'un "
+"Si vous disposez déjà d'une Clé Privée RSA, d'un Certificat et (peut-être) d'un "
 "Certificat Chaîné, collez leur contenu ici."
 
 #: ../admin/ssl_new.php:133
@@ -270,8 +270,8 @@ msgstr ""
 "certificats"
 
 #: ../admin/ssl_new.php:138
-msgid "RSA Key"
-msgstr "Clé RSA"
+msgid "RSA Private Key"
+msgstr "Clé Privée RSA"
 
 #: ../admin/ssl_new.php:142 ../admin/ssl_view.php:73 ../admin/ssl_view.php:159
 msgid "SSL Certificate"
@@ -498,7 +498,7 @@ msgid ""
 "The certificate must begin by BEGIN CERTIFICATE and end by END CERTIFICATE "
 "lines. Please check you pasted it in PEM form."
 msgstr ""
-"Ce certificat doit commencer par BEGIN CERTIFICATE et terminer par END "
+"Le certificat doit commencer par BEGIN CERTIFICATE et terminer par END "
 "CERTIFICATE. Merci de vérifier que vous avez bien collé un fichier PEM"
 
 #: ../class/m_ssl.php:680
@@ -506,7 +506,7 @@ msgid ""
 "The chained certificate must begin by BEGIN CERTIFICATE and end by END "
 "CERTIFICATE lines. Please check you pasted it in PEM form."
 msgstr ""
-"Ce certificat Chaîné doit commencer par BEGIN CERTIFICATE et terminer par "
+"Le certificat Chaîné doit commencer par BEGIN CERTIFICATE et terminer par "
 "END CERTIFICATE. Merci de vérifier que vous avez bien collé un fichier PEM"
 
 #: ../class/m_ssl.php:686

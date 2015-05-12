@@ -682,7 +682,7 @@ class m_ssl {
                 substr($crt, -26, 26) != "-----END CERTIFICATE-----\n") {
             $this->error.=_("The certificate must begin by BEGIN CERTIFICATE and end by END CERTIFICATE lines. Please check you pasted it in PEM form.") . "<br>\n";
         }
-        if ($chain &&
+        if (trim($chain) &&
                 (substr($chain, 0, 28) != "-----BEGIN CERTIFICATE-----\n" ||
                 substr($chain, -26, 26) != "-----END CERTIFICATE-----\n")) {
             $this->error.=_("The chained certificate must begin by BEGIN CERTIFICATE and end by END CERTIFICATE lines. Please check you pasted it in PEM form.") . "<br>\n";
