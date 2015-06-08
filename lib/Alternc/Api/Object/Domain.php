@@ -44,11 +44,43 @@ class Alternc_Api_Object_Domain extends Alternc_Api_Legacyobject {
         while ($me = $stmt->fetch(PDO::FETCH_OBJ)) {
             $result[$me->domaine] = $me;
         }
-        list($offset,$count)=$this->offsetAndCount($options, count($result));
+        list($offset, $count) = $this->offsetAndCount($options, count($result));
         if ($offset != -1 || $count != -1) {
             $result = array_slice($result, $offset, $count);
         }
         return new Alternc_Api_Response(array("content" => $result));
+    }
+
+    /** API Method from legacy class method dom->get_domain_all($dom)
+     * @param $options a hash with parameters transmitted to legacy call
+     * musr be the domain name $dom
+     * @return Alternc_Api_Response whose content is the list of domain info and subdomains 
+     */
+    function get($options) {
+        global $cuid;
+        if ($this->isAdmin) {
+            if (isset($options["uid"])) {
+                $cuid = intval($options["uid"]);
+            }
+        }
+        $mandatory = array("dom");
+        $missing = "";
+        foreach ($mandatory as $key) {
+            if (!isset($options[$key])) {
+                $missing.=$key . " ";
+            }
+        }
+        if ($missing) {
+            return new Alternc_Api_Response(array("code" => self::ERR_INVALID_ARGUMENT, "message" => "Missing or invalid argument: " . $missing));
+        }
+        $this->dom->lock();
+        $did = $this->dom->get_domain_all($options["dom"]);
+        $this->dom->unlock();
+        if (!$did) {
+            return $this->alterncLegacyErrorManager();
+        } else {
+            return new Alternc_Api_Response(array("content" => $did));
+        }
     }
 
     /** API Method from legacy class method dom->add_domain()

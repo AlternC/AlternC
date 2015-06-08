@@ -5,7 +5,6 @@
  */
 class Alternc_Api_Object_Account extends Alternc_Api_Legacyobject {
 
-
     /** API Method from legacy class method admin->add_mem()
      * @param $options a hash with parameters transmitted to legacy call
      * mandatory parameters: login, pass, nom, prenom, mail, 
