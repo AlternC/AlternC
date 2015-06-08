@@ -1110,7 +1110,7 @@ class m_bro {
     $err->log("bro", "_delete($file)");
     if (is_dir($file)) {
       $handle=opendir($file);
-      while($filename=readdir($handle)) {
+      while (($filename=readdir($handle)) !== false) {
 	if ($filename != "." && $filename != "..") {
 	  $this->_delete($file."/".$filename);
 	}
