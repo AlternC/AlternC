@@ -99,7 +99,7 @@ if (is_array($r)) {
 <tr>
 	<th><label for="bck_dir"><?php __("In which folder do you want to store the backups?"); ?></label></th>
 	<td><input type="text" class="int" name="bck_dir" id="bck_dir" size="30" maxlength="255" value="<?php @ehe($r["dir"]); ?>" />
-	<?php display_browser( isset($r["dir"])?$r["dir"]:"" , "main.bck_dir" ); ?>
+	<?php display_browser( isset($r["dir"])?$r["dir"]:"" , "bck_dir" ); ?>
 </td>
 </tr>
 

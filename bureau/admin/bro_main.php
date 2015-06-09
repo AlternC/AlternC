@@ -287,8 +287,8 @@ if (count($c)) {
   <input type="submit" class="ina" name="actcopy" value="<?php __("Copy"); ?>" onClick=" return actmoveto_not_empty();"/>
     <input type="submit" class="ina" name="actmove" value="<?php __("Move"); ?>" onClick=" return actmoveto_not_empty();"/>
     <?php __("To"); ?> 
-    <input type="text" class="int" id='actmoveto' name="actmoveto" value="" />
-    <?php display_browser( "" , "main.actmoveto" ); ?>
+    <input type="text" class="int" id="actmoveto" name="actmoveto" value="" />
+    <?php display_browser( "" , "actmoveto" ); ?>
 
     </td></tr>
 
