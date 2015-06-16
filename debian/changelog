@@ -1,3 +1,17 @@
+alternc (3.1.7) oldoldstable; urgency=low
+
+  * fix added autocomplete="off" to password fields (not login form)
+  * enh better password policy 'no login in password' and the other way around
+  * fix bad message in French when editing a mailbox
+  * fix adding a CNAME without a final . is now an error (but not if really relative)
+  * fix select folder (browseforfolder) not working in forms others than dom
+  * fix don't allow CNAME + other record in DNS
+  * fix added /run/alternc in open_basedir, fix ACTIONS not working
+  * fix permission in browser not working
+  * fix FTP access security UX
+
+ -- Benjamin Sonntag <benjamin@sonntag.fr>  Thu, 16 Jun 2015 16:10:12 +0200
+
 alternc (3.1.6) oldstable; urgency=low
 
   * add SSL and API alternc packages (Beta)
