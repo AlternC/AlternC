@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: i18n@alternc.org\n"
-"POT-Creation-Date: 2015-05-12 15:54+0200\n"
+"POT-Creation-Date: 2015-06-16 14:09+0200\n"
 "PO-Revision-Date: 2012-10-17 09:52+0200\n"
 "Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
 "Language-Team: Dutch <team@alternc.org>\n"
@@ -225,7 +225,7 @@ msgstr ""
 #: ../admin/adm_domstypeedit.php:134 ../admin/adm_edit.php:124
 #: ../admin/adm_quotaedit.php:88 ../admin/adm_tldadd.php:71
 #: ../admin/adm_tldedit.php:70 ../admin/bro_pref.php:150
-#: ../admin/browseforfolder2.php:149 ../admin/ftp_del.php:83
+#: ../admin/browseforfolder2.php:150 ../admin/ftp_del.php:83
 #: ../admin/ftp_edit.php:99 ../admin/hta_adduser.php:68
 #: ../admin/hta_dodeluser.php:65 ../admin/hta_edit.php:115
 #: ../admin/mail_edit.php:116 ../admin/mail_manage_catchall.php:137
@@ -357,11 +357,11 @@ msgid ""
 "alternc.install"
 msgstr ""
 
-#: ../admin/adm_deactivate.php:46 ../class/m_admin.php:246
-#: ../class/m_admin.php:278 ../class/m_admin.php:796 ../class/m_admin.php:824
-#: ../class/m_admin.php:853 ../class/m_admin.php:906 ../class/m_admin.php:935
-#: ../class/m_admin.php:962 ../class/m_admin.php:1042
-#: ../class/m_admin.php:1066
+#: ../admin/adm_deactivate.php:46 ../class/m_admin.php:241
+#: ../class/m_admin.php:272 ../class/m_admin.php:780 ../class/m_admin.php:806
+#: ../class/m_admin.php:833 ../class/m_admin.php:886 ../class/m_admin.php:914
+#: ../class/m_admin.php:940 ../class/m_admin.php:1017
+#: ../class/m_admin.php:1041
 msgid "Account not found"
 msgstr ""
 
@@ -1092,7 +1092,7 @@ msgstr ""
 msgid "Add this account to the allowed list"
 msgstr ""
 
-#: ../admin/adm_panel.php:40 ../class/m_admin.php:107
+#: ../admin/adm_panel.php:40 ../class/m_admin.php:108
 msgid "Admin Control Panel"
 msgstr ""
 
@@ -1702,19 +1702,19 @@ msgstr ""
 msgid "Change my settings"
 msgstr ""
 
-#: ../admin/browseforfolder2.php:127
+#: ../admin/browseforfolder2.php:128
 msgid "Searching for a folder"
 msgstr ""
 
-#: ../admin/browseforfolder2.php:133
+#: ../admin/browseforfolder2.php:134
 msgid "Error, cannot find this folder"
 msgstr ""
 
-#: ../admin/browseforfolder2.php:135
+#: ../admin/browseforfolder2.php:136
 msgid "Back to the root folder"
 msgstr ""
 
-#: ../admin/browseforfolder2.php:148
+#: ../admin/browseforfolder2.php:149
 msgid "Select"
 msgstr ""
 
@@ -2244,7 +2244,7 @@ msgstr ""
 msgid "Password do not match"
 msgstr ""
 
-#: ../admin/ftp_edit.php:121 ../class/m_admin.php:1472 ../class/m_hta.php:292
+#: ../admin/ftp_edit.php:121 ../class/m_admin.php:1443 ../class/m_hta.php:292
 msgid "Please enter a password"
 msgstr ""
 
@@ -3910,15 +3910,15 @@ msgstr ""
 msgid "Domain can be installed, force NO DNS hosting"
 msgstr ""
 
-#: ../class/m_admin.php:84
+#: ../class/m_admin.php:86
 msgid "Administration"
 msgstr ""
 
-#: ../class/m_admin.php:92
+#: ../class/m_admin.php:94
 msgid "Manage AlternC accounts"
 msgstr ""
 
-#: ../class/m_admin.php:97
+#: ../class/m_admin.php:99
 msgid "User Quotas"
 msgstr ""
 
@@ -3926,156 +3926,163 @@ msgstr ""
 msgid "PhpMyAdmin"
 msgstr ""
 
-#: ../class/m_admin.php:120
+#: ../class/m_admin.php:119
 msgid "Switch debug Off"
 msgstr ""
 
-#: ../class/m_admin.php:120
+#: ../class/m_admin.php:119
 msgid "Switch debug On"
 msgstr ""
 
-#: ../class/m_admin.php:127
+#: ../class/m_admin.php:125
 msgid "Applying..."
 msgstr ""
 
-#: ../class/m_admin.php:128
+#: ../class/m_admin.php:126
 msgid "Domain changes are already applying"
 msgstr ""
 
-#: ../class/m_admin.php:134
+#: ../class/m_admin.php:131
 msgid "Apply changes"
 msgstr ""
 
-#: ../class/m_admin.php:137
+#: ../class/m_admin.php:134
 msgid ""
 "Server configuration changes are applied every 5 minutes. Do you want to do "
 "it right now?"
 msgstr ""
 
-#: ../class/m_admin.php:212 ../class/m_admin.php:268 ../class/m_admin.php:342
-#: ../class/m_admin.php:431 ../class/m_admin.php:477 ../class/m_admin.php:513
-#: ../class/m_admin.php:595 ../class/m_admin.php:773 ../class/m_admin.php:816
-#: ../class/m_admin.php:845 ../class/m_admin.php:880
+#: ../class/m_admin.php:207 ../class/m_admin.php:262 ../class/m_admin.php:334
+#: ../class/m_admin.php:417 ../class/m_admin.php:462 ../class/m_admin.php:498
+#: ../class/m_admin.php:581 ../class/m_admin.php:759 ../class/m_admin.php:799
+#: ../class/m_admin.php:826 ../class/m_admin.php:860
 msgid "-- Only administrators can access this page! --"
 msgstr ""
 
-#: ../class/m_admin.php:383
+#: ../class/m_admin.php:373
 msgid ""
 "Invalid pattern type provided. Are you even performing a legitimate action?"
 msgstr ""
 
-#: ../class/m_admin.php:439
+#: ../class/m_admin.php:425
 msgid "Subject, message and sender are mandatory"
 msgstr ""
 
-#: ../class/m_admin.php:444
+#: ../class/m_admin.php:430
 msgid "Sender is syntaxically incorrect"
 msgstr ""
 
-#: ../class/m_admin.php:536
+#: ../class/m_admin.php:521
 msgid "-- Only administrators can do that! --"
 msgstr ""
 
-#: ../class/m_admin.php:542
+#: ../class/m_admin.php:527
 msgid "You don't seem to be allowed to delegate this domain"
 msgstr ""
 
-#: ../class/m_admin.php:599
+#: ../class/m_admin.php:585
 msgid "Missing db_server field"
 msgstr ""
 
-#: ../class/m_admin.php:603 ../class/m_admin.php:608
+#: ../class/m_admin.php:589 ../class/m_admin.php:594
 msgid "All fields are mandatory"
 msgstr ""
 
-#: ../class/m_admin.php:613
+#: ../class/m_admin.php:599
 msgid "Please enter a valid email address"
 msgstr ""
 
-#: ../class/m_admin.php:619
+#: ../class/m_admin.php:605
 msgid "Login can only contains characters a-z and 0-9"
 msgstr ""
 
-#: ../class/m_admin.php:626
+#: ../class/m_admin.php:612
 msgid "The login is too long (14 chars max)"
 msgstr ""
 
-#: ../class/m_admin.php:631
+#: ../class/m_admin.php:617
 msgid "Login can only contains characters a-z, 0-9 and -"
 msgstr ""
 
-#: ../class/m_admin.php:676
+#: ../class/m_admin.php:663
 msgid "This login already exists"
 msgstr ""
 
-#: ../class/m_admin.php:699
+#: ../class/m_admin.php:686
 #, php-format
 msgid "query failed: %s "
 msgstr ""
 
-#: ../class/m_admin.php:726
+#: ../class/m_admin.php:713
 #, php-format
 msgid "New account %s from %s on %s"
 msgstr ""
 
-#: ../class/m_admin.php:731
+#: ../class/m_admin.php:718
 #, php-format
 msgid "Cannot send email to %s"
 msgstr ""
 
-#: ../class/m_admin.php:735
+#: ../class/m_admin.php:722
 #, php-format
 msgid "Query failed: %s"
 msgstr ""
 
-#: ../class/m_admin.php:1046
+#: ../class/m_admin.php:1021
 msgid "This account is ALREADY an administrator account"
 msgstr ""
 
-#: ../class/m_admin.php:1070
+#: ../class/m_admin.php:1045
 msgid "This account is NOT an administrator account!"
 msgstr ""
 
-#: ../class/m_admin.php:1233
+#: ../class/m_admin.php:1208
 #, php-format
 msgid "Domain '%s' not found."
 msgstr ""
 
-#: ../class/m_admin.php:1253 ../class/m_admin.php:1289
-#: ../class/m_admin.php:1347
+#: ../class/m_admin.php:1227 ../class/m_admin.php:1262
+#: ../class/m_admin.php:1321
 msgid "This TLD does not exist"
 msgstr ""
 
-#: ../class/m_admin.php:1314
+#: ../class/m_admin.php:1287
 msgid "The TLD name is mandatory"
 msgstr ""
 
-#: ../class/m_admin.php:1321
+#: ../class/m_admin.php:1294
 msgid "This TLD already exist"
 msgstr ""
 
-#: ../class/m_admin.php:1468
+#: ../class/m_admin.php:1439
 msgid "Please enter a login"
 msgstr ""
 
-#: ../class/m_admin.php:1478
+#: ../class/m_admin.php:1449
 msgid "-- Program error -- The requested password policy does not exist!"
 msgstr ""
 
-#: ../class/m_admin.php:1486
+#: ../class/m_admin.php:1457
 msgid "The password length is too short according to the password policy"
 msgstr ""
 
-#: ../class/m_admin.php:1491
+#: ../class/m_admin.php:1462
 msgid "The password is too long according to the password policy"
 msgstr ""
 
-#: ../class/m_admin.php:1501
+#: ../class/m_admin.php:1472
 msgid ""
-"The password policy prevents you to use your login name inside your password"
+"The password policy prevents you to use your login name inside your password "
+"or the other way around"
 msgstr ""
 
-#: ../class/m_admin.php:1525
+#: ../class/m_admin.php:1477
+msgid ""
+"The password policy prevents you to use something too similar from your "
+"login name inside your password"
+msgstr ""
+
+#: ../class/m_admin.php:1501
 msgid ""
 "Your password contains not enough different classes of character, between "
 "low-case, up-case, figures and special characters."
