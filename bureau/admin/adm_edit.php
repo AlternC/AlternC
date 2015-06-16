@@ -83,11 +83,11 @@ if (!$r=$admin->get($uid)) {
 
 <tr>
 	<th><label for="pass"><?php __("Password"); ?></label></th>
-	<td><input type="password" class="int" id="pass" name="pass" value="" size="20" maxlength="64" /><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#pass","#passconf"); ?></td>
+	<td><input type="password" class="int" id="pass" autocomplete="off" name="pass" value="" size="20" maxlength="64" /><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#pass","#passconf"); ?></td>
 </tr>
 <tr>
 	<th><label for="passconf"><?php __("Confirm password"); ?></label></th>
-	<td><input type="password" class="int" id="passconf" name="passconf" value="" size="20" maxlength="64" /></td>
+	<td><input type="password" class="int" id="passconf" autocomplete="off" name="passconf" value="" size="20" maxlength="64" /></td>
 </tr>
 <tr>
 	<th><label><?php __("Password change allowed?"); ?></label></th>

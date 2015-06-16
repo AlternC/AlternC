@@ -56,11 +56,11 @@ getFields($fields);
 	</tr>
 	<tr>
 		<th><label for="password"><?php __("Password"); ?></label></th>
-		<td><input type="password" class="int" name="password" id="password" value="" size="20" maxlength="64" /><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#password","#passwordconf"); ?></td>
+		<td><input type="password" class="int" name="password" autocomplete="off" id="password" value="" size="20" maxlength="64" /><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#password","#passwordconf"); ?></td>
 	</tr>
 	<tr>
 		<th><label for="passwordconf"><?php __("Confirm password"); ?></label></th>
-		<td><input type="password" class="int" name="passwordconf" id="passwordconf" value="" size="20" maxlength="64" /></td>
+		<td><input type="password" class="int" name="passwordconf" autocomplete="off" id="passwordconf" value="" size="20" maxlength="64" /></td>
 	</tr>
 </table>
 <br />

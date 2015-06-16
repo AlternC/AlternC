@@ -80,8 +80,8 @@ echo "<p>";
 <form method="post" action="mem_passwd.php" name="main" id="main">
 <table border="1" cellspacing="0" cellpadding="4" class="tedit" >
 <tr><th><?php __("Old password"); ?></th><td><input type="password" class="int" name="oldpass" value="<?php isset($oldpass) ? : $oldpass=""; echo $oldpass; ?>" size="20" maxlength="128" /></td></tr>
-<tr><th><?php __("New password"); ?> (1)</th><td><input type="password" class="int" id="newpass" name="newpass" value="<?php isset($newpass) ? : $newpass=""; echo $newpass;  ?>" size="20" maxlength="60" /><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#newpass","#newpass2"); ?></td></tr>
-<tr><th><?php __("New password"); ?> (2)</th><td><input type="password" class="int" id="newpass2" name="newpass2" value="<?php isset($newpass2) ? : $newpass2=""; echo $newpass2;?>" size="20" maxlength="61" /></td></tr>
+<tr><th><?php __("New password"); ?> (1)</th><td><input type="password" class="int" autocomplete="off" id="newpass" name="newpass" value="<?php isset($newpass) ? : $newpass=""; echo $newpass;  ?>" size="20" maxlength="60" /><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#newpass","#newpass2"); ?></td></tr>
+<tr><th><?php __("New password"); ?> (2)</th><td><input type="password" class="int" autocomplete="off" id="newpass2" name="newpass2" value="<?php isset($newpass2) ? : $newpass2=""; echo $newpass2;?>" size="20" maxlength="61" /></td></tr>
 <tr class="trbtn"><td colspan="3"><input type="submit" class="inb ok" name="submit" value="<?php __("Change my password"); ?>" /></td></tr>
 </table>
 </form>

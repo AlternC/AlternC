@@ -66,11 +66,11 @@ if (isset($error) && $error) {
 </td></tr>
 <tr>
 	<th><label for="pass"><?php __("Initial password"); ?></label></th>
-	<td><input type="password" id="pass" name="pass" class="int" value="<?php ehe($pass); ?>" size="20" maxlength="64" /><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#pass","#passconf"); ?></td>
+	<td><input type="password" id="pass" name="pass" autocomplete="off" class="int" value="<?php ehe($pass); ?>" size="20" maxlength="64" /><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#pass","#passconf"); ?></td>
 </tr>
 <tr>
 	<th><label for="passconf"><?php __("Confirm password"); ?></label></th>
-	<td><input type="password" id="passconf" name="passconf" class="int" value="<?php ehe($passconf); ?>" size="20" maxlength="64" /></td>
+	<td><input type="password" id="passconf" name="passconf" autocomplete="off" class="int" value="<?php ehe($passconf); ?>" size="20" maxlength="64" /></td>
 </tr>
 <tr>
 	<th><label><?php __("Can he change its password"); ?></label></th>

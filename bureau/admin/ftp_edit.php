@@ -83,11 +83,11 @@ if (isset($error) && $error) {
     </tr>
     <tr id='ftp_tr_pass1'>
       <th><label for="pass"><?php __("Password"); ?></label></th>
-      <td><input type="password" class="int" name="pass" id="pass" size="20" maxlength="64" value=""/><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#pass","#passconf"); ?></td>
+      <td><input type="password" class="int" name="pass" autocomplete="off" id="pass" size="20" maxlength="64" value=""/><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#pass","#passconf"); ?></td>
     </tr>
     <tr id='ftp_tr_pass2'>
       <th><label for="passconf"><?php __("Confirm password"); ?></label></th>
-      <td><input type="password" class="int" name="passconf" id="passconf" size="20" maxlength="64" value=""/></td>
+      <td><input type="password" class="int" name="passconf" autocomplete="off" id="passconf" size="20" maxlength="64" value=""/></td>
     </tr>
     <tr id='ftp_tr_editpass' style='display: none;'>
       <th><label for="pass"><?php __("Password"); ?></label></th>

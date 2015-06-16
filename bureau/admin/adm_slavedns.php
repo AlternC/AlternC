@@ -158,7 +158,7 @@ if (is_array($c)) { ?>
     <tr><th><label for="newlogin"><?php __("Login"); ?></label></th><th><label for="newpass"><?php __("Password"); ?></label></th></tr>
     <tr>
       <td><input type="text" class="int" value="<?php ehe(  isset($newlogin)?$newlogin:'') ; ?>" id="newlogin" name="newlogin" maxlength="64" size="32" /><br/><br/></td>
-      <td><input type="password" class="int" value="<?php ehe( (isset($newpass)?$newpass:'') ) ; ?>" id="newpass" name="newpass" maxlength="64" size="32" /><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#newpass"); ?></td>
+      <td><input type="password" class="int" autocomplete="off" value="<?php ehe( (isset($newpass)?$newpass:'') ) ; ?>" id="newpass" name="newpass" maxlength="64" size="32" /><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#newpass"); ?></td>
     </tr>
     <tr class="trbtn"><td colspan="2"><input type="submit" value="<?php __("Add this account to the allowed list"); ?>" class="inb" /></td></tr>
   </table>
