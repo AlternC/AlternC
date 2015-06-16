@@ -47,7 +47,7 @@ $ac  = $authip->get_auth_class();
 $lac = $authip->list_affected();
 ?>
 
-<h3><?php __("Access security"); ?></h3>
+<h3><?php __("FTP Access Security"); ?></h3>
 <hr id="topbar"/>
 <br />
 

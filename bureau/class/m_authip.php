@@ -43,7 +43,7 @@ class m_authip {
    */
   function hook_menu() {
     $obj = array(
-      'title'       => _("Access security"),
+      'title'       => _("FTP Access Security"),
       'ico'         => 'images/ip.png',
       'link'        => 'ip_main.php',
       'pos'         => 120,

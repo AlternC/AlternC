@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: $Id: admin.po,v 1.2 2003/06/09 14:36:08 root Exp $\n"
 "Report-Msgid-Bugs-To: i18n@alternc.org\n"
-"POT-Creation-Date: 2015-06-16 14:09+0200\n"
+"POT-Creation-Date: 2015-06-16 14:25+0200\n"
 "PO-Revision-Date: 2007-10-25 23:50-0400\n"
 "Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
 "Language-Team: English <i18n@alternc.org>\n"
@@ -249,8 +249,7 @@ msgstr "Criar está nova conta FTP."
 msgid "Cancel"
 msgstr ""
 
-#: ../admin/adm_authip_whitelist.php:31 ../admin/ip_main.php:50
-#: ../class/m_authip.php:46
+#: ../admin/adm_authip_whitelist.php:31
 msgid "Access security"
 msgstr ""
 
@@ -2635,6 +2634,11 @@ msgstr "Você precisa aceitar o cookie da sessão para o login"
 #, fuzzy
 msgid "Need a login and a password"
 msgstr "Senha inicial"
+
+#: ../admin/ip_main.php:50 ../class/m_authip.php:46
+#, fuzzy
+msgid "FTP Access Security"
+msgstr "Conta Permitiu ?"
 
 #: ../admin/ip_main.php:58
 msgid ""

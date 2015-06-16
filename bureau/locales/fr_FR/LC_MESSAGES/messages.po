@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: $Id: admin.po,v 1.10 2004/11/01 15:55:44 anonymous Exp "
 "$\n"
 "Report-Msgid-Bugs-To: i18n@alternc.org\n"
-"POT-Creation-Date: 2015-06-16 14:09+0200\n"
+"POT-Creation-Date: 2015-06-16 14:25+0200\n"
 "PO-Revision-Date: 2015-06-16 14:11+0200\n"
 "Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
 "Language-Team: français <team@alternc.org>\n"
@@ -253,8 +253,7 @@ msgstr "Créer ce compte AlternC"
 msgid "Cancel"
 msgstr "Annuler"
 
-#: ../admin/adm_authip_whitelist.php:31 ../admin/ip_main.php:50
-#: ../class/m_authip.php:46
+#: ../admin/adm_authip_whitelist.php:31
 msgid "Access security"
 msgstr "Contrôle d'accès"
 
@@ -2619,6 +2618,10 @@ msgstr "Vous devez accepter le cookie de session pour pouvoir vous connecter"
 #: ../admin/index.php:152
 msgid "Need a login and a password"
 msgstr "Nom d'utilisateur et mot de passe requis"
+
+#: ../admin/ip_main.php:50 ../class/m_authip.php:46
+msgid "FTP Access Security"
+msgstr "Contrôle d'accès FTP"
 
 #: ../admin/ip_main.php:58
 msgid ""

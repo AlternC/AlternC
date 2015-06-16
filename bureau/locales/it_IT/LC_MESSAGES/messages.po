@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AlternC 2.0\n"
 "Report-Msgid-Bugs-To: i18n@alternc.org\n"
-"POT-Creation-Date: 2015-06-16 14:09+0200\n"
+"POT-Creation-Date: 2015-06-16 14:25+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -235,8 +235,7 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: ../admin/adm_authip_whitelist.php:31 ../admin/ip_main.php:50
-#: ../class/m_authip.php:46
+#: ../admin/adm_authip_whitelist.php:31
 msgid "Access security"
 msgstr ""
 
@@ -2462,6 +2461,10 @@ msgstr ""
 
 #: ../admin/index.php:152
 msgid "Need a login and a password"
+msgstr ""
+
+#: ../admin/ip_main.php:50 ../class/m_authip.php:46
+msgid "FTP Access Security"
 msgstr ""
 
 #: ../admin/ip_main.php:58
