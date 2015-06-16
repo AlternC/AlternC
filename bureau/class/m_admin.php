@@ -1468,13 +1468,18 @@ EOF;
             $logins = explode("@", $login);
             $logins[] = $login;
             foreach ($logins as $l) {
-                if (strpos($password, $l) !== false) {
-                    $err->raise("admin", _("The password policy prevents you to use your login name inside your password"));
+	      if (strpos($password, $l) !== false || strpos($l,$password) !== false) {
+                    $err->raise("admin", _("The password policy prevents you to use your login name inside your password or the other way around"));
                     return false;
                 }
+	      // Now check that levenshten distance between your login parts and your password is below 40% : 
+	      if ( intval(levenshtein($password, $l)/strlen($password)*1000) > 400 ) {
+                    $err->raise("admin", _("The password policy prevents you to use something too similar from your login name inside your password"));
+                    return false;
+	      }
             }
         }
-
+	
         if ($pol["classcount"] > 0) {
             $cls = array(0, 0, 0, 0, 0);
             for ($i = 0; $i < strlen($password); $i++) {
