@@ -572,7 +572,7 @@ class m_bro {
 	if ($perm[$i]['w']) {
 	  $m=$m | 0220; // ug+w
 	} else {
-	  $m=$m ^ 0222; // ugo-w
+	  $m=$m & (~ 0222); // ugo-w
 	}
         $action->chmod($absolute."/".$d[$i], $m);
 	if ($verbose) {
