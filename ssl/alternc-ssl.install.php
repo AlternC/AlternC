@@ -31,7 +31,7 @@ if ($argv[1] == "before-reload") {
             ('panel-ssl', 'HTTPS AlternC panel access', 'NONE', '%SUB% IN A @@PUBLIC_IP@@', 'txt,mx,mx2,defmx,defmx2', 'ALL', 0, 0, 1);");
 
     $db->query("INSERT IGNORE INTO `domaines_type` (name, description, target, entry, compatibility, enable, only_dns, need_dns, advanced ) VALUES
-            ('url-ssl', 'URL redirection, HTTP & HTTPS', 'URL', '%SUB% IN A @@PUBLIC_IP@@', 'cname,txt,mx,mx2,defmx,defmx2', 'ALL', 0, 0, 1);");
+            ('url-ssl', 'URL redirection, HTTP & HTTPS', 'URL', '%SUB% IN A @@PUBLIC_IP@@', 'txt,mx,mx2,defmx,defmx2', 'ALL', 0, 0, 1);");
 
     $db->query("SELECT * FROM domaines_type WHERE name='roundcube';");
     if ($db->next_record()) {
