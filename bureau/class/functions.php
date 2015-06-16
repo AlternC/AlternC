@@ -159,7 +159,23 @@ function checksubtxt($txt) {
  * @return boolean
  */
 function checkcname($cname) {
-	return true;
+  if ($check=checkfqdn(rtrim($cname,"."))) {
+    if ($check!=4) { // ALLOW non-fully qualified (no .)
+      return false; // bad FQDN
+    }
+  }
+  if (substr($cname,-1)!=".") {
+    // Not fully qualified : 
+    if (strpos($cname,".")===false) {
+      // NO DOT in the middle, no DOT elsewhere => seems fine
+      return true;
+    } else {
+      // NO DOT at the end, but A DOT ELSEWHERE => seems broken (please use fully qualified)
+      return false;
+    }
+  }
+  // fully qualified => fine
+  return true;
 }
 
 /**

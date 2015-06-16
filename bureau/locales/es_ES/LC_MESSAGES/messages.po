@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: messages\n"
 "Report-Msgid-Bugs-To: i18n@alternc.org\n"
-"POT-Creation-Date: 2015-06-16 14:25+0200\n"
+"POT-Creation-Date: 2015-06-16 16:06+0200\n"
 "PO-Revision-Date: 2008-09-05 16:50+0200\n"
 "Last-Translator: \n"
 "Language-Team:  <tech@alternc.org>\n"
@@ -4152,65 +4152,65 @@ msgid "The zone file of this domain is locked. Contact your administrator."
 msgstr "Esta cuenta es un cuenta de administrador"
 
 # Variables used in functions.php3
-#: ../class/functions.php:385
+#: ../class/functions.php:401
 msgid "Bytes"
 msgstr "Octetos"
 
-#: ../class/functions.php:387
+#: ../class/functions.php:403
 msgid "Byte"
 msgstr "Octeto"
 
-#: ../class/functions.php:392
+#: ../class/functions.php:408
 msgid "Kb"
 msgstr "Kb"
 
-#: ../class/functions.php:396
+#: ../class/functions.php:412
 msgid "Mb"
 msgstr "Mb"
 
-#: ../class/functions.php:400
+#: ../class/functions.php:416
 msgid "Gb"
 msgstr "Gb"
 
-#: ../class/functions.php:402
+#: ../class/functions.php:418
 msgid "Tb"
 msgstr "Tb"
 
-#: ../class/functions.php:511
+#: ../class/functions.php:527
 msgid "year"
 msgstr "año"
 
 # Variables used in functions.php3
-#: ../class/functions.php:511
+#: ../class/functions.php:527
 msgid "years"
 msgstr "años"
 
-#: ../class/functions.php:513
+#: ../class/functions.php:529
 msgid "month"
 msgstr "mes"
 
-#: ../class/functions.php:513
+#: ../class/functions.php:529
 msgid "months"
 msgstr "meses"
 
-#: ../class/functions.php:536
+#: ../class/functions.php:552
 msgid "Not managed"
 msgstr "No manejado"
 
-#: ../class/functions.php:702 ../class/functions.php:704
+#: ../class/functions.php:718 ../class/functions.php:720
 msgid "Previous Page"
 msgstr ""
 
-#: ../class/functions.php:758 ../class/functions.php:760
+#: ../class/functions.php:774 ../class/functions.php:776
 msgid "Next Page"
 msgstr ""
 
-#: ../class/functions.php:799
+#: ../class/functions.php:815
 #, fuzzy
 msgid "Clic here to generate a password"
 msgstr "Por favor, entra una contraseña"
 
-#: ../class/functions.php:841 ../class/functions.php:842
+#: ../class/functions.php:857 ../class/functions.php:858
 #, fuzzy
 msgid "Choose a folder..."
 msgstr "Proteger una carpeta"
@@ -4692,7 +4692,8 @@ msgstr "Lista de las buzones de correo del dominio %s"
 
 #: ../class/m_dom.php:1296
 #, fuzzy
-msgid "The name you entered is incorrect"
+msgid ""
+"The name you entered is incorrect or not fully qualified (shall end with a .)"
 msgstr "El miembro '%s' no existe"
 
 #: ../class/m_dom.php:1304
@@ -5543,3 +5544,7 @@ msgstr "Animación Flash"
 #: ../class/mime.php:172 ../class/mime.php:173 ../class/mime.php:174
 msgid "Real Media File"
 msgstr "Archivo Real Media"
+
+#, fuzzy
+#~ msgid "The name you entered is incorrect"
+#~ msgstr "El miembro '%s' no existe"

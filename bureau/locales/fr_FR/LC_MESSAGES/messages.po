@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: $Id: admin.po,v 1.10 2004/11/01 15:55:44 anonymous Exp "
 "$\n"
 "Report-Msgid-Bugs-To: i18n@alternc.org\n"
-"POT-Creation-Date: 2015-06-16 14:25+0200\n"
+"POT-Creation-Date: 2015-06-16 16:06+0200\n"
 "PO-Revision-Date: 2015-06-16 14:11+0200\n"
 "Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
 "Language-Team: français <team@alternc.org>\n"
@@ -4075,64 +4075,64 @@ msgstr ""
 "La zone DNS de ce domaine est verrouillée, contactez votre administrateur."
 
 # Variables used in functions.php3
-#: ../class/functions.php:385
+#: ../class/functions.php:401
 msgid "Bytes"
 msgstr "Octets"
 
 # Variables used in functions.php3
-#: ../class/functions.php:387
+#: ../class/functions.php:403
 msgid "Byte"
 msgstr "Octets"
 
-#: ../class/functions.php:392
+#: ../class/functions.php:408
 msgid "Kb"
 msgstr "Ko"
 
-#: ../class/functions.php:396
+#: ../class/functions.php:412
 msgid "Mb"
 msgstr "Mo"
 
-#: ../class/functions.php:400
+#: ../class/functions.php:416
 msgid "Gb"
 msgstr "Go"
 
-#: ../class/functions.php:402
+#: ../class/functions.php:418
 msgid "Tb"
 msgstr "To"
 
-#: ../class/functions.php:511
+#: ../class/functions.php:527
 msgid "year"
 msgstr "an"
 
-#: ../class/functions.php:511
+#: ../class/functions.php:527
 msgid "years"
 msgstr "ans"
 
-#: ../class/functions.php:513
+#: ../class/functions.php:529
 msgid "month"
 msgstr "mois"
 
-#: ../class/functions.php:513
+#: ../class/functions.php:529
 msgid "months"
 msgstr "mois"
 
-#: ../class/functions.php:536
+#: ../class/functions.php:552
 msgid "Not managed"
 msgstr "Non géré"
 
-#: ../class/functions.php:702 ../class/functions.php:704
+#: ../class/functions.php:718 ../class/functions.php:720
 msgid "Previous Page"
 msgstr "Page précédente"
 
-#: ../class/functions.php:758 ../class/functions.php:760
+#: ../class/functions.php:774 ../class/functions.php:776
 msgid "Next Page"
 msgstr "Page suivante"
 
-#: ../class/functions.php:799
+#: ../class/functions.php:815
 msgid "Clic here to generate a password"
 msgstr "Cliquez ici pour générer un mot de passe"
 
-#: ../class/functions.php:841 ../class/functions.php:842
+#: ../class/functions.php:857 ../class/functions.php:858
 msgid "Choose a folder..."
 msgstr "Choisir un répertoire ..."
 
@@ -4619,8 +4619,9 @@ msgid "The ip address is invalid"
 msgstr "Adresse IP invalide"
 
 #: ../class/m_dom.php:1296
-msgid "The name you entered is incorrect"
-msgstr "Le nom que vous avez entré est incorrect"
+msgid ""
+"The name you entered is incorrect or not fully qualified (shall end with a .)"
+msgstr "Le dossier que vous avez entré est incorrect ou non qualifié (doit terminé par un .)"
 
 #: ../class/m_dom.php:1304
 msgid "The TXT value you entered is incorrect"
@@ -5489,3 +5490,6 @@ msgstr "Animation Flash"
 #: ../class/mime.php:172 ../class/mime.php:173 ../class/mime.php:174
 msgid "Real Media File"
 msgstr "Fichier Real Media"
+
+#~ msgid "The name you entered is incorrect"
+#~ msgstr "Le nom que vous avez entré est incorrect"

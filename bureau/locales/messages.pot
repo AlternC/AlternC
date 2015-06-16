@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AlternC 2.0\n"
 "Report-Msgid-Bugs-To: i18n@alternc.org\n"
-"POT-Creation-Date: 2015-06-16 14:25+0200\n"
+"POT-Creation-Date: 2015-06-16 16:06+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3817,63 +3817,63 @@ msgstr ""
 msgid "The zone file of this domain is locked. Contact your administrator."
 msgstr ""
 
-#: ../class/functions.php:385
+#: ../class/functions.php:401
 msgid "Bytes"
 msgstr ""
 
-#: ../class/functions.php:387
+#: ../class/functions.php:403
 msgid "Byte"
 msgstr ""
 
-#: ../class/functions.php:392
+#: ../class/functions.php:408
 msgid "Kb"
 msgstr ""
 
-#: ../class/functions.php:396
+#: ../class/functions.php:412
 msgid "Mb"
 msgstr ""
 
-#: ../class/functions.php:400
+#: ../class/functions.php:416
 msgid "Gb"
 msgstr ""
 
-#: ../class/functions.php:402
+#: ../class/functions.php:418
 msgid "Tb"
 msgstr ""
 
-#: ../class/functions.php:511
+#: ../class/functions.php:527
 msgid "year"
 msgstr ""
 
-#: ../class/functions.php:511
+#: ../class/functions.php:527
 msgid "years"
 msgstr ""
 
-#: ../class/functions.php:513
+#: ../class/functions.php:529
 msgid "month"
 msgstr ""
 
-#: ../class/functions.php:513
+#: ../class/functions.php:529
 msgid "months"
 msgstr ""
 
-#: ../class/functions.php:536
+#: ../class/functions.php:552
 msgid "Not managed"
 msgstr ""
 
-#: ../class/functions.php:702 ../class/functions.php:704
+#: ../class/functions.php:718 ../class/functions.php:720
 msgid "Previous Page"
 msgstr ""
 
-#: ../class/functions.php:758 ../class/functions.php:760
+#: ../class/functions.php:774 ../class/functions.php:776
 msgid "Next Page"
 msgstr ""
 
-#: ../class/functions.php:799
+#: ../class/functions.php:815
 msgid "Clic here to generate a password"
 msgstr ""
 
-#: ../class/functions.php:841 ../class/functions.php:842
+#: ../class/functions.php:857 ../class/functions.php:858
 msgid "Choose a folder..."
 msgstr ""
 
@@ -4330,7 +4330,8 @@ msgid "The ip address is invalid"
 msgstr ""
 
 #: ../class/m_dom.php:1296
-msgid "The name you entered is incorrect"
+msgid ""
+"The name you entered is incorrect or not fully qualified (shall end with a .)"
 msgstr ""
 
 #: ../class/m_dom.php:1304
