@@ -112,21 +112,22 @@ function variable_set($name, $value, $comment=null) {
   global $conf, $db, $err;
   $err->log('variable', 'variable_set', '+'.serialize($value).'+'.$comment.'+'); 
 
-  $conf[$name] = $value;
+  variable_init_maybe();
+
   if (is_object($value) || is_array($value)) {
-    $value = serialize($value);
+    $value2 = serialize($value);
   }
-
-  if ( empty($comment) ) {
-    $query = "INSERT INTO variable (name, value) values ('".$name."', '".$value."') on duplicate key update name='$name', value='$value';";
-  } else {
-    $comment=mysql_real_escape_string($comment);
-    $query = "INSERT INTO variable (name, value, comment) values ('".$name."', '".$value."', '$comment') on duplicate key update name='$name', value='$value', comment='$comment';";
+  if (!array_key_exists($name,$conf) || $value!=$conf[$name]) {
+    $conf[$name] = $value;
+    
+    if ( empty($comment) ) {
+      $query = "INSERT INTO variable (name, value) values ('".$name."', '".addslashes($value2)."') on duplicate key update name='$name', value='$value';";
+    } else {
+      $comment=mysql_real_escape_string($comment);
+      $query = "INSERT INTO variable (name, value, comment) values ('".$name."', '".addslashes($value2)."', '$comment') on duplicate key update name='$name', value='$value', comment='$comment';";
+    }
+    $db->query($query);
   }
-
-  $db->query("$query");
-
-  variable_init();
 }
 
 /**
