@@ -451,6 +451,12 @@ ORDER BY
 	$this->delete($one["id"]);
       }
     }
+    $db->query("SELECT domaine FROM domaines WHERE id=$domain_id;");
+    if ($db->next_record()) {
+      $db->query("UPDATE sub_domaines SET web_action='DELETE' WHERE domaine='".addslashes($db->Record["domaine"])."' AND type='txt' AND sub='' AND (valeur LIKE 'v=spf1 %' OR valeur LIKE 'v=dmarc1;%');");
+      $db->query("UPDATE domaines SET dns_action='UPDATE' WHERE id=$domain_id;");
+    }
+
     return true;
   }
 
@@ -907,9 +913,100 @@ ORDER BY
       return false;
     }
     $mailname=$db->f("value");
-
+    // set spf & dmarc for this domain
+    $db->query("SELECT domaine FROM domaines WHERE id=$domain_id;");
+    if ($db->next_record()) {
+      if ($spf=variable_get("default_spf_value")) {
+	$this->set_dns_spf($db->Record["domaine"],$spf);
+      }
+      if ($dmarc=variable_get("default_dmarc_value")) {
+	$this->set_dns_dmarc($db->Record["domaine"],$dmarc);	
+      }
+    }
     return $this->create_alias($domain_id, 'postmaster', $mem->user['login'].'@'.$mailname );
   }
+
+
+  /* ----------------------------------------------------------------- */
+  /** hook function called by variables when a variable is changed
+   * @access private
+   */
+   function hook_variable_set($name,$old,$new) {
+     global $err, $db;
+     $err->log("mail","hook_variable_set($name,$old,$new)");
+
+     if ($name=="default_spf_value") {
+       $new=trim($new);
+       $old=trim($old);
+       $db->query("SELECT domaine,login,compte FROM domaines, membres WHERE gesdns=1 AND gesmx=1 and membres.uid=domaines.compte;");
+       while ($db->next_record()) {
+	 $this->set_dns_spf($db->Record["domaine"],$new,$old,$db->Record["compte"],$db->Record["login"]);
+       }
+     }
+
+     if ($name=="default_dmarc_value") {
+       $new=trim($new);
+       $old=trim($old);
+       $db->query("SELECT domaine,login,compte FROM domaines, membres WHERE gesdns=1 AND gesmx=1 and membres.uid=domaines.compte;");
+       while ($db->next_record()) {
+	 $this->set_dns_dmarc($db->Record["domaine"],$new,$old,$db->Record["compte"],$db->Record["login"]);
+       }
+     }
+     
+   }
+
+
+  /* ----------------------------------------------------------------- */
+  /** Set or UPDATE the DNS record for the domain $dom(str) to be $spf
+   * account's login is current and if not it's $login.
+   * don't change spf if current value is not $old
+   * @access private
+   */
+   function set_dns_spf($domain, $spf, $previous=-1, $uid=-1, $login=-1) {
+     global $db, $cuid, $dom, $mem;
+     // defaults
+     if ($uid===-1) $uid=intval($cuid); else $uid=intval($uid);
+     if ($login===-1) $login=$mem->user["login"];
+     // Search for the record in sub_domaines table
+     $db->query("SELECT * FROM sub_domaines WHERE compte=$uid AND domaine='".addslashes($domain)."' AND sub='' AND type='txt' AND valeur LIKE 'v=spf1 %' AND web_action!='DELETE';");
+     if ($db->next_record()) {
+       if ($previous!==-1 && $db->Record["valeur"]=="v=spf1 ".$spf) {
+	 return; // skip, no change asked.
+       }
+       $db->query("UPDATE sub_domaines SET web_action='DELETE' WHERE id='".$db->Record["id"]."';");
+     }
+     $db->query("INSERT INTO sub_domaines SET compte=$uid, domaine='".addslashes($domain)."', sub='', type='txt', valeur='".addslashes("v=spf1 ".$spf)."', web_action='UPDATE';");
+     $db->query("UPDATE domaines SET dns_action='UPDATE' WHERE domaine='".addslashes($domain)."';");
+   }
+
+
+
+  /* ----------------------------------------------------------------- */
+  /** Set or UPDATE the DNS record for the domain $dom(str) to be $dmarc
+   * account's login is current and if not it's $login.
+   * don't change dmarc if current value is not $old
+   * @access private
+   */
+   function set_dns_dmarc($domain, $dmarc, $previous=-1, $uid=-1, $login=-1) {
+     global $db, $cuid, $dom, $mem, $L_FQDN;
+     // defaults
+     if ($uid===-1) $uid=intval($cuid); else $uid=intval($uid);
+     if ($login===-1) $login=$mem->user["login"];
+     $dmarc=str_replace("%%ADMINMAIL%%","admin@".$L_FQDN,$dmarc);
+     $dmarc=str_replace("%%USERMAIL%%",$login."@".$L_FQDN,$dmarc);
+
+     // Search for the record in sub_domaines table
+     $db->query("SELECT * FROM sub_domaines WHERE compte=$uid AND domaine='".addslashes($domain)."' AND sub='' AND type='txt' AND valeur LIKE 'v=dmarc1;%' AND web_action!='DELETE';");
+     if ($db->next_record()) {
+       if ($previous!==-1 && $db->Record["valeur"]=="v=dmarc1;".$dmarc) {
+	 return; // skip, no change asked.
+       }
+       $db->query("UPDATE sub_domaines SET web_action='DELETE' WHERE id='".$db->Record["id"]."';");
+     }
+     $db->query("INSERT INTO sub_domaines SET compte=$uid, domaine='".addslashes($domain)."', sub='', type='txt', valeur='".addslashes("v=dmarc1;".$dmarc)."', web_action='UPDATE';");
+     $db->query("UPDATE domaines SET dns_action='UPDATE' WHERE domaine='".addslashes($domain)."';");
+   }
+
 
 
 

@@ -118,6 +118,7 @@ function variable_set($name, $value, $comment=null) {
     $value2 = serialize($value);
   }
   if (!array_key_exists($name,$conf) || $value!=$conf[$name]) {
+    $previous=$conf[$name];
     $conf[$name] = $value;
     
     if ( empty($comment) ) {
@@ -127,6 +128,7 @@ function variable_set($name, $value, $comment=null) {
       $query = "INSERT INTO variable (name, value, comment) values ('".$name."', '".addslashes($value2)."', '$comment') on duplicate key update name='$name', value='$value', comment='$comment';";
     }
     $db->query($query);
+    $hooks->invoke("hook_variable_set", array("name" => $name, "old"=> $previous, "new"=>$value ) );
   }
 }
 

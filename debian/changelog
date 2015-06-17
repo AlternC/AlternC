@@ -9,6 +9,7 @@ alternc (3.1.7) oldoldstable; urgency=low
   * fix added /run/alternc in open_basedir, fix ACTIONS not working
   * fix permission in browser not working
   * fix FTP access security UX
+  * enh add DMARC and SPF management for gesmx & gesdns domains through variables
 
  -- Benjamin Sonntag <benjamin@sonntag.fr>  Thu, 16 Jun 2015 16:10:12 +0200
 
