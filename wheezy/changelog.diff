@@ -1,13 +1,13 @@
 --- changelog	2014-06-24 13:42:50.234304438 +0200
 +++ changelog.wheezy	2014-06-24 13:43:51.978313552 +0200
 @@ -1,3 +1,10 @@
-+alternc (3.2.6) stable; urgency=low
++alternc (3.2.7) oldstable; urgency=low
 +
 +  * Version identical to 3.1 for Squeeze
 +  * Includes a small dovecot patch / dependency for dovecot 2.0 for Wheezy
 +
-+ -- Benjamin Sonntag <benjamin@sonntag.fr>  Thu,  7 May 2015 18:19:00 +0100
++ -- Benjamin Sonntag <benjamin@sonntag.fr>  Thu, 16 Jun 2015 18:19:00 +0100
 +
- alternc (3.1.6) oldstable; urgency=low
+ alternc (3.1.7) oldoldstable; urgency=low
  
-   * add SSL and API alternc packages (Beta)
+  * fix added autocomplete="off" to password fields (not login form)

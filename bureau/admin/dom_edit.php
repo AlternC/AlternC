@@ -129,7 +129,7 @@ if (! empty($r['dns_result']) && $r['dns_result'] != '0') {
 
 
 <div id="tabsdom-editsub">
-<h3><?php printf(_("Editing subdomains of %s"),$domain); ?></h3>
+<h3><?php __("Main subdomains"); ?></h3>
 <?php
 $dt=$dom->domains_type_lst();
 
@@ -146,10 +146,23 @@ if ( ! empty($problems) ) {
 <tr><th colspan="2"> </th><th><?php __("Subdomain"); ?></th><th><?php __("Type");?></th><th><?php __("Status")?></th><th></th></tr>
 </thead>
 <?php
+$hasadvanced=false;
 for($i=0;$i<$r["nsub"];$i++) {
+if ($r["sub"][$i]["advanced"] && !$hasadvanced) {
+ $hasadvanced=true;
+?>
+</table>
+<h3 style="padding: 40px 0 0 0"><?php __("Advanced subdomains"); ?></h3>
+<p class="alert alert-warning"><?php __("The following entries are advanced ones, edit them at your own risks."); ?></p>
+<table class="tlist" id="dom_edit_table">
+<thead>
+<tr><th colspan="2"> </th><th><?php __("Subdomain"); ?></th><th><?php __("Type");?></th><th><?php __("Status")?></th><th></th></tr>
+</thead>
+<?php
+
+}
 
 $disabled_class=in_array(strtoupper($r['sub'][$i]['enable']),array('DISABLED','DISABLE') )?'sub-disabled':'';
-
 ?>
 	<tr class="lst" data-fqdn="<?php echo $r["sub"][$i]["fqdn"]; ?>">
     <?php if ( $r['sub'][$i]['web_action'] =='DELETE') { echo "<td colspan='2' />"; } else { ?>

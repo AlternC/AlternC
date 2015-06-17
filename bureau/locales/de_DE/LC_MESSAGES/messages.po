@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: alternc\n"
 "Report-Msgid-Bugs-To: i18n@alternc.org\n"
-"POT-Creation-Date: 2015-06-16 16:06+0200\n"
+"POT-Creation-Date: 2015-06-17 16:24+0200\n"
 "PO-Revision-Date: 2004-02-14 19:53-0400\n"
 "Last-Translator: Bruno Marmier <bruno@marmier.net>\n"
 "Language-Team: Espagnol <i18n@alternc.org>\n"
@@ -166,7 +166,7 @@ msgstr ""
 #: ../admin/adm_domstype.php:87 ../admin/adm_domstype.php:88
 #: ../admin/adm_edit.php:78 ../admin/adm_edit.php:95
 #: ../admin/adm_passpolicy.php:113 ../admin/adm_passpolicy.php:157
-#: ../admin/dom_edit.php:257 ../admin/dom_edit.php:280
+#: ../admin/dom_edit.php:270 ../admin/dom_edit.php:293
 #: ../admin/dom_subdel.php:80 ../admin/mail_edit.php:90
 #: ../admin/mail_list.php:166 ../admin/sql_bck.php:94 ../class/m_bro.php:75
 msgid "No"
@@ -177,7 +177,7 @@ msgstr "Nein"
 #: ../admin/adm_domstype.php:87 ../admin/adm_domstype.php:88
 #: ../admin/adm_edit.php:79 ../admin/adm_edit.php:96
 #: ../admin/adm_passpolicy.php:114 ../admin/adm_passpolicy.php:157
-#: ../admin/dom_edit.php:256 ../admin/dom_edit.php:279
+#: ../admin/dom_edit.php:269 ../admin/dom_edit.php:292
 #: ../admin/dom_subdel.php:79 ../admin/mail_edit.php:91
 #: ../admin/mail_list.php:212 ../admin/mail_list.php:225
 #: ../admin/mail_list.php:238 ../admin/mail_list.php:257
@@ -291,7 +291,8 @@ msgid "Informations"
 msgstr ""
 
 #: ../admin/adm_authip_whitelist.php:64 ../admin/adm_doms_def_type.php:48
-#: ../admin/dom_edit.php:146 ../admin/ip_main.php:146
+#: ../admin/dom_edit.php:146 ../admin/dom_edit.php:159
+#: ../admin/ip_main.php:146
 msgid "Type"
 msgstr ""
 
@@ -299,7 +300,7 @@ msgstr ""
 #: ../admin/adm_list.php:199 ../admin/adm_list.php:226
 #: ../admin/adm_list.php:258 ../admin/adm_passpolicy.php:151
 #: ../admin/adm_tld.php:80 ../admin/bro_editor.php:86
-#: ../admin/dom_edit.php:161 ../admin/ftp_list.php:80 ../admin/ip_main.php:166
+#: ../admin/dom_edit.php:174 ../admin/ftp_list.php:80 ../admin/ip_main.php:166
 #: ../admin/mail_list.php:152
 msgid "Edit"
 msgstr ""
@@ -307,7 +308,7 @@ msgstr ""
 #: ../admin/adm_authip_whitelist.php:85 ../admin/adm_doms_def_type.php:60
 #: ../admin/adm_mxaccount.php:83 ../admin/adm_slavedns.php:101
 #: ../admin/adm_slavedns.php:145 ../admin/bro_main.php:283
-#: ../admin/cron.php:54 ../admin/dom_edit.php:127 ../admin/dom_edit.php:168
+#: ../admin/cron.php:54 ../admin/dom_edit.php:127 ../admin/dom_edit.php:181
 #: ../admin/ftp_del.php:82 ../admin/hta_dodeluser.php:64
 #: ../admin/ip_main.php:79 ../admin/ip_main.php:167
 #: ../admin/piwik_site_dodel.php:70 ../admin/piwik_sitelist.php:128
@@ -474,7 +475,7 @@ msgid "Account"
 msgstr ""
 
 #: ../admin/adm_dnsweberror.php:55 ../admin/adm_dnsweberror.php:85
-#: ../admin/dom_add.php:57 ../class/m_dom.php:1902
+#: ../admin/dom_add.php:57 ../class/m_dom.php:1903
 msgid "Domain name"
 msgstr ""
 
@@ -640,6 +641,7 @@ msgid "OK?"
 msgstr ""
 
 #: ../admin/adm_doms.php:69 ../admin/dom_edit.php:146
+#: ../admin/dom_edit.php:159
 msgid "Status"
 msgstr ""
 
@@ -789,7 +791,7 @@ msgstr ""
 msgid "Compatibility"
 msgstr ""
 
-#: ../admin/adm_domstypeedit.php:100 ../admin/dom_edit.php:190
+#: ../admin/adm_domstypeedit.php:100 ../admin/dom_edit.php:203
 #: ../admin/ftp_list.php:73 ../admin/ftp_list.php:84
 #: ../admin/mail_list.php:127 ../admin/mail_list.php:154
 msgid "Enabled"
@@ -1033,7 +1035,7 @@ msgstr ""
 msgid "DB:"
 msgstr ""
 
-#: ../admin/adm_list.php:206 ../admin/dom_edit.php:191
+#: ../admin/adm_list.php:206 ../admin/dom_edit.php:204
 msgid "Disable"
 msgstr ""
 
@@ -1974,112 +1976,119 @@ msgid "Settings"
 msgstr ""
 
 #: ../admin/dom_edit.php:132
-#, php-format
-msgid "Editing subdomains of %s"
+msgid "Main subdomains"
 msgstr ""
 
-#: ../admin/dom_edit.php:146
+#: ../admin/dom_edit.php:146 ../admin/dom_edit.php:159
 msgid "Subdomain"
 msgstr ""
 
-#: ../admin/dom_edit.php:159
+#: ../admin/dom_edit.php:155
+msgid "Advanced subdomains"
+msgstr ""
+
+#: ../admin/dom_edit.php:156
+msgid "The following entries are advanced ones, edit them at your own risks."
+msgstr ""
+
+#: ../admin/dom_edit.php:172
 msgid "Forbidden"
 msgstr ""
 
-#: ../admin/dom_edit.php:173
+#: ../admin/dom_edit.php:186
 msgid "ERROR, please check your server setup"
 msgstr ""
 
-#: ../admin/dom_edit.php:180 ../admin/ftp_list.php:97
+#: ../admin/dom_edit.php:193 ../admin/ftp_list.php:97
 #, fuzzy
 msgid "Directory not found"
 msgstr "Miglied '%s' existiert nicht"
 
-#: ../admin/dom_edit.php:194
+#: ../admin/dom_edit.php:207
 msgid "Activation pending"
 msgstr ""
 
-#: ../admin/dom_edit.php:197 ../admin/ftp_list.php:87
+#: ../admin/dom_edit.php:210 ../admin/ftp_list.php:87
 #: ../admin/mail_list.php:146 ../admin/mail_list.php:156
 msgid "Disabled"
 msgstr ""
 
-#: ../admin/dom_edit.php:198
+#: ../admin/dom_edit.php:211
 msgid "Enable"
 msgstr ""
 
-#: ../admin/dom_edit.php:201
+#: ../admin/dom_edit.php:214
 msgid "Desactivation pending"
 msgstr ""
 
-#: ../admin/dom_edit.php:209
+#: ../admin/dom_edit.php:222
 msgid "Update pending"
 msgstr ""
 
-#: ../admin/dom_edit.php:212
+#: ../admin/dom_edit.php:225
 msgid "Deletion pending"
 msgstr ""
 
-#: ../admin/dom_edit.php:232
+#: ../admin/dom_edit.php:245
 #, php-format
 msgid "Add a subdomain to %s"
 msgstr ""
 
-#: ../admin/dom_edit.php:249
+#: ../admin/dom_edit.php:262
 msgid "DNS &amp; Email parameters"
 msgstr ""
 
-#: ../admin/dom_edit.php:254
+#: ../admin/dom_edit.php:267
 msgid "Manage the DNS on the server ?"
 msgstr ""
 
-#: ../admin/dom_edit.php:265
+#: ../admin/dom_edit.php:278
 msgid "Define TTL for the zone records"
 msgstr ""
 
-#: ../admin/dom_edit.php:267
+#: ../admin/dom_edit.php:280
 msgid ""
 "Warning: a low TTL can be problematic. It is recommended not to use a lower "
 "TTL than 3600 seconds."
 msgstr ""
 
-#: ../admin/dom_edit.php:267
+#: ../admin/dom_edit.php:280
 msgid "seconds"
 msgstr ""
 
-#: ../admin/dom_edit.php:276
+#: ../admin/dom_edit.php:289
 msgid "Manage the Emails Addresses of this domain on the server?"
 msgstr ""
 
-#: ../admin/dom_edit.php:284
+#: ../admin/dom_edit.php:297
 msgid ""
 "Warning: If you set this to 'no', all your email accounts and aliases on "
 "this domain will be immediately deleted."
 msgstr ""
 
-#: ../admin/dom_edit.php:285
+#: ../admin/dom_edit.php:298
 msgid "Submit the changes"
 msgstr ""
 
-#: ../admin/dom_edit.php:293
+#: ../admin/dom_edit.php:306
 msgid ""
 "Here is the actual DNS zone running on the AlternC server. If you just made "
 "some changes, you have to wait for it."
 msgstr ""
 
-#: ../admin/dom_edit.php:297
+#: ../admin/dom_edit.php:310
 msgid "Click here to view the dump"
 msgstr ""
 
-#: ../admin/dom_edit.php:300
+#: ../admin/dom_edit.php:313
 msgid "Refresh"
 msgstr ""
 
-#: ../admin/dom_edit.php:306
+#: ../admin/dom_edit.php:319
 msgid "Domain removal"
 msgstr ""
 
-#: ../admin/dom_edit.php:307
+#: ../admin/dom_edit.php:320
 #, php-format
 msgid ""
 "If you want to destroy the domain %s, click on the button below. Warning: "
@@ -2087,7 +2096,7 @@ msgid ""
 "domain and subdomains."
 msgstr ""
 
-#: ../admin/dom_edit.php:310
+#: ../admin/dom_edit.php:323
 #, php-format
 msgid "Delete %s from this server"
 msgstr ""
@@ -4282,24 +4291,24 @@ msgstr ""
 msgid "The name MUST contain only letter and digits"
 msgstr ""
 
-#: ../class/m_dom.php:578 ../class/m_dom.php:1401
+#: ../class/m_dom.php:578 ../class/m_dom.php:1402
 msgid ""
 "The parameters for this subdomain and domain type are invalid. Please check "
 "for subdomain entries incompatibility"
 msgstr ""
 
-#: ../class/m_dom.php:697 ../class/m_dom.php:1146 ../class/m_dom.php:1217
-#: ../class/m_dom.php:1372 ../class/m_dom.php:1462 ../class/m_dom.php:1511
-#: ../class/m_dom.php:1855
+#: ../class/m_dom.php:697 ../class/m_dom.php:1146 ../class/m_dom.php:1218
+#: ../class/m_dom.php:1373 ../class/m_dom.php:1463 ../class/m_dom.php:1512
+#: ../class/m_dom.php:1856
 msgid "--- Program error --- No lock on the domains!"
 msgstr ""
 
-#: ../class/m_dom.php:704 ../class/m_dom.php:1151 ../class/m_dom.php:1396
-#: ../class/m_dom.php:1538
+#: ../class/m_dom.php:704 ../class/m_dom.php:1151 ../class/m_dom.php:1397
+#: ../class/m_dom.php:1539
 msgid "The domain name is syntaxically incorrect"
 msgstr ""
 
-#: ../class/m_dom.php:710 ../class/m_dom.php:755 ../class/m_dom.php:1622
+#: ../class/m_dom.php:710 ../class/m_dom.php:755 ../class/m_dom.php:1623
 msgid ""
 "The requested domain is forbidden in this server, please contact the "
 "administrator"
@@ -4314,7 +4323,7 @@ msgstr ""
 msgid "The domain already exist"
 msgstr "Miglied '%s' existiert nicht"
 
-#: ../class/m_dom.php:731 ../class/m_dom.php:1518
+#: ../class/m_dom.php:731 ../class/m_dom.php:1519
 msgid ""
 "The last member of the domain name is incorrect or cannot be hosted in that "
 "server"
@@ -4345,157 +4354,157 @@ msgstr ""
 msgid "The Whois database is unavailable, please try again later"
 msgstr ""
 
-#: ../class/m_dom.php:1064 ../class/m_dom.php:1522
+#: ../class/m_dom.php:1064 ../class/m_dom.php:1523
 msgid "The domain cannot be found in the Whois database"
 msgstr ""
 
-#: ../class/m_dom.php:1222 ../class/m_dom.php:1466
+#: ../class/m_dom.php:1223 ../class/m_dom.php:1467
 #, fuzzy
 msgid "The sub-domain does not exist"
 msgstr "Miglied '%s' existiert nicht"
 
-#: ../class/m_dom.php:1261
+#: ../class/m_dom.php:1262
 msgid "invalid url"
 msgstr ""
 
-#: ../class/m_dom.php:1271
+#: ../class/m_dom.php:1272
 #, fuzzy
 msgid "The folder you entered is incorrect or does not exist"
 msgstr "Miglied '%s' existiert nicht"
 
-#: ../class/m_dom.php:1280 ../class/m_dom.php:1288
+#: ../class/m_dom.php:1281 ../class/m_dom.php:1289
 msgid "The ip address is invalid"
 msgstr ""
 
-#: ../class/m_dom.php:1296
+#: ../class/m_dom.php:1297
 #, fuzzy
 msgid ""
 "The name you entered is incorrect or not fully qualified (shall end with a .)"
 msgstr "Miglied '%s' existiert nicht"
 
-#: ../class/m_dom.php:1304
+#: ../class/m_dom.php:1305
 #, fuzzy
 msgid "The TXT value you entered is incorrect"
 msgstr "Miglied '%s' existiert nicht"
 
-#: ../class/m_dom.php:1309
+#: ../class/m_dom.php:1310
 msgid "Invalid domain type selected, please check"
 msgstr ""
 
-#: ../class/m_dom.php:1384
+#: ../class/m_dom.php:1385
 msgid ""
 "There is some forbidden characters in the sub domain (only A-Z 0-9 and - are "
 "allowed)"
 msgstr ""
 
-#: ../class/m_dom.php:1423 ../class/m_dom.php:1434
+#: ../class/m_dom.php:1424 ../class/m_dom.php:1435
 msgid "Cannot write to the destination folder"
 msgstr ""
 
-#: ../class/m_dom.php:1526
+#: ../class/m_dom.php:1527
 msgid ""
 "The DNS of this domain do not match the server's DNS. Please change your "
 "domain's DNS before you install it again"
 msgstr ""
 
-#: ../class/m_dom.php:1543
+#: ../class/m_dom.php:1544
 #, fuzzy, php-format
 msgid "The domain name %s does not exist"
 msgstr "Miglied '%s' existiert nicht"
 
-#: ../class/m_dom.php:1550
+#: ../class/m_dom.php:1551
 msgid "No change has been requested..."
 msgstr ""
 
-#: ../class/m_dom.php:1558 ../class/m_dom.php:1563
+#: ../class/m_dom.php:1559 ../class/m_dom.php:1564
 msgid ""
 "There is no MX record pointing to this server, and you are asking us to host "
 "the mail here. Make sure to update your MX entries or no mail will be "
 "received"
 msgstr ""
 
-#: ../class/m_dom.php:1614 ../class/m_dom.php:1639
+#: ../class/m_dom.php:1615 ../class/m_dom.php:1640
 msgid "The IP address you entered is incorrect"
 msgstr ""
 
-#: ../class/m_dom.php:1732 ../class/m_dom.php:1738 ../class/m_dom.php:1756
-#: ../class/m_dom.php:1762
+#: ../class/m_dom.php:1733 ../class/m_dom.php:1739 ../class/m_dom.php:1757
+#: ../class/m_dom.php:1763
 msgid "This domain is not installed in your account"
 msgstr ""
 
-#: ../class/m_dom.php:1805
+#: ../class/m_dom.php:1806
 msgid "The specified slave account already exists"
 msgstr ""
 
-#: ../class/m_dom.php:1836
+#: ../class/m_dom.php:1837
 msgid "--- Program error --- Lock already obtained!"
 msgstr ""
 
-#: ../class/m_dom.php:2182
+#: ../class/m_dom.php:2183
 #, php-format
 msgid ""
 "Problem on %s: there is more than 1 web configuration going to be generated "
 "for this sub-domain."
 msgstr ""
 
-#: ../class/m_dom.php:2191
+#: ../class/m_dom.php:2192
 #, php-format
 msgid "Problem on %s: we do not know domain's type <b>%s</b>."
 msgstr ""
 
-#: ../class/m_dom.php:2202
+#: ../class/m_dom.php:2203
 msgid "Locally hosted"
 msgstr ""
 
-#: ../class/m_dom.php:2203
+#: ../class/m_dom.php:2204
 msgid "URL redirection"
 msgstr ""
 
-#: ../class/m_dom.php:2204
+#: ../class/m_dom.php:2205
 msgid "IPv4 redirect"
 msgstr ""
 
-#: ../class/m_dom.php:2205
+#: ../class/m_dom.php:2206
 msgid "Webmail access"
 msgstr ""
 
-#: ../class/m_dom.php:2206
+#: ../class/m_dom.php:2207
 msgid "Squirrelmail Webmail access"
 msgstr ""
 
-#: ../class/m_dom.php:2207
+#: ../class/m_dom.php:2208
 msgid "Roundcube Webmail access"
 msgstr ""
 
-#: ../class/m_dom.php:2208
+#: ../class/m_dom.php:2209
 msgid "IPv6 redirect"
 msgstr ""
 
-#: ../class/m_dom.php:2209
+#: ../class/m_dom.php:2210
 msgid "CNAME DNS entry"
 msgstr ""
 
-#: ../class/m_dom.php:2210
+#: ../class/m_dom.php:2211
 msgid "TXT DNS entry"
 msgstr ""
 
-#: ../class/m_dom.php:2211
+#: ../class/m_dom.php:2212
 msgid "MX DNS entry"
 msgstr ""
 
-#: ../class/m_dom.php:2212
+#: ../class/m_dom.php:2213
 msgid "secondary MX DNS entry"
 msgstr ""
 
-#: ../class/m_dom.php:2213
+#: ../class/m_dom.php:2214
 msgid "Default mail server"
 msgstr ""
 
-#: ../class/m_dom.php:2214
+#: ../class/m_dom.php:2215
 msgid "Default backup mail server"
 msgstr ""
 
-#: ../class/m_dom.php:2215
+#: ../class/m_dom.php:2216
 msgid "AlternC panel access"
 msgstr ""
 

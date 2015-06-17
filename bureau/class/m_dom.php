@@ -1172,7 +1172,7 @@ class m_dom {
         $r["nsub"] = $db->Record["cnt"];
         $db->free();
         #$db->query("SELECT sd.*, dt.description AS type_desc, dt.only_dns FROM sub_domaines sd, domaines_type dt WHERE compte='$cuid' AND domaine='$dom' AND UPPER(dt.name)=UPPER(sd.type) ORDER BY sd.sub,sd.type");
-        $db->query("SELECT sd.*, dt.description AS type_desc, dt.only_dns FROM sub_domaines sd LEFT JOIN domaines_type dt on  UPPER(dt.name)=UPPER(sd.type) WHERE compte='$cuid' AND domaine='$dom'  ORDER BY sd.sub,sd.type ;");
+        $db->query("SELECT sd.*, dt.description AS type_desc, dt.only_dns, dt.advanced FROM sub_domaines sd LEFT JOIN domaines_type dt on  UPPER(dt.name)=UPPER(sd.type) WHERE compte='$cuid' AND domaine='$dom'  ORDER BY dt.advanced,sd.sub,sd.type ;");
         // Pas de webmail, on le cochera si on le trouve.
         $r["sub"] = array();
         for ($i = 0; $i < $r["nsub"]; $i++) {
@@ -1186,6 +1186,7 @@ class m_dom {
             $r["sub"][$i]["type_desc"] = $db->Record["type_desc"];
             $r["sub"][$i]["only_dns"] = $db->Record["only_dns"];
             $r["sub"][$i]["web_action"] = $db->Record["web_action"];
+            $r["sub"][$i]["advanced"] = $db->Record["advanced"];
             $r["sub"][$i]["fqdn"] = ((!empty($r["sub"][$i]["name"])) ? $r["sub"][$i]["name"] . "." : "") . $r["name"];
         }
         $db->free();
@@ -1217,7 +1218,7 @@ class m_dom {
             $err->raise("dom", _("--- Program error --- No lock on the domains!"));
             return false;
         }
-        $db->query("select sd.*, dt.description as type_desc, dt.only_dns from sub_domaines sd, domaines_type dt where compte='$cuid' and sd.id='$sub_domain_id'  and upper(dt.name)=upper(sd.type);");
+        $db->query("select sd.*, dt.description as type_desc, dt.only_dns, dt.advanced from sub_domaines sd, domaines_type dt where compte='$cuid' and sd.id='$sub_domain_id'  and upper(dt.name)=upper(sd.type) ORDER BY dt.advanced, sd.sub;");
         if ($db->num_rows() == 0) {
             $err->raise("dom", _("The sub-domain does not exist"));
             return false;
