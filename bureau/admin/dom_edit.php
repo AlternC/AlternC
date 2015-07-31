@@ -109,6 +109,7 @@ if ($r['dns_action']=='UPDATE') {?>
 }
 
 if (! empty($r['dns_result']) && $r['dns_result'] != '0') {
+  if ($r['dns_result'] == 1) $r['dns_result'] =_("DNS zone is locked, changes will be ignored");
   echo '<p class="alert alert-warning">'; __($r['dns_result']); echo '</p>';
 }
 
