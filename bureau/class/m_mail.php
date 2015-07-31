@@ -453,7 +453,7 @@ ORDER BY
     }
     $db->query("SELECT domaine FROM domaines WHERE id=$domain_id;");
     if ($db->next_record()) {
-      $db->query("UPDATE sub_domaines SET web_action='DELETE' WHERE domaine='".addslashes($db->Record["domaine"])."' AND type='txt' AND sub='' AND (valeur LIKE 'v=spf1 %' OR valeur LIKE 'v=dmarc1;%');");
+      $db->query("UPDATE sub_domaines SET web_action='DELETE' WHERE domaine='".addslashes($db->Record["domaine"])."' AND type='txt' AND (sub='' AND valeur LIKE 'v=spf1 %') OR (sub='_dmarc' AND valeur LIKE 'v=dmarc1;%');");
       $db->query("UPDATE domaines SET dns_action='UPDATE' WHERE id=$domain_id;");
     }
 
@@ -996,14 +996,14 @@ ORDER BY
      $dmarc=str_replace("%%USERMAIL%%",$login."@".$L_FQDN,$dmarc);
 
      // Search for the record in sub_domaines table
-     $db->query("SELECT * FROM sub_domaines WHERE compte=$uid AND domaine='".addslashes($domain)."' AND sub='' AND type='txt' AND valeur LIKE 'v=dmarc1;%' AND web_action!='DELETE';");
+     $db->query("SELECT * FROM sub_domaines WHERE compte=$uid AND domaine='".addslashes($domain)."' AND sub='_dmarc' AND type='txt' AND valeur LIKE 'v=dmarc1;%' AND web_action!='DELETE';");
      if ($db->next_record()) {
        if ($previous!==-1 && $db->Record["valeur"]=="v=dmarc1;".$dmarc) {
 	 return; // skip, no change asked.
        }
        $db->query("UPDATE sub_domaines SET web_action='DELETE' WHERE id='".$db->Record["id"]."';");
      }
-     $db->query("INSERT INTO sub_domaines SET compte=$uid, domaine='".addslashes($domain)."', sub='', type='txt', valeur='".addslashes("v=dmarc1;".$dmarc)."', web_action='UPDATE';");
+     $db->query("INSERT INTO sub_domaines SET compte=$uid, domaine='".addslashes($domain)."', sub='_dmarc', type='txt', valeur='".addslashes("v=dmarc1;".$dmarc)."', web_action='UPDATE';");
      $db->query("UPDATE domaines SET dns_action='UPDATE' WHERE domaine='".addslashes($domain)."';");
    }
 
