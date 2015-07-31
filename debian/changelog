@@ -10,6 +10,8 @@ alternc (3.1.7) oldoldstable; urgency=low
   * fix permission in browser not working
   * fix FTP access security UX
   * enh add DMARC and SPF management for gesmx & gesdns domains through variables
+  * fix error message '1' for locked domains
+  * enh sort added to quotas_users
 
  -- Benjamin Sonntag <benjamin@sonntag.fr>  Thu, 16 Jun 2015 16:10:12 +0200
 

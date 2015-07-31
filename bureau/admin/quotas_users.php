@@ -6,6 +6,7 @@ $fields = array (
 	"mode"   => array ("get", "integer" ,0), 
 	"sd"     => array ("get", "integer" ,0), 
 	"usr"    => array ("get", "integer" ,0), 
+	"order"  => array ("get", "integer" ,0),
 );
 getFields($fields);
 
@@ -160,26 +161,40 @@ echo "<br /><br />"; printf(_("If you want to manage them, go to")."&nbsp;<a hre
 </center>
 <?php } elseif ($usr==0) {
   // Mode : affichage de tous les comptes
+
+ function sortlink($txt,$asc,$desc) {
+   global $order,$mode,$sd,$usr;
+   if ($order==$asc) $neworder=$desc; else $neworder=$asc;
+   echo "<a href=\"quotas_users.php?order=".$neworder."&mode=".$mode."&sd=".$sd."&usr=".$usr."\">";
+   echo $txt;
+   echo "</a>";
+   echo " &nbsp; &nbsp; ";
+   if ($order==$asc) echo "<img src=\"icon/sort0.png\" alt=\"sorted up\" title=\"sorted up\" />";
+   if ($order==$desc) echo "<img src=\"icon/sort1.png\" alt=\"sorted down\" title=\"sorted down\" />";
+ }
+
 ?>
 <center>
 
 <div>
 <table  class="tedit" width="100%">
 <thead>
-	    <tr><th rowspan="2"><?php __("Account"); ?></th><th colspan="3"><?php __("Count"); ?></th><th colspan="5"><?php __("Space"); ?></th></tr>
+		       <tr><th rowspan="2"><?php sortlink(_("Account"),0,1); ?></th><th colspan="3"><?php __("Count"); ?></th><th colspan="5"><?php __("Space"); ?></th></tr>
 <tr>
-  <th><?php __("Dom"); ?></th>
-  <th><?php __("Mails"); ?></th>
-  <th><?php __("Lists"); ?></th>
-  <th><?php __("Web");  ?></th>
-  <th><?php __("Mails"); ?></th>
-  <th><?php __("Lists"); ?></th>
-  <th><?php __("DB"); ?></th>
-  <th><?php __("Total"); ?></th>
+		       <th><?php sortlink(_("Dom"),2,3); ?></th>
+  <th><?php sortlink(_("Mails"),4,5); ?></th>
+  <th><?php sortlink(_("Lists"),6,7); ?></th>
+  <th><?php sortlink(_("Web"),8,9);  ?></th>
+  <th><?php sortlink(_("Mails"),10,11); ?></th>
+  <th><?php sortlink(_("Lists"),12,13); ?></th>
+  <th><?php sortlink(_("DB"),14,15); ?></th>
+  <th><?php sortlink(_("Total"),16,17); ?></th>
 </tr>
 </thead>
 <tbody>
 <?php
+
+  $afields=array("login","domaincount","mailcount","mailmancount","websize","mailsize","mailmansize","dbsize","totalsize");
 
 if ($cuid != 2000)
 {
@@ -240,7 +255,84 @@ if ($cuid != 2000) {
     $membres_list = $admin->get_list(1);
 }
 
+
+
+// ------------------------------------------------------------
+// LOOP ON EACH MEMBER 
+$all=array();
 foreach ($membres_list as $c) {
+  
+  $one=$c;
+
+  // On affiche le compte et ses domaines :
+  $domaines_list = $dom->enum_domains($c["uid"]);
+  $dc=0; // Domain Count
+  $ms=0; // Mail Space
+  $mls=0;
+  $one["domains"]=array();
+  foreach ($domaines_list as $d) {
+    $dc++;
+    $one["domains"][]=$d;
+    $mstmp = $quota->get_size_mail_sum_domain($d);
+    $ms+=$mstmp;
+    $mlstmp = $quota->get_size_mailman_sum_domain($d);
+    $mls+=$mlstmp;
+  }
+  $one["mailsize"]=$ms;
+  $one["mailmainsize"]=$mls;
+
+  // Mail Count
+  $maildomains_list = $mail->enum_domains($c["uid"]);
+  $mc = 0;
+  foreach ($maildomains_list as $md) {
+    $mc += $md['nb_mail'];
+  }
+
+  $one["mailcount"]=$mc;
+  $one["domaincount"]=$dc;
+
+  // Mailman List Count
+  if (isset($mailman)) {
+    $mlc = $mailman->count_ml_user($c["uid"]);
+    $one["mailmancount"]=$mlc;
+  }
+
+  // Espace WEB
+  $ws = $quota->get_size_web_sum_user($c["uid"]);
+  $one["websize"]=$ws;
+  // Espace Mail :
+
+  // Espace DB :
+$ds = $quota->get_size_db_sum_user($c["login"]);
+$one["dbsize"]=$ds;
+
+$ts=$ds/1024+$ws+$ms/1024+$mls;                  // In KB
+$one["totalsize"]=$ts;
+$all[]=$one;
+}
+
+// SORT this $all array
+$asc=(($order%2)==0);
+$fie=$afields[intval($order/2)];
+function mysort($a,$b) {
+  global $fie,$asc;
+  if ($asc) {
+    if ($a[$fie]<$b[$fie]) return -1;
+    if ($a[$fie]>$b[$fie]) return 1;
+    return 0;
+  } else {
+    if ($a[$fie]<$b[$fie]) return 1;
+    if ($a[$fie]>$b[$fie]) return -1;
+    return 0;
+  }
+
+}
+usort($all,"mysort");
+
+
+// ------------------------------------------------------------
+// LOOP ON EACH MEMBER 
+foreach ($all as $c) {
 
   echo "<tr><td>";
 
@@ -250,47 +342,32 @@ foreach ($membres_list as $c) {
   $dc=0; // Domain Count
   $ms=0; // Mail Space
   $mls=0;
-  foreach ($domaines_list as $d) {
+  foreach ($c["domains"] as $d) {
     if ($sd)     echo "&nbsp;&nbsp;&nbsp;-&nbsp;{$d}<br />\n";
-    $dc++;
-    $mstmp = $quota->get_size_mail_sum_domain($d);
-    $ms+=$mstmp;
-    $mlstmp = $quota->get_size_mailman_sum_domain($d);
-    $mls+=$mlstmp;
   }
+  
+  $ms=$c["mailsize"];
+  $mls=$c["mailmansize"];
 
   $mailsize=$quota->get_size_unit($ms);
-
-  if($mls !=  0)
-    $mailmansize=$quota->get_size_unit($mls);
-  else
-    $mailmansize=$quota->get_size_unit($quota->get_size_mailman_sum_user($c["uid"]) * 1024);
-
-  // Mail Count
-  $maildomains_list = $mail->enum_domains($c["uid"]);
-  $mc = 0;
-  foreach ($maildomains_list as $md) {
-    $mc += $md['nb_mail'];
-  }
-
-  // Mailman List Count
-  if (isset($mailman)) {
-    $mlc = $mailman->count_ml_user($c["uid"]);
-    echo "</td><td>$dc</td><td>$mc</td><td>$mlc</td><td";
-    if ($mode!=2) echo " style=\"text-align: right\"";
-    echo ">";
-  }
+  $mailmansize=$quota->get_size_unit($mls);
 
   // Espace WEB
-  $ws = $quota->get_size_web_sum_user($c["uid"]);
+  $ws = $c["websize"];
   $webspace=$quota->get_size_unit($ws * 1024);
-	if (isset($totalweb) && $totalweb){
-		$pc=intval(100*$ws/$totalweb);
-	}
-	else{
-		$pc=0;
-	}
+  if (isset($totalweb) && $totalweb){
+    $pc=intval(100*$ws/$totalweb);
+  } else {
+    $pc=0;
+  }
+  $dc=$c["domaincount"];
+  $mc=$c["mailcount"];
+  $mlc=$c["mailmancount"];
 
+  echo "</td><td>$dc</td><td>$mc</td><td>$mlc</td><td";                                                           
+  if ($mode!=2) echo " style=\"text-align: right\"";                                                              
+  echo ">";
+  
 if ($mode==0) {
   echo sprintf("%.1f", $webspace['size'])."&nbsp;".$webspace['unit'];
 } elseif ($mode==1) {
@@ -343,7 +420,7 @@ if ($mode!=2) echo " style=\"text-align: right\"";
 echo ">";
 
 // Espace DB :
-$ds = $quota->get_size_db_sum_user($c["login"]);
+$ds = $c["dbsize"];
 $dbsize=$quota->get_size_unit($ds);
 
 if ($totaldb)
@@ -364,7 +441,7 @@ echo "</td><td";
 if ($mode!=2) echo " style=\"text-align: right\"";
 echo ">";
 
-$ts=$ds/1024+$ws+$ms/1024+$mls;                  // In KB
+$ts=$c["totalsize"];
 $totalsize=$quota->get_size_unit($ts * 1024);
 if ($mode==0) {
   echo sprintf("%.1f", $totalsize['size'])."&nbsp;".$totalsize['unit'];
