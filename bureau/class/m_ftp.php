@@ -297,7 +297,7 @@ class m_ftp {
 
       // Check this password against the password policy using common API : 
       if (is_callable(array($admin,"checkPolicy"))) {
-        if (!$admin->checkPolicy("ftp",$prefixe.$login,$pass)) {
+        if (!$admin->checkPolicy("ftp",$full_login,$pass)) {
           return false; // The error has been raised by checkPolicy()
         }
       }

@@ -1,3 +1,9 @@
+alternc (3.1.8) oldoldstable; urgency=low
+
+  * fix non-working levensthein call for checkPolicy, fixed using preg_split instead
+
+ -- Benjamin Sonntag <benjamin@sonntag.fr>  Mon,  3 Aug 2015 15:53:16 +0200
+
 alternc (3.1.7) oldoldstable; urgency=low
 
   * fix added autocomplete="off" to password fields (not login form)

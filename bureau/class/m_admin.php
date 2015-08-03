@@ -1465,18 +1465,14 @@ EOF;
 
         if (!$pol["allowlogin"]) {
             // We do misc check on password versus login : 
-            $logins = explode("@", $login);
+            $logins = preg_split("/[@_-]/", $login);
             $logins[] = $login;
             foreach ($logins as $l) {
+	      if (!$l) continue;
 	      if (strpos($password, $l) !== false || strpos($l,$password) !== false) {
                     $err->raise("admin", _("The password policy prevents you to use your login name inside your password or the other way around"));
                     return false;
                 }
-	      // Now check that levenshten distance between your login parts and your password is below 40% : 
-	      if ( intval(levenshtein($password, $l)/strlen($password)*1000) > 400 ) {
-                    $err->raise("admin", _("The password policy prevents you to use something too similar from your login name inside your password"));
-                    return false;
-	      }
             }
         }
 	
