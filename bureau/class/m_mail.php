@@ -445,6 +445,7 @@ ORDER BY
    * or false if an error occured ($err is filled accordingly)
    */ 
   function hook_dom_del_mx_domain($dom_id) {
+    global $db;
     $list=$this->enum_domain_mails($dom_id,"",0,-1);
     if (is_array($list)) {
       foreach($list as $one) {

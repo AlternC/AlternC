@@ -109,7 +109,7 @@ function variable_get($name, $default = null, $createit_comment = null) {
  *   of serialization as necessary.
  */
 function variable_set($name, $value, $comment=null) {
-  global $conf, $db, $err;
+  global $conf, $db, $err, $hook;
   $err->log('variable', 'variable_set', '+'.serialize($value).'+'.$comment.'+'); 
 
   variable_init_maybe();
@@ -117,10 +117,13 @@ function variable_set($name, $value, $comment=null) {
   if (is_object($value) || is_array($value)) {
     $value2 = serialize($value);
   }
+  if (array_key_exists($name,$conf)) {
+    $previous=$conf[$name];    
+  } else {
+    $previous=null;
+  }
   if (!array_key_exists($name,$conf) || $value!=$conf[$name]) {
-    $previous=$conf[$name];
     $conf[$name] = $value;
-    
     if ( empty($comment) ) {
       $query = "INSERT INTO variable (name, value) values ('".$name."', '".addslashes($value2)."') on duplicate key update name='$name', value='$value';";
     } else {

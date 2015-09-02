@@ -1,3 +1,10 @@
+alternc (3.1.9) oldoldstable; urgency=low
+
+  * fix missing GLOBALS in various places
+  * fix non-installed default_spf_value and default_dmarc_value in variables
+
+ -- Benjamin Sonntag <benjamin@sonntag.fr>  Wed,  3 Sep 2015 15:53:16 +0200
+
 alternc (3.1.8) oldoldstable; urgency=low
 
   * fix non-working levensthein call for checkPolicy, fixed using preg_split instead
