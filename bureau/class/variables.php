@@ -2,28 +2,28 @@
 
 /*
  * $Id: variables.php,v 1.8 2005/04/02 00:26:36 anarcat Exp $
- ----------------------------------------------------------------------
- AlternC - Web Hosting System
- Copyright (C) 2002 by the AlternC Development Team.
- http://alternc.org/
- ----------------------------------------------------------------------
- Based on:
- Valentin Lacambre's web hosting softwares: http://altern.org/
- ----------------------------------------------------------------------
- LICENSE
+  ----------------------------------------------------------------------
+  AlternC - Web Hosting System
+  Copyright (C) 2002 by the AlternC Development Team.
+  http://alternc.org/
+  ----------------------------------------------------------------------
+  Based on:
+  Valentin Lacambre's web hosting softwares: http://altern.org/
+  ----------------------------------------------------------------------
+  LICENSE
 
- This program is free software; you can redistribute it and/or
- modify it under the terms of the GNU General Public License (GPL)
- as published by the Free Software Foundation; either version 2
- of the License, or (at your option) any later version.
+  This program is free software; you can redistribute it and/or
+  modify it under the terms of the GNU General Public License (GPL)
+  as published by the Free Software Foundation; either version 2
+  of the License, or (at your option) any later version.
 
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
 
- To read the license please visit http://www.gnu.org/copyleft/gpl.html
- ----------------------------------------------------------------------
+  To read the license please visit http://www.gnu.org/copyleft/gpl.html
+  ----------------------------------------------------------------------
  */
 
 /**
@@ -41,21 +41,21 @@
  * file.
  */
 function variable_init($conf = array()) {
-  global $db;
-  $result = $db->query('SELECT * FROM `variable`');
-  while ($db->next_record($result)) {
-    /* maybe the data is *not* serialized, in that case, take it verbatim */
-    $variable = $db->Record;
-    if (($variables[$variable['name']] = @unserialize($variable['value'])) === FALSE) {
-      $variables[$variable['name']] = $variable['value'];
+    global $db;
+    $result = $db->query('SELECT * FROM `variable`');
+    while ($db->next_record($result)) {
+        /* maybe the data is *not* serialized, in that case, take it verbatim */
+        $variable = $db->Record;
+        if (($variables[$variable['name']] = @unserialize($variable['value'])) === FALSE) {
+            $variables[$variable['name']] = $variable['value'];
+        }
     }
-  }
-  
-  foreach ($conf as $name => $value) {
-    $variables[$name] = $value;
-  }
 
-  return $variables;
+    foreach ($conf as $name => $value) {
+        $variables[$name] = $value;
+    }
+
+    return $variables;
 }
 
 /**
@@ -65,10 +65,10 @@ function variable_init($conf = array()) {
  * @uses variable_init()
  */
 function variable_init_maybe() {
-  global $conf;
-  if (!isset($conf)) {
-    $conf = variable_init();
-  }
+    global $conf;
+    if (!isset($conf)) {
+        $conf = variable_init();
+    }
 }
 
 /**
@@ -87,16 +87,16 @@ function variable_init_maybe() {
  *   A cache of the configuration.
  */
 function variable_get($name, $default = null, $createit_comment = null) {
-  global $conf;
+    global $conf;
 
-  variable_init_maybe();
+    variable_init_maybe();
 
-  if (isset($conf[$name])) {
-    return $conf[$name];
-  } elseif (!is_null($createit_comment)) {
-    variable_set($name, $default, $createit_comment);
-  }
-  return $default;
+    if (isset($conf[$name])) {
+        return $conf[$name];
+    } elseif (!is_null($createit_comment)) {
+        variable_set($name, $default, $createit_comment);
+    }
+    return $default;
 }
 
 /**
@@ -108,31 +108,31 @@ function variable_get($name, $default = null, $createit_comment = null) {
  *   The value to set. This can be any PHP data type; these functions take care
  *   of serialization as necessary.
  */
-function variable_set($name, $value, $comment=null) {
-  global $conf, $db, $err, $hooks;
-  $err->log('variable', 'variable_set', '+'.serialize($value).'+'.$comment.'+'); 
+function variable_set($name, $value, $comment = null) {
+    global $conf, $db, $err, $hooks;
+    $err->log('variable', 'variable_set', '+' . serialize($value) . '+' . $comment . '+');
 
-  variable_init_maybe();
+    variable_init_maybe();
 
-  if (is_object($value) || is_array($value)) {
-    $value2 = serialize($value);
-  }
-  if (array_key_exists($name,$conf)) {
-    $previous=$conf[$name];    
-  } else {
-    $previous=null;
-  }
-  if (!array_key_exists($name,$conf) || $value!=$conf[$name]) {
-    $conf[$name] = $value;
-    if ( empty($comment) ) {
-      $query = "INSERT INTO variable (name, value) values ('".$name."', '".addslashes($value2)."') on duplicate key update name='$name', value='$value';";
-    } else {
-      $comment=mysql_real_escape_string($comment);
-      $query = "INSERT INTO variable (name, value, comment) values ('".$name."', '".addslashes($value2)."', '$comment') on duplicate key update name='$name', value='$value', comment='$comment';";
+    if (is_object($value) || is_array($value)) {
+        $value2 = serialize($value);
     }
-    $db->query($query);
-    $hooks->invoke("hook_variable_set", array("name" => $name, "old"=> $previous, "new"=>$value ) );
-  }
+    if (array_key_exists($name, $conf)) {
+        $previous = $conf[$name];
+    } else {
+        $previous = null;
+    }
+    if (!array_key_exists($name, $conf) || $value != $conf[$name]) {
+        $conf[$name] = $value;
+        if (empty($comment)) {
+            $query = "INSERT INTO variable (name, value) values ('" . $name . "', '" . addslashes($value2) . "') on duplicate key update name='$name', value='$value';";
+        } else {
+            $comment = mysql_real_escape_string($comment);
+            $query = "INSERT INTO variable (name, value, comment) values ('" . $name . "', '" . addslashes($value2) . "', '$comment') on duplicate key update name='$name', value='$value', comment='$comment';";
+        }
+        $db->query($query);
+        $hooks->invoke("hook_variable_set", array("name" => $name, "old" => $previous, "new" => $value));
+    }
 }
 
 /**
@@ -142,21 +142,17 @@ function variable_set($name, $value, $comment=null) {
  *   The name of the variable to undefine.
  */
 function variable_del($name) {
-  global $conf, $db;
-
-  $db->query("DELETE FROM `variable` WHERE name = '".$name."'");
-
-  unset($conf[$name]);
+    global $conf, $db;
+    $db->query("DELETE FROM `variable` WHERE name = '" . $name . "'");
+    unset($conf[$name]);
 }
 
 function variables_list() {
-  global $db;
-  $t=array();
-  $db->query("SELECT * FROM `variable` WHERE `comment` IS NOT NULL ORDER BY `name`");
-  while ($db->next_record()) {
-    $t[]=$db->Record;
-  }
-  return $t;
+    global $db;
+    $t = array();
+    $db->query("SELECT * FROM `variable` WHERE `comment` IS NOT NULL ORDER BY `name`");
+    while ($db->next_record()) {
+        $t[] = $db->Record;
+    }
+    return $t;
 }
-
-?>

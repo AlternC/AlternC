@@ -1,27 +1,28 @@
 <?php
+
 /*
- ----------------------------------------------------------------------
- AlternC - Web Hosting System
- Copyright (C) 2000-2012 by the AlternC Development Team.
- https://alternc.org/
- ----------------------------------------------------------------------
- LICENSE
+  ----------------------------------------------------------------------
+  AlternC - Web Hosting System
+  Copyright (C) 2000-2012 by the AlternC Development Team.
+  https://alternc.org/
+  ----------------------------------------------------------------------
+  LICENSE
 
- This program is free software; you can redistribute it and/or
- modify it under the terms of the GNU General Public License (GPL)
- as published by the Free Software Foundation; either version 2
- of the License, or (at your option) any later version.
+  This program is free software; you can redistribute it and/or
+  modify it under the terms of the GNU General Public License (GPL)
+  as published by the Free Software Foundation; either version 2
+  of the License, or (at your option) any later version.
 
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
 
- To read the license please visit http://www.gnu.org/copyleft/gpl.html
- ----------------------------------------------------------------------
- Purpose of file: Miscellaneous functions globally used
- ----------------------------------------------------------------------
-*/
+  To read the license please visit http://www.gnu.org/copyleft/gpl.html
+  ----------------------------------------------------------------------
+  Purpose of file: Miscellaneous functions globally used
+  ----------------------------------------------------------------------
+ */
 
 /* seed the random number generator : */
 list($usec, $sec) = explode(' ', microtime());
@@ -33,8 +34,9 @@ mt_srand((float) $sec + ((float) $usec * 100000));
  * @param string $str
  * @return string
  */
-function fl($str) { return str_replace("<","&lt;",str_replace("\"","&quot;",$str)); }
-
+function fl($str) {
+    return str_replace("<", "&lt;", str_replace("\"", "&quot;", $str));
+}
 
 /**
  *  Check if a domain can be hosted on this server :
@@ -49,40 +51,50 @@ function fl($str) { return str_replace("<","&lt;",str_replace("\"","&quot;",$str
  * @param array $dns
  * @return int
  */
-function checkhostallow($domain,$dns) {
-  global $L_NS1,$L_NS2,$db,$dom;
-  $sizefound = 0;
-  $found = "";
-  $db->query("SELECT tld,mode FROM tld;");
-  while ($db->next_record()) {
-    list($key,$val) = $db->Record;
-    if (substr($domain,-1-strlen($key))==".".$key) {
-      if ($sizefound<strlen($key)) {
-	$sizefound = strlen($key);
-	$found = $key;
-	$fmode = $val;
-      }
+function checkhostallow($domain, $dns) {
+    global $L_NS1, $L_NS2, $db, $dom;
+    $sizefound = 0;
+    $found = "";
+    $db->query("SELECT tld,mode FROM tld;");
+    while ($db->next_record()) {
+        list($key, $val) = $db->Record;
+        if (substr($domain, -1 - strlen($key)) == "." . $key) {
+            if ($sizefound < strlen($key)) {
+                $sizefound = strlen($key);
+                $found = $key;
+                $fmode = $val;
+            }
+        }
     }
-  }
-  if ( $dom->tld_no_check_at_all )
-    return 0; // OK , the boss say that you can.
-
-  if (!$found || $fmode==0)			// TLD not allowed at all
-    return -1;
-  if (($fmode!=4) && (!is_array($dns)))	// NO dns found in the whois, and domain MUST exists
-    return -2;
-  if ($fmode>2)		// OK, in the case 3 4 5
-    return $found;
-  $n1 = false;	$n2 = false;
-  for ($i = 0;$i<count($dns);$i++) {
-    if (strtolower($dns[$i])==strtolower($L_NS1)) $n1 = true;
-    if (strtolower($dns[$i])==strtolower($L_NS2)) $n2 = true;
-  }
-  if ($fmode==1 && $n1)		// OK
-    return $found;
-  if ($fmode==2 && $n1 && $n2)		// OK
-    return $found;
-  return -3;	// DNS incorrect in the whois
+    if ($dom->tld_no_check_at_all) {
+        return 0; // OK , the boss say that you can.
+    }
+    if (!$found || $fmode == 0) {   // TLD not allowed at all
+        return -1;
+    }
+    if (($fmode != 4) && (!is_array($dns))) { // NO dns found in the whois, and domain MUST exists
+        return -2;
+    }
+    if ($fmode > 2) { // OK, in the case 3 4 5
+        return $found;
+    }
+    $n1 = false;
+    $n2 = false;
+    for ($i = 0; $i < count($dns); $i++) {
+        if (strtolower($dns[$i]) == strtolower($L_NS1)) {
+            $n1 = true;
+        }
+        if (strtolower($dns[$i]) == strtolower($L_NS2)) {
+            $n2 = true;
+        }
+    }
+    if ($fmode == 1 && $n1) {
+        return $found;
+    }
+    if ($fmode == 2 && $n1 && $n2) {
+        return $found;
+    }
+    return -3; // DNS incorrect in the whois
 }
 
 /**
@@ -93,36 +105,37 @@ function checkhostallow($domain,$dns) {
  * @return int
  */
 function checkhostallow_nodns($domain) {
-  global $db;
-  $sizefound = 0;
-  $found = "";
-  $db->query("SELECT tld,mode FROM tld;");
-  while ($db->next_record()) {
-    list($key,$val) = $db->Record;
-    if (substr($domain,-1-strlen($key))==".".$key) {
-      if ($sizefound<strlen($key)) {
-	$sizefound = strlen($key);
-	$found = $key;
-	$fmode = $val;
-      }
+    global $db;
+    $sizefound = 0;
+    $found = "";
+    $db->query("SELECT tld,mode FROM tld;");
+    while ($db->next_record()) {
+        list($key, $val) = $db->Record;
+        if (substr($domain, -1 - strlen($key)) == "." . $key) {
+            if ($sizefound < strlen($key)) {
+                $sizefound = strlen($key);
+                $found = $key;
+                $fmode = $val;
+            }
+        }
     }
-  }
-  // If we found a correct tld, let's find how many . before ;)
-  if (!$found || $fmode==0)                       // TLD not allowed at all
-    return 1;
-  if (count(explode(".",substr($domain,0,-$sizefound)))>2) {
-    return 1;
-  }
-  return 0;
+    // If we found a correct tld, let's find how many . before ;)
+    if (!$found || $fmode == 0) {                      // TLD not allowed at all
+        return 1;
+    }
+    if (count(explode(".", substr($domain, 0, -$sizefound))) > 2) {
+        return 1;
+    }
+    return 0;
 }
 
 /**
+ * Return the remote IP.
+ * If you are behind a proxy, use X_FORWARDED_FOR instead of REMOTE_ADDR
  * @return string
  */
 function get_remote_ip() {
-  // Return the remote IP.
-  // If you are behind a proxy, use X_FORWARDED_FOR instead of REMOTE_ADDR
-  return getenv('REMOTE_ADDR');
+    return getenv('REMOTE_ADDR');
 }
 
 /**
@@ -132,16 +145,25 @@ function get_remote_ip() {
  * @return boolean
  */
 function checkurl($url) {
-  // TODO : add a path/file check
-  if (substr($url,0,7)!="http://" && substr($url,0,8)!="https://" && substr($url,0,6)!="ftp://") return false;
-  if (substr($url,0,7)=="http://" ) $fq = substr($url,7);
-  if (substr($url,0,8)=="https://") $fq = substr($url,8);
-  if (substr($url,0,6)=="ftp://"  ) $fq = substr($url,6);
-  $f = explode("/",$fq);
-  if (!is_array($f)) $f = array($f);
-  $t = checkfqdn($f[0]);
-  if ($t) return false;
-  return true;
+    // TODO : add a path/file check
+    if (substr($url, 0, 7) != "http://" && substr($url, 0, 8) != "https://" && substr($url, 0, 6) != "ftp://") {
+        return false;
+    }
+    if (substr($url, 0, 7) == "http://") {
+        $fq = substr($url, 7);
+    }
+    if (substr($url, 0, 8) == "https://") {
+        $fq = substr($url, 8);
+    }
+    if (substr($url, 0, 6) == "ftp://") {
+        $fq = substr($url, 6);
+    }
+    $f = explode("/", $fq);
+    if (!is_array($f)) {
+        $f = array($f);
+    }
+    $t = checkfqdn($f[0]);
+    return !$t;
 }
 
 /**
@@ -151,31 +173,32 @@ function checkurl($url) {
  * @return boolean
  */
 function checksubtxt($txt) {
-	return true;
+    return true;
 }
+
 /**
  * Check that CNAME domain is correct 
  * @param string $cname
  * @return boolean
  */
 function checkcname($cname) {
-  if ($check=checkfqdn(rtrim($cname,"."))) {
-    if ($check!=4) { // ALLOW non-fully qualified (no .)
-      return false; // bad FQDN
+    if (($check = checkfqdn(rtrim($cname, ".")))) {
+        if ($check != 4) { // ALLOW non-fully qualified (no .)
+            return false; // bad FQDN
+        }
     }
-  }
-  if (substr($cname,-1)!=".") {
-    // Not fully qualified : 
-    if (strpos($cname,".")===false) {
-      // NO DOT in the middle, no DOT elsewhere => seems fine
-      return true;
-    } else {
-      // NO DOT at the end, but A DOT ELSEWHERE => seems broken (please use fully qualified)
-      return false;
+    if (substr($cname, -1) != ".") {
+        // Not fully qualified : 
+        if (strpos($cname, ".") === false) {
+            // NO DOT in the middle, no DOT elsewhere => seems fine
+            return true;
+        } else {
+            // NO DOT at the end, but A DOT ELSEWHERE => seems broken (please use fully qualified)
+            return false;
+        }
     }
-  }
-  // fully qualified => fine
-  return true;
+    // fully qualified => fine
+    return true;
 }
 
 /**
@@ -184,8 +207,8 @@ function checkcname($cname) {
  * @return type
  */
 function checkip($ip) {
-  // return true or false whether the ip is correctly formatted
-  return filter_var($ip,FILTER_VALIDATE_IP, FILTER_FLAG_IPV4);
+    // return true or false whether the ip is correctly formatted
+    return filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4);
 }
 
 /**
@@ -194,8 +217,8 @@ function checkip($ip) {
  * @return type
  */
 function checkipv6($ip) {
-  // return true or false whether the ip is correctly formatted
-  return filter_var($ip,FILTER_VALIDATE_IP, FILTER_FLAG_IPV6);
+    // return true or false whether the ip is correctly formatted
+    return filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6);
 }
 
 /**
@@ -205,7 +228,7 @@ function checkipv6($ip) {
  * @return boolean
  */
 function checkloginmail($mail) {
-  return true;
+    return true;
 }
 
 /**
@@ -215,11 +238,11 @@ function checkloginmail($mail) {
  * @return boolean
  */
 function checkmail($mail) {
-  if (filter_var($mail,FILTER_VALIDATE_EMAIL)) {
-    return FALSE;
-  } else {
-    return TRUE;
-  }
+    if (filter_var($mail, FILTER_VALIDATE_EMAIL)) {
+        return FALSE;
+    } else {
+        return TRUE;
+    }
 }
 
 /**
@@ -228,32 +251,36 @@ function checkmail($mail) {
  * @return int
  */
 function checkfqdn($fqdn) {
-  // (RFC 1035 http://www.ietf.org/rfc/rfc1035.txt)
-  // Retourne 0 si tout va bien, sinon, retourne un code erreur...
-  // 1. Nom de domaine complet trop long.
-  // 2. L'un des membres est trop long.
-  // 3. Caractere interdit dans l'un des membres.
-  // 4. Le fqdn ne fait qu'un seul membre (il n'est donc pas fq...)
-  if (strlen($fqdn)>255)
-    return 1;
-  $members = explode(".", $fqdn);
-  if (count($members)>1) $ret = 0; else $ret = 4;
-  reset($members);
-  while (list ($key, $val) = each ($members)) {
-    if (strlen($val)>63)
-      return 2;
-
-    // Note: a.foo.net is a valid domain
-    // Note: RFC1035 tells us that a domain should not start by a digit, but every registrar allows such a domain to be created ... too bad.
-    if (!preg_match("#^[a-z0-9_]([a-z0-9-_]*[a-z0-9_])?$#i",$val)) {
-      return 3;
+    // (RFC 1035 http://www.ietf.org/rfc/rfc1035.txt)
+    // Retourne 0 si tout va bien, sinon, retourne un code erreur...
+    // 1. Nom de domaine complet trop long.
+    // 2. L'un des membres est trop long.
+    // 3. Caractere interdit dans l'un des membres.
+    // 4. Le fqdn ne fait qu'un seul membre (il n'est donc pas fq...)
+    if (strlen($fqdn) > 255) {
+        return 1;
     }
-  }
-  return $ret;
+    $members = explode(".", $fqdn);
+    if (count($members) > 1) {
+        $ret = 0;
+    } else {
+        $ret = 4;
+    }
+    reset($members);
+    while (list ($key, $val) = each($members)) {
+        if (strlen($val) > 63) {
+            return 2;
+        }
+        // Note: a.foo.net is a valid domain
+        // Note: RFC1035 tells us that a domain should not start by a digit, but every registrar allows such a domain to be created ... too bad.
+        if (!preg_match("#^[a-z0-9_]([a-z0-9-_]*[a-z0-9_])?$#i", $val)) {
+            return 3;
+        }
+    }
+    return $ret;
 }
 
 /**
- * 
  * @global m_mem $mem
  * @param string $path
  * @return int 
@@ -262,26 +289,26 @@ function checkfqdn($fqdn) {
  * return 2 if this is a regular file
  */
 function checkuserpath($path) {
-  global $mem;
-  $user = $mem->user["login"];
-  $usar = substr($user,0,1);
-  if (substr($path,0,1)!="/")
-    $path = "/".$path;
-
-  $rpath = realpath(ALTERNC_HTML."/$usar/$user$path");
-  if (!$rpath) { // if file or directory does not exist
-    return 1; // FIXME is it safe to say OK in this case ?
-  }
-  $userpath = getuserpath();
-  if(strpos($rpath,$userpath) === 0){
-    if (is_dir(ALTERNC_HTML."/$usar/$user$path")) {
-        return 1;
+    global $mem;
+    $user = $mem->user["login"];
+    $usar = substr($user, 0, 1);
+    if (substr($path, 0, 1) != "/") {
+        $path = "/" . $path;
     }
-    if (is_file(ALTERNC_HTML."/$usar/$user$path")) {
-      return 2;
+    $rpath = realpath(ALTERNC_HTML . "/$usar/$user$path");
+    if (!$rpath) { // if file or directory does not exist
+        return 1; // FIXME is it safe to say OK in this case ?
     }
-  }
-  return 0;
+    $userpath = getuserpath();
+    if (strpos($rpath, $userpath) === 0) {
+        if (is_dir(ALTERNC_HTML . "/$usar/$user$path")) {
+            return 1;
+        }
+        if (is_file(ALTERNC_HTML . "/$usar/$user$path")) {
+            return 2;
+        }
+    }
+    return 0;
 }
 
 /**
@@ -293,32 +320,31 @@ function checkuserpath($path) {
  * @return string the actual absolute path
  */
 function getuserpath($user = null) {
-  if (is_null($user)) {
-    global $mem;
-    $user = $mem->user['login'];
-  }
-  return rtrim(ALTERNC_HTML,"/")."/".substr($user,0,1)."/".$user;
+    if (is_null($user)) {
+        global $mem;
+        $user = $mem->user['login'];
+    }
+    return rtrim(ALTERNC_HTML, "/") . "/" . substr($user, 0, 1) . "/" . $user;
 }
 
 /**
-* ECHOes checked="checked" only if the parameter is true
+ * ECHOes checked="checked" only if the parameter is true
  * useful for checkboxes and radio buttons
  * 
  * @param boolean $test
  * @param boolean $echo
  */
-function cbox($test, $echo = TRUE) {
-  if ($test) {
-    $return = " checked=\"checked\"";
-  } else {
-    $return = '';
-  }
-  if( $echo ){
-    echo $return;
-  }
-  return $return;
+function cbox($test, $echo = true) {
+    if ($test) {
+        $return = " checked=\"checked\"";
+    } else {
+        $return = '';
+    }
+    if ($echo) {
+        echo $return;
+    }
+    return $return;
 }
-
 
 /**
  * ECHOes selected="selected" only if the parameter is true
@@ -329,15 +355,15 @@ function cbox($test, $echo = TRUE) {
  * @return string
  */
 function selected($bool, $echo = TRUE) {
-  if ($bool) {
-    $return = " selected=\"selected\"";
-  } else {
-    $return = '';
-  }
-  if( $echo ){
-    echo $return;
-  }
-  return $return;
+    if ($bool) {
+        $return = " selected=\"selected\"";
+    } else {
+        $return = '';
+    }
+    if ($echo) {
+        echo $return;
+    }
+    return $return;
 }
 
 /**
@@ -348,15 +374,14 @@ function selected($bool, $echo = TRUE) {
  * @param integer $affiche
  * @return string
  */
-function ecif($test,$tr,$fa = "",$affiche = 1) {
-    if ($test){
+function ecif($test, $tr, $fa = "", $affiche = 1) {
+    if ($test) {
         $retour = $tr;
-    }
-    else{
+    } else {
         $retour = $fa;
     }
     if ($affiche) {
-      echo $retour;
+        echo $retour;
     }
     return $retour;
 }
@@ -366,7 +391,7 @@ function ecif($test,$tr,$fa = "",$affiche = 1) {
  * @param string $str
  */
 function __($str) {
-  echo _($str);
+    echo _($str);
 }
 
 /**
@@ -376,10 +401,10 @@ function __($str) {
  * @param string $fa
  * @return string
  */
-function ife($test,$tr,$fa = "") {
-    if ($test){
+function ife($test, $tr, $fa = "") {
+    if ($test) {
         return $tr;
-    } 
+    }
     return $fa;
 }
 
@@ -389,42 +414,42 @@ function ife($test,$tr,$fa = "") {
  * @param integer $html
  * @return string
  */
-function format_size($size,$html = 0) {
-  // Retourne une taille formatt�e en Octets, Kilo-octets, M�ga-octets ou Giga-Octets, avec 2 d�cimales.
-  if ("-" == $size) {
-    return $size;
-  }
-  $size = (float)$size;
-  if ($size<1024) {
-    $r = $size;
-    if ($size!=1) {
-      $r.=" "._("Bytes");
-    } else {
-      $r.=" "._("Byte");
+function format_size($size, $html = 0) {
+    // Retourne une taille formatt�e en Octets, Kilo-octets, M�ga-octets ou Giga-Octets, avec 2 d�cimales.
+    if ("-" == $size) {
+        return $size;
     }
-  } else {
-    $size = $size/1024;
-    if ($size<1024) {
-      $r = round($size,2)." "._("Kb");
+    $size = (float) $size;
+    if ($size < 1024) {
+        $r = $size;
+        if ($size != 1) {
+            $r.=" " . _("Bytes");
+        } else {
+            $r.=" " . _("Byte");
+        }
     } else {
-      $size = $size/1024;
-      if ($size<1024) {
-	$r = round($size,2)." "._("Mb");
-      } else {
-	$size = $size/1024;
-	if ($size<1024) {
-	  $r = round($size,2)." "._("Gb");
-	} else {
-	  $r = round($size/1024,2)." "._("Tb");
-	}
-      }
+        $size = $size / 1024;
+        if ($size < 1024) {
+            $r = round($size, 2) . " " . _("Kb");
+        } else {
+            $size = $size / 1024;
+            if ($size < 1024) {
+                $r = round($size, 2) . " " . _("Mb");
+            } else {
+                $size = $size / 1024;
+                if ($size < 1024) {
+                    $r = round($size, 2) . " " . _("Gb");
+                } else {
+                    $r = round($size / 1024, 2) . " " . _("Tb");
+                }
+            }
+        }
     }
-  }
-  if ($html) {
-    return str_replace(" ","&nbsp;",$r);
-  }else{
-    return $r;
-  }
+    if ($html) {
+        return str_replace(" ", "&nbsp;", $r);
+    } else {
+        return $r;
+    }
 }
 
 /**
@@ -433,35 +458,37 @@ function format_size($size,$html = 0) {
  * @return string
  */
 function getlinkhelp($hid) {
-  return "(<a href=\"javascript:help($hid);\">?</a>)";
+    return "(<a href=\"javascript:help($hid);\">?</a>)";
 }
+
 /**
  * 
  * @param int $hid
  */
 function linkhelp($hid) {
-  echo getlinkhelp($hid);
+    echo getlinkhelp($hid);
 }
+
 /**
  * 
  * @param string $format
  * @param string $date
  * @return string
  */
-function format_date($format,$date) {
-  $d = substr($date,8,2);
-  $m = substr($date,5,2);
-  $y = substr($date,0,4);
-  $h = substr($date,11,2);
-  $i = substr($date,14,2);
-  if ($h>12) {
-    $hh = $h-12;
-    $am = "pm";
-  } else {
-    $hh = $h;
-    $am = "am";
-  }
-  return sprintf($format,$d,$m,$y,$h,$i,$hh,$am);
+function format_date($format, $date) {
+    $d = substr($date, 8, 2);
+    $m = substr($date, 5, 2);
+    $y = substr($date, 0, 4);
+    $h = substr($date, 11, 2);
+    $i = substr($date, 14, 2);
+    if ($h > 12) {
+        $hh = $h - 12;
+        $am = "pm";
+    } else {
+        $hh = $h;
+        $am = "am";
+    }
+    return sprintf($format, $d, $m, $y, $h, $i, $hh, $am);
 }
 
 /**
@@ -470,67 +497,70 @@ function format_date($format,$date) {
  * @return string
  */
 function ssla($str) {
-  if (get_magic_quotes_gpc()) {
-    return stripslashes($str);
-  } else {
-    return $str;
-  }
+    if (get_magic_quotes_gpc()) {
+        return stripslashes($str);
+    } else {
+        return $str;
+    }
 }
 
-  /* ----------------------------------------------------------------- */
-  /** Hashe un mot de passe en clair en MD5 avec un salt al�atoire
-   * @param string $pass Mot de passe � crypter (max 32 caract�res)
-   * @return string Retourne le mot de passe crypt�
-   * @access private
-   */
-  function _md5cr($pass,$salt = "") {
+/* ----------------------------------------------------------------- */
+
+/** Hashe un mot de passe en clair en MD5 avec un salt al�atoire
+ * @param string $pass Mot de passe � crypter (max 32 caract�res)
+ * @return string Retourne le mot de passe crypt�
+ * @access private
+ */
+function _md5cr($pass, $salt = "") {
     if (!$salt) {
-      $chars = "./0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-      for ($i = 0;$i<12;$i++) {
-	$salt.=substr($chars,(mt_rand(0,strlen($chars))),1);
-      }
-      $salt = "$1$".$salt;
+        $chars = "./0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        for ($i = 0; $i < 12; $i++) {
+            $salt.=substr($chars, (mt_rand(0, strlen($chars))), 1);
+        }
+        $salt = "$1$" . $salt;
     }
-    return crypt($pass,$salt);
-  }
+    return crypt($pass, $salt);
+}
 
 /** split mysql database name between username and custom database name
  * @param string $dbname database name
  * @return array returns username as first element, custom name as second
  */
 function split_mysql_database_name($dbname) {
-    $db_exploded_name = explode("_",$dbname);
+    $db_exploded_name = explode("_", $dbname);
     return array($db_exploded_name[0],
-                 implode("_", array_slice($db_exploded_name, 1)));
+        implode("_", array_slice($db_exploded_name, 1)));
 }
 
-
 /* ----------------------------------------------------------------- */
+
 /** Echappe les caract�res pouvant perturber un flux XML standard : 
  * @param string $string Chaine de caract�re � encoder en valeur xml.
  * @return string Retourne la cha�ne modifi�e si besoin.
  * @access private
  */
 function xml_entities($string) {
-  return str_replace("<","&lt;",str_replace(">","&gt;",str_replace("&","&amp;",$string)));
+    return str_replace("<", "&lt;", str_replace(">", "&gt;", str_replace("&", "&amp;", $string)));
 }
 
 /* ----------------------------------------------------------------- */
+
 /** Converti un nombre de mois en une chaine plus lisible
  * @param  integer $months Nombre de mois
  * @return string Cha�ne repr�sentant le nombre de mois
  * @access private
  */
 function pretty_months($months) {
-  if( $months % 12 == 0 && $months > 11) {
-    $years = $months / 12;
-    return "$years " . ($years > 1 ? _("years") : _("year"));
-  } else {
-    return "$months " . ($months > 1 ? _("months") : _("month"));
-  }
+    if ($months % 12 == 0 && $months > 11) {
+        $years = $months / 12;
+        return "$years " . ($years > 1 ? _("years") : _("year"));
+    } else {
+        return "$months " . ($months > 1 ? _("months") : _("month"));
+    }
 }
 
 /* ----------------------------------------------------------------- */
+
 /** Fabrique un drop-down pour les dur�es de comptes
  * @name string $name Nom pour le composasnt
  * @selected number Option selection�e du composant
@@ -538,26 +568,26 @@ function pretty_months($months) {
  * @access private
  */
 function duration_list($name, $selected = 0) {
-  $res = "<select name=\"$name\" id=\"$name\" class=\"inl\">";
+    $res = "<select name=\"$name\" id=\"$name\" class=\"inl\">";
 
-  foreach(array(0, 1, 2, 3, 4, 6, 12, 24) as $dur) {
-    $res .= "<option value=\"$dur\"";
-    if($selected == $dur) {
-      $res .= ' selected="selected" ';
+    foreach (array(0, 1, 2, 3, 4, 6, 12, 24) as $dur) {
+        $res .= "<option value=\"$dur\"";
+        if ($selected == $dur) {
+            $res .= ' selected="selected" ';
+        }
+
+        $res .= '>';
+
+        if ($dur == 0) {
+            $res .= _('Not managed');
+        } else {
+            $res .= pretty_months($dur);
+        }
+        $res .= '</option>';
     }
 
-    $res .= '>';
-
-    if($dur == 0) {
-      $res .= _('Not managed');
-    } else {
-      $res .= pretty_months($dur);
-    }
-    $res .= '</option>';
-  }
-
-  $res .= '</select>';
-  return $res;
+    $res .= '</select>';
+    return $res;
 }
 
 /**
@@ -569,20 +599,23 @@ function duration_list($name, $selected = 0) {
  * @param string $cur
  * @param boolean $onedim
  */
-function eoption($values,$cur,$onedim = false) {
-  if (is_array($values)) {
-    foreach ($values as $k=>$v) {
-      if ( $onedim ) $k = $v;
-      echo "<option value=\"$k\"";
-      if ($k==$cur) echo " selected=\"selected\"";
-      echo ">".$v."</option>";
+function eoption($values, $cur, $onedim = false) {
+    if (is_array($values)) {
+        foreach ($values as $k => $v) {
+            if ($onedim) {
+                $k = $v;
+            }
+            echo "<option value=\"$k\"";
+            if ($k == $cur) {
+                echo " selected=\"selected\"";
+            }
+            echo ">" . $v . "</option>";
+        }
     }
-  }
 }
 
-
 /**
-/* Echo the HTMLSpecialChars version of a value. 
+  /* Echo the HTMLSpecialChars version of a value.
  * Must be called when pre-filling fields values in forms such as : 
  * <input type="text" name="toto" value="<?php ehe($toto); ?>" />
  * Use the charset of the current language for transcription
@@ -592,18 +625,19 @@ function eoption($values,$cur,$onedim = false) {
  * @param boolean $affiche
  * @return string
  */
-function ehe($str,$affiche = TRUE) {
+function ehe($str, $affiche = TRUE) {
     global $charset;
-    $retour = htmlspecialchars($str,ENT_QUOTES,$charset); 
+    $retour = htmlspecialchars($str, ENT_QUOTES, $charset);
     if ($affiche) {
-      echo $retour;
-    } 
+        echo $retour;
+    }
     return $retour;
 }
 
 /* Get the Fields of the posted form from $_REQUEST or POST or GET
  * and check their type
  */
+
 /**
  * 
  * @param array $fields
@@ -611,47 +645,47 @@ function ehe($str,$affiche = TRUE) {
  * @return array
  */
 function getFields($fields, $requestOnly = false) {
-  $vars = array();
-  $methodType = array ("get", "post", "request", "files", "server");
-  
-  foreach ($fields AS $name => $options) {
-    if (in_array(strtolower($options[0]), $methodType) === false)
-      die ("Unrecognized method type used for field " . $name . " : " . $options[0]);
-    
-    if ($requestOnly === true)
-      $method = "_REQUEST";
-    else
-      $method = "_" . strtoupper($options[0]);
-    
-    switch ($options[1]) {
-    case "integer":
-      $vars[$name] = (isset($GLOBALS[$method][$name]) && is_numeric($GLOBALS[$method][$name]) ? intval($GLOBALS[$method][$name]) : $options[2]);
-      break;
-    case "float":
-      $vars[$name] = (isset($GLOBALS[$method][$name]) && is_numeric($GLOBALS[$method][$name]) ? floatval($GLOBALS[$method][$name]) : $options[2]);
-      break;
-    case "string":
-      $vars[$name] = (isset($GLOBALS[$method][$name]) ? trim($GLOBALS[$method][$name]) : $options[2]);
-      break;
-    case "array":
-      $vars[$name] = (isset($GLOBALS[$method][$name]) && is_array($GLOBALS[$method][$name]) ? $GLOBALS[$method][$name] : $options[2]);
-      break;
-    case "boolean":
-      $vars[$name] = (isset($GLOBALS[$method][$name]) ? $GLOBALS[$method][$name] : $options[2]);
-      break;
-    case "file":
-      $vars[$name] = (isset($GLOBALS[$method][$name]) ? $GLOBALS[$method][$name] : $options[2]);
-      break;
-    default:
-      die ("Illegal method type used for field " . $name . " : " . $options[1]);
+    $vars = array();
+    $methodType = array("get", "post", "request", "files", "server");
+
+    foreach ($fields AS $name => $options) {
+        if (in_array(strtolower($options[0]), $methodType) === false) {
+            die("Unrecognized method type used for field " . $name . " : " . $options[0]);
+        }
+        if ($requestOnly === true) {
+            $method = "_REQUEST";
+        } else {
+            $method = "_" . strtoupper($options[0]);
+        }
+        switch ($options[1]) {
+            case "integer":
+                $vars[$name] = (isset($GLOBALS[$method][$name]) && is_numeric($GLOBALS[$method][$name]) ? intval($GLOBALS[$method][$name]) : $options[2]);
+                break;
+            case "float":
+                $vars[$name] = (isset($GLOBALS[$method][$name]) && is_numeric($GLOBALS[$method][$name]) ? floatval($GLOBALS[$method][$name]) : $options[2]);
+                break;
+            case "string":
+                $vars[$name] = (isset($GLOBALS[$method][$name]) ? trim($GLOBALS[$method][$name]) : $options[2]);
+                break;
+            case "array":
+                $vars[$name] = (isset($GLOBALS[$method][$name]) && is_array($GLOBALS[$method][$name]) ? $GLOBALS[$method][$name] : $options[2]);
+                break;
+            case "boolean":
+                $vars[$name] = (isset($GLOBALS[$method][$name]) ? $GLOBALS[$method][$name] : $options[2]);
+                break;
+            case "file":
+                $vars[$name] = (isset($GLOBALS[$method][$name]) ? $GLOBALS[$method][$name] : $options[2]);
+                break;
+            default:
+                die("Illegal method type used for field " . $name . " : " . $options[1]);
+        }
     }
-  }
-  
-  // Insert into $GLOBALS.
-  foreach ($vars AS $var => $value)
-    $GLOBALS[$var] = $value;
-  
-  return $vars;
+
+    // Insert into $GLOBALS.
+    foreach ($vars AS $var => $value) {
+        $GLOBALS[$var] = $value;
+    }
+    return $vars;
 }
 
 /**
@@ -659,10 +693,11 @@ function getFields($fields, $requestOnly = false) {
  * @param array $array
  */
 function printVar($array) {
-  echo "<pre style=\"border: 1px solid black; text-align: left; font-size: 9px\">\n";
-  print_r($array);
-  echo "</pre>\n";
+    echo "<pre style=\"border: 1px solid black; text-align: left; font-size: 9px\">\n";
+    print_r($array);
+    echo "</pre>\n";
 }
+
 /**
  * 
  * @param array $a
@@ -670,13 +705,11 @@ function printVar($array) {
  * @return int
  */
 function list_properties_order($a, $b) {
-  if ( $a['label'] == $b['label']) {
-    return 0;
-  }
-  return ($a['label']<$b['label'])?-1:1;
-} // end private function list_properties_order
-
-
+    if ($a['label'] == $b['label']) {
+        return 0;
+    }
+    return ($a['label'] < $b['label']) ? -1 : 1;
+}
 
 /**
  * Shows a pager : Previous page 0 1 2 ... 16 17 18 19 20 ... 35 36 37 Next page
@@ -698,89 +731,99 @@ function list_properties_order($a, $b) {
  * @param boolean $echo
  * @return string
  */
-function pager($offset,$count,$total,$url,$before = "",$after = "",$echo = TRUE) {
+function pager($offset, $count, $total, $url, $before = "", $after = "", $echo = true) {
     $return = "";
-  $offset = intval($offset); 
-  $count = intval($count); 
-  $total = intval($total); 
-  if ($offset<=0) $offset = "0";
-  if ($count<=1) $count = "1";
-  if ($total<=0) $total = "0";
-  if ($total<$offset) $offset = max(0,$total-$count);
+    $offset = intval($offset);
+    $count = intval($count);
+    $total = intval($total);
+    if ($offset <= 0) {
+        $offset = "0";
+    }
+    if ($count <= 1) {
+        $count = "1";
+    }
+    if ($total <= 0) {
+        $total = "0";
+    }
+    if ($total < $offset) {
+        $offset = max(0, $total - $count);
+    }
+    if ($total <= $count) { // When there is less element than 1 complete page, just don't do anything :-D
+        return true;
+    }
+    $return .= $before;
+    // Shall-we show previous page link ?
+    if ($offset) {
+        $o = max($offset - $count, 0);
+        $return .= "<a href=\"" . str_replace("%%offset%%", $o, $url) . "\" alt=\"(Ctl/Alt-p)\" title=\"(Alt-p)\" accesskey=\"p\">" . _("Previous Page") . "</a> ";
+    } else {
+        $return .= _("Previous Page") . " ";
+    }
 
-  if ($total<=$count) { // When there is less element than 1 complete page, just don't do anything :-D
-    return true;
-  }
-  $return .= $before;
-  // Shall-we show previous page link ?
-  if ($offset) {
-    $o = max($offset-$count,0);
-    $return .= "<a href=\"".str_replace("%%offset%%",$o,$url)."\" alt=\"(Ctl/Alt-p)\" title=\"(Alt-p)\" accesskey=\"p\">"._("Previous Page")."</a> ";
-  } else {
-    $return .= _("Previous Page")." ";
-  }
-
-  if ($total>(2*$count)) { // On n'affiche le pager central (0 1 2 ...) s'il y a au moins 2 pages.
-    $return .= " - ";
-    if (($total<($count*10)) && ($total>$count)) {  // moins de 10 pages : 
-      for($i = 0;$i<$total/$count;$i++) {
-	$o = $i*$count;
-	if ($offset==$o) {
-	  $return .= $i." "; 
-	} else {
-	  $return .= "<a href = \"".str_replace("%%offset%%",$o,$url)."\">$i</a> ";
-	}
-      }
-    } else { // Plus de 10 pages, on affiche 0 1 2 , 2 avant et 2 apr�s la page courante, et les 3 dernieres
-      for($i = 0;$i<=2;$i++) {
-	$o = $i*$count;
-	if ($offset==$o) {
-	  $return .= $i." "; 
-	} else {
-	  $return .= "<a href=\"".str_replace("%%offset%%",$o,$url)."\">$i</a> ";
-	}
-      }
-      if ($offset>=$count && $offset<($total-2*$count)) { // On est entre les milieux ...
-	// On affiche 2 avant jusque 2 apr�s l'offset courant mais sans d�border sur les indices affich�s autour
-	$start = max(3,intval($offset/$count)-2);
-	$end = min(intval($offset/$count)+3,intval($total/$count)-3);
-	if ($start!=3) $return .= " ... ";
-	for($i = $start;$i<$end;$i++) {
-	  $o = $i*$count;
-	  if ($offset==$o) {
-	    $return .= $i." "; 
-	  } else {
-	    $return .= "<a href=\"".str_replace("%%offset%%",$o,$url)."\">$i</a> ";
-	  }
-	}
-	if ($end!=intval($total/$count)-3) $return .= " ... ";
-      } else {
-	$return .= " ... ";
-      }
-      for($i = intval($total/$count)-3;$i<$total/$count;$i++) {
-	$o = $i*$count;
-	if ($offset==$o) {
-	  $return .= $i." "; 
-	} else {
-	  $return .= "<a href=\"".str_replace("%%offset%%",$o,$url)."\">$i</a> ";
-	}
-      }
-    $return .= " - ";
-    } // More than 10 pages?
-  }
-  // Shall-we show the next page link ?
-  if ($offset+$count<$total) {
-    $o = $offset+$count;
-    $return .= "<a href=\"".str_replace("%%offset%%",$o,$url)."\" alt=\"(Ctl/Alt-s)\" title=\"(Alt-s)\" accesskey=\"s\">"._("Next Page")."</a> ";
-  } else {
-    $return .= _("Next Page")." ";
-  }
-  $return .= $after;
-  if( $echo ){
-      echo $return;
-  }
-  return $return;
-  
+    if ($total > (2 * $count)) { // On n'affiche le pager central (0 1 2 ...) s'il y a au moins 2 pages.
+        $return .= " - ";
+        if (($total < ($count * 10)) && ($total > $count)) {  // moins de 10 pages : 
+            for ($i = 0; $i < $total / $count; $i++) {
+                $o = $i * $count;
+                if ($offset == $o) {
+                    $return .= $i . " ";
+                } else {
+                    $return .= "<a href = \"" . str_replace("%%offset%%", $o, $url) . "\">$i</a> ";
+                }
+            }
+        } else { // Plus de 10 pages, on affiche 0 1 2 , 2 avant et 2 apr�s la page courante, et les 3 dernieres
+            for ($i = 0; $i <= 2; $i++) {
+                $o = $i * $count;
+                if ($offset == $o) {
+                    $return .= $i . " ";
+                } else {
+                    $return .= "<a href=\"" . str_replace("%%offset%%", $o, $url) . "\">$i</a> ";
+                }
+            }
+            if ($offset >= $count && $offset < ($total - 2 * $count)) { // On est entre les milieux ...
+                // On affiche 2 avant jusque 2 apr�s l'offset courant mais sans d�border sur les indices affich�s autour
+                $start = max(3, intval($offset / $count) - 2);
+                $end = min(intval($offset / $count) + 3, intval($total / $count) - 3);
+                if ($start != 3) {
+                    $return .= " ... ";
+                }
+                for ($i = $start; $i < $end; $i++) {
+                    $o = $i * $count;
+                    if ($offset == $o) {
+                        $return .= $i . " ";
+                    } else {
+                        $return .= "<a href=\"" . str_replace("%%offset%%", $o, $url) . "\">$i</a> ";
+                    }
+                }
+                if ($end != intval($total / $count) - 3) {
+                    $return .= " ... ";
+                }
+            } else {
+                $return .= " ... ";
+            }
+            for ($i = intval($total / $count) - 3; $i < $total / $count; $i++) {
+                $o = $i * $count;
+                if ($offset == $o) {
+                    $return .= $i . " ";
+                } else {
+                    $return .= "<a href=\"" . str_replace("%%offset%%", $o, $url) . "\">$i</a> ";
+                }
+            }
+            $return .= " - ";
+        } // More than 10 pages?
+    }
+    // Shall-we show the next page link ?
+    if ($offset + $count < $total) {
+        $o = $offset + $count;
+        $return .= "<a href=\"" . str_replace("%%offset%%", $o, $url) . "\" alt=\"(Ctl/Alt-s)\" title=\"(Alt-s)\" accesskey=\"s\">" . _("Next Page") . "</a> ";
+    } else {
+        $return .= _("Next Page") . " ";
+    }
+    $return .= $after;
+    if ($echo) {
+        echo $return;
+    }
+    return $return;
 }
 
 /**
@@ -788,18 +831,16 @@ function pager($offset,$count,$total,$url,$before = "",$after = "",$echo = TRUE)
  * @param int $length
  * @return string
  */
-function create_pass($length = 8){
-  $chars = "1234567890abcdefghijkmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  $i = 0;
-  $password = "";
-  while ($i <= $length) {
-    $password .= @$chars{mt_rand(0,strlen($chars))};
-    $i++;
-  }
-  return $password;
+function create_pass($length = 8) {
+    $chars = "1234567890abcdefghijkmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    $i = 0;
+    $password = "";
+    while ($i <= $length) {
+        $password .= @$chars{mt_rand(0, strlen($chars))};
+        $i++;
+    }
+    return $password;
 }
-
-
 
 /**
  *  Affiche un bouton qui permet de generer automatiquement des mots de passes 
@@ -810,12 +851,12 @@ function create_pass($length = 8){
  * @return int
  */
 function display_div_generate_password($pass_size = DEFAULT_PASS_SIZE, $fields_to_fill1 = "", $fields_to_fill2 = "") {
-  $id = rand(1,1000);
-  echo "<div id='z$id' style='display:none;'><a href=\"javascript:generate_password_html('$id',$pass_size,'$fields_to_fill1','$fields_to_fill2');\">";
-  __("Clic here to generate a password");
-  echo "</a></div>";
-  echo "<script type='text/javascript'>$('#z$id').show();</script>";
-  return 0;
+    $id = rand(1, 1000);
+    echo "<div id='z$id' style='display:none;'><a href=\"javascript:generate_password_html('$id',$pass_size,'$fields_to_fill1','$fields_to_fill2');\">";
+    __("Clic here to generate a password");
+    echo "</a></div>";
+    echo "<script type='text/javascript'>$('#z$id').show();</script>";
+    return 0;
 }
 
 /**
@@ -827,15 +868,15 @@ function display_div_generate_password($pass_size = DEFAULT_PASS_SIZE, $fields_t
  * @param int       $height
  */
 function display_browser($dir = "", $caller = "main.dir", $width = 350, $height = 450) {
-  // Browser id
-  $bid = "b".rand(1,1000);
-  echo "<script type=\"text/javascript\">
+    // Browser id
+    $bid = "b" . rand(1, 1000);
+    echo "<script type=\"text/javascript\">
         <!--
           $(function() {
-              $( \"#".$bid."\" ).dialog({
+              $( \"#" . $bid . "\" ).dialog({
               autoOpen: false,
-              width: ".$width.",
-              height: ".$height.",
+              width: " . $width . ",
+              height: " . $height . ",
               modal: true,
               open: function()
                 {
@@ -844,24 +885,23 @@ function display_browser($dir = "", $caller = "main.dir", $width = 350, $height 
                 },
             });
          
-            $( \"#bt".$bid."\" )
+            $( \"#bt" . $bid . "\" )
               .button()
               .attr(\"class\", \"ina\")
               .click(function() {
-                $( \"#".$bid."\" ).dialog( \"open\" );
+                $( \"#" . $bid . "\" ).dialog( \"open\" );
                 return false;
               });
           });
           
           
-          document.write('&nbsp;<input type=\"button\" id=\"bt".$bid."\" value=\""._("Choose a folder...")."\" class=\"ina\">');
-          document.write('<div id=\"".$bid."\" title=\""._("Choose a folder...")."\" style=\"display: none; bgcolor:red;\">');
-          document.write('  <iframe src=\"/browseforfolder2.php?caller=".$caller."&amp;file=".ehe($dir, false)."&amp;bid=".$bid."\" width=\"".($width-40)."\" height=\"".($height-64)."\" frameborder=\"no\" id=\"browseiframe\"></iframe>');
+          document.write('&nbsp;<input type=\"button\" id=\"bt" . $bid . "\" value=\"" . _("Choose a folder...") . "\" class=\"ina\">');
+          document.write('<div id=\"" . $bid . "\" title=\"" . _("Choose a folder...") . "\" style=\"display: none; bgcolor:red;\">');
+          document.write('  <iframe src=\"/browseforfolder2.php?caller=" . $caller . "&amp;file=" . ehe($dir, false) . "&amp;bid=" . $bid . "\" width=\"" . ($width - 40) . "\" height=\"" . ($height - 64) . "\" frameborder=\"no\" id=\"browseiframe\"></iframe>');
           document.write('</div>');
         //  -->
         </script>
         ";
-  
 }
 
 /**
@@ -883,44 +923,83 @@ function display_browser($dir = "", $caller = "main.dir", $width = 350, $height 
  */
 function fHSVtoRGB($iH, $iS, $iV) {
 
-  if($iH < 0)   $iH = 0;   // Hue:
-  if($iH > 360) $iH = 360; //   0-360
-  if($iS < 0)   $iS = 0;   // Saturation:
-  if($iS > 100) $iS = 100; //   0-100
-  if($iV < 0)   $iV = 0;   // Lightness:
-  if($iV > 100) $iV = 100; //   0-100
+    if ($iH < 0) {
+        $iH = 0;   // Hue:
+    }
+    if ($iH > 360) {
+        $iH = 360; //   0-360
+    }
+    if ($iS < 0) {
+        $iS = 0;   // Saturation:
+    }
+    if ($iS > 100) {
+        $iS = 100; //   0-100
+    }
+    if ($iV < 0) {
+        $iV = 0;   // Lightness:
+    }
+    if ($iV > 100) {
+        $iV = 100; //   0-100
+    }
 
-  $dS = $iS/100.0; // Saturation: 0.0-1.0
-  $dV = $iV/100.0; // Lightness:  0.0-1.0
-  $dC = $dV*$dS;   // Chroma:     0.0-1.0
-  $dH = $iH/60.0;  // H-Prime:    0.0-6.0
-  $dT = $dH;       // Temp variable
+    $dS = $iS / 100.0; // Saturation: 0.0-1.0
+    $dV = $iV / 100.0; // Lightness:  0.0-1.0
+    $dC = $dV * $dS;   // Chroma:     0.0-1.0
+    $dH = $iH / 60.0;  // H-Prime:    0.0-6.0
+    $dT = $dH;       // Temp variable
 
-  while($dT >= 2.0) $dT -= 2.0; // php modulus does not work with float
-  $dX = $dC*(1-abs($dT-1));     // as used in the Wikipedia link
+    while ($dT >= 2.0) {
+        $dT -= 2.0; // php modulus does not work with float
+    }
+    $dX = $dC * (1 - abs($dT - 1));     // as used in the Wikipedia link
 
-  switch($dH) {
-      case($dH >= 0.0 && $dH < 1.0):
-          $dR = $dC; $dG = $dX; $dB = 0.0; break;
-      case($dH >= 1.0 && $dH < 2.0):
-          $dR = $dX; $dG = $dC; $dB = 0.0; break;
-      case($dH >= 2.0 && $dH < 3.0):
-          $dR = 0.0; $dG = $dC; $dB = $dX; break;
-      case($dH >= 3.0 && $dH < 4.0):
-          $dR = 0.0; $dG = $dX; $dB = $dC; break;
-      case($dH >= 4.0 && $dH < 5.0):
-          $dR = $dX; $dG = 0.0; $dB = $dC; break;
-      case($dH >= 5.0 && $dH < 6.0):
-          $dR = $dC; $dG = 0.0; $dB = $dX; break;
-      default:
-          $dR = 0.0; $dG = 0.0; $dB = 0.0; break;
-  }
+    switch ($dH) {
+        case($dH >= 0.0 && $dH < 1.0):
+            $dR = $dC;
+            $dG = $dX;
+            $dB = 0.0;
+            break;
+        case($dH >= 1.0 && $dH < 2.0):
+            $dR = $dX;
+            $dG = $dC;
+            $dB = 0.0;
+            break;
+        case($dH >= 2.0 && $dH < 3.0):
+            $dR = 0.0;
+            $dG = $dC;
+            $dB = $dX;
+            break;
+        case($dH >= 3.0 && $dH < 4.0):
+            $dR = 0.0;
+            $dG = $dX;
+            $dB = $dC;
+            break;
+        case($dH >= 4.0 && $dH < 5.0):
+            $dR = $dX;
+            $dG = 0.0;
+            $dB = $dC;
+            break;
+        case($dH >= 5.0 && $dH < 6.0):
+            $dR = $dC;
+            $dG = 0.0;
+            $dB = $dX;
+            break;
+        default:
+            $dR = 0.0;
+            $dG = 0.0;
+            $dB = 0.0;
+            break;
+    }
 
-  $dM  = $dV - $dC;
-  $dR += $dM; $dG += $dM; $dB += $dM;
-  $dR *= 255; $dG *= 255; $dB *= 255;
+    $dM = $dV - $dC;
+    $dR += $dM;
+    $dG += $dM;
+    $dB += $dM;
+    $dR *= 255;
+    $dG *= 255;
+    $dB *= 255;
 
-  return array('r'=>round($dR), 'g'=>round($dG), 'b'=>round($dB) );
+    return array('r' => round($dR), 'g' => round($dG), 'b' => round($dB));
 }
 
 /**
@@ -928,10 +1007,9 @@ function fHSVtoRGB($iH, $iS, $iV) {
  * @param int   $hex
  * @return int  
  */
-function hexa($hex)
-{
-  $num = dechex($hex);
-  return (strlen("$num") >= 2) ? "$num" : "0$num";
+function hexa($hex) {
+    $num = dechex($hex);
+    return (strlen("$num") >= 2) ? "$num" : "0$num";
 }
 
 /**
@@ -940,15 +1018,19 @@ function hexa($hex)
  * @return string
  */
 function PercentToColor($p = 0) {
-  if ($p>100) $p = 100;
-  if ($p<0) $p = 0;
-  // Pour aller de vert a rouge en passant par jaune et orange
-  $h = 1+((100-$p)*130/100);
-  
-  $rvb = fHSVtoRGB( (int)$h, 96, 93);
-  $color = "#".hexa($rvb['r']).hexa($rvb['g']).hexa($rvb['b']);
-  
-  return $color;
+    if ($p > 100) {
+        $p = 100;
+    }
+    if ($p < 0) {
+        $p = 0;
+    }
+    // Pour aller de vert a rouge en passant par jaune et orange
+    $h = 1 + ((100 - $p) * 130 / 100);
+
+    $rvb = fHSVtoRGB((int) $h, 96, 93);
+    $color = "#" . hexa($rvb['r']) . hexa($rvb['g']) . hexa($rvb['b']);
+
+    return $color;
 }
 
 /**
@@ -959,9 +1041,11 @@ function PercentToColor($p = 0) {
  * @return boolean
  */
 function panel_lock() {
-  global $err,$mem,$cuid;
-  if ($cuid!=2000) return false;
-  return touch(ALTERNC_LOCK_PANEL);
+    global $cuid;
+    if ($cuid != 2000) {
+        return false;
+    }
+    return touch(ALTERNC_LOCK_PANEL);
 }
 
 /**
@@ -972,9 +1056,11 @@ function panel_lock() {
  * @return boolean
  */
 function panel_unlock() {
-  global $err,$mem,$cuid;
-  if ($cuid!=2000) return false;
-  return unlink(ALTERNC_LOCK_PANEL);
+    global $cuid;
+    if ($cuid != 2000) {
+        return false;
+    }
+    return unlink(ALTERNC_LOCK_PANEL);
 }
 
 /**
@@ -982,7 +1068,5 @@ function panel_unlock() {
  * @return boolean
  */
 function panel_islocked() {
-  return file_exists(ALTERNC_LOCK_PANEL);
+    return file_exists(ALTERNC_LOCK_PANEL);
 }
-
-?>

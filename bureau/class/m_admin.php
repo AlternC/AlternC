@@ -79,9 +79,9 @@ class m_admin {
      */
     function hook_menu() {
         global $mem, $cuid, $debug_alternc, $L_INOTIFY_UPDATE_DOMAIN;
-        if (!$mem->checkRight())
+        if (!$mem->checkRight()) {
             return false;
-
+        }
         $obj = array(
             'title' => _("Administration"),
             'ico' => 'images/admin.png',
@@ -343,38 +343,36 @@ class m_admin {
 
                 $request = 'SELECT compte AS uid FROM domaines WHERE 1';
 
-                if ($pattern && preg_match('/[.a-zA-Z0-9]+/', $pattern))
+                if ($pattern && preg_match('/[.a-zA-Z0-9]+/', $pattern)) {
                     $request .= sprintf(' AND domaine LIKE "%%%s%%"', $pattern);
-
-                if ($creator)
+                }
+                if ($creator) {
                     $request .= sprintf(' AND compte in (select uid from membres where creator = "%s" ) ', $creator);
-
-                if ($mem->user['uid'] != 2000 && !$all)
+                }
+                if ($mem->user['uid'] != 2000 && !$all) {
                     $request .= sprintf(' AND compte in (select uid from membres where creator = "%s") ', $cuid);
-
+                }
 
                 $request .= ' GROUP BY uid';
             } elseif ($pattern_type === 'login') {
 
                 $request = 'SELECT uid FROM membres WHERE 1';
 
-                if ($pattern && preg_match('/[a-zA-Z0-9]+/', $pattern))
+                if ($pattern && preg_match('/[a-zA-Z0-9]+/', $pattern)) {
                     $request .= sprintf(' AND login LIKE "%%%s%%"', $pattern);
-
-                if ($creator)
+                }
+                if ($creator) {
                     $request .= sprintf(' AND creator = "%s"', $creator);
-
-                if ($mem->user['uid'] != 2000 && !$all)
+                }
+                if ($mem->user['uid'] != 2000 && !$all) {
                     $request .= sprintf(' AND creator = "%s"', $cuid);
-
+                }
                 $request .= ' ORDER BY login;';
             } else {
-
                 $err->raise("admin", _("Invalid pattern type provided. Are you even performing a legitimate action?"));
                 return FALSE;
             }
         } else {
-
             if ($creator) {
                 // Limit listing to a specific reseller
                 $request = "SELECT uid FROM membres WHERE creator='" . $creator . "' ORDER BY login;";
@@ -411,7 +409,7 @@ class m_admin {
      * @return    boolean
      */
     function mailallmembers($subject, $message, $from) {
-        global $err, $mem, $cuid, $db;
+        global $err, $db;
         $err->log("admin", "mailallmembers");
         if (!$this->enabled) {
             $err->raise("admin", _("-- Only administrators can access this page! --"));
@@ -453,7 +451,7 @@ class m_admin {
      * @return    boolean
      */
     function get_creator_list() {
-        global $err, $mem, $cuid;
+        global $err, $cuid;
 
         $creators = array();
 
@@ -488,7 +486,7 @@ class m_admin {
      * @return    boolean         TRUE if I am the creator of that account. FALSE else.
      */
     function checkcreator($uid) {
-        global $err, $mem, $db, $cuid;
+        global $err, $db, $cuid;
         if ($cuid == 2000) {
             return true;
         }
@@ -514,7 +512,7 @@ class m_admin {
      * @return boolean
      */
     function add_shared_domain($u, $domain_name) {
-        global $db, $err, $dom, $mem, $cuid;
+        global $err, $dom, $mem;
         $err->log("admin", "add_shared_domain", $u . "/" . $domain_name);
 
         if (!$mem->checkright()) {
@@ -575,7 +573,7 @@ class m_admin {
      * @return boolean Returns FALSE if an error occurs, TRUE if not.
      */
     function add_mem($login, $pass, $nom, $prenom, $mail, $canpass = 1, $type = 'default', $duration = 0, $notes = "", $force = 0, $create_dom = '', $db_server_id) {
-        global $err, $quota, $classes, $cuid, $mem, $L_MYSQL_DATABASE, $L_MYSQL_LOGIN, $hooks, $action;
+        global $err, $cuid, $mem, $L_MYSQL_DATABASE, $L_MYSQL_LOGIN, $hooks, $action;
         $err->log("admin", "add_mem", $login . "/" . $mail);
         if (!$this->enabled) {
             $err->raise("admin", _("-- Only administrators can access this page! --"));
@@ -629,8 +627,9 @@ class m_admin {
                 $uid = 2000;
             } else {
                 $uid = $db->Record["nextid"];
-                if ($uid <= 2000)
+                if ($uid <= 2000) {
                     $uid = 2000;
+                }
             }
             $db->query("INSERT INTO membres (uid,login,pass,mail,creator,canpass,type,created,notes,db_server_id) VALUES ('$uid','$login','$pass','$mail','$cuid','$canpass', '$type', NOW(), '$notes', '$db_server_id');");
             $db->query("INSERT INTO local(uid,nom,prenom) VALUES('$uid','$nom','$prenom');");
@@ -749,8 +748,7 @@ EOF;
      * @return    boolean Returns     FALSE if an error occurs, TRUE if not
      */
     function update_mem($uid, $mail, $nom, $prenom, $pass, $enabled, $canpass, $type = 'default', $duration = 0, $notes = "", $reset_quotas = false) {
-        global $err, $db;
-        global $cuid, $quota;
+        global $err, $db, $quota;
 
         $notes = addslashes($notes);
 
@@ -853,7 +851,7 @@ EOF;
      * @return    boolean         Returns FALSE if an error occurs, TRUE if not.
      */
     function del_mem($uid) {
-        global $err, $quota, $classes, $cuid, $mem, $dom, $hooks, $action;
+        global $err, $mem, $dom, $hooks, $action;
         $err->log("admin", "del_mem", $uid);
 
         if (!$this->enabled) {
@@ -904,9 +902,9 @@ EOF;
         global $err, $db;
 
         $periods = intval($periods);
-        if ($periods == 0)
+        if ($periods == 0) {
             return false;
-
+        }
         $query = "UPDATE membres SET renewed = renewed + INTERVAL (duration * $periods) MONTH WHERE uid=${uid};";
         if ($db->query($query)) {
             return true;
@@ -929,12 +927,14 @@ EOF;
         global $err, $db;
 
         if ($duration == 0) {
-            if ($db->query("UPDATE membres SET duration = NULL, renewed = NULL WHERE uid=$uid;"))
+            if ($db->query("UPDATE membres SET duration = NULL, renewed = NULL WHERE uid=$uid;")) {
                 return true;
+            }
         } else {
             if ($db->query("UPDATE membres SET duration = $duration WHERE uid=$uid") &&
-                    $db->query("UPDATE membres SET renewed = NOW() WHERE uid=$uid and renewed is null;"))
+                    $db->query("UPDATE membres SET renewed = NOW() WHERE uid=$uid and renewed is null;")) {
                 return true;
+            }
         }
 
         $err->raise("admin", _("Account not found"));
@@ -992,12 +992,13 @@ EOF;
                         " WHEN m.renewed <= NOW() THEN 2" .
                         " ELSE 1 END 'status' FROM membres m, local l" .
                         " WHERE m.uid = l.uid" .
-                        " HAVING status=2 or status=3 ORDER BY status DESC, expiry;"))
+                        " HAVING status=2 or status=3 ORDER BY status DESC, expiry;")) {
             return false;
-        else {
+        } else {
             $res = array();
-            while ($db->next_record())
+            while ($db->next_record()) {
                 $res[] = $db->Record;
+            }
             return $res;
         }
     }
@@ -1025,7 +1026,6 @@ EOF;
         return true;
     }
 
-    
     /**
      * Turns a super-admin account into a common account
      * 
@@ -1238,8 +1238,9 @@ EOF;
     function selecttldmode($current = false) {
         for ($i = 0; $i < count($this->tldmode); $i++) {
             echo "<option value=\"$i\"";
-            if ($current == $i)
+            if ($current == $i) {
                 echo " selected=\"selected\"";
+            }
             echo ">" . _($this->tldmode[$i]) . "</option>\n";
         }
     }
@@ -1294,11 +1295,13 @@ EOF;
             $err->raise("admin", _("This TLD already exist"));
             return false;
         }
-        if (substr($tld, 0, 1) == ".")
+        if (substr($tld, 0, 1) == ".") {
             $tld = substr($tld, 1);
+        }
         $mode = intval($mode);
-        if ($mode == 0)
+        if ($mode == 0) {
             $mode = "0";
+        }
         $db->query("INSERT INTO tld (tld,mode) VALUES ('$tld','$mode');");
         return true;
     }
@@ -1322,8 +1325,9 @@ EOF;
             return false;
         }
         $mode = intval($mode);
-        if ($mode == 0)
+        if ($mode == 0) {
             $mode = "0";
+        }
         $db->query("UPDATE tld SET mode='$mode' WHERE tld='$tld';");
         return true;
     }
@@ -1350,7 +1354,7 @@ EOF;
      * @return array              an indexed array of associative array from the MySQL "policy" table
      */
     function listPasswordPolicies() {
-        global $db, $classes, $hooks;
+        global $db, $hooks;
         $tmp1 = array();
         $tmp2 = array();
         $policies = array();
@@ -1358,16 +1362,6 @@ EOF;
         while ($db->next_record()) {
             $tmp1[$db->Record["name"]] = $db->Record;
         }
-        /*         * /
-          foreach($classes as $c) {
-          if (method_exists($GLOBALS[$c],"alternc_password_policy")) {
-          $res=$GLOBALS[$c]->alternc_password_policy(); // returns an array
-          foreach($res as $k=>$v) {
-          $tmp2[$k]=$v;
-          }
-          }
-          }
-          /* */
         $tmp3 = $hooks->invoke("alternc_password_policy");
         foreach ($tmp3 as $v) {
             foreach ($v as $l => $m) {
@@ -1433,7 +1427,7 @@ EOF;
      * @return    boolean             TRUE if the password if OK for this login and this policy, FALSE if it is not.
      */
     function checkPolicy($policy, $login, $password) {
-        global $db, $err;
+        global $err;
 
         if (empty($login)) {
             $err->raise("admin", _("Please enter a login"));
@@ -1468,14 +1462,16 @@ EOF;
             $logins = preg_split("/[@_-]/", $login);
             $logins[] = $login;
             foreach ($logins as $l) {
-	      if (!$l) continue;
-	      if (strpos($password, $l) !== false || strpos($l,$password) !== false) {
+                if (!$l) {
+                    continue;
+                }
+                if (strpos($password, $l) !== false || strpos($l, $password) !== false) {
                     $err->raise("admin", _("The password policy prevents you to use your login name inside your password or the other way around"));
                     return false;
                 }
             }
         }
-	
+
         if ($pol["classcount"] > 0) {
             $cls = array(0, 0, 0, 0, 0);
             for ($i = 0; $i < strlen($password); $i++) {

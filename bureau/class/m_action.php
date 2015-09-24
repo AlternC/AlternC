@@ -33,7 +33,7 @@
 class m_action {
     /* --------------------------------------------------------------------------- */
 
-    /** 
+    /**
      * Constructor
      */
     function m_action() {
@@ -48,9 +48,9 @@ class m_action {
      * @return boolean
      */
     function do_action() {
-	global $err, $L_INOTIFY_DO_ACTION;
+        global $err, $L_INOTIFY_DO_ACTION;
         $err->log("action", "do_action");
-        if( ! @touch($L_INOTIFY_DO_ACTION) ){
+        if (!@touch($L_INOTIFY_DO_ACTION)) {
             return FALSE;
         }
         return TRUE;
@@ -77,9 +77,9 @@ class m_action {
      * @return boolean
      */
     function chmod($filename, $perms, $user = "root") {
-        return $this->set('chmod', $user, array('filename' => $filename,"perms"=>$perms));
+        return $this->set('chmod', $user, array('filename' => $filename, "perms" => $perms));
     }
-    
+
     /**
      * Plans the creation of a dir 
      * 
@@ -243,11 +243,11 @@ class m_action {
 
         $purge = "select * from actions where TO_DAYS(curdate()) - TO_DAYS(creation) > 2;";
         $result = $db->query($purge);
-        if (! $result) {
+        if (!$result) {
             $err->raise("action", _("Error selecting  old actions"));
             return false;
         }
-        return $db->num_rows($result)   ;
+        return $db->num_rows($result);
     }
 
     /**
@@ -265,12 +265,11 @@ class m_action {
             $purge = "delete from actions where TO_DAYS(curdate()) - TO_DAYS(creation) > 2;";
         }
         $result = $db->query($purge);
-        if (! $result) {
+        if (!$result) {
             $err->raise("action", _("Error purging old actions"));
             return false;
         }
-        return $db->num_rows($result)   ;
-        
+        return $db->num_rows($result);
     }
 
     /**
@@ -327,7 +326,7 @@ class m_action {
         }
         return true;
     }
-    
+
     /**
      * 
      * @global m_mysql $db
@@ -343,7 +342,7 @@ class m_action {
         }
         return true;
     }
-    
+
     /**
      * Returns a list of actions marked as executable and ready for execution
      * 
@@ -352,7 +351,7 @@ class m_action {
      * @return boolean 
      */
     function get_job() {
-        global $db, $err;
+        global $db;
         $tab = array();
         $db->query("Select * from actions where begin !=0 and end = 0 ;");
         if ($db->next_record()) {
@@ -371,7 +370,6 @@ class m_action {
      * @return boolean
      */
     function cancel($id) {
-        global $db;
         $this->finish($id, 666);
         return true;
     }
