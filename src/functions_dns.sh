@@ -101,6 +101,7 @@ dns_delete() {
   
   # Ask the dns server for restart
   $RNDC reconfig
+  service opendkim restart
   # Hook it !
   run-parts --arg=dns_reconfig  /usr/lib/alternc/reload.d
 }
@@ -216,4 +217,5 @@ dns_regenerate() {
 
     # ask bind to reload the zone
     $RNDC reload $domain
+    service opendkim restart
 }
