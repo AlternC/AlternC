@@ -3,7 +3,7 @@
  $Id: adm_doedit.php,v 1.6 2006/01/24 05:03:30 joe Exp $
  ----------------------------------------------------------------------
  AlternC - Web Hosting System
- Copyright (C) 2006 Le réseau Koumbit Inc.
+ Copyright (C) 2006 Le reseau Koumbit Inc.
  http://koumbit.org/
  Copyright (C) 2002 by the AlternC Development Team.
  http://alternc.org/
@@ -77,4 +77,3 @@ if (!$admin->update_mem($uid, $nmail, $nom, $prenom, $pass, $enabled, $canpass, 
   $error=_("The member has been successfully edited");
   include("adm_list.php");
 }
-?>

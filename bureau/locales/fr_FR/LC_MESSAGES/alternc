@@ -44,6 +44,9 @@ msgid ""
 "currently not enabled."
 msgstr "AlternC ne peut pas fonctionner correctement sans les ACL activées sur le système de fichiers. Les ACL ne sont actuellement pas actives."
 
+msgid "This domain is locked, only a server administrator can unlock it."
+msgstr "Ce domaine est verrouillé, seul un administrateur peut le déverrouiller."
+
 #. Type: note
 #. Description
 #: ../alternc.templates:1001

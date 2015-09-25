@@ -45,6 +45,9 @@ msgstr ""
 msgid "Your current password is incorrect, please try again."
 msgstr "Votre mot de passe actuel est incorrect, réessayez."
 
+msgid "This domain is locked, only a server administrator can unlock it."
+msgstr "Ce domaine est verrouillé, seul un administrateur peut le déverrouiller."
+
 #: ../../squirrelmail/alternc_changepass/change.php:88
 msgid ""
 "Your password has been successfully changed. Don't forget to change it in "

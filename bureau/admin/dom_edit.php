@@ -254,11 +254,12 @@ sub_domains_edit($domain);
 <!-- *****************************************
 		 modification des parametres dns
  -->
-<?php
+
+</div>
+    <?php
 if (!$r['noerase']) {
 ?>
 
-</div>
 <div id="tabsdom-params">
 <h3><?php __("DNS &amp; Email parameters"); ?></h3>
 <form action="dom_editdns.php?domain=<?php echo urlencode($r["name"]) ?>" method="post" id="fdns" name="fdns" onSubmit="return destruction_alert();">
@@ -326,7 +327,13 @@ if (!$r['noerase']) {
   </form>
 </div> <!-- tabsdom-delete -->
 </div> <!-- tabsdom -->
-<?php } // noerase ?>
+<?php } else { // noerase 
+  ?>
+<div id="tabsdom-params">  
+   <p class="alert alert-info"><?php __("This domain is locked, only a server administrator can unlock it."); ?></p>
+</div>
+    <?php
+}  ?>
 <script type="text/javascript">
 //document.forms['main'].sub.focus(); // not with tabs
 
