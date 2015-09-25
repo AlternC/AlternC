@@ -1,4 +1,5 @@
 <?php
+
 /*
   ----------------------------------------------------------------------
   AlternC - Web Hosting System
@@ -6,117 +7,118 @@
   https://alternc.org/
   ----------------------------------------------------------------------
   LICENSE
-  
+
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License (GPL)
   as published by the Free Software Foundation; either version 2
   of the License, or (at your option) any later version.
-  
+
   This program is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
-  
+
   To read the license please visit http://www.gnu.org/copyleft/gpl.html
   ----------------------------------------------------------------------
-  Purpose of file: Manage Log files for users 
+  Purpose of file: Manage Log files for users
   ----------------------------------------------------------------------
-*/
+ */
 
 /**
-* Classe de gestion des erreurs apparaissant lors d'appels API.
-*/
+ * Classe de gestion des erreurs apparaissant lors d'appels API.
+ */
 class m_log {
 
-  function m_log(){
-  }
-
-  function list_logs_directory($dir){
-    global $cuid,$err;
-    $err->log("log","list_logs_directory");
-
-    $c=array();
-    foreach( glob("${dir}/*log*") as $absfile) {
-        $c[]=array("name"=>basename($absfile), 
-                   "creation_date"=>date("F d Y H:i:s", filectime($absfile)),
-		   "mtime" => filemtime($absfile),
-                   "filesize"=>filesize($absfile),
-                   "downlink"=>urlencode(basename($absfile)),
-                  );
+    function m_log() {
+        
     }
-    usort($c,"m_log::compare_logtime");
-    return $c;
 
-  }//list_logs
+    function list_logs_directory($dir) {
+        global $cuid, $err;
+        $err->log("log", "list_logs_directory");
 
-  // Used by list_logs_directory to sort
-  private function compare_logname($a, $b) {
-    return strcmp($a['name'],$b['name']);
-  }
-
-  // Used by list_logs_directory to sort
-  private function compare_logtime($a, $b) {
-    return $b['mtime']-$a['mtime'];
-  }
-
-
-  function hook_menu() {
-    $obj = array(
-      'title'       => _("Logs"),
-      'ico'         => 'images/logs.png',
-      'link'        => 'logs_list.php',
-      'pos'         => 130,
-     ) ;
-
-     return $obj;
-  }
-
-  function list_logs_directory_all($dirs){
-    global $err;
-    $err->log("log","get_logs_directory_all");
-    $c=array();
-    foreach($dirs as $dir=>$val){
-      $c[$dir]=$this->list_logs_directory($val);
+        $c = array();
+        foreach (glob("${dir}/*log*") as $absfile) {
+            $c[] = array("name" => basename($absfile),
+                "creation_date" => date("F d Y H:i:s", filectime($absfile)),
+                "mtime" => filemtime($absfile),
+                "filesize" => filesize($absfile),
+                "downlink" => urlencode(basename($absfile)),
+            );
+        }
+        usort($c, "m_log::compare_logtime");
+        return $c;
     }
-    return $c;
 
-  }
-  
-  function get_logs_directory(){
-    global $cuid,$mem,$err;
-    $err->log("log","get_logs_directory");
-    // Return an array to allow multiple directory in the future
-    if(defined('ALTERNC_LOGS_ARCHIVE')){
-      $c=array("dir"=>ALTERNC_LOGS_ARCHIVE."/".$cuid."-".$mem->user["login"]);
-    }else{
-      $c=array("dir"=>ALTERNC_LOGS."/".$cuid."-".$mem->user["login"]);
+    // Used by list_logs_directory to sort
+    private function compare_logname($a, $b) {
+        return strcmp($a['name'], $b['name']);
     }
-    return $c;
-  }
-  
-  function download_link($file){
-    global $err,$mem;
-    $err->log("log","download_link");
-    header("Content-Disposition: attachment; filename=".$file.""); 
-    header("Content-Type: application/force-download");
-    header("Content-Transfer-Encoding: binary");
-    $f=$this->get_logs_directory();
-    $ff=$f['dir']."/".basename($file);
-    set_time_limit(0);
-    readfile($ff);
-  }
 
-  function tail($file,$lines=20) {
-    global $err,$mem;
-    $err->log("log","tail");
-    $lines=intval($lines); if ($lines<=0) $lines=20;
-    $f=$this->get_logs_directory();
-    $ff=$f['dir']."/".basename($file);
-    unset($out);
-    exec("tail -".$lines." ".escapeshellarg($ff),$out);
-    return implode("\n",$out);
-  }
+    // Used by list_logs_directory to sort
+    private function compare_logtime($a, $b) {
+        return $b['mtime'] - $a['mtime'];
+    }
 
+    function hook_menu() {
+        $obj = array(
+            'title' => _("Logs"),
+            'ico' => 'images/logs.png',
+            'link' => 'logs_list.php',
+            'pos' => 130,
+                );
 
-} // end class
+        return $obj;
+    }
 
+    function list_logs_directory_all($dirs) {
+        global $err;
+        $err->log("log", "get_logs_directory_all");
+        $c = array();
+        foreach ($dirs as $dir => $val) {
+            $c[$dir] = $this->list_logs_directory($val);
+        }
+        return $c;
+    }
+
+    function get_logs_directory() {
+        global $cuid, $mem, $err;
+        $err->log("log", "get_logs_directory");
+        // Return an array to allow multiple directory in the future
+        if (defined('ALTERNC_LOGS_ARCHIVE')) {
+            $c = array("dir" => ALTERNC_LOGS_ARCHIVE . "/" . $cuid . "-" . $mem->user["login"]);
+        } else {
+            $c = array("dir" => ALTERNC_LOGS . "/" . $cuid . "-" . $mem->user["login"]);
+        }
+        return $c;
+    }
+
+    function download_link($file) {
+        global $err;
+        $err->log("log", "download_link");
+        header("Content-Disposition: attachment; filename=" . $file . "");
+        header("Content-Type: application/force-download");
+        header("Content-Transfer-Encoding: binary");
+        $f = $this->get_logs_directory();
+        $ff = $f['dir'] . "/" . basename($file);
+        set_time_limit(0);
+        readfile($ff);
+    }
+
+    function tail($file, $lines = 20) {
+        global $err;
+        $err->log("log", "tail");
+        $lines = intval($lines);
+        if ($lines <= 0) {
+            $lines = 20;
+        }
+        $f = $this->get_logs_directory();
+        $ff = $f['dir'] . "/" . basename($file);
+        $out=array();
+        exec("tail -" . $lines . " " . escapeshellarg($ff), $out);
+        return implode("\n", $out);
+    }
+
+}
+
+// end class

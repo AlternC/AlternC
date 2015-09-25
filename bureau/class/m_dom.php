@@ -85,7 +85,7 @@ class m_dom {
      * Constructeur
      */
     function m_dom() {
-      global $L_FQDN;
+        global $L_FQDN;
         $this->tld_no_check_at_all = variable_get('tld_no_check_at_all', 0, 'Disable ALL check on the TLD (users will be able to add any domain)', array('desc' => 'Disabled', 'type' => 'boolean'));
         variable_get('mailname_bounce', $L_FQDN, 'FQDN of the mail server, used to create vhost virtual mail_adress.', array('desc' => 'FQDN', 'type' => 'string'));
     }
@@ -105,15 +105,15 @@ class m_dom {
      * @param string $fqdn
      */
     public static function get_sub_domain_id_and_member_by_name($fqdn) {
-        global $db, $err, $cuid;
+        global $db, $err;
         $err->log("dom", "get_sub_domain_by_name");
         $fqdn = mysql_real_escape_string($fqdn);
         $db->query("select sd.* from sub_domaines sd where if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine) = '$fqdn';");
-        if (!$db->next_record())
+        if (!$db->next_record()) {
             return false;
+        }
         return array('sub_id' => intval($db->f('id')), 'member_id' => intval($db->f('compte')));
     }
-
 
     function hook_menu() {
         global $quota;
@@ -123,22 +123,20 @@ class m_dom {
             'link' => 'toggle',
             'pos' => 20,
             'links' => array(),
-                );
+        );
 
         if ($quota->cancreate("dom")) {
-            $obj['links'][] =
-                    array(
-                        'ico' => 'images/new.png',
-                        'txt' => _("Add a domain"),
-                        'url' => "dom_add.php",
+            $obj['links'][] = array(
+                'ico' => 'images/new.png',
+                'txt' => _("Add a domain"),
+                'url' => "dom_add.php",
             );
         }
 
         foreach ($this->enum_domains() as $d) {
-            $obj['links'][] =
-                    array(
-                        'txt' => htmlentities($d),
-                        'url' => "dom_edit.php?domain=" . urlencode($d),
+            $obj['links'][] = array(
+                'txt' => htmlentities($d),
+                'url' => "dom_edit.php?domain=" . urlencode($d),
             );
         }
 
@@ -186,7 +184,7 @@ class m_dom {
      * @param integer $type
      */
     function domains_type_target_values($type = null) {
-        global $db, $err, $cuid;
+        global $db, $err;
         $err->log("dom", "domains_type_target_values");
         if (is_null($type)) {
             $db->query("desc domaines_type;");
@@ -202,8 +200,9 @@ class m_dom {
             return $r;
         } else {
             $db->query("select target from domaines_type where name='$type';");
-            if (!$db->next_record())
+            if (!$db->next_record()) {
                 return false;
+            }
             return $db->f('target');
         }
     }
@@ -220,8 +219,9 @@ class m_dom {
         $val = array();
         foreach (explode("\n", $zone) as $z) {
             $z = trim($z);
-            if (empty($z))
+            if (empty($z)) {
                 continue;
+            }
             $val[] = $this->import_manual_dns_entry($z, $domain, $detect_redirect, $save);
         }
         return $val;
@@ -231,11 +231,12 @@ class m_dom {
      * @param string $zone
      */
     function import_manual_dns_entry($zone, $domain, $detect_redirect = true, $save = false) {
-        global $cuid, $err;
+        global $err;
         $err->log("dom", "import_manual_dns_entry");
         $zone = trim($zone);
-        if (empty($zone))
+        if (empty($zone)) {
             return false;
+        }
 
         $domain = trim($domain);
         if (empty($domain)) {
@@ -409,7 +410,6 @@ class m_dom {
     }
 
     private function import_manual_dns_entry_doit($entry) {
-        global $err;
         $entry['did_it'] = 0;
         if ($entry['status'] == 'err') {
             return $entry;
@@ -417,14 +417,14 @@ class m_dom {
 
         $val = $entry['entry_new'];
 
-        if (empty($val['type']))
+        if (empty($val['type'])) {
             return false;
+        }
 
         switch ($val['type']) {
             case "set_ttl":
                 $entry['did_it'] = $this->set_ttl($this->get_domain_byname($val['domain']), $val['value']);
                 return $entry;
-                break;
         }
 
         // If it is an unknown domains type
@@ -435,8 +435,9 @@ class m_dom {
         }
 
         // If the subdomain is @, we want an empty subdomain
-        if ($val['sub'] == '@')
+        if ($val['sub'] == '@') {
             $val['sub'] = '';
+        }
 
         $this->lock();
         $entry['did_it'] = $this->set_sub_domain($val['domain'], $val['sub'], $val['type'], $val['value']);
@@ -492,7 +493,6 @@ class m_dom {
 
             if ($result === false) {
                 throw new Exception("Could not read data from {$url}");
-                return false;
             }
             if (strstr($http_response_header[0], '301') || strstr($http_response_header[0], '302')) {
                 // This is a redirection
@@ -528,7 +528,7 @@ class m_dom {
     }
 
     function domains_type_get($name) {
-        global $db, $err, $cuid;
+        global $db;
         $name = mysql_real_escape_string($name);
         $db->query("select * from domaines_type where name='$name' ;");
         $db->next_record();
@@ -536,14 +536,14 @@ class m_dom {
     }
 
     function domains_type_del($name) {
-        global $db, $err, $cuid;
+        global $db;
         $name = mysql_real_escape_string($name);
         $db->query("delete domaines_type where name='$name';");
         return true;
     }
 
     function domains_type_update($name, $description, $target, $entry, $compatibility, $enable, $only_dns, $need_dns, $advanced, $create_tmpdir, $create_targetdir) {
-        global $err, $cuid, $db;
+        global $err, $db;
         // The name MUST contain only letter and digits, it's an identifier after all ...
         if (!preg_match("#^[a-z0-9]+$#", $name)) {
             $err->raise("dom", _("The name MUST contain only letter and digits"));
@@ -565,12 +565,13 @@ class m_dom {
     }
 
     function sub_domain_change_status($sub_id, $status) {
-        global $db, $err, $cuid;
+        global $db, $err;
         $err->log("dom", "sub_domain_change_status");
         $sub_id = intval($sub_id);
         $status = strtoupper($status);
-        if (!in_array($status, array('ENABLE', 'DISABLE')))
+        if (!in_array($status, array('ENABLE', 'DISABLE'))) {
             return false;
+        }
 
         $jh = $this->get_sub_domain_all($sub_id);
         if ($status == 'ENABLE') { // check compatibility with existing sub_domains
@@ -618,9 +619,7 @@ class m_dom {
         $dom = strtolower($dom);
         $db->query("UPDATE sub_domaines SET web_action='UPDATE'  WHERE domaine='$dom';");
         $this->set_dns_action($dom, 'UPDATE');
-
         # TODO : some work with domain sensitive classes
-
         return true;
     }
 
@@ -638,7 +637,7 @@ class m_dom {
      * @return boolean Retourne FALSE si une erreur s'est produite, TRUE sinon.
      */
     function del_domain($dom) {
-        global $db, $err, $classes, $cuid, $hooks;
+        global $db, $err, $hooks;
         $err->log("dom", "del_domain", $dom);
         $dom = strtolower($dom);
 
@@ -689,7 +688,7 @@ class m_dom {
       $ @return boolean Retourne FALSE si une erreur s'est produite, TRUE sinon.
      */
     function add_domain($domain, $dns, $noerase = false, $force = false, $isslave = false, $slavedom = "") {
-        global $db, $err, $quota, $classes, $L_MX, $L_FQDN, $tld, $cuid, $bro, $hooks;
+        global $db, $err, $quota, $L_FQDN, $tld, $cuid, $hooks;
         $err->log("dom", "add_domain", $domain);
 
         // Locked ?
@@ -740,14 +739,15 @@ class m_dom {
                 return false;
             }
 
-            if ($dns)
+            if ($dns) {
                 $dns = "1";
-            else
+            } else {
                 $dns = "0";
-
+            }
             // mode 5 : force DNS to NO.
-            if ($tld[$v] == 5)
+            if ($tld[$v] == 5) {
                 $dns = 0;
+            }
             // It must be a real domain (no subdomain)
             if (!$dns) {
                 $v = checkhostallow_nodns($domain);
@@ -762,14 +762,16 @@ class m_dom {
             $err->raise("dom", _("Your domain quota is over, you cannot create more domain names"));
             return false;
         }
-        if ($noerase)
+        if ($noerase) {
             $noerase = "1";
-        else
+        } else {
             $noerase = "0";
-        if ($dns)
+        }
+        if ($dns) {
             $gesmx = "1";
-        else
+        } else {
             $gesmx = "0"; // do not host mx by default if not hosting the DNS
+        }
         $db->query("INSERT INTO domaines (compte,domaine,gesdns,gesmx,noerase,dns_action) VALUES ('$cuid','$domain','$dns','$gesmx','$noerase','UPDATE');");
         if (!($id = $db->lastid())) {
             $err->raise("dom", _("An unexpected error occured when creating the domain"));
@@ -798,8 +800,9 @@ class m_dom {
         }
         // New Hooks: 
         $hooks->invoke("hook_dom_add_domain", array($id));
-        if ($gesmx)
+        if ($gesmx) {
             $hooks->invoke("hook_dom_add_mx_domain", array($id));
+        }
         if ($isslave) {
             $hooks->invoke("hook_dom_add_slave_domain", array($id, $slavedom));
         }
@@ -834,13 +837,11 @@ class m_dom {
      * @param string $domain
      */
     function domdefaultdir($domain) {
-        global $bro, $cuid;
-        $dest_root = $bro->get_userid_root($cuid);
-        #  return $dest_root."/www/".$this->domshort($domain);
         return "/www/" . $this->domshort($domain);
     }
 
     function dump_axfr($domain, $ns = 'localhost') {
+        $axfr = array();
         exec('/usr/bin/dig AXFR "' . escapeshellcmd($domain) . '" @"' . escapeshellcmd($ns) . '"', $axfr);
         return $axfr;
     }
@@ -858,7 +859,7 @@ class m_dom {
                 'domain_type_parameter' => $db->f('domain_type_parameter'),
                 'concerned' => $db->f('concerned'),
                 'enabled' => $db->f('enabled')
-                    );
+            );
         }
 
         return $c;
@@ -869,12 +870,14 @@ class m_dom {
         $err->log("dom", "update_default_subdomains");
         $ok = true;
         foreach ($arr as $a) {
-            if (!isset($a['id']))
+            if (!isset($a['id'])) {
                 $a['id'] = null;
+            }
             if (!empty($a['sub']) || !empty($a['domain_type_parameter'])) {
 
-                if (!isset($a['enabled']))
+                if (!isset($a['enabled'])) {
                     $a['enabled'] = 0;
+                }
                 if (!$this->update_one_default($a['domain_type'], $a['sub'], $a['domain_type_parameter'], $a['concerned'], $a['enabled'], $a['id'])) {
                     $ok = false;
                 }
@@ -887,10 +890,11 @@ class m_dom {
         global $db, $err;
         $err->log("dom", "update_one_default");
 
-        if ($id == null)
+        if ($id == null) {
             $db->query("INSERT INTO default_subdomains values ('','" . addslashes($sub) . "','" . addslashes($domain_type) . "','" . addslashes($domain_type_parameter) . "','" . addslashes($concerned) . "','" . addslashes($enabled) . "');");
-        else
+        } else {
             $db->query("UPDATE default_subdomains set sub='" . addslashes($sub) . "', domain_type='" . addslashes($domain_type) . "',domain_type_parameter='" . addslashes($domain_type_parameter) . "',concerned='" . addslashes($concerned) . "',enabled='" . addslashes($enabled) . "' where id=" . addslashes($id) . ";");
+        }
         return true;
         //update
     }
@@ -924,7 +928,7 @@ class m_dom {
      *
      */
     function whois($domain) {
-        global $db, $err;
+        global $err;
         $err->log("dom", "whois", $domain);
         // pour ajouter un nouveau TLD, utiliser le code ci-dessous.
         //  echo "whois : $domain<br />";
@@ -978,16 +982,19 @@ class m_dom {
                         if (preg_match("#Name Server:#", $ligne)) {
                             $found = true;
                             $tmp = strtolower(str_replace(chr(10), "", str_replace(chr(13), "", str_replace(" ", "", str_replace("Name Server:", "", $ligne)))));
-                            if ($tmp)
+                            if ($tmp) {
                                 $serveurList[] = $tmp;
+                            }
                         }
                         break;
                     case "cx":
                         $ligne = str_replace(chr(10), "", str_replace(chr(13), "", str_replace(" ", "", $ligne)));
-                        if ($ligne == "" && $state == 1)
+                        if ($ligne == "" && $state == 1) {
                             $state = 2;
-                        if ($state == 1)
+                        }
+                        if ($state == 1) {
                             $serveurList[] = strtolower($ligne);
+                        }
                         if ($ligne == "Nameservers:" && $state == 0) {
                             $state = 1;
                             $found = true;
@@ -996,10 +1003,12 @@ class m_dom {
                     case "eu":
                     case "be":
                         $ligne = preg_replace("/^ *([^ ]*) \(.*\)$/", "\\1", trim($ligne));
-                        if ($found)
+                        if ($found) {
                             $tmp = trim($ligne);
-                        if ($tmp)
+                        }
+                        if ($tmp) {
                             $serveurList[] = $tmp;
+                        }
                         if ($ligne == "Nameservers:") {
                             $state = 1;
                             $found = true;
@@ -1011,16 +1020,18 @@ class m_dom {
                             // weird regexp (trailing garbage after name server), but I could not make it work otherwise
                             $tmp = strtolower(preg_replace('/Name Server: ([^ ]+)\..$/', "\\1", $ligne));
                             $tmp = preg_replace('/[^-_a-z0-9\.]/', '', $tmp);
-                            if ($tmp)
+                            if ($tmp) {
                                 $serveurList[] = $tmp;
+                            }
                         }
                         break;
                     case "it":
                         if (preg_match("#nserver:#", $ligne)) {
                             $found = true;
                             $tmp = strtolower(preg_replace("/nserver:\s*[^ ]*\s*([^\s]*)$/", "\\1", $ligne));
-                            if ($tmp)
+                            if ($tmp) {
                                 $serveurList[] = $tmp;
+                            }
                         }
                         break;
                     case "fr":
@@ -1028,8 +1039,9 @@ class m_dom {
                         if (preg_match("#nserver:#", $ligne)) {
                             $found = true;
                             $tmp = strtolower(preg_replace("#nserver:\s*([^\s]*)\s*.*$#", "\\1", $ligne));
-                            if ($tmp)
+                            if ($tmp) {
                                 $serveurList[] = $tmp;
+                            }
                         }
                         break;
                     case "ca":
@@ -1082,6 +1094,8 @@ class m_dom {
     function checkmx($domaine, $ref_domain = '') {
         global $L_DEFAULT_MX, $L_DEFAULT_SECONDARY_MX;
 
+        $ref_mx = array();
+        $mxhosts = array();
         if (!empty($ref_domain)) {
             getmxrr($ref_domain, $ref_mx);
         } else {
@@ -1113,9 +1127,6 @@ class m_dom {
 
         return 0;
     }
-
-//checkmx
-
 
     /* ----------------------------------------------------------------- */
 
@@ -1245,7 +1256,7 @@ class m_dom {
      * @param string $value
      */
     function check_type_value($type, $value) {
-        global $db, $err, $cuid;
+        global $err;
 
         // check the type we can have in domaines_type.target
         switch ($this->domains_type_target_values($type)) {
@@ -1273,7 +1284,6 @@ class m_dom {
                     return false;
                 }
                 return true;
-                break;
             case 'IP':
                 if (checkip($value)) {
                     return true;
@@ -1309,13 +1319,9 @@ class m_dom {
             default:
                 $err->raise("dom", _("Invalid domain type selected, please check"));
                 return false;
-                break;
         }
         return false;
     }
-
-//check_type_value
-
 
     /* ----------------------------------------------------------------- */
 
@@ -1328,13 +1334,14 @@ class m_dom {
      * @return boolean tell you if the subdomain can be installed there 
      */
     function can_create_subdomain($dom, $sub, $type, $sub_domain_id = 'null') {
-        global $db, $err, $cuid;
+        global $db, $err;
         $err->log("dom", "can_create_subdomain", $dom . "/" . $sub);
 
         // Get the compatibility list for this domain type
         $db->query("select upper(compatibility) as compatibility from domaines_type where upper(name)=upper('$type');");
-        if (!$db->next_record())
+        if (!$db->next_record()) {
             return false;
+        }
         $compatibility_lst = explode(",", $db->f('compatibility'));
 
         // Get the list of type of subdomains already here who have the same name
@@ -1342,8 +1349,9 @@ class m_dom {
         #$db->query("select * from sub_domaines where sub='$sub' and domaine='$dom';");
         while ($db->next_record()) {
             // And if there is a domain with a incompatible type, return false
-            if (!in_array(strtoupper($db->f('type')), $compatibility_lst))
+            if (!in_array(strtoupper($db->f('type')), $compatibility_lst)) {
                 return false;
+            }
         }
 
         // All is right, go ! Create ur domain !
@@ -1393,7 +1401,7 @@ class m_dom {
         }
 
         // On a épuré $dir des problémes eventuels ... On est en DESSOUS du dossier de l'utilisateur.
-        if ($t = checkfqdn($dom)) {
+        if (($t = checkfqdn($dom))) {
             $err->raise("dom", _("The domain name is syntaxically incorrect"));
             return false;
         }
@@ -1415,7 +1423,7 @@ class m_dom {
 
         // Create TMP dir and TARGET dir if needed by the domains_type
         $dest_root = $bro->get_userid_root($cuid);
-        $domshort = $this->domshort($dom, $sub);
+        //$domshort = $this->domshort($dom, $sub);
         $db->query("select create_tmpdir, create_targetdir from domaines_type where name = '$type';");
         $db->next_record();
         if ($db->f('create_tmpdir')) {
@@ -1444,9 +1452,6 @@ class m_dom {
         return true;
     }
 
-// set_sub_domain
-
-
     /* ----------------------------------------------------------------- */
 
     /**
@@ -1456,7 +1461,7 @@ class m_dom {
      *
      */
     function del_sub_domain($sub_domain_id) {
-        global $db, $err, $cuid;
+        global $db, $err;
         $err->log("dom", "del_sub_domain", $sub_domain_id);
         // Locked ?
         if (!$this->islocked) {
@@ -1472,8 +1477,6 @@ class m_dom {
         }
         return true;
     }
-
-// del_sub_domain
 
     /**
      * @param integer $dom_id
@@ -1505,7 +1508,7 @@ class m_dom {
      *
      */
     function edit_domain($dom, $dns, $gesmx, $force = false, $ttl = 86400) {
-        global $db, $err, $L_MX, $classes, $cuid, $hooks;
+        global $db, $err, $hooks;
         $err->log("dom", "edit_domain", $dom . "/" . $dns . "/" . $gesmx);
         // Locked ?
         if (!$this->islocked && !$force) {
@@ -1544,8 +1547,9 @@ class m_dom {
             $err->raise("dom", _("The domain name %s does not exist"), $dom);
             return false;
         }
-        if ($dns != "1")
+        if ($dns != "1") {
             $dns = "0";
+        }
         // On vérifie que des modifications ont bien eu lieu :)
         if ($r["dns"] == $dns && $r["mail"] == $gesmx && $r["zonettl"] == $ttl) {
             $err->raise("dom", _("No change has been requested..."));
@@ -1579,13 +1583,9 @@ class m_dom {
         return true;
     }
 
-// edit_domain
-
-
     /*     * ************************* */
     /*  Slave dns ip managment  */
     /*     * ************************* */
-
 
     /* ----------------------------------------------------------------- */
 
@@ -1616,8 +1616,9 @@ class m_dom {
             return false;
         }
         $class = intval($class);
-        if ($class < 8 || $class > 32)
+        if ($class < 8 || $class > 32) {
             $class = 32;
+        }
         $db->query("SELECT * FROM slaveip WHERE ip='$ip' AND class='$class';");
         if ($db->next_record()) {
             $err->raise("err", _("The requested domain is forbidden in this server, please contact the administrator"));
@@ -1652,7 +1653,7 @@ class m_dom {
     /** Check for a slave account
      */
     function check_slave_account($login, $pass) {
-        global $db, $err;
+        global $db;
         $db->query("SELECT * FROM slaveaccount WHERE login='$login' AND pass='$pass';");
         if ($db->next_record()) {
             return true;
@@ -1665,7 +1666,7 @@ class m_dom {
     /** Out (echo) the complete hosted domain list : 
      */
     function echo_domain_list($integrity = false) {
-        global $db, $err;
+        global $db;
         $db->query("SELECT domaine FROM domaines WHERE gesdns=1 ORDER BY domaine");
         $tt = "";
         while ($db->next_record()) {
@@ -1684,7 +1685,7 @@ class m_dom {
     /** Returns the complete hosted domain list : 
      */
     function get_domain_list($uid = -1) {
-        global $db, $err;
+        global $db;
         $uid = intval($uid);
         $res = array();
         $sql = "";
@@ -1703,7 +1704,7 @@ class m_dom {
      * @return array
      */
     function get_domain_all_summary() {
-        global $db, $err;
+        global $db;
         $res = array();
         $db->query("SELECT domaine, gesdns, gesmx, dns_action, zonettl FROM domaines ORDER BY domaine");
         while ($db->next_record()) {
@@ -1770,7 +1771,7 @@ class m_dom {
     /** Count all domains, for all users
      */
     function count_domains_all() {
-        global $db, $err, $cuid;
+        global $db;
         $db->query("SELECT COUNT(*) AS count FROM domaines;");
         if ($db->next_record()) {
             return $db->f('count');
@@ -1784,14 +1785,15 @@ class m_dom {
     /** Return the list of allowed slave accounts 
      */
     function enum_slave_account() {
-        global $db, $err;
+        global $db;
         $db->query("SELECT * FROM slaveaccount;");
         $res = array();
         while ($db->next_record()) {
             $res[] = $db->Record;
         }
-        if (!count($res))
+        if (!count($res)) {
             return false;
+        }
         return $res;
     }
 
@@ -1831,7 +1833,7 @@ class m_dom {
      * @access private
      */
     function lock() {
-        global $db, $err;
+        global $err;
         $err->log("dom", "lock");
         if ($this->islocked) {
             $err->raise("dom", _("--- Program error --- Lock already obtained!"));
@@ -1850,7 +1852,7 @@ class m_dom {
      * @access private
      */
     function unlock() {
-        global $db, $err;
+        global $err;
         $err->log("dom", "unlock");
         if (!$this->islocked) {
             $err->raise("dom", _("--- Program error --- No lock on the domains!"));
@@ -1914,10 +1916,10 @@ class m_dom {
      * No parameters needed 
      * */
     function alternc_export_conf() {
-        global $db, $err;
+        global $err;
         $err->log("dom", "export");
         $this->enum_domains();
-        $str="";
+        $str = "";
         foreach ($this->domains as $d) {
             $str.= "  <domaines>\n";
             $str.="   <nom>" . $d . "</nom>\n";
@@ -1975,6 +1977,7 @@ class m_dom {
         if ($only_apache) {
             $params.=" and dt.only_dns is false ";
         }
+        
 // BUG BUG BUG FIXME
 // Suppression de comptes -> membres existe pas -> domaines a supprimer ne sont pas lister
         $db->query("
@@ -2017,8 +2020,9 @@ order by
         global $dom;
         $d = array();
         foreach ($dom->domains_type_lst() as $k => $v) {
-            if ($v['only_dns'] == true)
+            if ($v['only_dns'] == true) {
                 continue;
+            }
             if (!$j = file_get_contents(ALTERNC_APACHE2_GEN_TMPL_DIR . '/' . strtolower($k) . '.conf')) {
                 die("Error: missing file for $k");
             }
@@ -2030,9 +2034,9 @@ order by
 
 // Launch old fashionned hooks as there was in AlternC 1.0
     function generate_conf_oldhook($action, $lst_sub, $sub_obj = null) {
-        if (is_null($sub_obj))
+        if (is_null($sub_obj)) {
             $sub_obj = $this->generation_parameters(null, false);
-
+        }
         if (!isset($lst_sub[strtoupper($action)]) || empty($lst_sub[strtoupper($action)])) {
             return false;
         }
@@ -2173,12 +2177,14 @@ order by
         // by subdomain
         $tmp = array();
         foreach ($da['sub'] as $sub) {
-          if ($sub['web_action']!='OK') continue;
+            if ($sub['web_action'] != 'OK') {
+                continue;
+            }
             if (!$sub['only_dns']) {
                 if (!isset($tmp[$sub['fqdn']])) {
                     $tmp[$sub['fqdn']] = 0;
                 }
-                $tmp[$sub['fqdn']]++;
+                $tmp[$sub['fqdn']] ++;
                 if ($tmp[$sub['fqdn']] >= 2) {
                     $errors[$sub['fqdn']] = sprintf(_("Problem on %s: there is more than 1 web configuration going to be generated for this sub-domain."), $sub['fqdn']);
                 }
