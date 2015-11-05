@@ -665,7 +665,7 @@ class m_bro {
             $cmd = "unzip -o " . escapeshellarg($file) . " -d " . escapeshellarg($dest) . " 2>&1";
             passthru($cmd, $ret);
         }
-        if (substr($lfile, -3) == ".gz") {
+        if (substr($lfile, -3) == ".gz" && substr($lfile, -7) != ".tar.gz") {
             echo "<p>" . _("Uncompressing through GUNZIP") . "</p><pre style=\"overflow: scroll; height: 200px\">";
             $cmd = "gunzip " . escapeshellarg($file) . " 2>&1";
             passthru($cmd, $ret);
