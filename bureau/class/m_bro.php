@@ -658,7 +658,7 @@ class m_bro {
             // need to specify the compression format
             echo "<p>" . _("Uncompressing through TAR") . "</p><pre style=\"overflow: scroll; height: 200px\">";
             $ret = 0;
-            passthru("tar -xf " . escapeshellarg($file) . " -C " . escapeshellarg($dest) . " 2>&1", $ret);
+            passthru("tar -xvf " . escapeshellarg($file) . " -C " . escapeshellarg($dest) . " 2>&1", $ret);
         }
         if (substr($lfile, -4) == ".zip") {
             echo "<p>" . _("Uncompressing through UNZIP") . "</p><pre style=\"overflow: scroll; height: 200px\">";
