@@ -584,9 +584,9 @@ chown -R alterncpanel:alterncpanel "/usr/share/alternc/panel/"
 
 # We ensure localhost is trusted to opendkim
 mkdir -p "/etc/opendkim/keys"
+touch /etc/opendkim/TrustedHosts /etc/opendkim/SigningTable /etc/opendkim/KeyTable
 grep -q "^127.0.0.1\$" /etc/opendkim/TrustedHosts || echo "127.0.0.1" >>/etc/opendkim/TrustedHosts
 grep -q "^localhost\$" /etc/opendkim/TrustedHosts || echo "localhost" >>/etc/opendkim/TrustedHosts
-touch /etc/opendkim/TrustedHosts /etc/opendkim/SigningTable /etc/opendkim/KeyTable
 
 # Add opendkim to service to restart
 SERVICES="$SERVICES opendkim"
