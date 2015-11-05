@@ -3,6 +3,7 @@
 # Rebuild the bind configuration's file
 # with the IP of the slave dns
 
+PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 FLAGFILE="/var/run/alternc/refresh_slave";
 TPL="/etc/alternc/templates/bind/slaveip.conf"
 TARGET="/var/lib/alternc/bind/slaveip.conf"
