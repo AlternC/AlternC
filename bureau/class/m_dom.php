@@ -1003,6 +1003,7 @@ class m_dom {
                     case "eu":
                     case "be":
                         $ligne = preg_replace("/^ *([^ ]*) \(.*\)$/", "\\1", trim($ligne));
+                        $tmp="";
                         if ($found) {
                             $tmp = trim($ligne);
                         }
