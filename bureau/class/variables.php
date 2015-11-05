@@ -113,9 +113,11 @@ function variable_set($name, $value, $comment = null) {
     $err->log('variable', 'variable_set', '+' . serialize($value) . '+' . $comment . '+');
 
     variable_init_maybe();
-
+    
     if (is_object($value) || is_array($value)) {
         $value2 = serialize($value);
+    } else {
+        $value2 = $value;
     }
     if (array_key_exists($name, $conf)) {
         $previous = $conf[$name];
@@ -125,10 +127,9 @@ function variable_set($name, $value, $comment = null) {
     if (!array_key_exists($name, $conf) || $value != $conf[$name]) {
         $conf[$name] = $value;
         if (empty($comment)) {
-            $query = "INSERT INTO variable (name, value) values ('" . $name . "', '" . addslashes($value2) . "') on duplicate key update name='$name', value='$value';";
+            $query = "INSERT INTO variable (name, value) values ('" . $name . "', '" . addslashes($value2) . "') on duplicate key update name='" . $name . "', value='" . addslashes($value2) . "';";
         } else {
-            $comment = mysql_real_escape_string($comment);
-            $query = "INSERT INTO variable (name, value, comment) values ('" . $name . "', '" . addslashes($value2) . "', '$comment') on duplicate key update name='$name', value='$value', comment='$comment';";
+            $query = "INSERT INTO variable (name, value, comment) values ('" . $name . "', '" . addslashes($value2) . "', '$comment') on duplicate key update name='" . $name . "', value='" . addslashes($value2) . "', comment='" . addslashes($comment) . "';";
         }
         $db->query($query);
         $hooks->invoke("hook_variable_set", array("name" => $name, "old" => $previous, "new" => $value));
