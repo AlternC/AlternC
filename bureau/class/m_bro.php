@@ -206,11 +206,15 @@ class m_bro {
             $err->raise('bro', _("This directory is not readable."));
             return false;
         }
+        clearstatcache(true);
         $c = array();
         if ($dir = @opendir($absolute)) {
             while (($file = readdir($dir)) !== false) {
                 if ($file != "." && $file != "..") {
-                    $c[] = array("name" => $file, "size" => $this->fsize($absolute . "/" . $file, $showdirsize), "date" => filemtime($absolute . "/" . $file), "type" => (!is_dir($absolute . "/" . $file)));
+                    $stat=stat($absolute . "/" . $file);
+                    $c[] = array("name" => $file, "size" => $this->fsize($absolute . "/" . $file, $showdirsize),
+                        "date" => filemtime($absolute . "/" . $file), "type" => (!is_dir($absolute . "/" . $file)),
+                        "permissions" => $stat[2] );
                 }
             }
             closedir($dir);
@@ -563,12 +567,14 @@ class m_bro {
                     $m = $m & (~ 0222); // ugo-w
                 }
                 $action->chmod($absolute . "/" . $d[$i], $m);
+                // We'd like to *wait* for this to complete, but since this is essentially asynchronous, we can't be sure easily
+                // So we chose to wait a little bit (2 sec) at the end of the loop...
                 if ($verbose) {
                     echo "chmod " . sprintf('%o', $m) . " file, was " . sprintf('%o', fileperms($absolute . "/" . $d[$i])) . " -- " . $perm[$i]['w'];
                 }
             }
         }
-
+        sleep(2);
         return true;
     }
 
@@ -873,6 +879,8 @@ class m_bro {
             include('foot.php');
             exit;
         }
+        $stat=stat($absolute);
+        if (!($stat[2] & 0000200)) return false;
         $finfo = finfo_open(FILEINFO_MIME_TYPE);
         $mime = finfo_file($finfo, $absolute);
         if (substr($mime, 0, 5) == "text/" || $mime == "application/x-empty" || $mime == "inode/x-empty") {

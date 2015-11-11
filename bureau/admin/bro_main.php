@@ -62,13 +62,13 @@ $R=$bro->convertabsolute($R,1);
 // on fait ?
 if (!empty($formu) && $formu) {
   switch ($formu) {
-    case 1:  // Cr�er le r�pertoire $R.$nomfich
+    case 1:  // Create the folder $R.$nomfich
       if (!$bro->CreateDir($R,$nomfich)) {
         $error = $err->errstr();
       }
       $p=$bro->GetPrefs();
       break;
-    case 6: // Cr�er le fichier $R.$nomfich
+    case 6: // Create the file $R.$nomfich
       if (!$bro->CreateFile($R,$nomfich)) {
         $error = $err->errstr();
       }
@@ -133,7 +133,7 @@ if (!empty($formu) && $formu) {
       }
       break;
     case 7:  // Changement de permissions [ML]
-      if (!@$bro->ChangePermissions($R, $d, $perm)) {
+      if (!$bro->ChangePermissions($R, $d, $perm)) {
         $error = $err->errstr();
       }
       break;
@@ -331,7 +331,7 @@ function actmoveto_not_empty() {
                   <?php } ?>
                   <th></th>
                   </tr></thead><tbody>
-                  <?php
+<?php
 
         for($i=0;$i<count($c);$i++) {
           echo "<tr class=\"lst\">\n";
@@ -348,7 +348,11 @@ function actmoveto_not_empty() {
               echo "bro_downloadfile.php?dir=".urlencode($R)."&amp;file=".urlencode($c[$i]["name"]);
             }
             echo "\">"; ehe($c[$i]["name"]); 
-            echo"</a></td>\n";
+            echo"</a>";
+            if (!($c[$i]["permissions"] & 0000200)) {
+                echo " (<a href=\"bro_main.php?actperms=Permissions&R=".urlencode($R)."&amp;formu=2&amp;d[]=".urlencode($c[$i]["name"])."\">"._("protected")."</a>)";
+            }
+            echo "</td>\n";
             echo "  <td>".format_size($c[$i]["size"])."</td>";
             echo "<td>".format_date(_('%3$d-%2$d-%1$d %4$d:%5$d'),date("Y-m-d H:i:s",$c[$i]["date"]))."<br /></td>";
             if ($p["showtype"]) {
