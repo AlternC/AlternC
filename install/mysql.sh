@@ -45,11 +45,23 @@
 #
 # Those values are used to set the username/passwords...
 
+MYSQL_CONFIG="/etc/alternc/my.cnf"
+MYSQL_MAIL_CONFIG="/etc/alternc/my_mail.cnf"
+
+# We start by checking if an already configured mysql works, in that case we DON'T TOUCH IT
+if [ -f "$MYSQL_CONFIG" ]
+then
+    mysql --defaults-file="$MYSQL_CONFIG" -e "SELECT COUNT(*) FROM membres" >/dev/null
+    if [ "$?" = "0" ]
+    then
+	echo "MySQL already setup, schema & grant install skipped"
+	return 
+    fi
+fi
+
 # The grant all is the most important right needed in this script.
 echo "Granting users..."
 
-MYSQL_CONFIG="/etc/alternc/my.cnf"
-MYSQL_MAIL_CONFIG="/etc/alternc/my_mail.cnf"
 
 . /etc/alternc/local.sh
 # the purpose of this "grant" is to make sure that the generated my.cnf works
