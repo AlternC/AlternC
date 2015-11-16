@@ -11,4 +11,5 @@ if [ -e "$INOTIFY_DO_ACTION" ] ; then
          $LOGGER -t ALTERNC do_actions
     fi
     /usr/lib/alternc/do_actions.php
+    rm "$INOTIFY_DO_ACTION"
 fi
