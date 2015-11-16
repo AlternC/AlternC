@@ -385,7 +385,7 @@ INSERT IGNORE INTO tld VALUES ('asia', 1);
 --
 -- if comment is null, then the variable is internal and will not show
 -- up in the generic configuration panel
-CREATE TABLE `variable` (
+CREATE TABLE IF NOT EXISTS `variable` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(48) NOT NULL DEFAULT '',
   `value` longtext NOT NULL,
@@ -393,7 +393,7 @@ CREATE TABLE `variable` (
   `type` text,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=MyISAM;
+) ENGINE=MyISAM COMMENT='Stores AlternC system variable used by panel and scripts, configurable through the panel';
 
 --
 -- Table structure for table `dbusers`

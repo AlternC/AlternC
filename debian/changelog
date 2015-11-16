@@ -2,8 +2,14 @@ alternc (3.1.9) oldoldstable; urgency=low
 
   * fix missing GLOBALS in various places
   * fix non-installed default_spf_value and default_dmarc_value in variables
+  * fix restarting opendkim at each domain in update_domains instead of only once in the end
+  * fix the infinite loop of inotify_do_actions.sh
+  * enh added a (protected) message saying a file is write-protected
+  * fix a HTML graphical bug when uncompression a tar.gz file
+  * fix crating /etc/opendkim/TrustedHosts BEFORE searching in it
+  * enh refactoring of the code using netbeans IDE auto-formatting + manual smoothing of class code
 
- -- Benjamin Sonntag <benjamin@sonntag.fr>  Wed,  3 Sep 2015 15:53:16 +0200
+ -- Benjamin Sonntag <benjamin@sonntag.fr>  Mon, 16 Nov 2015 08:52:16 +0100
 
 alternc (3.1.8) oldoldstable; urgency=low
 
