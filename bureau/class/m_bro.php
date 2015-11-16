@@ -567,13 +567,13 @@ class m_bro {
                     $m = $m & (~ 0222); // ugo-w
                 }
                 $action->chmod($absolute . "/" . $d[$i], $m);
-                // We'd like to *wait* for this to complete, but since this is essentially asynchronous, we can't be sure easily
-                // So we chose to wait a little bit (2 sec) at the end of the loop...
                 if ($verbose) {
                     echo "chmod " . sprintf('%o', $m) . " file, was " . sprintf('%o', fileperms($absolute . "/" . $d[$i])) . " -- " . $perm[$i]['w'];
                 }
             }
         }
+        // We'd like to *wait* for this to complete, but since this is essentially asynchronous, we can't be sure easily
+        // So we chose to wait a little bit (2 sec) at the end of the loop...
         sleep(2);
         return true;
     }
