@@ -740,10 +740,11 @@ CREATE TABLE IF NOT EXISTS `actions` (
 CREATE TABLE IF NOT EXISTS `alternc_status` (
   `name` varchar(48) NOT NULL DEFAULT '',
   `value` longtext NOT NULL,
-  PRIMARY KEY (`name`),
-  KEY `name` (`name`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`name`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT = 'stores current AlternC schema version number';
 
+-- make it re-exec-proof
+DELETE FROM alternc_status WHERE name='alternc_version';
 INSERT INTO alternc_status SET name='alternc_version',value='3.4.1.sh';
 
 

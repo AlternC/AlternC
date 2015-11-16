@@ -48,20 +48,8 @@
 MYSQL_CONFIG="/etc/alternc/my.cnf"
 MYSQL_MAIL_CONFIG="/etc/alternc/my_mail.cnf"
 
-# We start by checking if an already configured mysql works, in that case we DON'T TOUCH IT
-if [ -f "$MYSQL_CONFIG" ]
-then
-    mysql --defaults-file="$MYSQL_CONFIG" -e "SELECT COUNT(*) FROM membres" >/dev/null
-    if [ "$?" = "0" ]
-    then
-	echo "MySQL already setup, schema & grant install skipped"
-	return 
-    fi
-fi
-
 # The grant all is the most important right needed in this script.
 echo "Granting users..."
-
 
 . /etc/alternc/local.sh
 # the purpose of this "grant" is to make sure that the generated my.cnf works
@@ -218,7 +206,7 @@ echo "Checking for MySQL connectivity"
 $mysql -e "SHOW TABLES" >/dev/null && echo "MYSQL.SH OK!" || echo "MYSQL.SH FAILED: database user setup failed"
 # Final mysql setup: db schema
 echo "installing AlternC schema in $database..."
-$mysql < /usr/share/alternc/install/mysql.sql || echo cannot load database schema
+$mysql < /usr/share/alternc/install/mysql.sql || echo "Error loading database schema, continuing..."
 $mysql <<EOF
 $grant_mail
 EOF
