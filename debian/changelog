@@ -8,6 +8,7 @@ alternc (3.1.9) oldoldstable; urgency=low
   * fix a HTML graphical bug when uncompression a tar.gz file
   * fix crating /etc/opendkim/TrustedHosts BEFORE searching in it
   * enh refactoring of the code using netbeans IDE auto-formatting + manual smoothing of class code
+  * fix phpmyadmin sso not working when /etc/apache2/conf.d/phpmyadmin.conf is enabled
 
  -- Benjamin Sonntag <benjamin@sonntag.fr>  Mon, 16 Nov 2015 08:52:16 +0100
 
