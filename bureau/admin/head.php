@@ -60,7 +60,7 @@ $favicon = variable_get('favicon', 'favicon.ico' ,'You can specify a favicon, fo
 
 </head>
 <body onload="prettyPrint()">
-<?
+<?php
 
 if ($isinvited && isset($oldid) && !empty($oldid) && $oldid!=$cuid ) {
   echo "<div align=center><p class='alert alert-warning'>";
