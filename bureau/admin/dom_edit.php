@@ -333,7 +333,7 @@ if (!$r['noerase']) {
    <p class="alert alert-info"><?php __("This domain is locked, only a server administrator can unlock it."); ?></p>
 </div>
     <?php
-}  ?>
+} ?>
 <script type="text/javascript">
 //document.forms['main'].sub.focus(); // not with tabs
 
