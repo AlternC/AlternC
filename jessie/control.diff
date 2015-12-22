@@ -1,0 +1,38 @@
+--- control.wheezy	2015-12-22 12:11:43.355751408 +0100
++++ control	2015-12-22 12:12:45.489205807 +0100
+@@ -15,7 +15,7 @@
+            , bash (>= 4)
+            , acl
+ Depends: debianutils (>= 1.13.1)
+-       , apache2-mpm-itk
++       , libapache2-mpm-itk
+        , libapache2-mod-php5
+        , php5-mysql
+        , phpmyadmin
+@@ -39,7 +39,7 @@
+        , adduser
+        , mysql-client
+        , dnsutils
+-       , dovecot-common (>=1:2.1.7)
++       , dovecot-core (>=1:2.1.7)
+        , dovecot-imapd
+        , dovecot-pop3d
+        , dovecot-mysql
+@@ -102,7 +102,7 @@
+ Architecture: all
+ Pre-depends: debconf (>= 0.5.00) | debconf-2.0, acl
+ Depends: debianutils (>= 1.13.1)
+-         , apache2-mpm-itk
++         , libapache2-mpm-itk
+          , libapache2-mod-php5
+          , php5-mysql
+          , phpmyadmin
+@@ -127,7 +127,7 @@
+          , adduser
+          , mysql-client
+          , sudo
+-         , dovecot-common (>= 1:2.1.7)
++         , dovecot-core (>= 1:2.1.7)
+          , dovecot-imapd
+          , dovecot-pop3d
+          , dovecot-mysql

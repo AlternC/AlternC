@@ -1,0 +1,13 @@
+--- changelog	2014-06-24 13:42:50.234304438 +0200
++++ changelog.wheezy	2014-06-24 13:43:51.978313552 +0200
+@@ -1,1 +1,8 @@
++alternc (3.3.9) stable; urgency=low
++
++  * Version identical to 3.1 for Squeeze
++  * Includes small patches / dependency for apache & dovecot 2.0 for Jessie
++
++ -- Benjamin Sonntag <benjamin@sonntag.fr>  Wed,  3 Sep 2015 15:54:12 +0200
++
+ alternc (3.2.9) oldstable; urgency=low
+
+  * Version identical to 3.1 for Squeeze
