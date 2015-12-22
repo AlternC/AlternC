@@ -13,3 +13,5 @@ patch <../jessie/changelog.diff
 popd
 
 cp vhost.conf ../etc/alternc/templates/apache2/
+cp bureau.conf ../etc/alternc/templates/alternc/
+cp alternc.install ../install/
