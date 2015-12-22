@@ -193,14 +193,14 @@ display:none;
 <div class="info">
 <h4 class="toggle toggle-next"><a href="javascript:void(0)" class="btn"> <?php __("Need open DNS Slave servers?"); ?> &#9660;</a></h4>
 <div class="info-hide">
-<p><? __("We offer free of charge DNS servers for alternc users."); ?></p>
-<h2><? __("How does it work?"); ?> </h2>
+<p><?php __("We offer free of charge DNS servers for alternc users."); ?></p>
+<h2><?php __("How does it work?"); ?> </h2>
 <ol>
-	<li><? printf(_("<strong>Give access to the alternc.net servers.</strong> Follow the instructions on <a href='%s' target='blank'>this page</a>. They will help you to configure this page and configure your alternc.net account."),"http://aide-alternc.org/go.php?hid=400"); ?></li>
-	<li><?= sprintf(_("<strong>Subscribe to alternc.net.</strong> Go to <a href='%s' target='_blank' class='btn btn-inline btn-link'>the alternc.net site</a> to use the DNS servers provided for free by the AlternC association and enter the required informations for each server you want to connect to the service."),"http://alternc.net/")?> </li>
+	<li><?php printf(_("<strong>Give access to the alternc.net servers.</strong> Follow the instructions on <a href='%s' target='blank'>this page</a>. They will help you to configure this page and configure your alternc.net account."),"http://aide-alternc.org/go.php?hid=400"); ?></li>
+	<li><?php printf(_("<strong>Subscribe to alternc.net.</strong> Go to <a href='%s' target='_blank' class='btn btn-inline btn-link'>the alternc.net site</a> to use the DNS servers provided for free by the AlternC association and enter the required informations for each server you want to connect to the service."),"http://alternc.net/"); ?> </li>
 </ol>
 <br />
-<p><? __("The alternc.net servers will take care of transfering and distributing to the world your domains zones."); ?> </p>
+<p><?php __("The alternc.net servers will take care of transfering and distributing to the world your domains zones."); ?> </p>
 </div><!-- info-hide -->
 </div><!-- info  -->
 <?php include_once("foot.php"); ?>
