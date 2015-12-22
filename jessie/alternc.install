@@ -309,8 +309,8 @@ if [ -x /usr/sbin/apache2 ]; then
             a2enmod ssl
             s="apache2"
         fi
-        if [ ! -h /etc/apache2/conf-enabled/alternc-ssl.conf ] && [ -e /etc/apache2/conf-enabled/ ]; then
-            ln -sf /etc/alternc/apache2-ssl.conf /etc/apache2/conf-enabled/alternc-ssl.conf
+        if [ ! -h /etc/apache2/conf-available/alternc-ssl.conf ] && [ -e /etc/apache2/conf-available/ ]; then
+            ln -sf /etc/alternc/apache2-ssl.conf /etc/apache2/conf-available/alternc-ssl.conf
 	    a2enconf alternc-ssl
             s="apache2"
         fi
