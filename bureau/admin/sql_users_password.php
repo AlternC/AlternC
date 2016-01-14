@@ -52,8 +52,13 @@ if (! empty($error) ) {
 
 ?>
 
-<form method="post" action="sql_users_dopassword.php">
+<form method="post" action="sql_users_dopassword.php" autocomplete="off">
 <input type="hidden" name="id" value="<?php echo $id; ?>" />
+
+<!-- honeypot fields -->
+<input type="text" style="display: none" id="fakeUsername" name="fakeUsername" value="" />
+<input type="password" style="display: none" id="fakePassword" name="fakePassword" value="" />
+
 <table cellspacing="0" cellpadding="4" class="tedit">
   <tr>
     <th><label for="password"><?php __("Password"); ?></label></th>

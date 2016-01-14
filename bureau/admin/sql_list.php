@@ -110,8 +110,4 @@ for($i=0;$i<count($rdb);$i++) {
 }
 }
 ?>
-<script type="text/javascript">
-//document.forms['main'].pass.focus();
-//document.forms['main'].setAttribute('autocomplete', 'off');
-</script>
 <?php include_once("foot.php"); ?>

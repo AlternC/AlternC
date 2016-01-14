@@ -59,7 +59,12 @@ if (isset($error) && $error) {
 	echo "<p class=\"alert alert-danger\">$error</p>";
 }
 ?>
-<form method="post" action="adm_doadd.php" id="main" name="main">
+<form method="post" action="adm_doadd.php" id="main" name="main" autocomplete="off">
+
+<!-- honeypot fields -->
+<input type="text" style="display: none" id="fakeUsername" name="fakeUsername" value="" />
+<input type="password" style="display: none" id="fakePassword" name="fakePassword" value="" />
+
 <table class="tedit">
 <tr><th><label for="login"><?php __("Username"); ?></label></th><td>
 	<input type="text" class="int" name="login" id="login" value="<?php ehe($login); ?>" size="20" maxlength="16" />
@@ -144,7 +149,6 @@ if (isset($error) && $error) {
 </form>
 <script type="text/javascript">
  document.forms['main'].login.focus();
- document.forms['main'].setAttribute('autocomplete', 'off');
 </script>
 
 <?php include_once("foot.php"); ?>

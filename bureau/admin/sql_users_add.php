@@ -53,7 +53,12 @@ getFields($fields);
 		}
 	}
 ?>
-<form method="post" action="sql_users_doadd.php" id="main" name="main">
+<form method="post" action="sql_users_doadd.php" id="main" name="main" autocomplete="off">
+
+<!-- honeypot fields -->
+<input type="text" style="display: none" id="fakeUsername" name="fakeUsername" value="" />
+<input type="password" style="display: none" id="fakePassword" name="fakePassword" value="" />
+
 <table class="tedit">
 <tr>
   <th><label for="usern"><?php __("Username"); ?></label></th>
@@ -80,7 +85,5 @@ getFields($fields);
   } else {
     document.forms['main'].usern.focus();
   }
-  document.forms['main'].setAttribute('autocomplete', 'off');
-
 </script>
 <?php include_once("foot.php"); ?>

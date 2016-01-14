@@ -77,7 +77,12 @@ if (!$mem->user["canpass"]) {
 echo "<p>";
  __("help_chg_passwd"); ?>
 </p>
-<form method="post" action="mem_passwd.php" name="main" id="main">
+<form method="post" action="mem_passwd.php" name="main" id="main" autocomplete="off">
+
+<!-- honeypot fields -->
+<input type="text" style="display: none" id="fakeUsername" name="fakeUsername" value="" />
+<input type="password" style="display: none" id="fakePassword" name="fakePassword" value="" />
+
 <table border="1" cellspacing="0" cellpadding="4" class="tedit" >
 <tr><th><?php __("Old password"); ?></th><td><input type="password" class="int" name="oldpass" value="<?php isset($oldpass) ? : $oldpass=""; echo $oldpass; ?>" size="20" maxlength="128" /></td></tr>
 <tr><th><?php __("New password"); ?> (1)</th><td><input type="password" class="int" autocomplete="off" id="newpass" name="newpass" value="<?php isset($newpass) ? : $newpass=""; echo $newpass;  ?>" size="20" maxlength="60" /><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#newpass","#newpass2"); ?></td></tr>

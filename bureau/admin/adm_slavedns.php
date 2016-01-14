@@ -153,7 +153,12 @@ if (is_array($c)) { ?>
 
 <p><?php __("If you want to allow a new server to access your domain list, give him an account."); ?></p>
 
-<form method="post" action="adm_slavedns.php" name="main" id="main">
+<form method="post" action="adm_slavedns.php" name="main" id="main" autocomplete="off">
+
+<!-- honeypot fields -->
+<input type="text" style="display: none" id="fakeUsername" name="fakeUsername" value="" />
+<input type="password" style="display: none" id="fakePassword" name="fakePassword" value="" />
+
   <table class="tedit">
     <tr><th><label for="newlogin"><?php __("Login"); ?></label></th><th><label for="newpass"><?php __("Password"); ?></label></th></tr>
     <tr>
@@ -165,7 +170,6 @@ if (is_array($c)) { ?>
 </form>
 
 <script type="text/javascript">
-  document.forms['main'].setAttribute('autocomplete', 'off');
   document.forms['main'].newip.focus();
 $(function(){
 	$(".toggle-next").on("click",function(){

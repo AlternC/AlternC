@@ -90,7 +90,12 @@ for($i=0;$i<count($c);$i++) { ?>
 </table>
     <?php } ?>
 <p><?php __("If you want to allow a new server to access your mx-hosted domain list, give him an account."); ?></p>
-<form method="post" action="adm_mxaccount.php" name="main" id="main">
+<form method="post" action="adm_mxaccount.php" name="main" id="main" autocomplete="off">
+
+<!-- honeypot fields -->
+<input type="text" style="display: none" id="fakeUsername" name="fakeUsername" value="" />
+<input type="password" style="display: none" id="fakePassword" name="fakePassword" value="" />
+
 <table class="tedit">
 <tr><th><label for="newlogin"><?php __("Login"); ?></label></th><th><label for="newpass"><?php __("Password"); ?></label></th></tr>
 <tr>
@@ -106,6 +111,5 @@ for($i=0;$i<count($c);$i++) { ?>
 
 <script type="text/javascript">
 document.forms['main'].newlogin.focus();
-document.forms['main'].setAttribute('autocomplete', 'off');
 </script>
 <?php include_once("foot.php"); ?>

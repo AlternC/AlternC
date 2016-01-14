@@ -61,7 +61,12 @@ if (isset($error)) {
 }
 ?>
 
-<form action="mail_doedit.php" method="post" name="main" id="main">
+<form action="mail_doedit.php" method="post" name="main" id="main" autocomplete="off">
+
+<!-- honeypot fields -->
+<input type="text" style="display: none" id="fakeUsername" name="fakeUsername" value="" />
+<input type="password" style="display: none" id="fakePassword" name="fakePassword" value="" />
+
 <input type="hidden" name="mail_id" value="<?php echo $mail_id; ?>" />
 <table class="tedit">
   <tr><th colspan="2"><b><?php __("Is this email enabled?"); ?></b></th></tr>
@@ -93,8 +98,8 @@ if (isset($error)) {
       <div id="poptbl">
 	<table class="tedit" >
           <tr id='mail_edit_pass' style='display: none;'><td colspan='2'><a href='javascript:mail_edit_pass();'><?php __("Click here to edit the existing password");?></a></td></tr>
-	  <tr id='mail_edit_pass1'><td><label for="pass"><?php __("Enter a POP/IMAP password"); ?></label></td><td><input type="password" class="int" autocomplete="off" name="pass" id="pass" value="" size="20" maxlength="32" autocomplete="off" /><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#pass","#passconf"); ?></td></tr>
-	  <tr id='mail_edit_pass2'><td><label for="passconf"><?php __("Confirm password"); ?></label></td><td><input type="password" class="int" autocomplete="off" name="passconf" id="passconf" value="" size="20" maxlength="32" autocomplete="off" /></td></tr>
+	  <tr id='mail_edit_pass1'><td><label for="pass"><?php __("Enter a POP/IMAP password"); ?></label></td><td><input type="password" class="int" autocomplete="off" name="pass" id="pass" value="" size="20" maxlength="32" /><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#pass","#passconf"); ?></td></tr>
+	  <tr id='mail_edit_pass2'><td><label for="passconf"><?php __("Confirm password"); ?></label></td><td><input type="password" class="int" autocomplete="off" name="passconf" id="passconf" value="" size="20" maxlength="32" /></td></tr>
 	  <tr><td><label for="quotamb"><?php __("Maximum allowed size of this Mailbox"); ?></label></td><td><input type="text" class="int intleft" style="text-align: right" name="quotamb" id="quotamb" value="<?php ehe($quotamb); ?>" size="7" maxlength="6" /><span class="int intright"><?php __("MB"); ?></span></td></tr>
 	</table>
       </div>
@@ -122,15 +127,7 @@ foreach($html as $h) echo $h;
 }
 ?>
 <script type="text/javascript">
-    $(document).ready(function() {
-    $('#email').focus();
-    <?php if (!$islocal) { ?>
-    popoff();
-    <?php } ?>
-    $('#turnoff').hide();
-    $('#pass').attr('autocomplete','off');
-    $('#passconf').attr('autocomplete','off');
-});
+
 function popoff() {
     $('#turnoff').show(); 
     $('#poptbl').addClass('grey'); 

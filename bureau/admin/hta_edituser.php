@@ -43,7 +43,12 @@ getFields($fields);
 
 <?php if (!empty($error) ) { echo "<p class=\"alert alert-danger\">$error</p>"; } ?>
 
-<form method="post" action="hta_doedituser.php" name="main" id="main">
+<form method="post" action="hta_doedituser.php" name="main" id="main" autocomplete="off">
+
+<!-- honeypot fields -->
+<input type="text" style="display: none" id="fakeUsername" name="fakeUsername" value="" />
+<input type="password" style="display: none" id="fakePassword" name="fakePassword" value="" />
+
   <input type="hidden" name="dir" value="<?php echo $dir ?>">
   <input type="hidden" name="user" value="<?php echo $user ?>">
   <table border="1" cellspacing="0" cellpadding="4" class='tedit'>
@@ -70,7 +75,6 @@ getFields($fields);
 
 <script type="text/javascript">
   document.forms['main'].newpass.focus();
-  document.forms['main'].setAttribute('autocomplete', 'off');
 </script>
 
 <?php include_once("foot.php"); ?>

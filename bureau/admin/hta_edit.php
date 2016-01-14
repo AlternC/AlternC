@@ -90,7 +90,12 @@ for($i=0;$i<count($r);$i++){ ?>
 <fieldset>
   <legend><h3><?php __("Adding an authorized user"); ?></h3></legend>
 
-  <form method="post" action="hta_doadduser.php" name="main" id="main">
+  <form method="post" action="hta_doadduser.php" name="main" id="main" autocomplete="off">
+
+<!-- honeypot fields -->
+<input type="text" style="display: none" id="fakeUsername" name="fakeUsername" value="" />
+<input type="password" style="display: none" id="fakePassword" name="fakePassword" value="" />
+
     <table class="tedit">
       <tr>
         <th><input type="hidden" name="dir" value="<?php echo $dir ?>" /><?php __("Folder"); ?></th>
@@ -118,7 +123,6 @@ for($i=0;$i<count($r);$i++){ ?>
   
 <script type="text/javascript">
   document.forms['main'].user.focus();
-  document.forms['main'].setAttribute('autocomplete', 'off'); 
 </script>
 
 <?php include_once("foot.php"); ?>

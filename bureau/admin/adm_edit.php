@@ -62,7 +62,12 @@ if (!$r=$admin->get($uid)) {
     echo "<p class=\"alert alert-danger\">$error</p>";
   }
 ?>
-<form method="post" action="adm_doedit.php" name="main" id="main">
+<form method="post" action="adm_doedit.php" name="main" id="main" autocomplete="off">
+
+<!-- honeypot fields -->
+<input type="text" style="display: none" id="fakeUsername" name="fakeUsername" value="" />
+<input type="password" style="display: none" id="fakePassword" name="fakePassword" value="" />
+
 <table class="tedit">
 <tr>
 	<th><input type="hidden" name="uid" value="<?php echo $uid ?>" />
@@ -173,6 +178,5 @@ if ($c=$admin->get($r["creator"])) {
 </p>
 <script type="text/javascript">
  document.forms['main'].pass.focus();
- document.forms['main'].setAttribute('autocomplete', 'off');
 </script>
 <?php include_once("foot.php"); ?>

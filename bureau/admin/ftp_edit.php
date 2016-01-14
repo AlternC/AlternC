@@ -64,7 +64,12 @@ if (isset($error) && $error) {
 	echo "<p class=\"alert alert-danger\">$error</p>";
 }
 ?>
-<form method="post" action="ftp_doedit.php" name="main" id="main">
+<form method="post" action="ftp_doedit.php" name="main" id="main" autocomplete="off">
+
+<!-- honeypot fields -->
+<input type="text" style="display: none" id="fakeUsername" name="fakeUsername" value="" />
+<input type="password" style="display: none" id="fakePassword" name="fakePassword" value="" />
+
   <input type="hidden" name="id" value="<?php echo $id ?>" />
   <input type="hidden" name="create" value="<?php echo $create ?>" />
   <table border="1" cellspacing="0" cellpadding="4" class="tedit">
@@ -102,7 +107,6 @@ if (isset($error) && $error) {
 
 <script type="text/javascript">
 document.forms['main'].login.focus();
-document.forms['main'].setAttribute('autocomplete', 'off'); 
 
 function ftp_edit_pass_toggle() {
   $('#ftp_tr_pass1').toggle();

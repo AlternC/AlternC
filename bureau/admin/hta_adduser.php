@@ -44,7 +44,12 @@ getFields($fields);
 	}
 ?>
 
-<form method="post" action="hta_doadduser.php" name="main" id="main">
+<form method="post" action="hta_doadduser.php" name="main" id="main" autocomplete="off">
+
+<!-- honeypot fields -->
+<input type="text" style="display: none" id="fakeUsername" name="fakeUsername" value="" />
+<input type="password" style="display: none" id="fakePassword" name="fakePassword" value="" />
+
 <table border="1" cellspacing="0" cellpadding="4" class='tedit'>
 	<tr>
 		<th><input type="hidden" name="dir" value="<?php ehe($dir); ?>" /><?php __("Folder"); ?></th>
