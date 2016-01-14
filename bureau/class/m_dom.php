@@ -1397,7 +1397,7 @@ class m_dom {
 
         if (!$this->check_type_value($type, $dest)) {
             //plutot verifier si la chaine d'erreur est vide avant de raise sinon sa veut dire que l(erruer est deja remonté
-            #$err->raise("dom",_("Invalid domain type selected, please check"));
+	  // error raised by check_type_value
             return false;
         }
 

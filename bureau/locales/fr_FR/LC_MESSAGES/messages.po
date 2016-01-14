@@ -4640,7 +4640,7 @@ msgstr "Adresse IP invalide"
 msgid ""
 "The name you entered is incorrect or not fully qualified (shall end with a .)"
 msgstr ""
-"Le dossier que vous avez entré est incorrect ou non qualifié (doit terminé "
+"Le nom que vous avez entré est incorrect ou non qualifié (doit terminer "
 "par un .)"
 
 #: ../class/m_dom.php:1316
