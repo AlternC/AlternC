@@ -1,3 +1,13 @@
+alternc (3.1.10) oldoldstable; urgency=low
+
+  * fix not showing dropdown when installing second domain in some case. #28
+  * fix password autocomplete fix for Firefox (HoneypotField) #27
+  * fix underscore not allowed in the middle of a domain name #26
+  * fix Cname not ending with . is now an error #25
+  * fix Show a warning when creating a non-working email (not pop, not alias) #18
+
+ -- Benjamin Sonntag <benjamin@sonntag.fr>  Fri, 15 Jan 2016 15:26:00 +0100
+
 alternc (3.1.9) oldoldstable; urgency=low
 
   * fix missing GLOBALS in various places
