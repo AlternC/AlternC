@@ -720,6 +720,9 @@ ORDER BY
         if (isset($red) && $red) {
             $db->query("INSERT INTO recipient SET address_id=" . $mail_id . ", recipients='" . addslashes($red) . "';");
         }
+	if (!$islocal && !$red) {
+	  $err->raise("mail", _("Warning: you created an email which is not an alias, and not a POP/IMAP mailbox. This is certainly NOT what you want to do. To fix this, edit the email address and check 'Yes' in POP/IMAP account, or set some recipients in the redirection field."));
+	}
         return true;
     }
 

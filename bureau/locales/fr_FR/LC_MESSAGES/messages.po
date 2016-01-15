@@ -5523,3 +5523,6 @@ msgstr "Fichier Real Media"
 
 #~ msgid "The name you entered is incorrect"
 #~ msgstr "Le nom que vous avez entré est incorrect"
+
+msgid "Warning: you created an email which is not an alias, and not a POP/IMAP mailbox. This is certainly NOT what you want to do. To fix this, edit the email address and check 'Yes' in POP/IMAP account, or set some recipients in the redirection field."
+msgstr "Attention : vous avez créé une adresse email qui n'est ni un alias, ni une boite POP/IMAP. Ce n'est probablement PAS ce que vous vouliez faire. Pour corriger cela, modifiez l'adresse mail, et choisissez 'Oui' dans Compte POP/IMAP ou entrez des destinataires dans le champ redirections."
