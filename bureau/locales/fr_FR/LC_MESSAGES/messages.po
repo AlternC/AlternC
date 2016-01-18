@@ -4638,10 +4638,10 @@ msgstr "Adresse IP invalide"
 
 #: ../class/m_dom.php:1308
 msgid ""
-"The name you entered is incorrect or not fully qualified (shall end with a .)"
+"The name you entered is incorrect or not fully qualified (it must end with a DOT, like example.com<b>.</b>)"
 msgstr ""
-"Le nom que vous avez entré est incorrect ou non qualifié (doit terminer "
-"par un .)"
+"Le nom que vous avez entré est incorrect ou non qualifié (il doit se terminer "
+"par un POINT, comme exemple.com<b>.</b>)"
 
 #: ../class/m_dom.php:1316
 msgid "The TXT value you entered is incorrect"

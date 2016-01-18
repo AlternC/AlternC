@@ -1305,7 +1305,7 @@ class m_dom {
                 if (checkcname($value)) {
                     return true;
                 } else {
-                    $err->raise("dom", _("The name you entered is incorrect or not fully qualified (shall end with a .)"));
+                    $err->raise("dom", _("The name you entered is incorrect or not fully qualified (it must end with a DOT, like example.com<b>.</b>)"));
                     return false;
                 }
                 break;
