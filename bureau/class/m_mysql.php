@@ -554,14 +554,12 @@ class m_mysql {
      * @access private
      */
     function get_db_size($dbname) {
-        global $db;
-
         $this->dbus->query("SHOW TABLE STATUS FROM `$dbname`;");
         $size = 0;
-        while ($db->next_record()) {
-            $size += $db->f('Data_length') + $db->f('Index_length');
-            if ($db->f('Engine') != 'InnoDB') {
-                $size += $db->f('Data_free');
+        while ($this->dbus->next_record()) {
+            $size += $this->dbus->f('Data_length') + $this->dbus->f('Index_length');
+            if ($this->dbus->f('Engine') != 'InnoDB') {
+                $size += $this->dbus->f('Data_free');
             }
         }
         return $size;
