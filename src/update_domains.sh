@@ -1,5 +1,6 @@
 #!/bin/bash
 # Update domain next-gen by fufroma
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 for CONFIG_FILE in \
       /etc/alternc/local.sh \
