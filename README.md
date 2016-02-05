@@ -26,7 +26,24 @@ This project native tongue is French. However, the packages are available at lea
 
 * The web control panel pages written in php are located in [bureau/admin](bureau/admin) and the associated PHP classes doing the stuff are in [bureau/class](bureau/class).
 
+## Nightly build
 
+We have 3 nightly build repositories:
+* jessie - [stable 3.3](http://stable-3-3.nightly.alternc.org/)
+* wheezy - [stable 3.2](http://stable-3-2.nightly.alternc.org/)
+* squeeze - [stable 3.1](http://stable-3-1.nightly.alternc.org/)
+
+To use one of them, create a file named `/etc/apt/sources.list.d/alternc-nightly-stable-3.3.list` (for debian jessie) as follow :
+
+```
+ deb http://stable-3-3.nightly.alternc.org/ latest/
+```
+
+The repository and the packages are signed by the pgp key of AlternC nightly build user :
+
+```
+wget http://stable-3-3.nightly.alternc.org/nightly.key -O - | apt-key add - 
+```
 
 ## License
 
