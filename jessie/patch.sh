@@ -15,3 +15,5 @@ popd
 cp vhost.conf ../etc/alternc/templates/apache2/
 cp bureau.conf ../etc/alternc/templates/alternc/
 cp alternc.install ../install/
+cp apache2.conf ../etc/alternc/templates/alternc/
+cp ssl.conf ../ssl/
