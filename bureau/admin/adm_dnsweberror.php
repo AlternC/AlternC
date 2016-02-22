@@ -61,7 +61,7 @@ include_once("head.php");
 
 <?php 
 $pair=0;
-$db->query("select sd.compte, m.login, sd.domaine, if(length(sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine) as fqdn, sd.valeur, dt.description, sd.web_result from sub_domaines sd,membres m, domaines_type dt where sd.web_action='OK' and length(sd.web_result)<>0 and upper(dt.name)=upper(sd.type) order by sd.domaine, sd.sub, sd.valeur;");
+$db->query("select sd.compte, m.login, sd.domaine, if(length(sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine) as fqdn, sd.valeur, dt.description, sd.web_result from sub_domaines sd,membres m, domaines_type dt where sd.web_action='OK' and length(sd.web_result)<>0 and upper(dt.name)=upper(sd.type) and sd.compte=m.uid order by sd.domaine, sd.sub, sd.valeur;");
 
 while($db->next_record()) {  ?>
 <tr class="lst">

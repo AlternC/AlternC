@@ -121,6 +121,11 @@ host_create() {
         -e "s#%%user%%#$USER2#g" \
         $TMP_FILE
 
+    ## Fix for wildcard
+    if [[ "$FQDN2" == "*."* ]]; then
+       sed -i "s/ServerName/ServerAlias/" $TMP_FILE
+    fi
+
     # Check if all is right in the conf file
     # If not, put a debug message
 # NO : redirect and document_root COULD contains legitimate %% expressions (...) 
