@@ -401,6 +401,19 @@ img {
   background-color: #F0F0F4;
 }
 
+@media screen and (min-width: 1000px) {
+  #global {
+    margin: 20px 50px;
+    width: auto;
+    display: flex;
+  }
+
+  #content {
+    flex: 1;
+    width: auto;
+  }
+}
+
 /* Main container */
 
 #menu {
