@@ -359,8 +359,8 @@ function actmoveto_not_empty() {
                 echo " (<a href=\"bro_main.php?actperms=Permissions&R=".urlencode($R)."&amp;formu=2&amp;d[]=".urlencode($c[$i]["name"])."\">"._("protected")."</a>)";
             }
             echo "</td>\n";
-            echo "  <td>".format_size($c[$i]["size"])."</td>";
-            echo "<td>".format_date(_('%3$d-%2$d-%1$d %4$d:%5$d'),date("Y-m-d H:i:s",$c[$i]["date"]))."<br /></td>";
+            echo "  <td data-sort-value=\"".$c[$i]["size"]."\">".format_size($c[$i]["size"])."</td>";
+            echo "<td data-sort-value=\"".$c[$i]["date"]."\">".format_date(_('%3$d-%2$d-%1$d %4$d:%5$d'),date("Y-m-d H:i:s",$c[$i]["date"]))."<br /></td>";
             if ($p["showtype"]) {
               echo "<td>"._($bro->mime($c[$i]["name"]))."</td>";
             }
@@ -399,8 +399,8 @@ function actmoveto_not_empty() {
             echo "<td><b><a href=\"";
             echo "bro_main.php?R=".urlencode($R."/".$c[$i]["name"]);
             echo "\">"; ehe($c[$i]["name"]); echo "/</a></b></td>\n";
-            echo "  <td>".format_size($c[$i]["size"])."</td>";
-            echo "<td>".format_date(_('%3$d-%2$d-%1$d %4$d:%5$d'),date("Y-m-d h:i:s",$c[$i]["date"]))."<br /></td>";
+            echo "  <td data-sort-value=\"".$c[$i]["size"]."\">".format_size($c[$i]["size"])."</td>";
+            echo "<td data-sort-value=\"".$c[$i]["date"]."\">".format_date(_('%3$d-%2$d-%1$d %4$d:%5$d'),date("Y-m-d h:i:s",$c[$i]["date"]))."<br /></td>";
             if ($p["showtype"]) {
               echo "<td>"._("Folder")."</td>";
             }
@@ -613,9 +613,9 @@ else {
 
 <br/>
 
-<p>
-<span class="ina"><a href="bro_main.php?R=<?php echo (($R)?$R:"/"); ?>&amp;showdirsize=1"><?php __("Show size of directories"); ?></a></span> <?php __("(slow)"); ?>
-</p><p>&nbsp;</p><p>
+<div class="showdirsize_button">
+<span class="ina"><a href="bro_main.php?R=<?php echo (($R)?$R:"/"); ?>&amp;showdirsize=1"><?php __("Show size of directories"); ?></a></span> <?php __("(slow)"); ?><br />&nbsp;<br />
+</div>
 <span class="ina"><?php
 if ($hta->is_protected($R)) {
   echo "<a href=\"hta_edit.php?dir=".(($R)?$R:"/")."\">"._("Edit this folder's protection")."</a>";
@@ -657,7 +657,17 @@ else {
 </td></tr></table>
 
 <script type="text/javascript">
-$(document).ready(function() {  $("#tab_files_w_details").tablesorter(); } ); 
+$(document).ready(function() {
+  $("#tab_files_w_details").tablesorter({
+    textExtraction: function(node) {
+        var attr = $(node).attr('data-sort-value');
+        if (typeof attr !== 'undefined' && attr !== false) {
+            return attr;
+        }
+        return $(node).text(); 
+    } 
+   });
+}); 
 </script>
 
 <?php include_once("foot.php"); ?>
