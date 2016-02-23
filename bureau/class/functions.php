@@ -488,6 +488,9 @@ function format_date($format, $date) {
         $hh = $h;
         $am = "am";
     }
+
+    // we want every number to be treated as a string.
+    $format=str_replace('$d', '$s', $format);
     return sprintf($format, $d, $m, $y, $h, $i, $hh, $am);
 }
 
@@ -627,7 +630,7 @@ function eoption($values, $cur, $onedim = false) {
  */
 function ehe($str, $affiche = TRUE) {
     global $charset;
-    $retour = htmlspecialchars($str, ENT_QUOTES, $charset);
+    $retour = htmlspecialchars($str, ENT_QUOTES|ENT_SUBSTITUTE, $charset);
     if ($affiche) {
         echo $retour;
     }

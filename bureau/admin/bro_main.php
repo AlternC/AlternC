@@ -51,6 +51,12 @@ $fields = array (
     "showdirsize" => array ("request", "integer", "0"),
     "nomfich"     => array ("request", "string", ""),
     );
+
+## does not intend to edit oversize files.
+$memory_limit=ini_get("memory_limit");
+if (preg_match("#([mk])#i", $memory_limit, $out))
+	$memory_limit=$memory_limit*1024*($out[1]=="M"?1024:1);
+
 getFields($fields);
 
 $p=$bro->GetPrefs();
@@ -342,7 +348,7 @@ function actmoveto_not_empty() {
             }
             echo "<td><a href=\"";
             $canedit = $bro->can_edit($R,$c[$i]["name"]);
-            if ($canedit) {
+            if ($canedit&&($c[$i]["size"]<$memory_limit)) {
               echo "bro_editor.php?editfile=".urlencode($c[$i]["name"])."&amp;R=".urlencode($R);
             } else {
               echo "bro_downloadfile.php?dir=".urlencode($R)."&amp;file=".urlencode($c[$i]["name"]);
@@ -415,9 +421,16 @@ function actmoveto_not_empty() {
         for($i=0;$i<round(count($c)/2);$i++) {
           echo "<tr class=\"lst\">\n";
           if ($c[$i]["type"]) {
-            echo "  <td width=\"28\"><input type=\"checkbox\" class=\"inc\" name=\"d[]\" value=\"".$c[$i]["name"]."\" /></td><td><a href=\"";
-            echo "bro_editor.php?editfile=".urlencode($c[$i]["name"])."&amp;R=".urlencode($R);
-            echo "\">".htmlentities($c[$i]["name"])."</a></td>\n";
+            echo "  <td width=\"28\"><input type=\"checkbox\" class=\"inc\" name=\"d[]\" value=\"".$c[$i]["name"]."\" /></td>";
+            echo "<td><a href=\"";
+            $canedit = $bro->can_edit($R,$c[$i]["name"]);
+            if ($canedit&&($c[$i]["size"]<$memory_limit)) {
+              echo "bro_editor.php?editfile=".urlencode($c[$i]["name"])."&amp;R=".urlencode($R);
+            } else {
+              echo "bro_downloadfile.php?dir=".urlencode($R)."&amp;file=".urlencode($c[$i]["name"]);
+            }
+            echo "\">"; ehe($c[$i]["name"]); 
+            echo "</a></td>\n";
             echo "  <td>".format_size($c[$i]["size"])."</td><td>";
             $vu=$bro->viewurl($R,$c[$i]["name"]);
             if ($vu) {
@@ -444,8 +457,14 @@ function actmoveto_not_empty() {
           echo "<tr class=\"lst\">\n";
           if ($c[$i]["type"]) {
             echo "  <td width=\"28\"><input TYPE=checkbox class=\"inc\" name=\"d[]\" value=\"".$c[$i]["name"]."\"></td><td><a href=\"";
-            echo "bro_editor.php?editfile=".urlencode($c[$i]["name"])."&amp;R=".urlencode($R);
-            echo "\">".htmlentities($c[$i]["name"])."</a></td>\n";
+            $canedit = $bro->can_edit($R,$c[$i]["name"]);
+            if ($canedit&&($c[$i]["size"]<$memory_limit)) {
+              echo "bro_editor.php?editfile=".urlencode($c[$i]["name"])."&amp;R=".urlencode($R);
+            } else {
+              echo "bro_downloadfile.php?dir=".urlencode($R)."&amp;file=".urlencode($c[$i]["name"]);
+            }
+            echo "\">"; ehe($c[$i]["name"]); 
+            echo "</a></td>\n";
             echo "  <td>".format_size($c[$i]["size"])."</td><td>";
             $vu=$bro->viewurl($R,$c[$i]["name"]);
             if ($vu) {
@@ -479,8 +498,14 @@ function actmoveto_not_empty() {
           echo "<tr class=\"lst\">\n";
           if ($c[$i]["type"]) {
             echo "  <td width=\"28\"><input TYPE=checkbox class=\"inc\" name=\"d[]\" value=\"".$c[$i]["name"]."\"></td><td><a href=\"";
-            echo "bro_editor.php?editfile=".urlencode($c[$i]["name"])."&amp;R=".urlencode($R);
-            echo "\">".htmlentities($c[$i]["name"])."</a></td>\n";
+            $canedit = $bro->can_edit($R,$c[$i]["name"]);
+            if ($canedit&&($c[$i]["size"]<$memory_limit)) {
+              echo "bro_editor.php?editfile=".urlencode($c[$i]["name"])."&amp;R=".urlencode($R);
+            } else {
+              echo "bro_downloadfile.php?dir=".urlencode($R)."&amp;file=".urlencode($c[$i]["name"]);
+            }
+            echo "\">"; ehe($c[$i]["name"]); 
+            echo "</a></td>\n";
             echo "  <td>".format_size($c[$i]["size"])."</td><td>";
             $vu=$bro->viewurl($R,$c[$i]["name"]);
             if ($vu) {
@@ -507,8 +532,14 @@ function actmoveto_not_empty() {
           echo "<tr class=\"lst\">\n";
           if ($c[$i]["type"]) {
             echo "  <td width=\"28\"><input TYPE=checkbox class=\"inc\" name=\"d[]\" value=\"".$c[$i]["name"]."\"></td><td><a href=\"";
-            echo "bro_editor.php?editfile=".urlencode($c[$i]["name"])."&amp;R=".urlencode($R);
-            echo "\">".htmlentities($c[$i]["name"])."</a></td>\n";
+            $canedit = $bro->can_edit($R,$c[$i]["name"]);
+            if ($canedit&&($c[$i]["size"]<$memory_limit)) {
+              echo "bro_editor.php?editfile=".urlencode($c[$i]["name"])."&amp;R=".urlencode($R);
+            } else {
+              echo "bro_downloadfile.php?dir=".urlencode($R)."&amp;file=".urlencode($c[$i]["name"]);
+            }
+            echo "\">"; ehe($c[$i]["name"]); 
+            echo "</a></td>\n";
             echo "  <td>".format_size($c[$i]["size"])."</td><td>";
             $vu=$bro->viewurl($R,$c[$i]["name"]);
             if ($vu) {
@@ -536,8 +567,14 @@ function actmoveto_not_empty() {
           echo "<tr class=\"lst\">\n";
           if ($c[$i]["type"]) {
             echo "  <td width=\"28\"><input TYPE=checkbox class=\"inc\" name=\"d[]\" value=\"".$c[$i]["name"]."\"></td><td><a href=\"";
-            echo "bro_editor.php?editfile=".urlencode($c[$i]["name"])."&amp;R=".urlencode($R);
-            echo "\">".htmlentities($c[$i]["name"])."</a></td>\n";
+            $canedit = $bro->can_edit($R,$c[$i]["name"]);
+            if ($canedit&&($c[$i]["size"]<$memory_limit)) {
+              echo "bro_editor.php?editfile=".urlencode($c[$i]["name"])."&amp;R=".urlencode($R);
+            } else {
+              echo "bro_downloadfile.php?dir=".urlencode($R)."&amp;file=".urlencode($c[$i]["name"]);
+            }
+            echo "\">"; ehe($c[$i]["name"]); 
+            echo "</a></td>\n";
             echo "  <td>".format_size($c[$i]["size"])."</td><td>";
             $vu=$bro->viewurl($R,$c[$i]["name"]);
             if ($vu) {
