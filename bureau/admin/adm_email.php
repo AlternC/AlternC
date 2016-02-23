@@ -44,7 +44,7 @@ getFields($fields);
 <?php
 
 if ( !empty($submit) ) {
-  if ($admin->mail_all_members($subject,$message,$from)) {
+  if ($admin->mailallmembers($subject,$message,$from)) {
     $error=_("The email was successfully sent");
   } else {
     $error=_("There was an error");
