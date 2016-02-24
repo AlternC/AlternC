@@ -987,6 +987,14 @@ class m_dom {
                             }
                         }
                         break;
+                    case "co":
+                        if (preg_match("#Name Server:#", $ligne)) {
+                            $found = true;
+                            $tmp = strtolower(str_replace(chr(10), "", str_replace(chr(13), "", str_replace(" ", "", str_replace("Name Server:", "", $ligne)))));
+                            if ($tmp)
+                                $serveurList[] = $tmp;
+                        }
+                        break;
                     case "cx":
                         $ligne = str_replace(chr(10), "", str_replace(chr(13), "", str_replace(" ", "", $ligne)));
                         if ($ligne == "" && $state == 1) {
