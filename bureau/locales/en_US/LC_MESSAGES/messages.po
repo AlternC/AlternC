@@ -1108,7 +1108,7 @@ msgstr ""
 
 #: ../admin/adm_panel.php:52
 msgid "Password Policies"
-msgstr "Password policy""
+msgstr "Password policy"
 
 #: ../admin/adm_panel.php:55
 msgid "Manage IP whitelist"
