@@ -80,7 +80,19 @@ class m_quota {
             $obj['links'][] = array('txt' => 'progressbar', 'total' => $q[$key]["t"], 'used' => $q[$key]["u"]);
         }
 
+        // do not return menu item if there is no quota
+	if (!count($obj['links'])) return false;
         return $obj;
+    }
+
+    function hook_homepageblock() {
+	return (object)Array(
+		'pos' => 20,
+		'call'=> function() {
+			define("QUOTASONE","1");
+		},
+		'include' => "quotas_oneuser.php"
+	);
     }
 
     /* ----------------------------------------------------------------- */

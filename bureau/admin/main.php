@@ -106,12 +106,17 @@ if($admin->enabled) {
   echo "</p>";
 } // if $admin->enabled
 
-$c = $admin->get($cuid);
-
-define("QUOTASONE","1");
-echo "<hr/>";
-require_once("quotas_oneuser.php");
-
+$blocks=$hooks->invoke("hook_homepageblock");
+uasort($blocks, function($a, $b) {return $a->order<$b->order ? -1 : 1;});
+foreach ($blocks as $v) {
+	if (property_exists($v, "call")) {
+		$func=$v->call;
+		$func();
+	}
+	if (property_exists($v, "include")) {
+		include $v->include;
+	}
+}
 
 ?>
 <?php include_once("foot.php"); ?>

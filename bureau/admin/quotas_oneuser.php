@@ -151,7 +151,7 @@ if (!isset($mode)) { # when included from adm_login, mode is not set
 <!-- Mailing lists -->
 
 <?php
-  $totallist = $quota->get_size_mailman_sum_user($c["uid"]);
+  $totallist = $quota->get_size_mailman_sum_user($mem->user["uid"]);
   if ($totallist) {
     // $totalweb is in KB, so we call get_size_unit() with it in Bytes
     $t=$quota->get_size_unit($totallist * 1024);
