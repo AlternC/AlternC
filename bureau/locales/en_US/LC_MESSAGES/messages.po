@@ -192,7 +192,7 @@ msgstr ""
 
 #: ../admin/adm_add.php:87 ../admin/adm_edit.php:104
 msgid "Surname"
-msgstr ""
+msgstr "Last name"
 
 #: ../admin/adm_add.php:91 ../admin/adm_edit.php:108
 msgid "Email address"
@@ -206,7 +206,7 @@ msgstr ""
 
 #: ../admin/adm_add.php:105
 msgid "Wich database server for this user ?"
-msgstr ""
+msgstr "Which database server for this user ?"
 
 #: ../admin/adm_add.php:107
 msgid "Warning: you can't change it after the creation of the user."
@@ -317,7 +317,7 @@ msgstr ""
 
 #: ../admin/adm_db_servers.php:42
 msgid "Here the list of the available databases servers."
-msgstr ""
+msgstr "Here is the list of the available databases servers."
 
 #: ../admin/adm_db_servers.php:49
 msgid "ID"
@@ -356,6 +356,8 @@ msgid ""
 "To update the list of the server on the PhpMyAdmin login page, launch "
 "alternc.install"
 msgstr ""
+"To update the list of servers on the PhpMyAdmin login page, launch "
+"alternc.install"
 
 #: ../admin/adm_deactivate.php:46 ../class/m_admin.php:241
 #: ../class/m_admin.php:272 ../class/m_admin.php:778 ../class/m_admin.php:804
@@ -427,7 +429,7 @@ msgstr ""
 
 #: ../admin/adm_defquotas.php:90
 msgid "Synchronise user's quota (only to upper value)"
-msgstr ""
+msgstr "Synchronize user's quota (only to upper value)"
 
 #: ../admin/adm_defquotas.php:102
 msgid "Accounts of type"
@@ -651,7 +653,7 @@ msgstr ""
 
 #: ../admin/adm_doms_def_type.php:11 ../admin/adm_panel.php:66
 msgid "Manage defaults domains type"
-msgstr ""
+msgstr "Manage default domain types"
 
 #: ../admin/adm_doms_def_type.php:13 ../admin/adm_domstype.php:42
 msgid ""
@@ -670,6 +672,8 @@ msgid ""
 "The Setting column contains the variables to be expanded in the defaults "
 "configuration. Available values are:  "
 msgstr ""
+"The Setting column contains the variables to be expanded in the default "
+"configuration. Available values are:  "
 
 #: ../admin/adm_doms_def_type.php:17
 #, php-format
@@ -1104,7 +1108,7 @@ msgstr ""
 
 #: ../admin/adm_panel.php:52
 msgid "Password Policies"
-msgstr ""
+msgstr "Password policy""
 
 #: ../admin/adm_panel.php:55
 msgid "Manage IP whitelist"
@@ -1309,12 +1313,17 @@ msgid ""
 "can configure the alternc-slavedns package on your slave server and give him "
 "the login/pass that will grant him access to your server's domain list. "
 msgstr ""
+"Here is the list of the allowed accounts for slave dns synchronization. You "
+"can configure the alternc-slavedns package on your slave server and give it "
+"the login/pass that will grant access to your server's domain list. "
 
 #: ../admin/adm_slavedns.php:154
 msgid ""
 "If you want to allow a new server to access your domain list, give him an "
 "account."
 msgstr ""
+"If you want to allow a new server to access your domain list, give it an "
+"account."
 
 #: ../admin/adm_slavedns.php:194
 msgid "Need open DNS Slave servers?"
@@ -2124,6 +2133,8 @@ msgid ""
 "Here is my proposition. Modify your zone until my proposition seems good to "
 "you"
 msgstr ""
+"Here is my suggestion. Modify your zone until my proposition seems good to "
+"you"
 
 #: ../admin/dom_import.php:59
 #, php-format
@@ -2278,7 +2289,7 @@ msgstr ""
 
 #: ../admin/ftp_list.php:82
 msgid "Are you sure you want to change his status?"
-msgstr ""
+msgstr "Are you sure you want to change its status?"
 
 #: ../admin/ftp_list.php:110
 msgid "FTP configuration information"
@@ -2336,7 +2347,7 @@ msgstr ""
 
 #: ../admin/hta_add.php:43
 msgid ""
-"Enter the name of the folder you want to protect. It must already exists."
+"Enter the name of the folder you want to protect. It must already exist."
 msgstr ""
 
 #: ../admin/hta_add.php:63
@@ -2439,8 +2450,8 @@ msgid "Edit login and passwords"
 msgstr ""
 
 #: ../admin/hta_list.php:86
-msgid "Unprotect the checked folders"
-msgstr ""
+msgid "Unprotect the cheked folders"
+msgstr "Unprotect the selected folders"
 
 #: ../admin/index.php:70
 msgid "Web Hosting Control Panel"
@@ -2501,7 +2512,7 @@ msgstr ""
 
 #: ../admin/ip_main.php:64
 msgid "Authorised IP address or network"
-msgstr ""
+msgstr "Authorized IP address or network"
 
 #: ../admin/ip_main.php:65 ../admin/ip_main.php:95
 msgid "Access type"
@@ -2578,6 +2589,8 @@ msgid ""
 "Here are web logs of your account.<br/>You can download them to do specific "
 "extract and statistics."
 msgstr ""
+"Here are the web logs of your account.<br/>You can download them to do specific "
+"extract and statistics."
 
 #: ../admin/logs_list.php:53
 msgid "Creation Date"
@@ -4075,7 +4088,7 @@ msgid "The TLD name is mandatory"
 msgstr ""
 
 #: ../class/m_admin.php:1295
-msgid "This TLD already exist"
+msgid "This TLD already exists"
 msgstr ""
 
 #: ../class/m_admin.php:1433
@@ -4290,7 +4303,7 @@ msgid "This domain is the server's domain! You cannot host it on your account!"
 msgstr ""
 
 #: ../class/m_dom.php:718 ../class/m_dom.php:723
-msgid "The domain already exist"
+msgid "The domain already exists"
 msgstr ""
 
 #: ../class/m_dom.php:730 ../class/m_dom.php:1523
@@ -4538,7 +4551,7 @@ msgstr ""
 
 #: ../class/m_hta.php:98 ../class/m_hta.php:103 ../class/m_hta.php:113
 #: ../class/m_hta.php:307 ../class/m_hta.php:353 ../class/m_hta.php:400
-msgid "File already exist"
+msgid "File already exists"
 msgstr ""
 
 #: ../class/m_hta.php:107
@@ -4575,7 +4588,7 @@ msgstr ""
 
 #: ../class/m_hta.php:315
 #, php-format
-msgid "The user '%s' already exist for this folder"
+msgid "The user '%s' already exists for this folder"
 msgstr ""
 
 #: ../class/m_hta.php:327

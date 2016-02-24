@@ -462,7 +462,7 @@ msgstr ""
 msgid "de_DE"
 msgstr ""
 
-#. Español (Spania)
+#. Español (España)
 #. Please do NOT translate those strings to each language. Use the original language instead
 msgid "es_ES"
 msgstr ""

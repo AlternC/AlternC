@@ -58,7 +58,7 @@ msgstr "This account is NOT an administrator account!"
 
 #. Login can only contains characters a-z, 0-9 and -
 msgid "err_admin_10"
-msgstr "Login can only contains characters a-z, 0-9 and -"
+msgstr "Login can only contain characters a-z, 0-9 and -"
 
 #. This TLD does not exist
 msgid "err_admin_11"
@@ -66,7 +66,7 @@ msgstr "This TLD does not exist"
 
 #. This TLD already exists
 msgid "err_admin_12"
-msgstr "This TLD already exist"
+msgstr "This TLD already exists"
 
 #. The login is too long (16 chars max)
 msgid "err_admin_13"
@@ -99,18 +99,18 @@ msgstr "One of the domain name member is too long."
 #. There is some forbidden characters in the domain name (only A-Z 0-9 and - are allowed).
 msgid "err_dom_6"
 msgstr ""
-"There is some forbidden characters in the domain name (only A-Z 0-9 and - "
+"There are some forbidden characters in the domain name (only A-Z 0-9 and - "
 "are allowed)."
 
 #. The last member of the domain name is incorrect or cannot be hosted in that server.
 msgid "err_dom_7"
 msgstr ""
-"The last member of the domain name is incorrect or cannot be hosted in that "
+"The last member of the domain name is incorrect or cannot be hosted on that "
 "server."
 
 #. The domain already exists.
 msgid "err_dom_8"
-msgstr "The domain already exist."
+msgstr "The domain already exists."
 
 #. The domain has been deleted less than 5 minutes ago, please try again later.
 msgid "err_dom_9"
@@ -145,7 +145,7 @@ msgstr "No change has been requested..."
 
 #. The sub-domain already exists.
 msgid "err_dom_16"
-msgstr "The sub-domain already exist."
+msgstr "The sub-domain already exists."
 
 #. --- Programm error --- Lock already obtained !
 msgid "err_dom_17"
@@ -171,26 +171,26 @@ msgstr "The folder you entered is incorrect or does not exist."
 #. The requested domain is forbidden in this server, please contact the administrator
 msgid "err_dom_22"
 msgstr ""
-"The requested domain is forbidden in this server, please contact the "
+"The requested domain is forbidden on this server, please contact the "
 "administrator"
 
 #. The DNS of this domain do not match the server's DNS. Please change your 
 #. domain's DNS (and eventually wait 1 day) before you install it again.
 msgid "err_dom_23"
 msgstr ""
-"The DNS of this domain do not match the server's DNS. Please change your "
+"The name servers of this domain do not match the server's DNS. Please change your "
 "domain's DNS (you may need to wait 1 day) before you install it again."
 
 #. There is some forbidden characters in the sub domain (only A-Z 0-9 and - are allowed).
 msgid "err_dom_24"
 msgstr ""
-"There is some forbidden characters in the sub domain (only A-Z 0-9 and - are "
+"There are some forbidden characters in the sub domain (only A-Z 0-9 and - are "
 "allowed)."
 
 #. There is no MX record pointing to this server, and you are asking us to host the Mail here 
 msgid "err_dom_25"
 msgstr ""
-"There is no MX record pointing to this server, and you are asking us to host "
+"There is no MX record pointing to this server, but you are asking to host "
 "the mail here. Please fix your MX DNS pointer."
 
 #. - Entrez le nom du domaine que vous souhaitez héberger. Le nom de domaine 
@@ -202,11 +202,11 @@ msgstr ""
 #. HELPID_200<br />
 msgid "hlp_add_domain"
 msgstr ""
-"- Please enter the domain name you want to hosthere. The domain name must be "
+"- Please enter the domain name you want to host here. The domain name must be "
 "complete, but <b>without the www.</b><br />IMPORTANT: If you want to host "
 "that domain properly, the DNS Servers of your domain must point to the DNS "
 "Servers of your hosting provider. Contact your hosting provider for more "
-"information<br /> Examples of domain name: globenet.org / demo.com / test.eu."
+"information<br /> Examples of domain name: alternc.org / demo.com / test.eu."
 "org etc. <br />For more information on domain management, read the online "
 "help, HELPID_200"
 
@@ -219,12 +219,11 @@ msgstr ""
 #. HELPID_200<br />
 msgid "hlp_add_domain_2"
 msgstr ""
-"Cliquez sur le lien ci-dessus. Vous pourrez ensuite accéder aux paremètres "
-"du domaine dans le menu à gauche.2 liens vont apparaitre : <br />- un "
-"premier pour modifier les paramètres d'hébergement du domaine (sous-"
-"domaines, redirections, hébergement mails ...) <br />- un second pour gérer "
-"les comptes emails du domaine (si vous souhaitez créer des boites aux "
-"lettres).<br />Plus d'info sur la gestion des domaines dans l'aide en ligne "
+"Click on the above link. You will then be able to access your domain parameters "
+"in the left menu. You will get access to two links: - the first one in the "
+"Domains section to manage your hosting parameters (subdomains, DNS hosting, ...), "
+"the second one in the Email addresses section to manage the mail account of this "
+"domain (if you want to do so). <br />More information in the online help "
 "HELPID_200<br />"
 
 #. Le domaine a été effacé, mais les fichiers de votre site n'ont pas été 
@@ -233,10 +232,9 @@ msgstr ""
 #. l'aide en ligne HELPID_200<br />
 msgid "hlp_del_domain"
 msgstr ""
-"Le domaine a été effacé, mais les fichiers de votre site n'ont pas été "
-"détruits.<br />Si vous souhaitez détruire les fichiers du site web, utilisez "
-"le Gestionnaire de Fichier<br />Plus d'info sur la gestion des domaines dans "
-"l'aide en ligne HELPID_200<br />"
+"This domain has been deleted, but the files are left intact.<br />"
+"If you want to delete the files from your website, use the File Browser.<br />"
+"More information to manage your domains in the online help HELPID_200<br />"
 
 #. Cette zone vous permet de modifier les paramètres de votre domaine, ainsi 
 #. que des sous-domaines installés<br />Vous pouvez créer un nouveau sous-
@@ -245,12 +243,10 @@ msgstr ""
 #. Plus d'info sur la gestion des domaines dans l'aide en ligne HELPID_200<br />
 msgid "hlp_edit_domain"
 msgstr ""
-"Cette zone vous permet de modifier les paramètres de votre domaine, ainsi "
-"que des sous-domaines installés<br />Vous pouvez créer un nouveau sous-"
-"domaine et choisir, soit de le rediriger vers votre espace disque, vers une "
-"autre adresse Internet, ou vers une adresse IP (utilisateurs avancés)<br /"
-">Plus d'info sur la gestion des domaines dans l'aide en ligne HELPID_200<br /"
-">"
+"In this area, you can modify your domain parameters, and its subdomains.<br /> "
+"You can create a new subdomain and choose if it redirects to a local directory, "
+"a remote URL, or bind it to an IP address (for advanced users)<br />"
+"More information to manage your domains in the online help HELPID_200<br />"
 
 #. FTP Accounts
 msgid "quota_ftp"
@@ -270,11 +266,11 @@ msgstr "The chosen prefix is not allowed"
 
 #. This ftp account already exists
 msgid "err_ftp_4"
-msgstr "This FTP account already exist"
+msgstr "This FTP account already exists"
 
 #. Your ftp account quota is over. You cannot create more ftp accounts.
 msgid "err_ftp_5"
-msgstr "Your FTP account quota is over. You cannot create more FTP accounts."
+msgstr "Your FTP accounts quota is reached. You cannot create more FTP accounts."
 
 #. The directory cannot be created.
 msgid "err_ftp_6"
@@ -290,14 +286,14 @@ msgstr "The directory cannot be created."
 #. dans l'aide en ligne HELPID_100<br />
 msgid "hlp_ftp_list"
 msgstr ""
-"Voici la liste des comptes ftp ayant accès à votre compte. Cliquez sur "
-"'Modifier' pour changer le nom d'utilisateur, le mot de passe, ou le dossier "
-"racine.<br /> Pour supprimer un compte, cochez la case correspondante et "
-"cliquez sur le bouton 'Supprimer les comptes cochés'<br />Pour pouvoir "
-"accéder à vos fichiers avec un logiciel de ftp, vous devez créer au moins un "
-"compte. Chaque compte est associé à un dossier, et n'aura donc accès qu'aux "
-"fichiers situés dans ce dossier ou en dessous. <br />Plus d'info sur le FTP "
-"dans l'aide en ligne HELPID_100<br />"
+"Here is the list of FTP account having access to your account. Click on"
+"'Modify' to change the username, the password, or the root directory.<br />"
+"To delete an account, mark the check box to the left and click on the button "
+"'Delete the checked accounts'<br />In order to access your file with a "
+"FTP software, you have to create at least one account. Each account is associated "
+"to a directory and will only have access to the files and folders inside "
+"this directory. <br />"
+"More information about the FTP in the online help HELPID_100<br />"
 
 #. Vous n'avez actuellement aucun Compte FTP de disponible. Cliquez sur 
 #. 'Création d'un compte ftp' pour en créer un.<br />Pour pouvoir accéder à vos 
@@ -333,17 +329,17 @@ msgstr ""
 
 #. An incompatible .htaccess file exists in this folder.
 msgid "err_hta_1"
-msgstr "An incompatible .htaccess file exist in this folder."
+msgstr "An incompatible .htaccess file exists in this folder."
 
 #. .htaccess parsed and syntaxically correct, a .htpassword file has been created.
 msgid "err_hta_2"
 msgstr ""
-".htaccess parsed and syntaxically correct, a .htpassword file has been "
+".htaccess parsed and syntaxically correct, a .htpasswd file has been "
 "created."
 
 #. .htaccess parsed and syntaxically correct, a .htpasswd already exist.
 msgid "err_hta_3"
-msgstr ".htaccess parsed and syntaxically correct, a .htpasswd already exist."
+msgstr ".htaccess parsed and syntaxically correct, a .htpasswd already exists."
 
 #. No protected folder
 msgid "err_hta_4"
@@ -371,7 +367,7 @@ msgstr "The file '%s' is not correct"
 
 #. The user '%s' already exist for this folder
 msgid "err_hta_10"
-msgstr "The user '%s' already exist for this folder"
+msgstr "The user '%s' already exists for this folder"
 
 #. Please enter a valid username
 msgid "err_hta_11"
@@ -383,7 +379,7 @@ msgstr "Email Accounts"
 
 #. DB connection impossible, please try again later.
 msgid "err_mail_1"
-msgstr "ldap connexion impossible, please try again later."
+msgstr "MySQL connection error, please try again later."
 
 #. No email on domain '%s'
 msgid "err_mail_2"
@@ -397,7 +393,7 @@ msgstr "The email '%s' does not exist"
 #. redirections, or both
 msgid "err_mail_4"
 msgstr ""
-"Please check 'pop account' and choose a password pop, or enter some "
+"Please check 'pop account' and choose a password, or enter some "
 "redirections, or both"
 
 #. -- Server error --- Parameter is incorrect (%s)
@@ -410,7 +406,7 @@ msgstr "The domain '%s' does not exist."
 
 #. The email '%s' already exists.
 msgid "err_mail_7"
-msgstr "The email '%s' already exists."
+msgstr "The e-mail '%s' already exists."
 
 #. Your mail account quota is over. You cannot create more email accounts.
 msgid "err_mail_8"
@@ -427,7 +423,7 @@ msgstr "-- Program error -- Mail quota does not exist"
 
 #. Please enter an Email address
 msgid "err_mail_11"
-msgstr "Please enter an Email address"
+msgstr "Please enter an e-mail address"
 
 #. Please enter a pop password
 msgid "err_mail_12"
@@ -435,11 +431,11 @@ msgstr "Please enter a pop password"
 
 #. Please enter a valid email
 msgid "err_mail_13"
-msgstr "Please enter a valid email"
+msgstr "Please enter a valid e-mail"
 
 #. One or more email redirection are invalid
 msgid "err_mail_14"
-msgstr "One or more email redirection are invalid"
+msgstr "One or more e-mail redirection are invalid"
 
 #. This mail is not a pop account. It's impossible to change the password !
 msgid "err_mail_15"
@@ -534,10 +530,10 @@ msgstr "English (United Kingdom)"
 msgid "de_DE"
 msgstr "Deutsch (Germany)"
 
-#. Español (Spania)
+#. Español (España)
 #. Please do NOT translate those strings to each language. Use the original language instead
 msgid "es_ES"
-msgstr "Español (Spania)"
+msgstr "Español (España)"
 
 #. Español (Venezuela)
 #. Please do NOT translate those strings to each language. Use the original language instead
@@ -656,15 +652,15 @@ msgstr "Web Statistics"
 
 #. You cannot create more raw statistic set.
 msgid "err_sta2_1"
-msgstr "You cannot create more raw statistic set."
+msgstr "You cannot create more raw statistics set."
 
 #. There is currently no raw statistic set.
 msgid "err_sta2_2"
-msgstr "There is currently no raw statistic set."
+msgstr "There is currently no raw statistics set."
 
 #. The requested raw statistic set has not been found.
 msgid "err_sta2_3"
-msgstr "The requested raw statistic set has not been found."
+msgstr "The requested raw statistics set has not been found."
 
 #. File or folder name is incorrect
 msgid "err_bro_1"
@@ -697,8 +693,8 @@ msgstr ""
 #. all its subdomains!
 msgid "help_domain_del %s"
 msgstr ""
-"If you want to delete the domain %s, click the button below.Warning : this "
-"delete all the ftp, mails, mailing-lists ... associated with thisdomain and "
+"If you want to delete the domain %s, click the button below. Warning : this "
+"delete all the ftp, mails, mailing-lists ... associated with this domain and "
 "all its subdomains!"
 
 #. You can create various databases<br />Click on 'SQL Admin' in the menu to 

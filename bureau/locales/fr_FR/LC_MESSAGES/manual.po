@@ -538,10 +538,10 @@ msgstr "English (United Kingdom)"
 msgid "de_DE"
 msgstr "Deutsch (Germany)"
 
-#. Español (Spania)
+#. Español (España)
 #. Please do NOT translate those strings to each language. Use the original language instead
 msgid "es_ES"
-msgstr "Español (Spania)"
+msgstr "Español (España)"
 
 #. Español (Venezuela)
 #. Please do NOT translate those strings to each language. Use the original language instead
