@@ -22,7 +22,7 @@ msgstr ""
 
 #: ../../squirrelmail/alternc_changepass/change.php:39
 msgid "Can't connect to MySQL server on AlternC!"
-msgstr ""
+msgstr "No se puede conectar al servidor MySQL"
 
 #: ../../squirrelmail/alternc_changepass/change.php:66
 msgid "Your new passwords are differents, pleasy try again."
@@ -86,7 +86,7 @@ msgstr "Cambiar la dirección de correo de la cuenta"
 
 #: ../admin/about.php:36
 msgid "About AlternC"
-msgstr ""
+msgstr "Sobre AlternC"
 
 #: ../admin/about.php:37
 #, fuzzy
@@ -104,7 +104,7 @@ msgstr ""
 
 #: ../admin/about.php:47
 msgid "Official website: "
-msgstr ""
+msgstr "Página web oficial"
 
 #: ../admin/about.php:48
 msgid "Developer website: "
@@ -227,11 +227,11 @@ msgstr "Tipo de cuenta"
 
 #: ../admin/adm_add.php:105
 msgid "Wich database server for this user ?"
-msgstr ""
+msgstr "Qué base de datos del servidor para este usuario ?"
 
 #: ../admin/adm_add.php:107
 msgid "Warning: you can't change it after the creation of the user."
-msgstr ""
+msgstr "Advertencia: no se puede cambiar después de la creación del usuario."
 
 #: ../admin/adm_add.php:124
 #, fuzzy, php-format
@@ -259,16 +259,16 @@ msgstr "Cancelar"
 
 #: ../admin/adm_authip_whitelist.php:31
 msgid "Access security"
-msgstr ""
+msgstr "Seguridad de acceso"
 
 #: ../admin/adm_authip_whitelist.php:39
 msgid ""
 "The IP and subnet you have here are allowed for ALL users and ALL usages"
-msgstr ""
+msgstr "La IP y la subred que tienes aquí son permitidos para TODOS los usuarios y TODOS los usos "
 
 #: ../admin/adm_authip_whitelist.php:39
 msgid "Warning"
-msgstr ""
+msgstr "Advertancia"
 
 #: ../admin/adm_authip_whitelist.php:44
 #, fuzzy
@@ -277,7 +277,7 @@ msgstr "Añadir un nuevo TLD"
 
 #: ../admin/adm_authip_whitelist.php:44 ../admin/ip_main.php:176
 msgid "Add my current IP"
-msgstr ""
+msgstr "Añadir mi IP actual"
 
 #: ../admin/adm_authip_whitelist.php:47 ../admin/ip_main.php:179
 #, fuzzy
@@ -288,7 +288,7 @@ msgstr "Cancelar"
 msgid ""
 "Enter here the IP address you want. <br/> <i>IPv4, IPv6 and subnet allowed</"
 "i>"
-msgstr ""
+msgstr "Entra aquí la dirección IP que desee. <Br/><i> IPv4, IPv6 y subred permitidos</i>"
 
 #: ../admin/adm_authip_whitelist.php:54
 #, fuzzy
@@ -304,17 +304,17 @@ msgstr "Guardar"
 
 #: ../admin/adm_authip_whitelist.php:64
 msgid "IP"
-msgstr ""
+msgstr "IP"
 
 #: ../admin/adm_authip_whitelist.php:64
 msgid "Informations"
-msgstr ""
+msgstr "Informaciones"
 
 #: ../admin/adm_authip_whitelist.php:64 ../admin/adm_doms_def_type.php:47
 #: ../admin/dom_edit.php:147 ../admin/dom_edit.php:160
 #: ../admin/ip_main.php:146
 msgid "Type"
-msgstr ""
+msgstr "Informaciones"
 
 #: ../admin/adm_authip_whitelist.php:84 ../admin/adm_domstype.php:76
 #: ../admin/adm_list.php:199 ../admin/adm_list.php:226
@@ -338,38 +338,38 @@ msgstr "Borrar"
 
 #: ../admin/adm_db_servers.php:35
 msgid "List of the databases servers"
-msgstr ""
+msgstr "Lista de los servidores de bases de datos"
 
 #: ../admin/adm_db_servers.php:42
 #, fuzzy
 msgid "Here the list of the available databases servers."
-msgstr "He aquí la lista de miembros hospedados"
+msgstr "Tiene aquí la lista de miembros hospedados"
 
 #: ../admin/adm_db_servers.php:49
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #: ../admin/adm_db_servers.php:50 ../admin/adm_domstype.php:59
 #: ../admin/adm_domstypeedit.php:74 ../admin/ip_main.php:146
 #: ../admin/ip_main.php:183 ../admin/logs_list.php:53
 #, fuzzy
 msgid "Name"
-msgstr "Nombres"
+msgstr "Nombre"
 
 #: ../admin/adm_db_servers.php:51 ../admin/vm.php:77
 #, fuzzy
 msgid "Hostname"
-msgstr "Nombre de usuario"
+msgstr "Host"
 
 #: ../admin/adm_db_servers.php:52 ../admin/adm_mxaccount.php:78
 #: ../admin/adm_mxaccount.php:95 ../admin/adm_slavedns.php:140
 #: ../admin/adm_slavedns.php:158 ../admin/sql_getparam.php:70
 msgid "Login"
-msgstr "Nombre de usuario"
+msgstr "Login"
 
 #: ../admin/adm_db_servers.php:53
 msgid "Client"
-msgstr ""
+msgstr "Cliente"
 
 #: ../admin/adm_db_servers.php:54
 #, fuzzy
@@ -378,13 +378,14 @@ msgstr "Usuario"
 
 #: ../admin/adm_db_servers.php:71
 msgid "To add a database server, do an INSERT into the db_servers table"
-msgstr ""
+msgstr "Para añadir un servidor de base de datos, haz una inserción en la tabla db_servers"
 
 #: ../admin/adm_db_servers.php:74
 msgid ""
 "To update the list of the server on the PhpMyAdmin login page, launch "
 "alternc.install"
-msgstr ""
+msgstr "To update the list of the server on the PhpMyAdmin login page, launch "
+"ejecuta alternc.install"
 
 #: ../admin/adm_deactivate.php:46 ../class/m_admin.php:241
 #: ../class/m_admin.php:272 ../class/m_admin.php:778 ../class/m_admin.php:804
@@ -443,11 +444,11 @@ msgstr ""
 
 #: ../admin/adm_defquotas.php:46 ../admin/adm_panel.php:54
 msgid "Change the default quotas"
-msgstr "Modificar las cuotas por omisión"
+msgstr "Modificar las cuotas por defecto"
 
 #: ../admin/adm_defquotas.php:52
 msgid "User's quotas synchronised"
-msgstr ""
+msgstr "Cuotas usuarios sincronizados"
 
 #: ../admin/adm_defquotas.php:65
 msgid "Add account type"
@@ -462,12 +463,12 @@ msgid ""
 "Here is the list of the quotas on the server for the new accounts. If you "
 "want to change them, enter new values"
 msgstr ""
-"He aquí la lista de cuotas por omisión en este servidor para las nuevas "
+"Tienes aquí la lista de cuotas por omisión en este servidor para las nuevas "
 "cuentas."
 
 #: ../admin/adm_defquotas.php:90
 msgid "Synchronise user's quota (only to upper value)"
-msgstr ""
+msgstr "Sincronizar los cuotas usuarios (sólo con un valor superior)"
 
 #: ../admin/adm_defquotas.php:102
 msgid "Accounts of type"
@@ -489,16 +490,16 @@ msgstr "Modificar las cuotas por omisión"
 
 #: ../admin/adm_dnsweberror.php:40
 msgid "Domains and Websites having errors"
-msgstr ""
+msgstr "Dominios y sitios web que tienen errores"
 
 #: ../admin/adm_dnsweberror.php:50
 msgid "List of the websites having errors in the domain database."
-msgstr ""
+msgstr "Lista de los sitios web que tienen errores en la base de datos de dominios."
 
 #: ../admin/adm_dnsweberror.php:53 ../admin/adm_dnsweberror.php:83
 #, fuzzy
 msgid "Uid"
-msgstr "uid"
+msgstr "UID"
 
 #: ../admin/adm_dnsweberror.php:54 ../admin/adm_dnsweberror.php:84
 #: ../admin/adm_list.php:155 ../admin/adm_list.php:237
@@ -515,7 +516,7 @@ msgstr "Nombre de dominio"
 
 #: ../admin/adm_dnsweberror.php:56
 msgid "FQDN"
-msgstr ""
+msgstr "FQDN"
 
 #: ../admin/adm_dnsweberror.php:57 ../admin/adm_variables.php:57
 msgid "Value"
@@ -524,19 +525,19 @@ msgstr "Valor"
 #: ../admin/adm_dnsweberror.php:58 ../admin/adm_domstype.php:60
 #: ../admin/adm_domstypeedit.php:78
 msgid "Description"
-msgstr ""
+msgstr "Descripción"
 
 #: ../admin/adm_dnsweberror.php:59
 msgid "Web Result field"
-msgstr ""
+msgstr "Resultado web"
 
 #: ../admin/adm_dnsweberror.php:80
 msgid "List of the domain names having errors in the domain database."
-msgstr ""
+msgstr "Lista de los nombres de dominio que tienen errores en la base de datos de dominio."
 
 #: ../admin/adm_dnsweberror.php:86
 msgid "DNS Result field"
-msgstr ""
+msgstr "Resultado DNS"
 
 #: ../admin/adm_doadd.php:53 ../admin/adm_doedit.php:64
 #: ../admin/ftp_doedit.php:44 ../admin/hta_doadduser.php:41
@@ -656,11 +657,11 @@ msgstr ""
 
 #: ../admin/adm_doms.php:65
 msgid "If you want to force the check of NS, MX, IP on domains, click the link"
-msgstr ""
+msgstr "Si deseas forzar la comprobación de NS, MX, en los dominios IP, haz clic en el enlace"
 
 #: ../admin/adm_doms.php:65
 msgid "Show domain list with refreshed checked NS, MX, IP information"
-msgstr ""
+msgstr "Mostrar la lista de dominios con verificación actualizada de las informaciones NS, MX, IP"
 
 #: ../admin/adm_doms.php:69 ../admin/adm_mxaccount.php:78
 #: ../admin/adm_slavedns.php:95 ../admin/adm_slavedns.php:140
@@ -689,7 +690,7 @@ msgstr "OK"
 #: ../admin/adm_doms.php:69 ../admin/dom_edit.php:147
 #: ../admin/dom_edit.php:160
 msgid "Status"
-msgstr ""
+msgstr "Estado"
 
 #: ../admin/adm_doms.php:76
 msgid "Locked Domain"
@@ -713,18 +714,23 @@ msgid ""
 "If you don't know what this page is about, don't touch anything, and read "
 "AlternC documentation about domain types"
 msgstr ""
+"Si no sabes de lo que esta página trata, no se toca nada, y lee"
+"la documentación AlternC sobre los tipos de dominio"
 
 #: ../admin/adm_doms_def_type.php:14
 msgid ""
 "The Type column contains a type of available VirtualHost config on The "
 "server."
-msgstr ""
+msgstr "La columna Tipo contiene los tipos de configuraciones disponibles por los VirtualHost"
+"en el servidor."
 
 #: ../admin/adm_doms_def_type.php:15
 msgid ""
 "The Setting column contains the variables to be expanded in the defaults "
 "configuration. Available values are:  "
 msgstr ""
+"La columna Configuración contiene las variables que se expandieron en los valores de configuración por defecto"
+"Los valores disponibles son:"
 
 #: ../admin/adm_doms_def_type.php:17
 #, fuzzy, php-format
@@ -734,7 +740,7 @@ msgstr "Nombre de dominio"
 #: ../admin/adm_doms_def_type.php:18
 #, php-format
 msgid "%%TARGETDOM%%: The destination domain"
-msgstr ""
+msgstr "%%TARGETDOM%%: Dominio de destnación"
 
 #: ../admin/adm_doms_def_type.php:19
 #, fuzzy, php-format
@@ -744,15 +750,15 @@ msgstr "Nombre de dominio"
 #: ../admin/adm_doms_def_type.php:20
 #, php-format
 msgid "%%DOMAINDIR%%: the domain directory on the file system"
-msgstr ""
+msgstr "%%DOMAINDIR%%: el directorio en el sistema de archivos"
 
 #: ../admin/adm_doms_def_type.php:37
 msgid "There was an error during the record."
-msgstr ""
+msgstr "Se ha producido un error durante el registro."
 
 #: ../admin/adm_doms_def_type.php:39 ../admin/cron.php:14
 msgid "Save done."
-msgstr ""
+msgstr "Grabación realizada"
 
 #: ../admin/adm_doms_def_type.php:47
 #, fuzzy
@@ -761,7 +767,7 @@ msgstr "Acción"
 
 #: ../admin/adm_doms_def_type.php:47
 msgid "Concerned"
-msgstr ""
+msgstr "Interesado"
 
 #: ../admin/adm_doms_def_type.php:47
 msgid "Sub"
@@ -789,15 +795,15 @@ msgstr "Creación de un subdominio:"
 
 #: ../admin/adm_domstype.php:61
 msgid "Target"
-msgstr ""
+msgstr "Objetivo"
 
 #: ../admin/adm_domstype.php:62 ../admin/adm_domstypeedit.php:92
 msgid "Entry"
-msgstr ""
+msgstr "Entrada"
 
 #: ../admin/adm_domstype.php:63
 msgid "Compatible with"
-msgstr ""
+msgstr "Compatible con"
 
 #: ../admin/adm_domstype.php:63 ../admin/adm_domstypeedit.php:96
 msgid "Enter comma-separated name of other types"
@@ -1016,16 +1022,16 @@ msgstr ""
 #: ../admin/adm_list.php:91
 #, fuzzy
 msgid "Search for a Login"
-msgstr "Búsqueda de una carpeta"
+msgstr "Busca por un login"
 
 #: ../admin/adm_list.php:92
 #, fuzzy
 msgid "Search for a Domain"
-msgstr "Búsqueda de una carpeta"
+msgstr "Busca por una carpeta"
 
 #: ../admin/adm_list.php:93 ../admin/piwik_sitelist.php:170
 msgid "submit"
-msgstr ""
+msgstr "Enviar"
 
 #: ../admin/adm_list.php:101
 #, fuzzy
@@ -2135,7 +2141,7 @@ msgstr "Configuración"
 #: ../admin/dom_edit.php:133
 #, fuzzy
 msgid "Main subdomains"
-msgstr "Modificar dominio %s"
+msgstr "Subdominios"
 
 #: ../admin/dom_edit.php:147 ../admin/dom_edit.php:160
 #, fuzzy
@@ -2195,7 +2201,7 @@ msgstr "Suprimir un usuario"
 #: ../admin/dom_edit.php:246
 #, fuzzy, php-format
 msgid "Add a subdomain to %s"
-msgstr "Añadir un subdominio"
+msgstr "Añadir un subdominio a %s"
 
 #: ../admin/dom_edit.php:264
 #, fuzzy
@@ -2656,12 +2662,17 @@ msgid ""
 "WARNING: you are trying to access the control panel insecurely, click <a "
 "href=\"https://%s\">here</a> to go to secure mode"
 msgstr ""
+"Advertencia: se está intentando tener acceso al panel de control de forma insegura, haga clic <a "
+"href=\"https://%s\">aquí</a> para ir al modo seguro"
+
 
 #: ../admin/index.php:83
 msgid ""
 "To connect to the hosting control panel, enter your AlternC's login and "
 "password in the following form and click 'Enter'"
 msgstr ""
+"Para conectar al panel de control de hosting, introduzca su login y su "
+"contraseña en el siguiente formulario y haga clic en 'Entrar'"
 
 #: ../admin/index.php:84
 msgid "You are attemping to connect without IP restriction."
@@ -2670,7 +2681,7 @@ msgstr ""
 #: ../admin/index.php:88
 #, fuzzy
 msgid "AlternC access"
-msgstr "Lista de cuentas FTP"
+msgstr "Accesso AlternC"
 
 #: ../admin/index.php:91
 msgid "Enter"
@@ -2688,12 +2699,11 @@ msgstr "Debe aceptar el cookie de sesión para poder conectarte"
 #: ../admin/index.php:152
 #, fuzzy
 msgid "Need a login and a password"
-msgstr "Contraseña inicial"
+msgstr "Se necesite un login y una contraseña"
 
 #: ../admin/ip_main.php:50 ../class/m_authip.php:50
-#, fuzzy
 msgid "FTP Access Security"
-msgstr "Tipo de cuenta"
+msgstr "Seguridad FTP"
 
 #: ../admin/ip_main.php:58
 msgid ""
@@ -2779,11 +2789,11 @@ msgstr ""
 
 #: ../admin/logs_list.php:35
 msgid "Logs Listing"
-msgstr ""
+msgstr "Liste de registros"
 
 #: ../admin/logs_list.php:43
 msgid "You have no web logs to list at the moment."
-msgstr ""
+msgstr "No tiene registros por el momento"
 
 #: ../admin/logs_list.php:49
 msgid ""
@@ -2794,7 +2804,7 @@ msgstr ""
 #: ../admin/logs_list.php:53
 #, fuzzy
 msgid "Creation Date"
-msgstr "Crear"
+msgstr "Fecha de creacion"
 
 #: ../admin/logs_list.php:53
 #, fuzzy
@@ -2807,11 +2817,11 @@ msgstr "Bajar"
 
 #: ../admin/logs_list.php:67
 msgid "Follow"
-msgstr ""
+msgstr "Seguir"
 
 #: ../admin/logs_tail.php:47
 msgid "unknown"
-msgstr ""
+msgstr "Desconocido"
 
 #: ../admin/logs_tail.php:50
 msgid "Follow a recent log"
@@ -3295,6 +3305,8 @@ msgid ""
 "You are using the AlternC Panel. You can contact the AlternC community for "
 "information or feedback by joining the mailing-list"
 msgstr ""
+"Está utilizando el Panel AlternC. Puede ponerse en contacto con la comunidad AlternC para"
+"Información o retroalimentación al unirse a la lista de correo"
 
 #: ../admin/mem_admin.php:40
 msgid "Your administrator preferences has been successfully changed."
@@ -3633,7 +3645,7 @@ msgstr "¡No hay cuota para esta cuenta, o imposible obtener cuota!"
 #: ../admin/quotas_oneuser.php:14
 #, fuzzy, php-format
 msgid "<b>%s</b> account"
-msgstr "%s cuentas"
+msgstr "Cuenta <b>%s</b>"
 
 #: ../admin/quotas_oneuser.php:25 ../class/m_quota.php:59
 #, fuzzy
@@ -3667,12 +3679,12 @@ msgstr ""
 
 #: ../admin/quotas_oneuser.php:158
 msgid "Mailman lists:"
-msgstr ""
+msgstr "Listeas de correa"
 
 #: ../admin/quotas_oneuser.php:166 ../admin/quotas_users.php:186
 #: ../admin/quotas_users.php:189
 msgid "Lists"
-msgstr ""
+msgstr "Listas"
 
 #: ../admin/quotas_users.php:21
 #, fuzzy

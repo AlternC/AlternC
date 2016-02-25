@@ -36,7 +36,7 @@ if ( empty($logo) ||  ! $logo ) {
 }
 
 ?>
-<img src="<?php echo $logo; ?>" class="menutoplogo" border="0" alt="AlternC" width='190px' height='46px' />
+<img src="<?php echo $logo; ?>" class="menutoplogo" border="0" alt="AlternC" />
 <p class="currentuser"><?php echo sprintf(_("Welcome %s"),$mem->user["login"]); ?></p>
 
 <?php
