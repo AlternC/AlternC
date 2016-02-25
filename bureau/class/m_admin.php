@@ -533,7 +533,9 @@ class m_admin {
         $mem->su($u);
         $dom->lock();
         // option : 1=hébergement dns, 1=noerase, empeche de modifier, 1=force
-        $dom->add_domain($mem->user['login'] . "." . $domain_name, 1, 1, 1);
+        // we do not allow DNS modification for hosting_tld
+        $dns=($domaine_name==variable_get("hosting_tld")) ? 0 : 1;
+        $dom->add_domain($mem->user['login'] . "." . $domain_name, $dns, 1, 1);
         $dom->unlock();
         $mem->unsu();
         return true;
@@ -1095,7 +1097,9 @@ EOF;
                 file_put_contents($cachefile, serialize($checked));
             }
         }
-        $db->query("SELECT m.uid,m.login,d.domaine,d.gesdns,d.gesmx,d.noerase FROM domaines d LEFT JOIN membres m ON m.uid=d.compte ORDER BY domaine;");
+
+        $filter=($hosting_tld=variable_get("hosting_tld")) ? " WHERE domaine not like '%.$hosting_tld'" : "";
+        $db->query("SELECT m.uid,m.login,d.domaine,d.gesdns,d.gesmx,d.noerase FROM domaines d LEFT JOIN membres m ON m.uid=d.compte $filter ORDER BY domaine;");
         $c = array();
         while ($db->next_record()) {
             $tmp = $db->Record;
@@ -1121,11 +1125,17 @@ EOF;
     function checkalldom() {
         global $db, $L_NS1, $L_NS2, $L_MX, $L_PUBLIC_IP;
         $checked = array();
-        $db->query("SELECT * FROM domaines ORDER BY domaine;");
+
+        $filter=($hosting_tld=variable_get("hosting_tld")) ? " WHERE domaine not like '%.$hosting_tld'" : "";
+        $db->query("SELECT * FROM domaines $filter ORDER BY domaine");
         $dl = array();
         while ($db->next_record()) {
             $dl[$db->Record["domaine"]] = $db->Record;
         }
+
+        // won't search for MX and subdomains record if DNS is hosted here
+        $lazycheck=1;
+
         sort($dl);
         foreach ($dl as $c) {
             // For each domain check its type:
@@ -1142,37 +1152,40 @@ EOF;
                 } else {
                     if (!in_array($L_NS1 . ".", $out) || !in_array($L_NS2 . ".", $out)) {
                         $errno = 1;
-                        $errstr.="NS for this domain are not $L_NS1 and $L_NS2 BUT " . implode(",", $out) . "\n";
+                        $errstr.=sprintf(_("NS for this domain are not %s and %s BUT %s"),
+                               $L_NS1, $L_NS2, implode(",", $out)) . "\n";
                     }
                 }
             }
-            if ($c["gesmx"] == 1 && !$dontexist) {
-                $out = array();
-                exec("dig +short MX " . escapeshellarg($c["domaine"]), $out);
-                $out2 = array();
-                foreach ($out as $o) {
-                    list($t, $out2[]) = explode(" ", $o);
+
+            if (!$dontexist&&(!$lazycheck||!$c["gesdns"])) {
+                if ($c["gesmx"] == 1) {
+                    $out = array();
+                    exec("dig +short MX " . escapeshellarg($c["domaine"]), $out);
+                    $out2 = array();
+                    foreach ($out as $o) {
+                        list($t, $out2[]) = explode(" ", $o);
+                    }
+                    if (!in_array($L_MX . ".", $out2)) {
+                        $errno = 1;
+                        $errstr.=sprintf(_("MX is not %s BUT %s"), $L_MX, implode(",", $out2))."\n";
+                    }
                 }
-                if (!in_array($L_MX . ".", $out2)) {
-                    $errno = 1;
-                    $errstr.="MX is not $L_MX BUT " . implode(",", $out2) . "\n";
-                }
-            }
-            if (!$dontexist) {
+
                 // We list all subdomains and check they are pointing to us.
                 $db->query("SELECT * FROM sub_domaines WHERE domaine='" . addslashes($c["domaine"]) . "' ORDER BY sub;");
                 while ($db->next_record()) {
                     $d = $db->Record;
-                    if ($d["type"] == 0) {
+                    if ($d["type"] == 'VHOST') {
                         // Check the IP: 
                         $out = array();
                         exec("dig +short A " . escapeshellarg($d["sub"] . (($d["sub"] != "") ? "." : "") . $c["domaine"]), $out);
                         if (!is_array($out)) { // exec dig can fail
                             $errno = 1;
-                            $errstr.="Fail to get the DNS information. Try again.\n";
+                            $errstr.=_("Fail to get the DNS information. Try again.")."\n";
                         } else {
                             if (!in_array($L_PUBLIC_IP, $out)) {
-                                $errstr.="subdomain '" . $d["sub"] . "' don't point to $L_PUBLIC_IP but to " . implode(",", $out) . "\n";
+                                $errstr.=sprintf(_("subdomain '%s' doesn't point to %s but to '%s'"), $d["sub"], $L_PUBLIC_IP, implode(",", $out))."\n" ;
                                 $errno = 1;
                             }
                         }
@@ -1181,7 +1194,7 @@ EOF;
             }
             if ($dontexist) {
                 $errno = 2;
-                $errstr = "Domain don't exist anymore !";
+                $errstr = _("Domain doesn't exist anymore !");
             }
             if ($errno == 0)
                 $errstr = "OK";

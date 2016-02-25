@@ -122,7 +122,7 @@ if ( empty($logo) ||  ! $logo ) {
         <tr><td style="text-align: left; font-size: 10px">
         <?php __("You must accept the session cookie to log-in"); ?>
         <br />
-        <?php echo "If you want to use a different language, choose it in the list below"; ?>
+        <?php echo _("If you want to use a different language, choose it in the list below"); ?>
         <br />
               <?php 
             foreach($locales as $l) {
