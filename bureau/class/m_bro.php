@@ -659,21 +659,26 @@ class m_bro {
             return 1;
         }
         $lfile = strtolower($file);
-        if (substr($lfile, -4) == ".tar" || substr($lfile, -8) == ".tar.bz2" || substr($lfile, -7) == ".tar.gz" || substr($lfile, -6) == ".tar.z") {
+        if (substr($lfile, -4) == ".tar" || substr($lfile, -8) == ".tar.bz2" || substr($lfile, -7) == ".tar.gz" || substr($lfile, -6) == ".tar.z" || substr($lfile, -4) == ".tgz" || substr($lfile, -4) == ".tbz" || substr($lfile, -5) == ".tbz2" ) {
             // TODO new version of tar supports `tar xf ...` so there is no
             // need to specify the compression format
             echo "<p>" . _("Uncompressing through TAR") . "</p><pre style=\"overflow: scroll; height: 200px\">";
             $ret = 0;
-            passthru("tar -xvf " . escapeshellarg($file) . " -C " . escapeshellarg($dest) . " 2>&1", $ret);
+            passthru("tar -xvf " . escapeshellarg($file) . " --numeric-owner -C " . escapeshellarg($dest) . " 2>&1", $ret);
         }
-        if (substr($lfile, -4) == ".zip") {
+        elseif (substr($lfile, -4) == ".zip") {
             echo "<p>" . _("Uncompressing through UNZIP") . "</p><pre style=\"overflow: scroll; height: 200px\">";
             $cmd = "unzip -o " . escapeshellarg($file) . " -d " . escapeshellarg($dest) . " 2>&1";
             passthru($cmd, $ret);
         }
-        if (substr($lfile, -3) == ".gz" && substr($lfile, -7) != ".tar.gz") {
+        elseif (substr($lfile, -3) == ".gz" || substr($lfile, -2) == ".Z") {
             echo "<p>" . _("Uncompressing through GUNZIP") . "</p><pre style=\"overflow: scroll; height: 200px\">";
             $cmd = "gunzip " . escapeshellarg($file) . " 2>&1";
+            passthru($cmd, $ret);
+        }
+        elseif (substr($lfile, -3) == ".bz" || substr($lfile, -4) == ".bz2") {
+            echo "<p>" . _("Uncompressing through bunzip2") . "</p><pre style=\"overflow: scroll; height: 200px\">";
+            $cmd = "bunzip2 " . escapeshellarg($file) . " 2>&1";
             passthru($cmd, $ret);
         }
         echo "</pre>";

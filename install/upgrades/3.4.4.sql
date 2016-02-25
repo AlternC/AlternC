@@ -1,0 +1,3 @@
+
+INSERT IGNORE INTO tld VALUES ('co', 1);
+INSERT IGNORE INTO tld VALUES ('cc', 1);
