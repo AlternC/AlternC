@@ -158,7 +158,7 @@ msgstr "Suprimir este tipo de cuenta"
 #: ../admin/hta_edit.php:63 ../admin/hta_edit.php:100 ../admin/index.php:89
 #: ../admin/piwik_userlist.php:79 ../admin/sql_users_add.php:59
 msgid "Username"
-msgstr "Nombre de usuario"
+msgstr "Login"
 
 #: ../admin/adm_add.php:68
 msgid "Initial password"
@@ -2671,8 +2671,8 @@ msgid ""
 "To connect to the hosting control panel, enter your AlternC's login and "
 "password in the following form and click 'Enter'"
 msgstr ""
-"Para conectar al panel de control de hosting, introduzca su login y su "
-"contraseña en el siguiente formulario y haga clic en 'Entrar'"
+"Para conectarte al <b>panel de control de tu alojamiento</b>, introduce tu login y tu "
+"contraseña en el siguiente formulario y haz clic en 'Entrar'"
 
 #: ../admin/index.php:84
 msgid "You are attemping to connect without IP restriction."
@@ -2694,7 +2694,7 @@ msgstr ""
 
 #: ../admin/index.php:123
 msgid "You must accept the session cookie to log-in"
-msgstr "Debe aceptar el cookie de sesión para poder conectarte"
+msgstr "Debes aceptar el cookie de sesión para poder conectarte"
 
 #: ../admin/index.php:152
 #, fuzzy
