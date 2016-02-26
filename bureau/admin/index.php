@@ -44,6 +44,7 @@ if (!isset($charset) || ! $charset) $charset="UTF-8";
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <title>AlternC Desktop</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="styles/style.css" type="text/css" />
 <?php
 if (file_exists("styles/style-custom.css") ) {
@@ -55,10 +56,10 @@ if (file_exists("styles/style-custom.css") ) {
 <script src="js/jquery.min_embedded.js" type="text/javascript"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $charset; ?>" />
 </head>
-<body>
+<body class="login_page">
   <div id="global">
 
-    <div id="content" style="width:1000px;">
+    <div id="content">
 <?php
 // Getting logo
 $logo = variable_get('logo_login', '' ,'You can specify a logo for the login page, example /images/my_logo.png .', array('desc'=>'URL','type'=>'string'));
@@ -75,27 +76,44 @@ if ( empty($logo) ||  ! $logo ) {
     <?php
     if (isset($_GET['authip_token'])) $authip_token=$_GET['authip_token'];
     if (variable_get('https_warning', true, 'warn users to switch to HTTPS') && !isset($_SERVER['HTTPS'])) {
-      echo '<h4>' . sprintf(_('WARNING: you are trying to access the control panel insecurely, click <a href="https://%s">here</a> to go to secure mode'), $_SERVER["HTTP_HOST"]) . '</h4>';
+      echo '<div class="unsecure"><strong>' . sprintf(_('WARNING: you are trying to access the control panel insecurely, click <a href="https://%s">here</a> to go to secure mode'), $_SERVER["HTTP_HOST"]) . '</strong></div>';
     }
     ?>
-    <div style="margin: 0 auto 30px auto; width: 700px;">
-      <table width="100%"><tr><td>
+    <div class="block_list">
+      <div class="block_login_page">
         <?php __("To connect to the hosting control panel, enter your AlternC's login and password in the following form and click 'Enter'"); ?>
+      </div>
+      <div class="block_login_page">
+	<div class="menu-box">
         <?php if (!empty($authip_token)) { echo "<p style='color:red;'>";__("You are attemping to connect without IP restriction."); echo "</p>"; } ?>
-        </td><td>
-          <form action="login.php" method="post" name="loginform" target="_top">
-            <table border="0" style="border: 1px solid #202020;" cellspacing="0" cellpadding="3" width="300px" >
-            <tr><td colspan="2" align="center"><b><?php __("AlternC access"); ?></b></td></tr>
-            <tr><td align="right"><label for="username"><?php echo _("Username"); ?></label></td><td><input type="text" class="int" name="username" id="username" value="" maxlength="128" size="15" /></td></tr>
-            <tr><td align="right"><label for="password"><?php echo _("Password"); ?></label></td><td><input type="password" class="int" name="password" id="password" value="" maxlength="128" size="15" /></td></tr>
-            <tr><td colspan="2" align="center"><input type="submit" class="inb" name="submit" onclick='return logmein();' value="<?php __("Enter"); ?>" /><input type="hidden" id="restrictip" name="restrictip" value="1" /></td></tr>
-            </table>
-            <input type="hidden" id="authip_token" name="authip_token" value="<?php echo htmlentities( (empty($authip_token)?'':$authip_token) ) ?>" />
+            <div class="menu-title"><?php __("AlternC access"); ?></div>
+	    <form action="login.php" method="post" name="loginform" target="_top">
+            <div class="menu-content">
+                <div><label for="username"><?php echo _("Username"); ?></label></td><td><input type="text" class="int" name="username" id="username" value="" maxlength="128" autocapitalize="none" /></div>
+                <div><label for="password"><?php echo _("Password"); ?></label></td><td><input type="password" class="int" name="password" id="password" value="" maxlength="128" /></div>
+                <div class="submit"><input type="submit" class="inb" name="submit" onclick='return logmein();' value="<?php __("Enter"); ?>" /><input type="hidden" id="restrictip" name="restrictip" value="1" />
+                <input type="hidden" id="authip_token" name="authip_token" value="<?php echo htmlentities( (empty($authip_token)?'':$authip_token) ) ?>" /></div>
+            </div>
           </form>
+	</div>
+      </div>
+      <div class="block_login_page">
 
-        </td></tr>
-        <tr><td>
-
+        <?php __("You must accept the session cookie to log-in"); ?>
+        <br />
+        <?php echo _("If you want to use a different language, choose it in the list below"); ?>
+        <br />
+              <?php 
+            foreach($locales as $l) {
+              ?>
+              <a href="?setlang=<?php echo $l; ?>"><?php if (isset($lang_translation[$l])) echo $lang_translation[$l]; else echo $l;  ?></a>
+              <?php } ?>
+        <br />
+        <?php
+         $mem->show_help("login",true); 
+        ?>
+      </div>
+      <div class="block_login_page">
         <?php
 
           // Here we used to have a form to enter the squirrelmail's webmail.
@@ -111,39 +129,13 @@ if ( empty($logo) ||  ! $logo ) {
           <p><a href="<?php echo $url; ?>"><?php __("To read your mail in a browser, click here to go to your server's Webmail"); ?></a></p>
         <?php
         }
-        ?></td><td>
-
-        </td></tr>
-
-      </table>
-
-
-      <table width="100%" style="border: 0">
-        <tr><td style="text-align: left; font-size: 10px">
-        <?php __("You must accept the session cookie to log-in"); ?>
-        <br />
-        <?php echo _("If you want to use a different language, choose it in the list below"); ?>
-        <br />
-              <?php 
-            foreach($locales as $l) {
-              ?>
-              <a href="?setlang=<?php echo $l; ?>"><?php if (isset($lang_translation[$l])) echo $lang_translation[$l]; else echo $l;  ?></a>
-              <?php } ?>
-        <br />
-        <?php
-         $mem->show_help("login",true); 
         ?>
-        </td>
-        <td>
-        <p>
-        <a href="http://www.alternc.com/"><img src="images/powered_by_alternc2.png" width="128" height="32" alt="Powered by AlternC" /></a>
-        </p>
-        </td>
-        </tr>
-      </table>
-
-
+      </div>
     </div>
+    <div class="alternc_powered">
+        <a href="http://www.alternc.com/"><img src="images/powered_by_alternc2.png" width="128" height="32" alt="Powered by AlternC" /></a>
+    </div>
+
     <script type="text/javascript">
     $('#username').focus();
 
