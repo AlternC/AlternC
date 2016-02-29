@@ -1,5 +1,6 @@
 #!/bin/bash
 # dns.sh next-gen by Fufroma
+# 20160229 - patch - issue 65
 
 # Init some vars
 . /etc/alternc/local.sh
