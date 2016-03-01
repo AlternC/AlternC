@@ -66,7 +66,7 @@ dns_named_conf() {
   fi
 
   # Add the entry
-  grep -q "\"$domain\"" "$NAMED_CONF"
+  grep -q "\"${domain/./\\.}\"" "$NAMED_CONF"
   if [ $? -ne 0 ] ; then
     local tempo=$(cat "$NAMED_TEMPLATE")
     tempo=${tempo/@@DOMAINE@@/$domain}
@@ -89,15 +89,17 @@ dns_delete() {
     rm -f "$(dns_zone_file $domain)"
   fi
 
+  local reg_domain=${domain/./\\.}
+
   # Remove from the named conf
   local file=$(cat "$NAMED_CONF")
-  echo -e "$file" |grep -v "\"$domain\"" > "$NAMED_CONF"
+  echo -e "$file" |grep -v "\"$reg_domain\"" > "$NAMED_CONF"
 
   # Remove the conf from openDKIM
   rm -rf "/etc/opendkim/keys/$domain"
-  grep -v "^$domain\$" /etc/opendkim/TrustedHosts >/etc/opendkim/TrustedHosts.alternc-tmp && mv /etc/opendkim/TrustedHosts.alternc-tmp /etc/opendkim/TrustedHosts
-  grep -v "^alternc._domainkey.$domain " /etc/opendkim/KeyTable >/etc/opendkim/KeyTable.alternc-tmp && mv /etc/opendkim/KeyTable.alternc-tmp /etc/opendkim/KeyTable
-  grep -v "^$domain alternc._domainkey.$domain\$" /etc/opendkim/SigningTable >/etc/opendkim/SigningTable.alternc-tmp && mv /etc/opendkim/SigningTable.alternc-tmp /etc/opendkim/SigningTable
+  grep -v "^$reg_domain\$" /etc/opendkim/TrustedHosts >/etc/opendkim/TrustedHosts.alternc-tmp && mv /etc/opendkim/TrustedHosts.alternc-tmp /etc/opendkim/TrustedHosts
+  grep -v "^alternc\._domainkey\.$reg_domain " /etc/opendkim/KeyTable >/etc/opendkim/KeyTable.alternc-tmp && mv /etc/opendkim/KeyTable.alternc-tmp /etc/opendkim/KeyTable
+  grep -v "^$domain alternc\._domainkey\.$reg_domain\$" /etc/opendkim/SigningTable >/etc/opendkim/SigningTable.alternc-tmp && mv /etc/opendkim/SigningTable.alternc-tmp /etc/opendkim/SigningTable
   
   # Ask the dns server for restart
   $RNDC reconfig
@@ -159,9 +161,11 @@ dns_regenerate() {
 	    chown opendkim:opendkim alternc.private
 	    popd
 
-	    grep -q "^$domain\$" /etc/opendkim/TrustedHosts || echo "$domain" >>/etc/opendkim/TrustedHosts
-	    grep -q "^alternc._domainkey.$domain " /etc/opendkim/KeyTable || echo "alternc._domainkey.$domain $domain:alternc:/etc/opendkim/keys/$domain/alternc.private" >> /etc/opendkim/KeyTable
-	    grep -q "^$domain alternc._domainkey.$domain\$" /etc/opendkim/SigningTable || echo "$domain alternc._domainkey.$domain" >> /etc/opendkim/SigningTable
+           local reg_domain=${domain/./\\.}
+
+	    grep -q "^$reg_domain\$" /etc/opendkim/TrustedHosts || echo "$domain" >>/etc/opendkim/TrustedHosts
+	    grep -q "^alternc\._domainkey\.$reg_domain " /etc/opendkim/KeyTable || echo "alternc._domainkey.$domain $domain:alternc:/etc/opendkim/keys/$domain/alternc.private" >> /etc/opendkim/KeyTable
+	    grep -q "^$domain alternc\._domainkey\.$reg_domain\$" /etc/opendkim/SigningTable || echo "$domain alternc._domainkey.$domain" >> /etc/opendkim/SigningTable
 	fi
 	# we add alternc._domainkey with the proper key
 
