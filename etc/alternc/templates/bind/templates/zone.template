@@ -12,7 +12,7 @@ $TTL @@ZONETTL@@
                 21600           ; refresh (6h)
                 3600            ; retry (1h)
                 604800          ; expiry (7d)
-                86400 ) ; RR TTL (24h)
+                @@ZONETTL@@ ) ; RR TTL (24h)
 
                 IN      NS      %%ns1%%.
                 IN      NS      %%ns2%%.
