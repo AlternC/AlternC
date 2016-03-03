@@ -50,10 +50,10 @@ Depends: debianutils (>= 1.13.1)
        , opendkim
        , mysql-client(>= 5.0)
        , php5-curl
+       , quota
        , ${misc:Depends}
 Recommends: mysql-server(>= 5.0)
           , ntp
-          , quota
           , unzip
           , bzip2
 Conflicts: alternc-admintools
