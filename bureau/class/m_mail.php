@@ -376,7 +376,7 @@ ORDER BY
         }
 
         // Check the quota:
-        if (!$quota->cancreate("mail")) {
+        if (($type=="")&&!$quota->cancreate("mail")) {
             $err->raise("mail", _("You cannot create email addresses: your quota is over"));
             return false;
         }
