@@ -146,8 +146,11 @@ $db = new DB_system();
 // https: Redirection if not calling https://!fqdn or if https is forced
 if ((variable_get('force_https', '0', "This variable is set to 0 (default) if users can access the management desktop through HTTP, otherwise we force HTTPS")&&(!isset($_SERVER["HTTPS"])|| ($_SERVER["HTTPS"] != "on")))
     ||(isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on" && $host != $L_FQDN)) {
-    header("Location: https://$L_FQDN".$_SERVER['REQUEST_URI']);
-    exit;
+    // do not redirect if access is not by HTTP(s)
+    if (isset($_SERVER['REQUEST_URI'])) {
+      header("Location: https://$L_FQDN".$_SERVER['REQUEST_URI']);
+      exit;
+    }
 }
 
 // Current User ID = the user whose commands are made on behalf of.
