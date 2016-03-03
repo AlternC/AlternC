@@ -213,8 +213,6 @@ if ($oldid && $oldid != $cuid) {
     $isinvited = true;
 }
 
-variable_get('aaa1', '', 'plop');
-
 // Init some vars
 variable_get('hosting_tld', '', 'This is a FQDN that designates the main hostname of the service. For example, hosting_tld determines in what TLD the "free" user domain is created. If this is set to "example.com", a checkbox will appear in the user creation dialog requesting the creator if he wants to create the domain "username.example.com".', array('desc' => 'Wanted FQDN', 'type' => 'string'));
 
