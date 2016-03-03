@@ -6075,7 +6075,7 @@ msgstr "Toon mijn quota's"
 #: ../class/m_quota.php:78
 #, php-format
 msgid "%s%% of %s"
-msgstr "%s%% van %s"
+msgstr "%s% van %s"
 
 #: ../class/m_quota.php:78 ../class/m_quota.php:106 ../class/m_quota.php:197
 msgid "quota_"

@@ -107,7 +107,7 @@ if($admin->enabled) {
 } // if $admin->enabled
 
 $blocks=$hooks->invoke("hook_homepageblock");
-uasort($blocks, function($a, $b) {return $a->order<$b->order ? -1 : 1;});
+uasort($blocks, function($a, $b) {return $a->pos<$b->pos ? -1 : 1;});
 foreach ($blocks as $v) {
 	if (property_exists($v, "call")) {
 		$func=$v->call;

@@ -61,7 +61,7 @@ if ($show == "all" && !$subadmin == 1 && $cuid != 2000) {
 }
 
 // show all accounts by default for admin-like accounts
-if (($show=="")&&($subadmin == 1 || $cuid == 2000)) $show=all;
+if (($show=="")&&($subadmin == 1 || $cuid == 2000)) $show="all";
 
 if ($pattern && $pattern_type) {
     $accountList = $admin->get_list($show == 'all' ? 1 : 0, $creator, $pattern, $pattern_type);
