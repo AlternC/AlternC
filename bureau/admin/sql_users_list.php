@@ -38,6 +38,9 @@ $rdb=$mysql->get_dblist();
 <hr id="topbar"/>
 <br />
 <?php
+if (isset($info) && $info) {
+	echo "<p class=\"alert alert-info\">$info</p><p>&nbsp;</p>";
+}
 if (isset($error) && $error) {
 	echo "<p class=\"alert alert-danger\">$error</p><p>&nbsp;</p>";
 }
