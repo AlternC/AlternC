@@ -56,7 +56,7 @@ session_start();
   /* */
 
 if (ini_get("safe_mode")) {
-    echo "SAFE MODE IS ENABLED for the web panel ! It's a bug in your php or apache configuration, please fix it !!";
+    echo _("SAFE MODE IS ENABLED for the web panel ! It's a bug in your php or apache configuration, please fix it !!");
     exit();
 }
 
@@ -114,11 +114,6 @@ require_once($root . "/class/db_mysql.php");
 require_once($root . "/class/functions.php");
 require_once($root . "/class/variables.php");
 
-// Redirection si appel � https://(!fqdn)/
-if (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on" && $host != $L_FQDN) {
-    header("Location: https://$L_FQDN/");
-}
-
 // child class of the phplib parent DB class 
 /**
  * Class for MySQL management in the bureau 
@@ -147,6 +142,13 @@ class DB_system extends DB_Sql {
 }
 
 $db = new DB_system();
+
+// https: Redirection if not calling https://!fqdn or if https is forced
+if ((variable_get('force_https', '0', "This variable is set to 0 (default) if users can access the management desktop through HTTP, otherwise we force HTTPS")&&( $_SERVER["HTTPS"] != "on"))
+    ||(isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on" && $host != $L_FQDN)) {
+    header("Location: https://$L_FQDN".$_SERVER['REQUEST_URI']);
+    exit;
+}
 
 // Current User ID = the user whose commands are made on behalf of.
 $cuid = 0;
@@ -216,6 +218,7 @@ if ($oldid && $oldid != $cuid) {
 // Init some vars
 variable_get('hosting_tld', '', 'This is a FQDN that designates the main hostname of the service. For example, hosting_tld determines in what TLD the "free" user domain is created. If this is set to "example.com", a checkbox will appear in the user creation dialog requesting the creator if he wants to create the domain "username.example.com".', array('desc' => 'Wanted FQDN', 'type' => 'string'));
 
-variable_get('subadmin_restriction', '0', "This variable set the way the account list works for accounts other than 'admin' (2000). 0 (default) = admin other than admin/2000 can see their own account, but not the other one 1 = admin other than admin/2000 can see any account by clicking the ''show all accounts'' link.", array('desc' => 'Shared access activated?', 'type' => 'boolean'));
+variable_get('subadmin_restriction', '0', "This variable sets the way the account list works for accounts other than 'admin' (2000). 0 (default) = admin other than admin/2000 can see their own account, but not the other one 1 = admin other than admin/2000 can see any account by clicking the ''show all accounts'' link.", array('desc' => 'Shared access activated?', 'type' => 'boolean'));
 
-variable_get('auth_ip_ftp_default_yes', '1', "This variable set if you want to allow all IP address to access FTP by default. If the user start to define some IP or subnet in the allow list, only those he defined will be allowed.", array('desc' => 'Allow by default?', 'type' => 'boolean'));
+variable_get('auth_ip_ftp_default_yes', '1', "This variable sets if you want to allow all IP address to access FTP by default. If the user start to define some IP or subnet in the allow list, only those he defined will be allowed.", array('desc' => 'Allow by default?', 'type' => 'boolean'));
+
