@@ -5,8 +5,9 @@ php:
   - 5.3
 script: phpunit --coverage-clover=coverage.clover
 before_script:
-  - pear channel-discover pear.phpunit.de
-  - pear install phpunit/DbUnit
+# pear.phpunit.de offline, and travis have phpunit 
+#  - pear channel-discover pear.phpunit.de
+#  - pear install phpunit/DbUnit
   - cd phpunit
 after_script:
   - wget https://scrutinizer-ci.com/ocular.phar
