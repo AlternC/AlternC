@@ -10,7 +10,7 @@ before_script:
 # pear.phpunit.de offline, and travis have phpunit 
 #  - pear channel-discover pear.phpunit.de
 #  - pear install phpunit/DbUnit
-  - mysql -e 'create database alternc_test;'
+  - mysql -e 'create database alternc_test DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;'
   - cd phpunit
 after_script:
   - wget https://scrutinizer-ci.com/ocular.phar
