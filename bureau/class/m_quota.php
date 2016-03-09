@@ -576,7 +576,7 @@ class m_quota {
         $units = array(1073741824 => _("GB"), 1048576 => _("MB"), 1024 => _("KB"), 0 => _("B"));
         foreach ($units as $value => $unit) {
             if ($size >= $value) {
-                $size = str_pad(round($size / ($value ? $value : 1), 1), 5, ' ', STR_PAD_LEFT);
+                $size=$size/($value?$value:1);
                 return array('size' => $size, 'unit' => $unit);
             }
         }
