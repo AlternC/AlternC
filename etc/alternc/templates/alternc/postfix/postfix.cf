@@ -6,8 +6,22 @@ smtpd_banner = $myhostname ESMTP
 header_checks = regexp:/etc/postfix/header_checks
 body_checks = regexp:/etc/postfix/body_checks
 local_destination_concurrency_limit = 8
-default_destination_concurrency_limit = 10
-# TLS options
+# nb of parallel delivery to the same destination
+default_destination_concurrency_limit = 3
+# nb of recipients per delivery 
+default_destination_recipient_limit = 6
+# max number of recipients per message
+smtpd_recipient_limit = 500
+# limit connections to local server to 50 per 5m period
+anvil_rate_time_unit = 5m
+smtpd_client_connection_rate_limit=50
+# do not fallback on the second mx when mail is greylisted
+# (this solves a bug in postfix which fallback to
+# alternate MX after receiving 4XX SMTP replies introduced
+# in "[Incompat 20031223]")  
+smtp_mx_session_limit = 1
+
+#### TLS options
 smtpd_use_tls = yes
 smtpd_tls_dcert_file = /etc/alternc/apache.pem
 smtpd_tls_dkey_file = $smtpd_tls_dcert_file
@@ -29,7 +43,7 @@ broken_sasl_auth_clients = yes
 smtpd_sasl_type=dovecot
 smtpd_sasl_path=private/auth
 smtpd_sasl_auth_enable=yes
-#Virtual Maping
+#### Virtual Mapping
 alias_maps = hash:/etc/aliases
 alias_database = hash:/etc/aliases
 virtual_alias_maps = proxy:mysql:/etc/postfix/myalias.cf,proxy:mysql:/etc/postfix/mymail2mail.cf
@@ -46,7 +60,7 @@ transport_maps = proxy:mysql:/etc/postfix/mytransport.cf
 dovecot_destination_recipient_limit = 1
 mailman_destination_recipient_limit = 1
 smtpd_recipient_restrictions = permit_mynetworks, permit_sasl_authenticated, reject_invalid_hostname, reject_non_fqdn_hostname, reject_non_fqdn_sender, reject_rbl_client zen.spamhaus.org, reject_non_fqdn_recipient, reject_unknown_sender_domain, reject_unknown_recipient_domain, reject_unauth_pipelining, reject_unlisted_recipient, reject_unauth_destination
-# DKIM Filtering
+#### DKIM Filtering
 milter_default_action = accept
 milter_protocol = 6
 smtpd_milters = inet:127.0.0.1:8891
