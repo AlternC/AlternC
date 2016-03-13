@@ -14,7 +14,7 @@
  
  	# We enable dovecot SSL certificate instructions: (on wheezy we should use a new file in /etc/dovecot/conf.d/ )
 -	sed -i -e 's#^ssl_cert_file.*$#ssl_cert_file = /etc/ssl/certs/ssl-cert-snakeoil.pem#' -e 's#^ssl_key_file.*$#ssl_key_file = /etc/ssl/private/ssl-cert-snakeoil.key#' /etc/dovecot/dovecot.conf
-+	( echo "ssl_cert = </etc/alternc/apache.pem" ; echo "ssl_key = </etc/alternc/apache.pem" ) >/etc/dovecot/conf.d/96_ssl.conf
++	( echo "# Don't change this file, it will be overwriten by alternc.install. Change ssl parameters in a file named 99_ssl.conf instead" ; echo "ssl_cert = </etc/alternc/apache.pem" ; echo "ssl_key = </etc/alternc/apache.pem" ) >/etc/dovecot/conf.d/96_ssl.conf
  
      else
          # We disable proftpd tls module
@@ -23,7 +23,7 @@
  
  	# We disable dovecot SSL certificate instructions: (on wheezy we should remove a file in /etc/dovecot/conf.d/ )
 -        sed -i -e 's#^ssl_cert_file.*$#ssl_cert_file = /etc/ssl/certs/ssl-cert-snakeoil.pem#' -e 's#^ssl_key_file.*$#ssl_key_file = /etc/ssl/private/ssl-cert-snakeoil.key#' /etc/dovecot/dovecot.conf
-+	( echo "ssl_cert = </etc/ssl/certs/ssl-cert-snakeoil.pem" ; echo "ssl_key = </etc/ssl/private/ssl-cert-snakeoil.key" ) >/etc/dovecot/conf.d/96_ssl.conf
++	( echo "# Don't change this file, it will be overwriten by alternc.install. Change ssl parameters in a file named 99_ssl.conf instead" ; echo "ssl_cert = </etc/ssl/certs/ssl-cert-snakeoil.pem" ; echo "ssl_key = </etc/ssl/private/ssl-cert-snakeoil.key" ) >/etc/dovecot/conf.d/96_ssl.conf
  
          echo "SSL not configured"
          echo "create a certificate in /etc/alternc/apache.pem and rerun alternc.install"
