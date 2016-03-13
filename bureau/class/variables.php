@@ -43,6 +43,7 @@
 function variable_init($conf = array()) {
     global $db;
     $result = $db->query('SELECT * FROM `variable`');
+    $variables=array();
     while ($db->next_record($result)) {
         /* maybe the data is *not* serialized, in that case, take it verbatim */
         $variable = $db->Record;
