@@ -96,8 +96,8 @@ for($i=0;$i<count($rdb);$i++) {
   <th><label for="dbn"><?php __("MySQL Database"); ?></label></th>
   <td>
     <?php 
-    // Max 16 caracters for the database name if we want the mysql user to be automatically created.
-    $max_dbsufix_size=(16-strlen($mem->user["login"].'_'));
+    // Set a maximum length for the database name if we want the mysql user to be automatically created.
+    $max_dbsufix_size=(variable_get("sql_max_database_length", 16)-strlen($mem->user["login"].'_'));
     ?>
 	<span class="int" id="dbnpfx"><?php echo $mem->user["login"]; ?>_</span><input type="text" class="int" name="dbn" id="dbn" value="" size="20" maxlength="<?php echo $max_dbsufix_size ;?>" />
   </td>

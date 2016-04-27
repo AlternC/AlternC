@@ -257,8 +257,9 @@ class m_mysql {
             return false;
         }
 
-        if (strlen($dbname) > 64) {
-            $err->raise("mysql", _("Database name cannot exceed 64 characters"));
+	$len=variable_get("sql_max_database_length", 64);
+        if (strlen($dbname) > $len) {
+            $err->raise("mysql", _("Database name cannot exceed %d characters"), $len);
             return false;
         }
         $db->query("SELECT * FROM db WHERE db='$dbname';");
@@ -422,8 +423,9 @@ class m_mysql {
             return false;
         }
 
-        if (strlen($password) > 16) {
-            $err->raise("mysql", _("MySQL password cannot exceed 16 characters"));
+	$len=variable_get("sql_max_username_length", 16);
+        if (strlen($password) > $len) {
+            $err->raise("mysql", _("MySQL password cannot exceed %d characters"), $len);
             return false;
         }
 
@@ -714,8 +716,9 @@ class m_mysql {
         }
 
         // We check the length of the COMPLETE username, not only the part after _
-        if (strlen($user) > 16) {
-            $err->raise("mysql", _("MySQL username cannot exceed 16 characters"));
+	$len=variable_get("sql_max_username_length", 16);
+        if (strlen($user) > $len) {
+            $err->raise("mysql", _("MySQL username cannot exceed %d characters"), $len);
             return false;
         }
         $db->query("SELECT * FROM dbusers WHERE name='$user';");

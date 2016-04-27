@@ -225,3 +225,14 @@ variable_get('subadmin_restriction', '0', "This variable sets the way the accoun
 
 variable_get('auth_ip_ftp_default_yes', '1', "This variable sets if you want to allow all IP address to access FTP by default. If the user start to define some IP or subnet in the allow list, only those he defined will be allowed.", array('desc' => 'Allow by default?', 'type' => 'boolean'));
 
+if ((variable_get('sql_max_username_length', NULL)==NULL)||(variable_get('sql_max_database_length', NULL)==NULL)) {
+    $result = $db->query("SELECT (SELECT CHARACTER_MAXIMUM_LENGTH length FROM information_schema.columns  WHERE TABLE_SCHEMA='mysql' and TABLE_NAME='user' and COLUMN_NAME='User') username, (SELECT CHARACTER_MAXIMUM_LENGTH length FROM information_schema.columns  WHERE TABLE_SCHEMA='mysql' and TABLE_NAME='db' and COLUMN_NAME='Db') `database`");
+    if ($db->next_record($result)) {
+        $variable = $db->Record;
+	$variable['username']=min(128, $variable['username']);
+	$variable['database']=min($variable['database'], $variable['username']);
+	variable_set('sql_max_username_length', $variable['username'], 'Maximum length allowed for SQL usernames');
+	variable_set('sql_max_database_length', $variable['database'], 'Maximum length allowed for SQL databases names');
+    }
+
+}
