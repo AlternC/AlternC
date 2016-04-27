@@ -20,9 +20,11 @@ alternc: non-standard-executable-perm usr/lib/alternc/slave_dns 0750 != 0755
 alternc: non-standard-executable-perm usr/lib/alternc/sendmail 0750 != 0755
 alternc: non-standard-executable-perm usr/lib/alternc/spoolsize.php 0750 != 0755
 alternc: non-standard-executable-perm usr/lib/alternc/fixperms.sh 0750 != 0755
+alternc: non-standard-executable-perm usr/lib/alternc/fixperms_mail.sh 0750 != 0755
 alternc: executable-is-not-world-readable usr/lib/alternc/sendmail 0750 != 0755
 alternc: executable-is-not-world-readable usr/lib/alternc/quota_edit.sh 0750 != 0755
 alternc: executable-is-not-world-readable usr/lib/alternc/fixperms.sh 0750 != 0755
+alternc: executable-is-not-world-readable usr/lib/alternc/fixperms_mail.sh 0750 != 0755
 alternc: executable-is-not-world-readable usr/lib/alternc/quota_edit 4750
 alternc: executable-is-not-world-readable usr/lib/alternc/quota_get.sh 0750 != 0755
 alternc: executable-is-not-world-readable usr/lib/alternc/mem_del 4750
