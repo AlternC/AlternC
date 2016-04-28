@@ -231,8 +231,8 @@ if ((variable_get('sql_max_username_length', NULL)==NULL)||(variable_get('sql_ma
         $variable = $db->Record;
 	$variable['username']=min(128, $variable['username']);
 	$variable['database']=min($variable['database'], $variable['username']);
-	variable_set('sql_max_username_length', $variable['username'], 'Maximum length allowed for SQL usernames');
-	variable_set('sql_max_database_length', $variable['database'], 'Maximum length allowed for SQL databases names');
+	variable_set('sql_max_username_length', $variable['username'], 'Maximum length allowed for SQL usernames by your SQL server (do not modify unless you know what you do)');
+	variable_set('sql_max_database_length', $variable['database'], 'Maximum length allowed for SQL database names by your SQL server (do not modify unless you know what you do)');
     }
 
 }
