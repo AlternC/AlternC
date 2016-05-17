@@ -200,7 +200,7 @@ if ($r=="8" || $r=="a") {
 
 // Send anonymous statistics to AlternC team.
 if ($r=="100" || $r=="a") {
-  $f=fopen("http://svn.alternc.org/stats.php?m1=$m1&m2=$m2&m3=$m3&m4=$m4&m5=$m5&m6=$m6&m7=$m7","rb");
+  $f=fopen("https://alternc.com/stats.php?m1=$m1&m2=$m2&m3=$m3&m4=$m4&m5=$m5&m6=$m6&m7=$m7","rb");
   if ($f) {
     while ($s=fgets($f,1024)) {
     }

@@ -259,6 +259,7 @@ done
 BACKUPS="$BACKUPS etc/postfix/main.cf"
 
 tar -zcf "$BACKUP_FILE" -C / $BACKUPS 2>/dev/null || true
+chmod 600 "$BACKUP_FILE"
 
 #######################################################################
 # Expand templates in the right place

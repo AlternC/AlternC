@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Migrate a svn repository to WHEEZY
+# Migrate a repository to WHEEZY
 
 # DON'T COMMIT ANYTHING AFTER launching this
 # reset your subversion repos back to the serverside one!
