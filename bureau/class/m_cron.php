@@ -56,7 +56,7 @@ class m_cron {
     function lst_cron() {
         global $cuid, $db, $err;
         $err->log("cron", "lst_cron");
-        $db->query("SELECT * FROM cron WHERE uid = $cuid ORDER BY url;");
+        $db->query("SELECT * FROM cron WHERE uid = ? ORDER BY url;", array($cuid));
         $r = Array();
         while ($db->next_record()) {
             $tmp = Array();
@@ -114,7 +114,7 @@ class m_cron {
     function delete_one($id) {
         global $db, $err, $cuid;
         $err->log("cron", "delete_one");
-        return $db->query("DELETE FROM cron WHERE id=" . intval($id) . " AND uid=$cuid LIMIT 1;");
+        return $db->query("DELETE FROM cron WHERE id= ? AND uid= ? LIMIT 1;", array(intval($id), $cuid));
     }
 
     /* --------------------------------------------------------------------------- */
@@ -159,7 +159,7 @@ class m_cron {
                 return false;
             }
         } else { // if not a new insert, check the $cuid
-            $db->query("SELECT uid FROM cron WHERE id = $id;");
+            $db->query("SELECT uid FROM cron WHERE id = ? ;", array($id));
             if (!$db->next_record()) {
                 return "false";
             } // return false if pb
@@ -168,8 +168,7 @@ class m_cron {
                 return false;
             }
         }
-        $query = "REPLACE INTO cron (id, uid, url, user, password, schedule, email) VALUES ('$id', '$cuid', '$url', '$user', '$password', '$schedule', '$email') ;";
-        return $db->query("$query");
+        return $db->query("REPLACE INTO cron (id, uid, url, user, password, schedule, email) VALUES (?, ?, ?, ?, ?, ?, ?) ;" , array($id, $cuid, $url, $user, $password, $schedule, $email));
     }
 
     /* --------------------------------------------------------------------------- */
@@ -200,7 +199,7 @@ class m_cron {
         global $cuid, $db, $err;
         $err->log("cron", "alternc_get_quota");
         $q = Array("name" => "cron", "description" => _("Scheduled tasks"), "used" => 0);
-        $db->query("select count(*) as cnt from cron where uid = $cuid;");
+        $db->query("select count(*) as cnt from cron where uid = ? ;", array($cuid));
         if ($db->next_record()) {
             $q['used'] = $db->f('cnt');
         }
@@ -277,7 +276,7 @@ class m_cron {
             }
         }
         // now schedule it for next run:
-        $db->query("UPDATE cron SET next_execution=FROM_UNIXTIME( UNIX_TIMESTAMP(NOW()) + schedule * 60) WHERE id=$id");
+        $db->query("UPDATE cron SET next_execution=FROM_UNIXTIME( UNIX_TIMESTAMP(NOW()) + schedule * 60) WHERE id= ?", array($id));
     }
 
     /* --------------------------------------------------------------------------- */

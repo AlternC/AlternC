@@ -107,8 +107,7 @@ class m_dom {
     public static function get_sub_domain_id_and_member_by_name($fqdn) {
         global $db, $err;
         $err->log("dom", "get_sub_domain_by_name");
-        $fqdn = mysql_real_escape_string($fqdn);
-        $db->query("select sd.* from sub_domaines sd where if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine) = '$fqdn';");
+        $db->query("select sd.* from sub_domaines sd where if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine) = ?;", array($fqdn));
         if (!$db->next_record()) {
             return false;
         }
@@ -199,7 +198,7 @@ class m_dom {
             }
             return $r;
         } else {
-            $db->query("select target from domaines_type where name='$type';");
+            $db->query("select target from domaines_type where name= ? ;", array($type));
             if (!$db->next_record()) {
                 return false;
             }
@@ -521,24 +520,21 @@ class m_dom {
 
     function domains_type_regenerate($name) {
         global $db, $err, $cuid;
-        $name = mysql_real_escape_string($name);
-        $db->query("update sub_domaines set web_action='UPDATE' where lower(type) = lower('$name') ;");
-        $db->query("update domaines d, sub_domaines sd set d.dns_action = 'UPDATE' where lower(sd.type)=lower('$name');");
+        $db->query("update sub_domaines set web_action='UPDATE' where lower(type) = lower(?) ;", array($name));
+        $db->query("update domaines d, sub_domaines sd set d.dns_action = 'UPDATE' where lower(sd.type)=lower(?);", array($name));
         return true;
     }
 
     function domains_type_get($name) {
         global $db;
-        $name = mysql_real_escape_string($name);
-        $db->query("select * from domaines_type where name='$name' ;");
+        $db->query("select * from domaines_type where name= ?;", array($name));
         $db->next_record();
         return $db->Record;
     }
 
     function domains_type_del($name) {
         global $db;
-        $name = mysql_real_escape_string($name);
-        $db->query("delete domaines_type where name='$name';");
+        $db->query("delete domaines_type where name= ? ;", array($name));
         return true;
     }
 
@@ -549,18 +545,12 @@ class m_dom {
             $err->raise("dom", _("The name MUST contain only letter and digits"));
             return false;
         }
-        $name = mysql_real_escape_string($name);
-        $description = mysql_real_escape_string($description);
-        $target = mysql_real_escape_string($target);
-        $entry = mysql_real_escape_string($entry);
-        $compatibility = mysql_real_escape_string($compatibility);
-        $enable = mysql_real_escape_string($enable);
         $only_dns = intval($only_dns);
         $need_dns = intval($need_dns);
         $advanced = intval($advanced);
         $create_tmpdir = intval($create_tmpdir);
         $create_targetdir = intval($create_targetdir);
-        $db->query("UPDATE domaines_type SET description='$description', target='$target', entry='$entry', compatibility='$compatibility', enable='$enable', need_dns=$need_dns, only_dns=$only_dns, advanced='$advanced',create_tmpdir=$create_tmpdir,create_targetdir=$create_targetdir where name='$name';");
+        $db->query("UPDATE domaines_type SET description= ?, target= ?, entry= ?, compatibility= ?, enable= e, need_dns= ?, only_dns= ?, advanced= ?,create_tmpdir= ?,create_targetdir= ? where name= ?;", array($description, $target, $entry, $compatibility, $enable, $need_dns, $only_dns, $advanced, $create_tmpdir, $create_targetdir, $name));
         return true;
     }
 
@@ -581,7 +571,7 @@ class m_dom {
             }
         }
 
-        $db->query("update sub_domaines set enable='$status' where id = '" . intval($sub_id) . "';");
+        $db->query("update sub_domaines set enable= ? where id = ? ;", array($status, intval($sub_id)));
         $this->set_dns_action($jh['domain'], 'UPDATE');
 
         return true;
@@ -603,7 +593,7 @@ class m_dom {
         if ($uid == -1) {
             $uid = $cuid;
         }
-        $db->query("SELECT * FROM domaines WHERE compte='{$uid}' ORDER BY domaine ASC;");
+        $db->query("SELECT * FROM domaines WHERE compte= ? ORDER BY domaine ASC;", array($uid));
         $this->domains = array();
         if ($db->num_rows() > 0) {
             while ($db->next_record()) {
@@ -617,7 +607,7 @@ class m_dom {
         global $db, $err, $classes, $cuid;
         $err->log("dom", "del_domaini_canl", $dom);
         $dom = strtolower($dom);
-        $db->query("UPDATE sub_domaines SET web_action='UPDATE'  WHERE domaine='$dom';");
+        $db->query("UPDATE sub_domaines SET web_action='UPDATE'  WHERE domaine= ?;", array($dom));
         $this->set_dns_action($dom, 'UPDATE');
         # TODO : some work with domain sensitive classes
         return true;
@@ -656,7 +646,7 @@ class m_dom {
         $hooks->invoke("hook_dom_del_mx_domain", array($r["id"]));
 
         // Now mark the domain for deletion:
-        $db->query("UPDATE sub_domaines SET web_action='DELETE'  WHERE domaine='$dom';");
+        $db->query("UPDATE sub_domaines SET web_action='DELETE'  WHERE domaine= ?;", array($dom));
         $this->set_dns_action($dom, 'DELETE');
 
         return true;
@@ -704,7 +694,7 @@ class m_dom {
             return false;
         }
         // Interdit les domaines clés (table forbidden_domains) sauf en cas FORCE
-        $db->query("SELECT domain FROM forbidden_domains WHERE domain='$domain'");
+        $db->query("SELECT domain FROM forbidden_domains WHERE domain= ? ;", array($domain));
         if ($db->num_rows() && !$force) {
             $err->raise("dom", _("The requested domain is forbidden in this server, please contact the administrator"));
             return false;
@@ -713,12 +703,12 @@ class m_dom {
             $err->raise("dom", _("This domain is the server's domain! You cannot host it on your account!"));
             return false;
         }
-        $db->query("SELECT compte FROM domaines WHERE domaine='$domain';");
+        $db->query("SELECT compte FROM domaines WHERE domaine= ?;", array($domain));
         if ($db->num_rows()) {
             $err->raise("dom", _("The domain already exist"));
             return false;
         }
-        $db->query("SELECT compte FROM `sub_domaines` WHERE sub != \"\" AND concat( sub, \".\", domaine )='$domain' OR domaine='$domain';");
+        $db->query("SELECT compte FROM `sub_domaines` WHERE sub != \"\" AND concat( sub, \".\", domaine )= ? OR domaine= ?;", array($domain, $domain));
         if ($db->num_rows()) {
             $err->raise("dom", _("The domain already exist"));
             return false;
@@ -772,7 +762,7 @@ class m_dom {
         } else {
             $gesmx = "0"; // do not host mx by default if not hosting the DNS
         }
-        $db->query("INSERT INTO domaines (compte,domaine,gesdns,gesmx,noerase,dns_action) VALUES ('$cuid','$domain','$dns','$gesmx','$noerase','UPDATE');");
+        $db->query("INSERT INTO domaines (compte,domaine,gesdns,gesmx,noerase,dns_action) VALUES (?, ?, ?, ?, ?, 'UPDATE');", array($cuid,$domain,$dns,$gesmx,$noerase));
         if (!($id = $db->lastid())) {
             $err->raise("dom", _("An unexpected error occured when creating the domain"));
             return false;
@@ -780,7 +770,7 @@ class m_dom {
 
         if ($isslave) {
             $isslave = true;
-            $db->query("SELECT domaine FROM domaines WHERE compte='$cuid' AND domaine='$slavedom';");
+            $db->query("SELECT domaine FROM domaines WHERE compte= ? AND domaine= ?;", array($cuid, $slavedom));
             $db->next_record();
             if (!$db->Record["domaine"]) {
                 $err->raise("dom", _("Domain '%s' not found"), $slavedom);
@@ -891,9 +881,9 @@ class m_dom {
         $err->log("dom", "update_one_default");
 
         if ($id == null) {
-            $db->query("INSERT INTO default_subdomains values ('','" . addslashes($sub) . "','" . addslashes($domain_type) . "','" . addslashes($domain_type_parameter) . "','" . addslashes($concerned) . "','" . addslashes($enabled) . "');");
+            $db->query("INSERT INTO default_subdomains values ('', ?, ?, ?, ?, ?);", array($sub, $domain_type, $domain_type_parameter, $concerned, $enabled));
         } else {
-            $db->query("UPDATE default_subdomains set sub='" . addslashes($sub) . "', domain_type='" . addslashes($domain_type) . "',domain_type_parameter='" . addslashes($domain_type_parameter) . "',concerned='" . addslashes($concerned) . "',enabled='" . addslashes($enabled) . "' where id=" . addslashes($id) . ";");
+            $db->query("UPDATE default_subdomains set sub= ?, domain_type= ?, domain_type_parameter= ?, concerned= ?, enabled= ? where id= ?;", array($sub, $domain_type, $domain_type_parameter, $concerned, $enabled, $id));
         }
         return true;
         //update
@@ -903,7 +893,7 @@ class m_dom {
         global $err, $db;
         $err->log("dom", "del_default_type");
 
-        if (!$db->query("delete from default_subdomains where id=$id;")) {
+        if (!$db->query("delete from default_subdomains where id= ?;", array($id))) {
             $err->raise("dom", _("Could not delete default type"));
             return false;
         }
@@ -1173,7 +1163,7 @@ class m_dom {
         }
         $r = array();
         $r["name"] = $dom;
-        $db->query("SELECT * FROM domaines WHERE compte='$cuid' AND domaine='$dom'");
+        $db->query("SELECT * FROM domaines WHERE compte= ? AND domaine= ?;", array($cuid, $dom));
         if ($db->num_rows() == 0) {
             $err->raise("dom", sprintf(_("Domain '%s' not found"), $dom));
             return false;
@@ -1187,12 +1177,12 @@ class m_dom {
         $r["zonettl"] = $db->Record["zonettl"];
         $r['noerase'] = $db->Record['noerase'];
         $db->free();
-        $db->query("SELECT COUNT(*) AS cnt FROM sub_domaines WHERE compte='$cuid' AND domaine='$dom'");
+        $db->query("SELECT COUNT(*) AS cnt FROM sub_domaines WHERE compte= ? AND domaine= ?;", array($cuid, $dom));
         $db->next_record();
         $r["nsub"] = $db->Record["cnt"];
         $db->free();
         #$db->query("SELECT sd.*, dt.description AS type_desc, dt.only_dns FROM sub_domaines sd, domaines_type dt WHERE compte='$cuid' AND domaine='$dom' AND UPPER(dt.name)=UPPER(sd.type) ORDER BY sd.sub,sd.type");
-        $db->query("SELECT sd.*, dt.description AS type_desc, dt.only_dns, dt.advanced FROM sub_domaines sd LEFT JOIN domaines_type dt on  UPPER(dt.name)=UPPER(sd.type) WHERE compte='$cuid' AND domaine='$dom'  ORDER BY dt.advanced,sd.sub,sd.type ;");
+        $db->query("SELECT sd.*, dt.description AS type_desc, dt.only_dns, dt.advanced FROM sub_domaines sd LEFT JOIN domaines_type dt on  UPPER(dt.name)=UPPER(sd.type) WHERE compte= ? AND domaine= ? ORDER BY dt.advanced,sd.sub,sd.type ;", array($cuid, $dom));
         // Pas de webmail, on le cochera si on le trouve.
         $r["sub"] = array();
         for ($i = 0; $i < $r["nsub"]; $i++) {
@@ -1238,7 +1228,7 @@ class m_dom {
             $err->raise("dom", _("--- Program error --- No lock on the domains!"));
             return false;
         }
-        $db->query("select sd.*, dt.description as type_desc, dt.only_dns, dt.advanced from sub_domaines sd, domaines_type dt where compte='$cuid' and sd.id='$sub_domain_id'  and upper(dt.name)=upper(sd.type) ORDER BY dt.advanced, sd.sub;");
+        $db->query("select sd.*, dt.description as type_desc, dt.only_dns, dt.advanced from sub_domaines sd, domaines_type dt where compte= ? and sd.id= ?  and upper(dt.name)=upper(sd.type) ORDER BY dt.advanced, sd.sub;", array($cuid, $sub_domain_id));
         if ($db->num_rows() == 0) {
             $err->raise("dom", _("The sub-domain does not exist"));
             return false;
@@ -1347,14 +1337,14 @@ class m_dom {
         $err->log("dom", "can_create_subdomain", $dom . "/" . $sub);
 
         // Get the compatibility list for this domain type
-        $db->query("select upper(compatibility) as compatibility from domaines_type where upper(name)=upper('$type');");
+        $db->query("select upper(compatibility) as compatibility from domaines_type where upper(name)=upper(?);", array($type));
         if (!$db->next_record()) {
             return false;
         }
         $compatibility_lst = explode(",", $db->f('compatibility'));
 
         // Get the list of type of subdomains already here who have the same name
-        $db->query("select * from sub_domaines where sub='$sub' and domaine='$dom' and not id = $sub_domain_id and web_action != 'DELETE' and enabled not in ('DISABLED', 'DISABLE') ");
+        $db->query("select * from sub_domaines where sub= ? and domaine= ? and not id = ? and web_action != 'DELETE' and enabled not in ('DISABLED', 'DISABLE') ", array($sub, $dom, $sub_domain_id));
         #$db->query("select * from sub_domaines where sub='$sub' and domaine='$dom';");
         while ($db->next_record()) {
             // And if there is a domain with a incompatible type, return false
@@ -1425,7 +1415,7 @@ class m_dom {
         }
 
         // Re-create the one we want
-        if (!$db->query("replace into sub_domaines (compte,domaine,sub,valeur,type,web_action) values ('$cuid','$dom','$sub','$dest','$type','UPDATE');")) {
+        if (!$db->query("replace into sub_domaines (compte,domaine,sub,valeur,type,web_action) values (?, ?, ?, ?, ?, 'UPDATE');", array( $cuid , $dom , $sub , $dest , $type ))) {
             echo "query failed: " . $db->Error;
             return false;
         }
@@ -1433,7 +1423,7 @@ class m_dom {
         // Create TMP dir and TARGET dir if needed by the domains_type
         $dest_root = $bro->get_userid_root($cuid);
         //$domshort = $this->domshort($dom, $sub);
-        $db->query("select create_tmpdir, create_targetdir from domaines_type where name = '$type';");
+        $db->query("select create_tmpdir, create_targetdir from domaines_type where name = ?;", array($type));
         $db->next_record();
         if ($db->f('create_tmpdir')) {
             if (!is_dir($dest_root . "/tmp")) {
@@ -1456,7 +1446,7 @@ class m_dom {
         }
 
         // Tell to update the DNS file
-        $db->query("update domaines set dns_action='UPDATE' where domaine='$dom';");
+        $db->query("update domaines set dns_action='UPDATE' where domaine= ?;", array($dom));
 
         return true;
     }
@@ -1481,8 +1471,8 @@ class m_dom {
             $err->raise("dom", _("The sub-domain does not exist"));
             return false;
         } else {
-            $db->query("update sub_domaines set web_action='DELETE' where id='$sub_domain_id'; ");
-            $db->query("update domaines set dns_action='UPDATE' where domaine='" . $r['domain'] . "';");
+            $db->query("update sub_domaines set web_action='DELETE' where id= ?; ", array($sub_domain_id));
+            $db->query("update domaines set dns_action='UPDATE' where domaine= ?;", array($r['domain']));
         }
         return true;
     }
@@ -1586,7 +1576,7 @@ class m_dom {
             $hooks->invoke("hook_dom_del_mx_domain", array($r["id"]));
         }
 
-        $db->query("UPDATE domaines SET gesdns='$dns', gesmx='$gesmx', zonettl='$ttl' WHERE domaine='$dom'");
+        $db->query("UPDATE domaines SET gesdns= ?, gesmx= ?, zonettl= ? WHERE domaine= ?", array($dns, $gesmx, $ttl, $dom));
         $this->set_dns_action($dom, 'UPDATE');
 
         return true;
@@ -1628,12 +1618,12 @@ class m_dom {
         if ($class < 8 || $class > 32) {
             $class = 32;
         }
-        $db->query("SELECT * FROM slaveip WHERE ip='$ip' AND class='$class';");
+        $db->query("SELECT * FROM slaveip WHERE ip= ? AND class= ?;", array($ip, $class));
         if ($db->next_record()) {
             $err->raise("err", _("The requested domain is forbidden in this server, please contact the administrator"));
             return false;
         }
-        $db->query("INSERT INTO slaveip (ip,class) VALUES ('$ip','$class');");
+        $db->query("INSERT INTO slaveip (ip,class) VALUES (?, ?);", array($ip, $class));
         $f = fopen(SLAVE_FLAG, "w");
         fputs($f, "yopla");
         fclose($f);
@@ -1650,7 +1640,7 @@ class m_dom {
             $err->raise("dom", _("The IP address you entered is incorrect"));
             return false;
         }
-        $db->query("DELETE FROM slaveip WHERE ip='$ip'");
+        $db->query("DELETE FROM slaveip WHERE ip= ?;", array($ip));
         $f = fopen(SLAVE_FLAG, "w");
         fputs($f, "yopla");
         fclose($f);
@@ -1663,7 +1653,7 @@ class m_dom {
      */
     function check_slave_account($login, $pass) {
         global $db;
-        $db->query("SELECT * FROM slaveaccount WHERE login='$login' AND pass='$pass';");
+        $db->query("SELECT * FROM slaveaccount WHERE login= ? AND pass= ?;", array($login, $pass));
         if ($db->next_record()) {
             return true;
         }
@@ -1692,6 +1682,7 @@ class m_dom {
     /* ----------------------------------------------------------------- */
 
     /** Returns the complete hosted domain list : 
+     * @TODO:EM: this has to be escaped
      */
     function get_domain_list($uid = -1) {
         global $db;
@@ -1736,7 +1727,7 @@ class m_dom {
     function get_domain_byid($dom_id) {
         global $db, $err, $cuid;
         $dom_id = intval($dom_id);
-        $db->query("SELECT domaine FROM domaines WHERE id=$dom_id AND compte=$cuid;");
+        $db->query("SELECT domaine FROM domaines WHERE id= ? AND compte= ?;", array($dom_id, $cuid));
         if ($db->next_record()) {
             $domain = $db->f("domaine");
             if (!$domain) {
@@ -1760,7 +1751,7 @@ class m_dom {
     function get_domain_byname($domain) {
         global $db, $err, $cuid;
         $domain = trim($domain);
-        $db->query("SELECT id FROM domaines WHERE domaine='" . addslashes($domain) . "' AND compte=$cuid;");
+        $db->query("SELECT id FROM domaines WHERE domaine= ? AND compte= ?;", array($domain, $cuid));
         if ($db->next_record()) {
             $id = $db->f("id");
             if (!$id) {
@@ -1812,12 +1803,12 @@ class m_dom {
      */
     function add_slave_account($login, $pass) {
         global $db, $err;
-        $db->query("SELECT * FROM slaveaccount WHERE login='$login'");
+        $db->query("SELECT * FROM slaveaccount WHERE login= ?", array($login));
         if ($db->next_record()) {
             $err->raise("dom", _("The specified slave account already exists"));
             return false;
         }
-        $db->query("INSERT INTO slaveaccount (login,pass) VALUES ('$login','$pass')");
+        $db->query("INSERT INTO slaveaccount (login,pass) VALUES (?, ?)", array($login, $pass));
         return true;
     }
 
@@ -1827,7 +1818,7 @@ class m_dom {
      */
     function del_slave_account($login) {
         global $db, $err;
-        $db->query("DELETE FROM slaveaccount WHERE login='$login'");
+        $db->query("DELETE FROM slaveaccount WHERE login= ?", array($login));
         return true;
     }
 
@@ -1912,7 +1903,7 @@ class m_dom {
         global $db, $err, $cuid;
         $err->log("dom", "get_quota");
         $q = Array("name" => "dom", "description" => _("Domain name"), "used" => 0);
-        $db->query("SELECT COUNT(*) AS cnt FROM domaines WHERE compte='$cuid'");
+        $db->query("SELECT COUNT(*) AS cnt FROM domaines WHERE compte= ?", array($cuid));
         if ($db->next_record()) {
             $q['used'] = $db->f("cnt");
         }
@@ -1974,6 +1965,7 @@ class m_dom {
      * If no parameters, return the parameters for ALL the vhost.
      * Optionnal parameters: id of the sub_domaines
      *
+     * @TODO:EM: This has to be escaped
      * */
     function generation_parameters($id = null, $only_apache = true) {
         global $db, $err;
@@ -2150,13 +2142,13 @@ order by
      */
     function set_dns_action($domain, $dns_action) {
         global $db;
-        $db->query("UPDATE domaines SET dns_action='" . mysql_escape_string($dns_action) . "' WHERE domaine='" . mysql_escape_string($domain) . "'; ");
+        $db->query("UPDATE domaines SET dns_action= ? WHERE domaine= ?; ", array($dns_action, $domain));
         return true;
     }
 
     function set_dns_result($domain, $dns_result) {
         global $db;
-        $db->query("UPDATE domaines SET dns_result='" . mysql_escape_string($dns_result) . "' WHERE domaine='" . mysql_escape_string($domain) . "'; ");
+        $db->query("UPDATE domaines SET dns_result= ? WHERE domaine= ?; ", array($dns_result, $domain));
         return true;
     }
 

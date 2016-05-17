@@ -54,7 +54,7 @@ class m_admin {
      */
     function m_admin() {
         global $db, $cuid;
-        $db->query("SELECT su FROM membres WHERE uid='$cuid';");
+        $db->query("SELECT su FROM membres WHERE uid=?;", array($cuid));
         $db->next_record();
         $this->enabled = $db->f("su");
 
@@ -161,7 +161,7 @@ class m_admin {
      */
     function get_uid_by_login($login) {
         global $db;
-        $db->query("SELECT uid FROM membres WHERE login='$login';");
+        $db->query("SELECT uid FROM membres WHERE login= ?;", array($login));
         if (!$db->next_record()) {
             return null;
         }
@@ -177,7 +177,7 @@ class m_admin {
      */
     function get_login_by_uid($uid) {
         global $db;
-        $db->query("SELECT login FROM membres WHERE uid=$uid;");
+        $db->query("SELECT login FROM membres WHERE uid= ?;", array($uid));
         if (!$db->next_record()) {
             return null;
         }
@@ -263,7 +263,7 @@ class m_admin {
             return false;
         }
 
-        $db->query("SELECT m.*, parent.login as parentlogin FROM membres as m LEFT JOIN membres as parent ON (parent.uid = m.creator) WHERE m.uid='$uid';");
+        $db->query("SELECT m.*, parent.login as parentlogin FROM membres as m LEFT JOIN membres as parent ON (parent.uid = m.creator) WHERE m.uid= ?;", array($uid));
 
         if ($db->num_rows()) {
             $db->next_record();
@@ -273,7 +273,7 @@ class m_admin {
             return false;
         }
 
-        $db->query("SELECT * FROM local WHERE uid='$uid';");
+        $db->query("SELECT * FROM local WHERE uid= ?;", array($uid));
         if ($db->num_rows()) {
             $db->next_record();
             reset($db->Record);
@@ -282,7 +282,7 @@ class m_admin {
             }
         }
 
-        $db->query("SELECT count(*) as nbcreated FROM membres WHERE creator='$uid';");
+        $db->query("SELECT count(*) as nbcreated FROM membres WHERE creator= ?;", array($uid));
         if ($db->num_rows()) {
             $db->next_record();
             reset($db->Record);
@@ -308,6 +308,7 @@ class m_admin {
     }
 
     /**
+     * @TODO :EM: those request should have been escaped
      * Returns the list of the hosted accounts
      * 
      * Returns all what we know about ALL the accounts (contents of the tables
@@ -490,7 +491,7 @@ class m_admin {
         if ($cuid == 2000) {
             return true;
         }
-        $db->query("SELECT creator FROM membres WHERE uid='$uid';");
+        $db->query("SELECT creator FROM membres WHERE uid= ?;", array($uid));
         $db->next_record();
         if ($db->Record["creator"] != $cuid) {
             $err->raise("admin", _("-- Only administrators can access this page! --"));
@@ -619,9 +620,8 @@ class m_admin {
         }
         $pass = _md5cr($pass);
         $db = new DB_System();
-        $notes = mysql_real_escape_string($notes);
         // Already exist?
-        $db->query("SELECT count(*) AS cnt FROM membres WHERE login='$login';");
+        $db->query("SELECT count(*) AS cnt FROM membres WHERE login= ?;", array($login));
         $db->next_record();
         if (!$db->f("cnt")) {
             $db->query("SELECT max(m.uid)+1 as nextid FROM membres m");
@@ -633,8 +633,8 @@ class m_admin {
                     $uid = 2000;
                 }
             }
-            $db->query("INSERT INTO membres (uid,login,pass,mail,creator,canpass,type,created,notes,db_server_id) VALUES ('$uid','$login','$pass','$mail','$cuid','$canpass', '$type', NOW(), '$notes', '$db_server_id');");
-            $db->query("INSERT INTO local(uid,nom,prenom) VALUES('$uid','$nom','$prenom');");
+            $db->query("INSERT INTO membres (uid,login,pass,mail,creator,canpass,type,created,notes,db_server_id) VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), ?, ?);", array($uid, $login, $pass, $mail, $cuid, $canpass, $type, $notes, $db_server_id));
+            $db->query("INSERT INTO local(uid,nom,prenom) VALUES(?, ?, ?);", array($uid, $nom, $prenom));
             $this->renew_update($uid, $duration);
             $action->create_dir(getuserpath("$login"));
             $action->fix_user($uid);
@@ -683,7 +683,7 @@ class m_admin {
             return false;
         }
         $db = new DB_System();
-        if (!$db->query("SELECT m.*, parent.login as parentlogin FROM membres m LEFT JOIN membres parent ON parent.uid=m.creator WHERE m.uid='$cuid'")) {
+        if (!$db->query("SELECT m.*, parent.login as parentlogin FROM membres m LEFT JOIN membres parent ON parent.uid=m.creator WHERE m.uid= ?", array($cuid))) {
             $err->raise("admin", sprintf(_("query failed: %s "), $db->Error));
             return false;
         }
@@ -760,6 +760,7 @@ EOF;
             return false;
         }
         $db = new DB_System();
+        // @TODO:EM: this has to be escaped
         if ($pass) {
             $pass = _md5cr($pass);
             $ssq = " ,pass='$pass' ";
@@ -769,7 +770,14 @@ EOF;
 
         $old_mem = $this->get($uid);
 
-        if (($db->query("UPDATE local SET nom='$nom', prenom='$prenom' WHERE uid='$uid';")) && ($db->query("UPDATE membres SET mail='$mail', canpass='$canpass', enabled='$enabled', `type`='$type', notes='$notes' $ssq WHERE uid='$uid';"))) {
+        if(
+            ($db->query(
+                            "UPDATE local SET nom= ?, prenom= ? WHERE uid=?;", 
+                            array($nom, $prenom, $uid)
+                        )) && 
+            ($db->query(
+                            "UPDATE membres SET mail= ?, canpass= ?, enabled= ?, `type`= ?, notes= ? $ssq WHERE uid= ?;",
+                            array($mail, $canpass, $enabled, $type, $notes, $uid)))) {
             if ($reset_quotas == "on" || $type != $old_mem['type']) {
                 $quota->addquotas();
                 $quota->synchronise_user_profile();
@@ -800,7 +808,7 @@ EOF;
             return false;
         }
         $db = new DB_System();
-        if ($db->query("UPDATE membres SET enabled='0' WHERE uid='$uid';")) {
+        if ($db->query("UPDATE membres SET enabled='0' WHERE uid= ?;", array($uid))) {
             return true;
         } else {
             $err->raise("admin", _("Account not found"));
@@ -827,7 +835,7 @@ EOF;
             return false;
         }
         $db = new DB_System();
-        if ($db->query("UPDATE membres SET enabled='1' WHERE uid='$uid';")) {
+        if ($db->query("UPDATE membres SET enabled='1' WHERE uid= ?;", array($uid))) {
             return true;
         } else {
             $err->raise("admin", _("Account not found"));
@@ -876,11 +884,11 @@ EOF;
         $hooks->invoke("alternc_del_member");
         $hooks->invoke("hook_admin_del_member");
 
-        if (($db->query("DELETE FROM membres WHERE uid='$uid';")) &&
-                ($db->query("DELETE FROM local WHERE uid='$uid';"))) {
+        if (($db->query("DELETE FROM membres WHERE uid= ?;", array($uid))) &&
+                ($db->query("DELETE FROM local WHERE uid= ?;", array($uid)))) {
             $mem->unsu();
             // If this user was (one day) an administrator one, he may have a list of his own accounts. Let's associate those accounts to nobody as a creator.
-            $db->query("UPDATE membres SET creator=2000 WHERE creator='$uid';");
+            $db->query("UPDATE membres SET creator=2000 WHERE creator= ?;", array($uid));
             return true;
         } else {
             $err->raise("admin", _("Account not found"));
@@ -907,8 +915,7 @@ EOF;
         if ($periods == 0) {
             return false;
         }
-        $query = "UPDATE membres SET renewed = renewed + INTERVAL (duration * $periods) MONTH WHERE uid=${uid};";
-        if ($db->query($query)) {
+        if ($db->query("UPDATE membres SET renewed = renewed + INTERVAL (duration * ?) MONTH WHERE uid= ?;", array($periods, $uid))) {
             return true;
         } else {
             $err->raise("admin", _("Account not found"));
@@ -929,12 +936,12 @@ EOF;
         global $err, $db;
 
         if ($duration == 0) {
-            if ($db->query("UPDATE membres SET duration = NULL, renewed = NULL WHERE uid=$uid;")) {
+            if ($db->query("UPDATE membres SET duration = NULL, renewed = NULL WHERE uid= ?;", array($uid))) {
                 return true;
             }
         } else {
-            if ($db->query("UPDATE membres SET duration = $duration WHERE uid=$uid") &&
-                    $db->query("UPDATE membres SET renewed = NOW() WHERE uid=$uid and renewed is null;")) {
+            if ($db->query("UPDATE membres SET duration = ? WHERE uid= ?", array($duration, $uid)) &&
+                    $db->query("UPDATE membres SET renewed = NOW() WHERE uid= ? and renewed is null;", array($uid))) {
                 return true;
             }
         }
@@ -1015,7 +1022,7 @@ EOF;
      */
     function normal2su($uid) {
         global $err, $db;
-        $db->query("SELECT su FROM membres WHERE uid='$uid';");
+        $db->query("SELECT su FROM membres WHERE uid= ?;", array($uid));
         if (!$db->next_record()) {
             $err->raise("admin", _("Account not found"));
             return false;
@@ -1024,7 +1031,7 @@ EOF;
             $err->raise("admin", _("This account is ALREADY an administrator account"));
             return false;
         }
-        $db->query("UPDATE membres SET su=1 WHERE uid='$uid';");
+        $db->query("UPDATE membres SET su=1 WHERE uid= ?;", array($uid));
         return true;
     }
 
@@ -1038,7 +1045,7 @@ EOF;
      */
     function su2normal($uid) {
         global $err, $db;
-        $db->query("SELECT su FROM membres WHERE uid='$uid';");
+        $db->query("SELECT su FROM membres WHERE uid= ?;", array($uid));
         if (!$db->next_record()) {
             $err->raise("admin", _("Account not found"));
             return false;
@@ -1047,7 +1054,7 @@ EOF;
             $err->raise("admin", _("This account is NOT an administrator account!"));
             return false;
         }
-        $db->query("UPDATE membres SET su=0 WHERE uid='$uid';");
+        $db->query("UPDATE membres SET su=0 WHERE uid= ?;", array($uid));
         return true;
     }
 
@@ -1098,6 +1105,7 @@ EOF;
             }
         }
 
+        // @TODO:EM: this has to be escaped
         $filter=($hosting_tld=variable_get("hosting_tld")) ? " WHERE domaine not like '%.$hosting_tld'" : "";
         $db->query("SELECT m.uid,m.login,d.domaine,d.gesdns,d.gesmx,d.noerase FROM domaines d LEFT JOIN membres m ON m.uid=d.compte $filter ORDER BY domaine;");
         $c = array();
@@ -1126,6 +1134,7 @@ EOF;
         global $db, $L_NS1, $L_NS2, $L_MX, $L_PUBLIC_IP;
         $checked = array();
 
+        // @TODO:EM: this has to be escaped
         $filter=($hosting_tld=variable_get("hosting_tld")) ? " WHERE domaine not like '%.$hosting_tld'" : "";
         $db->query("SELECT * FROM domaines $filter ORDER BY domaine");
         $dl = array();
@@ -1173,7 +1182,7 @@ EOF;
                 }
 
                 // We list all subdomains and check they are pointing to us.
-                $db->query("SELECT * FROM sub_domaines WHERE domaine='" . addslashes($c["domaine"]) . "' ORDER BY sub;");
+                $db->query("SELECT * FROM sub_domaines WHERE domaine=? ORDER BY sub;", array($c["domaine"]));
                 while ($db->next_record()) {
                     $d = $db->Record;
                     if ($d["type"] == 'VHOST') {
@@ -1216,12 +1225,12 @@ EOF;
      */
     function dom_lock($domain) {
         global $db, $err;
-        $db->query("SELECT compte FROM domaines WHERE domaine='$domain';");
+        $db->query("SELECT compte FROM domaines WHERE domaine= ?;", array($domain));
         if (!$db->next_record()) {
             $err->raise("dom", _("Domain '%s' not found."), $domain);
             return false;
         }
-        $db->query("UPDATE domaines SET noerase=1-noerase WHERE domaine='$domain';");
+        $db->query("UPDATE domaines SET noerase=1-noerase WHERE domaine= ?;", array($domain));
         return true;
     }
 
@@ -1235,7 +1244,7 @@ EOF;
      */
     function gettld($tld) {
         global $db, $err;
-        $db->query("SELECT mode FROM tld WHERE tld='$tld';");
+        $db->query("SELECT mode FROM tld WHERE tld= ?;", array($tld));
         if (!$db->next_record()) {
             $err->raise("admin", _("This TLD does not exist"));
             return false;
@@ -1271,12 +1280,12 @@ EOF;
      */
     function deltld($tld) {
         global $db, $err;
-        $db->query("SELECT tld FROM tld WHERE tld='$tld';");
+        $db->query("SELECT tld FROM tld WHERE tld= ?;", array($tld));
         if (!$db->next_record()) {
             $err->raise("admin", _("This TLD does not exist"));
             return false;
         }
-        $db->query("DELETE FROM tld WHERE tld='$tld';");
+        $db->query("DELETE FROM tld WHERE tld= ?;", array($tld));
         return true;
     }
 
@@ -1303,7 +1312,7 @@ EOF;
         }
         $tld = trim($tld);
 
-        $db->query("SELECT tld FROM tld WHERE tld='$tld';");
+        $db->query("SELECT tld FROM tld WHERE tld= ?;", array($tld));
         if ($db->next_record()) {
             $err->raise("admin", _("This TLD already exist"));
             return false;
@@ -1315,7 +1324,7 @@ EOF;
         if ($mode == 0) {
             $mode = "0";
         }
-        $db->query("INSERT INTO tld (tld,mode) VALUES ('$tld','$mode');");
+        $db->query("INSERT INTO tld (tld,mode) VALUES (?,?);", array($tld, $mode));
         return true;
     }
 
@@ -1332,7 +1341,7 @@ EOF;
      */
     function edittld($tld, $mode) {
         global $db, $err;
-        $db->query("SELECT tld FROM tld WHERE tld='$tld';");
+        $db->query("SELECT tld FROM tld WHERE tld= ?;", array($tld));
         if (!$db->next_record()) {
             $err->raise("admin", _("This TLD does not exist"));
             return false;
@@ -1341,7 +1350,7 @@ EOF;
         if ($mode == 0) {
             $mode = "0";
         }
-        $db->query("UPDATE tld SET mode='$mode' WHERE tld='$tld';");
+        $db->query("UPDATE tld SET mode= ? WHERE tld= ?;", array($mode, $tld));
         return true;
     }
 
@@ -1384,7 +1393,7 @@ EOF;
         foreach ($tmp2 as $k => $v) {
             if (!isset($tmp1[$k])) {
                 // Default policy : 
-                $db->query("INSERT INTO policy SET name='" . addslashes($k) . "', minsize=0, maxsize=64, classcount=0, allowlogin=0;");
+                $db->query("INSERT INTO policy SET name= ?, minsize=0, maxsize=64, classcount=0, allowlogin=0;", array($k));
                 $tmp1[$k] = array(
                     "minsize" => 0, "maxsize" => 64, "classcount" => 0, "allowlogin" => 0
                 );
@@ -1395,7 +1404,7 @@ EOF;
         }
         foreach ($tmp1 as $k => $v) {
             // Delete disabled modules :
-            $db->query("DELETE FROM policy WHERE name='" . addslashes($k) . "';");
+            $db->query("DELETE FROM policy WHERE name= ?;", array($k));
         }
         return $policies;
     }
@@ -1418,7 +1427,7 @@ EOF;
         $classcount = intval($classcount);
         $allowlogin = intval($allowlogin);
 
-        $db->query("SELECT * FROM policy WHERE name='" . addslashes($policy) . "';");
+        $db->query("SELECT * FROM policy WHERE name= ?;", array($policy));
         if (!$db->next_record()) {
             return false; // Policy not found
         }
@@ -1426,7 +1435,7 @@ EOF;
             return false; // Incorrect policy ...
         }
         $allowlogin = ($allowlogin) ? 1 : 0;
-        $db->query("UPDATE policy SET minsize=$minsize, maxsize=$maxsize, classcount=$classcount, allowlogin=$allowlogin WHERE name='" . addslashes($policy) . "';");
+        $db->query("UPDATE policy SET minsize= ?, maxsize= ?, classcount= ?, allowlogin= ? WHERE name= ?;", array($minsize, $maxsize, $classcount, $allowlogin, $policy));
         return true;
     }
 

@@ -167,7 +167,7 @@ class m_action {
             return true;
         }
         $BACKUP_DIR = $arch;
-        $db->query("select login from membres where uid=$cuid;");
+        $db->query("select login from membres where uid= ?;", array($cuid));
         $db->next_record();
         if (!$db->Record["login"]) {
             $err->raise("action", _("Login corresponding to $cuid not found"));
@@ -183,6 +183,7 @@ class m_action {
     }
 
     /**
+     * @TODO: This has to be escaped
      * function inserting the action in the sql table
      * 
      * @global m_mysql $db
@@ -288,7 +289,7 @@ class m_action {
      */
     function begin($id) {
         global $db, $err;
-        if (!$db->query("update actions set begin=now() where id=$id ;")) {
+        if (!$db->query("update actions set begin=now() where id= ? ;", array($id))) {
             $err->raise("action", _("Error locking the action : $id"));
             return false;
         }
@@ -306,7 +307,7 @@ class m_action {
      */
     function finish($id, $return = 0) {
         global $db, $err;
-        if (!$db->query("update actions set end=now(),status='$return' where id=$id ;")) {
+        if (!$db->query("update actions set end=now(),status=? where id= ?;", array($return, $id))) {
             $err->raise("action", _("Error unlocking the action : $id"));
             return false;
         }
@@ -322,7 +323,7 @@ class m_action {
      */
     function reset_job($id) {
         global $db, $err;
-        if (!$db->query("update actions set end=0,begin=0,status='' where id=$id ;")) {
+        if (!$db->query("update actions set end=0,begin=0,status='' where id= ?;", array($id))) {
             $err->raise("action", _("Error unlocking the action : $id"));
             return false;
         }

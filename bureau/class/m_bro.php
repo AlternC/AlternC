@@ -196,7 +196,7 @@ class m_bro {
      */
     function filelist($dir = "", $showdirsize = false) {
         global $db, $cuid, $err;
-        $db->query("UPDATE browser SET lastdir='$dir' WHERE uid='$cuid';");
+        $db->query("UPDATE browser SET lastdir= ? WHERE uid= ?;", array($dir, $cuid));
         $absolute = $this->convertabsolute($dir, false);
         if (!$absolute || !file_exists($absolute)) {
             $err->raise('bro', _("This directory does not exist."));
@@ -235,10 +235,10 @@ class m_bro {
      */
     function GetPrefs() {
         global $db, $cuid;
-        $db->query("SELECT * FROM browser WHERE uid='$cuid';");
+        $db->query("SELECT * FROM browser WHERE uid= ?;", array($cuid));
         if ($db->num_rows() == 0) {
-            $db->query("INSERT INTO browser (editsizex, editsizey, listmode, showicons, downfmt, createfile, showtype, uid, editor_font, editor_size) VALUES (70, 21, 0, 0, 0, 0, 0, '$cuid','Arial, Helvetica, Sans-serif','12px');");
-            $db->query("SELECT * FROM browser WHERE uid='$cuid';");
+            $db->query("INSERT INTO browser (editsizex, editsizey, listmode, showicons, downfmt, createfile, showtype, uid, editor_font, editor_size) VALUES (70, 21, 0, 0, 0, 0, 0, ?,'Arial, Helvetica, Sans-serif','12px');", array($cuid));
+            $db->query("SELECT * FROM browser WHERE uid= ?;", array($cuid));
         }
         $db->next_record();
         return $db->Record;
@@ -271,11 +271,11 @@ class m_bro {
         $downfmt = intval($downfmt);
         $createfile = intval($createfile);
         $golastdir = intval($golastdir);
-        $db->query("SELECT * FROM browser WHERE uid='" . intval($cuid) . "';");
+        $db->query("SELECT * FROM browser WHERE uid= ?;", array(intval($cuid)));
         if ($db->num_rows() == 0) {
-            $db->query("INSERT INTO browser (editsizex, editsizey, listmode, showicons, downfmt, createfile, showtype, uid, editor_font, editor_size, golastdir) VALUES (70, 21, 0, 0, 0, 0, 0, '" . intval($cuid) . "','Arial, Helvetica, Sans-serif','12px',1);");
+            $db->query("INSERT INTO browser (editsizex, editsizey, listmode, showicons, downfmt, createfile, showtype, uid, editor_font, editor_size, golastdir) VALUES (70, 21, 0, 0, 0, 0, 0, ?,'Arial, Helvetica, Sans-serif','12px',1);", array(intval($cuid)));
         }
-        $db->query("UPDATE browser SET editsizex='$editsizex', editsizey='$editsizey', listmode='$listmode', showicons='$showicons', downfmt='$downfmt', createfile='$createfile', showtype='$showtype', editor_font='$editor_font', editor_size='$editor_size', golastdir='$golastdir' WHERE uid='" . intval($cuid) . "';");
+        $db->query("UPDATE browser SET editsizex= ?, editsizey= ?, listmode= ?, showicons= ?, downfmt= ?, createfile= ?, showtype= ?, editor_font= ?, editor_size= e, golastdir= ? WHERE uid= ?;", array($editsizex, $editsizey, $downfmt, $createfile, $showtype, $editor_font, $editor_size, $golastdir, intval($cuid)));
         return true;
     }
 
@@ -402,7 +402,7 @@ class m_bro {
                 $err->raise("bro", _("Cannot create the requested directory. Please check the permissions"));
                 return false;
             }
-            $db->query("UPDATE browser SET crff=1 WHERE uid='$cuid';");
+            $db->query("UPDATE browser SET crff=1 WHERE uid= ?;", array($cuid));
             return true;
         } else {
             $err->raise("bro", _("File or folder name is incorrect"));
@@ -434,7 +434,7 @@ class m_bro {
                 return false;
             }
         }
-        $db->query("UPDATE browser SET crff=0 WHERE uid='$cuid';");
+        $db->query("UPDATE browser SET crff=0 WHERE uid= ?;", array($cuid));
         return true;
     }
 
@@ -839,8 +839,8 @@ class m_bro {
             $beg = $dir;
             $tofind = true;
             while ($tofind) {
-                $db->query("SELECT sub,domaine FROM sub_domaines WHERE compte='$cuid'
- AND type=0 AND (valeur='/$beg/' or valeur='/$beg');");
+                // @TODO:EM: be careful with this one!
+                $db->query("SELECT sub,domaine FROM sub_domaines WHERE compte= ? AND type=0 AND (valeur= ? or valeur= ?);", array($cuid, "/".$beg."/", "/".$beg));
                 $db->next_record();
                 if ($db->num_rows()) {
                     $tofind = false;

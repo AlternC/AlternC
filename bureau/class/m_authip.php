@@ -76,7 +76,7 @@ class m_authip {
         }
 
         $r = array();
-        $db->query("SELECT * FROM authorised_ip WHERE uid='$cuid' order by ip,subnet;");
+        $db->query("SELECT * FROM authorised_ip WHERE uid= ? order by ip,subnet;", array($cuid));
         while ($db->next_record()) {
             $r[$db->f('id')] = $db->Record;
             if ((checkip($db->f('ip')) && $db->f('subnet') == 32) ||
@@ -105,11 +105,11 @@ class m_authip {
         global $db, $cuid;
         $id = intval($id);
 
-        $db->query("SELECT id FROM authorised_ip_affected where authorised_ip_id ='$id';");
+        $db->query("SELECT id FROM authorised_ip_affected where authorised_ip_id = ?;", array($id));
         while ($db->next_record()) {
             $this->ip_affected_delete($db->f('id'));
         }
-        if (!$db->query("delete from authorised_ip where id='$id' and ( uid='$cuid' or uid=0) limit 1;")) {
+        if (!$db->query("delete from authorised_ip where id= ? and ( uid= ? or uid=0) limit 1;", array($id, $cuid))) {
             echo "query failed: " . $db->Error;
             return false;
         }
@@ -127,7 +127,7 @@ class m_authip {
      */
     function get_allowed($s) {
         global $db, $cuid;
-        if (!$db->query("select ai.ip, ai.subnet, ai.infos, aia.parameters from authorised_ip ai, authorised_ip_affected aia where aia.protocol='$s' and aia.authorised_ip_id = ai.id and ai.uid='$cuid';")) {
+        if (!$db->query("select ai.ip, ai.subnet, ai.infos, aia.parameters from authorised_ip ai, authorised_ip_affected aia where aia.protocol= ? and aia.authorised_ip_id = ai.id and ai.uid= ?;", array($s, $cuid))) {
             echo "query failed: " . $db->Error;
             return false;
         }
@@ -249,7 +249,7 @@ class m_authip {
             foreach ($list_affected as $k => $v) {
                 $this->call_hooks("authip_on_delete", $k);
             }
-            if (!$db->query("update authorised_ip set ip='$ip', subnet='$subnet', infos='$infos' where id='$id' and uid='$cuid' ;")) {
+            if (!$db->query("update authorised_ip set ip= ?, subnet= ?, infos= ? where id= ? and uid=? ;", array($id, $subnetn $infos, $id, $cuid)) {
                 echo "query failed: " . $db->Error;
                 return false;
             }
@@ -257,7 +257,7 @@ class m_authip {
                 $this->call_hooks("authip_on_create", $k);
             }
         } else { // Insert
-            if (!$db->query("insert into authorised_ip (uid, ip, subnet, infos) values ('$cuid', '$ip', '$subnet', '$infos' );")) {
+            if (!$db->query("insert into authorised_ip (uid, ip, subnet, infos) values (?, ?, ?, ?);", array($cuid, $ip, $subnet, $infos))) {
                 echo "query failed: " . $db->Error;
                 return false;
             }
@@ -274,7 +274,7 @@ class m_authip {
      */
     function alternc_del_member() {
         global $cuid, $db;
-        $db->query("SELECT id FROM authorised_ip WHERE uid ='$cuid';");
+        $db->query("SELECT id FROM authorised_ip WHERE uid = ?;", array($cuid));
         while ($db->next_record()) {
             $this->ip_delete($db->f('id'));
         }
@@ -315,23 +315,21 @@ class m_authip {
     function ip_affected_save($authorised_ip_id, $protocol, $parameters, $id = null) {
         global $db;
         $authorised_ip_id = intval($authorised_ip_id);
-        $protocol = mysql_real_escape_string($protocol);
-        $parameters = mysql_real_escape_string($parameters);
 
         if ($id) {
             $id = intval($id);
             $this->call_hooks("authip_on_delete", $id);
-            if (!$db->query("update authorised_ip_affected set authorised_ip_id='$authorised_ip_id', protocol='$protocol', parameters='$parameters' where id ='$id' limit 1;")) {
+            if (!$db->query("update authorised_ip_affected set authorised_ip_id= ?, protocol= ?, parameters= ? where id = ? limit 1;", array($authorised_ip_id, $protocol, $parameters, $id))) {
                 echo "query failed: " . $db->Error;
                 return false;
             }
             $this->call_hooks("authip_on_create", $id);
         } else {
-            if (!$db->query("insert into authorised_ip_affected (authorised_ip_id, protocol, parameters) values ('$authorised_ip_id', '$protocol', '$parameters');")) {
+            if (!$db->query("insert into authorised_ip_affected (authorised_ip_id, protocol, parameters) values (?, ?, ?);", array($authorised_ip_id, $protocol, $parameters))) {
                 echo "query failed: " . $db->Error;
                 return false;
             }
-            $this->call_hooks("authip_on_create", mysql_insert_id());
+            $this->call_hooks("authip_on_create", PDO::lastInsertId()); // @TODO:EM: To test
         }
         return true;
     }
@@ -352,7 +350,7 @@ class m_authip {
         // Call hooks
         $this->call_hooks("authip_on_delete", $id);
 
-        if (!$db->query("delete from authorised_ip_affected where id='$id' limit 1;")) {
+        if (!$db->query("delete from authorised_ip_affected where id= ? limit 1;", array($id))) {
             echo "query failed: " . $db->Error;
             return false;
         }
@@ -408,9 +406,9 @@ class m_authip {
 
         $r = array();
         if (is_null($ip_id)) {
-            $db->query("select aia.* from authorised_ip_affected aia, authorised_ip ai where ai.uid='$cuid' and aia.authorised_ip_id = ai.id order by protocol, parameters;");
+            $db->query("select aia.* from authorised_ip_affected aia, authorised_ip ai where ai.uid= ? and aia.authorised_ip_id = ai.id order by protocol, parameters;", array($cuid));
         } else {
-            $db->query("select aia.* from authorised_ip_affected aia, authorised_ip ai where ai.uid='$cuid' and aia.authorised_ip_id = '" . intval($ip_id) . "' order by protocol, parameters;");
+            $db->query("select aia.* from authorised_ip_affected aia, authorised_ip ai where ai.uid= ? and aia.authorised_ip_id = ? order by protocol, parameters;", array($cuid, intval($ip_id)));
         }
         while ($db->next_record()) {
             $r[$db->f('id')] = $db->Record;
