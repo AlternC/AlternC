@@ -139,7 +139,7 @@ class m_mail {
             'type' => '',
         );
 
-        $db->query("select r.recipients as dst, a.id mail_id from address a, recipient r where a.domain_id = $domain_id and r.address_id = a.id and a.address='';");
+        $db->query("select r.recipients as dst, a.id mail_id from address a, recipient r where a.domain_id = ? and r.address_id = a.id and a.address='';", array($domain_id));
         if ($db->next_record()) {
             $rr['target'] = $db->f('dst');
             $rr['mail_id'] = $db->f('mail_id');
@@ -204,7 +204,7 @@ class m_mail {
         global $db, $err, $cuid;
         $err->log("mail", "getquota");
         $q = Array("name" => "mail", "description" => _("Email addresses"), "used" => 0);
-        $db->query("SELECT COUNT(*) AS cnt FROM address a, domaines d WHERE a.domain_id=d.id AND d.compte=$cuid AND a.type='';");
+        $db->query("SELECT COUNT(*) AS cnt FROM address a, domaines d WHERE a.domain_id=d.id AND d.compte= ? AND a.type='';", array($cuid));
         if ($db->next_record()) {
             $q['used'] = $db->f("cnt");
         }
@@ -239,14 +239,14 @@ SELECT
 FROM
   domaines d LEFT JOIN address a ON (d.id=a.domain_id AND a.type='')
 WHERE
-  d.compte = $uid
+  d.compte = ? 
   and d.gesmx = 1
 GROUP BY
   d.id
 ORDER BY
   d.domaine
 ;
-");
+", array($uid));
         $this->enum_domains = array();
         while ($db->next_record()) {
             $this->enum_domains[] = $db->Record;
@@ -275,7 +275,7 @@ ORDER BY
             return false;
         }
         // Check the availability
-        $db->query("SELECT a.id FROM address a WHERE a.domain_id=" . $dom_id . " AND a.address='" . addslashes($login) . "';");
+        $db->query("SELECT a.id FROM address a WHERE a.domain_id= ? AND a.address= ?;", array($dom_id, $login));
         if ($db->next_record()) {
             return false;
         } else {
@@ -290,6 +290,7 @@ ORDER BY
      * @param $offset integer skip THAT much emails in the result.
      * @param $count integer return no more than THAT much emails. -1 for ALL. Offset is ignored then.
      * @result an array of each mail hosted under the domain.
+     * @TODO:EM: It has to be escaped
      */
 
     function enum_domain_mails($dom_id = null, $search = "", $offset = 0, $count = 30, $show_systemmails = false) {
@@ -381,13 +382,13 @@ ORDER BY
             return false;
         }
         // Already exists?
-        $db->query("SELECT * FROM address WHERE domain_id=" . $dom_id . " AND address='" . addslashes($mail) . "';");
+        $db->query("SELECT * FROM address WHERE domain_id= ? AND address= ? ;", array($dom_id, $mail));
         if ($db->next_record()) {
             $err->raise("mail", _("This email address already exists"));
             return false;
         }
         // Create it now
-        $db->query("INSERT INTO address (domain_id, address,type) VALUES ($dom_id, '" . addslashes($mail) . "','$type');");
+        $db->query("INSERT INTO address (domain_id, address,type) VALUES (?, ?, ?);", array($dom_id, $mail, $type));
         if (!($id = $db->lastid())) {
             $err->raise("mail", _("An unexpected error occured when creating the email"));
             return false;
@@ -412,7 +413,7 @@ ORDER BY
         }
 
         // We fetch all the informations for that email: these will fill the hastable : 
-        $db->query("SELECT a.id, a.address, a.password, a.enabled, d.domaine AS domain, m.path, m.quota, m.quota*1024*1024 AS quotabytes, m.bytes AS used, NOT ISNULL(m.id) AS islocal, a.type, r.recipients, m.lastlogin, a.mail_action, m.mail_action AS mailbox_action FROM (address a LEFT JOIN mailbox m ON m.address_id=a.id) LEFT JOIN recipient r ON r.address_id=a.id, domaines d WHERE a.id=" . $mail_id . " AND d.id=a.domain_id;");
+        $db->query("SELECT a.id, a.address, a.password, a.enabled, d.domaine AS domain, m.path, m.quota, m.quota*1024*1024 AS quotabytes, m.bytes AS used, NOT ISNULL(m.id) AS islocal, a.type, r.recipients, m.lastlogin, a.mail_action, m.mail_action AS mailbox_action FROM (address a LEFT JOIN mailbox m ON m.address_id=a.id) LEFT JOIN recipient r ON r.address_id=a.id, domaines d WHERE a.id= ? AND d.id=a.domain_id;", array($mail_id));
         if (!$db->next_record()) {
             return false;
         }
@@ -442,7 +443,7 @@ ORDER BY
         if (isset($this->isitmy_cache[$mail_id])) {
             return $this->isitmy_cache[$mail_id];
         }
-        $db->query("SELECT concat(a.address,'@',d.domaine) AS email FROM address a, domaines d WHERE d.id=a.domain_id AND a.id=$mail_id AND d.compte=$cuid;");
+        $db->query("SELECT concat(a.address,'@',d.domaine) AS email FROM address a, domaines d WHERE d.id=a.domain_id AND a.id= ? AND d.compte= ?;", array($mail_id, $cuid));
         if ($db->next_record()) {
             return $this->isitmy_cache[$mail_id] = $db->f("email");
         } else {
@@ -467,10 +468,10 @@ ORDER BY
                 $this->delete($one["id"]);
             }
         }
-        $db->query("SELECT domaine FROM domaines WHERE id=$domain_id;");
+        $db->query("SELECT domaine FROM domaines WHERE id= ? ;", array($domain_id));
         if ($db->next_record()) {
-            $db->query("UPDATE sub_domaines SET web_action='DELETE' WHERE domaine='" . addslashes($db->Record["domaine"]) . "' AND type='txt' AND (sub='' AND valeur LIKE 'v=spf1 %') OR (sub='_dmarc' AND valeur LIKE 'v=dmarc1;%');");
-            $db->query("UPDATE domaines SET dns_action='UPDATE' WHERE id=$domain_id;");
+            $db->query("UPDATE sub_domaines SET web_action='DELETE' WHERE domaine= ? AND type='txt' AND (sub='' AND valeur LIKE 'v=spf1 %') OR (sub='_dmarc' AND valeur LIKE 'v=dmarc1;%');", array($db->Record["domaine"]));
+            $db->query("UPDATE domaines SET dns_action='UPDATE' WHERE id= ? ;", array($domain_id));
         }
 
         return true;
@@ -479,7 +480,7 @@ ORDER BY
     // return the alternc account's ID of the mail_id
     function get_account_by_mail_id($mail_id) {
         global $db;
-        $db->query("select compte as uid from domaines d, address a where a.domain_id = d.id and a.id = $mail_id");
+        $db->query("select compte as uid from domaines d, address a where a.domain_id = d.id and a.id = ? ;", array($mail_id));
         if (!$db->next_record()) {
             return false;
         }
@@ -514,7 +515,7 @@ ORDER BY
         $hooks->invoke('hook_mail_delete', array($mail_id, $mailinfos['address'] . '@' . $mailinfos['domain']));
 
         // Search for that address:
-        $db->query("SELECT a.id, a.type, a.mail_action, m.mail_action AS mailbox_action, NOT ISNULL(m.id) AS islocal FROM address a LEFT JOIN mailbox m ON m.address_id=a.id WHERE a.id='$mail_id';");
+        $db->query("SELECT a.id, a.type, a.mail_action, m.mail_action AS mailbox_action, NOT ISNULL(m.id) AS islocal FROM address a LEFT JOIN mailbox m ON m.address_id=a.id WHERE a.id= ? ;", array($mail_id));
         if (!$db->next_record()) {
             $err->raise("mail", _("The email %s does not exist, it can't be deleted"), $mail);
             return false;
@@ -527,14 +528,14 @@ ORDER BY
 
         if ($db->f("islocal")) {
             // If it's a pop/imap mailbox, mark it for deletion
-            $db->query("UPDATE address SET mail_action='DELETE', enabled=0 WHERE id='$mail_id';");
-            $db->query("UPDATE mailbox SET mail_action='DELETE' WHERE address_id='$mail_id';");
+            $db->query("UPDATE address SET mail_action='DELETE', enabled=0 WHERE id= ?;", array($mail_id));
+            $db->query("UPDATE mailbox SET mail_action='DELETE' WHERE address_id= ?;", array($mail_id));
             $err->raise("mail", _("The email %s has been marked for deletion"), $mail);
         } else {
             // If it's only aliases, delete it NOW.
-            $db->query("DELETE FROM address WHERE id='$mail_id';");
-            $db->query("DELETE FROM mailbox WHERE address_id='$mail_id';");
-            $db->query("DELETE FROM recipient WHERE address_id='$mail_id';");
+            $db->query("DELETE FROM address WHERE id= ? ;", array($mail_id));
+            $db->query("DELETE FROM mailbox WHERE address_id= ? ;", array($mail_id));
+            $db->query("DELETE FROM recipient WHERE address_id= ? ;", array($mail_id));
             $err->raise("mail", _("The email %s has been successfully deleted"), $mail);
         }
         return true;
@@ -565,7 +566,7 @@ ORDER BY
         }
 
         // Search for that address:
-        $db->query("SELECT a.id, a.type, a.mail_action, m.mail_action AS mailbox_action, NOT ISNULL(m.id) AS islocal FROM address a LEFT JOIN mailbox m ON m.address_id=a.id WHERE a.id='$mail_id';");
+        $db->query("SELECT a.id, a.type, a.mail_action, m.mail_action AS mailbox_action, NOT ISNULL(m.id) AS islocal FROM address a LEFT JOIN mailbox m ON m.address_id=a.id WHERE a.id= ? ;", array($mail_id));
         if (!$db->next_record()) {
             $err->raise("mail", _("The email %s does not exist, it can't be undeleted"), $mail);
             return false;
@@ -582,8 +583,8 @@ ORDER BY
 
         if ($db->f("islocal")) {
             // If it's a pop/imap mailbox, mark it for deletion
-            $db->query("UPDATE address SET mail_action='OK', `enabled`=1 WHERE id='$mail_id';");
-            $db->query("UPDATE mailbox SET mail_action='OK' WHERE address_id='$mail_id';");
+            $db->query("UPDATE address SET mail_action='OK', `enabled`=1 WHERE id= ?;", array($mail_id));
+            $db->query("UPDATE mailbox SET mail_action='OK' WHERE address_id= ? ;", array($mail_id));
             $err->raise("mail", _("The email %s has been undeleted"), $mail);
             return true;
         } else {
@@ -609,7 +610,7 @@ ORDER BY
         if (!$admin->checkPolicy("pop", $email, $pass)) {
             return false;
         }
-        if (!$db->query("UPDATE address SET password='" . _md5cr($pass) . "' where id=$mail_id;")) {
+        if (!$db->query("UPDATE address SET password= ? where id = ? ;", array(_md5cr($pass), $mail_id ))) {
             return false;
         }
         return true;
@@ -627,7 +628,7 @@ ORDER BY
         if (!($email = $this->is_it_my_mail($mail_id))) {
             return false;
         }
-        if (!$db->query("UPDATE address SET `enabled`=1 where id=$mail_id;")) {
+        if (!$db->query("UPDATE address SET `enabled`=1 where id= ? ;", array($mail_id))) {
             return false;
         }
         return true;
@@ -645,7 +646,7 @@ ORDER BY
         if (!($email = $this->is_it_my_mail($mail_id))) {
             return false;
         }
-        if (!$db->query("UPDATE address SET `enabled`=0 where id=$mail_id;")) {
+        if (!$db->query("UPDATE address SET `enabled`=0 where id= ? ;", array($mail_id))) {
             return false;
         }
         return true;
@@ -665,14 +666,13 @@ ORDER BY
      */
     function set_details($mail_id, $islocal, $quotamb, $recipients, $delivery = "dovecot", $dontcheck = false) {
         global $err, $db;
-        $delivery = mysql_real_escape_string($delivery);
         $err->log("mail", "set_details");
         if (!($me = $this->get_details($mail_id))) {
             return false;
         }
         if ($me["islocal"] && !$islocal) {
             // delete pop
-            $db->query("UPDATE mailbox SET mail_action='DELETE' WHERE address_id=" . $mail_id . ";");
+            $db->query("UPDATE mailbox SET mail_action='DELETE' WHERE address_id= ? ;", array($mail_id));
         }
         if (!$me["islocal"] && $islocal) {
             // create pop
@@ -692,10 +692,10 @@ ORDER BY
                     break;
                 }
             }
-            $db->query("INSERT INTO mailbox SET address_id=$mail_id, delivery='$delivery', path='" . addslashes($path) . "';");
+            $db->query("INSERT INTO mailbox SET address_id= ? , delivery= ?, path= ? ;", array($mail_id, $delivery, $path));
         }
         if ($me["islocal"] && $islocal && $me["mailbox_action"] == "DELETE") {
-            $db->query("UPDATE mailbox SET mail_action='OK' WHERE mail_action='DELETE' AND address_id=" . $mail_id . ";");
+            $db->query("UPDATE mailbox SET mail_action='OK' WHERE mail_action='DELETE' AND address_id= ? ;", array($mail_id));
         }
 
         if ($islocal) {
@@ -703,7 +703,7 @@ ORDER BY
                 $quotamb = intval($me["used"] / 1024 / 1024) + 1;
                 $err->raise("mail", _("You set a quota smaller than the current mailbox size. Since it's not allowed, we set the quota to the current mailbox size"));
             }
-            $db->query("UPDATE mailbox SET quota=" . intval($quotamb) . " WHERE address_id=" . $mail_id . ";");
+            $db->query("UPDATE mailbox SET quota= ? WHERE address_id= ? ;", array($quotamb, $mail_id));
         }
 
         $recipients = preg_replace('/[\r\t\s]/', "\n", $recipients); // Handle space AND new line
@@ -716,9 +716,9 @@ ORDER BY
                 $red.=$m . "\n";
             }
         }
-        $db->query("DELETE FROM recipient WHERE address_id=" . $mail_id . ";");
+        $db->query("DELETE FROM recipient WHERE address_id= ? ;", array($mail_id));
         if (isset($red) && $red) {
-            $db->query("INSERT INTO recipient SET address_id=" . $mail_id . ", recipients='" . addslashes($red) . "';");
+            $db->query("INSERT INTO recipient SET address_id= ?, recipients= ? ;", array($mail_id, $red));
         }
 	if (!$islocal && !$red) {
 	  $err->raise("mail", _("Warning: you created an email which is not an alias, and not a POP/IMAP mailbox. This is certainly NOT what you want to do. To fix this, edit the email address and check 'Yes' in POP/IMAP account, or set some recipients in the redirection field."));
@@ -847,9 +847,7 @@ ORDER BY
      */
     function check_slave_account($login, $pass) {
         global $db;
-        $login = mysql_real_escape_string($login);
-        $pass = mysql_real_escape_string($pass);
-        $db->query("SELECT * FROM mxaccount WHERE login='$login' AND pass='$pass';");
+        $db->query("SELECT * FROM mxaccount WHERE login= ? AND pass= ?;", array($login, $pass));
         if ($db->next_record()) {
             return true;
         }
@@ -894,14 +892,12 @@ ORDER BY
      */
     function add_slave_account($login, $pass) {
         global $db, $err;
-        $login = mysql_real_escape_string($login);
-        $pass = mysql_real_escape_string($pass);
-        $db->query("SELECT * FROM mxaccount WHERE login='$login'");
+        $db->query("SELECT * FROM mxaccount WHERE login= ? ;", array($login));
         if ($db->next_record()) {
             $err->raise("mail", _("The slave MX account was not found"));
             return false;
         }
-        $db->query("INSERT INTO mxaccount (login,pass) VALUES ('$login','$pass')");
+        $db->query("INSERT INTO mxaccount (login,pass) VALUES (?, ?);", array($login, $pass));
         return true;
     }
 
@@ -913,8 +909,7 @@ ORDER BY
      */
     function del_slave_account($login) {
         global $db;
-        $login = mysql_real_escape_string($login);
-        $db->query("DELETE FROM mxaccount WHERE login='$login'");
+        $db->query("DELETE FROM mxaccount WHERE login= ? ;", array($login));
         return true;
     }
 
@@ -954,7 +949,7 @@ ORDER BY
         }
         $mailname = $db->f("value");
         // set spf & dmarc for this domain
-        $db->query("SELECT domaine FROM domaines WHERE id=$domain_id;");
+        $db->query("SELECT domaine FROM domaines WHERE id= ?;", array($domain_id));
         if ($db->next_record()) {
             if ($spf = variable_get("default_spf_value")) {
                 $this->set_dns_spf($db->Record["domaine"], $spf);
@@ -1015,15 +1010,15 @@ ORDER BY
             $login = $mem->user["login"];
         }
         // Search for the record in sub_domaines table
-        $db->query("SELECT * FROM sub_domaines WHERE compte=$uid AND domaine='" . addslashes($domain) . "' AND sub='' AND type='txt' AND valeur LIKE 'v=spf1 %' AND web_action!='DELETE';");
+        $db->query("SELECT * FROM sub_domaines WHERE compte= ? AND domaine= ? AND sub='' AND type='txt' AND valeur LIKE 'v=spf1 %' AND web_action!='DELETE';", array($uid, $domain));
         if ($db->next_record()) {
             if ($previous !== -1 && $db->Record["valeur"] == "v=spf1 " . $spf) {
                 return; // skip, no change asked.
             }
-            $db->query("UPDATE sub_domaines SET web_action='DELETE' WHERE id='" . $db->Record["id"] . "';");
+            $db->query("UPDATE sub_domaines SET web_action='DELETE' WHERE id= ? ;",array($db->Record["id"]));
         }
-        $db->query("INSERT INTO sub_domaines SET compte=$uid, domaine='" . addslashes($domain) . "', sub='', type='txt', valeur='" . addslashes("v=spf1 " . $spf) . "', web_action='UPDATE';");
-        $db->query("UPDATE domaines SET dns_action='UPDATE' WHERE domaine='" . addslashes($domain) . "';");
+        $db->query("INSERT INTO sub_domaines SET compte= ?, domaine= ?, sub='', type='txt', valeur= ? , web_action='UPDATE';", array($uid, $domain, "v=spf1 " . $spf));
+        $db->query("UPDATE domaines SET dns_action='UPDATE' WHERE domaine= ?;", array($domain));
     }
 
     /* ----------------------------------------------------------------- */
@@ -1048,15 +1043,15 @@ ORDER BY
         $dmarc = str_replace("%%USERMAIL%%", $login . "@" . $L_FQDN, $dmarc);
 
         // Search for the record in sub_domaines table
-        $db->query("SELECT * FROM sub_domaines WHERE compte=$uid AND domaine='" . addslashes($domain) . "' AND sub='_dmarc' AND type='txt' AND valeur LIKE 'v=dmarc1;%' AND web_action!='DELETE';");
+        $db->query("SELECT * FROM sub_domaines WHERE compte= ? AND domaine= ? AND sub='_dmarc' AND type='txt' AND valeur LIKE 'v=dmarc1;%' AND web_action!='DELETE';", array($uid, $domain));
         if ($db->next_record()) {
             if ($previous !== -1 && $db->Record["valeur"] == "v=dmarc1;" . $dmarc) {
                 return; // skip, no change asked.
             }
-            $db->query("UPDATE sub_domaines SET web_action='DELETE' WHERE id='" . $db->Record["id"] . "';");
+            $db->query("UPDATE sub_domaines SET web_action='DELETE' WHERE id= ?;", array($db->Record["id"]));
         }
-        $db->query("INSERT INTO sub_domaines SET compte=$uid, domaine='" . addslashes($domain) . "', sub='_dmarc', type='txt', valeur='" . addslashes("v=dmarc1;" . $dmarc) . "', web_action='UPDATE';");
-        $db->query("UPDATE domaines SET dns_action='UPDATE' WHERE domaine='" . addslashes($domain) . "';");
+        $db->query("INSERT INTO sub_domaines SET compte= ?, domaine= ?, sub='_dmarc', type='txt', valeur= ?, web_action='UPDATE';", array($uid, $domain, "v=dmarc1;" . $dmarc));
+        $db->query("UPDATE domaines SET dns_action='UPDATE' WHERE domaine= ?;", array($domain));
     }
 
     /* ----------------------------------------------------------------- */

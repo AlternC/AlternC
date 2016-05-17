@@ -46,7 +46,7 @@ class DB_users extends DB_Sql {
         global $cuid, $db, $err;
 
         if (!$empty) {
-            $db->query("select db_servers.* from db_servers, membres where membres.uid=$cuid and membres.db_server_id=db_servers.id;");
+            $db->query("select db_servers.* from db_servers, membres where membres.uid= ? and membres.db_server_id=db_servers.id;", array($cuid));
             if (!$db->next_record()) {
                 $err->raise('db_user', _("There are no databases in db_servers for this user. Please contact your administrator."));
                 die();
@@ -156,7 +156,7 @@ class m_mysql {
         global $db, $err, $bro, $cuid;
         $err->log("mysql", "get_dblist");
         $db->free();
-        $db->query("SELECT login,pass,db, bck_mode, bck_dir FROM db WHERE uid='$cuid' ORDER BY db;");
+        $db->query("SELECT login,pass,db, bck_mode, bck_dir FROM db WHERE uid= ? ORDER BY db;", array($cuid));
         $c = array();
         while ($db->next_record()) {
             list($dbu, $dbn) = split_mysql_database_name($db->f("db"));
@@ -174,7 +174,7 @@ class m_mysql {
     function php_myadmin_connect() {
         global $db, $cuid, $err;
         $err->log("mysql", "php_myadmin_connect");
-        $db->query("SELECT dbu.name,dbu.password, dbs.host FROM dbusers dbu, db_servers dbs, membres m WHERE dbu.uid='$cuid' and enable='ADMIN' and dbs.id=m.db_server_id and m.uid='$cuid';");
+        $db->query("SELECT dbu.name,dbu.password, dbs.host FROM dbusers dbu, db_servers dbs, membres m WHERE dbu.uid= ? and enable='ADMIN' and dbs.id=m.db_server_id and m.uid= ? ;", array($cuid, $cuid));
         if (!$db->num_rows()) {
             $err->raise("mysql", _("Cannot connect to PhpMyAdmin"));
             return false;
@@ -215,7 +215,7 @@ class m_mysql {
             $dbn = $dbncomp[1];
         }
         $size = $this->get_db_size($dbname);
-        $db->query("SELECT login,pass,db, bck_mode, bck_gzip, bck_dir, bck_history FROM db WHERE uid='$cuid' AND db='$dbname';");
+        $db->query("SELECT login,pass,db, bck_mode, bck_gzip, bck_dir, bck_history FROM db WHERE uid= ? AND db= ?;", array($cuid, $dbname));
         if (!$db->num_rows()) {
             $err->raise("mysql", _("Database %s not found"), $dbn);
             return array("enabled" => false);
@@ -262,13 +262,13 @@ class m_mysql {
             $err->raise("mysql", _("Database name cannot exceed %d characters"), $len);
             return false;
         }
-        $db->query("SELECT * FROM db WHERE db='$dbname';");
+        $db->query("SELECT * FROM db WHERE db= ? ;", array($dbname));
         if ($db->num_rows()) {
             $err->raise("mysql", _("Database %s already exists"), $dbn);
             return false;
         }
 
-        $db->query("SELECT name from dbusers where name='" . $dbname . "' and enable='ACTIVATED' ;");
+        $db->query("SELECT name from dbusers where name= ? and enable='ACTIVATED' ;", array($dbname));
         if (!$db->num_rows()) {
             $password_user = create_pass(8);
             if (!$this->add_user($dbn, $password_user, $password_user)) {
@@ -277,7 +277,7 @@ class m_mysql {
         }
 
         //checking for the phpmyadmin user
-        $db->query("SELECT * FROM dbusers WHERE uid=$cuid AND enable='ADMIN';");
+        $db->query("SELECT * FROM dbusers WHERE uid= ? AND enable='ADMIN';", array($cuid));
         if ($db->num_rows()) {
             $db->next_record();
             $myadm = $db->f("name");
@@ -288,10 +288,10 @@ class m_mysql {
         }
 
         //Grant the special user every rights.
-        if ($this->dbus->query("CREATE DATABASE `$dbname`;")) {
+        if ($this->dbus->query("CREATE DATABASE ? ;", array($dbname)) {
             $err->log("mysql", "add_db_succes", $dbn);
             // Ok, database does not exist, quota is ok and dbname is compliant. Let's proceed
-            $db->query("INSERT INTO db (uid,login,pass,db,bck_mode) VALUES ('$cuid','$myadm','$password','$dbname',0);");
+            $db->query("INSERT INTO db (uid,login,pass,db,bck_mode) VALUES (?, ?, ?, ? ,0)", array($cuid, $myadm, $password, $dbname));
             $dbuser = $dbname;
             $dbname = str_replace('_', '\_', $dbname);
             $this->grant($dbname, $myadm, "ALL PRIVILEGES", $password);
@@ -317,8 +317,7 @@ class m_mysql {
     function del_db($dbn) {
         global $db, $err, $cuid;
         $err->log("mysql", "del_db", $dbn);
-        $dbname = addslashes($dbn);
-        $db->query("SELECT uid FROM db WHERE db='$dbname';");
+        $db->query("SELECT uid FROM db WHERE db= ?;", array($dbname));
         if (!$db->num_rows()) {
             $err->raise("mysql", _("The database was not found. I can't delete it"));
             return false;
@@ -326,15 +325,15 @@ class m_mysql {
         $db->next_record();
 
         // Ok, database exists and dbname is compliant. Let's proceed
-        $db->query("DELETE FROM size_db WHERE db='$dbname';");
-        $db->query("DELETE FROM db WHERE uid='$cuid' AND db='$dbname';");
-        $this->dbus->query("DROP DATABASE `$dbname`;");
+        $db->query("DELETE FROM size_db WHERE db ?;", array($dbname));
+        $db->query("DELETE FROM db WHERE uid= ? AND db= ? ;", array($cuid, $dbname));
+        $this->dbus->query("DROP DATABASE ? ;", array($dbname));
 
         $db_esc = str_replace('_', '\_', $dbname);
-        $this->dbus->query("DELETE FROM mysql.db WHERE Db='$db_esc';");
+        $this->dbus->query("DELETE FROM mysql.db WHERE Db= ? ;",    array($db_esc));
 
         #We test if the user created with the database is associated with more than 1 database.
-        $this->dbus->query("select User from mysql.db where User='" . $dbname . "' and (Select_priv='Y' or Insert_priv='Y' or Update_priv='Y' or Delete_priv='Y' or Create_priv='Y' or Drop_priv='Y' or References_priv='Y' or Index_priv='Y' or Alter_priv='Y' or Create_tmp_table_priv='Y' or Lock_tables_priv='Y');");
+        $this->dbus->query("select User from mysql.db where User= ? and (Select_priv='Y' or Insert_priv='Y' or Update_priv='Y' or Delete_priv='Y' or Create_priv='Y' or Drop_priv='Y' or References_priv='Y' or Index_priv='Y' or Alter_priv='Y' or Create_tmp_table_priv='Y' or Lock_tables_priv='Y');", array($dbname));
         if (($this->dbus->num_rows()) == 0) {
             #If not we can delete it.
             $this->del_user($dbname);
@@ -373,7 +372,7 @@ class m_mysql {
             $err->raise("mysql", _("Database name can contain only letters and numbers"));
             return false;
         }
-        $db->query("SELECT * FROM db WHERE uid='$cuid' AND db='$dbname';");
+        $db->query("SELECT * FROM db WHERE uid= ? AND db= ? ;", array($cuid, $dbname));
         if (!$db->num_rows()) {
             $err->raise("mysql", _("Database %s not found"), $dbn);
             return false;
@@ -397,7 +396,7 @@ class m_mysql {
             $err->raise("mysql", _("Directory does not exist"));
             return false;
         }
-        $db->query("UPDATE db SET bck_mode='$bck_mode', bck_history='$bck_history', bck_gzip='$bck_gzip', bck_dir='$bck_dir' WHERE uid='$cuid' AND db='$dbname';");
+        $db->query("UPDATE db SET bck_mode= ? , bck_history= ?, bck_gzip= ?, bck_dir= ? WHERE uid= ? AND db= ? ;", array($bck_mode, $bck_history, $bck_gzip, $bck_dir, $cuid, $dbname));
         return true;
     }
 
@@ -410,7 +409,7 @@ class m_mysql {
     function put_mysql_details($password) {
         global $db, $err, $cuid, $admin;
         $err->log("mysql", "put_mysql_details");
-        $db->query("SELECT * FROM db WHERE uid='$cuid';");
+        $db->query("SELECT * FROM db WHERE uid= ?;", array($cuid));
         if (!$db->num_rows()) {
             $err->raise("mysql", _("Database not found"));
             return false;
@@ -437,8 +436,8 @@ class m_mysql {
         }
 
         // Update all the "pass" fields for this user : 
-        $db->query("UPDATE db SET pass='$password' WHERE uid='$cuid';");
-        $this->dbus->query("SET PASSWORD FOR " . $login . "@" . $this->dbus->Client . " = PASSWORD('$password');");
+        $db->query("UPDATE db SET pass= ? WHERE uid= ?;", array($password, $cuid));
+        $this->dbus->query("SET PASSWORD FOR ? = PASSWORD(?);", array( $login . "@" . $this->dbus->Client, $password));
         return true;
     }
 
@@ -457,7 +456,7 @@ class m_mysql {
         if (!preg_match("#^[0-9a-z_\\*\\\\]*$#", $base)) {
             $err->raise("mysql", _("Database name can contain only letters and numbers"));
             return false;
-        } elseif (!$this->dbus->query("select db from db where db='$base';")) {
+        } elseif (!$this->dbus->query("select db from db where db= ?;", array($base))) {
             $err->raise("mysql", _("Database not found"));
             return false;
         }

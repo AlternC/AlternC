@@ -71,7 +71,7 @@ class m_lxc implements vm {
     function hook_admin_del_member() {
         global $db, $err, $cuid;
         $err->log("lxc", "alternc_del_member");
-        $db->query("DELETE FROM vm_history WHERE uid='$cuid'");
+        $db->query("DELETE FROM vm_history WHERE uid= ?", array($cuid));
         return true;
     }
 
@@ -153,7 +153,7 @@ class m_lxc implements vm {
                 $err->raise('lxc', _($msg));
                 return FALSE;
             }
-            $db->query("INSERT INTO vm_history (ip,date_start,uid,serialized_object) VALUES ('$hostname', $date_start, '$uid', '$res')");
+            $db->query("INSERT INTO vm_history (ip,date_start,uid,serialized_object) VALUES (?, ?, ?, ?);", array($hostname, $date_start, $uid, $res));
             return $res;
         }
     }

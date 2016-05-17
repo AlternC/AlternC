@@ -118,7 +118,7 @@ class m_ftp {
         // Be sure what is in $status, in case of it was a parameter
         $status = ($status ? 'true' : 'false');
 
-        if (!$db->query("UPDATE ftpusers SET enabled = $status WHERE uid = '$cuid' AND id = '$id' ;")) {
+        if (!$db->query("UPDATE ftpusers SET enabled = ? WHERE uid = ? AND id = ? ;", array($status, $cuid, $id))) {
             $err->raise('ftp', _("Error during update"));
             return false;
         } else {
@@ -140,7 +140,7 @@ class m_ftp {
         global $db, $err, $cuid;
         $err->log("ftp", "get_list");
         $r = array();
-        $db->query("SELECT id, name, homedir, enabled FROM ftpusers WHERE uid='$cuid' ORDER BY name;");
+        $db->query("SELECT id, name, homedir, enabled FROM ftpusers WHERE uid= ? ORDER BY name;", array($cuid));
         if ($db->num_rows()) {
             while ($db->next_record()) {
                 $r[] = array(
@@ -169,7 +169,7 @@ class m_ftp {
         global $db, $err, $cuid;
         $err->log("ftp", "get_ftp_details", $id);
         $r = array();
-        $db->query("SELECT id, name, homedir, enabled FROM ftpusers WHERE uid='$cuid' AND id='$id';");
+        $db->query("SELECT id, name, homedir, enabled FROM ftpusers WHERE uid= ? AND id= ?;", array($cuid, $id));
         if ($db->num_rows()) {
             $db->next_record();
 
@@ -206,7 +206,7 @@ class m_ftp {
         global $db, $mem, $cuid;
         $r = array();
         $r[] = $mem->user["login"];
-        $db->query("SELECT domaine FROM domaines WHERE compte='$cuid' ORDER BY domaine;");
+        $db->query("SELECT domaine FROM domaines WHERE compte= ? ORDER BY domaine;", array($cuid));
         while ($db->next_record()) {
             $r[] = $db->f("domaine");
         }
@@ -274,7 +274,7 @@ class m_ftp {
     function put_ftp_details($id, $prefixe, $login, $pass, $dir) {
         global $db, $err, $bro, $cuid, $admin;
         $err->log("ftp", "put_ftp_details", $id);
-        $db->query("SELECT count(*) AS cnt FROM ftpusers WHERE id='$id' and uid='$cuid';");
+        $db->query("SELECT count(*) AS cnt FROM ftpusers WHERE id= ? and uid= ?;", array($id, $cuid));
         $db->next_record();
         if (!$db->f("cnt")) {
             $err->raise("ftp", _("This FTP account does not exist"));
@@ -297,7 +297,7 @@ class m_ftp {
         if (!$this->check_login($full_login)) {
             return false;
         }
-        $db->query("SELECT COUNT(*) AS cnt FROM ftpusers WHERE id!='$id' AND name='$full_login';");
+        $db->query("SELECT COUNT(*) AS cnt FROM ftpusers WHERE id!= ? AND name= ?;", array($id, $full_login));
         $db->next_record();
         if ($db->f("cnt")) {
             $err->raise("ftp", _("This FTP account already exists"));
@@ -320,9 +320,9 @@ class m_ftp {
                 }
             }
             $encrypted_password = _md5cr($pass, strrev(microtime(true)));
-            $db->query("UPDATE ftpusers SET name='" . $full_login . "', password='', encrypted_password='$encrypted_password', homedir='$absolute', uid='$cuid' WHERE id='$id';");
+            $db->query("UPDATE ftpusers SET name= ? , password='', encrypted_password= ?, homedir= ?, uid= ? WHERE id= ?;", array($full_login, $encrypted_password, $absolute, $cuid, $id));
         } else {
-            $db->query("UPDATE ftpusers SET name='" . $full_login . "', homedir='$absolute', uid='$cuid' WHERE id='$id';");
+            $db->query("UPDATE ftpusers SET name= ? , homedir= ? , uid= ? WHERE id= ? ;", array($full_login, $absolute, $cuid, $id));
         }
         return true;
     }
@@ -336,14 +336,14 @@ class m_ftp {
     function delete_ftp($id) {
         global $db, $err, $cuid;
         $err->log("ftp", "delete_ftp", $id);
-        $db->query("SELECT name FROM ftpusers WHERE id='$id' and uid='$cuid';");
+        $db->query("SELECT name FROM ftpusers WHERE id= ? and uid= ? ;", array($id, $cuid));
         $db->next_record();
         $name = $db->f("name");
         if (!$name) {
             $err->raise("ftp", _("This FTP account does not exist"));
             return false;
         }
-        $db->query("DELETE FROM ftpusers WHERE id='$id'");
+        $db->query("DELETE FROM ftpusers WHERE id= ? ;", array($id));
         return $name;
     }
 
@@ -380,13 +380,13 @@ class m_ftp {
         if (!$this->check_login($full_login)) {
             return false;
         }
-        $db->query("SELECT count(*) AS cnt FROM ftpusers WHERE name='" . $full_login . "'");
+        $db->query("SELECT count(*) AS cnt FROM ftpusers WHERE name= ? ;", array($full_login));
         $db->next_record();
         if ($db->f("cnt")) {
             $err->raise("ftp", _("This FTP account already exists"));
             return false;
         }
-        $db->query("SELECT login FROM membres WHERE uid='$cuid';");
+        $db->query("SELECT login FROM membres WHERE uid= ? ;", array($cuid));
         $db->next_record();
         $absolute = getuserpath() . "/$dir";
         if (!file_exists($absolute)) {
@@ -406,7 +406,7 @@ class m_ftp {
 
         if ($quota->cancreate("ftp")) {
             $encrypted_password = _md5cr($pass, strrev(microtime(true)));
-            $db->query("INSERT INTO ftpusers (name,password, encrypted_password,homedir,uid) VALUES ('" . $full_login . "', '', '$encrypted_password', '$absolute', '$cuid')");
+            $db->query("INSERT INTO ftpusers (name,password, encrypted_password,homedir,uid) VALUES ( ?, '', ?, ?, ?)", array($full_login, $encrypted_password, $absolute, $cuid));
             return true;
         } else {
             $err->raise("ftp", _("Your FTP account quota is over. You cannot create more ftp accounts"));
@@ -426,7 +426,7 @@ class m_ftp {
         if (substr($dir, 0, 1) == "/") {
             $dir = substr($dir, 1);
         }
-        $db->query("SELECT id FROM ftpusers WHERE homedir='" . getuserpath() . "/$dir';");
+        $db->query("SELECT id FROM ftpusers WHERE homedir= ? ;", array( getuserpath() . "/" .$dir ));
         if ($db->num_rows()) {
             $db->next_record();
             return $db->f("id");
@@ -444,7 +444,7 @@ class m_ftp {
     function alternc_del_domain($dom) {
         global $db, $err, $cuid;
         $err->log("ftp", "alternc_del_domain", $dom);
-        $db->query("DELETE FROM ftpusers WHERE uid='$cuid' AND ( name LIKE '$dom\_%' OR name LIKE '$dom') ");
+        $db->query("DELETE FROM ftpusers WHERE uid= ? AND ( name LIKE ? OR name LIKE ?) ", array($cuid, $dom."\_%", $dom));
         return true;
     }
 
@@ -456,7 +456,7 @@ class m_ftp {
     function alternc_del_member() {
         global $db, $err, $cuid;
         $err->log("ftp", "alternc_del_member");
-        $db->query("DELETE FROM ftpusers WHERE uid='$cuid'");
+        $db->query("DELETE FROM ftpusers WHERE uid= ?", array($cuid));
         return true;
     }
 
@@ -472,7 +472,7 @@ class m_ftp {
         global $db, $err, $cuid;
         $err->log("ftp", "getquota");
         $q = Array("name" => "ftp", "description" => _("FTP accounts"), "used" => 0);
-        $db->query("SELECT COUNT(*) AS cnt FROM ftpusers WHERE uid='$cuid'");
+        $db->query("SELECT COUNT(*) AS cnt FROM ftpusers WHERE uid= ? ", array($cuid));
         if ($db->next_record()) {
             $q['used'] = $db->f("cnt");
         }
