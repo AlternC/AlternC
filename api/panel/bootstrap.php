@@ -25,20 +25,12 @@ require_once($root."class/functions.php");
 
 global $L_MYSQL_HOST,$L_MYSQL_DATABASE,$L_MYSQL_LOGIN,$L_MYSQL_PWD,$db,$dbh;
 
-class DB_system extends DB_Sql {
-  var $Host,$Database,$User,$Password;
-
-  /**
-  * Creator
-  */
-  function DB_system() {
-    global $L_MYSQL_HOST,$L_MYSQL_DATABASE,$L_MYSQL_LOGIN,$L_MYSQL_PWD;
-    $this->Host     = $L_MYSQL_HOST;
-    $this->Database = $L_MYSQL_DATABASE;
-    $this->User     = $L_MYSQL_LOGIN;
-    $this->Password = $L_MYSQL_PWD;
-  }
-}
+class DB_system extends DB_Sql { 
+  function __construct() { 
+      global $L_MYSQL_HOST,$L_MYSQL_DATABASE,$L_MYSQL_LOGIN,$L_MYSQL_PWD; 
+      parent::__construct($L_MYSQL_DATABASE, $L_MYSQL_HOST, $L_MYSQL_LOGIN, $L_MYSQL_PWD);
+   } 
+} 
 
 // we do both: 
 $db= new DB_system();
