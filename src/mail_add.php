@@ -52,7 +52,7 @@ $recipients = array_slice($argv, 2); // rest is recipients
 // there's no function to do that, oddly enough...
 // there's one to extract the compte from the mail_id (!) but we
 // haven't created it yet...
-$db->query('SELECT id,compte FROM domaines WHERE domaine="'.addslashes($domain).'"');
+$db->query('SELECT id,compte FROM domaines WHERE domaine=?',array($domain));
 if ($db->next_record()) {
   $compte = $db->f('compte');
   $domain_id = $db->f('id');
