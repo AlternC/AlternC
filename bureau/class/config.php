@@ -114,34 +114,24 @@ require_once($root . "/class/db_mysql.php");
 require_once($root . "/class/functions.php");
 require_once($root . "/class/variables.php");
 
-// child class of the phplib parent DB class 
-/**
- * Class for MySQL management in the bureau 
- *
- * This class heriting from the db class of the phplib manages
- * the connection to the MySQL database.
- */
-class DB_system extends DB_Sql {
 
-    var $Host = null;
-    var $Database = null;
-    var $User = null;
-    var $Password = null;
-
-    /**
-     * Creator
-     */
-    function DB_system() {
-        global $L_MYSQL_HOST, $L_MYSQL_DATABASE, $L_MYSQL_LOGIN, $L_MYSQL_PWD;
-        $this->Host = $L_MYSQL_HOST;
-        $this->Database = $L_MYSQL_DATABASE;
-        $this->User = $L_MYSQL_LOGIN;
-        $this->Password = $L_MYSQL_PWD;
-    }
-
-}
+// Classe h�rit�e de la classe db de la phplib. 
+/** 
+ * Class for MySQL management in the bureau  
+ * 
+ * This class heriting from the db class of the phplib manages 
+ * the connection to the MySQL database. 
+ */ 
+  
+class DB_system extends DB_Sql { 
+  function __construct() { 
+      global $L_MYSQL_HOST,$L_MYSQL_DATABASE,$L_MYSQL_LOGIN,$L_MYSQL_PWD; 
+      parent::__construct($L_MYSQL_DATABASE, $L_MYSQL_HOST, $L_MYSQL_LOGIN, $L_MYSQL_PWD);
+   } 
+} 
 
 $db = new DB_system();
+// $db = new Sql($L_MYSQL_DATABASE, $L_MYSQL_HOST, $L_MYSQL_LOGIN, $L_MYSQL_PWD);
 
 // https: Redirection if not calling https://!fqdn or if https is forced
 if ((variable_get('force_https', '0', "This variable is set to 0 (default) if users can access the management desktop through HTTP, otherwise we force HTTPS")&&(!isset($_SERVER["HTTPS"])|| ($_SERVER["HTTPS"] != "on")))
