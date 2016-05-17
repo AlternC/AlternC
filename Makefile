@@ -21,8 +21,7 @@
 # Purpose of file: Global Makefile 
 # ----------------------------------------------------------------------
 MAJOR=$(shell sed -ne 's/^[^(]*(\([^)]*\)).*/\1/;1p' debian/changelog)
-REV=$(shell env LANG=C svn info --non-interactive | awk '/^Revision:/ { print $$2 }')
-VERSION="${MAJOR}~svn${REV}"
+VERSION=$MAJOR
 export VERSION
 
 build:
@@ -44,14 +43,11 @@ install-common:
 	cp -r etc/alternc $(DESTDIR)/etc
 	cp -r etc/incron.d $(DESTDIR)/etc
 	install -o root -g root -m 440 etc/sudoers.d/alternc $(DESTDIR)/etc/sudoers.d
-# SVN cleanup (bad if installing without DESTDIR, FIXME)
-	find $(DESTDIR)/etc/ -depth -type d -name ".svn" -exec rm {} -rf \;
 	chmod 755 $(DESTDIR)/etc/alternc etc/incron.d
 
 # Installer and upgrade scripts 
 	test -d $(DESTDIR)/usr/share/alternc/install || mkdir -p $(DESTDIR)/usr/share/alternc/install
 	cp -r install/* $(DESTDIR)/usr/share/alternc/install
-	find $(DESTDIR)/usr/share/alternc/install -depth -type d -name ".svn" -exec rm {} -rf \;
 	chmod a+x $(DESTDIR)/usr/share/alternc/install/alternc.install $(DESTDIR)/usr/share/alternc/install/dopo.sh $(DESTDIR)/usr/share/alternc/install/mysql.sh $(DESTDIR)/usr/share/alternc/install/newone.php $(DESTDIR)/usr/share/alternc/install/reset_root.php $(DESTDIR)/usr/share/alternc/install/upgrade_check.sh $(DESTDIR)/usr/share/alternc/install/upgrades/*.php $(DESTDIR)/usr/share/alternc/install/upgrades/*.sh
 
 
@@ -60,9 +56,7 @@ install-alternc: install-common
 # Web Panel
 	test -d $(DESTDIR)/usr/share/alternc/panel || mkdir $(DESTDIR)/usr/share/alternc/panel
 	cp -r bureau/* $(DESTDIR)/usr/share/alternc/panel
-	find $(DESTDIR)/usr/share/alternc/panel -depth -type d -name ".svn" -exec rm {} -rf \;
 	sed -i -e "s/@@REPLACED_DURING_BUILD@@/${MAJOR}/" $(DESTDIR)/usr/share/alternc/panel/class/local.php
-	echo ${VERSION} > $(DESTDIR)/usr/share/alternc/panel/class/.svn-infos
 	chown -R root:root $(DESTDIR)/usr/share/alternc/panel
 	chmod -R 644 $(DESTDIR)/usr/share/alternc/panel
 	chmod -R a+X $(DESTDIR)/usr/share/alternc/panel
