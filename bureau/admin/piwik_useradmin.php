@@ -45,7 +45,7 @@ else
 {
 	// Add a user to a piwik website
 	if ($site_id != -1 && $right !== FALSE) {
-		$db->query("SELECT COUNT(*) AS ok FROM piwik_sites WHERE uid='$cuid' AND piwik_id='$site_id'");
+		$db->query("SELECT COUNT(*) AS ok FROM piwik_sites WHERE uid=? AND piwik_id=?;",array($cuid,$site_id));
 		$db->next_record();
 		if ($db->f('ok')!=1)
 		{
@@ -53,7 +53,7 @@ else
 		}
 		else
 		{
-			$db->query("SELECT COUNT(*) AS ok FROM piwik_users WHERE uid='$cuid' AND login='$user_name'");
+			$db->query("SELECT COUNT(*) AS ok FROM piwik_users WHERE uid=? AND login=?",array($cuid,$user_name));
 			$db->next_record();
 			if ($db->f('ok')!=1)
 			{
@@ -79,7 +79,7 @@ else
 	}
 
 	$user_piwik_sites = array();
-	$db->query("SELECT piwik_id FROM piwik_sites WHERE uid='$cuid'");
+	$db->query("SELECT piwik_id FROM piwik_sites WHERE uid=?",array($cuid));
 	while ($db->next_record()) 
 		array_push($user_piwik_sites, $db->f('piwik_id'));
 	// Weird behaviour of php: array_push products an array such as:
@@ -89,7 +89,7 @@ else
 	$user_piwik_sites = array_flip($user_piwik_sites);
 
 	$user_piwik_users = array();
-	$db->query("SELECT login FROM piwik_users WHERE uid='$cuid'");
+	$db->query("SELECT login FROM piwik_users WHERE uid=?",arary($cuid));
 	while ($db->next_record())
 		array_push ($user_piwik_users, $db->f('login'));
 	// Swap keys and values, see user_piwik_sites
