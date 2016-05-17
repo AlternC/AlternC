@@ -56,12 +56,8 @@ case "$1" in
     test -d "$VMAIL_HOME" || mkdir -p "$VMAIL_HOME"
     chown vmail:vmail "$VMAIL_HOME" 
     chown vmail:vmail "$VMAIL_HOME"/* 2>/dev/null || true # It may be empty
-    chmod u+rxw "$VMAIL_HOME" 
-    chmod u+rxw "$VMAIL_HOME"/* 2>/dev/null || true # It may be empty
-    chmod g+rxw "$VMAIL_HOME" 
-    chmod g+rxw "$VMAIL_HOME"/* 2>/dev/null || true # It may be empty
-
-    chown alterncpanel:alterncpanel "/var/lib/alternc/panel"
+    chmod 770 "$VMAIL_HOME" 
+    chmod 770 "$VMAIL_HOME"/* 2>/dev/null || true # It may be empty
 
     # build local.sh if it does not exist
     if [ ! -f $CONFIGFILE ]; then

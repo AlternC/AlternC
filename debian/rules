@@ -19,6 +19,10 @@ override_dh_install:
 	$(MAKE) install-api DESTDIR=$(CURDIR)/debian/alternc-api
 	$(MAKE) -C ssl install DESTDIR=$(CURDIR)/debian/alternc-ssl
 
+override_dh_fixperms:
+        dh_fixperms
+        chmod 700 debian/alternc/var/lib/alternc/backups
+
 %:
 	dh $@
 
