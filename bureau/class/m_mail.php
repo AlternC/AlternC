@@ -290,33 +290,35 @@ ORDER BY
      * @param $offset integer skip THAT much emails in the result.
      * @param $count integer return no more than THAT much emails. -1 for ALL. Offset is ignored then.
      * @result an array of each mail hosted under the domain.
-     * @TODO:EM: It has to be escaped
      */
 
     function enum_domain_mails($dom_id = null, $search = "", $offset = 0, $count = 30, $show_systemmails = false) {
         global $db, $err, $hooks;
         $err->log("mail", "enum_domains_mail");
 
-        $search = trim($search);
+        $query_args = array($dom_id);
+        $search     = trim($search);
+        $where      = " a.domain_id = ? ";
 
-        $where = "a.domain_id=$dom_id";
         if ($search) {
-            $where.=" AND (a.address LIKE '%" . addslashes($search) . "%' OR r.recipients LIKE '%" . addslashes($search) . "%')";
+            $where .= " AND (a.address LIKE ? OR r.recipients LIKE ? )";
+            array_push($query_args, "%" . $search . "%", "%" . $search . "%");
         }
         if (!$show_systemmails) {
-            $where.=" AND type='' ";
+            $where .= " AND type='' ";
         }
-        $db->query("SELECT count(a.id) AS total FROM address a LEFT JOIN recipient r ON r.address_id=a.id WHERE $where;");
+        $db->query("SELECT count(a.id) AS total FROM address a LEFT JOIN recipient r ON r.address_id=a.id WHERE " .  $where . ";", $query_args);
         $db->next_record();
         $this->total = $db->f("total");
         if ($count != -1) {
-            $limit = "LIMIT $offset,$count";
+            $limit = " LIMIT ?, ? "; 
+            array_push($query_args, $offset, $count);
         } else {
             $limit = "";
         }
         $db->query("SELECT a.id, a.address, a.password, a.`enabled`, a.mail_action, d.domaine AS domain, m.quota, m.quota*1024*1024 AS quotabytes, m.bytes AS used, NOT ISNULL(m.id) AS islocal, a.type, r.recipients, m.lastlogin, a.domain_id  
          FROM (address a LEFT JOIN mailbox m ON m.address_id=a.id) LEFT JOIN recipient r ON r.address_id=a.id, domaines d 
-         WHERE $where AND d.id=a.domain_id $limit ;");
+         WHERE " . $where . " AND d.id=a.domain_id " . $limit . " ;", $query_args);
         if (!$db->next_record()) {
             $err->raise("mail", _("No email found for this query"));
             return array();

@@ -479,15 +479,14 @@ class m_mysql {
             return false;
         }
 
-        // @TODO:EM: does this part have to be escaped?
         # Protect database name if not wildcard
         if ($base != '*') {
-            $base = "`" . $base . "`";
+            $base = $db->quote($base);
         }
-        $grant = "grant " . $rights . " on " . $base . "." . $table . " to '" . $user . "'@'" . $this->dbus->Client . "'";
+        $grant = "grant " . $db->quote($rights) . " on " . $base . "." . $db->quote($table) . " to " . $db->quote($user) . "@" . $db->quote($this->dbus->Client);
 
         if ($pass) {
-            $grant .= " identified by '" . $pass . "';";
+            $grant .= " identified by " . $db->quote($pass) . ";";
         } else {
             $grant .= ";";
         }
@@ -556,8 +555,7 @@ class m_mysql {
      * @access private
      */
     function get_db_size($dbname) {
-        // @TODO:EM: does this part have to be escaped?
-        $this->dbus->query("SHOW TABLE STATUS FROM `$dbname`;");
+        $this->dbus->query("SHOW TABLE STATUS FROM ". $db->quote($dbname) .";");
         $size = 0;
         while ($this->dbus->next_record()) {
             $size += $this->dbus->f('Data_length') + $this->dbus->f('Index_length');
@@ -753,7 +751,6 @@ class m_mysql {
      * @param $password The password for this username
      * @param $passconf The password confirmation
      * @return boolean if the password has been changed in MySQL or FALSE if an error occurred
-     * @TODO:EM: is this correctly escaped ?
      * */
     function change_user_password($usern, $password, $passconf) {
         global $db, $err, $cuid, $admin;
@@ -771,7 +768,7 @@ class m_mysql {
                 return false; // The error has been raised by checkPolicy()
             }
         }
-        $this->dbus->query("SET PASSWORD FOR '" . addslashes($usern) . "'@'" . $this->dbus->Client . "' = PASSWORD(?);", array($pass));
+        $this->dbus->query("SET PASSWORD FOR " . $db->quote($usern) . "@" . $db->quote($this->dbus->Client) . "' = PASSWORD(?);", array($pass));
         $db->query("UPDATE dbusers set password= ? where name= ? and uid= ? ;", array($pass, $usern, $cuid));
         return true;
     }
@@ -805,8 +802,7 @@ class m_mysql {
         $login = $db->f("name");
 
         // Ok, database exists and dbname is compliant. Let's proceed
-        // @TODO:EM: is this correctly escaped ?
-        $this->dbus->query("REVOKE ALL PRIVILEGES ON *.* FROM '" . $user . "'@'" . $this->dbus->Client . "';");
+        $this->dbus->query("REVOKE ALL PRIVILEGES ON *.* FROM " . $db->quote($user) . "@" . $db->quote($this->dbus->Client) . ";");
         $this->dbus->query("DELETE FROM mysql.db WHERE User= ? AND Host= ? ;", array($user, $this->dbus->Client));
         $this->dbus->query("DELETE FROM mysql.user WHERE User= ? AND Host= ? ;", array($user, $this->dbus->Client));
         $this->dbus->query("FLUSH PRIVILEGES");
@@ -873,7 +869,6 @@ class m_mysql {
         global $err;
         $err->log("mysql", "set_user_rights");
 
-                $dbname = str_replace('_', '\_', $dbname);
         // On genere les droits en fonction du tableau de droits
         $strrights = "";
         for ($i = 0; $i < count($rights); $i++) {
@@ -936,18 +931,16 @@ class m_mysql {
         }
 
         // We reset all user rights on this DB : 
-        $this->dbus->query("SELECT * FROM mysql.db WHERE User = ? AND Db = ?;", array($usern, $dbname));
+        $this->dbus->query("SELECT * FROM mysql.db WHERE User = ? AND Db = ?;", array($user, $dbn));
 
         // @TODO:EM: This has to be verified, and maybe we should use another way to escape those requests
-        $usern = addslashes($user);
-        $dbname = addslashes($dbn);
 
         if ($this->dbus->num_rows()) {
-            $this->dbus->query("REVOKE ALL PRIVILEGES ON `$dbname`.* FROM '$usern'@'" . $this->dbus->Client . "';");
+            $this->dbus->query("REVOKE ALL PRIVILEGES ON ".$db->quote($dbn).".* FROM ".$db->quote($user)."@" . $db->quote($this->dbus->Client) . ";");
         }
         if ($strrights) {
             $strrights = substr($strrights, 0, strlen($strrights) - 1);
-            $this->grant($dbname, $usern, $strrights);
+            $this->grant($dbn, $user, $strrights);
         }
         $this->dbus->query("FLUSH PRIVILEGES");
         return TRUE;

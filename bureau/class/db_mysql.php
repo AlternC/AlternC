@@ -271,6 +271,15 @@ class DB_Sql {
      return $this->pdo_instance->lastInsertId();
   }
 
+    /**
+     *  Escape a string to use it into a SQL PDO query
+     *  @param  string  string to escape
+     *  @return string  escaped string
+     */
+  function quote($string) {
+    return $this->pdo_instance->quote($string);
+  }
+
   /* public: sequence numbers */
   function nextid($seq_name) {
      if (!$this->is_connected())

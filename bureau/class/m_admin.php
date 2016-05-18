@@ -752,32 +752,29 @@ EOF;
     function update_mem($uid, $mail, $nom, $prenom, $pass, $enabled, $canpass, $type = 'default', $duration = 0, $notes = "", $reset_quotas = false) {
         global $err, $db, $quota;
 
-        $notes = addslashes($notes);
-
         $err->log("admin", "update_mem", $uid);
+
         if (!$this->enabled) {
             $err->raise("admin", _("-- Only administrators can access this page! --"));
             return false;
         }
         $db = new DB_System();
-        // @TODO:EM: this has to be escaped
+
         if ($pass) {
             $pass = _md5cr($pass);
-            $ssq = " ,pass='$pass' ";
+            $second_query = "UPDATE membres SET mail= ?, canpass= ?, enabled= ?, `type`= ?, notes= ? , pass = ? WHERE uid= ?;";
+            $second_query_args = array($mail, $canpass, $enabled, $type, $notes, $pass, $uid);
         } else {
-            $ssq = "";
+            $second_query = "UPDATE membres SET mail= ?, canpass= ?, enabled= ?, `type`= ?, notes= ? WHERE uid= ?;";
+            $second_query_args = array($mail, $canpass, $enabled, $type, $notes, $uid);
         }
 
         $old_mem = $this->get($uid);
 
         if(
-            ($db->query(
-                            "UPDATE local SET nom= ?, prenom= ? WHERE uid=?;", 
-                            array($nom, $prenom, $uid)
-                        )) && 
-            ($db->query(
-                            "UPDATE membres SET mail= ?, canpass= ?, enabled= ?, `type`= ?, notes= ? $ssq WHERE uid= ?;",
-                            array($mail, $canpass, $enabled, $type, $notes, $uid)))) {
+            ($db->query("UPDATE local SET nom= ?, prenom= ? WHERE uid=?;", array($nom, $prenom, $uid))) && 
+            ($db->query($second_query, $second_query_args))
+        ){
             if ($reset_quotas == "on" || $type != $old_mem['type']) {
                 $quota->addquotas();
                 $quota->synchronise_user_profile();
@@ -1105,9 +1102,14 @@ EOF;
             }
         }
 
-        // @TODO:EM: this has to be escaped
-        $filter=($hosting_tld=variable_get("hosting_tld")) ? " WHERE domaine not like '%.$hosting_tld'" : "";
-        $db->query("SELECT m.uid,m.login,d.domaine,d.gesdns,d.gesmx,d.noerase FROM domaines d LEFT JOIN membres m ON m.uid=d.compte $filter ORDER BY domaine;");
+        $query = "SELECT m.uid,m.login,d.domaine,d.gesdns,d.gesmx,d.noerase FROM domaines d LEFT JOIN membres m ON m.uid=d.compte ";
+        $query_args = array();
+        if($hosting_tld = variable_get("hosting_tld")){
+            $query .= " WHERE domaine not like ?";
+            array_push($query_args, "%.".$hosting_tld);
+        }
+        $query .= " ORDER BY domaine;";
+        $db->query($query, $query_args);
         $c = array();
         while ($db->next_record()) {
             $tmp = $db->Record;
@@ -1134,9 +1136,14 @@ EOF;
         global $db, $L_NS1, $L_NS2, $L_MX, $L_PUBLIC_IP;
         $checked = array();
 
-        // @TODO:EM: this has to be escaped
-        $filter=($hosting_tld=variable_get("hosting_tld")) ? " WHERE domaine not like '%.$hosting_tld'" : "";
-        $db->query("SELECT * FROM domaines $filter ORDER BY domaine");
+        $query = "SELECT * FROM domaines ";
+        $query_args = array();
+        if($hosting_tld = variable_get("hosting_tld")){
+            $query .= " WHERE domaine not like ?";
+            array_push($query_args, "%.".$hosting_tld);
+        }
+        $query .= " ORDER BY domaine";
+        $db->query($query, $query_args);
         $dl = array();
         while ($db->next_record()) {
             $dl[$db->Record["domaine"]] = $db->Record;

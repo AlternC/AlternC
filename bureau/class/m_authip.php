@@ -249,7 +249,7 @@ class m_authip {
             foreach ($list_affected as $k => $v) {
                 $this->call_hooks("authip_on_delete", $k);
             }
-            if (!$db->query("update authorised_ip set ip= ?, subnet= ?, infos= ? where id= ? and uid=? ;", array($id, $subnetn $infos, $id, $cuid)) {
+            if (!$db->query("update authorised_ip set ip= ?, subnet= ?, infos= ? where id= ? and uid=? ;", array($id, $subnetn, $infos, $id, $cuid))) {
                 echo "query failed: " . $db->Error;
                 return false;
             }
@@ -329,7 +329,7 @@ class m_authip {
                 echo "query failed: " . $db->Error;
                 return false;
             }
-            $this->call_hooks("authip_on_create", PDO::lastInsertId()); // @TODO:EM: To test
+            $this->call_hooks("authip_on_create", $db->lastid()); 
         }
         return true;
     }

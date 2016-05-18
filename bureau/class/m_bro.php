@@ -839,7 +839,6 @@ class m_bro {
             $beg = $dir;
             $tofind = true;
             while ($tofind) {
-                // @TODO:EM: be careful with this one!
                 $db->query("SELECT sub,domaine FROM sub_domaines WHERE compte= ? AND type=0 AND (valeur= ? or valeur= ?);", array($cuid, "/".$beg."/", "/".$beg));
                 $db->next_record();
                 if ($db->num_rows()) {

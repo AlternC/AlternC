@@ -1682,17 +1682,21 @@ class m_dom {
     /* ----------------------------------------------------------------- */
 
     /** Returns the complete hosted domain list : 
-     * @TODO:EM: this has to be escaped
      */
     function get_domain_list($uid = -1) {
         global $db;
         $uid = intval($uid);
         $res = array();
         $sql = "";
+
+        $query  =   "SELECT domaine FROM domaines WHERE gesdns=1 ";
+        $query_args = array();
         if ($uid != -1) {
-            $sql .= " AND compte='$uid' ";
+            $query .= " AND compte= ? ";
+            array_push($query_args, $uid);
         }
-        $db->query("SELECT domaine FROM domaines WHERE gesdns=1 $sql ORDER BY domaine");
+        $query  .= " ORDER BY domaine;";
+        $db->query($query, $query_args);
         while ($db->next_record()) {
             $res[] = $db->f("domaine");
         }
@@ -1964,45 +1968,50 @@ class m_dom {
      * of a vhost.
      * If no parameters, return the parameters for ALL the vhost.
      * Optionnal parameters: id of the sub_domaines
-     *
-     * @TODO:EM: This has to be escaped
      * */
     function generation_parameters($id = null, $only_apache = true) {
         global $db, $err;
         $err->log("dom", "generation_parameters");
         $params = "";
+        /** 2016_05_18 : this comments was here before escaping the request... is there still something to do here ?
+         *   // BUG BUG BUG FIXME
+         *   // Suppression de comptes -> membres existe pas -> domaines a supprimer ne sont pas lister
+         */
+        $query  = "
+                select 
+                  sd.id as sub_id, 
+                  lower(sd.type) as type, 
+                  m.login, 
+                  m.uid as uid, 
+                  if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine) as fqdn, 
+                  concat_ws('@',m.login,v.value) as mail, 
+                  sd.valeur  
+                from 
+                  sub_domaines sd left join membres m on sd.compte=m.uid,
+                  variable v, 
+                  domaines_type dt 
+                where 
+                  v.name='mailname_bounce' 
+                  and lower(dt.name) = lower(sd.type)"; 
+        $query_args =   array();
+
         if (!is_null($id) && intval($id) == $id) {
-            $id = intval($id);
-            $params = " AND sd.id = $id ";
+            $query .= " AND sd.id = ? ";
+            array_push($query_args, intval($id));
         }
         if ($only_apache) {
-            $params.=" and dt.only_dns is false ";
+            $query .=" and dt.only_dns is false ";
         }
+
+        $query  .=  "
+                order by 
+                  m.login, 
+                  sd.domaine, 
+                  sd.sub;";
+
         
-// BUG BUG BUG FIXME
-// Suppression de comptes -> membres existe pas -> domaines a supprimer ne sont pas lister
-        $db->query("
-select 
-  sd.id as sub_id, 
-  lower(sd.type) as type, 
-  m.login, 
-  m.uid as uid, 
-  if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine) as fqdn, 
-  concat_ws('@',m.login,v.value) as mail, 
-  sd.valeur  
-from 
-  sub_domaines sd left join membres m on sd.compte=m.uid,
-  variable v, 
-  domaines_type dt 
-where 
-  v.name='mailname_bounce' 
-  and lower(dt.name) = lower(sd.type) 
-  $params 
-order by 
-  m.login, 
-  sd.domaine, 
-  sd.sub 
-;");
+        $db->query($query, $query_args);
+
         $r = array();
         while ($db->next_record()) {
             $r[$db->Record['sub_id']] = $db->Record;
