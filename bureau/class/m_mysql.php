@@ -288,7 +288,7 @@ class m_mysql {
         }
 
         //Grant the special user every rights.
-        if ($this->dbus->query("CREATE DATABASE ? ;", array($dbname)) {
+        if ($this->dbus->query("CREATE DATABASE ? ;", array($dbname))) {
             $err->log("mysql", "add_db_succes", $dbn);
             // Ok, database does not exist, quota is ok and dbname is compliant. Let's proceed
             $db->query("INSERT INTO db (uid,login,pass,db,bck_mode) VALUES (?, ?, ?, ? ,0)", array($cuid, $myadm, $password, $dbname));
@@ -437,7 +437,7 @@ class m_mysql {
 
         // Update all the "pass" fields for this user : 
         $db->query("UPDATE db SET pass= ? WHERE uid= ?;", array($password, $cuid));
-        $this->dbus->query("SET PASSWORD FOR ? = PASSWORD(?);", array( $login . "@" . $this->dbus->Client, $password));
+        $this->dbus->query("SET PASSWORD FOR " .$login . "@" . $this->dbus->Client . "  = PASSWORD(?);", array($password));
         return true;
     }
 
@@ -472,13 +472,14 @@ class m_mysql {
             $err->raise("mysql", _("The username can contain only letters and numbers."));
             return false;
         }
-        $db->query("select name from dbusers where name='" . $user . "' ;");
+        $db->query("select name from dbusers where name= ? ;", array($user));
 
         if (!$db->num_rows()) {
             $err->raise("mysql", _("Database user not found"));
             return false;
         }
 
+        // @TODO:EM: does this part have to be escaped?
         # Protect database name if not wildcard
         if ($base != '*') {
             $base = "`" . $base . "`";
@@ -555,6 +556,7 @@ class m_mysql {
      * @access private
      */
     function get_db_size($dbname) {
+        // @TODO:EM: does this part have to be escaped?
         $this->dbus->query("SHOW TABLE STATUS FROM `$dbname`;");
         $size = 0;
         while ($this->dbus->next_record()) {
@@ -576,9 +578,9 @@ class m_mysql {
         $err->log("mysql", "get_userslist");
         $c = array();
         if (!$all) {
-            $db->query("SELECT name FROM dbusers WHERE uid='$cuid' and enable not in ('ADMIN','HIDDEN') ORDER BY name;");
+            $db->query("SELECT name FROM dbusers WHERE uid= ? and enable not in ('ADMIN','HIDDEN') ORDER BY name;", array($cuid));
         } else {
-            $db->query("SELECT name FROM dbusers WHERE uid='$cuid' ORDER BY name;");
+            $db->query("SELECT name FROM dbusers WHERE uid= ? ORDER BY name;", array($cuid));
         }
         while ($db->next_record()) {
             $pos = strpos($db->f("name"), "_");
@@ -600,7 +602,7 @@ class m_mysql {
         $dbu = $dbn;
         $r = array();
         $dbn = str_replace('_', '\_', $dbn);
-        $this->dbus->query("Select * from mysql.db where Db='" . $dbn . "' and User!='" . $cuid . "_myadm';");
+        $this->dbus->query("Select * from mysql.db where Db= ? and User!= ? ;", array($dbn, $cuid."_myadm"));
 
         if (!$db->num_rows()) {
             return $r;
@@ -666,7 +668,7 @@ class m_mysql {
                 }
             }
         } //endwhile
-        if (!$db->query("SELECT name,password from dbusers where name='" . $dbu . "';")) {
+        if (!$db->query("SELECT name,password from dbusers where name= ? ;", array($dbu))) {
             return $r;
         }
 
@@ -699,7 +701,6 @@ class m_mysql {
         } else {
             $user = $usern;
         }
-        $pass = addslashes($password);
 
         if (!$usern) {
             $err->raise("mysql", _("The username is mandatory"));
@@ -720,7 +721,7 @@ class m_mysql {
             $err->raise("mysql", _("MySQL username cannot exceed %d characters"), $len);
             return false;
         }
-        $db->query("SELECT * FROM dbusers WHERE name='$user';");
+        $db->query("SELECT * FROM dbusers WHERE name= ? ;", array($user));
         if ($db->num_rows()) {
             $err->raise("mysql", _("The database user already exists"));
             return false;
@@ -738,7 +739,7 @@ class m_mysql {
         }
 
         // We add him to the user table 
-        $db->query("INSERT INTO dbusers (uid,name,password,enable) VALUES($cuid,'$user','$password','ACTIVATED');");
+        $db->query("INSERT INTO dbusers (uid,name,password,enable) VALUES( ?, ?, ?, 'ACTIVATED');", array($cuid, $user, $password));
         
         $this->grant("*", $user, "USAGE", $pass);
         return true;
@@ -752,14 +753,13 @@ class m_mysql {
      * @param $password The password for this username
      * @param $passconf The password confirmation
      * @return boolean if the password has been changed in MySQL or FALSE if an error occurred
+     * @TODO:EM: is this correctly escaped ?
      * */
     function change_user_password($usern, $password, $passconf) {
         global $db, $err, $cuid, $admin;
         $err->log("mysql", "change_user_pass", $usern);
 
         $usern = trim($usern);
-        $user = addslashes($usern);
-        $pass = addslashes($password);
         if ($password != $passconf || !$password) {
             $err->raise("mysql", _("The passwords do not match"));
             return false;
@@ -771,8 +771,8 @@ class m_mysql {
                 return false; // The error has been raised by checkPolicy()
             }
         }
-        $this->dbus->query("SET PASSWORD FOR '" . $user . "'@'" . $this->dbus->Client . "' = PASSWORD('" . $pass . "');");
-        $db->query("UPDATE dbusers set password='" . $pass . "' where name='" . $usern . "' and uid=$cuid ;");
+        $this->dbus->query("SET PASSWORD FOR '" . addslashes($usern) . "'@'" . $this->dbus->Client . "' = PASSWORD(?);", array($pass));
+        $db->query("UPDATE dbusers set password= ? where name= ? and uid= ? ;", array($pass, $usern, $cuid));
         return true;
     }
 
@@ -792,9 +792,9 @@ class m_mysql {
             return false;
         }
         if (!$all) {
-            $db->query("SELECT name FROM dbusers WHERE name='" . $user . "' and enable not in ('ADMIN','HIDDEN');");
+            $db->query("SELECT name FROM dbusers WHERE name= ? and enable not in ('ADMIN','HIDDEN');", array($user));
         } else {
-            $db->query("SELECT name FROM dbusers WHERE uid='" . $cuid . "' ;");
+            $db->query("SELECT name FROM dbusers WHERE uid= ? ;", array($cuid));
         }
 
         if (!$db->num_rows()) {
@@ -805,12 +805,13 @@ class m_mysql {
         $login = $db->f("name");
 
         // Ok, database exists and dbname is compliant. Let's proceed
+        // @TODO:EM: is this correctly escaped ?
         $this->dbus->query("REVOKE ALL PRIVILEGES ON *.* FROM '" . $user . "'@'" . $this->dbus->Client . "';");
-        $this->dbus->query("DELETE FROM mysql.db WHERE User='" . $user . "' AND Host='" . $this->dbus->Client . "';");
-        $this->dbus->query("DELETE FROM mysql.user WHERE User='" . $user . "' AND Host='" . $this->dbus->Client . "';");
+        $this->dbus->query("DELETE FROM mysql.db WHERE User= ? AND Host= ? ;", array($user, $this->dbus->Client));
+        $this->dbus->query("DELETE FROM mysql.user WHERE User= ? AND Host= ? ;", array($user, $this->dbus->Client));
         $this->dbus->query("FLUSH PRIVILEGES");
 
-        $db->query("DELETE FROM dbusers WHERE uid='$cuid' AND name='" . $user . "';");
+        $db->query("DELETE FROM dbusers WHERE uid= ? AND name= ? ;", array($cuid, $user));
         return true;
     }
 
@@ -824,7 +825,7 @@ class m_mysql {
     function get_user_dblist($user) {
         global $db, $err;
 
-        $this->dbus->query("SELECT * FROM mysql.user WHERE User='" . $user . "' AND Host='" . $this->dbus->Client . "';");
+        $this->dbus->query("SELECT * FROM mysql.user WHERE User= ? AND Host= ? ;", array($user, $this->dbus->Client));
         if (!$this->dbus->next_record()) {
             $err->raise('mysql', _("This user does not exist in the MySQL/User database"));
             return false;
@@ -836,10 +837,10 @@ class m_mysql {
         foreach ($dblist as $tab) {
             $pos = strpos($tab['db'], "_");
             if ($pos === false) {
-                $this->dbus->query("SELECT * FROM mysql.db WHERE User='" . $user . "' AND Host='" . $this->dbus->Client . "' AND Db='" . $tab["db"] . "';");
+                $this->dbus->query("SELECT * FROM mysql.db WHERE User= ? AND Host= ? AND Db= ? ;", array($user, $this->dbus->Client, $tab["db"]));
             } else {
                 $dbname = str_replace('_', '\_', $tab['db']);
-                $this->dbus->query("SELECT * FROM mysql.db WHERE User='" . $user . "' AND Host='" . $this->dbus->Client . "' AND Db='" . $dbname . "';");
+                $this->dbus->query("SELECT * FROM mysql.db WHERE User= ? AND Host= ? AND Db= ? ;", array($user, $this->dbus->Client, $dbname) );
             }
             if ($this->dbus->next_record()) {
                 $r[] = array("db" => $tab["db"], "select" => $this->dbus->f("Select_priv"), "insert" => $this->dbus->f("Insert_priv"), "update" => $this->dbus->f("Update_priv"), "delete" => $this->dbus->f("Delete_priv"), "create" => $this->dbus->f("Create_priv"), "drop" => $this->dbus->f("Drop_priv"), "references" => $this->dbus->f("References_priv"), "index" => $this->dbus->f("Index_priv"), "alter" => $this->dbus->f("Alter_priv"), "create_tmp" => $this->dbus->f("Create_tmp_table_priv"), "lock" => $this->dbus->f("Lock_tables_priv"),
@@ -872,9 +873,7 @@ class m_mysql {
         global $err;
         $err->log("mysql", "set_user_rights");
 
-        $usern = addslashes($user);
-        $dbname = addslashes($dbn);
-        $dbname = str_replace('_', '\_', $dbname);
+                $dbname = str_replace('_', '\_', $dbname);
         // On genere les droits en fonction du tableau de droits
         $strrights = "";
         for ($i = 0; $i < count($rights); $i++) {
@@ -937,7 +936,12 @@ class m_mysql {
         }
 
         // We reset all user rights on this DB : 
-        $this->dbus->query("SELECT * FROM mysql.db WHERE User = '$usern' AND Db = '$dbname';");
+        $this->dbus->query("SELECT * FROM mysql.db WHERE User = ? AND Db = ?;", array($usern, $dbname));
+
+        // @TODO:EM: This has to be verified, and maybe we should use another way to escape those requests
+        $usern = addslashes($user);
+        $dbname = addslashes($dbn);
+
         if ($this->dbus->num_rows()) {
             $this->dbus->query("REVOKE ALL PRIVILEGES ON `$dbname`.* FROM '$usern'@'" . $this->dbus->Client . "';");
         }
@@ -999,7 +1003,7 @@ class m_mysql {
         global $db, $err, $cuid, $mem;
         $err->log("mysql", "alternc_add_member");
         //checking for the phpmyadmin user
-        $db->query("SELECT name,password FROM dbusers WHERE uid=$cuid AND Type='ADMIN';");
+        $db->query("SELECT name,password FROM dbusers WHERE uid= ? AND Type='ADMIN';", array($cuid));
         if ($db->num_rows()) {
             $myadm = $db->f("name");
             $password = $db->f("password");
@@ -1009,7 +1013,7 @@ class m_mysql {
         }
 
 
-        $db->query("INSERT INTO dbusers (uid,name,password,enable) VALUES ('$cuid','$myadm','$password','ADMIN');");
+        $db->query("INSERT INTO dbusers (uid,name,password,enable) VALUES (?, ?, ?, 'ADMIN');", array($cuid, $myadm, $password));
 
         return true;
     }
@@ -1061,7 +1065,7 @@ class m_mysql {
         //TODO don't work with separated sql server for dbusers
         global $db, $err, $cuid;
         $err->log("mysql", "export");
-        $db->query("SELECT login, pass, db, bck_mode, bck_dir, bck_history, bck_gzip FROM db WHERE uid='$cuid';");
+        $db->query("SELECT login, pass, db, bck_mode, bck_dir, bck_history, bck_gzip FROM db WHERE uid= ? ;", array($cuid));
         $str = "";
         if ($db->next_record()) {
             $str.=" <sql>\n";
@@ -1093,7 +1097,7 @@ class m_mysql {
     function alternc_export_data($dir) {
         global $db, $err, $cuid;
         $err->log("mysql", "export_data");
-        $db->query("SELECT db.login, db.pass, db.db, dbusers.name FROM db,dbusers WHERE db.uid='$cuid' AND dbusers.uid=db.uid;");
+        $db->query("SELECT db.login, db.pass, db.db, dbusers.name FROM db,dbusers WHERE db.uid= ?  AND dbusers.uid=db.uid;", array($cuid));
         $dir.="sql/";
         if (!is_dir($dir)) {
             if (!mkdir($dir)) {
@@ -1133,6 +1137,7 @@ class m_mysql {
 
         $this->dbus->query("show databases;");
         $res = array();
+        //@TODO: this has to be done in another way
         while ($this->dbus->next_record()) {
             $dbname = $this->dbus->f("Database");
             $c = mysql_query("SHOW TABLE STATUS FROM $dbname;");

@@ -157,7 +157,7 @@ class m_quota {
         $type = $quota->listtype();
         foreach ($type as $t) {
             foreach ($qt as $q => $vv) {
-                $db->query("INSERT IGNORE defquotas (value,quota,type) VALUES (0,'$q','$t');");
+                $db->query("INSERT IGNORE defquotas (value,quota,type) VALUES (0, ?, ?);", array($q, $t));
             }
         }
         return true;
@@ -212,7 +212,7 @@ class m_quota {
             }
 
             // Get the allowed quota from database.
-            $db->query("select name, total from quotas where uid='$cuid';");
+            $db->query("select name, total from quotas where uid= ? ;", array($cuid));
             while ($db->next_record()) {
                 $this->quotas[$db->f('name')]['t'] = $db->f('total');
             }
@@ -255,11 +255,11 @@ class m_quota {
             }
         }
         // We check that this ressource exists for this client :
-        $db->query("SELECT * FROM quotas WHERE uid='$cuid' AND name='$ressource'");
+        $db->query("SELECT * FROM quotas WHERE uid= ? AND name= ? ", array($cuid, $ressource));
         if ($db->num_rows()) {
-            $db->query("UPDATE quotas SET total='$size' WHERE uid='$cuid' AND name='$ressource';");
+            $db->query("UPDATE quotas SET total= e WHERE uid= ? AND name= ?;", array($size, $cuid, $ressource));
         } else {
-            $db->query("INSERT INTO quotas (uid,name,total) VALUES ('$cuid','$ressource','$size');");
+            $db->query("INSERT INTO quotas (uid,name,total) VALUES (?, ?, ?);", array($cuid, $ressource, $size));
         }
         return true;
     }
@@ -272,7 +272,7 @@ class m_quota {
     function delquotas() {
         global $db, $err, $cuid;
         $err->log("quota", "delquota");
-        $db->query("DELETE FROM quotas WHERE uid='$cuid';");
+        $db->query("DELETE FROM quotas WHERE uid= ?;", array($cuid));
         return true;
     }
 
@@ -309,7 +309,7 @@ class m_quota {
         foreach ($newq as $type => $quotas) {
             foreach ($quotas as $qname => $value) {
                 if (array_key_exists($qname, $qlist)) {
-                    if (!$db->query("REPLACE INTO defquotas (value,quota,type) VALUES ($value,'$qname','$type');")) {
+                    if (!$db->query("REPLACE INTO defquotas (value,quota,type) VALUES ( ?, ?, ?); ", array($value, $qname, $type))) {
                         return false;
                     }
                 }
@@ -336,7 +336,7 @@ class m_quota {
             return false;
         }
         while (list($key, $val) = each($qlist)) {
-            if (!$db->query("INSERT IGNORE INTO defquotas (quota,type) VALUES('$key', '$type');") || $db->affected_rows() == 0) {
+            if (!$db->query("INSERT IGNORE INTO defquotas (quota,type) VALUES(?, ?);", array($key, $type)) || $db->affected_rows() == 0) {
                 return false;
             }
         }
@@ -367,8 +367,8 @@ class m_quota {
     function deltype($type) {
         global $db;
 
-        if ($db->query("UPDATE membres SET type='default' WHERE type='$type'") &&
-                $db->query("DELETE FROM defquotas WHERE type='$type'")) {
+        if ($db->query("UPDATE membres SET type='default' WHERE type= ? ;", array($type)) &&
+                $db->query("DELETE FROM defquotas WHERE type= ?;", array($type))) {
             return true;
         } else {
             return false;
@@ -390,12 +390,12 @@ class m_quota {
         if (!$db->next_record()) {
             $this->addtype('default');
         }
-        $db->query("SELECT type FROM membres WHERE uid='$cuid'");
+        $db->query("SELECT type FROM membres WHERE uid= ?;", array($cuid));
         $db->next_record();
         $t = $db->f("type");
 
         foreach ($ql as $res => $val) {
-            $db->query("SELECT value FROM defquotas WHERE quota='$res' AND type='$t'");
+            $db->query("SELECT value FROM defquotas WHERE quota= ? AND type= ? ;", array($res, $t));
             $q = $db->next_record() ? $db->f("value") : 0;
             $this->setquota($res, $q);
         }

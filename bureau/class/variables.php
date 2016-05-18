@@ -128,11 +128,14 @@ function variable_set($name, $value, $comment = null) {
     if (!array_key_exists($name, $conf) || $value != $conf[$name]) {
         $conf[$name] = $value;
         if (empty($comment)) {
-            $query = "INSERT INTO variable (name, value) values ('" . $name . "', '" . addslashes($value2) . "') on duplicate key update name='" . $name . "', value='" . addslashes($value2) . "';";
+            $query = "INSERT INTO variable (name, value) values ( ?, ?) on duplicate key update name=  ?, value= ? ;"; 
+            $query_args = array($name, $value2, $name, $value2);
+
         } else {
-            $query = "INSERT INTO variable (name, value, comment) values ('" . $name . "', '" . addslashes($value2) . "', '$comment') on duplicate key update name='" . $name . "', value='" . addslashes($value2) . "', comment='" . addslashes($comment) . "';";
+            $query = "INSERT INTO variable (name, value, comment) values ( ?, ?, ?) on duplicate key update name=  ?, value= ?, comment= ? ;"; 
+            $query_args = array($name, $value2, $comment, $name, $value2, $comment);
         }
-        $db->query($query);
+        $db->query($query, $query_args);
         $hooks->invoke("hook_variable_set", array("name" => $name, "old" => $previous, "new" => $value));
     }
 }
@@ -145,7 +148,7 @@ function variable_set($name, $value, $comment = null) {
  */
 function variable_del($name) {
     global $conf, $db;
-    $db->query("DELETE FROM `variable` WHERE name = '" . $name . "'");
+    $db->query("DELETE FROM `variable` WHERE name = ?;", array($name));
     unset($conf[$name]);
 }
 

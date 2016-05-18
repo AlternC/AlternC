@@ -77,7 +77,7 @@ class m_piwik {
    */
   function hook_quota_get() {
     global $db, $cuid;
-    $db->query("SELECT COUNT(id) AS nb FROM piwik_users WHERE uid='$cuid'");
+    $db->query("SELECT COUNT(id) AS nb FROM piwik_users WHERE uid= ? ;", array($cuid));
     $q=Array("name"=>"piwik", "description"=>_("Statistics through Piwik accounts"), "used"=>0);
     if ($db->next_record()) {
       $q['used']=$db->f('nb');
@@ -110,7 +110,7 @@ class m_piwik {
 	  if ($api_data->result === 'success') {
 	    $user = $this->get_user($user_login);
 	    $user_creation_date = $user->date_registered;
-	    return $db->query("INSERT INTO piwik_users (uid, login, created_date) VALUES ('$cuid', '$user_login', '$user_creation_date')");
+	    return $db->query("INSERT INTO piwik_users (uid, login, created_date) VALUES ( ?, ?, ?,);", array($cuid, $user_login, $user_creation_date));
 	  }
 	} else { // api_data = false -> error is already filled
 	  return FALSE;
@@ -169,7 +169,7 @@ class m_piwik {
 	global $db, $cuid;
 
 	static $alternc_users = array();
-	$db->query("SELECT login FROM piwik_users WHERE uid='$cuid'");
+	$db->query("SELECT login FROM piwik_users WHERE uid= ?;", array($cuid));
 	while ($db->next_record())
 		array_push($alternc_users, $db->f('login'));
 	
@@ -180,13 +180,13 @@ class m_piwik {
   function user_delete($piwik_user_login) {
     global $db, $cuid, $err;
     
-    $db->query("SELECT created_date, COUNT(id) AS cnt FROM piwik_users WHERE uid='$cuid' AND login='$piwik_user_login'");
+    $db->query("SELECT created_date, COUNT(id) AS cnt FROM piwik_users WHERE uid= ? AND login= ? ", array($cuid, $piwik_user_login));
     $db->next_record();
 
     if ($db->f('cnt') == 1) {
 	$api_data = $this->call_privileged_page('API', 'UsersManager.deleteUser', array('userLogin' => $piwik_user_login));
 	if ($api_data->result == 'success') {
-		return $db->query("DELETE FROM piwik_users WHERE uid='$cuid' AND login='$piwik_user_login'");
+		return $db->query("DELETE FROM piwik_users WHERE uid= ? AND login= ? ;", array($cuid, $piwik_user_login));
 	}
 	else {
 		return FALSE;
@@ -200,7 +200,7 @@ class m_piwik {
 
   function users_list() { 
     global $db, $cuid;
-    $db->query("SELECT login FROM piwik_users WHERE uid = '$cuid'");
+    $db->query("SELECT login FROM piwik_users WHERE uid = ?;", array($cuid));
     if ($db->num_rows() == 0)
       return array();
     $users = '';
@@ -277,7 +277,7 @@ class m_piwik {
         global $db, $cuid;
 
         static $alternc_sites = array();
-        $db->query("SELECT piwik_id AS site_id FROM piwik_sites WHERE uid='$cuid'");
+        $db->query("SELECT piwik_id AS site_id FROM piwik_sites WHERE uid= ? ;", array($cuid));
         while ($db->next_record())
                 array_push($alternc_sites, $db->f('site_id'));
 
@@ -294,7 +294,7 @@ class m_piwik {
     global $db, $cuid;
     $urls = is_array($urls) ? implode(',', $urls) : $urls;
     $api_data = $this->call_privileged_page('API', 'SitesManager.addSite', array('siteName' => $siteName, 'urls' => $urls));
-    $db->query("INSERT INTO piwik_sites set uid='$cuid', piwik_id='{$api_data->value}'");
+    $db->query("INSERT INTO piwik_sites set uid= ? , piwik_id= ? ", array($cuid, $api_data->value));
     return TRUE;
   }
 
@@ -304,13 +304,13 @@ class m_piwik {
   function site_delete($site_id) {
     global $db, $cuid, $err;
     
-    $db->query("SELECT COUNT(id) AS cnt FROM piwik_sites WHERE uid='$cuid' AND piwik_id='$site_id'");
+    $db->query("SELECT COUNT(id) AS cnt FROM piwik_sites WHERE uid= ? AND piwik_id= ? ;", array($cuid, $site_id));
     $db->next_record();
 
     if ($db->f('cnt') == 1) {
 	$api_data = $this->call_privileged_page('API', 'SitesManager.deleteSite', array('idSite' => $site_id));
 	if ($api_data->result == 'success') {
-		return $db->query("DELETE FROM piwik_sites where uid='$cuid' AND piwik_id='$site_id' LIMIT 1");
+		return $db->query("DELETE FROM piwik_sites where uid= ? AND piwik_id= ? LIMIT 1", array($cuid, $site_id));
 	} else {
 		return FALSE;
 	}
