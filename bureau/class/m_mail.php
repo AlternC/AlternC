@@ -311,8 +311,9 @@ ORDER BY
         $db->next_record();
         $this->total = $db->f("total");
         if ($count != -1) {
-            $limit = " LIMIT ?, ? "; 
-            array_push($query_args, $offset, $count);
+	  $offset = intval($offset);
+	  $count = intval($count);
+            $limit = " LIMIT $offset, $count "; 
         } else {
             $limit = "";
         }
