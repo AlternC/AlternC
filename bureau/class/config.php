@@ -133,16 +133,6 @@ class DB_system extends DB_Sql {
 $db = new DB_system();
 // $db = new Sql($L_MYSQL_DATABASE, $L_MYSQL_HOST, $L_MYSQL_LOGIN, $L_MYSQL_PWD);
 
-// https: Redirection if not calling https://!fqdn or if https is forced
-if ((variable_get('force_https', '0', "This variable is set to 0 (default) if users can access the management desktop through HTTP, otherwise we force HTTPS")&&(!isset($_SERVER["HTTPS"])|| ($_SERVER["HTTPS"] != "on")))
-    ||(isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on" && $host != $L_FQDN)) {
-    // do not redirect if access is not by HTTP(s)
-    if (isset($_SERVER['REQUEST_URI'])) {
-      header("Location: https://$L_FQDN".$_SERVER['REQUEST_URI']);
-      exit;
-    }
-}
-
 // Current User ID = the user whose commands are made on behalf of.
 $cuid = 0;
 
@@ -176,6 +166,17 @@ $mem = new m_mem();
 $err = new m_err();
 $authip = new m_authip();
 $hooks = new m_hooks();
+
+
+// https: Redirection if not calling https://!fqdn or if https is forced
+if ((variable_get('force_https', '0', "This variable is set to 0 (default) if users can access the management desktop through HTTP, otherwise we force HTTPS")&&(!isset($_SERVER["HTTPS"])|| ($_SERVER["HTTPS"] != "on")))
+    ||(isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on" && $host != $L_FQDN)) {
+    // do not redirect if access is not by HTTP(s)
+    if (isset($_SERVER['REQUEST_URI'])) {
+      header("Location: https://$L_FQDN".$_SERVER['REQUEST_URI']);
+      exit;
+    }
+}
 
 /* Check the User identity (if required) */
 if (!defined('NOCHECK')) {
