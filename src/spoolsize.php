@@ -26,17 +26,22 @@ if ($db->query("SELECT uid,login FROM membres;")) {
 
 echo "\n---------------------------\n Generating size-cache for MySQL databases\n\n";
   // We get all hosts on which sql users' DB are
-  $r=mysql_query("select * from db_servers;");
-  $tab=array();
-  while ($c=mysql_fetch_array($r)) {
-    $tab=$mysql->get_dbus_size($c["name"],$c["host"],$c["login"],$c["password"],$c["client"]);
-    echo "++ Processing ".$c["name"]." ++\n";
-    foreach ($tab as $dbname=>$size) {
-        $db->query("REPLACE INTO size_db SET db=?,size=?;",array($dbname,$size)); 
-      echo "   $dbname done ($size B) \n"; flush();
-    }
-    echo "\n";
+$r=$db->query("select * from db_servers;");
+$allsrv=array();
+while ($db->next_record()) {
+  $allsrv[] = $db->Record;
+}
+
+$tab=array();
+foreach($allsrv as $c) {
+  $tab=$mysql->get_dbus_size($c["name"],$c["host"],$c["login"],$c["password"],$c["client"]);
+  echo "++ Processing ".$c["name"]." ++\n";
+  foreach ($tab as $dbname=>$size) {
+    $db->query("REPLACE INTO size_db SET db=?,size=?;",array($dbname,$size)); 
+    echo "   $dbname done ($size B) \n"; flush();
   }
+  echo "\n";
+}
 
 echo "---------------------------\n Generating size-cache for mailman\n\n";
 if ($db->query("SELECT uid, name FROM mailman;")) {

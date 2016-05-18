@@ -42,34 +42,25 @@ class DB_users extends DB_Sql {
     /**
      * Creator
      */
-    function DB_users($empty = false) { // Sometimes we need to create this object with empty parameters, but by default we fill them with those of the current user's DB
-        global $cuid, $db, $err;
+    function __construct() { // Sometimes we need to create this object with empty parameters, but by default we fill them with those of the current user's DB
+      global $cuid, $db, $err;
+      
+      $db->query("select db_servers.* from db_servers, membres where membres.uid= ? and membres.db_server_id=db_servers.id;", array($cuid));
+      if (!$db->next_record()) {
+	$err->raise('db_user', _("There are no databases in db_servers for this user. Please contact your administrator."));
+	die();
+      }
 
-        if (!$empty) {
-            $db->query("select db_servers.* from db_servers, membres where membres.uid= ? and membres.db_server_id=db_servers.id;", array($cuid));
-            if (!$db->next_record()) {
-                $err->raise('db_user', _("There are no databases in db_servers for this user. Please contact your administrator."));
-                die();
-            }
-
-            # Create the object
-            $this->HumanHostname = $db->f('name');
-            $this->Host = $db->f('host');
-            $this->User = $db->f('login');
-            $this->Password = $db->f('password');
-            $this->Client = $db->f('client');
-
-            $this->Database = "mysql"; # We have to define a dabatase when we connect, and the database must exist.
-        } else {
-            # Create the object without any parameter
-            $this->HumanHostname = "";
-            $this->Host = "";
-            $this->User = "";
-            $this->Password = "";
-            $this->Client = "";
-
-            $this->Database = "mysql"; # We have to define a dabatase when we connect, and the database must exist.
-        }
+      # Create the object
+      $this->HumanHostname = $db->f('name');
+      $this->Host = $db->f('host');
+      $this->User = $db->f('login');
+      $this->Password = $db->f('password');
+      $this->Client = $db->f('client');
+      $this->Database = "mysql"; 
+      
+      parent::__construct("mysql", $db->f('host'), $db->f('login'), $db->f('password') );
+      
     }
 
 }
@@ -288,7 +279,7 @@ class m_mysql {
         }
 
         //Grant the special user every rights.
-        if ($this->dbus->query("CREATE DATABASE ? ;", array($dbname))) {
+        if ($this->dbus->exec("CREATE DATABASE $dbname;")) { // secured: dbname is checked against ^[0-9a-z]*$
             $err->log("mysql", "add_db_succes", $dbn);
             // Ok, database does not exist, quota is ok and dbname is compliant. Let's proceed
             $db->query("INSERT INTO db (uid,login,pass,db,bck_mode) VALUES (?, ?, ?, ? ,0)", array($cuid, $myadm, $password, $dbname));
@@ -310,30 +301,29 @@ class m_mysql {
     /* --------------------------------------------------------------------------- */
 
     /** Delete a database for the current user.
-     * @param $dbn string Name of the database to delete. The db name is $user_$dbn
+     * @param $dbname string Name of the database to delete. The db name is $user_$dbn
      * @return boolean if the database $user_$db has been successfully deleted, or FALSE if 
      *  an error occured, such as db does not exist.
      */
-    function del_db($dbn) {
+    function del_db($dbname) {
         global $db, $err, $cuid;
-        $err->log("mysql", "del_db", $dbn);
+        $err->log("mysql", "del_db", $dbname);
         $db->query("SELECT uid FROM db WHERE db= ?;", array($dbname));
-        if (!$db->num_rows()) {
+        if (!$db->next_record()) {
             $err->raise("mysql", _("The database was not found. I can't delete it"));
             return false;
         }
-        $db->next_record();
 
         // Ok, database exists and dbname is compliant. Let's proceed
         $db->query("DELETE FROM size_db WHERE db ?;", array($dbname));
         $db->query("DELETE FROM db WHERE uid= ? AND db= ? ;", array($cuid, $dbname));
-        $this->dbus->query("DROP DATABASE ? ;", array($dbname));
+        $this->dbus->query("DROP DATABASE $dbname;");
 
         $db_esc = str_replace('_', '\_', $dbname);
         $this->dbus->query("DELETE FROM mysql.db WHERE Db= ? ;",    array($db_esc));
 
         #We test if the user created with the database is associated with more than 1 database.
-        $this->dbus->query("select User from mysql.db where User= ? and (Select_priv='Y' or Insert_priv='Y' or Update_priv='Y' or Delete_priv='Y' or Create_priv='Y' or Drop_priv='Y' or References_priv='Y' or Index_priv='Y' or Alter_priv='Y' or Create_tmp_table_priv='Y' or Lock_tables_priv='Y');", array($dbname));
+        $this->dbus->query("select User from mysql.db where User= ? ;", array($dbname));
         if (($this->dbus->num_rows()) == 0) {
             #If not we can delete it.
             $this->del_user($dbname);
@@ -479,11 +469,7 @@ class m_mysql {
             return false;
         }
 
-        # Protect database name if not wildcard
-        if ($base != '*') {
-            $base = $db->quote($base);
-        }
-        $grant = "grant " . $db->quote($rights) . " on " . $base . "." . $db->quote($table) . " to " . $db->quote($user) . "@" . $db->quote($this->dbus->Client);
+        $grant = "grant " . $rights . " on " . $base . "." . $table . " to " . $db->quote($user) . "@" . $db->quote($this->dbus->Client);
 
         if ($pass) {
             $grant .= " identified by " . $db->quote($pass) . ";";
@@ -555,7 +541,7 @@ class m_mysql {
      * @access private
      */
     function get_db_size($dbname) {
-        $this->dbus->query("SHOW TABLE STATUS FROM ". $db->quote($dbname) .";");
+        $this->dbus->query("SHOW TABLE STATUS FROM $dbname;");
         $size = 0;
         while ($this->dbus->next_record()) {
             $size += $this->dbus->f('Data_length') + $this->dbus->f('Index_length');
@@ -695,7 +681,7 @@ class m_mysql {
         $usern = trim($usern);
         $login = $mem->user["login"];
         if ($login != $usern) {
-            $user = addslashes($login . "_" . $usern);
+            $user = $login . "_" . $usern;
         } else {
             $user = $usern;
         }
@@ -704,7 +690,7 @@ class m_mysql {
             $err->raise("mysql", _("The username is mandatory"));
             return false;
         }
-        if (!$pass) {
+        if (!$password) {
             $err->raise("mysql", _("The password is mandatory"));
             return false;
         }
@@ -714,7 +700,7 @@ class m_mysql {
         }
 
         // We check the length of the COMPLETE username, not only the part after _
-	$len=variable_get("sql_max_username_length", 16);
+        $len=variable_get("sql_max_username_length", 16);
         if (strlen($user) > $len) {
             $err->raise("mysql", _("MySQL username cannot exceed %d characters"), $len);
             return false;
@@ -781,7 +767,7 @@ class m_mysql {
      * @param integer $all
      * @return boolean if the user has been deleted in MySQL or FALSE if an error occurred
      * */
-    function del_user($user, $all = null) {
+    function del_user($user, $all = false) {
         global $db, $err, $cuid;
         $err->log("mysql", "del_user", $user);
         if (!preg_match("#^[0-9a-z]#", $user)) {
@@ -933,10 +919,8 @@ class m_mysql {
         // We reset all user rights on this DB : 
         $this->dbus->query("SELECT * FROM mysql.db WHERE User = ? AND Db = ?;", array($user, $dbn));
 
-        // @TODO:EM: This has to be verified, and maybe we should use another way to escape those requests
-
         if ($this->dbus->num_rows()) {
-            $this->dbus->query("REVOKE ALL PRIVILEGES ON ".$db->quote($dbn).".* FROM ".$db->quote($user)."@" . $db->quote($this->dbus->Client) . ";");
+            $this->dbus->query("REVOKE ALL PRIVILEGES ON ".$dbn.".* FROM ".$db->quote($user)."@" . $db->quote($this->dbus->Client) . ";");
         }
         if ($strrights) {
             $strrights = substr($strrights, 0, strlen($strrights) - 1);
@@ -1004,7 +988,6 @@ class m_mysql {
             $myadm = $cuid . "_myadm";
             $password = create_pass(8);
         }
-
 
         $db->query("INSERT INTO dbusers (uid,name,password,enable) VALUES (?, ?, ?, 'ADMIN');", array($cuid, $myadm, $password));
 
@@ -1119,24 +1102,20 @@ class m_mysql {
         global $err;
         $err->log("mysql", "get_dbus_size", $db_host);
 
-        # We create the object with empty parameters
-        $this->dbus = new DB_users(true);
-        # Modify the object with right parameters
-        $this->dbus->HumanHostname = $db_name;
-        $this->dbus->Host = $db_host;
-        $this->dbus->User = $db_login;
-        $this->dbus->Password = $db_password;
-        $this->dbus->Client = $db_client;
+	$this->dbus = new DB_Sql("mysql",$db_host,$db_login,$db_password);
 
-        $this->dbus->query("show databases;");
-        $res = array();
-        //@TODO: this has to be done in another way
+        $this->dbus->query("SHOW DATABASES;");
+	$alldb=array();
         while ($this->dbus->next_record()) {
-            $dbname = $this->dbus->f("Database");
-            $c = mysql_query("SHOW TABLE STATUS FROM $dbname;");
+            $alldb[] = $this->dbus->f("Database");
+	}
+
+        $res = array();
+	foreach($alldb as $dbname) {
+            $c = $this->dbus->query("SHOW TABLE STATUS FROM $dbname;");
             $size = 0;
-            while ($d = mysql_fetch_array($c)) {
-                $size+=$d["Data_length"] + $d["Index_length"];
+            while ($this->dbus->next_record()) {
+	      $size+=$this->dbus->f("Data_length") + $this->dbus->f("Index_length");
             }
             $res["$dbname"] = "$size";
         }

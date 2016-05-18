@@ -119,7 +119,7 @@ class DB_Sql {
    * @param arguments is an optionnal array for future use with PDO parametrized requests
    * @return the $Query_ID class variable (null if fails)
    */
-  function query($Query_String, $arguments = False) {
+  function query($Query_String, $arguments = false) {
      global $debug_alternc;
 
      if (empty($Query_String) || !$this->is_connected())
@@ -131,16 +131,29 @@ class DB_Sql {
 
      $debug_chrono_start = microtime(true);
 
-     $this->pdo_query = $this->pdo_instance->prepare($this->Query_String);
-     $exec_state = ($arguments) ? $this->pdo_query->execute($arguments) 
-                                : $this->pdo_query->execute();
+     if ($arguments===false) {
+       $this->pdo_query = $this->pdo_instance->query($Query_String);
+       $exec_state = is_object($this->pdo_query);
+
+     } else {
+       
+       $this->pdo_query = $this->pdo_instance->prepare($this->Query_String);
+       $exec_state = ($arguments) ? $this->pdo_query->execute($arguments) 
+	 : $this->pdo_query->execute(); 
+       // WARNING: this ternary is when we pass array() as $arguments
+     }
 
      $debug_chrono_start = (microtime(true) - $debug_chrono_start)*1000;
      $this->Row = 0;
 
      if ($exec_state == FALSE) {
+       if (is_object($this->pdo_query)) {
         $this->Errno = $this->pdo_query->errorCode();
         $this->Error = $this->pdo_query->errorInfo();
+       } else {
+        $this->Errno = $this->pdo_instance->errorCode();
+        $this->Error = $this->pdo_instance->errorInfo();
+       }
 
         if( defined("THROW_EXCEPTIONS") && THROW_EXCEPTIONS ){
            throw new \Exception("Mysql query failed : $this->Error");
@@ -279,6 +292,17 @@ class DB_Sql {
   function quote($string) {
     return $this->pdo_instance->quote($string);
   }
+
+
+    /**
+     *  Execute a direct query, not getting any result back
+     *  @param  query  string query to execute
+     *  @return integer the number of affected rows
+     */
+  function exec($query) {
+    return $this->pdo_instance->exec($query);
+  }
+
 
   /* public: sequence numbers */
   function nextid($seq_name) {
