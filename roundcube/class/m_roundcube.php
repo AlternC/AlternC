@@ -45,7 +45,7 @@ class m_roundcube {
 	if (count($expl)>=2) {
 	  list($host,$dompart)=$expl;
 	  // We search for a 'squirrelmail' subdomain in that domain
-	  $db->query("SELECT * FROM sub_domaines s WHERE s.domaine='".addslashes($dompart)."' AND s.type='roundcube';");
+	  $db->query("SELECT * FROM sub_domaines s WHERE s.domaine=? AND s.type='roundcube';",array($dompart));
 	  if ($db->next_record()) {
 	    $domain=$db->Record;
 	    return "http://".$domain["sub"].(($domain["sub"])?".":"").$domain["domaine"];
@@ -97,17 +97,17 @@ class m_roundcube {
         break;
     }
 
-    $req = $dbh->query("SELECT user_id FROM users WHERE username = '$fullmail'");
+    $req = $dbh->query("SELECT user_id FROM users WHERE username = ?;",array($fullmail));
 
     foreach ( $req->fetchAll() as $t ) {
       if (empty($t['user_id'])) continue ;
       $rcuser_id=$t['user_id'];
 
-      $dbh->query("DELETE from contactgroupmembers where contactgroup_id in (select contactgroup_id from contactgroups where user_id = $rcuser_id) ; ");
-      $dbh->query("DELETE from contactgroups where user_id = $rcuser_id ; ");
-      $dbh->query("DELETE from contacts where user_id = $rcuser_id ; ");
-      $dbh->query("DELETE from identities where user_id = $rcuser_id ; ");
-      $dbh->query("DELETE from users where user_id = $rcuser_id ; ");
+      $dbh->query("DELETE from contactgroupmembers where contactgroup_id in (select contactgroup_id from contactgroups where user_id = ?) ; ",array($rcuser_id));
+      $dbh->query("DELETE from contactgroups where user_id = ? ; ",array($rcuser_id));
+      $dbh->query("DELETE from contacts where user_id = ? ; ",array($rcuser_id));
+      $dbh->query("DELETE from identities where user_id = ? ; ",array($rcuser_id));
+      $dbh->query("DELETE from users where user_id = ? ; ",array($rcuser_id));
     } //foreach
 
   }

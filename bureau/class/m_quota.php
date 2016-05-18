@@ -257,7 +257,7 @@ class m_quota {
         // We check that this ressource exists for this client :
         $db->query("SELECT * FROM quotas WHERE uid= ? AND name= ? ", array($cuid, $ressource));
         if ($db->num_rows()) {
-            $db->query("UPDATE quotas SET total= e WHERE uid= ? AND name= ?;", array($size, $cuid, $ressource));
+            $db->query("UPDATE quotas SET total= ? WHERE uid= ? AND name= ?;", array($size, $cuid, $ressource));
         } else {
             $db->query("INSERT INTO quotas (uid,name,total) VALUES (?, ?, ?);", array($cuid, $ressource, $size));
         }

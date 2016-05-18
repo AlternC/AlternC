@@ -78,9 +78,9 @@ for($i=0;$i<count($c);$i++) {
 				    <td><?php if ($c[$i]["noerase"]) {
 			echo "<img src=\"icon/encrypted.png\" width=\"16\" height=\"16\" alt=\""._("Locked Domain")."\" />";
 				    } ?></td>
-<td><div class="ina"><a href="adm_domlock.php?domain=<?php echo urlencode($c[$i][domaine]); ?>"><?php
+<td><div class="ina"><a href="adm_domlock.php?domain=<?php echo urlencode($c[$i]["domaine"]); ?>"><?php
    if ($c[$i]["noerase"]) __("Unlock"); else __("Lock");  ?></a></div></td>
-<td><a href="http://<?php echo $c[$i][domaine]; ?>" target="_blank"><?php echo $c[$i]["domaine"]; ?></a></td>
+<td><a href="http://<?php echo $c[$i]["domaine"]; ?>" target="_blank"><?php echo $c[$i]["domaine"]; ?></a></td>
 <td><?php echo $c[$i]["login"]; ?></td>
 <td>
 <?php		  if($admin->checkcreator($c[$i]['uid'])) {

@@ -45,7 +45,7 @@ class m_squirrelmail {
 	if (count($expl)>=2) {
 	  list($host,$dompart)=$expl;
 	  // We search for a 'squirrelmail' subdomain in that domain
-	  $db->query("SELECT * FROM sub_domaines s WHERE s.domaine='".addslashes($dompart)."' AND s.type='squirrelmail';");
+	  $db->query("SELECT * FROM sub_domaines s WHERE s.domaine= ? AND s.type='squirrelmail';",array($dompart));
 	  if ($db->next_record()) {
 	    $domain=$db->Record;
 	    return "http://".$domain["sub"].(($domain["sub"])?".":"").$domain["domaine"];
