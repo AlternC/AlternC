@@ -750,12 +750,12 @@ class m_mysql {
 
         // Check this password against the password policy using common API : 
         if (is_callable(array($admin, "checkPolicy"))) {
-            if (!$admin->checkPolicy("mysql", $user, $password)) {
+            if (!$admin->checkPolicy("mysql", $usern, $password)) {
                 return false; // The error has been raised by checkPolicy()
             }
         }
-        $this->dbus->query("SET PASSWORD FOR " . $db->quote($usern) . "@" . $db->quote($this->dbus->Client) . "' = PASSWORD(?);", array($pass));
-        $db->query("UPDATE dbusers set password= ? where name= ? and uid= ? ;", array($pass, $usern, $cuid));
+        $this->dbus->query("SET PASSWORD FOR " . $db->quote($usern) . "@" . $db->quote($this->dbus->Client) . " = PASSWORD(?);", array($password));
+        $db->query("UPDATE dbusers set password= ? where name= ? and uid= ? ;", array($password, $usern, $cuid));
         return true;
     }
 
@@ -816,14 +816,8 @@ class m_mysql {
         $r = array();
         $db->free();
         $dblist = $this->get_dblist();
-        foreach ($dblist as $tab) {
-            $pos = strpos($tab['db'], "_");
-            if ($pos === false) {
-                $this->dbus->query("SELECT * FROM mysql.db WHERE User= ? AND Host= ? AND Db= ? ;", array($user, $this->dbus->Client, $tab["db"]));
-            } else {
-                $dbname = str_replace('_', '\_', $tab['db']);
-                $this->dbus->query("SELECT * FROM mysql.db WHERE User= ? AND Host= ? AND Db= ? ;", array($user, $this->dbus->Client, $dbname) );
-            }
+	foreach ($dblist as $tab) {
+            $this->dbus->query("SELECT * FROM mysql.db WHERE User= ? AND Host= ? AND Db= ? ;", array($user, $this->dbus->Client, $tab["db"]));
             if ($this->dbus->next_record()) {
                 $r[] = array("db" => $tab["db"], "select" => $this->dbus->f("Select_priv"), "insert" => $this->dbus->f("Insert_priv"), "update" => $this->dbus->f("Update_priv"), "delete" => $this->dbus->f("Delete_priv"), "create" => $this->dbus->f("Create_priv"), "drop" => $this->dbus->f("Drop_priv"), "references" => $this->dbus->f("References_priv"), "index" => $this->dbus->f("Index_priv"), "alter" => $this->dbus->f("Alter_priv"), "create_tmp" => $this->dbus->f("Create_tmp_table_priv"), "lock" => $this->dbus->f("Lock_tables_priv"),
                     "create_view" => $this->dbus->f("Create_view_priv"),
@@ -920,7 +914,7 @@ class m_mysql {
         $this->dbus->query("SELECT * FROM mysql.db WHERE User = ? AND Db = ?;", array($user, $dbn));
 
         if ($this->dbus->num_rows()) {
-            $this->dbus->query("REVOKE ALL PRIVILEGES ON ".$dbn.".* FROM ".$db->quote($user)."@" . $db->quote($this->dbus->Client) . ";");
+            $this->dbus->query("REVOKE ALL PRIVILEGES ON ".$dbn.".* FROM ".$this->dbus->quote($user)."@" . $this->dbus->quote($this->dbus->Client) . ";");
         }
         if ($strrights) {
             $strrights = substr($strrights, 0, strlen($strrights) - 1);
