@@ -142,9 +142,9 @@ class m_mem {
         // End AuthIP
 
         if ($restrictip) {
-            $ip = "'" . get_remote_ip() . "'";
+            $ip = get_remote_ip();
         } else {
-            $ip = "''";
+            $ip = "";
         }
         /* Close sessions that are more than 2 days old. */
         $db->query("DELETE FROM sessions WHERE DATE_ADD(ts,INTERVAL 2 DAY)<NOW();");
