@@ -53,6 +53,7 @@ exit();
 if (isset($error) && $error) echo "<p class=\"alert alert-danger\">$error</p>";
 ?>
 <form method="post" action="dom_doadd.php" id="main">
+  <?php csrf_get(); ?>
 <p>
 <label for="newdomain"><b><?php __("Domain name"); ?> :</b></label> <span class="int" id="newdomwww">www.</span><input type="text" class="int" id="newdomain" name="newdomain" value="<?php ehe($newdomain); ?>" size="32" maxlength="255" /> <a class="inb configure" href="dom_import.php"><?php __("Advanced import"); ?></a>
 </p>

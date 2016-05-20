@@ -90,6 +90,7 @@ if ($save) {
 
 
 <form method="post" action="dom_import.php">
+    <?php csrf_get(); ?>
   <table>
     <tr>
       <td>

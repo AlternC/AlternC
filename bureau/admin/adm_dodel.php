@@ -67,6 +67,7 @@ if($del_confirm == "y"){
     <body>
     <h3><?php printf(_("Deleting users")); ?> : </h3>
     <form action="adm_dodel.php" method="post">
+ <?php csrf_get(); ?>
       <input type="hidden" name="action" value="delete" />
       <input type="hidden" name="del_confirm" value="y" />
       <p class="alert alert-warning"><?php __("WARNING : Confirm the deletion of the users"); ?></p>

@@ -56,6 +56,7 @@ if ($confirm=="y") {
 <br />
 <p><?php __("Please confirm the deletion of the following mail accounts:"); ?></p>
 <form method="post" action="mail_del.php" id="main">
+  <?php csrf_get(); ?>
 <p>
 <input type="hidden" name="confirm" value="y" />
 <input type="hidden" name="domain_id" value="<?php echo $domain_id; ?>" />

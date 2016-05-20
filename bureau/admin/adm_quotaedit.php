@@ -63,6 +63,7 @@ $mem->unsu();
 	}
 ?>
 <form method="post" action="adm_quotadoedit.php">
+  <?php csrf_get(); ?>
 <table class="tedit">
 <tr><th><input type="hidden" name="uid" value="<?php echo $uid ?>" />
 <?php __("Username"); ?></th><td colspan="3"><code><big><?php echo $us["login"]; ?></big></code>&nbsp;</td></tr>

@@ -59,6 +59,7 @@ if (isset($error) && $error) {
 }
 ?>
 <form method="post" action="adm_dodefquotas.php">
+  <?php csrf_get(); ?>
 <p>
 <input type="hidden" name="action" value="add" />
 <input type="text" name="type" class="int" />
@@ -69,6 +70,7 @@ if (isset($error) && $error) {
 <?php
 ?>
 <form method="post" action="adm_dodefquotas.php">
+  <?php csrf_get(); ?>
 <table border="0" cellpadding="4" cellspacing="0">
 <tr class="lst">
 <td>
@@ -90,6 +92,7 @@ foreach($quota->listtype() as $type) {
 <span class="inb"><a href="adm_defquotas.php?synchronise=1"><?php __("Synchronise user's quota (only to upper value)"); ?></a></span>  
 
 <form method="post" action="adm_dodefquotas.php">
+  <?php csrf_get(); ?>
 <div>
 <input type="hidden" name="action" value="modify" />
 <?php

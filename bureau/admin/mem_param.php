@@ -78,6 +78,7 @@ echo "<p>";
  __("help_chg_passwd"); ?>
 </p>
 <form method="post" action="mem_passwd.php" name="main" id="main" autocomplete="off">
+    <?php csrf_get(); ?>
 
 <!-- honeypot fields -->
 <input type="text" style="display: none" id="fakeUsername" name="fakeUsername" value="" />
@@ -96,6 +97,7 @@ echo "<p>";
 <div id="tabsmem-mail">
 <h3><?php __("Change the email of the account"); ?></h3>
 <form method="post" action="mem_chgmail.php">
+  <?php csrf_get(); ?>
 	<table border="1" cellspacing="0" cellpadding="4" class="tedit">
 		<tr><td colspan="2"><?php __("help_chg_mail"); ?></td></tr>
 		<tr><th><?php __("Current mailbox"); ?></th><td><big><code><?php echo $mem->user["mail"]; ?></code></big></td></tr>
@@ -107,6 +109,7 @@ echo "<p>";
 <div id="tabsmem-help">
 		<h3><?php __("Online help settings"); ?></h3>
 <form method="post" action="mem_param.php">
+  <?php csrf_get(); ?>
 	<table border="1" cellspacing="0" cellpadding="4" class="tedit">
                 <tr><td colspan="2"><?php __("help_help_settings"); ?></td></tr>
 		<tr><th><label for="showhelp"><?php __("Do you want to see the help texts and links on each page?"); ?></label></th><td><input type="checkbox" class="inc" id="showhelp" name="showhelp" value="1" <?php if ($mem->get_help_param()) echo "checked=\"checked\""; ?> /></td></tr>
@@ -120,6 +123,7 @@ if ($mem->user["su"]) {
 <div id="tabsmem-admin">
 <h3><?php __("Admin preferences"); ?></h3>
 <form method="post" action="mem_admin.php">
+<?php csrf_get(); ?>
 <table border="1" cellspacing="0" cellpadding="4" class="tedit">
 <tr><th><?php __("Members list view"); ?></th><td><select name="admlist" class="inl">
 <option value="0"<?php if ($mem->user["admlist"]==0) echo " selected=\"selected\""; ?>><?php __("Large view"); ?></option>

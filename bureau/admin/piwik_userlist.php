@@ -40,6 +40,7 @@ if ($quota->cancreate("piwik")) {
 ?>
 <h3><?php __("Create a new piwik account");?></h3>
 <form method="post" action="piwik_addaccount.php" id="main" name="addaccount" >
+ <?php csrf_get(); ?>
 	<input type="text" class="int" name="account_name" size="20" id="account_name" maxlength="32" value="<?php if ($quotapiwik['u']==0) {echo $mem->user["login"];}?>"/>
 	<input type="submit" name="submit" class="inb" value="<?php __("Create"); ?>" />
 </form>
@@ -52,6 +53,7 @@ if ($quotapiwik['u']>0) {
 ?>
 <h3><?php __("Add a new website");?></h3>
 <form method="post" action="piwik_addsites.php" id="main" name="addsites" >
+<?php csrf_get(); ?>
 	<input type="text" class="int" name="site_urls" size="50" id="site_name" maxlength="255" value="" placeholder="<?php __("URL of the website")?>"/>
 	<input type="submit" name="submit" class="inb" value="<?php __("Create"); ?>" />
 </form>

@@ -82,6 +82,7 @@ if ($quota->cancreate("piwik")) {
 ?>
 <h3><?php __("Add a new website");?></h3>
 <form method="post" action="piwik_addsites.php" id="main" name="addsites" >
+ <?php csrf_get(); ?>
 	<input type="text" class="int" name="site_urls" size="50" id="site_name" maxlength="255" value="" placeholder="<?php __("URL of the website")?>"/>
 	<input type="submit" name="submit" class="inb" value="<?php __("Create"); ?>" />
 </form>
@@ -162,6 +163,7 @@ foreach ($sitelist as $site ){
 	// If a site was selected
 	if ($site_id != -1 && in_array($site_id, $piwik_alternc_sites)) {
 		echo '<form method="post">';
+		csrf_get();
 		echo '<dl>';
 		foreach ($piwik->get_users_access_from_site($site_id) AS $piwik_user => $cred) {
 			printf("<dt>%s:</dt>\n\t<dd>%s</dd>\n", $piwik_user, piwik_right_widget('right', $piwik_user, $cred));

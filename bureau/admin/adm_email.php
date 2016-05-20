@@ -57,7 +57,7 @@ if (isset($error) && $error) {
 
 ?>
 <form method="post" action="adm_email.php">
-
+  <?php csrf_get(); ?>
 <table cellspacing="1" cellpadding="4" border="0" align="center" class='tedit'>
 	<tr>
 	  <th align="right"><b><?php __("From");?></b></th>

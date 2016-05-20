@@ -43,6 +43,7 @@ if (!empty($domup)) {
 $tab = $dom->lst_default_subdomains();
 ?>
 <form method="post" action="adm_doms_def_type.php" name="main" id="main">
+  <?php csrf_get(); ?>
     <table class="tlist">
         <tr><th>&nbsp;</th><th><?php __("Sub"); ?></th><th><?php __("Type"); ?></th><th><?php __("settings"); ?></th><th><?php __("Concerned"); ?></th><th><?php __("Activation"); ?></th></tr>
         <?php for ($i = 0; $i < count($tab) + 1; $i++) { ?>

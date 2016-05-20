@@ -64,6 +64,7 @@ include_once('head.php');
 <br />
 
   <form method="post" action="piwik_user_dodel.php" name="main" id="main">
+  <?php csrf_get(); ?>
     <input type="hidden" name="login"  value="<?php echo $login;?>" />
     <input type="submit" class="inb" name="confirm_del" value="<?php __("Delete")?>" />
     <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='piwik_userlist.php'" />

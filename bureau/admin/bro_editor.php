@@ -80,6 +80,7 @@ $content=$bro->content($R,$editfile);
 ?>
 
 <form action="bro_editor.php" method="post"><br />
+  <?php csrf_get(); ?>
 <div id="tabsfile">
   <ul>
     <li class="view"><a href="#tabsfile-view"><?php __("View"); ?></a></li>

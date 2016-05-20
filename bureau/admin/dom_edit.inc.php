@@ -29,6 +29,7 @@ $dom->unlock();
 ?>
 
 <form action="dom_subdoedit.php" method="post" name="main" id="main">
+   <?php csrf_get(); ?>
     <table border="0">
         <tr>
             <td>

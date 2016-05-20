@@ -263,7 +263,7 @@ if (!$r['noerase']) {
 <div id="tabsdom-params">
 <h3><?php __("DNS &amp; Email parameters"); ?></h3>
 <form action="dom_editdns.php?domain=<?php echo urlencode($r["name"]) ?>" method="post" id="fdns" name="fdns" onSubmit="return destruction_alert();">
-
+ <?php csrf_get(); ?>
 <table class="tlist2">
 <tr>
   <td><?php __("Manage the DNS on the server ?"); ?></td>
@@ -321,6 +321,7 @@ if (!$r['noerase']) {
   <h3><?php __("Domain removal"); ?></h3>
   <?php printf(_("If you want to destroy the domain %s, click on the button below. Warning: this also deletes all FTP accounts, email, mailing lists associated with the domain and subdomains."),$domain); ?><br />
   <form action="dom_dodel.php?domain=<?php echo urlencode($domain) ?>" method="post">
+ <?php csrf_get(); ?>
     <p>
       <input type="submit" class="inb delete" name="detruire" value="<?php printf(_("Delete %s from this server"),$domain); ?>" />
     </p>

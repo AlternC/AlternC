@@ -27,7 +27,7 @@ $lst_cron = $cron->lst_cron();
 <?php } ?>
 
 <form method="post" action="cron.php" id="main" name="cron" >
-
+  <?php csrf_get(); ?>
 
 <table class="tlist">
 <!--

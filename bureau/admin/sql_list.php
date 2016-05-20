@@ -50,6 +50,7 @@ $r=$mysql->get_userslist();
 if($rdb){
 ?>
 <form method="post" action="sql_del.php" name="main" id="main">
+    <?php csrf_get(); ?>
 <table class="tlist">
    <tr><th>&nbsp;</th><th><?php __("Database"); ?></th><?php if ( variable_get('sql_allow_users_backups') ) { ?><th><?php __("Backup"); ?></th><?php } // sql_allow_users_backups ?><th><?php __("Restore"); ?></th><th><?php __("Show Settings"); ?></th><th><?php __("Size"); ?></th></tr>
 
@@ -91,6 +92,7 @@ for($i=0;$i<count($rdb);$i++) {
 <?php }else{
 ?>
 <form method="post" action="sql_doadd.php" id="main2" name="main2">
+   <?php csrf_get(); ?>
 <table class="tedit">
 <tr>
   <th><label for="dbn"><?php __("MySQL Database"); ?></label></th>

@@ -65,6 +65,7 @@ $c=$admin->dom_list(true,$forcecheck);
 <?php __("If you want to force the check of NS, MX, IP on domains, click the link"); ?> <a href="adm_doms.php?force=1"><?php __("Show domain list with refreshed checked NS, MX, IP information"); ?></a>
 </p>
 <form method="post" action="adm_dodom.php" name="main" id="main">
+  <?php csrf_get(); ?>
 <table class="tlist" id="dom_list_table">
 <thead>
     <tr><th></th><th><?php __("Action"); ?></th><th><?php __("Domain"); ?></th><th><?php __("Creator"); ?></th><th><?php __("Connect as"); ?></th><th><?php __("OK?"); ?></th><th><?php __("Status"); ?></th></tr>

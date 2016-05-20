@@ -39,7 +39,6 @@ $fields = array (
 );
 getFields($fields);
 
-
 if ($pass != $passconf) {
   $error = _("Passwords do not match");
   include_once("head.php");

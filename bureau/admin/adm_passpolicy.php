@@ -84,6 +84,7 @@ if (!empty($edit)) {
 																	     <p><b><?php echo $c[$edit]["description"]; ?></b></p>
 
 <form method="post" action="adm_passpolicy.php">
+ <?php csrf_get(); ?>
 <input type="hidden" name="doedit" value="<?php echo $edit; ?>"/> 
 <table class="tlist">
 <tr>

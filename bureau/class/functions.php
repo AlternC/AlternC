@@ -1080,14 +1080,20 @@ function panel_islocked() {
  * to the session cookie. We also need the $db pdo object
  * @return the csrf cookie to add into a csrf hidden field in your form
  */
-function csrf_get() {
+function csrf_get($return=false) {
     global $db;
+    static $token="";
     if (!isset($_SESSION["csrf"])) {
         $_SESSION["csrf"]=md5(rand().rand().rand());
     }
-    $token=md5(rand().rand().rand());
-    $db->query("INSERT INTO csrf SET cookie=?, token=?, created=NOW(), used=0;",array($_SESSION["csrf"],$token));
-    return $token;
+    if ($token=="") {
+      $token=md5(rand().rand().rand());
+      $db->query("INSERT INTO csrf SET cookie=?, token=?, created=NOW(), used=0;",array($_SESSION["csrf"],$token));
+    }
+    if ($return) 
+        return $token;
+    echo '<input type="hidden" name="csrf" value="'.$token.'" />';
+    return true;        
 }
 
 /** Check a CSRF token against the current session
@@ -1096,8 +1102,11 @@ function csrf_get() {
  * @return $result integer 0 for invalid token, 1 for good token, -1 for expired token (already used)
  * if a token is invalid or expired, an $err is raised, that can be displayed
  */
-function csrf_check($token) {
+function csrf_check($token=null) {
     global $db,$err;
+
+    if (is_null($token)) $token=$_POST["csrf"];
+
     if (!isset($_SESSION["csrf"])) {
         $err->raise("functions", _("The posted form token is incorrect. Maybe you need to allow cookies"));
         return 0; // no csrf cookie :/
@@ -1120,6 +1129,7 @@ function csrf_check($token) {
         $err->raise("functions", _("Your token is expired. Please refill the form."));
         return -1; // expired
     }
-    $db->query("UPDATE csrf SET used=1 WHERE cookie=? AND token=?;",array($_SESSION["csrf"],$token));
+    $db->query("UPDATE csrf SET used=1 WHERE cookie=? AND token=?;",array($_SESSION["csrf"],$token)); 
+    $db->exec("DELETE FROM csrf WHERE created<DATE_SUB(NOW(), INTERVAL 1 DAY);");
     return 1;
 }

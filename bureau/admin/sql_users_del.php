@@ -32,6 +32,7 @@ $fields = array (
         "confirm"                => array ("post", "string", ""),
 );
 getFields($fields);
+
 if(!isset($error)){
 	$error="";
 }
@@ -61,6 +62,7 @@ include_once("head.php");
 <p class="alert alert-warning"><?php __("WARNING"); ?></big><br /><?php __("Confirm the deletion of the following MySQL users"); ?><br />
 </p>
 <form method="post" action="sql_users_del.php" id="main">
+  <?php csrf_get(); ?>
 <p>
 <input type="hidden" name="confirm" value="y" />
 <?php

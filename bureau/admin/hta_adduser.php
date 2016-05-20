@@ -45,7 +45,7 @@ getFields($fields);
 ?>
 
 <form method="post" action="hta_doadduser.php" name="main" id="main" autocomplete="off">
-
+  <?php csrf_get(); ?>
 <!-- honeypot fields -->
 <input type="text" style="display: none" id="fakeUsername" name="fakeUsername" value="" />
 <input type="password" style="display: none" id="fakePassword" name="fakePassword" value="" />

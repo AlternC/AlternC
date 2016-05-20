@@ -64,6 +64,7 @@ $mem->show_help("hta_list2");
 </p>
 
 <form method="post" action="hta_del.php">
+  <?php csrf_get(); ?>
 <table class="tlist">
   <tr><th colspan="2"> </th><th><?php __("Folder"); ?></th></tr>
 <?php

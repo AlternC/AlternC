@@ -110,6 +110,7 @@ if (is_array($c)) { ?>
 <p><?php __("If you want to allow an ip address or class to connect to your dns server, enter it here. Choose 32 as a prefix for single ip address."); ?></p>
 
 <form method="post" action="adm_slavedns.php" name="main" id="main">
+  <?php csrf_get(); ?>
   <table class="tedit">
     <tr><th><label for="newip"><?php __("IP Address"); ?></label></th><th><label for="newclass"><?php __("Prefix"); ?></label></th></tr>
     <tr>
@@ -154,7 +155,7 @@ if (is_array($c)) { ?>
 <p><?php __("If you want to allow a new server to access your domain list, give him an account."); ?></p>
 
 <form method="post" action="adm_slavedns.php" name="main" id="main" autocomplete="off">
-
+  <?php csrf_get(); ?>
 <!-- honeypot fields -->
 <input type="text" style="display: none" id="fakeUsername" name="fakeUsername" value="" />
 <input type="password" style="display: none" id="fakePassword" name="fakePassword" value="" />

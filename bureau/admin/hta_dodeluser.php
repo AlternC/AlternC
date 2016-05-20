@@ -57,6 +57,7 @@ include_once('head.php');
   </ul>
 
   <form method="post" action="hta_dodeluser.php" name="main" id="main">
+  <?php csrf_get(); ?>
     <input type='hidden' name='dir' value='<?php echo $dir;?>' >
     <?php foreach($d as $t) {
       echo "<input type='hidden' name='d[$t]' value='$t' >\n";

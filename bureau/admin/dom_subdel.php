@@ -59,6 +59,7 @@ if (isset($error) && $error) {
 <hr id="topbar"/>
 <br />
 <form action="dom_subdodel.php" method="post">
+  <?php csrf_get(); ?>
   <p class="alert alert-warning">
     <input type="hidden" name="sub_domain_id" value="<?php echo $sub_domain_id ?>" />
     <?php __("WARNING : You are going to delete a sub-domain."); ?></p>

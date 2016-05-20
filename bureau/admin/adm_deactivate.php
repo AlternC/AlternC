@@ -69,6 +69,7 @@ if (! ($confirmed ) ) {
 
   ?>
   <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
+     <?php csrf_get(); ?>
   <input type="hidden" name="uid" value="<?php echo $uid?>" />
   <?php __("Redirection URL:") ?> <input type="text" name="redirect" class="int" value="http://example.com/" />
   <input type="submit" name="submit" class="inb" value="<?php __("Confirm")?>" />

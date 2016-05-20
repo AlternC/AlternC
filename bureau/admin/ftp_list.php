@@ -68,6 +68,7 @@ if (isset($error) && $error && !$noftp) {
 ?>
 
 <form method="post" action="ftp_del.php">
+   <?php csrf_get(); ?>
 <table class="tlist" id="ftp_list_table">
 <thead>
   <tr><th colspan="2"> </th><th><?php __("Enabled"); ?></th><th><?php __("Username"); ?></th><th><?php __("Folder"); ?></th></tr>

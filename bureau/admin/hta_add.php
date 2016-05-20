@@ -50,6 +50,7 @@ if (isset($error) && $error) {
 } ?>
 
 <form method="post" action="hta_doadd.php" name="main" id="main">
+  <?php csrf_get(); ?>
   <table border="1" cellspacing="0" cellpadding="4" class='tedit'>
     <tr>
       <th><label for="dir"><?php __("Folder"); ?></label></th>

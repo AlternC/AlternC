@@ -60,7 +60,7 @@ include_once("head.php");
 <hr id="topbar"/>
 <br />
 <form action="bro_pref.php" method="post">
-
+  <?php csrf_get(); ?>
 
 <table cellpadding="6" border="1" cellspacing="0" class='tedit'>
 <tr><th><?php __("Horizontal window size"); ?></th><td><select class="inl" name="editsizex">

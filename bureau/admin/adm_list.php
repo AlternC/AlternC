@@ -89,6 +89,7 @@ if ($mem->user["admlist"] == 0) { // Normal (large) mode
 <fieldset style="clear:both;">
     <legend><?php __("Filters"); ?></legend>
     <form method="post" action="adm_list.php">
+  <?php csrf_get(); ?>
         <p>
             <label>
 		<input type="radio" name="pattern_type" value="login" id="pattern_type_login" <?php if (!$pattern_type || $pattern_type === 'login') echo ' checked="checked" '; ?>/>
@@ -149,6 +150,7 @@ if (!is_array($accountList) || empty($accountList)) {
 ?>
 
 <form method="post" action="adm_dodel.php">
+      <?php csrf_get(); ?>
     <?php
 // Depending on the admin's choice, let's show a short list or a long list.
 

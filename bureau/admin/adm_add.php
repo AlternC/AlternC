@@ -60,7 +60,7 @@ if (isset($error) && $error) {
 }
 ?>
 <form method="post" action="adm_doadd.php" id="main" name="main" autocomplete="off">
-
+  <?php csrf_get(); ?>
 <!-- honeypot fields -->
 <input type="text" style="display: none" id="fakeUsername" name="fakeUsername" value="" />
 <input type="password" style="display: none" id="fakePassword" name="fakePassword" value="" />

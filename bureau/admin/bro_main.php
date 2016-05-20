@@ -96,6 +96,7 @@ if (!empty($formu) && $formu) {
           ?>
             <h3><?php printf(_("Deleting files and/or directories")); ?> : </h3>
             <form action="bro_main.php" method="post" name="main" id="main">  
+ <?php csrf_get(); ?>
             <input type="hidden" name="formu" value="2" />
             <input type="hidden" name="actdel" value="1" />
             <input type="hidden" name="R" value="<?php ehe($R)?>" />
@@ -184,6 +185,7 @@ if (isset($error) && $error) echo "<p class=\"alert alert-danger\">$error</p>";
 <td class="formcell">
 
 <form action="bro_main.php" enctype="multipart/form-data" method="post">
+   <?php csrf_get(); ?>
 <input type="hidden" name="R" value="<?php echo $R; ?>" />
 <input type="hidden" name="formu" value="3" />
 
@@ -200,6 +202,7 @@ if (isset($error) && $error) echo "<p class=\"alert alert-danger\">$error</p>";
 
 <?php __("New file or folder:"); ?><br />
 <form action="bro_main.php" method="post" name="nn" id="nn">
+   <?php csrf_get(); ?>
 <input type="hidden" name="R" value="<?php echo $R; ?>" />
 <table><tr>
 <td><input type="text" class="int" name="nomfich" id="nomfich" size="22" maxlength="255" /></td>
@@ -221,6 +224,7 @@ if (isset($error) && $error) echo "<p class=\"alert alert-danger\">$error</p>";
 if (isset($formu) && $formu==2 && isset($actrename) && $actrename && count($d)) {
   echo "<table cellpadding=\"6\">\n";
   echo "<form action=\"bro_main.php\" method=\"post\">\n";
+  csrf_get(); 
   echo "<input type=\"hidden\" name=\"R\" value=\"$R\" />\n";
   echo "<input type=\"hidden\" name=\"formu\" value=\"4\" />\n";
   echo "<tr><th colspan=\"2\">"._("Rename")."</th></tr>";
@@ -237,6 +241,7 @@ if (isset($formu) && $formu==2 && isset($actrename) && $actrename && count($d)) 
 /* [ML] Changer les permissions : */
 if ($formu==2 && ! (empty($actperms)) && count($d)) {
   echo "<form action=\"bro_main.php\" method=\"post\">\n";
+  csrf_get();
   echo "<input type=\"hidden\" name=\"R\" value=\"$R\" />\n";
   echo "<input type=\"hidden\" name=\"formu\" value=\"7\" />\n";
   echo "<p>"._("Permissions")."</p>";
@@ -277,6 +282,7 @@ if (count($c)) {
 
   ?>
     <form action="bro_main.php" method="post" name="main" id="main">
+   <?php csrf_get(); ?>
     <input type="hidden" name="R" value="<?php echo $R; ?>" />
     <input type="hidden" name="formu" value="2" />
 

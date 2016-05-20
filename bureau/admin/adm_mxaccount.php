@@ -91,7 +91,7 @@ for($i=0;$i<count($c);$i++) { ?>
     <?php } ?>
 <p><?php __("If you want to allow a new server to access your mx-hosted domain list, give him an account."); ?></p>
 <form method="post" action="adm_mxaccount.php" name="main" id="main" autocomplete="off">
-
+  <?php csrf_get(); ?>
 <!-- honeypot fields -->
 <input type="text" style="display: none" id="fakeUsername" name="fakeUsername" value="" />
 <input type="password" style="display: none" id="fakePassword" name="fakePassword" value="" />

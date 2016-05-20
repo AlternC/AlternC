@@ -66,6 +66,7 @@ if($action == "add") {
     <h3><?php printf(_("Deleting quota %s"),$type); ?> : </h3>
 
     <form action="adm_dodefquotas.php" method="post">
+ <?php csrf_get(); ?>
       <input type="hidden" name="action" value="delete" />
       <input type="hidden" name="type" value="<?php echo $type ?>" />
       <input type="hidden" name="del_confirm" value="y" />

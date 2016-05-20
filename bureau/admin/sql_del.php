@@ -75,6 +75,7 @@ if (!$found) {
 <p class="alert alert-warning"><?php __("WARNING"); ?></big><br /><?php __("Confirm the deletion of the following SQL databases"); ?><br />
 <?php __("This will delete all the tables currently in those db."); ?></p>
 <form method="post" action="sql_del.php" id="main">
+  <?php csrf_get(); ?>
 <p>
 <input type="hidden" name="confirm" value="y" />
 <?php

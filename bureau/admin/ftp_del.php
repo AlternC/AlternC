@@ -76,6 +76,7 @@ if(!empty($confirm_del)) {
   </ul>
 
   <form method="post" action="ftp_del.php" name="main" id="main">
+      <?php csrf_get(); ?>
     <?php foreach($lst_todel as $t) {
       echo "<input type='hidden' name='del_$t' value='$t' >\n";
     } ?>

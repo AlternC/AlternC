@@ -65,6 +65,7 @@ if (is_array($r)) {
 <h3><?php printf(_("Manage the SQL backup for database %s"),$r["db"]); ?></h3>
 
 <form action="sql_dobck.php" method="post" id="main" name="main">
+ <?php csrf_get(); ?>
 <table class="tedit">
 <tr>
 	<th><label><?php __("Do MySQL backup?"); ?></label></th>

@@ -131,6 +131,7 @@ if (count($available_user_sites)>0)
 foreach ($available_user_sites AS $current_id_site => $available_user_site)
 {
 	printf('<li>%s <form method="post"><input type="hidden" name="site_id" value="%d">
+<input type="hidden" name="csrf" value="'.csrf_get(true).'" />
 <select name="right">
 	<option value="noaccess">%s</option>
 	<option value="view">%s</option>

@@ -63,7 +63,7 @@ if (!$r=$admin->get($uid)) {
   }
 ?>
 <form method="post" action="adm_doedit.php" name="main" id="main" autocomplete="off">
-
+  <?php csrf_get(); ?>
 <!-- honeypot fields -->
 <input type="text" style="display: none" id="fakeUsername" name="fakeUsername" value="" />
 <input type="password" style="display: none" id="fakePassword" name="fakePassword" value="" />
@@ -136,6 +136,7 @@ if (!$r=$admin->get($uid)) {
 
 <?php if($r['duration']) { ?>
 <form method="post" action="adm_dorenew.php">
+   <?php csrf_get(); ?>
 <input type="hidden" name="uid" value="<?php echo $uid ?>" />
 <table border="1" cellspacing="0" cellpadding="4" class="tedit">
 <tr>

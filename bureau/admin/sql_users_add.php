@@ -54,6 +54,7 @@ getFields($fields);
 	}
 ?>
 <form method="post" action="sql_users_doadd.php" id="main" name="main" autocomplete="off">
+  <?php csrf_get(); ?>
 
 <!-- honeypot fields -->
 <input type="text" style="display: none" id="fakeUsername" name="fakeUsername" value="" />

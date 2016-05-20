@@ -44,6 +44,7 @@ $list_ip = $authip->list_ip_whitelist();
         <legend><?php __("Add an IP");?> - <a href="javascript:edit_ip('','<?php echo htmlentities(get_remote_ip())."','Home IP'";?>);" ><?php echo __("Add my current IP"); ?></a></legend>
         <span id="form_add_ip">
         <form method="post" action="adm_authip_whitelist.php" name="main" id="main">
+   <?php csrf_get(); ?>
           <p id="reset_edit_ip" style="display:none;"><a href="javascript:reset_edit_ip();"><?php __("Cancel edit")?></a></p>
           <input type="hidden" name="id" value="" id="edit_id" />
           <p>

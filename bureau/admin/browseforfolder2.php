@@ -139,6 +139,7 @@ if ($errbrowsefold) {
   reset($ar);
   ?>
     <form method="post" id="main" name="main" action="browseforfolder2.php">
+       <?php csrf_get(); ?>
     <p>
     <input type="hidden" name="caller" value="<?php echo $caller; ?>" />
     <input type="hidden" name="lastcurdir" value="<?php echo $curdir; ?>" />

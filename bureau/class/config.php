@@ -209,6 +209,17 @@ if ($oldid && $oldid != $cuid) {
     $isinvited = true;
 }
 
+// CHECK CSRF for ALL POSTS : 
+// you MUST add    <?php csrf_get(); ?>  after ALL <form method="post" in AlternC !
+if (count($_POST)) {
+  if (csrf_check()<=0) {
+    $error=$err->errstr();
+    require_once("main.php");
+    exit();
+  }
+}
+
+
 // Init some vars
 variable_get('hosting_tld', '', 'This is a FQDN that designates the main hostname of the service. For example, hosting_tld determines in what TLD the "free" user domain is created. If this is set to "example.com", a checkbox will appear in the user creation dialog requesting the creator if he wants to create the domain "username.example.com".', array('desc' => 'Wanted FQDN', 'type' => 'string'));
 

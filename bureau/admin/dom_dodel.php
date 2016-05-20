@@ -68,6 +68,7 @@ if ($del_confirm!="y") {
 
 <?php __("This will delete the related sub-domains too."); ?></p>
 <form method="post" action="dom_dodel.php" id="main">
+ <?php csrf_get(); ?>
 <p>
 <input type="hidden" name="del_confirm" value="y" />
 <input type="hidden" name="domain" value="<?php echo $domain ?>" />

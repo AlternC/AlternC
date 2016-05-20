@@ -36,7 +36,6 @@ $fields = array (
 );
 getFields($fields);
 
-
 if(!empty($usern)){
   if (!$mysql->add_user($usern,$password,$passconf)) {
     $error=$err->errstr();

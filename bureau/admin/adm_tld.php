@@ -69,6 +69,7 @@ $c=$admin->listtld();
 </p>
 <p><span class="ina"><a href="adm_tldadd.php"><?php __("Add a new TLD"); ?></a></span></p>
 <form method="post" action="adm_tld.php" name="main" id="main">
+  <?php csrf_get(); ?>
 <table class="tlist">
 <tr><th colspan="2"> </th><th><?php __("TLD"); ?></th><th><?php __("Allowed Mode"); ?></th></tr>
 <?php

@@ -93,6 +93,7 @@ if ( empty($logo) ||  ! $logo ) {
         <?php if (!empty($authip_token)) { echo "<p style='color:red;'>";__("You are attemping to connect without IP restriction."); echo "</p>"; } ?>
             <div class="menu-title"><?php __("AlternC access"); ?></div>
 	    <form action="login.php" method="post" name="loginform" target="_top">
+      <?php csrf_get(); ?>
             <div class="menu-content">
                 <div><label for="username"><?php echo _("Username"); ?></label></td><td><input type="text" class="int" name="username" id="username" value="" maxlength="128" autocapitalize="none" /></div>
                 <div><label for="password"><?php echo _("Password"); ?></label></td><td><input type="password" class="int" name="password" id="password" value="" maxlength="128" /></div>

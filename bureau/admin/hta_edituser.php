@@ -44,6 +44,7 @@ getFields($fields);
 <?php if (!empty($error) ) { echo "<p class=\"alert alert-danger\">$error</p>"; } ?>
 
 <form method="post" action="hta_doedituser.php" name="main" id="main" autocomplete="off">
+  <?php csrf_get(); ?>
 
 <!-- honeypot fields -->
 <input type="text" style="display: none" id="fakeUsername" name="fakeUsername" value="" />

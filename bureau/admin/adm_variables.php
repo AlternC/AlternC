@@ -53,6 +53,7 @@ include_once ("head.php");
 </p>
 
 <form method="post" action="adm_variables.php">
+  <?php csrf_get(); ?>
 <table border="0" cellpadding="4" cellspacing="0" class='tlist'>
 <tr><th><?php __("Names"); ?></th><th><?php __("Value"); ?></th><th><?php __("Comment"); ?></th></tr>
 <?php

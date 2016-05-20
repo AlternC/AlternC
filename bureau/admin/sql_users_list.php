@@ -47,6 +47,7 @@ if (isset($error) && $error) {
   if($r){ // if there is some userlist
 ?>
 <form method="post" action="sql_users_del.php">
+      <?php csrf_get(); ?>
 <table cellspacing="0" cellpadding="4" class="tlist">
    <tr><th>&nbsp;</th><th><?php __("User"); ?></th><th><?php __("Rights"); ?></th><th><?php __("Password");?></th></tr>
 <?php

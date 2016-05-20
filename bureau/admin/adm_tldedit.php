@@ -60,6 +60,7 @@ include_once("head.php");
 <h3><?php __("Edit a TLD"); ?></h3>
 
 <form method="post" action="adm_tlddoedit.php">
+  <?php csrf_get(); ?>
 <table id="main" class="tedit">
 <tr><th><label for="tld"><?php __("TLD"); ?></label></th><td><code><?php echo $tld; ?></code><input type="hidden" name="tld" id="tld" value="<?php echo $tld; ?>" /></td></tr>
 <tr><th><label for="mode"><?php __("Allowed Mode"); ?></label></th><td><select name="mode" class="inl" id="mode">

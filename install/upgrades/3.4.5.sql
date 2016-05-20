@@ -7,4 +7,4 @@ CREATE TABLE IF NOT EXISTS `csrf` (
   `used` tinyint(3) unsigned NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='csrf tokens for AlternC forms';
 
-ALTER TABLE `csrf` ADD PRIMARY KEY (`session`,`token`), ADD KEY `created` (`created`);
+ALTER TABLE `csrf` ADD PRIMARY KEY (`cookie`,`token`), ADD KEY `created` (`created`);

@@ -60,7 +60,7 @@ include_once ("head.php");
 </p>
 
 <form method="post" action="adm_tlddoadd.php" name="main" id="main">
-
+  <?php csrf_get(); ?>
 <table class="tedit">
 <tr><th><label for="tld"><?php __("TLD"); ?></label></th><td><input type="text" id="tld" name="tld" class="int" value="<?php ehe( (isset($tld)?$tld:'') ); ?>" size="20" maxlength="64" /></td></tr>
 <tr><th><label for="mode"><?php __("Allowed Mode"); ?></label></th><td><select name="mode" id="mode" class="inl">

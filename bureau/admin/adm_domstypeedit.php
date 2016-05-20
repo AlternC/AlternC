@@ -68,6 +68,7 @@ if (isset($error_edit) && $error_edit) {
 } ?>
 
 <form action="adm_domstypedoedit.php" method="post" name="main" id="main">
+   <?php csrf_get(); ?>
     <input type="hidden" name="name" value="<?php echo $d['name']; ?>" />
     <table class="tedit">
       <tr>

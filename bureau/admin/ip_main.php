@@ -89,6 +89,7 @@ $lac = $authip->list_affected();
   <p><?php __("You need to have some 'Known IP and networks' defined below to define a new rule.") ?></p>
 <?php } else { ?>
 <form method="post" action="ip_main.php" name="main" id="main">
+   <?php csrf_get(); ?>
 <table class="tlistb">
   <tbody>
     <tr valign="top">
@@ -176,6 +177,7 @@ foreach($list_ip as $i) {
 <p><a href="javascript:edit_ip('','<?php echo htmlentities(get_remote_ip())."','Home IP'";?>);" ><?php echo __("Add my current IP"); ?></a></p>
 <span id="form_add_ip">
 <form method="post" action="ip_main.php" name="main" >
+   <?php csrf_get(); ?>
   <p id="reset_edit_ip" style="display:none;"><a href="javascript:reset_edit_ip();"><?php __("Cancel edit")?></a></p>
 
   <input type="hidden" name="id" value="" id="edit_id" />

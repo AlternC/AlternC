@@ -53,6 +53,7 @@ if (! empty($error) ) {
 ?>
 
 <form method="post" action="sql_users_dopassword.php" autocomplete="off">
+  <?php csrf_get(); ?>
 <input type="hidden" name="id" value="<?php echo $id; ?>" />
 
 <!-- honeypot fields -->

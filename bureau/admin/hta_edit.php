@@ -57,6 +57,7 @@ if (!$dir) {
      reset($r);
 ?>
 <form method="post" action="hta_dodeluser.php">
+   <?php csrf_get(); ?>
 <table cellspacing="0" cellpadding="4" class='tlist'>
   <tr>
     <th colspan="2" ><input type="hidden" name="dir" value="<?php echo $dir?>"> </th>
@@ -91,7 +92,7 @@ for($i=0;$i<count($r);$i++){ ?>
   <legend><h3><?php __("Adding an authorized user"); ?></h3></legend>
 
   <form method="post" action="hta_doadduser.php" name="main" id="main" autocomplete="off">
-
+   <?php csrf_get(); ?>
 <!-- honeypot fields -->
 <input type="text" style="display: none" id="fakeUsername" name="fakeUsername" value="" />
 <input type="password" style="display: none" id="fakePassword" name="fakePassword" value="" />
