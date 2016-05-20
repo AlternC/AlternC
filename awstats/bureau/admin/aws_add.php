@@ -47,6 +47,7 @@ include_once("head.php");
 	}
 ?>
 <form method="post" action="<?php if (!$id) echo "aws_doadd.php"; else echo "aws_doedit.php"; ?>" id="main" name="main">
+<?php csrf_get(); ?>
 <table class="tedit">
 <tr><th><input type="hidden" name="id" value="<?php echo $id ?>" />
         <label for="hostname"><?php __("Domain name"); ?></label></th><td>

@@ -53,6 +53,7 @@ if ($quota->cancreate("aws")) { ?>
 <?php if (!$nosta) { ?>
 
 <form method="post" action="aws_del.php">
+<?php csrf_get(); ?>
 <table cellspacing="0" cellpadding="4">
     <tr><th colspan="2"><?php __("Action"); ?></th><th><?php __("Domain name"); ?></th><th><?php __("Allowed Users"); ?></th><th><?php __("View the statistics"); ?></th></tr>
 <?php

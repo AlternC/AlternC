@@ -65,6 +65,7 @@ if (isset($error) && $error) {
 <?php } ?>
 
 <form method="post" action="aws_pass.php" name="main" id="main">
+<?php csrf_get(); ?>
 <table class="tedit">
 <tr><th>
 <?php __("Username"); ?></th><td>

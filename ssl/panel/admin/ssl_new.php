@@ -93,6 +93,7 @@ if (isset($error) && $error) {
             </script>
 
             <form method="post" action="ssl_donew.php" name="main" id="main">
+<?php csrf_get(); ?>
                 <table border="1" cellspacing="0" cellpadding="4" class="tedit">
                     <tr><td colspan="2">
                             <?php __("Please choose the domain name for which you want a SSL Certificate, or enter it manually"); ?>
@@ -133,6 +134,7 @@ if (isset($error) && $error) {
             <p><?php __("We will verify the content of those files and add them in your certificate repository"); ?></p>
 
             <form method="post" action="ssl_doimport.php" name="main" id="main">
+<?php csrf_get(); ?>
                 <table border="1" cellspacing="0" cellpadding="4" class="tedit">
                     <tr>
                         <th><label for="key"><?php __("RSA Private Key"); ?></label></th>

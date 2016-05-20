@@ -46,6 +46,7 @@ if (!$r=$aws->list_login()) {
 <?php  	} ?>
 
 <form method="post" action="aws_useradd.php" name="main">
+<?php csrf_get(); ?>
 <table class="tedit">
 <tr><th>
 <label for="login"><?php __("Username"); ?></label></th><td>
@@ -74,6 +75,7 @@ if (!$nologin) {
 
 
 <form method="post" action="aws_userdel.php" name="main2" id="main2">
+<?php csrf_get(); ?>
 <table class="tlist">
     <tr><th colspan="2"><?php __("Action"); ?></th><th><?php __("Username"); ?></th></tr>
 <?php

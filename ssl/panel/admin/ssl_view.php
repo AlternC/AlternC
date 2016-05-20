@@ -54,6 +54,7 @@ if ($cert["status"] == $ssl::STATUS_PENDING) {
     <p><?php __("Once you'll have your <i>Certificate File</i> (CRT) and a <i>Chained Certificate File</i> (CHAIN), please paste them here to finish the enrollment."); ?></p>
 
     <form method="post" action="ssl_finalize.php" name="main" id="main">
+<?php csrf_get(); ?>
         <input type="hidden" name="id" id="id" value="<?php echo $cert["id"]; ?>"/>
         <table border="1" cellspacing="0" cellpadding="4" class="tedit">
             <tr>
@@ -177,6 +178,7 @@ if ($cert["status"] == $ssl::STATUS_PENDING) {
                     ?>
                 </p>
                 <form method="post" action="ssl_share.php">
+<?php csrf_get(); ?>
                     <input type="hidden" name="id" id="id" value="<?php echo $cert["id"]; ?>"/>
                     <input type="hidden" name="action" id="action" value="0" />
                     <input class="inb cancel" type="submit" name="unshare" value="<?php __("Click here to stop sharing this certificate"); ?>" />
@@ -193,6 +195,7 @@ if ($cert["status"] == $ssl::STATUS_PENDING) {
                 ?>
                 </p>
                 <form method="post" action="ssl_share.php">
+<?php csrf_get(); ?>
                     <input type="hidden" name="id" id="id" value="<?php echo $cert["id"]; ?>"/>
                     <input type="hidden" name="action" id="action" value="1" />
                     <input class="inb ok" type="submit" name="unshare" value="<?php __("Click here to share this certificate"); ?>" />
@@ -209,6 +212,7 @@ if ($cert["status"] == $ssl::STATUS_PENDING) {
     ?>
                 <p>
     <form method="post" action="ssl_finalize.php" name="main" id="main">
+<?php csrf_get(); ?>
         <input type="hidden" name="id" id="id" value="<?php echo $cert["id"]; ?>"/>
             <input type="submit" class="inb delete" name="delete" value="<?php __("Delete"); ?>" onclick="return confirm('<?php 
             echo addslashes(_("Please confirm that you want to delete this certificate AND ITS PRIVATE KEY!")); 
