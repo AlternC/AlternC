@@ -480,7 +480,7 @@ class m_bro {
             $err->raise("bro", _("File or folder name is incorrect"));
             return false;
         }
-        $alea = "." . time() . rand(1000, 9999);
+        $alea = "." . time() . mt_rand(1000, 9999);
         for ($i = 0; $i < count($old); $i++) {
             $old[$i] = ssla($old[$i]); // strip slashes if needed
             $new[$i] = ssla($new[$i]);

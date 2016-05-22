@@ -24,10 +24,6 @@
   ----------------------------------------------------------------------
  */
 
-/* seed the random number generator : */
-list($usec, $sec) = explode(' ', microtime());
-mt_srand((float) $sec + ((float) $usec * 100000));
-
 /**
  * Format a field value for input or textarea : 
  * 
@@ -854,11 +850,12 @@ function create_pass($length = 8) {
  * @return int
  */
 function display_div_generate_password($pass_size = DEFAULT_PASS_SIZE, $fields_to_fill1 = "", $fields_to_fill2 = "") {
-    $id = rand(1, 1000);
+    static $id=1;
     echo "<div id='z$id' style='display:none;'><a href=\"javascript:generate_password_html('$id',$pass_size,'$fields_to_fill1','$fields_to_fill2');\">";
     __("Clic here to generate a password");
     echo "</a></div>";
     echo "<script type='text/javascript'>$('#z$id').show();</script>";
+    $id++;
     return 0;
 }
 
@@ -872,7 +869,9 @@ function display_div_generate_password($pass_size = DEFAULT_PASS_SIZE, $fields_t
  */
 function display_browser($dir = "", $caller = "main.dir", $width = 350, $height = 450) {
     // Browser id
-    $bid = "b" . rand(1, 1000);
+    static $id=0;
+    $id++;
+    $bid = "b" . $id;
     echo "<script type=\"text/javascript\">
         <!--
           $(function() {
@@ -1084,10 +1083,10 @@ function csrf_get($return=false) {
     global $db;
     static $token="";
     if (!isset($_SESSION["csrf"])) {
-        $_SESSION["csrf"]=md5(rand().rand().rand());
+        $_SESSION["csrf"]=md5(mt_rand().mt_rand().mt_rand());
     }
     if ($token=="") {
-      $token=md5(rand().rand().rand());
+      $token=md5(mt_rand().mt_rand().mt_rand());
       $db->query("INSERT INTO csrf SET cookie=?, token=?, created=NOW(), used=0;",array($_SESSION["csrf"],$token));
     }
     if ($return) 
@@ -1111,13 +1110,9 @@ function csrf_check($token=null) {
         $err->raise("functions", _("The posted form token is incorrect. Maybe you need to allow cookies"));
         return 0; // no csrf cookie :/
     }
-    if (!preg_match('#^[0-9a-f]{32}$#',$token)) {
-        $err->raise("functions", _("The posted form token is invalid"));
-        return 0; // invalid csrf token
-    }
-    if (!preg_match('#^[0-9a-f]{32}$#',$_SESSION["csrf"])) {
+    if (strlen($token)!=32 || strlen($_SESSION["csrf"])!=32) {
         unset($_SESSION["csrf"]);
-        $err->raise("functions", _("Your cookie is invalid"));
+        $err->raise("functions", _("Your cookie or token is invalid"));
         return 0; // invalid csrf cookie 
     }
     $db->query("SELECT used FROM csrf WHERE cookie=? AND token=?;",array($_SESSION["csrf"],$token));

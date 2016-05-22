@@ -122,7 +122,7 @@ class Alternc_Api_Token {
         $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         $s = "";
         for ($i = 0; $i < 32; $i++)
-            $s.=substr($chars, rand(0, 61), 1);
+            $s.=substr($chars, mt_rand(0, 61), 1);
         return $s;
     }
 

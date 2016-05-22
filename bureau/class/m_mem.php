@@ -153,7 +153,7 @@ class m_mem {
             setcookie('oldid', '', 0, '/');
         }
         /* Open the session : */
-        $sess = md5(uniqid(mt_rand()));
+        $sess = md5(mt_rand().mt_rand().mt_rand());
         $_REQUEST["session"] = $sess;
         $db->query("insert into sessions (sid,ip,uid) values (?, ?, ?);", array($sess, $ip, $cuid));
         setcookie("session", $sess, 0, "/");
@@ -192,7 +192,7 @@ class m_mem {
         $mysql->reload_dbus();
 
         $ip = get_remote_ip();
-        $sess = md5(uniqid(mt_rand()));
+        $sess = md5(mt_rand().mt_rand().mt_rand());
         $_REQUEST["session"] = $sess;
         $db->query("insert into sessions (sid,ip,uid) values (?, ?, ?);", array($sess, $ip, $cuid));
         setcookie("session", $sess, 0, "/");
@@ -516,9 +516,9 @@ Cordially.
         $db->next_record();
 
         // un cookie de 20 caract�res pour le mail
-        $COOKIE = substr(md5(uniqid(rand(), true)), 0, 20);
+        $COOKIE = substr(md5(mt_rand().mt_rand()), 0, 20);
         // et de 6 pour la cl� � entrer. ca me semble suffisant...
-        $KEY = substr(md5(uniqid(rand(), true)), 0, 6);
+        $KEY = substr(md5(mt_rand().mt_rand()), 0, 6);
         $link = "https://$L_FQDN/mem_cm.php?usr=$cuid&cookie=$COOKIE";
         $txt = sprintf(_("Hello,
 
