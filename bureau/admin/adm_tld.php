@@ -77,9 +77,9 @@ for($i=0;$i<count($c);$i++) {
 ?>
 
 <tr class="lst">
-<td><input id="sel<?php echo $i; ?>" type="checkbox" name="sel[]" class="inc" value="<?php echo $c[$i]["tld"]; ?>" /></td>
-   <td><div class="ina edit"><a href="adm_tldedit.php?tld=<?php echo urlencode($c[$i]["tld"]); ?>"><?php __("Edit"); ?></a></div></td>
-<td><label for="sel<?php echo $i; ?>"><?php echo $c[$i]["tld"]; ?></label></td>
+<td><input id="sel<?php echo $i; ?>" type="checkbox" name="sel[]" class="inc" value="<?php ehe($c[$i]["tld"]); ?>" /></td>
+   <td><div class="ina edit"><a href="adm_tldedit.php?tld=<?php eue($c[$i]["tld"]); ?>"><?php __("Edit"); ?></a></div></td>
+    <td><label for="sel<?php echo $i; ?>"><?php ehe($c[$i]["tld"]); ?></label></td>
 <td><?php __($admin->tldmode[$c[$i]["mode"]]); ?></td></tr>
 
 <?php

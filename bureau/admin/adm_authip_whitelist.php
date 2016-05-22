@@ -49,11 +49,11 @@ $list_ip = $authip->list_ip_whitelist();
           <input type="hidden" name="id" value="" id="edit_id" />
           <p>
             <?php __("Enter here the IP address you want. <br/> <i>IPv4, IPv6 and subnet allowed</i>"); ?> <br/>
-            <input type="text" size='20' maxlength='39' name="ipsub" id="edit_ip" />
+            <input type="text" size="20" maxlength="39" name="ipsub" id="edit_ip" />
           </p>
           <p>
             <?php __("Add a comment");?><br/>
-            <input type="text" size='25' maxlength='200' name="infos" id="edit_infos" />
+            <input type="text" size="25" maxlength="200" name="infos" id="edit_infos" />
           </p>
           <input type="submit" class="inb" value="<?php __("Save")?>" />
         </form>
@@ -61,8 +61,8 @@ $list_ip = $authip->list_ip_whitelist();
       </fieldset>
  
 <br/>
-      <table class='tlist'>
-      <tr><th><?php __("Type"); ?></th><th><?php __("IP"); ?></th><th><?php __("Informations"); ?></th><th colspan='2' /></tr>
+      <table class="tlist">
+      <tr><th><?php __("Type"); ?></th><th><?php __("IP"); ?></th><th><?php __("Informations"); ?></th><th colspan="2" /></tr>
       <?php 
       foreach($list_ip as $i) {
         if (checkip($i['ip'])) {
@@ -80,10 +80,10 @@ $list_ip = $authip->list_ip_whitelist();
         } else {
           $txt = "Unknow IP";
         }
-        echo "<tr class='lst'><td>$txt</td><td>{$i['ip_human']}</td><td>{$i['infos']}</td>";
+        echo "<tr class="lst"><td>$txt</td><td>{$i['ip_human']}</td><td>{$i['infos']}</td>";
         ?>
-        <td><div class="ina edit"><a href="javascript:edit_ip(<?php echo "'".htmlentities($i['id'])."','".htmlentities($i['ip_human'])."','".htmlentities($i['infos'])."'"; ?>);"><?php __("Edit"); ?></a></div></td>
-        <td><div class="ina delete"><a href="adm_authip_whitelist.php?delete_id=<?php echo urlencode($i["id"]) ?>"><?php __("Delete"); ?></a></div></td>
+        <td><div class="ina edit"><a href="javascript:edit_ip(<?php echo "'".urlencode($i['id'])."','".urlencode($i['ip_human'])."','".urlencode($i['infos'])."'"; ?>);"><?php __("Edit"); ?></a></div></td>
+        <td><div class="ina delete"><a href="adm_authip_whitelist.php?delete_id=<?php eue($i["id"]); ?>"><?php __("Delete"); ?></a></div></td>
         </tr>
 
       <?php } ?>

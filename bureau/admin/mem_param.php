@@ -85,9 +85,9 @@ echo "<p>";
 <input type="password" style="display: none" id="fakePassword" name="fakePassword" value="" />
 
 <table border="1" cellspacing="0" cellpadding="4" class="tedit" >
-<tr><th><?php __("Old password"); ?></th><td><input type="password" class="int" name="oldpass" value="<?php isset($oldpass) ? : $oldpass=""; echo $oldpass; ?>" size="20" maxlength="128" /></td></tr>
-<tr><th><?php __("New password"); ?> (1)</th><td><input type="password" class="int" autocomplete="off" id="newpass" name="newpass" value="<?php isset($newpass) ? : $newpass=""; echo $newpass;  ?>" size="20" maxlength="60" /><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#newpass","#newpass2"); ?></td></tr>
-<tr><th><?php __("New password"); ?> (2)</th><td><input type="password" class="int" autocomplete="off" id="newpass2" name="newpass2" value="<?php isset($newpass2) ? : $newpass2=""; echo $newpass2;?>" size="20" maxlength="61" /></td></tr>
+<tr><th><?php __("Old password"); ?></th><td><input type="password" class="int" name="oldpass" value="<?php isset($oldpass) ? : $oldpass=""; ehe($oldpass); ?>" size="20" maxlength="128" /></td></tr>
+<tr><th><?php __("New password"); ?> (1)</th><td><input type="password" class="int" autocomplete="off" id="newpass" name="newpass" value="<?php isset($newpass) ? : $newpass=""; ehe($newpass);  ?>" size="20" maxlength="60" /><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#newpass","#newpass2"); ?></td></tr>
+<tr><th><?php __("New password"); ?> (2)</th><td><input type="password" class="int" autocomplete="off" id="newpass2" name="newpass2" value="<?php isset($newpass2) ? : $newpass2=""; ehe($newpass2);?>" size="20" maxlength="61" /></td></tr>
 <tr class="trbtn"><td colspan="3"><input type="submit" class="inb ok" name="submit" value="<?php __("Change my password"); ?>" /></td></tr>
 </table>
 </form>
@@ -101,7 +101,7 @@ echo "<p>";
 	<table border="1" cellspacing="0" cellpadding="4" class="tedit">
 		<tr><td colspan="2"><?php __("help_chg_mail"); ?></td></tr>
 		<tr><th><?php __("Current mailbox"); ?></th><td><big><code><?php echo $mem->user["mail"]; ?></code></big></td></tr>
-		<tr><th><?php __("New mailbox"); ?></th><td><input type="text" class="int" name="newmail" value="<?php   isset($newmail) ? : $newmail=""; echo $newmail;?>" size="40" maxlength="128" /></td></tr>
+		<tr><th><?php __("New mailbox"); ?></th><td><input type="text" class="int" name="newmail" value="<?php   isset($newmail) ? : $newmail=""; ehe($newmail);?>" size="40" maxlength="128" /></td></tr>
 		<tr class="trbtn"><td colspan="3"><input type="submit" class="inb ok" name="submit" value="<?php __("Change my email address"); ?>" /></td></tr>
 	</table>
 </form>

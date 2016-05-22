@@ -70,17 +70,17 @@ if (isset($error) && $error) {
 <input type="text" style="display: none" id="fakeUsername" name="fakeUsername" value="" />
 <input type="password" style="display: none" id="fakePassword" name="fakePassword" value="" />
 
-  <input type="hidden" name="id" value="<?php echo $id ?>" />
-  <input type="hidden" name="create" value="<?php echo $create ?>" />
+  <input type="hidden" name="id" value="<?php ehe($id); ?>" />
+  <input type="hidden" name="create" value="<?php ehe($create); ?>" />
   <table border="1" cellspacing="0" cellpadding="4" class="tedit">
     <tr>
       <th><label for="login"><?php __("Username"); ?></label></th>
-      <td><select class="inl" name="prefixe"><?php @$ftp->select_prefix_list($rr[0]["prefixe"]); ?></select>&nbsp;<b>_</b>&nbsp;<input type="text" class="int" name="login" id="login" value="<?php @ehe($rr[0]["login"]); ?>" size="20" maxlength="64" /></td>
+      <td><select class="inl" name="prefixe"><?php $ftp->select_prefix_list($rr[0]["prefixe"]); ?></select>&nbsp;<b>_</b>&nbsp;<input type="text" class="int" name="login" id="login" value="<?php ehe($rr[0]["login"]); ?>" size="20" maxlength="64" /></td>
     </tr>
     <tr>
       <th><label for="dir"><?php __("Folder"); ?></label></th>
       <td>
-        <input type="text" class="int" name="dir" id="dir" value="<?php empty($dir)?@ehe("/".$rr[0]["dir"]):@ehe($dir); ?>" size="20" maxlength="64" />
+        <input type="text" class="int" name="dir" id="dir" value="<?php empty($dir)?ehe("/".$rr[0]["dir"]):ehe($dir); ?>" size="20" maxlength="64" />
 				<?php display_browser( empty($dir)?("/".( isset($rr[0]["dir"])?$rr[0]["dir"]:'') ):$dir , "dir" ); ?>
 		<p><?php __("This is the root folder for this FTP user. i.e. this FTP user can access to this folder and all its sub-folders."); ?></p>
 		

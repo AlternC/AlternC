@@ -99,9 +99,9 @@ if ($mem->user["admlist"] == 0) { // Normal (large) mode
                 <input type="radio" name="pattern_type" value="domaine" id="pattern_type_domain" <?php if ($pattern_type === 'domaine') echo ' checked="checked" '; ?>/>
                 <?php __("Search for a Domain"); ?>
             </label>
-            <input type="text" id="pattern" name="pattern" value="<?php echo $pattern ?>"/>
+            <input type="text" id="pattern" name="pattern" value="<?php ehe($pattern); ?>"/>
             <input type="submit" class="inb filter" value="<?php __("submit"); ?>" />
-            <input type="hidden" name="show" value="<?php echo $show;?>" />
+            <input type="hidden" name="show" value="<?php ehe($show); ?>" />
 
         </p>
     </form>
@@ -186,17 +186,17 @@ if (!is_array($accountList) || empty($accountList)) {
                     <?php if ($val["su"]) { ?>
                         <td id="user_<?php echo $val["uid"]; ?>">&nbsp;</td>
                     <?php } else { ?>
-                        <td><input type="checkbox" class="inc" name="accountList[]" id="user_<?php echo $val["uid"]; ?>" value="<?php echo $val["uid"]; ?>" /></td>
+                        <td><input type="checkbox" class="inc" name="accountList[]" id="user_<?php ehe($val["uid"]); ?>" value="<?php ehe($val["uid"]); ?>" /></td>
                     <?php } // val['su']  ?>
-                    <td <?php if ($val["su"]) echo 'style="color: red"'; ?>><label for="user_<?php echo $val["uid"]; ?>"><b><?php echo $val["login"] ?></b></label></td>
-                    <td><a title="<?php __("Send an email"); ?>" href="mailto:<?php echo $val["mail"]; ?>"><?php echo $val["nom"] . " " . $val["prenom"] ?></a>&nbsp;</td>
-                    <td><?php echo $val["parentlogin"] ?></td>
-                    <td><?php echo format_date(_('%3$d-%2$d-%1$d'), $val["created"]); ?></td>
-                    <td><?php echo $val["type"] ?></td>
-                    <td><?php echo $val["lastlogin"] ?></td>
-                    <td><?php echo $val["lastip"] ?></td>
-                    <td><?php echo $val["lastfail"] ?></td>
-                    <td><div class="<?php echo 'exp' . $admin->renew_get_status($val['uid']) ?>"><?php echo $admin->renew_get_expiry($val['uid']) ?></div></td>
+                <td <?php if ($val["su"]) echo 'style="color: red"'; ?>><label for="user_<?php ehe($val["uid"]); ?>"><b><?php ehe($val["login"]); ?></b></label></td>
+                <td><a title="<?php __("Send an email"); ?>" href="mailto:<?php eue($val["mail"]); ?>"><?php ehe($val["nom"] . " " . $val["prenom"]); ?></a>&nbsp;</td>
+                    <td><?php ehe($val["parentlogin"]); ?></td>
+                <td><?php ehe(format_date(_('%3$d-%2$d-%1$d'), $val["created"])); ?></td>
+                    <td><?php ehe($val["type"]); ?></td>
+                    <td><?php ehe($val["lastlogin"]); ?></td>
+                    <td><?php ehe($val["lastip"]); ?></td>
+                    <td><?php ehe($val["lastfail"]); ?></td>
+                <td><div class="<?php echo 'exp' . $admin->renew_get_status($val['uid']) ?>"><?php ehe($admin->renew_get_expiry($val['uid'])); ?></div></td>
                 </tr>
 
                 <tr class="lst<?php echo $col; ?>" >

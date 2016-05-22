@@ -52,15 +52,15 @@ include_once('head.php');
   <?php __("Do you really want to delete those users ?");?>
   <ul>
   <?php foreach($d as $t) {
-    echo "<li>$t</li>\n";
+    echo "<li>".ehe($t,false)."</li>\n";
   } ?>
   </ul>
 
   <form method="post" action="hta_dodeluser.php" name="main" id="main">
   <?php csrf_get(); ?>
-    <input type='hidden' name='dir' value='<?php echo $dir;?>' >
+    <input type="hidden" name="dir" value="<?php ehe($dir); ?>" >
     <?php foreach($d as $t) {
-      echo "<input type='hidden' name='d[$t]' value='$t' >\n";
+    echo '<input type="hidden" name="d['.ehe($t,false).']" value="'.ehe($t,false).'" >'."\n";
     } ?>
     <input type="submit" class="inb" name="confirm_del" value="<?php __("Delete")?>" />
     <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='/hta_edit.php?dir=<?php echo urlencode($dir);?>'" />

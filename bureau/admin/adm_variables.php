@@ -61,9 +61,9 @@ include_once ("head.php");
 foreach( variables_list() as $vars) {  ?>
 
  <tr class="lst">
- <td><?php echo $vars['name']; ?></td>
+    <td><?php ehe($vars['name']); ?></td>
  <td><input type="text" name="<?php ehe($vars['name']); ?>" value="<?php ehe($vars['value']); ?>" /></td>
- <td><?php echo $vars['comment']; ?></td>
+    <td><?php ehe($vars['comment']); ?></td>
  </tr>
 <?php } ?>
 </table>

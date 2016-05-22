@@ -108,7 +108,7 @@ __("You can choose what to do with emails sent to unexisting address of this dom
     <td>
       <p>
 	<i><?php __("Enter the 'target' domain"); ?></i><br/>
-        <input type="text" id="target_domain" name="target_domain" value="<?php if($catch['type']=='domain') { echo substr($catch['target'],1); } ?>" placeholder="<?php __("example.tld");?>" />
+        <input type="text" id="target_domain" name="target_domain" value="<?php if($catch['type']=='domain') { ehe(substr($catch['target'],1)); } ?>" placeholder="<?php __("example.tld");?>" />
       </p>
 	<i><?php __("Or choose one of your own"); ?></i>
         <ul>
@@ -121,11 +121,11 @@ __("You can choose what to do with emails sent to unexisting address of this dom
     <th colspan="3"><b><?php __("Redirect to a specific email");?></b></th>
   </tr>
   <tr>
-    <td width="1px"><input type="radio" name="target_type" id='target_type_mail' value="mail" <?php if ($catch['type']=='mail') {echo 'checked="checked"';}?> /></td>
+    <td width="1px"><input type="radio" name="target_type" id='target_type_mail' value="mail" <?php if ($catch['type']=='mail') { echo 'checked="checked"'; } ?> /></td>
     <td style="width: 50%; text-align: justify"><label for='target_type_mail'><?php echo sprintf(_("Mails sent to an unexisting email on '@%s' will be redirect to user@example.tld."),$catch['domain']);?></label></td>
     <td>
       <p>
-        <input type="text" name="target_mail" size="30" value="<?php if($catch['type']=='mail') { echo $catch['target']; } ?>" placeholder="<?php __("john.doe@example.tld");?>" />
+        <input type="text" name="target_mail" size="30" value="<?php if($catch['type']=='mail') { ehe($catch['target']); } ?>" placeholder="<?php __("john.doe@example.tld");?>" />
       </p>
     </td>
   </tr>

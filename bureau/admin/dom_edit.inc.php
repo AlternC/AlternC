@@ -34,7 +34,7 @@ $dom->unlock();
         <tr>
             <td>
             <input type="hidden" name="domain" value="<?php ehe($domain) ?>" />
-            <input type="hidden" name="sub_domain_id" value="<?php echo $sub_domain_id ?>" />
+            <input type="hidden" name="sub_domain_id" value="<?php ehe($sub_domain_id); ?>" />
             <input type="hidden" name="action" value="add" />
   <?php
    if ($isedit) {
@@ -43,7 +43,7 @@ $dom->unlock();
      __("Create a subdomain:"); 
    }
 ?></td><td>
-<input type="text" class="int" name="sub" style="text-align:right" value="<?php ehe($sub); ?>" size="22" id="sub" /><span class="int" id="newsubname">.<?php echo $domain; ?></span></td>
+   <input type="text" class="int" name="sub" style="text-align:right" value="<?php ehe($sub); ?>" size="22" id="sub" /><span class="int" id="newsubname">.<?php ehe($domain); ?></span></td>
         </tr>
     <?php 
       $first_advanced=true;
@@ -70,35 +70,35 @@ $dom->unlock();
     ?>
     <tr id="tr_<?php echo $dt['name']; ?>">
       <td>
-        <input type="radio" id="r_<?php echo $dt['name']?>" class="inc" name="type" value="<?php echo $dt['name']; ?>" <?php cbox(strtoupper($type)==strtoupper($dt['name'])); ?> OnClick="getElementById('t_<?php echo $dt['name']?>').focus();"/>
-        <label for="r_<?php echo $dt['name']?>"><?php __($dt['description']); ?></label>
+        <input type="radio" id="r_<?php ehe($dt['name']); ?>" class="inc" name="type" value="<?php ehe($dt['name']); ?>" <?php cbox(strtoupper($type)==strtoupper($dt['name'])); ?> OnClick="getElementById('t_<?php ehe($dt['name']); ?>').focus();"/>
+        <label for="r_<?php ehe($dt['name']); ?>"><?php __($dt['description']); ?></label>
       </td>
       <td>
         <?php 
 
         switch ($dt['target']) {
           case "DIRECTORY": ?>
-            <input type="text" class="int" name="t_<?php echo $dt['name']?>" id="t_<?php echo $dt['name']?>" value="<?php ehe($targval); ?>" size="28" onKeyPress="getElementById('r_<?php echo $dt['name']?>').checked=true;" />
+            <input type="text" class="int" name="t_<?php ehe($dt['name']); ?>" id="t_<?php ehe($dt['name']); ?>" value="<?php ehe($targval); ?>" size="28" onKeyPress="getElementById('r_<?php ehe($dt['name']); ?>').checked=true;" />
             <?php display_browser( $targval , "t_".$dt['name'] ); 
             break;
           case "URL": ?>
-              <input type="text" class="int" name="t_<?php echo $dt['name']?>" id="t_<?php echo $dt['name']?>" value="<?php ehe( (empty($targval)?'http://':$targval) ); ?>" size="50" onKeyPress="getElementById('r_<?php echo $dt['name']?>').checked=true;" />
+              <input type="text" class="int" name="t_<?php ehe($dt['name']); ?>" id="t_<?php ehe($dt['name']); ?>" value="<?php ehe( (empty($targval)?'http://':$targval) ); ?>" size="50" onKeyPress="getElementById('r_<?php ehe($dt['name']); ?>').checked=true;" />
               <small><?php __("(enter an URL here)"); ?></small><?php
               break;;
           case 'IP':?>
-              <input type="text" class="int" name="t_<?php echo $dt['name']?>" id="t_<?php echo $dt['name']?>"  value="<?php ehe($targval); ?>" size="16" onKeyPress="getElementById('r_<?php echo $dt['name']?>').checked=true;" />
+              <input type="text" class="int" name="t_<?php ehe($dt['name']); ?>" id="t_<?php ehe($dt['name']); ?>"  value="<?php ehe($targval); ?>" size="16" onKeyPress="getElementById('r_<?php ehe($dt['name']); ?>').checked=true;" />
             <small><?php __("(enter an IPv4 address, for example 192.168.1.2)"); ?></small><?php
               break;
           case 'IPV6':?>
-            <input type="text" class="int" name="t_<?php echo $dt['name']?>" id="t_<?php echo $dt['name']?>" value="<?php ehe($targval); ?>" size="32" onKeyPress="getElementById('r_<?php echo $dt['name']?>').checked=true;" /> 
+            <input type="text" class="int" name="t_<?php ehe($dt['name']); ?>" id="t_<?php ehe($dt['name']); ?>" value="<?php ehe($targval); ?>" size="32" onKeyPress="getElementById('r_<?php ehe($dt['name']); ?>').checked=true;" /> 
             <small><?php __("(enter an IPv6 address, for example 2001:0910::0)"); ?></small><?php
               break;
           case 'TXT':?>
-              <input type="text" class="int" name="t_<?php echo $dt['name']?>" id="t_<?php echo $dt['name']?>" value="<?php ehe($targval);?>" size="32" onKeyPress="getElementById('r_<?php echo $dt['name']?>').checked=true;" />
+              <input type="text" class="int" name="t_<?php ehe($dt['name']); ?>" id="t_<?php ehe($dt['name']); ?>" value="<?php ehe($targval);?>" size="32" onKeyPress="getElementById('r_<?php ehe($dt['name']); ?>').checked=true;" />
             <small><?php __("(enter a TXT content for this domain)"); ?></small><?php
               break;
           case 'DOMAIN':?>
-              <input type="text" class="int" name="t_<?php echo $dt['name']?>" id="t_<?php echo $dt['name']?>" value="<?php ehe($targval);?>" size="32" onKeyPress="getElementById('r_<?php echo $dt['name']?>').checked=true;" /> 
+              <input type="text" class="int" name="t_<?php ehe($dt['name']); ?>" id="t_<?php ehe($dt['name']); ?>" value="<?php ehe($targval);?>" size="32" onKeyPress="getElementById('r_<?php ehe($dt['name']); ?>').checked=true;" /> 
             <small><?php __("(enter a domain name or subdomain)"); ?></small><?php
               break;
           case "NONE":

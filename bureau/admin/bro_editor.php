@@ -105,8 +105,8 @@ echo "<pre class='prettyprint' id='file_content_view' >$content</pre>";
 </div><!-- tabsfile -->
 <br/>
 <?php if (!empty($error)) echo "<p class=\"alert alert-danger\">".$error."</p>"; ?>
-	<input type="hidden" name="editfile" value="<?php echo str_replace("\"","&quot;",$editfile); ?>" />
-	<input type="hidden" name="R" value="<?php echo str_replace("\"","&quot;",$R); ?>" />
+	<input type="hidden" name="editfile" value="<?php ehe($editfile); ?>" />
+	<input type="hidden" name="R" value="<?php echo ehe($R); ?>" />
 
 	<input type="submit" class="inb" value="<?php __("Save"); ?>" name="save" />
 	<input type="submit" class="inb" value="<?php __("Save &amp; Quit"); ?>" name="saveret" />

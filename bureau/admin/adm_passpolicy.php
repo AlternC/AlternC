@@ -85,7 +85,7 @@ if (!empty($edit)) {
 
 <form method="post" action="adm_passpolicy.php">
  <?php csrf_get(); ?>
-<input type="hidden" name="doedit" value="<?php echo $edit; ?>"/> 
+<input type="hidden" name="doedit" value="<?php ehe($edit); ?>"/> 
 <table class="tlist">
 <tr>
   <th><?php __("Minimum Password Size:"); ?></th>

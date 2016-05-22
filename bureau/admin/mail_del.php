@@ -59,13 +59,13 @@ if ($confirm=="y") {
   <?php csrf_get(); ?>
 <p>
 <input type="hidden" name="confirm" value="y" />
-<input type="hidden" name="domain_id" value="<?php echo $domain_id; ?>" />
+<input type="hidden" name="domain_id" value="<?php ehe($domain_id); ?>" />
 
 <?php
 
 while (list($key,$val)=each($d)) {
   $m=$mail->get_details($val);
-  echo "<input type=\"hidden\" name=\"d[]\" value=\"$val\" />";
+  echo "<input type=\"hidden\" name=\"d[]\" value=\"".ehe($val,false)."\" />";
   echo $m["address"]."@".$m["domain"]."<br />";
 }
 

@@ -50,15 +50,15 @@ if (!$string) {
 <h3><?php __("Follow a recent log"); ?></h3>
 <p><?php printf(_("Please find below the last lines of file <b>%s</b>"),$file); ?></p>
 <form method="get" action="logs_tail.php" name="update" id="update">
-  <input type="hidden" name="file" value="<?php echo $file; ?>" />
-  <input type="hidden" name="autoreload" value="<?php echo $autoreload; ?>" />
+  <input type="hidden" name="file" value="<?php ehe($file); ?>" />
+  <input type="hidden" name="autoreload" value="<?php ehe($autoreload); ?>" />
 <?php if ($autoreload) {
 ?>
-<input type="button" class="inb" name="autoreload" value="<?php __("Stop Auto Reload"); ?>" onclick="document.location='logs_tail.php?file=<?php echo $file; ?>&autoreload=0&lines=<?php echo $lines; ?>'"/>
+<input type="button" class="inb" name="autoreload" value="<?php __("Stop Auto Reload"); ?>" onclick="document.location='logs_tail.php?file=<?php eue($file); ?>&autoreload=0&lines=<?php eue($lines); ?>'"/>
 <?php
 } else {
 ?>
-<input type="button" class="inb" name="autoreload" value="<?php __("Auto Reload"); ?>" onclick="document.location='logs_tail.php?file=<?php echo $file; ?>&autoreload=1&lines=<?php echo $lines; ?>'"/>
+<input type="button" class="inb" name="autoreload" value="<?php __("Auto Reload"); ?>" onclick="document.location='logs_tail.php?file=<?php eue($file); ?>&autoreload=1&lines=<?php eue($lines); ?>'"/>
 <?php
 } ?>
 <select id="lines" name="lines" onchange="document.forms['update'].submit()">

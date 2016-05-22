@@ -67,7 +67,7 @@ if (isset($error)) {
 <input type="text" style="display: none" id="fakeUsername" name="fakeUsername" value="" />
 <input type="password" style="display: none" id="fakePassword" name="fakePassword" value="" />
 
-<input type="hidden" name="mail_id" value="<?php echo $mail_id; ?>" />
+<input type="hidden" name="mail_id" value="<?php ehe($mail_id); ?>" />
 <table class="tedit">
   <tr><th colspan="2"><b><?php __("Is this email enabled?"); ?></b></th></tr>
 

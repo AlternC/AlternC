@@ -70,7 +70,7 @@ if (! ($confirmed ) ) {
   ?>
   <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
      <?php csrf_get(); ?>
-  <input type="hidden" name="uid" value="<?php echo $uid?>" />
+  <input type="hidden" name="uid" value="<?php ehe($uid); ?>" />
   <?php __("Redirection URL:") ?> <input type="text" name="redirect" class="int" value="http://example.com/" />
   <input type="submit" name="submit" class="inb" value="<?php __("Confirm")?>" />
   <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='adm_list.php'"/>

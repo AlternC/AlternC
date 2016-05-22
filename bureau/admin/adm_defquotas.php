@@ -114,7 +114,7 @@ foreach($q as $name => $value) {
 
 <tr class="lst">
 <td><label for="<?php echo $key; ?>"><?php echo $qarray[$name] ; ?></label></td>
-<td><input type="text" class="int" size="16" maxlength="16" name="<?php echo $key; ?>" id="<?php echo $key;?>" value="<?php ehe($value); ?>" /></td></tr>
+<td><input type="text" class="int" size="16" maxlength="16" name="<?php ehe($key); ?>" id="<?php ehe($key); ?>" value="<?php ehe($value); ?>" /></td></tr>
 
 <?php
   } //foreach 

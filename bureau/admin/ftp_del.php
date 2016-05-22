@@ -78,7 +78,7 @@ if(!empty($confirm_del)) {
   <form method="post" action="ftp_del.php" name="main" id="main">
       <?php csrf_get(); ?>
     <?php foreach($lst_todel as $t) {
-      echo "<input type='hidden' name='del_$t' value='$t' >\n";
+      echo '<input type="hidden" name="del_'.ehe($t,false).'" value="'.ehe($t,false).'" >'."\n";
     } ?>
     <input type="submit" class="inb" name="confirm_del" value="<?php __("Delete")?>" />
     <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='ftp_list.php'" />

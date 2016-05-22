@@ -141,14 +141,14 @@ if ($errbrowsefold) {
     <form method="post" id="main" name="main" action="browseforfolder2.php">
        <?php csrf_get(); ?>
     <p>
-    <input type="hidden" name="caller" value="<?php echo $caller; ?>" />
-    <input type="hidden" name="lastcurdir" value="<?php echo $curdir; ?>" />
-    <input type="hidden" name="bid" value="<?php echo $bid; ?>" />
+    <input type="hidden" name="caller" value="<?php echo ehe($caller); ?>" />
+    <input type="hidden" name="lastcurdir" value="<?php echo ehe($curdir); ?>" />
+    <input type="hidden" name="bid" value="<?php echo ehe($bid); ?>" />
 
     <input type="text" class="int" id="file" name="file" size="20" value="<?php ehe($file); ?>" /><br />
 
     <input type="button" name="select" value="<?php __("Select"); ?>" class="inb" onclick="retour();" />&nbsp;
-  <input type="button" name="cancel" value="<?php __("Cancel"); ?>" class="inb" onclick="window.parent.jQuery('#<?php echo $bid; ?>').dialog('close');" />&nbsp;
+  <input type="button" name="cancel" value="<?php __("Cancel"); ?>" class="inb" onclick="window.parent.jQuery('#<?php ehe($bid); ?>').dialog('close');" />&nbsp;
   </p>
     </form>
 
@@ -170,9 +170,9 @@ if ($errbrowsefold) {
       }
       echo "<td colspan=\"".($maxlevel-$val["level"]+1)."\">";
       if ($val["put"]!="") {
-        echo "<a href=\"browseforfolder2.php?caller=".urlencode($caller)."&amp;bid=".$bid."&amp;file=".urlencode($val["put"])."\">".$val["dir"]."</a>";
+          echo "<a href=\"browseforfolder2.php?caller=".eue($caller,false)."&amp;bid=".eue($bid,false)."&amp;file=".eue($val["put"],false)."\">".ehe($val["dir"],false)."</a>";
       } else {
-        echo "<b>".$val["dir"]."</b>";
+          echo "<b>".ehe($val["dir"],false)."</b>";
       }
       echo "</td>\n</tr>\n";
     }

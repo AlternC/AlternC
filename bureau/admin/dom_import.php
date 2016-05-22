@@ -97,7 +97,7 @@ if ($save) {
         <label for="domain"><?php __("Enter the domain name you want to import") ; ?></label>
       </td>
       <td>
-        <input type="text" size="40" name="domain" value="<?php echo $domain; ?>" />
+        <input type="text" size="40" name="domain" value="<?php ehe($domain); ?>" />
       </td>
     </tr>
     <tr>

@@ -60,17 +60,17 @@ if (!$dir) {
    <?php csrf_get(); ?>
 <table cellspacing="0" cellpadding="4" class='tlist'>
   <tr>
-    <th colspan="2" ><input type="hidden" name="dir" value="<?php echo $dir?>"> </th>
+    <th colspan="2" ><input type="hidden" name="dir" value="<?php ehe($dir); ?>"> </th>
     <th><?php __("Username"); ?></th>
   </tr>
 <?php
 for($i=0;$i<count($r);$i++){ ?>
   <tr class="lst">
-    <td align="center"><input type="checkbox" class="inc" name="d[]" value="<?php echo $r[$i]?>" /></td>
+    <td align="center"><input type="checkbox" class="inc" name="d[]" value="<?php ehe($r[$i]); ?>" /></td>
     <td>
-      <div class="ina"><a href="hta_edituser.php?user=<?php echo urlencode($r[$i])?>&amp;dir=<?php echo urlencode($dir); ?>"><img src="icon/encrypted.png" alt="<?php __("Change this user's password"); ?>" /><?php __("Change this user's password"); ?></a></div>
+      <div class="ina"><a href="hta_edituser.php?user=<?php eue($r[$i]); ?>&amp;dir=<?php eue($dir); ?>"><img src="icon/encrypted.png" alt="<?php __("Change this user's password"); ?>" /><?php __("Change this user's password"); ?></a></div>
     </td>
-    <td><?php echo $r[$i]; ?></td>
+    <td><?php ehe($r[$i]); ?></td>
   </tr>
 <?php
 } // for $i
@@ -83,7 +83,7 @@ for($i=0;$i<count($r);$i++){ ?>
 
 <?php } // else !count $r ?>
 <p>
-<span class="inb"><a href="bro_main.php?R=<?php echo $dir ?>"><?php __("Show this folder's content in the File Browser"); ?></a></span>
+<span class="inb"><a href="bro_main.php?R=<?php eue($dir); ?>"><?php __("Show this folder's content in the File Browser"); ?></a></span>
 </p>
 
 <p>&nbsp;</p>
@@ -99,8 +99,8 @@ for($i=0;$i<count($r);$i++){ ?>
 
     <table class="tedit">
       <tr>
-        <th><input type="hidden" name="dir" value="<?php echo $dir ?>" /><?php __("Folder"); ?></th>
-        <td><?php echo '<a href="bro_main.php?R='.urlencode($dir).'">'.htmlspecialchars($dir).'</a>'; ?></td>
+        <th><input type="hidden" name="dir" value="<?php ehe($dir); ?>" /><?php __("Folder"); ?></th>
+        <td><?php echo '<a href="bro_main.php?R='.eue($dir,false).'">'.ehe($dir,false).'</a>'; ?></td>
       </tr>
       <tr>
         <th><label for="user"><?php __("Username"); ?></label></th>

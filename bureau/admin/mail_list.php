@@ -79,7 +79,7 @@ if ($fatal) {
     <form method="post" action="mail_doadd.php" id="main" name="mail_create">
     <?php csrf_get(); ?>
       <input type="text" class="int intleft" style="text-align: right" name="mail_arg" value="<?php ehe($mail_arg); ?>" size="24" id="mail_arg" maxlength="255" /><span id="emaildom" class="int intright"><?php echo "@".$domain; ?></span>
-      <input type="hidden" name="domain_id"  value="<?php echo $domain_id;?>" />
+      <input type="hidden" name="domain_id"  value="<?php ehe($domain_id); ?>" />
       <input type="submit" name="submit" class="inb add" value="<?php __("Create this email address"); ?>"  onClick="return false_if_empty('mail_arg', '<?php echo addslashes(_("Can't have empty mail."));?>');" />
     </form>
 <?php } // $quota->cancreate("mail") ?>
@@ -104,19 +104,19 @@ if (empty($allmails_list) && empty($search)) {
 
 <table class="searchtable"><tr><td>
 <form method="get" name="formlist1" id="formlist1" action="mail_list.php">
-<input type="hidden" name="domain_id" value="<?php echo $domain_id; ?>" />
+<input type="hidden" name="domain_id" value="<?php ehe($domain_id); ?>" />
 <input type="hidden" name="offset" value="0" />
 <span class="int intleft"><img alt="<?php __("Search"); ?>" title="<?php __("Search"); ?>" src="/images/search.png" style="vertical-align: middle"/> </span><input type="text" name="search" value="<?php ehe($search); ?>" size="20" maxlength="64" class="int intright" />
 </td><td>
 <?php pager($offset,$count,$mail->total,"mail_list.php?domain_id=".$domain_id."&amp;count=".$count."&amp;search=".urlencode($search)."&amp;offset=%%offset%%"); ?>
 </td>
 <td style="text-align:center">
-  <input type="checkbox" id="show_systemmails" name="show_systemmails" <?php if($show_systemmails) {echo "checked";}?> value="1"onclick="document.getElementById('formlist1').submit();" /><label for="show_systemmails" ><?php __("Show system emails");?></label>
+  <input type="checkbox" id="show_systemmails" name="show_systemmails" <?php if($show_systemmails) { echo "checked"; } ?> value="1" onclick="document.getElementById('formlist1').submit();" /><label for="show_systemmails" ><?php __("Show system emails");?></label>
 </td>
 </form>
 <td style="text-align:right">
 <form method="get" name="formlist2" id="formlist2" action="mail_list.php">
- <input type="hidden" name="domain_id" value="<?php echo $domain_id; ?>" />
+ <input type="hidden" name="domain_id" value="<?php ehe($domain_id); ?>" />
  <input type="hidden" name="offset" value="0" />
  <?php __("Items per page:"); ?> <select name="count" class="inl" onchange="submit()"><?php eoption($counts,$count); ?></select>
 </form>
@@ -124,7 +124,7 @@ if (empty($allmails_list) && empty($search)) {
 
 <form method="post" action="mail_del.php">
    <?php csrf_get(); ?>
- <input type="hidden" name="domain_id" value="<?php echo $domain_id; ?>" />
+ <input type="hidden" name="domain_id" value="<?php ehe($domain_id); ?>" />
 <table class="tlist">
 <tr><th></th><th></th><th><?php __("Enabled");?></th><th style="text-align:right"><?php __("Address"); ?></th><th><?php __("Pop/Imap"); ?></th><th><?php __("Other recipients"); ?></th><th><?php __("Last login time"); ?></th></tr>
 <?php
@@ -148,7 +148,7 @@ if(!empty($mails_list)) {
 	    <td><img src="images/check_no.png" alt="<?php __("Disabled"); ?>" /></td>	  
 	  <?php } else if (!$val["type"]) { ?>
           <td align="center">
-	    <input class="inc" type="checkbox" id="del_<?php echo $i; ?>" name="d[]" value="<?php ehe($val["id"]); ?>" />
+	    <input class="inc" type="checkbox" id="del_<?php ehe($i); ?>" name="d[]" value="<?php ehe($val["id"]); ?>" />
 	</td>
 	<td class="<?php echo $grey; ?>">
 	  <div class="ina edit"><a href="mail_edit.php?mail_id=<?php echo $val["id"] ?>"><?php __("Edit"); ?></a></div></td>

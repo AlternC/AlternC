@@ -279,7 +279,7 @@ if (!$r['noerase']) {
 <tr>
   <td><?php __("Define TTL for the zone records"); ?>&nbsp;: </td>
   <td> 
-     <input type="text" id="ttldns" class="inc" name="ttl" size="6" value="<?php echo ($r["zonettl"]); ?>" /> <?php __("seconds"); ?> <small><i><?php __("Warning: a low TTL can be problematic. It is recommended not to use a lower TTL than 3600 seconds."); ?></i></small>
+     <input type="text" id="ttldns" class="inc" name="ttl" size="6" value="<?php ehe($r["zonettl"]); ?>" /> <?php __("seconds"); ?> <small><i><?php __("Warning: a low TTL can be problematic. It is recommended not to use a lower TTL than 3600 seconds."); ?></i></small>
   </td>
 </tr>
 </table>

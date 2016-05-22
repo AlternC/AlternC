@@ -82,7 +82,7 @@ if (!$found) {
 reset($_POST);
 while (list($key,$val)=each($_POST)) {
   if (substr($key,0,4)=="del_") {
-    echo "<input type=\"hidden\" name=\"$key\" value=\"$val\" />".$val."<br />\n";
+      echo "<input type=\"hidden\" name=\"".ehe($key,false)."\" value=\"".ehe($val,false)."\" />".ehe($val,false)."<br />\n";
   }
 }
 

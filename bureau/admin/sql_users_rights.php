@@ -55,7 +55,7 @@ if ($r) {
 
 <form method="post" action="sql_users_dorights.php">
     <?php csrf_get(); ?>
-<input type="hidden" name="id" value="<?php echo $id; ?>" />
+<input type="hidden" name="id" value="<?php ehe($id); ?>" />
 <table cellspacing="0" cellpadding="4" class="tlist ombrage">
    <tr class="petit">
      <th>&nbsp;</th>

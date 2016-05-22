@@ -54,7 +54,7 @@ if (! empty($error) ) {
 
 <form method="post" action="sql_users_dopassword.php" autocomplete="off">
   <?php csrf_get(); ?>
-<input type="hidden" name="id" value="<?php echo $id; ?>" />
+<input type="hidden" name="id" value="<?php ehe($id); ?>" />
 
 <!-- honeypot fields -->
 <input type="text" style="display: none" id="fakeUsername" name="fakeUsername" value="" />

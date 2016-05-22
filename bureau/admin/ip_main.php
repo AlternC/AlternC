@@ -97,19 +97,19 @@ $lac = $authip->list_affected();
     <td class="lst2">
       <?php foreach ($ac as $a) { ?>
         <p>
-        <input type="radio" name="s_protocol" id="s_protocol_<?php echo htmlentities($a['protocol']);?>" value="<?php echo htmlentities($a['protocol']);?>" />
-        <label for="s_protocol_<?php echo htmlentities($a['protocol']);?>"><?php echo htmlentities($a['name']); ?></label>
+        <input type="radio" name="s_protocol" id="s_protocol_<?php ehe($a['protocol']);?>" value="<?php ehe($a['protocol']);?>" />
+        <label for="s_protocol_<?php ehe($a['protocol']);?>"><?php ehe($a['name']); ?></label>
 
         <?php if ( sizeof($a['values']) > 1 ) { ?>
-           <select name="s_affect_<?php echo htmlentities($a['protocol']);?>" id="s_affect_<?php echo htmlentities($a['protocol']);?>">
+           <select name="s_affect_<?php ehe($a['protocol']);?>" id="s_affect_<?php ehe($a['protocol']);?>">
              <?php foreach ($a['values'] as $k => $v) { ?>
-               <option value="<?php echo htmlentities($k); ?>"><?php echo htmlentities($v); ?></option>
+               <option value="<?php ehe($k); ?>"><?php ehe($v); ?></option>
              <?php  } ?>
            </select>
         <?php } else { ?>
           <?php foreach ($a['values'] as $k => $v) { ?>
-            <label><b><?php echo htmlentities($v); ?></b></label> 
-            <input type=hidden name="s_affect_<?php echo htmlentities($a['protocol']);?>" id="s_affect_<?php echo htmlentities($a['protocol']);?>" value="<?php echo htmlentities($k); ?>" readonly />
+            <label><b><?php ehe($v); ?></b></label> 
+            <input type="hidden" name="s_affect_<?php ehe($a['protocol']);?>" id="s_affect_<?php ehe($a['protocol']);?>" value="<?php ehe($k); ?>" readonly="readonly" />
           <?php  } ?>
         <?php } ?>
         </p>
@@ -122,7 +122,7 @@ $lac = $authip->list_affected();
       <p>
       <select name="s_ipsub">
         <?php foreach ($list_ip as $li) { ?>
-          <option value="<?php echo $li['id']; ?>"><?php echo htmlentities($li['infos']); 
+          <option value="<?php echo $li['id']; ?>"><?php ehe($li['infos']); 
             //echo " - ".$li['ip'] ; if (!($li['subnet']==32 || $li['subnet'] == 128)) echo "/".$li['subnet'];
             ?></option>
         <?php } ?>
@@ -174,7 +174,7 @@ foreach($list_ip as $i) {
 <hr/>
 <h3><?php __("Add an IP or a networks");?></h3>
 
-<p><a href="javascript:edit_ip('','<?php echo htmlentities(get_remote_ip())."','Home IP'";?>);" ><?php echo __("Add my current IP"); ?></a></p>
+<p><a href="javascript:edit_ip('','<?php ehe(get_remote_ip())."','Home IP'";?>);" ><?php echo __("Add my current IP"); ?></a></p>
 <span id="form_add_ip">
 <form method="post" action="ip_main.php" name="main" >
    <?php csrf_get(); ?>
@@ -185,8 +185,8 @@ foreach($list_ip as $i) {
   <tr><th><?php __("Name"); ?></th><th><?php __("IP or network. <i>IPv4, IPv6 and subnet allowed</i>"); ?></th><th></th></tr>
   
   <tr class="lst2">
-    <td><input type="text" size='20' maxlength='39' name="ipsub" id="edit_ip" /></td>
-    <td><input type="text" size='25' maxlength='200' name="infos" id="edit_infos" /></td>
+    <td><input type="text" size="20" maxlength="39" name="ipsub" id="edit_ip" /></td>
+    <td><input type="text" size="25" maxlength="200" name="infos" id="edit_infos" /></td>
     <td><input type="submit" class="inb ok" value="<?php __("Save")?>" /></td>
   </tr>
   </table>

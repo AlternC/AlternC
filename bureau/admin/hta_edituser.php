@@ -50,8 +50,8 @@ getFields($fields);
 <input type="text" style="display: none" id="fakeUsername" name="fakeUsername" value="" />
 <input type="password" style="display: none" id="fakePassword" name="fakePassword" value="" />
 
-  <input type="hidden" name="dir" value="<?php echo $dir ?>">
-  <input type="hidden" name="user" value="<?php echo $user ?>">
+  <input type="hidden" name="dir" value="<?php ehe($dir); ?>">
+  <input type="hidden" name="user" value="<?php ehe($user); ?>">
   <table border="1" cellspacing="0" cellpadding="4" class='tedit'>
     <tr>
       <th><?php __("Folder"); ?></th>

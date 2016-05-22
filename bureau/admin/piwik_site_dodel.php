@@ -67,7 +67,7 @@ include_once('head.php');
 
   <form method="post" action="piwik_site_dodel.php" name="main" id="main">
   <?php csrf_get(); ?>
-    <input type="hidden" name="siteid"  value="<?php echo $siteid;?>" />
+    <input type="hidden" name="siteid"  value="<?php ehe($siteid);?>" />
     <input type="submit" class="inb" name="confirm_del" value="<?php __("Delete")?>" />
     <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='piwik_sitelist.php'" />
   </form>

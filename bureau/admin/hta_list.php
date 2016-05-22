@@ -73,11 +73,11 @@ $mem->show_help("hta_list2");
 for($i=0;$i<count($r);$i++){
 ?>
 	<tr  class="lst">
-		<td align="center"><input type="checkbox" class="inc" name="del_<?php echo $r[$i] ?>" value="<?php echo $r[$i] ?>" /></td>
+		<td align="center"><input type="checkbox" class="inc" name="del_<?php ehe($r[$i]); ?>" value="<?php ehe($r[$i]); ?>" /></td>
 		<td>
-<div class="ina lock"><a href="hta_edit.php?dir=<?php echo $r[$i]?>"><?php __("Edit login and passwords"); ?></a></div>
+<div class="ina lock"><a href="hta_edit.php?dir=<?php eue($r[$i]); ?>"><?php __("Edit login and passwords"); ?></a></div>
 </td>
-		<td><?php echo '<a href="bro_main.php?R='.urlencode($r[$i]).'">'.htmlspecialchars($r[$i]).'</a>'; ?></td>
+    <td><?php echo '<a href="bro_main.php?R='.ehe($r[$i],false).'">'.ehe($r[$i],false).'</a>'; ?></td>
 	</tr>
     <?php
 	}

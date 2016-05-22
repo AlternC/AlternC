@@ -633,6 +633,26 @@ function ehe($str, $affiche = TRUE) {
     return $retour;
 }
 
+/**
+  /* Echo the URLENCODED version of a value.
+ * Must be called when pre-filling fields values in URLS such as : 
+ * document.location='logs_tail.php?file=<?php eue($file); ?>
+ * Use the charset of the current language for transcription
+ * 
+ * @global string $charset
+ * @param string $str
+ * @param boolean $affiche
+ * @return string
+ */
+function eue($str, $affiche = TRUE) {
+    global $charset;
+    $retour = urlencode($str);
+    if ($affiche) {
+        echo $retour;
+    }
+    return $retour;
+}
+
 /* Get the Fields of the posted form from $_REQUEST or POST or GET
  * and check their type
  */

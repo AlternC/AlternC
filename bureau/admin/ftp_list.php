@@ -77,10 +77,10 @@ if (isset($error) && $error && !$noftp) {
 reset($r);
 while (list($key,$val)=each($r)) { ?>
 	<tr class="lst">
-		<td align="center"><input type="checkbox" class="inc" id="del_<?php echo $val["id"]; ?>" name="del_<?php echo $val["id"]; ?>" value="<?php echo $val["id"]; ?>" /></td>
-<td><div class="ina edit"><a href="ftp_edit.php?id=<?php echo $val["id"] ?>"><?php __("Edit"); ?></a></div></td>
+		<td align="center"><input type="checkbox" class="inc" id="del_<?php ehe($val["id"]); ?>" name="del_<?php ehe($val["id"]); ?>" value="<?php ehe($val["id"]); ?>" /></td>
+<td><div class="ina edit"><a href="ftp_edit.php?id=<?php eue($val["id"]); ?>"><?php __("Edit"); ?></a></div></td>
 
-		<td><a href='ftp_switch_enable.php?id=<?php echo $val['id'].'&amp;status='.( ($val['enabled'])?'0':'1' ) ;?>' onClick='return confirm("<?php __("Are you sure you want to change his status?"); ?>");'><?php 
+		<td><a href='ftp_switch_enable.php?id=<?php eue($val['id'],false); echo '&amp;status='.( ($val['enabled'])?'0':'1' ) ;?>' onClick='return confirm("<?php __("Are you sure you want to change his status?"); ?>");'><?php 
 if ( $val['enabled']) {
   echo "<img src='images/check_ok.png' alt=\""._("Enabled")."\"/>";
   echo "<span style='display:none;'>ENABLED</span>"; // for tablesorter
@@ -90,11 +90,11 @@ if ( $val['enabled']) {
 }
 
 ?></a></td>
-		<td><label for="del_<?php echo $val["id"]; ?>"><?php echo $val["login"] ?></label>
-                  <input type='hidden' name='names[<?php echo $val['id'];?>]' value='<?php echo $val["login"] ?>' />
+    <td><label for="del_<?php ehe($val["id"]); ?>"><?php ehe($val["login"]); ?></label>
+                  <input type="hidden" name="names[<?php ehe($val['id']); ?>]" value="<?php ehe($val["login"]); ?>" />
                 </td>
 		<td>
-                  <a href="bro_main.php?R=<?php echo urlencode(str_replace(getuserpath(),'', $val["dir"])); ?>"><code><?php echo str_replace(getuserpath(),'', $val["dir"]) ?></code></a>
+<a href="bro_main.php?R=<?php eue(str_replace(getuserpath(),'', $val["dir"])); ?>"><code><?php ehe(substr($val["dir"],strlen(getuserpath()) )); ?></code></a>
                   <?php if ( ! file_exists($val['dir'])) { echo " <span class=\"alerte\">"._("Directory not found")."</span>"; } ?>
                 </td>
 	</tr>

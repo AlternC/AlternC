@@ -71,7 +71,7 @@ if ($del_confirm!="y") {
  <?php csrf_get(); ?>
 <p>
 <input type="hidden" name="del_confirm" value="y" />
-<input type="hidden" name="domain" value="<?php echo $domain ?>" />
+<input type="hidden" name="domain" value="<?php ehe($domain); ?>" />
  <input type="submit" class="inb ok" name="submit" value="<?php __("Yes, delete this domain name"); ?>" />
  <input type="button" class="inb cancel" name="non" value="<?php __("No, don't delete this domain name"); ?>" onclick="history.back()" />
 </form>

@@ -70,7 +70,7 @@ if (is_array($r)) {
 <tr>
 	<th><label><?php __("Do MySQL backup?"); ?></label></th>
 	<td>
-        <input type="hidden" name="id" value="<?php echo $id; ?>" />
+        <input type="hidden" name="id" value="<?php ehe($id); ?>" />
         <input type="radio" class="inc" id="bck_mode0" name="bck_mode" value="0"<?php cbox($r["bck"]==0); ?>/><label for="bck_mode0"><?php __("No backup"); ?></label><br />
 	<input type="radio" class="inc" id="bck_mode1" name="bck_mode" value="1"<?php cbox($r["bck"]==1); ?>/><label for="bck_mode1"><?php __("Weekly backup"); ?></label><br />
 	<input type="radio" class="inc" id="bck_mode2" name="bck_mode" value="2"<?php cbox($r["bck"]==2); ?>/><label for="bck_mode2"><?php __("Daily backup"); ?></label><br />
@@ -99,7 +99,7 @@ if (is_array($r)) {
 </tr>
 <tr>
 	<th><label for="bck_dir"><?php __("In which folder do you want to store the backups?"); ?></label></th>
-	<td><input type="text" class="int" name="bck_dir" id="bck_dir" size="30" maxlength="255" value="<?php @ehe($r["dir"]); ?>" />
+	<td><input type="text" class="int" name="bck_dir" id="bck_dir" size="30" maxlength="255" value="<?php ehe($r["dir"]); ?>" />
 	<?php display_browser( isset($r["dir"])?$r["dir"]:"" , "bck_dir" ); ?>
 </td>
 </tr>

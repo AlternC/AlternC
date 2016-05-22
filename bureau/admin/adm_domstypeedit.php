@@ -69,7 +69,7 @@ if (isset($error_edit) && $error_edit) {
 
 <form action="adm_domstypedoedit.php" method="post" name="main" id="main">
    <?php csrf_get(); ?>
-    <input type="hidden" name="name" value="<?php echo $d['name']; ?>" />
+    <input type="hidden" name="name" value="<?php ehe($d['name']); ?>" />
     <table class="tedit">
       <tr>
             <th><?php __("Name");?></th>
@@ -77,7 +77,7 @@ if (isset($error_edit) && $error_edit) {
       </tr>
       <tr>
             <th><?php __("Description");?></th>
-            <td><input name="description" type="text" size="30" value="<?php echo $d['description']; ?>" /></td>
+            <td><input name="description" type="text" size="30" value="<?php ehe($d['description']); ?>" /></td>
       </tr>
 	    <tr>
             <th><?php __("Target type");?></th>
@@ -91,11 +91,11 @@ if (isset($error_edit) && $error_edit) {
       </tr>
 	    <tr>
             <th><?php __("Entry");?></th>
-            <td><input name="entry" type="text" size="30" value="<?php echo $d['entry']; ?>" /></td>
+            <td><input name="entry" type="text" size="30" value="<?php ehe($d['entry']); ?>" /></td>
       </tr>
 	    <tr>
           	<th><?php __("Compatibility");?><br /><small><?php __("Enter comma-separated name of other types"); ?></small></th>
-            <td><input name="compatibility" type="text" size="15" value="<?php echo $d['compatibility']; ?>" /></td>
+            <td><input name="compatibility" type="text" size="15" value="<?php ehe($d['compatibility']); ?>" /></td>
       </tr>
 	    <tr>
             <th><?php __("Enabled");?></th>
