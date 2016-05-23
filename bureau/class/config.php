@@ -180,14 +180,15 @@ if ((variable_get('force_https', '0', "This variable is set to 0 (default) if us
 
 // CHECK CSRF for ALL POSTS : 
 // you MUST add csrf_get(); after ALL <form method="post"> in AlternC !
-if (count($_POST)) {
+
+$fatalcsrf=false;
+if (count($_POST) && !defined("NOCSRF")) {
   if (csrf_check()<=0) {
     $error=$err->errstr();
-    require_once("main.php");
-    exit();
+    // We will trigger the error LATER in the code => need initialization of classes
+    $fatalcsrf=true;
   }
 }
-
 
 /* Check the User identity (if required) */
 if (!defined('NOCHECK')) {
@@ -238,3 +239,9 @@ if ((variable_get('sql_max_username_length', NULL)==NULL)||(variable_get('sql_ma
     }
 
 }
+
+if ($fatalcsrf) {
+    require_once("main.php");
+    exit();
+}
+

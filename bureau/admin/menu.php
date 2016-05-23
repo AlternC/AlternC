@@ -76,7 +76,8 @@ foreach ($obj_menu as $k => $m ) {
   echo "  </a>\n";
 
   if (!empty($m['links'])) {
-    echo "<div class='menu-content' id='menu-$k'>";
+  if ( $m['visibility']) $visible=""; else $visible="style=\"display: none\"";
+    echo "<div class='menu-content' id='menu-$k' $visible >";
     echo "  <ul>";
     foreach( $m['links'] as $l ) {
       if ( $l['txt'] == 'progressbar' ) {
@@ -101,7 +102,6 @@ foreach ($obj_menu as $k => $m ) {
     echo "</div>";
   }
   echo "</div>";
-  if (! $m['visibility']) echo "<script type='text/javascript'>menu_toggle('menu-$k');</script>\n";
 
 }
 
