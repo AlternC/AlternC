@@ -31,7 +31,7 @@ require_once("../class/config.php");
 include_once("head.php");
 
 $fields = array (
-	"dir"      => array ("post", "string", ""),
+	"dir"      => array ("request", "string", ""),
 );
 getFields($fields);
 

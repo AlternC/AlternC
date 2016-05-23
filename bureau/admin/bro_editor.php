@@ -30,12 +30,12 @@
 require_once("../class/config.php");
 
 $fields = array (
-	"editfile"    		=> array ("post", "string", ""),
+	"editfile"    		=> array ("request", "string", ""),
 	"texte"    		=> array ("post", "string", ""),
 	"save"    		=> array ("post", "string", ""),
 	"saveret"    		=> array ("post", "string", ""),
 	"cancel"    		=> array ("post", "string", ""),
-	"R"	    		=> array ("post", "string", ""),
+	"R"	    		=> array ("request", "string", ""),
 );
 getFields($fields);
 
@@ -72,7 +72,7 @@ include_once("head.php");
 ?>
 <p>
 <?php if (isset($error) && $error) echo "<p class=\"alert alert-danger\">$error</p>"; ?>
-<h3><?php echo _("File editing")." <code>$R/<b>$editfile</b></code><br />"; ?></h3>
+<h3><?php echo _("File editing")." <code>".ehe($R,false)."/<b>".ehe($editfile,false)."</b></code><br />"; ?></h3>
 </p>
 
 <?php
@@ -106,7 +106,7 @@ echo "<pre class='prettyprint' id='file_content_view' >$content</pre>";
 <br/>
 <?php if (!empty($error)) echo "<p class=\"alert alert-danger\">".$error."</p>"; ?>
 	<input type="hidden" name="editfile" value="<?php ehe($editfile); ?>" />
-	<input type="hidden" name="R" value="<?php echo ehe($R); ?>" />
+	<input type="hidden" name="R" value="<?php ehe($R); ?>" />
 
 	<input type="submit" class="inb" value="<?php __("Save"); ?>" name="save" />
 	<input type="submit" class="inb" value="<?php __("Save &amp; Quit"); ?>" name="saveret" />

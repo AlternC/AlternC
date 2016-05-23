@@ -141,9 +141,9 @@ if ($errbrowsefold) {
     <form method="post" id="main" name="main" action="browseforfolder2.php">
        <?php csrf_get(); ?>
     <p>
-    <input type="hidden" name="caller" value="<?php echo ehe($caller); ?>" />
-    <input type="hidden" name="lastcurdir" value="<?php echo ehe($curdir); ?>" />
-    <input type="hidden" name="bid" value="<?php echo ehe($bid); ?>" />
+    <input type="hidden" name="caller" value="<?php ehe($caller); ?>" />
+    <input type="hidden" name="lastcurdir" value="<?php ehe($curdir); ?>" />
+    <input type="hidden" name="bid" value="<?php ehe($bid); ?>" />
 
     <input type="text" class="int" id="file" name="file" size="20" value="<?php ehe($file); ?>" /><br />
 

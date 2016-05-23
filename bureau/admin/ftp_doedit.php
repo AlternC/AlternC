@@ -68,7 +68,11 @@ if (!$r) {
   include_once("ftp_edit.php");
   exit();
 } else {
+if ($create) {
+  $error=_("The ftp account has been successfully created");
+} else {
   $error=_("The ftp account has been successfully saved");
+}
   include("ftp_list.php");
   exit();
 }

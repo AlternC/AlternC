@@ -36,7 +36,7 @@ require_once("../class/config.php");
  */
 
 $fields = array (
-        "id"                => array ("post", "integer", ""),
+        "id"                => array ("get", "integer", ""),
 );
 getFields($fields);
 

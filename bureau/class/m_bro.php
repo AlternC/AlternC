@@ -275,7 +275,7 @@ class m_bro {
         if ($db->num_rows() == 0) {
             $db->query("INSERT INTO browser (editsizex, editsizey, listmode, showicons, downfmt, createfile, showtype, uid, editor_font, editor_size, golastdir) VALUES (70, 21, 0, 0, 0, 0, 0, ?,'Arial, Helvetica, Sans-serif','12px',1);", array(intval($cuid)));
         }
-        $db->query("UPDATE browser SET editsizex= ?, editsizey= ?, listmode= ?, showicons= ?, downfmt= ?, createfile= ?, showtype= ?, editor_font= ?, editor_size= e, golastdir= ? WHERE uid= ?;", array($editsizex, $editsizey, $downfmt, $createfile, $showtype, $editor_font, $editor_size, $golastdir, intval($cuid)));
+        $db->query("UPDATE browser SET editsizex= ?, editsizey= ?, listmode= ?, showicons= ?, downfmt= ?, createfile= ?, showtype= ?, editor_font= ?, editor_size= ?, golastdir= ? WHERE uid= ?;", array($editsizex, $editsizey, $listmode, $showicons, $downfmt, $createfile, $showtype, $editor_font, $editor_size, $golastdir, intval($cuid)));
         return true;
     }
 
@@ -1070,9 +1070,10 @@ class m_bro {
         header("Content-Disposition: attachment; filename=" . $mem->user["login"] . ".zip");
         header("Content-Type: application/x-zip");
         header("Content-Transfer-Encoding: binary");
-        $d = escapeshellarg($this->convertabsolute($dir, false));
+        $d = $this->convertabsolute($dir, false);
         set_time_limit(0);
-        passthru("/usr/bin/zip -r - $d");
+	chdir(dirname($d));
+        passthru("/usr/bin/zip -r - ".escapeshellarg(basename($d)));
     }
 
     /**
