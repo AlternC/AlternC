@@ -105,7 +105,7 @@ if (!empty($formu) && $formu) {
             <ul>
             <?php foreach($d as $editfile){ ?>
           <li> <?php ehe($editfile); ?></li>
-              <input type="hidden" name="d[]" value="<?php ehe($editfile)); ?>" />
+              <input type="hidden" name="d[]" value="<?php ehe($editfile); ?>" />
             <?php } ?>
             </ul>
                 <blockquote>

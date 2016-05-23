@@ -80,7 +80,7 @@ $list_ip = $authip->list_ip_whitelist();
         } else {
           $txt = "Unknow IP";
         }
-        echo "<tr class="lst"><td>$txt</td><td>{$i['ip_human']}</td><td>{$i['infos']}</td>";
+        echo "<tr class=\"lst\"><td>$txt</td><td>{$i['ip_human']}</td><td>{$i['infos']}</td>";
         ?>
         <td><div class="ina edit"><a href="javascript:edit_ip(<?php echo "'".urlencode($i['id'])."','".urlencode($i['ip_human'])."','".urlencode($i['infos'])."'"; ?>);"><?php __("Edit"); ?></a></div></td>
         <td><div class="ina delete"><a href="adm_authip_whitelist.php?delete_id=<?php eue($i["id"]); ?>"><?php __("Delete"); ?></a></div></td>
