@@ -26,9 +26,9 @@ require_once("../class/config.php");
 
 
 $fields = array (
-	"d"    => array ("request", "array", ""),
-	"domain_id"  => array ("request", "integer", ""),
-	"confirm" => array("request", "string", "n"),
+	"d"    => array ("post", "array", ""),
+	"domain_id"  => array ("post", "integer", ""),
+	"confirm" => array("post", "string", "n"),
 );
 getFields($fields);
 

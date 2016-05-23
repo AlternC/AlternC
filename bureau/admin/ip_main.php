@@ -4,9 +4,9 @@ include_once("head.php");
 
 
 $fields = array (
-  "delete_id"           => array ("get",  "integer", ""),
-  "delete_affected_id"  => array ("get",  "integer", ""),
-  "id"                  => array ("post", "integer", 0),
+  "delete_id"           => array ("request",  "integer", ""),
+  "delete_affected_id"  => array ("request",  "integer", ""),
+  "id"                  => array ("request", "integer", 0),
   "ipsub"               => array ("post", "string", ""),
   "infos"               => array ("post", "string" ,""),
   "s_ipsub"             => array ("post", "integer", ""),

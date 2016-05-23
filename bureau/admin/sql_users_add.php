@@ -31,9 +31,9 @@ require_once("../class/config.php");
 include_once("head.php");
 
 $fields = array (
-	"usern"     => array ("request", "string", ""),
-	"password"    => array ("request", "string", ""),
-	"passconf"    => array ("request", "string", ""),
+	"usern"     => array ("post", "string", ""),
+	"password"    => array ("post", "string", ""),
+	"passconf"    => array ("post", "string", ""),
 );
 getFields($fields);
 

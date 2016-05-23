@@ -32,8 +32,8 @@ require_once("../class/config.php");
 include_once("head.php");
 
 $fields = array (
-	"help_setting" 	=> array ("request", "string", ""),
-	"showhelp" 	=> array ("request", "integer", ""),
+	"help_setting" 	=> array ("post", "string", ""),
+	"showhelp" 	=> array ("post", "integer", ""),
 );
 getFields($fields);
 

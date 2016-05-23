@@ -30,7 +30,7 @@
 require_once("../class/config.php");
 
 $fields = array (
-	"admlist"    => array ("request", "string", ""),
+	"admlist"    => array ("post", "string", ""),
 );
 getFields($fields);
 

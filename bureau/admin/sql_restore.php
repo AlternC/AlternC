@@ -31,8 +31,8 @@ require_once("../class/config.php");
 include_once("head.php");
 
 $fields = array (
-	"id"           => array ("request", "string", ""),
-	"filename"     => array ("request", "string", ""),
+	"id"           => array ("post", "string", ""),
+	"filename"     => array ("post", "string", ""),
 );
 getFields($fields);
 

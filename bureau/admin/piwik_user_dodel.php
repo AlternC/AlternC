@@ -31,7 +31,7 @@ require_once("../class/config.php");
 
 $fields = array (
   "confirm_del"    	=> array ("post", "string", ""),
-  "login"    		=> array ("request", "string", ""),
+  "login"    		=> array ("post", "string", ""),
 );
 getFields($fields);
 

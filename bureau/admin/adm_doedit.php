@@ -39,18 +39,18 @@ if (!$admin->enabled) {
 $subadmin=variable_get("subadmin_restriction");
 
 $fields = array (
-	"uid" => array ("request", "integer", 0),
-	"enabled" => array ("request", "boolean", true),
-	"pass" => array ("request", "string", ""),
-	"passconf" => array ("request", "string", ""),
-	"canpass" => array ("request", "boolean", true),
-	"notes" => array ("request", "string", ""),
-	"nom" => array ("request", "string", ""),
-	"prenom" => array ("request", "string", ""),
-	"nmail" => array ("request", "string", ""),
-	"type" => array ("request", "string", ""),
-	"duration" => array ("request", "integer", 0),
-	"reset_quotas" => array ("request", "string", false),
+	"uid" => array ("post", "integer", 0),
+	"enabled" => array ("post", "boolean", true),
+	"pass" => array ("post", "string", ""),
+	"passconf" => array ("post", "string", ""),
+	"canpass" => array ("post", "boolean", true),
+	"notes" => array ("post", "string", ""),
+	"nom" => array ("post", "string", ""),
+	"prenom" => array ("post", "string", ""),
+	"nmail" => array ("post", "string", ""),
+	"type" => array ("post", "string", ""),
+	"duration" => array ("post", "integer", 0),
+	"reset_quotas" => array ("post", "string", false),
 );
 getFields($fields);
 

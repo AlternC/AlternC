@@ -29,9 +29,9 @@
 */
 require_once("../class/config.php");
 $fields = array (
-	"id"              => array ("request", "string", ""),
-	"password"        => array ("request", "string", ""),
-	"passwordconf"    => array ("request", "string", ""),
+	"id"              => array ("post", "string", ""),
+	"password"        => array ("post", "string", ""),
+	"passwordconf"    => array ("post", "string", ""),
 );
 getFields($fields);
 

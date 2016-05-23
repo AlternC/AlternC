@@ -3,10 +3,10 @@
 require_once("../class/config.php");
 
 $fields = array (
-	"mode"   => array ("get", "integer" ,0), 
-	"sd"     => array ("get", "integer" ,0), 
-	"usr"    => array ("get", "integer" ,0), 
-	"order"  => array ("get", "integer" ,0),
+	"mode"   => array ("request", "integer" ,0), 
+	"sd"     => array ("request", "integer" ,0), 
+	"usr"    => array ("request", "integer" ,0), 
+	"order"  => array ("request", "integer" ,0),
 );
 getFields($fields);
 

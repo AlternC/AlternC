@@ -31,9 +31,9 @@ require_once("../class/config.php");
 include_once("head.php");
 
 $fields = array (
-	"domain"      => array ("request", "string", ""),
+	"domain"      => array ("post", "string", ""),
 	"del_confirm" => array ("post",    "string", ""),
-	"del_cancel"  => array ("request", "string", ""),
+	"del_cancel"  => array ("post", "string", ""),
 );
 getFields($fields);
 

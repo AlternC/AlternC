@@ -3,7 +3,7 @@ require_once("../class/config.php");
 include_once("head.php");
 
 $fields = array (
-        "id"     => array ("request", "integer", ""),
+        "id"     => array ("post", "integer", ""),
         );
 getFields($fields);
 

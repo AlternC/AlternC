@@ -32,9 +32,9 @@ require_once("../class/config_nochk.php");
 include_once("head.php");
 
 $fields = array (
-	"usr" => array ("request", "integer", 0),
-	"cookie" => array ("request", "string", ""),
-	"cle" => array("request","string",""),
+	"usr" => array ("post", "integer", 0),
+	"cookie" => array ("post", "string", ""),
+	"cle" => array("post","string",""),
 );
 getFields($fields);
 

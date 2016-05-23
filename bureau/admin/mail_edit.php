@@ -26,13 +26,13 @@ require_once("../class/config.php");
 include_once("head.php");
 
 $fields = array (
-	"mail_id" =>array ("request","integer",""),
-	"pass" => array ("request","string",""),
-	"passconf" => array("request","string",""),
-	"quotamb" => array("request","integer",0),
-	"enabled" => array("request","boolean",true),
-	"islocal" => array("request","boolean",true),
-	"recipients" => array("request","string",""),
+	"mail_id" =>array ("post","integer",""),
+	"pass" => array ("post","string",""),
+	"passconf" => array("post","string",""),
+	"quotamb" => array("post","integer",0),
+	"enabled" => array("post","boolean",true),
+	"islocal" => array("post","boolean",true),
+	"recipients" => array("post","string",""),
 );
 getFields($fields);
 

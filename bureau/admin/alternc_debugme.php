@@ -3,7 +3,7 @@
 require_once("../class/config.php");
 
 $fields = array (
-  "enable" => array("request","string","0")
+  "enable" => array("post","string","0")
 );
 
 getFields($fields);

@@ -44,10 +44,10 @@ if ( ! variable_get('sql_allow_users_backups') ) {
 
 $fields = array (
 	"id"     => array ("request", "string", ""),
-	"bck_mode" => array ("request", "integer", 0),
-	"bck_history" => array ("request", "integer", 7),
-	"bck_gzip" => array ("request", "integer", 0),
-	"bck_dir" => array ("request", "string", "/"),
+	"bck_mode" => array ("post", "integer", 0),
+	"bck_history" => array ("post", "integer", 7),
+	"bck_gzip" => array ("post", "integer", 0),
+	"bck_dir" => array ("post", "string", "/"),
 	
 );
 getFields($fields);

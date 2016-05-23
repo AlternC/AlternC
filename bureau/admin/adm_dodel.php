@@ -35,8 +35,8 @@ if (!$admin->enabled) {
 }
 
 $fields = array (
-		 "accountList" => array ("request", "array", array()),
-		 "del_confirm" => array("request", "string", ""),
+		 "accountList" => array ("post", "array", array()),
+		 "del_confirm" => array("post", "string", ""),
 );
 getFields($fields);
 

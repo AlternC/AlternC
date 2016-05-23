@@ -38,15 +38,15 @@ if (!$admin->enabled) {
 }
 
 $fields = array (
-	"canpass"    => array ("request", "integer", 1),
-	"login"      => array ("request", "string", null),
-	"pass"       => array ("request", "string", null),
-	"passconf"   => array ("request", "string", null),
-	"notes"      => array ("request", "string", null),
-	"nom"        => array ("request", "string", null),
-	"prenom"     => array ("request", "string", null),
-	"nmail"      => array ("request", "string", null),
-	"create_dom" => array ("request", "integer", 0),
+	"canpass"    => array ("post", "integer", 1),
+	"login"      => array ("post", "string", null),
+	"pass"       => array ("post", "string", null),
+	"passconf"   => array ("post", "string", null),
+	"notes"      => array ("post", "string", null),
+	"nom"        => array ("post", "string", null),
+	"prenom"     => array ("post", "string", null),
+	"nmail"      => array ("post", "string", null),
+	"create_dom" => array ("post", "integer", 0),
 );
 getFields($fields);
 

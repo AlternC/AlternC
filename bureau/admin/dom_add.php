@@ -32,10 +32,10 @@ require_once("../class/config.php");
 include_once("head.php");
 
 $fields = array (
-	"newdomain"   => array ("request", "string", ""),
-	"yndns"   => array ("request", "integer", 0),
-	"newisslave"   => array ("request", "integer", 0),
-	"slavedom"   => array ("request", "string", ""),
+	"newdomain"   => array ("post", "string", ""),
+	"yndns"   => array ("post", "integer", 0),
+	"newisslave"   => array ("post", "integer", 0),
+	"slavedom"   => array ("post", "string", ""),
 );
 getFields($fields);
 

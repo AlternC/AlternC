@@ -31,7 +31,7 @@ require_once("../class/config.php");
 
 
 $fields = array (
-	"dir"     => array ("request", "string", ""),
+	"dir"     => array ("post", "string", ""),
 );
 getFields($fields);
 

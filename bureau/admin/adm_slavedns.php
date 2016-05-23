@@ -36,12 +36,12 @@ if (!$admin->enabled) {
 
 $fields = array (
     "delaccount"   => array ("request", "string", ""),
-    "newlogin"   => array ("request", "string", ""),
-    "newpass"    => array ("request", "string", ""),
+    "newlogin"   => array ("post", "string", ""),
+    "newpass"    => array ("post", "string", ""),
 
     "delip"   => array ("request", "string", ""),
-    "newip"    => array ("request", "string", ""),
-    "newclass" => array ("request", "string", "32"),
+    "newip"    => array ("post", "string", ""),
+    "newclass" => array ("post", "string", "32"),
     );
 getFields($fields);
 

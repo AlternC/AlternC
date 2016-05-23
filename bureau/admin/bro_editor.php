@@ -30,12 +30,12 @@
 require_once("../class/config.php");
 
 $fields = array (
-	"editfile"    		=> array ("request", "string", ""),
+	"editfile"    		=> array ("post", "string", ""),
 	"texte"    		=> array ("post", "string", ""),
 	"save"    		=> array ("post", "string", ""),
 	"saveret"    		=> array ("post", "string", ""),
 	"cancel"    		=> array ("post", "string", ""),
-	"R"	    		=> array ("request", "string", ""),
+	"R"	    		=> array ("post", "string", ""),
 );
 getFields($fields);
 

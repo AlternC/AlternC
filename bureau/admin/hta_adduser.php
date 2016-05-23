@@ -32,7 +32,7 @@ include_once("head.php");
 
 $fields = array (
 	"dir"      => array ("request", "string", ""),
-	"user"     => array ("request", "string", ""),
+	"user"     => array ("post", "string", ""),
 );
 getFields($fields);
 

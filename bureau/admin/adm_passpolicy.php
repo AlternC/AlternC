@@ -33,11 +33,11 @@ if (!$admin->enabled) {
 
 $fields = array (
 	"edit"   => array ("request", "string", ""),
-	"doedit"   => array ("request", "string", ""),
-	"minsize"    => array ("request", "integer", "0"),
-	"maxsize" => array ("request", "integer", "64"),
-	"classcount" => array ("request", "integer", "0"),
-	"allowlogin" => array ("request", "integer", "0"),
+	"doedit"   => array ("post", "string", ""),
+	"minsize"    => array ("post", "integer", "0"),
+	"maxsize" => array ("post", "integer", "64"),
+	"classcount" => array ("post", "integer", "0"),
+	"allowlogin" => array ("post", "integer", "0"),
 );
 
 getFields($fields);

@@ -33,7 +33,7 @@ include_once("piwik_utils.php");
 
 $fields = array (
         "site_id"             => array ("request", "integer", -1),  // alternc ID of the piwik site
-	"right"               => array ("post",    "array", FALSE), // array of rights associated foreach user of $site_id
+	"right"               => array ("request",    "array", FALSE), // array of rights associated foreach user of $site_id
 );
 getFields($fields);
 

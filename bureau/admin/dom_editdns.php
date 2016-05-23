@@ -31,10 +31,10 @@ require_once("../class/config.php");
 include_once("head.php");
 
 $fields = array (
-	"domain"    => array ("request", "string", ""),
-	"dns"       => array ("request", "integer", 1),
-	"email"     => array ("request", "integer", 1),
-	"ttl"       => array ("request", "integer", 86400),
+	"domain"    => array ("post", "string", ""),
+	"dns"       => array ("post", "integer", 1),
+	"email"     => array ("post", "integer", 1),
+	"ttl"       => array ("post", "integer", 86400),
 );
 getFields($fields);
 

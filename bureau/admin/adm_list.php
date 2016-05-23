@@ -38,8 +38,8 @@ $fields = array(
     "show" => array("request", "string", ""),
     "creator" => array("request", "integer", 0),
     "short" => array("request", "integer", -1),
-    "pattern" => array("post", "string", "*"),
-    "pattern_type" => array("post", "string", "login"),
+    "pattern" => array("request", "string", "*"),
+    "pattern_type" => array("request", "string", "login"),
 );
 getFields($fields);
 

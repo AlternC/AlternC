@@ -30,17 +30,17 @@
 require_once("../class/config.php");
 
 $fields = array (
-	"domain"    => array ("request", "string", ""),
-	"sub"       => array ("request", "string", ""),
-	"type"      => array ("request", "string", $dom->type_local),
-  	"sub_domain_id" => array ("request", "integer", ""),
+	"domain"    => array ("post", "string", ""),
+	"sub"       => array ("post", "string", ""),
+	"type"      => array ("post", "string", $dom->type_local),
+  	"sub_domain_id" => array ("post", "integer", ""),
 );
 getFields($fields);
 
 // here we get a dynamic-named value
 $dynamicvar="t_$type";
 $fields = array (
-  "$dynamicvar"   => array ("request", "string", ""),
+  "$dynamicvar"   => array ("post", "string", ""),
 );
 getFields($fields);
 $value=$$dynamicvar;

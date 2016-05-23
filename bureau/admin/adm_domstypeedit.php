@@ -37,16 +37,16 @@ include_once("head.php");
 
 $fields = array (
     "name"          => array ("request", "string", ""),
-    "description"   => array ("request", "string", ""),
-    "target"        => array ("request", "string", ""),
-    "entry"         => array ("request", "string", ""),
-    "compatibility" => array ("request", "string", ""),
-    "enable"        => array ("request", "string", ""),
-    "only_dns"      => array ("request", "boolean", ""),
-    "need_dns"      => array ("request", "boolean", ""),
-    "advanced"      => array ("request", "boolean", ""),
-    "create_tmpdir"      => array ("request", "boolean", ""),
-    "create_targetdir"      => array ("request", "boolean", ""),
+    "description"   => array ("post", "string", ""),
+    "target"        => array ("post", "string", ""),
+    "entry"         => array ("post", "string", ""),
+    "compatibility" => array ("post", "string", ""),
+    "enable"        => array ("post", "string", ""),
+    "only_dns"      => array ("post", "boolean", ""),
+    "need_dns"      => array ("post", "boolean", ""),
+    "advanced"      => array ("post", "boolean", ""),
+    "create_tmpdir"      => array ("post", "boolean", ""),
+    "create_targetdir"      => array ("post", "boolean", ""),
 );
 getFields($fields);
 

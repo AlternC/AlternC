@@ -26,7 +26,7 @@ require_once("../class/config.php");
 include_once("head.php");
 
 $fields = array (
-	"domain_id" => array("get","integer",null),
+	"domain_id" => array("request","integer",null),
 	"target_type" => array("post", "string", null),
 	"target_mail" => array("post", "string", null),
 	"target_domain" => array("post", "string", null),

@@ -25,7 +25,7 @@
 require_once("../class/config.php");
 
 $fields = array (
-	"mail_id"    => array ("request", "integer", ""),
+	"mail_id"    => array ("post", "integer", ""),
 );
 getFields($fields);
 

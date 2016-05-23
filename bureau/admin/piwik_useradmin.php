@@ -31,7 +31,7 @@ require_once("../class/config.php");
 include_once("head.php");
 
 $fields = array (
-	"user_name"	      => array ("request", "string", FALSE),
+	"user_name"	      => array ("post", "string", FALSE),
 	"site_id"	      => array ("post", "integer", -1),
 	"right"		      => array ("post", "string", FALSE),
 );

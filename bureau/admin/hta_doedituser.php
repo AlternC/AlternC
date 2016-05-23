@@ -31,10 +31,10 @@ require_once("../class/config.php");
 include_once("head.php");
 
 $fields = array (
-	"user"         => array ("request", "string", ""),
-	"dir"          => array ("request", "string", ""),
-	"newpass"      => array ("request", "string", ""),
-	"newpassconf"  => array ("request", "string", ""),
+	"user"         => array ("post", "string", ""),
+	"dir"          => array ("post", "string", ""),
+	"newpass"      => array ("post", "string", ""),
+	"newpassconf"  => array ("post", "string", ""),
 );
 getFields($fields);
 

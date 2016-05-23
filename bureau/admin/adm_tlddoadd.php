@@ -35,8 +35,8 @@ if (!$admin->enabled) {
 }
 
 $fields = array (
-        "tld"    => array ("request", "string", ""),
-        "mode"   => array ("request", "integer", ""),
+        "tld"    => array ("post", "string", ""),
+        "mode"   => array ("post", "integer", ""),
 );
 getFields($fields);
 

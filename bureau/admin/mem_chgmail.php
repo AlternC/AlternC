@@ -30,7 +30,7 @@
 require_once("../class/config.php");
 
 $fields = array (
-	"newmail"    => array ("request", "string", ""),
+	"newmail"    => array ("post", "string", ""),
 );
 getFields($fields);
 
