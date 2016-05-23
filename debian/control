@@ -45,6 +45,7 @@ Depends: debianutils (>= 1.13.1)
        , dovecot-pop3d (>= 1:1.2.15)
        , vlogger
        , mailutils | mailx
+       , zip
        , incron
        , cron
        , opendkim
@@ -71,7 +72,6 @@ Suggests: alternc-awstats
        , spamassassin
        , pop-before-smtp
        , magpierss
-       , zip
        , ncompress
        , alternc-squirrelmail
        , alternc-roundcube
