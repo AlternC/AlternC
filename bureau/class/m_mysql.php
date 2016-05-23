@@ -589,7 +589,8 @@ class m_mysql {
         $this->dbus->query("Select * from mysql.db where Db= ? and User!= ? ;", array($dbn, $cuid."_myadm"));
 
         if (!$db->num_rows()) {
-            return $r;
+            $err->raise("mysql",_("Database not found"));
+            return false;
         }
         while ($db->next_record()) {
             $variable = $db->Record;
@@ -652,12 +653,18 @@ class m_mysql {
                 }
             }
         } //endwhile
+        if (!count($r)) {
+            $err->raise("mysql",_("Database not found"));
+            return false;
+        }
         if (!$db->query("SELECT name,password from dbusers where name= ? ;", array($dbu))) {
-            return $r;
+            $err->raise("mysql",_("Database not found"));
+            return false;
         }
 
         if (!$db->num_rows()) {
-            return $r;
+            $err->raise("mysql",_("Database not found"));
+            return false;
         }
         $db->next_record();
         $r['user'] = $db->f('name');

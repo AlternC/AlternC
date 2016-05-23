@@ -38,7 +38,10 @@ if (!$r=$mysql->get_dblist()) {
 	$error=$err->errstr();
 }
 
-
+$r=$mysql->get_defaultsparam($dbname);
+if (!$r) {
+	$error=$err->errstr();
+}
 
 ?>
 <h3><?php __("MySQL Databases"); ?></h3>
@@ -47,8 +50,9 @@ if (!$r=$mysql->get_dblist()) {
 <?php
 	if (isset($error) && $error) {
 		echo "<p class=\"alert alert-danger\">$error</p><p>&nbsp;</p>";
-	}
-$r=$mysql->get_defaultsparam($dbname);
+        include_once("foot.php"); 
+        exit();
+    }
 ?>
 <p><?php __("Your current connection settings are"); ?> : </p>
 <table class="tedit">
@@ -61,7 +65,7 @@ $r=$mysql->get_defaultsparam($dbname);
 	</tr>
 	<tr>
 		<th><?php __("Database"); ?></th>
-		<td><code><?php echo $dbname; ?></code></td>
+<td><code><?php ehe($dbname); ?></code></td>
 	</tr>
 <?php
 if(isset($r['user'])){
