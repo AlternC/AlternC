@@ -588,82 +588,82 @@ class m_mysql {
         $dbn = str_replace('_', '\_', $dbn);
         $this->dbus->query("Select * from mysql.db where Db= ? and User!= ? ;", array($dbn, $cuid."_myadm"));
 
-        if (!$db->num_rows()) {
+        if (!$this->dbus->num_rows()) {
             $err->raise("mysql",_("Database not found"));
             return false;
         }
-        while ($db->next_record()) {
-            $variable = $db->Record;
+        while ($this->dbus->next_record()) {
+            $variable = $this->dbus->Record;
             if ($variable['User'] == $dbu) {
-                $r['Host'] = $db->f('Host');
+                $r['Host'] = $this->dbus->f('Host');
 
-                if ($db->f('Select_priv') !== "Y") {
+                if ($this->dbus->f('Select_priv') !== "Y") {
                     return $r;
                 }
-                if ($db->f('Insert_priv') !== "Y") {
+                if ($this->dbus->f('Insert_priv') !== "Y") {
                     return $r;
                 }
-                if ($db->f('Update_priv') !== "Y") {
+                if ($this->dbus->f('Update_priv') !== "Y") {
                     return $r;
                 }
-                if ($db->f('Delete_priv') !== "Y") {
+                if ($this->dbus->f('Delete_priv') !== "Y") {
                     return $r;
                 }
-                if ($db->f('Create_priv') !== "Y") {
+                if ($this->dbus->f('Create_priv') !== "Y") {
                     return $r;
                 }
-                if ($db->f('Drop_priv') !== "Y") {
+                if ($this->dbus->f('Drop_priv') !== "Y") {
                     return $r;
                 }
-                if ($db->f('References_priv') !== "Y") {
+                if ($this->dbus->f('References_priv') !== "Y") {
                     return $r;
                 }
-                if ($db->f('Index_priv') !== "Y") {
+                if ($this->dbus->f('Index_priv') !== "Y") {
                     return $r;
                 }
-                if ($db->f('Alter_priv') !== "Y") {
+                if ($this->dbus->f('Alter_priv') !== "Y") {
                     return $r;
                 }
-                if ($db->f('Create_tmp_table_priv') !== "Y") {
+                if ($this->dbus->f('Create_tmp_table_priv') !== "Y") {
                     return $r;
                 }
-                if ($db->f('Lock_tables_priv') !== "Y") {
+                if ($this->dbus->f('Lock_tables_priv') !== "Y") {
                     return $r;
                 }
-                if ($db->f('Create_view_priv') !== "Y") {
+                if ($this->dbus->f('Create_view_priv') !== "Y") {
                     return $r;
                 }
-                if ($db->f('Show_view_priv') !== "Y") {
+                if ($this->dbus->f('Show_view_priv') !== "Y") {
                     return $r;
                 }
-                if ($db->f('Create_routine_priv') !== "Y") {
+                if ($this->dbus->f('Create_routine_priv') !== "Y") {
                     return $r;
                 }
-                if ($db->f('Alter_routine_priv') !== "Y") {
+                if ($this->dbus->f('Alter_routine_priv') !== "Y") {
                     return $r;
                 }
-                if ($db->f('Execute_priv') !== "Y") {
+                if ($this->dbus->f('Execute_priv') !== "Y") {
                     return $r;
                 }
-                if ($db->f('Event_priv') !== "Y") {
+                if ($this->dbus->f('Event_priv') !== "Y") {
                     return $r;
                 }
-                if ($db->f('Trigger_priv') !== "Y") {
+                if ($this->dbus->f('Trigger_priv') !== "Y") {
                     return $r;
                 }
             }
         } //endwhile
         if (!count($r)) {
-            $err->raise("mysql",_("Database not found"));
+            $err->raise("mysql",_("Database not found")." (2)");
             return false;
         }
         if (!$db->query("SELECT name,password from dbusers where name= ? ;", array($dbu))) {
-            $err->raise("mysql",_("Database not found"));
+            $err->raise("mysql",_("Database not found")." (3)");
             return false;
         }
 
         if (!$db->num_rows()) {
-            $err->raise("mysql",_("Database not found"));
+            $err->raise("mysql",_("Database not found")." (4)");
             return false;
         }
         $db->next_record();

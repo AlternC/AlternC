@@ -26,7 +26,7 @@ require_once("../class/config.php");
 include_once("head.php");
 
 $fields = array (
-	"mail_id" =>array ("post","integer",""),
+	"mail_id" =>array ("request","integer",""),
 	"pass" => array ("post","string",""),
 	"passconf" => array("post","string",""),
 	"quotamb" => array("post","integer",0),

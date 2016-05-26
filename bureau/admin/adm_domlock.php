@@ -35,7 +35,7 @@ if (!$admin->enabled) {
 }
 
 $fields = array (
-	"domain"    => array ("post", "string", ""),
+	"domain"    => array ("request", "string", ""),
 );
 getFields($fields);
 

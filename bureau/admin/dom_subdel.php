@@ -31,7 +31,7 @@ require_once("../class/config.php");
 include_once("head.php");
 
 $fields = array (
-  "sub_domain_id"       => array ("post", "integer", ""),
+  "sub_domain_id"       => array ("request", "integer", ""),
 );
 getFields($fields);
 

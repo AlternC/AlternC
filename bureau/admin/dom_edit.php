@@ -301,6 +301,11 @@ if (!$r['noerase']) {
 	</form>
 
 </div>
+																					<?php } else { ?>
+<div id="tabsdom-params">  
+   <p class="alert alert-info"><?php __("This domain is locked, only a server administrator can unlock it."); ?></p>
+</div>
+ <?php } ?>
 
 <?php if ( $r["dns"] ) { ?>
 <div id="tabsdom-view">
@@ -308,14 +313,21 @@ if (!$r['noerase']) {
 <?php __("Here is the actual DNS zone running on the AlternC server. If you just made some changes, you have to wait for it."); ?>
 </p>
 
+<div>
 <pre><span class="petit" id="divdumpdns">
 <a target="_blank" href="dom_dnsdump.php?domain=<?php echo urlencode($domain) ?>"><?php __("Click here to view the dump");?></a>
 </span>
 </pre>
-<a href="javascript:force_update_dns_content();"><?php __("Refresh");?></a>
+</div>
+
+<p>&nbsp;</p>
+<p><a class="inb" href="javascript:force_update_dns_content();"><?php __("Refresh");?></a></p>
 
 </div>
 <?php } // if dns ?>
+    <?php
+if (!$r['noerase']) {
+?>
 
 <div id="tabsdom-delete">
   <h3><?php __("Domain removal"); ?></h3>
@@ -327,14 +339,14 @@ if (!$r['noerase']) {
     </p>
   </form>
 </div> <!-- tabsdom-delete -->
-</div> <!-- tabsdom -->
 <?php } else { // noerase 
   ?>
-<div id="tabsdom-params">  
+<div id="tabsdom-delete">  
    <p class="alert alert-info"><?php __("This domain is locked, only a server administrator can unlock it."); ?></p>
 </div>
     <?php
 } ?>
+</div> <!-- tabsdom -->
 <script type="text/javascript">
 //document.forms['main'].sub.focus(); // not with tabs
 

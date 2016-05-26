@@ -32,9 +32,9 @@ require_once("../class/config_nochk.php");
 include_once("head.php");
 
 $fields = array (
-	"usr" => array ("post", "integer", 0),
-	"cookie" => array ("post", "string", ""),
-	"cle" => array("post","string",""),
+	"usr" => array ("request", "integer", 0),
+	"cookie" => array ("request", "string", ""),
+	"cle" => array("request","string",""),
 );
 getFields($fields);
 
@@ -48,6 +48,7 @@ if (isset($error) && $error) {
 	}
 ?>
 <form method="post" action="mem_cm2.php">
+  <?php csrf_get(); ?>
 	<table border="1" cellspacing="0" cellpadding="4">
 		<tr><td colspan="2"><input type="hidden" name="usr" value="<?php ehe($usr); ?>" /><input type="hidden" name="cookie" value="<?php ehe($cookie); ?>" />
 <?php __("Change the email of the account"); ?><br />

@@ -5230,7 +5230,7 @@ msgstr ""
 
 #: ../class/m_mysql.php:304
 msgid "An error occured. The database could not be created"
-msgstr "Une erreur est survenur, la base de données n'a pas pu être créée"
+msgstr "Une erreur est survenue, la base de données n'a pas pu être créée"
 
 #: ../class/m_mysql.php:322
 msgid "The database was not found. I can't delete it"

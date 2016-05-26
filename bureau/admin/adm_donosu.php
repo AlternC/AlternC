@@ -35,7 +35,7 @@ if (!$admin->enabled) {
 }
 
 $fields = array (
-	"uid"    => array ("post", "integer", 0),
+	"uid"    => array ("request", "integer", 0),
 );
 getFields($fields);
 
