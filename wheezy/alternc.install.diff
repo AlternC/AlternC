@@ -1,5 +1,5 @@
---- alternc.install	2014-03-28 17:30:31.378712101 +0100
-+++ alternc.install.wheezy	2014-04-03 10:57:57.840148474 +0200
+--- alternc.install.squeeze	2016-05-27 14:25:52.239693435 +0200
++++ alternc.install	2016-05-27 14:24:05.908974433 +0200
 @@ -79,7 +79,7 @@
  fi
  
@@ -9,7 +9,7 @@
  fi
  
  INSTALLED_CONFIG_TAR="/var/lib/alternc/backups/etc-installed.tar.gz"
-@@ -315,7 +315,7 @@
+@@ -316,7 +316,7 @@
          fi
  
  	# We enable dovecot SSL certificate instructions: (on wheezy we should use a new file in /etc/dovecot/conf.d/ )
@@ -18,7 +18,7 @@
  
      else
          # We disable proftpd tls module
-@@ -324,7 +324,7 @@
+@@ -325,7 +325,7 @@
          cp /etc/proftpd/modules.conf /etc/alternc/templates/proftpd/
  
  	# We disable dovecot SSL certificate instructions: (on wheezy we should remove a file in /etc/dovecot/conf.d/ )
@@ -27,7 +27,7 @@
  
          echo "SSL not configured"
          echo "create a certificate in /etc/alternc/apache.pem and rerun alternc.install"
-@@ -569,9 +569,11 @@
+@@ -573,9 +573,11 @@
      fi
  fi
  
@@ -40,5 +40,5 @@
 +# Override some dovecot 2.0 configuration that may have happened during dovecot postinst:
 +sed -i -e 's/^ *!include/#!include/' /etc/dovecot/conf.d/10-auth.conf
  
- # Changing owner of web panel's files
- chown -R alterncpanel:alterncpanel "/usr/share/alternc/panel/"
+ # We force the re-computing of the DNS zones, since we may have changed the IP address (see #460)
+ /usr/bin/mysql --defaults-file="/etc/alternc/my.cnf" -B -e "update domaines set dns_action='UPDATE' WHERE gesdns=1;"

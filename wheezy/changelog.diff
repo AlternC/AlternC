@@ -8,6 +8,6 @@
 +
 + -- Benjamin Sonntag <benjamin@sonntag.fr>  Fri, 15 Jan 2016 15:26:00 +0100
 +
- alternc (3.1.10) oldoldstable; urgency=low
+ alternc (3.1.11) oldoldstable; urgency=low
  
-   * fix not showing dropdown when installing second domain in some case. #28
+   * fix This is a big security upgrade of AlternC 3.x

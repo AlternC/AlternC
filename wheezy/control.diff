@@ -1,6 +1,6 @@
---- control.squeeze	2014-09-29 16:44:01.334940844 +0200
-+++ control	2014-09-29 16:31:44.088155733 +0200
-@@ -39,15 +39,18 @@
+--- control.squeeze	2016-05-27 14:30:23.182580393 +0200
++++ control	2016-05-27 14:32:08.785264702 +0200
+@@ -39,16 +39,19 @@
         , adduser
         , mysql-client
         , dnsutils
@@ -14,6 +14,7 @@
 +       , dovecot-mysql
         , vlogger
         , mailutils | mailx
+        , zip
         , incron
         , cron
         , opendkim
@@ -22,8 +23,8 @@
 +       , dovecot-managesieved
         , mysql-client(>= 5.0)
         , php5-curl
- Recommends: mysql-server(>= 5.0)
-@@ -123,16 +126,20 @@
+        , quota
+@@ -124,15 +127,18 @@
           , adduser
           , mysql-client
           , sudo
@@ -31,7 +32,7 @@
 -         , dovecot-common(<< 1:2.0)
 -         , dovecot-imapd (>= 1:1.2.15)
 -         , dovecot-pop3d (>= 1:1.2.15)
-+         , dovecot-common (>= 1:2.1.7)
++         , dovecot-common (>=1:2.1.7)
 +         , dovecot-imapd
 +         , dovecot-pop3d
 +         , dovecot-mysql
@@ -40,12 +41,9 @@
           , incron
           , cron
           , opendkim
--         , mysql-client(>= 5.0)
 +         , opendkim-tools
-+         , dovecot-managesieved
 +         , dovecot-sieve
-+         , dovecot-mysql
-+         , mysql-client(>= 5.0)
++         , dovecot-managesieved
+          , mysql-client(>= 5.0)
           , php5-curl
- Recommends:
-          quota
+          , ${misc:Depends}

@@ -1,3 +1,15 @@
+alternc (3.1.11) oldoldstable; urgency=low
+
+  * fix This is a big security upgrade of AlternC 3.x
+  * added CSRF token to all forms (as much as possible) to prevent cross-site attacks
+  * added XSS protection to many form fields and views
+  * migrated the DB abstraction layer from mysql_* functions to PDO
+  * migrated the DB calls from addslases to prepared-queries or quotes
+  * fix many unix rights issues (prevents a root escalation from alterncpanel!)
+  * fix some little interface issues on forms
+
+ -- Benjamin Sonntag <benjamin@sonntag.fr>  Fri, 27 May 2016 10:36:00 +0200
+
 alternc (3.1.10) oldoldstable; urgency=low
 
   * fix not showing dropdown when installing second domain in some case. #28
