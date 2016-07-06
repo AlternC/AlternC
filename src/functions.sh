@@ -104,7 +104,7 @@ get_name_by_uid() {
 }
 
 get_variable_from_db() {
-  mysql_query 'SELECT value FROM membres WHERE name="'"$1"'" LIMIT 1;'
+  mysql_query 'SELECT value FROM variable WHERE name="'"$1"'" LIMIT 1;'
 }
 
 
