@@ -32,5 +32,5 @@
 00,30 * * * *	alterncpanel	/usr/lib/alternc/cron_users.sh
 
 # Every 20 minutes, do actions
-00,20 * * * *	root	/usr/lib/alternc/do_actions.php
+*/20 * * * *	root	/usr/lib/alternc/do_actions.php
 
