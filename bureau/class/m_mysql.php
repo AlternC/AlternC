@@ -319,7 +319,7 @@ class m_mysql {
         $db->query("DELETE FROM db WHERE uid= ? AND db= ? ;", array($cuid, $dbname));
         $this->dbus->query("DROP DATABASE $dbname;");
 
-        $db_esc = str_replace('_', '\_', $dbname);
+	$db_esc = str_replace('_', '\_', $dbname);
         $this->dbus->query("DELETE FROM mysql.db WHERE Db= ? ;",    array($db_esc));
 
         #We test if the user created with the database is associated with more than 1 database.
@@ -469,7 +469,7 @@ class m_mysql {
             return false;
         }
 
-        $grant = "grant " . $rights . " on " . $base . "." . $table . " to " . $db->quote($user) . "@" . $db->quote($this->dbus->Client);
+        $grant = "grant " . $rights . " on `" . $base . "`." . $table . " to " . $db->quote($user) . "@" . $db->quote($this->dbus->Client);
 
         if ($pass) {
             $grant .= " identified by " . $db->quote($pass) . ";";
@@ -585,7 +585,7 @@ class m_mysql {
 
         $dbu = $dbn;
         $r = array();
-        $dbn = str_replace('_', '\_', $dbn);
+	$dbn = str_replace('_', '\_', $dbn);
         $this->dbus->query("Select * from mysql.db where Db= ? and User!= ? ;", array($dbn, $cuid."_myadm"));
 
         if (!$this->dbus->num_rows()) {
