@@ -101,7 +101,7 @@ function mail_it(){
  * 
  * @param type $command the command
  * @param type $parameters of the command (they are going to be protected)
- * @return array('output'=>'output of exec', 'return_var'=>'returned integer of exec') 
+ * @return array('output'=>'output of exec', 'return_val'=>'returned integer of exec') 
  */
 function execute_cmd($command, $parameters=array()) {
   $cmd_line = "$command ";
@@ -116,7 +116,7 @@ function execute_cmd($command, $parameters=array()) {
   }
   $cmd_line.= " 2>&1";
   exec($cmd_line, $output, $code);
-  return array('executed' => $cmd_line, 'output'=>$output, 'return_var'=>$code);
+  return array('executed' => $cmd_line, 'output'=>$output, 'return_val'=>$code);
 }
 
 /** Check if a file or folder is in the list of allowed 
