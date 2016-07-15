@@ -71,14 +71,16 @@ class m_quota {
 
         $q = $this->getquota();
 
-        foreach (array('web', 'bw_web') as $key) {
-            if (!isset($q[$key]["u"]) || empty($q[$key]["t"])) {
-                continue;
-            }
-            $usage_percent = (int) ($q[$key]["u"] / $q[$key]["t"] * 100);
-            $obj['links'][] = array('txt' => _("quota_" . $key) . " " . sprintf(_("%s%% of %s"), $usage_percent, format_size($q[$key]["t"] * 1024)), 'url' => ($key == 'bw_web' ? 'stats_show_per_month.php' : 'quota_show.php'));
-            $obj['links'][] = array('txt' => 'progressbar', 'total' => $q[$key]["t"], 'used' => $q[$key]["u"]);
-        }
+	foreach ($q as $key=>$value)
+	if (($key=="web")||(isset($value['in_menu'])&&$value['in_menu'])) {
+		if (!isset($q[$key]["u"]) || empty($q[$key]["t"])) {
+        	        continue;
+		}
+	            
+		$usage_percent = (int) ($q[$key]["u"] / $q[$key]["t"] * 100);
+		$obj['links'][] = array('txt' => _("quota_" . $key) . " " . sprintf(_("%s%% of %s"), $usage_percent, format_size($q[$key]["t"] * 1024)), 'url' => 'quota_show.php');
+		$obj['links'][] = array('txt' => 'progressbar', 'total' => $q[$key]["t"], 'used' => $q[$key]["u"]);
+	}
 
         // do not return menu item if there is no quota
 	if (!count($obj['links'])) return false;

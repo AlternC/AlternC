@@ -54,9 +54,7 @@ reset($qlist);
    echo _($val);
   if ($q[$key]["u"] >= $q[$key]["t"]) echo "</font>";
 
-  if ($key == 'bw_web') {              
-    echo "&nbsp;</td><td>". format_size($q[$key]["u"]) ."&nbsp;</td><td>". format_size($q[$key]["t"]) ."&nbsp;</td>";
-  } elseif ($key == 'web') {
+  if (($key == 'web')||(isset($q[$key]['type'])&&($q[$key]['type']=='size'))) {
     echo "&nbsp;</td><td>". format_size($q[$key]["u"] * 1024) . "&nbsp;</td><td>". format_size($q[$key]["t"] * 1024) ."&nbsp;</td>";
   } else {
     echo "&nbsp;</td><td>".$q[$key]["u"]."&nbsp;</td><td>".$q[$key]["t"]."&nbsp;</td>";
