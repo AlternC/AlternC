@@ -18,7 +18,7 @@ if ($db->query("SELECT uid,login FROM membres;")) {
   while ($db->next_record()) {
     if (isset($list_quota[$db->f('uid')])) {
       $qu=$list_quota[$db->f('uid')];
-      $db2->query("INSERT OR REPLACE INTO size_web SET uid=?, size=?;",array(intval($db->f('uid')),intval($qu['used'])));
+      $db2->query("REPLACE INTO size_web SET uid=?, size=?;",array(intval($db->f('uid')),intval($qu['used'])));
       echo $db->f('login')." (".$qu['used']." B)\n";
     }  
   }
