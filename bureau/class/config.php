@@ -173,7 +173,7 @@ if ((variable_get('force_https', '0', "This variable is set to 0 (default) if us
     ||(isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on" && $host != $L_FQDN)) {
     // do not redirect if access is not by HTTP(s)
     if (isset($_SERVER['REQUEST_URI'])) {
-      header("Location: https://$L_FQDN".$_SERVER['REQUEST_URI']);
+      header("Location: https://".$_SERVER["HTTP_HOST"].$_SERVER['REQUEST_URI']);
       exit;
     }
 }
