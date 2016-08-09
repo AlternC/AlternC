@@ -29,6 +29,9 @@
 */
 require_once("../class/config.php");
 
+// We check it ourself : not fatal
+define("NOCSRF",true);
+
 $fields = array (
 	"editfile"    		=> array ("request", "string", ""),
 	"texte"    		=> array ("post", "string", ""),
@@ -39,6 +42,7 @@ $fields = array (
 );
 getFields($fields);
 
+$editing=false;
 $editfile=ssla($editfile);
 $texte=ssla($texte);
 
@@ -51,13 +55,24 @@ if (isset($cancel) && $cancel) {
 }
 
 if (isset($saveret) && $saveret) {
-  if ($bro->save($editfile,$R,$texte)) {
-    $error=sprintf(_("Your file %s has been saved"),$editfile)." (".format_date(_('%3$d-%2$d-%1$d %4$d:%5$d'),date("Y-m-d H:i:s")).")";
-  } else {
-    $error=$err->errstr();
-  }
-  include("bro_main.php");
-  exit();
+    $editing=true;
+
+    // Thanks to this, we bring you back to the EDIT form if the CSRF is invalid.
+    // Allows you to re-submit
+    $error="";
+    if (count($_POST) && !defined("NOCSRF")) {
+        if (csrf_check()<=0) {
+            $error=$err->errstr();
+        }
+    }
+    
+    if ($error!="" && $bro->save($editfile,$R,$texte)) {
+        $error=sprintf(_("Your file %s has been saved"),$editfile)." (".format_date(_('%3$d-%2$d-%1$d %4$d:%5$d'),date("Y-m-d H:i:s")).")";
+        include("bro_main.php");
+        exit();
+    } else {
+        $error=$err->errstr();
+    }
 }
 if (isset($save) && $save) {
   if ($bro->save($editfile,$R,$texte)) {
@@ -115,7 +130,12 @@ echo "<pre class='prettyprint' id='file_content_view' >$content</pre>";
 </form>
 
 <script type="text/javascript">
-$(function() {$( "#tabsfile" ).tabs();});
+$(function() {
+$( "#tabsfile" ).tabs();
+<?php if ($editing) { ?>
+$( "#tabsfile-edit" ).tabs( "option", "active", 1 );
+<?php } ?>
+});
 
 $('#tabsfile').on('tabsbeforeactivate', function(event, ui){
   var b = $('#file_content_editor').val();
