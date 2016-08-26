@@ -1108,6 +1108,10 @@ class m_bro {
         $err->log("bro", "_delete($file)");
         if (is_dir($file)) {
             $handle = opendir($file);
+            if (!$handle) { 
+                rmdir($file); // let's try it anyway...
+                return; // skip unreacheable folders
+            }
             while (($filename = readdir($handle)) !== false) {
                 if ($filename != "." && $filename != "..") {
                     $this->_delete($file . "/" . $filename);
