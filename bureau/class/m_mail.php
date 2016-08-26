@@ -977,6 +977,7 @@ ORDER BY
             $new = trim($new);
             $old = trim($old);
             $db->query("SELECT domaine,login,compte FROM domaines, membres WHERE gesdns=1 AND gesmx=1 and membres.uid=domaines.compte;");
+            $res=array();
             while ($db->next_record()) $res[]=$db->Record;
             foreach ($res as $record) {
                 $this->set_dns_spf($record["domaine"], $new, $old, $record["compte"], $record["login"]);
@@ -987,6 +988,7 @@ ORDER BY
             $new = trim($new);
             $old = trim($old);
             $db->query("SELECT domaine,login,compte FROM domaines, membres WHERE gesdns=1 AND gesmx=1 and membres.uid=domaines.compte;");
+            $res=array();
             while ($db->next_record()) $res[]=$db->Record;
             foreach ($res as $record) {
                 $this->set_dns_dmarc($record["domaine"], $new, $old, $record["compte"], $record["login"]);
