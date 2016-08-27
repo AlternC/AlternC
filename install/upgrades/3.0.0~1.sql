@@ -204,9 +204,6 @@ UPDATE domaines_type SET create_tmpdir=true, create_targetdir=true WHERE target=
 ALTER IGNORE TABLE domaines MODIFY domaine VARCHAR(255);
 ALTER IGNORE TABLE sub_domaines MODIFY domaine VARCHAR(255);
 
--- Should lthe default_subdomains table already exists, prevent the following INSERT INTO to double the entries
-ALTER TABLE `default_subdomains` ADD UNIQUE KEY `unique_row` (`sub`,`domain_type`,`domain_type_parameter`,`concerned`);
-
 -- Defaults subdomains to create when a domain is added
 CREATE TABLE IF NOT EXISTS `default_subdomains` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,

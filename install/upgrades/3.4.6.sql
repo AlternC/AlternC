@@ -36,3 +36,6 @@ ALTER TABLE `tld` ENGINE InnoDB;
 ALTER TABLE `variable` ENGINE InnoDB;
 ALTER TABLE `vm_history` ENGINE InnoDB;
 
+-- Should lthe default_subdomains table already exists, prevent the following INSERT INTO to double the entries
+ALTER TABLE `default_subdomains` ADD UNIQUE KEY `unique_row` (`sub`,`domain_type`,`domain_type_parameter`,`concerned`);
+
