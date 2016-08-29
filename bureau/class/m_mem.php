@@ -164,6 +164,7 @@ class m_mem {
             $db->next_record();
             $this->local = $db->Record;
         }
+        $this->resetlast();
         return true;
     }
 

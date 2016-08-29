@@ -31,16 +31,6 @@
 
 require_once("../class/config.php");
 
-if (!$mem->checkid())
-{
-	$error = $err->errstr();
-	include("index.php");
-	exit();
-}
-
-$mem->resetlast();
-
 header("Location: main.php");
-exit;
 
 ?>
