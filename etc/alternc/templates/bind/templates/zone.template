@@ -11,7 +11,7 @@ $TTL @@ZONETTL@@
                 @@SERIAL@@      ; serial
                 21600           ; refresh (6h)
                 3600            ; retry (1h)
-                604800          ; expiry (7d)
+                1209600          ; expiry (14d)
                 @@ZONETTL@@ ) ; nxdomain TTL
 
                 IN      NS      %%ns1%%.
