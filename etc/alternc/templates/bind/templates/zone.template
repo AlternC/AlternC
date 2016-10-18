@@ -7,7 +7,7 @@ $TTL @@ZONETTL@@
 ;; If you want to forbid automatic generation, change the LOCKED var
 ;; LOCKED:NO
 ;
-@       IN SOA %%fqdn%%. root.%%fqdn%%. (
+@       IN SOA %%ns1%%. root.%%fqdn%%. (
                 @@SERIAL@@      ; serial
                 21600           ; refresh (6h)
                 3600            ; retry (1h)
