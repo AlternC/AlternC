@@ -89,6 +89,7 @@ __("You can choose what to do with emails sent to unexisting address of this dom
 <br/><br/>
 
 <form action="mail_manage_catchall.php?domain_id=<?php echo $domain_id;?>" method="post" name="main" id="main">
+   <?php csrf_get(); ?>
 <table class="tedit">
 
   <tr>
