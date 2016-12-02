@@ -52,6 +52,7 @@ Depends: debianutils (>= 1.13.1)
        , mysql-client(>= 5.0)
        , php5-curl
        , quota
+       , pwgen
        , ${misc:Depends}
 Recommends: mysql-server(>= 5.0)
           , ntp
