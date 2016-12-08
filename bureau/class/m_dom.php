@@ -1353,6 +1353,10 @@ class m_dom {
             }
         }
 
+        // Forbidden to create a CNAME RR on the domain APEX (RFC 1912)                                                                                                                               
+        if ($type == 'cname' && $sub == '')    
+            return false;  
+
         // All is right, go ! Create ur domain !
         return true;
     }
