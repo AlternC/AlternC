@@ -560,7 +560,7 @@ ORDER BY
         $mail_id = intval($mail_id);
 
         if (!$mail_id) {
-            $err->raise("mail", _("The email you entered is syntaxically incorrect"));
+            $err->raise("mail", _("The email you entered does not exist"));
             return false;
         }
         // Validate that this email is owned by me...
