@@ -167,6 +167,9 @@ $err = new m_err();
 $authip = new m_authip();
 $hooks = new m_hooks();
 
+if (!isset($_SERVER["HTTP_X_FORWARDED_PROTO"]) && $_SERVER["HTTP_X_FORWARDED_PROTO"]=="https") {
+    $_SERVER["HTTPS"]="on";
+}
 
 // https: Redirection if not calling https://!fqdn or if https is forced
 if ((variable_get('force_https', '0', "This variable is set to 0 (default) if users can access the management desktop through HTTP, otherwise we force HTTPS")&&(!isset($_SERVER["HTTPS"])|| ($_SERVER["HTTPS"] != "on")))) {
