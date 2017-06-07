@@ -1,9 +1,1 @@
-/^Hi! How are you(=3F|\?)$/ REJECT
-/^begin(-base64)? [0-9]+.*(\.|=2E)bat(\?=)?(\.)?/ REJECT
-/^[^<]*(body|filename|name=).*(\.|=2E)bat(\?=)?(\.)?/ REJECT
-/^begin(-base64)? [0-9]+.*(\.|=2E)scr(\?=)?(\.)?/ REJECT
-/^[^<]*(body|filename|name=).*(\.|=2E)scr(\?=)?(\.)?/ REJECT
-/^begin(-base64)? [0-9]+.*(\.|=2E)lnk(\?=)?(\.)?/ REJECT
-/^[^<]*(body|filename|name=).*(\.|=2E)lnk(\?=)?(\.)?/ REJECT
-/^begin(-base64)? [0-9]+.*(\.|=2E)pif(\?=)?(\.)?/ REJECT
-/^[^<]*(body|filename|name=).*(\.|=2E)pif(\?=)?(\.)?/ REJECT
+
