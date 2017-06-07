@@ -119,7 +119,7 @@ class m_err {
      */
     function logerr() {
         global $mem;
-        @file_put_contents($this->logfile, date("d/m/Y H:i:s") . " - ERROR - " . $mem->user["login"] . " - " . $this->errstr(), FILE_APPEND);
+        @file_put_contents($this->logfile, date("d/m/Y H:i:s") . " - " . get_remote_ip() . " - ERROR - " . $mem->user["login"] . " - " . $this->errstr(), FILE_APPEND);
     }
 
     /**
