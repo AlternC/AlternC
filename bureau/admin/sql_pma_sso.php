@@ -38,7 +38,7 @@ if (!$r=$mysql->php_myadmin_connect()) {
   $_SESSION['PMA_single_signon_host'] = $r["host"]; // pma >= 2.11
   session_write_close();
   // finally redirect to phpMyAdmin :
-  header("Location: /alternc-sql/");
+  header("Location: /alternc-sql/index.php");
   exit();
 }
 
