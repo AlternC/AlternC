@@ -4,11 +4,15 @@ alternc (3.1.11) oldoldstable; urgency=low
   * added CSRF token to all forms (as much as possible) to prevent cross-site attacks
   * added XSS protection to many form fields and views
   * migrated the DB abstraction layer from mysql_* functions to PDO
+    (necessary for security, also adds PHP7.0 compatibility)
   * migrated the DB calls from addslases to prepared-queries or quotes
   * fix many unix rights issues (prevents a root escalation from alterncpanel!)
   * fix some little interface issues on forms
+  * enh adding IP address to panel logs (PR #153)
+  * enh adding X-Forwarded-Proto detection for SSL, not only HTTP_SSL from Apache
+  * enh add a variable to enable IP check in the panel (broken), disabled by default
 
- -- Benjamin Sonntag <benjamin@sonntag.fr>  Fri, 27 May 2016 10:36:00 +0200
+ -- Benjamin Sonntag <benjamin@sonntag.fr>  Wed,  7 Jun 2017 10:36:00 +0300
 
 alternc (3.1.10) oldoldstable; urgency=low
 
