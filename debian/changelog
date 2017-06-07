@@ -11,6 +11,7 @@ alternc (3.1.11) oldoldstable; urgency=low
   * enh adding IP address to panel logs (PR #153)
   * enh adding X-Forwarded-Proto detection for SSL, not only HTTP_SSL from Apache
   * enh add a variable to enable IP check in the panel (broken), disabled by default
+  * fix opendkim signing for mails submitted over the network
 
  -- Benjamin Sonntag <benjamin@sonntag.fr>  Wed,  7 Jun 2017 10:36:00 +0300
 
