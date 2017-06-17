@@ -411,7 +411,7 @@ grep -v '^\ *#' $postfix_conf |while read line ; do
         echo -e "\033[31m*****************************************************"
         echo "* The certificate file : $cert_file does not exists *"
 	echo "* If you want to be able to use SSL/TLS             *"
-        echo "* please go to https://alternc.org/wiki/SSL         *"
+        echo "* please go to https://alternc.com/SSL              *"
 	echo "* to get information on how to create a certificate *"
         echo "* Finally relaunch alternc.install                  *"
         echo "*****************************************************"
