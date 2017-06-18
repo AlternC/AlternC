@@ -1,15 +1,10 @@
 <?php
 /*
- $Id: adm_add.php,v 1.9 2006/01/24 05:03:30 joe Exp $
+ adm_add.php
  ----------------------------------------------------------------------
  AlternC - Web Hosting System
- Copyright (C) 2006 Le r�seau Koumbit Inc.
- http://koumbit.org/
- Copyright (C) 2002 by the AlternC Development Team.
- http://alternc.org/
- ----------------------------------------------------------------------
- Based on:
- Valentin Lacambre's web hosting softwares: http://altern.org/
+ Copyright (C) 2002-2017 by the AlternC Development Team.
+ https://alternc.com/
  ----------------------------------------------------------------------
  LICENSE
 
@@ -26,7 +21,7 @@
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
  Original Author of file: Benjamin Sonntag
- Purpose of file: Member managment
+ Purpose of file: new Member managment
  ----------------------------------------------------------------------
 */
 require_once("../class/config.php");
@@ -61,20 +56,17 @@ if (isset($error) && $error) {
 ?>
 <form method="post" action="adm_doadd.php" id="main" name="main" autocomplete="off">
   <?php csrf_get(); ?>
-<!-- honeypot fields -->
-<input type="text" style="display: none" id="fakeUsername" name="fakeUsername" value="" />
-<input type="password" style="display: none" id="fakePassword" name="fakePassword" value="" />
 
 <table class="tedit">
-<tr><th><label for="login"><?php __("Username"); ?></label></th><td>
-	<input type="text" class="int" name="login" id="login" value="<?php ehe($login); ?>" size="20" maxlength="16" />
+<tr><th><label for="login"><?php __("Username"); ?></label><span class="mandatory">*</span></th><td>
+	<input type="text" class="int" name="login" id="login" autocomplete="off" value="<?php ehe($login); ?>" size="20" maxlength="16" />
 </td></tr>
 <tr>
-	<th><label for="pass"><?php __("Initial password"); ?></label></th>
+	<th><label for="pass"><?php __("Initial password"); ?></label><span class="mandatory">*</span></th>
 	<td><input type="password" id="pass" name="pass" autocomplete="off" class="int" value="<?php ehe($pass); ?>" size="20" maxlength="64" /><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#pass","#passconf"); ?></td>
 </tr>
 <tr>
-	<th><label for="passconf"><?php __("Confirm password"); ?></label></th>
+	<th><label for="passconf"><?php __("Confirm password"); ?></label><span class="mandatory">*</span></th>
 	<td><input type="password" id="passconf" name="passconf" autocomplete="off" class="int" value="<?php ehe($passconf); ?>" size="20" maxlength="64" /></td>
 </tr>
 <tr>
@@ -93,7 +85,7 @@ if (isset($error) && $error) {
 	<td><input class="int" type="text" id="nom" name="nom" value="<?php ehe($nom); ?>" size="16" maxlength="128" />&nbsp;/&nbsp;<input type="text" name="prenom" id="prenom" value="<?php ehe($prenom); ?>" class="int" size="16" maxlength="128" /></td>
 </tr>
 <tr>
-	<th><label for="nmail"><?php __("Email address"); ?></label></th>
+	<th><label for="nmail"><?php __("Email address"); ?></label><span class="mandatory">*</span></th>
 	<td><input type="text" name="nmail" id="nmail" class="int" value="<?php ehe($nmail); ?>" size="30" maxlength="128" /></td>
 </tr>
 <tr>
@@ -107,7 +99,7 @@ if (isset($error) && $error) {
 <tr>
     <th>
         <?php 
-          __("Wich database server for this user ?");
+          __("Associate this new user to this database server:");
           echo "<br/>";
           echo "<i>"._("Warning: you can't change it after the creation of the user.")."</i>";
         ?>

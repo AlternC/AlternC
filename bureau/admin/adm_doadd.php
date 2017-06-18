@@ -1,9 +1,10 @@
 <?php
 /*
+ adm_doadd.php
  ----------------------------------------------------------------------
  AlternC - Web Hosting System
- Copyright (C) 2000-2012 by the AlternC Development Team.
- https://alternc.org/
+ Copyright (C) 2002-2017 by the AlternC Development Team.
+ https://alternc.com/
  ----------------------------------------------------------------------
  LICENSE
 
@@ -18,6 +19,9 @@
  GNU General Public License for more details.
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
+ ----------------------------------------------------------------------
+ Original Author of file: Benjamin Sonntag
+ Purpose of file: validate and create a new member
  ----------------------------------------------------------------------
 */
 require_once("../class/config.php");

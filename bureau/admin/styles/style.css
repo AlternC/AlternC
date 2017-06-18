@@ -379,6 +379,14 @@ img {
   color: red;
 }
 
+.mandatory {
+  color: red;
+  font-weight: bold;
+  vertical-align: super;
+  font-size: small;
+  line-height: normal;
+}
+
 .code {
   font-size: 16px;
   font-family: Courier New, Fixed;

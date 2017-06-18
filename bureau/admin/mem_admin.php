@@ -1,13 +1,10 @@
 <?php
 /*
- $Id: mem_admin.php,v 1.2 2003/06/10 08:18:26 root Exp $
+ mem_admin.php
  ----------------------------------------------------------------------
  AlternC - Web Hosting System
- Copyright (C) 2002 by the AlternC Development Team.
- http://alternc.org/
- ----------------------------------------------------------------------
- Based on:
- Valentin Lacambre's web hosting softwares: http://altern.org/
+ Copyright (C) 2002-2017 by the AlternC Development Team.
+ https://alternc.com/
  ----------------------------------------------------------------------
  LICENSE
 

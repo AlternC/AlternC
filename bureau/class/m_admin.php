@@ -587,12 +587,12 @@ class m_admin {
             return false;
         }
         if (($login == "") || ($pass == "")) {
-            $err->raise("admin", _("All fields are mandatory"));
+            $err->raise("admin", _("Please fill all mandatory fields"));
             return false;
         }
         if (!$force) {
             if ($mail == "") {
-                $err->raise("admin", _("All fields are mandatory"));
+                $err->raise("admin", _("Please fill all mandatory fields"));
                 return false;
             }
             //@todo remove cf functions.php
@@ -641,17 +641,10 @@ class m_admin {
 
             // Triggering hooks
             $mem->su($uid);
-            // TODO: old hook method FIXME: when unused remove this
-            /*
-              foreach($classes as $c) {
-              if (method_exists($GLOBALS[$c],"alternc_add_member")) {
-              $GLOBALS[$c]->alternc_add_member();
-              }
-              }
-             */
+
             $hooks->invoke("alternc_add_member");
             // New hook way
-            $hooks->invoke("hook_admin_add_member", array(), array('quota')); // First !!! The quota !!! Etherway, we can't be sure to be able to create all
+            $hooks->invoke("hook_admin_add_member", array(), array('quota')); // First !!! The quota !!! Eitherway, we can't be sure to be able to create all
             $hooks->invoke("hook_admin_add_member");
             $mem->unsu();
 
