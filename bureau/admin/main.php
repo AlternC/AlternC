@@ -1,9 +1,10 @@
 <?php
 /*
+ main.php
  ----------------------------------------------------------------------
  AlternC - Web Hosting System
- Copyright (C) 2000-2012 by the AlternC Development Team.
- https://alternc.org/
+ Copyright (C) 2002-2017 by the AlternC Development Team.
+ https://alternc.com/
  ----------------------------------------------------------------------
  LICENSE
 
