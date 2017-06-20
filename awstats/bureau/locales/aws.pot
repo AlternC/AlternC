@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AlternC 2.0\n"
 "Report-Msgid-Bugs-To: i18n@alternc.org\n"
-"POT-Creation-Date: 2014-03-28 16:38+0100\n"
+"POT-Creation-Date: 2017-06-20 11:44+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,33 +35,33 @@ msgid ""
 "creation)."
 msgstr ""
 
-#: ../admin/aws_add.php:52 ../admin/aws_list.php:57
+#: ../admin/aws_add.php:53 ../admin/aws_list.php:58
 msgid "Domain name"
 msgstr ""
 
-#: ../admin/aws_add.php:59
+#: ../admin/aws_add.php:60
 msgid "Hostaliases"
 msgstr ""
 
-#: ../admin/aws_add.php:73 ../admin/aws_list.php:57
+#: ../admin/aws_add.php:74 ../admin/aws_list.php:58
 msgid "Allowed Users"
 msgstr ""
 
-#: ../admin/aws_add.php:89
+#: ../admin/aws_add.php:90
 msgid ""
 "No users currently defined, you must create login with the 'Manage allowed "
 "users' accounts' menu."
 msgstr ""
 
-#: ../admin/aws_add.php:94
+#: ../admin/aws_add.php:95
 msgid "Create those statistics"
 msgstr ""
 
-#: ../admin/aws_add.php:94
+#: ../admin/aws_add.php:95
 msgid "Edit those statistics"
 msgstr ""
 
-#: ../admin/aws_add.php:95 ../admin/aws_pass.php:77 ../admin/aws_users.php:58
+#: ../admin/aws_add.php:96 ../admin/aws_pass.php:78 ../admin/aws_users.php:59
 msgid "Cancel"
 msgstr ""
 
@@ -98,23 +98,23 @@ msgstr ""
 msgid "Create new Statistics"
 msgstr ""
 
-#: ../admin/aws_list.php:57 ../admin/aws_users.php:78
+#: ../admin/aws_list.php:58 ../admin/aws_users.php:80
 msgid "Action"
 msgstr ""
 
-#: ../admin/aws_list.php:57 ../admin/aws_list.php:69
+#: ../admin/aws_list.php:58 ../admin/aws_list.php:70
 msgid "View the statistics"
 msgstr ""
 
-#: ../admin/aws_list.php:66
+#: ../admin/aws_list.php:67
 msgid "Edit"
 msgstr ""
 
-#: ../admin/aws_list.php:73
+#: ../admin/aws_list.php:74
 msgid "Are you sure you want to delete the selected statistics?"
 msgstr ""
 
-#: ../admin/aws_list.php:73
+#: ../admin/aws_list.php:74
 msgid "Delete the checked Statistics"
 msgstr ""
 
@@ -130,20 +130,20 @@ msgstr ""
 msgid "Change a user's password"
 msgstr ""
 
-#: ../admin/aws_pass.php:70 ../admin/aws_users.php:51
-#: ../admin/aws_users.php:78
+#: ../admin/aws_pass.php:71 ../admin/aws_users.php:52
+#: ../admin/aws_users.php:80
 msgid "Username"
 msgstr ""
 
-#: ../admin/aws_pass.php:73
+#: ../admin/aws_pass.php:74
 msgid "New Password"
 msgstr ""
 
-#: ../admin/aws_pass.php:74 ../admin/aws_users.php:55
+#: ../admin/aws_pass.php:75 ../admin/aws_users.php:56
 msgid "Confirm password"
 msgstr ""
 
-#: ../admin/aws_pass.php:76
+#: ../admin/aws_pass.php:77
 msgid "Change this user's password"
 msgstr ""
 
@@ -160,23 +160,23 @@ msgstr ""
 msgid "Awstats allowed user list"
 msgstr ""
 
-#: ../admin/aws_users.php:54
+#: ../admin/aws_users.php:55
 msgid "Password"
 msgstr ""
 
-#: ../admin/aws_users.php:57
+#: ../admin/aws_users.php:58
 msgid "Create this new Awstats user"
 msgstr ""
 
-#: ../admin/aws_users.php:86
+#: ../admin/aws_users.php:88
 msgid "Change password"
 msgstr ""
 
-#: ../admin/aws_users.php:92
+#: ../admin/aws_users.php:94
 msgid "Are you sure you want to delete the selected accounts?"
 msgstr ""
 
-#: ../admin/aws_users.php:92
+#: ../admin/aws_users.php:94
 msgid "Delete checked accounts"
 msgstr ""
 

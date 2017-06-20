@@ -6,17 +6,18 @@
 # Benjamin Sonntag <benjamin@alternc.org>, 2004
 # Bmt91 <benoit.maherault@laposte.net>, 2012
 # Bruno Marmier <bruno@marmier.net>, 2004
-# Facetester Testerface, 2013-2014
+# DeepSurfer, 2013-2014
+# Ettore Atalan <atalanttore@googlemail.com>, 2014
 # poupoule2004 <poupoule2004@hotmail.com>, 2012
-# stephane.treboux <stephane.treboux@gmail.com>, 2012
+# Stéphane Tréboux <stephane.treboux@gmail.com>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: AlternC, hosting control panel\n"
 "Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
 "POT-Creation-Date: 2013-10-18 11:47+0200\n"
-"PO-Revision-Date: 2014-03-27 15:51+0000\n"
+"PO-Revision-Date: 2017-06-20 09:44+0000\n"
 "Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
-"Language-Team: German (Germany) (http://www.transifex.com/projects/p/alternc/"
+"Language-Team: German (Germany) (http://www.transifex.com/octopuce/alternc/"
 "language/de_DE/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"

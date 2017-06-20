@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: $Id: stats.po,v 1.1.1.1 2004/09/01 16:52:49 anonymous "
 "Exp $\n"
 "Report-Msgid-Bugs-To: i18n@alternc.org\n"
-"POT-Creation-Date: 2014-03-27 16:28+0100\n"
+"POT-Creation-Date: 2017-06-20 11:44+0200\n"
 "PO-Revision-Date: 2009-05-24 13:50CEST\n"
 "Last-Translator: Benjamin Sonntag <benjamin@alternc.org>\n"
 "Language-Team: French <i18n@alternc.org>\n"
@@ -35,19 +35,19 @@ msgid ""
 "creation)."
 msgstr ""
 
-#: ../admin/aws_add.php:52 ../admin/aws_list.php:57
+#: ../admin/aws_add.php:53 ../admin/aws_list.php:58
 msgid "Domain name"
 msgstr "Nom de domaine"
 
-#: ../admin/aws_add.php:59
+#: ../admin/aws_add.php:60
 msgid "Hostaliases"
 msgstr "Autres noms de domaine à associer aux stats"
 
-#: ../admin/aws_add.php:73 ../admin/aws_list.php:57
+#: ../admin/aws_add.php:74 ../admin/aws_list.php:58
 msgid "Allowed Users"
 msgstr "Utilisateurs autorisés"
 
-#: ../admin/aws_add.php:89
+#: ../admin/aws_add.php:90
 msgid ""
 "No users currently defined, you must create login with the 'Manage allowed "
 "users' accounts' menu."
@@ -55,15 +55,15 @@ msgstr ""
 "Aucun utilisateur n'est défini pour l'instant. Vous devez créer des "
 "utilisateurs avec le menu 'Gérer les utilisateurs autorisés'."
 
-#: ../admin/aws_add.php:94
+#: ../admin/aws_add.php:95
 msgid "Create those statistics"
 msgstr "Créer ce jeu de statistiques"
 
-#: ../admin/aws_add.php:94
+#: ../admin/aws_add.php:95
 msgid "Edit those statistics"
 msgstr "Modifier ce jeu de statistiques"
 
-#: ../admin/aws_add.php:95 ../admin/aws_pass.php:77 ../admin/aws_users.php:58
+#: ../admin/aws_add.php:96 ../admin/aws_pass.php:78 ../admin/aws_users.php:59
 msgid "Cancel"
 msgstr ""
 
@@ -100,23 +100,23 @@ msgstr "Gérer les utilisateurs autorisés"
 msgid "Create new Statistics"
 msgstr "Créer un jeu de statistiques"
 
-#: ../admin/aws_list.php:57 ../admin/aws_users.php:78
+#: ../admin/aws_list.php:58 ../admin/aws_users.php:80
 msgid "Action"
 msgstr ""
 
-#: ../admin/aws_list.php:57 ../admin/aws_list.php:69
+#: ../admin/aws_list.php:58 ../admin/aws_list.php:70
 msgid "View the statistics"
 msgstr "Voir les statistiques"
 
-#: ../admin/aws_list.php:66
+#: ../admin/aws_list.php:67
 msgid "Edit"
 msgstr "Modifier"
 
-#: ../admin/aws_list.php:73
+#: ../admin/aws_list.php:74
 msgid "Are you sure you want to delete the selected statistics?"
 msgstr ""
 
-#: ../admin/aws_list.php:73
+#: ../admin/aws_list.php:74
 msgid "Delete the checked Statistics"
 msgstr "Effacer les statistiques cochées"
 
@@ -132,21 +132,21 @@ msgstr ""
 msgid "Change a user's password"
 msgstr "Changer le mot de passe d'un utilisateur"
 
-#: ../admin/aws_pass.php:70 ../admin/aws_users.php:51
-#: ../admin/aws_users.php:78
+#: ../admin/aws_pass.php:71 ../admin/aws_users.php:52
+#: ../admin/aws_users.php:80
 msgid "Username"
 msgstr "Nom d'utilisateur"
 
-#: ../admin/aws_pass.php:73
+#: ../admin/aws_pass.php:74
 msgid "New Password"
 msgstr "Nouveau mot de passe"
 
-#: ../admin/aws_pass.php:74 ../admin/aws_users.php:55
+#: ../admin/aws_pass.php:75 ../admin/aws_users.php:56
 #, fuzzy
 msgid "Confirm password"
 msgstr "Changer le mot de passe"
 
-#: ../admin/aws_pass.php:76
+#: ../admin/aws_pass.php:77
 msgid "Change this user's password"
 msgstr "Changer le mot de passe de cet utilisateur"
 
@@ -163,24 +163,24 @@ msgstr "Le compte utilisateur %s a été effacé avec succès"
 msgid "Awstats allowed user list"
 msgstr "Liste des utilisateurs autorisés"
 
-#: ../admin/aws_users.php:54
+#: ../admin/aws_users.php:55
 msgid "Password"
 msgstr "Mot de passe"
 
-#: ../admin/aws_users.php:57
+#: ../admin/aws_users.php:58
 #, fuzzy
 msgid "Create this new Awstats user"
 msgstr "Créer cet utilisateur"
 
-#: ../admin/aws_users.php:86
+#: ../admin/aws_users.php:88
 msgid "Change password"
 msgstr "Changer le mot de passe"
 
-#: ../admin/aws_users.php:92
+#: ../admin/aws_users.php:94
 msgid "Are you sure you want to delete the selected accounts?"
 msgstr ""
 
-#: ../admin/aws_users.php:92
+#: ../admin/aws_users.php:94
 msgid "Delete checked accounts"
 msgstr "Effacer les utilisateurs sélectionnés"
 
