@@ -97,19 +97,22 @@ class m_roundcube {
         break;
     }
 
-    $req = $dbh->query("SELECT user_id FROM users WHERE username = ?;",array($fullmail));
+    $stmt = $dbh->prepare("SELECT user_id FROM users WHERE username = ?;");
+    $req=$stmt->execute(array($fullmail));
 
+    if ($req) {
     foreach ( $req->fetchAll() as $t ) {
       if (empty($t['user_id'])) continue ;
       $rcuser_id=$t['user_id'];
 
-      $dbh->query("DELETE from contactgroupmembers where contactgroup_id in (select contactgroup_id from contactgroups where user_id = ?) ; ",array($rcuser_id));
-      $dbh->query("DELETE from contactgroups where user_id = ? ; ",array($rcuser_id));
-      $dbh->query("DELETE from contacts where user_id = ? ; ",array($rcuser_id));
-      $dbh->query("DELETE from identities where user_id = ? ; ",array($rcuser_id));
-      $dbh->query("DELETE from users where user_id = ? ; ",array($rcuser_id));
+      $dbh->prepare("DELETE from contactgroupmembers where contactgroup_id in (select contactgroup_id from contactgroups where user_id = ?) ; ")->execute(array($rcuser_id));
+      $dbh->prepare("DELETE from contactgroups where user_id = ? ; ")->execute(array($rcuser_id));
+      $dbh->prepare("DELETE from contacts where user_id = ? ; ")->execute(array($rcuser_id));
+      $dbh->prepare("DELETE from identities where user_id = ? ; ")->execute(array($rcuser_id));
+      $dbh->prepare("DELETE from users where user_id = ? ; ")->execute(array($rcuser_id));
     } //foreach
-
+    }
+    
   }
 
 } /* Class Roundcube */
