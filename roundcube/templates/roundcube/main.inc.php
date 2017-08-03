@@ -147,11 +147,11 @@ $rcmail_config['smtp_port'] = 25;
 
 // SMTP username (if required) if you use %u as the username Roundcube
 // will use the current username for login
-$rcmail_config['smtp_user'] = '';
+$rcmail_config['smtp_user'] = '%u';
 
 // SMTP password (if required) if you use %p as the password Roundcube
 // will use the current user's password for login
-$rcmail_config['smtp_pass'] = '';
+$rcmail_config['smtp_pass'] = '%p';
 
 // SMTP AUTH type (DIGEST-MD5, CRAM-MD5, LOGIN, PLAIN or empty to use
 // best server supported one)
