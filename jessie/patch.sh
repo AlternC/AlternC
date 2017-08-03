@@ -17,3 +17,7 @@ cp bureau.conf ../etc/alternc/templates/alternc/
 cp alternc.install ../install/
 cp apache2.conf ../etc/alternc/templates/alternc/
 cp ssl.conf ../ssl/
+cp roundcube.config.inc.php ../roundcube/templates/roundcube/config.inc.php
+rm ../roundcube/templates/roundcube/main.inc.php
+cp roundcube.password.config.inc.php ../roundcube/templates/roundcube/plugins/password/config.inc.php
+cp roundcube-install ./roundcube/
