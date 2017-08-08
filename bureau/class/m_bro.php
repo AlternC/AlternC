@@ -1100,12 +1100,15 @@ class m_bro {
      * @param string $file Fichier ou dossier supprimer.
      * @access private
      */
-    function _delete($file) {
+    function _delete($file,$depth=0) {
         global $err;
         // permet d'effacer de nombreux fichiers
         @set_time_limit(0);
         //chmod($file,0777);
         $err->log("bro", "_delete($file)");
+        if ($depth>20) {
+            $err->log("bro", "CANCELING _delete($file) TOO DEEP");
+        }
         if (is_dir($file)) {
             $handle = opendir($file);
             if (!$handle) { 
@@ -1114,7 +1117,7 @@ class m_bro {
             }
             while (($filename = readdir($handle)) !== false) {
                 if ($filename != "." && $filename != "..") {
-                    $this->_delete($file . "/" . $filename);
+                    $this->_delete($file . "/" . $filename,$depth+1);
                 }
             }
             closedir($handle);
