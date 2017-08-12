@@ -16,8 +16,12 @@ cp vhost.conf ../etc/alternc/templates/apache2/
 cp bureau.conf ../etc/alternc/templates/alternc/
 cp alternc.install ../install/
 cp apache2.conf ../etc/alternc/templates/alternc/
-cp ssl.conf ../ssl/
+# alternc-roundcube package : 
 cp roundcube.config.inc.php ../roundcube/templates/roundcube/config.inc.php
 rm ../roundcube/templates/roundcube/main.inc.php
 cp roundcube.password.config.inc.php ../roundcube/templates/roundcube/plugins/password/config.inc.php
-cp roundcube-install ./roundcube/
+cp roundcube-install ../roundcube/
+
+# alternc-ssl package : 
+cp ssl.conf ../ssl/
+cp alternc-ssl.install.php ../ssl/
