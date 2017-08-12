@@ -167,7 +167,7 @@ $err = new m_err();
 $authip = new m_authip();
 $hooks = new m_hooks();
 
-if (!isset($_SERVER["HTTP_X_FORWARDED_PROTO"]) && $_SERVER["HTTP_X_FORWARDED_PROTO"]=="https") {
+if (isset($_SERVER["HTTP_X_FORWARDED_PROTO"]) && $_SERVER["HTTP_X_FORWARDED_PROTO"]=="https") {
     $_SERVER["HTTPS"]="on";
 }
 
