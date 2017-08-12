@@ -458,8 +458,8 @@ ORDER BY
     /* ----------------------------------------------------------------- */
 
     /** Hook called when the DOMAIN class will delete a domain.
-     *
-     * @param $dom integer the number of the email to delete
+     * OR when the DOMAIN class tells us we don't host the emails of this domain anymore.
+     * @param $dom the ID of the domain to delete
      * @return boolean if the email has been properly deleted 
      * or false if an error occured ($err is filled accordingly)
      */
@@ -474,6 +474,7 @@ ORDER BY
         $db->query("SELECT domaine FROM domaines WHERE id= ? ;", array($dom_id));
         if ($db->next_record()) {
             $db->query("UPDATE sub_domaines SET web_action='DELETE' WHERE domaine= ? AND type='txt' AND (sub='' AND valeur LIKE 'v=spf1 %') OR (sub='_dmarc' AND valeur LIKE 'v=dmarc1;%');", array($db->Record["domaine"]));
+            $db->query("UPDATE sub_domaines SET web_action='DELETE' WHERE domaine= ? AND (type='defmx' OR type='defmx2');", array($db->Record["domaine"]));
             $db->query("UPDATE domaines SET dns_action='UPDATE' WHERE id= ? ;", array($dom_id));
         }
 
