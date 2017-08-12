@@ -108,7 +108,7 @@ if (!$res=$mail->get_details($mail_id)) {
    * Other elements by hooks
    */
   $rh=$hooks->invoke("mail_edit_post",array($mail_id));
-  if (in_array(false,$res,true)) {
+  if (in_array(false,$rh,true)) {
     include ("mail_edit.php");
     exit();
   } else {
