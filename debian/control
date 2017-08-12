@@ -37,7 +37,6 @@ Depends: debianutils (>= 1.13.1)
        , gettext (>= 0.10.40-5)
        , sudo
        , adduser
-       , mysql-client
        , dnsutils
        , dovecot-common (>=1:1.2.15)
        , dovecot-common(<< 1:2.0)
@@ -49,12 +48,12 @@ Depends: debianutils (>= 1.13.1)
        , incron
        , cron
        , opendkim
-       , mysql-client(>= 5.0)
+       , mysql-client(>= 5.0) | mariadb-client
        , php5-curl
        , quota
        , pwgen
        , ${misc:Depends}
-Recommends: mysql-server(>= 5.0)
+Recommends: mysql-server(>= 5.0) | mariadb-server
           , ntp
           , unzip
           , bzip2
@@ -123,7 +122,6 @@ Depends: debianutils (>= 1.13.1)
          , lockfile-progs (>= 0.1.9)
          , gettext (>= 0.10.40-5)
          , adduser
-         , mysql-client
          , sudo
          , dovecot-common (>=1:1.2.15)
          , dovecot-common(<< 1:2.0)
@@ -134,7 +132,7 @@ Depends: debianutils (>= 1.13.1)
          , incron
          , cron
          , opendkim
-         , mysql-client(>= 5.0)
+         , mysql-client(>= 5.0) | mariadb-client
          , php5-curl
          , ${misc:Depends}
 Recommends:
@@ -332,7 +330,7 @@ Package: alternc-ssl
 Priority: optional
 Section: admin
 Architecture: all
-Depends: openssl, mysql-client, debconf, alternc (>= 3.0), php5-cli, ${misc:Depends}
+Depends: openssl, mysql-client | mariadb-client, debconf, alternc (>= 3.0), php5-cli, ${misc:Depends}
 Conflicts: alternc (<< 3.0)
 Description: HTTPS module for AlternC
  AlternC is a mutualized hosting software manager for Linux.
