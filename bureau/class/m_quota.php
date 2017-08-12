@@ -478,7 +478,7 @@ class m_quota {
     /* sum of mailbox sizes from all domains */
 
     function get_size_mail_sum_all() {
-        return $this->_get_sum_sql("SELECT SUM(bytes) AS sum FROM mailbox;");
+        return $this->_get_sum_sql("SELECT SUM(bytes) AS sum FROM mailbox WHERE delivery = 'dovecot';;");
     }
 
     /* sum of mailbox sizes for one domain */
@@ -491,7 +491,7 @@ class m_quota {
     /* count of mailbox sizes from all domains */
 
     function get_size_mail_count_all() {
-        return $this->_get_count_sql("SELECT COUNT(*) AS count FROM mailbox;");
+        return $this->_get_count_sql("SELECT COUNT(*) AS count FROM mailbox WHERE delivery = 'dovecot';");
     }
 
     /* count of mailbox for one domain */
