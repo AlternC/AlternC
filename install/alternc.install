@@ -586,6 +586,7 @@ mkdir -p "/etc/opendkim/keys"
 touch /etc/opendkim/TrustedHosts /etc/opendkim/SigningTable /etc/opendkim/KeyTable
 grep -q "^127.0.0.1\$" /etc/opendkim/TrustedHosts || echo "127.0.0.1" >>/etc/opendkim/TrustedHosts
 grep -q "^localhost\$" /etc/opendkim/TrustedHosts || echo "localhost" >>/etc/opendkim/TrustedHosts
+grep -q "^$PUBLIC_IP\$" /etc/opendkim/TrustedHosts || echo "$PUBLIC_IP" >>/etc/opendkim/TrustedHosts
 
 # Add opendkim to service to restart
 SERVICES="$SERVICES opendkim"
