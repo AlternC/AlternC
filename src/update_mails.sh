@@ -66,8 +66,10 @@ mysql_query "SELECT id, address_id, quote(replace(path,'!','\\!')) FROM mailbox 
 done
 
 # List the adresses to DELETE
+# delete aliases of this pop/imap email too : 
+mysql_query "DELETE r FROM recipient r LEFT JOIN address a ON r.address_id = a.id  WHERE a.mail_action = 'DELETE' OR a.mail_action = 'DELETING';"
 # Delete if only if there isn't any mailbox refering to it
-mysql_query "delete a FROM address a LEFT JOIN mailbox m ON a.id = m.address_id  WHERE m.id IS NULL AND (a.mail_action = 'DELETE' OR a.mail_action = 'DELETING');" 
+mysql_query "DELETE a FROM address a LEFT JOIN mailbox m ON a.id = m.address_id  WHERE m.id IS NULL AND (a.mail_action = 'DELETE' OR a.mail_action = 'DELETING');" 
 
 # Delete the lock
 rm -f "$LOCK_FILE"
