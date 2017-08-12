@@ -9,7 +9,9 @@ if ($argv[1] == "templates") {
     // install ssl.conf
     echo "[alternc-ssl] Installing ssl.conf template\n";
     copy("/etc/alternc/templates/apache2/mods-available/ssl.conf","/etc/apache2/mods-available/ssl.conf");
-    mkdir("/var/run/alternc-ssl");
+    if (!is_dir('/var/run/alternc-ssl')) {
+        mkdir("/var/run/alternc-ssl");
+    }
     chown("/var/run/alternc-ssl","alterncpanel");
     chgrp("/var/run/alternc-ssl","alterncpanel");
     // replace open_basedir line if necessary : 
