@@ -610,6 +610,7 @@ for service in $SERVICES; do
 done
 
 echo "Fix all the permission. May be quite long..."
+echo "YOU CAN INTERUPT THIS BY USING Ctrl-c THEN y TO BYPASS THE ERROR." 
 /usr/lib/alternc/fixperms.sh
 echo "Compile PO files"
 
