@@ -209,10 +209,14 @@ host_delete() {
       return $?
     fi
 
-    local FENABLED=$(host_conffile "$FQDN")
-    local FDISABLED="$FENABLED-disabled"
-
-    [ -w "$FENABLED" ] && rm -f "$FENABLED"
-    [ -w "$FDISABLED" ] && rm -f "$FDISABLED"
+    # Fix of a longstanding BUG: we only DELETE the vhost file if the type is a vhost one !
+    if [ -f "/etc/alternc/templates/${VTYPE}.conf" ]
+    then
+	local FENABLED=$(host_conffile "$FQDN")
+	local FDISABLED="$FENABLED-disabled"
+	
+	[ -w "$FENABLED" ] && rm -f "$FENABLED"
+	[ -w "$FDISABLED" ] && rm -f "$FDISABLED"
+    fi
 }
 
