@@ -285,13 +285,6 @@ class m_mem {
             return false;
         }
         $db->next_record();
-        if (variable_get('single_ip_desktop', '0', "Set this to 1 to enable the IP address check and unicity for an account. Prevents multiple connections to the same account and disable IP address roaming.")
-        && $db->f("ip")) {
-            if ($db->f("me") != $db->f("ip")) {
-                $err->raise("mem", _("IP address incorrect, please contact the administrator"));
-                return false;
-            }
-        }
         $cuid = $db->f("uid");
 
         if (panel_islocked() && $cuid != 2000) {
