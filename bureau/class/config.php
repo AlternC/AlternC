@@ -90,7 +90,8 @@ require_once(dirname(__FILE__) . "/local.php");
 
 // Define constants from vars of /etc/alternc/local.sh
 // The you can't choose where is the AlternC Panel 
-define("DEFAULT_PASS_SIZE", 8);
+
+define("DEFAULT_PASS_SIZE", 10);
 define('ALTERNC_MAIL', "$L_ALTERNC_MAIL");
 define('ALTERNC_HTML', "$L_ALTERNC_HTML");
 if (isset($L_ALTERNC_LOGS_ARCHIVE)) {
@@ -163,9 +164,9 @@ foreach (glob($root . "class/class_system_*.php") as $fcs) {
 include_once("lang_env.php");
 
 $mem = new m_mem();
-$err = new m_err();
 $authip = new m_authip();
 $hooks = new m_hooks();
+$msg = new m_messages();
 
 if (isset($_SERVER["HTTP_X_FORWARDED_PROTO"]) && $_SERVER["HTTP_X_FORWARDED_PROTO"]=="https") {
     $_SERVER["HTTPS"]="on";
@@ -186,7 +187,6 @@ if ((variable_get('force_https', '0', "This variable is set to 0 (default) if us
 $fatalcsrf=false;
 if (count($_POST) && !defined("NOCSRF")) {
   if (csrf_check()<=0) {
-    $error=$err->errstr();
     // We will trigger the error LATER in the code => need initialization of classes
     $fatalcsrf=true;
   }
@@ -200,7 +200,6 @@ if (!defined('NOCHECK')) {
             header('HTTP/1.0 401 Unauthorized');
             exit();
         }
-        $error = $err->errstr();
         include("$root/admin/index.php");
         exit();
     }

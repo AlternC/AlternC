@@ -848,16 +848,40 @@ function pager($offset, $count, $total, $url, $before = "", $after = "", $echo =
 /**
  * 
  * @param int $length
+ * @param int $classcount
  * @return string
  */
-function create_pass($length = 8) {
-    $chars = "1234567890abcdefghijkmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    $i = 0;
-    $password = "";
-    while ($i <= $length) {
-        $password .= @$chars{mt_rand(0, strlen($chars))};
-        $i++;
+function create_pass($length = 10, $classcount = 3) {
+    $sets = array();
+
+    // Si classcount policy est 4 catégories différents, on utilise les 4 cat, sinon, on en utilise 3
+    if ($classcount < 4)
+	$available_sets='lud';
+    else
+	$available_sets='luds';
+
+    if(strpos($available_sets, 'l') !== false)
+	$sets[] = 'abcdefghijklmnopqrstuvwxyz';
+    if(strpos($available_sets, 'u') !== false)
+	$sets[] = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    if(strpos($available_sets, 'd') !== false)
+	$sets[] = '0123456789';
+    if(strpos($available_sets, 's') !== false)
+	$sets[] = '(!#$%)*+,-./:;<=>?@[\]^_';
+
+    $all = '';
+    $password = '';
+    foreach($sets as $set) {
+	$password .= $set[array_rand(str_split($set))];
+	$all .= $set;
     }
+
+    $all = str_split($all);
+    for($i = 0; $i < $length - count($sets); $i++)
+	$password .= $all[array_rand($all)];
+
+    $password = str_shuffle($password);
+
     return $password;
 }
 
