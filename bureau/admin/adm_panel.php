@@ -30,7 +30,8 @@
 require_once("../class/config.php");
 
 if (!$admin->enabled) {
-	__("This page is restricted to authorized staff");
+	$msg->raise('Error', "admin", _("This page is restricted to authorized staff"));
+	echo $msg->msg_html_all();
 	exit();
 }
 
@@ -41,11 +42,7 @@ include_once("head.php");
 <hr id="topbar"/>
 <br />
 <?php
-if (isset($error) && $error) {
-	echo "<p class=\"alert alert-danger\">$error</p>";
-	include_once("foot.php");
-	exit;
-}
+echo $msg->msg_html_all();
 ?>
 <ul id="adm_panel">
  <li class="lst"><a href="adm_tld.php"><?php __("Manage allowed domains (TLD)"); ?></a></li>

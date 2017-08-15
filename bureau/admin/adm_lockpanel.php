@@ -30,12 +30,13 @@
 require_once("../class/config.php");
 
 if (!$admin->enabled || $cuid!=2000) {
-    __("This page is restricted to authorized staff");
+    $msg->raise('Error', "admin", _("This page is restricted to authorized staff"));
+    echo $msg->msg_html_all();
     die();
 }
 
 $fields = array (
-		 "action" =>array ("get","string",""),
+     "action" =>array ("get","string",""),
 );
 
 getFields($fields);

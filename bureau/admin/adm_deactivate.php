@@ -32,7 +32,8 @@ require_once("../class/config.php");
 include_once("head.php");
 
 if (!$admin->enabled) {
-	__("This page is restricted to authorized staff");
+	$msg->raise('Error', "admin", _("This page is restricted to authorized staff"));
+	echo $msg->msg_html_all();
 	exit;
 }
 $fields = array (
@@ -43,19 +44,22 @@ $fields = array (
 getFields($fields);
 
 if (!$uid) {
-	__("Account not found");
+	$msg->raise('Error', "admin", _("Account not found"));
+	echo $msg->msg_html_all();
 	include_once("foot.php");
 	exit();
 }
 
 if (!$admin->checkcreator($uid)) {
-        __("This page is restricted to authorized staff");
+	$msg->raise('Error', "admin", _("This page is restricted to authorized staff"));
+	echo $msg->msg_html_all();
 	include_once("foot.php");
 	exit();
 }
 
 if (!$r=$admin->get($uid)) {
-	__("User does not exist");
+	$msg->raise('Error', "admin", _("User does not exist"));
+	echo $msg->msg_html_all();
 	include_once("foot.php");
 	exit();
 }
@@ -79,7 +83,8 @@ if (! ($confirmed ) ) {
   print "<h3>" . _("Domains of user: ") . $r["login"] . "</h3>";
 } else {
   if (empty($redirect)) {
-    __("Missing redirect url.");
+    $msg->raise('Error', "admin", _("Missing redirect url."));
+    echo $msg->msg_html_all();
     include_once("foot.php");
     exit();
   } 
@@ -105,9 +110,7 @@ reset($domains);
 foreach ($domains as $key => $domain) {
   if (!$confirmed) print '<h4>' . $domain . '</h4><ul>';
   $dom->lock();
-  if (!$r=$dom->get_domain_all($domain)) {
-          $error=$err->errstr();
-  }
+  $r=$dom->get_domain_all($domain);
   $dom->unlock();
   # 2. for each subdomain
   if (is_array($r['sub'])) {
@@ -132,7 +135,7 @@ foreach ($domains as $key => $domain) {
 # 2.2 change the subdomain to redirect to http://spam.koumbit.org/
 	  $dom->lock();
 	  if (!$dom->set_sub_domain($domain, $sub, $dom->type_url, "edit", $redirect)) {
-	    print "-- error in $sub.$domain: " . $err->errstr() . "\n";
+	    print "-- error in $sub.$domain: " . $msg->msg_str("Error", "") . "\n";
 	  }
 	  $dom->unlock();
 	}

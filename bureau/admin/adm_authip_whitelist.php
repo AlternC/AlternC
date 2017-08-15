@@ -15,13 +15,13 @@ getFields($fields);
 
 if (!empty($delete_id)) {
   if (! $authip->ip_delete($delete_id)) {
-    $error="Error during deletion";
+    $msg->raise('Error', "admin", _("Error during deletion")); // à traduire
   }
 }
 
 if (!empty($ipsub)) {
   if (! $authip->ip_save_whitelist($id, $ipsub, $infos)) {
-    $error="Error during recording";
+    $msg->raise('Error', "admin", _("Error during recording"));
   }
 }
 
@@ -32,9 +32,8 @@ $list_ip = $authip->list_ip_whitelist();
 <hr id="topbar"/>
 <br />
 
-<?php if (isset($error) && $error) { ?>
-  <p class="alert alert-danger"><?php echo $error ?></p>
-<?php } ?>
+<?php echo $msg->msg_html_all(); ?>
+
 <center>
   <p class="alert alert-warning"><?php __("Warning"); echo "<br/>"; __("The IP and subnet you have here are allowed for ALL users and ALL usages"); ?></p>
 </center>

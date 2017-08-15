@@ -30,7 +30,8 @@
 require_once("../class/config.php");
 
 if (!$admin->enabled) {
-	__("This page is restricted to authorized staff");
+	$msg->raise('Error', "admin", _("This page is restricted to authorized staff"));
+	echo $msg->msg_html_all();
 	exit();
 }
 $fields = array (
@@ -49,7 +50,10 @@ while (list($key,$val)=each($qlist)) {
   $quota->setquota($key,$_REQUEST[$var]);
 }
 $mem->unsu();
-$error=_("The quotas has been successfully edited");
+
+if (!$msg->has_msgs("Error"))
+    $msg->raise("Ok", "admin", _("The quotas has been successfully edited"));
+
 include("adm_list.php");
 exit;
 

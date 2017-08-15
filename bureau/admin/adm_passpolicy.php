@@ -27,7 +27,8 @@
 require_once("../class/config.php");
 
 if (!$admin->enabled) {
-	__("This page is restricted to authorized staff");
+	$msg->raise('Error', "admin", _("This page is restricted to authorized staff"));
+	echo $msg->msg_html_all();
 	exit();
 }
 
@@ -50,38 +51,34 @@ include_once("head.php");
 <hr id="topbar"/>
 <br />
 <?php
-	if (isset($error) && $error) {
-	  echo "<p class=\"alert alert-danger\">$error</p>";
-	}
-
-
 $c=$admin->listPasswordPolicies();
-//echo "<pre>"; print_r($c); echo "</pre>";
 
 if (isset($doedit) && $doedit) {
   if (!$c[$doedit]) {
-    echo "<p class=\"alert alert-danger\">"._("Policy not found")."</p>";
+    $msg->raise('Error', "admin", _("Policy not found"));
   } else {
     // Change it ;) 
     if ($admin->editPolicy($doedit,$minsize,$maxsize,$classcount,$allowlogin)) {
-      echo "<p class=\"info\">"._("Policy changed")."</p>";
+      $msg->raise('Ok', "admin", _("Policy changed"));
       unset($edit);
       $c=$admin->listPasswordPolicies();
     } else {
-      echo "<p class=\"alert alert-danger\">"._("Cannot edit the policy, an error occurred")."</p>";
+      $msg->raise('Error', "admin", _("Cannot edit the policy, an error occurred"));
     }
   }
 }
+echo $msg->msg_html_all("<li>", true, true);
 
 if (!empty($edit)) {
   if (!$c[$edit]) {
-    echo "<p class=\"alert alert-danger\">"._("Policy not found")."</p>";
+    $msg->raise('Error', "admin", _("Policy not found"));
+    echo $msg->msg_html_all();
   } else {
 ?>
 
- <p><?php __("Please choose which policy you want to apply to this password kind:"); ?></p>
+<p><?php __("Please choose which policy you want to apply to this password kind:"); ?></p>
 
-																	     <p><b><?php echo $c[$edit]["description"]; ?></b></p>
+<p><b><?php echo $c[$edit]["description"]; ?></b></p>
 
 <form method="post" action="adm_passpolicy.php">
  <?php csrf_get(); ?>

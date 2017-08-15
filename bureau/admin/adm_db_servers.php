@@ -27,7 +27,8 @@ require_once("../class/config.php");
 include("head.php");
 
 if (!$admin->enabled) {
-    __("This page is restricted to authorized staff");
+    $msg->raise('Error', "admin", _("This page is restricted to authorized staff"));
+    echo $msg->msg_html_all();
     exit();
 }
 
