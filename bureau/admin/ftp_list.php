@@ -38,7 +38,6 @@ getFields($fields);
 $noftp=false;
 if (!$r=$ftp->get_list($domain)) {
 	$noftp=true;
-	$error=$err->errstr();
 }
 
 ?>
@@ -47,24 +46,20 @@ if (!$r=$ftp->get_list($domain)) {
 <br />
  
 <?php
-if (isset($error) && $error && !$noftp) {
-?>
-<p class="alert alert-danger"><?php echo $error ?></p>
-<?php } ?>
+echo $msg->msg_html_all();
 
-<?php if ($quota->cancreate("ftp")) { ?>
-<p>
+if ($quota->cancreate("ftp")) { ?>
+  <p>
    <span class="inb add"><a href="ftp_edit.php?create=1"><?php __("Create a new ftp account"); ?></a></span> 
-</p>
-<?php  	} ?>
+  </p>
+<?php
+}
 
-<?php
-	if ($noftp) {
-?>
-	<?php $mem->show_help("ftp_list_no"); ?>
-<?php
- include_once("foot.php"); 
-    } 
+if ($noftp) {
+  $mem->show_help("ftp_list_no");
+  include_once("foot.php");
+  exit;
+} 
 ?>
 
 <form method="post" action="ftp_del.php">
@@ -80,7 +75,7 @@ while (list($key,$val)=each($r)) { ?>
 		<td align="center"><input type="checkbox" class="inc" id="del_<?php ehe($val["id"]); ?>" name="del_<?php ehe($val["id"]); ?>" value="<?php ehe($val["id"]); ?>" /></td>
 <td><div class="ina edit"><a href="ftp_edit.php?id=<?php eue($val["id"]); ?>"><?php __("Edit"); ?></a></div></td>
 
-		<td><a href='ftp_switch_enable.php?id=<?php eue($val['id'],false); echo '&amp;status='.( ($val['enabled'])?'0':'1' ) ;?>' onClick='return confirm("<?php __("Are you sure you want to change his status?"); ?>");'><?php 
+		<td><a href='ftp_switch_enable.php?id=<?php eue($val['id']); echo '&amp;status='.( ($val['enabled'])?'0':'1' ) ;?>' onClick='return confirm("<?php __("Are you sure you want to change his status?"); ?>");'><?php 
 if ( $val['enabled']) {
   echo "<img src='images/check_ok.png' alt=\""._("Enabled")."\"/>";
   echo "<span style='display:none;'>ENABLED</span>"; // for tablesorter
