@@ -79,8 +79,8 @@ class m_roundcube {
 
     include_once("/etc/roundcube/debian-db.php");
     if (! isset($dbtype)) {
-      global $err;
-      $err->raise("roundcube::hook_mail_delete_for_real",_("Problem: missing var in Debian Roundcube configuration file"));
+      global $msg;
+      $msg->raise('Error', "roundcube::hook_mail_delete_for_real",_("Problem: missing var in Debian Roundcube configuration file"));
       return false;
     }
 
@@ -112,7 +112,7 @@ class m_roundcube {
       $dbh->prepare("DELETE from users where user_id = ? ; ")->execute(array($rcuser_id));
     } //foreach
     }
-    
+
   }
 
 } /* Class Roundcube */

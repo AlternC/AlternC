@@ -30,10 +30,10 @@ $fields = array (
 getFields($fields);
 
 if (!($res=$mail->create($domain_id,$mail_arg))) {
-  $error=$err->errstr();
   include("mail_list.php");
 } else {
   $_REQUEST["mail_id"]=$res;
+  $new_account=true;
   include("mail_edit.php"); 
 }
 ?>

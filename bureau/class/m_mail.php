@@ -113,7 +113,7 @@ class m_mail {
     function get_total_size_for_domain($domain) {
         global $db;
         if (empty($this->cache_domain_mail_size)) {
-            $db->query("SELECT SUBSTRING_INDEX(user,'@', -1) as domain, SUM(quota_dovecot) AS sum FROM dovecot_view group by domain ;");
+            $db->query("SELECT SUBSTRING_INDEX(user,'@', -1) as domain, SUM(quota_dovecot) AS sum FROM dovecot_quota group by domain ;");
             while ($db->next_record()) {
                 $dd = $db->f('domain');
                 $this->cache_domain_mail_size[$dd] = $db->f('sum');
@@ -173,9 +173,9 @@ class m_mail {
      * @param string $target
      */
     function catchall_set($domain_id, $target) {
-        global $err;
+        global $msg;
         $target = rtrim($target);
-        if (substr_count($target, '@') == 0) { // Pas de @
+        if (strlen($target) > 0 && substr_count($target, '@') == 0) { // Pas de @
             $target = '@' . $target;
         }
 
@@ -183,12 +183,11 @@ class m_mail {
             // FIXME validate domain
         } else { // ca doit être un mail
             if (!filter_var($target, FILTER_VALIDATE_EMAIL)) {
-                $err->raise("mail", _("The email you entered is syntaxically incorrect"));
+                $msg->raise('Error', "mail", _("The email you entered is syntaxically incorrect"));
                 return false;
             }
         }
         $this->catchall_del($domain_id);
-        $err->error = "";
         return $this->create_alias($domain_id, '', $target, "catchall", true);
     }
 
@@ -201,8 +200,8 @@ class m_mail {
      * or false if I'm not the one for the named quota
      */
     function hook_quota_get() {
-        global $db, $err, $cuid;
-        $err->log("mail", "getquota");
+        global $db, $msg, $cuid;
+        $msg->log("mail", "getquota");
         $q = Array("name" => "mail", "description" => _("Email addresses"), "used" => 0);
         $db->query("SELECT COUNT(*) AS cnt FROM address a, domaines d WHERE a.domain_id=d.id AND d.compte= ? AND a.type='';", array($cuid));
         if ($db->next_record()) {
@@ -226,12 +225,12 @@ class m_mail {
      * @return array indexed array of hosted domains
      */
     function enum_domains($uid = -1) {
-        global $db, $err, $cuid;
-        $err->log("mail", "enum_domains");
+        global $db, $msg, $cuid;
+        $msg->log("mail", "enum_domains");
         if ($uid == -1) {
             $uid = $cuid;
         }
-        $db->query("
+	$db->query("
 SELECT
   d.id,
   d.domaine,
@@ -262,8 +261,8 @@ ORDER BY
      * @return boolean true if the email can be installed on the server 
      */
     function available($mail) {
-        global $db, $err, $dom;
-        $err->log("mail", "available");
+        global $db, $msg, $dom;
+        $msg->log("mail", "available");
         list($login, $domain) = explode("@", $mail, 2);
         // Validate the domain ownership & syntax
         if (!($dom_id = $dom->get_domain_byname($domain))) {
@@ -271,7 +270,7 @@ ORDER BY
         }
         // Validate the email syntax:
         if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
-            $err->raise("mail", _("The email you entered is syntaxically incorrect"));
+            $msg->raise('Error', "mail", _("The email you entered is syntaxically incorrect"));
             return false;
         }
         // Check the availability
@@ -293,8 +292,8 @@ ORDER BY
      */
 
     function enum_domain_mails($dom_id = null, $search = "", $offset = 0, $count = 30, $show_systemmails = false) {
-        global $db, $err, $hooks;
-        $err->log("mail", "enum_domains_mail");
+        global $db, $msg, $hooks;
+        $msg->log("mail", "enum_domains_mail");
 
         $query_args = array($dom_id);
         $search     = trim($search);
@@ -317,11 +316,11 @@ ORDER BY
         } else {
             $limit = "";
         }
-        $db->query("SELECT a.id, a.address, a.password, a.`enabled`, a.mail_action, d.domaine AS domain, m.quota, m.quota*1024*1024 AS quotabytes, m.bytes AS used, NOT ISNULL(m.id) AS islocal, a.type, r.recipients, m.lastlogin, a.domain_id  
-         FROM (address a LEFT JOIN mailbox m ON m.address_id=a.id) LEFT JOIN recipient r ON r.address_id=a.id, domaines d 
+        $db->query("SELECT a.id, a.address, a.password, a.`enabled`, a.mail_action, d.domaine AS domain, m.quota, m.quota*1024*1024 AS quotabytes, q.quota_dovecot as used, NOT ISNULL(m.id) AS islocal, a.type, r.recipients, m.lastlogin, a.domain_id
+         FROM ((domaines d, address a LEFT JOIN mailbox m ON m.address_id=a.id) LEFT JOIN dovecot_quota q ON CONCAT(a.address,'@',d.domaine)  = q.user) LEFT JOIN recipient r ON r.address_id=a.id
          WHERE " . $where . " AND d.id=a.domain_id " . $limit . " ;", $query_args);
         if (!$db->next_record()) {
-            $err->raise("mail", _("No email found for this query"));
+            $msg->raise('Error', "mail", _("No email found for this query"));
             return array();
         }
         $res = array();
@@ -355,11 +354,11 @@ ORDER BY
      * (will be the part at the right of the @ in the email)
      * @param $mail string the left part of the email to create (something@dom_id)
      * @return an hashtable containing the database id of the newly created mail, 
-     * or false if an error occured ($err is filled accordingly)
+     * or false if an error occured ($msg is filled accordingly)
      */
     function create($dom_id, $mail, $type = "", $dontcheck = false) {
-        global $err, $db, $quota, $dom, $hooks;
-        $err->log("mail", "create", $mail);
+        global $msg, $db, $quota, $dom, $hooks;
+        $msg->log("mail", "create", $mail);
 
         // Validate the domain id
         if (!($domain = $dom->get_domain_byid($dom_id))) {
@@ -369,7 +368,7 @@ ORDER BY
         // Validate the email syntax:
         $m = $mail . "@" . $domain;
         if (!filter_var($m, FILTER_VALIDATE_EMAIL) && !$dontcheck) {
-            $err->raise("mail", _("The email you entered is syntaxically incorrect"));
+            $msg->raise('Error', "mail", _("The email you entered is syntaxically incorrect"));
             return false;
         }
 
@@ -381,19 +380,23 @@ ORDER BY
 
         // Check the quota:
         if (($type=="")&&!$quota->cancreate("mail")) {
-            $err->raise("mail", _("You cannot create email addresses: your quota is over"));
+            $msg->raise('Alert', "mail", _("You cannot create email addresses: your quota is over"));
             return false;
         }
         // Already exists?
         $db->query("SELECT * FROM address WHERE domain_id= ? AND address= ? ;", array($dom_id, $mail));
         if ($db->next_record()) {
-            $err->raise("mail", _("This email address already exists"));
+	    if ($db->f("type") == "mailman")
+	      $msg->raise('Error', "mail", _("This email address already exists in mailman")); // à traduire
+	    else
+              $msg->raise('Error', "mail", _("This email address already exists"));
+
             return false;
         }
         // Create it now
         $db->query("INSERT INTO address (domain_id, address,type) VALUES (?, ?, ?);", array($dom_id, $mail, $type));
         if (!($id = $db->lastid())) {
-            $err->raise("mail", _("An unexpected error occured when creating the email"));
+            $msg->raise('Error', "mail", _("An unexpected error occured when creating the email"));
             return false;
         }
         return $id;
@@ -406,8 +409,8 @@ ORDER BY
      * @return array a hashtable with all the informations for that email
      */
     function get_details($mail_id) {
-        global $db, $err, $hooks;
-        $err->log("mail", "get_details");
+        global $db, $msg, $hooks;
+        $msg->log("mail", "get_details");
 
         $mail_id = intval($mail_id);
         // Validate that this email is owned by me...
@@ -416,7 +419,7 @@ ORDER BY
         }
 
         // We fetch all the informations for that email: these will fill the hastable : 
-        $db->query("SELECT a.id, a.address, a.password, a.enabled, d.domaine AS domain, m.path, m.quota, m.quota*1024*1024 AS quotabytes, m.bytes AS used, NOT ISNULL(m.id) AS islocal, a.type, r.recipients, m.lastlogin, a.mail_action, m.mail_action AS mailbox_action FROM (address a LEFT JOIN mailbox m ON m.address_id=a.id) LEFT JOIN recipient r ON r.address_id=a.id, domaines d WHERE a.id= ? AND d.id=a.domain_id;", array($mail_id));
+        $db->query("SELECT a.id, a.address, a.password, a.enabled, d.domaine AS domain, m.path, m.quota, m.quota*1024*1024 AS quotabytes, q.quota_dovecot AS used, NOT ISNULL(m.id) AS islocal, a.type, r.recipients, m.lastlogin, a.mail_action, m.mail_action AS mailbox_action FROM ((domaines d, address a LEFT JOIN mailbox m ON m.address_id=a.id) LEFT JOIN dovecot_quota q ON CONCAT(a.address,'@',d.domaine)  = q.user) LEFT JOIN recipient r ON r.address_id=a.id WHERE a.id= ? AND d.id=a.domain_id;", array($mail_id));
         if (!$db->next_record()) {
             return false;
         }
@@ -437,10 +440,10 @@ ORDER BY
      *
      * @param $mail_id integer the number of the email to check
      * @return string the complete email address if that's mine, false if not
-     * ($err is filled accordingly)
+     * ($msg is filled accordingly)
      */
     function is_it_my_mail($mail_id) {
-        global $err, $db, $cuid;
+        global $msg, $db, $cuid;
         $mail_id = intval($mail_id);
         // cache it (may be called more than one time in the same page).
         if (isset($this->isitmy_cache[$mail_id])) {
@@ -450,7 +453,7 @@ ORDER BY
         if ($db->next_record()) {
             return $this->isitmy_cache[$mail_id] = $db->f("email");
         } else {
-            $err->raise("mail", _("This email is not yours, you can't change anything on it"));
+            $msg->raise('Error', "mail", _("This email is not yours, you can't change anything on it"));
             return $this->isitmy_cache[$mail_id] = false;
         }
     }
@@ -460,7 +463,7 @@ ORDER BY
     /** Hook called when the DOMAIN class will delete a domain.
      * OR when the DOMAIN class tells us we don't host the emails of this domain anymore.
      * @param $dom the ID of the domain to delete
-     * @return boolean if the email has been properly deleted 
+     * @return boolean if the email has been properly deleted
      * or false if an error occured ($err is filled accordingly)
      */
     function hook_dom_del_mx_domain($dom_id) {
@@ -498,16 +501,16 @@ ORDER BY
      *
      * @param $mail_id integer the number of the email to delete
      * @return boolean if the email has been properly deleted 
-     * or false if an error occured ($err is filled accordingly)
+     * or false if an error occured ($msg is filled accordingly)
      */
     function delete($mail_id) {
-        global $err, $db, $hooks;
-        $err->log("mail", "delete");
+        global $msg, $db, $hooks;
+        $msg->log("mail", "delete");
 
         $mail_id = intval($mail_id);
 
         if (!$mail_id) {
-            $err->raise("mail", _("The email you entered is syntaxically incorrect"));
+            $msg->raise('Error', "mail", _("The email you entered is syntaxically incorrect"));
             return false;
         }
         // Validate that this email is owned by me...
@@ -521,11 +524,11 @@ ORDER BY
         // Search for that address:
         $db->query("SELECT a.id, a.type, a.mail_action, m.mail_action AS mailbox_action, NOT ISNULL(m.id) AS islocal FROM address a LEFT JOIN mailbox m ON m.address_id=a.id WHERE a.id= ? ;", array($mail_id));
         if (!$db->next_record()) {
-            $err->raise("mail", _("The email %s does not exist, it can't be deleted"), $mail);
+            $msg->raise('Error', "mail", _("The email %s does not exist, it can't be deleted"), $mail);
             return false;
         }
         if ($db->f("mail_action") != "OK" || ($db->f("islocal") && $db->f("mailbox_action") != "OK")) { // will be deleted soon ...
-            $err->raise("mail", _("The email %s is already marked for deletion, it can't be deleted"), $mail);
+            $msg->raise('Error', "mail", _("The email %s is already marked for deletion, it can't be deleted"), $mail);
             return false;
         }
         $mail_id = $db->f("id");
@@ -534,13 +537,11 @@ ORDER BY
             // If it's a pop/imap mailbox, mark it for deletion
             $db->query("UPDATE address SET mail_action='DELETE', enabled=0 WHERE id= ?;", array($mail_id));
             $db->query("UPDATE mailbox SET mail_action='DELETE' WHERE address_id= ?;", array($mail_id));
-            $err->raise("mail", _("The email %s has been marked for deletion"), $mail);
         } else {
             // If it's only aliases, delete it NOW.
             $db->query("DELETE FROM address WHERE id= ? ;", array($mail_id));
             $db->query("DELETE FROM mailbox WHERE address_id= ? ;", array($mail_id));
             $db->query("DELETE FROM recipient WHERE address_id= ? ;", array($mail_id));
-            $err->raise("mail", _("The email %s has been successfully deleted"), $mail);
         }
         return true;
     }
@@ -552,16 +553,16 @@ ORDER BY
      *
      * @param $mail_id integer the email id
      * @return boolean if the email has been properly undeleted 
-     * or false if an error occured ($err is filled accordingly)
+     * or false if an error occured ($msg is filled accordingly)
      */
     function undelete($mail_id) {
-        global $err, $db;
-        $err->log("mail", "undelete");
+        global $msg, $db;
+        $msg->log("mail", "undelete");
 
         $mail_id = intval($mail_id);
 
         if (!$mail_id) {
-            $err->raise("mail", _("The email you entered does not exist"));
+            $msg->raise('Error', "mail", _("The email you entered does not exist"));
             return false;
         }
         // Validate that this email is owned by me...
@@ -572,15 +573,15 @@ ORDER BY
         // Search for that address:
         $db->query("SELECT a.id, a.type, a.mail_action, m.mail_action AS mailbox_action, NOT ISNULL(m.id) AS islocal FROM address a LEFT JOIN mailbox m ON m.address_id=a.id WHERE a.id= ? ;", array($mail_id));
         if (!$db->next_record()) {
-            $err->raise("mail", _("The email %s does not exist, it can't be undeleted"), $mail);
+            $msg->raise('Error', "mail", _("The email %s does not exist, it can't be undeleted"), $mail);
             return false;
         }
         if ($db->f("type") != "") { // Technically special : mailman, sympa ... 
-            $err->raise("mail", _("The email %s is special, it can't be undeleted"), $mail);
+            $msg->raise('Error', "mail", _("The email %s is special, it can't be undeleted"), $mail);
             return false;
         }
         if ($db->f("mailbox_action") != "DELETE" || $db->f("mail_action") != "DELETE") { // will be deleted soon ...
-            $err->raise("mail", _("Sorry, deletion of email %s is already in progress, or not marked for deletion, it can't be undeleted"), $mail);
+            $msg->raise('Alert', "mail", _("Sorry, deletion of email %s is already in progress, or not marked for deletion, it can't be undeleted"), $mail);
             return false;
         }
         $mail_id = $db->f("id");
@@ -589,10 +590,9 @@ ORDER BY
             // If it's a pop/imap mailbox, mark it for deletion
             $db->query("UPDATE address SET mail_action='OK', `enabled`=1 WHERE id= ?;", array($mail_id));
             $db->query("UPDATE mailbox SET mail_action='OK' WHERE address_id= ? ;", array($mail_id));
-            $err->raise("mail", _("The email %s has been undeleted"), $mail);
             return true;
         } else {
-            $err->raise("mail", _("-- Program Error -- The email %s can't be undeleted"), $mail);
+            $msg->raise('Error', "mail", _("-- Program Error -- The email %s can't be undeleted"), $mail);
             return false;
         }
     }
@@ -604,14 +604,14 @@ ORDER BY
      * @param $pass string the new password.
      * @return boolean true if the password has been set, false else, raise an error.
      */
-    function set_passwd($mail_id, $pass) {
-        global $db, $err, $admin;
-        $err->log("mail", "setpasswd");
+    function set_passwd($mail_id, $pass, $canbeempty = false) {
+        global $db, $msg, $admin;
+        $msg->log("mail", "setpasswd");
 
         if (!($email = $this->is_it_my_mail($mail_id))) {
             return false;
         }
-        if (!$admin->checkPolicy("pop", $email, $pass)) {
+        if (!$admin->checkPolicy("pop", $email, $pass, $canbeempty)) {
             return false;
         }
         if (!$db->query("UPDATE address SET password= ? where id = ? ;", array(_md5cr($pass), $mail_id ))) {
@@ -627,8 +627,8 @@ ORDER BY
      * @return boolean true if the email has been enabled.
      */
     function enable($mail_id) {
-        global $db, $err;
-        $err->log("mail", "enable");
+        global $db, $msg;
+        $msg->log("mail", "enable");
         if (!($email = $this->is_it_my_mail($mail_id))) {
             return false;
         }
@@ -645,8 +645,8 @@ ORDER BY
      * @return boolean true if the email has been enabled.
      */
     function disable($mail_id) {
-        global $db, $err;
-        $err->log("mail", "disable");
+        global $db, $msg;
+        $msg->log("mail", "disable");
         if (!($email = $this->is_it_my_mail($mail_id))) {
             return false;
         }
@@ -666,11 +666,11 @@ ORDER BY
      * @param integer $quotamb integer if islocal=1, quota in MB
      * @param string $recipients string recipients, one mail per line.
      * @return boolean if the email has been properly edited
-     * or false if an error occured ($err is filled accordingly)
+     * or false if an error occured ($msg is filled accordingly)
      */
     function set_details($mail_id, $islocal, $quotamb, $recipients, $delivery = "dovecot", $dontcheck = false) {
-        global $err, $db;
-        $err->log("mail", "set_details");
+        global $msg, $db;
+        $msg->log("mail", "set_details");
         if (!($me = $this->get_details($mail_id))) {
             return false;
         }
@@ -686,7 +686,7 @@ ORDER BY
             }
             foreach ($this->forbiddenchars as $str) {
                 if (strpos($me["address"], $str) !== false) {
-                    $err->raise("mail", _("There is forbidden characters in your email address. You can't make it a POP/IMAP account, you can only use it as redirection to other emails"));
+                    $msg->raise('Error', "mail", _("There is forbidden characters in your email address. You can't make it a POP/IMAP account, you can only use it as redirection to other emails"));
                     return false;
                 }
             }
@@ -705,7 +705,7 @@ ORDER BY
         if ($islocal) {
             if ($quotamb != 0 && $quotamb < (intval($me["used"] / 1024 / 1024) + 1)) {
                 $quotamb = intval($me["used"] / 1024 / 1024) + 1;
-                $err->raise("mail", _("You set a quota smaller than the current mailbox size. Since it's not allowed, we set the quota to the current mailbox size"));
+                $msg->raise('Alert', "mail", _("You set a quota smaller than the current mailbox size. Since it's not allowed, we set the quota to the current mailbox size"));
             }
             $db->query("UPDATE mailbox SET quota= ? WHERE address_id= ? ;", array($quotamb, $mail_id));
         }
@@ -725,7 +725,7 @@ ORDER BY
             $db->query("INSERT INTO recipient SET address_id= ?, recipients= ? ;", array($mail_id, $red));
         }
 	if (!$islocal && !$red) {
-	  $err->raise("mail", _("Warning: you created an email which is not an alias, and not a POP/IMAP mailbox. This is certainly NOT what you want to do. To fix this, edit the email address and check 'Yes' in POP/IMAP account, or set some recipients in the redirection field."));
+	  $msg->raise('Alert', "mail", _("Warning: you created an email which is not an alias, and not a POP/IMAP mailbox. This is certainly NOT what you want to do. To fix this, edit the email address and check 'Yes' in POP/IMAP account, or set some recipients in the redirection field."));
 	}
         return true;
     }
@@ -738,8 +738,8 @@ ORDER BY
      * @ param : $delivery , the delivery used to deliver the mail
      */
     function add_wrapper($dom_id, $m, $delivery) {
-        global $err, $mail;
-        $err->log("mail", "add_wrapper", "creating $delivery $m address");
+        global $msg, $mail;
+        $msg->log("mail", "add_wrapper", "creating $delivery $m address");
 
         $mail_id = $mail->create($dom_id, $m, $delivery);
         $this->set_details($mail_id, 1, 0, '', $delivery);
@@ -758,8 +758,8 @@ ORDER BY
      * @param string $dom_id
      */
     function create_alias($dom_id, $m, $alias, $type = "", $dontcheck = false) {
-        global $err, $mail;
-        $err->log("mail", "create_alias", "creating $m alias for $alias type $type");
+        global $msg, $mail;
+        $msg->log("mail", "create_alias", "creating $m alias for $alias type $type");
 
         $mail_id = $mail->create($dom_id, $m, $type, $dontcheck);
         if (!$mail_id) {
@@ -776,8 +776,8 @@ ORDER BY
      * of the email for the current acccount.
      */
     function del_wrapper($mail_id) {
-        global $err;
-        $err->log("mail", "del_wrapper");
+        global $msg;
+        $msg->log("mail", "del_wrapper");
         $this->delete($mail_id);
     }
 
@@ -788,8 +788,8 @@ ORDER BY
      * of the email for the current acccount.
      */
     function alternc_export_conf() {
-        global $err;
-        $err->log("mail", "export");
+        global $msg;
+        $msg->log("mail", "export");
         $domain = $this->enum_domains();
         $str = "<mail>\n";
         foreach ($domain as $d) {
@@ -895,10 +895,10 @@ ORDER BY
      * @return boolean TRUE if the account has been created, or FALSE if an error occurred.
      */
     function add_slave_account($login, $pass) {
-        global $db, $err;
+        global $db, $msg;
         $db->query("SELECT * FROM mxaccount WHERE login= ? ;", array($login));
         if ($db->next_record()) {
-            $err->raise("mail", _("The slave MX account was not found"));
+            $msg->raise('Error', "mail", _("The slave MX account was not found"));
             return false;
         }
         $db->query("INSERT INTO mxaccount (login,pass) VALUES (?, ?);", array($login, $pass));
@@ -927,8 +927,8 @@ ORDER BY
      * @access private
      */
     function hook_dom_add_slave_domain($domain_id, $target_domain) {
-        global $err;
-        $err->log("mail", "hook_dom_add_slave_domain", $domain_id);
+        global $msg;
+        $msg->log("mail", "hook_dom_add_slave_domain", $domain_id);
         $this->catchall_set($domain_id, '@' . $target_domain);
         return true;
     }
@@ -943,12 +943,12 @@ ORDER BY
      * @access private
      */
     function hook_dom_add_mx_domain($domain_id) {
-        global $err, $mem, $db;
-        $err->log("mail", "hook_dom_add_mx_domain", $domain_id);
+        global $msg, $mem, $db;
+        $msg->log("mail", "hook_dom_add_mx_domain", $domain_id);
 
         $db->query("SELECT value FROM variable where name='mailname_bounce';");
         if (!$db->next_record()) {
-            $err->raise("mail", _("Problem: can't create default bounce mail"));
+            $msg->raise('Error', "mail", _("Problem: can't create default bounce mail"));
             return false;
         }
         $mailname = $db->f("value");
@@ -971,8 +971,8 @@ ORDER BY
      * @access private
      */
     function hook_variable_set($name, $old, $new) {
-        global $err, $db;
-        $err->log("mail", "hook_variable_set($name,$old,$new)");
+        global $msg, $db;
+        $msg->log("mail", "hook_variable_set($name,$old,$new)");
 
         if ($name == "default_spf_value") {
             $new = trim($new);
