@@ -35,11 +35,8 @@ $fields = array (
 );
 getFields($fields);
 
-$mysql->change_user_password($id,$password,$passwordconf);
-$error=$err->errstr();
-if(isset($error) && $error){
-  include("sql_users_password.php");
-}else{
-  include("sql_users_list.php");
-}
+if ($mysql->change_user_password($id,$password,$passwordconf))
+  $msg->raise("ok", "mysql", _("Mot de passe changé pour l'utilisateur '%s'."), $id);
+
+include("sql_users_list.php");
 ?>

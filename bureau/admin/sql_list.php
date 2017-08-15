@@ -38,12 +38,14 @@ $r=$mysql->get_userslist();
 <hr id="topbar"/>
 <br />
 <?php
-	if (isset($error) && $error) {
-		echo "<p class=\"alert alert-danger\">$error</p>";
-	}
-  if(!$r || empty($r)){
-    echo "<p class=\"alert alert-info\">"._("You have no sql user at the moment.")."</p>";  
+  // On regarde d'abord si on a une db existante. Sioui, on regarde si on a des utilisateurs existants
+  if(!$rdb || empty($rdb)){
+	$msg->raise("info", "mysql", _("You have no database at the moment."));
+  } else if(!$r || empty($r)){
+	$msg->raise("info", "mysql", _("You have no sql user at the moment."));
   }
+
+echo $msg->msg_html_all();
 ?>
 
 <?php
@@ -74,7 +76,7 @@ for($i=0;$i<count($rdb);$i++) {
 
  }
 ?>
-<tr><td colspan="5">
+<tr><td colspan="6">
    <input type="submit" name="sub" value="<?php __("Delete the checked databases"); ?>" class="inb delete" />
 </td></tr>
 </table>

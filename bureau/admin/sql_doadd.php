@@ -34,7 +34,7 @@ $fields = array (
 );
 getFields($fields);
 if (!$quota->cancreate("mysql")) {
-  $error=_("Can't create a database: your quota is over");
+  $msg->raise("alert", "mysql", _("Can't create a database: your quota is over"));
   include("sql_list.php");
   exit;
 }
@@ -46,13 +46,11 @@ if($q['u'] > 0){
   $dbname=$mem->user["login"];
 }
 
-if(!$mysql->add_db($dbname)) {
-  $error=$err->errstr();
-  include("sql_list.php");
-  exit;
+if($mysql->add_db($dbname)) {
+  $msg->raise("ok", "mysql", _("La base de données '%s' a bien été créé."),$dbname);
 }
 
-header('Location: sql_getparam.php?dbname='.htmlentities($dbname));
-#include("sql_list.php");
+#header('Location: sql_getparam.php?dbname='.htmlentities($dbname));
+include("sql_list.php");
 
 ?>

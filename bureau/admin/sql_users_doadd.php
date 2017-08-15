@@ -36,18 +36,22 @@ $fields = array (
 );
 getFields($fields);
 
-if(!empty($usern)){
+if (!empty($usern)) {
   if (!$mysql->add_user($usern,$password,$passconf)) {
-    $error=$err->errstr();
     include("sql_users_add.php");
     exit;
+  } else {
+    $username=$mem->user["login"]."_".$usern;
+    $msg->raise("ok", "mysql", _("L'utilisateur '%s' a bien été créé."),$username);
   }
-}else{
+} else {
   $usern=$mem->user["login"];
   if (!$mysql->add_user($usern,$password,$passconf)) {
-    $error=$err->errstr();
     include("sql_users_add.php");
     exit;
+  } else {
+    $username=$mem->user["login"];
+    $msg->raise("ok", "mysql", _("L'utilisateur '%s' a bien été créé."),$username);
   }
 }
 

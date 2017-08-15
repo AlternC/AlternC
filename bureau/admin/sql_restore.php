@@ -36,18 +36,14 @@ $fields = array (
 );
 getFields($fields);
 
-if (!$r=$mysql->get_mysql_details($id)) {
-	$error=$err->errstr();
-}
+$r=$mysql->get_mysql_details($id);
 
 ?>
 <h3><?php __("MySQL Databases"); ?></h3>
 <hr id="topbar"/>
 <br />
 <?php
-if (!empty($error)) {
-	echo "<p class=\"alert alert-danger\">$error</p><p>&nbsp;</p>";
-}
+echo $msg->msg_html_all();
 
 if (!is_array($r)) {
   echo "<p>"._("You currently have no database defined")."</p>";

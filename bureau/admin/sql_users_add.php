@@ -37,21 +37,20 @@ $fields = array (
 );
 getFields($fields);
 
+$c=$admin->listPasswordPolicies();
+$passwd_classcount = $c['mysql']['classcount'];
+
 ?>
 <h3><?php __("Create a new MySQL user"); ?></h3>
 <hr id="topbar"/>
 <br />
 <?php
-	if (isset($error) && $error) {
-		echo "<p class=\"alert alert-danger\">$error</p>";
-		if (isset($fatal) && $fatal) {
-?>
-<?php include_once("foot.php"); ?>
+echo $msg->msg_html_all();
 
-<?php
-			exit();
-		}
-	}
+if (isset($fatal) && $fatal) {
+    include_once("foot.php");
+    exit();
+}
 ?>
 <form method="post" action="sql_users_doadd.php" id="main" name="main" autocomplete="off">
   <?php csrf_get(); ?>
@@ -62,12 +61,17 @@ getFields($fields);
 
 <table class="tedit">
 <tr>
+<?php
+// On récupère la taille max d'un nom d'utilisateur mysql (définit dans les variables globales d'AlternC
+// et on l'utilise pour mettre la propriété maxlength de l'Input du nom
+$len=variable_get('sql_max_username_length', NULL)-strlen($mem->user["login"]."_");
+?>
   <th><label for="usern"><?php __("Username"); ?></label></th>
-  <td><span class="int" id="usernpfx"><?php echo $mem->user["login"]; ?>_</span><input type="text" class="int" name="usern" id="usern" value="<?php ehe($usern); ?>" size="20" maxlength="20" /></td>
+  <td><span class="int" id="usernpfx"><?php echo $mem->user["login"]; ?>_</span><input type="text" class="int" name="usern" id="usern" value="<?php ehe($usern); ?>" size="20" maxlength="<?php echo $len; ?>" /></td>
 </tr>
 <tr>
   <th><label for="password"><?php __("Password"); ?></label></th>
-  <td><input type="password" class="int" autocomplete="off" name="password" id="password" size="26"/><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#password","#passconf"); ?></td>
+  <td><input type="password" class="int" autocomplete="off" name="password" id="password" size="26"/><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#password","#passconf",$passwd_classcount); ?></td>
 </tr>
 <tr>
   <th><label for="password"><?php __("Confirm password"); ?></label></th>
@@ -81,7 +85,7 @@ getFields($fields);
 </table>
 </form>
 <script type="text/javascript">
-  if (document.forms['main'].usern.text!='') {
+  if (document.forms['main'].usern.value!='') {
     document.forms['main'].password.focus();
   } else {
     document.forms['main'].usern.focus();

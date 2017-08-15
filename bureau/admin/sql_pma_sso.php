@@ -29,9 +29,7 @@
 */
 require_once("../class/config.php");
 
-if (!$r=$mysql->php_myadmin_connect()) {
-	$error=$err->errstr();
-} else {
+if ($r=$mysql->php_myadmin_connect()) {
   // SSO of PhpMyAdmin
   $_SESSION['PMA_single_signon_user'] = $r["login"];
   $_SESSION['PMA_single_signon_password'] = $r["pass"];
@@ -45,9 +43,8 @@ if (!$r=$mysql->php_myadmin_connect()) {
 include_once("head.php");
 echo '<h3>'._("SQL Admin").'</h3>';
 
-if (!empty($error)) {
-  echo "<p class=\"alert alert-danger\">$error</p>";
-}
+echo $msg->msg_html_all();
+
 include_once("foot.php"); 
 
 ?>
