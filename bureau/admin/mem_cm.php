@@ -41,11 +41,12 @@ getFields($fields);
 ?>
 <h3><?php __("Change the email of the account"); ?></h3>
 <?php
-if (isset($error) && $error) {
-		echo "<p class=\"alert alert-danger\">$error</p>";
-		include_once("foot.php");
-		exit();
-	}
+echo $msg->msg_html_all();
+if ($msg->has_msgs('Error')) {
+	echo "<p><span class='ina'><a href='mem_param.php'>"._("Click here to continue")."</a></span></p>";
+	include_once("foot.php");
+	exit();
+}
 ?>
 <form method="post" action="mem_cm2.php">
   <?php csrf_get(); ?>
