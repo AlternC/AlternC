@@ -77,7 +77,7 @@ class m_piwik {
    */
   function hook_quota_get() {
     global $db, $cuid;
-    $db->query("SELECT COUNT(id) AS nb FROM piwik_users WHERE uid= ? ;", array($cuid));
+    $db->query("SELECT COUNT(id) AS nb FROM piwik_sites WHERE uid= ? ;", array($cuid));
     $q=Array("name"=>"piwik", "description"=>_("Statistics through Piwik accounts"), "used"=>0);
     if ($db->next_record()) {
       $q['used']=$db->f('nb');
@@ -96,13 +96,24 @@ class m_piwik {
   /***********************/
 
 
-  function user_add($user_login, $user_mail = null) {
+  function user_add($user_login, $user_mail) {
+        global $db, $mem, $cuid, $msg;
 
-        global $db, $mem, $cuid, $err;
+	$msg->log("piwik","user_add");
+
+	if (empty($user_login) || is_null($user_login) || empty($user_mail) || is_null($user_mail)) {
+	  $msg->raise('Error', "piwik", _("All fields are mandatory"));
+	  return false;
+	}
+
+	// Validate the email syntax:
+        if (!filter_var($user_mail, FILTER_VALIDATE_EMAIL)) {
+            $msg->raise('Error', "piwik", _("The email you entered is syntaxically incorrect"));
+            return false;
+        }
 
         $user_login = $this->clean_user_name($user_login);
 	$user_pass  = create_pass();
-	$user_mail  = $mem->user['mail'];
 	$user_alias = $user_login;
 
 	$api_data = $this->call_privileged_page('API', 'UsersManager.addUser', array('userLogin' => $user_login, 'password' => $user_pass, 'email' => $user_mail, 'alias' => $user_alias), 'JSON'); 
@@ -110,7 +121,11 @@ class m_piwik {
 	  if ($api_data->result === 'success') {
 	    $user = $this->get_user($user_login);
 	    $user_creation_date = $user->date_registered;
-	    return $db->query("INSERT INTO piwik_users (uid, login, created_date) VALUES ( ?, ?, ?,);", array($cuid, $user_login, $user_creation_date));
+	    $ret_value = $db->query("INSERT INTO piwik_users (uid, passwd, login, created_date) VALUES ( ?, ?, ?);", array($cuid, md5('$user_pass'), $user_login, $user_creation_date));
+	    return $ret_value;
+	  } else {
+	    $msg->raise('Error', "piwik", $api_data->message);
+	    return FALSE;
 	  }
 	} else { // api_data = false -> error is already filled
 	  return FALSE;
@@ -129,14 +144,16 @@ class m_piwik {
   }
 
   function get_users_access_from_site($site_id) {
-	global $err, $cuid;
+	global $msg, $cuid;
+
+	$msg->log("piwik","get_users_access_from_site");
 
 	if (!is_numeric($site_id)) {
-		$err->raise('piwik', 'site_id must be numeric');
+		$msg->raise('Error', 'piwik', 'site_id must be numeric');
 		return FALSE;
 	}
 	if (!in_array($site_id, $this->alternc_sites)) {
-		$err->raise('piwik', "you don't own this piwik website");
+		$msg->raise('Error', 'piwik', "you don't own this piwik website");
 		return FALSE;
 	}
 
@@ -166,7 +183,9 @@ class m_piwik {
   }
 
   function get_alternc_users() {
-	global $db, $cuid;
+	global $db, $cuid, $msg;
+
+	$msg->log("piwik","get_alternc_users");
 
 	static $alternc_users = array();
 	$db->query("SELECT login FROM piwik_users WHERE uid= ?;", array($cuid));
@@ -175,10 +194,52 @@ class m_piwik {
 	
 	return $alternc_users;
   }
+
+  function get_users_url_infos() {
+    global $db,$cuid, $msg;
+    $infos_user = array();
+    $api_calls = array();
+
+
+    $db->query("SELECT login, passwd, s.piwik_id as id FROM piwik_users as u INNER JOIN piwik_sites as s on u.uid = s.uid WHERE u.uid = $cuid");
+    while ($db->next_record()) {
+      $id = $db->f('id');
+      $login = $db->f('login');
+
+      if (!isset($infos_user[$id]))
+	$infos_user[$id] = array();
+
+      if (!isset($api_calls[$id]))
+	$api_calls[$id] = $this->get_users_access_from_site($id);
+
+      foreach ($api_calls[$id] as $l => $cred) {
+	if ($l == $login)
+	  $infos_user[$id][] = array('login' => $login, 'password' => $db->f('passwd'), 'cred' => $cred);
+      }
+    }
+
+    return $infos_user;
+  }
+
+  // Regarde si l'utilisateur a des sites piwik configurés dans AlternC
+  function user_has_sites() {
+    global $db, $cuid, $msg;
+
+    $msg->log("piwik","user_has_sites");
+
+    $db->query("SELECT id FROM piwik_sites WHERE uid='$cuid'");
+    if ($db->num_rows() > 0)
+      return true;
+
+    return false;
+  }
+
   // Supprime l'utilisateur Piwik passé en parametre
   // Ne le supprime pas localement tant que pas supprimé en remote
   function user_delete($piwik_user_login) {
-    global $db, $cuid, $err;
+    global $db, $cuid, $msg;
+
+    $msg->log("piwik","user_delete");
     
     $db->query("SELECT created_date, COUNT(id) AS cnt FROM piwik_users WHERE uid= ? AND login= ? ", array($cuid, $piwik_user_login));
     $db->next_record();
@@ -192,14 +253,17 @@ class m_piwik {
 		return FALSE;
 	}
     } else {
-      $err->raise("piwik", _("You are not allowed to delete the statistics of this website"));
+      $msg->raise('Error', "piwik", _("You are not allowed to delete the statistics of this website"));
       return FALSE;
     }
   }
  
 
   function users_list() { 
-    global $db, $cuid;
+    global $db, $cuid, $msg;
+
+    $msg->log("piwik","users_list");
+
     $db->query("SELECT login FROM piwik_users WHERE uid = ?;", array($cuid));
     if ($db->num_rows() == 0)
       return array();
@@ -239,6 +303,10 @@ class m_piwik {
 
 
   function site_list() {
+    global $msg;
+
+    $msg->log("piwik","site_list");
+
     $api_data = $this->call_privileged_page('API', 'SitesManager.getAllSites');
     $data = array();
 
@@ -274,7 +342,9 @@ class m_piwik {
   }
 
   function get_alternc_sites() {
-        global $db, $cuid;
+        global $db, $cuid, $msg;
+
+	$msg->log("piwik","get_alternc_sites");
 
         static $alternc_sites = array();
         $db->query("SELECT piwik_id AS site_id FROM piwik_sites WHERE uid= ? ;", array($cuid));
@@ -291,18 +361,40 @@ class m_piwik {
   // Ajoute un site à Piwik
   // can't figure out how to pass multiple url through the API
   function site_add($siteName, $urls, $ecommerce = FALSE) {
-    global $db, $cuid;
+    global $db, $cuid, $piwik, $msg;
+
+    $msg->log("piwik","site_add");
+
     $urls = is_array($urls) ? implode(',', $urls) : $urls;
     $api_data = $this->call_privileged_page('API', 'SitesManager.addSite', array('siteName' => $siteName, 'urls' => $urls));
-    $db->query("INSERT INTO piwik_sites set uid= ? , piwik_id= ? ", array($cuid, $api_data->value));
-    return TRUE;
+
+    if ($api_data->value) {
+      $id_site = $api_data->value;
+
+      // Ajout de donner auto les droits de lecture à ce nouvel utilisateur pour le site qu'il a ajouté
+      $userslist = $piwik->users_list();
+      $api_data = $this->call_privileged_page('API', 'UsersManager.setUserAccess', array('userLogin' => $userslist[0]->login, 'idSites' => $id_site, 'access' => 'view'));
+
+      if ($api_data->result == 'success') {
+        // On enregistre le site dans alternC
+	$db->query("INSERT INTO piwik_sites set uid= ? , piwik_id= ? ", array($cuid, $id_site));
+
+        // Permet de prendre en compte le site qu'on vient de créer dans la page quis'affiche
+        $this->alternc_sites = $this->get_alternc_sites();
+        return TRUE;
+      }
+      return TRUE;
+    } else
+      return FALSE;
   }
 
 
   //SitesManager.deleteSite (idSite)
   // Supprime un site de Piwik
   function site_delete($site_id) {
-    global $db, $cuid, $err;
+    global $db, $cuid, $msg;
+
+    $msg->log("piwik","site_delete");
     
     $db->query("SELECT COUNT(id) AS cnt FROM piwik_sites WHERE uid= ? AND piwik_id= ? ;", array($cuid, $site_id));
     $db->next_record();
@@ -315,7 +407,7 @@ class m_piwik {
 		return FALSE;
 	}
     } else {
-	$err->raise("piwik", _("You are not allowed to delete the statistics of this website"));
+	$msg->raise('Error', "piwik", _("You are not allowed to delete the statistics of this website"));
 	return FALSE;
     }
 
@@ -325,14 +417,17 @@ class m_piwik {
 
     function site_set_user_right($site_id, $login, $right)
     {
-	global $err;
+	global $msg;
+
+	$msg->log("piwik","site_set_user_right");
+
 	if (!in_array($right, array('noaccess', 'view', 'admin')))
 		return FALSE;
 	$api_data = $this->call_privileged_page('API', 'UsersManager.setUserAccess', array('userLogin' => $login, 'access' => $right, 'idSites' => $site_id));
 	if ($api_data->result == 'success') {
 		return TRUE;
 	} else {
-		$err->raise('piwik', $api_data->messsage);
+		$msg->raise('Error', 'piwik', $api_data->messsage);
 		return FALSE;
 	}
     }
@@ -346,8 +441,10 @@ class m_piwik {
 
   /* return a clean username with a unique prefix per account */
   function clean_user_name($username) {
-    global $admin, $cuid;
-    return 'alternc_' . $admin->get_login_by_uid($cuid) . '_' . mysql_real_escape_string(trim($username));
+    global $admin, $cuid, $db;
+    $escaped_name=$db->quote(trim($username));
+    $escaped_name=preg_replace("/^'(.*)'/", "\\1", $escaped_name);
+    return 'alternc_' . $admin->get_login_by_uid($cuid) . '_' . $escaped_name;
   }
 
 
@@ -362,26 +459,30 @@ class m_piwik {
    * @param string $method
    */
   function call_page($module, $method, $arguments=array(), $output = 'JSON') {
-    global $err;
+	global $msg;
+
+	$msg->log("piwik","call_page");
+
 	$url = sprintf('%s/?module=%s&method=%s&format=%s', $this->piwik_server_uri, $module, $method, $output);
 	foreach ($arguments AS $k=>$v)
 	  $url .= sprintf('&%s=%s', urlencode($k), $v); //  urlencode($v));
 
 	$page_content = file_get_contents($url);
 	if ($page_content === FALSE) {
-	  $err->raise("piwik", _("Unable to reach the API"));
+	  $msg->raise('Error', "piwik", _("Unable to reach the API"));
 	  return FALSE;
 	}
+
 	if ($output == 'JSON') {
 	  $api_data = json_decode($page_content);
 	  if ($api_data === FALSE) {
-	    $err->raise("piwik", _("Error while decoding response from the API"));
+	    $msg->raise('Error', "piwik", _("Error while decoding response from the API"));
 	    return FALSE;
 	  }
 
 	  return $api_data;
 	} else {
-	  $err->raise("piwik", _("Other format than JSON is not implemented yet"));
+	  $msg->raise('Error', "piwik", _("Other format than JSON is not implemented yet"));
 	  return FALSE;
 	}
   }
@@ -392,6 +493,10 @@ class m_piwik {
    * @param string $method
    */
   function call_privileged_page($module, $method, $arguments=array(), $output = 'JSON') {
+	global $msg;
+
+	$msg->log("piwik","call_privileged_page");
+
 	$arguments['token_auth'] = $this->piwik_admin_token;
 	return $this->call_page($module, $method, $arguments, $output);
   }

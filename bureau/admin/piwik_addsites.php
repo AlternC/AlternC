@@ -39,11 +39,9 @@ getFields($fields);
 if(empty($site_name)) $site_name=$site_urls;
 
 if (empty($site_name)) {
-  $error=("Error: missing arguments.");
-} elseif (! $piwik->site_add($site_name, $site_urls) ) {
-  $error=_("Error while adding website.<br/>".$err->errstr());
-} else {
-  $error=_("Website added Successfully");
+  $msg->raise('Error', "piwik", _("All fields are mandatory"));
+} elseif ( $piwik->site_add($site_name, $site_urls) ) {
+  $msg->raise('Ok', "piwik", _("Website added Successfully"));
 }
 include_once("piwik_sitelist.php");
 

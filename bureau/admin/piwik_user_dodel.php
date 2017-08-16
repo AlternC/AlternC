@@ -36,17 +36,17 @@ $fields = array (
 getFields($fields);
 
 if (empty($login)) {
-  $error=_("Missing login parameters");
+  $msg->raise('Error', "piwik", _("Missing login parameters"));
   include('piwik_userlist.php'); 
   exit;
 } 
 
 if(!empty($confirm_del)) {
-  if (! $piwik->user_delete($login) ) {
-    $error=$err->errstr();
-  } else {
-    include_once('head.php');
-    printf("Utilisateur %s supprimé avec succès\n", $login);
+  // contrôle si ce compte piwik a encore des sites associés avant d'accepter sa suppression
+  if ($piwik->user_has_sites()) {
+    $msg->raise('Alert', "piwik", _("You must first remove all the piwik sites associated with this user before deleting him")); // à traduire
+  } else if ($piwik->user_delete($login) ) {
+    $msg->raise('Ok', "piwik", _("Account %s is successfully deleted"), $login);
   }
 
   include('piwik_userlist.php'); 

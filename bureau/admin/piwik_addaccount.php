@@ -28,44 +28,22 @@
  ----------------------------------------------------------------------
 */
 require_once("../class/config.php");
-include_once("head.php");
 
-if (!$quota->cancreate("piwik")) {
-	$error=_("You cannot add any new Piwik account, your quota is over.");
-	$fatal=1;
+$userslist = $piwik->users_list();
+$quotapiwik = $quota->getquota('piwik');
+
+if (!($quotapiwik['t'] > 0 && count($userslist) < 3)) {
+	$msg->raise('Error', "piwik", _("You cannot add any new Piwik account, your quota is over.")." ("._("Max. 3 accounts").")");
 }
 
 $fields = array (
 	"account_name" 		=> array ("post", "string", ""),
+	"account_mail" 		=> array ("post", "string", ""),
 );
 getFields($fields);
 
-if (empty($account_name)) {
-  echo "<p class=\"alert alert-danger\">"._("Error : missing arguments.")."</p>";
-  include_once("foot.php");
-  exit;
+if ($piwik->user_add($account_name, $account_mail) ) {
+  $msg->raise('Ok', "piwik", _('Successfully added piwik account')); // à traduire (ou à corriger)
 }
-
-?>
-<h3><?php printf(_("Creation of Piwik account \"%s\""),$account_name); ?></h3>
-<hr id="topbar"/>
-<br />
-<?php
-$infos = $piwik->user_add($account_name);
-if (!$infos)
-{
-    $error = $err->errstr();
-    //if (isset($error) && $error) {
-    echo "<p class=\"alert alert-danger\">$error</p>";
-    if (isset($fatal) && $fatal) {
-      include_once("foot.php");
-      exit();
-    }
-}
-else
-{
-	printf("%s %s\n", _('Successfully added piwik user'), $account_name);
-}
-
-include_once("foot.php"); 
+include_once("piwik_userlist.php");
 ?>
