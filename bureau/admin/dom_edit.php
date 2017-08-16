@@ -38,16 +38,17 @@ getFields($fields);
 
 $dom->lock();
 if (!$r=$dom->get_domain_all($domain)) {
-	$error=$err->errstr();
-	echo "<p class=\"alert alert-danger\">$error</p>";
+	$dom->unlock();
+	echo $msg->msg_html_all();
 	include('foot.php');
 	die();
 }
-if (isset($error) && $error ) {
-	echo "<p class=\"alert alert-danger\">$error</p>";
-}
 $dom->unlock();
 
+?>
+<h3><img src="images/dom.png" alt="" />&nbsp;<?php printf(_("Manage %s"),$domain); ?></h3>
+<?php
+echo $msg->msg_html_all();
 ?>
 <script type="text/javascript">
 function dnson() {
@@ -87,8 +88,6 @@ function destruction_alert() {
   }
 }
 </script>
-
-<h3><img src="images/dom.png" alt="" />&nbsp;<?php printf(_("Manage %s"),$domain); ?></h3>
 
 <?php
 

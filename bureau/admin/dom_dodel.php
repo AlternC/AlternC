@@ -37,21 +37,22 @@ $fields = array (
 );
 getFields($fields);
 
-$dom->lock();
-if ($del_confirm=="y")
+if ($del_confirm=="y") {
 	if (!$dom->del_domain($domain)) {
-		$error=$err->errstr();
 		include("dom_edit.php");
-		$dom->unlock();
 		exit();
 	}
-
-$dom->unlock();
+}
 
 if (! empty($del_cancel)) {
+  $dom->lock();
   $dom->del_domain_cancel($domain);
+  $dom->unlock();
+
   // The link to this function is disable : the del_domain_cancel function need some modification
-  __("Deletion have been successfully cancelled");?><br/>
+  $msg->raise('Ok', "dom", _("Deletion have been successfully cancelled"));
+  echo $msg->msg_html_all();
+?>
   <p>
   <span class="ina"><a href="main.php" target="_parent"><?php __("Click here to continue"); ?></a></span>
   </p>
@@ -77,13 +78,16 @@ if ($del_confirm!="y") {
 </form>
 <?php include_once("foot.php");
 	exit();
-	}
+}
 ?>
 <h3><?php printf(_("Domain %s deleted"),$domain); ?></h3>
 <hr id="topbar"/>
 <br />
-<p>
-<?php printf(_("The domain %s has been successfully deleted."),$domain); ?><br /><br />
+<?php 
+$msg->raise('Ok', "dom", _("The domain %s has been successfully deleted."),$domain);
+echo $msg->msg_html_all();
+?>
+</p>
 <span class="ina"><a href="main.php" target="_parent"><?php __("Click here to continue"); ?></a></span>
 <?php $mem->show_help("del_domain"); ?>
 </p>
