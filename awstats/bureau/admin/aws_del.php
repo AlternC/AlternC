@@ -24,7 +24,6 @@
 */
 require_once("../class/config.php");
 
-$error="";
 // On parcours les POST_VARS et on repere les del_.
 reset($_POST);
 $found=false;
@@ -33,16 +32,14 @@ while (list($key,$val)=each($_POST)) {
     // Effacement du jeu de stats $val
     $r=$aws->delete_stats($val);
     $found=true;
-    if (!$r) {
-      $error.=$err->errstr()."<br />";
-    } else {
-      $error.=sprintf(_("The statistics %s has been successfully deleted"),$r)."<br />";
+    if ($r) {
+      $msg->raise('Ok', "aws", _("The statistics %s has been successfully deleted"),$r);
     }
   }
 }
 
 if (!$found) {
-  $error.=_("Please check the statistics set you want to delete");
+  $msg->raise('Info', "aws", _("Please check the statistics set you want to delete"));
  }
 
 include("aws_list.php");

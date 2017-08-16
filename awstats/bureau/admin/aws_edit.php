@@ -30,12 +30,10 @@ $fields = array (
 getFields($fields);
 
 if (!$id) {
-	$error=_("No Statistics selected!");
+	$msg->raise('Error', "aws", _("No Statistics selected!"));
 } else {
 	$r=$aws->get_stats_details($id);
-	if (!$r) {
-		$error=$err->errstr();
-	} else {
+	if ($r) {
 		$id=$r["id"];
 		$hostname=$r["hostname"];
 		$awsusers=$r["users"];

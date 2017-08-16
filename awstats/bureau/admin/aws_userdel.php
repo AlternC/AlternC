@@ -24,17 +24,14 @@
 */
 require_once("../class/config.php");
 
-$error="";
 // On parcours les POST_VARS et on repere les del_.
 reset($_POST);
 while (list($key,$val)=each($_POST)) {
 	if (substr($key,0,4)=="del_") {
 		// Effacement du compte ftp $val
 		$r=$aws->del_login($val);
-		if (!$r) {
-			$error.=$err->errstr()."<br />";
-		} else {
-			$error.=sprintf(_("The awstat account %s has been successfully deleted"),$val)."<br />";
+		if ($r) {
+			$msg->raise('Ok', "aws", _("The awstat account %s has been successfully deleted"),$val);
 		}
 	}
 }
