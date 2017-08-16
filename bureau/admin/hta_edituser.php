@@ -36,12 +36,17 @@ $fields = array (
 );
 getFields($fields);
 
+$c=$admin->listPasswordPolicies();
+$passwd_classcount = $c['hta']['classcount'];
+
 ?>
 <h3><?php printf(_("Editing user %s in the protected folder %s"),$user,$dir); ?></h3>
 <hr id="topbar"/>
 <br />
 
-<?php if (!empty($error) ) { echo "<p class=\"alert alert-danger\">$error</p>"; } ?>
+<?php
+echo $msg->msg_html_all();
+?>
 
 <form method="post" action="hta_doedituser.php" name="main" id="main" autocomplete="off">
   <?php csrf_get(); ?>
@@ -63,7 +68,7 @@ getFields($fields);
     </tr>
     <tr>
       <th><label for="newpass"><?php __("New password"); ?></label></th>
-      <td><input type="password" class="int" name="newpass" autocomplete="off" id="newpass" value="" size="20" maxlength="64" /><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#newpass","#newpassconf"); ?></td>
+      <td><input type="password" class="int" name="newpass" autocomplete="off" id="newpass" value="" size="20" maxlength="64" /><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#newpass","#newpassconf",$passwd_classcount); ?></td>
     </tr>
     <tr>
       <th><label for="newpassconf"><?php __("Confirm password"); ?></label></th>

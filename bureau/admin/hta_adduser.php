@@ -39,9 +39,10 @@ getFields($fields);
 ?>
 <h3><?php printf(_("Adding a username in %s"),$dir); ?></h3>
 <?php
-	if (isset($error) && $error) {
-		echo "<p class=\"alert alert-danger\">$error</p>";
-	}
+echo $msg->msg_html_all();
+
+$c=$admin->listPasswordPolicies();
+$passwd_classcount = $c['hta']['classcount'];
 ?>
 
 <form method="post" action="hta_doadduser.php" name="main" id="main" autocomplete="off">
@@ -61,7 +62,7 @@ getFields($fields);
 	</tr>
 	<tr>
 		<th><label for="password"><?php __("Password"); ?></label></th>
-		<td><input type="password" class="int" name="password" autocomplete="off" id="password" value="" size="20" maxlength="64" /><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#password","#passwordconf"); ?></td>
+		<td><input type="password" class="int" name="password" autocomplete="off" id="password" value="" size="20" maxlength="64" /><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#password","#passwordconf",$passwd_classcount); ?></td>
 	</tr>
 	<tr>
 		<th><label for="passwordconf"><?php __("Confirm password"); ?></label></th>

@@ -30,10 +30,8 @@
 require_once("../class/config.php");
 include_once("head.php");
 
-if (!$r=$hta->ListDir()) {
-	$error=$err->errstr();
-} else {
-	reset($r);
+if ($r=$hta->ListDir()) {
+  reset($r);
 }
 
 ?>
@@ -41,17 +39,15 @@ if (!$r=$hta->ListDir()) {
 <hr id="topbar"/>
 <br />
 <?php
-	if (isset($error) && $error) {
-		echo "<p class=\"alert alert-danger\">$error</p>";
-	}
+echo $msg->msg_html_all();
 
-	if (!is_array($r)) {
-		echo "<p><span class=\"ina\"><a href=\"hta_add.php\">"._("Protect a folder")."</a></span><br />";
-		$mem->show_help("hta_list");
-		echo "</p>";
-		include_once("foot.php");
-		exit();
-	}
+if (!is_array($r)) {
+  echo "<p><span class=\"ina\"><a href=\"hta_add.php\">"._("Protect a folder")."</a></span><br />";
+  $mem->show_help("hta_list");
+  echo "</p>";
+  include_once("foot.php");
+  exit();
+}
 
 ?>
 
