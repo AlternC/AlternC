@@ -37,9 +37,9 @@ include_once("head.php");
 <?php
 $q=$quota->getquota();
 if (!is_array($q) || empty($q) ) {
-  echo "<p class=\"alert alert-danger\">"._("No quotas for this account, or quotas currently unavailable!")."</p>";
-  include_once("foot.php");
-  die();
+  $msg->raise('Alert', "quota", _("No quotas for this account, or quotas currently unavailable!"));
+  include_once("main.php");
+  exit();
 } 
 
 echo "<table cellspacing=\"0\" cellpadding=\"4\" class='tlist'>";

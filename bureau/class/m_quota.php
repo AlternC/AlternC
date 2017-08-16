@@ -137,8 +137,8 @@ class m_quota {
      * the defaults value.
      */
     function synchronise_user_profile() {
-        global $db, $err;
-        $err->log("quota", "synchronise_user_profile");
+        global $db, $msg;
+        $msg->log("quota", "synchronise_user_profile");
         $q = "insert into quotas select m.uid as uid, d.quota as name, d.value as total from membres m, defquotas d left join quotas q on q.name=d.quota  where m.type=d.type  ON DUPLICATE KEY UPDATE total = greatest(d.value, quotas.total);";
         if (!$db->query($q)) {
             return false;
@@ -153,8 +153,8 @@ class m_quota {
      */
 
     function create_missing_quota_profile() {
-        global $db, $quota, $err;
-        $err->log("quota", "create_missing_quota_profile");
+        global $db, $quota, $msg;
+        $msg->log("quota", "create_missing_quota_profile");
         $qt = $quota->getquota('', true);
         $type = $quota->listtype();
         foreach ($type as $t) {
@@ -172,8 +172,8 @@ class m_quota {
      * @Return array the quota used and total for this ressource (or for all ressource if unspecified)
      */
     function getquota($ressource = "", $recheck = false) {
-        global $db, $err, $cuid, $get_quota_cache, $hooks, $mem;
-        $err->log("quota", "getquota", $ressource);
+        global $db, $msg, $cuid, $get_quota_cache, $hooks, $mem;
+        $msg->log("quota", "getquota", $ressource);
         if ($recheck) { // rebuilding quota
             $get_quota_cache = null;
             $this->quotas = array();
@@ -240,8 +240,8 @@ class m_quota {
      * @param integer size of the quota (available or used)
      */
     function setquota($ressource, $size) {
-        global $err, $db, $cuid;
-        $err->log("quota", "setquota", $ressource . "/" . $size);
+        global $msg, $db, $cuid;
+        $msg->log("quota", "setquota", $ressource . "/" . $size);
         if (floatval($size) == 0) {
             $size = "0";
         }
@@ -252,7 +252,7 @@ class m_quota {
             $a = array();
             exec("sudo /usr/lib/alternc/quota_get " . intval($cuid) . " &> /dev/null &", $a);
             if (!isset($a[1]) || $size != $a[1]) {
-                $err->raise("quota", _("Error writing the quota entry!"));
+                $msg->raise('Error', "quota", _("Error writing the quota entry!"));
                 return false;
             }
         }
@@ -272,8 +272,8 @@ class m_quota {
      * Erase all quota information about the user.
      */
     function delquotas() {
-        global $db, $err, $cuid;
-        $err->log("quota", "delquota");
+        global $db, $msg, $cuid;
+        $msg->log("quota", "delquota");
         $db->query("DELETE FROM quotas WHERE uid= ?;", array($cuid));
         return true;
     }
@@ -327,14 +327,14 @@ class m_quota {
      * @return boolean true if all went ok
      */
     function addtype($type) {
-        global $db, $err;
+        global $db, $msg;
         $qlist = $this->qlist();
         if (empty($type)) {
             return false;
         }
         $type = strtolower($type);
         if (!preg_match("#^[a-z0-9]*$#", $type)) {
-            $err->raise("quota", "Type can only contains characters a-z and 0-9");
+            $msg->raise('Error', "quota", _("Type can only contains characters a-z and 0-9")); // à traduire
             return false;
         }
         while (list($key, $val) = each($qlist)) {
@@ -383,8 +383,8 @@ class m_quota {
      * The user we are talking about is in the global $cuid.
      */
     function addquotas() {
-        global $db, $err, $cuid;
-        $err->log("quota", "addquota");
+        global $db, $msg, $cuid;
+        $msg->log("quota", "addquota");
         $ql = $this->qlist();
         reset($ql);
 
@@ -478,7 +478,7 @@ class m_quota {
     /* sum of mailbox sizes from all domains */
 
     function get_size_mail_sum_all() {
-        return $this->_get_sum_sql("SELECT SUM(bytes) AS sum FROM mailbox WHERE delivery = 'dovecot';;");
+        return $this->_get_sum_sql("SELECT SUM(quota_dovecot) AS sum FROM dovecot_quota ;");
     }
 
     /* sum of mailbox sizes for one domain */
@@ -491,19 +491,19 @@ class m_quota {
     /* count of mailbox sizes from all domains */
 
     function get_size_mail_count_all() {
-        return $this->_get_count_sql("SELECT COUNT(*) AS count FROM mailbox WHERE delivery = 'dovecot';");
+        return $this->_get_count_sql("SELECT COUNT(*) AS count FROM dovecot_quota;");
     }
 
     /* count of mailbox for one domain */
 
     function get_size_mail_count_domain($dom) {
-        return $this->_get_count_sql("SELECT COUNT(*) AS count FROM dovecot_view WHERE user LIKE '%@{$dom}'");
+        return $this->_get_count_sql("SELECT COUNT(*) AS count FROM dovecot_quota WHERE user LIKE '%@{$dom}'");
     }
 
     /* get list of mailbox alias and size for one domain */
 
     function get_size_mail_details_domain($dom) {
-        return $this->_get_size_and_record_sql("SELECT user as alias,quota_dovecot as size FROM dovecot_view WHERE user LIKE '%@{$dom}' ORDER BY alias;");
+        return $this->_get_size_and_record_sql("SELECT user as alias,quota_dovecot as size FROM dovecot_quota WHERE user LIKE '%@{$dom}' ORDER BY alias;");
     }
 
     /* sum of mailman lists sizes from all domains */
@@ -515,7 +515,7 @@ class m_quota {
     /* sum of mailman lists sizes for one domain */
 
     function get_size_mailman_sum_domain($dom) {
-        return $this->_get_sum_sql("SELECT SUM(size) AS sum FROM size_mailman WHERE list LIKE '%@{$dom}'");
+        return $this->_get_sum_sql("SELECT SUM(size) AS sum FROM size_mailman s INNER JOIN mailman m ON s.list = m.list AND s.uid = m.uid WHERE m.domain = '$dom'");
     }
 
     /* sum of mailman lists for one user */
@@ -624,8 +624,8 @@ class m_quota {
      * globals $cuid is the appropriate user
      */
     function hook_admin_add_member() {
-        global $err;
-        $err->log("quota", "hook_admin_add_member");
+        global $msg;
+        $msg->log("quota", "hook_admin_add_member");
         $this->addquotas();
         $this->getquota('', true); // actualise quota
     }
@@ -637,8 +637,8 @@ class m_quota {
      * EXPERIMENTAL function ;) 
      */
     function alternc_export_conf() {
-        global $err;
-        $err->log("quota", "export");
+        global $msg;
+        $msg->log("quota", "export");
         $str = "  <quota>";
 
         $q = $this->getquota();
