@@ -189,21 +189,21 @@ class m_bro {
      * 
      * @global m_mysql $db
      * @global int $cuid
-     * @global m_err $err
+     * @global m_messages $msg
      * @param string $dir Dossier relatif au dossier racine du compte du membre courant
      * @param boolean $showdirsize
      * @return array Le tableau contenant les fichiers de $dir, et
      */
     function filelist($dir = "", $showdirsize = false) {
-        global $db, $cuid, $err;
+        global $db, $cuid, $msg;
         $db->query("UPDATE browser SET lastdir= ? WHERE uid= ?;", array($dir, $cuid));
         $absolute = $this->convertabsolute($dir, false);
         if (!$absolute || !file_exists($absolute)) {
-            $err->raise('bro', _("This directory does not exist."));
+            $msg->raise('Error', 'bro', _("This directory does not exist."));
             return false;
         }
         if (!is_readable($absolute)) {
-            $err->raise('bro', _("This directory is not readable."));
+            $msg->raise('Error', 'bro', _("This directory is not readable."));
             return false;
         }
         clearstatcache(true);
@@ -387,25 +387,25 @@ class m_bro {
      * 
      * @global m_mysql $db
      * @global int $cuid
-     * @global m_err $err
+     * @global m_messages $msg
      * @param string $dir Dossier dans lequel on veut crer un sous-dossier
      * @param string $file Nom du dossier à créer
      * @return boolean TRUE si le dossier a été créé, FALSE si une erreur s'est produite.
      */
     function CreateDir($dir, $file) {
-        global $db, $cuid, $err;
+        global $db, $cuid, $msg;
         $file = ssla($file);
         $absolute = $this->convertabsolute($dir . "/" . $file, false);
         #echo "$absolute";
         if ($absolute && (!file_exists($absolute))) {
             if (!mkdir($absolute, 00777, true)) {
-                $err->raise("bro", _("Cannot create the requested directory. Please check the permissions"));
+                $msg->raise('Error', "bro", _("Cannot create the requested directory. Please check the permissions"));
                 return false;
             }
             $db->query("UPDATE browser SET crff=1 WHERE uid= ?;", array($cuid));
             return true;
         } else {
-            $err->raise("bro", _("File or folder name is incorrect"));
+            $msg->raise('Error', "bro", _("File or folder name is incorrect"));
             return false;
         }
     }
@@ -414,23 +414,23 @@ class m_bro {
      * Crée un fichier vide dans un dossier
      * 
      * @global m_mysql $db
-     * @global m_err $err
+     * @global m_messages $msg
      * @global int $cuid
      * @param string $dir Dossier dans lequel on veut crer un sous-dossier
      * @param string $file Nom du dossier à créer
      * @return boolean TRUE si le dossier a été créé, FALSE si une erreur s'est produite.
      */
     function CreateFile($dir, $file) {
-        global $db, $err, $cuid;
+        global $db, $msg, $cuid;
         $file = ssla($file);
         $absolute = $this->convertabsolute($dir . "/" . $file, false);
         if (!$absolute || file_exists($absolute)) {
-            $err->raise("bro", _("File or folder name is incorrect"));
+            $msg->raise('Error', "bro", _("File or folder name is incorrect"));
             return false;
         }
         if (!file_exists($absolute)) {
             if (!@touch($absolute)) {
-                $err->raise("bro", _("Cannot create the requested file. Please check the permissions"));
+                $msg->raise('Error', "bro", _("Cannot create the requested file. Please check the permissions"));
                 return false;
             }
         }
@@ -441,18 +441,18 @@ class m_bro {
     /**
      * Efface les fichiers du tableau $file_list dans le dossier $R
      * 
-     * @global m_err $err
+     * @global m_messages $msg
      * @global m_mem $mem
      * @param array $file_list Liste des fichiers effacer.
      * @param string $R Dossier dans lequel on efface les fichiers
      * @return boolean TRUE si les fichiers ont t effacs, FALSE si une erreur s'est produite.
      */
     function DeleteFile($file_list, $R) {
-        global $err;
+        global $msg;
         $root = realpath(getuserpath());
         $absolute = $this->convertabsolute($R, false);
         if (!$absolute && strpos($root, $absolute) === 0 && strlen($absolute) > (strlen($root) + 1)) {
-            $err->raise("bro", _("File or folder name is incorrect"));
+            $msg->raise('Error', "bro", _("File or folder name is incorrect"));
             return false;
         }
         for ($i = 0; $i < count($file_list); $i++) {
@@ -467,17 +467,17 @@ class m_bro {
     /**
      * Renomme les fichier de $old du dossier $R en $new
      * 
-     * @global m_err $err
+     * @global m_messages $msg
      * @param string $R Dossier dans lequel se trouve les fichiers renommer.
      * @param array $old Ancien nom des fichiers
      * @param array $new Nouveau nom des fichiers
      * @return boolean TRUE si les fichiers ont t renomms, FALSE si une erreur s'est produite.
      */
     function RenameFile($R, $old, $new) {
-        global $err;
+        global $msg;
         $absolute = $this->convertabsolute($R, false);
         if (!$absolute) {
-            $err->raise("bro", _("File or folder name is incorrect"));
+            $msg->raise('Error', "bro", _("File or folder name is incorrect"));
             return false;
         }
         $alea = "." . time() . mt_rand(1000, 9999);
@@ -500,17 +500,17 @@ class m_bro {
     /**
      * Déplace les fichier de $d du dossier $old vers $new
      * 
-     * @global m_err $err
+     * @global m_messages $msg
      * @param array $d Liste des fichiers du dossier $old dplacer
      * @param string $old Dossier dans lequel se trouve les fichiers dplacer.
      * @param string $new Dossier vers lequel seront dplacs les fichiers.
      * @return boolean TRUE si les fichiers ont t renomms, FALSE si une erreur s'est produite.
      */
     function MoveFile($d, $old, $new) {
-        global $err;
+        global $msg;
         $old = $this->convertabsolute($old, false);
         if (!$old) {
-            $err->raise("bro", _("File or folder name is incorrect"));
+            $msg->raise('Error', "bro", _("File or folder name is incorrect"));
             return false;
         }
 
@@ -520,18 +520,18 @@ class m_bro {
         $new = $this->convertabsolute($new, false);
 
         if (!$new) {
-            $err->raise("bro", _("File or folder name is incorrect"));
+            $msg->raise('Error', "bro", _("File or folder name is incorrect"));
             return false;
         }
         if ($old == $new) {
-            $err->raise("bro", _("You cannot move or copy a file to the same folder"));
+            $msg->raise('Error', "bro", _("You cannot move or copy a file to the same folder"));
             return false;
         }
         for ($i = 0; $i < count($d); $i++) {
             $d[$i] = ssla($d[$i]); // strip slashes if needed
             if (!strpos($d[$i], "/") && file_exists($old . "/" . $d[$i]) && !file_exists($new . "/" . $d[$i])) {
                 if (!rename($old . "/" . $d[$i], $new . "/" . $d[$i])) {
-                    $err->raise("bro", "error renaming $old/$d[$i] -> $new/$d[$i]");
+                    $msg->raise('Error', "bro", "error renaming $old/$d[$i] -> $new/$d[$i]");
                 }
             }
         }
@@ -547,11 +547,11 @@ class m_bro {
      * @param boolean $verbose Shall we 'echo' what we did ?
      * @return boolean TRUE Si les fichiers ont t renomms, FALSE si une erreur s'est produite.
      */
-    function ChangePermissions($R, $d, $perm, $verbose = false) {
-        global $err, $action;
+    function ChangePermissions($R, $d, $perm) {
+        global $msg, $action;
         $absolute = $this->convertabsolute($R, false);
         if (!$absolute) {
-            $err->raise("bro", _("File or folder name is incorrect"));
+            $msg->raise('Error', "bro", _("File or folder name is incorrect"));
             return false;
         }
         for ($i = 0; $i < count($d); $i++) {
@@ -567,9 +567,7 @@ class m_bro {
                     $m = $m & (~ 0222); // ugo-w
                 }
                 $action->chmod($absolute . "/" . $d[$i], $m);
-                if ($verbose) {
-                    echo "chmod " . sprintf('%o', $m) . " file, was " . sprintf('%o', fileperms($absolute . "/" . $d[$i])) . " -- " . $perm[$i]['w'];
-                }
+                echo "chmod " . sprintf('%o', $m) . " file, was " . sprintf('%o', fileperms($absolute . "/" . $d[$i])) . " -- " . $perm[$i]['w'];
             }
         }
         // We'd like to *wait* for this to complete, but since this is essentially asynchronous, we can't be sure easily
@@ -585,17 +583,17 @@ class m_bro {
      * 
      * 
      * @global array $_FILES
-     * @global m_err $err
+     * @global m_messages $msg
      * @global int $cuid
      * @global m_action $action
      * @param string $R Dossier dans lequel on upload le fichier
      * @returns string The path where the file resides or false if upload failed
      */
     function UploadFile($R) {
-        global $_FILES, $err, $cuid, $action;
+        global $_FILES, $msg, $cuid, $action;
         $absolute = $this->convertabsolute($R, false);
         if (!$absolute) {
-            $err->raise("bro", _("File or folder name is incorrect"));
+            $msg->raise('Error', "bro", _("File or folder name is incorrect"));
             return false;
         }
         if (!strpos($_FILES['userfile']['name'], "/")) {
@@ -607,12 +605,12 @@ class m_bro {
                     $action->fix_file($absolute . "/" . $_FILES['userfile']['name']);
                     return $absolute . "/" . $_FILES['userfile']['name'];
                 } else {
-                    $err->raise("bro", _("Cannot create the requested file. Please check the permissions"));
+                    $msg->raise('Error', "bro", _("Cannot create the requested file. Please check the permissions"));
                     return false;
                 }
             } else {
                 // there was an error, raise it
-                $err->log("bro", "uploadfile", "Problem when uploading a file");
+                $msg->log("bro", "uploadfile", "Problem when uploading a file");
                 switch ($_FILES['userfile']['error']) {
                     case UPLOAD_ERR_INI_SIZE:
                         $erstr = _("The uploaded file exceeds the max file size allowed");
@@ -627,7 +625,7 @@ class m_bro {
                         $erstr = _("Undefined error ") . $_FILES['userfile']['error'];
                         break;
                 }
-                $err->raise("bro", _("Error during the upload of the file: ") . $erstr);
+                $msg->raise('Error', "bro", _("Error during the upload of the file: ") . $erstr);
                 return false;
             }
         }
@@ -637,7 +635,7 @@ class m_bro {
     /**
      * Extract an archive by using GNU and non-GNU tools
      * 
-     * @global m_err $err
+     * @global m_messages $msg
      * @global int $cuid
      * @global m_mem $mem
      * @global m_action $action
@@ -647,7 +645,7 @@ class m_bro {
      * @return integer|null != 0 on error
      */
     function ExtractFile($file, $dest = null) {
-        global $err, $action;
+        global $msg, $action;
         $file = $this->convertabsolute($file, false);
         if (is_null($dest)) {
             $dest = dirname($file);
@@ -655,7 +653,7 @@ class m_bro {
             $dest = $this->convertabsolute($dest, false);
         }
         if (!$file || !$dest || !is_readable($file)) {
-            $err->raise("bro", _("File or folder name is incorrect"));
+            $msg->raise('Error', "bro", _("File or folder name is incorrect"));
             return 1;
         }
         $lfile = strtolower($file);
@@ -682,37 +680,40 @@ class m_bro {
             passthru($cmd, $ret);
         }
         echo "</pre>";
-        if ($ret) {
-            $err->raise("bro", _("I cannot find a way to extract the file %s, it is an unsupported compressed format"), $file);
-        }
+
         // fix the perms of the extracted archive TODO: does it work??? | note: it was using a wrong variable name !
         $action->fix_dir($dest);
-        return $ret;
+
+        if ($ret) {
+            $msg->raise('Error', "bro", _("I cannot find a way to extract the file %s, it is an unsupported compressed format"), $file);
+	    return false;
+        }
+        return true;
     }
 
     /**
      * Copy many files from point A to point B
      * 
-     * @global m_err $err
+     * @global m_messages $msg
      * @param array $d List of files to move
      * @param string $old 
      * @param string $new 
      * @return boolean
      */
     function CopyFile($d, $old, $new) {
-        global $err;
+        global $msg;
         $old = $this->convertabsolute($old, false);
         if (!$old) {
-            $err->raise("bro", _("File or folder name is incorrect"));
+            $msg->raise('Error', "bro", _("File or folder name is incorrect"));
             return false;
         }
         $new = $this->convertabsolute($new, false);
         if (!$new) {
-            $err->raise("bro", _("File or folder name is incorrect"));
+            $msg->raise('Error', "bro", _("File or folder name is incorrect"));
             return false;
         }
         if ($old == $new) {
-            $err->raise("bro", _("You cannot move or copy a file to the same folder"));
+            $msg->raise('Error', "bro", _("You cannot move or copy a file to the same folder"));
             return false;
         }
         for ($i = 0; $i < count($d); $i++) {
@@ -731,16 +732,16 @@ class m_bro {
      *
      * Note that we assume that the inputs have been convertabsolute()'d
      * 
-     * @global m_err $err
+     * @global m_messages $msg
      * @param string $src Path or URL
      * @param string $dest Absolute path inside the users directory
      * @return boolean false on error
      */
     function CopyOneFile($src, $dest) {
-        global $err;
+        global $msg;
         exec("cp -Rpf " . escapeshellarg($src) . " " . escapeshellarg($dest), $void, $ret);
         if ($ret) {
-            $err->raise("bro", "Errors happened while copying the source to destination. cp return value: %d", $ret);
+            $msg->raise('Error', "bro", "Errors happened while copying the source to destination. cp return value: %d", $ret);
             return false;
         }
         return true;
@@ -783,14 +784,14 @@ class m_bro {
      * Affiche le contenu du fichier $file dans le dossier $R. Le contenu
      * du fichier est reformat pour pouvoir entrer dans un champs TextArea
      * 
-     * @global m_err $err
+     * @global m_messages $msg
      * @param string $R Dossier dans lequel on cherche le fichier
      * @param string $file Fichier dont on souhaite obtenir le contenu.
      * @return string|false TRUE si le fichier a bien été mis sur
      * echo, ou FALSE si une erreur est survenue.
      */
     function content($R, $file) {
-        global $err;
+        global $msg;
         $absolute = $this->convertabsolute($R, false);
         if (!strpos($file, "/")) {
             $absolute.="/" . $file;
@@ -798,11 +799,11 @@ class m_bro {
                 $std = str_replace("<", "&lt;", str_replace("&", "&amp;", file_get_contents($absolute)));
                 return $std;
             } else {
-                $err->raise("bro", _("Cannot read the requested file. Please check the permissions"));
+                $msg->raise('Error', "bro", _("Cannot read the requested file. Please check the permissions"));
                 return false;
             }
         } else {
-            $err->raise("bro", _("File or folder name is incorrect"));
+            $msg->raise('Error', "bro", _("File or folder name is incorrect"));
             return false;
         }
     }
@@ -869,17 +870,17 @@ class m_bro {
     /**
      * 
      * @global m_mem $mem
-     * @global m_err $err
+     * @global m_messages $msg
      * @param string $dir
      * @param string $name
      * @return null|boolean
      */
     function can_edit($dir, $name) {
-        global $err;
+        global $msg;
         $absolute = "$dir/$name";
         $absolute = $this->convertabsolute($absolute, false);
         if (!$absolute) {
-            $err->raise('bro', _("File not in authorized directory"));
+            $msg->raise('Error', 'bro', _("File not in authorized directory"));
             include('foot.php');
             exit;
         }
@@ -943,13 +944,13 @@ class m_bro {
 
     /**
      * 
-     * @global m_err $err
+     * @global m_messages $msg
      * @param string $dir
      * @param string $file
      */
     function download_link($dir, $file) {
-        global $err;
-        $err->log("bro", "download_link");
+        global $msg;
+        $msg->log("bro", "download_link");
         header("Content-Disposition: attachment; filename=$file");
         header("Content-Type: application/force-download");
         header("Content-Transfer-Encoding: binary");
@@ -959,13 +960,13 @@ class m_bro {
     /**
      * Echoes the content of the file $file located in directory $R
      * 
-     * @global m_err $err
+     * @global m_messages $msg
      * @param string $R
      * @param string $file
      * @return null|false
      */
     function content_send($R, $file) {
-        global $err;
+        global $msg;
         $absolute = $this->convertabsolute($R, false);
         if (!strpos($file, "/")) {
             $absolute.="/" . $file;
@@ -973,7 +974,7 @@ class m_bro {
                 readfile($absolute);
             }
         } else {
-            $err->raise("bro", _("File or folder name is incorrect"));
+            $msg->raise('Error', "bro", _("File or folder name is incorrect"));
             return false;
         }
     }
@@ -983,7 +984,7 @@ class m_bro {
      * le contenu est issu d'un textarea, et ne DOIT PAS contenir de \ ajouts
      * automatiquement par addslashes
      * 
-     * @global m_err $err
+     * @global m_messages $msg
      * @param string $file Nom du fichier sauver. S'il existe déjà, il sera
      * écrasé sans confirmation.
      * @param string $R Dossier dans lequel on modifie le fichier
@@ -991,20 +992,21 @@ class m_bro {
      * @return false|null TRUE si tout s'est bien pass, FALSE si une erreur s'est produite.
      */
     function save($file, $R, $texte) {
-        global $err;
+        global $msg;
         $absolute = $this->convertabsolute($R, false);
         if (!strpos($file, "/")) {
             $absolute.="/" . $file;
             if (file_exists($absolute)) {
                 if (!file_put_contents($absolute, $texte)) {
-                    $err->raise("bro", _("Cannot edit the requested file. Please check the permissions"));
+                    $msg->raise('Error', "bro", _("Cannot edit the requested file. Please check the permissions"));
                     return false;
                 }
             }
         } else {
-            $err->raise("bro", _("File or folder name is incorrect"));
+            $msg->raise('Error', "bro", _("File or folder name is incorrect"));
             return false;
         }
+	return true;
     }
 
     /**
@@ -1101,13 +1103,13 @@ class m_bro {
      * @access private
      */
     function _delete($file,$depth=0) {
-        global $err;
+        global $msg;
         // permet d'effacer de nombreux fichiers
         @set_time_limit(0);
         //chmod($file,0777);
-        $err->log("bro", "_delete($file)");
+        $msg->log("bro", "_delete($file)");
         if ($depth>20) {
-            $err->log("bro", "CANCELING _delete($file) TOO DEEP");
+            $msg->log("bro", "CANCELING _delete($file) TOO DEEP");
         }
         if (is_dir($file)) {
             $handle = opendir($file);
@@ -1132,12 +1134,12 @@ class m_bro {
      * Produit en sorti un tableau formatté ( pour le moment) en HTML
      * 
      * @global m_mysql $db
-     * @global m_err $err
+     * @global m_messages $msg
      * @return string
      */
     function alternc_export_conf() {
-        global $err;
-        $err->log("bro", "export_conf");
+        global $msg;
+        $msg->log("bro", "export_conf");
         $str = "<table border=\"1\"><caption> Browser </caption>\n";
         $str.=" <browser>\n";
         $pref = $this->GetPrefs();
@@ -1158,24 +1160,24 @@ class m_bro {
      * Function d'exportation des données appelé par la classe m_export via un hooks
      * 
      * @global m_mem $mem
-     * @global m_err $err
+     * @global m_messages $msg
      * @param string $dir Le chemin destination du tarball produit
      * @return boolean|null
      */
     function alternc_export_data($dir) {
-        global $mem, $err;
-        $err->log("bro", "export_data");
+        global $mem, $msg;
+        $msg->log("bro", "export_data");
         $dir.="html/";
         if (!is_dir($dir)) {
             if (!mkdir($dir))
-                $err->raise("bro", _("Cannot create the requested directory. Please check the permissions"));
+                $msg->raise('Error', "bro", _("Cannot create the requested directory. Please check the permissions"));
         }
         $timestamp = date("H:i:s");
 
         if (exec("/bin/tar cvf - " . escapeshellarg(getuserpath() . "/") . "| gzip -9c > " . escapeshellarg($dir . "/" . $mem->user['login'] . "_html_" . $timestamp . ".tar.gz"))) {
-            $err->log("bro", "export_data_succes");
+            $msg->log("bro", "export_data_succes");
         } else {
-            $err->log("bro", "export_data_failed");
+            $msg->log("bro", "export_data_failed");
         }
     }
 
