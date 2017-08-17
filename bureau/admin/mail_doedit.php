@@ -56,7 +56,8 @@ if (!$res=$mail->get_details($mail_id)) {
     include ("mail_edit.php");
     exit();
   } else {
-    if (!$mail->set_passwd($mail_id,$pass,($islocal == 1?false:true))) { /* SET THE PASSWORD */
+    $canbeempty = ($islocal != 1 || ($islocal == 1 && !$new_account))?true:false;
+    if (!$mail->set_passwd($mail_id,$pass,$canbeempty)) { /* SET THE PASSWORD */
       include ("mail_edit.php");
       exit();
     }
