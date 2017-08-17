@@ -59,24 +59,51 @@ function false_if_empty(id,err_msg) {
   }
 }
 
-function generate_password(len){
-	len	= parseInt(len);
-	if(!len)
-		len = 8;
-	var password = "";
-	var chars    = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	var charsN   = chars.length;
-	var nextChar;
- 
-	for(i=0; i<len; i++){
-		nextChar = chars.charAt(Math.floor(Math.random()*charsN));
-		password += nextChar;
+function generate_password(passwordLength, classcount) {
+        passwordLength     = parseInt(passwordLength);
+        if(!passwordLength)
+                passwordLength = 8;
+
+	classcount = parseInt(classcount);
+	if(!classcount)
+		classcount = 3;
+
+	var numberChars = "0123456789";
+	var upperChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	var lowerChars = "abcdefghiklmnopqrstuvwxyz";
+	var specialchars = "(!#$%&'()*+,-./:;<=>?@[\]^_";
+
+	if (classcount >= 4) {
+		var allChars = numberChars + upperChars + lowerChars + specialchars;
+	} else {
+		var allChars = numberChars + upperChars + lowerChars;
 	}
-	return password;
+	var randPasswordArray = Array(passwordLength);
+	randPasswordArray[0] = numberChars;
+	randPasswordArray[1] = upperChars;
+	randPasswordArray[2] = lowerChars;
+	if (classcount == 4) {
+		randPasswordArray[3] = specialchars;
+		randPasswordArray = randPasswordArray.fill(allChars, 4);
+	} else {
+		randPasswordArray = randPasswordArray.fill(allChars, 3);
+	}
+
+	return shuffleArray(randPasswordArray.map(function(x) { return x[Math.floor(Math.random() * x.length)] })).join('');
 }
 
-function generate_password_html(id, size, field1, field2) {
-  $("#z"+id).html("<input id='inp"+id+"' type='textbox' size=8 readonly='readonly' value='"+generate_password(size)+"' />&nbsp;<a href='javascript:generate_password_html("+id+","+size+",\""+field1+"\",\""+field2+"\");'><img src='/images/refresh.png' alt='Refresh' title='Refresh'/></a>");
+function shuffleArray(array) {
+  for (var i = array.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+  }
+  return array;
+}
+
+function generate_password_html(id, size, field1, field2, classcount) {
+  $("#z"+id).html("<input id='inp"+id+"' type='textbox' size=8 readonly='readonly' value='"+generate_password(size, classcount)+"' />&nbsp;<a href='javascript:generate_password_html("+id+","+size+",\""+field1+"\",\""+field2+"\");'><img src='/images/refresh.png' alt='Refresh' title='Refresh'/></a>");
   $("#inp"+id).focus();
   $("#inp"+id).select();
   if (field1 != "") { $(field1).val( $("#inp"+id).val() ); }
