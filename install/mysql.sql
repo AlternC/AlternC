@@ -582,6 +582,17 @@ CREATE TABLE IF NOT EXISTS `cron` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 
+--
+-- Structure de la table `dovecot_quota`
+--
+
+CREATE TABLE IF NOT EXISTS `dovecot_quota` (
+  `user` varchar(320) NOT NULL,
+  `quota_dovecot` bigint(20) NOT NULL DEFAULT '0',
+  `nb_messages` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`user`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 
 --
 -- Structure de la vue `dovecot_view`
@@ -661,6 +672,7 @@ where
 CREATE TABLE IF NOT EXISTS `piwik_users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `uid` int(11) NOT NULL,
+  `passwd` varchar(255) NOT NULL,
   `login` varchar(255) NOT NULL,
   `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
@@ -693,7 +705,7 @@ CREATE TABLE IF NOT EXISTS `default_subdomains` (
 
 INSERT IGNORE INTO `default_subdomains` (`sub`, `domain_type`, `domain_type_parameter`, `concerned`) VALUES
 ('www', 'VHOST', '%%DOMAINDIR%%', 'MAIN'),
-('mail', 'WEBMAIL', '', 'MAIN'),
+('mail', 'ROUNDCUBE', '', 'MAIN'),
 ('', 'URL', 'http://www.%%DOMAIN%%', 'MAIN'),
 ('www', 'URL', 'http://www.%%TARGETDOM%%', 'SLAVE'),
 ('mail', 'URL', 'http://mail.%%TARGETDOM%%', 'SLAVE'),
