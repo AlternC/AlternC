@@ -77,7 +77,7 @@ class m_cron {
             'title' => _("Scheduled tasks"),
             'ico' => 'images/schedule.png',
             'link' => 'cron.php',
-            'pos' => 90,
+            'pos' => 120,
                 );
 
         return $obj;

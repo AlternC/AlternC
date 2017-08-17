@@ -58,7 +58,7 @@ class m_ftp {
             'title' => _("FTP accounts"),
             'ico' => 'images/ftp.png',
             'link' => 'toggle',
-            'pos' => 60,
+            'pos' => 100,
             'links' => array(),
         );
 

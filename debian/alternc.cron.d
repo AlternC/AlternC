@@ -21,7 +21,7 @@
 # Every hour, check for slave_dns refreshes
 5 * * * *	root            /usr/lib/alternc/slave_dns
 
-# Every day at 2am, compute web, mail and db space usage per account.
+# Every day at 2am, compute web, mailman and db space usage per account.
 # You may put this computing every week only or on your filer on busy services.
 0 2 * * *	alterncpanel 	/usr/lib/alternc/spoolsize.php 2>&1 > /dev/null
 
@@ -34,3 +34,6 @@
 # Every 20 minutes, do actions
 */20 * * * *	root	/usr/lib/alternc/do_actions.php
 
+# Calculate the mail accounts size once a week beacause the dovecot plugin to do that is not precise (see ticket AlternC #168)
+# Every Sunday at 4am
+0 4 * * 0	root	/usr/lib/alternc/update_quota_mail.sh -a

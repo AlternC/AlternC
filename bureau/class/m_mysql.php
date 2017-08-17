@@ -942,12 +942,13 @@ class m_mysql {
      * @access private
      */
     function hook_quota_get() {
-        global $msg;
+        global $msg, $mem, $quota;
         $msg->log("mysql", "alternc_get_quota");
         $q = Array("name" => "mysql", "description" => _("MySQL Databases"), "used" => 0);
         $c = $this->get_dblist();
         if (is_array($c)) {
             $q['used'] = count($c);
+            $q['sizeondisk'] = $quota->get_size_db_sum_user($mem->user["login"])/1024;
         }
         return $q;
     }

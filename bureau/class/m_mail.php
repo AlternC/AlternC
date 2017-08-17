@@ -200,12 +200,13 @@ class m_mail {
      * or false if I'm not the one for the named quota
      */
     function hook_quota_get() {
-        global $db, $msg, $cuid;
+        global $db, $msg, $cuid, $quota;
         $msg->log("mail", "getquota");
         $q = Array("name" => "mail", "description" => _("Email addresses"), "used" => 0);
         $db->query("SELECT COUNT(*) AS cnt FROM address a, domaines d WHERE a.domain_id=d.id AND d.compte= ? AND a.type='';", array($cuid));
         if ($db->next_record()) {
             $q['used'] = $db->f("cnt");
+            $q['sizeondisk'] =  $quota->get_size_mail_sum_user($cuid)/1024;
         }
         return $q;
     }

@@ -40,6 +40,7 @@ class m_quota {
 
     var $disk = Array();  /* disk resource for which we will manage quotas */
     var $disk_quota_enable;
+    var $disk_quota_not_blocking;
     var $quotas;
     var $clquota; // Which class manage which quota.
 
@@ -52,6 +53,8 @@ class m_quota {
         $this->disk_quota_enable = variable_get('disk_quota_enable', 1, 'Are disk quota enabled for this server', array('desc' => 'Enabled', 'type' => 'boolean'));
         if ($this->disk_quota_enable) {
             $this->disk = Array("web" => "web");
+
+	    $this->disk_quota_not_blocking = variable_get('disk_quota_not_blocking', 1, "0 - Block data when quota are exceeded (you need a working quota system) | 1 - Just show quota but don't block anything", array('desc' => 'Enabled', 'type' => 'boolean'));
         }
     }
 
@@ -60,11 +63,13 @@ class m_quota {
     }
 
     function hook_menu() {
+        global $cuid, $mem, $quota;
+
         $obj = array(
             'title' => _("Show my quotas"),
             'ico' => 'images/quota.png',
             'link' => 'toggle',
-            'pos' => 110,
+            'pos' => 5,
             'divclass' => 'menu-quota',
             'links' => array(),
         );
@@ -77,9 +82,10 @@ class m_quota {
         	        continue;
 		}
 	            
-		$usage_percent = (int) ($q[$key]["u"] / $q[$key]["t"] * 100);
+                $totalsize_used = $quota->get_size_web_sum_user($cuid) + $quota->get_size_mailman_sum_user($cuid) + ($quota->get_size_db_sum_user($mem->user["login"]) + $quota->get_size_mail_sum_user($cuid))/1024;
+		$usage_percent = (int) ($totalsize_used / $q[$key]["t"] * 100);
 		$obj['links'][] = array('txt' => _("quota_" . $key) . " " . sprintf(_("%s%% of %s"), $usage_percent, format_size($q[$key]["t"] * 1024)), 'url' => 'quota_show.php');
-		$obj['links'][] = array('txt' => 'progressbar', 'total' => $q[$key]["t"], 'used' => $q[$key]["u"]);
+		$obj['links'][] = array('txt' => 'progressbar', 'total' => $q[$key]["t"], 'used' => $totalsize_used);
 	}
 
         // do not return menu item if there is no quota
@@ -186,6 +192,8 @@ class m_quota {
             foreach ($res as $r) {
                 $this->quotas[$r['name']] = $r;
                 $this->quotas[$r['name']]['u'] = $r['used']; // retrocompatibilité
+                if (isset($r['sizeondisk']))
+                    $this->quotas[$r['name']]['s'] = $r['sizeondisk'];
                 $this->quotas[$r['name']]['t'] = 0; // Default quota = 0
             }
             reset($this->disk);
@@ -202,14 +210,20 @@ class m_quota {
                         // If there is a cached value
                         $a = $disk_cached[$val];
                     } else {
-                        exec("/usr/lib/alternc/quota_get " . intval($cuid), $ak);
-                        $a['u'] = intval($ak[0]);
-                        $a['t'] = @intval($ak[1]);
+                        if ($this->disk_quota_not_blocking) {
+                            $a['u'] = $this->get_size_web_sum_user($cuid);
+                            $a['t'] = $this->get_quota_user_cat($cuid, 'web');
+                        } else {
+                            exec("/usr/lib/alternc/quota_get " . intval($cuid), $ak);
+                            $a['u'] = intval($ak[0]);
+                            $a['t'] = @intval($ak[1]);
+                        }
+			$a['sizeondisk'] = $a['u'];
                         $a['timestamp'] = time();
                         $a['uid'] = $cuid;
                         $disk_cached = $mem->session_tempo_params_set('quota_cache_disk', array($val => $a));
                     }
-                    $this->quotas[$val] = array("name" => "$val", 'description' => _("quota_" . $val), "t" => $a['t'], "u" => $a['u']);
+		    $this->quotas[$val] = array("name" => "$val", 'description' => _("Web disk space"), "s" => $a['sizeondisk'], "t" => $a['t'], "u" => $a['u']);
                 }
             }
 
@@ -245,7 +259,7 @@ class m_quota {
         if (floatval($size) == 0) {
             $size = "0";
         }
-        if (isset($this->disk[$ressource])) {
+        if (!$this->disk_quota_not_blocking && isset($this->disk[$ressource])) {
             // It's a disk resource, update it with shell command
             exec("sudo /usr/lib/alternc/quota_edit " . intval($cuid) . " " . intval($size) . " &> /dev/null &");
             // Now we check that the value has been written properly : 
@@ -463,6 +477,12 @@ class m_quota {
         }
     }
 
+    /* get the quota from one user for a cat */
+
+    function get_quota_user_cat($uid, $name) {
+	return $this->_get_sum_sql("SELECT SUM(total) AS sum FROM quotas WHERE uid='$uid' AND name='$name';");
+    }
+
     /* sum of websites sizes from all users */
 
     function get_size_web_sum_all() {
@@ -486,6 +506,12 @@ class m_quota {
     function get_size_mail_sum_domain($dom) {
         global $mail;
         return $mail->get_total_size_for_domain($dom);
+    }
+
+    /* sum of mailbox size for ine user */
+
+    function get_size_mail_sum_user($u) {
+      return $this->_get_sum_sql("SELECT SUM(quota_dovecot) as sum FROM dovecot_quota WHERE user IN (SELECT CONCAT(a.address, '@', d.domaine) as mail FROM `address` as a INNER JOIN domaines as d ON a.domain_id = d.id WHERE d.compte = '$u' AND a.type ='')");
     }
 
     /* count of mailbox sizes from all domains */
