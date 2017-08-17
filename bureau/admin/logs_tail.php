@@ -36,10 +36,6 @@ $fields = array (
 );
 getFields($fields);
 
-if (empty($file)) {
-$error="";
-}
-
 include_once("head.php");
 
 $string=$log->tail($file,$lines);
@@ -63,7 +59,7 @@ if (!$string) {
 } ?>
 <select id="lines" name="lines" onchange="document.forms['update'].submit()">
   <?php
-  $alines=array(10=>10, 20=>20, 30=>30, 50=>50, 100=>100, 200=>200, 500=>500, 1000=>1000, 5000=>5000);
+  $alines=array(10=>10, 20=>20, 30=>30, 50=>50, 100=>100, 200=>200, 500=>500, 1000=>1000);
 eoption($alines,$lines);
 ?>
 </select> <?php __("Last lines shown"); ?>  
@@ -73,11 +69,7 @@ eoption($alines,$lines);
 <hr id="topbar"/>
 <br />
 <?php
-if (isset($error) && $error) {
-  echo "<p class=\"alert alert-danger\">$error</p>";
-}
-
-
+echo $msg->msg_html_all();
 ?>
 <pre style="    white-space: pre-wrap;       /* CSS 3 */
     white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */

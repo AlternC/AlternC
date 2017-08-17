@@ -20,25 +20,25 @@ if (!empty($s_protocol)) {
   getFields($fields);
 
   if (! $authip->ip_affected_save($s_ipsub, $s_protocol, $$val) ) {
-    $error="Error during ip_affected_save";
+    $msg->raise('Error', "ftp", _("Error during ip_affected_save")); // à traduire
   }
 }
 
 if (!empty($delete_affected_id)) {
   if (! $authip->ip_affected_delete($delete_affected_id)) {
-    $error="Error during deletion";
+    $msg->raise('Error', "ftp", _("Error during deletion")); // à traduire
   }
 }
 
 if (!empty($delete_id)) {
   if (! $authip->ip_delete($delete_id)) {
-    $error="Error during deletion";
+    $msg->raise('Error', "ftp", _("Error during deletion")); // à traduire
   }
 }
 
 if (!empty($ipsub)) {
   if (! $authip->ip_save($id, $ipsub, $infos)) {
-    $error="Error during recording";
+    $msg->raise('Error', "ftp", _("Error during recording")); // à traduire
   }
 }
 
@@ -51,9 +51,9 @@ $lac = $authip->list_affected();
 <hr id="topbar"/>
 <br />
 
-<?php if (isset($error) && $error) { ?>
-  <p class="alert alert-danger"><?php echo $error ; $error=''; ?></p>
-<?php } ?>
+<?php
+echo $msg->msg_html_all();
+?>
 
 <p><?php __("Here you can add rules to restrict access to AlternC's services, filtered by IP. First, add trusted IPs in the 'Known IP and networks' list. Then, add rules to grant access on services to the chosen IPs from this list.") ?></p>
 
@@ -164,7 +164,7 @@ foreach($list_ip as $i) {
   }
   echo "<tr class='lst' ><td>{$i['infos']}</td><td>{$i['ip_human']}</td><td>$txt</td>";
   ?>
-  <td><div class="ina edit"><a href="javascript:edit_ip(<?php echo "'".htmlentities($i['id'])."','".htmlentities($i['ip_human'])."','".htmlentities($i['infos'])."'"; ?>);"><?php __("Edit"); ?></a></div></td>
+  <td><div class="ina edit"><a href="javascript:edit_ip(<?php echo "'".htmlentities($i['id'])."','".htmlentities($i['ip_human'])."',".htmlentities($i['infos']); ?>);"><?php __("Edit"); ?></a></div></td>
   <td><div class="ina delete"><a href="ip_main.php?delete_id=<?php echo urlencode($i["id"]) ?>"><?php __("Delete"); ?></a></div></td>
   </tr>
 
@@ -174,7 +174,7 @@ foreach($list_ip as $i) {
 <hr/>
 <h3><?php __("Add an IP or a networks");?></h3>
 
-<p><a href="javascript:edit_ip('','<?php ehe(get_remote_ip())."','Home IP'";?>);" ><?php echo __("Add my current IP"); ?></a></p>
+<p><a href="javascript:edit_ip('','<?php ehe(get_remote_ip()."','Home IP'");?>);" ><?php echo __("Add my current IP"); ?></a></p>
 <span id="form_add_ip">
 <form method="post" action="ip_main.php" name="main" >
    <?php csrf_get(); ?>

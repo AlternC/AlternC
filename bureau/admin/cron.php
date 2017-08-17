@@ -8,10 +8,8 @@ $fields = array (
 getFields($fields);
 
 if (!empty($cronupdate)) {
-  if (! $cron->update($cronupdate)) {
-    $error=$err->errstr();
-  } else {
-    $error=_("Save done.");
+  if ($cron->update($cronupdate)) {
+    $msg->raise("ok", "mysql", _("Save done."));
   }
 }
 
@@ -22,9 +20,9 @@ $lst_cron = $cron->lst_cron();
 <hr id="topbar"/>
 <br />
 
-<?php if (isset($error) && $error) { ?>
-  <p class="alert alert-danger"><?php echo $error ?></p>
-<?php } ?>
+<?php
+echo $msg->msg_html_all()
+?>
 
 <form method="post" action="cron.php" id="main" name="cron" >
   <?php csrf_get(); ?>

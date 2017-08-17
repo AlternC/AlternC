@@ -69,8 +69,8 @@ class m_lxc implements vm {
      * HOOK: remove VM history for AlternC account
      */
     function hook_admin_del_member() {
-        global $db, $err, $cuid;
-        $err->log("lxc", "alternc_del_member");
+        global $db, $msg, $cuid;
+        $msg->log("lxc", "alternc_del_member");
         $db->query("DELETE FROM vm_history WHERE uid= ?", array($cuid));
         return true;
     }
@@ -123,10 +123,10 @@ class m_lxc implements vm {
      * for user $login having hashed password $pass and uid $uid
      */
     public function start($login = FALSE, $pass = FALSE, $uid = FALSE) {
-        global $mem, $db, $err, $mysql;
+        global $mem, $db, $msg, $mysql;
 
         if ($this->getvm() !== FALSE) {
-            $err->raise('lxc', _('VM already started'));
+            $msg->raise('Error', 'lxc', _('VM already started'));
             return FALSE;
         }
         unset($this->error);
@@ -150,7 +150,7 @@ class m_lxc implements vm {
             $uid = $mem->user['uid'];
 
             if ($error != 0) {
-                $err->raise('lxc', _($msg));
+                $msg->raise('Error', 'lxc', _($msg));
                 return FALSE;
             }
             $db->query("INSERT INTO vm_history (ip,date_start,uid,serialized_object) VALUES (?, ?, ?, ?);", array($hostname, $date_start, $uid, $res));

@@ -53,15 +53,9 @@ include_once("head.php");
 <hr/>
 <br/>
 
-<?php if (!empty($error)) { ?>
-<div>
-<span class="alert alert-danger">
-   <?php echo implode(" - ", array_unique($error)); ?>
-
-</span>
-</div>
-<br/>
-<?php } ?>
+<?php
+echo $msg->msg_html_all();
+?>
 
 <div>
 <?php if (empty($infos)) { 

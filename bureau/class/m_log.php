@@ -34,8 +34,8 @@ class m_log {
     }
 
     function list_logs_directory($dir) {
-        global $cuid, $err;
-        $err->log("log", "list_logs_directory");
+        global $cuid, $msg;
+        $msg->log("log", "list_logs_directory");
 
         $c = array();
         foreach (glob("${dir}/*log*") as $absfile) {
@@ -72,8 +72,8 @@ class m_log {
     }
 
     function list_logs_directory_all($dirs) {
-        global $err;
-        $err->log("log", "get_logs_directory_all");
+        global $msg;
+        $msg->log("log", "get_logs_directory_all");
         $c = array();
         foreach ($dirs as $dir => $val) {
             $c[$dir] = $this->list_logs_directory($val);
@@ -82,8 +82,8 @@ class m_log {
     }
 
     function get_logs_directory() {
-        global $cuid, $mem, $err;
-        $err->log("log", "get_logs_directory");
+        global $cuid, $mem, $msg;
+        $msg->log("log", "get_logs_directory");
         // Return an array to allow multiple directory in the future
         if (defined('ALTERNC_LOGS_ARCHIVE')) {
             $c = array("dir" => ALTERNC_LOGS_ARCHIVE . "/" . $cuid . "-" . $mem->user["login"]);
@@ -94,8 +94,8 @@ class m_log {
     }
 
     function download_link($file) {
-        global $err;
-        $err->log("log", "download_link");
+        global $msg;
+        $msg->log("log", "download_link");
         header("Content-Disposition: attachment; filename=" . $file . "");
         header("Content-Type: application/force-download");
         header("Content-Transfer-Encoding: binary");
@@ -106,8 +106,8 @@ class m_log {
     }
 
     function tail($file, $lines = 20) {
-        global $err;
-        $err->log("log", "tail");
+        global $msg;
+        $msg->log("log", "tail");
         $lines = intval($lines);
         if ($lines <= 0) {
             $lines = 20;

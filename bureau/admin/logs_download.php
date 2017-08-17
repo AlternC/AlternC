@@ -34,9 +34,5 @@ $fields = array (
 );
 getFields($fields);
 
-if (empty($file)) {
-$error="";
-}
-
 $log->download_link($file);
 ?>
