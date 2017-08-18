@@ -44,7 +44,7 @@ if (empty($login)) {
 if(!empty($confirm_del)) {
   // contrôle si ce compte piwik a encore des sites associés avant d'accepter sa suppression
   if ($piwik->user_has_sites()) {
-    $msg->raise('Alert', "piwik", _("You must first remove all the piwik sites associated with this user before deleting him")); // à traduire
+    $msg->raise('Alert', "piwik", _("To be able to delete the last user account, you must first remove all the piwik sites"));
   } else if ($piwik->user_delete($login) ) {
     $msg->raise('Ok', "piwik", _("Account %s is successfully deleted"), $login);
   }

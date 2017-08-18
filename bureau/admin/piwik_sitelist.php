@@ -162,7 +162,7 @@ foreach ($sitelist as $site ){
               <?php
               if (! $no_user) {
 		?>
-                <a id="connect_<?php echo $site->id; ?>" href="<?php echo $first_url; ?>" target="_blank"><?php __('Connect as'); ?></a> <!-- à traduire -->
+                <a id="connect_<?php echo $site->id; ?>" href="<?php echo $first_url; ?>" target="_blank"><?php __('Connect as'); ?></a>
 		<?php
 	        echo $list_users;
               } else {

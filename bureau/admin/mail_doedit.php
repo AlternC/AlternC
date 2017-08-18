@@ -104,7 +104,7 @@ if (!$res=$mail->get_details($mail_id)) {
 } 
 
 if ($new_account)
-  $msg->raise("Ok", "mail", _("Your email has been created successfully")); // à traduire
+  $msg->raise("Ok", "mail", _("Your email has been created successfully"));
 else
   $msg->raise("Ok", "mail", _("Your email has been edited successfully"));
 

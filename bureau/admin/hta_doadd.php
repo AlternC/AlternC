@@ -42,7 +42,7 @@ if(empty($dir)) {
 	$is_include=true;
 	include("hta_add.php");
 } else {
-	$msg->raise("Ok", "hta", _("Folder %s is protected"), $dir);  // à traduire
+	$msg->raise("Ok", "hta", _("Folder %s is protected"), $dir);
 	include("hta_list.php");
 }
 ?>

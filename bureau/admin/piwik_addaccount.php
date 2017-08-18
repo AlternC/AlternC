@@ -43,7 +43,7 @@ $fields = array (
 getFields($fields);
 
 if ($piwik->user_add($account_name, $account_mail) ) {
-  $msg->raise('Ok', "piwik", _('Successfully added piwik account')); // à traduire (ou à corriger)
+  $msg->raise('Ok', "piwik", _('Successfully added piwik account'));
 }
 include_once("piwik_userlist.php");
 ?>

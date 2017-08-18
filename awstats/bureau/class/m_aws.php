@@ -678,7 +678,7 @@ class m_aws {
       return false;
     } 
    if (!preg_match('/^[0-9a-z_-]*$/', $postfix)){
-      $msg->raise('Error', "aws", _("There is some forbidden characters in the login (only A-Z 0-9 _ and - are allowed)"));  // à traduire
+      $msg->raise('Error', "aws", _("There is some forbidden characters in the login (only A-Z 0-9 _ and - are allowed)"));
       return false;
     }
     return $login;

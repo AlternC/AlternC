@@ -71,13 +71,13 @@ if (!empty($formu) && $formu) {
   switch ($formu) {
     case 1:  // Create the folder $R.$nomfich
       if ($bro->CreateDir($R,$nomfich)) {
-        $msg->raise("Ok", "bro", _("The folder '%s' was successfully created"), $nomfich); // à traduire
+        $msg->raise("Ok", "bro", _("The folder '%s' was successfully created"), $nomfich);
       }
       $p=$bro->GetPrefs();
       break;
     case 6: // Create the file $R.$nomfich
       if ($bro->CreateFile($R,$nomfich)) {
-        $msg->raise("Ok", "bro", _("The file '%s' was successfully created"), $nomfich); // à traduire
+        $msg->raise("Ok", "bro", _("The file '%s' was successfully created"), $nomfich);
       }
       $p=$bro->GetPrefs();
       if ($p["createfile"]==1) {
@@ -92,9 +92,9 @@ if (!empty($formu) && $formu) {
           if ($bro->DeleteFile($d,$R)) {
 	    foreach ($d as $v) {
 	      if (is_dir($absolute . "/" . $v))
-                $msg->raise("Ok", "bro", _("The folder '%s' was successfully deleted"), $v); // à traduire
+                $msg->raise("Ok", "bro", _("The folder '%s' was successfully deleted"), $v);
 	      else
-                $msg->raise("Ok", "bro", _("The file '%s' was successfully deleted"), $v); // à traduire
+                $msg->raise("Ok", "bro", _("The file '%s' was successfully deleted"), $v);
 	    }
           }
         } elseif (empty($cancel) && is_array($d)) {
@@ -128,22 +128,22 @@ if (!empty($formu) && $formu) {
         if ($bro->CopyFile($d,$R,$actmoveto)) {
 	  if (count($d) == 1) {
 	    if (is_dir($absolute . "/" . $d[0]))
-	      $msg->raise("Ok", "bro", _("The folder '%s' was successfully copied to '%s'"), array($d[0], $actmoveto)); // à traduire
+	      $msg->raise("Ok", "bro", _("The folder '%s' was successfully copied to '%s'"), array($d[0], $actmoveto));
 	    else
-	      $msg->raise("Ok", "bro", _("The file '%s' was successfully copied to '%s'"), array($d[0], $actmoveto)); // à traduire
+	      $msg->raise("Ok", "bro", _("The file '%s' was successfully copied to '%s'"), array($d[0], $actmoveto));
 	  } else
-            $msg->raise("Ok", "bro", _("The files / folders were successfully copied")); // à traduire
+            $msg->raise("Ok", "bro", _("The files / folders were successfully copied"));
         }
       }
       if ($actmove) {
         if ($bro->MoveFile($d,$R,$actmoveto)) {
 	  if (count($d) == 1) {
 	    if (is_dir($absolute . "/" . $d[0]))
-	      $msg->raise("Ok", "bro", _("The folder '%s' was successfully moved to '%s'"), array($d[0], $actmoveto)); // à traduire
+	      $msg->raise("Ok", "bro", _("The folder '%s' was successfully moved to '%s'"), array($d[0], $actmoveto));
 	    else
-	      $msg->raise("Ok", "bro", _("The file '%s' was successfully moved to '%s'"), array($d[0], $actmoveto)); // à traduire
+	      $msg->raise("Ok", "bro", _("The file '%s' was successfully moved to '%s'"), array($d[0], $actmoveto));
 	  } else
-            $msg->raise("Ok", "bro", _("The files / folders were successfully moved")); // à traduire
+            $msg->raise("Ok", "bro", _("The files / folders were successfully moved"));
         }
       }
       break;
@@ -151,21 +151,21 @@ if (!empty($formu) && $formu) {
       if ($bro->RenameFile($R,$o,$d)) { // Rename $R (directory) $o (old) $d (new) names
 	if (count($d) == 1) {
 	  if (is_dir($absolute . "/" . $d[0]))
-	    $msg->raise("Ok", "bro", _("The folder '%s' was successfully renamed to '%s'"), array($o[0], $d[0])); // à traduire
+	    $msg->raise("Ok", "bro", _("The folder '%s' was successfully renamed to '%s'"), array($o[0], $d[0]));
 	  else
-	    $msg->raise("Ok", "bro", _("The file '%s' was successfully renamed to '%s'"), array($o[0], $d[0])); // à traduire
+	    $msg->raise("Ok", "bro", _("The file '%s' was successfully renamed to '%s'"), array($o[0], $d[0]));
 	} else
-          $msg->raise("Ok", "bro", _("The files / folders were successfully renamed")); // à traduire
+          $msg->raise("Ok", "bro", _("The files / folders were successfully renamed"));
       } 
       break;
     case 3:  // Upload de fichier...
       if ($bro->UploadFile($R)) {
-        $msg->raise("Ok", "bro", _("The file '%s' was successfully uploaded"), $_FILES['userfile']['name']); // à traduire
+        $msg->raise("Ok", "bro", _("The file '%s' was successfully uploaded"), $_FILES['userfile']['name']);
       }
       break;
     case 7:  // Changement de permissions [ML]
       if ($bro->ChangePermissions($R, $d)) {
-	$msg->raise("Ok", "bro", _("The permissions were successfully set")); // à traduire
+	$msg->raise("Ok", "bro", _("The permissions were successfully set"));
       }
       break;
   }
@@ -173,7 +173,7 @@ if (!empty($formu) && $formu) {
 
 if (isset($actextract) && $actextract) {
   if ($bro->ExtractFile($R. '/' . $fileextract, $R)) {
-    $msg->raise("Ok", "bro", _("The extraction of the file '%s' was successfull"), $fileextract); // à traduire
+    $msg->raise("Ok", "bro", _("The extraction of the file '%s' was successfull"), $fileextract);
   }
 }
 

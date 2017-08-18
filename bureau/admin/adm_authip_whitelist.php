@@ -15,7 +15,7 @@ getFields($fields);
 
 if (!empty($delete_id)) {
   if (! $authip->ip_delete($delete_id)) {
-    $msg->raise('Error', "admin", _("Error during deletion")); // à traduire
+    $msg->raise('Error', "admin", _("Error during deletion"));
   }
 }
 

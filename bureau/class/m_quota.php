@@ -348,7 +348,7 @@ class m_quota {
         }
         $type = strtolower($type);
         if (!preg_match("#^[a-z0-9]*$#", $type)) {
-            $msg->raise('Error', "quota", _("Type can only contains characters a-z and 0-9")); // à traduire
+            $msg->raise('Error', "quota", _("Type can only contains characters a-z and 0-9"));
             return false;
         }
         while (list($key, $val) = each($qlist)) {

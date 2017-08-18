@@ -388,7 +388,7 @@ ORDER BY
         $db->query("SELECT * FROM address WHERE domain_id= ? AND address= ? ;", array($dom_id, $mail));
         if ($db->next_record()) {
 	    if ($db->f("type") == "mailman")
-	      $msg->raise('Error', "mail", _("This email address already exists in mailman")); // à traduire
+	      $msg->raise('Error', "mail", _("This email address already exists in mailman"));
 	    else
               $msg->raise('Error', "mail", _("This email address already exists"));
 

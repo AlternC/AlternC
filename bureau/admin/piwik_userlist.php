@@ -44,11 +44,11 @@ echo $msg->msg_html_all("<li>", true, true);
  <?php csrf_get(); ?>
 	<table class="tedit">
 	<tr>
-	<th><label for="account_name"><?php __("Account Name"); ?></label></th>   <!-- à traduire -->
+	<th><label for="account_name"><?php __("Account Name"); ?></label></th>
 	<td><span class="int" id="account_namefx"><?php echo $mem->user["login"]; ?>_</span><input type="text" class="int" name="account_name" size="20" id="account_name" maxlength="32" value=""/>
 	</tr>
 	<tr>
-	<th><label for="account_mail"><?php __("Linked Account Email"); ?></label></th>  <!-- à traduire -->
+	<th><label for="account_mail"><?php __("Linked Account Email"); ?></label></th>
 	<td><input type="text" class="int" name="account_mail" size="20" id="account_mail" maxlength="32" value="<?php if (count($userslist) == 0) {echo $mem->user["mail"];}?>"/>
 	</tr>
 	<tr class="trbtn"><td colspan="2">
@@ -74,7 +74,7 @@ echo $msg->msg_html_all("<li>", true, true);
 // printVar($piwik->dev());
 
 if (empty($userslist)){
-	$msg->raise('Info', "piwik", _("No existing Piwik accounts")); // à traduire (ou à corriger)
+	$msg->raise('Info', "piwik", _("No existing Piwik accounts"));
 	echo $msg->msg_html_all();
 } else {
 ?>
@@ -125,7 +125,7 @@ foreach ($userslist as $user ){
 ?>
 
 </table>
-<div class="ina" id="alert_div_msg" style="display:none;background-color:yellow;padding:5px;border:2px solid black;margin-top:3em;";> <!-- à traduire -->
+<div class="ina" id="alert_div_msg" style="display:none;background-color:yellow;padding:5px;border:2px solid black;margin-top:3em;";>
   <?php __("An error occurred. It was not possible to retrieve the access information to the Piwik interface") ?>
 </div>
 <?php include_once("foot.php"); ?>

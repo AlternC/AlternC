@@ -224,7 +224,7 @@ class m_authip {
 
         // Error if $ip not an IP
         if (!checkip($ip) && !checkipv6($ip)) {
-            $msg->raise('Error', 'authip', _("Failed : not an IP address")); // à traduire
+            $msg->raise('Error', 'authip', _("Failed : not an IP address"));
             return false;
         }
 

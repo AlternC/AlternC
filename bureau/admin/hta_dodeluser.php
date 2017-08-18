@@ -40,7 +40,7 @@ if (!empty($confirm_del)) {
   reset($d);
   if ($hta->del_user($d,$dir)) {
     foreach ($d as $v) {
-      $msg->raise("Ok", "hta", _("The user '%s' was successfully deleted"), $v);  // à traduire
+      $msg->raise("Ok", "hta", _("The user '%s' was successfully deleted"), $v);
     }
   }
   $is_include=true;

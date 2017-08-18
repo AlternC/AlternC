@@ -46,7 +46,7 @@ if ($password != $passwordconf) {
 if (!$hta->add_user($user, $password, $dir)) {
 	include ("hta_adduser.php");
 } else {
-	$msg->raise("Ok", "hta", _("The user %s was added to th protected folder %s"), array($user, $dir)); // à traduire
+	$msg->raise("Ok", "hta", _("The user %s was added to th protected folder %s"), array($user, $dir));
 	include ("hta_edit.php");
 }
 ?>
