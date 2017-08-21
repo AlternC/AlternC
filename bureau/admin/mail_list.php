@@ -59,7 +59,7 @@ if ($domain=$dom->get_domain_byid($domain_id)) {
   echo '<h3>'._("Manage Catch-all")."</h3>";
 }
 
-echo $msg->msg_html_all();
+echo $msg->msg_html_all("<li>", true, true);
 ?>
     </td>
   </tr>
@@ -85,9 +85,8 @@ echo $msg->msg_html_all();
 <h3><?php printf(_("Email addresses of the domain %s"),$domain); ?> : </h3>
 <?php
 if (empty($allmails_list) && empty($search)) {
-  echo "<p><i>";
-  __("No mails for this domain.");
-  echo "</i></p><br/>";
+  $msg->raise('Error', 'mail', _("No mails for this domain."));
+  echo $msg->msg_html_all();
 } else {
 
 ?>

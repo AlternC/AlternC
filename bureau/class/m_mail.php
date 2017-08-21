@@ -465,7 +465,7 @@ ORDER BY
      * OR when the DOMAIN class tells us we don't host the emails of this domain anymore.
      * @param $dom the ID of the domain to delete
      * @return boolean if the email has been properly deleted
-     * or false if an error occured ($err is filled accordingly)
+     * or false if an error occured ($msg is filled accordingly)
      */
     function hook_dom_del_mx_domain($dom_id) {
         global $db;
