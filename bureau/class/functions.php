@@ -1081,7 +1081,7 @@ function PercentToColor($p = 0) {
 
 /**
  * 
- * @global m_err    $err
+ * @global m_messages    $msg
  * @global m_mem    $mem
  * @global int          $cuid
  * @return boolean
@@ -1096,7 +1096,7 @@ function panel_lock() {
 
 /**
  * 
- * @global m_err    $err
+ * @global m_messages    $msg
  * @global m_mem    $mem
  * @global int          $cuid
  * @return boolean
@@ -1143,29 +1143,29 @@ function csrf_get($return=false) {
  * a token can be only checked once, it's disabled then
  * @param $token string the token to check in the DB + session
  * @return $result integer 0 for invalid token, 1 for good token, -1 for expired token (already used)
- * if a token is invalid or expired, an $err is raised, that can be displayed
+ * if a token is invalid or expired, an $msg is raised, that can be displayed
  */
 function csrf_check($token=null) {
-    global $db,$err;
+    global $db,$msg;
 
     if (is_null($token)) $token=$_POST["csrf"];
 
     if (!isset($_SESSION["csrf"])) {
-        $err->raise("functions", _("The posted form token is incorrect. Maybe you need to allow cookies"));
+        $msg->raise('Error', "functions", _("The posted form token is incorrect. Maybe you need to allow cookies"));
         return 0; // no csrf cookie :/
     }
     if (strlen($token)!=32 || strlen($_SESSION["csrf"])!=32) {
         unset($_SESSION["csrf"]);
-        $err->raise("functions", _("Your cookie or token is invalid"));
+        $msg->raise('Error', "functions", _("Your cookie or token is invalid"));
         return 0; // invalid csrf cookie 
     }
     $db->query("SELECT used FROM csrf WHERE cookie=? AND token=?;",array($_SESSION["csrf"],$token));
     if (!$db->next_record()) {
-        $err->raise("functions", _("Your token is invalid"));
+        $msg->raise('Error', "functions", _("Your token is invalid"));
         return 0; // invalid csrf cookie 
     }
     if ($db->f("used")) {
-        $err->raise("functions", _("Your token is expired. Please refill the form."));
+        $msg->raise('Error', "functions", _("Your token is expired. Please refill the form."));
         return -1; // expired
     }
     $db->query("UPDATE csrf SET used=1 WHERE cookie=? AND token=?;",array($_SESSION["csrf"],$token)); 
