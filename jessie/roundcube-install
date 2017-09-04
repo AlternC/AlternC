@@ -81,9 +81,17 @@ EOF
     echo "    Done"
 
     echo "Deconfiguring javascript-common alias"
-    rm -f /etc/apache2/conf.d/javascript-common.conf
+    if [ -f /etc/apache2/conf.d/javascript-common.conf ]; then
+        	rm -f /etc/apache2/conf.d/javascript-common.conf
+    fi
+    if [ -f /etc/apache2/conf-available/javascript-common.conf ] ; then
+		a2disconf javascript-common.conf
+		service apache2 reload
+    fi
     # just in case 
-    sed -i -e "s/^Alias \/javascript/# Do not uncomment, commented by AlternC to prevent a global alias\n#Alias \/javascript/" /etc/javascript-common/javascript-common.conf
+    if [ -f /etc/javascript-common/javascript-common.conf ]; then
+        sed -i -e "s/^Alias \/javascript/# Do not uncomment, commented by AlternC to prevent a global alias\n#Alias \/javascript/" /etc/javascript-common/javascript-common.conf
+    fi
     echo "    Done"
     
 fi
