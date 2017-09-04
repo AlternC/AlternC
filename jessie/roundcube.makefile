@@ -22,7 +22,7 @@
 
 install:
 	# alternc-roundcube files install
-	install -m 644 templates/roundcube/main.inc.php $(DESTDIR)/etc/alternc/templates/roundcube/
+	install -m 644 templates/roundcube/config.inc.php $(DESTDIR)/etc/alternc/templates/roundcube/
 	install -m 644 templates/roundcube/plugins/password/config.inc.php $(DESTDIR)/etc/alternc/templates/roundcube/plugins/password/
 	install -m 644 templates/roundcube/plugins/managesieve/config.inc.php $(DESTDIR)/etc/alternc/templates/roundcube/plugins/managesieve/
 	install -m 644 roundcube_alternc_logo.png $(DESTDIR)/usr/share/roundcube/skins/default/images/
