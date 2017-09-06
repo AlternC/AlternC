@@ -1344,7 +1344,7 @@ class m_dom {
         $compatibility_lst = explode(",", $db->f('compatibility'));
 
         // Get the list of type of subdomains already here who have the same name
-        $db->query("select * from sub_domaines where sub= ? and domaine= ? and not id = ? and web_action != 'DELETE' and enabled not in ('DISABLED', 'DISABLE') ", array($sub, $dom, $sub_domain_id));
+        $db->query("select * from sub_domaines where sub= ? and domaine= ? and not id = ? and web_action != 'DELETE' and enable not in ('DISABLED', 'DISABLE') ", array($sub, $dom, $sub_domain_id));
         #$db->query("select * from sub_domaines where sub='$sub' and domaine='$dom';");
         while ($db->next_record()) {
             // And if there is a domain with a incompatible type, return false
