@@ -57,9 +57,19 @@ if (!$res=$mail->get_details($mail_id)) {
     exit();
   } else {
     $canbeempty = ($islocal != 1 || ($islocal == 1 && !$new_account))?true:false;
-    if (!$mail->set_passwd($mail_id,$pass,$canbeempty)) { /* SET THE PASSWORD */
-      include ("mail_edit.php");
-      exit();
+    if ($new_account || !empty($pass) || $islocal != 1) {
+      if ($islocal != 1)
+        $pass = ""; 
+
+      if (!$mail->set_passwd($mail_id,$pass,$canbeempty)) { /* SET THE PASSWORD */
+        include ("mail_edit.php");
+        exit();
+      }
+    } else if (!$new_account && empty($pass) && $islocal == 1 && $res['password'] == "") {
+      if (!$mail->set_passwd($mail_id,$pass, false)) { /* SET THE PASSWORD */
+        include ("mail_edit.php");
+        exit();
+      }
     }
   }	
 

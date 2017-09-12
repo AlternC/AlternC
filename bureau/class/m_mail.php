@@ -615,7 +615,9 @@ ORDER BY
         if (!$admin->checkPolicy("pop", $email, $pass, $canbeempty)) {
             return false;
         }
-        if (!$db->query("UPDATE address SET password= ? where id = ? ;", array(_md5cr($pass), $mail_id ))) {
+        if ($canbeempty && empty($pass)) {
+          return $db->query("UPDATE address SET password= ? where id = ? ;", array(null, $mail_id ));
+        } else if (!$db->query("UPDATE address SET password= ? where id = ? ;", array(_md5cr($pass), $mail_id ))) {
             return false;
         }
         return true;
