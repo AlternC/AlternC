@@ -749,3 +749,13 @@ DELETE FROM alternc_status WHERE name='alternc_version';
 INSERT INTO alternc_status SET name='alternc_version',value='3.4.7.php';
 
 
+
+CREATE TABLE IF NOT EXISTS `csrf` (
+  `cookie` char(32) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
+  `token` char(32) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
+  `created` datetime NOT NULL,
+  `used` tinyint(3) unsigned NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='csrf tokens for AlternC forms';
+
+ALTER TABLE `csrf` ADD PRIMARY KEY (`cookie`,`token`), ADD KEY `created` (`created`);
+
