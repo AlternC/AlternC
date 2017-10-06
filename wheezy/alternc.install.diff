@@ -1,6 +1,8 @@
---- alternc.install.squeeze	2016-05-27 14:25:52.239693435 +0200
-+++ alternc.install	2016-05-27 14:24:05.908974433 +0200
-@@ -79,7 +79,7 @@
+diff --git a/install/alternc.install b/install/alternc.install
+index b9691b0..2ee07b8 100644
+--- alternc.install.squeeze
++++ alternc.install
+@@ -79,7 +79,7 @@ if [ -e /etc/default/saslauthd ]; then
  fi
  
  if [ -e /etc/dovecot/dovecot.conf ]; then
@@ -9,7 +11,7 @@
  fi
  
  INSTALLED_CONFIG_TAR="/var/lib/alternc/backups/etc-installed.tar.gz"
-@@ -316,7 +316,7 @@
+@@ -317,7 +317,7 @@ if [ -x /usr/sbin/apache2 ]; then
          fi
  
  	# We enable dovecot SSL certificate instructions: (on wheezy we should use a new file in /etc/dovecot/conf.d/ )
@@ -18,7 +20,7 @@
  
      else
          # We disable proftpd tls module
-@@ -325,7 +325,7 @@
+@@ -326,7 +326,7 @@ if [ -x /usr/sbin/apache2 ]; then
          cp /etc/proftpd/modules.conf /etc/alternc/templates/proftpd/
  
  	# We disable dovecot SSL certificate instructions: (on wheezy we should remove a file in /etc/dovecot/conf.d/ )
@@ -27,7 +29,7 @@
  
          echo "SSL not configured"
          echo "create a certificate in /etc/alternc/apache.pem and rerun alternc.install"
-@@ -573,9 +573,11 @@
+@@ -574,9 +574,11 @@ if [ "$HAS_ROOT" != "1" ]; then
      fi
  fi
  
