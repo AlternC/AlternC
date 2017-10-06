@@ -15,13 +15,13 @@ getFields($fields);
 
 if (!empty($delete_id)) {
   if (! $authip->ip_delete($delete_id)) {
-    $msg->raise('Error', "admin", _("Error during deletion"));
+    $msg->raise("ERROR", "admin", _("Error during deletion"));
   }
 }
 
 if (!empty($ipsub)) {
   if (! $authip->ip_save_whitelist($id, $ipsub, $infos)) {
-    $msg->raise('Error', "admin", _("Error during recording"));
+    $msg->raise("ERROR", "admin", _("Error during recording"));
   }
 }
 

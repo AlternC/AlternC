@@ -36,7 +36,7 @@ while (list($key,$val)=each($_POST)) {
 		// Effacement du dossier $val
 		$return = $hta->DelDir($val);
 		if ($return) {
-			$msg->raise("Ok", "hta",_("The protected folder %s has been successfully unprotected"),$val);
+			$msg->raise("INFO", "hta",_("The protected folder %s has been successfully unprotected"),$val);
 		}
 	}
 }

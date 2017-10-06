@@ -126,7 +126,7 @@ class m_lxc implements vm {
         global $mem, $db, $msg, $mysql;
 
         if ($this->getvm() !== FALSE) {
-            $msg->raise('Error', 'lxc', _('VM already started'));
+            $msg->raise("ERROR", 'lxc', _('VM already started'));
             return FALSE;
         }
         unset($this->error);
@@ -150,7 +150,7 @@ class m_lxc implements vm {
             $uid = $mem->user['uid'];
 
             if ($error != 0) {
-                $msg->raise('Error', 'lxc', _($msg));
+                $msg->raise("ERROR", 'lxc', _($msg));
                 return FALSE;
             }
             $db->query("INSERT INTO vm_history (ip,date_start,uid,serialized_object) VALUES (?, ?, ?, ?);", array($hostname, $date_start, $uid, $res));

@@ -39,7 +39,7 @@ getFields($fields);
 
 
 if ($mem->passwd($oldpass,$newpass,$newpass2)) {
-	$msg->raise('Ok', "mem", _("Your password has been successfully changed."));
+	$msg->raise("INFO", "mem", _("Your password has been successfully changed."));
 }
 
 include_once("head.php");

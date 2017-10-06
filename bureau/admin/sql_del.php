@@ -42,7 +42,7 @@ if ($confirm=="y" ) {
       // Effacement de la base $val
       $r=$mysql->del_db(substr($key,4));
       if ($r) {
-	$msg->raise("ok", "mysql", _("The database '%s' has been successfully deleted"), $val);
+	$msg->raise("INFO", "mysql", _("The database '%s' has been successfully deleted"), $val);
       }
     }
   }
@@ -57,7 +57,7 @@ foreach($_POST as $key=>$val) {
   }
 }
 if (!$found) {
-  $msg->raise("alert", "mysql", _("Please check which databases you want to delete"));
+  $msg->raise("ALERT", "mysql", _("Please check which databases you want to delete"));
   include("sql_list.php");
   exit();
  }

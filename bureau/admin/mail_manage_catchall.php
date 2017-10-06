@@ -34,7 +34,7 @@ $fields = array (
 getFields($fields);
 
 if (is_null($domain_id)) { 
-  $msg->raise("Error", "mail", _("Problem with the domain"));
+  $msg->raise("ERROR", "mail", _("Problem with the domain"));
   include_once("mail_list.php"); 
   exit();
 }
@@ -43,21 +43,21 @@ if (!is_null($target_type)) {
   switch ($target_type) {
     case "none":
       if ($mail->catchall_del($domain_id))
-        $msg->raise("Ok", "mail", _("Catchall successfully deleted"));
+        $msg->raise("INFO", "mail", _("Catchall successfully deleted"));
 
       require_once("mail_list.php");
       exit();
       break;
     case "domain":
       if ($mail->catchall_set($domain_id, $target_domain)) {
-	$msg->raise("Ok", "mail", _("Catchall successfully updated"));
+	$msg->raise("INFO", "mail", _("Catchall successfully updated"));
 	require_once("mail_list.php");
 	exit();
       }
       break;
     case "mail":
       if ($mail->catchall_set($domain_id, $target_mail)) {
-	$msg->raise("Ok", "mail", _("Catchall successfully updated"));
+	$msg->raise("INFO", "mail", _("Catchall successfully updated"));
 	require_once("mail_list.php");
 	exit();
       }

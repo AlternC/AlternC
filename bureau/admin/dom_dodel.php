@@ -50,7 +50,7 @@ if (! empty($del_cancel)) {
   $dom->unlock();
 
   // The link to this function is disable : the del_domain_cancel function need some modification
-  $msg->raise('Ok', "dom", _("Deletion have been successfully cancelled"));
+  $msg->raise("INFO", "dom", _("Deletion have been successfully cancelled"));
   echo $msg->msg_html_all();
 ?>
   <p>
@@ -84,7 +84,7 @@ if ($del_confirm!="y") {
 <hr id="topbar"/>
 <br />
 <?php 
-$msg->raise('Ok', "dom", _("The domain %s has been successfully deleted."),$domain);
+$msg->raise("INFO", "dom", _("The domain %s has been successfully deleted."),$domain);
 echo $msg->msg_html_all();
 ?>
 </p>

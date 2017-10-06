@@ -199,11 +199,11 @@ class m_bro {
         $db->query("UPDATE browser SET lastdir= ? WHERE uid= ?;", array($dir, $cuid));
         $absolute = $this->convertabsolute($dir, false);
         if (!$absolute || !file_exists($absolute)) {
-            $msg->raise('Error', 'bro', _("This directory does not exist."));
+            $msg->raise("ERROR", 'bro', _("This directory does not exist."));
             return false;
         }
         if (!is_readable($absolute)) {
-            $msg->raise('Error', 'bro', _("This directory is not readable."));
+            $msg->raise("ERROR", 'bro', _("This directory is not readable."));
             return false;
         }
         clearstatcache(true);
@@ -399,13 +399,13 @@ class m_bro {
         #echo "$absolute";
         if ($absolute && (!file_exists($absolute))) {
             if (!mkdir($absolute, 00777, true)) {
-                $msg->raise('Error', "bro", _("Cannot create the requested directory. Please check the permissions"));
+                $msg->raise("ERROR", "bro", _("Cannot create the requested directory. Please check the permissions"));
                 return false;
             }
             $db->query("UPDATE browser SET crff=1 WHERE uid= ?;", array($cuid));
             return true;
         } else {
-            $msg->raise('Error', "bro", _("File or folder name is incorrect"));
+            $msg->raise("ERROR", "bro", _("File or folder name is incorrect"));
             return false;
         }
     }
@@ -425,12 +425,12 @@ class m_bro {
         $file = ssla($file);
         $absolute = $this->convertabsolute($dir . "/" . $file, false);
         if (!$absolute || file_exists($absolute)) {
-            $msg->raise('Error', "bro", _("File or folder name is incorrect"));
+            $msg->raise("ERROR", "bro", _("File or folder name is incorrect"));
             return false;
         }
         if (!file_exists($absolute)) {
             if (!@touch($absolute)) {
-                $msg->raise('Error', "bro", _("Cannot create the requested file. Please check the permissions"));
+                $msg->raise("ERROR", "bro", _("Cannot create the requested file. Please check the permissions"));
                 return false;
             }
         }
@@ -452,7 +452,7 @@ class m_bro {
         $root = realpath(getuserpath());
         $absolute = $this->convertabsolute($R, false);
         if (!$absolute && strpos($root, $absolute) === 0 && strlen($absolute) > (strlen($root) + 1)) {
-            $msg->raise('Error', "bro", _("File or folder name is incorrect"));
+            $msg->raise("ERROR", "bro", _("File or folder name is incorrect"));
             return false;
         }
         for ($i = 0; $i < count($file_list); $i++) {
@@ -477,7 +477,7 @@ class m_bro {
         global $msg;
         $absolute = $this->convertabsolute($R, false);
         if (!$absolute) {
-            $msg->raise('Error', "bro", _("File or folder name is incorrect"));
+            $msg->raise("ERROR", "bro", _("File or folder name is incorrect"));
             return false;
         }
         $alea = "." . time() . mt_rand(1000, 9999);
@@ -510,7 +510,7 @@ class m_bro {
         global $msg;
         $old = $this->convertabsolute($old, false);
         if (!$old) {
-            $msg->raise('Error', "bro", _("File or folder name is incorrect"));
+            $msg->raise("ERROR", "bro", _("File or folder name is incorrect"));
             return false;
         }
 
@@ -520,18 +520,18 @@ class m_bro {
         $new = $this->convertabsolute($new, false);
 
         if (!$new) {
-            $msg->raise('Error', "bro", _("File or folder name is incorrect"));
+            $msg->raise("ERROR", "bro", _("File or folder name is incorrect"));
             return false;
         }
         if ($old == $new) {
-            $msg->raise('Error', "bro", _("You cannot move or copy a file to the same folder"));
+            $msg->raise("ERROR", "bro", _("You cannot move or copy a file to the same folder"));
             return false;
         }
         for ($i = 0; $i < count($d); $i++) {
             $d[$i] = ssla($d[$i]); // strip slashes if needed
             if (!strpos($d[$i], "/") && file_exists($old . "/" . $d[$i]) && !file_exists($new . "/" . $d[$i])) {
                 if (!rename($old . "/" . $d[$i], $new . "/" . $d[$i])) {
-                    $msg->raise('Error', "bro", "error renaming $old/$d[$i] -> $new/$d[$i]");
+                    $msg->raise("ERROR", "bro", "error renaming $old/$d[$i] -> $new/$d[$i]");
                 }
             }
         }
@@ -551,7 +551,7 @@ class m_bro {
         global $msg, $action;
         $absolute = $this->convertabsolute($R, false);
         if (!$absolute) {
-            $msg->raise('Error', "bro", _("File or folder name is incorrect"));
+            $msg->raise("ERROR", "bro", _("File or folder name is incorrect"));
             return false;
         }
         for ($i = 0; $i < count($d); $i++) {
@@ -593,7 +593,7 @@ class m_bro {
         global $_FILES, $msg, $cuid, $action;
         $absolute = $this->convertabsolute($R, false);
         if (!$absolute) {
-            $msg->raise('Error', "bro", _("File or folder name is incorrect"));
+            $msg->raise("ERROR", "bro", _("File or folder name is incorrect"));
             return false;
         }
         if (!strpos($_FILES['userfile']['name'], "/")) {
@@ -605,7 +605,7 @@ class m_bro {
                     $action->fix_file($absolute . "/" . $_FILES['userfile']['name']);
                     return $absolute . "/" . $_FILES['userfile']['name'];
                 } else {
-                    $msg->raise('Error', "bro", _("Cannot create the requested file. Please check the permissions"));
+                    $msg->raise("ERROR", "bro", _("Cannot create the requested file. Please check the permissions"));
                     return false;
                 }
             } else {
@@ -625,7 +625,7 @@ class m_bro {
                         $erstr = _("Undefined error ") . $_FILES['userfile']['error'];
                         break;
                 }
-                $msg->raise('Error', "bro", _("Error during the upload of the file: ") . $erstr);
+                $msg->raise("ERROR", "bro", _("Error during the upload of the file: ") . $erstr);
                 return false;
             }
         }
@@ -653,7 +653,7 @@ class m_bro {
             $dest = $this->convertabsolute($dest, false);
         }
         if (!$file || !$dest || !is_readable($file)) {
-            $msg->raise('Error', "bro", _("File or folder name is incorrect"));
+            $msg->raise("ERROR", "bro", _("File or folder name is incorrect"));
             return 1;
         }
         $lfile = strtolower($file);
@@ -685,7 +685,7 @@ class m_bro {
         $action->fix_dir($dest);
 
         if ($ret) {
-            $msg->raise('Error', "bro", _("I cannot find a way to extract the file %s, it is an unsupported compressed format"), $file);
+            $msg->raise("ERROR", "bro", _("I cannot find a way to extract the file %s, it is an unsupported compressed format"), $file);
 	    return false;
         }
         return true;
@@ -704,16 +704,16 @@ class m_bro {
         global $msg;
         $old = $this->convertabsolute($old, false);
         if (!$old) {
-            $msg->raise('Error', "bro", _("File or folder name is incorrect"));
+            $msg->raise("ERROR", "bro", _("File or folder name is incorrect"));
             return false;
         }
         $new = $this->convertabsolute($new, false);
         if (!$new) {
-            $msg->raise('Error', "bro", _("File or folder name is incorrect"));
+            $msg->raise("ERROR", "bro", _("File or folder name is incorrect"));
             return false;
         }
         if ($old == $new) {
-            $msg->raise('Error', "bro", _("You cannot move or copy a file to the same folder"));
+            $msg->raise("ERROR", "bro", _("You cannot move or copy a file to the same folder"));
             return false;
         }
         for ($i = 0; $i < count($d); $i++) {
@@ -741,7 +741,7 @@ class m_bro {
         global $msg;
         exec("cp -Rpf " . escapeshellarg($src) . " " . escapeshellarg($dest), $void, $ret);
         if ($ret) {
-            $msg->raise('Error', "bro", "Errors happened while copying the source to destination. cp return value: %d", $ret);
+            $msg->raise("ERROR", "bro", "Errors happened while copying the source to destination. cp return value: %d", $ret);
             return false;
         }
         return true;
@@ -799,11 +799,11 @@ class m_bro {
                 $std = str_replace("<", "&lt;", str_replace("&", "&amp;", file_get_contents($absolute)));
                 return $std;
             } else {
-                $msg->raise('Error', "bro", _("Cannot read the requested file. Please check the permissions"));
+                $msg->raise("ERROR", "bro", _("Cannot read the requested file. Please check the permissions"));
                 return false;
             }
         } else {
-            $msg->raise('Error', "bro", _("File or folder name is incorrect"));
+            $msg->raise("ERROR", "bro", _("File or folder name is incorrect"));
             return false;
         }
     }
@@ -880,7 +880,7 @@ class m_bro {
         $absolute = "$dir/$name";
         $absolute = $this->convertabsolute($absolute, false);
         if (!$absolute) {
-            $msg->raise('Error', 'bro', _("File not in authorized directory"));
+            $msg->raise("ERROR", 'bro', _("File not in authorized directory"));
             include('foot.php');
             exit;
         }
@@ -974,7 +974,7 @@ class m_bro {
                 readfile($absolute);
             }
         } else {
-            $msg->raise('Error', "bro", _("File or folder name is incorrect"));
+            $msg->raise("ERROR", "bro", _("File or folder name is incorrect"));
             return false;
         }
     }
@@ -998,12 +998,12 @@ class m_bro {
             $absolute.="/" . $file;
             if (file_exists($absolute)) {
                 if (!file_put_contents($absolute, $texte)) {
-                    $msg->raise('Error', "bro", _("Cannot edit the requested file. Please check the permissions"));
+                    $msg->raise("ERROR", "bro", _("Cannot edit the requested file. Please check the permissions"));
                     return false;
                 }
             }
         } else {
-            $msg->raise('Error', "bro", _("File or folder name is incorrect"));
+            $msg->raise("ERROR", "bro", _("File or folder name is incorrect"));
             return false;
         }
 	return true;
@@ -1170,7 +1170,7 @@ class m_bro {
         $dir.="html/";
         if (!is_dir($dir)) {
             if (!mkdir($dir))
-                $msg->raise('Error', "bro", _("Cannot create the requested directory. Please check the permissions"));
+                $msg->raise("ERROR", "bro", _("Cannot create the requested directory. Please check the permissions"));
         }
         $timestamp = date("H:i:s");
 

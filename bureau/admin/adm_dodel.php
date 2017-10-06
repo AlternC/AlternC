@@ -30,7 +30,7 @@
 require_once("../class/config.php");
 
 if (!$admin->enabled) {
-  $msg->raise('Error', "admin", _("This page is restricted to authorized staff"));
+  $msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
   echo $msg->msg_html_all();
   exit();
 }
@@ -44,21 +44,21 @@ getFields($fields);
 if($del_confirm == "y"){
   foreach ($accountList as $key => $val) {
     if (!$admin->checkcreator($val)) {
-      $msg->raise('Error', "admin", _("This page is restricted to authorized staff"));
+      $msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
       echo $msg->msg_html_all();
       exit();
     }
     if (!($u=$admin->get($val)) || !$admin->del_mem($val)) {
-      $msg->raise("Error", "admin", _("Member '%s' does not exist"),$val);
+      $msg->raise("ERROR", "admin", _("Member '%s' does not exist"),$val);
     } else {
-      $msg->raise("Ok", "admin", _("Member %s successfully deleted"),$u["login"]);
+      $msg->raise("INFO", "admin", _("Member %s successfully deleted"),$u["login"]);
     }
   }
   include("adm_list.php");
   exit();
 } else {
   if (!is_array($accountList) || count($accountList)==0) {
-    $msg->raise("Error", "admin", _("Please check the accounts you want to delete"));
+    $msg->raise("ERROR", "admin", _("Please check the accounts you want to delete"));
     require("adm_list.php");
     exit();
   } 

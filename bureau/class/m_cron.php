@@ -132,7 +132,7 @@ class m_cron {
 
 
         if (filter_var($url, FILTER_VALIDATE_URL) === false) {
-            $msg->raise('Error', "cron", _("URL not valid"));
+            $msg->raise("ERROR", "cron", _("URL not valid"));
             return false;
         }
         $url = urlencode($url);
@@ -144,7 +144,7 @@ class m_cron {
 
         //@todo remove checkmail cf functions.php
         if (!empty($email) && !checkmail($email) == 0) {
-            $msg->raise('Error', "cron", _("Email address is not valid"));
+            $msg->raise("ERROR", "cron", _("Email address is not valid"));
             return false;
         }
         $email = urlencode($email);
@@ -155,7 +155,7 @@ class m_cron {
         if (is_null($id)) { // if a new insert, quotacheck
             $q = $quota->getquota("cron");
             if ($q["u"] >= $q["t"]) {
-                $msg->raise('Error', "cron", _("You quota of cron entries is over. You cannot create more cron entries"));
+                $msg->raise("ERROR", "cron", _("You quota of cron entries is over. You cannot create more cron entries"));
                 return false;
             }
         } else { // if not a new insert, check the $cuid
@@ -164,7 +164,7 @@ class m_cron {
                 return "false";
             } // return false if pb
 	    if ($db->f('uid') != $cuid) {
-		    $msg->raise('Error', "cron", _("Identity problem"));
+		    $msg->raise("ERROR", "cron", _("Identity problem"));
                 return false;
             }
         }

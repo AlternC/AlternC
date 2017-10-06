@@ -37,7 +37,7 @@ include_once("head.php");
 <?php
 $q=$quota->getquota();
 if (!is_array($q) || empty($q) ) {
-  $msg->raise('Alert', "quota", _("No quotas for this account, or quotas currently unavailable!"));
+  $msg->raise("ALERT", "quota", _("No quotas for this account, or quotas currently unavailable!"));
   include_once("main.php");
   exit();
 } 

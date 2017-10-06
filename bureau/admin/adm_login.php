@@ -46,14 +46,14 @@ if ( empty($id) && isset($_COOKIE["oldid"]) && !empty($_COOKIE["oldid"])) {
   list($newuid,$passcheck)=explode("/",$_COOKIE["oldid"]);
   $newuid=intval($newuid); 
   if (!$newuid) {
-    $msg->raise("Error", "admin", _("Your authentication information are incorrect"));
+    $msg->raise("ERROR", "admin", _("Your authentication information are incorrect"));
     include("index.php");
     exit();
   }
   $admin->enabled=true;
   $r=$admin->get($newuid);
   if ($passcheck!=md5($r["pass"])) {
-    $msg->raise("Ok", "admin", _("Your authentication information are incorrect"));
+    $msg->raise("INFO", "admin", _("Your authentication information are incorrect"));
     include("index.php");
     exit();
   }
@@ -75,7 +75,7 @@ if ( empty($id) && isset($_COOKIE["oldid"]) && !empty($_COOKIE["oldid"])) {
 
 //  * with a user id to go to (we check the current account is admin and is allowed to connect to this account) 
 if (!$admin->enabled) {
-  $msg->raise('Error', "admin", _("This page is restricted to authorized staff"));
+  $msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
   echo $msg->msg_html_all();
   exit();
 }
@@ -83,7 +83,7 @@ if (!$admin->enabled) {
 // Depending on subadmin_restriction, a subadmin can (or cannot) connect to account he didn't create
 $subadmin=variable_get("subadmin_restriction");
 if ($subadmin==0 && !$admin->checkcreator($id)) {
-  $msg->raise('Error', "admin", _("This page is restricted to authorized staff"));
+  $msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
   echo $msg->msg_html_all();
   exit();
 }

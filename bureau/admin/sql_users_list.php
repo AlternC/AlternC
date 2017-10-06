@@ -38,7 +38,7 @@ $rdb=$mysql->get_dblist();
 <hr id="topbar"/>
 <br />
 <?php
-echo $msg->msg_html_all("<li>", true, true);
+echo $msg->msg_html_all(true, true);
 
 if($r){ // if there is some userlist
 ?>
@@ -75,7 +75,7 @@ for($i=0;$i<count($r);$i++) {
 
 <?php
   } else {
-   $msg->raise('Info', "mysql", _("You have no sql user at the moment."));
+   $msg->raise("INFO", "mysql", _("You have no sql user at the moment."));
    echo $msg->msg_html_all();
   }
 ?>

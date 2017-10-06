@@ -39,7 +39,7 @@ $list=$log->list_logs_directory_all($log->get_logs_directory());
 echo $msg->msg_html_all();
 
 if(!$list || empty($list['dir'])){
-  $msg->raise('Info', "logs", _("You have no web logs to list at the moment."));  
+  $msg->raise("INFO", "logs", _("You have no web logs to list at the moment."));  
   echo $msg->msg_html_all();
   include_once('foot.php');
   exit;

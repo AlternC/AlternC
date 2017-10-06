@@ -42,7 +42,7 @@ if (!empty($usern)) {
     exit;
   } else {
     $username=$mem->user["login"]."_".$usern;
-    $msg->raise("ok", "mysql", _("L'utilisateur '%s' a bien été créé."),$username);
+    $msg->raise("INFO", "mysql", _("L'utilisateur '%s' a bien été créé."),$username);
   }
 } else {
   $usern=$mem->user["login"];
@@ -51,7 +51,7 @@ if (!empty($usern)) {
     exit;
   } else {
     $username=$mem->user["login"];
-    $msg->raise("ok", "mysql", _("L'utilisateur '%s' a bien été créé."),$username);
+    $msg->raise("INFO", "mysql", _("L'utilisateur '%s' a bien été créé."),$username);
   }
 }
 

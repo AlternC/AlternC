@@ -44,7 +44,7 @@ if (!$dom->add_domain($newdomain,$dns,0,0,$newisslave,$slavedom)) {
 	include("dom_add.php");
 	exit();
 } else
-	$msg->raise('Ok', "dom", _("Your new domain %s has been successfully installed"),$newdomain);
+	$msg->raise("INFO", "dom", _("Your new domain %s has been successfully installed"),$newdomain);
 
 $dom->unlock();
 

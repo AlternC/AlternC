@@ -46,7 +46,7 @@ if (!isset($dns)) $dns="1";
 <hr />
 <?php
 if (!$quota->cancreate("dom")) {
-  $msg->raise('Alert', "dom", _("You cannot add any new domain, your quota is over.")." "._("Contact your administrator for more information."));
+  $msg->raise("ALERT", "dom", _("You cannot add any new domain, your quota is over.")." "._("Contact your administrator for more information."));
   echo $msg->msg_html_all();
   exit();
 }

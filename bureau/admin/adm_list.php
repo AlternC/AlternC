@@ -28,7 +28,7 @@ require_once("../class/config.php");
 include_once("head.php");
 
 if (!$admin->enabled) {
-    $msg->raise('Error', "admin", _("This page is restricted to authorized staff"));
+    $msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
     echo $msg->msg_html_all();
     include_once('foot.php');
     exit();
@@ -55,7 +55,7 @@ $subadmin = variable_get("subadmin_restriction", 0);
 // If we ask for all account but we aren't "admin" and
 // subadmin var is not 1
 if ($show == "all" && !$subadmin == 1 && $cuid != 2000) {
-    $msg->raise('Error', "admin", _("This page is restricted to authorized staff"));
+    $msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
     echo $msg->msg_html_all();
     include('foot.php');
     exit();
@@ -143,7 +143,7 @@ echo $msg->msg_html_all();
 
 <?php
 if (!is_array($accountList) || empty($accountList)) {
-    $msg->raise('Error', "admin", _("No account defined for now"));
+    $msg->raise("ERROR", "admin", _("No account defined for now"));
     echo $msg->msg_html_all();
     include('foot.php');
 }

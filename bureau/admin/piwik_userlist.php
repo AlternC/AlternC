@@ -38,7 +38,7 @@ if ($quotapiwik['t'] > 0 && count($userslist) < 3) {
 ?>
 <h3><?php __("Create a new piwik account");?></h3>
 <?php
-echo $msg->msg_html_all("<li>", true, true);
+echo $msg->msg_html_all(true, true);
 ?>
 <form method="post" action="piwik_addaccount.php" id="main" name="addaccount" >
  <?php csrf_get(); ?>
@@ -64,17 +64,17 @@ echo $msg->msg_html_all("<li>", true, true);
 <hr/>
 <?php
 } else {
-  $msg->raise('Info', "piwik", _("You cannot add any new Piwik account, your quota is over."));
+  $msg->raise("INFO", "piwik", _("You cannot add any new Piwik account, your quota is over."));
 } // cancreate piwik
 ?>
 
 <h3><?php __("Existing Piwik accounts"); ?></h3>
 <?php 
-echo $msg->msg_html_all("<li>", true, true);
+echo $msg->msg_html_all(true, true);
 // printVar($piwik->dev());
 
 if (empty($userslist)){
-	$msg->raise('Info', "piwik", _("No existing Piwik accounts"));
+	$msg->raise("INFO", "piwik", _("No existing Piwik accounts"));
 	echo $msg->msg_html_all();
 } else {
 ?>

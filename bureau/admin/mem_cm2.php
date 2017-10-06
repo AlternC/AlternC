@@ -38,7 +38,7 @@ $fields = array (
 getFields($fields);
 
 if ($mem->ChangeMail2($cookie,$cle,$usr)) {
-	$msg->raise('Ok', "mem", _("The mailbox has been successfully changed."));
+	$msg->raise("INFO", "mem", _("The mailbox has been successfully changed."));
 }
 
 include_once("head.php");

@@ -32,7 +32,7 @@ $fields = array (
 getFields($fields);
 
 if ($mem->adminpref($admlist)) {
-	$msg->raise('Ok', "mem", _("Your administrator preferences has been successfully changed."));
+	$msg->raise("INFO", "mem", _("Your administrator preferences has been successfully changed."));
 }
 
 include_once("head.php");

@@ -57,7 +57,7 @@ if (! $r["enabled"]) {
 <p>
 <?php
 if ($mysql->restore($restfile,true,$id))  {
-  $msg->raise("ok", "mysql", _("Your database has been restored, check out the previous text for error messages."));
+  $msg->raise("INFO", "mysql", _("Your database has been restored, check out the previous text for error messages."));
 } // if mysql->restore
 
 echo $msg->msg_html_all();

@@ -39,13 +39,13 @@ $fields = array (
 getFields($fields);
 
 if ($newpass != $newpassconf) {
-	$msg->raise("Error", "hta", _("Passwords do not match"));
+	$msg->raise("ERROR", "hta", _("Passwords do not match"));
 	include("hta_edituser.php");
 	exit();
 }
 
 if ($hta->change_pass($user,$newpass,$dir)) {
-	$msg->raise("Ok", "hta", _("The password of the user %s has been successfully changed"), $user);
+	$msg->raise("INFO", "hta", _("The password of the user %s has been successfully changed"), $user);
 	$is_include=true;
 	include_once("hta_edit.php");
 } else {

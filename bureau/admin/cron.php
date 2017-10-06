@@ -9,7 +9,7 @@ getFields($fields);
 
 if (!empty($cronupdate)) {
   if ($cron->update($cronupdate)) {
-    $msg->raise("ok", "mysql", _("Save done."));
+    $msg->raise("INFO", "mysql", _("Save done."));
   }
 }
 

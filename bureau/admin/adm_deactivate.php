@@ -32,7 +32,7 @@ require_once("../class/config.php");
 include_once("head.php");
 
 if (!$admin->enabled) {
-	$msg->raise('Error', "admin", _("This page is restricted to authorized staff"));
+	$msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
 	echo $msg->msg_html_all();
 	exit;
 }
@@ -44,21 +44,21 @@ $fields = array (
 getFields($fields);
 
 if (!$uid) {
-	$msg->raise('Error', "admin", _("Account not found"));
+	$msg->raise("ERROR", "admin", _("Account not found"));
 	echo $msg->msg_html_all();
 	include_once("foot.php");
 	exit();
 }
 
 if (!$admin->checkcreator($uid)) {
-	$msg->raise('Error', "admin", _("This page is restricted to authorized staff"));
+	$msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
 	echo $msg->msg_html_all();
 	include_once("foot.php");
 	exit();
 }
 
 if (!$r=$admin->get($uid)) {
-	$msg->raise('Error', "admin", _("User does not exist"));
+	$msg->raise("ERROR", "admin", _("User does not exist"));
 	echo $msg->msg_html_all();
 	include_once("foot.php");
 	exit();
@@ -83,7 +83,7 @@ if (! ($confirmed ) ) {
   print "<h3>" . _("Domains of user: ") . $r["login"] . "</h3>";
 } else {
   if (empty($redirect)) {
-    $msg->raise('Error', "admin", _("Missing redirect url."));
+    $msg->raise("ERROR", "admin", _("Missing redirect url."));
     echo $msg->msg_html_all();
     include_once("foot.php");
     exit();
@@ -135,7 +135,8 @@ foreach ($domains as $key => $domain) {
 # 2.2 change the subdomain to redirect to http://spam.koumbit.org/
 	  $dom->lock();
 	  if (!$dom->set_sub_domain($domain, $sub, $dom->type_url, "edit", $redirect)) {
-	    print "-- error in $sub.$domain: " . $msg->msg_str("Error", "") . "\n";
+          print "-- error in $sub.$domain: ";
+          echo $msg->msg_html("ERROR");
 	  }
 	  $dom->unlock();
 	}

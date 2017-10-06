@@ -40,7 +40,7 @@ if ( !isset($is_include) ) {
 }
 
 if (!$id && !$create) {
-  $msg->raise("Error", "ftp", _("Neither a creation nor a edition"));
+  $msg->raise("ERROR", "ftp", _("Neither a creation nor a edition"));
   echo "<h3>"._("Create a FTP account")."</h3>";
   echo $msg->msg_html_all();
   include_once("foot.php");

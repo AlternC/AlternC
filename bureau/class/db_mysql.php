@@ -348,7 +348,7 @@ class DB_Sql {
   /* public: return table metadata */
   function metadata($table='',$full=false) {
      global $msg;
-     $msg->raise("Error", 'Mysql', 'function is no longer implemented (metadata())');
+     $msg->raise("ERROR", 'Mysql', 'function is no longer implemented (metadata())');
      return FALSE;
   }
 

@@ -38,7 +38,7 @@ getFields($fields);
 
 
 if ($password != $passwordconf) {
-	$msg->raise("Error", "hta", _("Passwords do not match"));
+	$msg->raise("ERROR", "hta", _("Passwords do not match"));
 	include("hta_adduser.php");
 	exit();
 }
@@ -46,7 +46,7 @@ if ($password != $passwordconf) {
 if (!$hta->add_user($user, $password, $dir)) {
 	include ("hta_adduser.php");
 } else {
-	$msg->raise("Ok", "hta", _("The user %s was added to th protected folder %s"), array($user, $dir));
+	$msg->raise("INFO", "hta", _("The user %s was added to th protected folder %s"), array($user, $dir));
 	include ("hta_edit.php");
 }
 ?>

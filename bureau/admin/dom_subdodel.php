@@ -41,7 +41,7 @@ $dt=$dom->domains_type_lst();
 $dom->unlock();
 
 if (!$isinvited && $dt[strtolower($r['type'])]["enable"] != "ALL" ) {
-  $msg->raise('Error', "dom", _("This page is restricted to authorized staff"));
+  $msg->raise("ERROR", "dom", _("This page is restricted to authorized staff"));
   echo $msg->msg_html_all();
   exit();
 }
@@ -64,7 +64,7 @@ $dom->unlock();
 	} else {
         $t = time();
 	// XXX: we assume the cron job is at every 5 minutes
-        $msg->raise('Ok', "dom", _("The modifications will take effect at %s.  Server time is %s."), array(date('H:i:s', ($t-($t%300)+300)), date('H:i:s', $t))); 
+        $msg->raise("INFO", "dom", _("The modifications will take effect at %s.  Server time is %s."), array(date('H:i:s', ($t-($t%300)+300)), date('H:i:s', $t))); 
 	echo $msg->msg_html_all();
 	}
 ?>

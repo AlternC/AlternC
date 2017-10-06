@@ -104,7 +104,7 @@ class m_ftp {
     function switch_enabled($id, $status = null) {
         global $cuid, $db, $msg;
         if (!$jj = $this->get_ftp_details($id)) {
-            $msg->raise('Error', 'ftp', _("This account do not exist or is not of this account"));
+            $msg->raise("ERROR", 'ftp', _("This account do not exist or is not of this account"));
             return false;
         }
         if ($status == null) {
@@ -119,7 +119,7 @@ class m_ftp {
         $status = ($status ? 1 : 0);
 
         if (!$db->query("UPDATE ftpusers SET enabled = ? WHERE uid = ? AND id = ? ;", array($status, $cuid, $id))) {
-            $msg->raise('Error', 'ftp', _("Error during update"));
+            $msg->raise("ERROR", 'ftp', _("Error during update"));
             return false;
         } else {
             return true;
@@ -153,7 +153,7 @@ class m_ftp {
             }
             return $r;
         } else {
-            $msg->raise('Info', "ftp", _("No FTP account found"));
+            $msg->raise("INFO", "ftp", _("No FTP account found"));
             return array();
         }
     }
@@ -191,7 +191,7 @@ class m_ftp {
             );
             return $r;
         } else {
-            $msg->raise('Error', "ftp", _("This FTP account does not exist"));
+            $msg->raise("ERROR", "ftp", _("This FTP account does not exist"));
             return false;
         }
     }
@@ -226,14 +226,14 @@ class m_ftp {
         $vv = array('_' => '1', ' ' => 0);
         foreach ($vv as $k => $n) {
             if (substr_count($l, $k) > $n) { // if there is more than $n $k
-                $msg->raise('Error', 'ftp', sprintf(_("FTP login is incorrect: too many '%s'"), $k));
+                $msg->raise("ERROR", 'ftp', sprintf(_("FTP login is incorrect: too many '%s'"), $k));
                 return false;
             }
         }
 
         // Explicitly look for only allowed chars
         if (!preg_match("/^[A-Za-z0-9]+[A-Za-z0-9_\.\-]*$/", $l)) {
-            $msg->raise('Error', 'ftp', _("FTP login is incorrect"));
+            $msg->raise("ERROR", 'ftp', _("FTP login is incorrect"));
             return false;
         }
         return true;
@@ -277,7 +277,7 @@ class m_ftp {
         $db->query("SELECT count(*) AS cnt FROM ftpusers WHERE id= ? and uid= ?;", array($id, $cuid));
         $db->next_record();
         if (!$db->f("cnt")) {
-            $msg->raise('Error', "ftp", _("This FTP account does not exist"));
+            $msg->raise("ERROR", "ftp", _("This FTP account does not exist"));
             return false;
         }
         $dir = $bro->convertabsolute($dir);
@@ -286,7 +286,7 @@ class m_ftp {
         }
         $r = $this->prefix_list();
         if (!in_array($prefixe, $r)) {
-            $msg->raise('Error', "ftp", _("The chosen prefix is not allowed"));
+            $msg->raise("ERROR", "ftp", _("The chosen prefix is not allowed"));
             return false;
         }
 
@@ -300,7 +300,7 @@ class m_ftp {
         $db->query("SELECT COUNT(*) AS cnt FROM ftpusers WHERE id!= ? AND name= ?;", array($id, $full_login));
         $db->next_record();
         if ($db->f("cnt")) {
-            $msg->raise('Error', "ftp", _("This FTP account already exists"));
+            $msg->raise("ERROR", "ftp", _("This FTP account already exists"));
             return false;
         }
         $absolute = getuserpath() . "/$dir";
@@ -308,7 +308,7 @@ class m_ftp {
             system("/bin/mkdir -p $absolute");
         }
         if (!is_dir($absolute)) {
-            $msg->raise('Error', "ftp", _("The directory cannot be created"));
+            $msg->raise("ERROR", "ftp", _("The directory cannot be created"));
             return false;
         }
         if (trim($pass)) {
@@ -340,7 +340,7 @@ class m_ftp {
         $db->next_record();
         $name = $db->f("name");
         if (!$name) {
-            $msg->raise('Error', "ftp", _("This FTP account does not exist"));
+            $msg->raise("ERROR", "ftp", _("This FTP account does not exist"));
             return false;
         }
         $db->query("DELETE FROM ftpusers WHERE id= ? ;", array($id));
@@ -366,11 +366,11 @@ class m_ftp {
         }
         $r = $this->prefix_list();
         if (empty($pass)) {
-            $msg->raise('Error', "ftp", _("Password can't be empty"));
+            $msg->raise("ERROR", "ftp", _("Password can't be empty"));
             return false;
         }
         if (!in_array($prefixe, $r) || $prefixe == "") {
-            $msg->raise('Error', "ftp", _("The chosen prefix is not allowed"));
+            $msg->raise("ERROR", "ftp", _("The chosen prefix is not allowed"));
             return false;
         }
         $full_login = $prefixe;
@@ -383,7 +383,7 @@ class m_ftp {
         $db->query("SELECT count(*) AS cnt FROM ftpusers WHERE name= ? ;", array($full_login));
         $db->next_record();
         if ($db->f("cnt")) {
-            $msg->raise('Error', "ftp", _("This FTP account already exists"));
+            $msg->raise("ERROR", "ftp", _("This FTP account already exists"));
             return false;
         }
         $db->query("SELECT login FROM membres WHERE uid= ? ;", array($cuid));
@@ -393,7 +393,7 @@ class m_ftp {
             system("/bin/mkdir -p $absolute"); // FIXME replace with action
         }
         if (!is_dir($absolute)) {
-            $msg->raise('Error', "ftp", _("The directory cannot be created"));
+            $msg->raise("ERROR", "ftp", _("The directory cannot be created"));
             return false;
         }
 
@@ -409,7 +409,7 @@ class m_ftp {
             $db->query("INSERT INTO ftpusers (name,password, encrypted_password,homedir,uid) VALUES ( ?, '', ?, ?, ?)", array($full_login, $encrypted_password, $absolute, $cuid));
             return true;
         } else {
-            $msg->raise('Error', "ftp", _("Your FTP account quota is over. You cannot create more ftp accounts"));
+            $msg->raise("ERROR", "ftp", _("Your FTP account quota is over. You cannot create more ftp accounts"));
             return false;
         }
     }

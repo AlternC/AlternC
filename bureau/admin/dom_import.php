@@ -46,7 +46,7 @@ $domain=trim($domain);
 
 <?php
 if ( !empty($zone) && empty($domain) ) {
-  $msg->raise('Alert', "dom", _("The domain field seems to be empty"));
+  $msg->raise("ALERT", "dom", _("The domain field seems to be empty"));
 }
 
 echo $msg->msg_html_all();

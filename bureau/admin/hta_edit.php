@@ -54,7 +54,7 @@ $passwd_classcount = $c['hta']['classcount'];
 <br />
 <?php
   if (!count($r)) {
-    $msg->raise("Info", "hta", _("No authorized user in %s"),$dir);
+    $msg->raise("INFO", "hta", _("No authorized user in %s"),$dir);
     echo $msg->msg_html_all();
   } else {
     reset($r);

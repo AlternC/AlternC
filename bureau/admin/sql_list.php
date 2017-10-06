@@ -40,9 +40,9 @@ $r=$mysql->get_userslist();
 <?php
   // On regarde d'abord si on a une db existante. Sioui, on regarde si on a des utilisateurs existants
   if(!$rdb || empty($rdb)){
-	$msg->raise("info", "mysql", _("You have no database at the moment."));
+	$msg->raise("INFO", "mysql", _("You have no database at the moment."));
   } else if(!$r || empty($r)){
-	$msg->raise("info", "mysql", _("You have no sql user at the moment."));
+	$msg->raise("INFO", "mysql", _("You have no sql user at the moment."));
   }
 
 echo $msg->msg_html_all();

@@ -20,25 +20,25 @@ if (!empty($s_protocol)) {
   getFields($fields);
 
   if (! $authip->ip_affected_save($s_ipsub, $s_protocol, $$val) ) {
-    $msg->raise('Error', "ftp", _("Error during ip_affected_save"));
+    $msg->raise("ERROR", "ftp", _("Error during ip_affected_save"));
   }
 }
 
 if (!empty($delete_affected_id)) {
   if (! $authip->ip_affected_delete($delete_affected_id)) {
-    $msg->raise('Error', "ftp", _("Error during deletion"));
+    $msg->raise("ERROR", "ftp", _("Error during deletion"));
   }
 }
 
 if (!empty($delete_id)) {
   if (! $authip->ip_delete($delete_id)) {
-    $msg->raise('Error', "ftp", _("Error during deletion"));
+    $msg->raise("ERROR", "ftp", _("Error during deletion"));
   }
 }
 
 if (!empty($ipsub)) {
   if (! $authip->ip_save($id, $ipsub, $infos)) {
-    $msg->raise('Error', "ftp", _("Error during recording"));
+    $msg->raise("ERROR", "ftp", _("Error during recording"));
   }
 }
 

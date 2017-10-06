@@ -46,7 +46,7 @@ getFields($fields);
 
 if (!empty($submit)) {
 	$bro->SetPrefs($editsizex, $editsizey, $listmode, $showicons, $downfmt, $createfile, $showtype, $editor_font, $editor_size, $golastdir);
-	$msg->raise("Ok", "bro", _("Your preferences have been updated."));
+	$msg->raise("INFO", "bro", _("Your preferences have been updated."));
 	include("bro_main.php");
 	exit;
 }

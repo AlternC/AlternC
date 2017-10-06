@@ -30,7 +30,7 @@
 require_once("../class/config.php");
 
 if (!$admin->enabled) {
-	$msg->raise('Error', "admin", _("This page is restricted to authorized staff"));
+	$msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
 	echo $msg->msg_html_all();
 	exit();
 }
@@ -45,13 +45,13 @@ getFields($fields);
 if ($delaccount) {
 	// Delete an account
 	if ($mail->del_slave_account($delaccount)) {
-		$msg->raise('Ok', "admin", _("The requested account has been deleted. It is now denied."));
+		$msg->raise("INFO", "admin", _("The requested account has been deleted. It is now denied."));
 	}
 }
 if ($newlogin) {
 	// Add an account
 	if ($mail->add_slave_account($newlogin,$newpass)) { 
-		$msg->raise('Ok', "admin", _("The requested account address has been created. It is now allowed."));
+		$msg->raise("INFO", "admin", _("The requested account address has been created. It is now allowed."));
 		$newlogin='';$newpass='';
 	}
 }

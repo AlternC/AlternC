@@ -33,9 +33,9 @@ getFields($fields);
 
 if ($ftp->switch_enabled($id,$status)) {
   if ($status) 
-    $msg->raise("Ok", "ftp", _("The ftp account is enabled"));
+    $msg->raise("INFO", "ftp", _("The ftp account is enabled"));
   else
-    $msg->raise("Ok", "ftp", _("The ftp account is disabled"));
+    $msg->raise("INFO", "ftp", _("The ftp account is disabled"));
 }
 
 require_once('ftp_list.php');

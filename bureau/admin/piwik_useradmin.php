@@ -39,7 +39,7 @@ getFields($fields);
 
 if ($user_name === FALSE)
 {
-	 $msg->raise('Error', "piwik", _('No piwik user specified'));
+	 $msg->raise("ERROR", "piwik", _('No piwik user specified'));
 }
 else
 {
@@ -49,7 +49,7 @@ else
 		$db->next_record();
 		if ($db->f('ok')!=1)
 		{
-			$msg->raise('Error', "piwik", _("You don't own this piwik website"));
+			$msg->raise("ERROR", "piwik", _("You don't own this piwik website"));
 		}
 		else
 		{
@@ -57,7 +57,7 @@ else
 			$db->next_record();
 			if ($db->f('ok')!=1)
 			{
-				$msg->raise('Error', "piwik", _("You don't own this piwik user"));
+				$msg->raise("ERROR", "piwik", _("You don't own this piwik user"));
 			}
 			else
 			{
@@ -66,13 +66,13 @@ else
 				{
 					$api_data = $piwik->site_set_user_right($site_id, $user_name, $right);
 					if ($api_data === FALSE)
-						$msg->raise('Error', "piwik", $api_data->message)
+						$msg->raise("ERROR", "piwik", $api_data->message)
 					else
-						$msg->raise('Ok', "piwik", _('success'));
+						$msg->raise("INFO", "piwik", _('success'));
 				}
 				else
 				{
-					$msg->raise('Error', "piwik", _("This right does not exist"));
+					$msg->raise("ERROR", "piwik", _("This right does not exist"));
 				}
 			}
 		}

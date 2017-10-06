@@ -102,13 +102,13 @@ class m_piwik {
 	$msg->log("piwik","user_add");
 
 	if (empty($user_login) || is_null($user_login) || empty($user_mail) || is_null($user_mail)) {
-	  $msg->raise('Error', "piwik", _("All fields are mandatory"));
+	  $msg->raise("ERROR", "piwik", _("All fields are mandatory"));
 	  return false;
 	}
 
 	// Validate the email syntax:
         if (!filter_var($user_mail, FILTER_VALIDATE_EMAIL)) {
-            $msg->raise('Error', "piwik", _("The email you entered is syntaxically incorrect"));
+            $msg->raise("ERROR", "piwik", _("The email you entered is syntaxically incorrect"));
             return false;
         }
 
@@ -124,7 +124,7 @@ class m_piwik {
 	    $ret_value = $db->query("INSERT INTO piwik_users (uid, passwd, login, created_date) VALUES ( ?, ?, ?, ?);", array($cuid, md5('$user_pass'), $user_login, $user_creation_date));
 	    return $ret_value;
 	  } else {
-	    $msg->raise('Error', "piwik", $api_data->message);
+	    $msg->raise("ERROR", "piwik", $api_data->message);
 	    return FALSE;
 	  }
 	} else { // api_data = false -> error is already filled
@@ -149,11 +149,11 @@ class m_piwik {
 	$msg->log("piwik","get_users_access_from_site");
 
 	if (!is_numeric($site_id)) {
-		$msg->raise('Error', 'piwik', 'site_id must be numeric');
+		$msg->raise("ERROR", 'piwik', 'site_id must be numeric');
 		return FALSE;
 	}
 	if (!in_array($site_id, $this->alternc_sites)) {
-		$msg->raise('Error', 'piwik', "you don't own this piwik website");
+		$msg->raise("ERROR", 'piwik', "you don't own this piwik website");
 		return FALSE;
 	}
 
@@ -256,7 +256,7 @@ class m_piwik {
 		return FALSE;
 	}
     } else {
-      $msg->raise('Error', "piwik", _("You are not allowed to delete the statistics of this website"));
+      $msg->raise("ERROR", "piwik", _("You are not allowed to delete the statistics of this website"));
       return FALSE;
     }
   }
@@ -410,7 +410,7 @@ class m_piwik {
 		return FALSE;
 	}
     } else {
-	$msg->raise('Error', "piwik", _("You are not allowed to delete the statistics of this website"));
+	$msg->raise("ERROR", "piwik", _("You are not allowed to delete the statistics of this website"));
 	return FALSE;
     }
 
@@ -430,7 +430,7 @@ class m_piwik {
 	if ($api_data->result == 'success') {
 		return TRUE;
 	} else {
-		$msg->raise('Error', 'piwik', $api_data->messsage);
+		$msg->raise("ERROR", 'piwik', $api_data->messsage);
 		return FALSE;
 	}
     }
@@ -472,20 +472,20 @@ class m_piwik {
 
 	$page_content = file_get_contents($url);
 	if ($page_content === FALSE) {
-	  $msg->raise('Error', "piwik", _("Unable to reach the API"));
+	  $msg->raise("ERROR", "piwik", _("Unable to reach the API"));
 	  return FALSE;
 	}
 
 	if ($output == 'JSON') {
 	  $api_data = json_decode($page_content);
 	  if ($api_data === FALSE) {
-	    $msg->raise('Error', "piwik", _("Error while decoding response from the API"));
+	    $msg->raise("ERROR", "piwik", _("Error while decoding response from the API"));
 	    return FALSE;
 	  }
 
 	  return $api_data;
 	} else {
-	  $msg->raise('Error', "piwik", _("Other format than JSON is not implemented yet"));
+	  $msg->raise("ERROR", "piwik", _("Other format than JSON is not implemented yet"));
 	  return FALSE;
 	}
   }

@@ -27,7 +27,7 @@
 require_once("../class/config.php");
 
 if (!$admin->enabled) {
-	$msg->raise('Error', "admin", _("This page is restricted to authorized staff"));
+	$msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
 	echo $msg->msg_html_all();
 	exit();
 }
@@ -55,23 +55,23 @@ $c=$admin->listPasswordPolicies();
 
 if (isset($doedit) && $doedit) {
   if (!$c[$doedit]) {
-    $msg->raise('Error', "admin", _("Policy not found"));
+    $msg->raise("ERROR", "admin", _("Policy not found"));
   } else {
     // Change it ;) 
     if ($admin->editPolicy($doedit,$minsize,$maxsize,$classcount,$allowlogin)) {
-      $msg->raise('Ok', "admin", _("Policy changed"));
+      $msg->raise("INFO", "admin", _("Policy changed"));
       unset($edit);
       $c=$admin->listPasswordPolicies();
     } else {
-      $msg->raise('Error', "admin", _("Cannot edit the policy, an error occurred"));
+      $msg->raise("ERROR", "admin", _("Cannot edit the policy, an error occurred"));
     }
   }
 }
-echo $msg->msg_html_all("<li>", true, true);
+echo $msg->msg_html_all(true, true);
 
 if (!empty($edit)) {
   if (!$c[$edit]) {
-    $msg->raise('Error', "admin", _("Policy not found"));
+    $msg->raise("ERROR", "admin", _("Policy not found"));
     echo $msg->msg_html_all();
   } else {
 ?>

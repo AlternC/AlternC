@@ -35,7 +35,7 @@ $fields = array (
 getFields($fields);
 
 if ($cle=$mem->ChangeMail1($newmail)) {
-	$msg->raise('Ok', "mem", _("The mail was successfully changed"));
+	$msg->raise("INFO", "mem", _("The mail was successfully changed"));
 }
 
 include_once("head.php");

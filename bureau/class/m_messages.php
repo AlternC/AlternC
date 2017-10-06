@@ -37,15 +37,15 @@ class m_messages {
 
     var $logfile = "/var/log/alternc/bureau.log";
 
-    /** List of possible message types */
-    var $ARRTYPES = array("ERROR", "ALERT", "INFO", "OK");
+    /** List of possible message level */
+    var $ARRLEVEL = array("ERROR", "ALERT", "INFO");
 
-    /** CSS classes for each type */
+    /** CSS classes for each level */
     var $ARRCSS = array(
+        // emergency critical warning notice debug : currently not used (from PSR-3)
         "ERROR" => "alert-danger",
         "ALERT" => "alert-warning",
-        "INFO" => "alert-info",
-        "OK" => "alert-success"
+        "INFO" => "alert-success",
     );
 
     public function __construct() {
@@ -61,25 +61,25 @@ class m_messages {
      * @param string $cat The category of the msg array to work with
      * @param integer $clsid Which class raises this message
      * @param mixed $msg The message
-     * @param string $param Non-mandatory string parameter for this message
+     * @param array $param Non-mandatory array of string parameter for this message
      * @return boolean TRUE if the message got recorded, FALSE if not.
      *
      */
-    function raise($cat = "Error", $clsid, $msg, $param = "") {
+    function raise($level = "ERROR", $clsid, $msg, $param = "") {
         $arrInfos  = array();
 
-        $type = strtoupper($cat);
-        if (! in_array($type, $this->ARRTYPES)) {
-            return false;
+        $level = strtoupper($level);
+        if (! in_array($level, $this->ARRLEVEL)) {
+            throw new Exception('Missing or unknown level in a raise() call');
         }
 
         $arrInfos['clsid'] = $clsid;
         $arrInfos['msg'] = $msg;
         $arrInfos['param'] = is_array($param)?$param:(empty($param)?"":array($param));
 
-        $this->arrMessages[$type][] = $arrInfos;
+        $this->arrMessages[$level][] = $arrInfos;
 
-        $this->logAlternC($cat);
+        $this->logAlternC($level,$arrInfos);
         return true;
     }
     
@@ -87,7 +87,7 @@ class m_messages {
      * Reset the stored messages array
      */
     function init_msgs() {
-        foreach ($this->ARRTYPES as $v) {
+        foreach ($this->ARRLEVEL as $v) {
             $this->arrMessages[$v] = array();
         }
     }
@@ -96,14 +96,14 @@ class m_messages {
      * Tell if there are stored messages for a specific level
      * or for all levels (if level is empty)
      *
-     * @param string $cat The level of the msg array to work with
+     * @param string $level The level of the msg array to work with (if empty or not set, use all levels)
      * @return boolean TRUE if there is/are msg recorded.
      *
      */
-    function has_msgs($cat) {
-        $type = strtoupper($cat);
-        if (in_array($type, $this->ARRTYPES)) {
-            return (count($this->arrMessages[$type]) > 0);
+    function has_msgs($level="") {
+        $level = strtoupper($level);
+        if (in_array($level, $this->ARRLEVEL)) {
+            return (count($this->arrMessages[$level]) > 0);
         } else {
             foreach ($this->arrMessages as $v) {
                 if (count($v) > 0)
@@ -117,48 +117,39 @@ class m_messages {
      * Return a string of concateneted messages of all recorded messages
      * or only the last message
      *
-     * @param string $cat The level of the msg array to work with
-     * @param string $sep The separator used to concatenate msgs
+     * @param string $level The level of the msg array to work with
      * @param boolean $all show all the messages or only the last one
-     *
+     * 
+     * @access private 
      * @return string Message.
      *
      */
-    function msg_str($cat = "Error", $sep = "<li>", $all = true) {
+    function msg_str($level = "ERROR", $all = true) {
         $str = "";
 
-        $type = strtoupper($cat);
-        if (! in_array($type, $this->ARRTYPES)) {
-            return false;
+        $level = strtoupper($level);
+        if (! in_array($level, $this->ARRLEVEL)) {
+            throw new Exception('Missing or unknown level in a raise() call');
         }
 
-        if (! $this->has_msgs($cat))
+        if (! $this->has_msgs($level))
             return "";
 
         if ($all) {
-            foreach ($this->arrMessages[$type] as $k => $arrMsg) {
+            foreach ($this->arrMessages[$level] as $k => $arrMsg) {
                 $args = $arrMsg['param'];
 
                 if (is_array($args) && count($args) > 0) {
                     array_unshift($args, $arrMsg['msg']);
-                    if ($sep == "<li>")
-                        $str .= "<li>" . call_user_func_array("sprintf", $args) . "</li>";
-                    else
-                        $str .= call_user_func_array("sprintf", $args) . $sep;
+                    $str .= call_user_func_array("sprintf", $args) . "\n";
                 } else
-                    if ($sep == "<li>")
-                        $str .= "<li>" . $arrMsg['msg'] . "</li>";
-                    else
-                        $str .= $arrMsg['msg'] . $sep;
+                    $str .= $arrMsg['msg'] . "\n";
             }
 
-            if ($sep == "<li>") 
-                $str = "<ul>".$str."</ul>";
-
         } else {
-            $i = count($this->arrMessages[$type]) - 1;
+            $i = count($this->arrMessages[$level]) - 1;
             if ($i > 0) {
-                $arr_msg=$this->arrMessages[$type][$i];
+                $arr_msg=$this->arrMessages[$level][$i];
                 $args = $arr_msg['param'];
                 if (is_array($args) && count($args) > 0) {
                     array_unshift($args, $arr_msg['msg']);
@@ -174,23 +165,23 @@ class m_messages {
     /**
      * Return a message in HTML form with associated CSS
      *
-     * @param string $cat The level of the msg array to work with
+     * @param string $level The level of the msg array to work with
      * @param string $sep The separator used to concatenate msgs
      * @param boolean $all show all the messages or only the last one
      *
      * @return string HTML message
      */
-    function msg_html($cat = "Error", $sep = "<li>", $all = true) {
-        $type = strtoupper($cat);
-        if (! in_array($type, $this->ARRTYPES)) {
-            return false;
+    function msg_html($level = "ERROR", $all = true) {
+        $level = strtoupper($level);
+        if (! in_array($level, $this->ARRLEVEL)) {
+            throw new Exception('Missing or unknown level in a raise() call');
         }
 
-        if (count($this->arrMessages[$type]) == 0)
+        if (count($this->arrMessages[$level]) == 0)
             return "";
 
-        $str = $this->msg_str($cat, $sep, $all);
-        $str = "<div class='alert " . $this->ARRCSS[$type] . "'>" . $str . "</div>";
+        $str = $this->msg_str($level, $all);
+        $str = "<div class='alert " . $this->ARRCSS[$level] . "'>" . nl2br($str) . "</div>";
 
         return $str;
     }
@@ -203,13 +194,12 @@ class m_messages {
      *
      * @return string HTML message
      */
-    function msg_html_all($sep = "<li>", $all = true, $init = false) {
+    function msg_html_all($all = true, $init = false) {
         $msg="";
 
-        $msg.=$this->msg_html("Error", $sep, $all);
-        $msg.=$this->msg_html("Ok", $sep, $all);
-        $msg.=$this->msg_html("Info", $sep, $all);
-        $msg.=$this->msg_html("Alert", $sep, $all);
+        $msg.=$this->msg_html("ERROR", $all);
+        $msg.=$this->msg_html("INFO", $all);
+        $msg.=$this->msg_html("ALERT", $all);
 
         if ($init)
             $this->init_msgs();
@@ -223,17 +213,26 @@ class m_messages {
      * This function logs the last message in the /var/log/alternc folder
      * allowing sysadmins to know what's happened.
      * automatically called by raise()
+     * @param string $level the error level
+     * @param array $arrMsg the array containing message info.
      * @access private
      */
-    function logAlternC($cat = "Error") {
+    function logAlternC($level = "ERROR", $arrMsg) {
         global $mem;
+        
+        $args = $arrMsg['param'];
+        
+        if (is_array($args) && count($args) > 0) {
+            array_unshift($args, $arrMsg['msg']);
+            $str = call_user_func_array("sprintf", $args);
+        } else
+            $str = $arrMsg['msg'];
 
-        $type = strtoupper($cat);
-        if (! in_array($type, $this->ARRTYPES)) {
-            return false;
-        }
-
-        @file_put_contents($this->logfile, date("d/m/Y H:i:s") . " - " . get_remote_ip() . " - $type - " . $mem->user["login"] . " - " . $this->msg_str($cat, "", false), FILE_APPEND);
+        @file_put_contents(
+            $this->logfile, 
+            date("d/m/Y H:i:s") . " - " . get_remote_ip() . " - $level - " . $mem->user["login"] . " - " . $str,
+            FILE_APPEND
+        );
     }
 
     /**
@@ -249,7 +248,11 @@ class m_messages {
      */
     function log($clsid, $function, $param = "") {
         global $mem;
-        return @file_put_contents($this->logfile, date("d/m/Y H:i:s") . " - " . get_remote_ip() . " - CALL - " . $mem->user["login"] . " - $clsid - $function - $param\n", FILE_APPEND);
+        return @file_put_contents(
+            $this->logfile, 
+            date("d/m/Y H:i:s") . " - " . get_remote_ip() . " - CALL - " . $mem->user["login"] . " - $clsid - $function - $param\n", 
+            FILE_APPEND
+        );
     }
 
 }

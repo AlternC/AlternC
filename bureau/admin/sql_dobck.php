@@ -54,7 +54,7 @@ if ($msg->has_msgs("Error")) {
 	include("sql_bck.php");
 	exit();
 } else {
-	$msg->raise("ok", "mysql", _("Your backup parameters has been successfully changed."));
+	$msg->raise("INFO", "mysql", _("Your backup parameters has been successfully changed."));
 }
 include("sql_list.php");
 ?>

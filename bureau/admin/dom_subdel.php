@@ -41,7 +41,7 @@ $dom->unlock();
 
 $dt=$dom->domains_type_lst();
 if (!$isinvited && $dt[strtolower($r['type'])]["enable"] != "ALL" ) {
-  $msg->raise('Error', "dom", _("This page is restricted to authorized staff"));
+  $msg->raise("ERROR", "dom", _("This page is restricted to authorized staff"));
   echo $msg->msg_html_all();
   exit();
 }

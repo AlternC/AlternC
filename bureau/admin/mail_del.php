@@ -51,15 +51,15 @@ if ($confirm=="y") {
     $db->query("SELECT a.id, NOT ISNULL(m.id) AS islocal FROM address a LEFT JOIN mailbox m ON m.address_id=a.id WHERE a.id= ? ;", array($val));
 
     if (!$db->next_record()) {
-      $msg->raise('Error', "mail", _("The email %s does not exist, it can't be deleted"), $email);
+      $msg->raise("ERROR", "mail", _("The email %s does not exist, it can't be deleted"), $email);
       continue;
     }
 
     if ($mail->delete($val)) {
       if ($db->f("islocal")) {
-	$msg->raise('Ok', "mail", _("The email %s has been marked for deletion"), $email);
+	$msg->raise("INFO", "mail", _("The email %s has been marked for deletion"), $email);
       } else {
-        $msg->raise('Ok', "mail", _("The email %s has been successfully deleted"), $email);
+        $msg->raise("INFO", "mail", _("The email %s has been successfully deleted"), $email);
       }
     }
   }

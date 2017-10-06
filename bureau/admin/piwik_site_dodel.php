@@ -36,7 +36,7 @@ $fields = array (
 getFields($fields);
 
 if ($siteid === -1) {
-    $msg->raise('Error', "piwik", _("Missing site parameters"));
+    $msg->raise("ERROR", "piwik", _("Missing site parameters"));
     include('piwik_sitelist.php'); 
     exit;
 }
@@ -44,7 +44,7 @@ if ($siteid === -1) {
 if(!empty($confirm_del) ) {
 
   if ($piwik->site_delete($siteid) ) {
-    $msg->raise('Ok', "piwik", _("Site successfully deleted"));
+    $msg->raise("INFO", "piwik", _("Site successfully deleted"));
   }
 
   include('piwik_sitelist.php'); 

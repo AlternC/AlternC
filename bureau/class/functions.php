@@ -1151,21 +1151,21 @@ function csrf_check($token=null) {
     if (is_null($token)) $token=$_POST["csrf"];
 
     if (!isset($_SESSION["csrf"])) {
-        $msg->raise('Error', "functions", _("The posted form token is incorrect. Maybe you need to allow cookies"));
+        $msg->raise("ERROR", "functions", _("The posted form token is incorrect. Maybe you need to allow cookies"));
         return 0; // no csrf cookie :/
     }
     if (strlen($token)!=32 || strlen($_SESSION["csrf"])!=32) {
         unset($_SESSION["csrf"]);
-        $msg->raise('Error', "functions", _("Your cookie or token is invalid"));
+        $msg->raise("ERROR", "functions", _("Your cookie or token is invalid"));
         return 0; // invalid csrf cookie 
     }
     $db->query("SELECT used FROM csrf WHERE cookie=? AND token=?;",array($_SESSION["csrf"],$token));
     if (!$db->next_record()) {
-        $msg->raise('Error', "functions", _("You can't post twice the same form, please retry."));
+        $msg->raise("ERROR", "functions", _("You can't post twice the same form, please retry."));
         return 0; // invalid csrf cookie 
     }
     if ($db->f("used")) {
-        $msg->raise('Error', "functions", _("You can't post twice the same form, please retry."));
+        $msg->raise("ERROR", "functions", _("You can't post twice the same form, please retry."));
         return -1; // expired
     }
     $db->query("UPDATE csrf SET used=1 WHERE cookie=? AND token=?;",array($_SESSION["csrf"],$token)); 

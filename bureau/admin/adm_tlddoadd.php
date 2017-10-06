@@ -30,7 +30,7 @@
 require_once("../class/config.php");
 
 if (!$admin->enabled) {
-	$msg->raise('Error', "admin", _("This page is restricted to authorized staff"));
+	$msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
 	echo $msg->msg_html_all();
 	exit();
 }
@@ -46,7 +46,7 @@ if (!$admin->addtld($tld,$mode)) {
 	include("adm_tldadd.php");
 	exit();
 } else {
-	$msg->raise("Ok", "admin", _("The TLD has been successfully added"));
+	$msg->raise("INFO", "admin", _("The TLD has been successfully added"));
 	include("adm_tld.php");
 	exit();
 }

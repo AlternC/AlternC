@@ -30,7 +30,7 @@
 require_once("../class/config.php");
 
 if (!$admin->enabled) {
-  $msg->raise('Error', "admin", _("This page is restricted to authorized staff"));
+  $msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
   echo $msg->msg_html_all();
   exit();
 }
@@ -49,13 +49,13 @@ getFields($fields);
 if ($delaccount) {
   // Delete an account
   if ($dom->del_slave_account($delaccount)) {
-    $msg->raise('Ok', "admin", _("The requested account has been deleted. It is now denied."));
+    $msg->raise("INFO", "admin", _("The requested account has been deleted. It is now denied."));
   }
 }
 if ($newlogin) {
   // Add an account
   if ($dom->add_slave_account($newlogin,$newpass)) {
-    $msg->raise('Ok', "admin", _("The requested account address has been created. It is now allowed."));
+    $msg->raise("INFO", "admin", _("The requested account address has been created. It is now allowed."));
     unset($newlogin); unset($newpass);
   }
 }
@@ -63,13 +63,13 @@ if ($newlogin) {
 if ($delip) {
   // Delete an ip address/class
   if ($dom->del_slave_ip($delip)) {
-    $msg->raise('Ok', "admin", _("The requested ip address has been deleted. It will be denied in one hour."));
+    $msg->raise("INFO", "admin", _("The requested ip address has been deleted. It will be denied in one hour."));
   }
 }
 if ($newip) {
   // Add an ip address/class
   if ($dom->add_slave_ip($newip,$newclass)) {
-    $msg->raise('Ok', "admin", _("The requested ip address has been added to the list. It will be allowed in one hour."));
+    $msg->raise("INFO", "admin", _("The requested ip address has been added to the list. It will be allowed in one hour."));
     unset($newip); unset($newclass);
   }
 }

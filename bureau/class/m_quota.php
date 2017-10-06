@@ -266,7 +266,7 @@ class m_quota {
             $a = array();
             exec("sudo /usr/lib/alternc/quota_get " . intval($cuid) . " &> /dev/null &", $a);
             if (!isset($a[1]) || $size != $a[1]) {
-                $msg->raise('Error', "quota", _("Error writing the quota entry!"));
+                $msg->raise("ERROR", "quota", _("Error writing the quota entry!"));
                 return false;
             }
         }
@@ -348,7 +348,7 @@ class m_quota {
         }
         $type = strtolower($type);
         if (!preg_match("#^[a-z0-9]*$#", $type)) {
-            $msg->raise('Error', "quota", _("Type can only contains characters a-z and 0-9"));
+            $msg->raise("ERROR", "quota", _("Type can only contains characters a-z and 0-9"));
             return false;
         }
         while (list($key, $val) = each($qlist)) {

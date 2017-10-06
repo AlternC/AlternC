@@ -68,14 +68,14 @@ if (isset($saveret) && $saveret) {
     }*/
     
     if ($bro->save($editfile,$R,$texte)) {
-        $msg->raise("Ok", "bro", _("Your file %s has been saved")." (".format_date(_('%3$d-%2$d-%1$d %4$d:%5$d'),date("Y-m-d H:i:s")).")", $editfile);
+        $msg->raise("INFO", "bro", _("Your file %s has been saved")." (".format_date(_('%3$d-%2$d-%1$d %4$d:%5$d'),date("Y-m-d H:i:s")).")", $editfile);
         include("bro_main.php");
         exit();
     }
 }
 if (isset($save) && $save) {
   if ($bro->save($editfile,$R,$texte)) {
-    $msg->raise("Ok", "bro", _("Your file %s has been saved")." (".format_date(_('%3$d-%2$d-%1$d %4$d:%5$d'),date("Y-m-d H:i:s")).")", $editfile);
+    $msg->raise("INFO", "bro", _("Your file %s has been saved")." (".format_date(_('%3$d-%2$d-%1$d %4$d:%5$d'),date("Y-m-d H:i:s")).")", $editfile);
   }
 }
 
