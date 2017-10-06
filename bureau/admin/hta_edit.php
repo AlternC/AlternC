@@ -30,10 +30,12 @@
 require_once("../class/config.php");
 include_once("head.php");
 
-$fields = array (
+if (!isset($is_include)) {
+  $fields = array (
 	"dir"      => array ("request", "string", ""),
-);
-getFields($fields);
+  );
+  getFields($fields);
+}
 
 if (!$dir) {
   echo "<p class=\"alert alert-warning\">"._("No folder selected!")."</p>";
@@ -41,10 +43,10 @@ if (!$dir) {
   die();
 } else {
   $r=$hta->get_hta_detail($dir);
-  if (!$r) {
-    $error=$err->errstr();
-  }
 } // if !$dir
+
+$c=$admin->listPasswordPolicies();
+$passwd_classcount = $c['hta']['classcount'];
 
 ?>
 <h3><?php printf(_("List of authorized user in folder %s"),$dir); ?></h3>
@@ -52,9 +54,11 @@ if (!$dir) {
 <br />
 <?php
   if (!count($r)) {
-    echo "<p class=\"alert alert-warning\">".sprintf(_("No authorized user in %s"),$dir)."</p>";
+    $msg->raise("Info", "hta", _("No authorized user in %s"),$dir);
+    echo $msg->msg_html_all();
   } else {
-     reset($r);
+    reset($r);
+    echo $msg->msg_html_all();
 ?>
 <form method="post" action="hta_dodeluser.php">
    <?php csrf_get(); ?>
@@ -108,7 +112,7 @@ for($i=0;$i<count($r);$i++){ ?>
       </tr>
       <tr>
         <th><label for="password"><?php __("Password"); ?></label></th>
-        <td><input type="password" class="int" name="password" autocomplete="off" id="password" value="" size="20" maxlength="64" /><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#password","#passwordconf"); ?></td>
+        <td><input type="password" class="int" name="password" autocomplete="off" id="password" value="" size="20" maxlength="64" /><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#password","#passwordconf",$passwd_classcount); ?></td>
       </tr>
       <tr>
         <th><label for="passwordconf"><?php __("Confirm password"); ?></label></th>

@@ -40,17 +40,21 @@ getFields($fields);
 
 if (!empty($help_setting)) {
 	$mem->set_help_param($showhelp);
-	$error=_("Your help setting has been updated.");
+	$msg->raise('Ok', "mem", _("Your help setting has been updated."));
 }
 
 ?>
 <div align="center"><h3><?php __("Settings of your account"); ?></h3></div>
 <?php
-	if (isset($error) && $error) {
-		echo "<font color=red>$error</font>";
-		include_once("foot.php");
-		exit();
-	}
+if ($msg->has_msgs('Error')) {
+	include_once("mem_param.php");
+	exit();
+}
+
+$c=$admin->listPasswordPolicies();
+$passwd_classcount = $c['mem']['classcount'];
+
+echo $msg->msg_html_all();
 ?>
 
 <div id="tabsmem">
@@ -86,7 +90,7 @@ echo "<p>";
 
 <table border="1" cellspacing="0" cellpadding="4" class="tedit" >
 <tr><th><?php __("Old password"); ?></th><td><input type="password" class="int" name="oldpass" value="<?php isset($oldpass) ? : $oldpass=""; ehe($oldpass); ?>" size="20" maxlength="128" /></td></tr>
-<tr><th><?php __("New password"); ?> (1)</th><td><input type="password" class="int" autocomplete="off" id="newpass" name="newpass" value="<?php isset($newpass) ? : $newpass=""; ehe($newpass);  ?>" size="20" maxlength="60" /><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#newpass","#newpass2"); ?></td></tr>
+<tr><th><?php __("New password"); ?> (1)</th><td><input type="password" class="int" autocomplete="off" id="newpass" name="newpass" value="<?php isset($newpass) ? : $newpass=""; ehe($newpass);  ?>" size="20" maxlength="60" /><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#newpass","#newpass2",$passwd_classcount); ?></td></tr>
 <tr><th><?php __("New password"); ?> (2)</th><td><input type="password" class="int" autocomplete="off" id="newpass2" name="newpass2" value="<?php isset($newpass2) ? : $newpass2=""; ehe($newpass2);?>" size="20" maxlength="61" /></td></tr>
 <tr class="trbtn"><td colspan="3"><input type="submit" class="inb ok" name="submit" value="<?php __("Change my password"); ?>" /></td></tr>
 </table>

@@ -43,11 +43,11 @@ class DB_users extends DB_Sql {
      * Creator
      */
     function __construct() { // Sometimes we need to create this object with empty parameters, but by default we fill them with those of the current user's DB
-      global $cuid, $db, $err;
+      global $cuid, $db, $msg;
       
       $db->query("select db_servers.* from db_servers, membres where membres.uid= ? and membres.db_server_id=db_servers.id;", array($cuid));
       if (!$db->next_record()) {
-	$err->raise('db_user', _("There are no databases in db_servers for this user. Please contact your administrator."));
+	$msg->raise('Error', 'db_user', _("There are no databases in db_servers for this user. Please contact your administrator."));
 	die();
       }
 
@@ -144,8 +144,8 @@ class m_mysql {
      *  Returns an array (empty) if no databases
      */
     function get_dblist() {
-        global $db, $err, $bro, $cuid;
-        $err->log("mysql", "get_dblist");
+        global $db, $msg, $bro, $cuid;
+        $msg->log("mysql", "get_dblist");
         $db->free();
         $db->query("SELECT login,pass,db, bck_mode, bck_dir FROM db WHERE uid= ? ORDER BY db;", array($cuid));
         $c = array();
@@ -163,11 +163,11 @@ class m_mysql {
      *  Returns FALSE if error
      */
     function php_myadmin_connect() {
-        global $db, $cuid, $err;
-        $err->log("mysql", "php_myadmin_connect");
+        global $db, $cuid, $msg;
+        $msg->log("mysql", "php_myadmin_connect");
         $db->query("SELECT dbu.name,dbu.password, dbs.host FROM dbusers dbu, db_servers dbs, membres m WHERE dbu.uid= ? and enable='ADMIN' and dbs.id=m.db_server_id and m.uid= ? ;", array($cuid, $cuid));
         if (!$db->num_rows()) {
-            $err->raise("mysql", _("Cannot connect to PhpMyAdmin"));
+            $msg->raise('Error', "mysql", _("Cannot connect to PhpMyAdmin"));
             return false;
         }
         $db->next_record();
@@ -194,9 +194,9 @@ class m_mysql {
      *  Returns FALSE if the user has no database of if the database does not exist.
      */
     function get_mysql_details($dbn) {
-        global $db, $err, $cuid;
+        global $db, $msg, $cuid;
         $root = getuserpath();
-        $err->log("mysql", "get_mysql_details");
+        $msg->log("mysql", "get_mysql_details");
         $pos = strpos($dbn, '_');
         if ($pos === false) {
             $dbname = $dbn;
@@ -208,7 +208,7 @@ class m_mysql {
         $size = $this->get_db_size($dbname);
         $db->query("SELECT login,pass,db, bck_mode, bck_gzip, bck_dir, bck_history FROM db WHERE uid= ? AND db= ?;", array($cuid, $dbname));
         if (!$db->num_rows()) {
-            $err->raise("mysql", _("Database %s not found"), $dbn);
+            $msg->raise('Error', "mysql", _("Database %s not found"), $dbn);
             return array("enabled" => false);
         }
         $db->next_record();
@@ -224,11 +224,11 @@ class m_mysql {
      * an error occured, such as over quota user.
      */
     function add_db($dbn) {
-        global $db, $err, $quota, $cuid;
-        $err->log("mysql", "add_db", $dbn);
+        global $db, $msg, $quota, $cuid, $admin;
+        $msg->log("mysql", "add_db", $dbn);
         $password_user = "";
         if (!$quota->cancreate("mysql")) {
-            $err->raise("mysql", _("Your databases quota is over. You cannot create more databases"));
+            $msg->raise('Error', "mysql", _("Your databases quota is over. You cannot create more databases"));
             return false;
         }
         $pos = strpos($dbn, '_');
@@ -239,33 +239,45 @@ class m_mysql {
             $dbname = $dbn;
             $dbn = $dbncomp[1];
             if (empty($dbn)) { // If nothing after the '_'
-                $err->raise("mysql", _("Database can't have empty suffix"));
+                $msg->raise('Error', "mysql", _("Database can't have empty suffix"));
                 return false;
             }
         }
         if (!preg_match("#^[0-9a-z]*$#", $dbn)) {
-            $err->raise("mysql", _("Database name can contain only letters and numbers"));
+            $msg->raise('Error', "mysql", _("Database name can contain only letters and numbers"));
             return false;
         }
 
 	$len=variable_get("sql_max_database_length", 64);
         if (strlen($dbname) > $len) {
-            $err->raise("mysql", _("Database name cannot exceed %d characters"), $len);
+            $msg->raise('Error', "mysql", _("Database name cannot exceed %d characters"), $len);
             return false;
         }
         $db->query("SELECT * FROM db WHERE db= ? ;", array($dbname));
         if ($db->num_rows()) {
-            $err->raise("mysql", _("Database %s already exists"), $dbn);
+            $msg->raise('Error', "mysql", _("Database %s already exists"), $dbn);
             return false;
         }
 
-        $db->query("SELECT name from dbusers where name= ? and enable='ACTIVATED' ;", array($dbname));
-        if (!$db->num_rows()) {
-            $password_user = create_pass(8);
-            if (!$this->add_user($dbn, $password_user, $password_user)) {
-                
+	// On empèche la création auto d'utilisateurs si la taille du nom de la db est plus grand que la taille max du nom d'utilisateur
+	$len=variable_get('sql_max_username_length', NULL);
+	if (strlen($dbname) <= $len) {
+            $db->query("SELECT name from dbusers where name= ? and enable='ACTIVATED' ;", array($dbname));
+            if (!$db->num_rows()) {
+		// On récupère la complexité du mdp qu'on doit générer que l'on va passer en paramètre de la fonction create_pass
+		$c=$admin->listPasswordPolicies();
+		$passwd_classcount = $c['mysql']['classcount'];
+
+                $password_user = create_pass(10, $passwd_classcount);
+                if ($this->add_user($dbn, $password_user, $password_user)) {
+		    $msg->raise('Info', "mysql", "L'utilisateur '$dbname' a été créé et les droits sur cette base de données lui ont été attribué.");
+                } else {
+		    $msg->raise('Alert', "mysql", "L'utilisateur '$dbname' n'a pas pu être créé.<br>Allez à la page 'Utilisateurs Mysql' pour en créer manuellement.<br>Et n'oubliez pas de lui donner les droits sur la base de données.");
+		}
             }
-        }
+	} else {
+	    $msg->raise('Alert', "mysql", "L'utilisateur '$dbname' n'a pas été automatiquement créé car il dépasse la limite de taille pour les utilisateurs qui est à $len<br>Allez à la page 'Utilisateurs Mysql' pour en créer un avec le nom que vous voulez.<br>Et n'oubliez pas de lui donner les droits sur la base de données.");
+	}
 
         //checking for the phpmyadmin user
         $db->query("SELECT * FROM dbusers WHERE uid= ? AND enable='ADMIN';", array($cuid));
@@ -274,13 +286,13 @@ class m_mysql {
             $myadm = $db->f("name");
             $password = $db->f("password");
         } else {
-            $err->raise("mysql", _("There is a problem with the special PhpMyAdmin user. Contact the administrator"));
+            $msg->raise('Error', "mysql", _("There is a problem with the special PhpMyAdmin user. Contact the administrator"));
             return false;
         }
 
         //Grant the special user every rights.
         if ($this->dbus->exec("CREATE DATABASE $dbname;")) { // secured: dbname is checked against ^[0-9a-z]*$
-            $err->log("mysql", "add_db_succes", $dbn);
+            $msg->log("mysql", "add_db_succes", $dbn);
             // Ok, database does not exist, quota is ok and dbname is compliant. Let's proceed
             $db->query("INSERT INTO db (uid,login,pass,db,bck_mode) VALUES (?, ?, ?, ? ,0)", array($cuid, $myadm, $password, $dbname));
             $dbuser = $dbname;
@@ -292,8 +304,8 @@ class m_mysql {
             $this->dbus->query("FLUSH PRIVILEGES;");
             return true;
         } else {
-            $err->log("mysql", "add_db", $dbn);
-            $err->raise("mysql", _("An error occured. The database could not be created"));
+            $msg->log("mysql", "add_db", $dbn);
+            $msg->raise('Error', "mysql", _("An error occured. The database could not be created"));
             return false;
         }
     }
@@ -306,11 +318,11 @@ class m_mysql {
      *  an error occured, such as db does not exist.
      */
     function del_db($dbname) {
-        global $db, $err, $cuid;
-        $err->log("mysql", "del_db", $dbname);
+        global $db, $msg, $cuid;
+        $msg->log("mysql", "del_db", $dbname);
         $db->query("SELECT uid FROM db WHERE db= ?;", array($dbname));
         if (!$db->next_record()) {
-            $err->raise("mysql", _("The database was not found. I can't delete it"));
+            $msg->raise('Error', "mysql", _("The database was not found. I can't delete it"));
             return false;
         }
 
@@ -342,11 +354,11 @@ class m_mysql {
      * @return boolean true if the backup parameters has been successfully changed, false if not.
      */
     function put_mysql_backup($dbn, $bck_mode, $bck_history, $bck_gzip, $bck_dir) {
-        global $db, $err, $bro, $cuid;
-        $err->log("mysql", "put_mysql_backup");
+        global $db, $msg, $bro, $cuid;
+        $msg->log("mysql", "put_mysql_backup");
 
         if (!variable_get('sql_allow_users_backups')) {
-            $err->raise("mysql", _("User aren't allowed to configure their backups"));
+            $msg->raise('Error', "mysql", _("User aren't allowed to configure their backups"));
             return false;
         }
 
@@ -359,12 +371,12 @@ class m_mysql {
             $dbn = $dbncomp[1];
         }
         if (!preg_match("#^[0-9a-z]*$#", $dbn)) {
-            $err->raise("mysql", _("Database name can contain only letters and numbers"));
+            $msg->raise('Error', "mysql", _("Database name can contain only letters and numbers"));
             return false;
         }
         $db->query("SELECT * FROM db WHERE uid= ? AND db= ? ;", array($cuid, $dbname));
         if (!$db->num_rows()) {
-            $err->raise("mysql", _("Database %s not found"), $dbn);
+            $msg->raise('Error', "mysql", _("Database %s not found"), $dbn);
             return false;
         }
         $db->next_record();
@@ -379,11 +391,11 @@ class m_mysql {
             $bck_mode = "0";
         }
         if (!$bck_history) {
-            $err->raise("mysql", _("You have to choose how many backups you want to keep"));
+            $msg->raise('Alert', "mysql", _("You have to choose how many backups you want to keep"));
             return false;
         }
         if (($bck_dir = $bro->convertabsolute($bck_dir, 0)) === false) { // return a full path or FALSE
-            $err->raise("mysql", _("Directory does not exist"));
+            $msg->raise('Error', "mysql", _("Directory does not exist"));
             return false;
         }
         $db->query("UPDATE db SET bck_mode= ? , bck_history= ?, bck_gzip= ?, bck_dir= ? WHERE uid= ? AND db= ? ;", array($bck_mode, $bck_history, $bck_gzip, $bck_dir, $cuid, $dbname));
@@ -397,24 +409,24 @@ class m_mysql {
      * @return boolean TRUE if the password has been successfully changed, FALSE else.
      */
     function put_mysql_details($password) {
-        global $db, $err, $cuid, $admin;
-        $err->log("mysql", "put_mysql_details");
+        global $db, $msg, $cuid, $admin;
+        $msg->log("mysql", "put_mysql_details");
         $db->query("SELECT * FROM db WHERE uid= ?;", array($cuid));
         if (!$db->num_rows()) {
-            $err->raise("mysql", _("Database not found"));
+            $msg->raise('Error', "mysql", _("Database not found"));
             return false;
         }
         $db->next_record();
         $login = $db->f("login");
 
         if (!$password) {
-            $err->raise("mysql", _("The password is mandatory"));
+            $msg->raise('Error', "mysql", _("The password is mandatory"));
             return false;
         }
 
 	$len=variable_get("sql_max_username_length", 16);
         if (strlen($password) > $len) {
-            $err->raise("mysql", _("MySQL password cannot exceed %d characters"), $len);
+            $msg->raise('Error', "mysql", _("MySQL password cannot exceed %d characters"), $len);
             return false;
         }
 
@@ -440,32 +452,32 @@ class m_mysql {
      * @table : sql tables to apply rights
      * */
     function grant($base, $user, $rights = null, $pass = null, $table = '*') {
-        global $err, $db;
-        $err->log("mysql", "grant", $base . "-" . $rights . "-" . $user);
+        global $msg, $db;
+        $msg->log("mysql", "grant", $base . "-" . $rights . "-" . $user);
 
         if (!preg_match("#^[0-9a-z_\\*\\\\]*$#", $base)) {
-            $err->raise("mysql", _("Database name can contain only letters and numbers"));
+            $msg->raise('Error', "mysql", _("Database name can contain only letters and numbers"));
             return false;
         } elseif (!$this->dbus->query("select db from db where db= ?;", array($base))) {
-            $err->raise("mysql", _("Database not found"));
+            $msg->raise('Error', "mysql", _("Database not found"));
             return false;
         }
 
         if ($rights == null) {
             $rights = 'ALL PRIVILEGES';
         } elseif (!preg_match("#^[a-zA-Z,\s]*$#", $rights)) {
-            $err->raise("mysql", _("Databases rights are not correct"));
+            $msg->raise('Error', "mysql", _("Databases rights are not correct"));
             return false;
         }
 
         if (!preg_match("#^[0-9a-z]#", $user)) {
-            $err->raise("mysql", _("The username can contain only letters and numbers."));
+            $msg->raise('Error', "mysql", _("The username can contain only letters and numbers."));
             return false;
         }
         $db->query("select name from dbusers where name= ? ;", array($user));
 
         if (!$db->num_rows()) {
-            $err->raise("mysql", _("Database user not found"));
+            $msg->raise('Error', "mysql", _("Database user not found"));
             return false;
         }
 
@@ -476,8 +488,9 @@ class m_mysql {
         } else {
             $grant .= ";";
         }
+
         if (!$this->dbus->query($grant)) {
-            $err->raise("mysql", _("Could not grant rights"));
+            $msg->raise('Error', "mysql", _("Could not grant rights"));
             return false;
         }
         return true;
@@ -492,20 +505,20 @@ class m_mysql {
      * @return boolean TRUE if the database has been restored, or FALSE if an error occurred
      */
     function restore($file, $stdout, $id) {
-        global $err, $bro;
+        global $msg, $bro;
         if (empty($file)) {
-            $err->raise("mysql", _("No file specified"));
+            $msg->raise('Error', "mysql", _("No file specified"));
             return false;
         }
         if (!$r = $this->get_mysql_details($id)) {
             return false;
         }
         if (!($fi = $bro->convertabsolute($file, 0))) {
-            $err->raise("mysql", _("File not found"));
+            $msg->raise('Error', "mysql", _("File not found"));
             return false;
         }
         if (!file_exists($fi)) {
-            $err->raise("mysql", _("File not found"));
+            $msg->raise('Error', "mysql", _("File not found"));
             return false;
         }
 
@@ -558,8 +571,8 @@ class m_mysql {
      * Returns the list of database users of an account
      * */
     function get_userslist($all = null) {
-        global $db, $err, $cuid;
-        $err->log("mysql", "get_userslist");
+        global $db, $msg, $cuid;
+        $msg->log("mysql", "get_userslist");
         $c = array();
         if (!$all) {
             $db->query("SELECT name FROM dbusers WHERE uid= ? and enable not in ('ADMIN','HIDDEN') ORDER BY name;", array($cuid));
@@ -580,8 +593,8 @@ class m_mysql {
     }
 
     function get_defaultsparam($dbn) {
-        global $db, $err, $cuid;
-        $err->log("mysql", "getdefaults");
+        global $db, $msg, $cuid;
+        $msg->log("mysql", "getdefaults");
 
         $dbu = $dbn;
         $r = array();
@@ -589,86 +602,46 @@ class m_mysql {
         $this->dbus->query("Select * from mysql.db where Db= ? and User!= ? ;", array($dbn, $cuid."_myadm"));
 
         if (!$this->dbus->num_rows()) {
-            $err->raise("mysql",_("Database not found"));
+            $msg->raise('Error', "mysql",_("Database not found"));
             return false;
         }
+
+	$listRights = array('Select', 'Insert', 'Update', 'Delete', 'Create', 'Drop', 'References', 'Index', 'Alter', 'Create_tmp_table', 'Lock_tables', 'Create_view', 'Show_view', 'Create_routine', 'Alter_routine', 'Execute', 'Event', 'Trigger');
         while ($this->dbus->next_record()) {
+	    // rTmp est l'array dans lequel on met les infos recupérées à chaque tour de boucle et est ajouté à l'array $r
+	    $rTmp = array();
             $variable = $this->dbus->Record;
-            if ($variable['User'] == $dbu) {
-                $r['Host'] = $this->dbus->f('Host');
 
-                if ($this->dbus->f('Select_priv') !== "Y") {
-                    return $r;
-                }
-                if ($this->dbus->f('Insert_priv') !== "Y") {
-                    return $r;
-                }
-                if ($this->dbus->f('Update_priv') !== "Y") {
-                    return $r;
-                }
-                if ($this->dbus->f('Delete_priv') !== "Y") {
-                    return $r;
-                }
-                if ($this->dbus->f('Create_priv') !== "Y") {
-                    return $r;
-                }
-                if ($this->dbus->f('Drop_priv') !== "Y") {
-                    return $r;
-                }
-                if ($this->dbus->f('References_priv') !== "Y") {
-                    return $r;
-                }
-                if ($this->dbus->f('Index_priv') !== "Y") {
-                    return $r;
-                }
-                if ($this->dbus->f('Alter_priv') !== "Y") {
-                    return $r;
-                }
-                if ($this->dbus->f('Create_tmp_table_priv') !== "Y") {
-                    return $r;
-                }
-                if ($this->dbus->f('Lock_tables_priv') !== "Y") {
-                    return $r;
-                }
-                if ($this->dbus->f('Create_view_priv') !== "Y") {
-                    return $r;
-                }
-                if ($this->dbus->f('Show_view_priv') !== "Y") {
-                    return $r;
-                }
-                if ($this->dbus->f('Create_routine_priv') !== "Y") {
-                    return $r;
-                }
-                if ($this->dbus->f('Alter_routine_priv') !== "Y") {
-                    return $r;
-                }
-                if ($this->dbus->f('Execute_priv') !== "Y") {
-                    return $r;
-                }
-                if ($this->dbus->f('Event_priv') !== "Y") {
-                    return $r;
-                }
-                if ($this->dbus->f('Trigger_priv') !== "Y") {
-                    return $r;
-                }
+	    $dbu = $variable['User'];
+
+            $rTmp['Host'] = $this->dbus->f('Host');
+	    $rTmp['Rights']='All';
+
+	    foreach ($listRights as $v) {
+		$right = $v."_priv";
+		if ($this->dbus->f($right) !== "Y") {
+		    $rTmp['Rights'] = 'NotAll';
+		    break;
+		}
+	    }
+
+            if (!$db->query("SELECT name,password from dbusers where name= ? ;", array($dbu))) {
+                $msg->raise('Error', "mysql",_("Database not found")." (3)");
+                return false;
             }
-        } //endwhile
-        if (!count($r)) {
-            $err->raise("mysql",_("Database not found")." (2)");
-            return false;
-        }
-        if (!$db->query("SELECT name,password from dbusers where name= ? ;", array($dbu))) {
-            $err->raise("mysql",_("Database not found")." (3)");
-            return false;
-        }
 
-        if (!$db->num_rows()) {
-            $err->raise("mysql",_("Database not found")." (4)");
-            return false;
-        }
-        $db->next_record();
-        $r['user'] = $db->f('name');
-        $r['password'] = $db->f('password');
+            if (!$db->num_rows()) {
+                $msg->raise('Error', "mysql",_("Database not found")." (4)");
+                return false;
+            }
+
+            $db->next_record();
+            $rTmp['user'] = $db->f('name');
+            $rTmp['password'] = $db->f('password');
+
+	    $r[] = $rTmp;
+
+        } //endwhile
         return $r;
     }
 
@@ -682,8 +655,8 @@ class m_mysql {
      * @return boolean if the user has been created in MySQL or FALSE if an error occurred
      * */
     function add_user($usern, $password, $passconf) {
-        global $db, $err, $mem, $cuid, $admin;
-        $err->log("mysql", "add_user", $usern);
+        global $db, $msg, $mem, $cuid, $admin;
+        $msg->log("mysql", "add_user", $usern);
 
         $usern = trim($usern);
         $login = $mem->user["login"];
@@ -692,33 +665,32 @@ class m_mysql {
         } else {
             $user = $usern;
         }
-
         if (!$usern) {
-            $err->raise("mysql", _("The username is mandatory"));
+            $msg->raise('Alert', "mysql", _("The username is mandatory"));
             return false;
         }
         if (!$password) {
-            $err->raise("mysql", _("The password is mandatory"));
+            $msg->raise('Alert', "mysql", _("The password is mandatory"));
             return false;
         }
         if (!preg_match("#^[0-9a-z]#", $usern)) {
-            $err->raise("mysql", _("The username can contain only letters and numbers"));
+            $msg->raise('Error', "mysql", _("The username can contain only letters and numbers"));
             return false;
         }
 
         // We check the length of the COMPLETE username, not only the part after _
         $len=variable_get("sql_max_username_length", 16);
         if (strlen($user) > $len) {
-            $err->raise("mysql", _("MySQL username cannot exceed %d characters"), $len);
+            $msg->raise('Error', "mysql", _("MySQL username cannot exceed %d characters"), $len);
             return false;
         }
         $db->query("SELECT * FROM dbusers WHERE name= ? ;", array($user));
         if ($db->num_rows()) {
-            $err->raise("mysql", _("The database user already exists"));
+            $msg->raise('Error', "mysql", _("The database user already exists"));
             return false;
         }
         if ($password != $passconf || !$password) {
-            $err->raise("mysql", _("The passwords do not match"));
+            $msg->raise('Error', "mysql", _("The passwords do not match"));
             return false;
         }
 
@@ -731,8 +703,8 @@ class m_mysql {
 
         // We add him to the user table 
         $db->query("INSERT INTO dbusers (uid,name,password,enable) VALUES( ?, ?, ?, 'ACTIVATED');", array($cuid, $user, $password));
-        
-        $this->grant("*", $user, "USAGE", $pass);
+
+        $this->grant("*", $user, "USAGE", $password);
         return true;
     }
 
@@ -746,12 +718,12 @@ class m_mysql {
      * @return boolean if the password has been changed in MySQL or FALSE if an error occurred
      * */
     function change_user_password($usern, $password, $passconf) {
-        global $db, $err, $cuid, $admin;
-        $err->log("mysql", "change_user_pass", $usern);
+        global $db, $msg, $cuid, $admin;
+        $msg->log("mysql", "change_user_pass", $usern);
 
         $usern = trim($usern);
         if ($password != $passconf || !$password) {
-            $err->raise("mysql", _("The passwords do not match"));
+            $msg->raise('Error', "mysql", _("The passwords do not match"));
             return false;
         }
 
@@ -775,10 +747,10 @@ class m_mysql {
      * @return boolean if the user has been deleted in MySQL or FALSE if an error occurred
      * */
     function del_user($user, $all = false) {
-        global $db, $err, $cuid;
-        $err->log("mysql", "del_user", $user);
+        global $db, $msg, $cuid;
+        $msg->log("mysql", "del_user", $user);
         if (!preg_match("#^[0-9a-z]#", $user)) {
-            $err->raise("mysql", _("The username can contain only letters and numbers"));
+            $msg->raise('Error', "mysql", _("The username can contain only letters and numbers"));
             return false;
         }
         if (!$all) {
@@ -787,9 +759,12 @@ class m_mysql {
             $db->query("SELECT name FROM dbusers WHERE uid= ? ;", array($cuid));
         }
 
+	$backtrace = debug_backtrace();
         if (!$db->num_rows()) {
-            $err->raise("mysql", _("The username was not found"));
-            return false;
+	    if ($backtrace[1]["function"] != "del_db")
+		$msg->raise('Error', "mysql", _("The username was not found"));
+
+	    return false;
         }
         $db->next_record();
         $login = $db->f("name");
@@ -801,6 +776,10 @@ class m_mysql {
         $this->dbus->query("FLUSH PRIVILEGES");
 
         $db->query("DELETE FROM dbusers WHERE uid= ? AND name= ? ;", array($cuid, $user));
+
+	if ($backtrace[1]["function"] == "del_db")
+	    $msg->raise('info', "mysql", _("The user '%s' has been successfully deleted"), $user);
+
         return true;
     }
 
@@ -812,11 +791,11 @@ class m_mysql {
      * @return array An array of database name and rights
      * */
     function get_user_dblist($user) {
-        global $db, $err;
+        global $db, $msg;
 
         $this->dbus->query("SELECT * FROM mysql.user WHERE User= ? AND Host= ? ;", array($user, $this->dbus->Client));
         if (!$this->dbus->next_record()) {
-            $err->raise('mysql', _("This user does not exist in the MySQL/User database"));
+            $msg->raise('Error', 'mysql', _("This user does not exist in the MySQL/User database"));
             return false;
         }
 
@@ -824,7 +803,8 @@ class m_mysql {
         $db->free();
         $dblist = $this->get_dblist();
 	foreach ($dblist as $tab) {
-            $this->dbus->query("SELECT * FROM mysql.db WHERE User= ? AND Host= ? AND Db= ? ;", array($user, $this->dbus->Client, $tab["db"]));
+	    $dbname = str_replace('_', '\_', $tab["db"]);
+            $this->dbus->query("SELECT * FROM mysql.db WHERE User= ? AND Host= ? AND Db= ? ;", array($user, $this->dbus->Client, $dbname));
             if ($this->dbus->next_record()) {
                 $r[] = array("db" => $tab["db"], "select" => $this->dbus->f("Select_priv"), "insert" => $this->dbus->f("Insert_priv"), "update" => $this->dbus->f("Update_priv"), "delete" => $this->dbus->f("Delete_priv"), "create" => $this->dbus->f("Create_priv"), "drop" => $this->dbus->f("Drop_priv"), "references" => $this->dbus->f("References_priv"), "index" => $this->dbus->f("Index_priv"), "alter" => $this->dbus->f("Alter_priv"), "create_tmp" => $this->dbus->f("Create_tmp_table_priv"), "lock" => $this->dbus->f("Lock_tables_priv"),
                     "create_view" => $this->dbus->f("Create_view_priv"),
@@ -853,8 +833,8 @@ class m_mysql {
      * 
      * */
     function set_user_rights($user, $dbn, $rights) {
-        global $err;
-        $err->log("mysql", "set_user_rights");
+        global $msg;
+        $msg->log("mysql", "set_user_rights");
 
         // On genere les droits en fonction du tableau de droits
         $strrights = "";
@@ -918,14 +898,15 @@ class m_mysql {
         }
 
         // We reset all user rights on this DB : 
-        $this->dbus->query("SELECT * FROM mysql.db WHERE User = ? AND Db = ?;", array($user, $dbn));
+	$dbname = str_replace('_', '\_', $dbn);
+        $this->dbus->query("SELECT * FROM mysql.db WHERE User = ? AND Db = ?;", array($user, $dbname));
 
         if ($this->dbus->num_rows()) {
-            $this->dbus->query("REVOKE ALL PRIVILEGES ON ".$dbn.".* FROM ".$this->dbus->quote($user)."@" . $this->dbus->quote($this->dbus->Client) . ";");
+            $this->dbus->query("REVOKE ALL PRIVILEGES ON `".$dbname."`.* FROM ".$this->dbus->quote($user)."@" . $this->dbus->quote($this->dbus->Client) . ";");
         }
         if ($strrights) {
             $strrights = substr($strrights, 0, strlen($strrights) - 1);
-            $this->grant($dbn, $user, $strrights);
+            $this->grant($dbname, $user, $strrights);
         }
         $this->dbus->query("FLUSH PRIVILEGES");
         return TRUE;
@@ -942,8 +923,8 @@ class m_mysql {
      * @access private
      */
     function hook_lxc_params($params) {
-        global $err;
-        $err->log("mysql", "alternc_get_quota");
+        global $msg;
+        $msg->log("mysql", "alternc_get_quota");
         $p = array();
         if (isset($this->dbus["Host"]) && $this->dbus["Host"] != "") {
             $p["mysql_host"] = $this->dbus["Host"];
@@ -961,12 +942,13 @@ class m_mysql {
      * @access private
      */
     function hook_quota_get() {
-        global $err;
-        $err->log("mysql", "alternc_get_quota");
+        global $msg, $mem, $quota;
+        $msg->log("mysql", "alternc_get_quota");
         $q = Array("name" => "mysql", "description" => _("MySQL Databases"), "used" => 0);
         $c = $this->get_dblist();
         if (is_array($c)) {
             $q['used'] = count($c);
+            $q['sizeondisk'] = $quota->get_size_db_sum_user($mem->user["login"])/1024;
         }
         return $q;
     }
@@ -978,8 +960,8 @@ class m_mysql {
      * @access private
      */
     function alternc_add_member() {
-        global $db, $err, $cuid, $mem;
-        $err->log("mysql", "alternc_add_member");
+        global $db, $msg, $cuid, $mem;
+        $msg->log("mysql", "alternc_add_member");
         //checking for the phpmyadmin user
         $db->query("SELECT name,password FROM dbusers WHERE uid= ? AND Type='ADMIN';", array($cuid));
         if ($db->num_rows()) {
@@ -987,7 +969,7 @@ class m_mysql {
             $password = $db->f("password");
         } else {
             $myadm = $cuid . "_myadm";
-            $password = create_pass(8);
+            $password = create_pass();
         }
 
         $db->query("INSERT INTO dbusers (uid,name,password,enable) VALUES (?, ?, ?, 'ADMIN');", array($cuid, $myadm, $password));
@@ -1002,8 +984,8 @@ class m_mysql {
      * @access private
      */
     function alternc_del_member() {
-        global $err;
-        $err->log("mysql", "alternc_del_member");
+        global $msg;
+        $msg->log("mysql", "alternc_del_member");
         $c = $this->get_dblist();
         if (is_array($c)) {
             for ($i = 0; $i < count($c); $i++) {
@@ -1040,8 +1022,8 @@ class m_mysql {
      */
     function alternc_export_conf() {
         //TODO don't work with separated sql server for dbusers
-        global $db, $err, $cuid;
-        $err->log("mysql", "export");
+        global $db, $msg, $cuid;
+        $msg->log("mysql", "export");
         $db->query("SELECT login, pass, db, bck_mode, bck_dir, bck_history, bck_gzip FROM db WHERE uid= ? ;", array($cuid));
         $str = "";
         if ($db->next_record()) {
@@ -1072,13 +1054,13 @@ class m_mysql {
      * EXPERIMENTAL 'sid' function ;) 
      */
     function alternc_export_data($dir) {
-        global $db, $err, $cuid;
-        $err->log("mysql", "export_data");
+        global $db, $msg, $cuid;
+        $msg->log("mysql", "export_data");
         $db->query("SELECT db.login, db.pass, db.db, dbusers.name FROM db,dbusers WHERE db.uid= ?  AND dbusers.uid=db.uid;", array($cuid));
         $dir.="sql/";
         if (!is_dir($dir)) {
             if (!mkdir($dir)) {
-                $err->raise('mysql', _("The directory could not be created"));
+                $msg->raise('Error', 'mysql', _("The directory could not be created"));
             }
         }
         // on exporte toutes les bases utilisateur.
@@ -1100,8 +1082,8 @@ class m_mysql {
      * @return an array associating the name of the databases to their sizes : array(dbname=>size)
      */
     function get_dbus_size($db_name, $db_host, $db_login, $db_password, $db_client) {
-        global $err;
-        $err->log("mysql", "get_dbus_size", $db_host);
+        global $msg;
+        $msg->log("mysql", "get_dbus_size", $db_host);
 
 	$this->dbus = new DB_Sql("mysql",$db_host,$db_login,$db_password);
 

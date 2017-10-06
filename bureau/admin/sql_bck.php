@@ -52,13 +52,9 @@ $fields = array (
 );
 getFields($fields);
 
-if (!$r=$mysql->get_mysql_details($id)) {
-	$error=$err->errstr();
-}
+$r=$mysql->get_mysql_details($id); 
 
-if (isset($error) && $error) {
-	echo "<p class=\"alert alert-danger\">$error</p><p>&nbsp;</p>";
-}
+echo $msg->msg_html_all();
 
 if (is_array($r)) {
 ?>

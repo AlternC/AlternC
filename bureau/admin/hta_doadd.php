@@ -36,18 +36,13 @@ $fields = array (
 getFields($fields);
 
 if(empty($dir)) {
-	$error=_("No directory specified");
+	$msg->raise("Error", "hta", _("No directory specified"));
 	include("hta_list.php");
-	exit();
-}
-
-if(!$hta->CreateDir($dir)) {
-	$error=$err->errstr();
+} else if(!$hta->CreateDir($dir)) {
+	$is_include=true;
 	include("hta_add.php");
-	exit();
+} else {
+	$msg->raise("Ok", "hta", _("Folder %s is protected"), $dir);
+	include("hta_list.php");
 }
-
-include("hta_list.php");
-exit();
-
 ?>

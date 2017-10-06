@@ -29,7 +29,6 @@
 */
 require_once("../class/config.php");
 
-$error="";
 // On parcours les POST_VARS et on repere les del_.
 reset($_POST);
 $lst_todel=array();
@@ -54,10 +53,8 @@ getFields($fields);
 if(!empty($confirm_del)) {
   foreach($lst_todel as $v) {
     $r=$ftp->delete_ftp($v);
-    if (!$r) {
-      $error.=$err->errstr()."<br />";
-    } else {
-      $error.=sprintf(_("The ftp account %s has been successfully deleted"),$r)."<br />";
+    if ($r) {
+      $msg->raise("Ok", "ftp", _("The ftp account %s has been successfully deleted"),$r);
     }
   }
   include("ftp_list.php");
@@ -71,7 +68,7 @@ if(!empty($confirm_del)) {
   <?php __("Do you really want to delete those accounts?");?>
   <ul>
   <?php foreach($lst_todel as $t) {
-    echo "<li>".$names[$t]."</li>\n";
+    echo "<li><b>".$names[$t]."</b></li>\n";
   } ?>
   </ul>
 
@@ -87,7 +84,6 @@ if(!empty($confirm_del)) {
 <?php
   include_once('foot.php');
   exit();
-
 }
 
 ?>

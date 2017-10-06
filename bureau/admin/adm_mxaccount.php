@@ -30,7 +30,8 @@
 require_once("../class/config.php");
 
 if (!$admin->enabled) {
-	__("This page is restricted to authorized staff");
+	$msg->raise('Error', "admin", _("This page is restricted to authorized staff"));
+	echo $msg->msg_html_all();
 	exit();
 }
 
@@ -44,28 +45,30 @@ getFields($fields);
 if ($delaccount) {
 	// Delete an account
 	if ($mail->del_slave_account($delaccount)) {
-		$error=_("The requested account has been deleted. It is now denied.");
+		$msg->raise('Ok', "admin", _("The requested account has been deleted. It is now denied."));
 	}
 }
 if ($newlogin) {
 	// Add an account
 	if ($mail->add_slave_account($newlogin,$newpass)) { 
-		$error=_("The requested account address has been created. It is now allowed.");
+		$msg->raise('Ok', "admin", _("The requested account address has been created. It is now allowed."));
 		$newlogin='';$newpass='';
 	}
 }
 
 include_once("head.php");
+
+$c=$admin->listPasswordPolicies();
+$passwd_classcount = $c['adm']['classcount'];
+
 ?>
 <h3><?php __("Manage allowed accounts for secondary mx"); ?></h3>
 <hr id="topbar"/>
 <br />
 <?php
-	if (isset($error) && $error) {
-	  echo "<p class=\"alert alert-danger\">$error</p>";
-	}
-
 $c=$mail->enum_slave_account();
+
+echo $msg->msg_html_all();
 
 if (is_array($c)) {
 
@@ -100,7 +103,7 @@ for($i=0;$i<count($c);$i++) { ?>
 <tr><th><label for="newlogin"><?php __("Login"); ?></label></th><th><label for="newpass"><?php __("Password"); ?></label></th></tr>
 <tr>
 	<td><input type="text" class="int" value="<?php ehe($newlogin); ?>" id="newlogin" name="newlogin" maxlength="64" size="32" /><br/><br/></td>
-	<td><input type="password" class="int" autocomplete="off" value="<?php ehe($newpass); ?>" id="newpass" name="newpass" maxlength="64" size="32" /><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#newpass"); ?></td>
+	<td><input type="password" class="int" autocomplete="off" value="<?php ehe($newpass); ?>" id="newpass" name="newpass" maxlength="64" size="32" /><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#newpass","",$passwd_classcount); ?></td>
 </tr>
 <tr class="trbtn"><td colspan="2">
 	<input type="submit" value="<?php __("Add this account to the allowed list"); ?>" class="inb" />

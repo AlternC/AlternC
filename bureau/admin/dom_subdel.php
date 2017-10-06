@@ -36,22 +36,21 @@ $fields = array (
 getFields($fields);
 
 $dom->lock();
-if (!$r=$dom->get_sub_domain_all($sub_domain_id)) {
-  $error=$err->errstr();
-}
+$r=$dom->get_sub_domain_all($sub_domain_id);
 $dom->unlock();
 
 $dt=$dom->domains_type_lst();
 if (!$isinvited && $dt[strtolower($r['type'])]["enable"] != "ALL" ) {
-  __("This page is restricted to authorized staff");
+  $msg->raise('Error', "dom", _("This page is restricted to authorized staff"));
+  echo $msg->msg_html_all();
   exit();
 }
 
 ?>
 <h3><?php printf(_("Deleting subdomain %s"),ife($r['name'],$r['name'].".").$r['domain']); ?> : </h3>
 <?php
-if (isset($error) && $error) {
-  echo "<p class=\"alert alert-danger\">$error</p>";
+if ($msg->has_msgs('Error')) {
+  echo $msg->msg_html_all();
   include_once("foot.php");
   exit();
 }
@@ -78,7 +77,7 @@ if (isset($error) && $error) {
     </p>
     <blockquote>
       <input type="submit" class="inb" name="confirm" value="<?php __("Yes"); ?>" />&nbsp;&nbsp;
-      <input type="button" class="inb" name="cancel" value="<?php __("No"); ?>" onclick="history.back();" />
+      <span class="ina"><a href="dom_edit.php?domain=<?php echo urlencode($r['domain']) ?>"><?php __("No"); ?></a></span></p>
     </blockquote>
 </form>
 <?php include_once("foot.php"); ?>

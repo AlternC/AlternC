@@ -141,6 +141,15 @@ class m_admin {
     }
 
     /**
+     * Password kind used in this class (hook for admin class)
+     *
+     * @return array
+     */
+    function alternc_password_policy() {
+        return array("adm" => "Administration section");
+    }
+
+    /**
      * 
      */
     function stop_if_jobs_locked() {
@@ -191,7 +200,7 @@ class m_admin {
      *  <code>membres</code> et <code>local</code>)
      * Ckecks if the account is super-admin
      * 
-     * @global	   type $err
+     * @global	   type $msg
      * @global	   type $db
      * @global	   string     $lst_users_properties
      * @param     int         $uid a unique integer identifying the account
@@ -201,10 +210,10 @@ class m_admin {
      * Returns FALSE if an error occurs.
      */
     function get($uid, $recheck = false) {
-        global $err, $db, $lst_users_properties;
-        //    $err->log("admin","get",$uid);
+        global $msg, $db, $lst_users_properties;
+        //    $msg->log("admin","get",$uid);
         if (!$this->enabled) {
-            $err->raise("admin", _("-- Only administrators can access this page! --"));
+            $msg->raise('Error', "admin", _("-- Only administrators can access this page! --"));
             return false;
         }
 
@@ -238,7 +247,7 @@ class m_admin {
                 // don't exist, but is not a forced check. Do a forced check
                 return $this->get($uid, true);
             }
-            $err->raise("admin", _("Account not found"));
+            $msg->raise('Error', "admin", _("Account not found"));
             return false;
         }
 
@@ -250,16 +259,16 @@ class m_admin {
      * 
      * Similar to get_list() but for creators/resellers.
      * 
-     * @global	   type $err
+     * @global	   type $msg
      * @global	   type $db
      * @param     int     $uid
      * @return    boolean
      */
     function get_creator($uid) {
-        global $err, $db;
-        //    $err->log("admin","get",$uid);
+        global $msg, $db;
+        //    $msg->log("admin","get",$uid);
         if (!$this->enabled) {
-            $err->raise("admin", _("-- Only administrators can access this page! --"));
+            $msg->raise('Error', "admin", _("-- Only administrators can access this page! --"));
             return false;
         }
 
@@ -269,7 +278,7 @@ class m_admin {
             $db->next_record();
             $c = $db->Record;
         } else {
-            $err->raise("admin", _("Account not found"));
+            $msg->raise('Error', "admin", _("Account not found"));
             return false;
         }
 
@@ -317,7 +326,7 @@ class m_admin {
      * @param
      * @return 
      * 
-     * @global	   type $err
+     * @global	   type $msg
      * @global	   type $mem
      * @global	   type $cuid
      * @param     integer $all
@@ -329,10 +338,10 @@ class m_admin {
      * Returns FALSE if an error occurs.
      */
     function get_list($all = 0, $creator = 0, $pattern = FALSE, $pattern_type = FALSE) {
-        global $err, $mem, $cuid;
-        $err->log("admin", "get_list");
+        global $msg, $mem, $cuid;
+        $msg->log("admin", "get_list");
         if (!$this->enabled) {
-            $err->raise("admin", _("-- Only administrators can access this page! --"));
+            $msg->raise('Error', "admin", _("-- Only administrators can access this page! --"));
             return false;
         }
         $db = new DB_System();
@@ -370,7 +379,7 @@ class m_admin {
                 }
                 $request .= ' ORDER BY login;';
             } else {
-                $err->raise("admin", _("Invalid pattern type provided. Are you even performing a legitimate action?"));
+                $msg->raise('Error', "admin", _("Invalid pattern type provided. Are you even performing a legitimate action?"));
                 return FALSE;
             }
         } else {
@@ -400,7 +409,7 @@ class m_admin {
     /**
      * Send an email to all AlternC's accounts
      * 
-     * @global	   type $err
+     * @global	   type $msg
      * @global	   type $mem
      * @global	   type $cuid
      * @global	   type $db
@@ -410,10 +419,10 @@ class m_admin {
      * @return    boolean
      */
     function mailallmembers($subject, $message, $from) {
-        global $err, $db;
-        $err->log("admin", "mailallmembers");
+        global $msg, $db;
+        $msg->log("admin", "mailallmembers");
         if (!$this->enabled) {
-            $err->raise("admin", _("-- Only administrators can access this page! --"));
+            $msg->raise('Error', "admin", _("-- Only administrators can access this page! --"));
             return false;
         }
         $subject = trim($subject);
@@ -421,12 +430,12 @@ class m_admin {
         $from = trim($from);
 
         if (empty($subject) || empty($message) || empty($from)) {
-            $err->raise("admin", _("Subject, message and sender are mandatory"));
+            $msg->raise('Error', "admin", _("Subject, message and sender are mandatory"));
             return false;
         }
         //@todo remove cf functions.php
         if (checkmail($from) != 0) {
-            $err->raise("admin", _("Sender is syntaxically incorrect"));
+            $msg->raise('Error', "admin", _("Sender is syntaxically incorrect"));
             return false;
         }
 
@@ -446,19 +455,19 @@ class m_admin {
      * May only be called by the admin account (2000)
      * If there are no reseller accounts, returns an empty array.
      * 
-     * @global    type $err
+     * @global    type $msg
      * @global    type $mem
      * @global    type $cuid
      * @return    boolean
      */
     function get_creator_list() {
-        global $err, $cuid;
+        global $msg, $cuid;
 
         $creators = array();
 
-        $err->log("admin", "get_reseller_list");
+        $msg->log("admin", "get_reseller_list");
         if (!$this->enabled || $cuid != 2000) {
-            $err->raise("admin", _("-- Only administrators can access this page! --"));
+            $msg->raise('Error', "admin", _("-- Only administrators can access this page! --"));
             return false;
         }
 
@@ -479,7 +488,7 @@ class m_admin {
     /**
      * Check if I am the creator of the member $uid
      * 
-     * @global    type $err
+     * @global    type $msg
      * @global    type $mem
      * @global    type $db
      * @global    type $cuid
@@ -487,14 +496,14 @@ class m_admin {
      * @return    boolean         TRUE if I am the creator of that account. FALSE else.
      */
     function checkcreator($uid) {
-        global $err, $db, $cuid;
+        global $msg, $db, $cuid;
         if ($cuid == 2000) {
             return true;
         }
         $db->query("SELECT creator FROM membres WHERE uid= ?;", array($uid));
         $db->next_record();
         if ($db->Record["creator"] != $cuid) {
-            $err->raise("admin", _("-- Only administrators can access this page! --"));
+            $msg->raise('Error', "admin", _("-- Only administrators can access this page! --"));
             return false;
         }
         return true;
@@ -504,7 +513,7 @@ class m_admin {
      * When the admin want to delegate a subdomain to an account
      * 
      * @global    m_mysql $db
-     * @global    m_err   $err
+     * @global    m_messages   $msg
      * @global    m_dom   $dom
      * @global    m_mem   $mem
      * @global    int     $cuid
@@ -513,18 +522,18 @@ class m_admin {
      * @return boolean
      */
     function add_shared_domain($u, $domain_name) {
-        global $err, $dom, $mem;
-        $err->log("admin", "add_shared_domain", $u . "/" . $domain_name);
+        global $msg, $dom, $mem;
+        $msg->log("admin", "add_shared_domain", $u . "/" . $domain_name);
 
         if (!$mem->checkright()) {
-            $err->raise("admin", _("-- Only administrators can do that! --"));
+            $msg->raise('Error', "admin", _("-- Only administrators can do that! --"));
             return false;
         }
 
         // Check if this domain exist on this admin account
         if ((!in_array($domain_name, $dom->enum_domains()))&&($domaine_name!=variable_get("hosting_tld"))) {
-            $err->raise("admin", _("You don't seem to be allowed to delegate this domain"));
-            $err->log("admin", "add_shared_domain", "domain not allowed");
+            $msg->raise('Error', "admin", _("You don't seem to be allowed to delegate this domain"));
+            $msg->log("admin", "add_shared_domain", "domain not allowed");
             return false;
         }
 
@@ -551,7 +560,7 @@ class m_admin {
      * the account $mid is not super-admin.
      *
      * 
-     * @global    m_err   $err
+     * @global    m_messages   $msg
      * @global    m_quota $quota
      * @global    array   $classes
      * @global    int     $cuid
@@ -576,46 +585,46 @@ class m_admin {
      * @return boolean Returns FALSE if an error occurs, TRUE if not.
      */
     function add_mem($login, $pass, $nom, $prenom, $mail, $canpass = 1, $type = 'default', $duration = 0, $notes = "", $force = 0, $create_dom = '', $db_server_id) {
-        global $err, $cuid, $mem, $L_MYSQL_DATABASE, $L_MYSQL_LOGIN, $hooks, $action;
-        $err->log("admin", "add_mem", $login . "/" . $mail);
+        global $msg, $cuid, $mem, $L_MYSQL_DATABASE, $L_MYSQL_LOGIN, $hooks, $action;
+        $msg->log("admin", "add_mem", $login . "/" . $mail);
         if (!$this->enabled) {
-            $err->raise("admin", _("-- Only administrators can access this page! --"));
+            $msg->raise('Error', "admin", _("-- Only administrators can access this page! --"));
             return false;
         }
         if (empty($db_server_id)) {
-            $err->raise("admin", _("Missing db_server field"));
+            $msg->raise('Error', "admin", _("Missing db_server field"));
             return false;
         }
         if (($login == "") || ($pass == "")) {
-            $err->raise("admin", _("Please fill all mandatory fields"));
+            $msg->raise('Error', "admin", _("Please fill all mandatory fields"));
             return false;
         }
         if (!$force) {
             if ($mail == "") {
-                $err->raise("admin", _("Please fill all mandatory fields"));
+                $msg->raise('Error', "admin", _("Please fill all mandatory fields"));
                 return false;
             }
             //@todo remove cf functions.php
             if (checkmail($mail) != 0) {
-                $err->raise("admin", _("Please enter a valid email address"));
+                $msg->raise('Error', "admin", _("Please enter a valid email address"));
                 return false;
             }
         }
         $login = strtolower($login);
         if (!preg_match("#^[a-z0-9]+$#", $login)) { //$
-            $err->raise("admin", _("Login can only contains characters a-z and 0-9"));
+            $msg->raise('Error', "admin", _("Login can only contains characters a-z and 0-9"));
             return false;
         }
         if (strlen($login) > 14) {
             // Not an arbitrary value : MySQL user names can be up to 16 characters long
             // If we want to allow people to create a few mysql_user (and we want to!)
             // we have to limit the login lenght
-            $err->raise("admin", _("The login is too long (14 chars max)"));
+            $msg->raise('Error', "admin", _("The login is too long (14 chars max)"));
             return false;
         }
         // Some login are not allowed...
         if ($login == $L_MYSQL_DATABASE || $login == $L_MYSQL_LOGIN || $login == "mysql" || $login == "root") {
-            $err->raise("admin", _("Login can only contains characters a-z, 0-9 and -"));
+            $msg->raise('Error', "admin", _("Login can only contains characters a-z, 0-9 and -"));
             return false;
         }
         $pass = _md5cr($pass);
@@ -654,7 +663,7 @@ class m_admin {
 
             return $uid;
         } else {
-            $err->raise("admin", _("This login already exists"));
+            $msg->raise('Error', "admin", _("This login already exists"));
             return false;
         }
     }
@@ -663,21 +672,21 @@ class m_admin {
      * AlternC's standard function called when a user is created
      * This sends an email if configured through the interface.
      * 
-     * @global    m_err   $err
+     * @global    m_messages   $msg
      * @global    int     $cuid
      * @global    string     $L_FQDN
      * @global    string     $L_HOSTING
      * @return    boolean
      */
     function hook_admin_add_member() {
-        global $err, $cuid, $L_FQDN, $L_HOSTING;
+        global $msg, $cuid, $L_FQDN, $L_HOSTING;
         $dest = variable_get('new_email', '0', 'An email will be sent to this address when new accounts are created if set.', array('desc' => 'Enabled', 'type' => 'boolean'));
         if (!$dest) {
             return false;
         }
         $db = new DB_System();
         if (!$db->query("SELECT m.*, parent.login as parentlogin FROM membres m LEFT JOIN membres parent ON parent.uid=m.creator WHERE m.uid= ?", array($cuid))) {
-            $err->raise("admin", sprintf(_("query failed: %s "), $db->Error));
+            $msg->raise('Error', "admin", sprintf(_("query failed: %s "), $db->Error));
             return false;
         }
         if ($db->next_record()) {
@@ -709,11 +718,11 @@ EOF;
                 //sprintf(_("Email successfully sent to %s"), $dest);
                 return true;
             } else {
-                $err->raise("admin", sprintf(_("Cannot send email to %s"), $dest));
+                $msg->raise('Error', "admin", sprintf(_("Cannot send email to %s"), $dest));
                 return false;
             }
         } else {
-            $err->raise("admin", sprintf(_("Query failed: %s"), $db->Error));
+            $msg->raise('Error', "admin", sprintf(_("Query failed: %s"), $db->Error));
             return false;
         }
     }
@@ -725,7 +734,7 @@ EOF;
      * and <code>local</code>). Prevents any manipulation of the account if
      * the account $mid is not super-admin.
      *  
-     * @global    m_err   $err
+     * @global    m_messages   $msg
      * @global    m_mysql $db
      * @global    int     $cuid
      * @global    m_quota $quota
@@ -743,12 +752,12 @@ EOF;
      * @return    boolean Returns     FALSE if an error occurs, TRUE if not
      */
     function update_mem($uid, $mail, $nom, $prenom, $pass, $enabled, $canpass, $type = 'default', $duration = 0, $notes = "", $reset_quotas = false) {
-        global $err, $db, $quota;
+        global $msg, $db, $quota;
 
-        $err->log("admin", "update_mem", $uid);
+        $msg->log("admin", "update_mem", $uid);
 
         if (!$this->enabled) {
-            $err->raise("admin", _("-- Only administrators can access this page! --"));
+            $msg->raise('Error', "admin", _("-- Only administrators can access this page! --"));
             return false;
         }
         $db = new DB_System();
@@ -775,7 +784,7 @@ EOF;
             $this->renew_update($uid, $duration);
             return true;
         } else {
-            $err->raise("admin", _("Account not found"));
+            $msg->raise('Error', "admin", _("Account not found"));
             return false;
         }
     }
@@ -785,23 +794,23 @@ EOF;
      * 
      * Lock an account and prevent the user to access its account.
      * 
-     * @global    m_err   $err
+     * @global    m_messages   $msg
      * @global    m_mysql $db
      * @param     int     $uid    The uid number of the account 
      * @return    boolean         Returns FALSE if an error occurs, TRUE if not.
      */
     function lock_mem($uid) {
-        global $err, $db;
-        $err->log("admin", "lock_mem", $uid);
+        global $msg, $db;
+        $msg->log("admin", "lock_mem", $uid);
         if (!$this->enabled) {
-            $err->raise("admin", _("-- Only administrators can access this page! --"));
+            $msg->raise('Error', "admin", _("-- Only administrators can access this page! --"));
             return false;
         }
         $db = new DB_System();
         if ($db->query("UPDATE membres SET enabled='0' WHERE uid= ?;", array($uid))) {
             return true;
         } else {
-            $err->raise("admin", _("Account not found"));
+            $msg->raise('Error', "admin", _("Account not found"));
             return false;
         }
     }
@@ -812,23 +821,23 @@ EOF;
      * UnLock an account and prevent the user to access its account.
      * 
      * 
-     * @global    m_err   $err
+     * @global    m_messages   $msg
      * @global    m_mysql $db
      * @param     int     $uid    The uid number of the account 
      * @return    boolean         Returns FALSE if an error occurs, TRUE if not.
      */
     function unlock_mem($uid) {
-        global $err, $db;
-        $err->log("admin", "unlock_mem", $uid);
+        global $msg, $db;
+        $msg->log("admin", "unlock_mem", $uid);
         if (!$this->enabled) {
-            $err->raise("admin", _("-- Only administrators can access this page! --"));
+            $msg->raise('Error', "admin", _("-- Only administrators can access this page! --"));
             return false;
         }
         $db = new DB_System();
         if ($db->query("UPDATE membres SET enabled='1' WHERE uid= ?;", array($uid))) {
             return true;
         } else {
-            $err->raise("admin", _("Account not found"));
+            $msg->raise('Error', "admin", _("Account not found"));
             return false;
         }
     }
@@ -839,7 +848,7 @@ EOF;
      * Deletes the specified account. Prevents any manipulation of the account if
      * the account $mid is not super-admin.
      * 
-     * @global    m_err   $err
+     * @global    m_messages   $msg
      * @global    m_quota $quota
      * @global    array   $classes
      * @global    int     $cuid
@@ -851,11 +860,11 @@ EOF;
      * @return    boolean         Returns FALSE if an error occurs, TRUE if not.
      */
     function del_mem($uid) {
-        global $err, $mem, $dom, $hooks, $action;
-        $err->log("admin", "del_mem", $uid);
+        global $msg, $mem, $dom, $hooks, $action;
+        $msg->log("admin", "del_mem", $uid);
 
         if (!$this->enabled) {
-            $err->raise("admin", _("-- Only administrators can access this page! --"));
+            $msg->raise('Error', "admin", _("-- Only administrators can access this page! --"));
             return false;
         }
         $db = new DB_System();
@@ -865,7 +874,7 @@ EOF;
         // This script may take a long time on big accounts, let's give us some time ... Fixes 1132
         @set_time_limit(0);
         // WE MUST call m_dom before all others because of conflicts ...
-        $dom->hook_admin_del_member();
+        $dom->admin_del_member();
 
         # New way of deleting or backup delted user html folders using action class
         $path = getuserpath($tt['login']);
@@ -881,7 +890,7 @@ EOF;
             $db->query("UPDATE membres SET creator=2000 WHERE creator= ?;", array($uid));
             return true;
         } else {
-            $err->raise("admin", _("Account not found"));
+            $msg->raise('Error', "admin", _("Account not found"));
             $mem->unsu();
             return false;
         }
@@ -892,14 +901,14 @@ EOF;
      * 
      * Renew an account for its duration
      * 
-     * @global    m_err   $err
+     * @global    m_messages   $msg
      * @global    m_mysql $db
      * @param     int     $uid        The uid number of the account 
      * @param     int     $periods    The new duration, in months, of the account
      * @return    boolean             Returns FALSE if an error occurs, TRUE if not.
      */
     function renew_mem($uid, $periods = 1) {
-        global $err, $db;
+        global $msg, $db;
 
         $periods = intval($periods);
         if ($periods == 0) {
@@ -908,7 +917,7 @@ EOF;
         if ($db->query("UPDATE membres SET renewed = renewed + INTERVAL (duration * ?) MONTH WHERE uid= ?;", array($periods, $uid))) {
             return true;
         } else {
-            $err->raise("admin", _("Account not found"));
+            $msg->raise('Error', "admin", _("Account not found"));
             return false;
         }
     }
@@ -916,14 +925,14 @@ EOF;
     /**
      * Update the duration information for an account
      * 
-     * @global    m_err   $err
+     * @global    m_messages   $msg
      * @global    m_mysql $db
      * @param     int     $uid        The uid number of the account 
      * @param     int     $duration   The new duration, in months, of the account
      * @return    boolean             Returns FALSE if an error occurs, TRUE if not.
      */
     function renew_update($uid, $duration) {
-        global $err, $db;
+        global $msg, $db;
 
         if ($duration == 0) {
             if ($db->query("UPDATE membres SET duration = NULL, renewed = NULL WHERE uid= ?;", array($uid))) {
@@ -936,7 +945,7 @@ EOF;
             }
         }
 
-        $err->raise("admin", _("Account not found"));
+        $msg->raise('Error', "admin", _("Account not found"));
         return false;
     }
 
@@ -1005,20 +1014,20 @@ EOF;
     /**
      * Turns a common account into a super-admin account
      * 
-     * @global    m_err   $err
+     * @global    m_messages   $msg
      * @global    m_mysql $db
      * @param     int     $uid        The uid number of the account 
      * @return    boolean    
      */
     function normal2su($uid) {
-        global $err, $db;
+        global $msg, $db;
         $db->query("SELECT su FROM membres WHERE uid= ?;", array($uid));
         if (!$db->next_record()) {
-            $err->raise("admin", _("Account not found"));
+            $msg->raise('Error', "admin", _("Account not found"));
             return false;
         }
         if ($db->Record["su"] != 0) {
-            $err->raise("admin", _("This account is ALREADY an administrator account"));
+            $msg->raise('Error', "admin", _("This account is ALREADY an administrator account"));
             return false;
         }
         $db->query("UPDATE membres SET su=1 WHERE uid= ?;", array($uid));
@@ -1028,20 +1037,20 @@ EOF;
     /**
      * Turns a super-admin account into a common account
      * 
-     * @global    m_err   $err
+     * @global    m_messages   $msg
      * @global    m_mysql $db
      * @param     int     $uid        The uid number of the account 
      * @return boolean                Returns FALSE if an error occurs, TRUE if not.
      */
     function su2normal($uid) {
-        global $err, $db;
+        global $msg, $db;
         $db->query("SELECT su FROM membres WHERE uid= ?;", array($uid));
         if (!$db->next_record()) {
-            $err->raise("admin", _("Account not found"));
+            $msg->raise('Error', "admin", _("Account not found"));
             return false;
         }
         if ($db->Record["su"] != 1) {
-            $err->raise("admin", _("This account is NOT an administrator account!"));
+            $msg->raise('Error', "admin", _("This account is NOT an administrator account!"));
             return false;
         }
         $db->query("UPDATE membres SET su=0 WHERE uid= ?;", array($uid));
@@ -1219,15 +1228,15 @@ EOF;
      * from its account
      * 
      * @global    m_mysql $db
-     * @global    m_err   $err
+     * @global    m_messages   $msg
      * @param     string  $domain     Domain name to lock / unlock
      * @return    boolean             TRUE if the domain has been locked/unlocked or FALSE if it does not exist.
      */
     function dom_lock($domain) {
-        global $db, $err;
+        global $db, $msg;
         $db->query("SELECT compte FROM domaines WHERE domaine= ?;", array($domain));
         if (!$db->next_record()) {
-            $err->raise("dom", _("Domain '%s' not found."), $domain);
+            $msg->raise('Error', "dom", _("Domain '%s' not found."), $domain);
             return false;
         }
         $db->query("UPDATE domaines SET noerase=1-noerase WHERE domaine= ?;", array($domain));
@@ -1238,15 +1247,15 @@ EOF;
      * Add a new TLD to the list of the authorized TLDs 
      * 
      * @global    m_mysql $db
-     * @global    m_err   $err
+     * @global    m_messages   $msg
      * @param     string      $tld    top-level domain to add (org, com...)
      * @return    boolean             TRUE if the tld has been successfully added, FALSE if not.
      */
     function gettld($tld) {
-        global $db, $err;
+        global $db, $msg;
         $db->query("SELECT mode FROM tld WHERE tld= ?;", array($tld));
         if (!$db->next_record()) {
-            $err->raise("admin", _("This TLD does not exist"));
+            $msg->raise('Error', "admin", _("This TLD does not exist"));
             return false;
         }
         return $db->Record["mode"];
@@ -1273,16 +1282,16 @@ EOF;
      * on this TLD
      * 
      * @global    m_mysql $db
-     * @global    m_err   $err
+     * @global    m_messages   $msg
      * @param     string  $tld   The TLD you want to delete
      * @return    boolean         returns true if the TLD has been deleted, or
      * false if an error occured.
      */
     function deltld($tld) {
-        global $db, $err;
+        global $db, $msg;
         $db->query("SELECT tld FROM tld WHERE tld= ?;", array($tld));
         if (!$db->next_record()) {
-            $err->raise("admin", _("This TLD does not exist"));
+            $msg->raise('Error', "admin", _("This TLD does not exist"));
             return false;
         }
         $db->query("DELETE FROM tld WHERE tld= ?;", array($tld));
@@ -1298,23 +1307,23 @@ EOF;
      *  domain!
      * 
      * @global    m_mysql $db
-     * @global    m_err   $err
+     * @global    m_messages   $msg
      * @param     string  $tld        string TLD we want to authorize
      * @param     boolean $mode       Controls to make on this TLD.
      * @return    boolean             TRUE if the TLD has been successfully
      *  added. FALSE if not.
      */
     function addtld($tld, $mode) {
-        global $db, $err;
+        global $db, $msg;
         if (!$tld) {
-            $err->raise("admin", _("The TLD name is mandatory"));
+            $msg->raise('Error', "admin", _("The TLD name is mandatory"));
             return false;
         }
         $tld = trim($tld);
 
         $db->query("SELECT tld FROM tld WHERE tld= ?;", array($tld));
         if ($db->next_record()) {
-            $err->raise("admin", _("This TLD already exist"));
+            $msg->raise('Error', "admin", _("This TLD already exist"));
             return false;
         }
         if (substr($tld, 0, 1) == ".") {
@@ -1332,7 +1341,7 @@ EOF;
      * Modify a TLD of the list of the authorized TLDs 
      * 
      * @global    m_mysql $db
-     * @global    m_err   $err
+     * @global    m_messages   $msg
      * @param     string  $tld    TLD we want to modify
      * @param     int     $mode   Controls to make on this TLD.
      * @return    boolean         TRUE if the TLD has been successfully
@@ -1340,10 +1349,10 @@ EOF;
 
      */
     function edittld($tld, $mode) {
-        global $db, $err;
+        global $db, $msg;
         $db->query("SELECT tld FROM tld WHERE tld= ?;", array($tld));
         if (!$db->next_record()) {
-            $err->raise("admin", _("This TLD does not exist"));
+            $msg->raise('Error', "admin", _("This TLD does not exist"));
             return false;
         }
         $mode = intval($mode);
@@ -1442,40 +1451,40 @@ EOF;
     /**
      * 
      * @global    m_mysql $db
-     * @global    m_err   $err
+     * @global    m_messages   $msg
      * @param     string  $policy     Name of the policy to check for
      * @param     string  $login      The login that will be set
      * @param     string  $password   The password we have to check
      * @return    boolean             TRUE if the password if OK for this login and this policy, FALSE if it is not.
      */
-    function checkPolicy($policy, $login, $password) {
-        global $err;
+    function checkPolicy($policy, $login, $password, $canbeempty = false) {
+        global $msg;
 
         if (empty($login)) {
-            $err->raise("admin", _("Please enter a login"));
+            $msg->raise('alert', "admin", _("Please enter a login"));
             return false;
         }
-        if (empty($password)) {
-            $err->raise("admin", _("Please enter a password"));
+        if (empty($password) && !$canbeempty) {
+            $msg->raise('alert', "admin", _("Please enter a password"));
             return false;
         }
 
         $pol = $this->listPasswordPolicies();
         if (!$pol[$policy]) {
-            $err->raise("admin", _("-- Program error -- The requested password policy does not exist!"));
+            $msg->raise('Error', "admin", _("-- Program error -- The requested password policy does not exist!"));
             return false;
         }
         $pol = $pol[$policy];
         // Ok, now let's check it : 
         $plen = strlen($password);
 
-        if ($plen < $pol["minsize"]) {
-            $err->raise("admin", _("The password length is too short according to the password policy"));
+        if ($plen < $pol["minsize"] && !($canbeempty && empty($password))) {
+            $msg->raise('Error', "admin", _("The password length is too short according to the password policy"));
             return false;
         }
 
-        if ($plen > $pol["maxsize"]) {
-            $err->raise("admin", _("The password is too long according to the password policy"));
+        if ($plen > $pol["maxsize"] && !($canbeempty && empty($password))) {
+            $msg->raise('Error', "admin", _("The password is too long according to the password policy"));
             return false;
         }
 
@@ -1488,13 +1497,13 @@ EOF;
                     continue;
                 }
                 if (strpos($password, $l) !== false || strpos($l, $password) !== false) {
-                    $err->raise("admin", _("The password policy prevents you to use your login name inside your password or the other way around"));
+                    $msg->raise('Error', "admin", _("The password policy prevents you to use your login name inside your password or the other way around"));
                     return false;
                 }
             }
         }
 
-        if ($pol["classcount"] > 0) {
+        if ($pol["classcount"] > 0 && !($canbeempty && empty($password))) {
             $cls = array(0, 0, 0, 0, 0);
             for ($i = 0; $i < strlen($password); $i++) {
                 $p = substr($password, $i, 1);
@@ -1512,7 +1521,7 @@ EOF;
             } // foreach
             $clc = array_sum($cls);
             if ($clc < $pol["classcount"]) {
-                $err->raise("admin", _("Your password contains not enough different classes of character, between low-case, up-case, figures and special characters."));
+                $msg->raise('Error', "admin", _("Your password contains not enough different classes of character, between low-case, up-case, figures and special characters."));
                 return false;
             }
         }

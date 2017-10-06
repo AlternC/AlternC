@@ -68,7 +68,6 @@ class DB_Sql {
    * @return the class variable $Link_ID
    */
   function connect($Database = "", $Host = "", $User = "", $Password = "") {
-     global $err;
      $this->halt('Mysql::connect() : This function should no longer be used');
      /* Handle defaults */
      if ("" == $Database)
@@ -348,8 +347,8 @@ class DB_Sql {
 
   /* public: return table metadata */
   function metadata($table='',$full=false) {
-     global $err;
-     $err->raise('Mysql', 'function is no longer implemented (metadata())');
+     global $msg;
+     $msg->raise("Error", 'Mysql', 'function is no longer implemented (metadata())');
      return FALSE;
   }
 

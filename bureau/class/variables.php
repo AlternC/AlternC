@@ -110,8 +110,8 @@ function variable_get($name, $default = null, $createit_comment = null) {
  *   of serialization as necessary.
  */
 function variable_set($name, $value, $comment = null) {
-    global $conf, $db, $err, $hooks;
-    $err->log('variable', 'variable_set', '+' . serialize($value) . '+' . $comment . '+');
+    global $conf, $db, $msg, $hooks;
+    $msg->log('variable', 'variable_set', '+' . serialize($value) . '+' . $comment . '+');
 
     variable_init_maybe();
     

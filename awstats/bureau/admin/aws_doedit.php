@@ -33,7 +33,7 @@ $fields = array (
 getFields($fields);
 
 if (!$id) {
-	$error=_("No Statistics selected!");
+	$msg->raise('Error', "aws", _("No Statistics selected!"));
 } else {
   $ha ="";
   foreach($hostaliases as $ho) 
@@ -41,11 +41,10 @@ if (!$id) {
   
   $r=$aws->put_stats_details($id,$awsusers,$ha,$public);
 	if (!$r) {
-		$error=$err->errstr();
 		include("aws_edit.php");
 		exit();
 	} else {
-		$error=_("The Statistics has been successfully changed");
+		$msg->raise('Ok', "aws", _("The Statistics has been successfully changed"));
 		include("aws_list.php");
 		exit();
 	}

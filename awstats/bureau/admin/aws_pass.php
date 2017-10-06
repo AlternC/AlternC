@@ -26,28 +26,26 @@ require_once("../class/config.php");
 
 $fields = array (
 	"login" => array ("request", "string", ""),
-	"pass"  => array ("request", "string", ""),
-	"passconf"  => array ("request", "string", ""),
+	"pass"  => array ("post", "string", ""),
+	"passconf"  => array ("post", "string", ""),
+	"confirm"  => array ("post", "string", ""),
 );
 
 getFields($fields);
 
 if (!$aws->login_exists($login)) {
-	$error=$err->errstr();
 	include("aws_users.php");
 	exit();
 }
 
-if ($pass) {
-    if ($pass != $passconf) {
-	$error = _("Passwords do not match");
-	include("aws_users.php");
-        exit();
-    }else{
-	if (!$aws->change_pass($login,$pass)) {
-		$error=$err->errstr();
-	} else {
-		$error = _("Password successfuly updated");
+if ($confirm == 1) {
+    if (empty($pass) || is_null($pass)) {
+	$msg->raise('Error', "aws", _("Please enter a password"));
+    } else if ($pass != $passconf) {
+	$msg->raise('Error', "aws", _("Passwords do not match"));
+    } else {
+	if ($aws->change_pass($login,$pass)) {
+		$msg->raise('Ok', "aws", _("Password successfuly updated"));
 		include("aws_users.php");
 		exit();
 	}
@@ -56,22 +54,24 @@ if ($pass) {
 
 include_once("head.php");
 
+$c=$admin->listPasswordPolicies();
+$passwd_classcount = $c['aws']['classcount'];
+
 ?>
 <h3><?php __("Change a user's password"); ?></h3>
 <?php
-if (isset($error) && $error) {
+echo $msg->msg_html_all();
 ?>
-<p class="error"><?php echo $error ; $error=''; ?></p>
-<?php } ?>
 
 <form method="post" action="aws_pass.php" name="main" id="main">
 <?php csrf_get(); ?>
+<input type="hidden" name="confirm" value="1" />
 <table class="tedit">
 <tr><th>
 <?php __("Username"); ?></th><td>
 	<code><?php echo $login; ?></code> <input type="hidden" name="login" value="<?php echo $login; ?>" />
 </td></tr>
-<tr><th><label for="pass"><?php __("New Password"); ?></label></th><td><input type="password" class="int" name="pass" id="pass" value="<?php echo $pass; ?>" size="20" maxlength="64" /><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#pass","#passconf"); ?></td></tr>
+<tr><th><label for="pass"><?php __("New Password"); ?></label></th><td><input type="password" class="int" name="pass" id="pass" value="<?php echo $pass; ?>" size="20" maxlength="64" /><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#pass","#passconf",$passwd_classcount); ?></td></tr>
 <tr><th><label for="passconf"><?php __("Confirm password"); ?></label></th><td><input type="password" class="int" name="passconf" id="passconf" value="" size="20" maxlength="64" /></td></tr>
 <tr class="trbtn"><td colspan="2">
   <input type="submit" class="inb" name="submit" value="<?php __("Change this user's password"); ?>" />

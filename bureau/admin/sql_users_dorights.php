@@ -51,7 +51,8 @@ foreach($mysql->get_dblist() as $d){
   $mysql->set_user_rights($id,$d['db'],$rights);
 }
 
-$info=_("The rights has been successfully applied to the user");
+$msg->raise("ok", "mysql", _("The rights has been successfully applied to the user"));
+
 include("sql_users_list.php");
 
 ?>

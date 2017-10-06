@@ -43,6 +43,7 @@ if ($mem->user["lastfail"]) {
 	printf(_("%1\$d login failed since last login")."<br />",$mem->user["lastfail"]);
 }
 
+echo $msg->msg_html_all();
 if (!empty($error) ) { echo "<p class='alert alert-danger'>$error</p>";$error=''; } 
 
 $feed_url = variable_get('rss_feed', '', 'This is an RSS feed that will be displayed on the users homepages when they log in.', array('desc'=>'URL','type'=>'string'));

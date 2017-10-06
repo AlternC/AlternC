@@ -38,10 +38,13 @@ getFields($fields);
 
 if (!empty($confirm_del)) {
   reset($d);
-  if (!$hta->del_user($d,$dir)) {
-    $error=$err->errstr();
+  if ($hta->del_user($d,$dir)) {
+    foreach ($d as $v) {
+      $msg->raise("Ok", "hta", _("The user '%s' was successfully deleted"), $v);
+    }
   }
-  header ('Location: /hta_edit.php?dir='.urlencode($dir));
+  $is_include=true;
+  include_once("hta_edit.php");
   exit();
 }
 include_once('head.php');
@@ -52,7 +55,7 @@ include_once('head.php');
   <?php __("Do you really want to delete those users ?");?>
   <ul>
   <?php foreach($d as $t) {
-    echo "<li>".ehe($t,false)."</li>\n";
+    echo "<li><b>".ehe($t,false)."</b></li>\n";
   } ?>
   </ul>
 

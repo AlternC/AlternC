@@ -35,20 +35,14 @@ $fields = array (
 );
 getFields($fields);
 
-if(!isset($error)){
-	$error="";
-}
-
 if ($confirm=="y" ) {
   reset($_POST);
   while (list($key,$val)=each($_POST)) {
     if (substr($key,0,4)=="del_") {
       // Effacement de la base $val
       $r=$mysql->del_db(substr($key,4));
-      if (!$r) {
-	$error.=$err->errstr()."<br />";
-      } else {
-	$error.=sprintf(_("The database %s has been successfully deleted"),$val)."<br />";
+      if ($r) {
+	$msg->raise("ok", "mysql", _("The database '%s' has been successfully deleted"), $val);
       }
     }
   }
@@ -63,7 +57,7 @@ foreach($_POST as $key=>$val) {
   }
 }
 if (!$found) {
-  $error=_("Please check which databases you want to delete"); 
+  $msg->raise("alert", "mysql", _("Please check which databases you want to delete"));
   include("sql_list.php");
   exit();
  }
@@ -82,7 +76,7 @@ if (!$found) {
 reset($_POST);
 while (list($key,$val)=each($_POST)) {
   if (substr($key,0,4)=="del_") {
-      echo "<input type=\"hidden\" name=\"".ehe($key,false)."\" value=\"".ehe($val,false)."\" />".ehe($val,false)."<br />\n";
+      echo "<input type=\"hidden\" name=\"".ehe($key,false)."\" value=\"".ehe($val,false)."\" /><ul><li><b>".ehe($val,false)."</b></li></ul>\n";
   }
 }
 

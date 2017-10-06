@@ -283,6 +283,7 @@ img {
 }
 .alert > p, .alert > ul {
     margin-bottom: 0;
+    margin-top: 0;
 }
 .alert > p + p {
     margin-top: 5px;
@@ -351,7 +352,7 @@ img {
 
 /* Alert icons */
 #content .alert {
-    background-position: 12px 10px;
+    background-position: 12px center;
     background-repeat: no-repeat;
     padding-left: 48px;
 }
@@ -610,11 +611,11 @@ table.searchtable td {
 
 }
 
-#newdomwww, #sub, #usernpfx, #dbnpfx {
+#newdomwww, #sub, #usernpfx, #dbnpfx, #account_namefx {
   border-right: 0;
   padding-right: 0;
 }
-#newdomain, #newsubname, #usern, #dbn {
+#newdomain, #newsubname, #usern, #dbn, #account_name {
   border-left: 0;
   padding-left: 0;
 }

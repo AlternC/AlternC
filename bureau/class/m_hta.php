@@ -78,29 +78,26 @@ class m_hta {
      * 
      * @global    m_mem   $mem
      * @global    m_bro   $bro
-     * @global    m_err   $err
+     * @global    m_messages   $msg
      * @param     string  $dir
      * @return    boolean
      */
     function CreateDir($dir) {
-        global $bro, $err;
-        $err->log("hta", "createdir", $dir);
+        global $bro, $msg;
+        $msg->log("hta", "createdir", $dir);
         $absolute = $bro->convertabsolute($dir, 0);
-        if (!$absolute) {
-            $err->raise("hta", printf(_("The folder '%s' does not exist"), $dir));
+        if (!is_dir($absolute)) {
+            $msg->raise('Error', "hta", _("The folder '%s' does not exist"), $dir);
             return false;
-        }
-        if (!file_exists($absolute)) {
-            @mkdir($absolute, 00777);
         }
         if (!file_exists("$absolute/.htaccess")) {
             if (!@touch("$absolute/.htaccess")) {
-                $err->raise("hta", _("File already exist"));
+                $msg->raise('Error', "hta", _("File already exist"));
                 return false;
             }
             $file = @fopen("$absolute/.htaccess", "r+");
             if (!$file) {
-                $err->raise("hta", _("File already exist"));
+                $msg->raise('Error', "hta", _("File already exist"));
                 return false;
             }
             fseek($file, 0);
@@ -110,7 +107,7 @@ class m_hta {
         }
         if (!file_exists("$absolute/.htpasswd")) {
             if (!touch("$absolute/.htpasswd")) {
-                $err->raise("hta", _("File already exist"));
+                $msg->raise('Error', "hta", _("File already exist"));
                 return false;
             }
             return true;
@@ -121,18 +118,18 @@ class m_hta {
     /**
      * Returns the list of all user folder currently protected by a .htpasswd file
      * 
-     * @global    m_err   $err
+     * @global    m_messages   $msg
      * @global    m_mem   $mem
      * @return    array           Array containing user folder list
      */
     function ListDir() {
-        global$err, $mem;
-        $err->log("hta", "listdir");
+        global$msg, $mem;
+        $msg->log("hta", "listdir");
         $sortie = array();
         $absolute = ALTERNC_HTML . "/" . substr($mem->user["login"], 0, 1) . "/" . $mem->user["login"];
         exec("find " . escapeshellarg($absolute) . " -name .htpasswd|sort", $sortie);
         if (!count($sortie)) {
-            $err->raise("hta", _("No protected folder"));
+            $msg->raise('Info', "hta", _("No protected folder"));
             return false;
         }
         $pattern = "/^" . preg_quote(ALTERNC_HTML, "/") . "\/.\/[^\/]*\/(.*)\/\.htpasswd/";
@@ -151,13 +148,13 @@ class m_hta {
      * Tells if a folder is protected.
      * 
      * @global    m_mem   $mem
-     * @global    m_err   $err
+     * @global    m_messages   $msg
      * @param     string  $dir    Folder to check
      * @return    boolean         If the folder is protected, or FALSE if it is not
      */
     function is_protected($dir) {
-        global $mem, $err;
-        $err->log("hta", "is_protected", $dir);
+        global $mem, $msg;
+        $msg->log("hta", "is_protected", $dir);
         $absolute = ALTERNC_HTML . "/" . substr($mem->user["login"], 0, 1) . "/" . $mem->user["login"] . "/$dir";
         if (file_exists("$absolute/.htpasswd")) {
             return true;
@@ -170,13 +167,13 @@ class m_hta {
      * Returns the list of login for a protected folder.
      * 
      * @global    m_mem   $mem
-     * @global    m_err   $err
+     * @global    m_messages   $msg
      * @param     string  $dir    The folder to lookup (relative to user root)
      * @return    array           An array containing the list of logins from the .htpasswd file, or FALSE
      */
     function get_hta_detail($dir) {
-        global $mem, $err;
-        $err->log("hta", "get_hta_detail");
+        global $mem, $msg;
+        $msg->log("hta", "get_hta_detail");
         $absolute = ALTERNC_HTML . "/" . substr($mem->user["login"], 0, 1) . "/" . $mem->user["login"] . "/$dir";
         if (file_exists("$absolute/.htaccess")) {
             /* 		if (!_reading_htaccess($absolute)) {
@@ -208,22 +205,22 @@ class m_hta {
      * 
      * @global    m_mem   $mem
      * @global    m_bro   $bro
-     * @global    m_err   $err
+     * @global    m_messages   $msg
      * @param     string  $dir    Folder to unprotect, relative to user root
      * @param     boolean $skip   For testing purpose mainly, skips the full user path search
      * @return    boolean         TRUE if the folder has been unprotected, or FALSE if an error occurred
      */
     function DelDir($dir, $skip = false) {
-        global $bro, $err;
-        $err->log("hta", "deldir", $dir);
+        global $bro, $msg;
+        $msg->log("hta", "deldir", $dir);
         $dir = $bro->convertabsolute($dir, $skip);
         if (!$dir) {
-            $err->raise("hta", printf(("The folder '%s' does not exist"), $dir));
+            $msg->raise('Error', "hta", ("The folder '%s' does not exist"), $dir);
             return false;
         }
         $htaccess_file = "$dir/.htaccess";
         if (!is_readable($htaccess_file)) {
-            $err->raise("hta", printf(_("I cannot read the file '%s'"), $htaccess_file));
+            $msg->raise('Error', "hta", _("I cannot read the file '%s'"), $htaccess_file);
         }
         $fileLines = file($htaccess_file);
         $patternList = array(
@@ -243,21 +240,21 @@ class m_hta {
         }
         // If no changes 
         if (!$count_lines) {
-            $err->raise("hta", printf(_("Unexpected: No changes made to '%s'"), $htaccess_file));
+            $msg->raise('Alert', "hta", _("Unexpected: No changes made to '%s'"), $htaccess_file);
         }
         // If file is empty, remove it
         if (!count($fileLines)) {
             if (!unlink($htaccess_file)) {
-                $err->raise("hta", printf(_("I could not delete the file '%s'"), $htaccess_file));
+                $msg->raise('Error', "hta", _("I could not delete the file '%s'"), $htaccess_file);
             }
         } else {
             file_put_contents($htaccess_file, implode("\n", $fileLines));
         }
         $htpasswd_file = "$dir/.htpasswd";
         if (!is_writable($htpasswd_file)) {
-            $err->raise("hta", printf(_("I cannot read the file '%s'"), $htpasswd_file));
+            $msg->raise('Error', "hta", _("I cannot read the file '%s'"), $htpasswd_file);
         } else if (!unlink($htpasswd_file)) {
-            $err->raise("hta", printf(_("I cannot delete the file '%s/.htpasswd'"), $dir));
+            $msg->raise('Error', "hta", _("I cannot delete the file '%s/.htpasswd'"), $dir);
             return false;
         }
 
@@ -267,7 +264,7 @@ class m_hta {
     /**
      * Add a user to a protected folder
      * 
-     * @global    m_err   $err
+     * @global    m_messages   $msg
      * @global    m_bro   $bro
      * @global    m_admin $admin
      * @param     string  $user
@@ -278,19 +275,19 @@ class m_hta {
      * @return    boolean             TRUE if the user has been added, or FALSE if an error occurred
      */
     function add_user($user, $password, $dir) {
-        global $err, $bro, $admin;
-        $err->log("hta", "add_user", $user . "/" . $dir);
+        global $msg, $bro, $admin;
+        $msg->log("hta", "add_user", $user . "/" . $dir);
         if (empty($user)) {
-            $err->raise('hta', _("Please enter a user"));
+            $msg->raise('Error', 'hta', _("Please enter a user"));
             return false;
         }
         if (empty($password)) {
-            $err->raise('hta', _("Please enter a password"));
+            $msg->raise('Error', 'hta', _("Please enter a password"));
             return false;
         }
         $absolute = $bro->convertabsolute($dir, 0);
         if (!file_exists($absolute)) {
-            $err->raise("hta", printf(("The folder '%s' does not exist"), $dir));
+            $msg->raise('Error', "hta", _("The folder '%s' does not exist"), $dir);
             return false;
         }
         // @todo delete cf!. functions.php checkloginemail definition
@@ -304,7 +301,7 @@ class m_hta {
 
             $file = @fopen("$absolute/.htpasswd", "a+");
             if (!$file) {
-                $err->raise("hta", _("File already exist"));
+                $msg->raise('Error', "hta", _("File already exist"));
                 return false;
             }
             fseek($file, 0);
@@ -312,7 +309,7 @@ class m_hta {
                 $s = fgets($file, 1024);
                 $t = explode(":", $s);
                 if ($t[0] == $user) {
-                    $err->raise("hta", _("The user '%s' already exist for this folder"), $user);
+                    $msg->raise('Error', "hta", _("The user '%s' already exist for this folder"), $user);
                     return false;
                 }
             }
@@ -324,7 +321,7 @@ class m_hta {
             fclose($file);
             return true;
         } else {
-            $err->raise("hta", _("Please enter a valid username"));
+            $msg->raise('Error', "hta", _("Please enter a valid username"));
             return false;
         }
     }
@@ -333,24 +330,24 @@ class m_hta {
      * Delete a user from a protected folder.
      * 
      * @global    m_bro   $bro
-     * @global    m_err   $err
+     * @global    m_messages   $msg
      * @param     array   $lst    An array with login to delete.
      * @param     string  $dir    The folder, relative to user root, where we want to delete users.
      * @return    boolean         TRUE if users has been deleted, or FALSE if an error occurred.
      */
     function del_user($lst, $dir) {
-        global $bro, $err;
-        $err->log("hta", "del_user", $lst . "/" . $dir);
+        global $bro, $msg;
+        $msg->log("hta", "del_user", $lst . "/" . $dir);
         $absolute = $bro->convertabsolute($dir, 0);
         if (!file_exists($absolute)) {
-            $err->raise("hta", printf(_("The folder '%s' does not exist"), $dir));
+            $msg->raise('Error', "hta", _("The folder '%s' does not exist"), $dir);
             return false;
         }
         touch("$absolute/.htpasswd.new");
         $file = fopen("$absolute/.htpasswd", "r");
         $newf = fopen("$absolute/.htpasswd.new", "a");
         if (!$file || !$newf) {
-            $err->raise("hta", _("File already exist"));
+            $msg->raise('Error', "hta", _("File already exist"));
             return false;
         }
         reset($lst);
@@ -378,11 +375,11 @@ class m_hta {
      * @return boolean TRUE if the password has been changed, or FALSE if an error occurred
      */
     function change_pass($user, $newpass, $dir) {
-        global $bro, $err, $admin;
-        $err->log("hta", "change_pass", $user . "/" . $dir);
+        global $bro, $msg, $admin;
+        $msg->log("hta", "change_pass", $user . "/" . $dir);
         $absolute = $bro->convertabsolute($dir, 0);
         if (!file_exists($absolute)) {
-            $err->raise("hta", printf(_("The folder '%s' does not exist"), $dir));
+            $msg->raise('Error', "hta", _("The folder '%s' does not exist"), $dir);
             return false;
         }
 
@@ -397,7 +394,7 @@ class m_hta {
         $file = fopen("$absolute/.htpasswd", "r");
         $newf = fopen("$absolute/.htpasswd.new", "a");
         if (!$file || !$newf) {
-            $err->raise("hta", _("File already exist"));
+            $msg->raise('Error', "hta", _("File already exist"));
             return false;
         }
         while (!feof($file)) {
@@ -418,14 +415,14 @@ class m_hta {
     /**
      * Check that a .htaccess file is valid (for authentication)
      * 
-     * @global    m_err   $err
+     * @global    m_messages   $msg
      * @param     type    $absolute
      * @param     string  $absolute   Folder we want to check (relative to user root)
      * @return    boolean             TRUE is the .htaccess is protecting this folder, or FALSE else
      */
     private function _reading_htaccess($absolute) {
-        global $err;
-        $err->log("hta", "_reading_htaccess", $absolute);
+        global $msg;
+        $msg->log("hta", "_reading_htaccess", $absolute);
         $file = fopen("$absolute/.htaccess", "r+");
         $lignes = array(1, 1, 1);
         $errr = 0;
@@ -452,7 +449,7 @@ class m_hta {
         } // Reading config file
         fclose($file);
         if ($errr || in_array(0, $lignes)) {
-            $err->raise("hta", _("An incompatible .htaccess file exists in this folder"));
+            $msg->raise('Error', "hta", _("An incompatible .htaccess file exists in this folder"));
             return false;
         }
         return true;

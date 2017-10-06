@@ -44,28 +44,10 @@ if(!$domain_id ) {
   exit();
 }
 
-$fatal=false;
-
 if ($domain=$dom->get_domain_byid($domain_id)) {
-  if(!($mails_list = $mail->enum_domain_mails($domain_id,$search,$offset,$count,$show_systemmails)) && $search) {
-    $error=$err->errstr();
-  }
+  $mails_list = $mail->enum_domain_mails($domain_id,$search,$offset,$count,$show_systemmails);
   $allmails_list = $mail->enum_domain_mails($domain_id,$search,$offset,$count,'true');
-} else {
-  $error=$err->errstr();
-  $fatal=true;
 }
-
-if ($fatal) {
-  echo "<div class=\"alert alert-danger\">$error</div>";
-} else {
-
-  if (isset($error) && !empty($error)) {
-	echo "<p class='alert alert-danger'>$error</p>";
-  } else if (isset($success)) {
-        echo "<p class=\"alert alert-success\">$success</p>";
-}
-
 ?>
 
 <table>
@@ -75,7 +57,10 @@ if ($fatal) {
   echo '<h3>'._("Create a new mail account")."</h3>";
 } else {
   echo '<h3>'._("Manage Catch-all")."</h3>";
-} ?>
+}
+
+echo $msg->msg_html_all("<li>", true, true);
+?>
     </td>
   </tr>
   <tr>
@@ -100,9 +85,8 @@ if ($fatal) {
 <h3><?php printf(_("Email addresses of the domain %s"),$domain); ?> : </h3>
 <?php
 if (empty($allmails_list) && empty($search)) {
-  echo "<p><i>";
-  __("No mails for this domain.");
-  echo "</i></p><br/>";
+  $msg->raise('Error', 'mail', _("No mails for this domain."));
+  echo $msg->msg_html_all();
 } else {
 
 ?>
@@ -188,7 +172,7 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
 </form>
 
 <?php
-    } } // end if no mail for this domain
+    } // end if no mail for this domain
 ?>
 <hr/>
 
@@ -302,7 +286,6 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
     </div>
 </div><!-- tabs-mailhelp-in -->
 </div><!-- tabs-mailhelp -->
-
 
 <script type="text/javascript">
 

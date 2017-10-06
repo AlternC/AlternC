@@ -41,8 +41,7 @@ $dom->lock();
 $r=true;
 if (!isset($noread) || !$noread) {
   if (!$r=$dom->get_sub_domain_all($sub_domain_id)) {
-    $error=$err->errstr();
-    echo "<p class=\"alert alert-danger\">$error</p>";
+    echo $msg->msg_html_all();
     include_once('foot.php');
     die();
   }
@@ -56,21 +55,24 @@ if (!$r) {
 
 $dt=$dom->domains_type_lst();
 if (!$isinvited && $dt[strtolower($r['type'])]["enable"] != "ALL" ) {
-  __("This page is restricted to authorized staff");
+  $msg->raise('Error', "dom", _("This page is restricted to authorized staff"));
+  include("dom_edit.php");
   exit();
 }
 
 $domroot=$dom->get_domain_all($r['domain']);
+$dom->unlock();
+
+if ($msg->has_msgs("Error")) {
+  include_once("dom_edit.php");
+  exit();
+} 
 
 echo "<h3>";
 __("Editing subdomain");
 echo " http://"; ecif($r['name'],$r['name']."."); echo $r['domain']."</h3>";
-if (isset($error) && $error) {
-  echo "<p class=\"alert alert-danger\">$error</p>";
-  include_once("foot.php");
-  exit();
-} 
-$dom->unlock();
+
+echo $msg->msg_html_all();
 ?>
 
 <hr id="topbar"/>

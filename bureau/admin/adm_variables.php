@@ -30,7 +30,8 @@
 require_once("../class/config.php");
 
 if (!$admin->enabled) {
-	__("This page is restricted to authorized staff");
+	$msg->raise('Error', "admin", _("This page is restricted to authorized staff"));
+	echo $msg->msg_html_all();
 	exit();
 }
 
@@ -47,7 +48,7 @@ include_once ("head.php");
 <h3><?php __("Configure AlternC variables"); ?></h3>
 <hr id="topbar"/>
 <br />
-
+<?php echo $msg->msg_html_all(); ?>
 <p>
 <?php __("Here are the internal AlternC variables that are currently being used."); ?>
 </p>

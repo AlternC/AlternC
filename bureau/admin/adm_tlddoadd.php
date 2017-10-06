@@ -30,7 +30,8 @@
 require_once("../class/config.php");
 
 if (!$admin->enabled) {
-	__("This page is restricted to authorized staff");
+	$msg->raise('Error', "admin", _("This page is restricted to authorized staff"));
+	echo $msg->msg_html_all();
 	exit();
 }
 
@@ -42,11 +43,10 @@ getFields($fields);
 
 
 if (!$admin->addtld($tld,$mode)) {
-	$error=$err->errstr();
 	include("adm_tldadd.php");
 	exit();
 } else {
-	$error=_("The TLD has been successfully added");
+	$msg->raise("Ok", "admin", _("The TLD has been successfully added"));
 	include("adm_tld.php");
 	exit();
 }

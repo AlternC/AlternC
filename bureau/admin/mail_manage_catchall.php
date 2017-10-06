@@ -34,37 +34,32 @@ $fields = array (
 getFields($fields);
 
 if (is_null($domain_id)) { 
-  echo "<p alert alert-danger\>";
-  __("Problem with the domain");
-  echo"</p>";
-  include_once("foot.php"); 
+  $msg->raise("Error", "mail", _("Problem with the domain"));
+  include_once("mail_list.php"); 
   exit();
 }
 
 if (!is_null($target_type)) {
   switch ($target_type) {
     case "none":
-      $mail->catchall_del($domain_id);
-      $error=_("Catchall successfully deleted");
+      if ($mail->catchall_del($domain_id))
+        $msg->raise("Ok", "mail", _("Catchall successfully deleted"));
+
       require_once("mail_list.php");
       exit();
       break;
     case "domain":
       if ($mail->catchall_set($domain_id, $target_domain)) {
-	$error=_("Catchall successfully updated");
+	$msg->raise("Ok", "mail", _("Catchall successfully updated"));
 	require_once("mail_list.php");
 	exit();
-      } else {
-        $error=$err->errstr();
       }
       break;
     case "mail":
       if ($mail->catchall_set($domain_id, $target_mail)) {
-	$error=_("Catchall successfully updated");
+	$msg->raise("Ok", "mail", _("Catchall successfully updated"));
 	require_once("mail_list.php");
 	exit();
-      } else {
-        $error=$err->errstr();
       }
       break;
     default:
@@ -80,9 +75,7 @@ $catch=$mail->catchall_getinfos($domain_id);
 <br />
 
 <?php
-if (isset($error) && !empty($error) ) {
-  	echo "<p class=\"alert alert-danger\">$error</p>";
-}
+echo $msg->msg_html_all();
 
 __("You can choose what to do with emails sent to unexisting address of this domain");
 ?>

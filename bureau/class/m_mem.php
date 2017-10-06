@@ -94,30 +94,30 @@ class m_mem {
      * @return boolean TRUE if the user has been successfully connected, or FALSE if an error occured.
      */
     function login($username, $password, $restrictip = 0, $authip_token = false) {
-        global $db, $err, $cuid, $authip;
-        $err->log("mem", "login", $username);
+        global $db, $msg, $cuid, $authip;
+        $msg->log("mem", "login", $username);
         //    $username=addslashes($username);
         //    $password=addslashes($password);
         $db->query("select * from membres where login= ? ;", array($username));
         if ($db->num_rows() == 0) {
-            $err->raise("mem", _("User or password incorrect"));
+            $msg->raise('Error', "mem", _("User or password incorrect"));
             return false;
         }
         $db->next_record();
         if (_md5cr($password, $db->f("pass")) != $db->f("pass")) {
             $db->query("UPDATE membres SET lastfail=lastfail+1 WHERE uid= ? ;", array($db->f("uid")));
-            $err->raise("mem", _("User or password incorrect"));
+            $msg->raise('Error', "mem", _("User or password incorrect"));
             return false;
         }
         if (!$db->f("enabled")) {
-            $err->raise("mem", _("This account is locked, contact the administrator."));
+            $msg->raise('Error', "mem", _("This account is locked, contact the administrator."));
             return false;
         }
         $this->user = $db->Record;
         $cuid = $db->f("uid");
 
         if (panel_islocked() && $cuid != 2000) {
-            $err->raise("mem", _("This website is currently under maintenance, login is currently disabled."));
+            $msg->raise('Alert', "mem", _("This website is currently under maintenance, login is currently disabled."));
             return false;
         }
 
@@ -136,7 +136,7 @@ class m_mem {
 
         // Error if there is rules, the IP is not allowed and it's not in the whitelisted IP
         if (sizeof($aga) > 1 && !$allowed_ip && !$authip->is_wl(get_remote_ip())) {
-            $err->raise("mem", _("Your IP isn't allowed to connect"));
+            $msg->raise('Error', "mem", _("Your IP isn't allowed to connect"));
             return false;
         }
         // End AuthIP
@@ -157,7 +157,7 @@ class m_mem {
         $_REQUEST["session"] = $sess;
         $db->query("insert into sessions (sid,ip,uid) values (?, ?, ?);", array($sess, $ip, $cuid));
         setcookie("session", $sess, 0, "/");
-        $err->error = 0;
+        $msg->error = 0;
         /* Fill in $local */
         $db->query("SELECT * FROM local WHERE uid= ? ;", array($cuid));
         if ($db->num_rows()) {
@@ -179,11 +179,11 @@ class m_mem {
      * @return boolean TRUE if the user has been successfully connected, FALSE else.
      */
     function setid($id) {
-        global $db, $err, $cuid, $mysql, $quota;
-        $err->log("mem", "setid", $id);
+        global $db, $msg, $cuid, $mysql, $quota;
+        $msg->log("mem", "setid", $id);
         $db->query("select * from membres where uid= ? ;", array($id));
         if ($db->num_rows() == 0) {
-            $err->raise("mem", _("User or password incorrect"));
+            $msg->raise('Error', "mem", _("User or password incorrect"));
             return false;
         }
         $db->next_record();
@@ -197,7 +197,7 @@ class m_mem {
         $_REQUEST["session"] = $sess;
         $db->query("insert into sessions (sid,ip,uid) values (?, ?, ?);", array($sess, $ip, $cuid));
         setcookie("session", $sess, 0, "/");
-        $err->error = 0;
+        $msg->error = 0;
         /* Fill in $local */
         $db->query("SELECT * FROM local WHERE uid= ? ;", array($cuid));
         if ($db->num_rows()) {
@@ -262,11 +262,11 @@ class m_mem {
      * @global string $username/password le login/pass de l'utilisateur
      * @return boolean TRUE si la session est correcte, FALSE sinon.
      */
-    function checkid() {
-        global $db, $err, $cuid;
+    function checkid($show_msg = true) {
+        global $db, $msg, $cuid;
         if (isset($_REQUEST["username"])) {
             if (empty($_REQUEST['password'])) {
-                $err->raise("mem", _("Missing password"));
+                $msg->raise('Error', "mem", _("Missing password"));
                 return false;
             }
             if ($_REQUEST["username"] && $_REQUEST["password"]) {
@@ -275,27 +275,29 @@ class m_mem {
         } // end isset
         $_COOKIE["session"] = isset($_COOKIE["session"]) ? $_COOKIE["session"] : "";
         if (strlen($_COOKIE["session"]) != 32) {
-            $err->raise("mem", _("Identity lost or unknown, please login"));
+	    if ($show_msg)
+                $msg->raise('Error', "mem", _("Identity lost or unknown, please login"));
             return false;
         }
         $ip = get_remote_ip();
         $db->query("select uid, ? as me,ip from sessions where sid= ?;", array($ip, $_COOKIE["session"]));
         if ($db->num_rows() == 0) {
-            $err->raise("mem", _("Session unknown, contact the administrator"));
+	    if ($show_msg)
+                $msg->raise('Error', "mem", _("Identity lost or unknown, please login"));
             return false;
         }
         $db->next_record();
         $cuid = $db->f("uid");
 
         if (panel_islocked() && $cuid != 2000) {
-            $err->raise("mem", _("This website is currently under maintenance, login is currently disabled."));
+            $msg->raise('Alert', "mem", _("This website is currently under maintenance, login is currently disabled."));
             return false;
         }
 
         $db->query("select * from membres where uid= ? ;", array($cuid));
         $db->next_record();
         $this->user = $db->Record;
-        $err->error = 0;
+        $msg->error = 0;
         /* Remplissage de $local */
         $db->query("SELECT * FROM local WHERE uid= ? ;", array($cuid));
         if ($db->num_rows()) {
@@ -312,13 +314,13 @@ class m_mem {
      * @return TRUE si la session est correcte, FALSE sinon.
      */
     function su($uid) {
-        global $cuid, $db, $err, $mysql;
+        global $cuid, $db, $msg, $mysql;
         if (!$this->olduid) {
             $this->olduid = $cuid;
         }
         $db->query("select * from membres where uid= ? ;", array($uid));
         if ($db->num_rows() == 0) {
-            $err->raise("mem", _("User or password incorrect"));
+            $msg->raise('Error', "mem", _("User or password incorrect"));
             return false;
         }
         $db->next_record();
@@ -353,32 +355,32 @@ class m_mem {
      * @return boolean TRUE si la session a bien ete detruite, FALSE sinon.
      */
     function del_session() {
-        global $db, $user, $err, $cuid, $hooks;
+        global $db, $user, $msg, $cuid, $hooks;
         $_COOKIE["session"] = isset($_COOKIE["session"]) ? $_COOKIE["session"] : '';
         setcookie("session", "", 0, "/");
         setcookie("oldid", "", 0, "/");
         if ($_COOKIE["session"] == "") {
-            $err->error = 0;
+            $msg->error = 0;
             return true;
         }
         if (strlen($_COOKIE["session"]) != 32) {
-            $err->raise("mem", _("Cookie incorrect, please accept the session cookie"));
+            $msg->raise('Error', "mem", _("Cookie incorrect, please accept the session cookie"));
             return false;
         }
         $ip = get_remote_ip();
         $db->query("select uid, ? as me,ip from sessions where sid= ? ;", array($ip, $_COOKIE["session"]));
         if ($db->num_rows() == 0) {
-            $err->raise("mem", _("Session unknown, contact the administrator"));
+            $msg->raise('Error', "mem", _("Session unknown, contact the administrator"));
             return false;
         }
         $db->next_record();
         if ($db->f("me") != $db->f("ip")) {
-            $err->raise("mem", _("IP address incorrect, please contact the administrator"));
+            $msg->raise('Error', "mem", _("IP address incorrect, please contact the administrator"));
             return false;
         }
         $cuid = $db->f("uid");
         $db->query("delete from sessions where sid= ? ;", array($_COOKIE["session"]));
-        $err->error = 0;
+        $msg->error = 0;
 
         # Invoker le logout dans toutes les autres classes
         /*
@@ -404,18 +406,18 @@ class m_mem {
      * @return boolean TRUE si le mot de passe a ete change, FALSE sinon.
      */
     function passwd($oldpass, $newpass, $newpass2) {
-        global $db, $err, $cuid, $admin;
-        $err->log("mem", "passwd");
+        global $db, $msg, $cuid, $admin;
+        $msg->log("mem", "passwd");
         if (!$this->user["canpass"]) {
-            $err->raise("mem", _("You are not allowed to change your password."));
+            $msg->raise('Error', "mem", _("You are not allowed to change your password."));
             return false;
         }
         if ($this->user["pass"] != _md5cr($oldpass, $this->user["pass"])) {
-            $err->raise("mem", _("The old password is incorrect"));
+            $msg->raise('Error', "mem", _("The old password is incorrect"));
             return false;
         }
         if ($newpass != $newpass2) {
-            $err->raise("mem", _("The new passwords are differents, please retry"));
+            $msg->raise('Error', "mem", _("The new passwords are differents, please retry"));
             return false;
         }
         $db->query("SELECT login FROM membres WHERE uid= ? ;", array($cuid));
@@ -426,7 +428,7 @@ class m_mem {
         }
         $newpass = _md5cr($newpass);
         $db->query("UPDATE membres SET pass= ? WHERE uid= ?;", array($newpass, $cuid));
-        $err->error = 0;
+        $msg->error = 0;
         return true;
     }
 
@@ -437,14 +439,14 @@ class m_mem {
      * @return boolean TRUE si les preferences ont ete changees, FALSE sinon.
      */
     function adminpref($admlist) {
-        global $db, $err, $cuid;
-        $err->log("mem", "admlist");
+        global $db, $msg, $cuid;
+        $msg->log("mem", "admlist");
         if (!$this->user["su"]) {
-            $err->raise("mem", _("You must be a system administrator to do this."));
+            $msg->raise('Error', "mem", _("You must be a system administrator to do this."));
             return false;
         }
         $db->query("UPDATE membres SET admlist= ? WHERE uid= ?;", array($admlist, $cuid));
-        $err->error = 0;
+        $msg->error = 0;
         return true;
     }
 
@@ -457,16 +459,16 @@ class m_mem {
      * @return boolean TRUE si le mot de passe a ete envoye avec succes, FALSE sinon.
      */
     function send_pass($login) {
-        global $err, $db, $L_HOSTING, $L_FQDN;
-        $err->log("mem", "send_pass");
+        global $msg, $db, $L_HOSTING, $L_FQDN;
+        $msg->log("mem", "send_pass");
         $db->query("SELECT * FROM membres WHERE login= ? ;", array($login));
         if (!$db->num_rows()) {
-            $err->raise("mem", _("This account is locked, contact the administrator."));
+            $msg->raise('Error', "mem", _("This account is locked, contact the administrator."));
             return false;
         }
         $db->next_record();
         if (time() - $db->f("lastaskpass") < 86400) {
-            $err->raise("mem", _("The new passwords are differents, please retry"));
+            $msg->raise('Error', "mem", _("The new passwords are differents, please retry"));
             return false;
         }
         $txt = sprintf(_("Hello,
@@ -501,11 +503,11 @@ Cordially.
      * @return string le cookie si le mail a bien ete envoye, FALSE sinon
      */
     function ChangeMail1($newmail) {
-        global $err, $db, $L_HOSTING, $L_FQDN, $cuid;
-        $err->log("mem", "changemail1", $newmail);
+        global $msg, $db, $L_HOSTING, $L_FQDN, $cuid;
+        $msg->log("mem", "changemail1", $newmail);
         $db->query("SELECT * FROM membres WHERE uid= ? ;", array($cuid));
         if (!$db->num_rows()) {
-            $err->raise("mem", _("This account is locked, contact the administrator."));
+            $msg->raise('Error', "mem", _("This account is locked, contact the administrator."));
             return false;
         }
         $db->next_record();
@@ -514,7 +516,7 @@ Cordially.
         $COOKIE = substr(md5(mt_rand().mt_rand()), 0, 20);
         // et de 6 pour la cl� � entrer. ca me semble suffisant...
         $KEY = substr(md5(mt_rand().mt_rand()), 0, 6);
-        $link = "https://$L_FQDN/mem_cm.php?usr=$cuid&cookie=$COOKIE";
+        $link = "https://$L_FQDN/mem_cm.php?usr=$cuid&cookie=$COOKIE&cle=$KEY";
         $txt = sprintf(_("Hello,
 
 Someone (maybe you) requested an email's address modification of the account
@@ -553,11 +555,11 @@ Cordially.
      * @return boolean TRUE si le mail a bien ete modifie, FALSE sinon
      */
     function ChangeMail2($COOKIE, $KEY, $uid) {
-        global $err, $db;
-        $err->log("mem", "changemail2", $uid);
+        global $msg, $db;
+        $msg->log("mem", "changemail2", $uid);
         $db->query("SELECT * FROM chgmail WHERE cookie= ? and ckey= ? and uid= ?;", array($COOKIE, $KEY, $uid));
         if (!$db->num_rows()) {
-            $err->raise("mem", _("The information you entered is incorrect."));
+            $msg->raise('Error', "mem", _("The information you entered is incorrect."));
             return false;
         }
         $db->next_record();
@@ -578,8 +580,8 @@ Cordially.
      * @param integer $show Faut-il (1) ou non (0) afficher l'aide en ligne
      */
     function set_help_param($show) {
-        global $db, $err, $cuid;
-        $err->log("mem", "set_help_param", $show);
+        global $db, $msg, $cuid;
+        $msg->log("mem", "set_help_param", $show);
         $db->query("UPDATE membres SET show_help= ? WHERE uid= ? ;", array($show, $cuid));
     }
 
@@ -617,8 +619,8 @@ Cordially.
      * @param integer $uid
      */
     function get_creator_by_uid($uid) {
-        global $db, $err;
-        $err->log("dom", "get_creator_by_uid");
+        global $db, $msg;
+        $msg->log("dom", "get_creator_by_uid");
         $db->query("select creator from membres where uid = ? ;", array($uid));
         if (!$db->next_record()) {
             return false;
@@ -633,8 +635,8 @@ Cordially.
      * @access private
      */
     function alternc_export_conf() {
-        global $db, $err;
-        $err->log("mem", "export");
+        global $db, $msg;
+        $msg->log("mem", "export");
         $str = "  <member>\n";
         $users = $this->user;
         $str.="   <uid>" . $users["uid"] . "</uid>\n";

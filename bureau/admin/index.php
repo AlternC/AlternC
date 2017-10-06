@@ -26,15 +26,12 @@
 
 require_once("../class/config_nochk.php");
 
-if ($mem->checkid()) {
+if ($mem->checkid(false)) {
 	Header("Location: /main.php");
 	exit;
 }
 
-if (!$mem->del_session()) {
-  // No need to draw an error message ...
-  //$error=$err->errstr();
-}
+$mem->del_session();
 
 $H=getenv("HTTP_HOST");
 
@@ -72,11 +69,10 @@ if ( empty($logo) ||  ! $logo ) {
   $logo = 'images/logo.png'; 
 }
 ?>
-
-      <p id="logo">  <img src="<?php echo $logo; ?>" border="0" alt="<?php __("Web Hosting Control Panel"); ?>" title="<?php __("Web Hosting Control Panel"); ?>" />
+      <p id='logo'>  <img src="<?php echo $logo; ?>" border="0" height="100px" alt="<?php __("Web Hosting Control Panel"); ?>" title="<?php __("Web Hosting Control Panel"); ?>" />
       </p>
       <p>&nbsp;</p>
-    <?php if (isset($error) && $error) echo "<div class='alert alert-danger'>$error</div>"; ?>
+    <?php echo $msg->msg_html_all(); ?>
     <br/>
     <?php
     if (isset($_GET['authip_token'])) $authip_token=$_GET['authip_token'];

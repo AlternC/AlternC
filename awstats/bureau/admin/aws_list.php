@@ -24,28 +24,35 @@
 */
 require_once("../class/config.php");
 include_once("head.php");
+
+$nosta=false;
+if (!$r=$aws->get_list()) {
+	$msg->raise('Info', "aws", _("No statistics currently defined"));
+	$nosta=true;
+}
+
+$create=true;
+if (!$quota->cancreate("aws")) {
+	$msg->raise('Info', "aws", _("Your stat quota is over..."));
+	$create=false;
+}
 ?>
 
 <h3><?php __("Statistics List"); ?></h3>
 <hr id="topbar"/>
 <br />
-<?php if (!empty($error)) { echo "<p class=\"error\">$error</p>"; $error=''; } ?>
+<?php
+echo $msg->msg_html_all("<li>", true, true);
+?>
 <p>
 <?php
-
-$nosta=false;
-if (!$r=$aws->get_list()) {
-	$error=$err->errstr();
-	$nosta=true;
-}
-
-if (!empty($error)) { echo "<p class=\"error\">$error</p>"; $error=''; } 
+//echo "<pre>";print_r($mem);echo "</pre>";
 ?>
 
 <span class="ina"><a href="aws_users.php"><?php __("Manage allowed users' accounts"); ?></a></span><br /><br />
 
 <?php
-if ($quota->cancreate("aws")) { ?>
+if ($create) { ?>
   <span class="ina"><a href="aws_add.php"><?php __("Create new Statistics"); ?></a></span><br />
 <?php } // cancreate ?>
 </p>

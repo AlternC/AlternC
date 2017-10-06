@@ -29,7 +29,8 @@
 */
 require_once("../class/config.php");
 if (!$admin->enabled) {
-    __("This page is restricted to authorized staff");
+    $msg->raise('Error', "admin", _("This page is restricted to authorized staff"));
+    echo $msg->msg_html_all();
     exit();
 }
 
@@ -51,21 +52,17 @@ $fields = array (
 getFields($fields);
 
 
-if (! $d=$dom->domains_type_get($name)) {
-	$error=$err->errstr();
-	echo $error;
-} else {
+$d=$dom->domains_type_get($name);
 ?>
 
 <h3><?php __("Edit a domain type"); ?> </h3>
 <hr id="topbar"/>
 <br />
 <?php
-if (isset($error_edit) && $error_edit) {
-	echo "<p class=\"alert alert-danger\">$error_edit</p>";
-	$error_edit="";
+echo $msg->msg_html_all();
 
-} ?>
+if (! $msg->has_msgs("Error")) {
+?>
 
 <form action="adm_domstypedoedit.php" method="post" name="main" id="main">
    <?php csrf_get(); ?>

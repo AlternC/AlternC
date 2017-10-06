@@ -43,9 +43,8 @@ getFields($fields);
 
 <?php
 
-if (!$r=$mysql->get_mysql_details($id)) {
-        $error=$err->errstr();
-}
+$r=$mysql->get_mysql_details($id);
+
 if (! $r["enabled"]) { 
   echo "<p class=\"alert alert-danger\">"._("You currently have no database defined")."</p>";
   include_once("foot.php");
@@ -57,14 +56,11 @@ if (! $r["enabled"]) {
 
 <p>
 <?php
-if (!$mysql->restore($restfile,true,$id))  {
-  $error=$err->errstr();
-} else {
-  $error=_("Your database has been restored, check out the previous text for error messages.");
+if ($mysql->restore($restfile,true,$id))  {
+  $msg->raise("ok", "mysql", _("Your database has been restored, check out the previous text for error messages."));
 } // if mysql->restore
 
-echo "<p class=\"alert alert-danger\">$error</p><p>&nbsp;</p>";
-
+echo $msg->msg_html_all();
 ?>
 </p>
 <?php include_once("foot.php"); ?>

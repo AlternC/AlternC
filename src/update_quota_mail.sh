@@ -108,8 +108,9 @@ for i in $maildirs ; do
 	echo "dir size : "$size
 	echo ""
 	#update the mailbox table accordingly
-	mysql_query "UPDATE mailbox SET bytes=$size WHERE path='$i' ; "
-	mysql_query "UPDATE mailbox SET messages=$mail_count WHERE path='$i' ; " 
+	MAILADD=`basename $i`
+	MAILADD=${MAILADD/_/@}
+	mysql_query "REPLACE INTO dovecot_quota VALUES('$MAILADD', $size, $mail_count);"
 done
 
 # may cause a problem, let's fix this here :) 

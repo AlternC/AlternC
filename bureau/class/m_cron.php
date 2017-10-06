@@ -54,8 +54,8 @@ class m_cron {
      * @return array an hash for each crontab.
      */
     function lst_cron() {
-        global $cuid, $db, $err;
-        $err->log("cron", "lst_cron");
+        global $cuid, $db, $msg;
+        $msg->log("cron", "lst_cron");
         $db->query("SELECT * FROM cron WHERE uid = ? ORDER BY url;", array($cuid));
         $r = Array();
         while ($db->next_record()) {
@@ -77,7 +77,7 @@ class m_cron {
             'title' => _("Scheduled tasks"),
             'ico' => 'images/schedule.png',
             'link' => 'cron.php',
-            'pos' => 90,
+            'pos' => 120,
                 );
 
         return $obj;
@@ -112,8 +112,8 @@ class m_cron {
      * @return boolean TRUE if the crontab has been deleted
      */
     function delete_one($id) {
-        global $db, $err, $cuid;
-        $err->log("cron", "delete_one");
+        global $db, $msg, $cuid;
+        $msg->log("cron", "delete_one");
         return $db->query("DELETE FROM cron WHERE id= ? AND uid= ? LIMIT 1;", array(intval($id), $cuid));
     }
 
@@ -123,8 +123,8 @@ class m_cron {
      * @return boolean TRUE if the crontab has been edited
      */
     private function _update_one($url, $user, $password, $email, $schedule, $id = null) {
-        global $db, $err, $quota, $cuid;
-        $err->log("cron", "update_one");
+        global $db, $msg, $quota, $cuid;
+        $msg->log("cron", "update_one");
 
         if (empty($url) && !is_null($id)) {
             return $this->delete_one($id);
@@ -132,7 +132,7 @@ class m_cron {
 
 
         if (filter_var($url, FILTER_VALIDATE_URL) === false) {
-            $err->raise("cron", _("URL not valid"));
+            $msg->raise('Error', "cron", _("URL not valid"));
             return false;
         }
         $url = urlencode($url);
@@ -144,7 +144,7 @@ class m_cron {
 
         //@todo remove checkmail cf functions.php
         if (!empty($email) && !checkmail($email) == 0) {
-            $err->raise("cron", _("Email address is not valid"));
+            $msg->raise('Error', "cron", _("Email address is not valid"));
             return false;
         }
         $email = urlencode($email);
@@ -155,7 +155,7 @@ class m_cron {
         if (is_null($id)) { // if a new insert, quotacheck
             $q = $quota->getquota("cron");
             if ($q["u"] >= $q["t"]) {
-                $err->raise("cron", _("You quota of cron entries is over. You cannot create more cron entries"));
+                $msg->raise('Error', "cron", _("You quota of cron entries is over. You cannot create more cron entries"));
                 return false;
             }
         } else { // if not a new insert, check the $cuid
@@ -163,8 +163,8 @@ class m_cron {
             if (!$db->next_record()) {
                 return "false";
             } // return false if pb
-            if ($db->f('uid') != $cuid) {
-                $err->raise("cron", _("Identity problem"));
+	    if ($db->f('uid') != $cuid) {
+		    $msg->raise('Error', "cron", _("Identity problem"));
                 return false;
             }
         }
@@ -196,8 +196,8 @@ class m_cron {
     /** hook for quota computation
      */
     function hook_quota_get() {
-        global $cuid, $db, $err;
-        $err->log("cron", "alternc_get_quota");
+        global $cuid, $db, $msg;
+        $msg->log("cron", "alternc_get_quota");
         $q = Array("name" => "cron", "description" => _("Scheduled tasks"), "used" => 0);
         $db->query("select count(*) as cnt from cron where uid = ? ;", array($cuid));
         if ($db->next_record()) {

@@ -40,6 +40,7 @@ class m_quota {
 
     var $disk = Array();  /* disk resource for which we will manage quotas */
     var $disk_quota_enable;
+    var $disk_quota_not_blocking;
     var $quotas;
     var $clquota; // Which class manage which quota.
 
@@ -52,6 +53,8 @@ class m_quota {
         $this->disk_quota_enable = variable_get('disk_quota_enable', 1, 'Are disk quota enabled for this server', array('desc' => 'Enabled', 'type' => 'boolean'));
         if ($this->disk_quota_enable) {
             $this->disk = Array("web" => "web");
+
+	    $this->disk_quota_not_blocking = variable_get('disk_quota_not_blocking', 1, "0 - Block data when quota are exceeded (you need a working quota system) | 1 - Just show quota but don't block anything", array('desc' => 'Enabled', 'type' => 'boolean'));
         }
     }
 
@@ -60,11 +63,13 @@ class m_quota {
     }
 
     function hook_menu() {
+        global $cuid, $mem, $quota;
+
         $obj = array(
             'title' => _("Show my quotas"),
             'ico' => 'images/quota.png',
             'link' => 'toggle',
-            'pos' => 110,
+            'pos' => 5,
             'divclass' => 'menu-quota',
             'links' => array(),
         );
@@ -77,9 +82,10 @@ class m_quota {
         	        continue;
 		}
 	            
-		$usage_percent = (int) ($q[$key]["u"] / $q[$key]["t"] * 100);
+                $totalsize_used = $quota->get_size_web_sum_user($cuid) + $quota->get_size_mailman_sum_user($cuid) + ($quota->get_size_db_sum_user($mem->user["login"]) + $quota->get_size_mail_sum_user($cuid))/1024;
+		$usage_percent = (int) ($totalsize_used / $q[$key]["t"] * 100);
 		$obj['links'][] = array('txt' => _("quota_" . $key) . " " . sprintf(_("%s%% of %s"), $usage_percent, format_size($q[$key]["t"] * 1024)), 'url' => 'quota_show.php');
-		$obj['links'][] = array('txt' => 'progressbar', 'total' => $q[$key]["t"], 'used' => $q[$key]["u"]);
+		$obj['links'][] = array('txt' => 'progressbar', 'total' => $q[$key]["t"], 'used' => $totalsize_used);
 	}
 
         // do not return menu item if there is no quota
@@ -137,8 +143,8 @@ class m_quota {
      * the defaults value.
      */
     function synchronise_user_profile() {
-        global $db, $err;
-        $err->log("quota", "synchronise_user_profile");
+        global $db, $msg;
+        $msg->log("quota", "synchronise_user_profile");
         $q = "insert into quotas select m.uid as uid, d.quota as name, d.value as total from membres m, defquotas d left join quotas q on q.name=d.quota  where m.type=d.type  ON DUPLICATE KEY UPDATE total = greatest(d.value, quotas.total);";
         if (!$db->query($q)) {
             return false;
@@ -153,8 +159,8 @@ class m_quota {
      */
 
     function create_missing_quota_profile() {
-        global $db, $quota, $err;
-        $err->log("quota", "create_missing_quota_profile");
+        global $db, $quota, $msg;
+        $msg->log("quota", "create_missing_quota_profile");
         $qt = $quota->getquota('', true);
         $type = $quota->listtype();
         foreach ($type as $t) {
@@ -172,8 +178,8 @@ class m_quota {
      * @Return array the quota used and total for this ressource (or for all ressource if unspecified)
      */
     function getquota($ressource = "", $recheck = false) {
-        global $db, $err, $cuid, $get_quota_cache, $hooks, $mem;
-        $err->log("quota", "getquota", $ressource);
+        global $db, $msg, $cuid, $get_quota_cache, $hooks, $mem;
+        $msg->log("quota", "getquota", $ressource);
         if ($recheck) { // rebuilding quota
             $get_quota_cache = null;
             $this->quotas = array();
@@ -186,6 +192,8 @@ class m_quota {
             foreach ($res as $r) {
                 $this->quotas[$r['name']] = $r;
                 $this->quotas[$r['name']]['u'] = $r['used']; // retrocompatibilité
+                if (isset($r['sizeondisk']))
+                    $this->quotas[$r['name']]['s'] = $r['sizeondisk'];
                 $this->quotas[$r['name']]['t'] = 0; // Default quota = 0
             }
             reset($this->disk);
@@ -202,14 +210,20 @@ class m_quota {
                         // If there is a cached value
                         $a = $disk_cached[$val];
                     } else {
-                        exec("/usr/lib/alternc/quota_get " . intval($cuid), $ak);
-                        $a['u'] = intval($ak[0]);
-                        $a['t'] = @intval($ak[1]);
+                        if ($this->disk_quota_not_blocking) {
+                            $a['u'] = $this->get_size_web_sum_user($cuid);
+                            $a['t'] = $this->get_quota_user_cat($cuid, 'web');
+                        } else {
+                            exec("/usr/lib/alternc/quota_get " . intval($cuid), $ak);
+                            $a['u'] = intval($ak[0]);
+                            $a['t'] = @intval($ak[1]);
+                        }
+			$a['sizeondisk'] = $a['u'];
                         $a['timestamp'] = time();
                         $a['uid'] = $cuid;
                         $disk_cached = $mem->session_tempo_params_set('quota_cache_disk', array($val => $a));
                     }
-                    $this->quotas[$val] = array("name" => "$val", 'description' => _("quota_" . $val), "t" => $a['t'], "u" => $a['u']);
+		    $this->quotas[$val] = array("name" => "$val", 'description' => _("Web disk space"), "s" => $a['sizeondisk'], "t" => $a['t'], "u" => $a['u']);
                 }
             }
 
@@ -240,19 +254,19 @@ class m_quota {
      * @param integer size of the quota (available or used)
      */
     function setquota($ressource, $size) {
-        global $err, $db, $cuid;
-        $err->log("quota", "setquota", $ressource . "/" . $size);
+        global $msg, $db, $cuid;
+        $msg->log("quota", "setquota", $ressource . "/" . $size);
         if (floatval($size) == 0) {
             $size = "0";
         }
-        if (isset($this->disk[$ressource])) {
+        if (!$this->disk_quota_not_blocking && isset($this->disk[$ressource])) {
             // It's a disk resource, update it with shell command
             exec("sudo /usr/lib/alternc/quota_edit " . intval($cuid) . " " . intval($size) . " &> /dev/null &");
             // Now we check that the value has been written properly : 
             $a = array();
             exec("sudo /usr/lib/alternc/quota_get " . intval($cuid) . " &> /dev/null &", $a);
             if (!isset($a[1]) || $size != $a[1]) {
-                $err->raise("quota", _("Error writing the quota entry!"));
+                $msg->raise('Error', "quota", _("Error writing the quota entry!"));
                 return false;
             }
         }
@@ -272,8 +286,8 @@ class m_quota {
      * Erase all quota information about the user.
      */
     function delquotas() {
-        global $db, $err, $cuid;
-        $err->log("quota", "delquota");
+        global $db, $msg, $cuid;
+        $msg->log("quota", "delquota");
         $db->query("DELETE FROM quotas WHERE uid= ?;", array($cuid));
         return true;
     }
@@ -327,14 +341,14 @@ class m_quota {
      * @return boolean true if all went ok
      */
     function addtype($type) {
-        global $db, $err;
+        global $db, $msg;
         $qlist = $this->qlist();
         if (empty($type)) {
             return false;
         }
         $type = strtolower($type);
         if (!preg_match("#^[a-z0-9]*$#", $type)) {
-            $err->raise("quota", "Type can only contains characters a-z and 0-9");
+            $msg->raise('Error', "quota", _("Type can only contains characters a-z and 0-9"));
             return false;
         }
         while (list($key, $val) = each($qlist)) {
@@ -383,8 +397,8 @@ class m_quota {
      * The user we are talking about is in the global $cuid.
      */
     function addquotas() {
-        global $db, $err, $cuid;
-        $err->log("quota", "addquota");
+        global $db, $msg, $cuid;
+        $msg->log("quota", "addquota");
         $ql = $this->qlist();
         reset($ql);
 
@@ -463,6 +477,12 @@ class m_quota {
         }
     }
 
+    /* get the quota from one user for a cat */
+
+    function get_quota_user_cat($uid, $name) {
+	return $this->_get_sum_sql("SELECT SUM(total) AS sum FROM quotas WHERE uid='$uid' AND name='$name';");
+    }
+
     /* sum of websites sizes from all users */
 
     function get_size_web_sum_all() {
@@ -478,7 +498,7 @@ class m_quota {
     /* sum of mailbox sizes from all domains */
 
     function get_size_mail_sum_all() {
-        return $this->_get_sum_sql("SELECT SUM(bytes) AS sum FROM mailbox WHERE delivery = 'dovecot';;");
+        return $this->_get_sum_sql("SELECT SUM(quota_dovecot) AS sum FROM dovecot_quota ;");
     }
 
     /* sum of mailbox sizes for one domain */
@@ -488,22 +508,28 @@ class m_quota {
         return $mail->get_total_size_for_domain($dom);
     }
 
+    /* sum of mailbox size for ine user */
+
+    function get_size_mail_sum_user($u) {
+      return $this->_get_sum_sql("SELECT SUM(quota_dovecot) as sum FROM dovecot_quota WHERE user IN (SELECT CONCAT(a.address, '@', d.domaine) as mail FROM `address` as a INNER JOIN domaines as d ON a.domain_id = d.id WHERE d.compte = '$u' AND a.type ='')");
+    }
+
     /* count of mailbox sizes from all domains */
 
     function get_size_mail_count_all() {
-        return $this->_get_count_sql("SELECT COUNT(*) AS count FROM mailbox WHERE delivery = 'dovecot';");
+        return $this->_get_count_sql("SELECT COUNT(*) AS count FROM dovecot_quota;");
     }
 
     /* count of mailbox for one domain */
 
     function get_size_mail_count_domain($dom) {
-        return $this->_get_count_sql("SELECT COUNT(*) AS count FROM dovecot_view WHERE user LIKE '%@{$dom}'");
+        return $this->_get_count_sql("SELECT COUNT(*) AS count FROM dovecot_quota WHERE user LIKE '%@{$dom}'");
     }
 
     /* get list of mailbox alias and size for one domain */
 
     function get_size_mail_details_domain($dom) {
-        return $this->_get_size_and_record_sql("SELECT user as alias,quota_dovecot as size FROM dovecot_view WHERE user LIKE '%@{$dom}' ORDER BY alias;");
+        return $this->_get_size_and_record_sql("SELECT user as alias,quota_dovecot as size FROM dovecot_quota WHERE user LIKE '%@{$dom}' ORDER BY alias;");
     }
 
     /* sum of mailman lists sizes from all domains */
@@ -515,7 +541,7 @@ class m_quota {
     /* sum of mailman lists sizes for one domain */
 
     function get_size_mailman_sum_domain($dom) {
-        return $this->_get_sum_sql("SELECT SUM(size) AS sum FROM size_mailman WHERE list LIKE '%@{$dom}'");
+        return $this->_get_sum_sql("SELECT SUM(size) AS sum FROM size_mailman s INNER JOIN mailman m ON s.list = m.list AND s.uid = m.uid WHERE m.domain = '$dom'");
     }
 
     /* sum of mailman lists for one user */
@@ -624,8 +650,8 @@ class m_quota {
      * globals $cuid is the appropriate user
      */
     function hook_admin_add_member() {
-        global $err;
-        $err->log("quota", "hook_admin_add_member");
+        global $msg;
+        $msg->log("quota", "hook_admin_add_member");
         $this->addquotas();
         $this->getquota('', true); // actualise quota
     }
@@ -637,8 +663,8 @@ class m_quota {
      * EXPERIMENTAL function ;) 
      */
     function alternc_export_conf() {
-        global $err;
-        $err->log("quota", "export");
+        global $msg;
+        $msg->log("quota", "export");
         $str = "  <quota>";
 
         $q = $this->getquota();

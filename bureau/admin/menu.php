@@ -31,12 +31,14 @@ require_once("../class/config.php");
 
 // Getting logo
 $logo = variable_get('logo_menu', '' ,'You can specify a logo for the menu, example /images/my_logo.png .', array('desc'=>'URL','type'=>'string'));
-if ( empty($logo) ||  ! $logo ) { 
-  $logo = 'images/logo3.png'; 
-}
 
+echo '<div class="menutoplogo">';
+if ( ! empty($logo) &&  ! is_null($logo)) {
+  echo "<img src=\"".$logo."\" border='0' alt='AlternC' width='45px' height='46px' />";
+}
+echo "<img src='images/logo3.png' border='0' alt='AlternC' ".(( ! empty($logo) &&  ! is_null($logo))?"width='140px'":"")." height='40px' />";
+echo "</div>";
 ?>
-<img src="<?php echo $logo; ?>" class="menutoplogo" border="0" alt="AlternC" />
 <p class="currentuser"><?php echo sprintf(_("Welcome %s"),$mem->user["login"]); ?></p>
 
 <?php

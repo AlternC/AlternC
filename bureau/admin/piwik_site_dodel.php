@@ -31,23 +31,20 @@ require_once("../class/config.php");
 
 $fields = array (
   "confirm_del"    	=> array ("post", "string", ""),
-  "siteid"    		=> array ("post", "integer", -1),
+  "siteid"    		=> array ("request", "integer", -1),
 );
 getFields($fields);
 
 if ($siteid === -1) {
-    $error=_("Missing site parameters");
+    $msg->raise('Error', "piwik", _("Missing site parameters"));
     include('piwik_sitelist.php'); 
     exit;
 }
 
 if(!empty($confirm_del) ) {
 
-  if (! $piwik->site_delete($siteid) ) {
-    $error=$err->errstr();
-  } else {
-    include_once('head.php');
-    __("Site successfully deleted");
+  if ($piwik->site_delete($siteid) ) {
+    $msg->raise('Ok', "piwik", _("Site successfully deleted"));
   }
 
   include('piwik_sitelist.php'); 

@@ -45,16 +45,16 @@ $domain=trim($domain);
 <br />
 
 <?php
-if (!empty($error)) {
-  echo '<p class="alert alert-danger">'.$error.'</p>';
-} 
+if ( !empty($zone) && empty($domain) ) {
+  $msg->raise('Alert', "dom", _("The domain field seems to be empty"));
+}
+
+echo $msg->msg_html_all();
 ?>
 
 <?php if ( !empty($zone) ) { 
-if ( empty($domain) ) {
-  echo '<p class="alert alert-danger">'._("The domain field seems to be empty").'</p>';
-} else { ?>
-  <?php __("Here is my proposition. Modify your zone until my proposition seems good to you"); ?>
+if ( !empty($domain) ) {
+  __("Here is my proposition. Modify your zone until my proposition seems good to you"); ?>
   <table class="tlist">
   <tr><th colspan=3><h2><?php printf(_("Working on %s"),$domain); ?></h2></th></tr>
   <tr>
