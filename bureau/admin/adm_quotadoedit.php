@@ -51,7 +51,7 @@ while (list($key,$val)=each($qlist)) {
 }
 $mem->unsu();
 
-if (!$msg->has_msgs("Error"))
+if (!$msg->has_msgs("ERROR"))
     $msg->raise("INFO", "admin", _("The quotas has been successfully edited"));
 
 include("adm_list.php");

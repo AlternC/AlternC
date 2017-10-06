@@ -57,7 +57,7 @@ $dom->unlock();
 <hr id="topbar"/>
 <br />
 <?php
-	if ($msg->has_msgs('Error')) {
+	if ($msg->has_msgs("ERROR")) {
 		echo $msg->msg_html_all();
 		include_once("foot.php");
 		exit();

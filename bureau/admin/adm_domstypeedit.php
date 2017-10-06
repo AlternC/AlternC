@@ -61,7 +61,7 @@ $d=$dom->domains_type_get($name);
 <?php
 echo $msg->msg_html_all();
 
-if (! $msg->has_msgs("Error")) {
+if (! $msg->has_msgs("ERROR")) {
 ?>
 
 <form action="adm_domstypedoedit.php" method="post" name="main" id="main">

@@ -47,7 +47,7 @@ if (is_array($sel)) {
 			$msg->raise("ERROR", "admin", _("Some TLD cannot be deleted...")." : ".$sel[$i]);
 		}
 	}
-	if (!$msg->has_msgs("Error"))
+	if (!$msg->has_msgs("ERROR"))
 		$msg->raise("INFO", "admin", _("The requested TLD has been deleted"));
 }
 

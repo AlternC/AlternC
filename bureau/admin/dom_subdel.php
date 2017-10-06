@@ -49,7 +49,7 @@ if (!$isinvited && $dt[strtolower($r['type'])]["enable"] != "ALL" ) {
 ?>
 <h3><?php printf(_("Deleting subdomain %s"),ife($r['name'],$r['name'].".").$r['domain']); ?> : </h3>
 <?php
-if ($msg->has_msgs('Error')) {
+if ($msg->has_msgs("ERROR")) {
   echo $msg->msg_html_all();
   include_once("foot.php");
   exit();

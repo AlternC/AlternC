@@ -42,7 +42,7 @@ getFields($fields);
 <h3><?php __("Change the email of the account"); ?></h3>
 <?php
 echo $msg->msg_html_all();
-if ($msg->has_msgs('Error')) {
+if ($msg->has_msgs("ERROR")) {
 	echo "<p><span class='ina'><a href='mem_param.php'>"._("Click here to continue")."</a></span></p>";
 	include_once("foot.php");
 	exit();

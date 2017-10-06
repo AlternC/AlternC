@@ -50,7 +50,7 @@ getFields($fields);
 
 $mysql->put_mysql_backup($id,$bck_mode,$bck_history,$bck_gzip,$bck_dir); 
 
-if ($msg->has_msgs("Error")) {
+if ($msg->has_msgs("ERROR")) {
 	include("sql_bck.php");
 	exit();
 } else {

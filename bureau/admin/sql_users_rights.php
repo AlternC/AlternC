@@ -41,7 +41,7 @@ getFields($fields);
 <?php
 $r=$mysql->get_user_dblist($id);
 
-if ($msg->has_msgs("Error")) {
+if ($msg->has_msgs("ERROR")) {
   require_once('sql_users_list.php');
   exit();
 }

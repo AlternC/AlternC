@@ -47,7 +47,7 @@ $res=$mysql->get_defaultsparam($dbname);
 <?php
 echo $msg->msg_html_all();
 
-if ($msg->has_msgs("error")) {
+if ($msg->has_msgs("ERROR")) {
     include_once("foot.php"); 
     exit();
 }

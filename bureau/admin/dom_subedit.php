@@ -63,7 +63,7 @@ if (!$isinvited && $dt[strtolower($r['type'])]["enable"] != "ALL" ) {
 $domroot=$dom->get_domain_all($r['domain']);
 $dom->unlock();
 
-if ($msg->has_msgs("Error")) {
+if ($msg->has_msgs("ERROR")) {
   include_once("dom_edit.php");
   exit();
 } 
