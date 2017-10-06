@@ -49,9 +49,7 @@ if (! $conf) {
 
 // Add some headers
 $conf2 = "###BEGIN OF ALTERNC AUTO-GENERATED FILE - DO NOT EDIT MANUALLY###
-# Generation: ".date('Y-m-d H:i:s')."
-## LogFormat informations
-Include \"/etc/alternc/apache_logformat.conf\"";
+# Generation: ".date('Y-m-d H:i:s');
 
 // Do we need to include manual configuration ?
 if ( is_dir( ALTERNC_VHOST_MANUALCONF ) ) {
