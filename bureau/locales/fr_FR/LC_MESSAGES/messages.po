@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: $Id: admin.po,v 1.10 2004/11/01 15:55:44 anonymous Exp "
 "$\n"
 "Report-Msgid-Bugs-To: i18n@alternc.org\n"
-"POT-Creation-Date: 2017-10-06 23:53+0200\n"
+"POT-Creation-Date: 2017-10-07 00:05+0200\n"
 "PO-Revision-Date: 2016-05-26 18:38+0200\n"
 "Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
 "Language-Team: français <team@alternc.org>\n"
@@ -2618,7 +2618,7 @@ msgstr ""
 
 #: ../admin/hta_doadduser.php:49
 #, fuzzy, php-format
-msgid "The user %s was added to th protected folder %s"
+msgid "The user %s was added to the protected folder %s"
 msgstr "Modification de l'utilisateur %s dans le répertoire protégé %s"
 
 #: ../admin/hta_dodeluser.php:43
@@ -3999,9 +3999,9 @@ msgstr ""
 "Vous ne pouvez plus créer de bases de données, votre quota est atteint."
 
 #: ../admin/sql_doadd.php:50
-#, php-format
-msgid "La base de données '%s' a bien été créé."
-msgstr ""
+#, fuzzy, php-format
+msgid "The database '%s' has been created."
+msgstr "La base de données %s a été effacée avec succès"
 
 #: ../admin/sql_dobck.php:57
 msgid "Your backup parameters has been successfully changed."
@@ -4167,9 +4167,9 @@ msgid "Yes, delete the MySQL user"
 msgstr "Oui, effacer cet utilisateur MySQL"
 
 #: ../admin/sql_users_doadd.php:45 ../admin/sql_users_doadd.php:54
-#, php-format
-msgid "L'utilisateur '%s' a bien été créé."
-msgstr ""
+#, fuzzy, php-format
+msgid "The user '%s' has been successfully created."
+msgstr "L'utilisateur %s a été effacée avec succès"
 
 #: ../admin/sql_users_dopassword.php:39
 #, fuzzy, php-format

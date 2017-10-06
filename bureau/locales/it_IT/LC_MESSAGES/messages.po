@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AlternC 2.0\n"
 "Report-Msgid-Bugs-To: i18n@alternc.org\n"
-"POT-Creation-Date: 2017-10-06 23:53+0200\n"
+"POT-Creation-Date: 2017-10-07 00:05+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2457,7 +2457,7 @@ msgstr ""
 
 #: ../admin/hta_doadduser.php:49
 #, php-format
-msgid "The user %s was added to th protected folder %s"
+msgid "The user %s was added to the protected folder %s"
 msgstr ""
 
 #: ../admin/hta_dodeluser.php:43
@@ -3738,7 +3738,7 @@ msgstr ""
 
 #: ../admin/sql_doadd.php:50
 #, php-format
-msgid "La base de données '%s' a bien été créé."
+msgid "The database '%s' has been created."
 msgstr ""
 
 #: ../admin/sql_dobck.php:57
@@ -3893,7 +3893,7 @@ msgstr ""
 
 #: ../admin/sql_users_doadd.php:45 ../admin/sql_users_doadd.php:54
 #, php-format
-msgid "L'utilisateur '%s' a bien été créé."
+msgid "The user '%s' has been successfully created."
 msgstr ""
 
 #: ../admin/sql_users_dopassword.php:39

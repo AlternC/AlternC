@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: alternc\n"
 "Report-Msgid-Bugs-To: i18n@alternc.org\n"
-"POT-Creation-Date: 2017-10-06 23:53+0200\n"
+"POT-Creation-Date: 2017-10-07 00:05+0200\n"
 "PO-Revision-Date: 2004-02-14 19:53-0400\n"
 "Last-Translator: Bruno Marmier <bruno@marmier.net>\n"
 "Language-Team: Espagnol <i18n@alternc.org>\n"
@@ -2478,7 +2478,7 @@ msgstr ""
 
 #: ../admin/hta_doadduser.php:49
 #, php-format
-msgid "The user %s was added to th protected folder %s"
+msgid "The user %s was added to the protected folder %s"
 msgstr ""
 
 #: ../admin/hta_dodeluser.php:43
@@ -3766,9 +3766,9 @@ msgid "Can't create a database: your quota is over"
 msgstr ""
 
 #: ../admin/sql_doadd.php:50
-#, php-format
-msgid "La base de données '%s' a bien été créé."
-msgstr ""
+#, fuzzy, php-format
+msgid "The database '%s' has been created."
+msgstr "Miglied '%s' existiert nicht"
 
 #: ../admin/sql_dobck.php:57
 msgid "Your backup parameters has been successfully changed."
@@ -3921,9 +3921,9 @@ msgid "Yes, delete the MySQL user"
 msgstr ""
 
 #: ../admin/sql_users_doadd.php:45 ../admin/sql_users_doadd.php:54
-#, php-format
-msgid "L'utilisateur '%s' a bien été créé."
-msgstr ""
+#, fuzzy, php-format
+msgid "The user '%s' has been successfully created."
+msgstr "Miglied '%s' existiert nicht"
 
 #: ../admin/sql_users_dopassword.php:39
 #, fuzzy, php-format
