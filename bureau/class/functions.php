@@ -846,56 +846,56 @@ function pager($offset, $count, $total, $url, $before = "", $after = "", $echo =
 }
 
 /**
- * 
+ * Create a password compatible with the password policy
  * @param int $length
  * @param int $classcount
- * @return string
+ * @return string a random password
  */
 function create_pass($length = 10, $classcount = 3) {
     $sets = array();
 
-    // Si classcount policy est 4 catégories différents, on utilise les 4 cat, sinon, on en utilise 3
+    // Use up to 4 character classes, 3 by default.
     if ($classcount < 4)
-	$available_sets='lud';
+        $available_sets='lud';
     else
-	$available_sets='luds';
+        $available_sets='luds';
 
     if(strpos($available_sets, 'l') !== false)
-	$sets[] = 'abcdefghijklmnopqrstuvwxyz';
+        $sets[] = 'abcdefghijklmnopqrstuvwxyz';
     if(strpos($available_sets, 'u') !== false)
-	$sets[] = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $sets[] = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     if(strpos($available_sets, 'd') !== false)
-	$sets[] = '0123456789';
+        $sets[] = '0123456789';
     if(strpos($available_sets, 's') !== false)
-	$sets[] = '(!#$%)*+,-./:;<=>?@[\]^_';
+        $sets[] = '(!#$%)*+,-./:;<=>?@[\]^_';
 
     $all = '';
     $password = '';
     foreach($sets as $set) {
-	$password .= $set[array_rand(str_split($set))];
-	$all .= $set;
+        $password .= $set[array_rand(str_split($set))];
+        $all .= $set;
     }
-
+    
     $all = str_split($all);
     for($i = 0; $i < $length - count($sets); $i++)
-	$password .= $all[array_rand($all)];
-
+        $password .= $all[array_rand($all)];
+    
     $password = str_shuffle($password);
-
+    
     return $password;
 }
 
 /**
- *  Affiche un bouton qui permet de generer automatiquement des mots de passes 
+ * Show a button to set a random password for a password field.
  * 
- * @param int $pass_size
- * @param string $fields_to_fill1
- * @param string $fields_to_fill2
+ * @param int $pass_size size of the password
+ * @param string $fields_to_fill1 html field where we will put the password
+ * @param string $fields_to_fill2 a second (password confirmation) field where we will put the password
  * @return int
  */
-function display_div_generate_password($pass_size = DEFAULT_PASS_SIZE, $fields_to_fill1 = "", $fields_to_fill2 = "") {
+function display_div_generate_password($pass_size = DEFAULT_PASS_SIZE, $fields_to_fill1 = "", $fields_to_fill2 = "", $classcount = 3) {
     static $id=1;
-    echo "<div id='z$id' style='display:none;'><a href=\"javascript:generate_password_html('$id',$pass_size,'$fields_to_fill1','$fields_to_fill2');\">";
+    echo "<div id='z$id' style='display:none;'><a href=\"javascript:generate_password_html('$id',$pass_size,'$fields_to_fill1','$fields_to_fill2',$classcount);\">";
     __("Clic here to generate a password");
     echo "</a></div>";
     echo "<script type='text/javascript'>$('#z$id').show();</script>";
@@ -904,7 +904,7 @@ function display_div_generate_password($pass_size = DEFAULT_PASS_SIZE, $fields_t
 }
 
 /**
- * Affiche un bouton pour selectionner un dossier sur le serveur 
+ * Show a button to select a folder on the server
  * 
  * @param string    $dir
  * @param string    $caller
