@@ -20,7 +20,7 @@ if ($db->query("SELECT uid,login FROM membres;")) {
       $qu=$list_quota[$db->f('uid')];
       $size=$qu['used'];
     } else {
-      // Le système de quota n'étant pas actif, on doit passer par un 'du' sur chaque dossier
+      // The QUOTA system being disabled, we need to use 'du' on each folder.
       $login = $db->f('login');
       $size=exec("/usr/lib/alternc/du.pl /var/www/alternc/".substr($login,0,1)."/".$login);
     }
