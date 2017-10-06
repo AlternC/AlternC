@@ -59,26 +59,23 @@ if (isset($saveret) && $saveret) {
 
     // Thanks to this, we bring you back to the EDIT form if the CSRF is invalid.
     // Allows you to re-submit
-    $error="";
+    // FIXME - doesn't work
+/*    $csrf_check=false;
     if (count($_POST) && !defined("NOCSRF")) {
         if (csrf_check()<=0) {
-            $error=$err->errstr();
+            $csrf_check = true;
         }
-    }
+    }*/
     
-    if ($error!="" && $bro->save($editfile,$R,$texte)) {
-        $error=sprintf(_("Your file %s has been saved"),$editfile)." (".format_date(_('%3$d-%2$d-%1$d %4$d:%5$d'),date("Y-m-d H:i:s")).")";
+    if ($bro->save($editfile,$R,$texte)) {
+        $msg->raise("INFO", "bro", _("Your file %s has been saved")." (".format_date(_('%3$d-%2$d-%1$d %4$d:%5$d'),date("Y-m-d H:i:s")).")", $editfile);
         include("bro_main.php");
         exit();
-    } else {
-        $error=$err->errstr();
     }
 }
 if (isset($save) && $save) {
   if ($bro->save($editfile,$R,$texte)) {
-    $error=sprintf(_("Your file %s has been saved"),$editfile)." (".format_date(_('%3$d-%2$d-%1$d %4$d:%5$d'),date("Y-m-d H:i:s")).")";
-  } else {
-    $error=$err->errstr();
+    $msg->raise("INFO", "bro", _("Your file %s has been saved")." (".format_date(_('%3$d-%2$d-%1$d %4$d:%5$d'),date("Y-m-d H:i:s")).")", $editfile);
   }
 }
 
@@ -86,7 +83,9 @@ include_once("head.php");
 
 ?>
 <p>
-<?php if (isset($error) && $error) echo "<p class=\"alert alert-danger\">$error</p>"; ?>
+<?php
+echo $msg->msg_html_all();
+?>
 <h3><?php echo _("File editing")." <code>".ehe($R,false)."/<b>".ehe($editfile,false)."</b></code><br />"; ?></h3>
 </p>
 

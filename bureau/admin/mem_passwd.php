@@ -38,10 +38,8 @@ getFields($fields);
 
 
 
-if (!$mem->passwd($oldpass,$newpass,$newpass2)) {
-	$error=$err->errstr();
-} else {
-	$error=_("Your password has been successfully changed.");
+if ($mem->passwd($oldpass,$newpass,$newpass2)) {
+	$msg->raise("INFO", "mem", _("Your password has been successfully changed."));
 }
 
 include_once("head.php");
@@ -49,10 +47,7 @@ include_once("head.php");
 ?>
 <div align="center"><h3><?php __("Password change"); ?></h3></div>
 <?php
-	if (isset($error) && $error) {
-		echo "<font color=red>$error</font>";
-		include("foot.php");
-		exit();
-	}
+echo $msg->msg_html_all();
+echo "<p><span class='ina'><a href='mem_param.php'>"._("Click here to continue")."</a></span></p>";
+include_once("foot.php");
 ?>
-<?php include_once("foot.php"); ?>

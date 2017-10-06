@@ -30,7 +30,8 @@
 require_once("../class/config.php");
 
 if (!$admin->enabled) {
-	__("This page is restricted to authorized staff");
+	$msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
+	echo $msg->msg_html_all();
 	exit();
 }
 
@@ -39,10 +40,8 @@ $fields = array (
 );
 getFields($fields);
 
-if (!$admin->normal2su($uid)) {
-	$error=$err->errstr();
- } else {
-  $error=_("This account is now an administrator account");
+if ($admin->normal2su($uid)) {
+  $msg->raise("INFO", "admin", _("This account is now an administrator account"));
  }
 
 include("adm_edit.php");

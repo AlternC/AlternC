@@ -1,7 +1,8 @@
 <?php
 require_once("../class/config.php");
 if (!$admin->enabled) {
-    __("This page is restricted to authorized staff");
+    $msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
+    echo $msg->msg_html_all();
     exit();
 }
 
@@ -20,12 +21,12 @@ $fields = array (
 );
 getFields($fields);
 
-if ( ! $dom->domains_type_update($name, $description, $target, $entry, $compatibility, $enable, $only_dns, $need_dns, $advanced,$create_tmpdir,$create_targetdir) ) {
-    die($err->errstr());
+if (! $dom->domains_type_update($name, $description, $target, $entry, $compatibility, $enable, $only_dns, $need_dns, $advanced,$create_tmpdir,$create_targetdir) ) {
+    include("adm_domstypedoedit.php");
 } else {
+    $msg->raise("INFO", "admin", _("Domain type is updated"));
     include("adm_domstype.php");
 }
-
 ?>
 
 

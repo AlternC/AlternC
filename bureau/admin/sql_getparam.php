@@ -34,30 +34,35 @@ $fields = array (
 	"dbname"    => array ("request", "string", ""),
 );
 getFields($fields);
-if (!$r=$mysql->get_dblist()) {
+if (!$res=$mysql->get_dblist()) {
 	$error=$err->errstr();
 }
 
-$r=$mysql->get_defaultsparam($dbname);
-if (!$r) {
-	$error=$err->errstr();
-}
+$res=$mysql->get_defaultsparam($dbname);
 
 ?>
 <h3><?php __("MySQL Databases"); ?></h3>
 <hr id="topbar"/>
 <br />
 <?php
-	if (isset($error) && $error) {
-		echo "<p class=\"alert alert-danger\">$error</p><p>&nbsp;</p>";
-        include_once("foot.php"); 
-        exit();
-    }
+echo $msg->msg_html_all();
+
+if ($msg->has_msgs("ERROR")) {
+    include_once("foot.php"); 
+    exit();
+}
 ?>
 <p><?php __("Your current connection settings are"); ?> : </p>
+
+<?php
+$i = 0;
+foreach ($res as $r) { 
+	$i++;
+	$title = (count($res) > 1)?"Paramètres ".$i:"Paramètres";
+?>
 <table class="tedit">
         <tr>
-	<th colspan="2" style='text-align:center;'><?php echo '<h1>'.$mysql->dbus->HumanHostname.'</h1>'; ?></th>
+	<th colspan="2" style='text-align:center;'><?php echo '<h1>'.$title.'</h1>'; ?></th>
         </tr>
 	<tr>
 		<th><?php __("Mysql Server"); ?></th>
@@ -65,7 +70,7 @@ if (!$r) {
 	</tr>
 	<tr>
 		<th><?php __("Database"); ?></th>
-<td><code><?php ehe($dbname); ?></code></td>
+		<td><code><?php ehe($dbname); ?></code></td>
 	</tr>
 <?php
 if(isset($r['user'])){
@@ -77,6 +82,18 @@ if(isset($r['user'])){
 	<tr>
 		<th><?php __("Password"); ?></th>
 		<td><code><?php echo $r['password']; ?></code></td>
+	</tr>
+	<tr>
+		<th>Droits de l'utilisateur</th>
+<?php
+// On teste la valeur de retour 'Rights' afin de savoir si cet utilisateur à tous les droits ou seulement certains et on place le bouton "Gestion des droits"
+if ($r[Rights] == 'All') {
+	$rights = "Tous";
+} else {
+	$rights = "<span style='color:orange;'>Sélectifs</span>";
+}
+?>
+		<td><?php echo $rights; ?>&nbsp;&nbsp;<span class="ina configure"><a href="sql_users_rights.php?id=<?php echo $r["user"] ?>"><?php __("Manage the rights"); ?></a></span></td>
 	</tr>
 	<tr>
 		<td colspan="2" align="center">
@@ -95,6 +112,8 @@ if(!isset($r['user'])){
 	echo "<p class=\"alert alert-warning\">";__("You changed the MySQL User base configuration. Please refer to your configuration");echo"</p><p>&nbsp;</p>";
 }
 ?>
+<br>
+<?php } // Fin foreach ?>
 <p><span class="ina back"><a href="sql_list.php"><?php __("Back to the MySQL database list"); ?></a></span></p>
 
 

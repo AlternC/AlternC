@@ -38,13 +38,9 @@ $rdb=$mysql->get_dblist();
 <hr id="topbar"/>
 <br />
 <?php
-if (isset($info) && $info) {
-	echo "<p class=\"alert alert-info\">$info</p><p>&nbsp;</p>";
-}
-if (isset($error) && $error) {
-	echo "<p class=\"alert alert-danger\">$error</p><p>&nbsp;</p>";
-}
-  if($r){ // if there is some userlist
+echo $msg->msg_html_all(true, true);
+
+if($r){ // if there is some userlist
 ?>
 <form method="post" action="sql_users_del.php">
       <?php csrf_get(); ?>
@@ -78,7 +74,10 @@ for($i=0;$i<count($r);$i++) {
 <br/>
 
 <?php
-  } // if $r
+  } else {
+   $msg->raise("INFO", "mysql", _("You have no sql user at the moment."));
+   echo $msg->msg_html_all();
+  }
 ?>
   <span class="ina add"><a href="sql_users_add.php"><?php __("Create a new MySQL user"); ?></a></span>
 <?php include_once("foot.php"); ?>

@@ -2,10 +2,6 @@
 
 /*
   ----------------------------------------------------------------------
-  AlternC - Web Hosting System
-  Copyright (C) 2000-2012 by the AlternC Development Team.
-  https://alternc.org/
-  ----------------------------------------------------------------------
   LICENSE
 
   This program is free software; you can redistribute it and/or
@@ -20,60 +16,71 @@
 
   To read the license please visit http://www.gnu.org/copyleft/gpl.html
   ----------------------------------------------------------------------
-  Purpose of file: Manage Log files for users
-  ----------------------------------------------------------------------
- */
+*/
 
 /**
- * Classe de gestion des erreurs apparaissant lors d'appels API.
+ * This class shows error or access logs of web server to the web panel
  */
 class m_log {
 
-    function m_log() {
-        
-    }
-
+    /**
+     * List all logs files in a directory 
+     */
     function list_logs_directory($dir) {
-        global $cuid, $err;
-        $err->log("log", "list_logs_directory");
+        global $cuid, $msg;
+        $msg->log("log", "list_logs_directory");
 
         $c = array();
         foreach (glob("${dir}/*log*") as $absfile) {
             $c[] = array("name" => basename($absfile),
-                "creation_date" => date("F d Y H:i:s", filectime($absfile)),
-                "mtime" => filemtime($absfile),
-                "filesize" => filesize($absfile),
-                "downlink" => urlencode(basename($absfile)),
+            "creation_date" => date("F d Y H:i:s", filectime($absfile)),
+            "mtime" => filemtime($absfile),
+            "filesize" => filesize($absfile),
+            "downlink" => urlencode(basename($absfile)),
             );
         }
         usort($c, "m_log::compare_logtime");
         return $c;
     }
 
-    // Used by list_logs_directory to sort
+
+    /**
+     * Used by list_logs_directory to sort
+     */
     private function compare_logname($a, $b) {
         return strcmp($a['name'], $b['name']);
     }
 
-    // Used by list_logs_directory to sort
+
+    /**
+     * Used by list_logs_directory to sort
+     */
     private function compare_logtime($a, $b) {
         return $b['mtime'] - $a['mtime'];
     }
 
+
+    /**
+     * hook called by the menu class
+     * to add menu to the left panel
+     */
     function hook_menu() {
         $obj = array(
             'title' => _("Logs"),
             'ico' => 'images/logs.png',
             'link' => 'logs_list.php',
             'pos' => 130,
-                );
+        );
 
         return $obj;
     }
 
+    /**
+     * list all log files in all log directories
+     */
     function list_logs_directory_all($dirs) {
-        global $err;
-        $err->log("log", "get_logs_directory_all");
+        global $msg;
+        $msg->log("log", "get_logs_directory_all");
         $c = array();
         foreach ($dirs as $dir => $val) {
             $c[$dir] = $this->list_logs_directory($val);
@@ -81,9 +88,10 @@ class m_log {
         return $c;
     }
 
+
     function get_logs_directory() {
-        global $cuid, $mem, $err;
-        $err->log("log", "get_logs_directory");
+        global $cuid, $mem, $msg;
+        $msg->log("log", "get_logs_directory");
         // Return an array to allow multiple directory in the future
         if (defined('ALTERNC_LOGS_ARCHIVE')) {
             $c = array("dir" => ALTERNC_LOGS_ARCHIVE . "/" . $cuid . "-" . $mem->user["login"]);
@@ -93,9 +101,13 @@ class m_log {
         return $c;
     }
 
+
+    /**
+     * download a log file
+     */
     function download_link($file) {
-        global $err;
-        $err->log("log", "download_link");
+        global $msg;
+        $msg->log("log", "download_link");
         header("Content-Disposition: attachment; filename=" . $file . "");
         header("Content-Type: application/force-download");
         header("Content-Transfer-Encoding: binary");
@@ -105,9 +117,12 @@ class m_log {
         readfile($ff);
     }
 
+    /** 
+     * show the last lines of a file
+     */
     function tail($file, $lines = 20) {
-        global $err;
-        $err->log("log", "tail");
+        global $msg;
+        $msg->log("log", "tail");
         $lines = intval($lines);
         if ($lines <= 0) {
             $lines = 20;
@@ -119,6 +134,4 @@ class m_log {
         return implode("\n", $out);
     }
 
-}
-
-// end class
+} /* class m_log */

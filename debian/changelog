@@ -14,8 +14,9 @@ alternc (3.1.11) oldoldstable; urgency=low
   * fix opendkim signing for mails submitted over the network
   * fix a LOT of bugs from Github: #128 #69 #116 #123 #126 #134 #139 #156 #173 #138
   * fix more BUGS from Github: #178 #159 #155 #176 #161 #162 #164 #165 #166 #170 #175 #177
+  * enhanced message class, managed both logs to /var/log/alternc and LEVELS of messages
 
- -- Benjamin Sonntag <benjamin@sonntag.fr>  Wed,  7 Jun 2017 10:36:00 +0300
+ -- Benjamin Sonntag <benjamin@sonntag.fr>  Wed,  7 Oct 2017 23:36:00 +0200
 
 alternc (3.1.10) oldoldstable; urgency=low
 

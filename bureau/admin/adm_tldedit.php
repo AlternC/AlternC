@@ -30,7 +30,8 @@
 require_once("../class/config.php");
 
 if (!$admin->enabled) {
-        __("This page is restricted to authorized staff");
+	$msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
+	echo $msg->msg_html_all();
         exit();
 }
 
@@ -41,7 +42,6 @@ getFields($fields);
 
 $mode=$admin->gettld($tld);
 if ($mode===false) {
-	$error=$err->errstr();
 	include("adm_tld.php");
 	exit();
 }
@@ -53,9 +53,7 @@ include_once("head.php");
 <hr id="topbar"/>
 <br />
 <?php
-        if (isset($error) && $error) {
-                echo "<p class=\"alert alert-danger\">$error</p>";
-        }
+echo $msg->msg_html_all();
 ?>
 <h3><?php __("Edit a TLD"); ?></h3>
 

@@ -30,10 +30,12 @@
 require_once("../class/config.php");
 include_once("head.php");
 
-$fields = array (
-	"dir"      => array ("request", "string", ""),
-);
-getFields($fields);
+if (!isset($is_include)) {
+  $fields = array (
+    "dir"      => array ("request", "string", ""),
+  );
+  getFields($fields);
+}
 
 ?>
 <h3><?php __("Protect a folder"); ?></h3>
@@ -43,11 +45,8 @@ getFields($fields);
 <?php __("Enter the name of the folder you want to protect. It must already exists."); ?>
 </p>
 <?php
-if (isset($error) && $error) {
-  echo "<p class=\"alert alert-danger\">$error</p>";
-  include_once("foot.php");
-  exit;
-} ?>
+echo $msg->msg_html_all();
+?>
 
 <form method="post" action="hta_doadd.php" name="main" id="main">
   <?php csrf_get(); ?>

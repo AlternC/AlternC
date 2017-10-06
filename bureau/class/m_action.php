@@ -18,7 +18,7 @@
   Original Author of file: Lerider Steven
   Purpose of file: Manage generic actions.
   ----------------------------------------------------------------------
- */
+*/
 
 /**
  * This class manage actions to be performed on the file system on behalf of alternc Classes
@@ -43,13 +43,13 @@ class m_action {
     /**
      * Plans the cration of a file 
      * 
-     * @global \m_err $err
+     * @global m_messages $msg
      * @global string $L_INOTIFY_DO_ACTION
      * @return boolean
      */
     function do_action() {
-        global $err, $L_INOTIFY_DO_ACTION;
-        $err->log("action", "do_action");
+        global $msg, $L_INOTIFY_DO_ACTION;
+        $msg->log("action", "do_action");
         if (!@touch($L_INOTIFY_DO_ACTION)) {
             return FALSE;
         }
@@ -152,14 +152,14 @@ class m_action {
      * 
      * @global int $cuid
      * @global m_mysql $db
-     * @global m_err $err
+     * @global m_messages $msg
      * @param string $archive Directory to archive within the archive_del_data folder if set in variable sql table
      *                      If archive_del_data is not set we delete the folder
      * @param string $dir  sub_directory of the archive directory
      * @return boolean
      */
     function archive($archive, $dir = "html") {
-        global $cuid, $db, $err;
+        global $cuid, $db, $msg;
 
         $arch = variable_get('archive_del_data');
         if (empty($arch)) {
@@ -170,7 +170,7 @@ class m_action {
         $db->query("select login from membres where uid= ?;", array($cuid));
         $db->next_record();
         if (!$db->Record["login"]) {
-            $err->raise("action", _("Login corresponding to $cuid not found"));
+            $msg->raise("ERROR", "action", _("Login corresponding to $cuid not found"));
             return false;
         }
         $uidlogin = $cuid . "-" . $db->Record["login"];
@@ -187,32 +187,32 @@ class m_action {
      * function inserting the action in the sql table
      * 
      * @global m_mysql $db
-     * @global m_err $err
+     * @global m_messages $msg
      * @param string $type
      * @param string|integer $user wich user do we impersonate?
      * @param mixed $parameters
      * @return boolean
      */
     function set($type, $user, $parameters) {
-        global $db, $err;
-        $err->log("action", "set", $type);
+        global $db, $msg;
+        $msg->log("action", "set", $type);
         $serialized = serialize($parameters);
-	$type = strtoupper($type);
-	if (in_array($type, array('CHMOD',
-                                  'CREATE_FILE', 
-				  'CREATE_DIR', 
-				  'MOVE', 
-				  'FIX_USER', 
-				  'FIX_FILE', 
-				  'FIX_DIR', 
-				  'DELETE'))) {
-	  $query = "INSERT INTO `actions` (type, parameters, creation, user) VALUES('$type', '$serialized', now(), '$user');";
-	} else {
-	  return False;
-	}
+        $type = strtoupper($type);
+        if (in_array($type, array('CHMOD',
+        'CREATE_FILE', 
+        'CREATE_DIR', 
+        'MOVE', 
+        'FIX_USER', 
+        'FIX_FILE', 
+        'FIX_DIR', 
+        'DELETE'))) {
+            $query = "INSERT INTO `actions` (type, parameters, creation, user) VALUES('$type', '$serialized', now(), '$user');";
+        } else {
+            return False;
+        }
 
         if (!$db->query($query)) {
-            $err->raise("action", _("Error setting actions"));
+            $msg->raise("ERROR", "action", _("Error setting actions"));
             return false;
         }
         return $this->do_action();
@@ -221,17 +221,17 @@ class m_action {
     /**
      * This seems to be unused ?
      * 
-     * @global m_err $err
+     * @global m_messages $msg
      * @global m_mysql $db
      * @return boolean
      */
     function get_old() {
-        global $err, $db;
+        global $msg, $db;
 
         $purge = "select * from actions where TO_DAYS(curdate()) - TO_DAYS(creation) > 2;";
         $result = $db->query($purge);
         if (!$result) {
-            $err->raise("action", _("Error selecting  old actions"));
+            $msg->raise("ERROR", "action", _("Error selecting  old actions"));
             return false;
         }
         return $db->num_rows($result);
@@ -239,13 +239,13 @@ class m_action {
 
     /**
      * 
-     * @global m_err $err
+     * @global m_messages $msg
      * @global m_mysql $db
      * @param type $all
      * @return boolean
      */
     function purge($all = null) {
-        global $err, $db;
+        global $msg, $db;
         if (is_null($all)) {
             $purge = "delete from actions where TO_DAYS(curdate()) - TO_DAYS(creation) > 2 and status = 0;";
         } else {
@@ -253,7 +253,7 @@ class m_action {
         }
         $result = $db->query($purge);
         if (!$result) {
-            $err->raise("action", _("Error purging old actions"));
+            $msg->raise("ERROR", "action", _("Error purging old actions"));
             return false;
         }
         return $db->num_rows($result);
@@ -263,11 +263,10 @@ class m_action {
      *  function returning the first not locked line of the action table 
      * 
      * @global m_mysql $db
-     * @global m_err $err
      * @return boolean or array
      */
     function get_action() {
-        global $db, $err;
+        global $db;
 
         $tab = array();
         $db->query('select * from actions where end = 0 and begin = 0 order by id limit 1;');
@@ -283,14 +282,14 @@ class m_action {
      * function locking an entry while it is being executed by the action script
      * 
      * @global m_mysql $db
-     * @global m_err $err
+     * @global m_messages $msg
      * @param int $id
      * @return boolean
      */
     function begin($id) {
-        global $db, $err;
+        global $db, $msg;
         if (!$db->query("update actions set begin=now() where id= ? ;", array($id))) {
-            $err->raise("action", _("Error locking the action : $id"));
+            $msg->raise("ERROR", "action", _("Error locking the action : $id"));
             return false;
         }
         return true;
@@ -300,15 +299,15 @@ class m_action {
      *  function locking an entry while it is being executed by the action script
      * 
      * @global m_mysql $db
-     * @global m_err $err
+     * @global m_messages $msg
      * @param int $id
      * @param integer $return
      * @return boolean
      */
     function finish($id, $return = 0) {
-        global $db, $err;
+        global $db, $msg;
         if (!$db->query("update actions set end=now(),status=? where id= ?;", array($return, $id))) {
-            $err->raise("action", _("Error unlocking the action : $id"));
+            $msg->raise("ERROR", "action", _("Error unlocking the action : $id"));
             return false;
         }
         return true;
@@ -317,14 +316,14 @@ class m_action {
     /**
      * 
      * @global m_mysql $db
-     * @global m_err $err
+     * @global m_messages $msg
      * @param int $id
      * @return boolean
      */
     function reset_job($id) {
-        global $db, $err;
+        global $db, $msg;
         if (!$db->query("update actions set end=0,begin=0,status='' where id= ?;", array($id))) {
-            $err->raise("action", _("Error unlocking the action : $id"));
+            $msg->raise("ERROR", "action", _("Error unlocking the action : $id"));
             return false;
         }
         return true;
@@ -334,7 +333,7 @@ class m_action {
      * Returns a list of actions marked as executable and ready for execution
      * 
      * @global m_mysql $db
-     * @global m_err $err
+     * @global m_messages $msg
      * @return boolean 
      */
     function get_job() {

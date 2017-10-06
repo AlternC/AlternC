@@ -11,7 +11,8 @@ $fields = array (
 getFields($fields);
 
 if (!$admin->enabled) {
-  __("This page is restricted to authorized staff");
+  $msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
+  echo $msg->msg_html_all();
   exit();
 }
 
@@ -22,9 +23,7 @@ include_once ("head.php");
 <hr id="topbar"/>
 <br />
 <?php
-if (isset($error) && $error) {
-  echo "<p class=\"alert alert-warning\">$error</p>";
-}
+echo $msg->msg_html_all();
 ?>
 <p>
 <?php __("This page shows the space and service count of your AlternC server and each AlternC accounts.");
@@ -279,7 +278,7 @@ foreach ($membres_list as $c) {
     $mls+=$mlstmp;
   }
   $one["mailsize"]=$ms;
-  $one["mailmainsize"]=$mls;
+  $one["mailmansize"]=$mls;
 
   // Mail Count
   $maildomains_list = $mail->enum_domains($c["uid"]);
@@ -350,7 +349,7 @@ foreach ($all as $c) {
   $mls=$c["mailmansize"];
 
   $mailsize=$quota->get_size_unit($ms);
-  $mailmansize=$quota->get_size_unit($mls);
+  $mailmansize=$quota->get_size_unit($mls * 1024);
 
   // Espace WEB
   $ws = $c["websize"];

@@ -40,25 +40,17 @@ getFields($fields);
 
 $dom->lock();
 
-if (!$dom->edit_domain($domain,$dns,$email,0,$ttl)) {
-  $error=$err->errstr();
-  include("dom_edit.php");
-  $dom->unlock();
-  exit();
- }
-$dom->unlock();
-
-?>
-<h3><?php printf(_("Editing domain %s"),$domain); ?></h3>
-<hr id="topbar"/>
-<br />
-<p>
-<?php
-  printf(_("The domain %s has been changed."),$domain);
+$r = $dom->get_domain_all($domain);
+if ($r["dns"] == $dns && $r["mail"] == $email && $r["zonettl"] == $ttl) {
+  $msg->raise("INFO", "dom", _("No change has been requested..."));
+} else if ($dom->edit_domain($domain,$dns,$email,0,$ttl)) {
+  $msg->raise("INFO", "dom", _("The domain %s has been changed."),$domain);
   $t = time();
 // XXX: we assume the cron job is at every 5 minutes
-  print strtr(_("The modifications will take effect at %time.  Server time is %now."), array('%now' => date('H:i:s', $t), '%time' => date('H:i:s', ($t-($t%300)+300)))); 
-?><br /><br />
-<span class="ina"><a href="dom_edit.php?domain=<?php echo urlencode($domain) ?>" ><?php __("Click here to continue"); ?></a></span>
-</p>
-<?php include_once("foot.php"); ?>
+  $msg->raise("INFO", "dom", _("The modifications will take effect at %s.  Server time is %s."), array(date('H:i:s', ($t-($t%300)+300)), date('H:i:s', $t)));
+}
+$dom->unlock();
+
+include("dom_edit.php");
+exit();
+?>

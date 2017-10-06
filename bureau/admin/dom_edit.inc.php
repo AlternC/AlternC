@@ -6,18 +6,15 @@ include_once("head.php");
 # Take the values of the subdomain in arguments
 
 function sub_domains_edit($domain, $sub_domain_id=false) {
-  global $admin, $err, $oldid, $isedit;
+  global $admin, $msg, $oldid, $isedit;
 
 $dom=new m_dom();
 $dom->lock();
-if (!$r=$dom->get_domain_all($domain)) {
-  $error=$err->errstr();
-}
+
+$r=$dom->get_domain_all($domain);
 /*
 if (! empty($sub)) {
-   if (!$sd=$dom->get_sub_domain_all($domain,$sub,$type,$value)) {
-     $error=$err->errstr();
-   }
+   $sd=$dom->get_sub_domain_all($domain,$sub,$type,$value);
 }
 */
 $sd=$dom->get_sub_domain_all($sub_domain_id);
@@ -26,6 +23,7 @@ $type=$sd['type'];
 $sub=$sd['name'];
 
 $dom->unlock();
+
 ?>
 
 <form action="dom_subdoedit.php" method="post" name="main" id="main">

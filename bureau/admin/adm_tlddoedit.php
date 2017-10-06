@@ -36,16 +36,16 @@ getFields($fields);
 
 
 if (!$admin->enabled) {
-        __("This page is restricted to authorized staff");
+	$msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
+	echo $msg->msg_html_all();
         exit();
 }
 
 if (!$admin->edittld($tld,$mode)) {
-        $error=$err->errstr();
         include("adm_tldedit.php");
         exit();
 } else {
-        $error=_("The TLD has been successfully edited");
+        $msg->raise("INFO", "admin", _("The TLD has been successfully edited"));
         include("adm_tld.php");
         exit();
 }

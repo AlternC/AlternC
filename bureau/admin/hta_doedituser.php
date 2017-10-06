@@ -39,26 +39,16 @@ $fields = array (
 getFields($fields);
 
 if ($newpass != $newpassconf) {
-	$error = _("Passwords do not match");
+	$msg->raise("ERROR", "hta", _("Passwords do not match"));
 	include("hta_edituser.php");
 	exit();
 }
 
-if (!$hta->change_pass($user,$newpass,$dir)) {
-		$error=$err->errstr();
+if ($hta->change_pass($user,$newpass,$dir)) {
+	$msg->raise("INFO", "hta", _("The password of the user %s has been successfully changed"), $user);
+	$is_include=true;
+	include_once("hta_edit.php");
+} else {
+	include("hta_edituser.php");
 }
-
 ?>
-<h3><?php printf(_("Change the user %s in the protected folder %s"),$user,$dir); ?></h3>
-<hr id="topbar"/>
-<br />
-<?php
-	if (isset($error) && $error) {
-		echo "<p class=\"alert alert-danger\">$error</p>";
-	}
-	else {
-		echo "<p>".sprintf(_("The password of the user %s has been successfully changed"),$user)."</p>";
-	}
-	echo "<p><span class=\"ina\"><a href=\"hta_edit.php?dir=$dir\">"._("Click here to continue")."</a></span></p>";
-?>
-<?php include_once("foot.php"); ?>

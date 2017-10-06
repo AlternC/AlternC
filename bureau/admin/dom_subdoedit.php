@@ -50,18 +50,17 @@ $dom->lock();
 
 $dt=$dom->domains_type_lst();
 if ( (!isset($isinvited) || !$isinvited) && $dt[strtolower($type)]["enable"] != "ALL" ) {
-  __("This page is restricted to authorized staff");
+  $msg->raise("ERROR", "dom", _("This page is restricted to authorized staff"));
+  include("dom_edit.php");
   exit();
 }
 
-
-
+if (empty($sub_domain_id)) $sub_domain_id=null;
 $r=$dom->set_sub_domain($domain,$sub,$type,$value, $sub_domain_id);
 
 $dom->unlock();
 
 if (!$r) {
-  $error=$err->errstr();
   $noread=true;
   include("dom_subedit.php"); 
   exit();
@@ -69,7 +68,7 @@ if (!$r) {
   $t = time();
   // XXX: we assume the cron job is at every 5 minutes
   $noread=false;
-  $error=strtr(_("The modifications will take effect at %time. Server time is %now."), array('%now' => date('H:i:s', $t), '%time' => date('H:i:s', ($t-($t%300)+300))));
+  $msg->raise("INFO", "dom", _("The modifications will take effect at %s. Server time is %s."), array(date('H:i:s', ($t-($t%300)+300)), date('H:i:s', $t)));
   foreach($fields as $k=>$v) unset($$k);
 }
 include("dom_edit.php");

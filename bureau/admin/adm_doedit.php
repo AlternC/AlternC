@@ -32,7 +32,8 @@
 require_once("../class/config.php");
 
 if (!$admin->enabled) {
-  __("This page is restricted to authorized staff");
+  $msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
+  echo $msg->msg_html_all();
   exit();
 }
 
@@ -56,12 +57,13 @@ getFields($fields);
 
 
 if ($subadmin==0 && !$admin->checkcreator($uid)) {
-  __("This page is restricted to authorized staff");
+  $msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
+  echo $msg->msg_html_all();
   exit();
 }
 
 if ($pass != $passconf) {
-  $error = _("Passwords do not match");
+  $msg->raise("ERROR", "admin", _("Passwords do not match"));
   include("adm_edit.php");
   exit();
 }
@@ -71,9 +73,8 @@ if ($uid==$mem->user["uid"]) {
 }
 
 if (!$admin->update_mem($uid, $nmail, $nom, $prenom, $pass, $enabled, $canpass, $type, $duration, $notes, $reset_quotas)){
-  $error=$err->errstr();
   include("adm_edit.php");
 } else {
-  $error=_("The member has been successfully edited");
+  $msg->raise("INFO", "admin", _("The member has been successfully edited"));
   include("adm_list.php");
 }

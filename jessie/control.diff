@@ -1,5 +1,5 @@
---- debian/control	2017-08-12 17:23:26.603473696 +0200
-+++ /tmp/control.jessie	2017-08-12 17:24:48.811868407 +0200
+--- control.wheezy	2017-10-06 12:13:49.765062335 +0200
++++ control	2017-10-06 12:15:52.021333089 +0200
 @@ -15,7 +15,7 @@
             , bash (>= 4)
             , acl
@@ -9,21 +9,20 @@
         , libapache2-mod-php5
         , php5-mysql
         , phpmyadmin
-@@ -38,10 +38,9 @@
+@@ -38,9 +38,9 @@
         , sudo
         , adduser
         , dnsutils
--       , dovecot-common (>=1:1.2.15)
--       , dovecot-common(<< 1:2.0)
--       , dovecot-imapd (>= 1:1.2.15)
--       , dovecot-pop3d (>= 1:1.2.15)
+-       , dovecot-common (>=1:2.1.7)
+-       , dovecot-imapd
+-       , dovecot-pop3d
 +       , dovecot-core (>=1:2.1.7)
 +       , dovecot-imapd (>=1:2.1.7)
 +       , dovecot-pop3d (>=1:2.1.7)
+        , dovecot-mysql
         , vlogger
         , mailutils | mailx
-        , zip
-@@ -99,7 +98,7 @@
+@@ -102,7 +102,7 @@
  Architecture: all
  Pre-depends: debconf (>= 0.5.00) | debconf-2.0, acl
  Depends: debianutils (>= 1.13.1)
@@ -32,17 +31,16 @@
           , libapache2-mod-php5
           , php5-mysql
           , phpmyadmin
-@@ -123,10 +122,9 @@
+@@ -126,9 +126,9 @@
           , gettext (>= 0.10.40-5)
           , adduser
           , sudo
--         , dovecot-common (>=1:1.2.15)
--         , dovecot-common(<< 1:2.0)
--         , dovecot-imapd (>= 1:1.2.15)
--         , dovecot-pop3d (>= 1:1.2.15)
-+	 , dovecot-core (>=1:2.1.7)
+-         , dovecot-common (>=1:2.1.7)
+-         , dovecot-imapd
+-         , dovecot-pop3d
++         , dovecot-core (>=1:2.1.7)
 +         , dovecot-imapd (>=1:2.1.7)
 +         , dovecot-pop3d (>=1:2.1.7)
+          , dovecot-mysql
           , vlogger
           , mailutils | mailx
-          , incron

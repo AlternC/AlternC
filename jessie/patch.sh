@@ -21,7 +21,7 @@ cp roundcube.config.inc.php ../roundcube/templates/roundcube/config.inc.php
 rm ../roundcube/templates/roundcube/main.inc.php
 cp roundcube.password.config.inc.php ../roundcube/templates/roundcube/plugins/password/config.inc.php
 cp roundcube-install ../roundcube/
-cp roundcube.makefile ../roundcube/Makefile
+cp alternc-roundcube.postinst ../debian/
 
 # alternc-ssl package : 
 cp ssl.conf ../ssl/

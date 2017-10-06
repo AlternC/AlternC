@@ -30,7 +30,8 @@
 require_once("../class/config.php");
 
 if (!$admin->enabled) {
-	__("This page is restricted to authorized staff");
+	$msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
+	echo $msg->msg_html_all();
 	exit();
 }
 
@@ -43,10 +44,7 @@ include_once("head.php");
 
 <br />
 <?php
-if (!empty($error)) {
-  echo "<p class=\"alert alert-danger\">$error</p>";
-}
-
+echo $msg->msg_html_all();
 ?>
 <p>
 <?php __("Here is the list of domain types."); ?>

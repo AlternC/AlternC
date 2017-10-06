@@ -19,14 +19,13 @@ $sub=$domi['name'];
 $dom->unlock();
 
 if (!$r) {
-  $error=$err->errstr();
   $noread=true;
   include("dom_edit.php"); 
   exit();
 } else {
   $t = time();
   // XXX: we assume the cron job is at every 5 minutes
-  $error=strtr(_("The modifications will take effect at %time. Server time is %now."), array('%now' => date('H:i:s', $t), '%time' => date('H:i:s', ($t-($t%300)+300))));
+  $msg->raise("INFO", "dom", _("The modifications will take effect at %s. Server time is %s."), array(date('H:i:s', ($t-($t%300)+300)), date('H:i:s', $t)));
   foreach($fields as $k=>$v) unset($k);
 }
 include("dom_edit.php");

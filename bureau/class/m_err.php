@@ -1,7 +1,5 @@
 <?php
-
 /*
-  $Id: m_err.php,v 1.4 2004/05/19 14:23:06 benjamin Exp $
   ----------------------------------------------------------------------
   LICENSE
 
@@ -17,9 +15,7 @@
 
   To read the license please visit http://www.gnu.org/copyleft/gpl.html
   ----------------------------------------------------------------------
-  Original Author of file: Benjamin Sonntag, Franck Missoum
-  ----------------------------------------------------------------------
- */
+*/
 
 /**
  * Classe de gestion des erreurs apparaissant lors d'appels API.
@@ -38,16 +34,16 @@
 class m_err {
 
     /** Numero de classe d'erreur actuelle */
-    var $clsid = 0;
+    var $clsid=0;
 
     /** Dernière erreur enregistrée par la classe */
-    var $error = 0;
+    var $error=0;
 
     /** Paramètre chaine eventuellement associé à la dernière erreur */
-    var $param = "";
+    var $param="";
 
     /** Emplacement du fichier de logs d'AlternC */
-    var $logfile = "/var/log/alternc/bureau.log";
+    var $logfile="/var/log/alternc/bureau.log"; 
 
     /**
      * Leve une erreur, signale celle-ci dans les logs et stocke le code erreur
@@ -63,19 +59,22 @@ class m_err {
      * @return boolean TRUE si l'erreur est connue, FALSE sinon.
      *
      */
-    function raise($clsid, $error, $param = "") {
-        /* Leve une exception. Si elle existe, sinon, stocke un message d'erreur sur erreur ... */
-        if (_("err_" . $clsid . "_" . $error) != "err_" . $clsid . "_" . $error || is_string($error)) {
-            $this->clsid = $clsid;
-            $this->error = $error;
+    function raise($clsid,$error,$param="") {
+    
+        // This is the old method, deprecation warning 
+        $this->deprecated();
+        /* Leve une exception. Si elle existe, sinon, stocke un message d'erreur sur erreur ...*/
+        if (_("err_".$clsid."_".$error)!="err_".$clsid."_".$error || is_string($error)) {
+            $this->clsid=$clsid;
+            $this->error=$error;
             $args = func_get_args();
-            $this->param = array_slice($args, 2);
+            $this->param=array_slice($args, 2);
             $this->logerr();
             return true;
         } else {
-            $this->clsid = "err";
-            $this->error = 1;
-            $this->param = "Error # $error in Class $clsid, Value is $param. (sorry, no text for this error in your language at the moment)";
+            $this->clsid="err";
+            $this->error=1;
+            $this->param="Error # $error in Class $clsid, Value is $param. (sorry, no text for this error in your language at the moment)";
             $this->logerr();
             return false;
         }
@@ -94,10 +93,10 @@ class m_err {
     function errstr() {
         if (is_string($this->error)) {
             // new way of handling errors: message directly in the class
-            $str = $this->error . "\n";
+            $str = $this->error."\n";
         } else {
             // old way: message in the locales files (ugly)
-            $str = _("err_" . $this->clsid . "_" . $this->error) . "\n";
+            $str = _("err_".$this->clsid."_".$this->error)."\n";
         }
         $args = $this->param;
         if (is_array($args)) {
@@ -119,7 +118,7 @@ class m_err {
      */
     function logerr() {
         global $mem;
-        @file_put_contents($this->logfile, date("d/m/Y H:i:s") . " - " . get_remote_ip() . " - ERROR - " . $mem->user["login"] . " - " . $this->errstr(), FILE_APPEND);
+        @file_put_contents($this->logfile, date("d/m/Y H:i:s")." - ERROR - ".$mem->user["login"]." - ".$this->errstr(), FILE_APPEND );
     }
 
     /**
@@ -134,11 +133,22 @@ class m_err {
      * @return boolean TRUE si le log a été ajouté, FALSE sinon
      *
      */
-    function log($clsid, $function, $param = "") {
-        global $mem;
-        return @file_put_contents($this->logfile, date("d/m/Y H:i:s") . " - " . get_remote_ip() . " - CALL - " . $mem->user["login"] . " - $clsid - $function - $param\n", FILE_APPEND);
+    function log($clsid,$function,$param="") {
+        global $mem,$cuid;
+        // This is the old method, deprecation warning 
+        $this->deprecated();
+        return @file_put_contents($this->logfile,date("d/m/Y H:i:s")." - " .get_remote_ip(). " - CALL - ".$mem->user["login"]." - $clsid - $function - $param\n", FILE_APPEND );
+    }
+    /**
+     * This method is present in order to allow slow deprecation 
+     */
+    function deprecated(){
+        global $msg;
+        $trace = debug_backtrace();
+        $caller = $trace[2];
+        $msg->raise( "error","err","Deprecation warning: The old messaging class is still used by ".json_encode( $caller ));
     }
 
-}
+} /* Classe m_err */
 
-/* Classe m_err */
+

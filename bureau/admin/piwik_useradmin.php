@@ -39,7 +39,7 @@ getFields($fields);
 
 if ($user_name === FALSE)
 {
-	$error = _('No piwik user specified');
+	 $msg->raise("ERROR", "piwik", _('No piwik user specified'));
 }
 else
 {
@@ -49,7 +49,7 @@ else
 		$db->next_record();
 		if ($db->f('ok')!=1)
 		{
-			$error = _("You don't own this piwik website");
+			$msg->raise("ERROR", "piwik", _("You don't own this piwik website"));
 		}
 		else
 		{
@@ -57,7 +57,7 @@ else
 			$db->next_record();
 			if ($db->f('ok')!=1)
 			{
-				$error = _("You don't own this piwik user");
+				$msg->raise("ERROR", "piwik", _("You don't own this piwik user"));
 			}
 			else
 			{
@@ -66,13 +66,13 @@ else
 				{
 					$api_data = $piwik->site_set_user_right($site_id, $user_name, $right);
 					if ($api_data === FALSE)
-						echo $error;
+						$msg->raise("ERROR", "piwik", $api_data->message)
 					else
-						__('success');
+						$msg->raise("INFO", "piwik", _('success'));
 				}
 				else
 				{
-					$error = _("This right does not exist");
+					$msg->raise("ERROR", "piwik", _("This right does not exist"));
 				}
 			}
 		}
@@ -96,14 +96,11 @@ else
 	$user_piwik_users = array_flip($user_piwik_users);
 }
 
-
-if (isset($error) && $error) {
-  	echo "<p class=\"alert alert-danger\">$error</p>";
-	exit;
-}
 ?>
 <h3><?php printf('%s "%s"', _("Rights for user"), $user_name); ?></h3>
 <?php
+echo $msg->msg_html_all();
+
 $raw_sites = $piwik->get_site_list();
 $piwik_sites = array();
 foreach ($raw_sites AS $site) {

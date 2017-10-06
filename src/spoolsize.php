@@ -18,9 +18,14 @@ if ($db->query("SELECT uid,login FROM membres;")) {
   while ($db->next_record()) {
     if (isset($list_quota[$db->f('uid')])) {
       $qu=$list_quota[$db->f('uid')];
-      $db2->query("REPLACE INTO size_web SET uid=?, size=?;",array(intval($db->f('uid')),intval($qu['used'])));
-      echo $db->f('login')." (".$qu['used']." B)\n";
-    }  
+      $size=$qu['used'];
+    } else {
+      // The QUOTA system being disabled, we need to use 'du' on each folder.
+      $login = $db->f('login');
+      $size=exec("/usr/lib/alternc/du.pl /var/www/alternc/".substr($login,0,1)."/".$login);
+    }
+    $db2->query("REPLACE INTO size_web SET uid=?, size=?;",array(intval($db->f('uid')),intval($size)));
+    echo $db->f('login')." (".(round($size/1024, 1))." MB)\n";
   }
 }
 
@@ -38,7 +43,7 @@ foreach($allsrv as $c) {
   echo "++ Processing ".$c["name"]." ++\n";
   foreach ($tab as $dbname=>$size) {
     $db->query("REPLACE INTO size_db SET db=?,size=?;",array($dbname,$size)); 
-    echo "   $dbname done ($size B) \n"; flush();
+    echo "   $dbname done (".(round(($size/1024)/1024,1))." MB) \n"; flush();
   }
   echo "\n";
 }
@@ -58,7 +63,7 @@ if ($db->query("SELECT uid, name FROM mailman;")) {
       $size3=exec("sudo /usr/lib/alternc/du.pl ".escapeshellarg("/var/lib/mailman/archives/private/".$c["name"].".mbox"));
       $size=(intval($size1)+intval($size2)+intval($size3));
       $db->query("REPLACE INTO size_mailman SET uid=?,list=?,size=?;",array($c["uid"],$c["name"],$size));
-      echo " done ($size KB) \n"; flush();
+      echo " done (".(round($size/1024, 1))." MB) \n"; flush();
     }
   }
 }

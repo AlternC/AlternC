@@ -28,7 +28,8 @@ require_once("../class/config.php");
 include_once("head.php");
 
 if (!$admin->enabled) {
-	__("This page is restricted to authorized staff");
+	$msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
+	echo $msg->msg_html_all();
 	exit();
 }
 
@@ -45,14 +46,15 @@ $fields = array (
 );
 getFields($fields);
 
+$c=$admin->listPasswordPolicies();
+$passwd_classcount = $c['adm']['classcount'];
+
 ?>
 <h3><?php __("New AlternC account"); ?></h3>
 <hr id="topbar"/>
 <br />
 <?php
-if (isset($error) && $error) {
-	echo "<p class=\"alert alert-danger\">$error</p>";
-}
+echo $msg->msg_html_all();
 ?>
 <form method="post" action="adm_doadd.php" id="main" name="main" autocomplete="off">
   <?php csrf_get(); ?>
@@ -63,7 +65,7 @@ if (isset($error) && $error) {
 </td></tr>
 <tr>
 	<th><label for="pass"><?php __("Initial password"); ?></label><span class="mandatory">*</span></th>
-	<td><input type="password" id="pass" name="pass" autocomplete="off" class="int" value="<?php ehe($pass); ?>" size="20" maxlength="64" /><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#pass","#passconf"); ?></td>
+	<td><input type="password" id="pass" name="pass" autocomplete="off" class="int" value="<?php ehe($pass); ?>" size="20" maxlength="64" /><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#pass","#passconf",$passwd_classcount); ?></td>
 </tr>
 <tr>
 	<th><label for="passconf"><?php __("Confirm password"); ?></label><span class="mandatory">*</span></th>

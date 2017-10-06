@@ -31,7 +31,8 @@ require_once("../class/config.php");
 include_once("head.php");
 
 if (!$admin->enabled) {
-	__("This page is restricted to authorized staff");
+	$msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
+	echo $msg->msg_html_all();
 	include_once("foot.php");
 	exit();
 }
@@ -41,14 +42,10 @@ $fields = array (
 );
 getFields($fields);
 
-if (!$us=$admin->get($uid)) {
-	$error=$err->errstr();
-}
+$us=$admin->get($uid);
 
 $mem->su($uid);
-if (!$r=$quota->getquota()) {
-	$error=$err->errstr();
-}
+$r=$quota->getquota();
 $mem->unsu();
 
 ?>
@@ -56,11 +53,7 @@ $mem->unsu();
 <hr id="topbar"/>
 <br />
 <?php
-	if (isset($error) && $error) {
-	  echo "<p class=\"alert alert-danger\">$error</p>";
-	  include_once("foot.php");
-	  exit();
-	}
+echo $msg->msg_html_all();
 ?>
 <form method="post" action="adm_quotadoedit.php">
   <?php csrf_get(); ?>

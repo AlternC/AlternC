@@ -45,12 +45,12 @@ if (!isset($dns)) $dns="1";
 <h3><?php __("Domain hosting"); ?></h3>
 <hr />
 <?php
-if (!$quota->cancreate("dom")) { ?>
-<p class="alert alert-danger"><?php echo _("You cannot add any new domain, your quota is over.")." "._("Contact your administrator for more information."); ?></p>
-<?php
-exit();
+if (!$quota->cancreate("dom")) {
+  $msg->raise("ALERT", "dom", _("You cannot add any new domain, your quota is over.")." "._("Contact your administrator for more information."));
+  echo $msg->msg_html_all();
+  exit();
 }
-if (isset($error) && $error) echo "<p class=\"alert alert-danger\">$error</p>";
+echo $msg->msg_html_all();
 ?>
 <form method="post" action="dom_doadd.php" id="main">
   <?php csrf_get(); ?>

@@ -2,10 +2,6 @@
 
 /*
   ----------------------------------------------------------------------
-  AlternC - Web Hosting System
-  Copyright (C) 2000-2012 by the AlternC Development Team.
-  https://alternc.org/
-  ----------------------------------------------------------------------
   LICENSE
 
   This program is free software; you can redistribute it and/or
@@ -20,25 +16,19 @@
 
   To read the license please visit http://www.gnu.org/copyleft/gpl.html
   ----------------------------------------------------------------------
-  Purpose of file: Manage hook system.
-  ----------------------------------------------------------------------
- */
+*/
 
 /**
- * This class manage menu.
+ * This class manage the left menu of AlternC
  * 
  * @copyright    AlternC-Team 2002-2005 http://alternc.org/
  */
 class m_menu {
-    /* --------------------------------------------------------------------------- */
 
-    /** Constructor
-     * menu([$mid]) Constructeur de la classe menu, ne fait rien pour le moment
+    /**
+     * get all menus to display, 
+     * uses hooks
      */
-    function m_menu() {
-        
-    }
-
     function getmenu() {
         global $hooks, $quota, $mem;
 
@@ -102,13 +92,17 @@ class m_menu {
         return $lst;
     }
 
+    /** 
+     * utilitary function used by usort() to order menus
+     */
     function order_menu($a, $b) {
-        // Use to order the menu with a usort
         return $a['pos'] > $b['pos'];
     }
 
+    /**
+     * some menus that don't have an attached class
+     */
     function system_menu() {
-        // Here some needed menu who don't have a class
         global $help_baseurl, $lang_translation, $locales;
 
         $m = array(
@@ -150,6 +144,4 @@ class m_menu {
         return $m;
     }
 
-}
-
-/* Class menu */
+} /* Class m_menu */

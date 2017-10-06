@@ -33,19 +33,13 @@ $fields = array (
 );
 getFields($fields);
 
-if(!isset($error)){
-	$error="";
-}
 if (isset($confirm) && ($confirm=="y")) {
   reset($_POST);
   while (list($key,$val)=each($_POST)) {
     if (substr($key,0,4)=="del_") {
       // Effacement de la base $val
-      $r=$mysql->del_user($val);
-      if (!$r) {
-	$error.=$err->errstr()."<br />";
-      } else {
-	$error.=sprintf(_("The user %s has been successfully deleted"),$val)."<br />";
+      if($mysql->del_user($val)) {
+	$msg->raise("INFO", "mysql", _("The user '%s' has been successfully deleted"), $val);
       }
     }
   }
@@ -65,16 +59,17 @@ include_once("head.php");
   <?php csrf_get(); ?>
 <p>
 <input type="hidden" name="confirm" value="y" />
+<ul>
 <?php
 reset($_POST);
 while (list($key,$val)=each($_POST)) {
   if (substr($key,0,4)=="del_") {
-      echo "<input type=\"hidden\" name=\"".ehe($key,false)."\" value=\"".ehe($val,false)."\" />".ehe($val,false)."<br />\n";
+      echo "<li><input type=\"hidden\" name=\"".ehe($key,false)."\" value=\"".ehe($val,false)."\" /><b>".ehe($val,false)."</b></li>\n";
   }
 }
 
 ?>
-<br />
+</ul>
 <input type="submit" class="inb ok" name="sub" value="<?php __("Yes, delete the MySQL user"); ?>" /> <input type="button" class="inb cancel" name="non" value="<?php __("No, don't delete the MySQL user"); ?>" onclick="history.back()" />
 </p>
 </form>

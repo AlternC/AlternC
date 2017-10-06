@@ -38,12 +38,14 @@ $r=$mysql->get_userslist();
 <hr id="topbar"/>
 <br />
 <?php
-	if (isset($error) && $error) {
-		echo "<p class=\"alert alert-danger\">$error</p>";
-	}
-  if(!$r || empty($r)){
-    echo "<p class=\"alert alert-info\">"._("You have no sql user at the moment.")."</p>";  
+  // If the db exists, we look at users 
+  if (!$rdb || empty($rdb)) {
+	$msg->raise("INFO", "mysql", _("You have no database at the moment."));
+  } else if(!$r || empty($r)){
+	$msg->raise("INFO", "mysql", _("You have no sql user at the moment."));
   }
+
+echo $msg->msg_html_all();
 ?>
 
 <?php
@@ -52,7 +54,7 @@ if($rdb){
 <form method="post" action="sql_del.php" name="main" id="main">
     <?php csrf_get(); ?>
 <table class="tlist">
-   <tr><th>&nbsp;</th><th><?php __("Database"); ?></th><?php if ( variable_get('sql_allow_users_backups') ) { ?><th><?php __("Backup"); ?></th><?php } // sql_allow_users_backups ?><th><?php __("Restore"); ?></th><th><?php __("Show Settings"); ?></th><th><?php __("Size"); ?></th></tr>
+   <tr><th>&nbsp;</th><th><?php __("Database"); ?></th><?php if ( variable_get('sql_allow_users_backups') ) { ?><th><?php __("Backup"); ?></th><?php } ?><th><?php __("Restore"); ?></th><th><?php __("Show Settings"); ?></th><th><?php __("Size"); ?></th></tr>
 
 <?php
 for($i=0;$i<count($rdb);$i++) {
@@ -74,7 +76,7 @@ for($i=0;$i<count($rdb);$i++) {
 
  }
 ?>
-<tr><td colspan="5">
+<tr><td colspan="6">
    <input type="submit" name="sub" value="<?php __("Delete the checked databases"); ?>" class="inb delete" />
 </td></tr>
 </table>

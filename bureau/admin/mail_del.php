@@ -41,10 +41,19 @@ reset($d);
 include_once ("head.php");
 
 if ($confirm=="y") {
-  $error="";
   while (list($key,$val)=each($d)) {
-    $mail->delete($val);
-    $error.=$err->errstr()."<br />"; 
+    // Validate that this email is owned by me...
+    if (!($email = $mail->is_it_my_mail($val))) {
+      continue;
+    }
+
+    if ($mail->delete($val)) {
+        if ($db->f("islocal")) {
+            $msg->raise("INFO", "mail", _("The email %s has been marked for deletion"), $email);
+        } else {
+            $msg->raise("INFO", "mail", _("The email %s has been successfully deleted"), $email);
+        }
+    }
   }
   include("mail_list.php");
   exit();
@@ -61,15 +70,15 @@ if ($confirm=="y") {
 <input type="hidden" name="confirm" value="y" />
 <input type="hidden" name="domain_id" value="<?php ehe($domain_id); ?>" />
 
+<ul>
 <?php
-
 while (list($key,$val)=each($d)) {
   $m=$mail->get_details($val);
   echo "<input type=\"hidden\" name=\"d[]\" value=\"".ehe($val,false)."\" />";
-  echo $m["address"]."@".$m["domain"]."<br />";
+  echo "<li><b>".$m["address"]."@".$m["domain"]."</b></li>";
 }
-
 ?>
+</ul>
 </p>
 <p>
 <input type="submit" class="inb" name="submit" value="<?php __("Confirm the deletion"); ?>" /> - <input type="button" name="cancel" id="cancel" onclick="window.history.go(-1);" class="inb" value="<?php __("Don't delete anything and go back to the email list"); ?>"/>

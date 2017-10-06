@@ -1,30 +1,22 @@
 <?php
 
 /*
- * $Id: variables.php,v 1.8 2005/04/02 00:26:36 anarcat Exp $
-  ----------------------------------------------------------------------
-  AlternC - Web Hosting System
-  Copyright (C) 2002 by the AlternC Development Team.
-  http://alternc.org/
-  ----------------------------------------------------------------------
-  Based on:
-  Valentin Lacambre's web hosting softwares: http://altern.org/
-  ----------------------------------------------------------------------
-  LICENSE
+ ----------------------------------------------------------------------
+ LICENSE
 
-  This program is free software; you can redistribute it and/or
-  modify it under the terms of the GNU General Public License (GPL)
-  as published by the Free Software Foundation; either version 2
-  of the License, or (at your option) any later version.
+ This program is free software; you can redistribute it and/or
+ modify it under the terms of the GNU General Public License (GPL)
+ as published by the Free Software Foundation; either version 2
+ of the License, or (at your option) any later version.
 
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
 
-  To read the license please visit http://www.gnu.org/copyleft/gpl.html
-  ----------------------------------------------------------------------
- */
+ To read the license please visit http://www.gnu.org/copyleft/gpl.html
+ ----------------------------------------------------------------------
+*/
 
 /**
  * Persistent variable table
@@ -32,6 +24,7 @@
  * @author Drupal Developpement Team
  * @link http://cvs.drupal.org/viewcvs/drupal/drupal/includes/bootstrap.inc?rev=1.38&view=auto
  */
+
 
 /**
  * Load the persistent variable table.
@@ -59,6 +52,7 @@ function variable_init($conf = array()) {
     return $variables;
 }
 
+
 /**
  * Initialize the global $conf array if necessary
  *
@@ -71,6 +65,7 @@ function variable_init_maybe() {
         $conf = variable_init();
     }
 }
+
 
 /**
  * Return a persistent variable.
@@ -100,6 +95,7 @@ function variable_get($name, $default = null, $createit_comment = null) {
     return $default;
 }
 
+
 /**
  * Set a persistent variable.
  *
@@ -110,8 +106,8 @@ function variable_get($name, $default = null, $createit_comment = null) {
  *   of serialization as necessary.
  */
 function variable_set($name, $value, $comment = null) {
-    global $conf, $db, $err, $hooks;
-    $err->log('variable', 'variable_set', '+' . serialize($value) . '+' . $comment . '+');
+    global $conf, $db, $msg, $hooks;
+    $msg->log('variable', 'variable_set', '+' . serialize($value) . '+' . $comment . '+');
 
     variable_init_maybe();
     
@@ -140,6 +136,7 @@ function variable_set($name, $value, $comment = null) {
     }
 }
 
+
 /**
  * Unset a persistent variable.
  *
@@ -152,6 +149,10 @@ function variable_del($name) {
     unset($conf[$name]);
 }
 
+
+/**
+ * List all variables 
+ */
 function variables_list() {
     global $db;
     $t = array();
@@ -161,3 +162,4 @@ function variables_list() {
     }
     return $t;
 }
+

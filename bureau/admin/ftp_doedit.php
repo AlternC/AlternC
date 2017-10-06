@@ -39,16 +39,8 @@ $fields = array (
 );
 getFields($fields);
 
-if ($pass != $passconf) {
-  $error = _("Passwords do not match");
-  include_once("head.php");
-  echo "<h3>"._("Create a FTP account")."</h3><p class=\"alert alert-danger\">$error</p>";
-  include("foot.php");
-  exit();
-}
-
 if (! $id && !$create) { //not a creation and not an edit
-  $error=_("Error: neither a creation nor an edition");
+  $msg->raise("ERROR", "ftp", _("Error: neither a creation nor an edition"));
   include("ftp_list.php");
   exit();
 }
@@ -60,7 +52,6 @@ if (! $id ) { //create
 }
 
 if (!$r) {
-  $error=$err->errstr();
   $is_include=true;
   $rr[0]["prefixe"]=$prefixe;
   $rr[0]["login"]=$login;
@@ -68,11 +59,11 @@ if (!$r) {
   include_once("ftp_edit.php");
   exit();
 } else {
-if ($create) {
-  $error=_("The ftp account has been successfully created");
-} else {
-  $error=_("The ftp account has been successfully saved");
-}
+  if ($create)
+    $msg->raise("INFO", "ftp", _("The ftp account has been successfully created"));
+  else
+    $msg->raise("INFO", "ftp", _("The ftp account has been successfully saved"));
+
   include("ftp_list.php");
   exit();
 }

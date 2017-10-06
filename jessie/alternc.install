@@ -286,6 +286,7 @@ ln -fs /etc/alternc/alternc.ini /etc/$php/cli/conf.d/alternc.ini || true
 if [ -x /usr/sbin/apache2 ]; then
     # hook 
     run-parts --arg=apache2 /usr/lib/alternc/install.d 
+    a2enmod mpm_itk
     
     s=""
     # unused from AlternC 1.0, FIXME: remove it later

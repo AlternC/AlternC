@@ -40,13 +40,10 @@ getFields($fields);
 <br />
 <?php
 $r=$mysql->get_user_dblist($id);
-if (!$r) {
-  $error=$err->errstr();
-}
 
-if (!empty($error)) {
-  echo "<p class=\"alert alert-danger\">$error</p><p>&nbsp;</p>";
-  require_once('foot.php');
+if ($msg->has_msgs("ERROR")) {
+  require_once('sql_users_list.php');
+  exit();
 }
 
 if ($r) {

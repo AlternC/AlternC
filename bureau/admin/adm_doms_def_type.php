@@ -2,7 +2,8 @@
 require_once("../class/config.php");
 
 if (!$admin->enabled) {
-    __("This page is restricted to authorized staff");
+    $msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
+    echo $msg->msg_html_all();
     exit();
 }
 
@@ -22,11 +23,6 @@ include_once("head.php");
 
 <br />
 <?php
-if (isset($error) && $error) {
-    echo "<p class=\"alert alert-danger\">$error</p>";
-}
-
-
 $fields = array(
     "domup" => array("post", "array", ""),
 );
@@ -34,11 +30,12 @@ getFields($fields);
 
 if (!empty($domup)) {
     if (!$dom->update_default_subdomains($domup)) {
-        $error = _("There was an error during the record.");
+        $msg->raise("ERROR", "admin", _("There was an error during the record."));
     } else {
-        $error = _("Save done.");
+        $msg->raise("INFO", "admin", _("Save done."));
     }
 }
+echo $msg->msg_html_all();
 
 $tab = $dom->lst_default_subdomains();
 ?>

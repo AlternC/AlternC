@@ -582,6 +582,17 @@ CREATE TABLE IF NOT EXISTS `cron` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 
+--
+-- Structure de la table `dovecot_quota`
+--
+
+CREATE TABLE IF NOT EXISTS `dovecot_quota` (
+  `user` varchar(320) NOT NULL,
+  `quota_dovecot` bigint(20) NOT NULL DEFAULT '0',
+  `nb_messages` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`user`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 
 --
 -- Structure de la vue `dovecot_view`
@@ -661,6 +672,7 @@ where
 CREATE TABLE IF NOT EXISTS `piwik_users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `uid` int(11) NOT NULL,
+  `passwd` varchar(255) NOT NULL,
   `login` varchar(255) NOT NULL,
   `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
@@ -693,10 +705,8 @@ CREATE TABLE IF NOT EXISTS `default_subdomains` (
 
 INSERT IGNORE INTO `default_subdomains` (`sub`, `domain_type`, `domain_type_parameter`, `concerned`) VALUES
 ('www', 'VHOST', '%%DOMAINDIR%%', 'MAIN'),
-('mail', 'WEBMAIL', '', 'MAIN'),
 ('', 'URL', 'http://www.%%DOMAIN%%', 'MAIN'),
 ('www', 'URL', 'http://www.%%TARGETDOM%%', 'SLAVE'),
-('mail', 'URL', 'http://mail.%%TARGETDOM%%', 'SLAVE'),
 ('', 'URL', 'http://%%TARGETDOM%%', 'SLAVE');
 
 
@@ -744,8 +754,19 @@ CREATE TABLE IF NOT EXISTS `alternc_status` (
   PRIMARY KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT = 'stores current AlternC schema version number';
 
+
+
+
+CREATE TABLE IF NOT EXISTS `csrf` (
+  `cookie` char(32) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
+  `token` char(32) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
+  `created` datetime NOT NULL,
+  `used` tinyint(3) unsigned NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='csrf tokens for AlternC forms';
+
+ALTER TABLE `csrf` ADD PRIMARY KEY (`cookie`,`token`), ADD KEY `created` (`created`);
+
+
 -- make it re-exec-proof
 DELETE FROM alternc_status WHERE name='alternc_version';
-INSERT INTO alternc_status SET name='alternc_version',value='3.4.7.php';
-
-
+INSERT INTO alternc_status SET name='alternc_version',value='3.4.8.sql';

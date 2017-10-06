@@ -30,7 +30,8 @@
 require_once("../class/config.php");
 
 if (!$admin->enabled) {
-	__("This page is restricted to authorized staff");
+	$msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
+	echo $msg->msg_html_all();
 	exit();
 }
 
@@ -39,9 +40,7 @@ $fields = array (
 );
 getFields($fields);
 
-if (!$admin->dom_lock($domain)) {
-  $error=$err->errstr();
-}
+$admin->dom_lock($domain);
 
 include("adm_doms.php");
 exit;

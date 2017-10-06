@@ -48,12 +48,13 @@ $fields = array (
 getFields($fields);
 
 
-if (!$mysql->put_mysql_backup($id,$bck_mode,$bck_history,$bck_gzip,$bck_dir)) {
-	$error=$err->errstr();
+$mysql->put_mysql_backup($id,$bck_mode,$bck_history,$bck_gzip,$bck_dir); 
+
+if ($msg->has_msgs("ERROR")) {
 	include("sql_bck.php");
 	exit();
 } else {
-	$error=_("Your backup parameters has been successfully changed.");
+	$msg->raise("INFO", "mysql", _("Your backup parameters has been successfully changed."));
 }
 include("sql_list.php");
 ?>

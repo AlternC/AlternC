@@ -30,7 +30,8 @@
 require_once("../class/config.php");
 
 if (!$admin->enabled) {
-	__("This page is restricted to authorized staff");
+	$msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
+	echo $msg->msg_html_all();
 	exit();
 }
 $fields = array (
@@ -47,11 +48,7 @@ include_once ("head.php");
 <hr id="topbar"/>
 <br />
 <?php
-	if (isset($error) && $error) {
-	  echo "<p class=\"alert alert-danger\">$error</p>";
-	}
-
-
+echo $msg->msg_html_all();
 ?>
 <h3><?php __("Add a new TLD"); ?></h3>
 <p>

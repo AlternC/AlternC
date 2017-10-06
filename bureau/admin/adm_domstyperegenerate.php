@@ -1,7 +1,8 @@
 <?php
 require_once("../class/config.php");
 if (!$admin->enabled) {
-    __("This page is restricted to authorized staff");
+    $msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
+    echo $msg->msg_html_all();
     exit();
 }
 
@@ -11,13 +12,9 @@ $fields = array (
 getFields($fields);
 
 
-if (empty($name) || (! $dom->domains_type_regenerate($name)) ) {
-  die($err->errstr());
-} else {
-  $error="Regenerate pending"; 
-  include("adm_domstype.php");
+if (! empty($name) || ($dom->domains_type_regenerate($name)) ) {
+  $msg->raise("INFO", "admin", _("Regenerate pending"));
 }
 
+include("adm_domstype.php");
 ?>
-
-

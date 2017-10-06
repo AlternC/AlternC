@@ -40,29 +40,27 @@ if ( !isset($is_include) ) {
 }
 
 if (!$id && !$create) {
-  $error=_("Neither a creation nor a edition");
+  $msg->raise("ERROR", "ftp", _("Neither a creation nor a edition"));
   echo "<h3>"._("Create a FTP account")."</h3>";
-  echo "<p class=\"alert alert-danger\">$error</p>";
+  echo $msg->msg_html_all();
   include_once("foot.php");
   exit();
 }
 
 if (!$id && $create) { //creation
   echo "<h3>"._("Create a FTP account")."</h3>";
-  $rr=false;
+  if ( !isset($is_include) )
+    $rr=false;
 } else {
-   echo "<h3>"._("Editing a FTP account")."</h3>";
+  echo "<h3>"._("Editing a FTP account")."</h3>";
   $rr=$ftp->get_ftp_details($id);
-  if (!$rr) {
-    $error=$err->errstr();
-  }
 }
 
-?>
-<?php
-if (isset($error) && $error) {
-	echo "<p class=\"alert alert-danger\">$error</p>";
-}
+echo $msg->msg_html_all();
+
+$c=$admin->listPasswordPolicies();
+$passwd_classcount = $c['ftp']['classcount'];
+
 ?>
 <form method="post" action="ftp_doedit.php" name="main" id="main" autocomplete="off">
 <?php csrf_get(); ?>
@@ -88,7 +86,7 @@ if (isset($error) && $error) {
     </tr>
     <tr id='ftp_tr_pass1'>
       <th><label for="pass"><?php __("Password"); ?></label></th>
-      <td><input type="password" class="int" name="pass" autocomplete="off" id="pass" size="20" maxlength="64" value=""/><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#pass","#passconf"); ?></td>
+      <td><input type="password" class="int" name="pass" autocomplete="off" id="pass" size="20" maxlength="64" value=""/><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#pass","#passconf",$passwd_classcount); ?></td>
     </tr>
     <tr id='ftp_tr_pass2'>
       <th><label for="passconf"><?php __("Confirm password"); ?></label></th>

@@ -40,16 +40,9 @@ getFields($fields);
 <br />
 <?php
 $r=$mysql->get_user_dblist($id);
-if (!$r) {
-  $error=$err->errstr();
-}
 
-if (! empty($error) ) {
-  echo "<p class=\"alert alert-danger\">$error</p>";
-  require_once('foot.php');
-  die();
-}
-
+$c=$admin->listPasswordPolicies();
+$passwd_classcount = $c['mysql']['classcount'];
 ?>
 
 <form method="post" action="sql_users_dopassword.php" autocomplete="off">
@@ -63,7 +56,7 @@ if (! empty($error) ) {
 <table cellspacing="0" cellpadding="4" class="tedit">
   <tr>
     <th><label for="password"><?php __("Password"); ?></label></th>
-    <td><input type="password" class="int" autocomplete="off" name="password" id="password" value="" size="20" maxlength="64" /><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#password","#passwordconf"); ?></td>
+    <td><input type="password" class="int" autocomplete="off" name="password" id="password" value="" size="20" maxlength="64" /><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#password","#passwordconf",$passwd_classcount); ?></td>
   </tr>
   <tr>
     <th><label for="passwordconf"><?php __("Confirm password"); ?></label></th>

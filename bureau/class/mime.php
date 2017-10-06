@@ -1,14 +1,6 @@
 <?php
 
 /*
-  $Id: mime.php,v 1.3 2004/06/03 14:32:20 anonymous Exp $
-  ----------------------------------------------------------------------
-  AlternC - Web Hosting System
-  Copyright (C) 2002 by the AlternC Development Team.
-  http://alternc.org/
-  ----------------------------------------------------------------------
-  Based on:
-  Valentin Lacambre's web hosting softwares: http://altern.org/
   ----------------------------------------------------------------------
   LICENSE
 
@@ -24,21 +16,10 @@
 
   To read the license please visit http://www.gnu.org/copyleft/gpl.html
   ----------------------------------------------------------------------
-  Original Author of file: Benjamin Sonntag 23/12/2001
-  Purpose of file: Brouteur php3 pour AlternC
-  ----------------------------------------------------------------------
- */
-/*
-  Brouteur php3 pour AlternC (voir http://www.alternc.org)
+*/
 
-  Version 0.1
-
-  Notes :
-  Benjamin Sonntag 23/12/2001 Version initiale
-
-  Fichier :
-  mime.php3 : gestion de la liste des types mime des fichiers.
-
+/**
+ * Browser mime function to detect mime types and show icons or type names
  */
 if (!IsSet($MIME_H)) {
     $MIME_H = 1;

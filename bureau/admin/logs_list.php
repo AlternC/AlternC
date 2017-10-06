@@ -36,11 +36,11 @@ $list=$log->list_logs_directory_all($log->get_logs_directory());
 <hr id="topbar"/>
 <br />
 <?php
-if (isset($error) && $error) {
-  echo "<p class=\"alert alert-danger\">$error</p>";
-}
+echo $msg->msg_html_all();
+
 if(!$list || empty($list['dir'])){
-  echo "<p class=\"alert alert-danger\">"._("You have no web logs to list at the moment.")."</p>";  
+  $msg->raise("INFO", "logs", _("You have no web logs to list at the moment."));  
+  echo $msg->msg_html_all();
   include_once('foot.php');
   exit;
 }

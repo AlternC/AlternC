@@ -3,15 +3,25 @@
 require_once("../class/config.php");
 if (!defined("QUOTASONE")) return;
 
-//FIXME missing getfield for $mode
-if (!isset($mode)) { # when included from adm_login, mode is not set
+// FIXME missing getfield for $mode
+if (!isset($mode)) { // when included from adm_login, mode is not set
   $mode = 0;
 }
 // $mode = 4; // Pour Debuguer le mode "graphique" des quotas
+
+// If the var $usr exists, it means we call quotas for 1 user from the general admin page.
+// If not, we get the ID of the user via $mem->user["login"]
+if (isset($usr) && is_int($usr)) {
+  $id_usr=$usr;
+  $login=$admin->get_login_by_uid($id_usr);
+} else {
+  $id_usr = $mem->user["uid"];
+  $login = $mem->user["login"];
+}
 ?>
 <center>
 
-<h3 style="text-align:center;"><?php printf(_("<b>%s</b> account"),$mem->user["login"]); ?></h3>
+<h3 style="text-align:center;"><?php printf(_("<b>%s</b> account"),$login); ?></h3>
 
 <div style="width: 600px">
 
@@ -30,6 +40,8 @@ if (!isset($mode)) { # when included from adm_login, mode is not set
 
 <!-- Mails -->
 
+<p style="text-align: left; font-size:16px;"><b><?php __("Emails"); ?></b></p>
+
 <table class="tedit" width="100%">
 <thead>
 <tr>
@@ -41,7 +53,7 @@ if (!isset($mode)) { # when included from adm_login, mode is not set
 <tbody>
 <?php
 
-  $domaines_user = $dom->enum_domains($mem->user["uid"]);
+  $domaines_user = $dom->enum_domains($id_usr);
   $totalmail=0;
   foreach ($domaines_user as $domaine) {
     $mstmp = $quota->get_size_mail_sum_domain($domaine);
@@ -84,10 +96,10 @@ if (!isset($mode)) { # when included from adm_login, mode is not set
       $tpc = 0;
     }
     if (count($alias_sizes) > 0) {
-    echo "<tr><td><i>". _('Total'). " {$domaine}</i></td><td></td>";
+    echo "<tr><td style=\"text-align: right\"><i><b>". _('Total'). " {$domaine}</b></i></td><td></td>";
     echo "<td";
     if ($mode!=2) echo " style=\"text-align: right\"";
-    echo "><i>";
+    echo "><i><b>";
     if ($mode==0) {
       echo sprintf("%.1f", $d['size'])."&nbsp;".$d['unit'];
     } elseif ($mode==1) {
@@ -95,7 +107,7 @@ if (!isset($mode)) { # when included from adm_login, mode is not set
     } else {
       $quota->quota_displaybar($tpc);
     }
-    echo "</i></td></tr>";
+    echo "</b></i></td></tr>";
   }
 }
 ?>
@@ -106,12 +118,12 @@ if (!isset($mode)) { # when included from adm_login, mode is not set
 <!-- Databases -->
 
 <?php
-  $totaldb = $quota->get_size_db_sum_user($mem->user["login"]);
+  $totaldb = $quota->get_size_db_sum_user($login);
 
   $t = $quota->get_size_unit($totaldb);
-  echo "<p>"._("Databases:")." ";
-  echo sprintf("%.1f", $t['size'])."&nbsp;".$t['unit'];
-  echo "</p>";
+
+  echo "<p style=\"text-align: left; font-size:16px;\"><b>"._("Databases:")." ";
+  echo "</b></p>";
 ?>
 
 <table class="tedit" width="100%">
@@ -124,7 +136,7 @@ if (!isset($mode)) { # when included from adm_login, mode is not set
 <tbody>
 <?php
 
-  $db_sizes = $quota->get_size_db_details_user($mem->user["login"]);
+  $db_sizes = $quota->get_size_db_details_user($login);
   foreach ($db_sizes as $d) {
     echo "<tr><td>".$d["db"]."</td><td";
     if ($mode!=2) echo " style=\"text-align: right\"";
@@ -140,9 +152,16 @@ if (!isset($mode)) { # when included from adm_login, mode is not set
     } elseif (isset($mode) &&$mode==1) {
       echo sprintf("%.1f", $pc)."&nbsp;%";
     } else {
-      $quota->quota_displaybar(2*$pc, 0);
+      $quota->quota_displaybar($pc, 0);
     }
     echo "</td></tr>";
+  }
+
+  if (count($db_sizes) > 0 && $mode==0) {
+    echo "<tr><td style=\"text-align: right\"><i><b>". _('Total'). " " . _("Databases:")."</b></i></td>";
+    echo "<td style=\"text-align: right\"><i><b>";
+    echo sprintf("%.1f", $t['size'])."&nbsp;".$t['unit'];
+    echo "</b></i></td></tr>";
   }
 ?>
 </tbody>
@@ -151,16 +170,16 @@ if (!isset($mode)) { # when included from adm_login, mode is not set
 <!-- Mailing lists -->
 
 <?php
-  $totallist = $quota->get_size_mailman_sum_user($mem->user["uid"]);
+  $totallist = $quota->get_size_mailman_sum_user($id_usr);
   if ($totallist) {
     // $totalweb is in KB, so we call get_size_unit() with it in Bytes
     $t=$quota->get_size_unit($totallist * 1024);
-    echo "<p>"._("Mailman lists:")." ";
-    echo sprintf("%.1f", $t['size'])."&nbsp;".$t['unit'];
-    echo "</p>";
+
+    echo "<p style=\"text-align: left; font-size:16px;\"><b>"._("Mailman lists:")." ";
+    echo "</b></p>";
 ?>
 
-<table class="tedit" width='60%'>
+<table class="tedit" width='100%'>
 <thead>
 <tr>
   <th><?php __("Lists"); ?></th>
@@ -170,14 +189,14 @@ if (!isset($mode)) { # when included from adm_login, mode is not set
 <tbody>
 <?php
 
-  $mailman_size = $quota->get_size_mailman_details_user($mem->user["uid"]);
+  $mailman_size = $quota->get_size_mailman_details_user($id_usr);
   foreach ($mailman_size as $d) {
     echo "<tr><td>".$d["list"]."</td><td";
     if ($mode!=2) echo " style=\"text-align: right\"";
     echo ">";
     $ds = $quota->get_size_unit($d["size"] * 1024);
     if ($totallist) {
-      $pc=intval(100*$ds['size']/$totallist);
+      $pc=intval(100*$d['size']/$totallist);
     } else {
       $pc=0;
     }
@@ -190,10 +209,20 @@ if (!isset($mode)) { # when included from adm_login, mode is not set
     }
     echo "</td></tr>";
   }
+
+  if (count($db_sizes) > 0 && $mode==0) {
+    echo "<tr><td style=\"text-align: right\"><i><b>". _('Total'). " " . _("Mailman lists:")."</b></i></td>";
+    echo "<td";
+    if ($mode!=2) echo " style=\"text-align: right\"";
+    echo "><i><b>";
+    echo sprintf("%.1f", $t['size'])."&nbsp;".$t['unit'];
+    echo "</b></i></td></tr>";
+  }
 ?>
 </tbody>
 </table>
 
     <?php } /* totallist */ ?>
 </div>
+<p>&nbsp;</p>
 </center>

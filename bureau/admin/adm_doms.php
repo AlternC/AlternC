@@ -30,7 +30,8 @@
 require_once("../class/config.php");
 
 if (!$admin->enabled) {
-	__("This page is restricted to authorized staff");
+	$msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
+	echo $msg->msg_html_all();
 	exit();
 }
 
@@ -39,9 +40,7 @@ include_once ("head.php");
 ?>
 <h3><?php __("Manage installed domains"); ?></h3>
 <?php
-if (isset($error) && $error) {
-  echo "<p class=\"alert alert-danger\">$error</p>";
-}
+echo $msg->msg_html_all();
 
 $fields = array (
 	"force"    		=> array ("get", "integer", "0"),

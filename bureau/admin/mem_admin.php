@@ -31,10 +31,8 @@ $fields = array (
 );
 getFields($fields);
 
-if (!$mem->adminpref($admlist)) {
-	$error=$err->errstr();
-} else {
-	$error=_("Your administrator preferences has been successfully changed.");
+if ($mem->adminpref($admlist)) {
+	$msg->raise("INFO", "mem", _("Your administrator preferences has been successfully changed."));
 }
 
 include_once("head.php");
@@ -42,8 +40,8 @@ include_once("head.php");
 ?>
 <h3><?php __("Admin preferences"); ?></h3>
 <?php
-	if (isset($error) && $error) {
-		echo "<p class=\"alert alert-danger\">$error</p>";
-	}
+echo $msg->msg_html_all();
+echo "<p><span class='ina'><a href='mem_param.php'>"._("Click here to continue")."</a></span></p>";
+
+include_once("foot.php");
 ?>
-<?php include_once("foot.php"); ?>

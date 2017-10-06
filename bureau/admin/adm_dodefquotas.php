@@ -32,7 +32,8 @@
 require_once("../class/config.php");
 
 if (!$admin->enabled) {
-	__("This page is restricted to authorized staff");
+	$msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
+	echo $msg->msg_html_all();
 	exit();
 }
 $fields = array (
@@ -45,18 +46,18 @@ getFields($fields);
 if($action == "add") {
 
   if($quota->addtype($type)) {
-    $error=_("Account type"). " \"".htmlentities($type)."\" "._("added");
+    $msg->raise("INFO", "admin", _("Account type"). " \"".htmlentities($type)."\" "._("added"));
   } else {
-    $error=_("Account type"). " \"".htmlentities($type)."\" "._("could not be added");
+    $msg->raise("ERROR", "admin", _("Account type"). " \"".htmlentities($type)."\" "._("could not be added"));
   }
   include("adm_defquotas.php");
 } else if($action == "delete") {
   if($del_confirm == "y"){
     if(!empty($type)) {
       if($quota->deltype($type)) {
-        $error=_("Account type"). " \"".htmlentities($type)."\" "._("deleted");
+        $msg->raise("INFO", "admin", _("Account type"). " \"".htmlentities($type)."\" "._("deleted"));
       } else {
-        $error=_("Account type"). " \"".htmlentities($type)."\" "._("could not be deleted");
+        $msg->raise("ERROR", "admin", _("Account type"). " \"".htmlentities($type)."\" "._("could not be deleted"));
       }
     }
     include("adm_defquotas.php");
@@ -92,9 +93,9 @@ if($action == "add") {
   }
 
   if($quota->setdefaults($c)) {
-    $error=_("Default quotas successfully changed");
+    $msg->raise("INFO", "admin", _("Default quotas successfully changed"));
   } else {
-    $error=_("Default quotas could not be set.");
+    $msg->raise("ERROR", "admin", _("Default quotas could not be set."));
   }
   include("adm_panel.php");
 }

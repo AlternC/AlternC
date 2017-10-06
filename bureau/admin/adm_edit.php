@@ -33,7 +33,8 @@ require_once("../class/config.php");
 include_once("head.php");
 
 if (!$admin->enabled) {
-	__("This page is restricted to authorized staff");
+	$msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
+	echo $msg->msg_html_all();
 	exit();
 }
 
@@ -45,22 +46,22 @@ getFields($fields);
 $subadmin=variable_get("subadmin_restriction");
 
 if ($subadmin==0 && !$admin->checkcreator($uid)) {
-	__("This page is restricted to authorized staff");
+	$msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
+	echo $msg->msg_html_all();
 	exit();
 }
 
-if (!$r=$admin->get($uid)) {
-	$error=$err->errstr();
-}
+$r=$admin->get($uid);
+
+$c=$admin->listPasswordPolicies();
+$passwd_classcount = $c['adm']['classcount'];
 
 ?>
 <h3><?php __("Member Edition"); ?></h3>
 <hr id="topbar"/>
 <br />
 <?php
-  if (isset($error) && $error) {
-    echo "<p class=\"alert alert-danger\">$error</p>";
-  }
+echo $msg->msg_html_all();
 ?>
 <form method="post" action="adm_doedit.php" name="main" id="main" autocomplete="off">
   <?php csrf_get(); ?>
@@ -88,7 +89,7 @@ if (!$r=$admin->get($uid)) {
 
 <tr>
 	<th><label for="pass"><?php __("Password"); ?></label></th>
-	<td><input type="password" class="int" id="pass" autocomplete="off" name="pass" value="" size="20" maxlength="64" /><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#pass","#passconf"); ?></td>
+	<td><input type="password" class="int" id="pass" autocomplete="off" name="pass" value="" size="20" maxlength="64" /><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#pass","#passconf",$passwd_classcount); ?></td>
 </tr>
 <tr>
 	<th><label for="passconf"><?php __("Confirm password"); ?></label></th>

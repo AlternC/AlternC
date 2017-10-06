@@ -27,7 +27,7 @@
   Original Author of file: Benjamin Sonntag
   Purpose of file: General configuration file for AlternC Desktop
   ----------------------------------------------------------------------
- */
+*/
 
 define('NOCHECK', 1);
 require_once("config.php");

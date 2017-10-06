@@ -34,17 +34,15 @@ getFields($fields);
 if ($aws->check_host_available($hostname)) {
     $r=$aws->add_stats($hostname,$awsusers,$hostaliases,1);
     if (!$r) {
-        $error=$err->errstr();
         include("aws_add.php");
         exit();
     } else {
-        $error=_("The statistics has been successfully created");
+        $msg->raise('Ok', "aws", _("The statistics has been successfully created"));
 	    include("aws_list.php");
 	    exit();
     }
 }
 else {
-    $error=$err->errstr();
     include("aws_add.php");
     exit();
 }

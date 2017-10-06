@@ -34,21 +34,24 @@ $fields = array (
 );
 getFields($fields);
 
-if (!($cle=$mem->ChangeMail1($newmail))) {
-	$error=$err->errstr();
+if ($cle=$mem->ChangeMail1($newmail)) {
+	$msg->raise("INFO", "mem", _("The mail was successfully changed"));
 }
 
 include_once("head.php");
-
 ?>
 <h3><?php __("Change the email of the account"); ?></h3>
 <?php
-	if (isset($error) && $error) {
-		echo "<p class=\"alert alert-danger\">$error</p>";
-		include_once("foot.php");
-		exit();
-	}
+echo $msg->msg_html_all();
+if ($msg->has_msgs("ERROR")) {
+	echo "<p><span class='ina'><a href='mem_param.php'>"._("Click here to continue")."</a></span></p>";
+	include_once("foot.php");
+	exit();
+}
+
 printf(_("help_mem_chgmail %s"),$newmail);
 ?>
 <p class="code"><?php echo $cle; ?></p>
+<p><span class="ina"><a href="mem_param.php"><?php __("Click here to continue"); ?></a></span></p>
+
 <?php include_once("foot.php"); ?>

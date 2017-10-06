@@ -39,7 +39,7 @@ then
     . /etc/alternc/local.sh
     # Configuration template location
     TEMPLATE_DIR="/etc/alternc/templates"
-    CONFIG_FILES="etc/roundcube/main.inc.php etc/roundcube/plugins/password/config.inc.php"
+    CONFIG_FILES="etc/roundcube/main.inc.php etc/roundcube/plugins/password/config.inc.php etc/roundcube/plugins/managesieve/config.inc.php"
 
     cat > $SED_SCRIPT <<EOF
 s\\%%ALTERNC_LOC%%\\$ALTERNC_LOC\\;

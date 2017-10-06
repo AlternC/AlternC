@@ -30,7 +30,8 @@
 require_once("../class/config.php");
 
 if (!$admin->enabled) {
-	__("This page is restricted to authorized staff");
+	$msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
+	echo $msg->msg_html_all();
 	exit();
 }
 
@@ -41,10 +42,7 @@ include_once("head.php");
 <hr id="topbar" />
  <br />
 <?php
-	if (isset($error) && $error) {
-	  echo "<p class=\"alert alert-danger\">$error</p>";
-	}
-
+echo $msg->msg_html_all();
 ?>
 <br/>
 <h3><?php __("List of the websites having errors in the domain database."); ?></h3>

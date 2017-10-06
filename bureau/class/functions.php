@@ -22,7 +22,7 @@
   ----------------------------------------------------------------------
   Purpose of file: Miscellaneous functions globally used
   ----------------------------------------------------------------------
- */
+*/
 
 /**
  * Format a field value for input or textarea : 
@@ -528,7 +528,7 @@ function _md5cr($pass, $salt = "") {
 function split_mysql_database_name($dbname) {
     $db_exploded_name = explode("_", $dbname);
     return array($db_exploded_name[0],
-        implode("_", array_slice($db_exploded_name, 1)));
+    implode("_", array_slice($db_exploded_name, 1)));
 }
 
 /* ----------------------------------------------------------------- */
@@ -614,16 +614,16 @@ function eoption($values, $cur, $onedim = false) {
 }
 
 /**
-  /* Echo the HTMLSpecialChars version of a value.
- * Must be called when pre-filling fields values in forms such as : 
- * <input type="text" name="toto" value="<?php ehe($toto); ?>" />
- * Use the charset of the current language for transcription
- * 
- * @global string $charset
- * @param string $str
- * @param boolean $affiche
- * @return string
- */
+   /* Echo the HTMLSpecialChars version of a value.
+   * Must be called when pre-filling fields values in forms such as : 
+   * <input type="text" name="toto" value="<?php ehe($toto); ?>" />
+   * Use the charset of the current language for transcription
+   * 
+   * @global string $charset
+   * @param string $str
+   * @param boolean $affiche
+   * @return string
+   */
 function ehe($str, $affiche = TRUE) {
     global $charset;
     $retour = htmlspecialchars($str, ENT_QUOTES|ENT_SUBSTITUTE, $charset);
@@ -634,16 +634,16 @@ function ehe($str, $affiche = TRUE) {
 }
 
 /**
-  /* Echo the URLENCODED version of a value.
- * Must be called when pre-filling fields values in URLS such as : 
- * document.location='logs_tail.php?file=<?php eue($file); ?>
- * Use the charset of the current language for transcription
- * 
- * @global string $charset
- * @param string $str
- * @param boolean $affiche
- * @return string
- */
+   /* Echo the URLENCODED version of a value.
+   * Must be called when pre-filling fields values in URLS such as : 
+   * document.location='logs_tail.php?file=<?php eue($file); ?>
+   * Use the charset of the current language for transcription
+   * 
+   * @global string $charset
+   * @param string $str
+   * @param boolean $affiche
+   * @return string
+   */
 function eue($str, $affiche = TRUE) {
     global $charset;
     $retour = urlencode($str);
@@ -677,26 +677,26 @@ function getFields($fields, $requestOnly = false) {
             $method = "_" . strtoupper($options[0]);
         }
         switch ($options[1]) {
-            case "integer":
-                $vars[$name] = (isset($GLOBALS[$method][$name]) && is_numeric($GLOBALS[$method][$name]) ? intval($GLOBALS[$method][$name]) : $options[2]);
-                break;
-            case "float":
-                $vars[$name] = (isset($GLOBALS[$method][$name]) && is_numeric($GLOBALS[$method][$name]) ? floatval($GLOBALS[$method][$name]) : $options[2]);
-                break;
-            case "string":
-                $vars[$name] = (isset($GLOBALS[$method][$name]) ? trim($GLOBALS[$method][$name]) : $options[2]);
-                break;
-            case "array":
-                $vars[$name] = (isset($GLOBALS[$method][$name]) && is_array($GLOBALS[$method][$name]) ? $GLOBALS[$method][$name] : $options[2]);
-                break;
-            case "boolean":
-                $vars[$name] = (isset($GLOBALS[$method][$name]) ? $GLOBALS[$method][$name] : $options[2]);
-                break;
-            case "file":
-                $vars[$name] = (isset($GLOBALS[$method][$name]) ? $GLOBALS[$method][$name] : $options[2]);
-                break;
-            default:
-                die("Illegal method type used for field " . $name . " : " . $options[1]);
+        case "integer":
+            $vars[$name] = (isset($GLOBALS[$method][$name]) && is_numeric($GLOBALS[$method][$name]) ? intval($GLOBALS[$method][$name]) : $options[2]);
+            break;
+        case "float":
+            $vars[$name] = (isset($GLOBALS[$method][$name]) && is_numeric($GLOBALS[$method][$name]) ? floatval($GLOBALS[$method][$name]) : $options[2]);
+            break;
+        case "string":
+            $vars[$name] = (isset($GLOBALS[$method][$name]) ? trim($GLOBALS[$method][$name]) : $options[2]);
+            break;
+        case "array":
+            $vars[$name] = (isset($GLOBALS[$method][$name]) && is_array($GLOBALS[$method][$name]) ? $GLOBALS[$method][$name] : $options[2]);
+            break;
+        case "boolean":
+            $vars[$name] = (isset($GLOBALS[$method][$name]) ? $GLOBALS[$method][$name] : $options[2]);
+            break;
+        case "file":
+            $vars[$name] = (isset($GLOBALS[$method][$name]) ? $GLOBALS[$method][$name] : $options[2]);
+            break;
+        default:
+            die("Illegal method type used for field " . $name . " : " . $options[1]);
         }
     }
 
@@ -846,32 +846,56 @@ function pager($offset, $count, $total, $url, $before = "", $after = "", $echo =
 }
 
 /**
- * 
+ * Create a password compatible with the password policy
  * @param int $length
- * @return string
+ * @param int $classcount
+ * @return string a random password
  */
-function create_pass($length = 8) {
-    $chars = "1234567890abcdefghijkmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    $i = 0;
-    $password = "";
-    while ($i <= $length) {
-        $password .= @$chars{mt_rand(0, strlen($chars))};
-        $i++;
+function create_pass($length = 10, $classcount = 3) {
+    $sets = array();
+
+    // Use up to 4 character classes, 3 by default.
+    if ($classcount < 4)
+        $available_sets='lud';
+    else
+        $available_sets='luds';
+
+    if(strpos($available_sets, 'l') !== false)
+        $sets[] = 'abcdefghijklmnopqrstuvwxyz';
+    if(strpos($available_sets, 'u') !== false)
+        $sets[] = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    if(strpos($available_sets, 'd') !== false)
+        $sets[] = '0123456789';
+    if(strpos($available_sets, 's') !== false)
+        $sets[] = '(!#$%)*+,-./:;<=>?@[\]^_';
+
+    $all = '';
+    $password = '';
+    foreach($sets as $set) {
+        $password .= $set[array_rand(str_split($set))];
+        $all .= $set;
     }
+    
+    $all = str_split($all);
+    for($i = 0; $i < $length - count($sets); $i++)
+        $password .= $all[array_rand($all)];
+    
+    $password = str_shuffle($password);
+    
     return $password;
 }
 
 /**
- *  Affiche un bouton qui permet de generer automatiquement des mots de passes 
+ * Show a button to set a random password for a password field.
  * 
- * @param int $pass_size
- * @param string $fields_to_fill1
- * @param string $fields_to_fill2
+ * @param int $pass_size size of the password
+ * @param string $fields_to_fill1 html field where we will put the password
+ * @param string $fields_to_fill2 a second (password confirmation) field where we will put the password
  * @return int
  */
-function display_div_generate_password($pass_size = DEFAULT_PASS_SIZE, $fields_to_fill1 = "", $fields_to_fill2 = "") {
+function display_div_generate_password($pass_size = DEFAULT_PASS_SIZE, $fields_to_fill1 = "", $fields_to_fill2 = "", $classcount = 3) {
     static $id=1;
-    echo "<div id='z$id' style='display:none;'><a href=\"javascript:generate_password_html('$id',$pass_size,'$fields_to_fill1','$fields_to_fill2');\">";
+    echo "<div id='z$id' style='display:none;'><a href=\"javascript:generate_password_html('$id',$pass_size,'$fields_to_fill1','$fields_to_fill2',$classcount);\">";
     __("Clic here to generate a password");
     echo "</a></div>";
     echo "<script type='text/javascript'>$('#z$id').show();</script>";
@@ -880,7 +904,7 @@ function display_div_generate_password($pass_size = DEFAULT_PASS_SIZE, $fields_t
 }
 
 /**
- * Affiche un bouton pour selectionner un dossier sur le serveur 
+ * Show a button to select a folder on the server
  * 
  * @param string    $dir
  * @param string    $caller
@@ -976,41 +1000,41 @@ function fHSVtoRGB($iH, $iS, $iV) {
     $dX = $dC * (1 - abs($dT - 1));     // as used in the Wikipedia link
 
     switch ($dH) {
-        case($dH >= 0.0 && $dH < 1.0):
-            $dR = $dC;
-            $dG = $dX;
-            $dB = 0.0;
-            break;
-        case($dH >= 1.0 && $dH < 2.0):
-            $dR = $dX;
-            $dG = $dC;
-            $dB = 0.0;
-            break;
-        case($dH >= 2.0 && $dH < 3.0):
-            $dR = 0.0;
-            $dG = $dC;
-            $dB = $dX;
-            break;
-        case($dH >= 3.0 && $dH < 4.0):
-            $dR = 0.0;
-            $dG = $dX;
-            $dB = $dC;
-            break;
-        case($dH >= 4.0 && $dH < 5.0):
-            $dR = $dX;
-            $dG = 0.0;
-            $dB = $dC;
-            break;
-        case($dH >= 5.0 && $dH < 6.0):
-            $dR = $dC;
-            $dG = 0.0;
-            $dB = $dX;
-            break;
-        default:
-            $dR = 0.0;
-            $dG = 0.0;
-            $dB = 0.0;
-            break;
+    case($dH >= 0.0 && $dH < 1.0):
+        $dR = $dC;
+        $dG = $dX;
+        $dB = 0.0;
+        break;
+    case($dH >= 1.0 && $dH < 2.0):
+        $dR = $dX;
+        $dG = $dC;
+        $dB = 0.0;
+        break;
+    case($dH >= 2.0 && $dH < 3.0):
+        $dR = 0.0;
+        $dG = $dC;
+        $dB = $dX;
+        break;
+    case($dH >= 3.0 && $dH < 4.0):
+        $dR = 0.0;
+        $dG = $dX;
+        $dB = $dC;
+        break;
+    case($dH >= 4.0 && $dH < 5.0):
+        $dR = $dX;
+        $dG = 0.0;
+        $dB = $dC;
+        break;
+    case($dH >= 5.0 && $dH < 6.0):
+        $dR = $dC;
+        $dG = 0.0;
+        $dB = $dX;
+        break;
+    default:
+        $dR = 0.0;
+        $dG = 0.0;
+        $dB = 0.0;
+        break;
     }
 
     $dM = $dV - $dC;
@@ -1057,7 +1081,7 @@ function PercentToColor($p = 0) {
 
 /**
  * 
- * @global m_err    $err
+ * @global m_messages    $msg
  * @global m_mem    $mem
  * @global int          $cuid
  * @return boolean
@@ -1072,7 +1096,7 @@ function panel_lock() {
 
 /**
  * 
- * @global m_err    $err
+ * @global m_messages    $msg
  * @global m_mem    $mem
  * @global int          $cuid
  * @return boolean
@@ -1106,8 +1130,8 @@ function csrf_get($return=false) {
         $_SESSION["csrf"]=md5(mt_rand().mt_rand().mt_rand());
     }
     if ($token=="") {
-      $token=md5(mt_rand().mt_rand().mt_rand());
-      $db->query("INSERT INTO csrf SET cookie=?, token=?, created=NOW(), used=0;",array($_SESSION["csrf"],$token));
+        $token=md5(mt_rand().mt_rand().mt_rand());
+        $db->query("INSERT INTO csrf SET cookie=?, token=?, created=NOW(), used=0;",array($_SESSION["csrf"],$token));
     }
     if ($return) 
         return $token;
@@ -1119,29 +1143,29 @@ function csrf_get($return=false) {
  * a token can be only checked once, it's disabled then
  * @param $token string the token to check in the DB + session
  * @return $result integer 0 for invalid token, 1 for good token, -1 for expired token (already used)
- * if a token is invalid or expired, an $err is raised, that can be displayed
+ * if a token is invalid or expired, an $msg is raised, that can be displayed
  */
 function csrf_check($token=null) {
-    global $db,$err;
+    global $db,$msg;
 
     if (is_null($token)) $token=$_POST["csrf"];
 
     if (!isset($_SESSION["csrf"])) {
-        $err->raise("functions", _("The posted form token is incorrect. Maybe you need to allow cookies"));
+        $msg->raise("ERROR", "functions", _("The posted form token is incorrect. Maybe you need to allow cookies"));
         return 0; // no csrf cookie :/
     }
     if (strlen($token)!=32 || strlen($_SESSION["csrf"])!=32) {
         unset($_SESSION["csrf"]);
-        $err->raise("functions", _("Your cookie or token is invalid"));
+        $msg->raise("ERROR", "functions", _("Your cookie or token is invalid"));
         return 0; // invalid csrf cookie 
     }
     $db->query("SELECT used FROM csrf WHERE cookie=? AND token=?;",array($_SESSION["csrf"],$token));
     if (!$db->next_record()) {
-        $err->raise("functions", _("Your token is invalid"));
+        $msg->raise("ERROR", "functions", _("You can't post twice the same form, please retry."));
         return 0; // invalid csrf cookie 
     }
     if ($db->f("used")) {
-        $err->raise("functions", _("Your token is expired. Please refill the form."));
+        $msg->raise("ERROR", "functions", _("You can't post twice the same form, please retry."));
         return -1; // expired
     }
     $db->query("UPDATE csrf SET used=1 WHERE cookie=? AND token=?;",array($_SESSION["csrf"],$token)); 

@@ -30,7 +30,8 @@
 require_once("../class/config.php");
 
 if (!$admin->enabled) {
-  __("This page is restricted to authorized staff");
+  $msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
+  echo $msg->msg_html_all();
   exit();
 }
 
@@ -48,13 +49,13 @@ getFields($fields);
 if ($delaccount) {
   // Delete an account
   if ($dom->del_slave_account($delaccount)) {
-    $error=_("The requested account has been deleted. It is now denied.");
+    $msg->raise("INFO", "admin", _("The requested account has been deleted. It is now denied."));
   }
 }
 if ($newlogin) {
   // Add an account
   if ($dom->add_slave_account($newlogin,$newpass)) {
-    $error=_("The requested account address has been created. It is now allowed.");
+    $msg->raise("INFO", "admin", _("The requested account address has been created. It is now allowed."));
     unset($newlogin); unset($newpass);
   }
 }
@@ -62,22 +63,21 @@ if ($newlogin) {
 if ($delip) {
   // Delete an ip address/class
   if ($dom->del_slave_ip($delip)) {
-    $error=_("The requested ip address has been deleted. It will be denied in one hour.");
+    $msg->raise("INFO", "admin", _("The requested ip address has been deleted. It will be denied in one hour."));
   }
 }
 if ($newip) {
   // Add an ip address/class
   if ($dom->add_slave_ip($newip,$newclass)) {
-    $error=_("The requested ip address has been added to the list. It will be allowed in one hour.");
+    $msg->raise("INFO", "admin", _("The requested ip address has been added to the list. It will be allowed in one hour."));
     unset($newip); unset($newclass);
   }
 }
 
 include_once("head.php");
 
-if (!empty($error)) {
-  echo "<p class=\"alert alert-danger\">$error</p>";
-}
+$c=$admin->listPasswordPolicies();
+$passwd_classcount = $c['adm']['classcount'];
 
 ?>
 <h3><?php __("Manage allowed ip for slave zone transfers"); ?></h3>
@@ -85,6 +85,8 @@ if (!empty($error)) {
 <?php
 
 $c=$dom->enum_slave_ip();
+
+echo $msg->msg_html_all();
 
 if (is_array($c)) { ?>
   <p>
@@ -164,7 +166,7 @@ if (is_array($c)) { ?>
     <tr><th><label for="newlogin"><?php __("Login"); ?></label></th><th><label for="newpass"><?php __("Password"); ?></label></th></tr>
     <tr>
       <td><input type="text" class="int" value="<?php ehe(  isset($newlogin)?$newlogin:'') ; ?>" id="newlogin" name="newlogin" maxlength="64" size="32" /><br/><br/></td>
-      <td><input type="password" class="int" autocomplete="off" value="<?php ehe( (isset($newpass)?$newpass:'') ) ; ?>" id="newpass" name="newpass" maxlength="64" size="32" /><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#newpass"); ?></td>
+      <td><input type="password" class="int" autocomplete="off" value="<?php ehe( (isset($newpass)?$newpass:'') ) ; ?>" id="newpass" name="newpass" maxlength="64" size="32" /><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#newpass","",$passwd_classcount); ?></td>
     </tr>
     <tr class="trbtn"><td colspan="2"><input type="submit" value="<?php __("Add this account to the allowed list"); ?>" class="inb" /></td></tr>
   </table>
