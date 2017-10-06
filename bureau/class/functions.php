@@ -1161,11 +1161,11 @@ function csrf_check($token=null) {
     }
     $db->query("SELECT used FROM csrf WHERE cookie=? AND token=?;",array($_SESSION["csrf"],$token));
     if (!$db->next_record()) {
-        $msg->raise('Error', "functions", _("Your token is invalid"));
+        $msg->raise('Error', "functions", _("You can't post twice the same form, please retry."));
         return 0; // invalid csrf cookie 
     }
     if ($db->f("used")) {
-        $msg->raise('Error', "functions", _("Your token is expired. Please refill the form."));
+        $msg->raise('Error', "functions", _("You can't post twice the same form, please retry."));
         return -1; // expired
     }
     $db->query("UPDATE csrf SET used=1 WHERE cookie=? AND token=?;",array($_SESSION["csrf"],$token)); 
