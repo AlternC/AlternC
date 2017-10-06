@@ -22,7 +22,6 @@ umask 022
 LOCK_FILE="/usr/share/alternc/panel/cron.lock" # FIXME doesn't seem clean to be here
 OLDIFS="$IFS"
 NEWIFS=" "
-LOGFORMAT_FILE="/etc/alternc/apache_logformat.conf"
 RELOAD_WEB="$(mktemp /tmp/alternc_reload_web.XXXX)"
 RELOAD_DNS="$(mktemp /tmp/alternc_reload_dns.XXXX)"
 B="µµ§§" # Strange letters to make split in query
@@ -130,14 +129,6 @@ if [ ! -z "$(cat "$RELOAD_WEB")" ] ; then
 
   (
     echo "###BEGIN OF ALTERNC AUTO-GENERATED FILE - DO NOT EDIT MANUALLY###"
-    # If exists and readable, include conf file "apache_logformat.conf"
-    # contain LogFormat and CustomLog directives for our Vhosts)
-    echo "## LogFormat informations"
-    if [ ! -r "$LOGFORMAT_FILE" ] ; then
-      echo "## Warning : Cannot read $LOGFORMAT_FILE"
-    else
-      echo "Include \"$LOGFORMAT_FILE\""
-    fi
     find "$VHOST_DIR" -mindepth 2 -type f -iname "*.conf" -print0 | xargs -0 cat 
     echo "###END OF ALTERNC AUTO-GENERATED FILE - DO NOT EDIT MANUALLY###" 
   ) > "$tempo"
