@@ -157,7 +157,7 @@ class m_mem {
         $_REQUEST["session"] = $sess;
         $db->query("insert into sessions (sid,ip,uid) values (?, ?, ?);", array($sess, $ip, $cuid));
         setcookie("session", $sess, 0, "/");
-        $msg->error = 0;
+        $msg->init_msgs();
         /* Fill in $local */
         $db->query("SELECT * FROM local WHERE uid= ? ;", array($cuid));
         if ($db->num_rows()) {
@@ -197,7 +197,7 @@ class m_mem {
         $_REQUEST["session"] = $sess;
         $db->query("insert into sessions (sid,ip,uid) values (?, ?, ?);", array($sess, $ip, $cuid));
         setcookie("session", $sess, 0, "/");
-        $msg->error = 0;
+        $msg->init_msgs();
         /* Fill in $local */
         $db->query("SELECT * FROM local WHERE uid= ? ;", array($cuid));
         if ($db->num_rows()) {
@@ -297,7 +297,7 @@ class m_mem {
         $db->query("select * from membres where uid= ? ;", array($cuid));
         $db->next_record();
         $this->user = $db->Record;
-        $msg->error = 0;
+        $msg->init_msgs();
         /* Remplissage de $local */
         $db->query("SELECT * FROM local WHERE uid= ? ;", array($cuid));
         if ($db->num_rows()) {
@@ -360,7 +360,7 @@ class m_mem {
         setcookie("session", "", 0, "/");
         setcookie("oldid", "", 0, "/");
         if ($_COOKIE["session"] == "") {
-            $msg->error = 0;
+            $msg->init_msgs();
             return true;
         }
         if (strlen($_COOKIE["session"]) != 32) {
@@ -380,7 +380,7 @@ class m_mem {
         }
         $cuid = $db->f("uid");
         $db->query("delete from sessions where sid= ? ;", array($_COOKIE["session"]));
-        $msg->error = 0;
+        $msg->init_msgs();
 
         # Invoker le logout dans toutes les autres classes
         /*
@@ -428,7 +428,7 @@ class m_mem {
         }
         $newpass = _md5cr($newpass);
         $db->query("UPDATE membres SET pass= ? WHERE uid= ?;", array($newpass, $cuid));
-        $msg->error = 0;
+        $msg->init_msgs();
         return true;
     }
 
@@ -446,7 +446,7 @@ class m_mem {
             return false;
         }
         $db->query("UPDATE membres SET admlist= ? WHERE uid= ?;", array($admlist, $cuid));
-        $msg->error = 0;
+        $msg->init_msgs();
         return true;
     }
 
