@@ -1,7 +1,6 @@
 <?php
 
 /*
-  $Id: m_messages.php,v 1.4 2004/05/19 14:23:06 benjamin Exp $
   ----------------------------------------------------------------------
   LICENSE
 
@@ -17,111 +16,108 @@
 
   To read the license please visit http://www.gnu.org/copyleft/gpl.html
   ----------------------------------------------------------------------
-  Original Author of file: Benjamin Sonntag, Franck Missoum
-  ----------------------------------------------------------------------
- */
+*/
 
 /**
- * Classe de gestion des messages apparaissant lors d'appels API.
+ * Handle messages (error, warning, info, ok) appearing in API calls. 
  *
- * <p>Cette classe gère les messages qui peuvent apparaitre lors d'appels
- * à l'API d'AlternC. Ces msgs sont stockées sous la forme d'1 nombre
- * (Classe ID) ainsi que du msg en associé.
- * Des messages localisés sont aussi disponibles.</p>
- * <p>Cette classe se charge aussi d'insérer les appels à l'API d'AlternC
- * dans les logs du système dans /var/log/alternc/bureau.log
+ * <p>This class handles messages appearing while calling API functions of AlternC
+ * Those messages are stored as a number (class-id) and a message
+ * localized messages are available</p>
+ * <p>This class also handle inserting those messages into the logging 
+ * system in /var/log/alternc/bureau.log
  * </p>
- * Copyleft {@link http://alternc.net/ AlternC Team}
  * 
- * @copyright    AlternC-Team 2002-11-01 http://alternc.net/
+ * @copyright    AlternC-Team  https://alternc.com/
  */
 class m_messages {
 
-    /** Tableau qui va contenir les messages et leur id */
+    /** Contains the messages and their ID */
     var $arrMessages = array();
 
-    /** Emplacement du fichier de logs d'AlternC */
     var $logfile = "/var/log/alternc/bureau.log";
 
-    /** Liste of possible type */
+    /** List of possible message types */
     var $ARRTYPES = array("ERROR", "ALERT", "INFO", "OK");
 
-    /** Associate css classes */
+    /** CSS classes for each type */
     var $ARRCSS = array(
-	"ERROR" => "alert-danger",
-	"ALERT" => "alert-warning",
-	"INFO" => "alert-info",
-	"OK" => "alert-success"
+        "ERROR" => "alert-danger",
+        "ALERT" => "alert-warning",
+        "INFO" => "alert-info",
+        "OK" => "alert-success"
     );
 
     public function __construct() {
-	$this->init_msgs();
+        $this->init_msgs();
     }
 
     /**
-     * Enregistre un message, signale celle-ci dans les logs
+     * Record a message, insert it into the logfile.
      * 
-     * Cette fonction enregistre un message, l'ajoute dans les logs d'AlternC, 
-     * et la met à disposition pour le bureau virtuel pour affichage ultérieur.
+     * This function records a message, add it to the logfile,
+     * and make it available for the web panel to print it later.
      *
      * @param string $cat The category of the msg array to work with
-     * @param integer $clsid Classe qui lève le message
-     * @param mixed $msg Message
-     * @param string $param Paramètre chaine associé au message (facultatif)
-     * @return boolean TRUE si le msg est enregistré, FALSE sinon.
+     * @param integer $clsid Which class raises this message
+     * @param mixed $msg The message
+     * @param string $param Non-mandatory string parameter for this message
+     * @return boolean TRUE if the message got recorded, FALSE if not.
      *
      */
     function raise($cat = "Error", $clsid, $msg, $param = "") {
-	$arrInfos  = array();
+        $arrInfos  = array();
 
-	$type = strtoupper($cat);
-	if (! in_array($type, $this->ARRTYPES)) {
-	    return false;
-	}
+        $type = strtoupper($cat);
+        if (! in_array($type, $this->ARRTYPES)) {
+            return false;
+        }
 
-	$arrInfos['clsid'] = $clsid;
-	$arrInfos['msg'] = $msg;
-	$arrInfos['param'] = is_array($param)?$param:(empty($param)?"":array($param));
+        $arrInfos['clsid'] = $clsid;
+        $arrInfos['msg'] = $msg;
+        $arrInfos['param'] = is_array($param)?$param:(empty($param)?"":array($param));
 
-	$this->arrMessages[$type][] = $arrInfos;
+        $this->arrMessages[$type][] = $arrInfos;
 
         $this->logAlternC($cat);
         return true;
     }
-
+    
+    /**
+     * Reset the stored messages array
+     */
     function init_msgs() {
-	// Initialisation du tableau des message
-	foreach ($this->ARRTYPES as $v) {
-	    $this->arrMessages[$v] = array();
-	}
+        foreach ($this->ARRTYPES as $v) {
+            $this->arrMessages[$v] = array();
+        }
     }
 
     /**
-     * Indique s'il y a ds msgs enregistrés pour une catégorie si le param $cat contient une catégorie
-     * ou pour toutesl es catégories si $cat est vide
+     * Tell if there are stored messages for a specific level
+     * or for all levels (if level is empty)
      *
-     * @param string $cat The category of the msg array to work with
-     * @return boolean True if there is/are msg recorded.
+     * @param string $cat The level of the msg array to work with
+     * @return boolean TRUE if there is/are msg recorded.
      *
      */
     function has_msgs($cat) {
-	$type = strtoupper($cat);
-	if (in_array($type, $this->ARRTYPES)) {
-	    return (count($this->arrMessages[$type]) > 0);
-	} else {
-	    foreach ($this->arrMessages as $v) {
-		if (count($v) > 0)
-		    return true;
-	    }
-	    return false;
-	}
+        $type = strtoupper($cat);
+        if (in_array($type, $this->ARRTYPES)) {
+            return (count($this->arrMessages[$type]) > 0);
+        } else {
+            foreach ($this->arrMessages as $v) {
+                if (count($v) > 0)
+                    return true;
+            }
+            return false;
+        }
     }
 
     /**
-     * Retourne la chaine de message concaténés de l'ensemble des msgs enregistrés
-     * ou du dernièr message rencontré
+     * Return a string of concateneted messages of all recorded messages
+     * or only the last message
      *
-     * @param string $cat The category of the msg array to work with
+     * @param string $cat The level of the msg array to work with
      * @param string $sep The separator used to concatenate msgs
      * @param boolean $all show all the messages or only the last one
      *
@@ -129,78 +125,78 @@ class m_messages {
      *
      */
     function msg_str($cat = "Error", $sep = "<li>", $all = true) {
-	$str = "";
+        $str = "";
 
-	$type = strtoupper($cat);
-	if (! in_array($type, $this->ARRTYPES)) {
-	    return false;
-	}
+        $type = strtoupper($cat);
+        if (! in_array($type, $this->ARRTYPES)) {
+            return false;
+        }
 
-	if (! $this->has_msgs($cat))
-	    return "";
+        if (! $this->has_msgs($cat))
+            return "";
 
-	if ($all) {
-	    foreach ($this->arrMessages[$type] as $k => $arrMsg) {
-		$args = $arrMsg['param'];
+        if ($all) {
+            foreach ($this->arrMessages[$type] as $k => $arrMsg) {
+                $args = $arrMsg['param'];
 
-		if (is_array($args) && count($args) > 0) {
-		    array_unshift($args, $arrMsg['msg']);
-		    if ($sep == "<li>")
-		        $str .= "<li>" . call_user_func_array("sprintf", $args) . "</li>";
-		    else
-			$str .= call_user_func_array("sprintf", $args) . $sep;
-		} else
-		    if ($sep == "<li>")
-		        $str .= "<li>" . $arrMsg['msg'] . "</li>";
-		    else
-			$str .= $arrMsg['msg'] . $sep;
+                if (is_array($args) && count($args) > 0) {
+                    array_unshift($args, $arrMsg['msg']);
+                    if ($sep == "<li>")
+                        $str .= "<li>" . call_user_func_array("sprintf", $args) . "</li>";
+                    else
+                        $str .= call_user_func_array("sprintf", $args) . $sep;
+                } else
+                    if ($sep == "<li>")
+                        $str .= "<li>" . $arrMsg['msg'] . "</li>";
+                    else
+                        $str .= $arrMsg['msg'] . $sep;
             }
 
-	    if ($sep == "<li>") 
-		$str = "<ul>".$str."</ul>";
+            if ($sep == "<li>") 
+                $str = "<ul>".$str."</ul>";
 
-	} else {
-	    $i = count($this->arrMessages[$type]) - 1;
-	    if ($i > 0) {
-		$arr_msg=$this->arrMessages[$type][$i];
-		$args = $arr_msg['param'];
-		if (is_array($args) && count($args) > 0) {
-		    array_unshift($args, $arr_msg['msg']);
-		    $str = call_user_func_array("sprintf", $args);
-		} else
-		    $str = $arr_msg['msgId'];
-	    }
-	}
+        } else {
+            $i = count($this->arrMessages[$type]) - 1;
+            if ($i > 0) {
+                $arr_msg=$this->arrMessages[$type][$i];
+                $args = $arr_msg['param'];
+                if (is_array($args) && count($args) > 0) {
+                    array_unshift($args, $arr_msg['msg']);
+                    $str = call_user_func_array("sprintf", $args);
+                } else
+                    $str = $arr_msg['msgId'];
+            }
+        }
 
-	return $str;
+        return $str;
     }
 
     /**
-     * Retourn le message au format Html avec la class Css associée
+     * Return a message in HTML form with associated CSS
      *
-     * @param string $cat The category of the msg array to work with
+     * @param string $cat The level of the msg array to work with
      * @param string $sep The separator used to concatenate msgs
      * @param boolean $all show all the messages or only the last one
      *
      * @return string HTML message
      */
     function msg_html($cat = "Error", $sep = "<li>", $all = true) {
-	$type = strtoupper($cat);
-	if (! in_array($type, $this->ARRTYPES)) {
-	    return false;
-	}
+        $type = strtoupper($cat);
+        if (! in_array($type, $this->ARRTYPES)) {
+            return false;
+        }
 
-	if (count($this->arrMessages[$type]) == 0)
-	    return "";
+        if (count($this->arrMessages[$type]) == 0)
+            return "";
 
-	$str = $this->msg_str($cat, $sep, $all);
-	$str = "<div class='alert " . $this->ARRCSS[$type] . "'>" . $str . "</div>";
+        $str = $this->msg_str($cat, $sep, $all);
+        $str = "<div class='alert " . $this->ARRCSS[$type] . "'>" . $str . "</div>";
 
-	return $str;
+        return $str;
     }
 
     /**
-     * Retourn le message de toutes les catégories au format Html avec la class Css associée
+     * Return all the messages of all levels in HTML form with associated CSS
      *
      * @param string $sep The separator used to concatenate msgs
      * @param boolean $all show all the messages or only the last one
@@ -208,48 +204,47 @@ class m_messages {
      * @return string HTML message
      */
     function msg_html_all($sep = "<li>", $all = true, $init = false) {
-	$msg="";
+        $msg="";
 
-	$msg.=$this->msg_html("Error", $sep, $all);
-	$msg.=$this->msg_html("Ok", $sep, $all);
-	$msg.=$this->msg_html("Info", $sep, $all);
-	$msg.=$this->msg_html("Alert", $sep, $all);
+        $msg.=$this->msg_html("Error", $sep, $all);
+        $msg.=$this->msg_html("Ok", $sep, $all);
+        $msg.=$this->msg_html("Info", $sep, $all);
+        $msg.=$this->msg_html("Alert", $sep, $all);
 
-	if ($init)
-		$this->init_msgs();
+        if ($init)
+            $this->init_msgs();
 
-	return $msg;
+        return $msg;
     }
 
     /**
-     * Envoi un log dans /var/log/alternc/bureau.log
-     *
-     * Cette fonction Loggue le dernier msg dans /var/log sur la machine,
-     * permettant ainsi aux admins de savoir ce qu'il se passe...
-     * Elle est appelée automatiquement par error
+     * Log a message into /var/log/alternc/bureau.log
+     * 
+     * This function logs the last message in the /var/log/alternc folder
+     * allowing sysadmins to know what's happened.
+     * automatically called by raise()
      * @access private
      */
     function logAlternC($cat = "Error") {
         global $mem;
 
-	$type = strtoupper($cat);
-	if (! in_array($type, $this->ARRTYPES)) {
-	    return false;
-	}
+        $type = strtoupper($cat);
+        if (! in_array($type, $this->ARRTYPES)) {
+            return false;
+        }
 
         @file_put_contents($this->logfile, date("d/m/Y H:i:s") . " - " . get_remote_ip() . " - $type - " . $mem->user["login"] . " - " . $this->msg_str($cat, "", false), FILE_APPEND);
     }
 
     /**
-     * Envoi un log d'appel d'API dans /var/log/alternc/bureau.log
+     * Log an API function call into /var/log/alternc/bureau.log
      *
-     * Cette fonction loggue dans /var/log l'appel à la fonction de l'API
-     * d'AlternC.
+     * This function logs in /var/log/alternc an API function call of AlternC
      *
-     * @param integer $clsid Numéro de la classe dont on a appelé une fonction
-     * @param string $function Nom de la fonction appelée
-     * @param string $param Paramètre (facultatif) passés à la fonction de l'API.
-     * @return boolean TRUE si le log a été ajouté, FALSE sinon
+     * @param integer $clsid Number of the class doing the call
+     * @param string $function Name of the called function
+     * @param string $param non-mandatory parameters of the API call
+     * @return boolean TRUE if the log where successfull, FALSE if not
      *
      */
     function log($clsid, $function, $param = "") {
@@ -259,4 +254,4 @@ class m_messages {
 
 }
 
-/* Classe m_messages */
+/* Class m_messages */
