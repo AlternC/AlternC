@@ -705,10 +705,8 @@ CREATE TABLE IF NOT EXISTS `default_subdomains` (
 
 INSERT IGNORE INTO `default_subdomains` (`sub`, `domain_type`, `domain_type_parameter`, `concerned`) VALUES
 ('www', 'VHOST', '%%DOMAINDIR%%', 'MAIN'),
-('mail', 'ROUNDCUBE', '', 'MAIN'),
 ('', 'URL', 'http://www.%%DOMAIN%%', 'MAIN'),
 ('www', 'URL', 'http://www.%%TARGETDOM%%', 'SLAVE'),
-('mail', 'URL', 'http://mail.%%TARGETDOM%%', 'SLAVE'),
 ('', 'URL', 'http://%%TARGETDOM%%', 'SLAVE');
 
 
@@ -756,9 +754,6 @@ CREATE TABLE IF NOT EXISTS `alternc_status` (
   PRIMARY KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT = 'stores current AlternC schema version number';
 
--- make it re-exec-proof
-DELETE FROM alternc_status WHERE name='alternc_version';
-INSERT INTO alternc_status SET name='alternc_version',value='3.4.7.php';
 
 
 
@@ -771,3 +766,7 @@ CREATE TABLE IF NOT EXISTS `csrf` (
 
 ALTER TABLE `csrf` ADD PRIMARY KEY (`cookie`,`token`), ADD KEY `created` (`created`);
 
+
+-- make it re-exec-proof
+DELETE FROM alternc_status WHERE name='alternc_version';
+INSERT INTO alternc_status SET name='alternc_version',value='3.4.8.sql';

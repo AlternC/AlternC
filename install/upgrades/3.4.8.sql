@@ -7,4 +7,5 @@ CREATE TABLE IF NOT EXISTS `dovecot_quota` (
 
 ALTER TABLE `piwik_users` ADD `passwd` VARCHAR(255) NOT NULL AFTER `login`;
 
-UPDATE `default_subdomains` SET `domain_type` = 'ROUNDCUBE' WHERE `domain_type` = 'WEBMAIL';
+DELETE FROM `default_subdomains` WHERE  `domain_type` = 'ROUNDCUBE' AND `sub`='mail';
+DELETE FROM `default_subdomains` WHERE  `domain_type` = 'URL' AND `sub`='mail';
