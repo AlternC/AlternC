@@ -47,7 +47,7 @@ if($q['u'] > 0){
 }
 
 if($mysql->add_db($dbname)) {
-  $msg->raise("INFO", "mysql", _("La base de données '%s' a bien été créé."),$dbname);
+  $msg->raise("INFO", "mysql", _("The database '%s' has been created."),$dbname);
 }
 
 #header('Location: sql_getparam.php?dbname='.htmlentities($dbname));
