@@ -18,7 +18,7 @@
   Original Author of file: Lerider Steven
   Purpose of file: Manage generic actions.
   ----------------------------------------------------------------------
- */
+*/
 
 /**
  * This class manage actions to be performed on the file system on behalf of alternc Classes
@@ -197,19 +197,19 @@ class m_action {
         global $db, $msg;
         $msg->log("action", "set", $type);
         $serialized = serialize($parameters);
-	$type = strtoupper($type);
-	if (in_array($type, array('CHMOD',
-                                  'CREATE_FILE', 
-				  'CREATE_DIR', 
-				  'MOVE', 
-				  'FIX_USER', 
-				  'FIX_FILE', 
-				  'FIX_DIR', 
-				  'DELETE'))) {
-	  $query = "INSERT INTO `actions` (type, parameters, creation, user) VALUES('$type', '$serialized', now(), '$user');";
-	} else {
-	  return False;
-	}
+        $type = strtoupper($type);
+        if (in_array($type, array('CHMOD',
+        'CREATE_FILE', 
+        'CREATE_DIR', 
+        'MOVE', 
+        'FIX_USER', 
+        'FIX_FILE', 
+        'FIX_DIR', 
+        'DELETE'))) {
+            $query = "INSERT INTO `actions` (type, parameters, creation, user) VALUES('$type', '$serialized', now(), '$user');";
+        } else {
+            return False;
+        }
 
         if (!$db->query($query)) {
             $msg->raise("ERROR", "action", _("Error setting actions"));

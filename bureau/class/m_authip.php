@@ -1,25 +1,25 @@
 <?php
 
 /**
-  $Id: m_authip.php
-  ----------------------------------------------------------------------
-  LICENSE
+   $Id: m_authip.php
+   ----------------------------------------------------------------------
+   LICENSE
 
-  This program is free software; you can redistribute it and/or
-  modify it under the terms of the GNU General Public License (GPL)
-  as published by the Free Software Foundation; either version 2
-  of the License, or (at your option) any later version.
+   This program is free software; you can redistribute it and/or
+   modify it under the terms of the GNU General Public License (GPL)
+   as published by the Free Software Foundation; either version 2
+   of the License, or (at your option) any later version.
 
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
 
-  To read the license please visit http://www.gnu.org/copyleft/gpl.html
-  ----------------------------------------------------------------------
-  Original Author of file: Fufroma
-  ----------------------------------------------------------------------
- */
+   To read the license please visit http://www.gnu.org/copyleft/gpl.html
+   ----------------------------------------------------------------------
+   Original Author of file: Fufroma
+   ----------------------------------------------------------------------
+*/
 
 /**
  * Classe de gestion des IP authorisée
@@ -80,7 +80,7 @@ class m_authip {
         while ($db->next_record()) {
             $r[$db->f('id')] = $db->Record;
             if ((checkip($db->f('ip')) && $db->f('subnet') == 32) ||
-                    (checkipv6($db->f('ip')) && $db->f('subnet') == 128)) {
+            (checkipv6($db->f('ip')) && $db->f('subnet') == 128)) {
                 $r[$db->f('id')]['ip_human'] = $db->f('ip');
             } else {
                 $r[$db->f('id')]['ip_human'] = $db->f('ip') . "/" . $db->f('subnet');
@@ -216,7 +216,7 @@ class m_authip {
         }
 
         $id = intval($id);
-	$infos = $db->quote(trim($infos));
+        $infos = $db->quote(trim($infos));
 
         // Extract subnet from ipsub
         $tmp = explode('/', $ipsub);

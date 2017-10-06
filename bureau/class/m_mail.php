@@ -2,10 +2,6 @@
 
 /*
   ----------------------------------------------------------------------
-  AlternC - Web Hosting System
-  Copyright (C) 2000-2012 by the AlternC Development Team.
-  https://alternc.org/
-  ----------------------------------------------------------------------
   LICENSE
 
   This program is free software; you can redistribute it and/or
@@ -20,50 +16,48 @@
 
   To read the license please visit http://www.gnu.org/copyleft/gpl.html
   ----------------------------------------------------------------------
-  Purpose of file: Manage Email accounts and aliases.
-  ----------------------------------------------------------------------
- */
+*/
 
 /**
  * This class handle emails (pop and/or aliases and even wrapper for internal
  * classes) of hosted users.
  *
- * @copyright    AlternC-Team 2012-09-01 http://alternc.com/
  * This class is directly using the following alternc MySQL tables:
  * address = any used email address will be defined here, mailbox = pop/imap mailboxes, recipient = redirection from an email to another
  * and indirectly the domain class, to know domain names from their id in the DB.
  * This class is also defining a few hooks, search ->invoke in the code.
  */
 class m_mail {
-    /* ----------------------------------------------------------------- */
 
-    /** domain list for this account
+    /** 
+     * domain list for this account
      * @access private
      */
     var $domains;
 
-    /* ----------------------------------------------------------------- */
 
-    /** If an email has those chars, 'not nice in shell env' ;) 
+    /** 
+     * If an email has those chars, 'not nice in shell env' ;) 
      * we don't store the email in $mail/u/{user}_domain, but in $mail/_/{address_id}_domain
      * @access private
      */
     var $specialchars = array('"', "'", '\\', '/');
 
-    /* ----------------------------------------------------------------- */
 
-    /** If an email has those chars, we will ONLY allow RECIPIENTS, NOT POP/IMAP for DOVECOT !
+    /** 
+     * If an email has those chars, we will ONLY allow RECIPIENTS, NOT POP/IMAP for DOVECOT !
      * Since Dovecot doesn't allow those characters
      * @access private
      */
     var $forbiddenchars = array('"', "'", '\\', '/', '?', '!', '*', '$', '|', '#', '+');
 
-    /* ----------------------------------------------------------------- */
 
-    /** Number of results for a pager display
+    /** 
+     * Number of results for a pager display
      * @access public
      */
     var $total;
+
     // Human server name for help
     var $srv_submission;
     var $srv_smtp;
@@ -75,7 +69,6 @@ class m_mail {
     var $cache_domain_mail_size = array();
     var $enum_domains = array();
 
-    /* ----------------------------------------------------------------- */
 
     /**
      * Constructeur
@@ -91,6 +84,10 @@ class m_mail {
         $this->srv_pop3s = variable_get('mail_human_pop3s', $L_FQDN, 'Human name for POP3s mail server', array('desc' => 'Name', 'type' => 'string'));
     }
 
+
+    /**
+     * Hook called by menu class to add the email menu to the left pane 
+     */
     function hook_menu() {
         $obj = array(
             'title' => _("Email Addresses"),
@@ -110,6 +107,7 @@ class m_mail {
         return $obj;
     }
 
+
     function get_total_size_for_domain($domain) {
         global $db;
         if (empty($this->cache_domain_mail_size)) {
@@ -125,7 +123,6 @@ class m_mail {
         return 0;
     }
 
-    // FIXME documenter
 
     /**
      * @param string $domain_id
@@ -157,6 +154,7 @@ class m_mail {
         return $rr;
     }
 
+
     /**
      * @param string $domain_id
      */
@@ -167,6 +165,7 @@ class m_mail {
         }
         return $this->delete($catch['mail_id']);
     }
+
 
     /**
      * @param string $domain_id
@@ -179,9 +178,9 @@ class m_mail {
             $target = '@' . $target;
         }
 
-        if (substr($target, 0, 1) == '@') { // le premier caractere est un @
+        if (substr($target, 0, 1) == '@') { // the first character is @
             // FIXME validate domain
-        } else { // ca doit être un mail
+        } else { // it MUST be an email
             if (!filter_var($target, FILTER_VALIDATE_EMAIL)) {
                 $msg->raise("ERROR", "mail", _("The email you entered is syntaxically incorrect"));
                 return false;
@@ -191,9 +190,9 @@ class m_mail {
         return $this->create_alias($domain_id, '', $target, "catchall", true);
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** get_quota (hook for quota class), returns the number of used 
+    /** 
+     * get_quota (hook for quota class), returns the number of used 
      * service for a quota-bound service
      * @param $name string the named quota we want
      * @return the number of used service for the specified quota, 
@@ -211,18 +210,18 @@ class m_mail {
         return $q;
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** Password policy kind used in this class (hook for admin class)
+    /** 
+     * Password policy kind used in this class (hook for admin class)
      * @return array an array of policykey => "policy name (for humans)"
      */
     function alternc_password_policy() {
         return array("pop" => _("Email account password"));
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** Returns the list of mail-hosting domains for a user
+    /** 
+     * Returns the list of mail-hosting domains for a user
      * @return array indexed array of hosted domains
      */
     function enum_domains($uid = -1) {
@@ -231,7 +230,7 @@ class m_mail {
         if ($uid == -1) {
             $uid = $cuid;
         }
-	$db->query("
+        $db->query("
 SELECT
   d.id,
   d.domaine,
@@ -254,9 +253,9 @@ ORDER BY
         return $this->enum_domains;
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** available: tells if an email address can be installed in the server
+    /** 
+     * available: tells if an email address can be installed in the server
      * check the domain part (is it mine too), the syntax, and the availability.
      * @param $mail string email to check
      * @return boolean true if the email can be installed on the server 
@@ -283,15 +282,15 @@ ORDER BY
         }
     }
 
-    /* ----------------------------------------------------------------- */
-    /* function used to list every mail address hosted on a domain.
+
+    /**
+     * function used to list every mail address hosted on a domain.
      * @param $dom_id integer the domain id.
      * @param $search string search that string in recipients or address.
      * @param $offset integer skip THAT much emails in the result.
      * @param $count integer return no more than THAT much emails. -1 for ALL. Offset is ignored then.
      * @result an array of each mail hosted under the domain.
      */
-
     function enum_domain_mails($dom_id = null, $search = "", $offset = 0, $count = 30, $show_systemmails = false) {
         global $db, $msg, $hooks;
         $msg->log("mail", "enum_domains_mail");
@@ -311,8 +310,8 @@ ORDER BY
         $db->next_record();
         $this->total = $db->f("total");
         if ($count != -1) {
-	  $offset = intval($offset);
-	  $count = intval($count);
+            $offset = intval($offset);
+            $count = intval($count);
             $limit = " LIMIT $offset, $count "; 
         } else {
             $limit = "";
@@ -343,9 +342,9 @@ ORDER BY
         }
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** Function used to insert a new mail into the db
+    /** 
+     * Function used to insert a new mail into the db
      * should be used by the web interface, not by third-party programs.
      *
      * This function calls the hook "hooks_mail_cancreate"
@@ -387,10 +386,10 @@ ORDER BY
         // Already exists?
         $db->query("SELECT * FROM address WHERE domain_id= ? AND address= ? ;", array($dom_id, $mail));
         if ($db->next_record()) {
-	    if ($db->f("type") == "mailman")
-	      $msg->raise("ERROR", "mail", _("This email address already exists in mailman"));
-	    else
-              $msg->raise("ERROR", "mail", _("This email address already exists"));
+            if ($db->f("type") == "mailman")
+                $msg->raise("ERROR", "mail", _("This email address already exists in mailman"));
+            else
+                $msg->raise("ERROR", "mail", _("This email address already exists"));
 
             return false;
         }
@@ -403,9 +402,9 @@ ORDER BY
         return $id;
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** function used to get every information we can on a mail 
+    /** 
+     * function used to get every information we can on a mail 
      * @param $mail_id integer
      * @return array a hashtable with all the informations for that email
      */
@@ -435,9 +434,9 @@ ORDER BY
 
     private $isitmy_cache = array();
 
-    /* ----------------------------------------------------------------- */
 
-    /** Check if an email is mine ...
+    /** 
+     * Check if an email is mine ...
      *
      * @param $mail_id integer the number of the email to check
      * @return string the complete email address if that's mine, false if not
@@ -459,9 +458,9 @@ ORDER BY
         }
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** Hook called when the DOMAIN class will delete a domain.
+    /** 
+     * Hook called when the DOMAIN class will delete a domain.
      * OR when the DOMAIN class tells us we don't host the emails of this domain anymore.
      * @param $dom the ID of the domain to delete
      * @return boolean if the email has been properly deleted
@@ -485,7 +484,10 @@ ORDER BY
         return true;
     }
 
-    // return the alternc account's ID of the mail_id
+
+    /**
+     * return the alternc account's ID of the mail_id
+     */
     function get_account_by_mail_id($mail_id) {
         global $db;
         $db->query("select compte as uid from domaines d, address a where a.domain_id = d.id and a.id = ? ;", array($mail_id));
@@ -495,9 +497,9 @@ ORDER BY
         return $db->f('uid');
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** Function used to delete a mail from the db
+    /** 
+     * Function used to delete a mail from the db
      * should be used by the web interface, not by third-party programs.
      *
      * @param $mail_id integer the number of the email to delete
@@ -547,9 +549,9 @@ ORDER BY
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** Function used to undelete a pending deletion mail from the db
+    /** 
+     * Function used to undelete a pending deletion mail from the db
      * should be used by the web interface, not by third-party programs.
      *
      * @param $mail_id integer the email id
@@ -598,9 +600,9 @@ ORDER BY
         }
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** set the password of an email address.
+    /** 
+     * set the password of an email address.
      * @param $mail_id integer email ID 
      * @param $pass string the new password.
      * @return boolean true if the password has been set, false else, raise an error.
@@ -616,16 +618,16 @@ ORDER BY
             return false;
         }
         if ($canbeempty && empty($pass)) {
-          return $db->query("UPDATE address SET password= ? where id = ? ;", array(null, $mail_id ));
+            return $db->query("UPDATE address SET password= ? where id = ? ;", array(null, $mail_id ));
         } else if (!$db->query("UPDATE address SET password= ? where id = ? ;", array(_md5cr($pass), $mail_id ))) {
             return false;
         }
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** Enables an email address.
+    /** 
+     * Enables an email address.
      * @param $mail_id integer Email ID
      * @return boolean true if the email has been enabled.
      */
@@ -641,9 +643,9 @@ ORDER BY
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** Disables an email address.
+    /** 
+     * Disables an email address.
      * @param $mail_id integer Email ID
      * @return boolean true if the email has been enabled.
      */
@@ -659,9 +661,9 @@ ORDER BY
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** Function used to update an email settings
+    /** 
+     * Function used to update an email settings
      * should be used by the web interface, not by third-party programs.
      *
      * @param $mail_id integer the number of the email to delete
@@ -719,7 +721,7 @@ ORDER BY
         foreach ($r as $m) {
             $m = trim($m);
             if ($m && ( filter_var($m, FILTER_VALIDATE_EMAIL) || $dontcheck)  // Recipient Email is valid
-                    && $m != ($me["address"] . "@" . $me["domain"])) {  // And not myself (no loop allowed easily ;) )
+            && $m != ($me["address"] . "@" . $me["domain"])) {  // And not myself (no loop allowed easily ;) )
                 $red.=$m . "\n";
             }
         }
@@ -727,15 +729,15 @@ ORDER BY
         if (isset($red) && $red) {
             $db->query("INSERT INTO recipient SET address_id= ?, recipients= ? ;", array($mail_id, $red));
         }
-	if (!$islocal && !$red) {
-	  $msg->raise("ALERT", "mail", _("Warning: you created an email which is not an alias, and not a POP/IMAP mailbox. This is certainly NOT what you want to do. To fix this, edit the email address and check 'Yes' in POP/IMAP account, or set some recipients in the redirection field."));
-	}
+        if (!$islocal && !$red) {
+            $msg->raise("ALERT", "mail", _("Warning: you created an email which is not an alias, and not a POP/IMAP mailbox. This is certainly NOT what you want to do. To fix this, edit the email address and check 'Yes' in POP/IMAP account, or set some recipients in the redirection field."));
+        }
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** A wrapper used by mailman class to create it's needed addresses 
+    /** 
+     * A wrapper used by mailman class to create it's needed addresses 
      * @ param : $dom_id , the domain id associated to a given address
      * @ param : $m , the left part of the  mail address being created
      * @ param : $delivery , the delivery used to deliver the mail
@@ -749,9 +751,9 @@ ORDER BY
         // FIXME return error code
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** A function used to create an alias for a specific address
+    /** 
+     * A function used to create an alias for a specific address
      * @ param : $dom_id , the domain sql identifier
      * @ param : $m , the alias we want to create
      * @ param : $alias , the already existing aliased address
@@ -772,9 +774,9 @@ ORDER BY
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** A wrapper used by mailman class to create it's needed addresses 
+    /** 
+     * A wrapper used by mailman class to create it's needed addresses 
      * @ param : $mail_id , the mysql id of the mail address we want to delete
      * of the email for the current acccount.
      */
@@ -784,9 +786,9 @@ ORDER BY
         $this->delete($mail_id);
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** Export the mail information of an account 
+    /** 
+     * Export the mail information of an account 
      * @return: str, string containing the complete configuration 
      * of the email for the current acccount.
      */
@@ -825,7 +827,6 @@ ORDER BY
         return $str;
     }
 
-    /* ----------------------------------------------------------------- */
 
     /**
      * Return the list of allowed slave accounts (secondary-mx)
@@ -844,7 +845,6 @@ ORDER BY
         return $res;
     }
 
-    /* ----------------------------------------------------------------- */
 
     /**
      * Check for a slave account (secondary mx)
@@ -861,9 +861,9 @@ ORDER BY
         return false;
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** Out (echo) the complete hosted domain list : 
+    /** 
+     * Out (echo) the complete hosted domain list : 
      */
     function echo_domain_list($format = null) {
         global $db;
@@ -875,21 +875,20 @@ ORDER BY
             $tt.=$db->f("domaine");
         }
 
-        # Generate an integrity check 
+        // Generate an integrity check 
         $obj = array('integrity' => md5($tt), 'items' => $lst);
 
         switch ($format) {
-            case "json":
-                return json_encode($obj);
-            default:
-                foreach ($lst as $l) {
-                    echo $l . "\n";
-                }
-                return true;
+        case "json":
+            return json_encode($obj);
+        default:
+            foreach ($lst as $l) {
+                echo $l . "\n";
+            }
+            return true;
         } // switch
     }
 
-    /* ----------------------------------------------------------------- */
 
     /**
      * Add a slave account that will be allowed to access the mxdomain list
@@ -908,7 +907,6 @@ ORDER BY
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
 
     /**
      * Remove a slave account
@@ -920,9 +918,9 @@ ORDER BY
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** hook function called by AlternC when a domain is created for
+    /** 
+     * hook function called by AlternC when a domain is created for
      * the current user account using the SLAVE DOMAIN feature
      * This function create a CATCHALL to the master domain
      * @param string $domain_id Domain that has just been created
@@ -936,9 +934,9 @@ ORDER BY
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** hook function called by AlternC when a domain is created for
+    /** 
+     * hook function called by AlternC when a domain is created for
      * the current user account 
      * This function create a postmaster mail which is an alias to LOGIN @ FQDN
      * wich is a dynamic alias to the alternc's account mail
@@ -968,9 +966,9 @@ ORDER BY
         return $this->create_alias($domain_id, 'postmaster', $mem->user['login'] . '@' . $mailname);
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** hook function called by variables when a variable is changed
+    /** 
+     * hook function called by variables when a variable is changed
      * @access private
      */
     function hook_variable_set($name, $old, $new) {
@@ -1000,9 +998,9 @@ ORDER BY
         }
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** Set or UPDATE the DNS record for the domain $dom(str) to be $spf
+    /** 
+     * Set or UPDATE the DNS record for the domain $dom(str) to be $spf
      * account's login is current and if not it's $login.
      * don't change spf if current value is not $old
      * @access private
@@ -1030,9 +1028,9 @@ ORDER BY
         $db->query("UPDATE domaines SET dns_action='UPDATE' WHERE domaine= ?;", array($domain));
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** Set or UPDATE the DNS record for the domain $dom(str) to be $dmarc
+    /** 
+     * Set or UPDATE the DNS record for the domain $dom(str) to be $dmarc
      * account's login is current and if not it's $login.
      * don't change dmarc if current value is not $old
      * @access private
@@ -1063,9 +1061,9 @@ ORDER BY
         $db->query("UPDATE domaines SET dns_action='UPDATE' WHERE domaine= ?;", array($domain));
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** hook function called by AlternC-upnp to know which open 
+    /** 
+     * hook function called by AlternC-upnp to know which open 
      * tcp or udp ports this class requires or suggests
      * @return array a key => value list of port protocol name mandatory values
      * @access private
@@ -1082,6 +1080,5 @@ ORDER BY
         );
     }
 
-}
 
-/* Class m_mail */
+} /* Class m_mail */

@@ -2,10 +2,6 @@
 
 /*
   ----------------------------------------------------------------------
-  AlternC - Web Hosting System
-  Copyright (C) 2000-2013 by the AlternC Development Team.
-  https://alternc.org/
-  ----------------------------------------------------------------------
   LICENSE
 
   This program is free software; you can redistribute it and/or
@@ -20,13 +16,12 @@
 
   To read the license please visit http://www.gnu.org/copyleft/gpl.html
   ----------------------------------------------------------------------
-  Purpose of file: Manage LXC-based virtual machine through an inetd-based protocol
-  ----------------------------------------------------------------------
- */
+*/
 
 include_once(dirname(__FILE__) . '/vm.class.php');
 
 /**
+ * 
  * Manage AlternC's virtual machine start/stop using our own inetd-based protocol.
  */
 class m_lxc implements vm {
@@ -38,6 +33,7 @@ class m_lxc implements vm {
     public $TIMEOUT = 5;
     public $error = array();
 
+
     /**
      * Constructor, initialize the class informations from AlternC's variables
      */
@@ -47,6 +43,7 @@ class m_lxc implements vm {
         $this->KEY = variable_get('lxc_key', '', "Shared key with the Alternc's LXC server", array('desc' => 'Shared key', 'type' => 'string'));
         $this->maxtime = variable_get('lxc_maxtime', '4', "How many hours do we allow to have a server before shutting it down", array('desc' => 'Max time', 'type' => 'integer'));
     }
+
 
     /**
      * HOOK: add the "Console Access" to AlternC's main menu
@@ -60,10 +57,11 @@ class m_lxc implements vm {
             'ico' => 'images/ssh.png',
             'link' => 'vm.php',
             'pos' => 95,
-                );
+        );
 
         return $obj;
     }
+
 
     /**
      * HOOK: remove VM history for AlternC account
@@ -74,6 +72,7 @@ class m_lxc implements vm {
         $db->query("DELETE FROM vm_history WHERE uid= ?", array($cuid));
         return true;
     }
+
 
     /**
      * Send a message to a remote VM manager instance
@@ -118,6 +117,7 @@ class m_lxc implements vm {
         }
     }
 
+
     /**
      * START a Virtual Machine on the remote VM manager
      * for user $login having hashed password $pass and uid $uid
@@ -158,6 +158,7 @@ class m_lxc implements vm {
         }
     }
 
+
     /**
      * 
      */
@@ -173,6 +174,7 @@ class m_lxc implements vm {
         return unserialize($res);
     }
 
+
     /**
      * Stop the currently running VM
      */
@@ -187,6 +189,5 @@ class m_lxc implements vm {
         return TRUE;
     }
 
-}
+} /* class m_lxc */
 
-// class m_lxc

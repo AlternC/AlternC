@@ -2,10 +2,6 @@
 
 /*
   ----------------------------------------------------------------------
-  AlternC - Web Hosting System
-  Copyright (C) 2000-2012 by the AlternC Development Team.
-  https://alternc.org/
-  ----------------------------------------------------------------------
   LICENSE
 
   This program is free software; you can redistribute it and/or
@@ -20,26 +16,14 @@
 
   To read the license please visit http://www.gnu.org/copyleft/gpl.html
   ----------------------------------------------------------------------
-  Purpose of file: Manage hook system.
-  ----------------------------------------------------------------------
- */
+*/
 
 /**
  * This class manage hooks.
  * 
- * @copyright    AlternC-Team 2002-2005 http://alternc.org/
  */
 class m_hooks {
-    /* --------------------------------------------------------------------------- */
 
-    /** Constructor
-     * hooks([$mid]) Constructeur de la classe hooks, ne fait rien pour le moment
-     */
-    function m_hooks() {
-        
-    }
-
-    /* --------------------------------------------------------------------------- */
 
     /**
      * invoke() permet de lancer une fonction donné en parametre dans toute les classes
@@ -79,7 +63,6 @@ class m_hooks {
         return $val;
     }
 
-    /* --------------------------------------------------------------------------- */
 
     /**
      * invoke each executable script of the directory (or the specified script)
@@ -119,7 +102,5 @@ class m_hooks {
         return true;
     }
 
-}
-
-/* Class hooks */
+} /* Class hooks */
 

@@ -2,10 +2,6 @@
 
 /*
   ----------------------------------------------------------------------
-  AlternC - Web Hosting System
-  Copyright (C) 2000-2012 by the AlternC Development Team.
-  https://alternc.org/
-  ----------------------------------------------------------------------
   LICENSE
 
   This program is free software; you can redistribute it and/or
@@ -20,9 +16,7 @@
 
   To read the license please visit http://www.gnu.org/copyleft/gpl.html
   ----------------------------------------------------------------------
-  Purpose of file: Manage FTP accounts
-  ----------------------------------------------------------------------
- */
+*/
 
 /**
  * FTP account management class
@@ -31,17 +25,15 @@ class m_ftp {
 
     var $srv_name;
 
-    /* ----------------------------------------------------------------- */
 
     /**
-     * Constructeur
+     * Constructor
      */
     function m_ftp() {
         global $L_FQDN;
         $this->srv_name = variable_get('ftp_human_name', $L_FQDN, 'Human name for FTP server', array('desc' => 'Name', 'type' => 'string'));
     }
 
-    /* ----------------------------------------------------------------- */
 
     /**
      * Password kind used in this class (hook for admin class)
@@ -50,6 +42,11 @@ class m_ftp {
         return array("ftp" => "FTP accounts");
     }
 
+
+    /**
+     * hook function called by menu class
+     * to add menu to the left panel
+     */
     function hook_menu() {
         global $quota;
         $q = $quota->getquota("ftp");
@@ -81,8 +78,11 @@ class m_ftp {
         return $obj;
     }
 
-    // Return the values needed to activate security access. See get_auth_class()
-    // in authip for more informations
+
+    /**
+     * Return the values needed to activate security access. See get_auth_class()
+     * in authip for more informations
+     */
     function authip_class() {
         $c = Array();
         $c['name'] = "FTP";
@@ -100,7 +100,10 @@ class m_ftp {
         return $c;
     }
 
-    // Switch enabled status of an account
+
+    /**
+     * Switch enabled status of an account
+     */
     function switch_enabled($id, $status = null) {
         global $cuid, $db, $msg;
         if (!$jj = $this->get_ftp_details($id)) {
@@ -114,7 +117,6 @@ class m_ftp {
                 $status = 1;
             }
         }
-
         // Be sure what is in $status, in case of it was a parameter
         $status = ($status ? 1 : 0);
 
@@ -126,9 +128,9 @@ class m_ftp {
         }
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** Retourne la liste des comptes FTP du compte h�berg�
+    /** 
+     * Retourne la liste des comptes FTP du compte h�berg�
      * Retourne la liste des comptes FTP sous forme de tableau index� de
      * tableaus associatifs comme suit :
      * $a["id"]= ID du compte ftp
@@ -158,9 +160,9 @@ class m_ftp {
         }
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** Retourne les details d'un compte FTP (voir get_list)
+    /** 
+     * Retourne les details d'un compte FTP (voir get_list)
      * Le tableau est celui du compte d'id specifie
      * @param integer $id Numero du compte dont on souhaite obtenir les d�tails
      * @return array Tableau associatif contenant les infos du comptes ftp
@@ -196,9 +198,9 @@ class m_ftp {
         }
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** Retourne la liste des prefixes utilisables par le compte courant
+    /** 
+     * Retourne la liste des prefixes utilisables par le compte courant
      * @return array tableau contenant la liste des prefixes (domaines + login)
      *  du compte actuel.
      */
@@ -213,14 +215,13 @@ class m_ftp {
         return $r;
     }
 
+
     /**
      * Check if the login is fine (syntax)
-     * 
      * @param string $l
      */
     function check_login($l) {
         global $msg;
-
         // special chars and the max numbers of them allowed
         // to be able to give a specific error
         $vv = array('_' => '1', ' ' => 0);
@@ -230,7 +231,6 @@ class m_ftp {
                 return false;
             }
         }
-
         // Explicitly look for only allowed chars
         if (!preg_match("/^[A-Za-z0-9]+[A-Za-z0-9_\.\-]*$/", $l)) {
             $msg->raise("ERROR", 'ftp', _("FTP login is incorrect"));
@@ -239,9 +239,9 @@ class m_ftp {
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** Affiche (ECHO) la liste des prefixes disponibles sous forme de champs d'option
+    /** 
+     * Affiche (ECHO) la liste des prefixes disponibles sous forme de champs d'option
      * Les champs sont affich�s sous la forme <option>prefixe</option>...
      * La valeur $current se voit affubl�e de la balise SELECTED.
      * @param string $current Prefixe s�lectionn� par d�faut
@@ -261,9 +261,9 @@ class m_ftp {
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** Modifie les param�tres du comptes FTP $id.
+    /** 
+     * Modifie les param�tres du comptes FTP $id.
      * @param integer $id Num�ro du compte dont on veut modifier les param�tres
      * @param string $prefixe Prefixe du compte FTP
      * @param string $login login ajout� au pr�fixe ($prefixe_$login)
@@ -327,9 +327,9 @@ class m_ftp {
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** Efface le compte ftp specifie
+    /** 
+     * Efface le compte ftp specifie
      * @param integer $id Numero du compte FTP a supprimer.
      * @return boolean TRUE si le compte a ete efface, FALSE sinon.
      */
@@ -347,15 +347,14 @@ class m_ftp {
         return $name;
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** Cree un nouveau compte FTP.
+    /** 
+     * Cree un nouveau compte FTP.
      * @param string $prefixe Prefixe au login
      * @param string $login Login ftp (login=prefixe_login)
      * @param string $pass Mot de passe FTP
      * @param string $dir Repertoire racine du compte relatif à la racine du membre
      * @return boolean TRUE si le compte a ete cree, FALSE sinon.
-     *
      */
     function add_ftp($prefixe, $login, $pass, $dir) {
         global $db, $msg, $quota, $bro, $cuid, $admin;
@@ -414,9 +413,9 @@ class m_ftp {
         }
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** Retourne TRUE si $dir possee un compte FTP
+    /** 
+     * Retourne TRUE si $dir possee un compte FTP
      * @param string $dir Dossier a tester, relatif a la racine du compte courant
      * @return boolean retourne TRUE si $dir a un compte FTP, FALSE sinon.
      */
@@ -435,9 +434,9 @@ class m_ftp {
         }
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** Fonction appellee par domains quand un domaine est supprime pour le membre
+    /** 
+     * Fonction appellee par domains quand un domaine est supprime pour le membre
      * @param string $dom Domaine à detruire.
      * @access private
      */
@@ -448,9 +447,9 @@ class m_ftp {
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** Fonction appellee par membres quand un membre est efface
+    /** 
+     * Fonction appellee par membres quand un membre est efface
      * @access private
      */
     function alternc_del_member() {
@@ -460,7 +459,6 @@ class m_ftp {
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
 
     /**
      * Returns the used quota for the $name service for the current user.
@@ -479,7 +477,6 @@ class m_ftp {
         return $q;
     }
 
-    /* ----------------------------------------------------------------- */
 
     /**
      * Exporte toutes les informations ftp du compte AlternC
@@ -500,9 +497,9 @@ class m_ftp {
         return $str;
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** hook function called by AlternC-upnp to know which open 
+    /** 
+     * hook function called by AlternC-upnp to know which open 
      * tcp or udp ports this class requires or suggests
      * @return array a key => value list of port protocol name mandatory values
      * @access private
@@ -513,6 +510,5 @@ class m_ftp {
         );
     }
 
-}
+} /* Class m_ftp */
 
-/* Class m_ftp */

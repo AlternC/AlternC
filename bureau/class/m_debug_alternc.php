@@ -1,6 +1,7 @@
 <?php
 
 /*
+  ----------------------------------------------------------------------
   LICENSE
 
   This program is free software; you can redistribute it and/or
@@ -15,10 +16,7 @@
 
   To read the license please visit http://www.gnu.org/copyleft/gpl.html
   ----------------------------------------------------------------------
-  Original Author of file: Camille Lafitte
-  Purpose of file: Manage hook system.
-  ----------------------------------------------------------------------
- */
+*/
 
 /**
  * This class manage debug.

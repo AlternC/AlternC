@@ -1,7 +1,6 @@
 <?php
 
 /*
-  $Id: m_mem.php,v 1.19 2006/01/12 08:04:43 anarcat Exp $
   ----------------------------------------------------------------------
   LICENSE
 
@@ -17,11 +16,7 @@
 
   To read the license please visit http://www.gnu.org/copyleft/gpl.html
   ----------------------------------------------------------------------
-  Original Author of file: Benjamin Sonntag
-  Purpose of file: Manage Login session on the virtual desktop and
-  member parameters
-  ----------------------------------------------------------------------
- */
+*/
 
 /**
  * This class manage user sessions in the web desktop.
@@ -35,27 +30,17 @@ class m_mem {
     /** Original uid for the temporary uid swapping (for administrators) */
     var $olduid = 0;
 
-    /** This array contains the Tableau contenant les champs de la table "membres" du membre courant
-     * Ce tableau est utilisable globalement par toutes les classes filles.
+    /**
+     * This array contains the Tableau contenant les champs de la table "membres" du membre courant
      */
     var $user;
 
-    /** Tableau contenant les champs de la table "local" du membre courant
-     * Ce tableau est utilisable globalement par toutes les classes filles.
-     * Note : les champs de "local" sont specifiques a l'hebergeur.
+    /** 
+     * contains all the fields of the "local" table for an account in AlternC.
+     * they are specific to the hosting provider
      */
     var $local;
 
-    /* ----------------------------------------------------------------- */
-
-    /**
-     * Constructeur
-     */
-    function m_mem() {
-        
-    }
-
-    /* ----------------------------------------------------------------- */
 
     /**
      * Password kind used in this class (hook for admin class)
@@ -64,29 +49,33 @@ class m_mem {
         return array("mem" => "AlternC's account password");
     }
 
+
+    /**
+     * hook called by the m_menu class to add menu to the left of the panel
+     */
     function hook_menu() {
         $obj = array(
             'title' => _("Settings"),
             'ico' => 'images/settings.png',
             'link' => 'mem_param.php',
             'pos' => 160,
-                );
+        );
 
         return $obj;
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** Check that the current user is an admnistrator.
+    /** 
+     * Check that the current user is an admnistrator.
      * @return boolean TRUE if we are super user, or FALSE if we are not.
      */
     function checkright() {
         return ($this->user["su"] == "1");
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** Start a session in the web desktop. Check username and password.
+    /** 
+     * Start a session in the web desktop. Check username and password.
      * <b>Note : </b>If the user entered a bas password, the failure will be logged
      * and told to the corresponding user on next successfull login.
      * @param $username string Username that want to get connected.
@@ -96,8 +85,7 @@ class m_mem {
     function login($username, $password, $restrictip = 0, $authip_token = false) {
         global $db, $msg, $cuid, $authip;
         $msg->log("mem", "login", $username);
-        //    $username=addslashes($username);
-        //    $password=addslashes($password);
+
         $db->query("select * from membres where login= ? ;", array($username));
         if ($db->num_rows() == 0) {
             $msg->raise("ERROR", "mem", _("User or password incorrect"));
@@ -168,9 +156,9 @@ class m_mem {
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** Start a session as another user from an administrator account.
+    /** 
+     * Start a session as another user from an administrator account.
      * This function is not the same as su. setid connect the current user in the destination
      * account (for good), and su allow any user to become another account for some commands only.
      * (del_user, add_user ...) and allow to bring back admin rights with unsu
@@ -208,9 +196,9 @@ class m_mem {
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** Suite � la connexion de l'utilisateur, r�initialise ses param�tres de derni�re connexion
+    /** 
+     * After a successful connection, reset the user's last connection date
      */
     function resetlast() {
         global $db, $cuid;
@@ -220,6 +208,7 @@ class m_mem {
         }
         $db->query("UPDATE membres SET lastlogin=NOW(), lastfail=0, lastip= ? WHERE uid= ?;", array($ip, $cuid));
     }
+
 
     function authip_token($bis = false) {
         global $db, $cuid;
@@ -232,6 +221,7 @@ class m_mem {
         return md5("$i--" . $db->f('pass'));
     }
 
+
     /**
      * @param boolean $t
      */
@@ -240,27 +230,27 @@ class m_mem {
     }
 
     /* Faut finir de l'implementer :) * /
-      function authip_class() {
-      global $cuid;
-      $c = Array();
-      $c['name']="Panel access";
-      $c['protocol']="mem";
-      $c['values']=Array($cuid=>'');
+       function authip_class() {
+       global $cuid;
+       $c = Array();
+       $c['name']="Panel access";
+       $c['protocol']="mem";
+       $c['values']=Array($cuid=>'');
 
-      return $c;
-      }
-      /* */
+       return $c;
+       }
+       /* */
 
-    /* ----------------------------------------------------------------- */
 
-    /** Verifie que la session courante est correcte (cookie ok et ip valide).
-     * Si besoin, et si reception des champs username & password, cree une nouvelle
-     * session pour l'utilisateur annonce.
-     * Cette fonction doit etre appellee a chaque page devant etre authentifiee.
-     * et AVANT d'emettre des donnees. (un cookie peut etre envoye)
-     * @global string $session Le cookie de session eventuel
-     * @global string $username/password le login/pass de l'utilisateur
-     * @return boolean TRUE si la session est correcte, FALSE sinon.
+    /** 
+     * Check that the current session is correct (valid cookie)
+     * If necessary, and if we received username & password fields, 
+     * create a new session for the user.
+     * This function MUST be called by each page to authenticate the user.
+     * and BEFORE sending any data (since a cookie can be sent)
+     * @global string $session the session cookie
+     * @global string $username & $password the login / pass of the user
+     * @return boolean TRUE if the session is OK, FALSE if it is not.
      */
     function checkid($show_msg = true) {
         global $db, $msg, $cuid;
@@ -273,16 +263,19 @@ class m_mem {
                 return $this->login($_REQUEST["username"], $_REQUEST["password"], (isset($_REQUEST["restrictip"]) ? $_REQUEST["restrictip"] : 0));
             }
         } // end isset
+
         $_COOKIE["session"] = isset($_COOKIE["session"]) ? $_COOKIE["session"] : "";
+
         if (strlen($_COOKIE["session"]) != 32) {
-	    if ($show_msg)
+            if ($show_msg)
                 $msg->raise("ERROR", "mem", _("Identity lost or unknown, please login"));
             return false;
         }
+
         $ip = get_remote_ip();
         $db->query("select uid, ? as me,ip from sessions where sid= ?;", array($ip, $_COOKIE["session"]));
         if ($db->num_rows() == 0) {
-	    if ($show_msg)
+            if ($show_msg)
                 $msg->raise("ERROR", "mem", _("Identity lost or unknown, please login"));
             return false;
         }
@@ -298,7 +291,8 @@ class m_mem {
         $db->next_record();
         $this->user = $db->Record;
         $msg->init_msgs();
-        /* Remplissage de $local */
+
+        /* Fills $local */
         $db->query("SELECT * FROM local WHERE uid= ? ;", array($cuid));
         if ($db->num_rows()) {
             $db->next_record();
@@ -307,11 +301,11 @@ class m_mem {
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** Change l'identite d'un utilisateur temporairement.
-     * @global string $uid Utilisateur dont on prends l'identite
-     * @return TRUE si la session est correcte, FALSE sinon.
+    /** 
+     * Change the identity of the user temporarily (SUDO)
+     * @global string $uid User that we want to impersonate
+     * @return boolean TRUE if it's okay, FALSE if it's not.
      */
     function su($uid) {
         global $cuid, $db, $msg, $mysql;
@@ -332,10 +326,10 @@ class m_mem {
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** Retourne a l'identite d'origine de l'utilisateur apres su.
-     * @return boolean TRUE si la session est correcte, FALSE sinon.
+    /** 
+     * Goes back to the original identity (of an admin, usually)
+     * @return boolean TRUE if it's okay, FALSE if it's not.
      */
     function unsu() {
         global $mysql;
@@ -349,10 +343,10 @@ class m_mem {
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** Termine une session du bureau virtuel (logout)
-     * @return boolean TRUE si la session a bien ete detruite, FALSE sinon.
+    /** 
+     * Ends a session on the panel (logout)
+     * @return boolean TRUE if it's okay, FALSE if it's not.  
      */
     function del_session() {
         global $db, $user, $msg, $cuid, $hooks;
@@ -382,14 +376,6 @@ class m_mem {
         $db->query("delete from sessions where sid= ? ;", array($_COOKIE["session"]));
         $msg->init_msgs();
 
-        # Invoker le logout dans toutes les autres classes
-        /*
-          foreach($classes as $c) {
-          if (method_exists($GLOBALS[$c],"alternc_del_session")) {
-          $GLOBALS[$c]->alternc_del_session();
-          }
-          }
-         */
         $hooks->invoke("alternc_del_session");
 
         session_unset();
@@ -397,13 +383,13 @@ class m_mem {
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** Change le mot de passe de l'utilisateur courant.
-     * @param string $oldpass Ancien mot de passe.
-     * @param string $newpass Nouveau mot de passe
-     * @param string $newpass2 Nouveau mot de passe (a nouveau)
-     * @return boolean TRUE si le mot de passe a ete change, FALSE sinon.
+    /** 
+     * Change the password of the current user
+     * @param string $oldpass Old password
+     * @param string $newpass New password
+     * @param string $newpass2 New password (again)
+     * @return boolean TRUE if the password has been change, FALSE if not.
      */
     function passwd($oldpass, $newpass, $newpass2) {
         global $db, $msg, $cuid, $admin;
@@ -432,11 +418,11 @@ class m_mem {
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** Change les preferences administrateur d'un compte
-     * @param integer $admlist Mode de visualisation des membres (0=large 1=courte)
-     * @return boolean TRUE si les preferences ont ete changees, FALSE sinon.
+    /** 
+     * Change the administrator preferences of an admin account
+     * @param integer $admlist visualisation mode of the account list (0=large 1=short)
+     * @return boolean TRUE if the preferences has been changed, FALSE if not.
      */
     function adminpref($admlist) {
         global $db, $msg, $cuid;
@@ -450,13 +436,13 @@ class m_mem {
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** Envoie en mail le mot de passe d'un compte.
-     * <b>Note : </b>On ne peut demander le mot de passe qu'une seule fois par jour.
+    /** 
+     * Send a mail with a password to an account
+     * <b>Note : </b>We can ask for a password only once a day
      * TODO : Translate this mail into the localization program.
      * TODO : Check this function's !
-     * @return boolean TRUE si le mot de passe a ete envoye avec succes, FALSE sinon.
+     * @return boolean TRUE if the password has been sent, FALSE if not.
      */
     function send_pass($login) {
         global $msg, $db, $L_HOSTING, $L_FQDN;
@@ -495,12 +481,12 @@ Cordially.
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** Change le mail d'un membre (premiere etape, envoi du CookiE)
+    /** 
+     * Change the email of an account (first step: sending of a Cookie)
      * TODO : insert this mail string into the localization system
-     * @param string $newmail Nouveau mail souhaite pour le membre.
-     * @return string le cookie si le mail a bien ete envoye, FALSE sinon
+     * @param string $newmail New mail we want to set for this account
+     * @return boolean TRUE if the email with a link has been sent, FALSE if not
      */
     function ChangeMail1($newmail) {
         global $msg, $db, $L_HOSTING, $L_FQDN, $cuid;
@@ -537,22 +523,22 @@ again, please contact your server's administrator.
 Cordially.
 "), $db->f("login"), $L_HOSTING, $link);
         mail($newmail, "Email modification request on $L_HOSTING", $txt, "From: postmaster@$L_FQDN\nReply-to: postmaster@$L_FQDN");
-        // Supprime les demandes pr�c�dentes de ce compte !
+
         $db->query("DELETE FROM chgmail WHERE uid= ? ;", array($cuid));
         $db->query("INSERT INTO chgmail (cookie,ckey,uid,mail,ts) VALUES ( ?, ?, ?, ?, ?);", array($COOKIE, $KEY, $cuid, $newmail, time()));
-        // Supprime les cookies de la veille :)
+
         $lts = time() - 86400;
         $db->query("DELETE FROM chgmail WHERE ts< ? ;", array($lts));
         return $KEY;
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** Change le mail d'un membre (seconde etape, CookiE+cle = application)
-     * @param string $COOKIE Cookie envoye par mail
-     * @param string $KEY cle affichee a l'ecran
-     * @param integer $uid Utilisateur concerne (on est hors session)
-     * @return boolean TRUE si le mail a bien ete modifie, FALSE sinon
+    /** 
+     * Change the email of a member (second step, Cookie + key change)
+     * @param string $COOKIE Cookie sent by mail
+     * @param string $KEY cle shown on the screen
+     * @param integer $uid User id (we may not be connected)
+     * @return boolean TRUE if the email has been changed, FALSE if not.
      */
     function ChangeMail2($COOKIE, $KEY, $uid) {
         global $msg, $db;
@@ -574,10 +560,10 @@ Cordially.
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** Modifie le parametre d'aide en ligne (1/0)
-     * @param integer $show Faut-il (1) ou non (0) afficher l'aide en ligne
+    /** 
+     * Change the help parameter
+     * @param integer $show Shall we (1) or not (0) show the online help
      */
     function set_help_param($show) {
         global $db, $msg, $cuid;
@@ -585,27 +571,27 @@ Cordially.
         $db->query("UPDATE membres SET show_help= ? WHERE uid= ? ;", array($show, $cuid));
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** Dit si l'aide en ligne est demandee
-     * @return boolean TRUE si l'aide en ligne est demandee, FALSE sinon.
+    /** 
+     * tell if the help parameter is set
+     * @return boolean TRUE if the account want online help, FALSE if not.
      */
     function get_help_param() {
         return $this->user["show_help"];
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** Affiche (echo) l'aide contextuelle
-     * @param integer $file Numero de fichier d'aide a afficher.
-     * @return boolean TRUE si l'aide contextuelle a ete trouvee, FALSE sinon
+    /** 
+     * show (echo) a contextual help
+     * @param integer $file File number in the help system to show
+     * @return boolean TRUE if the help has been shown, FALSE if not.
      */
     function show_help($file, $force = false) {
         if ($this->user["show_help"] || $force) {
             $hlp = _("hlp_$file");
             if ($hlp != "hlp_$file") {
                 $hlp = preg_replace(
-                        "#HELPID_([0-9]*)#", "<a href=\"javascript:help(\\1);\"><img src=\"/aide/help.png\" width=\"17\" height=\"17\" style=\"vertical-align: middle;\" alt=\"" . _("Help") . "\" /></a>", $hlp);
+                    "#HELPID_([0-9]*)#", "<a href=\"javascript:help(\\1);\"><img src=\"/aide/help.png\" width=\"17\" height=\"17\" style=\"vertical-align: middle;\" alt=\"" . _("Help") . "\" /></a>", $hlp);
                 echo "<p class=\"hlp\">" . $hlp . "</p>";
                 return true;
             }
@@ -614,6 +600,7 @@ Cordially.
             return true;
         }
     }
+
 
     /**
      * @param integer $uid
@@ -628,7 +615,6 @@ Cordially.
         return intval($db->f('creator'));
     }
 
-    /* ----------------------------------------------------------------- */
 
     /**
      * Exports all the personal user related information for an account.
@@ -689,6 +675,4 @@ Cordially.
         return true;
     }
 
-}
-
-/* Classe Membre */
+} /* Class m_mem */

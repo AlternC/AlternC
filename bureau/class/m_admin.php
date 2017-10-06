@@ -22,7 +22,7 @@
   ----------------------------------------------------------------------
   Purpose of file: Administrate members and rights.
   ----------------------------------------------------------------------
- */
+*/
 
 /* ----------------------------------------------------------------- */
 
@@ -692,27 +692,27 @@ class m_admin {
         if ($db->next_record()) {
             // TODO: put that string into gettext ! 
             $mail = <<<EOF
-A new AlternC account was created on %fqdn by %creator.
+                A new AlternC account was created on %fqdn by %creator.
 
-Account details
----------------
+                Account details
+                ---------------
 
-login: %login (%uid)
-email: %mail
-createor: %creator (%cuid)
-can change password: %canpass
-type: %type
-notes: %notes
-EOF;
+                login: %login (%uid)
+                email: %mail
+                createor: %creator (%cuid)
+                can change password: %canpass
+                type: %type
+                notes: %notes
+                EOF;
             $mail = strtr($mail, array('%fqdn' => $L_FQDN,
-                '%creator' => $db->Record['parentlogin'],
-                '%uid' => $db->Record['uid'],
-                '%login' => $db->Record['login'],
-                '%mail' => $db->Record['mail'],
-                '%cuid' => $db->Record['creator'],
-                '%canpass' => $db->Record['canpass'],
-                '%type' => $db->Record['type'],
-                '%notes' => $db->Record['notes']));
+            '%creator' => $db->Record['parentlogin'],
+            '%uid' => $db->Record['uid'],
+            '%login' => $db->Record['login'],
+            '%mail' => $db->Record['mail'],
+            '%cuid' => $db->Record['creator'],
+            '%canpass' => $db->Record['canpass'],
+            '%type' => $db->Record['type'],
+            '%notes' => $db->Record['notes']));
             $subject = sprintf(_("New account %s from %s on %s"), $db->Record['login'], $db->Record['parentlogin'], $L_HOSTING);
             if (mail($dest, $subject, $mail, "From: postmaster@$L_FQDN")) {
                 //sprintf(_("Email successfully sent to %s"), $dest);
@@ -884,7 +884,7 @@ EOF;
         $hooks->invoke("hook_admin_del_member");
 
         if (($db->query("DELETE FROM membres WHERE uid= ?;", array($uid))) &&
-                ($db->query("DELETE FROM local WHERE uid= ?;", array($uid)))) {
+        ($db->query("DELETE FROM local WHERE uid= ?;", array($uid)))) {
             $mem->unsu();
             // If this user was (one day) an administrator one, he may have a list of his own accounts. Let's associate those accounts to nobody as a creator.
             $db->query("UPDATE membres SET creator=2000 WHERE creator= ?;", array($uid));
@@ -940,7 +940,7 @@ EOF;
             }
         } else {
             if ($db->query("UPDATE membres SET duration = ? WHERE uid= ?", array($duration, $uid)) &&
-                    $db->query("UPDATE membres SET renewed = NOW() WHERE uid= ? and renewed is null;", array($uid))) {
+            $db->query("UPDATE membres SET renewed = NOW() WHERE uid= ? and renewed is null;", array($uid))) {
                 return true;
             }
         }
@@ -995,12 +995,12 @@ EOF;
         global $db;
 
         if (!$db->query("SELECT *, m.renewed + INTERVAL duration MONTH 'expiry'," .
-                        " CASE WHEN m.duration IS NULL THEN 0" .
-                        " WHEN m.renewed + INTERVAL m.duration MONTH <= NOW() THEN 3" .
-                        " WHEN m.renewed <= NOW() THEN 2" .
-                        " ELSE 1 END 'status' FROM membres m, local l" .
-                        " WHERE m.uid = l.uid" .
-                        " HAVING status=2 or status=3 ORDER BY status DESC, expiry;")) {
+        " CASE WHEN m.duration IS NULL THEN 0" .
+        " WHEN m.renewed + INTERVAL m.duration MONTH <= NOW() THEN 3" .
+        " WHEN m.renewed <= NOW() THEN 2" .
+        " ELSE 1 END 'status' FROM membres m, local l" .
+        " WHERE m.uid = l.uid" .
+        " HAVING status=2 or status=3 ORDER BY status DESC, expiry;")) {
             return false;
         } else {
             $res = array();
@@ -1171,7 +1171,7 @@ EOF;
                     if (!in_array($L_NS1 . ".", $out) || !in_array($L_NS2 . ".", $out)) {
                         $errno = 1;
                         $errstr.=sprintf(_("NS for this domain are not %s and %s BUT %s"),
-                               $L_NS1, $L_NS2, implode(",", $out)) . "\n";
+                        $L_NS1, $L_NS2, implode(",", $out)) . "\n";
                     }
                 }
             }

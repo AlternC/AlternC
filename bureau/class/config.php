@@ -27,7 +27,7 @@
   Original Author of file: Benjamin Sonntag
   Purpose of file: General configuration file for AlternC Desktop
   ----------------------------------------------------------------------
- */
+*/
 
 define('DO_XHPROF_STATS', FALSE);
 if (DO_XHPROF_STATS) {
@@ -45,15 +45,15 @@ session_start();
 /*
   Si vous voulez mettre le bureau en maintenance, decommentez le code ci-dessous
   et mettez votre ip dans le IF pour que seule votre ip puisse acceder au bureau :
- */
+*/
 
 /* * /
-  if (getenv("REMOTE_ADDR")!="127.0.0.1") {
-  echo "Le bureau AlternC est en vacances jusqu'a minuit pour maintenance.<br>
-  Merci de revenir plus tard.";
-  exit();
-  }
-  /* */
+   if (getenv("REMOTE_ADDR")!="127.0.0.1") {
+   echo "Le bureau AlternC est en vacances jusqu'a minuit pour maintenance.<br>
+   Merci de revenir plus tard.";
+   exit();
+   }
+   /* */
 
 if (ini_get("safe_mode")) {
     echo _("SAFE MODE IS ENABLED for the web panel ! It's a bug in your php or apache configuration, please fix it !!");
@@ -125,10 +125,10 @@ require_once($root . "/class/variables.php");
  */ 
   
 class DB_system extends DB_Sql { 
-  function __construct() { 
-      global $L_MYSQL_HOST,$L_MYSQL_DATABASE,$L_MYSQL_LOGIN,$L_MYSQL_PWD; 
-      parent::__construct($L_MYSQL_DATABASE, $L_MYSQL_HOST, $L_MYSQL_LOGIN, $L_MYSQL_PWD);
-   } 
+    function __construct() { 
+        global $L_MYSQL_HOST,$L_MYSQL_DATABASE,$L_MYSQL_LOGIN,$L_MYSQL_PWD; 
+        parent::__construct($L_MYSQL_DATABASE, $L_MYSQL_HOST, $L_MYSQL_LOGIN, $L_MYSQL_PWD);
+    } 
 } 
 
 $db = new DB_system();
@@ -147,8 +147,8 @@ foreach (glob($root . "class/m_*.php") as $di) {
     }
 }
 /* THE DEFAULT CLASSES ARE :
-  dom, ftp, mail, quota, bro, admin, mem, mysql, err, variables
- */
+   dom, ftp, mail, quota, bro, admin, mem, mysql, err, variables
+*/
 
 // Load file for the system class.
 // Those class will not be build by default.
@@ -176,8 +176,8 @@ if (isset($_SERVER["HTTP_X_FORWARDED_PROTO"]) && $_SERVER["HTTP_X_FORWARDED_PROT
 if ((variable_get('force_https', '0', "This variable is set to 0 (default) if users can access the management desktop through HTTP, otherwise we force HTTPS")&&(!isset($_SERVER["HTTPS"])|| ($_SERVER["HTTPS"] != "on")))) {
     // do not redirect if access is not by HTTP(s)
     if (isset($_SERVER['REQUEST_URI'])) {
-      header("Location: https://".$_SERVER["HTTP_HOST"].$_SERVER['REQUEST_URI']);
-      exit;
+        header("Location: https://".$_SERVER["HTTP_HOST"].$_SERVER['REQUEST_URI']);
+        exit;
     }
 }
 
@@ -186,10 +186,10 @@ if ((variable_get('force_https', '0', "This variable is set to 0 (default) if us
 
 $fatalcsrf=false;
 if (count($_POST) && !defined("NOCSRF")) {
-  if (csrf_check()<=0) {
-    // We will trigger the error LATER in the code => need initialization of classes
-    $fatalcsrf=true;
-  }
+    if (csrf_check()<=0) {
+        // We will trigger the error LATER in the code => need initialization of classes
+        $fatalcsrf=true;
+    }
 }
 
 /* Check the User identity (if required) */
@@ -233,10 +233,10 @@ if ((variable_get('sql_max_username_length', NULL)==NULL)||(variable_get('sql_ma
     $result = $db->query("SELECT (SELECT CHARACTER_MAXIMUM_LENGTH length FROM information_schema.columns  WHERE TABLE_SCHEMA='mysql' and TABLE_NAME='user' and COLUMN_NAME='User') username, (SELECT CHARACTER_MAXIMUM_LENGTH length FROM information_schema.columns  WHERE TABLE_SCHEMA='mysql' and TABLE_NAME='db' and COLUMN_NAME='Db') `database`");
     if ($db->next_record($result)) {
         $variable = $db->Record;
-	$variable['username']=min(128, $variable['username']);
-	$variable['database']=min($variable['database'], $variable['username']);
-	variable_set('sql_max_username_length', $variable['username'], 'Maximum length allowed for SQL usernames by your SQL server (do not modify unless you know what you do)');
-	variable_set('sql_max_database_length', $variable['database'], 'Maximum length allowed for SQL database names by your SQL server (do not modify unless you know what you do)');
+        $variable['username']=min(128, $variable['username']);
+        $variable['database']=min($variable['database'], $variable['username']);
+        variable_set('sql_max_username_length', $variable['username'], 'Maximum length allowed for SQL usernames by your SQL server (do not modify unless you know what you do)');
+        variable_set('sql_max_database_length', $variable['database'], 'Maximum length allowed for SQL database names by your SQL server (do not modify unless you know what you do)');
     }
 
 }

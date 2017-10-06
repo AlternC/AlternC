@@ -22,7 +22,7 @@
   ----------------------------------------------------------------------
   Purpose of file: Manage hook system.
   ----------------------------------------------------------------------
- */
+*/
 
 /**
  * This class manage web-cron tasks
@@ -78,7 +78,7 @@ class m_cron {
             'ico' => 'images/schedule.png',
             'link' => 'cron.php',
             'pos' => 120,
-                );
+        );
 
         return $obj;
     }
@@ -163,8 +163,8 @@ class m_cron {
             if (!$db->next_record()) {
                 return "false";
             } // return false if pb
-	    if ($db->f('uid') != $cuid) {
-		    $msg->raise("ERROR", "cron", _("Identity problem"));
+            if ($db->f('uid') != $cuid) {
+                $msg->raise("ERROR", "cron", _("Identity problem"));
                 return false;
             }
         }
@@ -304,11 +304,11 @@ class m_cron {
 
         // add additional curl options here
         $std_options = array(CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_FOLLOWLOCATION => false,
-            CURLOPT_CONNECTTIMEOUT => 5,
-            CURLOPT_TIMEOUT => 240, // 4 minutes timeout for a page
-            CURLOPT_USERAGENT => "AlternC (Cron Daemon)",
-            CURLOPT_MAXREDIRS => 0);
+        CURLOPT_FOLLOWLOCATION => false,
+        CURLOPT_CONNECTTIMEOUT => 5,
+        CURLOPT_TIMEOUT => 240, // 4 minutes timeout for a page
+        CURLOPT_USERAGENT => "AlternC (Cron Daemon)",
+        CURLOPT_MAXREDIRS => 0);
 
         if ($GLOBALS["DEBUG"]) {
             $std_options[CURLOPT_VERBOSE] = true;

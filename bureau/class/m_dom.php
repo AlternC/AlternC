@@ -2,10 +2,6 @@
 
 /*
   ----------------------------------------------------------------------
-  AlternC - Web Hosting System
-  Copyright (C) 2000-2012 by the AlternC Development Team.
-  https://alternc.org/
-  ----------------------------------------------------------------------
   LICENSE
 
   This program is free software; you can redistribute it and/or
@@ -20,9 +16,7 @@
 
   To read the license please visit http://www.gnu.org/copyleft/gpl.html
   ----------------------------------------------------------------------
-  Purpose of file: PHP Class that manage domain names installed on the server
-  ----------------------------------------------------------------------
- */
+*/
 
 define('SLAVE_FLAG', "/var/run/alternc/refresh_slave");
 
@@ -34,17 +28,20 @@ define('SLAVE_FLAG', "/var/run/alternc/refresh_slave");
  */
 class m_dom {
 
-    /** $domains : Cache des domaines du membre
+    /** 
+     * $domains : Cache des domaines du membre
      * @access private
      */
     var $domains;
 
-    /** $dns : Liste des dns trouvés par la fonction whois
+    /**
+     *  $dns : Liste des dns trouvés par la fonction whois
      * @access private
      */
     var $dns;
 
-    /** Flag : a-t-on trouvé un sous-domaine Webmail pour ce domaine ?
+    /**
+     * Flag : a-t-on trouvé un sous-domaine Webmail pour ce domaine ?
      * @access private
      */
     var $webmail;
@@ -79,7 +76,6 @@ class m_dom {
     var $tld_no_check_at_all = "1";
     var $cache_domains_type_lst = false;
 
-    /* ----------------------------------------------------------------- */
 
     /**
      * Constructeur
@@ -89,6 +85,7 @@ class m_dom {
         $this->tld_no_check_at_all = variable_get('tld_no_check_at_all', 0, 'Disable ALL check on the TLD (users will be able to add any domain)', array('desc' => 'Disabled', 'type' => 'boolean'));
         variable_get('mailname_bounce', $L_FQDN, 'FQDN of the mail server, used to create vhost virtual mail_adress.', array('desc' => 'FQDN', 'type' => 'string'));
     }
+
 
     function get_panel_url_list() {
         global $db, $msg;
@@ -100,6 +97,7 @@ class m_dom {
         }
         return $t;
     }
+
 
     /**
      * @param string $fqdn
@@ -114,6 +112,11 @@ class m_dom {
         return array('sub_id' => intval($db->f('id')), 'member_id' => intval($db->f('compte')));
     }
 
+
+    /** 
+     * hook function called by the menu class
+     * to add menu to the left panel
+     */
     function hook_menu() {
         global $quota;
         $obj = array(
@@ -142,7 +145,6 @@ class m_dom {
         return $obj;
     }
 
-    /* ----------------------------------------------------------------- */
 
     /**
      * Retourne un tableau contenant les types de domaines
@@ -163,6 +165,7 @@ class m_dom {
         return $this->cache_domains_type_lst;
     }
 
+
     function domains_type_enable_values() {
         global $db, $msg, $cuid;
         $msg->log("dom", "domains_type_target_values");
@@ -178,6 +181,7 @@ class m_dom {
         }
         return $r;
     }
+
 
     /**
      * @param integer $type
@@ -206,6 +210,7 @@ class m_dom {
         }
     }
 
+
     function import_manual_dns_zone($zone, $domain, $detect_redirect = true, $save = false) {
         global $msg;
         if ($save) {
@@ -225,6 +230,7 @@ class m_dom {
         }
         return $val;
     }
+
 
     /**
      * @param string $zone
@@ -256,150 +262,150 @@ class m_dom {
             $val['status'] = 'ok';
             $val['comment'] = 'Just a comment, do not import';
         } else
-        // Examples:
-        // $TTL 86400'
-        if (preg_match('/^\$TTL\h+(?P<ttl>[\dMHDmhd]+)/', $zone, $ret)) {
-            $val['status'] = 'ok';
-            $val['comment'] = 'Set TTL to ' . $ret['ttl'];
-            $val['entry_new']['type'] = 'set_ttl';
-            $val['entry_new']['value'] = $ret['ttl'];
-        } else
-
-        // Examples:
-        // @ IN AAAA 127.2.1.5
-        // reseau IN AAAA 145.214.44.55
-        if (preg_match('/^(?P<sub>[\w\.@\-]*)\h*(?P<ttl>\d*)\h*IN\h+AAAA\h+(?P<target>[0-9A-F:]{2,40})/i', $zone, $ret)) {
-
-            // Check if it is just a redirect
-            if (substr($ret['sub'], -1) == '.') { // if ending by a "." it is allready a FQDN
-                $url = "http://" . $ret['sub'];
-            } else {
-                if ($ret['sub'] == '@' || empty($ret['sub'])) {
-                    $url = "http://" . $domain;
-                } else {
-                    $url = "http://" . $ret['sub'] . "." . $domain;
-                }
-            }
-            if ($detect_redirect && $dst_url = $this->is_it_a_redirect($url)) {
-                $val['status'] = 'warn';
-                $val['comment'] = "Became a redirect to $dst_url";
-                $val['entry_new']['type'] = 'URL';
-                $val['entry_new']['sub'] = $ret['sub'];
-                $val['entry_new']['value'] = $dst_url;
-            } else {
+            // Examples:
+            // $TTL 86400'
+            if (preg_match('/^\$TTL\h+(?P<ttl>[\dMHDmhd]+)/', $zone, $ret)) {
                 $val['status'] = 'ok';
-                $val['comment'] = "Create entry AAAA with " . $ret['sub'] . " go to " . $ret['target'] . " with ttl " . $ret['ttl'];
-                $val['entry_new']['type'] = 'IPV6';
-                $val['entry_new']['sub'] = $ret['sub'];
-                $val['entry_new']['value'] = $ret['target'];
-            }
-        } else
+                $val['comment'] = 'Set TTL to ' . $ret['ttl'];
+                $val['entry_new']['type'] = 'set_ttl';
+                $val['entry_new']['value'] = $ret['ttl'];
+            } else
+
+                // Examples:
+                // @ IN AAAA 127.2.1.5
+                // reseau IN AAAA 145.214.44.55
+                if (preg_match('/^(?P<sub>[\w\.@\-]*)\h*(?P<ttl>\d*)\h*IN\h+AAAA\h+(?P<target>[0-9A-F:]{2,40})/i', $zone, $ret)) {
+
+                    // Check if it is just a redirect
+                    if (substr($ret['sub'], -1) == '.') { // if ending by a "." it is allready a FQDN
+                        $url = "http://" . $ret['sub'];
+                    } else {
+                        if ($ret['sub'] == '@' || empty($ret['sub'])) {
+                            $url = "http://" . $domain;
+                        } else {
+                            $url = "http://" . $ret['sub'] . "." . $domain;
+                        }
+                    }
+                    if ($detect_redirect && $dst_url = $this->is_it_a_redirect($url)) {
+                        $val['status'] = 'warn';
+                        $val['comment'] = "Became a redirect to $dst_url";
+                        $val['entry_new']['type'] = 'URL';
+                        $val['entry_new']['sub'] = $ret['sub'];
+                        $val['entry_new']['value'] = $dst_url;
+                    } else {
+                        $val['status'] = 'ok';
+                        $val['comment'] = "Create entry AAAA with " . $ret['sub'] . " go to " . $ret['target'] . " with ttl " . $ret['ttl'];
+                        $val['entry_new']['type'] = 'IPV6';
+                        $val['entry_new']['sub'] = $ret['sub'];
+                        $val['entry_new']['value'] = $ret['target'];
+                    }
+                } else
 
 
-        // Examples:
-        // @ IN A 127.2.1.5
-        // reseau IN A 145.214.44.55
-        if (preg_match('/^(?P<sub>[\w\.@\-]*)\h*(?P<ttl>\d*)\h*IN\h+A\h+(?P<target>\d+\.\d+\.\d+\.\d+)/i', $zone, $ret)) {
-            // Check if it is just a redirect
-            if (substr($ret['sub'], -1) == '.') { // if ending by a "." it is allready a FQDN
-                $url = "http://" . $ret['sub'];
-            } else {
-                if ($ret['sub'] == '@' || empty($ret['sub'])) {
-                    $url = "http://" . $domain;
-                } else {
-                    $url = "http://" . $ret['sub'] . "." . $domain;
-                }
-            }
-            if ($detect_redirect && $dst_url = $this->is_it_a_redirect($url)) {
-                $val['status'] = 'warn';
-                $val['comment'] = "Became a redirect to $dst_url";
-                $val['entry_new']['type'] = 'URL';
-                $val['entry_new']['sub'] = $ret['sub'];
-                $val['entry_new']['value'] = $dst_url;
-            } else {
-                $val['status'] = 'ok';
-                $val['comment'] = "Create entry A with " . $ret['sub'] . " go to " . $ret['target'] . " with ttl " . $ret['ttl'];
-                $val['entry_new']['type'] = 'IP';
-                $val['entry_new']['sub'] = $ret['sub'];
-                $val['entry_new']['value'] = $ret['target'];
-            }
-        } else
+                    // Examples:
+                    // @ IN A 127.2.1.5
+                    // reseau IN A 145.214.44.55
+                    if (preg_match('/^(?P<sub>[\w\.@\-]*)\h*(?P<ttl>\d*)\h*IN\h+A\h+(?P<target>\d+\.\d+\.\d+\.\d+)/i', $zone, $ret)) {
+                        // Check if it is just a redirect
+                        if (substr($ret['sub'], -1) == '.') { // if ending by a "." it is allready a FQDN
+                            $url = "http://" . $ret['sub'];
+                        } else {
+                            if ($ret['sub'] == '@' || empty($ret['sub'])) {
+                                $url = "http://" . $domain;
+                            } else {
+                                $url = "http://" . $ret['sub'] . "." . $domain;
+                            }
+                        }
+                        if ($detect_redirect && $dst_url = $this->is_it_a_redirect($url)) {
+                            $val['status'] = 'warn';
+                            $val['comment'] = "Became a redirect to $dst_url";
+                            $val['entry_new']['type'] = 'URL';
+                            $val['entry_new']['sub'] = $ret['sub'];
+                            $val['entry_new']['value'] = $dst_url;
+                        } else {
+                            $val['status'] = 'ok';
+                            $val['comment'] = "Create entry A with " . $ret['sub'] . " go to " . $ret['target'] . " with ttl " . $ret['ttl'];
+                            $val['entry_new']['type'] = 'IP';
+                            $val['entry_new']['sub'] = $ret['sub'];
+                            $val['entry_new']['value'] = $ret['target'];
+                        }
+                    } else
 
-        // Examples:
-        // @ IN NS ns.example.tld.
-        // ns 3600 IN NS 145.214.44.55
-        if (preg_match('/^(?P<sub>[\-\w\.@]*)\h*(?P<ttl>\d*)\h*IN\h+NS\h+(?P<target>[\w\.\-]+)/i', $zone, $ret)) {
-            if (empty($ret['sub']) || $ret['sub'] == '@') {
-                $val['status'] = 'warn';
-                $val['comment'] = "Won't migrate it, there will get a new value";
-            } else {
-                $val['status'] = 'ok';
-                $val['comment'] = "Create entry NS with " . $ret['sub'] . " go to " . $ret['target'] . " with ttl " . $ret['ttl'];
-                $val['entry_new']['type'] = 'FIXME-NS';
-                $val['entry_new']['sub'] = $ret['sub'];
-                $val['entry_new']['value'] = $ret['target'];
-            }
-        } else
+                        // Examples:
+                        // @ IN NS ns.example.tld.
+                        // ns 3600 IN NS 145.214.44.55
+                        if (preg_match('/^(?P<sub>[\-\w\.@]*)\h*(?P<ttl>\d*)\h*IN\h+NS\h+(?P<target>[\w\.\-]+)/i', $zone, $ret)) {
+                            if (empty($ret['sub']) || $ret['sub'] == '@') {
+                                $val['status'] = 'warn';
+                                $val['comment'] = "Won't migrate it, there will get a new value";
+                            } else {
+                                $val['status'] = 'ok';
+                                $val['comment'] = "Create entry NS with " . $ret['sub'] . " go to " . $ret['target'] . " with ttl " . $ret['ttl'];
+                                $val['entry_new']['type'] = 'FIXME-NS';
+                                $val['entry_new']['sub'] = $ret['sub'];
+                                $val['entry_new']['value'] = $ret['target'];
+                            }
+                        } else
 
-        // Examples:
-        // agenda IN CNAME ghs.google.com.
-        // www 3600 IN CNAME @
-        if (preg_match('/^(?P<sub>[\-\w\.@]*)\h*(?P<ttl>\d*)\h*IN\h+CNAME\h+(?P<target>[@\w+\.\-]+)/i', $zone, $ret)) {
-            if (substr($ret['sub'], -1) == '.') { // if ending by a "." it is allready a FQDN
-                $url = "http://" . $ret['sub'];
-            } else {
-                if ($ret['sub'] == '@' || empty($ret['sub'])) {
-                    $url = "http://" . $domain;
-                } else {
-                    $url = "http://" . $ret['sub'] . "." . $domain;
-                }
-            }
-            if ($detect_redirect && $dst_url = $this->is_it_a_redirect($url)) {
-                $val['status'] = 'warn';
-                $val['comment'] = "Became a redirect to $dst_url";
-                $val['entry_new']['type'] = 'URL';
-                $val['entry_new']['sub'] = $ret['sub'];
-                $val['entry_new']['value'] = $dst_url;
-            } else {
-                $val['status'] = 'ok';
-                $val['comment'] = "Create entry CNAME with " . $ret['sub'] . " go to " . $ret['target'] . " with ttl " . $ret['ttl'];
-                $val['entry_new']['type'] = 'CNAME';
-                $val['entry_new']['sub'] = $ret['sub'];
-                $val['entry_new']['value'] = $ret['target'];
-            }
-        } else
+                            // Examples:
+                            // agenda IN CNAME ghs.google.com.
+                            // www 3600 IN CNAME @
+                            if (preg_match('/^(?P<sub>[\-\w\.@]*)\h*(?P<ttl>\d*)\h*IN\h+CNAME\h+(?P<target>[@\w+\.\-]+)/i', $zone, $ret)) {
+                                if (substr($ret['sub'], -1) == '.') { // if ending by a "." it is allready a FQDN
+                                    $url = "http://" . $ret['sub'];
+                                } else {
+                                    if ($ret['sub'] == '@' || empty($ret['sub'])) {
+                                        $url = "http://" . $domain;
+                                    } else {
+                                        $url = "http://" . $ret['sub'] . "." . $domain;
+                                    }
+                                }
+                                if ($detect_redirect && $dst_url = $this->is_it_a_redirect($url)) {
+                                    $val['status'] = 'warn';
+                                    $val['comment'] = "Became a redirect to $dst_url";
+                                    $val['entry_new']['type'] = 'URL';
+                                    $val['entry_new']['sub'] = $ret['sub'];
+                                    $val['entry_new']['value'] = $dst_url;
+                                } else {
+                                    $val['status'] = 'ok';
+                                    $val['comment'] = "Create entry CNAME with " . $ret['sub'] . " go to " . $ret['target'] . " with ttl " . $ret['ttl'];
+                                    $val['entry_new']['type'] = 'CNAME';
+                                    $val['entry_new']['sub'] = $ret['sub'];
+                                    $val['entry_new']['value'] = $ret['target'];
+                                }
+                            } else
 
-        // Examples:
-        // @ IN MX 10 aspmx.l.google.com.
-        // arf 3600 IN MX 20 pouet.fr.
-        if (preg_match('/^(?P<sub>[\-\w\.@]*)\h*(?P<ttl>\d*)\h*IN\h+MX\h+(?P<weight>\d+)\h+(?P<target>[@\w+\.\-]+)/i', $zone, $ret)) {
-            $val['status'] = 'warn';
-            $val['comment'] = "Create entry MX with " . $ret['sub'] . " go to " . $ret['target'] . " with ttl " . $ret['ttl'] . " and weight 5 (initial weight was " . $ret['weight'] . ")";
-            $val['entry_new']['type'] = 'MX';
-            $val['entry_new']['sub'] = $ret['sub'];
-            $val['entry_new']['value'] = $ret['target'];
-        } else
+                                // Examples:
+                                // @ IN MX 10 aspmx.l.google.com.
+                                // arf 3600 IN MX 20 pouet.fr.
+                                if (preg_match('/^(?P<sub>[\-\w\.@]*)\h*(?P<ttl>\d*)\h*IN\h+MX\h+(?P<weight>\d+)\h+(?P<target>[@\w+\.\-]+)/i', $zone, $ret)) {
+                                    $val['status'] = 'warn';
+                                    $val['comment'] = "Create entry MX with " . $ret['sub'] . " go to " . $ret['target'] . " with ttl " . $ret['ttl'] . " and weight 5 (initial weight was " . $ret['weight'] . ")";
+                                    $val['entry_new']['type'] = 'MX';
+                                    $val['entry_new']['sub'] = $ret['sub'];
+                                    $val['entry_new']['value'] = $ret['target'];
+                                } else
 
-        // Examples:
-        // _sip._tcp  IN      SRV             1 100 5061 sip.example.tld.
-        if (preg_match('/^(?P<sub>[\_\w\.@\-]+)\h+(?P<ttl>\d*)\h*IN\h+SRV\h+/i', $zone, $ret)) {
-            $val['status'] = 'err';
-            $val['comment'] = "Please add yourself the entry $zone";
-        } else
+                                    // Examples:
+                                    // _sip._tcp  IN      SRV             1 100 5061 sip.example.tld.
+                                    if (preg_match('/^(?P<sub>[\_\w\.@\-]+)\h+(?P<ttl>\d*)\h*IN\h+SRV\h+/i', $zone, $ret)) {
+                                        $val['status'] = 'err';
+                                        $val['comment'] = "Please add yourself the entry $zone";
+                                    } else
 
-        // Examples:
-        // @       IN      TXT             "google-site-verification=jjjjjjjjjjjjjjjjjjjjjjjjsdsdjlksjdljdslgNj5"
-        if (preg_match('/^(?P<sub>[\_\w\.@\-]*)\h*(?P<ttl>\d*)\h*IN\h+TXT\h+\"(?P<target>.+)\"/i', $zone, $ret)) {
-            $val['status'] = 'ok';
-            $val['comment'] = "Create TXT entry with " . $ret['sub'] . " go to " . $ret['target'];
-            $val['entry_new']['type'] = 'TXT';
-            $val['entry_new']['sub'] = $ret['sub'];
-            $val['entry_new']['value'] = $ret['target'];
-        } else {
+                                        // Examples:
+                                        // @       IN      TXT             "google-site-verification=jjjjjjjjjjjjjjjjjjjjjjjjsdsdjlksjdljdslgNj5"
+                                        if (preg_match('/^(?P<sub>[\_\w\.@\-]*)\h*(?P<ttl>\d*)\h*IN\h+TXT\h+\"(?P<target>.+)\"/i', $zone, $ret)) {
+                                            $val['status'] = 'ok';
+                                            $val['comment'] = "Create TXT entry with " . $ret['sub'] . " go to " . $ret['target'];
+                                            $val['entry_new']['type'] = 'TXT';
+                                            $val['entry_new']['sub'] = $ret['sub'];
+                                            $val['entry_new']['value'] = $ret['target'];
+                                        } else {
 
-            // WTF can it be ?
-            $val['comment'] = "Unknow: $zone";
-        }
+                                            // WTF can it be ?
+                                            $val['comment'] = "Unknow: $zone";
+                                        }
 
         if ($save) {
             return $this->import_manual_dns_entry_doit($val);
@@ -407,6 +413,7 @@ class m_dom {
 
         return $val;
     }
+
 
     private function import_manual_dns_entry_doit($entry) {
         $entry['did_it'] = 0;
@@ -421,9 +428,9 @@ class m_dom {
         }
 
         switch ($val['type']) {
-            case "set_ttl":
-                $entry['did_it'] = $this->set_ttl($this->get_domain_byname($val['domain']), $val['value']);
-                return $entry;
+        case "set_ttl":
+            $entry['did_it'] = $this->set_ttl($this->get_domain_byname($val['domain']), $val['value']);
+            return $entry;
         }
 
         // If it is an unknown domains type
@@ -444,6 +451,7 @@ class m_dom {
 
         return $entry;
     }
+
 
     private function import_manual_dns_prep_zone($domain) {
         global $msg;
@@ -472,6 +480,7 @@ class m_dom {
         return true;
     }
 
+
     // Take an URL, and return FALSE is there is no redirection,
     // and the target URL if there is one (HTTP CODE 301 & 302)
     // CURL is needed
@@ -482,8 +491,8 @@ class m_dom {
     function is_it_a_redirect($url) {
         try {
             $params = array('http' => array(
-                    'method' => 'HEAD',
-                    'ignore_errors' => true
+                'method' => 'HEAD',
+                'ignore_errors' => true
             ));
 
             $context = stream_context_create($params);
@@ -518,12 +527,14 @@ class m_dom {
         }
     }
 
+
     function domains_type_regenerate($name) {
         global $db, $msg, $cuid;
         $db->query("update sub_domaines set web_action='UPDATE' where lower(type) = lower(?) ;", array($name));
         $db->query("update domaines d, sub_domaines sd set d.dns_action = 'UPDATE' where lower(sd.type)=lower(?);", array($name));
         return true;
     }
+
 
     function domains_type_get($name) {
         global $db;
@@ -532,11 +543,13 @@ class m_dom {
         return $db->Record;
     }
 
+
     function domains_type_del($name) {
         global $db;
         $db->query("delete domaines_type where name= ? ;", array($name));
         return true;
     }
+
 
     function domains_type_update($name, $description, $target, $entry, $compatibility, $enable, $only_dns, $need_dns, $advanced, $create_tmpdir, $create_targetdir) {
         global $msg, $db;
@@ -553,6 +566,7 @@ class m_dom {
         $db->query("UPDATE domaines_type SET description= ?, target= ?, entry= ?, compatibility= ?, enable= e, need_dns= ?, only_dns= ?, advanced= ?,create_tmpdir= ?,create_targetdir= ? where name= ?;", array($description, $target, $entry, $compatibility, $enable, $need_dns, $only_dns, $advanced, $create_tmpdir, $create_targetdir, $name));
         return true;
     }
+
 
     function sub_domain_change_status($sub_id, $status) {
         global $db, $msg;
@@ -577,7 +591,6 @@ class m_dom {
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
 
     /**
      * Retourne un tableau contenant les domaines d'un membre.
@@ -613,7 +626,6 @@ class m_dom {
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
 
     /**
      *  Efface un domaine du membre courant, et tous ses sous-domaines
@@ -652,11 +664,11 @@ class m_dom {
         return true;
     }
 
+
     function domshort($dom, $sub = "") {
         return str_replace("-", "", str_replace(".", "", empty($sub) ? "" : "$sub.") . $dom);
     }
 
-    /* ----------------------------------------------------------------- */
 
     /**
      *  Installe un domaine sur le compte courant.
@@ -799,6 +811,7 @@ class m_dom {
         return true;
     }
 
+
     /**
      * @param string $domain
      */
@@ -823,6 +836,7 @@ class m_dom {
         }
     }
 
+
     /**
      * @param string $domain
      */
@@ -830,11 +844,13 @@ class m_dom {
         return "/www/" . $this->domshort($domain);
     }
 
+
     function dump_axfr($domain, $ns = 'localhost') {
         $axfr = array();
         exec('/usr/bin/dig AXFR "' . escapeshellcmd($domain) . '" @"' . escapeshellcmd($ns) . '"', $axfr);
         return $axfr;
     }
+
 
     function lst_default_subdomains() {
         global $db, $msg;
@@ -844,16 +860,17 @@ class m_dom {
 
         while ($db->next_record()) {
             $c[] = array('id' => $db->f('id'),
-                'sub' => $db->f('sub'),
-                'domain_type' => $db->f('domain_type'),
-                'domain_type_parameter' => $db->f('domain_type_parameter'),
-                'concerned' => $db->f('concerned'),
-                'enabled' => $db->f('enabled')
+            'sub' => $db->f('sub'),
+            'domain_type' => $db->f('domain_type'),
+            'domain_type_parameter' => $db->f('domain_type_parameter'),
+            'concerned' => $db->f('concerned'),
+            'enabled' => $db->f('enabled')
             );
         }
 
         return $c;
     }
+
 
     function update_default_subdomains($arr) {
         global $msg;
@@ -876,6 +893,7 @@ class m_dom {
         return $ok;
     }
 
+
     function update_one_default($domain_type, $sub, $domain_type_parameter, $concerned, $enabled, $id = null) {
         global $db, $msg;
         $msg->log("dom", "update_one_default");
@@ -889,6 +907,7 @@ class m_dom {
         //update
     }
 
+
     function del_default_type($id) {
         global $msg, $db;
         $msg->log("dom", "del_default_type");
@@ -901,7 +920,6 @@ class m_dom {
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
 
     /**
      * Retourne les entrées DNS du domaine $domain issues du WHOIS.
@@ -943,12 +961,12 @@ class m_dom {
 
         $egal = "";
         switch ($ext) {
-            case "net":
-                $egal = "=";
-                break;
-            case "name":
-                $egal = "domain = ";
-                break;
+        case "net":
+            $egal = "=";
+            break;
+        case "name":
+            $egal = "domain = ";
+            break;
         }
         $serveurList = array();
         // pour ajouter un nouveau TLD, utiliser le code ci-dessous.
@@ -962,105 +980,105 @@ class m_dom {
                 // pour ajouter un nouveau TLD, utiliser le code ci-dessous.
                 //  echo "| $ligne<br />";
                 switch ($ext) {
-                    case "org":
-                    case "com":
-                    case "net":
-                    case "info":
-                    case "biz":
-                    case "name":
-                    case "cc":
-                        if (preg_match("#Name Server:#", $ligne)) {
-                            $found = true;
-                            $tmp = strtolower(str_replace(chr(10), "", str_replace(chr(13), "", str_replace(" ", "", str_replace("Name Server:", "", $ligne)))));
-                            if ($tmp) {
-                                $serveurList[] = $tmp;
-                            }
-                        }
-                        break;
-                    case "co":
-                        if (preg_match("#Name Server:#", $ligne)) {
-                            $found = true;
-                            $tmp = strtolower(str_replace(chr(10), "", str_replace(chr(13), "", str_replace(" ", "", str_replace("Name Server:", "", $ligne)))));
-                            if ($tmp)
-                                $serveurList[] = $tmp;
-                        }
-                        break;
-                    case "cx":
-                        $ligne = str_replace(chr(10), "", str_replace(chr(13), "", str_replace(" ", "", $ligne)));
-                        if ($ligne == "" && $state == 1) {
-                            $state = 2;
-                        }
-                        if ($state == 1) {
-                            $serveurList[] = strtolower($ligne);
-                        }
-                        if ($ligne == "Nameservers:" && $state == 0) {
-                            $state = 1;
-                            $found = true;
-                        }
-                        break;
-                    case "eu":
-                    case "be":
-                        $ligne = preg_replace("/^ *([^ ]*) \(.*\)$/", "\\1", trim($ligne));
-                        $tmp="";
-                        if ($found) {
-                            $tmp = trim($ligne);
-                        }
+                case "org":
+                case "com":
+                case "net":
+                case "info":
+                case "biz":
+                case "name":
+                case "cc":
+                    if (preg_match("#Name Server:#", $ligne)) {
+                        $found = true;
+                        $tmp = strtolower(str_replace(chr(10), "", str_replace(chr(13), "", str_replace(" ", "", str_replace("Name Server:", "", $ligne)))));
                         if ($tmp) {
                             $serveurList[] = $tmp;
                         }
-                        if ($ligne == "Nameservers:") {
-                            $state = 1;
-                            $found = true;
+                    }
+                break;
+                case "co":
+                    if (preg_match("#Name Server:#", $ligne)) {
+                        $found = true;
+                        $tmp = strtolower(str_replace(chr(10), "", str_replace(chr(13), "", str_replace(" ", "", str_replace("Name Server:", "", $ligne)))));
+                        if ($tmp)
+                            $serveurList[] = $tmp;
+                    }
+                    break;
+                case "cx":
+                    $ligne = str_replace(chr(10), "", str_replace(chr(13), "", str_replace(" ", "", $ligne)));
+                    if ($ligne == "" && $state == 1) {
+                        $state = 2;
+                    }
+                    if ($state == 1) {
+                        $serveurList[] = strtolower($ligne);
+                    }
+                    if ($ligne == "Nameservers:" && $state == 0) {
+                        $state = 1;
+                        $found = true;
+                    }
+                    break;
+                case "eu":
+                case "be":
+                    $ligne = preg_replace("/^ *([^ ]*) \(.*\)$/", "\\1", trim($ligne));
+                $tmp="";
+                if ($found) {
+                    $tmp = trim($ligne);
+                }
+                if ($tmp) {
+                    $serveurList[] = $tmp;
+                }
+                if ($ligne == "Nameservers:") {
+                    $state = 1;
+                    $found = true;
+                }
+                break;
+                case "im":
+                    if (preg_match('/Name Server:/', $ligne)) {
+                        $found = true;
+                        // weird regexp (trailing garbage after name server), but I could not make it work otherwise
+                        $tmp = strtolower(preg_replace('/Name Server: ([^ ]+)\..$/', "\\1", $ligne));
+                        $tmp = preg_replace('/[^-_a-z0-9\.]/', '', $tmp);
+                        if ($tmp) {
+                            $serveurList[] = $tmp;
                         }
-                        break;
-                    case "im":
-                        if (preg_match('/Name Server:/', $ligne)) {
-                            $found = true;
-                            // weird regexp (trailing garbage after name server), but I could not make it work otherwise
-                            $tmp = strtolower(preg_replace('/Name Server: ([^ ]+)\..$/', "\\1", $ligne));
-                            $tmp = preg_replace('/[^-_a-z0-9\.]/', '', $tmp);
-                            if ($tmp) {
-                                $serveurList[] = $tmp;
-                            }
+                    }
+                    break;
+                case "it":
+                    if (preg_match("#nserver:#", $ligne)) {
+                        $found = true;
+                        $tmp = strtolower(preg_replace("/nserver:\s*[^ ]*\s*([^\s]*)$/", "\\1", $ligne));
+                        if ($tmp) {
+                            $serveurList[] = $tmp;
                         }
-                        break;
-                    case "it":
-                        if (preg_match("#nserver:#", $ligne)) {
-                            $found = true;
-                            $tmp = strtolower(preg_replace("/nserver:\s*[^ ]*\s*([^\s]*)$/", "\\1", $ligne));
-                            if ($tmp) {
-                                $serveurList[] = $tmp;
-                            }
+                    }
+                    break;
+                case "fr":
+                case "re":
+                    if (preg_match("#nserver:#", $ligne)) {
+                        $found = true;
+                        $tmp = strtolower(preg_replace("#nserver:\s*([^\s]*)\s*.*$#", "\\1", $ligne));
+                        if ($tmp) {
+                            $serveurList[] = $tmp;
                         }
-                        break;
-                    case "fr":
-                    case "re":
-                        if (preg_match("#nserver:#", $ligne)) {
-                            $found = true;
-                            $tmp = strtolower(preg_replace("#nserver:\s*([^\s]*)\s*.*$#", "\\1", $ligne));
-                            if ($tmp) {
-                                $serveurList[] = $tmp;
-                            }
-                        }
-                        break;
-                    case "ca":
-                    case "ws";
-                        if (preg_match('#Name servers#', $ligne)) {
-                            // found the server
-                            $state = 1;
-                        } elseif ($state) {
-                            if (preg_match('#^[^%]#', $ligne) && $ligne = preg_replace('#[[:space:]]#', "", $ligne)) {
-                                // first non-whitespace line is considered to be the nameservers themselves
-                                $found = true;
-                                $serveurList[] = $ligne;
-                            }
-                        }
-                        break;
-                    case "coop":
-                        if (preg_match('#Host Name:\s*([^\s]+)#', $ligne, $matches)) {
-                            $found = true;
-                            $serveurList[] = $matches[1];
-                        }
+                    }
+                break;
+                case "ca":
+                case "ws";
+                if (preg_match('#Name servers#', $ligne)) {
+                    // found the server
+                    $state = 1;
+                } elseif ($state) {
+                    if (preg_match('#^[^%]#', $ligne) && $ligne = preg_replace('#[[:space:]]#', "", $ligne)) {
+                        // first non-whitespace line is considered to be the nameservers themselves
+                        $found = true;
+                        $serveurList[] = $ligne;
+                    }
+                }
+                break;
+                case "coop":
+                    if (preg_match('#Host Name:\s*([^\s]+)#', $ligne, $matches)) {
+                        $found = true;
+                        $serveurList[] = $matches[1];
+                    }
                 } // switch
             } // while
             fclose($fp);
@@ -1075,12 +1093,8 @@ class m_dom {
             $msg->raise("ALERT", "dom", _("The domain cannot be found in the Whois database"));
             return false;
         }
-    }
+    } // whois
 
-// whois
-
-
-    /* ----------------------------------------------------------------- */
 
     /**
      *  vérifie la presence d'un champs mx valide sur un serveur DNS
@@ -1127,7 +1141,6 @@ class m_dom {
         return 0;
     }
 
-    /* ----------------------------------------------------------------- */
 
     /**
      *  retourne TOUTES les infos d'un domaine
@@ -1201,12 +1214,8 @@ class m_dom {
         }
         $db->free();
         return $r;
-    }
+    } // get_domain_all
 
-// get_domain_all
-
-
-    /* ----------------------------------------------------------------- */
 
     /**
      * Retourne TOUTES les infos d'un sous domaine du compte courant.
@@ -1246,9 +1255,8 @@ class m_dom {
         $r["web_action"] = $db->Record["web_action"];
         $db->free();
         return $r;
-    }
+    } // get_sub_domain_all
 
-// get_sub_domain_all
 
     /**
      * @param integer $type
@@ -1259,70 +1267,69 @@ class m_dom {
 
         // check the type we can have in domaines_type.target
         switch ($this->domains_type_target_values($type)) {
-            case 'NONE':
-                if (empty($value) or is_null($value)) {
-                    return true;
-                }
-                break;
-            case 'URL':
-                if ($value == strval($value)) {
-                    if (filter_var($value, FILTER_VALIDATE_URL)) {
-                        return true;
-                    } else {
-                        $msg->raise("ERROR", "dom", _("invalid url"));
-                        return false;
-                    }
-                }
-                break;
-            case 'DIRECTORY':
-                if (substr($value, 0, 1) != "/") {
-                    $value = "/" . $value;
-                }
-                if (!checkuserpath($value)) {
-                    $msg->raise("ERROR", "dom", _("The folder you entered is incorrect or does not exist"));
-                    return false;
-                }
+        case 'NONE':
+            if (empty($value) or is_null($value)) {
                 return true;
-            case 'IP':
-                if (checkip($value)) {
+            }
+            break;
+        case 'URL':
+            if ($value == strval($value)) {
+                if (filter_var($value, FILTER_VALIDATE_URL)) {
                     return true;
                 } else {
-                    $msg->raise("ERROR", "dom", _("The ip address is invalid"));
+                    $msg->raise("ERROR", "dom", _("invalid url"));
                     return false;
                 }
-                break;
-            case 'IPV6':
-                if (checkipv6($value)) {
-                    return true;
-                } else {
-                    $msg->raise("ERROR", "dom", _("The ip address is invalid"));
-                    return false;
-                }
-                break;
-            case 'DOMAIN':
-                if (checkcname($value)) {
-                    return true;
-                } else {
-                    $msg->raise("ERROR", "dom", _("The name you entered is incorrect or not fully qualified (it must end with a DOT, like example.com<b>.</b>)"));
-                    return false;
-                }
-                break;
-            case 'TXT':
-                if ($value == strval($value)) {
-                    return true;
-                } else {
-                    $msg->raise("ERROR", "dom", _("The TXT value you entered is incorrect"));
-                    return false;
-                }
-                break;
-            default:
-                $msg->raise("ERROR", "dom", _("Invalid domain type selected, please check"));
+            }
+            break;
+        case 'DIRECTORY':
+            if (substr($value, 0, 1) != "/") {
+                $value = "/" . $value;
+            }
+            if (!checkuserpath($value)) {
+                $msg->raise("ERROR", "dom", _("The folder you entered is incorrect or does not exist"));
                 return false;
+            }
+            return true;
+        case 'IP':
+            if (checkip($value)) {
+                return true;
+            } else {
+                $msg->raise("ERROR", "dom", _("The ip address is invalid"));
+                return false;
+            }
+            break;
+        case 'IPV6':
+            if (checkipv6($value)) {
+                return true;
+            } else {
+                $msg->raise("ERROR", "dom", _("The ip address is invalid"));
+                return false;
+            }
+            break;
+        case 'DOMAIN':
+            if (checkcname($value)) {
+                return true;
+            } else {
+                $msg->raise("ERROR", "dom", _("The name you entered is incorrect or not fully qualified (it must end with a DOT, like example.com<b>.</b>)"));
+                return false;
+            }
+            break;
+        case 'TXT':
+            if ($value == strval($value)) {
+                return true;
+            } else {
+                $msg->raise("ERROR", "dom", _("The TXT value you entered is incorrect"));
+                return false;
+            }
+            break;
+        default:
+            $msg->raise("ERROR", "dom", _("Invalid domain type selected, please check"));
+            return false;
         }
         return false;
     }
 
-    /* ----------------------------------------------------------------- */
 
     /**
      * Check the compatibility of the POSTed parameters with the chosen
@@ -1353,7 +1360,7 @@ class m_dom {
             }
         }
 
-        // Forbidden to create a CNAME RR on the domain APEX (RFC 1912)                                                                                                                               
+        // Forbidden to create a CNAME RR on the domain APEX (RFC 1912)
         if ($type == 'cname' && $sub == '')    
             return false;  
 
@@ -1361,7 +1368,6 @@ class m_dom {
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
 
     /**
      * Modifier les information du sous-domaine demandé.
@@ -1399,7 +1405,7 @@ class m_dom {
 
         if (!$this->check_type_value($type, $dest)) {
             //plutot verifier si la chaine d'erreur est vide avant de raise sinon sa veut dire que l(erruer est deja remonté
-	  // error raised by check_type_value
+            // error raised by check_type_value
             return false;
         }
 
@@ -1455,7 +1461,6 @@ class m_dom {
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
 
     /**
      *  Supprime le sous-domaine demandé
@@ -1481,6 +1486,7 @@ class m_dom {
         return true;
     }
 
+
     /**
      * @param integer $dom_id
      */
@@ -1496,7 +1502,6 @@ class m_dom {
         return $j;
     }
 
-    /* ----------------------------------------------------------------- */
 
     /**
      * Modifie les information du domaine précisé.
@@ -1535,7 +1540,7 @@ class m_dom {
             }
         }
 
-        # Can't have ttl == 0. There is also a check in function_dns
+        // Can't have ttl == 0. There is also a check in function_dns
         if ($ttl == 0) {
             $ttl = 86400;
         }
@@ -1559,7 +1564,7 @@ class m_dom {
             return true;
         }
 
-        //si gestion mx uniquement, vérification du dns externe
+        // si gestion mx uniquement, vérification du dns externe
         if ($dns == "0" && $gesmx == "1" && !$force) {
             $vmx = $this->checkmx($dom);
             if ($vmx == 1) {
@@ -1586,11 +1591,9 @@ class m_dom {
         return true;
     }
 
-    /*     * ************************* */
-    /*  Slave dns ip managment  */
-    /*     * ************************* */
 
-    /* ----------------------------------------------------------------- */
+    /*  Slave dns ip managment  */
+
 
     /** Return the list of ip addresses and classes that are allowed access to domain list
      * through AXFR Transfers from the bind server.
@@ -1608,9 +1611,9 @@ class m_dom {
         return $res;
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** Add an ip address (or a ip class) to the list of allowed slave ip access list.
+    /** 
+     * Add an ip address (or a ip class) to the list of allowed slave ip access list.
      */
     function add_slave_ip($ip, $class = "32") {
         global $db, $msg;
@@ -1634,9 +1637,9 @@ class m_dom {
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** Remove an ip address (or a ip class) from the list of allowed slave ip access list.
+    /** 
+     * Remove an ip address (or a ip class) from the list of allowed slave ip access list.
      */
     function del_slave_ip($ip) {
         global $db, $msg;
@@ -1651,9 +1654,9 @@ class m_dom {
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** Check for a slave account
+    /** 
+     * Check for a slave account
      */
     function check_slave_account($login, $pass) {
         global $db;
@@ -1664,9 +1667,8 @@ class m_dom {
         return false;
     }
 
-    /* ----------------------------------------------------------------- */
-
-    /** Out (echo) the complete hosted domain list : 
+    /** 
+     * Out (echo) the complete hosted domain list : 
      */
     function echo_domain_list($integrity = false) {
         global $db;
@@ -1683,9 +1685,9 @@ class m_dom {
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** Returns the complete hosted domain list : 
+    /** 
+     * Returns the complete hosted domain list : 
      */
     function get_domain_list($uid = -1) {
         global $db;
@@ -1726,7 +1728,6 @@ class m_dom {
         return $res;
     }
 
-    /* ----------------------------------------------------------------- */
 
     /** Returns the name of a domain for the current user, from it's domain_id
      * @param $dom_id integer the domain_id to search for
@@ -1750,7 +1751,6 @@ class m_dom {
         }
     }
 
-    /* ----------------------------------------------------------------- */
 
     /** Returns the id of a domain for the current user, from it's domain name
      * @param $domain string the domain name to search for
@@ -1774,9 +1774,9 @@ class m_dom {
         }
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** Count all domains, for all users
+    /** 
+     * Count all domains, for all users
      */
     function count_domains_all() {
         global $db;
@@ -1788,9 +1788,9 @@ class m_dom {
         }
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** Return the list of allowed slave accounts 
+    /** 
+     * Return the list of allowed slave accounts 
      */
     function enum_slave_account() {
         global $db;
@@ -1805,9 +1805,9 @@ class m_dom {
         return $res;
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** Add a slave account that will be allowed to access the domain list
+    /** 
+     * Add a slave account that will be allowed to access the domain list
      */
     function add_slave_account($login, $pass) {
         global $db, $msg;
@@ -1820,9 +1820,9 @@ class m_dom {
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** Remove a slave account
+    /** 
+     * Remove a slave account
      */
     function del_slave_account($login) {
         global $db, $msg;
@@ -1830,14 +1830,11 @@ class m_dom {
         return true;
     }
 
-    /*     * ********** */
     /*  Private  */
-    /*     * ********** */
 
 
-    /* ----------------------------------------------------------------- */
-
-    /** Try to lock a domain
+    /** 
+     * Try to lock a domain
      * @access private
      */
     function lock() {
@@ -1853,9 +1850,9 @@ class m_dom {
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** Unlock the cron for domain management
+    /** 
+     * Unlock the cron for domain management
      * return true
      * @access private
      */
@@ -1869,9 +1866,9 @@ class m_dom {
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** Declare that a domain's emails are hosted in this server : 
+    /** 
+     * Declare that a domain's emails are hosted in this server : 
      * This adds 2 MX entries in this domain (if required)
      */
     function hook_dom_add_mx_domain($dom_id) {
@@ -1885,7 +1882,6 @@ class m_dom {
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
 
     /**
      * Delete an account (all his domains)
@@ -1900,9 +1896,9 @@ class m_dom {
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
 
-    /** Returns the used quota for the $name service for the current user.
+    /** 
+     * Returns the used quota for the $name service for the current user.
      * @param $name string name of the quota
      * @return integer the number of service used or false if an error occured
      * @access private
@@ -1918,11 +1914,11 @@ class m_dom {
         return $q;
     }
 
-    /* --------------------------------------------------------------------- */
 
-    /** Returns the global domain(s) configuration(s) of a particular user
+    /**
+     * Returns the global domain(s) configuration(s) of a particular user
      * No parameters needed 
-     * */
+     */
     function alternc_export_conf() {
         global $msg;
         $msg->log("dom", "export");
@@ -1966,6 +1962,7 @@ class m_dom {
         }
         return $str;
     }
+
 
     /**
      * Return an array with all the needed parameters to generate conf 
@@ -2023,6 +2020,7 @@ class m_dom {
         return $r;
     }
 
+
     /**
      * Return an array with all informations of the domains_type
      * used to generate Apache conf.
@@ -2046,7 +2044,11 @@ class m_dom {
         return $d;
     }
 
-// Launch old fashionned hooks as there was in AlternC 1.0
+
+    /**
+     *  Launch old fashionned hooks as there was in AlternC 1.0
+     * @TODO: do we still need that?
+     */
     function generate_conf_oldhook($action, $lst_sub, $sub_obj = null) {
         if (is_null($sub_obj)) {
             $sub_obj = $this->generation_parameters(null, false);
@@ -2071,6 +2073,7 @@ class m_dom {
             }
         } // foreach $lst_by_type
     }
+
 
     /**
      * Generate apache configuration.
@@ -2124,7 +2127,10 @@ class m_dom {
         return $ret;
     }
 
-    // Return an array with the list of id of sub_domains waiting for an action
+
+    /**
+     *  Return an array with the list of id of sub_domains waiting for an action
+     */
     function generation_todo() {
         global $db, $msg;
         $msg->log("dom", "generation_todo");
@@ -2136,19 +2142,21 @@ class m_dom {
         return $r;
     }
 
+
     function subdomain_modif_are_done($sub_domain_id, $action) {
         global $db;
         $sub_domain_id = intval($sub_domain_id);
         switch (strtolower($action)) {
-            case "delete":
-                $sql = "DELETE FROM sub_domaines WHERE id =$sub_domain_id;";
-                break;
-            default:
-                $sql = "UPDATE sub_domaines SET web_action='OK' WHERE id='$sub_domain_id'; ";
+        case "delete":
+            $sql = "DELETE FROM sub_domaines WHERE id =$sub_domain_id;";
+            break;
+        default:
+            $sql = "UPDATE sub_domaines SET web_action='OK' WHERE id='$sub_domain_id'; ";
         }
         $db->query($sql);
         return true;
     }
+
 
     /**
      * @param string $dns_action
@@ -2159,13 +2167,13 @@ class m_dom {
         return true;
     }
 
+
     function set_dns_result($domain, $dns_result) {
         global $db;
         $db->query("UPDATE domaines SET dns_result= ? WHERE domaine= ?; ", array($dns_result, $domain));
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
 
     /** hook function called by AlternC-upnp to know which open 
      * tcp or udp ports this class requires or suggests
@@ -2179,8 +2187,11 @@ class m_dom {
         );
     }
 
-    // List if there is problems in the domains.
-    // Problems can appear when editing domains type properties
+
+    /** 
+     * List if there is problems in the domains.
+     *  Problems can appear when editing domains type properties
+     */
     function get_problems($domain) {
         $this->lock();
         $da = $this->get_domain_all($domain);
@@ -2218,6 +2229,7 @@ class m_dom {
         return $errors;
     }
 
+
     function default_domain_type() {
         // This function is only used to allow translation of default domain types:
         _("Locally hosted");
@@ -2236,6 +2248,4 @@ class m_dom {
         _("AlternC panel access");
     }
 
-}
-
-/* Class m_domains */
+} /* Class m_domains */

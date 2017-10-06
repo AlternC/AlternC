@@ -52,6 +52,7 @@ class m_messages {
         $this->init_msgs();
     }
 
+
     /**
      * Record a message, insert it into the logfile.
      * 
@@ -83,6 +84,7 @@ class m_messages {
         return true;
     }
     
+
     /**
      * Reset the stored messages array
      */
@@ -91,6 +93,7 @@ class m_messages {
             $this->arrMessages[$v] = array();
         }
     }
+
 
     /**
      * Tell if there are stored messages for a specific level
@@ -112,6 +115,7 @@ class m_messages {
             return false;
         }
     }
+
 
     /**
      * Return a string of concateneted messages of all recorded messages
@@ -162,6 +166,7 @@ class m_messages {
         return $str;
     }
 
+
     /**
      * Return a message in HTML form with associated CSS
      *
@@ -186,6 +191,7 @@ class m_messages {
         return $str;
     }
 
+
     /**
      * Return all the messages of all levels in HTML form with associated CSS
      *
@@ -206,6 +212,7 @@ class m_messages {
 
         return $msg;
     }
+
 
     /**
      * Log a message into /var/log/alternc/bureau.log
@@ -235,6 +242,7 @@ class m_messages {
         );
     }
 
+
     /**
      * Log an API function call into /var/log/alternc/bureau.log
      *
@@ -255,6 +263,4 @@ class m_messages {
         );
     }
 
-}
-
-/* Class m_messages */
+} /* Class m_messages */

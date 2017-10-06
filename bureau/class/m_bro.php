@@ -22,7 +22,7 @@
   ----------------------------------------------------------------------
   Purpose of file: file browser class.
   ----------------------------------------------------------------------
- */
+*/
 
 /* Add the mime type list */
 @include("mime.php");
@@ -213,8 +213,8 @@ class m_bro {
                 if ($file != "." && $file != "..") {
                     $stat=stat($absolute . "/" . $file);
                     $c[] = array("name" => $file, "size" => $this->fsize($absolute . "/" . $file, $showdirsize),
-                        "date" => filemtime($absolute . "/" . $file), "type" => (!is_dir($absolute . "/" . $file)),
-                        "permissions" => $stat[2] );
+                    "date" => filemtime($absolute . "/" . $file), "type" => (!is_dir($absolute . "/" . $file)),
+                    "permissions" => $stat[2] );
                 }
             }
             closedir($dir);
@@ -245,22 +245,22 @@ class m_bro {
     }
 
     /**
-      Modifie les prfrences de l'utilisateur courant.
-     *
-     * @global m_mysql $db
-     * @global int $cuid
-     * @param integer $editsizex Taille de l'diteur (nombre de colonnes)
-     * @param integer $editsizey Taille de l'diteur (nombre de lignes)
-     * @param integer $listmode Mode d'affichage de la liste des fichiers
-     * @param integer $showicons Faut-il afficher / cacher les icones des fichiers
-     * @param integer $downfmt Dans quel format faut-il tlcharger les dossiers compresss
-     * @param integer $createfile Faut-il editer/revenir au browser aprs cration d'un fichier
-     * @param integer $showtype Faut-il afficher le type mime des fichiers
-     * @param integer $editor_font Quelle police faut-il utiliser pour l'diteur
-     * @param integer $editor_size Quelle taille de police faut-il utiliser pour l'diteur
-     * @param integer $golastdir Faut-il revenir la racine ou au dernier dossier visit ?
-     * @return boolean 
-     */
+       Modifie les prfrences de l'utilisateur courant.
+       *
+       * @global m_mysql $db
+       * @global int $cuid
+       * @param integer $editsizex Taille de l'diteur (nombre de colonnes)
+       * @param integer $editsizey Taille de l'diteur (nombre de lignes)
+       * @param integer $listmode Mode d'affichage de la liste des fichiers
+       * @param integer $showicons Faut-il afficher / cacher les icones des fichiers
+       * @param integer $downfmt Dans quel format faut-il tlcharger les dossiers compresss
+       * @param integer $createfile Faut-il editer/revenir au browser aprs cration d'un fichier
+       * @param integer $showtype Faut-il afficher le type mime des fichiers
+       * @param integer $editor_font Quelle police faut-il utiliser pour l'diteur
+       * @param integer $editor_size Quelle taille de police faut-il utiliser pour l'diteur
+       * @param integer $golastdir Faut-il revenir la racine ou au dernier dossier visit ?
+       * @return boolean 
+       */
     function SetPrefs($editsizex, $editsizey, $listmode, $showicons, $downfmt, $createfile, $showtype, $editor_font, $editor_size, $golastdir) {
         global $db, $cuid;
         $editsizex = intval($editsizex);
@@ -612,18 +612,18 @@ class m_bro {
                 // there was an error, raise it
                 $msg->log("bro", "uploadfile", "Problem when uploading a file");
                 switch ($_FILES['userfile']['error']) {
-                    case UPLOAD_ERR_INI_SIZE:
-                        $erstr = _("The uploaded file exceeds the max file size allowed");
-                        break;
-                    case UPLOAD_ERR_FORM_SIZE:
-                    case UPLOAD_ERR_PARTIAL:
-                    case UPLOAD_ERR_NO_FILE:
-                    case UPLOAD_ERR_NO_TMP_DIR:
-                    case UPLOAD_ERR_CANT_WRITE:
-                    case UPLOAD_ERR_EXTENSION:
-                    default:
-                        $erstr = _("Undefined error ") . $_FILES['userfile']['error'];
-                        break;
+                case UPLOAD_ERR_INI_SIZE:
+                    $erstr = _("The uploaded file exceeds the max file size allowed");
+                    break;
+                case UPLOAD_ERR_FORM_SIZE:
+                case UPLOAD_ERR_PARTIAL:
+                case UPLOAD_ERR_NO_FILE:
+                case UPLOAD_ERR_NO_TMP_DIR:
+                case UPLOAD_ERR_CANT_WRITE:
+                case UPLOAD_ERR_EXTENSION:
+                default:
+                    $erstr = _("Undefined error ") . $_FILES['userfile']['error'];
+                    break;
                 }
                 $msg->raise("ERROR", "bro", _("Error during the upload of the file: ") . $erstr);
                 return false;
@@ -686,7 +686,7 @@ class m_bro {
 
         if ($ret) {
             $msg->raise("ERROR", "bro", _("I cannot find a way to extract the file %s, it is an unsupported compressed format"), $file);
-	    return false;
+            return false;
         }
         return true;
     }
@@ -904,21 +904,21 @@ class m_bro {
         if (($parts = explode(".", $name))) {
             $ext = array_pop($parts);
             switch ($ext) {
-                case "gz":
-                case "bz":
-                case "bz2":
-                    $ext = array_pop($parts) . $ext;
-                /* FALLTHROUGH */
-                case "tar.gz":
-                case "tar.bz":
-                case "tar.bz2":
-                case "tgz":
-                case "tbz":
-                case "tbz2":
-                case "tar":
-                case "Z":
-                case "zip":
-                    return true;
+            case "gz":
+            case "bz":
+            case "bz2":
+                $ext = array_pop($parts) . $ext;
+            /* FALLTHROUGH */
+            case "tar.gz":
+            case "tar.bz":
+            case "tar.bz2":
+            case "tgz":
+            case "tbz":
+            case "tbz2":
+            case "tar":
+            case "Z":
+            case "zip":
+                return true;
             }
         }
         return false;
@@ -1006,7 +1006,7 @@ class m_bro {
             $msg->raise("ERROR", "bro", _("File or folder name is incorrect"));
             return false;
         }
-	return true;
+        return true;
     }
 
     /**
@@ -1074,7 +1074,7 @@ class m_bro {
         header("Content-Transfer-Encoding: binary");
         $d = $this->convertabsolute($dir, false);
         set_time_limit(0);
-	chdir(dirname($d));
+        chdir(dirname($d));
         passthru("/usr/bin/zip -r - ".escapeshellarg(basename($d)));
     }
 

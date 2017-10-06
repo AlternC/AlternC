@@ -22,7 +22,7 @@
   ----------------------------------------------------------------------
   Purpose of file: Miscellaneous functions globally used
   ----------------------------------------------------------------------
- */
+*/
 
 /**
  * Format a field value for input or textarea : 
@@ -528,7 +528,7 @@ function _md5cr($pass, $salt = "") {
 function split_mysql_database_name($dbname) {
     $db_exploded_name = explode("_", $dbname);
     return array($db_exploded_name[0],
-        implode("_", array_slice($db_exploded_name, 1)));
+    implode("_", array_slice($db_exploded_name, 1)));
 }
 
 /* ----------------------------------------------------------------- */
@@ -614,16 +614,16 @@ function eoption($values, $cur, $onedim = false) {
 }
 
 /**
-  /* Echo the HTMLSpecialChars version of a value.
- * Must be called when pre-filling fields values in forms such as : 
- * <input type="text" name="toto" value="<?php ehe($toto); ?>" />
- * Use the charset of the current language for transcription
- * 
- * @global string $charset
- * @param string $str
- * @param boolean $affiche
- * @return string
- */
+   /* Echo the HTMLSpecialChars version of a value.
+   * Must be called when pre-filling fields values in forms such as : 
+   * <input type="text" name="toto" value="<?php ehe($toto); ?>" />
+   * Use the charset of the current language for transcription
+   * 
+   * @global string $charset
+   * @param string $str
+   * @param boolean $affiche
+   * @return string
+   */
 function ehe($str, $affiche = TRUE) {
     global $charset;
     $retour = htmlspecialchars($str, ENT_QUOTES|ENT_SUBSTITUTE, $charset);
@@ -634,16 +634,16 @@ function ehe($str, $affiche = TRUE) {
 }
 
 /**
-  /* Echo the URLENCODED version of a value.
- * Must be called when pre-filling fields values in URLS such as : 
- * document.location='logs_tail.php?file=<?php eue($file); ?>
- * Use the charset of the current language for transcription
- * 
- * @global string $charset
- * @param string $str
- * @param boolean $affiche
- * @return string
- */
+   /* Echo the URLENCODED version of a value.
+   * Must be called when pre-filling fields values in URLS such as : 
+   * document.location='logs_tail.php?file=<?php eue($file); ?>
+   * Use the charset of the current language for transcription
+   * 
+   * @global string $charset
+   * @param string $str
+   * @param boolean $affiche
+   * @return string
+   */
 function eue($str, $affiche = TRUE) {
     global $charset;
     $retour = urlencode($str);
@@ -677,26 +677,26 @@ function getFields($fields, $requestOnly = false) {
             $method = "_" . strtoupper($options[0]);
         }
         switch ($options[1]) {
-            case "integer":
-                $vars[$name] = (isset($GLOBALS[$method][$name]) && is_numeric($GLOBALS[$method][$name]) ? intval($GLOBALS[$method][$name]) : $options[2]);
-                break;
-            case "float":
-                $vars[$name] = (isset($GLOBALS[$method][$name]) && is_numeric($GLOBALS[$method][$name]) ? floatval($GLOBALS[$method][$name]) : $options[2]);
-                break;
-            case "string":
-                $vars[$name] = (isset($GLOBALS[$method][$name]) ? trim($GLOBALS[$method][$name]) : $options[2]);
-                break;
-            case "array":
-                $vars[$name] = (isset($GLOBALS[$method][$name]) && is_array($GLOBALS[$method][$name]) ? $GLOBALS[$method][$name] : $options[2]);
-                break;
-            case "boolean":
-                $vars[$name] = (isset($GLOBALS[$method][$name]) ? $GLOBALS[$method][$name] : $options[2]);
-                break;
-            case "file":
-                $vars[$name] = (isset($GLOBALS[$method][$name]) ? $GLOBALS[$method][$name] : $options[2]);
-                break;
-            default:
-                die("Illegal method type used for field " . $name . " : " . $options[1]);
+        case "integer":
+            $vars[$name] = (isset($GLOBALS[$method][$name]) && is_numeric($GLOBALS[$method][$name]) ? intval($GLOBALS[$method][$name]) : $options[2]);
+            break;
+        case "float":
+            $vars[$name] = (isset($GLOBALS[$method][$name]) && is_numeric($GLOBALS[$method][$name]) ? floatval($GLOBALS[$method][$name]) : $options[2]);
+            break;
+        case "string":
+            $vars[$name] = (isset($GLOBALS[$method][$name]) ? trim($GLOBALS[$method][$name]) : $options[2]);
+            break;
+        case "array":
+            $vars[$name] = (isset($GLOBALS[$method][$name]) && is_array($GLOBALS[$method][$name]) ? $GLOBALS[$method][$name] : $options[2]);
+            break;
+        case "boolean":
+            $vars[$name] = (isset($GLOBALS[$method][$name]) ? $GLOBALS[$method][$name] : $options[2]);
+            break;
+        case "file":
+            $vars[$name] = (isset($GLOBALS[$method][$name]) ? $GLOBALS[$method][$name] : $options[2]);
+            break;
+        default:
+            die("Illegal method type used for field " . $name . " : " . $options[1]);
         }
     }
 
@@ -1000,41 +1000,41 @@ function fHSVtoRGB($iH, $iS, $iV) {
     $dX = $dC * (1 - abs($dT - 1));     // as used in the Wikipedia link
 
     switch ($dH) {
-        case($dH >= 0.0 && $dH < 1.0):
-            $dR = $dC;
-            $dG = $dX;
-            $dB = 0.0;
-            break;
-        case($dH >= 1.0 && $dH < 2.0):
-            $dR = $dX;
-            $dG = $dC;
-            $dB = 0.0;
-            break;
-        case($dH >= 2.0 && $dH < 3.0):
-            $dR = 0.0;
-            $dG = $dC;
-            $dB = $dX;
-            break;
-        case($dH >= 3.0 && $dH < 4.0):
-            $dR = 0.0;
-            $dG = $dX;
-            $dB = $dC;
-            break;
-        case($dH >= 4.0 && $dH < 5.0):
-            $dR = $dX;
-            $dG = 0.0;
-            $dB = $dC;
-            break;
-        case($dH >= 5.0 && $dH < 6.0):
-            $dR = $dC;
-            $dG = 0.0;
-            $dB = $dX;
-            break;
-        default:
-            $dR = 0.0;
-            $dG = 0.0;
-            $dB = 0.0;
-            break;
+    case($dH >= 0.0 && $dH < 1.0):
+        $dR = $dC;
+        $dG = $dX;
+        $dB = 0.0;
+        break;
+    case($dH >= 1.0 && $dH < 2.0):
+        $dR = $dX;
+        $dG = $dC;
+        $dB = 0.0;
+        break;
+    case($dH >= 2.0 && $dH < 3.0):
+        $dR = 0.0;
+        $dG = $dC;
+        $dB = $dX;
+        break;
+    case($dH >= 3.0 && $dH < 4.0):
+        $dR = 0.0;
+        $dG = $dX;
+        $dB = $dC;
+        break;
+    case($dH >= 4.0 && $dH < 5.0):
+        $dR = $dX;
+        $dG = 0.0;
+        $dB = $dC;
+        break;
+    case($dH >= 5.0 && $dH < 6.0):
+        $dR = $dC;
+        $dG = 0.0;
+        $dB = $dX;
+        break;
+    default:
+        $dR = 0.0;
+        $dG = 0.0;
+        $dB = 0.0;
+        break;
     }
 
     $dM = $dV - $dC;
@@ -1130,8 +1130,8 @@ function csrf_get($return=false) {
         $_SESSION["csrf"]=md5(mt_rand().mt_rand().mt_rand());
     }
     if ($token=="") {
-      $token=md5(mt_rand().mt_rand().mt_rand());
-      $db->query("INSERT INTO csrf SET cookie=?, token=?, created=NOW(), used=0;",array($_SESSION["csrf"],$token));
+        $token=md5(mt_rand().mt_rand().mt_rand());
+        $db->query("INSERT INTO csrf SET cookie=?, token=?, created=NOW(), used=0;",array($_SESSION["csrf"],$token));
     }
     if ($return) 
         return $token;

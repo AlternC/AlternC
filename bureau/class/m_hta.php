@@ -1,14 +1,6 @@
 <?php
 
 /*
-  $Id: m_hta.php,v 1.5 2004/11/29 17:15:37 anonymous Exp $
-  ----------------------------------------------------------------------
-  AlternC - Web Hosting System
-  Copyright (C) 2002 by the AlternC Development Team.
-  http://alternc.org/
-  ----------------------------------------------------------------------
-  Based on:
-  Valentin Lacambre's web hosting softwares: http://altern.org/
   ----------------------------------------------------------------------
   LICENSE
 
@@ -24,40 +16,28 @@
 
   To read the license please visit http://www.gnu.org/copyleft/gpl.html
   ----------------------------------------------------------------------
-  Original Author of file:
-  Purpose of file:
-  ----------------------------------------------------------------------
- */
+*/
 
 /**
  * This class handle folder web restricted access through .htaccess/.htpassword
  * files.
  * 
- * Copyleft {@link http://alternc.net/ AlternC Team}
- * 
- * @copyright    AlternC-Team 2002-11-01 http://alternc.org/
- * 
  */
 class m_hta {
 
-    /**
-     * Constructor
-     */
-    function m_webaccess() {
-        
-    }
 
     /**
      * Password kind used in this class (hook for admin class)
-     * 
      * @return array
      */
     function alternc_password_policy() {
         return array("hta" => "Protected folders passwords");
     }
 
+
     /**
-     * 
+     * hook called by menu class to add a menu 
+     * to the left panel
      * @return array
      */
     function hook_menu() {
@@ -70,6 +50,7 @@ class m_hta {
 
         return $obj;
     }
+
 
     /**
      * Create a protected folder (.htaccess et .htpasswd)
@@ -115,6 +96,7 @@ class m_hta {
         return true;
     }
 
+
     /**
      * Returns the list of all user folder currently protected by a .htpasswd file
      * 
@@ -144,6 +126,7 @@ class m_hta {
         return $r;
     }
 
+
     /**
      * Tells if a folder is protected.
      * 
@@ -163,6 +146,7 @@ class m_hta {
         }
     }
 
+
     /**
      * Returns the list of login for a protected folder.
      * 
@@ -177,9 +161,9 @@ class m_hta {
         $absolute = ALTERNC_HTML . "/" . substr($mem->user["login"], 0, 1) . "/" . $mem->user["login"] . "/$dir";
         if (file_exists("$absolute/.htaccess")) {
             /* 		if (!_reading_htaccess($absolute)) {
-              return false;
-              }
-             */
+                    return false;
+                    }
+            */
         }
         $file = @fopen("$absolute/.htpasswd", "r");
         $i = 0;
@@ -187,7 +171,7 @@ class m_hta {
         if (!$file) {
             return false;
         }
-        // TODO: Tester la validité du .htpasswd
+        // TODO: Test the validity of a .htpasswd
         while (!feof($file)) {
             $s = fgets($file, 1024);
             $t = explode(":", $s);
@@ -199,6 +183,7 @@ class m_hta {
         fclose($file);
         return $res;
     }
+
 
     /**
      * Unprotect a folder
@@ -260,6 +245,7 @@ class m_hta {
 
         return true;
     }
+
 
     /**
      * Add a user to a protected folder
@@ -326,6 +312,7 @@ class m_hta {
         }
     }
 
+
     /**
      * Delete a user from a protected folder.
      * 
@@ -366,6 +353,7 @@ class m_hta {
         rename("$absolute/.htpasswd.new", "$absolute/.htpasswd");
         return true;
     }
+
 
     /**
      * Change the password of a user in a protected folder
@@ -412,6 +400,7 @@ class m_hta {
         return true;
     }
 
+
     /**
      * Check that a .htaccess file is valid (for authentication)
      * 
@@ -455,6 +444,5 @@ class m_hta {
         return true;
     }
 
-}
+} /* class m_hta */
 
-/* CLASS m_hta */

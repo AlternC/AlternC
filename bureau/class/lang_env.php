@@ -3,11 +3,11 @@
 $lang_translation = array(# If you comment lang here, it won't be displayed. 
     "fr_FR" => "Français",
     "en_US" => "English",
-			"es_ES" => "Español",
-#			"it_IT" => "Italiano",
-#			"de_DE" => "Deutsch",
-#			"pt_BR" => "Portuguese",
-#    "nl_NL" => "Dutch",
+    "es_ES" => "Español",
+    #			"it_IT" => "Italiano",
+    #			"de_DE" => "Deutsch",
+    #			"pt_BR" => "Portuguese",
+    #    "nl_NL" => "Dutch",
 );
 
 global $arr_lang_translation;
