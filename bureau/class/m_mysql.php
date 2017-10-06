@@ -258,28 +258,28 @@ class m_mysql {
             $msg->raise("ERROR", "mysql", _("Database %s already exists"), $dbn);
             return false;
         }
-
-	// On empèche la création auto d'utilisateurs si la taille du nom de la db est plus grand que la taille max du nom d'utilisateur
-	$len=variable_get('sql_max_username_length', NULL);
-	if (strlen($dbname) <= $len) {
+        
+        // We prevent the automatic creation of user account longer than the max allowed lenght of a MySQL username 
+        $len=variable_get('sql_max_username_length', NULL);
+        if (strlen($dbname) <= $len) {
             $db->query("SELECT name from dbusers where name= ? and enable='ACTIVATED' ;", array($dbname));
             if (!$db->num_rows()) {
-		// On récupère la complexité du mdp qu'on doit générer que l'on va passer en paramètre de la fonction create_pass
-		$c=$admin->listPasswordPolicies();
-		$passwd_classcount = $c['mysql']['classcount'];
-
+                // We get the password complexity set in the policy and ensure we have that complexity in the create_pass() call
+                $c=$admin->listPasswordPolicies();
+                $passwd_classcount = $c['mysql']['classcount'];
+                
                 $password_user = create_pass(10, $passwd_classcount);
                 if ($this->add_user($dbn, $password_user, $password_user)) {
-		    $msg->raise("INFO", "mysql", "L'utilisateur '$dbname' a été créé et les droits sur cette base de données lui ont été attribué.");
+                    $msg->raise("INFO", "mysql", "L'utilisateur '$dbname' a été créé et les droits sur cette base de données lui ont été attribué.");
                 } else {
-		    $msg->raise("ALERT", "mysql", "L'utilisateur '$dbname' n'a pas pu être créé.<br>Allez à la page 'Utilisateurs Mysql' pour en créer manuellement.<br>Et n'oubliez pas de lui donner les droits sur la base de données.");
-		}
+                    $msg->raise("ALERT", "mysql", "L'utilisateur '$dbname' n'a pas pu être créé.<br>Allez à la page 'Utilisateurs Mysql' pour en créer manuellement.<br>Et n'oubliez pas de lui donner les droits sur la base de données.");
+                }
             }
-	} else {
-	    $msg->raise("ALERT", "mysql", "L'utilisateur '$dbname' n'a pas été automatiquement créé car il dépasse la limite de taille pour les utilisateurs qui est à $len<br>Allez à la page 'Utilisateurs Mysql' pour en créer un avec le nom que vous voulez.<br>Et n'oubliez pas de lui donner les droits sur la base de données.");
-	}
-
-        //checking for the phpmyadmin user
+        } else {
+            $msg->raise("ALERT", "mysql", "L'utilisateur '$dbname' n'a pas été automatiquement créé car il dépasse la limite de taille pour les utilisateurs qui est à $len<br>Allez à la page 'Utilisateurs Mysql' pour en créer un avec le nom que vous voulez.<br>Et n'oubliez pas de lui donner les droits sur la base de données.");
+        }
+        
+        // checking for the phpmyadmin user
         $db->query("SELECT * FROM dbusers WHERE uid= ? AND enable='ADMIN';", array($cuid));
         if ($db->num_rows()) {
             $db->next_record();
@@ -290,7 +290,7 @@ class m_mysql {
             return false;
         }
 
-        //Grant the special user every rights.
+        // Grant the special user every rights.
         if ($this->dbus->exec("CREATE DATABASE $dbname;")) { // secured: dbname is checked against ^[0-9a-z]*$
             $msg->log("mysql", "add_db_succes", $dbn);
             // Ok, database does not exist, quota is ok and dbname is compliant. Let's proceed
@@ -309,7 +309,7 @@ class m_mysql {
             return false;
         }
     }
-
+    
     /* --------------------------------------------------------------------------- */
 
     /** Delete a database for the current user.
@@ -334,11 +334,11 @@ class m_mysql {
 	$db_esc = str_replace('_', '\_', $dbname);
         $this->dbus->query("DELETE FROM mysql.db WHERE Db= ? ;",    array($db_esc));
 
-        #We test if the user created with the database is associated with more than 1 database.
+        // We test if the user created with the database is associated with more than 1 database.
         $this->dbus->query("select User from mysql.db where User= ? ;", array($dbname));
         if (($this->dbus->num_rows()) == 0) {
-            #If not we can delete it.
-            $this->del_user($dbname);
+            // If not we can delete it.
+            $this->del_user($dbname, false, true );
         }
         return true;
     }
@@ -606,45 +606,45 @@ class m_mysql {
             return false;
         }
 
-	$listRights = array('Select', 'Insert', 'Update', 'Delete', 'Create', 'Drop', 'References', 'Index', 'Alter', 'Create_tmp_table', 'Lock_tables', 'Create_view', 'Show_view', 'Create_routine', 'Alter_routine', 'Execute', 'Event', 'Trigger');
+        $listRights = array('Select', 'Insert', 'Update', 'Delete', 'Create', 'Drop', 'References', 'Index', 'Alter', 'Create_tmp_table', 'Lock_tables', 'Create_view', 'Show_view', 'Create_routine', 'Alter_routine', 'Execute', 'Event', 'Trigger');
         while ($this->dbus->next_record()) {
-	    // rTmp est l'array dans lequel on met les infos recupérées à chaque tour de boucle et est ajouté à l'array $r
-	    $rTmp = array();
+            // rTmp is the array where we put the informations from each loop, added to array $r
+            $rTmp = array();
             $variable = $this->dbus->Record;
-
-	    $dbu = $variable['User'];
-
+            
+            $dbu = $variable['User'];
+            
             $rTmp['Host'] = $this->dbus->f('Host');
-	    $rTmp['Rights']='All';
-
-	    foreach ($listRights as $v) {
-		$right = $v."_priv";
-		if ($this->dbus->f($right) !== "Y") {
-		    $rTmp['Rights'] = 'NotAll';
-		    break;
-		}
-	    }
-
+            $rTmp['Rights']='All';
+            
+            foreach ($listRights as $v) {
+                $right = $v."_priv";
+                if ($this->dbus->f($right) !== "Y") {
+                    $rTmp['Rights'] = 'NotAll';
+                    break;
+                }
+            }
+            
             if (!$db->query("SELECT name,password from dbusers where name= ? ;", array($dbu))) {
                 $msg->raise("ERROR", "mysql",_("Database not found")." (3)");
                 return false;
             }
-
+            
             if (!$db->num_rows()) {
                 $msg->raise("ERROR", "mysql",_("Database not found")." (4)");
                 return false;
             }
-
+            
             $db->next_record();
             $rTmp['user'] = $db->f('name');
             $rTmp['password'] = $db->f('password');
-
-	    $r[] = $rTmp;
-
-        } //endwhile
+            
+            $r[] = $rTmp;
+            
+        } // endwhile
         return $r;
     }
-
+    
     /* ------------------------------------------------------------ */
 
     /**
@@ -746,7 +746,7 @@ class m_mysql {
      * @param integer $all
      * @return boolean if the user has been deleted in MySQL or FALSE if an error occurred
      * */
-    function del_user($user, $all = false) {
+    function del_user($user, $all = false, $caller_is_deldb = false) {
         global $db, $msg, $cuid;
         $msg->log("mysql", "del_user", $user);
         if (!preg_match("#^[0-9a-z]#", $user)) {
@@ -759,9 +759,8 @@ class m_mysql {
             $db->query("SELECT name FROM dbusers WHERE uid= ? ;", array($cuid));
         }
 
-	$backtrace = debug_backtrace();
         if (!$db->num_rows()) {
-	    if ($backtrace[1]["function"] != "del_db")
+	    if (! $caller_is_deldb )
 		$msg->raise("ERROR", "mysql", _("The username was not found"));
 
 	    return false;
@@ -777,9 +776,9 @@ class m_mysql {
 
         $db->query("DELETE FROM dbusers WHERE uid= ? AND name= ? ;", array($cuid, $user));
 
-	if ($backtrace[1]["function"] == "del_db")
-	    $msg->raise('info', "mysql", _("The user '%s' has been successfully deleted"), $user);
-
+        if ( $caller_is_deldb )
+            $msg->raise("INFO", "mysql", _("The user '%s' has been successfully deleted"), $user);
+        
         return true;
     }
 
@@ -995,7 +994,7 @@ class m_mysql {
         $d = $this->get_userslist(1);
         if (!empty($d)) {
             for ($i = 0; $i < count($d); $i++) {
-                $this->del_user($d[$i]["name"], 1);
+                $this->del_user($d[$i]["name"], 1,true);
             }
         }
         return true;

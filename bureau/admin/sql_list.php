@@ -38,8 +38,8 @@ $r=$mysql->get_userslist();
 <hr id="topbar"/>
 <br />
 <?php
-  // On regarde d'abord si on a une db existante. Sioui, on regarde si on a des utilisateurs existants
-  if(!$rdb || empty($rdb)){
+  // If the db exists, we look at users 
+  if (!$rdb || empty($rdb)) {
 	$msg->raise("INFO", "mysql", _("You have no database at the moment."));
   } else if(!$r || empty($r)){
 	$msg->raise("INFO", "mysql", _("You have no sql user at the moment."));
@@ -54,7 +54,7 @@ if($rdb){
 <form method="post" action="sql_del.php" name="main" id="main">
     <?php csrf_get(); ?>
 <table class="tlist">
-   <tr><th>&nbsp;</th><th><?php __("Database"); ?></th><?php if ( variable_get('sql_allow_users_backups') ) { ?><th><?php __("Backup"); ?></th><?php } // sql_allow_users_backups ?><th><?php __("Restore"); ?></th><th><?php __("Show Settings"); ?></th><th><?php __("Size"); ?></th></tr>
+   <tr><th>&nbsp;</th><th><?php __("Database"); ?></th><?php if ( variable_get('sql_allow_users_backups') ) { ?><th><?php __("Backup"); ?></th><?php } ?><th><?php __("Restore"); ?></th><th><?php __("Show Settings"); ?></th><th><?php __("Size"); ?></th></tr>
 
 <?php
 for($i=0;$i<count($rdb);$i++) {

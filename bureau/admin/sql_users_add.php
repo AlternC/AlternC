@@ -62,8 +62,8 @@ if (isset($fatal) && $fatal) {
 <table class="tedit">
 <tr>
 <?php
-// On récupère la taille max d'un nom d'utilisateur mysql (définit dans les variables globales d'AlternC
-// et on l'utilise pour mettre la propriété maxlength de l'Input du nom
+// We check the max length of a mysql user (defined in the variables of AlternC) 
+// we use that for the maxlenght of the Input 
 $len=variable_get('sql_max_username_length', NULL)-strlen($mem->user["login"]."_");
 ?>
   <th><label for="usern"><?php __("Username"); ?></label></th>

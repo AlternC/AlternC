@@ -36,7 +36,7 @@ $fields = array (
 getFields($fields);
 
 if ($mysql->change_user_password($id,$password,$passwordconf))
-  $msg->raise("INFO", "mysql", _("Mot de passe changé pour l'utilisateur '%s'."), $id);
+  $msg->raise("INFO", "mysql", _("Password changed for user '%s'."), $id);
 
 include("sql_users_list.php");
 ?>
