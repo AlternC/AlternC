@@ -221,7 +221,9 @@ class m_piwik {
     return $infos_user;
   }
 
-  // Regarde si l'utilisateur a des sites piwik configurés dans AlternC
+  /** 
+   * does this user has piwik websites configured in AlternC ?
+   */
   function user_has_sites() {
     global $db, $cuid, $msg;
 
@@ -237,8 +239,9 @@ class m_piwik {
     return false;
   }
 
-  // Supprime l'utilisateur Piwik passé en parametre
-  // Ne le supprime pas localement tant que pas supprimé en remote
+  /** Delete a piwik user
+   * don't delete it locally unless it has been remotely deleted.
+   */
   function user_delete($piwik_user_login) {
     global $db, $cuid, $msg;
 

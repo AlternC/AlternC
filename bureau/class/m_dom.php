@@ -675,7 +675,7 @@ class m_dom {
      * @param boolean $noerase 1 ou 0 pour rendre le domaine inamovible ou non
      * @param boolean $force 1 ou 0, si 1, n'effectue pas les tests de DNS.
      *  force ne devrait étre utilisé que par le super-admin.
-      $ @return boolean Retourne FALSE si une erreur s'est produite, TRUE sinon.
+     * @return boolean Retourne FALSE si une erreur s'est produite, TRUE sinon.
      */
     function add_domain($domain, $dns, $noerase = false, $force = false, $isslave = false, $slavedom = "") {
         global $db, $msg, $quota, $L_FQDN, $tld, $cuid, $hooks;

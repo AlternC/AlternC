@@ -3,14 +3,14 @@
 require_once("../class/config.php");
 if (!defined("QUOTASONE")) return;
 
-//FIXME missing getfield for $mode
-if (!isset($mode)) { # when included from adm_login, mode is not set
+// FIXME missing getfield for $mode
+if (!isset($mode)) { // when included from adm_login, mode is not set
   $mode = 0;
 }
 // $mode = 4; // Pour Debuguer le mode "graphique" des quotas
 
-// Si la var $usr existe, c'est qu'on appelle les quotas pour 1 user à partir des quotas généraux de l'admin
-// Sinon, on récupère l'id du user à récupérer via $mem->user["login"]
+// If the var $usr exists, it means we call quotas for 1 user from the general admin page.
+// If not, we get the ID of the user via $mem->user["login"]
 if (isset($usr) && is_int($usr)) {
   $id_usr=$usr;
   $login=$admin->get_login_by_uid($id_usr);
