@@ -60,9 +60,9 @@ if (!$r) {
   exit();
 } else {
   if ($create)
-    $msg->raise("INFO", "ftp", _("The ftp account has been successfully created"));
+    $msg->raise("INFO", "ftp", _("The FTP account has been successfully created"));
   else
-    $msg->raise("INFO", "ftp", _("The ftp account has been successfully saved"));
+    $msg->raise("INFO", "ftp", _("The FTP account has been successfully saved"));
 
   include("ftp_list.php");
   exit();

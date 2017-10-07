@@ -408,7 +408,7 @@ class m_ftp {
             $db->query("INSERT INTO ftpusers (name,password, encrypted_password,homedir,uid) VALUES ( ?, '', ?, ?, ?)", array($full_login, $encrypted_password, $absolute, $cuid));
             return true;
         } else {
-            $msg->raise("ERROR", "ftp", _("Your FTP account quota is over. You cannot create more ftp accounts"));
+            $msg->raise("ERROR", "ftp", _("Your FTP account quota is over. You cannot create more FTP accounts"));
             return false;
         }
     }

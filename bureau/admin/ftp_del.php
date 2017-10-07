@@ -54,7 +54,7 @@ if(!empty($confirm_del)) {
   foreach($lst_todel as $v) {
     $r=$ftp->delete_ftp($v);
     if ($r) {
-      $msg->raise("INFO", "ftp", _("The ftp account %s has been successfully deleted"),$r);
+      $msg->raise("INFO", "ftp", _("The FTP account %s has been successfully deleted"),$r);
     }
   }
   include("ftp_list.php");

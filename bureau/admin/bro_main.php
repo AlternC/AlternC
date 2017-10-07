@@ -173,7 +173,7 @@ if (!empty($formu) && $formu) {
 
 if (isset($actextract) && $actextract) {
   if ($bro->ExtractFile($R. '/' . $fileextract, $R)) {
-    $msg->raise("INFO", "bro", _("The extraction of the file '%s' was successfull"), $fileextract);
+    $msg->raise("INFO", "bro", _("The extraction of the file '%s' succeeded"), $fileextract);
   }
 }
 

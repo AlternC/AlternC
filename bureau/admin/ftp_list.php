@@ -50,7 +50,7 @@ echo $msg->msg_html_all();
 
 if ($quota->cancreate("ftp")) { ?>
   <p>
-   <span class="inb add"><a href="ftp_edit.php?create=1"><?php __("Create a new ftp account"); ?></a></span> 
+   <span class="inb add"><a href="ftp_edit.php?create=1"><?php __("Create a new FTP account"); ?></a></span> 
   </p>
 <?php
 }

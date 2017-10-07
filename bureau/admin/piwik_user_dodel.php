@@ -46,7 +46,7 @@ if(!empty($confirm_del)) {
   if ($piwik->user_has_sites()) {
     $msg->raise("ALERT", "piwik", _("To be able to delete the last user account, you must first remove all the piwik sites"));
   } else if ($piwik->user_delete($login) ) {
-    $msg->raise("INFO", "piwik", _("Account %s is successfully deleted"), $login);
+    $msg->raise("INFO", "piwik", _("Account %s has been successfully deleted"), $login);
   }
 
   include('piwik_userlist.php'); 
