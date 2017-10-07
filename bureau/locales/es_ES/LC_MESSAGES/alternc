@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: AlternC, hosting control panel\n"
 "Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
 "POT-Creation-Date: 2013-10-18 11:47+0200\n"
-"PO-Revision-Date: 2017-10-06 22:05+0000\n"
+"PO-Revision-Date: 2017-10-07 17:08+0000\n"
 "Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
 "Language-Team: Spanish (Spain) (http://www.transifex.com/octopuce/alternc/language/es_ES/)\n"
 "MIME-Version: 1.0\n"
@@ -1502,7 +1502,10 @@ msgid ""
 msgstr ""
 
 #: ../admin/adm_deactivate.php:47 ../class/m_admin.php:250
-#: ../class/m_admin.php:281
+#: ../class/m_admin.php:281 ../class/m_admin.php:787 ../class/m_admin.php:813
+#: ../class/m_admin.php:840 ../class/m_admin.php:893 ../class/m_admin.php:920
+#: ../class/m_admin.php:948 ../class/m_admin.php:1026
+#: ../class/m_admin.php:1049
 msgid "Account not found"
 msgstr "No se encuentra el miembro"
 
@@ -2671,7 +2674,7 @@ msgstr ""
 
 #: ../admin/bro_main.php:176
 #, php-format
-msgid "The extraction of the file '%s' was successfull"
+msgid "The extraction of the file '%s' succeeded"
 msgstr ""
 
 #: ../admin/bro_main.php:181 ../class/m_bro.php:86
@@ -3276,7 +3279,7 @@ msgstr "Si quieres suprimir el dominio %s, presiona en el botón de aquí arriba
 msgid "Delete %s from this server"
 msgstr "Eliminar %s"
 
-#: ../admin/dom_editdns.php:45 ../class/m_dom.php:1563
+#: ../admin/dom_editdns.php:45 ../class/m_dom.php:1565
 msgid "No change has been requested..."
 msgstr "No se pidió ninguna modificación..."
 
@@ -3387,7 +3390,7 @@ msgstr "¿Está seguro de que desea borrarlo?"
 msgid "Deleting the subdomain %s:"
 msgstr "Suprimesión del subdominio %s:"
 
-#: ../admin/dom_subdoedit.php:71 ../admin/dom_substatus.php:28
+#: ../admin/dom_subdoedit.php:76 ../admin/dom_substatus.php:28
 #, php-format
 msgid "The modifications will take effect at %s. Server time is %s."
 msgstr ""
@@ -3398,8 +3401,8 @@ msgstr "Modificando subdominio"
 
 #: ../admin/ftp_del.php:57
 #, php-format
-msgid "The ftp account %s has been successfully deleted"
-msgstr "La cuenta FTP %s fue borrada"
+msgid "The FTP account %s has been successfully deleted"
+msgstr ""
 
 #: ../admin/ftp_del.php:65
 msgid "Confirm the FTP accounts deletion"
@@ -3414,12 +3417,12 @@ msgid "Error: neither a creation nor an edition"
 msgstr "Error: ni creación ni edición"
 
 #: ../admin/ftp_doedit.php:63
-msgid "The ftp account has been successfully created"
+msgid "The FTP account has been successfully created"
 msgstr "Se creó correctamente la cuenta FTP"
 
 #: ../admin/ftp_doedit.php:65
-msgid "The ftp account has been successfully saved"
-msgstr "La cuenta de FTP ha sido guardada con éxito"
+msgid "The FTP account has been successfully saved"
+msgstr ""
 
 #: ../admin/ftp_edit.php:43
 msgid "Neither a creation nor a edition"
@@ -3451,9 +3454,9 @@ msgstr "La constraseña con coincide"
 msgid "FTP accounts list"
 msgstr "Lista de cuentas FTP"
 
-#: ../admin/ftp_list.php:53 ../class/m_ftp.php:65
-msgid "Create a new ftp account"
-msgstr "Crear una nueva cuenta FTP"
+#: ../admin/ftp_list.php:53
+msgid "Create a new FTP account"
+msgstr ""
 
 #: ../admin/ftp_list.php:78
 msgid "Are you sure you want to change his status?"
@@ -3492,11 +3495,11 @@ msgid ""
 msgstr "las que especificó cuando creó la cuenta. Puede editarlas en el panel."
 
 #: ../admin/ftp_switch_enable.php:36
-msgid "The ftp account is enabled"
+msgid "The FTP account is enabled"
 msgstr ""
 
 #: ../admin/ftp_switch_enable.php:38
-msgid "The ftp account is disabled"
+msgid "The FTP account is disabled"
 msgstr ""
 
 #: ../admin/head.php:32
@@ -4320,7 +4323,7 @@ msgstr "Los parámetros de ayuda han sido modificados."
 msgid "Settings of your account"
 msgstr "Parámetros de tu cuenta"
 
-#: ../admin/mem_param.php:64 ../class/m_mem.php:594
+#: ../admin/mem_param.php:64 ../class/m_mem.php:592
 msgid "Help"
 msgstr "Ayuda"
 
@@ -4513,7 +4516,7 @@ msgstr ""
 
 #: ../admin/piwik_user_dodel.php:49
 #, php-format
-msgid "Account %s is successfully deleted"
+msgid "Account %s has been successfully deleted"
 msgstr ""
 
 #: ../admin/piwik_user_dodel.php:59
@@ -4537,31 +4540,31 @@ msgstr "Este sitio web piwik no es de su propiedad"
 msgid "You don't own this piwik user"
 msgstr "Este usuario piwik no es de su propiedad"
 
-#: ../admin/piwik_useradmin.php:71
+#: ../admin/piwik_useradmin.php:72
 msgid "success"
 msgstr "hecho"
 
-#: ../admin/piwik_useradmin.php:75
+#: ../admin/piwik_useradmin.php:76
 msgid "This right does not exist"
 msgstr "Este privilegio no existe"
 
-#: ../admin/piwik_useradmin.php:100
+#: ../admin/piwik_useradmin.php:101
 msgid "Rights for user"
 msgstr "Privilegios del usuario"
 
-#: ../admin/piwik_useradmin.php:125
+#: ../admin/piwik_useradmin.php:126
 msgid "Add rights to user"
 msgstr "Agregar privilegios al usuario"
 
-#: ../admin/piwik_useradmin.php:137
+#: ../admin/piwik_useradmin.php:138
 msgid "admin"
 msgstr "admin"
 
-#: ../admin/piwik_useradmin.php:137
+#: ../admin/piwik_useradmin.php:138
 msgid "noacces"
 msgstr "noacces"
 
-#: ../admin/piwik_useradmin.php:137
+#: ../admin/piwik_useradmin.php:138
 msgid "view"
 msgstr "view"
 
@@ -4732,9 +4735,8 @@ msgid "Mailman lists"
 msgstr "Listas mailman "
 
 #: ../admin/quotas_users.php:149 ../admin/sql_del.php:66
-#: ../admin/sql_dorestore.php:40 ../admin/sql_getparam.php:44
-#: ../admin/sql_list.php:37 ../admin/sql_restore.php:42
-#: ../class/m_mysql.php:936
+#: ../admin/sql_dorestore.php:40 ../admin/sql_list.php:37
+#: ../admin/sql_restore.php:42 ../class/m_mysql.php:936
 msgid "MySQL Databases"
 msgstr "Base de datos MySQL"
 
@@ -4850,6 +4852,11 @@ msgid ""
 "messages."
 msgstr "Tu base fue restaurada, verifica los posibles errores en el texto."
 
+#: ../admin/sql_getparam.php:44
+#, php-format
+msgid "MySQL settings for database '%s'"
+msgstr ""
+
 #: ../admin/sql_getparam.php:55
 msgid "Your current connection settings are"
 msgstr "Los ajustes actuales de su conexión son"
@@ -4859,6 +4866,7 @@ msgid "Mysql Server"
 msgstr "Servidor MySQL"
 
 #: ../admin/sql_getparam.php:72 ../admin/sql_list.php:57
+#: ../admin/sql_users_rights.php:58
 msgid "Database"
 msgstr "Base de datos"
 
@@ -4867,16 +4875,16 @@ msgid "Manage the rights"
 msgstr "Gestionar permisos"
 
 #: ../admin/sql_getparam.php:100
-msgid "Web interface PhpMyAdmin"
-msgstr "Interfaz web PhpMyAdmin"
+msgid "Click here to access PhpMyAdmin interface"
+msgstr ""
 
-#: ../admin/sql_getparam.php:112
+#: ../admin/sql_getparam.php:109
 msgid ""
 "You changed the MySQL User base configuration. Please refer to your "
 "configuration"
 msgstr "Ha modificado la configuración de usuario de MySQL. Por favor, consulte su configuración"
 
-#: ../admin/sql_getparam.php:117
+#: ../admin/sql_getparam.php:114
 msgid "Back to the MySQL database list"
 msgstr "Volver al listado de bases de datos MySQL"
 
@@ -4920,7 +4928,7 @@ msgstr "No puede haber un sufijo MySQL vacío"
 msgid "Create this new MySQL database."
 msgstr "Crear ésta base de datos MySQL"
 
-#: ../admin/sql_pma_sso.php:44
+#: ../admin/sql_pma_sso.php:62
 msgid "SQL Admin"
 msgstr "Admin SQL"
 
@@ -4945,15 +4953,15 @@ msgstr "Por favor indique la ruta y archivo de los datos SQL para restablecerlos
 msgid "Restore my database"
 msgstr "Restaurar mi base de datos"
 
-#: ../admin/sql_restore.php:64
+#: ../admin/sql_restore.php:65
 msgid "Tip: you can restore a file directly in the File Browser"
 msgstr "Consejo: es posible restablecer un archivo directamente en el navegador de archivos"
 
-#: ../admin/sql_restore.php:69
+#: ../admin/sql_restore.php:70
 msgid "Please the complete path of the filename"
 msgstr "Por favor, la ruta completa del archivo"
 
-#: ../admin/sql_restore.php:78
+#: ../admin/sql_restore.php:79
 msgid "Note: If the filename ends with .gz, it will be uncompressed before."
 msgstr "Nota: Si el nombre del archivo termina por .gz, primero será descomprimido."
 
@@ -5014,14 +5022,14 @@ msgstr "Cambiar contraseña"
 
 #: ../admin/sql_users_rights.php:38
 #, php-format
-msgid "MySQL Rights for %s"
-msgstr "Derechos MySQL para %s"
+msgid "Manage MySQL rights for user '%s'"
+msgstr ""
 
-#: ../admin/sql_users_rights.php:87
+#: ../admin/sql_users_rights.php:86
 msgid "Reverse selection"
 msgstr "Selección inversa"
 
-#: ../admin/sql_users_rights.php:101
+#: ../admin/sql_users_rights.php:100
 msgid "Apply"
 msgstr "Aplicar"
 
@@ -5278,7 +5286,8 @@ msgstr "Los cambios de configuración del servidor se aplican cada 5 minutos. ¿
 
 #: ../class/m_admin.php:216 ../class/m_admin.php:271 ../class/m_admin.php:344
 #: ../class/m_admin.php:425 ../class/m_admin.php:470 ../class/m_admin.php:506
-#: ../class/m_admin.php:591
+#: ../class/m_admin.php:591 ../class/m_admin.php:760 ../class/m_admin.php:806
+#: ../class/m_admin.php:833 ../class/m_admin.php:867
 msgid "-- Only administrators can access this page! --"
 msgstr "-- ¡Solo los administradores tienen acceso a esta página! --"
 
@@ -5335,6 +5344,98 @@ msgstr "¡Este login ya existe!"
 #, php-format
 msgid "query failed: %s "
 msgstr "consulta fallida: %s "
+
+#: ../class/m_admin.php:716
+#, php-format
+msgid "New account %s from %s on %s"
+msgstr "Nueva cuenta %s de %s en %s"
+
+#: ../class/m_admin.php:721
+#, php-format
+msgid "Cannot send email to %s"
+msgstr "No es posible enviar un emal a %s"
+
+#: ../class/m_admin.php:725
+#, php-format
+msgid "Query failed: %s"
+msgstr "Consulta fallida: %s"
+
+#: ../class/m_admin.php:1030
+msgid "This account is ALREADY an administrator account"
+msgstr "¡El usuario seleccionado YA es administrador!"
+
+#: ../class/m_admin.php:1053
+msgid "This account is NOT an administrator account!"
+msgstr "¡Esta cuenta NO es una cuenta de administrador!"
+
+#: ../class/m_admin.php:1173
+#, php-format
+msgid "NS for this domain are not %s and %s BUT %s"
+msgstr ""
+
+#: ../class/m_admin.php:1189
+#, php-format
+msgid "MX is not %s BUT %s"
+msgstr ""
+
+#: ../class/m_admin.php:1203
+msgid "Fail to get the DNS information. Try again."
+msgstr ""
+
+#: ../class/m_admin.php:1206
+#, php-format
+msgid "subdomain '%s' doesn't point to %s but to '%s'"
+msgstr ""
+
+#: ../class/m_admin.php:1215
+msgid "Domain doesn't exist anymore !"
+msgstr "Este dominio no existe."
+
+#: ../class/m_admin.php:1239
+#, php-format
+msgid "Domain '%s' not found."
+msgstr "El dominio '%s' no existe."
+
+#: ../class/m_admin.php:1258 ../class/m_admin.php:1294
+#: ../class/m_admin.php:1355
+msgid "This TLD does not exist"
+msgstr "Este TLD no existe"
+
+#: ../class/m_admin.php:1319
+msgid "The TLD name is mandatory"
+msgstr "El nombre de TLD es obligatorio"
+
+#: ../class/m_admin.php:1326
+msgid "This TLD already exist"
+msgstr "Este TLD ya existe"
+
+#: ../class/m_admin.php:1464
+msgid "Please enter a login"
+msgstr "Porfavor escriba el usuario"
+
+#: ../class/m_admin.php:1474
+msgid "-- Program error -- The requested password policy does not exist!"
+msgstr "-- Error de programa -- ¡La política de contraseña solicitada no existe!"
+
+#: ../class/m_admin.php:1482
+msgid "The password length is too short according to the password policy"
+msgstr "La longitud de la contraseña es demasiado corta según la política de contraseñas"
+
+#: ../class/m_admin.php:1487
+msgid "The password is too long according to the password policy"
+msgstr "La contraseña es demasiado larga de según la política de contraseñas"
+
+#: ../class/m_admin.php:1500
+msgid ""
+"The password policy prevents you to use your login name inside your password"
+" or the other way around"
+msgstr "La política de contraseñas no permite que use su nombre de acceso como parte de su contraseña"
+
+#: ../class/m_admin.php:1524
+msgid ""
+"Your password contains not enough different classes of character, between "
+"low-case, up-case, figures and special characters."
+msgstr "Su contraseña no contiene suficientes caracteres diferentes, entre minúsculas, mayúsculas, números y caracteres especiales."
 
 #: ../class/m_authip.php:113 ../class/m_authip.php:131
 #: ../class/m_authip.php:150 ../class/m_authip.php:253
@@ -5507,24 +5608,24 @@ msgstr "Falta el nombre de dominio"
 msgid "The name MUST contain only letter and digits"
 msgstr "El nombre DEBE incluir solo letras y números"
 
-#: ../class/m_dom.php:583 ../class/m_dom.php:1419
+#: ../class/m_dom.php:583 ../class/m_dom.php:1421
 msgid ""
 "The parameters for this subdomain and domain type are invalid. Please check "
 "for subdomain entries incompatibility"
 msgstr "Los parámetros de este subdominio y tipo de dominio no son válidos. Por favor, revise la incompatibilidad de entradas para subdominios"
 
 #: ../class/m_dom.php:698 ../class/m_dom.php:1169 ../class/m_dom.php:1237
-#: ../class/m_dom.php:1390 ../class/m_dom.php:1476 ../class/m_dom.php:1523
-#: ../class/m_dom.php:1863
+#: ../class/m_dom.php:1392 ../class/m_dom.php:1478 ../class/m_dom.php:1525
+#: ../class/m_dom.php:1865
 msgid "--- Program error --- No lock on the domains!"
 msgstr "--- Error de programación --- ¡Ningún Lock en los dominios!"
 
-#: ../class/m_dom.php:705 ../class/m_dom.php:1174 ../class/m_dom.php:1414
-#: ../class/m_dom.php:1550
+#: ../class/m_dom.php:705 ../class/m_dom.php:1174 ../class/m_dom.php:1416
+#: ../class/m_dom.php:1552
 msgid "The domain name is syntaxically incorrect"
 msgstr "El nombre de dominio es sintácticamente incorrecto"
 
-#: ../class/m_dom.php:711 ../class/m_dom.php:757 ../class/m_dom.php:1630
+#: ../class/m_dom.php:711 ../class/m_dom.php:757 ../class/m_dom.php:1632
 msgid ""
 "The requested domain is forbidden in this server, please contact the "
 "administrator"
@@ -5539,7 +5640,7 @@ msgstr "¡Este servidor es el servidor de dominio! ¡No es posible alojarlo en s
 msgid "The domain already exist"
 msgstr "El dominio ya existe"
 
-#: ../class/m_dom.php:732 ../class/m_dom.php:1530
+#: ../class/m_dom.php:732 ../class/m_dom.php:1532
 msgid ""
 "The last member of the domain name is incorrect or cannot be hosted in that "
 "server"
@@ -5570,11 +5671,11 @@ msgstr "No es posible borrar el tipo por defecto"
 msgid "The Whois database is unavailable, please try again later"
 msgstr "La base de datos de whois no se encuentra disponible, por favor, vuelva a intentarlo después"
 
-#: ../class/m_dom.php:1093 ../class/m_dom.php:1534
+#: ../class/m_dom.php:1093 ../class/m_dom.php:1536
 msgid "The domain cannot be found in the Whois database"
 msgstr "No es posible encontrar el dominio en la base de datos de Whois"
 
-#: ../class/m_dom.php:1242 ../class/m_dom.php:1480
+#: ../class/m_dom.php:1242 ../class/m_dom.php:1482
 msgid "The sub-domain does not exist"
 msgstr "El subdominio no existe"
 
@@ -5604,116 +5705,116 @@ msgstr "El valor TXT indicado es incorrecto"
 msgid "Invalid domain type selected, please check"
 msgstr "El tipo de dominio seleccionado no es válido, por favor, revíselo"
 
-#: ../class/m_dom.php:1402
+#: ../class/m_dom.php:1404
 msgid ""
 "There is some forbidden characters in the sub domain (only A-Z 0-9 and - are"
 " allowed)"
 msgstr "Hay caracteres no permitidos en el subdominio (solo se permiten A-Z, 0-9 y -)"
 
-#: ../class/m_dom.php:1441 ../class/m_dom.php:1452
+#: ../class/m_dom.php:1443 ../class/m_dom.php:1454
 msgid "Cannot write to the destination folder"
 msgstr "No es posible escribir en el directorio de destino"
 
-#: ../class/m_dom.php:1538
+#: ../class/m_dom.php:1540
 msgid ""
 "The DNS of this domain do not match the server's DNS. Please change your "
 "domain's DNS before you install it again"
 msgstr "El DNS de este dominio no coincide con el DNS del servidor. Por favor, modifique el DNS de su dominio antes de volver a instalarlo"
 
-#: ../class/m_dom.php:1555
+#: ../class/m_dom.php:1557
 #, php-format
 msgid "The domain name %s does not exist"
 msgstr "El nombre de dominio %s no existe"
 
-#: ../class/m_dom.php:1571 ../class/m_dom.php:1576
+#: ../class/m_dom.php:1573 ../class/m_dom.php:1578
 msgid ""
 "There is no MX record pointing to this server, and you are asking us to host"
 " the mail here. Make sure to update your MX entries or no mail will be "
 "received"
 msgstr ""
 
-#: ../class/m_dom.php:1621 ../class/m_dom.php:1647
+#: ../class/m_dom.php:1623 ../class/m_dom.php:1649
 msgid "The IP address you entered is incorrect"
 msgstr "La dirección IP indicada es incorrecta"
 
-#: ../class/m_dom.php:1743 ../class/m_dom.php:1749 ../class/m_dom.php:1766
-#: ../class/m_dom.php:1772
+#: ../class/m_dom.php:1745 ../class/m_dom.php:1751 ../class/m_dom.php:1768
+#: ../class/m_dom.php:1774
 msgid "This domain is not installed in your account"
 msgstr "El dominio no está instalado en su cuenta"
 
-#: ../class/m_dom.php:1816
+#: ../class/m_dom.php:1818
 msgid "The specified slave account already exists"
 msgstr ""
 
-#: ../class/m_dom.php:1844
+#: ../class/m_dom.php:1846
 msgid "--- Program error --- Lock already obtained!"
 msgstr "---Error programa--- Bloqueo ya realizado!"
 
-#: ../class/m_dom.php:2214
+#: ../class/m_dom.php:2203
 #, php-format
 msgid ""
 "Problem on %s: there is more than 1 web configuration going to be generated "
 "for this sub-domain."
 msgstr ""
 
-#: ../class/m_dom.php:2223
+#: ../class/m_dom.php:2212
 #, php-format
 msgid "Problem on %s: we do not know domain's type <b>%s</b>."
 msgstr "Problema en %s: tipo de dominio <b>%s</b> no conocido."
 
-#: ../class/m_dom.php:2235
+#: ../class/m_dom.php:2224
 msgid "Locally hosted"
 msgstr "Hospedado localmente"
 
-#: ../class/m_dom.php:2236
+#: ../class/m_dom.php:2225
 msgid "URL redirection"
 msgstr "Dirigir hacia una URL"
 
-#: ../class/m_dom.php:2237
+#: ../class/m_dom.php:2226
 msgid "IPv4 redirect"
 msgstr "Redirección IPv4"
 
-#: ../class/m_dom.php:2238
+#: ../class/m_dom.php:2227
 msgid "Webmail access"
 msgstr "Acceso Webmail"
 
-#: ../class/m_dom.php:2239
+#: ../class/m_dom.php:2228
 msgid "Squirrelmail Webmail access"
 msgstr "Acceso a Squirrelmail Webmail"
 
-#: ../class/m_dom.php:2240
+#: ../class/m_dom.php:2229
 msgid "Roundcube Webmail access"
 msgstr "Acceso a Roundcube Webmail"
 
-#: ../class/m_dom.php:2241
+#: ../class/m_dom.php:2230
 msgid "IPv6 redirect"
 msgstr "Redirección IPv6"
 
-#: ../class/m_dom.php:2242
+#: ../class/m_dom.php:2231
 msgid "CNAME DNS entry"
 msgstr ""
 
-#: ../class/m_dom.php:2243
+#: ../class/m_dom.php:2232
 msgid "TXT DNS entry"
 msgstr "Entrada TXT DNS"
 
-#: ../class/m_dom.php:2244
+#: ../class/m_dom.php:2233
 msgid "MX DNS entry"
 msgstr "Entrada MX DNS "
 
-#: ../class/m_dom.php:2245
+#: ../class/m_dom.php:2234
 msgid "secondary MX DNS entry"
 msgstr "Entrada secundaria MX DNS"
 
-#: ../class/m_dom.php:2246
+#: ../class/m_dom.php:2235
 msgid "Default mail server"
 msgstr "Servidor de correo predeterminado"
 
-#: ../class/m_dom.php:2247
+#: ../class/m_dom.php:2236
 msgid "Default backup mail server"
 msgstr "Servidor de email de respaldo predeterminado"
 
-#: ../class/m_dom.php:2248
+#: ../class/m_dom.php:2237
 msgid "AlternC panel access"
 msgstr "Panel de control de AlternC"
 
@@ -5724,6 +5825,10 @@ msgstr "err_"
 #: ../class/m_ftp.php:55 ../class/m_ftp.php:472
 msgid "FTP accounts"
 msgstr "Cuentas FTP"
+
+#: ../class/m_ftp.php:65
+msgid "Create a new ftp account"
+msgstr "Crear una nueva cuenta FTP"
 
 #: ../class/m_ftp.php:110
 msgid "This account do not exist or is not of this account"
@@ -5767,8 +5872,8 @@ msgid "Password can't be empty"
 msgstr "La clave no puede estar vacia"
 
 #: ../class/m_ftp.php:411
-msgid "Your FTP account quota is over. You cannot create more ftp accounts"
-msgstr "Alcanzaste el limite de tu cuota de cuentas FTP, no se pueden crear más."
+msgid "Your FTP account quota is over. You cannot create more FTP accounts"
+msgstr ""
 
 #: ../class/m_hta.php:45
 msgid "Protected folders"
@@ -5934,61 +6039,49 @@ msgstr "No se encontró el esclavo cuenta MX"
 msgid "Problem: can't create default bounce mail"
 msgstr ""
 
-#: ../class/m_mem.php:91 ../class/m_mem.php:97 ../class/m_mem.php:174
-#: ../class/m_mem.php:317
+#: ../class/m_mem.php:92 ../class/m_mem.php:98 ../class/m_mem.php:175
+#: ../class/m_mem.php:323
 msgid "User or password incorrect"
 msgstr "Usuario o contraseña incorrecta."
 
-#: ../class/m_mem.php:101 ../class/m_mem.php:452 ../class/m_mem.php:496
+#: ../class/m_mem.php:102 ../class/m_mem.php:450 ../class/m_mem.php:494
 msgid "This account is locked, contact the administrator."
 msgstr "Esta cuenta está bloqueada, en contacto con el administrador."
 
-#: ../class/m_mem.php:108 ../class/m_mem.php:286
+#: ../class/m_mem.php:109 ../class/m_mem.php:293
 msgid ""
 "This website is currently under maintenance, login is currently disabled."
 msgstr "Este sitio web esta en mantenimiento, los ingresos estan desactivados"
 
-#: ../class/m_mem.php:127
+#: ../class/m_mem.php:128
 msgid "Your IP isn't allowed to connect"
 msgstr "Su IP no tiene acceso permitido"
 
-#: ../class/m_mem.php:259
+#: ../class/m_mem.php:266
 msgid "Missing password"
 msgstr "Clave perdida"
 
-#: ../class/m_mem.php:271 ../class/m_mem.php:279
+#: ../class/m_mem.php:278 ../class/m_mem.php:286
 msgid "Identity lost or unknown, please login"
 msgstr "Identidad perdida o desconocida, por favor ingresa nuevamente"
 
-#: ../class/m_mem.php:361
-msgid "Cookie incorrect, please accept the session cookie"
-msgstr "Cookie incorrecto, tu navegador tiene que aceptar los cookies."
-
-#: ../class/m_mem.php:367
-msgid "Session unknown, contact the administrator"
-msgstr "Sesión inexistente, contacta al administrador."
-
-#: ../class/m_mem.php:372
-msgid "IP address incorrect, please contact the administrator"
-msgstr "IP incorrecta, contacta al administrador."
-
-#: ../class/m_mem.php:398
+#: ../class/m_mem.php:396
 msgid "You are not allowed to change your password."
 msgstr "No estás autorizado a cambiar tu contraseña."
 
-#: ../class/m_mem.php:402
+#: ../class/m_mem.php:400
 msgid "The old password is incorrect"
 msgstr "La antigua contraseña es incorrecta."
 
-#: ../class/m_mem.php:406 ../class/m_mem.php:457
+#: ../class/m_mem.php:404 ../class/m_mem.php:455
 msgid "The new passwords are differents, please retry"
 msgstr "Las dos versiones de la nueva contraseña son distintas."
 
-#: ../class/m_mem.php:431
+#: ../class/m_mem.php:429
 msgid "You must be a system administrator to do this."
 msgstr "Debe ser un administrador del sistema para ello."
 
-#: ../class/m_mem.php:460
+#: ../class/m_mem.php:458
 #, php-format
 msgid ""
 "Hello,\n"
@@ -6011,7 +6104,7 @@ msgid ""
 "Cordially.\n"
 msgstr ""
 
-#: ../class/m_mem.php:506
+#: ../class/m_mem.php:504
 #, php-format
 msgid ""
 "Hello,\n"
@@ -6034,7 +6127,7 @@ msgid ""
 "Cordially.\n"
 msgstr ""
 
-#: ../class/m_mem.php:548
+#: ../class/m_mem.php:546
 msgid "The information you entered is incorrect."
 msgstr "Los datos proporcionados son incorrectos."
 
