@@ -58,7 +58,7 @@ $avelsieve_backend = 'ManageSieve';
  */
 
 global $sieveport;
-$sieveport = 2000;
+$sieveport = 4190;
 
 /**
  * @var string Space separated list of preferred SASL mechanisms for the
