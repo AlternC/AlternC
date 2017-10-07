@@ -396,7 +396,6 @@ class m_bro {
         global $db, $cuid, $msg;
         $file = ssla($file);
         $absolute = $this->convertabsolute($dir . "/" . $file, false);
-        #echo "$absolute";
         if ($absolute && (!file_exists($absolute))) {
             if (!mkdir($absolute, 00777, true)) {
                 $msg->raise("ERROR", "bro", _("Cannot create the requested directory. Please check the permissions"));
@@ -567,7 +566,6 @@ class m_bro {
                     $m = $m & (~ 0222); // ugo-w
                 }
                 $action->chmod($absolute . "/" . $d[$i], $m);
-                echo "chmod " . sprintf('%o', $m) . " file, was " . sprintf('%o', fileperms($absolute . "/" . $d[$i])) . " -- " . $perm[$i]['w'];
             }
         }
         // We'd like to *wait* for this to complete, but since this is essentially asynchronous, we can't be sure easily
