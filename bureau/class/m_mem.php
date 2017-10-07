@@ -85,6 +85,7 @@ class m_mem {
     function login($username, $password, $restrictip = 0, $authip_token = false) {
         global $db, $msg, $cuid, $authip;
         $msg->log("mem", "login", $username);
+	if ($msg->has_msgs("ERROR")) return false;
 
         $db->query("select * from membres where login= ? ;", array($username));
         if ($db->num_rows() == 0) {
@@ -254,6 +255,12 @@ class m_mem {
      */
     function checkid($show_msg = true) {
         global $db, $msg, $cuid;
+
+	// We may go here *twice* when login fails. We prevent this with a static variable;
+	static $already=false;
+	if ($already) return false;
+	$already=true;
+
         if (isset($_REQUEST["username"])) {
             if (empty($_REQUEST['password'])) {
                 $msg->raise("ERROR", "mem", _("Missing password"));
@@ -354,27 +361,19 @@ class m_mem {
         setcookie("session", "", 0, "/");
         setcookie("oldid", "", 0, "/");
         if ($_COOKIE["session"] == "") {
-            $msg->init_msgs();
             return true;
         }
         if (strlen($_COOKIE["session"]) != 32) {
-            $msg->raise("ERROR", "mem", _("Cookie incorrect, please accept the session cookie"));
             return false;
         }
         $ip = get_remote_ip();
         $db->query("select uid, ? as me,ip from sessions where sid= ? ;", array($ip, $_COOKIE["session"]));
         if ($db->num_rows() == 0) {
-            $msg->raise("ERROR", "mem", _("Session unknown, contact the administrator"));
             return false;
         }
         $db->next_record();
-        if ($db->f("me") != $db->f("ip")) {
-            $msg->raise("ERROR", "mem", _("IP address incorrect, please contact the administrator"));
-            return false;
-        }
         $cuid = $db->f("uid");
         $db->query("delete from sessions where sid= ? ;", array($_COOKIE["session"]));
-        $msg->init_msgs();
 
         $hooks->invoke("alternc_del_session");
 
