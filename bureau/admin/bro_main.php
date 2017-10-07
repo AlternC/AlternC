@@ -33,8 +33,8 @@ include_once ("head.php");
 
 $fields = array (
     "R"           => array ("request", "string", ""),
-    "o"           => array ("request", "array", ""),
-    "d"           => array ("request", "array", ""),
+    "o"           => array ("request", "array", array()),
+    "d"           => array ("request", "array", array()),
     "perm"        => array ("post",    "array", array()),
     "formu"       => array ("post", "integer", ""),
     "actextract"  => array ("request", "string", ""),
@@ -97,7 +97,7 @@ if (!empty($formu) && $formu) {
                 $msg->raise("INFO", "bro", _("The file '%s' was successfully deleted"), $v);
 	    }
           }
-        } elseif (empty($cancel) && is_array($d)) {
+        } elseif (empty($cancel) && count($d)) {
           include_once("head.php");
           ?>
             <h3><?php printf(_("Deleting files and/or directories")); ?> : </h3>
@@ -124,7 +124,7 @@ if (!empty($formu) && $formu) {
           exit();
         }
       }
-      if ($actcopy) {
+      if ($actcopy && count($d)) {
         if ($bro->CopyFile($d,$R,$actmoveto)) {
 	  if (count($d) == 1) {
 	    if (is_dir($absolute . "/" . $d[0]))
@@ -135,7 +135,7 @@ if (!empty($formu) && $formu) {
             $msg->raise("INFO", "bro", _("The files / folders were successfully copied"));
         }
       }
-      if ($actmove) {
+      if ($actmove && count($d)) {
         if ($bro->MoveFile($d,$R,$actmoveto)) {
 	  if (count($d) == 1) {
 	    if (is_dir($absolute . "/" . $d[0]))
