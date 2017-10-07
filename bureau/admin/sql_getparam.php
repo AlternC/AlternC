@@ -97,10 +97,7 @@ if ($r[Rights] == 'All') {
 	</tr>
 	<tr>
 		<td colspan="2" align="center">
-                  <a href="/sql_pma_sso.php" target="_blank"><?php __("Web interface PhpMyAdmin"); ?></a>
-                  <p>
-                  <code>http://<?php echo $L_FQDN; ?>/alternc-sql/</code>
-                  </p>
+                  <a href="/sql_pma_sso.php?db=<?php echo $dbname; ?>" target="_blank"><?php __("Click here to access PhpMyAdmin interface"); ?></a>
                 </td>
 	</tr>
 <?php

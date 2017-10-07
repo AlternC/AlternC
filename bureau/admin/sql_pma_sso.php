@@ -29,6 +29,12 @@
 */
 require_once("../class/config.php");
 
+$fields = array (
+	"id"     => array ("request", "string", ""),
+);
+getFields($fields);
+
+
 if ($r=$mysql->php_myadmin_connect()) {
   // SSO of PhpMyAdmin
   $_SESSION['PMA_single_signon_user'] = $r["login"];
@@ -39,8 +45,16 @@ if ($r=$mysql->php_myadmin_connect()) {
   // Forget any standard phpmyadmin session
   setcookie("phpMyAdmin", "", time() - 3600);
 
+  if ($id!="") {
+    $r=$mysql->get_mysql_details($id); 
+    if ($r) {
+      $db="?db=".$id;
+    }
+  } else {
+    $db="";
+  }
   // finally redirect to phpMyAdmin :
-  header("Location: /alternc-sql/index.php");
+  header("Location: /alternc-sql/index.php".$db);
   exit();
 }
 
