@@ -164,7 +164,7 @@ if (!empty($formu) && $formu) {
       }
       break;
     case 7:  // Changement de permissions [ML]
-      if ($bro->ChangePermissions($R, $d)) {
+      if ($bro->ChangePermissions($R, $d, $perm)) {
 	$msg->raise("INFO", "bro", _("The permissions were successfully set"));
       }
       break;
