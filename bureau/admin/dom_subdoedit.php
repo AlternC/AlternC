@@ -33,7 +33,7 @@ $fields = array (
 	"domain"    => array ("post", "string", ""),
 	"sub"       => array ("post", "string", ""),
 	"type"      => array ("post", "string", $dom->type_local),
-  	"sub_domain_id" => array ("post", "integer", ""),
+  	"sub_domain_id" => array ("post", "integer", 0),
 );
 getFields($fields);
 
@@ -61,9 +61,14 @@ $r=$dom->set_sub_domain($domain,$sub,$type,$value, $sub_domain_id);
 $dom->unlock();
 
 if (!$r) {
-  $noread=true;
-  include("dom_subedit.php"); 
-  exit();
+  if ($sub_domain_id!=0) {
+    $noread=true;
+    include("dom_subedit.php"); 
+  } else {
+    // it was a creation, not an edit
+    include("dom_edit.php");
+  }
+    exit();
 } else {
   $t = time();
   // XXX: we assume the cron job is at every 5 minutes

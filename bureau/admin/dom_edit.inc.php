@@ -32,7 +32,7 @@ $dom->unlock();
         <tr>
             <td>
             <input type="hidden" name="domain" value="<?php ehe($domain) ?>" />
-            <input type="hidden" name="sub_domain_id" value="<?php ehe($sub_domain_id); ?>" />
+            <input type="hidden" name="sub_domain_id" value="<?php echo intval($sub_domain_id); ?>" />
             <input type="hidden" name="action" value="add" />
   <?php
    if ($isedit) {

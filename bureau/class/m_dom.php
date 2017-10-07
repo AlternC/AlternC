@@ -1339,9 +1339,11 @@ class m_dom {
      * @param string $sub SUBdomain 
      * @return boolean tell you if the subdomain can be installed there 
      */
-    function can_create_subdomain($dom, $sub, $type, $sub_domain_id = 'null') {
+    function can_create_subdomain($dom, $sub, $type, $sub_domain_id = 0) {
         global $db, $msg;
-        $msg->log("dom", "can_create_subdomain", $dom . "/" . $sub);
+
+	$sub_domain_id=intval($sub_domain_id);
+        $msg->log("dom", "can_create_subdomain", $dom . "/" . $sub . "/" .$type . "/" . $sub_domain_id);
 
         // Get the compatibility list for this domain type
         $db->query("select upper(compatibility) as compatibility from domaines_type where upper(name)=upper(?);", array($type));
@@ -1382,7 +1384,7 @@ class m_dom {
      *  de $type (url, ip, dossier...)
      * @return boolean Retourne FALSE si une erreur s'est produite, TRUE sinon.
      */
-    function set_sub_domain($dom, $sub, $type, $dest, $sub_domain_id = null) {
+    function set_sub_domain($dom, $sub, $type, $dest, $sub_domain_id = 0) {
         global $db, $msg, $cuid, $bro;
         $msg->log("dom", "set_sub_domain", $dom . "/" . $sub . "/" . $type . "/" . $dest);
         // Locked ?
@@ -1420,12 +1422,12 @@ class m_dom {
             return false;
         }
 
-        if (!is_null($sub_domain_id) && !empty($sub_domain_id)) { // It's not a creation, it's an edit. Delete the old one
+        if ($sub_domain_id!=0) { // It's not a creation, it's an edit. Delete the old one
             $this->del_sub_domain($sub_domain_id);
         }
 
         // Re-create the one we want
-        if (!$db->query("replace into sub_domaines (compte,domaine,sub,valeur,type,web_action) values (?, ?, ?, ?, ?, 'UPDATE');", array( $cuid , $dom , $sub , $dest , $type ))) {
+        if (!$db->query("INSERT INTO sub_domaines (compte,domaine,sub,valeur,type,web_action) VALUES (?, ?, ?, ?, ?, 'UPDATE');", array( $cuid , $dom , $sub , $dest , $type ))) {
             echo "query failed: " . $db->Error;
             return false;
         }

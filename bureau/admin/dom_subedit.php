@@ -32,7 +32,7 @@ include_once("head.php");
 
 
 $fields = array (
-	"sub_domain_id"    => array ("request", "integer", ""),
+	"sub_domain_id"    => array ("request", "integer", 0),
 );
 getFields($fields);
 
