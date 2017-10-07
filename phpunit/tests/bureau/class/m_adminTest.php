@@ -472,15 +472,4 @@ class m_adminTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    /**
-     * @covers m_admin::hook_upnp_list
-     * @todo   Implement testHook_upnp_list().
-     */
-    public function testHook_upnp_list()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
 }

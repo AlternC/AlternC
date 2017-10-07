@@ -235,12 +235,4 @@ class m_ftpTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    /**
-     * @covers m_ftp::hook_upnp_list
-     * @todo   Implement testHook_upnp_list().
-     */
-    public function testHook_upnp_list()
-    {
-        $this->assertArrayHasKey('ftp', $this->object->hook_upnp_list());
-    }
 }

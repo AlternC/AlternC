@@ -785,18 +785,6 @@ class m_domTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers m_dom::hook_upnp_list
-     * @todo   Implement testHook_upnp_list().
-     */
-    public function testHook_upnp_list()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
      * @covers m_dom::get_problems
      * @todo   Implement testGet_problems().
      */
