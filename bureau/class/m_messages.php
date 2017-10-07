@@ -89,6 +89,7 @@ class m_messages {
      * Reset the stored messages array
      */
     function init_msgs() {
+        //	$me=debug_backtrace();  $this->log("messages", "init_msgs from ".$me[1]["class"].".".$me[1]["function"]);	
         foreach ($this->ARRLEVEL as $v) {
             $this->arrMessages[$v] = array();
         }

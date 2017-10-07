@@ -208,7 +208,7 @@ if (!defined('NOCHECK')) {
 for ($i = 0; $i < count($classes); $i++) {
     $name2 = $classes[$i];
     if (isset($$name2))
-        continue; // for already instancied class like mem, err or authip
+        continue; // for already instancied class like mem, msg or authip
     $name1 = "m_" . $name2;
     $$name2 = new $name1();
 }

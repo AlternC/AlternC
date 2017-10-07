@@ -297,7 +297,6 @@ class m_mem {
         $db->query("select * from membres where uid= ? ;", array($cuid));
         $db->next_record();
         $this->user = $db->Record;
-        $msg->init_msgs();
 
         /* Fills $local */
         $db->query("SELECT * FROM local WHERE uid= ? ;", array($cuid));
