@@ -41,7 +41,7 @@ if (!$res=$mysql->get_dblist()) {
 $res=$mysql->get_defaultsparam($dbname);
 
 ?>
-<h3><?php __("MySQL Databases"); ?></h3>
+<h3><?php printf(_("MySQL settings for database '%s'"),$dbname); ?></h3>
 <hr id="topbar"/>
 <br />
 <?php

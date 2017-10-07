@@ -35,7 +35,7 @@ $fields = array (
 );
 getFields($fields);
 ?>
-<h3><?php printf(_("MySQL Rights for %s"),$id) ?></h3>
+<h3><?php printf(_("Manage MySQL rights for user '%s'"),$id) ?></h3>
 <hr id="topbar"/>
 <br />
 <?php
@@ -55,8 +55,7 @@ if ($r) {
 <input type="hidden" name="id" value="<?php ehe($id); ?>" />
 <table cellspacing="0" cellpadding="4" class="tlist ombrage">
    <tr class="petit">
-     <th>&nbsp;</th>
-     <th>&nbsp;</th>
+    <th colspan="2"><?php __("Database"); ?></th>
      <th>SELECT</th>
      <th>INSERT</th>
      <th>UPDATE</th>
