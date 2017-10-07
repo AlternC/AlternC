@@ -66,7 +66,8 @@ else
 				{
 					$api_data = $piwik->site_set_user_right($site_id, $user_name, $right);
 					if ($api_data === FALSE)
-						$msg->raise("ERROR", "piwik", $api_data->message)
+						$msg->raise("ERROR", "piwik", $api_data->message);
+						$msg->raise("ERROR", "piwik", $api_data->message);
 					else
 						$msg->raise("INFO", "piwik", _('success'));
 				}
