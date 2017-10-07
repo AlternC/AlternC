@@ -1084,14 +1084,14 @@ class m_dom {
             fclose($fp);
         } else {
             $msg->raise("ALERT", "dom", _("The Whois database is unavailable, please try again later"));
-            return false;
+            return array();
         }
 
         if ($found) {
             return $serveurList;
         } else {
             $msg->raise("ALERT", "dom", _("The domain cannot be found in the Whois database"));
-            return false;
+            return array();
         }
     } // whois
 
