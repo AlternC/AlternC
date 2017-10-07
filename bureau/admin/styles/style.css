@@ -136,6 +136,9 @@ pre {
   vertical-align: middle;
   line-height: 15px;
 }
+input.ui-state-hover {
+    font-weight: normal;
+}
 
 span.inb {
   display: inline-block;

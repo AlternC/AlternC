@@ -61,7 +61,8 @@ echo "</p>";
   <?php csrf_get(); ?>
 <input type="hidden" name="id" value="<?php ehe($id); ?>" />
 <p><label for="restfile"><?php __("Please enter the path and the filename containing SQL data to be restored."); ?></label></p>
-<p><input type="text" class="int" id="restfile" name="restfile" size="35" maxlength="255" value="<?php ehe($filename); ?>" /> <input class="inb" type="submit" name="submit" onClick='return restfilenotempty();' value="<?php __("Restore my database"); ?>" /><i><?php __("Tip: you can restore a file directly in the File Browser");?></i></p>
+<p><input type="text" class="int" id="restfile" name="restfile" size="35" maxlength="255" value="<?php ehe($filename); ?>" /> <input class="inb" type="submit" name="submit" onClick='return restfilenotempty();' value="<?php __("Restore my database"); ?>" /><i>
+<br /><?php __("Tip: you can restore a file directly in the File Browser");?></i></p>
 </form>
 <script type="text/javascript">
   function restfilenotempty() {
