@@ -50,7 +50,6 @@ if($mysql->add_db($dbname)) {
   $msg->raise("INFO", "mysql", _("The database '%s' has been created."),$dbname);
 }
 
-#header('Location: sql_getparam.php?dbname='.htmlentities($dbname));
-include("sql_list.php");
+header('Location: sql_getparam.php?dbname='.htmlentities($dbname));
 
 ?>
