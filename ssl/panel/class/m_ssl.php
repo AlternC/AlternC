@@ -149,7 +149,7 @@ class m_ssl {
             }
             return $r;
         } else {
-            $msg->raise("ERROR", "ssl", _("No SSL certificates available"));
+            $msg->raise("INFO", "ssl", _("No SSL certificates available"));
             return array();
         }
     }
@@ -172,7 +172,7 @@ class m_ssl {
             }
             return $r;
         } else {
-            $msg->raise("ERROR","ssl", _("You currently have no hosting using SSL certificate"));
+            $msg->raise("INFO","ssl", _("You currently have no hosting using SSL certificate"));
             return array();
         }
     }
