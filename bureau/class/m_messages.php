@@ -237,7 +237,7 @@ class m_messages {
 
         @file_put_contents(
             $this->logfile, 
-            date("d/m/Y H:i:s") . " - " . get_remote_ip() . " - $level - " . $mem->user["login"] . " - " . $str,
+            date("d/m/Y H:i:s") . " - " . get_remote_ip() . " - $level - " . $mem->user["login"] . " - " . $str . "\n",
             FILE_APPEND
         );
     }
