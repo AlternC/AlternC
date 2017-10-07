@@ -149,7 +149,7 @@ class m_ssl {
             }
             return $r;
         } else {
-            $msg->raise("ssl", _("No SSL certificates available"));
+            $msg->raise("ERROR", "ssl", _("No SSL certificates available"));
             return array();
         }
     }
@@ -172,7 +172,7 @@ class m_ssl {
             }
             return $r;
         } else {
-            $msg->raise("ssl", _("You currently have no hosting using SSL certificate"));
+            $msg->raise("ERROR","ssl", _("You currently have no hosting using SSL certificate"));
             return array();
         }
     }
@@ -193,18 +193,18 @@ class m_ssl {
             $f = $fqdn;
         }
         if (checkfqdn($f)) {
-            $msg->raise("ssl", _("Bad FQDN domain name"));
+            $msg->raise("ERROR","ssl", _("Bad FQDN domain name"));
             return false;
         }
         putenv("OPENSSL_CONF=/etc/alternc/openssl.cnf");
         $pkey = openssl_pkey_new();
         if (!$pkey) {
-            $msg->raise("ssl", _("Can't generate a private key (1)"));
+            $msg->raise("ERROR","ssl", _("Can't generate a private key (1)"));
             return false;
         }
         $privKey = "";
         if (!openssl_pkey_export($pkey, $privKey)) {
-            $msg->raise("ssl", _("Can't generate a private key (2)"));
+            $msg->raise("ERROR","ssl", _("Can't generate a private key (2)"));
             return false;
         }
         $dn = array("commonName" => $fqdn);
@@ -215,7 +215,7 @@ class m_ssl {
         openssl_csr_export($csr, $csrout);
         $db->query("INSERT INTO certificates SET uid='$cuid', status=" . self::STATUS_PENDING . ", shared=0, fqdn='" . addslashes($fqdn) . "', altnames='', validstart=NOW(), sslcsr='" . addslashes($csrout) . "', sslkey='" . addslashes($privKey) . "';");
         if (!($id = $db->lastid())) {
-            $msg->raise("ssl", _("Can't generate a CSR"));
+            $msg->raise("ERROR","ssl", _("Can't generate a CSR"));
             return false;
         }
         return $id;
@@ -231,7 +231,7 @@ class m_ssl {
         $id = intval($id);
         $db->query("SELECT *, UNIX_TIMESTAMP(validstart) AS validstartts, UNIX_TIMESTAMP(validend) AS validendts FROM certificates WHERE (uid='$cuid' OR (shared=1 AND status=" . self::STATUS_OK . ") ) AND id='$id';");
         if (!$db->next_record()) {
-            $msg->raise("ssl", _("Can't find this Certificate"));
+            $msg->raise("ERROR","ssl", _("Can't find this Certificate"));
             return false;
         }
         return $db->Record;
@@ -247,7 +247,7 @@ class m_ssl {
         $id = intval($id);
         $db->query("SELECT * FROM certificates WHERE uid='$cuid' AND id='$id';");
         if (!$db->next_record()) {
-            $msg->raise("ssl", _("Can't find this Certificate"));
+            $msg->raise("ERROR","ssl", _("Can't find this Certificate"));
             return false;
         }
         $fqdn = $db->Record["fqdn"];
@@ -270,7 +270,7 @@ class m_ssl {
         $id = intval($id);
         $db->query("SELECT * FROM certificates WHERE uid='$cuid' AND status=" . self::STATUS_OK . " AND id='$id';");
         if (!$db->next_record()) {
-            $msg->raise("ssl", _("Can't find this Certificate"));
+            $msg->raise("ERROR","ssl", _("Can't find this Certificate"));
             return false;
         }
         if ($action) {
@@ -336,7 +336,7 @@ class m_ssl {
 
         $result = $this->check_cert($crt, $chain, $key);
         if ($result === false) {
-            $msg->raise("ssl", $this->error);
+            $msg->raise("ERROR","ssl", $this->error);
             return false;
         }
         list($crt, $chain, $key, $crtdata) = $result;
@@ -350,7 +350,7 @@ class m_ssl {
         $sql = "INSERT INTO certificates SET uid='$cuid', status=" . self::STATUS_OK . ", shared=0, fqdn='" . addslashes($fqdn) . "', altnames='" . addslashes($altnames) . "', validstart=FROM_UNIXTIME(" . intval($validstart) . "), validend=FROM_UNIXTIME(" . intval($validend) . "), sslkey='" . addslashes($key) . "', sslcrt='" . addslashes($crt) . "', sslchain='" . addslashes($chain) . "';";
         $db->query($sql);
         if (!($id = $db->lastid())) {
-            $msg->raise("ssl", _("Can't save the Key/Crt/Chain now. Please try later."));
+            $msg->raise("ERROR","ssl", _("Can't save the Key/Crt/Chain now. Please try later."));
             return false;
         }
         $this->updateTrigger($fqdn, $altnames);
@@ -374,7 +374,7 @@ class m_ssl {
         $certid = intval($certid);
         $result = $this->check_cert($crt, $chain, "", $certid);
         if ($result === false) {
-            $msg->raise("ssl", $this->error);
+            $msg->raise("ERROR","ssl", $this->error);
             return false;
         }
         list($crt, $chain, $key, $crtdata) = $result;
@@ -387,7 +387,7 @@ class m_ssl {
         // Everything is PERFECT and has been thoroughly checked, let's insert those in the DB !
         $sql = "UPDATE certificates SET status=" . self::STATUS_OK . ", shared=0, fqdn='" . addslashes($fqdn) . "', altnames='" . addslashes($altnames) . "', validstart=FROM_UNIXTIME(" . intval($validstart) . "), validend=FROM_UNIXTIME(" . intval($validend) . "), sslcrt='" . addslashes($crt) . "', sslchain='" . addslashes($chain) . "' WHERE id='$certid' ;";
         if (!$db->query($sql)) {
-            $msg->raise("ssl", _("Can't save the Crt/Chain now. Please try later."));
+            $msg->raise("ERROR","ssl", _("Can't save the Crt/Chain now. Please try later."));
             return false;
         }
         $this->updateTrigger($fqdn, $altnames);
@@ -623,7 +623,7 @@ class m_ssl {
         global $msg, $cuid, $db;
         $db->query("SELECT name FROM certif_alias WHERE name='" . addslashes($name) . "';");
         if ($db->next_record()) {
-            $msg->raise("ssl", _("Alias already exists"));
+            $msg->raise("ERROR","ssl", _("Alias already exists"));
             return false;
         }
         $db->query("INSERT INTO certif_alias SET name='" . addslashes($name) . "', content='" . addslashes($content) . "', uid=" . intval($cuid) . ";");
@@ -642,7 +642,7 @@ class m_ssl {
         global $msg, $cuid, $db;
         $db->query("SELECT name FROM certif_alias WHERE name='" . addslashes($name) . "' AND uid=" . intval($cuid) . ";");
         if (!$db->next_record()) {
-            $msg->raise("ssl", _("Alias not found"));
+            $msg->raise("ERROR","ssl", _("Alias not found"));
             return false;
         }
         $db->query("DELETE FROM certif_alias WHERE name='" . addslashes($name) . "' AND uid=" . intval($cuid) . ";");
@@ -779,12 +779,12 @@ class m_ssl {
         putenv("OPENSSL_CONF=/etc/alternc/openssl.cnf");
         $pkey = openssl_pkey_new();
         if (!$pkey) {
-            $msg->raise("ssl", _("Can't generate a private key (1)"));
+            $msg->raise("ERROR","ssl", _("Can't generate a private key (1)"));
             return false;
         }
         $privKey = "";
         if (!openssl_pkey_export($pkey, $privKey)) {
-            $msg->raise("ssl", _("Can't generate a private key (2)"));
+            $msg->raise("ERROR","ssl", _("Can't generate a private key (2)"));
             return false;
         }
         $dn = array("commonName" => $fqdn);
