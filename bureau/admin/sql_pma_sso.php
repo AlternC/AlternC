@@ -35,6 +35,10 @@ if ($r=$mysql->php_myadmin_connect()) {
   $_SESSION['PMA_single_signon_password'] = $r["pass"];
   $_SESSION['PMA_single_signon_host'] = $r["host"]; // pma >= 2.11
   session_write_close();
+
+  // Forget any standard phpmyadmin session
+  setcookie("phpMyAdmin", "", time() - 3600);
+
   // finally redirect to phpMyAdmin :
   header("Location: /alternc-sql/index.php");
   exit();
