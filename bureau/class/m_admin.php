@@ -103,7 +103,7 @@ class m_admin {
             )
         );
 
-        if ($cuid == 2000) {
+        if ($cuid == 2000) { // only ADMIN, not available to subadmins
             $obj['links'][] = array(
                 'txt' => _("Admin Control Panel"),
                 'url' => 'adm_panel.php',
@@ -466,7 +466,7 @@ class m_admin {
         $creators = array();
 
         $msg->log("admin", "get_reseller_list");
-        if (!$this->enabled || $cuid != 2000) {
+        if (!$this->enabled) {
             $msg->raise("ERROR", "admin", _("-- Only administrators can access this page! --"));
             return false;
         }
@@ -1371,7 +1371,7 @@ class m_admin {
      */
     function getadmin() {
         global $db;
-        $db->query("SELECT login FROM membres WHERE uid = '2000';");
+        $db->query("SELECT login FROM membres WHERE uid=2000;");
         $db->next_record();
         return $db->f("login");
     }
