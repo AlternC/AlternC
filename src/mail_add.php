@@ -30,13 +30,13 @@ function usage() {
   global $argv;
   // putting {$argv[0]} or $argv[0] in the heredoc fails
   $wtfphp = $argv[0];
-  $u = <<<EOF
+  $u = '
 Usage: $wtfphp <email> <alias> ...
 
 email: full email adress, including domain, which must exist
 alias: one or many aliases the email should forward to, space separated
 
-EOF;
+';
   error_log($u);
   exit(1);
 }
@@ -81,7 +81,7 @@ if (is_null($password)) {
 $quotas = $default_quotas;
 $r = join(", ", $recipients);
 
-print <<<EOF
+print '
 user: $user
 domain: $domain
 compte: $compte
@@ -89,7 +89,7 @@ password: $password
 quota: $default_quotas
 recipients: $r
 
-EOF;
+';
 
 if ($dryrun) {
   error_log('not creating email because of $dryrun is true');
