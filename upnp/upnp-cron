@@ -1,3 +1,0 @@
-
-# This shell script configures the UPnP client if necessary:
-* * * * *	root /usr/lib/alternc/update_upnp.sh

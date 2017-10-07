@@ -28,7 +28,7 @@ build:
 # gettext are built at runtime, to be able to MERGE them from CORE + MODULES before msgfmt
 
 install: 
-#install-alternc install-squirrelmail install-roundcube install-upnp install-awstats
+#install-alternc install-squirrelmail install-roundcube install-awstats
 
 # install AlternC files common between ALTERNC and ALTERNC-SLAVE
 install-common:
@@ -83,9 +83,6 @@ install-roundcube:
 
 install-squirrelmail:
 	make -C squirrelmail install DESTDIR=$(DESTDIR) 
-
-install-upnp:
-	make -C upnp install DESTDIR=$(DESTDIR) 
 
 install-api:
 	make -C api install DESTDIR=$(DESTDIR) 

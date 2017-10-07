@@ -1528,20 +1528,6 @@ class m_admin {
         return true; // congratulations ! 
     }
 
-    /**
-     * hook function called by AlternC-upnp to know which open 
-     * tcp or udp ports this class requires or suggests
-     * 
-     * @access private
-     * @return array a key => value list of port protocol name mandatory values
-     */
-    function hook_upnp_list() {
-        return array(
-            "http" => array("port" => 80, "protocol" => "tcp", "mandatory" => 1),
-            "https" => array("port" => 443, "protocol" => "tcp", "mandatory" => 0),
-            "ssh" => array("port" => 22, "protocol" => "tcp", "mandatory" => 0),
-        );
-    }
 
 }
 

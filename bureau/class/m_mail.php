@@ -1062,23 +1062,5 @@ ORDER BY
     }
 
 
-    /** 
-     * hook function called by AlternC-upnp to know which open 
-     * tcp or udp ports this class requires or suggests
-     * @return array a key => value list of port protocol name mandatory values
-     * @access private
-     */
-    function hook_upnp_list() {
-        return array(
-            "imap" => array("port" => 143, "protocol" => "tcp", "mandatory" => 1),
-            "imaps" => array("port" => 993, "protocol" => "tcp", "mandatory" => 1),
-            "pop" => array("port" => 110, "protocol" => "tcp", "mandatory" => 1),
-            "pops" => array("port" => 995, "protocol" => "tcp", "mandatory" => 1),
-            "smtp" => array("port" => 25, "protocol" => "tcp", "mandatory" => 1),
-            "sieve" => array("port" => 2000, "protocol" => "tcp", "mandatory" => 1),
-            "submission" => array("port" => 587, "protocol" => "tcp", "mandatory" => 0),
-        );
-    }
-
 
 } /* Class m_mail */

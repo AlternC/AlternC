@@ -2175,19 +2175,6 @@ class m_dom {
     }
 
 
-    /** hook function called by AlternC-upnp to know which open 
-     * tcp or udp ports this class requires or suggests
-     * @return array a key => value list of port protocol name mandatory values
-     * @access private
-     */
-    function hook_upnp_list() {
-        return array(
-            "dns-tcp" => array("port" => 53, "protocol" => "tcp", "mandatory" => 1),
-            "dns-udp" => array("port" => 53, "protocol" => "udp", "mandatory" => 1),
-        );
-    }
-
-
     /** 
      * List if there is problems in the domains.
      *  Problems can appear when editing domains type properties
