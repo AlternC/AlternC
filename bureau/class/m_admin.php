@@ -690,8 +690,8 @@ class m_admin {
             return false;
         }
         if ($db->next_record()) {
-            // TODO: put that string into gettext ! 
-            $mail = <<<EOF
+            // TODO: put that string into gettext !
+            $mail = '
                 A new AlternC account was created on %fqdn by %creator.
 
                 Account details
@@ -703,7 +703,7 @@ class m_admin {
                 can change password: %canpass
                 type: %type
                 notes: %notes
-                EOF;
+                ';
             $mail = strtr($mail, array('%fqdn' => $L_FQDN,
             '%creator' => $db->Record['parentlogin'],
             '%uid' => $db->Record['uid'],
