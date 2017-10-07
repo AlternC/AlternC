@@ -20,7 +20,6 @@ smtpd_client_connection_rate_limit=50
 # alternate MX after receiving 4XX SMTP replies introduced
 # in "[Incompat 20031223]")  
 smtp_mx_session_limit = 1
-
 #### TLS options
 smtpd_use_tls = yes
 smtpd_tls_dcert_file = /etc/alternc/apache.pem
