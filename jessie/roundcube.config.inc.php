@@ -76,6 +76,7 @@ $config['plugins'] = array(
 'archive',
 'zipdownload',
 'managesieve',
+'password'
 );
 
 // skin name: folder from skins/
