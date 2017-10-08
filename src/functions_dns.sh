@@ -76,7 +76,7 @@ dns_named_conf() {
     # (the zone file is already created and populated)
     $RNDC reconfig
     # Hook it !
-    run-parts --arg=dns_reconfig  /usr/lib/alternc/reload.d
+    run-parts --arg=dns_reconfig --arg="$domain" /usr/lib/alternc/reload.d
   fi
 
 }
@@ -104,7 +104,7 @@ dns_delete() {
   # Ask the dns server for restart
   $RNDC reconfig
   # Hook it !
-  run-parts --arg=dns_reconfig  /usr/lib/alternc/reload.d
+  run-parts --arg=dns_reconfig --arg="$domain" /usr/lib/alternc/reload.d
 }
 
 # DNS regenerate
