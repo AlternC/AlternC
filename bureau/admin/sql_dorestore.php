@@ -1,13 +1,5 @@
 <?php
 /*
- $Id: sql_dorestore.php,v 1.4 2004/08/31 14:25:50 anonymous Exp $
- ----------------------------------------------------------------------
- AlternC - Web Hosting System
- Copyright (C) 2002 by the AlternC Development Team.
- http://alternc.org/
- ----------------------------------------------------------------------
- Based on:
- Valentin Lacambre's web hosting softwares: http://altern.org/
  ----------------------------------------------------------------------
  LICENSE
 
@@ -23,10 +15,14 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file: Benjamin Sonntag
- Purpose of file: Manage the MySQL Restore
- ----------------------------------------------------------------------
 */
+
+/** 
+ * restore (do it) a MySQL database
+ *
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/
+ */
+
 require_once("../class/config.php");
 
 include_once("head.php");
@@ -57,8 +53,8 @@ if (! $r["enabled"]) {
 <p>
 <?php
 if ($mysql->restore($restfile,true,$id))  {
-  $msg->raise("INFO", "mysql", _("Your database has been restored, check out the previous text for error messages."));
-} // if mysql->restore
+  $msg->raise("INFO", "mysql", _("Your database have been restored, check out the previous text for error messages."));
+}
 
 echo $msg->msg_html_all();
 ?>

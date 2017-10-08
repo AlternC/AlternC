@@ -1,13 +1,5 @@
 <?php
 /*
- $Id: piwik_addaccount.php,v 1.5 2006/01/12 01:10:48 anarcat Exp $
- ----------------------------------------------------------------------
- AlternC - Web Hosting System
- Copyright (C) 2002 by the AlternC Development Team.
- http://alternc.org/
- ----------------------------------------------------------------------
- Based on:
- Valentin Lacambre's web hosting softwares: http://altern.org/
  ----------------------------------------------------------------------
  LICENSE
 
@@ -23,10 +15,14 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file: Benjamin Sonntag
- Purpose of file: Ask the required values to add a ftp account
- ----------------------------------------------------------------------
 */
+
+/**
+ * Add a piwik website using piwik's API
+ *
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/
+ */
+
 require_once("../class/config.php");
 include_once("head.php");
 

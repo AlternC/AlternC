@@ -1,13 +1,5 @@
 <?php
 /*
- $Id: sql_users_add.php,v 1.5 2004/05/19 14:23:06 nahuel Exp $
- ----------------------------------------------------------------------
- AlternC - Web Hosting System
- Copyright (C) 2002 by the AlternC Development Team.
- http://alternc.org/
- ----------------------------------------------------------------------
- Based on:
- Valentin Lacambre's web hosting softwares: http://altern.org/
  ----------------------------------------------------------------------
  LICENSE
 
@@ -23,10 +15,14 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file: Nahuel ANGELINETTI
- Purpose of file:
- ----------------------------------------------------------------------
 */
+
+/**
+ * Form to add a MySQL user account
+ * 
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/
+ */
+
 require_once("../class/config.php");
 include_once("head.php");
 
@@ -54,10 +50,6 @@ if (isset($fatal) && $fatal) {
 ?>
 <form method="post" action="sql_users_doadd.php" id="main" name="main" autocomplete="off">
   <?php csrf_get(); ?>
-
-<!-- honeypot fields -->
-<input type="text" style="display: none" id="fakeUsername" name="fakeUsername" value="" />
-<input type="password" style="display: none" id="fakePassword" name="fakePassword" value="" />
 
 <table class="tedit">
 <tr>

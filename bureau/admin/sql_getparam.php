@@ -1,13 +1,5 @@
 <?php
 /*
- $Id: sql_getparam.php,v 1.4 2005/05/27 20:10:18 arnaud-lb Exp $
- ----------------------------------------------------------------------
- AlternC - Web Hosting System
- Copyright (C) 2002 by the AlternC Development Team.
- http://alternc.org/
- ----------------------------------------------------------------------
- Based on:
- Valentin Lacambre's web hosting softwares: http://altern.org/
  ----------------------------------------------------------------------
  LICENSE
 
@@ -23,10 +15,15 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file: Benjamin Sonntag
- Purpose of file: Return the current SQL settings
- ----------------------------------------------------------------------
 */
+
+/**
+ * Show the settings (may be plural) available 
+ * to access a MySQL database for an account
+ * 
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/
+ */
+
 require_once("../class/config.php");
 include_once("head.php");
 
@@ -84,9 +81,10 @@ if(isset($r['user'])){
 		<td><code><?php echo $r['password']; ?></code></td>
 	</tr>
 	<tr>
-		<th>Droits de l'utilisateur</th>
+    <th><?php __("User Rights"); ?></th>
 <?php
-// On teste la valeur de retour 'Rights' afin de savoir si cet utilisateur à tous les droits ou seulement certains et on place le bouton "Gestion des droits"
+
+// We test the  'Rights' value to know if this user have all or only specific rights.
 if ($r["Rights"] == 'All') {
 	$rights = "Tous";
 } else {
@@ -110,10 +108,13 @@ if(!isset($r['user'])){
 }
 ?>
 <br>
-<?php } // Fin foreach ?>
+<?php
+} // end foreach 
+?>
 <p><span class="ina back"><a href="sql_list.php"><?php __("Back to the MySQL database list"); ?></a></span></p>
 
 
 <?php
- include_once("foot.php"); ?>
+ include_once("foot.php"); 
+?>
 

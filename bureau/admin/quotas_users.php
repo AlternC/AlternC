@@ -1,4 +1,27 @@
 <?php
+/*
+ ----------------------------------------------------------------------
+ LICENSE
+
+ This program is free software; you can redistribute it and/or
+ modify it under the terms of the GNU General Public License (GPL)
+ as published by the Free Software Foundation; either version 2
+ of the License, or (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ To read the license please visit http://www.gnu.org/copyleft/gpl.html
+ ----------------------------------------------------------------------
+*/
+
+/** 
+ * Display the quotas of one or some users
+ * 
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/
+ */
 
 require_once("../class/config.php");
 
@@ -51,7 +74,7 @@ echo "<br /><br />"; printf(_("If you want to manage them, go to")."&nbsp;<a hre
 </p>
 
 <?php if ($mode == 4) {
-	// Mode : affichage des donn�es globales
+	// Mode : global display 
 
 	if ($cuid != 2000)
 	{
@@ -159,7 +182,7 @@ echo "<br /><br />"; printf(_("If you want to manage them, go to")."&nbsp;<a hre
 </div>
 </center>
 <?php } elseif ($usr==0) {
-  // Mode : affichage de tous les comptes
+  // Mode : display all accounts
 
  function sortlink($txt,$asc,$desc) {
    global $order,$mode,$sd,$usr;
@@ -263,7 +286,7 @@ foreach ($membres_list as $c) {
   
   $one=$c;
 
-  // On affiche le compte et ses domaines :
+  // We show account AND domains
   $domaines_list = $dom->enum_domains($c["uid"]);
   $dc=0; // Domain Count
   $ms=0; // Mail Space
@@ -335,7 +358,7 @@ foreach ($all as $c) {
 
   echo "<tr><td>";
 
-  // On affiche le compte et ses domaines :
+  // We show all accounts and domains
   echo "<b><a href=\"quotas_users.php?mode=".$mode."&sd=".$sd."&usr=".$c["uid"]."\">".$c["login"]."</a></b><br />\n";
   $domaines_list = $dom->enum_domains($c["uid"]);
   $dc=0; // Domain Count
@@ -351,7 +374,7 @@ foreach ($all as $c) {
   $mailsize=$quota->get_size_unit($ms);
   $mailmansize=$quota->get_size_unit($mls * 1024);
 
-  // Espace WEB
+  // WEB space quota
   $ws = $c["websize"];
   $webspace=$quota->get_size_unit($ws * 1024);
   if (isset($totalweb) && $totalweb){
@@ -372,14 +395,13 @@ if ($mode==0) {
 } elseif ($mode==1) {
   echo sprintf("%.1f",$pc)."&nbsp;%";
 } else {
-  #echo "<img src=\"images/hippo_bleue.gif\" style=\"width: ".(1*$pc)."px; height: 16px\" alt=\"".$pc."%\" title=\"".$pc."\"/>";
   $quota->quota_displaybar($pc);
 }
   echo "</td><td";
   if ($mode!=2) echo " style=\"text-align: right\"";
   echo ">";
 
-  // Espace Mail :
+  // Mail space quota
 
 if ($totalmail)
 	$pc=intval(100*$ms/$totalmail);
@@ -391,7 +413,6 @@ if ($mode==0) {
 } elseif ($mode==1) {
   echo sprintf("%.1f",$pc)."&nbsp;%";
 } else {
-  #echo "<img src=\"images/hippo_bleue.gif\" style=\"width: ".(1*$pc)."px; height: 16px\" alt=\"".$pc."%\" title=\"".$pc."%\"/>";
   $quota->quota_displaybar($pc);
 }
 
@@ -399,7 +420,7 @@ if ($mode==0) {
   if ($mode!=2) echo " style=\"text-align: right\"";
   echo ">";
 
-  // Espace Mailman :
+  // Mailman space quota
 if ($totallist)
 	$pc=intval(100*$mls/$totallist);
 else
@@ -410,7 +431,6 @@ if ($mode==0) {
 } elseif ($mode==1) {
   echo sprintf("%.1f",$pc)."&nbsp;%";
 } else {
-  #echo "<img src=\"images/hippo_bleue.gif\" style=\"width: ".(1*$pc)."px; height: 16px\" alt=\"".$pc."%\" title=\"".$pc."%\"/>";
   $quota->quota_displaybar($pc);
 }
 
@@ -418,7 +438,7 @@ echo "</td><td";
 if ($mode!=2) echo " style=\"text-align: right\"";
 echo ">";
 
-// Espace DB :
+// MySQL db space
 $ds = $c["dbsize"];
 $dbsize=$quota->get_size_unit($ds);
 
@@ -432,14 +452,14 @@ if ($mode==0) {
 } elseif ($mode==1) {
 	echo sprintf("%.1f",$pc)."&nbsp;%";
 } else {
-	#echo "<img src=\"images/hippo_bleue.gif\" style=\"width: ".(1*$pc)."px; height: 16px\" alt=\"".$pc."%\" title=\"".$pc."%\"/>";
-        $quota->quota_displaybar($pc);
+    $quota->quota_displaybar($pc);
 }
 
 echo "</td><td";
 if ($mode!=2) echo " style=\"text-align: right\"";
 echo ">";
 
+// Total space 
 $ts=$c["totalsize"];
 $totalsize=$quota->get_size_unit($ts * 1024);
 if ($mode==0) {
@@ -452,7 +472,6 @@ if ($mode==0) {
   } else {
     $pc=0;
   }
-	#echo "<img src=\"images/hippo_bleue.gif\" style=\"width: ".(1*$pc)."px; height: 16px\" alt=\"".$pc."%\" title=\"".$pc."%\"/>";
 	$quota->quota_displaybar($pc);
 }
 
@@ -471,7 +490,7 @@ echo "</tr>";
 </div>
 </center>
 <?php
-    } else { // Mode affichage d'UN seul compte
+    } else { // Display only ONE accoutn
 
     $oneuser_ok = false;
 	if ($cuid != 2000) {
@@ -487,11 +506,11 @@ echo "</tr>";
         }
 	}
 
-    if ($oneuser_ok) {  # quotas_oneuser.php will used prefilled $c
+    if ($oneuser_ok) {  // quotas_oneuser.php will used prefilled $c
 	  define("QUOTASONE","1");
 	  require_once("quotas_oneuser.php");
     }
 
-    } // endif un seul compte
+    } // endif only one account
 ?>
 <?php include_once("foot.php"); ?>

@@ -1,13 +1,5 @@
 <?php
 /*
- $Id: sql_admin.php,v 1.4 2005/05/27 21:30:38 arnaud-lb Exp $
- ----------------------------------------------------------------------
- AlternC - Web Hosting System
- Copyright (C) 2002 by the AlternC Development Team.
- http://alternc.org/
- ----------------------------------------------------------------------
- Based on:
- Valentin Lacambre's web hosting softwares: http://altern.org/
  ----------------------------------------------------------------------
  LICENSE
 
@@ -23,10 +15,14 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file:
- Purpose of file:
- ----------------------------------------------------------------------
 */
+
+/** 
+ * Launch a PhpMyAdmin session using PMA's SSO system
+ * 
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/
+ */
+
 require_once("../class/config.php");
 
 $fields = array (
@@ -42,7 +38,7 @@ if ($r=$mysql->php_myadmin_connect()) {
   $_SESSION['PMA_single_signon_host'] = $r["host"]; // pma >= 2.11
   session_write_close();
 
-  // Forget any standard phpmyadmin session
+  // Destroy any existing phpmyadmin session
   setcookie("phpMyAdmin", "", time() - 3600);
 
   if ($id!="") {

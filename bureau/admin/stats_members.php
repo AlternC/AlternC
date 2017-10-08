@@ -1,13 +1,5 @@
 <?php
 /*
- $Id: stats_show_per_month.php,v 1.6 2005/08/02 14:56:51 anarcat Exp $
- ----------------------------------------------------------------------
- AlternC - Web Hosting System
- Copyright (C) 2002 by the AlternC Development Team.
- http://alternc.org/
- ----------------------------------------------------------------------
- Based on:
- Valentin Lacambre's web hosting softwares: http://altern.org/
  ----------------------------------------------------------------------
  LICENSE
 
@@ -23,10 +15,14 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file:
- Purpose of file:
- ----------------------------------------------------------------------
 */
+
+/**
+ * Show the statistics of all members.
+ *
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/
+ */
+
 @require_once("../class/config.php");
 if ((@include_once 'Image/Graph.php') === FALSE) {
   echo "<p class=\"alert alert-warning\">". _("Image_Graph not installed. use 'aptitude install php-pear' then 'pear install --alldeps Image_Graph-devel' to see the graph.")."</p>";

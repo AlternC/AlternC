@@ -1,10 +1,6 @@
 <?php
 /*
  ----------------------------------------------------------------------
- AlternC - Web Hosting System
- Copyright (C) 2000-2012 by the AlternC Development Team.
- https://alternc.org/
- ----------------------------------------------------------------------
  LICENSE
 
  This program is free software; you can redistribute it and/or
@@ -18,8 +14,6 @@
  GNU General Public License for more details.
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
- ----------------------------------------------------------------------
- Purpose of file: Show a message when there is no webmail configured
  ----------------------------------------------------------------------
 */
 

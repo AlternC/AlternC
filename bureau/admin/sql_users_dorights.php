@@ -1,13 +1,5 @@
 <?php
 /*
- $Id: sql_users_dorights.php,v 1.8 2006/02/16 16:26:28 nahuel Exp $
- ----------------------------------------------------------------------
- AlternC - Web Hosting System
- Copyright (C) 2002 by the AlternC Development Team.
- http://alternc.org/
- ----------------------------------------------------------------------
- Based on:
- Valentin Lacambre's web hosting softwares: http://altern.org/
  ----------------------------------------------------------------------
  LICENSE
 
@@ -23,12 +15,15 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file: Nahuel ANGELINETTI
- Purpose of file: Manage the MySQL users of a member
- ----------------------------------------------------------------------
 */
-require_once("../class/config.php");
 
+/**
+ * Manages the MySQL users Rights
+ * 
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/
+ */
+
+ require_once("../class/config.php");
 
 $fields = array (
   "id"        => array ("post", "string", ""),

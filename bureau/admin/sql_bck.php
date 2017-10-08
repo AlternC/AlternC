@@ -1,13 +1,5 @@
 <?php
 /*
- $Id: sql_bck.php,v 1.8 2003/10/09 00:54:58 root Exp $
- ----------------------------------------------------------------------
- AlternC - Web Hosting System
- Copyright (C) 2002 by the AlternC Development Team.
- http://alternc.org/
- ----------------------------------------------------------------------
- Based on:
- Valentin Lacambre's web hosting softwares: http://altern.org/
  ----------------------------------------------------------------------
  LICENSE
 
@@ -23,10 +15,14 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file: Benjamin Sonntag
- Purpose of file: Manage the MySQL Backup
- ----------------------------------------------------------------------
 */
+
+/** 
+ * Form to manage MySQL database backup for an account
+ *
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/
+ */
+
 require_once("../class/config.php");
 include_once("head.php");
 
@@ -108,10 +104,10 @@ if (is_array($r)) {
 </form>
 <?php
 	$mem->show_help("sql_bck");
-	} else {
-  echo "<p>";
-__("You currently have no database defined");
- echo "</p>";
-	}
+} else {
+    echo "<p>";
+    __("You currently have no database defined");
+    echo "</p>";
+}
 ?>
 <?php include_once("foot.php"); ?>

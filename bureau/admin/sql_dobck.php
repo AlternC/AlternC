@@ -1,13 +1,5 @@
 <?php
 /*
- $Id: sql_dobck.php,v 1.3 2003/06/10 07:20:29 root Exp $
- ----------------------------------------------------------------------
- AlternC - Web Hosting System
- Copyright (C) 2002 by the AlternC Development Team.
- http://alternc.org/
- ----------------------------------------------------------------------
- Based on:
- Valentin Lacambre's web hosting softwares: http://altern.org/
  ----------------------------------------------------------------------
  LICENSE
 
@@ -23,10 +15,15 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file: Benjamin Sonntag
- Purpose of file: Manage the MySQL Backup
- ----------------------------------------------------------------------
 */
+
+/**
+ * Receive the post for the management of the Backup
+ * of MySQL database
+ *
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/
+ */
+
 require_once("../class/config.php");
 
 if ( ! variable_get('sql_allow_users_backups') ) {

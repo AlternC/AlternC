@@ -1,13 +1,5 @@
 <?php
 /*
- $Id: piwik_userlist.php, author: François Serman <fser>
- ----------------------------------------------------------------------
- AlternC - Web Hosting System
- Copyright (C) 2002 by the AlternC Development Team.
- http://alternc.org/
- ----------------------------------------------------------------------
- Based on:
- Valentin Lacambre's web hosting softwares: http://altern.org/
  ----------------------------------------------------------------------
  LICENSE
 
@@ -22,8 +14,6 @@
  GNU General Public License for more details.
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
- ----------------------------------------------------------------------
- Purpose of file: Admin piwik users right for piwik sites
  ----------------------------------------------------------------------
 */
 
