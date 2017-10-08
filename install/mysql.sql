@@ -755,16 +755,15 @@ CREATE TABLE IF NOT EXISTS `alternc_status` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT = 'stores current AlternC schema version number';
 
 
-
-
+-- csrf token table
 CREATE TABLE IF NOT EXISTS `csrf` (
   `cookie` char(32) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
   `token` char(32) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
   `created` datetime NOT NULL,
-  `used` tinyint(3) unsigned NOT NULL DEFAULT '0'
+  `used` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`cookie`,`token`),
+  KEY `created` (`created`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='csrf tokens for AlternC forms';
-
-ALTER TABLE `csrf` ADD PRIMARY KEY (`cookie`,`token`), ADD KEY `created` (`created`);
 
 
 -- make it re-exec-proof
