@@ -286,7 +286,7 @@ then
     ln -fs /etc/alternc/alternc.ini /etc/php/$php/cli/conf.d/alternc.ini || true
 else
     ln -fs /etc/alternc/alternc.ini /etc/php$php/apache2/conf.d/alternc.ini || true
-    ln -fs /etc/alternc/alternc.ini /etcphp/$php/cli/conf.d/alternc.ini || true
+    ln -fs /etc/alternc/alternc.ini /etc/php$php/cli/conf.d/alternc.ini || true
 fi
 
 if [ -x /usr/sbin/apache2 ]; then
