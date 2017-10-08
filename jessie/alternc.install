@@ -636,7 +636,7 @@ done
 # Fix some perms
 # Fix phpmyadmin import trac#1557
 test -d "/var/lib/phpmyadmin/tmp" && dpkg-statoverride --update --add www-data alterncpanel 0775 "/var/lib/phpmyadmin/tmp" 2>/dev/null || true
-test -d "/etc/phpmyadmin/config-db.php" && dpkg-statoverride --update --add www-data alterncpanel 0644 "/etc/phpmyadmin/config-db.php" 2>/dev/null || true
+test -f "/etc/phpmyadmin/config-db.php" && dpkg-statoverride --update --add www-data alterncpanel 0644 "/etc/phpmyadmin/config-db.php" 2>/dev/null || true
 
 # hook 
 run-parts --arg=end /usr/lib/alternc/install.d 
