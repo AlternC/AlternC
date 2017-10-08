@@ -8,7 +8,7 @@ This software consist of an automatic install and configuration system, a web co
 
 Technically, AlternC is based on Debian GNU/Linux distribution and it depends on other software such as Apache, Postfix, Dovecot, Mailman (...). It also contains an API documentation so that users can easily customize their web desktop.
 
-This project native tongue is French. However, the packages are available at least in French and English. 
+This project native tongue is French, and the code is commented in English. The packages are available at least in French and English, German and Spanish interfaces are usually available too.
 
 
 ## Installation
@@ -24,7 +24,7 @@ This project native tongue is French. However, the packages are available at lea
 * If you want to **build it for Wheezy**, clone the source and patch it for Wheezy using [wheezy/patch.sh](wheezy/patch.sh) script. You'll be able to use dpkg-buildpackage to build the Wheezy version.
 * If you want to **build it for Jessie**, clone the source and patch it for Wheezy using [wheezy/patch.sh](wheezy/patch.sh) script then patch it for Jessie using [jessie/patch.sh](jessie/patch.sh) script. You'll be able to use dpkg-buildpackage to build the Jessie version.
 
-* The web control panel pages written in php are located in [bureau/admin](bureau/admin) and the associated PHP classes doing the stuff are in [bureau/class](bureau/class).
+* The web control panel pages written in PHP are located in [bureau/admin](bureau/admin) and the associated PHP classes doing the stuff are in [bureau/class](bureau/class).
 
 ## Nightly build
 
