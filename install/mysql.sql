@@ -242,7 +242,7 @@ CREATE TABLE IF NOT EXISTS `address` (
   `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- Update date, for technical usage only.
   `mail_action` enum('OK','DELETE','DELETING') NOT NULL default 'OK', -- mail_action is DELETE or DELETING when deleting a mailbox by cron
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `fk_domain_id` (`domain_id`,`address`)
+  UNIQUE INDEX `fk_domain_id` (`domain_id`,`address`(190))
 ) ENGINE=InnoDB COMMENT = 'This is the main address table. It represents an address as in RFC2822';
 
 --
@@ -312,7 +312,7 @@ INSERT IGNORE INTO defquotas (quota,value) VALUES ('mysql',1);
 
 CREATE TABLE IF NOT EXISTS forbidden_domains (
   domain varchar(255) NOT NULL default '',
-  PRIMARY KEY  (domain)
+  PRIMARY KEY  (domain(190))
 ) ENGINE=InnoDB COMMENT='forbidden domains to install';
 
 --
@@ -345,6 +345,7 @@ INSERT IGNORE INTO forbidden_domains VALUES ('yahoo.fr');
 INSERT IGNORE INTO forbidden_domains VALUES ('gmail.com');
 INSERT IGNORE INTO forbidden_domains VALUES ('orange.fr');
 INSERT IGNORE INTO forbidden_domains VALUES ('sfr.fr');
+INSERT IGNORE INTO forbidden_domains VALUES ('free.fr');
 
 --
 -- Structure de la table `tld`
@@ -427,7 +428,7 @@ CREATE TABLE IF NOT EXISTS `size_web` (
 
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `size_db` (
-  `db` varchar(255) NOT NULL default '',
+  `db` varchar(128) NOT NULL default '',
   `size` int(10) unsigned NOT NULL default '0',
   `ts` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY  (`db`),
@@ -440,7 +441,7 @@ CREATE TABLE IF NOT EXISTS `size_mailman` (
   `uid` int(11) NOT NULL default '0',
   `size` int(10) unsigned NOT NULL default '0',
   `ts` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
-  PRIMARY KEY  (`list`),
+  PRIMARY KEY  (`list`(190)),
   KEY `ts` (`ts`),
   KEY `uid` (`uid`)
 ) ENGINE=InnoDB COMMENT='Mailman Lists used space';
@@ -700,7 +701,7 @@ CREATE TABLE IF NOT EXISTS `default_subdomains` (
   `concerned` enum('BOTH','MAIN','SLAVE') NOT NULL DEFAULT 'MAIN',
   `enabled` boolean not null default true,
   PRIMARY KEY  (`id`),
-  UNIQUE KEY `unique_row` (`sub`,`domain_type`,`domain_type_parameter`,`concerned`)
+  UNIQUE KEY `unique_row` (`sub`(60),`domain_type`,`domain_type_parameter`(60),`concerned`)
 ) ENGINE=InnoDB COMMENT='Contains the defaults subdomains created on domains creation';
 
 INSERT IGNORE INTO `default_subdomains` (`sub`, `domain_type`, `domain_type_parameter`, `concerned`) VALUES
