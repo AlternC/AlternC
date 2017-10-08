@@ -46,10 +46,6 @@ if (!empty($help_setting)) {
 ?>
 <div align="center"><h3><?php __("Settings of your account"); ?></h3></div>
 <?php
-if ($msg->has_msgs("ERROR")) {
-	include_once("mem_param.php");
-	exit();
-}
 
 $c=$admin->listPasswordPolicies();
 $passwd_classcount = $c['mem']['classcount'];
