@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AlternC, hosting control panel\n"
 "Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
-"POT-Creation-Date: 2013-10-18 11:47+0200\n"
+"POT-Creation-Date: 2017-10-08 14:47+0200\n"
 "PO-Revision-Date: 2013-02-08 14:51+0000\n"
 "Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
 "Language-Team: English <dev@alternc.org>\n"
@@ -17,13 +17,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. Type: note
+#. Type: error
 #. Description
 #: ../alternc.templates:1001
 msgid "AlternC need ACL on filesystem"
 msgstr ""
 
-#. Type: note
+#. Type: error
 #. Description
 #: ../alternc.templates:1001
 msgid ""
@@ -31,12 +31,20 @@ msgid ""
 "currently not enabled."
 msgstr ""
 
-#. Type: note
+#. Type: error
 #. Description
 #: ../alternc.templates:1001
 msgid ""
 "Also, you need to activate group quota (grpquota) to be able to use disk "
 "quota (but that's not mandatory)."
+msgstr ""
+
+#. Type: error
+#. Description
+#. Type: error
+#. Description
+#: ../alternc.templates:1001 ../alternc.templates:36001
+msgid "This is a fatal error and will cause the package installation to fail."
 msgstr ""
 
 #. Type: note
@@ -534,8 +542,8 @@ msgstr ""
 #. Description
 #: ../alternc.templates:33001
 msgid ""
-"No local Mysql server was found. Please confirm you want to use a remote "
-"Mysql Server. If not, AlternC cannot be installed."
+"Please confirm you want to use a remote Mysql Server. If not, AlternC cannot "
+"be installed."
 msgstr ""
 
 #. Type: boolean
@@ -564,6 +572,18 @@ msgid ""
 "The IP address of the machine appears to be private, please confirm that "
 "this is an expected situation, since the server might not be reachable from "
 "outside your network."
+msgstr ""
+
+#. Type: error
+#. Description
+#: ../alternc.templates:36001
+msgid "Remote mysql: connection error"
+msgstr ""
+
+#. Type: error
+#. Description
+#: ../alternc.templates:36001
+msgid "Connection to the remote MySQL server failed."
 msgstr ""
 
 #. Type: string
