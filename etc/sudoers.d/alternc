@@ -1,2 +1,2 @@
-alterncpanel	ALL = NOPASSWD : /usr/bin/quota, /usr/sbin/setquota, /usr/lib/alternc/fixperms.sh, /usr/lib/alternc/mem_add, /usr/lib/alternc/mem_del, /usr/lib/alternc/quota_edit, /usr/lib/alternc/quota_get, /usr/lib/alternc/du.pl, /usr/lib/alternc/update_mails.sh, /usr/sbin/repquota
+alterncpanel	ALL = NOPASSWD : /usr/bin/quota, /usr/sbin/setquota, /usr/lib/alternc/fixperms.sh, /usr/lib/alternc/mem_add, /usr/lib/alternc/mem_del, /usr/lib/alternc/quota_edit, /usr/lib/alternc/quota_get, /usr/bin/du, /usr/lib/alternc/update_mails.sh, /usr/sbin/repquota
 vmail		ALL = NOPASSWD : /usr/lib/dovecot/deliver
