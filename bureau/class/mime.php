@@ -20,6 +20,7 @@
 
 /**
  * Browser mime function to detect mime types and show icons or type names
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/
  */
 if (!IsSet($MIME_H)) {
     $MIME_H = 1;

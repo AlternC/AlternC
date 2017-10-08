@@ -1,14 +1,6 @@
 <?php
 
 /*
-  $Id: config_nochk.php,v 1.2 2004/11/04 06:56:49 anonymous Exp $
-  ----------------------------------------------------------------------
-  AlternC - Web Hosting System
-  Copyright (C) 2002 by the AlternC Development Team.
-  http://alternc.org/
-  ----------------------------------------------------------------------
-  Based on:
-  Valentin Lacambre's web hosting softwares: http://altern.org/
   ----------------------------------------------------------------------
   LICENSE
 
@@ -24,10 +16,8 @@
 
   To read the license please visit http://www.gnu.org/copyleft/gpl.html
   ----------------------------------------------------------------------
-  Original Author of file: Benjamin Sonntag
-  Purpose of file: General configuration file for AlternC Desktop
-  ----------------------------------------------------------------------
 */
+
 
 define('NOCHECK', 1);
 require_once("config.php");

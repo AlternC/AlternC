@@ -1,6 +1,28 @@
 <?php
 
+/*
+  ----------------------------------------------------------------------
+  LICENSE
 
+  This program is free software; you can redistribute it and/or
+  modify it under the terms of the GNU General Public License (GPL)
+  as published by the Free Software Foundation; either version 2
+  of the License, or (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  To read the license please visit http://www.gnu.org/copyleft/gpl.html
+  ----------------------------------------------------------------------
+*/
+
+/**
+ * bind9 file management class
+ * 
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/
+ */
 class system_bind {
     var $ZONE_TEMPLATE ="/etc/alternc/templates/bind/templates/zone.template";
     var $NAMED_TEMPLATE ="/etc/alternc/templates/bind/templates/named.template";
@@ -17,12 +39,6 @@ class system_bind {
     var $cache_domain_summary = array();
     var $zone_file_directory = '/var/lib/alternc/bind/zones/';
 
-    /**
-     * 
-     */
-    function system_bind() {
-        // Constructeur
-    }
 
     /**
      * Return the part of the conf we got from the database
@@ -62,6 +78,7 @@ class system_bind {
         return $this->cache_conf_db;
     }
 
+
     /**
      * Return full path of the zone configuration file
      * 
@@ -71,6 +88,7 @@ class system_bind {
     function get_zone_file_uri($domain) {
         return $this->zone_file_directory.$domain;
     }
+
 
     /**
      * 
@@ -88,6 +106,7 @@ class system_bind {
         }
         return $this->cache_zone_file[$domain] ;
     }
+
 
     /**
      * 
@@ -113,6 +132,7 @@ class system_bind {
         return max(array($calc,$old)) + 1 ;
     }
 
+
     /**
      * Return lines that are after ;;; END ALTERNC AUTOGENERATE CONFIGURATION
      * 
@@ -131,6 +151,7 @@ class system_bind {
         return $this->cache_get_persistent[$domain];
     }
   
+
     /**
      * 
      * @return string 
@@ -139,6 +160,7 @@ class system_bind {
         return file_get_contents($this->ZONE_TEMPLATE);
     }
   
+
     /**
      * 
      * @global m_dom $dom
@@ -157,6 +179,7 @@ class system_bind {
         else return $this->cache_domain_summary;
     }
 
+
     /**
      * 
      * @param string $domain
@@ -171,6 +194,7 @@ class system_bind {
         }
         return true;
     }
+
 
     /**
      * Generate the domain DKIM key
@@ -201,6 +225,7 @@ class system_bind {
 
         return true; // FIXME handle error
     }
+
 
     /**
      * Refresh DKIM configuration: be sure to list the domain having a private key (and only them)
@@ -259,6 +284,8 @@ class system_bind {
         }
 
     }
+
+
     /**
      * 
      * @param string $domain
@@ -272,6 +299,7 @@ class system_bind {
         }
         return @file_get_contents($keyfile);
     }
+
 
     /**
      * Conditionnal generation autoconfig entry for outlook / thunderbird
@@ -349,6 +377,7 @@ class system_bind {
         return $zone;
     }
 
+
     /**
      * 
      * @param string $domain
@@ -359,6 +388,7 @@ class system_bind {
             echo "ERROR: Reload zone failed for zone $domain\n";
         }
     }
+
 
     /**
      * return true if zone is locked
@@ -373,6 +403,7 @@ class system_bind {
         }
         return false;
     }  
+
 
     /**
      * 
@@ -401,6 +432,7 @@ class system_bind {
         return true; // fixme add tests
     }
 
+
     /**
      * Delete the zone configuration file
      * 
@@ -415,6 +447,7 @@ class system_bind {
         $this->dkim_delete($domain);
         return true;
     }
+
 
     /**
      * 
@@ -445,6 +478,7 @@ class system_bind {
 
         return true;
     }
+
 
     /**
      * Regenerate bind configuration and load it
@@ -478,6 +512,7 @@ class system_bind {
         return true;
     }
 
+
     /**
      * 
      */
@@ -485,7 +520,6 @@ class system_bind {
         _("The zone file of this domain is locked. Contact your administrator.");
     }
 
-} // class
 
+} /* Class system_bind */
 
-?>

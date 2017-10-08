@@ -26,6 +26,8 @@
  * address = any used email address will be defined here, mailbox = pop/imap mailboxes, recipient = redirection from an email to another
  * and indirectly the domain class, to know domain names from their id in the DB.
  * This class is also defining a few hooks, search ->invoke in the code.
+ * 
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/
  */
 class m_mail {
 

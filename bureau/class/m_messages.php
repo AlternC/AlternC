@@ -28,7 +28,7 @@
  * system in /var/log/alternc/bureau.log
  * </p>
  * 
- * @copyright    AlternC-Team  https://alternc.com/
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/
  */
 class m_messages {
 

@@ -19,8 +19,10 @@
 */
 
 /**
- * This class manage hooks.
+ * This class manage hooks that any other class or panel page can call.
+ * or hook to.
  * 
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/
  */
 class m_hooks {
 

@@ -2,10 +2,6 @@
 
 /*
   ----------------------------------------------------------------------
-  AlternC - Web Hosting System
-  Copyright (C) 2000-2012 by the AlternC Development Team.
-  https://alternc.org/
-  ----------------------------------------------------------------------
   LICENSE
 
   This program is free software; you can redistribute it and/or
@@ -20,26 +16,22 @@
 
   To read the license please visit http://www.gnu.org/copyleft/gpl.html
   ----------------------------------------------------------------------
-  Purpose of file: Manage hook system.
-  ----------------------------------------------------------------------
 */
 
 /**
  * This class manage web-cron tasks
+ * 
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/
  */
 class m_cron {
 
     const MAX_SOCKETS = 8;
     const DEFAULT_CAFILE = "/etc/ssl/certs/ca-certificates.crt";
 
-    /* --------------------------------------------------------------------------- */
 
-    /** Constructor
+    /**
+     * 
      */
-    function m_cron() {
-        
-    }
-
     function schedule() {
         return Array(
             Array('unit' => 1440, 'name' => _("Daily")),
@@ -48,9 +40,9 @@ class m_cron {
         );
     }
 
-    /* --------------------------------------------------------------------------- */
 
-    /** List the crontab for the current user.
+    /** 
+     * List the crontab for the current user.
      * @return array an hash for each crontab.
      */
     function lst_cron() {
@@ -72,6 +64,9 @@ class m_cron {
         return $r;
     }
 
+    /**
+     * Hook called by menu class to add menu to the left panel
+     */
     function hook_menu() {
         $obj = array(
             'title' => _("Scheduled tasks"),
@@ -83,9 +78,9 @@ class m_cron {
         return $obj;
     }
 
-    /* --------------------------------------------------------------------------- */
 
-    /** update the crontab 
+    /** 
+     * update the crontab 
      * @param $arr array the crontab information, including its ID
      * @return boolean TRUE if the crontab has been edited
      */
@@ -105,9 +100,9 @@ class m_cron {
         return $ok;
     }
 
-    /* --------------------------------------------------------------------------- */
 
-    /** delete a crontab 
+    /** 
+     * delete a crontab 
      * @param $id the id of the crontab to delete
      * @return boolean TRUE if the crontab has been deleted
      */
@@ -117,9 +112,9 @@ class m_cron {
         return $db->query("DELETE FROM cron WHERE id= ? AND uid= ? LIMIT 1;", array(intval($id), $cuid));
     }
 
-    /* --------------------------------------------------------------------------- */
 
-    /** update a crontab, 
+    /** 
+     * update a crontab, 
      * @return boolean TRUE if the crontab has been edited
      */
     private function _update_one($url, $user, $password, $email, $schedule, $id = null) {
@@ -171,9 +166,9 @@ class m_cron {
         return $db->query("REPLACE INTO cron (id, uid, url, user, password, schedule, email) VALUES (?, ?, ?, ?, ?, ?, ?) ;" , array($id, $cuid, $url, $user, $password, $schedule, $email));
     }
 
-    /* --------------------------------------------------------------------------- */
 
-    /** validate a crontab schedule
+    /** 
+     * validate a crontab schedule
      * @param $s array schedule paramters
      * @return boolean TRUE if the schedule is valid
      */
@@ -191,9 +186,9 @@ class m_cron {
         return $r;
     }
 
-    /* --------------------------------------------------------------------------- */
 
-    /** hook for quota computation
+    /** 
+     * hook for quota computation
      */
     function hook_quota_get() {
         global $cuid, $db, $msg;
@@ -206,7 +201,6 @@ class m_cron {
         return $q;
     }
 
-    /* --------------------------------------------------------------------------- */
 
     /**
      * Execute the required crontab of AlternC users
@@ -252,7 +246,6 @@ class m_cron {
         }
     }
 
-    /* --------------------------------------------------------------------------- */
 
     /**
      * Callback function called by rolling_curl when a cron resulr has been received
@@ -279,7 +272,6 @@ class m_cron {
         $db->query("UPDATE cron SET next_execution=FROM_UNIXTIME( UNIX_TIMESTAMP(NOW()) + schedule * 60) WHERE id= ?", array($id));
     }
 
-    /* --------------------------------------------------------------------------- */
 
     /**
      * Launch parallel (using MAX_SOCKETS sockets maximum) retrieval
@@ -398,6 +390,4 @@ class m_cron {
         return true;
     }
 
-}
-
-/* Class cron */
+} /* Class cron */

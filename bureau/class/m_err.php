@@ -19,7 +19,11 @@
 
 /**
  * Classe de gestion des erreurs apparaissant lors d'appels API.
- *
+ * 
+ * =================================================================
+ * DEPRECATION WARNING: DON'T USE THIS CLASS, USE M_MESSAGES INSTEAD
+ * =================================================================
+ * 
  * <p>Cette classe gère les erreurs qui peuvent apparaitre lors d'appels
  * à l'API d'AlternC. Ces erreurs sont stockées sous la forme de 2 nombres
  * (Classe ID et Numéro d'erreur) ainsi qu'un texte facultatif associé.

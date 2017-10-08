@@ -21,7 +21,7 @@
 /**
  * This class manage the left menu of AlternC
  * 
- * @copyright    AlternC-Team 2002-2005 http://alternc.org/
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/
  */
 class m_menu {
 

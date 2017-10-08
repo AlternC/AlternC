@@ -2,10 +2,6 @@
 
 /*
   ----------------------------------------------------------------------
-  AlternC - Web Hosting System
-  Copyright (C) 2000-2012 by the AlternC Development Team.
-  https://alternc.org/
-  ----------------------------------------------------------------------
   LICENSE
 
   This program is free software; you can redistribute it and/or
@@ -20,23 +16,21 @@
 
   To read the license please visit http://www.gnu.org/copyleft/gpl.html
   ----------------------------------------------------------------------
-  Purpose of file: Administrate members and rights.
-  ----------------------------------------------------------------------
 */
-
-/* ----------------------------------------------------------------- */
 
 /**
  * Manage the AlternC's account administration (create/edit/delete)
+ * 
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/
  */
 class m_admin {
-    /* ----------------------------------------------------------------- */
 
-    /** $enabled tells if the logged user is super-admin or not
+
+    /** 
+     * $enabled tells if the logged user is super-admin or not
      */
     var $enabled = 0;
 
-    /* ----------------------------------------------------------------- */
 
     /** List of the controls made for each TLD
      *
@@ -46,13 +40,14 @@ class m_admin {
     public $tldmode = array();
     var $archive = '';
 
+
     /**
      * Constructor
      * 
      * @global	type $db
      * @global	type $cuid
      */
-    function m_admin() {
+    function __construct() {
         global $db, $cuid;
         $db->query("SELECT su FROM membres WHERE uid=?;", array($cuid));
         $db->next_record();
@@ -69,8 +64,9 @@ class m_admin {
         $this->archive = variable_get('archive_del_data', '', 'If folder specified html folder of deleted user is archived, else it is deleted. ');
     }
 
+
     /**
-     * 
+     * Hook function called by the menu class to add menu to the left panel.
      * @global	type $mem
      * @global	type $cuid
      * @global	type $debug_alternc
@@ -140,6 +136,7 @@ class m_admin {
         return $obj;
     }
 
+
     /**
      * Password kind used in this class (hook for admin class)
      *
@@ -148,6 +145,7 @@ class m_admin {
     function alternc_password_policy() {
         return array("adm" => "Administration section");
     }
+
 
     /**
      * 
@@ -160,6 +158,7 @@ class m_admin {
             die();
         }
     }
+
 
     /**
      * return the uid of an alternc account
@@ -177,6 +176,7 @@ class m_admin {
         return $db->f('uid');
     }
 
+
     /**
      * return the name of an alternc account
      *
@@ -192,6 +192,7 @@ class m_admin {
         }
         return $db->f('login');
     }
+
 
     /**
      * Returns the known information about a hosted account
@@ -254,6 +255,7 @@ class m_admin {
         return $lst_users_properties[$uid];
     }
 
+
     /**
      * Returns the known information about a specific hosted account
      * 
@@ -303,6 +305,7 @@ class m_admin {
         return $c;
     }
 
+
     /**
      * 
      * @global	type $db
@@ -315,6 +318,7 @@ class m_admin {
         $db->next_record();
         return ($db->f("cnt") == 1);
     }
+
 
     /**
      * @TODO :EM: those request should have been escaped
@@ -406,6 +410,7 @@ class m_admin {
         }
     }
 
+
     /**
      * Send an email to all AlternC's accounts
      * 
@@ -449,6 +454,7 @@ class m_admin {
         return true;
     }
 
+
     /**
      * Returns an array with the known information about resellers (uid, login, number of accounts)
      * Does not include account 2000 in the list.
@@ -485,6 +491,7 @@ class m_admin {
         return $creators2;
     }
 
+
     /**
      * Check if I am the creator of the member $uid
      * 
@@ -508,6 +515,7 @@ class m_admin {
         }
         return true;
     }
+
 
     /**
      * When the admin want to delegate a subdomain to an account
@@ -551,7 +559,6 @@ class m_admin {
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
 
     /** Creates a new hosted account
      *  
@@ -668,6 +675,7 @@ class m_admin {
         }
     }
 
+
     /**
      * AlternC's standard function called when a user is created
      * This sends an email if configured through the interface.
@@ -726,6 +734,7 @@ class m_admin {
             return false;
         }
     }
+
 
     /**
      * Edit an account
@@ -789,6 +798,7 @@ class m_admin {
         }
     }
 
+
     /**
      * Lock an account
      * 
@@ -814,6 +824,7 @@ class m_admin {
             return false;
         }
     }
+
 
     /**
      * UnLock an account
@@ -842,7 +853,6 @@ class m_admin {
         }
     }
 
-    /* ----------------------------------------------------------------- */
 
     /** Deletes an account
      * Deletes the specified account. Prevents any manipulation of the account if
@@ -896,6 +906,7 @@ class m_admin {
         }
     }
 
+
     /**
      * Renew an account
      * 
@@ -921,6 +932,7 @@ class m_admin {
             return false;
         }
     }
+
 
     /**
      * Update the duration information for an account
@@ -949,6 +961,7 @@ class m_admin {
         return false;
     }
 
+
     /**
      * Get the expiry date for an account
      * 
@@ -963,7 +976,6 @@ class m_admin {
         return '';
     }
 
-    /* ----------------------------------------------------------------- */
 
     /**
      * Get the expiry status for an account
@@ -984,6 +996,7 @@ class m_admin {
 
         return 0;
     }
+
 
     /**
      * Get the expired/about to expire accounts.
@@ -1011,6 +1024,7 @@ class m_admin {
         }
     }
 
+
     /**
      * Turns a common account into a super-admin account
      * 
@@ -1033,6 +1047,7 @@ class m_admin {
         $db->query("UPDATE membres SET su=1 WHERE uid= ?;", array($uid));
         return true;
     }
+
 
     /**
      * Turns a super-admin account into a common account
@@ -1057,6 +1072,7 @@ class m_admin {
         return true;
     }
 
+
     /**
      * List of the authorized TLDs
      * Returns the list of the authorized TLDs and also the way they are
@@ -1079,6 +1095,7 @@ class m_admin {
         }
         return $c;
     }
+
 
     /**
      * List the hosted domains on this server
@@ -1123,6 +1140,7 @@ class m_admin {
         }
         return $c;
     }
+
 
     /**
      * Check all the domains for their NS MX and IPs
@@ -1221,6 +1239,7 @@ class m_admin {
         return $checked;
     }
 
+
     /**
      * Lock / Unlock a domain 
      * 
@@ -1243,6 +1262,7 @@ class m_admin {
         return true;
     }
 
+
     /**
      * Add a new TLD to the list of the authorized TLDs 
      * 
@@ -1261,6 +1281,7 @@ class m_admin {
         return $db->Record["mode"];
     }
 
+
     /**
      * Prints the list of the actually authorized TLDs
      * 
@@ -1275,6 +1296,7 @@ class m_admin {
             echo ">" . _($this->tldmode[$i]) . "</option>\n";
         }
     }
+
 
     /**
      * Deletes the specified tld in the list of the authorized TLDs
@@ -1298,7 +1320,6 @@ class m_admin {
         return true;
     }
 
-    /* ----------------------------------------------------------------- */
 
     /** Add a TLD to the list of the authorized TLDs during the installation
      * 
@@ -1337,6 +1358,7 @@ class m_admin {
         return true;
     }
 
+
     /**
      * Modify a TLD of the list of the authorized TLDs 
      * 
@@ -1363,6 +1385,7 @@ class m_admin {
         return true;
     }
 
+
     /**
      * Get the login name of the main administrator account
      * 
@@ -1375,6 +1398,7 @@ class m_admin {
         $db->next_record();
         return $db->f("login");
     }
+
 
     /**
      * List the password policies currently installed in the policy table
@@ -1418,6 +1442,7 @@ class m_admin {
         return $policies;
     }
 
+
     /**
      * Change a password policy for one kind of password
      * 
@@ -1448,6 +1473,7 @@ class m_admin {
         return true;
     }
 
+    
     /**
      * 
      * @global    m_mysql $db
@@ -1529,7 +1555,6 @@ class m_admin {
     }
 
 
-}
+} /* Class m_admin */
 
-/* Classe ADMIN */
 

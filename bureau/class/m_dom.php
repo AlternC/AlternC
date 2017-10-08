@@ -25,6 +25,8 @@ define('SLAVE_FLAG', "/var/run/alternc/refresh_slave");
  * 
  * Cette classe permet de gérer les domaines / sous-domaines, redirections
  * dns et mx des domaines d'un membre hébergé.<br />
+ * 
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/
  */
 class m_dom {
 

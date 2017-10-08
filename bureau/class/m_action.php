@@ -1,6 +1,7 @@
 <?php
 
 /*
+  ----------------------------------------------------------------------
   LICENSE
 
   This program is free software; you can redistribute it and/or
@@ -15,9 +16,6 @@
 
   To read the license please visit http://www.gnu.org/copyleft/gpl.html
   ----------------------------------------------------------------------
-  Original Author of file: Lerider Steven
-  Purpose of file: Manage generic actions.
-  ----------------------------------------------------------------------
 */
 
 /**
@@ -25,23 +23,13 @@
  * It primary use is to store the actions to be performed ( creating file or folder, deleting, setting permissions etc..) in the action sql table. 
  * The script /usr/lib/alternc/do_actions.php handled by cron and incron is then used to perform those actions.
  * 
- * Copyleft {@link http://alternc.org/ AlternC Team}
- * 
- * @copyright    AlternC-Team 2013-8-13 http://alternc.org/
- * 
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/
  */
 class m_action {
-    /* --------------------------------------------------------------------------- */
+
 
     /**
-     * Constructor
-     */
-    function m_action() {
-        
-    }
-
-    /**
-     * Plans the cration of a file 
+     * Tell the incron that an action should be performed
      * 
      * @global m_messages $msg
      * @global string $L_INOTIFY_DO_ACTION
@@ -56,6 +44,7 @@ class m_action {
         return TRUE;
     }
 
+
     /**
      * Plans a file creation
      * 
@@ -67,6 +56,7 @@ class m_action {
     function create_file($file, $content = "", $user = "root") {
         return $this->set('create_file', $user, array('file' => $file, 'content' => $content));
     }
+
 
     /**
      * Plans the a chmod on file or dir
@@ -80,6 +70,7 @@ class m_action {
         return $this->set('chmod', $user, array('filename' => $filename, "perms" => $perms));
     }
 
+
     /**
      * Plans the creation of a dir 
      * 
@@ -91,6 +82,7 @@ class m_action {
         return $this->set('create_dir', $user, array('dir' => $dir));
     }
 
+
     /**
      * Plans a perms fix upon user creation 
      * @param int $uid
@@ -101,8 +93,9 @@ class m_action {
         return $this->set('fix_user', $user, array('uid' => $uid));
     }
 
+
     /**
-     * Plans a dir fix
+     * Plans a dir permission fix
      * 
      * @param string $dir
      * @param m_user $user
@@ -112,8 +105,9 @@ class m_action {
         return $this->set('fix_dir', $user, array('dir' => $dir));
     }
 
+
     /**
-     * Plans a file fix
+     * Plans a file permission fix
      * 
      * @param string $file
      * @param m_user $user
@@ -122,6 +116,7 @@ class m_action {
     function fix_file($file, $user = "root") {
         return $this->set('fix_file', $user, array('file' => $file));
     }
+
 
     /**
      * function to delete file / folder
@@ -134,6 +129,7 @@ class m_action {
         return $this->set('delete', $user, array('dir' => $dir));
     }
 
+
     /**
      * function returning the first not locked line of the action table 
      * 
@@ -145,6 +141,7 @@ class m_action {
     function move($src, $dst, $user = "root") {
         return $this->set('move', $user, array('src' => $src, 'dst' => $dst));
     }
+
 
     /**
      * 
@@ -182,8 +179,8 @@ class m_action {
         return true;
     }
 
+
     /**
-     * @TODO: This has to be escaped
      * function inserting the action in the sql table
      * 
      * @global m_mysql $db
@@ -218,6 +215,7 @@ class m_action {
         return $this->do_action();
     }
 
+
     /**
      * This seems to be unused ?
      * 
@@ -236,6 +234,7 @@ class m_action {
         }
         return $db->num_rows($result);
     }
+
 
     /**
      * 
@@ -259,6 +258,7 @@ class m_action {
         return $db->num_rows($result);
     }
 
+
     /**
      *  function returning the first not locked line of the action table 
      * 
@@ -278,6 +278,7 @@ class m_action {
         }
     }
 
+
     /**
      * function locking an entry while it is being executed by the action script
      * 
@@ -294,6 +295,7 @@ class m_action {
         }
         return true;
     }
+
 
     /**
      *  function locking an entry while it is being executed by the action script
@@ -313,6 +315,7 @@ class m_action {
         return true;
     }
 
+
     /**
      * 
      * @global m_mysql $db
@@ -328,6 +331,7 @@ class m_action {
         }
         return true;
     }
+
 
     /**
      * Returns a list of actions marked as executable and ready for execution
@@ -348,6 +352,7 @@ class m_action {
         }
     }
 
+
     /**
      *  function locking an entry while it is being executed by the action script
      * 
@@ -360,6 +365,5 @@ class m_action {
         return true;
     }
 
-}
+} /* Class action */
 
-/* Class action */

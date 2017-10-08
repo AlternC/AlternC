@@ -20,6 +20,8 @@
 
 /**
  * FTP account management class
+ * 
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/
  */
 class m_ftp {
 

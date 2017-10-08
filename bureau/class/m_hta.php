@@ -22,6 +22,7 @@
  * This class handle folder web restricted access through .htaccess/.htpassword
  * files.
  * 
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/
  */
 class m_hta {
 

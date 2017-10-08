@@ -2,10 +2,6 @@
 
 /*
   ----------------------------------------------------------------------
-  AlternC - Web Hosting System
-  Copyright (C) 2000-2012 by the AlternC Development Team.
-  https://alternc.org/
-  ----------------------------------------------------------------------
   LICENSE
 
   This program is free software; you can redistribute it and/or
@@ -20,8 +16,6 @@
 
   To read the license please visit http://www.gnu.org/copyleft/gpl.html
   ----------------------------------------------------------------------
-  Purpose of file: file browser class.
-  ----------------------------------------------------------------------
 */
 
 /* Add the mime type list */
@@ -30,6 +24,8 @@
 /**
  * This class manage the file browser of AlternC
  * allow the file and directory management in the user account web folder
+ * 
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/
  */
 class m_bro {
 
@@ -45,20 +41,10 @@ class m_bro {
     /** What do we do after creating a file? */
     var $l_createfile;
 
-    /** internal cache
-     */
+    /** internal cache */
     var $mime_desc = array();
-
-    /** internal cache
-     */
     var $mime_icon = array();
-
-    /** internal cache
-     */
     var $mime_type = array();
-
-    /** Internal cache for viewurl
-     */
     var $cacheurl = array();
 
     /** Font choice in the editor */
@@ -67,6 +53,7 @@ class m_bro {
     /** font size in the editor */
     var $l_editor_size = array("18px", "14px", "12px", "10px", "8px", "0.8em", "0.9em", "1em", "1.1em", "1.2em");
 
+    
     /**
      * Constructor 
      * */
@@ -77,8 +64,9 @@ class m_bro {
         $this->l_createfile = array(0 => _("Go back to the file manager"), 1 => _("Edit the newly created file"));
     }
 
+
     /**
-     * 
+     * Hook called by the menu class to add menus to the left panel
      * @return array
      */
     function hook_menu() {
@@ -92,6 +80,7 @@ class m_bro {
         return $obj;
     }
 
+    
     /**
      * Verifie un dossier relatif au dossier de l'utilisateur courant
      *
@@ -142,6 +131,7 @@ class m_bro {
         }
     }
 
+
     /**
      * Retourne le chemin complet vers la racine du repertoire de l'utilisateur.
      *
@@ -153,6 +143,7 @@ class m_bro {
     function get_user_root($login) {
         return getuserpath();
     }
+
 
     /**
      * Retourne le chemin complet vers la racine du repertoire de l'utilisateur.
@@ -176,6 +167,7 @@ class m_bro {
 
         return $this->get_user_root($member['login']);
     }
+
 
     /**
      * Retourne un tableau contenant la liste des fichiers du dossier courant
@@ -223,6 +215,7 @@ class m_bro {
         return $c;
     }
 
+
     /**
      * Retourne un tableau contenant les prfrences de l'utilisateur courant
      * 
@@ -243,6 +236,7 @@ class m_bro {
         $db->next_record();
         return $db->Record;
     }
+
 
     /**
        Modifie les prfrences de l'utilisateur courant.
@@ -279,6 +273,7 @@ class m_bro {
         return true;
     }
 
+
     /**
      * Retourne le nom du fichier icone associ au fichier donc le nom est $file
      * <b>Note</b>: Les fichiers icones sont mis en cache sur la page courante.
@@ -305,6 +300,7 @@ class m_bro {
             return $bro_icon[$ext] . ".png";
         }
     }
+
 
     /**
      * Retourne le type mime associé au fichier donc le nom est $file
@@ -334,6 +330,7 @@ class m_bro {
         }
     }
 
+
     /**
      * Retourne la taille du fichier $file
      * si $file est un dossier, retourne la taille de ce dossier et de tous
@@ -355,6 +352,7 @@ class m_bro {
             return filesize($file);
         }
     }
+
 
     /**
      * Returns the size of a directory, by adding all it's files sizes
@@ -382,6 +380,7 @@ class m_bro {
         return $totalsize;
     }
 
+
     /**
      * Crée le dossier $file dans le dossier (parent) $dir
      * 
@@ -408,6 +407,7 @@ class m_bro {
             return false;
         }
     }
+
 
     /**
      * Crée un fichier vide dans un dossier
@@ -437,6 +437,7 @@ class m_bro {
         return true;
     }
 
+
     /**
      * Efface les fichiers du tableau $file_list dans le dossier $R
      * 
@@ -462,6 +463,7 @@ class m_bro {
         }
         return true;
     }
+
 
     /**
      * Renomme les fichier de $old du dossier $R en $new
@@ -495,6 +497,7 @@ class m_bro {
 
         return true;
     }
+
 
     /**
      * Déplace les fichier de $d du dossier $old vers $new
@@ -537,6 +540,7 @@ class m_bro {
         return true;
     }
 
+
     /**
      * Change les droits d'acces aux fichier de $d du dossier $R en $p
      * 
@@ -573,6 +577,7 @@ class m_bro {
         sleep(2);
         return true;
     }
+
 
     /**
      * Recoit un champ file upload (Global) et le stocke dans le dossier $R
@@ -629,6 +634,7 @@ class m_bro {
         }
         return $absolute . "/" . $_FILES['userfile']['name'];
     }
+
 
     /**
      * Extract an archive by using GNU and non-GNU tools
@@ -689,6 +695,7 @@ class m_bro {
         return true;
     }
 
+
     /**
      * Copy many files from point A to point B
      * 
@@ -723,6 +730,7 @@ class m_bro {
         return true;
     }
 
+
     /**
      * Copy a source to a destination by either copying recursively a
      * directory or by downloading a file with a URL (only http:// is
@@ -744,6 +752,7 @@ class m_bro {
         }
         return true;
     }
+
 
     /**
      * Affiche le chemin et les liens de la racine au dossier $path
@@ -776,6 +785,7 @@ class m_bro {
         return $c;
     }
 
+
     /**
      * Affiche le contenu d'un fichier pour un champ VALUE de textarea
      * 
@@ -805,6 +815,7 @@ class m_bro {
             return false;
         }
     }
+
 
     /**
      * Retourne une url de navigation pour le fichier $name du dossier $dir
@@ -865,6 +876,7 @@ class m_bro {
         }
     }
 
+
     /**
      * 
      * @global m_mem $mem
@@ -891,6 +903,7 @@ class m_bro {
         }
         return false;
     }
+
 
     /**
      * Return a HTML snippet representing an extraction function only if the mimetype of $name is supported
@@ -922,6 +935,7 @@ class m_bro {
         return false;
     }
 
+
     /**
      * return true if file is a sql dump (end with .sql or .sql.gz)
      * 
@@ -940,6 +954,7 @@ class m_bro {
         return false;
     }
 
+
     /**
      * 
      * @global m_messages $msg
@@ -954,6 +969,7 @@ class m_bro {
         header("Content-Transfer-Encoding: binary");
         $this->content_send($dir, $file);
     }
+
 
     /**
      * Echoes the content of the file $file located in directory $R
@@ -976,6 +992,7 @@ class m_bro {
             return false;
         }
     }
+
 
     /**
      * Sauve le fichier $file dans le dossier $R avec pour contenu $texte
@@ -1007,6 +1024,7 @@ class m_bro {
         return true;
     }
 
+
     /**
      * Echo d'un flux .tar.Z contenant tout le contenu du dossier $dir
      * 
@@ -1023,6 +1041,7 @@ class m_bro {
         set_time_limit(0);
         passthru("/bin/tar -cZ -C " . getuserpath() . "/" . $mem->user["login"] . "/ $d");
     }
+
 
     /**
      * Echo d'un flux .tgz contenant tout le contenu du dossier $dir
@@ -1041,6 +1060,7 @@ class m_bro {
         passthru("/bin/tar -cz -C " . getuserpath() . "/ $d");
     }
 
+
     /**
      * Echo d'un flux .tar.bz2 contenant tout le contenu du dossier $dir
      * 
@@ -1057,6 +1077,7 @@ class m_bro {
         set_time_limit(0);
         passthru("/bin/tar -cj -C " . getuserpath() . "/ $d");
     }
+
 
     /**
      * Echo d'un flux .ZIP contenant tout le contenu du dossier $dir
@@ -1076,6 +1097,7 @@ class m_bro {
         passthru("/usr/bin/zip -r - ".escapeshellarg(basename($d)));
     }
 
+
     /**
      * Fonction de tri perso utilis par filelist.
      * 
@@ -1093,6 +1115,7 @@ class m_bro {
         }
         return $a["name"] > $b["name"];
     }
+
 
     /**
      * Efface $file et tous ses sous-dossiers s'il s'agit d'un dossier
@@ -1127,6 +1150,7 @@ class m_bro {
         }
     }
 
+
     /**
      * Function d'exportation de configuration appelé par la classe m_export via un hooks
      * Produit en sorti un tableau formatté ( pour le moment) en HTML
@@ -1153,6 +1177,7 @@ class m_bro {
 
         return $str;
     }
+
 
     /**
      * Function d'exportation des données appelé par la classe m_export via un hooks
@@ -1183,6 +1208,4 @@ class m_bro {
         return min(ini_get('post_max_size'), ini_get('upload_max_filesize'));
     }
 
-}
-
-/* Class Browser */
+} /* Class m_bro */

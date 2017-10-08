@@ -1,7 +1,6 @@
 <?php
 
-/**
-   $Id: m_authip.php
+/*
    ----------------------------------------------------------------------
    LICENSE
 
@@ -17,15 +16,15 @@
 
    To read the license please visit http://www.gnu.org/copyleft/gpl.html
    ----------------------------------------------------------------------
-   Original Author of file: Fufroma
-   ----------------------------------------------------------------------
 */
 
 /**
- * Classe de gestion des IP authorisée
- * @group alternc
- * */
+ * Authorized-ip class
+ * 
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/
+ */
 class m_authip {
+
 
     /**
      * Retourne la liste des ip whitelist
@@ -41,6 +40,7 @@ class m_authip {
         return $this->list_ip(true);
     }
 
+
     /**
      * 
      * @return array
@@ -55,6 +55,7 @@ class m_authip {
 
         return $obj;
     }
+
 
     /**
      * Retourne la liste des ip spécifiées par cet utilisateur
@@ -89,6 +90,7 @@ class m_authip {
         return $r;
     }
 
+
     /**
      * Supprime une IP des IP de l'utilisateur
      * et supprime les droits attaché en cascade
@@ -116,6 +118,7 @@ class m_authip {
         return true;
     }
 
+
     /**
      * Liste les IP et subnet authorisés
      * pour une classe donnée
@@ -138,6 +141,7 @@ class m_authip {
         return $r;
     }
 
+
     /**
      * 
      * @global    m_mysql $db
@@ -156,6 +160,7 @@ class m_authip {
         }
         return false;
     }
+
 
     /**
      * Retourne si l'ip appartient au subnet.
@@ -176,6 +181,7 @@ class m_authip {
         return false;
     }
 
+
     /**
      * Sauvegarde une IP dans les IP TOUJOURS authorisée
      *
@@ -188,6 +194,7 @@ class m_authip {
         }
         return $this->ip_save($id, $ipsub, $infos, 0);
     }
+
 
     /**
      * Sauvegarde une IP dans les IP authorisée
@@ -265,6 +272,7 @@ class m_authip {
         return true;
     }
 
+
     /**
      * Fonction appelée par Alternc lors de la suppression d'un utilisateur
      *
@@ -280,6 +288,7 @@ class m_authip {
         }
         return true;
     }
+
 
     /**
      * Analyse les classes et récupéres les informations
@@ -299,6 +308,7 @@ class m_authip {
 
         return $authclass;
     }
+
 
     /**
      * Enregistre ou modifie une affectation ip<=>ressource
@@ -334,6 +344,7 @@ class m_authip {
         return true;
     }
 
+
     /**
      * Supprime une affectation ip<=>ressource
      * Nota : lance des hooks dans la classe correspondante
@@ -356,6 +367,7 @@ class m_authip {
         }
         return true;
     }
+
 
     /**
      * Appel les hooks demandé avec en parametres les 
@@ -393,6 +405,7 @@ class m_authip {
         return true;
     }
 
+
     /**
      * Liste les affectation ip<=>ressource d'un utilisateur
      *
@@ -416,6 +429,5 @@ class m_authip {
         return $r;
     }
 
-}
+} /* Class m_authip */
 
-/* Classe m_authip */

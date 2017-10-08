@@ -20,6 +20,8 @@
 
 /**
  * This class shows error or access logs of web server to the web panel
+ * 
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/
  */
 class m_log {
 

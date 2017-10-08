@@ -20,6 +20,8 @@
 
 /**
  * This class manage piwik statistics management through AlternC, using piwik's "API".
+ * 
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/
  */
 class m_piwik {
     var $piwik_server_uri;

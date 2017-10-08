@@ -1,13 +1,29 @@
 <?php
 
+/*
+  ----------------------------------------------------------------------
+  LICENSE
+
+  This program is free software; you can redistribute it and/or
+  modify it under the terms of the GNU General Public License (GPL)
+  as published by the Free Software Foundation; either version 2
+  of the License, or (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  To read the license please visit http://www.gnu.org/copyleft/gpl.html
+  ----------------------------------------------------------------------
+*/
+
 /**
  *  Mysql Database class
  *
- *  François - aka fser - Serman
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/
  * 
- *  2014/06/24
  */
-
 class DB_Sql {
   
     /* public: connection parameters */
@@ -31,17 +47,16 @@ class DB_Sql {
     private $Errno;
     private $Error;
 
-
     /* private: link and query handles */
     private $Query_String;
   
-
     /* PDO related variables */
     private $pdo_instance = NULL;
     private $pdo_query = NULL;
 
+
     /**
-     * Constructor 
+     * Constructor: Connect to the database server
      */
     function __construct($db, $host, $user, $passwd) {
 
@@ -54,6 +69,7 @@ class DB_Sql {
             return FALSE;
         }
     }
+
 
     /**
      * function for MySQL database connection management
@@ -102,13 +118,17 @@ class DB_Sql {
         $this->pdo_query->closeCursor();
     }
 
+
     function is_connected() {
         return $this->pdo_instance != FALSE;
     }
 
+
     function last_error() {
         return $this->Error;
     }
+
+
     /** 
      * Perform a query 
      * 
@@ -169,6 +189,7 @@ class DB_Sql {
 
         return TRUE;
     }
+
    
     /**
      * walk result set 
@@ -198,7 +219,10 @@ class DB_Sql {
         return TRUE;
     }
 
-    /* public: table locking */
+
+    /**
+     * table locking
+     */
     function lock($table, $mode="write") {
         if (!$this->is_connected())
             return FALSE;
@@ -227,6 +251,9 @@ class DB_Sql {
 
     }
   
+    /**
+     * table unlocking
+     */
     function unlock() {
         if (!$this->is_connected())
             return FALSE;
@@ -238,11 +265,12 @@ class DB_Sql {
     }
 
 
-    /* public: evaluate the result (size, width) */
+    /**
+     * evaluate the result (size, width)
+     */
     function affected_rows() {
         return $this->pdo_query->rowCount();
     }
-
     function num_rows() {
         return $this->pdo_query->rowCount();
     }
@@ -251,7 +279,9 @@ class DB_Sql {
         return $this->pdo_query->columnCount();
     }
 
-    /* public: shorthand notation */
+    /**
+     *  shorthand notation
+     */
     function nf() {
         return $this->num_rows();
     }
@@ -259,6 +289,7 @@ class DB_Sql {
     function np() {
         print $this->num_rows();
     }
+
 
     /**
      * @param string $Name
@@ -271,17 +302,21 @@ class DB_Sql {
             return false;
     }
 
+
     function current_record() {
         return $this->Record;
     }
+
 
     function p($Name) {
         print $this->Record[$Name];
     }
 
+
     function lastid() {
         return $this->pdo_instance->lastInsertId();
     }
+
 
     /**
      *  Escape a string to use it into a SQL PDO query
@@ -303,7 +338,9 @@ class DB_Sql {
     }
 
 
-    /* public: sequence numbers */
+    /**
+     * get next sequence numbers
+     */
     function nextid($seq_name) {
         if (!$this->is_connected())
             return FALSE;
@@ -345,14 +382,19 @@ class DB_Sql {
         return $nextid;
     }
 
-    /* public: return table metadata */
+
+    /** 
+     * DEPRECATED return table metadata
+     */
     function metadata($table='',$full=false) {
         global $msg;
         $msg->raise("ERROR", 'Mysql', 'function is no longer implemented (metadata())');
         return FALSE;
     }
 
-    /* private: error handling */
+    /**
+     *  private: error handling
+     */
     function halt($msg) {
         if ($this->Halt_On_Error == "no")
             return;
@@ -363,12 +405,17 @@ class DB_Sql {
             die("Session halted.");
     }
 
+
+    /**
+     *  private: error handling
+     */
     function haltmsg($msg) {
         printf("</td></tr></table><b>Database error:</b> %s<br />\n", $msg);
         printf("<b>MySQL Error</b>: %s (%s)<br />\n",
         $this->Errno,
         implode("\n", $this->Error));
     }
+
 
     function table_names() {
         $this->query("SHOW TABLES");
@@ -378,5 +425,6 @@ class DB_Sql {
 
         return $return;
     }
-}
-?>
+
+} /* Class DB_Sql */
+

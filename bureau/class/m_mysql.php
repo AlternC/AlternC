@@ -22,7 +22,7 @@
  * MySQL user database management for AlternC.
  * This class manage user's databases in MySQL, and user's MySQL accounts.
  * 
- * @copyright    AlternC-Team 2000-2017 https://alternc.com/
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/
  */
 class DB_users extends DB_Sql {
 

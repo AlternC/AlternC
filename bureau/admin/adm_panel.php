@@ -1,13 +1,5 @@
 <?php
 /*
- $Id: adm_panel.php,v 1.9 2005/08/01 18:25:52 anarcat Exp $
- ----------------------------------------------------------------------
- AlternC - Web Hosting System
- Copyright (C) 2002 by the AlternC Development Team.
- http://alternc.org/
- ----------------------------------------------------------------------
- Based on:
- Valentin Lacambre's web hosting softwares: http://altern.org/
  ----------------------------------------------------------------------
  LICENSE
 
@@ -23,10 +15,8 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file: Benjamin Sonntag
- Purpose of file: Panneau de control de l'administrateur
- ----------------------------------------------------------------------
 */
+
 require_once("../class/config.php");
 
 if (!$admin->enabled) {

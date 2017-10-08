@@ -1,14 +1,6 @@
 <?php
 
 /*
-  $Id: config.php,v 1.12 2005/12/18 09:51:32 benjamin Exp $
-  ----------------------------------------------------------------------
-  AlternC - Web Hosting System
-  Copyright (C) 2002 by the AlternC Development Team.
-  http://alternc.org/
-  ----------------------------------------------------------------------
-  Based on:
-  Valentin Lacambre's web hosting softwares: http://altern.org/
   ----------------------------------------------------------------------
   LICENSE
 
@@ -24,10 +16,15 @@
 
   To read the license please visit http://www.gnu.org/copyleft/gpl.html
   ----------------------------------------------------------------------
-  Original Author of file: Benjamin Sonntag
-  Purpose of file: General configuration file for AlternC Desktop
-  ----------------------------------------------------------------------
 */
+
+/**
+ * Main configuration file (BOOSTRAP) of AlternC
+ * control panel. Include this to load everything and ensure
+ * the user is connected
+ * 
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/
+ */
 
 define('DO_XHPROF_STATS', FALSE);
 if (DO_XHPROF_STATS) {
@@ -42,18 +39,6 @@ if (file_exists('/etc/alternc/alternc_display_php_error')) {
 session_name('AlternC_Panel');
 session_start();
 
-/*
-  Si vous voulez mettre le bureau en maintenance, decommentez le code ci-dessous
-  et mettez votre ip dans le IF pour que seule votre ip puisse acceder au bureau :
-*/
-
-/* * /
-   if (getenv("REMOTE_ADDR")!="127.0.0.1") {
-   echo "Le bureau AlternC est en vacances jusqu'a minuit pour maintenance.<br>
-   Merci de revenir plus tard.";
-   exit();
-   }
-   /* */
 
 if (ini_get("safe_mode")) {
     echo _("SAFE MODE IS ENABLED for the web panel ! It's a bug in your php or apache configuration, please fix it !!");
@@ -71,7 +56,7 @@ if (isset($http_auth)) {
     }
 }
 if (!empty($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_PW'])) {
-    // Gruiiik
+    // Gruiiik does http-auth : simulate a posted-login/pass
     $_REQUEST["username"] = $_SERVER['PHP_AUTH_USER'];
     $_REQUEST["password"] = $_SERVER['PHP_AUTH_PW'];
 }
@@ -88,9 +73,11 @@ $host = getenv("HTTP_HOST");
 /* Global variables (AlternC configuration) */
 require_once(dirname(__FILE__) . "/local.php");
 
-// Define constants from vars of /etc/alternc/local.sh
-// The you can't choose where is the AlternC Panel 
 
+/**
+ * Define constants from vars of /etc/alternc/local.sh
+ * The you can't choose where is the AlternC Panel 
+ */
 define("DEFAULT_PASS_SIZE", 10);
 define('ALTERNC_MAIL', "$L_ALTERNC_MAIL");
 define('ALTERNC_HTML', "$L_ALTERNC_HTML");
@@ -116,14 +103,12 @@ require_once($root . "/class/functions.php");
 require_once($root . "/class/variables.php");
 
 
-// Classe h�rit�e de la classe db de la phplib. 
-/** 
- * Class for MySQL management in the bureau  
+/**
+ * Class for MySQL management in the panel
  * 
  * This class heriting from the db class of the phplib manages 
  * the connection to the MySQL database. 
- */ 
-  
+ */   
 class DB_system extends DB_Sql { 
     function __construct() { 
         global $L_MYSQL_HOST,$L_MYSQL_DATABASE,$L_MYSQL_LOGIN,$L_MYSQL_PWD; 
@@ -132,22 +117,23 @@ class DB_system extends DB_Sql {
 } 
 
 $db = new DB_system();
-// $db = new Sql($L_MYSQL_DATABASE, $L_MYSQL_HOST, $L_MYSQL_LOGIN, $L_MYSQL_PWD);
 
 // Current User ID = the user whose commands are made on behalf of.
 $cuid = 0;
 
 
 $classes = array();
-/* CLASSES PHP : automatic include : */
+
+/* PHP CLASSES : automatic include : */
 foreach (glob($root . "class/m_*.php") as $di) {
     if (preg_match("#${root}class/m_(.*)\\.php$#", $di, $match)) { // $
         $classes[] = $match[1];
         require_once($di);
     }
 }
+
 /* THE DEFAULT CLASSES ARE :
-   dom, ftp, mail, quota, bro, admin, mem, mysql, err, variables
+   dom, ftp, mail, quota, bro, admin, mem, mysql, messages, variables
 */
 
 // Load file for the system class.
@@ -160,7 +146,7 @@ foreach (glob($root . "class/class_system_*.php") as $fcs) {
         require_once($fcs);
 }
 
-/* Language */
+/* Language environment setup */
 include_once("lang_env.php");
 
 $mem = new m_mem();
@@ -181,9 +167,10 @@ if ((variable_get('force_https', '0', "This variable is set to 0 (default) if us
     }
 }
 
-// CHECK CSRF for ALL POSTS : 
-// you MUST add csrf_get(); after ALL <form method="post"> in AlternC !
-
+/**
+ *  Check csrf token for all posts: 
+ * you MUST add csrf_get(); after ALL <form method="post"> in AlternC !
+ */
 $fatalcsrf=false;
 if (count($_POST) && !defined("NOCSRF")) {
     if (csrf_check()<=0) {
@@ -192,7 +179,7 @@ if (count($_POST) && !defined("NOCSRF")) {
     }
 }
 
-/* Check the User identity (if required) */
+/* Check the User identity (if not disabled) */
 if (!defined('NOCHECK')) {
     if (!$mem->checkid()) {
         if (!empty($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_PW'])) {
@@ -240,6 +227,7 @@ if ((variable_get('sql_max_username_length', NULL)==NULL)||(variable_get('sql_ma
     }
 
 }
+
 
 if ($fatalcsrf) {
     require_once("main.php");

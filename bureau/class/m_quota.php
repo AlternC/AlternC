@@ -29,6 +29,7 @@
  * each class may also export a function <code>alternc_quota_names()</code>
  * that returns an array with the quotas names managed by this class.
  *
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/
  */
 class m_quota {
 

@@ -2,10 +2,6 @@
 
 /*
   ----------------------------------------------------------------------
-  AlternC - Web Hosting System
-  Copyright (C) 2000-2012 by the AlternC Development Team.
-  https://alternc.org/
-  ----------------------------------------------------------------------
   LICENSE
 
   This program is free software; you can redistribute it and/or
@@ -20,9 +16,11 @@
 
   To read the license please visit http://www.gnu.org/copyleft/gpl.html
   ----------------------------------------------------------------------
-  Purpose of file: Miscellaneous functions globally used
-  ----------------------------------------------------------------------
 */
+
+/**
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/
+ */
 
 /**
  * Format a field value for input or textarea : 
@@ -33,6 +31,7 @@
 function fl($str) {
     return str_replace("<", "&lt;", str_replace("\"", "&quot;", $str));
 }
+
 
 /**
  *  Check if a domain can be hosted on this server :
@@ -93,6 +92,7 @@ function checkhostallow($domain, $dns) {
     return -3; // DNS incorrect in the whois
 }
 
+
 /**
  * Check that a domain can be hosted in that server, 
  *   without DNS managment. 
@@ -125,6 +125,7 @@ function checkhostallow_nodns($domain) {
     return 0;
 }
 
+
 /**
  * Return the remote IP.
  * If you are behind a proxy, use X_FORWARDED_FOR instead of REMOTE_ADDR
@@ -133,6 +134,7 @@ function checkhostallow_nodns($domain) {
 function get_remote_ip() {
     return getenv('REMOTE_ADDR');
 }
+
 
 /**
  * Check that $url is a correct url (http:// or https:// or ftp://) 
@@ -162,6 +164,7 @@ function checkurl($url) {
     return !$t;
 }
 
+
 /**
  * Check that TXT domain is correct 
  * 
@@ -171,6 +174,7 @@ function checkurl($url) {
 function checksubtxt($txt) {
     return true;
 }
+
 
 /**
  * Check that CNAME domain is correct 
@@ -197,6 +201,7 @@ function checkcname($cname) {
     return true;
 }
 
+
 /**
  * Check that $ip is a correct 4 Dotted ip
  * @param string $ip
@@ -206,6 +211,7 @@ function checkip($ip) {
     // return true or false whether the ip is correctly formatted
     return filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4);
 }
+
 
 /**
  * Check that $ip is a correct ipv6 ip 
@@ -217,6 +223,7 @@ function checkipv6($ip) {
     return filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6);
 }
 
+
 /**
  * Check a login mail, cf http://www.bortzmeyer.org/arreter-d-interdire-des-adresses-legales.html 
  * @todo Check who is using that function and delete it when unused 
@@ -226,6 +233,7 @@ function checkipv6($ip) {
 function checkloginmail($mail) {
     return true;
 }
+
 
 /**
  * Check an email address, use filter_var with emails, which works great ;) 
@@ -240,6 +248,7 @@ function checkmail($mail) {
         return TRUE;
     }
 }
+
 
 /**
  * Check that a domain name is fqdn compliant 
@@ -276,6 +285,7 @@ function checkfqdn($fqdn) {
     return $ret;
 }
 
+
 /**
  * @global m_mem $mem
  * @param string $path
@@ -307,6 +317,7 @@ function checkuserpath($path) {
     return 0;
 }
 
+
 /**
  * get the home of the user
  *
@@ -322,6 +333,7 @@ function getuserpath($user = null) {
     }
     return rtrim(ALTERNC_HTML, "/") . "/" . substr($user, 0, 1) . "/" . $user;
 }
+
 
 /**
  * ECHOes checked="checked" only if the parameter is true
@@ -341,6 +353,7 @@ function cbox($test, $echo = true) {
     }
     return $return;
 }
+
 
 /**
  * ECHOes selected="selected" only if the parameter is true
@@ -362,6 +375,7 @@ function selected($bool, $echo = TRUE) {
     return $return;
 }
 
+
 /**
  * 
  * @param boolean $test
@@ -382,6 +396,7 @@ function ecif($test, $tr, $fa = "", $affiche = 1) {
     return $retour;
 }
 
+
 /**
  * 
  * @param string $str
@@ -389,6 +404,7 @@ function ecif($test, $tr, $fa = "", $affiche = 1) {
 function __($str) {
     echo _($str);
 }
+
 
 /**
  * 
@@ -403,6 +419,7 @@ function ife($test, $tr, $fa = "") {
     }
     return $fa;
 }
+
 
 /**
  * 
@@ -448,6 +465,7 @@ function format_size($size, $html = 0) {
     }
 }
 
+
 /**
  * 
  * @param int $hid
@@ -457,6 +475,7 @@ function getlinkhelp($hid) {
     return "(<a href=\"javascript:help($hid);\">?</a>)";
 }
 
+
 /**
  * 
  * @param int $hid
@@ -464,6 +483,7 @@ function getlinkhelp($hid) {
 function linkhelp($hid) {
     echo getlinkhelp($hid);
 }
+
 
 /**
  * 
@@ -490,6 +510,7 @@ function format_date($format, $date) {
     return sprintf($format, $d, $m, $y, $h, $i, $hh, $am);
 }
 
+
 /**
  * Strip slashes if needed : 
  * @param string $str
@@ -503,11 +524,10 @@ function ssla($str) {
     }
 }
 
-/* ----------------------------------------------------------------- */
 
-/** Hashe un mot de passe en clair en MD5 avec un salt al�atoire
- * @param string $pass Mot de passe � crypter (max 32 caract�res)
- * @return string Retourne le mot de passe crypt�
+/** Hashe a password using proper crypto function
+ * @param string $pass a cleartext password to hash
+ * @return string the hash 
  * @access private
  */
 function _md5cr($pass, $salt = "") {
@@ -521,6 +541,7 @@ function _md5cr($pass, $salt = "") {
     return crypt($pass, $salt);
 }
 
+
 /** split mysql database name between username and custom database name
  * @param string $dbname database name
  * @return array returns username as first element, custom name as second
@@ -531,7 +552,6 @@ function split_mysql_database_name($dbname) {
     implode("_", array_slice($db_exploded_name, 1)));
 }
 
-/* ----------------------------------------------------------------- */
 
 /** Echappe les caract�res pouvant perturber un flux XML standard : 
  * @param string $string Chaine de caract�re � encoder en valeur xml.
@@ -542,7 +562,6 @@ function xml_entities($string) {
     return str_replace("<", "&lt;", str_replace(">", "&gt;", str_replace("&", "&amp;", $string)));
 }
 
-/* ----------------------------------------------------------------- */
 
 /** Converti un nombre de mois en une chaine plus lisible
  * @param  integer $months Nombre de mois
@@ -558,7 +577,6 @@ function pretty_months($months) {
     }
 }
 
-/* ----------------------------------------------------------------- */
 
 /** Fabrique un drop-down pour les dur�es de comptes
  * @name string $name Nom pour le composasnt
@@ -589,6 +607,7 @@ function duration_list($name, $selected = 0) {
     return $res;
 }
 
+
 /**
  * select_values($arr,$cur) echo des <option> du tableau $values ou de la table sql $values
  *  selectionne $current par defaut. 
@@ -613,17 +632,18 @@ function eoption($values, $cur, $onedim = false) {
     }
 }
 
+
 /**
-   /* Echo the HTMLSpecialChars version of a value.
-   * Must be called when pre-filling fields values in forms such as : 
-   * <input type="text" name="toto" value="<?php ehe($toto); ?>" />
-   * Use the charset of the current language for transcription
-   * 
-   * @global string $charset
-   * @param string $str
-   * @param boolean $affiche
-   * @return string
-   */
+ * Echo the HTMLSpecialChars version of a value.
+ * Must be called when pre-filling fields values in forms such as : 
+ * <input type="text" name="toto" value="<?php ehe($toto); ?>" />
+ * Use the charset of the current language for transcription
+ * 
+ * @global string $charset
+ * @param string $str
+ * @param boolean $affiche
+ * @return string
+ */
 function ehe($str, $affiche = TRUE) {
     global $charset;
     $retour = htmlspecialchars($str, ENT_QUOTES|ENT_SUBSTITUTE, $charset);
@@ -633,17 +653,18 @@ function ehe($str, $affiche = TRUE) {
     return $retour;
 }
 
+
 /**
-   /* Echo the URLENCODED version of a value.
-   * Must be called when pre-filling fields values in URLS such as : 
-   * document.location='logs_tail.php?file=<?php eue($file); ?>
-   * Use the charset of the current language for transcription
-   * 
-   * @global string $charset
-   * @param string $str
-   * @param boolean $affiche
-   * @return string
-   */
+ * Echo the URLENCODED version of a value.
+ * Must be called when pre-filling fields values in URLS such as : 
+ * document.location='logs_tail.php?file=<?php eue($file); ?>
+ * Use the charset of the current language for transcription
+ * 
+ * @global string $charset
+ * @param string $str
+ * @param boolean $affiche
+ * @return string
+ */
 function eue($str, $affiche = TRUE) {
     global $charset;
     $retour = urlencode($str);
@@ -653,11 +674,10 @@ function eue($str, $affiche = TRUE) {
     return $retour;
 }
 
-/* Get the Fields of the posted form from $_REQUEST or POST or GET
- * and check their type
- */
 
 /**
+ * Get the Fields of the posted form from $_REQUEST or POST or GET
+ * and check their type
  * 
  * @param array $fields
  * @param boolean $requestOnly
@@ -707,6 +727,7 @@ function getFields($fields, $requestOnly = false) {
     return $vars;
 }
 
+
 /**
  * 
  * @param array $array
@@ -716,6 +737,7 @@ function printVar($array) {
     print_r($array);
     echo "</pre>\n";
 }
+
 
 /**
  * 
@@ -730,9 +752,9 @@ function list_properties_order($a, $b) {
     return ($a['label'] < $b['label']) ? -1 : 1;
 }
 
+
 /**
  * Shows a pager : Previous page 0 1 2 ... 16 17 18 19 20 ... 35 36 37 Next page
- * 
  * 
  * Arguments are as follow : 
  * $offset = the current offset from 0 
@@ -845,6 +867,7 @@ function pager($offset, $count, $total, $url, $before = "", $after = "", $echo =
     return $return;
 }
 
+
 /**
  * Create a password compatible with the password policy
  * @param int $length
@@ -885,6 +908,7 @@ function create_pass($length = 10, $classcount = 3) {
     return $password;
 }
 
+
 /**
  * Show a button to set a random password for a password field.
  * 
@@ -902,6 +926,7 @@ function display_div_generate_password($pass_size = DEFAULT_PASS_SIZE, $fields_t
     $id++;
     return 0;
 }
+
 
 /**
  * Show a button to select a folder on the server
@@ -949,6 +974,7 @@ function display_browser($dir = "", $caller = "main.dir", $width = 350, $height 
         </script>
         ";
 }
+
 
 /**
  *  Converts HSV to RGB values
@@ -1048,6 +1074,7 @@ function fHSVtoRGB($iH, $iS, $iV) {
     return array('r' => round($dR), 'g' => round($dG), 'b' => round($dB));
 }
 
+
 /**
  * 
  * @param int   $hex
@@ -1057,6 +1084,7 @@ function hexa($hex) {
     $num = dechex($hex);
     return (strlen("$num") >= 2) ? "$num" : "0$num";
 }
+
 
 /**
  * 
@@ -1079,6 +1107,7 @@ function PercentToColor($p = 0) {
     return $color;
 }
 
+
 /**
  * 
  * @global m_messages    $msg
@@ -1094,6 +1123,7 @@ function panel_lock() {
     return touch(ALTERNC_LOCK_PANEL);
 }
 
+
 /**
  * 
  * @global m_messages    $msg
@@ -1108,6 +1138,7 @@ function panel_unlock() {
     }
     return unlink(ALTERNC_LOCK_PANEL);
 }
+
 
 /**
  * 
@@ -1138,6 +1169,7 @@ function csrf_get($return=false) {
     echo '<input type="hidden" name="csrf" value="'.$token.'" />';
     return true;        
 }
+
 
 /** Check a CSRF token against the current session
  * a token can be only checked once, it's disabled then

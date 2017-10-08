@@ -21,8 +21,9 @@
 include_once(dirname(__FILE__) . '/vm.class.php');
 
 /**
+ * Manage AlternC's virtual machine (Containers) start/stop using our own inetd-based protocol.
  * 
- * Manage AlternC's virtual machine start/stop using our own inetd-based protocol.
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/
  */
 class m_lxc implements vm {
 
