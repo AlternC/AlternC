@@ -87,7 +87,7 @@ if(isset($r['user'])){
 		<th>Droits de l'utilisateur</th>
 <?php
 // On teste la valeur de retour 'Rights' afin de savoir si cet utilisateur à tous les droits ou seulement certains et on place le bouton "Gestion des droits"
-if ($r[Rights] == 'All') {
+if ($r["Rights"] == 'All') {
 	$rights = "Tous";
 } else {
 	$rights = "<span style='color:orange;'>Sélectifs</span>";
