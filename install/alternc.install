@@ -572,6 +572,14 @@ if [ "$HAS_ROOT" != "1" ]; then
     else
 	echo "Unable to create the first AlternC account (named 'admin'). newone.php returned $?. Check your MySQL database, PHP, and the /etc/alternc/local.sh file. Also check for any error above during install."
     fi
+else
+    ##UPDATE default db_server following /etc/alternc/my.cnf values
+    if [ "$MYSQL_HOST" == "localhost" ]; then
+        MYSQL_HOST_CLIENT="localhost"
+    else
+        MYSQL_HOST_CLIENT="%"
+    fi
+    mysql --defaults-file=/etc/alternc/my.cnf -e "UPDATE db_servers SET host='$MYSQL_HOST', login='$MYSQL_USER', password='$MYSQL_PASS', client='$MYSQL_HOST_CLIENT' WHERE name='Default';"
 fi
 
 #giving vmail user read access on dovecot sql file
