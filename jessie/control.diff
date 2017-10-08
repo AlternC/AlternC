@@ -1,14 +1,5 @@
 --- control.wheezy	2017-10-06 12:13:49.765062335 +0200
 +++ control	2017-10-06 12:15:52.021333089 +0200
-@@ -15,7 +15,7 @@
-            , bash (>= 4)
-            , acl
- Depends: debianutils (>= 1.13.1)
--       , apache2-mpm-itk
-+       , libapache2-mpm-itk
-        , libapache2-mod-php5
-        , php5-mysql
-        , phpmyadmin
 @@ -38,9 +38,9 @@
         , sudo
         , adduser
@@ -22,15 +13,6 @@
         , dovecot-mysql
         , vlogger
         , mailutils | mailx
-@@ -102,7 +102,7 @@
- Architecture: all
- Pre-depends: debconf (>= 0.5.00) | debconf-2.0, acl
- Depends: debianutils (>= 1.13.1)
--         , apache2-mpm-itk
-+         , libapache2-mpm-itk
-          , libapache2-mod-php5
-          , php5-mysql
-          , phpmyadmin
 @@ -126,9 +126,9 @@
           , gettext (>= 0.10.40-5)
           , adduser
