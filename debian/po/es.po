@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AlternC, hosting control panel\n"
 "Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
-"POT-Creation-Date: 2013-10-18 11:47+0200\n"
-"PO-Revision-Date: 2017-10-07 17:08+0000\n"
+"POT-Creation-Date: 2017-10-08 14:47+0200\n"
+"PO-Revision-Date: 2017-10-08 12:49+0000\n"
 "Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
 "Language-Team: Spanish (Spain) (http://www.transifex.com/octopuce/alternc/"
 "language/es_ES/)\n"
@@ -26,13 +26,13 @@ msgstr ""
 "Language: es_ES\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. Type: note
+#. Type: error
 #. Description
 #: ../alternc.templates:1001
 msgid "AlternC need ACL on filesystem"
 msgstr "AlternC requiere los ACL sobre el sistema de cuota de archivos"
 
-#. Type: note
+#. Type: error
 #. Description
 #: ../alternc.templates:1001
 msgid ""
@@ -42,7 +42,7 @@ msgstr ""
 "AlternC no puede funcionar correctamente sin los ACL activados sobre el "
 "sistema de archivos. Losw ACL no están actualmente activos."
 
-#. Type: note
+#. Type: error
 #. Description
 #: ../alternc.templates:1001
 msgid ""
@@ -646,12 +646,9 @@ msgstr "¿Se debe utilizar un servidor MySQL distante?"
 #. Description
 #: ../alternc.templates:33001
 msgid ""
-"No local Mysql server was found. Please confirm you want to use a remote "
-"Mysql Server. If not, AlternC cannot be installed."
+"Please confirm you want to use a remote Mysql Server. If not, AlternC cannot "
+"be installed."
 msgstr ""
-"No se encontró ningún servidor MySQL local. Favor confirmar que quieres "
-"utilizar un servidor MySQL distante. Sin esto, AlternC no puede ser "
-"instalado. "
 
 #. Type: boolean
 #. Description
@@ -685,6 +682,12 @@ msgstr ""
 "La dirección IP de la cual dispones es privada. Graqcias por confirmar que "
 "igual quieres utilizarla. El servidor podrá no ser accesible desde fuera de "
 "tu red. "
+
+#. Type: error
+#. Description
+#: ../alternc.templates:36001
+msgid "Connection to the remote MySQL server failed."
+msgstr ""
 
 #. Type: string
 #. Description

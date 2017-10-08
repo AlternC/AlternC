@@ -24,6 +24,11 @@ if [ ! -x /usr/bin/tx ] ; then
   exit 1
 fi
 
+pushd debian
+echo "Update of PO files in debian/"
+debconf-updatepo
+popd
+
 pushd ..
 
 langs="fr_FR de_DE en_US es_ES pt_BR it_IT nl_NL"

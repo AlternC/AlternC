@@ -23,8 +23,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AlternC, hosting control panel\n"
 "Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
-"POT-Creation-Date: 2013-10-18 11:47+0200\n"
-"PO-Revision-Date: 2017-10-07 17:17+0000\n"
+"POT-Creation-Date: 2017-10-08 14:47+0200\n"
+"PO-Revision-Date: 2017-10-08 12:51+0000\n"
 "Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
 "Language-Team: French (France) (http://www.transifex.com/octopuce/alternc/"
 "language/fr_FR/)\n"
@@ -34,13 +34,13 @@ msgstr ""
 "Language: fr_FR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#. Type: note
+#. Type: error
 #. Description
 #: ../alternc.templates:1001
 msgid "AlternC need ACL on filesystem"
 msgstr "AlternC requiert les ACL sur le système de fichiers"
 
-#. Type: note
+#. Type: error
 #. Description
 #: ../alternc.templates:1001
 msgid ""
@@ -50,7 +50,7 @@ msgstr ""
 "AlternC ne peut pas fonctionner correctement sans les ACL activées sur le "
 "système de fichiers. Les ACL ne sont actuellement pas actives."
 
-#. Type: note
+#. Type: error
 #. Description
 #: ../alternc.templates:1001
 msgid ""
@@ -59,6 +59,14 @@ msgid ""
 msgstr ""
 "De plus, si vous souhaitez utiliser les quotas de disque, vous devez activer "
 "les quotas de groupe (grpquota) (mais cela n'est pas obligatoire)."
+
+#. Type: error
+#. Description
+#. Type: error
+#. Description
+#: ../alternc.templates:1001 ../alternc.templates:36001
+msgid "This is a fatal error and will cause the package installation to fail."
+msgstr "Cette erreur est fatale et bloquera l'installation du paquet."
 
 #. Type: note
 #. Description
@@ -205,6 +213,12 @@ msgstr ""
 "Merci d'entrer le nom du répertoire où vous souhaitez stocker les maildirs "
 "des utilisateurs. La valeur par défaut doit convenir dans la majorité des "
 "cas."
+
+#. Type: string
+#. Description
+#: ../alternc.templates:9001
+msgid "Path where alternc's logs files will be located:"
+msgstr "Répertoire dans lequel les fichiers logs d'AlternC seront stockés"
 
 #. Type: string
 #. Description
@@ -566,16 +580,50 @@ msgstr "AlternC doit-il supprimer toutes les boites mail ?"
 msgid "If you accept all users e-mails will be deleted"
 msgstr "Si vous acceptez, tous les e-mails des utilisateurs seront supprimés"
 
+#. Type: string
+#. Description
+#: ../alternc.templates:31001
+msgid "Slave servers:"
+msgstr "Serveurs esclaves :"
+
+#. Type: string
+#. Description
+#: ../alternc.templates:31001
+msgid ""
+"This is a space-separated list of servers that are \"slaves\" to the master "
+"server (this server). When writing Apache configuration files, the master "
+"server will attempt to reload Apache on those remote servers. The alternc-"
+"slave package correctly configures those machines to allow login and reload."
+msgstr ""
+"Entre une liste séparée par des espaces des serveurs 'esclaves' du serveur "
+"maître (qui est ce serveur). Lors de l'écriture de la configuration "
+"d'Apache, ce maître tentera de recharger apache sur les serveurs distants. "
+"le package alternc-slave configure ces machines comme il faut pour permettre "
+"la connexion distante et le rechargement d'apache. "
+
+#. Type: boolean
+#. Description
+#: ../alternc.templates:32001
+msgid "Use locally found MySQL server?"
+msgstr "Doit-on utiliser le serveur MySQL local automatiquement découvert ?"
+
+#. Type: boolean
+#. Description
+#: ../alternc.templates:32001
+msgid ""
+"A local MySQL connection was established on the server. Please tell if you "
+"want to use it. If not remote MySQL server connection parameters will be "
+"needed."
+msgstr ""
+"Une connexion locale à MySQL a été trouvée. Dites-nous si vous souhaitez que "
+"nous l'utilisions. Sinon, des paramètres d'accès distants à MySQL vous "
+"seront demandés."
+
 #. Type: boolean
 #. Description
 #: ../alternc.templates:33001
-msgid ""
-"No local Mysql server was found. Please confirm you want to use a remote "
-"Mysql Server. If not, AlternC cannot be installed."
-msgstr ""
-"Aucun serveur MySQL local n'a été trouvé. Merci de confirmer que vous "
-"souhaitez utiliser un serveur MySQL distant. Sans cela, AlternC ne peut pas "
-"être installé."
+msgid "Use a remote MySQL server?"
+msgstr "Doit-on utiliser un serveur MySQL distant ?"
 
 #. Type: boolean
 #. Description
@@ -585,9 +633,42 @@ msgstr "Erreur de connexion à MySQL. Réessayer ?"
 
 #. Type: boolean
 #. Description
+#: ../alternc.templates:34001
+msgid ""
+"Remote connection to the MySQL server failed. Please confirm to try again."
+msgstr ""
+"La connexion au serveur MySQL distant a échouée. Merci de confirmer que nous "
+"devons réessayer."
+
+#. Type: boolean
+#. Description
 #: ../alternc.templates:35001
 msgid "Private IP detected, use it anyway?"
 msgstr "IP privée détectée, faut-il l'utiliser tout de même ?"
+
+#. Type: boolean
+#. Description
+#: ../alternc.templates:35001
+msgid ""
+"The IP address of the machine appears to be private, please confirm that "
+"this is an expected situation, since the server might not be reachable from "
+"outside your network."
+msgstr ""
+"L'adresse IP dont vous disposez est privée, merci de confirmer que vous "
+"souhaitez tout de même l'utiliser. Le serveur pourrait ne pas être joignable "
+"depuis l'extérieur de votre réseau. "
+
+#. Type: error
+#. Description
+#: ../alternc.templates:36001
+msgid "Remote mysql: connection error"
+msgstr "Serveur MySQL distant : erreur de connexion"
+
+#. Type: error
+#. Description
+#: ../alternc.templates:36001
+msgid "Connection to the remote MySQL server failed."
+msgstr "La connexion au serveur MySQL distant a échoué."
 
 #. Type: string
 #. Description

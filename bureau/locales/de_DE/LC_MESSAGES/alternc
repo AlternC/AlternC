@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AlternC, hosting control panel\n"
 "Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
-"POT-Creation-Date: 2013-10-18 11:47+0200\n"
-"PO-Revision-Date: 2017-10-07 17:08+0000\n"
+"POT-Creation-Date: 2017-10-08 14:47+0200\n"
+"PO-Revision-Date: 2017-10-08 12:49+0000\n"
 "Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
 "Language-Team: German (Germany) (http://www.transifex.com/octopuce/alternc/language/de_DE/)\n"
 "MIME-Version: 1.0\n"
@@ -24,13 +24,13 @@ msgstr ""
 "Language: de_DE\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. Type: note
+#. Type: error
 #. Description
 #: ../alternc.templates:1001
 msgid "AlternC need ACL on filesystem"
 msgstr "AlternC braucht das ACL für dieses Dateisystem"
 
-#. Type: note
+#. Type: error
 #. Description
 #: ../alternc.templates:1001
 msgid ""
@@ -38,7 +38,7 @@ msgid ""
 "currently not enabled."
 msgstr "AlternC kann nicht ohne ACL Aktivierung auf diesem Dateisystem arbeiten. ACL ist derzeit nicht eingeschaltet."
 
-#. Type: note
+#. Type: error
 #. Description
 #: ../alternc.templates:1001
 msgid ""
@@ -46,11 +46,19 @@ msgid ""
 "quota (but that's not mandatory)."
 msgstr "Es muss das Gruppen Kontingent (grpquota) aktiviert sein um das Freie Kontingent zu verwalten (ist aber nicht Verpflichtent wenn kein Kontingent vergeben werden soll)."
 
+#. Type: error
+#. Description
+#. Type: error
+#. Description
+#: ../alternc.templates:1001 ../alternc.templates:36001
+msgid "This is a fatal error and will cause the package installation to fail."
+msgstr ""
+
 #. Type: note
 #. Description
 #: ../alternc.templates:2001
 msgid "AlternC QUOTA not enabled"
-msgstr "AlternC Kontingent nicht eingeschaltet"
+msgstr "AlternC-KONTINGENT nicht aktiviert"
 
 #. Type: note
 #. Description
@@ -209,7 +217,7 @@ msgstr ""
 #. Description
 #: ../alternc.templates:11001
 msgid "AlternC's mysql system database:"
-msgstr "AlternC MySQL System Datenbank"
+msgstr "MySQL-Systemdatenbank von AlternC:"
 
 #. Type: string
 #. Description
@@ -226,7 +234,7 @@ msgstr "AlternC wird eine MySQL Datenbankstruktur aufbauen. Bitte wählen Sie ei
 #. Description
 #: ../alternc.templates:12001 ../alternc.templates:16001
 msgid "AlternC's mysql account:"
-msgstr "AlternC MySQL Konto:"
+msgstr "MySQL-Konto von AlternC:"
 
 #. Type: string
 #. Description
@@ -242,7 +250,7 @@ msgstr "AlternC wird einen Administrator Account erstellen. Bitte wählen Sie hi
 #. Description
 #: ../alternc.templates:13001
 msgid "Remote root mysql user account:"
-msgstr "Benutzeraccount -root- MySQL :"
+msgstr "Entferntes Root-MySQL-Benutzerkonto:"
 
 #. Type: string
 #. Description
@@ -267,7 +275,7 @@ msgstr ""
 #. Description
 #: ../alternc.templates:14001 ../alternc.templates:17001
 msgid "Password of AlternC's mysql account:"
-msgstr "Passwort des AlternC-Mysql Konto"
+msgstr "Password des MySQL-Kontos von AlternC:"
 
 #. Type: password
 #. Description
@@ -294,7 +302,7 @@ msgstr "Bitte tragen Sie ein komplexes Passwort hier ein, dieses wird dann Zugan
 #. Description
 #: ../alternc.templates:15001
 msgid "Password of the remote root mysql user account:"
-msgstr "Passwort des -root- MySQL Benutzers:"
+msgstr "Passwort des entfernten Root-MySQL-Benutzerkontos:"
 
 #. Type: password
 #. Description
@@ -359,7 +367,7 @@ msgstr ""
 #. Description
 #: ../alternc.templates:21001
 msgid "The primary IP of this server:"
-msgstr "Die Primäre IP-Adresse von diesem Server:"
+msgstr "Die primäre IP von diesem Server:"
 
 #. Type: string
 #. Description
@@ -373,7 +381,7 @@ msgstr ""
 #. Description
 #: ../alternc.templates:22001
 msgid "The internal IP of this server:"
-msgstr "Die interne IP-Adresse von diesem Server:"
+msgstr "Die interne IP von diesem Server:"
 
 #. Type: string
 #. Description
@@ -422,7 +430,7 @@ msgstr ""
 #. Description
 #: ../alternc.templates:25001
 msgid "The path where AlternC is installed:"
-msgstr "Der Pfad in dem AlternC installiert wurde:"
+msgstr "Der Pfad in dem AlternC installiert ist:"
 
 #. Type: string
 #. Description
@@ -442,7 +450,7 @@ msgstr "Hinweis: Bitte mit Vorsicht Anwenden! Es kann einige Probleme hervorrufe
 #. Description
 #: ../alternc.templates:26001
 msgid "The monitoring server:"
-msgstr "Der Überwachungs-Server:"
+msgstr "Der Überwachungsserver:"
 
 #. Type: string
 #. Description
@@ -456,7 +464,7 @@ msgstr ""
 #. Description
 #: ../alternc.templates:27001
 msgid "Should AlternC remove all databases (/var/lib/mysql/)?"
-msgstr "Soll AlternC vorhandene Datenbanken löschen (/var/lib/myasql/)?"
+msgstr "Soll AlternC alle Datenbanken (/var/lib/myasql/) entfernen?"
 
 #. Type: boolean
 #. Description
@@ -535,21 +543,21 @@ msgstr "Eine lokale MySQL Verbindung wurde etabliert auf dem Server. Bitte mitte
 #. Description
 #: ../alternc.templates:33001
 msgid "Use a remote MySQL server?"
-msgstr "Eine Fernsteuerung zum MySQL benutzen?"
+msgstr "Entfernten MySQL-Server verwenden?"
 
 #. Type: boolean
 #. Description
 #: ../alternc.templates:33001
 msgid ""
-"No local Mysql server was found. Please confirm you want to use a remote "
-"Mysql Server. If not, AlternC cannot be installed."
-msgstr "Kein Lokaler MySQL Server gefunden. Bitte Bestätigen sie wenn sie einen Entfernten MySQL Server nutzen wollen. Wenn nicht, AlternC kann nicht Installiert werden."
+"Please confirm you want to use a remote Mysql Server. If not, AlternC cannot"
+" be installed."
+msgstr ""
 
 #. Type: boolean
 #. Description
 #: ../alternc.templates:34001
 msgid "MySQL connection error. Try again?"
-msgstr "MySQL Verbindungsproblem. Erneut Versuchen?"
+msgstr "MySQL-Verbindungsfehler. Erneut versuchen?"
 
 #. Type: boolean
 #. Description
@@ -562,7 +570,7 @@ msgstr "Fernsteuerung zum MySQL Server fehlgeschalgen, Bitte Bestätigen und ern
 #. Description
 #: ../alternc.templates:35001
 msgid "Private IP detected, use it anyway?"
-msgstr "Private IP festgestellt, trotzdem verwenden?"
+msgstr "Private IP erkannt, trotzdem verwenden?"
 
 #. Type: boolean
 #. Description
@@ -572,6 +580,18 @@ msgid ""
 "this is an expected situation, since the server might not be reachable from "
 "outside your network."
 msgstr "Diese IP Adresse gehört möglicherweise zu einer Privaten maschine, bitte bestätige das diese Situation gewollt ist, ansonsten ist dieser Server nicht von aussen zu erreichen."
+
+#. Type: error
+#. Description
+#: ../alternc.templates:36001
+msgid "Remote mysql: connection error"
+msgstr ""
+
+#. Type: error
+#. Description
+#: ../alternc.templates:36001
+msgid "Connection to the remote MySQL server failed."
+msgstr ""
 
 #. Type: string
 #. Description
@@ -618,55 +638,13 @@ msgid ""
 "Please check out the AlternC installation documentation before proceeding."
 msgstr "Bitte lesen sie in der AlternC Installation Beschreibung bevor sie weiter machen."
 
-#. Type: boolean
-#. Description
-#: ../templates:1001
-msgid "Do you want to patch mailman for virtual support?"
-msgstr "Sie möchten den MailMan Patchen für den Virtual-Support?"
-
-#. Type: boolean
-#. Description
-#: ../templates:1001
-msgid ""
-"The AlternC mailman plugin can optionally patch mailman to make it support "
-"same-name lists on different domains (ie. allow test@example.com and "
-"test@example.org to coexist). Mailman 2.x, by default, doesn't support that "
-"functionality but Koumbit.org has developped patches to make it."
-msgstr ""
-
-#. Type: boolean
-#. Description
-#: ../templates:1001
-msgid ""
-"The plugin only supports patching, no way to unpatch right now. Please "
-"understand that this process will modify core Mailman code and might break "
-"some functionality. It is running in production on Koumbit.org."
-msgstr ""
-
-#. Type: boolean
-#. Description
-#: ../templates:1001
-msgid ""
-"Also, note that everytime the mailman package is upgraded or reinstalled, "
-"the patches will need to be reapplied manually. This can be done by "
-"reconfiguring the alternc-mailman package.  ."
-msgstr ""
-
-#. Type: boolean
-#. Description
-#: ../templates:1001
-msgid ""
-"The patches are in /usr/share/alternc-mailman/patches. More information "
-"about the patch at http://wiki.koumbit.net/VirtualMailman."
-msgstr "Die Patches liegen in '/usr/share/alternc-mailman/patches'. Mehr Informationen über die Patches sind unter 'http://wiki.koumbit.net/VirtualMailman' nach zu lesen."
-
 #: ../admin/aws_add.php:33
 msgid "You cannot add any new statistics, your quota is over."
 msgstr "Sie könne keine neue Statistik einbinden, ihr Beschränkung ist erreicht"
 
 #: ../admin/aws_add.php:38
 msgid "Edit Statistics"
-msgstr "Bearbeite Statistiken"
+msgstr "Statistiken bearbeiten"
 
 #: ../admin/aws_add.php:38
 msgid "New Statistics"
@@ -680,11 +658,11 @@ msgstr "AWSTATS wird für diese Domain die vorhandenen Log-Dateien analysieren (
 
 #: ../admin/aws_add.php:51 ../admin/aws_list.php:65
 msgid "Domain name"
-msgstr "Domänen Name"
+msgstr "Domainname"
 
 #: ../admin/aws_add.php:58
 msgid "Hostaliases"
-msgstr "Serveralias"
+msgstr "Hostaliases"
 
 #: ../admin/aws_add.php:72 ../admin/aws_list.php:65
 msgid "Allowed Users"
@@ -698,11 +676,11 @@ msgstr "Zur Zeit sind noch keine Benutzer definiert, Sie müssen eine Anmeldung 
 
 #: ../admin/aws_add.php:93
 msgid "Create those statistics"
-msgstr "Erstelle diese Statistiken"
+msgstr "Diese Statistik erstellen"
 
 #: ../admin/aws_add.php:93
 msgid "Edit those statistics"
-msgstr "Bearbeite Statistiken"
+msgstr "Diese Statistik bearbeiten"
 
 #: ../admin/aws_add.php:94 ../admin/aws_pass.php:78 ../admin/aws_users.php:58
 msgid "Cancel"
@@ -711,7 +689,7 @@ msgstr "Abbrechen"
 #: ../admin/aws_del.php:36
 #, php-format
 msgid "The statistics %s has been successfully deleted"
-msgstr "Die Statistik wurde erfolgreich erstellt"
+msgstr "Die Statistik %s wurde erfolgreich gelöscht"
 
 #: ../admin/aws_del.php:42
 msgid "Please check the statistics set you want to delete"
@@ -719,15 +697,15 @@ msgstr "Bitte prüfen Sie die Statistik, die Sie entfernen möchten"
 
 #: ../admin/aws_doadd.php:40
 msgid "The statistics has been successfully created"
-msgstr "Diese Statistiken wurden erfolgreich erstellt"
+msgstr "Die Statistik wurde erfolgreich erstellt"
 
 #: ../admin/aws_doedit.php:36 ../admin/aws_edit.php:33
 msgid "No Statistics selected!"
-msgstr "Keine Statistiken ausgewählt!"
+msgstr "Keine Statistik ausgewählt!"
 
 #: ../admin/aws_doedit.php:47
 msgid "The Statistics has been successfully changed"
-msgstr "Die Statistiken wurde erfolgreich geändert"
+msgstr "Die Statistik wurde erfolgreich geändert"
 
 #: ../admin/aws_list.php:30
 msgid "No statistics currently defined"
@@ -735,11 +713,11 @@ msgstr "Keine Statistiken derzeit vorhanden"
 
 #: ../admin/aws_list.php:36 ../class/m_aws.php:386
 msgid "Your stat quota is over..."
-msgstr "Ihr STAT Volumen ist erreicht"
+msgstr "Ihr stat-Kontingent ist erschöpft..."
 
 #: ../admin/aws_list.php:41
 msgid "Statistics List"
-msgstr "Statistiken Liste"
+msgstr "Statistikliste"
 
 #: ../admin/aws_list.php:52
 msgid "Manage allowed users' accounts"
@@ -747,7 +725,7 @@ msgstr "Erlaubte Benutzerkonten verwalten"
 
 #: ../admin/aws_list.php:56 ../admin/aws_users.php:44
 msgid "Create new Statistics"
-msgstr "Erstelle neue Statistiken"
+msgstr "Neue Statistik erstellen"
 
 #: ../admin/aws_list.php:65 ../admin/aws_users.php:73
 msgid "Action"
@@ -755,7 +733,7 @@ msgstr "Aktion"
 
 #: ../admin/aws_list.php:65 ../admin/aws_list.php:77
 msgid "View the statistics"
-msgstr "Diese Statistik erstellen"
+msgstr "Diese Statistik ansehen"
 
 #: ../admin/aws_list.php:74
 msgid "Edit"
@@ -771,7 +749,7 @@ msgstr "Lösche die gewählte Statistiken"
 
 #: ../admin/aws_pass.php:43
 msgid "Please enter a password"
-msgstr "Bitte Eingabe des Passwortes"
+msgstr "Bitte geben Sie ein Passwort ein"
 
 #: ../admin/aws_pass.php:45 ../admin/aws_useradd.php:36
 msgid "Passwords do not match"
@@ -796,7 +774,7 @@ msgstr "Neues Passwort"
 
 #: ../admin/aws_pass.php:75 ../admin/aws_users.php:55
 msgid "Confirm password"
-msgstr "Passwort wiederholen"
+msgstr "Passwort bestätigen"
 
 #: ../admin/aws_pass.php:77
 msgid "Change this user's password"
@@ -817,7 +795,7 @@ msgstr "AWstats vorhandene User Listen"
 
 #: ../admin/aws_users.php:54
 msgid "Password"
-msgstr "Passwört"
+msgstr "Passwort"
 
 #: ../admin/aws_users.php:57
 msgid "Create this new Awstats user"
@@ -837,7 +815,7 @@ msgstr "Lösche die gewählten Statistiken"
 
 #: ../admin/menu_aws.php:39 ../class/m_aws.php:59
 msgid "Web Statistics"
-msgstr "WEB Statistiken"
+msgstr "Webstatistik"
 
 #: ../class/m_aws.php:82
 msgid ""
@@ -897,7 +875,7 @@ msgstr "Dieser Login ist für die Statistik untersagt"
 
 #: ../class/m_aws.php:655
 msgid "Awstats"
-msgstr "AWSTATS"
+msgstr "Awstats"
 
 #: ../class/m_aws.php:677
 msgid "prefix not allowed."
@@ -911,7 +889,7 @@ msgstr ""
 
 #: ../class/m_aws.php:695
 msgid "Hostname is incorrect"
-msgstr "HOSTNAME (Rechnername) ist falsch."
+msgstr "Hostname ist falsch"
 
 #: ../class/m_aws.php:711
 msgid "Problem to create the configuration"
@@ -936,7 +914,7 @@ msgstr "(mit mailman)"
 
 #: ../admin/mman_add.php:46
 msgid "List's email address"
-msgstr "Liste der eMail Adressen"
+msgstr "Liste der E-Mail-Adressen"
 
 #: ../admin/mman_add.php:49
 msgid "Email of the list's administrator"
@@ -952,7 +930,7 @@ msgstr "Passwort Liste (bestätigen)"
 
 #: ../admin/mman_add.php:60
 msgid "Create the list."
-msgstr "Liste anlegen"
+msgstr "Liste erstellen."
 
 #: ../admin/mman_del.php:51
 msgid "Deleting mailman lists"
@@ -1018,7 +996,7 @@ msgstr "Keine Domäne ist auf Ihrem Konto eingerichtet, Sie können keine Mailin
 
 #: ../admin/mman_list.php:68
 msgid "Create a list"
-msgstr "Liste anlegen"
+msgstr "Liste erstellen"
 
 #: ../admin/mman_list.php:78
 msgid "List Status"
@@ -1042,7 +1020,7 @@ msgstr "Listenadministrator"
 
 #: ../admin/mman_list.php:103
 msgid "Pending messages"
-msgstr "Neue Nachrichten"
+msgstr "Ausstehende Nachrichten"
 
 #: ../admin/mman_list.php:107
 msgid "Change url"
@@ -1050,7 +1028,7 @@ msgstr "URL ändern"
 
 #: ../admin/mman_list.php:116
 msgid "-- Choose an action --"
-msgstr "-- Wähle eine Aktion --"
+msgstr "-- Aktion auswählen --"
 
 #: ../admin/mman_list.php:120
 msgid "Validate"
@@ -1063,15 +1041,15 @@ msgstr "Passwort der Liste %s wird geändert"
 
 #: ../admin/mman_passwd.php:58
 msgid "New list password"
-msgstr "Neues Passwort für die Liste"
+msgstr "Neues Listenpasswort"
 
 #: ../admin/mman_passwd.php:62
 msgid "Password confirmation"
-msgstr "Passwort wiederholen"
+msgstr "Passwortbestätigung"
 
 #: ../admin/mman_passwd.php:66
 msgid "Change the password."
-msgstr "Passwort ändern"
+msgstr "Passwort ändern."
 
 #: ../admin/mman_url.php:65
 msgid ""
@@ -1161,6 +1139,10 @@ msgstr "Die Benutzer eMail und das Passwort sind zwingend notwendig"
 msgid "This email is incorrect"
 msgstr "Diese eMail ist nicht rivhtig"
 
+#: ../class/m_mailman.php:283 ../class/m_mailman.php:531
+msgid "The passwords are differents, please try again"
+msgstr "Die Passwörter sind unterschiedlich, bitte erneut versuchen."
+
 #: ../class/m_mailman.php:288
 msgid "This domain does not exist."
 msgstr "Diese DOMAIN ist nicht vorhanden."
@@ -1180,10 +1162,6 @@ msgstr ""
 #: ../class/m_mailman.php:366 ../class/m_mailman.php:414
 msgid "This list has pending action, you cannot delete it"
 msgstr "Die Liste ist in der Prozessschlange. Kein löschen möglich."
-
-#: ../class/m_mailman.php:531
-msgid "The passwords are differents, please try again"
-msgstr "Die Passwörter sind unterschiedlich, bitte erneut versuchen."
 
 #: ../class/m_mailman.php:586
 msgid "Mailing lists (mailman)"
@@ -3455,7 +3433,7 @@ msgstr "FTP-Konto Liste"
 
 #: ../admin/ftp_list.php:53
 msgid "Create a new FTP account"
-msgstr ""
+msgstr "Neues FTP-Konto erstellen"
 
 #: ../admin/ftp_list.php:78
 msgid "Are you sure you want to change his status?"
@@ -3495,11 +3473,11 @@ msgstr ""
 
 #: ../admin/ftp_switch_enable.php:36
 msgid "The FTP account is enabled"
-msgstr ""
+msgstr "Das FTP-Konto ist aktiviert"
 
 #: ../admin/ftp_switch_enable.php:38
 msgid "The FTP account is disabled"
-msgstr ""
+msgstr "Das FTP-Konto ist deaktiviert"
 
 #: ../admin/head.php:32
 msgid "AlternC Control Panel"
@@ -4428,7 +4406,7 @@ msgstr "Kein weiteres erstellen von PIWIK Konten möglich. Einschränkungen wurd
 
 #: ../admin/piwik_addaccount.php:46
 msgid "Successfully added piwik account"
-msgstr ""
+msgstr "Piwik-Konto erfolgreich hinzugefügt"
 
 #: ../admin/piwik_addsites.php:42 ../class/m_piwik.php:101
 msgid "All fields are mandatory"
@@ -4854,7 +4832,7 @@ msgstr "Die Datenbank wurde wiederhergestellt. Prüfen Sie den vorherigen Text a
 #: ../admin/sql_getparam.php:44
 #, php-format
 msgid "MySQL settings for database '%s'"
-msgstr ""
+msgstr "MySQL-Einstellungen für Datenbank '%s'"
 
 #: ../admin/sql_getparam.php:55
 msgid "Your current connection settings are"
@@ -5375,7 +5353,7 @@ msgstr ""
 #: ../class/m_admin.php:1189
 #, php-format
 msgid "MX is not %s BUT %s"
-msgstr ""
+msgstr "MX ist nicht %s ABER %s"
 
 #: ../class/m_admin.php:1203
 msgid "Fail to get the DNS information. Try again."
@@ -5393,7 +5371,7 @@ msgstr ""
 #: ../class/m_admin.php:1239
 #, php-format
 msgid "Domain '%s' not found."
-msgstr "DOMAIN \"%s\" nicht gefunden."
+msgstr "Domain '%s' nicht gefunden."
 
 #: ../class/m_admin.php:1258 ../class/m_admin.php:1294
 #: ../class/m_admin.php:1355
@@ -5410,7 +5388,7 @@ msgstr "Diese TLD existiert bereits"
 
 #: ../class/m_admin.php:1464
 msgid "Please enter a login"
-msgstr "Bitte Eingabe der Logindaten"
+msgstr "Bitte geben Sie einen Anmeldenamen ein"
 
 #: ../class/m_admin.php:1474
 msgid "-- Program error -- The requested password policy does not exist!"
@@ -5500,70 +5478,70 @@ msgstr "Dieses Verzeichnis ist nicht vorhanden."
 msgid "This directory is not readable."
 msgstr "Dieses Verzeichnis ist nicht lesbar."
 
-#: ../class/m_bro.php:402 ../class/m_bro.php:1173
+#: ../class/m_bro.php:401 ../class/m_bro.php:1171
 msgid "Cannot create the requested directory. Please check the permissions"
 msgstr "Kann das angegebene Verzeichnis nicht erstellen. Bitte die Berechtigungen prüfen."
 
-#: ../class/m_bro.php:408 ../class/m_bro.php:428 ../class/m_bro.php:455
-#: ../class/m_bro.php:480 ../class/m_bro.php:513 ../class/m_bro.php:523
-#: ../class/m_bro.php:554 ../class/m_bro.php:596 ../class/m_bro.php:656
-#: ../class/m_bro.php:707 ../class/m_bro.php:712 ../class/m_bro.php:806
-#: ../class/m_bro.php:977 ../class/m_bro.php:1006
+#: ../class/m_bro.php:407 ../class/m_bro.php:427 ../class/m_bro.php:454
+#: ../class/m_bro.php:479 ../class/m_bro.php:512 ../class/m_bro.php:522
+#: ../class/m_bro.php:553 ../class/m_bro.php:594 ../class/m_bro.php:654
+#: ../class/m_bro.php:705 ../class/m_bro.php:710 ../class/m_bro.php:804
+#: ../class/m_bro.php:975 ../class/m_bro.php:1004
 msgid "File or folder name is incorrect"
 msgstr "Datei oder Verzeichnis Name ist nicht richtig"
 
-#: ../class/m_bro.php:433 ../class/m_bro.php:608
+#: ../class/m_bro.php:432 ../class/m_bro.php:606
 msgid "Cannot create the requested file. Please check the permissions"
 msgstr "Ich kann die angegebene Datei nicht erstellen. Bitte die Berechtigungen prüfen."
 
-#: ../class/m_bro.php:527 ../class/m_bro.php:716
+#: ../class/m_bro.php:526 ../class/m_bro.php:714
 msgid "You cannot move or copy a file to the same folder"
 msgstr "Sie könne keine Datei in das selbe Verzeichnis kopieren"
 
-#: ../class/m_bro.php:616
+#: ../class/m_bro.php:614
 msgid "The uploaded file exceeds the max file size allowed"
 msgstr "Die Datei ist grösser als die freigegebene grösse für Dateien"
 
-#: ../class/m_bro.php:625
+#: ../class/m_bro.php:623
 msgid "Undefined error "
 msgstr "Unerklärlicher Fehler"
 
-#: ../class/m_bro.php:628
+#: ../class/m_bro.php:626
 msgid "Error during the upload of the file: "
 msgstr "Ein Fehler beim Datei Upload."
 
-#: ../class/m_bro.php:663
+#: ../class/m_bro.php:661
 msgid "Uncompressing through TAR"
 msgstr ""
 
-#: ../class/m_bro.php:668
+#: ../class/m_bro.php:666
 msgid "Uncompressing through UNZIP"
 msgstr ""
 
-#: ../class/m_bro.php:673
+#: ../class/m_bro.php:671
 msgid "Uncompressing through GUNZIP"
 msgstr ""
 
-#: ../class/m_bro.php:678
+#: ../class/m_bro.php:676
 msgid "Uncompressing through bunzip2"
 msgstr ""
 
-#: ../class/m_bro.php:688
+#: ../class/m_bro.php:686
 #, php-format
 msgid ""
 "I cannot find a way to extract the file %s, it is an unsupported compressed "
 "format"
 msgstr "Ich finde keinen weiteren Lösung um die Datei %s zu entpacken, es ist ein nicht unterstütztes Kompressionsformat."
 
-#: ../class/m_bro.php:802
+#: ../class/m_bro.php:800
 msgid "Cannot read the requested file. Please check the permissions"
 msgstr "Ich kann die angeforderte Datei nicht lesen. Bitte überprüfen Sie die Berechtigungen."
 
-#: ../class/m_bro.php:883
+#: ../class/m_bro.php:881
 msgid "File not in authorized directory"
 msgstr "Datei ist nicht in einem authorisiertem Verzeichnis"
 
-#: ../class/m_bro.php:1001
+#: ../class/m_bro.php:999
 msgid "Cannot edit the requested file. Please check the permissions"
 msgstr "Bearbeiten der gewählten Datei nicht möglich- Bitte prüfen Sie die Berechtgungen"
 

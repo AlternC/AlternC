@@ -23,8 +23,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AlternC, hosting control panel\n"
 "Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
-"POT-Creation-Date: 2013-10-18 11:47+0200\n"
-"PO-Revision-Date: 2017-10-07 17:17+0000\n"
+"POT-Creation-Date: 2017-10-08 14:47+0200\n"
+"PO-Revision-Date: 2017-10-08 12:51+0000\n"
 "Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
 "Language-Team: French (France) (http://www.transifex.com/octopuce/alternc/language/fr_FR/)\n"
 "MIME-Version: 1.0\n"
@@ -33,13 +33,13 @@ msgstr ""
 "Language: fr_FR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#. Type: note
+#. Type: error
 #. Description
 #: ../alternc.templates:1001
 msgid "AlternC need ACL on filesystem"
 msgstr "AlternC requiert les ACL sur le système de fichiers"
 
-#. Type: note
+#. Type: error
 #. Description
 #: ../alternc.templates:1001
 msgid ""
@@ -47,13 +47,21 @@ msgid ""
 "currently not enabled."
 msgstr "AlternC ne peut pas fonctionner correctement sans les ACL activées sur le système de fichiers. Les ACL ne sont actuellement pas actives."
 
-#. Type: note
+#. Type: error
 #. Description
 #: ../alternc.templates:1001
 msgid ""
 "Also, you need to activate group quota (grpquota) to be able to use disk "
 "quota (but that's not mandatory)."
 msgstr "De plus, si vous souhaitez utiliser les quotas de disque, vous devez activer les quotas de groupe (grpquota) (mais cela n'est pas obligatoire)."
+
+#. Type: error
+#. Description
+#. Type: error
+#. Description
+#: ../alternc.templates:1001 ../alternc.templates:36001
+msgid "This is a fatal error and will cause the package installation to fail."
+msgstr "Cette erreur est fatale et bloquera l'installation du paquet."
 
 #. Type: note
 #. Description
@@ -550,9 +558,9 @@ msgstr "Doit-on utiliser un serveur MySQL distant ?"
 #. Description
 #: ../alternc.templates:33001
 msgid ""
-"No local Mysql server was found. Please confirm you want to use a remote "
-"Mysql Server. If not, AlternC cannot be installed."
-msgstr "Aucun serveur MySQL local n'a été trouvé. Merci de confirmer que vous souhaitez utiliser un serveur MySQL distant. Sans cela, AlternC ne peut pas être installé."
+"Please confirm you want to use a remote Mysql Server. If not, AlternC cannot"
+" be installed."
+msgstr "Merci de confirmer que vous souhaitez utiliser un serveur MySQL distant. Sinon, AlternC ne pourra pas être installé"
 
 #. Type: boolean
 #. Description
@@ -581,6 +589,18 @@ msgid ""
 "this is an expected situation, since the server might not be reachable from "
 "outside your network."
 msgstr "L'adresse IP dont vous disposez est privée, merci de confirmer que vous souhaitez tout de même l'utiliser. Le serveur pourrait ne pas être joignable depuis l'extérieur de votre réseau. "
+
+#. Type: error
+#. Description
+#: ../alternc.templates:36001
+msgid "Remote mysql: connection error"
+msgstr "Serveur MySQL distant : erreur de connexion"
+
+#. Type: error
+#. Description
+#: ../alternc.templates:36001
+msgid "Connection to the remote MySQL server failed."
+msgstr "La connexion au serveur MySQL distant a échoué."
 
 #. Type: string
 #. Description
@@ -626,48 +646,6 @@ msgstr "Merci d'installer et de CONFIGURER AlternC avant d'installer alternc-aws
 msgid ""
 "Please check out the AlternC installation documentation before proceeding."
 msgstr "Merci de lire la documentation d'installation d'AlternC avant de continuer."
-
-#. Type: boolean
-#. Description
-#: ../templates:1001
-msgid "Do you want to patch mailman for virtual support?"
-msgstr "Voulez-vous installer le patch mailman pour le support des listes virtuelles ?"
-
-#. Type: boolean
-#. Description
-#: ../templates:1001
-msgid ""
-"The AlternC mailman plugin can optionally patch mailman to make it support "
-"same-name lists on different domains (ie. allow test@example.com and "
-"test@example.org to coexist). Mailman 2.x, by default, doesn't support that "
-"functionality but Koumbit.org has developped patches to make it."
-msgstr "Le module mailman pour AlternC peut optionnellement modifier (patch) mailman pour qu'il sache gérer des listes du même nom sur des domaines différents (par exemple autoriser test@example.com et test@example.org) Mailman 2.x, par défaut, ne sait pas gérer cela, mais Koumbit.org a développé des patchs qui le permettent."
-
-#. Type: boolean
-#. Description
-#: ../templates:1001
-msgid ""
-"The plugin only supports patching, no way to unpatch right now. Please "
-"understand that this process will modify core Mailman code and might break "
-"some functionality. It is running in production on Koumbit.org."
-msgstr "Ce greffon ne sait que modifier mailman, et un retour en arrière n'est pas possible. Vous devez être conscient que ce processus modifie le coeur du code de mailman et pourrait casser certaines fonctions. Cela dit, Koumbit.org l'utilise en production."
-
-#. Type: boolean
-#. Description
-#: ../templates:1001
-msgid ""
-"Also, note that everytime the mailman package is upgraded or reinstalled, "
-"the patches will need to be reapplied manually. This can be done by "
-"reconfiguring the alternc-mailman package.  ."
-msgstr "Notez aussi qu'à chaque fois que vous mettez à jour ou réinstallez le paquet Mailman, cette modification doit être réappliquée. Cela peut être effectué en reconfigurant le paquet alternc-mailman."
-
-#. Type: boolean
-#. Description
-#: ../templates:1001
-msgid ""
-"The patches are in /usr/share/alternc-mailman/patches. More information "
-"about the patch at http://wiki.koumbit.net/VirtualMailman."
-msgstr "Les patchs sont dans  /usr/share/alternc-mailman/patches. Pour plus d'information sur ce patch rendez-vous sur http://wiki.koumbit.net/VirtualMailman."
 
 #: ../admin/aws_add.php:33
 msgid "You cannot add any new statistics, your quota is over."
@@ -1170,6 +1148,10 @@ msgstr "Le mail du propriétaire et le mot de passe sont obligatoires"
 msgid "This email is incorrect"
 msgstr "L'adresse email est incorrecte"
 
+#: ../class/m_mailman.php:283 ../class/m_mailman.php:531
+msgid "The passwords are differents, please try again"
+msgstr "Les mots de passes sont différents, merci de réessayer"
+
 #: ../class/m_mailman.php:288
 msgid "This domain does not exist."
 msgstr "Ce domaine n'existe pas."
@@ -1189,10 +1171,6 @@ msgstr "Cette adresse email (ou une des liste-subscribe, liste-unsubscribe etc.)
 #: ../class/m_mailman.php:366 ../class/m_mailman.php:414
 msgid "This list has pending action, you cannot delete it"
 msgstr "Cette liste a des actions en cours, vous ne pouvez pas l'effacer"
-
-#: ../class/m_mailman.php:531
-msgid "The passwords are differents, please try again"
-msgstr "Les mots de passes sont différents, merci de réessayer"
 
 #: ../class/m_mailman.php:586
 msgid "Mailing lists (mailman)"
@@ -5509,70 +5487,70 @@ msgstr "Ce répertoire n'existe pas"
 msgid "This directory is not readable."
 msgstr "Le répertoire ne peut pas être lu."
 
-#: ../class/m_bro.php:402 ../class/m_bro.php:1173
+#: ../class/m_bro.php:401 ../class/m_bro.php:1171
 msgid "Cannot create the requested directory. Please check the permissions"
 msgstr "Impossible de créer le répertoire. Vérifiez les droits."
 
-#: ../class/m_bro.php:408 ../class/m_bro.php:428 ../class/m_bro.php:455
-#: ../class/m_bro.php:480 ../class/m_bro.php:513 ../class/m_bro.php:523
-#: ../class/m_bro.php:554 ../class/m_bro.php:596 ../class/m_bro.php:656
-#: ../class/m_bro.php:707 ../class/m_bro.php:712 ../class/m_bro.php:806
-#: ../class/m_bro.php:977 ../class/m_bro.php:1006
+#: ../class/m_bro.php:407 ../class/m_bro.php:427 ../class/m_bro.php:454
+#: ../class/m_bro.php:479 ../class/m_bro.php:512 ../class/m_bro.php:522
+#: ../class/m_bro.php:553 ../class/m_bro.php:594 ../class/m_bro.php:654
+#: ../class/m_bro.php:705 ../class/m_bro.php:710 ../class/m_bro.php:804
+#: ../class/m_bro.php:975 ../class/m_bro.php:1004
 msgid "File or folder name is incorrect"
 msgstr "Le nom du fichier ou répertoire est incorrect"
 
-#: ../class/m_bro.php:433 ../class/m_bro.php:608
+#: ../class/m_bro.php:432 ../class/m_bro.php:606
 msgid "Cannot create the requested file. Please check the permissions"
 msgstr "Impossible de créer le fichier. Vérifiez les droits."
 
-#: ../class/m_bro.php:527 ../class/m_bro.php:716
+#: ../class/m_bro.php:526 ../class/m_bro.php:714
 msgid "You cannot move or copy a file to the same folder"
 msgstr "Vous ne pouvez pas déplacer ou copier un fichier dans le même dossier"
 
-#: ../class/m_bro.php:616
+#: ../class/m_bro.php:614
 msgid "The uploaded file exceeds the max file size allowed"
 msgstr "La taille du fichier transféré dépassé la taille autorisée"
 
-#: ../class/m_bro.php:625
+#: ../class/m_bro.php:623
 msgid "Undefined error "
 msgstr "Erreur inconnue"
 
-#: ../class/m_bro.php:628
+#: ../class/m_bro.php:626
 msgid "Error during the upload of the file: "
 msgstr "Erreur pendant le transfert du fichier"
 
-#: ../class/m_bro.php:663
+#: ../class/m_bro.php:661
 msgid "Uncompressing through TAR"
 msgstr "Décompresser via TAR"
 
-#: ../class/m_bro.php:668
+#: ../class/m_bro.php:666
 msgid "Uncompressing through UNZIP"
 msgstr "Décompresser via UNZIP"
 
-#: ../class/m_bro.php:673
+#: ../class/m_bro.php:671
 msgid "Uncompressing through GUNZIP"
 msgstr "Décompresser via GUNZIP"
 
-#: ../class/m_bro.php:678
+#: ../class/m_bro.php:676
 msgid "Uncompressing through bunzip2"
 msgstr "Décompresser via bunzip2"
 
-#: ../class/m_bro.php:688
+#: ../class/m_bro.php:686
 #, php-format
 msgid ""
 "I cannot find a way to extract the file %s, it is an unsupported compressed "
 "format"
 msgstr "Impossible de décompresser '%s', c'est peut-être un format de compression non supporté "
 
-#: ../class/m_bro.php:802
+#: ../class/m_bro.php:800
 msgid "Cannot read the requested file. Please check the permissions"
 msgstr "Impossible de lire le fichier demandé. Vérifiez les droits."
 
-#: ../class/m_bro.php:883
+#: ../class/m_bro.php:881
 msgid "File not in authorized directory"
 msgstr "Le fichier n'est pas dans un répertoire autorisé"
 
-#: ../class/m_bro.php:1001
+#: ../class/m_bro.php:999
 msgid "Cannot edit the requested file. Please check the permissions"
 msgstr "Impossible d'éditer le fichier. Vérifiez les droits."
 

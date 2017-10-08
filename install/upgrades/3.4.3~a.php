@@ -1,12 +1,6 @@
 #!/usr/bin/php
 <?php
 
-// We check that mysql php module is loaded 
-if(!function_exists('mysql_connect'))  {
-  if(!dl("mysql.so"))
-    exit(1);
-}
-
 // we don't check our AlternC session
 if(!chdir("/usr/share/alternc/panel"))
 exit(1);

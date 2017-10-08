@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AlternC, hosting control panel\n"
 "Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
-"POT-Creation-Date: 2013-10-18 11:47+0200\n"
-"PO-Revision-Date: 2017-10-07 17:08+0000\n"
+"POT-Creation-Date: 2017-10-08 14:47+0200\n"
+"PO-Revision-Date: 2017-10-08 12:49+0000\n"
 "Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
 "Language-Team: Italian (Italy) (http://www.transifex.com/octopuce/alternc/"
 "language/it_IT/)\n"
@@ -21,13 +21,13 @@ msgstr ""
 "Language: it_IT\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. Type: note
+#. Type: error
 #. Description
 #: ../alternc.templates:1001
 msgid "AlternC need ACL on filesystem"
 msgstr "AlternC necessita di una ACL sul file system"
 
-#. Type: note
+#. Type: error
 #. Description
 #: ../alternc.templates:1001
 msgid ""
@@ -37,7 +37,7 @@ msgstr ""
 "AlternC non può funzionare senza un'ACL attivata sul file system. L'ACL non "
 "è attualmente abilitata."
 
-#. Type: note
+#. Type: error
 #. Description
 #: ../alternc.templates:1001
 msgid ""
@@ -611,11 +611,9 @@ msgstr "Usare un server MySQL remoto?"
 #. Description
 #: ../alternc.templates:33001
 msgid ""
-"No local Mysql server was found. Please confirm you want to use a remote "
-"Mysql Server. If not, AlternC cannot be installed."
+"Please confirm you want to use a remote Mysql Server. If not, AlternC cannot "
+"be installed."
 msgstr ""
-"Non è stato trovato un server MySQL locale. Confermate de volete usare un "
-"server MySQL remoto. Altrimenti AlternC non può venire installato."
 
 #. Type: boolean
 #. Description
@@ -649,6 +647,12 @@ msgstr ""
 "L'indirizzo IP della macchina risulta essere privato. Confermate che si "
 "tratta di una situazione prevista, dato che il server potrebbe non essere "
 "raggiungibile dall'esterno della vostra rete."
+
+#. Type: error
+#. Description
+#: ../alternc.templates:36001
+msgid "Connection to the remote MySQL server failed."
+msgstr ""
 
 #. Type: string
 #. Description

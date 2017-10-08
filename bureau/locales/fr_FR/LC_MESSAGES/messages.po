@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: $Id: admin.po,v 1.10 2004/11/01 15:55:44 anonymous Exp "
 "$\n"
 "Report-Msgid-Bugs-To: i18n@alternc.org\n"
-"POT-Creation-Date: 2017-10-07 19:08+0200\n"
+"POT-Creation-Date: 2017-10-08 14:49+0200\n"
 "PO-Revision-Date: 2016-05-26 18:38+0200\n"
 "Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
 "Language-Team: français <team@alternc.org>\n"
@@ -4713,55 +4713,55 @@ msgstr "Le dossier n'existe pas"
 msgid "This directory is not readable."
 msgstr "Le dossier n'existe pas"
 
-#: ../class/m_bro.php:402 ../class/m_bro.php:1173
+#: ../class/m_bro.php:401 ../class/m_bro.php:1171
 msgid "Cannot create the requested directory. Please check the permissions"
 msgstr "Impossible de créer le dossier demandé, vérifiez les droits d'accès"
 
-#: ../class/m_bro.php:408 ../class/m_bro.php:428 ../class/m_bro.php:455
-#: ../class/m_bro.php:480 ../class/m_bro.php:513 ../class/m_bro.php:523
-#: ../class/m_bro.php:554 ../class/m_bro.php:596 ../class/m_bro.php:656
-#: ../class/m_bro.php:707 ../class/m_bro.php:712 ../class/m_bro.php:806
-#: ../class/m_bro.php:977 ../class/m_bro.php:1006
+#: ../class/m_bro.php:407 ../class/m_bro.php:427 ../class/m_bro.php:454
+#: ../class/m_bro.php:479 ../class/m_bro.php:512 ../class/m_bro.php:522
+#: ../class/m_bro.php:553 ../class/m_bro.php:594 ../class/m_bro.php:654
+#: ../class/m_bro.php:705 ../class/m_bro.php:710 ../class/m_bro.php:804
+#: ../class/m_bro.php:975 ../class/m_bro.php:1004
 msgid "File or folder name is incorrect"
 msgstr "Nom de fichier ou de dossier incorrect"
 
-#: ../class/m_bro.php:433 ../class/m_bro.php:608
+#: ../class/m_bro.php:432 ../class/m_bro.php:606
 msgid "Cannot create the requested file. Please check the permissions"
 msgstr "Impossible de créer le fichier demandé, vérifiez les droits d'accès"
 
-#: ../class/m_bro.php:527 ../class/m_bro.php:716
+#: ../class/m_bro.php:526 ../class/m_bro.php:714
 msgid "You cannot move or copy a file to the same folder"
 msgstr "Vous ne pouvez pas déplacer ou copier un fichier dans le même dossier"
 
-#: ../class/m_bro.php:616
+#: ../class/m_bro.php:614
 msgid "The uploaded file exceeds the max file size allowed"
 msgstr "Les fichiers téléchargés dépassent la taille maximale autorisée"
 
-#: ../class/m_bro.php:625
+#: ../class/m_bro.php:623
 msgid "Undefined error "
 msgstr "erreur non définie"
 
-#: ../class/m_bro.php:628
+#: ../class/m_bro.php:626
 msgid "Error during the upload of the file: "
 msgstr "Une erreur est survenue lors de l'envoi du fichier : "
 
-#: ../class/m_bro.php:663
+#: ../class/m_bro.php:661
 msgid "Uncompressing through TAR"
 msgstr "Décompression via TAR"
 
-#: ../class/m_bro.php:668
+#: ../class/m_bro.php:666
 msgid "Uncompressing through UNZIP"
 msgstr "Décompression via UNZIP"
 
-#: ../class/m_bro.php:673
+#: ../class/m_bro.php:671
 msgid "Uncompressing through GUNZIP"
 msgstr "Décompression via GUNZIP"
 
-#: ../class/m_bro.php:678
+#: ../class/m_bro.php:676
 msgid "Uncompressing through bunzip2"
 msgstr "Décompression via bunzip2"
 
-#: ../class/m_bro.php:688
+#: ../class/m_bro.php:686
 #, php-format
 msgid ""
 "I cannot find a way to extract the file %s, it is an unsupported compressed "
@@ -4770,15 +4770,15 @@ msgstr ""
 "Je ne trouve pas de moyen d'extraire le fichiers %s, il semble être dans un "
 "format de compression non géré"
 
-#: ../class/m_bro.php:802
+#: ../class/m_bro.php:800
 msgid "Cannot read the requested file. Please check the permissions"
 msgstr "Impossible de lire le fichier demandé. Vérifiez les droits d'accès"
 
-#: ../class/m_bro.php:883
+#: ../class/m_bro.php:881
 msgid "File not in authorized directory"
 msgstr "Le fichier n'est pas dans un dossier autorisé"
 
-#: ../class/m_bro.php:1001
+#: ../class/m_bro.php:999
 msgid "Cannot edit the requested file. Please check the permissions"
 msgstr "Impossible de modifier le fichier demandé. Vérifiez les droits d'accès"
 

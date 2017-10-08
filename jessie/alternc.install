@@ -279,9 +279,15 @@ rm -f $SED_SCRIPT
 # Ad-hoc fixes
 #
 
-php="`ls /usr/lib/apache*/*/*php*.so | sed -e 's/^.*libphp\(.\)\.so$/php\1/' | tail -1`"
-ln -fs /etc/alternc/alternc.ini /etc/$php/apache2/conf.d/alternc.ini || true
-ln -fs /etc/alternc/alternc.ini /etc/$php/cli/conf.d/alternc.ini || true
+php="`ls /usr/lib/apache*/*/*php*.so | sed -e 's/^.*libphp\(.*\)\.so$/\1/' | tail -1`"
+if [ "$php" = "7.0" ]
+then
+    ln -fs /etc/alternc/alternc.ini /etc/php/$php/apache2/conf.d/alternc.ini || true
+    ln -fs /etc/alternc/alternc.ini /etc/php/$php/cli/conf.d/alternc.ini || true
+else
+    ln -fs /etc/alternc/alternc.ini /etc/php$php/apache2/conf.d/alternc.ini || true
+    ln -fs /etc/alternc/alternc.ini /etcphp/$php/cli/conf.d/alternc.ini || true
+fi
 
 if [ -x /usr/sbin/apache2 ]; then
     # hook 
@@ -576,6 +582,14 @@ if [ "$HAS_ROOT" != "1" ]; then
     else
 	echo "Unable to create the first AlternC account (named 'admin'). newone.php returned $?. Check your MySQL database, PHP, and the /etc/alternc/local.sh file. Also check for any error above during install."
     fi
+else
+    ##UPDATE default db_server following /etc/alternc/my.cnf values
+    if [ "$MYSQL_HOST" == "localhost" ]; then
+        MYSQL_HOST_CLIENT="localhost"
+    else
+        MYSQL_HOST_CLIENT="%"
+    fi
+    mysql --defaults-file=/etc/alternc/my.cnf -e "UPDATE db_servers SET host='$MYSQL_HOST', login='$MYSQL_USER', password='$MYSQL_PASS', client='$MYSQL_HOST_CLIENT' WHERE name='Default';"
 fi
 
 # giving vmail user read access on dovecot sql file
@@ -598,7 +612,7 @@ grep -q "^localhost\$" /etc/opendkim/TrustedHosts || echo "localhost" >>/etc/ope
 grep -q "^$PUBLIC_IP\$" /etc/opendkim/TrustedHosts || echo "$PUBLIC_IP" >>/etc/opendkim/TrustedHosts
 
 # Add opendkim to service to restart
-SERVICES="$SERVICES opendkim"
+SERVICES="$SERVICES opendkim bind9"
 
 # hook 
 run-parts --arg=before-reload /usr/lib/alternc/install.d 
@@ -606,7 +620,7 @@ run-parts --arg=before-reload /usr/lib/alternc/install.d
 #######################################################################
 # Reload services
 #
-for service in postfix bind9 apache2 dovecot cron proftpd ; do
+for service in postfix dovecot cron proftpd ; do
     invoke-rc.d $service force-reload || true
 done
 
@@ -614,6 +628,10 @@ done
 for service in $SERVICES; do
     test -x /etc/init.d/$service && invoke-rc.d $service stop || true
 done
+
+# on Jessie, apache2 does not stop/start properly due to "service" and "apache2ctl" having different behavior pid-file-wise
+killall apache2 
+
 for service in $SERVICES; do
     test -x /etc/init.d/$service && invoke-rc.d $service start || true
 done
