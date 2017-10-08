@@ -22,7 +22,7 @@ if ($db->query("SELECT uid,login FROM membres;")) {
     } else {
       // The QUOTA system being disabled, we need to use 'du' on each folder.
       $login = $db->f('login');
-      $size=exec("/usr/lib/alternc/du.pl /var/www/alternc/".substr($login,0,1)."/".$login);
+      $size=exec("/usr/bin/du /var/www/alternc/".substr($login,0,1)."/".$login);
     }
     $db2->query("REPLACE INTO size_web SET uid=?, size=?;",array(intval($db->f('uid')),intval($size)));
     echo $db->f('login')." (".(round($size/1024, 1))." MB)\n";
