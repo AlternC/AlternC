@@ -279,7 +279,7 @@ rm -f $SED_SCRIPT
 # Ad-hoc fixes
 #
 
-php="`ls /usr/lib/apache*/*/*php*.so | sed -e 's/^.*libphp\(.\)\.so$/php\1/' | tail -1`"
+php="`ls /usr/lib/apache*/*/*php*.so | sed -e 's/^.*libphp\(.*\)\.so$/php\1/' | tail -1`"
 ln -fs /etc/alternc/alternc.ini /etc/$php/apache2/conf.d/alternc.ini || true
 ln -fs /etc/alternc/alternc.ini /etc/$php/cli/conf.d/alternc.ini || true
 
