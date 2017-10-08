@@ -57,6 +57,7 @@ echo "Granting users..."
 grant="GRANT ALL ON *.* TO '$user'@'${MYSQL_CLIENT}' IDENTIFIED BY '$password' WITH GRANT OPTION;
 CREATE DATABASE IF NOT EXISTS $database; "
 grant_mail="GRANT ALL ON $database.dovecot_view TO '$alternc_mail_user'@'${MYSQL_CLIENT}' IDENTIFIED BY '$alternc_mail_password';"
+grant_mail=$grant_mail"GRANT ALL ON $database.dovecot_quota TO '$alternc_mail_user'@'${MYSQL_CLIENT}' IDENTIFIED BY '$alternc_mail_password';"
 grant_mail=$grant_mail"GRANT SELECT ON $database.* TO '$alternc_mail_user'@'${MYSQL_CLIENT}' IDENTIFIED BY '$alternc_mail_password';"
 
 
