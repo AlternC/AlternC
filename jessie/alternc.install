@@ -612,7 +612,7 @@ run-parts --arg=before-reload /usr/lib/alternc/install.d
 #######################################################################
 # Reload services
 #
-for service in postfix apache2 dovecot cron proftpd ; do
+for service in postfix dovecot cron proftpd ; do
     invoke-rc.d $service force-reload || true
 done
 
@@ -620,6 +620,10 @@ done
 for service in $SERVICES; do
     test -x /etc/init.d/$service && invoke-rc.d $service stop || true
 done
+
+# on Jessie, apache2 does not stop/start properly due to "service" and "apache2ctl" having different behavior pid-file-wise
+killall apache2 
+
 for service in $SERVICES; do
     test -x /etc/init.d/$service && invoke-rc.d $service start || true
 done
