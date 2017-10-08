@@ -111,7 +111,7 @@ echo "<br /><br />"; printf(_("If you want to manage them, go to")."&nbsp;<a hre
         $tmptotaldb = $quota->get_size_db_sum_all();            // IN B
         $totaldb=$quota->get_size_unit($tmptotaldb);
 
-	$tmptotaltotal=($tmptotalweb*1024)+($tmptotallist*1024)+$tmptotalmail+($tmptotaldb/1024); // IN B
+	$tmptotaltotal=($tmptotalweb*1024)+($tmptotallist*1024)+$tmptotalmail+$tmptotaldb; // IN B
 	$totaltotal=$quota->get_size_unit($tmptotaltotal); 
 
         $dc = $dom->count_domains_all();
