@@ -29,11 +29,6 @@
  ----------------------------------------------------------------------
 */
 
-if(!function_exists('mysql_connect'))  {
-  if(!dl("mysql.so"))
-    exit(1);
-}
-
 // don't check my authentication !
 if(!chdir("/usr/share/alternc/panel"))
   exit(1);

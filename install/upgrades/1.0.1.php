@@ -1,12 +1,6 @@
 #!/usr/bin/php
 <?php
 
-   // We check that mysql php module is loaded 
-if(!function_exists('mysql_connect'))  {
-  if(!dl("mysql.so"))
-    exit(1);
-}
-
 // If we upgrade directly to 3.1 the panel directory change
 $panel='';
 if(chdir("/usr/share/alternc/panel")) $panel='/usr/share/alternc/panel';
