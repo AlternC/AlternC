@@ -301,9 +301,9 @@ if [ -x /usr/sbin/apache2 ]; then
         a2dismod vhost_alias
         s="apache2"
     fi 
-    if ! [ -L /etc/apache2/mods-enabled/$php.load ]
+    if ! [ -L /etc/apache2/mods-enabled/php$php.load ]
     then
-	    a2enmod $php
+	    a2enmod php$php
     fi
     if ! [ -L /etc/apache2/mods-enabled/rewrite.load ]
     then
