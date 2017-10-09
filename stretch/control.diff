@@ -1,0 +1,25 @@
+diff --git a/debian/control b/debian/control
+index 394506f9..654f2f59 100644
+--- a/debian/control
++++ b/debian/control
+@@ -38,8 +38,8 @@ Depends: debianutils (>= 1.13.1)
+        , sudo
+        , adduser
+        , dnsutils
+-       , dovecot-common (>=1:1.2.15)
+-       , dovecot-common(<< 1:2.0)
++       , acl
++       , dovecot-core (>=1:1.2.15)
+        , dovecot-imapd (>= 1:1.2.15)
+        , dovecot-pop3d (>= 1:1.2.15)
+        , vlogger
+@@ -123,8 +123,7 @@ Depends: debianutils (>= 1.13.1)
+          , gettext (>= 0.10.40-5)
+          , adduser
+          , sudo
+-         , dovecot-common (>=1:1.2.15)
+-         , dovecot-common(<< 1:2.0)
++         , dovecot-core (>=1:1.2.15)
+          , dovecot-imapd (>= 1:1.2.15)
+          , dovecot-pop3d (>= 1:1.2.15)
+          , vlogger

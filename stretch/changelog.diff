@@ -1,0 +1,13 @@
+--- changelog	2014-06-24 13:42:50.234304438 +0200
++++ changelog	2014-06-24 13:43:51.978313552 +0200
+@@ -1,1 +1,8 @@
++alternc (3.4.11) stable; urgency=low
++
++  * Version identical to 3.1 for Squeeze
++  * Includes small patches / dependency for apache & dovecot 2.0 for Stretch
++
++ -- John Soros <sorosj@gmail.com>  Mon, 9 Oct 2017 12:16:00 +0100
++
+ alternc (3.2.10) oldstable; urgency=low
+
+  * Version identical to 3.1 for Squeeze
