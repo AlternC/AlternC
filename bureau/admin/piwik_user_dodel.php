@@ -17,6 +17,10 @@
  ----------------------------------------------------------------------
 */
 
+/**
+ * delete piwik users
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/
+ */
 require_once("../class/config.php");
 
 $fields = array (

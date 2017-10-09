@@ -1,10 +1,5 @@
 <?php
 /*
- mem_admin.php
- ----------------------------------------------------------------------
- AlternC - Web Hosting System
- Copyright (C) 2002-2017 by the AlternC Development Team.
- https://alternc.com/
  ----------------------------------------------------------------------
  LICENSE
 
@@ -20,10 +15,14 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file: Benjamin Sonntag <benjamin@octopuce.com>
- Purpose of file: Manage administrators preferences
- ----------------------------------------------------------------------
 */
+
+/**
+ * Change the administrator's account preferences
+ * 
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/
+ */
+
 require_once("../class/config.php");
 
 $fields = array (

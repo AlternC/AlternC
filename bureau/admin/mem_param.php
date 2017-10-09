@@ -1,13 +1,5 @@
 <?php
 /*
- $Id: mem_param.php,v 1.8 2004/07/23 14:03:57 anonymous Exp $
- ----------------------------------------------------------------------
- AlternC - Web Hosting System
- Copyright (C) 2002 by the AlternC Development Team.
- http://alternc.org/
- ----------------------------------------------------------------------
- Based on:
- Valentin Lacambre's web hosting softwares: http://altern.org/
  ----------------------------------------------------------------------
  LICENSE
 
@@ -23,10 +15,14 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file:  Benjamin Sonntag
- Purpose of file: Allow the customization of the user interface
- ----------------------------------------------------------------------
 */
+
+/**
+ * Customize the user's interface of AlternC
+ * 
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/
+ */
+
 require_once("../class/config.php");
 
 include_once("head.php");

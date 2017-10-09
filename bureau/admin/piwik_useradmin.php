@@ -17,7 +17,12 @@
  ----------------------------------------------------------------------
 */
 
-require_once("../class/config.php");
+/**
+ * Manages piwik user accounts
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/
+ */
+
+ require_once("../class/config.php");
 include_once("head.php");
 
 $fields = array (

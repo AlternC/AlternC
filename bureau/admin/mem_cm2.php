@@ -1,13 +1,5 @@
 <?php
 /*
- $Id: mem_cm2.php,v 1.5 2004/11/29 17:27:04 anonymous Exp $
- ----------------------------------------------------------------------
- AlternC - Web Hosting System
- Copyright (C) 2002 by the AlternC Development Team.
- http://alternc.org/
- ----------------------------------------------------------------------
- Based on:
- Valentin Lacambre's web hosting softwares: http://altern.org/
  ----------------------------------------------------------------------
  LICENSE
 
@@ -23,10 +15,13 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file:  Benjamin Sonntag
- Purpose of file: Change the email of a member step 3.
- ----------------------------------------------------------------------
 */
+
+/**
+ * Change the email of an account, STEP 3
+ *
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/
+ */
 
 require_once("../class/config_nochk.php");
 

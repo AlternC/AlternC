@@ -1,13 +1,5 @@
 <?php
 /*
- $Id: menu.php,v 1.9 2005/01/18 22:16:10 anarcat Exp $
- ----------------------------------------------------------------------
- AlternC - Web Hosting System
- Copyright (C) 2002 by the AlternC Development Team.
- http://alternc.org/
- ----------------------------------------------------------------------
- Based on:
- Valentin Lacambre's web hosting softwares: http://altern.org/
  ----------------------------------------------------------------------
  LICENSE
 
@@ -23,10 +15,14 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file:
- Purpose of file:
- ----------------------------------------------------------------------
 */
+
+/**
+ * Main left menu of AlternC, uses Hooks 
+ * 
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/
+ */
+
 require_once("../class/config.php");
 
 // Getting logo
