@@ -1,13 +1,5 @@
 <?php
 /*
- $Id: logs_download.php,v 1.2 2004/09/06 18:14:36 anonymous Exp $
- ----------------------------------------------------------------------
- AlternC - Web Hosting System
- Copyright (C) 2002 by the AlternC Development Team.
- http://alternc.org/
- ----------------------------------------------------------------------
- Based on:
- Valentin Lacambre's web hosting softwares: http://altern.org/
  ----------------------------------------------------------------------
  LICENSE
 
@@ -23,10 +15,14 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file: Sonntag Benjamin
- Purpose of file: Return the current folder in a compressed file
- ----------------------------------------------------------------------
 */
+
+/**
+ * Download a log file for a user.
+ * 
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/ 
+ */
+
 require_once("../class/config.php");
 
 $fields = array (

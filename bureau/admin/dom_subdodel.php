@@ -1,13 +1,5 @@
 <?php
 /*
- $Id: dom_subdodel.php,v 1.2 2003/06/10 11:18:27 root Exp $
- ----------------------------------------------------------------------
- AlternC - Web Hosting System
- Copyright (C) 2002 by the AlternC Development Team.
- http://alternc.org/
- ----------------------------------------------------------------------
- Based on:
- Valentin Lacambre's web hosting softwares: http://altern.org/
  ----------------------------------------------------------------------
  LICENSE
 
@@ -23,10 +15,14 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file:
- Purpose of file:
- ----------------------------------------------------------------------
 */
+
+/**
+ * After confirmation of a subdomain deletion, do it here.
+ * 
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/ 
+ */
+
 require_once("../class/config.php");
 include_once("head.php");
 
@@ -63,7 +59,7 @@ $dom->unlock();
 		exit();
 	} else {
         $t = time();
-	// XXX: we assume the cron job is at every 5 minutes
+	// TODO: we assume the cron job is at every 5 minutes
         $msg->raise("INFO", "dom", _("The modifications will take effect at %s.  Server time is %s."), array(date('H:i:s', ($t-($t%300)+300)), date('H:i:s', $t))); 
 	echo $msg->msg_html_all();
 	}

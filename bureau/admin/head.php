@@ -1,10 +1,6 @@
 <?php
 /*
  ----------------------------------------------------------------------
- AlternC - Web Hosting System
- Copyright (C) 2000-2012 by the AlternC Development Team.
- https://alternc.org/
- ----------------------------------------------------------------------
  LICENSE
 
  This program is free software; you can redistribute it and/or
@@ -19,9 +15,14 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Purpose of file: Main header of all html files
- ----------------------------------------------------------------------
 */
+
+/**
+ * main HEADER of all HTML page of the panel
+ * 
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/ 
+ */
+
 if (!isset($charset) || ! $charset) $charset="UTF-8";
 @header("Content-Type: text/html; charset=$charset");
 ?>

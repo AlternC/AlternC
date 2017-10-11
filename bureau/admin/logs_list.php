@@ -1,13 +1,5 @@
 <?php
 /*
- $Id: log_list.php,v 1.8 2006/02/16 16:26:28 benjamin Exp $
- ----------------------------------------------------------------------
- AlternC - Web Hosting System
- Copyright (C) 2002 by the AlternC Development Team.
- http://alternc.org/
- ----------------------------------------------------------------------
- Based on:
- Valentin Lacambre's web hosting softwares: http://altern.org/
  ----------------------------------------------------------------------
  LICENSE
 
@@ -23,10 +15,15 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file: Lerider Steven
- Purpose of file: Manage the log listing of a user
- ----------------------------------------------------------------------
 */
+
+/**
+ * Show a list of all found log files for an account
+ * and allow to see / tail / download them
+ * 
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/ 
+ */
+
 require_once("../class/config.php");
 include_once("head.php");
 

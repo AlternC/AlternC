@@ -1,13 +1,5 @@
 <?php
 /*
- $Id: hta_list.php,v 1.5 2003/08/20 13:08:28 root Exp $
- ----------------------------------------------------------------------
- AlternC - Web Hosting System
- Copyright (C) 2002 by the AlternC Development Team.
- http://alternc.org/
- ----------------------------------------------------------------------
- Based on:
- Valentin Lacambre's web hosting softwares: http://altern.org/
  ----------------------------------------------------------------------
  LICENSE
 
@@ -23,10 +15,14 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file: Franck Missoum
- Purpose of file: List the users in a protected folder
- ----------------------------------------------------------------------
 */
+
+/**
+ * List the folders having password-protection in the account's home
+ * 
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/ 
+ */
+
 require_once("../class/config.php");
 include_once("head.php");
 

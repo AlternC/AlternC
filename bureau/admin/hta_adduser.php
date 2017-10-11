@@ -1,13 +1,5 @@
 <?php
 /*
- $Id: hta_adduser.php,v 1.6 2006/01/12 01:10:48 anarcat Exp $
- ----------------------------------------------------------------------
- AlternC - Web Hosting System
- Copyright (C) 2002 by the AlternC Development Team.
- http://alternc.org/
- ----------------------------------------------------------------------
- Based on:
- Valentin Lacambre's web hosting softwares: http://altern.org/
  ----------------------------------------------------------------------
  LICENSE
 
@@ -23,10 +15,14 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file: Franck Missoum, Benjamin Sonntag
- Purpose of file: Add a username to a protected folder
- ----------------------------------------------------------------------
 */
+
+/** 
+ * Add a user to a protected folder (using .htaccess for apache)
+ *
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/ 
+ */
+
 require_once("../class/config.php");
 include_once("head.php");
 
@@ -47,9 +43,6 @@ $passwd_classcount = $c['hta']['classcount'];
 
 <form method="post" action="hta_doadduser.php" name="main" id="main" autocomplete="off">
   <?php csrf_get(); ?>
-<!-- honeypot fields -->
-<input type="text" style="display: none" id="fakeUsername" name="fakeUsername" value="" />
-<input type="password" style="display: none" id="fakePassword" name="fakePassword" value="" />
 
 <table border="1" cellspacing="0" cellpadding="4" class='tedit'>
 	<tr>
@@ -74,6 +67,6 @@ $passwd_classcount = $c['hta']['classcount'];
   <input type="button" class="inb" value="<?php __("Cancel"); ?>" onclick="document.location='hta_edit.php?dir=<?php echo urlencode($dir);  ?>';" />
 </form>
 <script type="text/javascript">
-document.forms['main'].user.focus();
+  document.forms['main'].user.focus();
 </script>
 <?php include_once("foot.php"); ?>

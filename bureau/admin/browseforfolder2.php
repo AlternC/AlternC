@@ -1,39 +1,31 @@
 <?php
 /*
-   Navigateur de dossiers en php. (BrowseForFolder in win32 api :)
-   Version 1.0
-   Notes :
-   Benjamin Sonntag 23/12/2001 Version initiale: n'utilise qu'un seul uid : 1...
-   Fichier :
-   browseforfolder.php3 : Dialogue de navigation BrowseForFolder
-   $caller = composant form appelant (de la forme forms['main'].component )
+ ----------------------------------------------------------------------
+ LICENSE
 
-   function browseforfolder(caller) {
-   eval("file=document."+caller+".value");
-   w=window.open("browseforfolder.php?caller="+caller+"&file="+file,"browseforfolder","width=300,height=400,scrollbars,left=100,top=100");
-   }
+ This program is free software; you can redistribute it and/or
+ modify it under the terms of the GNU General Public License (GPL)
+ as published by the Free Software Foundation; either version 2
+ of the License, or (at your option) any later version.
 
-   requires : ife($test,$iftrue,$iffalse) function : 
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
 
-   function ife($test,$true,$false="") {
-   if ($test)
-   return $true;
-   else
-   return $false;
-   }
+ To read the license please visit http://www.gnu.org/copyleft/gpl.html
+ ----------------------------------------------------------------------
+*/
 
-   BrowseForFolder($curdir); Retourne le tableau avec la liste des dossiers à afficher dans
-   la fonction browseforfolder sachant que le dossier actuel et curdir
-   retourne un tableau de tableau de la forme :
-   dir => "directory"      Nom du dossier
-   level => 0-n            Niveau du dossier (0=racine 1,2 ...)
-   put => "/sub/sub/directory" Contenu de la variable post à ajouter pour la balise A si ="" c'est le dossier courant.
-   Si probleme, positionne $errbrowsefold
-   Sinon, retourne le tableau et $maxlevel contient le nombre maximum de sous-dossiers.
+/**
+ * An HTML page to browse for a folder on a remote server and choose it using 
+ * Javascript. Chroot the user to its root, 
+ * 
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/ 
  */
+
 include("../class/config.php");
 
-// FIXME Refaire ce truc hein...
 $fields = array (
     "caller"               => array ("request", "string", ""),
     "select"               => array ("request", "string", ""),

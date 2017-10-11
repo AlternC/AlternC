@@ -1,13 +1,5 @@
 <?php
 /*
- $Id: dom_dodel.php,v 1.3 2003/06/10 11:18:27 root Exp $
- ----------------------------------------------------------------------
- AlternC - Web Hosting System
- Copyright (C) 2002 by the AlternC Development Team.
- http://alternc.org/
- ----------------------------------------------------------------------
- Based on:
- Valentin Lacambre's web hosting softwares: http://altern.org/
  ----------------------------------------------------------------------
  LICENSE
 
@@ -23,10 +15,14 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file: Benjamin Sonntag
- Purpose of file: Delete a domain, confirm the deletion
- ----------------------------------------------------------------------
 */
+
+/** 
+ * Delete a domain, confirm the deletion
+ * 
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/ 
+ */
+
 require_once("../class/config.php");
 include_once("head.php");
 

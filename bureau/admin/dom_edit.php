@@ -1,13 +1,5 @@
 <?php
 /*
- $Id: dom_edit.php,v 1.8 2006/02/17 18:20:08 olivier Exp $
- ----------------------------------------------------------------------
- AlternC - Web Hosting System
- Copyright (C) 2002 by the AlternC Development Team.
- http://alternc.org/
- ----------------------------------------------------------------------
- Based on:
- Valentin Lacambre's web hosting softwares: http://altern.org/
  ----------------------------------------------------------------------
  LICENSE
 
@@ -23,10 +15,14 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file: Benjamin Sonntag
- Purpose of file: Edit a domain parameters
- ----------------------------------------------------------------------
 */
+
+/**
+ * Change a DOMAIN settings
+ * 
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/ 
+ */
+
 require_once("../class/config.php");
 include_once("head.php");
 
@@ -53,7 +49,7 @@ echo $msg->msg_html_all();
 <script type="text/javascript">
 function dnson() {
   alert('This function seems unused. If you see this message, please let us know.');
-	// Active les composants DNS :
+	// enable / disable html components:
 	if (document.forms["fdns"].mx.disabled!=null)
 		document.forms["fdns"].mx.disabled=false;
 	if (document.forms["fdns"].emailon.disabled!=null)
@@ -63,7 +59,7 @@ function dnson() {
 }
 function dnsoff() {
   alert('This function seems unused. If you see this message, please let us know.');
-	// Active les composants DNS :
+	// enable / disable html components:
 	if (document.forms["fdns"].mx.disabled!=null)
 		document.forms["fdns"].mx.disabled=true;
 	if (document.forms["fdns"].emailon.disabled!=null)
@@ -73,7 +69,7 @@ function dnsoff() {
 }
 
 function destruction_alert() {
-  // On ne se pose pas de question si le DNS est deja sur NON
+  // We don't ask question if DNS is already NO
   if (<?php echo (int)$r["dns"]; ?>!=1) {
     return true;
   }
@@ -250,9 +246,7 @@ sub_domains_edit($domain);
 ?>
 <br />
 <?php $mem->show_help("edit_domain"); ?>
-<!-- *****************************************
-		 modification des parametres dns
- -->
+<!-- DNS SETTINGS  -->
 
 </div>
     <?php
@@ -347,7 +341,6 @@ if (!$r['noerase']) {
 } ?>
 </div> <!-- tabsdom -->
 <script type="text/javascript">
-//document.forms['main'].sub.focus(); // not with tabs
 
 $(function() {
   $("#tabsdom").tabs();

@@ -1,10 +1,6 @@
 <?php
 /*
  ----------------------------------------------------------------------
- AlternC - Web Hosting System
- Copyright (C) 2000-2012 by the AlternC Development Team.
- https://alternc.org/
- ----------------------------------------------------------------------
  LICENSE
 
  This program is free software; you can redistribute it and/or
@@ -19,11 +15,16 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Purpose of file: Delete one or more mailboxes
- ----------------------------------------------------------------------
 */
-require_once("../class/config.php");
 
+/**
+ * Form to confirm the deletion of an email account
+ * delete it when confirmed.
+ * 
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/ 
+ */
+
+require_once("../class/config.php");
 
 $fields = array (
 	"d"    => array ("post", "array", ""),

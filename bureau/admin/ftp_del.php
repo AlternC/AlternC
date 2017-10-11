@@ -1,13 +1,5 @@
 <?php
 /*
- $Id: ftp_del.php,v 1.2 2003/06/10 06:45:16 root Exp $
- ----------------------------------------------------------------------
- AlternC - Web Hosting System
- Copyright (C) 2002 by the AlternC Development Team.
- http://alternc.org/
- ----------------------------------------------------------------------
- Based on:
- Valentin Lacambre's web hosting softwares: http://altern.org/
  ----------------------------------------------------------------------
  LICENSE
 
@@ -23,13 +15,16 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file: Benjamin Sonntag
- Purpose of file: Delete ftp accounts
- ----------------------------------------------------------------------
 */
+
+/**
+ * Ask for confirmation or delete an FTP account
+ * 
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/ 
+ */
+
 require_once("../class/config.php");
 
-// On parcours les POST_VARS et on repere les del_.
 reset($_POST);
 $lst_todel=array();
 while (list($key,$val)=each($_POST)) {

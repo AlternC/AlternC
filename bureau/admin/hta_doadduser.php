@@ -1,13 +1,5 @@
  <?php
 /*
- $Id: hta_doadduser.php,v 1.2 2006/01/12 01:10:48 anarcat Exp $
- ----------------------------------------------------------------------
- AlternC - Web Hosting System
- Copyright (C) 2002 by the AlternC Development Team.
- http://alternc.org/
- ----------------------------------------------------------------------
- Based on:
- Valentin Lacambre's web hosting softwares: http://altern.org/
  ----------------------------------------------------------------------
  LICENSE
 
@@ -23,10 +15,14 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file: Franck Missoum
- Purpose of file: Add a username to a protected folder
- ----------------------------------------------------------------------
 */
+
+/**
+ * Add a new username / password pair to a protected folder
+ *
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/ 
+ */
+
 require_once("../class/config.php");
 $fields = array (
         "dir"		=> array ("post", "string", ""),
