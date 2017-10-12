@@ -1,13 +1,5 @@
 <?php
 /*
- $Id: adm_domstypeedit.php,v 1.6 2006/01/12 01:10:48 anarcat Exp $
- ----------------------------------------------------------------------
- AlternC - Web Hosting System
- Copyright (C) 2002 by the AlternC Development Team.
- http://alternc.org/
- ----------------------------------------------------------------------
- Based on:
- Valentin Lacambre's web hosting softwares: http://altern.org/
  ----------------------------------------------------------------------
  LICENSE
 
@@ -23,10 +15,14 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file: Alan Garcia
- Purpose of file: Edit the domain types
- ----------------------------------------------------------------------
 */
+
+/**
+ * Form to update a domain type on the server
+ * 
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/ 
+ */
+
 require_once("../class/config.php");
 if (!$admin->enabled) {
     $msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));

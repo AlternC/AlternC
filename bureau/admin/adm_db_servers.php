@@ -1,10 +1,6 @@
 <?php
 /*
 ----------------------------------------------------------------------
-AlternC - Web Hosting System
-Copyright (C) 2000-2012 by the AlternC Development Team.
-https://alternc.org/
-----------------------------------------------------------------------
 LICENSE
 
 This program is free software; you can redistribute it and/or
@@ -19,9 +15,14 @@ GNU General Public License for more details.
 
 To read the license please visit http://www.gnu.org/copyleft/gpl.html
 ----------------------------------------------------------------------
-Purpose of file: Show a form to edit a member
-----------------------------------------------------------------------
 */
+
+/**
+ * Show the list of MySQL db servers that this AlternC instance can use
+ * 
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/
+ */
+
 require_once("../class/config.php");
 
 include("head.php");

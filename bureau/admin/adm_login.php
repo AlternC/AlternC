@@ -1,13 +1,5 @@
 <?php
 /*
- $Id: adm_login.php,v 1.4 2005/04/01 17:13:10 benjamin Exp $
- ----------------------------------------------------------------------
- AlternC - Web Hosting System
- Copyright (C) 2002 by the AlternC Development Team.
- http://alternc.org/
- ----------------------------------------------------------------------
- Based on:
- Valentin Lacambre's web hosting softwares: http://altern.org/
  ----------------------------------------------------------------------
  LICENSE
 
@@ -23,10 +15,14 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file: Benjamin Sonntag
- Purpose of file: Connect a super-user to another account
- ----------------------------------------------------------------------
 */
+
+/**
+ * Any ADMIN account can impersonate to any other account by using this page.
+ *
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/ 
+ */
+
 require_once("../class/config.php");
 
 /*

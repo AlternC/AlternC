@@ -1,13 +1,5 @@
 <?php
 /*
- $Id: adm_quotadoedit.php,v 1.3 2004/10/24 20:09:21 anonymous Exp $
- ----------------------------------------------------------------------
- AlternC - Web Hosting System
- Copyright (C) 2002 by the AlternC Development Team.
- http://alternc.org/
-----------------------------------------------------------------------
- Based on:
- Valentin Lacambre's web hosting softwares: http://altern.org/
 ----------------------------------------------------------------------
  LICENSE
 
@@ -23,10 +15,14 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
 ----------------------------------------------------------------------
- Original Author of file: Benjamin Sonntag
- Purpose of file: Edit a member's quotas
- ----------------------------------------------------------------------
 */
+
+/**
+ * Edit an account's quotas
+ * 
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/ 
+ */
+
 require_once("../class/config.php");
 
 if (!$admin->enabled) {

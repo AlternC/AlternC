@@ -1,10 +1,5 @@
 <?php
 /*
- mem_admin.php
- ----------------------------------------------------------------------
- AlternC - Web Hosting System
- Copyright (C) 2002-2017 by the AlternC Development Team.
- https://alternc.com/
  ----------------------------------------------------------------------
  LICENSE
 
@@ -20,10 +15,15 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file: Benjamin Sonntag
- Purpose of file: Show the member list
- ----------------------------------------------------------------------
  */
+
+/**
+ * Show the list of all accounts on AlternC, or those created by a subadmin
+ * allow to impersonate, edit the account, change the quotas
+ * 
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/ 
+ */
+
 require_once("../class/config.php");
 include_once("head.php");
 

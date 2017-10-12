@@ -1,13 +1,5 @@
 <?php
 /*
-   $Id: bro_main.php,v 1.11 2004/09/06 18:14:36 anonymous Exp $
-   ----------------------------------------------------------------------
-   AlternC - Web Hosting System
-   Copyright (C) 2002 by the AlternC Development Team.
-   http://alternc.org/
-   ----------------------------------------------------------------------
-   Based on:
-   Valentin Lacambre's web hosting softwares: http://altern.org/
    ----------------------------------------------------------------------
    LICENSE
 
@@ -23,12 +15,19 @@
 
    To read the license please visit http://www.gnu.org/copyleft/gpl.html
    ----------------------------------------------------------------------
-   Original Author of file: Benjamin Sonntag, Remi
-   Purpose of file: Online file Browser of AlternC
-   TODO : Voir ??? + D�placer / Copier 
-   ----------------------------------------------------------------------
  */
-require_once("../class/config.php");
+
+/**
+ * A file browser / manager for AlternC
+ * Warning: complex spaghetti-style code below.
+ * allow an account user to browse files, move, copy, upload, rename,
+ * and set permissions
+ * also, uncompress tarballs and zips, and import SQL files
+ * 
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/  
+ */
+
+ require_once("../class/config.php");
 include_once ("head.php");
 
 $fields = array (

@@ -1,13 +1,5 @@
 <?php
 /*
- $Id: bro_editor.php,v 1.5 2005/05/03 14:49:06 anarcat Exp $
- ----------------------------------------------------------------------
- AlternC - Web Hosting System
- Copyright (C) 2002 by the AlternC Development Team.
- http://alternc.org/
- ----------------------------------------------------------------------
- Based on:
- Valentin Lacambre's web hosting softwares: http://altern.org/
  ----------------------------------------------------------------------
  LICENSE
 
@@ -23,11 +15,15 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file: Benjamin Sonntag
- Purpose of file: Editor of the browser
- ----------------------------------------------------------------------
 */
-require_once("../class/config.php");
+
+/**
+ * File editor part of AlternC file manager / browser.
+ * 
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/  
+ */
+
+ require_once("../class/config.php");
 
 // We check it ourself : not fatal
 define("NOCSRF",true);

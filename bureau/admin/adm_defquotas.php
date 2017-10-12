@@ -1,15 +1,5 @@
 <?php
 /*
- $Id: adm_defquotas.php,v 1.4 2006/01/24 05:03:30 joe Exp $
- ----------------------------------------------------------------------
- AlternC - Web Hosting System
- Copyright (C) 2006 Le r�seau Koumbit Inc.
- http://koumbit.org/
- Copyright (C) 2002 by the AlternC Development Team.
- http://alternc.org/
- ----------------------------------------------------------------------
- Based on:
- Valentin Lacambre's web hosting softwares: http://altern.org/
  ----------------------------------------------------------------------
  LICENSE
 
@@ -25,10 +15,14 @@
 
  To read the license please visit http://www.gnu.org/copyleft/gpl.html
  ----------------------------------------------------------------------
- Original Author of file: Benjamin Sonntag
- Purpose of file: Manage the default quotas
- ----------------------------------------------------------------------
 */
+
+/**
+ * Administrator page to manage default quotas for users
+ * 
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/
+ */
+
 require_once("../class/config.php");
 
 if (!$admin->enabled) {
