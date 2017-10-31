@@ -32,7 +32,7 @@ if (!$admin->enabled) {
 	exit();
 }
 
-<$fields = array (
+$fields = array (
 	"canpass"    => array ("post", "integer", 1),
 	"login"      => array ("post", "string", null),
 	"pass"       => array ("post", "string", null),
