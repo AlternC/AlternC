@@ -469,6 +469,10 @@ class m_ssl {
                     break;
                 }
                 $offset = strpos($fqdn, ".", $offset+1);
+                //No more dot, we prevent an infinite loop
+                if (!$offset) {
+                    break;
+                }
             } while (true);
             if (!$found) {
                 echo "FATAL: didn't found fqdn $fqdn in sub_domaines table !\n";
