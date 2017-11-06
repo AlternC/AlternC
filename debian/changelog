@@ -16,7 +16,7 @@ alternc (3.1.11) oldoldstable; urgency=low
   * fix more BUGS from Github: #178 #159 #155 #176 #161 #162 #164 #165 #166 #170 #175 #177
   * enhanced message class, managed both logs to /var/log/alternc and LEVELS of messages
 
- -- Benjamin Sonntag <benjamin@sonntag.fr>  Wed,  7 Oct 2017 23:36:00 +0200
+ -- Benjamin Sonntag <benjamin@sonntag.fr>  Wed,  6 Nov 2017 15:36:00 +0100
 
 alternc (3.1.10) oldoldstable; urgency=low
 
