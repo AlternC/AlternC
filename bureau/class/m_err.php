@@ -150,7 +150,7 @@ class m_err {
         global $msg;
         $trace = debug_backtrace();
         $caller = $trace[2];
-        $msg->raise( "error","err","Deprecation warning: The old messaging class is still used by ".json_encode( $caller ));
+        $msg->raise("info", "err", "Deprecation warning: The old messaging class is still used by ".json_encode($caller));
     }
 
 } /* Classe m_err */
