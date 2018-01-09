@@ -73,13 +73,9 @@ class m_hta {
             return false;
         }
         if (!file_exists("$absolute/.htaccess")) {
-            if (!@touch("$absolute/.htaccess")) {
-                $msg->raise("ERROR", "hta", _("File already exist"));
-                return false;
-            }
-            $file = @fopen("$absolute/.htaccess", "r+");
+            $file = @fopen("$absolute/.htaccess", "w+");
             if (!$file) {
-                $msg->raise("ERROR", "hta", _("File already exist"));
+                $msg->raise("ERROR", "hta", _("Error creating .htaccess file: ") . error_get_last()['message']);
                 return false;
             }
             fseek($file, 0);
@@ -88,8 +84,8 @@ class m_hta {
             fclose($file);
         }
         if (!file_exists("$absolute/.htpasswd")) {
-            if (!touch("$absolute/.htpasswd")) {
-                $msg->raise("ERROR", "hta", _("File already exist"));
+            if (!@touch("$absolute/.htpasswd")) {
+                $msg->raise("ERROR", "hta", _("Error creating .htpasswd file: ") . error_get_last()['message']);
                 return false;
             }
             return true;
