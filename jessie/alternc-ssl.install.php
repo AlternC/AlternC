@@ -36,7 +36,7 @@ if ($argv[1] == "before-reload") {
     $db->query("SELECT * FROM domaines_type WHERE name='roundcube';");
     if ($db->next_record()) {
         $db->query("INSERT IGNORE INTO `domaines_type` (name, description, target, entry, compatibility, enable, only_dns, need_dns, advanced ) VALUES
-    ('roundcube-ssl', 'HTTPS Roundcube Webmail', 'NONE', '%SUB% IN A @@PUBLIC_IP@@', 'mx,mx2,defmx,defmx2,txt', 'ALL', 0, 0, 1;");
+    ('roundcube-ssl', 'HTTPS Roundcube Webmail', 'NONE', '%SUB% IN A @@PUBLIC_IP@@', 'mx,mx2,defmx,defmx2,txt', 'ALL', 0, 0, 1);");
     } else {
         $db->query("DELETE FROM domaines_type WHERE name='roundcube-ssl';");
         $db->query("UPDATE sub_domaines SET web_action='DELETE' WHERE type='roundcube-ssl';");
