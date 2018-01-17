@@ -210,7 +210,7 @@ host_delete() {
     fi
 
     # Fix of a longstanding BUG: we only DELETE the vhost file if the type is a vhost one !
-    if [ -f "/etc/alternc/templates/${VTYPE}.conf" ]
+    if [ -f "${TEMPLATE_DIR}/${VTYPE}.conf" ]
     then
 	local FENABLED=$(host_conffile "$FQDN")
 	local FDISABLED="$FENABLED-disabled"
