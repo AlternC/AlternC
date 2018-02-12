@@ -319,7 +319,7 @@ class m_mysql {
         }
 
         // Ok, database exists and dbname is compliant. Let's proceed
-        $db->query("DELETE FROM size_db WHERE db ?;", array($dbname));
+        $db->query("DELETE FROM size_db WHERE db= ?;", array($dbname));
         $db->query("DELETE FROM db WHERE uid= ? AND db= ? ;", array($cuid, $dbname));
         $this->dbus->query("DROP DATABASE $dbname;");
 
