@@ -44,58 +44,58 @@ function create_pass($length = 8){
   return $password;
 }
 
-$res=mysql_connect($mhost,$muser,$mpass);
-if (!$res) {
+require_once("/usr/share/alternc/panel/class/db_mysql.php");
+$db=new DB_Sql($mdb,$mhost,$muser,$mpass);
+if (!$db) {
   echo "Can't connect to MySQL !\n";
-  exit(1);
-}
-if (!mysql_select_db($mdb)) {
-  echo "Can't connect to DB MySQL !\n";
   exit(1);
 }
 
 // Fix a bug in 3.0.0
-mysql_query("UPDATE dbusers SET enable='ACTIVATED' WHERE name!=CONCAT(uid,'_myadm');");
+$db->query("UPDATE dbusers SET enable='ACTIVATED' WHERE name!=CONCAT(uid,'_myadm');");
 
-$r=mysql_query("SELECT * FROM db_servers",$res);
+$db->query("SELECT * FROM db_servers");
 $srv=array();
 $client=array();
-while ($c=mysql_fetch_array($r)) {
-  $srv[$c["id"]]=mysql_connect($c["host"],$c["login"],$c["password"]);
-  if (!$srv[$c["id"]]) {
-    echo "Can't connect to server having id ".$c["id"]." at host ".$c["host"]." EXITING !\n";
-    exit();
-  }
+while ($db->next_record()) {
+    $c=$db->Record;
+    $srv[$c["id"]]=new DB_Sql("mysql",$c["host"],$c["login"],$c["password"]);
+    if (!$srv[$c["id"]]) {
+        echo "Can't connect to server having id ".$c["id"]." at host ".$c["host"]." EXITING !\n";
+        exit();
+    }
   $client[$c["id"]]=$c["client"];
 }
 
-$r=mysql_query("SELECT uid, login, db_server_id FROM membres;",$res);
-while ($c=mysql_fetch_array($r)) {
-  $membres[$c["uid"]]=array($c["login"],$c["db_server_id"]);
+$r=$db->query("SELECT uid, login, db_server_id FROM membres;");
+while ($db->next_record()) {
+    $c=$db->Record;
+    $membres[$c["uid"]]=array($c["login"],$c["db_server_id"]);
 }
 
 foreach($membres as $uid => $data) {
   $membre=$data[0];
   $srvid=$data[1];
-  $ok=@mysql_fetch_array(mysql_query("SELECT * FROM dbusers WHERE uid=$uid AND NAME='".$uid."_myadm';",$res));
-  if (!$ok) {
+  $db->query("SELECT * FROM dbusers WHERE uid=$uid AND NAME='".$uid."_myadm';");
+  if (!$db->next_record()) {
     echo "Creating user ".$uid."_myadm for login ".$membre."\n";
     $pass=create_pass(8);
-    mysql_query("INSERT INTO dbusers SET uid=$uid, name='".$uid."_myadm', password='$pass', enable='ADMIN';",$res);
-    echo mysql_error();
+    $db->query("INSERT INTO dbusers SET uid=$uid, name='".$uid."_myadm', password='$pass', enable='ADMIN';");
+    if (is_array($db->last_error()))   echo implode("\n",$db->last_error());
   } else {
     $pass=$ok["password"];
   }
   echo "Granting rights to user ".$uid."_myadm for login ".$membre." ... ";
   // Now granting him access to all user's databases
-  mysql_query("GRANT USAGE ON *.* TO '".$uid."_myadm'@'".$client[$srvid]."' IDENTIFIED BY '$pass';",$srv[$srvid]);
-  echo mysql_error();
-  $t=mysql_query("SELECT * FROM db WHERE uid=$uid;",$res);
-  echo mysql_error();
-  while ($d=mysql_fetch_array($t)) {
-    mysql_query("GRANT ALL ON ".$d["db"].".* TO '".$uid."_myadm'@'".$client[$srvid]."';",$srv[$srvid]);
-    echo " ".$d["db"];
-    echo mysql_error();
+  $srv[$srvid]->query("GRANT USAGE ON *.* TO '".$uid."_myadm'@'".$client[$srvid]."' IDENTIFIED BY '$pass';");
+  if (is_array($srv[$srvid]->last_error()))   echo implode("\n",$srv[$srvid]->last_error());
+  $t=$db->query("SELECT * FROM db WHERE uid=$uid;");
+  if (is_array($db->last_error()))   echo implode("\n",$db->last_error());
+  while ($db->next_record()) {
+      $d=$db->Record;
+      $srv[$srvid]->query("GRANT ALL ON ".$d["db"].".* TO '".$uid."_myadm'@'".$client[$srvid]."';");
+      echo " ".$d["db"];
+      if (is_array($srv[$srvid]->last_error())) echo implode("\n",$srv[$srvid]->last_error());
   }
   echo "\n";
 }

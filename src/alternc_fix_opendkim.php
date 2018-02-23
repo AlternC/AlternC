@@ -52,41 +52,40 @@ if (!file_exists("/usr/bin/opendkim-genkey")
   exit(1);
 }
 
-$res=mysql_connect($mhost,$muser,$mpass);
-if (!$res) {
+
+require_once("/usr/share/alternc/panel/class/db_mysql.php");
+$db=new DB_Sql($mdb,$mhost,$muser,$mpass);
+if (!$db) {
   echo "Can't connect to MySQL !\n";
-  exit(1);
-}
-if (!mysql_select_db($mdb)) {
-  echo "Can't connect to DB MySQL !\n";
   exit(1);
 }
 
 $hasdoneone=false;
-$r=mysql_query("SELECT domaine FROM domaines where gesmx=1 AND gesdns=1;");
-while ($c=mysql_fetch_array($r)) {
-  if (!file_exists("/etc/opendkim/keys/".$c["domaine"]."/alternc.private") ||
-      !file_exists("/etc/opendkim/keys/".$c["domaine"]."/alternc.txt")) {
-    echo "Creating Opendkim key for domain ".$c["domaine"]."\n";
-    if (!is_dir("/etc/opendkim/keys/".$c["domaine"]."")) {
-      if (!mkdir("/etc/opendkim/keys/".$c["domaine"]."")) {
-	echo "Error creating the directory /etc/opendkim/keys/".$c["domaine"]." !\n";
-      } else {
-	echo "Created the directory /etc/opendkim/keys/".$c["domaine"]."\n";
-      }
+$r=$db->query("SELECT domaine FROM domaines where gesmx=1 AND gesdns=1;");
+while ($db->next_record()) {
+    $c=$db->Record;
+    if (!file_exists("/etc/opendkim/keys/".$c["domaine"]."/alternc.private") ||
+    !file_exists("/etc/opendkim/keys/".$c["domaine"]."/alternc.txt")) {
+        echo "Creating Opendkim key for domain ".$c["domaine"]."\n";
+        if (!is_dir("/etc/opendkim/keys/".$c["domaine"]."")) {
+            if (!mkdir("/etc/opendkim/keys/".$c["domaine"]."")) {
+                echo "Error creating the directory /etc/opendkim/keys/".$c["domaine"]." !\n";
+            } else {
+                echo "Created the directory /etc/opendkim/keys/".$c["domaine"]."\n";
+            }
+        }
+        chdir("/etc/opendkim/keys/".$c["domaine"]."");
+        passthru("opendkim-genkey -r -d ".$c["domaine"]." -s alternc 2>&1");
+        passthru("chown opendkim:opendkim alternc.private 2>&1");
+        $db->query("UPDATE domaines SET dns_action='UPDATE' WHERE domaine='".$c["domaine"]."';");
+        $hasdoneone=true;
     }
-    chdir("/etc/opendkim/keys/".$c["domaine"]."");
-    passthru("opendkim-genkey -r -d ".$c["domaine"]." -s alternc 2>&1");
-    passthru("chown opendkim:opendkim alternc.private 2>&1");
-    mysql_query("UPDATE domaines SET dns_action='UPDATE' WHERE domaine='".$c["domaine"]."';");
-    $hasdoneone=true;
-  }
 }
 
 if ($hasdoneone) {
-  echo "I created some keys, launching update_domaines...\n";
-  passthru("/usr/lib/alternc/update_domains.sh 2>&1");
+    echo "I created some keys, launching update_domaines...\n";
+    passthru("/usr/lib/alternc/update_domains.sh 2>&1");
 } else {
-  echo "I did nothing, opendkim seems fine...\n";
+    echo "I did nothing, opendkim seems fine...\n";
 }
 
