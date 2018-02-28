@@ -30,13 +30,13 @@ if ($db->query("SELECT uid,login FROM membres;")) {
 }
 
 echo "\n---------------------------\n Generating size-cache for MySQL databases\n\n";
-  // We get all hosts on which sql users' DB are
+// We get all hosts on which sql users' DB are
 $r=$db->query("select * from db_servers;");
 $allsrv=array();
 while ($db->next_record()) {
   $allsrv[] = $db->Record;
 }
-
+$db->query("DELETE FROM size_db;");
 $tab=array();
 foreach($allsrv as $c) {
   $tab=$mysql->get_dbus_size($c["name"],$c["host"],$c["login"],$c["password"],$c["client"]);
