@@ -1,51 +1,30 @@
 diff --git a/debian/control b/debian/control
-index 551f6171..394506f9 100644
+index 551f6171..ac10f87d 100644
 --- a/debian/control
 +++ b/debian/control
-@@ -38,19 +38,16 @@ Depends: debianutils (>= 1.13.1)
+@@ -38,9 +38,9 @@ Depends: debianutils (>= 1.13.1)
         , sudo
         , adduser
         , dnsutils
 -       , dovecot-core (>=1:2.1.7)
 -       , dovecot-imapd (>=1:2.1.7)
 -       , dovecot-pop3d (>=1:2.1.7)
--       , dovecot-mysql
-+       , dovecot-common (>=1:1.2.15)
-+       , dovecot-common(<< 1:2.0)
-+       , dovecot-imapd (>= 1:1.2.15)
-+       , dovecot-pop3d (>= 1:1.2.15)
++       , dovecot-common (>=1:2.1.7)
++       , dovecot-imapd
++       , dovecot-pop3d
+        , dovecot-mysql
         , vlogger
         , mailutils | mailx
-        , zip
-        , incron
-        , cron
-        , opendkim
--       , opendkim-tools
--       , dovecot-sieve
--       , dovecot-managesieved
-        , mysql-client(>= 5.0) | mariadb-client
-        , php5-curl | php7.0-curl
-        , quota
-@@ -126,18 +123,15 @@ Depends: debianutils (>= 1.13.1)
+@@ -126,9 +126,9 @@ Depends: debianutils (>= 1.13.1)
           , gettext (>= 0.10.40-5)
           , adduser
           , sudo
 -         , dovecot-core (>=1:2.1.7)
 -         , dovecot-imapd (>=1:2.1.7)
 -         , dovecot-pop3d (>=1:2.1.7)
--         , dovecot-mysql
-+         , dovecot-common (>=1:1.2.15)
-+         , dovecot-common(<< 1:2.0)
-+         , dovecot-imapd (>= 1:1.2.15)
-+         , dovecot-pop3d (>= 1:1.2.15)
++         , dovecot-common (>=1:2.1.7)
++         , dovecot-imapd
++         , dovecot-pop3d
+          , dovecot-mysql
           , vlogger
           , mailutils | mailx
-          , incron
-          , cron
-          , opendkim
--         , opendkim-tools
--         , dovecot-sieve
--         , dovecot-managesieved
-          , mysql-client(>= 5.0) | mariadb-client
-          , php5-curl
-          , ${misc:Depends}

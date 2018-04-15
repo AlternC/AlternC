@@ -1,16 +1,7 @@
 diff --git a/install/alternc.install b/install/alternc.install
-index 95060b7c..10bcbacc 100644
+index 95060b7c..5d92cf0c 100644
 --- a/install/alternc.install
 +++ b/install/alternc.install
-@@ -79,7 +79,7 @@ if [ -e /etc/default/saslauthd ]; then
- fi
- 
- if [ -e /etc/dovecot/dovecot.conf ]; then
--    CONFIG_FILES="$CONFIG_FILES etc/dovecot/alternc-sql.conf etc/dovecot/alternc-dict-quota.conf etc/dovecot/conf.d/95_alternc.conf"
-+    CONFIG_FILES="$CONFIG_FILES etc/dovecot/dovecot.conf etc/dovecot/dovecot-sql.conf etc/dovecot/dovecot-dict-quota.conf"
- fi
- 
- INSTALLED_CONFIG_TAR="/var/lib/alternc/backups/etc-installed.tar.gz"
 @@ -279,20 +279,12 @@ rm -f $SED_SCRIPT
  # Ad-hoc fixes
  #
@@ -47,7 +38,7 @@ index 95060b7c..10bcbacc 100644
      fi
      if ! [ -L /etc/apache2/mods-enabled/rewrite.load ]
      then
-@@ -319,14 +311,13 @@ if [ -x /usr/sbin/apache2 ]; then
+@@ -319,9 +311,8 @@ if [ -x /usr/sbin/apache2 ]; then
              a2enmod ssl
              s="apache2"
          fi
@@ -59,19 +50,7 @@ index 95060b7c..10bcbacc 100644
              s="apache2"
          fi
  
- 	# We enable dovecot SSL certificate instructions: (on wheezy we should use a new file in /etc/dovecot/conf.d/ )
--	( echo "# Don't change this file, it will be overwriten by alternc.install. Change ssl parameters in a file named 99_ssl.conf instead" ; echo "ssl_cert = </etc/alternc/apache.pem" ; echo "ssl_key = </etc/alternc/apache.pem" ) >/etc/dovecot/conf.d/96_ssl.conf
-+	sed -i -e 's#^ssl_cert_file.*$#ssl_cert_file = /etc/ssl/certs/ssl-cert-snakeoil.pem#' -e 's#^ssl_key_file.*$#ssl_key_file = /etc/ssl/private/ssl-cert-snakeoil.key#' /etc/dovecot/dovecot.conf
- 
-     else
-         # We disable proftpd tls module
-@@ -335,18 +326,17 @@ if [ -x /usr/sbin/apache2 ]; then
-         cp /etc/proftpd/modules.conf /etc/alternc/templates/proftpd/
- 
- 	# We disable dovecot SSL certificate instructions: (on wheezy we should remove a file in /etc/dovecot/conf.d/ )
--	( echo "# Don't change this file, it will be overwriten by alternc.install. Change ssl parameters in a file named 99_ssl.conf instead" ; echo "ssl_cert = </etc/ssl/certs/ssl-cert-snakeoil.pem" ; echo "ssl_key = </etc/ssl/private/ssl-cert-snakeoil.key" ) >/etc/dovecot/conf.d/96_ssl.conf
-+        sed -i -e 's#^ssl_cert_file.*$#ssl_cert_file = /etc/ssl/certs/ssl-cert-snakeoil.pem#' -e 's#^ssl_key_file.*$#ssl_key_file = /etc/ssl/private/ssl-cert-snakeoil.key#' /etc/dovecot/dovecot.conf
- 
+@@ -340,13 +331,12 @@ if [ -x /usr/sbin/apache2 ]; then
          echo "SSL not configured"
          echo "create a certificate in /etc/alternc/apache.pem and rerun alternc.install"
      fi
@@ -98,25 +77,17 @@ index 95060b7c..10bcbacc 100644
  
  # Configure PHPMyAdmin
  include_str='include("/etc/alternc/phpmyadmin.inc.php")'
-@@ -592,14 +582,9 @@ else
-     mysql --defaults-file=/etc/alternc/my.cnf -e "UPDATE db_servers SET host='$MYSQL_HOST', login='$MYSQL_USER', password='$MYSQL_PASS', client='$MYSQL_HOST_CLIENT' WHERE name='Default';"
- fi
+@@ -598,9 +588,6 @@ chmod g+r /etc/dovecot/alternc-sql.conf
+ # Override some dovecot 2.0 configuration that may have happened during dovecot postinst:
+ sed -i -e 's/^ *!include/#!include/' /etc/dovecot/conf.d/10-auth.conf
  
--# giving vmail user read access on dovecot sql file
--chgrp vmail /etc/dovecot/alternc-sql.conf
--chmod g+r /etc/dovecot/alternc-sql.conf
--# Override some dovecot 2.0 configuration that may have happened during dovecot postinst:
--sed -i -e 's/^ *!include/#!include/' /etc/dovecot/conf.d/10-auth.conf
--
 -# Changing owner of web panel's files
 -chown -R alterncpanel:alterncpanel "/usr/share/alternc/panel/"
-+#giving vmail user read access on dovecot sql file
-+chgrp vmail /etc/dovecot/dovecot.conf
-+chmod g+r /etc/dovecot/dovecot.conf
- 
+-
  # We force the re-computing of the DNS zones, since we may have changed the IP address (see #460)
  /usr/bin/mysql --defaults-file="/etc/alternc/my.cnf" -B -e "update domaines set dns_action='UPDATE' WHERE gesdns=1;"
-@@ -612,7 +597,7 @@ grep -q "^localhost\$" /etc/opendkim/TrustedHosts || echo "localhost" >>/etc/ope
+ 
+@@ -612,7 +599,7 @@ grep -q "^localhost\$" /etc/opendkim/TrustedHosts || echo "localhost" >>/etc/ope
  grep -q "^$PUBLIC_IP\$" /etc/opendkim/TrustedHosts || echo "$PUBLIC_IP" >>/etc/opendkim/TrustedHosts
  
  # Add opendkim to service to restart
@@ -125,7 +96,7 @@ index 95060b7c..10bcbacc 100644
  
  # hook 
  run-parts --arg=before-reload /usr/lib/alternc/install.d 
-@@ -620,7 +605,7 @@ run-parts --arg=before-reload /usr/lib/alternc/install.d
+@@ -620,7 +607,7 @@ run-parts --arg=before-reload /usr/lib/alternc/install.d
  #######################################################################
  # Reload services
  #
@@ -134,7 +105,7 @@ index 95060b7c..10bcbacc 100644
      invoke-rc.d $service force-reload || true
  done
  
-@@ -628,10 +613,6 @@ done
+@@ -628,10 +615,6 @@ done
  for service in $SERVICES; do
      test -x /etc/init.d/$service && invoke-rc.d $service stop || true
  done
