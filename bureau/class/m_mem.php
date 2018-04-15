@@ -104,6 +104,12 @@ class m_mem {
         }
         $this->user = $db->Record;
         $cuid = $db->f("uid");
+        // Transitional code to update md5 hashed passwords to those created
+        // with password_hash().
+        if (strncmp($db->f('pass'), '$1$', 3) == 0) {
+            $db->query("update membres set pass = ? where uid = ?",
+                       array(password_hash($password), $cuid));
+        }
 
         if (panel_islocked() && $cuid != 2000) {
             $msg->raise("ALERT", "mem", _("This website is currently under maintenance, login is currently disabled."));
