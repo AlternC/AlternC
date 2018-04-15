@@ -21,7 +21,7 @@
 # Purpose of file: Global Makefile 
 # ----------------------------------------------------------------------
 MAJOR=$(shell sed -ne 's/^[^(]*(\([^)]*\)).*/\1/;1p' debian/changelog)
-VERSION=$MAJOR
+VERSION=$(MAJOR)
 export VERSION
 
 build:
