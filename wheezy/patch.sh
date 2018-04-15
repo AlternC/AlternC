@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Apply diffs to build for jessie
+# Apply diffs to build for wheezy
 
 # DON'T COMMIT ANYTHING AFTER launching this
 # reset your repos back to the serverside one!
