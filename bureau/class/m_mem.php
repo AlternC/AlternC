@@ -93,7 +93,7 @@ class m_mem {
             return false;
         }
         $db->next_record();
-        if (_md5cr($password, $db->f("pass")) != $db->f("pass")) {
+        if (!_password_verify($password, $db->f('pass'))) {
             $db->query("UPDATE membres SET lastfail=lastfail+1 WHERE uid= ? ;", array($db->f("uid")));
             $msg->raise("ERROR", "mem", _("User or password incorrect"));
             return false;
@@ -396,7 +396,7 @@ class m_mem {
             $msg->raise("ERROR", "mem", _("You are not allowed to change your password."));
             return false;
         }
-        if ($this->user["pass"] != _md5cr($oldpass, $this->user["pass"])) {
+        if (!_password_verify($oldpass, $this->user['pass'])) {
             $msg->raise("ERROR", "mem", _("The old password is incorrect"));
             return false;
         }
@@ -410,7 +410,7 @@ class m_mem {
         if (!$admin->checkPolicy("mem", $login, $newpass)) {
             return false; // The error has been raised by checkPolicy()
         }
-        $newpass = _md5cr($newpass);
+        $newpass = password_hash($newpass);
         $db->query("UPDATE membres SET pass= ? WHERE uid= ?;", array($newpass, $cuid));
         $msg->init_msgs();
         return true;
