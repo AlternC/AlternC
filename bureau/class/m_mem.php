@@ -93,7 +93,7 @@ class m_mem {
             return false;
         }
         $db->next_record();
-        if (!_password_verify($password, $db->f('pass'))) {
+        if (!password_verify($password, $db->f('pass'))) {
             $db->query("UPDATE membres SET lastfail=lastfail+1 WHERE uid= ? ;", array($db->f("uid")));
             $msg->raise("ERROR", "mem", _("User or password incorrect"));
             return false;
@@ -396,7 +396,7 @@ class m_mem {
             $msg->raise("ERROR", "mem", _("You are not allowed to change your password."));
             return false;
         }
-        if (!_password_verify($oldpass, $this->user['pass'])) {
+        if (!password_verify($oldpass, $this->user['pass'])) {
             $msg->raise("ERROR", "mem", _("The old password is incorrect"));
             return false;
         }

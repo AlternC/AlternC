@@ -541,20 +541,6 @@ function _md5cr($pass, $salt = "") {
     return crypt($pass, $salt);
 }
 
-/**
- * Transtional function to check if a string matches a saved password hash.
- * @param string $pass string
- * @param string $hash string
- * @return bool
- */
-function _password_verify($pass, $hash) {
-    if (strncmp($hash, '$1$', 3) == 0) {
-        // @TODO Raise a warning for the user to update their password.
-        return _md5cr($pass, $hash) == $hash;
-    }
-    return password_verify($pass, $hash);
-}
-
 /** split mysql database name between username and custom database name
  * @param string $dbname database name
  * @return array returns username as first element, custom name as second
