@@ -108,7 +108,7 @@ class m_mem {
         // with password_hash().
         if (strncmp($db->f('pass'), '$1$', 3) == 0) {
             $db->query("update membres set pass = ? where uid = ?",
-                       array(password_hash($password), $cuid));
+                       array(password_hash($password, PASSWORD_BCRYPT), $cuid));
         }
 
         if (panel_islocked() && $cuid != 2000) {
@@ -416,7 +416,7 @@ class m_mem {
         if (!$admin->checkPolicy("mem", $login, $newpass)) {
             return false; // The error has been raised by checkPolicy()
         }
-        $newpass = password_hash($newpass);
+        $newpass = password_hash($newpass, PASSWORD_BCRYPT);
         $db->query("UPDATE membres SET pass= ? WHERE uid= ?;", array($newpass, $cuid));
         $msg->init_msgs();
         return true;
