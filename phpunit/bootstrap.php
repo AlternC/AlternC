@@ -20,7 +20,7 @@ define('ALTERNC_PANEL',realpath(__DIR__."/../bureau"));; // Custom
 define('PHPUNIT_DATASETS_PATH',realpath(__DIR__."/tests/_datasets"));
 require_once ALTERNC_PANEL."/class/db_mysql.php";
 require_once ALTERNC_PANEL."/class/functions.php";
-
+require_once ALTERNC_PANEL."/class/variables.php";
 
 // General variables setup
 // *********************
@@ -143,6 +143,7 @@ echo "*** In progress: mysql.sql imported\n";
 
 $db                                     = new \DB_system($database, $user, $password);
 $cuid                                   = 0;
+$msg                                  = new \m_messages();
 $mem                                    = new \m_mem();
 $err                                    = new \m_err();
 $authip                                 = new \m_authip();
