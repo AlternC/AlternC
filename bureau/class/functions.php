@@ -1203,3 +1203,32 @@ function csrf_check($token=null) {
     $db->exec("DELETE FROM csrf WHERE created<DATE_SUB(NOW(), INTERVAL 1 DAY);");
     return 1;
 }
+
+/**
+ * Create a password hash for use with dovecot.
+ */
+function _dovecot_hash($password) {
+    // Aim to have a 16 character salt for SHA-512 crypt.
+    // @see https://secure.php.net/manual/en/function.crypt.php
+    if (function_exists('random_bytes')) {
+        // PHP >= 7.0
+        $salt = base64_encode(random_bytes(12));
+    }
+    else if (function_exists('mcrypt_create_iv')) {
+        $salt = base64_encode(mcrypt_create_iv(12, MCRYPT_DEV_URANDOM));
+    }
+    else if (function_exists('')) {
+        $salt  = base64_encode(openssl_random_pseudo_bytes(12));
+    }
+    if (!$salt) {
+        throw Error('Unable to generate salt');
+    }
+    $salt = '$6$rounds=20000$' . $salt;
+    $hash = crypt($password, $salt);
+    // In any case the final password saved for dovecot can store the
+    // scheme to override the default on a per-account basis.
+    // Ideally this is updated to bcrypt or argon2 when those become
+    // available in dovecot.
+    // @see https://wiki.dovecot.org/Authentication/PasswordSchemes
+    return '{SHA512-CRYPT}' . $hash;
+}
