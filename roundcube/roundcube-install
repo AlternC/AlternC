@@ -99,8 +99,10 @@ EOF
     
 fi
 
-#This is necessary because upgrading roundcube from 7.1 to 7.2 changes this setting
 if [ "$1" = "end" ]; then
+  #This is necessary because upgrading roundcube from 7.1 to 7.2 changes this setting
   chown alternc-roundcube:root /etc/roundcube/main.inc.php
+  # In case owner is reset to www-data
+  chown alternc-roundcube:nogroup /var/lib/roundcube/temp
 fi
 
