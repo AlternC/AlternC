@@ -11,11 +11,11 @@
 */
 
 if ($argc!=3) {
-	echo "Usage : ".$argv[0]." <quota name> <quota value>
- Create a quota entry for each existing user and set the default quota to the 
+    echo "Usage : ".$argv[0]." <quota name> <quota value>
+ Create a quota entry for each existing user and set the default quota to the
  specified value.
 ";
-	return 1;
+    return 1;
 }
 
 $name=$argv[1];
@@ -24,27 +24,27 @@ $quota=$argv[2];
 include("/usr/share/alternc/panel/class/local.php");
 
 if (!mysqli_connect($L_MYSQL_HOST,$L_MYSQL_LOGIN,$L_MYSQL_PWD)) {
-	echo "Cannot connect to Mysql !\n";
-	return 1;
+    echo "Cannot connect to Mysql !\n";
+    return 1;
 }
 
 $co = mysqli_connect($L_MYSQL_HOST,$L_MYSQL_LOGIN,$L_MYSQL_PWD);
 
 if (!mysqli_select_db($co, $L_MYSQL_DATABASE)) {
-	echo "Cannot connect to Mysql database $L_MYSQL_DATABASE !\n";
-	return 1;
+    echo "Cannot connect to Mysql database $L_MYSQL_DATABASE !\n";
+    return 1;
 }
 
 $r=mysqli_query($co, "DELETE FROM defquotas WHERE quota='$name';");
 if (mysqli_errno($co)) {
-	echo "Mysql Error : ".mysqli_error($co)."\n";
-	return 1;
+    echo "Mysql Error : ".mysqli_error($co)."\n";
+    return 1;
 }
 
 $r=mysqli_query($co, "INSERT INTO defquotas (quota,value) VALUES ('$name','$quota');");
 if (mysqli_errno($co)) {
-	echo "Mysql Error : ".mysqli_error($co)."\n";
-	return 1;
+    echo "Mysql Error : ".mysqli_error($co)."\n";
+    return 1;
 }
 
 $r=mysqli_query($co, "SELECT uid FROM membres;");
@@ -53,10 +53,10 @@ if (mysqli_errno($co)) {
         return 1;
 }
 while ($c=mysqli_fetch_array($r)) {
-	$s=mysqli_query("SELECT name FROM quotas WHERE uid='$c[uid]' AND name='$name';");
-	if (!mysqli_num_rows($s)) {
-		mysqli_query("INSERT INTO quotas (uid,name,total) VALUES ('$c[uid]','$name','$quota') on DUPLICATE KEY UPDATE total=$quota;");
-	}
+    $s=mysqli_query($co, "SELECT name FROM quotas WHERE uid='$c[uid]' AND name='$name';");
+    if (!mysqli_num_rows($s)) {
+        mysqli_query($co, "INSERT INTO quotas (uid,name,total) VALUES ('$c[uid]','$name','$quota') on DUPLICATE KEY UPDATE total=$quota;");
+    }
 }
 
 return 0;
