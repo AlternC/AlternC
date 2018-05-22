@@ -38,7 +38,7 @@ if ($pass != $passconf) {
 	$r=$aws->add_login($prefixe.(($login)?"_":"").$login,$pass);
 
 	if ($r) {
-		$msg->raise('Ok', "aws", _("The Awstat account has been successfully created"));
+		$msg->raise('INFO', "aws", _("The Awstat account has been successfully created"));
 	}
 }
 

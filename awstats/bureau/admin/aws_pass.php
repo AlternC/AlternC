@@ -45,7 +45,7 @@ if ($confirm == 1) {
 	$msg->raise('Error', "aws", _("Passwords do not match"));
     } else {
 	if ($aws->change_pass($login,$pass)) {
-		$msg->raise('Ok', "aws", _("Password successfuly updated"));
+		$msg->raise('INFO', "aws", _("Password successfuly updated"));
 		include("aws_users.php");
 		exit();
 	}
