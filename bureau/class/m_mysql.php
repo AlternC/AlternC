@@ -952,7 +952,7 @@ class m_mysql {
         global $db, $msg, $cuid, $mem;
         $msg->log("mysql", "alternc_add_member");
         // checking for the phpmyadmin user
-        $db->query("SELECT name,password FROM dbusers WHERE uid= ? AND Type='ADMIN';", array($cuid));
+        $db->query("SELECT name,password FROM dbusers WHERE uid= ? AND enable='ADMIN';", array($cuid));
         if ($db->num_rows()) {
             $myadm = $db->f("name");
             $password = $db->f("password");
