@@ -38,16 +38,19 @@ Depends: debianutils (>= 1.13.1)
        , sudo
        , adduser
        , dnsutils
-       , dovecot-common (>=1:1.2.15)
-       , dovecot-common(<< 1:2.0)
-       , dovecot-imapd (>= 1:1.2.15)
-       , dovecot-pop3d (>= 1:1.2.15)
+       , dovecot-core (>=1:2.1.7)
+       , dovecot-imapd (>=1:2.1.7)
+       , dovecot-pop3d (>=1:2.1.7)
+       , dovecot-mysql
        , vlogger
        , mailutils | mailx
        , zip
        , incron
        , cron
        , opendkim
+       , opendkim-tools
+       , dovecot-sieve
+       , dovecot-managesieved
        , mysql-client(>= 5.0) | mariadb-client
        , php5-curl | php7.0-curl
        , quota
@@ -123,15 +126,18 @@ Depends: debianutils (>= 1.13.1)
          , gettext (>= 0.10.40-5)
          , adduser
          , sudo
-         , dovecot-common (>=1:1.2.15)
-         , dovecot-common(<< 1:2.0)
-         , dovecot-imapd (>= 1:1.2.15)
-         , dovecot-pop3d (>= 1:1.2.15)
+         , dovecot-core (>=1:2.1.7)
+         , dovecot-imapd (>=1:2.1.7)
+         , dovecot-pop3d (>=1:2.1.7)
+         , dovecot-mysql
          , vlogger
          , mailutils | mailx
          , incron
          , cron
          , opendkim
+         , opendkim-tools
+         , dovecot-sieve
+         , dovecot-managesieved
          , mysql-client(>= 5.0) | mariadb-client
          , php5-curl
          , ${misc:Depends}

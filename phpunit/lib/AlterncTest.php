@@ -3,9 +3,14 @@
  * This is the abstract class for all tests
  * @see http://phpunit.de/manual/
  */
-abstract class AlterncTest extends PHPUnit_Extensions_Database_TestCase
+use PHPUnit\Framework\TestCase;
+use PHPUnit\DbUnit\TestCaseTrait;
+
+abstract class AlterncTest extends TestCase
 {
-        /**
+    use TestCaseTrait;
+
+    /**
      * @return PHPUnit_Extensions_Database_DB_IDatabaseConnection
      */
     public function getConnection()
@@ -14,9 +19,9 @@ abstract class AlterncTest extends PHPUnit_Extensions_Database_TestCase
         $pdo = new PDO('mysql:dbname='.$database.';host=127.0.0.1',$user,$password);
         return $this->createDefaultDBConnection($pdo);
     }
-    
+
     /**
-     * 
+     *
      * @param string $fileList
      * @return \PHPUnit_Extensions_Database_DataSet_YamlDataSet
      * @throws \Exception
@@ -40,8 +45,6 @@ abstract class AlterncTest extends PHPUnit_Extensions_Database_TestCase
         }
         $compositeDataSet            = new PHPUnit_Extensions_Database_DataSet_CompositeDataSet($datasetList);
         return $dataSet;
-    } 
-
-    
+    }
 
 }

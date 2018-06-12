@@ -1,0 +1,33 @@
+diff --git a/roundcube/roundcube-install b/roundcube/roundcube-install
+index 59a26119..81011d12 100644
+--- a/roundcube/roundcube-install
++++ b/roundcube/roundcube-install
+@@ -39,7 +39,7 @@ then
+     . /etc/alternc/local.sh
+     # Configuration template location
+     TEMPLATE_DIR="/etc/alternc/templates"
+-    CONFIG_FILES="etc/roundcube/config.inc.php etc/roundcube/plugins/password/config.inc.php"
++    CONFIG_FILES="etc/roundcube/main.inc.php etc/roundcube/plugins/password/config.inc.php etc/roundcube/plugins/managesieve/config.inc.php"
+ 
+     cat > $SED_SCRIPT <<EOF
+ s\\%%ALTERNC_LOC%%\\$ALTERNC_LOC\\;
+@@ -81,17 +81,9 @@ EOF
+     echo "    Done"
+ 
+     echo "Deconfiguring javascript-common alias"
+-    if [ -f /etc/apache2/conf.d/javascript-common.conf ]; then
+-        	rm -f /etc/apache2/conf.d/javascript-common.conf
+-    fi
+-    if [ -f /etc/apache2/conf-available/javascript-common.conf ] ; then
+-		a2disconf javascript-common.conf
+-		service apache2 reload
+-    fi
++    rm -f /etc/apache2/conf.d/javascript-common.conf
+     # just in case 
+-    if [ -f /etc/javascript-common/javascript-common.conf ]; then
+-        sed -i -e "s/^Alias \/javascript/# Do not uncomment, commented by AlternC to prevent a global alias\n#Alias \/javascript/" /etc/javascript-common/javascript-common.conf
+-    fi
++    sed -i -e "s/^Alias \/javascript/# Do not uncomment, commented by AlternC to prevent a global alias\n#Alias \/javascript/" /etc/javascript-common/javascript-common.conf
+     echo "    Done"
+     
+ fi

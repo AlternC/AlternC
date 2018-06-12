@@ -1,0 +1,19 @@
+diff --git a/debian/alternc-roundcube.postinst b/debian/alternc-roundcube.postinst
+index 0d99169d..6dfe23c9 100644
+--- a/debian/alternc-roundcube.postinst
++++ b/debian/alternc-roundcube.postinst
+@@ -27,10 +27,10 @@ case "$1" in
+ 	chown -R www-data:root /etc/roundcube/debian-db.php
+ 	chmod -R 460 /etc/roundcube/debian-db.php
+ 
+-	dpkg-statoverride --list /etc/roundcube/config.inc.php >/dev/null && 
+-	dpkg-statoverride --remove /etc/roundcube/config.inc.php
+-	chown -R www-data:root /etc/roundcube/config.inc.php
+-	chmod -R 460 /etc/roundcube/config.inc.php
++	dpkg-statoverride --list /etc/roundcube/main.inc.php >/dev/null && 
++	dpkg-statoverride --remove /etc/roundcube/main.inc.php
++	chown -R www-data:root /etc/roundcube/main.inc.php
++	chmod -R 460 /etc/roundcube/main.inc.php
+ 
+ 	dpkg-statoverride --list /var/log/roundcube >/dev/null && 
+ 	dpkg-statoverride --remove /var/log/roundcube
