@@ -539,7 +539,7 @@ class m_admin {
         }
 
         // Check if this domain exist on this admin account
-        if ((!in_array($domain_name, $dom->enum_domains()))&&($domaine_name!=variable_get("hosting_tld"))) {
+        if ((!in_array($domain_name, $dom->enum_domains()))&&($domain_name!=variable_get("hosting_tld"))) {
             $msg->raise("ERROR", "admin", _("You don't seem to be allowed to delegate this domain"));
             $msg->log("admin", "add_shared_domain", "domain not allowed");
             return false;
