@@ -155,8 +155,7 @@ if [ -r /etc/alternc/my.cnf ]; then
     # * add a right quote operator at the end of line (;s)
     # * convert mysql variables into our MYSQL_ naming convention (;s)
     # * print the result (;p)
-    MYSQL_PASS_ESC=$(echo "$MYSQL_PASS" | sed -e 's/[\/&^$]/\\&/g')
-    eval `sed -n -e "/=/{s/ *= *\"\?/='/;s/\"\?\$/'/;s/host/MYSQL_HOST/;s/user/MYSQL_USER/;s/password/MYSQL_PASS_ESC/;s/database/MYSQL_DATABASE/;p}" /etc/alternc/my.cnf`
+    eval `sed -n -e "/=/{s/ *= *\"\?/='/;s/\"\?\$/'/;s/host/MYSQL_HOST/;s/user/MYSQL_USER/;s/password/MYSQL_PASS/;s/database/MYSQL_DATABASE/;p}" /etc/alternc/my.cnf`
     chown root:alterncpanel /etc/alternc/my.cnf
     chmod 640 /etc/alternc/my.cnf
 fi
@@ -169,8 +168,7 @@ if [ -r /etc/alternc/my_mail.cnf ]; then
     # * add a right quote operator at the end of line (;s)
     # * convert mysql variables into our MYSQL_ naming convention (;s)
     # * print the result (;p)
-    MYSQL_MAIL_PASS_ESC=$(echo "$MYSQL_MAIL_PASS" | sed -e 's/[\/&^$]/\\&/g')
-    eval `sed -n -e "/=/{s/ *= *\"\?/='/;s/\"\?\$/'/;s/host/MYSQL_HOST/;s/user/MYSQL_MAIL_USER/;s/password/MYSQL_MAIL_PASS_ESC/;s/database/MYSQL_DATABASE/;p}" /etc/alternc/my_mail.cnf`
+    eval `sed -n -e "/=/{s/ *= *\"\?/='/;s/\"\?\$/'/;s/host/MYSQL_HOST/;s/user/MYSQL_MAIL_USER/;s/password/MYSQL_MAIL_PASS/;s/database/MYSQL_DATABASE/;p}" /etc/alternc/my_mail.cnf`
     chown root:alterncpanel /etc/alternc/my_mail.cnf
     chmod 640 /etc/alternc/my_mail.cnf
 fi
@@ -206,6 +204,14 @@ PHPMYADMIN_BLOWFISH="$(generate_string 24)"
 # XXX: I assume this is secure if /tmp is sticky (+t)
 # we should have a better way to deal with templating, of course.
 SED_SCRIPT="/tmp/alternc.install.sedscript"
+# Escape passwords for sed and restore afterwards
+# Escaping '&' and '|' since those are used as special characters
+MYSQL_PASS_ORIG="$MYSQL_PASS"
+MYSQL_PASS=$(echo "$MYSQL_PASS" | sed -e 's/[|&]/\\&/g')
+MYSQL_MAIL_PASS_ORIG="$MYSQL_MAIL_PASS"
+MYSQL_MAIL_PASS=$(echo "$MYSQL_MAIL_PASS" | sed -e 's/[|&]/\\&/g')
+PHPMYADMIN_BLOWFISH_ORIG="$PHPMYADMIN_BLOWFISH_ORIG"
+PHPMYADMIN_BLOWFISH=$(echo "$PHPMYADMIN_BLOWFISH" | sed -e 's/[|&]/\\&/g')
 cat > $SED_SCRIPT <<EOF
 s\\%%hosting%%\\$HOSTING\\;
 s\\%%fqdn%%\\$FQDN\\;
@@ -219,9 +225,9 @@ s\\%%mx%%\\$DEFAULT_MX\\;
 s\\%%dbhost%%\\$MYSQL_HOST\\;
 s\\%%dbname%%\\$MYSQL_DATABASE\\;
 s\\%%dbuser%%\\$MYSQL_USER\\;
-s\\%%dbpwd%%\\$MYSQL_PASS\\;
+s|%%dbpwd%%|$MYSQL_PASS|;
 s\\%%db_mail_user%%\\$MYSQL_MAIL_USER\\;
-s\\%%db_mail_pwd%%\\$MYSQL_MAIL_PASS\\;
+s|%%db_mail_pwd%%|$MYSQL_MAIL_PASS|;
 s\\%%warning_message%%\\$WARNING\\;
 s\\%%fqdn_lettre%%\\$FQDN_LETTER\\;
 s\\%%version%%\\$VERSION\\;
@@ -229,12 +235,15 @@ s\\%%ns2_ip%%\\$NS2_IP\\;
 s\\%%ALTERNC_HTML%%\\$ALTERNC_HTML\\;
 s\\%%ALTERNC_MAIL%%\\$ALTERNC_MAIL\\;
 s\\%%ALTERNC_LOGS%%\\$ALTERNC_LOGS\\;
-s\\%%PHPMYADMIN_BLOWFISH%%\\$PHPMYADMIN_BLOWFISH\\;
+s|%%PHPMYADMIN_BLOWFISH%%|$PHPMYADMIN_BLOWFISH|;
 EOF
+MYSQL_PASS="$MYSQL_PASS_ORIG"
+MYSQL_MAIL_PASS="$MYSQL_MAIL_PASS_ORIG"
+PHPMYADMIN_BLOWFISH="$PHPMYADMIN_BLOWFISH_ORIG"
 
-# hook 
+# hook
 test -d /usr/lib/alternc/install.d || mkdir -p /usr/lib/alternc/install.d
-run-parts --arg=templates /usr/lib/alternc/install.d 
+run-parts --arg=templates /usr/lib/alternc/install.d
 
 
 ######################################################################
