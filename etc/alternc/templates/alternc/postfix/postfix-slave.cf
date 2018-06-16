@@ -1,3 +1,6 @@
+# Postfix Configuration options
+# Used by alternc.install with postconf
+# WARNING: this script is not used directly by postfix! it is parse by alternc.install
 home_mailbox = Maildir/
 smtpd_banner = $myhostname ESMTP
 header_checks = regexp:/etc/postfix/header_checks
@@ -23,6 +26,9 @@ smtpd_sasl_local_domain = postfix
 smtpd_sasl_security_options = noanonymous
 enable_sasl_authentification = yes
 broken_sasl_auth_clients = yes
+#### Virtual mapping
+# none, the primary server knows about virtual mailboxes
+# We do need to know who's allowed to relay through here, though.
 alias_maps = hash:/etc/aliases
 alias_database = hash:/etc/aliases
 virtual_maps = 
@@ -34,7 +40,8 @@ default_privs = nobody
 transport_maps=proxy:mysql:/etc/postfix/myrelay.cf
 relay_domains=proxy:mysql:/etc/postfix/myrelay.cf
 relay_recipients_map=proxy:mysql:/etc/postfix/myvirtual.cf
-smtpd_recipient_restrictions = reject_unlisted_recipient, permit_mynetworks, permit_sasl_authenticated, reject_non_fqdn_recipient, reject_unauth_destination, check_policy_service inet:127.0.0.1:60000, reject_rbl_client zen.spamhaus.org
+#### General options
 message_size_limit = 100000000
 mailbox_size_limit = 0
 enable_original_recipient = no
+smtpd_recipient_restrictions = reject_unlisted_recipient, permit_mynetworks, permit_sasl_authenticated, reject_non_fqdn_recipient, reject_unauth_destination, check_policy_service inet:127.0.0.1:60000, reject_rbl_client zen.spamhaus.org
