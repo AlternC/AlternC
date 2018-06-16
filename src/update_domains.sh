@@ -129,7 +129,7 @@ if [ ! -z "$(cat "$RELOAD_WEB")" ] ; then
 
   (
     echo "###BEGIN OF ALTERNC AUTO-GENERATED FILE - DO NOT EDIT MANUALLY###"
-    find "$VHOST_DIR" -mindepth 2 -type f -iname "*.conf" -print0 | xargs -0 cat 
+    find "$VHOST_DIR"/ -mindepth 2 -type f -iname "*.conf" -print0 | xargs -0 cat
     echo "###END OF ALTERNC AUTO-GENERATED FILE - DO NOT EDIT MANUALLY###" 
   ) > "$tempo"
 
