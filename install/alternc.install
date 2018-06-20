@@ -299,7 +299,7 @@ PHPMYADMIN_BLOWFISH="$PHPMYADMIN_BLOWFISH_ORIG"
 
 # hook
 test -d /usr/lib/alternc/install.d || mkdir -p /usr/lib/alternc/install.d
-run-parts --arg=templates /usr/lib/alternc/install.d
+run-parts --arg=templates --arg="$SED_SCRIPT" /usr/lib/alternc/install.d
 
 
 ######################################################################
