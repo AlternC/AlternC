@@ -1022,6 +1022,13 @@ div.progress-bar div.txt {
   padding-left: 30px;
 }
 
+.ssl a, a.ssl, input.ssl, .ssl-menu .menu-title {
+  background-image: url(../images/ssl.png);
+  background-repeat: no-repeat;
+  background-position: 8px 3px;
+  padding-left: 30px;
+}
+
 .filter a, a.edit, input.filter {
   background-image: url(../icon/filter.png);
   background-repeat: no-repeat;
@@ -1093,8 +1100,13 @@ body .ui-widget-content a {
   padding: 0 16px;
 }
 
-th.headerSortUp { 
-  background-image: url(../images/asc.gif); 
+textarea.cert {
+    font-family: Courier New, Courier, monospace, fixed;
+    font-size: 12px;
+}
+
+th.headerSortUp {
+  background-image: url(../images/asc.gif);
   background-repeat: no-repeat;
   background-position: right; 
   cursor: pointer; 
@@ -1196,4 +1208,6 @@ th.headerSortDown {
 		float: none;
 		width:auto;
 	}
+textarea[readonly='readonly'] {
+  background-color: #ddd;
 }
