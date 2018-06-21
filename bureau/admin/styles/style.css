@@ -38,7 +38,7 @@ body {
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   font-size: 14px;
   color: #000000;
-  background-color: #f8f8f8;
+  background-color: #f0f0f0;
   margin:0px;
 
 }
@@ -74,7 +74,7 @@ table {
 }
 
 thead tr th:hover, table.tlist tbody tr:first-child th:hover {
-  background-color: #f8f8f8 !important;
+  background-color: #f0f0f0 !important;
 }
 
 tbody tr:first-child {
@@ -116,8 +116,8 @@ th {
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   font-size: 14px;
   color: black;
-  background: #f8f8f8;
-  font-weight: normal;
+  background: #f0f0f0;
+  font-weight: bold;
   text-align: left;
 }
 
@@ -268,7 +268,7 @@ input.inb, input.ina{
 input.inb:hover, input.ina:hover {
   border: 1px solid #999;
   text-decoration: none;
-  background-color: #F8F8F8;
+  background-color: #F0F0F0;
 }
 
 input.inb:focus, input.ina.focus {
@@ -365,7 +365,7 @@ input.inav, .inav a {
 
 input.inav:hover, .inav a:hover, a.inav:hover,
 input.ina:hover, .ina a:hover, .inb a:hover {
-  background-color: #F8F8F8;
+  background-color: #F0F0F0;
 }
 
 .ina a, a.ina, .inb a, a.inb,.inav a, a.inav {
@@ -427,7 +427,7 @@ span#newsubname {
 }
 .bff {
   border: 1px solid #999;
-  background-color: #F8F8F8;
+  background-color: #F0F0F0;
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   font-size: 13px;
   padding-left: 2px;
@@ -450,15 +450,11 @@ form[action='adm_dodefquotas.php'] table {
   border-radius: 4px;
   transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
   min-height: 2em;
+  padding-left: 6px;
 }
 
 span.intleft, #usernpfx, #newdomwww {
-  display: inline-table;
-  border-top-right-radius: 0px;
-  border-bottom-right-radius: 0px;
-  padding-bottom: 4px;
-  padding-top: 3px;
-  padding-right: 10px;
+    border: 0; /* disabled, not compatible with bootstrap */
 }
 
 form#formlist1 > span.int.intleft {
@@ -716,7 +712,7 @@ form[action="mman_edit.php"] > table > tbody > tr.lst1:hover, form[action="mman_
 
 #menu {
   display: block;
-  background-color: #f8f8f8;
+  background-color: #f0f0f0;
   float: left;
   padding: 0px;
   margin: 0px;
@@ -750,7 +746,7 @@ form[action="mman_edit.php"] > table > tbody > tr.lst1:hover, form[action="mman_
 
 .menu-box {
   font-size: 14px;
-  background-color: #f8f8f8;
+  background-color: #f0f0f0;
   border-top-color: transparent;
   height: auto;
 }
@@ -758,7 +754,7 @@ form[action="mman_edit.php"] > table > tbody > tr.lst1:hover, form[action="mman_
 .menu-box .menu-title {
   display: block;
   color: #000000;
-  background-color: #f8f8f8;
+  background-color: #f0f0f0;
   padding: 3px;
 }
 
@@ -771,6 +767,9 @@ form[action="mman_edit.php"] > table > tbody > tr.lst1:hover, form[action="mman_
   margin: 0 5px 5px 5px;
 }
 
+.menu-content {
+    background: white;
+}
 .menu-content ul li a span {
   margin-left: 22px;
 }
@@ -1621,6 +1620,7 @@ body.login_page {
 .login_page .block_list {
   display: flex;
   flex-flow: column;
+  padding: 0 10%;
 }
 .login_page .block_login_page {
   margin: 10px 15px;

@@ -59,7 +59,7 @@ foreach( variables_list() as $vars) {  ?>
 
  <tr class="lst">
     <td><?php ehe($vars['name']); ?></td>
- <td><input type="text" name="<?php ehe($vars['name']); ?>" value="<?php ehe($vars['value']); ?>" /></td>
+ <td><input type="text" class="int" name="<?php ehe($vars['name']); ?>" value="<?php ehe($vars['value']); ?>" style="width: 200px"/></td>
     <td><?php ehe($vars['comment']); ?></td>
  </tr>
 <?php } ?>

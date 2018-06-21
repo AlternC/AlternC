@@ -136,7 +136,11 @@ $dom->unlock();
 } else {
  __("Add this subdomain");
 } 
-?>" /></td>
+?>" />
+<?php if ($isedit) { ?>
+              <input type="button" class="inb cancel" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location = 'dom_edit.php?domain=<?php echo $domain; ?>'"/>
+<?php } ?>
+</td>
         </tr>
     </table>
 </form>
