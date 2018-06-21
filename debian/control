@@ -65,8 +65,11 @@ Conflicts: alternc-admintools
         , alternc-webalizer (<= 0.9.4)
         , alternc-mailman (<< 2.0)
         , courier-authlib
+        , alternc-ssl
 Provides: alternc-admintools
+        , alternc-ssl
 Replaces: alternc-admintools
+        , alternc-ssl
 Suggests: alternc-awstats
        , alternc-mailman
        , alternc-changepass
