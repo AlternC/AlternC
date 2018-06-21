@@ -26,8 +26,8 @@
 require_once("../class/config.php");
 
 $fields = array (
-  "sub_id"    => array ("post", "integer", ""),
-  "status"    => array ("post", "string", ""),
+  "sub_id"    => array ("get", "integer", ""),
+  "status"    => array ("get", "string", ""),
 );
 getFields($fields);
 
