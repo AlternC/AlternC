@@ -302,31 +302,3 @@ Description: Rest or get/post API for AlternC
  .
  More information at http://www.alternc.com/
 Homepage: http://www.alternc.com/
-
-Package: alternc-ssl
-Priority: optional
-Section: admin
-Architecture: all
-Depends: openssl
-    , mysql-client | mariadb-client
-    , debconf
-    , alternc (>= 3.0)
-    , php5-cli | php7.0-cli
-    , ${misc:Depends}
-Conflicts: alternc (<< 3.0)
-Description: HTTPS module for AlternC
- AlternC is a mutualized hosting software manager for Linux.
- It allows you to manage your websites, domains, ftp, emails, aliases,
- web statistics, mailing-lists, jabber accounts, etc.
- .
- This package is an optional module that adds HTTPS vhosts and SSL Certificates
- management to the virtual desktop. 
- .
- More information on http://www.alternc.com/
-Description-fr.UTF-8: Module HTTPS pour AlternC
- AlternC est un logiciel d'hébergement mutualisé pour serveur Linux.
- Il permet de gérer les sites web, domaines, ftp, emails, alias,
- statistiques web, listes de discussions, comptes jabber, etc.
- .
- Ce paquet est un module optionnel qui permet aux utilisateurs
- de gérer des hôtes virtuels HTTPS et des certificats SSL dans AlternC.
