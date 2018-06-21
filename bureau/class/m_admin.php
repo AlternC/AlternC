@@ -552,7 +552,7 @@ class m_admin {
         $dom->lock();
         // option : 1=hébergement dns, 1=noerase, empeche de modifier, 1=force
         // we do not allow DNS modification for hosting_tld
-        $dns=($domaine_name==variable_get("hosting_tld")) ? 0 : 1;
+        $dns=($domain_name==variable_get("hosting_tld")) ? 0 : 1;
         $dom->add_domain($mem->user['login'] . "." . $domain_name, $dns, 1, 1);
         $dom->unlock();
         $mem->unsu();
