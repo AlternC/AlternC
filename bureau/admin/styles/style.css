@@ -451,6 +451,7 @@ form[action='adm_dodefquotas.php'] table {
   transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
   min-height: 2em;
   padding-left: 6px;
+  padding-right: 6px;
 }
 
 span.intleft, #usernpfx, #newdomwww {
