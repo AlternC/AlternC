@@ -1,4 +1,3 @@
-
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
@@ -55,7 +54,6 @@ body.light {
 }
 
 table {
-  border: 1px solid #ddd;
   border-radius: 5px;
 }
 
@@ -79,11 +77,27 @@ thead tr th:hover, table.tlist tbody tr:first-child th:hover {
   background-color: #f8f8f8 !important;
 }
 
+tbody tr:first-child {
+  border-bottom: 1px solid #eee;
+}
+
 table.tlist > tbody > tr.lst:hover,
 table.tlist > tbody > tr.lst > td:hover,
 form[action="adm_dodel.php"] > table.tlist > tbody > tr:hover,
 form[action="adm_dodel.php"] > table.tlist > tbody > tr > td:hover {
   background-color: #DFEEF8 !important;
+}
+
+table.tlist > tbody > tr.lst:first-child {
+  background-color: #fff;
+}
+
+table.tlist > thead {
+  border-bottom: 1px solid #eee;
+}
+
+table.tlist > thead + tbody > tr.lst {
+  border-bottom: transparent !important;
 }
 
 tr:hover,  td:hover
@@ -127,6 +141,7 @@ h3 {
 
 .trbtn {
   text-align: right;
+
 }
 
 h4 {
@@ -148,8 +163,8 @@ hr {
   display: none;
 }
 
-.block_login_page br, td br, form > br, p.hlp > br {
-  display: contents !important;
+.block_login_page br, td br, form > br, p.hlp > br, td br {
+  display: block !important;
 }
 
 a {
@@ -200,6 +215,15 @@ div.ui-accordion-content > ul {
   margin-top: 0px !important;
 }
 
+select {
+  border: 1px solid #999;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 13px;
+  color: black;
+  background: white;
+  text-transform: lowercase;
+}
+
 .inc, .inl {
   border: 1px solid #999;
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -208,7 +232,20 @@ div.ui-accordion-content > ul {
   background: white;
 }
 
-body.light input.inb, input.ina{
+#inp1 {
+  min-width: 50%;
+  margin-top: 5px;
+}
+
+form > br + .inb, form > br + .ina, form > br + .inb + .inb, form > br + .ina + .inb, form > br + .inb + .ina, form > br + .ina + .ina {
+  margin-top: 10px;
+}
+
+p > input#file + br + .inb, p > input#file + br + .inb + .inb {
+  margin-top: 10px;
+}
+
+.showdirsize_button {
   margin-top: 10px;
 }
 
@@ -226,13 +263,12 @@ input.inb, input.ina{
   vertical-align: middle;
   padding-left: 10px;
   height: auto;
-  margin-top: auto;
 }
 
 input.inb:hover, input.ina:hover {
   border: 1px solid #999;
   text-decoration: none;
-  background-color: #DFEEF8;
+  background-color: #F8F8F8;
 }
 
 input.inb:focus, input.ina.focus {
@@ -313,25 +349,24 @@ input.ina:hover, input.inav:hover {
   border: 1px solid #999;
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   font-size: 14px;
-  padding: 2px 4px 2px 4px;
   color: black;
   cursor: pointer;
 }
 
+input.ina[name="actdel"], input.ina[name="actrename"], input.ina[name="actperms"], input.ina[name="actcopy"], input.ina[name="actmove"] {
+  padding-top: 5px;
+  padding-bottom: 4px;
+}
+
 input.ina, .ina a, .inb a, input.inb, input.ina,
-input.ina:hover, .ina a:hover, .inb a:hover,
 input.inav, .inav a {
-  background-color: #F8F8F8;
+  background-color: #fff;
 }
 
 input.inav:hover, .inav a:hover, a.inav:hover,
-input.ina, .ina a  {
-  background-color: #fff;
+input.ina:hover, .ina a:hover, .inb a:hover {
+  background-color: #F8F8F8;
 }
-/*
-.ina-active a, a.ina-active, input.ina-active {
-background-color: #C1FFCD;
-}*/
 
 .ina a, a.ina, .inb a, a.inb,.inav a, a.inav {
   color: black;
@@ -353,23 +388,31 @@ background-color: #C1FFCD;
 #emaildom.int, #newsubname.int, #create_dom_list {
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
-  padding-bottom: 4px;
-  padding-top: 4px;
   padding-right: 10px;
 }
 
 #tabsdom-addsub #newsubname.int {
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
-  padding-bottom: 5px;
-  padding-top: 3px;
   padding-right: 10px;
+  display: inline-table;
+  padding-top: 0.23em;
+  padding-bottom: 0.23em;
+}
+
+span#newsubname {
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  padding-right: 10px;
+  display: inline-table;
+  padding-top: 0.28em;
+  padding-bottom: 0.18em;
 }
 
 .int#sub, .int#mail_arg {
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
-  padding-top: 2px;
+  display: inline-table;
 }
 
 .ina a:hover, a.ina:hover, .inb a:hover, a.inb:hover,.inav a:hover, a.inav:hover {
@@ -406,15 +449,25 @@ form[action='adm_dodefquotas.php'] table {
   border: 1px solid #ccc;
   border-radius: 4px;
   transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-  min-height: 26px;
+  min-height: 2em;
 }
 
 span.intleft, #usernpfx, #newdomwww {
+  display: inline-table;
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
   padding-bottom: 4px;
   padding-top: 3px;
   padding-right: 10px;
+}
+
+form#formlist1 > span.int.intleft {
+  padding-bottom: 0.14em;
+  padding-top: 0.43em;
+}
+
+input[name="domain_id"] + input.inb.add {
+  margin-top: -4px;
 }
 
 #create_dom_list_pfx {
@@ -449,6 +502,11 @@ input.intleft {
 input.intright {
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
+}
+
+input.int[name="userfile"] {
+  padding-top: 5px;
+  padding-bottom: 2px;
 }
 
 .intleft {
@@ -804,8 +862,7 @@ form[action="mman_edit.php"] > table > tbody > tr.lst1:hover, form[action="mman_
 }
 
 table.searchtable {
-  width: 700px;
-  border: 1px dotted #99f;
+  width: 900px;
   margin: 20px 0 20px 0px;
 }
 
@@ -820,10 +877,6 @@ table.searchtable td {
   margin-right: auto;
   bottom: 0;
 }
-/*
-.logout-menu {
-  margin-bottom: 100%;
-}*/
 
 #content > .center {
     display: none;
@@ -839,6 +892,7 @@ table.searchtable td {
 
 
 #sendthisfile {
+  display: flex;
   margin-top: 6px;
 }
 
@@ -870,6 +924,9 @@ input#email {
 span#emaildom {
   border-left: 0;
   padding-left: 2px;
+  display: inline-table;
+  padding-top: 0.28em;
+  padding-bottom: 0.18em;
 }
 
 .tedit {
@@ -911,10 +968,6 @@ span#emaildom {
 
 table.tlistb, .tlistb tr, form > table {
   border: 1px solid transparent;
-}
-
-.tlist th, .tlist2 th {
-  font-size: 125%;
 }
 
 input#dir, input#sub_local {
@@ -978,6 +1031,7 @@ input#dir, input#sub_local {
 .menu-quota div.progress-bar {
   width: 180px;
   background: #fff;
+  color: white;
   border: 1px solid transparent;
   margin-left: 10px;
   display: none;
@@ -1006,7 +1060,6 @@ div.progress-bar div.barre {
 
 div.progress-bar div.txt {
   position: absolute;
-  top: 3px;
   left: 0;
   width: 100%;
   text-align:center;
@@ -1033,35 +1086,35 @@ div.progress-bar div.txt {
 .edit a, a.edit, input.edit {
   background-image: url(../images/edit.png);
   background-repeat: no-repeat;
-  background-position: 8px 8px;
+  background-position: 8px 5px;
   padding-left: 30px;
 }
 
 .view a, a.view, input.view {
   background-image: url(../images/code.png);
   background-repeat: no-repeat;
-  background-position: 8px 8px;
+  background-position: 8px 5px;
   padding-left: 30px;
 }
 
 .lock a, a.lock, input.lock {
   background-image: url(../icon/encrypted.png);
   background-repeat: no-repeat;
-  background-position: 8px 8px;
+  background-position: 8px 5px;
   padding-left: 30px;
 }
 
 .settings a, a.settings, input.settings {
   background-image: url(../icon/settings.png);
   background-repeat: no-repeat;
-  background-position: 8px 8px;
+  background-position: 8px 5px;
   padding-left: 30px;
 }
 
 .ok a, a.ok, input.ok {
   background-image: url(../icon/ok.png);
   background-repeat: no-repeat;
-  background-position: 8px 8px;
+  background-position: 8px 5px;
   padding-left: 30px;
   color: #fff;
   background-color: #5cb85c;
@@ -1071,7 +1124,7 @@ div.progress-bar div.txt {
 input.ok:hover, input.ok:focus {
   background-image: url(../icon/ok.png);
   background-repeat: no-repeat;
-  background-position: 8px 8px;
+  background-position: 8px 5px;
   padding-left: 30px;
   color: #fff;
   background-color: #449d44;
@@ -1087,7 +1140,7 @@ input[value="Delete the checked users"] {
 input.add, span.add .ina {
   background-image: url(../icon/add.png);
   background-repeat: no-repeat;
-  background-position: 8px 8px;
+  background-position: 8px 5px;
   padding-left: 30px;
 }
 
@@ -1101,7 +1154,7 @@ div > .add a:hover, p > a.add:hover {
 input.add:hover, input.add:focus {
   background-image: url(../icon/add.png);
   background-repeat: no-repeat;
-  background-position: 8px 8px;
+  background-position: 8px 5px;
   padding-left: 30px;
   color: #fff;
   background-color: #449d44;
@@ -1111,7 +1164,7 @@ input.add:hover, input.add:focus {
 .delete a, a.delete, input.delete {
   background-image: url(../icon/delete.png);
   background-repeat: no-repeat;
-  background-position: 8px 8px;
+  background-position: 8px 5px;
   padding-left: 30px;
 }
 
@@ -1125,7 +1178,7 @@ div > .delete a:hover, p > a.delete:hover {
 input.delete:hover, input.delete:focus {
   background-image: url(../icon/delete.png);
   background-repeat: no-repeat;
-  background-position: 8px 8px;
+  background-position: 8px 5px;
   padding-left: 30px;
   color: #fff;
   background-color: #d9534f;
@@ -1135,14 +1188,14 @@ input.delete:hover, input.delete:focus {
 .cancel a, a.cancel, input.cancel {
   background-image: url(../icon/cancel.png);
   background-repeat: no-repeat;
-  background-position: 8px 8px;
+  background-position: 8px 5px;
   padding-left: 30px;
 }
 
 input.cancel:hover {
   background-image: url(../icon/cancel.png);
   background-repeat: no-repeat;
-  background-position: 8px 8px;
+  background-position: 8px 5px;
   padding-left: 30px;
   background-color: #fcf8e3;
 }
@@ -1150,7 +1203,7 @@ input.cancel:hover {
 input.cancel:active {
   background-image: url(../icon/cancel.png);
   background-repeat: no-repeat;
-  background-position: 8px 8px;
+  background-position: 8px 5px;
   padding-left: 30px;
   background-color: #f0ad4e;
   border-color: #eea236;
@@ -1175,35 +1228,35 @@ input.cancel:active {
 .configure a, a.configure, input.configure {
   background-image: url(../icon/configure.png);
   background-repeat: no-repeat;
-  background-position: 8px 8px;
+  background-position: 8px 5px;
   padding-left: 30px;
 }
 
 .edit a, a.edit, input.edit {
   background-image: url(../icon/edit.png);
   background-repeat: no-repeat;
-  background-position: 8px 8px;
+  background-position: 8px 5px;
   padding-left: 30px;
 }
 
 .save a, a.save, input.save {
   background-image: url(../icon/save.png);
   background-repeat: no-repeat;
-  background-position: 8px 8px;
+  background-position: 8px 5px;
   padding-left: 30px;
 }
 
 .down a, a.down, input.down {
   background-image: url(../icon/save.png);
   background-repeat: no-repeat;
-  background-position: 8px 8px;
+  background-position: 8px 5px;
   padding-left: 30px;
 }
 
 .up a, a.up, input.up {
   background-image: url(../icon/up.png);
   background-repeat: no-repeat;
-  background-position: 8px 8px;
+  background-position: 8px 5px;
   padding-left: 30px;
   padding-top: 5px;
   padding-bottom: 5px;
@@ -1212,7 +1265,7 @@ input.cancel:active {
 .up a:hover, a.up:hover, input.up:hover {
   background-image: url(../icon/up.png);
   background-repeat: no-repeat;
-  background-position: 8px 8px;
+  background-position: 8px 5px;
   padding-left: 30px;
   padding-top: 5px;
   padding-bottom: 5px;
@@ -1226,7 +1279,7 @@ input.cancel:active {
 .back a, a.back, input.back {
   background-image: url(../icon/back.png);
   background-repeat: no-repeat;
-  background-position: 8px 8px;
+  background-position: 8px 5px;
   padding-left: 30px;
 }
 
@@ -1349,7 +1402,7 @@ input.cancel:active {
 .filter a, a.edit, input.filter {
   background-image: url(../icon/filter.png);
   background-repeat: no-repeat;
-  background-position: 8px 8px;
+  background-position: 8px 5px;
   padding-left: 30px;
 }
 
@@ -1392,7 +1445,6 @@ body .ui-state-default, body .ui-widget-content .ui-state-default, body .ui-widg
 }
 
 body .ui-state-active, body .ui-widget-content, body .ui-state-active, body .ui-widget-header .ui-state-active {
-  border: 1px solid #ddd;
   color: #555;
   cursor: default;
   background-color: #fff;
@@ -1552,11 +1604,12 @@ body.login_page {
 }
 
 .login_page #content {
-  padding: 10px 10px 10px 0px;
+  padding: 10px 10px 10px 10px;
   border: 1px solid #ddd;
   border-radius: 5px;
   width: auto;
 }
+
 .login_page #logo, .login_page {
   text-align:center;
 }
@@ -1669,6 +1722,7 @@ small > i {
   background-repeat: no-repeat;
   background-position: 8px 10px;
   padding-left: 30px;
+  text-align: center;
 }
 
 .alternc_powered {
@@ -1681,4 +1735,27 @@ small > i {
   top: 10px;
   right: 10px;
   z-index: 1000;
+}
+
+@media (max-width:2000px) {
+  span#emaildom {
+    padding-top: 0.17em;
+    padding-bottom: 0.27em;
+  }
+  form#formlist1 > span.int.intleft {
+    padding-bottom: 0.15em;
+    padding-top: 0.4em;
+  }
+  span.intright {
+    padding-bottom: 0.4em;
+    padding-top: 0.25em;
+  }
+  span#newsubname {
+    padding-top: 0.17em;
+    padding-bottom: 0.27em;
+  }
+  #tabsdom-addsub #newsubname.int {
+    padding-top: 0.1em;
+    padding-bottom: 0.35em;
+  }
 }
