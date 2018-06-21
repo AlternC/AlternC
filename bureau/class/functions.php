@@ -541,7 +541,6 @@ function _md5cr($pass, $salt = "") {
     return crypt($pass, $salt);
 }
 
-
 /** split mysql database name between username and custom database name
  * @param string $dbname database name
  * @return array returns username as first element, custom name as second
@@ -1203,4 +1202,43 @@ function csrf_check($token=null) {
     $db->query("UPDATE csrf SET used=1 WHERE cookie=? AND token=?;",array($_SESSION["csrf"],$token)); 
     $db->exec("DELETE FROM csrf WHERE created<DATE_SUB(NOW(), INTERVAL 1 DAY);");
     return 1;
+}
+
+/**
+ * Create a SHA512-CRYPT hash of a string.
+ */
+function _sha512cr($password, $salt = NULL) {
+    if (!$salt) {
+        // Aim to have a 16 character salt for SHA-512 crypt.
+        // @see https://secure.php.net/manual/en/function.crypt.php
+        if (function_exists('random_bytes')) {
+            // PHP >= 7.0
+            $salt = base64_encode(random_bytes(12));
+        }
+        else if (function_exists('mcrypt_create_iv')) {
+            $salt = base64_encode(mcrypt_create_iv(12, MCRYPT_DEV_URANDOM));
+        }
+        else if (function_exists('')) {
+            $salt  = base64_encode(openssl_random_pseudo_bytes(12));
+        }
+        if (!$salt) {
+            throw Error('Unable to generate salt');
+        }
+    }
+    $salt = '$6$rounds=20000$' . $salt;
+    $hash = crypt($password, $salt);
+    return $hash;
+}
+
+/**
+ * Create a password hash for use with dovecot.
+ */
+function _dovecot_hash($password) {
+    // In any case the final password saved for dovecot can store the
+    // scheme to override the default on a per-account basis.
+    // Ideally this is updated to bcrypt or argon2 when those become
+    // available in dovecot.
+    // @see https://wiki.dovecot.org/Authentication/PasswordSchemes
+    $hash = _sha512cr($password);
+    return '{SHA512-CRYPT}' . $hash;
 }

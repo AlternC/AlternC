@@ -129,7 +129,7 @@ CREATE TABLE IF NOT EXISTS ftpusers (
   id int(10) unsigned NOT NULL auto_increment,
   name varchar(64) NOT NULL default '',
   password varchar(32) NOT NULL default '',
-  encrypted_password VARCHAR(32) default NULL,
+  encrypted_password VARCHAR(255) default NULL,
   homedir varchar(128) NOT NULL default '',
   uid int(10) unsigned NOT NULL default '0',
   enabled boolean NOT NULL DEFAULT TRUE,
@@ -159,7 +159,7 @@ CREATE TABLE IF NOT EXISTS local (
 CREATE TABLE IF NOT EXISTS membres (
   uid int(10) unsigned NOT NULL auto_increment,		-- Numéro du membre (GID)
   login varchar(128) NOT NULL default '',		-- Nom d`utilisateur
-  pass varchar(64) NOT NULL default '',			-- Mot de passe
+  pass varchar(255) NOT NULL default '',			-- Mot de passe
   enabled tinyint(4) NOT NULL default '1',		-- Le compte est-il actif ?
   su tinyint(4) NOT NULL default '0',			-- Le compte est-il super-admin ?
   mail varchar(128) NOT NULL default '',		-- Adresse email du possesseur
