@@ -101,7 +101,7 @@ class m_roundcube {
     $req=$stmt->execute(array($fullmail));
 
     if ($req) {
-    foreach ( $req->fetchAll() as $t ) {
+    foreach ( $stmt->fetchAll() as $t ) {
       if (empty($t['user_id'])) continue ;
       $rcuser_id=$t['user_id'];
 

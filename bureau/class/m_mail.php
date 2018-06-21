@@ -620,8 +620,10 @@ ORDER BY
             return false;
         }
         if ($canbeempty && empty($pass)) {
-            return $db->query("UPDATE address SET password= ? where id = ? ;", array(null, $mail_id ));
-        } else if (!$db->query("UPDATE address SET password= ? where id = ? ;", array(_md5cr($pass), $mail_id ))) {
+            return $db->query("UPDATE address SET password= ? where id = ? ;",
+                              array(null, $mail_id ));
+        } else if (!$db->query("UPDATE address SET password= ? where id = ? ;",
+                               array(_dovecot_hash($pass), $mail_id ))) {
             return false;
         }
         return true;

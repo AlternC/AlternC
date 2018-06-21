@@ -18,6 +18,7 @@ debian/alternc-slave
 debian/alternc-squirrelmail
 debian/alternc-upnp
 debian/files
+debian/.debhelper
 lang/de_DE.po
 lang/es_ES.po
 lang/fr_FR.po

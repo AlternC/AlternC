@@ -93,7 +93,7 @@ class m_mem {
             return false;
         }
         $db->next_record();
-        if (_md5cr($password, $db->f("pass")) != $db->f("pass")) {
+        if (!password_verify($password, $db->f('pass'))) {
             $db->query("UPDATE membres SET lastfail=lastfail+1 WHERE uid= ? ;", array($db->f("uid")));
             $msg->raise("ERROR", "mem", _("User or password incorrect"));
             return false;
@@ -104,6 +104,12 @@ class m_mem {
         }
         $this->user = $db->Record;
         $cuid = $db->f("uid");
+        // Transitional code to update md5 hashed passwords to those created
+        // with password_hash().
+        if (strncmp($db->f('pass'), '$1$', 3) == 0) {
+            $db->query("update membres set pass = ? where uid = ?",
+                       array(password_hash($password, PASSWORD_BCRYPT), $cuid));
+        }
 
         if (panel_islocked() && $cuid != 2000) {
             $msg->raise("ALERT", "mem", _("This website is currently under maintenance, login is currently disabled."));
@@ -396,7 +402,7 @@ class m_mem {
             $msg->raise("ERROR", "mem", _("You are not allowed to change your password."));
             return false;
         }
-        if ($this->user["pass"] != _md5cr($oldpass, $this->user["pass"])) {
+        if (!password_verify($oldpass, $this->user['pass'])) {
             $msg->raise("ERROR", "mem", _("The old password is incorrect"));
             return false;
         }
@@ -410,7 +416,7 @@ class m_mem {
         if (!$admin->checkPolicy("mem", $login, $newpass)) {
             return false; // The error has been raised by checkPolicy()
         }
-        $newpass = _md5cr($newpass);
+        $newpass = password_hash($newpass, PASSWORD_BCRYPT);
         $db->query("UPDATE membres SET pass= ? WHERE uid= ?;", array($newpass, $cuid));
         $msg->init_msgs();
         return true;

@@ -19,30 +19,30 @@ This project native tongue is French, and the code is commented in English. The 
 
 ## Developper information
 
-* This software is built around a Debian package for Jessie whose packaging instructions are located in [debian/](debian/) folder
+* This software is built around a Debian package for Stretch whose packaging instructions are located in [debian/](debian/) folder (this package can be installed on Jessie safely too)
 * To **build the packages**, clone this repository in a Debian machine and use `debuild` or `dpkg-buildpackage` from source code root.
-* If you want to **build it for Squeeze**, clone the source and patch it for Squeeze using [squeeze/patch.sh](squeeze/patch.sh) script. You'll be able to use dpkg-buildpackage to build the Wheezy version.
-* If you want to **build it for Wheezy**, clone the source and patch it for Wheezy using [wheezy/patch.sh](wheezy/patch.sh) script. You'll be able to use dpkg-buildpackage to build the Wheezy version.
-
 * The web control panel pages written in PHP are located in [bureau/admin](bureau/admin) and the associated PHP classes doing the stuff are in [bureau/class](bureau/class).
 
 ## Nightly build
 
-We have 3 nightly build repositories:
+We have 1 nightly build repositories:
+* stretch - [stable 3.5](http://stable-3-5.nightly.alternc.org/)
+
+and 3 nightly from former Debian releases (now unmaintained) 
 * jessie - [stable 3.3](http://stable-3-3.nightly.alternc.org/)
 * wheezy - [stable 3.2](http://stable-3-2.nightly.alternc.org/)
 * squeeze - [stable 3.1](http://stable-3-1.nightly.alternc.org/)
 
-To use one of them, create a file named `/etc/apt/sources.list.d/alternc-nightly-stable-3.3.list` (for debian jessie) as follow :
+To use one of them, create a file named `/etc/apt/sources.list.d/alternc-nightly-stable-3.5.list` (for debian Jessie or Stretch) as follow :
 
 ```
- deb http://stable-3-3.nightly.alternc.org/ latest/
+ deb http://stable-3-5.nightly.alternc.org/ latest/
 ```
 
 The repository and the packages are signed by the pgp key of AlternC nightly build user :
 
 ```
-wget http://stable-3-3.nightly.alternc.org/nightly.key -O - | apt-key add - 
+wget http://stable-3-5.nightly.alternc.org/nightly.key -O - | apt-key add - 
 ```
 
 ## License

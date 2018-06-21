@@ -1,3 +1,22 @@
+alternc (3.5.0rc1) stable; urgency=low
+
+  * AlternC 3.5 for Jessie & Stretch
+  * added AlternC-ssl natively now, based on cert providers (external package)
+
+ -- Benjamin Sonntag <benjamin@sonntag.fr>  Fri, 21 Jun 2018 15:26:00 +0100
+
+alternc (3.1.11) oldoldstable; urgency=low
+
+  * fix This is a big security upgrade of AlternC 3.x
+  * added CSRF token to all forms (as much as possible) to prevent cross-site attacks
+  * added XSS protection to many form fields and views
+  * migrated the DB abstraction layer from mysql_* functions to PDO
+  * migrated the DB calls from addslases to prepared-queries or quotes
+  * fix many unix rights issues (prevents a root escalation from alterncpanel!)
+  * fix some little interface issues on forms
+
+ -- Benjamin Sonntag <benjamin@sonntag.fr>  Fri, 27 May 2016 10:36:00 +0200
+
 alternc (3.3.10) stable; urgency=low
 
   * Version identical to 3.1 for Squeeze

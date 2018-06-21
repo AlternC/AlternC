@@ -634,7 +634,7 @@ class m_admin {
             $msg->raise("ERROR", "admin", _("Login can only contains characters a-z, 0-9 and -"));
             return false;
         }
-        $pass = _md5cr($pass);
+        $pass = password_hash($pass, PASSWORD_BCRYPT);
         $db = new DB_System();
         // Already exist?
         $db->query("SELECT count(*) AS cnt FROM membres WHERE login= ?;", array($login));
@@ -772,7 +772,7 @@ class m_admin {
         $db = new DB_System();
 
         if ($pass) {
-            $pass = _md5cr($pass);
+            $pass = password_hash($pass, PASSWORD_BCRYPT);
             $second_query = "UPDATE membres SET mail= ?, canpass= ?, enabled= ?, `type`= ?, notes= ? , pass = ? WHERE uid= ?;";
             $second_query_args = array($mail, $canpass, $enabled, $type, $notes, $pass, $uid);
         } else {
