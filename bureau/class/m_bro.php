@@ -559,6 +559,12 @@ class m_bro {
         }
         for ($i = 0; $i < count($d); $i++) {
             $d[$i] = ssla($d[$i]); // strip slashes if needed
+            // If the form checkboxes are not checked, PHP will not fill in a
+            // value at all for the permissions. Set the default to unwriteable
+            // unless explicitly marked as writable.
+            if (!isset($perm[$i])) {
+               $perm[$i]['w'] = False;
+            }
             if (!strpos($d[$i], "/")) { // caractre / interdit dans le nom du fichier
                 $m = fileperms($absolute . "/" . $d[$i]);
 
