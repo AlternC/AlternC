@@ -82,7 +82,7 @@ while (list($key,$val)=each($d)) {
 </ul>
 </p>
 <p>
-<input type="submit" class="inb" name="submit" value="<?php __("Confirm the deletion"); ?>" /> - <input type="button" name="cancel" id="cancel" onclick="window.history.go(-1);" class="inb" value="<?php __("Don't delete anything and go back to the email list"); ?>"/>
+<input type="submit" class="inb" name="submit" value="<?php __("Confirm the deletion"); ?>" /> &nbsp; <input type="button" name="cancel" id="cancel" onclick="window.history.go(-1);" class="inb" value="<?php __("Don't delete anything and go back to the email list"); ?>"/>
 </p>
 
 <p class="warningmsg">

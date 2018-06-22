@@ -66,14 +66,13 @@ for($i=0;$i<count($r);$i++) {
 <input type="submit" name="sub" value="<?php __("Delete the checked users"); ?>" class="inb delete" />
 </form>
 
-<br/>
-<br/>
-
 <?php
   } else {
    $msg->raise("INFO", "mysql", _("You have no sql user at the moment."));
    echo $msg->msg_html_all();
   }
 ?>
+<p>
   <span class="ina add"><a href="sql_users_add.php"><?php __("Create a new MySQL user"); ?></a></span>
+</p>
 <?php include_once("foot.php"); ?>
