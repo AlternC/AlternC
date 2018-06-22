@@ -239,7 +239,7 @@ p > input#file + br + .inb, p > input#file + br + .inb + .inb {
   margin-top: 10px;
 }
 
-input.inb, input.ina{
+input.inb, input.ina, button.inb, button.ina {
   color: black;
   white-space: nowrap;
   border: 1px solid #999;
@@ -255,13 +255,13 @@ input.inb, input.ina{
   height: auto;
 }
 
-input.inb:hover, input.ina:hover {
+input.inb:hover, input.ina:hover, button.inb:hover, button.ina:hover {
   border: 1px solid #999;
   text-decoration: none;
   background-color: #F0F0F0;
 }
 
-input.inb:focus, input.ina.focus {
+input.inb:focus, input.ina:focus, button.inb:focus, button.ina:focus {
   box-shadow: 0 0 0 0.2rem inbrgba(40, 167, 69, 0.5);
 }
 
@@ -278,13 +278,7 @@ input.inb:focus, input.ina.focus {
   border-color: #eea236;
 }
 
-input.inb.cancel:active {
-  color: #fff;
-  background-color: #f0ad4e;
-  border-color: #eea236;
-}
-
-.cancel:active{
+.cancel:active {
   color: #fff;
   background-color: #f0ad4e;
   border-color: #eea236;
@@ -297,7 +291,7 @@ input.inb.cancel:active {
   border-color: #d43f3a;
 }
 
-input.inb.delete:active {
+.inb.delete:active {
   color: #fff;
   background-color: #d9534f;
   border-color: #d43f3a;
@@ -311,7 +305,7 @@ input.inb.delete:active {
   border-color: #255625;
 }
 
-input.inb.ok:active {
+input.inb.ok:active, input.inb.add:active, button.inb.ok:active, button.inb.add:active {
   color: #fff;
   background-color: #449d44;
   border-color: #255625;
@@ -319,12 +313,6 @@ input.inb.ok:active {
 
 .add.inb:not([disabled]):not(.disabled):active, .add.inb:not([disabled]):not(.disabled).active,
 .add.show > .inb.dropdown-toggle {
-  color: #fff;
-  background-color: #449d44;
-  border-color: #255625;
-}
-
-input.inb.add:active {
   color: #fff;
   background-color: #449d44;
   border-color: #255625;
@@ -596,19 +584,27 @@ img {
 #content .alert {
   background-position: 12px center;
   background-repeat: no-repeat;
-  padding-left: 48px;
+  padding-left: 20px;
+  min-height: 32px;
 }
-#content .alert-danger {
-  background-image: url("../images/danger.png");
+#content .alert:before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    padding-right: 20px;
+    font-size: 32px;
+    float: left;
 }
-#content .alert-info{
-  background-image: url("../images/info.png");
+#content .alert-danger:before {
+    content:"\f071";
 }
-#content .alert-success {
-  background-image: url("../images/success.png");
+#content .alert-info:before {
+    content:"\f129";
 }
-#content .alert-warning {
-  background-image: url("../images/warning.png");
+#content .alert-success:before {
+    content:"\f058";
+}
+#content .alert-warning:before {
+    content:"\f06a";
 }
 
 .alerte {
@@ -1076,11 +1072,11 @@ div.progress-bar div.txt {
   padding-right: 6px;
 }
 
-.view a, a.view, input.view {
-  background-image: url(../images/code.png);
-  background-repeat: no-repeat;
-  background-position: 8px 5px;
-  padding-left: 30px;
+.view a:before, a.view:before, input.view:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f002";
+  padding-right: 6px;
 }
 
 .lock a, a.lock, input.lock {
@@ -1090,35 +1086,32 @@ div.progress-bar div.txt {
   padding-left: 30px;
 }
 
-.settings a, a.settings, input.settings {
-  background-image: url(../icon/settings.png);
-  background-repeat: no-repeat;
-  background-position: 8px 5px;
-  padding-left: 30px;
+.settings a:before, a.settings:before, input.settings:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f1de";
+  padding-right: 6px;
 }
 
-.ok a, a.ok, input.ok {
-  background-image: url(../icon/ok.png);
-  background-repeat: no-repeat;
-  background-position: 8px 5px;
-  padding-left: 30px;
+.ok a, a.ok, input.ok, button.ok {
   color: #fff;
   background-color: #5cb85c;
   border-color: #4cae4c;
 }
+.ok a:before, a.ok:before, input.ok:before, button.ok:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f00c";
+  padding-right: 6px;
+}
 
-input.ok:hover, input.ok:focus {
-  background-image: url(../icon/ok.png);
-  background-repeat: no-repeat;
-  background-position: 8px 5px;
-  padding-left: 30px;
+input.ok:hover, input.ok:focus, button.ok:focus, button.ok:hover {
   color: #fff;
   background-color: #449d44;
   border-color: #398439;
 }
 
-.add a:before, a.add:before,
-input.add:before, span.add .ina:before {
+.add a:before, a.add:before, input.add:before, span.add .ina:before {
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   content:"\f067";
@@ -1132,7 +1125,7 @@ div > .add a:hover, p > a.add:hover {
   border-color: #4cae4c;
 }
 
-input.add:hover, input.add:focus {
+input.add:hover, input.add:focus, button.add:focus {
   background-image: url(../icon/add.png);
   background-repeat: no-repeat;
   background-position: 8px 5px;
@@ -1142,11 +1135,11 @@ input.add:hover, input.add:focus {
   border-color: #398439;
 }
 
-.delete a, a.delete, input.delete {
-  background-image: url(../icon/delete.png);
-  background-repeat: no-repeat;
-  background-position: 8px 5px;
-  padding-left: 30px;
+.delete a:before, a.delete:before, input.delete:before, button.delete:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f00d";
+  padding-right: 6px;
 }
 
 div.delete a:hover,
@@ -1166,26 +1159,18 @@ input.delete:hover, input.delete:focus {
   border-color: #d43f3a;
 }
 
-.cancel a, a.cancel, input.cancel {
-  background-image: url(../icon/cancel.png);
-  background-repeat: no-repeat;
-  background-position: 8px 5px;
-  padding-left: 30px;
+.cancel a:before, a.cancel:before, input.cancel:before, button.cancel:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f00d";
+  padding-right: 6px;
 }
 
-input.cancel:hover {
-  background-image: url(../icon/cancel.png);
-  background-repeat: no-repeat;
-  background-position: 8px 5px;
-  padding-left: 30px;
+input.cancel:hover, button.cancel:hover {
   background-color: #fcf8e3;
 }
 
-input.cancel:active {
-  background-image: url(../icon/cancel.png);
-  background-repeat: no-repeat;
-  background-position: 8px 5px;
-  padding-left: 30px;
+input.cancel:active, button.cancel:active {
   background-color: #f0ad4e;
   border-color: #eea236;
 }
