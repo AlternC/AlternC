@@ -42,7 +42,7 @@ if (!$r=$dom->get_domain_all($domain)) {
 $dom->unlock();
 
 ?>
-<h3><img src="images/dom.png" alt="" />&nbsp;<?php printf(_("Manage %s"),$domain); ?></h3>
+<h3><i class="fas fa-globe-africa"></i> <?php printf(_("Manage %s"),$domain); ?></h3>
 <?php
 echo $msg->msg_html_all();
 ?>

@@ -181,7 +181,7 @@ if (!is_array($accountList) || empty($accountList)) {
             while (list($key, $val) = each($accountList)) {
                 $col = 3 - $col;
                 ?>
-                <tr class="lst<?php echo $col; ?>">
+                <tr class="lst">
 
                     <?php if ($val["su"]) { ?>
                         <td id="user_<?php echo $val["uid"]; ?>">&nbsp;</td>
@@ -199,7 +199,7 @@ if (!is_array($accountList) || empty($accountList)) {
                 <td><div class="<?php echo 'exp' . $admin->renew_get_status($val['uid']) ?>"><?php ehe($admin->renew_get_expiry($val['uid'])); ?></div></td>
                 </tr>
 
-                <tr class="lst<?php echo $col; ?>" >
+                <tr class="lst" >
                     <td/><td ><i><?php echo _("DB:") . ' ' . $val['db_server_name'] ?></i></td>
                     <td colspan="8" >
                         <div id="admlistbtn">

@@ -82,9 +82,7 @@ tbody tr:first-child {
 }
 
 table.tlist > tbody > tr.lst:hover,
-table.tlist > tbody > tr.lst > td:hover,
-form[action="adm_dodel.php"] > table.tlist > tbody > tr:hover,
-form[action="adm_dodel.php"] > table.tlist > tbody > tr > td:hover {
+table.tlist > tbody > tr.lst > td:hover {
   background-color: #DFEEF8 !important;
 }
 
@@ -157,14 +155,6 @@ hr {
   /*border: 1px solid #007799;*/
   border: 1px solid transparent;
   border-width: 1px 0 0 0;
-}
-
-#content > hr, #content br {
-  display: none;
-}
-
-.block_login_page br, td br, form > br, p.hlp > br, td br {
-  display: block !important;
 }
 
 a {
@@ -461,10 +451,6 @@ span.intleft, #usernpfx, #newdomwww {
 form#formlist1 > span.int.intleft {
   padding-bottom: 0.14em;
   padding-top: 0.43em;
-}
-
-input[name="domain_id"] + input.inb.add {
-  margin-top: -4px;
 }
 
 #create_dom_list_pfx {
@@ -1083,11 +1069,11 @@ div.progress-bar div.txt {
   background-color: #DFEEF8;
 }
 
-.edit a, a.edit, input.edit {
-  background-image: url(../images/edit.png);
-  background-repeat: no-repeat;
-  background-position: 8px 5px;
-  padding-left: 30px;
+.edit a:before, a.edit:before, input.edit:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f304";
+  padding-right: 6px;
 }
 
 .view a, a.view, input.view {
@@ -1131,17 +1117,12 @@ input.ok:hover, input.ok:focus {
   border-color: #398439;
 }
 
-input[value="Supprimer les utilisateurs cochés"],
-input[value="Delete the checked users"] {
-  margin-bottom: 10px;
-}
-
-.add a, a.add,
-input.add, span.add .ina {
-  background-image: url(../icon/add.png);
-  background-repeat: no-repeat;
-  background-position: 8px 5px;
-  padding-left: 30px;
+.add a:before, a.add:before,
+input.add:before, span.add .ina:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f067";
+  padding-right: 6px;
 }
 
 div.add > a:hover,
@@ -1227,13 +1208,6 @@ input.cancel:active {
 
 .configure a, a.configure, input.configure {
   background-image: url(../icon/configure.png);
-  background-repeat: no-repeat;
-  background-position: 8px 5px;
-  padding-left: 30px;
-}
-
-.edit a, a.edit, input.edit {
-  background-image: url(../icon/edit.png);
   background-repeat: no-repeat;
   background-position: 8px 5px;
   padding-left: 30px;
