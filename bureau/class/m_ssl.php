@@ -290,32 +290,66 @@ class m_ssl {
      * return the list of certificates by order of preference (2 lasts bein the default FQDN and the snakeoil if necessary)
      * keys: id, provider, crt, chain, key, validstart, validend
      */
-    function get_valid_certs($fqdn) {
+    function get_valid_certs($fqdn, $provider="") {
         global $db, $msg, $cuid;
         $db->query("SELECT * FROM certificates WHERE status=".self::STATUS_OK." ORDER BY validstart DESC;");
-        $good=array();
-        $bad=array();
-        $ugly=array();
+        $good=array(); // list of good certificates
+        $bof=array(); // good but not with the right provider 
+        $bad=array(); 
         $wildcard="*".substr($fqdn,strpos($fqdn,".");
         $defaultwild="*".substr($this->default_certificate_fqdn,strpos($this->default_certificate_fqdn,".");
 
         while($db->next_record()) {
-            $good=false
+            $found=false;
             if ($db->Record["fqdn"]==$fqdn || $db->Record["fqdn"]==$wildcard) {
-                $good=true;
+                $found=true;
             } else {
                 $alts=explode("\n",$db->Record["altnames"]);
                 foreach($alts as $alt) {
                     if ($alt==$fqdn || $alt==$wildcard) {
-                        $good=true;
+                        $found=true;
                         break;
                     }
                 }
             }
-            if ($good) {
-                $good[]=$db->Record;
+            if ($found) {
+                if ($provider=="" || $provider=$db->Record["provider"]) {
+                    $good[]=$db->Record;
+                } else {
+                    $bof[]=$db->Record;
+                }
+            }
+            // search for the default one, the one used by the panel
+            if (!count($bad)) {
+                $found=false;
+                if ($db->Record["fqdn"]==$this->default_certificate_fqdn || $db->Record["fqdn"]==$defaultwild) {
+                    $found=true;
+                } else {
+                    $alts=explode("\n",$db->Record["altnames"]);
+                    foreach($alts as $alt) {
+                        if ($alt==$this->default_certificate_fqdn || $alt==$defaultwild) {
+                            $found=true;
+                            break;
+                        }
+                    }
+                }
+                if ($found) {
+                    $bad=$db->Record;
+                }
             }
             // TODO : manages BAD (default) and UGLY (snakeoil)
+        }
+        // add the one with the bad provider
+        if (count($bof)) {
+            $good=array_merge($good,$bof);
+        }
+        if (count($bad)) {
+            $good[]=$bad;
+        }
+        // $ugly Add the Snakeoil : #0
+        $db->query("SELECT * FROM certificates WHERE id=0;");
+        if ($db->next_record()) {
+            $good[]=$db->Record;
         }
         return $good;
     }
