@@ -3,6 +3,7 @@
 
 DROP TABLE `certif_alias`;
 ALTER TABLE `certificates` DROP `shared`, DROP `ssl_action`, DROP `ssl_result`;
+ALTER TABLE `certificates` ADD `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP;
 
 ALTER TABLE `sub_domaines`
       ADD `certificate_id` INT UNSIGNED NOT NULL DEFAULT '0' AFTER `enable`,
