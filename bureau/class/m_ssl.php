@@ -346,9 +346,15 @@ class m_ssl {
         $fqdn = $crtdata["subject"]["CN"];
         $altnames = $this->parseAltNames($crtdata["extensions"]["subjectAltName"]);
 
+        // Search for an existing cert:
+        $db->query("SELECT id FROM certificates WHERE crt=?;",array($crt));
+        if ($db->next_record()) {
+            $msg->raise("ERROR","ssl", _("Certificate already exists in database"));
+            return false;
+        }
         // Everything is PERFECT and has been thoroughly checked, let's insert those in the DB !
-        $sql = "INSERT INTO certificates SET uid='$cuid', status=" . self::STATUS_OK . ", shared=0, fqdn='" . addslashes($fqdn) . "', altnames='" . addslashes($altnames) . "', validstart=FROM_UNIXTIME(" . intval($validstart) . "), validend=FROM_UNIXTIME(" . intval($validend) . "), sslkey='" . addslashes($key) . "', sslcrt='" . addslashes($crt) . "', sslchain='" . addslashes($chain) . "';";
-        $db->query($sql);
+        $sql = "INSERT INTO certificates SET uid='?', status=?, shared=0, fqdn=?, altnames=?, validstart=FROM_UNIXTIME(?), validend=FROM_UNIXTIME(?), sslkey=?, sslcrt=?, sslchain=?;";
+        $db->query($sql,array($cuid,self::STATUS_OK,$fqdn,$altnames,intval($validstart),intval($validend),$key,$crt,$chain));
         if (!($id = $db->lastid())) {
             $msg->raise("ERROR","ssl", _("Can't save the Key/Crt/Chain now. Please try later."));
             return false;
