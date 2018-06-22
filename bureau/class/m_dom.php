@@ -1159,6 +1159,7 @@ class m_dom {
      *  $r["sub"][0-(nsub-1)]["name"] = nom du sous-domaine (NON-complet)
      *  $r["sub"][0-(nsub-1)]["dest"] = Destination (url, ip, local ...)
      *  $r["sub"][0-(nsub-1)]["type"] = Type (0-n) de la redirection.
+     *  $r["sub"][0-(nsub-1)]["https"] = is https properly enabled for this subdomain? (http/https/both)
      *  </pre>
      *  Retourne FALSE si une erreur s'est produite.
      *
@@ -1197,21 +1198,21 @@ class m_dom {
         $r["nsub"] = $db->Record["cnt"];
         $db->free();
         #$db->query("SELECT sd.*, dt.description AS type_desc, dt.only_dns FROM sub_domaines sd, domaines_type dt WHERE compte='$cuid' AND domaine='$dom' AND UPPER(dt.name)=UPPER(sd.type) ORDER BY sd.sub,sd.type");
-        $db->query("SELECT sd.*, dt.description AS type_desc, dt.only_dns, dt.advanced FROM sub_domaines sd LEFT JOIN domaines_type dt on  UPPER(dt.name)=UPPER(sd.type) WHERE compte= ? AND domaine= ? ORDER BY dt.advanced,sd.sub,sd.type ;", array($cuid, $dom));
+        $db->query("SELECT sd.*, dt.description AS type_desc, dt.only_dns, dt.advanced, dt.has_https_option FROM sub_domaines sd LEFT JOIN domaines_type dt on  UPPER(dt.name)=UPPER(sd.type) WHERE compte= ? AND domaine= ? ORDER BY dt.advanced,sd.sub,sd.type ;", array($cuid, $dom));
         // Pas de webmail, on le cochera si on le trouve.
         $r["sub"] = array();
-        for ($i = 0; $i < $r["nsub"]; $i++) {
-            $db->next_record();
+        $data = $db->fetchAll();
+        foreach($data as $i=>$record) {
             $r["sub"][$i] = array();
-            $r["sub"][$i]["id"] = $db->Record["id"];
-            $r["sub"][$i]["name"] = $db->Record["sub"];
-            $r["sub"][$i]["dest"] = $db->Record["valeur"];
-            $r["sub"][$i]["type"] = $db->Record["type"];
-            $r["sub"][$i]["enable"] = $db->Record["enable"];
-            $r["sub"][$i]["type_desc"] = $db->Record["type_desc"];
-            $r["sub"][$i]["only_dns"] = $db->Record["only_dns"];
-            $r["sub"][$i]["web_action"] = $db->Record["web_action"];
-            $r["sub"][$i]["advanced"] = $db->Record["advanced"];
+            $r["sub"][$i]["id"] = $record["id"];
+            $r["sub"][$i]["name"] = $record["sub"];
+            $r["sub"][$i]["dest"] = $record["valeur"];
+            $r["sub"][$i]["type"] = $record["type"];
+            $r["sub"][$i]["enable"] = $record["enable"];
+            $r["sub"][$i]["type_desc"] = $record["type_desc"];
+            $r["sub"][$i]["only_dns"] = $record["only_dns"];
+            $r["sub"][$i]["web_action"] = $record["web_action"];
+            $r["sub"][$i]["advanced"] = $record["advanced"];
             $r["sub"][$i]["fqdn"] = ((!empty($r["sub"][$i]["name"])) ? $r["sub"][$i]["name"] . "." : "") . $r["name"];
         }
         $db->free();

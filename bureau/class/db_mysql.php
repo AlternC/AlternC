@@ -219,6 +219,25 @@ class DB_Sql {
         return TRUE;
     }
 
+    /* pdo equivalent of fetchAll() */
+    function fetchAll() {
+        if (!$this->pdo_query) {
+            $this->halt("next_record called with no query pending.");
+            return FALSE;
+        }
+
+        $data = $this->pdo_query->fetchAll(PDO::FETCH_BOTH);
+        $this->Errno = $this->pdo_query->errorCode();
+        $this->Error = $this->pdo_query->errorInfo();
+
+        if ($data == FALSE) {
+            if ($this->Auto_Free) 
+                $this->free();
+            return FALSE;
+        }
+
+        return $data;
+    }
 
     /**
      * table locking
