@@ -170,7 +170,7 @@ class m_dom {
 
     function domains_type_enable_values() {
         global $db, $msg, $cuid;
-        $msg->log("dom", "domains_type_target_values");
+        $msg->log("dom", "domains_type_enable_values");
         $db->query("desc domaines_type;");
         $r = array();
         while ($db->next_record()) {
@@ -1256,11 +1256,26 @@ class m_dom {
         $r["type_desc"] = $db->Record["type_desc"];
         $r["only_dns"] = $db->Record["only_dns"];
         $r["web_action"] = $db->Record["web_action"];
+        $r["https"] = $db->Record["https"];
         $db->free();
         return $r;
     } // get_sub_domain_all
 
 
+    function clean_https_value($type, $https) {
+        global $db;
+        $db->query("select has_https_option from domaines_type where name= ? ;", array($type));
+        if (!$db->next_record()) {
+            return "";
+        }
+        if ($db->Record["has_https_option"]) {
+            $https=strtolower($https);
+            if ($https!="http" && $https!="https" && $https!="both") {
+                return "both";
+            }
+            return $https;
+        } else return "";
+    }
     /**
      * @param integer $type
      * @param string $value
@@ -1385,9 +1400,11 @@ class m_dom {
      * @param integer $type Type de sous-domaine (local, ip, url ...)
      * @param string $dest Destination du sous-domaine, dépend de la valeur
      *  de $type (url, ip, dossier...)
+     * @param string $https the HTTPS behavior : HTTP(redirect https to http), 
+     *  HTTPS(redirect http to https) or BOTH (both hosted at the same place)
      * @return boolean Retourne FALSE si une erreur s'est produite, TRUE sinon.
      */
-    function set_sub_domain($dom, $sub, $type, $dest, $sub_domain_id = 0) {
+    function set_sub_domain($dom, $sub, $type, $dest, $sub_domain_id = 0, $https) {
         global $db, $msg, $cuid, $bro;
         $msg->log("dom", "set_sub_domain", $dom . "/" . $sub . "/" . $type . "/" . $dest);
         // Locked ?
@@ -1399,7 +1416,6 @@ class m_dom {
         $sub = trim(trim($sub), ".");
         $dom = strtolower($dom);
         $sub = strtolower($sub);
-
         //    if (!(($sub == '*') || ($sub=="") || (preg_match('/([a-z0-9][\.\-a-z0-9]*)?[a-z0-9]/', $sub)))) {
         $fqdn = checkfqdn($sub);
         // Special cases : * (all subdomains at once) and '' empty subdomain are allowed.
@@ -1409,10 +1425,10 @@ class m_dom {
         }
 
         if (!$this->check_type_value($type, $dest)) {
-            //plutot verifier si la chaine d'erreur est vide avant de raise sinon sa veut dire que l(erruer est deja remonté
             // error raised by check_type_value
             return false;
         }
+        $https=$this->clean_https_value($type, $https);
 
         // On a épuré $dir des problémes eventuels ... On est en DESSOUS du dossier de l'utilisateur.
         if (($t = checkfqdn($dom))) {
@@ -1430,8 +1446,8 @@ class m_dom {
         }
 
         // Re-create the one we want
-        if (!$db->query("INSERT INTO sub_domaines (compte,domaine,sub,valeur,type,web_action) VALUES (?, ?, ?, ?, ?, 'UPDATE');", array( $cuid , $dom , $sub , $dest , $type ))) {
-            echo "query failed: " . $db->Error;
+        if (!$db->query("INSERT INTO sub_domaines (compte,domaine,sub,valeur,type,web_action,https) VALUES (?, ?, ?, ?, ?, 'UPDATE',?);", array( $cuid , $dom , $sub , $dest , $type, $https ))) {
+            $msg->raise("ERROR", "dom", _("The parameters for this subdomain and domain type are invalid. Please check for subdomain entries incompatibility"));
             return false;
         }
 

@@ -205,21 +205,15 @@ div.ui-accordion-content > ul {
   margin-top: 0px !important;
 }
 
-select {
-  border: 1px solid #999;
+select, .inc, .inl {
+  border: 1px solid #ccc;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   font-size: 13px;
   color: black;
   background: white;
-  text-transform: lowercase;
-}
-
-.inc, .inl {
-  border: 1px solid #999;
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-  font-size: 13px;
-  color: black;
-  background: white;
+  padding: 4px;
 }
 
 #inp1 {
@@ -242,7 +236,7 @@ p > input#file + br + .inb, p > input#file + br + .inb + .inb {
 input.inb, input.ina{
   color: black;
   white-space: nowrap;
-  border: 1px solid #999;
+  border: 1px solid black;
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   font-size: 14px;
   padding: 4px 10px 4px 0px;
@@ -256,7 +250,7 @@ input.inb, input.ina{
 }
 
 input.inb:hover, input.ina:hover {
-  border: 1px solid #999;
+  border: 1px solid black;
   text-decoration: none;
   background-color: #F0F0F0;
 }
@@ -336,7 +330,7 @@ input.ui-state-hover {
 
 input.ina, input.inav,
 input.ina:hover, input.inav:hover {
-  border: 1px solid #999;
+  border: 1px solid black;
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   font-size: 14px;
   color: black;
@@ -361,7 +355,7 @@ input.ina:hover, .ina a:hover, .inb a:hover {
 .ina a, a.ina, .inb a, a.inb,.inav a, a.inav {
   color: black;
   white-space: nowrap;
-  border: 1px solid #999;
+  border: 1px solid black;
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   font-size: 14px;
   padding: 4px 10px;
@@ -416,7 +410,7 @@ span#newsubname {
   float: left;
 }
 .bff {
-  border: 1px solid #999;
+  border: 1px solid black;
   background-color: #F0F0F0;
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   font-size: 13px;
@@ -1273,6 +1267,9 @@ input.cancel:active {
   border-top: 1px solid #ddd;
 }
 
+.dom-edit-table td {
+    height: 2.4em;
+}
 .dom a, a.dom, input.dom, .dom-menu .menu-title {
   background-image: url(../images/dom.png);
   background-repeat: no-repeat;

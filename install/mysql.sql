@@ -224,7 +224,7 @@ CREATE TABLE IF NOT EXISTS sub_domaines (
   enable enum ('ENABLED', 'ENABLE', 'DISABLED', 'DISABLE') NOT NULL DEFAULT 'ENABLED',
   `certificate_id` INT UNSIGNED NOT NULL DEFAULT '0',
   `provider` VARCHAR(16) NOT NULL DEFAULT '',
-  `https` VARCHAR(4) NOT NULL, -- SET(http,https,both) (also the suffix of the template name in /etc/alternc/templates/apache2/)
+  `https` VARCHAR(6) NOT NULL, -- SET(http,https,both) (also the suffix of the template name in /etc/alternc/templates/apache2/)
   PRIMARY KEY (id)
 --  ,FOREIGN KEY (type) REFERENCES (domaines_type)
 ) ENGINE=InnoDB;
