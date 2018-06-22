@@ -784,6 +784,7 @@ CREATE TABLE `certificates` (
   `sslkey` text NOT NULL,
   `sslcrt` text NOT NULL,
   `sslchain` text NOT NULL,
+  `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `uid` (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
