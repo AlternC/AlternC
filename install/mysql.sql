@@ -784,6 +784,7 @@ CREATE TABLE `certificates` (
   `sslkey` text NOT NULL,
   `sslcrt` text NOT NULL,
   `sslchain` text NOT NULL,
+  `provider` VARCHAR(16) NOT NULL DEFAULT '',
   `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `uid` (`uid`)

@@ -56,11 +56,20 @@ for($i=0;$i<$r["nsub"];$i++) {
     if (!$r["sub"][$i]["only_dns"]) {
         continue;
     }
-    echo "<br />\n";
+    $fqdn=$r["sub"][$i]["name"].(($r["sub"][$i]["name"])?".":"").$r["name"];
+    $certs = $ssl->get_valid_certs($fqdn);
+
     echo "<tr>";
-    echo "<td>".$r["name"].(($r["name"])?".":"").$r["sub"][$i]["name"]."</td>";
+    echo "<td>".$fqdn."</td>";
     echo "<td><select name=\"ssl_".$r["sub"][$i]["name"]."\" id=\"ssl_".$r["sub"][$i]["name"]."\">";
     echo "<option value=\"\">"._("-- no HTTPS certificate provider preference --")."</option>";
+    $providers=array();
+    foreach($certs as $cert) {
+        if ($cert["provider"] && !isset($providers[$cert["provider"]])) {
+            $providers[$cert["provider"]]=1;
+            echo "<option value=\"".$cert["provider"]."\">"._("Provider:")." ".$cert["provider"]."</option>";
+        }
+    }
     echo "</select>";
     echo "</td>";
     echo "</tr>";

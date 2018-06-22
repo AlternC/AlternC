@@ -296,13 +296,14 @@ class m_ssl {
         $good=array(); // list of good certificates
         $bof=array(); // good but not with the right provider 
         $bad=array(); 
-        $wildcard="*".substr($fqdn,strpos($fqdn,".");
-        $defaultwild="*".substr($this->default_certificate_fqdn,strpos($this->default_certificate_fqdn,".");
+        $wildcard="*".substr($fqdn,strpos($fqdn,"."));
+        $defaultwild="*".substr($this->default_certificate_fqdn,strpos($this->default_certificate_fqdn,"."));
 
         while($db->next_record()) {
             $found=false;
             if ($db->Record["fqdn"]==$fqdn || $db->Record["fqdn"]==$wildcard) {
                 $found=true;
+                
             } else {
                 $alts=explode("\n",$db->Record["altnames"]);
                 foreach($alts as $alt) {
@@ -313,7 +314,7 @@ class m_ssl {
                 }
             }
             if ($found) {
-                if ($provider=="" || $provider=$db->Record["provider"]) {
+                if ($provider=="" || $provider==$db->Record["provider"]) {
                     $good[]=$db->Record;
                 } else {
                     $bof[]=$db->Record;
@@ -400,9 +401,10 @@ class m_ssl {
      * be the one signinf the private RSA key in $key
      * @param $chain string the X.509 PEM-encoded list of SSL Certificate chain if intermediate authorities
      * @return integer the ID of the newly created certificate in the table
+     * @return string the ssl cert provider 
      * or false if an error occurred
      */
-    function import_cert($key, $crt, $chain = "") {
+    function import_cert($key, $crt, $chain = "", $provider = "") {
         global $cuid, $msg, $db;
         $msg->log("ssl", "import_cert");
 
@@ -425,8 +427,8 @@ class m_ssl {
             return false;
         }
         // Everything is PERFECT and has been thoroughly checked, let's insert those in the DB !
-        $sql = "INSERT INTO certificates SET uid='?', status=?, shared=0, fqdn=?, altnames=?, validstart=FROM_UNIXTIME(?), validend=FROM_UNIXTIME(?), sslkey=?, sslcrt=?, sslchain=?;";
-        $db->query($sql,array($cuid,self::STATUS_OK,$fqdn,$altnames,intval($validstart),intval($validend),$key,$crt,$chain));
+        $sql = "INSERT INTO certificates SET uid='?', status=?, shared=0, fqdn=?, altnames=?, validstart=FROM_UNIXTIME(?), validend=FROM_UNIXTIME(?), sslkey=?, sslcrt=?, sslchain=?, provider=?;";
+        $db->query($sql,array($cuid,self::STATUS_OK,$fqdn,$altnames,intval($validstart),intval($validend),$key,$crt,$chain,$provider));
         if (!($id = $db->lastid())) {
             $msg->raise("ERROR","ssl", _("Can't save the Key/Crt/Chain now. Please try later."));
             return false;
