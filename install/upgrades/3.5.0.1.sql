@@ -1,4 +1,6 @@
 
+-- upgrade to merge alternc-ssl into alternc + change the way we work on SSL
+
 DROP TABLE `certif_alias`;
 ALTER TABLE `certificates` DROP `shared`, DROP `ssl_action`, DROP `ssl_result`;
 
@@ -35,3 +37,24 @@ DELETE sd1 FROM sub_domaines sd1, sub_domaines sd2 WHERE sd1.id > sd2.id AND sd1
 
 -- Regenerate all vhost
 UPDATE `sub_domaines` SET `web_action` = 'UPDATE';
+
+
+-- change some variable names :
+
+UPDATE variable
+   SET name="fqdn_dovecot",comment="FQDN name for humans for pop/imap services"
+      WHERE name="mail_human_imap";
+
+UPDATE variable
+   SET name="fqdn_postfix",comment="FQDN name for humans for smtp services"
+      WHERE name="mail_human_smtp";
+
+UPDATE variable
+   SET name="fqdn_proftpd",comment="FQDN name for humans for ftp services"
+      WHERE name="mail_human_ftp";
+
+DELETE FROM variable WHERE name IN (
+  'mail_human_imaps','mail_human_pop3','mail_human_pop3s',
+  'mail_human_smtps','mail_human_submission'
+  );
+      

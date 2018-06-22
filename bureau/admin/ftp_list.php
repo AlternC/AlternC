@@ -104,7 +104,7 @@ if ( $val['enabled']) {
 <?php __("Here are some configuration information you will need to configure your FTP application.");?>
 
 <ul>
-  <li><?php echo '<b>'._("Server:").'</b> '.$ftp->srv_name; ?></li>
+  <li><?php echo '<b>'._("Server:").'</b> '.$ftp->srv_proftpd; ?></li>
   <li><?php echo '<b>'._("FTP mode for data transfer:").'</b> '._("passive");?></li>
   <li><?php echo '<b>'._("User/password:").'</b> '._("the one you specified when you created the account. You can edit them in the panel.");?></li>
 </ul>

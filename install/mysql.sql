@@ -788,7 +788,6 @@ CREATE TABLE `certificates` (
   KEY `uid` (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT IGNORE INTO defquotas VALUES ('ssl', 0, 'default');
 
 
 -- make it re-exec-proof
