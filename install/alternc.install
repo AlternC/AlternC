@@ -28,8 +28,25 @@ if [ `id -u` -ne 0 ]; then
     exit 1
 fi
 
+usage(){
+    declare -a out
+    [[ $# -ne 0 ]] && out+=("\e[31mWarning: $@ \e[0m")
+    out+=("
+Usage: ${BASH_SOURCE[0]} [options]
+  -n|--no-fixperms    Skip the -often long- fixperms action
+  -f|--force          Force the execution even if some files changed
+  -s|--slave          Mandatory on instances runnning the alternc-slave module
+  -h|--help           This help
+    ")
+    echo -e "${out[@]}"
+    exit 2
+}
 for i in $*; do
     case "$i" in
+        -h|--help)
+	    usage; shift;;
+        -n|--no-fixperms)
+	    export nofixperms=1; shift;;
         -f|--force)
             export force=1; shift;;
         -s|--slave)
@@ -37,7 +54,7 @@ for i in $*; do
         --)
             break;;
         *)
-            echo "unknown option $i"; shift;;
+            usage "unknown option '$i'!"; 
     esac
 done
 
@@ -636,11 +653,14 @@ for service in $SERVICES; do
     test -x /etc/init.d/$service && invoke-rc.d $service start || true
 done
 
-echo "Fix all the permission. May be quite long..."
-echo "YOU CAN INTERUPT THIS BY USING Ctrl-c THEN y TO BYPASS THE ERROR." 
-/usr/lib/alternc/fixperms.sh
-echo "Compile PO files"
-
+if [[ $nofixperms -ne 1 ]] ; then 
+    echo "Fix all the permission. May be quite long..."
+    echo "YOU CAN INTERUPT THIS BY USING Ctrl-c THEN y TO BYPASS THE ERROR." 
+    /usr/lib/alternc/fixperms.sh
+    echo "Compile PO files"
+else
+    echo -e "\nSkipping fixperms as requested\n"
+fi
 # TODO : includes the .MO in debian package ;) 
 find /usr/share/alternc/panel/locales -maxdepth 1 -mindepth 1 -type d -name "*_*" | while read A
 do 
