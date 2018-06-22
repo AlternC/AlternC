@@ -53,7 +53,9 @@ class m_ssl {
      * Constructor
      */
     function m_ssl() {
-        
+        global $L_FQDN;
+        $this->last_certificate_id=variable_get('last_certificate_id',0,'Latest certificate ID parsed by update_domains. Do not change this unless you know what you are doing');
+        $this->default_certificate_fqdn=variable_get('default_certificate_fqdn',$L_FQDN,'FQDN of the certificate we will use as a default one before getting a proper one through any provider. If unsure, keep the default');
     }
 
     // ----------------------------------------------------------------- 
@@ -282,6 +284,42 @@ class m_ssl {
         $db->query("UPDATE certificates SET shared=$action WHERE id='$id';");
         return true;
     }
+
+    // -----------------------------------------------------------------
+    /** Return all the valid certificates that can be used for a specific FQDN
+     * return the list of certificates by order of preference (2 lasts bein the default FQDN and the snakeoil if necessary)
+     * keys: id, provider, crt, chain, key, validstart, validend
+     */
+    function get_valid_certs($fqdn) {
+        global $db, $msg, $cuid;
+        $db->query("SELECT * FROM certificates WHERE status=".self::STATUS_OK." ORDER BY validstart DESC;");
+        $good=array();
+        $bad=array();
+        $ugly=array();
+        $wildcard="*".substr($fqdn,strpos($fqdn,".");
+        $defaultwild="*".substr($this->default_certificate_fqdn,strpos($this->default_certificate_fqdn,".");
+
+        while($db->next_record()) {
+            $good=false
+            if ($db->Record["fqdn"]==$fqdn || $db->Record["fqdn"]==$wildcard) {
+                $good=true;
+            } else {
+                $alts=explode("\n",$db->Record["altnames"]);
+                foreach($alts as $alt) {
+                    if ($alt==$fqdn || $alt==$wildcard) {
+                        $good=true;
+                        break;
+                    }
+                }
+            }
+            if ($good) {
+                $good[]=$db->Record;
+            }
+            // TODO : manages BAD (default) and UGLY (snakeoil)
+        }
+        return $good;
+    }
+
 
     // ----------------------------------------------------------------- 
     /** Return all the subdomains that can be ssl-enabled for the current account.
