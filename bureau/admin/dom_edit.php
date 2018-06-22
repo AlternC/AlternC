@@ -120,6 +120,7 @@ if (! empty($r['dns_result']) && $r['dns_result'] != '0') {
 <?php if ( $r["dns"] ) { ?>
   <li class="view"><a href="#tabsdom-view" onClick="update_dns_content();"><?php __("View");?></a></li> 
 <?php } //if gesdns ?>
+  <li class="ssl"><a href="#tabsdom-ssl" onClick="update_ssl_content();"><?php __("HTTPS Preferences");?></a></li> 
   <li class="delete"><a href="#tabsdom-delete"><?php __("Delete");?></a></li>
 </ul>
 
@@ -360,6 +361,12 @@ if (!$r['noerase']) {
 </div>
     <?php
 } ?>
+
+<div id="tabsdom-ssl">  
+<div id="sslpref">
+     </div>
+</div> <!-- tabsdom-ssl -->
+
 </div> <!-- tabsdom -->
 <script type="text/javascript">
 
@@ -378,6 +385,14 @@ function update_dns_content(){
       $("#divdumpdns").html(html);
     });
   }
+}
+
+function update_ssl_content(){
+    $.ajax({
+      url: "dom_ssl.inc.php?domain=<?php echo urlencode($domain)?>",
+      }).done(function( html ) {
+      $("#sslpref").html(html);
+    });
 }
 
 function force_update_dns_content(){

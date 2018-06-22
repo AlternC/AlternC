@@ -1073,11 +1073,11 @@ div.progress-bar div.txt {
   padding-right: 6px;
 }
 
-.lock a, a.lock, input.lock {
-  background-image: url(../icon/encrypted.png);
-  background-repeat: no-repeat;
-  background-position: 8px 5px;
-  padding-left: 30px;
+.ssl a:before, input.ssl:before, a.ssl:before, .lock a:before, a.lock:before, input.lock:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f023";
+  padding-right: 6px;
 }
 
 .settings a:before, a.settings:before, input.settings:before {
@@ -1425,7 +1425,7 @@ body .ui-tabs .ui-tabs-panel {
 }
 
 body .ui-tabs .ui-tabs-nav li a {
-  padding: .5em 1em .5em 30px;
+    padding: .5em 1em .5em 1em;
 }
 
 body .ui-state-active, body .ui-widget-content .ui-state-active, body .ui-widget-header .ui-state-active,
@@ -1715,14 +1715,6 @@ small > i {
     padding-top: 0.1em;
     padding-bottom: 0.35em;
   }
-}
-
-
-.ssl a, a.ssl, input.ssl, .ssl-menu .menu-title {
-  background-image: url(../images/ssl.png);
-  background-repeat: no-repeat;
-  background-position: 8px 3px;
-  padding-left: 30px;
 }
 
 textarea.cert {
