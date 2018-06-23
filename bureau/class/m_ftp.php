@@ -55,7 +55,6 @@ class m_ftp {
 
         $obj = array(
             'title' => _("FTP accounts"),
-            'ico' => 'images/ftp.png',
             'link' => 'toggle',
             'pos' => 100,
             'links' => array(),
@@ -63,7 +62,6 @@ class m_ftp {
 
         if ($quota->cancreate("ftp")) {
             $obj['links'][] = array(
-                'ico' => 'images/new.png',
                 'txt' => _("Create a new ftp account"),
                 'url' => "ftp_edit.php?create=1",
                 'class' => '',

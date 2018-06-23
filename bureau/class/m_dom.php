@@ -123,7 +123,6 @@ class m_dom {
         global $quota;
         $obj = array(
             'title' => _("Domains"),
-            'ico' => 'images/dom.png',
             'link' => 'toggle',
             'pos' => 20,
             'links' => array(),
@@ -131,7 +130,6 @@ class m_dom {
 
         if ($quota->cancreate("dom")) {
             $obj['links'][] = array(
-                'ico' => 'images/new.png',
                 'txt' => _("Add a domain"),
                 'url' => "dom_add.php",
             );

@@ -83,7 +83,6 @@ class m_mail {
     function hook_menu() {
         $obj = array(
             'title' => _("Email Addresses"),
-            'ico' => 'images/mail.png',
             'link' => 'toggle',
             'pos' => 30,
             'links' => array(),
