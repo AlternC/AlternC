@@ -63,7 +63,7 @@ class m_ssl {
      * used by providers to get the certs they should generate
      * also used by update_domaines to choose which cert to use for a specific fqdn
      */
-    function get_fqdn_specials($deduplicate=true) {
+    function get_fqdn_specials() {
         global $L_FQDN;
         $specials=array($L_FQDN);
         $variables=array("fqdn_dovecot","fqdn_postfix","fqdn_proftpd","fqdn_mailman");
