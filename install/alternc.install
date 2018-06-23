@@ -289,6 +289,22 @@ else
     ln -fs /etc/alternc/alternc.ini /etc/php$php/cli/conf.d/alternc.ini || true
 fi
 
+#Set a default certificate if needed
+make-ssl-cert generate-default-snakeoil
+SNAKEOIL_SSLKEY=$(</etc/ssl/private/ssl-cert-snakeoil.key)
+SNAKEOIL_SSLCRT=$(</etc/ssl/certs/ssl-cert-snakeoil.pem)
+
+mysql_query "SET SESSION sql_mode=\"NO_AUTO_VALUE_ON_ZERO\" ; INSERT IGNORE INTO \
+    certificates (id,uid,status,fqdn,validstart,validend,sslkey,sslcrt,provider) \
+    VALUES \
+    (0,2000,1,\"ALTERNC_DEFAULT_FQDN\",NOW(),ADDDATE(NOW(),INTERVAL 200 YEAR),\"$SNAKEOIL_SSLKEY\",\"$SNAKEOIL_SSLCRT\",\"snakeoil\");"
+
+if [ ! -e /etc/alternc/apache.pem ]; then
+    echo -e "$SNAKEOIL_SSLKEY\n$SNAKEOIL_SSLCRT" > /etc/alternc/apache.pem
+fi
+
+run-parts --arg=certificates /usr/lib/alternc/install.d
+
 if [ -x /usr/sbin/apache2 ]; then
     # hook 
     run-parts --arg=apache2 /usr/lib/alternc/install.d 
