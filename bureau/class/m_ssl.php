@@ -107,8 +107,8 @@ class m_ssl {
             while ($db->next_record()) {
                 if (!$db->Record["sslcrt"]) continue; // skip NOT FINALIZED certificates !!
 
-                list($altnames)=explode("\n",$db->Record["altnames"]);
                 $certs[]=array("id"=>$db->Record["id"],"fqdn"=>$db->Record["fqdn"]);
+                $altnames=explode("\n",$db->Record["altnames"]);
                 foreach($altnames as $altname) {
                     $certs[]=array("id"=>$db->Record["id"],"fqdn"=>$altname);
                 }

@@ -19,7 +19,7 @@ if (posix_getuid()!=0) {
     exit(-1);
 }
 
-if ($date("H:m")=="10:00") {
+if (date("H:m")=="10:00") {
     $ssl->delete_old_certificates();
 }
 
