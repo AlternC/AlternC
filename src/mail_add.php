@@ -109,7 +109,7 @@ print "cuid: $cuid\n";
  * from scratch
  */
 if (!($mail_id = $mail->create($domain_id, $user))) {
-  error_log('failed to create: ' . $err->errstr());
+  error_log('failed to create: ' . $msg->msg_str());
   exit(4);
 }
 
@@ -120,8 +120,8 @@ if (!($mail_id = $mail->create($domain_id, $user))) {
  * no idea why this is a different function.
  */
 if (!$mail->set_passwd($mail_id,$password)) {
-  error_log("failed to set password on mail $mail_id: " . $err->errstr());
-  exit(5);
+    error_log("failed to set password on mail $mail_id: " . $msg->msg_str());
+    exit(5);
 }
 
 /*  function set_details($mail_id, $islocal, $quotamb,
@@ -132,8 +132,8 @@ if (!$mail->set_passwd($mail_id,$password)) {
  * if we have no aliases, it's a mailbox. deal with it.
  */
 if (!$mail->set_details($mail_id, !count($recipients), $quota, join("\n", $recipients))) {
-  error_log('failed to set details: ' . $err->errstr());
-  exit(6);
+    error_log('failed to set details: ' . $msg->msg_str());
+    exit(6);
 }
 
 // maybe we need to call the hooks? i don't know!
