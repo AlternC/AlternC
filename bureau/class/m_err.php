@@ -149,7 +149,11 @@ class m_err {
     function deprecated(){
         global $msg;
         $trace = debug_backtrace();
-        $caller = $trace[2];
+        if (isset($trace[2])) {
+            $caller = $trace[2];
+        } else {
+            $caller = "UNKNOWN CALLER";
+        }
         $msg->raise("info", "err", "Deprecation warning: The old messaging class is still used by ".json_encode($caller));
     }
 
