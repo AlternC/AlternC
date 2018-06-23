@@ -18,15 +18,18 @@ launch_hooks() {
 
   local VTYPE=$2
 
+  EXITCODE=0
   if [ -x "$HOSTING_DIR/hosting_$VTYPE.sh" ] ; then
     # If a specific script exist for this VTYPE,
     # we launch it, and return his return code
     "$HOSTING_DIR/hosting_$VTYPE.sh" "$1" "$2" "$3" "$4" 
-    return $?
+    EXITCODE=$?
   fi
-
+  # also launch ssl update domains hook
+  /usr/lib/alternc/update_certs.sh "$1" "$2" "$3" "$4"
+  
   # No specific script, return 0
-  return 0
+  return "$EXITCODE"
 }
 
 host_conffile() {

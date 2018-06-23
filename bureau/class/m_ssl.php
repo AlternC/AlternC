@@ -82,6 +82,7 @@ class m_ssl {
      * set expired certificates as such : 
      */
     function expire_certificates() {
+        global $db;
         $db->query("UPDATE certificates SET status=".self::STATUS_EXPIRED." WHERE status=".self::STATUS_OK." AND validend<NOW();");
     }
 
@@ -91,6 +92,7 @@ class m_ssl {
      * delete old certificates (expired for more than a year)
      */
     function delete_old_certificates() {
+        global $db;
         $db->query("SELECT id FROM certificates WHERE status=".self::STATUS_EXPIRED." AND validend<DATE_SUB(NOW(), INTERVAL 12 MONTH) AND validend!='0000-00-00 00:00:00';");
         while ($db->next_record()) {
             $CRTDIR = self::KEY_REPOSITORY . "/" . floor($db->Record["id"]/1000);

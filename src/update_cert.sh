@@ -21,7 +21,7 @@
 require_once("/usr/share/alternc/panel/class/config_nochk.php");
 
 if (!isset($ssl)) {
-    echo "OUPS: hosting_vhost-ssl.sh launched, but ssl module not installed, exiting\n";    
+    echo "OUPS: update_cert.sh launched, but ssl module not installed, exiting\n";    
     exit();
 }
 
