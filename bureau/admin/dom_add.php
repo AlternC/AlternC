@@ -51,7 +51,7 @@ echo $msg->msg_html_all();
 <form method="post" action="dom_doadd.php" id="main">
   <?php csrf_get(); ?>
 <p>
-<label for="newdomain"><b><?php __("Domain name"); ?> :</b></label> <span class="int" id="newdomwww">www.</span><input type="text" class="int" id="newdomain" name="newdomain" value="<?php ehe($newdomain); ?>" size="32" maxlength="255" /> <a class="inb configure" href="dom_import.php"><?php __("Advanced import"); ?></a>
+<label for="newdomain"><b><?php __("Domain name"); ?> :</b></label> <span class="int" id="newdomwww">www.</span><input type="text" class="int" id="newdomain" name="newdomain" value="<?php ehe($newdomain); ?>" size="32" maxlength="255" /> <a class="inb settings" href="dom_import.php"><?php __("Advanced import"); ?></a>
 </p>
 <p>
   <input type="checkbox" name="dns" class="inc" value="1" id="yndns"<?php cbox($dns=="1"); ?>/>&nbsp;<label for="yndns"><?php __("host my dns here"); ?></label>

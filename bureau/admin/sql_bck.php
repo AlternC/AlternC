@@ -27,7 +27,7 @@ require_once("../class/config.php");
 include_once("head.php");
 
 ?>
-<h3><?php __("MySQL Databases - Configure backups"); ?></h3>
+<h3 class="backup"><?php __("MySQL Databases - Configure backups"); ?></h3>
 <hr id="topbar"/>
 <br />
 <?php

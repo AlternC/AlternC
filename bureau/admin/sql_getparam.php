@@ -55,11 +55,10 @@ if ($msg->has_msgs("ERROR")) {
 $i = 0;
 foreach ($res as $r) { 
 	$i++;
-	$title = (count($res) > 1)?"Paramètres ".$i:"Paramètres";
 ?>
 <table class="tedit">
         <tr>
-	<th colspan="2" style='text-align:center;'><?php echo '<h1>'.$title.'</h1>'; ?></th>
+	<th colspan="2" style='text-align:center;'><?php echo '<h1>'._("Database Settings").'</h1>'; ?></th>
         </tr>
 	<tr>
 		<th><?php __("Mysql Server"); ?></th>
@@ -86,22 +85,28 @@ if(isset($r['user'])){
 
 // We test the  'Rights' value to know if this user have all or only specific rights.
 if ($r["Rights"] == 'All') {
-	$rights = "Tous";
+	$rights = _("All permissions");
 } else {
-	$rights = "<span style='color:orange;'>Sélectifs</span>";
+	$rights = "<span style='color:orange;'>"._("Specific permissions")."</span>";
 }
 ?>
-		<td><?php echo $rights; ?>&nbsp;&nbsp;<span class="ina configure"><a href="sql_users_rights.php?id=<?php echo $r["user"] ?>"><?php __("Manage the rights"); ?></a></span></td>
-	</tr>
-	<tr>
-		<td colspan="2" align="center">
-                  <a href="/sql_pma_sso.php?db=<?php echo $dbname; ?>" target="_blank"><?php __("Click here to access PhpMyAdmin interface"); ?></a>
-                </td>
+<td>
+<?php echo $rights; ?>
+&nbsp;
+<a class="inb permissions" href="sql_users_rights.php?id=<?php echo $r["user"] ?>"><?php __("Manage the rights"); ?></a>
+</td>
 	</tr>
 <?php
 }
 ?>
 </table>
+
+<p>
+   <a class="inb settings" href="/sql_pma_sso.php?db=<?php echo $dbname; ?>" target="_blank"><?php __("Access PhpMyAdmin interface"); ?></a>
+</p>
+<p>
+
+
 <?php
 if(!isset($r['user'])){
 	echo "<p class=\"alert alert-warning\">";__("You changed the MySQL User base configuration. Please refer to your configuration");echo"</p><p>&nbsp;</p>";
