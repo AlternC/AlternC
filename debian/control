@@ -32,7 +32,7 @@ Depends: debianutils (>= 1.13.1)
        , wwwconfig-common
        , sasl2-bin
        , libsasl2-modules
-       , php5-cli | php7.0-cli
+       , php5-cli | php7.0-cli | php-cli
        , lockfile-progs (>= 0.1.9)
        , gettext (>= 0.10.40-5)
        , sudo
@@ -124,7 +124,7 @@ Depends: debianutils (>= 1.13.1)
          , wwwconfig-common
          , sasl2-bin
          , libsasl2-modules
-         , php5-cli | php7.0-cli
+         , php5-cli | php7.0-cli | php-cli
          , lockfile-progs (>= 0.1.9)
          , gettext (>= 0.10.40-5)
          , adduser
@@ -271,7 +271,7 @@ Architecture: all
 Pre-depends: debconf
 Depends: alternc (>= 3.0~rc1)
        , awstats (>=6.1-1)
-       , php5-cli | php7.0-cli
+       , php5-cli | php7.0-cli | php-cli
        , ${misc:Depends}
 Suggests: apachemerge
 Description: Awstats statistics module for AlternC
