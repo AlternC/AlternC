@@ -36,7 +36,7 @@ install-common:
 	test -d $(DESTDIR)/usr/lib/alternc || mkdir -p $(DESTDIR)/usr/lib/alternc
 	cp -r src/* $(DESTDIR)/usr/lib/alternc/
 	chown root:root $(DESTDIR)/usr/lib/alternc/*
-	chmod 755 $(DESTDIR)/usr/lib/alternc/* $(DESTDIR)/usr/lib/alternc/install.d/*
+	chmod 755 $(DESTDIR)/usr/lib/alternc/*
 
 # Configuration Files
 	test -d $(DESTDIR)/etc || mkdir -p $(DESTDIR)/etc
