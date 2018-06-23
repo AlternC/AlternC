@@ -269,13 +269,16 @@ class DB_Sql {
      * evaluate the result (size, width)
      */
     function affected_rows() {
+        if (!$this->pdo_query) return 0;
         return $this->pdo_query->rowCount();
     }
     function num_rows() {
+        if (!$this->pdo_query) return 0;
         return $this->pdo_query->rowCount();
     }
 
     function num_fields() {
+        if (!$this->pdo_query) return 0;
         return $this->pdo_query->columnCount();
     }
 
