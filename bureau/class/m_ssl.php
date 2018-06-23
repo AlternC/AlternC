@@ -552,7 +552,7 @@ SELECT ?,?,?, FROM_UNIXTIME(?), FROM_UNIXTIME(?), ?, ?, sslcsr FROM certificate 
      * (like a generic admin-shared or self-signed for localhost as a last chance)
      */
     public function updateDomain($action, $type, $fqdn, $mail = 0, $value = "") {
-        global $db, $msg;
+        global $db, $msg, $dom;
         $msg->log("ssl", "update_domain($action,$type,$fqdn)");
 
         // the domain type must be a "dns_only=false" one:
