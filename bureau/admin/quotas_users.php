@@ -187,12 +187,14 @@ echo "<br /><br />"; printf(_("If you want to manage them, go to")."&nbsp;<a hre
  function sortlink($txt,$asc,$desc) {
    global $order,$mode,$sd,$usr;
    if ($order==$asc) $neworder=$desc; else $neworder=$asc;
+   echo "<th";
+   if ($order==$asc) echo " class=\"headerSortUp\"";
+   if ($order==$desc) echo " class=\"headerSortDown\"";
+   echo ">";
    echo "<a href=\"quotas_users.php?order=".$neworder."&mode=".$mode."&sd=".$sd."&usr=".$usr."\">";
    echo $txt;
    echo "</a>";
-   echo " &nbsp; &nbsp; ";
-   if ($order==$asc) echo "<img src=\"icon/sort0.png\" alt=\"sorted up\" title=\"sorted up\" />";
-   if ($order==$desc) echo "<img src=\"icon/sort1.png\" alt=\"sorted down\" title=\"sorted down\" />";
+   echo "</th>";
  }
 
 ?>
@@ -203,14 +205,14 @@ echo "<br /><br />"; printf(_("If you want to manage them, go to")."&nbsp;<a hre
 <thead>
 		       <tr><th rowspan="2"><?php sortlink(_("Account"),0,1); ?></th><th colspan="3"><?php __("Count"); ?></th><th colspan="5"><?php __("Space"); ?></th></tr>
 <tr>
-		       <th><?php sortlink(_("Dom"),2,3); ?></th>
-  <th><?php sortlink(_("Mails"),4,5); ?></th>
-  <th><?php sortlink(_("Lists"),6,7); ?></th>
-  <th><?php sortlink(_("Web"),8,9);  ?></th>
-  <th><?php sortlink(_("Mails"),10,11); ?></th>
-  <th><?php sortlink(_("Lists"),12,13); ?></th>
-  <th><?php sortlink(_("DB"),14,15); ?></th>
-  <th><?php sortlink(_("Total"),16,17); ?></th>
+<?php sortlink(_("Dom"),2,3); ?>
+<?php sortlink(_("Mails"),4,5); ?>
+<?php sortlink(_("Lists"),6,7); ?>
+<?php sortlink(_("Web"),8,9);  ?>
+<?php sortlink(_("Mails"),10,11); ?>
+<?php sortlink(_("Lists"),12,13); ?>
+<?php sortlink(_("DB"),14,15); ?>
+<?php sortlink(_("Total"),16,17); ?>
 </tr>
 </thead>
 <tbody>

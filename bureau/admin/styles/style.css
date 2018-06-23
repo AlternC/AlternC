@@ -720,7 +720,8 @@ form[action="mman_edit.php"] > table > tbody > tr.lst1:hover, form[action="mman_
 }
 
 .menu-box a .menu-title {
-  border-bottom: 1px solid #e7e7e7;
+    border-bottom: 1px solid #e7e7e7;
+    padding-left: 10px;
 }
 
 .menu-box li:last-child {
@@ -1126,10 +1127,6 @@ div > .add a:hover, p > a.add:hover {
 }
 
 input.add:hover, input.add:focus, button.add:focus {
-  background-image: url(../icon/add.png);
-  background-repeat: no-repeat;
-  background-position: 8px 5px;
-  padding-left: 30px;
   color: #fff;
   background-color: #449d44;
   border-color: #398439;
@@ -1150,10 +1147,6 @@ div > .delete a:hover, p > a.delete:hover {
 }
 
 input.delete:hover, input.delete:focus {
-  background-image: url(../icon/delete.png);
-  background-repeat: no-repeat;
-  background-position: 8px 5px;
-  padding-left: 30px;
   color: #fff;
   background-color: #d9534f;
   border-color: #d43f3a;
@@ -1191,43 +1184,49 @@ input.cancel:active, button.cancel:active {
   background-color: #dff0d8;
 }
 
-.configure a, a.configure, input.configure {
-  background-image: url(../icon/configure.png);
-  background-repeat: no-repeat;
-  background-position: 8px 5px;
-  padding-left: 30px;
+.input.unlock:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f09c";
+  padding-right: 6px;
 }
 
-.save a, a.save, input.save {
-  background-image: url(../icon/save.png);
-  background-repeat: no-repeat;
-  background-position: 8px 5px;
-  padding-left: 30px;
+.save a:before, a.save:before, input.save:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f0c7";
+  padding-right: 6px;
 }
 
-.down a, a.down, input.down {
-  background-image: url(../icon/save.png);
-  background-repeat: no-repeat;
-  background-position: 8px 5px;
-  padding-left: 30px;
+h3.backup:before, .backup a:before, a.backup:before, input.backup:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f0a0 \f104";
+  padding-right: 6px;
 }
 
-.up a, a.up, input.up {
-  background-image: url(../icon/up.png);
-  background-repeat: no-repeat;
-  background-position: 8px 5px;
-  padding-left: 30px;
-  padding-top: 5px;
-  padding-bottom: 5px;
+h3.restore:before, .restore a:before, a.restore:before, input.restore:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f0a0 \f105";
+  padding-right: 6px;
 }
 
-.up a:hover, a.up:hover, input.up:hover {
-  background-image: url(../icon/up.png);
-  background-repeat: no-repeat;
-  background-position: 8px 5px;
-  padding-left: 30px;
-  padding-top: 5px;
-  padding-bottom: 5px;
+th.headerSortUp:before, .sortup:before a, a.sortup:before, input.sortup:before {
+  cursor: pointer;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f15e";
+  padding-right: 6px;
+}
+
+
+th.headerSortDown:before, .sortdown:before a, a.sortdown:before, input.sortdown:before {
+  cursor: pointer;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f15d";
+  padding-right: 6px;
 }
 
 #btb1.ina {
@@ -1235,134 +1234,143 @@ input.cancel:active, button.cancel:active {
   padding-bottom: 4px;
 }
 
-.back a, a.back, input.back {
-  background-image: url(../icon/back.png);
-  background-repeat: no-repeat;
-  background-position: 8px 5px;
-  padding-left: 30px;
+.back a:before, a.back:before, input.back:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f04a";
+  padding-right: 6px;
 }
 
-.admin a, a.admin, input.admin, .admin-menu .menu-title {
-  background-image: url(../images/admin.png);
-  background-repeat: no-repeat;
-  background-position: 8px 10px;
-  padding-left: 30px;
+.permissions a:before, a.permissions:before, input.permissions:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f2bb";
+  padding-right: 6px;
 }
 
-.home a, a.home, input.home, .home-menu .menu-title {
-  background-image: url(../images/home.png);
-  background-repeat: no-repeat;
-  background-position: 8px 10px;
-  padding-left: 30px;
-  margin-top: 10px;
-  border-top: 1px solid #ddd;
+.admin a:before, a.admin:before, input.admin:before, .admin-menu .menu-title:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f552";
+  padding-right: 6px;
 }
 
-.dom a, a.dom, input.dom, .dom-menu .menu-title {
-  background-image: url(../images/dom.png);
-  background-repeat: no-repeat;
-  background-position: 8px 10px;
-  padding-left: 30px;
+.home a:before, a.home:before, input.home:before, .home-menu .menu-title:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f015";
+  padding-right: 6px;
 }
 
-.mail a, a.mail, input.mail, .mail-menu .menu-title {
-  background-image: url(../images/mail.png);
-  background-repeat: no-repeat;
-  background-position: 8px 10px;
-  padding-left: 30px;
+.dom-edit-table td {
+    height: 2.4em;
 }
 
-.bro a, a.bro, input.bro, .bro-menu .menu-title {
-  background-image: url(../images/folder.png);
-  background-repeat: no-repeat;
-  background-position: 8px 10px;
-  padding-left: 30px;
+.dom a:before, a.dom:before, input.dom:before, .dom-menu .menu-title:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f57c";
+  padding-right: 6px;
 }
 
-.hta a, a.hta, input.hta, .hta-menu .menu-title {
-  background-image: url(../images/password.png);
-  background-repeat: no-repeat;
-  background-position: 8px 10px;
-  padding-left: 30px;
+.mail a:before, a.mail:before, input.mail:before, .mail-menu .menu-title:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f0e0";
+  padding-right: 6px;
 }
 
-.ftp a, a.ftp, input.ftp, .ftp-menu .menu-title {
-  background-image: url(../images/ftp.png);
-  background-repeat: no-repeat;
-  background-position: 8px 10px;
-  padding-left: 30px;
+.bro a:before, a.bro:before, input.bro:before, .bro-menu .menu-title:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f07c";
+  padding-right: 6px;
 }
 
-.cron a, a.cron, input.cron, .cron-menu .menu-title {
-  background-image: url(../images/schedule.png);
-  background-repeat: no-repeat;
-  background-position: 8px 10px;
-  padding-left: 30px;
+.hta a:before, a.hta:before, input.hta:before, .hta-menu .menu-title:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f084";
+  padding-right: 6px;
 }
 
-.lxc a, a.lxc, input.lxc, .lxc-menu .menu-title {
-  background-image: url(../images/ssh.png);
-  background-repeat: no-repeat;
-  background-position: 8px 10px;
-  padding-left: 30px;
+.ftp a:before, a.ftp:before, input.ftp:before, .ftp-menu .menu-title:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f0a0";
+  padding-right: 6px;
 }
 
-.mysql a, a.mysql, input.mysql, .mysql-menu .menu-title {
-  background-image: url(../images/mysql.png);
-  background-repeat: no-repeat;
-  background-position: 8px 10px;
-  padding-left: 30px;
+.cron a:before, a.cron:before, input.cron:before, .cron-menu .menu-title:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f017";
+  padding-right: 6px;
 }
 
-.quota a, a.quota, input.quota, .quota-menu .menu-title {
-  background-image: url(../images/quota.png);
-  background-repeat: no-repeat;
-  background-position: 8px 10px;
-  padding-left: 30px;
+.lxc a:before, a.lxc:before, input.lxc:before, .lxc-menu .menu-title:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f120";
+  padding-right: 6px;
 }
 
-.authip a, a.authip, input.authip, .authip-menu .menu-title {
-  background-image: url(../images/ip.png);
-  background-repeat: no-repeat;
-  background-position: 8px 10px;
-  padding-left: 30px;
+.mysql a:before, a.mysql:before, input.mysql:before, .mysql-menu .menu-title:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f1c0";
+  padding-right: 6px;
 }
 
-.log a, a.log, input.log, .log-menu .menu-title {
-  background-image: url(../images/logs.png);
-  background-repeat: no-repeat;
-  background-position: 8px 10px;
-  padding-left: 30px;
+.quota a:before, a.quota:before, input.quota:before, .quota-menu .menu-title:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f200";
+  padding-right: 6px;
 }
 
-.help a, a.help, input.help, .help-menu .menu-title {
-  background-image: url(../images/help.png);
-  background-repeat: no-repeat;
-  background-position: 8px 10px;
-  padding-left: 30px;
+.authip a:before, a.authip:before, input.authip:before, .authip-menu .menu-title:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f5ab";
+  padding-right: 6px;
 }
 
-.lang a, a.lang, input.lang, .lang-menu .menu-title {
-  background-image: url(../images/lang.png);
-  background-repeat: no-repeat;
-  background-position: 8px 10px;
-  padding-left: 30px;
+.log a:before, a.log:before, input.log:before, .log-menu .menu-title:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f1da";
+  padding-right: 6px;
 }
 
-.mem a, a.mem, input.mem, .mem-menu .menu-title {
-  background-image: url(../images/settings.png);
-  background-repeat: no-repeat;
-  background-position: 8px 10px;
-  padding-left: 30px;
+.help a:before, a.help:before, input.help:before, .help-menu .menu-title:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f128";
+  padding-right: 6px;
+}
+
+.lang a:before, a.lang:before, input.lang:before, .lang-menu .menu-title:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f1ab";
+  padding-right: 6px;
+}
+
+.mem a:before, a.mem:before, input.mem:before, .mem-menu .menu-title:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f1de";
+  padding-right: 6px;
 }
 
 
 
-.filter a, a.edit, input.filter {
-  background-image: url(../icon/filter.png);
-  background-repeat: no-repeat;
-  background-position: 8px 5px;
-  padding-left: 30px;
+.filter a:before, a.edit:before, input.filter:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f0b0";
+  padding-right: 6px;
 }
 
 
@@ -1467,22 +1475,6 @@ li.ui-state-active[role='tab'] {
   border-radius: 15px 15px 15px 15px;
   margin: 16px 0;
   padding: 0 16px;
-}
-
-th.headerSortUp {
-  background-image: url(../images/asc.gif);
-  background-repeat: no-repeat;
-  background-position: right;
-  cursor: pointer;
-  background-color: #3399FF;
-}
-
-th.headerSortDown {
-  background-image: url(../images/desc.gif);
-  background-repeat: no-repeat;
-  background-position: right;
-  cursor: pointer;
-  background-color: #3399FF;
 }
 
 .sub-disabled {
@@ -1677,12 +1669,11 @@ small > i {
   }
 }
 
-.logout a, a.logout, input.logout, .logout-menu .menu-title {
-  background-image: url(../images/exit.png);
-  background-repeat: no-repeat;
-  background-position: 8px 10px;
-  padding-left: 30px;
-  text-align: center;
+.logout a:before, a.logout:before, input.logout:before, .logout-menu .menu-title:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f2f5";
+  padding-right: 6px;
 }
 
 .alternc_powered {

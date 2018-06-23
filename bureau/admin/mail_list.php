@@ -75,7 +75,7 @@ echo $msg->msg_html_all(true, true);
 <?php } // $quota->cancreate("mail") ?>
     </td>
     <td>
-      <span class="inb configure" valign='bottom'><a href="mail_manage_catchall.php?domain_id=<?php echo $domain_id?>"><?php __("Manage Catch-all for this domain");?></a></span> 
+      <span class="inb settings" valign='bottom'><a href="mail_manage_catchall.php?domain_id=<?php echo $domain_id?>"><?php __("Manage Catch-all for this domain");?></a></span> 
     </td>
   </tr>
 </table>
