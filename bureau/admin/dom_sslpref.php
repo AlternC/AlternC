@@ -24,7 +24,6 @@
  */
 
 require_once("../class/config.php");
-require_once("head.php");
 
 $fields = array (
 	"domain"    => array ("request", "string", (empty($domain)?"":$domain) ),
@@ -34,6 +33,7 @@ getFields($fields);
 $dom->lock();
 if (!$r=$dom->get_domain_all($domain)) {
 	$dom->unlock();
+    require_once("head.php");
 	echo $msg->msg_html_all();
 	include('foot.php');
 	die();
@@ -54,13 +54,15 @@ if (count($_POST)) {
     }
     $dom->unlock();    
     if ($haserror) {
+        require_once("head.php");
         echo $msg->msg_html_all();
     } else {
-        header("Location: dom_edit.php?domain=".eue($domain,false));
+        header("Location: dom_edit.php?domain=".eue($domain,false)."&msg=".eue(_("Your HTTPS preferences have been set"),false));
+        exit();
     }
 } // post ?
 
-
+require_once("head.php");
 
 ?>
 <h3><i class="fas fa-globe-africa"></i> <?php printf(_("Manage %s HTTPS preferences"),ehe($domain,false)); ?></h3>
@@ -72,7 +74,7 @@ if (count($_POST)) {
 <?php __("please note that you only see a provider if you have a valid certificate for this domain"); ?>
 </p>
 
-<form action="dom_ssl.inc.php" method="post" name="main" id="main">
+<form action="dom_sslpref.php" method="post" name="main" id="main">
     <input type="hidden" name="domain" value="<?php ehe($domain); ?>" />
    <?php csrf_get(); ?>
 <table class="tlist" id="dom_edit_ssl">
@@ -94,9 +96,11 @@ for($i=0;$i<$r["nsub"];$i++) {
     echo "<option value=\"\">"._("-- no HTTPS certificate provider preference --")."</option>";
     $providers=array();
     foreach($certs as $cert) {
-        if ($cert["provider"] && !isset($providers[$cert["provider"]])) {
+        if ($cert["provider"] && $cert["provider"]!="snakeoil" && !isset($providers[$cert["provider"]])) {
             $providers[$cert["provider"]]=1;
-            echo "<option value=\"".$cert["provider"]."\">"._("Provider:")." ".$cert["provider"]."</option>";
+            echo "<option value=\"".$cert["provider"]."\"";
+            selected($r["sub"][$i]["provider"]==$cert["provider"]);
+            echo ">"._("Provider:")." ".$cert["provider"]."</option>";
         }
     }
     echo "</select>";

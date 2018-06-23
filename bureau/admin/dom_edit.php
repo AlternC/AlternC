@@ -41,6 +41,9 @@ if (!$r=$dom->get_domain_all($domain)) {
 }
 $dom->unlock();
 
+if (isset($_GET["msg"])) {
+    $msg->raise("INFO","dom",$_GET["msg"]);
+}
 ?>
 <h3><i class="fas fa-globe-africa"></i> <?php printf(_("Manage %s"),$domain); ?></h3>
 <?php

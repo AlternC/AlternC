@@ -1203,16 +1203,10 @@ class m_dom {
         $r["sub"] = array();
         $data = $db->fetchAll();
         foreach($data as $i=>$record) {
-            $r["sub"][$i] = array();
-            $r["sub"][$i]["id"] = $record["id"];
+            $r["sub"][$i] = $record;
+            // FIXME : replace sub by name and dest by valeur in the code that exploits this function :
             $r["sub"][$i]["name"] = $record["sub"];
             $r["sub"][$i]["dest"] = $record["valeur"];
-            $r["sub"][$i]["type"] = $record["type"];
-            $r["sub"][$i]["enable"] = $record["enable"];
-            $r["sub"][$i]["type_desc"] = $record["type_desc"];
-            $r["sub"][$i]["only_dns"] = $record["only_dns"];
-            $r["sub"][$i]["web_action"] = $record["web_action"];
-            $r["sub"][$i]["advanced"] = $record["advanced"];
             $r["sub"][$i]["fqdn"] = ((!empty($r["sub"][$i]["name"])) ? $r["sub"][$i]["name"] . "." : "") . $r["name"];
         }
         $db->free();
@@ -1395,9 +1389,9 @@ class m_dom {
      * @param string the provider (if not empty, will be checked against an existing certificate for this subdomain)
      * @return boolean true if the preference has been set
      */
-    function set_sub_domain_ssl_provider($sub_domain_id,$provider) { 
+    function set_subdomain_ssl_provider($sub_domain_id,$provider) { 
         global $db, $msg, $cuid, $ssl;
-        $msg->log("dom", "set_sub_domain_ssl_provider", $sub_domain_id." / ".$provider)
+        $msg->log("dom", "set_sub_domain_ssl_provider", $sub_domain_id." / ".$provider);
         // Locked ?
         if (!$this->islocked) {
             $msg->raise("ERROR", "dom", _("--- Program error --- No lock on the domains!"));
