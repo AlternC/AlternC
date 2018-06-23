@@ -109,21 +109,18 @@ class m_menu {
             'home' =>
             array(
                 'title' => _("Home / Information"),
-                'ico' => 'images/home.png',
                 'link' => 'main.php',
                 'pos' => 0,
             ),
             'logout' =>
             array(
                 'title' => _("Logout"),
-                'ico' => 'images/exit.png',
                 'link' => 'mem_logout.php',
                 'pos' => 170,
             ),
             'help' =>
             array(
                 'title' => _("Online help"),
-                'ico' => 'images/help.png',
                 'target' => 'help',
                 'link' => $help_baseurl,
                 'pos' => 140,
@@ -131,7 +128,6 @@ class m_menu {
             'lang' =>
             array(
                 'title' => _("Languages"),
-                'ico' => '/images/lang.png',
                 'visibility' => false,
                 'link' => 'toggle',
                 'links' => array(),

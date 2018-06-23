@@ -69,7 +69,6 @@ class m_log {
     function hook_menu() {
         $obj = array(
             'title' => _("Logs"),
-            'ico' => 'images/logs.png',
             'link' => 'logs_list.php',
             'pos' => 130,
         );
