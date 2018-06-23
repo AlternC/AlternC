@@ -457,6 +457,13 @@ INSTR(CONCAT(sd.sub,IF(sd.sub!='','.',''),sd.domaine),'.')+1))=?
         global $cuid, $msg, $db;
         $msg->log("ssl", "import_cert");
 
+        // Search for an existing cert: (first)
+        $db->query("SELECT id FROM certificates WHERE crt=?;",array($crt));
+        if ($db->next_record()) {
+            $msg->raise("ERROR","ssl", _("Certificate already exists in database"));
+            return false;
+        }
+        
         $result = $this->check_cert($crt, $chain, $key);
         if ($result === false) {
             $msg->raise("ERROR","ssl", $this->error);
@@ -468,13 +475,6 @@ INSTR(CONCAT(sd.sub,IF(sd.sub!='','.',''),sd.domaine),'.')+1))=?
         $validend = $crtdata['validTo_time_t'];
         $fqdn = $crtdata["subject"]["CN"];
         $altnames = $this->parseAltNames($crtdata["extensions"]["subjectAltName"]);
-
-        // Search for an existing cert:
-        $db->query("SELECT id FROM certificates WHERE crt=?;",array($crt));
-        if ($db->next_record()) {
-            $msg->raise("ERROR","ssl", _("Certificate already exists in database"));
-            return false;
-        }
 
         // Everything is PERFECT and has been thoroughly checked, let's insert those in the DB !
         $db->query(
