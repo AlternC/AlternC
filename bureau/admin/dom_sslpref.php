@@ -24,25 +24,13 @@
  */
 
 require_once("../class/config.php");
+require_once("head.php");
 
 $fields = array (
 	"domain"    => array ("request", "string", (empty($domain)?"":$domain) ),
 );
 getFields($fields);
 
-?>
-<p class="alert alert-info"><?php __("These parameters are for advanced user who want to choose specific certificate provider. <br />Usually you'd want to click 'edit' in front of a subdomain to choose between HTTP and HTTPS by default."); ?></p>
-<p>
-  <?php __("For each subdomain that may be available through HTTPS, please choose which certificate provider you want to use."); ?>
-<br />
-<?php __("please note that you only see a provider if you have a valid certificate for this domain"); ?>
-</p>
-
-<table class="tlist" id="dom_edit_ssl">
-<thead>
-    <tr><th><?php __("Subdomain"); ?></th><th><?php __("HTTPS Preference"); ?></th></tr>
-</thead>
-<?php
 $dom->lock();
 if (!$r=$dom->get_domain_all($domain)) {
 	$dom->unlock();
@@ -51,6 +39,47 @@ if (!$r=$dom->get_domain_all($domain)) {
 	die();
 }
 $dom->unlock();
+
+$haserror=false;
+if (count($_POST)) {
+    $dom->lock();
+    // get fields from the posted form:
+    foreach($r["sub"] as $subdomain) {
+        if (isset($_POST["ssl_".$subdomain["id"]])) {
+            if (!$dom->set_subdomain_ssl_provider($subdomain["id"],$_POST["ssl_".$subdomain["id"]])) {
+                $haserror=true;
+            }
+            // errors will be shown below
+        }
+    }
+    $dom->unlock();    
+    if ($haserror) {
+        echo $msg->msg_html_all();
+    } else {
+        header("Location: dom_edit.php?domain=".eue($domain,false));
+    }
+} // post ?
+
+
+
+?>
+<h3><i class="fas fa-globe-africa"></i> <?php printf(_("Manage %s HTTPS preferences"),ehe($domain,false)); ?></h3>
+
+<p class="alert alert-info"><?php __("These parameters are for advanced user who want to choose specific certificate provider. <br />Usually you'd want to click 'edit' in front of a subdomain to choose between HTTP and HTTPS by default."); ?></p>
+<p>
+  <?php __("For each subdomain that may be available through HTTPS, please choose which certificate provider you want to use."); ?>
+<br />
+<?php __("please note that you only see a provider if you have a valid certificate for this domain"); ?>
+</p>
+
+<form action="dom_ssl.inc.php" method="post" name="main" id="main">
+    <input type="hidden" name="domain" value="<?php ehe($domain); ?>" />
+   <?php csrf_get(); ?>
+<table class="tlist" id="dom_edit_ssl">
+<thead>
+    <tr><th><?php __("Subdomain"); ?></th><th><?php __("HTTPS Preference"); ?></th></tr>
+</thead>
+<?php
 
 for($i=0;$i<$r["nsub"];$i++) {
     if (!$r["sub"][$i]["only_dns"]) {
@@ -61,7 +90,7 @@ for($i=0;$i<$r["nsub"];$i++) {
 
     echo "<tr>";
     echo "<td>".$fqdn."</td>";
-    echo "<td><select name=\"ssl_".$r["sub"][$i]["name"]."\" id=\"ssl_".$r["sub"][$i]["name"]."\">";
+    echo "<td><select name=\"ssl_".$r["sub"][$i]["id"]."\" id=\"ssl_".$r["sub"][$i]["id"]."\">";
     echo "<option value=\"\">"._("-- no HTTPS certificate provider preference --")."</option>";
     $providers=array();
     foreach($certs as $cert) {
@@ -76,3 +105,18 @@ for($i=0;$i<$r["nsub"];$i++) {
     
 }
 
+?>
+<tr><td></td>
+<td>
+<p>
+<button type="submit" class="inb ok" name="go"><?php __("Set my HTTPS certificate preferences"); ?></button>
+<button type="button" class="inb cancel" name="cancel" onclick="document.location='dom_edit.php?domain=<?php eue($domain); ?>';"><?php __("Cancel"); ?></button>
+</p>
+</td></tr>
+</table>
+</form>
+
+
+<?php
+require_once("foot.php");
+?>

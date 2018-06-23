@@ -1390,6 +1390,45 @@ class m_dom {
 
 
     /**
+     * set the HTTPS preference for a subdomain.
+     * @param integer the sub_domain_id (will be checked against the user ID identity)
+     * @param string the provider (if not empty, will be checked against an existing certificate for this subdomain)
+     * @return boolean true if the preference has been set
+     */
+    function set_sub_domain_ssl_provider($sub_domain_id,$provider) { 
+        global $db, $msg, $cuid, $ssl;
+        $msg->log("dom", "set_sub_domain_ssl_provider", $sub_domain_id." / ".$provider)
+        // Locked ?
+        if (!$this->islocked) {
+            $msg->raise("ERROR", "dom", _("--- Program error --- No lock on the domains!"));
+            return false;
+        }
+        $db->query("SELECT * FROM sub_domaines WHERE id=?",array($sub_domain_id));
+        if (!$db->next_record() || $db->Record["compte"]!=$cuid) {
+            $msg->raise("ERROR", "dom", _("Subdomain not found"));
+            return false;
+        }
+        $fqdn=$db->Record["sub"].(($db->Record["sub"])?".":"").$db->Record["domaine"];
+        $certs = $ssl->get_valid_certs($fqdn);
+        $provider=strtolower(trim($provider));
+        if ($provider) {
+            $found=false;
+            foreach($certs as $cert) {
+                if ($cert["provider"]==$provider) {
+                    $found=true;
+                }
+            }
+            if (!$found) {
+                $msg->raise("ERROR", "dom", _("No certificate found for this provider and this subdomain"));
+                return false;
+            }
+        }
+        $db->query("UPDATE sub_domaines SET provider=? WHERE id=?",array($provider,$sub_domain_id));
+        return true;
+    }
+
+    
+    /**
      * Modifier les information du sous-domaine demandé.
      *
      * <b>Note</b> : si le sous-domaine $sub.$dom n'existe pas, il est créé.<br />

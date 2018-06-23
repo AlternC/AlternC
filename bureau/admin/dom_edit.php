@@ -120,7 +120,6 @@ if (! empty($r['dns_result']) && $r['dns_result'] != '0') {
 <?php if ( $r["dns"] ) { ?>
   <li class="view"><a href="#tabsdom-view" onClick="update_dns_content();"><?php __("View");?></a></li> 
 <?php } //if gesdns ?>
-  <li class="ssl"><a href="#tabsdom-ssl" onClick="update_ssl_content();"><?php __("HTTPS Preferences");?></a></li> 
   <li class="delete"><a href="#tabsdom-delete"><?php __("Delete");?></a></li>
 </ul>
 
@@ -256,7 +255,15 @@ foreach ($problems as $pr => $lm) { // $problems can be empty but can't be null/
   echo "<script type='text/javascript'>$(\"tr[data-fqdn='".$pr."']\").addClass('alert-danger-tr');</script>\n";
 }
 ?>
-</div>
+
+<p>&nbsp;</p>
+<hr />
+<p>
+   <a class="inb ssl" href="dom_sslpref.php?domain=<?php ehe($domain); ?>"><?php __("HTTPS Preferences for this domain");?></a>
+</p>
+
+
+</div> <!-- tabsdom-editsub -->
 
 
 <div id="tabsdom-addsub">
