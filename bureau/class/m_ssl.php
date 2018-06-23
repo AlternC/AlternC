@@ -63,7 +63,7 @@ class m_ssl {
      * used by providers to get the certs they should generate
      * also used by update_domaines to choose which cert to use for a specific fqdn
      */
-    function get_fqdn_specials() {
+    function get_fqdn_specials($deduplicate=true) {
         global $L_FQDN;
         $specials=array($L_FQDN);
         $variables=array("fqdn_dovecot","fqdn_postfix","fqdn_proftpd","fqdn_mailman");
@@ -88,13 +88,148 @@ class m_ssl {
 
 
     // -----------------------------------------------------------------
+    /** 
+     * Crontab launched every minute 
+     * to search for new certificates and launch web_action="UPDATE" 
+     */
+    function cron_new_certs() {
+        global $db,$msg,$dom;
+        $db->query("SELECT max(id) AS maxid FROM certificates;");
+        if (!$db->next_record()) {
+            $msg->raise("ERROR","ssl",_("FATAL: no certificates in certificates table, even the SnakeOil one??"));
+            return false;
+        }
+        $maxid=$db->Record["maxid"];
+        if ($maxid>$this->last_certificate_id) {
+            $db->query("SELECT id,fqdn,altnames,sslcrt FROM certificates WHERE id>?",array($this->last_certificate_id));
+            $certs=array();
+            // fill an array of fqdn/altnames
+            while ($db->next_record()) {
+                if (!$db->Record["sslcrt"]) continue; // skip NOT FINALIZED certificates !!
+
+                list($altnames)=explode("\n",$db->Record["altnames"]);
+                $certs[]=array("id"=>$db->Record["id"],"fqdn"=>$db->Record["fqdn"]);
+                foreach($altnames as $altname) {
+                    $certs[]=array("id"=>$db->Record["id"],"fqdn"=>$altname);
+                }
+            }
+
+            // get the list of subdomains-id that match the following FQDN (or wildcard)
+            $updateids=array();
+            foreach($certs as $cert) {
+                $subids=$this->searchSubDomain($cert["fqdn"]);
+                foreach($subids as $subid) {
+                    $updateids[$subid]=$cert["id"];
+                }
+                // if this fqdn match a special domain, update its certificate (and mark service for reloading)
+                $this->update_specials_match($cert["id"],$cert["fqdn"]);
+            }
+
+            // update those subdomains 
+            $dom->lock();
+            foreach($updateids as $id => $certid) {
+                $db->query("UPDATE sub_domaines SET web_action=? WHERE id=?;",array("UPDATE",$id));
+                $msg->raise("INFO","ssl",sprintf(_("Reloading domain %s as we have new certificate %s"),$id,$certid));
+            }
+            $dom->unlock();
+            $this->last_certificate_id=$maxid;
+        }
+    }
+
+
+    function fqdnmatch($cert,$fqdn) {
+        if ($cert==$fqdn)
+            return true;
+        if (substr($cert,0,2)=="*." &&
+        substr($cert,2)==substr($fqdn,strpos($fqdn,".")+1) )
+            return true;
+        return false;
+    }
+    
+    // -----------------------------------------------------------------
+    /**
+     * update special system certificate that matches the cert fqdn:
+     */
+    function update_specials_match($id,$fqdn) {
+        global $L_FQDN;
+
+        if ($this->fqdnmatch($fqdn,$L_FQDN)) {
+            // new certificate for the panel
+            $this->copycert("alternc-panel",$id);
+            exec("service apache2 reload");
+        }
+        $variables=array("fqdn_dovecot","fqdn_postfix","fqdn_proftpd","fqdn_mailman");
+        foreach($variables as $var) {
+            $value = variable_get($var,null);
+            if ($value) {
+                if ($this->fqdnmatch($fqdn,$value)) {
+                    $this->copycert("alternc-".substr($var,5),$id);
+                    exec("service ".substr($var,5)." reload");
+                }
+            }
+        }
+        
+    }
+
+    // -----------------------------------------------------------------
+    /**
+     * copy a certificate (by its ID) to the system files
+     * set the correct permissions
+     * try to minimize zero-file-size risk or timing attack
+     */
+    function copycert($target,$id) {
+        global $db;
+        $db->query("SELECT * FROM certificate WHERE id=?",array($id));
+        if (!$db->next_record()) return false;
+        if (!file_put_contents("/etc/ssl/certs/".$target.".crt.tmp",trim($db->Record["sslcrt"])."\n".trim($db->Record["sslchain"])))
+            return false;
+        chown("/etc/ssl/certs/".$target.".crt.tmp","root");
+        chgrp("/etc/ssl/certs/".$target.".crt.tmp","ssl-cert");
+        chmod("/etc/ssl/certs/".$target.".crt.tmp",0755);
+        if (!file_put_contents("/etc/ssl/private/".$target.".key.tmp",$db->Record["sslkey"])) 
+            return false;
+        chown("/etc/ssl/private/".$target.".key.tmp","root");
+        chgrp("/etc/ssl/private/".$target.".key.tmp","ssl-cert");
+        chmod("/etc/ssl/private/".$target.".key.tmp",0750);
+        
+        rename("/etc/ssl/certs/".$target.".crt.tmp","/etc/ssl/certs/".$target.".crt");
+        rename("/etc/ssl/private/".$target.".key.tmp","/etc/ssl/private/".$target.".key");
+        return true;
+    }
+
+
+    // -----------------------------------------------------------------
+    /**
+     * search for a FQDN as a fqdn or a wildcard in all subdomains currently hosted
+     * return a list of subdomain-id
+     */
+    function searchSubDomain($fqdn) {
+        global $db;
+        $db->query("SELECT sd.id FROM sub_domaines sd, domaines_type dt WHERE dt.name=sd.type AND dt.only_dns=0 AND
+(CONCAT(sd.sub,IF(sd.sub!='','.',''),sd.domaine)=?
+OR CONCAT('*.',SUBSTRING(CONCAT(sd.sub,IF(sd.sub!='','.',''),sd.domaine),
+INSTR(CONCAT(sd.sub,IF(sd.sub!='','.',''),sd.domaine),'.')+1))=?
+);",
+        array($fqdn,$fqdn));
+        $ids=array();
+        while ($db->next_record()) {
+            $ids[]=$db->Record["id"];
+        }
+        return $ids;
+    }
+
+    
+    // -----------------------------------------------------------------
     /**
      * delete old certificates (expired for more than a year)
      */
     function delete_old_certificates() {
         global $db;
-        $db->query("SELECT id FROM certificates WHERE status=".self::STATUS_EXPIRED." AND validend<DATE_SUB(NOW(), INTERVAL 12 MONTH) AND validend!='0000-00-00 00:00:00';");
+        $db->query("SELECT c.id,sd.id AS used FROM certificates c LEFT JOIN sub_domaines sd ON sd.certificate_id=c.id WHERE c.status=".self::STATUS_EXPIRED." AND c.validend<DATE_SUB(NOW(), INTERVAL 12 MONTH) AND c.validend!='0000-00-00 00:00:00';");
         while ($db->next_record()) {
+            if ($db->Record["used"]) {
+                continue; // this certificate is used (even though it's expired :/ ) 
+            }
             $CRTDIR = self::KEY_REPOSITORY . "/" . floor($db->Record["id"]/1000);
             @unlink($CRTDIR."/".$db->Record["id"].".crt");
             @unlink($CRTDIR."/".$db->Record["id"].".key");
@@ -383,13 +518,16 @@ class m_ssl {
 
         // Everything is PERFECT and has been thoroughly checked, let's insert those in the DB !
         if (!$db->query(
-            "UPDATE certificates SET status=?, fqdn=?, altnames=?, validstart=FROM_UNIXTIME(?), validend=FROM_UNIXTIME(?), sslcrt=?, sslchain=? WHERE id=?;",
+            "INSERT INTO certificates (status,fqdn,altnames,validstart,validend,sslcrt,sslchain,sslcsr) 
+SELECT ?,?,?, FROM_UNIXTIME(?), FROM_UNIXTIME(?), ?, ?, sslcsr FROM certificate WHERE id=?;",
             array(self::STATUS_OK, $fqdn, $altnames, $validstart, $validend, $crt, $chain, $certid)        
         )) {
             $msg->raise("ERROR","ssl", _("Can't save the Crt/Chain now. Please try later."));
             return false;
         }
-        return $certid;
+        $newid=$db->lastid();
+        $db->query("DELETE FROM certificates WHERE id=?;",array($certid));
+        return $newid;
     }
 
     

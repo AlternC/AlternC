@@ -1415,7 +1415,7 @@ class m_dom {
                 return false;
             }
         }
-        $db->query("UPDATE sub_domaines SET provider=? WHERE id=?",array($provider,$sub_domain_id));
+        $db->query("UPDATE sub_domaines SET web_action=?, provider=? WHERE id=?",array("UPDATE",$provider,$sub_domain_id));
         return true;
     }
 

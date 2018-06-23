@@ -1,4 +1,6 @@
 
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
 # Create /var/run/ folder : it may be a ramdrive
 @reboot	 root	   mkdir -p /var/run/alternc && chown alterncpanel:alterncpanel /var/run/alternc 
 
@@ -37,3 +39,7 @@
 # Calculate the mail accounts size once a week beacause the dovecot plugin to do that is not precise (see ticket AlternC #168)
 # Every Sunday at 4am
 0 4 * * 0	root	/usr/lib/alternc/update_quota_mail.sh -a
+
+# every minute, search for new certificates
+* * * * *       root    /usr/lib/alternc/cron_ssl.sh
+
