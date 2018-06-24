@@ -276,9 +276,9 @@ echo "."
 rm -f $SED_SCRIPT
 
 ######################################################################## 
-# Ad-hoc fixes
-#
+# Ad-hoc fixes 
 
+# add php.ini directives for AlternC in any installed php version:
 php="`ls /usr/lib/apache*/*/*php*.so | sed -e 's/^.*libphp\(.*\)\.so$/\1/' | tail -1`"
 if [ "$php" = "7.0" ]
 then
@@ -289,19 +289,42 @@ else
     ln -fs /etc/alternc/alternc.ini /etc/php$php/cli/conf.d/alternc.ini || true
 fi
 
-#Set a default certificate if needed
+# Create the default certificate if needed (requires openssl)
 make-ssl-cert generate-default-snakeoil
-SNAKEOIL_SSLKEY=$(</etc/ssl/private/ssl-cert-snakeoil.key)
-SNAKEOIL_SSLCRT=$(</etc/ssl/certs/ssl-cert-snakeoil.pem)
 
-mysql_query "SET SESSION sql_mode=\"NO_AUTO_VALUE_ON_ZERO\" ; INSERT IGNORE INTO \
-    certificates (id,uid,status,fqdn,validstart,validend,sslkey,sslcrt,provider) \
-    VALUES \
-    (0,2000,1,\"ALTERNC_DEFAULT_FQDN\",NOW(),ADDDATE(NOW(),INTERVAL 200 YEAR),\"$SNAKEOIL_SSLKEY\",\"$SNAKEOIL_SSLCRT\",\"snakeoil\");"
+mysql_query <<EOF
+SET SESSION sql_mode="NO_AUTO_VALUE_ON_ZERO" ; 
+INSERT IGNORE INTO certificates 
+  (id,uid,status,fqdn,validstart,validend,sslkey,sslcrt,provider) 
+  VALUES 
+  (0, 2000, 1, "AlternC Default Certificate", NOW(), DATE_ADD(NOW(),INTERVAL 20 YEAR), 
+  "$(cat /etc/ssl/private/ssl-cert-snakeoil.key)",
+  "$(cat /etc/ssl/certs/ssl-cert-snakeoil.pem)",
+  "snakeoil");
+EOF
 
+# backward compatibility: in case you still use apache.pem
+# we are now storing certificates in /etc/ssl/certs/alternc-<servicename>.pem
+# and private keys in /etc/ssl/private/alternc-<servicename>.key
 if [ ! -e /etc/alternc/apache.pem ]; then
-    echo -e "$SNAKEOIL_SSLKEY\n$SNAKEOIL_SSLCRT" > /etc/alternc/apache.pem
+    cat /etc/ssl/private/ssl-cert-snakeoil.key /etc/ssl/certs/ssl-cert-snakeoil.pem > /etc/alternc/apache.pem
 fi
+
+# set services certificates in case we don't already have them:
+# we set them to snakeoil: a provider MUST be installed to obtain a proper certificate automagically
+for service in postfix dovecot proftpd panel
+do
+    if [ ! -e "/etc/ssl/certs/alternc-${service}.pem" -o ! -e "/etc/ssl/private/alternc-${service}.key" ]
+    then
+	cat /etc/ssl/private/ssl-cert-snakeoil.key >"/etc/ssl/private/alternc-${service}.key"
+	cat /etc/ssl/certs/ssl-cert-snakeoil.pem >"/etc/ssl/certs/alternc-${service}.pem"
+    fi
+done
+
+# ensure dovecot, postfix, apache, can access ssl certificates:
+adduser dovecot ssl-cert
+adduser www-data ssl-cert
+adduser postfix ssl-cert
 
 run-parts --arg=certificates /usr/lib/alternc/install.d
 

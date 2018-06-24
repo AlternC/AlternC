@@ -458,7 +458,7 @@ INSTR(CONCAT(sd.sub,IF(sd.sub!='','.',''),sd.domaine),'.')+1))=?
         $msg->log("ssl", "import_cert");
 
         // Search for an existing cert: (first)
-        $db->query("SELECT id FROM certificates WHERE crt=?;",array($crt));
+        $db->query("SELECT id FROM certificates WHERE sslcrt=?;",array($crt));
         if ($db->next_record()) {
             $msg->raise("ERROR","ssl", _("Certificate already exists in database"));
             return false;
@@ -556,7 +556,7 @@ SELECT ?,?,?, FROM_UNIXTIME(?), FROM_UNIXTIME(?), ?, ?, sslcsr FROM certificate 
         $msg->log("ssl", "update_domain($action,$type,$fqdn)");
 
         // the domain type must be a "dns_only=false" one:
-        if (!($domtype=$dom->domains_type_get($type)) || $domtype["dns_only"]==true) {
+        if (!($domtype=$dom->domains_type_get($type)) || $domtype["only_dns"]==true) {
             return; // nothing to do : this domain type does not involve Vhosts
         }
 
@@ -623,19 +623,38 @@ SELECT ?,?,?, FROM_UNIXTIME(?), FROM_UNIXTIME(?), ?, ?, sslcsr FROM certificate 
 
         // we split the certificates by 1000
         $CRTDIR = self::KEY_REPOSITORY . "/" . floor($cert["id"]/1000);
-        @mkdir($CRTDIR);
+        @mkdir($CRTDIR,0750,true);
+        // set the proper permissions on the Key Repository folder and children : 
+        chown(self::KEY_REPOSITORY,"root");
+        chgrp(self::KEY_REPOSITORY,"ssl-cert");
+        chmod(self::KEY_REPOSITORY,0750);
+        chown($CRTDIR,"root");
+        chgrp($CRTDIR,"ssl-cert");
+        chmod($CRTDIR,0750);
+
         if (
             !file_exists($CRTDIR . "/" . $cert["id"].".crt") ||
             !file_exists($CRTDIR . "/" . $cert["id"].".key")) {
             // write the files (first time we use a certificate)
             file_put_contents($CRTDIR . "/" . $cert["id"].".crt", $cert["sslcrt"]);
             file_put_contents($CRTDIR . "/" . $cert["id"].".key", $cert["sslkey"]);
+            // set the proper rights on those files :
+            chown($CRTDIR . "/" . $cert["id"].".crt","root");
+            chgrp($CRTDIR . "/" . $cert["id"].".crt","ssl-cert");
+            chmod($CRTDIR . "/" . $cert["id"].".crt",0640);
+            chown($CRTDIR . "/" . $cert["id"].".key","root");
+            chgrp($CRTDIR . "/" . $cert["id"].".key","ssl-cert");
+            chmod($CRTDIR . "/" . $cert["id"].".key",0640);
             if (isset($cert["sslchain"]) && $cert["sslchain"]) {
                 file_put_contents($CRTDIR . "/" . $cert["id"] . ".chain", $cert["sslchain"]);
+                chown($CRTDIR . "/" . $cert["id"].".chain","root");
+                chgrp($CRTDIR . "/" . $cert["id"].".chain","ssl-cert");
+                chmod($CRTDIR . "/" . $cert["id"].".chain",0640);
             }
         }
         // we have the files, let's fill the output array :
         $output=array(
+            "id" => $cert["id"],
             "crt" => $CRTDIR . "/" . $cert["id"].".crt",
             "key" => $CRTDIR . "/" . $cert["id"].".key",
         );
