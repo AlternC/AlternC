@@ -326,6 +326,7 @@ if [ -x /usr/sbin/apache2 ]; then
     then
 	    a2enmod rewrite
     fi
+
     if [ -e /etc/alternc/apache.pem ]; then
         # We enable proftpd tls module
         cat /etc/proftpd/modules.conf | sed -e 's/^#LoadModule mod_tls.c/LoadModule mod_tls.c/' > /etc/proftpd/modules.conf.alternc-new
@@ -341,6 +342,11 @@ if [ -x /usr/sbin/apache2 ]; then
 	    a2enconf alternc-ssl
             s="apache2"
         fi
+	
+	if ! [ -L /etc/apache2/mods-enabled/expires.load ]
+	then
+	    a2enmod expires
+	fi
 
 	# We enable dovecot SSL certificate instructions: (on wheezy we should use a new file in /etc/dovecot/conf.d/ )
 	( echo "# Don't change this file, it will be overwriten by alternc.install. Change ssl parameters in a file named 99_ssl.conf instead" ; echo "ssl_cert = </etc/alternc/apache.pem" ; echo "ssl_key = </etc/alternc/apache.pem" ) >/etc/dovecot/conf.d/96_ssl.conf

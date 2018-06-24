@@ -21,6 +21,10 @@ Depends: debianutils (>= 1.13.1)
        , phpmyadmin
        , ssl-cert
        , libjs-prettify
+       , libjs-jquery
+       , libjs-jquery-tablesorter       
+       , libjs-jquery-ui
+       , libjs-jquery-ui-theme-redmond
        , postfix
        , proftpd-mod-mysql
        , proftpd-basic
@@ -104,7 +108,11 @@ Depends: debianutils (>= 1.13.1)
          , php5-mysql | php7.0-mysql
          , phpmyadmin
          , ssl-cert
-	 , libjs-prettify
+         , libjs-prettify
+         , libjs-jquery
+         , libjs-jquery-tablesorter       
+         , libjs-jquery-ui
+         , libjs-jquery-ui-theme-redmond
          , postfix
          , proftpd-mod-mysql
          , proftpd-basic
