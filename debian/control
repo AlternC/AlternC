@@ -96,8 +96,8 @@ Description: Hosting software management suite for Debian
  AlternC is mainly a PHP based administration interface and some conf files
  for the software used by it. 
  .
- More information at http://www.alternc.com/
-Homepage: http://www.alternc.com/
+ More information at https://alternc.com/
+Homepage: https://alternc.com/
 
 Package: alternc-slave
 Architecture: all
@@ -179,8 +179,8 @@ Description: Hosting software management suite for Debian
  This package is designed for frontend nodes in a load balancing setup, where
  the AlternC directory is not touched and managed over NFS.
  . 
- More information at http://www.alternc.com/
-Homepage: http://www.alternc.com/
+ More information at https://alternc.com/
+Homepage: https://alternc.com/
 
 Package: alternc-squirrelmail
 Architecture: all
@@ -205,8 +205,8 @@ Description: Squirrelmail-Webmail plugin and configuration for AlternC
  filtering, the password changing through MySQL, and the automatic
  creation of proper profile with the right address and language.
  .
- More information at http://www.alternc.com/
-Homepage: http://www.alternc.com/
+ More information at https://alternc.com/
+Homepage: https://alternc.com/
 
 Package: alternc-roundcube
 Architecture: all
@@ -231,8 +231,8 @@ Description: Roundcube-Webmail plugin and configuration for AlternC
  filtering, the password changing through MySQL, and the automatic
  creation of proper profile with the right address and language.
  .
- More information at http://www.alternc.com/
-Homepage: http://www.alternc.com/
+ More information at https://alternc.com/
+Homepage: https://alternc.com/
 
 Package: alternc-awstats
 Priority: optional
@@ -252,7 +252,7 @@ Description: Awstats statistics module for AlternC
  This package is an optional module that adds awstats statistics
  to the virtual desktop.
  .
- More information on http://www.alternc.com/.
+ More information on https://alternc.com/.
 
 Package: alternc-api
 Architecture: all
@@ -270,5 +270,5 @@ Description: Rest or get/post API for AlternC
  GET/POST/REST API. You can then use https://yourpanel/api/ as an endpoint
  to launch remotely any functions of the hosting control panel.
  .
- More information at http://www.alternc.com/
-Homepage: http://www.alternc.com/
+ More information at https://alternc.com/
+Homepage: https://alternc.com/
