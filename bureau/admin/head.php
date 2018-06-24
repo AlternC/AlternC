@@ -25,37 +25,10 @@
 
 if (!isset($charset) || ! $charset) $charset="UTF-8";
 @header("Content-Type: text/html; charset=$charset");
+
+require_once("html-head.php");
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $lang; ?>" lang="<?php echo $lang; ?>">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $charset; ?>" />
-<title><?php __("AlternC Control Panel"); ?></title>
-
-<link rel="stylesheet" href="/javascript/jquery-ui-themes/redmond/jquery-ui.min.css" type="text/css" />
-<link rel="stylesheet" href="/javascript/prettify/prettify.css" type="text/css" />
-<link rel="stylesheet" href="styles/style.css" type="text/css" />
-<link rel="stylesheet" href="styles/solid.css" type="text/css" /><!-- fontawesome solid font -->
-<link rel="stylesheet" href="styles/fontawesome.css" type="text/css" />
-<?php
-if (file_exists("styles/style-custom.css") ) {
-  echo '<link rel="stylesheet" href="styles/style-custom.css" type="text/css" />';
-}
-
-$favicon = variable_get('favicon', 'favicon.ico' ,'You can specify a favicon, for example /images/my_logo.ico', array('desc'=>'URL','type'=>'string'));
-?>
-
-<link rel="Shortcut Icon" href="<?php echo $favicon;?>" type="image/ico" />
-<link rel="icon" href="<?php echo $favicon;?>" type="image/ico" />
-
-<script src="js/alternc.js" type="text/javascript" ></script>
-<script src="/javascript/jquery/jquery.min.js" type="text/javascript"></script>
-<script src="/javascript/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
-<script src="/javascript/jquery-tablesorter/jquery.tablesorter.min.js" type="text/javascript"></script>
-<script src="/javascript/prettify/prettify.js" type="text/javascript"></script>
-
-</head>
-<body onload="prettyPrint()">
+<body>
 <?php
 
 if ($isinvited && isset($oldid) && !empty($oldid) && $oldid!=$cuid ) {
