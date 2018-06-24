@@ -1,9 +1,9 @@
-alternc (3.5.0rc1) stable; urgency=low
+alternc (3.5.0~rc1) stable; urgency=low
 
   * AlternC 3.5 for Jessie & Stretch
   * added AlternC-ssl natively now, based on cert providers (external package)
 
- -- Benjamin Sonntag <benjamin@sonntag.fr>  Fri, 21 Jun 2018 15:26:00 +0100
+ -- Benjamin Sonntag <benjamin@sonntag.fr>  Sun, 24 Jun 2018 15:26:00 +0200
 
 alternc (3.1.11) oldoldstable; urgency=low
 

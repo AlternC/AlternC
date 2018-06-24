@@ -1,13 +1,13 @@
 Source: alternc
 Section: admin
 Priority: optional
-Maintainer: Benjamin Sonntag <benjamin@alternc.org>
+Maintainer: Benjamin Sonntag <benjamin@sonntag.fr>
 Build-Depends-Indep: perl
                    , findutils (>= 4.1.7)
                    , gettext (>= 0.10.40-5)
 Build-Depends: debhelper (>= 9)
              , po-debconf
-Standards-Version: 3.9.4
+Standards-Version: 3.9.8
 
 Package: alternc
 Architecture: all
@@ -88,7 +88,7 @@ Suggests: alternc-awstats
        , ncompress
        , alternc-squirrelmail
        , alternc-roundcube
-Description: Hosting software managment suite for Debian
+Description: Hosting software management suite for Debian
  AlternC is a mutualized hosting software manager for Linux.
  It allows you to manage your websites, domains, ftp, emails, aliases,
  web statistics, mailing-lists, jabber accounts, etc.
@@ -168,7 +168,7 @@ Suggests: alternc-awstats
          , zip
          , ncompress
          , bzip2
-Description: Hosting software managment suite for Debian
+Description: Hosting software management suite for Debian
  AlternC is a mutualized hosting software manager for Linux.
  It allows you to manage your websites, domains, ftp, emails, aliases,
  web statistics, mailing-lists, jabber accounts, etc.

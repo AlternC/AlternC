@@ -7,12 +7,3 @@ _Description: Default quota value for awstats stats:
  number of statistic set. Please specify the default quota they will have
  for this service.
 
-Template: alternc-awstats/errorinstall
-Type: note
-_Description: Error installing AlternC-Awstats
- AlternC-Awstats requires a complete installed AlternC system to get installed properly!
- .
- Please install AlternC and CONFIGURE IT before installing alternc-awstats or additional
- modules (don't forget to launch 'alternc.install').
- .
- Please check out the AlternC installation documentation before proceeding.

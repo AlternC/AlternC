@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.3.1\n"
 "Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
-"POT-Creation-Date: 2017-10-08 14:47+0200\n"
+"POT-Creation-Date: 2018-06-24 17:17+0200\n"
 "PO-Revision-Date: 2005-05-15 18:24+0200\n"
 "Last-Translator: Benjamin Sonntag <benjamin@altercn.org>\n"
 "Language-Team: English <dev@alternc.org>\n"
@@ -599,33 +599,4 @@ msgid ""
 "to ask for statistics about his web site. Users can ask for a limited number "
 "of statistic set. Please specify the default quota they will have for this "
 "service."
-msgstr ""
-
-#. Type: note
-#. Description
-#: ../alternc-awstats.templates:2001
-msgid "Error installing AlternC-Awstats"
-msgstr ""
-
-#. Type: note
-#. Description
-#: ../alternc-awstats.templates:2001
-msgid ""
-"AlternC-Awstats requires a complete installed AlternC system to get "
-"installed properly!"
-msgstr ""
-
-#. Type: note
-#. Description
-#: ../alternc-awstats.templates:2001
-msgid ""
-"Please install AlternC and CONFIGURE IT before installing alternc-awstats or "
-"additional modules (don't forget to launch 'alternc.install')."
-msgstr ""
-
-#. Type: note
-#. Description
-#: ../alternc-awstats.templates:2001
-msgid ""
-"Please check out the AlternC installation documentation before proceeding."
 msgstr ""

@@ -809,4 +809,6 @@ CREATE TABLE IF NOT EXISTS `certif_hosts` (
   KEY `uid` (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='VHosts of a user using defined or self-signed certificates';
 
-INSERT IGNORE INTO defquotas VALUES ('ssl', 0, 'default');
+-- make it re-exec-proof
+DELETE FROM alternc_status WHERE name='alternc_version';
+INSERT INTO alternc_status SET name='alternc_version',value='3.5.0.1.sql';

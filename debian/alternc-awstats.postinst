@@ -29,10 +29,10 @@ case "$1" in
     # configure /etc/alternc/templates/apache/httpd.conf
     # configure /etc/alternc/templates/apache-ssl/httpd.conf
 
-    if [ -x /usr/sbin/apache2 ]; then
-        if [ ! -h /etc/apache2/conf.d/alterncawstats.conf ]; then
+    if [ -d /etc/apache2/conf-enabled ]; then
+        if [ ! -L /etc/apache2/conf-enabled/alterncawstats.conf ]; then
             ln -sf /etc/alternc/alterncawstats.conf \
-                /etc/apache2/conf.d/alterncawstats.conf
+                /etc/apache2/conf-enabled/alterncawstats.conf
         fi
         # build awstats.log.alternc.conf if it does not exist
         if [ ! -f $LOGAPACHE ]; then
@@ -45,13 +45,6 @@ EOF
 	fi
         chown alterncpanel:root $LOGAPACHE
         chmod 644 $LOGAPACHE
-    fi
-
-    if [ -x /usr/sbin/apache-ssl ]; then
-      if [ ! -h /etc/apache-ssl/conf.d/alterncawstats.conf ]; then
-          ln -sf /etc/alternc/alterncawstats.conf \
-              /etc/apache-ssl/conf.d/alterncawstats.conf
-      fi
     fi
 
     logrotate_apache
