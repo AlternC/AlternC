@@ -794,4 +794,5 @@ CREATE TABLE IF NOT EXISTS `certificates` (
 
 -- make it re-exec-proof
 DELETE FROM alternc_status WHERE name='alternc_version';
-INSERT INTO alternc_status SET name='alternc_version',value='3.5.0.2.php';
+INSERT INTO alternc_status SET name='alternc_version',value='3.5.0.1.sql';
+

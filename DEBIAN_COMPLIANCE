@@ -1,6 +1,7 @@
 
 ********************************************************************************************
 * 2013: We are trying to make AlternC enter Debian repositories and follow Debian rules :) *
+* 2018: Still trying :) *
 ********************************************************************************************
 
 The main issues we know as of today are:  
@@ -14,38 +15,7 @@ Questions:
 
 - some binaries / scripts don't have a man page
 
-- we are packaging some JS library ourself : 
-  W: alternc: embedded-javascript-library var/alternc/bureau/admin/js/prototype.js
-  W: alternc: embedded-javascript-library var/alternc/bureau/admin/js/jquery.min.js
 
-- W: alternc: virtual-package-depends-without-real-package-depends depends: mailx
-
-- We should NOT ask for "do you REALLY want to install AlternC blabla" since we don't launch alternc.install at postinst anymore.
-  This question MAY be asked to the user when launching alternc installer manually (on an interactive shell)
-
-
-Easy to fix NOW :  
-E: alternc: dir-or-file-in-var-run var/run/alternc/
-W: alternc: binary-without-manpage usr/bin/alternc_get_path
-W: alternc: binary-without-manpage usr/bin/alternc_reload
-W: alternc: maintainer-script-ignores-errors prerm
-W: alternc-awstats: possible-debconf-note-abuse preinst:13 alternc-awstats/errorinstall
-
-E: alternc: duplicate-conffile etc/cron.d/alternc
-E: alternc: duplicate-conffile etc/logrotate.d/alternc
-W: alternc: malformed-prompt-in-templates alternc/slaves
-
-********************************************************************************
-Should be fixed, need more test:
-- the control panel is located in /var/alternc/bureau => move it to /usr/share/alternc/panel
-- the html data are in /var/alternc/html/[a-z0-9] => move them to /var/www/alternc/[a-z0-9]
-- the mail data are in /var/alternc/mail/[a-z0-9] => move them to /var/mail/alternc/[a-z0-9]
-- the bind zones, apache vhosts and other dynamic data are in /var/alternc/(bind|apache-vhost)/ => move them to /var/lib/alternc/(samename)
-- /var/alternc/db => not used anymore, drop
-- /var/alternc/mla => not used anymore, drop
-- there is /var/alternc/cgi-bin/ is forgotten and now we use the standard /usr/lib/cgi-bin/ 
-- /var/alternc/exec.usr/ => usr/lib/alternc/safe_mode_exec_dir
-- /var/alternc/sessions/ disapear for the standard PHP sessions dir.
 
 ********************************************************************************
 FIXED:
@@ -89,3 +59,33 @@ W: alternc: malformed-question-in-templates alternc/use_private_ip
 
 W: alternc: command-with-path-in-maintainer-script config:205 /usr/bin/awk
 
+- we are packaging some JS library ourself : 
+  W: alternc: embedded-javascript-library var/alternc/bureau/admin/js/prototype.js
+  W: alternc: embedded-javascript-library var/alternc/bureau/admin/js/jquery.min.js
+
+- W: alternc: virtual-package-depends-without-real-package-depends depends: mailx
+
+- We should NOT ask for "do you REALLY want to install AlternC blabla" since we don't launch alternc.install at postinst anymore.
+  This question MAY be asked to the user when launching alternc installer manually (on an interactive shell)
+
+
+Easy to fix NOW :  
+E: alternc: dir-or-file-in-var-run var/run/alternc/
+W: alternc: binary-without-manpage usr/bin/alternc_get_path
+W: alternc: binary-without-manpage usr/bin/alternc_reload
+W: alternc: maintainer-script-ignores-errors prerm
+W: alternc-awstats: possible-debconf-note-abuse preinst:13 alternc-awstats/errorinstall
+
+E: alternc: duplicate-conffile etc/cron.d/alternc
+E: alternc: duplicate-conffile etc/logrotate.d/alternc
+W: alternc: malformed-prompt-in-templates alternc/slaves
+
+- the control panel is located in /var/alternc/bureau => move it to /usr/share/alternc/panel
+- the html data are in /var/alternc/html/[a-z0-9] => move them to /var/www/alternc/[a-z0-9]
+- the mail data are in /var/alternc/mail/[a-z0-9] => move them to /var/mail/alternc/[a-z0-9]
+- the bind zones, apache vhosts and other dynamic data are in /var/alternc/(bind|apache-vhost)/ => move them to /var/lib/alternc/(samename)
+- /var/alternc/db => not used anymore, drop
+- /var/alternc/mla => not used anymore, drop
+- there is /var/alternc/cgi-bin/ is forgotten and now we use the standard /usr/lib/cgi-bin/ 
+- /var/alternc/exec.usr/ => usr/lib/alternc/safe_mode_exec_dir
+- /var/alternc/sessions/ disapear for the standard PHP sessions dir.
