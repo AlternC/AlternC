@@ -772,7 +772,7 @@ CREATE TABLE IF NOT EXISTS `csrf` (
 
 
 -- SSL managment
-CREATE TABLE `certificates` (
+CREATE TABLE IF NOT EXISTS `certificates` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uid` int(10) unsigned NOT NULL,
   `status` tinyint(3) unsigned NOT NULL,
