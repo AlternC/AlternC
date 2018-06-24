@@ -772,7 +772,7 @@ DELETE FROM alternc_status WHERE name='alternc_version';
 INSERT INTO alternc_status SET name='alternc_version',value='3.4.8.sql';
 
 -- SSL managment
-CREATE TABLE `certificates` (
+CREATE TABLE IF NOT EXISTS `certificates` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uid` int(10) unsigned NOT NULL,
   `status` tinyint(3) unsigned NOT NULL,
