@@ -292,7 +292,7 @@ fi
 # Create the default certificate if needed (requires openssl)
 make-ssl-cert generate-default-snakeoil
 
-mysql_query <<EOF
+/usr/bin/mysql --defaults-file=/etc/alternc/my.cnf -Bs <<EOF
 SET SESSION sql_mode="NO_AUTO_VALUE_ON_ZERO" ; 
 INSERT IGNORE INTO certificates 
   (id,uid,status,fqdn,validstart,validend,sslkey,sslcrt,provider) 
@@ -341,15 +341,15 @@ if [ -x /usr/sbin/apache2 ]; then
     fi 
     if ! [ -L /etc/apache2/mods-enabled/php$php.load ]
     then
-	    a2enmod php$php
+	a2enmod php$php
     fi
     if ! [ -L /etc/apache2/mods-enabled/rewrite.load ]
     then
-	    a2enmod rewrite
+	a2enmod rewrite
     fi
     if ! [ -L /etc/apache2/mods-enabled/expires.load ]
     then
-	    a2enmod expires
+	a2enmod expires
     fi
 
     if [ ! -h /etc/apache2/conf-available/alternc-ssl.conf ] && [ -e /etc/apache2/conf-available/ ]; then
@@ -427,7 +427,10 @@ OLDDESTINATION=`postconf mydestination | awk -F '=' '{print $2}'`
 echo "$OLDDESTINATION" | grep -q -v "$FQDN" && postconf -e "mydestination = $FQDN, $OLDDESTINATION"
 
 # Remove phpmyadmin apache2 configuration
-a2disconf phpmyadmin
+if [ -L /etc/apache2/conf-enabled/phpmyadmin.conf ]
+then
+    a2disconf phpmyadmin
+fi
 
 # Configure PHPMyAdmin
 include_str='include("/etc/alternc/phpmyadmin.inc.php")'
