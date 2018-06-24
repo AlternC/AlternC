@@ -43,23 +43,8 @@ if (!isset($restrictip)) {
 if (!isset($charset) || ! $charset) $charset="UTF-8";
 @header("Content-Type: text/html; charset=$charset");
 
+require_once("html-head.php");
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-<title>AlternC Desktop</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="styles/style.css" type="text/css" />
-<?php
-if (file_exists("styles/style-custom.css") ) {
-  echo '<link rel="stylesheet" href="styles/style-custom.css" type="text/css" />';
-}
-?>
-
-<script type="text/javascript" src="js/alternc.js"></script>
-<script src="js/jquery.min_embedded.js" type="text/javascript"></script>
-<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $charset; ?>" />
-</head>
 <body class="login_page">
   <div id="global">
 

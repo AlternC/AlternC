@@ -75,6 +75,8 @@ if (isset($save) && $save) {
   }
 }
 
+$addhead['css'][]='<link rel="stylesheet" href="/javascript/prettify/prettify.css" type="text/css" />';
+$addhead['js'][]='<script src="/javascript/prettify/prettify.js" type="text/javascript"></script>'
 include_once("head.php");
 
 ?>
@@ -126,17 +128,18 @@ echo "<pre class='prettyprint' id='file_content_view' >$content</pre>";
 
 <script type="text/javascript">
 $(function() {
-$( "#tabsfile" ).tabs();
+    prettyPrint();
+    $( "#tabsfile" ).tabs();
 <?php if ($editing) { ?>
-$( "#tabsfile-edit" ).tabs( "option", "active", 1 );
+    $( "#tabsfile-edit" ).tabs( "option", "active", 1 );
 <?php } ?>
 });
 
 $('#tabsfile').on('tabsbeforeactivate', function(event, ui){
-  var b = $('#file_content_editor').val();
-  $('#file_content_view').text( b );
-  $('#file_content_view').removeClass('prettyprinted');
-  PR.prettyPrint();
+    var b = $('#file_content_editor').val();
+    $('#file_content_view').text( b );
+    $('#file_content_view').removeClass('prettyprinted');
+    PR.prettyPrint();
 });
 </script>
 
