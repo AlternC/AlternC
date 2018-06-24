@@ -25,13 +25,11 @@
 if [ "$1" = "templates" ]
 then
     echo "Installing Roundcube Templates ..."
-#    cp -f /etc/alternc/templates/roundcube/avelsieve-config.php /etc/alternc/templates/roundcube/apache.conf /etc/roundcube/
-#    cp -f /etc/alternc/templates/javascript-common/javascript-common.conf /etc/javascript-common/
 
     LOGIN="0000_roundcube"
     PASSWORD="`perl -e 'print map{("a".."z","A".."Z",0..9)[int(rand(62))]}(1..10)'`"
     DESKEY="`perl -e 'print map{("a".."z","A".."Z",0..9)[int(rand(62))]}(1..24)'`"
-
+    # "
     # Add new variables to the sed script ...
     SED_SCRIPT="/tmp/alternc-roundcube.sedscript"
     # cf alternc.install for more explanations on this horror : 
@@ -80,20 +78,6 @@ EOF
     mysql_query "UPDATE sub_domaines SET web_action='DELETE' WHERE type='WEBMAIL';"
     echo "    Done"
 
-    echo "Deconfiguring javascript-common alias"
-    if [ -f /etc/apache2/conf.d/javascript-common.conf ]; then
-        	rm -f /etc/apache2/conf.d/javascript-common.conf
-    fi
-    if [ -f /etc/apache2/conf-available/javascript-common.conf ] ; then
-		a2disconf javascript-common.conf
-		service apache2 reload
-    fi
-    # just in case 
-    if [ -f /etc/javascript-common/javascript-common.conf ]; then
-        sed -i -e "s/^Alias \/javascript/# Do not uncomment, commented by AlternC to prevent a global alias\n#Alias \/javascript/" /etc/javascript-common/javascript-common.conf
-    fi
-    echo "    Done"
-    
 fi
 
 if [ "$1" = "end" ]; then
