@@ -33,7 +33,7 @@ class m_ftp {
      */
     function m_ftp() {
         global $L_FQDN;
-        $this->srv_proftpd = variable_get('fqdn_proftpd', $L_FQDN, 'Human name for FTP server', array('desc' => 'Name', 'type' => 'string'));
+        $this->srv_proftpd = variable_get('fqdn_proftpd', $L_FQDN, 'Human name for FTP server. If you change it, launch reload-certs', array('desc' => 'Name', 'type' => 'string'));
     }
 
 

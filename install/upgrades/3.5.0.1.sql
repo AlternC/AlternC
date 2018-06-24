@@ -1,7 +1,8 @@
 
 -- upgrade to merge alternc-ssl into alternc + change the way we work on SSL
 
-DROP TABLE `certif_alias`;
+DROP TABLE IF EXISTS `certif_alias`;
+
 ALTER TABLE `certificates`
       DROP `shared`,
       DROP `ssl_action`,
@@ -21,7 +22,7 @@ UPDATE `domaines_type` SET `has_https_option`=1 WHERE name='vhost';
 
 -- Backport old certif_hosts data to sub_domaines
 UPDATE `sub_domaines` LEFT JOIN `certif_hosts` ON `sub_domaines`.`id` = `certif_hosts`.`sub` SET `sub_domaines`.`certificate_id` = `certif_hosts`.`certif` WHERE 1;
-DROP TABLE `certif_hosts`;
+DROP TABLE IF EXISTS `certif_hosts`;
 
 -- Set https status  (http,https,both)
 UPDATE `sub_domaines` SET `https` = "https" WHERE `type` LIKE '%-ssl' AND https = '';
@@ -40,8 +41,8 @@ UPDATE sub_domaines AS sd  INNER JOIN
 -- Delete duplicate lines
 DELETE sd1 FROM sub_domaines sd1, sub_domaines sd2 WHERE sd1.id > sd2.id AND sd1.domaine = sd2.domaine AND sd1.sub = sd2.sub AND sd1.type = sd2.type AND sd1.https <> '' AND sd2.https <> '';
 
--- Regenerate all vhost
-UPDATE `sub_domaines` SET `web_action` = 'UPDATE';
+-- we need to regenerate all vhost, they will be by AlternC.install
+-- UPDATE `sub_domaines` SET `web_action` = 'UPDATE';
 
 
 -- change some variable names :
