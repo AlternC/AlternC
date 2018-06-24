@@ -254,7 +254,7 @@ INSTR(CONCAT(sd.sub,IF(sd.sub!='','.',''),sd.domaine),'.')+1))=?
     // ----------------------------------------------------------------- 
     /** Return all the SSL certificates for an account (or the searched one)
      * @param $filter an integer telling which certificate we want to see (see FILTER_* constants above)
-     * the default is showing all certificate, but only Pending and OK certificates, not expired or shared one 
+     * the default is showing all certificate, but only Pending and OK certificates, not expired
      * when there is more than 10.
      * @return array all the ssl certificate this user can use 
      * (each array is the content of the certificates table)
@@ -479,7 +479,7 @@ INSTR(CONCAT(sd.sub,IF(sd.sub!='','.',''),sd.domaine),'.')+1))=?
 
         // Everything is PERFECT and has been thoroughly checked, let's insert those in the DB !
         $db->query(
-            "INSERT INTO certificates SET uid=?, status=?, shared=0, fqdn=?, altnames=?, validstart=FROM_UNIXTIME(?), validend=FROM_UNIXTIME(?), sslkey=?, sslcrt=?, sslchain=?, provider=?;",
+            "INSERT INTO certificates SET uid=?, status=?, fqdn=?, altnames=?, validstart=FROM_UNIXTIME(?), validend=FROM_UNIXTIME(?), sslkey=?, sslcrt=?, sslchain=?, provider=?;",
             array($cuid, self::STATUS_OK, $fqdn, $altnames, intval($validstart), intval($validend), $key, $crt, $chain, $provider)
         );
         if (!($id = $db->lastid())) {
@@ -550,7 +550,7 @@ SELECT ?,?,?, FROM_UNIXTIME(?), FROM_UNIXTIME(?), ?, ?, sslcsr FROM certificate 
      * Action may be create/postinst/delete/enable/disable
      * Change the template for this domain name to have the proper CERTIFICATE
      * An algorithm determine the best possible certificate, which may be a BAD one 
-     * (like a generic admin-shared or self-signed for localhost as a last chance)
+     * (like a generic self-signed for localhost as a last chance)
      */
     public function updateDomain($action, $type, $fqdn, $mail = 0, $value = "") {
         global $db, $msg, $dom;
