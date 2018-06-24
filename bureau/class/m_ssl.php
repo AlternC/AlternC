@@ -179,21 +179,27 @@ class m_ssl {
      * try to minimize zero-file-size risk or timing attack
      */
     private function copycert($target,$id) {
-        global $db;
-        $db->query("SELECT * FROM certificate WHERE id=?",array($id));
+        global $db,$msg;
+        $msg->raise("INFO","ssl",_("Copying system certificate $id on $target"));
+        $db->query("SELECT * FROM certificates WHERE id=?",array($id));
         if (!$db->next_record()) return false;
-        if (!file_put_contents("/etc/ssl/certs/".$target.".crt.tmp",trim($db->Record["sslcrt"])."\n".trim($db->Record["sslchain"])))
+        if (!file_put_contents("/etc/ssl/certs/".$target.".pem.tmp",trim($db->Record["sslcrt"])."\n".trim($db->Record["sslchain"]))) {
+            $msg->raise("ERROR","ssl",_("Can't put file into /etc/ssl/certs/".$target.".pem.tmp, failing properly"));            
             return false;
-        chown("/etc/ssl/certs/".$target.".crt.tmp","root");
-        chgrp("/etc/ssl/certs/".$target.".crt.tmp","ssl-cert");
-        chmod("/etc/ssl/certs/".$target.".crt.tmp",0755);
-        if (!file_put_contents("/etc/ssl/private/".$target.".key.tmp",$db->Record["sslkey"])) 
+        }
+        chown("/etc/ssl/certs/".$target.".pem.tmp","root");
+        chgrp("/etc/ssl/certs/".$target.".pem.tmp","ssl-cert");
+        chmod("/etc/ssl/certs/".$target.".pem.tmp",0755);
+        if (!file_put_contents("/etc/ssl/private/".$target.".key.tmp",$db->Record["sslkey"])) {
+            $msg->raise("ERROR","ssl",_("Can't put file into /etc/ssl/private/".$target.".key.tmp, failing properly"));
+            @unlink("/etc/ssl/certs/".$target.".pem.tmp");
             return false;
+        }
         chown("/etc/ssl/private/".$target.".key.tmp","root");
         chgrp("/etc/ssl/private/".$target.".key.tmp","ssl-cert");
         chmod("/etc/ssl/private/".$target.".key.tmp",0750);
         
-        rename("/etc/ssl/certs/".$target.".crt.tmp","/etc/ssl/certs/".$target.".crt");
+        rename("/etc/ssl/certs/".$target.".pem.tmp","/etc/ssl/certs/".$target.".pem");
         rename("/etc/ssl/private/".$target.".key.tmp","/etc/ssl/private/".$target.".key");
         return true;
     }
@@ -232,7 +238,7 @@ INSTR(CONCAT(sd.sub,IF(sd.sub!='','.',''),sd.domaine),'.')+1))=?
                 continue; // this certificate is used (even though it's expired :/ ) 
             }
             $CRTDIR = self::KEY_REPOSITORY . "/" . floor($db->Record["id"]/1000);
-            @unlink($CRTDIR."/".$db->Record["id"].".crt");
+            @unlink($CRTDIR."/".$db->Record["id"].".pem");
             @unlink($CRTDIR."/".$db->Record["id"].".key");
             @unlink($CRTDIR."/".$db->Record["id"].".chain");
             $d=opendir($CRTDIR);
@@ -634,15 +640,15 @@ SELECT ?,?,?, FROM_UNIXTIME(?), FROM_UNIXTIME(?), ?, ?, sslcsr FROM certificate 
         chmod($CRTDIR,0750);
 
         if (
-            !file_exists($CRTDIR . "/" . $cert["id"].".crt") ||
+            !file_exists($CRTDIR . "/" . $cert["id"].".pem") ||
             !file_exists($CRTDIR . "/" . $cert["id"].".key")) {
             // write the files (first time we use a certificate)
-            file_put_contents($CRTDIR . "/" . $cert["id"].".crt", $cert["sslcrt"]);
+            file_put_contents($CRTDIR . "/" . $cert["id"].".pem", $cert["sslcrt"]);
             file_put_contents($CRTDIR . "/" . $cert["id"].".key", $cert["sslkey"]);
             // set the proper rights on those files :
-            chown($CRTDIR . "/" . $cert["id"].".crt","root");
-            chgrp($CRTDIR . "/" . $cert["id"].".crt","ssl-cert");
-            chmod($CRTDIR . "/" . $cert["id"].".crt",0640);
+            chown($CRTDIR . "/" . $cert["id"].".pem","root");
+            chgrp($CRTDIR . "/" . $cert["id"].".pem","ssl-cert");
+            chmod($CRTDIR . "/" . $cert["id"].".pem",0640);
             chown($CRTDIR . "/" . $cert["id"].".key","root");
             chgrp($CRTDIR . "/" . $cert["id"].".key","ssl-cert");
             chmod($CRTDIR . "/" . $cert["id"].".key",0640);
@@ -656,7 +662,7 @@ SELECT ?,?,?, FROM_UNIXTIME(?), FROM_UNIXTIME(?), ?, ?, sslcsr FROM certificate 
         // we have the files, let's fill the output array :
         $output=array(
             "id" => $cert["id"],
-            "crt" => $CRTDIR . "/" . $cert["id"].".crt",
+            "crt" => $CRTDIR . "/" . $cert["id"].".pem",
             "key" => $CRTDIR . "/" . $cert["id"].".key",
         );
         if (file_exists($CRTDIR . "/" . $cert["id"].".chain")) {

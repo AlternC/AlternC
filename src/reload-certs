@@ -30,8 +30,15 @@ $ssl->cron_new_certs();
 $services=array("postfix","dovecot","proftpd","apache2");
 
 foreach($services as $service) {
-    echo "Reloading $service\n";
-    passthru("service $service reload");
-    echo "Done...\n";
+    passthru("service $service status",&$ret);
+    if ($ret!=0) {
+        echo "$service not running, restarting\n";
+        passthru("service $service restart");
+        echo "Done...\n";
+    } else {
+        echo "$service running, reloading\n";
+        passthru("service $service reload");
+        echo "Done...\n";
+    };
 }
 
