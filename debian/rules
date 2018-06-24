@@ -17,10 +17,6 @@ override_dh_install:
 	$(MAKE) install-slave DESTDIR=$(CURDIR)/debian/alternc-slave
 	$(MAKE) install-api DESTDIR=$(CURDIR)/debian/alternc-api
 
-override_dh_fixperms:
-	dh_fixperms
-	chmod 700 debian/alternc/var/lib/alternc/backups
-
 %:
 	dh $@
 
