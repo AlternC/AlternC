@@ -47,16 +47,16 @@ UPDATE `sub_domaines` SET `web_action` = 'UPDATE';
 -- change some variable names :
 
 UPDATE variable
-   SET name="fqdn_dovecot",comment="FQDN name for humans for pop/imap services"
+   SET name="fqdn_dovecot",comment="FQDN name for humans for pop/imap services. If you change it, launch reload-certs"
       WHERE name="mail_human_imap";
 
 UPDATE variable
-   SET name="fqdn_postfix",comment="FQDN name for humans for smtp services"
+   SET name="fqdn_postfix",comment="FQDN name for humans for smtp services. If you change it, launch reload-certs"
       WHERE name="mail_human_smtp";
 
 UPDATE variable
-   SET name="fqdn_proftpd",comment="FQDN name for humans for ftp services"
-      WHERE name="mail_human_ftp";
+   SET name="fqdn_proftpd",comment="FQDN name for humans for ftp services. If you change it, launch reload-certs"
+      WHERE name="ftp_human_name";
 
 DELETE FROM variable WHERE name IN (
   'mail_human_imaps','mail_human_pop3','mail_human_pop3s',
