@@ -479,8 +479,8 @@ INSTR(CONCAT(sd.sub,IF(sd.sub!='','.',''),sd.domaine),'.')+1))=?
 
         // Everything is PERFECT and has been thoroughly checked, let's insert those in the DB !
         $db->query(
-            "INSERT INTO certificates SET uid='?', status=?, shared=0, fqdn=?, altnames=?, validstart=FROM_UNIXTIME(?), validend=FROM_UNIXTIME(?), sslkey=?, sslcrt=?, sslchain=?, provider=?;",
-            array($cuid,self::STATUS_OK,$fqdn,$altnames,intval($validstart),intval($validend),$key,$crt,$chain,$provider)
+            "INSERT INTO certificates SET uid=?, status=?, shared=0, fqdn=?, altnames=?, validstart=FROM_UNIXTIME(?), validend=FROM_UNIXTIME(?), sslkey=?, sslcrt=?, sslchain=?, provider=?;",
+            array($cuid, self::STATUS_OK, $fqdn, $altnames, intval($validstart), intval($validend), $key, $crt, $chain, $provider)
         );
         if (!($id = $db->lastid())) {
             $msg->raise("ERROR","ssl", _("Can't save the Key/Crt/Chain now. Please try later."));
