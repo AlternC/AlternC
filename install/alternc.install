@@ -22,21 +22,28 @@
 # Purpose of file: Main install script, launch it anytime ;) 
 # ----------------------------------------------------------------------
 
-# Somes check before start operations
-if [ `id -u` -ne 0 ]; then
-    echo "must be launched as root"
-    exit 1
-fi
 
 usage(){
     declare -a out
     [[ $# -ne 0 ]] && out+=("\e[31mWarning: $@ \e[0m")
     out+=("
-Usage: ${BASH_SOURCE[0]} [options]
-  -n|--no-fixperms    Skip the -often long- fixperms action
-  -f|--force          Force the execution even if some files changed
-  -s|--slave          Mandatory on instances runnning the alternc-slave module
-  -h|--help           This help
+Usage: alternc.install [-n] [-f] [-s] 
+   or  alternc.install [-h] [-v]
+Launch the template installation and service configuration process of AlternC.
+
+This script should be launched by root after an AlternC package or plugin
+installation or upgrade.
+It should be harmless to launch it anytime, (it will restart services though).
+
+Options:
+  -n, --no-fixperms    Skip the -often long- fixperms action
+  -f, --force          Force the execution even if some files changed
+  -s, --slave          Mandatory on instances runnning the alternc-slave module
+  -h, --help           This help
+  -v, --version        Show AlternC version
+
+AlternC is a free software distributed under GPL-v2+ license.
+For more information see https://alternc.com/
     ")
     echo -e "${out[@]}"
     exit 2
@@ -45,6 +52,9 @@ for i in $*; do
     case "$i" in
         -h|--help)
 	    usage; shift;;
+        -v|--version)
+	    echo "AlternC - hosting software control panel, version @@REPLACED_DURING_BUILD@@"
+	    exit 2;;
         -n|--no-fixperms)
 	    export nofixperms=1; shift;;
         -f|--force)
@@ -57,6 +67,12 @@ for i in $*; do
             usage "unknown option '$i'!"; 
     esac
 done
+
+# Somes check before start operations
+if [ `id -u` -ne 0 ]; then
+    echo "must be launched as root"
+    exit 1
+fi
 
 . /usr/lib/alternc/functions.sh
 

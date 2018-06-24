@@ -1,6 +1,0 @@
-alternc: non-standard-dir-perm var/lib/alternc/backups/ 0700 != 0755
-alternc: setuid-binary usr/lib/alternc/quota_edit 4750 root/www-data
-alternc: setuid-binary usr/lib/alternc/quota_get 4750 root/www-data
-alternc: setuid-binary usr/lib/alternc/mem_add 4750 root/www-data
-alternc: setuid-binary usr/lib/alternc/mem_del 4750 root/www-data
-alternc: setuid-binary usr/lib/alternc/db_create 4750 root/www-data
