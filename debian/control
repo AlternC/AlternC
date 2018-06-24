@@ -5,7 +5,7 @@ Maintainer: Benjamin Sonntag <benjamin@alternc.org>
 Build-Depends-Indep: perl
                    , findutils (>= 4.1.7)
                    , gettext (>= 0.10.40-5)
-Build-Depends: debhelper (>= 8)
+Build-Depends: debhelper (>= 9)
              , po-debconf
 Standards-Version: 3.9.4
 
