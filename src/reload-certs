@@ -1,0 +1,37 @@
+#!/usr/bin/php
+<?php
+/*
+ function called by a sysadmin when (s)he want to reload all
+ certificate configured for all subdomains, including system services.
+ launch as root as :
+ /usr/lib/alternc/reload-certs <enter>
+ system services WILL BE RELOADED
+*/
+
+// Bootstrap
+require_once("/usr/share/alternc/panel/class/config_nochk.php");
+
+if (!isset($ssl)) {
+    echo "OUPS: reload-certs launched, but ssl module not installed, exiting\n";    
+    exit();
+}
+
+if (posix_getuid()!=0) {
+    echo "This script MUST be launched as root, it should be able to overwrite files in /etc/ssl/private\n";
+    exit(-1);
+}
+
+// force reloading all valid certificates in the proper vhosts : 
+variable_set('last_certificate_id',0);
+
+$ssl->cron_new_certs();
+
+// forcibly reload all services (new certificates may apply)
+$services=array("postfix","dovecot","proftpd","apache2");
+
+foreach($services as $service) {
+    echo "Reloading $service\n";
+    passthru("service $service reload");
+    echo "Done...\n";
+}
+

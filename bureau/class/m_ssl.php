@@ -133,6 +133,7 @@ class m_ssl {
             }
             $dom->unlock();
             $this->last_certificate_id=$maxid;
+            variable_set('last_certificate_id',$this->last_certificate_id);
         }
     }
 
@@ -177,7 +178,7 @@ class m_ssl {
      * set the correct permissions
      * try to minimize zero-file-size risk or timing attack
      */
-    function copycert($target,$id) {
+    private function copycert($target,$id) {
         global $db;
         $db->query("SELECT * FROM certificate WHERE id=?",array($id));
         if (!$db->next_record()) return false;

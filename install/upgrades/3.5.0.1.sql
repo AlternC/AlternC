@@ -60,6 +60,7 @@ UPDATE variable
 
 DELETE FROM variable WHERE name IN (
   'mail_human_imaps','mail_human_pop3','mail_human_pop3s',
-  'mail_human_smtps','mail_human_submission'
+  'mail_human_smtps','mail_human_submission', 'mail_human_imap', 'mail_human_smtp',
+  'ftp_human_name'
   );
       

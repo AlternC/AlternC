@@ -29,6 +29,12 @@ if (!isset($argv[1])) {
     echo "FATAL: must be launched from functions_hosting.sh !\n";
     exit();
 }
+
+if (posix_getuid()!=0) {
+    echo "This script MUST be launched as root, it should be able to overwrite files in /etc/ssl/private\n";
+    exit(-1);
+}
+
 if ( ($argv[1]=="create" || $argv[1]=="postinst" || $argv[1]=="delete") ) {
     if (count($argv)<5) {
         echo "FATAL: create/postinst/delete need 4 parameters: type domain mail value\n";
