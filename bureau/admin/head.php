@@ -32,9 +32,10 @@ if (!isset($charset) || ! $charset) $charset="UTF-8";
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $charset; ?>" />
 <title><?php __("AlternC Control Panel"); ?></title>
 
-<link rel="stylesheet" href="js/jquery_ui/css/redmond/jquery-ui-1.10.3.custom.min.css" type="text/css" />
+<link rel="stylesheet" href="/javascript/jquery-ui-themes/redmond/jquery-ui.min.css" type="text/css" />
+<link rel="stylesheet" href="/javascript/prettify/prettify.css" type="text/css" />
 <link rel="stylesheet" href="styles/style.css" type="text/css" />
-<link rel="stylesheet" href="styles/solid.css" type="text/css" />
+<link rel="stylesheet" href="styles/solid.css" type="text/css" /><!-- fontawesome solid font -->
 <link rel="stylesheet" href="styles/fontawesome.css" type="text/css" />
 <?php
 if (file_exists("styles/style-custom.css") ) {
@@ -42,20 +43,16 @@ if (file_exists("styles/style-custom.css") ) {
 }
 
 $favicon = variable_get('favicon', 'favicon.ico' ,'You can specify a favicon, for example /images/my_logo.ico', array('desc'=>'URL','type'=>'string'));
-
 ?>
 
 <link rel="Shortcut Icon" href="<?php echo $favicon;?>" type="image/ico" />
 <link rel="icon" href="<?php echo $favicon;?>" type="image/ico" />
 
 <script src="js/alternc.js" type="text/javascript" ></script>
-<script src="js/jquery.min_embedded.js" type="text/javascript"></script>
-<script src="js/jquery_ui/js/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
-
-<script src="js/jquery.tablesorter.min.js" type="text/javascript"></script>
-
-<link href="prettify/prettify.css" type="text/css" rel="stylesheet" />
-<script src="prettify/prettify.js" type="text/javascript"></script>
+<script src="/javascript/jquery/jquery.min.js" type="text/javascript"></script>
+<script src="/javascript/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
+<script src="/javascript/jquery-tablesorter/jquery.tablesorter.min.js" type="text/javascript"></script>
+<script src="/javascript/prettify/prettify.js" type="text/javascript"></script>
 
 </head>
 <body onload="prettyPrint()">
