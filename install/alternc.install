@@ -320,11 +320,11 @@ if [ -x /usr/sbin/apache2 ]; then
     fi 
     if ! [ -L /etc/apache2/mods-enabled/php$php.load ]
     then
-	    a2enmod php$php
+	a2enmod php$php
     fi
     if ! [ -L /etc/apache2/mods-enabled/rewrite.load ]
     then
-	    a2enmod rewrite
+	a2enmod rewrite
     fi
 
     if [ -e /etc/alternc/apache.pem ]; then
@@ -347,6 +347,12 @@ if [ -x /usr/sbin/apache2 ]; then
 	then
 	    a2enmod expires
 	fi
+=======
+    if ! [ -L /etc/apache2/mods-enabled/expires.load ]
+    then
+	a2enmod expires
+    fi
+>>>>>>> 6fd89455... [fix] alternc.install misc fixes: mysql_query heredoc + phpmyadmin test
 
 	# We enable dovecot SSL certificate instructions: (on wheezy we should use a new file in /etc/dovecot/conf.d/ )
 	( echo "# Don't change this file, it will be overwriten by alternc.install. Change ssl parameters in a file named 99_ssl.conf instead" ; echo "ssl_cert = </etc/alternc/apache.pem" ; echo "ssl_key = </etc/alternc/apache.pem" ) >/etc/dovecot/conf.d/96_ssl.conf
@@ -463,7 +469,10 @@ OLDDESTINATION=`postconf mydestination | awk -F '=' '{print $2}'`
 echo "$OLDDESTINATION" | grep -q -v "$FQDN" && postconf -e "mydestination = $FQDN, $OLDDESTINATION"
 
 # Remove phpmyadmin apache2 configuration
-a2disconf phpmyadmin
+if [ -L /etc/apache2/conf-enabled/phpmyadmin.conf ]
+then
+    a2disconf phpmyadmin
+fi
 
 # Configure PHPMyAdmin
 include_str='include("/etc/alternc/phpmyadmin.inc.php")'
