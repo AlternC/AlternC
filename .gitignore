@@ -19,6 +19,7 @@ debian/alternc-squirrelmail
 debian/alternc-upnp
 debian/files
 debian/.debhelper
+debian/debhelper-build-stamp
 lang/de_DE.po
 lang/es_ES.po
 lang/fr_FR.po

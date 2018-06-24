@@ -19,6 +19,8 @@ Depends: debianutils (>= 1.13.1)
        , libapache2-mod-php5 | libapache2-mod-php7.0
        , php5-mysql | php7.0-mysql
        , phpmyadmin
+       , ssl-cert
+       , libjs-prettify
        , postfix
        , proftpd-mod-mysql
        , proftpd-basic
@@ -101,6 +103,8 @@ Depends: debianutils (>= 1.13.1)
          , libapache2-mod-php5 | libapache2-mod-php7.0
          , php5-mysql | php7.0-mysql
          , phpmyadmin
+         , ssl-cert
+	 , libjs-prettify
          , postfix
          , proftpd-mod-mysql
          , proftpd-basic
