@@ -228,6 +228,8 @@ if ((variable_get('sql_max_username_length', NULL)==NULL)||(variable_get('sql_ma
 
 }
 
+// any page can add elements to js/css part of <head> BEFORE including head.php
+$addhead=array('js'=>array(), 'css'=>array()); 
 
 if ($fatalcsrf) {
     require_once("main.php");

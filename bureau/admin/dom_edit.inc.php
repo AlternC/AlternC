@@ -50,7 +50,7 @@ $dom->unlock();
 
 <form action="dom_subdoedit.php" method="post" name="main" id="main">
    <?php csrf_get(); ?>
-    <table border="0">
+    <table class="dom-edit-table">
         <tr>
             <td>
             <input type="hidden" name="domain" value="<?php ehe($domain) ?>" />
@@ -64,6 +64,7 @@ $dom->unlock();
    }
 ?></td><td>
    <input type="text" class="int" name="sub" style="text-align:right" value="<?php ehe($sub); ?>" size="22" id="sub" /><span class="int" id="newsubname">.<?php ehe($domain); ?></span></td>
+   <td></td>
         </tr>
     <?php 
       $first_advanced=true;
@@ -81,10 +82,8 @@ $dom->unlock();
           $lst_advanced[]=$dt['name'];
           if ($first_advanced) {
             $first_advanced=false;
-            echo "<tr><td colspan=\"2\" class=\"advdom\"></td></tr>";
             echo "<tr id='domtype_show' onClick=\"domtype_advanced_show();\"><td colspan='2'><a href=\"javascript:domtype_advanced_show();\"><b>+ "; __("Show advanced options"); echo "</b></a></td></tr>";
             echo "<tr id='domtype_hide' onClick=\"domtype_advanced_hide();\" style='display:none'><td colspan='2'><a href=\"javascript:domtype_advanced_hide();\"><b>- "; __("Hide advanced options"); echo "</b></a></td></tr>";
-            echo "<tr><td colspan=\"2\" class=\"advdom\"></td></tr>";
           }
         }
     ?>
@@ -126,19 +125,29 @@ $dom->unlock();
             break;
         } // switch ?>
       </td>
+        <td>
+<?php if ($dt['has_https_option']) { ?>
+
+     <select class="inl" name="https_<?php ehe($dt['name']); ?>" id="https_<?php ehe($dt['name']); ?>">
+            <option value="http"<?php selected((strtoupper($type)==strtoupper($dt['name']) && $sd["https"]=="http") || false); ?>><?php __("HTTP Only (redirect HTTPS to HTTP)"); ?></option>
+            <option value="https"<?php selected((strtoupper($type)==strtoupper($dt['name']) && $sd["https"]=="http") || true); ?>><?php __("HTTPS Only (redirect HTTP to HTTPS)"); ?></option>
+            <option value="both"<?php selected((strtoupper($type)==strtoupper($dt['name']) && $sd["https"]=="http") || false); ?>><?php __("Both HTTP and HTTPS hosted at the same place"); ?></option>
+            </select>
+<?php  } ?>
+        </td>
     </tr>
     <?php } // foreach ?>
 
         <tr class="trbtn">
-            <td colspan="2"><input type="submit" class="inb ok" name="add" onclick='return check_type_selected();' value="<?php
+            <td colspan="2"><button type="submit" class="inb ok" name="add" onclick='return check_type_selected();'><?php
    if ($isedit) {
  __("Edit this subdomain");
 } else {
  __("Add this subdomain");
 } 
-?>" />
+?></button>
 <?php if ($isedit) { ?>
-              <input type="button" class="inb cancel" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location = 'dom_edit.php?domain=<?php echo $domain; ?>'"/>
+              <button class="inb cancel" name="cancel" onclick="document.location = 'dom_edit.php?domain=<?php echo $domain; ?>'"><?php __("Cancel"); ?></button>
 <?php } ?>
 </td>
         </tr>

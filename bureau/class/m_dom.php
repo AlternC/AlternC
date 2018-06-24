@@ -123,7 +123,6 @@ class m_dom {
         global $quota;
         $obj = array(
             'title' => _("Domains"),
-            'ico' => 'images/dom.png',
             'link' => 'toggle',
             'pos' => 20,
             'links' => array(),
@@ -131,7 +130,6 @@ class m_dom {
 
         if ($quota->cancreate("dom")) {
             $obj['links'][] = array(
-                'ico' => 'images/new.png',
                 'txt' => _("Add a domain"),
                 'url' => "dom_add.php",
             );
@@ -170,7 +168,7 @@ class m_dom {
 
     function domains_type_enable_values() {
         global $db, $msg, $cuid;
-        $msg->log("dom", "domains_type_target_values");
+        $msg->log("dom", "domains_type_enable_values");
         $db->query("desc domaines_type;");
         $r = array();
         while ($db->next_record()) {
@@ -1159,6 +1157,7 @@ class m_dom {
      *  $r["sub"][0-(nsub-1)]["name"] = nom du sous-domaine (NON-complet)
      *  $r["sub"][0-(nsub-1)]["dest"] = Destination (url, ip, local ...)
      *  $r["sub"][0-(nsub-1)]["type"] = Type (0-n) de la redirection.
+     *  $r["sub"][0-(nsub-1)]["https"] = is https properly enabled for this subdomain? (http/https/both)
      *  </pre>
      *  Retourne FALSE si une erreur s'est produite.
      *
@@ -1197,21 +1196,15 @@ class m_dom {
         $r["nsub"] = $db->Record["cnt"];
         $db->free();
         #$db->query("SELECT sd.*, dt.description AS type_desc, dt.only_dns FROM sub_domaines sd, domaines_type dt WHERE compte='$cuid' AND domaine='$dom' AND UPPER(dt.name)=UPPER(sd.type) ORDER BY sd.sub,sd.type");
-        $db->query("SELECT sd.*, dt.description AS type_desc, dt.only_dns, dt.advanced FROM sub_domaines sd LEFT JOIN domaines_type dt on  UPPER(dt.name)=UPPER(sd.type) WHERE compte= ? AND domaine= ? ORDER BY dt.advanced,sd.sub,sd.type ;", array($cuid, $dom));
+        $db->query("SELECT sd.*, dt.description AS type_desc, dt.only_dns, dt.advanced, dt.has_https_option FROM sub_domaines sd LEFT JOIN domaines_type dt on  UPPER(dt.name)=UPPER(sd.type) WHERE compte= ? AND domaine= ? ORDER BY dt.advanced,sd.sub,sd.type ;", array($cuid, $dom));
         // Pas de webmail, on le cochera si on le trouve.
         $r["sub"] = array();
-        for ($i = 0; $i < $r["nsub"]; $i++) {
-            $db->next_record();
-            $r["sub"][$i] = array();
-            $r["sub"][$i]["id"] = $db->Record["id"];
-            $r["sub"][$i]["name"] = $db->Record["sub"];
-            $r["sub"][$i]["dest"] = $db->Record["valeur"];
-            $r["sub"][$i]["type"] = $db->Record["type"];
-            $r["sub"][$i]["enable"] = $db->Record["enable"];
-            $r["sub"][$i]["type_desc"] = $db->Record["type_desc"];
-            $r["sub"][$i]["only_dns"] = $db->Record["only_dns"];
-            $r["sub"][$i]["web_action"] = $db->Record["web_action"];
-            $r["sub"][$i]["advanced"] = $db->Record["advanced"];
+        $data = $db->fetchAll();
+        foreach($data as $i=>$record) {
+            $r["sub"][$i] = $record;
+            // FIXME : replace sub by name and dest by valeur in the code that exploits this function :
+            $r["sub"][$i]["name"] = $record["sub"];
+            $r["sub"][$i]["dest"] = $record["valeur"];
             $r["sub"][$i]["fqdn"] = ((!empty($r["sub"][$i]["name"])) ? $r["sub"][$i]["name"] . "." : "") . $r["name"];
         }
         $db->free();
@@ -1255,11 +1248,26 @@ class m_dom {
         $r["type_desc"] = $db->Record["type_desc"];
         $r["only_dns"] = $db->Record["only_dns"];
         $r["web_action"] = $db->Record["web_action"];
+        $r["https"] = $db->Record["https"];
         $db->free();
         return $r;
     } // get_sub_domain_all
 
 
+    function clean_https_value($type, $https) {
+        global $db;
+        $db->query("select has_https_option from domaines_type where name= ? ;", array($type));
+        if (!$db->next_record()) {
+            return "";
+        }
+        if ($db->Record["has_https_option"]) {
+            $https=strtolower($https);
+            if ($https!="http" && $https!="https" && $https!="both") {
+                return "both";
+            }
+            return $https;
+        } else return "";
+    }
     /**
      * @param integer $type
      * @param string $value
@@ -1374,6 +1382,45 @@ class m_dom {
 
 
     /**
+     * set the HTTPS preference for a subdomain.
+     * @param integer the sub_domain_id (will be checked against the user ID identity)
+     * @param string the provider (if not empty, will be checked against an existing certificate for this subdomain)
+     * @return boolean true if the preference has been set
+     */
+    function set_subdomain_ssl_provider($sub_domain_id,$provider) { 
+        global $db, $msg, $cuid, $ssl;
+        $msg->log("dom", "set_sub_domain_ssl_provider", $sub_domain_id." / ".$provider);
+        // Locked ?
+        if (!$this->islocked) {
+            $msg->raise("ERROR", "dom", _("--- Program error --- No lock on the domains!"));
+            return false;
+        }
+        $db->query("SELECT * FROM sub_domaines WHERE id=?",array($sub_domain_id));
+        if (!$db->next_record() || $db->Record["compte"]!=$cuid) {
+            $msg->raise("ERROR", "dom", _("Subdomain not found"));
+            return false;
+        }
+        $fqdn=$db->Record["sub"].(($db->Record["sub"])?".":"").$db->Record["domaine"];
+        $certs = $ssl->get_valid_certs($fqdn);
+        $provider=strtolower(trim($provider));
+        if ($provider) {
+            $found=false;
+            foreach($certs as $cert) {
+                if ($cert["provider"]==$provider) {
+                    $found=true;
+                }
+            }
+            if (!$found) {
+                $msg->raise("ERROR", "dom", _("No certificate found for this provider and this subdomain"));
+                return false;
+            }
+        }
+        $db->query("UPDATE sub_domaines SET web_action=?, provider=? WHERE id=?",array("UPDATE",$provider,$sub_domain_id));
+        return true;
+    }
+
+    
+    /**
      * Modifier les information du sous-domaine demandé.
      *
      * <b>Note</b> : si le sous-domaine $sub.$dom n'existe pas, il est créé.<br />
@@ -1384,9 +1431,11 @@ class m_dom {
      * @param integer $type Type de sous-domaine (local, ip, url ...)
      * @param string $dest Destination du sous-domaine, dépend de la valeur
      *  de $type (url, ip, dossier...)
+     * @param string $https the HTTPS behavior : HTTP(redirect https to http), 
+     *  HTTPS(redirect http to https) or BOTH (both hosted at the same place)
      * @return boolean Retourne FALSE si une erreur s'est produite, TRUE sinon.
      */
-    function set_sub_domain($dom, $sub, $type, $dest, $sub_domain_id = 0) {
+    function set_sub_domain($dom, $sub, $type, $dest, $sub_domain_id = 0, $https) {
         global $db, $msg, $cuid, $bro;
         $msg->log("dom", "set_sub_domain", $dom . "/" . $sub . "/" . $type . "/" . $dest);
         // Locked ?
@@ -1398,7 +1447,6 @@ class m_dom {
         $sub = trim(trim($sub), ".");
         $dom = strtolower($dom);
         $sub = strtolower($sub);
-
         //    if (!(($sub == '*') || ($sub=="") || (preg_match('/([a-z0-9][\.\-a-z0-9]*)?[a-z0-9]/', $sub)))) {
         $fqdn = checkfqdn($sub);
         // Special cases : * (all subdomains at once) and '' empty subdomain are allowed.
@@ -1408,10 +1456,10 @@ class m_dom {
         }
 
         if (!$this->check_type_value($type, $dest)) {
-            //plutot verifier si la chaine d'erreur est vide avant de raise sinon sa veut dire que l(erruer est deja remonté
             // error raised by check_type_value
             return false;
         }
+        $https=$this->clean_https_value($type, $https);
 
         // On a épuré $dir des problémes eventuels ... On est en DESSOUS du dossier de l'utilisateur.
         if (($t = checkfqdn($dom))) {
@@ -1429,8 +1477,8 @@ class m_dom {
         }
 
         // Re-create the one we want
-        if (!$db->query("INSERT INTO sub_domaines (compte,domaine,sub,valeur,type,web_action) VALUES (?, ?, ?, ?, ?, 'UPDATE');", array( $cuid , $dom , $sub , $dest , $type ))) {
-            echo "query failed: " . $db->Error;
+        if (!$db->query("INSERT INTO sub_domaines (compte,domaine,sub,valeur,type,web_action,https) VALUES (?, ?, ?, ?, ?, 'UPDATE',?);", array( $cuid , $dom , $sub , $dest , $type, $https ))) {
+            $msg->raise("ERROR", "dom", _("The parameters for this subdomain and domain type are invalid. Please check for subdomain entries incompatibility"));
             return false;
         }
 

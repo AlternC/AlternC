@@ -634,43 +634,46 @@ function eoption($values, $cur, $onedim = false) {
 
 /**
  * Echo the HTMLSpecialChars version of a value.
+ * (or return it if display=false
  * Must be called when pre-filling fields values in forms such as : 
  * <input type="text" name="toto" value="<?php ehe($toto); ?>" />
  * Use the charset of the current language for transcription
  * 
  * @global string $charset
  * @param string $str
- * @param boolean $affiche
+ * @param boolean $display
  * @return string
  */
-function ehe($str, $affiche = TRUE) {
+function ehe($str, $display = TRUE) {
     global $charset;
-    $retour = htmlspecialchars($str, ENT_QUOTES|ENT_SUBSTITUTE, $charset);
-    if ($affiche) {
-        echo $retour;
+    $quoted = htmlspecialchars($str, ENT_QUOTES|ENT_SUBSTITUTE, $charset);
+    if ($display) {
+        echo $quoted;
     }
-    return $retour;
+    return $quoted;
 }
+
 
 
 /**
  * Echo the URLENCODED version of a value.
+ * (or return it if display=false)
  * Must be called when pre-filling fields values in URLS such as : 
  * document.location='logs_tail.php?file=<?php eue($file); ?>
  * Use the charset of the current language for transcription
  * 
  * @global string $charset
  * @param string $str
- * @param boolean $affiche
+ * @param boolean $display
  * @return string
  */
-function eue($str, $affiche = TRUE) {
+function eue($str, $display = TRUE) {
     global $charset;
-    $retour = urlencode($str);
-    if ($affiche) {
-        echo $retour;
+    $quoted = urlencode($str);
+    if ($display) {
+        echo $quoted;
     }
-    return $retour;
+    return $quoted;
 }
 
 

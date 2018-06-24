@@ -61,10 +61,10 @@ for($i=0;$i<count($rdb);$i++) {
 		<td align="center"><input type="checkbox" class="inc" id="del_<?php echo $val["db"]; ?>" name="del_<?php echo $val["db"]; ?>" value="<?php echo ($val["db"]); ?>" /></td>
 	   	<td><label for="del_<?php echo $val["db"]; ?>"><?php echo $val["db"]; ?></label></td>
 <?php if ( variable_get('sql_allow_users_backups') ) { ?>
-		<td><div class="ina down"><a href="sql_bck.php?id=<?php echo $val["db"] ?>"><?php __("Backup"); ?></a></div></td>
+		<td><div class="ina backup"><a href="sql_bck.php?id=<?php echo $val["db"] ?>"><?php __("Backup"); ?></a></div></td>
 <?php } // sql_allow_users_backups ?>
-		<td><div class="ina up"><a href="sql_restore.php?id=<?php echo $val["db"] ?>"><?php __("Restore"); ?></a></div></td>
-		<td><div class="ina configure"><a href="sql_getparam.php?dbname=<?php echo $val["db"] ?>"><?php __("Show Settings"); ?></a></div></td>
+		<td><div class="ina restore"><a href="sql_restore.php?id=<?php echo $val["db"] ?>"><?php __("Restore"); ?></a></div></td>
+		<td><div class="ina settings"><a href="sql_getparam.php?dbname=<?php echo $val["db"] ?>"><?php __("Show Settings"); ?></a></div></td>
 		<td><code><?php echo format_size($val["size"]); ?></code></td>
 	</tr>
 <?php
@@ -73,7 +73,7 @@ for($i=0;$i<count($rdb);$i++) {
  }
 ?>
 <tr><td colspan="6">
-   <input type="submit" name="sub" value="<?php __("Delete the checked databases"); ?>" class="inb delete" />
+   <button type="submit" name="sub" class="inb delete"><?php __("Delete the checked databases"); ?></button>
 </td></tr>
 </table>
 </form>

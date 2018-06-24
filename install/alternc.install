@@ -293,9 +293,9 @@ echo "."
 rm -f $SED_SCRIPT
 
 ######################################################################## 
-# Ad-hoc fixes
-#
+# Ad-hoc fixes 
 
+# add php.ini directives for AlternC in any installed php version:
 php="`ls /usr/lib/apache*/*/*php*.so | sed -e 's/^.*libphp\(.*\)\.so$/\1/' | tail -1`"
 if [ "$php" = "7.0" ]
 then
@@ -306,66 +306,74 @@ else
     ln -fs /etc/alternc/alternc.ini /etc/php$php/cli/conf.d/alternc.ini || true
 fi
 
+# Create the default certificate if needed (requires openssl)
+make-ssl-cert generate-default-snakeoil
+
+/usr/bin/mysql --defaults-file=/etc/alternc/my.cnf -Bs <<EOF
+SET SESSION sql_mode="NO_AUTO_VALUE_ON_ZERO" ; 
+INSERT IGNORE INTO certificates 
+  (id,uid,status,fqdn,validstart,validend,sslkey,sslcrt,provider) 
+  VALUES 
+  (0, 2000, 1, "AlternC Default Certificate", NOW(), DATE_ADD(NOW(),INTERVAL 20 YEAR), 
+  "$(cat /etc/ssl/private/ssl-cert-snakeoil.key)",
+  "$(cat /etc/ssl/certs/ssl-cert-snakeoil.pem)",
+  "snakeoil");
+EOF
+
+# backward compatibility: in case you still use apache.pem
+# we are now storing certificates in /etc/ssl/certs/alternc-<servicename>.pem
+# and private keys in /etc/ssl/private/alternc-<servicename>.key
+if [ ! -e /etc/alternc/apache.pem ]; then
+    cat /etc/ssl/private/ssl-cert-snakeoil.key /etc/ssl/certs/ssl-cert-snakeoil.pem > /etc/alternc/apache.pem
+fi
+
+# set services certificates in case we don't already have them:
+# we set them to snakeoil: a provider MUST be installed to obtain a proper certificate automagically
+for service in postfix dovecot proftpd panel
+do
+    if [ ! -e "/etc/ssl/certs/alternc-${service}.pem" -o ! -e "/etc/ssl/private/alternc-${service}.key" ]
+    then
+	cat /etc/ssl/private/ssl-cert-snakeoil.key >"/etc/ssl/private/alternc-${service}.key"
+	cat /etc/ssl/certs/ssl-cert-snakeoil.pem >"/etc/ssl/certs/alternc-${service}.pem"
+    fi
+done
+
+# ensure dovecot, postfix, apache, can access ssl certificates:
+adduser dovecot ssl-cert
+adduser www-data ssl-cert
+adduser postfix ssl-cert
+
+run-parts --arg=certificates /usr/lib/alternc/install.d
+
 if [ -x /usr/sbin/apache2 ]; then
     # hook 
     run-parts --arg=apache2 /usr/lib/alternc/install.d 
     a2enmod mpm_itk
     
-    s=""
+    s="apache2"
     # unused from AlternC 1.0, FIXME: remove it later
     if [ -L /etc/apache2/mods-enabled/vhost_alias.load ]
     then
         a2dismod vhost_alias
-        s="apache2"
     fi 
     if ! [ -L /etc/apache2/mods-enabled/php$php.load ]
     then
-	    a2enmod php$php
+	a2enmod php$php
     fi
     if ! [ -L /etc/apache2/mods-enabled/rewrite.load ]
     then
-	    a2enmod rewrite
+	a2enmod rewrite
     fi
-    if [ -e /etc/alternc/apache.pem ]; then
-        # We enable proftpd tls module
-        cat /etc/proftpd/modules.conf | sed -e 's/^#LoadModule mod_tls.c/LoadModule mod_tls.c/' > /etc/proftpd/modules.conf.alternc-new
-        mv /etc/proftpd/modules.conf.alternc-new /etc/proftpd/modules.conf 
-        cp /etc/proftpd/modules.conf /etc/alternc/templates/proftpd/
-        # We enable apache2 SSL : 
-        if [ ! -L /etc/apache2/mods-enabled/ssl.load ] ; then
-            a2enmod ssl
-            s="apache2"
-        fi
-        if [ ! -h /etc/apache2/conf-available/alternc-ssl.conf ] && [ -e /etc/apache2/conf-available/ ]; then
-            ln -sf /etc/alternc/apache2-ssl.conf /etc/apache2/conf-available/alternc-ssl.conf
-	    a2enconf alternc-ssl
-            s="apache2"
-        fi
-
-	# We enable dovecot SSL certificate instructions: (on wheezy we should use a new file in /etc/dovecot/conf.d/ )
-	( echo "# Don't change this file, it will be overwriten by alternc.install. Change ssl parameters in a file named 99_ssl.conf instead" ; echo "ssl_cert = </etc/alternc/apache.pem" ; echo "ssl_key = </etc/alternc/apache.pem" ) >/etc/dovecot/conf.d/96_ssl.conf
-
-    else
-        # We disable proftpd tls module
-        cat /etc/proftpd/modules.conf | sed -e 's/^LoadModule mod_tls.c/#LoadModule mod_tls.c/' > /etc/proftpd/modules.conf.alternc-new
-        mv /etc/proftpd/modules.conf.alternc-new /etc/proftpd/modules.conf 
-        cp /etc/proftpd/modules.conf /etc/alternc/templates/proftpd/
-
-	# We disable dovecot SSL certificate instructions: (on wheezy we should remove a file in /etc/dovecot/conf.d/ )
-	( echo "# Don't change this file, it will be overwriten by alternc.install. Change ssl parameters in a file named 99_ssl.conf instead" ; echo "ssl_cert = </etc/ssl/certs/ssl-cert-snakeoil.pem" ; echo "ssl_key = </etc/ssl/private/ssl-cert-snakeoil.key" ) >/etc/dovecot/conf.d/96_ssl.conf
-
-        echo "SSL not configured"
-        echo "create a certificate in /etc/alternc/apache.pem and rerun alternc.install"
+    if ! [ -L /etc/apache2/mods-enabled/expires.load ]
+    then
+	a2enmod expires
     fi
-    if [ ! -h /etc/apache2/conf-available/alternc.conf ] && [ -e /etc/apache2/conf-available/ ]; then
-        ln -sf /etc/alternc/apache2.conf /etc/apache2/conf-available/alternc.conf
-	a2enconf alternc.conf
-        s="apache2"
+
+    if [ ! -h /etc/apache2/conf-available/alternc-ssl.conf ] && [ -e /etc/apache2/conf-available/ ]; then
+        ln -sf /etc/alternc/apache2-ssl.conf /etc/apache2/conf-available/alternc-ssl.conf
+        a2enconf alternc-ssl
     fi
-    if [ -e /etc/apache2/sites-enabled/000-default.conf ]; then
-        a2dissite 000-default
-        s="apache2"
-    fi
+
     SERVICES="$SERVICES $s"
 fi
 
@@ -425,28 +433,7 @@ else
     postfix_conf=/etc/alternc/postfix/postfix.cf
 fi
 grep -v '^\ *#' $postfix_conf |while read line ; do
-   if echo "$line" | grep -qi '^smtpd_tls_dcert_file' ;then
-     line_strip=`echo "$line"|tr -d '[:blank:]'`
-     pattern="*="
-     cert_file=${line_strip#$pattern}
-     echo $cert_file
-     echo $line
-     echo $line_strip
-     if [ -e $cert_file ];then
-        postconf -e "$line"
-     else
-        echo -e "\033[31m*****************************************************"
-        echo "* The certificate file : $cert_file does not exists *"
-	echo "* If you want to be able to use SSL/TLS             *"
-        echo "* please go to https://alternc.com/SSL              *"
-	echo "* to get information on how to create a certificate *"
-        echo "* Finally relaunch alternc.install                  *"
-        echo "*****************************************************"
-	echo -e "\033[0m"
-     fi
-  else
-        postconf -e "$line"
-  fi
+    postconf -e "$line"
 done
 
 # Conviguring delivery used by Postfix
@@ -457,7 +444,15 @@ OLDDESTINATION=`postconf mydestination | awk -F '=' '{print $2}'`
 echo "$OLDDESTINATION" | grep -q -v "$FQDN" && postconf -e "mydestination = $FQDN, $OLDDESTINATION"
 
 # Remove phpmyadmin apache2 configuration
-a2disconf phpmyadmin
+if [ -L /etc/apache2/conf-enabled/phpmyadmin.conf ]
+then
+    a2disconf phpmyadmin
+fi
+# Remove global /javascript alias (side effect warning)
+if [ -L /etc/apache2/conf-enabled/javascript-common.conf ]
+then
+    a2disconf javascript-common
+fi
 
 # Configure PHPMyAdmin
 include_str='include("/etc/alternc/phpmyadmin.inc.php")'

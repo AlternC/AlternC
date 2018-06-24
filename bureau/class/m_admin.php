@@ -80,7 +80,6 @@ class m_admin {
         }
         $obj = array(
             'title' => _("Administration"),
-            'ico' => 'images/admin.png',
             'link' => 'toggle',
             'class' => 'adminmenu',
             'pos' => 10,

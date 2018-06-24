@@ -41,8 +41,11 @@ if (!$r=$dom->get_domain_all($domain)) {
 }
 $dom->unlock();
 
+if (isset($_GET["msg"])) {
+    $msg->raise("INFO","dom",$_GET["msg"]);
+}
 ?>
-<h3><img src="images/dom.png" alt="" />&nbsp;<?php printf(_("Manage %s"),$domain); ?></h3>
+<h3><i class="fas fa-globe-africa"></i> <?php printf(_("Manage %s"),$domain); ?></h3>
 <?php
 echo $msg->msg_html_all();
 ?>
@@ -139,10 +142,11 @@ if ( ! empty($problems) ) {
 ?>
 <table class="tlist" id="dom_edit_table">
 <thead>
-<tr><th colspan="2"> </th><th><?php __("Subdomain"); ?></th><th><?php __("Type");?></th><th><?php __("Status")?></th><th></th></tr>
+    <tr><th colspan="2"> </th><th><?php __("Subdomain"); ?></th><th><?php __("HTTPS"); ?></th><th><?php __("Type");?></th><th><?php __("Status")?></th><th></th></tr>
 </thead>
 <?php
 $hasadvanced=false;
+// this loop expect the table to be sorted with advanced entries AFTER normal ones :
 for($i=0;$i<$r["nsub"];$i++) {
 if ($r["sub"][$i]["advanced"] && !$hasadvanced) {
  $hasadvanced=true;
@@ -152,7 +156,7 @@ if ($r["sub"][$i]["advanced"] && !$hasadvanced) {
 <p class="alert alert-warning"><?php __("The following entries are advanced ones, edit them at your own risks."); ?></p>
 <table class="tlist" id="dom_edit_table">
 <thead>
-<tr><th colspan="2"> </th><th><?php __("Subdomain"); ?></th><th><?php __("Type");?></th><th><?php __("Status")?></th><th></th></tr>
+ <tr><th colspan="2"> </th><th><?php __("Subdomain"); ?></th><th><?php __("HTTPS"); ?></th><th><?php __("Type");?></th><th><?php __("Status")?></th><th></th></tr>
 </thead>
 <?php
 
@@ -179,7 +183,27 @@ $disabled_class=in_array(strtoupper($r['sub'][$i]['enable']),array('DISABLED','D
 		</td>
     <?php } // end IF ==DELETE ?>
 		<td><div class="retour-auto <?php echo $disabled_class; ?>"><a href="http://<?php echo $r["sub"][$i]["fqdn"] ?>" target="_blank"><?php echo $r["sub"][$i]["fqdn"]; ?></a></div></td>
-  <td><div class="retour-auto <?php echo $disabled_class; ?>"><?php if ($r['sub'][$i]['type_desc']) { __($r['sub'][$i]['type_desc']); } else { echo __("ERROR, please check your server setup"); } ?>
+<td>
+<?php
+if (!$r["sub"][$i]["only_dns"]) {
+    switch ($r["sub"][$i]["https"]) {
+    case "http":
+        __("HTTP only");
+        break;
+    case "https":
+        __("HTTPS only");
+        break;
+    case "both":
+        __("HTTP and HTTPS");
+        break;
+    default:
+        __("Unknown");
+        break;
+    }
+}
+?>
+</td>
+<td><div class="retour-auto <?php echo $disabled_class; ?>"><?php if ($r['sub'][$i]['type_desc']) { __($r['sub'][$i]['type_desc']); } else { echo __("ERROR, please check your server setup"); } ?>
  <?php 
  //if ($r["sub"][$i]['type'] === 'VHOST') {
  if ( @$dt[$r["sub"][$i]['type']]['target'] === 'DIRECTORY') {
@@ -234,7 +258,15 @@ foreach ($problems as $pr => $lm) { // $problems can be empty but can't be null/
   echo "<script type='text/javascript'>$(\"tr[data-fqdn='".$pr."']\").addClass('alert-danger-tr');</script>\n";
 }
 ?>
-</div>
+
+<p>&nbsp;</p>
+<hr />
+<p>
+   <a class="inb ssl" href="dom_sslpref.php?domain=<?php ehe($domain); ?>"><?php __("HTTPS Preferences for this domain");?></a>
+</p>
+
+
+</div> <!-- tabsdom-editsub -->
 
 
 <div id="tabsdom-addsub">
@@ -339,6 +371,12 @@ if (!$r['noerase']) {
 </div>
     <?php
 } ?>
+
+<div id="tabsdom-ssl">  
+<div id="sslpref">
+     </div>
+</div> <!-- tabsdom-ssl -->
+
 </div> <!-- tabsdom -->
 <script type="text/javascript">
 
@@ -357,6 +395,14 @@ function update_dns_content(){
       $("#divdumpdns").html(html);
     });
   }
+}
+
+function update_ssl_content(){
+    $.ajax({
+      url: "dom_ssl.inc.php?domain=<?php echo urlencode($domain)?>",
+      }).done(function( html ) {
+      $("#sslpref").html(html);
+    });
 }
 
 function force_update_dns_content(){

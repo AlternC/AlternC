@@ -44,7 +44,6 @@ class m_hta {
     function hook_menu() {
         $obj = array(
             'title' => _("Protected folders"),
-            'ico' => 'images/password.png',
             'link' => 'hta_list.php',
             'pos' => 50,
         );
