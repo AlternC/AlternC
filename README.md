@@ -8,7 +8,7 @@ This software consist of an automatic install and configuration system, a web co
 
 Technically, AlternC is based on Debian GNU/Linux distribution and it depends on other software such as Apache, Postfix, Dovecot, Mailman (...). It also contains an API documentation so that users can easily customize their web desktop.
 
-This project native tongue is French, and the code is commented in English. The packages are available at least in French and English, German and Spanish interfaces are usually available too.
+This project native language is French, and the code is commented in English. The packages are available at least in French and English, German and Spanish interfaces are usually available too.
 
 
 ## Installation
