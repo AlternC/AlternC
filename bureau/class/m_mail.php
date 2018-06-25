@@ -61,13 +61,8 @@ class m_mail {
     var $total;
 
     // Human server name for help
-    var $srv_submission;
-    var $srv_smtp;
-    var $srv_smtps;
-    var $srv_imap;
-    var $srv_imaps;
-    var $srv_pop3;
-    var $srv_pop3s;
+    var $srv_postfix;
+    var $srv_dovecot;
     var $cache_domain_mail_size = array();
     var $enum_domains = array();
 
@@ -77,13 +72,8 @@ class m_mail {
      */
     function m_mail() {
         global $L_FQDN;
-        $this->srv_submission = variable_get('mail_human_submission', $L_FQDN, 'Human name for mail server (submission protocol), leave empty to disable help', array('desc' => 'Name', 'type' => 'string'));
-        $this->srv_smtp = variable_get('mail_human_smtp', $L_FQDN, 'Human name for mail server (SMTP protocol), leave empty to disable help', array('desc' => 'Name', 'type' => 'string'));
-        $this->srv_smtps = variable_get('mail_human_smtps', $L_FQDN, 'Human name for mail server (SMTPS protocol), leave empty to disable help', array('desc' => 'Name', 'type' => 'string'));
-        $this->srv_imap = variable_get('mail_human_imap', $L_FQDN, 'Human name for IMAP mail server', array('desc' => 'Name', 'type' => 'string'));
-        $this->srv_imaps = variable_get('mail_human_imaps', $L_FQDN, 'Human name for IMAPS mail server', array('desc' => 'Name', 'type' => 'string'));
-        $this->srv_pop3 = variable_get('mail_human_pop3', $L_FQDN, 'Human name for POP3 mail server', array('desc' => 'Name', 'type' => 'string'));
-        $this->srv_pop3s = variable_get('mail_human_pop3s', $L_FQDN, 'Human name for POP3s mail server', array('desc' => 'Name', 'type' => 'string'));
+        $this->srv_postfix = variable_get('fqdn_postfix', $L_FQDN, 'FQDN name for humans for smtp services. If you change it, launch reload-certs', array('desc' => 'Name', 'type' => 'string'));
+        $this->srv_dovecot = variable_get('fqdn_dovecot', $L_FQDN, 'FQDN name for humans for pop/imap services. If you change it, launch reload-certs', array('desc' => 'Name', 'type' => 'string'));
     }
 
 
@@ -93,7 +83,6 @@ class m_mail {
     function hook_menu() {
         $obj = array(
             'title' => _("Email Addresses"),
-            'ico' => 'images/mail.png',
             'link' => 'toggle',
             'pos' => 30,
             'links' => array(),

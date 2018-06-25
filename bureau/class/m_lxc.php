@@ -55,7 +55,6 @@ class m_lxc implements vm {
 
         $obj = array(
             'title' => _("Console access"),
-            'ico' => 'images/ssh.png',
             'link' => 'vm.php',
             'pos' => 95,
         );

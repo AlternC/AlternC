@@ -103,7 +103,10 @@ function shuffleArray(array) {
 }
 
 function generate_password_html(id, size, field1, field2, classcount) {
-  $("#z"+id).html("<input id='inp"+id+"' type='textbox' size=8 readonly='readonly' value='"+generate_password(size, classcount)+"' />&nbsp;<a href='javascript:generate_password_html("+id+","+size+",\""+field1+"\",\""+field2+"\");'><img src='/images/refresh.png' alt='Refresh' title='Refresh'/></a>");
+    $("#z"+id).html("<input id='inp"+id+
+		    "' type='textbox' size=8 readonly='readonly' value='"+generate_password(size, classcount)+
+		    "' />&nbsp;<a href='javascript:generate_password_html("+id+","+size+",\""+field1+"\",\""+field2+
+		    "\");'><img src='/images/refresh.png' alt='Refresh' title='Refresh'/></a>");
   $("#inp"+id).focus();
   $("#inp"+id).select();
   if (field1 != "") { $(field1).val( $("#inp"+id).val() ); }

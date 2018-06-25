@@ -222,6 +222,9 @@ CREATE TABLE IF NOT EXISTS sub_domaines (
   web_action enum ('OK','UPDATE','DELETE') NOT NULL default 'UPDATE',
   web_result varchar(255) not null default '',
   enable enum ('ENABLED', 'ENABLE', 'DISABLED', 'DISABLE') NOT NULL DEFAULT 'ENABLED',
+  `certificate_id` INT UNSIGNED NOT NULL DEFAULT '0',
+  `provider` VARCHAR(16) NOT NULL DEFAULT '',
+  `https` VARCHAR(6) NOT NULL, -- SET(http,https,both) (also the suffix of the template name in /etc/alternc/templates/apache2/)
   PRIMARY KEY (id)
 --  ,FOREIGN KEY (type) REFERENCES (domaines_type)
 ) ENGINE=InnoDB;
@@ -471,7 +474,8 @@ CREATE TABLE IF NOT EXISTS `domaines_type` (
     `advanced` BOOLEAN DEFAULT TRUE, -- It's an advanced option
     `create_tmpdir` BOOLEAN NOT NULL DEFAULT FALSE, -- do we create tmp dir ?
     `create_targetdir` BOOLEAN NOT NULL DEFAULT FALSE, -- do we create target dir ?
-PRIMARY KEY ( `name` )
+    `has_https_option` BOOLEAN NOT NULL DEFAULT FALSE, -- shall we show the http/https/both dropdown ?
+    PRIMARY KEY ( `name` )
 ) ENGINE=InnoDB COMMENT = 'Type of domains allowed';
 
 INSERT IGNORE INTO `domaines_type` (name, description, target, entry,                             compatibility,                               only_dns, need_dns, advanced, enable) values
@@ -767,16 +771,11 @@ CREATE TABLE IF NOT EXISTS `csrf` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='csrf tokens for AlternC forms';
 
 
--- make it re-exec-proof
-DELETE FROM alternc_status WHERE name='alternc_version';
-INSERT INTO alternc_status SET name='alternc_version',value='3.4.8.sql';
-
 -- SSL managment
-CREATE TABLE `certificates` (
+CREATE TABLE IF NOT EXISTS `certificates` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `uid` int(10) unsigned NOT NULL,
   `status` tinyint(3) unsigned NOT NULL,
-  `shared` tinyint(3) unsigned NOT NULL,
   `fqdn` varchar(255) NOT NULL,
   `altnames` text NOT NULL,
   `validstart` datetime NOT NULL,
@@ -785,28 +784,15 @@ CREATE TABLE `certificates` (
   `sslkey` text NOT NULL,
   `sslcrt` text NOT NULL,
   `sslchain` text NOT NULL,
-  `ssl_action` varchar(32) NOT NULL,
-  `ssl_result` varchar(32) NOT NULL,
+  `provider` VARCHAR(16) NOT NULL DEFAULT '',
+  `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  KEY `uid` (`uid`),
-  KEY `ssl_action` (`ssl_action`)
+  KEY `uid` (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `certif_alias` (
-  `name` varchar(255) NOT NULL,
-  `content` text NOT NULL,
-  `uid` int(10) unsigned NOT NULL,
-  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`name`),
-  KEY `uid` (`uid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Global aliases defined for SSL certificates FILE validation processes';
 
-CREATE TABLE IF NOT EXISTS `certif_hosts` (
-  `certif` int(10) unsigned NOT NULL,
-  `sub` int(10) unsigned NOT NULL,
-  `uid` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`certif`,`sub`),
-  KEY `uid` (`uid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='VHosts of a user using defined or self-signed certificates';
 
-INSERT IGNORE INTO defquotas VALUES ('ssl', 0, 'default');
+-- make it re-exec-proof
+DELETE FROM alternc_status WHERE name='alternc_version';
+INSERT INTO alternc_status SET name='alternc_version',value='3.5.0.1.sql';
+

@@ -15,15 +15,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AlternC, hosting control panel\n"
 "Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
-"POT-Creation-Date: 2017-10-08 14:47+0200\n"
+"POT-Creation-Date: 2018-06-24 17:17+0200\n"
 "PO-Revision-Date: 2017-10-08 12:49+0000\n"
 "Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
 "Language-Team: Spanish (Spain) (http://www.transifex.com/octopuce/alternc/"
 "language/es_ES/)\n"
+"Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: es_ES\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Type: error
@@ -51,6 +51,14 @@ msgid ""
 msgstr ""
 "Además, si deseas utilizar las cuotas de disco, deves activar las cuotas de "
 "grupo (grpquota) (pero no es obligatorio)"
+
+#. Type: error
+#. Description
+#. Type: error
+#. Description
+#: ../alternc.templates:1001 ../alternc.templates:36001
+msgid "This is a fatal error and will cause the package installation to fail."
+msgstr ""
 
 #. Type: note
 #. Description
@@ -686,6 +694,12 @@ msgstr ""
 #. Type: error
 #. Description
 #: ../alternc.templates:36001
+msgid "Remote mysql: connection error"
+msgstr ""
+
+#. Type: error
+#. Description
+#: ../alternc.templates:36001
 msgid "Connection to the remote MySQL server failed."
 msgstr ""
 
@@ -710,36 +724,24 @@ msgstr ""
 "el valor por omisión de las cuotas que les serán asignadas para este "
 "servicio. "
 
-#. Type: note
-#. Description
-#: ../alternc-awstats.templates:2001
-msgid "Error installing AlternC-Awstats"
-msgstr "Error al instalar AlternC-Awstats"
+#~ msgid "Error installing AlternC-Awstats"
+#~ msgstr "Error al instalar AlternC-Awstats"
 
-#. Type: note
-#. Description
-#: ../alternc-awstats.templates:2001
-msgid ""
-"AlternC-Awstats requires a complete installed AlternC system to get "
-"installed properly!"
-msgstr ""
-"¡AlternC-Awstats requiere una instalación completa de AlternC para poder ser "
-"instalado!"
+#~ msgid ""
+#~ "AlternC-Awstats requires a complete installed AlternC system to get "
+#~ "installed properly!"
+#~ msgstr ""
+#~ "¡AlternC-Awstats requiere una instalación completa de AlternC para poder "
+#~ "ser instalado!"
 
-#. Type: note
-#. Description
-#: ../alternc-awstats.templates:2001
-msgid ""
-"Please install AlternC and CONFIGURE IT before installing alternc-awstats or "
-"additional modules (don't forget to launch 'alternc.install')."
-msgstr ""
-"Favor instalar y CONFIGURAR AlternC antes de instalar alternc-awstats y "
-"otros módulos (no olvidar de lanzar 'alternc.install')."
+#~ msgid ""
+#~ "Please install AlternC and CONFIGURE IT before installing alternc-awstats "
+#~ "or additional modules (don't forget to launch 'alternc.install')."
+#~ msgstr ""
+#~ "Favor instalar y CONFIGURAR AlternC antes de instalar alternc-awstats y "
+#~ "otros módulos (no olvidar de lanzar 'alternc.install')."
 
-#. Type: note
-#. Description
-#: ../alternc-awstats.templates:2001
-msgid ""
-"Please check out the AlternC installation documentation before proceeding."
-msgstr ""
-"Favor leer la documentación de instalación de AlternC antes de continuar. "
+#~ msgid ""
+#~ "Please check out the AlternC installation documentation before proceeding."
+#~ msgstr ""
+#~ "Favor leer la documentación de instalación de AlternC antes de continuar. "

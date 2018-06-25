@@ -56,7 +56,8 @@ install-alternc: install-common
 # Web Panel
 	test -d $(DESTDIR)/usr/share/alternc/panel || mkdir $(DESTDIR)/usr/share/alternc/panel
 	cp -r bureau/* $(DESTDIR)/usr/share/alternc/panel
-	sed -i -e "s/@@REPLACED_DURING_BUILD@@/${MAJOR}/" $(DESTDIR)/usr/share/alternc/panel/class/local.php
+	sed -i -e "s/@@REPLACED_DURING_BUILD@@/${MAJOR}/" $(DESTDIR)/usr/share/alternc/panel/class/local.php $(DESTDIR)/usr/share/alternc/install/alternc.install
+	help2man -n "Hosting control panel software" --no-discard-stderr --section 8 $(DESTDIR)/usr/share/alternc/install/alternc.install -o $(DESTDIR)/usr/share/man/man8/alternc.install.8
 	chown -R root:root $(DESTDIR)/usr/share/alternc/panel
 	chmod -R 644 $(DESTDIR)/usr/share/alternc/panel
 	chmod -R a+X $(DESTDIR)/usr/share/alternc/panel

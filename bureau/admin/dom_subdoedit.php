@@ -35,11 +35,14 @@ getFields($fields);
 
 // here we get a dynamic-named value
 $dynamicvar="t_$type";
+$httpsvar="https_$type";
 $fields = array (
   "$dynamicvar"   => array ("post", "string", ""),
+  "$httpsvar"   => array ("post", "string", ""),
 );
 getFields($fields);
 $value=$$dynamicvar;
+$https=$$httpsvar;
 // The dynamic value is now in $value
 
 $dom->lock();
@@ -52,7 +55,7 @@ if ( (!isset($isinvited) || !$isinvited) && $dt[strtolower($type)]["enable"] != 
 }
 
 if (empty($sub_domain_id)) $sub_domain_id=null;
-$r=$dom->set_sub_domain($domain,$sub,$type,$value, $sub_domain_id);
+$r=$dom->set_sub_domain($domain, $sub, $type, $value, $sub_domain_id, $https);
 
 $dom->unlock();
 

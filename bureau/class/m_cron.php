@@ -70,7 +70,6 @@ class m_cron {
     function hook_menu() {
         $obj = array(
             'title' => _("Scheduled tasks"),
-            'ico' => 'images/schedule.png',
             'link' => 'cron.php',
             'pos' => 120,
         );

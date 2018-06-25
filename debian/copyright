@@ -1,10 +1,10 @@
 
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: AlternC
-Source: https://alternc.org/svn/alternc/
+Source: https://github.com/AlternC/alternc-certbot
 
 Files: *
-Copyright: Copyright 2001-2013 AlternC's development Team <team@alternc.org>
+Copyright: Copyright 2001-2018 AlternC's development Team <team@alternc.org>
 License: GPL-2+
  This program is free software; you can redistribute it
  and/or modify it under the terms of the GNU General Public

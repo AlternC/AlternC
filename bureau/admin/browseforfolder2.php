@@ -91,7 +91,7 @@ $maxlevel=0;
 <title>Recherche d'un dossier</title>
 <link rel="stylesheet" href="styles/style.css" type="text/css" />
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<script src="js/jquery.min_embedded.js" type="text/javascript"></script>
+<script src="/javascript/jquery/jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript">
 /* Fonction appellée lors du lancement d'un popup Fichier : */
 function popupfile() {

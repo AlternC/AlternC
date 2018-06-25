@@ -82,9 +82,7 @@ tbody tr:first-child {
 }
 
 table.tlist > tbody > tr.lst:hover,
-table.tlist > tbody > tr.lst > td:hover,
-form[action="adm_dodel.php"] > table.tlist > tbody > tr:hover,
-form[action="adm_dodel.php"] > table.tlist > tbody > tr > td:hover {
+table.tlist > tbody > tr.lst > td:hover {
   background-color: #DFEEF8 !important;
 }
 
@@ -159,14 +157,6 @@ hr {
   border-width: 1px 0 0 0;
 }
 
-#content > hr, #content br {
-  display: none;
-}
-
-.block_login_page br, td br, form > br, p.hlp > br, td br {
-  display: block !important;
-}
-
 a {
   text-decoration: none;
   color: #337ab7;
@@ -215,21 +205,15 @@ div.ui-accordion-content > ul {
   margin-top: 0px !important;
 }
 
-select {
-  border: 1px solid #999;
+select, .inc, .inl {
+  border: 1px solid #ccc;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   font-size: 13px;
   color: black;
   background: white;
-  text-transform: lowercase;
-}
-
-.inc, .inl {
-  border: 1px solid #999;
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-  font-size: 13px;
-  color: black;
-  background: white;
+  padding: 4px;
 }
 
 #inp1 {
@@ -249,10 +233,10 @@ p > input#file + br + .inb, p > input#file + br + .inb + .inb {
   margin-top: 10px;
 }
 
-input.inb, input.ina{
+input.inb, input.ina, button.inb, button.ina {
   color: black;
   white-space: nowrap;
-  border: 1px solid #999;
+  border: 1px solid black;
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   font-size: 14px;
   padding: 4px 10px 4px 0px;
@@ -265,13 +249,13 @@ input.inb, input.ina{
   height: auto;
 }
 
-input.inb:hover, input.ina:hover {
-  border: 1px solid #999;
+input.inb:hover, input.ina:hover, button.inb:hover, button.ina:hover {
+  border: 1px solid black;
   text-decoration: none;
   background-color: #F0F0F0;
 }
 
-input.inb:focus, input.ina.focus {
+input.inb:focus, input.ina:focus, button.inb:focus, button.ina:focus {
   box-shadow: 0 0 0 0.2rem inbrgba(40, 167, 69, 0.5);
 }
 
@@ -288,13 +272,7 @@ input.inb:focus, input.ina.focus {
   border-color: #eea236;
 }
 
-input.inb.cancel:active {
-  color: #fff;
-  background-color: #f0ad4e;
-  border-color: #eea236;
-}
-
-.cancel:active{
+.cancel:active {
   color: #fff;
   background-color: #f0ad4e;
   border-color: #eea236;
@@ -307,7 +285,7 @@ input.inb.cancel:active {
   border-color: #d43f3a;
 }
 
-input.inb.delete:active {
+.inb.delete:active {
   color: #fff;
   background-color: #d9534f;
   border-color: #d43f3a;
@@ -321,7 +299,7 @@ input.inb.delete:active {
   border-color: #255625;
 }
 
-input.inb.ok:active {
+input.inb.ok:active, input.inb.add:active, button.inb.ok:active, button.inb.add:active {
   color: #fff;
   background-color: #449d44;
   border-color: #255625;
@@ -334,19 +312,13 @@ input.inb.ok:active {
   border-color: #255625;
 }
 
-input.inb.add:active {
-  color: #fff;
-  background-color: #449d44;
-  border-color: #255625;
-}
-
 input.ui-state-hover {
   font-weight: normal;
 }
 
 input.ina, input.inav,
 input.ina:hover, input.inav:hover {
-  border: 1px solid #999;
+  border: 1px solid black;
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   font-size: 14px;
   color: black;
@@ -371,7 +343,7 @@ input.ina:hover, .ina a:hover, .inb a:hover {
 .ina a, a.ina, .inb a, a.inb,.inav a, a.inav {
   color: black;
   white-space: nowrap;
-  border: 1px solid #999;
+  border: 1px solid black;
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   font-size: 14px;
   padding: 4px 10px;
@@ -426,7 +398,7 @@ span#newsubname {
   float: left;
 }
 .bff {
-  border: 1px solid #999;
+  border: 1px solid black;
   background-color: #F0F0F0;
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   font-size: 13px;
@@ -461,10 +433,6 @@ span.intleft, #usernpfx, #newdomwww {
 form#formlist1 > span.int.intleft {
   padding-bottom: 0.14em;
   padding-top: 0.43em;
-}
-
-input[name="domain_id"] + input.inb.add {
-  margin-top: -4px;
 }
 
 #create_dom_list_pfx {
@@ -610,19 +578,27 @@ img {
 #content .alert {
   background-position: 12px center;
   background-repeat: no-repeat;
-  padding-left: 48px;
+  padding-left: 20px;
+  min-height: 32px;
 }
-#content .alert-danger {
-  background-image: url("../images/danger.png");
+#content .alert:before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    padding-right: 20px;
+    font-size: 32px;
+    float: left;
 }
-#content .alert-info{
-  background-image: url("../images/info.png");
+#content .alert-danger:before {
+    content:"\f071";
 }
-#content .alert-success {
-  background-image: url("../images/success.png");
+#content .alert-info:before {
+    content:"\f129";
 }
-#content .alert-warning {
-  background-image: url("../images/warning.png");
+#content .alert-success:before {
+    content:"\f058";
+}
+#content .alert-warning:before {
+    content:"\f06a";
 }
 
 .alerte {
@@ -738,7 +714,8 @@ form[action="mman_edit.php"] > table > tbody > tr.lst1:hover, form[action="mman_
 }
 
 .menu-box a .menu-title {
-  border-bottom: 1px solid #e7e7e7;
+    border-bottom: 1px solid #e7e7e7;
+    padding-left: 10px;
 }
 
 .menu-box li:last-child {
@@ -1083,65 +1060,57 @@ div.progress-bar div.txt {
   background-color: #DFEEF8;
 }
 
-.edit a, a.edit, input.edit {
-  background-image: url(../images/edit.png);
-  background-repeat: no-repeat;
-  background-position: 8px 5px;
-  padding-left: 30px;
+.edit a:before, a.edit:before, input.edit:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f304";
+  padding-right: 6px;
 }
 
-.view a, a.view, input.view {
-  background-image: url(../images/code.png);
-  background-repeat: no-repeat;
-  background-position: 8px 5px;
-  padding-left: 30px;
+.view a:before, a.view:before, input.view:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f002";
+  padding-right: 6px;
 }
 
-.lock a, a.lock, input.lock {
-  background-image: url(../icon/encrypted.png);
-  background-repeat: no-repeat;
-  background-position: 8px 5px;
-  padding-left: 30px;
+.ssl a:before, input.ssl:before, a.ssl:before, .lock a:before, a.lock:before, input.lock:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f023";
+  padding-right: 6px;
 }
 
-.settings a, a.settings, input.settings {
-  background-image: url(../icon/settings.png);
-  background-repeat: no-repeat;
-  background-position: 8px 5px;
-  padding-left: 30px;
+.settings a:before, a.settings:before, input.settings:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f1de";
+  padding-right: 6px;
 }
 
-.ok a, a.ok, input.ok {
-  background-image: url(../icon/ok.png);
-  background-repeat: no-repeat;
-  background-position: 8px 5px;
-  padding-left: 30px;
+.ok a, a.ok, input.ok, button.ok {
   color: #fff;
   background-color: #5cb85c;
   border-color: #4cae4c;
 }
+.ok a:before, a.ok:before, input.ok:before, button.ok:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f00c";
+  padding-right: 6px;
+}
 
-input.ok:hover, input.ok:focus {
-  background-image: url(../icon/ok.png);
-  background-repeat: no-repeat;
-  background-position: 8px 5px;
-  padding-left: 30px;
+input.ok:hover, input.ok:focus, button.ok:focus, button.ok:hover {
   color: #fff;
   background-color: #449d44;
   border-color: #398439;
 }
 
-input[value="Supprimer les utilisateurs cochés"],
-input[value="Delete the checked users"] {
-  margin-bottom: 10px;
-}
-
-.add a, a.add,
-input.add, span.add .ina {
-  background-image: url(../icon/add.png);
-  background-repeat: no-repeat;
-  background-position: 8px 5px;
-  padding-left: 30px;
+.add a:before, a.add:before, input.add:before, span.add .ina:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f067";
+  padding-right: 6px;
 }
 
 div.add > a:hover,
@@ -1151,21 +1120,17 @@ div > .add a:hover, p > a.add:hover {
   border-color: #4cae4c;
 }
 
-input.add:hover, input.add:focus {
-  background-image: url(../icon/add.png);
-  background-repeat: no-repeat;
-  background-position: 8px 5px;
-  padding-left: 30px;
+input.add:hover, input.add:focus, button.add:focus {
   color: #fff;
   background-color: #449d44;
   border-color: #398439;
 }
 
-.delete a, a.delete, input.delete {
-  background-image: url(../icon/delete.png);
-  background-repeat: no-repeat;
-  background-position: 8px 5px;
-  padding-left: 30px;
+.delete a:before, a.delete:before, input.delete:before, button.delete:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f00d";
+  padding-right: 6px;
 }
 
 div.delete a:hover,
@@ -1176,35 +1141,23 @@ div > .delete a:hover, p > a.delete:hover {
 }
 
 input.delete:hover, input.delete:focus {
-  background-image: url(../icon/delete.png);
-  background-repeat: no-repeat;
-  background-position: 8px 5px;
-  padding-left: 30px;
   color: #fff;
   background-color: #d9534f;
   border-color: #d43f3a;
 }
 
-.cancel a, a.cancel, input.cancel {
-  background-image: url(../icon/cancel.png);
-  background-repeat: no-repeat;
-  background-position: 8px 5px;
-  padding-left: 30px;
+.cancel a:before, a.cancel:before, input.cancel:before, button.cancel:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f00d";
+  padding-right: 6px;
 }
 
-input.cancel:hover {
-  background-image: url(../icon/cancel.png);
-  background-repeat: no-repeat;
-  background-position: 8px 5px;
-  padding-left: 30px;
+input.cancel:hover, button.cancel:hover {
   background-color: #fcf8e3;
 }
 
-input.cancel:active {
-  background-image: url(../icon/cancel.png);
-  background-repeat: no-repeat;
-  background-position: 8px 5px;
-  padding-left: 30px;
+input.cancel:active, button.cancel:active {
   background-color: #f0ad4e;
   border-color: #eea236;
 }
@@ -1225,50 +1178,49 @@ input.cancel:active {
   background-color: #dff0d8;
 }
 
-.configure a, a.configure, input.configure {
-  background-image: url(../icon/configure.png);
-  background-repeat: no-repeat;
-  background-position: 8px 5px;
-  padding-left: 30px;
+.input.unlock:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f09c";
+  padding-right: 6px;
 }
 
-.edit a, a.edit, input.edit {
-  background-image: url(../icon/edit.png);
-  background-repeat: no-repeat;
-  background-position: 8px 5px;
-  padding-left: 30px;
+.save a:before, a.save:before, input.save:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f0c7";
+  padding-right: 6px;
 }
 
-.save a, a.save, input.save {
-  background-image: url(../icon/save.png);
-  background-repeat: no-repeat;
-  background-position: 8px 5px;
-  padding-left: 30px;
+h3.backup:before, .backup a:before, a.backup:before, input.backup:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f0a0 \f104";
+  padding-right: 6px;
 }
 
-.down a, a.down, input.down {
-  background-image: url(../icon/save.png);
-  background-repeat: no-repeat;
-  background-position: 8px 5px;
-  padding-left: 30px;
+h3.restore:before, .restore a:before, a.restore:before, input.restore:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f0a0 \f105";
+  padding-right: 6px;
 }
 
-.up a, a.up, input.up {
-  background-image: url(../icon/up.png);
-  background-repeat: no-repeat;
-  background-position: 8px 5px;
-  padding-left: 30px;
-  padding-top: 5px;
-  padding-bottom: 5px;
+th.headerSortUp:before, .sortup:before a, a.sortup:before, input.sortup:before {
+  cursor: pointer;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f15e";
+  padding-right: 6px;
 }
 
-.up a:hover, a.up:hover, input.up:hover {
-  background-image: url(../icon/up.png);
-  background-repeat: no-repeat;
-  background-position: 8px 5px;
-  padding-left: 30px;
-  padding-top: 5px;
-  padding-bottom: 5px;
+
+th.headerSortDown:before, .sortdown:before a, a.sortdown:before, input.sortdown:before {
+  cursor: pointer;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f15d";
+  padding-right: 6px;
 }
 
 #btb1.ina {
@@ -1276,134 +1228,143 @@ input.cancel:active {
   padding-bottom: 4px;
 }
 
-.back a, a.back, input.back {
-  background-image: url(../icon/back.png);
-  background-repeat: no-repeat;
-  background-position: 8px 5px;
-  padding-left: 30px;
+.back a:before, a.back:before, input.back:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f04a";
+  padding-right: 6px;
 }
 
-.admin a, a.admin, input.admin, .admin-menu .menu-title {
-  background-image: url(../images/admin.png);
-  background-repeat: no-repeat;
-  background-position: 8px 10px;
-  padding-left: 30px;
+.permissions a:before, a.permissions:before, input.permissions:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f2bb";
+  padding-right: 6px;
 }
 
-.home a, a.home, input.home, .home-menu .menu-title {
-  background-image: url(../images/home.png);
-  background-repeat: no-repeat;
-  background-position: 8px 10px;
-  padding-left: 30px;
-  margin-top: 10px;
-  border-top: 1px solid #ddd;
+.admin a:before, a.admin:before, input.admin:before, .admin-menu .menu-title:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f552";
+  padding-right: 6px;
 }
 
-.dom a, a.dom, input.dom, .dom-menu .menu-title {
-  background-image: url(../images/dom.png);
-  background-repeat: no-repeat;
-  background-position: 8px 10px;
-  padding-left: 30px;
+.home a:before, a.home:before, input.home:before, .home-menu .menu-title:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f015";
+  padding-right: 6px;
 }
 
-.mail a, a.mail, input.mail, .mail-menu .menu-title {
-  background-image: url(../images/mail.png);
-  background-repeat: no-repeat;
-  background-position: 8px 10px;
-  padding-left: 30px;
+.dom-edit-table td {
+    height: 2.4em;
 }
 
-.bro a, a.bro, input.bro, .bro-menu .menu-title {
-  background-image: url(../images/folder.png);
-  background-repeat: no-repeat;
-  background-position: 8px 10px;
-  padding-left: 30px;
+.dom a:before, a.dom:before, input.dom:before, .dom-menu .menu-title:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f57c";
+  padding-right: 6px;
 }
 
-.hta a, a.hta, input.hta, .hta-menu .menu-title {
-  background-image: url(../images/password.png);
-  background-repeat: no-repeat;
-  background-position: 8px 10px;
-  padding-left: 30px;
+.mail a:before, a.mail:before, input.mail:before, .mail-menu .menu-title:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f0e0";
+  padding-right: 6px;
 }
 
-.ftp a, a.ftp, input.ftp, .ftp-menu .menu-title {
-  background-image: url(../images/ftp.png);
-  background-repeat: no-repeat;
-  background-position: 8px 10px;
-  padding-left: 30px;
+.bro a:before, a.bro:before, input.bro:before, .bro-menu .menu-title:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f07c";
+  padding-right: 6px;
 }
 
-.cron a, a.cron, input.cron, .cron-menu .menu-title {
-  background-image: url(../images/schedule.png);
-  background-repeat: no-repeat;
-  background-position: 8px 10px;
-  padding-left: 30px;
+.hta a:before, a.hta:before, input.hta:before, .hta-menu .menu-title:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f084";
+  padding-right: 6px;
 }
 
-.lxc a, a.lxc, input.lxc, .lxc-menu .menu-title {
-  background-image: url(../images/ssh.png);
-  background-repeat: no-repeat;
-  background-position: 8px 10px;
-  padding-left: 30px;
+.ftp a:before, a.ftp:before, input.ftp:before, .ftp-menu .menu-title:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f0a0";
+  padding-right: 6px;
 }
 
-.mysql a, a.mysql, input.mysql, .mysql-menu .menu-title {
-  background-image: url(../images/mysql.png);
-  background-repeat: no-repeat;
-  background-position: 8px 10px;
-  padding-left: 30px;
+.cron a:before, a.cron:before, input.cron:before, .cron-menu .menu-title:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f017";
+  padding-right: 6px;
 }
 
-.quota a, a.quota, input.quota, .quota-menu .menu-title {
-  background-image: url(../images/quota.png);
-  background-repeat: no-repeat;
-  background-position: 8px 10px;
-  padding-left: 30px;
+.lxc a:before, a.lxc:before, input.lxc:before, .lxc-menu .menu-title:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f120";
+  padding-right: 6px;
 }
 
-.authip a, a.authip, input.authip, .authip-menu .menu-title {
-  background-image: url(../images/ip.png);
-  background-repeat: no-repeat;
-  background-position: 8px 10px;
-  padding-left: 30px;
+.mysql a:before, a.mysql:before, input.mysql:before, .mysql-menu .menu-title:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f1c0";
+  padding-right: 6px;
 }
 
-.log a, a.log, input.log, .log-menu .menu-title {
-  background-image: url(../images/logs.png);
-  background-repeat: no-repeat;
-  background-position: 8px 10px;
-  padding-left: 30px;
+.quota a:before, a.quota:before, input.quota:before, .quota-menu .menu-title:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f200";
+  padding-right: 6px;
 }
 
-.help a, a.help, input.help, .help-menu .menu-title {
-  background-image: url(../images/help.png);
-  background-repeat: no-repeat;
-  background-position: 8px 10px;
-  padding-left: 30px;
+.authip a:before, a.authip:before, input.authip:before, .authip-menu .menu-title:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f5ab";
+  padding-right: 6px;
 }
 
-.lang a, a.lang, input.lang, .lang-menu .menu-title {
-  background-image: url(../images/lang.png);
-  background-repeat: no-repeat;
-  background-position: 8px 10px;
-  padding-left: 30px;
+.log a:before, a.log:before, input.log:before, .log-menu .menu-title:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f1da";
+  padding-right: 6px;
 }
 
-.mem a, a.mem, input.mem, .mem-menu .menu-title {
-  background-image: url(../images/settings.png);
-  background-repeat: no-repeat;
-  background-position: 8px 10px;
-  padding-left: 30px;
+.help a:before, a.help:before, input.help:before, .help-menu .menu-title:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f128";
+  padding-right: 6px;
+}
+
+.lang a:before, a.lang:before, input.lang:before, .lang-menu .menu-title:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f1ab";
+  padding-right: 6px;
+}
+
+.mem a:before, a.mem:before, input.mem:before, .mem-menu .menu-title:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f1de";
+  padding-right: 6px;
 }
 
 
 
-.filter a, a.edit, input.filter {
-  background-image: url(../icon/filter.png);
-  background-repeat: no-repeat;
-  background-position: 8px 5px;
-  padding-left: 30px;
+.filter a:before, a.edit:before, input.filter:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f0b0";
+  padding-right: 6px;
 }
 
 
@@ -1469,7 +1430,7 @@ body .ui-tabs .ui-tabs-panel {
 }
 
 body .ui-tabs .ui-tabs-nav li a {
-  padding: .5em 1em .5em 30px;
+    padding: .5em 1em .5em 1em;
 }
 
 body .ui-state-active, body .ui-widget-content .ui-state-active, body .ui-widget-header .ui-state-active,
@@ -1508,22 +1469,6 @@ li.ui-state-active[role='tab'] {
   border-radius: 15px 15px 15px 15px;
   margin: 16px 0;
   padding: 0 16px;
-}
-
-th.headerSortUp {
-  background-image: url(../images/asc.gif);
-  background-repeat: no-repeat;
-  background-position: right;
-  cursor: pointer;
-  background-color: #3399FF;
-}
-
-th.headerSortDown {
-  background-image: url(../images/desc.gif);
-  background-repeat: no-repeat;
-  background-position: right;
-  cursor: pointer;
-  background-color: #3399FF;
 }
 
 .sub-disabled {
@@ -1718,12 +1663,11 @@ small > i {
   }
 }
 
-.logout a, a.logout, input.logout, .logout-menu .menu-title {
-  background-image: url(../images/exit.png);
-  background-repeat: no-repeat;
-  background-position: 8px 10px;
-  padding-left: 30px;
-  text-align: center;
+.logout a:before, a.logout:before, input.logout:before, .logout-menu .menu-title:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content:"\f2f5";
+  padding-right: 6px;
 }
 
 .alternc_powered {
@@ -1759,14 +1703,6 @@ small > i {
     padding-top: 0.1em;
     padding-bottom: 0.35em;
   }
-}
-
-
-.ssl a, a.ssl, input.ssl, .ssl-menu .menu-title {
-  background-image: url(../images/ssl.png);
-  background-repeat: no-repeat;
-  background-position: 8px 3px;
-  padding-left: 30px;
 }
 
 textarea.cert {

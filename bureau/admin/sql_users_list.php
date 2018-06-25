@@ -51,7 +51,7 @@ for($i=0;$i<count($r);$i++) {
             <input type="checkbox" class="inc" id="del_<?php echo $val["name"]; ?>" name="del_<?php echo $val["name"]; ?>" value="<?php echo $val["name"]; ?>" />
           </td>
 	  <td><label for="del_<?php echo $val["name"]; ?>"><?php echo $val["name"]; ?></label></td>
-	  <td><span class="ina configure"><a href="sql_users_rights.php?id=<?php echo $val["name"] ?>"><?php __("Manage the rights"); ?></a></span></td>
+	  <td><span class="ina permissions"><a href="sql_users_rights.php?id=<?php echo $val["name"] ?>"><?php __("Manage the rights"); ?></a></span></td>
 	  <td><span class="ina lock"><a href="sql_users_password.php?id=<?php echo $val["name"] ?>"><?php __("Password change"); ?></a></span></td>
 	</tr>
 <?php
@@ -62,12 +62,10 @@ for($i=0;$i<count($r);$i++) {
 
 </table>
 
-<br/>
-<input type="submit" name="sub" value="<?php __("Delete the checked users"); ?>" class="inb delete" />
+<p>
+<button type="submit" name="sub" class="inb delete"><?php __("Delete the checked users"); ?></button>
+</p>
 </form>
-
-<br/>
-<br/>
 
 <?php
   } else {
@@ -75,5 +73,7 @@ for($i=0;$i<count($r);$i++) {
    echo $msg->msg_html_all();
   }
 ?>
+<p>
   <span class="ina add"><a href="sql_users_add.php"><?php __("Create a new MySQL user"); ?></a></span>
+</p>
 <?php include_once("foot.php"); ?>

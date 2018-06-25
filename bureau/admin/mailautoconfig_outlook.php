@@ -53,7 +53,7 @@ echo "<?xml version='1.0' encoding='UTF-8'?> \n";
 	<Action>settings</Action>
 	<Protocol>
 		<Type>IMAP</Type>
-		<Server><?php echo $mail->srv_imaps;?></Server>
+		<Server><?php echo $mail->srv_dovecot; ?></Server>
 		<Port>993</Port>
 		<LoginName><?php echo $matches[0];?></LoginName>
 		<DomainName><?php echo $emailDomain[1];?></DomainName>
@@ -63,7 +63,7 @@ echo "<?xml version='1.0' encoding='UTF-8'?> \n";
 	</Protocol>
 	<Protocol>
 		<Type>SMTP</Type>
-		<Server><?php echo $mail->srv_smtps;?></Server>
+		<Server><?php echo $mail->srv_postfix; ?></Server>
 		<Port>587</Port>
 		<SPA>off</SPA>
 		<SSL>on</SSL>

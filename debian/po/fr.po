@@ -23,15 +23,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: AlternC, hosting control panel\n"
 "Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
-"POT-Creation-Date: 2017-10-08 14:47+0200\n"
+"POT-Creation-Date: 2018-06-24 17:17+0200\n"
 "PO-Revision-Date: 2017-10-08 12:51+0000\n"
 "Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
 "Language-Team: French (France) (http://www.transifex.com/octopuce/alternc/"
 "language/fr_FR/)\n"
+"Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: fr_FR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. Type: error
@@ -188,6 +188,14 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../alternc.templates:7001
+#, fuzzy
+#| msgid "Path where alternc's logs files will be located:"
+msgid "Path where AlternC's users html files will be located:"
+msgstr "Répertoire dans lequel les fichiers logs d'AlternC seront stockés"
+
+#. Type: string
+#. Description
+#: ../alternc.templates:7001
 msgid ""
 "Please enter the directory name where you want html user files to be put. "
 "The default value should be good in most cases."
@@ -202,6 +210,14 @@ msgstr ""
 msgid "This directory will contain every AlternC users personal directories."
 msgstr ""
 "Ce répertoire contiendra les dossiers personnels de tous les comptes AlternC."
+
+#. Type: string
+#. Description
+#: ../alternc.templates:8001
+#, fuzzy
+#| msgid "Path where alternc's logs files will be located:"
+msgid "Path where AlternC's users mails will be located:"
+msgstr "Répertoire dans lequel les fichiers logs d'AlternC seront stockés"
 
 #. Type: string
 #. Description
@@ -293,6 +309,14 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../alternc.templates:13001
+#, fuzzy
+#| msgid "AlternC's mysql account:"
+msgid "Remote root mysql user account:"
+msgstr "Compte mysql d'AlternC : "
+
+#. Type: string
+#. Description
+#: ../alternc.templates:13001
 msgid ""
 "Using a remote mysql installation requires root access to the remote "
 "database. A root user is required to create the alternc user with grant "
@@ -345,6 +369,14 @@ msgid ""
 msgstr ""
 "Merci de choisir un mot de passe complexe, car il permet d'accéder à la base "
 "système ! Si vous n'entrez rien, un mot de passe aléatoire sera généré."
+
+#. Type: password
+#. Description
+#: ../alternc.templates:15001
+#, fuzzy
+#| msgid "Password of AlternC's mysql account:"
+msgid "Password of the remote root mysql user account:"
+msgstr "Mot de passe du compte MySQL d'AlternC :"
 
 #. Type: password
 #. Description
@@ -627,6 +659,14 @@ msgstr "Doit-on utiliser un serveur MySQL distant ?"
 
 #. Type: boolean
 #. Description
+#: ../alternc.templates:33001
+msgid ""
+"Please confirm you want to use a remote Mysql Server. If not, AlternC cannot "
+"be installed."
+msgstr ""
+
+#. Type: boolean
+#. Description
 #: ../alternc.templates:34001
 msgid "MySQL connection error. Try again?"
 msgstr "Erreur de connexion à MySQL. Réessayer ?"
@@ -691,36 +731,25 @@ msgstr ""
 "Merci de préciser la valeur par défaut des quotas qui leurs seront assignés "
 "pour ce service."
 
-#. Type: note
-#. Description
-#: ../alternc-awstats.templates:2001
-msgid "Error installing AlternC-Awstats"
-msgstr "Erreur à l'installation d'AlternC-Awstats"
+#~ msgid "Error installing AlternC-Awstats"
+#~ msgstr "Erreur à l'installation d'AlternC-Awstats"
 
-#. Type: note
-#. Description
-#: ../alternc-awstats.templates:2001
-msgid ""
-"AlternC-Awstats requires a complete installed AlternC system to get "
-"installed properly!"
-msgstr ""
-"AlternC-Awstats requiert une installation complète d'AlternC pour pouvoir "
-"être installé !"
+#~ msgid ""
+#~ "AlternC-Awstats requires a complete installed AlternC system to get "
+#~ "installed properly!"
+#~ msgstr ""
+#~ "AlternC-Awstats requiert une installation complète d'AlternC pour pouvoir "
+#~ "être installé !"
 
-#. Type: note
-#. Description
-#: ../alternc-awstats.templates:2001
-msgid ""
-"Please install AlternC and CONFIGURE IT before installing alternc-awstats or "
-"additional modules (don't forget to launch 'alternc.install')."
-msgstr ""
-"Merci d'installer et de CONFIGURER AlternC avant d'installer alternc-awstats "
-"ou d'autres modules (ne pas oublier de lancer 'alternc.install')."
+#~ msgid ""
+#~ "Please install AlternC and CONFIGURE IT before installing alternc-awstats "
+#~ "or additional modules (don't forget to launch 'alternc.install')."
+#~ msgstr ""
+#~ "Merci d'installer et de CONFIGURER AlternC avant d'installer alternc-"
+#~ "awstats ou d'autres modules (ne pas oublier de lancer 'alternc.install')."
 
-#. Type: note
-#. Description
-#: ../alternc-awstats.templates:2001
-msgid ""
-"Please check out the AlternC installation documentation before proceeding."
-msgstr ""
-"Merci de lire la documentation d'installation d'AlternC avant de continuer."
+#~ msgid ""
+#~ "Please check out the AlternC installation documentation before proceeding."
+#~ msgstr ""
+#~ "Merci de lire la documentation d'installation d'AlternC avant de "
+#~ "continuer."

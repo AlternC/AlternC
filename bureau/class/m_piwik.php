@@ -35,7 +35,6 @@ class m_piwik {
 
         $obj = array(
             'title'       => _("Piwik statistics"),
-            'ico'         => 'images/piwik.png',
             'link'        => 'toggle',
             'pos'         => 115,
             'links'       => array(
@@ -52,10 +51,10 @@ class m_piwik {
      * Constructor
      */
     function m_piwik() {
-        $this->piwik_server_uri=variable_get('piwik_server_uri',null,'Remote Piwik server uri');
-        $this->piwik_admin_token=variable_get('piwik_admin_token',null,'Remote Piwik super-admin token');
-        $this->alternc_users = $this->get_alternc_users();
-        $this->alternc_sites = $this->get_alternc_sites();
+        $this->piwik_server_uri=variable_get('piwik_server_uri','','Remote Piwik server uri');
+        $this->piwik_admin_token=variable_get('piwik_admin_token','','Remote Piwik super-admin token');
+        $this->alternc_users=array();
+        $this->alternc_sites=array();
     }
 
 
@@ -147,6 +146,8 @@ class m_piwik {
 
         $msg->log("piwik","get_users_access_from_site");
 
+        $this->get_alternc_sites();
+        $this->get_alternc_users();
         if (!is_numeric($site_id)) {
             $msg->raise("ERROR", 'piwik', 'site_id must be numeric');
             return FALSE;
@@ -183,17 +184,26 @@ class m_piwik {
     }
 
 
+    function get_alternc_sites($force=false) {
+        global $db, $cuid, $msg;
+        
+        if (!count($this->alternc_sites) || $force) {
+            $db->query("SELECT piwik_id AS site_id FROM piwik_sites WHERE uid= ? ;", array($cuid));
+            while ($db->next_record())
+                $this->alternc_sites[]=$db->f('site_id');
+        }
+        return $this->alternc_sites;
+    }
+
     function get_alternc_users() {
         global $db, $cuid, $msg;
 
-        $msg->log("piwik","get_alternc_users");
-
-        static $alternc_users = array();
-        $db->query("SELECT login FROM piwik_users WHERE uid= ?;", array($cuid));
-        while ($db->next_record())
-            array_push($alternc_users, $db->f('login'));
-	
-        return $alternc_users;
+        if (!count($this->alternc_users)) {
+            $db->query("SELECT login FROM piwik_users WHERE uid= ?;", array($cuid));
+            while ($db->next_record())
+                $this->alternc_users[]=$db->f('login');
+        }
+        return $this->alternc_users;
     }
 
 
@@ -315,6 +325,7 @@ class m_piwik {
 
         $msg->log("piwik","site_list");
 
+        $this->get_alternc_sites();
         $api_data = $this->call_privileged_page('API', 'SitesManager.getAllSites');
         $data = array();
 
@@ -351,20 +362,6 @@ class m_piwik {
     }
 
 
-    function get_alternc_sites() {
-        global $db, $cuid, $msg;
-
-        $msg->log("piwik","get_alternc_sites");
-
-        static $alternc_sites = array();
-        $db->query("SELECT piwik_id AS site_id FROM piwik_sites WHERE uid= ? ;", array($cuid));
-        while ($db->next_record())
-            array_push($alternc_sites, $db->f('site_id'));
-
-        return $alternc_sites;
-    }
-
-
     function get_site_list()
     {
         return $this->call_privileged_page('API', 'SitesManager.getAllSites');
@@ -376,6 +373,7 @@ class m_piwik {
 
         $msg->log("piwik","site_add");
 
+        $this->get_alternc_sites();
         $urls = is_array($urls) ? implode(',', $urls) : $urls;
         $api_data = $this->call_privileged_page('API', 'SitesManager.addSite', array('siteName' => $siteName, 'urls' => $urls));
 
@@ -391,7 +389,7 @@ class m_piwik {
                 $db->query("INSERT INTO piwik_sites set uid= ? , piwik_id= ? ", array($cuid, $id_site));
 
                 // Permet de prendre en compte le site qu'on vient de créer dans la page quis'affiche
-                $this->alternc_sites = $this->get_alternc_sites();
+                $this->alternc_sites = $this->get_alternc_sites(true);
                 return TRUE;
             }
             return TRUE;

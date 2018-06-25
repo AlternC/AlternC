@@ -62,8 +62,11 @@ class DB_Sql {
 
         $dsn = sprintf('mysql:dbname=%s;host=%s', $db, $host);
 
+        $options=array(
+            \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION
+        );
         try {
-            $this->pdo_instance = new PDO($dsn, $user, $passwd);
+            $this->pdo_instance = new PDO($dsn, $user, $passwd, $options);
         } catch (PDOException $e) {
             echo "Mysql", "PDO instance", $e->getMessage();
             return FALSE;
@@ -219,6 +222,25 @@ class DB_Sql {
         return TRUE;
     }
 
+    /* pdo equivalent of fetchAll() */
+    function fetchAll() {
+        if (!$this->pdo_query) {
+            $this->halt("next_record called with no query pending.");
+            return FALSE;
+        }
+
+        $data = $this->pdo_query->fetchAll(PDO::FETCH_BOTH);
+        $this->Errno = $this->pdo_query->errorCode();
+        $this->Error = $this->pdo_query->errorInfo();
+
+        if ($data == FALSE) {
+            if ($this->Auto_Free) 
+                $this->free();
+            return FALSE;
+        }
+
+        return $data;
+    }
 
     /**
      * table locking
@@ -269,13 +291,16 @@ class DB_Sql {
      * evaluate the result (size, width)
      */
     function affected_rows() {
+        if (!$this->pdo_query) return 0;
         return $this->pdo_query->rowCount();
     }
     function num_rows() {
+        if (!$this->pdo_query) return 0;
         return $this->pdo_query->rowCount();
     }
 
     function num_fields() {
+        if (!$this->pdo_query) return 0;
         return $this->pdo_query->columnCount();
     }
 
