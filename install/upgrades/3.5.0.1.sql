@@ -64,4 +64,7 @@ DELETE FROM variable WHERE name IN (
   'mail_human_smtps','mail_human_submission', 'mail_human_imap', 'mail_human_smtp',
   'ftp_human_name'
   );
-      
+
+-- we'd like to prepare IPv6 ;) 
+ALTER TABLE  `domaines_type` CHANGE  `entry`  `entry` TEXT DEFAULT '';
+

@@ -466,7 +466,7 @@ CREATE TABLE IF NOT EXISTS `domaines_type` (
     `name` VARCHAR (30) NOT NULL, -- Uniq name
     `description` TEXT, -- Human description
     `target` enum ('NONE', 'URL', 'DIRECTORY', 'IP', 'IPV6', 'DOMAIN', 'TXT') NOT NULL DEFAULT 'NONE', -- Target type
-    `entry` VARCHAR (255) DEFAULT '', -- BIND entry
+    `entry` TEXT DEFAULT '', -- BIND entry
     `compatibility` VARCHAR (255) DEFAULT '', -- Which type can be on the same subdomains
     `enable` enum ('ALL', 'NONE', 'ADMIN') NOT NULL DEFAULT 'ALL', -- Show this option to who ?
     `only_dns` BOOLEAN DEFAULT FALSE, -- Update_domains modify just the dns, no web configuration
