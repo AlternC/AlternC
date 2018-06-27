@@ -212,7 +212,7 @@ echo $msg->msg_html_all();
 <br />
 <input type="submit" id="sendthisfile" class="ina" value="<?php __("Send this file"); ?>" />
 <?php echo sprintf(_("Warning: max size: %s"),$bro->getMaxAllowedUploadSize() ); ?>
-</form>
+<?php __("(If you upload a compressed file, <br />you will be able to uncompress it after.)"); ?></form>
 
 </td>
 <td style="width: 20px">&nbsp;</td>
