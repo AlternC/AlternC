@@ -140,7 +140,7 @@ class m_ftp {
      */
     function get_list() {
         global $db, $msg, $cuid;
-        $msg->log("ftp", "get_list");
+        $msg->debug("ftp", "get_list");
         $r = array();
         $db->query("SELECT id, name, homedir, enabled FROM ftpusers WHERE uid= ? ORDER BY name;", array($cuid));
         if ($db->num_rows()) {
@@ -169,7 +169,7 @@ class m_ftp {
      */
     function get_ftp_details($id) {
         global $db, $msg, $cuid;
-        $msg->log("ftp", "get_ftp_details", $id);
+        $msg->debug("ftp", "get_ftp_details", $id);
         $r = array();
         $db->query("SELECT id, name, homedir, enabled FROM ftpusers WHERE uid= ? AND id= ?;", array($cuid, $id));
         if ($db->num_rows()) {
@@ -421,7 +421,7 @@ class m_ftp {
      */
     function is_ftp($dir) {
         global $db, $msg;
-        $msg->log("ftp", "is_ftp", $dir);
+        $msg->debug("ftp", "is_ftp", $dir);
         if (substr($dir, 0, 1) == "/") {
             $dir = substr($dir, 1);
         }
@@ -468,7 +468,7 @@ class m_ftp {
      */
     function hook_quota_get() {
         global $db, $msg, $cuid;
-        $msg->log("ftp", "getquota");
+        $msg->debug("ftp", "getquota");
         $q = Array("name" => "ftp", "description" => _("FTP accounts"), "used" => 0);
         $db->query("SELECT COUNT(*) AS cnt FROM ftpusers WHERE uid= ? ", array($cuid));
         if ($db->next_record()) {

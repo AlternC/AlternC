@@ -211,7 +211,7 @@ class m_admin {
      */
     function get($uid, $recheck = false) {
         global $msg, $db, $lst_users_properties;
-        //    $msg->log("admin","get",$uid);
+        $msg->debug("admin","get",$uid);
         if (!$this->enabled) {
             $msg->raise("ERROR", "admin", _("-- Only administrators can access this page! --"));
             return false;
@@ -267,7 +267,7 @@ class m_admin {
      */
     function get_creator($uid) {
         global $msg, $db;
-        //    $msg->log("admin","get",$uid);
+        $msg->debug("admin","get_creator",$uid);
         if (!$this->enabled) {
             $msg->raise("ERROR", "admin", _("-- Only administrators can access this page! --"));
             return false;
@@ -342,7 +342,7 @@ class m_admin {
      */
     function get_list($all = 0, $creator = 0, $pattern = FALSE, $pattern_type = FALSE) {
         global $msg, $mem, $cuid;
-        $msg->log("admin", "get_list");
+        $msg->debug("admin", "get_list");
         if (!$this->enabled) {
             $msg->raise("ERROR", "admin", _("-- Only administrators can access this page! --"));
             return false;
@@ -470,7 +470,7 @@ class m_admin {
 
         $creators = array();
 
-        $msg->log("admin", "get_reseller_list");
+        $msg->debug("admin", "get_creator_list");
         if (!$this->enabled) {
             $msg->raise("ERROR", "admin", _("-- Only administrators can access this page! --"));
             return false;

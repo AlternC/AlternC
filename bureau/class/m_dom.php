@@ -91,7 +91,7 @@ class m_dom {
 
     function get_panel_url_list() {
         global $db, $msg;
-        $msg->log("dom", "get_panel_url_list");
+        $msg->debug("dom", "get_panel_url_list");
         $db->query("SELECT sd.id as sub_id, if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine) as fqdn from sub_domaines sd where type = 'PANEL';");
         $t = array();
         while ($db->next_record()) {
@@ -106,7 +106,7 @@ class m_dom {
      */
     public static function get_sub_domain_id_and_member_by_name($fqdn) {
         global $db, $msg;
-        $msg->log("dom", "get_sub_domain_by_name");
+        $msg->debug("dom", "get_sub_domain_by_name");
         $db->query("select sd.* from sub_domaines sd where if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine) = ?;", array($fqdn));
         if (!$db->next_record()) {
             return false;
@@ -154,7 +154,7 @@ class m_dom {
      */
     function domains_type_lst() {
         global $db, $msg;
-        $msg->log("dom", "domains_type_lst");
+        $msg->debug("dom", "domains_type_lst");
         if (empty($this->cache_domains_type_lst)) {
             $db->query("select * from domaines_type order by advanced;");
             $this->cache_domains_type_lst = array();
@@ -168,7 +168,7 @@ class m_dom {
 
     function domains_type_enable_values() {
         global $db, $msg, $cuid;
-        $msg->log("dom", "domains_type_enable_values");
+        $msg->debug("dom", "domains_type_enable_values");
         $db->query("desc domaines_type;");
         $r = array();
         while ($db->next_record()) {
@@ -188,7 +188,7 @@ class m_dom {
      */
     function domains_type_target_values($type = null) {
         global $db, $msg;
-        $msg->log("dom", "domains_type_target_values");
+        $msg->debug("dom", "domains_type_target_values");
         if (is_null($type)) {
             $db->query("desc domaines_type;");
             $r = array();
@@ -602,7 +602,7 @@ class m_dom {
      */
     function enum_domains($uid = -1) {
         global $db, $msg, $cuid;
-        $msg->log("dom", "enum_domains");
+        $msg->debug("dom", "enum_domains");
         if ($uid == -1) {
             $uid = $cuid;
         }
@@ -854,7 +854,7 @@ class m_dom {
 
     function lst_default_subdomains() {
         global $db, $msg;
-        $msg->log("dom", "lst_default_subdomains");
+        $msg->debug("dom", "lst_default_subdomains");
         $c = array();
         $db->query("select * from default_subdomains;");
 
@@ -937,7 +937,7 @@ class m_dom {
      */
     function whois($domain) {
         global $msg;
-        $msg->log("dom", "whois", $domain);
+        $msg->debug("dom", "whois", $domain);
         // pour ajouter un nouveau TLD, utiliser le code ci-dessous.
         //  echo "whois : $domain<br />";
         preg_match("#.*\.([^\.]*)#", $domain, $out);
@@ -1164,7 +1164,7 @@ class m_dom {
      */
     function get_domain_all($dom) {
         global $db, $msg, $cuid;
-        $msg->log("dom", "get_domain_all", $dom);
+        $msg->debug("dom", "get_domain_all", $dom);
         // Locked ?
         if (!$this->islocked) {
             $msg->raise("ERROR", "dom", _("--- Program error --- No lock on the domains!"));
@@ -1226,7 +1226,7 @@ class m_dom {
      */
     function get_sub_domain_all($sub_domain_id) {
         global $db, $msg, $cuid;
-        $msg->log("dom", "get_sub_domain_all", $sub_domain_id);
+        $msg->debug("dom", "get_sub_domain_all", $sub_domain_id);
         // Locked ?
         if (!$this->islocked) {
             $msg->raise("ERROR", "dom", _("--- Program error --- No lock on the domains!"));
@@ -1352,7 +1352,7 @@ class m_dom {
     function can_create_subdomain($dom, $sub, $type, $sub_domain_id = 0) {
         global $db, $msg;
 
-	$sub_domain_id=intval($sub_domain_id);
+        $sub_domain_id=intval($sub_domain_id);
         $msg->log("dom", "can_create_subdomain", $dom . "/" . $sub . "/" .$type . "/" . $sub_domain_id);
 
         // Get the compatibility list for this domain type
@@ -1891,7 +1891,7 @@ class m_dom {
      */
     function lock() {
         global $msg;
-        $msg->log("dom", "lock");
+        $msg->debug("dom", "lock");
         if ($this->islocked) {
             $msg->raise("ERROR", "dom", _("--- Program error --- Lock already obtained!"));
         }
@@ -1910,7 +1910,7 @@ class m_dom {
      */
     function unlock() {
         global $msg;
-        $msg->log("dom", "unlock");
+        $msg->debug("dom", "unlock");
         if (!$this->islocked) {
             $msg->raise("ERROR", "dom", _("--- Program error --- No lock on the domains!"));
         }
@@ -1957,7 +1957,7 @@ class m_dom {
      */
     function hook_quota_get() {
         global $db, $msg, $cuid;
-        $msg->log("dom", "get_quota");
+        $msg->debug("dom", "get_quota");
         $q = Array("name" => "dom", "description" => _("Domain name"), "used" => 0);
         $db->query("SELECT COUNT(*) AS cnt FROM domaines WHERE compte= ?", array($cuid));
         if ($db->next_record()) {
@@ -2185,7 +2185,7 @@ class m_dom {
      */
     function generation_todo() {
         global $db, $msg;
-        $msg->log("dom", "generation_todo");
+        $msg->debug("dom", "generation_todo");
         $db->query("select id as sub_id, web_action, type from sub_domaines where web_action !='ok';");
         $r = array();
         while ($db->next_record()) {

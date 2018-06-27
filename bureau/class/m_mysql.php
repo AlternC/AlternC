@@ -137,7 +137,7 @@ class m_mysql {
      */
     function get_dblist() {
         global $db, $msg, $bro, $cuid;
-        $msg->log("mysql", "get_dblist");
+        $msg->debug("mysql", "get_dblist");
         $db->free();
         $db->query("SELECT login,pass,db, bck_mode, bck_dir FROM db WHERE uid= ? ORDER BY db;", array($cuid));
         $c = array();
@@ -188,7 +188,7 @@ class m_mysql {
     function get_mysql_details($dbn) {
         global $db, $msg, $cuid;
         $root = getuserpath();
-        $msg->log("mysql", "get_mysql_details");
+        $msg->debug("mysql", "get_mysql_details");
         $pos = strpos($dbn, '_');
         if ($pos === false) {
             $dbname = $dbn;
@@ -284,7 +284,7 @@ class m_mysql {
 
         // Grant the special user every rights.
         if ($this->dbus->exec("CREATE DATABASE $dbname;")) { // secured: dbname is checked against ^[0-9a-z]*$
-            $msg->log("mysql", "add_db_succes", $dbn);
+            $msg->log("mysql", "add_db", "Success: ".$dbn);
             // Ok, database does not exist, quota is ok and dbname is compliant. Let's proceed
             $db->query("INSERT INTO db (uid,login,pass,db,bck_mode) VALUES (?, ?, ?, ? ,0)", array($cuid, $myadm, $password, $dbname));
             $dbuser = $dbname;
@@ -296,7 +296,7 @@ class m_mysql {
             $this->dbus->query("FLUSH PRIVILEGES;");
             return true;
         } else {
-            $msg->log("mysql", "add_db", $dbn);
+            $msg->log("mysql", "add_db", "Error: ".$dbn);
             $msg->raise("ERROR", "mysql", _("An error occured. The database could not be created"));
             return false;
         }
@@ -564,7 +564,7 @@ class m_mysql {
      */
     function get_userslist($all = null) {
         global $db, $msg, $cuid;
-        $msg->log("mysql", "get_userslist");
+        $msg->debug("mysql", "get_userslist");
         $c = array();
         if (!$all) {
             $db->query("SELECT name FROM dbusers WHERE uid= ? and enable not in ('ADMIN','HIDDEN') ORDER BY name;", array($cuid));
@@ -587,7 +587,7 @@ class m_mysql {
     
     function get_defaultsparam($dbn) {
         global $db, $msg, $cuid;
-        $msg->log("mysql", "getdefaults");
+        $msg->debug("mysql", "getdefaults");
 
         $dbu = $dbn;
         $r = array();
@@ -932,7 +932,7 @@ class m_mysql {
      */
     function hook_quota_get() {
         global $msg, $mem, $quota;
-        $msg->log("mysql", "alternc_get_quota");
+        $msg->debug("mysql", "alternc_get_quota");
         $q = Array("name" => "mysql", "description" => _("MySQL Databases"), "used" => 0);
         $c = $this->get_dblist();
         if (is_array($c)) {
@@ -1069,7 +1069,7 @@ class m_mysql {
      */
     function get_dbus_size($db_name, $db_host, $db_login, $db_password, $db_client) {
         global $msg;
-        $msg->log("mysql", "get_dbus_size", $db_host);
+        $msg->debug("mysql", "get_dbus_size", $db_host);
 
         $this->dbus = new DB_Sql("mysql",$db_host,$db_login,$db_password);
 

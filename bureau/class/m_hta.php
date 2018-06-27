@@ -102,7 +102,7 @@ class m_hta {
      */
     function ListDir() {
         global$msg, $mem;
-        $msg->log("hta", "listdir");
+        $msg->debug("hta", "listdir");
         $sortie = array();
         $absolute = ALTERNC_HTML . "/" . substr($mem->user["login"], 0, 1) . "/" . $mem->user["login"];
         exec("find " . escapeshellarg($absolute) . " -name .htpasswd|sort", $sortie);
@@ -133,7 +133,7 @@ class m_hta {
      */
     function is_protected($dir) {
         global $mem, $msg;
-        $msg->log("hta", "is_protected", $dir);
+        $msg->debug("hta", "is_protected", $dir);
         $absolute = ALTERNC_HTML . "/" . substr($mem->user["login"], 0, 1) . "/" . $mem->user["login"] . "/$dir";
         if (file_exists("$absolute/.htpasswd")) {
             return true;
@@ -153,7 +153,7 @@ class m_hta {
      */
     function get_hta_detail($dir) {
         global $mem, $msg;
-        $msg->log("hta", "get_hta_detail");
+        $msg->debug("hta", "get_hta_detail");
         $absolute = ALTERNC_HTML . "/" . substr($mem->user["login"], 0, 1) . "/" . $mem->user["login"] . "/$dir";
         if (file_exists("$absolute/.htaccess")) {
             /* 		if (!_reading_htaccess($absolute)) {
@@ -407,7 +407,7 @@ class m_hta {
      */
     private function _reading_htaccess($absolute) {
         global $msg;
-        $msg->log("hta", "_reading_htaccess", $absolute);
+        $msg->debug("hta", "_reading_htaccess", $absolute);
         $file = fopen("$absolute/.htaccess", "r+");
         $lignes = array(1, 1, 1);
         $errr = 0;

@@ -47,7 +47,7 @@ class m_cron {
      */
     function lst_cron() {
         global $cuid, $db, $msg;
-        $msg->log("cron", "lst_cron");
+        $msg->debug("cron", "lst_cron");
         $db->query("SELECT * FROM cron WHERE uid = ? ORDER BY url;", array($cuid));
         $r = Array();
         while ($db->next_record()) {
@@ -191,7 +191,7 @@ class m_cron {
      */
     function hook_quota_get() {
         global $cuid, $db, $msg;
-        $msg->log("cron", "alternc_get_quota");
+        $msg->debug("cron", "alternc_get_quota");
         $q = Array("name" => "cron", "description" => _("Scheduled tasks"), "used" => 0);
         $db->query("select count(*) as cnt from cron where uid = ? ;", array($cuid));
         if ($db->next_record()) {
@@ -206,8 +206,9 @@ class m_cron {
      * this function EXIT at the end.
      */
     function execute_cron() {
-        global $db;
+        global $db,$msg;
 
+        $msg->debug("cron", "execute_cron");
         if (!isset($GLOBALS["DEBUG"])) {
             $GLOBALS["DEBUG"] = false;
         }

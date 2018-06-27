@@ -144,7 +144,7 @@ class m_piwik {
     function get_users_access_from_site($site_id) {
         global $msg, $cuid;
 
-        $msg->log("piwik","get_users_access_from_site");
+        $msg->debug("piwik","get_users_access_from_site");
 
         $this->get_alternc_sites();
         $this->get_alternc_users();
@@ -240,7 +240,7 @@ class m_piwik {
     function user_has_sites() {
         global $db, $cuid, $msg;
 
-        $msg->log("piwik","user_has_sites");
+        $msg->debug("piwik","user_has_sites");
 
         $db->query("SELECT id FROM piwik_users WHERE uid='$cuid'");
         if ($db->num_rows() <= 1) {
@@ -283,7 +283,7 @@ class m_piwik {
     function users_list() { 
         global $db, $cuid, $msg;
 
-        $msg->log("piwik","users_list");
+        $msg->debug("piwik","users_list");
 
         $db->query("SELECT login FROM piwik_users WHERE uid = ?;", array($cuid));
         if ($db->num_rows() == 0)
@@ -323,7 +323,7 @@ class m_piwik {
     function site_list() {
         global $msg;
 
-        $msg->log("piwik","site_list");
+        $msg->debug("piwik","site_list");
 
         $this->get_alternc_sites();
         $api_data = $this->call_privileged_page('API', 'SitesManager.getAllSites');
@@ -473,7 +473,7 @@ class m_piwik {
     function call_page($module, $method, $arguments=array(), $output = 'JSON') {
         global $msg;
 
-        $msg->log("piwik","call_page");
+        $msg->debug("piwik","call_page");
 
         $url = sprintf('%s/?module=%s&method=%s&format=%s', $this->piwik_server_uri, $module, $method, $output);
         foreach ($arguments AS $k=>$v)
@@ -507,7 +507,7 @@ class m_piwik {
     function call_privileged_page($module, $method, $arguments=array(), $output = 'JSON') {
         global $msg;
 
-        $msg->log("piwik","call_privileged_page");
+        $msg->debug("piwik","call_privileged_page");
 
         $arguments['token_auth'] = $this->piwik_admin_token;
         return $this->call_page($module, $method, $arguments, $output);
