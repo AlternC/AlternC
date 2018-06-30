@@ -2045,7 +2045,8 @@ class m_dom {
                   domaines_type dt 
                 where 
                   v.name='mailname_bounce' 
-                  and lower(dt.name) = lower(sd.type)"; 
+                  and lower(dt.name) = lower(sd.type)
+                  and ( sd.enable='ENABLED' or sd.enable='ENABLE')"; 
         $query_args =   array();
 
         if (!is_null($id) && intval($id) == $id) {
