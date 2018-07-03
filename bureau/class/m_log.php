@@ -30,7 +30,7 @@ class m_log {
      */
     function list_logs_directory($dir) {
         global $cuid, $msg;
-        $msg->log("log", "list_logs_directory");
+        $msg->debug("log", "list_logs_directory");
 
         $c = array();
         foreach (glob("${dir}/*log*") as $absfile) {
@@ -81,7 +81,7 @@ class m_log {
      */
     function list_logs_directory_all($dirs) {
         global $msg;
-        $msg->log("log", "get_logs_directory_all");
+        $msg->debug("log", "get_logs_directory_all");
         $c = array();
         foreach ($dirs as $dir => $val) {
             $c[$dir] = $this->list_logs_directory($val);
@@ -92,7 +92,7 @@ class m_log {
 
     function get_logs_directory() {
         global $cuid, $mem, $msg;
-        $msg->log("log", "get_logs_directory");
+        $msg->debug("log", "get_logs_directory");
         // Return an array to allow multiple directory in the future
         if (defined('ALTERNC_LOGS_ARCHIVE')) {
             $c = array("dir" => ALTERNC_LOGS_ARCHIVE . "/" . $cuid . "-" . $mem->user["login"]);
@@ -123,7 +123,7 @@ class m_log {
      */
     function tail($file, $lines = 20) {
         global $msg;
-        $msg->log("log", "tail");
+        $msg->debug("log", "tail");
         $lines = intval($lines);
         if ($lines <= 0) {
             $lines = 20;

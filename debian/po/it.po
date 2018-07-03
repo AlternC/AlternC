@@ -11,14 +11,14 @@ msgstr ""
 "Project-Id-Version: AlternC, hosting control panel\n"
 "Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
 "POT-Creation-Date: 2018-06-24 17:17+0200\n"
-"PO-Revision-Date: 2017-10-08 12:49+0000\n"
-"Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
+"PO-Revision-Date: 2018-06-27 19:13+0000\n"
+"Last-Translator: JuliaR <giulia.r@azerttyu.net>\n"
 "Language-Team: Italian (Italy) (http://www.transifex.com/octopuce/alternc/"
 "language/it_IT/)\n"
-"Language: it_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: it_IT\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Type: error
@@ -46,14 +46,6 @@ msgid ""
 msgstr ""
 "Inoltre, serve attivare il gruppo quota (grpquota) per poter utilizzare il "
 "disco quota (ma non è obbligatorio)"
-
-#. Type: error
-#. Description
-#. Type: error
-#. Description
-#: ../alternc.templates:1001 ../alternc.templates:36001
-msgid "This is a fatal error and will cause the package installation to fail."
-msgstr ""
 
 #. Type: note
 #. Description
@@ -395,14 +387,6 @@ msgstr ""
 
 #. Type: select
 #. Description
-#: ../alternc.templates:19001
-msgid ""
-"rotate - backup.sql, backup.sql.0, backup.sql.1 date - backup.sql, backup."
-"sql.20080709, backup.sql.20080708"
-msgstr ""
-
-#. Type: select
-#. Description
 #: ../alternc.templates:20001
 msgid "Behavior of the backup script when it encounters a unmanaged file"
 msgstr "Comportamento dello script di backup quando incontra un file non "
@@ -625,14 +609,6 @@ msgstr "Usare un server MySQL remoto?"
 
 #. Type: boolean
 #. Description
-#: ../alternc.templates:33001
-msgid ""
-"Please confirm you want to use a remote Mysql Server. If not, AlternC cannot "
-"be installed."
-msgstr ""
-
-#. Type: boolean
-#. Description
 #: ../alternc.templates:34001
 msgid "MySQL connection error. Try again?"
 msgstr "Errore di connessione MySQL. Ritentare?"
@@ -664,18 +640,6 @@ msgstr ""
 "tratta di una situazione prevista, dato che il server potrebbe non essere "
 "raggiungibile dall'esterno della vostra rete."
 
-#. Type: error
-#. Description
-#: ../alternc.templates:36001
-msgid "Remote mysql: connection error"
-msgstr ""
-
-#. Type: error
-#. Description
-#: ../alternc.templates:36001
-msgid "Connection to the remote MySQL server failed."
-msgstr ""
-
 #. Type: string
 #. Description
 #: ../alternc-awstats.templates:1001
@@ -695,26 +659,3 @@ msgstr ""
 "ogni utente di richiedere le statistiche pr il suo sito web. Gli utenti "
 "possono richiedere un numero limitato di set di statistiche. Specificate la "
 "quota di default per questo servizio."
-
-#~ msgid "Error installing AlternC-Awstats"
-#~ msgstr "Errore nell'installazione di AlternC-AWStats"
-
-#~ msgid ""
-#~ "AlternC-Awstats requires a complete installed AlternC system to get "
-#~ "installed properly!"
-#~ msgstr ""
-#~ "AlternC-AWStats necessita di un'installazione completa del sistema "
-#~ "AlternC per essere installata correttamente!"
-
-#~ msgid ""
-#~ "Please install AlternC and CONFIGURE IT before installing alternc-awstats "
-#~ "or additional modules (don't forget to launch 'alternc.install')."
-#~ msgstr ""
-#~ "Installate AlternC e CONFIGURATELO prima di instalare alternc-awstats o "
-#~ "altri moduli aggiuntivi (non dimenticate di lanciare \"alternc.install\")."
-
-#~ msgid ""
-#~ "Please check out the AlternC installation documentation before proceeding."
-#~ msgstr ""
-#~ "Controllate la documentazione di installazione di AlternC prima di "
-#~ "procedere."

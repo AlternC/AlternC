@@ -264,4 +264,26 @@ class m_messages {
         );
     }
 
+    /**
+     * Log an API function call into /var/log/alternc/bureau.log
+     *
+     * This function logs in /var/log/alternc an API function call of AlternC
+     *
+     * @param integer $clsid Number of the class doing the call
+     * @param string $function Name of the called function
+     * @param string $param non-mandatory parameters of the API call
+     * @return boolean TRUE if the log where successfull, FALSE if not
+     *
+     */
+    function debug($clsid, $function, $param = "") {
+        global $mem;
+        if (variable_get("debug_panel", "0", "Set it to 1 to enable panel debug in /var/log/alternc/bureau.log")) {
+            return @file_put_contents(
+                $this->logfile, 
+                date("d/m/Y H:i:s") . " - " . get_remote_ip() . " - DEBUG - " . $mem->user["login"] . " - $clsid - $function - $param\n", 
+                FILE_APPEND
+            );
+        }
+    }
+
 } /* Class m_messages */

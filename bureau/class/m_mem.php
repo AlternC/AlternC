@@ -610,7 +610,7 @@ Cordially.
      */
     function get_creator_by_uid($uid) {
         global $db, $msg;
-        $msg->log("dom", "get_creator_by_uid");
+        $msg->debug("dom", "get_creator_by_uid");
         $db->query("select creator from membres where uid = ? ;", array($uid));
         if (!$db->next_record()) {
             return false;

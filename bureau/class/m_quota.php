@@ -141,7 +141,7 @@ class m_quota {
     function synchronise_user_profile() {
         global $db, $msg;
         $msg->log("quota", "synchronise_user_profile");
-        $q = "insert into quotas select m.uid as uid, d.quota as name, d.value as total from membres m, defquotas d left join quotas q on q.name=d.quota  where m.type=d.type  ON DUPLICATE KEY UPDATE total = greatest(d.value, quotas.total);";
+        $q = "INSERT INTO quotas SELECT m.uid AS uid, d.quota AS name, d.value AS total FROM membres m, defquotas d LEFT JOIN quotas q ON q.name=d.quota  WHERE m.type=d.type  ON DUPLICATE KEY UPDATE total = greatest(d.value, quotas.total);";
         if (!$db->query($q)) {
             return false;
         }
@@ -173,7 +173,7 @@ class m_quota {
      */
     function getquota($ressource = "", $recheck = false) {
         global $db, $msg, $cuid, $get_quota_cache, $hooks, $mem;
-        $msg->log("quota", "getquota", $ressource);
+        $msg->debug("quota", "getquota", $ressource);
         if ($recheck) { // rebuilding quota
             $get_quota_cache = null;
             $this->quotas = array();

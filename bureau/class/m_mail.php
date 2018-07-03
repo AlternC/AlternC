@@ -191,7 +191,7 @@ class m_mail {
      */
     function hook_quota_get() {
         global $db, $msg, $cuid, $quota;
-        $msg->log("mail", "getquota");
+        $msg->debug("mail", "getquota");
         $q = Array("name" => "mail", "description" => _("Email addresses"), "used" => 0);
         $db->query("SELECT COUNT(*) AS cnt FROM address a, domaines d WHERE a.domain_id=d.id AND d.compte= ? AND a.type='';", array($cuid));
         if ($db->next_record()) {
@@ -217,7 +217,7 @@ class m_mail {
      */
     function enum_domains($uid = -1) {
         global $db, $msg, $cuid;
-        $msg->log("mail", "enum_domains");
+        $msg->debug("mail", "enum_domains");
         if ($uid == -1) {
             $uid = $cuid;
         }
@@ -284,7 +284,7 @@ ORDER BY
      */
     function enum_domain_mails($dom_id = null, $search = "", $offset = 0, $count = 30, $show_systemmails = false) {
         global $db, $msg, $hooks;
-        $msg->log("mail", "enum_domains_mail");
+        $msg->debug("mail", "enum_domains_mail");
 
         $query_args = array($dom_id);
         $search     = trim($search);
@@ -401,7 +401,7 @@ ORDER BY
      */
     function get_details($mail_id) {
         global $db, $msg, $hooks;
-        $msg->log("mail", "get_details");
+        $msg->debug("mail", "get_details");
 
         $mail_id = intval($mail_id);
         // Validate that this email is owned by me...
