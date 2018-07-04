@@ -19,6 +19,7 @@ Depends: debianutils (>= 1.13.1)
        , apache2-mpm-itk | libapache2-mpm-itk
        , libapache2-mod-php5 | libapache2-mod-php7.0
        , php5-mysql | php7.0-mysql
+       , php-curl | php5-curl | php7.0-curl
        , phpmyadmin
        , ssl-cert
        , libjs-prettify
@@ -107,6 +108,7 @@ Depends: debianutils (>= 1.13.1)
          , apache2-mpm-itk | libapache2-mpm-itk
          , libapache2-mod-php5 | libapache2-mod-php7.0
          , php5-mysql | php7.0-mysql
+         , php-curl | php5-curl | php7.0-curl
          , phpmyadmin
          , ssl-cert
          , libjs-prettify

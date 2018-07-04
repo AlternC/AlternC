@@ -139,7 +139,7 @@ function get_remote_ip() {
 /**
  * Check that $url is a correct url (http:// or https:// or ftp://) 
  * 
- * @param type $url
+1 * @param type $url
  * @return boolean
  */
 function checkurl($url) {
@@ -1221,11 +1221,11 @@ function _sha512cr($password, $salt = NULL) {
         else if (function_exists('mcrypt_create_iv')) {
             $salt = base64_encode(mcrypt_create_iv(12, MCRYPT_DEV_URANDOM));
         }
-        else if (function_exists('')) {
+        else if (function_exists('openssl_random_pseudo_bytes')) {
             $salt  = base64_encode(openssl_random_pseudo_bytes(12));
         }
         if (!$salt) {
-            throw Error('Unable to generate salt');
+            throw Exception('Unable to generate salt');
         }
     }
     $salt = '$6$rounds=20000$' . $salt;
