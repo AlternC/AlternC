@@ -57,7 +57,7 @@ require_once("/usr/share/alternc/panel/class/config_nochk.php");
 $admin->stop_if_jobs_locked();
 
 if( !defined("ALTERNC_DO_ACTION_LOCK")){
-    define("ALTERNC_DO_ACTION_LOCK",'/var/run/alternc/do_actions_cron.lock');
+    define("ALTERNC_DO_ACTION_LOCK",'/run/alternc/do_actions_cron.lock');
 }
 
 $SCRIPT='/usr/bin/php do_actions.php';

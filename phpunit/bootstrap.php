@@ -60,7 +60,7 @@ if(isset($L_ALTERNC_LOGS_ARCHIVE)){
  define('ALTERNC_LOGS_ARCHIVE', "$L_ALTERNC_LOGS_ARCHIVE");
 }
 if( !defined("ALTERNC_LOCALES") ) { define('ALTERNC_LOCALES', ALTERNC_PANEL."/locales"); };
-if( !defined("ALTERNC_LOCK_JOBS") ) { define('ALTERNC_LOCK_JOBS', '/var/run/alternc/jobs-lock'); };
+if( !defined("ALTERNC_LOCK_JOBS") ) { define('ALTERNC_LOCK_JOBS', '/run/alternc/jobs-lock'); };
 if( !defined("ALTERNC_LOCK_PANEL") ) { define('ALTERNC_LOCK_PANEL', '/var/lib/alternc/panel/nologin.lock'); };
 if( !defined("ALTERNC_APACHE2_GEN_TMPL_DIR") ) { define('ALTERNC_APACHE2_GEN_TMPL_DIR', '/etc/alternc/templates/apache2/'); };
 if( !defined("ALTERNC_VHOST_DIR") ) { define('ALTERNC_VHOST_DIR', "/var/lib/alternc/apache-vhost/"); };

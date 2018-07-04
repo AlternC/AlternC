@@ -18,7 +18,7 @@
   ----------------------------------------------------------------------
 */
 
-define('SLAVE_FLAG', "/var/run/alternc/refresh_slave");
+define('SLAVE_FLAG', "/run/alternc/refresh_slave");
 
 /**
  * Classe de gestion des domaines de l'hébergé.
@@ -54,7 +54,7 @@ class m_dom {
      * du domaine par update_domains.sh
      * @access private
      */
-    var $fic_lock_cron = "/var/run/alternc/cron.lock";
+    var $fic_lock_cron = "/run/alternc/cron.lock";
 
     /**
      * Le cron a-t-il été bloqué ?

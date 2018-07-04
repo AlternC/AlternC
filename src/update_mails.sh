@@ -15,7 +15,7 @@ done
 
 stop_if_jobs_locked
 
-LOCK_FILE="/var/run/alternc/update_mails"
+LOCK_FILE="/run/alternc/update_mails"
 
 # ALTERNC_MAIL is from local.sh
 

@@ -113,10 +113,10 @@ SQLBACKUP_OVERWRITE=""
 ALTERNC_SLAVES=""
 
 # File to look at for forced launch of update_domain (use incron)
-INOTIFY_UPDATE_DOMAIN="/var/run/alternc/inotify_update_domain.lock"
+INOTIFY_UPDATE_DOMAIN="/run/alternc/inotify_update_domain.lock"
 
 # File to look at for forced launch of do_actions (use incron)
-INOTIFY_DO_ACTION="/var/run/alternc/inotify_do_action.lock"
+INOTIFY_DO_ACTION="/run/alternc/inotify_do_action.lock"
 
 # AlternC Locations
 ALTERNC_HTML=""
@@ -251,8 +251,8 @@ NFS_QUOTA=no" >> $CONFIGFILE
     touch           /var/lib/alternc/bind/automatic.conf /var/lib/alternc/bind/slaveip.conf
     chown root:bind /var/lib/alternc/bind/automatic.conf /var/lib/alternc/bind/slaveip.conf
     chmod 640       /var/lib/alternc/bind/automatic.conf /var/lib/alternc/bind/slaveip.conf
-    mkdir -p /var/run/alternc && chown alterncpanel:alterncpanel /var/run/alternc
-    touch /var/run/alternc/refresh_slave
+    mkdir -p /run/alternc && chown alterncpanel:alterncpanel /run/alternc
+    touch /run/alternc/refresh_slave
     /usr/lib/alternc/slave_dns
     # Apache will not start without this file
     touch /var/lib/alternc/apache-vhost/vhosts_all.conf

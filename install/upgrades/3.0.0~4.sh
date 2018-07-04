@@ -6,9 +6,9 @@
 if [ -z "$INOTIFY_UPDATE_DOMAIN" ] ; then
 /bin/echo -e '
 # File to look at for forced launch of update_domain (use incron)
-INOTIFY_UPDATE_DOMAIN="/var/run/alternc/inotify_update_domain.lock"
+INOTIFY_UPDATE_DOMAIN="/run/alternc/inotify_update_domain.lock"
 ' >> /etc/alternc/local.sh
 fi
 
-mkdir -p /var/run/alternc && chown alterncpanel /var/run/alternc
+mkdir -p /run/alternc && chown alterncpanel /run/alternc
 
