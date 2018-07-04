@@ -263,6 +263,7 @@ CREATE TABLE IF NOT EXISTS `mailbox` (
   `bytes` bigint(20) NOT NULL DEFAULT '0', -- number of bytes in the mailbox, filled by dovecot
   `messages` int(11) NOT NULL DEFAULT '0', -- number of messages in the mailbox, filled by dovecot 
   `lastlogin` datetime NOT NULL DEFAULT '0000-00-00 00:00:00', -- Last login, filled by dovecot
+  `lastloginsasl` DATETIME NOT NULL DEFAULT 0, -- last login on SASL / SMTP, not filled yet ;) 
   `mail_action` enum('OK','DELETE','DELETING') NOT NULL default 'OK', -- mail_action is DELETE or DELETING when deleting a mailbox by cron
   PRIMARY KEY (`id`),
   UNIQUE KEY `address_id` (`address_id`)

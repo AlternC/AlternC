@@ -1,2 +1,0 @@
-
-ALTER TABLE mailbox MODIFY  `lastlogin` DATETIME NOT NULL DEFAULT 0;

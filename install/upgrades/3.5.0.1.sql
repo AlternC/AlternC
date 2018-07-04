@@ -1,3 +1,10 @@
+-- upgrade from 3.4.10 and 3.4.11 (a bug prevented them to be inserted :/ )
+
+ALTER TABLE mailbox MODIFY  `lastlogin` DATETIME NOT NULL DEFAULT 0;
+ALTER TABLE mailbox ADD  `lastloginsasl` DATETIME NOT NULL DEFAULT 0 AFTER `lastlogin`;
+
+ALTER TABLE `membres` MODIFY `pass` varchar(255);
+ALTER TABLE `ftpusers` MODIFY `encrypted_password` varchar(255);
 
 -- upgrade to merge alternc-ssl into alternc + change the way we work on SSL
 
@@ -9,7 +16,7 @@ ALTER TABLE `certificates`
       DROP `ssl_result`,
       ADD `provider` VARCHAR(16) NOT NULL DEFAULT '',
       ADD `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP;
-
+  
 ALTER TABLE `sub_domaines`
       ADD `certificate_id` INT UNSIGNED NOT NULL DEFAULT '0' AFTER `enable`,
       ADD `provider` VARCHAR(16) NOT NULL DEFAULT '' AFTER `certificate_id`,
