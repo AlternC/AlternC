@@ -157,7 +157,7 @@ chown :alterncpanel /etc/alternc/local.sh
 . /etc/alternc/local.sh
 
 # May be missing 
-test -d /var/run/alternc || ( mkdir -p /var/run/alternc && chown alterncpanel:alterncpanel /var/run/alternc )
+test -d /run/alternc || ( mkdir -p /run/alternc && chown alterncpanel:alterncpanel /run/alternc )
 
 # Create the target directory
 for i in "$ALTERNC_HTML" "$ALTERNC_MAIL" "$ALTERNC_LOGS" ; do

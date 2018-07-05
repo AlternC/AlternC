@@ -9,7 +9,7 @@
 require_once("/usr/share/alternc/panel/class/config_nochk.php");
 ini_set("display_errors", 1);
 
-if (file_exists("/var/run/alternc/jobs-lock")) {
+if (file_exists("/run/alternc/jobs-lock")) {
   echo "jobs-lock exists, did you ran alternc.install?\n";
   echo "canceling cron_users\n";
   exit(1);

@@ -18,7 +18,7 @@
   ----------------------------------------------------------------------
 */
 
-define('SLAVE_FLAG', "/var/run/alternc/refresh_slave");
+define('SLAVE_FLAG', "/run/alternc/refresh_slave");
 
 /**
  * Classe de gestion des domaines de l'hébergé.
@@ -54,7 +54,7 @@ class m_dom {
      * du domaine par update_domains.sh
      * @access private
      */
-    var $fic_lock_cron = "/var/run/alternc/cron.lock";
+    var $fic_lock_cron = "/run/alternc/cron.lock";
 
     /**
      * Le cron a-t-il été bloqué ?
@@ -63,6 +63,7 @@ class m_dom {
      * @access private
      */
     var $islocked = false;
+
     var $type_local = "VHOST";
     var $type_url = "URL";
     var $type_ip = "IP";
@@ -166,6 +167,7 @@ class m_dom {
     }
 
 
+    // returns array(ALL,NONE,ADMIN) 
     function domains_type_enable_values() {
         global $db, $msg, $cuid;
         $msg->debug("dom", "domains_type_enable_values");
@@ -185,6 +187,7 @@ class m_dom {
 
     /**
      * @param integer $type
+     * all = 'NONE','URL','DIRECTORY','IP','IPV6','DOMAIN','TXT'
      */
     function domains_type_target_values($type = null) {
         global $db, $msg;
@@ -551,7 +554,7 @@ class m_dom {
     }
 
 
-    function domains_type_update($name, $description, $target, $entry, $compatibility, $enable, $only_dns, $need_dns, $advanced, $create_tmpdir, $create_targetdir) {
+    function domains_type_update($name, $description, $target, $entry, $compatibility, $enable, $only_dns, $need_dns, $advanced, $create_tmpdir, $create_targetdir,$has_https_option=0) {
         global $msg, $db;
         // The name MUST contain only letter and digits, it's an identifier after all ...
         if (!preg_match("#^[a-z0-9]+$#", $name)) {
@@ -561,9 +564,10 @@ class m_dom {
         $only_dns = intval($only_dns);
         $need_dns = intval($need_dns);
         $advanced = intval($advanced);
+        $has_https_option = intval($has_https_option);
         $create_tmpdir = intval($create_tmpdir);
         $create_targetdir = intval($create_targetdir);
-        $db->query("UPDATE domaines_type SET description= ?, target= ?, entry= ?, compatibility= ?, enable= e, need_dns= ?, only_dns= ?, advanced= ?,create_tmpdir= ?,create_targetdir= ? where name= ?;", array($description, $target, $entry, $compatibility, $enable, $need_dns, $only_dns, $advanced, $create_tmpdir, $create_targetdir, $name));
+        $db->query("UPDATE domaines_type SET description= ?, target= ?, entry= ?, compatibility= ?, enable= e, need_dns= ?, only_dns= ?, advanced= ?,create_tmpdir= ?,create_targetdir= ?, has_https_option=? where name= ?;", array($description, $target, $entry, $compatibility, $enable, $need_dns, $only_dns, $advanced, $create_tmpdir, $create_targetdir, $has_https_option, $name));
         return true;
     }
 
@@ -922,177 +926,47 @@ class m_dom {
 
 
     /**
-     * Retourne les entrées DNS du domaine $domain issues du WHOIS.
-     *
-     * Cette fonction effectue un appel WHOIS($domain) sur Internet,
-     * et extrait du whois les serveurs DNS du domaine demandé. En fonction
-     * du TLD, on sait (ou pas) faire le whois correspondant.
-     * Actuellement, les tld suivants sont supportés :
-     * .com .net .org .be .info .ca .cx .fr .biz .name
-     *
-     * @param string $domain Domaine fqdn dont on souhaite les serveurs DNS
-     * @return array Retourne un tableau indexé avec les NOMS fqdn des dns
-     *   du domaine demandé. Retourne FALSE si une erreur s'est produite.
+     * Return the NS of a server by interrogating its parent zone.
+     * 
+     * @param string $domain FQDN we are searching for
+     * @return array Return the authoritative NS of this domain
+     *   or FALSE if an error occurred
      *
      */
     function whois($domain) {
         global $msg;
         $msg->debug("dom", "whois", $domain);
-        // pour ajouter un nouveau TLD, utiliser le code ci-dessous.
-        //  echo "whois : $domain<br />";
-        preg_match("#.*\.([^\.]*)#", $domain, $out);
-        $ext = $out[1];
-        // pour ajouter un nouveau TLD, utiliser le code ci-dessous.
-        //  echo "ext: $ext<br />";
 
-        $serveur = "";
-        if (($fp = @fsockopen("whois.iana.org", 43)) > 0) {
-            fputs($fp, "$domain\r\n");
-            $found = false;
-            $state = 0;
-            while (!feof($fp)) {
-                $ligne = fgets($fp, 128);
-                if (preg_match('#^whois:#', $ligne)) {
-                    $serveur = preg_replace('/whois:\ */', '', $ligne, 1);
-                }
+        $domain=trim($domain,"."); // strip initial/final .
+        $parent=$domain; $loopmax=32;
+        do {
+            $parent=substr($parent,strpos($parent,".")+1);
+            $parent=trim($parent,".");
+            if (!$parent) {
+                $msg->raise("ALERT", "dom", _("The domain has no parent. Check syntax"));
+                return false; // no . in this fqdn??
+            }
+            // ask the parent for its NS (no +trace)
+            $out=array();
+            exec("dig +short NS ".escapeshellarg($parent),$out);
+            $loopmax--;
+        } while (!count($out) && $loopmax); // will stop when : we have no parent, or
+        if (!count($out)) {
+            return false; // bad exit of the loop
+        }
+        $parentns=trim($out[0]); 
+
+        // we take the first NS of the SOA of the parent and interrogate it for the child domain:
+        $out=array();
+        exec("dig NS ".escapeshellarg($domain)." ".escapeshellarg("@".$parentns),$out);
+        // we scan the dig result for authoritative information :
+        $ns=array();
+        foreach($out as $line) {
+            if (preg_match('#^'.str_replace(".","\\.",$domain).'\..*IN\s*NS\s*(.*)$#',$line,$mat)) {
+                $ns[]=trim($mat[1]);
             }
         }
-        $serveur = str_replace(array(" ", "\n"), "", $serveur);
-
-        $egal = "";
-        switch ($ext) {
-        case "net":
-            $egal = "=";
-            break;
-        case "name":
-            $egal = "domain = ";
-            break;
-        }
-        $serveurList = array();
-        // pour ajouter un nouveau TLD, utiliser le code ci-dessous.
-        //  echo "serveur : $serveur <br />";
-        if (($fp = @fsockopen($serveur, 43)) > 0) {
-            fputs($fp, "$egal$domain\r\n");
-            $found = false;
-            $state = 0;
-            while (!feof($fp)) {
-                $ligne = fgets($fp, 128);
-                // pour ajouter un nouveau TLD, utiliser le code ci-dessous.
-                //  echo "| $ligne<br />";
-                switch ($ext) {
-                case "org":
-                case "com":
-                case "net":
-                case "info":
-                case "biz":
-                case "name":
-                case "cc":
-                    if (preg_match("#Name Server:#", $ligne)) {
-                        $found = true;
-                        $tmp = strtolower(str_replace(chr(10), "", str_replace(chr(13), "", str_replace(" ", "", str_replace("Name Server:", "", $ligne)))));
-                        if ($tmp) {
-                            $serveurList[] = $tmp;
-                        }
-                    }
-                break;
-                case "co":
-                    if (preg_match("#Name Server:#", $ligne)) {
-                        $found = true;
-                        $tmp = strtolower(str_replace(chr(10), "", str_replace(chr(13), "", str_replace(" ", "", str_replace("Name Server:", "", $ligne)))));
-                        if ($tmp)
-                            $serveurList[] = $tmp;
-                    }
-                    break;
-                case "cx":
-                    $ligne = str_replace(chr(10), "", str_replace(chr(13), "", str_replace(" ", "", $ligne)));
-                    if ($ligne == "" && $state == 1) {
-                        $state = 2;
-                    }
-                    if ($state == 1) {
-                        $serveurList[] = strtolower($ligne);
-                    }
-                    if ($ligne == "Nameservers:" && $state == 0) {
-                        $state = 1;
-                        $found = true;
-                    }
-                    break;
-                case "eu":
-                case "be":
-                    $ligne = preg_replace("/^ *([^ ]*) \(.*\)$/", "\\1", trim($ligne));
-                $tmp="";
-                if ($found) {
-                    $tmp = trim($ligne);
-                }
-                if ($tmp) {
-                    $serveurList[] = $tmp;
-                }
-                if ($ligne == "Nameservers:") {
-                    $state = 1;
-                    $found = true;
-                }
-                break;
-                case "im":
-                    if (preg_match('/Name Server:/', $ligne)) {
-                        $found = true;
-                        // weird regexp (trailing garbage after name server), but I could not make it work otherwise
-                        $tmp = strtolower(preg_replace('/Name Server: ([^ ]+)\..$/', "\\1", $ligne));
-                        $tmp = preg_replace('/[^-_a-z0-9\.]/', '', $tmp);
-                        if ($tmp) {
-                            $serveurList[] = $tmp;
-                        }
-                    }
-                    break;
-                case "it":
-                    if (preg_match("#nserver:#", $ligne)) {
-                        $found = true;
-                        $tmp = strtolower(preg_replace("/nserver:\s*[^ ]*\s*([^\s]*)$/", "\\1", $ligne));
-                        if ($tmp) {
-                            $serveurList[] = $tmp;
-                        }
-                    }
-                    break;
-                case "fr":
-                case "re":
-                    if (preg_match("#nserver:#", $ligne)) {
-                        $found = true;
-                        $tmp = strtolower(preg_replace("#nserver:\s*([^\s]*)\s*.*$#", "\\1", $ligne));
-                        if ($tmp) {
-                            $serveurList[] = $tmp;
-                        }
-                    }
-                break;
-                case "ca":
-                case "ws";
-                if (preg_match('#Name servers#', $ligne)) {
-                    // found the server
-                    $state = 1;
-                } elseif ($state) {
-                    if (preg_match('#^[^%]#', $ligne) && $ligne = preg_replace('#[[:space:]]#', "", $ligne)) {
-                        // first non-whitespace line is considered to be the nameservers themselves
-                        $found = true;
-                        $serveurList[] = $ligne;
-                    }
-                }
-                break;
-                case "coop":
-                    if (preg_match('#Host Name:\s*([^\s]+)#', $ligne, $matches)) {
-                        $found = true;
-                        $serveurList[] = $matches[1];
-                    }
-                } // switch
-            } // while
-            fclose($fp);
-        } else {
-            $msg->raise("ALERT", "dom", _("The Whois database is unavailable, please try again later"));
-            return array();
-        }
-
-        if ($found) {
-            return $serveurList;
-        } else {
-            $msg->raise("ALERT", "dom", _("The domain cannot be found in the Whois database"));
-            return array();
-        }
+        return $ns;
     } // whois
 
 
@@ -1195,7 +1069,6 @@ class m_dom {
         $db->next_record();
         $r["nsub"] = $db->Record["cnt"];
         $db->free();
-        #$db->query("SELECT sd.*, dt.description AS type_desc, dt.only_dns FROM sub_domaines sd, domaines_type dt WHERE compte='$cuid' AND domaine='$dom' AND UPPER(dt.name)=UPPER(sd.type) ORDER BY sd.sub,sd.type");
         $db->query("SELECT sd.*, dt.description AS type_desc, dt.only_dns, dt.advanced, dt.has_https_option FROM sub_domaines sd LEFT JOIN domaines_type dt on  UPPER(dt.name)=UPPER(sd.type) WHERE compte= ? AND domaine= ? ORDER BY dt.advanced,sd.sub,sd.type ;", array($cuid, $dom));
         // Pas de webmail, on le cochera si on le trouve.
         $r["sub"] = array();
@@ -1268,6 +1141,8 @@ class m_dom {
             return $https;
         } else return "";
     }
+
+    
     /**
      * @param integer $type
      * @param string $value
@@ -1594,7 +1469,7 @@ class m_dom {
 
         // Can't have ttl == 0. There is also a check in function_dns
         if ($ttl == 0) {
-            $ttl = 86400;
+            $ttl = 3600;
         }
 
         $t = checkfqdn($dom);

@@ -63,7 +63,7 @@ class DB_Sql {
         $dsn = sprintf('mysql:dbname=%s;host=%s', $db, $host);
 
         $options=array(
-            \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION
+//            \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION
         );
         try {
             $this->pdo_instance = new PDO($dsn, $user, $passwd, $options);

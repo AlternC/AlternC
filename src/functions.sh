@@ -32,7 +32,7 @@ mysql_query() { /usr/bin/mysql --defaults-file=/etc/alternc/my.cnf -Bs -e "$@" ;
 DOMAIN_LOG_FILE="/var/log/alternc/update_domains.log"
 VHOST_FILE="$VHOST_DIR/vhosts_all.conf" 
 VHOST_MANUALCONF="$VHOST_DIR/manual/"
-LOCK_JOBS="/var/run/alternc/jobs-lock"
+LOCK_JOBS="/run/alternc/jobs-lock"
 
 
 # Some useful miscellaneous shell functions

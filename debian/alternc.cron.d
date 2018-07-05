@@ -1,8 +1,8 @@
 
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
-# Create /var/run/ folder : it may be a ramdrive
-@reboot	 root	   mkdir -p /var/run/alternc && chown alterncpanel:alterncpanel /var/run/alternc 
+# Create /run/ folder : it may be a ramdrive
+@reboot	 root	   mkdir -p /run/alternc && chown alterncpanel:alterncpanel /run/alternc 
 
 # Every 2 days compress log files
 0 4 * * *	alterncpanel	/usr/lib/alternc/compress_logs.sh

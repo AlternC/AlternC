@@ -87,7 +87,7 @@ if (isset($L_ALTERNC_LOGS_ARCHIVE)) {
 define('ALTERNC_LOGS', "$L_ALTERNC_LOGS");
 define('ALTERNC_PANEL', "/usr/share/alternc/panel");
 define('ALTERNC_LOCALES', ALTERNC_PANEL . "/locales");
-define('ALTERNC_LOCK_JOBS', '/var/run/alternc/jobs-lock');
+define('ALTERNC_LOCK_JOBS', '/run/alternc/jobs-lock');
 define('ALTERNC_LOCK_PANEL', '/var/lib/alternc/panel/nologin.lock');
 define('ALTERNC_APACHE2_GEN_TMPL_DIR', '/etc/alternc/templates/apache2/');
 define('ALTERNC_VHOST_DIR', "/var/lib/alternc/apache-vhost/");
