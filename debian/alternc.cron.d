@@ -14,8 +14,8 @@ PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 0 5 * * *	alterncpanel	/usr/lib/alternc/sqlbackup.sh -t daily
 0 4 * * 0	alterncpanel	/usr/lib/alternc/sqlbackup.sh -t weekly
 
-# Every 5 minutes, spool waiting domain changes
-*/5 * * * *	root		/usr/lib/alternc/update_domains.sh
+# Every minute, spool waiting domain changes
+* * * * *	root		/usr/lib/alternc/update_domains.php
 
 # Every 5 minutes, do mails actions
 */5 * * * *	root		/usr/lib/alternc/update_mails.sh
