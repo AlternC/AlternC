@@ -1245,3 +1245,54 @@ function _dovecot_hash($password) {
     $hash = _sha512cr($password);
     return '{SHA512-CRYPT}' . $hash;
 }
+
+    
+// ------------------------------------------------------------
+/** 
+ * Add the line of text $line into file $file.
+ * do not duplicate (check)
+ * @param $file string the full path to the file where we should add the line
+ * @param $line string the line to add (without the termination \n, WILL BE ADDED)
+ * @return boolean TRUE if the line has been added, or FALSE if the line ALREADY EXISTED
+ */ 
+function add_line_to_file($file,$line) {
+    $f=fopen($file,"rb");
+    $found=false;
+    while($s=fgets($f,1024)) {
+        if (trim($s)==$line) {
+            $found=true;
+            return false;
+        }
+    }
+    fclose($f);
+    $f=fopen($file,"ab");
+    fputs($f,trim($line)."\n");
+    fclose($f);
+    return true;
+}
+    
+
+// ------------------------------------------------------------
+/** 
+ * Remove the line of text $line from file $file.
+ * @param $file string the full path to the file where we should remove the line
+ * @param $line string the line to add (without the termination \n, WILL BE REMOVED)
+ * @return boolean TRUE if the line has been found and removed, or FALSE if the line DIDN'T EXIST
+ */ 
+function del_line_from_file($file,$line) {
+    $f=fopen($file,"rb");
+    $g=fopen($file.".new","wb");
+    $found=false;
+    while($s=fgets($f,1024)) {
+        if (trim($s)!=$line) {
+            fputs($g,$s);
+        } else {
+            $found=true;
+        }
+    }
+    fclose($f);
+    fclose($g);
+    rename($file.".new",$file); // overwrite atomically
+    return $found;
+}
+

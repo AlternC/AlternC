@@ -115,7 +115,7 @@ CREATE TABLE IF NOT EXISTS domaines (
   noerase tinyint(4) NOT NULL default '0',
   dns_action enum ('OK','UPDATE','DELETE') NOT NULL default 'UPDATE',
   dns_result varchar(255) not null default '',
-  zonettl int(10) unsigned NOT NULL default '86400',
+  zonettl int(10) unsigned NOT NULL default '3600',
   PRIMARY KEY (id),
   UNIQUE KEY (domaine)
 ) ENGINE=InnoDB;
@@ -479,8 +479,10 @@ CREATE TABLE IF NOT EXISTS `domaines_type` (
     PRIMARY KEY ( `name` )
 ) ENGINE=InnoDB COMMENT = 'Type of domains allowed';
 
-INSERT IGNORE INTO `domaines_type` (name, description, target, entry,                             compatibility,                               only_dns, need_dns, advanced, enable) values
-('vhost',  'Locally hosted',             'DIRECTORY', '%SUB% IN A @@PUBLIC_IP@@',                 'txt,defmx,defmx2,mx,mx2',                   false,    false,    false, 'ALL'),
+INSERT IGNORE INTO `domaines_type` (name, description, target, entry, compatibility, only_dns, need_dns, advanced, enable) VALUES
+('dkim',  'DKIM Key',             'NONE', '%SUB% IN TXT "%TARGET%"',                 'txt,defmx,defmx2,mx,mx2,url,ip,ipv6',                   true,    true,    true, 'ADMIN'),
+('autodiscover',  'Autodiscover and autoconf for email', 'NONE', '%SUB% IN A @@PUBLIC_IP@@', 'txt,defmx,defmx2,mx,mx2', false, true, true, 'ADMIN'),
+ ('vhost',  'Locally hosted',             'DIRECTORY', '%SUB% IN A @@PUBLIC_IP@@',                 'txt,defmx,defmx2,mx,mx2',                   false,    false,    false, 'ALL'),
 ('url',    'URL redirection',            'URL',       '%SUB% IN A @@PUBLIC_IP@@',                 'txt,defmx,defmx2',                          false,    false,    false, 'ALL'),
 ('ip',     'IPv4 redirect',              'IP',        '%SUB% IN A %TARGET%',                      'url,ip,ipv6,txt,mx,mx2,defmx,defmx2',       true,     true,     false, 'ALL'),
 ('ipv6',   'IPv6 redirect',              'IPV6',      '%SUB% IN AAAA %TARGET%',                   'ip,ipv6,txt,mx,mx2,defmx,defmx2',           true,     true,     true,  'ALL'),

@@ -1442,7 +1442,7 @@ class m_dom {
      *  TRUE sinon.
      *
      */
-    function edit_domain($dom, $dns, $gesmx, $force = false, $ttl = 86400) {
+    function edit_domain($dom, $dns, $gesmx, $force = false, $ttl = 3600) {
         global $db, $msg, $hooks;
         $msg->log("dom", "edit_domain", $dom . "/" . $dns . "/" . $gesmx);
         // Locked ?
