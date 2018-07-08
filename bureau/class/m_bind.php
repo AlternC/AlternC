@@ -19,11 +19,16 @@
 */
 
 /**
- * bind9 file management class
+ * Manages BIND 9+ zone management templates in AlternC 3.5+
  * 
- * @copyright AlternC-Team 2000-2017 https://alternc.com/
+ * @copyright AlternC-Team 2000-2018 https://alternc.com/
  */
-class system_bind {
+class m_bind {
+
+    var $shouldreload;
+    var $shouldreconfig;
+
+    
     var $ZONE_TEMPLATE ="/etc/alternc/templates/bind/templates/zone.template";
     var $NAMED_TEMPLATE ="/etc/alternc/templates/bind/templates/named.template";
     var $NAMED_CONF ="/var/lib/alternc/bind/automatic.conf";
@@ -38,6 +43,47 @@ class system_bind {
     var $cache_zone_file = array();
     var $cache_domain_summary = array();
     var $zone_file_directory = '/var/lib/alternc/bind/zones/';
+
+    
+    // launched before any action by updatedomains 
+    function hook_updatedomains_dns_pre() {
+        $this->shouldreload=false;
+        $this->shouldreconfig=false;
+    }
+
+    // launched for each ZONE for which we want a zone update (or create)
+    function hook_updatedomains_dns_add($domain) {
+        
+    }
+
+    // launched for each ZONE for which we want a zone DELETE
+    function hook_updatedomains_dns_del($domain) {
+        
+    }
+
+    // launched at the very end of updatedomains 
+    function hook_updatedomains_dns_post() {
+        global $msg;
+        if ($this->shouldreload) {
+            $ret=0;
+            exec($this->rndc." reload 2>&1",$out,$ret);
+            if ($ret!=0) {
+                $msg->raise("ERROR","bind","Error while reloading bind, error code is $ret\n".implode("\n",$out));
+            } else {
+                $msg->raise("INFO","bind","Bind reloaded");
+            }
+        }
+        if ($this->shouldreconfig) {
+            $ret=0;
+            exec($this->rndc." reload 2>&1",$out,$ret);
+            if ($ret!=0) {
+                $msg->raise("ERROR","bind","Error while reconfiguring bind, error code is $ret\n".implode("\n",$out));
+            } else {
+                $msg->raise("INFO","bind","Bind reconfigured");
+            }
+        }
+    }
+
 
 
     /**
@@ -521,5 +567,6 @@ class system_bind {
     }
 
 
-} /* Class system_bind */
+    
+} // m_bind
 

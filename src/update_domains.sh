@@ -1,5 +1,12 @@
 #!/bin/bash
-# Update domain next-gen by fufroma
+# This is now done using PHP-only scripting
+
+/usr/lib/alternc/update_domains.php 
+
+exit
+
+# legacy code here 
+
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 for CONFIG_FILE in \

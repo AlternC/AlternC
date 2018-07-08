@@ -1770,10 +1770,15 @@ class m_dom {
         if ($this->islocked) {
             $msg->raise("ERROR", "dom", _("--- Program error --- Lock already obtained!"));
         }
-        while (file_exists($this->fic_lock_cron)) {
+        // wait for the file to disappear, or at most 15min: 
+        while (file_exists($this->fic_lock_cron) && filemtime($this->fic_lock_cron)>(time()-900)) {
+            clearstatcache();
             sleep(2);
         }
+        @touch($this->fic_lock_cron);
         $this->islocked = true;
+        // extra safe : 
+        register_shutdown_function(array("m_dom","unlock"),1);
         return true;
     }
 
@@ -1783,12 +1788,13 @@ class m_dom {
      * return true
      * @access private
      */
-    function unlock() {
+    function unlock($isshutdown=0) {
         global $msg;
         $msg->debug("dom", "unlock");
-        if (!$this->islocked) {
+        if (!$isshutdown && !$this->islocked) {
             $msg->raise("ERROR", "dom", _("--- Program error --- No lock on the domains!"));
         }
+        @unlink($this->fic_lock_cron);
         $this->islocked = false;
         return true;
     }
@@ -1891,6 +1897,95 @@ class m_dom {
     }
 
 
+    /**
+     * complex process to manage domain and subdomain updates
+     * Launched every minute by a cron as root 
+     * should launch hooks for each domain or subdomain,
+     * so that apache & bind could do their job
+     */
+    function update_domains() {
+        if (posix_getuid()!=0) {
+            echo "FATAL: please lauch me as root\n";
+            exit();
+        }
+
+        $dom->lock();
+
+        // fix in case we forgot to delete SUBDOMAINS before deleting a DOMAIN
+        $db->query("UPDATE sub_domaines sd, domaines d SET sd.web_action = 'DELETE' WHERE sd.domaine = d.domaine AND sd.compte=d.compte AND d.dns_action = 'DELETE';");
+        
+        // Search for things to do on DOMAINS:
+        $db->query("SELECT * FROM domaines WHERE dns_action!='OK';");
+        $alldoms=array();
+        while ($db->next_record()) {
+            $alldoms[$db->Record["id"]]=$db->Record;
+        }
+        // now launch hooks
+        if (count($alldoms)) {
+            $hooks->invoke("hook_updatedomains_dns_pre");
+            foreach($alldoms as $id=>$onedom) {
+                if ($onedom["gesdns"]==0 || $onedom["dns_action"]=="DELETE") {
+                    $ret = $hooks->invoke("hook_updatedomains_dns_del",array(array($onedom)));
+                } else {
+                    $ret = $hooks->invoke("hook_updatedomains_dns_add",array(array($onedom)));
+                }
+
+                if ($onedom["dns_action"]=="DELETE") {
+                    $db->query("DELETE FROM domaines WHERE domaine=?;",array($onedom));
+                } else {
+                    // we keep the highest result returned by hooks...
+                    rsort($ret,SORT_NUMERIC); $returncode=$ret[0];
+                    $db->query("UPDATE domaines SET dns_result=?, dns_action='OK' WHERE domaine=?;",array($returncode,$onedom));
+                }
+            }
+            $hooks->invoke("hook_updatedomains_dns_post");
+        }
+
+
+        // Search for things to do on SUB-DOMAINS:
+        $db->query("SELECT sd.*, dt.only_dns FROM domaines_type dt, sub_domaines sd WHERE dt.name=sd.type AND sd.web_action!='OK';");
+        $alldoms=array();
+        $ignore=array();
+        while ($db->next_record()) {
+            // only_dns=1 => weird, we should not have web_action SET to something else than OK ... anyway, skip it
+            if ($db->Record["only_dns"]) {
+                $ignore[]=$db->Record["id"];
+            } else {
+                $alldoms[$db->Record["id"]]=$db->Record;
+            }
+        }
+        foreach($ignore as $id) {
+            // @FIXME (unsure it's useful) maybe we could check that no file exist for this subdomain ?
+            $db->query("UPDATE sub_domaines SET web_action='OK' WHERE id=?;",array($id));
+        }
+        // now launch hooks
+        if (count($alldoms)) {
+            $hooks->invoke("hook_updatedomains_web_pre");
+            foreach($alldoms as $id=>$subdom) {
+                // is it a delete (DISABLED or DELETE)
+                if ($subdom["web_action"]=="DELETE" || strtoupper(substr($subdom["enable"],0,7))=="DISABLE") {
+                    $ret = $hooks->invoke("hook_updatedomains_web_del",array($subdom["id"]));
+                } else {
+                    $hooks->invoke("hook_updatedomains_web_before",array($subdom["id"])); // give a chance to get SSL cert before ;) 
+                    $ret = $hooks->invoke("hook_updatedomains_web_add",array($subdom["id"]));
+                    $hooks->invoke("hook_updatedomains_web_after",array($subdom["id"]));
+                }
+
+                if ($subdom["web_action"]=="DELETE") {
+                    $db->query("DELETE FROM sub_domaines WHERE id=?;",array($id));
+                } else {
+                    // we keep the highest result returned by hooks...
+                    rsort($ret,SORT_NUMERIC); $returncode=$ret[0];
+                    $db->query("UPDATE sub_domaines SET web_result=?, web_action='OK' WHERE id=?;",array($returncode,$id));
+                }
+            }
+            $hooks->invoke("hook_updatedomains_web_post");
+        }
+        
+        $dom->unlock();
+    }
+
+    
     /**
      * Return an array with all the needed parameters to generate conf 
      * of a vhost.
