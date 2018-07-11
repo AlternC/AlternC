@@ -596,14 +596,22 @@ SELECT ?,?,?, FROM_UNIXTIME(?), FROM_UNIXTIME(?), ?, ?, sslcsr FROM certificate 
             return; // nothing to do : this domain type does not involve Vhosts
         }
 
+        // The 'vhost' type is overloaded with -http, -https, and -both.
+        // If the type starts with vhost, we should match vhost%
+        // Generally, only 'vhost' is used since the overloads are not enabled
+        // for use in the interface.
+        $type_match = $type;
+        if (substr($type, 0, 5) == 'vhost') {
+            $type_match = 'vhost%';
+        }
         if ($action == "postinst") {
             $msg->log("ssl", "update_domain:CREATE($action,$type,$fqdn)");
             $offset = 0;
             $found = false;
             do { // try each subdomain (strtok-style) and search them in sub_domaines table:
                 $db->query(
-                    "SELECT * FROM sub_domaines WHERE sub=? AND domaine=? AND web_action NOT IN ('','OK') AND type=?",
-                    array(substr($fqdn, 0, $offset), substr($fqdn, $offset + ($offset != 0)), $type)
+                    "SELECT * FROM sub_domaines WHERE sub=? AND domaine=? AND web_action NOT IN ('','OK') AND type LIKE ?",
+                    array(substr($fqdn, 0, $offset), substr($fqdn, $offset + ($offset != 0)), $type_match)
                 );
                 if ($db->next_record()) {
                     $found = true;
