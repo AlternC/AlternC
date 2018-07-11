@@ -480,7 +480,9 @@ CREATE TABLE IF NOT EXISTS `domaines_type` (
 ) ENGINE=InnoDB COMMENT = 'Type of domains allowed';
 
 INSERT IGNORE INTO `domaines_type` (name, description, target, entry,                             compatibility,                               only_dns, need_dns, advanced, enable) values
-('vhost',  'Locally hosted',             'DIRECTORY', '%SUB% IN A @@PUBLIC_IP@@',                 'txt,defmx,defmx2,mx,mx2',                   false,    false,    false, 'ALL'),
+('vhost',      'Locally hosted with https->http',   'DIRECTORY', '%SUB% IN A @@PUBLIC_IP@@',      'txt,defmx,defmx2,mx,mx2',                   false,    false,    false, 'ALL'),
+('vhost-https','Locally hosted with http->https',   'DIRECTORY', '%SUB% IN A @@PUBLIC_IP@@',      'txt,defmx,defmx2,mx,mx2',                   false,    false,    false, 'ALL'),
+('vhost-both', 'Locally hosted with http and https', 'DIRECTORY', '%SUB% IN A @@PUBLIC_IP@@',     'txt,defmx,defmx2,mx,mx2',                   false,    false,    false, 'ALL'),
 ('url',    'URL redirection',            'URL',       '%SUB% IN A @@PUBLIC_IP@@',                 'txt,defmx,defmx2',                          false,    false,    false, 'ALL'),
 ('ip',     'IPv4 redirect',              'IP',        '%SUB% IN A %TARGET%',                      'url,ip,ipv6,txt,mx,mx2,defmx,defmx2',       true,     true,     false, 'ALL'),
 ('ipv6',   'IPv6 redirect',              'IPV6',      '%SUB% IN AAAA %TARGET%',                   'ip,ipv6,txt,mx,mx2,defmx,defmx2',           true,     true,     true,  'ALL'),
