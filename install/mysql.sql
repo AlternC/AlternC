@@ -482,9 +482,15 @@ CREATE TABLE IF NOT EXISTS `domaines_type` (
 INSERT IGNORE INTO `domaines_type` (name, description, target, entry, compatibility, only_dns, need_dns, advanced, enable,has_https_option) VALUES
 ('dkim',  'DKIM Key',             'TXT', '%SUB% IN TXT "%TARGET%"',                 'txt,defmx,defmx2,mx,mx2,url,ip,ipv6',                   true,    true,    true, 'ADMIN', false),
 ('autodiscover',  'Email autoconfiguration', 'NONE', '%SUB% IN A @@PUBLIC_IP@@', 'txt,defmx,defmx2,mx,mx2', false, true, true, 'ADMIN', false),
-('vhost',      'Locally hosted with https->http',   'DIRECTORY', '%SUB% IN A @@PUBLIC_IP@@',      'txt,defmx,defmx2,mx,mx2',                   false,    false,    false, 'ALL'),
-('vhost-https','Locally hosted with http->https',   'DIRECTORY', '%SUB% IN A @@PUBLIC_IP@@',      'txt,defmx,defmx2,mx,mx2',                   false,    false,    false, 'ALL'),
-('vhost-both', 'Locally hosted with http and https', 'DIRECTORY', '%SUB% IN A @@PUBLIC_IP@@',     'txt,defmx,defmx2,mx,mx2',                   false,    false,    false, 'ALL'),
+-- Default vhost type to maintains compatibility across versions.
+-- This is overloaded depending on the value of the https column in sub_domaines
+('vhost',      'Locally hosted',   'DIRECTORY', '%SUB% IN A @@PUBLIC_IP@@',      'txt,defmx,defmx2,mx,mx2',                   false,    false,    false, 'ALL', true),
+-- The following 3 types (vhost-http, vhost-https, vhost-both) are overloads for vhost
+-- and are "disabled" to not be available from the interface, but still be valid domaine types
+-- when checking in m_ssl::updateDomain.
+('vhost-http','Locally hosted with http->https',   'DIRECTORY', '%SUB% IN A @@PUBLIC_IP@@',      'txt,defmx,defmx2,mx,mx2',                   false,    false,    false, 'NONE', false),
+('vhost-https','Locally hosted with http->https',   'DIRECTORY', '%SUB% IN A @@PUBLIC_IP@@',      'txt,defmx,defmx2,mx,mx2',                   false,    false,    false, 'NONE', false),
+('vhost-both', 'Locally hosted with http and https', 'DIRECTORY', '%SUB% IN A @@PUBLIC_IP@@',     'txt,defmx,defmx2,mx,mx2',                   false,    false,    false, 'NONE', false),
 ('url',    'URL redirection',            'URL',       '%SUB% IN A @@PUBLIC_IP@@',                 'txt,defmx,defmx2',                          false,    false,    false, 'ALL', false),
 ('ip',     'IPv4 redirect',              'IP',        '%SUB% IN A %TARGET%',                      'url,ip,ipv6,txt,mx,mx2,defmx,defmx2',       true,     true,     false, 'ALL', false),
 ('ipv6',   'IPv6 redirect',              'IPV6',      '%SUB% IN AAAA %TARGET%',                   'ip,ipv6,txt,mx,mx2,defmx,defmx2',           true,     true,     true,  'ALL', false),
