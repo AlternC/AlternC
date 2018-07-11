@@ -57,7 +57,7 @@ mysql_query "update sub_domaines sd, domaines d set sd.web_action = 'DELETE' whe
 
 # Sub_domaines we want to delete
 # sub_domaines.web_action = delete
-for sub in $( mysql_query "select concat_ws('$B',if(length(sd.https)>0,concat_ws('-',sd.type,sd.https),lower(sd.type)), if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine)) from sub_domaines sd where web_action ='DELETE';") ; do
+for sub in $( mysql_query "select concat_ws('$B', lower(sd.type), if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine)) from sub_domaines sd where web_action ='DELETE';") ; do
     host_delete ${sub/$B/ }
     mysql_query "delete from sub_domaines where concat_ws('$B',lower(type), if(length(sub)>0,concat_ws('.',sub,domaine),domaine)) = '$sub' and web_action ='DELETE';"
     echo 1 > "$RELOAD_WEB"
