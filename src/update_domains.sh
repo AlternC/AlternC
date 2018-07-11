@@ -57,7 +57,7 @@ mysql_query "update sub_domaines sd, domaines d set sd.web_action = 'DELETE' whe
 
 # Sub_domaines we want to delete
 # sub_domaines.web_action = delete
-for sub in $( mysql_query "select concat_ws('$B',lower(sd.type), if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine)) from sub_domaines sd where web_action ='DELETE';") ; do
+for sub in $( mysql_query "select concat_ws('$B', lower(sd.type), if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine)) from sub_domaines sd where web_action ='DELETE';") ; do
     host_delete ${sub/$B/ }
     mysql_query "delete from sub_domaines where concat_ws('$B',lower(type), if(length(sub)>0,concat_ws('.',sub,domaine),domaine)) = '$sub' and web_action ='DELETE';"
     echo 1 > "$RELOAD_WEB"
@@ -67,7 +67,7 @@ done
 # sub_domaines.web_action = update and sub_domains.only_dns = false
 IFS="$NEWIFS"
 mysql_query "
-select concat_ws('$IFS',sd.id, lower(sd.type), if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine), concat_ws('@',m.login,v.value), sd.valeur )
+select concat_ws('$IFS',sd.id, if(length(sd.https)>0,concat_ws('-',sd.type,sd.https),lower(sd.type)), if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine), concat_ws('@',m.login,v.value), sd.valeur )
 from sub_domaines sd,membres m,variable v
 where sd.compte=m.uid and sd.web_action ='UPDATE' and v.name='mailname_bounce'
 ;" | while read sdid type domain mail valeur ; do
@@ -77,14 +77,14 @@ where sd.compte=m.uid and sd.web_action ='UPDATE' and v.name='mailname_bounce'
 done
 
 # Domaine to enable
-mysql_query "select concat_ws('$IFS',sd.id, lower(sd.type),if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine),sd.valeur) from sub_domaines sd where sd.enable ='ENABLE' ;"|while read sdid type domain valeur ; do
+mysql_query "select concat_ws('$IFS',sd.id, if(length(sd.https)>0,concat_ws('-',sd.type,sd.https),lower(sd.type)),if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine),sd.valeur) from sub_domaines sd where sd.enable ='ENABLE' ;"|while read sdid type domain valeur ; do
     host_enable "$type" "$domain" "$valeur"
     mysql_query "update sub_domaines sd set enable='ENABLED' where sd.id = '$sdid' ;"
     echo 1 > "$RELOAD_WEB"
 done
 
 # Domains to disable
-mysql_query "select concat_ws('$IFS', sd.id, lower(sd.type),if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine),sd.valeur) from sub_domaines sd where sd.enable ='DISABLE' ;"|while read sdid type domain valeur ; do
+mysql_query "select concat_ws('$IFS', sd.id, if(length(sd.https)>0,concat_ws('-',sd.type,sd.https),lower(sd.type)),if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine),sd.valeur) from sub_domaines sd where sd.enable ='DISABLE' ;"|while read sdid type domain valeur ; do
     host_disable "$type" "$domain" "$valeur"
     mysql_query "update sub_domaines sd set enable='DISABLED' where sd.id = '$sdid' ;"
     echo 1 > "$RELOAD_WEB"
