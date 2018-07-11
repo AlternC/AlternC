@@ -130,8 +130,8 @@ $dom->unlock();
 
      <select class="inl" name="https_<?php ehe($dt['name']); ?>" id="https_<?php ehe($dt['name']); ?>">
             <option value="http"<?php selected((strtoupper($type)==strtoupper($dt['name']) && $sd["https"]=="http") || false); ?>><?php __("HTTP Only (redirect HTTPS to HTTP)"); ?></option>
-            <option value="https"<?php selected((strtoupper($type)==strtoupper($dt['name']) && $sd["https"]=="http") || true); ?>><?php __("HTTPS Only (redirect HTTP to HTTPS)"); ?></option>
-            <option value="both"<?php selected((strtoupper($type)==strtoupper($dt['name']) && $sd["https"]=="http") || false); ?>><?php __("Both HTTP and HTTPS hosted at the same place"); ?></option>
+            <option value="https"<?php selected((strtoupper($type)==strtoupper($dt['name']) && $sd["https"]=="https") || false); ?>><?php __("HTTPS Only (redirect HTTP to HTTPS)"); ?></option>
+            <option value="both"<?php selected((strtoupper($type)==strtoupper($dt['name']) && $sd["https"]=="both") || false); ?>><?php __("Both HTTP and HTTPS hosted at the same place"); ?></option>
             </select>
 <?php  } ?>
         </td>
