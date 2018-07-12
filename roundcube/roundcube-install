@@ -81,9 +81,8 @@ EOF
 fi
 
 if [ "$1" = "end" ]; then
-  # This is necessary because upgrading roundcube from 7.1 to 7.2 changes this setting
-  chown alternc-roundcube:root /etc/roundcube/config.inc.php
-  # In case owner is reset to www-data
-  chown alternc-roundcube:nogroup /var/lib/roundcube/temp
+  # Roundcube vhosts run as www-data instead of alternc-roundcube now.
+  # Ensure the configuration is owned by the appropriate user.
+  chown www-data:root /etc/roundcube/config.inc.php
+  chown www-data:nogroup /var/lib/roundcube/temp
 fi
-
