@@ -76,7 +76,7 @@ if (isset($save) && $save) {
 }
 
 $addhead['css'][]='<link rel="stylesheet" href="/javascript/prettify/prettify.css" type="text/css" />';
-$addhead['js'][]='<script src="/javascript/prettify/prettify.js" type="text/javascript"></script>'
+$addhead['js'][]='<script src="/javascript/prettify/prettify.js" type="text/javascript"></script>';
 include_once("head.php");
 
 ?>
