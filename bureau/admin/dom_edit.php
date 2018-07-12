@@ -197,6 +197,12 @@ if (!$r["sub"][$i]["only_dns"]) {
         __("HTTP and HTTPS");
         break;
     default:
+        if ($r['sub'][$i]['has_https_option']) {
+            __("Unknown");
+        }
+        else {
+            __('Not applicable');
+        }
         break;
     }
 }
