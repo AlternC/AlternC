@@ -393,6 +393,11 @@ if [ -x /usr/sbin/apache2 ]; then
         a2enconf alternc-ssl
     fi
 
+    if [ ! -h /etc/apache2/conf-available/alternc.conf ] && [ -e /etc/apache2/conf-available/ ]; then
+        ln -sf /etc/alternc/apache2.conf /etc/apache2/conf-available/alternc.conf
+        a2enconf alternc
+    fi
+
     SERVICES="$SERVICES $s"
 fi
 
