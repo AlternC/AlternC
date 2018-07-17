@@ -54,7 +54,7 @@ class m_dom {
      * du domaine par update_domains.sh
      * @access private
      */
-    var $fic_lock_cron = "/run/alternc/cron.lock";
+    const fic_lock_cron = "/run/alternc/cron.lock";
 
     var $type_local = "VHOST";
     var $type_url = "URL";
@@ -1784,7 +1784,7 @@ class m_dom {
     function unlock($isshutdown=0) {
         global $msg,$domislocked;
         $msg->debug("dom", "unlock");
-        if (!$isshutdown && !m_dom::islocked) {
+        if (!$isshutdown && !$domislocked) {
             $msg->raise("ERROR", "dom", _("--- Program error --- No lock on the domains!"));
         }
         // don't use $this since we may be called by register_shutdown_function out of an object instance.
