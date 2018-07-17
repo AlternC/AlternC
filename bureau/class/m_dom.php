@@ -1065,13 +1065,14 @@ class m_dom {
         $db->query("SELECT sd.*, dt.description AS type_desc, dt.only_dns, dt.advanced, dt.has_https_option FROM sub_domaines sd LEFT JOIN domaines_type dt on  UPPER(dt.name)=UPPER(sd.type) WHERE compte= ? AND domaine= ? ORDER BY dt.advanced,sd.sub,sd.type ;", array($cuid, $dom));
         // Pas de webmail, on le cochera si on le trouve.
         $r["sub"] = array();
-        $data = $db->fetchAll();
-        foreach($data as $i=>$record) {
+        $i=0;
+        while ($record=$db->fetch()) {
             $r["sub"][$i] = $record;
             // FIXME : replace sub by name and dest by valeur in the code that exploits this function :
             $r["sub"][$i]["name"] = $record["sub"];
             $r["sub"][$i]["dest"] = $record["valeur"];
             $r["sub"][$i]["fqdn"] = ((!empty($r["sub"][$i]["name"])) ? $r["sub"][$i]["name"] . "." : "") . $r["name"];
+            $i++;
         }
         $db->free();
         return $r;
@@ -1920,9 +1921,9 @@ class m_dom {
             $hooks->invoke("hook_updatedomains_dns_pre");
             foreach($alldoms as $id=>$onedom) {
                 if ($onedom["gesdns"]==0 || $onedom["dns_action"]=="DELETE") {
-                    $ret = $hooks->invoke("hook_updatedomains_dns_del",array(array($onedom)));
+                    $ret = $hooks->invoke("hook_updatedomains_dns_del",array($onedom));
                 } else {
-                    $ret = $hooks->invoke("hook_updatedomains_dns_add",array(array($onedom)));
+                    $ret = $hooks->invoke("hook_updatedomains_dns_add",array($onedom));
                 }
 
                 if ($onedom["dns_action"]=="DELETE") {

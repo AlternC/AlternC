@@ -197,7 +197,6 @@ if (!$r["sub"][$i]["only_dns"]) {
         __("HTTP and HTTPS");
         break;
     default:
-        __("Unknown");
         break;
     }
 }

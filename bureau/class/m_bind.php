@@ -128,7 +128,7 @@ class m_bind {
      */
     function hook_updatedomains_dns_del($dominfo) {
         $domain = $dominfo["domaine"];
-        if (remove_line_from_file(
+        if (del_line_from_file(
             $this->NAMED_CONF,
             trim(strtr(
                 file_get_contents($this->NAMED_TEMPLATE),
@@ -157,7 +157,7 @@ class m_bind {
         global $msg;
         if ($this->shouldreload) {
             $ret=0;
-            exec($this->rndc." reload 2>&1",$out,$ret);
+            exec($this->RNDC." reload 2>&1",$out,$ret);
             if ($ret!=0) {
                 $msg->raise("ERROR","bind","Error while reloading bind, error code is $ret\n".implode("\n",$out));
             } else {
@@ -166,7 +166,7 @@ class m_bind {
         }
         if ($this->shouldreconfig) {
             $ret=0;
-            exec($this->rndc." reload 2>&1",$out,$ret);
+            exec($this->RNDC." reload 2>&1",$out,$ret);
             if ($ret!=0) {
                 $msg->raise("ERROR","bind","Error while reconfiguring bind, error code is $ret\n".implode("\n",$out));
             } else {
