@@ -4,7 +4,6 @@
 . /usr/lib/alternc/functions.sh
 
 echo "This script will rebuild all web configuration and regenerate DNS."
-echo "Only files in $VHOST_MANUALCONF will be preserved."
 echo "Use --force to skip confirmation"
 
 if [ ! "$1" == "--force" ] ; then 
@@ -20,7 +19,6 @@ mysql_query "update     domaines set dns_action = 'UPDATE' WHERE dns_action != '
 
 echo "Now launching update_domains to rebuild."
 /usr/lib/alternc/update_domains.sh
-/usr/lib/alternc/generate_bind_conf.php --force
 
 echo "Finish."
 

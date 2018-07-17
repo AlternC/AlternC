@@ -1909,7 +1909,7 @@ class m_dom {
             exit();
         }
 
-        $dom->lock();
+        $this->lock();
 
         // fix in case we forgot to delete SUBDOMAINS before deleting a DOMAIN
         $db->query("UPDATE sub_domaines sd, domaines d SET sd.web_action = 'DELETE' WHERE sd.domaine = d.domaine AND sd.compte=d.compte AND d.dns_action = 'DELETE';");
@@ -1982,7 +1982,7 @@ class m_dom {
             $hooks->invoke("hook_updatedomains_web_post");
         }
         
-        $dom->unlock();
+        $this->unlock();
     }
 
     
