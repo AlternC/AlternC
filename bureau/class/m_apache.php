@@ -106,6 +106,7 @@ class m_apache {
      *  launched for each FQDN for which we want to delete a vhost template 
      */
     function hook_updatedomains_web_del($subdomid) {
+        global $db;
         $db->query("SELECT sd.*, dt.only_dns, dt.has_https_option, m.login FROM domaines_type dt, sub_domaines sd LEFT JOIN membres m ON m.uid=sd.compte WHERE dt.name=sd.type AND sd.web_action!='OK' AND id=?;",array($subdomid));
         $db->next_record();
         $subdom=$db->Record;

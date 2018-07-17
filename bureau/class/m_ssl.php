@@ -394,7 +394,7 @@ INSTR(CONCAT(sd.sub,IF(sd.sub!='','.',''),sd.domaine),'.')+1))=?
             $chain=false;
 
         return array(
-            "cert" => self::KEY_REPOSITORY."/".floor($id/1000)."/".$id.".cert",
+            "cert" => self::KEY_REPOSITORY."/".floor($id/1000)."/".$id.".pem",
             "key" => self::KEY_REPOSITORY."/".floor($id/1000)."/".$id.".key",
             "chain" => $chain
         );
