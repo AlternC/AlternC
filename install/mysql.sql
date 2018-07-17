@@ -480,7 +480,7 @@ CREATE TABLE IF NOT EXISTS `domaines_type` (
 ) ENGINE=InnoDB COMMENT = 'Type of domains allowed';
 
 INSERT IGNORE INTO `domaines_type` (name, description, target, entry, compatibility, only_dns, need_dns, advanced, enable) VALUES
-('dkim',  'DKIM Key',             'NONE', '%SUB% IN TXT "%TARGET%"',                 'txt,defmx,defmx2,mx,mx2,url,ip,ipv6',                   true,    true,    true, 'ADMIN'),
+('dkim',  'DKIM Key',             'TXT', '%SUB% IN TXT "%TARGET%"',                 'txt,defmx,defmx2,mx,mx2,url,ip,ipv6',                   true,    true,    true, 'ADMIN'),
 ('autodiscover',  'Email autoconfiguration', 'NONE', '%SUB% IN A @@PUBLIC_IP@@', 'txt,defmx,defmx2,mx,mx2', false, true, true, 'ADMIN'),
  ('vhost',  'Locally hosted',             'DIRECTORY', '%SUB% IN A @@PUBLIC_IP@@',                 'txt,defmx,defmx2,mx,mx2',                   false,    false,    false, 'ALL'),
 ('url',    'URL redirection',            'URL',       '%SUB% IN A @@PUBLIC_IP@@',                 'txt,defmx,defmx2',                          false,    false,    false, 'ALL'),
