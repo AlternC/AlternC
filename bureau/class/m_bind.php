@@ -227,7 +227,7 @@ class m_bind {
         ORDER BY ENTRY ;");
         $t="";
         while ($db->next_record()) {
-            $t.= $db->f('entry')."\n";
+            $t.= $db->f('ENTRY')."\n";
         }
         return $t;
     }
