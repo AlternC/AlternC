@@ -1904,6 +1904,7 @@ class m_dom {
      * so that apache & bind could do their job
      */
     function update_domains() {
+        global $db, $hooks;
         if (posix_getuid()!=0) {
             echo "FATAL: please lauch me as root\n";
             exit();

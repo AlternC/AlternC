@@ -1,3 +1,4 @@
+#!/usr/bin/php -q
 <?php
 
 // we don't check our AlternC session
