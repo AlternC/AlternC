@@ -147,7 +147,7 @@ $dom->unlock();
 } 
 ?></button>
 <?php if ($isedit) { ?>
-              <button class="inb cancel" name="cancel" onclick="document.location = 'dom_edit.php?domain=<?php echo $domain; ?>'"><?php __("Cancel"); ?></button>
+              <button class="inb cancel" type="button" name="cancel" onclick="document.location = 'dom_edit.php?domain=<?php echo $domain; ?>'"><?php __("Cancel"); ?></button>
 <?php } ?>
 </td>
         </tr>
