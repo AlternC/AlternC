@@ -56,14 +56,6 @@ class m_dom {
      */
     var $fic_lock_cron = "/run/alternc/cron.lock";
 
-    /**
-     * Le cron a-t-il été bloqué ?
-     * Il faut appeler les fonctions privées lock et unlock entre les
-     * appels aux domaines.
-     * @access private
-     */
-    var $islocked = false;
-
     var $type_local = "VHOST";
     var $type_url = "URL";
     var $type_ip = "IP";
@@ -84,9 +76,10 @@ class m_dom {
      * Constructeur
      */
     function m_dom() {
-        global $L_FQDN;
+        global $L_FQDN, $domislocked;
         $this->tld_no_check_at_all = variable_get('tld_no_check_at_all', 0, 'Disable ALL check on the TLD (users will be able to add any domain)', array('desc' => 'Disabled', 'type' => 'boolean'));
         variable_get('mailname_bounce', $L_FQDN, 'FQDN of the mail server, used to create vhost virtual mail_adress.', array('desc' => 'FQDN', 'type' => 'string'));
+        $domislocked=false;
     }
 
 
@@ -694,11 +687,11 @@ class m_dom {
      * @return boolean Retourne FALSE si une erreur s'est produite, TRUE sinon.
      */
     function add_domain($domain, $dns, $noerase = false, $force = false, $isslave = false, $slavedom = "") {
-        global $db, $msg, $quota, $L_FQDN, $tld, $cuid, $hooks;
+        global $db, $msg, $quota, $L_FQDN, $tld, $cuid, $hooks, $domislocked;
         $msg->log("dom", "add_domain", $domain);
 
         // Locked ?
-        if (!$this->islocked) {
+        if (!$domislocked) {
             $msg->raise("ERROR", "dom", _("--- Program error --- No lock on the domains!"));
             return false;
         }
@@ -1037,10 +1030,10 @@ class m_dom {
      *
      */
     function get_domain_all($dom) {
-        global $db, $msg, $cuid;
+        global $db, $msg, $cuid, $domislocked;
         $msg->debug("dom", "get_domain_all", $dom);
         // Locked ?
-        if (!$this->islocked) {
+        if (!$domislocked) {
             $msg->raise("ERROR", "dom", _("--- Program error --- No lock on the domains!"));
             return false;
         }
@@ -1098,10 +1091,10 @@ class m_dom {
      *  Retourne FALSE si une erreur s'est produite.
      */
     function get_sub_domain_all($sub_domain_id) {
-        global $db, $msg, $cuid;
+        global $db, $msg, $cuid, $domislocked;
         $msg->debug("dom", "get_sub_domain_all", $sub_domain_id);
         // Locked ?
-        if (!$this->islocked) {
+        if (!$domislocked) {
             $msg->raise("ERROR", "dom", _("--- Program error --- No lock on the domains!"));
             return false;
         }
@@ -1263,10 +1256,10 @@ class m_dom {
      * @return boolean true if the preference has been set
      */
     function set_subdomain_ssl_provider($sub_domain_id,$provider) { 
-        global $db, $msg, $cuid, $ssl;
+        global $db, $msg, $cuid, $ssl, $domislocked;
         $msg->log("dom", "set_sub_domain_ssl_provider", $sub_domain_id." / ".$provider);
         // Locked ?
-        if (!$this->islocked) {
+        if (!$domislocked) {
             $msg->raise("ERROR", "dom", _("--- Program error --- No lock on the domains!"));
             return false;
         }
@@ -1311,10 +1304,10 @@ class m_dom {
      * @return boolean Retourne FALSE si une erreur s'est produite, TRUE sinon.
      */
     function set_sub_domain($dom, $sub, $type, $dest, $sub_domain_id = 0, $https) {
-        global $db, $msg, $cuid, $bro;
+        global $db, $msg, $cuid, $bro, $domislocked;
         $msg->log("dom", "set_sub_domain", $dom . "/" . $sub . "/" . $type . "/" . $dest);
         // Locked ?
-        if (!$this->islocked) {
+        if (!$domislocked) {
             $msg->raise("ERROR", "dom", _("--- Program error --- No lock on the domains!"));
             return false;
         }
@@ -1396,10 +1389,10 @@ class m_dom {
      *
      */
     function del_sub_domain($sub_domain_id) {
-        global $db, $msg;
+        global $db, $msg, $domislocked;
         $msg->log("dom", "del_sub_domain", $sub_domain_id);
         // Locked ?
-        if (!$this->islocked) {
+        if (!$domislocked) {
             $msg->raise("ERROR", "dom", _("--- Program error --- No lock on the domains!"));
             return false;
         }
@@ -1443,10 +1436,10 @@ class m_dom {
      *
      */
     function edit_domain($dom, $dns, $gesmx, $force = false, $ttl = 3600) {
-        global $db, $msg, $hooks;
+        global $db, $msg, $hooksthis;
         $msg->log("dom", "edit_domain", $dom . "/" . $dns . "/" . $gesmx);
         // Locked ?
-        if (!$this->islocked && !$force) {
+        if (!$domislocked && !$force) {
             $msg->raise("ERROR", "dom", _("--- Program error --- No lock on the domains!"));
             return false;
         }
@@ -1765,18 +1758,18 @@ class m_dom {
      * @access private
      */
     function lock() {
-        global $msg;
+        global $msg,$domislocked;
         $msg->debug("dom", "lock");
-        if ($this->islocked) {
+        if ($domislocked) {
             $msg->raise("ERROR", "dom", _("--- Program error --- Lock already obtained!"));
         }
         // wait for the file to disappear, or at most 15min: 
-        while (file_exists($this->fic_lock_cron) && filemtime($this->fic_lock_cron)>(time()-900)) {
+        while (file_exists(m_dom::fic_lock_cron) && filemtime(m_dom::fic_lock_cron)>(time()-900)) {
             clearstatcache();
             sleep(2);
         }
-        @touch($this->fic_lock_cron);
-        $this->islocked = true;
+        @touch(m_dom::fic_lock_cron);
+        $domislocked = true;
         // extra safe : 
         register_shutdown_function(array("m_dom","unlock"),1);
         return true;
@@ -1789,13 +1782,14 @@ class m_dom {
      * @access private
      */
     function unlock($isshutdown=0) {
-        global $msg;
+        global $msg,$domislocked;
         $msg->debug("dom", "unlock");
-        if (!$isshutdown && !$this->islocked) {
+        if (!$isshutdown && !m_dom::islocked) {
             $msg->raise("ERROR", "dom", _("--- Program error --- No lock on the domains!"));
         }
-        @unlink($this->fic_lock_cron);
-        $this->islocked = false;
+        // don't use $this since we may be called by register_shutdown_function out of an object instance.
+        @unlink(m_dom::fic_lock_cron); 
+        $domislocked = false;
         return true;
     }
 
