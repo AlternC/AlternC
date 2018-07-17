@@ -42,8 +42,9 @@ case "$1" in
 
     # corriger les permissions du chroot
     mkdir -p /var/spool/postfix/var/run/saslauthd || true
-    dpkg-statoverride --quiet --update --add root sasl 710 /var/spool/postfix/var/run/saslauthd  || true
-
+    if ! dpkg-statoverride  --list /var/spool/postfix/var/run/saslauthd >/dev/null ; then
+	dpkg-statoverride --quiet --update --add root sasl 710 /var/spool/postfix/var/run/saslauthd  || true
+    fi
 
     db_get "alternc/alternc_mail"
     VMAIL_HOME="$RET"
