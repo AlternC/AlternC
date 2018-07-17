@@ -1943,13 +1943,21 @@ class m_dom {
         $db->query("SELECT sd.*, dt.only_dns FROM domaines_type dt, sub_domaines sd WHERE dt.name=sd.type AND sd.web_action!='OK';");
         $alldoms=array();
         $ignore=array();
+        $delete=array();
         while ($db->next_record()) {
             // only_dns=1 => weird, we should not have web_action SET to something else than OK ... anyway, skip it
             if ($db->Record["only_dns"]) {
-                $ignore[]=$db->Record["id"];
+                if ($db->Record["web_action"]=="DELETE") {
+                    $delete[]=$db->Record["id"];
+                } else {
+                    $ignore[]=$db->Record["id"];
+                }
             } else {
                 $alldoms[$db->Record["id"]]=$db->Record;
             }
+        }
+        foreach($delete as $id) {
+            $db->query("DELETE FROM sub_domaines WHERE id=?;",array($id));
         }
         foreach($ignore as $id) {
             // @FIXME (unsure it's useful) maybe we could check that no file exist for this subdomain ?

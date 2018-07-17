@@ -160,6 +160,7 @@ class m_apache {
         }
         closedir($d);
         fclose($f);
+        rename($this->vhostroot."/vhosts_all.conf.new", $this->vhostroot."/vhosts_all.conf");
     }
     
     private function subconcat($f,$root) {
