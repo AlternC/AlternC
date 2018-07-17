@@ -44,7 +44,7 @@ class m_apache {
 
     // launched for each FQDN for which we want a new vhost template 
     function hook_updatedomains_web_add($subdomid) {
-        global $msg,$db;
+        global $msg,$db,$ssl,$L_FQDN;
 
         $db->query("SELECT sd.*, dt.only_dns, dt.has_https_option, m.login FROM domaines_type dt, sub_domaines sd LEFT JOIN membres m ON m.uid=sd.compte WHERE dt.name=sd.type AND sd.web_action!='OK' AND id=?;",array($subdomid));
         $db->next_record();
@@ -85,7 +85,7 @@ class m_apache {
             "%%redirect%%" => $subdom['valeur'],
             "%%UID%%" => $subdom['compte'],
             "%%GID%%" => $subdom['compte'],
-            "%%mail_account%%" => $subdom['mail'],
+            "%%mail_account%%" => $subdom['login']."@".$L_FQDN,
             "%%user%%" => "FIXME",
             "%%CRT%%" => $cert["cert"],
             "%%KEY%%" => $cert["key"],
@@ -94,7 +94,7 @@ class m_apache {
         // and write the template
         $confdir = $this->vhostroot."/".substr($subdom["compte"],-1)."/".$subdom["compte"];
         @mkdir($confdir,0755,true);
-        file_put_contents($confdir."/".$subdom["fqdn"].".conf");
+        file_put_contents($confdir."/".$subdom["fqdn"].".conf",$tpl);
         $this->shouldreload=true;
 
         return 0; // shell meaning => OK ;) 

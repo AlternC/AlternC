@@ -1099,21 +1099,21 @@ ORDER BY
         global $db;
         // for each domain where we don't have the MX or the DNS, remove the DKIM setup
         $this->shouldreloaddkim=false;
-        $db->query("SELECT domaine,gesdns,gesmx FROM domaines WHERE dns_action!='OK';");
+        $db->query("SELECT domaine,compte,gesdns,gesmx FROM domaines WHERE dns_action!='OK';");
         $add=array();
         $del=array();
         while ($db->next_record()) {
             if ($db->Record["gesdns"]==0 || $db->Record["gesmx"]==0) {
-                $del[]=$db->Record["domaine"];
+                $del[]=$db->Record;
             } else {
-                $add[]=$db->Record["domaine"];
+                $add[]=$db->Record;
             }
         }
         foreach($add as $domain) {
-            $this->dkim_add($domain);
+            $this->dkim_add($domain["domaine"],$domain["compte"]);
         }
         foreach($del as $domain) {
-            $this->dkim_del($domain);
+            $this->dkim_del($domain["domaine"],$domain["compte"]);
         }
     }
 
@@ -1134,7 +1134,7 @@ ORDER BY
     /** 
      * Add a domain into OpenDKIM configuration
      */    
-    function dkim_add($domain) {
+    function dkim_add($domain,$uid) {
         global $db;
         $target_dir = "/etc/opendkim/keys/$domain";
         if (file_exists($target_dir.'/alternc.txt')) return; // Do not generate if exist
@@ -1154,7 +1154,7 @@ ORDER BY
         add_line_to_file("/etc/opendkim/SigningTable",$domain." alternc._domainkey.".$domain);
         // Add subdomaine entry
         $dkim_key=$this->dkim_get_entry($domain);
-        $db->query("INSERT INTO sub_domaines SET domaine=?, compte=?, sub='', type='dkim', valeur=?;",array($uid,$domain,$dkim_key));
+        $db->query("INSERT INTO sub_domaines SET domaine=?, compte=?, sub='', type='dkim', valeur=?;",array($domain,$uid,$dkim_key));
         // no need to do DNS_ACTION="UPDATE" => we are in the middle of a HOOK, so dns WILL BE reloaded for this domain
     }
 
@@ -1163,7 +1163,7 @@ ORDER BY
     /** 
      * Delete a domain from OpenDKIM configuration
      */    
-    function dkim_del($domain) {
+    function dkim_del($domain,$uid) {
         $target_dir = "/etc/opendkim/keys/$domain";
         if (file_exists($target_dir)) {
             $this->shouldreloaddkim=true;

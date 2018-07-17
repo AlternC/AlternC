@@ -107,7 +107,7 @@ class m_bind {
             trim(strtr(
                 file_get_contents($this->NAMED_TEMPLATE),
                 array(
-                    "@@DOMAIN@@" => $DOMAIN,
+                    "@@DOMAIN@@" => $domain,
                     "@@ZONE_FILE@@" => $this->zone_file_directory."/".$domain
                 )
             )))
@@ -225,7 +225,7 @@ class m_bind {
           sd.type=dt.name 
           AND sd.enable IN ('ENABLE', 'ENABLED') 
         ORDER BY ENTRY ;");
-        $t=array();
+        $t="";
         while ($db->next_record()) {
             $t.= $db->f('entry')."\n";
         }

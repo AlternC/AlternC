@@ -667,7 +667,7 @@ SELECT ?,?,?, FROM_UNIXTIME(?), FROM_UNIXTIME(?), ?, ?, sslcsr FROM certificate 
         }
         $subdom["fqdn"]=$subdom["sub"].(($subdom["sub"])?".":"").$subdom["domaine"];
 
-        list($cert) = $this->get_valid_certs($fqdn, $subdom["provider"]);
+        list($cert) = $this->get_valid_certs($subdom["fqdn"], $subdom["provider"]);
         // Edit certif_hosts:
         $db->query("UPDATE sub_domaines SET certificate_id=? WHERE id=?;",array($cert["id"], $subdom["id"]));
     }

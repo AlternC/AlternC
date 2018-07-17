@@ -635,35 +635,35 @@ class m_dom {
      * @param string $dom nom de domaine é effacer
      * @return boolean Retourne FALSE si une erreur s'est produite, TRUE sinon.
      */
-    function del_domain($dom) {
+    function del_domain($domain) {
         global $db, $msg, $hooks;
-        $msg->log("dom", "del_domain", $dom);
-        $dom = strtolower($dom);
+        $msg->log("dom", "del_domain", $domain);
+        $domain = strtolower($domain);
 
         $this->lock();
-        if (!$r = $this->get_domain_all($dom)) {
+        if (!$r = $this->get_domain_all($domain)) {
             return false;
         }
         $this->unlock();
 
         // Call Hooks to delete the domain and the MX management:
         // TODO : the 2 calls below are using an OLD hook call, FIXME: remove them when unused
-        $hooks->invoke("alternc_del_domain", array($dom));
-        $hooks->invoke("alternc_del_mx_domain", array($dom));
+        $hooks->invoke("alternc_del_domain", array($domain));
+        $hooks->invoke("alternc_del_mx_domain", array($domain));
         // New hook calls: 
         $hooks->invoke("hook_dom_del_domain", array($r["id"]));
         $hooks->invoke("hook_dom_del_mx_domain", array($r["id"]));
 
         // Now mark the domain for deletion:
-        $db->query("UPDATE sub_domaines SET web_action='DELETE'  WHERE domaine= ?;", array($dom));
-        $this->set_dns_action($dom, 'DELETE');
+        $db->query("UPDATE sub_domaines SET web_action='DELETE'  WHERE domaine= ?;", array($domain));
+        $this->set_dns_action($domain, 'DELETE');
 
         return true;
     }
 
 
-    function domshort($dom, $sub = "") {
-        return str_replace("-", "", str_replace(".", "", empty($sub) ? "" : "$sub.") . $dom);
+    function domshort($domain, $sub = "") {
+        return str_replace("-", "", str_replace(".", "", empty($sub) ? "" : "$sub.") . $domain);
     }
 
 
@@ -1302,9 +1302,10 @@ class m_dom {
      *  de $type (url, ip, dossier...)
      * @param string $https the HTTPS behavior : HTTP(redirect https to http), 
      *  HTTPS(redirect http to https) or BOTH (both hosted at the same place)
+     *  or nothing "" when not applicable for this domain type.
      * @return boolean Retourne FALSE si une erreur s'est produite, TRUE sinon.
      */
-    function set_sub_domain($dom, $sub, $type, $dest, $sub_domain_id = 0, $https) {
+    function set_sub_domain($dom, $sub, $type, $dest, $sub_domain_id = 0, $https="") {
         global $db, $msg, $cuid, $bro, $domislocked;
         $msg->log("dom", "set_sub_domain", $dom . "/" . $sub . "/" . $type . "/" . $dest);
         // Locked ?
@@ -1931,7 +1932,7 @@ class m_dom {
                 } else {
                     // we keep the highest result returned by hooks...
                     rsort($ret,SORT_NUMERIC); $returncode=$ret[0];
-                    $db->query("UPDATE domaines SET dns_result=?, dns_action='OK' WHERE domaine=?;",array($returncode,$onedom));
+                    $db->query("UPDATE domaines SET dns_result=?, dns_action='OK' WHERE domaine=?;",array($returncode,$onedom["domaine"]));
                 }
             }
             $hooks->invoke("hook_updatedomains_dns_post");
