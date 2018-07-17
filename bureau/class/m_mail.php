@@ -1154,7 +1154,7 @@ ORDER BY
         add_line_to_file("/etc/opendkim/SigningTable",$domain." alternc._domainkey.".$domain);
         // Add subdomaine entry
         $dkim_key=$this->dkim_get_entry($domain);
-        $db->query("INSERT INTO sub_domaines SET domaine=?, compte=?, sub='', type='dkim', valeur=?;",array($domain,$uid,$dkim_key));
+        $db->query("INSERT INTO sub_domaines SET domaine=?, compte=?, sub='alternc._domainkey', type='dkim', valeur=?;",array($domain,$uid,$dkim_key));
         // no need to do DNS_ACTION="UPDATE" => we are in the middle of a HOOK, so dns WILL BE reloaded for this domain
     }
 
@@ -1194,13 +1194,13 @@ ORDER BY
             $inkey=false; $result="";
             $lines=explode("\n",$key);
             foreach($lines as $line) {
-                if (preg_match('#alternc._domainkey IN TXT \( "(.*)"#',$key,$mat)) {
+                if (preg_match('#alternc._domainkey\s+IN\s+TXT\s+\( "(.*)"#',$line,$mat)) {
                     $result.=$mat[1]; $inkey=true; continue;
                 }
-                if ($inkey && preg_match('# "(.*)" \)#',$key,$mat)) {
+                if ($inkey && preg_match('#^\s*"(.*)"\s*\)#',$line,$mat)) {
                     $result.=$mat[1]; $inkey=false; break;
                 }
-                if ($inkey && preg_match('# "(.*)" #',$key,$mat)) {
+                if ($inkey && preg_match('#^\s*"(.*)"\s*$#',$line,$mat)) {
                     $result.=$mat[1]; $inkey=true; continue;
                 }
             }
