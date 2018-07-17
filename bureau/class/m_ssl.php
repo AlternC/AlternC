@@ -519,12 +519,6 @@ INSTR(CONCAT(sd.sub,IF(sd.sub!='','.',''),sd.domaine),'.')+1))=?
             $msg->raise("ERROR","ssl", _("Can't save the Key/Crt/Chain now. Please try later."));
             return false;
         }
-        $this->write_cert_file(array(
-            "id"=>$id,
-            "sslcrt"=>$crt,
-            "sslkey"=>$key,
-            "sslchain"=>$chain
-        ));
         return $id;
     }
 
@@ -668,6 +662,7 @@ SELECT ?,?,?, FROM_UNIXTIME(?), FROM_UNIXTIME(?), ?, ?, sslcsr FROM certificate 
         $subdom["fqdn"]=$subdom["sub"].(($subdom["sub"])?".":"").$subdom["domaine"];
 
         list($cert) = $this->get_valid_certs($subdom["fqdn"], $subdom["provider"]);
+        $this->write_cert_file($cert);        
         // Edit certif_hosts:
         $db->query("UPDATE sub_domaines SET certificate_id=? WHERE id=?;",array($cert["id"], $subdom["id"]));
     }
