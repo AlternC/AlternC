@@ -72,6 +72,10 @@ class m_bind {
 
         // Prepare a new zonefile from a template
         $zone = file_get_contents($this->ZONE_TEMPLATE);
+
+        // add the SUBDOMAIN entries
+        $zone .= $this->conf_from_db($domain);
+
         // substitute ALTERNC & domain variables
         $zone = strtr($zone, array(
             "%%fqdn%%" => "$L_FQDN",
@@ -90,9 +94,6 @@ class m_bind {
             "@@PUBLIC_IPV6@@" => "$L_PUBLIC_IPV6",
             "@@ZONETTL@@" => $ttl,
         ));
-
-        // add the SUBDOMAIN entries
-        $zone .= $this->conf_from_db($domain);
 
         // add the "END ALTERNC CONF line";
         $zone .= ";;; END ALTERNC AUTOGENERATE CONFIGURATION\n";
