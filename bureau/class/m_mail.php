@@ -1007,12 +1007,12 @@ ORDER BY
 
         $db->query("SELECT domaine,sub,type,valeur FROM sub_domaines WHERE domaine=? AND sub='autodiscover' AND type='autodiscover';",array($domain));
         if (!$db->next_record()) {
-            $db->query("INSERT INTO sub_domaines SET domaine=?, compte=?, sub='autodiscover', type='autodiscover';",array($domain,$uid));
+            $db->query("INSERT INTO sub_domaines SET domaine=?, compte=?, sub='autodiscover', type='autodiscover', valeur='';",array($domain,$uid));
             $changed=true;
         }
         $db->query("SELECT domaine,sub,type,valeur FROM sub_domaines WHERE domaine=? AND sub='autoconfig' AND type='autodiscover';",array($domain));
         if (!$db->next_record()) {
-            $db->query("INSERT INTO sub_domaines SET domaine=?, compte=?, sub='autoconfig', type='autodiscover';",array($domain,$uid));
+            $db->query("INSERT INTO sub_domaines SET domaine=?, compte=?, sub='autoconfig', type='autodiscover', valeur='';",array($domain,$uid));
             $changed=true;
         }
         if ($changed) {
@@ -1184,10 +1184,30 @@ ORDER BY
      * or false if an error occurred
      **/
     function dkim_get_entry($domain) {
+        global $msg;
         $key=file_get_contents("/etc/opendkim/keys/".$domain."/alternc.txt");
+        // easy: monoline key
         if (preg_match('#alternc._domainkey IN TXT "(.*)"#',$key,$mat)) {
             return $mat[1];
+        } else {
+            // Need to parse a multiligne key:
+            $inkey=false; $result="";
+            $lines=explode("\n",$key);
+            foreach($lines as $line) {
+                if (preg_match('#alternc._domainkey IN TXT \( "(.*)"#',$key,$mat)) {
+                    $result.=$mat[1]; $inkey=true; continue;
+                }
+                if ($inkey && preg_match('# "(.*)" \)#',$key,$mat)) {
+                    $result.=$mat[1]; $inkey=false; break;
+                }
+                if ($inkey && preg_match('# "(.*)" #',$key,$mat)) {
+                    $result.=$mat[1]; $inkey=true; continue;
+                }
+            }
+            if ($result) 
+                return $result;
         }
+        $msg->debug("mail","dkim_get_entry($domain) failed");
         return false;
     }
     

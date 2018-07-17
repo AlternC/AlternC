@@ -223,7 +223,7 @@ class m_bind {
           sub_domaines sd,
           domaines_type dt 
         WHERE 
-          sd.type=dt.name 
+          sd.type=dt.name
           AND sd.enable IN ('ENABLE', 'ENABLED') 
         ORDER BY ENTRY ;");
         $t="";
