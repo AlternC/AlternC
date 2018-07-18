@@ -1137,25 +1137,32 @@ ORDER BY
     function dkim_add($domain,$uid) {
         global $db;
         $target_dir = "/etc/opendkim/keys/$domain";
-        if (file_exists($target_dir.'/alternc.txt')) return; // Do not generate if exist
-        $this->shouldreloaddkim=true;
-        if (! is_dir($target_dir)) mkdir($target_dir); // create dir
-        // Generate the key
-        $old_dir=getcwd();
-        chdir($target_dir);
-        exec('opendkim-genkey -b 1200 -r -d '.escapeshellarg($domain).' -s "alternc" ');
-        chdir($old_dir);
-        // opendkim must be owner of the key
-        chown("$target_dir/alternc.private", 'opendkim');
-        chgrp("$target_dir/alternc.private", 'opendkim');
 
-        // Add line into files:
-        add_line_to_file("/etc/opendkim/KeyTable","alternc._domainkey.".$domain." ".$domain.":alternc:/etc/opendkim/keys/".$domain."/alternc.private");
-        add_line_to_file("/etc/opendkim/SigningTable",$domain." alternc._domainkey.".$domain);
-        // Add subdomaine entry
-        $dkim_key=$this->dkim_get_entry($domain);
-        $db->query("INSERT INTO sub_domaines SET domaine=?, compte=?, sub='alternc._domainkey', type='dkim', valeur=?;",array($domain,$uid,$dkim_key));
-        // no need to do DNS_ACTION="UPDATE" => we are in the middle of a HOOK, so dns WILL BE reloaded for this domain
+        // Create a dkim key when it's not already there : 
+        if (!file_exists($target_dir.'/alternc.txt')) {
+            $this->shouldreloaddkim=true;
+            if (! is_dir($target_dir)) mkdir($target_dir); // create dir
+            // Generate the key, 1200 bits (better than 1024)
+            $old_dir=getcwd();
+            chdir($target_dir);
+            exec('opendkim-genkey -b 1200 -r -d '.escapeshellarg($domain).' -s "alternc" ');
+            chdir($old_dir);
+            // opendkim must be owner of the key
+            chown("$target_dir/alternc.private", 'opendkim');
+            chgrp("$target_dir/alternc.private", 'opendkim');
+            
+            add_line_to_file("/etc/opendkim/KeyTable","alternc._domainkey.".$domain." ".$domain.":alternc:/etc/opendkim/keys/".$domain."/alternc.private");
+            add_line_to_file("/etc/opendkim/SigningTable",$domain." alternc._domainkey.".$domain);
+        }
+
+        // Search for the subdomain entry, if it's not already there, create it:
+        $db->query("SELECT id FROM sub_domaines WHERE domaine=? AND sub='alternc._domainkey';",array($domain));
+        if (!$db->next_record()) {
+            // Add subdomaine entry
+            $dkim_key=$this->dkim_get_entry($domain);
+            $db->query("INSERT INTO sub_domaines SET domaine=?, compte=?, sub='alternc._domainkey', type='dkim', valeur=?;",array($domain,$uid,$dkim_key));
+            // no need to do DNS_ACTION="UPDATE" => we are in the middle of a HOOK, so dns WILL BE reloaded for this domain
+        }
     }
 
 
@@ -1173,6 +1180,8 @@ ORDER BY
             del_line_from_file("/etc/opendkim/KeyTable","alternc._domainkey.".$domain." ".$domain.":alternc:/etc/opendkim/keys/".$domain."/alternc.private");
             del_line_from_file("/etc/opendkim/SigningTable",$domain." alternc._domainkey.".$domain);
         }
+        $db->query("DELETE FROM sub_domaines WHERE domaine=? AND sub='alternc._domainkey';",array($domain));
+        // No need to do DNS_ACTION="UPDATE" => we are in the middle of a HOOK
     }
 
 
