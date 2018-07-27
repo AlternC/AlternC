@@ -502,8 +502,8 @@ class system_bind {
 
             if ( ( $all || strtoupper($ds['dns_action']) == 'UPDATE' ) && $ds['gesdns'] ) {
                 $this->save_zone($domain);
-                $this->reload_zone($domain);
                 $hooks->invoke_scripts("/usr/lib/alternc/reload.d", array('dns_reload_zone', $domain)  );
+                $this->reload_zone($domain);
             }
         } // end foreach domain
 
