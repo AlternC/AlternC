@@ -11,7 +11,7 @@ script:
   - ../vendor/bin/phpcs --ignore=../vendor/ ../
   - ../vendor/bin/phpunit --coverage-clover=coverage.clover
 before_script:
-  - composer require phpunit/dbunit=3.0.1 squizlabs/php_codesniffer
+  - composer require 'phpunit/dbunit<3.0.2' squizlabs/php_codesniffer
   - mysql -e 'create database alternc_test DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;'
   - cd phpunit
 after_script:
