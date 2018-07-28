@@ -7,6 +7,7 @@ php:
   - 5.6
   - 5.5
 script:
+  - grep --exclude-dir=../.git/ --exclude-dir=../vendor/ -l -r -e '#!/bin/[bash|sh]' ../ | uniq | xargs shellcheck
   - ../vendor/bin/phpcs ../
   - ../vendor/bin/phpunit --coverage-clover=coverage.clover
 before_script:
