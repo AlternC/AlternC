@@ -8,7 +8,7 @@ php:
   - 5.5
 script:
   - grep --exclude-dir=../.git/ --exclude-dir=../vendor/ -l -r -e '#!/bin/[bash|sh]' ../ | uniq | xargs shellcheck
-  - ../vendor/bin/phpcs ../
+  - ../vendor/bin/phpcs --ignore=../vendor/ ../
   - ../vendor/bin/phpunit --coverage-clover=coverage.clover
 before_script:
   - composer require phpunit/dbunit=3.0.1 squizlabs/php_codesniffer
