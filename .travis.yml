@@ -6,9 +6,11 @@ php:
   - 7.0
   - 5.6
   - 5.5
-script: ../vendor/bin/phpunit --coverage-clover=coverage.clover
+script:
+  - ../vendor/bin/phpcs ../
+  - ../vendor/bin/phpunit --coverage-clover=coverage.clover
 before_script:
-  - composer require phpunit/dbunit
+  - composer require phpunit/dbunit squizlabs/php_codesniffer
   - mysql -e 'create database alternc_test DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;'
   - cd phpunit
 after_script:
