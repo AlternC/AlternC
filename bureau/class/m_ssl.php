@@ -627,7 +627,7 @@ SELECT ?,?,?, FROM_UNIXTIME(?), FROM_UNIXTIME(?), ?, ?, sslcsr FROM certificate 
             $s = file_get_contents($TARGET_FILE);
             $s = str_replace("%%CRT%%", $cert["crt"], $s);
             $s = str_replace("%%KEY%%", $cert["key"], $s);
-            if (isset($cert["sslchain"]) && $cert["sslchain"]) {
+            if (isset($cert["chain"]) && $cert["chain"]) {
                 $s = str_replace("%%CHAINLINE%%", "SSLCertificateChainFile " . $cert["chain"], $s);
             } else {
                 $s = str_replace("%%CHAINLINE%%", "", $s);
