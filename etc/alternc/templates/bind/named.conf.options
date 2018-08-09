@@ -18,13 +18,13 @@ options {
 
 	auth-nxdomain no;    # conform to RFC1035
         allow-query     { "internal"; };
-        allow-transfer  { "allslaves"; };
+        allow-transfer  { "allslaves"; "internal"; };
 	recursion no;
 };
 
 acl "internal" {
         {
-	127.0.0.1;
+	127.0.0.1; ::1;
         };
 };
 
