@@ -167,7 +167,7 @@ class m_bind {
         }
         if ($this->shouldreconfig) {
             $ret=0;
-            exec($this->RNDC." reload 2>&1",$out,$ret);
+            exec($this->RNDC." reconfig 2>&1",$out,$ret);
             if ($ret!=0) {
                 $msg->raise("ERROR","bind","Error while reconfiguring bind, error code is $ret\n".implode("\n",$out));
             } else {
