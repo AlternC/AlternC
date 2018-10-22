@@ -5,6 +5,8 @@
  */
 use PHPUnit\Framework\TestCase;
 use PHPUnit\DbUnit\TestCaseTrait;
+use PHPUnit\DbUnit\DataSet\YamlDataSet;
+use PHPUnit\DbUnit\DataSet\CompositeDataSet;
 
 abstract class AlterncTest extends TestCase
 {
@@ -40,10 +42,10 @@ abstract class AlterncTest extends TestCase
             if( !is_file($file) ){
                 throw new \Exception("missing $file");
             }
-            $dataSet            = new PHPUnit_Extensions_Database_DataSet_YamlDataSet($file);
+            $dataSet            = new YamlDataSet($file);
             $datasetList[]      = $dataSet;
         }
-        $compositeDataSet            = new PHPUnit_Extensions_Database_DataSet_CompositeDataSet($datasetList);
+        $compositeDataSet            = new CompositeDataSet($datasetList);
         return $dataSet;
     }
 
