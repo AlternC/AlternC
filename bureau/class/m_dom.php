@@ -54,15 +54,7 @@ class m_dom {
      * du domaine par update_domains.sh
      * @access private
      */
-    var $fic_lock_cron = "/run/alternc/cron.lock";
-
-    /**
-     * Le cron a-t-il été bloqué ?
-     * Il faut appeler les fonctions privées lock et unlock entre les
-     * appels aux domaines.
-     * @access private
-     */
-    var $islocked = false;
+    const fic_lock_cron = "/run/alternc/cron.lock";
 
     var $type_local = "VHOST";
     var $type_url = "URL";
@@ -84,9 +76,10 @@ class m_dom {
      * Constructeur
      */
     function m_dom() {
-        global $L_FQDN;
+        global $L_FQDN, $domislocked;
         $this->tld_no_check_at_all = variable_get('tld_no_check_at_all', 0, 'Disable ALL check on the TLD (users will be able to add any domain)', array('desc' => 'Disabled', 'type' => 'boolean'));
         variable_get('mailname_bounce', $L_FQDN, 'FQDN of the mail server, used to create vhost virtual mail_adress.', array('desc' => 'FQDN', 'type' => 'string'));
+        $domislocked=false;
     }
 
 
@@ -642,35 +635,35 @@ class m_dom {
      * @param string $dom nom de domaine é effacer
      * @return boolean Retourne FALSE si une erreur s'est produite, TRUE sinon.
      */
-    function del_domain($dom) {
+    function del_domain($domain) {
         global $db, $msg, $hooks;
-        $msg->log("dom", "del_domain", $dom);
-        $dom = strtolower($dom);
+        $msg->log("dom", "del_domain", $domain);
+        $domain = strtolower($domain);
 
         $this->lock();
-        if (!$r = $this->get_domain_all($dom)) {
+        if (!$r = $this->get_domain_all($domain)) {
             return false;
         }
         $this->unlock();
 
         // Call Hooks to delete the domain and the MX management:
         // TODO : the 2 calls below are using an OLD hook call, FIXME: remove them when unused
-        $hooks->invoke("alternc_del_domain", array($dom));
-        $hooks->invoke("alternc_del_mx_domain", array($dom));
+        $hooks->invoke("alternc_del_domain", array($domain));
+        $hooks->invoke("alternc_del_mx_domain", array($domain));
         // New hook calls: 
         $hooks->invoke("hook_dom_del_domain", array($r["id"]));
         $hooks->invoke("hook_dom_del_mx_domain", array($r["id"]));
 
         // Now mark the domain for deletion:
-        $db->query("UPDATE sub_domaines SET web_action='DELETE'  WHERE domaine= ?;", array($dom));
-        $this->set_dns_action($dom, 'DELETE');
+        $db->query("UPDATE sub_domaines SET web_action='DELETE'  WHERE domaine= ?;", array($domain));
+        $this->set_dns_action($domain, 'DELETE');
 
         return true;
     }
 
 
-    function domshort($dom, $sub = "") {
-        return str_replace("-", "", str_replace(".", "", empty($sub) ? "" : "$sub.") . $dom);
+    function domshort($domain, $sub = "") {
+        return str_replace("-", "", str_replace(".", "", empty($sub) ? "" : "$sub.") . $domain);
     }
 
 
@@ -694,11 +687,11 @@ class m_dom {
      * @return boolean Retourne FALSE si une erreur s'est produite, TRUE sinon.
      */
     function add_domain($domain, $dns, $noerase = false, $force = false, $isslave = false, $slavedom = "") {
-        global $db, $msg, $quota, $L_FQDN, $tld, $cuid, $hooks;
+        global $db, $msg, $quota, $L_FQDN, $tld, $cuid, $hooks, $domislocked;
         $msg->log("dom", "add_domain", $domain);
 
         // Locked ?
-        if (!$this->islocked) {
+        if (!$domislocked) {
             $msg->raise("ERROR", "dom", _("--- Program error --- No lock on the domains!"));
             return false;
         }
@@ -1037,10 +1030,10 @@ class m_dom {
      *
      */
     function get_domain_all($dom) {
-        global $db, $msg, $cuid;
+        global $db, $msg, $cuid, $domislocked;
         $msg->debug("dom", "get_domain_all", $dom);
         // Locked ?
-        if (!$this->islocked) {
+        if (!$domislocked) {
             $msg->raise("ERROR", "dom", _("--- Program error --- No lock on the domains!"));
             return false;
         }
@@ -1072,13 +1065,14 @@ class m_dom {
         $db->query("SELECT sd.*, dt.description AS type_desc, dt.only_dns, dt.advanced, dt.has_https_option FROM sub_domaines sd LEFT JOIN domaines_type dt on  UPPER(dt.name)=UPPER(sd.type) WHERE compte= ? AND domaine= ? ORDER BY dt.advanced,sd.sub,sd.type ;", array($cuid, $dom));
         // Pas de webmail, on le cochera si on le trouve.
         $r["sub"] = array();
-        $data = $db->fetchAll();
-        foreach($data as $i=>$record) {
+        $i=0;
+        while ($record=$db->fetch()) {
             $r["sub"][$i] = $record;
             // FIXME : replace sub by name and dest by valeur in the code that exploits this function :
             $r["sub"][$i]["name"] = $record["sub"];
             $r["sub"][$i]["dest"] = $record["valeur"];
             $r["sub"][$i]["fqdn"] = ((!empty($r["sub"][$i]["name"])) ? $r["sub"][$i]["name"] . "." : "") . $r["name"];
+            $i++;
         }
         $db->free();
         return $r;
@@ -1098,10 +1092,10 @@ class m_dom {
      *  Retourne FALSE si une erreur s'est produite.
      */
     function get_sub_domain_all($sub_domain_id) {
-        global $db, $msg, $cuid;
+        global $db, $msg, $cuid, $domislocked;
         $msg->debug("dom", "get_sub_domain_all", $sub_domain_id);
         // Locked ?
-        if (!$this->islocked) {
+        if (!$domislocked) {
             $msg->raise("ERROR", "dom", _("--- Program error --- No lock on the domains!"));
             return false;
         }
@@ -1263,10 +1257,10 @@ class m_dom {
      * @return boolean true if the preference has been set
      */
     function set_subdomain_ssl_provider($sub_domain_id,$provider) { 
-        global $db, $msg, $cuid, $ssl;
+        global $db, $msg, $cuid, $ssl, $domislocked;
         $msg->log("dom", "set_sub_domain_ssl_provider", $sub_domain_id." / ".$provider);
         // Locked ?
-        if (!$this->islocked) {
+        if (!$domislocked) {
             $msg->raise("ERROR", "dom", _("--- Program error --- No lock on the domains!"));
             return false;
         }
@@ -1308,13 +1302,14 @@ class m_dom {
      *  de $type (url, ip, dossier...)
      * @param string $https the HTTPS behavior : HTTP(redirect https to http), 
      *  HTTPS(redirect http to https) or BOTH (both hosted at the same place)
+     *  or nothing "" when not applicable for this domain type.
      * @return boolean Retourne FALSE si une erreur s'est produite, TRUE sinon.
      */
-    function set_sub_domain($dom, $sub, $type, $dest, $sub_domain_id = 0, $https) {
-        global $db, $msg, $cuid, $bro;
+    function set_sub_domain($dom, $sub, $type, $dest, $sub_domain_id = 0, $https="") {
+        global $db, $msg, $cuid, $bro, $domislocked;
         $msg->log("dom", "set_sub_domain", $dom . "/" . $sub . "/" . $type . "/" . $dest);
         // Locked ?
-        if (!$this->islocked) {
+        if (!$domislocked) {
             $msg->raise("ERROR", "dom", _("--- Program error --- No lock on the domains!"));
             return false;
         }
@@ -1396,10 +1391,10 @@ class m_dom {
      *
      */
     function del_sub_domain($sub_domain_id) {
-        global $db, $msg;
+        global $db, $msg, $domislocked;
         $msg->log("dom", "del_sub_domain", $sub_domain_id);
         // Locked ?
-        if (!$this->islocked) {
+        if (!$domislocked) {
             $msg->raise("ERROR", "dom", _("--- Program error --- No lock on the domains!"));
             return false;
         }
@@ -1442,11 +1437,11 @@ class m_dom {
      *  TRUE sinon.
      *
      */
-    function edit_domain($dom, $dns, $gesmx, $force = false, $ttl = 86400) {
-        global $db, $msg, $hooks;
+    function edit_domain($dom, $dns, $gesmx, $force = false, $ttl = 3600) {
+        global $db, $msg, $hooksthis;
         $msg->log("dom", "edit_domain", $dom . "/" . $dns . "/" . $gesmx);
         // Locked ?
-        if (!$this->islocked && !$force) {
+        if (!$domislocked && !$force) {
             $msg->raise("ERROR", "dom", _("--- Program error --- No lock on the domains!"));
             return false;
         }
@@ -1765,15 +1760,20 @@ class m_dom {
      * @access private
      */
     function lock() {
-        global $msg;
+        global $msg,$domislocked;
         $msg->debug("dom", "lock");
-        if ($this->islocked) {
+        if ($domislocked) {
             $msg->raise("ERROR", "dom", _("--- Program error --- Lock already obtained!"));
         }
-        while (file_exists($this->fic_lock_cron)) {
+        // wait for the file to disappear, or at most 15min: 
+        while (file_exists(m_dom::fic_lock_cron) && filemtime(m_dom::fic_lock_cron)>(time()-900)) {
+            clearstatcache();
             sleep(2);
         }
-        $this->islocked = true;
+        @touch(m_dom::fic_lock_cron);
+        $domislocked = true;
+        // extra safe : 
+        register_shutdown_function(array("m_dom","unlock"),1);
         return true;
     }
 
@@ -1783,13 +1783,15 @@ class m_dom {
      * return true
      * @access private
      */
-    function unlock() {
-        global $msg;
+    function unlock($isshutdown=0) {
+        global $msg,$domislocked;
         $msg->debug("dom", "unlock");
-        if (!$this->islocked) {
+        if (!$isshutdown && !$domislocked) {
             $msg->raise("ERROR", "dom", _("--- Program error --- No lock on the domains!"));
         }
-        $this->islocked = false;
+        // don't use $this since we may be called by register_shutdown_function out of an object instance.
+        @unlink(m_dom::fic_lock_cron); 
+        $domislocked = false;
         return true;
     }
 
@@ -1892,199 +1894,103 @@ class m_dom {
 
 
     /**
-     * Return an array with all the needed parameters to generate conf 
-     * of a vhost.
-     * If no parameters, return the parameters for ALL the vhost.
-     * Optionnal parameters: id of the sub_domaines
-     * */
-    function generation_parameters($id = null, $only_apache = true) {
-        global $db, $msg;
-        $msg->log("dom", "generation_parameters");
-        $params = "";
-        /** 2016_05_18 : this comments was here before escaping the request... is there still something to do here ?
-         *   // BUG BUG BUG FIXME
-         *   // Suppression de comptes -> membres existe pas -> domaines a supprimer ne sont pas lister
-         */
-        $query  = "
-                select 
-                  sd.id as sub_id, 
-                  lower(sd.type) as type, 
-                  m.login, 
-                  m.uid as uid, 
-                  if(length(sd.sub)>0,concat_ws('.',sd.sub,sd.domaine),sd.domaine) as fqdn, 
-                  concat_ws('@',m.login,v.value) as mail, 
-                  sd.valeur  
-                from 
-                  sub_domaines sd left join membres m on sd.compte=m.uid,
-                  variable v, 
-                  domaines_type dt 
-                where 
-                  v.name='mailname_bounce' 
-                  and lower(dt.name) = lower(sd.type)"; 
-        $query_args =   array();
-
-        if (!is_null($id) && intval($id) == $id) {
-            $query .= " AND sd.id = ? ";
-            array_push($query_args, intval($id));
-        }
-        if ($only_apache) {
-            $query .=" and dt.only_dns is false ";
+     * complex process to manage domain and subdomain updates
+     * Launched every minute by a cron as root 
+     * should launch hooks for each domain or subdomain,
+     * so that apache & bind could do their job
+     */
+    function update_domains() {
+        global $db, $hooks;
+        if (posix_getuid()!=0) {
+            echo "FATAL: please lauch me as root\n";
+            exit();
         }
 
-        $query  .=  "
-                order by 
-                  m.login, 
-                  sd.domaine, 
-                  sd.sub;";
+        $this->lock();
 
+        // fix in case we forgot to delete SUBDOMAINS before deleting a DOMAIN
+        $db->query("UPDATE sub_domaines sd, domaines d SET sd.web_action = 'DELETE' WHERE sd.domaine = d.domaine AND sd.compte=d.compte AND d.dns_action = 'DELETE';");
         
-        $db->query($query, $query_args);
-
-        $r = array();
+        // Search for things to do on DOMAINS:
+        $db->query("SELECT * FROM domaines WHERE dns_action!='OK';");
+        $alldoms=array();
         while ($db->next_record()) {
-            $r[$db->Record['sub_id']] = $db->Record;
+            $alldoms[$db->Record["id"]]=$db->Record;
         }
-        return $r;
-    }
+        // now launch hooks
+        if (count($alldoms)) {
+            $hooks->invoke("hook_updatedomains_dns_pre");
+            foreach($alldoms as $id=>$onedom) {
+                if ($onedom["gesdns"]==0 || $onedom["dns_action"]=="DELETE") {
+                    $ret = $hooks->invoke("hook_updatedomains_dns_del",array($onedom));
+                } else {
+                    $ret = $hooks->invoke("hook_updatedomains_dns_add",array($onedom));
+                }
 
-
-    /**
-     * Return an array with all informations of the domains_type
-     * used to generate Apache conf.
-     * Die if templates missing.
-     * Warning: an Apache domains_type must have 'only_dns' == TRUE
-     *
-     * */
-    function generation_domains_type() {
-        global $dom;
-        $d = array();
-        foreach ($dom->domains_type_lst() as $k => $v) {
-            if ($v['only_dns'] == true) {
-                continue;
+                if ($onedom["dns_action"]=="DELETE") {
+                    $db->query("DELETE FROM domaines WHERE domaine=?;",array($onedom));
+                } else {
+                    // we keep the highest result returned by hooks...
+                    rsort($ret,SORT_NUMERIC); $returncode=$ret[0];
+                    $db->query("UPDATE domaines SET dns_result=?, dns_action='OK' WHERE domaine=?;",array($returncode,$onedom["domaine"]));
+                }
             }
-            if (!$j = file_get_contents(ALTERNC_APACHE2_GEN_TMPL_DIR . '/' . strtolower($k) . '.conf')) {
-                die("Error: missing file for $k");
-            }
-            $d[$k] = $v;
-            $d[$k]['tpl'] = $j;
-        }
-        return $d;
-    }
-
-
-    /**
-     *  Launch old fashionned hooks as there was in AlternC 1.0
-     * @TODO: do we still need that?
-     */
-    function generate_conf_oldhook($action, $lst_sub, $sub_obj = null) {
-        if (is_null($sub_obj)) {
-            $sub_obj = $this->generation_parameters(null, false);
-        }
-        if (!isset($lst_sub[strtoupper($action)]) || empty($lst_sub[strtoupper($action)])) {
-            return false;
+            $hooks->invoke("hook_updatedomains_dns_post");
         }
 
-        $lst_by_type = $lst_sub[strtoupper($action)];
 
-        foreach ($lst_by_type as $type => $lid_arr) {
-            $script = "/etc/alternc/functions_hosting/hosting_" . strtolower($type) . ".sh";
-            if (!@is_executable($script)) {
-                continue;
-            }
-            foreach ($lid_arr as $lid) {
-                $o = $sub_obj[$lid];
-                $cmd = $script . " " . escapeshellcmd(strtolower($action)) . " ";
-                $cmd .= escapeshellcmd($o['fqdn']) . " " . escapeshellcmd($o['valeur']);
-
-                system($cmd);
-            }
-        } // foreach $lst_by_type
-    }
-
-
-    /**
-     * Generate apache configuration.
-     * Die if a specific FQDN have 2 vhost conf.
-     *
-     * */
-    function generate_apacheconf($p = null) {
-        // Get the parameters
-        $lst = $this->generation_parameters($p);
-
-        $gdt = $this->generation_domains_type();
-
-        // Initialize duplicate check
-        $check_dup = array();
-
-        $ret = '';
-        foreach ($lst as $p) {
-            // Check if duplicate
-            if (in_array($p['fqdn'], $check_dup)) {
-                die("Error: duplicate fqdn : " . $p['fqdn']);
+        // Search for things to do on SUB-DOMAINS:
+        $db->query("SELECT sd.*, dt.only_dns FROM domaines_type dt, sub_domaines sd WHERE dt.name=sd.type AND sd.web_action!='OK';");
+        $alldoms=array();
+        $ignore=array();
+        $delete=array();
+        while ($db->next_record()) {
+            // only_dns=1 => weird, we should not have web_action SET to something else than OK ... anyway, skip it
+            if ($db->Record["only_dns"]) {
+                if ($db->Record["web_action"]=="DELETE") {
+                    $delete[]=$db->Record["id"];
+                } else {
+                    $ignore[]=$db->Record["id"];
+                }
             } else {
-                $check_dup[] = $p['fqdn'];
+                $alldoms[$db->Record["id"]]=$db->Record;
             }
+        }
+        foreach($delete as $id) {
+            $db->query("DELETE FROM sub_domaines WHERE id=?;",array($id));
+        }
+        foreach($ignore as $id) {
+            // @FIXME (unsure it's useful) maybe we could check that no file exist for this subdomain ?
+            $db->query("UPDATE sub_domaines SET web_action='OK' WHERE id=?;",array($id));
+        }
+        // now launch hooks
+        if (count($alldoms)) {
+            $hooks->invoke("hook_updatedomains_web_pre");
+            foreach($alldoms as $id=>$subdom) {
+                // is it a delete (DISABLED or DELETE)
+                if ($subdom["web_action"]=="DELETE" || strtoupper(substr($subdom["enable"],0,7))=="DISABLE") {
+                    $ret = $hooks->invoke("hook_updatedomains_web_del",array($subdom["id"]));
+                } else {
+                    $hooks->invoke("hook_updatedomains_web_before",array($subdom["id"])); // give a chance to get SSL cert before ;) 
+                    $ret = $hooks->invoke("hook_updatedomains_web_add",array($subdom["id"]));
+                    $hooks->invoke("hook_updatedomains_web_after",array($subdom["id"]));
+                }
 
-            // Get the needed template
-            $tpl = $gdt[$p['type']] ['tpl'];
-
-            // Replace needed vars
-            $tpl = strtr($tpl, array(
-                "%%LOGIN%%" => $p['login'],
-                "%%fqdn%%" => $p['fqdn'],
-                "%%document_root%%" => getuserpath($p['login']) . $p['valeur'],
-                "%%account_root%%" => getuserpath($p['login']),
-                "%%redirect%%" => $p['valeur'],
-                "%%UID%%" => $p['uid'],
-                "%%GID%%" => $p['uid'],
-                "%%mail_account%%" => $p['mail'],
-                "%%user%%" => "FIXME",
-            ));
-
-            // Security check
-            if ($p['uid'] < 1999) { // if UID is not an AlternC uid
-                $ret.= "# ERROR: Sub_id: " . $p['sub_id'] . "- The uid seem to be dangerous\n";
-                continue;
+                if ($subdom["web_action"]=="DELETE") {
+                    $db->query("DELETE FROM sub_domaines WHERE id=?;",array($id));
+                } else {
+                    // we keep the highest result returned by hooks...
+                    rsort($ret,SORT_NUMERIC); $returncode=$ret[0];
+                    $db->query("UPDATE sub_domaines SET web_result=?, web_action='OK' WHERE id=?;",array($returncode,$id));
+                }
             }
-
-            // Return the conf
-            $ret.= "# Sub_id: " . $p['sub_id'] . "\n" . $tpl;
+            $hooks->invoke("hook_updatedomains_web_post");
         }
-
-        return $ret;
+        
+        $this->unlock();
     }
 
-
-    /**
-     *  Return an array with the list of id of sub_domains waiting for an action
-     */
-    function generation_todo() {
-        global $db, $msg;
-        $msg->debug("dom", "generation_todo");
-        $db->query("select id as sub_id, web_action, type from sub_domaines where web_action !='ok';");
-        $r = array();
-        while ($db->next_record()) {
-            $r[strtoupper($db->Record['web_action'])][strtoupper($db->Record['type'])][] = $db->f('sub_id');
-        }
-        return $r;
-    }
-
-
-    function subdomain_modif_are_done($sub_domain_id, $action) {
-        global $db;
-        $sub_domain_id = intval($sub_domain_id);
-        switch (strtolower($action)) {
-        case "delete":
-            $sql = "DELETE FROM sub_domaines WHERE id =$sub_domain_id;";
-            break;
-        default:
-            $sql = "UPDATE sub_domaines SET web_action='OK' WHERE id='$sub_domain_id'; ";
-        }
-        $db->query($sql);
-        return true;
-    }
-
-
+    
     /**
      * @param string $dns_action
      */
@@ -2095,15 +2001,8 @@ class m_dom {
     }
 
 
-    function set_dns_result($domain, $dns_result) {
-        global $db;
-        $db->query("UPDATE domaines SET dns_result= ? WHERE domaine= ?; ", array($dns_result, $domain));
-        return true;
-    }
-
-
     /** 
-     * List if there is problems in the domains.
+     * List if there are problems on the domain.
      *  Problems can appear when editing domains type properties
      */
     function get_problems($domain) {
@@ -2160,6 +2059,8 @@ class m_dom {
         _("Default mail server");
         _("Default backup mail server");
         _("AlternC panel access");
+        _("DKIM Key");
+        _("Email autoconfiguration");
     }
 
 } /* Class m_domains */

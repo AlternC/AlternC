@@ -372,7 +372,34 @@ INSTR(CONCAT(sd.sub,IF(sd.sub!='','.',''),sd.domaine),'.')+1))=?
         return $db->Record;
     }
 
-    
+
+    // ----------------------------------------------------------------- 
+    /** Return paths to certificate, key, and chain for a certificate
+     * given it's ID. 
+     * @param $id integer the certificate by id
+     * @return array cert, key, chain (not mandatory) with full path.
+     */
+    function get_certificate_path($id) {
+        global $db, $msg, $cuid;
+        $msg->log("ssl", "get_certificate_path",$id);
+        $id = intval($id);
+        $db->query("SELECT id FROM certificates WHERE id=?;",array($id));
+        if (!$db->next_record()) {
+            $msg->raise("ERROR","ssl", _("Can't find this Certificate"));
+            // Return cert 0 info :)
+            $id=0;            
+        }
+        $chain=self::KEY_REPOSITORY."/".floor($id/1000)."/".$id.".chain";
+        if (!file_exists($chain))
+            $chain=false;
+
+        return array(
+            "cert" => self::KEY_REPOSITORY."/".floor($id/1000)."/".$id.".pem",
+            "key" => self::KEY_REPOSITORY."/".floor($id/1000)."/".$id.".key",
+            "chain" => $chain
+        );
+    }
+
     // -----------------------------------------------------------------
     /** Return all the valid certificates that can be used for a specific FQDN
      * return the list of certificates by order of preference 
@@ -612,6 +639,34 @@ SELECT ?,?,?, FROM_UNIXTIME(?), FROM_UNIXTIME(?), ?, ?, sslcsr FROM certificate 
 
     }
 
+
+        //  ----------------------------------------------------------------- 
+    /** Launched by hosting_functions.sh launched by update_domaines.sh
+     * Action may be create/postinst/delete/enable/disable
+     * Change the template for this domain name to have the proper CERTIFICATE
+     * An algorithm determine the best possible certificate, which may be a BAD one 
+     * (like a generic self-signed for localhost as a last chance)
+     */
+    public function hook_updatedomains_web_before($subdomid) {
+        global $db, $msg, $dom;
+        $msg->log("ssl", "hook_updatedomains_web_before($subdomid)");
+
+        $db->query("SELECT sd.*, dt.only_dns, dt.has_https_option, m.login FROM domaines_type dt, sub_domaines sd LEFT JOIN membres m ON m.uid=sd.compte WHERE dt.name=sd.type AND sd.web_action!='OK' AND id=?;",array($subdomid));
+        $db->next_record();
+        $subdom=$db->Record;
+        $domtype=$dom->domains_type_get($subdom["type"]);
+        // the domain type must be a "dns_only=false" one:
+        if ($domtype["only_dns"]==true) {
+            return; // nothing to do : this domain type does not involve Vhosts
+        }
+        $subdom["fqdn"]=$subdom["sub"].(($subdom["sub"])?".":"").$subdom["domaine"];
+
+        list($cert) = $this->get_valid_certs($subdom["fqdn"], $subdom["provider"]);
+        $this->write_cert_file($cert);        
+        // Edit certif_hosts:
+        $db->query("UPDATE sub_domaines SET certificate_id=? WHERE id=?;",array($cert["id"], $subdom["id"]));
+    }
+
     
     //  ---------------------------------------------------------------- 
     /** Search for the best certificate for a user and a fqdn 
@@ -627,7 +682,25 @@ SELECT ?,?,?, FROM_UNIXTIME(?), FROM_UNIXTIME(?), ?, ?, sslcsr FROM certificate 
 
         // get the first good certificate: 
         list($cert) = $this->get_valid_certs($fqdn, $subdom["provider"]);
+        $this->write_cert_file($cert);
+        // we have the files, let's fill the output array :
+        $output=array(
+            "id" => $cert["id"],
+            "crt" => $CRTDIR . "/" . $cert["id"].".pem",
+            "key" => $CRTDIR . "/" . $cert["id"].".key",
+        );
+        if (file_exists($CRTDIR . "/" . $cert["id"].".chain")) {
+            $output["chain"] = $CRTDIR . "/" . $cert["id"].".chain";
+        }
+        return $output;
+    }
 
+
+    // ----------------------------------------------------------------- 
+    /** Write certificate file into KEY_REPOSITORY
+     * @param $cert array an array with ID sslcrt sslkey sslchain
+     */
+    function write_cert_file($cert) {
         // we split the certificates by 1000
         $CRTDIR = self::KEY_REPOSITORY . "/" . floor($cert["id"]/1000);
         @mkdir($CRTDIR,0750,true);
@@ -659,16 +732,6 @@ SELECT ?,?,?, FROM_UNIXTIME(?), FROM_UNIXTIME(?), ?, ?, sslcsr FROM certificate 
                 chmod($CRTDIR . "/" . $cert["id"].".chain",0640);
             }
         }
-        // we have the files, let's fill the output array :
-        $output=array(
-            "id" => $cert["id"],
-            "crt" => $CRTDIR . "/" . $cert["id"].".pem",
-            "key" => $CRTDIR . "/" . $cert["id"].".key",
-        );
-        if (file_exists($CRTDIR . "/" . $cert["id"].".chain")) {
-            $output["chain"] = $CRTDIR . "/" . $cert["id"].".chain";
-        }
-        return $output;
     }
 
     

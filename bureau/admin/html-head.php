@@ -39,7 +39,7 @@ if (!defined("ALTERNC_PANEL")) exit(); // must be included ;)
 if (file_exists("styles/style-custom.css") ) {
   echo '<link rel="stylesheet" href="styles/style-custom.css" type="text/css" />';
 }
-if (count($addhead['css'])) {
+if (isset($addhead) && count($addhead['css'])) {
     foreach($addhead['css'] as $css) echo $css."\n";
 }
 $favicon = variable_get('favicon', 'favicon.ico' ,'You can specify a favicon, for example /images/my_logo.ico', array('desc'=>'URL','type'=>'string'));
@@ -53,7 +53,7 @@ $favicon = variable_get('favicon', 'favicon.ico' ,'You can specify a favicon, fo
 <script src="/javascript/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
 <script src="/javascript/jquery-tablesorter/jquery.tablesorter.min.js" type="text/javascript"></script>
 <?php
-if (count($addhead['js'])) {
+if (isset($addhead) && count($addhead['js'])) {
     foreach($addhead['js'] as $js) echo $js."\n";
 }
 ?>

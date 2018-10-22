@@ -242,6 +242,26 @@ class DB_Sql {
         return $data;
     }
 
+    /* pdo equivalent of fetch() */
+    function fetch($mode=PDO::FETCH_ASSOC) {
+        if (!$this->pdo_query) {
+            $this->halt("next_record called with no query pending.");
+            return FALSE;
+        }
+
+        $data = $this->pdo_query->fetch($mode);
+        $this->Errno = $this->pdo_query->errorCode();
+        $this->Error = $this->pdo_query->errorInfo();
+
+        if ($data == FALSE) {
+            if ($this->Auto_Free) 
+                $this->free();
+            return FALSE;
+        }
+
+        return $data;
+    }
+
     /**
      * table locking
      */

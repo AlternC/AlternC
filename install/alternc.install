@@ -354,9 +354,8 @@ do
     fi
 done
 
-# ensure dovecot, postfix, apache, can access ssl certificates:
+# ensure dovecot, postfix, can access ssl certificates:
 adduser dovecot ssl-cert
-adduser www-data ssl-cert
 adduser postfix ssl-cert
 
 run-parts --arg=certificates /usr/lib/alternc/install.d

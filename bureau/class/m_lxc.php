@@ -99,8 +99,8 @@ class m_lxc implements vm {
             }
         }
 
-        $msg = serialize($params);
-        if (fwrite($fp, $msg . "\n") < 0) {
+        $message = serialize($params);
+        if (fwrite($fp, $message . "\n") < 0) {
             $this->error[] = 'Unable to send data';
             return FALSE;
         }
@@ -135,22 +135,22 @@ class m_lxc implements vm {
         $pass = $pass ? $pass : $mem->user['pass'];
         $uid = $uid ? $uid : $mem->user['uid'];
 
-        $msgg = array('action' => 'start', 'login' => $login, 'pass' => $pass, 'uid' => $uid);
-        $msgg['mysql_host'] = $mysql->dbus->Host;
+        $message = array('action' => 'start', 'login' => $login, 'pass' => $pass, 'uid' => $uid);
+        $message['mysql_host'] = $mysql->dbus->Host;
 
-        $res = $this->sendMessage($msgg);
+        $res = $this->sendMessage($message);
         if ($res === FALSE) {
             return $this->error;
         } else {
             $data = unserialize($res);
             $error = (int) $data['error'];
             $hostname = $data['hostname'];
-            $msg = $data['msg'];
+            $message = $data['msg'];
             $date_start = 'NOW()';
             $uid = $mem->user['uid'];
 
             if ($error != 0) {
-                $msg->raise("ERROR", 'lxc', _($msg));
+                $msg->raise("ERROR", 'lxc', _($message));
                 return FALSE;
             }
             $db->query("INSERT INTO vm_history (ip,date_start,uid,serialized_object) VALUES (?, ?, ?, ?);", array($hostname, $date_start, $uid, $res));
@@ -166,8 +166,8 @@ class m_lxc implements vm {
         global $mem;
 
         $login = $login ? $login : $mem->user['login'];
-        $msgg = array('action' => 'get', 'login' => $login);
-        $res = $this->sendMessage($msgg);
+        $message = array('action' => 'get', 'login' => $login);
+        $res = $this->sendMessage($message);
         if (!$res) {
             return FALSE;
         }
