@@ -174,7 +174,7 @@ class m_actionTest extends AlterncTest {
      */
     public function testPurge() {
         $result = $this->object->purge();
-        $this->assertEquals(0, $result);
+        $this->assertEquals(1, $result);
         $expectedTable = $this->loadDataSet("actions-empty.yml")->getTable("actions");
         $currentTable = $this->getConnection()->createQueryTable('actions', 'SELECT * FROM actions');
         $this->assertTablesEqual($expectedTable, $currentTable);

@@ -241,7 +241,7 @@ class m_action {
      * @global m_messages $msg
      * @global m_mysql $db
      * @param type $all
-     * @return boolean
+     * @return boolean|int The number of rows purged; False is there was an error
      */
     function purge($all = null) {
         global $msg, $db;
