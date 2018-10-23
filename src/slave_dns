@@ -1,35 +1,33 @@
-#!/bin/bash
+#!/usr/bin/php
+<?php
 
-# Rebuild the bind configuration's file
-# with the IP of the slave dns
+// Rebuild the bind configuration's file
+// with the IP of the slave dns
 
-PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-FLAGFILE="/run/alternc/refresh_slave";
-TPL="/etc/alternc/templates/bind/slaveip.conf"
-TARGET="/var/lib/alternc/bind/slaveip.conf"
+$FLAGFILE="/run/alternc/refresh_slave";
+$TPL="/etc/alternc/templates/bind/slaveip.conf";
+$TARGET="/var/lib/alternc/bind/slaveip.conf";
 
-if [ ! -e "$FLAGFILE" ] ; then 
-  # Nothing to do
-  exit 0
-fi
+if (!file_exists($FLAGFILE)) exit(0);
 
-# Source some functions
-. /usr/lib/alternc/functions.sh
+// Bootstrap
+require_once("/usr/share/alternc/panel/class/config_nochk.php");
 
-TMP=$(mktemp /tmp/slaveip.conf.XXXX)
+$db->query("SELECT ip,class FROM slaveip;");
+$str="";
+while ($db->next_record()) {
+    $str.="    ".$db->Record["ip"]."/".$db->Record["class"].";\n";
+}
 
-# Get the slave IP. Remove the "newline" caracters
-val=$(mysql_query "SELECT concat(ip,'::',class,'; ') FROM slaveip;"|tr '\n' ' ')
+file_put_contents($TARGET,  str_replace("//AUTO-SLAVES//",$str, file_get_contents($TPL) ) );
 
-# Add the slaves to the templates, re-add the missing "/" separator of subnet
-cat "$TPL" | sed -e "s/\/\/AUTO-SLAVES\/\//$val/g" -e "s/::/\//g" > "$TMP"
+chown($TARGET,"root");
+chgrp($TARGET,"bind");
+chmod($TARGET,0640);
 
-# Activate the new configuration
-mv "$TMP" "$TARGET"
-chown root:bind "$TARGET"
-chmod 640 "$TARGET"
+putenv("PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin");
+passthru("rndc reconfig");
 
-invoke-rc.d bind9 reload
+unlink($FLAGFILE);
 
-# Remove FLAGSLAVE file
-rm -f "$FLAGFILE"
+
