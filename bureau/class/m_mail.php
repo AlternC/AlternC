@@ -474,6 +474,7 @@ ORDER BY
         
         $this->del_dns_dmarc($domain);
         $this->del_dns_spf($domain);
+        $this->del_dns_autoconf($domain);
         $this->dkim_del($domain);
         
         $db->query("UPDATE domaines SET dns_action='UPDATE' WHERE id= ? ;", array($dom_id));
@@ -1026,6 +1027,16 @@ ORDER BY
         return $changed;
     }
 
+
+    // ------------------------------------------------------------
+    /** 
+     * delete the autoconf / autodiscover vhosts when removing a domain as MX
+     */
+    function del_dns_autoconf($domain) {
+        global $db, $L_FQDN, $cuid;
+        $db->query("UPDATE sub_domaines SET web_action='DELETE' WHERE domaine= ? AND type='autodiscover' AND sub='autoconfig';", array($domain));
+        $db->query("UPDATE sub_domaines SET web_action='DELETE' WHERE domaine= ? AND type='autodiscover' AND sub='autodiscover';", array($domain));        
+    }
     
     // ------------------------------------------------------------
     /** 
