@@ -466,12 +466,17 @@ ORDER BY
             }
         }
         $db->query("SELECT domaine FROM domaines WHERE id= ? ;", array($dom_id));
-        if ($db->next_record()) {
-            $db->query("UPDATE sub_domaines SET web_action='DELETE' WHERE domaine= ? AND type='txt' AND (sub='' AND valeur LIKE 'v=spf1 %') OR (sub='_dmarc' AND valeur LIKE 'v=dmarc1;%');", array($db->Record["domaine"]));
-            $db->query("UPDATE sub_domaines SET web_action='DELETE' WHERE domaine= ? AND (type='defmx' OR type='defmx2');", array($db->Record["domaine"]));
-            $db->query("UPDATE domaines SET dns_action='UPDATE' WHERE id= ? ;", array($dom_id));  
+        if (!$db->next_record()) {
+            return false;
         }
+        $domain=$db->Record["domaine"];
+        $db->query("UPDATE sub_domaines SET web_action='DELETE' WHERE domaine= ? AND (type='defmx' OR type='defmx2');", array($domain));
         
+        $this->del_dns_dmarc($domain);
+        $this->del_dns_spf($domain);
+        $this->dkim_del($domain);
+        
+        $db->query("UPDATE domaines SET dns_action='UPDATE' WHERE id= ? ;", array($dom_id));
         return true;
     }
 
@@ -1052,6 +1057,16 @@ ORDER BY
         $db->query("UPDATE domaines SET dns_action='UPDATE' WHERE domaine= ?;", array($domain));
     }
 
+    // ------------------------------------------------------------
+    /**
+     * delete the SPF entries in the sub_domaine table for a domain
+     * called by del_domain or del_mx_domain by hooks : 
+     */ 
+    function del_dns_spf($domain) {
+        global $db;
+        $db->query("UPDATE sub_domaines SET web_action='DELETE' WHERE domaine= ? AND type='txt' AND sub='' AND valeur LIKE 'v=spf1 %';", array($domain));
+    }
+
 
     // ------------------------------------------------------------
     /** 
@@ -1087,6 +1102,17 @@ ORDER BY
     }
 
 
+    // ------------------------------------------------------------
+    /**
+     * delete the DMARC entries in the sub_domaine table for a domain
+     * called by del_domain or del_mx_domain by hooks : 
+     */ 
+    function del_dns_dmarc($domain) {
+        global $db;
+        $db->query("UPDATE sub_domaines SET web_action='DELETE' WHERE domaine= ? AND type='txt' AND sub='' AND valeur LIKE 'v=dmarc1 %';", array($domain));
+    }
+    
+
     /** Manage DKIM when adding / removing a domain MX management */
     var $shouldreloaddkim;
 
@@ -1113,7 +1139,7 @@ ORDER BY
             $this->dkim_add($domain["domaine"],$domain["compte"]);
         }
         foreach($del as $domain) {
-            $this->dkim_del($domain["domaine"],$domain["compte"]);
+            $this->dkim_del($domain["domaine"]);
         }
     }
 
@@ -1170,7 +1196,7 @@ ORDER BY
     /** 
      * Delete a domain from OpenDKIM configuration
      */    
-    function dkim_del($domain,$uid) {
+    function dkim_del($domain) {
         $target_dir = "/etc/opendkim/keys/$domain";
         if (file_exists($target_dir)) {
             $this->shouldreloaddkim=true;
