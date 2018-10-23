@@ -1664,7 +1664,7 @@ msgstr "Les fichiers /  répertoires %s ont été déplacé avec succès"
 
 #: ../admin/bro_main.php:153
 msgid "The folder '%s' was successfully renamed to '%s'"
-msgstr "Le dissier '%s' a été renommé '%s' avec succès"
+msgstr "Le dossier '%s' a été renommé '%s' avec succès"
 
 #: ../admin/bro_main.php:155
 msgid "The file '%s' was successfully renamed to '%s'"
@@ -1684,7 +1684,7 @@ msgstr "Les permissions ont été appliquées avec succès"
 
 #: ../admin/bro_main.php:175
 msgid "The extraction of the file '%s' succeeded"
-msgstr "L'extraction du fichier '%s' à été effectuée avec succés"
+msgstr "L'extraction du fichier '%s' a été effectuée avec succés"
 
 #: ../admin/bro_main.php:180 ../class/m_bro.php:74
 msgid "File browser"
