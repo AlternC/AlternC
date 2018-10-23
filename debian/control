@@ -149,7 +149,7 @@ Depends: debianutils (>= 1.13.1)
          , dovecot-sieve
          , dovecot-managesieved
          , default-mysql-client
-         , php5-curl
+         , php5-curl | php7.0-curl
          , ${misc:Depends}
 Recommends:
          quota
