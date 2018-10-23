@@ -1197,6 +1197,7 @@ ORDER BY
      * Delete a domain from OpenDKIM configuration
      */    
     function dkim_del($domain) {
+        global $db;
         $target_dir = "/etc/opendkim/keys/$domain";
         if (file_exists($target_dir)) {
             $this->shouldreloaddkim=true;
