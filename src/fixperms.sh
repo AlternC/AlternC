@@ -42,7 +42,6 @@ query="SELECT uid,login FROM membres ORDER BY login"
 sub_dir=""
 file=""
 LOCK_FIXPERMS="/etc/alternc/disable_all_fixperms"
-LOCK_FIXPERMS="/tmp/test"
 
 if [ -f "$LOCK_FIXPERMS" ] ; then
 
@@ -67,16 +66,14 @@ do
     if [[ "$OPTARG" =~ ^[a-zA-Z0-9_]+$ ]] ; then
       query="SELECT uid,login FROM membres WHERE login LIKE '$OPTARG' ORDER BY login"
     else	
-      echo "Bad login provided"
-      exit
+      usage "Bad login provided"
     fi
   ;;
   "u")
     if [[ "$OPTARG" =~ ^[0-9]+$ ]] ; then
       query="SELECT uid,login FROM membres WHERE uid LIKE '$OPTARG' ORDER BY login"
     else
-      echo "Bad uid provided"
-      exit
+      usage "Bad uid provided"
     fi
   ;;
   "f")
