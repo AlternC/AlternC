@@ -39,7 +39,7 @@ Depends: debianutils (>= 1.13.1)
        , wwwconfig-common
        , sasl2-bin
        , libsasl2-modules
-       , php-cli
+       , php-cli | php5-cli
        , lockfile-progs (>= 0.1.9)
        , gettext (>= 0.10.40-5)
        , sudo
@@ -58,13 +58,13 @@ Depends: debianutils (>= 1.13.1)
        , opendkim-tools
        , dovecot-sieve
        , dovecot-managesieved
-       , default-mysql-client
+       , default-mysql-client | mysql-client
        , php5-curl | php7.0-curl
        , quota
        , pwgen
        , lsb-release
        , ${misc:Depends}
-Recommends: default-mysql-server
+Recommends: default-mysql-server | mysql-server
           , ntp
           , unzip
           , bzip2
@@ -130,7 +130,7 @@ Depends: debianutils (>= 1.13.1)
          , wwwconfig-common
          , sasl2-bin
          , libsasl2-modules
-         , php-cli
+         , php-cli | php5-cli
          , lockfile-progs (>= 0.1.9)
          , gettext (>= 0.10.40-5)
          , adduser
@@ -147,7 +147,7 @@ Depends: debianutils (>= 1.13.1)
          , opendkim-tools
          , dovecot-sieve
          , dovecot-managesieved
-         , default-mysql-client
+         , default-mysql-client | mysql-client
          , php5-curl | php7.0-curl
 	 , lsb-release
          , ${misc:Depends}
@@ -244,7 +244,7 @@ Architecture: all
 Pre-depends: debconf
 Depends: alternc (>= 3.0~rc1)
        , awstats (>=6.1-1)
-       , php-cli
+       , php-cli | php5-cli
        , ${misc:Depends}
 Suggests: apachemerge
 Description: Awstats statistics module for AlternC
