@@ -99,7 +99,7 @@ TEMPLATE_DIR="/etc/alternc/templates"
 
 # Find needed configuration files (without the initial '/')
 # replace this one unconditionnally
-CONFIG_FILES="etc/alternc/bureau.conf etc/apache2/envvars etc/alternc/apache2.conf etc/alternc/apache_logformat.conf etc/alternc/phpmyadmin.inc.php"
+CONFIG_FILES="etc/alternc/bureau.conf etc/apache2/envvars etc/alternc/apache2.conf etc/alternc/phpmyadmin.inc.php"
 
 if [ -e /etc/bind/named.conf ]; then
     CONFIG_FILES="$CONFIG_FILES etc/bind/named.conf.options"
