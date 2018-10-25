@@ -335,12 +335,10 @@ if [ -x /usr/sbin/apache2 ]; then
     run-parts --arg=apache2 /usr/lib/alternc/install.d 
     a2enmod mpm_itk
     
-    s=""
     # unused from AlternC 1.0, FIXME: remove it later
     if [ -L /etc/apache2/mods-enabled/vhost_alias.load ]
     then
         a2dismod vhost_alias
-        s="apache2"
     fi 
     if ! [ -L /etc/apache2/mods-enabled/php$php.load ]
     then
@@ -359,12 +357,10 @@ if [ -x /usr/sbin/apache2 ]; then
         # We enable apache2 SSL : 
         if [ ! -L /etc/apache2/mods-enabled/ssl.load ] ; then
             a2enmod ssl
-            s="apache2"
         fi
         if [ ! -h /etc/apache2/conf-available/alternc-ssl.conf ] && [ -e /etc/apache2/conf-available/ ]; then
             ln -sf /etc/alternc/apache2-ssl.conf /etc/apache2/conf-available/alternc-ssl.conf
 	    a2enconf alternc-ssl
-            s="apache2"
         fi
 	
 	# We enable dovecot SSL certificate instructions: (on wheezy we should use a new file in /etc/dovecot/conf.d/ )
@@ -385,18 +381,16 @@ if [ -x /usr/sbin/apache2 ]; then
     if [ ! -h /etc/apache2/conf-available/alternc.conf ] && [ -e /etc/apache2/conf-available/ ]; then
         ln -sf /etc/alternc/apache2.conf /etc/apache2/conf-available/alternc.conf
 	a2enconf alternc.conf
-        s="apache2"
     fi
     if [ -e /etc/apache2/sites-enabled/000-default.conf ]; then
         a2dissite 000-default
-        s="apache2"
     fi
     if ! [ -L /etc/apache2/mods-enabled/expires.load ]
     then
 	a2enmod expires
     fi
 
-    SERVICES="$SERVICES $s"
+    SERVICES="$SERVICES apache2"
 fi
 
 # Manage sudoers.d include appearing in Squeeze:
