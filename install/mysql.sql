@@ -805,4 +805,4 @@ CREATE TABLE IF NOT EXISTS `certif_hosts` (
 
 -- make it re-exec-proof
 DELETE FROM alternc_status WHERE name='alternc_version';
-INSERT INTO alternc_status SET name='alternc_version',value='3.5.0.1.sql';
+INSERT INTO alternc_status SET name='alternc_version',value='3.4.8.sql';
