@@ -1438,7 +1438,7 @@ class m_dom {
      *
      */
     function edit_domain($dom, $dns, $gesmx, $force = false, $ttl = 3600) {
-        global $db, $msg, $hooksthis;
+        global $db, $msg, $hooks, $domislocked;
         $msg->log("dom", "edit_domain", $dom . "/" . $dns . "/" . $gesmx);
         // Locked ?
         if (!$domislocked && !$force) {
