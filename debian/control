@@ -62,6 +62,7 @@ Depends: debianutils (>= 1.13.1)
        , php5-curl | php7.0-curl
        , quota
        , pwgen
+       , lsb-release
        , ${misc:Depends}
 Recommends: default-mysql-server
           , ntp
@@ -148,6 +149,7 @@ Depends: debianutils (>= 1.13.1)
          , dovecot-managesieved
          , default-mysql-client
          , php5-curl | php7.0-curl
+	 , lsb-release
          , ${misc:Depends}
 Recommends:
          quota
