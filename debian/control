@@ -59,13 +59,13 @@ Depends: debianutils (>= 1.13.1)
        , opendkim-tools
        , dovecot-sieve
        , dovecot-managesieved
-       , default-mysql-client
+       , default-mysql-client | mysql-client | mariadb-client
        , php5-curl | php7.0-curl
        , quota
        , pwgen
        , lsb-release
        , ${misc:Depends}
-Recommends: default-mysql-server
+Recommends: default-mysql-server | mysql-server | mariadb-server
           , ntp
           , unzip
           , bzip2
@@ -149,7 +149,7 @@ Depends: debianutils (>= 1.13.1)
          , opendkim-tools
          , dovecot-sieve
          , dovecot-managesieved
-         , default-mysql-client
+         , default-mysql-client | mysql-client | mariadb-client
          , php5-curl | php7.0-curl
 	 , lsb-release
          , ${misc:Depends}
