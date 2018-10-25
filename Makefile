@@ -48,7 +48,7 @@ install-common:
 # Installer and upgrade scripts 
 	test -d $(DESTDIR)/usr/share/alternc/install || mkdir -p $(DESTDIR)/usr/share/alternc/install
 	cp -r install/* $(DESTDIR)/usr/share/alternc/install
-	chmod a+x $(DESTDIR)/usr/share/alternc/install/alternc.install $(DESTDIR)/usr/share/alternc/install/dopo.sh $(DESTDIR)/usr/share/alternc/install/mysql.sh $(DESTDIR)/usr/share/alternc/install/newone.php $(DESTDIR)/usr/share/alternc/install/reset_root.php $(DESTDIR)/usr/share/alternc/install/upgrade_check.sh $(DESTDIR)/usr/share/alternc/install/upgrades/*.php $(DESTDIR)/usr/share/alternc/install/upgrades/*.sh
+	chmod a+x $(DESTDIR)/usr/share/alternc/install/alternc.install $(DESTDIR)/usr/share/alternc/install/dopo.sh $(DESTDIR)/usr/share/alternc/install/mysql.sh $(DESTDIR)/usr/share/alternc/install/newone.php $(DESTDIR)/usr/share/alternc/install/reset_root.php $(DESTDIR)/usr/share/alternc/install/upgrade_check.sh $(DESTDIR)/usr/share/alternc/install/upgrades/*.php $(DESTDIR)/usr/share/alternc/install/upgrades/*.sh $(DESTDIR)/usr/share/alternc/install/variables.php
 
 
 # install AlternC itself: 
