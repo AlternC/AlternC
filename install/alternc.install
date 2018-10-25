@@ -373,7 +373,6 @@ if [ -x /usr/sbin/apache2 ]; then
     run-parts --arg=apache2 /usr/lib/alternc/install.d 
     a2enmod mpm_itk
     
-    s="apache2"
     # unused from AlternC 1.0, FIXME: remove it later
     if [ -L /etc/apache2/mods-enabled/vhost_alias.load ]
     then
@@ -406,7 +405,7 @@ if [ -x /usr/sbin/apache2 ]; then
         a2enconf alternc
     fi
 
-    SERVICES="$SERVICES $s"
+    SERVICES="$SERVICES apache2"
 fi
 
 # Manage sudoers.d include appearing in Squeeze:
