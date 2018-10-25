@@ -76,6 +76,14 @@ fi
 
 . /usr/lib/alternc/functions.sh
 
+# get the information on running Sysv or Systemd init & boot system
+if [ -e /run/systemd/system ]
+then
+    SYSTEMD=1
+else
+    SYSTEMD=0
+fi
+
 # Lock the jobs !
 lock_jobs
 
@@ -649,7 +657,8 @@ touch /etc/opendkim/TrustedHosts /etc/opendkim/SigningTable /etc/opendkim/KeyTab
 grep -q "^127.0.0.1\$" /etc/opendkim/TrustedHosts || echo "127.0.0.1" >>/etc/opendkim/TrustedHosts
 grep -q "^localhost\$" /etc/opendkim/TrustedHosts || echo "localhost" >>/etc/opendkim/TrustedHosts
 grep -q "^$PUBLIC_IP\$" /etc/opendkim/TrustedHosts || echo "$PUBLIC_IP" >>/etc/opendkim/TrustedHosts
-if [ "$(lsb_release -s -c)" == 'stretch' ] ; then
+
+if [ "$SYSTEMD" = "1" -a "$(lsb_release -s -c)" = "stretch" ] ; then
     /lib/opendkim/opendkim.service.generate
     # Without adding '-u opendkim' after the service file is generated, opendkim
     # will run as root, which we do not want.
