@@ -112,7 +112,7 @@ if [ -e /etc/default/saslauthd ]; then
 fi
 
 if [ -e /etc/dovecot/dovecot.conf ]; then
-    CONFIG_FILES="$CONFIG_FILES etc/dovecot/alternc-sql.conf etc/dovecot/alternc-dict-quota.conf etc/dovecot/conf.d/95_alternc.conf etc/dovecot/conf.d/96_ssl.conf"
+    CONFIG_FILES="$CONFIG_FILES etc/dovecot/alternc-sql.conf etc/dovecot/alternc-dict-quota.conf etc/dovecot/conf.d/95_alternc.conf"
 fi
 
 INSTALLED_CONFIG_TAR="/var/lib/alternc/backups/etc-installed.tar.gz"
