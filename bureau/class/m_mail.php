@@ -1011,7 +1011,6 @@ ORDER BY
      */
     function set_dns_spf($domain, $spf, $previous = -1, $uid = -1, $login = -1) {
         global $db, $cuid, $mem, $msg;
-        $msg->debug("mail","set_dns_spf($domain, $spf, $previous, $uid, $login)");
         // defaults
         if ($uid === -1) {
             $uid = intval($cuid);
@@ -1042,7 +1041,6 @@ ORDER BY
      */
     function set_dns_dmarc($domain, $dmarc, $previous = -1, $uid = -1, $login = -1) {
         global $db, $cuid, $mem, $L_FQDN, $msg;
-        $msg->debug("mail","set_dns_dmarc($domain, $dmarc, $previous, $uid, $login)");
         // defaults
         if ($uid === -1) {
             $uid = intval($cuid);
