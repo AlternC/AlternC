@@ -957,12 +957,14 @@ ORDER BY
         // set spf & dmarc for this domain
         $db->query("SELECT domaine,compte FROM domaines WHERE id= ?;", array($domain_id));
         if ($db->next_record()) {
-            $this->set_dns_autoconf($db->Record["domaine"],$db->Record["compte"]);
+	    $domaine=$db->Record["domaine"];
+	    $compte=$db->Record["compte"];
+            $this->set_dns_autoconf($domaine,$compte);
             if ($spf = variable_get("default_spf_value")) {
-                $this->set_dns_spf($db->Record["domaine"], $spf);
+                $this->set_dns_spf($domaine, $spf);
             }
             if ($dmarc = variable_get("default_dmarc_value")) {
-                $this->set_dns_dmarc($db->Record["domaine"], $dmarc);
+                $this->set_dns_dmarc($domaine, $dmarc);
             }
         }
         return $this->create_alias($domain_id, 'postmaster', $mem->user['login'] . '@' . $mailname);
@@ -1046,7 +1048,8 @@ ORDER BY
      * @access private
      */
     function set_dns_spf($domain, $spf, $previous = -1, $uid = -1, $login = -1) {
-        global $db, $cuid, $mem;
+        global $db, $cuid, $mem, $msg;
+        $msg->debug("mail","set_dns_spf($domain, $spf, $previous, $uid, $login)");
         // defaults
         if ($uid === -1) {
             $uid = intval($cuid);
@@ -1087,7 +1090,8 @@ ORDER BY
      * @access private
      */
     function set_dns_dmarc($domain, $dmarc, $previous = -1, $uid = -1, $login = -1) {
-        global $db, $cuid, $mem, $L_FQDN;
+        global $db, $cuid, $mem, $L_FQDN, $msg;
+        $msg->debug("mail","set_dns_dmarc($domain, $dmarc, $previous, $uid, $login)");
         // defaults
         if ($uid === -1) {
             $uid = intval($cuid);
