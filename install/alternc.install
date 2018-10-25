@@ -367,11 +367,6 @@ if [ -x /usr/sbin/apache2 ]; then
             s="apache2"
         fi
 	
-	if ! [ -L /etc/apache2/mods-enabled/expires.load ]
-	then
-	    a2enmod expires
-	fi
-
 	# We enable dovecot SSL certificate instructions: (on wheezy we should use a new file in /etc/dovecot/conf.d/ )
 	( echo "# Don't change this file, it will be overwriten by alternc.install. Change ssl parameters in a file named 99_ssl.conf instead" ; echo "ssl_cert = </etc/alternc/apache.pem" ; echo "ssl_key = </etc/alternc/apache.pem" ) >/etc/dovecot/conf.d/96_ssl.conf
 
@@ -396,6 +391,11 @@ if [ -x /usr/sbin/apache2 ]; then
         a2dissite 000-default
         s="apache2"
     fi
+    if ! [ -L /etc/apache2/mods-enabled/expires.load ]
+    then
+	a2enmod expires
+    fi
+
     SERVICES="$SERVICES $s"
 fi
 
