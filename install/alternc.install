@@ -615,6 +615,9 @@ fi
 chmod 640 /var/log/alternc/bureau.log /var/log/alternc/update_domains.log
 chown alterncpanel:adm /var/log/alternc/bureau.log /var/log/alternc/update_domains.log
 
+# Launch a script that will populate AlternC variables as needed
+su - alterncpanel -s /bin/bash -c /usr/share/alternc/install/variables.php
+
 # Creating admin user if needed
 HAS_ROOT=`mysql --defaults-file=/etc/alternc/my.cnf -e "SELECT COUNT(*) FROM membres WHERE login = 'admin' OR login = 'root' and su = 1" | tail -1`
 
