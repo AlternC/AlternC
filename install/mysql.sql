@@ -755,7 +755,6 @@ CREATE TABLE IF NOT EXISTS `alternc_status` (
   PRIMARY KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT = 'stores current AlternC schema version number';
 
-
 -- csrf token table
 CREATE TABLE IF NOT EXISTS `csrf` (
   `cookie` char(32) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
@@ -765,11 +764,6 @@ CREATE TABLE IF NOT EXISTS `csrf` (
   PRIMARY KEY (`cookie`,`token`),
   KEY `created` (`created`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='csrf tokens for AlternC forms';
-
-
--- make it re-exec-proof
-DELETE FROM alternc_status WHERE name='alternc_version';
-INSERT INTO alternc_status SET name='alternc_version',value='3.4.8.sql';
 
 -- SSL managment
 CREATE TABLE IF NOT EXISTS `certificates` (
