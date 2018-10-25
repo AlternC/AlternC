@@ -481,7 +481,7 @@ CREATE TABLE IF NOT EXISTS `domaines_type` (
 
 INSERT IGNORE INTO `domaines_type` (name, description, target, entry, compatibility, only_dns, need_dns, advanced, enable,has_https_option) VALUES
 ('dkim',  'DKIM Key',             'TXT', '%SUB% IN TXT "%TARGET%"',                 'txt,defmx,defmx2,mx,mx2,url,ip,ipv6',                   true,    true,    true, 'ADMIN', false),
-('autodiscover',  'Email autoconfiguration', 'NONE', '%SUB% IN A @@PUBLIC_IP@@', 'txt,defmx,defmx2,mx,mx2', false, true, true, 'ADMIN'),
+('autodiscover',  'Email autoconfiguration', 'NONE', '%SUB% IN A @@PUBLIC_IP@@', 'txt,defmx,defmx2,mx,mx2', false, true, true, 'ADMIN', false),
  ('vhost',  'Locally hosted',             'DIRECTORY', '%SUB% IN A @@PUBLIC_IP@@',                 'txt,defmx,defmx2,mx,mx2',                   false,    false,    false, 'ALL', true),
 ('url',    'URL redirection',            'URL',       '%SUB% IN A @@PUBLIC_IP@@',                 'txt,defmx,defmx2',                          false,    false,    false, 'ALL', false),
 ('ip',     'IPv4 redirect',              'IP',        '%SUB% IN A %TARGET%',                      'url,ip,ipv6,txt,mx,mx2,defmx,defmx2',       true,     true,     false, 'ALL', false),
