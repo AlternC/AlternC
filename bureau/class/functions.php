@@ -1149,7 +1149,9 @@ function csrf_get($return=false) {
     }
     if ($token=="") {
         $token=md5(mt_rand().mt_rand().mt_rand());
-        $db->query("INSERT INTO csrf SET cookie=?, token=?, created=NOW(), used=0;",array($_SESSION["csrf"],$token));
+        if (!$db->query("INSERT INTO csrf SET cookie=:csrf, token=:token, created=NOW(), used=0;",array("csrf" => $_SESSION["csrf"], "token" => $token))) {
+          echo(print_r($db->last_error(),1));
+        }
     }
     if ($return) 
         return $token;
