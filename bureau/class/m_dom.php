@@ -1333,7 +1333,7 @@ class m_dom {
 
         // On a épuré $dir des problémes eventuels ... On est en DESSOUS du dossier de l'utilisateur.
         if (($t = checkfqdn($dom))) {
-            $msg->raise("ERROR", "dom", _("The domain name is syntaxically incorrect"));
+            $msg->raise("ERROR", "dom", _("The domain name {$dom} is syntaxically incorrect: code {$t}"));
             return false;
         }
 
