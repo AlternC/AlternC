@@ -25,22 +25,32 @@
 
 require_once("../class/config.php");
 
-$fields = array (
-	"domain"    => array ("post", "string", ""),
-	"sub"       => array ("post", "string", ""),
-	"type"      => array ("post", "string", $dom->type_local),
-  	"sub_domain_id" => array ("post", "integer", 0),
+global $db, $hooks;
+
+// Do the type first so it can be used to retrieve dynamic fields.
+$fields = array(
+    'type' => array('post', 'string', $dom->type_local),
 );
 getFields($fields);
 
-// here we get a dynamic-named value
+$fields = array();
+foreach ($hooks->invoke('hook_dom_subdoedit_fields', array($type)) as $module => $extra_fields) {
+    $fields = array_merge($fields, $extra_fields);
+}
+
 $dynamicvar="t_$type";
 $httpsvar="https_$type";
-$fields = array (
-  "$dynamicvar"   => array ("post", "string", ""),
-  "$httpsvar"   => array ("post", "string", ""),
+$default_fields = array (
+    "domain"    => array ("post", "string", ""),
+    "sub"       => array ("post", "string", ""),
+    "sub_domain_id" => array ("post", "integer", 0),
+    "$dynamicvar"   => array ("post", "string", ""),
+    "$httpsvar"   => array ("post", "string", ""),
 );
+$fields = array_merge($fields, $default_fields);
 getFields($fields);
+
+// here we get a dynamic-named value
 $value=$$dynamicvar;
 $https=$$httpsvar;
 // The dynamic value is now in $value
@@ -69,6 +79,18 @@ if (!$r) {
   }
     exit();
 } else {
+  $db->query('SELECT id from sub_domaines where domaine = ? ORDER BY id DESC;',
+             array($domain));
+  $db->next_record();
+  $new_subdomain_id = $db->f('id');
+
+  $context = array();
+  foreach ($fields as $k => $v) {
+    $context[$k] = $$k;
+  }
+  $context['sub_domain_id'] = $new_subdomain_id;
+  $context['type'] = $type;
+  $hooks->invoke('hook_dom_subdoedit_set', array($context));
   $t = time();
   // TODO: we assume the cron job is at every 5 minutes
   $noread=false;
