@@ -44,7 +44,7 @@ class m_apache {
 
     // launched for each FQDN for which we want a new vhost template 
     function hook_updatedomains_web_add($subdomid) {
-        global $msg,$db,$ssl,$L_FQDN;
+        global $msg,$db,$ssl,$L_FQDN,$hooks;
 
         $db->query("SELECT sd.*, dt.only_dns, dt.has_https_option, m.login FROM domaines_type dt, sub_domaines sd LEFT JOIN membres m ON m.uid=sd.compte WHERE dt.name=sd.type AND sd.web_action!='OK' AND id=?;",array($subdomid));
         $db->next_record();
@@ -77,7 +77,11 @@ class m_apache {
         }
         // Replace needed vars in template file
         $tpl=file_get_contents($template);
-        $tpl = strtr($tpl, array(
+        $extra_tokens = array();
+        foreach ($hooks->invoke('hook_web_template_tokens', array($subdom)) as $module => $et) {
+            $extra_tokens = array_merge($extra_tokens, $et);
+        }
+        $default_tokens = array(
             "%%LOGIN%%" => $subdom['login'],
             "%%fqdn%%" => $subdom['fqdn'],
             "%%document_root%%" => getuserpath($subdom['login']) . $subdom['valeur'],
@@ -90,7 +94,8 @@ class m_apache {
             "%%CRT%%" => $cert["cert"],
             "%%KEY%%" => $cert["key"],
             "%%CHAINLINE%%" => $chainline,
-        ));
+        );
+        $tpl = strtr($tpl, array_merge($extra_tokens, $default_tokens));
         // and write the template
         $confdir = $this->vhostroot."/".substr($subdom["compte"],-1)."/".$subdom["compte"];
         @mkdir($confdir,0755,true);
