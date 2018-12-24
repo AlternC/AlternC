@@ -28,7 +28,7 @@ require_once("../class/config.php");
 include_once("head.php");
 
 function sub_domains_edit($domain, $sub_domain_id=false) {
-  global $admin, $msg, $oldid, $isedit;
+  global $admin, $msg, $oldid, $isedit, $hooks;
 
 $dom=new m_dom();
 $dom->lock();
@@ -135,6 +135,16 @@ $dom->unlock();
             </select>
 <?php  } ?>
         </td>
+<?php $extra_fields = $hooks->invoke('hook_subdomain_type_extra_fields', array($dt, $domain, $sub_domain_id));?>
+        <?php if ($extra_fields): ?>
+            <td>
+                <?php foreach ($extra_fields as $module => $extra): ?>
+                    <?php foreach($extra as $field_name => $f): ?>
+                        <?php echo($f); ?>
+                    <?php endforeach; ?>
+                <?php endforeach; ?>
+            </td>
+        <?php endif; ?>
     </tr>
     <?php } // foreach ?>
 
