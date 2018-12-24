@@ -1978,6 +1978,7 @@ class m_dom {
 
                 if ($subdom["web_action"]=="DELETE") {
                     $db->query("DELETE FROM sub_domaines WHERE id=?;",array($id));
+                    $hooks->invoke('hook_dom_del_subdomain', array($id));
                 } else {
                     // we keep the highest result returned by hooks...
                     rsort($ret,SORT_NUMERIC); $returncode=$ret[0];
