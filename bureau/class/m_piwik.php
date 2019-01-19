@@ -3,24 +3,24 @@
 /*
   ----------------------------------------------------------------------
   LICENSE
-  
+
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License (GPL)
   as published by the Free Software Foundation; either version 2
   of the License, or (at your option) any later version.
-  
+
   This program is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
-  
+
   To read the license please visit http://www.gnu.org/copyleft/gpl.html
   ----------------------------------------------------------------------
 */
 
 /**
  * This class manage piwik statistics management through AlternC, using piwik's "API".
- * 
+ *
  * @copyright AlternC-Team 2000-2017 https://alternc.com/
  */
 class m_piwik {
@@ -47,10 +47,10 @@ class m_piwik {
     }
 
 
-    /** 
+    /**
      * Constructor
      */
-    function m_piwik() {
+    function __construct() {
         $this->piwik_server_uri=variable_get('piwik_server_uri','','Remote Piwik server uri');
         $this->piwik_admin_token=variable_get('piwik_admin_token','','Remote Piwik super-admin token');
         $this->alternc_users=array();
@@ -58,7 +58,7 @@ class m_piwik {
     }
 
 
-    /** 
+    /**
      * hook called when an AlternC account is deleted
      */
     function hook_admin_del_member() {
@@ -67,9 +67,9 @@ class m_piwik {
     }
 
 
-    /** 
+    /**
      * Returns the used quota for the $name service for the current user.
-     * @param $name string name of the quota 
+     * @param $name string name of the quota
      * @return integer the number of service used or false if an error occured
      * @access private
      */
@@ -113,7 +113,7 @@ class m_piwik {
         $user_pass  = create_pass();
         $user_alias = $user_login;
 
-        $api_data = $this->call_privileged_page('API', 'UsersManager.addUser', array('userLogin' => $user_login, 'password' => $user_pass, 'email' => $user_mail, 'alias' => $user_alias), 'JSON'); 
+        $api_data = $this->call_privileged_page('API', 'UsersManager.addUser', array('userLogin' => $user_login, 'password' => $user_pass, 'email' => $user_mail, 'alias' => $user_alias), 'JSON');
         if ($api_data) {
             if ($api_data->result === 'success') {
                 $user = $this->get_user($user_login);
@@ -131,7 +131,7 @@ class m_piwik {
 
 
     /**
-     *  Change a user @TODO: code this 
+     *  Change a user @TODO: code this
      */
     function user_edit() {
         return true;
@@ -161,13 +161,13 @@ class m_piwik {
         if ($api_data !== FALSE) {
             $api_data = $api_data[0]; // Data is in the first column
             foreach ($this->alternc_users AS $key=>$user) {
-                if (!array_key_exists($user, $api_data)) {                                                            
-                    $api_data->$user = 'noaccess';                                                                
-                } 
+                if (!array_key_exists($user, $api_data)) {
+                    $api_data->$user = 'noaccess';
+                }
             }
             return $api_data;
         }
-        else return FALSE; 
+        else return FALSE;
     }
 
 
@@ -186,7 +186,7 @@ class m_piwik {
 
     function get_alternc_sites($force=false) {
         global $db, $cuid, $msg;
-        
+
         if (!count($this->alternc_sites) || $force) {
             $db->query("SELECT piwik_id AS site_id FROM piwik_sites WHERE uid= ? ;", array($cuid));
             while ($db->next_record())
@@ -234,7 +234,7 @@ class m_piwik {
     }
 
 
-    /** 
+    /**
      * does this user has piwik websites configured in AlternC ?
      */
     function user_has_sites() {
@@ -253,7 +253,7 @@ class m_piwik {
     }
 
 
-    /** 
+    /**
      * Delete a piwik user
      * don't delete it locally unless it has been remotely deleted.
      */
@@ -261,7 +261,7 @@ class m_piwik {
         global $db, $cuid, $msg;
 
         $msg->log("piwik","user_delete");
-    
+
         $db->query("SELECT created_date, COUNT(id) AS cnt FROM piwik_users WHERE uid= ? AND login= ? ", array($cuid, $piwik_user_login));
         $db->next_record();
 
@@ -278,9 +278,9 @@ class m_piwik {
             return FALSE;
         }
     }
- 
 
-    function users_list() { 
+
+    function users_list() {
         global $db, $cuid, $msg;
 
         $msg->debug("piwik","users_list");
@@ -291,7 +291,7 @@ class m_piwik {
         $users = '';
         while ($db->next_record())
             $users .= ($users !== '') ? ',' . $db->f('login') : $db->f('login');
-        return $this->call_privileged_page('API', 'UsersManager.getUsers', array('userLogins' => $users)); 
+        return $this->call_privileged_page('API', 'UsersManager.getUsers', array('userLogins' => $users));
     }
 
 
@@ -332,7 +332,7 @@ class m_piwik {
         if($api_data) {
             foreach ($api_data AS $site) {
 
-                if (!in_array($site->idsite, $this->alternc_sites)) 
+                if (!in_array($site->idsite, $this->alternc_sites))
                     continue;
 
                 $item = new stdClass();
@@ -404,7 +404,7 @@ class m_piwik {
         global $db, $cuid, $msg;
 
         $msg->log("piwik","site_delete");
-    
+
         $db->query("SELECT COUNT(id) AS cnt FROM piwik_sites WHERE uid= ? AND piwik_id= ? ;", array($cuid, $site_id));
         $db->next_record();
 
@@ -422,7 +422,7 @@ class m_piwik {
 
         return true;
     }
- 
+
 
     function site_set_user_right($site_id, $login, $right)
     {
@@ -450,7 +450,7 @@ class m_piwik {
 
 
     /**
-     *  return a clean username with a unique prefix per account 
+     *  return a clean username with a unique prefix per account
      */
     function clean_user_name($username) {
         global $admin, $cuid, $db;

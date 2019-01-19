@@ -9,8 +9,8 @@
 */
 Class m_export {
 
-    function m_export() {
-        
+    function __construct() {
+
     }
 
     function export_conf() {
@@ -32,4 +32,3 @@ Class m_export {
 }
 
 // export Class end
-

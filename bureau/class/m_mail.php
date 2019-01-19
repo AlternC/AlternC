@@ -26,27 +26,27 @@
  * address = any used email address will be defined here, mailbox = pop/imap mailboxes, recipient = redirection from an email to another
  * and indirectly the domain class, to know domain names from their id in the DB.
  * This class is also defining a few hooks, search ->invoke in the code.
- * 
+ *
  * @copyright AlternC-Team 2000-2017 https://alternc.com/
  */
 class m_mail {
 
-    /** 
+    /**
      * domain list for this account
      * @access private
      */
     var $domains;
 
 
-    /** 
-     * If an email has those chars, 'not nice in shell env' ;) 
+    /**
+     * If an email has those chars, 'not nice in shell env' ;)
      * we don't store the email in $mail/u/{user}_domain, but in $mail/_/{address_id}_domain
      * @access private
      */
     var $specialchars = array('"', "'", '\\', '/');
 
 
-    /** 
+    /**
      * If an email has those chars, we will ONLY allow RECIPIENTS, NOT POP/IMAP for DOVECOT !
      * Since Dovecot doesn't allow those characters
      * @access private
@@ -54,7 +54,7 @@ class m_mail {
     var $forbiddenchars = array('"', "'", '\\', '/', '?', '!', '*', '$', '|', '#', '+');
 
 
-    /** 
+    /**
      * Number of results for a pager display
      * @access public
      */
@@ -70,7 +70,7 @@ class m_mail {
     /**
      * Constructeur
      */
-    function m_mail() {
+    function __construct() {
         global $L_FQDN;
         $this->srv_postfix = variable_get('fqdn_postfix', $L_FQDN, 'FQDN name for humans for smtp services. If you change it, launch reload-certs', array('desc' => 'Name', 'type' => 'string'));
         $this->srv_dovecot = variable_get('fqdn_dovecot', $L_FQDN, 'FQDN name for humans for pop/imap services. If you change it, launch reload-certs', array('desc' => 'Name', 'type' => 'string'));
@@ -78,7 +78,7 @@ class m_mail {
 
 
     /**
-     * Hook called by menu class to add the email menu to the left pane 
+     * Hook called by menu class to add the email menu to the left pane
      */
     function hook_menu() {
         $obj = array(
@@ -182,11 +182,11 @@ class m_mail {
     }
 
 
-    /** 
-     * get_quota (hook for quota class), returns the number of used 
+    /**
+     * get_quota (hook for quota class), returns the number of used
      * service for a quota-bound service
      * @param $name string the named quota we want
-     * @return the number of used service for the specified quota, 
+     * @return the number of used service for the specified quota,
      * or false if I'm not the one for the named quota
      */
     function hook_quota_get() {
@@ -202,7 +202,7 @@ class m_mail {
     }
 
 
-    /** 
+    /**
      * Password policy kind used in this class (hook for admin class)
      * @return array an array of policykey => "policy name (for humans)"
      */
@@ -211,7 +211,7 @@ class m_mail {
     }
 
 
-    /** 
+    /**
      * Returns the list of mail-hosting domains for a user
      * @return array indexed array of hosted domains
      */
@@ -229,7 +229,7 @@ SELECT
 FROM
   domaines d LEFT JOIN address a ON (d.id=a.domain_id AND a.type='')
 WHERE
-  d.compte = ? 
+  d.compte = ?
   and d.gesmx = 1
 GROUP BY
   d.id
@@ -245,11 +245,11 @@ ORDER BY
     }
 
 
-    /** 
+    /**
      * available: tells if an email address can be installed in the server
      * check the domain part (is it mine too), the syntax, and the availability.
      * @param $mail string email to check
-     * @return boolean true if the email can be installed on the server 
+     * @return boolean true if the email can be installed on the server
      */
     function available($mail) {
         global $db, $msg, $dom;
@@ -303,7 +303,7 @@ ORDER BY
         if ($count != -1) {
             $offset = intval($offset);
             $count = intval($count);
-            $limit = " LIMIT $offset, $count "; 
+            $limit = " LIMIT $offset, $count ";
         } else {
             $limit = "";
         }
@@ -334,17 +334,17 @@ ORDER BY
     }
 
 
-    /** 
+    /**
      * Function used to insert a new mail into the db
      * should be used by the web interface, not by third-party programs.
      *
      * This function calls the hook "hooks_mail_cancreate"
      * which must return FALSE if the user can't create this email, and raise and error accordingly
-     * 
-     * @param $dom_id integer A domain_id (owned by the user) 
+     *
+     * @param $dom_id integer A domain_id (owned by the user)
      * (will be the part at the right of the @ in the email)
      * @param $mail string the left part of the email to create (something@dom_id)
-     * @return an hashtable containing the database id of the newly created mail, 
+     * @return an hashtable containing the database id of the newly created mail,
      * or false if an error occured ($msg is filled accordingly)
      */
     function create($dom_id, $mail, $type = "", $dontcheck = false) {
@@ -394,8 +394,8 @@ ORDER BY
     }
 
 
-    /** 
-     * function used to get every information we can on a mail 
+    /**
+     * function used to get every information we can on a mail
      * @param $mail_id integer
      * @return array a hashtable with all the informations for that email
      */
@@ -409,7 +409,7 @@ ORDER BY
             return false;
         }
 
-        // We fetch all the informations for that email: these will fill the hastable : 
+        // We fetch all the informations for that email: these will fill the hastable :
         $db->query("SELECT a.id, a.address, a.password, a.enabled, d.domaine AS domain, m.path, m.quota, m.quota*1024*1024 AS quotabytes, q.quota_dovecot AS used, NOT ISNULL(m.id) AS islocal, a.type, r.recipients, m.lastlogin, a.mail_action, m.mail_action AS mailbox_action FROM ((domaines d, address a LEFT JOIN mailbox m ON m.address_id=a.id) LEFT JOIN dovecot_quota q ON CONCAT(a.address,'@',d.domaine)  = q.user) LEFT JOIN recipient r ON r.address_id=a.id WHERE a.id= ? AND d.id=a.domain_id;", array($mail_id));
         if (!$db->next_record()) {
             return false;
@@ -426,7 +426,7 @@ ORDER BY
     private $isitmy_cache = array();
 
 
-    /** 
+    /**
      * Check if an email is mine ...
      *
      * @param $mail_id integer the number of the email to check
@@ -450,7 +450,7 @@ ORDER BY
     }
 
 
-    /** 
+    /**
      * Hook called when the DOMAIN class will delete a domain.
      * OR when the DOMAIN class tells us we don't host the emails of this domain anymore.
      * @param $dom the ID of the domain to delete
@@ -471,12 +471,12 @@ ORDER BY
         }
         $domain=$db->Record["domaine"];
         $db->query("UPDATE sub_domaines SET web_action='DELETE' WHERE domaine= ? AND (type='defmx' OR type='defmx2');", array($domain));
-        
+
         $this->del_dns_dmarc($domain);
         $this->del_dns_spf($domain);
         $this->del_dns_autoconf($domain);
         $this->dkim_del($domain);
-        
+
         $db->query("UPDATE domaines SET dns_action='UPDATE' WHERE id= ? ;", array($dom_id));
         return true;
     }
@@ -495,12 +495,12 @@ ORDER BY
     }
 
 
-    /** 
+    /**
      * Function used to delete a mail from the db
      * should be used by the web interface, not by third-party programs.
      *
      * @param $mail_id integer the number of the email to delete
-     * @return boolean if the email has been properly deleted 
+     * @return boolean if the email has been properly deleted
      * or false if an error occured ($msg is filled accordingly)
      */
     function delete($mail_id) {
@@ -547,12 +547,12 @@ ORDER BY
     }
 
 
-    /** 
+    /**
      * Function used to undelete a pending deletion mail from the db
      * should be used by the web interface, not by third-party programs.
      *
      * @param $mail_id integer the email id
-     * @return boolean if the email has been properly undeleted 
+     * @return boolean if the email has been properly undeleted
      * or false if an error occured ($msg is filled accordingly)
      */
     function undelete($mail_id) {
@@ -576,7 +576,7 @@ ORDER BY
             $msg->raise("ERROR", "mail", _("The email %s does not exist, it can't be undeleted"), $mail);
             return false;
         }
-        if ($db->f("type") != "") { // Technically special : mailman, sympa ... 
+        if ($db->f("type") != "") { // Technically special : mailman, sympa ...
             $msg->raise("ERROR", "mail", _("The email %s is special, it can't be undeleted"), $mail);
             return false;
         }
@@ -598,9 +598,9 @@ ORDER BY
     }
 
 
-    /** 
+    /**
      * set the password of an email address.
-     * @param $mail_id integer email ID 
+     * @param $mail_id integer email ID
      * @param $pass string the new password.
      * @return boolean true if the password has been set, false else, raise an error.
      */
@@ -625,7 +625,7 @@ ORDER BY
     }
 
 
-    /** 
+    /**
      * Enables an email address.
      * @param $mail_id integer Email ID
      * @return boolean true if the email has been enabled.
@@ -643,7 +643,7 @@ ORDER BY
     }
 
 
-    /** 
+    /**
      * Disables an email address.
      * @param $mail_id integer Email ID
      * @return boolean true if the email has been enabled.
@@ -661,7 +661,7 @@ ORDER BY
     }
 
 
-    /** 
+    /**
      * Function used to update an email settings
      * should be used by the web interface, not by third-party programs.
      *
@@ -735,8 +735,8 @@ ORDER BY
     }
 
 
-    /** 
-     * A wrapper used by mailman class to create it's needed addresses 
+    /**
+     * A wrapper used by mailman class to create it's needed addresses
      * @ param : $dom_id , the domain id associated to a given address
      * @ param : $m , the left part of the  mail address being created
      * @ param : $delivery , the delivery used to deliver the mail
@@ -751,7 +751,7 @@ ORDER BY
     }
 
 
-    /** 
+    /**
      * A function used to create an alias for a specific address
      * @ param : $dom_id , the domain sql identifier
      * @ param : $m , the alias we want to create
@@ -774,8 +774,8 @@ ORDER BY
     }
 
 
-    /** 
-     * A wrapper used by mailman class to create it's needed addresses 
+    /**
+     * A wrapper used by mailman class to create it's needed addresses
      * @ param : $mail_id , the mysql id of the mail address we want to delete
      * of the email for the current acccount.
      */
@@ -786,9 +786,9 @@ ORDER BY
     }
 
 
-    /** 
-     * Export the mail information of an account 
-     * @return: str, string containing the complete configuration 
+    /**
+     * Export the mail information of an account
+     * @return: str, string containing the complete configuration
      * of the email for the current acccount.
      */
     function alternc_export_conf() {
@@ -861,8 +861,8 @@ ORDER BY
     }
 
 
-    /** 
-     * Out (echo) the complete hosted domain list : 
+    /**
+     * Out (echo) the complete hosted domain list :
      */
     function echo_domain_list($format = null) {
         global $db;
@@ -874,7 +874,7 @@ ORDER BY
             $tt.=$db->f("domaine");
         }
 
-        // Generate an integrity check 
+        // Generate an integrity check
         $obj = array('integrity' => md5($tt), 'items' => $lst);
 
         switch ($format) {
@@ -919,12 +919,12 @@ ORDER BY
 
 
     // ------------------------------------------------------------
-    /** 
+    /**
      * hook function called by AlternC when a domain is created for
      * the current user account using the SLAVE DOMAIN feature
      * This function create a CATCHALL to the master domain
      * @param string $domain_id Domain that has just been created
-     * @param string $target_domain Master domain 
+     * @param string $target_domain Master domain
      * @access private
      */
     function hook_dom_add_slave_domain($domain_id, $target_domain) {
@@ -936,9 +936,9 @@ ORDER BY
 
 
     // ------------------------------------------------------------
-    /** 
+    /**
      * hook function called by AlternC when a domain is created for
-     * the current user account 
+     * the current user account
      * This function create a postmaster mail which is an alias to LOGIN @ FQDN
      * wich is a dynamic alias to the alternc's account mail
      * @param string $domain_id Domain that has just been created
@@ -957,8 +957,8 @@ ORDER BY
         // set spf & dmarc for this domain
         $db->query("SELECT domaine,compte FROM domaines WHERE id= ?;", array($domain_id));
         if ($db->next_record()) {
-	    $domaine=$db->Record["domaine"];
-	    $compte=$db->Record["compte"];
+        $domaine=$db->Record["domaine"];
+        $compte=$db->Record["compte"];
             $this->set_dns_autoconf($domaine,$compte);
             if ($spf = variable_get("default_spf_value")) {
                 $this->set_dns_spf($domaine, $spf);
@@ -972,13 +972,13 @@ ORDER BY
 
 
     // ------------------------------------------------------------
-    /** 
+    /**
      * hook function called by variables when a variable is changed
      * @access private
      */
     function hook_variable_set($name, $old, $new) {
         global $msg, $db;
-        $msg->log("mail", "hook_variable_set($name,$old,$new)");      
+        $msg->log("mail", "hook_variable_set($name,$old,$new)");
 
         if ($name == "default_spf_value") {
             $new = trim($new);
@@ -1003,7 +1003,7 @@ ORDER BY
         }
     }
 
-    
+
     // ------------------------------------------------------------
     /**
      * Add dns entries for autodiscover / autoconf on the domain
@@ -1031,17 +1031,17 @@ ORDER BY
 
 
     // ------------------------------------------------------------
-    /** 
+    /**
      * delete the autoconf / autodiscover vhosts when removing a domain as MX
      */
     function del_dns_autoconf($domain) {
         global $db, $L_FQDN, $cuid;
         $db->query("UPDATE sub_domaines SET web_action='DELETE' WHERE domaine= ? AND type='autodiscover' AND sub='autoconfig';", array($domain));
-        $db->query("UPDATE sub_domaines SET web_action='DELETE' WHERE domaine= ? AND type='autodiscover' AND sub='autodiscover';", array($domain));        
+        $db->query("UPDATE sub_domaines SET web_action='DELETE' WHERE domaine= ? AND type='autodiscover' AND sub='autodiscover';", array($domain));
     }
-    
+
     // ------------------------------------------------------------
-    /** 
+    /**
      * Set or UPDATE the DNS record for the domain $dom(str) to be $spf
      * account's login is current and if not it's $login.
      * don't change spf if current value is not $old
@@ -1074,8 +1074,8 @@ ORDER BY
     // ------------------------------------------------------------
     /**
      * delete the SPF entries in the sub_domaine table for a domain
-     * called by del_domain or del_mx_domain by hooks : 
-     */ 
+     * called by del_domain or del_mx_domain by hooks :
+     */
     function del_dns_spf($domain) {
         global $db;
         $db->query("UPDATE sub_domaines SET web_action='DELETE' WHERE domaine= ? AND type='txt' AND sub='' AND valeur LIKE 'v=spf1 %';", array($domain));
@@ -1083,7 +1083,7 @@ ORDER BY
 
 
     // ------------------------------------------------------------
-    /** 
+    /**
      * Set or UPDATE the DNS record for the domain $dom(str) to be $dmarc
      * account's login is current and if not it's $login.
      * don't change dmarc if current value is not $old
@@ -1120,22 +1120,22 @@ ORDER BY
     // ------------------------------------------------------------
     /**
      * delete the DMARC entries in the sub_domaine table for a domain
-     * called by del_domain or del_mx_domain by hooks : 
-     */ 
+     * called by del_domain or del_mx_domain by hooks :
+     */
     function del_dns_dmarc($domain) {
         global $db;
         $db->query("UPDATE sub_domaines SET web_action='DELETE' WHERE domaine= ? AND type='txt' AND sub='' AND valeur LIKE 'v=dmarc1 %';", array($domain));
     }
-    
+
 
     /** Manage DKIM when adding / removing a domain MX management */
     var $shouldreloaddkim;
 
-    
+
     // ------------------------------------------------------------
-    /** 
+    /**
      * Hook launched before doing anything dns-related
-     */    
+     */
     function hook_updatedomains_dns_pre() {
         global $db;
         // for each domain where we don't have the MX or the DNS, remove the DKIM setup
@@ -1160,9 +1160,9 @@ ORDER BY
 
 
     // ------------------------------------------------------------
-    /** 
+    /**
      * Hook launched after doing anything dns-related
-     */    
+     */
     function hook_updatedomains_dns_post() {
         if ($this->shouldreloaddkim) {
             exec("service opendkim reload");
@@ -1172,14 +1172,14 @@ ORDER BY
 
 
     // ------------------------------------------------------------
-    /** 
+    /**
      * Add a domain into OpenDKIM configuration
-     */    
+     */
     function dkim_add($domain,$uid) {
         global $db;
         $target_dir = "/etc/opendkim/keys/$domain";
 
-        // Create a dkim key when it's not already there : 
+        // Create a dkim key when it's not already there :
         if (!file_exists($target_dir.'/alternc.txt')) {
             $this->shouldreloaddkim=true;
             if (! is_dir($target_dir)) mkdir($target_dir); // create dir
@@ -1191,7 +1191,7 @@ ORDER BY
             // opendkim must be owner of the key
             chown("$target_dir/alternc.private", 'opendkim');
             chgrp("$target_dir/alternc.private", 'opendkim');
-            
+
             add_line_to_file("/etc/opendkim/KeyTable","alternc._domainkey.".$domain." ".$domain.":alternc:/etc/opendkim/keys/".$domain."/alternc.private");
             add_line_to_file("/etc/opendkim/SigningTable",$domain." alternc._domainkey.".$domain);
         }
@@ -1208,9 +1208,9 @@ ORDER BY
 
 
     // ------------------------------------------------------------
-    /** 
+    /**
      * Delete a domain from OpenDKIM configuration
-     */    
+     */
     function dkim_del($domain) {
         global $db;
         $target_dir = "/etc/opendkim/keys/$domain";
@@ -1228,7 +1228,7 @@ ORDER BY
 
 
     // ------------------------------------------------------------
-    /** 
+    /**
      * return the content of the TXT information to be added into the DB for DKIM subdomains
      * @param $domain string the name of the domain name
      * @return string the TXT entry (without quotes)
@@ -1255,13 +1255,13 @@ ORDER BY
                     $result.=$mat[1]; $inkey=true; continue;
                 }
             }
-            if ($result) 
+            if ($result)
                 return $result;
         }
         $msg->debug("mail","dkim_get_entry($domain) failed");
         return false;
     }
-    
+
     // @TODO hook after reloading DNS zones => if necessary, restart opendkim
 
 } /* Class m_mail */

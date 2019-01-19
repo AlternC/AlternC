@@ -24,7 +24,7 @@
 /**
  * This class manage the file browser of AlternC
  * allow the file and directory management in the user account web folder
- * 
+ *
  * @copyright AlternC-Team 2000-2017 https://alternc.com/
  */
 class m_bro {
@@ -53,11 +53,11 @@ class m_bro {
     /** font size in the editor */
     var $l_editor_size = array("18px", "14px", "12px", "10px", "8px", "0.8em", "0.9em", "1em", "1.1em", "1.2em");
 
-    
+
     /**
-     * Constructor 
+     * Constructor
      * */
-    function m_bro() {
+    function __construct() {
         $this->l_mode = array(0 => _("1 column, detailed"), 1 => _("2 columns, short"), 2 => _("3 columns, short"));
         $this->l_tgz = array(0 => _("tgz (Linux)"), 1 => _("tar.bz2 (Linux)"), 2 => _("zip (Windows/Dos)"), 3 => _("tar.Z (Unix)"));
         $this->l_icons = array(0 => _("No"), 1 => _("Yes"));
@@ -80,11 +80,11 @@ class m_bro {
         return $obj;
     }
 
-    
+
     /**
      * Verifie un dossier relatif au dossier de l'utilisateur courant
      *
-     * @param string $dir 
+     * @param string $dir
      * @global m_mem $mem
      * @param string $dir Dossier absolu que l'on souhaite vérifier
      * @param boolean $strip
@@ -111,7 +111,7 @@ class m_bro {
         // recomposer le chemin
         $dir = $dir . '/' . $file;
 
-        # Si on tente de mettre un '..' alors erreur 
+        # Si on tente de mettre un '..' alors erreur
         if (preg_match("/\/\.\.\//", $dir) || preg_match("/\/\.\.$/", $dir)) {
             return false;
         }
@@ -119,9 +119,9 @@ class m_bro {
         if ($strip) {
             $dir = substr($dir, strlen($root));
         } else {
-            // si on ne strip pas, il faut enlever le chemin rel 
+            // si on ne strip pas, il faut enlever le chemin rel
             // et mettre la racine d'alternc pour viter les
-            // problmes de lien depuis /var /alternc ! 
+            // problmes de lien depuis /var /alternc !
             $dir = $root_alternc . substr($dir, strlen($root));
         }
         if (substr($dir, -1) == "/") {
@@ -152,7 +152,7 @@ class m_bro {
      * @todo [ML] Comment faire ca correctement?
      * C'est utilise' dans class/m_dom.php quand un utilisateur ajoute un domaine dans son compte
      * et nous devons savoir quel est le chemin complet vers la racine de son compte..
-     * 
+     *
      * @global m_admin $admin
      * @param int $uid User id.
      * @return string Returns the complete path to the root of the user's directory.
@@ -171,14 +171,14 @@ class m_bro {
 
     /**
      * Retourne un tableau contenant la liste des fichiers du dossier courant
-     * 
+     *
      * Ce tableau contient tous les paramtres des fichiers du dossier courant
      * sous la forme d'un tableau index de tableaux associatifs comme suit :
      * $a["name"]=nom du fichier / dossier
      * $a["size"]=Taille totale du fichier / dossier + sous-dossier
      * $a["date"]=Date de dernire modification
      * $a["type"]=Type du fichier (1 pour fichier, 0 pour dossier)
-     * 
+     *
      * @global m_mysql $db
      * @global int $cuid
      * @global m_messages $msg
@@ -218,10 +218,10 @@ class m_bro {
 
     /**
      * Retourne un tableau contenant les prfrences de l'utilisateur courant
-     * 
+     *
      * Ce tableau associatif contient les valeurs des champs de la table "browser"
      * pour l'utilisateur courant.
-     * 
+     *
      * @global m_mysql $db
      * @global int $cuid
      * @return array Tableau des prfrences de l'utilisateur courant.
@@ -253,7 +253,7 @@ class m_bro {
        * @param integer $editor_font Quelle police faut-il utiliser pour l'diteur
        * @param integer $editor_size Quelle taille de police faut-il utiliser pour l'diteur
        * @param integer $golastdir Faut-il revenir la racine ou au dernier dossier visit ?
-       * @return boolean 
+       * @return boolean
        */
     function SetPrefs($editsizex, $editsizey, $listmode, $showicons, $downfmt, $createfile, $showtype, $editor_font, $editor_size, $golastdir) {
         global $db, $cuid;
@@ -277,7 +277,7 @@ class m_bro {
     /**
      * Retourne le nom du fichier icone associ au fichier donc le nom est $file
      * <b>Note</b>: Les fichiers icones sont mis en cache sur la page courante.
-     * 
+     *
      * @global array $bro_icon
      * @param string $file Fichier dont on souhaite connaitre le fichier icone
      * @return string Fichier icone correspondant.
@@ -306,7 +306,7 @@ class m_bro {
      * Retourne le type mime associé au fichier donc le nom est $file
      * <b>Note</b>: Les types mimes sont mis en cache sur la page courante.
      * Le type mime est dtermin d'aprs l'extension du fichier.
-     * 
+     *
      * @global array $bro_type
      * @param string $file Fichier dont on souhaite connaitre le type mime
      * @return string Type mime / Sous type du fichier demand
@@ -335,7 +335,7 @@ class m_bro {
      * Retourne la taille du fichier $file
      * si $file est un dossier, retourne la taille de ce dossier et de tous
      * ses sous dossiers.
-     * 
+     *
      * @param string $file Fichier dont on souhaite connaitre la taille
      * @param boolean $showdirsize Recursively compute the directory size.
      * @return integer Taille du fichier en octets.
@@ -356,8 +356,8 @@ class m_bro {
 
     /**
      * Returns the size of a directory, by adding all it's files sizes
-     * 
-     * @param string $dir The directory whose size we want to compute 
+     *
+     * @param string $dir The directory whose size we want to compute
      * @return integer The total size in bytes.
      */
     function dirsize($dir) {
@@ -383,7 +383,7 @@ class m_bro {
 
     /**
      * Crée le dossier $file dans le dossier (parent) $dir
-     * 
+     *
      * @global m_mysql $db
      * @global int $cuid
      * @global m_messages $msg
@@ -411,7 +411,7 @@ class m_bro {
 
     /**
      * Crée un fichier vide dans un dossier
-     * 
+     *
      * @global m_mysql $db
      * @global m_messages $msg
      * @global int $cuid
@@ -440,7 +440,7 @@ class m_bro {
 
     /**
      * Efface les fichiers du tableau $file_list dans le dossier $R
-     * 
+     *
      * @global m_messages $msg
      * @global m_mem $mem
      * @param array $file_list Liste des fichiers effacer.
@@ -467,7 +467,7 @@ class m_bro {
 
     /**
      * Renomme les fichier de $old du dossier $R en $new
-     * 
+     *
      * @global m_messages $msg
      * @param string $R Dossier dans lequel se trouve les fichiers renommer.
      * @param array $old Ancien nom des fichiers
@@ -501,7 +501,7 @@ class m_bro {
 
     /**
      * Déplace les fichier de $d du dossier $old vers $new
-     * 
+     *
      * @global m_messages $msg
      * @param array $d Liste des fichiers du dossier $old dplacer
      * @param string $old Dossier dans lequel se trouve les fichiers dplacer.
@@ -543,7 +543,7 @@ class m_bro {
 
     /**
      * Change les droits d'acces aux fichier de $d du dossier $R en $p
-     * 
+     *
      * @param string $R Dossier dans lequel se trouve les fichiers renommer.
      * @param string $d list of files whose permission must be changed
      * @param string $perm the permission to change
@@ -589,8 +589,8 @@ class m_bro {
      * Recoit un champ file upload (Global) et le stocke dans le dossier $R
      * Le champ file-upload originel doit s'appeler "userfile" et doit
      * bien être un fichier d'upload.
-     * 
-     * 
+     *
+     *
      * @global array $_FILES
      * @global m_messages $msg
      * @global int $cuid
@@ -644,7 +644,7 @@ class m_bro {
 
     /**
      * Extract an archive by using GNU and non-GNU tools
-     * 
+     *
      * @global m_messages $msg
      * @global int $cuid
      * @global m_mem $mem
@@ -704,11 +704,11 @@ class m_bro {
 
     /**
      * Copy many files from point A to point B
-     * 
+     *
      * @global m_messages $msg
      * @param array $d List of files to move
-     * @param string $old 
-     * @param string $new 
+     * @param string $old
+     * @param string $new
      * @return boolean
      */
     function CopyFile($d, $old, $new) {
@@ -743,7 +743,7 @@ class m_bro {
      * supported)
      *
      * Note that we assume that the inputs have been convertabsolute()'d
-     * 
+     *
      * @global m_messages $msg
      * @param string $src Path or URL
      * @param string $dest Absolute path inside the users directory
@@ -765,7 +765,7 @@ class m_bro {
      * Affiche autant de liens HTML (anchor) que le chemin $path contient de
      * niveaux de dossier. Chaque lien est associ la page web $action
      * laquelle on ajoute le paramtre R=+Le nom du dossier courant.
-     * 
+     *
      * @param string $path Dossier vers lequel on trace le chemin
      * @param string $action Page web de destination des liens
      * @param boolean $justparent
@@ -794,10 +794,10 @@ class m_bro {
 
     /**
      * Affiche le contenu d'un fichier pour un champ VALUE de textarea
-     * 
+     *
      * Affiche le contenu du fichier $file dans le dossier $R. Le contenu
      * du fichier est reformat pour pouvoir entrer dans un champs TextArea
-     * 
+     *
      * @global m_messages $msg
      * @param string $R Dossier dans lequel on cherche le fichier
      * @param string $file Fichier dont on souhaite obtenir le contenu.
@@ -827,13 +827,13 @@ class m_bro {
      * Retourne une url de navigation pour le fichier $name du dossier $dir
      * Les url sont mises en caches. Il se peut qu'aucune url n'existe, ou que
      * celle-ci soit protge par un .htaccess.
-     * 
+     *
      * Return a browsing url if available.
      * Maintain a url cache (positive AND negative(-) cache)
-     * 
+     *
      * @global m_mysql $db
      * @global int $cuid
-     * 
+     *
      * @param string $dir Dossier concerné
      * @param string $name Fichier dont on souhaite obtenir une URL
      * @return string URL concerne, ou FALSE si aucune URL n'est disponible pour ce fichier
@@ -884,7 +884,7 @@ class m_bro {
 
 
     /**
-     * 
+     *
      * @global m_mem $mem
      * @global m_messages $msg
      * @param string $dir
@@ -913,7 +913,7 @@ class m_bro {
 
     /**
      * Return a HTML snippet representing an extraction function only if the mimetype of $name is supported
-     * 
+     *
      * @param string $name
      * @return boolean
      */
@@ -944,7 +944,7 @@ class m_bro {
 
     /**
      * return true if file is a sql dump (end with .sql or .sql.gz)
-     * 
+     *
      * @param type $dir
      * @param type $name
      * @return boolean
@@ -962,7 +962,7 @@ class m_bro {
 
 
     /**
-     * 
+     *
      * @global m_messages $msg
      * @param string $dir
      * @param string $file
@@ -979,7 +979,7 @@ class m_bro {
 
     /**
      * Echoes the content of the file $file located in directory $R
-     * 
+     *
      * @global m_messages $msg
      * @param string $R
      * @param string $file
@@ -1004,7 +1004,7 @@ class m_bro {
      * Sauve le fichier $file dans le dossier $R avec pour contenu $texte
      * le contenu est issu d'un textarea, et ne DOIT PAS contenir de \ ajouts
      * automatiquement par addslashes
-     * 
+     *
      * @global m_messages $msg
      * @param string $file Nom du fichier sauver. S'il existe déjà, il sera
      * écrasé sans confirmation.
@@ -1033,7 +1033,7 @@ class m_bro {
 
     /**
      * Echo d'un flux .tar.Z contenant tout le contenu du dossier $dir
-     * 
+     *
      * @global m_mem $mem
      * @param string $dir Dossier à dumper, relatif la racine du compte du membre.
      * @return void NE RETOURNE RIEN, et il faut Quitter le script immdiatement aprs
@@ -1051,7 +1051,7 @@ class m_bro {
 
     /**
      * Echo d'un flux .tgz contenant tout le contenu du dossier $dir
-     * 
+     *
      * @global type $mem
      * @param string $dir Dossier à dumper, relatif la racine du compte du membre.
      * @return void NE RETOURNE RIEN, et il faut Quitter le script immdiatement aprs
@@ -1069,7 +1069,7 @@ class m_bro {
 
     /**
      * Echo d'un flux .tar.bz2 contenant tout le contenu du dossier $dir
-     * 
+     *
      * @global type $mem
      * @param string $dir Dossier à dumper, relatif la racine du compte du membre.
      * @return void NE RETOURNE RIEN, et il faut Quitter le script immdiatement aprs
@@ -1087,7 +1087,7 @@ class m_bro {
 
     /**
      * Echo d'un flux .ZIP contenant tout le contenu du dossier $dir
-     * 
+     *
      * @global type $mem
      * @param string $dir Dossier à dumper, relatif la racine du compte du membre.
      * @return void NE RETOURNE RIEN, et il faut Quitter le script immdiatement aprs
@@ -1106,7 +1106,7 @@ class m_bro {
 
     /**
      * Fonction de tri perso utilis par filelist.
-     * 
+     *
      * @access private
      * @param string $a
      * @param string $b
@@ -1140,7 +1140,7 @@ class m_bro {
         }
         if (is_dir($file)) {
             $handle = opendir($file);
-            if (!$handle) { 
+            if (!$handle) {
                 rmdir($file); // let's try it anyway...
                 return; // skip unreacheable folders
             }
@@ -1160,7 +1160,7 @@ class m_bro {
     /**
      * Function d'exportation de configuration appelé par la classe m_export via un hooks
      * Produit en sorti un tableau formatté ( pour le moment) en HTML
-     * 
+     *
      * @global m_mysql $db
      * @global m_messages $msg
      * @return string
@@ -1187,7 +1187,7 @@ class m_bro {
 
     /**
      * Function d'exportation des données appelé par la classe m_export via un hooks
-     * 
+     *
      * @global m_mem $mem
      * @global m_messages $msg
      * @param string $dir Le chemin destination du tarball produit

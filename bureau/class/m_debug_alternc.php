@@ -20,7 +20,7 @@
 
 /**
  * This class manage debug. Available to admin account only
- * 
+ *
  * @copyright AlternC-Team 2000-2017 https://alternc.com/
  */
 class m_debug_alternc {
@@ -35,7 +35,7 @@ class m_debug_alternc {
 
     /** Constructor
      */
-    function m_debug_alternc() {
+    function __construct() {
         if (isset($_COOKIE['alternc_debugme']) && $_COOKIE['alternc_debugme']) {
             $this->status = true;
             ini_set('display_errors', '1');

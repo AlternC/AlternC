@@ -22,15 +22,15 @@ define('SLAVE_FLAG', "/run/alternc/refresh_slave");
 
 /**
  * Classe de gestion des domaines de l'hébergé.
- * 
+ *
  * Cette classe permet de gérer les domaines / sous-domaines, redirections
  * dns et mx des domaines d'un membre hébergé.<br />
- * 
+ *
  * @copyright AlternC-Team 2000-2017 https://alternc.com/
  */
 class m_dom {
 
-    /** 
+    /**
      * $domains : Cache des domaines du membre
      * @access private
      */
@@ -75,7 +75,7 @@ class m_dom {
     /**
      * Constructeur
      */
-    function m_dom() {
+    function __construct() {
         global $L_FQDN, $domislocked;
         $this->tld_no_check_at_all = variable_get('tld_no_check_at_all', 0, 'Disable ALL check on the TLD (users will be able to add any domain)', array('desc' => 'Disabled', 'type' => 'boolean'));
         variable_get('mailname_bounce', $L_FQDN, 'FQDN of the mail server, used to create vhost virtual mail_adress.', array('desc' => 'FQDN', 'type' => 'string'));
@@ -109,7 +109,7 @@ class m_dom {
     }
 
 
-    /** 
+    /**
      * hook function called by the menu class
      * to add menu to the left panel
      */
@@ -143,7 +143,7 @@ class m_dom {
     /**
      * Retourne un tableau contenant les types de domaines
      *
-     * @return array retourne un tableau indexé contenant la liste types de domaines 
+     * @return array retourne un tableau indexé contenant la liste types de domaines
      *  authorisé. Retourne FALSE si une erreur s'est produite.
      */
     function domains_type_lst() {
@@ -160,7 +160,7 @@ class m_dom {
     }
 
 
-    // returns array(ALL,NONE,ADMIN) 
+    // returns array(ALL,NONE,ADMIN)
     function domains_type_enable_values() {
         global $db, $msg, $cuid;
         $msg->debug("dom", "domains_type_enable_values");
@@ -451,13 +451,13 @@ class m_dom {
 
     private function import_manual_dns_prep_zone($domain) {
         global $msg;
-        // Prepare a domain to be importer : 
+        // Prepare a domain to be importer :
         // * create the domain
         // * delete all automatic subdomain
         // * set no mx
         $this->lock();
 
-        // function add_domain($domain,$dns,$noerase=0,$force=0,$isslave=0,$slavedom="") 
+        // function add_domain($domain,$dns,$noerase=0,$force=0,$isslave=0,$slavedom="")
         if (!$this->add_domain($domain, true, false, true)) {
             $msg->raise("ERROR", 'dom', "Error adding domain");
             return false;
@@ -515,7 +515,7 @@ class m_dom {
                     }
                     return $ret['target'];
                 }
-            } else { // it isn't a redirection 
+            } else { // it isn't a redirection
                 return false;
             }
         } catch (Exception $e) {
@@ -650,7 +650,7 @@ class m_dom {
         // TODO : the 2 calls below are using an OLD hook call, FIXME: remove them when unused
         $hooks->invoke("alternc_del_domain", array($domain));
         $hooks->invoke("alternc_del_mx_domain", array($domain));
-        // New hook calls: 
+        // New hook calls:
         $hooks->invoke("hook_dom_del_domain", array($r["id"]));
         $hooks->invoke("hook_dom_del_mx_domain", array($r["id"]));
 
@@ -785,7 +785,7 @@ class m_dom {
                 $msg->raise("ERROR", "dom", _("Domain '%s' not found"), $slavedom);
                 $isslave = false;
             }
-            // Point to the master domain : 
+            // Point to the master domain :
             $this->create_default_subdomains($domain, $slavedom);
         }
         if (!$isslave) {
@@ -797,7 +797,7 @@ class m_dom {
         if ($isslave) {
             $hooks->invoke("alternc_add_slave_domain", array($domain));
         }
-        // New Hooks: 
+        // New Hooks:
         $hooks->invoke("hook_dom_add_domain", array($id));
         if ($gesmx) {
             $hooks->invoke("hook_dom_add_mx_domain", array($id));
@@ -920,7 +920,7 @@ class m_dom {
 
     /**
      * Return the NS of a server by interrogating its parent zone.
-     * 
+     *
      * @param string $domain FQDN we are searching for
      * @return array Return the authoritative NS of this domain
      *   or FALSE if an error occurred
@@ -947,7 +947,7 @@ class m_dom {
         if (!count($out)) {
             return false; // bad exit of the loop
         }
-        $parentns=trim($out[0]); 
+        $parentns=trim($out[0]);
 
         // we take the first NS of the SOA of the parent and interrogate it for the child domain:
         $out=array();
@@ -1136,7 +1136,7 @@ class m_dom {
         } else return "";
     }
 
-    
+
     /**
      * @param integer $type
      * @param string $value
@@ -1215,8 +1215,8 @@ class m_dom {
      * domain type
      *
      * @param string $dom FQDN of the domain name
-     * @param string $sub SUBdomain 
-     * @return boolean tell you if the subdomain can be installed there 
+     * @param string $sub SUBdomain
+     * @return boolean tell you if the subdomain can be installed there
      */
     function can_create_subdomain($dom, $sub, $type, $sub_domain_id = 0) {
         global $db, $msg;
@@ -1242,8 +1242,8 @@ class m_dom {
         }
 
         // Forbidden to create a CNAME RR on the domain APEX (RFC 1912)
-        if ($type == 'cname' && $sub == '')    
-            return false;  
+        if ($type == 'cname' && $sub == '')
+            return false;
 
         // All is right, go ! Create ur domain !
         return true;
@@ -1256,7 +1256,7 @@ class m_dom {
      * @param string the provider (if not empty, will be checked against an existing certificate for this subdomain)
      * @return boolean true if the preference has been set
      */
-    function set_subdomain_ssl_provider($sub_domain_id,$provider) { 
+    function set_subdomain_ssl_provider($sub_domain_id,$provider) {
         global $db, $msg, $cuid, $ssl, $domislocked;
         $msg->log("dom", "set_sub_domain_ssl_provider", $sub_domain_id." / ".$provider);
         // Locked ?
@@ -1288,7 +1288,7 @@ class m_dom {
         return true;
     }
 
-    
+
     /**
      * Modifier les information du sous-domaine demandé.
      *
@@ -1300,7 +1300,7 @@ class m_dom {
      * @param integer $type Type de sous-domaine (local, ip, url ...)
      * @param string $dest Destination du sous-domaine, dépend de la valeur
      *  de $type (url, ip, dossier...)
-     * @param string $https the HTTPS behavior : HTTP(redirect https to http), 
+     * @param string $https the HTTPS behavior : HTTP(redirect https to http),
      *  HTTPS(redirect http to https) or BOTH (both hosted at the same place)
      *  or nothing "" when not applicable for this domain type.
      * @return boolean Retourne FALSE si une erreur s'est produite, TRUE sinon.
@@ -1534,7 +1534,7 @@ class m_dom {
     }
 
 
-    /** 
+    /**
      * Add an ip address (or a ip class) to the list of allowed slave ip access list.
      */
     function add_slave_ip($ip, $class = "32") {
@@ -1560,7 +1560,7 @@ class m_dom {
     }
 
 
-    /** 
+    /**
      * Remove an ip address (or a ip class) from the list of allowed slave ip access list.
      */
     function del_slave_ip($ip) {
@@ -1577,7 +1577,7 @@ class m_dom {
     }
 
 
-    /** 
+    /**
      * Check for a slave account
      */
     function check_slave_account($login, $pass) {
@@ -1589,8 +1589,8 @@ class m_dom {
         return false;
     }
 
-    /** 
-     * Out (echo) the complete hosted domain list : 
+    /**
+     * Out (echo) the complete hosted domain list :
      */
     function echo_domain_list($integrity = false) {
         global $db;
@@ -1608,8 +1608,8 @@ class m_dom {
     }
 
 
-    /** 
-     * Returns the complete hosted domain list : 
+    /**
+     * Returns the complete hosted domain list :
      */
     function get_domain_list($uid = -1) {
         global $db;
@@ -1632,7 +1632,7 @@ class m_dom {
     }
 
     /**
-     * 
+     *
      * @return array
      */
     function get_domain_all_summary() {
@@ -1697,7 +1697,7 @@ class m_dom {
     }
 
 
-    /** 
+    /**
      * Count all domains, for all users
      */
     function count_domains_all() {
@@ -1711,8 +1711,8 @@ class m_dom {
     }
 
 
-    /** 
-     * Return the list of allowed slave accounts 
+    /**
+     * Return the list of allowed slave accounts
      */
     function enum_slave_account() {
         global $db;
@@ -1728,7 +1728,7 @@ class m_dom {
     }
 
 
-    /** 
+    /**
      * Add a slave account that will be allowed to access the domain list
      */
     function add_slave_account($login, $pass) {
@@ -1743,7 +1743,7 @@ class m_dom {
     }
 
 
-    /** 
+    /**
      * Remove a slave account
      */
     function del_slave_account($login) {
@@ -1755,7 +1755,7 @@ class m_dom {
     /*  Private  */
 
 
-    /** 
+    /**
      * Try to lock a domain
      * @access private
      */
@@ -1765,20 +1765,20 @@ class m_dom {
         if ($domislocked) {
             $msg->raise("ERROR", "dom", _("--- Program error --- Lock already obtained!"));
         }
-        // wait for the file to disappear, or at most 15min: 
+        // wait for the file to disappear, or at most 15min:
         while (file_exists(m_dom::fic_lock_cron) && filemtime(m_dom::fic_lock_cron)>(time()-900)) {
             clearstatcache();
             sleep(2);
         }
         @touch(m_dom::fic_lock_cron);
         $domislocked = true;
-        // extra safe : 
+        // extra safe :
         register_shutdown_function(array("m_dom","unlock"),1);
         return true;
     }
 
 
-    /** 
+    /**
      * Unlock the cron for domain management
      * return true
      * @access private
@@ -1790,14 +1790,14 @@ class m_dom {
             $msg->raise("ERROR", "dom", _("--- Program error --- No lock on the domains!"));
         }
         // don't use $this since we may be called by register_shutdown_function out of an object instance.
-        @unlink(m_dom::fic_lock_cron); 
+        @unlink(m_dom::fic_lock_cron);
         $domislocked = false;
         return true;
     }
 
 
-    /** 
-     * Declare that a domain's emails are hosted in this server : 
+    /**
+     * Declare that a domain's emails are hosted in this server :
      * This adds 2 MX entries in this domain (if required)
      */
     function hook_dom_add_mx_domain($dom_id) {
@@ -1826,7 +1826,7 @@ class m_dom {
     }
 
 
-    /** 
+    /**
      * Returns the used quota for the $name service for the current user.
      * @param $name string name of the quota
      * @return integer the number of service used or false if an error occured
@@ -1846,7 +1846,7 @@ class m_dom {
 
     /**
      * Returns the global domain(s) configuration(s) of a particular user
-     * No parameters needed 
+     * No parameters needed
      */
     function alternc_export_conf() {
         global $msg;
@@ -1895,7 +1895,7 @@ class m_dom {
 
     /**
      * complex process to manage domain and subdomain updates
-     * Launched every minute by a cron as root 
+     * Launched every minute by a cron as root
      * should launch hooks for each domain or subdomain,
      * so that apache & bind could do their job
      */
@@ -1910,7 +1910,7 @@ class m_dom {
 
         // fix in case we forgot to delete SUBDOMAINS before deleting a DOMAIN
         $db->query("UPDATE sub_domaines sd, domaines d SET sd.web_action = 'DELETE' WHERE sd.domaine = d.domaine AND sd.compte=d.compte AND d.dns_action = 'DELETE';");
-        
+
         // Search for things to do on DOMAINS:
         $db->query("SELECT * FROM domaines WHERE dns_action!='OK';");
         $alldoms=array();
@@ -1971,7 +1971,7 @@ class m_dom {
                 if ($subdom["web_action"]=="DELETE" || strtoupper(substr($subdom["enable"],0,7))=="DISABLE") {
                     $ret = $hooks->invoke("hook_updatedomains_web_del",array($subdom["id"]));
                 } else {
-                    $hooks->invoke("hook_updatedomains_web_before",array($subdom["id"])); // give a chance to get SSL cert before ;) 
+                    $hooks->invoke("hook_updatedomains_web_before",array($subdom["id"])); // give a chance to get SSL cert before ;)
                     $ret = $hooks->invoke("hook_updatedomains_web_add",array($subdom["id"]));
                     $hooks->invoke("hook_updatedomains_web_after",array($subdom["id"]));
                 }
@@ -1986,11 +1986,11 @@ class m_dom {
             }
             $hooks->invoke("hook_updatedomains_web_post");
         }
-        
+
         $this->unlock();
     }
 
-    
+
     /**
      * @param string $dns_action
      */
@@ -2001,7 +2001,7 @@ class m_dom {
     }
 
 
-    /** 
+    /**
      * List if there are problems on the domain.
      *  Problems can appear when editing domains type properties
      */

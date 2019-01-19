@@ -43,7 +43,7 @@ class m_quota {
     /**
      * Constructor
      */
-    function m_quota() {
+    function __construct() {
         $this->disk_quota_enable = variable_get('disk_quota_enable', 1, 'Are disk quota enabled for this server', array('desc' => 'Enabled', 'type' => 'boolean'));
         if ($this->disk_quota_enable) {
             $this->disk = Array("web" => "web");
@@ -75,9 +75,9 @@ class m_quota {
         foreach ($q as $key=>$value)
             if (($key=="web")||(isset($value['in_menu'])&&$value['in_menu'])) {
                 if (!isset($q[$key]["u"]) || empty($q[$key]["t"])) {
-        	        continue;
+                    continue;
                 }
-	            
+
                 $totalsize_used = $quota->get_size_web_sum_user($cuid) + $quota->get_size_mailman_sum_user($cuid) + ($quota->get_size_db_sum_user($mem->user["login"]) + $quota->get_size_mail_sum_user($cuid))/1024;
                 $usage_percent = (int) ($totalsize_used / $q[$key]["t"] * 100);
                 $obj['links'][] = array('txt' => _("quota_" . $key) . " " . sprintf(_("%s%% of %s"), $usage_percent, format_size($q[$key]["t"] * 1024)), 'url' => 'quota_show.php');
@@ -255,7 +255,7 @@ class m_quota {
         if (!$this->disk_quota_not_blocking && isset($this->disk[$ressource])) {
             // It's a disk resource, update it with shell command
             exec("sudo /usr/lib/alternc/quota_edit " . intval($cuid) . " " . intval($size) . " &> /dev/null &");
-            // Now we check that the value has been written properly : 
+            // Now we check that the value has been written properly :
             $a = array();
             exec("sudo /usr/lib/alternc/quota_get " . intval($cuid) . " &> /dev/null &", $a);
             if (!isset($a[1]) || $size != $a[1]) {
@@ -285,7 +285,7 @@ class m_quota {
     }
 
 
-    /** 
+    /**
      * Get the default quotas as an associative array
      * @return array the array of the default quotas
      */
@@ -306,7 +306,7 @@ class m_quota {
     }
 
 
-    /** 
+    /**
      * Set the default quotas
      * @param array associative array of quota (key=>val)
      */
@@ -327,7 +327,7 @@ class m_quota {
     }
 
 
-    /** 
+    /**
      * Add an account type for quotas
      * @param string $type account type to be added
      * @return boolean true if all went ok
@@ -352,7 +352,7 @@ class m_quota {
     }
 
 
-    /** 
+    /**
      * List types of quotas
      * @return array
      */
@@ -650,7 +650,7 @@ class m_quota {
 
     /** Exports all the quota related information for an account.
      * @access private
-     * EXPERIMENTAL function ;) 
+     * EXPERIMENTAL function ;)
      */
     function alternc_export_conf() {
         global $msg;
@@ -671,4 +671,3 @@ class m_quota {
 }
 
 /* Class m_quota */
-

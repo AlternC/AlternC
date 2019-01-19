@@ -22,7 +22,7 @@ include_once(dirname(__FILE__) . '/vm.class.php');
 
 /**
  * Manage AlternC's virtual machine (Containers) start/stop using our own inetd-based protocol.
- * 
+ *
  * @copyright AlternC-Team 2000-2017 https://alternc.com/
  */
 class m_lxc implements vm {
@@ -38,7 +38,7 @@ class m_lxc implements vm {
     /**
      * Constructor, initialize the class informations from AlternC's variables
      */
-    function m_lxc() {
+    function __construct() {
         $this->IP = variable_get('lxc_ip', '', "IP address of the Alternc's LXC server. If empty, no LXC server.", array('desc' => 'IP address', 'type' => 'ip'));
         $this->PORT = variable_get('lxc_port', '6504', "Port of the Alternc's LXC server", array('desc' => 'Port', 'type' => 'integer'));
         $this->KEY = variable_get('lxc_key', '', "Shared key with the Alternc's LXC server", array('desc' => 'Shared key', 'type' => 'string'));
@@ -77,7 +77,7 @@ class m_lxc implements vm {
     /**
      * Send a message to a remote VM manager instance
      * $params are the parameters to send as serialized data
-     * to the listening server. 
+     * to the listening server.
      * Return the unserialized response data, if the message has been sent successfully
      * or FALSE if an error occurred. In that case $error[] is set.
      */
@@ -91,7 +91,7 @@ class m_lxc implements vm {
         // Authenticate:
         $params['server'] = $L_FQDN;
         $params['key'] = $this->KEY;
-        // MySQL Host for this user ? 
+        // MySQL Host for this user ?
         $moreparams = $hooks->invoke("lxc_params", array($params));
         foreach ($moreparams as $p) {
             foreach ($p as $k => $v) {
@@ -160,7 +160,7 @@ class m_lxc implements vm {
 
 
     /**
-     * 
+     *
      */
     public function getvm($login = FALSE) {
         global $mem;
@@ -190,4 +190,3 @@ class m_lxc implements vm {
     }
 
 } /* class m_lxc */
-

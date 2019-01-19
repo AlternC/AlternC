@@ -20,7 +20,7 @@
 
 /**
  * FTP account management class
- * 
+ *
  * @copyright AlternC-Team 2000-2017 https://alternc.com/
  */
 class m_ftp {
@@ -31,7 +31,7 @@ class m_ftp {
     /**
      * Constructor
      */
-    function m_ftp() {
+    function __construct() {
         global $L_FQDN;
         $this->srv_proftpd = variable_get('fqdn_proftpd', $L_FQDN, 'Human name for FTP server. If you change it, launch reload-certs', array('desc' => 'Name', 'type' => 'string'));
     }
@@ -129,14 +129,14 @@ class m_ftp {
     }
 
 
-    /** 
+    /**
      * Retourne la liste des comptes FTP du compte h�berg�
      * Retourne la liste des comptes FTP sous forme de tableau index� de
      * tableaus associatifs comme suit :
      * $a["id"]= ID du compte ftp
      * $a["login"]= Nom de login du compte
      * $a["dir"]= Dossier relatif � la racine du compte de l'utilisateur
-     * @return array Retourne le tableau des comptes 
+     * @return array Retourne le tableau des comptes
      */
     function get_list() {
         global $db, $msg, $cuid;
@@ -161,7 +161,7 @@ class m_ftp {
     }
 
 
-    /** 
+    /**
      * Retourne les details d'un compte FTP (voir get_list)
      * Le tableau est celui du compte d'id specifie
      * @param integer $id Numero du compte dont on souhaite obtenir les d�tails
@@ -199,7 +199,7 @@ class m_ftp {
     }
 
 
-    /** 
+    /**
      * Retourne la liste des prefixes utilisables par le compte courant
      * @return array tableau contenant la liste des prefixes (domaines + login)
      *  du compte actuel.
@@ -240,7 +240,7 @@ class m_ftp {
     }
 
 
-    /** 
+    /**
      * Affiche (ECHO) la liste des prefixes disponibles sous forme de champs d'option
      * Les champs sont affich�s sous la forme <option>prefixe</option>...
      * La valeur $current se voit affubl�e de la balise SELECTED.
@@ -262,7 +262,7 @@ class m_ftp {
     }
 
 
-    /** 
+    /**
      * Modifie les param�tres du comptes FTP $id.
      * @param integer $id Num�ro du compte dont on veut modifier les param�tres
      * @param string $prefixe Prefixe du compte FTP
@@ -313,7 +313,7 @@ class m_ftp {
         }
         if (trim($pass)) {
 
-            // Check this password against the password policy using common API : 
+            // Check this password against the password policy using common API :
             if (is_callable(array($admin, "checkPolicy"))) {
                 if (!$admin->checkPolicy("ftp", $full_login, $pass)) {
                     return false; // The error has been raised by checkPolicy()
@@ -328,7 +328,7 @@ class m_ftp {
     }
 
 
-    /** 
+    /**
      * Efface le compte ftp specifie
      * @param integer $id Numero du compte FTP a supprimer.
      * @return boolean TRUE si le compte a ete efface, FALSE sinon.
@@ -348,7 +348,7 @@ class m_ftp {
     }
 
 
-    /** 
+    /**
      * Cree un nouveau compte FTP.
      * @param string $prefixe Prefixe au login
      * @param string $login Login ftp (login=prefixe_login)
@@ -396,7 +396,7 @@ class m_ftp {
             return false;
         }
 
-        // Check this password against the password policy using common API : 
+        // Check this password against the password policy using common API :
         if (is_callable(array($admin, "checkPolicy"))) {
             if (!$admin->checkPolicy("ftp", $full_login, $pass)) {
                 return false; // The error has been raised by checkPolicy()
@@ -414,7 +414,7 @@ class m_ftp {
     }
 
 
-    /** 
+    /**
      * Retourne TRUE si $dir possee un compte FTP
      * @param string $dir Dossier a tester, relatif a la racine du compte courant
      * @return boolean retourne TRUE si $dir a un compte FTP, FALSE sinon.
@@ -435,7 +435,7 @@ class m_ftp {
     }
 
 
-    /** 
+    /**
      * Fonction appellee par domains quand un domaine est supprime pour le membre
      * @param string $dom Domaine à detruire.
      * @access private
@@ -448,7 +448,7 @@ class m_ftp {
     }
 
 
-    /** 
+    /**
      * Fonction appellee par membres quand un membre est efface
      * @access private
      */
@@ -462,7 +462,7 @@ class m_ftp {
 
     /**
      * Returns the used quota for the $name service for the current user.
-     * @param $name string name of the quota 
+     * @param $name string name of the quota
      * @return integer the number of service used or false if an error occured
      * @access private
      */
@@ -481,7 +481,7 @@ class m_ftp {
     /**
      * Exporte toutes les informations ftp du compte AlternC
      * @access private
-     * EXPERIMENTAL 'sid' function ;) 
+     * EXPERIMENTAL 'sid' function ;)
      */
     function alternc_export_conf() {
         global $db, $msg;
@@ -499,4 +499,3 @@ class m_ftp {
 
 
 } /* Class m_ftp */
-
