@@ -146,24 +146,24 @@ EOF
         usermod --uid 342 --shell /bin/rbash --login alternc alternc-mergelog
         # this is a separate step otherwise usermod will look for
         # files to chown in /var/alternc, which takes a long time
-        usermod --home $ALTERNC_LOC alternc
+        usermod --home "$ALTERNC_LOC" alternc
     fi
     if [ -d /var/run/alternc-mergelog/.ssh ]; then
         echo "Cleaning up old alternc-mergelog home"
-        mv /var/run/alternc-mergelog/.ssh $ALTERNC_LOC/.ssh && rmdir /var/run/alternc-mergelog
+        mv /var/run/alternc-mergelog/.ssh "$ALTERNC_LOC/.ssh" && rmdir /var/run/alternc-mergelog
     fi
     if ! grep -q alternc /etc/passwd ; then
         echo "Creating alternc account"
         # this uid is ugly. we should request allocation from
         # base-password instead
-        adduser --quiet --system --uid 342 --home $ALTERNC_LOC --shell /bin/rbash --ingroup adm alternc
+        adduser --quiet --system --uid 342 --home "$ALTERNC_LOC" --shell /bin/rbash --ingroup adm alternc
     fi
 
     echo "config phpmyadmin"
     include_str='include("/etc/alternc/phpmyadmin.inc.php")'
     pma_config=/etc/phpmyadmin/config.inc.php
-    if ! grep -e "$include_str" $pma_config > /dev/null 2>&1; then
-        echo "<?php $include_str ?>" >> $pma_config
+    if ! grep -e "$include_str" "$pma_config" > /dev/null 2>&1; then
+        echo "<?php $include_str ?>" >> "$pma_config"
     fi
 
     if ! grep -q '## ALTERNC START' /etc/sudoers; then

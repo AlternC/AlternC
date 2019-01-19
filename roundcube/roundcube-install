@@ -27,8 +27,8 @@ then
     echo "Installing Roundcube Templates ..."
 
     LOGIN="0000_roundcube"
-    PASSWORD="`perl -e 'print map{("a".."z","A".."Z",0..9)[int(rand(62))]}(1..10)'`"
-    DESKEY="`perl -e 'print map{("a".."z","A".."Z",0..9)[int(rand(62))]}(1..24)'`"
+    PASSWORD="$(perl -e 'print map{("a".."z","A".."Z",0..9)[int(rand(62))]}(1..10)')"
+    DESKEY="$(perl -e 'print map{("a".."z","A".."Z",0..9)[int(rand(62))]}(1..24)')"
     # "
     # Add new variables to the sed script ...
     SED_SCRIPT="/tmp/alternc-roundcube.sedscript"
@@ -51,11 +51,11 @@ EOF
 	TEMPLATE="$TEMPLATE_DIR/${file##etc/}"
 	echo -n " $file"
 	if [ -f "$TEMPLATE" ]; then
-            sed -f "$SED_SCRIPT" < $TEMPLATE > /$file
+            sed -f "$SED_SCRIPT" < "$TEMPLATE" > "/$file"
 	fi
     done
 
-    rm -f $SED_SCRIPT
+    rm -f "$SED_SCRIPT"
 
     echo "    Done"
 

@@ -11,7 +11,7 @@ if [ ! -r "$CONFIG_FILE" ]; then
     exit 1
 fi
 
-if [ `id -u` -ne 0 ]; then
+if [ $(id -u) -ne 0 ]; then
     echo "3.0.3~b.sh must be launched as root"
     exit 1
 fi
@@ -21,12 +21,12 @@ fi
 
 ## This part create TMP dir if don't exist
 function create_tmp_dir() {
-    read LOGIN || true
+    read -r LOGIN || true
     while [ "$LOGIN" ]; do
         echo "Check tmp directory for $LOGIN"
         REP="$(get_html_path_by_name $LOGIN )/tmp/"
-        [[ "$REP" != "/tmp/" ]] && ( test -d "$REP" || mkdir $REP )
-        read LOGIN || true
+        [[ "$REP" != "/tmp/" ]] && ( test -d "$REP" || mkdir "$REP" )
+        read -r LOGIN || true
     done
 }
 

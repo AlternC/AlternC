@@ -217,17 +217,17 @@ NFS_QUOTA=no" >> $CONFIGFILE
     if [ ! -z "$ALTERNC_SLAVES" ] && [ "$ALTERNC_SLAVES" != "localhost" ] ; then
         if ! grep -q alternc /etc/passwd ; then
             echo "Creating alternc account"
-            adduser --quiet --system --uid 342 --home $ALTERNC_HTML --shell /bin/false --ingroup adm alternc
+            adduser --quiet --system --uid 342 --home "$ALTERNC_HTML" --shell /bin/false --ingroup adm alternc
         fi
         chown alternc "$ALTERNC_USER_HOME"
         if [ -r ~root/.ssh/id_dsa.pub ]; then
-            key=`cat ~root/.ssh/id_dsa.pub`
-            if ! grep -q "$key" $ALTERNC_USER_HOME/.ssh/authorized_keys ; then
+            key=$(cat ~root/.ssh/id_dsa.pub)
+            if ! grep -q "$key" "$ALTERNC_USER_HOME/.ssh/authorized_keys" ; then
                 echo "Authorizing root ssh key to access the common alternc account"
-                mkdir -p $ALTERNC_USER_HOME/.ssh
-                echo "$key" >> $ALTERNC_USER_HOME/.ssh/authorized_keys
-                chown -R alternc:adm $ALTERNC_USER_HOME/.ssh
-                chmod -R og-rwx $ALTERNC_USER_HOME/.ssh
+                mkdir -p "$ALTERNC_USER_HOME/.ssh"
+                echo "$key" >> "$ALTERNC_USER_HOME/.ssh/authorized_keys"
+                chown -R alternc:adm "$ALTERNC_USER_HOME/.ssh"
+                chmod -R og-rwx "$ALTERNC_USER_HOME/.ssh"
             fi
         else
             echo "No SSH key in "~root/.ssh/id_dsa.pub
@@ -238,7 +238,7 @@ NFS_QUOTA=no" >> $CONFIGFILE
     fi
 
     # /var/alternc/dns/d/www.example.com
-    FQDN_LETTER="`echo $FQDN | sed -e 's/.*\.\([^\.]\)[^\.]*\.[^\.]*$/\1/'`"
+    FQDN_LETTER="$(echo $FQDN | sed -e 's/.*\.\([^\.]\)[^\.]*\.[^\.]*$/\1/')"
     if [ "$FQDN_LETTER" = "$FQDN" ]
     then
            FQDN_LETTER="_"

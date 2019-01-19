@@ -58,7 +58,7 @@ USAGE=`$printf "$($gettext "Usage: %s account.")" $PROG_NAME`
 NOT_FOUND_MSG=$($gettext "does not exist.")
 NON_ROOT_MSG=$($gettext "You have to be root (uid 0) to execute this program.")
 MISSING_PROG=$($gettext "Unable to execute")
-MISSING_CONF_FILE=`$printf "$($gettext "Can't find %s. Are you sure AlterncC is properly installed?")" $ALTERNC_CONF_FILE`
+MISSING_CONF_FILE=`$printf "$($gettext "Can't find %s. Are you sure AlternC is properly installed?")" $ALTERNC_CONF_FILE`
 MYSQL_UNREACHABLE_DATABASE=`$printf "$($gettext "Cannot access accounts database. Please check either %s or Mysql state.")" $ALTERNC_CONF_FILE`
 
 

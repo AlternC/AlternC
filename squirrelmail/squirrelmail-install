@@ -28,7 +28,7 @@ then
     cp -f /etc/alternc/templates/squirrelmail/avelsieve-config.php /etc/alternc/templates/squirrelmail/apache.conf /etc/squirrelmail/
 
     LOGIN="2000_squirrel"
-    PASSWORD="`perl -e 'print map{("a".."z","A".."Z",0..9)[int(rand(62))]}(1..10)'`"
+    PASSWORD="$(perl -e 'print map{("a".."z","A".."Z",0..9)[int(rand(62))]}(1..10)')"
 
     # Add new variables to the sed script ...
     SED_SCRIPT="/tmp/alternc-squirrelmail.sedscript"

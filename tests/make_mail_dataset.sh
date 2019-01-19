@@ -68,7 +68,7 @@ append_recipients(){
     shift
     
     j=""
-    for i in $*; do
+    for i in "$@"; do
       j=$(echo -e "$j\n$i")
     done
    
@@ -82,7 +82,7 @@ add_recipient(){
 
     begin
     insert_address "$alias"
-    append_recipients "$alias" $*
+    append_recipients "$alias" "$@"
     commit
 }
 
@@ -94,7 +94,7 @@ add_mailbox(){
     begin
     insert_address "$username"
     insert_mailbox "$username"
-    append_recipients "$username" $*
+    append_recipients "$username" "$@"
     commit
 }
 
@@ -106,7 +106,7 @@ add_list(){
     begin
     insert_address "$listname"
     insert_mailman "$listname"
-    append_recipients "$listname" $*
+    append_recipients "$listname" "$@"
     commit
 }
 

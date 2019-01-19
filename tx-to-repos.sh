@@ -24,7 +24,7 @@ for lang in $langs
 do
     echo "doing lang $lang"
     cp "lang/${lang}.po" "bureau/locales/$lang/LC_MESSAGES/alternc"
-    sublang="`echo $lang | cut -c 1-2`"
+    sublang=${lang:0:2}
     # merge the po for debconf into the relevant file for the modules : 
     if [ "$lang" != "en_US" ]
     then

@@ -10,16 +10,16 @@ TARGET=$4
 . /usr/lib/alternc/functions.sh
 
 # To not be case-sensitive
-ACTION="`echo $ACTION|tr '[:upper:]' '[:lower:]'`"
-DOMAIN="`echo $DOMAIN|tr '[:upper:]' '[:lower:]'`"
+ACTION="$(echo $ACTION|tr '[:upper:]' '[:lower:]')"
+DOMAIN="$(echo $DOMAIN|tr '[:upper:]' '[:lower:]')"
 
-if [ -z $ACTION ] || [ -z $DOMAIN ] ; then
+if [ -z "$ACTION" ] || [ -z "$DOMAIN" ] ; then
   echo "Need at least 2 parameters ( action - fqdn )"
 fi
 
 YOP="$ALTERNC_LOC/dns/$(print_domain_letter $DOMAIN)/$DOMAIN"
 
-case $ACTION in
+case "$ACTION" in
 "disable"|"delete")
   if [ ! -e "$YOP" ] ; then
     echo "Link do not exist. Nothing done"
@@ -37,7 +37,7 @@ case $ACTION in
     exit 13
   fi
   USER=$(get_account_by_domain "$DOMAIN")
-  if [ -z $USER ] ; then
+  if [ -z "$USER" ] ; then
     echo "Unable to find account of $DOMAIN"
     exit 17
   fi

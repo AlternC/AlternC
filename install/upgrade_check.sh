@@ -21,13 +21,13 @@ get_ext() {
 # Reading the current version in the DB.
 # If the DB exist but the alternc_status table doesn't, we will initialize it below
 # In that case we search where we upgrade from in /var/lib/alternc/backups/lastversion from debian.postinstall script
-oldvers="`mysql --defaults-file=/etc/alternc/my.cnf --skip-column-names -e "SELECT value FROM alternc_status WHERE name='alternc_version'" 2>/dev/null||true`"
+oldvers="$(mysql --defaults-file=/etc/alternc/my.cnf --skip-column-names -e "SELECT value FROM alternc_status WHERE name='alternc_version'" 2>/dev/null||true)"
 if [ -z "$oldvers" ]
 then
     # no version number, we check from /var/lib/alternc
     if [ -f "/var/lib/alternc/backups/lastversion" ]
     then
-	oldvers="`cat /var/lib/alternc/backups/lastversion`"
+	oldvers="$(cat /var/lib/alternc/backups/lastversion)"
 	# this is a *version number*, not a *last upgrade script* we have this *border case*
 	if [ "$oldvers" = "3.1" ]
 	then
@@ -57,29 +57,29 @@ mysql --defaults-file=/etc/alternc/my.cnf -e "INSERT IGNORE INTO alternc_status 
 extensions="*.sql *.sh *.php"
 cd /usr/share/alternc/install/upgrades
 for file in $( ls $extensions | sort -n ) ; do
-	if [ -r $file ]; then
+	if [ -r "$file" ]; then
                 # the version in the filename
-		upvers=`strip_ext $file`
+		upvers=$(strip_ext "$file")
                 # the extension
-		ext=`get_ext $file`
+		ext=$(get_ext "$file")
 		if dpkg --compare-versions "$upvers" gt "$oldvers"; then
 		  echo "Running upgrade script $file"
                   # run the proper program to interpret the upgrade script
 		  case "$ext" in
 		      sql)
 			  ( echo "BEGIN;"
-			      cat $file
+			      cat "$file"
 			      echo "UPDATE alternc_status SET value='$file' WHERE name='alternc_version';"
 			      echo "COMMIT;"
 			  ) | mysql --defaults-file=/etc/alternc/my.cnf -f
 			  ;;
 		      php)
-		  	  php -q $file
+		  	  php -q "$file"
 			  echo "UPDATE alternc_status SET value='$file' WHERE name='alternc_version';" | 
 			    mysql --defaults-file=/etc/alternc/my.cnf -f
 			  ;;
 		      sh)
-		  	  bash $file
+		  	  bash "$file"
 			  echo "UPDATE alternc_status SET value='$file' WHERE name='alternc_version';" | 
 			    mysql --defaults-file=/etc/alternc/my.cnf -f
 			  ;;

@@ -7,10 +7,10 @@ function convert {
     src=$1
     dst=$2
     (cat ../etc/alternc/templates/apache2/url.conf | sed -e 's#%%redirect%%#https://%%fqdn%%#' 
-    cat $src |
+    cat "$src" |
     sed -e 's#:80#:443#' \
 	-e "s#</VirtualHost>#  SSLEngine On\n  SSLCertificateFile %%CRT%%\n  SSLCertificateKeyFile %%KEY%%\n  %%CHAINLINE%%\n\n</VirtualHost>#i" \
-    )	>$dst
+    )	>"$dst"
 }
 
 # Those 3 are redirects from http://%%fqdn%% to https://%%fqdn%% PLUS the https://%%fqdn%% VHOST

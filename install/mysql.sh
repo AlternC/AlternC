@@ -63,7 +63,7 @@ grant_mail=$grant_mail"GRANT SELECT ON $database.* TO '$alternc_mail_user'@'${MY
 
 #if mysql_client != localhost means we are connecting to a remote server
 #the remote sql use rshould already be configured but it is a way of confirming it.
-if [ $MYSQL_CLIENT != "localhost" ]; then
+if [ "$MYSQL_CLIENT" != "localhost" ]; then
        mysql="/usr/bin/mysql -h$host -u$user -p$password"
   if ! $mysql << EOF
 $grant
@@ -153,8 +153,8 @@ set_value() {
     var=$1
     RET=$2
     file=$3
-    grep -Eq "^ *$var=" $file || echo "$var=" >> $file
-    if [ $file = $MYSQL_CONFIG ]; then
+    grep -Eq "^ *$var=" "$file" || echo "$var=" >> "$file"
+    if [ "$file" = "$MYSQL_CONFIG" ]; then
       SED_SCRIPT_USR="$SED_SCRIPT_USR;s\\^ *$var=.*\\$var=\"$RET\"\\"
     else
       SED_SCRIPT_MAIL="$SED_SCRIPT_MAIL;s\\^ *$var=.*\\$var=\"$RET\"\\"
@@ -168,36 +168,36 @@ if [ -z "$host" ]; then
     host="localhost"
 fi
 #filling the config file for the sysusr
-set_value host $host $MYSQL_CONFIG
-set_value database $database $MYSQL_CONFIG
-set_value user $user $MYSQL_CONFIG
-set_value password $password $MYSQL_CONFIG
+set_value host "$host" "$MYSQL_CONFIG"
+set_value database "$database" "$MYSQL_CONFIG"
+set_value user "$user" "$MYSQL_CONFIG"
+set_value password "$password" "$MYSQL_CONFIG"
 
 
 #filling the config file for the mailuser
-set_value host $host $MYSQL_MAIL_CONFIG
-set_value database $database $MYSQL_MAIL_CONFIG
-set_value user $alternc_mail_user $MYSQL_MAIL_CONFIG
-set_value password $alternc_mail_password $MYSQL_MAIL_CONFIG
+set_value host "$host" "$MYSQL_MAIL_CONFIG"
+set_value database "$database" "$MYSQL_MAIL_CONFIG"
+set_value user "$alternc_mail_user" "$MYSQL_MAIL_CONFIG"
+set_value password "$alternc_mail_password" "$MYSQL_MAIL_CONFIG"
 
 
 # take extra precautions here with the mysql password:
 # put the sed script in a temporary file
-SED_SCRIPT_NAME=`mktemp`
-cat > $SED_SCRIPT_NAME <<EOF
+SED_SCRIPT_NAME=$(mktemp)
+cat > "$SED_SCRIPT_NAME" <<EOF
 $SED_SCRIPT_USR
 EOF
-sed -f "$SED_SCRIPT_NAME" < $MYSQL_CONFIG > $MYSQL_CONFIG.$$
-mv -f $MYSQL_CONFIG.$$ $MYSQL_CONFIG
-rm -f $SED_SCRIPT_NAME
+sed -f "$SED_SCRIPT_NAME" < "$MYSQL_CONFIG" > "$MYSQL_CONFIG.$$"
+mv -f "$MYSQL_CONFIG.$$" "$MYSQL_CONFIG"
+rm -f "$SED_SCRIPT_NAME"
 
-SED_SCRIPT_NAME_MAIL=`mktemp`
-cat > $SED_SCRIPT_NAME_MAIL <<EOF
+SED_SCRIPT_NAME_MAIL=$(mktemp)
+cat > "$SED_SCRIPT_NAME_MAIL" <<EOF
 $SED_SCRIPT_MAIL
 EOF
-sed -f "$SED_SCRIPT_NAME_MAIL" < $MYSQL_MAIL_CONFIG > $MYSQL_MAIL_CONFIG.$$
-mv -f $MYSQL_MAIL_CONFIG.$$ $MYSQL_MAIL_CONFIG
-rm -f $SED_SCRIPT_NAME_MAIL
+sed -f "$SED_SCRIPT_NAME_MAIL" < "$MYSQL_MAIL_CONFIG" > "$MYSQL_MAIL_CONFIG.$$"
+mv -f "$MYSQL_MAIL_CONFIG.$$" "$MYSQL_MAIL_CONFIG"
+rm -f "$SED_SCRIPT_NAME_MAIL"
 
 # Now we should be able to use the mysql configuration
 mysql="/usr/bin/mysql --defaults-file=$MYSQL_CONFIG"

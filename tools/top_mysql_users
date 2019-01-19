@@ -111,7 +111,7 @@ trap trap_EXIT INT KILL TERM QUIT ABRT STOP HUP
 #-------------------------
 set_messages
 # Must be root
-[ "`$id -u`" != "0" ] && { echo $NON_ROOT_MSG ; exit 1 ; }
+[ "$($id -u)" != "0" ] && { echo $NON_ROOT_MSG ; exit 1 ; }
 
 # Parse args
 IS_N_PARAM=false

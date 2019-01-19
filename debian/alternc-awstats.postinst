@@ -17,7 +17,7 @@ case "$1" in
 
     # Then, configure the quota for "aws"
     db_get alternc-awstats/default_quota_value || true
-    /usr/lib/alternc/quota_init aws $RET
+    /usr/lib/alternc/quota_init aws "$RET"
 
     db_stop
 

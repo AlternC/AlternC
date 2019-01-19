@@ -11,7 +11,7 @@ if [ ! -r "$CONFIG_FILE" ]; then
     exit 1
 fi
 
-if [ `id -u` -ne 0 ]; then
+if [ $(id -u) -ne 0 ]; then
     echo "3.0.0~2.sh must be launched as root"
     exit 1
 fi
@@ -22,13 +22,13 @@ MAIL_DIR="$ALTERNC_LOC/mail"
 
 ## This part update mails' file owner and group ##
 fix_mail() {
-    read LOGIN GID || true
+    read -r LOGIN GID || true
     while [ "$LOGIN" ]; do
-        INITIALE=`echo $LOGIN |cut -c1`
-        MAIL=$(echo $LOGIN |sed -e 's/\@/_/')
+        INITIALE=${LOGIN:0:1}
+        MAIL=${LOGIN//@/_}
         REP="$ALTERNC_LOC/mail/$INITIALE/$MAIL/"
-        chown --recursive $GID:vmail "$REP"
-        read LOGIN GID || true
+        chown --recursive "$GID":vmail "$REP"
+        read -r LOGIN GID || true
     done
 }
 

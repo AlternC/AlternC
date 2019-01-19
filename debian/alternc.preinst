@@ -27,10 +27,10 @@ case "$1" in
             if [ ! -e /var/alternc/bind/zones ]; then
                 mkdir -p /var/alternc/bind/zones
             fi
-            for zone in `sed -n -e 's,.*/etc/bind/master/\(.*\)".*,\1,p' \
-                             /etc/bind/automatic.conf`; do
-                if [ -f /etc/bind/master/$zone ]; then
-                    mv /etc/bind/master/$zone /var/alternc/bind/zones
+            for zone in $(sed -n -e 's,.*/etc/bind/master/\(.*\)".*,\1,p' \
+                             /etc/bind/automatic.conf); do
+                if [ -f "/etc/bind/master/$zone" ]; then
+                    mv "/etc/bind/master/$zone" /var/alternc/bind/zones
                 fi
             done
             cp -a -f /etc/bind/automatic.conf /var/alternc/bind/automatic.conf
