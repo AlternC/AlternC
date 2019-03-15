@@ -320,6 +320,9 @@ class m_mailTest extends AlterncTest
     public function testCreate_alias()
     {
        // Test #1580
+        $this->markTestIncomplete(
+          'This test has not been implemented yet.'
+        );
     }
 
     /**

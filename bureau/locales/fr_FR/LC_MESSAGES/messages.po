@@ -1601,24 +1601,20 @@ msgid "Quit"
 msgstr "Fermer"
 
 #: ../admin/bro_main.php:73
-#, fuzzy, php-format
 msgid "The folder '%s' was successfully created"
-msgstr "L'utilisateur %s a été effacée avec succès"
+msgstr "Le dossier %s a été effacé avec succès"
 
 #: ../admin/bro_main.php:79
-#, fuzzy, php-format
 msgid "The file '%s' was successfully created"
-msgstr "L'Email a été modifié avec succès"
+msgstr "Le fihier été créé avec succès"
 
 #: ../admin/bro_main.php:94
-#, fuzzy, php-format
 msgid "The folder '%s' was successfully deleted"
-msgstr "L'utilisateur %s a été effacée avec succès"
+msgstr "Le dossier %s a été effacé avec succès"
 
 #: ../admin/bro_main.php:96
-#, fuzzy, php-format
 msgid "The file '%s' was successfully deleted"
-msgstr "L'adresse email %s a été effacée avec succès"
+msgstr "Le fichier %s a été effacé avec succès"
 
 #: ../admin/bro_main.php:102
 #, php-format
@@ -1663,39 +1659,32 @@ msgid "The file '%s' was successfully moved to '%s'"
 msgstr "L'Email a été modifié avec succès"
 
 #: ../admin/bro_main.php:145
-#, fuzzy
 msgid "The files / folders were successfully moved"
-msgstr "Le répertoire protégé %s a été déprotégé avec succès"
+msgstr "Les fichiers /  répertoires %s ont été déplacé avec succès"
 
 #: ../admin/bro_main.php:153
-#, fuzzy, php-format
 msgid "The folder '%s' was successfully renamed to '%s'"
-msgstr "L'Email a été modifié avec succès"
+msgstr "Le dossier '%s' a été renommé '%s' avec succès"
 
 #: ../admin/bro_main.php:155
-#, fuzzy, php-format
 msgid "The file '%s' was successfully renamed to '%s'"
-msgstr "L'Email a été modifié avec succès"
+msgstr "Le fichier '%s' a été renommé '%s' avec succès"
 
 #: ../admin/bro_main.php:157
-#, fuzzy
 msgid "The files / folders were successfully renamed"
-msgstr "Le compte AlternC a été renouvelé avec succès"
+msgstr "Les fichiers / répertoires ont été renommés avec succès"
 
 #: ../admin/bro_main.php:162
-#, fuzzy, php-format
 msgid "The file '%s' was successfully uploaded"
-msgstr "L'adresse email %s a été effacée avec succès"
+msgstr "Le fichier '%s' a été téléversé avec succès"
 
 #: ../admin/bro_main.php:167
-#, fuzzy
 msgid "The permissions were successfully set"
-msgstr "L'Email a été modifié avec succès"
+msgstr "Les permissions ont été appliquées avec succès"
 
 #: ../admin/bro_main.php:175
-#, fuzzy, php-format
 msgid "The extraction of the file '%s' succeeded"
-msgstr "Le mot de passe de l'utilisateur %s à été modifié avec succés"
+msgstr "L'extraction du fichier '%s' a été effectuée avec succés"
 
 #: ../admin/bro_main.php:180 ../class/m_bro.php:74
 msgid "File browser"
@@ -2713,12 +2702,10 @@ msgid "Folder %s is protected"
 msgstr ""
 
 #: ../admin/hta_doadduser.php:45
-#, fuzzy, php-format
 msgid "The user %s was added to the protected folder %s"
-msgstr "Modification de l'utilisateur %s dans le répertoire protégé %s"
+msgstr "L'utilisateur %s a été ajouté au répertoire protégé %s"
 
 #: ../admin/hta_dodeluser.php:39
-#, fuzzy, php-format
 msgid "The user '%s' was successfully deleted"
 msgstr "L'utilisateur %s a été effacée avec succès"
 
@@ -4273,9 +4260,8 @@ msgid "Create this new MySQL user"
 msgstr "Créer ce nouvel utilisateur MySQL"
 
 #: ../admin/sql_users_del.php:38 ../class/m_mysql.php:770
-#, fuzzy, php-format
 msgid "The user '%s' has been successfully deleted"
-msgstr "L'utilisateur %s a été effacée avec succès"
+msgstr "L'utilisateur MySQL %s a été effacé avec succès"
 
 #: ../admin/sql_users_del.php:49
 msgid "MySQL users"
@@ -4294,14 +4280,12 @@ msgid "Yes, delete the MySQL user"
 msgstr "Oui, effacer cet utilisateur MySQL"
 
 #: ../admin/sql_users_doadd.php:41 ../admin/sql_users_doadd.php:50
-#, fuzzy, php-format
 msgid "The user '%s' has been successfully created."
-msgstr "L'utilisateur %s a été effacée avec succès"
+msgstr "L'utilisateur %s a été ajouté avec succès"
 
 #: ../admin/sql_users_dopassword.php:35
-#, fuzzy, php-format
 msgid "Password changed for user '%s'."
-msgstr "Permettre le changement de mot de passe ?"
+msgstr "Mot de passe changé pour l'utilisateur '%s'."
 
 #: ../admin/sql_users_dorights.php:49
 msgid "The rights has been successfully applied to the user"

@@ -309,7 +309,7 @@ ORDER BY
         }
         $db->query("SELECT a.id, a.address, a.password, a.`enabled`, a.mail_action, d.domaine AS domain, m.quota, m.quota*1024*1024 AS quotabytes, q.quota_dovecot as used, NOT ISNULL(m.id) AS islocal, a.type, r.recipients, m.lastlogin, a.domain_id
          FROM ((domaines d, address a LEFT JOIN mailbox m ON m.address_id=a.id) LEFT JOIN dovecot_quota q ON CONCAT(a.address,'@',d.domaine)  = q.user) LEFT JOIN recipient r ON r.address_id=a.id
-         WHERE " . $where . " AND d.id=a.domain_id " . $limit . " ;", $query_args);
+         WHERE " . $where . " AND d.id=a.domain_id ORDER BY a.address ASC " . $limit . " ;", $query_args);
         if (!$db->next_record()) {
             $msg->raise("ERROR", "mail", _("No email found for this query"));
             return array();
@@ -466,12 +466,18 @@ ORDER BY
             }
         }
         $db->query("SELECT domaine FROM domaines WHERE id= ? ;", array($dom_id));
-        if ($db->next_record()) {
-            $db->query("UPDATE sub_domaines SET web_action='DELETE' WHERE domaine= ? AND type='txt' AND (sub='' AND valeur LIKE 'v=spf1 %') OR (sub='_dmarc' AND valeur LIKE 'v=dmarc1;%');", array($db->Record["domaine"]));
-            $db->query("UPDATE sub_domaines SET web_action='DELETE' WHERE domaine= ? AND (type='defmx' OR type='defmx2');", array($db->Record["domaine"]));
-            $db->query("UPDATE domaines SET dns_action='UPDATE' WHERE id= ? ;", array($dom_id));
+        if (!$db->next_record()) {
+            return false;
         }
-
+        $domain=$db->Record["domaine"];
+        $db->query("UPDATE sub_domaines SET web_action='DELETE' WHERE domaine= ? AND (type='defmx' OR type='defmx2');", array($domain));
+        
+        $this->del_dns_dmarc($domain);
+        $this->del_dns_spf($domain);
+        $this->del_dns_autoconf($domain);
+        $this->dkim_del($domain);
+        
+        $db->query("UPDATE domaines SET dns_action='UPDATE' WHERE id= ? ;", array($dom_id));
         return true;
     }
 
@@ -912,6 +918,7 @@ ORDER BY
     }
 
 
+    // ------------------------------------------------------------
     /** 
      * hook function called by AlternC when a domain is created for
      * the current user account using the SLAVE DOMAIN feature
@@ -928,6 +935,7 @@ ORDER BY
     }
 
 
+    // ------------------------------------------------------------
     /** 
      * hook function called by AlternC when a domain is created for
      * the current user account 
@@ -937,7 +945,7 @@ ORDER BY
      * @access private
      */
     function hook_dom_add_mx_domain($domain_id) {
-        global $msg, $mem, $db;
+        global $msg, $mem, $db, $L_FQDN;
         $msg->log("mail", "hook_dom_add_mx_domain", $domain_id);
 
         $db->query("SELECT value FROM variable where name='mailname_bounce';");
@@ -947,26 +955,30 @@ ORDER BY
         }
         $mailname = $db->f("value");
         // set spf & dmarc for this domain
-        $db->query("SELECT domaine FROM domaines WHERE id= ?;", array($domain_id));
+        $db->query("SELECT domaine,compte FROM domaines WHERE id= ?;", array($domain_id));
         if ($db->next_record()) {
+	    $domaine=$db->Record["domaine"];
+	    $compte=$db->Record["compte"];
+            $this->set_dns_autoconf($domaine,$compte);
             if ($spf = variable_get("default_spf_value")) {
-                $this->set_dns_spf($db->Record["domaine"], $spf);
+                $this->set_dns_spf($domaine, $spf);
             }
             if ($dmarc = variable_get("default_dmarc_value")) {
-                $this->set_dns_dmarc($db->Record["domaine"], $dmarc);
+                $this->set_dns_dmarc($domaine, $dmarc);
             }
         }
         return $this->create_alias($domain_id, 'postmaster', $mem->user['login'] . '@' . $mailname);
     }
 
 
+    // ------------------------------------------------------------
     /** 
      * hook function called by variables when a variable is changed
      * @access private
      */
     function hook_variable_set($name, $old, $new) {
         global $msg, $db;
-        $msg->log("mail", "hook_variable_set($name,$old,$new)");
+        $msg->log("mail", "hook_variable_set($name,$old,$new)");      
 
         if ($name == "default_spf_value") {
             $new = trim($new);
@@ -991,7 +1003,44 @@ ORDER BY
         }
     }
 
+    
+    // ------------------------------------------------------------
+    /**
+     * Add dns entries for autodiscover / autoconf on the domain
+     */
+    function set_dns_autoconf($domain,$uid=-1) {
+        global $db, $L_FQDN, $cuid;
+        $changed=false;
+        if ($uid==-1) $uid=$cuid;
 
+        $db->query("SELECT domaine,sub,type,valeur FROM sub_domaines WHERE domaine=? AND sub='autodiscover' AND type='autodiscover';",array($domain));
+        if (!$db->next_record()) {
+            $db->query("INSERT INTO sub_domaines SET domaine=?, compte=?, sub='autodiscover', type='autodiscover', valeur='';",array($domain,$uid));
+            $changed=true;
+        }
+        $db->query("SELECT domaine,sub,type,valeur FROM sub_domaines WHERE domaine=? AND sub='autoconfig' AND type='autodiscover';",array($domain));
+        if (!$db->next_record()) {
+            $db->query("INSERT INTO sub_domaines SET domaine=?, compte=?, sub='autoconfig', type='autodiscover', valeur='';",array($domain,$uid));
+            $changed=true;
+        }
+        if ($changed) {
+            $db->query("UPDATE domaines SET dns_action='UPDATE' WHERE domaine= ?;", array($domain));
+        }
+        return $changed;
+    }
+
+
+    // ------------------------------------------------------------
+    /** 
+     * delete the autoconf / autodiscover vhosts when removing a domain as MX
+     */
+    function del_dns_autoconf($domain) {
+        global $db, $L_FQDN, $cuid;
+        $db->query("UPDATE sub_domaines SET web_action='DELETE' WHERE domaine= ? AND type='autodiscover' AND sub='autoconfig';", array($domain));
+        $db->query("UPDATE sub_domaines SET web_action='DELETE' WHERE domaine= ? AND type='autodiscover' AND sub='autodiscover';", array($domain));        
+    }
+    
+    // ------------------------------------------------------------
     /** 
      * Set or UPDATE the DNS record for the domain $dom(str) to be $spf
      * account's login is current and if not it's $login.
@@ -999,7 +1048,8 @@ ORDER BY
      * @access private
      */
     function set_dns_spf($domain, $spf, $previous = -1, $uid = -1, $login = -1) {
-        global $db, $cuid, $mem;
+        global $db, $cuid, $mem, $msg;
+        $msg->debug("mail","set_dns_spf($domain, $spf, $previous, $uid, $login)");
         // defaults
         if ($uid === -1) {
             $uid = intval($cuid);
@@ -1021,7 +1071,18 @@ ORDER BY
         $db->query("UPDATE domaines SET dns_action='UPDATE' WHERE domaine= ?;", array($domain));
     }
 
+    // ------------------------------------------------------------
+    /**
+     * delete the SPF entries in the sub_domaine table for a domain
+     * called by del_domain or del_mx_domain by hooks : 
+     */ 
+    function del_dns_spf($domain) {
+        global $db;
+        $db->query("UPDATE sub_domaines SET web_action='DELETE' WHERE domaine= ? AND type='txt' AND sub='' AND valeur LIKE 'v=spf1 %';", array($domain));
+    }
 
+
+    // ------------------------------------------------------------
     /** 
      * Set or UPDATE the DNS record for the domain $dom(str) to be $dmarc
      * account's login is current and if not it's $login.
@@ -1029,7 +1090,8 @@ ORDER BY
      * @access private
      */
     function set_dns_dmarc($domain, $dmarc, $previous = -1, $uid = -1, $login = -1) {
-        global $db, $cuid, $mem, $L_FQDN;
+        global $db, $cuid, $mem, $L_FQDN, $msg;
+        $msg->debug("mail","set_dns_dmarc($domain, $dmarc, $previous, $uid, $login)");
         // defaults
         if ($uid === -1) {
             $uid = intval($cuid);
@@ -1055,5 +1117,151 @@ ORDER BY
     }
 
 
+    // ------------------------------------------------------------
+    /**
+     * delete the DMARC entries in the sub_domaine table for a domain
+     * called by del_domain or del_mx_domain by hooks : 
+     */ 
+    function del_dns_dmarc($domain) {
+        global $db;
+        $db->query("UPDATE sub_domaines SET web_action='DELETE' WHERE domaine= ? AND type='txt' AND sub='' AND valeur LIKE 'v=dmarc1 %';", array($domain));
+    }
+    
+
+    /** Manage DKIM when adding / removing a domain MX management */
+    var $shouldreloaddkim;
+
+    
+    // ------------------------------------------------------------
+    /** 
+     * Hook launched before doing anything dns-related
+     */    
+    function hook_updatedomains_dns_pre() {
+        global $db;
+        // for each domain where we don't have the MX or the DNS, remove the DKIM setup
+        $this->shouldreloaddkim=false;
+        $db->query("SELECT domaine,compte,gesdns,gesmx FROM domaines WHERE dns_action!='OK';");
+        $add=array();
+        $del=array();
+        while ($db->next_record()) {
+            if ($db->Record["gesdns"]==0 || $db->Record["gesmx"]==0) {
+                $del[]=$db->Record;
+            } else {
+                $add[]=$db->Record;
+            }
+        }
+        foreach($add as $domain) {
+            $this->dkim_add($domain["domaine"],$domain["compte"]);
+        }
+        foreach($del as $domain) {
+            $this->dkim_del($domain["domaine"]);
+        }
+    }
+
+
+    // ------------------------------------------------------------
+    /** 
+     * Hook launched after doing anything dns-related
+     */    
+    function hook_updatedomains_dns_post() {
+        if ($this->shouldreloaddkim) {
+            exec("service opendkim reload");
+            $this->shouldreloaddkim=false;
+        }
+    }
+
+
+    // ------------------------------------------------------------
+    /** 
+     * Add a domain into OpenDKIM configuration
+     */    
+    function dkim_add($domain,$uid) {
+        global $db;
+        $target_dir = "/etc/opendkim/keys/$domain";
+
+        // Create a dkim key when it's not already there : 
+        if (!file_exists($target_dir.'/alternc.txt')) {
+            $this->shouldreloaddkim=true;
+            if (! is_dir($target_dir)) mkdir($target_dir); // create dir
+            // Generate the key, 1200 bits (better than 1024)
+            $old_dir=getcwd();
+            chdir($target_dir);
+            exec('opendkim-genkey -b 1200 -r -d '.escapeshellarg($domain).' -s "alternc" ');
+            chdir($old_dir);
+            // opendkim must be owner of the key
+            chown("$target_dir/alternc.private", 'opendkim');
+            chgrp("$target_dir/alternc.private", 'opendkim');
+            
+            add_line_to_file("/etc/opendkim/KeyTable","alternc._domainkey.".$domain." ".$domain.":alternc:/etc/opendkim/keys/".$domain."/alternc.private");
+            add_line_to_file("/etc/opendkim/SigningTable",$domain." alternc._domainkey.".$domain);
+        }
+
+        // Search for the subdomain entry, if it's not already there, create it:
+        $db->query("SELECT id FROM sub_domaines WHERE domaine=? AND sub='alternc._domainkey';",array($domain));
+        if (!$db->next_record()) {
+            // Add subdomaine entry
+            $dkim_key=$this->dkim_get_entry($domain);
+            $db->query("INSERT INTO sub_domaines SET domaine=?, compte=?, sub='alternc._domainkey', type='dkim', valeur=?;",array($domain,$uid,$dkim_key));
+            // no need to do DNS_ACTION="UPDATE" => we are in the middle of a HOOK, so dns WILL BE reloaded for this domain
+        }
+    }
+
+
+    // ------------------------------------------------------------
+    /** 
+     * Delete a domain from OpenDKIM configuration
+     */    
+    function dkim_del($domain) {
+        global $db;
+        $target_dir = "/etc/opendkim/keys/$domain";
+        if (file_exists($target_dir)) {
+            $this->shouldreloaddkim=true;
+            @unlink("$target_dir/alternc_private");
+            @unlink("$target_dir/alternc.txt");
+            @rmdir($target_dir);
+            del_line_from_file("/etc/opendkim/KeyTable","alternc._domainkey.".$domain." ".$domain.":alternc:/etc/opendkim/keys/".$domain."/alternc.private");
+            del_line_from_file("/etc/opendkim/SigningTable",$domain." alternc._domainkey.".$domain);
+        }
+        $db->query("DELETE FROM sub_domaines WHERE domaine=? AND sub='alternc._domainkey';",array($domain));
+        // No need to do DNS_ACTION="UPDATE" => we are in the middle of a HOOK
+    }
+
+
+    // ------------------------------------------------------------
+    /** 
+     * return the content of the TXT information to be added into the DB for DKIM subdomains
+     * @param $domain string the name of the domain name
+     * @return string the TXT entry (without quotes)
+     * or false if an error occurred
+     **/
+    function dkim_get_entry($domain) {
+        global $msg;
+        $key=file_get_contents("/etc/opendkim/keys/".$domain."/alternc.txt");
+        // easy: monoline key
+        if (preg_match('#alternc._domainkey IN TXT "(.*)"#',$key,$mat)) {
+            return $mat[1];
+        } else {
+            // Need to parse a multiligne key:
+            $inkey=false; $result="";
+            $lines=explode("\n",$key);
+            foreach($lines as $line) {
+                if (preg_match('#alternc._domainkey\s+IN\s+TXT\s+\( "(.*)"#',$line,$mat)) {
+                    $result.=$mat[1]; $inkey=true; continue;
+                }
+                if ($inkey && preg_match('#^\s*"(.*)"\s*\)#',$line,$mat)) {
+                    $result.=$mat[1]; $inkey=false; break;
+                }
+                if ($inkey && preg_match('#^\s*"(.*)"\s*$#',$line,$mat)) {
+                    $result.=$mat[1]; $inkey=true; continue;
+                }
+            }
+            if ($result) 
+                return $result;
+        }
+        $msg->debug("mail","dkim_get_entry($domain) failed");
+        return false;
+    }
+    
+    // @TODO hook after reloading DNS zones => if necessary, restart opendkim
 
 } /* Class m_mail */

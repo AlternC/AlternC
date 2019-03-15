@@ -53,6 +53,11 @@ class m_hooks {
         // existe on l'execute et on rajoute ce qu'elle a retourné dans
         // un tableau
         $val = array();
+        if (!$classes) {
+            // Leaving early if classes isn't set prevents PHP warnings.
+            // Happens frequently when running PHPUnit tests.
+            return $val;
+        }
         foreach ($classes as $c) {
             global $$c;
             if (method_exists($$c, $hname)) {

@@ -115,7 +115,7 @@ CREATE TABLE IF NOT EXISTS domaines (
   noerase tinyint(4) NOT NULL default '0',
   dns_action enum ('OK','UPDATE','DELETE') NOT NULL default 'UPDATE',
   dns_result varchar(255) not null default '',
-  zonettl int(10) unsigned NOT NULL default '86400',
+  zonettl int(10) unsigned NOT NULL default '3600',
   PRIMARY KEY (id),
   UNIQUE KEY (domaine)
 ) ENGINE=InnoDB;
@@ -479,16 +479,11 @@ CREATE TABLE IF NOT EXISTS `domaines_type` (
     PRIMARY KEY ( `name` )
 ) ENGINE=InnoDB COMMENT = 'Type of domains allowed';
 
-INSERT IGNORE INTO `domaines_type` (name, description, target, entry,                             compatibility,                               only_dns, need_dns, advanced, enable, has_https_option) values
+INSERT IGNORE INTO `domaines_type` (name, description, target, entry, compatibility, only_dns, need_dns, advanced, enable,has_https_option) VALUES
 -- Default vhost type to maintains compatibility across versions.
--- This is overloaded depending on the value of the https column in sub_domaines
 ('vhost',      'Locally hosted',   'DIRECTORY', '%SUB% IN A @@PUBLIC_IP@@',      'txt,defmx,defmx2,mx,mx2',                   false,    false,    false, 'ALL', true),
--- The following 3 types (vhost-http, vhost-https, vhost-both) are overloads for vhost
--- and are "disabled" to not be available from the interface, but still be valid domaine types
--- when checking in m_ssl::updateDomain.
-('vhost-http','Locally hosted with http->https',   'DIRECTORY', '%SUB% IN A @@PUBLIC_IP@@',      'txt,defmx,defmx2,mx,mx2',                   false,    false,    false, 'NONE', false),
-('vhost-https','Locally hosted with http->https',   'DIRECTORY', '%SUB% IN A @@PUBLIC_IP@@',      'txt,defmx,defmx2,mx,mx2',                   false,    false,    false, 'NONE', false),
-('vhost-both', 'Locally hosted with http and https', 'DIRECTORY', '%SUB% IN A @@PUBLIC_IP@@',     'txt,defmx,defmx2,mx,mx2',                   false,    false,    false, 'NONE', false),
+('dkim',  'DKIM Key',             'TXT', '%SUB% IN TXT "%TARGET%"',                 'txt,defmx,defmx2,mx,mx2,url,ip,ipv6',                   true,    true,    true, 'ADMIN', false),
+('autodiscover',  'Email autoconfiguration', 'NONE', '%SUB% IN A @@PUBLIC_IP@@', 'txt,defmx,defmx2,mx,mx2', false, true, true, 'ADMIN', false),
 ('url',    'URL redirection',            'URL',       '%SUB% IN A @@PUBLIC_IP@@',                 'txt,defmx,defmx2',                          false,    false,    false, 'ALL', false),
 ('ip',     'IPv4 redirect',              'IP',        '%SUB% IN A %TARGET%',                      'url,ip,ipv6,txt,mx,mx2,defmx,defmx2',       true,     true,     false, 'ALL', false),
 ('ipv6',   'IPv6 redirect',              'IPV6',      '%SUB% IN AAAA %TARGET%',                   'ip,ipv6,txt,mx,mx2,defmx,defmx2',           true,     true,     true,  'ALL', false),
@@ -801,7 +796,6 @@ CREATE TABLE IF NOT EXISTS `certificates` (
 
 
 
--- make it re-exec-proof
-DELETE FROM alternc_status WHERE name='alternc_version';
-INSERT INTO alternc_status SET name='alternc_version',value='3.5.0.1.sql';
+-- make it re-exec-proof -- BUT don't overwrite existing value !
+INSERT IGNORE INTO alternc_status SET name='alternc_version',value='3.5.0.2.php';
 

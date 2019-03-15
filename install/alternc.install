@@ -76,6 +76,14 @@ fi
 
 . /usr/lib/alternc/functions.sh
 
+# get the information on running Sysv or Systemd init & boot system
+if [ -e /run/systemd/system ]
+then
+    SYSTEMD=1
+else
+    SYSTEMD=0
+fi
+
 # Lock the jobs !
 lock_jobs
 
@@ -91,7 +99,7 @@ TEMPLATE_DIR="/etc/alternc/templates"
 
 # Find needed configuration files (without the initial '/')
 # replace this one unconditionnally
-CONFIG_FILES="etc/alternc/bureau.conf etc/apache2/envvars etc/alternc/apache2.conf etc/alternc/apache_logformat.conf etc/alternc/phpmyadmin.inc.php"
+CONFIG_FILES="etc/alternc/bureau.conf etc/apache2/envvars etc/alternc/apache2.conf etc/alternc/phpmyadmin.inc.php"
 
 if [ -e /etc/bind/named.conf ]; then
     CONFIG_FILES="$CONFIG_FILES etc/bind/named.conf.options"
@@ -365,9 +373,8 @@ do
     fi
 done
 
-# ensure dovecot, postfix, apache, can access ssl certificates:
+# ensure dovecot, postfix, can access ssl certificates:
 adduser dovecot ssl-cert
-adduser www-data ssl-cert
 adduser postfix ssl-cert
 
 run-parts --arg=certificates /usr/lib/alternc/install.d
@@ -377,7 +384,6 @@ if [ -x /usr/sbin/apache2 ]; then
     run-parts --arg=apache2 /usr/lib/alternc/install.d 
     a2enmod mpm_itk
     
-    s="apache2"
     # unused from AlternC 1.0, FIXME: remove it later
     if [ -L /etc/apache2/mods-enabled/vhost_alias.load ]
     then
@@ -410,7 +416,7 @@ if [ -x /usr/sbin/apache2 ]; then
         a2enconf alternc
     fi
 
-    SERVICES="$SERVICES $s"
+    SERVICES="$SERVICES apache2"
 fi
 
 # Manage sudoers.d include appearing in Squeeze:
@@ -608,6 +614,9 @@ fi
 chmod 640 /var/log/alternc/bureau.log /var/log/alternc/update_domains.log
 chown alterncpanel:adm /var/log/alternc/bureau.log /var/log/alternc/update_domains.log
 
+# Launch a script that will populate AlternC variables as needed
+su - alterncpanel -s /bin/bash -c /usr/share/alternc/install/variables.php
+
 # Creating admin user if needed
 HAS_ROOT=`mysql --defaults-file=/etc/alternc/my.cnf -e "SELECT COUNT(*) FROM membres WHERE login = 'admin' OR login = 'root' and su = 1" | tail -1`
 
@@ -659,6 +668,16 @@ grep -q "^127.0.0.1\$" /etc/opendkim/TrustedHosts || echo "127.0.0.1" >>/etc/ope
 grep -q "^localhost\$" /etc/opendkim/TrustedHosts || echo "localhost" >>/etc/opendkim/TrustedHosts
 grep -q "^$PUBLIC_IP\$" /etc/opendkim/TrustedHosts || echo "$PUBLIC_IP" >>/etc/opendkim/TrustedHosts
 if [ "$(lsb_release -s -c)" == 'stretch' ] ; then
+    /lib/opendkim/opendkim.service.generate
+    # Without adding '-u opendkim' after the service file is generated, opendkim
+    # will run as root, which we do not want.
+    if [ "$(grep -c 'u opendkim' /etc/systemd/system/opendkim.service.d/override.conf)" == 0 ] ; then
+        sed -i -e 's/inet:8891@127.0.0.1/& -u opendkim/' /etc/systemd/system/opendkim.service.d/override.conf
+    fi
+    systemctl daemon-reload
+fi
+
+if [ "$SYSTEMD" = "1" -a "$(lsb_release -s -c)" = "stretch" ] ; then
     /lib/opendkim/opendkim.service.generate
     # Without adding '-u opendkim' after the service file is generated, opendkim
     # will run as root, which we do not want.

@@ -22,50 +22,58 @@
 # Purpose of file: Fix permission, ACL and ownership of AlternC's files
 # ----------------------------------------------------------------------
 #
+red () { echo -e "\e[31m$@ \e[0m" ; }
+usage () {
+    [[ -n "$@" ]] && red "$@\n"
+    cat<<End-of-message
+Four optionals argument to chose from
+ -l string : a specific login to fix
+ -u integer : a specific uid to fix
+ -f string : a specific file to fix according to a given uid 
+ -d string : a specific subdirectory to fix according to a given uid 
 
-# four optionals argument to chose from
-# -l string : a specific login to fix
-# -u integer : a specific uid to fix
-# -f string : a specific file to fix according to a given uid 
-# -d string : a specific subdirectory to fix according to a given uid 
-
-# The u and l switch are used to fix a given user whole directory including his base directory ($ALTERNC_HTML/<letter>/<login>/
-# The f and d switch are used to fix a given file or directory under the user's base directory. They use the base directory to get the permissions they should use.
-# Be sure to have correct base directory permissions before attemplting to fix use those two switch 
-
+ The u and l switch are used to fix a given user whole directory including his base directory ($ALTERNC_HTML/<letter>/<login>/
+ The f and d switch are used to fix a given file or directory under the user's base directory. They use the base directory to get the permissions they should use.
+ Be sure to have correct base directory permissions before attemplting to fix use those two switch 
+End-of-message
+    exit 1
+}
 query="SELECT uid,login FROM membres ORDER BY login"
 sub_dir=""
 file=""
 LOCK_FIXPERMS="/etc/alternc/disable_all_fixperms"
 
 if [ -f "$LOCK_FIXPERMS" ] ; then
-  (
-  echo "    -------------    "
-  echo '/!\    WARNING    /!\ ' 
-  echo "The fixperms script is disabled"
-  echo "To enable it, delete $LOCK_FIXPERMS "
-  echo "    -------------    "
-  ) 1>&2
-  exit 0
+
+  usage "
+------------------------------------    
+/!\    WARNING    /!\  
+The fixperms script is disabled
+To enable it, delete $LOCK_FIXPERMS 
+------------------------------------
+"
+
 fi
 
-while getopts "l:u:f:d:" optname
+
+while getopts "hl:u:f:d:" optname
 do
   case "$optname" in
+  "h") usage
+      ;;
+
   "l")
     if [[ "$OPTARG" =~ ^[a-zA-Z0-9_]+$ ]] ; then
       query="SELECT uid,login FROM membres WHERE login LIKE '$OPTARG' ORDER BY login"
     else	
-      echo "Bad login provided"
-      exit
+      usage "Bad login provided"
     fi
   ;;
   "u")
     if [[ "$OPTARG" =~ ^[0-9]+$ ]] ; then
       query="SELECT uid,login FROM membres WHERE uid LIKE '$OPTARG' ORDER BY login"
     else
-      echo "Bad uid provided"
-      exit
+      usage "Bad uid provided"
     fi
   ;;
   "f")
@@ -79,17 +87,14 @@ do
     echo $sub_dir
   ;;
   "?")
-    echo "Unknown option $OPTARG - stop processing"
-    exit
+    usage "Unknown option $OPTARG - stop processing"
   ;;
   ":")
-    echo "No argument value for option $OPTARG - stop processing"
-    exit
+    usage "No argument value for option $OPTARG - stop processing"
   ;;
   *)
     # Should not occur
-    echo "Unknown error while processing options"
-    exit
+    usage "Unknown error while processing options"
   ;;
   esac
 done

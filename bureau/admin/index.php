@@ -87,7 +87,8 @@ if ( empty($logo) ||  ! $logo ) {
 	</div>
       </div>
       <div class="block_login_page">
-
+        <a href="request_reset.php"><?php echo _('Request new password'); ?></a>
+        <br />
         <?php __("You must accept the session cookie to log-in"); ?>
         <br />
         <?php echo _("If you want to use a different language, choose it in the list below"); ?>
