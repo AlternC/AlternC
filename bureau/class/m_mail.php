@@ -309,7 +309,7 @@ ORDER BY
         }
         $db->query("SELECT a.id, a.address, a.password, a.`enabled`, a.mail_action, d.domaine AS domain, m.quota, m.quota*1024*1024 AS quotabytes, q.quota_dovecot as used, NOT ISNULL(m.id) AS islocal, a.type, r.recipients, m.lastlogin, a.domain_id
          FROM ((domaines d, address a LEFT JOIN mailbox m ON m.address_id=a.id) LEFT JOIN dovecot_quota q ON CONCAT(a.address,'@',d.domaine)  = q.user) LEFT JOIN recipient r ON r.address_id=a.id
-         WHERE " . $where . " AND d.id=a.domain_id " . $limit . " ;", $query_args);
+         WHERE " . $where . " AND d.id=a.domain_id ORDER BY a.address ASC " . $limit . " ;", $query_args);
         if (!$db->next_record()) {
             $msg->raise("ERROR", "mail", _("No email found for this query"));
             return array();
