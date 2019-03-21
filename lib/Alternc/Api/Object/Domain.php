@@ -169,6 +169,10 @@ class Alternc_Api_Object_Domain extends Alternc_Api_Legacyobject {
         }
     }
 
+    
+
+
+    
 }
 
 // class Alternc_Api_Object_Domain

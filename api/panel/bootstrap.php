@@ -70,6 +70,7 @@ if (is_file($root."/class/variables.php")) {
 }
 $mem=new m_mem();
 $err=new m_err();
+$msg=new m_messages();
 $authip=new m_authip();
 $hooks=new m_hooks();
 $msg = new m_messages();

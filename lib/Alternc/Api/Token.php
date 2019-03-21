@@ -47,9 +47,12 @@ class Alternc_Api_Token {
 
     public function __construct($options = array()) {
 
-        if (isset($options["uid"]) && is_int($options["uid"]))
-            $this->uid = $options["uid"];
+        if (isset($options["uid"]) && intval($options["uid"]))
+            $this->uid = intval($options["uid"]);
 
+        if (isset($options["duration"]) && intval($options["duration"]))
+            $this->tokenDuration = max(31,intval($options["duration"]));
+        
         if (isset($options["isAdmin"]) && is_bool($options["isAdmin"]))
             $this->isAdmin = $options["isAdmin"];
     }
@@ -69,7 +72,7 @@ class Alternc_Api_Token {
 
     /**
      * Create a new token in the DB for the associated user/admin
-     * 
+     * may contain "duration" in second too.
      * @return string the token (32 chars)
      */
     public static function tokenGenerate($options, $db) {
@@ -81,10 +84,10 @@ class Alternc_Api_Token {
         }
 
         $token = new Alternc_Api_Token($options);
-
+        $db->exec("DELETE FROM token WHERE expire < NOW();");
         do {
             $token->token = $token->tokenRandom();
-            $stmt = $db->prepare("INSERT IGNORE INTO token SET token=?, expire=DATE_ADD(NOW(), INTERVAL ? SECOND), data=?");
+            $stmt = $db->prepare("INSERT IGNORE INTO token SET token=?, expire=DATE_ADD(NOW(), INTERVAL ? DAY), data=?");
             $stmt->execute(array($token->token, $token->tokenDuration, $token->toJson()));
             $rows = $stmt->rowCount();
         } while ($rows == 0); // prevent collisions
