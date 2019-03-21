@@ -39,20 +39,28 @@ class Alternc_Api_Auth_Login implements Alternc_Api_Auth_Interface {
         if (!isset($options["password"]) || !is_string($options["password"])) {
             throw new \Exception("Missing required parameter password", self::ERR_INVALID_ARGUMENT);
         }
+        if (!isset($options["duration"]) || !intval($options["duration"])) {
+            $options["duration"]=31; // default 1 month
+        }
 
         if (!preg_match("#^[0-9a-zA-Z-]{1,32}$#", $options["login"])) { // FIXME : normalize this on AlternC !!!
             throw new \Exception("Invalid login", self::ERR_INVALID_LOGIN);
         }
 
-        $stmt = $db->query("SELECT m.enabled,m.uid,m.login,m.su FROM membres m WHERE m.login=? AND m.password=?;", array($options["login"], $options["password"]), PDO::FETCH_CLASS);
-        $me = $stmt->fetch();
-        if (!$me)
+        $stmt = $this->db->prepare("SELECT m.pass,m.enabled,m.uid,m.login,m.su FROM membres m WHERE m.login=?;");
+        $stmt->execute(array($options["login"]));
+        $me = $stmt->fetch(PDO::FETCH_OBJ);
+        if (!$me) {
             return new Alternc_Api_Response(array("code" => ERR_INVALID_AUTH, "message" => "Invalid login or password"));
-        if (!$me->enabled)
+        }
+        if (!password_verify($options["password"],$me->pass)) {
+            return new Alternc_Api_Response(array("code" => ERR_DISABLED_ACCOUNT, "message" => "Invalid login or password"));            
+        }
+        if (!$me->enabled) {
             return new Alternc_Api_Response(array("code" => ERR_DISABLED_ACCOUNT, "message" => "Account is disabled"));
-
+        }
         return Alternc_Api_Token::tokenGenerate(
-                        array("uid" => $me->uid, "isAdmin" => ($me->su != 0)), $this->db
+            array("uid" => $me->uid, "isAdmin" => ($me->su != 0), "duration" => $options["duration"]), $this->db
         );
     }
 
