@@ -75,7 +75,7 @@ echo $msg->msg_html_all(true, true);
 <?php } // $quota->cancreate("mail") ?>
     </td>
     <td>
-      <span class="inb settings" valign='bottom'><a href="mail_manage_catchall.php?domain_id=<?php echo $domain_id?>"><?php __("Manage Catch-all for this domain");?></a></span> 
+      <span class="inb configure" valign='bottom'><a href="mail_manage_catchall.php?domain_id=<?php echo $domain_id?>"><?php __("Manage Catch-all for this domain");?></a></span> 
     </td>
   </tr>
 </table>
@@ -114,8 +114,9 @@ if (empty($allmails_list) && empty($search)) {
 <form method="post" action="mail_del.php">
    <?php csrf_get(); ?>
  <input type="hidden" name="domain_id" value="<?php ehe($domain_id); ?>" />
-<table class="tlist">
-<tr><th></th><th></th><th><?php __("Enabled");?></th><th style="text-align:right"><?php __("Address"); ?></th><th><?php __("Pop/Imap"); ?></th><th><?php __("Other recipients"); ?></th><th><?php __("Last login time"); ?></th></tr>
+<table id="mail_list" class="tlist">
+<thead>
+<tr><th></th><th></th><th><?php __("Enabled");?></th><th style="text-align:right"><?php __("Address"); ?></th><th><?php __("Pop/Imap"); ?></th><th><?php __("Other recipients"); ?></th><th><?php __("Last login time"); ?></th></tr></thead>
 <?php
 
 $i=0;
@@ -193,11 +194,11 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
 
     <?php __("Which protocol shall you use?"); ?>
     <div id="accordion-mailout">
-      <?php if ($mail->srv_postfix) { ?>
+      <?php if ($mail->srv_submission) { ?>
       <h4><?php __("Submission");?></h4>
       <div>
         <ul>
-        <li><b><?php __("Server name: ");?></b> <?php __($mail->srv_postfix); ?></li>
+        <li><b><?php __("Server name: ");?></b> <?php __($mail->srv_submission); ?></li>
         <li><b><?php __("Username: ");?></b> <?php __("The mail address you want to access <i>(example : myuser@example.tld)</i>");?></li>
         <li><b><?php __("Port: ");?></b> 587</li>
         <li><b><?php __("Authentication: ");?></b><?php __("Yes")?></li>
@@ -206,11 +207,11 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
         </ul>
       </div>
       <?php } ?>
-      <?php if ($mail->srv_postfix) { ?>
+      <?php if ($mail->srv_smtp) { ?>
       <h4><?php __("SMTP");?></h4>
       <div>
         <ul>
-          <li><b><?php __("Server name: ");?></b> <?php __($mail->srv_postfix); ?></li>
+          <li><b><?php __("Server name: ");?></b> <?php __($mail->srv_smtp); ?></li>
           <li><b><?php __("Username: ");?></b> <?php __("The mail address you want to access <i>(example : myuser@example.tld)</i>");?></li>
           <li><b><?php __("Port: ");?></b> 25</li>
           <li><b><?php __("Authentication: ");?></b><?php __("Yes")?></li>
@@ -219,11 +220,11 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
         </ul>
       </div>
       <?php } ?>
-      <?php if ($mail->srv_postfix) { ?>
+      <?php if ($mail->srv_smtps) { ?>
       <h4><?php __("SMTPS");?></h4>
       <div>
         <ul>
-          <li><b><?php __("Server name: ");?></b> <?php __($mail->srv_postfix); ?></li>
+          <li><b><?php __("Server name: ");?></b> <?php __($mail->srv_smtps); ?></li>
           <li><b><?php __("Username: ");?></b> <?php __("The mail address you want to access <i>(example : myuser@example.tld)</i>");?></li>
           <li><b><?php __("Port: ");?></b> 465</li>
           <li><b><?php __("Authentication: ");?></b><?php __("Yes")?></li>
@@ -243,7 +244,7 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
       <h4><?php __("IMAP");?></h4>
       <div>
         <ul>
-          <li><b><?php __("Server name: ");?></b> <?php __($mail->srv_dovecot); ?></li>
+          <li><b><?php __("Server name: ");?></b> <?php __($mail->srv_imap); ?></li>
           <li><b><?php __("Port: ");?></b> 143</li>
           <li><b><?php __("Authentication: ");?></b><?php __("Yes")?></li>
           <li><b><?php __("Authentication method: ");?></b><?php __("Normal password")?></li>
@@ -254,7 +255,7 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
       <h4><?php __("IMAPS");?></h4>
       <div>
         <ul>
-          <li><b><?php __("Server name: ");?></b> <?php __($mail->srv_dovecot); ?></li>
+          <li><b><?php __("Server name: ");?></b> <?php __($mail->srv_imaps); ?></li>
           <li><b><?php __("Port: ");?></b> 993</li>
           <li><b><?php __("Authentication: ");?></b><?php __("Yes")?></li>
           <li><b><?php __("Authentication method: ")?></b><?php __("Normal password")?></li>
@@ -265,7 +266,7 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
       <h4><?php __("POP3");?></h4>
       <div>
         <ul>
-          <li><b><?php __("Server name: ");?></b> <?php __($mail->srv_dovecot); ?></li>
+          <li><b><?php __("Server name: ");?></b> <?php __($mail->srv_pop3); ?></li>
           <li><b><?php __("Port: ");?></b> 110</li>
           <li><b><?php __("Authentication: ");?></b><?php __("Yes")?></li>
           <li><b><?php __("Authentication method: ");?></b><?php __("Normal password")?></li>
@@ -276,7 +277,7 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
       <h4><?php __("POP3S");?></h4>
       <div>
         <ul>
-          <li><b><?php __("Server name: ");?></b> <?php __($mail->srv_dovecot); ?></li>
+          <li><b><?php __("Server name: ");?></b> <?php __($mail->srv_pop3s); ?></li>
           <li><b><?php __("Port: ");?></b> 995</li>
           <li><b><?php __("Authentication: ");?></b><?php __("Yes")?></li>
           <li><b><?php __("Authentication method: ");?></b><?php __("Normal password")?></li>
@@ -301,6 +302,11 @@ if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"]
     });
   });
 
+$(document).ready(function() 
+    { 
+        $("#mail_list").tablesorter(); 
+    } 
+); 
 
 $(function() {$( "#tabs-mailhelp" ).tabs();});
 
