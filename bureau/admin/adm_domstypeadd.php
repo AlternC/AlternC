@@ -18,7 +18,7 @@
 */
 
 /**
- * Form to update a domain type on the server
+ * Form to add a domain type on the server
  * 
  * @copyright AlternC-Team 2000-2017 https://alternc.com/ 
  */
@@ -31,32 +31,9 @@ if (!$admin->enabled || $uid != 2000) {
 }
 
 include_once("head.php");
-
-$fields = array (
-    "name"          => array ("request", "string", ""),
-    "description"   => array ("post", "string", ""),
-    "target"        => array ("post", "string", ""),
-    "entry"         => array ("post", "string", ""),
-    "compatibility" => array ("post", "string", ""),
-    "enable"        => array ("post", "string", ""),
-    "only_dns"      => array ("post", "boolean", ""),
-    "need_dns"      => array ("post", "boolean", ""),
-    "advanced"      => array ("post", "boolean", ""),
-    "create_tmpdir"      => array ("post", "boolean", ""),
-    "create_targetdir"      => array ("post", "boolean", ""),
-);
-getFields($fields);
-
-$d=$dom->domains_type_get($name);
-if(!$d){
-	$msg->raise("ERROR", "admin", _("Domain type not found"));
-	include("adm_domstype.php");
-	exit();
-}
-
 ?>
 
-<h3><?php __("Edit a domain type"); ?> </h3>
+<h3><?php __("Create a domain type"); ?> </h3>
 <hr id="topbar"/>
 <br />
 <?php
@@ -65,13 +42,13 @@ echo $msg->msg_html_all();
 if (! $msg->has_msgs("ERROR")) {
 ?>
 
-<form action="adm_domstypedoedit.php" method="post" name="main" id="main">
+<form action="adm_domstypedoadd.php" method="post" name="main" id="main">
    <?php csrf_get(); ?>
     <input type="hidden" name="name" value="<?php ehe($d['name']); ?>" />
     <table class="tedit">
       <tr>
             <th><?php __("Name");?></th>
-	    <td><b><?php echo $d["name"]; ?></b></td>
+	    <td><input name="name" type="text" value =""/></td>
       </tr>
       <tr>
             <th><?php __("Description");?></th>
@@ -128,15 +105,14 @@ if (! $msg->has_msgs("ERROR")) {
             <td><input name="create_targetdir" type="checkbox" value="1" <?php cbox($d['create_targetdir']); ?> /></td>
       </tr>
       <tr class="trbtn">
-          <td colspan="3">
-		<input style="background-color: #ff3333;" type="button" class="inb" name="remove" value="<?php __("Remove this domain type"); ?>" onclick="document.location='adm_domstyperemove.php?name=<?php echo $d['name'] ?>'"/>
-             <input type="submit" class="inb" name="submit" value="<?php __("Change this domain type"); ?>" />
+          <td colspan="2">
+             <input type="submit" class="inb" name="submit" value="<?php __("Create this domain type"); ?>" />
 	           <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='adm_domstype.php'"/>
           </td>
         </tr>
 </table>
 </form>
-
+<!-- TODO make a script how check form input -->
 <?php } ?>
 
 <?php include_once("foot.php"); ?>

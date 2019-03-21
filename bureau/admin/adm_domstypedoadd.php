@@ -18,7 +18,7 @@
 */
 
 /**
- * Change a domain type on the server
+ * Create a domain type on the server
  *
  * @copyright AlternC-Team 2000-2017 https://alternc.com/ 
  */
@@ -47,10 +47,10 @@ $fields = array (
 );
 getFields($fields);
 
-if (! $dom->domains_type_update($name, $description, $target, $entry, $compatibility, $enable, $only_dns, $need_dns, $advanced,$create_tmpdir,$create_targetdir) ) {
+if (! $dom->domains_type_add($name, $description, $target, $entry, $compatibility, $enable, $only_dns, $need_dns, $advanced,$create_tmpdir,$create_targetdir) ) {
     include("adm_domstypedoedit.php");
 } else {
-    $msg->raise("INFO", "admin", _("Domain type is updated"));
+    $msg->raise("INFO", "admin", _("Domain type is create"));
     include("adm_domstype.php");
 }
 ?>

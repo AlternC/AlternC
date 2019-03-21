@@ -33,26 +33,14 @@ if (!$admin->enabled || $uid != 2000) {
 }
 
 $fields = array (
-	"name"    		=> array ("post", "string", ""),
-	"description"    	=> array ("post", "string", ""),
-	"target"    		=> array ("post", "string", ""),
-	"entry"    		=> array ("post", "string", ""),
-	"compatibility"    	=> array ("post", "string", ""),
-	"enable"    		=> array ("post", "string", ""),
-	"only_dns"    		=> array ("post", "string", ""),
-	"need_dns"    		=> array ("post", "string", ""),
-	"advanced"    		=> array ("post", "string", ""),
-	"create_tmpdir"    		=> array ("post", "string", ""),
-	"create_targetdir"    		=> array ("post", "string", ""),
+	"name"    => array ("request", "string", "")
 );
 getFields($fields);
 
-if (! $dom->domains_type_update($name, $description, $target, $entry, $compatibility, $enable, $only_dns, $need_dns, $advanced,$create_tmpdir,$create_targetdir) ) {
-    include("adm_domstypedoedit.php");
+if ( empty($name) || !$dom->domains_type_del($name) ) {
+    $msg->raise("ERROR", "admin", _("Domain type can't be deleted"));
 } else {
-    $msg->raise("INFO", "admin", _("Domain type is updated"));
-    include("adm_domstype.php");
+    $msg->raise("INFO", "admin", _("Domain type is deleted"));
 }
+include("adm_domstype.php");
 ?>
-
-

@@ -24,8 +24,8 @@
  */
 
 require_once("../class/config.php");
-
-if (!$admin->enabled) {
+$uid = $mem->user['uid'];
+if (!$admin->enabled || $uid != 2000) {
 	$msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
 	echo $msg->msg_html_all();
 	exit();
@@ -45,7 +45,7 @@ echo $msg->msg_html_all();
 <p>
 <?php __("Here is the list of domain types."); ?>
 </p>
-<p><span class="ina"><a href="#" OnClick="alert('Todo. But if you want to play with that, you are advanced enough to do an insert in MySQL');" ><?php __("Create a domain type"); ?></a></span></p>
+<p><span class="ina"><a href="/adm_domstypeadd.php" OnClick="" ><?php __("Create a domain type"); ?></a></span></p>
 <table class="tlist ombrage" id="table_domtype">
 <thead>
 <tr class='petit'>
