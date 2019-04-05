@@ -118,7 +118,7 @@ class m_piwik {
             if ($api_data->result === 'success') {
                 $user = $this->get_user($user_login);
                 $user_creation_date = $user->date_registered;
-                $ret_value = $db->query("INSERT INTO piwik_users (uid, passwd, login, created_date) VALUES ( ?, ?, ?, ?);", array($cuid, md5('$user_pass'), $user_login, $user_creation_date));
+                $ret_value = $db->query("INSERT INTO piwik_users (uid, passwd, login, created_date) VALUES ( ?, ?, ?, ?);", array($cuid, md5($user_pass), $user_login, $user_creation_date));
                 return $ret_value;
             } else {
                 $msg->raise("ERROR", "piwik", $api_data->message);
