@@ -326,7 +326,8 @@ class m_piwik {
         $msg->debug("piwik","site_list");
 
         $this->get_alternc_sites();
-        $api_data = $this->call_privileged_page('API', 'SitesManager.getAllSites');
+        $api_data = $this->call_privileged_page('API', 'SitesManager.getAllSites',
+                                                array('filter_limit' => -1));
         $data = array();
 
         if($api_data) {
@@ -364,7 +365,8 @@ class m_piwik {
 
     function get_site_list()
     {
-        return $this->call_privileged_page('API', 'SitesManager.getAllSites');
+        return $this->call_privileged_page('API', 'SitesManager.getAllSites',
+                                           array('filter_limit' => -1));
     }
     // Ajoute un site à Piwik
     // can't figure out how to pass multiple url through the API
