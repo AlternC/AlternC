@@ -225,7 +225,7 @@ class m_bind {
         WHERE 
           sd.type=dt.name
           AND sd.enable IN ('ENABLE', 'ENABLED')
-          AND sb.web_action NOT IN ('DELETE')
+          AND sd.web_action NOT IN ('DELETE')
         ORDER BY ENTRY ;");
         $t="";
         while ($db->next_record()) {
