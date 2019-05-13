@@ -1215,7 +1215,7 @@ ORDER BY
         $target_dir = "/etc/opendkim/keys/$domain";
         if (file_exists($target_dir)) {
             $this->shouldreloaddkim=true;
-            @unlink("$target_dir/alternc_private");
+            @unlink("$target_dir/alternc.private");
             @unlink("$target_dir/alternc.txt");
             @rmdir($target_dir);
             del_line_from_file("/etc/opendkim/KeyTable","alternc._domainkey.".$domain." ".$domain.":alternc:/etc/opendkim/keys/".$domain."/alternc.private");
