@@ -1183,10 +1183,12 @@ ORDER BY
         if (!file_exists($target_dir.'/alternc.txt')) {
             $this->shouldreloaddkim=true;
             if (! is_dir($target_dir)) mkdir($target_dir); // create dir
-            // Generate the key, 1200 bits (better than 1024)
             $old_dir=getcwd();
             chdir($target_dir);
-            exec('opendkim-genkey -b 1200 -r -d '.escapeshellarg($domain).' -s "alternc" ');
+            // Generate the key, 2048 bits (better than 1024)
+            // 2048 bits is also the default in recent Debian builds of opendkim
+            // @see man opendkim-genkey
+            exec('opendkim-genkey -b 2048 -r -d '.escapeshellarg($domain).' -s "alternc" ');
             chdir($old_dir);
             // opendkim must be owner of the key
             chown("$target_dir/alternc.private", 'opendkim');

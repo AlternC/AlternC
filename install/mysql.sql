@@ -217,7 +217,7 @@ CREATE TABLE IF NOT EXISTS sub_domaines (
   compte int(10) unsigned NOT NULL default '0',
   domaine varchar(255) NOT NULL default '',
   sub varchar(255) NOT NULL default '',
-  valeur varchar(255) default NULL,
+  valeur varchar(1024) default NULL,
   type varchar(30) NOT NULL default 'LOCAL',
   web_action enum ('OK','UPDATE','DELETE') NOT NULL default 'UPDATE',
   web_result varchar(255) not null default '',
