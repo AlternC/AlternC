@@ -226,7 +226,8 @@ class m_bind {
           sd.type=dt.name
           AND sd.enable IN ('ENABLE', 'ENABLED')
           AND sd.web_action NOT IN ('DELETE')
-        ORDER BY ENTRY ;");
+          AND sd.domaine = ?
+        ORDER BY ENTRY ;", array($domain));
         $t="";
         while ($db->next_record()) {
             $t.= $db->f('ENTRY')."\n";
