@@ -106,7 +106,7 @@ class m_admin {
             );
             $obj['links'][] = array(
                 'txt' => _("PhpMyAdmin"),
-                'url' => '/alternc-sql/',
+                'url' => 'sql_pma_sso.php',
                 'class' => 'adminmenu',
                 'target' => '_blank',
             );
