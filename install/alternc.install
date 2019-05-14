@@ -714,6 +714,8 @@ done
 # Fix phpmyadmin import trac#1557
 test -d "/var/lib/phpmyadmin/tmp" && dpkg-statoverride --update --add www-data alterncpanel 0775 "/var/lib/phpmyadmin/tmp" 2>/dev/null || true
 test -f "/etc/phpmyadmin/config-db.php" && dpkg-statoverride --update --add www-data alterncpanel 0644 "/etc/phpmyadmin/config-db.php" 2>/dev/null || true
+test -f "/var/lib/phpmyadmin/blowfish_secret.inc.php" && dpkg-statoverride --update --add www-data alterncpanel 0660 "/var/lib/phpmyadmin/blowfish_secret.inc.php" 2> /dev/null || true
+test -f "/var/lib/phpmyadmin/config.inc.php" && dpkg-statoverride --update --add www-data alterncpanel 0660 "/var/lib/phpmyadmin/config.inc.php" 2> /dev/null || true
 
 # hook 
 run-parts --arg=end /usr/lib/alternc/install.d 
