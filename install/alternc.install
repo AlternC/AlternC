@@ -240,7 +240,7 @@ fi
 PUBLIC_IP_BEGIN=$(echo $PUBLIC_IP|cut -c 1)
 
 # Secret for PhpMyAdmin sessions
-PHPMYADMIN_BLOWFISH="$(generate_string 24)"
+PHPMYADMIN_BLOWFISH="$(generate_string 32)"
 
 # XXX: I assume this is secure if /tmp is sticky (+t)
 # we should have a better way to deal with templating, of course.
