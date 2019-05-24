@@ -1140,11 +1140,11 @@ ORDER BY
         global $db;
         // for each domain where we don't have the MX or the DNS, remove the DKIM setup
         $this->shouldreloaddkim=false;
-        $db->query("SELECT domaine,compte,gesdns,gesmx FROM domaines WHERE dns_action!='OK';");
+        $db->query("SELECT domaine,compte,gesdns,gesmx,dns_action FROM domaines WHERE dns_action!='OK';");
         $add=array();
         $del=array();
         while ($db->next_record()) {
-            if ($db->Record["gesdns"]==0 || $db->Record["gesmx"]==0) {
+            if ($db->Record["gesdns"]==0 || $db->Record["gesmx"]==0 || $db->Record['dns_action'] == 'DELETE') {
                 $del[]=$db->Record;
             } else {
                 $add[]=$db->Record;
@@ -1178,7 +1178,6 @@ ORDER BY
     function dkim_add($domain,$uid) {
         global $db;
         $target_dir = "/etc/opendkim/keys/$domain";
-
         // Create a dkim key when it's not already there : 
         if (!file_exists($target_dir.'/alternc.txt')) {
             $this->shouldreloaddkim=true;
@@ -1218,7 +1217,7 @@ ORDER BY
         $target_dir = "/etc/opendkim/keys/$domain";
         if (file_exists($target_dir)) {
             $this->shouldreloaddkim=true;
-            @unlink("$target_dir/alternc_private");
+            @unlink("$target_dir/alternc.private");
             @unlink("$target_dir/alternc.txt");
             @rmdir($target_dir);
             del_line_from_file("/etc/opendkim/KeyTable","alternc._domainkey.".$domain." ".$domain.":alternc:/etc/opendkim/keys/".$domain."/alternc.private");
