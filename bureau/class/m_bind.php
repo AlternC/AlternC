@@ -218,7 +218,11 @@ class m_bind {
         global $db;
         $db->query("
         SELECT 
-          REPLACE(REPLACE(dt.entry,'%TARGET%',sd.valeur), '%SUB%', if(length(sd.sub)>0,sd.sub,'@')) AS ENTRY 
+          REPLACE(REPLACE(dt.entry,'%TARGET%',sd.valeur), '%SUB%', if(length(sd.sub)>0,sd.sub,'@')) AS ENTRY,
+          dt.target AS TARGET,
+          dt.entry  AS ORIGINAL_ENTRY,
+          sd.valeur AS VALEUR,
+          if(length(sd.sub)>0,sd.sub,'@') AS SUB
         FROM 
           sub_domaines sd,
           domaines_type dt 
@@ -230,7 +234,30 @@ class m_bind {
         ORDER BY ENTRY ;", array($domain));
         $t="";
         while ($db->next_record()) {
-            $t.= $db->f('ENTRY')."\n";
+            // TXT entries may be longer than 255 characters, but need
+            // special treatment. @see https://kb.isc.org/docs/aa-00356
+            if (strlen($db->f('VALEUR')) >= 256 && $db->f('TARGET') == 'TXT') {
+                $chunks = str_split($db->f('VALEUR'), 255);
+                if ($chunks !== FALSE) {
+                    $new_entry = '';
+                    foreach ($chunks as $chunk) {
+                        $new_entry .= '"' . $chunk . '" ';
+                    }
+                    $new_entry = trim($new_entry, ' ');
+                    $entry = strtr($db->f('ORIGINAL_ENTRY'), array(
+                        '%SUB%' => $db->f('SUB'),
+                        // Don't want extra double quotes in this case
+                        '"%TARGET%"' => $new_entry,
+                    ));
+                }
+                else {
+                    $entry = $db->f('ENTRY');
+                }
+            }
+            else {
+                $entry = $db->f('ENTRY');
+            }
+            $t.= $entry . "\n";
         }
         return $t;
     }
