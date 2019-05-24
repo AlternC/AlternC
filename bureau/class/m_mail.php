@@ -471,12 +471,12 @@ ORDER BY
         }
         $domain=$db->Record["domaine"];
         $db->query("UPDATE sub_domaines SET web_action='DELETE' WHERE domaine= ? AND (type='defmx' OR type='defmx2');", array($domain));
-        
+        $db->query("UPDATE sub_domaines SET web_action='DELETE' WHERE domaine= ? AND sub='alternc._domainkey';",array($domain));
+
         $this->del_dns_dmarc($domain);
         $this->del_dns_spf($domain);
         $this->del_dns_autoconf($domain);
-        $this->dkim_del($domain);
-        
+
         $db->query("UPDATE domaines SET dns_action='UPDATE' WHERE id= ? ;", array($dom_id));
         return true;
     }
@@ -1124,7 +1124,7 @@ ORDER BY
      */ 
     function del_dns_dmarc($domain) {
         global $db;
-        $db->query("UPDATE sub_domaines SET web_action='DELETE' WHERE domaine= ? AND type='txt' AND sub='_dmarc' AND valeur LIKE lower('v=DMARC1;%');", array($domain));
+        $db->query("UPDATE sub_domaines SET web_action='DELETE' WHERE domaine= ? AND type='txt' AND sub='_dmarc';", array($domain));
     }
     
 
@@ -1223,7 +1223,6 @@ ORDER BY
             del_line_from_file("/etc/opendkim/KeyTable","alternc._domainkey.".$domain." ".$domain.":alternc:/etc/opendkim/keys/".$domain."/alternc.private");
             del_line_from_file("/etc/opendkim/SigningTable",$domain." alternc._domainkey.".$domain);
         }
-        $db->query("DELETE FROM sub_domaines WHERE domaine=? AND sub='alternc._domainkey';",array($domain));
         // No need to do DNS_ACTION="UPDATE" => we are in the middle of a HOOK
     }
 
