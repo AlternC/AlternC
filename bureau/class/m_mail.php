@@ -471,12 +471,12 @@ ORDER BY
         }
         $domain=$db->Record["domaine"];
         $db->query("UPDATE sub_domaines SET web_action='DELETE' WHERE domaine= ? AND (type='defmx' OR type='defmx2');", array($domain));
-        
+        $db->query("UPDATE sub_domaines SET web_action='DELETE' WHERE domaine= ? AND sub='alternc._domainkey';",array($domain));
+
         $this->del_dns_dmarc($domain);
         $this->del_dns_spf($domain);
         $this->del_dns_autoconf($domain);
-        $this->dkim_del($domain);
-        
+
         $db->query("UPDATE domaines SET dns_action='UPDATE' WHERE id= ? ;", array($dom_id));
         return true;
     }
@@ -1124,7 +1124,7 @@ ORDER BY
      */ 
     function del_dns_dmarc($domain) {
         global $db;
-        $db->query("UPDATE sub_domaines SET web_action='DELETE' WHERE domaine= ? AND type='txt' AND sub='' AND valeur LIKE 'v=dmarc1 %';", array($domain));
+        $db->query("UPDATE sub_domaines SET web_action='DELETE' WHERE domaine= ? AND type='txt' AND sub='_dmarc';", array($domain));
     }
     
 
@@ -1140,11 +1140,11 @@ ORDER BY
         global $db;
         // for each domain where we don't have the MX or the DNS, remove the DKIM setup
         $this->shouldreloaddkim=false;
-        $db->query("SELECT domaine,compte,gesdns,gesmx FROM domaines WHERE dns_action!='OK';");
+        $db->query("SELECT domaine,compte,gesdns,gesmx,dns_action FROM domaines WHERE dns_action!='OK';");
         $add=array();
         $del=array();
         while ($db->next_record()) {
-            if ($db->Record["gesdns"]==0 || $db->Record["gesmx"]==0) {
+            if ($db->Record["gesdns"]==0 || $db->Record["gesmx"]==0 || $db->Record['dns_action'] == 'DELETE') {
                 $del[]=$db->Record;
             } else {
                 $add[]=$db->Record;
@@ -1178,15 +1178,16 @@ ORDER BY
     function dkim_add($domain,$uid) {
         global $db;
         $target_dir = "/etc/opendkim/keys/$domain";
-
         // Create a dkim key when it's not already there : 
         if (!file_exists($target_dir.'/alternc.txt')) {
             $this->shouldreloaddkim=true;
             if (! is_dir($target_dir)) mkdir($target_dir); // create dir
-            // Generate the key, 1200 bits (better than 1024)
             $old_dir=getcwd();
             chdir($target_dir);
-            exec('opendkim-genkey -b 1200 -r -d '.escapeshellarg($domain).' -s "alternc" ');
+            // Generate the key, 2048 bits (better than 1024)
+            // 2048 bits is also the default in recent Debian builds of opendkim
+            // @see man opendkim-genkey
+            exec('opendkim-genkey -b 2048 -r -d '.escapeshellarg($domain).' -s "alternc" ');
             chdir($old_dir);
             // opendkim must be owner of the key
             chown("$target_dir/alternc.private", 'opendkim');
@@ -1216,13 +1217,12 @@ ORDER BY
         $target_dir = "/etc/opendkim/keys/$domain";
         if (file_exists($target_dir)) {
             $this->shouldreloaddkim=true;
-            @unlink("$target_dir/alternc_private");
+            @unlink("$target_dir/alternc.private");
             @unlink("$target_dir/alternc.txt");
             @rmdir($target_dir);
             del_line_from_file("/etc/opendkim/KeyTable","alternc._domainkey.".$domain." ".$domain.":alternc:/etc/opendkim/keys/".$domain."/alternc.private");
             del_line_from_file("/etc/opendkim/SigningTable",$domain." alternc._domainkey.".$domain);
         }
-        $db->query("DELETE FROM sub_domaines WHERE domaine=? AND sub='alternc._domainkey';",array($domain));
         // No need to do DNS_ACTION="UPDATE" => we are in the middle of a HOOK
     }
 

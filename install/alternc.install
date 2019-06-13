@@ -91,6 +91,23 @@ lock_jobs
 run-parts --arg=startup /usr/lib/alternc/install.d 
 
 #######################################################################
+# Enter the initial database configuration if needed
+#
+
+# Creating admin user if needed
+# This is done before any templating, since it adds the default database server.
+# User feedback is provided near the end of the script.
+HAS_ROOT=`mysql --defaults-file=/etc/alternc/my.cnf -e "SELECT COUNT(*) FROM membres WHERE login = 'admin' OR login = 'root' and su = 1" | tail -1`
+if [ "$HAS_ROOT" != "1" ] ; then
+    echo "Creating admin user..."
+    echo ""
+
+    su - alterncpanel -s /bin/bash -c /usr/share/alternc/install/newone.php
+    NEWONE_RETVAL=$?
+fi
+
+
+#######################################################################
 # Script configuration
 #
 
@@ -240,11 +257,19 @@ fi
 PUBLIC_IP_BEGIN=$(echo $PUBLIC_IP|cut -c 1)
 
 # Secret for PhpMyAdmin sessions
-PHPMYADMIN_BLOWFISH="$(generate_string 24)"
+PHPMYADMIN_BLOWFISH="$(generate_string 32)"
 
 # XXX: I assume this is secure if /tmp is sticky (+t)
 # we should have a better way to deal with templating, of course.
 SED_SCRIPT="/tmp/alternc.install.sedscript"
+# Escape passwords for sed and restore afterwards
+# Escaping '&' and '|' since those are used as special characters
+MYSQL_PASS_ORIG="$MYSQL_PASS"
+MYSQL_PASS=$(echo "$MYSQL_PASS" | sed -e 's/[|&]/\\&/g')
+MYSQL_MAIL_PASS_ORIG="$MYSQL_MAIL_PASS"
+MYSQL_MAIL_PASS=$(echo "$MYSQL_MAIL_PASS" | sed -e 's/[|&]/\\&/g')
+PHPMYADMIN_BLOWFISH_ORIG="$PHPMYADMIN_BLOWFISH_ORIG"
+PHPMYADMIN_BLOWFISH=$(echo "$PHPMYADMIN_BLOWFISH" | sed -e 's/[|&]/\\&/g')
 cat > $SED_SCRIPT <<EOF
 s\\%%hosting%%\\$HOSTING\\;
 s\\%%fqdn%%\\$FQDN\\;
@@ -258,9 +283,9 @@ s\\%%mx%%\\$DEFAULT_MX\\;
 s\\%%dbhost%%\\$MYSQL_HOST\\;
 s\\%%dbname%%\\$MYSQL_DATABASE\\;
 s\\%%dbuser%%\\$MYSQL_USER\\;
-s\\%%dbpwd%%\\$MYSQL_PASS\\;
+s|%%dbpwd%%|$MYSQL_PASS|;
 s\\%%db_mail_user%%\\$MYSQL_MAIL_USER\\;
-s\\%%db_mail_pwd%%\\$MYSQL_MAIL_PASS\\;
+s|%%db_mail_pwd%%|$MYSQL_MAIL_PASS|;
 s\\%%warning_message%%\\$WARNING\\;
 s\\%%fqdn_lettre%%\\$FQDN_LETTER\\;
 s\\%%version%%\\$VERSION\\;
@@ -268,12 +293,15 @@ s\\%%ns2_ip%%\\$NS2_IP\\;
 s\\%%ALTERNC_HTML%%\\$ALTERNC_HTML\\;
 s\\%%ALTERNC_MAIL%%\\$ALTERNC_MAIL\\;
 s\\%%ALTERNC_LOGS%%\\$ALTERNC_LOGS\\;
-s\\%%PHPMYADMIN_BLOWFISH%%\\$PHPMYADMIN_BLOWFISH\\;
+s|%%PHPMYADMIN_BLOWFISH%%|$PHPMYADMIN_BLOWFISH|;
 EOF
+MYSQL_PASS="$MYSQL_PASS_ORIG"
+MYSQL_MAIL_PASS="$MYSQL_MAIL_PASS_ORIG"
+PHPMYADMIN_BLOWFISH="$PHPMYADMIN_BLOWFISH_ORIG"
 
-# hook 
+# hook
 test -d /usr/lib/alternc/install.d || mkdir -p /usr/lib/alternc/install.d
-run-parts --arg=templates /usr/lib/alternc/install.d 
+run-parts --arg=templates /usr/lib/alternc/install.d
 
 
 ######################################################################
@@ -606,15 +634,8 @@ chown alterncpanel:adm /var/log/alternc/bureau.log /var/log/alternc/update_domai
 # Launch a script that will populate AlternC variables as needed
 su - alterncpanel -s /bin/bash -c /usr/share/alternc/install/variables.php
 
-# Creating admin user if needed
-HAS_ROOT=`mysql --defaults-file=/etc/alternc/my.cnf -e "SELECT COUNT(*) FROM membres WHERE login = 'admin' OR login = 'root' and su = 1" | tail -1`
-
 if [ "$HAS_ROOT" != "1" ]; then
-    echo "Creating admin user..."
-    echo ""
-
-    if su - alterncpanel -s /bin/bash -c /usr/share/alternc/install/newone.php
-      then
+    if [ "$NEWONE_RETVAL" ] ; then
       echo "*******************************************"
       echo "*                                         *"
       echo "*               Admin account             *"
@@ -626,7 +647,7 @@ if [ "$HAS_ROOT" != "1" ]; then
       echo "*                                         *"
       echo "*******************************************"
     else
-	echo "Unable to create the first AlternC account (named 'admin'). newone.php returned $?. Check your MySQL database, PHP, and the /etc/alternc/local.sh file. Also check for any error above during install."
+      echo "Unable to create the first AlternC account (named 'admin'). newone.php returned $NEWONE_RETVAL. Check your MySQL database, PHP, and the /etc/alternc/local.sh file. Also check for any error above during install."
     fi
 else
     ##UPDATE default db_server following /etc/alternc/my.cnf values
@@ -656,6 +677,15 @@ touch /etc/opendkim/TrustedHosts /etc/opendkim/SigningTable /etc/opendkim/KeyTab
 grep -q "^127.0.0.1\$" /etc/opendkim/TrustedHosts || echo "127.0.0.1" >>/etc/opendkim/TrustedHosts
 grep -q "^localhost\$" /etc/opendkim/TrustedHosts || echo "localhost" >>/etc/opendkim/TrustedHosts
 grep -q "^$PUBLIC_IP\$" /etc/opendkim/TrustedHosts || echo "$PUBLIC_IP" >>/etc/opendkim/TrustedHosts
+if [ "$(lsb_release -s -c)" == 'stretch' ] ; then
+    /lib/opendkim/opendkim.service.generate
+    # Without adding '-u opendkim' after the service file is generated, opendkim
+    # will run as root, which we do not want.
+    if [ "$(grep -c 'u opendkim' /etc/systemd/system/opendkim.service.d/override.conf)" == 0 ] ; then
+        sed -i -e 's/inet:8891@127.0.0.1/& -u opendkim/' /etc/systemd/system/opendkim.service.d/override.conf
+    fi
+    systemctl daemon-reload
+fi
 
 if [ "$SYSTEMD" = "1" -a "$(lsb_release -s -c)" = "stretch" ] ; then
     /lib/opendkim/opendkim.service.generate
@@ -714,6 +744,8 @@ done
 # Fix phpmyadmin import trac#1557
 test -d "/var/lib/phpmyadmin/tmp" && dpkg-statoverride --update --add www-data alterncpanel 0775 "/var/lib/phpmyadmin/tmp" 2>/dev/null || true
 test -f "/etc/phpmyadmin/config-db.php" && dpkg-statoverride --update --add www-data alterncpanel 0644 "/etc/phpmyadmin/config-db.php" 2>/dev/null || true
+test -f "/var/lib/phpmyadmin/blowfish_secret.inc.php" && dpkg-statoverride --update --add www-data alterncpanel 0660 "/var/lib/phpmyadmin/blowfish_secret.inc.php" 2> /dev/null || true
+test -f "/var/lib/phpmyadmin/config.inc.php" && dpkg-statoverride --update --add www-data alterncpanel 0660 "/var/lib/phpmyadmin/config.inc.php" 2> /dev/null || true
 
 # hook 
 run-parts --arg=end /usr/lib/alternc/install.d 

@@ -560,7 +560,7 @@ class m_dom {
         $has_https_option = intval($has_https_option);
         $create_tmpdir = intval($create_tmpdir);
         $create_targetdir = intval($create_targetdir);
-        $db->query("UPDATE domaines_type SET description= ?, target= ?, entry= ?, compatibility= ?, enable= e, need_dns= ?, only_dns= ?, advanced= ?,create_tmpdir= ?,create_targetdir= ?, has_https_option=? where name= ?;", array($description, $target, $entry, $compatibility, $enable, $need_dns, $only_dns, $advanced, $create_tmpdir, $create_targetdir, $has_https_option, $name));
+        $db->query("UPDATE domaines_type SET description= ?, target= ?, entry= ?, compatibility= ?, enable= ?, need_dns= ?, only_dns= ?, advanced= ?,create_tmpdir= ?,create_targetdir= ?, has_https_option=? where name= ?;", array($description, $target, $entry, $compatibility, $enable, $need_dns, $only_dns, $advanced, $create_tmpdir, $create_targetdir, $has_https_option, $name));
         return true;
     }
 
@@ -1928,7 +1928,7 @@ class m_dom {
                 }
 
                 if ($onedom["dns_action"]=="DELETE") {
-                    $db->query("DELETE FROM domaines WHERE domaine=?;",array($onedom));
+                    $db->query("DELETE FROM domaines WHERE domaine=?;",array($onedom['domaine']));
                 } else {
                     // we keep the highest result returned by hooks...
                     rsort($ret,SORT_NUMERIC); $returncode=$ret[0];

@@ -87,6 +87,8 @@ class m_hooks {
             }
         } else if (is_dir($scripts)) {
             foreach (scandir($scripts) as $ccc) {
+                # scandir returns the file names only
+                $ccc = $scripts . '/' . $ccc;
                 if (is_file($ccc) && is_executable($ccc)) {
                     $to_launch[] = $ccc;
                 }

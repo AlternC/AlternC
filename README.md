@@ -21,7 +21,6 @@ This project native language is French, and the code is commented in English. Th
 
 * This software is built around a Debian package for Stretch whose packaging instructions are located in [debian/](debian/) folder (this package can be installed on Jessie safely too)
 * To **build the packages**, clone this repository in a Debian machine and use `debuild` or `dpkg-buildpackage` from source code root.
-
 * The web control panel pages written in PHP are located in [bureau/admin](bureau/admin) and the associated PHP classes doing the stuff are in [bureau/class](bureau/class).
 
 ## Nightly build
