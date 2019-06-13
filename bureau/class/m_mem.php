@@ -41,7 +41,6 @@ class m_mem {
      */
     var $local;
 
-
     /**
      * Password kind used in this class (hook for admin class)
      */
@@ -401,10 +400,14 @@ class m_mem {
             $msg->raise("ERROR", "mem", _("You are not allowed to change your password."));
             return false;
         }
-        if (!password_verify($oldpass, $this->user['pass'])) {
-            $msg->raise("ERROR", "mem", _("The old password is incorrect"));
-            return false;
+
+        if ($this->requires_old_password_for_change()) {
+            if (!password_verify($oldpass, $this->user['pass'])) {
+                $msg->raise("ERROR", "mem", _("The old password is incorrect"));
+                return false;
+            }
         }
+
         if ($newpass != $newpass2) {
             $msg->raise("ERROR", "mem", _("The new passwords are differents, please retry"));
             return false;
@@ -418,11 +421,12 @@ class m_mem {
         $newpass = password_hash($newpass, PASSWORD_BCRYPT);
         $db->query("UPDATE membres SET pass= ? WHERE uid= ?;", array($newpass, $cuid));
         $msg->init_msgs();
+        setcookie('require_old_password', '', 1);
         return true;
     }
 
 
-    /** 
+    /**
      * Change the administrator preferences of an admin account
      * @param integer $admlist visualisation mode of the account list (0=large 1=short)
      * @return boolean TRUE if the preferences has been changed, FALSE if not.
@@ -676,6 +680,266 @@ Cordially.
         $p[$k] = $v;
         $_SESSION[$sid . '-' . $uid] = json_encode($p);
         return true;
+    }
+
+    /**
+     * Sends a password-reset URL.
+     */
+    public function send_reset_url($email_or_login) {
+        global $msg, $L_FQDN, $L_HOSTING, $db;
+        // Look up user by email_or_login.
+        $db->query("SELECT * FROM membres WHERE login = ? OR mail = ? ;", array($email_or_login, $email_or_login));
+
+        $msg->log('mem', 'send_reset_url', 'Password reset requested for: ' . $email_or_login);
+        // Give user feedback, even if we don't have an account stored.
+        $msg->raise('INFO', 'mem', _('An e-mail with information on how to connect has been sent to the owner of the account if one exists'));
+
+        // It is possible here that a user could have multiple accounts for a
+        // single e-mail since 'mail' is not a uniqe key in the membres table.
+        // For the moment we'll just take the first account.
+        if (!$db->num_rows()) {
+            $msg->log('mem', 'send_reset_url', 'No member found with login or mail ' . $email_or_login);
+            return FALSE;
+        }
+        if ($db->num_rows()) {
+            $db->next_record();
+            // Get a reset URL for the current timestamp.
+            $url = $this->generate_reset_url($db->f('uid'));
+            $mail = $db->f('mail');
+        }
+        if (!$url || !$mail) {
+            return FALSE;
+        }
+        $duration = variable_get('password_reset_expiration', 86400, 'The number of seconds for which a password reset link is valid');
+        $duration_hours = ($duration / 3600.0) . ' ' . _('hours');
+        $message = sprintf(_('
+Hi,
+
+someone requested a password reset for your account at %s (%s).
+
+You may connect to your account and change your account by clicking on the following URL or copying it into your browser :
+
+%s
+
+This link may only be used once. You should change your password in your account settings once connected. This link will only be valid for %s, and no changes will be made if it is not used.
+'), $L_HOSTING, $L_FQDN, $url, $duration_hours);
+        mail($mail, "Password reset request on {$L_HOSTING}", $message, "From: postmaster@{$L_FQDN}\nReply-to: postmaster@{$L_FQDN}");
+        $msg->log('mem', 'send_reset_url', "Password reset e-mail sent for account {$uid} at {$mail}");
+    }
+
+    /**
+     * Generate a reset URL for an account given it's e-mail or login.
+     *
+     * @param $email_or_login
+     *   A string with the email or login.
+     *
+     * @returns string|boolean
+     *   A reset URL or FALSE in case of error.
+     */
+    function generate_reset_url($uid) {
+        global $db;
+        $db->query("SELECT * FROM membres WHERE uid = ? ;", array($uid));
+        if (!$db->num_rows()) {
+            return FALSE;
+        }
+        if ($db->num_rows()) {
+            $db->next_record();
+            // Get a reset URL for the current timestamp.
+            return $this->_get_reset_url(time(), $db->f('uid'), $db->f('login'), $db->f('pass'));
+        }
+        return FALSE;
+    }
+
+    /**
+     * Builds a full reset URL from the uid, login, password and timestamp.
+     *
+     * @returns string
+     *   A full URL.
+     */
+    function _get_reset_url($timestamp, $uid, $login, $password) {
+        global $db, $L_FQDN;
+        $salt = variable_get('salt_password_reset', base64_encode(random_bytes(128)), 'The salt used when hasing password resets - change to invalidate all existing reset tokens') . $password;
+        $data = $timestamp . $uid . $login;
+        $token = hash_hmac('sha512', $data, $salt);
+        // @TODO: Not sure where the bureau's preferred protocol is stored, but
+        // since 3.5.0 https seems to be the default.
+        return 'https://' . $L_FQDN . '/reset.php?' . http_build_query(array(
+            'uid' => $uid,
+            'timestamp' => $timestamp,
+            'token' => $token,
+        ));
+    }
+
+    /**
+     * Logs a user in from a one-time login link.
+     */
+    function temporary_login($uid, $timestamp, $token, $restrictip = 0, $authip_token = false) {
+        global $db, $msg, $cuid, $authip;
+        if (!$this->validate_reset_url($uid, $timestamp, $token)) {
+            return FALSE;
+        }
+        $msg->log("mem", "temporary_login", $username);
+        if ($msg->has_msgs("ERROR")) {
+            return FALSE;
+        }
+
+        $db->query("select * from membres where uid= ? ;", array($uid));
+        if ($db->num_rows() == 0) {
+            return FALSE;
+        }
+        $db->next_record();
+
+        // No password verification for temporary logins, the validation
+        // is in validate_reset_url instead.
+        if (!$db->f("enabled")) {
+            $msg->raise("ERROR", "mem", _("This account is locked, contact the administrator."));
+            return FALSE;
+        }
+
+        $this->user = $db->Record;
+        $cuid = $db->f("uid");
+        if (panel_islocked() && $cuid != 2000) {
+            $msg->raise("ALERT", "mem", _("This website is currently under maintenance, login is currently disabled."));
+            return FALSE;
+        }
+
+        // AuthIP
+        $allowed_ip = FALSE;
+        if ($authip_token) {
+            $allowed_ip = $this->authip_tokencheck($authip_token);
+        }
+
+        $aga = $authip->get_allowed('panel');
+        foreach ($aga as $k => $v) {
+            if ($authip->is_in_subnet(get_remote_ip(), $v['ip'], $v['subnet'])) {
+                $allowed = TRUE;
+            }
+        }
+
+        // Error if there is rules, the IP is not allowed and it's not in the whitelisted IP
+        if (sizeof($aga) > 1 && !$allowed_ip && !$authip->is_wl(get_remote_ip())) {
+            $msg->raise("ERROR", "mem", _("Your IP isn't allowed to connect"));
+            return FALSE;
+        }
+        // End AuthIP
+
+        if ($restrictip) {
+            $ip = get_remote_ip();
+        } else {
+            $ip = "";
+        }
+
+        // Close sessions that are more than 2 days old.
+        $db->query("DELETE FROM sessions WHERE DATE_ADD(ts,INTERVAL 2 DAY)<NOW();");
+
+        // Delete old impersonations.
+        if (isset($_COOKIE["oldid"])) {
+            setcookie('oldid', '', 0, '/');
+        }
+
+        // Open the session
+        $sess = md5(mt_rand().mt_rand().mt_rand());
+        $_REQUEST["session"] = $sess;
+        $db->query("insert into sessions (sid,ip,uid) values (?, ?, ?);", array($sess, $ip, $cuid));
+        setcookie("session", $sess, 0, "/");
+        $msg->init_msgs();
+
+        // Fill in $local.
+        $db->query("SELECT * FROM local WHERE uid= ? ;", array($cuid));
+        if ($db->num_rows()) {
+            $db->next_record();
+            $this->local = $db->Record;
+        }
+        $this->resetlast();
+
+        // Set a cookie parameter to allow password change without requiring
+        // previous one.
+        $db->query('select lastlogin, pass from membres where uid = ?;', array($uid));
+        if ($db->num_rows()) {
+            $db->next_record();
+            $cookie_data = $cuid . $db->f('lastlogin');
+            $salt = variable_get('salt_password_reset', base64_encode(random_bytes(128))) . $db->f('pass');
+            $c = setcookie('require_old_password', hash_hmac('sha512', $cookie_data, $salt), 0, '/');
+            if (!$c) {
+                $msg->log('mem', 'temporary_login', 'Failed to set cookie require_old_password');
+            }
+        }
+        return TRUE;
+    }
+
+    function requires_old_password_for_change() {
+        global $cuid, $db;
+        $cookie = $_COOKIE['require_old_password'];
+        if (!$cookie) {
+            return TRUE;
+        }
+        $db->query('select lastlogin, pass from membres where uid = ?;', array($cuid));
+        if ($db->num_rows()) {
+            $db->next_record();
+            $cookie_data = $cuid . $db->f('lastlogin');
+            $salt = variable_get('salt_password_reset', base64_encode(random_bytes(128))) . $db->f('pass');
+            if ($cookie == hash_hmac('sha512', $cookie_data, $salt)) {
+                return FALSE;
+            }
+        }
+        return TRUE;
+    }
+
+    /**
+     * Validates a reset URL that has been received.
+     */
+    function validate_reset_url($uid, $timestamp, $token) {
+        global $cuid, $db, $msg;
+        // Do not log a person in if they are logged in already.
+        if ($this->checkid(false)) {
+            $msg->raise('ERROR', 'mem', _('You are already logged in, you may not use a one-time login link'));
+            $msg->log('mem', 'validate_reset_url', 'Refused one-time log-in since the user is already connected');
+            return FALSE;
+        }
+
+        // The timestamp is older than the age limit - invalid.
+        $fail_message = _('The login-link has already been used or is expired');
+        $duration = variable_get('password_reset_expiration', 86400, 'The number of seconds for which a password reset link is valid');
+        if (time() - $timestamp >= $duration) {
+            $msg->raise('ERROR', 'mem', $fail_message);
+            $msg->log('mem', 'validate_reset_url', 'Refused one-time log-in since the time elapsed is greater than limit of ' . $duration);
+            return FALSE;
+        }
+
+        $db->query("SELECT * FROM membres WHERE uid = ? ;", array($uid));
+        if (!$db->num_rows()) {
+            $msg->raise('ERROR', 'mem', $fail_message);
+            $msg->log('mem', 'validate_reset_url', 'Refused one-time log-in since a user with ID ' . $uid. ' does not exist');
+            return FALSE;
+        }
+        $db->next_record();
+        $last_login = strtotime($db->f('lastlogin'));
+        // The timestamp is older than the most recent login - invalid.
+        if ($last_login >= time() || $last_login >= $timestamp) {
+            $msg->raise('ERROR', 'mem', $fail_message);
+            $msg->log('mem', 'validate_reset_url', "Refused one-time log-in since the most recent login was more recent than the timestamp in the log-in link. Last: {$last_login}, Timestamp: {$timestamp}");
+            return FALSE;
+        }
+
+        // The account is locked or cannot change pass - invalid.
+        if (!$db->f('enabled') || !$db->f('canpass')) {
+            $msg->raise('ERROR', 'mem', $fail_message);
+            $msg->log('mem', 'validate_reset_url', 'Refused one-time log-in since the user account is disabled or cannot change it\'s password.');
+            return FALSE;
+        }
+
+        // Using the current user info and timestamp the tokens generated
+        // do not match - invalid. (Eg. user password changed, salt changed).
+        $salt = variable_get('salt_password_reset', base64_encode(random_bytes(128))) . $db->f('pass');
+        $data = $timestamp . $uid . $db->f('login');
+        $ref_token = hash_hmac('sha512', $data, $salt);
+        if ($token != $ref_token) {
+            $msg->raise('ERROR', 'mem', $fail_message);
+            return FALSE;
+        }
+
+        $msg->raise('INFO', 'mem', _('You have used a one-time login link. Please set a new password now.'));
+        return TRUE;
     }
 
 } /* Class m_mem */
