@@ -5,7 +5,7 @@ PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 @reboot	 root	   mkdir -p /run/alternc && chown alterncpanel:alterncpanel /run/alternc 
 
 # Every 2 days compress log files
-0 4 * * *	alterncpanel	/usr/lib/alternc/compress_logs.sh
+30 4 * * *	alterncpanel	/usr/lib/alternc/compress_logs.sh
 
 # Suppress log files older than one year
 0 4 * * *	alterncpanel	/usr/lib/alternc/delete_logs.sh
