@@ -157,9 +157,15 @@ class m_mysql {
     function php_myadmin_connect() {
         global $db, $cuid, $msg;
         $msg->log("mysql", "php_myadmin_connect");
+        $db->query("SELECT count(0) as count from db where uid = ?;", array($cuid));
+        $db->next_record();
+        if ($db->f('count') == 0) {
+            $msg->raise("ERROR", "mysql", _("Cannot connect to PhpMyAdmin, no databases for user {$cuid}"));
+            return false;
+        }
         $db->query("SELECT dbu.name,dbu.password, dbs.host FROM dbusers dbu, db_servers dbs, membres m WHERE dbu.uid= ? and enable='ADMIN' and dbs.id=m.db_server_id and m.uid= ? ;", array($cuid, $cuid));
         if (!$db->num_rows()) {
-            $msg->raise("ERROR", "mysql", _("Cannot connect to PhpMyAdmin"));
+            $msg->raise("ERROR", "mysql", _("Cannot connect to PhpMyAdmin, no admin user for uid {$cuid}"));
             return false;
         }
         $db->next_record();
