@@ -91,6 +91,23 @@ lock_jobs
 run-parts --arg=startup /usr/lib/alternc/install.d 
 
 #######################################################################
+# Enter the initial database configuration if needed
+#
+
+# Creating admin user if needed
+# This is done before any templating, since it adds the default database server.
+# User feedback is provided near the end of the script.
+HAS_ROOT=`mysql --defaults-file=/etc/alternc/my.cnf -e "SELECT COUNT(*) FROM membres WHERE login = 'admin' OR login = 'root' and su = 1" | tail -1`
+if [ "$HAS_ROOT" != "1" ] ; then
+    echo "Creating admin user..."
+    echo ""
+
+    su - alterncpanel -s /bin/bash -c /usr/share/alternc/install/newone.php
+    NEWONE_RETVAL=$?
+fi
+
+
+#######################################################################
 # Script configuration
 #
 
@@ -240,7 +257,7 @@ fi
 PUBLIC_IP_BEGIN=$(echo $PUBLIC_IP|cut -c 1)
 
 # Secret for PhpMyAdmin sessions
-PHPMYADMIN_BLOWFISH="$(generate_string 24)"
+PHPMYADMIN_BLOWFISH="$(generate_string 32)"
 
 # XXX: I assume this is secure if /tmp is sticky (+t)
 # we should have a better way to deal with templating, of course.
@@ -606,15 +623,8 @@ chown alterncpanel:adm /var/log/alternc/bureau.log /var/log/alternc/update_domai
 # Launch a script that will populate AlternC variables as needed
 su - alterncpanel -s /bin/bash -c /usr/share/alternc/install/variables.php
 
-# Creating admin user if needed
-HAS_ROOT=`mysql --defaults-file=/etc/alternc/my.cnf -e "SELECT COUNT(*) FROM membres WHERE login = 'admin' OR login = 'root' and su = 1" | tail -1`
-
 if [ "$HAS_ROOT" != "1" ]; then
-    echo "Creating admin user..."
-    echo ""
-
-    if su - alterncpanel -s /bin/bash -c /usr/share/alternc/install/newone.php
-      then
+    if [ "$NEWONE_RETVAL" ] ; then
       echo "*******************************************"
       echo "*                                         *"
       echo "*               Admin account             *"
@@ -626,7 +636,7 @@ if [ "$HAS_ROOT" != "1" ]; then
       echo "*                                         *"
       echo "*******************************************"
     else
-	echo "Unable to create the first AlternC account (named 'admin'). newone.php returned $?. Check your MySQL database, PHP, and the /etc/alternc/local.sh file. Also check for any error above during install."
+      echo "Unable to create the first AlternC account (named 'admin'). newone.php returned $NEWONE_RETVAL. Check your MySQL database, PHP, and the /etc/alternc/local.sh file. Also check for any error above during install."
     fi
 else
     ##UPDATE default db_server following /etc/alternc/my.cnf values
@@ -714,6 +724,8 @@ done
 # Fix phpmyadmin import trac#1557
 test -d "/var/lib/phpmyadmin/tmp" && dpkg-statoverride --update --add www-data alterncpanel 0775 "/var/lib/phpmyadmin/tmp" 2>/dev/null || true
 test -f "/etc/phpmyadmin/config-db.php" && dpkg-statoverride --update --add www-data alterncpanel 0644 "/etc/phpmyadmin/config-db.php" 2>/dev/null || true
+test -f "/var/lib/phpmyadmin/blowfish_secret.inc.php" && dpkg-statoverride --update --add www-data alterncpanel 0660 "/var/lib/phpmyadmin/blowfish_secret.inc.php" 2> /dev/null || true
+test -f "/var/lib/phpmyadmin/config.inc.php" && dpkg-statoverride --update --add www-data alterncpanel 0660 "/var/lib/phpmyadmin/config.inc.php" 2> /dev/null || true
 
 # hook 
 run-parts --arg=end /usr/lib/alternc/install.d 
