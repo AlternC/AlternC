@@ -43,6 +43,7 @@ class m_bind {
     function hook_updatedomains_dns_pre() {
         $this->shouldreload=false;
         $this->shouldreconfig=false;
+	return 0;
     }
 
 
@@ -117,6 +118,7 @@ class m_bind {
         } else {
             $this->shouldreload=true;
         }
+	return 0;
     }
 
 
@@ -141,9 +143,10 @@ class m_bind {
         ) {
             $this->shouldreconfig=true;
         } else {
-            return;
+            return 0;
         }
         @unlink($this->zone_file_directory."/".$domain);
+	return 0;
     }
 
     
@@ -174,6 +177,7 @@ class m_bind {
                 $msg->raise("INFO","bind","Bind reconfigured");
             }
         }
+	return 0;
     }
 
     
