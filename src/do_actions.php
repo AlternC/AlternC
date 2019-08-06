@@ -196,7 +196,7 @@ if (file_exists(ALTERNC_DO_ACTION_LOCK) !== false){
 //We get the next action to do
 while ($rr=$action->get_action()){
   $r=$rr[0];
-  $return="OK";
+  $return=0;
   // Do we have to do this action with a specific user?
   if($r["user"] != "root")
     $SU="su ".$r["user"]." 2>&1 ;";
