@@ -165,7 +165,7 @@ CREATE TABLE IF NOT EXISTS membres (
   mail varchar(128) NOT NULL default '',		-- Adresse email du possesseur
   lastaskpass bigint(20) unsigned default '0',		-- Date de dernière demande du pass par mail
   show_help tinyint(4) NOT NULL default '1',		-- Faut-il afficher l`aide dans le bureau
-  lastlogin datetime NOT NULL default '0000-00-00 00:00:00',	-- Date du dernier login
+  lastlogin datetime NOT NULL default '1000-01-01 00:00:00',	-- Date du dernier login
   lastfail tinyint(4) NOT NULL default '0',		-- Nombre d`échecs depuis le dernier login
   lastip varchar(255) NOT NULL default '',		-- Nom DNS du client au dernier login
   creator int(10) unsigned default '0',			-- Qui a créé le compte (quel uid admin)
@@ -467,7 +467,7 @@ CREATE TABLE IF NOT EXISTS `domaines_type` (
     `name` VARCHAR (30) NOT NULL, -- Uniq name
     `description` TEXT, -- Human description
     `target` enum ('NONE', 'URL', 'DIRECTORY', 'IP', 'IPV6', 'DOMAIN', 'TXT') NOT NULL DEFAULT 'NONE', -- Target type
-    `entry` TEXT DEFAULT '', -- BIND entry
+    `entry` TEXT, -- BIND entry
     `compatibility` VARCHAR (255) DEFAULT '', -- Which type can be on the same subdomains
     `enable` enum ('ALL', 'NONE', 'ADMIN') NOT NULL DEFAULT 'ALL', -- Show this option to who ?
     `only_dns` BOOLEAN DEFAULT FALSE, -- Update_domains modify just the dns, no web configuration
@@ -748,8 +748,8 @@ CREATE TABLE IF NOT EXISTS `actions` (
  type enum ('CREATE_FILE','FIX_USER','CREATE_DIR','DELETE','MOVE','FIX_DIR','FIX_FILE','CHMOD'),
  parameters longtext default NULL,
  creation timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
- begin timestamp,
- end timestamp,
+ begin timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+ end timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
  user varchar(255) default NULL,
  status int(8) unsigned default NULL,
  PRIMARY KEY ( `id` )
