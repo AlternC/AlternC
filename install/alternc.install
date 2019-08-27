@@ -129,7 +129,7 @@ if [ -d /etc/postfix ]; then
                   etc/opendkim.conf etc/default/opendkim"
 fi
 if [ -e /etc/proftpd/proftpd.conf ]; then
-    CONFIG_FILES="$CONFIG_FILES etc/proftpd/proftpd.conf etc/proftpd/welcome.msg etc/proftpd/modules.conf"
+    CONFIG_FILES="$CONFIG_FILES etc/proftpd/proftpd.conf etc/proftpd/welcome.msg etc/proftpd/modules.conf etc/proftpd/conf.d/sftp.conf"
 fi
 
 if [ -e /etc/default/saslauthd ]; then
