@@ -4871,7 +4871,7 @@ msgstr ""
 
 #: ../class/functions.php:925
 #, fuzzy
-msgid "Clic here to generate a password"
+msgid "Click here to generate a password"
 msgstr "Please enter a password"
 
 #: ../class/functions.php:971 ../class/functions.php:972
