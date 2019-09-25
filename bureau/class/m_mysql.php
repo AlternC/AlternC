@@ -592,8 +592,21 @@ class m_mysql {
 
     
     function get_defaultsparam($dbn) {
-        global $db, $msg, $cuid;
+        global $db, $mem, $msg, $cuid;
         $msg->debug("mysql", "getdefaults");
+
+        $login=$mem->user["login"];
+        # The first condition allows us to access our "default" database, where the
+        # name matches exactly our login name. The second condition allows us to
+        # access the other databases suffixed with "_.*"
+        # The condition is split into two here to avoid the following situation:
+        #   * Given two accounts "example" and "exampleb", with defaults (un-suffixed)
+        # databases, the user of account "example" could read the parameter information
+        # for "exampleb".
+        if (($dbn != $login) && !preg_match("#^$login\_#", $dbn)) {
+                $msg->raise("ERROR", "mysql",_("Database not found")." (5)");
+                return false;
+        }
 
         $dbu = $dbn;
         $r = array();
@@ -624,7 +637,7 @@ class m_mysql {
                 }
             }
             
-            if (!$db->query("SELECT name,password from dbusers where name= ? ;", array($dbu))) {
+            if (!$db->query("SELECT name,password from dbusers where name= ? and uid= ? ;", array($dbu, $cuid))) {
                 $msg->raise("ERROR", "mysql",_("Database not found")." (3)");
                 return false;
             }
