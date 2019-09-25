@@ -98,7 +98,7 @@ if ($r['dns_action']=='UPDATE') {?>
 <?php
 /*
   // Link hidden as long as the del_domain_cancel function is not complete
-  <a href="dom_dodel.php?domain=<?php echo urlencode($domain);?>&del_cancel=true"><?php __("Clic here to cancel deletion");?></a>
+  <a href="dom_dodel.php?domain=<?php echo urlencode($domain);?>&del_cancel=true"><?php __("Click here to cancel deletion");?></a>
 */
 ?>
   <?php

@@ -922,7 +922,7 @@ function create_pass($length = 10, $classcount = 3) {
 function display_div_generate_password($pass_size = DEFAULT_PASS_SIZE, $fields_to_fill1 = "", $fields_to_fill2 = "", $classcount = 3) {
     static $id=1;
     echo "<div id='z$id' style='display:none;'><a href=\"javascript:generate_password_html('$id',$pass_size,'$fields_to_fill1','$fields_to_fill2',$classcount);\">";
-    __("Clic here to generate a password");
+    __("Click here to generate a password");
     echo "</a></div>";
     echo "<script type='text/javascript'>$('#z$id').show();</script>";
     $id++;
