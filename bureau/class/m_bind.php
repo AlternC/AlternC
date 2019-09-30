@@ -55,6 +55,7 @@ class m_bind {
      */
     function hook_updatedomains_dns_add($dominfo) {
         global $L_FQDN,$L_NS1_HOSTNAME,$L_NS2_HOSTNAME,$L_DEFAULT_MX,$L_DEFAULT_SECONDARY_MX,$L_PUBLIC_IP,$L_PUBLIC_IPV6;
+        global $hooks;
 
         $domain = $dominfo["domaine"];
         $ttl = $dominfo["zonettl"];
@@ -77,7 +78,16 @@ class m_bind {
         $zone .= $this->conf_from_db($domain);
 
         // substitute ALTERNC & domain variables
-        $zone = strtr($zone, array(
+        $tokens = array();
+        $user_tokens = $hooks->invoke("hook_bind_dns_tokens", array($domain));
+        foreach ($user_tokens as $c => $result) {
+            if (is_array($result)) {
+                // The first hook to define a token will have it's definition kept,
+                // unless it's for a "default token".
+                $tokens = array_merge($result, $tokens);
+            }
+        }
+        $default_tokens = array(
             "%%fqdn%%" => "$L_FQDN",
             "%%ns1%%" => "$L_NS1_HOSTNAME",
             "%%ns2%%" => "$L_NS2_HOSTNAME",
@@ -92,8 +102,11 @@ class m_bind {
             "@@SERIAL@@" => $serial,
             "@@PUBLIC_IP@@" => "$L_PUBLIC_IP",
             "@@PUBLIC_IPV6@@" => "$L_PUBLIC_IPV6",
-            "@@ZONETTL@@" => $ttl,
-        ));
+            "@@ZONETTL@@" => $ttl
+        );
+        # Preserve the default tokens before all.
+        $tokens = array_merge($tokens, $default_tokens);
+        $zone = strtr($zone, $tokens);
 
         // add the "END ALTERNC CONF line";
         $zone .= ";;; END ALTERNC AUTOGENERATE CONFIGURATION\n";
