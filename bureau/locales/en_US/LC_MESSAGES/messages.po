@@ -4542,7 +4542,7 @@ msgid "Next Page"
 msgstr ""
 
 #: ../class/functions.php:925
-msgid "Clic here to generate a password"
+msgid "Click here to generate a password"
 msgstr ""
 
 #: ../class/functions.php:971 ../class/functions.php:972
