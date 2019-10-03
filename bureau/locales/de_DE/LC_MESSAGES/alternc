@@ -5620,7 +5620,7 @@ msgid "Next Page"
 msgstr "Nächste Seite"
 
 #: ../class/functions.php:925
-msgid "Clic here to generate a password"
+msgid "Click here to generate a password"
 msgstr "Klicke hier um ein Passwort zu generieren"
 
 #: ../class/functions.php:971 ../class/functions.php:972
