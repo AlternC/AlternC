@@ -5615,7 +5615,7 @@ msgid "Next Page"
 msgstr "Volgende Pagina"
 
 #: ../class/functions.php:925
-msgid "Clic here to generate a password"
+msgid "Click here to generate a password"
 msgstr "Klik hier op een wachtwoord te genereren"
 
 #: ../class/functions.php:971 ../class/functions.php:972
