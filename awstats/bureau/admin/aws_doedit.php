@@ -44,7 +44,7 @@ if (!$id) {
 		include("aws_edit.php");
 		exit();
 	} else {
-		$msg->raise('Ok', "aws", _("The Statistics has been successfully changed"));
+		$msg->raise('INFO', "aws", _("The Statistics has been successfully changed"));
 		include("aws_list.php");
 		exit();
 	}
