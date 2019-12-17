@@ -57,6 +57,16 @@ case "$1" in
     #  rm -rf /var/alternc/mail
     #fi
 
+    # Remove bind apparmor additions
+    if [ -f '/etc/apparmor.d/usr.sbin.named' ] ; then
+        sed -i '/#include <local\/usr.sbin.named-alternc>/d' /etc/apparmor.d/usr.sbin.named
+    fi
+    rm -f /etc/apparmor.d/local/usr.sbin.named-alternc
+    # Reload the profile, including any abstraction updates
+    if aa-enabled --quiet 2>/dev/null; then
+        apparmor_parser -r -T -W "usr.sbin.named" || true
+    fi
+
     #rm -rf /var/alternc/apacheconf /var/alternc/cgi-bin /var/alternc/bureau /var/alternc/exec.usr /var/alternc/mla /var/alternc/redir /var/alternc/tmp /var/log/alternc
     rm -f /etc/apache*/conf.d/override_php.conf /etc/apache*/conf.d/alternc-ssl.conf /etc/apache*/conf.d/alternc.conf
     rm -f /etc/php*/conf.d/alternc.ini
