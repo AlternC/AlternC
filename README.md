@@ -17,6 +17,26 @@ This project native language is French, and the code is commented in English. Th
 
 [Pour installer AlternC, merci de suivre la documentation d'installation](https://alternc.com/Install-fr)
 
+### Upgrading from AlternC 3.[1,2,3].11
+
+AlternC >= 3.5 removes integrates alternc-ssl and alternc-admintools in the the core AlternC package.
+
+As a result, both alternc-ssl and alternc-admintools will be removed during installation.
+When alternc-ssl is removed, it will mark many of the sub domain types suffixed with '-ssl'
+and '-mixssl' for deletion.
+
+To safely upgrade between these versions:
+
+* Backup your AlternC database
+* Stop the cron service: ```/etc/init.d/cron stop```
+* Install alternc (>= 3.5)
+* Run the following queries against the alternc database (here, it's called "alternc"): ```
+mysql alternc -e 'update sub_domaines set web_action = "OK" where type like "%-mixssl";'
+mysql alternc -e 'update sub_domaines set web_action = "OK" where type like "%-ssl";'
+```
+* Run alternc.install
+* Start the cron service again: ```/etc/init.d/cron start```
+
 ## Developper information
 
 * This software is built around a Debian package for Stretch whose packaging instructions are located in [debian/](debian/) folder (this package can be installed on Jessie safely too)
