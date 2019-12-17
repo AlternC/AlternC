@@ -349,9 +349,12 @@ class m_domTest extends TestCase
     public function testWhois()
     {
         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+        $ns = $this->object->whois('alternc.org');
+        $expected_ns = array(
+            'primary.heberge.info',
+            'secondary.heberge.info',
         );
+        $this->assertSame($ns, $expected_ns);
     }
 
     /**
