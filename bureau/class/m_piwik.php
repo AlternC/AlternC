@@ -161,13 +161,13 @@ class m_piwik {
         if ($api_data !== FALSE) {
             $api_data = $api_data[0]; // Data is in the first column
             foreach ($this->alternc_users AS $key=>$user) {
-                if (!array_key_exists($user, $api_data)) {                                                            
-                    $api_data->$user = 'noaccess';                                                                
-                } 
+                if (!array_key_exists($user, $api_data)) {
+                    $api_data->$user = 'noaccess';
+                }
             }
             return $api_data;
         }
-        else return FALSE; 
+        else return FALSE;
     }
 
 
