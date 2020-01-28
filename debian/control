@@ -70,12 +70,12 @@ Recommends: default-mysql-server | mysql-server | mariadb-server
           , unzip
           , bzip2
 	  , alternc-certificate-provider-letsencrypt
-Conflicts: alternc-admintools
-        , alternc-awstats (<< 1.0)
+Breaks: alternc-admintools
+      , alternc-ssl
+Conflicts: alternc-awstats (<< 1.0)
         , alternc-webalizer (<= 0.9.4)
         , alternc-mailman (<< 2.0)
         , courier-authlib
-        , alternc-ssl
 Provides: alternc-admintools
         , alternc-ssl
 Replaces: alternc-admintools
