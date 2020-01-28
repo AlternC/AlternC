@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /*
  ----------------------------------------------------------------------
@@ -18,10 +18,10 @@
  ----------------------------------------------------------------------
 */
 
-/** 
+/**
  * List and edit IP-Authentication list for this account
- * 
- * @copyright AlternC-Team 2000-2017 https://alternc.com/ 
+ *
+ * @copyright AlternC-Team 2000-2017 https://alternc.com/
  */
 
 require_once("../class/config.php");
@@ -90,7 +90,7 @@ echo $msg->msg_html_all();
   <th><?php __("Access type");?></th>
   <th></th>
 </tr>
-<?php 
+<?php
   foreach ($lac as $ll) {
     echo "<tr class='lst' >";
     echo "<td><span title=\"{$list_ip[$ll['authorised_ip_id']]['ip_human']}\">".$list_ip[$ll['authorised_ip_id']]['infos'];
@@ -133,7 +133,7 @@ echo $msg->msg_html_all();
            </select>
         <?php } else { ?>
           <?php foreach ($a['values'] as $k => $v) { ?>
-            <label><b><?php ehe($v); ?></b></label> 
+            <label><b><?php ehe($v); ?></b></label>
             <input type="hidden" name="s_affect_<?php ehe($a['protocol']);?>" id="s_affect_<?php ehe($a['protocol']);?>" value="<?php ehe($k); ?>" readonly="readonly" />
           <?php  } ?>
         <?php } ?>
@@ -147,7 +147,7 @@ echo $msg->msg_html_all();
       <p>
       <select name="s_ipsub">
         <?php foreach ($list_ip as $li) { ?>
-          <option value="<?php echo $li['id']; ?>"><?php ehe($li['infos']); 
+          <option value="<?php echo $li['id']; ?>"><?php ehe($li['infos']);
             //echo " - ".$li['ip'] ; if (!($li['subnet']==32 || $li['subnet'] == 128)) echo "/".$li['subnet'];
             ?></option>
         <?php } ?>
@@ -170,7 +170,7 @@ echo $msg->msg_html_all();
 <h3><?php __("Known IP and networks");?></h3>
 <table class="tlist">
 <tr><th><?php __("Name"); ?></th><th><?php __("IP or network"); ?></th><th><?php __("Type"); ?></th><th colspan='2'></th></tr>
-<?php 
+<?php
 foreach($list_ip as $i) {
   if (checkip($i['ip'])) {
     if ($i['subnet']==32) {
@@ -207,8 +207,8 @@ foreach($list_ip as $i) {
 
   <input type="hidden" name="id" value="" id="edit_id" />
   <table class="tlistb">
-  <tr><th><?php __("Name"); ?></th><th><?php __("IP or network. <i>IPv4, IPv6 and subnet allowed</i>"); ?></th><th></th></tr>
-  
+  <tr><th><?php __("IP or network. <i>IPv4, IPv6 and subnet allowed</i>"); ?></th><th><?php __("Name"); ?></th><th></th></tr>
+
   <tr class="lst2">
     <td><input type="text" size="20" maxlength="39" name="ipsub" id="edit_ip" /></td>
     <td><input type="text" size="25" maxlength="200" name="infos" id="edit_infos" /></td>
@@ -227,7 +227,7 @@ foreach($list_ip as $i) {
   }
 
   function edit_ip(id, iph, infos) {
-    if ( id != '' ) { 
+    if ( id != '' ) {
       $("#reset_edit_ip").show();
     }
     $("#edit_id").val(id);
