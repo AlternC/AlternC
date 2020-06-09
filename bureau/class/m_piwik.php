@@ -161,13 +161,19 @@ class m_piwik {
         if ($api_data !== FALSE) {
             $api_data = $api_data[0]; // Data is in the first column
             foreach ($this->alternc_users AS $key=>$user) {
-                if (!array_key_exists($user, $api_data)) {                                                            
-                    $api_data->$user = 'noaccess';                                                                
-                } 
+                if (!array_key_exists($user, $api_data)) {
+                    $api_data->$user = 'noaccess';
+                }
+            }
+            # Hide users who have access, but are not in AlternC
+            foreach (get_object_vars($api_data) as $user => $access) {
+                if (!in_array($user, $this->alternc_users)) {
+                    unset($api_data->$user);
+                }
             }
             return $api_data;
         }
-        else return FALSE; 
+        else return FALSE;
     }
 
 

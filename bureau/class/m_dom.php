@@ -956,7 +956,23 @@ class m_dom {
         $ns=array();
         foreach($out as $line) {
             if (preg_match('#^'.str_replace(".","\\.",$domain).'\..*IN\s*NS\s*(.*)$#',$line,$mat)) {
-                $ns[]=trim($mat[1]);
+                $n = trim($mat[1]);
+                # If the nameserver ends with a '.', we want to remove it as callers of
+                # this function expect the fully qualified domain name without a trailing
+                # dot.
+                if (substr($n, -1) == '.') {
+                    $ns[] = substr($n, 0, strlen($n)-1);
+                }
+                else {
+                    # In the case where is no trailing dot, the normal procedure is to append
+                    # the domain name to finish qualifying the answer.
+                    # eg. If one searches for example.com and gets a result "ns", then
+                    # the fully qualified answer is 'ns.example.com'.
+                    #
+                    # I'm not sure in what case dig will return a non-fully qualified answer.
+                    #  - Kienan 2019-12-17
+                    $ns[] = $n . '.' . $domain;
+                }
             }
         }
         return $ns;
