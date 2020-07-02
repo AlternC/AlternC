@@ -345,11 +345,7 @@ function actmoveto_not_empty() {
         echo "<table width=\"100%\" id='tab_files_w_details' class=\"tlist\" style=\"border: 0px\" cellpadding=\"2\" cellspacing=\"0\"><thead>";
         ?>
           <tr><th>
-          <script type="text/javascript">
-          <!--
-          document.write("<input type=\"checkbox\" id=\"checkall\" value=\"1\" class=\"inb\" onclick=\"CheckAll();\" />");
-        //  -->
-        </script>
+            <input type="checkbox" id="checkall" value="1" class="inb" onclick="CheckAll();" />
           </th>
           <?php if ($p["showicons"]) { ?>
               <th style="text-align: center;"><?php if (!empty($R)) { echo $bro->PathList($R,"bro_main.php",true);  }?></th>
