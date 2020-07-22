@@ -17,9 +17,9 @@ Pre-depends: debconf (>= 0.5.00) | debconf-2.0
            , acl
 Depends: debianutils (>= 1.13.1)
        , apache2-mpm-itk | libapache2-mpm-itk
-       , libapache2-mod-php5 | libapache2-mod-php7.0
-       , php5-mysql | php7.0-mysql
-       , php-curl | php5-curl | php7.0-curl
+       , libapache2-mod-php5 | libapache2-mod-php7.0 | libapache2-mod-php7.3
+       , php5-mysql | php7.0-mysql | php7.3-mysql
+       , php-curl | php5-curl | php7.0-curl | php7.3-curl
        , phpmyadmin
        , ssl-cert
        , libjs-prettify
@@ -40,7 +40,7 @@ Depends: debianutils (>= 1.13.1)
        , wwwconfig-common
        , sasl2-bin
        , libsasl2-modules
-       , php-cli
+       , php-cli | php7.0-cli | php7.3-cli
        , lockfile-progs (>= 0.1.9)
        , gettext (>= 0.10.40-5)
        , sudo
@@ -60,7 +60,7 @@ Depends: debianutils (>= 1.13.1)
        , dovecot-sieve
        , dovecot-managesieved
        , default-mysql-client | mysql-client | mariadb-client
-       , php5-curl | php7.0-curl
+       , php-curl | php5-curl | php7.0-curl | php7.3-curl
        , quota
        , pwgen
        , lsb-release
@@ -107,9 +107,9 @@ Architecture: all
 Pre-depends: debconf (>= 0.5.00) | debconf-2.0, acl
 Depends: debianutils (>= 1.13.1)
          , apache2-mpm-itk | libapache2-mpm-itk
-         , libapache2-mod-php5 | libapache2-mod-php7.0
-         , php5-mysql | php7.0-mysql
-         , php-curl | php5-curl | php7.0-curl
+         , libapache2-mod-php5 | libapache2-mod-php7.0 | libapache2-mod-php7.3
+         , php5-mysql | php7.0-mysql | php7.3-mysql
+         , php-curl | php5-curl | php7.0-curl | php7.3-curl
          , phpmyadmin
          , ssl-cert
          , libjs-prettify
@@ -132,7 +132,7 @@ Depends: debianutils (>= 1.13.1)
          , wwwconfig-common
          , sasl2-bin
          , libsasl2-modules
-         , php-cli
+         , php-cli | php7.0-cli | php7.3-cli
          , lockfile-progs (>= 0.1.9)
          , gettext (>= 0.10.40-5)
          , adduser
@@ -150,7 +150,7 @@ Depends: debianutils (>= 1.13.1)
          , dovecot-sieve
          , dovecot-managesieved
          , default-mysql-client | mysql-client | mariadb-client
-         , php5-curl | php7.0-curl
+         , php5-curl | php7.0-curl | php7.3-curl
 	 , lsb-release
          , ${misc:Depends}
 Recommends:
@@ -246,7 +246,7 @@ Architecture: all
 Pre-depends: debconf
 Depends: alternc (>= 3.0~rc1)
        , awstats (>=6.1-1)
-       , php-cli
+       , php-cli | php7.0-cli | php7.3-cli
        , ${misc:Depends}
 Suggests: apachemerge
 Description: Awstats statistics module for AlternC

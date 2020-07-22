@@ -1,0 +1,2 @@
+/var/lib/alternc/bind/** rw,
+/var/lib/alternc/bind/ rw,

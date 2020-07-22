@@ -81,7 +81,9 @@ echo "<p>";
 <input type="password" style="display: none" id="fakePassword" name="fakePassword" value="" />
 
 <table border="1" cellspacing="0" cellpadding="4" class="tedit" >
-<tr><th><?php __("Old password"); ?></th><td><input type="password" class="int" name="oldpass" value="<?php isset($oldpass) ? : $oldpass=""; ehe($oldpass); ?>" size="20" maxlength="128" /></td></tr>
+<?php if ($mem->requires_old_password_for_change()): ?>
+    <tr><th><?php __("Old password"); ?></th><td><input type="password" class="int" name="oldpass" value="<?php isset($oldpass) ? : $oldpass=""; ehe($oldpass); ?>" size="20" maxlength="128" /></td></tr>
+<?php endif; ?>
 <tr><th><?php __("New password"); ?> (1)</th><td><input type="password" class="int" autocomplete="off" id="newpass" name="newpass" value="<?php isset($newpass) ? : $newpass=""; ehe($newpass);  ?>" size="20" maxlength="60" /><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#newpass","#newpass2",$passwd_classcount); ?></td></tr>
 <tr><th><?php __("New password"); ?> (2)</th><td><input type="password" class="int" autocomplete="off" id="newpass2" name="newpass2" value="<?php isset($newpass2) ? : $newpass2=""; ehe($newpass2);?>" size="20" maxlength="61" /></td></tr>
 <tr class="trbtn"><td colspan="3"><input type="submit" class="inb ok" name="submit" value="<?php __("Change my password"); ?>" /></td></tr>
@@ -134,8 +136,13 @@ if ($mem->user["su"]) {
 </div> <!-- tabsmem -->
 
 <script type="text/javascript">
-document.forms['main'].oldpass.focus();
-$(function() {$( "#tabsmem" ).tabs();});
+    if (document.forms['main'].getElementsByClassName("oldpass").length > 0) {
+        document.forms['main'].oldpass.focus();
+    }
+    else {
+        document.getElementById('newpass').focus();
+    }
+    $(function() {$( "#tabsmem" ).tabs();});
 </script>
 
 <?php include_once("foot.php"); ?>

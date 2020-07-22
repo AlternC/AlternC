@@ -55,6 +55,7 @@ class m_bind {
      */
     function hook_updatedomains_dns_add($dominfo) {
         global $L_FQDN,$L_NS1_HOSTNAME,$L_NS2_HOSTNAME,$L_DEFAULT_MX,$L_DEFAULT_SECONDARY_MX,$L_PUBLIC_IP,$L_PUBLIC_IPV6;
+        global $hooks;
 
         $domain = $dominfo["domaine"];
         $ttl = $dominfo["zonettl"];
@@ -68,7 +69,7 @@ class m_bind {
             $serial=date("Ymd")."00";
             $islocked=false;
         }
-        if ($islocked) return;
+        if ($islocked) return 1;
 
         // Prepare a new zonefile from a template
         $zone = file_get_contents($this->ZONE_TEMPLATE);
@@ -77,7 +78,16 @@ class m_bind {
         $zone .= $this->conf_from_db($domain);
 
         // substitute ALTERNC & domain variables
-        $zone = strtr($zone, array(
+        $tokens = array();
+        $user_tokens = $hooks->invoke("hook_bind_dns_tokens", array($domain));
+        foreach ($user_tokens as $c => $result) {
+            if (is_array($result)) {
+                // The first hook to define a token will have it's definition kept,
+                // unless it's for a "default token".
+                $tokens = array_merge($result, $tokens);
+            }
+        }
+        $default_tokens = array(
             "%%fqdn%%" => "$L_FQDN",
             "%%ns1%%" => "$L_NS1_HOSTNAME",
             "%%ns2%%" => "$L_NS2_HOSTNAME",
@@ -92,8 +102,11 @@ class m_bind {
             "@@SERIAL@@" => $serial,
             "@@PUBLIC_IP@@" => "$L_PUBLIC_IP",
             "@@PUBLIC_IPV6@@" => "$L_PUBLIC_IPV6",
-            "@@ZONETTL@@" => $ttl,
-        ));
+            "@@ZONETTL@@" => $ttl
+        );
+        # Preserve the default tokens before all.
+        $tokens = array_merge($tokens, $default_tokens);
+        $zone = strtr($zone, $tokens);
 
         // add the "END ALTERNC CONF line";
         $zone .= ";;; END ALTERNC AUTOGENERATE CONFIGURATION\n";
@@ -117,6 +130,7 @@ class m_bind {
         } else {
             $this->shouldreload=true;
         }
+        return 0;
     }
 
 
@@ -141,9 +155,10 @@ class m_bind {
         ) {
             $this->shouldreconfig=true;
         } else {
-            return;
+            return 0;
         }
         @unlink($this->zone_file_directory."/".$domain);
+        return 0;
     }
 
     
@@ -218,7 +233,11 @@ class m_bind {
         global $db;
         $db->query("
         SELECT 
-          REPLACE(REPLACE(dt.entry,'%TARGET%',sd.valeur), '%SUB%', if(length(sd.sub)>0,sd.sub,'@')) AS ENTRY 
+          REPLACE(REPLACE(dt.entry,'%TARGET%',sd.valeur), '%SUB%', if(length(sd.sub)>0,sd.sub,'@')) AS ENTRY,
+          dt.target AS TARGET,
+          dt.entry  AS ORIGINAL_ENTRY,
+          sd.valeur AS VALEUR,
+          if(length(sd.sub)>0,sd.sub,'@') AS SUB
         FROM 
           sub_domaines sd,
           domaines_type dt 
@@ -226,10 +245,34 @@ class m_bind {
           sd.type=dt.name
           AND sd.enable IN ('ENABLE', 'ENABLED')
           AND sd.web_action NOT IN ('DELETE')
-        ORDER BY ENTRY ;");
+          AND sd.domaine = ?
+        ORDER BY ENTRY ;", array($domain));
         $t="";
         while ($db->next_record()) {
-            $t.= $db->f('ENTRY')."\n";
+            // TXT entries may be longer than 255 characters, but need
+            // special treatment. @see https://kb.isc.org/docs/aa-00356
+            if (strlen($db->f('VALEUR')) >= 256 && $db->f('TARGET') == 'TXT') {
+                $chunks = str_split($db->f('VALEUR'), 255);
+                if ($chunks !== FALSE) {
+                    $new_entry = '';
+                    foreach ($chunks as $chunk) {
+                        $new_entry .= '"' . $chunk . '" ';
+                    }
+                    $new_entry = trim($new_entry, ' ');
+                    $entry = strtr($db->f('ORIGINAL_ENTRY'), array(
+                        '%SUB%' => $db->f('SUB'),
+                        // Don't want extra double quotes in this case
+                        '"%TARGET%"' => $new_entry,
+                    ));
+                }
+                else {
+                    $entry = $db->f('ENTRY');
+                }
+            }
+            else {
+                $entry = $db->f('ENTRY');
+            }
+            $t.= $entry . "\n";
         }
         return $t;
     }
