@@ -88,7 +88,7 @@ class m_bind {
             "@@ns2@@" => "$L_NS2_HOSTNAME",
             "@@DEFAULT_MX@@" => "$L_DEFAULT_MX",
             "@@DEFAULT_SECONDARY_MX@@" => "$L_DEFAULT_SECONDARY_MX",
-            "@@DOMAINE@@" => $domain,
+            "@@DOMAIN@@" => $domain,
             "@@SERIAL@@" => $serial,
             "@@PUBLIC_IP@@" => "$L_PUBLIC_IP",
             "@@PUBLIC_IPV6@@" => "$L_PUBLIC_IPV6",

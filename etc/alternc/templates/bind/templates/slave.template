@@ -1,1 +1,1 @@
-zone "@@DOMAINE@@" { type slave; allow-query { any; }; file "@@DOMAINE@@"; masters { %%public_ip%%; }; };
+zone "@@DOMAIN@@" { type slave; allow-query { any; }; file "@@DOMAIN@@"; masters { %%public_ip%%; }; };
