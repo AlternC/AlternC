@@ -323,17 +323,32 @@ while ($rr=$action->get_action()){
       }
       break;
     default :
-      $output=array("Fail: Sorry dude, i do not know this type of action");
+      $returned = array(
+          'return_val' => -1,
+          'output' => array("Fail: Sorry dude, i do not know this type of action"),
+      );
       break;
   }
-  // Get the error (if exists).
-  if(isset($output[0])){
-    $return=$output[0];
+  // Some of the above cases set $returned when executed_cmd is run, which provides
+  // us with detailed information; however, or cases will leave the value of
+  // $return unchanged and simply append to the error list.
+  // @CLEANUP Fix the consistency problems in the case statement itself instead of
+  // trying to do it here.
+  if (!isset($returned)) {
+      $returned = array(
+          'return_val' => $errorsList ? -1 : 0,
+          'output' => $errorsList,
+      );
+  }
+
+  $output = $returned['output'];
+  $return_value = $returned['return_val'];
+  if ($return_value != 0) {
     $errorsList[]="\nAction n°".$r["id"]." '".$r["type"]."' failed! With user: ".$r["user"]."\nHere is the complete output:\n".print_r($output);
   }
   // We finished the action, notify the DB.
-  d("Finishing... return value is : $return\n");
-  if(!$action->finish($r["id"],addslashes($return))){
+  d("Finishing... return value is : $return_value\n");
+  if(!$action->finish($r["id"], $return_value)){
     $errorsList[]="Cannot finish the action! Error while inserting the error value in the DB for action n°".$r["id"]." : action '".$r["type"]."'\nReturn value: ".addslashes($return)."\n";
     break; // Else we go into an infinite loop... AAAAHHHHHH
   }
