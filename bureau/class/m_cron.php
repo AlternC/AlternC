@@ -363,7 +363,7 @@ class m_cron {
                 // (it's important to do this before removing the old one)
                 if ($i < count($urls)) {
                     $ch = curl_init();
-                    $options[CURLOPT_URL] = $urls[$i++];  // increment i
+                    $options[CURLOPT_URL] = $urls[$i++]['url'];  // increment i
                     curl_setopt_array($ch, $options);
                     if (strtolower(substr($options[CURLOPT_URL], 0, 5)) == "https") {
                         curl_setopt($ch, CURLOPT_CAINFO, m_cron::DEFAULT_CAFILE);
