@@ -253,7 +253,7 @@ NFS_QUOTA=no" >> $CONFIGFILE
     chown root:bind /var/lib/alternc/bind/automatic.conf /var/lib/alternc/bind/slaveip.conf
     chmod 640       /var/lib/alternc/bind/automatic.conf /var/lib/alternc/bind/slaveip.conf
     mkdir -p /run/alternc && chown alterncpanel:alterncpanel /run/alternc
-    mkdir -p /run/alternc/incron && chown alterncpanel::alterncpanel /run/alternc/incron
+    mkdir -p /run/alternc/incron && chown alterncpanel:alterncpanel /run/alternc/incron
     touch /run/alternc/refresh_slave
     /usr/lib/alternc/slave_dns
     # Apache will not start without this file
