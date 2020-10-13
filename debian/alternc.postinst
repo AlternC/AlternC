@@ -114,10 +114,10 @@ SQLBACKUP_OVERWRITE=""
 ALTERNC_SLAVES=""
 
 # File to look at for forced launch of update_domain (use incron)
-INOTIFY_UPDATE_DOMAIN="/run/alternc/inotify_update_domain.lock"
+INOTIFY_UPDATE_DOMAIN="/run/alternc/incron/inotify_update_domain.lock"
 
 # File to look at for forced launch of do_actions (use incron)
-INOTIFY_DO_ACTION="/run/alternc/inotify_do_action.lock"
+INOTIFY_DO_ACTION="/run/alternc/incron/inotify_do_action.lock"
 
 # AlternC Locations
 ALTERNC_HTML=""
@@ -273,6 +273,7 @@ NFS_QUOTA=no" >> $CONFIGFILE
             apparmor_parser -r -T -W "usr.sbin.named" || true
         fi
     fi
+    mkdir -p /run/alternc/incron && chown alterncpanel::alterncpanel /run/alternc/incron
     touch /run/alternc/refresh_slave
     /usr/lib/alternc/slave_dns
 
