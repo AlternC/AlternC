@@ -1,1 +1,1 @@
-/run/alternc/incron/ IN_CREATE,IN_ATTRIB,IN_NO_LOOP /usr/lib/alternc/inotify_do_actions.sh
+/run/alternc/incron/inotify_do_action.lock IN_CREATE,IN_ATTRIB,IN_NO_LOOP /usr/lib/alternc/inotify_do_actions.sh
