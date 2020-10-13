@@ -273,7 +273,7 @@ NFS_QUOTA=no" >> $CONFIGFILE
             apparmor_parser -r -T -W "usr.sbin.named" || true
         fi
     fi
-    mkdir -p /run/alternc/incron && chown alterncpanel::alterncpanel /run/alternc/incron
+    mkdir -p /run/alternc/incron && chown alterncpanel:alterncpanel /run/alternc/incron
     touch /run/alternc/refresh_slave
     /usr/lib/alternc/slave_dns
 
