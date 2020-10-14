@@ -17,7 +17,11 @@ This project native language is French, and the code is commented in English. Th
 
 [Pour installer AlternC, merci de suivre la documentation d'installation](https://alternc.com/Install-fr)
 
-### Upgrading from AlternC 3.[1,2,3].11
+### Upgrading from AlternC 3.[1,2,3].11 or earlier
+
+The recommended process for upgrading is to upgrade to 3.3.12 before upgrading to 3.5. If
+you choose to upgrade directly to 3.5 from an earlier version, please read this information
+as there is a risk of a loss of data.
 
 AlternC >= 3.5 removes integrates alternc-ssl and alternc-admintools in the the core AlternC package.
 
