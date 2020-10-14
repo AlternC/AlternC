@@ -264,3 +264,12 @@ _Description: Remote mysql: connection error
  .
  This is a fatal error and will cause the package installation
  to fail.
+
+Template: alternc/confirm_unsupported_upgrade
+Type: boolean
+_Description: This upgrade may incur data loss. Continue anyway?
+ When upgrading from AlternC < 3.3.12 to AlternC 3.5, sub domains
+ with SSL will be lost. It is recommended to upgrade to 3.3.12
+ before upgrading to 3.5.
+ .
+ If you chose to not continue, this package installation will fail.
