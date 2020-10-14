@@ -136,9 +136,6 @@ pre {
   vertical-align: middle;
   line-height: 15px;
 }
-input.ui-state-hover {
-    font-weight: normal;
-}
 
 span.inb {
   display: inline-block;
@@ -286,7 +283,6 @@ img {
 }
 .alert > p, .alert > ul {
     margin-bottom: 0;
-    margin-top: 0;
 }
 .alert > p + p {
     margin-top: 5px;
@@ -348,14 +344,10 @@ img {
 .alert-danger a{
     color: #6F2B2A;
 }
-.alert-danger-tr {
-  background-color: #F2DEDE !important;
-}
-
 
 /* Alert icons */
 #content .alert {
-    background-position: 12px center;
+    background-position: 12px 10px;
     background-repeat: no-repeat;
     padding-left: 48px;
 }
@@ -383,14 +375,6 @@ img {
   color: red;
 }
 
-.mandatory {
-  color: red;
-  font-weight: bold;
-  vertical-align: super;
-  font-size: small;
-  line-height: normal;
-}
-
 .code {
   font-size: 16px;
   font-family: Courier New, Fixed;
@@ -411,19 +395,6 @@ img {
   border-radius: 10px;  
   box-shadow: 1px 1px 15px #555;
   background-color: #F0F0F4;
-}
-
-@media screen and (min-width: 1000px) {
-  #global {
-    margin: 20px 50px;
-    width: auto;
-    display: flex;
-  }
-
-  #content {
-    flex: 1;
-    width: auto;
-  }
 }
 
 /* Main container */
@@ -614,11 +585,11 @@ table.searchtable td {
 
 }
 
-#newdomwww, #sub, #usernpfx, #dbnpfx, #account_namefx {
+#newdomwww, #sub, #usernpfx, #dbnpfx {
   border-right: 0;
   padding-right: 0;
 }
-#newdomain, #newsubname, #usern, #dbn, #account_name {
+#newdomain, #newsubname, #usern, #dbn {
   border-left: 0;
   padding-left: 0;
 }
@@ -1022,6 +993,13 @@ div.progress-bar div.txt {
   padding-left: 30px;
 }
 
+.ssl a, a.ssl, input.ssl, .ssl-menu .menu-title {
+  background-image: url(../images/ssl.png);
+  background-repeat: no-repeat;
+  background-position: 8px 3px;
+  padding-left: 30px;
+}
+
 .filter a, a.edit, input.filter {
   background-image: url(../icon/filter.png);
   background-repeat: no-repeat;
@@ -1085,115 +1063,10 @@ body .ui-widget-content a {
   outline:none;
 }
 
-.info-toggle {
-  background: none repeat scroll 0 0 #CFE3F1;
-  border: 1px solid #CCCCCC;
-  border-radius: 15px 15px 15px 15px;
-  margin: 16px 0;
-  padding: 0 16px;
+textarea.cert {
+    font-family: Courier New, Courier, monospace, fixed;
+    font-size: 12px;
 }
-
-th.headerSortUp { 
-  background-image: url(../images/asc.gif); 
-  background-repeat: no-repeat;
-  background-position: right; 
-  cursor: pointer; 
-  background-color: #3399FF; 
-} 
-
-th.headerSortDown { 
-  background-image: url(../images/desc.gif); 
-  background-repeat: no-repeat;
-  background-position: right; 
-  cursor: pointer; 
-  background-color: #3399FF; 
-} 
-
-.sub-disabled {
-  text-decoration: line-through;
-}
-
-.login_page #global {
-        max-width: 1000px !important;
-        margin: 20px auto !important;
-        width: auto !important;
-}
-
-
-
-.login_page .unsecure {
-        font-size: 1.1em;
-        width: 90%;
-        margin-bottom: 1em;
-}
-
-.login_page #content {
-        padding: 10px;
-        width: auto;
-}
-.login_page #logo, .login_page .alternc_powered {
-        text-align:center;
-}
-
-.login_page .block_list {
-        display: flex;
-        flex-flow: row wrap;
-}
-.login_page .block_login_page {
-        margin: 10px;
-        width: 420px;
-}
-
-.login_page .menu-box .menu-title {
-        text-align: center;
-        font-weight: bold;
-        font-size: 1.2em;
-}
-
-.login_page .menu-box .menu-content {
-        margin: 15px;
-}
-.login_page .menu-box .menu-content > div {
-        margin-bottom: 7px;
-}
-.login_page .menu-box .menu-content label {
-        width: 30%;
-        display: inline-block;
-}
-.login_page .menu-box .menu-content input {
-        width: 60%;
-}
-.login_page .menu-box .menu-content .submit {
-        text-align: center;
-}
-.login_page .menu-box .menu-content input[type='submit']{
-        width: 100px;
-        height: 2em;
-}
-
-.toggle_menu {
-	display: none;
-	position: fixed;
-	top: 10px;
-	right: 10px;
-	z-index: 1000;
-}
-
-@media (max-width:980px) {
-        .login_page .block_login_page {
-                width: 100%;
-        }
-
-        .login_page #global {
-                margin: 0 !important;
-        }
-	#global {
-		display: block;
-		width: auto;
-	}
-
-	#menu, #content {
-		float: none;
-		width:auto;
-	}
+textarea[readonly='readonly'] {
+  background-color: #ddd;
 }
