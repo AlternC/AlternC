@@ -1,3 +1,10 @@
+alternc (3.3.10) stable; urgency=low
+
+  * Version identical to 3.1 for Squeeze
+  * Includes small patches / dependency for apache & dovecot 2.0 for Jessie
+
+ -- Benjamin Sonntag <benjamin@sonntag.fr>  Fri, 15 Jan 2016 15:26:00 +0100
+
 alternc (3.2.10) oldstable; urgency=low
 
   * Version identical to 3.1 for Squeeze
