@@ -1,7 +1,6 @@
 #!/bin/bash
 
 set -e
-
 . /usr/share/debconf/confmodule
 
 # Create AlternC Panel user for web server
@@ -64,6 +63,15 @@ case "$1" in
             echo "/etc/bind/master was not empty. Please remove it manually."
     fi
 
+    if dpkg --compare-versions "$2" lt "3.3.12"; then
+        db_input high alternc/confirm_unsupported_upgrade
+        db_go
+        db_get alternc/confirm_unsupported_upgrade
+        if [ "$RET" == "false" ] ; then
+           echo "User chose to abort installation" >&2
+           exit 1
+        fi
+    fi
     ;;
 
   abort-upgrade)
