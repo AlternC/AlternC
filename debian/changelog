@@ -1,3 +1,16 @@
+alternc (3.3.12) UNRELEASED; urgency=medium
+
+  * Transition release for folks running AlternC 3.1, 3.2, or 3.3
+  * alternc-ssl no longer automatically removes data when the package is
+    removed or purged
+  * Fix infinite loop when looking for matching certificats (#207)
+  * Fix e-mail last login time for MariaDB
+  * Fix spoolsize recording for deleted databases and cleanup when
+    deleting databases
+  * Fix database account creation
+  * Release targeting Debian jessie and Debian stretch
+ -- Kienan Stewart <kienan.stewart@koumbit.org>  Wed, 14 Oct 2020 15:54:03 -0400
+
 alternc (3.3.10) stable; urgency=low
 
   * Version identical to 3.1 for Squeeze
