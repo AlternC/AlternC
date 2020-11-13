@@ -1105,14 +1105,14 @@ ORDER BY
         $dmarc = str_replace("%%USERMAIL%%", $login . "@" . $L_FQDN, $dmarc);
 
         // Search for the record in sub_domaines table
-        $db->query("SELECT * FROM sub_domaines WHERE compte= ? AND domaine= ? AND sub='_dmarc' AND type='txt' AND valeur LIKE 'v=dmarc1;%' AND web_action!='DELETE';", array($uid, $domain));
+        $db->query("SELECT * FROM sub_domaines WHERE compte= ? AND domaine= ? AND sub='_dmarc' AND type='txt' AND valeur LIKE lower('v=DMARC1;%') AND web_action!='DELETE';", array($uid, $domain));
         if ($db->next_record()) {
-            if ($previous !== -1 && $db->Record["valeur"] == "v=dmarc1;" . $dmarc) {
+            if ($previous !== -1 && $db->Record["valeur"] == "v=DMARC1;" . $dmarc) {
                 return; // skip, no change asked.
             }
             $db->query("UPDATE sub_domaines SET web_action='DELETE' WHERE id= ?;", array($db->Record["id"]));
         }
-        $db->query("INSERT INTO sub_domaines SET compte= ?, domaine= ?, sub='_dmarc', type='txt', valeur= ?, web_action='UPDATE';", array($uid, $domain, "v=dmarc1;" . $dmarc));
+        $db->query("INSERT INTO sub_domaines SET compte= ?, domaine= ?, sub='_dmarc', type='txt', valeur= ?, web_action='UPDATE';", array($uid, $domain, "v=DMARC1;" . $dmarc));
         $db->query("UPDATE domaines SET dns_action='UPDATE' WHERE domaine= ?;", array($domain));
     }
 
@@ -1124,7 +1124,7 @@ ORDER BY
      */ 
     function del_dns_dmarc($domain) {
         global $db;
-        $db->query("UPDATE sub_domaines SET web_action='DELETE' WHERE domaine= ? AND type='txt' AND sub='' AND valeur LIKE 'v=dmarc1 %';", array($domain));
+        $db->query("UPDATE sub_domaines SET web_action='DELETE' WHERE domaine= ? AND type='txt' AND sub='_dmarc' AND valeur LIKE lower('v=DMARC1;%');", array($domain));
     }
     
 
