@@ -1124,7 +1124,7 @@ ORDER BY
      */ 
     function del_dns_dmarc($domain) {
         global $db;
-        $db->query("UPDATE sub_domaines SET web_action='DELETE' WHERE domaine= ? AND type='txt' AND sub='_dmarc';", array($domain));
+        $db->query("UPDATE sub_domaines SET web_action='DELETE' WHERE domaine= ? AND type='txt' AND sub='_dmarc' AND valeur LIKE lower('v=DMARC1;%');", array($domain));
     }
     
 
