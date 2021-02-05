@@ -1489,6 +1489,14 @@ class m_admin {
             $msg->raise("ALERT", "admin", _("Please enter a login"));
             return false;
         }
+
+        // We've at least checked that login was not empty. The rest of the
+        // checks are done on the password and it doesn't make sense to
+        // continue if we have an empty password that is permitted.
+        if (empty($password) && $canbeempty) {
+            return true;
+        }
+
         if (empty($password) && !$canbeempty) {
             $msg->raise("ALERT", "admin", _("Please enter a password"));
             return false;
@@ -1500,21 +1508,21 @@ class m_admin {
             return false;
         }
         $pol = $pol[$policy];
-        // Ok, now let's check it : 
+        // Ok, now let's check it :
         $plen = strlen($password);
 
-        if ($plen < $pol["minsize"] && !($canbeempty && empty($password))) {
+        if ($plen < $pol["minsize"]) {
             $msg->raise("ERROR", "admin", _("The password length is too short according to the password policy"));
             return false;
         }
 
-        if ($plen > $pol["maxsize"] && !($canbeempty && empty($password))) {
+        if ($plen > $pol["maxsize"]) {
             $msg->raise("ERROR", "admin", _("The password is too long according to the password policy"));
             return false;
         }
 
         if (!$pol["allowlogin"]) {
-            // We do misc check on password versus login : 
+            // We do misc check on password versus login :
             $logins = preg_split("/[@_-]/", $login);
             $logins[] = $login;
             foreach ($logins as $l) {
@@ -1528,7 +1536,7 @@ class m_admin {
             }
         }
 
-        if ($pol["classcount"] > 0 && !($canbeempty && empty($password))) {
+        if ($pol["classcount"] > 0) {
             $cls = array(0, 0, 0, 0, 0);
             for ($i = 0; $i < strlen($password); $i++) {
                 $p = substr($password, $i, 1);
@@ -1550,7 +1558,7 @@ class m_admin {
                 return false;
             }
         }
-        return true; // congratulations ! 
+        return true; // congratulations !
     }
 
 
