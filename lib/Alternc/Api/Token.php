@@ -126,6 +126,22 @@ class Alternc_Api_Token {
         return $s;
     }
 
+    /**
+     * Remove all expired tokens
+     * @param $db PDO a PDO object representing AlternC's database.
+     *
+     * @return NULL
+     */
+    public static function clearExpired($db) {
+        if (!($db instanceof PDO)) {
+            throw new \Exception("Parameter is not an instance of PDO.", self::ERR_DATABASE_ERROR);
+        }
+        $result = $db->query("DELETE FROM token WHERE expire < NOW()");
+        if ($result === FALSE) {
+            throw new \Exception("Database query failed: ". $db->Error);
+        }
+    }
+
 }
 
 // class Alternc_Api_Response
