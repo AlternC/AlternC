@@ -131,6 +131,10 @@ class Alternc_Api_Service {
         if (!$request instanceof Alternc_Api_Request)
             throw new \Exception("request must be an Alternc_Api_Request object", self::ERR_INVALID_ARGUMENT);
 
+        // Make sure that no expired tokens are present when we verify the
+        // validity of the given token
+        Alternc_Api_Token::clearExpired($this->db);
+
         // we set the token in the Service object, so that other classes can use it :) 
         $this->token = Alternc_Api_Token::tokenGet($request->token_hash, $this->db);
         if ($this->token instanceof Alternc_Api_Response)  // bad token
