@@ -37,6 +37,7 @@ getFields($fields);
 $dom->lock();
 
 if (!$dom->add_domain($newdomain,$dns,0,0,$newisslave,$slavedom)) {
+	$dom->unlock();
 	include("dom_add.php");
 	exit();
 } else

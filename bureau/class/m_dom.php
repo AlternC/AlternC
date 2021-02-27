@@ -459,6 +459,7 @@ class m_dom {
 
         // function add_domain($domain,$dns,$noerase=0,$force=0,$isslave=0,$slavedom="") 
         if (!$this->add_domain($domain, true, false, true)) {
+            $this->unlock();
             $msg->raise("ERROR", 'dom', "Error adding domain");
             return false;
         }
@@ -642,6 +643,7 @@ class m_dom {
 
         $this->lock();
         if (!$r = $this->get_domain_all($domain)) {
+            $this->unlock();
             return false;
         }
         $this->unlock();
