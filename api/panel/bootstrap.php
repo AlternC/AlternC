@@ -72,6 +72,7 @@ $mem=new m_mem();
 $err=new m_err();
 $authip=new m_authip();
 $hooks=new m_hooks();
+$msg = new m_messages();
 
 
 for($i=0;$i<count($classes);$i++) {
