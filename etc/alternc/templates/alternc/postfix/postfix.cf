@@ -40,7 +40,7 @@ smtpd_sasl_security_options = noanonymous
 broken_sasl_auth_clients = yes
 smtpd_sasl_type=dovecot
 smtpd_sasl_path=private/auth
-smtpd_sasl_auth_enable=no
+smtpd_sasl_auth_enable=yes
 #### Virtual Mapping
 alias_maps = hash:/etc/aliases
 alias_database = hash:/etc/aliases
