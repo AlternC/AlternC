@@ -1084,7 +1084,7 @@ class m_mysql {
      * @param $db_login the login to access the SQL db
      * @param $db_password the password to access the SQL db
      * @param $db_client the client to access the SQL db
-     * @return an array associating the name of the databases to their sizes : array(dbname=>size)
+     * @return an array associating the name of the databases to their size in bytes : array(dbname=>size)
      */
     function get_dbus_size($db_name, $db_host, $db_login, $db_password, $db_client) {
         global $msg;
@@ -1092,20 +1092,12 @@ class m_mysql {
 
         $this->dbus = new DB_Sql("mysql",$db_host,$db_login,$db_password);
 
-        $this->dbus->query("SHOW DATABASES;");
-        $alldb=array();
-        while ($this->dbus->next_record()) {
-            $alldb[] = $this->dbus->f("Database");
-        }
-
         $res = array();
-        foreach($alldb as $dbname) {
-            $c = $this->dbus->query("SHOW TABLE STATUS FROM $dbname;");
-            $size = 0;
-            while ($this->dbus->next_record()) {
-                $size+=$this->dbus->f("Data_length") + $this->dbus->f("Index_length");
-            }
-            $res["$dbname"] = "$size";
+        # Note: this returns the size in bytes
+        $this->dbus->query("SELECT table_schema, SUM(data_length + index_length) AS size FROM information_schema.tables GROUP BY table_schema;");
+
+        while ($this->dbus->next_record()) {
+            $res[$this->dbus->f("table_schema")] = $this->dbus->f("size");
         }
         return $res;
     }
