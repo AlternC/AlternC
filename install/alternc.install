@@ -349,7 +349,7 @@ rm -f $SED_SCRIPT
 
 # add php.ini directives for AlternC in any installed php version:
 php="`ls /usr/lib/apache*/*/*php*.so | sed -e 's/^.*libphp\(.*\)\.so$/\1/' | tail -1`"
-if [ "$php" = "7.0" ]
+if ! [[ "$php" < "7" ]]
 then
     ln -fs /etc/alternc/alternc.ini /etc/php/$php/apache2/conf.d/alternc.ini || true
     ln -fs /etc/alternc/alternc.ini /etc/php/$php/cli/conf.d/alternc.ini || true
