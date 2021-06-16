@@ -13,3 +13,5 @@ if [ -e "$INOTIFY_DO_ACTION" ] ; then
     /usr/lib/alternc/do_actions.php
     rm "$INOTIFY_DO_ACTION"
 fi
+
+exit 1
