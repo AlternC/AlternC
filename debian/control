@@ -43,7 +43,7 @@ Depends: debianutils (>= 1.13.1)
        , php-cli | php7.0-cli | php7.3-cli
        , lockfile-progs (>= 0.1.9)
        , gettext (>= 0.10.40-5)
-       , sudo
+       , sudo | sudo-ldap
        , adduser
        , dnsutils
        , dovecot-core (>=1:2.1.7)
@@ -135,7 +135,7 @@ Depends: debianutils (>= 1.13.1)
          , lockfile-progs (>= 0.1.9)
          , gettext (>= 0.10.40-5)
          , adduser
-         , sudo
+         , sudo | sudo-ldap
          , dovecot-core (>=1:2.1.7)
          , dovecot-imapd (>=1:2.1.7)
          , dovecot-pop3d (>=1:2.1.7)
