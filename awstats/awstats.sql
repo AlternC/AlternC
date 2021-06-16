@@ -6,8 +6,7 @@ CREATE TABLE IF NOT EXISTS `aws` (
   `public` INT(1) unsigned NOT NULL DEFAULT '1',
   `hostaliases` TEXT,
   PRIMARY KEY  (`id`)
-) Engine=MyISAM COMMENT='Statistiques web par Awstats';
-
+);
 
 
 CREATE TABLE IF NOT EXISTS `aws_users` (
@@ -16,7 +15,7 @@ CREATE TABLE IF NOT EXISTS `aws_users` (
   `pass` varchar(38) NOT NULL,
   PRIMARY KEY (`login`),
   INDEX (`uid`)
-) COMMENT = 'Comptes pouvant accéder aux stats awstats.';
+);
 
 
 CREATE TABLE IF NOT EXISTS `aws_access` (
@@ -24,5 +23,5 @@ CREATE TABLE IF NOT EXISTS `aws_access` (
 `uid` int(10) unsigned NOT NULL,
 `login` varchar(128) NOT NULL,
 INDEX (`id`)
-) COMMENT = 'Qui peut accéder aux stats awstats ';
+);
 
