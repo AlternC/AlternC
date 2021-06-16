@@ -13,3 +13,6 @@ if [ -e "$INOTIFY_UPDATE_DOMAIN" ] ; then
     /usr/lib/alternc/update_domains.sh
     rm "$INOTIFY_UPDATE_DOMAIN"
 fi
+
+exit 1
+
