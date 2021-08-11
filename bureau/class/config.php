@@ -211,6 +211,7 @@ if ($oldid && $oldid != $cuid) {
 
 // Init some vars
 variable_get('hosting_tld', '', 'This is a FQDN that designates the main hostname of the service. For example, hosting_tld determines in what TLD the "free" user domain is created. If this is set to "example.com", a checkbox will appear in the user creation dialog requesting the creator if he wants to create the domain "username.example.com".', array('desc' => 'Wanted FQDN', 'type' => 'string'));
+variable_get('free_domain_enable_dns', '0', 'If this is set to a non-zero, non-empty value then the "free" user domain created for accounts (based on hosting_tld) will have DNS entries and e-mails available. Otherwise, only the default sub-domains as defined will be created (this is the default behaviour)', array('desc' => 'Enable DNS for free domains?', 'type' => 'boolean'));
 
 variable_get('subadmin_restriction', '0', "This variable sets the way the account list works for accounts other than 'admin' (2000). 0 (default) = admin other than admin/2000 can see their own account, but not the other one 1 = admin other than admin/2000 can see any account by clicking the ''show all accounts'' link.", array('desc' => 'Shared access activated?', 'type' => 'boolean'));
 
