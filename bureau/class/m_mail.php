@@ -327,6 +327,13 @@ ORDER BY
         return $res;
     }
 
+    function hook_mail_delete_for_real($mail_id, $address) {
+        global $db;
+        // Clean up dovecot_quota table; otherwise users will continue to see
+        // the e-mail addresses as if they are taking spaceo n the server.
+        $db->query("DELETE FROM dovecot_quota WHERE user = ?;", array($address));
+    }
+
     function hook_mail_get_details($detail) {
         if ($detail['type'] == 'catchall') {
             return _(sprintf("Special mail address for catch-all. <a href='mail_manage_catchall.php?domain_id=%s'>Click here to manage it.</a>", $detail['domain_id']));
