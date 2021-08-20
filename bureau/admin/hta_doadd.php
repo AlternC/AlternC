@@ -37,7 +37,6 @@ if(empty($dir)) {
 	$is_include=true;
 	include("hta_add.php");
 } else {
-	$msg->raise("INFO", "hta", _("Folder %s is protected"), $dir);
 	include("hta_list.php");
 }
 ?>
