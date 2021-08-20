@@ -71,6 +71,7 @@ class m_hta {
             $msg->raise("ERROR", "hta", _("The folder '%s' does not exist"), $dir);
             return false;
         }
+        $param = "AuthUserFile \"$absolute/.htpasswd\"\nAuthName \"" . _("Restricted area") . "\"\nAuthType Basic\nrequire valid-user\n";
         if (!file_exists("$absolute/.htaccess")) {
             $file = @fopen("$absolute/.htaccess", "w+");
             if (!$file) {
@@ -78,15 +79,23 @@ class m_hta {
                 return false;
             }
             fseek($file, 0);
-            $param = "AuthUserFile \"$absolute/.htpasswd\"\nAuthName \"" . _("Restricted area") . "\"\nAuthType Basic\nrequire valid-user\n";
             fwrite($file, $param);
             fclose($file);
+            $msg->raise("INFO", "hta", _("Added .htaccess file to restrict '%s' to valid users"), array($dir));
+        }
+        else {
+            # The .htaccess file already exists, and we don't try to overwrite the existing
+            # contents, therefore we inform that they need to make the modifications to
+            # the htaccess file manually.
+            $msg->raise("ALERT", "hta", _("The .htaccess file already existed in '%s', you must add the following lines manually to '%s'\n"), array($dir, $dir . "/.htaccess"));
+            $msg->raise("ALERT", "hta", $param);
         }
         if (!file_exists("$absolute/.htpasswd")) {
             if (!@touch("$absolute/.htpasswd")) {
                 $msg->raise("ERROR", "hta", _("Error creating .htpasswd file: ") . error_get_last()['message']);
                 return false;
             }
+            $msg->raise("INFO", "hta", _("Added .htpasswd to Folder '%s', you may now add users who will be able to access it."), $dir);
             return true;
         }
         return true;
