@@ -1928,7 +1928,7 @@ class m_dom {
                 }
 
                 if ($onedom["dns_action"]=="DELETE") {
-                    $db->query("DELETE FROM domaines WHERE domaine=?;",array($onedom));
+                    $db->query("DELETE FROM domaines WHERE domaine=?;",array($onedom['domaine']));
                 } else {
                     // we keep the highest result returned by hooks...
                     rsort($ret,SORT_NUMERIC); $returncode=$ret[0];

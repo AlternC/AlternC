@@ -2133,7 +2133,7 @@ msgstr ""
 #~ msgstr "Controlado localemente"
 
 #, fuzzy
-#~ msgid "Clic here to generate a password"
+#~ msgid "Click here to generate a password"
 #~ msgstr "Please enter a password"
 
 #, fuzzy
