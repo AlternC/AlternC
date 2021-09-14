@@ -29,8 +29,7 @@ include_once("head.php");
 $userslist = $piwik->users_list();
 $quotapiwik = $quota->getquota('piwik');
 
-// TODO - Put the limit of piwik users (here at 3) as a variable in alternC
-if ($quotapiwik['t'] > 0 && count($userslist) < 3) {
+if ($quotapiwik['t'] > 0 && count($userslist) < $quotapiwik['t']) {
 ?>
 <h3><?php __("Create a new piwik account");?></h3>
 <?php
@@ -51,7 +50,7 @@ echo $msg->msg_html_all(true, true);
 	<input type="submit" name="submit" class="inb" value="<?php __("Create"); ?>" />
 	</tr>
 	</table>
-	<i>(<?php ehe("Max. 3 accounts"); ?>)</i>
+	<i>(<?php ehe(sprintf(_("Max. %d accounts"), $quotapiwik['t'])); ?>)</i>
 </form>
 <script type="text/javascript">
     document.forms['main'].account_name.focus();

@@ -28,18 +28,20 @@ require_once("../class/config.php");
 $userslist = $piwik->users_list();
 $quotapiwik = $quota->getquota('piwik');
 
-if (!($quotapiwik['t'] > 0 && count($userslist) < 3)) {
-	$msg->raise("ERROR", "piwik", _("You cannot add any new Piwik account, your quota is over.")." ("._("Max. 3 accounts").")");
+if (!($quotapiwik['t'] > 0 && count($userslist) < $quotapiwik['t'])) {
+  $msg->raise("ERROR", "piwik", _("You cannot add any new Piwik account, your quota is over.")." (".sprintf(_("Max. %d accounts"), $quotapiwik['t']).")");
+}
+else {
+  $fields = array (
+      "account_name" => array ("post", "string", ""),
+      "account_mail" => array ("post", "string", ""),
+  );
+  getFields($fields);
+
+  if ($piwik->user_add($account_name, $account_mail) ) {
+    $msg->raise("INFO", "piwik", _('Successfully added piwik account'));
+  }
 }
 
-$fields = array (
-	"account_name" 		=> array ("post", "string", ""),
-	"account_mail" 		=> array ("post", "string", ""),
-);
-getFields($fields);
-
-if ($piwik->user_add($account_name, $account_mail) ) {
-  $msg->raise("INFO", "piwik", _('Successfully added piwik account'));
-}
 include_once("piwik_userlist.php");
 ?>
