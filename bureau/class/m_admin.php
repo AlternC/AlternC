@@ -638,6 +638,16 @@ class m_admin {
             $msg->raise("ERROR", "admin", _("Login can only contains characters a-z, 0-9 and -"));
             return false;
         }
+        // Additional checks before a user is created
+        // Do not create the account if any hook returned false
+        $before_add_hook_data = $hooks->invoke('hook_before_alternc_add_member', [$login]);
+        foreach($before_add_hook_data as $create) {
+          if(!$create) {
+              $msg->raise("ERROR", "admin", _("-- I cannot create this account --"));
+              return false;
+          }
+        }
+
         $pass = password_hash($pass, PASSWORD_BCRYPT);
         $db = new DB_System();
         // Already exist?
