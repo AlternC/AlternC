@@ -1138,7 +1138,7 @@ class m_bro {
         if ($depth>20) {
             $msg->log("bro", "CANCELING _delete($file) TOO DEEP");
         }
-        if (is_dir($file)) {
+        if (is_dir($file) && !is_link($file)) {
             $handle = opendir($file);
             if (!$handle) { 
                 rmdir($file); // let's try it anyway...
