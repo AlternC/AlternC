@@ -17,6 +17,7 @@ debian/alternc-roundcube
 debian/alternc-slave
 debian/alternc-squirrelmail
 debian/alternc-upnp
+debian/alternc-common-php*
 debian/files
 debian/.debhelper
 debian/debhelper-build-stamp
