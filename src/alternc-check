@@ -1,4 +1,4 @@
-#!/usr/bin/php
+#!/usr/bin/php-alternc-wrapper
 <?php
 
 // TODO : we should accept a "-n" option that will mean : "don't do any action, but tell us" :) 

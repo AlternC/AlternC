@@ -1,4 +1,4 @@
-#!/usr/bin/php
+#!/usr/bin/php-alternc-wrapper
 <?php
 /**
  * This script set the required variables for AlternC at install time. 

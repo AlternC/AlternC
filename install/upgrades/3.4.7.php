@@ -1,4 +1,4 @@
-#!/usr/bin/php
+#!/usr/bin/php-alternc-wrapper
 <?php
 
 // we don't check our AlternC session

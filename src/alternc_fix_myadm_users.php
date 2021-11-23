@@ -1,4 +1,4 @@
-#!/usr/bin/php
+#!/usr/bin/php-alternc-wrapper
 <?php
 
    /* Fix the $uid_myadm mysql users access.

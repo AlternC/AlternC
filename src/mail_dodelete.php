@@ -1,4 +1,4 @@
-#!/usr/bin/php -q
+#!/usr/bin/php-alternc-wrapper -q
 <?php
 // Launch the hooks for a real deletion of the mail whose ID is in parameters
 

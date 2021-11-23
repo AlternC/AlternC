@@ -1,4 +1,4 @@
-#!/usr/bin/php -q
+#!/usr/bin/php-alternc-wrapper -q
 <?php
 /*
  $Id: reset_root.php,v 1.1 2005/01/19 05:37:18 anarcat Exp $

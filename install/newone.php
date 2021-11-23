@@ -1,4 +1,4 @@
-#!/usr/bin/php -q
+#!/usr/bin/php-alternc-wrapper -q
 <?php
 /*
  $Id: newone.php,v 1.6 2006/02/17 15:15:54 olivier Exp $

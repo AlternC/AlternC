@@ -1,4 +1,4 @@
-#!/usr/bin/php -q
+#!/usr/bin/php-alternc-wrapper -q
 <?php
 
 // Script de migration des données LDAP vers les bases MYSQL de mx/imap

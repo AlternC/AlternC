@@ -1,4 +1,4 @@
-#!/usr/bin/php -q
+#!/usr/bin/php-alternc-wrapper -q
 <?php
 /*
    $Id: do_actions.php,v 1.0 2013/04/19 13:40:32 axel Exp $
@@ -60,7 +60,7 @@ if( !defined("ALTERNC_DO_ACTION_LOCK")){
     define("ALTERNC_DO_ACTION_LOCK",'/run/alternc/do_actions_cron.lock');
 }
 
-$SCRIPT='/usr/bin/php do_actions.php';
+$SCRIPT='/usr/bin/php-alternc-wrapper do_actions.php';
 $MY_PID=getmypid();
 $FIXPERM='/usr/lib/alternc/fixperms.sh';
 

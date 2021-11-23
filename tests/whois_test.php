@@ -1,4 +1,4 @@
-#!/usr/bin/php
+#!/usr/bin/php-alternc-wrapper
 <?php
 
 // test de la fonction whois : 

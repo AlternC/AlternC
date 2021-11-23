@@ -1,4 +1,4 @@
-#!/usr/bin/php
+#!/usr/bin/php-alternc-wrapper
 <?php
 /*
  function called as a hook during alternc update_domains.sh as follow: 

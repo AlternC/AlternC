@@ -74,7 +74,7 @@ for file in $( ls $extensions | sort -n ) ; do
 			  ) | mysql --defaults-file=/etc/alternc/my.cnf -f
 			  ;;
 		      php)
-		  	  php -q $file
+		  	  php-alternc-wrapper -q $file
 			  echo "UPDATE alternc_status SET value='$file' WHERE name='alternc_version';" | 
 			    mysql --defaults-file=/etc/alternc/my.cnf -f
 			  ;;

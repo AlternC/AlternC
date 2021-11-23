@@ -1,4 +1,4 @@
-#!/usr/bin/php -q
+#!/usr/bin/php-alternc-wrapper -q
 <?php
 
 // Set the available memory to a large enough variable to be able to handle quite busy servers :) 

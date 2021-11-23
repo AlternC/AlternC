@@ -1,4 +1,4 @@
-#!/usr/bin/php
+#!/usr/bin/php-alternc-wrapper
 <?php
  // create the missing opendkim keys and update dns zones accordingly when necessary.
 

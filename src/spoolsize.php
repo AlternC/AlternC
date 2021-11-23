@@ -1,4 +1,4 @@
-#!/usr/bin/php -q
+#!/usr/bin/php-alternc-wrapper -q
 <?php
 
 require_once("/usr/share/alternc/panel/class/config_nochk.php");
