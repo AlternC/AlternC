@@ -1,0 +1,16 @@
+#!/bin/bash
+
+##Default php value
+php="/usr/bin/php"
+
+dpkg -s alternc-common-php5 >/dev/null 2>&1
+if [ "$?" ]; then
+    php="/usr/bin/php5.6"
+fi
+
+dpkg -s alternc-common-php7.0 >/dev/null 2>&1
+if [ "$?" ]; then
+    php="/usr/bin/php7.0"
+fi
+
+exec $php "$@"

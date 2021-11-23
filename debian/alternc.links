@@ -1,3 +1,4 @@
 /usr/share/alternc/install/alternc.install usr/sbin/alternc.install
+/usr/lib/alternc/php-alternc-wrapper usr/bin/php-alternc-wrapper
 fr_FR usr/share/alternc/panel/locales/fr_CA
 en_US usr/share/alternc/panel/locales/en_GB
