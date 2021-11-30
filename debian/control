@@ -16,7 +16,8 @@ Pre-depends: debconf (>= 0.5.00) | debconf-2.0
            , bash (>= 4)
            , acl
 Depends: debianutils (>= 1.13.1)
-       , apache2-mpm-itk | libapache2-mpm-itk
+       , apache2
+       , libapache2-mpm-itk
        , libapache2-mod-php5 | libapache2-mod-php7.0
        , php5-mysql | php7.0-mysql
        , php-curl | php5-curl | php7.0-curl
@@ -106,7 +107,8 @@ Package: alternc-slave
 Architecture: all
 Pre-depends: debconf (>= 0.5.00) | debconf-2.0, acl
 Depends: debianutils (>= 1.13.1)
-         , apache2-mpm-itk | libapache2-mpm-itk
+         , apache2
+         , libapache2-mpm-itk
          , libapache2-mod-php5 | libapache2-mod-php7.0
          , php5-mysql | php7.0-mysql
          , php-curl | php5-curl | php7.0-curl
