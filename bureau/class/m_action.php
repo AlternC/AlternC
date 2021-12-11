@@ -325,7 +325,7 @@ class m_action {
      */
     function reset_job($id) {
         global $db, $msg;
-        if (!$db->query("update actions set end=0,begin=0,status='' where id= ?;", array($id))) {
+        if (!$db->query("update actions set end=0,begin=0,status=0 where id= ?;", array($id))) {
             $msg->raise("ERROR", "action", _("Error unlocking the action : $id"));
             return false;
         }
