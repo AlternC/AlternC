@@ -1956,7 +1956,7 @@ class m_dom {
 
 
         // Search for things to do on SUB-DOMAINS:
-        $db->query("SELECT sd.*, dt.only_dns FROM domaines_type dt, sub_domaines sd WHERE dt.name=sd.type AND sd.web_action!='OK';");
+        $db->query("SELECT sd.*, dt.only_dns FROM domaines_type dt, sub_domaines sd WHERE dt.name=sd.type AND sd.web_action!='OK' ORDER BY sd.id;");
         $alldoms=array();
         $ignore=array();
         $delete=array();
