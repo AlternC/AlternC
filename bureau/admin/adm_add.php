@@ -60,7 +60,7 @@ echo $msg->msg_html_all();
 
 <table class="tedit">
 <tr><th><label for="login"><?php __("Username"); ?></label><span class="mandatory">*</span></th><td>
-	<input type="text" class="int" name="login" id="login" autocomplete="off" value="<?php ehe($login); ?>" size="20" maxlength="16" />
+	<input type="text" class="int" name="login" id="login" autocomplete="off" value="<?php ehe($login); ?>" size="20" maxlength="<?php echo variable_get('sql_max_username_length', 16); ?>" />
 </td></tr>
 <tr>
 	<th><label for="pass"><?php __("Initial password"); ?></label><span class="mandatory">*</span></th>
