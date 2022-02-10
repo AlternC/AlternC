@@ -1,7 +1,0 @@
-etc/alternc
-etc/alternc/templates/squirrelmail
-etc/alternc/templates/apache2
-etc/squirrelmail
-usr/lib/alternc/install.d
-usr/share/alternc/panel/class
-usr/share/squirrelmail/plugins/alternc_changepass
