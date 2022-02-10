@@ -4,7 +4,6 @@ etc/bind
 etc/bind/templates
 etc/phpmyadmin
 etc/postfix
-etc/squirrelmail
 usr/bin
 usr/lib/alternc
 usr/sbin
