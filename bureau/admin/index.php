@@ -106,7 +106,7 @@ if ( empty($logo) ||  ! $logo ) {
       <div class="block_login_page">
         <?php
 
-          // Here we used to have a form to enter the squirrelmail's webmail.
+          // Here we used to have a form to enter the webmail.
           // Following the "rule of less astonishment, we try to put it here again, even though the webmail is now a plugin.
           $res=$hooks->invoke("hook_admin_webmail");
         if (($wr=variable_get("webmail_redirect")) && isset($res[$wr]) && $res[$wr]) {

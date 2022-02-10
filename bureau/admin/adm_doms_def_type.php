@@ -20,7 +20,7 @@
 /**
  * Manages default domain types, 
  * they are the subdomains automatically installed on a domain when you host it.
- * AlternC's modules such as squirrelmail or roundcube may create new ones, you'll see them here
+ * AlternC's modules such as roundcube may create new ones, you'll see them here
  *
  * @copyright AlternC-Team 2000-2017 https://alternc.com/ 
  */
