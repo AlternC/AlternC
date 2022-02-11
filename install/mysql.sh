@@ -127,7 +127,7 @@ database=
 
 [client]
 EOF
-    chown root:www-data $MYSQL_CONFIG
+    chown root:alterncpanel $MYSQL_CONFIG
     chmod 640 $MYSQL_CONFIG
 fi
 
@@ -145,7 +145,7 @@ database=
 
 [client]
 EOF
-    chown root:www-data $MYSQL_MAIL_CONFIG
+    chown root:alterncpanel $MYSQL_MAIL_CONFIG
     chmod 640 $MYSQL_MAIL_CONFIG
 fi
 # create a sed script to create/update the file
