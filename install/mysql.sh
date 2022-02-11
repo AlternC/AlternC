@@ -144,7 +144,7 @@ host="$host"
 user="$user"
 password="$password"
 EOF
-    chown root:www-data "$filename"
+    chown root:alterncpanel "$filename"
     chmod 640 "$filename"
 }
 
