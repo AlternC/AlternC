@@ -17,14 +17,14 @@ Pre-depends: debconf (>= 0.5.00) | debconf-2.0
            , acl
 Depends: debianutils (>= 1.13.1)
        , apache2-mpm-itk | libapache2-mpm-itk
-       , libapache2-mod-php5 | libapache2-mod-php7.0 | libapache2-mod-php7.3
-       , php5-mysql | php7.0-mysql | php7.3-mysql
-       , php-curl | php5-curl | php7.0-curl | php7.3-curl
+       , libapache2-mod-php5 | libapache2-mod-php7.0 | libapache2-mod-php7.3 | libapache2-mod-php7.4
+       , php5-mysql | php7.0-mysql | php7.3-mysql | php7.4-mysql
+       , php-curl | php5-curl | php7.0-curl | php7.3-curl | php7.4-curl
        , phpmyadmin
        , ssl-cert
        , libjs-prettify
        , libjs-jquery
-       , libjs-jquery-tablesorter       
+       , libjs-jquery-tablesorter
        , libjs-jquery-ui
        , libjs-jquery-ui-theme-redmond
        , postfix
@@ -40,7 +40,7 @@ Depends: debianutils (>= 1.13.1)
        , wwwconfig-common
        , sasl2-bin
        , libsasl2-modules
-       , php-cli | php7.0-cli | php7.3-cli
+       , php-cli | php7.0-cli | php7.3-cli | php7.4-cli
        , lockfile-progs (>= 0.1.9)
        , gettext (>= 0.10.40-5)
        , sudo
@@ -105,14 +105,14 @@ Architecture: all
 Pre-depends: debconf (>= 0.5.00) | debconf-2.0, acl
 Depends: debianutils (>= 1.13.1)
          , apache2-mpm-itk | libapache2-mpm-itk
-         , libapache2-mod-php5 | libapache2-mod-php7.0 | libapache2-mod-php7.3
-         , php5-mysql | php7.0-mysql | php7.3-mysql
-         , php-curl | php5-curl | php7.0-curl | php7.3-curl
+         , libapache2-mod-php5 | libapache2-mod-php7.0 | libapache2-mod-php7.3 | libapache2-mod-php7.4
+         , php5-mysql | php7.0-mysql | php7.3-mysql | php7.4-mysql
+         , php-curl | php5-curl | php7.0-curl | php7.3-curl | php7.4-curl
          , phpmyadmin
          , ssl-cert
          , libjs-prettify
          , libjs-jquery
-         , libjs-jquery-tablesorter       
+         , libjs-jquery-tablesorter
          , libjs-jquery-ui
          , libjs-jquery-ui-theme-redmond
          , postfix
