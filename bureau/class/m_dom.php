@@ -584,6 +584,7 @@ class m_dom {
 
         $db->query("update sub_domaines set enable= ? where id = ? ;", array($status, intval($sub_id)));
         $this->set_dns_action($jh['domain'], 'UPDATE');
+        $this->set_web_action($sub_id, 'UPDATE');
 
         return true;
     }
@@ -1998,6 +1999,13 @@ class m_dom {
                 if ($subdom["web_action"]=="DELETE") {
                     $db->query("DELETE FROM sub_domaines WHERE id=?;",array($id));
                 } else {
+		    // Set sub-domain status
+                    if (strtoupper($subdom["enable"])=="DISABLE") {
+                        $db->query("UPDATE sub_domaines SET enable='DISABLED' WHERE id=?;",array($id));
+                    }
+                    else if (strtoupper($subdom["enable"])=="ENABLE") {
+                        $db->query("UPDATE sub_domaines SET enable='ENABLED' WHERE id=?;",array($id));
+                    }
                     // we keep the highest result returned by hooks...
                     rsort($ret,SORT_NUMERIC); $returncode=$ret[0];
                     $db->query("UPDATE sub_domaines SET web_result=?, web_action='OK' WHERE id=?;",array($returncode,$id));
@@ -2016,6 +2024,15 @@ class m_dom {
     function set_dns_action($domain, $dns_action) {
         global $db;
         $db->query("UPDATE domaines SET dns_action= ? WHERE domaine= ?; ", array($dns_action, $domain));
+        return true;
+    }
+
+    /**
+     * @param string $web_action
+     */
+    function set_web_action($sub_id, $dns_action) {
+        global $db;
+        $db->query("UPDATE sub_domaines SET web_action= ? WHERE id= ?; ", array($dns_action, $sub_id));
         return true;
     }
 
