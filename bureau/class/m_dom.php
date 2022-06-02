@@ -1987,9 +1987,6 @@ class m_dom {
                 // is it a delete (DISABLED or DELETE)
                 if ($subdom["web_action"]=="DELETE" || strtoupper(substr($subdom["enable"],0,7))=="DISABLE") {
                     $ret = $hooks->invoke("hook_updatedomains_web_del",array($subdom["id"]));
-                    if (strtoupper(substr($subdom["enable"],0,7))=="DISABLE") {
-                        $db->query("UPDATE sub_domaines SET enable=\"DISABLED\" WHERE id=?;",array($id));
-                    }
                 } else {
                     $hooks->invoke("hook_updatedomains_web_before",array($subdom["id"])); // give a chance to get SSL cert before ;) 
                     $ret = $hooks->invoke("hook_updatedomains_web_add",array($subdom["id"]));
