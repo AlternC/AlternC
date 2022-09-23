@@ -68,7 +68,7 @@ class m_bind {
             $serial=date("Ymd")."00";
             $islocked=false;
         }
-        if ($islocked) return;
+        if ($islocked) return 1;
 
         // Prepare a new zonefile from a template
         $zone = file_get_contents($this->ZONE_TEMPLATE);
@@ -117,6 +117,7 @@ class m_bind {
         } else {
             $this->shouldreload=true;
         }
+        return 0;
     }
 
 
@@ -141,9 +142,10 @@ class m_bind {
         ) {
             $this->shouldreconfig=true;
         } else {
-            return;
+            return 0;
         }
         @unlink($this->zone_file_directory."/".$domain);
+        return 0;
     }
 
     
