@@ -1,16 +1,17 @@
 #!/bin/bash
 
-PERCENT=$1
-DOM="`echo $USER | sed -e 's/.*@//'`"
+PERCENT="$1"
+MAILUSER="$2"
+DOM="$(echo "${MAILUSER}" | sed -e 's/.*@//')"
 FROM="postmaster@$DOM"
 
-msg="From: $FROM
-To: $USER
+cat <<EOF | /usr/lib/dovecot/deliver -d "${MAILUSER}" -o "plugin/quota=maildir:User quota:noenforcing"
+From: $FROM
+To: $MAILUSER
 Subject: Your email quota is $PERCENT% full
 Content-Type: text/plain; charset=UTF-8
 
 Your mailbox is now $PERCENT% full."
 
-echo -e "$msg" | /usr/sbin/sendmail -f $FROM "$USER"
-
+EOF
 exit 0
