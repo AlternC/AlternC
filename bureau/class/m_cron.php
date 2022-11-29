@@ -236,11 +236,12 @@ class m_cron {
                     echo "Will run cron :\n" . print_r($u, true) . "\n";
                 $urllist[] = $u;
             }
-
-            if (empty($urllist)) { // nothing to do : 
-                exit(0);
-            }
         }
+
+        if (empty($urllist)) { // nothing to do : 
+            exit(0);
+        }
+        
         // cron_callback($url, $content, $curlobj) will be called at the end of each http call.
         $this->rolling_curl($urllist, array("m_cron", "cron_callback"));
     }
@@ -358,12 +359,11 @@ class m_cron {
                         break;
                     }
                 }
-
                 // If there is more: start a new request
                 // (it's important to do this before removing the old one)
                 if ($i < count($urls)) {
                     $ch = curl_init();
-                    $options[CURLOPT_URL] = $urls[$i++];  // increment i
+                    $options[CURLOPT_URL] = $urls[$i++]["url"];  // increment i
                     curl_setopt_array($ch, $options);
                     if (strtolower(substr($options[CURLOPT_URL], 0, 5)) == "https") {
                         curl_setopt($ch, CURLOPT_CAINFO, m_cron::DEFAULT_CAFILE);
