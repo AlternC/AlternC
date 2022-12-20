@@ -41,8 +41,27 @@ class m_bind {
      * @NOTE launched as ROOT 
      */
     function hook_updatedomains_dns_pre() {
+        global $msg;
+
         $this->shouldreload=false;
         $this->shouldreconfig=false;
+
+        //Prevent some race condition with dynamic zone (as dns-sec behavior)
+        $ret=0;
+        exec($this->RNDC." sync -clean 2>&1",$out,$ret);
+        if ($ret!=0) {
+            $msg->raise("ERROR","bind","Error while sync bind, error code is $ret\n".implode("\n",$out));
+        } else {
+            $msg->raise("INFO","bind","Bind sync done");
+        }
+
+        $ret=0;
+        exec($this->RNDC." freeze 2>&1",$out,$ret);
+        if ($ret!=0) {
+            $msg->raise("ERROR","bind","Error while freeze bind, error code is $ret\n".implode("\n",$out));
+        } else {
+            $msg->raise("INFO","bind","Bind freeze done");
+        }
     }
 
 
@@ -171,6 +190,15 @@ class m_bind {
      */ 
     function hook_updatedomains_dns_post() {
         global $msg;
+
+        $ret=0;
+        exec($this->RNDC." thaw 2>&1",$out,$ret);
+        if ($ret!=0) {
+            $msg->raise("ERROR","bind","Error while thawing bind, error code is $ret\n".implode("\n",$out));
+        } else {
+            $msg->raise("INFO","bind","Bind thaw done");
+        }
+
         if ($this->shouldreload) {
             $ret=0;
             exec($this->RNDC." reload 2>&1",$out,$ret);
