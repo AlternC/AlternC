@@ -293,6 +293,8 @@ PROFTPD_SFTP_PORT=2222" >> $CONFIGFILE
     touch           /var/lib/alternc/bind/automatic.conf /var/lib/alternc/bind/slaveip.conf
     chown root:bind /var/lib/alternc/bind/automatic.conf /var/lib/alternc/bind/slaveip.conf
     chmod 640       /var/lib/alternc/bind/automatic.conf /var/lib/alternc/bind/slaveip.conf
+    chown root:bind /var/lib/alternc/bind/zones/
+    chmod 775       /var/lib/alternc/bind/zones/
     mkdir -p /run/alternc && chown alterncpanel:alterncpanel /run/alternc
     # Bind Apparmor Override, required by default on >= Buster
     if [ -f '/etc/apparmor.d/usr.sbin.named' ] ; then
