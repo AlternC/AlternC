@@ -252,6 +252,8 @@ NFS_QUOTA=no" >> $CONFIGFILE
     touch           /var/lib/alternc/bind/automatic.conf /var/lib/alternc/bind/slaveip.conf
     chown root:bind /var/lib/alternc/bind/automatic.conf /var/lib/alternc/bind/slaveip.conf
     chmod 640       /var/lib/alternc/bind/automatic.conf /var/lib/alternc/bind/slaveip.conf
+    chown root:bind /var/lib/alternc/bind/zones/
+    chmod 775       /var/lib/alternc/bind/zones/
     mkdir -p /run/alternc && chown alterncpanel:alterncpanel /run/alternc
     touch /run/alternc/refresh_slave
     /usr/lib/alternc/slave_dns
