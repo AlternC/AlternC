@@ -4,7 +4,7 @@ require_once("../class/config_nochk.php");
 
 $request = FALSE;
 $valid_request = TRUE;
-if (isset($_REQUEST['name_or_email'])) {
+if (isset($_REQUEST['name'])) {
     $request = TRUE;
     // Inserted into the global namespace by config.php
     $valid_request = !$fatalcsrf;
@@ -19,7 +19,7 @@ if (isset($_REQUEST['name_or_email'])) {
 $show_form =  !$request || ($request && !$valid_request);
 
 if ($request && $valid_request) {
-    $mem->send_reset_url($_REQUEST['name_or_email']);
+    $mem->send_reset_url($_REQUEST['name']);
 }
 
 if (!isset($charset) || ! $charset) {
@@ -53,8 +53,8 @@ require_once("html-head.php");
                             <form action="request_reset.php" method="post" name="passwordreset">
                                 <?php csrf_get(); ?>
                                 <div>
-                                    <label for="name_or_email"><?php echo _('Username or e-mail'); ?></label>
-                                    <input type="text" class="int" name="name_or_email">
+                                    <label for="name"><?php echo _('Username'); ?></label>
+                                    <input type="text" class="int" name="name">
                                 </div>
                                 <div class="submit"><input type="submit" class="inb" name="submit"></div>
                             </form>

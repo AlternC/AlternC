@@ -1606,7 +1606,7 @@ msgstr "Le dossier %s a été effacé avec succès"
 
 #: ../admin/bro_main.php:79
 msgid "The file '%s' was successfully created"
-msgstr "Le fihier été créé avec succès"
+msgstr "Le fichier a été créé avec succès"
 
 #: ../admin/bro_main.php:94
 msgid "The folder '%s' was successfully deleted"

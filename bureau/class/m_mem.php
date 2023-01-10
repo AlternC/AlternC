@@ -685,20 +685,19 @@ Cordially.
     /**
      * Sends a password-reset URL.
      */
-    public function send_reset_url($email_or_login) {
+    public function send_reset_url($login) {
         global $msg, $L_FQDN, $L_HOSTING, $db;
-        // Look up user by email_or_login.
-        $db->query("SELECT * FROM membres WHERE login = ? OR mail = ? ;", array($email_or_login, $email_or_login));
+        // Look up user by login.
+        // 'mail' is not a unique key so we can't rely on it.
+        $db->query("SELECT * FROM membres WHERE login = ? ;", array($login));
 
-        $msg->log('mem', 'send_reset_url', 'Password reset requested for: ' . $email_or_login);
+        $msg->log('mem', 'send_reset_url', 'Password reset requested for: ' . $login);
         // Give user feedback, even if we don't have an account stored.
         $msg->raise('INFO', 'mem', _('An e-mail with information on how to connect has been sent to the owner of the account if one exists'));
 
-        // It is possible here that a user could have multiple accounts for a
-        // single e-mail since 'mail' is not a uniqe key in the membres table.
-        // For the moment we'll just take the first account.
+        // Get the corresponding account.
         if (!$db->num_rows()) {
-            $msg->log('mem', 'send_reset_url', 'No member found with login or mail ' . $email_or_login);
+            $msg->log('mem', 'send_reset_url', 'No member found with login ' . $login);
             return FALSE;
         }
         if ($db->num_rows()) {
@@ -728,10 +727,10 @@ This link may only be used once. You should change your password in your account
     }
 
     /**
-     * Generate a reset URL for an account given it's e-mail or login.
+     * Generate a reset URL for an account given its login.
      *
-     * @param $email_or_login
-     *   A string with the email or login.
+     * @param $login
+     *   A string with the login.
      *
      * @returns string|boolean
      *   A reset URL or FALSE in case of error.
