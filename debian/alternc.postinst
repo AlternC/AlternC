@@ -271,7 +271,7 @@ NFS_QUOTA=no" >> $CONFIGFILE
 
         # Reload the profile, including any abstraction updates
         if aa-enabled --quiet 2>/dev/null; then
-            apparmor_parser -r -T -W "usr.sbin.named" || true
+            apparmor_parser -r -T -W /etc/apparmor.d/usr.sbin.named || true
         fi
     fi
     touch /run/alternc/refresh_slave
