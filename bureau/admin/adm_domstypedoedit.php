@@ -45,12 +45,10 @@ $fields = array (
 );
 getFields($fields);
 
-if (! $dom->domains_type_update($name, $description, $target, $entry, $compatibility, $enable, $only_dns, $need_dns, $advanced,$create_tmpdir,$create_targetdir) ) {
-    include("adm_domstypedoedit.php");
-} else {
+if ($dom->domains_type_update($name, $description, $target, $entry, $compatibility, $enable, $only_dns, $need_dns, $advanced,$create_tmpdir,$create_targetdir) ) {
     $msg->raise("INFO", "admin", _("Domain type is updated"));
-    include("adm_domstype.php");
 }
+include("adm_domstype.php");
 ?>
 
 
