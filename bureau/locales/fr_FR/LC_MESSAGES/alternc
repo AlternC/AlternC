@@ -729,6 +729,10 @@ msgstr "Aucun jeu de sélectionné !"
 msgid "The Statistics has been successfully changed"
 msgstr "Le jeu de statistiques a été modifié avec succès"
 
+#: ../admin/aws_doedit.php:96
+msgid "Quota exceed maximum size allowed"
+msgstr "Le quota demandé excéde le quota maximum autorisé"
+
 #: ../admin/aws_list.php:30
 msgid "No statistics currently defined"
 msgstr "Aucun jeu de statistiques de défini"

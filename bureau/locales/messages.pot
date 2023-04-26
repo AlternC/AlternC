@@ -2856,6 +2856,10 @@ msgid ""
 "contains! You will <b>NOT</b> be able to get it back!"
 msgstr ""
 
+#: ../admin/mail_doedit.php:96
+msgid "Quota exceed maximum size allowed"
+msgstr ""
+
 #: ../admin/mail_doedit.php:116
 msgid "Your email has been created successfully"
 msgstr ""
