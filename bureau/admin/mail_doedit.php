@@ -25,12 +25,15 @@
 
 require_once("../class/config.php");
 
+$mail_quota_max_hard=variable_get("mail_quota_max_hard",0);
+
+
 $fields = array (
 		 "mail_id" =>array ("post","integer",""),
 		 "new_account" =>array ("post","integer",""),
 		 "pass" => array ("post","string",""),
 		 "passconf" => array("post","string",""),
-		 "quotamb" => array("post","integer",0),
+		 "quotamb" => array("post","integer",$mail_quota_max_hard),
 		 "enabled" => array("post","boolean",true),
 		 "islocal" => array("post","boolean",true),
 		 "recipients" => array("post","string",""),
@@ -89,6 +92,11 @@ if (!$res=$mail->get_details($mail_id)) {
     }
   }
 
+  if ($mail_quota_max_hard > 0 && $quotamb > $mail_quota_max_hard) {
+    $msg->raise("ERROR", "mail", _("Quota exceed maximum size allowed"));
+    include ("mail_edit.php");
+    exit();
+  }
 
   /* 
    * now the islocal + quota + recipients 
