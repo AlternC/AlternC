@@ -4028,6 +4028,10 @@ msgstr "Mo"
 msgid "Maximum allowed size of this Mailbox"
 msgstr "Taille maximale autorisé pour cette boite aux lettres"
 
+#: ../admin/mail_edit.php:105
+msgid "Mailbox size can't exceed"
+msgstr "La taille maximale ne peut excéder"
+
 #: ../admin/mail_edit.php:110
 msgid ""
 "WARNING: turning POP/IMAP off will DELETE the stored messages in this email "

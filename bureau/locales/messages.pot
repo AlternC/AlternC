@@ -2927,6 +2927,10 @@ msgstr ""
 msgid "Maximum allowed size of this Mailbox"
 msgstr ""
 
+#: ../admin/mail_edit.php:105
+msgid "Mailbox size can't exceed"
+msgstr ""
+
 #: ../admin/mail_edit.php:110
 msgid ""
 "WARNING: turning POP/IMAP off will DELETE the stored messages in this email "

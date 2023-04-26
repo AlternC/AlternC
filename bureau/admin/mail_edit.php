@@ -102,7 +102,7 @@ echo $msg->msg_html_all();
           <tr id='mail_edit_pass' style='display: none;'><td colspan='2'><a href='javascript:mail_edit_pass();'><?php __("Click here to edit the existing password");?></a></td></tr>
 	  <tr id='mail_edit_pass1'><td><label for="pass"><?php __("Enter a POP/IMAP password"); ?></label></td><td><input type="password" class="int" autocomplete="off" name="pass" id="pass" value="" size="20" maxlength="32" /><?php display_div_generate_password(DEFAULT_PASS_SIZE,"#pass","#passconf",$passwd_classcount); ?></td></tr>
 	  <tr id='mail_edit_pass2'><td><label for="passconf"><?php __("Confirm password"); ?></label></td><td><input type="password" class="int" autocomplete="off" name="passconf" id="passconf" value="" size="20" maxlength="32" /></td></tr>
-	  <tr><td><label for="quotamb"><?php __("Maximum allowed size of this Mailbox"); ?></label></td><td><input type="text" class="int intleft" style="text-align: right" name="quotamb" id="quotamb" value="<?php ehe($quotamb); ?>" size="7" maxlength="6" /><span class="int intright"><?php __("MB"); ?></span></td></tr>
+	  <tr><td><label for="quotamb"><?php __("Maximum allowed size of this Mailbox"); if(variable_get("mail_quota_max_hard")){?><br/><?php __("Mailbox size can't exceed") ; echo " ".variable_get("mail_quota_max_hard"); __("MB"); }?></label></td><td><input type="text" class="int intleft" style="text-align: right" name="quotamb" id="quotamb" value="<?php ehe($quotamb); ?>" size="7" maxlength="6" /><span class="int intright"><?php __("MB"); ?></span></td></tr>
 	</table>
       </div>
   </td></tr>
