@@ -74,6 +74,10 @@ msgstr "Ce TLD existe déjà"
 msgid "err_admin_13"
 msgstr "Le login est trop long (16 caractères maximum)"
 
+#. The account '%s' cannot be created. %s
+msgid "err_admin_19"
+msgstr "Le compte '%s' ne peut être créé. %s"
+
 #. Domain names
 msgid "quota_dom"
 msgstr "Noms de domaines"

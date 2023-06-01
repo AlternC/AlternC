@@ -1601,18 +1601,22 @@ msgid "Quit"
 msgstr "Fermer"
 
 #: ../admin/bro_main.php:73
+#, php-format
 msgid "The folder '%s' was successfully created"
 msgstr "Le dossier %s a été effacé avec succès"
 
 #: ../admin/bro_main.php:79
+#, fuzzy, php-format
 msgid "The file '%s' was successfully created"
 msgstr "Le fihier été créé avec succès"
 
 #: ../admin/bro_main.php:94
+#, php-format
 msgid "The folder '%s' was successfully deleted"
 msgstr "Le dossier %s a été effacé avec succès"
 
 #: ../admin/bro_main.php:96
+#, php-format
 msgid "The file '%s' was successfully deleted"
 msgstr "Le fichier %s a été effacé avec succès"
 
@@ -1663,10 +1667,12 @@ msgid "The files / folders were successfully moved"
 msgstr "Les fichiers /  répertoires %s ont été déplacé avec succès"
 
 #: ../admin/bro_main.php:153
+#, php-format
 msgid "The folder '%s' was successfully renamed to '%s'"
 msgstr "Le dossier '%s' a été renommé '%s' avec succès"
 
 #: ../admin/bro_main.php:155
+#, php-format
 msgid "The file '%s' was successfully renamed to '%s'"
 msgstr "Le fichier '%s' a été renommé '%s' avec succès"
 
@@ -1675,6 +1681,7 @@ msgid "The files / folders were successfully renamed"
 msgstr "Les fichiers / répertoires ont été renommés avec succès"
 
 #: ../admin/bro_main.php:162
+#, php-format
 msgid "The file '%s' was successfully uploaded"
 msgstr "Le fichier '%s' a été téléversé avec succès"
 
@@ -1683,6 +1690,7 @@ msgid "The permissions were successfully set"
 msgstr "Les permissions ont été appliquées avec succès"
 
 #: ../admin/bro_main.php:175
+#, php-format
 msgid "The extraction of the file '%s' succeeded"
 msgstr "L'extraction du fichier '%s' a été effectuée avec succés"
 
@@ -2702,10 +2710,12 @@ msgid "Folder %s is protected"
 msgstr ""
 
 #: ../admin/hta_doadduser.php:45
+#, php-format
 msgid "The user %s was added to the protected folder %s"
 msgstr "L'utilisateur %s a été ajouté au répertoire protégé %s"
 
 #: ../admin/hta_dodeluser.php:39
+#, php-format
 msgid "The user '%s' was successfully deleted"
 msgstr "L'utilisateur %s a été effacée avec succès"
 
@@ -4260,6 +4270,7 @@ msgid "Create this new MySQL user"
 msgstr "Créer ce nouvel utilisateur MySQL"
 
 #: ../admin/sql_users_del.php:38 ../class/m_mysql.php:770
+#, php-format
 msgid "The user '%s' has been successfully deleted"
 msgstr "L'utilisateur MySQL %s a été effacé avec succès"
 
@@ -4280,10 +4291,12 @@ msgid "Yes, delete the MySQL user"
 msgstr "Oui, effacer cet utilisateur MySQL"
 
 #: ../admin/sql_users_doadd.php:41 ../admin/sql_users_doadd.php:50
+#, php-format
 msgid "The user '%s' has been successfully created."
 msgstr "L'utilisateur %s a été ajouté avec succès"
 
 #: ../admin/sql_users_dopassword.php:35
+#, php-format
 msgid "Password changed for user '%s'."
 msgstr "Mot de passe changé pour l'utilisateur '%s'."
 
@@ -4983,6 +4996,10 @@ msgstr "Le nom d'utilisateur est trop long (14 caractères maximum)"
 #: ../class/m_admin.php:633
 msgid "Login can only contains characters a-z, 0-9 and -"
 msgstr "Le nom d'utilisateur ne peut contenir que les caractères a-z, 0-9 et -"
+
+#: ../class/m_admin.php:647
+msgid "The account '%s' cannot be created. %s"
+msgstr "Le compte '%s' ne peut être créé. %s"
 
 #: ../class/m_admin.php:672
 msgid "This login already exists"
