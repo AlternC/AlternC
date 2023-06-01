@@ -5764,6 +5764,10 @@ msgstr ""
 msgid "Login can only contains characters a-z, 0-9 and -"
 msgstr "In de login kunnen alleen gebruikt worden a-z, 0-9 en -"
 
+#: ../class/m_admin.php:647
+msgid "The account '%s' cannot be created. %s"
+msgstr ""
+
 #: ../class/m_admin.php:672
 msgid "This login already exists"
 msgstr "Deze login bestaat al"
