@@ -2928,7 +2928,7 @@ msgstr "Adresse IP incorrecte"
 
 #: ../admin/ip_main.php:200
 msgid "Add an IP or a networks"
-msgstr "Ajouter une adresse iP ou un réseau"
+msgstr "Ajouter une adresse IP ou un réseau"
 
 #: ../admin/ip_main.php:210
 msgid "IP or network. <i>IPv4, IPv6 and subnet allowed</i>"
