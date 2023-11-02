@@ -253,7 +253,6 @@ NFS_QUOTA=no" >> $CONFIGFILE
     chown root:bind /var/lib/alternc/bind/automatic.conf /var/lib/alternc/bind/slaveip.conf
     chmod 640       /var/lib/alternc/bind/automatic.conf /var/lib/alternc/bind/slaveip.conf
     mkdir -p /run/alternc && chown alterncpanel:alterncpanel /run/alternc
-    mkdir -p /run/alternc/incron && chown alterncpanel:alterncpanel /run/alternc/incron
     # Bind Apparmor Override, required by default on >= Buster
     if [ -f '/etc/apparmor.d/usr.sbin.named' ] ; then
         if ! grep -q 'usr.sbin.named-alternc' /etc/apparmor.d/usr.sbin.named ; then
@@ -274,6 +273,7 @@ NFS_QUOTA=no" >> $CONFIGFILE
             apparmor_parser -r -T -W /etc/apparmor.d/usr.sbin.named || true
         fi
     fi
+    mkdir -p /run/alternc/incron && chown alterncpanel:alterncpanel /run/alternc/incron
     touch /run/alternc/refresh_slave
     /usr/lib/alternc/slave_dns
 

@@ -8,7 +8,7 @@ dans lequel on a des fichiers .po en vrac (normalement 1 ou 2 fichiers .po par m
 
 Le fichier alternc.mo est donc construit à partir de TOUS les fichiers .po d'une même langue.
 
-Pour mettre a jour les fichiers .po a partir des sources : 
+Pour mettre a jour les fichiers .po a partir des sources (avoir le paquet gettext):
 
 cd bureau/locales
 make 
@@ -36,7 +36,7 @@ to translate AlternC in any language.
 When the programm is updated, the po files in locales/ are changed to
 reflect the new developped features.
 
-You can just call the makefile to have the files regenerated:
+You can just call the makefile to have the files regenerated (you'll need the gettext package):
 
 cd bureau/locales
 make

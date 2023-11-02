@@ -677,15 +677,6 @@ touch /etc/opendkim/TrustedHosts /etc/opendkim/SigningTable /etc/opendkim/KeyTab
 grep -q "^127.0.0.1\$" /etc/opendkim/TrustedHosts || echo "127.0.0.1" >>/etc/opendkim/TrustedHosts
 grep -q "^localhost\$" /etc/opendkim/TrustedHosts || echo "localhost" >>/etc/opendkim/TrustedHosts
 grep -q "^$PUBLIC_IP\$" /etc/opendkim/TrustedHosts || echo "$PUBLIC_IP" >>/etc/opendkim/TrustedHosts
-if [ "$(lsb_release -s -c)" == 'stretch' ] ; then
-    /lib/opendkim/opendkim.service.generate
-    # Without adding '-u opendkim' after the service file is generated, opendkim
-    # will run as root, which we do not want.
-    if [ "$(grep -c 'u opendkim' /etc/systemd/system/opendkim.service.d/override.conf)" == 0 ] ; then
-        sed -i -e 's/inet:8891@127.0.0.1/& -u opendkim/' /etc/systemd/system/opendkim.service.d/override.conf
-    fi
-    systemctl daemon-reload
-fi
 
 if [[ "$SYSTEMD" = "1" && ! "$(lsb_release -s -c)" =~ ^(jessie|wheezy)$ ]] ; then
     /lib/opendkim/opendkim.service.generate

@@ -143,7 +143,7 @@ echo "*** In progress: mysql.sql imported\n";
 
 $db                                     = new \DB_system($database, $user, $password);
 $cuid                                   = 0;
-$msg                                  = new \m_messages();
+$msg                                    = new \m_messages();
 $mem                                    = new \m_mem();
 $err                                    = new \m_err();
 $authip                                 = new \m_authip();
