@@ -213,8 +213,7 @@ if [ -r /etc/alternc/my.cnf ]; then
     # * add a right quote operator at the end of line (;s)
     # * convert mysql variables into our MYSQL_ naming convention (;s)
     # * print the result (;p)
-    MYSQL_PASS_ESC=$(echo "$MYSQL_PASS" | sed -e 's/[\/&^$]/\\&/g')
-    eval `sed -n -e "/=/{s/ *= *\"\?/='/;s/\"\?\$/'/;s/host/MYSQL_HOST/;s/user/MYSQL_USER/;s/password/MYSQL_PASS_ESC/;s/database/MYSQL_DATABASE/;p}" /etc/alternc/my.cnf`
+    eval `sed -n -e "/=/{s/ *= *\"\?/='/;s/\"\?\$/'/;s/host/MYSQL_HOST/;s/user/MYSQL_USER/;s/password/MYSQL_PASS/;s/database/MYSQL_DATABASE/;p}" /etc/alternc/my.cnf`
     chown root:alterncpanel /etc/alternc/my.cnf
     chmod 640 /etc/alternc/my.cnf
 fi
@@ -227,8 +226,7 @@ if [ -r /etc/alternc/my_mail.cnf ]; then
     # * add a right quote operator at the end of line (;s)
     # * convert mysql variables into our MYSQL_ naming convention (;s)
     # * print the result (;p)
-    MYSQL_MAIL_PASS_ESC=$(echo "$MYSQL_MAIL_PASS" | sed -e 's/[\/&^$]/\\&/g')
-    eval `sed -n -e "/=/{s/ *= *\"\?/='/;s/\"\?\$/'/;s/host/MYSQL_HOST/;s/user/MYSQL_MAIL_USER/;s/password/MYSQL_MAIL_PASS_ESC/;s/database/MYSQL_DATABASE/;p}" /etc/alternc/my_mail.cnf`
+    eval `sed -n -e "/=/{s/ *= *\"\?/='/;s/\"\?\$/'/;s/host/MYSQL_HOST/;s/user/MYSQL_MAIL_USER/;s/password/MYSQL_MAIL_PASS/;s/database/MYSQL_DATABASE/;p}" /etc/alternc/my_mail.cnf`
     chown root:alterncpanel /etc/alternc/my_mail.cnf
     chmod 640 /etc/alternc/my_mail.cnf
 fi
