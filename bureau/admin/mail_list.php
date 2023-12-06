@@ -121,8 +121,8 @@ if (empty($allmails_list) && empty($search)) {
 $i=0;
 //listing of every mail of the current domain.
 if(!empty($mails_list)) {
- while (list($key,$val)=each($mails_list)) {
-  $grey="";
+  foreach($mails_list as $key=>$val) {
+    $grey="";
 	?>
 	<tr class="lst">
 	  <?php if ($val["mail_action"]=="DELETING") { $grey="grey"; ?>

@@ -56,8 +56,7 @@ echo $msg->msg_html_all();
 <?php
 	if (is_array($dom->dns)) {
 		echo "<br />"._("Whois result on the domain")." : <pre>";
-		reset($dom->dns);
-		while (list($key,$val)=each($dom->dns)) {
+		foreach($dom->dns as $val) {
 			echo "nameserver: $val\n";
 		}
 		echo "</pre>";

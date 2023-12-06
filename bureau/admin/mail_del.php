@@ -42,7 +42,7 @@ reset($d);
 include_once ("head.php");
 
 if ($confirm=="y") {
-  while (list($key,$val)=each($d)) {
+  foreach($d as $key=>$val) {
     // Validate that this email is owned by me...
     if (!($email = $mail->is_it_my_mail($val))) {
       continue;
@@ -73,7 +73,7 @@ if ($confirm=="y") {
 
 <ul>
 <?php
-while (list($key,$val)=each($d)) {
+foreach($d as $key=>$val) {
   $m=$mail->get_details($val);
   echo "<input type=\"hidden\" name=\"d[]\" value=\"".ehe($val,false)."\" />";
   echo "<li><b>".$m["address"]."@".$m["domain"]."</b></li>";

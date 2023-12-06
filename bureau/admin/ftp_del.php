@@ -25,9 +25,8 @@
 
 require_once("../class/config.php");
 
-reset($_POST);
 $lst_todel=array();
-while (list($key,$val)=each($_POST)) {
+foreach($_POST as $key=>$val) {
   if (substr($key,0,4)=="del_") {
     $lst_todel[]=$val;
   }
