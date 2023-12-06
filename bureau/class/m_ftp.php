@@ -249,8 +249,7 @@ class m_ftp {
      */
     function select_prefix_list($current) {
         $r = $this->prefix_list();
-        reset($r);
-        while (list($key, $val) = each($r)) {
+        foreach($r as $val) {
             if ($current == $val) {
                 $c = " selected=\"selected\"";
             } else {

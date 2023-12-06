@@ -807,7 +807,7 @@ ORDER BY
             $str.="  <domain>\n    <name>" . xml_entities($d["domain"]) . "</name>\n";
             $s = $this->enum_domain_mails($d["id"]);
             if (count($s)) {
-                while (list($key, $val) = each($s)) {
+                foreach($s as $key=>$val) {
                     $str.="    <address>\n";
                     $str.="      <name>" . xml_entities($val["address"]) . "</name>\n";
                     $str.="      <enabled>" . xml_entities($val["enabled"]) . "</enabled>\n";
