@@ -248,7 +248,6 @@ if (isset($formu) && $formu==2 && isset($actrename) && $actrename && count($d)) 
   echo "<input type=\"hidden\" name=\"formu\" value=\"4\" />\n";
   echo "<tr><th colspan=\"2\">"._("Rename")."</th></tr>";
   for ($i=0;$i<count($d);$i++) {
-    $d[$i]=ssla($d[$i]);
     echo "<tr><td><input type=\"hidden\" name=\"o[$i]\" value=\"".ehe($d[$i],false)."\" />".ehe($d[$i],false)."</td>";
     echo "<td><input type=\"text\" class=\"int\" name=\"d[$i]\" value=\"".ehe($d[$i],false)."\" /></td></tr>";
   }
@@ -273,7 +272,6 @@ if ($formu==2 && ! (empty($actperms)) && count($d)) {
   echo "</tr>";
 
   for ($i=0;$i<count($d);$i++) {
-    $d[$i]=ssla($d[$i]);
     $stats = stat($tmp_absdir . '/' . $d[$i]);
     $modes = $stats[2];
 

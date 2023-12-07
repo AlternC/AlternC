@@ -39,8 +39,6 @@ $fields = array (
 getFields($fields);
 
 $editing=false;
-$editfile=ssla($editfile);
-$texte=ssla($texte);
 
 $R=$bro->convertabsolute($R,1);
 $p=$bro->GetPrefs();

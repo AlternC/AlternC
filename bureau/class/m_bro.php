@@ -393,7 +393,6 @@ class m_bro {
      */
     function CreateDir($dir, $file) {
         global $db, $cuid, $msg;
-        $file = ssla($file);
         $absolute = $this->convertabsolute($dir . "/" . $file, false);
         if ($absolute && (!file_exists($absolute))) {
             if (!mkdir($absolute, 00777, true)) {
@@ -421,7 +420,6 @@ class m_bro {
      */
     function CreateFile($dir, $file) {
         global $db, $msg, $cuid;
-        $file = ssla($file);
         $absolute = $this->convertabsolute($dir . "/" . $file, false);
         if (!$absolute || file_exists($absolute)) {
             $msg->raise("ERROR", "bro", _("File or folder name is incorrect"));
@@ -456,7 +454,6 @@ class m_bro {
             return false;
         }
         for ($i = 0; $i < count($file_list); $i++) {
-            $file_list[$i] = ssla($file_list[$i]);
             if (!strpos($file_list[$i], "/") && file_exists($absolute . "/" . $file_list[$i])) { // Character / forbidden in a FILE name
                 $this->_delete($absolute . "/" . $file_list[$i]);
             }
@@ -483,8 +480,6 @@ class m_bro {
         }
         $alea = "." . time() . mt_rand(1000, 9999);
         for ($i = 0; $i < count($old); $i++) {
-            $old[$i] = ssla($old[$i]); // strip slashes if needed
-            $new[$i] = ssla($new[$i]);
             if (!strpos($old[$i], "/") && !strpos($new[$i], "/")) { // caractre / interdit dans old ET dans new...
                 @rename($absolute . "/" . $old[$i], $absolute . "/" . $old[$i] . $alea);
             }
@@ -530,7 +525,6 @@ class m_bro {
             return false;
         }
         for ($i = 0; $i < count($d); $i++) {
-            $d[$i] = ssla($d[$i]); // strip slashes if needed
             if (!strpos($d[$i], "/") && file_exists($old . "/" . $d[$i]) && !file_exists($new . "/" . $d[$i])) {
                 if (!rename($old . "/" . $d[$i], $new . "/" . $d[$i])) {
                     $msg->raise("ERROR", "bro", "error renaming $old/$d[$i] -> $new/$d[$i]");
@@ -558,7 +552,6 @@ class m_bro {
             return false;
         }
         for ($i = 0; $i < count($d); $i++) {
-            $d[$i] = ssla($d[$i]); // strip slashes if needed
             // If the form checkboxes are not checked, PHP will not fill in a
             // value at all for the permissions. Set the default to unwriteable
             // unless explicitly marked as writable.
@@ -728,7 +721,6 @@ class m_bro {
             return false;
         }
         for ($i = 0; $i < count($d); $i++) {
-            $d[$i] = ssla($d[$i]); // strip slashes if needed
             if (!strpos($d[$i], "/") && file_exists($old . "/" . $d[$i]) && !file_exists($new . "/" . $d[$i])) {
                 $this->CopyOneFile($old . "/" . $d[$i], $new);
             }

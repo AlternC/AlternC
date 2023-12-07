@@ -510,20 +510,6 @@ function format_date($format, $date) {
 }
 
 
-/**
- * Strip slashes if needed : 
- * @param string $str
- * @return string
- */
-function ssla($str) {
-    if (get_magic_quotes_gpc()) {
-        return stripslashes($str);
-    } else {
-        return $str;
-    }
-}
-
-
 /** Hashe a password using proper crypto function
  * @param string $pass a cleartext password to hash
  * @return string the hash 
