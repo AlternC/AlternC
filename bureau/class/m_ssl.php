@@ -44,6 +44,9 @@ class m_ssl {
 
     const KEY_REPOSITORY = "/var/lib/alternc/ssl/private";
     const SPECIAL_CERTIFICATE_ID_PATH = "/var/lib/alternc/ssl/special_id.json";
+
+    public $last_certificate_id;
+    public $default_certificate_fqdn;
     
     // ----------------------------------------------------------------- 
     /**
