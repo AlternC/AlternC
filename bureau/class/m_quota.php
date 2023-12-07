@@ -43,7 +43,7 @@ class m_quota {
     /**
      * Constructor
      */
-    function m_quota() {
+    function __construct() {
         $this->disk_quota_enable = variable_get('disk_quota_enable', 1, 'Are disk quota enabled for this server', array('desc' => 'Enabled', 'type' => 'boolean'));
         if ($this->disk_quota_enable) {
             $this->disk = Array("web" => "web");

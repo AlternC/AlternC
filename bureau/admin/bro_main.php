@@ -53,8 +53,8 @@ $fields = array (
 
 ## does not intend to edit oversize files.
 $memory_limit=ini_get("memory_limit");
-if (preg_match("#([mk])#i", $memory_limit, $out))
-	$memory_limit=$memory_limit*1024*($out[1]=="M"?1024:1);
+if (preg_match("#(.*)([mk])#i", $memory_limit, $out))
+	$memory_limit=$out[1]*1024*($out[2]=="M"?1024:1);
 
 getFields($fields);
 

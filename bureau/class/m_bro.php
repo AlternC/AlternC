@@ -30,16 +30,16 @@
 class m_bro {
 
     /** How we draw the file in column */
-    var $l_mode;
+    public $l_mode;
 
     /** download mode of a compressed folder */
-    var $l_tgz;
+    public $l_tgz;
 
     /** Shall we show icons or just names? */
-    var $l_icons;
+    public $l_icons;
 
     /** What do we do after creating a file? */
-    var $l_createfile;
+    public $l_createfile;
 
     /** internal cache */
     var $mime_desc = array();
@@ -48,16 +48,16 @@ class m_bro {
     var $cacheurl = array();
 
     /** Font choice in the editor */
-    var $l_editor_font = array("Arial, Helvetica, Sans-serif", "Times, Bookman, Serif", "Courier New, Courier, Fixed");
+    public $l_editor_font = array("Arial, Helvetica, Sans-serif", "Times, Bookman, Serif", "Courier New, Courier, Fixed");
 
     /** font size in the editor */
-    var $l_editor_size = array("18px", "14px", "12px", "10px", "8px", "0.8em", "0.9em", "1em", "1.1em", "1.2em");
+    public $l_editor_size = array("18px", "14px", "12px", "10px", "8px", "0.8em", "0.9em", "1em", "1.1em", "1.2em");
 
     
     /**
-     * Constructor 
+     * Initialize the internal variables, this triggers their translation 
      * */
-    function m_bro() {
+    function __construct() {
         $this->l_mode = array(0 => _("1 column, detailed"), 1 => _("2 columns, short"), 2 => _("3 columns, short"));
         $this->l_tgz = array(0 => _("tgz (Linux)"), 1 => _("tar.bz2 (Linux)"), 2 => _("zip (Windows/Dos)"), 3 => _("tar.Z (Unix)"));
         $this->l_icons = array(0 => _("No"), 1 => _("Yes"));

@@ -43,6 +43,9 @@ class m_menu {
         // Merge it !
         $lst = array_merge($sm, $lsto);
 
+        // if any menu is empty, remove it
+        foreach($lst as $key=>$val) if (!$val) unset($lst[$key]);
+        
         // Sort it
         uasort($lst, 'm_menu::order_menu');
 

@@ -53,7 +53,7 @@ if (isset($usr) && is_int($usr)) {
 <?php
 
   $totalweb = $quota->getquota('web');
-  if ( $totalweb['u'] > 0 ) {
+  if ( isset($totalweb['u']) && $totalweb['u'] > 0 ) {
     $t=$quota->get_size_unit($totalweb['u'] * 1024);
     echo "<p>"._("quota_web")." "; // use quota_web because it's the magically translated string
     echo sprintf("%.1f", $t['size'])."&nbsp;".$t['unit'];

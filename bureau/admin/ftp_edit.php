@@ -46,7 +46,7 @@ if (!$id && !$create) {
 if (!$id && $create) { //creation
   echo "<h3>"._("Create a FTP account")."</h3>";
   if ( !isset($is_include) )
-    $rr=false;
+      $rr=[ [ "prefixe"=>"", "login" => "", "dir" => "" ] ];
 } else {
   echo "<h3>"._("Editing a FTP account")."</h3>";
   $rr=$ftp->get_ftp_details($id);
