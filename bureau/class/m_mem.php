@@ -575,7 +575,7 @@ Cordially.
     function set_help_param($show) {
         global $db, $msg, $cuid;
         $msg->log("mem", "set_help_param", $show);
-        $db->query("UPDATE membres SET show_help= ? WHERE uid= ? ;", array($show, $cuid));
+        $db->query("UPDATE membres SET show_help= ? WHERE uid= ? ;", array(intval($show), $cuid));
     }
 
 
@@ -594,7 +594,7 @@ Cordially.
      * @return boolean TRUE if the help has been shown, FALSE if not.
      */
     function show_help($file, $force = false) {
-        if ($this->user["show_help"] || $force) {
+        if ((isset($this->user["show_help"]) && $this->user["show_help"]) || $force) {
             $hlp = _("hlp_$file");
             if ($hlp != "hlp_$file") {
                 $hlp = preg_replace(
@@ -866,22 +866,20 @@ This link may only be used once. You should change your password in your account
         return TRUE;
     }
 
+    /** TODO : explains this */
     function requires_old_password_for_change() {
         global $cuid, $db;
-        $cookie = $_COOKIE['require_old_password'];
-        if (!$cookie) {
-            return TRUE;
-        }
+        if (!isset($_COOKIE['require_old_password'])) return true;
         $db->query('select lastlogin, pass from membres where uid = ?;', array($cuid));
         if ($db->num_rows()) {
             $db->next_record();
             $cookie_data = $cuid . $db->f('lastlogin');
             $salt = variable_get('salt_password_reset', base64_encode(random_bytes(128))) . $db->f('pass');
             if ($cookie == hash_hmac('sha512', $cookie_data, $salt)) {
-                return FALSE;
+                return false;
             }
         }
-        return TRUE;
+        return true;
     }
 
     /**
