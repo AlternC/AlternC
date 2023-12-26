@@ -34,7 +34,7 @@ install:
 install-common:
 # Shell Scripts
 	test -d $(DESTDIR)/usr/lib/alternc || mkdir -p $(DESTDIR)/usr/lib/alternc
-	cp -r src/* $(DESTDIR)/usr/lib/alternc/
+	cp src/* $(DESTDIR)/usr/lib/alternc/
 	chown root:root $(DESTDIR)/usr/lib/alternc/*
 	chmod 755 $(DESTDIR)/usr/lib/alternc/*
 
@@ -68,15 +68,6 @@ install-alternc: install-common
 	install -o root -g root -m 755 tools/* $(DESTDIR)/usr/bin
 # Man pages
 	install -o root -g root -m 644 man/*.8 $(DESTDIR)/usr/share/man/man8/
-
-#SSL functions
-	ln -s hosting_vhost-ssl.sh $(DESTDIR)/etc/alternc/functions_hosting/hosting_panel-ssl.sh
-	ln -s hosting_vhost-ssl.sh $(DESTDIR)/etc/alternc/functions_hosting/hosting_vhost-mixssl.sh
-	ln -s hosting_vhost-ssl.sh $(DESTDIR)/etc/alternc/functions_hosting/hosting_roundcube-ssl.sh
-	ln -s hosting_vhost-ssl.sh $(DESTDIR)/etc/alternc/functions_hosting/hosting_squirrelmail-ssl.sh
-	ln -s hosting_vhost-ssl.sh $(DESTDIR)/etc/alternc/functions_hosting/hosting_php52-ssl.sh
-	ln -s hosting_vhost-ssl.sh $(DESTDIR)/etc/alternc/functions_hosting/hosting_php52-mixssl.sh
-	ln -s hosting_vhost-ssl.sh $(DESTDIR)/etc/alternc/functions_hosting/hosting_url-ssl.sh
 
 install-slave: install-common
 # Man pages
