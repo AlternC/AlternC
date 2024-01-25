@@ -944,7 +944,7 @@ class m_dom {
             $out=array();
             exec("dig +short NS ".escapeshellarg($parent),$out);
             $loopmax--;
-        } while (!count($out) && $loopmax); // will stop when : we have no parent, or
+        } while (!count($out) && $loopmax && strpos($parent, '.'));
         if (!count($out)) {
             return false; // bad exit of the loop
         }

@@ -350,6 +350,7 @@ class m_domTest extends TestCase
     {
         // Remove the following lines when you implement this test.
         $ns = $this->object->whois('alternc.org');
+        sort($ns);
         $expected_ns = array(
             'primary.heberge.info',
             'secondary.heberge.info',
