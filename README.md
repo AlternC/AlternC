@@ -34,7 +34,8 @@ To safely upgrade between these versions:
 * Backup your AlternC database
 * Stop the cron service: ```/etc/init.d/cron stop```
 * Install alternc (>= 3.5)
-* Run the following queries against the alternc database (here, it's called "alternc"): ```
+* Run the following queries against the alternc database (here, it's called "alternc"):
+```
 mysql alternc -e 'update sub_domaines set web_action = "OK" where type like "%-mixssl";'
 mysql alternc -e 'update sub_domaines set web_action = "OK" where type like "%-ssl";'
 ```
@@ -72,7 +73,7 @@ wget http://stable-3-5.nightly.alternc.org/nightly.key -O - | apt-key add -
 
 ## License
 
-AlternC is distributed under the GPL v2 or later license. See `COPYING`.
+AlternC is distributed under the GPL v2 or later license. See [COPYING](COPYING).
 
 AlternC's translations (po files) are distributed under the [Creative Commons CC0 license](https://creativecommons.org/publicdomain/zero/1.0/). Don't participate to the translation if you don't agree to publish your translations under that license.
 
