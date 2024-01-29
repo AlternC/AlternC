@@ -16,6 +16,8 @@
 # then put them at the right places in the repositories
 # and commit everything using svn
 
+hash tx 2>/dev/null || { echo >&2 "tx is required. Retrieve it from https://github.com/transifex/cli . Stopped."; exit 1; }
+
 tx pull -a -f
 
 langs="fr_FR de_DE en_US es_ES pt_BR it_IT nl_NL"

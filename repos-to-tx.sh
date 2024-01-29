@@ -18,11 +18,8 @@
 # finally, push en_US to transifex
 # to be translated.
 
-if [ ! -x /usr/bin/tx ] ; then
-  echo "Package transifex-client is not installed."
-  echo "Install it to run $0."
-  exit 1
-fi
+hash tx 2>/dev/null || { echo >&2 "tx is required. Retrieve it from https://github.com/transifex/cli . Stopped."; exit 1; }
+
 
 pushd debian
 echo "Update of PO files in debian/"
