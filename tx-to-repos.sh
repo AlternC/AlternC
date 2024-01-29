@@ -1,15 +1,15 @@
 #!/bin/bash
 
 #------------------------------------------------------------
-# Short doc: launch this when people said they translated 
+# Short doc: launch this when people said they translated
 # the program in Transifex, so that their translation appears
 # in the production package.
 #------------------------------------------------------------
 
 # USE IT INSIDE alternc/ folder which MUST BE a git clone
-# 
-# Long doc: 
-# Take each sub-project of AlternC 
+#
+# Long doc:
+# Take each sub-project of AlternC
 # (EXPECTED IN PARENT FOLDERS of alternc/)
 # (yes, one day we will be united again ;) )
 # and get the TRANSLATED strings from transifex
@@ -25,7 +25,7 @@ do
     echo "doing lang $lang"
     cp "lang/${lang}.po" "bureau/locales/$lang/LC_MESSAGES/alternc"
     sublang="`echo $lang | cut -c 1-2`"
-    # merge the po for debconf into the relevant file for the modules : 
+    # merge the po for debconf into the relevant file for the modules :
     if [ "$lang" != "en_US" ]
     then
 	cat "debian/po/${sublang}.po" | sed -e 's/msgstr ""/msgstr "**DUMMY**"/'  >tmp-debconf.po
@@ -48,9 +48,9 @@ done
 
 exit 0
 
-if [ "$1" != "nocommit" ] 
-then 
-# Now committing 
+if [ "$1" != "nocommit" ]
+then
+# Now committing
     git commit -am "Updating language files from Transifex"
     pushd ../alternc-mailman
     git commit -am "Updating language files from Transifex"
