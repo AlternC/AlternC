@@ -38,17 +38,6 @@ do
 	rm "tmp-debconf.po"
 	mv -f "$tmppo" "debian/po/${sublang}.po"
 
-    tmppo=$(mktemp)
-	sed "../alternc-mailman/debian/po/${sublang}.po" -e 's/msgstr ""/msgstr "**DUMMY**"/'  >tmp-debconf.po
-	msgcat --use-first --less-than=3 --more-than=1 -o "$tmppo"  "lang/${lang}.po" "tmp-debconf.po"
-	rm "tmp-debconf.po"
-	mv -f "$tmppo" "../alternc-mailman/debian/po/${sublang}.po"
-
-    tmppo=$(mktemp)
-	sed "../alternc-mailman/bureau/locales/$lang/LC_MESSAGES/mailman.po" -e 's/msgstr ""/msgstr "**DUMMY**"/'  >tmp-mailman.po
-	msgcat --use-first --less-than=3 --more-than=1 -o "$tmppo"  "lang/${lang}.po" "tmp-mailman.po"
-	rm "tmp-mailman.po"
-	mv -f "$tmppo" "../alternc-mailman/bureau/locales/$lang/LC_MESSAGES/mailman.po"
     fi
     echo "done"
 done
