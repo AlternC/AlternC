@@ -1,18 +1,18 @@
 #!/bin/bash
 
 #------------------------------------------------------------
-# Short doc: launch this after big changes, so that 
-# people who translate the project have the new strings ;) 
+# Short doc: launch this after big changes, so that
+# people who translate the project have the new strings ;)
 #------------------------------------------------------------
 
 # USE IT INSIDE alternc/ folder which MUST BE a git clone
-# 
-# Long doc: 
-# Take each sub-project of AlternC 
+#
+# Long doc:
+# Take each sub-project of AlternC
 # (EXPECTED IN PARENT FOLDERS from here)
-# and regenerate the .POT 
+# and regenerate the .POT
 # then regenerate the .PO for each language
-# then merge them into one big .po file and 
+# then merge them into one big .po file and
 # put them in the lang/ folder
 #
 # finally, push en_US to transifex
@@ -33,7 +33,7 @@ pushd ..
 
 langs="fr_FR de_DE en_US es_ES pt_BR it_IT nl_NL"
 
-# external repositories : 
+# external repositories :
 for project in alternc alternc-mailman
 do
     pushd "$project/bureau/locales"
@@ -41,8 +41,8 @@ do
     popd
 done
 
-# internal po files : 
-for subproject in awstats 
+# internal po files :
+for subproject in awstats
 do
     pushd "alternc/$subproject/bureau/locales"
     make
@@ -63,13 +63,13 @@ do
 #	cp "alternc/trunk/awstats/debian/po/${sublang}.po" "alternc/trunk/tmp.$lang/alternc-awstats.debconf.po"
 #    else
 #	cp "alternc/trunk/debian/po/templates.pot" "alternc/trunk/tmp.$lang/alternc.debconf.po"
-#	cp "alternc-mailman/trunk/debian/po/templates.pot" "alternc/trunk/tmp.$lang/alternc-mailman.debconf.po"	
+#	cp "alternc-mailman/trunk/debian/po/templates.pot" "alternc/trunk/tmp.$lang/alternc-mailman.debconf.po"
 #    fi
     cp "alternc/bureau/locales/$lang/LC_MESSAGES/messages.po" \
 	"alternc-mailman/bureau/locales/$lang/LC_MESSAGES/mailman.po" \
 	"alternc/awstats/bureau/locales/$lang/LC_MESSAGES/aws.po" \
-	"alternc/tmp.$lang/" 
-    # now we have all .po files in one folder, merge them into one big catalog: 
+	"alternc/tmp.$lang/"
+    # now we have all .po files in one folder, merge them into one big catalog:
     msgcat --use-first -o "alternc/lang/${lang}.po" alternc/tmp.$lang/*
     rm -rf "alternc/tmp.$lang"
    echo "done"
@@ -77,6 +77,6 @@ done
 
 # Now pushing po files into transifex website:
 cd alternc/lang/
-tx push -s 
+tx push -s
 
 popd
