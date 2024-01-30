@@ -1,8 +1,8 @@
 ![](https://alternc.com/logo.png)
 
-## AlternC: Web and Email Hosting Software Suite 
+## AlternC: Web and Email Hosting Software Suite
 
-AlternC is a software helping system administrators to handle Web and Email services management. It should be easy to install, based only on free software. 
+AlternC is a software helping system administrators to handle Web and Email services management. It should be easy to install, based only on free software.
 
 This software consist of an automatic install and configuration system, a web control panel to manage hosted users and their web services such as domains, email accounts, ftp accounts, web statistics...
 
@@ -54,7 +54,7 @@ mysql alternc -e 'update sub_domaines set web_action = "OK" where type like "%-s
 We have 1 nightly build repositories:
 * stretch - [stable 3.5](http://stable-3-5.nightly.alternc.org/)
 
-and 3 nightly from former Debian releases (now unmaintained) 
+and 3 nightly from former Debian releases (now unmaintained)
 * jessie - [stable 3.3](http://stable-3-3.nightly.alternc.org/)
 * wheezy - [stable 3.2](http://stable-3-2.nightly.alternc.org/)
 * squeeze - [stable 3.1](http://stable-3-1.nightly.alternc.org/)
@@ -68,8 +68,19 @@ To use one of them, create a file named `/etc/apt/sources.list.d/alternc-nightly
 The repository and the packages are signed by the pgp key of AlternC nightly build user :
 
 ```
-wget http://stable-3-5.nightly.alternc.org/nightly.key -O - | apt-key add - 
+wget http://stable-3-5.nightly.alternc.org/nightly.key -O - | apt-key add -
 ```
+
+
+## Translation
+
+Translator you're welcome. You can contribute and update any translation on weblate service :
+
+<html>
+    <a href="https://hosted.weblate.org/engage/alternc/-/en/">
+        <img src="https://hosted.weblate.org/widget/alternc/-/en/multi-auto.svg" alt="État de la traduction" />
+    </a>
+</html>
 
 ## License
 
