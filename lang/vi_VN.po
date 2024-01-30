@@ -3,18 +3,19 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Le Hong Phuong <chemgiet@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: AlternC, hosting control panel\n"
 "Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
 "POT-Creation-Date: 2018-06-24 17:17+0200\n"
 "PO-Revision-Date: 2012-08-21 15:36+0000\n"
-"Last-Translator: Benjamin Sonntag <benjamin@altercn.org>\n"
-"Language-Team: Vietnamese (Viet Nam) (http://app.transifex.com/octopuce/alternc/language/vi_VN/)\n"
+"Last-Translator: Le Hong Phuong <chemgiet@gmail.com>, 2015\n"
+"Language-Team: Vietnamese (http://app.transifex.com/octopuce/alternc/language/vi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: vi_VN\n"
+"Language: vi\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. Type: error
@@ -194,7 +195,7 @@ msgstr ""
 #. Description
 #: ../alternc.templates:10001
 msgid "Name of the mysql server:"
-msgstr ""
+msgstr "Tên của máy chủ mysql:"
 
 #. Type: string
 #. Description
@@ -227,7 +228,7 @@ msgstr ""
 #. Description
 #: ../alternc.templates:12001 ../alternc.templates:16001
 msgid "AlternC's mysql account:"
-msgstr ""
+msgstr "Tài khoản mysql của AlternC:"
 
 #. Type: string
 #. Description
@@ -6679,11 +6680,11 @@ msgstr ""
 
 #: ../class/m_mysql.php:467
 msgid "The username can contain only letters and numbers."
-msgstr ""
+msgstr "Tài khoản chỉ được bao gồm chữ cái và số."
 
 #: ../class/m_mysql.php:473
 msgid "Database user not found"
-msgstr ""
+msgstr "Không tìm thấy tài khoản CSDL"
 
 #: ../class/m_mysql.php:486
 msgid "Could not grant rights"
@@ -6695,7 +6696,7 @@ msgstr ""
 
 #: ../class/m_mysql.php:510 ../class/m_mysql.php:514
 msgid "File not found"
-msgstr ""
+msgstr "Tệp không tồn tại"
 
 #: ../class/m_mysql.php:661
 msgid "The username is mandatory"
@@ -6703,7 +6704,7 @@ msgstr ""
 
 #: ../class/m_mysql.php:669 ../class/m_mysql.php:743
 msgid "The username can contain only letters and numbers"
-msgstr ""
+msgstr "Tài khoản chỉ được bao gồm chữ cái và số"
 
 #: ../class/m_mysql.php:676
 #, php-format
@@ -6712,15 +6713,15 @@ msgstr ""
 
 #: ../class/m_mysql.php:681
 msgid "The database user already exists"
-msgstr ""
+msgstr "Tài khoản CSDL đã tồn tại"
 
 #: ../class/m_mysql.php:685 ../class/m_mysql.php:717
 msgid "The passwords do not match"
-msgstr ""
+msgstr "Mật khẩu không chính xác"
 
 #: ../class/m_mysql.php:754
 msgid "The username was not found"
-msgstr ""
+msgstr "Không tìm thấy tài khoản"
 
 #: ../class/m_mysql.php:786
 msgid "This user does not exist in the MySQL/User database"
@@ -6728,7 +6729,7 @@ msgstr ""
 
 #: ../class/m_mysql.php:1050
 msgid "The directory could not be created"
-msgstr ""
+msgstr "Không thể khởi tạo đường dẫn"
 
 #: ../class/m_piwik.php:37
 msgid "Piwik statistics"
@@ -6769,7 +6770,7 @@ msgstr ""
 #: ../class/m_quota.php:83
 #, php-format
 msgid "%s%% of %s"
-msgstr ""
+msgstr "%s%% trên %s"
 
 #: ../class/m_quota.php:83 ../class/m_quota.php:122
 msgid "quota_"
@@ -6789,15 +6790,15 @@ msgstr ""
 
 #: ../class/m_quota.php:595
 msgid "B"
-msgstr ""
+msgstr "B"
 
 #: ../class/m_quota.php:595
 msgid "GB"
-msgstr ""
+msgstr "GB"
 
 #: ../class/m_quota.php:595
 msgid "KB"
-msgstr ""
+msgstr "KB"
 
 #: ../class/m_ssl.php:99
 msgid "FATAL: no certificates in certificates table, even the SnakeOil one??"
@@ -6940,7 +6941,7 @@ msgstr ""
 
 #: ../class/mime.php:123 ../class/mime.php:124
 msgid "HTML Document"
-msgstr ""
+msgstr "Tài liệu HTML"
 
 #: ../class/mime.php:125 ../class/mime.php:126
 msgid "JPEG Image"
@@ -6948,7 +6949,7 @@ msgstr ""
 
 #: ../class/mime.php:127
 msgid "Music Playlist"
-msgstr ""
+msgstr "Danh sách phát nhạc"
 
 #: ../class/mime.php:128
 msgid "MP3 Music File"
@@ -6960,11 +6961,11 @@ msgstr ""
 
 #: ../class/mime.php:130
 msgid "Acrobat PDF"
-msgstr ""
+msgstr "Acrobat PDF"
 
 #: ../class/mime.php:131
 msgid "PHP Source"
-msgstr ""
+msgstr "Mã nguồn PHP"
 
 #: ../class/mime.php:132
 msgid "PNG Image"
@@ -6984,7 +6985,7 @@ msgstr ""
 
 #: ../class/mime.php:137
 msgid "Rar Compressed Files"
-msgstr ""
+msgstr "Tệp nén dạng Rar"
 
 #: ../class/mime.php:138
 msgid "Rich Text Document"
@@ -7012,7 +7013,7 @@ msgstr ""
 
 #: ../class/mime.php:145
 msgid "Text Document"
-msgstr ""
+msgstr "Tài liệu văn bản"
 
 #: ../class/mime.php:146 ../class/mime.php:147
 msgid "Virtual Card"
@@ -7024,15 +7025,15 @@ msgstr ""
 
 #: ../class/mime.php:149
 msgid "Excel Spreadsheet"
-msgstr ""
+msgstr "Bảng tính Excel"
 
 #: ../class/mime.php:150
 msgid "Zip Compressed Files"
-msgstr ""
+msgstr "Tệp nén dạng Zip"
 
 #: ../class/mime.php:151
 msgid "Flash Animation"
-msgstr ""
+msgstr "Hiệu ứng Flash"
 
 #: ../class/mime.php:152 ../class/mime.php:153 ../class/mime.php:154
 msgid "Real Media File"
