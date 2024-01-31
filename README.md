@@ -71,6 +71,17 @@ The repository and the packages are signed by the pgp key of AlternC nightly bui
 wget http://stable-3-5.nightly.alternc.org/nightly.key -O - | apt-key add -
 ```
 
+
+## Translation
+
+Translator you're welcome. You can contribute and update any translation on weblate service :
+
+<html>
+    <a href="https://hosted.weblate.org/engage/alternc/-/en/">
+        <img src="https://hosted.weblate.org/widget/alternc/-/en/multi-auto.svg" alt="État de la traduction" />
+    </a>
+</html>
+
 ## License
 
 AlternC code and translation are distributed under the GPL v2 or later license. See [COPYING](COPYING).
