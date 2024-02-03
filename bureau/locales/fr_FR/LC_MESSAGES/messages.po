@@ -5311,7 +5311,7 @@ msgid ""
 "administrator"
 msgstr ""
 "Vous n'avez pas le droit d'installer ce nom de domaine sur le serveur, "
-"conactez l'administrateur"
+"contactez l'administrateur"
 
 #: ../class/m_dom.php:715
 msgid "This domain is the server's domain! You cannot host it on your account!"
