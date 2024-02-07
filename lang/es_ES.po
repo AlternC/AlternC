@@ -17,14 +17,17 @@ msgstr ""
 "Project-Id-Version: AlternC, hosting control panel\n"
 "Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
 "POT-Creation-Date: 2018-06-24 17:17+0200\n"
-"PO-Revision-Date: 2012-08-21 15:36+0000\n"
-"Last-Translator: Daniel Viñar <daniel@uruguayos.fr>, 2020\n"
-"Language-Team: Spanish (Spain) (http://app.transifex.com/octopuce/alternc/language/es_ES/)\n"
+"PO-Revision-Date: 2024-02-08 23:01+0000\n"
+"Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/alternc/alternc/"
+"es/>\n"
+"Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: es_ES\n"
-"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=(n == 1) ? 0 : ((n != 0 && n % 1000000 == 0)"
+" ? 1 : 2);\n"
+"X-Generator: Weblate 5.4-dev\n"
 
 #. Type: error
 #. Description
@@ -1499,6 +1502,8 @@ msgid ""
 "To update the list of the server on the PhpMyAdmin login page, launch "
 "alternc.install"
 msgstr ""
+"Para actualizar la lista del servidor en la página de inicio de sesión de "
+"PhpMyAdmin, ejecute alternc.install"
 
 #: ../admin/adm_deactivate.php:44 ../class/m_admin.php:250
 #: ../class/m_admin.php:282 ../class/m_admin.php:795 ../class/m_admin.php:822
@@ -1570,7 +1575,7 @@ msgstr "He aquí la lista de cuotas por omisión en este servidor para las nueva
 
 #: ../admin/adm_defquotas.php:85
 msgid "Synchronise user's quota (only to upper value)"
-msgstr ""
+msgstr "Sincronizar la cuota del usuario (sólo al valor superior)"
 
 #: ../admin/adm_defquotas.php:98
 msgid "Accounts of type"
@@ -1780,7 +1785,7 @@ msgstr "Desbloquear"
 
 #: ../admin/adm_doms_def_type.php:38 ../admin/adm_panel.php:59
 msgid "Manage defaults domains type"
-msgstr ""
+msgstr "Administrar el tipo de dominios predeterminados"
 
 #: ../admin/adm_doms_def_type.php:40 ../admin/adm_domstype.php:39
 msgid ""
@@ -1799,6 +1804,8 @@ msgid ""
 "The Setting column contains the variables to be expanded in the defaults "
 "configuration. Available values are:  "
 msgstr ""
+"La columna Configuración contiene las variables que se expandirán en la "
+"configuración por defecto. Los valores disponibles son:  "
 
 #: ../admin/adm_doms_def_type.php:44
 #, php-format
@@ -1902,7 +1909,7 @@ msgstr "Regenerar"
 
 #: ../admin/adm_domstypedoedit.php:51
 msgid "Domain type is updated"
-msgstr ""
+msgstr "Tipo de dominio actualizado"
 
 #: ../admin/adm_domstypeedit.php:54
 msgid "Edit a domain type"
@@ -1944,7 +1951,7 @@ msgstr "Cambiar de tipo de dominio"
 
 #: ../admin/adm_domstyperegenerate.php:40
 msgid "Regenerate pending"
-msgstr ""
+msgstr "Regeneración pendiente"
 
 #: ../admin/adm_donosu.php:40
 msgid "This account is now a normal account"
@@ -2141,7 +2148,7 @@ msgstr "Enviar un mensaje de correo"
 #: ../admin/adm_list.php:194 ../admin/mail_list.php:160
 #, php-format
 msgid "%3$d-%2$d-%1$d"
-msgstr ""
+msgstr "%3$d-%2$d-%1$d"
 
 #: ../admin/adm_list.php:203
 msgid "DB:"
@@ -2589,22 +2596,22 @@ msgstr "Salir"
 #: ../admin/bro_main.php:73
 #, php-format
 msgid "The folder '%s' was successfully created"
-msgstr ""
+msgstr "La carpeta '%s' se ha creado correctamente"
 
 #: ../admin/bro_main.php:79
 #, php-format
 msgid "The file '%s' was successfully created"
-msgstr ""
+msgstr "El archivo '%s' se ha creado correctamente"
 
 #: ../admin/bro_main.php:94
 #, php-format
 msgid "The folder '%s' was successfully deleted"
-msgstr ""
+msgstr "La carpeta '%s' se ha eliminado correctamente"
 
 #: ../admin/bro_main.php:96
 #, php-format
 msgid "The file '%s' was successfully deleted"
-msgstr ""
+msgstr "El archivo \"%s\" se ha eliminado correctamente"
 
 #: ../admin/bro_main.php:102
 #, php-format
@@ -2626,58 +2633,58 @@ msgstr "No, no borrar esos archivos/carpetas"
 #: ../admin/bro_main.php:130
 #, php-format
 msgid "The folder '%s' was successfully copied to '%s'"
-msgstr ""
+msgstr "La carpeta \"%s\" se ha copiado correctamente en \"%s\""
 
 #: ../admin/bro_main.php:132
 #, php-format
 msgid "The file '%s' was successfully copied to '%s'"
-msgstr ""
+msgstr "El archivo \"%s\" se ha copiado correctamente en \"%s\""
 
 #: ../admin/bro_main.php:134
 msgid "The files / folders were successfully copied"
-msgstr ""
+msgstr "Los archivos / carpetas se han copiado correctamente"
 
 #: ../admin/bro_main.php:141
 #, php-format
 msgid "The folder '%s' was successfully moved to '%s'"
-msgstr ""
+msgstr "La carpeta \"%s\" se ha movido correctamente a \"%s\""
 
 #: ../admin/bro_main.php:143
 #, php-format
 msgid "The file '%s' was successfully moved to '%s'"
-msgstr ""
+msgstr "El archivo \"%s\" se ha movido correctamente a \"%s\""
 
 #: ../admin/bro_main.php:145
 msgid "The files / folders were successfully moved"
-msgstr ""
+msgstr "Los archivos / carpetas se han movido correctamente"
 
 #: ../admin/bro_main.php:153
 #, php-format
 msgid "The folder '%s' was successfully renamed to '%s'"
-msgstr ""
+msgstr "La carpeta \"%s\" se ha renombrado correctamente a \"%s\""
 
 #: ../admin/bro_main.php:155
 #, php-format
 msgid "The file '%s' was successfully renamed to '%s'"
-msgstr ""
+msgstr "El archivo \"%s\" se ha renombrado correctamente a \"%s\""
 
 #: ../admin/bro_main.php:157
 msgid "The files / folders were successfully renamed"
-msgstr ""
+msgstr "Los archivos / carpetas se han renombrado correctamente"
 
 #: ../admin/bro_main.php:162
 #, php-format
 msgid "The file '%s' was successfully uploaded"
-msgstr ""
+msgstr "El archivo \"%s\" se ha cargado correctamente"
 
 #: ../admin/bro_main.php:167
 msgid "The permissions were successfully set"
-msgstr ""
+msgstr "Los permisos se han establecido correctamente"
 
 #: ../admin/bro_main.php:175
 #, php-format
 msgid "The extraction of the file '%s' succeeded"
-msgstr ""
+msgstr "La extracción del archivo \"%s\" se ha realizado correctamente"
 
 #: ../admin/bro_main.php:180 ../class/m_bro.php:74
 msgid "File browser"
@@ -3108,15 +3115,15 @@ msgstr "(introduzca un nombre de dominio o subdominio)"
 
 #: ../admin/dom_edit.inc.php:132
 msgid "HTTP Only (redirect HTTPS to HTTP)"
-msgstr ""
+msgstr "Solo HTTP (redirigir HTTPS a HTTP)"
 
 #: ../admin/dom_edit.inc.php:133
 msgid "HTTPS Only (redirect HTTP to HTTPS)"
-msgstr ""
+msgstr "Solo HTTPS (redirigir HTTP a HTTPS)"
 
 #: ../admin/dom_edit.inc.php:134
 msgid "Both HTTP and HTTPS hosted at the same place"
-msgstr ""
+msgstr "Tanto HTTP como HTTPS alojados en el mismo lugar"
 
 #: ../admin/dom_edit.inc.php:144
 msgid "Edit this subdomain"
@@ -3156,7 +3163,7 @@ msgstr "Ha solicitado que se elimine el dominio %s."
 
 #: ../admin/dom_edit.php:110
 msgid "DNS zone is locked, changes will be ignored"
-msgstr ""
+msgstr "La zona DNS está bloqueada, los cambios serán ignorados"
 
 #: ../admin/dom_edit.php:120
 msgid "Edit subdomains"
@@ -3172,11 +3179,11 @@ msgstr "Configuración"
 
 #: ../admin/dom_edit.php:131
 msgid "Main subdomains"
-msgstr ""
+msgstr "Subdominios principales"
 
 #: ../admin/dom_edit.php:145 ../admin/dom_edit.php:159
 msgid "HTTPS"
-msgstr ""
+msgstr "HTTPS"
 
 #: ../admin/dom_edit.php:145 ../admin/dom_edit.php:159
 #: ../admin/dom_sslpref.php:82
@@ -3185,11 +3192,12 @@ msgstr "Subdominio"
 
 #: ../admin/dom_edit.php:155
 msgid "Advanced subdomains"
-msgstr ""
+msgstr "Subdominios avanzados"
 
 #: ../admin/dom_edit.php:156
 msgid "The following entries are advanced ones, edit them at your own risks."
 msgstr ""
+"Las siguientes entradas son avanzadas, edítalas bajo tu responsabilidad."
 
 #: ../admin/dom_edit.php:172
 msgid "Forbidden"
@@ -3197,19 +3205,19 @@ msgstr "Prohibido"
 
 #: ../admin/dom_edit.php:191
 msgid "HTTP only"
-msgstr ""
+msgstr "Solo HTTP"
 
 #: ../admin/dom_edit.php:194
 msgid "HTTPS only"
-msgstr ""
+msgstr "Solo HTTPS"
 
 #: ../admin/dom_edit.php:197
 msgid "HTTP and HTTPS"
-msgstr ""
+msgstr "HTTP y HTTPS"
 
 #: ../admin/dom_edit.php:200
 msgid "Unknown"
-msgstr ""
+msgstr "Desconocido"
 
 #: ../admin/dom_edit.php:206
 msgid "ERROR, please check your server setup"
@@ -3246,7 +3254,7 @@ msgstr "Eliminación pendiente"
 
 #: ../admin/dom_edit.php:265
 msgid "HTTPS Preferences for this domain"
-msgstr ""
+msgstr "Ajustes del HTTPS para este dominio"
 
 #: ../admin/dom_edit.php:273
 #, php-format
@@ -3292,6 +3300,8 @@ msgstr "Validar cambios"
 #: ../admin/dom_edit.php:331 ../admin/dom_edit.php:370
 msgid "This domain is locked, only a server administrator can unlock it."
 msgstr ""
+"Este dominio está bloqueado, solo un administrador del servidor puede "
+"desbloquearlo."
 
 #: ../admin/dom_edit.php:338
 msgid ""
@@ -3337,6 +3347,7 @@ msgstr "El dominio %s fue modificado."
 #, php-format
 msgid "The modifications will take effect at %s.  Server time is %s."
 msgstr ""
+"Las modificaciones entrarán en vigor a las %s.  La hora del servidor es %s."
 
 #: ../admin/dom_import.php:39
 msgid "Import a DNS zone"
@@ -3351,6 +3362,8 @@ msgid ""
 "Here is my proposition. Modify your zone until my proposition seems good to "
 "you"
 msgstr ""
+"Esta es mi propuesta. Modifica tu zona hasta que mi propuesta te parezca "
+"buena"
 
 #: ../admin/dom_import.php:55
 #, php-format
@@ -3403,12 +3416,12 @@ msgstr "Enviar"
 
 #: ../admin/dom_sslpref.php:60
 msgid "Your HTTPS preferences have been set"
-msgstr ""
+msgstr "Sus ajustes HTTPS han sido establecidos"
 
 #: ../admin/dom_sslpref.php:68
 #, php-format
 msgid "Manage %s HTTPS preferences"
-msgstr ""
+msgstr "Gestionar los ajustes HTTPS de %s"
 
 #: ../admin/dom_sslpref.php:70
 msgid ""
@@ -3416,34 +3429,41 @@ msgid ""
 "certificate provider. <br />Usually you'd want to click 'edit' in front of a"
 " subdomain to choose between HTTP and HTTPS by default."
 msgstr ""
+"Estos parámetros son para usuarios avanzados que quieran elegir un proveedor "
+"de certificados específico. <br />Usualmente querrás hacer clic en 'editar' "
+"delante de un subdominio para elegir entre HTTP y HTTPS por defecto."
 
 #: ../admin/dom_sslpref.php:72
 msgid ""
 "For each subdomain that may be available through HTTPS, please choose which "
 "certificate provider you want to use."
 msgstr ""
+"Para cada subdominio que pueda estar disponible a través de HTTPS, elija qué "
+"proveedor de certificados desea utilizar."
 
 #: ../admin/dom_sslpref.php:74
 msgid ""
 "please note that you only see a provider if you have a valid certificate for"
 " this domain"
 msgstr ""
+"por favor, tenga en cuenta que solo verá un proveedor si tiene un "
+"certificado válido para este dominio"
 
 #: ../admin/dom_sslpref.php:82
 msgid "HTTPS Preference"
-msgstr ""
+msgstr "Ajustes HTTPS"
 
 #: ../admin/dom_sslpref.php:96
 msgid "-- no HTTPS certificate provider preference --"
-msgstr ""
+msgstr "-- no hay ajustes del proveedor del certificado HTTPS --"
 
 #: ../admin/dom_sslpref.php:103
 msgid "Provider:"
-msgstr ""
+msgstr "Proveedor:"
 
 #: ../admin/dom_sslpref.php:116
 msgid "Set my HTTPS certificate preferences"
-msgstr ""
+msgstr "Establecer mis ajustes del certificado HTTPS"
 
 #: ../admin/dom_subdel.php:46
 #, php-format
@@ -3483,6 +3503,7 @@ msgstr "Suprimesión del subdominio %s:"
 #, php-format
 msgid "The modifications will take effect at %s. Server time is %s."
 msgstr ""
+"Las modificaciones entrarán en vigor a las %s . La hora del servidor es %s ."
 
 #: ../admin/dom_subedit.php:68
 msgid "Editing subdomain"
@@ -3491,7 +3512,7 @@ msgstr "Modificando subdominio"
 #: ../admin/ftp_del.php:52
 #, php-format
 msgid "The FTP account %s has been successfully deleted"
-msgstr ""
+msgstr "La cuenta FTP %s ha sido eliminado exitosamente"
 
 #: ../admin/ftp_del.php:60
 msgid "Confirm the FTP accounts deletion"
@@ -3511,7 +3532,7 @@ msgstr "Se creó correctamente la cuenta FTP"
 
 #: ../admin/ftp_doedit.php:61
 msgid "The FTP account has been successfully saved"
-msgstr ""
+msgstr "La cuenta FTP se ha guardado correctamente"
 
 #: ../admin/ftp_edit.php:39
 msgid "Neither a creation nor a edition"
@@ -3530,6 +3551,8 @@ msgid ""
 "This is the root folder for this FTP user. i.e. this FTP user can access to "
 "this folder and all its sub-folders."
 msgstr ""
+"Esta es la carpeta raíz de este usuario de FTP. es decir, este usuario de "
+"FTP puede acceder a esta carpeta y a todas sus subcarpetas."
 
 #: ../admin/ftp_edit.php:93
 msgid "Click here if you want to edit password"
@@ -3549,7 +3572,7 @@ msgstr ""
 
 #: ../admin/ftp_list.php:74
 msgid "Are you sure you want to change his status?"
-msgstr ""
+msgstr "¿Estás seguro de que quieres cambiar su estado?"
 
 #: ../admin/ftp_list.php:102
 msgid "FTP configuration information"
@@ -3585,11 +3608,11 @@ msgstr "las que especificó cuando creó la cuenta. Puede editarlas en el panel.
 
 #: ../admin/ftp_switch_enable.php:37
 msgid "The FTP account is enabled"
-msgstr ""
+msgstr "La cuenta FTP está habilitada"
 
 #: ../admin/ftp_switch_enable.php:39
 msgid "The FTP account is disabled"
-msgstr ""
+msgstr "La cuenta FTP está deshabilitada"
 
 #: ../admin/head.php:36
 msgid ""
@@ -3639,17 +3662,17 @@ msgstr "No se ha especificado un directorio"
 #: ../admin/hta_doadd.php:40
 #, php-format
 msgid "Folder %s is protected"
-msgstr ""
+msgstr "La crpeta %s está protegida"
 
 #: ../admin/hta_doadduser.php:45
 #, php-format
 msgid "The user %s was added to the protected folder %s"
-msgstr ""
+msgstr "El usuario %s ha sido agregado a la carpeta protegida %s"
 
 #: ../admin/hta_dodeluser.php:39
 #, php-format
 msgid "The user '%s' was successfully deleted"
-msgstr ""
+msgstr "El usuario '%s ' fue eliminado exitosamente"
 
 #: ../admin/hta_dodeluser.php:48
 msgid "Authorized user deletion confirm"
@@ -3737,6 +3760,8 @@ msgid ""
 "WARNING: you are trying to access the control panel insecurely, click <a "
 "href=\"https://%s\">here</a> to go to secure mode"
 msgstr ""
+"ADVERTENCIA: está intentando acceder al panel de control de forma insegura, "
+"haga clic en <a href=\"https://%s\"> aquí</a> para ir al modo seguro"
 
 #: ../admin/index.php:72
 msgid ""
@@ -3775,7 +3800,7 @@ msgstr "Es necesario un nombre de acceso y una contraseña"
 
 #: ../admin/ip_main.php:48
 msgid "Error during ip_affected_save"
-msgstr ""
+msgstr "Error durante ip_affected_save"
 
 #: ../admin/ip_main.php:75 ../class/m_authip.php:50
 msgid "FTP Access Security"
@@ -3871,6 +3896,8 @@ msgid ""
 "Here are web logs of your account.<br/>You can download them to do specific "
 "extract and statistics."
 msgstr ""
+"Aquí están los registros web de su cuenta.<br/> Puede descargarlos para "
+"realizar extractos y estadísticas específicos."
 
 #: ../admin/logs_list.php:50
 msgid "Creation Date"
@@ -3886,36 +3913,37 @@ msgstr "Bajar"
 
 #: ../admin/logs_list.php:64
 msgid "Follow"
-msgstr ""
+msgstr "Seguir"
 
 #: ../admin/logs_tail.php:40
 msgid "unknown"
-msgstr ""
+msgstr "desconocido"
 
 #: ../admin/logs_tail.php:43
 msgid "Follow a recent log"
-msgstr ""
+msgstr "Seguir un registro reciente"
 
 #: ../admin/logs_tail.php:44
 #, php-format
 msgid "Please find below the last lines of file <b>%s</b>"
 msgstr ""
+"Por favor, encuentre a continuación las últimas líneas del archivo <b>%s</b>"
 
 #: ../admin/logs_tail.php:50
 msgid "Stop Auto Reload"
-msgstr ""
+msgstr "Detener la recarga automática"
 
 #: ../admin/logs_tail.php:54
 msgid "Auto Reload"
-msgstr ""
+msgstr "Recarga automática"
 
 #: ../admin/logs_tail.php:62
 msgid "Last lines shown"
-msgstr ""
+msgstr "Últimas líneas mostradas"
 
 #: ../admin/logs_tail.php:65
 msgid "Back to the logs list"
-msgstr ""
+msgstr "Volver a la lista de registros"
 
 #: ../admin/mail_del.php:53
 #, php-format
@@ -3951,7 +3979,7 @@ msgstr "Advertencia: ¡Borrar una dirección de correo electrónico borrará tod
 
 #: ../admin/mail_doedit.php:116
 msgid "Your email has been created successfully"
-msgstr ""
+msgstr "Tu correo electrónico ha sido creado exitosamente"
 
 #: ../admin/mail_doedit.php:118
 msgid "Your email has been edited successfully"
