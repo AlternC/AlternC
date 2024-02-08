@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: AlternC, hosting control panel\n"
 "Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
 "POT-Creation-Date: 2018-06-24 17:17+0200\n"
-"PO-Revision-Date: 2024-02-08 23:01+0000\n"
+"PO-Revision-Date: 2024-02-09 16:02+0000\n"
 "Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/alternc/alternc/"
 "es/>\n"
@@ -3568,7 +3568,7 @@ msgstr "Lista de cuentas FTP"
 
 #: ../admin/ftp_list.php:49
 msgid "Create a new FTP account"
-msgstr ""
+msgstr "Crea una nueva cuenta FTP"
 
 #: ../admin/ftp_list.php:74
 msgid "Are you sure you want to change his status?"
