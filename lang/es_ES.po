@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: AlternC, hosting control panel\n"
 "Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
 "POT-Creation-Date: 2018-06-24 17:17+0200\n"
-"PO-Revision-Date: 2024-02-09 16:02+0000\n"
+"PO-Revision-Date: 2024-02-11 13:02+0000\n"
 "Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/alternc/alternc/"
 "es/>\n"
@@ -4354,7 +4354,7 @@ msgstr "Última conexión: "
 #: ../admin/main.php:38
 #, php-format
 msgid "the %3$d-%2$d-%1$d at %4$d:%5$02d"
-msgstr ""
+msgstr "el %3$d-%2$d-%1$d a las %4$d:%5$02d"
 
 #: ../admin/main.php:39
 #, php-format
@@ -4383,6 +4383,9 @@ msgid ""
 "You are using the AlternC Panel. You can contact the AlternC community for "
 "information or feedback by joining the mailing-list"
 msgstr ""
+"Está utilizando el panel de AlternC. Puede ponerse en contacto con la "
+"comunidad AlternC para obtener información o comentarios uniéndose a la "
+"lista de correo"
 
 #: ../admin/mem_admin.php:34
 msgid "Your administrator preferences has been successfully changed."
@@ -4394,7 +4397,7 @@ msgstr "Preferencias de administrador"
 
 #: ../admin/mem_chgmail.php:34
 msgid "The mail was successfully changed"
-msgstr ""
+msgstr "El correo se ha modificado correctamente"
 
 #: ../admin/mem_chgmail.php:39 ../admin/mem_cm.php:37 ../admin/mem_cm.php:50
 #: ../admin/mem_cm2.php:42 ../admin/mem_param.php:94
@@ -4538,7 +4541,7 @@ msgstr "Actualmente no hay configuración de webmail. Si la necesita, contacte c
 
 #: ../admin/piwik_addaccount.php:32
 msgid "Max. 3 accounts"
-msgstr ""
+msgstr "Máx. 3 cuentas"
 
 #: ../admin/piwik_addaccount.php:32 ../admin/piwik_userlist.php:63
 msgid "You cannot add any new Piwik account, your quota is over."
@@ -4546,7 +4549,7 @@ msgstr "No es posible agregar una nueva cuenta Piwik, su cuota ha sido sobrepasa
 
 #: ../admin/piwik_addaccount.php:42
 msgid "Successfully added piwik account"
-msgstr ""
+msgstr "Cuenta de piwik añadida correctamente"
 
 #: ../admin/piwik_addsites.php:38 ../class/m_piwik.php:102
 msgid "All fields are mandatory"
@@ -4582,7 +4585,7 @@ msgstr "URL del sitio web"
 
 #: ../admin/piwik_sitelist.php:62
 msgid "You cannot add any new Piwik sites, your quota is over."
-msgstr ""
+msgstr "No puede añadir nuevos sitios Piwik, su cuota se ha agotado."
 
 #: ../admin/piwik_sitelist.php:76
 msgid "Existing Piwik monitored websites"
@@ -4599,7 +4602,7 @@ msgstr "El usuario no le pertenece"
 #: ../admin/piwik_sitelist.php:108
 #, php-format
 msgid "Account '%s' has been given '%s' rights on '%s'"
-msgstr ""
+msgstr "A la cuenta \"%s\" se le han dados derechos \"%s\" sobre \"%s\""
 
 #: ../admin/piwik_sitelist.php:122
 msgid "No existing Piwik websites"
@@ -4619,7 +4622,7 @@ msgstr "Gestión de las credenciales"
 
 #: ../admin/piwik_sitelist.php:213
 msgid "No user may access this site"
-msgstr ""
+msgstr "Ningún usuario puede acceder a este sitio"
 
 #: ../admin/piwik_user_dodel.php:33
 msgid "Missing login parameters"
@@ -4630,11 +4633,13 @@ msgid ""
 "To be able to delete the last user account, you must first remove all the "
 "piwik sites"
 msgstr ""
+"Para poder eliminar la última cuenta de usuario, primero debe eliminar todos "
+"los sitios piwik"
 
 #: ../admin/piwik_user_dodel.php:43
 #, php-format
 msgid "Account %s has been successfully deleted"
-msgstr ""
+msgstr "La cuenta %s se ha eliminado correctamente"
 
 #: ../admin/piwik_user_dodel.php:53
 msgid "Piwik accounts deletion confirm"
@@ -4691,11 +4696,11 @@ msgstr "Crear una nueva cuenta piwik"
 
 #: ../admin/piwik_userlist.php:43
 msgid "Account Name"
-msgstr ""
+msgstr "Nombre de la cuenta"
 
 #: ../admin/piwik_userlist.php:47
 msgid "Linked Account Email"
-msgstr ""
+msgstr "Correo electrónico de la cuenta vinculado"
 
 #: ../admin/piwik_userlist.php:67
 msgid "Existing Piwik accounts"
@@ -4703,7 +4708,7 @@ msgstr "Cuentas Piwik existentes"
 
 #: ../admin/piwik_userlist.php:73
 msgid "No existing Piwik accounts"
-msgstr ""
+msgstr "Sin cuentas Piwik"
 
 #: ../admin/piwik_userlist.php:79 ../admin/piwik_userlist.php:105
 #: ../admin/piwik_userlist.php:110
@@ -4715,6 +4720,8 @@ msgid ""
 "An error occurred. It was not possible to retrieve the access information to"
 " the Piwik interface"
 msgstr ""
+"Se ha producido un error. No ha sido posible recuperar la información de "
+"acceso a la interfaz Piwik"
 
 #: ../admin/quota_show.php:30
 msgid "Account's quotas"
@@ -4726,7 +4733,7 @@ msgstr "¡No hay cuota para esta cuenta, o imposible obtener cuota!"
 
 #: ../admin/quota_show.php:42
 msgid "Size on disk"
-msgstr ""
+msgstr "Tamaño del disco"
 
 #: ../admin/quotas_oneuser.php:47
 #, php-format
@@ -4924,7 +4931,7 @@ msgstr "No tienes ninguna base de datos definida"
 #: ../admin/sql_del.php:42
 #, php-format
 msgid "The database '%s' has been successfully deleted"
-msgstr ""
+msgstr "La base de datos '%s' se ha eliminado correctamente"
 
 #: ../admin/sql_del.php:58
 msgid "Please check which databases you want to delete"
@@ -4953,7 +4960,7 @@ msgstr "No es posible crear una base de datos: ha superado su cuota"
 #: ../admin/sql_doadd.php:49
 #, php-format
 msgid "The database '%s' has been created."
-msgstr ""
+msgstr "La base de datos '%s' ha sido creada."
 
 #: ../admin/sql_dobck.php:54
 msgid "Your backup parameters has been successfully changed."
@@ -4968,11 +4975,13 @@ msgid ""
 "Your database have been restored, check out the previous text for error "
 "messages."
 msgstr ""
+"Tu base de datos ha sido restaurada, revisa el texto anterior para ver los "
+"mensajes de error."
 
 #: ../admin/sql_getparam.php:41
 #, php-format
 msgid "MySQL settings for database '%s'"
-msgstr ""
+msgstr "Configuración MySQL para la base de datos '%s"
 
 #: ../admin/sql_getparam.php:52
 msgid "Your current connection settings are"
@@ -4980,7 +4989,7 @@ msgstr "Los ajustes actuales de su conexión son"
 
 #: ../admin/sql_getparam.php:61
 msgid "Database Settings"
-msgstr ""
+msgstr "Ajustes de la base de datos"
 
 #: ../admin/sql_getparam.php:64
 msgid "Mysql Server"
@@ -4993,15 +5002,15 @@ msgstr "Base de datos"
 
 #: ../admin/sql_getparam.php:83
 msgid "User Rights"
-msgstr ""
+msgstr "Permisos para los usuarios"
 
 #: ../admin/sql_getparam.php:88
 msgid "All permissions"
-msgstr ""
+msgstr "Todos los permisos"
 
 #: ../admin/sql_getparam.php:90
 msgid "Specific permissions"
-msgstr ""
+msgstr "Permisos específicos"
 
 #: ../admin/sql_getparam.php:96 ../admin/sql_users_list.php:54
 msgid "Manage the rights"
@@ -5009,7 +5018,7 @@ msgstr "Gestionar permisos"
 
 #: ../admin/sql_getparam.php:105
 msgid "Access PhpMyAdmin interface"
-msgstr ""
+msgstr "Acceder a la interfaz PhpMyAdmin"
 
 #: ../admin/sql_getparam.php:112
 msgid ""
@@ -5023,7 +5032,7 @@ msgstr "Volver al listado de bases de datos MySQL"
 
 #: ../admin/sql_list.php:39
 msgid "You have no database at the moment."
-msgstr ""
+msgstr "De momento no tienes base de datos."
 
 #: ../admin/sql_list.php:41 ../admin/sql_users_list.php:72
 msgid "You have no sql user at the moment."
@@ -5109,7 +5118,7 @@ msgstr "Crear nuevo usuario de MySQL"
 #: ../admin/sql_users_del.php:38 ../class/m_mysql.php:770
 #, php-format
 msgid "The user '%s' has been successfully deleted"
-msgstr ""
+msgstr "El usuario '%s' ha sido eliminado con éxito"
 
 #: ../admin/sql_users_del.php:49
 msgid "MySQL users"
@@ -5130,12 +5139,12 @@ msgstr "Sí, eliminar el usuario MySQL"
 #: ../admin/sql_users_doadd.php:41 ../admin/sql_users_doadd.php:50
 #, php-format
 msgid "The user '%s' has been successfully created."
-msgstr ""
+msgstr "El usuario '%s' ha sido creado con éxito."
 
 #: ../admin/sql_users_dopassword.php:35
 #, php-format
 msgid "Password changed for user '%s'."
-msgstr ""
+msgstr "Contraseña cambiada para el usuario '%s'."
 
 #: ../admin/sql_users_dorights.php:49
 msgid "The rights has been successfully applied to the user"
@@ -5156,7 +5165,7 @@ msgstr "Cambiar contraseña"
 #: ../admin/sql_users_rights.php:34
 #, php-format
 msgid "Manage MySQL rights for user '%s'"
-msgstr ""
+msgstr "Gestionar los derechos MySQL para el usuario '%s'"
 
 #: ../admin/sql_users_rights.php:82
 msgid "Reverse selection"
@@ -5168,31 +5177,31 @@ msgstr "Aplicar"
 
 #: ../admin/ssl_delete.php:43
 msgid "Your SSL Certificate has been deleted"
-msgstr ""
+msgstr "Su certificado SSL ha sido eliminado"
 
 #: ../admin/ssl_doimport.php:39
 msgid "Please enter an ssl key and a certificate"
-msgstr ""
+msgstr "Por favor, introduzca una clave ssl y un certificado"
 
 #: ../admin/ssl_donew.php:38
 msgid "Please enter a proper domain name"
-msgstr ""
+msgstr "Por favor ingrese un nombre de dominio adecuado"
 
 #: ../admin/ssl_finalize.php:49
 msgid "Your ssl certificate has been imported successfully"
-msgstr ""
+msgstr "Su certificado ssl se ha importado correctamente"
 
 #: ../admin/ssl_list.php:51 ../admin/ssl_view.php:50
 msgid "Pending Certificate"
-msgstr ""
+msgstr "Certificado pendiente"
 
 #: ../admin/ssl_list.php:52
 msgid "Valid"
-msgstr ""
+msgstr "Válido"
 
 #: ../admin/ssl_list.php:53
 msgid "Expired"
-msgstr ""
+msgstr "Caducado"
 
 #: ../admin/ssl_list.php:59
 msgid ""
@@ -5200,10 +5209,13 @@ msgid ""
 "browser will not let you surf those domains properly<br>To fix this, buy a "
 "properly signed certificate"
 msgstr ""
+"Algunos de tus hosting están usando un certificado <b>autofirmado</b>. "
+"<br>Tu navegador no te dejará navegar correctamente por esos "
+"dominios<br>Para solucionarlo, compra un certificado firmado correctamente"
 
 #: ../admin/ssl_list.php:71
 msgid "Your Certificates"
-msgstr ""
+msgstr "Sus certificados"
 
 #: ../admin/ssl_list.php:73
 msgid ""
@@ -5211,77 +5223,86 @@ msgid ""
 "administrator of the server, some may be Expired or Pending (waiting for a "
 "CRT from your Certificate Provider)"
 msgstr ""
+"Por favor, a continuación encontrará sus certificados SSL. Algunos pueden "
+"haber sido proporcionados por el administrador del servidor, otros pueden "
+"estar caducados o pendientes (a la espera de una CRT de su proveedor de "
+"certificados)"
 
 #: ../admin/ssl_list.php:75
 msgid "Only show the following certificates:"
-msgstr ""
+msgstr "Mostrar sólo los siguientes certificados:"
 
 #: ../admin/ssl_list.php:76
 msgid "Pending Certificates"
-msgstr ""
+msgstr "Certificados pendientes"
 
 #: ../admin/ssl_list.php:77
 msgid "Valid Certificates"
-msgstr ""
+msgstr "Certificados válidos"
 
 #: ../admin/ssl_list.php:78
 msgid "Expired Certificates"
-msgstr ""
+msgstr "Certificados caducados"
 
 #: ../admin/ssl_list.php:80
 msgid "Certificates Shared by the Administrator"
-msgstr ""
+msgstr "Certificados compartidos por el administrador"
 
 #: ../admin/ssl_list.php:82
 msgid "Filter"
-msgstr ""
+msgstr "Filtrar"
 
 #: ../admin/ssl_list.php:85
 msgid "Domain Name"
-msgstr ""
+msgstr "Nombre del dominio"
 
 #: ../admin/ssl_list.php:85
 msgid "Used by"
-msgstr ""
+msgstr "Utilizado por"
 
 #: ../admin/ssl_list.php:85
 msgid "Validity period"
-msgstr ""
+msgstr "Periodo de validez"
 
 #: ../admin/ssl_list.php:91
 msgid "Details"
-msgstr ""
+msgstr "Detalles"
 
 #: ../admin/ssl_list.php:97
 msgid "(shared)"
-msgstr ""
+msgstr "(compartido)"
 
 #: ../admin/ssl_list.php:111
 msgid "Requested on: "
-msgstr ""
+msgstr "Solicitado en: "
 
 #: ../admin/ssl_list.php:129
 msgid "Create one"
-msgstr ""
+msgstr "Crear uno"
 
 #: ../admin/ssl_list.php:130
 msgid ""
 "This hosting has no valid certificate<br>a self-signed one has been created"
 msgstr ""
+"Este alojamiento no tiene un certificado válido<br>se ha creado uno "
+"autofirmado"
 
 #: ../admin/ssl_list.php:140
 msgid "Create or Import a new SSL Certificate"
-msgstr ""
+msgstr "Crear o importar un nuevo certificado SSL"
 
 #: ../admin/ssl_new.php:42
 msgid "New SSL Certificate"
-msgstr ""
+msgstr "Nuevo certificado SSL"
 
 #: ../admin/ssl_new.php:50
 msgid ""
 "An SSL certificate is a file which must be obtained from a Certificate "
 "Authority, and allow you to enable HTTPS encryption on a domain name."
 msgstr ""
+"Un certificado SSL es un archivo que debe obtenerse de una Autoridad de "
+"Certificación, y le permite habilitar el cifrado HTTPS en un nombre de "
+"dominio."
 
 #: ../admin/ssl_new.php:53
 msgid ""
@@ -5290,48 +5311,59 @@ msgid ""
 "which will give you a certificate (CRT) and also often a chained certificate"
 " (CHAIN)."
 msgstr ""
+"Para obtener uno, es necesario generar una <i>Solicitud de Certificado</i> "
+"(CSR) y una <i>Clave RSA</i> (KEY) aquí, luego dar la CSR a la Autoridad de "
+"Certificación, que le dará un certificado (CRT) y también a menudo un "
+"certificado encadenado (CHAIN)."
 
 #: ../admin/ssl_new.php:56
 msgid ""
 "If you already know what it is and already have all those files "
 "(CRT/KEY/CHAIN) You can import them here too."
 msgstr ""
+"Si ya sabes qué es y ya tienes todos esos archivos (CRT/KEY/CHAIN), también "
+"puedes importarlos aquí."
 
 #: ../admin/ssl_new.php:64
 msgid "Create a CSR/KEY"
-msgstr ""
+msgstr "Crear una CSR/CLAVE"
 
 #: ../admin/ssl_new.php:65
 msgid "Import existing files"
-msgstr ""
+msgstr "Importar archivos existentes"
 
 #: ../admin/ssl_new.php:69
 msgid "Create a CSR/KEY for a given domain name"
-msgstr ""
+msgstr "Crear una CSR/KEY para un nombre de dominio determinado"
 
 #: ../admin/ssl_new.php:71
 msgid ""
 "Use this form to generate a <i>Certificate Request file</i> (CSR) and a "
 "<i>RSA Key file</i> (KEY) for a given domain name"
 msgstr ""
+"Utilice este formulario para generar un <i>archivo de solicitud de "
+"certificado</i> (CSR) y un <i>archivo de clave RSA</i> (KEY) para un nombre "
+"de dominio determinado"
 
 #: ../admin/ssl_new.php:99
 msgid ""
 "Please choose the domain name for which you want a SSL Certificate, or enter"
 " it manually"
 msgstr ""
+"Por favor, elija el nombre del dominio para el que desea un certificado SSL "
+"o introdúzcalo manualmente"
 
 #: ../admin/ssl_new.php:102 ../admin/ssl_view.php:61
 msgid "Fully Qualified Domain Name"
-msgstr ""
+msgstr "Nombre del dominio completo"
 
 #: ../admin/ssl_new.php:105
 msgid "--- Choose here ---"
-msgstr ""
+msgstr "--- Elige aquí ---"
 
 #: ../admin/ssl_new.php:111
 msgid "... or click here to enter it manually"
-msgstr ""
+msgstr "... o haz clic aquí para introducirlo manualmente"
 
 #: ../admin/ssl_new.php:124
 msgid ""
@@ -5339,6 +5371,9 @@ msgid ""
 "domain, use a wildcard notation (eg: *.example.com). Please note that a "
 "wildcard certificate is usually more expensive than normal one.)</i>"
 msgstr ""
+"<i>(Si desea obtener un certificado válido para todos los subdominios de un "
+"dominio, utilice una notación comodín (por ejemplo: *.ejemplo.com). Tenga en "
+"cuenta que un certificado comodín suele ser más caro que uno normal.)</i>"
 
 #: ../admin/ssl_new.php:124
 msgid ""
@@ -5347,34 +5382,42 @@ msgid ""
 "NOT valid for <code>intranet.example.com</code> or "
 "<code>intranet.www.example.com</code> !"
 msgstr ""
+"Por favor tenga en cuenta que un certificado SSL sólo es válido para un "
+"nombre de dominio completo. ¡Como resultado, un certificado para <code>www."
+"example.com</code> NO es válido para <code>intranet.example.com</code> o "
+"<code>intranet.www.example.com</code> !"
 
 #: ../admin/ssl_new.php:131
 msgid "Import existing Private Key, Certificate and Chain files"
-msgstr ""
+msgstr "Importar archivos existentes de claves privadas, certificados y cadenas"
 
 #: ../admin/ssl_new.php:133
 msgid ""
 "If you already have a RSA Private Key file, a Certificate for this key and "
 "(maybe) a Chained certificate, please paste their content here."
 msgstr ""
+"Si ya dispone de un archivo de clave privada RSA, un certificado para esta "
+"clave y (tal vez) un certificado encadenado, pegue aquí su contenido."
 
 #: ../admin/ssl_new.php:134
 msgid ""
 "We will verify the content of those files and add them in your certificate "
 "repository"
 msgstr ""
+"Verificaremos el contenido de esos archivos y los añadiremos a su "
+"repositorio de certificados"
 
 #: ../admin/ssl_new.php:140
 msgid "RSA Private Key"
-msgstr ""
+msgstr "Clave privada RSA"
 
 #: ../admin/ssl_new.php:144 ../admin/ssl_view.php:74 ../admin/ssl_view.php:158
 msgid "SSL Certificate"
-msgstr ""
+msgstr "Certificado SSL"
 
 #: ../admin/ssl_new.php:148 ../admin/ssl_view.php:78 ../admin/ssl_view.php:163
 msgid "Chained Certificate<br />(not mandatory)"
-msgstr ""
+msgstr "Certificado encadenado<br />(no obligatorio)"
 
 #: ../admin/ssl_view.php:52
 msgid ""
@@ -5382,6 +5425,9 @@ msgid ""
 "<i>private RSA Key</i> (KEY). Please find below the CSR you must send to "
 "your SSL Certificate provider."
 msgstr ""
+"Se ha creado su <i>Archivo de solicitud de certificado</i> (CSR), junto con "
+"su <i>clave RSA privada</i> (KEY). Por favor, encuentre a continuación la "
+"CSR que debe enviar a su proveedor de certificados SSL."
 
 #: ../admin/ssl_view.php:54
 msgid ""
@@ -5389,78 +5435,84 @@ msgid ""
 "Certificate File</i> (CHAIN), please paste them here to finish the "
 "enrollment."
 msgstr ""
+"Una vez que tenga su <i>certificado</i> (CRT) y un <i>Certificado "
+"encadenado</i> (CHAIN), péguelos aquí para finalizar la inscripción."
 
 #: ../admin/ssl_view.php:65
 msgid "Date of the request"
-msgstr ""
+msgstr "Fecha de la solicitud"
 
 #: ../admin/ssl_view.php:69 ../admin/ssl_view.php:153
 msgid "Certificate Request File"
-msgstr ""
+msgstr "Solicitud del certificado"
 
 #: ../admin/ssl_view.php:87
 msgid ""
 "Please confirm that you want to delete this certificate request AND ITS "
 "PRIVATE KEY!"
 msgstr ""
+"¡ Por favor, confirme que desea eliminar esta solicitud de certificado Y SU "
+"CLAVE PRIVADA!"
 
 #: ../admin/ssl_view.php:98
 msgid "Valid Certificate"
-msgstr ""
+msgstr "Certificado válido"
 
 #: ../admin/ssl_view.php:99
 msgid "Please find below your valid certificate data."
-msgstr ""
+msgstr "A continuación encontrará los datos válidos de su certificado."
 
 #: ../admin/ssl_view.php:105
 msgid "EXPIRED Certificate"
-msgstr ""
+msgstr "Certificado VENCIDO"
 
 #: ../admin/ssl_view.php:106
 msgid ""
 "Your certificate is EXPIRED. You should not use it for any purpose. Please "
 "find below its data."
 msgstr ""
+"Su certificado ha caducado. No debe utilizarlo para ningún fin. A "
+"continuación encontrará sus datos."
 
 #: ../admin/ssl_view.php:112
 msgid "Back to my SSL Certificates"
-msgstr ""
+msgstr "Volver a mis certificados SSL"
 
 #: ../admin/ssl_view.php:116
 msgid "Valid From:"
-msgstr ""
+msgstr "Válido desde:"
 
 #: ../admin/ssl_view.php:122
 #, php-format
 msgid "(%d days ago)"
-msgstr ""
+msgstr "(hace %d días)"
 
 #: ../admin/ssl_view.php:125
 #, php-format
 msgid "(%d month ago)"
-msgstr ""
+msgstr "(hace %d meses)"
 
 #: ../admin/ssl_view.php:130
 msgid "Valid Until:"
-msgstr ""
+msgstr "Válido hasta:"
 
 #: ../admin/ssl_view.php:136
 #, php-format
 msgid "(%d days from now)"
-msgstr ""
+msgstr "(%d días a partir de ahora)"
 
 #: ../admin/ssl_view.php:139
 #, php-format
 msgid "(%d month from now)"
-msgstr ""
+msgstr "(%d meses a partir de ahora)"
 
 #: ../admin/ssl_view.php:144
 msgid "FQDN:"
-msgstr ""
+msgstr "FQDN:"
 
 #: ../admin/ssl_view.php:148
 msgid "Other Valid FQDN:"
-msgstr ""
+msgstr "Otro FQDN válido:"
 
 #: ../admin/ssl_view.php:172
 msgid ""
@@ -5468,33 +5520,39 @@ msgid ""
 "certificate to host his services. <br />(This is only useful for wildcard or"
 " multi-domain certificates)."
 msgstr ""
+"Como administrador puede permitir que cualquier cuenta de este servidor "
+"utilice este certificado para alojar sus servicios. <br />(Esto sólo es útil "
+"para certificados comodín o multidominio)."
 
 #: ../admin/ssl_view.php:176
 msgid "This certificate is currently <b>shared</b>"
-msgstr ""
+msgstr "Este certificado está actualmente <b>compartido</b>"
 
 #: ../admin/ssl_view.php:184
 msgid "Click here to stop sharing this certificate"
-msgstr ""
+msgstr "Haga clic aquí para dejar de compartir este certificado"
 
 #: ../admin/ssl_view.php:189 ../admin/ssl_view.php:206
 msgid ""
 "You are not the owner of this certificate, only its owner can share/unshare "
 "this certificate."
 msgstr ""
+"Usted no es el propietario de este certificado, sólo su propietario puede "
+"compartir/no compartir este certificado."
 
 #: ../admin/ssl_view.php:193
 msgid "This certificate is currently <b>NOT shared</b>"
-msgstr ""
+msgstr "Este certificado actualmente <b>NO está compartido</b>"
 
 #: ../admin/ssl_view.php:201
 msgid "Click here to share this certificate"
-msgstr ""
+msgstr "Haga clic aquí para compartir este certificado"
 
 #: ../admin/ssl_view.php:218
 msgid ""
 "Please confirm that you want to delete this certificate AND ITS PRIVATE KEY!"
 msgstr ""
+"¡Por favor, confirme que desea borrar este certificado Y SU CLAVE PRIVADA!"
 
 #: ../admin/stats_members.php:28
 msgid ""
@@ -5596,6 +5654,8 @@ msgid ""
 "SAFE MODE IS ENABLED for the web panel ! It's a bug in your php or apache "
 "configuration, please fix it !!"
 msgstr ""
+"¡EL MODO SEGURO ESTÁ HABILITADO para el panel web ! ¡Es un error en la "
+"configuración de php o apache, por favor, arreglarlo !"
 
 #: ../class/functions.php:439
 msgid "Bytes"
@@ -5660,14 +5720,18 @@ msgstr "Eligir un fichero..."
 #: ../class/functions.php:1188
 msgid "The posted form token is incorrect. Maybe you need to allow cookies"
 msgstr ""
+"El token del formulario publicado es incorrecto. Tal vez usted necesita para "
+"permitir las cookies"
 
 #: ../class/functions.php:1193
 msgid "Your cookie or token is invalid"
-msgstr ""
+msgstr "Su cookie o token no es válido"
 
 #: ../class/functions.php:1198 ../class/functions.php:1202
 msgid "You can't post twice the same form, please retry."
 msgstr ""
+"No se puede publicar dos veces el mismo formulario, por favor, vuelva a "
+"intentarlo."
 
 #: ../class/m_action.php:212
 msgid "Error setting actions"
@@ -5758,6 +5822,7 @@ msgstr "-- ¡Solo los administradores tienen acceso a esta página! --"
 msgid ""
 "Invalid pattern type provided. Are you even performing a legitimate action?"
 msgstr ""
+"Tipo de patrón proporcionado no válido. ¿Está realizando una acción legítima?"
 
 #: ../class/m_admin.php:437
 msgid "Subject, message and sender are mandatory"
@@ -5781,7 +5846,7 @@ msgstr "Falta el camp db_server"
 
 #: ../class/m_admin.php:605 ../class/m_admin.php:610
 msgid "Please fill all mandatory fields"
-msgstr ""
+msgstr "Por favor, rellene todos los campos obligatorios"
 
 #: ../class/m_admin.php:615
 msgid "Please enter a valid email address"
@@ -5834,21 +5899,21 @@ msgstr "¡Esta cuenta NO es una cuenta de administrador!"
 #: ../class/m_admin.php:1190
 #, php-format
 msgid "NS for this domain are not %s and %s BUT %s"
-msgstr ""
+msgstr "Los NS para este dominio no son %s y %s PERO %s"
 
 #: ../class/m_admin.php:1206
 #, php-format
 msgid "MX is not %s BUT %s"
-msgstr ""
+msgstr "MX no es %s PERO %s"
 
 #: ../class/m_admin.php:1220
 msgid "Fail to get the DNS information. Try again."
-msgstr ""
+msgstr "No se pudo obtener la información de la DNS. Inténtelo de nuevo."
 
 #: ../class/m_admin.php:1223
 #, php-format
 msgid "subdomain '%s' doesn't point to %s but to '%s'"
-msgstr ""
+msgstr "el subdominio '%s' no apunta a %s sino a '%s'"
 
 #: ../class/m_admin.php:1232
 msgid "Domain doesn't exist anymore !"
@@ -5905,11 +5970,11 @@ msgstr "Su contraseña no contiene suficientes caracteres diferentes, entre min�
 #: ../class/m_authip.php:267 ../class/m_authip.php:332
 #: ../class/m_authip.php:338 ../class/m_authip.php:364
 msgid "query failed: "
-msgstr ""
+msgstr "consulta fallida: "
 
 #: ../class/m_authip.php:233
 msgid "Failed : not an IP address"
-msgstr ""
+msgstr "Error : no es una dirección IP"
 
 #: ../class/m_authip.php:387
 msgid "Object not available"
@@ -5962,7 +6027,7 @@ msgstr "Este directorio no existe"
 
 #: ../class/m_bro.php:198
 msgid "This directory is not readable."
-msgstr ""
+msgstr "Este directorio no es legible."
 
 #: ../class/m_bro.php:400 ../class/m_bro.php:1202
 msgid "Cannot create the requested directory. Please check the permissions"
@@ -5998,19 +6063,19 @@ msgstr "Error durante la carga del archivo:"
 
 #: ../class/m_bro.php:673
 msgid "Uncompressing through TAR"
-msgstr ""
+msgstr "Descomprimir con TAR"
 
 #: ../class/m_bro.php:678
 msgid "Uncompressing through UNZIP"
-msgstr ""
+msgstr "Descomprimir con UNZIP"
 
 #: ../class/m_bro.php:683
 msgid "Uncompressing through GUNZIP"
-msgstr ""
+msgstr "Descomprimir con GUNZIP"
 
 #: ../class/m_bro.php:688
 msgid "Uncompressing through bunzip2"
-msgstr ""
+msgstr "Descomprimir con bunzip2"
 
 #: ../class/m_bro.php:698
 #, php-format
@@ -6159,6 +6224,8 @@ msgid ""
 "The name you entered is incorrect or not fully qualified (it must end with a"
 " DOT, like example.com<b>.</b>)"
 msgstr ""
+"El nombre introducido es incorrecto o no está completamente cualificado ("
+"debe terminar en DOT, como ejemplo.com<b>.</b>)"
 
 #: ../class/m_dom.php:1332
 msgid "The TXT value you entered is incorrect"
@@ -6170,11 +6237,12 @@ msgstr "El tipo de dominio seleccionado no es válido, por favor, revíselo"
 
 #: ../class/m_dom.php:1400
 msgid "Subdomain not found"
-msgstr ""
+msgstr "Subdominio no encontrado"
 
 #: ../class/m_dom.php:1414
 msgid "No certificate found for this provider and this subdomain"
 msgstr ""
+"No se ha encontrado ningún certificado para este proveedor y este subdominio"
 
 #: ../class/m_dom.php:1454
 msgid ""
@@ -6203,6 +6271,9 @@ msgid ""
 " the mail here. Make sure to update your MX entries or no mail will be "
 "received"
 msgstr ""
+"No hay ningún registro MX que apunte a este servidor, y nos está pidiendo "
+"que alojemos el correo aquí. Asegúrese de actualizar sus entradas MX o no se "
+"recibirá ningún correo"
 
 #: ../class/m_dom.php:1673 ../class/m_dom.php:1699
 msgid "The IP address you entered is incorrect"
