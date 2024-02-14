@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: AlternC, hosting control panel\n"
 "Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
 "POT-Creation-Date: 2018-06-24 17:17+0200\n"
-"PO-Revision-Date: 2024-02-11 13:02+0000\n"
+"PO-Revision-Date: 2024-02-15 21:02+0000\n"
 "Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/alternc/alternc/"
 "es/>\n"
@@ -27,7 +27,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n == 1) ? 0 : ((n != 0 && n % 1000000 == 0)"
 " ? 1 : 2);\n"
-"X-Generator: Weblate 5.4-dev\n"
+"X-Generator: Weblate 5.4\n"
 
 #. Type: error
 #. Description
@@ -4079,7 +4079,7 @@ msgstr "Crear nueva cuenta de correo"
 
 #: ../admin/mail_list.php:59
 msgid "Manage Catch-all"
-msgstr ""
+msgstr "Gestionar Catch-all"
 
 #: ../admin/mail_list.php:73
 msgid "Can't have empty mail."
@@ -4091,7 +4091,7 @@ msgstr "Crear dirección de correo"
 
 #: ../admin/mail_list.php:78
 msgid "Manage Catch-all for this domain"
-msgstr ""
+msgstr "Gestionar Catch-all para este dominio"
 
 #: ../admin/mail_list.php:85
 #, php-format
@@ -4277,7 +4277,7 @@ msgstr "Tipo de objetivo desconocido"
 #: ../admin/mail_manage_catchall.php:74
 #, php-format
 msgid "Manage catch-all configuration of %s"
-msgstr ""
+msgstr "Gestionar la configuración catch-all de %s"
 
 #: ../admin/mail_manage_catchall.php:81
 msgid ""
@@ -6286,7 +6286,7 @@ msgstr "El dominio no está instalado en su cuenta"
 
 #: ../class/m_dom.php:1868
 msgid "The specified slave account already exists"
-msgstr ""
+msgstr "La cuenta esclava especificada ya existe"
 
 #: ../class/m_dom.php:1896
 msgid "--- Program error --- Lock already obtained!"
@@ -6298,6 +6298,8 @@ msgid ""
 "Problem on %s: there is more than 1 web configuration going to be generated "
 "for this sub-domain."
 msgstr ""
+"Problema en %s: se va a generar más de 1 configuración web para este "
+"subdominio."
 
 #: ../class/m_dom.php:2262
 #, php-format
@@ -6334,7 +6336,7 @@ msgstr "Redirección IPv6"
 
 #: ../class/m_dom.php:2281
 msgid "CNAME DNS entry"
-msgstr ""
+msgstr "Entrada DNS CNAME"
 
 #: ../class/m_dom.php:2282
 msgid "TXT DNS entry"
@@ -6374,7 +6376,7 @@ msgstr "Crear una nueva cuenta FTP"
 
 #: ../class/m_ftp.php:110
 msgid "This account do not exist or is not of this account"
-msgstr ""
+msgstr "Esta cuenta no existe o no es de esta cuenta"
 
 #: ../class/m_ftp.php:124
 msgid "Error during update"
@@ -6391,7 +6393,7 @@ msgstr "La cuenta FTP no existe"
 #: ../class/m_ftp.php:230
 #, php-format
 msgid "FTP login is incorrect: too many '%s'"
-msgstr ""
+msgstr "El inicio de sesión FTP es incorrecto: demasiados '%s'"
 
 #: ../class/m_ftp.php:236
 msgid "FTP login is incorrect"
@@ -6416,6 +6418,7 @@ msgstr "La clave no puede estar vacia"
 #: ../class/m_ftp.php:411
 msgid "Your FTP account quota is over. You cannot create more FTP accounts"
 msgstr ""
+"La cuota de tu cuenta FTP se ha superado. No puede crear más cuentas FTP"
 
 #: ../class/m_hta.php:46
 msgid "Protected folders"
@@ -6429,7 +6432,7 @@ msgstr "La carpeta '%s' no existe"
 
 #: ../class/m_hta.php:77
 msgid "Error creating .htaccess file: "
-msgstr ""
+msgstr "Error al crear el archivo .htaccess: "
 
 #: ../class/m_hta.php:81
 msgid "Restricted area"
@@ -6437,7 +6440,7 @@ msgstr "Area restringida"
 
 #: ../class/m_hta.php:87
 msgid "Error creating .htpasswd file: "
-msgstr ""
+msgstr "Error al crear el archivo .htpasswd: "
 
 #: ../class/m_hta.php:110
 msgid "No protected folder"
@@ -6451,7 +6454,7 @@ msgstr "No puedo leer el archivo %s"
 #: ../class/m_hta.php:224
 #, php-format
 msgid "Unexpected: No changes made to '%s'"
-msgstr ""
+msgstr "Error inesperado: No se han realizado cambios en '%s'"
 
 #: ../class/m_hta.php:229
 #, php-format
@@ -6510,7 +6513,7 @@ msgstr "No puede crear un email, has sobrepasado su couta"
 
 #: ../class/m_mail.php:381
 msgid "This email address already exists in mailman"
-msgstr ""
+msgstr "Esta dirección de correo electrónico ya existe en mailman"
 
 #: ../class/m_mail.php:383
 msgid "This email address already exists"
@@ -6536,7 +6539,7 @@ msgstr "El email %s ya esta marcado para ser borrado, no puede ser deseleccionad
 
 #: ../class/m_mail.php:559
 msgid "The email you entered does not exist"
-msgstr ""
+msgstr "El email no existe"
 
 #: ../class/m_mail.php:570
 #, php-format
@@ -6579,6 +6582,11 @@ msgid ""
 "email address and check 'Yes' in POP/IMAP account, or set some recipients in"
 " the redirection field."
 msgstr ""
+"Advertencia: ha creado un correo electrónico que no es un alias, y no un "
+"buzón POP/IMAP. Esto NO es ciertamente lo que quieres hacer. Para "
+"solucionarlo, edite la dirección de correo electrónico y marque 'Sí' en la "
+"cuenta POP/IMAP, o establezca algunos destinatarios en el campo de "
+"redirección."
 
 #: ../class/m_mail.php:896
 msgid "The slave MX account was not found"
