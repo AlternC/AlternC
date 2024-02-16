@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: AlternC, hosting control panel\n"
 "Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
 "POT-Creation-Date: 2018-06-24 17:17+0200\n"
-"PO-Revision-Date: 2024-02-15 21:02+0000\n"
+"PO-Revision-Date: 2024-02-17 14:02+0000\n"
 "Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/alternc/alternc/"
 "es/>\n"
@@ -6595,6 +6595,8 @@ msgstr "No se encontró el esclavo cuenta MX"
 #: ../class/m_mail.php:945
 msgid "Problem: can't create default bounce mail"
 msgstr ""
+"Problema: No se puede crear una dirección principal para las devoluciones de "
+"correo"
 
 #: ../class/m_mem.php:91 ../class/m_mem.php:97 ../class/m_mem.php:180
 #: ../class/m_mem.php:328
@@ -6660,6 +6662,25 @@ msgid ""
 "\n"
 "Cordially.\n"
 msgstr ""
+"Hola,\n"
+"\n"
+"Ha solicitado la modificación de su contraseña para su\n"
+"cuenta %s en %s\n"
+"Aquí tienes tu usuario y contraseña para acceder al panel :\n"
+"\n"
+"--------------------------------------\n"
+"\n"
+"Nombre de usuario : %s\n"
+"Contraseña : %s\n"
+"\n"
+"--------------------------------------\n"
+"\n"
+"Nota : si usted no solicitó esa modificación, significa que\n"
+"alguien lo hizo en su lugar. Puede ignorar este mensaje.\n"
+"Si vuelve a ocurrir, póngase en contacto con el administrador de su "
+"servidor. \n"
+"\n"
+"Cordialmente.\n"
 
 #: ../class/m_mem.php:509
 #, php-format
@@ -6683,6 +6704,25 @@ msgid ""
 "\n"
 "Cordially.\n"
 msgstr ""
+"Hola,\n"
+"\n"
+"Alguien (quizás tú) ha solicitado una modificación de la dirección de correo "
+"electrónico de la cuenta\n"
+"%s en %s\n"
+"Para confirmar su solicitud, vaya a esta url :\n"
+"\n"
+"%s\n"
+"\n"
+"(Atención : si esta dirección aparece en 2 líneas, no olvide\n"
+"tomarla en una línea).\n"
+"El panel le pedirá la clave dada cuando la dirección de correo electrónico\n"
+"fue solicitada.\n"
+"\n"
+"Si usted no solicitó esta modificación, significa que alguien\n"
+"lo hizo en su lugar. Puede elegir ignorar este mensaje. Si vuelve a ocurrir\n"
+"de nuevo, póngase en contacto con el administrador de su servidor.\n"
+"\n"
+"Cordialmente.\n"
 
 #: ../class/m_mem.php:551
 msgid "The information you entered is incorrect."
@@ -6803,7 +6843,7 @@ msgstr "Usuario de la base de datos no encontrado"
 
 #: ../class/m_mysql.php:486
 msgid "Could not grant rights"
-msgstr ""
+msgstr "No se pueden conceder derechos"
 
 #: ../class/m_mysql.php:503
 msgid "No file specified"
@@ -6893,7 +6933,7 @@ msgstr "quota_"
 
 #: ../class/m_quota.php:220
 msgid "Web disk space"
-msgstr ""
+msgstr "Espacio en el almacenamiento de la web"
 
 #: ../class/m_quota.php:262
 msgid "Error writing the quota entry!"
@@ -6901,7 +6941,7 @@ msgstr "Error al escribir la couta "
 
 #: ../class/m_quota.php:343
 msgid "Type can only contains characters a-z and 0-9"
-msgstr ""
+msgstr "Solo puede contener los caracteres a-z y 0-9"
 
 #: ../class/m_quota.php:595
 msgid "B"
@@ -6918,109 +6958,127 @@ msgstr "KB"
 #: ../class/m_ssl.php:99
 msgid "FATAL: no certificates in certificates table, even the SnakeOil one??"
 msgstr ""
+"ERROR FATAL: no hay certificados en la tabla de certificados, ¿ni siquiera "
+"el de SnakeOil?"
 
 #: ../class/m_ssl.php:132
 #, php-format
 msgid "Reloading domain %s as we have new certificate %s"
-msgstr ""
+msgstr "Recargando el dominio %s ya que tenemos un nuevo certificado %s"
 
 #: ../class/m_ssl.php:187
 msgid "Can't put file into /etc/ssl/certs/"
-msgstr ""
+msgstr "No se puede crear el archivo en /etc/ssl/certs/"
 
 #: ../class/m_ssl.php:194
 msgid "Can't put file into /etc/ssl/private/"
-msgstr ""
+msgstr "No se puede crear el archivo en /etc/ssl/private/"
 
 #: ../class/m_ssl.php:300
 msgid "No SSL certificates available"
-msgstr ""
+msgstr "No hay certificados SSL"
 
 #: ../class/m_ssl.php:324
 msgid "Bad FQDN domain name"
-msgstr ""
+msgstr "Nombre de dominio FQDN erróneo"
 
 #: ../class/m_ssl.php:330
 msgid "Can't generate a private key (1)"
-msgstr ""
+msgstr "No se puede generar una clave privada (1)"
 
 #: ../class/m_ssl.php:335
 msgid "Can't generate a private key (2)"
-msgstr ""
+msgstr "No se puede generar una clave privada (2)"
 
 #: ../class/m_ssl.php:346
 msgid "Can't generate a CSR"
-msgstr ""
+msgstr "No se puede generar un CSR"
 
 #: ../class/m_ssl.php:369
 msgid "Can't find this Certificate"
-msgstr ""
+msgstr "No se encuentra este certificado"
 
 #: ../class/m_ssl.php:470
 msgid "Certificate already exists in database"
-msgstr ""
+msgstr "El certificado ya existe en la base de datos"
 
 #: ../class/m_ssl.php:492
 msgid "Can't save the Key/Crt/Chain now. Please try later."
 msgstr ""
+"No se puede guardar la Key/Crt/Chain ahora. Por favor, inténtelo más tarde."
 
 #: ../class/m_ssl.php:532
 msgid "Can't save the Crt/Chain now. Please try later."
-msgstr ""
+msgstr "No se puede guardar el Crt/Chain ahora. Por favor, inténtelo más tarde."
 
 #: ../class/m_ssl.php:733
 msgid ""
 "Can't find the private key in the certificate table, please check your form."
 msgstr ""
+"No se encuentra la clave privada en la tabla de certificados, por favor "
+"compruebe su formulario."
 
 #: ../class/m_ssl.php:742
 msgid ""
 "The certificate must begin by BEGIN CERTIFICATE and end by END CERTIFICATE "
 "lines. Please check you pasted it in PEM form."
 msgstr ""
+"El certificado debe empezar por las líneas BEGIN CERTIFICATE y terminar por "
+"END CERTIFICATE. Compruebe que lo ha pegado en formato PEM."
 
 #: ../class/m_ssl.php:747
 msgid ""
 "The chained certificate must begin by BEGIN CERTIFICATE and end by END "
 "CERTIFICATE lines. Please check you pasted it in PEM form."
 msgstr ""
+"El certificado encadenado debe empezar por las líneas BEGIN CERTIFICATE y "
+"terminar por END CERTIFICATE. Compruebe que lo ha pegado en formato PEM."
 
 #: ../class/m_ssl.php:753
 msgid ""
 "The private key must begin by BEGIN (RSA )PRIVATE KEY and end by END (RSA "
 ")PRIVATE KEY lines. Please check you pasted it in PEM form."
 msgstr ""
+"La clave privada debe empezar por las líneas BEGIN (RSA )PRIVATE KEY y "
+"terminar por END (RSA )PRIVATE KEY. Compruebe que la ha pegado en formato "
+"PEM."
 
 #: ../class/m_ssl.php:789
 #, php-format
 msgid "The %d-th certificate in the chain is invalid"
-msgstr ""
+msgstr "El certificado %d-th de la cadena no es válido"
 
 #: ../class/m_ssl.php:797
 msgid "The certificate is invalid."
-msgstr ""
+msgstr "El certificado no es válido."
 
 #: ../class/m_ssl.php:802
 msgid "The private key is invalid."
-msgstr ""
+msgstr "La clave privada no es válida."
 
 #: ../class/m_ssl.php:807
 msgid "The private key is not the one signed inside the certificate."
-msgstr ""
+msgstr "La clave privada no es la que está firmada dentro del certificado."
 
 #: ../class/m_ssl.php:813
 msgid "Can't export your certificate as a string, please check its syntax."
 msgstr ""
+"No se puede exportar el certificado como una cadena, por favor, compruebe su "
+"sintaxis."
 
 #: ../class/m_ssl.php:818
 msgid ""
 "Can't export one of your chained certificates as a string, please check its "
 "syntax."
 msgstr ""
+"No se puede exportar uno de sus certificados encadenados como cadena, por "
+"favor compruebe su sintaxis."
 
 #: ../class/m_ssl.php:824
 msgid "Can't export your private key as a string, please check its syntax."
 msgstr ""
+"No se puede exportar su clave privada como una cadena, por favor, compruebe "
+"su sintaxis."
 
 #: ../class/mime.php:115
 msgid "CSS Stylesheet"
