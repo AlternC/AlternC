@@ -26,7 +26,7 @@ foreach($add as $domain => $id) {
     }
     // Convert autodiscover into SUB_DOMAINES table
     $db->query("INSERT INTO sub_domaines 
-    SET compte=?, domaine=?, sub='@', valeur='', type='autodiscover', web_action='UPDATE', web_result=0, enable='ENABLED';",
+    SET compte=?, domaine=?, sub='autodiscover', valeur='', type='autodiscover', web_action='UPDATE', web_result=0, enable='ENABLED';",
     array($id, $domain)
     );    
 }
