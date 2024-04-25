@@ -3,9 +3,7 @@
 # Get the quota
 #
 
-user = %%db_mail_user%%
-password = %%db_mail_pwd%%
-hosts =%%dbhost%%
-dbname = %%dbname%%
+option_file = /etc/alternc/my_mail.cnf
+
 query = select quota from mailbox join address on mailbox.id = address.id join domaines on domaines.id = address.id where concat(address.address,'@',domaines.domaine) = '%s'
 

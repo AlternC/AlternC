@@ -4,8 +4,6 @@
 # to modify this file.
 #
 
-user = %%db_mail_user%%
-password = %%db_mail_pwd%%
-hosts =%%dbhost%%
-dbname = %%dbname%%
+option_file = /etc/alternc/my_mail.cnf
+
 query = select domaines.domaine from domaines where domaine='%s' and gesmx=1;
