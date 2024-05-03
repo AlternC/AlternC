@@ -17,14 +17,17 @@ msgstr ""
 "Project-Id-Version: AlternC, hosting control panel\n"
 "Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
 "POT-Creation-Date: 2018-06-24 17:17+0200\n"
-"PO-Revision-Date: 2012-08-21 15:36+0000\n"
-"Last-Translator: Daniel Viñar <daniel@uruguayos.fr>, 2020\n"
-"Language-Team: Spanish (Spain) (http://app.transifex.com/octopuce/alternc/language/es_ES/)\n"
+"PO-Revision-Date: 2024-02-17 14:02+0000\n"
+"Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/alternc/alternc/"
+"es/>\n"
+"Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: es_ES\n"
-"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=(n == 1) ? 0 : ((n != 0 && n % 1000000 == 0)"
+" ? 1 : 2);\n"
+"X-Generator: Weblate 5.4\n"
 
 #. Type: error
 #. Description
@@ -1499,6 +1502,8 @@ msgid ""
 "To update the list of the server on the PhpMyAdmin login page, launch "
 "alternc.install"
 msgstr ""
+"Para actualizar la lista del servidor en la página de inicio de sesión de "
+"PhpMyAdmin, ejecute alternc.install"
 
 #: ../admin/adm_deactivate.php:44 ../class/m_admin.php:250
 #: ../class/m_admin.php:282 ../class/m_admin.php:795 ../class/m_admin.php:822
@@ -1570,7 +1575,7 @@ msgstr "He aquí la lista de cuotas por omisión en este servidor para las nueva
 
 #: ../admin/adm_defquotas.php:85
 msgid "Synchronise user's quota (only to upper value)"
-msgstr ""
+msgstr "Sincronizar la cuota del usuario (sólo al valor superior)"
 
 #: ../admin/adm_defquotas.php:98
 msgid "Accounts of type"
@@ -1780,7 +1785,7 @@ msgstr "Desbloquear"
 
 #: ../admin/adm_doms_def_type.php:38 ../admin/adm_panel.php:59
 msgid "Manage defaults domains type"
-msgstr ""
+msgstr "Administrar el tipo de dominios predeterminados"
 
 #: ../admin/adm_doms_def_type.php:40 ../admin/adm_domstype.php:39
 msgid ""
@@ -1799,6 +1804,8 @@ msgid ""
 "The Setting column contains the variables to be expanded in the defaults "
 "configuration. Available values are:  "
 msgstr ""
+"La columna Configuración contiene las variables que se expandirán en la "
+"configuración por defecto. Los valores disponibles son:  "
 
 #: ../admin/adm_doms_def_type.php:44
 #, php-format
@@ -1902,7 +1909,7 @@ msgstr "Regenerar"
 
 #: ../admin/adm_domstypedoedit.php:51
 msgid "Domain type is updated"
-msgstr ""
+msgstr "Tipo de dominio actualizado"
 
 #: ../admin/adm_domstypeedit.php:54
 msgid "Edit a domain type"
@@ -1944,7 +1951,7 @@ msgstr "Cambiar de tipo de dominio"
 
 #: ../admin/adm_domstyperegenerate.php:40
 msgid "Regenerate pending"
-msgstr ""
+msgstr "Regeneración pendiente"
 
 #: ../admin/adm_donosu.php:40
 msgid "This account is now a normal account"
@@ -2141,7 +2148,7 @@ msgstr "Enviar un mensaje de correo"
 #: ../admin/adm_list.php:194 ../admin/mail_list.php:160
 #, php-format
 msgid "%3$d-%2$d-%1$d"
-msgstr ""
+msgstr "%3$d-%2$d-%1$d"
 
 #: ../admin/adm_list.php:203
 msgid "DB:"
@@ -2589,22 +2596,22 @@ msgstr "Salir"
 #: ../admin/bro_main.php:73
 #, php-format
 msgid "The folder '%s' was successfully created"
-msgstr ""
+msgstr "La carpeta '%s' se ha creado correctamente"
 
 #: ../admin/bro_main.php:79
 #, php-format
 msgid "The file '%s' was successfully created"
-msgstr ""
+msgstr "El archivo '%s' se ha creado correctamente"
 
 #: ../admin/bro_main.php:94
 #, php-format
 msgid "The folder '%s' was successfully deleted"
-msgstr ""
+msgstr "La carpeta '%s' se ha eliminado correctamente"
 
 #: ../admin/bro_main.php:96
 #, php-format
 msgid "The file '%s' was successfully deleted"
-msgstr ""
+msgstr "El archivo \"%s\" se ha eliminado correctamente"
 
 #: ../admin/bro_main.php:102
 #, php-format
@@ -2626,58 +2633,58 @@ msgstr "No, no borrar esos archivos/carpetas"
 #: ../admin/bro_main.php:130
 #, php-format
 msgid "The folder '%s' was successfully copied to '%s'"
-msgstr ""
+msgstr "La carpeta \"%s\" se ha copiado correctamente en \"%s\""
 
 #: ../admin/bro_main.php:132
 #, php-format
 msgid "The file '%s' was successfully copied to '%s'"
-msgstr ""
+msgstr "El archivo \"%s\" se ha copiado correctamente en \"%s\""
 
 #: ../admin/bro_main.php:134
 msgid "The files / folders were successfully copied"
-msgstr ""
+msgstr "Los archivos / carpetas se han copiado correctamente"
 
 #: ../admin/bro_main.php:141
 #, php-format
 msgid "The folder '%s' was successfully moved to '%s'"
-msgstr ""
+msgstr "La carpeta \"%s\" se ha movido correctamente a \"%s\""
 
 #: ../admin/bro_main.php:143
 #, php-format
 msgid "The file '%s' was successfully moved to '%s'"
-msgstr ""
+msgstr "El archivo \"%s\" se ha movido correctamente a \"%s\""
 
 #: ../admin/bro_main.php:145
 msgid "The files / folders were successfully moved"
-msgstr ""
+msgstr "Los archivos / carpetas se han movido correctamente"
 
 #: ../admin/bro_main.php:153
 #, php-format
 msgid "The folder '%s' was successfully renamed to '%s'"
-msgstr ""
+msgstr "La carpeta \"%s\" se ha renombrado correctamente a \"%s\""
 
 #: ../admin/bro_main.php:155
 #, php-format
 msgid "The file '%s' was successfully renamed to '%s'"
-msgstr ""
+msgstr "El archivo \"%s\" se ha renombrado correctamente a \"%s\""
 
 #: ../admin/bro_main.php:157
 msgid "The files / folders were successfully renamed"
-msgstr ""
+msgstr "Los archivos / carpetas se han renombrado correctamente"
 
 #: ../admin/bro_main.php:162
 #, php-format
 msgid "The file '%s' was successfully uploaded"
-msgstr ""
+msgstr "El archivo \"%s\" se ha cargado correctamente"
 
 #: ../admin/bro_main.php:167
 msgid "The permissions were successfully set"
-msgstr ""
+msgstr "Los permisos se han establecido correctamente"
 
 #: ../admin/bro_main.php:175
 #, php-format
 msgid "The extraction of the file '%s' succeeded"
-msgstr ""
+msgstr "La extracción del archivo \"%s\" se ha realizado correctamente"
 
 #: ../admin/bro_main.php:180 ../class/m_bro.php:74
 msgid "File browser"
@@ -3108,15 +3115,15 @@ msgstr "(introduzca un nombre de dominio o subdominio)"
 
 #: ../admin/dom_edit.inc.php:132
 msgid "HTTP Only (redirect HTTPS to HTTP)"
-msgstr ""
+msgstr "Solo HTTP (redirigir HTTPS a HTTP)"
 
 #: ../admin/dom_edit.inc.php:133
 msgid "HTTPS Only (redirect HTTP to HTTPS)"
-msgstr ""
+msgstr "Solo HTTPS (redirigir HTTP a HTTPS)"
 
 #: ../admin/dom_edit.inc.php:134
 msgid "Both HTTP and HTTPS hosted at the same place"
-msgstr ""
+msgstr "Tanto HTTP como HTTPS alojados en el mismo lugar"
 
 #: ../admin/dom_edit.inc.php:144
 msgid "Edit this subdomain"
@@ -3156,7 +3163,7 @@ msgstr "Ha solicitado que se elimine el dominio %s."
 
 #: ../admin/dom_edit.php:110
 msgid "DNS zone is locked, changes will be ignored"
-msgstr ""
+msgstr "La zona DNS está bloqueada, los cambios serán ignorados"
 
 #: ../admin/dom_edit.php:120
 msgid "Edit subdomains"
@@ -3172,11 +3179,11 @@ msgstr "Configuración"
 
 #: ../admin/dom_edit.php:131
 msgid "Main subdomains"
-msgstr ""
+msgstr "Subdominios principales"
 
 #: ../admin/dom_edit.php:145 ../admin/dom_edit.php:159
 msgid "HTTPS"
-msgstr ""
+msgstr "HTTPS"
 
 #: ../admin/dom_edit.php:145 ../admin/dom_edit.php:159
 #: ../admin/dom_sslpref.php:82
@@ -3185,11 +3192,12 @@ msgstr "Subdominio"
 
 #: ../admin/dom_edit.php:155
 msgid "Advanced subdomains"
-msgstr ""
+msgstr "Subdominios avanzados"
 
 #: ../admin/dom_edit.php:156
 msgid "The following entries are advanced ones, edit them at your own risks."
 msgstr ""
+"Las siguientes entradas son avanzadas, edítalas bajo tu responsabilidad."
 
 #: ../admin/dom_edit.php:172
 msgid "Forbidden"
@@ -3197,19 +3205,19 @@ msgstr "Prohibido"
 
 #: ../admin/dom_edit.php:191
 msgid "HTTP only"
-msgstr ""
+msgstr "Solo HTTP"
 
 #: ../admin/dom_edit.php:194
 msgid "HTTPS only"
-msgstr ""
+msgstr "Solo HTTPS"
 
 #: ../admin/dom_edit.php:197
 msgid "HTTP and HTTPS"
-msgstr ""
+msgstr "HTTP y HTTPS"
 
 #: ../admin/dom_edit.php:200
 msgid "Unknown"
-msgstr ""
+msgstr "Desconocido"
 
 #: ../admin/dom_edit.php:206
 msgid "ERROR, please check your server setup"
@@ -3246,7 +3254,7 @@ msgstr "Eliminación pendiente"
 
 #: ../admin/dom_edit.php:265
 msgid "HTTPS Preferences for this domain"
-msgstr ""
+msgstr "Ajustes del HTTPS para este dominio"
 
 #: ../admin/dom_edit.php:273
 #, php-format
@@ -3292,6 +3300,8 @@ msgstr "Validar cambios"
 #: ../admin/dom_edit.php:331 ../admin/dom_edit.php:370
 msgid "This domain is locked, only a server administrator can unlock it."
 msgstr ""
+"Este dominio está bloqueado, solo un administrador del servidor puede "
+"desbloquearlo."
 
 #: ../admin/dom_edit.php:338
 msgid ""
@@ -3337,6 +3347,7 @@ msgstr "El dominio %s fue modificado."
 #, php-format
 msgid "The modifications will take effect at %s.  Server time is %s."
 msgstr ""
+"Las modificaciones entrarán en vigor a las %s.  La hora del servidor es %s."
 
 #: ../admin/dom_import.php:39
 msgid "Import a DNS zone"
@@ -3351,6 +3362,8 @@ msgid ""
 "Here is my proposition. Modify your zone until my proposition seems good to "
 "you"
 msgstr ""
+"Esta es mi propuesta. Modifica tu zona hasta que mi propuesta te parezca "
+"buena"
 
 #: ../admin/dom_import.php:55
 #, php-format
@@ -3403,12 +3416,12 @@ msgstr "Enviar"
 
 #: ../admin/dom_sslpref.php:60
 msgid "Your HTTPS preferences have been set"
-msgstr ""
+msgstr "Sus ajustes HTTPS han sido establecidos"
 
 #: ../admin/dom_sslpref.php:68
 #, php-format
 msgid "Manage %s HTTPS preferences"
-msgstr ""
+msgstr "Gestionar los ajustes HTTPS de %s"
 
 #: ../admin/dom_sslpref.php:70
 msgid ""
@@ -3416,34 +3429,41 @@ msgid ""
 "certificate provider. <br />Usually you'd want to click 'edit' in front of a"
 " subdomain to choose between HTTP and HTTPS by default."
 msgstr ""
+"Estos parámetros son para usuarios avanzados que quieran elegir un proveedor "
+"de certificados específico. <br />Usualmente querrás hacer clic en 'editar' "
+"delante de un subdominio para elegir entre HTTP y HTTPS por defecto."
 
 #: ../admin/dom_sslpref.php:72
 msgid ""
 "For each subdomain that may be available through HTTPS, please choose which "
 "certificate provider you want to use."
 msgstr ""
+"Para cada subdominio que pueda estar disponible a través de HTTPS, elija qué "
+"proveedor de certificados desea utilizar."
 
 #: ../admin/dom_sslpref.php:74
 msgid ""
 "please note that you only see a provider if you have a valid certificate for"
 " this domain"
 msgstr ""
+"por favor, tenga en cuenta que solo verá un proveedor si tiene un "
+"certificado válido para este dominio"
 
 #: ../admin/dom_sslpref.php:82
 msgid "HTTPS Preference"
-msgstr ""
+msgstr "Ajustes HTTPS"
 
 #: ../admin/dom_sslpref.php:96
 msgid "-- no HTTPS certificate provider preference --"
-msgstr ""
+msgstr "-- no hay ajustes del proveedor del certificado HTTPS --"
 
 #: ../admin/dom_sslpref.php:103
 msgid "Provider:"
-msgstr ""
+msgstr "Proveedor:"
 
 #: ../admin/dom_sslpref.php:116
 msgid "Set my HTTPS certificate preferences"
-msgstr ""
+msgstr "Establecer mis ajustes del certificado HTTPS"
 
 #: ../admin/dom_subdel.php:46
 #, php-format
@@ -3483,6 +3503,7 @@ msgstr "Suprimesión del subdominio %s:"
 #, php-format
 msgid "The modifications will take effect at %s. Server time is %s."
 msgstr ""
+"Las modificaciones entrarán en vigor a las %s . La hora del servidor es %s ."
 
 #: ../admin/dom_subedit.php:68
 msgid "Editing subdomain"
@@ -3491,7 +3512,7 @@ msgstr "Modificando subdominio"
 #: ../admin/ftp_del.php:52
 #, php-format
 msgid "The FTP account %s has been successfully deleted"
-msgstr ""
+msgstr "La cuenta FTP %s ha sido eliminado exitosamente"
 
 #: ../admin/ftp_del.php:60
 msgid "Confirm the FTP accounts deletion"
@@ -3511,7 +3532,7 @@ msgstr "Se creó correctamente la cuenta FTP"
 
 #: ../admin/ftp_doedit.php:61
 msgid "The FTP account has been successfully saved"
-msgstr ""
+msgstr "La cuenta FTP se ha guardado correctamente"
 
 #: ../admin/ftp_edit.php:39
 msgid "Neither a creation nor a edition"
@@ -3530,6 +3551,8 @@ msgid ""
 "This is the root folder for this FTP user. i.e. this FTP user can access to "
 "this folder and all its sub-folders."
 msgstr ""
+"Esta es la carpeta raíz de este usuario de FTP. es decir, este usuario de "
+"FTP puede acceder a esta carpeta y a todas sus subcarpetas."
 
 #: ../admin/ftp_edit.php:93
 msgid "Click here if you want to edit password"
@@ -3545,11 +3568,11 @@ msgstr "Lista de cuentas FTP"
 
 #: ../admin/ftp_list.php:49
 msgid "Create a new FTP account"
-msgstr ""
+msgstr "Crea una nueva cuenta FTP"
 
 #: ../admin/ftp_list.php:74
 msgid "Are you sure you want to change his status?"
-msgstr ""
+msgstr "¿Estás seguro de que quieres cambiar su estado?"
 
 #: ../admin/ftp_list.php:102
 msgid "FTP configuration information"
@@ -3585,11 +3608,11 @@ msgstr "las que especificó cuando creó la cuenta. Puede editarlas en el panel.
 
 #: ../admin/ftp_switch_enable.php:37
 msgid "The FTP account is enabled"
-msgstr ""
+msgstr "La cuenta FTP está habilitada"
 
 #: ../admin/ftp_switch_enable.php:39
 msgid "The FTP account is disabled"
-msgstr ""
+msgstr "La cuenta FTP está deshabilitada"
 
 #: ../admin/head.php:36
 msgid ""
@@ -3639,17 +3662,17 @@ msgstr "No se ha especificado un directorio"
 #: ../admin/hta_doadd.php:40
 #, php-format
 msgid "Folder %s is protected"
-msgstr ""
+msgstr "La crpeta %s está protegida"
 
 #: ../admin/hta_doadduser.php:45
 #, php-format
 msgid "The user %s was added to the protected folder %s"
-msgstr ""
+msgstr "El usuario %s ha sido agregado a la carpeta protegida %s"
 
 #: ../admin/hta_dodeluser.php:39
 #, php-format
 msgid "The user '%s' was successfully deleted"
-msgstr ""
+msgstr "El usuario '%s ' fue eliminado exitosamente"
 
 #: ../admin/hta_dodeluser.php:48
 msgid "Authorized user deletion confirm"
@@ -3737,6 +3760,8 @@ msgid ""
 "WARNING: you are trying to access the control panel insecurely, click <a "
 "href=\"https://%s\">here</a> to go to secure mode"
 msgstr ""
+"ADVERTENCIA: está intentando acceder al panel de control de forma insegura, "
+"haga clic en <a href=\"https://%s\"> aquí</a> para ir al modo seguro"
 
 #: ../admin/index.php:72
 msgid ""
@@ -3775,7 +3800,7 @@ msgstr "Es necesario un nombre de acceso y una contraseña"
 
 #: ../admin/ip_main.php:48
 msgid "Error during ip_affected_save"
-msgstr ""
+msgstr "Error durante ip_affected_save"
 
 #: ../admin/ip_main.php:75 ../class/m_authip.php:50
 msgid "FTP Access Security"
@@ -3871,6 +3896,8 @@ msgid ""
 "Here are web logs of your account.<br/>You can download them to do specific "
 "extract and statistics."
 msgstr ""
+"Aquí están los registros web de su cuenta.<br/> Puede descargarlos para "
+"realizar extractos y estadísticas específicos."
 
 #: ../admin/logs_list.php:50
 msgid "Creation Date"
@@ -3886,36 +3913,37 @@ msgstr "Bajar"
 
 #: ../admin/logs_list.php:64
 msgid "Follow"
-msgstr ""
+msgstr "Seguir"
 
 #: ../admin/logs_tail.php:40
 msgid "unknown"
-msgstr ""
+msgstr "desconocido"
 
 #: ../admin/logs_tail.php:43
 msgid "Follow a recent log"
-msgstr ""
+msgstr "Seguir un registro reciente"
 
 #: ../admin/logs_tail.php:44
 #, php-format
 msgid "Please find below the last lines of file <b>%s</b>"
 msgstr ""
+"Por favor, encuentre a continuación las últimas líneas del archivo <b>%s</b>"
 
 #: ../admin/logs_tail.php:50
 msgid "Stop Auto Reload"
-msgstr ""
+msgstr "Detener la recarga automática"
 
 #: ../admin/logs_tail.php:54
 msgid "Auto Reload"
-msgstr ""
+msgstr "Recarga automática"
 
 #: ../admin/logs_tail.php:62
 msgid "Last lines shown"
-msgstr ""
+msgstr "Últimas líneas mostradas"
 
 #: ../admin/logs_tail.php:65
 msgid "Back to the logs list"
-msgstr ""
+msgstr "Volver a la lista de registros"
 
 #: ../admin/mail_del.php:53
 #, php-format
@@ -3951,7 +3979,7 @@ msgstr "Advertencia: ¡Borrar una dirección de correo electrónico borrará tod
 
 #: ../admin/mail_doedit.php:116
 msgid "Your email has been created successfully"
-msgstr ""
+msgstr "Tu correo electrónico ha sido creado exitosamente"
 
 #: ../admin/mail_doedit.php:118
 msgid "Your email has been edited successfully"
@@ -4051,7 +4079,7 @@ msgstr "Crear nueva cuenta de correo"
 
 #: ../admin/mail_list.php:59
 msgid "Manage Catch-all"
-msgstr ""
+msgstr "Gestionar Catch-all"
 
 #: ../admin/mail_list.php:73
 msgid "Can't have empty mail."
@@ -4063,7 +4091,7 @@ msgstr "Crear dirección de correo"
 
 #: ../admin/mail_list.php:78
 msgid "Manage Catch-all for this domain"
-msgstr ""
+msgstr "Gestionar Catch-all para este dominio"
 
 #: ../admin/mail_list.php:85
 #, php-format
@@ -4249,7 +4277,7 @@ msgstr "Tipo de objetivo desconocido"
 #: ../admin/mail_manage_catchall.php:74
 #, php-format
 msgid "Manage catch-all configuration of %s"
-msgstr ""
+msgstr "Gestionar la configuración catch-all de %s"
 
 #: ../admin/mail_manage_catchall.php:81
 msgid ""
@@ -4326,7 +4354,7 @@ msgstr "Última conexión: "
 #: ../admin/main.php:38
 #, php-format
 msgid "the %3$d-%2$d-%1$d at %4$d:%5$02d"
-msgstr ""
+msgstr "el %3$d-%2$d-%1$d a las %4$d:%5$02d"
 
 #: ../admin/main.php:39
 #, php-format
@@ -4355,6 +4383,9 @@ msgid ""
 "You are using the AlternC Panel. You can contact the AlternC community for "
 "information or feedback by joining the mailing-list"
 msgstr ""
+"Está utilizando el panel de AlternC. Puede ponerse en contacto con la "
+"comunidad AlternC para obtener información o comentarios uniéndose a la "
+"lista de correo"
 
 #: ../admin/mem_admin.php:34
 msgid "Your administrator preferences has been successfully changed."
@@ -4366,7 +4397,7 @@ msgstr "Preferencias de administrador"
 
 #: ../admin/mem_chgmail.php:34
 msgid "The mail was successfully changed"
-msgstr ""
+msgstr "El correo se ha modificado correctamente"
 
 #: ../admin/mem_chgmail.php:39 ../admin/mem_cm.php:37 ../admin/mem_cm.php:50
 #: ../admin/mem_cm2.php:42 ../admin/mem_param.php:94
@@ -4510,7 +4541,7 @@ msgstr "Actualmente no hay configuración de webmail. Si la necesita, contacte c
 
 #: ../admin/piwik_addaccount.php:32
 msgid "Max. 3 accounts"
-msgstr ""
+msgstr "Máx. 3 cuentas"
 
 #: ../admin/piwik_addaccount.php:32 ../admin/piwik_userlist.php:63
 msgid "You cannot add any new Piwik account, your quota is over."
@@ -4518,7 +4549,7 @@ msgstr "No es posible agregar una nueva cuenta Piwik, su cuota ha sido sobrepasa
 
 #: ../admin/piwik_addaccount.php:42
 msgid "Successfully added piwik account"
-msgstr ""
+msgstr "Cuenta de piwik añadida correctamente"
 
 #: ../admin/piwik_addsites.php:38 ../class/m_piwik.php:102
 msgid "All fields are mandatory"
@@ -4554,7 +4585,7 @@ msgstr "URL del sitio web"
 
 #: ../admin/piwik_sitelist.php:62
 msgid "You cannot add any new Piwik sites, your quota is over."
-msgstr ""
+msgstr "No puede añadir nuevos sitios Piwik, su cuota se ha agotado."
 
 #: ../admin/piwik_sitelist.php:76
 msgid "Existing Piwik monitored websites"
@@ -4571,7 +4602,7 @@ msgstr "El usuario no le pertenece"
 #: ../admin/piwik_sitelist.php:108
 #, php-format
 msgid "Account '%s' has been given '%s' rights on '%s'"
-msgstr ""
+msgstr "A la cuenta \"%s\" se le han dados derechos \"%s\" sobre \"%s\""
 
 #: ../admin/piwik_sitelist.php:122
 msgid "No existing Piwik websites"
@@ -4591,7 +4622,7 @@ msgstr "Gestión de las credenciales"
 
 #: ../admin/piwik_sitelist.php:213
 msgid "No user may access this site"
-msgstr ""
+msgstr "Ningún usuario puede acceder a este sitio"
 
 #: ../admin/piwik_user_dodel.php:33
 msgid "Missing login parameters"
@@ -4602,11 +4633,13 @@ msgid ""
 "To be able to delete the last user account, you must first remove all the "
 "piwik sites"
 msgstr ""
+"Para poder eliminar la última cuenta de usuario, primero debe eliminar todos "
+"los sitios piwik"
 
 #: ../admin/piwik_user_dodel.php:43
 #, php-format
 msgid "Account %s has been successfully deleted"
-msgstr ""
+msgstr "La cuenta %s se ha eliminado correctamente"
 
 #: ../admin/piwik_user_dodel.php:53
 msgid "Piwik accounts deletion confirm"
@@ -4663,11 +4696,11 @@ msgstr "Crear una nueva cuenta piwik"
 
 #: ../admin/piwik_userlist.php:43
 msgid "Account Name"
-msgstr ""
+msgstr "Nombre de la cuenta"
 
 #: ../admin/piwik_userlist.php:47
 msgid "Linked Account Email"
-msgstr ""
+msgstr "Correo electrónico de la cuenta vinculado"
 
 #: ../admin/piwik_userlist.php:67
 msgid "Existing Piwik accounts"
@@ -4675,7 +4708,7 @@ msgstr "Cuentas Piwik existentes"
 
 #: ../admin/piwik_userlist.php:73
 msgid "No existing Piwik accounts"
-msgstr ""
+msgstr "Sin cuentas Piwik"
 
 #: ../admin/piwik_userlist.php:79 ../admin/piwik_userlist.php:105
 #: ../admin/piwik_userlist.php:110
@@ -4687,6 +4720,8 @@ msgid ""
 "An error occurred. It was not possible to retrieve the access information to"
 " the Piwik interface"
 msgstr ""
+"Se ha producido un error. No ha sido posible recuperar la información de "
+"acceso a la interfaz Piwik"
 
 #: ../admin/quota_show.php:30
 msgid "Account's quotas"
@@ -4698,7 +4733,7 @@ msgstr "¡No hay cuota para esta cuenta, o imposible obtener cuota!"
 
 #: ../admin/quota_show.php:42
 msgid "Size on disk"
-msgstr ""
+msgstr "Tamaño del disco"
 
 #: ../admin/quotas_oneuser.php:47
 #, php-format
@@ -4896,7 +4931,7 @@ msgstr "No tienes ninguna base de datos definida"
 #: ../admin/sql_del.php:42
 #, php-format
 msgid "The database '%s' has been successfully deleted"
-msgstr ""
+msgstr "La base de datos '%s' se ha eliminado correctamente"
 
 #: ../admin/sql_del.php:58
 msgid "Please check which databases you want to delete"
@@ -4925,7 +4960,7 @@ msgstr "No es posible crear una base de datos: ha superado su cuota"
 #: ../admin/sql_doadd.php:49
 #, php-format
 msgid "The database '%s' has been created."
-msgstr ""
+msgstr "La base de datos '%s' ha sido creada."
 
 #: ../admin/sql_dobck.php:54
 msgid "Your backup parameters has been successfully changed."
@@ -4940,11 +4975,13 @@ msgid ""
 "Your database have been restored, check out the previous text for error "
 "messages."
 msgstr ""
+"Tu base de datos ha sido restaurada, revisa el texto anterior para ver los "
+"mensajes de error."
 
 #: ../admin/sql_getparam.php:41
 #, php-format
 msgid "MySQL settings for database '%s'"
-msgstr ""
+msgstr "Configuración MySQL para la base de datos '%s"
 
 #: ../admin/sql_getparam.php:52
 msgid "Your current connection settings are"
@@ -4952,7 +4989,7 @@ msgstr "Los ajustes actuales de su conexión son"
 
 #: ../admin/sql_getparam.php:61
 msgid "Database Settings"
-msgstr ""
+msgstr "Ajustes de la base de datos"
 
 #: ../admin/sql_getparam.php:64
 msgid "Mysql Server"
@@ -4965,15 +5002,15 @@ msgstr "Base de datos"
 
 #: ../admin/sql_getparam.php:83
 msgid "User Rights"
-msgstr ""
+msgstr "Permisos para los usuarios"
 
 #: ../admin/sql_getparam.php:88
 msgid "All permissions"
-msgstr ""
+msgstr "Todos los permisos"
 
 #: ../admin/sql_getparam.php:90
 msgid "Specific permissions"
-msgstr ""
+msgstr "Permisos específicos"
 
 #: ../admin/sql_getparam.php:96 ../admin/sql_users_list.php:54
 msgid "Manage the rights"
@@ -4981,7 +5018,7 @@ msgstr "Gestionar permisos"
 
 #: ../admin/sql_getparam.php:105
 msgid "Access PhpMyAdmin interface"
-msgstr ""
+msgstr "Acceder a la interfaz PhpMyAdmin"
 
 #: ../admin/sql_getparam.php:112
 msgid ""
@@ -4995,7 +5032,7 @@ msgstr "Volver al listado de bases de datos MySQL"
 
 #: ../admin/sql_list.php:39
 msgid "You have no database at the moment."
-msgstr ""
+msgstr "De momento no tienes base de datos."
 
 #: ../admin/sql_list.php:41 ../admin/sql_users_list.php:72
 msgid "You have no sql user at the moment."
@@ -5081,7 +5118,7 @@ msgstr "Crear nuevo usuario de MySQL"
 #: ../admin/sql_users_del.php:38 ../class/m_mysql.php:770
 #, php-format
 msgid "The user '%s' has been successfully deleted"
-msgstr ""
+msgstr "El usuario '%s' ha sido eliminado con éxito"
 
 #: ../admin/sql_users_del.php:49
 msgid "MySQL users"
@@ -5102,12 +5139,12 @@ msgstr "Sí, eliminar el usuario MySQL"
 #: ../admin/sql_users_doadd.php:41 ../admin/sql_users_doadd.php:50
 #, php-format
 msgid "The user '%s' has been successfully created."
-msgstr ""
+msgstr "El usuario '%s' ha sido creado con éxito."
 
 #: ../admin/sql_users_dopassword.php:35
 #, php-format
 msgid "Password changed for user '%s'."
-msgstr ""
+msgstr "Contraseña cambiada para el usuario '%s'."
 
 #: ../admin/sql_users_dorights.php:49
 msgid "The rights has been successfully applied to the user"
@@ -5128,7 +5165,7 @@ msgstr "Cambiar contraseña"
 #: ../admin/sql_users_rights.php:34
 #, php-format
 msgid "Manage MySQL rights for user '%s'"
-msgstr ""
+msgstr "Gestionar los derechos MySQL para el usuario '%s'"
 
 #: ../admin/sql_users_rights.php:82
 msgid "Reverse selection"
@@ -5140,31 +5177,31 @@ msgstr "Aplicar"
 
 #: ../admin/ssl_delete.php:43
 msgid "Your SSL Certificate has been deleted"
-msgstr ""
+msgstr "Su certificado SSL ha sido eliminado"
 
 #: ../admin/ssl_doimport.php:39
 msgid "Please enter an ssl key and a certificate"
-msgstr ""
+msgstr "Por favor, introduzca una clave ssl y un certificado"
 
 #: ../admin/ssl_donew.php:38
 msgid "Please enter a proper domain name"
-msgstr ""
+msgstr "Por favor ingrese un nombre de dominio adecuado"
 
 #: ../admin/ssl_finalize.php:49
 msgid "Your ssl certificate has been imported successfully"
-msgstr ""
+msgstr "Su certificado ssl se ha importado correctamente"
 
 #: ../admin/ssl_list.php:51 ../admin/ssl_view.php:50
 msgid "Pending Certificate"
-msgstr ""
+msgstr "Certificado pendiente"
 
 #: ../admin/ssl_list.php:52
 msgid "Valid"
-msgstr ""
+msgstr "Válido"
 
 #: ../admin/ssl_list.php:53
 msgid "Expired"
-msgstr ""
+msgstr "Caducado"
 
 #: ../admin/ssl_list.php:59
 msgid ""
@@ -5172,10 +5209,13 @@ msgid ""
 "browser will not let you surf those domains properly<br>To fix this, buy a "
 "properly signed certificate"
 msgstr ""
+"Algunos de tus hosting están usando un certificado <b>autofirmado</b>. "
+"<br>Tu navegador no te dejará navegar correctamente por esos "
+"dominios<br>Para solucionarlo, compra un certificado firmado correctamente"
 
 #: ../admin/ssl_list.php:71
 msgid "Your Certificates"
-msgstr ""
+msgstr "Sus certificados"
 
 #: ../admin/ssl_list.php:73
 msgid ""
@@ -5183,77 +5223,86 @@ msgid ""
 "administrator of the server, some may be Expired or Pending (waiting for a "
 "CRT from your Certificate Provider)"
 msgstr ""
+"Por favor, a continuación encontrará sus certificados SSL. Algunos pueden "
+"haber sido proporcionados por el administrador del servidor, otros pueden "
+"estar caducados o pendientes (a la espera de una CRT de su proveedor de "
+"certificados)"
 
 #: ../admin/ssl_list.php:75
 msgid "Only show the following certificates:"
-msgstr ""
+msgstr "Mostrar sólo los siguientes certificados:"
 
 #: ../admin/ssl_list.php:76
 msgid "Pending Certificates"
-msgstr ""
+msgstr "Certificados pendientes"
 
 #: ../admin/ssl_list.php:77
 msgid "Valid Certificates"
-msgstr ""
+msgstr "Certificados válidos"
 
 #: ../admin/ssl_list.php:78
 msgid "Expired Certificates"
-msgstr ""
+msgstr "Certificados caducados"
 
 #: ../admin/ssl_list.php:80
 msgid "Certificates Shared by the Administrator"
-msgstr ""
+msgstr "Certificados compartidos por el administrador"
 
 #: ../admin/ssl_list.php:82
 msgid "Filter"
-msgstr ""
+msgstr "Filtrar"
 
 #: ../admin/ssl_list.php:85
 msgid "Domain Name"
-msgstr ""
+msgstr "Nombre del dominio"
 
 #: ../admin/ssl_list.php:85
 msgid "Used by"
-msgstr ""
+msgstr "Utilizado por"
 
 #: ../admin/ssl_list.php:85
 msgid "Validity period"
-msgstr ""
+msgstr "Periodo de validez"
 
 #: ../admin/ssl_list.php:91
 msgid "Details"
-msgstr ""
+msgstr "Detalles"
 
 #: ../admin/ssl_list.php:97
 msgid "(shared)"
-msgstr ""
+msgstr "(compartido)"
 
 #: ../admin/ssl_list.php:111
 msgid "Requested on: "
-msgstr ""
+msgstr "Solicitado en: "
 
 #: ../admin/ssl_list.php:129
 msgid "Create one"
-msgstr ""
+msgstr "Crear uno"
 
 #: ../admin/ssl_list.php:130
 msgid ""
 "This hosting has no valid certificate<br>a self-signed one has been created"
 msgstr ""
+"Este alojamiento no tiene un certificado válido<br>se ha creado uno "
+"autofirmado"
 
 #: ../admin/ssl_list.php:140
 msgid "Create or Import a new SSL Certificate"
-msgstr ""
+msgstr "Crear o importar un nuevo certificado SSL"
 
 #: ../admin/ssl_new.php:42
 msgid "New SSL Certificate"
-msgstr ""
+msgstr "Nuevo certificado SSL"
 
 #: ../admin/ssl_new.php:50
 msgid ""
 "An SSL certificate is a file which must be obtained from a Certificate "
 "Authority, and allow you to enable HTTPS encryption on a domain name."
 msgstr ""
+"Un certificado SSL es un archivo que debe obtenerse de una Autoridad de "
+"Certificación, y le permite habilitar el cifrado HTTPS en un nombre de "
+"dominio."
 
 #: ../admin/ssl_new.php:53
 msgid ""
@@ -5262,48 +5311,59 @@ msgid ""
 "which will give you a certificate (CRT) and also often a chained certificate"
 " (CHAIN)."
 msgstr ""
+"Para obtener uno, es necesario generar una <i>Solicitud de Certificado</i> "
+"(CSR) y una <i>Clave RSA</i> (KEY) aquí, luego dar la CSR a la Autoridad de "
+"Certificación, que le dará un certificado (CRT) y también a menudo un "
+"certificado encadenado (CHAIN)."
 
 #: ../admin/ssl_new.php:56
 msgid ""
 "If you already know what it is and already have all those files "
 "(CRT/KEY/CHAIN) You can import them here too."
 msgstr ""
+"Si ya sabes qué es y ya tienes todos esos archivos (CRT/KEY/CHAIN), también "
+"puedes importarlos aquí."
 
 #: ../admin/ssl_new.php:64
 msgid "Create a CSR/KEY"
-msgstr ""
+msgstr "Crear una CSR/CLAVE"
 
 #: ../admin/ssl_new.php:65
 msgid "Import existing files"
-msgstr ""
+msgstr "Importar archivos existentes"
 
 #: ../admin/ssl_new.php:69
 msgid "Create a CSR/KEY for a given domain name"
-msgstr ""
+msgstr "Crear una CSR/KEY para un nombre de dominio determinado"
 
 #: ../admin/ssl_new.php:71
 msgid ""
 "Use this form to generate a <i>Certificate Request file</i> (CSR) and a "
 "<i>RSA Key file</i> (KEY) for a given domain name"
 msgstr ""
+"Utilice este formulario para generar un <i>archivo de solicitud de "
+"certificado</i> (CSR) y un <i>archivo de clave RSA</i> (KEY) para un nombre "
+"de dominio determinado"
 
 #: ../admin/ssl_new.php:99
 msgid ""
 "Please choose the domain name for which you want a SSL Certificate, or enter"
 " it manually"
 msgstr ""
+"Por favor, elija el nombre del dominio para el que desea un certificado SSL "
+"o introdúzcalo manualmente"
 
 #: ../admin/ssl_new.php:102 ../admin/ssl_view.php:61
 msgid "Fully Qualified Domain Name"
-msgstr ""
+msgstr "Nombre del dominio completo"
 
 #: ../admin/ssl_new.php:105
 msgid "--- Choose here ---"
-msgstr ""
+msgstr "--- Elige aquí ---"
 
 #: ../admin/ssl_new.php:111
 msgid "... or click here to enter it manually"
-msgstr ""
+msgstr "... o haz clic aquí para introducirlo manualmente"
 
 #: ../admin/ssl_new.php:124
 msgid ""
@@ -5311,6 +5371,9 @@ msgid ""
 "domain, use a wildcard notation (eg: *.example.com). Please note that a "
 "wildcard certificate is usually more expensive than normal one.)</i>"
 msgstr ""
+"<i>(Si desea obtener un certificado válido para todos los subdominios de un "
+"dominio, utilice una notación comodín (por ejemplo: *.ejemplo.com). Tenga en "
+"cuenta que un certificado comodín suele ser más caro que uno normal.)</i>"
 
 #: ../admin/ssl_new.php:124
 msgid ""
@@ -5319,34 +5382,42 @@ msgid ""
 "NOT valid for <code>intranet.example.com</code> or "
 "<code>intranet.www.example.com</code> !"
 msgstr ""
+"Por favor tenga en cuenta que un certificado SSL sólo es válido para un "
+"nombre de dominio completo. ¡Como resultado, un certificado para <code>www."
+"example.com</code> NO es válido para <code>intranet.example.com</code> o "
+"<code>intranet.www.example.com</code> !"
 
 #: ../admin/ssl_new.php:131
 msgid "Import existing Private Key, Certificate and Chain files"
-msgstr ""
+msgstr "Importar archivos existentes de claves privadas, certificados y cadenas"
 
 #: ../admin/ssl_new.php:133
 msgid ""
 "If you already have a RSA Private Key file, a Certificate for this key and "
 "(maybe) a Chained certificate, please paste their content here."
 msgstr ""
+"Si ya dispone de un archivo de clave privada RSA, un certificado para esta "
+"clave y (tal vez) un certificado encadenado, pegue aquí su contenido."
 
 #: ../admin/ssl_new.php:134
 msgid ""
 "We will verify the content of those files and add them in your certificate "
 "repository"
 msgstr ""
+"Verificaremos el contenido de esos archivos y los añadiremos a su "
+"repositorio de certificados"
 
 #: ../admin/ssl_new.php:140
 msgid "RSA Private Key"
-msgstr ""
+msgstr "Clave privada RSA"
 
 #: ../admin/ssl_new.php:144 ../admin/ssl_view.php:74 ../admin/ssl_view.php:158
 msgid "SSL Certificate"
-msgstr ""
+msgstr "Certificado SSL"
 
 #: ../admin/ssl_new.php:148 ../admin/ssl_view.php:78 ../admin/ssl_view.php:163
 msgid "Chained Certificate<br />(not mandatory)"
-msgstr ""
+msgstr "Certificado encadenado<br />(no obligatorio)"
 
 #: ../admin/ssl_view.php:52
 msgid ""
@@ -5354,6 +5425,9 @@ msgid ""
 "<i>private RSA Key</i> (KEY). Please find below the CSR you must send to "
 "your SSL Certificate provider."
 msgstr ""
+"Se ha creado su <i>Archivo de solicitud de certificado</i> (CSR), junto con "
+"su <i>clave RSA privada</i> (KEY). Por favor, encuentre a continuación la "
+"CSR que debe enviar a su proveedor de certificados SSL."
 
 #: ../admin/ssl_view.php:54
 msgid ""
@@ -5361,78 +5435,84 @@ msgid ""
 "Certificate File</i> (CHAIN), please paste them here to finish the "
 "enrollment."
 msgstr ""
+"Una vez que tenga su <i>certificado</i> (CRT) y un <i>Certificado "
+"encadenado</i> (CHAIN), péguelos aquí para finalizar la inscripción."
 
 #: ../admin/ssl_view.php:65
 msgid "Date of the request"
-msgstr ""
+msgstr "Fecha de la solicitud"
 
 #: ../admin/ssl_view.php:69 ../admin/ssl_view.php:153
 msgid "Certificate Request File"
-msgstr ""
+msgstr "Solicitud del certificado"
 
 #: ../admin/ssl_view.php:87
 msgid ""
 "Please confirm that you want to delete this certificate request AND ITS "
 "PRIVATE KEY!"
 msgstr ""
+"¡ Por favor, confirme que desea eliminar esta solicitud de certificado Y SU "
+"CLAVE PRIVADA!"
 
 #: ../admin/ssl_view.php:98
 msgid "Valid Certificate"
-msgstr ""
+msgstr "Certificado válido"
 
 #: ../admin/ssl_view.php:99
 msgid "Please find below your valid certificate data."
-msgstr ""
+msgstr "A continuación encontrará los datos válidos de su certificado."
 
 #: ../admin/ssl_view.php:105
 msgid "EXPIRED Certificate"
-msgstr ""
+msgstr "Certificado VENCIDO"
 
 #: ../admin/ssl_view.php:106
 msgid ""
 "Your certificate is EXPIRED. You should not use it for any purpose. Please "
 "find below its data."
 msgstr ""
+"Su certificado ha caducado. No debe utilizarlo para ningún fin. A "
+"continuación encontrará sus datos."
 
 #: ../admin/ssl_view.php:112
 msgid "Back to my SSL Certificates"
-msgstr ""
+msgstr "Volver a mis certificados SSL"
 
 #: ../admin/ssl_view.php:116
 msgid "Valid From:"
-msgstr ""
+msgstr "Válido desde:"
 
 #: ../admin/ssl_view.php:122
 #, php-format
 msgid "(%d days ago)"
-msgstr ""
+msgstr "(hace %d días)"
 
 #: ../admin/ssl_view.php:125
 #, php-format
 msgid "(%d month ago)"
-msgstr ""
+msgstr "(hace %d meses)"
 
 #: ../admin/ssl_view.php:130
 msgid "Valid Until:"
-msgstr ""
+msgstr "Válido hasta:"
 
 #: ../admin/ssl_view.php:136
 #, php-format
 msgid "(%d days from now)"
-msgstr ""
+msgstr "(%d días a partir de ahora)"
 
 #: ../admin/ssl_view.php:139
 #, php-format
 msgid "(%d month from now)"
-msgstr ""
+msgstr "(%d meses a partir de ahora)"
 
 #: ../admin/ssl_view.php:144
 msgid "FQDN:"
-msgstr ""
+msgstr "FQDN:"
 
 #: ../admin/ssl_view.php:148
 msgid "Other Valid FQDN:"
-msgstr ""
+msgstr "Otro FQDN válido:"
 
 #: ../admin/ssl_view.php:172
 msgid ""
@@ -5440,33 +5520,39 @@ msgid ""
 "certificate to host his services. <br />(This is only useful for wildcard or"
 " multi-domain certificates)."
 msgstr ""
+"Como administrador puede permitir que cualquier cuenta de este servidor "
+"utilice este certificado para alojar sus servicios. <br />(Esto sólo es útil "
+"para certificados comodín o multidominio)."
 
 #: ../admin/ssl_view.php:176
 msgid "This certificate is currently <b>shared</b>"
-msgstr ""
+msgstr "Este certificado está actualmente <b>compartido</b>"
 
 #: ../admin/ssl_view.php:184
 msgid "Click here to stop sharing this certificate"
-msgstr ""
+msgstr "Haga clic aquí para dejar de compartir este certificado"
 
 #: ../admin/ssl_view.php:189 ../admin/ssl_view.php:206
 msgid ""
 "You are not the owner of this certificate, only its owner can share/unshare "
 "this certificate."
 msgstr ""
+"Usted no es el propietario de este certificado, sólo su propietario puede "
+"compartir/no compartir este certificado."
 
 #: ../admin/ssl_view.php:193
 msgid "This certificate is currently <b>NOT shared</b>"
-msgstr ""
+msgstr "Este certificado actualmente <b>NO está compartido</b>"
 
 #: ../admin/ssl_view.php:201
 msgid "Click here to share this certificate"
-msgstr ""
+msgstr "Haga clic aquí para compartir este certificado"
 
 #: ../admin/ssl_view.php:218
 msgid ""
 "Please confirm that you want to delete this certificate AND ITS PRIVATE KEY!"
 msgstr ""
+"¡Por favor, confirme que desea borrar este certificado Y SU CLAVE PRIVADA!"
 
 #: ../admin/stats_members.php:28
 msgid ""
@@ -5568,6 +5654,8 @@ msgid ""
 "SAFE MODE IS ENABLED for the web panel ! It's a bug in your php or apache "
 "configuration, please fix it !!"
 msgstr ""
+"¡EL MODO SEGURO ESTÁ HABILITADO para el panel web ! ¡Es un error en la "
+"configuración de php o apache, por favor, arreglarlo !"
 
 #: ../class/functions.php:439
 msgid "Bytes"
@@ -5632,14 +5720,18 @@ msgstr "Eligir un fichero..."
 #: ../class/functions.php:1188
 msgid "The posted form token is incorrect. Maybe you need to allow cookies"
 msgstr ""
+"El token del formulario publicado es incorrecto. Tal vez usted necesita para "
+"permitir las cookies"
 
 #: ../class/functions.php:1193
 msgid "Your cookie or token is invalid"
-msgstr ""
+msgstr "Su cookie o token no es válido"
 
 #: ../class/functions.php:1198 ../class/functions.php:1202
 msgid "You can't post twice the same form, please retry."
 msgstr ""
+"No se puede publicar dos veces el mismo formulario, por favor, vuelva a "
+"intentarlo."
 
 #: ../class/m_action.php:212
 msgid "Error setting actions"
@@ -5730,6 +5822,7 @@ msgstr "-- ¡Solo los administradores tienen acceso a esta página! --"
 msgid ""
 "Invalid pattern type provided. Are you even performing a legitimate action?"
 msgstr ""
+"Tipo de patrón proporcionado no válido. ¿Está realizando una acción legítima?"
 
 #: ../class/m_admin.php:437
 msgid "Subject, message and sender are mandatory"
@@ -5753,7 +5846,7 @@ msgstr "Falta el camp db_server"
 
 #: ../class/m_admin.php:605 ../class/m_admin.php:610
 msgid "Please fill all mandatory fields"
-msgstr ""
+msgstr "Por favor, rellene todos los campos obligatorios"
 
 #: ../class/m_admin.php:615
 msgid "Please enter a valid email address"
@@ -5806,21 +5899,21 @@ msgstr "¡Esta cuenta NO es una cuenta de administrador!"
 #: ../class/m_admin.php:1190
 #, php-format
 msgid "NS for this domain are not %s and %s BUT %s"
-msgstr ""
+msgstr "Los NS para este dominio no son %s y %s PERO %s"
 
 #: ../class/m_admin.php:1206
 #, php-format
 msgid "MX is not %s BUT %s"
-msgstr ""
+msgstr "MX no es %s PERO %s"
 
 #: ../class/m_admin.php:1220
 msgid "Fail to get the DNS information. Try again."
-msgstr ""
+msgstr "No se pudo obtener la información de la DNS. Inténtelo de nuevo."
 
 #: ../class/m_admin.php:1223
 #, php-format
 msgid "subdomain '%s' doesn't point to %s but to '%s'"
-msgstr ""
+msgstr "el subdominio '%s' no apunta a %s sino a '%s'"
 
 #: ../class/m_admin.php:1232
 msgid "Domain doesn't exist anymore !"
@@ -5877,11 +5970,11 @@ msgstr "Su contraseña no contiene suficientes caracteres diferentes, entre min�
 #: ../class/m_authip.php:267 ../class/m_authip.php:332
 #: ../class/m_authip.php:338 ../class/m_authip.php:364
 msgid "query failed: "
-msgstr ""
+msgstr "consulta fallida: "
 
 #: ../class/m_authip.php:233
 msgid "Failed : not an IP address"
-msgstr ""
+msgstr "Error : no es una dirección IP"
 
 #: ../class/m_authip.php:387
 msgid "Object not available"
@@ -5934,7 +6027,7 @@ msgstr "Este directorio no existe"
 
 #: ../class/m_bro.php:198
 msgid "This directory is not readable."
-msgstr ""
+msgstr "Este directorio no es legible."
 
 #: ../class/m_bro.php:400 ../class/m_bro.php:1202
 msgid "Cannot create the requested directory. Please check the permissions"
@@ -5970,19 +6063,19 @@ msgstr "Error durante la carga del archivo:"
 
 #: ../class/m_bro.php:673
 msgid "Uncompressing through TAR"
-msgstr ""
+msgstr "Descomprimir con TAR"
 
 #: ../class/m_bro.php:678
 msgid "Uncompressing through UNZIP"
-msgstr ""
+msgstr "Descomprimir con UNZIP"
 
 #: ../class/m_bro.php:683
 msgid "Uncompressing through GUNZIP"
-msgstr ""
+msgstr "Descomprimir con GUNZIP"
 
 #: ../class/m_bro.php:688
 msgid "Uncompressing through bunzip2"
-msgstr ""
+msgstr "Descomprimir con bunzip2"
 
 #: ../class/m_bro.php:698
 #, php-format
@@ -6131,6 +6224,8 @@ msgid ""
 "The name you entered is incorrect or not fully qualified (it must end with a"
 " DOT, like example.com<b>.</b>)"
 msgstr ""
+"El nombre introducido es incorrecto o no está completamente cualificado ("
+"debe terminar en DOT, como ejemplo.com<b>.</b>)"
 
 #: ../class/m_dom.php:1332
 msgid "The TXT value you entered is incorrect"
@@ -6142,11 +6237,12 @@ msgstr "El tipo de dominio seleccionado no es válido, por favor, revíselo"
 
 #: ../class/m_dom.php:1400
 msgid "Subdomain not found"
-msgstr ""
+msgstr "Subdominio no encontrado"
 
 #: ../class/m_dom.php:1414
 msgid "No certificate found for this provider and this subdomain"
 msgstr ""
+"No se ha encontrado ningún certificado para este proveedor y este subdominio"
 
 #: ../class/m_dom.php:1454
 msgid ""
@@ -6175,6 +6271,9 @@ msgid ""
 " the mail here. Make sure to update your MX entries or no mail will be "
 "received"
 msgstr ""
+"No hay ningún registro MX que apunte a este servidor, y nos está pidiendo "
+"que alojemos el correo aquí. Asegúrese de actualizar sus entradas MX o no se "
+"recibirá ningún correo"
 
 #: ../class/m_dom.php:1673 ../class/m_dom.php:1699
 msgid "The IP address you entered is incorrect"
@@ -6187,7 +6286,7 @@ msgstr "El dominio no está instalado en su cuenta"
 
 #: ../class/m_dom.php:1868
 msgid "The specified slave account already exists"
-msgstr ""
+msgstr "La cuenta esclava especificada ya existe"
 
 #: ../class/m_dom.php:1896
 msgid "--- Program error --- Lock already obtained!"
@@ -6199,6 +6298,8 @@ msgid ""
 "Problem on %s: there is more than 1 web configuration going to be generated "
 "for this sub-domain."
 msgstr ""
+"Problema en %s: se va a generar más de 1 configuración web para este "
+"subdominio."
 
 #: ../class/m_dom.php:2262
 #, php-format
@@ -6235,7 +6336,7 @@ msgstr "Redirección IPv6"
 
 #: ../class/m_dom.php:2281
 msgid "CNAME DNS entry"
-msgstr ""
+msgstr "Entrada DNS CNAME"
 
 #: ../class/m_dom.php:2282
 msgid "TXT DNS entry"
@@ -6275,7 +6376,7 @@ msgstr "Crear una nueva cuenta FTP"
 
 #: ../class/m_ftp.php:110
 msgid "This account do not exist or is not of this account"
-msgstr ""
+msgstr "Esta cuenta no existe o no es de esta cuenta"
 
 #: ../class/m_ftp.php:124
 msgid "Error during update"
@@ -6292,7 +6393,7 @@ msgstr "La cuenta FTP no existe"
 #: ../class/m_ftp.php:230
 #, php-format
 msgid "FTP login is incorrect: too many '%s'"
-msgstr ""
+msgstr "El inicio de sesión FTP es incorrecto: demasiados '%s'"
 
 #: ../class/m_ftp.php:236
 msgid "FTP login is incorrect"
@@ -6317,6 +6418,7 @@ msgstr "La clave no puede estar vacia"
 #: ../class/m_ftp.php:411
 msgid "Your FTP account quota is over. You cannot create more FTP accounts"
 msgstr ""
+"La cuota de tu cuenta FTP se ha superado. No puede crear más cuentas FTP"
 
 #: ../class/m_hta.php:46
 msgid "Protected folders"
@@ -6330,7 +6432,7 @@ msgstr "La carpeta '%s' no existe"
 
 #: ../class/m_hta.php:77
 msgid "Error creating .htaccess file: "
-msgstr ""
+msgstr "Error al crear el archivo .htaccess: "
 
 #: ../class/m_hta.php:81
 msgid "Restricted area"
@@ -6338,7 +6440,7 @@ msgstr "Area restringida"
 
 #: ../class/m_hta.php:87
 msgid "Error creating .htpasswd file: "
-msgstr ""
+msgstr "Error al crear el archivo .htpasswd: "
 
 #: ../class/m_hta.php:110
 msgid "No protected folder"
@@ -6352,7 +6454,7 @@ msgstr "No puedo leer el archivo %s"
 #: ../class/m_hta.php:224
 #, php-format
 msgid "Unexpected: No changes made to '%s'"
-msgstr ""
+msgstr "Error inesperado: No se han realizado cambios en '%s'"
 
 #: ../class/m_hta.php:229
 #, php-format
@@ -6411,7 +6513,7 @@ msgstr "No puede crear un email, has sobrepasado su couta"
 
 #: ../class/m_mail.php:381
 msgid "This email address already exists in mailman"
-msgstr ""
+msgstr "Esta dirección de correo electrónico ya existe en mailman"
 
 #: ../class/m_mail.php:383
 msgid "This email address already exists"
@@ -6437,7 +6539,7 @@ msgstr "El email %s ya esta marcado para ser borrado, no puede ser deseleccionad
 
 #: ../class/m_mail.php:559
 msgid "The email you entered does not exist"
-msgstr ""
+msgstr "El email no existe"
 
 #: ../class/m_mail.php:570
 #, php-format
@@ -6480,6 +6582,11 @@ msgid ""
 "email address and check 'Yes' in POP/IMAP account, or set some recipients in"
 " the redirection field."
 msgstr ""
+"Advertencia: ha creado un correo electrónico que no es un alias, y no un "
+"buzón POP/IMAP. Esto NO es ciertamente lo que quieres hacer. Para "
+"solucionarlo, edite la dirección de correo electrónico y marque 'Sí' en la "
+"cuenta POP/IMAP, o establezca algunos destinatarios en el campo de "
+"redirección."
 
 #: ../class/m_mail.php:896
 msgid "The slave MX account was not found"
@@ -6488,6 +6595,8 @@ msgstr "No se encontró el esclavo cuenta MX"
 #: ../class/m_mail.php:945
 msgid "Problem: can't create default bounce mail"
 msgstr ""
+"Problema: No se puede crear una dirección principal para las devoluciones de "
+"correo"
 
 #: ../class/m_mem.php:91 ../class/m_mem.php:97 ../class/m_mem.php:180
 #: ../class/m_mem.php:328
@@ -6553,6 +6662,25 @@ msgid ""
 "\n"
 "Cordially.\n"
 msgstr ""
+"Hola,\n"
+"\n"
+"Ha solicitado la modificación de su contraseña para su\n"
+"cuenta %s en %s\n"
+"Aquí tienes tu usuario y contraseña para acceder al panel :\n"
+"\n"
+"--------------------------------------\n"
+"\n"
+"Nombre de usuario : %s\n"
+"Contraseña : %s\n"
+"\n"
+"--------------------------------------\n"
+"\n"
+"Nota : si usted no solicitó esa modificación, significa que\n"
+"alguien lo hizo en su lugar. Puede ignorar este mensaje.\n"
+"Si vuelve a ocurrir, póngase en contacto con el administrador de su "
+"servidor. \n"
+"\n"
+"Cordialmente.\n"
 
 #: ../class/m_mem.php:509
 #, php-format
@@ -6576,6 +6704,25 @@ msgid ""
 "\n"
 "Cordially.\n"
 msgstr ""
+"Hola,\n"
+"\n"
+"Alguien (quizás tú) ha solicitado una modificación de la dirección de correo "
+"electrónico de la cuenta\n"
+"%s en %s\n"
+"Para confirmar su solicitud, vaya a esta url :\n"
+"\n"
+"%s\n"
+"\n"
+"(Atención : si esta dirección aparece en 2 líneas, no olvide\n"
+"tomarla en una línea).\n"
+"El panel le pedirá la clave dada cuando la dirección de correo electrónico\n"
+"fue solicitada.\n"
+"\n"
+"Si usted no solicitó esta modificación, significa que alguien\n"
+"lo hizo en su lugar. Puede elegir ignorar este mensaje. Si vuelve a ocurrir\n"
+"de nuevo, póngase en contacto con el administrador de su servidor.\n"
+"\n"
+"Cordialmente.\n"
 
 #: ../class/m_mem.php:551
 msgid "The information you entered is incorrect."
@@ -6696,7 +6843,7 @@ msgstr "Usuario de la base de datos no encontrado"
 
 #: ../class/m_mysql.php:486
 msgid "Could not grant rights"
-msgstr ""
+msgstr "No se pueden conceder derechos"
 
 #: ../class/m_mysql.php:503
 msgid "No file specified"
@@ -6786,7 +6933,7 @@ msgstr "quota_"
 
 #: ../class/m_quota.php:220
 msgid "Web disk space"
-msgstr ""
+msgstr "Espacio en el almacenamiento de la web"
 
 #: ../class/m_quota.php:262
 msgid "Error writing the quota entry!"
@@ -6794,7 +6941,7 @@ msgstr "Error al escribir la couta "
 
 #: ../class/m_quota.php:343
 msgid "Type can only contains characters a-z and 0-9"
-msgstr ""
+msgstr "Solo puede contener los caracteres a-z y 0-9"
 
 #: ../class/m_quota.php:595
 msgid "B"
@@ -6811,109 +6958,127 @@ msgstr "KB"
 #: ../class/m_ssl.php:99
 msgid "FATAL: no certificates in certificates table, even the SnakeOil one??"
 msgstr ""
+"ERROR FATAL: no hay certificados en la tabla de certificados, ¿ni siquiera "
+"el de SnakeOil?"
 
 #: ../class/m_ssl.php:132
 #, php-format
 msgid "Reloading domain %s as we have new certificate %s"
-msgstr ""
+msgstr "Recargando el dominio %s ya que tenemos un nuevo certificado %s"
 
 #: ../class/m_ssl.php:187
 msgid "Can't put file into /etc/ssl/certs/"
-msgstr ""
+msgstr "No se puede crear el archivo en /etc/ssl/certs/"
 
 #: ../class/m_ssl.php:194
 msgid "Can't put file into /etc/ssl/private/"
-msgstr ""
+msgstr "No se puede crear el archivo en /etc/ssl/private/"
 
 #: ../class/m_ssl.php:300
 msgid "No SSL certificates available"
-msgstr ""
+msgstr "No hay certificados SSL"
 
 #: ../class/m_ssl.php:324
 msgid "Bad FQDN domain name"
-msgstr ""
+msgstr "Nombre de dominio FQDN erróneo"
 
 #: ../class/m_ssl.php:330
 msgid "Can't generate a private key (1)"
-msgstr ""
+msgstr "No se puede generar una clave privada (1)"
 
 #: ../class/m_ssl.php:335
 msgid "Can't generate a private key (2)"
-msgstr ""
+msgstr "No se puede generar una clave privada (2)"
 
 #: ../class/m_ssl.php:346
 msgid "Can't generate a CSR"
-msgstr ""
+msgstr "No se puede generar un CSR"
 
 #: ../class/m_ssl.php:369
 msgid "Can't find this Certificate"
-msgstr ""
+msgstr "No se encuentra este certificado"
 
 #: ../class/m_ssl.php:470
 msgid "Certificate already exists in database"
-msgstr ""
+msgstr "El certificado ya existe en la base de datos"
 
 #: ../class/m_ssl.php:492
 msgid "Can't save the Key/Crt/Chain now. Please try later."
 msgstr ""
+"No se puede guardar la Key/Crt/Chain ahora. Por favor, inténtelo más tarde."
 
 #: ../class/m_ssl.php:532
 msgid "Can't save the Crt/Chain now. Please try later."
-msgstr ""
+msgstr "No se puede guardar el Crt/Chain ahora. Por favor, inténtelo más tarde."
 
 #: ../class/m_ssl.php:733
 msgid ""
 "Can't find the private key in the certificate table, please check your form."
 msgstr ""
+"No se encuentra la clave privada en la tabla de certificados, por favor "
+"compruebe su formulario."
 
 #: ../class/m_ssl.php:742
 msgid ""
 "The certificate must begin by BEGIN CERTIFICATE and end by END CERTIFICATE "
 "lines. Please check you pasted it in PEM form."
 msgstr ""
+"El certificado debe empezar por las líneas BEGIN CERTIFICATE y terminar por "
+"END CERTIFICATE. Compruebe que lo ha pegado en formato PEM."
 
 #: ../class/m_ssl.php:747
 msgid ""
 "The chained certificate must begin by BEGIN CERTIFICATE and end by END "
 "CERTIFICATE lines. Please check you pasted it in PEM form."
 msgstr ""
+"El certificado encadenado debe empezar por las líneas BEGIN CERTIFICATE y "
+"terminar por END CERTIFICATE. Compruebe que lo ha pegado en formato PEM."
 
 #: ../class/m_ssl.php:753
 msgid ""
 "The private key must begin by BEGIN (RSA )PRIVATE KEY and end by END (RSA "
 ")PRIVATE KEY lines. Please check you pasted it in PEM form."
 msgstr ""
+"La clave privada debe empezar por las líneas BEGIN (RSA )PRIVATE KEY y "
+"terminar por END (RSA )PRIVATE KEY. Compruebe que la ha pegado en formato "
+"PEM."
 
 #: ../class/m_ssl.php:789
 #, php-format
 msgid "The %d-th certificate in the chain is invalid"
-msgstr ""
+msgstr "El certificado %d-th de la cadena no es válido"
 
 #: ../class/m_ssl.php:797
 msgid "The certificate is invalid."
-msgstr ""
+msgstr "El certificado no es válido."
 
 #: ../class/m_ssl.php:802
 msgid "The private key is invalid."
-msgstr ""
+msgstr "La clave privada no es válida."
 
 #: ../class/m_ssl.php:807
 msgid "The private key is not the one signed inside the certificate."
-msgstr ""
+msgstr "La clave privada no es la que está firmada dentro del certificado."
 
 #: ../class/m_ssl.php:813
 msgid "Can't export your certificate as a string, please check its syntax."
 msgstr ""
+"No se puede exportar el certificado como una cadena, por favor, compruebe su "
+"sintaxis."
 
 #: ../class/m_ssl.php:818
 msgid ""
 "Can't export one of your chained certificates as a string, please check its "
 "syntax."
 msgstr ""
+"No se puede exportar uno de sus certificados encadenados como cadena, por "
+"favor compruebe su sintaxis."
 
 #: ../class/m_ssl.php:824
 msgid "Can't export your private key as a string, please check its syntax."
 msgstr ""
+"No se puede exportar su clave privada como una cadena, por favor, compruebe "
+"su sintaxis."
 
 #: ../class/mime.php:115
 msgid "CSS Stylesheet"
