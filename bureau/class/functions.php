@@ -400,9 +400,19 @@ function ecif($test, $tr, $fa = "", $affiche = 1) {
 /**
  * 
  * @param string $str
+ * @param string $domain domain translation, domain "alternc" as core translation
+ * @param bool $return return or display translated string
  */
-function __($str) {
-    echo _($str);
+function __($str, $domain = null, $return = false) {
+    if (empty($domain)) {
+        $domain="alternc";
+    }
+    if (empty($return)) {
+        echo dgettext($domain, $str);
+        return;
+    } else {
+        return dgettext($domain, $str);
+    }
 }
 
 
