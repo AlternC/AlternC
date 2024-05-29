@@ -18,9 +18,9 @@ function alternc_changepass_optpage_register_block() {
     global $optpage_blocks;
     textdomain("alternc-changepass");
     $optpage_blocks[] = array(
-        'name' => _("Change Password"),
+        'name' => __("Change Password", "alternc", true),
         'url'  => '../plugins/alternc_changepass/change.php',
-        'desc' => _("Change the password of your email account."),
+        'desc' => __("Change the password of your email account.", "alternc", true),
         'js'   => false
     );
     textdomain("squirrelmail");

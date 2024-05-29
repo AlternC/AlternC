@@ -35,7 +35,7 @@ if ( ! empty($logo) &&  ! is_null($logo)) {
 echo "<img src='images/logo3.png' border='0' alt='AlternC' ".(( ! empty($logo) &&  ! is_null($logo))?"width='140px'":"")." height='40px' />";
 echo "</div>";
 ?>
-<p class="currentuser"><?php echo sprintf(_("Welcome %s"),$mem->user["login"]); ?></p>
+<p class="currentuser"><?php echo sprintf(__("Welcome %s", "alternc", true),$mem->user["login"]); ?></p>
 
 <?php
 

@@ -28,7 +28,7 @@ require_once("../class/config.php");
 include("head.php");
 
 if (!$admin->enabled) {
-    $msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
+    $msg->raise("ERROR", "admin", __("This page is restricted to authorized staff", "alternc", true));
     echo $msg->msg_html_all();
     exit();
 }
@@ -47,9 +47,9 @@ getFields($fields);
 
 if ( !empty($submit) ) {
   if ($admin->mailallmembers($subject,$message,$from)) {
-    $msg->raise("INFO", "admin", _("The email was successfully sent"));
+    $msg->raise("INFO", "admin", __("The email was successfully sent", "alternc", true));
   } else {
-    $msg->raise("INFO", "admin", _("There was an error"));
+    $msg->raise("INFO", "admin", __("There was an error", "alternc", true));
   }
 }
 

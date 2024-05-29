@@ -68,7 +68,7 @@ class m_log {
      */
     function hook_menu() {
         $obj = array(
-            'title' => _("Logs"),
+            'title' => __("Logs", "alternc", true),
             'link' => 'logs_list.php',
             'pos' => 130,
         );

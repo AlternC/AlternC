@@ -30,7 +30,7 @@ $fields = array (
 getFields($fields);
 
 if (empty($login)) {
-  $msg->raise("ERROR", "piwik", _("Missing login parameters"));
+  $msg->raise("ERROR", "piwik", __("Missing login parameters", "alternc", true));
   include('piwik_userlist.php'); 
   exit;
 } 
@@ -38,9 +38,9 @@ if (empty($login)) {
 if(!empty($confirm_del)) {
   // does this piwik acount still have websites ? can we delete it then ?
   if ($piwik->user_has_sites()) {
-    $msg->raise("ALERT", "piwik", _("To be able to delete the last user account, you must first remove all the piwik sites"));
+    $msg->raise("ALERT", "piwik", __("To be able to delete the last user account, you must first remove all the piwik sites", "alternc", true));
   } else if ($piwik->user_delete($login) ) {
-    $msg->raise("INFO", "piwik", _("Account %s has been successfully deleted"), $login);
+    $msg->raise("INFO", "piwik", __("Account %s has been successfully deleted", "alternc", true), $login);
   }
 
   include('piwik_userlist.php'); 
@@ -53,7 +53,7 @@ include_once('head.php');
 <h3><?php __("Piwik accounts deletion confirm"); ?></h3>
 <hr id="topbar"/>
 <br />
-  <?php printf(_("Do you really want to delete the Piwik account %s ?"),$login);?>
+  <?php printf(__("Do you really want to delete the Piwik account %s ?", "alternc", true),$login);?>
 <br />
 <br />
 

@@ -38,7 +38,7 @@ if (!empty($usern)) {
     exit;
   } else {
     $username=$mem->user["login"]."_".$usern;
-    $msg->raise("INFO", "mysql", _("The user '%s' has been successfully created."),$username);
+    $msg->raise("INFO", "mysql", __("The user '%s' has been successfully created.", "alternc", true),$username);
   }
 } else {
   $usern=$mem->user["login"];
@@ -47,7 +47,7 @@ if (!empty($usern)) {
     exit;
   } else {
     $username=$mem->user["login"];
-    $msg->raise("INFO", "mysql", _("The user '%s' has been successfully created."),$username);
+    $msg->raise("INFO", "mysql", __("The user '%s' has been successfully created.", "alternc", true),$username);
   }
 }
 

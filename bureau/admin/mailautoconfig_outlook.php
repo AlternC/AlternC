@@ -40,7 +40,7 @@ if ( $_SERVER['REQUEST_METHOD'] === 'POST' ){
   preg_match($pattern, $string, $matches); 
   $emailDomain = explode('@', $matches[0]);
 } else {
-  die(_('Missing POST of the mail address'));
+  die(__('Missing POST of the mail address', "alternc", true));
 }
 
 header("Content-type: text/xml");

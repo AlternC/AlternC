@@ -89,7 +89,7 @@ setlocale(LC_ALL, $lang);
 textdomain("alternc");
 
 $empty = "";
-if (_($empty) && preg_match("#charset=([A-Za-z0-9\.-]*)#", _($empty), $mat)) {
+if (__($empty, "alternc", true) && preg_match("#charset=([A-Za-z0-9\.-]*)#", __($empty, "alternc", true), $mat)) {
     $charset = $mat[1];
 }
 if (!isset($charset) || !$charset) {

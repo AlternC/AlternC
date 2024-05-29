@@ -9,7 +9,7 @@ if (isset($_REQUEST['name'])) {
     // Inserted into the global namespace by config.php
     $valid_request = !$fatalcsrf;
     if ($fatalcsrf) {
-        $msg->raise('ERROR', _('Failed to validate CSRF token'));
+        $msg->raise('ERROR', __('Failed to validate CSRF token', "alternc", true));
     }
 }
 
@@ -49,11 +49,11 @@ require_once("html-head.php");
               <?php if ($show_form): ?>
                 <div class="block_login_page">
                         <div class="menu-box">
-                            <div class="menu-title"><?php echo _('Password reset'); ?></div>
+                            <div class="menu-title"><?php echo __('Password reset', "alternc", true); ?></div>
                             <form action="request_reset.php" method="post" name="passwordreset">
                                 <?php csrf_get(); ?>
                                 <div>
-                                    <label for="name"><?php echo _('Username'); ?></label>
+                                    <label for="name"><?php echo __('Username', "alternc", true); ?></label>
                                     <input type="text" class="int" name="name">
                                 </div>
                                 <div class="submit"><input type="submit" class="inb" name="submit"></div>
@@ -61,7 +61,7 @@ require_once("html-head.php");
                         </div>
                 </div>
                 <div class="block_list">
-                  <p><?php echo _('An e-mail with instructions will be sent'); ?></p>
+                  <p><?php echo __('An e-mail with instructions will be sent', "alternc", true); ?></p>
                 </div>
               <?php else: ?>
                 <div><p><a href="index.php"><?php __('Return to login page'); ?></a></p></div>

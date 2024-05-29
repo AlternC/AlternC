@@ -54,9 +54,9 @@ if ($domain=$dom->get_domain_byid($domain_id)) {
   <tr>
     <td colspan=2>
 <?php if ($quota->cancreate("mail")) {
-  echo '<h3>'._("Create a new mail account")."</h3>";
+  echo '<h3>'.__("Create a new mail account", "alternc", true)."</h3>";
 } else {
-  echo '<h3>'._("Manage Catch-all")."</h3>";
+  echo '<h3>'.__("Manage Catch-all", "alternc", true)."</h3>";
 }
 
 echo $msg->msg_html_all(true, true);
@@ -70,7 +70,7 @@ echo $msg->msg_html_all(true, true);
     <?php csrf_get(); ?>
       <input type="text" class="int intleft" style="text-align: right" name="mail_arg" value="<?php ehe($mail_arg); ?>" size="24" id="mail_arg" maxlength="255" /><span id="emaildom" class="int intright"><?php echo "@".$domain; ?></span>
       <input type="hidden" name="domain_id"  value="<?php ehe($domain_id); ?>" />
-      <input type="submit" name="submit" class="inb add" value="<?php __("Create this email address"); ?>"  onClick="return false_if_empty('mail_arg', '<?php echo addslashes(_("Can't have empty mail."));?>');" />
+      <input type="submit" name="submit" class="inb add" value="<?php __("Create this email address"); ?>"  onClick="return false_if_empty('mail_arg', '<?php echo addslashes(__("Can't have empty mail.", "alternc", true));?>');" />
     </form>
 <?php } // $quota->cancreate("mail") ?>
     </td>
@@ -82,10 +82,10 @@ echo $msg->msg_html_all(true, true);
 
 <br />
 <hr id="topbar"/>
-<h3><?php printf(_("Email addresses of the domain %s"),$domain); ?> : </h3>
+<h3><?php printf(__("Email addresses of the domain %s", "alternc", true),$domain); ?> : </h3>
 <?php
 if (empty($allmails_list) && empty($search)) {
-  $msg->raise("ERROR", 'mail', _("No mails for this domain."));
+  $msg->raise("ERROR", 'mail', __("No mails for this domain.", "alternc", true));
   echo $msg->msg_html_all();
 } else {
 
@@ -157,7 +157,7 @@ if(!empty($mails_list)) {
 	<td class="<?php echo $grey; ?>"><?php if ($val["islocal"]) echo format_size($val["used"]).( ($val["quotabytes"]==0)?'':"/".format_size($val["quotabytes"])) ; else __("No"); ?></td>
 	<td class="<?php echo $grey; ?>"><?php echo $val["recipients"]; /* TODO : if >60chars, use "..." + js close/open */ ?></td>
   <td class="<?php echo $grey; ?>"><?php if ($val["islocal"]) { 
-if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"],11,5); else if (substr($val["lastlogin"],0,10)=="0000-00-00") __("Never"); else echo format_date(_('%3$d-%2$d-%1$d'),$val["lastlogin"]);
+if (date("Y-m-d")==substr($val["lastlogin"],0,10)) echo substr($val["lastlogin"],11,5); else if (substr($val["lastlogin"],0,10)=="0000-00-00") __("Never"); else echo format_date(__('%3$d-%2$d-%1$d', "alternc", true),$val["lastlogin"]);
 } ?></td>
 	<?php } ?>
 	</tr>

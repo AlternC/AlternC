@@ -27,7 +27,7 @@ require_once("../class/config.php");
 include_once("head.php");
 
 if (!$admin->enabled) {
-	$msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
+	$msg->raise("ERROR", "admin", __("This page is restricted to authorized staff", "alternc", true));
 	echo $msg->msg_html_all();
 	exit();
 }
@@ -82,7 +82,7 @@ echo $msg->msg_html_all();
        <td><textarea name="notes" id="notes" class="int" cols="32" rows="5"><?php  ehe($notes); ?></textarea></td>
 </tr>
 <tr>
-        	<th><label for="nom"><?php echo _("Surname")."</label> / <label for=\"prenom\">"._("First Name"); ?></label></th>
+        	<th><label for="nom"><?php echo __("Surname", "alternc", true)."</label> / <label for=\"prenom\">".__("First Name", "alternc", true); ?></label></th>
 	<td><input class="int" type="text" id="nom" name="nom" value="<?php ehe($nom); ?>" size="16" maxlength="128" />&nbsp;/&nbsp;<input type="text" name="prenom" id="prenom" value="<?php ehe($prenom); ?>" class="int" size="16" maxlength="128" /></td>
 </tr>
 <tr>
@@ -102,7 +102,7 @@ echo $msg->msg_html_all();
         <?php 
           __("Associate this new user to this database server:");
           echo "<br/>";
-          echo "<i>"._("Warning: you can't change it after the creation of the user.")."</i>";
+          echo "<i>".__("Warning: you can't change it after the creation of the user.", "alternc", true)."</i>";
         ?>
      </th>
      <td><?php
@@ -119,7 +119,7 @@ echo $msg->msg_html_all();
 <tr>
     <th colspan="2">
         <input type="checkbox" name="create_dom" value="1" class="inc" id="create_dom" <?php cbox($create_dom==1); ?>/>
-        <label for="create_dom"><?php printf(_("Install the domain"),""); ?></label>
+        <label for="create_dom"><?php printf(__("Install the domain", "alternc", true),""); ?></label>
         <span class="int" id="create_dom_list_pfx">login.</span><select name="create_dom_list" class="int" id="create_dom_list">
             <?php if (variable_get('hosting_tld')) { ?>
              <option value="<?php echo variable_get('hosting_tld'); ?>" selected="selected"><?php echo variable_get('hosting_tld'); ?></option>

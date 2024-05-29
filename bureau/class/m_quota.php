@@ -54,7 +54,7 @@ class m_quota {
 
 
     private function dummy_for_translation() {
-        _("quota_web");
+        __("quota_web", "alternc", true);
     }
 
 
@@ -62,7 +62,7 @@ class m_quota {
         global $cuid, $mem, $quota;
 
         $obj = array(
-            'title' => _("Show my quotas"),
+            'title' => __("Show my quotas", "alternc", true),
             'ico' => 'images/quota.png',
             'link' => 'toggle',
             'pos' => 5,
@@ -80,7 +80,7 @@ class m_quota {
 	            
                 $totalsize_used = $quota->get_size_web_sum_user($cuid) + $quota->get_size_mailman_sum_user($cuid) + ($quota->get_size_db_sum_user($mem->user["login"]) + $quota->get_size_mail_sum_user($cuid))/1024;
                 $usage_percent = (int) ($totalsize_used / $q[$key]["t"] * 100);
-                $obj['links'][] = array('txt' => _("quota_" . $key) . " " . sprintf(_("%s%% of %s"), $usage_percent, format_size($q[$key]["t"] * 1024)), 'url' => 'quota_show.php');
+                $obj['links'][] = array('txt' => __("quota_" . $key, "alternc", true) . " " . sprintf(__("%s%% of %s", "alternc", true), $usage_percent, format_size($q[$key]["t"] * 1024)), 'url' => 'quota_show.php');
                 $obj['links'][] = array('txt' => 'progressbar', 'total' => $q[$key]["t"], 'used' => $totalsize_used);
             }
 
@@ -119,7 +119,7 @@ class m_quota {
         $qlist = array();
         reset($this->disk);
         while (list($key, $val) = each($this->disk)) {
-            $qlist[$key] = _("quota_" . $key); // those are specific disks quotas.
+            $qlist[$key] = __("quota_" . $key, "alternc", true); // those are specific disks quotas.
         }
 
         foreach ($this->getquota() as $qq) {
@@ -217,7 +217,7 @@ class m_quota {
                         $a['uid'] = $cuid;
                         $disk_cached = $mem->session_tempo_params_set('quota_cache_disk', array($val => $a));
                     }
-                    $this->quotas[$val] = array("name" => "$val", 'description' => _("Web disk space"), "s" => $a['sizeondisk'], "t" => $a['t'], "u" => $a['u']);
+                    $this->quotas[$val] = array("name" => "$val", 'description' => __("Web disk space", "alternc", true), "s" => $a['sizeondisk'], "t" => $a['t'], "u" => $a['u']);
                 }
             }
 
@@ -259,7 +259,7 @@ class m_quota {
             $a = array();
             exec("sudo /usr/lib/alternc/quota_get " . intval($cuid) . " &> /dev/null &", $a);
             if (!isset($a[1]) || $size != $a[1]) {
-                $msg->raise("ERROR", "quota", _("Error writing the quota entry!"));
+                $msg->raise("ERROR", "quota", __("Error writing the quota entry!", "alternc", true));
                 return false;
             }
         }
@@ -340,7 +340,7 @@ class m_quota {
         }
         $type = strtolower($type);
         if (!preg_match("#^[a-z0-9]*$#", $type)) {
-            $msg->raise("ERROR", "quota", _("Type can only contains characters a-z and 0-9"));
+            $msg->raise("ERROR", "quota", __("Type can only contains characters a-z and 0-9", "alternc", true));
             return false;
         }
         while (list($key, $val) = each($qlist)) {
@@ -592,7 +592,7 @@ class m_quota {
 
     /* Return appropriate value and unit of a size given in Bytes (e.g. 1024 Bytes -> return 1 KB) */
     function get_size_unit($size) {
-        $units = array(1073741824 => _("GB"), 1048576 => _("MB"), 1024 => _("KB"), 0 => _("B"));
+        $units = array(1073741824 => __("GB", "alternc", true), 1048576 => __("MB", "alternc", true), 1024 => __("KB", "alternc", true), 0 => __("B", "alternc", true));
         foreach ($units as $value => $unit) {
             if ($size >= $value) {
                 $size=$size/($value?$value:1);

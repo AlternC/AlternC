@@ -58,10 +58,10 @@ class m_bro {
      * Constructor 
      * */
     function m_bro() {
-        $this->l_mode = array(0 => _("1 column, detailed"), 1 => _("2 columns, short"), 2 => _("3 columns, short"));
-        $this->l_tgz = array(0 => _("tgz (Linux)"), 1 => _("tar.bz2 (Linux)"), 2 => _("zip (Windows/Dos)"), 3 => _("tar.Z (Unix)"));
-        $this->l_icons = array(0 => _("No"), 1 => _("Yes"));
-        $this->l_createfile = array(0 => _("Go back to the file manager"), 1 => _("Edit the newly created file"));
+        $this->l_mode = array(0 => __("1 column, detailed", "alternc", true), 1 => __("2 columns, short", "alternc", true), 2 => __("3 columns, short", "alternc", true));
+        $this->l_tgz = array(0 => __("tgz (Linux, "alternc", true)"), 1 => __("tar.bz2 (Linux, "alternc", true)"), 2 => __("zip (Windows/Dos, "alternc", true)"), 3 => __("tar.Z (Unix, "alternc", true)"));
+        $this->l_icons = array(0 => __("No", "alternc", true), 1 => __("Yes", "alternc", true));
+        $this->l_createfile = array(0 => __("Go back to the file manager", "alternc", true), 1 => __("Edit the newly created file", "alternc", true));
     }
 
 
@@ -71,7 +71,7 @@ class m_bro {
      */
     function hook_menu() {
         $obj = array(
-            'title' => _("File browser"),
+            'title' => __("File browser", "alternc", true),
             'ico' => 'images/folder.png',
             'link' => 'bro_main.php',
             'pos' => 40,
@@ -191,11 +191,11 @@ class m_bro {
         $db->query("UPDATE browser SET lastdir= ? WHERE uid= ?;", array($dir, $cuid));
         $absolute = $this->convertabsolute($dir, false);
         if (!$absolute || !file_exists($absolute)) {
-            $msg->raise("ERROR", 'bro', _("This directory does not exist."));
+            $msg->raise("ERROR", 'bro', __("This directory does not exist.", "alternc", true));
             return false;
         }
         if (!is_readable($absolute)) {
-            $msg->raise("ERROR", 'bro', _("This directory is not readable."));
+            $msg->raise("ERROR", 'bro', __("This directory is not readable.", "alternc", true));
             return false;
         }
         clearstatcache(true);
@@ -397,13 +397,13 @@ class m_bro {
         $absolute = $this->convertabsolute($dir . "/" . $file, false);
         if ($absolute && (!file_exists($absolute))) {
             if (!mkdir($absolute, 00777, true)) {
-                $msg->raise("ERROR", "bro", _("Cannot create the requested directory. Please check the permissions"));
+                $msg->raise("ERROR", "bro", __("Cannot create the requested directory. Please check the permissions", "alternc", true));
                 return false;
             }
             $db->query("UPDATE browser SET crff=1 WHERE uid= ?;", array($cuid));
             return true;
         } else {
-            $msg->raise("ERROR", "bro", _("File or folder name is incorrect"));
+            $msg->raise("ERROR", "bro", __("File or folder name is incorrect", "alternc", true));
             return false;
         }
     }
@@ -424,12 +424,12 @@ class m_bro {
         $file = ssla($file);
         $absolute = $this->convertabsolute($dir . "/" . $file, false);
         if (!$absolute || file_exists($absolute)) {
-            $msg->raise("ERROR", "bro", _("File or folder name is incorrect"));
+            $msg->raise("ERROR", "bro", __("File or folder name is incorrect", "alternc", true));
             return false;
         }
         if (!file_exists($absolute)) {
             if (!@touch($absolute)) {
-                $msg->raise("ERROR", "bro", _("Cannot create the requested file. Please check the permissions"));
+                $msg->raise("ERROR", "bro", __("Cannot create the requested file. Please check the permissions", "alternc", true));
                 return false;
             }
         }
@@ -452,7 +452,7 @@ class m_bro {
         $root = realpath(getuserpath());
         $absolute = $this->convertabsolute($R, false);
         if (!$absolute && strpos($root, $absolute) === 0 && strlen($absolute) > (strlen($root) + 1)) {
-            $msg->raise("ERROR", "bro", _("File or folder name is incorrect"));
+            $msg->raise("ERROR", "bro", __("File or folder name is incorrect", "alternc", true));
             return false;
         }
         for ($i = 0; $i < count($file_list); $i++) {
@@ -478,7 +478,7 @@ class m_bro {
         global $msg;
         $absolute = $this->convertabsolute($R, false);
         if (!$absolute) {
-            $msg->raise("ERROR", "bro", _("File or folder name is incorrect"));
+            $msg->raise("ERROR", "bro", __("File or folder name is incorrect", "alternc", true));
             return false;
         }
         $alea = "." . time() . mt_rand(1000, 9999);
@@ -512,7 +512,7 @@ class m_bro {
         global $msg;
         $old = $this->convertabsolute($old, false);
         if (!$old) {
-            $msg->raise("ERROR", "bro", _("File or folder name is incorrect"));
+            $msg->raise("ERROR", "bro", __("File or folder name is incorrect", "alternc", true));
             return false;
         }
 
@@ -522,11 +522,11 @@ class m_bro {
         $new = $this->convertabsolute($new, false);
 
         if (!$new) {
-            $msg->raise("ERROR", "bro", _("File or folder name is incorrect"));
+            $msg->raise("ERROR", "bro", __("File or folder name is incorrect", "alternc", true));
             return false;
         }
         if ($old == $new) {
-            $msg->raise("ERROR", "bro", _("You cannot move or copy a file to the same folder"));
+            $msg->raise("ERROR", "bro", __("You cannot move or copy a file to the same folder", "alternc", true));
             return false;
         }
         for ($i = 0; $i < count($d); $i++) {
@@ -554,7 +554,7 @@ class m_bro {
         global $msg, $action;
         $absolute = $this->convertabsolute($R, false);
         if (!$absolute) {
-            $msg->raise("ERROR", "bro", _("File or folder name is incorrect"));
+            $msg->raise("ERROR", "bro", __("File or folder name is incorrect", "alternc", true));
             return false;
         }
         for ($i = 0; $i < count($d); $i++) {
@@ -602,7 +602,7 @@ class m_bro {
         global $_FILES, $msg, $cuid, $action;
         $absolute = $this->convertabsolute($R, false);
         if (!$absolute) {
-            $msg->raise("ERROR", "bro", _("File or folder name is incorrect"));
+            $msg->raise("ERROR", "bro", __("File or folder name is incorrect", "alternc", true));
             return false;
         }
         if (!strpos($_FILES['userfile']['name'], "/")) {
@@ -614,7 +614,7 @@ class m_bro {
                     $action->fix_file($absolute . "/" . $_FILES['userfile']['name']);
                     return $absolute . "/" . $_FILES['userfile']['name'];
                 } else {
-                    $msg->raise("ERROR", "bro", _("Cannot create the requested file. Please check the permissions"));
+                    $msg->raise("ERROR", "bro", __("Cannot create the requested file. Please check the permissions", "alternc", true));
                     return false;
                 }
             } else {
@@ -622,7 +622,7 @@ class m_bro {
                 $msg->log("bro", "uploadfile", "Problem when uploading a file");
                 switch ($_FILES['userfile']['error']) {
                 case UPLOAD_ERR_INI_SIZE:
-                    $erstr = _("The uploaded file exceeds the max file size allowed");
+                    $erstr = __("The uploaded file exceeds the max file size allowed", "alternc", true);
                     break;
                 case UPLOAD_ERR_FORM_SIZE:
                 case UPLOAD_ERR_PARTIAL:
@@ -631,10 +631,10 @@ class m_bro {
                 case UPLOAD_ERR_CANT_WRITE:
                 case UPLOAD_ERR_EXTENSION:
                 default:
-                    $erstr = _("Undefined error ") . $_FILES['userfile']['error'];
+                    $erstr = __("Undefined error ", "alternc", true) . $_FILES['userfile']['error'];
                     break;
                 }
-                $msg->raise("ERROR", "bro", _("Error during the upload of the file: ") . $erstr);
+                $msg->raise("ERROR", "bro", __("Error during the upload of the file: ", "alternc", true) . $erstr);
                 return false;
             }
         }
@@ -663,29 +663,29 @@ class m_bro {
             $dest = $this->convertabsolute($dest, false);
         }
         if (!$file || !$dest || !is_readable($file)) {
-            $msg->raise("ERROR", "bro", _("File or folder name is incorrect"));
+            $msg->raise("ERROR", "bro", __("File or folder name is incorrect", "alternc", true));
             return 1;
         }
         $lfile = strtolower($file);
         if (substr($lfile, -4) == ".tar" || substr($lfile, -8) == ".tar.bz2" || substr($lfile, -7) == ".tar.gz" || substr($lfile, -6) == ".tar.z" || substr($lfile, -4) == ".tgz" || substr($lfile, -4) == ".tbz" || substr($lfile, -5) == ".tbz2" ) {
             // TODO new version of tar supports `tar xf ...` so there is no
             // need to specify the compression format
-            echo "<p>" . _("Uncompressing through TAR") . "</p><pre style=\"overflow: scroll; height: 200px\">";
+            echo "<p>" . __("Uncompressing through TAR", "alternc", true) . "</p><pre style=\"overflow: scroll; height: 200px\">";
             $ret = 0;
             passthru("tar -xvf " . escapeshellarg($file) . " --numeric-owner -C " . escapeshellarg($dest) . " 2>&1", $ret);
         }
         elseif (substr($lfile, -4) == ".zip") {
-            echo "<p>" . _("Uncompressing through UNZIP") . "</p><pre style=\"overflow: scroll; height: 200px\">";
+            echo "<p>" . __("Uncompressing through UNZIP", "alternc", true) . "</p><pre style=\"overflow: scroll; height: 200px\">";
             $cmd = "unzip -o " . escapeshellarg($file) . " -d " . escapeshellarg($dest) . " 2>&1";
             passthru($cmd, $ret);
         }
         elseif (substr($lfile, -3) == ".gz" || substr($lfile, -2) == ".Z") {
-            echo "<p>" . _("Uncompressing through GUNZIP") . "</p><pre style=\"overflow: scroll; height: 200px\">";
+            echo "<p>" . __("Uncompressing through GUNZIP", "alternc", true) . "</p><pre style=\"overflow: scroll; height: 200px\">";
             $cmd = "gunzip " . escapeshellarg($file) . " 2>&1";
             passthru($cmd, $ret);
         }
         elseif (substr($lfile, -3) == ".bz" || substr($lfile, -4) == ".bz2") {
-            echo "<p>" . _("Uncompressing through bunzip2") . "</p><pre style=\"overflow: scroll; height: 200px\">";
+            echo "<p>" . __("Uncompressing through bunzip2", "alternc", true) . "</p><pre style=\"overflow: scroll; height: 200px\">";
             $cmd = "bunzip2 " . escapeshellarg($file) . " 2>&1";
             passthru($cmd, $ret);
         }
@@ -695,7 +695,7 @@ class m_bro {
         $action->fix_dir($dest);
 
         if ($ret) {
-            $msg->raise("ERROR", "bro", _("I cannot find a way to extract the file %s, it is an unsupported compressed format"), $file);
+            $msg->raise("ERROR", "bro", __("I cannot find a way to extract the file %s, it is an unsupported compressed format", "alternc", true), $file);
             return false;
         }
         return true;
@@ -715,16 +715,16 @@ class m_bro {
         global $msg;
         $old = $this->convertabsolute($old, false);
         if (!$old) {
-            $msg->raise("ERROR", "bro", _("File or folder name is incorrect"));
+            $msg->raise("ERROR", "bro", __("File or folder name is incorrect", "alternc", true));
             return false;
         }
         $new = $this->convertabsolute($new, false);
         if (!$new) {
-            $msg->raise("ERROR", "bro", _("File or folder name is incorrect"));
+            $msg->raise("ERROR", "bro", __("File or folder name is incorrect", "alternc", true));
             return false;
         }
         if ($old == $new) {
-            $msg->raise("ERROR", "bro", _("You cannot move or copy a file to the same folder"));
+            $msg->raise("ERROR", "bro", __("You cannot move or copy a file to the same folder", "alternc", true));
             return false;
         }
         for ($i = 0; $i < count($d); $i++) {
@@ -813,11 +813,11 @@ class m_bro {
                 $std = str_replace("<", "&lt;", str_replace("&", "&amp;", file_get_contents($absolute)));
                 return $std;
             } else {
-                $msg->raise("ERROR", "bro", _("Cannot read the requested file. Please check the permissions"));
+                $msg->raise("ERROR", "bro", __("Cannot read the requested file. Please check the permissions", "alternc", true));
                 return false;
             }
         } else {
-            $msg->raise("ERROR", "bro", _("File or folder name is incorrect"));
+            $msg->raise("ERROR", "bro", __("File or folder name is incorrect", "alternc", true));
             return false;
         }
     }
@@ -896,7 +896,7 @@ class m_bro {
         $absolute = "$dir/$name";
         $absolute = $this->convertabsolute($absolute, false);
         if (!$absolute) {
-            $msg->raise("ERROR", 'bro', _("File not in authorized directory"));
+            $msg->raise("ERROR", 'bro', __("File not in authorized directory", "alternc", true));
             include('foot.php');
             exit;
         }
@@ -994,7 +994,7 @@ class m_bro {
                 readfile($absolute);
             }
         } else {
-            $msg->raise("ERROR", "bro", _("File or folder name is incorrect"));
+            $msg->raise("ERROR", "bro", __("File or folder name is incorrect", "alternc", true));
             return false;
         }
     }
@@ -1019,12 +1019,12 @@ class m_bro {
             $absolute.="/" . $file;
             if (file_exists($absolute)) {
                 if (!file_put_contents($absolute, $texte)) {
-                    $msg->raise("ERROR", "bro", _("Cannot edit the requested file. Please check the permissions"));
+                    $msg->raise("ERROR", "bro", __("Cannot edit the requested file. Please check the permissions", "alternc", true));
                     return false;
                 }
             }
         } else {
-            $msg->raise("ERROR", "bro", _("File or folder name is incorrect"));
+            $msg->raise("ERROR", "bro", __("File or folder name is incorrect", "alternc", true));
             return false;
         }
         return true;
@@ -1199,7 +1199,7 @@ class m_bro {
         $dir.="html/";
         if (!is_dir($dir)) {
             if (!mkdir($dir))
-                $msg->raise("ERROR", "bro", _("Cannot create the requested directory. Please check the permissions"));
+                $msg->raise("ERROR", "bro", __("Cannot create the requested directory. Please check the permissions", "alternc", true));
         }
         $timestamp = date("H:i:s");
 

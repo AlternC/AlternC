@@ -37,13 +37,13 @@ $dom->unlock();
 
 $dt=$dom->domains_type_lst();
 if (!$isinvited && $dt[strtolower($r['type'])]["enable"] != "ALL" ) {
-  $msg->raise("ERROR", "dom", _("This page is restricted to authorized staff"));
+  $msg->raise("ERROR", "dom", __("This page is restricted to authorized staff", "alternc", true));
   echo $msg->msg_html_all();
   exit();
 }
 
 ?>
-<h3><?php printf(_("Deleting subdomain %s"),ife($r['name'],$r['name'].".").$r['domain']); ?> : </h3>
+<h3><?php printf(__("Deleting subdomain %s", "alternc", true),ife($r['name'],$r['name'].".").$r['domain']); ?> : </h3>
 <?php
 if ($msg->has_msgs("ERROR")) {
   echo $msg->msg_html_all();
@@ -61,10 +61,10 @@ if ($msg->has_msgs("ERROR")) {
     <p><?php 
       __("Informations about the subdomain you're going to delete:");
       echo "<ul>";
-      echo "<li>"._("Entry:")." ".( empty($r['name'])?'':$r['name'].".").$r['domain']."</li>";
-      echo "<li>"._("Type:")." "._($r['type_desc'])."</li>";
+      echo "<li>".__("Entry:", "alternc", true)." ".( empty($r['name'])?'':$r['name'].".").$r['domain']."</li>";
+      echo "<li>".__("Type:", "alternc", true)." ".__($r['type_desc'], "alternc", true)."</li>";
       if (!empty($r['dest'])) {
-        echo "<li>"._("Value:")." "._($r['dest'])."</li>";
+        echo "<li>".__("Value:", "alternc", true)." ".__($r['dest'], "alternc", true)."</li>";
       }
       echo "</ul>";
       echo "<br/>";

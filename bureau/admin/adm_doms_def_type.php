@@ -28,7 +28,7 @@
 require_once("../class/config.php");
 
 if (!$admin->enabled) {
-    $msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
+    $msg->raise("ERROR", "admin", __("This page is restricted to authorized staff", "alternc", true));
     echo $msg->msg_html_all();
     exit();
 }
@@ -56,9 +56,9 @@ getFields($fields);
 
 if (!empty($domup)) {
     if (!$dom->update_default_subdomains($domup)) {
-        $msg->raise("ERROR", "admin", _("There was an error during the record."));
+        $msg->raise("ERROR", "admin", __("There was an error during the record.", "alternc", true));
     } else {
-        $msg->raise("INFO", "admin", _("Save done."));
+        $msg->raise("INFO", "admin", __("Save done.", "alternc", true));
     }
 }
 echo $msg->msg_html_all();

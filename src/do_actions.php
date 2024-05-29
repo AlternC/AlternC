@@ -358,7 +358,7 @@ while ($rr=$action->get_action()){
 if(count($errorsList)) {
   mail_it();
 if( (php_sapi_name() === 'cli') ){
-   echo _("errors were met");
+   echo __("errors were met", "alternc", true);
    var_dump($errorsList);
 
 } 

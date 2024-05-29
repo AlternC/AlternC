@@ -30,7 +30,7 @@ $fields = array (
 );
 getFields($fields);
 
-if (empty($domain)) die(_("Error: no domain"));
+if (empty($domain)) die(__("Error: no domain", "alternc", true));
 
 foreach ($dom->dump_axfr($domain) as $o ) {
   echo "$o\n";

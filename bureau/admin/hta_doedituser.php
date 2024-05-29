@@ -35,13 +35,13 @@ $fields = array (
 getFields($fields);
 
 if ($newpass != $newpassconf) {
-	$msg->raise("ERROR", "hta", _("Passwords do not match"));
+	$msg->raise("ERROR", "hta", __("Passwords do not match", "alternc", true));
 	include("hta_edituser.php");
 	exit();
 }
 
 if ($hta->change_pass($user,$newpass,$dir)) {
-	$msg->raise("INFO", "hta", _("The password of the user %s has been successfully changed"), $user);
+	$msg->raise("INFO", "hta", __("The password of the user %s has been successfully changed", "alternc", true), $user);
 	$is_include=true;
 	include_once("hta_edit.php");
 } else {

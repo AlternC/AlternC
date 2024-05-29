@@ -26,7 +26,7 @@
 require_once("../class/config.php");
 
 if (!$admin->enabled) {
-	$msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
+	$msg->raise("ERROR", "admin", __("This page is restricted to authorized staff", "alternc", true));
 	echo $msg->msg_html_all();
 	exit();
 }
@@ -72,7 +72,7 @@ for($i=0;$i<count($c);$i++) {
 
 <tr class="lst">
 				    <td><?php if ($c[$i]["noerase"]) {
-			echo "<img src=\"icon/encrypted.png\" width=\"16\" height=\"16\" alt=\""._("Locked Domain")."\" />";
+			echo "<img src=\"icon/encrypted.png\" width=\"16\" height=\"16\" alt=\"".__("Locked Domain", "alternc", true)."\" />";
 				    } ?></td>
 <td><div class="ina"><a href="adm_domlock.php?domain=<?php echo urlencode($c[$i]["domaine"]); ?>"><?php
    if ($c[$i]["noerase"]) __("Unlock"); else __("Lock");  ?></a></div></td>

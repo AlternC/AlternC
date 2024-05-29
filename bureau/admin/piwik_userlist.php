@@ -60,7 +60,7 @@ echo $msg->msg_html_all(true, true);
 <hr/>
 <?php
 } else {
-  $msg->raise("INFO", "piwik", _("You cannot add any new Piwik account, your quota is over."));
+  $msg->raise("INFO", "piwik", __("You cannot add any new Piwik account, your quota is over.", "alternc", true));
 } // cancreate piwik
 ?>
 
@@ -70,7 +70,7 @@ echo $msg->msg_html_all(true, true);
 // printVar($piwik->dev());
 
 if (empty($userslist)){
-	$msg->raise("INFO", "piwik", _("No existing Piwik accounts"));
+	$msg->raise("INFO", "piwik", __("No existing Piwik accounts", "alternc", true));
 	echo $msg->msg_html_all();
 } else {
 ?>

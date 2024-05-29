@@ -68,7 +68,7 @@ class m_err {
         // This is the old method, deprecation warning 
         $this->deprecated();
         /* Leve une exception. Si elle existe, sinon, stocke un message d'erreur sur erreur ...*/
-        if (_("err_".$clsid."_".$error)!="err_".$clsid."_".$error || is_string($error)) {
+        if (__("err_".$clsid."_".$error, "alternc", true)!="err_".$clsid."_".$error || is_string($error)) {
             $this->clsid=$clsid;
             $this->error=$error;
             $args = func_get_args();
@@ -100,7 +100,7 @@ class m_err {
             $str = $this->error."\n";
         } else {
             // old way: message in the locales files (ugly)
-            $str = _("err_".$this->clsid."_".$this->error)."\n";
+            $str = __("err_".$this->clsid."_".$this->error, "alternc", true)."\n";
         }
         $args = $this->param;
         if (is_array($args)) {

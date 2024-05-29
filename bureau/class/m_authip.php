@@ -47,7 +47,7 @@ class m_authip {
      */
     function hook_menu() {
         $obj = array(
-            'title' => _("FTP Access Security"),
+            'title' => __("FTP Access Security", "alternc", true),
             'link' => 'ip_main.php',
             'pos' => 120,
         );
@@ -111,7 +111,7 @@ class m_authip {
             $this->ip_affected_delete($db->f('id'));
         }
         if (!$db->query("delete from authorised_ip where id= ? and ( uid= ? or uid=0) limit 1;", array($id, $cuid))) {
-            $msg->raise("ERROR", 'authip', _("query failed: " . $db->Error));
+            $msg->raise("ERROR", 'authip', __("query failed: " . $db->Error, "alternc", true));
             return false;
         }
         return true;
@@ -130,7 +130,7 @@ class m_authip {
     function get_allowed($s) {
         global $db, $cuid, $msg;
         if (!$db->query("select ai.ip, ai.subnet, ai.infos, aia.parameters from authorised_ip ai, authorised_ip_affected aia where aia.protocol= ? and aia.authorised_ip_id = ai.id and ai.uid= ?;", array($s, $cuid))) {
-            $msg->raise("ERROR", 'authip', _("query failed: " . $db->Error));
+            $msg->raise("ERROR", 'authip', __("query failed: " . $db->Error, "alternc", true));
             return false;
         }
         $r = Array();
@@ -150,7 +150,7 @@ class m_authip {
     function is_wl($ip) {
         global $db, $msg;
         if (!$db->query("select ai.ip, ai.subnet from authorised_ip ai where ai.uid='0';")) {
-            $msg->raise("ERROR", 'authip', _("query failed: " . $db->Error));
+            $msg->raise("ERROR", 'authip', __("query failed: " . $db->Error, "alternc", true));
             return false;
         }
         while ($db->next_record()) {
@@ -230,7 +230,7 @@ class m_authip {
 
         // Error if $ip not an IP
         if (!checkip($ip) && !checkipv6($ip)) {
-            $msg->raise("ERROR", 'authip', _("Failed : not an IP address"));
+            $msg->raise("ERROR", 'authip', __("Failed : not an IP address", "alternc", true));
             return false;
         }
 
@@ -256,7 +256,7 @@ class m_authip {
                 $this->call_hooks("authip_on_delete", $k);
             }
             if (!$db->query("update authorised_ip set ip= ?, subnet= ?, infos= ? where id= ? and uid=? ;", array($ip, $subnet, $infos, $id, $cuid))) {
-                $msg->raise("ERROR", 'authip', _("query failed: " . $db->Error));
+                $msg->raise("ERROR", 'authip', __("query failed: " . $db->Error, "alternc", true));
                 return false;
             }
             foreach ($list_affected as $k => $v) {
@@ -264,7 +264,7 @@ class m_authip {
             }
         } else { // Insert
             if (!$db->query("insert into authorised_ip (uid, ip, subnet, infos) values (?, ?, ?, ?);", array($cuid, $ip, $subnet, $infos))) {
-                $msg->raise("ERROR", 'authip', _("query failed: " . $db->Error));
+                $msg->raise("ERROR", 'authip', __("query failed: " . $db->Error, "alternc", true));
                 return false;
             }
         }
@@ -329,13 +329,13 @@ class m_authip {
             $id = intval($id);
             $this->call_hooks("authip_on_delete", $id);
             if (!$db->query("update authorised_ip_affected set authorised_ip_id= ?, protocol= ?, parameters= ? where id = ? limit 1;", array($authorised_ip_id, $protocol, $parameters, $id))) {
-                $msg->raise("ERROR", 'authip', _("query failed: " . $db->Error));
+                $msg->raise("ERROR", 'authip', __("query failed: " . $db->Error, "alternc", true));
                 return false;
             }
             $this->call_hooks("authip_on_create", $id);
         } else {
             if (!$db->query("insert into authorised_ip_affected (authorised_ip_id, protocol, parameters) values (?, ?, ?);", array($authorised_ip_id, $protocol, $parameters))) {
-                $msg->raise("ERROR", 'authip', _("query failed: " . $db->Error));
+                $msg->raise("ERROR", 'authip', __("query failed: " . $db->Error, "alternc", true));
                 return false;
             }
             $this->call_hooks("authip_on_create", $db->lastid()); 
@@ -361,7 +361,7 @@ class m_authip {
         $this->call_hooks("authip_on_delete", $id);
 
         if (!$db->query("delete from authorised_ip_affected where id= ? limit 1;", array($id))) {
-            $msg->raise("ERROR", 'authip', _("query failed: " . $db->Error));
+            $msg->raise("ERROR", 'authip', __("query failed: " . $db->Error, "alternc", true));
             return false;
         }
         return true;
@@ -384,7 +384,7 @@ class m_authip {
         // On récure l'objet dont on parle
         $d = $this->list_affected();
         if (!isset($d[$affectation_id])) {
-            $msg->raise("ERROR", 'authip', _("Object not available"));
+            $msg->raise("ERROR", 'authip', __("Object not available", "alternc", true));
             return false;
         }
 
@@ -393,7 +393,7 @@ class m_authip {
         // On en déduis la classe qui le concerne
         $e = $this->get_auth_class();
         if (!isset($e[$affectation['protocol']])) {
-            $msg->raise("ERROR", 'authip', sprintf(_("Can't identified class for the protocole %s"), $affectation['protocol']));
+            $msg->raise("ERROR", 'authip', sprintf(__("Can't identified class for the protocole %s", "alternc", true), $affectation['protocol']));
             return false;
         }
         $c = $e[$affectation['protocol']]['class'];

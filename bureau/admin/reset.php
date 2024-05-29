@@ -7,7 +7,7 @@ if (isset($_GET['uid']) && isset($_GET['token']) && isset($_GET['timestamp'])) {
     $logged_in = $mem->temporary_login($_GET['uid'], $_GET['timestamp'],
                                        $_GET['token']);
     if ($logged_in) {
-        $msg->raise('INFO', 'admin/reset', _('Please change your password'));
+        $msg->raise('INFO', 'admin/reset', __('Please change your password', "alternc", true));
         header("Location: /mem_param.php");
         exit;
     }

@@ -59,7 +59,7 @@ echo $msg->msg_html_all(true, true);
 <?php
   } // quotapiwik > 0
 } else {
-  $msg->raise("INFO", "piwik", _("You cannot add any new Piwik sites, your quota is over."));
+  $msg->raise("INFO", "piwik", __("You cannot add any new Piwik sites, your quota is over.", "alternc", true));
 } // cancreate piwik
 
 
@@ -83,7 +83,7 @@ $infos_urls = $piwik->get_users_url_infos();
 if ($right !== FALSE) {
   // Should this stay here, or in the API?
   if (!in_array($site_id, $piwik_alternc_sites))
-    $msg->raise("ERROR", "piwik", _("You don't own this piwik site!"));
+    $msg->raise("ERROR", "piwik", __("You don't own this piwik site!", "alternc", true));
   else {
     foreach ($sitelist as $site) {
       if ($site->id == $site_id)
@@ -95,7 +95,7 @@ if ($right !== FALSE) {
       /* Ensures that the user is legitimate for that user */
       /* If not, we just break the loop, and set error message */
       if (!in_array($user, $piwik_alternc_users)) {
-	$msg->raise("ERROR", "piwik", _('You dont own user'), $user);
+	$msg->raise("ERROR", "piwik", __('You dont own user', "alternc", true), $user);
 	break;
       }
 
@@ -105,7 +105,7 @@ if ($right !== FALSE) {
           if (!$piwik->site_set_user_right($site_id, $user, $cred)) {
 	    break;
           } else {
-	    $msg->raise("INFO", "piwik", _("Account '%s' has been given '%s' rights on '%s'"), array($user, $cred, $domain));
+	    $msg->raise("INFO", "piwik", __("Account '%s' has been given '%s' rights on '%s'", "alternc", true), array($user, $cred, $domain));
           }
         }
       }
@@ -204,7 +204,7 @@ foreach ($sitelist as $site ){
 			printf("<dt>%s:</dt>\n\t<dd>%s</dd>\n", $piwik_user, piwik_right_widget('right', $piwik_user, $cred));
 		}
 		echo '</dl>';
-		echo '<input type="submit" name="valid" class="inb" value="' , _("submit"), '" />';
+		echo '<input type="submit" name="valid" class="inb" value="' , __("submit", "alternc", true), '" />';
 		echo '</form>';
 	}
 } // empty userlist

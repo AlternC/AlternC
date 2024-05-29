@@ -38,7 +38,7 @@ if (!$res=$mysql->get_dblist()) {
 $res=$mysql->get_defaultsparam($dbname);
 
 ?>
-<h3><?php printf(_("MySQL settings for database '%s'"),$dbname); ?></h3>
+<h3><?php printf(__("MySQL settings for database '%s'", "alternc", true),$dbname); ?></h3>
 <hr id="topbar"/>
 <br />
 <?php
@@ -58,7 +58,7 @@ foreach ($res as $r) {
 ?>
 <table class="tedit">
         <tr>
-	<th colspan="2" style='text-align:center;'><?php echo '<h1>'._("Database Settings").'</h1>'; ?></th>
+	<th colspan="2" style='text-align:center;'><?php echo '<h1>'.__("Database Settings", "alternc", true).'</h1>'; ?></th>
         </tr>
 	<tr>
 		<th><?php __("Mysql Server"); ?></th>
@@ -85,9 +85,9 @@ if(isset($r['user'])){
 
 // We test the  'Rights' value to know if this user have all or only specific rights.
 if ($r["Rights"] == 'All') {
-	$rights = _("All permissions");
+	$rights = __("All permissions", "alternc", true);
 } else {
-	$rights = "<span style='color:orange;'>"._("Specific permissions")."</span>";
+	$rights = "<span style='color:orange;'>".__("Specific permissions", "alternc", true)."</span>";
 }
 ?>
 <td>

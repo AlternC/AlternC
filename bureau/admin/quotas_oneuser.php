@@ -44,7 +44,7 @@ if (isset($usr) && is_int($usr)) {
 ?>
 <center>
 
-<h3 style="text-align:center;"><?php printf(_("<b>%s</b> account"),$login); ?></h3>
+<h3 style="text-align:center;"><?php printf(__("<b>%s</b> account", "alternc", true),$login); ?></h3>
 
 <div style="width: 600px">
 
@@ -55,7 +55,7 @@ if (isset($usr) && is_int($usr)) {
   $totalweb = $quota->getquota('web');
   if ( $totalweb['u'] > 0 ) {
     $t=$quota->get_size_unit($totalweb['u'] * 1024);
-    echo "<p>"._("quota_web")." "; // use quota_web because it's the magically translated string
+    echo "<p>".__("quota_web", "alternc", true)." "; // use quota_web because it's the magically translated string
     echo sprintf("%.1f", $t['size'])."&nbsp;".$t['unit'];
     echo "</p>";
   }
@@ -119,7 +119,7 @@ if (isset($usr) && is_int($usr)) {
       $tpc = 0;
     }
     if (count($alias_sizes) > 0) {
-    echo "<tr><td style=\"text-align: right\"><i><b>". _('Total'). " {$domaine}</b></i></td><td></td>";
+    echo "<tr><td style=\"text-align: right\"><i><b>". __('Total', "alternc", true). " {$domaine}</b></i></td><td></td>";
     echo "<td";
     if ($mode!=2) echo " style=\"text-align: right\"";
     echo "><i><b>";
@@ -145,7 +145,7 @@ if (isset($usr) && is_int($usr)) {
 
   $t = $quota->get_size_unit($totaldb);
 
-  echo "<p style=\"text-align: left; font-size:16px;\"><b>"._("Databases:")." ";
+  echo "<p style=\"text-align: left; font-size:16px;\"><b>".__("Databases:", "alternc", true)." ";
   echo "</b></p>";
 ?>
 
@@ -181,7 +181,7 @@ if (isset($usr) && is_int($usr)) {
   }
 
   if (count($db_sizes) > 0 && $mode==0) {
-    echo "<tr><td style=\"text-align: right\"><i><b>". _('Total'). " " . _("Databases:")."</b></i></td>";
+    echo "<tr><td style=\"text-align: right\"><i><b>". __('Total', "alternc", true). " " . __("Databases:", "alternc", true)."</b></i></td>";
     echo "<td style=\"text-align: right\"><i><b>";
     echo sprintf("%.1f", $t['size'])."&nbsp;".$t['unit'];
     echo "</b></i></td></tr>";
@@ -198,7 +198,7 @@ if (isset($usr) && is_int($usr)) {
     // $totalweb is in KB, so we call get_size_unit() with it in Bytes
     $t=$quota->get_size_unit($totallist * 1024);
 
-    echo "<p style=\"text-align: left; font-size:16px;\"><b>"._("Mailman lists:")." ";
+    echo "<p style=\"text-align: left; font-size:16px;\"><b>".__("Mailman lists:", "alternc", true)." ";
     echo "</b></p>";
 ?>
 
@@ -234,7 +234,7 @@ if (isset($usr) && is_int($usr)) {
   }
 
   if (count($db_sizes) > 0 && $mode==0) {
-    echo "<tr><td style=\"text-align: right\"><i><b>". _('Total'). " " . _("Mailman lists:")."</b></i></td>";
+    echo "<tr><td style=\"text-align: right\"><i><b>". __('Total', "alternc", true). " " . __("Mailman lists:", "alternc", true)."</b></i></td>";
     echo "<td";
     if ($mode!=2) echo " style=\"text-align: right\"";
     echo "><i><b>";

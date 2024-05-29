@@ -26,7 +26,7 @@
 require_once("../class/config.php");
 
 if (!$admin->enabled) {
-  $msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
+  $msg->raise("ERROR", "admin", __("This page is restricted to authorized staff", "alternc", true));
   echo $msg->msg_html_all();
   exit();
 }
@@ -38,7 +38,7 @@ $fields = array (
 getFields($fields);
 
 if (!$admin->checkcreator($uid)) {
-  $msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
+  $msg->raise("ERROR", "admin", __("This page is restricted to authorized staff", "alternc", true));
   echo $msg->msg_html_all();
   exit();
 }
@@ -46,7 +46,7 @@ if (!$admin->checkcreator($uid)) {
 if (!$admin->renew_mem($uid, $periods)){
   include("adm_edit.php");
 } else {
-  $msg->raise("INFO", "admin", _("The member has been successfully renewed"));
+  $msg->raise("INFO", "admin", __("The member has been successfully renewed", "alternc", true));
   include("adm_list.php");
 }
 ?>

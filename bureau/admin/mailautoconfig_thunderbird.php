@@ -33,10 +33,10 @@ header ("Content-Type:text/xml");
  wget -O - -q  http://FQDN/mailautoconfig_thunderbird.php?emailaddress=test@example.tld
 */
 
-if (empty($_GET['emailaddress'])) die(_("Error: Missing GET of emailaddress"));
+if (empty($_GET['emailaddress'])) die(__("Error: Missing GET of emailaddress", "alternc", true));
 
 $emailDomain = explode('@', rawurldecode($_GET['emailaddress']));
-if (empty($emailDomain)) die(_('Error: Empty $emailDomain'));
+if (empty($emailDomain)) die(__('Error: Empty $emailDomain', "alternc", true));
 ?>
 <clientConfig version="1.1">
 <emailProvider id="<?php echo $L_FQDN ?>">

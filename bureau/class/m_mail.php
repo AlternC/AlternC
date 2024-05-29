@@ -82,7 +82,7 @@ class m_mail {
      */
     function hook_menu() {
         $obj = array(
-            'title' => _("Email Addresses"),
+            'title' => __("Email Addresses", "alternc", true),
             'link' => 'toggle',
             'pos' => 30,
             'links' => array(),
@@ -173,7 +173,7 @@ class m_mail {
             // FIXME validate domain
         } else { // it MUST be an email
             if (!filter_var($target, FILTER_VALIDATE_EMAIL)) {
-                $msg->raise("ERROR", "mail", _("The email you entered is syntaxically incorrect"));
+                $msg->raise("ERROR", "mail", __("The email you entered is syntaxically incorrect", "alternc", true));
                 return false;
             }
         }
@@ -192,7 +192,7 @@ class m_mail {
     function hook_quota_get() {
         global $db, $msg, $cuid, $quota;
         $msg->debug("mail", "getquota");
-        $q = Array("name" => "mail", "description" => _("Email addresses"), "used" => 0);
+        $q = Array("name" => "mail", "description" => __("Email addresses", "alternc", true), "used" => 0);
         $db->query("SELECT COUNT(*) AS cnt FROM address a, domaines d WHERE a.domain_id=d.id AND d.compte= ? AND a.type='';", array($cuid));
         if ($db->next_record()) {
             $q['used'] = $db->f("cnt");
@@ -207,7 +207,7 @@ class m_mail {
      * @return array an array of policykey => "policy name (for humans)"
      */
     function alternc_password_policy() {
-        return array("pop" => _("Email account password"));
+        return array("pop" => __("Email account password", "alternc", true));
     }
 
 
@@ -261,7 +261,7 @@ ORDER BY
         }
         // Validate the email syntax:
         if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
-            $msg->raise("ERROR", "mail", _("The email you entered is syntaxically incorrect"));
+            $msg->raise("ERROR", "mail", __("The email you entered is syntaxically incorrect", "alternc", true));
             return false;
         }
         // Check the availability
@@ -311,7 +311,7 @@ ORDER BY
          FROM ((domaines d, address a LEFT JOIN mailbox m ON m.address_id=a.id) LEFT JOIN dovecot_quota q ON CONCAT(a.address,'@',d.domaine)  = q.user) LEFT JOIN recipient r ON r.address_id=a.id
          WHERE " . $where . " AND d.id=a.domain_id ORDER BY a.address ASC " . $limit . " ;", $query_args);
         if (!$db->next_record()) {
-            $msg->raise("ERROR", "mail", _("No email found for this query"));
+            $msg->raise("ERROR", "mail", __("No email found for this query", "alternc", true));
             return array();
         }
         $res = array();
@@ -336,7 +336,7 @@ ORDER BY
 
     function hook_mail_get_details($detail) {
         if ($detail['type'] == 'catchall') {
-            return _(sprintf("Special mail address for catch-all. <a href='mail_manage_catchall.php?domain_id=%s'>Click here to manage it.</a>", $detail['domain_id']));
+            return __(sprintf("Special mail address for catch-all. <a href='mail_manage_catchall.php?domain_id=%s'>Click here to manage it.</a>", $detail['domain_id'], "alternc", true));
         }
     }
 
@@ -366,7 +366,7 @@ ORDER BY
         // Validate the email syntax:
         $m = $mail . "@" . $domain;
         if (!filter_var($m, FILTER_VALIDATE_EMAIL) && !$dontcheck) {
-            $msg->raise("ERROR", "mail", _("The email you entered is syntaxically incorrect"));
+            $msg->raise("ERROR", "mail", __("The email you entered is syntaxically incorrect", "alternc", true));
             return false;
         }
 
@@ -378,23 +378,23 @@ ORDER BY
 
         // Check the quota:
         if (($type=="")&&!$quota->cancreate("mail")) {
-            $msg->raise("ALERT", "mail", _("You cannot create email addresses: your quota is over"));
+            $msg->raise("ALERT", "mail", __("You cannot create email addresses: your quota is over", "alternc", true));
             return false;
         }
         // Already exists?
         $db->query("SELECT * FROM address WHERE domain_id= ? AND address= ? ;", array($dom_id, $mail));
         if ($db->next_record()) {
             if ($db->f("type") == "mailman")
-                $msg->raise("ERROR", "mail", _("This email address already exists in mailman"));
+                $msg->raise("ERROR", "mail", __("This email address already exists in mailman", "alternc", true));
             else
-                $msg->raise("ERROR", "mail", _("This email address already exists"));
+                $msg->raise("ERROR", "mail", __("This email address already exists", "alternc", true));
 
             return false;
         }
         // Create it now
         $db->query("INSERT INTO address (domain_id, address,type) VALUES (?, ?, ?);", array($dom_id, $mail, $type));
         if (!($id = $db->lastid())) {
-            $msg->raise("ERROR", "mail", _("An unexpected error occured when creating the email"));
+            $msg->raise("ERROR", "mail", __("An unexpected error occured when creating the email", "alternc", true));
             return false;
         }
         return $id;
@@ -451,7 +451,7 @@ ORDER BY
         if ($db->next_record()) {
             return $this->isitmy_cache[$mail_id] = $db->f("email");
         } else {
-            $msg->raise("ERROR", "mail", _("This email is not yours, you can't change anything on it"));
+            $msg->raise("ERROR", "mail", __("This email is not yours, you can't change anything on it", "alternc", true));
             return $this->isitmy_cache[$mail_id] = false;
         }
     }
@@ -517,7 +517,7 @@ ORDER BY
         $mail_id = intval($mail_id);
 
         if (!$mail_id) {
-            $msg->raise("ERROR", "mail", _("The email you entered is syntaxically incorrect"));
+            $msg->raise("ERROR", "mail", __("The email you entered is syntaxically incorrect", "alternc", true));
             return false;
         }
         // Validate that this email is owned by me...
@@ -531,11 +531,11 @@ ORDER BY
         // Search for that address:
         $db->query("SELECT a.id, a.type, a.mail_action, m.mail_action AS mailbox_action, NOT ISNULL(m.id) AS islocal FROM address a LEFT JOIN mailbox m ON m.address_id=a.id WHERE a.id= ? ;", array($mail_id));
         if (!$db->next_record()) {
-            $msg->raise("ERROR", "mail", _("The email %s does not exist, it can't be deleted"), $mail);
+            $msg->raise("ERROR", "mail", __("The email %s does not exist, it can't be deleted", "alternc", true), $mail);
             return false;
         }
         if ($db->f("mail_action") != "OK" || ($db->f("islocal") && $db->f("mailbox_action") != "OK")) { // will be deleted soon ...
-            $msg->raise("ERROR", "mail", _("The email %s is already marked for deletion, it can't be deleted"), $mail);
+            $msg->raise("ERROR", "mail", __("The email %s is already marked for deletion, it can't be deleted", "alternc", true), $mail);
             return false;
         }
         $mail_id = $db->f("id");
@@ -569,7 +569,7 @@ ORDER BY
         $mail_id = intval($mail_id);
 
         if (!$mail_id) {
-            $msg->raise("ERROR", "mail", _("The email you entered does not exist"));
+            $msg->raise("ERROR", "mail", __("The email you entered does not exist", "alternc", true));
             return false;
         }
         // Validate that this email is owned by me...
@@ -580,15 +580,15 @@ ORDER BY
         // Search for that address:
         $db->query("SELECT a.id, a.type, a.mail_action, m.mail_action AS mailbox_action, NOT ISNULL(m.id) AS islocal FROM address a LEFT JOIN mailbox m ON m.address_id=a.id WHERE a.id= ? ;", array($mail_id));
         if (!$db->next_record()) {
-            $msg->raise("ERROR", "mail", _("The email %s does not exist, it can't be undeleted"), $mail);
+            $msg->raise("ERROR", "mail", __("The email %s does not exist, it can't be undeleted", "alternc", true), $mail);
             return false;
         }
         if ($db->f("type") != "") { // Technically special : mailman, sympa ... 
-            $msg->raise("ERROR", "mail", _("The email %s is special, it can't be undeleted"), $mail);
+            $msg->raise("ERROR", "mail", __("The email %s is special, it can't be undeleted", "alternc", true), $mail);
             return false;
         }
         if ($db->f("mailbox_action") != "DELETE" || $db->f("mail_action") != "DELETE") { // will be deleted soon ...
-            $msg->raise("ALERT", "mail", _("Sorry, deletion of email %s is already in progress, or not marked for deletion, it can't be undeleted"), $mail);
+            $msg->raise("ALERT", "mail", __("Sorry, deletion of email %s is already in progress, or not marked for deletion, it can't be undeleted", "alternc", true), $mail);
             return false;
         }
         $mail_id = $db->f("id");
@@ -599,7 +599,7 @@ ORDER BY
             $db->query("UPDATE mailbox SET mail_action='OK' WHERE address_id= ? ;", array($mail_id));
             return true;
         } else {
-            $msg->raise("ERROR", "mail", _("-- Program Error -- The email %s can't be undeleted"), $mail);
+            $msg->raise("ERROR", "mail", __("-- Program Error -- The email %s can't be undeleted", "alternc", true), $mail);
             return false;
         }
     }
@@ -697,7 +697,7 @@ ORDER BY
             }
             foreach ($this->forbiddenchars as $str) {
                 if (strpos($me["address"], $str) !== false) {
-                    $msg->raise("ERROR", "mail", _("There is forbidden characters in your email address. You can't make it a POP/IMAP account, you can only use it as redirection to other emails"));
+                    $msg->raise("ERROR", "mail", __("There is forbidden characters in your email address. You can't make it a POP/IMAP account, you can only use it as redirection to other emails", "alternc", true));
                     return false;
                 }
             }
@@ -716,7 +716,7 @@ ORDER BY
         if ($islocal) {
             if ($quotamb != 0 && $quotamb < (intval($me["used"] / 1024 / 1024) + 1)) {
                 $quotamb = intval($me["used"] / 1024 / 1024) + 1;
-                $msg->raise("ALERT", "mail", _("You set a quota smaller than the current mailbox size. Since it's not allowed, we set the quota to the current mailbox size"));
+                $msg->raise("ALERT", "mail", __("You set a quota smaller than the current mailbox size. Since it's not allowed, we set the quota to the current mailbox size", "alternc", true));
             }
             $db->query("UPDATE mailbox SET quota= ? WHERE address_id= ? ;", array($quotamb, $mail_id));
         }
@@ -736,7 +736,7 @@ ORDER BY
             $db->query("INSERT INTO recipient SET address_id= ?, recipients= ? ;", array($mail_id, $red));
         }
         if (!$islocal && !$red) {
-            $msg->raise("ALERT", "mail", _("Warning: you created an email which is not an alias, and not a POP/IMAP mailbox. This is certainly NOT what you want to do. To fix this, edit the email address and check 'Yes' in POP/IMAP account, or set some recipients in the redirection field."));
+            $msg->raise("ALERT", "mail", __("Warning: you created an email which is not an alias, and not a POP/IMAP mailbox. This is certainly NOT what you want to do. To fix this, edit the email address and check 'Yes' in POP/IMAP account, or set some recipients in the redirection field.", "alternc", true));
         }
         return true;
     }
@@ -906,7 +906,7 @@ ORDER BY
         global $db, $msg;
         $db->query("SELECT * FROM mxaccount WHERE login= ? ;", array($login));
         if ($db->next_record()) {
-            $msg->raise("ERROR", "mail", _("The slave MX account was not found"));
+            $msg->raise("ERROR", "mail", __("The slave MX account was not found", "alternc", true));
             return false;
         }
         $db->query("INSERT INTO mxaccount (login,pass) VALUES (?, ?);", array($login, $pass));
@@ -957,7 +957,7 @@ ORDER BY
 
         $db->query("SELECT value FROM variable where name='mailname_bounce';");
         if (!$db->next_record()) {
-            $msg->raise("ERROR", "mail", _("Problem: can't create default bounce mail"));
+            $msg->raise("ERROR", "mail", __("Problem: can't create default bounce mail", "alternc", true));
             return false;
         }
         $mailname = $db->f("value");

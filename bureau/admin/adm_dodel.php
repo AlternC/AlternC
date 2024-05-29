@@ -27,7 +27,7 @@
 require_once("../class/config.php");
 
 if (!$admin->enabled) {
-  $msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
+  $msg->raise("ERROR", "admin", __("This page is restricted to authorized staff", "alternc", true));
   echo $msg->msg_html_all();
   exit();
 }
@@ -41,21 +41,21 @@ getFields($fields);
 if($del_confirm == "y"){
   foreach ($accountList as $key => $val) {
     if (!$admin->checkcreator($val)) {
-      $msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
+      $msg->raise("ERROR", "admin", __("This page is restricted to authorized staff", "alternc", true));
       echo $msg->msg_html_all();
       exit();
     }
     if (!($u=$admin->get($val)) || !$admin->del_mem($val)) {
-      $msg->raise("ERROR", "admin", _("Member '%s' does not exist"),$val);
+      $msg->raise("ERROR", "admin", __("Member '%s' does not exist", "alternc", true),$val);
     } else {
-      $msg->raise("INFO", "admin", _("Member %s successfully deleted"),$u["login"]);
+      $msg->raise("INFO", "admin", __("Member %s successfully deleted", "alternc", true),$u["login"]);
     }
   }
   include("adm_list.php");
   exit();
 } else {
   if (!is_array($accountList) || count($accountList)==0) {
-    $msg->raise("ERROR", "admin", _("Please check the accounts you want to delete"));
+    $msg->raise("ERROR", "admin", __("Please check the accounts you want to delete", "alternc", true));
     require("adm_list.php");
     exit();
   } 
@@ -63,7 +63,7 @@ if($del_confirm == "y"){
     ?>
     </head>
     <body>
-    <h3><?php printf(_("Deleting users")); ?> : </h3>
+    <h3><?php printf(__("Deleting users", "alternc", true)); ?> : </h3>
     <form action="adm_dodel.php" method="post">
  <?php csrf_get(); ?>
       <input type="hidden" name="action" value="delete" />

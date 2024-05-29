@@ -37,7 +37,7 @@ if ($aws->check_host_available($hostname)) {
         include("aws_add.php");
         exit();
     } else {
-        $msg->raise('Ok', "aws", _("The statistics has been successfully created"));
+        $msg->raise('Ok', "aws", __("The statistics has been successfully created", "alternc", true));
 	    include("aws_list.php");
 	    exit();
     }

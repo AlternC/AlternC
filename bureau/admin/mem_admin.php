@@ -31,7 +31,7 @@ $fields = array (
 getFields($fields);
 
 if ($mem->adminpref($admlist)) {
-	$msg->raise("INFO", "mem", _("Your administrator preferences has been successfully changed."));
+	$msg->raise("INFO", "mem", __("Your administrator preferences has been successfully changed.", "alternc", true));
 }
 
 include_once("head.php");
@@ -40,7 +40,7 @@ include_once("head.php");
 <h3><?php __("Admin preferences"); ?></h3>
 <?php
 echo $msg->msg_html_all();
-echo "<p><span class='ina'><a href='mem_param.php'>"._("Click here to continue")."</a></span></p>";
+echo "<p><span class='ina'><a href='mem_param.php'>".__("Click here to continue", "alternc", true)."</a></span></p>";
 
 include_once("foot.php");
 ?>

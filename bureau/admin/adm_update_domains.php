@@ -27,14 +27,14 @@ require_once("../class/config.php");
 
 if (!$admin->enabled) {
   if ( ! ( $isinvited && isset($oldid) && !empty($oldid) && $oldid==2000) ) { // Allow sub admins
-    $msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
+    $msg->raise("ERROR", "admin", __("This page is restricted to authorized staff", "alternc", true));
     echo $msg->msg_html_all();
     exit();
   }
 }
 
 if (! isset($L_INOTIFY_UPDATE_DOMAIN)) {
-  $msg->raise("ERROR", "admin", _("Missing INOTIFY_UPDATE_DOMAIN var in /etc/alternc/local.sh . Fix it!"));
+  $msg->raise("ERROR", "admin", __("Missing INOTIFY_UPDATE_DOMAIN var in /etc/alternc/local.sh . Fix it!", "alternc", true));
   echo $msg->msg_html_all();
   die();
 }

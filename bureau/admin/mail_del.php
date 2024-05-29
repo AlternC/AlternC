@@ -50,9 +50,9 @@ if ($confirm=="y") {
 
     if ($mail->delete($val)) {
         if ($db->f("islocal")) {
-            $msg->raise("INFO", "mail", _("The email %s has been marked for deletion"), $email);
+            $msg->raise("INFO", "mail", __("The email %s has been marked for deletion", "alternc", true), $email);
         } else {
-            $msg->raise("INFO", "mail", _("The email %s has been successfully deleted"), $email);
+            $msg->raise("INFO", "mail", __("The email %s has been successfully deleted", "alternc", true), $email);
         }
     }
   }

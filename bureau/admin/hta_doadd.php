@@ -31,7 +31,7 @@ $fields = array (
 getFields($fields);
 
 if(empty($dir)) {
-	$msg->raise("ERROR", "hta", _("No directory specified"));
+	$msg->raise("ERROR", "hta", __("No directory specified", "alternc", true));
 	include("hta_list.php");
 } else if(!$hta->CreateDir($dir)) {
 	$is_include=true;

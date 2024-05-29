@@ -70,13 +70,13 @@ if (!empty($formu) && $formu) {
   switch ($formu) {
     case 1:  // Create the folder $R.$nomfich
       if ($bro->CreateDir($R,$nomfich)) {
-        $msg->raise("INFO", "bro", _("The folder '%s' was successfully created"), $nomfich);
+        $msg->raise("INFO", "bro", __("The folder '%s' was successfully created", "alternc", true), $nomfich);
       }
       $p=$bro->GetPrefs();
       break;
     case 6: // Create the file $R.$nomfich
       if ($bro->CreateFile($R,$nomfich)) {
-        $msg->raise("INFO", "bro", _("The file '%s' was successfully created"), $nomfich);
+        $msg->raise("INFO", "bro", __("The file '%s' was successfully created", "alternc", true), $nomfich);
       }
       $p=$bro->GetPrefs();
       if ($p["createfile"]==1) {
@@ -91,15 +91,15 @@ if (!empty($formu) && $formu) {
           if ($bro->DeleteFile($d,$R)) {
 	    foreach ($d as $v) {
 	      if (is_dir($absolute . "/" . $v))
-                $msg->raise("INFO", "bro", _("The folder '%s' was successfully deleted"), $v);
+                $msg->raise("INFO", "bro", __("The folder '%s' was successfully deleted", "alternc", true), $v);
 	      else
-                $msg->raise("INFO", "bro", _("The file '%s' was successfully deleted"), $v);
+                $msg->raise("INFO", "bro", __("The file '%s' was successfully deleted", "alternc", true), $v);
 	    }
           }
         } elseif (empty($cancel) && count($d)) {
           include_once("head.php");
           ?>
-            <h3><?php printf(_("Deleting files and/or directories")); ?> : </h3>
+            <h3><?php printf(__("Deleting files and/or directories", "alternc", true)); ?> : </h3>
             <form action="bro_main.php" method="post" name="main" id="main">  
  <?php csrf_get(); ?>
             <input type="hidden" name="formu" value="2" />
@@ -127,22 +127,22 @@ if (!empty($formu) && $formu) {
         if ($bro->CopyFile($d,$R,$actmoveto)) {
 	  if (count($d) == 1) {
 	    if (is_dir($absolute . "/" . $d[0]))
-	      $msg->raise("INFO", "bro", _("The folder '%s' was successfully copied to '%s'"), array($d[0], $actmoveto));
+	      $msg->raise("INFO", "bro", __("The folder '%s' was successfully copied to '%s'", "alternc", true), array($d[0], $actmoveto));
 	    else
-	      $msg->raise("INFO", "bro", _("The file '%s' was successfully copied to '%s'"), array($d[0], $actmoveto));
+	      $msg->raise("INFO", "bro", __("The file '%s' was successfully copied to '%s'", "alternc", true), array($d[0], $actmoveto));
 	  } else
-            $msg->raise("INFO", "bro", _("The files / folders were successfully copied"));
+            $msg->raise("INFO", "bro", __("The files / folders were successfully copied", "alternc", true));
         }
       }
       if ($actmove && count($d)) {
         if ($bro->MoveFile($d,$R,$actmoveto)) {
 	  if (count($d) == 1) {
 	    if (is_dir($absolute . "/" . $d[0]))
-	      $msg->raise("INFO", "bro", _("The folder '%s' was successfully moved to '%s'"), array($d[0], $actmoveto));
+	      $msg->raise("INFO", "bro", __("The folder '%s' was successfully moved to '%s'", "alternc", true), array($d[0], $actmoveto));
 	    else
-	      $msg->raise("INFO", "bro", _("The file '%s' was successfully moved to '%s'"), array($d[0], $actmoveto));
+	      $msg->raise("INFO", "bro", __("The file '%s' was successfully moved to '%s'", "alternc", true), array($d[0], $actmoveto));
 	  } else
-            $msg->raise("INFO", "bro", _("The files / folders were successfully moved"));
+            $msg->raise("INFO", "bro", __("The files / folders were successfully moved", "alternc", true));
         }
       }
       break;
@@ -150,21 +150,21 @@ if (!empty($formu) && $formu) {
       if ($bro->RenameFile($R,$o,$d)) { // Rename $R (directory) $o (old) $d (new) names
 	if (count($d) == 1) {
 	  if (is_dir($absolute . "/" . $d[0]))
-	    $msg->raise("INFO", "bro", _("The folder '%s' was successfully renamed to '%s'"), array($o[0], $d[0]));
+	    $msg->raise("INFO", "bro", __("The folder '%s' was successfully renamed to '%s'", "alternc", true), array($o[0], $d[0]));
 	  else
-	    $msg->raise("INFO", "bro", _("The file '%s' was successfully renamed to '%s'"), array($o[0], $d[0]));
+	    $msg->raise("INFO", "bro", __("The file '%s' was successfully renamed to '%s'", "alternc", true), array($o[0], $d[0]));
 	} else
-          $msg->raise("INFO", "bro", _("The files / folders were successfully renamed"));
+          $msg->raise("INFO", "bro", __("The files / folders were successfully renamed", "alternc", true));
       } 
       break;
     case 3:  // Upload de fichier...
       if ($bro->UploadFile($R)) {
-        $msg->raise("INFO", "bro", _("The file '%s' was successfully uploaded"), $_FILES['userfile']['name']);
+        $msg->raise("INFO", "bro", __("The file '%s' was successfully uploaded", "alternc", true), $_FILES['userfile']['name']);
       }
       break;
     case 7:  // Changement de permissions [ML]
       if ($bro->ChangePermissions($R, $d, $perm)) {
-	$msg->raise("INFO", "bro", _("The permissions were successfully set"));
+	$msg->raise("INFO", "bro", __("The permissions were successfully set", "alternc", true));
       }
       break;
   }
@@ -172,7 +172,7 @@ if (!empty($formu) && $formu) {
 
 if (isset($actextract) && $actextract) {
   if ($bro->ExtractFile($R. '/' . $fileextract, $R)) {
-    $msg->raise("INFO", "bro", _("The extraction of the file '%s' succeeded"), $fileextract);
+    $msg->raise("INFO", "bro", __("The extraction of the file '%s' succeeded", "alternc", true), $fileextract);
   }
 }
 
@@ -211,7 +211,7 @@ echo $msg->msg_html_all();
 <input class="int" name="userfile" type="file" />
 <br />
 <input type="submit" id="sendthisfile" class="ina" value="<?php __("Send this file"); ?>" />
-<?php echo sprintf(_("Warning: max size: %s"),$bro->getMaxAllowedUploadSize() ); ?>
+<?php echo sprintf(__("Warning: max size: %s", "alternc", true),$bro->getMaxAllowedUploadSize() ); ?>
 <?php __("(If you upload a compressed file, <br />you will be able to uncompress it after.)"); ?></form>
 
 </td>
@@ -246,13 +246,13 @@ if (isset($formu) && $formu==2 && isset($actrename) && $actrename && count($d)) 
   csrf_get(); 
   echo "<input type=\"hidden\" name=\"R\" value=\"".ehe($R,false)."\" />\n";
   echo "<input type=\"hidden\" name=\"formu\" value=\"4\" />\n";
-  echo "<tr><th colspan=\"2\">"._("Rename")."</th></tr>";
+  echo "<tr><th colspan=\"2\">".__("Rename", "alternc", true)."</th></tr>";
   for ($i=0;$i<count($d);$i++) {
     $d[$i]=ssla($d[$i]);
     echo "<tr><td><input type=\"hidden\" name=\"o[$i]\" value=\"".ehe($d[$i],false)."\" />".ehe($d[$i],false)."</td>";
     echo "<td><input type=\"text\" class=\"int\" name=\"d[$i]\" value=\"".ehe($d[$i],false)."\" /></td></tr>";
   }
-  echo "<tr><td colspan=\"2\" align=\"center\"><input type=\"submit\" class=\"inb\" name=\"submit\" value=\""._("Rename")."\" /></td></tr>";
+  echo "<tr><td colspan=\"2\" align=\"center\"><input type=\"submit\" class=\"inb\" name=\"submit\" value=\"".__("Rename", "alternc", true)."\" /></td></tr>";
   echo "</table></form>\n";
   echo "<hr />\n";
 }
@@ -263,13 +263,13 @@ if ($formu==2 && ! (empty($actperms)) && count($d)) {
   csrf_get();
   echo "<input type=\"hidden\" name=\"R\" value=\"".ehe($R,false)."\" />\n";
   echo "<input type=\"hidden\" name=\"formu\" value=\"7\" />\n";
-  echo "<p>"._("Permissions")."</p>";
+  echo "<p>".__("Permissions", "alternc", true)."</p>";
 
   $tmp_absdir = $bro->convertabsolute($R,0);
 
   echo "<table border=\"1\" cellpadding=\"4\" cellspacing=\"0\">";
   echo "<tr>";
-  echo "<th>" . _("File") . "</th><th>"._("Permissions")."</th>"; 
+  echo "<th>" . __("File", "alternc", true) . "</th><th>".__("Permissions", "alternc", true)."</th>"; 
   echo "</tr>";
 
   for ($i=0;$i<count($d);$i++) {
@@ -283,7 +283,7 @@ if ($formu==2 && ! (empty($actperms)) && count($d)) {
     // Owner
     echo "<td>";
     echo "<input type=\"hidden\" name=\"d[$i]\" value=\"".ehe($d[$i],false)."\" />";
-    echo "<label for=\"permw$i\">"._("write")."</label> <input type=\"checkbox\" id=\"permw$i\" name=\"perm[$i][w]\" value=\"1\" ". (($modes & 0000200) ? 'checked="checked"' : '') ." />";
+    echo "<label for=\"permw$i\">".__("write", "alternc", true)."</label> <input type=\"checkbox\" id=\"permw$i\" name=\"perm[$i][w]\" value=\"1\" ". (($modes & 0000200) ? 'checked="checked"' : '') ." />";
     echo "</td>";
 
     echo "</tr>";
@@ -291,7 +291,7 @@ if ($formu==2 && ! (empty($actperms)) && count($d)) {
 
   echo "</table>";
 
-  echo "<p><input type=\"submit\" class=\"inb\" name=\"submit\" value=\""._("Change permissions")."\" /></p>";
+  echo "<p><input type=\"submit\" class=\"inb\" name=\"submit\" value=\"".__("Change permissions", "alternc", true)."\" /></p>";
   echo "</form>\n";
   echo "<hr />\n";
 }
@@ -377,37 +377,37 @@ function actmoveto_not_empty() {
             echo "\">"; ehe($c[$i]["name"]); 
             echo"</a>";
             if (!($c[$i]["permissions"] & 0000200)) {
-                echo " (<a href=\"bro_main.php?actperms=Permissions&R=".urlencode($R)."&amp;formu=2&amp;d[]=".urlencode($c[$i]["name"])."\">"._("protected")."</a>)";
+                echo " (<a href=\"bro_main.php?actperms=Permissions&R=".urlencode($R)."&amp;formu=2&amp;d[]=".urlencode($c[$i]["name"])."\">".__("protected", "alternc", true)."</a>)";
             }
             echo "</td>\n";
             echo "  <td data-sort-value=\"".$c[$i]["size"]."\">".format_size($c[$i]["size"])."</td>";
-            echo "<td data-sort-value=\"".$c[$i]["date"]."\">".format_date(_('%3$d-%2$d-%1$d %4$d:%5$d'),date("Y-m-d H:i:s",$c[$i]["date"]))."<br /></td>";
+            echo "<td data-sort-value=\"".$c[$i]["date"]."\">".format_date(__('%3$d-%2$d-%1$d %4$d:%5$d', "alternc", true),date("Y-m-d H:i:s",$c[$i]["date"]))."<br /></td>";
             if ($p["showtype"]) {
-              echo "<td>"._($bro->mime($c[$i]["name"]))."</td>";
+              echo "<td>".__($bro->mime($c[$i]["name"], "alternc", true))."</td>";
             }
             $vu=$bro->viewurl($R,$c[$i]["name"]);
             if ($vu) {
-              echo "<td><a href=\"$vu\">"._("View")."</a>";
+              echo "<td><a href=\"$vu\">".__("View", "alternc", true)."</a>";
             } else {
               echo "<td>&nbsp;";
             }
             $e = $bro->is_extractable($c[$i]["name"]);
             if ($e) {
               echo " <a href=\"bro_main.php?actextract=1&amp;fileextract=".urlencode($c[$i]["name"])."&amp;R=".urlencode($R)."\">";
-              echo _("Extract");
+              echo __("Extract", "alternc", true);
               echo "</a>";
             }
             $ez = $bro->is_sqlfile($c[$i]["name"]);
             if ($ez) {
               echo " <a href=\"javascript:;\" onClick=\"$('#rest_db_$i').toggle();\">";
-              echo _("Restore SQL");
+              echo __("Restore SQL", "alternc", true);
               echo "</a>";
-              echo "<div id='rest_db_$i' style='display:none;'><fieldset><legend>"._("Restore SQL")."</legend>"._("In which database to you want to restore this dump?");
+              echo "<div id='rest_db_$i' style='display:none;'><fieldset><legend>".__("Restore SQL", "alternc", true)."</legend>".__("In which database to you want to restore this dump?", "alternc", true);
               echo "<br/>";
               echo "<input type='hidden' name ='filename' value='".ehe($R."/".$c[$i]["name"],false)."' />";
               $dbl=array(); foreach ($mysql->get_dblist() as $v) { $dbl[]=$v['db'];}
               echo "<select id='db_name_$i'>"; eoption($dbl,'',true); echo "</select>" ;
-              echo "<a href='javascript:;' onClick='window.location=\"sql_restore.php?filename=".eue($R."/".$c[$i]["name"],false)."&amp;id=\"+encodeURIComponent($(\"#db_name_$i\").val()) ;'>"._("Restore it")."</a>";
+              echo "<a href='javascript:;' onClick='window.location=\"sql_restore.php?filename=".eue($R."/".$c[$i]["name"],false)."&amp;id=\"+encodeURIComponent($(\"#db_name_$i\").val()) ;'>".__("Restore it", "alternc", true)."</a>";
               echo "</fieldset></div>";
             }
 
@@ -421,9 +421,9 @@ function actmoveto_not_empty() {
             echo "bro_main.php?R=".eue($R."/".$c[$i]["name"],false);
             echo "\">"; ehe($c[$i]["name"]); echo "/</a></b></td>\n";
             echo "  <td data-sort-value=\"".$c[$i]["size"]."\">".format_size($c[$i]["size"])."</td>";
-            echo "<td data-sort-value=\"".$c[$i]["date"]."\">".format_date(_('%3$d-%2$d-%1$d %4$d:%5$d'),date("Y-m-d h:i:s",$c[$i]["date"]))."<br /></td>";
+            echo "<td data-sort-value=\"".$c[$i]["date"]."\">".format_date(__('%3$d-%2$d-%1$d %4$d:%5$d', "alternc", true),date("Y-m-d h:i:s",$c[$i]["date"]))."<br /></td>";
             if ($p["showtype"]) {
-              echo "<td>"._("Folder")."</td>";
+              echo "<td>".__("Folder", "alternc", true)."</td>";
             }
             echo "<td>&nbsp;";
             echo "</td>\n";
@@ -455,7 +455,7 @@ function actmoveto_not_empty() {
             echo "  <td>".format_size($c[$i]["size"])."</td><td>";
             $vu=$bro->viewurl($R,$c[$i]["name"]);
             if ($vu) {
-              echo "<td><a href=\"$vu\">"._("V")."</a>";
+              echo "<td><a href=\"$vu\">".__("V", "alternc", true)."</a>";
             } else {
               echo "<td>&nbsp;";
             }
@@ -489,7 +489,7 @@ function actmoveto_not_empty() {
             echo "  <td>".format_size($c[$i]["size"])."</td><td>";
             $vu=$bro->viewurl($R,$c[$i]["name"]);
             if ($vu) {
-              echo "<td><a href=\"$vu\">"._("V")."</a>";
+              echo "<td><a href=\"$vu\">".__("V", "alternc", true)."</a>";
             } else {
               echo "<td>&nbsp;";
             }
@@ -530,7 +530,7 @@ function actmoveto_not_empty() {
             echo "  <td>".format_size($c[$i]["size"])."</td><td>";
             $vu=$bro->viewurl($R,$c[$i]["name"]);
             if ($vu) {
-              echo "<td><a href=\"$vu\">"._("V")."</a>";
+              echo "<td><a href=\"$vu\">".__("V", "alternc", true)."</a>";
             } else {
               echo "<td>&nbsp;";
             }
@@ -564,7 +564,7 @@ function actmoveto_not_empty() {
             echo "  <td>".format_size($c[$i]["size"])."</td><td>";
             $vu=$bro->viewurl($R,$c[$i]["name"]);
             if ($vu) {
-              echo "<td><a href=\"$vu\">"._("V")."</a>";
+              echo "<td><a href=\"$vu\">".__("V", "alternc", true)."</a>";
             } else {
               echo "<td>&nbsp;";
             }
@@ -599,7 +599,7 @@ function actmoveto_not_empty() {
             echo "  <td>".format_size($c[$i]["size"])."</td><td>";
             $vu=$bro->viewurl($R,$c[$i]["name"]);
             if ($vu) {
-              echo "<td><a href=\"$vu\">"._("View")."</a>";
+              echo "<td><a href=\"$vu\">".__("View", "alternc", true)."</a>";
             } else {
               echo "<td>&nbsp;";
             }
@@ -625,7 +625,7 @@ function actmoveto_not_empty() {
     <?php
 } // is there any files here ?
 else {
-  echo "<p class=\"alert alert-info\">"._("No files in this folder")."</p>";
+  echo "<p class=\"alert alert-info\">".__("No files in this folder", "alternc", true)."</p>";
 }
 ?>
 
@@ -639,17 +639,17 @@ else {
 </div>
 <span class="ina"><?php
 if ($hta->is_protected($R)) {
-    echo "<a href=\"hta_edit.php?dir=".eue(($R)?$R:"/",false)."\">"._("Edit this folder's protection")."</a>";
+    echo "<a href=\"hta_edit.php?dir=".eue(($R)?$R:"/",false)."\">".__("Edit this folder's protection", "alternc", true)."</a>";
 }
 else {
-    echo "<a href=\"hta_add.php?dir=".eue(($R)?$R:"/",false)."\">"._("Protect this folder")."</a>";
+    echo "<a href=\"hta_add.php?dir=".eue(($R)?$R:"/",false)."\">".__("Protect this folder", "alternc", true)."</a>";
 }
 ?></span> <?php __("with a login and a password"); ?>
 </p><p>
 <span class="ina">
 <a href="bro_tgzdown.php?dir=<?php eue(($R)?$R:"/"); ?>"><?php __("Download this folder"); ?></a>
 </span> &nbsp; 
-<?php printf(_("as a %s file"),$bro->l_tgz[$p["downfmt"]]); ?>
+<?php printf(__("as a %s file", "alternc", true),$bro->l_tgz[$p["downfmt"]]); ?>
 </p>  
 <?php
 

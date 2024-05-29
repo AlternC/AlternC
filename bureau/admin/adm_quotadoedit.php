@@ -26,7 +26,7 @@
 require_once("../class/config.php");
 
 if (!$admin->enabled) {
-	$msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
+	$msg->raise("ERROR", "admin", __("This page is restricted to authorized staff", "alternc", true));
 	echo $msg->msg_html_all();
 	exit();
 }
@@ -48,7 +48,7 @@ while (list($key,$val)=each($qlist)) {
 $mem->unsu();
 
 if (!$msg->has_msgs("ERROR"))
-    $msg->raise("INFO", "admin", _("The quotas has been successfully edited"));
+    $msg->raise("INFO", "admin", __("The quotas has been successfully edited", "alternc", true));
 
 include("adm_list.php");
 exit;

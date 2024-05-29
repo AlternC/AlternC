@@ -27,7 +27,7 @@
 require_once("../class/config.php");
 
 if (!$admin->enabled) {
-	$msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
+	$msg->raise("ERROR", "admin", __("This page is restricted to authorized staff", "alternc", true));
 	echo $msg->msg_html_all();
 	exit();
 }
@@ -41,11 +41,11 @@ getFields($fields);
 if (is_array($sel)) {
 	for($i=0;$i<count($sel);$i++) {
 		if (!$admin->deltld($sel[$i])) {
-			$msg->raise("ERROR", "admin", _("Some TLD cannot be deleted...")." : ".$sel[$i]);
+			$msg->raise("ERROR", "admin", __("Some TLD cannot be deleted...", "alternc", true)." : ".$sel[$i]);
 		}
 	}
 	if (!$msg->has_msgs("ERROR"))
-		$msg->raise("INFO", "admin", _("The requested TLD has been deleted"));
+		$msg->raise("INFO", "admin", __("The requested TLD has been deleted", "alternc", true));
 }
 
 include_once("head.php");

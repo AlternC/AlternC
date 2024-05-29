@@ -54,7 +54,7 @@ class m_mem {
      */
     function hook_menu() {
         $obj = array(
-            'title' => _("Settings"),
+            'title' => __("Settings", "alternc", true),
             'link' => 'mem_param.php',
             'pos' => 160,
         );
@@ -87,17 +87,17 @@ class m_mem {
 
         $db->query("select * from membres where login= ? ;", array($username));
         if ($db->num_rows() == 0) {
-            $msg->raise("ERROR", "mem", _("User or password incorrect"));
+            $msg->raise("ERROR", "mem", __("User or password incorrect", "alternc", true));
             return false;
         }
         $db->next_record();
         if (!password_verify($password, $db->f('pass'))) {
             $db->query("UPDATE membres SET lastfail=lastfail+1 WHERE uid= ? ;", array($db->f("uid")));
-            $msg->raise("ERROR", "mem", _("User or password incorrect"));
+            $msg->raise("ERROR", "mem", __("User or password incorrect", "alternc", true));
             return false;
         }
         if (!$db->f("enabled")) {
-            $msg->raise("ERROR", "mem", _("This account is locked, contact the administrator."));
+            $msg->raise("ERROR", "mem", __("This account is locked, contact the administrator.", "alternc", true));
             return false;
         }
         $this->user = $db->Record;
@@ -110,7 +110,7 @@ class m_mem {
         }
 
         if (panel_islocked() && $cuid != 2000) {
-            $msg->raise("ALERT", "mem", _("This website is currently under maintenance, login is currently disabled."));
+            $msg->raise("ALERT", "mem", __("This website is currently under maintenance, login is currently disabled.", "alternc", true));
             return false;
         }
 
@@ -129,7 +129,7 @@ class m_mem {
 
         // Error if there is rules, the IP is not allowed and it's not in the whitelisted IP
         if (sizeof($aga) > 1 && !$allowed_ip && !$authip->is_wl(get_remote_ip())) {
-            $msg->raise("ERROR", "mem", _("Your IP isn't allowed to connect"));
+            $msg->raise("ERROR", "mem", __("Your IP isn't allowed to connect", "alternc", true));
             return false;
         }
         // End AuthIP
@@ -176,7 +176,7 @@ class m_mem {
         $msg->log("mem", "setid", $id);
         $db->query("select * from membres where uid= ? ;", array($id));
         if ($db->num_rows() == 0) {
-            $msg->raise("ERROR", "mem", _("User or password incorrect"));
+            $msg->raise("ERROR", "mem", __("User or password incorrect", "alternc", true));
             return false;
         }
         $db->next_record();
@@ -267,7 +267,7 @@ class m_mem {
 
         if (isset($_REQUEST["username"])) {
             if (empty($_REQUEST['password'])) {
-                $msg->raise("ERROR", "mem", _("Missing password"));
+                $msg->raise("ERROR", "mem", __("Missing password", "alternc", true));
                 return false;
             }
             if ($_REQUEST["username"] && $_REQUEST["password"]) {
@@ -279,7 +279,7 @@ class m_mem {
 
         if (strlen($_COOKIE["session"]) != 32) {
             if ($show_msg)
-                $msg->raise("ERROR", "mem", _("Identity lost or unknown, please login"));
+                $msg->raise("ERROR", "mem", __("Identity lost or unknown, please login", "alternc", true));
             return false;
         }
 
@@ -287,14 +287,14 @@ class m_mem {
         $db->query("select uid, ? as me,ip from sessions where sid= ?;", array($ip, $_COOKIE["session"]));
         if ($db->num_rows() == 0) {
             if ($show_msg)
-                $msg->raise("ERROR", "mem", _("Identity lost or unknown, please login"));
+                $msg->raise("ERROR", "mem", __("Identity lost or unknown, please login", "alternc", true));
             return false;
         }
         $db->next_record();
         $cuid = $db->f("uid");
 
         if (panel_islocked() && $cuid != 2000) {
-            $msg->raise("ALERT", "mem", _("This website is currently under maintenance, login is currently disabled."));
+            $msg->raise("ALERT", "mem", __("This website is currently under maintenance, login is currently disabled.", "alternc", true));
             return false;
         }
 
@@ -324,7 +324,7 @@ class m_mem {
         }
         $db->query("select * from membres where uid= ? ;", array($uid));
         if ($db->num_rows() == 0) {
-            $msg->raise("ERROR", "mem", _("User or password incorrect"));
+            $msg->raise("ERROR", "mem", __("User or password incorrect", "alternc", true));
             return false;
         }
         $db->next_record();
@@ -397,19 +397,19 @@ class m_mem {
         global $db, $msg, $cuid, $admin;
         $msg->log("mem", "passwd");
         if (!$this->user["canpass"]) {
-            $msg->raise("ERROR", "mem", _("You are not allowed to change your password."));
+            $msg->raise("ERROR", "mem", __("You are not allowed to change your password.", "alternc", true));
             return false;
         }
 
         if ($this->requires_old_password_for_change()) {
             if (!password_verify($oldpass, $this->user['pass'])) {
-                $msg->raise("ERROR", "mem", _("The old password is incorrect"));
+                $msg->raise("ERROR", "mem", __("The old password is incorrect", "alternc", true));
                 return false;
             }
         }
 
         if ($newpass != $newpass2) {
-            $msg->raise("ERROR", "mem", _("The new passwords are differents, please retry"));
+            $msg->raise("ERROR", "mem", __("The new passwords are differents, please retry", "alternc", true));
             return false;
         }
         $db->query("SELECT login FROM membres WHERE uid= ? ;", array($cuid));
@@ -435,7 +435,7 @@ class m_mem {
         global $db, $msg, $cuid;
         $msg->log("mem", "admlist");
         if (!$this->user["su"]) {
-            $msg->raise("ERROR", "mem", _("You must be a system administrator to do this."));
+            $msg->raise("ERROR", "mem", __("You must be a system administrator to do this.", "alternc", true));
             return false;
         }
         $db->query("UPDATE membres SET admlist= ? WHERE uid= ?;", array($admlist, $cuid));
@@ -456,12 +456,12 @@ class m_mem {
         $msg->log("mem", "send_pass");
         $db->query("SELECT * FROM membres WHERE login= ? ;", array($login));
         if (!$db->num_rows()) {
-            $msg->raise("ERROR", "mem", _("This account is locked, contact the administrator."));
+            $msg->raise("ERROR", "mem", __("This account is locked, contact the administrator.", "alternc", true));
             return false;
         }
         $db->next_record();
         if (time() - $db->f("lastaskpass") < 86400) {
-            $msg->raise("ERROR", "mem", _("The new passwords are differents, please retry"));
+            $msg->raise("ERROR", "mem", __("The new passwords are differents, please retry", "alternc", true));
             return false;
         }
         $txt = sprintf(_("Hello,
@@ -500,7 +500,7 @@ Cordially.
         $msg->log("mem", "changemail1", $newmail);
         $db->query("SELECT * FROM membres WHERE uid= ? ;", array($cuid));
         if (!$db->num_rows()) {
-            $msg->raise("ERROR", "mem", _("This account is locked, contact the administrator."));
+            $msg->raise("ERROR", "mem", __("This account is locked, contact the administrator.", "alternc", true));
             return false;
         }
         $db->next_record();
@@ -552,7 +552,7 @@ Cordially.
         $msg->log("mem", "changemail2", $uid);
         $db->query("SELECT * FROM chgmail WHERE cookie= ? and ckey= ? and uid= ?;", array($COOKIE, $KEY, $uid));
         if (!$db->num_rows()) {
-            $msg->raise("ERROR", "mem", _("The information you entered is incorrect."));
+            $msg->raise("ERROR", "mem", __("The information you entered is incorrect.", "alternc", true));
             return false;
         }
         $db->next_record();
@@ -595,10 +595,10 @@ Cordially.
      */
     function show_help($file, $force = false) {
         if ($this->user["show_help"] || $force) {
-            $hlp = _("hlp_$file");
+            $hlp = __("hlp_$file", "alternc", true);
             if ($hlp != "hlp_$file") {
                 $hlp = preg_replace(
-                    "#HELPID_([0-9]*)#", "<a href=\"javascript:help(\\1);\"><img src=\"/aide/help.png\" width=\"17\" height=\"17\" style=\"vertical-align: middle;\" alt=\"" . _("Help") . "\" /></a>", $hlp);
+                    "#HELPID__([0-9]*, "alternc", true)#", "<a href=\"javascript:help(\\1);\"><img src=\"/aide/help.png\" width=\"17\" height=\"17\" style=\"vertical-align: middle;\" alt=\"" . __("Help", "alternc", true) . "\" /></a>", $hlp);
                 echo "<p class=\"hlp\">" . $hlp . "</p>";
                 return true;
             }
@@ -693,7 +693,7 @@ Cordially.
 
         $msg->log('mem', 'send_reset_url', 'Password reset requested for: ' . $login);
         // Give user feedback, even if we don't have an account stored.
-        $msg->raise('INFO', 'mem', _('An e-mail with information on how to connect has been sent to the owner of the account if one exists'));
+        $msg->raise('INFO', 'mem', __('An e-mail with information on how to connect has been sent to the owner of the account if one exists', "alternc", true));
 
         // Get the corresponding account.
         if (!$db->num_rows()) {
@@ -710,7 +710,7 @@ Cordially.
             return FALSE;
         }
         $duration = variable_get('password_reset_expiration', 86400, 'The number of seconds for which a password reset link is valid');
-        $duration_hours = ($duration / 3600.0) . ' ' . _('hours');
+        $duration_hours = ($duration / 3600.0) . ' ' . __('hours', "alternc", true);
         $message = sprintf(_('
 Hi,
 
@@ -791,14 +791,14 @@ This link may only be used once. You should change your password in your account
         // No password verification for temporary logins, the validation
         // is in validate_reset_url instead.
         if (!$db->f("enabled")) {
-            $msg->raise("ERROR", "mem", _("This account is locked, contact the administrator."));
+            $msg->raise("ERROR", "mem", __("This account is locked, contact the administrator.", "alternc", true));
             return FALSE;
         }
 
         $this->user = $db->Record;
         $cuid = $db->f("uid");
         if (panel_islocked() && $cuid != 2000) {
-            $msg->raise("ALERT", "mem", _("This website is currently under maintenance, login is currently disabled."));
+            $msg->raise("ALERT", "mem", __("This website is currently under maintenance, login is currently disabled.", "alternc", true));
             return FALSE;
         }
 
@@ -817,7 +817,7 @@ This link may only be used once. You should change your password in your account
 
         // Error if there is rules, the IP is not allowed and it's not in the whitelisted IP
         if (sizeof($aga) > 1 && !$allowed_ip && !$authip->is_wl(get_remote_ip())) {
-            $msg->raise("ERROR", "mem", _("Your IP isn't allowed to connect"));
+            $msg->raise("ERROR", "mem", __("Your IP isn't allowed to connect", "alternc", true));
             return FALSE;
         }
         // End AuthIP
@@ -891,13 +891,13 @@ This link may only be used once. You should change your password in your account
         global $cuid, $db, $msg;
         // Do not log a person in if they are logged in already.
         if ($this->checkid(false)) {
-            $msg->raise('ERROR', 'mem', _('You are already logged in, you may not use a one-time login link'));
+            $msg->raise('ERROR', 'mem', __('You are already logged in, you may not use a one-time login link', "alternc", true));
             $msg->log('mem', 'validate_reset_url', 'Refused one-time log-in since the user is already connected');
             return FALSE;
         }
 
         // The timestamp is older than the age limit - invalid.
-        $fail_message = _('The login-link has already been used or is expired');
+        $fail_message = __('The login-link has already been used or is expired', "alternc", true);
         $duration = variable_get('password_reset_expiration', 86400, 'The number of seconds for which a password reset link is valid');
         if (time() - $timestamp >= $duration) {
             $msg->raise('ERROR', 'mem', $fail_message);
@@ -937,7 +937,7 @@ This link may only be used once. You should change your password in your account
             return FALSE;
         }
 
-        $msg->raise('INFO', 'mem', _('You have used a one-time login link. Please set a new password now.'));
+        $msg->raise('INFO', 'mem', __('You have used a one-time login link. Please set a new password now.', "alternc", true));
         return TRUE;
     }
 

@@ -19,7 +19,7 @@
 
 require_once("../class/config.php");
 require_once("head.php");
-$msg->raise("INFO", "mail", _("There is currently no webmail configured. If you need one, contact your server administrator"));
+$msg->raise("INFO", "mail", __("There is currently no webmail configured. If you need one, contact your server administrator", "alternc", true));
 
 include("index.php"); 
 

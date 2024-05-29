@@ -63,7 +63,7 @@ if ($cert["status"] == $ssl::STATUS_PENDING) {
             </tr>
             <tr>
                 <th><label for="validstart"><?php __("Date of the request"); ?></label></th>
-                <td><?php echo format_date(_('%3$d-%2$d-%1$d %4$d:%5$d'), date("Y-m-d H:i:s", $cert["validstartts"])); ?></td>
+                <td><?php echo format_date(__('%3$d-%2$d-%1$d %4$d:%5$d', "alternc", true), date("Y-m-d H:i:s", $cert["validstartts"])); ?></td>
             </tr>
             <tr>
                 <th><label for="csr"><?php __("Certificate Request File"); ?></label></th>
@@ -84,7 +84,7 @@ if ($cert["status"] == $ssl::STATUS_PENDING) {
             <input type="button" class="inb cancel" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location = 'ssl_list.php'"/>
         </p><p>
             <input type="submit" class="inb delete" name="delete" value="<?php __("Delete"); ?>" onclick="return confirm('<?php 
-            echo addslashes(_("Please confirm that you want to delete this certificate request AND ITS PRIVATE KEY!")); 
+            echo addslashes(__("Please confirm that you want to delete this certificate request AND ITS PRIVATE KEY!", "alternc", true)); 
             ?>');"/>
 
         </p>
@@ -115,28 +115,28 @@ if ($cert["status"] == $ssl::STATUS_PENDING) {
         <tr>
             <th><?php __("Valid From:"); ?></th>
             <td><?php
-    echo format_date(_('%3$d-%2$d-%1$d %4$d:%5$d'), date("Y-m-d H:i:s", $cert["validstartts"]));
+    echo format_date(__('%3$d-%2$d-%1$d %4$d:%5$d', "alternc", true), date("Y-m-d H:i:s", $cert["validstartts"]));
     echo " ";
     $days = intval((time() - $cert["validstartts"]) / 86400);
     if ($days < 60) {
-        printf(_("(%d days ago)"), $days);
+        printf(__("(%d days ago, "alternc", true)"), $days);
     } else {
         $month = intval($days / 30);
-        printf(_("(%d month ago)"), $month);
+        printf(__("(%d month ago, "alternc", true)"), $month);
     }
     ?></td>
         </tr>
         <tr>
             <th><?php __("Valid Until:"); ?></th>
             <td><?php
-                echo format_date(_('%3$d-%2$d-%1$d %4$d:%5$d'), date("Y-m-d H:i:s", $cert["validendts"]));
+                echo format_date(__('%3$d-%2$d-%1$d %4$d:%5$d', "alternc", true), date("Y-m-d H:i:s", $cert["validendts"]));
                 echo " ";
                 $days = intval(($cert["validendts"] - time()) / 86400);
                 if ($days < 60) {
-                    printf(_("(%d days from now)"), $days);
+                    printf(__("(%d days from now, "alternc", true)"), $days);
                 } else {
                     $month = intval($days / 30);
-                    printf(_("(%d month from now)"), $month);
+                    printf(__("(%d month from now, "alternc", true)"), $month);
                 }
                 ?></td>
         </tr>
@@ -173,7 +173,7 @@ if ($cert["status"] == $ssl::STATUS_PENDING) {
         <p>
             <?php
             if ($cert["shared"]) {
-                echo _("This certificate is currently <b>shared</b>");
+                echo __("This certificate is currently <b>shared</b>", "alternc", true);
                 if ($cert["uid"] == $cuid) {
                     ?>
                 </p>
@@ -190,7 +190,7 @@ if ($cert["status"] == $ssl::STATUS_PENDING) {
                 <?php
             }
         } else {
-            echo _("This certificate is currently <b>NOT shared</b>");
+            echo __("This certificate is currently <b>NOT shared</b>", "alternc", true);
             if ($cert["uid"] == $cuid) {
                 ?>
                 </p>
@@ -215,7 +215,7 @@ if ($cert["status"] == $ssl::STATUS_PENDING) {
 <?php csrf_get(); ?>
         <input type="hidden" name="id" id="id" value="<?php echo $cert["id"]; ?>"/>
             <input type="submit" class="inb delete" name="delete" value="<?php __("Delete"); ?>" onclick="return confirm('<?php 
-            echo addslashes(_("Please confirm that you want to delete this certificate AND ITS PRIVATE KEY!")); 
+            echo addslashes(__("Please confirm that you want to delete this certificate AND ITS PRIVATE KEY!", "alternc", true)); 
             ?>');"/>
        </form>
         </p>

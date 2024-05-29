@@ -37,7 +37,7 @@ class DB_users extends DB_Sql {
       
         $db->query("select db_servers.* from db_servers, membres where membres.uid= ? and membres.db_server_id=db_servers.id;", array($cuid));
         if (!$db->next_record()) {
-            $msg->raise("ERROR", 'db_user', _("There are no databases in db_servers for this user. Please contact your administrator."));
+            $msg->raise("ERROR", 'db_user', __("There are no databases in db_servers for this user. Please contact your administrator.", "alternc", true));
             die();
         }
 
@@ -94,7 +94,7 @@ class m_mysql {
         $q = $quota->getquota("mysql");
 
         $obj = array(
-            'title' => _("MySQL"),
+            'title' => __("MySQL", "alternc", true),
             'ico' => 'images/mysql.png',
             'link' => 'toggle',
             'pos' => 100,
@@ -102,16 +102,16 @@ class m_mysql {
         );
 
         $obj['links'][] = array(
-            'txt' => _("Databases"),
+            'txt' => __("Databases", "alternc", true),
             'url' => "sql_list.php",
         );
         $obj['links'][] = array(
-            'txt' => _("MySQL Users"),
+            'txt' => __("MySQL Users", "alternc", true),
             'url' => "sql_users_list.php",
         );
         if ($q["u"] > 0) {
             $obj['links'][] = array(
-                'txt' => _("PhpMyAdmin"),
+                'txt' => __("PhpMyAdmin", "alternc", true),
                 'url' => "sql_pma_sso.php",
                 'target' => '_blank',
             );
@@ -160,12 +160,12 @@ class m_mysql {
         $db->query("SELECT count(0) as count from db where uid = ?;", array($cuid));
         $db->next_record();
         if ($db->f('count') == 0) {
-            $msg->raise("ERROR", "mysql", _("Cannot connect to PhpMyAdmin, no databases for user {$cuid}"));
+            $msg->raise("ERROR", "mysql", __("Cannot connect to PhpMyAdmin, no databases for user {$cuid}", "alternc", true));
             return false;
         }
         $db->query("SELECT dbu.name,dbu.password, dbs.host FROM dbusers dbu, db_servers dbs, membres m WHERE dbu.uid= ? and enable='ADMIN' and dbs.id=m.db_server_id and m.uid= ? ;", array($cuid, $cuid));
         if (!$db->num_rows()) {
-            $msg->raise("ERROR", "mysql", _("Cannot connect to PhpMyAdmin, no admin user for uid {$cuid}"));
+            $msg->raise("ERROR", "mysql", __("Cannot connect to PhpMyAdmin, no admin user for uid {$cuid}", "alternc", true));
             return false;
         }
         $db->next_record();
@@ -206,7 +206,7 @@ class m_mysql {
         $size = $this->get_db_size($dbname);
         $db->query("SELECT login,pass,db, bck_mode, bck_gzip, bck_dir, bck_history FROM db WHERE uid= ? AND db= ?;", array($cuid, $dbname));
         if (!$db->num_rows()) {
-            $msg->raise("ERROR", "mysql", _("Database %s not found"), $dbn);
+            $msg->raise("ERROR", "mysql", __("Database %s not found", "alternc", true), $dbn);
             return array("enabled" => false);
         }
         $db->next_record();
@@ -226,7 +226,7 @@ class m_mysql {
         $msg->log("mysql", "add_db", $dbn);
         $password_user = "";
         if (!$quota->cancreate("mysql")) {
-            $msg->raise("ERROR", "mysql", _("Your databases quota is over. You cannot create more databases"));
+            $msg->raise("ERROR", "mysql", __("Your databases quota is over. You cannot create more databases", "alternc", true));
             return false;
         }
         $pos = strpos($dbn, '_');
@@ -237,23 +237,23 @@ class m_mysql {
             $dbname = $dbn;
             $dbn = $dbncomp[1];
             if (empty($dbn)) { // If nothing after the '_'
-                $msg->raise("ERROR", "mysql", _("Database can't have empty suffix"));
+                $msg->raise("ERROR", "mysql", __("Database can't have empty suffix", "alternc", true));
                 return false;
             }
         }
         if (!preg_match("#^[0-9a-z]*$#", $dbn)) {
-            $msg->raise("ERROR", "mysql", _("Database name can contain only letters and numbers"));
+            $msg->raise("ERROR", "mysql", __("Database name can contain only letters and numbers", "alternc", true));
             return false;
         }
 
         $len=variable_get("sql_max_database_length", 64);
         if (strlen($dbname) > $len) {
-            $msg->raise("ERROR", "mysql", _("Database name cannot exceed %d characters"), $len);
+            $msg->raise("ERROR", "mysql", __("Database name cannot exceed %d characters", "alternc", true), $len);
             return false;
         }
         $db->query("SELECT * FROM db WHERE db= ? ;", array($dbname));
         if ($db->num_rows()) {
-            $msg->raise("ERROR", "mysql", _("Database %s already exists"), $dbn);
+            $msg->raise("ERROR", "mysql", __("Database %s already exists", "alternc", true), $dbn);
             return false;
         }
         
@@ -284,7 +284,7 @@ class m_mysql {
             $myadm = $db->f("name");
             $password = $db->f("password");
         } else {
-            $msg->raise("ERROR", "mysql", _("There is a problem with the special PhpMyAdmin user. Contact the administrator"));
+            $msg->raise("ERROR", "mysql", __("There is a problem with the special PhpMyAdmin user. Contact the administrator", "alternc", true));
             return false;
         }
 
@@ -303,7 +303,7 @@ class m_mysql {
             return true;
         } else {
             $msg->log("mysql", "add_db", "Error: ".$dbn);
-            $msg->raise("ERROR", "mysql", _("An error occured. The database could not be created"));
+            $msg->raise("ERROR", "mysql", __("An error occured. The database could not be created", "alternc", true));
             return false;
         }
     }
@@ -320,7 +320,7 @@ class m_mysql {
         $msg->log("mysql", "del_db", $dbname);
         $db->query("SELECT uid FROM db WHERE db= ?;", array($dbname));
         if (!$db->next_record()) {
-            $msg->raise("ERROR", "mysql", _("The database was not found. I can't delete it"));
+            $msg->raise("ERROR", "mysql", __("The database was not found. I can't delete it", "alternc", true));
             return false;
         }
 
@@ -356,7 +356,7 @@ class m_mysql {
         $msg->log("mysql", "put_mysql_backup");
 
         if (!variable_get('sql_allow_users_backups')) {
-            $msg->raise("ERROR", "mysql", _("User aren't allowed to configure their backups"));
+            $msg->raise("ERROR", "mysql", __("User aren't allowed to configure their backups", "alternc", true));
             return false;
         }
 
@@ -369,12 +369,12 @@ class m_mysql {
             $dbn = $dbncomp[1];
         }
         if (!preg_match("#^[0-9a-z]*$#", $dbn)) {
-            $msg->raise("ERROR", "mysql", _("Database name can contain only letters and numbers"));
+            $msg->raise("ERROR", "mysql", __("Database name can contain only letters and numbers", "alternc", true));
             return false;
         }
         $db->query("SELECT * FROM db WHERE uid= ? AND db= ? ;", array($cuid, $dbname));
         if (!$db->num_rows()) {
-            $msg->raise("ERROR", "mysql", _("Database %s not found"), $dbn);
+            $msg->raise("ERROR", "mysql", __("Database %s not found", "alternc", true), $dbn);
             return false;
         }
         $db->next_record();
@@ -389,11 +389,11 @@ class m_mysql {
             $bck_mode = "0";
         }
         if (!$bck_history) {
-            $msg->raise("ALERT", "mysql", _("You have to choose how many backups you want to keep"));
+            $msg->raise("ALERT", "mysql", __("You have to choose how many backups you want to keep", "alternc", true));
             return false;
         }
         if (($bck_dir = $bro->convertabsolute($bck_dir, 0)) === false) { // return a full path or FALSE
-            $msg->raise("ERROR", "mysql", _("Directory does not exist"));
+            $msg->raise("ERROR", "mysql", __("Directory does not exist", "alternc", true));
             return false;
         }
         $db->query("UPDATE db SET bck_mode= ? , bck_history= ?, bck_gzip= ?, bck_dir= ? WHERE uid= ? AND db= ? ;", array($bck_mode, $bck_history, $bck_gzip, $bck_dir, $cuid, $dbname));
@@ -411,20 +411,20 @@ class m_mysql {
         $msg->log("mysql", "put_mysql_details");
         $db->query("SELECT * FROM db WHERE uid= ?;", array($cuid));
         if (!$db->num_rows()) {
-            $msg->raise("ERROR", "mysql", _("Database not found"));
+            $msg->raise("ERROR", "mysql", __("Database not found", "alternc", true));
             return false;
         }
         $db->next_record();
         $login = $db->f("login");
 
         if (!$password) {
-            $msg->raise("ERROR", "mysql", _("The password is mandatory"));
+            $msg->raise("ERROR", "mysql", __("The password is mandatory", "alternc", true));
             return false;
         }
 
         $len=variable_get("sql_max_username_length", 16);
         if (strlen($password) > $len) {
-            $msg->raise("ERROR", "mysql", _("MySQL password cannot exceed %d characters"), $len);
+            $msg->raise("ERROR", "mysql", __("MySQL password cannot exceed %d characters", "alternc", true), $len);
             return false;
         }
 
@@ -455,28 +455,28 @@ class m_mysql {
         $msg->log("mysql", "grant", $base . "-" . $rights . "-" . $user);
 
         if (!preg_match("#^[0-9a-z_\\*\\\\]*$#", $base)) {
-            $msg->raise("ERROR", "mysql", _("Database name can contain only letters and numbers"));
+            $msg->raise("ERROR", "mysql", __("Database name can contain only letters and numbers", "alternc", true));
             return false;
         } elseif (!$this->dbus->query("select db from db where db= ?;", array($base))) {
-            $msg->raise("ERROR", "mysql", _("Database not found"));
+            $msg->raise("ERROR", "mysql", __("Database not found", "alternc", true));
             return false;
         }
 
         if ($rights == null) {
             $rights = 'ALL PRIVILEGES';
         } elseif (!preg_match("#^[a-zA-Z,\s]*$#", $rights)) {
-            $msg->raise("ERROR", "mysql", _("Databases rights are not correct"));
+            $msg->raise("ERROR", "mysql", __("Databases rights are not correct", "alternc", true));
             return false;
         }
 
         if (!preg_match("#^[0-9a-z]#", $user)) {
-            $msg->raise("ERROR", "mysql", _("The username can contain only letters and numbers."));
+            $msg->raise("ERROR", "mysql", __("The username can contain only letters and numbers.", "alternc", true));
             return false;
         }
         $db->query("select name from dbusers where name= ? ;", array($user));
 
         if (!$db->num_rows()) {
-            $msg->raise("ERROR", "mysql", _("Database user not found"));
+            $msg->raise("ERROR", "mysql", __("Database user not found", "alternc", true));
             return false;
         }
 
@@ -489,7 +489,7 @@ class m_mysql {
         }
 
         if (!$this->dbus->query($grant)) {
-            $msg->raise("ERROR", "mysql", _("Could not grant rights"));
+            $msg->raise("ERROR", "mysql", __("Could not grant rights", "alternc", true));
             return false;
         }
         return true;
@@ -506,18 +506,18 @@ class m_mysql {
     function restore($file, $stdout, $id) {
         global $msg, $bro;
         if (empty($file)) {
-            $msg->raise("ERROR", "mysql", _("No file specified"));
+            $msg->raise("ERROR", "mysql", __("No file specified", "alternc", true));
             return false;
         }
         if (!$r = $this->get_mysql_details($id)) {
             return false;
         }
         if (!($fi = $bro->convertabsolute($file, 0))) {
-            $msg->raise("ERROR", "mysql", _("File not found"));
+            $msg->raise("ERROR", "mysql", __("File not found", "alternc", true));
             return false;
         }
         if (!file_exists($fi)) {
-            $msg->raise("ERROR", "mysql", _("File not found"));
+            $msg->raise("ERROR", "mysql", __("File not found", "alternc", true));
             return false;
         }
 
@@ -604,7 +604,7 @@ class m_mysql {
         # databases, the user of account "example" could read the parameter information
         # for "exampleb".
         if (($dbn != $login) && !preg_match("#^$login\_#", $dbn)) {
-                $msg->raise("ERROR", "mysql",_("Database not found")." (5)");
+                $msg->raise("ERROR", "mysql",__("Database not found", "alternc", true)." (5)");
                 return false;
         }
 
@@ -614,7 +614,7 @@ class m_mysql {
         $this->dbus->query("Select * from mysql.db where Db= ? and User!= ? ;", array($dbn, $cuid."_myadm"));
 
         if (!$this->dbus->num_rows()) {
-            $msg->raise("ERROR", "mysql",_("Database not found"));
+            $msg->raise("ERROR", "mysql",__("Database not found", "alternc", true));
             return false;
         }
 
@@ -638,12 +638,12 @@ class m_mysql {
             }
             
             if (!$db->query("SELECT name,password from dbusers where name= ? and uid= ? ;", array($dbu, $cuid))) {
-                $msg->raise("ERROR", "mysql",_("Database not found")." (3)");
+                $msg->raise("ERROR", "mysql",__("Database not found", "alternc", true)." (3)");
                 return false;
             }
             
             if (!$db->num_rows()) {
-                $msg->raise("ERROR", "mysql",_("Database not found")." (4)");
+                $msg->raise("ERROR", "mysql",__("Database not found", "alternc", true)." (4)");
                 return false;
             }
             
@@ -677,31 +677,31 @@ class m_mysql {
             $user = $usern;
         }
         if (!$usern) {
-            $msg->raise("ALERT", "mysql", _("The username is mandatory"));
+            $msg->raise("ALERT", "mysql", __("The username is mandatory", "alternc", true));
             return false;
         }
         if (!$password) {
-            $msg->raise("ALERT", "mysql", _("The password is mandatory"));
+            $msg->raise("ALERT", "mysql", __("The password is mandatory", "alternc", true));
             return false;
         }
         if (!preg_match("#^[0-9a-z]#", $usern)) {
-            $msg->raise("ERROR", "mysql", _("The username can contain only letters and numbers"));
+            $msg->raise("ERROR", "mysql", __("The username can contain only letters and numbers", "alternc", true));
             return false;
         }
 
         // We check the length of the COMPLETE username, not only the part after _
         $len=variable_get("sql_max_username_length", 16);
         if (strlen($user) > $len) {
-            $msg->raise("ERROR", "mysql", _("MySQL username cannot exceed %d characters"), $len);
+            $msg->raise("ERROR", "mysql", __("MySQL username cannot exceed %d characters", "alternc", true), $len);
             return false;
         }
         $db->query("SELECT * FROM dbusers WHERE name= ? ;", array($user));
         if ($db->num_rows()) {
-            $msg->raise("ERROR", "mysql", _("The database user already exists"));
+            $msg->raise("ERROR", "mysql", __("The database user already exists", "alternc", true));
             return false;
         }
         if ($password != $passconf || !$password) {
-            $msg->raise("ERROR", "mysql", _("The passwords do not match"));
+            $msg->raise("ERROR", "mysql", __("The passwords do not match", "alternc", true));
             return false;
         }
 
@@ -733,7 +733,7 @@ class m_mysql {
 
         $usern = trim($usern);
         if ($password != $passconf || !$password) {
-            $msg->raise("ERROR", "mysql", _("The passwords do not match"));
+            $msg->raise("ERROR", "mysql", __("The passwords do not match", "alternc", true));
             return false;
         }
 
@@ -759,7 +759,7 @@ class m_mysql {
         global $db, $msg, $cuid;
         $msg->log("mysql", "del_user", $user);
         if (!preg_match("#^[0-9a-z]#", $user)) {
-            $msg->raise("ERROR", "mysql", _("The username can contain only letters and numbers"));
+            $msg->raise("ERROR", "mysql", __("The username can contain only letters and numbers", "alternc", true));
             return false;
         }
         if (!$all) {
@@ -770,7 +770,7 @@ class m_mysql {
 
         if (!$db->num_rows()) {
             if (! $caller_is_deldb )
-                $msg->raise("ERROR", "mysql", _("The username was not found"));
+                $msg->raise("ERROR", "mysql", __("The username was not found", "alternc", true));
 
             return false;
         }
@@ -786,7 +786,7 @@ class m_mysql {
         $db->query("DELETE FROM dbusers WHERE uid= ? AND name= ? ;", array($cuid, $user));
 
         if ( $caller_is_deldb )
-            $msg->raise("INFO", "mysql", _("The user '%s' has been successfully deleted"), $user);
+            $msg->raise("INFO", "mysql", __("The user '%s' has been successfully deleted", "alternc", true), $user);
         
         return true;
     }
@@ -802,7 +802,7 @@ class m_mysql {
 
         $this->dbus->query("SELECT * FROM mysql.user WHERE User= ? AND Host= ? ;", array($user, $this->dbus->Client));
         if (!$this->dbus->next_record()) {
-            $msg->raise("ERROR", 'mysql', _("This user does not exist in the MySQL/User database"));
+            $msg->raise("ERROR", 'mysql', __("This user does not exist in the MySQL/User database", "alternc", true));
             return false;
         }
 
@@ -952,7 +952,7 @@ class m_mysql {
     function hook_quota_get() {
         global $msg, $mem, $quota;
         $msg->debug("mysql", "alternc_get_quota");
-        $q = Array("name" => "mysql", "description" => _("MySQL Databases"), "used" => 0);
+        $q = Array("name" => "mysql", "description" => __("MySQL Databases", "alternc", true), "used" => 0);
         $c = $this->get_dblist();
         if (is_array($c)) {
             $q['used'] = count($c);
@@ -1066,7 +1066,7 @@ class m_mysql {
         $dir.="sql/";
         if (!is_dir($dir)) {
             if (!mkdir($dir)) {
-                $msg->raise("ERROR", 'mysql', _("The directory could not be created"));
+                $msg->raise("ERROR", 'mysql', __("The directory could not be created", "alternc", true));
             }
         }
         // on exporte toutes les bases utilisateur.

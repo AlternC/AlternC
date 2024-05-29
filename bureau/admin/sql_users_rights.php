@@ -31,7 +31,7 @@ $fields = array (
 );
 getFields($fields);
 ?>
-<h3><?php printf(_("Manage MySQL rights for user '%s'"),$id) ?></h3>
+<h3><?php printf(__("Manage MySQL rights for user '%s'", "alternc", true),$id) ?></h3>
 <hr id="topbar"/>
 <br />
 <?php

@@ -50,7 +50,7 @@ if (!$res=$mail->get_details($mail_id)) {
   if (isset($isedit) && $isedit) getFields($fields); // we came from a POST, so let's get the request again ...
 
 ?>
-<h3><?php printf(_("Editing the email %s"),$res["address"]."@".$res["domain"]); ?></h3>
+<h3><?php printf(__("Editing the email %s", "alternc", true),$res["address"]."@".$res["domain"]); ?></h3>
 <hr id="topbar"/>
 <br />
 
@@ -86,7 +86,7 @@ echo $msg->msg_html_all();
   <tr><td style="width: 50%; text-align: justify"><?php __("POP/IMAP accounts are receiving emails in the server. To read those emails, you can use a Webmail, or a mail client such as Thunderbird. If you don't use POP/IMAP, you can configure your email to be a redirection to other existing emails. The maximum size is in megabytes, use 0 to make it infinite."); ?><br />
 <p>&nbsp;</p>
 <?php if ($islocal) { ?>
-<p><?php printf(_('This mailbox is currently using %1$s / %2$s'),format_size($used),format_size($quotabytes)); ?></p>
+<p><?php printf(__('This mailbox is currently using %1$s / %2$s', "alternc", true),format_size($used),format_size($quotabytes)); ?></p>
 <?php } ?>
 <?php if ($mailbox_action=="DELETE") { ?>
 <p class="alert alert-warning"><?php __("This mailbox is pending deletion. You can recover its mails by setting it to 'Yes' NOW!"); ?></p>

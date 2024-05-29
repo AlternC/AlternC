@@ -29,7 +29,7 @@ require_once("../class/config.php");
 include_once("head.php");
 
 if (!$admin->enabled) {
-	$msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
+	$msg->raise("ERROR", "admin", __("This page is restricted to authorized staff", "alternc", true));
 	echo $msg->msg_html_all();
 	exit;
 }
@@ -41,31 +41,31 @@ $fields = array (
 getFields($fields);
 
 if (!$uid) {
-	$msg->raise("ERROR", "admin", _("Account not found"));
+	$msg->raise("ERROR", "admin", __("Account not found", "alternc", true));
 	echo $msg->msg_html_all();
 	include_once("foot.php");
 	exit();
 }
 
 if (!$admin->checkcreator($uid)) {
-	$msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
+	$msg->raise("ERROR", "admin", __("This page is restricted to authorized staff", "alternc", true));
 	echo $msg->msg_html_all();
 	include_once("foot.php");
 	exit();
 }
 
 if (!$r=$admin->get($uid)) {
-	$msg->raise("ERROR", "admin", _("User does not exist"));
+	$msg->raise("ERROR", "admin", __("User does not exist", "alternc", true));
 	echo $msg->msg_html_all();
 	include_once("foot.php");
 	exit();
 }
 
-$confirmed = ($submit == _("Confirm"))?true:false;
+$confirmed = ($submit == __("Confirm", "alternc", true))?true:false;
 
 
 if (! ($confirmed ) ) {
-  print '<h2>' . _('WARNING: experimental feature, use at your own risk') . '</h2>';
+  print '<h2>' . __('WARNING: experimental feature, use at your own risk', "alternc", true) . '</h2>';
   __("The following domains will be deactivated and redirected to the URL entered in the following box. A backup of the domain configuration will be displayed as a serie of SQL request that you can run to restore the current configuration if you want. Click confirm if you are sure you want to deactivate all this user's domains.");
 
   ?>
@@ -77,10 +77,10 @@ if (! ($confirmed ) ) {
   <input type="button" class="inb" name="cancel" value="<?php __("Cancel"); ?>" onclick="document.location='adm_list.php'"/>
   </form><?php
 
-  print "<h3>" . _("Domains of user: ") . $r["login"] . "</h3>";
+  print "<h3>" . __("Domains of user: ", "alternc", true) . $r["login"] . "</h3>";
 } else {
   if (empty($redirect)) {
-    $msg->raise("ERROR", "admin", _("Missing redirect url."));
+    $msg->raise("ERROR", "admin", __("Missing redirect url.", "alternc", true));
     echo $msg->msg_html_all();
     include_once("foot.php");
     exit();
@@ -99,7 +99,7 @@ $domains = $dom->enum_domains();
 
 if ($confirmed) {
   print "<pre>";
-  printf(_("-- Redirecting all domains and subdomains of the user %s to %s\n"), $r['login'], $redirect);
+  printf(__("-- Redirecting all domains and subdomains of the user %s to %s\n", "alternc", true), $r['login'], $redirect);
 }
 
 reset($domains);

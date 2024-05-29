@@ -35,13 +35,13 @@ __("Last Login: ");
 if ($mem->user["lastlogin"]=="0000-00-00 00:00:00") {
   __("Never");
 } else { 
-  echo format_date(_('the %3$d-%2$d-%1$d at %4$d:%5$02d'),$mem->user["lastlogin"]); 
-  printf("&nbsp;"._('from: <code> %1$s </code>')."<br />",$mem->user["lastip"]);
+  echo format_date(__('the %3$d-%2$d-%1$d at %4$d:%5$02d', "alternc", true),$mem->user["lastlogin"]); 
+  printf("&nbsp;".__('from: <code> %1$s </code>', "alternc", true)."<br />",$mem->user["lastip"]);
 }
   echo "</p>";
 
 if ($mem->user["lastfail"]) {
-	printf(_("%1\$d login failed since last login")."<br />",$mem->user["lastfail"]);
+	printf(__("%1\$d login failed since last login", "alternc", true)."<br />",$mem->user["lastfail"]);
 }
 
 echo $msg->msg_html_all();
@@ -64,7 +64,7 @@ if (!empty($feed_url)) {
   if ( ! $xml === FALSE ) {
     echo '<div align="center"><table class="tedit" cellspacing="0" cellpadding="6">';
     echo "<tr><th colspan='2'><a target='_blank' style='font-size: 18px;font-weight: bold;color: #10507C;' href='".$xml->channel->link."'>".$xml->channel->title."</a><br/><i>".$xml->channel->description."</i></th></tr>";
-    //echo '<tr><th>'._("Title").'</th><th>'._("Date").'</th></tr>';
+    //echo '<tr><th>'.__("Title", "alternc", true).'</th><th>'.__("Date", "alternc", true).'</th></tr>';
     $count = 0;
     $max = 5;
     foreach ($xml->channel->item as $val) {
@@ -86,9 +86,9 @@ if($admin->enabled) {
   $expiring = $admin->renew_get_expiring_accounts();
 
   if(!empty($expiring) ) {
-    echo "<h2>" . _("Expired or about to expire accounts") . "</h2>\n";
+    echo "<h2>" . __("Expired or about to expire accounts", "alternc", true) . "</h2>\n";
     echo "<table cellspacing=\"2\" cellpadding=\"4\">\n";
-    echo "<tr><th>"._("uid")."</th><th>"._("Last name, surname")."</th><th>"._("Expiry")."</th></tr>\n";
+    echo "<tr><th>".__("uid", "alternc", true)."</th><th>".__("Last name, surname", "alternc", true)."</th><th>".__("Expiry", "alternc", true)."</th></tr>\n";
     if (is_array($expiring)) {
       foreach($expiring as $account) {
         echo "<tr class=\"exp{$account['status']}\"><td>{$account['uid']}</td>";

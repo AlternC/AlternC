@@ -40,12 +40,12 @@ if (!$aws->login_exists($login)) {
 
 if ($confirm == 1) {
     if (empty($pass) || is_null($pass)) {
-	$msg->raise('Error', "aws", _("Please enter a password"));
+	$msg->raise('Error', "aws", __("Please enter a password", "alternc", true));
     } else if ($pass != $passconf) {
-	$msg->raise('Error', "aws", _("Passwords do not match"));
+	$msg->raise('Error', "aws", __("Passwords do not match", "alternc", true));
     } else {
 	if ($aws->change_pass($login,$pass)) {
-		$msg->raise('INFO', "aws", _("Password successfuly updated"));
+		$msg->raise('INFO', "aws", __("Password successfuly updated", "alternc", true));
 		include("aws_users.php");
 		exit();
 	}

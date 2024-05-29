@@ -30,7 +30,7 @@ $fields = array (
 getFields($fields);
 
 if (!$id && !$quota->cancreate("aws")) {
-	$msg->raise('Alert', "aws", _("You cannot add any new statistics, your quota is over."));
+	$msg->raise('Alert', "aws", __("You cannot add any new statistics, your quota is over.", "alternc", true));
 }
 
 include_once("head.php");

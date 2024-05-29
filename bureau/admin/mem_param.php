@@ -36,7 +36,7 @@ getFields($fields);
 
 if (!empty($help_setting)) {
 	$mem->set_help_param($showhelp);
-	$msg->raise("INFO", "mem", _("Your help setting has been updated."));
+	$msg->raise("INFO", "mem", __("Your help setting has been updated.", "alternc", true));
 }
 
 ?>

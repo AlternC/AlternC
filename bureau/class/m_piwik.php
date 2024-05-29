@@ -34,12 +34,12 @@ class m_piwik {
         if ( empty($this->piwik_server_uri) || empty($this->piwik_admin_token)) return false;
 
         $obj = array(
-            'title'       => _("Piwik statistics"),
+            'title'       => __("Piwik statistics", "alternc", true),
             'link'        => 'toggle',
             'pos'         => 115,
             'links'       => array(
-                array( 'txt' => _("Piwik Users"), 'url' => 'piwik_userlist.php'),
-                array( 'txt' => _("Piwik Sites"), 'url' => 'piwik_sitelist.php'),
+                array( 'txt' => __("Piwik Users", "alternc", true), 'url' => 'piwik_userlist.php'),
+                array( 'txt' => __("Piwik Sites", "alternc", true), 'url' => 'piwik_sitelist.php'),
             ),
         ) ;
 
@@ -76,7 +76,7 @@ class m_piwik {
     function hook_quota_get() {
         global $db, $cuid;
         $db->query("SELECT COUNT(id) AS nb FROM piwik_sites WHERE uid= ? ;", array($cuid));
-        $q=Array("name"=>"piwik", "description"=>_("Statistics through Piwik accounts"), "used"=>0);
+        $q=Array("name"=>"piwik", "description"=>__("Statistics through Piwik accounts", "alternc", true), "used"=>0);
         if ($db->next_record()) {
             $q['used']=$db->f('nb');
         }
@@ -99,13 +99,13 @@ class m_piwik {
         $msg->log("piwik","user_add");
 
         if (empty($user_login) || is_null($user_login) || empty($user_mail) || is_null($user_mail)) {
-            $msg->raise("ERROR", "piwik", _("All fields are mandatory"));
+            $msg->raise("ERROR", "piwik", __("All fields are mandatory", "alternc", true));
             return false;
         }
 
         // Validate the email syntax:
         if (!filter_var($user_mail, FILTER_VALIDATE_EMAIL)) {
-            $msg->raise("ERROR", "piwik", _("The email you entered is syntaxically incorrect"));
+            $msg->raise("ERROR", "piwik", __("The email you entered is syntaxically incorrect", "alternc", true));
             return false;
         }
 
@@ -280,7 +280,7 @@ class m_piwik {
                 return FALSE;
             }
         } else {
-            $msg->raise("ERROR", "piwik", _("You are not allowed to delete the statistics of this website"));
+            $msg->raise("ERROR", "piwik", __("You are not allowed to delete the statistics of this website", "alternc", true));
             return FALSE;
         }
     }
@@ -424,7 +424,7 @@ class m_piwik {
                 return FALSE;
             }
         } else {
-            $msg->raise("ERROR", "piwik", _("You are not allowed to delete the statistics of this website"));
+            $msg->raise("ERROR", "piwik", __("You are not allowed to delete the statistics of this website", "alternc", true));
             return FALSE;
         }
 
@@ -489,20 +489,20 @@ class m_piwik {
 
         $page_content = file_get_contents($url);
         if ($page_content === FALSE) {
-            $msg->raise("ERROR", "piwik", _("Unable to reach the API"));
+            $msg->raise("ERROR", "piwik", __("Unable to reach the API", "alternc", true));
             return FALSE;
         }
 
         if ($output == 'JSON') {
             $api_data = json_decode($page_content);
             if ($api_data === FALSE) {
-                $msg->raise("ERROR", "piwik", _("Error while decoding response from the API"));
+                $msg->raise("ERROR", "piwik", __("Error while decoding response from the API", "alternc", true));
                 return FALSE;
             }
 
             return $api_data;
         } else {
-            $msg->raise("ERROR", "piwik", _("Other format than JSON is not implemented yet"));
+            $msg->raise("ERROR", "piwik", __("Other format than JSON is not implemented yet", "alternc", true));
             return FALSE;
         }
     }

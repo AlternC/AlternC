@@ -40,7 +40,7 @@ if (!isset($delete)) {
 
 $ok = $ssl->del_certificate($id);
 
-if ($ok) $info=_("Your SSL Certificate has been deleted");
+if ($ok) $info=__("Your SSL Certificate has been deleted", "alternc", true);
 
 $error = $err->errstr();
 

@@ -38,7 +38,7 @@ getFields($fields);
 <?php
 echo $msg->msg_html_all();
 if ($msg->has_msgs("ERROR")) {
-	echo "<p><span class='ina'><a href='mem_param.php'>"._("Click here to continue")."</a></span></p>";
+	echo "<p><span class='ina'><a href='mem_param.php'>".__("Click here to continue", "alternc", true)."</a></span></p>";
 	include_once("foot.php");
 	exit();
 }

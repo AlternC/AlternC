@@ -51,7 +51,7 @@ if (!$res=$mail->get_details($mail_id)) {
    * checking the password
    */
   if($pass != $passconf){
-    $msg->raise("ERROR", "mail", _("Passwords do not match"));
+    $msg->raise("ERROR", "mail", __("Passwords do not match", "alternc", true));
     include ("mail_edit.php");
     exit();
   } else {
@@ -113,9 +113,9 @@ if (!$res=$mail->get_details($mail_id)) {
 } 
 
 if ($new_account)
-  $msg->raise("INFO", "mail", _("Your email has been created successfully"));
+  $msg->raise("INFO", "mail", __("Your email has been created successfully", "alternc", true));
 else
-  $msg->raise("INFO", "mail", _("Your email has been edited successfully"));
+  $msg->raise("INFO", "mail", __("Your email has been edited successfully", "alternc", true));
 
 $_REQUEST["domain_id"]=$dom->get_domain_byname($res["domain"]);
 include("mail_list.php");

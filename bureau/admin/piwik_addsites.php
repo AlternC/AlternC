@@ -35,9 +35,9 @@ getFields($fields);
 if(empty($site_name)) $site_name=$site_urls;
 
 if (empty($site_name)) {
-  $msg->raise("ERROR", "piwik", _("All fields are mandatory"));
+  $msg->raise("ERROR", "piwik", __("All fields are mandatory", "alternc", true));
 } elseif ( $piwik->site_add($site_name, $site_urls) ) {
-  $msg->raise("INFO", "piwik", _("Website added Successfully"));
+  $msg->raise("INFO", "piwik", __("Website added Successfully", "alternc", true));
 }
 include_once("piwik_sitelist.php");
 

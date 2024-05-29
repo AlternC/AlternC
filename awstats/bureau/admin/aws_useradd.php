@@ -33,12 +33,12 @@ $fields = array (
 getFields($fields);
 
 if ($pass != $passconf) {
-        $msg->raise('Error', "aws", _("Passwords do not match"));
+        $msg->raise('Error', "aws", __("Passwords do not match", "alternc", true));
 }else{
 	$r=$aws->add_login($prefixe.(($login)?"_":"").$login,$pass);
 
 	if ($r) {
-		$msg->raise('INFO', "aws", _("The Awstat account has been successfully created"));
+		$msg->raise('INFO', "aws", __("The Awstat account has been successfully created", "alternc", true));
 	}
 }
 

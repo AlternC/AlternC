@@ -36,7 +36,7 @@ $c=$admin->listPasswordPolicies();
 $passwd_classcount = $c['hta']['classcount'];
 
 ?>
-<h3><?php printf(_("Editing user %s in the protected folder %s"),$user,$dir); ?></h3>
+<h3><?php printf(__("Editing user %s in the protected folder %s", "alternc", true),$user,$dir); ?></h3>
 <hr id="topbar"/>
 <br />
 

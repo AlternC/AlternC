@@ -96,7 +96,7 @@ class m_ssl {
         global $db,$msg,$dom;
         $db->query("SELECT max(id) AS maxid FROM certificates;");
         if (!$db->next_record()) {
-            $msg->raise("ERROR","ssl",_("FATAL: no certificates in certificates table, even the SnakeOil one??"));
+            $msg->raise("ERROR","ssl",__("FATAL: no certificates in certificates table, even the SnakeOil one??", "alternc", true));
             return false;
         }
         $maxid=$db->Record["maxid"];
@@ -129,7 +129,7 @@ class m_ssl {
             $dom->lock();
             foreach($updateids as $id => $certid) {
                 $db->query("UPDATE sub_domaines SET web_action=? WHERE id=?;",array("UPDATE",$id));
-                $msg->raise("INFO","ssl",sprintf(_("Reloading domain %s as we have new certificate %s"),$id,$certid));
+                $msg->raise("INFO","ssl",sprintf(__("Reloading domain %s as we have new certificate %s", "alternc", true),$id,$certid));
             }
             $dom->unlock();
             $this->last_certificate_id=$maxid;
@@ -180,18 +180,18 @@ class m_ssl {
      */
     private function copycert($target,$id) {
         global $db,$msg;
-        $msg->raise("INFO","ssl",_("Copying system certificate $id on $target"));
+        $msg->raise("INFO","ssl",__("Copying system certificate $id on $target", "alternc", true));
         $db->query("SELECT * FROM certificates WHERE id=?",array($id));
         if (!$db->next_record()) return false;
         if (!file_put_contents("/etc/ssl/certs/".$target.".pem.tmp",trim($db->Record["sslcrt"])."\n".trim($db->Record["sslchain"]))) {
-            $msg->raise("ERROR","ssl",_("Can't put file into /etc/ssl/certs/".$target.".pem.tmp, failing properly"));            
+            $msg->raise("ERROR","ssl",__("Can't put file into /etc/ssl/certs/".$target.".pem.tmp, failing properly", "alternc", true));            
             return false;
         }
         chown("/etc/ssl/certs/".$target.".pem.tmp","root");
         chgrp("/etc/ssl/certs/".$target.".pem.tmp","ssl-cert");
         chmod("/etc/ssl/certs/".$target.".pem.tmp",0755);
         if (!file_put_contents("/etc/ssl/private/".$target.".key.tmp",$db->Record["sslkey"])) {
-            $msg->raise("ERROR","ssl",_("Can't put file into /etc/ssl/private/".$target.".key.tmp, failing properly"));
+            $msg->raise("ERROR","ssl",__("Can't put file into /etc/ssl/private/".$target.".key.tmp, failing properly", "alternc", true));
             @unlink("/etc/ssl/certs/".$target.".pem.tmp");
             return false;
         }
@@ -297,7 +297,7 @@ INSTR(CONCAT(sd.sub,IF(sd.sub!='','.',''),sd.domaine),'.')+1))=?
             }
             return $r;
         } else {
-            $msg->raise("INFO", "ssl", _("No SSL certificates available"));
+            $msg->raise("INFO", "ssl", __("No SSL certificates available", "alternc", true));
             return array();
         }
     }
@@ -321,18 +321,18 @@ INSTR(CONCAT(sd.sub,IF(sd.sub!='','.',''),sd.domaine),'.')+1))=?
             $f = $fqdn;
         }
         if (checkfqdn($f)) {
-            $msg->raise("ERROR","ssl", _("Bad FQDN domain name"));
+            $msg->raise("ERROR","ssl", __("Bad FQDN domain name", "alternc", true));
             return false;
         }
         putenv("OPENSSL_CONF=/etc/alternc/openssl.cnf");
         $pkey = openssl_pkey_new();
         if (!$pkey) {
-            $msg->raise("ERROR","ssl", _("Can't generate a private key (1)"));
+            $msg->raise("ERROR","ssl", __("Can't generate a private key (1, "alternc", true)"));
             return false;
         }
         $privKey = "";
         if (!openssl_pkey_export($pkey, $privKey)) {
-            $msg->raise("ERROR","ssl", _("Can't generate a private key (2)"));
+            $msg->raise("ERROR","ssl", __("Can't generate a private key (2, "alternc", true)"));
             return false;
         }
         $dn = array("commonName" => $fqdn);
@@ -343,7 +343,7 @@ INSTR(CONCAT(sd.sub,IF(sd.sub!='','.',''),sd.domaine),'.')+1))=?
         openssl_csr_export($csr, $csrout);
         $db->query("INSERT INTO certificates SET uid=?, status=?, fqdn=?, altnames='', validstart=NOW(), sslcsr=?, sslkey=?, provider=?;",array($cuid, self::STATUS_PENDING, $fqdn, $csrout, $privKey, $provider));
         if (!($id = $db->lastid())) {
-            $msg->raise("ERROR","ssl", _("Can't generate a CSR"));
+            $msg->raise("ERROR","ssl", __("Can't generate a CSR", "alternc", true));
             return false;
         }
         return $id;
@@ -366,7 +366,7 @@ INSTR(CONCAT(sd.sub,IF(sd.sub!='','.',''),sd.domaine),'.')+1))=?
         }
         $db->query("SELECT *, UNIX_TIMESTAMP(validstart) AS validstartts, UNIX_TIMESTAMP(validend) AS validendts FROM certificates WHERE id=? $sql;",array($id));
         if (!$db->next_record()) {
-            $msg->raise("ERROR","ssl", _("Can't find this Certificate"));
+            $msg->raise("ERROR","ssl", __("Can't find this Certificate", "alternc", true));
             return false;
         }
         return $db->Record;
@@ -385,7 +385,7 @@ INSTR(CONCAT(sd.sub,IF(sd.sub!='','.',''),sd.domaine),'.')+1))=?
         $id = intval($id);
         $db->query("SELECT id FROM certificates WHERE id=?;",array($id));
         if (!$db->next_record()) {
-            $msg->raise("ERROR","ssl", _("Can't find this Certificate"));
+            $msg->raise("ERROR","ssl", __("Can't find this Certificate", "alternc", true));
             // Return cert 0 info :)
             $id=0;            
         }
@@ -494,7 +494,7 @@ INSTR(CONCAT(sd.sub,IF(sd.sub!='','.',''),sd.domaine),'.')+1))=?
         // Search for an existing cert: (first)
         $db->query("SELECT id FROM certificates WHERE sslcrt=?;",array($crt));
         if ($db->next_record()) {
-            $msg->raise("ERROR","ssl", _("Certificate already exists in database"));
+            $msg->raise("ERROR","ssl", __("Certificate already exists in database", "alternc", true));
             return false;
         }
         
@@ -518,7 +518,7 @@ INSTR(CONCAT(sd.sub,IF(sd.sub!='','.',''),sd.domaine),'.')+1))=?
         );
         if (!($id = $db->lastid())) {
             $msg->log('ssl', 'impoert_cert', 'insert query failed (' . print_r($db->last_error(), TRUE) . ')');
-            $msg->raise("ERROR","ssl", _("Can't save the Key/Crt/Chain now. Please try later."));
+            $msg->raise("ERROR","ssl", __("Can't save the Key/Crt/Chain now. Please try later.", "alternc", true));
             return false;
         }
         return $id;
@@ -558,7 +558,7 @@ INSTR(CONCAT(sd.sub,IF(sd.sub!='','.',''),sd.domaine),'.')+1))=?
 SELECT ?,?,?, FROM_UNIXTIME(?), FROM_UNIXTIME(?), ?, ?, sslcsr FROM certificate WHERE id=?;",
             array(self::STATUS_OK, $fqdn, $altnames, $validstart, $validend, $crt, $chain, $certid)        
         )) {
-            $msg->raise("ERROR","ssl", _("Can't save the Crt/Chain now. Please try later."));
+            $msg->raise("ERROR","ssl", __("Can't save the Crt/Chain now. Please try later.", "alternc", true));
             return false;
         }
         $newid=$db->lastid();
@@ -803,7 +803,7 @@ SELECT ?,?,?, FROM_UNIXTIME(?), FROM_UNIXTIME(?), ?, ?, sslcsr FROM certificate 
             // find it in the DB : 
             $db->query("SELECT sslkey FROM certificates WHERE id=?;",array(intval($certid)));
             if (!$db->next_record()) {
-                $this->error.=_("Can't find the private key in the certificate table, please check your form.");
+                $this->error.=__("Can't find the private key in the certificate table, please check your form.", "alternc", true);
                 return false;
             }
             $key = $db->f("sslkey");
@@ -812,18 +812,18 @@ SELECT ?,?,?, FROM_UNIXTIME(?), FROM_UNIXTIME(?), ?, ?, sslcsr FROM certificate 
 
         if (substr($crt, 0, 28) != "-----BEGIN CERTIFICATE-----\n" ||
                 substr($crt, -26, 26) != "-----END CERTIFICATE-----\n") {
-            $this->error.=_("The certificate must begin by BEGIN CERTIFICATE and end by END CERTIFICATE lines. Please check you pasted it in PEM form.") . "<br>\n";
+            $this->error.=__("The certificate must begin by BEGIN CERTIFICATE and end by END CERTIFICATE lines. Please check you pasted it in PEM form.", "alternc", true) . "<br>\n";
         }
         if (trim($chain) &&
                 (substr($chain, 0, 28) != "-----BEGIN CERTIFICATE-----\n" ||
                 substr($chain, -26, 26) != "-----END CERTIFICATE-----\n")) {
-            $this->error.=_("The chained certificate must begin by BEGIN CERTIFICATE and end by END CERTIFICATE lines. Please check you pasted it in PEM form.") . "<br>\n";
+            $this->error.=__("The chained certificate must begin by BEGIN CERTIFICATE and end by END CERTIFICATE lines. Please check you pasted it in PEM form.", "alternc", true) . "<br>\n";
         }
         if ((substr($key, 0, 32) != "-----BEGIN RSA PRIVATE KEY-----\n" ||
                 substr($key, -30, 30) != "-----END RSA PRIVATE KEY-----\n") &&
                 (substr($key, 0, 28) != "-----BEGIN PRIVATE KEY-----\n" ||
                 substr($key, -26, 26) != "-----END PRIVATE KEY-----\n")) {
-            $this->error.=_("The private key must begin by BEGIN (RSA )PRIVATE KEY and end by END (RSA )PRIVATE KEY lines. Please check you pasted it in PEM form.") . "<br>\n";
+            $this->error.=__("The private key must begin by BEGIN (RSA , "alternc", true)PRIVATE KEY and end by END (RSA )PRIVATE KEY lines. Please check you pasted it in PEM form.") . "<br>\n";
         }
         if ($this->error) {
             return false;
@@ -859,7 +859,7 @@ SELECT ?,?,?, FROM_UNIXTIME(?), FROM_UNIXTIME(?), ?, ?, sslcsr FROM certificate 
             $i++;
             $tmpr = openssl_x509_read($tmpcert);
             if ($tmpr === false) {
-                $this->error.=sprintf(_("The %d-th certificate in the chain is invalid"), $i) . "<br>\n";
+                $this->error.=sprintf(__("The %d-th certificate in the chain is invalid", "alternc", true), $i) . "<br>\n";
             } else {
                 $rchains[] = $tmpr;
             }
@@ -867,34 +867,34 @@ SELECT ?,?,?, FROM_UNIXTIME(?), FROM_UNIXTIME(?), ?, ?, sslcsr FROM certificate 
         $rcrt = openssl_x509_read($crt);
         $crtdata = openssl_x509_parse($crt);
         if ($rcrt === false || $crtdata === false) {
-            $this->error.=_("The certificate is invalid.") . "<br>\n";
+            $this->error.=__("The certificate is invalid.", "alternc", true) . "<br>\n";
         }
 
         $rkey = openssl_pkey_get_private($key);
         if ($rkey === false) {
-            $this->error.=_("The private key is invalid.") . "<br>\n";
+            $this->error.=__("The private key is invalid.", "alternc", true) . "<br>\n";
         }
         if (!$this->error) {
             // check that the private key and the certificates are matching :
             if (!openssl_x509_check_private_key($rcrt, $rkey)) {
-                $this->error.=_("The private key is not the one signed inside the certificate.") . "<br>\n";
+                $this->error.=__("The private key is not the one signed inside the certificate.", "alternc", true) . "<br>\n";
             }
         }
         if (!$this->error) {
             // Everything is fine, let's recreate crt, chain, key from our internal OpenSSL structures:
             if (!openssl_x509_export($rcrt, $crt)) {
-                $this->error.=_("Can't export your certificate as a string, please check its syntax.") . "<br>\n";
+                $this->error.=__("Can't export your certificate as a string, please check its syntax.", "alternc", true) . "<br>\n";
             }
             $chain = "";
             foreach ($rchains as $r) {
                 if (!openssl_x509_export($r, $tmp)) {
-                    $this->error.=_("Can't export one of your chained certificates as a string, please check its syntax.") . "<br>\n";
+                    $this->error.=__("Can't export one of your chained certificates as a string, please check its syntax.", "alternc", true) . "<br>\n";
                 } else {
                     $chain.=$tmp;
                 }
             }
             if (!openssl_pkey_export($rkey, $key)) {
-                $this->error.=_("Can't export your private key as a string, please check its syntax.") . "<br>\n";
+                $this->error.=__("Can't export your private key as a string, please check its syntax.", "alternc", true) . "<br>\n";
             }
         }
         return array($crt, $chain, $key, $crtdata);

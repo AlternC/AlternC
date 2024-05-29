@@ -26,7 +26,7 @@
 require_once("../class/config.php");
 
 if (!$admin->enabled || $cuid!=2000) {
-    $msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
+    $msg->raise("ERROR", "admin", __("This page is restricted to authorized staff", "alternc", true));
     echo $msg->msg_html_all();
     die();
 }

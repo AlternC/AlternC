@@ -28,7 +28,7 @@ require_once("../class/config.php");
 
 if ( ! variable_get('sql_allow_users_backups') ) {
   include_once('head.php');
-  echo "<p class=\"alert alert-warning\">"._("You aren't allowed to access this page. Contact your administrator if you want to.")."</p>";
+  echo "<p class=\"alert alert-warning\">".__("You aren't allowed to access this page. Contact your administrator if you want to.", "alternc", true)."</p>";
   include_once('foot.php');
   exit;
 }
@@ -51,7 +51,7 @@ if ($msg->has_msgs("ERROR")) {
 	include("sql_bck.php");
 	exit();
 } else {
-	$msg->raise("INFO", "mysql", _("Your backup parameters has been successfully changed."));
+	$msg->raise("INFO", "mysql", __("Your backup parameters has been successfully changed.", "alternc", true));
 }
 include("sql_list.php");
 ?>

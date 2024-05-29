@@ -122,10 +122,10 @@ function retour() {
 
 $ar=browseforfolder($file);
 if ($errbrowsefold) {
-  /* Si le dossier spécifié n'existe pas ou est un fichier : */
-  echo _("Error, cannot find this folder")."<br />";
+  /* Si le dossier spï¿½cifiï¿½ n'existe pas ou est un fichier : */
+  echo __("Error, cannot find this folder", "alternc", true)."<br />";
   /* Retour : */
-  echo "<a href=\"browseforfolder2.php?caller=".urlencode($caller)."&amp;curdir=".$root."&amp;bid=".$bid."\">"._("Back to the root folder")."</a><br />";
+  echo "<a href=\"browseforfolder2.php?caller=".urlencode($caller)."&amp;curdir=".$root."&amp;bid=".$bid."\">".__("Back to the root folder", "alternc", true)."</a><br />";
 } else {
   /* Sinon, tout va bien, on affiche le tableau */
   reset($ar);

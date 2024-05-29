@@ -48,15 +48,15 @@ if (!$error)
     $error.=$err->errstr();
 
 $astatus = array(
-    $ssl::STATUS_PENDING => _("Pending Certificate"),
-    $ssl::STATUS_OK => _("Valid"),
-    $ssl::STATUS_EXPIRED => "<span style=\"color: red; font-weight:bold\">" . _("Expired") . "</span>",
+    $ssl::STATUS_PENDING => __("Pending Certificate", "alternc", true),
+    $ssl::STATUS_OK => __("Valid", "alternc", true),
+    $ssl::STATUS_EXPIRED => "<span style=\"color: red; font-weight:bold\">" . __("Expired", "alternc", true) . "</span>",
 );
 
 $vhosts = $ssl->get_vhosts();
 foreach ($vhosts as $v) {
     if ($v["certif"] == 0) {
-        $info=_("Some of your hosting are using a <b>self-signed</b> certificate. <br>Your browser will not let you surf those domains properly<br>To fix this, buy a properly signed certificate")."<br>".$info;
+        $info=__("Some of your hosting are using a <b>self-signed</b> certificate. <br>Your browser will not let you surf those domains properly<br>To fix this, buy a properly signed certificate", "alternc", true)."<br>".$info;
     }
 }
 include_once("head.php");
@@ -94,22 +94,22 @@ if ($info) {
             <td><?php
                 echo $astatus[$val["status"]];
                 if ($val["shared"])
-                    echo " <i>" . _("(shared)") . "</i>";
+                    echo " <i>" . __("(shared, "alternc", true)") . "</i>";
                 ?></td>
             <?php
             if ($val["status"] != $ssl::STATUS_PENDING) {
                 ?>
-                <td><?php echo format_date(_('%3$d-%2$d-%1$d %4$d:%5$d'), date("Y-m-d H:i:s", $val["validstartts"])); ?><br>
+                <td><?php echo format_date(__('%3$d-%2$d-%1$d %4$d:%5$d', "alternc", true), date("Y-m-d H:i:s", $val["validstartts"])); ?><br>
                     <?php
                     if ($val["validendts"] < (time() + 86400 * 31))
                         echo "<span style=\"color: red; font-weight:bold\">";
-                    echo format_date(_('%3$d-%2$d-%1$d %4$d:%5$d'), date("Y-m-d H:i:s", $val["validendts"]));
+                    echo format_date(__('%3$d-%2$d-%1$d %4$d:%5$d', "alternc", true), date("Y-m-d H:i:s", $val["validendts"]));
                     if ($val["validendts"] < (time() + 86400 * 31))
                         echo "</span>";
                     ?></td> 
             <?php } else { ?>
                 <td><?php __("Requested on: "); ?><br>
-                    <?php echo format_date(_('%3$d-%2$d-%1$d %4$d:%5$d'), date("Y-m-d H:i:s", $val["validstartts"])); ?></td> 
+                    <?php echo format_date(__('%3$d-%2$d-%1$d %4$d:%5$d', "alternc", true), date("Y-m-d H:i:s", $val["validstartts"])); ?></td> 
             <?php } ?>
             <td><?php
                 foreach ($vhosts as $v) {
@@ -126,8 +126,8 @@ if ($info) {
     foreach ($vhosts as $v) {
         if ($v["certif"] == 0) {
             $v["fqdn"] = (($v["sub"]) ? ($v["sub"] . ".") : "") . $v["domaine"];
-            echo "<tr><td><div class=\"ina add\"><a href=\"ssl_new.php?fqdn=" . $v["fqdn"] . "\">" . _("Create one") . "</a></div></td>";
-            echo "<td colspan=\"3\"><span style=\"color: red; font-weight:bold\">" . _("This hosting has no valid certificate<br>a self-signed one has been created") . "</span></td>";
+            echo "<tr><td><div class=\"ina add\"><a href=\"ssl_new.php?fqdn=" . $v["fqdn"] . "\">" . __("Create one", "alternc", true) . "</a></div></td>";
+            echo "<td colspan=\"3\"><span style=\"color: red; font-weight:bold\">" . __("This hosting has no valid certificate<br>a self-signed one has been created", "alternc", true) . "</span></td>";
             echo "<td><a href=\"dom_edit.php?domain=" . $v["domaine"] . "\">" . $v["fqdn"] . "</a></td>";
             echo "</tr>";
         }

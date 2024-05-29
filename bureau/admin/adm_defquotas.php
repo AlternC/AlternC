@@ -26,7 +26,7 @@
 require_once("../class/config.php");
 
 if (!$admin->enabled) {
-	$msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
+	$msg->raise("ERROR", "admin", __("This page is restricted to authorized staff", "alternc", true));
 	echo $msg->msg_html_all();
 	exit();
 }
@@ -95,7 +95,7 @@ reset($qlist);
 foreach($qlist as $type => $q) {
 ?>
 <div class="info-toggle">
-<h4 class="toggle-next"><?php echo _("Accounts of type"). " \"$type\"" ?>▼</h4>
+<h4 class="toggle-next"><?php echo __("Accounts of type", "alternc", true). " \"$type\"" ?>▼</h4>
 <div class="info-hide" id="div-quot-<?php echo md5($type);?>">
 <table border="0" cellpadding="4" cellspacing="0" class='tlist'>
 <tr><th><?php __("Quotas") ?></th><th><?php __("Default Value"); ?></th></tr>

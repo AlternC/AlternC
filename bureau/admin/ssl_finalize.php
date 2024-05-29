@@ -46,6 +46,6 @@ if ($error) {
     require_once("ssl_list.php");
     exit();
 }
-$info = _("Your ssl certificate has been imported successfully");
+$info = __("Your ssl certificate has been imported successfully", "alternc", true);
 
 require_once("ssl_view.php");

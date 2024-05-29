@@ -42,12 +42,12 @@ $r=$mysql->get_mysql_details($id);
 echo $msg->msg_html_all();
 
 if (!is_array($r)) {
-  echo "<p>"._("You currently have no database defined")."</p>";
+  echo "<p>".__("You currently have no database defined", "alternc", true)."</p>";
   include_once("foot.php");
   exit;
 }
 ?>
-<h3 class="restore"><?php printf(_("Restore a MySQL backup for database %s"),$r["db"]); ?></h3>
+<h3 class="restore"><?php printf(__("Restore a MySQL backup for database %s", "alternc", true),$r["db"]); ?></h3>
 <?php
 echo "<p>";
 __("Warning: Write the complete path and the filename. <br />For example if your backups are in the directory /Backups,<br />write /Backups/file.sql.gz (where file.sql.gz is the filename).");

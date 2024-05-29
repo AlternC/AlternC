@@ -54,12 +54,12 @@ class m_admin {
         $this->enabled = $db->f("su");
 
         $this->tldmode = array(
-            0 => _("This TLD is forbidden"),
-            1 => _("primary DNS is checked in WHOIS db"),
-            2 => _("primary & secondary DNS are checked in WHOIS db"),
-            3 => _("Domain must exist, but don't do any DNS check"),
-            4 => _("Domain can be installed, no check at all"),
-            5 => _("Domain can be installed, force NO DNS hosting"),
+            0 => __("This TLD is forbidden", "alternc", true),
+            1 => __("primary DNS is checked in WHOIS db", "alternc", true),
+            2 => __("primary & secondary DNS are checked in WHOIS db", "alternc", true),
+            3 => __("Domain must exist, but don't do any DNS check", "alternc", true),
+            4 => __("Domain can be installed, no check at all", "alternc", true),
+            5 => __("Domain can be installed, force NO DNS hosting", "alternc", true),
         );
         $this->archive = variable_get('archive_del_data', '', 'If folder specified html folder of deleted user is archived, else it is deleted. ');
     }
@@ -79,19 +79,19 @@ class m_admin {
             return false;
         }
         $obj = array(
-            'title' => _("Administration"),
+            'title' => __("Administration", "alternc", true),
             'link' => 'toggle',
             'class' => 'adminmenu',
             'pos' => 10,
             'links' =>
             array(
                 array(
-                    'txt' => _("Manage AlternC accounts"),
+                    'txt' => __("Manage AlternC accounts", "alternc", true),
                     'url' => 'adm_list.php',
                     'class' => 'adminmenu'
                 ),
                 array(
-                    'txt' => _("User Quotas"),
+                    'txt' => __("User Quotas", "alternc", true),
                     'url' => 'quotas_users.php?mode=4',
                     'class' => 'adminmenu'
                 ),
@@ -100,33 +100,33 @@ class m_admin {
 
         if ($cuid == 2000) { // only ADMIN, not available to subadmins
             $obj['links'][] = array(
-                'txt' => _("Admin Control Panel"),
+                'txt' => __("Admin Control Panel", "alternc", true),
                 'url' => 'adm_panel.php',
                 'class' => 'adminmenu'
             );
             $obj['links'][] = array(
-                'txt' => _("PhpMyAdmin"),
+                'txt' => __("PhpMyAdmin", "alternc", true),
                 'url' => 'sql_pma_sso.php',
                 'class' => 'adminmenu',
                 'target' => '_blank',
             );
             $obj['links'][] = array(
-                'txt' => ($debug_alternc->status) ? _("Switch debug Off") : _("Switch debug On"),
+                'txt' => ($debug_alternc->status) ? __("Switch debug Off", "alternc", true) : __("Switch debug On", "alternc", true),
                 'url' => "alternc_debugme.php?enable=" . ($debug_alternc->status ? "0" : "1"),
                 'class' => 'adminmenu'
             );
             if (empty($L_INOTIFY_UPDATE_DOMAIN) || file_exists("$L_INOTIFY_UPDATE_DOMAIN")) {
                 $obj['links'][] = array(
-                    'txt' => _("Applying..."),
-                    'url' => 'javascript:alert(\'' . _("Domain changes are already applying") . '\');',
+                    'txt' => __("Applying...", "alternc", true),
+                    'url' => 'javascript:alert(\'' . __("Domain changes are already applying", "alternc", true) . '\');',
                     'class' => 'adminmenu',
                 );
             } else {
                 $obj['links'][] = array(
-                    'txt' => _("Apply changes"),
+                    'txt' => __("Apply changes", "alternc", true),
                     'url' => 'adm_update_domains.php',
                     'class' => 'adminmenu',
-                    'onclick' => 'return confirm("' . addslashes(_("Server configuration changes are applied every 5 minutes. Do you want to do it right now?")) . '");',
+                    'onclick' => 'return confirm("' . addslashes(__("Server configuration changes are applied every 5 minutes. Do you want to do it right now?", "alternc", true)) . '");',
                 );
             } // L_INOTIFY_UPDATE_DOMAIN
         } // cuid == 2000
@@ -213,7 +213,7 @@ class m_admin {
         global $msg, $db, $lst_users_properties;
         $msg->debug("admin","get",$uid);
         if (!$this->enabled) {
-            $msg->raise("ERROR", "admin", _("-- Only administrators can access this page! --"));
+            $msg->raise("ERROR", "admin", __("-- Only administrators can access this page! --", "alternc", true));
             return false;
         }
 
@@ -247,7 +247,7 @@ class m_admin {
                 // don't exist, but is not a forced check. Do a forced check
                 return $this->get($uid, true);
             }
-            $msg->raise("ERROR", "admin", _("Account not found"));
+            $msg->raise("ERROR", "admin", __("Account not found", "alternc", true));
             return false;
         }
 
@@ -269,7 +269,7 @@ class m_admin {
         global $msg, $db;
         $msg->debug("admin","get_creator",$uid);
         if (!$this->enabled) {
-            $msg->raise("ERROR", "admin", _("-- Only administrators can access this page! --"));
+            $msg->raise("ERROR", "admin", __("-- Only administrators can access this page! --", "alternc", true));
             return false;
         }
 
@@ -279,7 +279,7 @@ class m_admin {
             $db->next_record();
             $c = $db->Record;
         } else {
-            $msg->raise("ERROR", "admin", _("Account not found"));
+            $msg->raise("ERROR", "admin", __("Account not found", "alternc", true));
             return false;
         }
 
@@ -344,7 +344,7 @@ class m_admin {
         global $msg, $mem, $cuid;
         $msg->debug("admin", "get_list");
         if (!$this->enabled) {
-            $msg->raise("ERROR", "admin", _("-- Only administrators can access this page! --"));
+            $msg->raise("ERROR", "admin", __("-- Only administrators can access this page! --", "alternc", true));
             return false;
         }
         $db = new DB_System();
@@ -382,7 +382,7 @@ class m_admin {
                 }
                 $request .= ' ORDER BY login;';
             } else {
-                $msg->raise("ERROR", "admin", _("Invalid pattern type provided. Are you even performing a legitimate action?"));
+                $msg->raise("ERROR", "admin", __("Invalid pattern type provided. Are you even performing a legitimate action?", "alternc", true));
                 return FALSE;
             }
         } else {
@@ -426,7 +426,7 @@ class m_admin {
         global $msg, $db;
         $msg->log("admin", "mailallmembers");
         if (!$this->enabled) {
-            $msg->raise("ERROR", "admin", _("-- Only administrators can access this page! --"));
+            $msg->raise("ERROR", "admin", __("-- Only administrators can access this page! --", "alternc", true));
             return false;
         }
         $subject = trim($subject);
@@ -434,12 +434,12 @@ class m_admin {
         $from = trim($from);
 
         if (empty($subject) || empty($message) || empty($from)) {
-            $msg->raise("ERROR", "admin", _("Subject, message and sender are mandatory"));
+            $msg->raise("ERROR", "admin", __("Subject, message and sender are mandatory", "alternc", true));
             return false;
         }
         //@todo remove cf functions.php
         if (checkmail($from) != 0) {
-            $msg->raise("ERROR", "admin", _("Sender is syntaxically incorrect"));
+            $msg->raise("ERROR", "admin", __("Sender is syntaxically incorrect", "alternc", true));
             return false;
         }
 
@@ -472,7 +472,7 @@ class m_admin {
 
         $msg->debug("admin", "get_creator_list");
         if (!$this->enabled) {
-            $msg->raise("ERROR", "admin", _("-- Only administrators can access this page! --"));
+            $msg->raise("ERROR", "admin", __("-- Only administrators can access this page! --", "alternc", true));
             return false;
         }
 
@@ -509,7 +509,7 @@ class m_admin {
         $db->query("SELECT creator FROM membres WHERE uid= ?;", array($uid));
         $db->next_record();
         if ($db->Record["creator"] != $cuid) {
-            $msg->raise("ERROR", "admin", _("-- Only administrators can access this page! --"));
+            $msg->raise("ERROR", "admin", __("-- Only administrators can access this page! --", "alternc", true));
             return false;
         }
         return true;
@@ -533,13 +533,13 @@ class m_admin {
         $msg->log("admin", "add_shared_domain", $u . "/" . $domain_name);
 
         if (!$mem->checkright()) {
-            $msg->raise("ERROR", "admin", _("-- Only administrators can do that! --"));
+            $msg->raise("ERROR", "admin", __("-- Only administrators can do that! --", "alternc", true));
             return false;
         }
 
         // Check if this domain exist on this admin account
         if ((!in_array($domain_name, $dom->enum_domains()))&&($domain_name!=variable_get("hosting_tld"))) {
-            $msg->raise("ERROR", "admin", _("You don't seem to be allowed to delegate this domain"));
+            $msg->raise("ERROR", "admin", __("You don't seem to be allowed to delegate this domain", "alternc", true));
             $msg->log("admin", "add_shared_domain", "domain not allowed");
             return false;
         }
@@ -599,43 +599,43 @@ class m_admin {
         global $msg, $cuid, $mem, $L_MYSQL_DATABASE, $L_MYSQL_LOGIN, $hooks, $action;
         $msg->log("admin", "add_mem", $login . "/" . $mail);
         if (!$this->enabled) {
-            $msg->raise("ERROR", "admin", _("-- Only administrators can access this page! --"));
+            $msg->raise("ERROR", "admin", __("-- Only administrators can access this page! --", "alternc", true));
             return false;
         }
         if (empty($db_server_id)) {
-            $msg->raise("ERROR", "admin", _("Missing db_server field"));
+            $msg->raise("ERROR", "admin", __("Missing db_server field", "alternc", true));
             return false;
         }
         if (($login == "") || ($pass == "")) {
-            $msg->raise("ERROR", "admin", _("Please fill all mandatory fields"));
+            $msg->raise("ERROR", "admin", __("Please fill all mandatory fields", "alternc", true));
             return false;
         }
         if (!$force) {
             if ($mail == "") {
-                $msg->raise("ERROR", "admin", _("Please fill all mandatory fields"));
+                $msg->raise("ERROR", "admin", __("Please fill all mandatory fields", "alternc", true));
                 return false;
             }
             //@todo remove cf functions.php
             if (checkmail($mail) != 0) {
-                $msg->raise("ERROR", "admin", _("Please enter a valid email address"));
+                $msg->raise("ERROR", "admin", __("Please enter a valid email address", "alternc", true));
                 return false;
             }
         }
         $login = strtolower($login);
         if (!preg_match("#^[a-z0-9]+$#", $login)) { //$
-            $msg->raise("ERROR", "admin", _("Login can only contains characters a-z and 0-9"));
+            $msg->raise("ERROR", "admin", __("Login can only contains characters a-z and 0-9", "alternc", true));
             return false;
         }
         if (strlen($login) > 14) {
             // Not an arbitrary value : MySQL user names can be up to 16 characters long
             // If we want to allow people to create a few mysql_user (and we want to!)
             // we have to limit the login lenght
-            $msg->raise("ERROR", "admin", _("The login is too long (14 chars max)"));
+            $msg->raise("ERROR", "admin", __("The login is too long (14 chars max, "alternc", true)"));
             return false;
         }
         // Some login are not allowed...
         if ($login == $L_MYSQL_DATABASE || $login == $L_MYSQL_LOGIN || $login == "mysql" || $login == "root") {
-            $msg->raise("ERROR", "admin", _("Login can only contains characters a-z, 0-9 and -"));
+            $msg->raise("ERROR", "admin", __("Login can only contains characters a-z, 0-9 and -", "alternc", true));
             return false;
         }
         // Additional checks before a user is created
@@ -644,7 +644,7 @@ class m_admin {
         $before_add_hook_data = $hooks->invoke('hook_before_alternc_add_member', [$login]);
         foreach($before_add_hook_data as $create) {
 	    if($create !== null) {
-		$msg->raise("ERROR", "admin", _("The account '%s' cannot be created. %s"), [$login, $create]);
+		$msg->raise("ERROR", "admin", __("The account '%s' cannot be created. %s", "alternc", true), [$login, $create]);
 		return false;
 	    }
         }
@@ -685,7 +685,7 @@ class m_admin {
 
             return $uid;
         } else {
-            $msg->raise("ERROR", "admin", _("This login already exists"));
+            $msg->raise("ERROR", "admin", __("This login already exists", "alternc", true));
             return false;
         }
     }
@@ -709,7 +709,7 @@ class m_admin {
         }
         $db = new DB_System();
         if (!$db->query("SELECT m.*, parent.login as parentlogin FROM membres m LEFT JOIN membres parent ON parent.uid=m.creator WHERE m.uid= ?", array($cuid))) {
-            $msg->raise("ERROR", "admin", sprintf(_("query failed: %s "), $db->Error));
+            $msg->raise("ERROR", "admin", sprintf(__("query failed: %s ", "alternc", true), $db->Error));
             return false;
         }
         if ($db->next_record()) {
@@ -736,16 +736,16 @@ class m_admin {
             '%canpass' => $db->Record['canpass'],
             '%type' => $db->Record['type'],
             '%notes' => $db->Record['notes']));
-            $subject = sprintf(_("New account %s from %s on %s"), $db->Record['login'], $db->Record['parentlogin'], $L_HOSTING);
+            $subject = sprintf(__("New account %s from %s on %s", "alternc", true), $db->Record['login'], $db->Record['parentlogin'], $L_HOSTING);
             if (mail($dest, $subject, $mail, "From: postmaster@$L_FQDN")) {
-                //sprintf(_("Email successfully sent to %s"), $dest);
+                //sprintf(__("Email successfully sent to %s", "alternc", true), $dest);
                 return true;
             } else {
-                $msg->raise("ERROR", "admin", sprintf(_("Cannot send email to %s"), $dest));
+                $msg->raise("ERROR", "admin", sprintf(__("Cannot send email to %s", "alternc", true), $dest));
                 return false;
             }
         } else {
-            $msg->raise("ERROR", "admin", sprintf(_("Query failed: %s"), $db->Error));
+            $msg->raise("ERROR", "admin", sprintf(__("Query failed: %s", "alternc", true), $db->Error));
             return false;
         }
     }
@@ -781,7 +781,7 @@ class m_admin {
         $msg->log("admin", "update_mem", $uid);
 
         if (!$this->enabled) {
-            $msg->raise("ERROR", "admin", _("-- Only administrators can access this page! --"));
+            $msg->raise("ERROR", "admin", __("-- Only administrators can access this page! --", "alternc", true));
             return false;
         }
         $db = new DB_System();
@@ -808,7 +808,7 @@ class m_admin {
             $this->renew_update($uid, $duration);
             return true;
         } else {
-            $msg->raise("ERROR", "admin", _("Account not found"));
+            $msg->raise("ERROR", "admin", __("Account not found", "alternc", true));
             return false;
         }
     }
@@ -828,14 +828,14 @@ class m_admin {
         global $msg, $db;
         $msg->log("admin", "lock_mem", $uid);
         if (!$this->enabled) {
-            $msg->raise("ERROR", "admin", _("-- Only administrators can access this page! --"));
+            $msg->raise("ERROR", "admin", __("-- Only administrators can access this page! --", "alternc", true));
             return false;
         }
         $db = new DB_System();
         if ($db->query("UPDATE membres SET enabled='0' WHERE uid= ?;", array($uid))) {
             return true;
         } else {
-            $msg->raise("ERROR", "admin", _("Account not found"));
+            $msg->raise("ERROR", "admin", __("Account not found", "alternc", true));
             return false;
         }
     }
@@ -856,14 +856,14 @@ class m_admin {
         global $msg, $db;
         $msg->log("admin", "unlock_mem", $uid);
         if (!$this->enabled) {
-            $msg->raise("ERROR", "admin", _("-- Only administrators can access this page! --"));
+            $msg->raise("ERROR", "admin", __("-- Only administrators can access this page! --", "alternc", true));
             return false;
         }
         $db = new DB_System();
         if ($db->query("UPDATE membres SET enabled='1' WHERE uid= ?;", array($uid))) {
             return true;
         } else {
-            $msg->raise("ERROR", "admin", _("Account not found"));
+            $msg->raise("ERROR", "admin", __("Account not found", "alternc", true));
             return false;
         }
     }
@@ -889,7 +889,7 @@ class m_admin {
         $msg->log("admin", "del_mem", $uid);
 
         if (!$this->enabled) {
-            $msg->raise("ERROR", "admin", _("-- Only administrators can access this page! --"));
+            $msg->raise("ERROR", "admin", __("-- Only administrators can access this page! --", "alternc", true));
             return false;
         }
         $db = new DB_System();
@@ -915,7 +915,7 @@ class m_admin {
             $db->query("UPDATE membres SET creator=2000 WHERE creator= ?;", array($uid));
             return true;
         } else {
-            $msg->raise("ERROR", "admin", _("Account not found"));
+            $msg->raise("ERROR", "admin", __("Account not found", "alternc", true));
             $mem->unsu();
             return false;
         }
@@ -943,7 +943,7 @@ class m_admin {
         if ($db->query("UPDATE membres SET renewed = renewed + INTERVAL (duration * ?) MONTH WHERE uid= ?;", array($periods, $uid))) {
             return true;
         } else {
-            $msg->raise("ERROR", "admin", _("Account not found"));
+            $msg->raise("ERROR", "admin", __("Account not found", "alternc", true));
             return false;
         }
     }
@@ -972,7 +972,7 @@ class m_admin {
             }
         }
 
-        $msg->raise("ERROR", "admin", _("Account not found"));
+        $msg->raise("ERROR", "admin", __("Account not found", "alternc", true));
         return false;
     }
 
@@ -1052,11 +1052,11 @@ class m_admin {
         global $msg, $db;
         $db->query("SELECT su FROM membres WHERE uid= ?;", array($uid));
         if (!$db->next_record()) {
-            $msg->raise("ERROR", "admin", _("Account not found"));
+            $msg->raise("ERROR", "admin", __("Account not found", "alternc", true));
             return false;
         }
         if ($db->Record["su"] != 0) {
-            $msg->raise("ERROR", "admin", _("This account is ALREADY an administrator account"));
+            $msg->raise("ERROR", "admin", __("This account is ALREADY an administrator account", "alternc", true));
             return false;
         }
         $db->query("UPDATE membres SET su=1 WHERE uid= ?;", array($uid));
@@ -1076,11 +1076,11 @@ class m_admin {
         global $msg, $db;
         $db->query("SELECT su FROM membres WHERE uid= ?;", array($uid));
         if (!$db->next_record()) {
-            $msg->raise("ERROR", "admin", _("Account not found"));
+            $msg->raise("ERROR", "admin", __("Account not found", "alternc", true));
             return false;
         }
         if ($db->Record["su"] != 1) {
-            $msg->raise("ERROR", "admin", _("This account is NOT an administrator account!"));
+            $msg->raise("ERROR", "admin", __("This account is NOT an administrator account!", "alternc", true));
             return false;
         }
         $db->query("UPDATE membres SET su=0 WHERE uid= ?;", array($uid));
@@ -1203,7 +1203,7 @@ class m_admin {
                 } else {
                     if (!in_array($L_NS1 . ".", $out) || !in_array($L_NS2 . ".", $out)) {
                         $errno = 1;
-                        $errstr.=sprintf(_("NS for this domain are not %s and %s BUT %s"),
+                        $errstr.=sprintf(__("NS for this domain are not %s and %s BUT %s", "alternc", true),
                         $L_NS1, $L_NS2, implode(",", $out)) . "\n";
                     }
                 }
@@ -1219,7 +1219,7 @@ class m_admin {
                     }
                     if (!in_array($L_MX . ".", $out2)) {
                         $errno = 1;
-                        $errstr.=sprintf(_("MX is not %s BUT %s"), $L_MX, implode(",", $out2))."\n";
+                        $errstr.=sprintf(__("MX is not %s BUT %s", "alternc", true), $L_MX, implode(",", $out2))."\n";
                     }
                 }
 
@@ -1233,10 +1233,10 @@ class m_admin {
                         exec("dig +short A " . escapeshellarg($d["sub"] . (($d["sub"] != "") ? "." : "") . $c["domaine"]), $out);
                         if (!is_array($out)) { // exec dig can fail
                             $errno = 1;
-                            $errstr.=_("Fail to get the DNS information. Try again.")."\n";
+                            $errstr.=__("Fail to get the DNS information. Try again.", "alternc", true)."\n";
                         } else {
                             if (!in_array($L_PUBLIC_IP, $out)) {
-                                $errstr.=sprintf(_("subdomain '%s' doesn't point to %s but to '%s'"), $d["sub"], $L_PUBLIC_IP, implode(",", $out))."\n" ;
+                                $errstr.=sprintf(__("subdomain '%s' doesn't point to %s but to '%s'", "alternc", true), $d["sub"], $L_PUBLIC_IP, implode(",", $out))."\n" ;
                                 $errno = 1;
                             }
                         }
@@ -1245,7 +1245,7 @@ class m_admin {
             }
             if ($dontexist) {
                 $errno = 2;
-                $errstr = _("Domain doesn't exist anymore !");
+                $errstr = __("Domain doesn't exist anymore !", "alternc", true);
             }
             if ($errno == 0)
                 $errstr = "OK";
@@ -1270,7 +1270,7 @@ class m_admin {
         global $db, $msg;
         $db->query("SELECT compte FROM domaines WHERE domaine= ?;", array($domain));
         if (!$db->next_record()) {
-            $msg->raise("ERROR", "dom", _("Domain '%s' not found."), $domain);
+            $msg->raise("ERROR", "dom", __("Domain '%s' not found.", "alternc", true), $domain);
             return false;
         }
         $db->query("UPDATE domaines SET noerase=1-noerase WHERE domaine= ?;", array($domain));
@@ -1290,7 +1290,7 @@ class m_admin {
         global $db, $msg;
         $db->query("SELECT mode FROM tld WHERE tld= ?;", array($tld));
         if (!$db->next_record()) {
-            $msg->raise("ERROR", "admin", _("This TLD does not exist"));
+            $msg->raise("ERROR", "admin", __("This TLD does not exist", "alternc", true));
             return false;
         }
         return $db->Record["mode"];
@@ -1308,7 +1308,7 @@ class m_admin {
             if ($current == $i) {
                 echo " selected=\"selected\"";
             }
-            echo ">" . _($this->tldmode[$i]) . "</option>\n";
+            echo ">" . __($this->tldmode[$i], "alternc", true) . "</option>\n";
         }
     }
 
@@ -1328,7 +1328,7 @@ class m_admin {
         global $db, $msg;
         $db->query("SELECT tld FROM tld WHERE tld= ?;", array($tld));
         if (!$db->next_record()) {
-            $msg->raise("ERROR", "admin", _("This TLD does not exist"));
+            $msg->raise("ERROR", "admin", __("This TLD does not exist", "alternc", true));
             return false;
         }
         $db->query("DELETE FROM tld WHERE tld= ?;", array($tld));
@@ -1352,14 +1352,14 @@ class m_admin {
     function addtld($tld, $mode) {
         global $db, $msg;
         if (!$tld) {
-            $msg->raise("ERROR", "admin", _("The TLD name is mandatory"));
+            $msg->raise("ERROR", "admin", __("The TLD name is mandatory", "alternc", true));
             return false;
         }
         $tld = trim($tld);
 
         $db->query("SELECT tld FROM tld WHERE tld= ?;", array($tld));
         if ($db->next_record()) {
-            $msg->raise("ERROR", "admin", _("This TLD already exist"));
+            $msg->raise("ERROR", "admin", __("This TLD already exist", "alternc", true));
             return false;
         }
         if (substr($tld, 0, 1) == ".") {
@@ -1389,7 +1389,7 @@ class m_admin {
         global $db, $msg;
         $db->query("SELECT tld FROM tld WHERE tld= ?;", array($tld));
         if (!$db->next_record()) {
-            $msg->raise("ERROR", "admin", _("This TLD does not exist"));
+            $msg->raise("ERROR", "admin", __("This TLD does not exist", "alternc", true));
             return false;
         }
         $mode = intval($mode);
@@ -1447,7 +1447,7 @@ class m_admin {
                 );
             }
             $policies[$k] = $tmp1[$k];
-            $policies[$k]["description"] = _($v);
+            $policies[$k]["description"] = __($v, "alternc", true);
             unset($tmp1[$k]);
         }
         foreach ($tmp1 as $k => $v) {
@@ -1502,17 +1502,17 @@ class m_admin {
         global $msg;
 
         if (empty($login)) {
-            $msg->raise("ALERT", "admin", _("Please enter a login"));
+            $msg->raise("ALERT", "admin", __("Please enter a login", "alternc", true));
             return false;
         }
         if (empty($password) && !$canbeempty) {
-            $msg->raise("ALERT", "admin", _("Please enter a password"));
+            $msg->raise("ALERT", "admin", __("Please enter a password", "alternc", true));
             return false;
         }
 
         $pol = $this->listPasswordPolicies();
         if (!$pol[$policy]) {
-            $msg->raise("ERROR", "admin", _("-- Program error -- The requested password policy does not exist!"));
+            $msg->raise("ERROR", "admin", __("-- Program error -- The requested password policy does not exist!", "alternc", true));
             return false;
         }
         $pol = $pol[$policy];
@@ -1520,12 +1520,12 @@ class m_admin {
         $plen = strlen($password);
 
         if ($plen < $pol["minsize"] && !($canbeempty && empty($password))) {
-            $msg->raise("ERROR", "admin", _("The password length is too short according to the password policy"));
+            $msg->raise("ERROR", "admin", __("The password length is too short according to the password policy", "alternc", true));
             return false;
         }
 
         if ($plen > $pol["maxsize"] && !($canbeempty && empty($password))) {
-            $msg->raise("ERROR", "admin", _("The password is too long according to the password policy"));
+            $msg->raise("ERROR", "admin", __("The password is too long according to the password policy", "alternc", true));
             return false;
         }
 
@@ -1538,7 +1538,7 @@ class m_admin {
                     continue;
                 }
                 if (strpos($password, $l) !== false || strpos($l, $password) !== false) {
-                    $msg->raise("ERROR", "admin", _("The password policy prevents you to use your login name inside your password or the other way around"));
+                    $msg->raise("ERROR", "admin", __("The password policy prevents you to use your login name inside your password or the other way around", "alternc", true));
                     return false;
                 }
             }
@@ -1562,7 +1562,7 @@ class m_admin {
             } // foreach
             $clc = array_sum($cls);
             if ($clc < $pol["classcount"]) {
-                $msg->raise("ERROR", "admin", _("Your password contains not enough different classes of character, between low-case, up-case, figures and special characters."));
+                $msg->raise("ERROR", "admin", __("Your password contains not enough different classes of character, between low-case, up-case, figures and special characters.", "alternc", true));
                 return false;
             }
         }

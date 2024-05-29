@@ -25,7 +25,7 @@
 
 @require_once("../class/config.php");
 if ((@include_once 'Image/Graph.php') === FALSE) {
-  echo "<p class=\"alert alert-warning\">". _("Image_Graph not installed. use 'aptitude install php-pear' then 'pear install --alldeps Image_Graph-devel' to see the graph.")."</p>";
+  echo "<p class=\"alert alert-warning\">". __("Image_Graph not installed. use 'aptitude install php-pear' then 'pear install --alldeps Image_Graph-devel' to see the graph.", "alternc", true)."</p>";
   exit(0);
 }
 
@@ -34,7 +34,7 @@ $db->query("SELECT COUNT(login) AS count,date_format(created, '%Y-%m') as month 
 $Graph =& Image_Graph::factory('graph', array(800, 600)); 
 $Graph->add(
     Image_Graph::vertical(
-        Image_Graph::factory('title', array(_('Account creation per month'), 12)),        
+        Image_Graph::factory('title', array(__('Account creation per month', "alternc", true), 12)),        
         Image_Graph::vertical(
             $Plotarea = Image_Graph::factory('plotarea'),
             $Legend = Image_Graph::factory('legend'),
@@ -47,9 +47,9 @@ $Graph->add(
 $Legend->setPlotarea($Plotarea);        
 
 $total =& Image_Graph::factory('Image_Graph_Dataset_Trivial');
-$total->setName(_('before the month'));
+$total->setName(__('before the month', "alternc", true));
 $units =& Image_Graph::factory('Image_Graph_Dataset_Trivial');
-$units->setName(_('during the month'));
+$units->setName(__('during the month', "alternc", true));
 
 $i = 0;
 while ($db->next_record()) {

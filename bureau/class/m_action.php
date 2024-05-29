@@ -167,7 +167,7 @@ class m_action {
         $db->query("select login from membres where uid= ?;", array($cuid));
         $db->next_record();
         if (!$db->Record["login"]) {
-            $msg->raise("ERROR", "action", _("Login corresponding to $cuid not found"));
+            $msg->raise("ERROR", "action", __("Login corresponding to $cuid not found", "alternc", true));
             return false;
         }
         $uidlogin = $cuid . "-" . $db->Record["login"];
@@ -209,7 +209,7 @@ class m_action {
         }
 
         if (!$db->query($query)) {
-            $msg->raise("ERROR", "action", _("Error setting actions"));
+            $msg->raise("ERROR", "action", __("Error setting actions", "alternc", true));
             return false;
         }
         return $this->do_action();
@@ -229,7 +229,7 @@ class m_action {
         $purge = "select * from actions where TO_DAYS(curdate()) - TO_DAYS(creation) > 2;";
         $result = $db->query($purge);
         if (!$result) {
-            $msg->raise("ERROR", "action", _("Error selecting  old actions"));
+            $msg->raise("ERROR", "action", __("Error selecting  old actions", "alternc", true));
             return false;
         }
         return $db->num_rows($result);
@@ -252,7 +252,7 @@ class m_action {
         }
         $result = $db->query($purge);
         if (!$result) {
-            $msg->raise("ERROR", "action", _("Error purging old actions"));
+            $msg->raise("ERROR", "action", __("Error purging old actions", "alternc", true));
             return false;
         }
         return $db->num_rows($result);
@@ -290,7 +290,7 @@ class m_action {
     function begin($id) {
         global $db, $msg;
         if (!$db->query("update actions set begin=now() where id= ? ;", array($id))) {
-            $msg->raise("ERROR", "action", _("Error locking the action : $id"));
+            $msg->raise("ERROR", "action", __("Error locking the action : $id", "alternc", true));
             return false;
         }
         return true;
@@ -309,7 +309,7 @@ class m_action {
     function finish($id, $return = 0) {
         global $db, $msg;
         if (!$db->query("update actions set end=now(),status=? where id= ?;", array($return, $id))) {
-            $msg->raise("ERROR", "action", _("Error unlocking the action : $id"));
+            $msg->raise("ERROR", "action", __("Error unlocking the action : $id", "alternc", true));
             return false;
         }
         return true;
@@ -326,7 +326,7 @@ class m_action {
     function reset_job($id) {
         global $db, $msg;
         if (!$db->query("update actions set end=0,begin=0,status=0 where id= ?;", array($id))) {
-            $msg->raise("ERROR", "action", _("Error unlocking the action : $id"));
+            $msg->raise("ERROR", "action", __("Error unlocking the action : $id", "alternc", true));
             return false;
         }
         return true;

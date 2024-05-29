@@ -37,7 +37,7 @@ $dt=$dom->domains_type_lst();
 $dom->unlock();
 
 if (!$isinvited && $dt[strtolower($r['type'])]["enable"] != "ALL" ) {
-  $msg->raise("ERROR", "dom", _("This page is restricted to authorized staff"));
+  $msg->raise("ERROR", "dom", __("This page is restricted to authorized staff", "alternc", true));
   echo $msg->msg_html_all();
   exit();
 }
@@ -49,7 +49,7 @@ $dom->del_sub_domain($sub_domain_id);
 $dom->unlock();
 
 ?>
-<h3><?php echo sprintf(_("Deleting the subdomain %s:"),(($r['name'])?$r['name'].".":$r['name']).$r['domain']); ?></h3>
+<h3><?php echo sprintf(__("Deleting the subdomain %s:", "alternc", true),(($r['name'])?$r['name'].".":$r['name']).$r['domain']); ?></h3>
 <hr id="topbar"/>
 <br />
 <?php
@@ -60,7 +60,7 @@ $dom->unlock();
 	} else {
         $t = time();
 	// TODO: we assume the cron job is at every 5 minutes
-        $msg->raise("INFO", "dom", _("The modifications will take effect at %s.  Server time is %s."), array(date('H:i:s', ($t-($t%300)+300)), date('H:i:s', $t))); 
+        $msg->raise("INFO", "dom", __("The modifications will take effect at %s.  Server time is %s.", "alternc", true), array(date('H:i:s', ($t-($t%300)+300)), date('H:i:s', $t))); 
 	echo $msg->msg_html_all();
 	}
 ?>

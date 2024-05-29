@@ -35,7 +35,7 @@ if (isset($confirm) && ($confirm=="y")) {
     if (substr($key,0,4)=="del_") {
       // Effacement de la base $val
       if($mysql->del_user($val)) {
-	$msg->raise("INFO", "mysql", _("The user '%s' has been successfully deleted"), $val);
+	$msg->raise("INFO", "mysql", __("The user '%s' has been successfully deleted", "alternc", true), $val);
       }
     }
   }

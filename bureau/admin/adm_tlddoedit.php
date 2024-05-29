@@ -32,7 +32,7 @@ getFields($fields);
 
 
 if (!$admin->enabled) {
-	$msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
+	$msg->raise("ERROR", "admin", __("This page is restricted to authorized staff", "alternc", true));
 	echo $msg->msg_html_all();
         exit();
 }
@@ -41,7 +41,7 @@ if (!$admin->edittld($tld,$mode)) {
         include("adm_tldedit.php");
         exit();
 } else {
-        $msg->raise("INFO", "admin", _("The TLD has been successfully edited"));
+        $msg->raise("INFO", "admin", __("The TLD has been successfully edited", "alternc", true));
         include("adm_tld.php");
         exit();
 }

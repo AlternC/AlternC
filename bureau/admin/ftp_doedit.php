@@ -36,7 +36,7 @@ $fields = array (
 getFields($fields);
 
 if (! $id && !$create) { //not a creation and not an edit
-  $msg->raise("ERROR", "ftp", _("Error: neither a creation nor an edition"));
+  $msg->raise("ERROR", "ftp", __("Error: neither a creation nor an edition", "alternc", true));
   include("ftp_list.php");
   exit();
 }
@@ -56,9 +56,9 @@ if (!$r) {
   exit();
 } else {
   if ($create)
-    $msg->raise("INFO", "ftp", _("The FTP account has been successfully created"));
+    $msg->raise("INFO", "ftp", __("The FTP account has been successfully created", "alternc", true));
   else
-    $msg->raise("INFO", "ftp", _("The FTP account has been successfully saved"));
+    $msg->raise("INFO", "ftp", __("The FTP account has been successfully saved", "alternc", true));
 
   include("ftp_list.php");
   exit();

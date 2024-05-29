@@ -34,7 +34,7 @@ getFields($fields);
 
 if ($user_name === FALSE)
 {
-	 $msg->raise("ERROR", "piwik", _('No piwik user specified'));
+	 $msg->raise("ERROR", "piwik", __('No piwik user specified', "alternc", true));
 }
 else
 {
@@ -44,7 +44,7 @@ else
 		$db->next_record();
 		if ($db->f('ok')!=1)
 		{
-			$msg->raise("ERROR", "piwik", _("You don't own this piwik website"));
+			$msg->raise("ERROR", "piwik", __("You don't own this piwik website", "alternc", true));
 		}
 		else
 		{
@@ -52,7 +52,7 @@ else
 			$db->next_record();
 			if ($db->f('ok')!=1)
 			{
-				$msg->raise("ERROR", "piwik", _("You don't own this piwik user"));
+				$msg->raise("ERROR", "piwik", __("You don't own this piwik user", "alternc", true));
 			}
 			else
 			{
@@ -64,11 +64,11 @@ else
 						$msg->raise("ERROR", "piwik", $api_data->message);
 						$msg->raise("ERROR", "piwik", $api_data->message);
 					else
-						$msg->raise("INFO", "piwik", _('success'));
+						$msg->raise("INFO", "piwik", __('success', "alternc", true));
 				}
 				else
 				{
-					$msg->raise("ERROR", "piwik", _("This right does not exist"));
+					$msg->raise("ERROR", "piwik", __("This right does not exist", "alternc", true));
 				}
 			}
 		}
@@ -93,7 +93,7 @@ else
 }
 
 ?>
-<h3><?php printf('%s "%s"', _("Rights for user"), $user_name); ?></h3>
+<h3><?php printf('%s "%s"', __("Rights for user", "alternc", true), $user_name); ?></h3>
 <?php
 echo $msg->msg_html_all();
 
@@ -118,7 +118,7 @@ echo '</ul>';
 if (count($available_user_sites)>0)
 {
 ?>
-<h3><?php printf('%s "%s"', _("Add rights to user"), $user_name); ?></h3>
+<h3><?php printf('%s "%s"', __("Add rights to user", "alternc", true), $user_name); ?></h3>
 <ul>
 <?php
 foreach ($available_user_sites AS $current_id_site => $available_user_site)
@@ -130,7 +130,7 @@ foreach ($available_user_sites AS $current_id_site => $available_user_site)
 	<option value="view">%s</option>
 	<option value="admin">%s</option>
 </select>
-<input type="submit" name="add" value="ajouter" class="inb" /></form></li>', $available_user_site['name'], $current_id_site, _("noacces"), _("view"), _("admin"));
+<input type="submit" name="add" value="ajouter" class="inb" /></form></li>', $available_user_site['name'], $current_id_site, __("noacces", "alternc", true), __("view", "alternc", true), __("admin", "alternc", true));
 }
 ?>
 </li>

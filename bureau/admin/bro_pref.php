@@ -42,7 +42,7 @@ getFields($fields);
 
 if (!empty($submit)) {
 	$bro->SetPrefs($editsizex, $editsizey, $listmode, $showicons, $downfmt, $createfile, $showtype, $editor_font, $editor_size, $golastdir);
-	$msg->raise("INFO", "bro", _("Your preferences have been updated."));
+	$msg->raise("INFO", "bro", __("Your preferences have been updated.", "alternc", true));
 	include("bro_main.php");
 	exit;
 }
@@ -80,7 +80,7 @@ for($i=4;$i<=80;$i+=2) {
 for($i=0;$i<count($bro->l_editor_font);$i++) {
 	echo "<option";
 	if ($p["editor_font"]==$bro->l_editor_font[$i]) echo " selected='selected'";
-	echo ">"._($bro->l_editor_font[$i])."</option>";
+	echo ">".__($bro->l_editor_font[$i], "alternc", true)."</option>";
 }
 ?></select></td></tr>
 <tr><th><?php __("File editor font size"); ?></th><td><select class="inl" name="editor_size">
@@ -88,7 +88,7 @@ for($i=0;$i<count($bro->l_editor_font);$i++) {
 for($i=0;$i<count($bro->l_editor_size);$i++) {
 	echo "<option";
 	if ($p["editor_size"]==$bro->l_editor_size[$i]) echo " selected='selected'";
-	echo ">"._($bro->l_editor_size[$i])."</option>";
+	echo ">".__($bro->l_editor_size[$i], "alternc", true)."</option>";
 }
 ?></select></td></tr>
 <tr><th><?php __("File list view"); ?></th><td><select class="inl" name="listmode">
@@ -96,7 +96,7 @@ for($i=0;$i<count($bro->l_editor_size);$i++) {
 for($i=0;$i<count($bro->l_mode);$i++) {
 	echo "<option";
 	if ($p["listmode"]==$i) echo " selected='selected'";
-	echo " value=\"$i\">"._($bro->l_mode[$i])."</option>";
+	echo " value=\"$i\">".__($bro->l_mode[$i], "alternc", true)."</option>";
 }
 ?></select></td></tr>
 <tr><th><?php __("Downloading file format"); ?></th><td><select class="inl" name="downfmt">
@@ -104,7 +104,7 @@ for($i=0;$i<count($bro->l_mode);$i++) {
 for($i=0;$i<count($bro->l_tgz);$i++) {
 	echo "<option";
 	if ($p["downfmt"]==$i) echo " selected='selected'";
-	echo " value=\"$i\">"._($bro->l_tgz[$i])."</option>";
+	echo " value=\"$i\">".__($bro->l_tgz[$i], "alternc", true)."</option>";
 }
 ?></select></td></tr>
 <tr><th><?php __("What to do after creating a file"); ?></th><td><select class="inl" name="createfile">
@@ -112,7 +112,7 @@ for($i=0;$i<count($bro->l_tgz);$i++) {
 for($i=0;$i<count($bro->l_createfile);$i++) {
 	echo "<option";
 	if ($p["createfile"]==$i) echo " selected='selected'";
-	echo " value=\"$i\">"._($bro->l_createfile[$i])."</option>";
+	echo " value=\"$i\">".__($bro->l_createfile[$i], "alternc", true)."</option>";
 }
 ?></select></td></tr>
 <tr><th><?php __("Show icons?"); ?></th><td><select class="inl" name="showicons">
@@ -120,7 +120,7 @@ for($i=0;$i<count($bro->l_createfile);$i++) {
 for($i=0;$i<count($bro->l_icons);$i++) {
 	echo "<option";
 	if ($p["showicons"]==$i) echo " selected='selected'";
-	echo " value=\"$i\">"._($bro->l_icons[$i])."</option>";
+	echo " value=\"$i\">".__($bro->l_icons[$i], "alternc", true)."</option>";
 }
 ?></select></td></tr>
 <tr><th><?php __("Show file types?"); ?></th><td><select class="inl" name="showtype">
@@ -128,7 +128,7 @@ for($i=0;$i<count($bro->l_icons);$i++) {
 for($i=0;$i<count($bro->l_icons);$i++) {
 	echo "<option";
 	if ($p["showtype"]==$i) echo " selected='selected'";
-	echo " value=\"$i\">"._($bro->l_icons[$i])."</option>";
+	echo " value=\"$i\">".__($bro->l_icons[$i], "alternc", true)."</option>";
 }
 ?></select></td></tr>
 <tr><th><?php __("Remember last visited directory?"); ?></th><td><select class="inl" name="golastdir">
@@ -136,7 +136,7 @@ for($i=0;$i<count($bro->l_icons);$i++) {
 for($i=0;$i<count($bro->l_icons);$i++) {
 	echo "<option";
 	if ($p["golastdir"]==$i) echo " selected='selected'";
-	echo " value=\"$i\">"._($bro->l_icons[$i])."</option>";
+	echo " value=\"$i\">".__($bro->l_icons[$i], "alternc", true)."</option>";
 }
 ?></select></td></tr>
 </table>

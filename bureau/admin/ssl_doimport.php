@@ -36,7 +36,7 @@ if (!isset($is_include)) {
 }
 
 if (!$key && !$crt) {
-    $error = _("Please enter an ssl key and a certificate");
+    $error = __("Please enter an ssl key and a certificate", "alternc", true);
     require_once("ssl_new.php");
     exit();
 }

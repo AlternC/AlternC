@@ -26,7 +26,7 @@
 require_once("../class/config.php");
 
 if (!$admin->enabled) {
-	$msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
+	$msg->raise("ERROR", "admin", __("This page is restricted to authorized staff", "alternc", true));
 	echo $msg->msg_html_all();
 	exit();
 }
@@ -40,25 +40,25 @@ getFields($fields);
 if($action == "add") {
 
   if($quota->addtype($type)) {
-    $msg->raise("INFO", "admin", _("Account type"). " \"".htmlentities($type)."\" "._("added"));
+    $msg->raise("INFO", "admin", __("Account type", "alternc", true). " \"".htmlentities($type)."\" ".__("added", "alternc", true));
   } else {
-    $msg->raise("ERROR", "admin", _("Account type"). " \"".htmlentities($type)."\" "._("could not be added"));
+    $msg->raise("ERROR", "admin", __("Account type", "alternc", true). " \"".htmlentities($type)."\" ".__("could not be added", "alternc", true));
   }
   include("adm_defquotas.php");
 } else if($action == "delete") {
   if($del_confirm == "y"){
     if(!empty($type)) {
       if($quota->deltype($type)) {
-        $msg->raise("INFO", "admin", _("Account type"). " \"".htmlentities($type)."\" "._("deleted"));
+        $msg->raise("INFO", "admin", __("Account type", "alternc", true). " \"".htmlentities($type)."\" ".__("deleted", "alternc", true));
       } else {
-        $msg->raise("ERROR", "admin", _("Account type"). " \"".htmlentities($type)."\" "._("could not be deleted"));
+        $msg->raise("ERROR", "admin", __("Account type", "alternc", true). " \"".htmlentities($type)."\" ".__("could not be deleted", "alternc", true));
       }
     }
     include("adm_defquotas.php");
   }else{
     include("head.php");
     ?>
-    <h3><?php printf(_("Deleting quota %s"),$type); ?> : </h3>
+    <h3><?php printf(__("Deleting quota %s", "alternc", true),$type); ?> : </h3>
 
     <form action="adm_dodefquotas.php" method="post">
  <?php csrf_get(); ?>
@@ -87,9 +87,9 @@ if($action == "add") {
   }
 
   if($quota->setdefaults($c)) {
-    $msg->raise("INFO", "admin", _("Default quotas successfully changed"));
+    $msg->raise("INFO", "admin", __("Default quotas successfully changed", "alternc", true));
   } else {
-    $msg->raise("ERROR", "admin", _("Default quotas could not be set."));
+    $msg->raise("ERROR", "admin", __("Default quotas could not be set.", "alternc", true));
   }
   include("adm_panel.php");
 }

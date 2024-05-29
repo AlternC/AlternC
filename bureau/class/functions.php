@@ -446,24 +446,24 @@ function format_size($size, $html = 0) {
     if ($size < 1024) {
         $r = $size;
         if ($size != 1) {
-            $r.=" " . _("Bytes");
+            $r.=" " . __("Bytes", "alternc", true);
         } else {
-            $r.=" " . _("Byte");
+            $r.=" " . __("Byte", "alternc", true);
         }
     } else {
         $size = $size / 1024;
         if ($size < 1024) {
-            $r = round($size, 2) . " " . _("Kb");
+            $r = round($size, 2) . " " . __("Kb", "alternc", true);
         } else {
             $size = $size / 1024;
             if ($size < 1024) {
-                $r = round($size, 2) . " " . _("Mb");
+                $r = round($size, 2) . " " . __("Mb", "alternc", true);
             } else {
                 $size = $size / 1024;
                 if ($size < 1024) {
-                    $r = round($size, 2) . " " . _("Gb");
+                    $r = round($size, 2) . " " . __("Gb", "alternc", true);
                 } else {
-                    $r = round($size / 1024, 2) . " " . _("Tb");
+                    $r = round($size / 1024, 2) . " " . __("Tb", "alternc", true);
                 }
             }
         }
@@ -580,9 +580,9 @@ function xml_entities($string) {
 function pretty_months($months) {
     if ($months % 12 == 0 && $months > 11) {
         $years = $months / 12;
-        return "$years " . ($years > 1 ? _("years") : _("year"));
+        return "$years " . ($years > 1 ? __("years", "alternc", true) : __("year", "alternc", true));
     } else {
-        return "$months " . ($months > 1 ? _("months") : _("month"));
+        return "$months " . ($months > 1 ? __("months", "alternc", true) : __("month", "alternc", true));
     }
 }
 
@@ -605,7 +605,7 @@ function duration_list($name, $selected = 0) {
         $res .= '>';
 
         if ($dur == 0) {
-            $res .= _('Not managed');
+            $res .= __('Not managed', "alternc", true);
         } else {
             $res .= pretty_months($dur);
         }
@@ -808,9 +808,9 @@ function pager($offset, $count, $total, $url, $before = "", $after = "", $echo =
     // Shall-we show previous page link ?
     if ($offset) {
         $o = max($offset - $count, 0);
-        $return .= "<a href=\"" . str_replace("%%offset%%", $o, $url) . "\" alt=\"(Ctl/Alt-p)\" title=\"(Alt-p)\" accesskey=\"p\">" . _("Previous Page") . "</a> ";
+        $return .= "<a href=\"" . str_replace("%%offset%%", $o, $url) . "\" alt=\"(Ctl/Alt-p)\" title=\"(Alt-p)\" accesskey=\"p\">" . __("Previous Page", "alternc", true) . "</a> ";
     } else {
-        $return .= _("Previous Page") . " ";
+        $return .= __("Previous Page", "alternc", true) . " ";
     }
 
     if ($total > (2 * $count)) { // On n'affiche le pager central (0 1 2 ...) s'il y a au moins 2 pages.
@@ -868,9 +868,9 @@ function pager($offset, $count, $total, $url, $before = "", $after = "", $echo =
     // Shall-we show the next page link ?
     if ($offset + $count < $total) {
         $o = $offset + $count;
-        $return .= "<a href=\"" . str_replace("%%offset%%", $o, $url) . "\" alt=\"(Ctl/Alt-s)\" title=\"(Alt-s)\" accesskey=\"s\">" . _("Next Page") . "</a> ";
+        $return .= "<a href=\"" . str_replace("%%offset%%", $o, $url) . "\" alt=\"(Ctl/Alt-s)\" title=\"(Alt-s)\" accesskey=\"s\">" . __("Next Page", "alternc", true) . "</a> ";
     } else {
-        $return .= _("Next Page") . " ";
+        $return .= __("Next Page", "alternc", true) . " ";
     }
     $return .= $after;
     if ($echo) {
@@ -978,8 +978,8 @@ function display_browser($dir = "", $caller = "main.dir", $width = 350, $height 
           });
           
           
-          document.write('&nbsp;<input type=\"button\" id=\"bt" . $bid . "\" value=\"" . _("Choose a folder...") . "\" class=\"ina\">');
-          document.write('<div id=\"" . $bid . "\" title=\"" . _("Choose a folder...") . "\" style=\"display: none; bgcolor:red;\">');
+          document.write('&nbsp;<input type=\"button\" id=\"bt" . $bid . "\" value=\"" . __("Choose a folder...", "alternc", true) . "\" class=\"ina\">');
+          document.write('<div id=\"" . $bid . "\" title=\"" . __("Choose a folder...", "alternc", true) . "\" style=\"display: none; bgcolor:red;\">');
           document.write('  <iframe src=\"/browseforfolder2.php?caller=" . $caller . "&amp;file=" . ehe($dir, false) . "&amp;bid=" . $bid . "\" width=\"" . ($width - 40) . "\" height=\"" . ($height - 64) . "\" frameborder=\"no\" id=\"browseiframe\"></iframe>');
           document.write('</div>');
         //  -->
@@ -1195,21 +1195,21 @@ function csrf_check($token=null) {
     if (is_null($token)) $token=$_POST["csrf"];
 
     if (!isset($_SESSION["csrf"])) {
-        $msg->raise("ERROR", "functions", _("The posted form token is incorrect. Maybe you need to allow cookies"));
+        $msg->raise("ERROR", "functions", __("The posted form token is incorrect. Maybe you need to allow cookies", "alternc", true));
         return 0; // no csrf cookie :/
     }
     if (strlen($token)!=32 || strlen($_SESSION["csrf"])!=32) {
         unset($_SESSION["csrf"]);
-        $msg->raise("ERROR", "functions", _("Your cookie or token is invalid"));
+        $msg->raise("ERROR", "functions", __("Your cookie or token is invalid", "alternc", true));
         return 0; // invalid csrf cookie 
     }
     $db->query("SELECT used FROM csrf WHERE cookie=? AND token=?;",array($_SESSION["csrf"],$token));
     if (!$db->next_record()) {
-        $msg->raise("ERROR", "functions", _("You can't post twice the same form, please retry."));
+        $msg->raise("ERROR", "functions", __("You can't post twice the same form, please retry.", "alternc", true));
         return 0; // invalid csrf cookie 
     }
     if ($db->f("used")) {
-        $msg->raise("ERROR", "functions", _("You can't post twice the same form, please retry."));
+        $msg->raise("ERROR", "functions", __("You can't post twice the same form, please retry.", "alternc", true));
         return -1; // expired
     }
     $db->query("UPDATE csrf SET used=1 WHERE cookie=? AND token=?;",array($_SESSION["csrf"],$token)); 

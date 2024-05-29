@@ -36,7 +36,7 @@ $list=$log->list_logs_directory_all($log->get_logs_directory());
 echo $msg->msg_html_all();
 
 if(!$list || empty($list['dir'])){
-  $msg->raise("INFO", "logs", _("You have no web logs to list at the moment."));  
+  $msg->raise("INFO", "logs", __("You have no web logs to list at the moment.", "alternc", true));  
   echo $msg->msg_html_all();
   include_once('foot.php');
   exit;
@@ -59,9 +59,9 @@ while (list($key,$val)=each($list)){
   <td><?php echo $v['name']; ?></td>  
   <td><?php echo $v['creation_date']; ?></td>  
   <td><?php echo format_size($v['filesize']); ?></td>  
-  <td><?php echo "<a href=\"logs_download.php?file=".$v['downlink']."\">"._("Download")."</a>";
+  <td><?php echo "<a href=\"logs_download.php?file=".$v['downlink']."\">".__("Download", "alternc", true)."</a>";
     if ((time()-14400)<$v['mtime']) {
-      echo " &nbsp; <a href=\"logs_tail.php?file=".$v['downlink']."\">"._("Follow")."</a>";
+      echo " &nbsp; <a href=\"logs_tail.php?file=".$v['downlink']."\">".__("Follow", "alternc", true)."</a>";
     }
 ?></td>
   </tr>

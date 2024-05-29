@@ -34,7 +34,7 @@ if (!isset($is_include)) {
 }
 
 if (!$dir) {
-  echo "<p class=\"alert alert-warning\">"._("No folder selected!")."</p>";
+  echo "<p class=\"alert alert-warning\">".__("No folder selected!", "alternc", true)."</p>";
   require_once('foot.php');
   die();
 } else {
@@ -45,12 +45,12 @@ $c=$admin->listPasswordPolicies();
 $passwd_classcount = $c['hta']['classcount'];
 
 ?>
-<h3><?php printf(_("List of authorized user in folder %s"),$dir); ?></h3>
+<h3><?php printf(__("List of authorized user in folder %s", "alternc", true),$dir); ?></h3>
 <hr id="topbar"/>
 <br />
 <?php
   if (!count($r)) {
-    $msg->raise("INFO", "hta", _("No authorized user in %s"),$dir);
+    $msg->raise("INFO", "hta", __("No authorized user in %s", "alternc", true),$dir);
     echo $msg->msg_html_all();
   } else {
     reset($r);

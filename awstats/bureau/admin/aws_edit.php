@@ -30,7 +30,7 @@ $fields = array (
 getFields($fields);
 
 if (!$id) {
-	$msg->raise('Error', "aws", _("No Statistics selected!"));
+	$msg->raise('Error', "aws", __("No Statistics selected!", "alternc", true));
 } else {
 	$r=$aws->get_stats_details($id);
 	if ($r) {

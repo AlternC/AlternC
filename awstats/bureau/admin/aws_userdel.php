@@ -31,7 +31,7 @@ while (list($key,$val)=each($_POST)) {
 		// Effacement du compte ftp $val
 		$r=$aws->del_login($val);
 		if ($r) {
-			$msg->raise('INFO', "aws", _("The awstat account %s has been successfully deleted"),$val);
+			$msg->raise('INFO', "aws", __("The awstat account %s has been successfully deleted", "alternc", true),$val);
 		}
 	}
 }

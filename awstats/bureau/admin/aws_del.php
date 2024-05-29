@@ -33,13 +33,13 @@ while (list($key,$val)=each($_POST)) {
     $r=$aws->delete_stats($val);
     $found=true;
     if ($r) {
-      $msg->raise('INFO', "aws", _("The statistics %s has been successfully deleted"),$r);
+      $msg->raise('INFO', "aws", __("The statistics %s has been successfully deleted", "alternc", true),$r);
     }
   }
 }
 
 if (!$found) {
-  $msg->raise('INFO', "aws", _("Please check the statistics set you want to delete"));
+  $msg->raise('INFO', "aws", __("Please check the statistics set you want to delete", "alternc", true));
  }
 
 include("aws_list.php");

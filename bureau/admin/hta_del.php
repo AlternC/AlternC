@@ -30,7 +30,7 @@ while (list($key,$val)=each($_POST)) {
 	if (substr($key,0,4)=="del_") {
 		$return = $hta->DelDir($val);
 		if ($return) {
-			$msg->raise("INFO", "hta",_("The protected folder %s has been successfully unprotected"),$val);
+			$msg->raise("INFO", "hta",__("The protected folder %s has been successfully unprotected", "alternc", true),$val);
 		}
 	}
 }

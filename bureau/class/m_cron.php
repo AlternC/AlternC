@@ -34,9 +34,9 @@ class m_cron {
      */
     function schedule() {
         return Array(
-            Array('unit' => 1440, 'name' => _("Daily")),
-            Array('unit' => 60, 'name' => _("Hour")),
-            Array('unit' => 30, 'name' => _("Half Hour")),
+            Array('unit' => 1440, 'name' => __("Daily", "alternc", true)),
+            Array('unit' => 60, 'name' => __("Hour", "alternc", true)),
+            Array('unit' => 30, 'name' => __("Half Hour", "alternc", true)),
         );
     }
 
@@ -69,7 +69,7 @@ class m_cron {
      */
     function hook_menu() {
         $obj = array(
-            'title' => _("Scheduled tasks"),
+            'title' => __("Scheduled tasks", "alternc", true),
             'link' => 'cron.php',
             'pos' => 120,
         );
@@ -126,7 +126,7 @@ class m_cron {
 
 
         if (filter_var($url, FILTER_VALIDATE_URL) === false) {
-            $msg->raise("ERROR", "cron", _("URL not valid"));
+            $msg->raise("ERROR", "cron", __("URL not valid", "alternc", true));
             return false;
         }
         $url = urlencode($url);
@@ -138,7 +138,7 @@ class m_cron {
 
         //@todo remove checkmail cf functions.php
         if (!empty($email) && !checkmail($email) == 0) {
-            $msg->raise("ERROR", "cron", _("Email address is not valid"));
+            $msg->raise("ERROR", "cron", __("Email address is not valid", "alternc", true));
             return false;
         }
         $email = urlencode($email);
@@ -149,7 +149,7 @@ class m_cron {
         if (is_null($id)) { // if a new insert, quotacheck
             $q = $quota->getquota("cron");
             if ($q["u"] >= $q["t"]) {
-                $msg->raise("ERROR", "cron", _("You quota of cron entries is over. You cannot create more cron entries"));
+                $msg->raise("ERROR", "cron", __("You quota of cron entries is over. You cannot create more cron entries", "alternc", true));
                 return false;
             }
         } else { // if not a new insert, check the $cuid
@@ -158,7 +158,7 @@ class m_cron {
                 return "false";
             } // return false if pb
             if ($db->f('uid') != $cuid) {
-                $msg->raise("ERROR", "cron", _("Identity problem"));
+                $msg->raise("ERROR", "cron", __("Identity problem", "alternc", true));
                 return false;
             }
         }
@@ -192,7 +192,7 @@ class m_cron {
     function hook_quota_get() {
         global $cuid, $db, $msg;
         $msg->debug("cron", "alternc_get_quota");
-        $q = Array("name" => "cron", "description" => _("Scheduled tasks"), "used" => 0);
+        $q = Array("name" => "cron", "description" => __("Scheduled tasks", "alternc", true), "used" => 0);
         $db->query("select count(*) as cnt from cron where uid = ? ;", array($cuid));
         if ($db->next_record()) {
             $q['used'] = $db->f('cnt');

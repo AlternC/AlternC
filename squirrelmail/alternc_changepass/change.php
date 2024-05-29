@@ -8,7 +8,7 @@ if (!defined("ALTERNC_CHANGEPASS_LOC")) {
 
 bindtextdomain("alternc", ALTERNC_CHANGEPASS_LOC."/bureau/locales");
 if (!function_exists("__")) {
-  function __($str) { echo _($str); } 
+  function __($str) { echo __($str, "alternc", true); } 
 }
 
   /* ----------------------------------------------------------------- */
@@ -63,29 +63,29 @@ $errstr="";
 
 if ($_POST['acp_oldpass'] && $_POST['acp_newpass'] && $_POST['acp_verify']) {
   if ($_POST['acp_newpass']!=$_POST['acp_verify']) {
-    $errstr=_("Your new passwords are differents, pleasy try again.");
+    $errstr=__("Your new passwords are differents, pleasy try again.", "alternc", true);
   } else {
     // Check the old password
     $r=mysql_query("SELECT a.password, a.id FROM address a,domaines d WHERE a.address='".addslashes($login)."' AND a.domain_id=d.id AND d.domaine='".addslashes($domain)."';");
     echo mysql_error();
     if (!($c=mysql_fetch_array($r))) {
-      $errstr=_("Your account has not been found, please try again later or ask an administrator.");
+      $errstr=__("Your account has not been found, please try again later or ask an administrator.", "alternc", true);
     } else {
       if ($c["password"]!=_md5cr($_POST['acp_oldpass'],$c["password"])) {
-	$errstr=_("Your current password is incorrect, please try again.");
+	$errstr=__("Your current password is incorrect, please try again.", "alternc", true);
       } else {
 	// FIXME DO Check the password policy : 
 	/*
 	if (is_callable(array($admin,"checkPolicy"))  && 
 	    !$admin->checkPolicy("pop",$username,$_POST['acp_newpass'])) {
-	  $errstr=_("This password is not strong enough for your policy, set a stronger password or call your administrator");
+	  $errstr=__("This password is not strong enough for your policy, set a stronger password or call your administrator", "alternc", true);
 	} else {
 	*/
 	  // ok, let's change the password
 	  $acp_newpass=$_POST['acp_newpass'];
 	  $newp=_md5cr($acp_newpass);
 	  mysql_query("UPDATE address SET password='".addslashes($newp)."' WHERE id=".$c["id"]." ;");
-	  $errstr=_("Your password has been successfully changed. Don't forget to change it in your mail software if you are using one (Outlook, Mozilla, Thunderbird, Eudora ...)");
+	  $errstr=__("Your password has been successfully changed. Don't forget to change it in your mail software if you are using one (Outlook, Mozilla, Thunderbird, Eudora ..., "alternc", true)");
 	  
 	  // Write new cookies for the password
 	  $onetimepad = OneTimePadCreate(strlen($acp_newpass));

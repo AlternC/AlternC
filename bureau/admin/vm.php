@@ -75,10 +75,10 @@ echo $msg->msg_html_all();
 <?php
    } else {
  echo "<table class='tedit'>";
- echo "<tr><th>"._("Hostname")."</th><td>".$infos['hostname']."</td></tr>";
- echo "<tr><th>"._("Start time")."</th><td>".date('Y-m-d H:i:s',$infos['starttime'])."</td></tr>";
- echo "<tr><th>"._("SSH Fingerprint")."</th><td style=\"font-family: Courier, fixed;\">".implode('<br />',$infos['ssh-keys'])."</td></tr>";
- echo "<tr><th>"._("Useful command")."</th><td><pre>";
+ echo "<tr><th>".__("Hostname", "alternc", true)."</th><td>".$infos['hostname']."</td></tr>";
+ echo "<tr><th>".__("Start time", "alternc", true)."</th><td>".date('Y-m-d H:i:s',$infos['starttime'])."</td></tr>";
+ echo "<tr><th>".__("SSH Fingerprint", "alternc", true)."</th><td style=\"font-family: Courier, fixed;\">".implode('<br />',$infos['ssh-keys'])."</td></tr>";
+ echo "<tr><th>".__("Useful command", "alternc", true)."</th><td><pre>";
    echo "ssh ".$mem->user['login']."@".$infos['hostname']."\n";
    echo "rsync ".$mem->user['login']."@".$infos['hostname']."\n";
  echo "</pre></td></tr>";

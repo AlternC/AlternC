@@ -29,7 +29,7 @@ $userslist = $piwik->users_list();
 $quotapiwik = $quota->getquota('piwik');
 
 if (!($quotapiwik['t'] > 0 && count($userslist) < 3)) {
-	$msg->raise("ERROR", "piwik", _("You cannot add any new Piwik account, your quota is over.")." ("._("Max. 3 accounts").")");
+	$msg->raise("ERROR", "piwik", __("You cannot add any new Piwik account, your quota is over.", "alternc", true)." (".__("Max. 3 accounts", "alternc", true).")");
 }
 
 $fields = array (
@@ -39,7 +39,7 @@ $fields = array (
 getFields($fields);
 
 if ($piwik->user_add($account_name, $account_mail) ) {
-  $msg->raise("INFO", "piwik", _('Successfully added piwik account'));
+  $msg->raise("INFO", "piwik", __('Successfully added piwik account', "alternc", true));
 }
 include_once("piwik_userlist.php");
 ?>

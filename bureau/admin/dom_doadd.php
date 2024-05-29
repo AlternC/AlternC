@@ -40,7 +40,7 @@ if (!$dom->add_domain($newdomain,$dns,0,0,$newisslave,$slavedom)) {
 	include("dom_add.php");
 	exit();
 } else
-	$msg->raise("INFO", "dom", _("Your new domain %s has been successfully installed"),$newdomain);
+	$msg->raise("INFO", "dom", __("Your new domain %s has been successfully installed", "alternc", true),$newdomain);
 
 $dom->unlock();
 
@@ -55,7 +55,7 @@ echo $msg->msg_html_all();
 <br />
 <?php
 	if (is_array($dom->dns)) {
-		echo "<br />"._("Whois result on the domain")." : <pre>";
+		echo "<br />".__("Whois result on the domain", "alternc", true)." : <pre>";
 		reset($dom->dns);
 		while (list($key,$val)=each($dom->dns)) {
 			echo "nameserver: $val\n";

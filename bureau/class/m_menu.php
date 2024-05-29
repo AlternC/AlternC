@@ -108,26 +108,26 @@ class m_menu {
         $m = array(
             'home' =>
             array(
-                'title' => _("Home / Information"),
+                'title' => __("Home / Information", "alternc", true),
                 'link' => 'main.php',
                 'pos' => 0,
             ),
             'logout' =>
             array(
-                'title' => _("Logout"),
+                'title' => __("Logout", "alternc", true),
                 'link' => 'mem_logout.php',
                 'pos' => 170,
             ),
             'help' =>
             array(
-                'title' => _("Online help"),
+                'title' => __("Online help", "alternc", true),
                 'target' => 'help',
                 'link' => $help_baseurl,
                 'pos' => 140,
             ),
             'lang' =>
             array(
-                'title' => _("Languages"),
+                'title' => __("Languages", "alternc", true),
                 'visibility' => false,
                 'link' => 'toggle',
                 'links' => array(),

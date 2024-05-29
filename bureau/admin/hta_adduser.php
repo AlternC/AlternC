@@ -33,7 +33,7 @@ $fields = array (
 getFields($fields);
 
 ?>
-<h3><?php printf(_("Adding a username in %s"),$dir); ?></h3>
+<h3><?php printf(__("Adding a username in %s", "alternc", true),$dir); ?></h3>
 <?php
 echo $msg->msg_html_all();
 

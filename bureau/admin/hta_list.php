@@ -38,7 +38,7 @@ if ($r=$hta->ListDir()) {
 echo $msg->msg_html_all();
 
 if (!is_array($r)) {
-  echo "<p><span class=\"ina\"><a href=\"hta_add.php\">"._("Protect a folder")."</a></span><br />";
+  echo "<p><span class=\"ina\"><a href=\"hta_add.php\">".__("Protect a folder", "alternc", true)."</a></span><br />";
   $mem->show_help("hta_list");
   echo "</p>";
   include_once("foot.php");

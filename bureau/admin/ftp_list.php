@@ -73,10 +73,10 @@ while (list($key,$val)=each($r)) { ?>
 
 		<td><a href='ftp_switch_enable.php?id=<?php eue($val['id']); echo '&amp;status='.( ($val['enabled'])?'0':'1' ) ;?>' onClick='return confirm("<?php __("Are you sure you want to change his status?"); ?>");'><?php 
 if ( $val['enabled']) {
-  echo "<img src='images/check_ok.png' alt=\""._("Enabled")."\"/>";
+  echo "<img src='images/check_ok.png' alt=\"".__("Enabled", "alternc", true)."\"/>";
   echo "<span style='display:none;'>ENABLED</span>"; // for tablesorter
 } else {
-  echo "<img src='images/check_no.png' alt=\""._("Disabled")."\"/>";
+  echo "<img src='images/check_no.png' alt=\"".__("Disabled", "alternc", true)."\"/>";
   echo "<span style='display:none;'>DISABLED</span>"; // for tablesorter
 }
 
@@ -86,7 +86,7 @@ if ( $val['enabled']) {
                 </td>
 		<td>
 <a href="bro_main.php?R=<?php eue(str_replace(getuserpath(),'', $val["dir"])); ?>"><code><?php ehe(substr($val["dir"],strlen(getuserpath()) )); ?></code></a>
-                  <?php if ( ! file_exists($val['dir'])) { echo " <span class=\"alerte\">"._("Directory not found")."</span>"; } ?>
+                  <?php if ( ! file_exists($val['dir'])) { echo " <span class=\"alerte\">".__("Directory not found", "alternc", true)."</span>"; } ?>
                 </td>
 	</tr>
 <?php
@@ -104,9 +104,9 @@ if ( $val['enabled']) {
 <?php __("Here are some configuration information you will need to configure your FTP application.");?>
 
 <ul>
-  <li><?php echo '<b>'._("Server:").'</b> '.$ftp->srv_proftpd; ?></li>
-  <li><?php echo '<b>'._("FTP mode for data transfer:").'</b> '._("passive");?></li>
-  <li><?php echo '<b>'._("User/password:").'</b> '._("the one you specified when you created the account. You can edit them in the panel.");?></li>
+  <li><?php echo '<b>'.__("Server:", "alternc", true).'</b> '.$ftp->srv_proftpd; ?></li>
+  <li><?php echo '<b>'.__("FTP mode for data transfer:", "alternc", true).'</b> '.__("passive", "alternc", true);?></li>
+  <li><?php echo '<b>'.__("User/password:", "alternc", true).'</b> '.__("the one you specified when you created the account. You can edit them in the panel.", "alternc", true);?></li>
 </ul>
 
 <?php

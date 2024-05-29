@@ -27,7 +27,7 @@ require_once("../class/config.php");
 include_once("head.php");
 
 if (!$admin->enabled) {
-	$msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
+	$msg->raise("ERROR", "admin", __("This page is restricted to authorized staff", "alternc", true));
 	echo $msg->msg_html_all();
 	exit();
 }
@@ -40,7 +40,7 @@ getFields($fields);
 $subadmin=variable_get("subadmin_restriction");
 
 if ($subadmin==0 && !$admin->checkcreator($uid)) {
-	$msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
+	$msg->raise("ERROR", "admin", __("This page is restricted to authorized staff", "alternc", true));
 	echo $msg->msg_html_all();
 	exit();
 }
@@ -98,7 +98,7 @@ echo $msg->msg_html_all();
 	<td><textarea name="notes" id="notes" class="int" cols="32" rows="5"><?php ehe($r['notes']); ?></textarea></td>
 </tr>
 <tr>
-	<th><label for="nom"><?php echo _("Surname")."</label> / <label for=\"prenom\">"._("First Name"); ?></label></th>
+	<th><label for="nom"><?php echo __("Surname", "alternc", true)."</label> / <label for=\"prenom\">".__("First Name", "alternc", true); ?></label></th>
 	<td><input type="text" class="int" name="nom" id="nom" value="<?php ehe($r["nom"]); ?>" size="20" maxlength="128" />&nbsp;/&nbsp;<input type="text" class="int" name="prenom" id="prenom" value="<?php ehe($r["prenom"]); ?>" size="20" maxlength="128" /></td>
 </tr>
 <tr>
@@ -133,7 +133,7 @@ echo $msg->msg_html_all();
 <table border="1" cellspacing="0" cellpadding="4" class="tedit">
 <tr>
 	<th><label for="periods"><?php __("Renew for") ?></label></th>
-	<td><input name="periods" id="periods" type="text" size="2" value="1"/><?php echo ' ' . _('period(s)') ?></td>
+	<td><input name="periods" id="periods" type="text" size="2" value="1"/><?php echo ' ' . __('period(s, "alternc", true)') ?></td>
 </tr>
 <tr>
 	<td colspan="2" align="center"><input type="submit" class="inb" name="submit" value="<?php __("Renew"); ?>" />
@@ -165,7 +165,7 @@ if ($r["su"]) {
 <p><?php
 	}
 if ($c=$admin->get($r["creator"])) {
-  printf(_("Account created by %s"),$c["login"]);
+  printf(__("Account created by %s", "alternc", true),$c["login"]);
  }
 ?>
 </p>

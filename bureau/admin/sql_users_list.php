@@ -69,7 +69,7 @@ for($i=0;$i<count($r);$i++) {
 
 <?php
   } else {
-   $msg->raise("INFO", "mysql", _("You have no sql user at the moment."));
+   $msg->raise("INFO", "mysql", __("You have no sql user at the moment.", "alternc", true));
    echo $msg->msg_html_all();
   }
 ?>

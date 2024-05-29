@@ -31,7 +31,7 @@ $fields = array (
 getFields($fields);
 
 if ($cle=$mem->ChangeMail1($newmail)) {
-	$msg->raise("INFO", "mem", _("The mail was successfully changed"));
+	$msg->raise("INFO", "mem", __("The mail was successfully changed", "alternc", true));
 }
 
 include_once("head.php");
@@ -40,12 +40,12 @@ include_once("head.php");
 <?php
 echo $msg->msg_html_all();
 if ($msg->has_msgs("ERROR")) {
-	echo "<p><span class='ina'><a href='mem_param.php'>"._("Click here to continue")."</a></span></p>";
+	echo "<p><span class='ina'><a href='mem_param.php'>".__("Click here to continue", "alternc", true)."</a></span></p>";
 	include_once("foot.php");
 	exit();
 }
 
-printf(_("help_mem_chgmail %s"),$newmail);
+printf(__("help_mem_chgmail %s", "alternc", true),$newmail);
 ?>
 <p class="code"><?php echo $cle; ?></p>
 <p><span class="ina"><a href="mem_param.php"><?php __("Click here to continue"); ?></a></span></p>

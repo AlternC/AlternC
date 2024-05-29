@@ -64,7 +64,7 @@ if ( empty($logo) ||  ! $logo ) {
     <?php
     if (isset($_GET['authip_token'])) $authip_token=$_GET['authip_token'];
     if (variable_get('https_warning', true, 'warn users to switch to HTTPS') && !isset($_SERVER['HTTPS'])) {
-      echo '<div class="unsecure"><strong>' . sprintf(_('WARNING: you are trying to access the control panel insecurely, click <a href="https://%s">here</a> to go to secure mode'), $_SERVER["HTTP_HOST"]) . '</strong></div>';
+      echo '<div class="unsecure"><strong>' . sprintf(__('WARNING: you are trying to access the control panel insecurely, click <a href="https://%s">here</a> to go to secure mode', "alternc", true), $_SERVER["HTTP_HOST"]) . '</strong></div>';
     }
     ?>
     <div class="block_list">
@@ -78,8 +78,8 @@ if ( empty($logo) ||  ! $logo ) {
 	    <form action="login.php" method="post" name="loginform" target="_top">
       <?php csrf_get(); ?>
             <div class="menu-content">
-                <div><label for="username"><?php echo _("Username"); ?></label></td><td><input type="text" class="int" name="username" id="username" value="" maxlength="128" autocapitalize="none" /></div>
-                <div><label for="password"><?php echo _("Password"); ?></label></td><td><input type="password" class="int" name="password" id="password" value="" maxlength="128" /></div>
+                <div><label for="username"><?php echo __("Username", "alternc", true); ?></label></td><td><input type="text" class="int" name="username" id="username" value="" maxlength="128" autocapitalize="none" /></div>
+                <div><label for="password"><?php echo __("Password", "alternc", true); ?></label></td><td><input type="password" class="int" name="password" id="password" value="" maxlength="128" /></div>
                 <div class="submit"><input type="submit" class="inb" name="submit" onclick='return logmein();' value="<?php __("Enter"); ?>" /><input type="hidden" id="restrictip" name="restrictip" value="0" />
                 <input type="hidden" id="authip_token" name="authip_token" value="<?php ehe( (empty($authip_token)?'':$authip_token) ) ?>" /></div>
             </div>
@@ -87,11 +87,11 @@ if ( empty($logo) ||  ! $logo ) {
 	</div>
       </div>
       <div class="block_login_page">
-        <a href="request_reset.php"><?php echo _('Request new password'); ?></a>
+        <a href="request_reset.php"><?php echo __('Request new password', "alternc", true); ?></a>
         <br />
         <?php __("You must accept the session cookie to log-in"); ?>
         <br />
-        <?php echo _("If you want to use a different language, choose it in the list below"); ?>
+        <?php echo __("If you want to use a different language, choose it in the list below", "alternc", true); ?>
         <br />
               <?php 
             foreach($locales as $l) {

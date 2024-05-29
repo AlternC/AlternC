@@ -58,7 +58,7 @@ class m_mailman {
     $err->log("mailman","enum_ml");
 ## when calling an important function, log it that way ##
 ## when raising an error, use the following syntax ##
-    $err->raise("classname",_("text in english"));
+    $err->raise("classname",__("text in english", "alternc", true));
   }
 }
 /* at the end of a php-only file, we don't put a ?> */

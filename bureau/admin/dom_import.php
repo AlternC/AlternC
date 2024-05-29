@@ -42,7 +42,7 @@ $domain=trim($domain);
 
 <?php
 if ( !empty($zone) && empty($domain) ) {
-  $msg->raise("ALERT", "dom", _("The domain field seems to be empty"));
+  $msg->raise("ALERT", "dom", __("The domain field seems to be empty", "alternc", true));
 }
 
 echo $msg->msg_html_all();
@@ -52,9 +52,9 @@ echo $msg->msg_html_all();
 if ( !empty($domain) ) {
   __("Here is my proposition. Modify your zone until my proposition seems good to you"); ?>
   <table class="tlist">
-  <tr><th colspan=3><h2><?php printf(_("Working on %s"),$domain); ?></h2></th></tr>
+  <tr><th colspan=3><h2><?php printf(__("Working on %s", "alternc", true),$domain); ?></h2></th></tr>
   <tr>
-    <th width="50%"><?php __("Zone"); ?></th><th width="50%"><?php __("Generated entry"); ?></th><?php if ($save) {echo "<th>"._("Result")."</th>"; } ?>
+    <th width="50%"><?php __("Zone"); ?></th><th width="50%"><?php __("Generated entry"); ?></th><?php if ($save) {echo "<th>".__("Result", "alternc", true)."</th>"; } ?>
   </tr>
   <tbody>
   <?php foreach ($dom->import_manual_dns_zone($zone, $domain, $detect_redirect, $save) as $val) {  
@@ -67,7 +67,7 @@ if ( !empty($domain) ) {
       echo "tab-".$val['status'];
     }
     echo "'><td>".$val['entry_old']."</td><td>".$val['comment']."</td>";
-    if ($save) { echo "<td>".($val['did_it']==1?_("OK"):_("ERROR"))."</td>"; }
+    if ($save) { echo "<td>".($val['did_it']==1?__("OK", "alternc", true):__("ERROR", "alternc", true))."</td>"; }
     echo "</tr>\n";
   } // foreach
   ?>
@@ -80,7 +80,7 @@ echo "<hr/>";
 
 
 if ($save) {
-  echo '<span class="inb"><a href="dom_edit.php?domain='.urlencode($domain).'" >'._("Click here to continue").'</a></span>';
+  echo '<span class="inb"><a href="dom_edit.php?domain='.urlencode($domain).'" >'.__("Click here to continue", "alternc", true).'</a></span>';
 } else {
 ?>
 

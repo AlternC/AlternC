@@ -45,25 +45,25 @@ if (!empty($s_protocol)) {
   getFields($fields);
 
   if (! $authip->ip_affected_save($s_ipsub, $s_protocol, $$val) ) {
-    $msg->raise("ERROR", "ftp", _("Error during ip_affected_save"));
+    $msg->raise("ERROR", "ftp", __("Error during ip_affected_save", "alternc", true));
   }
 }
 
 if (!empty($delete_affected_id)) {
   if (! $authip->ip_affected_delete($delete_affected_id)) {
-    $msg->raise("ERROR", "ftp", _("Error during deletion"));
+    $msg->raise("ERROR", "ftp", __("Error during deletion", "alternc", true));
   }
 }
 
 if (!empty($delete_id)) {
   if (! $authip->ip_delete($delete_id)) {
-    $msg->raise("ERROR", "ftp", _("Error during deletion"));
+    $msg->raise("ERROR", "ftp", __("Error during deletion", "alternc", true));
   }
 }
 
 if (!empty($ipsub)) {
   if (! $authip->ip_save($id, $ipsub, $infos)) {
-    $msg->raise("ERROR", "ftp", _("Error during recording"));
+    $msg->raise("ERROR", "ftp", __("Error during recording", "alternc", true));
   }
 }
 
@@ -98,10 +98,10 @@ echo $msg->msg_html_all();
     echo "</span></td>";
     echo "<td>".@$ac[$ll['protocol']]['name'];
     if (isset($ac[$ll['protocol']]['values'][$ll['parameters']]) && $ac[$ll['protocol']]['values'][$ll['parameters']]) {
-      echo " "._("for")." ".$ac[$ll['protocol']]['values'][$ll['parameters']];
+      echo " ".__("for", "alternc", true)." ".$ac[$ll['protocol']]['values'][$ll['parameters']];
     }
     echo "</td>";
-    echo '<td><div class="ina delete"><a href="ip_main.php?delete_affected_id='.urlencode($ll["id"]).'">'._("Delete").'</a></div></td>';
+    echo '<td><div class="ina delete"><a href="ip_main.php?delete_affected_id='.urlencode($ll["id"]).'">'.__("Delete", "alternc", true).'</a></div></td>';
     echo "</tr>";
   }
 ?>
@@ -174,18 +174,18 @@ echo $msg->msg_html_all();
 foreach($list_ip as $i) {
   if (checkip($i['ip'])) {
     if ($i['subnet']==32) {
-      $txt=_("Address IPv4");
+      $txt=__("Address IPv4", "alternc", true);
     } else {
-      $txt=_("Subnet IPv4");
+      $txt=__("Subnet IPv4", "alternc", true);
     }
   } elseif (checkipv6($i['ip'])) {
     if ($i['subnet']==128) {
-      $txt=_("Address IPv6");
+      $txt=__("Address IPv6", "alternc", true);
     } else {
-      $txt=_("Subnet IPv6");
+      $txt=__("Subnet IPv6", "alternc", true);
     }
   } else {
-    $txt=_("Error with this IP");
+    $txt=__("Error with this IP", "alternc", true);
   }
   echo "<tr class='lst' ><td>{$i['infos']}</td><td>{$i['ip_human']}</td><td>$txt</td>";
   ?>

@@ -42,7 +42,7 @@ if (!isset($dns)) $dns="1";
 <hr />
 <?php
 if (!$quota->cancreate("dom")) {
-  $msg->raise("ALERT", "dom", _("You cannot add any new domain, your quota is over.")." "._("Contact your administrator for more information."));
+  $msg->raise("ALERT", "dom", __("You cannot add any new domain, your quota is over.", "alternc", true)." ".__("Contact your administrator for more information.", "alternc", true));
   echo $msg->msg_html_all();
   exit();
 }
@@ -89,7 +89,7 @@ if ($q["u"]>0 && count($dl)) {
 </form>
 <?php
 	if (is_array($dom->dns)) {
-		echo "<br />"._("Whois result on the domain")." : <pre>";
+		echo "<br />".__("Whois result on the domain", "alternc", true)." : <pre>";
 		reset($dom->dns);
 		while (list($key,$val)=each($dom->dns)) {
 			echo "nameserver: $val\n";

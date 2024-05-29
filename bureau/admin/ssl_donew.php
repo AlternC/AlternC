@@ -35,7 +35,7 @@ if (!isset($is_include)) {
 }
 
 if (!$fqdn && !$fqdnt) {
-    $error = _("Please enter a proper domain name");
+    $error = __("Please enter a proper domain name", "alternc", true);
     require_once("ssl_new.php");
     exit();
 }

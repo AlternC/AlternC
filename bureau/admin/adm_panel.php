@@ -26,7 +26,7 @@
 require_once("../class/config.php");
 
 if (!$admin->enabled) {
-	$msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
+	$msg->raise("ERROR", "admin", __("This page is restricted to authorized staff", "alternc", true));
 	echo $msg->msg_html_all();
 	exit();
 }
@@ -87,7 +87,7 @@ closedir($d);
     <?php if (panel_islocked()) { ?>
       <a href="adm_lockpanel.php?action=unlock"><?php __("Click here to unlock the panel and allow user to login.");?></a>
     <?php } else { ?>
-      <a href="adm_lockpanel.php?action=lock" onClick='return confirm("<?php echo addslashes(_("Are you sure you want to kick everyone?"));?>");' ><?php __("Click here to lock the panel and force logout of all the user.");?></a>
+      <a href="adm_lockpanel.php?action=lock" onClick='return confirm("<?php echo addslashes(__("Are you sure you want to kick everyone?", "alternc", true));?>");' ><?php __("Click here to lock the panel and force logout of all the user.");?></a>
     <?php } ?>
   </p>
 <?php } //cuid 2000 ?>

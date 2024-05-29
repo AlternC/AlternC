@@ -33,7 +33,7 @@ $fields = array (
 getFields($fields);
 
 if ($mem->ChangeMail2($cookie,$cle,$usr)) {
-	$msg->raise("INFO", "mem", _("The mailbox has been successfully changed."));
+	$msg->raise("INFO", "mem", __("The mailbox has been successfully changed.", "alternc", true));
 }
 
 include_once("head.php");
@@ -43,7 +43,7 @@ include_once("head.php");
 <?php
 echo $msg->msg_html_all();
 
-echo "<p><span class='ina'><a href='mem_param.php'>"._("Click here to continue")."</a></span></p>";
+echo "<p><span class='ina'><a href='mem_param.php'>".__("Click here to continue", "alternc", true)."</a></span></p>";
 
 include_once("foot.php");
 ?>

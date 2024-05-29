@@ -45,7 +45,7 @@ if (isset($_GET["msg"])) {
     $msg->raise("INFO","dom",$_GET["msg"]);
 }
 ?>
-<h3><i class="fas fa-globe-africa"></i> <?php printf(_("Manage %s"),$domain); ?></h3>
+<h3><i class="fas fa-globe-africa"></i> <?php printf(__("Manage %s", "alternc", true),$domain); ?></h3>
 <?php
 echo $msg->msg_html_all();
 ?>
@@ -94,7 +94,7 @@ if ($r['dns_action']=='UPDATE') {?>
   <p class="alert alert-info"><?php __("This domain have some DNS change pending. Please wait."); ?></p>
 <?php
 } elseif ($r['dns_action']=='DELETE') {?>
-  <p class="alert alert-warning"><?php printf(_("You requested deletion of domain %s."), $domain);?></p>
+  <p class="alert alert-warning"><?php printf(__("You requested deletion of domain %s.", "alternc", true), $domain);?></p>
 <?php
 /*
   // Link hidden as long as the del_domain_cancel function is not complete
@@ -107,7 +107,7 @@ if ($r['dns_action']=='UPDATE') {?>
 }
 
 if (! empty($r['dns_result']) && $r['dns_result'] != '0') {
-  if ($r['dns_result'] == 1) $r['dns_result'] =_("DNS zone is locked, changes will be ignored");
+  if ($r['dns_result'] == 1) $r['dns_result'] =__("DNS zone is locked, changes will be ignored", "alternc", true);
   echo '<p class="alert alert-warning">'; __($r['dns_result']); echo '</p>';
 }
 
@@ -215,7 +215,7 @@ if (!$r["sub"][$i]["only_dns"]) {
   $iidir=$r["sub"][$i]["dest"];
   if ($iidir=='') $iidir='/';
   echo '<br /><a href="bro_main.php?R='.urlencode($iidir).'">'.htmlspecialchars($iidir).'</a>';
-  if ( ! file_exists($bro->convertabsolute($iidir,0))) { echo " <span class=\"alerte\">"._("Directory not found")."</span>"; }
+  if ( ! file_exists($bro->convertabsolute($iidir,0))) { echo " <span class=\"alerte\">".__("Directory not found", "alternc", true)."</span>"; }
 } else {
   if ($r["sub"][$i]['type']) echo "<br />".htmlspecialchars($r["sub"][$i]["dest"]);
 }
@@ -275,7 +275,7 @@ foreach ($problems as $pr => $lm) { // $problems can be empty but can't be null/
 
 
 <div id="tabsdom-addsub">
-<h3><?php printf(_("Add a subdomain to %s"),$domain); ?></h3>
+<h3><?php printf(__("Add a subdomain to %s", "alternc", true),$domain); ?></h3>
 <?php
 $isedit=false;
 require_once('dom_edit.inc.php');
@@ -361,11 +361,11 @@ if (!$r['noerase']) {
 
 <div id="tabsdom-delete">
   <h3><?php __("Domain removal"); ?></h3>
-  <?php printf(_("If you want to destroy the domain %s, click on the button below. Warning: this also deletes all FTP accounts, email, mailing lists associated with the domain and subdomains."),$domain); ?><br />
+  <?php printf(__("If you want to destroy the domain %s, click on the button below. Warning: this also deletes all FTP accounts, email, mailing lists associated with the domain and subdomains.", "alternc", true),$domain); ?><br />
   <form action="dom_dodel.php?domain=<?php echo urlencode($domain) ?>" method="post">
  <?php csrf_get(); ?>
     <p>
-      <input type="submit" class="inb delete" name="detruire" value="<?php printf(_("Delete %s from this server"),$domain); ?>" />
+      <input type="submit" class="inb delete" name="detruire" value="<?php printf(__("Delete %s from this server", "alternc", true),$domain); ?>" />
     </p>
   </form>
 </div> <!-- tabsdom-delete -->

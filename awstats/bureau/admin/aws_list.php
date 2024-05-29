@@ -27,13 +27,13 @@ include_once("head.php");
 
 $nosta=false;
 if (!$r=$aws->get_list()) {
-	$msg->raise('Info', "aws", _("No statistics currently defined"));
+	$msg->raise('Info', "aws", __("No statistics currently defined", "alternc", true));
 	$nosta=true;
 }
 
 $create=true;
 if (!$quota->cancreate("aws")) {
-	$msg->raise('Info', "aws", _("Your stat quota is over..."));
+	$msg->raise('Info', "aws", __("Your stat quota is over...", "alternc", true));
 	$create=false;
 }
 ?>

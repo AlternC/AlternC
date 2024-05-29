@@ -33,13 +33,13 @@ include_once("head.php");
 <?php
 $q=$quota->getquota();
 if (!is_array($q) || empty($q) ) {
-  $msg->raise("ALERT", "quota", _("No quotas for this account, or quotas currently unavailable!"));
+  $msg->raise("ALERT", "quota", __("No quotas for this account, or quotas currently unavailable!", "alternc", true));
   include_once("main.php");
   exit();
 } 
 
 echo "<table cellspacing=\"0\" cellpadding=\"4\" class='tlist'>";
-echo "<tr><th>"._("Quota")."</th><th>"._("Used")."</th><th>"._("Total")."</th><th>"._("Size on disk")."</th></tr>";
+echo "<tr><th>".__("Quota", "alternc", true)."</th><th>".__("Used", "alternc", true)."</th><th>".__("Total", "alternc", true)."</th><th>".__("Size on disk", "alternc", true)."</th></tr>";
 $qlist=$quota->qlist();
 reset($qlist);
 $totalsize = 0;
@@ -48,7 +48,7 @@ while (list($key,$val)=each($qlist)) {
    echo "<tr class=\"lst\">";
    echo "<td>";
   if ($q[$key]["u"] >= $q[$key]["t"]) echo "<font class=\"over\">";
-   echo _($val);
+   echo __($val, "alternc", true);
   if ($q[$key]["u"] >= $q[$key]["t"]) echo "</font>";
 
   if (($key == 'web')||(isset($q[$key]['type'])&&($q[$key]['type']=='size'))) {
@@ -65,7 +65,7 @@ while (list($key,$val)=each($qlist)) {
   }
   echo "</tr>";
 }
-echo "<tr><td colspan='2'></td><td align='right'><b>"._("Total").":&nbsp;</b></td><td><b>".format_size($totalsize * 1024)." / ".format_size($q['web']["t"] * 1024)."</b></td></tr>";
+echo "<tr><td colspan='2'></td><td align='right'><b>".__("Total", "alternc", true).":&nbsp;</b></td><td><b>".format_size($totalsize * 1024)." / ".format_size($q['web']["t"] * 1024)."</b></td></tr>";
 echo "</table>";
 
 include_once("foot.php"); 

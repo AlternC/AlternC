@@ -64,14 +64,14 @@ if (isset($saveret) && $saveret) {
     }*/
     
     if ($bro->save($editfile,$R,$texte)) {
-        $msg->raise("INFO", "bro", _("Your file %s has been saved")." (".format_date(_('%3$d-%2$d-%1$d %4$d:%5$d'),date("Y-m-d H:i:s")).")", $editfile);
+        $msg->raise("INFO", "bro", __("Your file %s has been saved", "alternc", true)." (".format_date(__('%3$d-%2$d-%1$d %4$d:%5$d', "alternc", true),date("Y-m-d H:i:s")).")", $editfile);
         include("bro_main.php");
         exit();
     }
 }
 if (isset($save) && $save) {
   if ($bro->save($editfile,$R,$texte)) {
-    $msg->raise("INFO", "bro", _("Your file %s has been saved")." (".format_date(_('%3$d-%2$d-%1$d %4$d:%5$d'),date("Y-m-d H:i:s")).")", $editfile);
+    $msg->raise("INFO", "bro", __("Your file %s has been saved", "alternc", true)." (".format_date(__('%3$d-%2$d-%1$d %4$d:%5$d', "alternc", true),date("Y-m-d H:i:s")).")", $editfile);
   }
 }
 
@@ -84,7 +84,7 @@ include_once("head.php");
 <?php
 echo $msg->msg_html_all();
 ?>
-<h3><?php echo _("File editing")." <code>".ehe($R,false)."/<b>".ehe($editfile,false)."</b></code><br />"; ?></h3>
+<h3><?php echo __("File editing", "alternc", true)." <code>".ehe($R,false)."/<b>".ehe($editfile,false)."</b></code><br />"; ?></h3>
 </p>
 
 <?php
@@ -108,7 +108,7 @@ echo "<pre class='prettyprint' id='file_content_view' >$content</pre>";
 <div id="tabsfile-edit">
 <textarea id='file_content_editor' class="int" style="font-family: <?php echo $p["editor_font"]; ?>; font-size: <?php echo $p["editor_size"]; ?>; width: 90%; height: 400px;" name="texte"><?php
   if (empty($content)) { 
-    $error=_("This file is empty");
+    $error=__("This file is empty", "alternc", true);
   } else {
     echo $content;  
   }

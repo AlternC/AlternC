@@ -116,7 +116,7 @@ class m_dom {
     function hook_menu() {
         global $quota;
         $obj = array(
-            'title' => _("Domains"),
+            'title' => __("Domains", "alternc", true),
             'link' => 'toggle',
             'pos' => 20,
             'links' => array(),
@@ -124,7 +124,7 @@ class m_dom {
 
         if ($quota->cancreate("dom")) {
             $obj['links'][] = array(
-                'txt' => _("Add a domain"),
+                'txt' => __("Add a domain", "alternc", true),
                 'url' => "dom_add.php",
             );
         }
@@ -211,7 +211,7 @@ class m_dom {
         global $msg;
         if ($save) {
             if (!$this->import_manual_dns_prep_zone($domain)) {
-                $msg->raise("ERROR", 'dom', _("Err: failed to prepare the zone"));
+                $msg->raise("ERROR", 'dom', __("Err: failed to prepare the zone", "alternc", true));
                 return false;
             }
         }
@@ -241,7 +241,7 @@ class m_dom {
 
         $domain = trim($domain);
         if (empty($domain)) {
-            $msg->raise("ERROR", "dom", _("Missing domain name"));
+            $msg->raise("ERROR", "dom", __("Missing domain name", "alternc", true));
             return false;
         }
 
@@ -551,7 +551,7 @@ class m_dom {
         global $msg, $db;
         // The name MUST contain only letter and digits, it's an identifier after all ...
         if (!preg_match("#^[a-z0-9]+$#", $name)) {
-            $msg->raise("ERROR", "dom", _("The name MUST contain only letter and digits"));
+            $msg->raise("ERROR", "dom", __("The name MUST contain only letter and digits", "alternc", true));
             return false;
         }
         $only_dns = intval($only_dns);
@@ -577,7 +577,7 @@ class m_dom {
         $jh = $this->get_sub_domain_all($sub_id);
         if ($status == 'ENABLE') { // check compatibility with existing sub_domains
             if (!$this->can_create_subdomain($jh['domain'], $jh['name'], $jh['type'], $sub_id)) {
-                $msg->raise("ERROR", "dom", _("The parameters for this subdomain and domain type are invalid. Please check for subdomain entries incompatibility"));
+                $msg->raise("ERROR", "dom", __("The parameters for this subdomain and domain type are invalid. Please check for subdomain entries incompatibility", "alternc", true));
                 return false;
             }
         }
@@ -693,49 +693,49 @@ class m_dom {
 
         // Locked ?
         if (!$domislocked) {
-            $msg->raise("ERROR", "dom", _("--- Program error --- No lock on the domains!"));
+            $msg->raise("ERROR", "dom", __("--- Program error --- No lock on the domains!", "alternc", true));
             return false;
         }
         // Verifie que le domaine est rfc-compliant
         $domain = strtolower($domain);
         $t = checkfqdn($domain);
         if ($t) {
-            $msg->raise("ERROR", "dom", _("The domain name is syntaxically incorrect"));
+            $msg->raise("ERROR", "dom", __("The domain name is syntaxically incorrect", "alternc", true));
             return false;
         }
         // Interdit les domaines clés (table forbidden_domains) sauf en cas FORCE
         $db->query("SELECT domain FROM forbidden_domains WHERE domain= ? ;", array($domain));
         if ($db->num_rows() && !$force) {
-            $msg->raise("ERROR", "dom", _("The requested domain is forbidden in this server, please contact the administrator"));
+            $msg->raise("ERROR", "dom", __("The requested domain is forbidden in this server, please contact the administrator", "alternc", true));
             return false;
         }
         if ($domain == $L_FQDN || $domain == "www.$L_FQDN") {
-            $msg->raise("ERROR", "dom", _("This domain is the server's domain! You cannot host it on your account!"));
+            $msg->raise("ERROR", "dom", __("This domain is the server's domain! You cannot host it on your account!", "alternc", true));
             return false;
         }
         $db->query("SELECT compte FROM domaines WHERE domaine= ?;", array($domain));
         if ($db->num_rows()) {
-            $msg->raise("ERROR", "dom", _("The domain already exist"));
+            $msg->raise("ERROR", "dom", __("The domain already exist", "alternc", true));
             return false;
         }
         $db->query("SELECT compte FROM `sub_domaines` WHERE sub != \"\" AND concat( sub, \".\", domaine )= ? OR domaine= ?;", array($domain, $domain));
         if ($db->num_rows()) {
-            $msg->raise("ERROR", "dom", _("The domain already exist"));
+            $msg->raise("ERROR", "dom", __("The domain already exist", "alternc", true));
             return false;
         }
         $this->dns = $this->whois($domain);
         if (!$force) {
             $v = checkhostallow($domain, $this->dns);
             if ($v == -1) {
-                $msg->raise("ERROR", "dom", _("The last member of the domain name is incorrect or cannot be hosted in that server"));
+                $msg->raise("ERROR", "dom", __("The last member of the domain name is incorrect or cannot be hosted in that server", "alternc", true));
                 return false;
             }
             if ($dns && $v == -2) {
-                $msg->raise("ALERT", "dom", _("The domain cannot be found in the whois database"));
+                $msg->raise("ALERT", "dom", __("The domain cannot be found in the whois database", "alternc", true));
                 return false;
             }
             if ($dns && $v == -3) {
-                $msg->raise("ALERT", "dom", _("The domain cannot be found in the whois database"));
+                $msg->raise("ALERT", "dom", __("The domain cannot be found in the whois database", "alternc", true));
                 return false;
             }
 
@@ -752,14 +752,14 @@ class m_dom {
             if (!$dns) {
                 $v = checkhostallow_nodns($domain);
                 if ($v) {
-                    $msg->raise("ERROR", "dom", _("The requested domain is forbidden in this server, please contact the administrator"));
+                    $msg->raise("ERROR", "dom", __("The requested domain is forbidden in this server, please contact the administrator", "alternc", true));
                     return false;
                 }
             }
         }
         // Check the quota :
         if (!$quota->cancreate("dom")) {
-            $msg->raise("ALERT", "dom", _("Your domain quota is over, you cannot create more domain names"));
+            $msg->raise("ALERT", "dom", __("Your domain quota is over, you cannot create more domain names", "alternc", true));
             return false;
         }
         if ($noerase) {
@@ -774,7 +774,7 @@ class m_dom {
         }
         $db->query("INSERT INTO domaines (compte,domaine,gesdns,gesmx,noerase,dns_action) VALUES (?, ?, ?, ?, ?, 'UPDATE');", array($cuid,$domain,$dns,$gesmx,$noerase));
         if (!($id = $db->lastid())) {
-            $msg->raise("ERROR", "dom", _("An unexpected error occured when creating the domain"));
+            $msg->raise("ERROR", "dom", __("An unexpected error occured when creating the domain", "alternc", true));
             return false;
         }
 
@@ -783,7 +783,7 @@ class m_dom {
             $db->query("SELECT domaine FROM domaines WHERE compte= ? AND domaine= ?;", array($cuid, $slavedom));
             $db->next_record();
             if (!$db->Record["domaine"]) {
-                $msg->raise("ERROR", "dom", _("Domain '%s' not found"), $slavedom);
+                $msg->raise("ERROR", "dom", __("Domain '%s' not found", "alternc", true), $slavedom);
                 $isslave = false;
             }
             // Point to the master domain : 
@@ -911,7 +911,7 @@ class m_dom {
         $msg->log("dom", "del_default_type");
 
         if (!$db->query("delete from default_subdomains where id= ?;", array($id))) {
-            $msg->raise("ERROR", "dom", _("Could not delete default type"));
+            $msg->raise("ERROR", "dom", __("Could not delete default type", "alternc", true));
             return false;
         }
 
@@ -937,7 +937,7 @@ class m_dom {
             $parent=substr($parent,strpos($parent,".")+1);
             $parent=trim($parent,".");
             if (!$parent) {
-                $msg->raise("ALERT", "dom", _("The domain has no parent. Check syntax"));
+                $msg->raise("ALERT", "dom", __("The domain has no parent. Check syntax", "alternc", true));
                 return false; // no . in this fqdn??
             }
             // ask the parent for its NS (no +trace)
@@ -1051,19 +1051,19 @@ class m_dom {
         $msg->debug("dom", "get_domain_all", $dom);
         // Locked ?
         if (!$domislocked) {
-            $msg->raise("ERROR", "dom", _("--- Program error --- No lock on the domains!"));
+            $msg->raise("ERROR", "dom", __("--- Program error --- No lock on the domains!", "alternc", true));
             return false;
         }
         $t = checkfqdn($dom);
         if ($t) {
-            $msg->raise("ERROR", "dom", _("The domain name is syntaxically incorrect"));
+            $msg->raise("ERROR", "dom", __("The domain name is syntaxically incorrect", "alternc", true));
             return false;
         }
         $r = array();
         $r["name"] = $dom;
         $db->query("SELECT * FROM domaines WHERE compte= ? AND domaine= ?;", array($cuid, $dom));
         if ($db->num_rows() == 0) {
-            $msg->raise("ERROR", "dom", sprintf(_("Domain '%s' not found"), $dom));
+            $msg->raise("ERROR", "dom", sprintf(__("Domain '%s' not found", "alternc", true), $dom));
             return false;
         }
         $db->next_record();
@@ -1113,12 +1113,12 @@ class m_dom {
         $msg->debug("dom", "get_sub_domain_all", $sub_domain_id);
         // Locked ?
         if (!$domislocked) {
-            $msg->raise("ERROR", "dom", _("--- Program error --- No lock on the domains!"));
+            $msg->raise("ERROR", "dom", __("--- Program error --- No lock on the domains!", "alternc", true));
             return false;
         }
         $db->query("select sd.*, dt.description as type_desc, dt.only_dns, dt.advanced from sub_domaines sd, domaines_type dt where compte= ? and sd.id= ?  and upper(dt.name)=upper(sd.type) ORDER BY dt.advanced, sd.sub;", array($cuid, $sub_domain_id));
         if ($db->num_rows() == 0) {
-            $msg->raise("ERROR", "dom", _("The sub-domain does not exist"));
+            $msg->raise("ERROR", "dom", __("The sub-domain does not exist", "alternc", true));
             return false;
         }
         $db->next_record();
@@ -1173,7 +1173,7 @@ class m_dom {
                 if (filter_var($value, FILTER_VALIDATE_URL)) {
                     return true;
                 } else {
-                    $msg->raise("ERROR", "dom", _("invalid url"));
+                    $msg->raise("ERROR", "dom", __("invalid url", "alternc", true));
                     return false;
                 }
             }
@@ -1183,7 +1183,7 @@ class m_dom {
                 $value = "/" . $value;
             }
             if (!checkuserpath($value)) {
-                $msg->raise("ERROR", "dom", _("The folder you entered is incorrect or does not exist"));
+                $msg->raise("ERROR", "dom", __("The folder you entered is incorrect or does not exist", "alternc", true));
                 return false;
             }
             return true;
@@ -1191,7 +1191,7 @@ class m_dom {
             if (checkip($value)) {
                 return true;
             } else {
-                $msg->raise("ERROR", "dom", _("The ip address is invalid"));
+                $msg->raise("ERROR", "dom", __("The ip address is invalid", "alternc", true));
                 return false;
             }
             break;
@@ -1199,7 +1199,7 @@ class m_dom {
             if (checkipv6($value)) {
                 return true;
             } else {
-                $msg->raise("ERROR", "dom", _("The ip address is invalid"));
+                $msg->raise("ERROR", "dom", __("The ip address is invalid", "alternc", true));
                 return false;
             }
             break;
@@ -1207,7 +1207,7 @@ class m_dom {
             if (checkcname($value)) {
                 return true;
             } else {
-                $msg->raise("ERROR", "dom", _("The name you entered is incorrect or not fully qualified (it must end with a DOT, like example.com<b>.</b>)"));
+                $msg->raise("ERROR", "dom", __("The name you entered is incorrect or not fully qualified (it must end with a DOT, like example.com<b>.</b>, "alternc", true)"));
                 return false;
             }
             break;
@@ -1215,12 +1215,12 @@ class m_dom {
             if ($value == strval($value)) {
                 return true;
             } else {
-                $msg->raise("ERROR", "dom", _("The TXT value you entered is incorrect"));
+                $msg->raise("ERROR", "dom", __("The TXT value you entered is incorrect", "alternc", true));
                 return false;
             }
             break;
         default:
-            $msg->raise("ERROR", "dom", _("Invalid domain type selected, please check"));
+            $msg->raise("ERROR", "dom", __("Invalid domain type selected, please check", "alternc", true));
             return false;
         }
         return false;
@@ -1278,12 +1278,12 @@ class m_dom {
         $msg->log("dom", "set_sub_domain_ssl_provider", $sub_domain_id." / ".$provider);
         // Locked ?
         if (!$domislocked) {
-            $msg->raise("ERROR", "dom", _("--- Program error --- No lock on the domains!"));
+            $msg->raise("ERROR", "dom", __("--- Program error --- No lock on the domains!", "alternc", true));
             return false;
         }
         $db->query("SELECT * FROM sub_domaines WHERE id=?",array($sub_domain_id));
         if (!$db->next_record() || $db->Record["compte"]!=$cuid) {
-            $msg->raise("ERROR", "dom", _("Subdomain not found"));
+            $msg->raise("ERROR", "dom", __("Subdomain not found", "alternc", true));
             return false;
         }
         $fqdn=$db->Record["sub"].(($db->Record["sub"])?".":"").$db->Record["domaine"];
@@ -1297,7 +1297,7 @@ class m_dom {
                 }
             }
             if (!$found) {
-                $msg->raise("ERROR", "dom", _("No certificate found for this provider and this subdomain"));
+                $msg->raise("ERROR", "dom", __("No certificate found for this provider and this subdomain", "alternc", true));
                 return false;
             }
         }
@@ -1327,7 +1327,7 @@ class m_dom {
         $msg->log("dom", "set_sub_domain", $dom . "/" . $sub . "/" . $type . "/" . $dest);
         // Locked ?
         if (!$domislocked) {
-            $msg->raise("ERROR", "dom", _("--- Program error --- No lock on the domains!"));
+            $msg->raise("ERROR", "dom", __("--- Program error --- No lock on the domains!", "alternc", true));
             return false;
         }
         $dest = trim($dest);
@@ -1338,7 +1338,7 @@ class m_dom {
         $fqdn = checkfqdn($sub);
         // Special cases : * (all subdomains at once) and '' empty subdomain are allowed.
         if (($sub != '*' && $sub != '') && !($fqdn == 0 || $fqdn == 4)) {
-            $msg->raise("ALERT", "dom", _("There is some forbidden characters in the sub domain (only A-Z 0-9 and - are allowed)"));
+            $msg->raise("ALERT", "dom", __("There is some forbidden characters in the sub domain (only A-Z 0-9 and - are allowed, "alternc", true)"));
             return false;
         }
 
@@ -1350,12 +1350,12 @@ class m_dom {
 
         // On a épuré $dir des problémes eventuels ... On est en DESSOUS du dossier de l'utilisateur.
         if (($t = checkfqdn($dom))) {
-            $msg->raise("ERROR", "dom", _("The domain name is syntaxically incorrect"));
+            $msg->raise("ERROR", "dom", __("The domain name is syntaxically incorrect", "alternc", true));
             return false;
         }
 
         if (!$this->can_create_subdomain($dom, $sub, $type, $sub_domain_id)) {
-            $msg->raise("ERROR", "dom", _("The parameters for this subdomain and domain type are invalid. Please check for subdomain entries incompatibility"));
+            $msg->raise("ERROR", "dom", __("The parameters for this subdomain and domain type are invalid. Please check for subdomain entries incompatibility", "alternc", true));
             return false;
         }
 
@@ -1365,7 +1365,7 @@ class m_dom {
 
         // Re-create the one we want
         if (!$db->query("INSERT INTO sub_domaines (compte,domaine,sub,valeur,type,web_action,https) VALUES (?, ?, ?, ?, ?, 'UPDATE',?);", array( $cuid , $dom , $sub , $dest , $type, $https ))) {
-            $msg->raise("ERROR", "dom", _("The parameters for this subdomain and domain type are invalid. Please check for subdomain entries incompatibility"));
+            $msg->raise("ERROR", "dom", __("The parameters for this subdomain and domain type are invalid. Please check for subdomain entries incompatibility", "alternc", true));
             return false;
         }
 
@@ -1377,7 +1377,7 @@ class m_dom {
         if ($db->f('create_tmpdir')) {
             if (!is_dir($dest_root . "/tmp")) {
                 if (!@mkdir($dest_root . "/tmp", 0777, true)) {
-                    $msg->raise("ERROR", "dom", _("Cannot write to the destination folder"));
+                    $msg->raise("ERROR", "dom", __("Cannot write to the destination folder", "alternc", true));
                 }
             }
         }
@@ -1388,7 +1388,7 @@ class m_dom {
             if (!is_dir($dirr)) {
                 $old = umask(0);
                 if (!@mkdir($dirr, 0770, true)) {
-                    $msg->raise("ERROR", "dom", _("Cannot write to the destination folder"));
+                    $msg->raise("ERROR", "dom", __("Cannot write to the destination folder", "alternc", true));
                 }
                 umask($old);
             }
@@ -1412,11 +1412,11 @@ class m_dom {
         $msg->log("dom", "del_sub_domain", $sub_domain_id);
         // Locked ?
         if (!$domislocked) {
-            $msg->raise("ERROR", "dom", _("--- Program error --- No lock on the domains!"));
+            $msg->raise("ERROR", "dom", __("--- Program error --- No lock on the domains!", "alternc", true));
             return false;
         }
         if (!$r = $this->get_sub_domain_all($sub_domain_id)) {
-            $msg->raise("ERROR", "dom", _("The sub-domain does not exist"));
+            $msg->raise("ERROR", "dom", __("The sub-domain does not exist", "alternc", true));
             return false;
         } else {
             $db->query("update sub_domaines set web_action='DELETE' where id= ?; ", array($sub_domain_id));
@@ -1459,22 +1459,22 @@ class m_dom {
         $msg->log("dom", "edit_domain", $dom . "/" . $dns . "/" . $gesmx);
         // Locked ?
         if (!$domislocked && !$force) {
-            $msg->raise("ERROR", "dom", _("--- Program error --- No lock on the domains!"));
+            $msg->raise("ERROR", "dom", __("--- Program error --- No lock on the domains!", "alternc", true));
             return false;
         }
         if ($dns == true && !$force) {
             $this->dns = $this->whois($dom);
             $v = checkhostallow($dom, $this->dns);
             if ($v == -1) {
-                $msg->raise("ERROR", "dom", _("The last member of the domain name is incorrect or cannot be hosted in that server"));
+                $msg->raise("ERROR", "dom", __("The last member of the domain name is incorrect or cannot be hosted in that server", "alternc", true));
                 return false;
             }
             if ($dns && $v == -2) {
-                $msg->raise("ALERT", "dom", _("The domain cannot be found in the Whois database"));
+                $msg->raise("ALERT", "dom", __("The domain cannot be found in the Whois database", "alternc", true));
                 return false;
             }
             if ($dns && $v == -3) {
-                $msg->raise("ALERT", "dom", _("The DNS of this domain do not match the server's DNS. Please change your domain's DNS before you install it again"));
+                $msg->raise("ALERT", "dom", __("The DNS of this domain do not match the server's DNS. Please change your domain's DNS before you install it again", "alternc", true));
                 return false;
             }
         }
@@ -1486,12 +1486,12 @@ class m_dom {
 
         $t = checkfqdn($dom);
         if ($t) {
-            $msg->raise("ERROR", "dom", _("The domain name is syntaxically incorrect"));
+            $msg->raise("ERROR", "dom", __("The domain name is syntaxically incorrect", "alternc", true));
             return false;
         }
         if (!$r = $this->get_domain_all($dom)) {
             // Le domaine n'existe pas, Failure
-            $msg->raise("ERROR", "dom", _("The domain name %s does not exist"), $dom);
+            $msg->raise("ERROR", "dom", __("The domain name %s does not exist", "alternc", true), $dom);
             return false;
         }
         if ($dns != "1") {
@@ -1499,7 +1499,7 @@ class m_dom {
         }
         // On vérifie que des modifications ont bien eu lieu :)
         if ($r["dns"] == $dns && $r["mail"] == $gesmx && $r["zonettl"] == $ttl) {
-            $msg->raise("INFO", "dom", _("No change has been requested..."));
+            $msg->raise("INFO", "dom", __("No change has been requested...", "alternc", true));
             return true;
         }
 
@@ -1507,12 +1507,12 @@ class m_dom {
         if ($dns == "0" && $gesmx == "1" && !$force) {
             $vmx = $this->checkmx($dom);
             if ($vmx == 1) {
-                $msg->raise("ALERT", "dom", _("There is no MX record pointing to this server, and you are asking us to host the mail here. Make sure to update your MX entries or no mail will be received"));
+                $msg->raise("ALERT", "dom", __("There is no MX record pointing to this server, and you are asking us to host the mail here. Make sure to update your MX entries or no mail will be received", "alternc", true));
             }
 
             if ($vmx == 2) {
                 // Serveur non spécifié parmi les champx mx
-                $msg->raise("ALERT", "dom", _("There is no MX record pointing to this server, and you are asking us to host the mail here. Make sure to update your MX entries or no mail will be received"));
+                $msg->raise("ALERT", "dom", __("There is no MX record pointing to this server, and you are asking us to host the mail here. Make sure to update your MX entries or no mail will be received", "alternc", true));
             }
         }
 
@@ -1557,7 +1557,7 @@ class m_dom {
     function add_slave_ip($ip, $class = "32") {
         global $db, $msg;
         if (!checkip($ip)) {
-            $msg->raise("ERROR", "dom", _("The IP address you entered is incorrect"));
+            $msg->raise("ERROR", "dom", __("The IP address you entered is incorrect", "alternc", true));
             return false;
         }
         $class = intval($class);
@@ -1566,7 +1566,7 @@ class m_dom {
         }
         $db->query("SELECT * FROM slaveip WHERE ip= ? AND class= ?;", array($ip, $class));
         if ($db->next_record()) {
-            $msg->raise("ERROR", "err", _("The requested domain is forbidden in this server, please contact the administrator"));
+            $msg->raise("ERROR", "err", __("The requested domain is forbidden in this server, please contact the administrator", "alternc", true));
             return false;
         }
         $db->query("INSERT INTO slaveip (ip,class) VALUES (?, ?);", array($ip, $class));
@@ -1583,7 +1583,7 @@ class m_dom {
     function del_slave_ip($ip) {
         global $db, $msg;
         if (!checkip($ip)) {
-            $msg->raise("ERROR", "dom", _("The IP address you entered is incorrect"));
+            $msg->raise("ERROR", "dom", __("The IP address you entered is incorrect", "alternc", true));
             return false;
         }
         $db->query("DELETE FROM slaveip WHERE ip= ?;", array($ip));
@@ -1679,13 +1679,13 @@ class m_dom {
         if ($db->next_record()) {
             $domain = $db->f("domaine");
             if (!$domain) {
-                $msg->raise("ERROR", "dom", _("This domain is not installed in your account"));
+                $msg->raise("ERROR", "dom", __("This domain is not installed in your account", "alternc", true));
                 return false;
             } else {
                 return $domain;
             }
         } else {
-            $msg->raise("ERROR", "dom", _("This domain is not installed in your account"));
+            $msg->raise("ERROR", "dom", __("This domain is not installed in your account", "alternc", true));
             return false;
         }
     }
@@ -1702,13 +1702,13 @@ class m_dom {
         if ($db->next_record()) {
             $id = $db->f("id");
             if (!$id) {
-                $msg->raise("ERROR", "dom", _("This domain is not installed in your account"));
+                $msg->raise("ERROR", "dom", __("This domain is not installed in your account", "alternc", true));
                 return false;
             } else {
                 return $id;
             }
         } else {
-            $msg->raise("ERROR", "dom", _("This domain is not installed in your account"));
+            $msg->raise("ERROR", "dom", __("This domain is not installed in your account", "alternc", true));
             return false;
         }
     }
@@ -1752,7 +1752,7 @@ class m_dom {
         global $db, $msg;
         $db->query("SELECT * FROM slaveaccount WHERE login= ?", array($login));
         if ($db->next_record()) {
-            $msg->raise("ERROR", "dom", _("The specified slave account already exists"));
+            $msg->raise("ERROR", "dom", __("The specified slave account already exists", "alternc", true));
             return false;
         }
         $db->query("INSERT INTO slaveaccount (login,pass) VALUES (?, ?)", array($login, $pass));
@@ -1780,7 +1780,7 @@ class m_dom {
         global $msg,$domislocked;
         $msg->debug("dom", "lock");
         if ($domislocked) {
-            $msg->raise("ERROR", "dom", _("--- Program error --- Lock already obtained!"));
+            $msg->raise("ERROR", "dom", __("--- Program error --- Lock already obtained!", "alternc", true));
         }
         // wait for the file to disappear, or at most 15min: 
         while (file_exists(m_dom::fic_lock_cron) && filemtime(m_dom::fic_lock_cron)>(time()-900)) {
@@ -1804,7 +1804,7 @@ class m_dom {
         global $msg,$domislocked;
         $msg->debug("dom", "unlock");
         if (!$isshutdown && !$domislocked) {
-            $msg->raise("ERROR", "dom", _("--- Program error --- No lock on the domains!"));
+            $msg->raise("ERROR", "dom", __("--- Program error --- No lock on the domains!", "alternc", true));
         }
         // don't use $this since we may be called by register_shutdown_function out of an object instance.
         @unlink(m_dom::fic_lock_cron); 
@@ -1852,7 +1852,7 @@ class m_dom {
     function hook_quota_get() {
         global $db, $msg, $cuid;
         $msg->debug("dom", "get_quota");
-        $q = Array("name" => "dom", "description" => _("Domain name"), "used" => 0);
+        $q = Array("name" => "dom", "description" => __("Domain name", "alternc", true), "used" => 0);
         $db->query("SELECT COUNT(*) AS cnt FROM domaines WHERE compte= ?", array($cuid));
         if ($db->next_record()) {
             $q['used'] = $db->f("cnt");
@@ -2057,7 +2057,7 @@ class m_dom {
                 }
                 $tmp[$sub['fqdn']] ++;
                 if ($tmp[$sub['fqdn']] >= 2) {
-                    $errors[$sub['fqdn']] = sprintf(_("Problem on %s: there is more than 1 web configuration going to be generated for this sub-domain."), $sub['fqdn']);
+                    $errors[$sub['fqdn']] = sprintf(__("Problem on %s: there is more than 1 web configuration going to be generated for this sub-domain.", "alternc", true), $sub['fqdn']);
                 }
             }
         }
@@ -2066,7 +2066,7 @@ class m_dom {
         // Example: we may not know WEBMAIL if we upgrade from a previous setup
         foreach ($da['sub'] as $sub) {
             if (is_null($sub['type_desc'])) {
-                $errors[$sub['fqdn']] = sprintf(_("Problem on %s: we do not know domain's type <b>%s</b>."), $sub['fqdn'], $sub['type']);
+                $errors[$sub['fqdn']] = sprintf(__("Problem on %s: we do not know domain's type <b>%s</b>.", "alternc", true), $sub['fqdn'], $sub['type']);
             }
         }
 
@@ -2078,22 +2078,22 @@ class m_dom {
 
     function default_domain_type() {
         // This function is only used to allow translation of default domain types:
-        _("Locally hosted");
-        _("URL redirection");
-        _("IPv4 redirect");
-        _("Webmail access");
-        _("Squirrelmail Webmail access");
-        _("Roundcube Webmail access");
-        _("IPv6 redirect");
-        _("CNAME DNS entry");
-        _("TXT DNS entry");
-        _("MX DNS entry");
-        _("secondary MX DNS entry");
-        _("Default mail server");
-        _("Default backup mail server");
-        _("AlternC panel access");
-        _("DKIM Key");
-        _("Email autoconfiguration");
+        __("Locally hosted", "alternc", true);
+        __("URL redirection", "alternc", true);
+        __("IPv4 redirect", "alternc", true);
+        __("Webmail access", "alternc", true);
+        __("Squirrelmail Webmail access", "alternc", true);
+        __("Roundcube Webmail access", "alternc", true);
+        __("IPv6 redirect", "alternc", true);
+        __("CNAME DNS entry", "alternc", true);
+        __("TXT DNS entry", "alternc", true);
+        __("MX DNS entry", "alternc", true);
+        __("secondary MX DNS entry", "alternc", true);
+        __("Default mail server", "alternc", true);
+        __("Default backup mail server", "alternc", true);
+        __("AlternC panel access", "alternc", true);
+        __("DKIM Key", "alternc", true);
+        __("Email autoconfiguration", "alternc", true);
     }
 
 } /* Class m_domains */

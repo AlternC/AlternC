@@ -28,7 +28,7 @@ require_once("../class/config.php");
 include_once("head.php");
 
 if (!$admin->enabled) {
-    $msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
+    $msg->raise("ERROR", "admin", __("This page is restricted to authorized staff", "alternc", true));
     echo $msg->msg_html_all();
     include_once('foot.php');
     exit();
@@ -55,7 +55,7 @@ $subadmin = variable_get("subadmin_restriction", 0);
 // If we ask for all account but we aren't "admin" and
 // subadmin var is not 1
 if ($show == "all" && !$subadmin == 1 && $cuid != 2000) {
-    $msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
+    $msg->raise("ERROR", "admin", __("This page is restricted to authorized staff", "alternc", true));
     echo $msg->msg_html_all();
     include('foot.php');
     exit();
@@ -111,10 +111,10 @@ if ($mem->user["admlist"] == 0) { // Normal (large) mode
 
     if ($subadmin == 1 || $cuid == 2000) {
         $class=($show=="all") ? "inb" : "ina";
-        echo '<p><span class="'.$class.' filter"><a href="adm_list.php?show=all">' . _('List all AlternC accounts') . '</a></span>';
+        echo '<p><span class="'.$class.' filter"><a href="adm_list.php?show=all">' . __('List all AlternC accounts', "alternc", true) . '</a></span>';
 
         $class=($show!="all") ? "inb" : "ina";
-        echo ' <span class="'.$class.' filter"><a href="adm_list.php?show=me">' . _('List only my accounts') . '</a></span></p>';
+        echo ' <span class="'.$class.' filter"><a href="adm_list.php?show=me">' . __('List only my accounts', "alternc", true) . '</a></span></p>';
 
         if ($show != 'all') {
            $infos_creators = array();
@@ -124,7 +124,7 @@ if ($mem->user["admlist"] == 0) { // Normal (large) mode
            }
 
            if (count($infos_creators)) {
-              echo ' (' . _("Or only the accounts of:") . " " . implode(', ', $infos_creators) . ')';
+              echo ' (' . __("Or only the accounts of:", "alternc", true) . " " . implode(', ', $infos_creators) . ')';
            }
         }
     }// END ($subadmin==1 || $cuid==2000)
@@ -136,14 +136,14 @@ echo $msg->msg_html_all();
 ?>
 
 <p>
-    <?php __("Here is the list of hosted AlternC accounts"); ?> (<?php printf(_("%s accounts"), $accountList? count($accountList) : 0); ?>)
+    <?php __("Here is the list of hosted AlternC accounts"); ?> (<?php printf(__("%s accounts", "alternc", true), $accountList? count($accountList) : 0); ?>)
 </p>
 
 <p><span class="ina add"><a href="adm_add.php"><?php __("Create a new AlternC account"); ?></a></span></p>
 
 <?php
 if (!is_array($accountList) || empty($accountList)) {
-    $msg->raise("ERROR", "admin", _("No account defined for now"));
+    $msg->raise("ERROR", "admin", __("No account defined for now", "alternc", true));
     echo $msg->msg_html_all();
     include('foot.php');
 }
@@ -191,7 +191,7 @@ if (!is_array($accountList) || empty($accountList)) {
                 <td <?php if ($val["su"]) echo 'style="color: red"'; ?>><label for="user_<?php ehe($val["uid"]); ?>"><b><?php ehe($val["login"]); ?></b></label></td>
                 <td><a title="<?php __("Send an email"); ?>" href="mailto:<?php eue($val["mail"]); ?>"><?php ehe($val["nom"] . " " . $val["prenom"]); ?></a>&nbsp;</td>
                     <td><?php ehe($val["parentlogin"]); ?></td>
-                <td><?php ehe(format_date(_('%3$d-%2$d-%1$d'), $val["created"])); ?></td>
+                <td><?php ehe(format_date(__('%3$d-%2$d-%1$d', "alternc", true), $val["created"])); ?></td>
                     <td><?php ehe($val["type"]); ?></td>
                     <td><?php ehe($val["lastlogin"]); ?></td>
                     <td><?php ehe($val["lastip"]); ?></td>
@@ -200,7 +200,7 @@ if (!is_array($accountList) || empty($accountList)) {
                 </tr>
 
                 <tr class="lst" >
-                    <td/><td ><i><?php echo _("DB:") . ' ' . $val['db_server_name'] ?></i></td>
+                    <td/><td ><i><?php echo __("DB:", "alternc", true) . ' ' . $val['db_server_name'] ?></i></td>
                     <td colspan="8" >
                         <div id="admlistbtn">
                             <span class="ina<?php if ($col == 2) echo "v"; ?>">
@@ -271,10 +271,10 @@ if ($mem->user["admlist"] == 1) { // SHORT MODE
                 <?php if ($admin->checkcreator($val['uid'])||($show=="all")) { ?>
                     <a href="adm_quotaedit.php?uid=<?php echo $val["uid"] ?>" title="<?php __("Quotas"); ?>">[&nbsp;<?php __("Q"); ?>&nbsp;]</a><?php
                 } // $admin->checkcreator
-                $creator_name = ( ($val['creator'] == '0') ? _("himself") : $list_creators[$val['creator']]['login'])
+                $creator_name = ( ($val['creator'] == '0') ? __("himself", "alternc", true) : $list_creators[$val['creator']]['login'])
                 ?>
             </td>
-            <td style="padding-right: 2px; border-right: 1px solid black; <?php if ($val["su"]) echo "color: red"; ?>"><b><label title="<?php printf(_("Creator: %s"), $creator_name); ?>" for="id_c_<?php echo $val["uid"]; ?>"><?php echo $val["login"] ?></label></b></td>
+            <td style="padding-right: 2px; border-right: 1px solid black; <?php if ($val["su"]) echo "color: red"; ?>"><b><label title="<?php printf(__("Creator: %s", "alternc", true), $creator_name); ?>" for="id_c_<?php echo $val["uid"]; ?>"><?php echo $val["login"] ?></label></b></td>
             <?php
             if (($count_r % 3) == 2) {
                 echo '</tr>';

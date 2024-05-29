@@ -55,7 +55,7 @@ if ($r=$mysql->php_myadmin_connect()) {
 }
 
 include_once("head.php");
-echo '<h3>'._("SQL Admin").'</h3>';
+echo '<h3>'.__("SQL Admin", "alternc", true).'</h3>';
 
 echo $msg->msg_html_all();
 

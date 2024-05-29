@@ -36,19 +36,19 @@ if ( !isset($is_include) ) {
 }
 
 if (!$id && !$create) {
-  $msg->raise("ERROR", "ftp", _("Neither a creation nor a edition"));
-  echo "<h3>"._("Create a FTP account")."</h3>";
+  $msg->raise("ERROR", "ftp", __("Neither a creation nor a edition", "alternc", true));
+  echo "<h3>".__("Create a FTP account", "alternc", true)."</h3>";
   echo $msg->msg_html_all();
   include_once("foot.php");
   exit();
 }
 
 if (!$id && $create) { //creation
-  echo "<h3>"._("Create a FTP account")."</h3>";
+  echo "<h3>".__("Create a FTP account", "alternc", true)."</h3>";
   if ( !isset($is_include) )
     $rr=false;
 } else {
-  echo "<h3>"._("Editing a FTP account")."</h3>";
+  echo "<h3>".__("Editing a FTP account", "alternc", true)."</h3>";
   $rr=$ftp->get_ftp_details($id);
 }
 

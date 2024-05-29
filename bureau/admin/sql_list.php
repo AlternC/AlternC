@@ -36,9 +36,9 @@ $r=$mysql->get_userslist();
 <?php
   // If the db exists, we look at users 
   if (!$rdb || empty($rdb)) {
-	$msg->raise("INFO", "mysql", _("You have no database at the moment."));
+	$msg->raise("INFO", "mysql", __("You have no database at the moment.", "alternc", true));
   } else if(!$r || empty($r)){
-	$msg->raise("INFO", "mysql", _("You have no sql user at the moment."));
+	$msg->raise("INFO", "mysql", __("You have no sql user at the moment.", "alternc", true));
   }
 
 echo $msg->msg_html_all();
@@ -104,7 +104,7 @@ for($i=0;$i<count($rdb);$i++) {
 </tr>
 </table>
 <br />
-<input type="submit" class="inb add" name="submit" value="<?php __("Create this new MySQL database."); ?>" onClick="return false_if_empty('dbn', '<?php echo addslashes(_("Can't have empty MySQL suffix"));?>');" />
+<input type="submit" class="inb add" name="submit" value="<?php __("Create this new MySQL database."); ?>" onClick="return false_if_empty('dbn', '<?php echo addslashes(__("Can't have empty MySQL suffix", "alternc", true));?>');" />
 </form>
 <?php
 }

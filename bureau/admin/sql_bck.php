@@ -33,7 +33,7 @@ include_once("head.php");
 <?php
 
 if ( ! variable_get('sql_allow_users_backups') ) {
-  echo "<p class=\"alert alert-danger\">"._("You aren't allowed to access this page. Contact your administrator if you want to.")."</p>";
+  echo "<p class=\"alert alert-danger\">".__("You aren't allowed to access this page. Contact your administrator if you want to.", "alternc", true)."</p>";
   include_once('foot.php');
   exit;
 }
@@ -54,7 +54,7 @@ echo $msg->msg_html_all();
 
 if (is_array($r)) {
 ?>
-<h3><?php printf(_("Manage the SQL backup for database %s"),$r["db"]); ?></h3>
+<h3><?php printf(__("Manage the SQL backup for database %s", "alternc", true),$r["db"]); ?></h3>
 
 <form action="sql_dobck.php" method="post" id="main" name="main">
  <?php csrf_get(); ?>

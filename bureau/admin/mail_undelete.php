@@ -32,7 +32,7 @@ getFields($fields);
 
 if ($mail->undelete($mail_id)) {
   $email = $mail->is_it_my_mail($mail_id);
-  $msg->raise("INFO", "mail", _("The email %s has been undeleted"), $email);
+  $msg->raise("INFO", "mail", __("The email %s has been undeleted", "alternc", true), $email);
 }
 
 include("mail_list.php");

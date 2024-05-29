@@ -56,7 +56,7 @@ echo $msg->msg_html_all();
     </tr>
   </table>
   <br />
-  <input type="submit" class="inb lock" value="<?php __("Protect this folder"); ?>" onClick="return false_if_empty('dir', '<?php echo addslashes(_("Can't have empty directory."));?>');" />
+  <input type="submit" class="inb lock" value="<?php __("Protect this folder"); ?>" onClick="return false_if_empty('dir', '<?php echo addslashes(__("Can't have empty directory.", "alternc", true));?>');" />
 </form>
 
 <script type="text/javascript">

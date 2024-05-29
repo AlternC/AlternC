@@ -49,7 +49,7 @@ if (!$r) {
 } else {
   $t = time();
   // TODO: we assume the cron job is at every 5 minutes 
-  $msg->raise("INFO", "dom", _("The modifications will take effect at %s. Server time is %s."), array(date('H:i:s', ($t-($t%300)+300)), date('H:i:s', $t)));
+  $msg->raise("INFO", "dom", __("The modifications will take effect at %s. Server time is %s.", "alternc", true), array(date('H:i:s', ($t-($t%300)+300)), date('H:i:s', $t)));
   foreach($fields as $k=>$v) unset($k);
 }
 include("dom_edit.php");

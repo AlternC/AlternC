@@ -34,7 +34,7 @@ $fields = array (
 getFields($fields);
 
 if (!$admin->enabled) {
-  $msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
+  $msg->raise("ERROR", "admin", __("This page is restricted to authorized staff", "alternc", true));
   echo $msg->msg_html_all();
   exit();
 }
@@ -50,10 +50,10 @@ echo $msg->msg_html_all();
 ?>
 <p>
 <?php __("This page shows the space and service count of your AlternC server and each AlternC accounts.");
-echo "<br /><br />"; printf(_("If you want to manage them, go to")."&nbsp;<a href=\"adm_list.php\">"._("Administration -> Manage the Alternc accounts")."</a>"); ?>
+echo "<br /><br />"; printf(__("If you want to manage them, go to", "alternc", true)."&nbsp;<a href=\"adm_list.php\">".__("Administration -> Manage the Alternc accounts", "alternc", true)."</a>"); ?>
 </p>
 <p>
-<?php printf(_("Sizes are shown as %s"),($mode==0 || $mode==4)?_("MB."):_("% of the total.")); ?>
+<?php printf(__("Sizes are shown as %s", "alternc", true),($mode==0 || $mode==4)?__("MB.", "alternc", true):__("% of the total.", "alternc", true)); ?>
 </p>
 <p>
 <?php __("Server-side view:"); ?> <span class="ina <?php if ($mode==4) { echo 'ina-active'; } ?>"><a href="quotas_users.php?mode=4"><?php __("Global"); ?></a></span><br /><br />
@@ -203,16 +203,16 @@ echo "<br /><br />"; printf(_("If you want to manage them, go to")."&nbsp;<a hre
 <div>
 <table  class="tedit" width="100%">
 <thead>
-		       <tr><th rowspan="2"><?php sortlink(_("Account"),0,1); ?></th><th colspan="3"><?php __("Count"); ?></th><th colspan="5"><?php __("Space"); ?></th></tr>
+		       <tr><th rowspan="2"><?php sortlink(__("Account", "alternc", true),0,1); ?></th><th colspan="3"><?php __("Count"); ?></th><th colspan="5"><?php __("Space"); ?></th></tr>
 <tr>
-<?php sortlink(_("Dom"),2,3); ?>
-<?php sortlink(_("Mails"),4,5); ?>
-<?php sortlink(_("Lists"),6,7); ?>
-<?php sortlink(_("Web"),8,9);  ?>
-<?php sortlink(_("Mails"),10,11); ?>
-<?php sortlink(_("Lists"),12,13); ?>
-<?php sortlink(_("DB"),14,15); ?>
-<?php sortlink(_("Total"),16,17); ?>
+<?php sortlink(__("Dom", "alternc", true),2,3); ?>
+<?php sortlink(__("Mails", "alternc", true),4,5); ?>
+<?php sortlink(__("Lists", "alternc", true),6,7); ?>
+<?php sortlink(__("Web", "alternc", true),8,9);  ?>
+<?php sortlink(__("Mails", "alternc", true),10,11); ?>
+<?php sortlink(__("Lists", "alternc", true),12,13); ?>
+<?php sortlink(__("DB", "alternc", true),14,15); ?>
+<?php sortlink(__("Total", "alternc", true),16,17); ?>
 </tr>
 </thead>
 <tbody>

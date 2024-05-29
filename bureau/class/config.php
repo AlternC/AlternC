@@ -41,7 +41,7 @@ session_start();
 
 
 if (ini_get("safe_mode")) {
-    echo _("SAFE MODE IS ENABLED for the web panel ! It's a bug in your php or apache configuration, please fix it !!");
+    echo __("SAFE MODE IS ENABLED for the web panel ! It's a bug in your php or apache configuration, please fix it !!", "alternc", true);
     exit();
 }
 

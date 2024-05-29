@@ -27,7 +27,7 @@
 require_once("../class/config.php");
 
 if (!$admin->enabled) {
-  $msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
+  $msg->raise("ERROR", "admin", __("This page is restricted to authorized staff", "alternc", true));
   echo $msg->msg_html_all();
   exit();
 }
@@ -46,13 +46,13 @@ getFields($fields);
 if ($delaccount) {
   // Delete an account
   if ($dom->del_slave_account($delaccount)) {
-    $msg->raise("INFO", "admin", _("The requested account has been deleted. It is now denied."));
+    $msg->raise("INFO", "admin", __("The requested account has been deleted. It is now denied.", "alternc", true));
   }
 }
 if ($newlogin) {
   // Add an account
   if ($dom->add_slave_account($newlogin,$newpass)) {
-    $msg->raise("INFO", "admin", _("The requested account address has been created. It is now allowed."));
+    $msg->raise("INFO", "admin", __("The requested account address has been created. It is now allowed.", "alternc", true));
     unset($newlogin); unset($newpass);
   }
 }
@@ -60,13 +60,13 @@ if ($newlogin) {
 if ($delip) {
   // Delete an ip address/class
   if ($dom->del_slave_ip($delip)) {
-    $msg->raise("INFO", "admin", _("The requested ip address has been deleted. It will be denied in one hour."));
+    $msg->raise("INFO", "admin", __("The requested ip address has been deleted. It will be denied in one hour.", "alternc", true));
   }
 }
 if ($newip) {
   // Add an ip address/class
   if ($dom->add_slave_ip($newip,$newclass)) {
-    $msg->raise("INFO", "admin", _("The requested ip address has been added to the list. It will be allowed in one hour."));
+    $msg->raise("INFO", "admin", __("The requested ip address has been added to the list. It will be allowed in one hour.", "alternc", true));
     unset($newip); unset($newclass);
   }
 }
@@ -200,8 +200,8 @@ display:none;
 <p><?php __("We offer free of charge DNS servers for alternc users."); ?></p>
 <h2><?php __("How does it work?"); ?> </h2>
 <ol>
-	<li><?php printf(_("<strong>Give access to the alternc.net servers.</strong> Follow the instructions on <a href='%s' target='blank'>this page</a>. They will help you to configure this page and configure your alternc.net account."),"http://aide-alternc.org/go.php?hid=400"); ?></li>
-	<li><?php printf(_("<strong>Subscribe to alternc.net.</strong> Go to <a href='%s' target='_blank' class='btn btn-inline btn-link'>the alternc.net site</a> to use the DNS servers provided for free by the AlternC association and enter the required informations for each server you want to connect to the service."),"http://alternc.net/"); ?> </li>
+	<li><?php printf(__("<strong>Give access to the alternc.net servers.</strong> Follow the instructions on <a href='%s' target='blank'>this page</a>. They will help you to configure this page and configure your alternc.net account.", "alternc", true),"http://aide-alternc.org/go.php?hid=400"); ?></li>
+	<li><?php printf(__("<strong>Subscribe to alternc.net.</strong> Go to <a href='%s' target='_blank' class='btn btn-inline btn-link'>the alternc.net site</a> to use the DNS servers provided for free by the AlternC association and enter the required informations for each server you want to connect to the service.", "alternc", true),"http://alternc.net/"); ?> </li>
 </ol>
 <br />
 <p><?php __("The alternc.net servers will take care of transfering and distributing to the world your domains zones."); ?> </p>

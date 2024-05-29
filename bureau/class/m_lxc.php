@@ -54,7 +54,7 @@ class m_lxc implements vm {
             return; // No menu if no server
 
         $obj = array(
-            'title' => _("Console access"),
+            'title' => __("Console access", "alternc", true),
             'link' => 'vm.php',
             'pos' => 95,
         );
@@ -126,7 +126,7 @@ class m_lxc implements vm {
         global $mem, $db, $msg, $mysql;
 
         if ($this->getvm() !== FALSE) {
-            $msg->raise("ERROR", 'lxc', _('VM already started'));
+            $msg->raise("ERROR", 'lxc', __('VM already started', "alternc", true));
             return FALSE;
         }
         unset($this->error);
@@ -150,7 +150,7 @@ class m_lxc implements vm {
             $uid = $mem->user['uid'];
 
             if ($error != 0) {
-                $msg->raise("ERROR", 'lxc', _($message));
+                $msg->raise("ERROR", 'lxc', __($message, "alternc", true));
                 return FALSE;
             }
             $db->query("INSERT INTO vm_history (ip,date_start,uid,serialized_object) VALUES (?, ?, ?, ?);", array($hostname, $date_start, $uid, $res));

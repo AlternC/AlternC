@@ -57,7 +57,7 @@ if (count($_POST)) {
         require_once("head.php");
         echo $msg->msg_html_all();
     } else {
-        header("Location: dom_edit.php?domain=".eue($domain,false)."&msg=".eue(_("Your HTTPS preferences have been set"),false));
+        header("Location: dom_edit.php?domain=".eue($domain,false)."&msg=".eue(__("Your HTTPS preferences have been set", "alternc", true),false));
         exit();
     }
 } // post ?
@@ -65,7 +65,7 @@ if (count($_POST)) {
 require_once("head.php");
 
 ?>
-<h3><i class="fas fa-globe-africa"></i> <?php printf(_("Manage %s HTTPS preferences"),ehe($domain,false)); ?></h3>
+<h3><i class="fas fa-globe-africa"></i> <?php printf(__("Manage %s HTTPS preferences", "alternc", true),ehe($domain,false)); ?></h3>
 
 <p class="alert alert-info"><?php __("These parameters are for advanced user who want to choose specific certificate provider. <br />Usually you'd want to click 'edit' in front of a subdomain to choose between HTTP and HTTPS by default."); ?></p>
 <p>
@@ -93,14 +93,14 @@ for($i=0;$i<$r["nsub"];$i++) {
     echo "<tr>";
     echo "<td>".$fqdn."</td>";
     echo "<td><select name=\"ssl_".$r["sub"][$i]["id"]."\" id=\"ssl_".$r["sub"][$i]["id"]."\">";
-    echo "<option value=\"\">"._("-- no HTTPS certificate provider preference --")."</option>";
+    echo "<option value=\"\">".__("-- no HTTPS certificate provider preference --", "alternc", true)."</option>";
     $providers=array();
     foreach($certs as $cert) {
         if ($cert["provider"] && $cert["provider"]!="snakeoil" && !isset($providers[$cert["provider"]])) {
             $providers[$cert["provider"]]=1;
             echo "<option value=\"".$cert["provider"]."\"";
             selected($r["sub"][$i]["provider"]==$cert["provider"]);
-            echo ">"._("Provider:")." ".$cert["provider"]."</option>";
+            echo ">".__("Provider:", "alternc", true)." ".$cert["provider"]."</option>";
         }
     }
     echo "</select>";

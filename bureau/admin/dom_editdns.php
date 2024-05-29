@@ -38,12 +38,12 @@ $dom->lock();
 
 $r = $dom->get_domain_all($domain);
 if ($r["dns"] == $dns && $r["mail"] == $email && $r["zonettl"] == $ttl) {
-  $msg->raise("INFO", "dom", _("No change has been requested..."));
+  $msg->raise("INFO", "dom", __("No change has been requested...", "alternc", true));
 } else if ($dom->edit_domain($domain,$dns,$email,0,$ttl)) {
-  $msg->raise("INFO", "dom", _("The domain %s has been changed."),$domain);
+  $msg->raise("INFO", "dom", __("The domain %s has been changed.", "alternc", true),$domain);
   $t = time();
 // TODO: we assume the cron job is at every 5 minutes
-  $msg->raise("INFO", "dom", _("The modifications will take effect at %s.  Server time is %s."), array(date('H:i:s', ($t-($t%300)+300)), date('H:i:s', $t)));
+  $msg->raise("INFO", "dom", __("The modifications will take effect at %s.  Server time is %s.", "alternc", true), array(date('H:i:s', ($t-($t%300)+300)), date('H:i:s', $t)));
 }
 $dom->unlock();
 

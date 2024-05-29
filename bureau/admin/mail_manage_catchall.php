@@ -35,7 +35,7 @@ $fields = array (
 getFields($fields);
 
 if (is_null($domain_id)) { 
-  $msg->raise("ERROR", "mail", _("Problem with the domain"));
+  $msg->raise("ERROR", "mail", __("Problem with the domain", "alternc", true));
   include_once("mail_list.php"); 
   exit();
 }
@@ -44,34 +44,34 @@ if (!is_null($target_type)) {
   switch ($target_type) {
     case "none":
       if ($mail->catchall_del($domain_id))
-        $msg->raise("INFO", "mail", _("Catchall successfully deleted"));
+        $msg->raise("INFO", "mail", __("Catchall successfully deleted", "alternc", true));
 
       require_once("mail_list.php");
       exit();
       break;
     case "domain":
       if ($mail->catchall_set($domain_id, $target_domain)) {
-	$msg->raise("INFO", "mail", _("Catchall successfully updated"));
+	$msg->raise("INFO", "mail", __("Catchall successfully updated", "alternc", true));
 	require_once("mail_list.php");
 	exit();
       }
       break;
     case "mail":
       if ($mail->catchall_set($domain_id, $target_mail)) {
-	$msg->raise("INFO", "mail", _("Catchall successfully updated"));
+	$msg->raise("INFO", "mail", __("Catchall successfully updated", "alternc", true));
 	require_once("mail_list.php");
 	exit();
       }
       break;
     default:
-      $error=_("Unknown target type");
+      $error=__("Unknown target type", "alternc", true);
   }
 }
 
 $catch=$mail->catchall_getinfos($domain_id);
   
 ?>
-<h3><?php printf(_("Manage catch-all configuration of %s"),$catch["domain"]); ?></h3>
+<h3><?php printf(__("Manage catch-all configuration of %s", "alternc", true),$catch["domain"]); ?></h3>
 <hr id="topbar"/>
 <br />
 
@@ -99,7 +99,7 @@ __("You can choose what to do with emails sent to unexisting address of this dom
   </tr>
   <tr>
     <td width="1px"><input type="radio" name="target_type" id='target_type_domain' value="domain" <?php if ($catch['type']=='domain') {echo 'checked="checked"';}?> /></td>
-    <td style="width: 50%; text-align: justify"><label for='target_type_domain'><?php echo sprintf(_("Mails sent to john.doe@%s will be redirect to john.doe@anotherdomain.tld"),$catch['domain']);?></label></td>
+    <td style="width: 50%; text-align: justify"><label for='target_type_domain'><?php echo sprintf(__("Mails sent to john.doe@%s will be redirect to john.doe@anotherdomain.tld", "alternc", true),$catch['domain']);?></label></td>
     <td>
       <p>
 	<i><?php __("Enter the 'target' domain"); ?></i><br/>
@@ -117,7 +117,7 @@ __("You can choose what to do with emails sent to unexisting address of this dom
   </tr>
   <tr>
     <td width="1px"><input type="radio" name="target_type" id='target_type_mail' value="mail" <?php if ($catch['type']=='mail') { echo 'checked="checked"'; } ?> /></td>
-    <td style="width: 50%; text-align: justify"><label for='target_type_mail'><?php echo sprintf(_("Mails sent to an unexisting email on '@%s' will be redirect to user@example.tld."),$catch['domain']);?></label></td>
+    <td style="width: 50%; text-align: justify"><label for='target_type_mail'><?php echo sprintf(__("Mails sent to an unexisting email on '@%s' will be redirect to user@example.tld.", "alternc", true),$catch['domain']);?></label></td>
     <td>
       <p>
         <input type="text" name="target_mail" size="30" value="<?php if($catch['type']=='mail') { ehe($catch['target']); } ?>" placeholder="<?php __("john.doe@example.tld");?>" />

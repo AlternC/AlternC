@@ -26,7 +26,7 @@
 require_once("../class/config.php");
 
 if (!$admin->enabled) {
-	$msg->raise("ERROR", "admin", _("This page is restricted to authorized staff"));
+	$msg->raise("ERROR", "admin", __("This page is restricted to authorized staff", "alternc", true));
 	echo $msg->msg_html_all();
 	exit;
 }
@@ -54,7 +54,7 @@ if ($create_dom && !empty($create_dom_list) ) {
 }
 
 if ($pass != $passconf) {
-	$msg->raise("ERROR", "admin", _("Passwords do not match"));
+	$msg->raise("ERROR", "admin", __("Passwords do not match", "alternc", true));
 	include("adm_add.php");
 	exit();
 }
@@ -65,7 +65,7 @@ if (!($u=$admin->add_mem($login, $pass, $nom, $prenom, $nmail, $canpass, $type, 
 	exit;
 }
 
-$msg->raise("INFO", "admin", _("The new member has been successfully created"));
+$msg->raise("INFO", "admin", __("The new member has been successfully created", "alternc", true));
 
 include("adm_list.php");
 exit;

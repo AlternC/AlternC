@@ -36,7 +36,7 @@ if (!empty($confirm_del)) {
   reset($d);
   if ($hta->del_user($d,$dir)) {
     foreach ($d as $v) {
-      $msg->raise("INFO", "hta", _("The user '%s' was successfully deleted"), $v);
+      $msg->raise("INFO", "hta", __("The user '%s' was successfully deleted", "alternc", true), $v);
     }
   }
   $is_include=true;

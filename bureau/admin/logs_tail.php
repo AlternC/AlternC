@@ -37,11 +37,11 @@ include_once("head.php");
 
 $string=$log->tail($file,$lines);
 if (!$string) {
-  $file=_("unknown");
+  $file=__("unknown", "alternc", true);
 }
 ?>
 <h3><?php __("Follow a recent log"); ?></h3>
-<p><?php printf(_("Please find below the last lines of file <b>%s</b>"),$file); ?></p>
+<p><?php printf(__("Please find below the last lines of file <b>%s</b>", "alternc", true),$file); ?></p>
 <form method="get" action="logs_tail.php" name="update" id="update">
   <input type="hidden" name="file" value="<?php ehe($file); ?>" />
   <input type="hidden" name="autoreload" value="<?php ehe($autoreload); ?>" />
@@ -61,7 +61,7 @@ eoption($alines,$lines);
 ?>
 </select> <?php __("Last lines shown"); ?>  
 &nbsp;
-<?php echo "<a class=\"inb\" href=\"logs_download.php?file=".$file."\">"._("Download")."</a>"; ?>
+<?php echo "<a class=\"inb\" href=\"logs_download.php?file=".$file."\">".__("Download", "alternc", true)."</a>"; ?>
 <a class="inb" href="logs_list.php" ><?php __("Back to the logs list"); ?></a> 
 <hr id="topbar"/>
 <br />
