@@ -1,7 +1,6 @@
 * text=auto !eol
 /.svnignore -text
 /.travis.yml -text
-.tx/config -text
 /CODING_CONVENTION.php -text
 /COPYING -text
 /DEBIAN_COMPLIANCE -text
@@ -610,7 +609,6 @@ phpunit/tests/_datasets/domaines.yml -text
 po/alternc-admintools.pot -text
 po/fr/LC_MESSAGES/.svnignore -text
 po/fr/LC_MESSAGES/alternc-admintools.po -text
-/repos-to-tx.sh -text
 roundcube/Makefile -text
 roundcube/class/m_roundcube.php -text
 roundcube/roundcube-install -text
@@ -684,7 +682,6 @@ tools/get_domains_by_account -text
 tools/top_ftp_users -text
 tools/top_http_users -text
 tools/top_mysql_users -text
-/tx-to-repos.sh -text
 upnp/Makefile -text
 upnp/adminmenu_upnp.php -text
 upnp/m_upnp.php -text
