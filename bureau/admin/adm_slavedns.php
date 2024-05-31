@@ -200,7 +200,7 @@ display:none;
 <p><?php __("We offer free of charge DNS servers for alternc users."); ?></p>
 <h2><?php __("How does it work?"); ?> </h2>
 <ol>
-	<li><?php printf(_("<strong>Give access to the alternc.net servers.</strong> Follow the instructions on <a href='%s' target='blank'>this page</a>. They will help you to configure this page and configure your alternc.net account."),"http://aide-alternc.org/go.php?hid=400"); ?></li>
+	<li><?php printf(_("<strong>Give access to the alternc.net servers.</strong> Follow the instructions on <a href='%s' target='blank'>this page</a>. They will help you to configure this page and configure your alternc.net account."),variable_get('help_baseurl')."/go.php?hid=400"); ?></li>
 	<li><?php printf(_("<strong>Subscribe to alternc.net.</strong> Go to <a href='%s' target='_blank' class='btn btn-inline btn-link'>the alternc.net site</a> to use the DNS servers provided for free by the AlternC association and enter the required informations for each server you want to connect to the service."),"http://alternc.net/"); ?> </li>
 </ol>
 <br />
