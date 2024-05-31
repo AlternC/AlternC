@@ -42,7 +42,7 @@ __("AlternC is an automatic hosting software suite. It features a PHP-based admi
   <ul>
     <li><?php __("Official website: ");?> <a target="_blank" href="https://alternc.com">http://alternc.com</a></li>
     <li><?php __("Developer website: ");?> <a target="_blank" href="https://github.com/AlternC">https://github.com/AlternC</a></li>
-    <li><?php __("Help: ");?> <a target="_blank" href="https://aide-alternc.org">https://aide-alternc.org</a></li>
+    <li><?php __("Help: ");?> <a target="_blank" href="<?php echo variable_get('help_baseurl'); ?>"><?php echo variable_get('help_baseurl'); ?></a></li>
   </ul>
 </li>
 
