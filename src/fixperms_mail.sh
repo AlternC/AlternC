@@ -138,6 +138,8 @@ done
 
 
 echo $query | mysql --defaults-file=/etc/alternc/my.cnf -N -B | while read path uid; do
+    if [ -d "$path" ] 
+    then
 	echo "** Fixing $path ($uid)"
 
 	if [ $ACL -eq 1 ]; then
@@ -150,5 +152,7 @@ echo $query | mysql --defaults-file=/etc/alternc/my.cnf -N -B | while read path 
 		execute_cmd chown -R $uid.vmail $path
 		execute_cmd find $path -type d -exec chmod 0700 {} \\\;
         fi
-
+    else
+	echo "** Skipping $path (does not exist)"
+    fi
 done
