@@ -20,7 +20,7 @@ fi
 
 
 #Force column as NULLABLE if default value is NULL
-sql='select CONCAT("ALTER TABLE ", table_schema, ".", table_name, " MODIFY ", column_name, " ", column_type, ";" ) FROM information_schema.columns WHERE table_schema = "alternc" AND column_default IS NULL order by column_name;'
+sql='select CONCAT("ALTER TABLE ", table_schema, ".", table_name, " MODIFY ", column_name, " ", column_type, ";" ) FROM information_schema.columns WHERE table_schema = "alternc" AND column_default IS NULL AND extra NOT LIKE "%auto_increment%" order by column_name;'
 queries=$(mysql_query "${sql}")
 
 
