@@ -18,7 +18,7 @@ foreach($add as $domain => $id) {
         if ($dkim_key) {
             // Add subdomain dkim entry
             $db->query("INSERT INTO sub_domaines 
-        SET compte=?, domaine=?, sub='@', valeur=?, type='dkim', web_action='OK', web_result=0, enable='ENABLED';",
+        SET compte=?, domaine=?, sub='alternc._domainkey', valeur=?, type='dkim', web_action='OK', web_result=0, enable='ENABLED';",
             array($id, $domain, $dkim_key)
             );
             // Alternc.INSTALL WILL reload DNS zones anyway, so fear not we don't set dns_action="RELOAD" here.
