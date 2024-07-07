@@ -1,8 +1,8 @@
 ![](https://alternc.com/logo.png)
 
-## AlternC: Web and Email Hosting Software Suite 
+## AlternC: Web and Email Hosting Software Suite
 
-AlternC is a software helping system administrators to handle Web and Email services management. It should be easy to install, based only on free software. 
+AlternC is a software helping system administrators to handle Web and Email services management. It should be easy to install, based only on free software.
 
 This software consist of an automatic install and configuration system, a web control panel to manage hosted users and their web services such as domains, email accounts, ftp accounts, web statistics...
 
@@ -34,7 +34,8 @@ To safely upgrade between these versions:
 * Backup your AlternC database
 * Stop the cron service: ```/etc/init.d/cron stop```
 * Install alternc (>= 3.5)
-* Run the following queries against the alternc database (here, it's called "alternc"): ```
+* Run the following queries against the alternc database (here, it's called "alternc"):
+```
 mysql alternc -e 'update sub_domaines set web_action = "OK" where type like "%-mixssl";'
 mysql alternc -e 'update sub_domaines set web_action = "OK" where type like "%-ssl";'
 ```
@@ -53,7 +54,7 @@ mysql alternc -e 'update sub_domaines set web_action = "OK" where type like "%-s
 We have 1 nightly build repositories:
 * stretch - [stable 3.5](http://stable-3-5.nightly.alternc.org/)
 
-and 3 nightly from former Debian releases (now unmaintained) 
+and 3 nightly from former Debian releases (now unmaintained)
 * jessie - [stable 3.3](http://stable-3-3.nightly.alternc.org/)
 * wheezy - [stable 3.2](http://stable-3-2.nightly.alternc.org/)
 * squeeze - [stable 3.1](http://stable-3-1.nightly.alternc.org/)
@@ -67,12 +68,14 @@ To use one of them, create a file named `/etc/apt/sources.list.d/alternc-nightly
 The repository and the packages are signed by the pgp key of AlternC nightly build user :
 
 ```
-wget http://stable-3-5.nightly.alternc.org/nightly.key -O - | apt-key add - 
+wget http://stable-3-5.nightly.alternc.org/nightly.key -O - | apt-key add -
 ```
 
 ## License
 
-AlternC is distributed under the GPL v2 or later license. See `COPYING`.
+AlternC code and translation are distributed under the GPL v2 or later license. See [COPYING](COPYING).
 
-AlternC's translations (po files) are distributed under the [Creative Commons CC0 license](https://creativecommons.org/publicdomain/zero/1.0/). Don't participate to the translation if you don't agree to publish your translations under that license.
+Note : AlternC's translations (po files) until 31 January 2024 was distributed under the [Creative Commons CC0 license](https://creativecommons.org/publicdomain/zero/1.0/).
+
+Don't participate to the code or translation if you don't agree to publish any contribution under that license.
 

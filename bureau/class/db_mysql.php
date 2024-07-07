@@ -178,7 +178,8 @@ class DB_Sql {
             }
 
             if( defined("THROW_EXCEPTIONS") && THROW_EXCEPTIONS ){
-                throw new \Exception("Mysql query failed : $this->Error");
+                $error_msg=$this->Error[2];
+                throw new \Exception("Mysql query failed : $error_msg");
             }
             $this->halt("SQL Error: ".$Query_String);
             return FALSE;

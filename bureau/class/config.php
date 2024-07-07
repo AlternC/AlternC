@@ -227,7 +227,7 @@ if ((variable_get('sql_max_username_length', NULL)==NULL)||(variable_get('sql_ma
 
 }
 
-$help_baseurl = variable_get('help_baseurl', 'http://www.aide-alternc.org/', 'The base URL for help liks', array('desc' => 'Help URL', 'type' => 'string'));
+$help_baseurl = variable_get('help_baseurl', 'https://aide.alternc.org/', 'The base URL for help liks', array('desc' => 'Help URL', 'type' => 'string'));
 
 // any page can add elements to js/css part of <head> BEFORE including head.php
 $addhead=array('js'=>array(), 'css'=>array()); 
