@@ -67,7 +67,7 @@ execute_cmd() {
 	fi
 }
 
-query="select m.path, mem.uid from mailbox m join address a on m.address_id=a.id join domaines d on a.domain_id=d.id join membres mem on d.compte=mem.uid where delivery='dovecot'"
+query="select m.path, mem.uid, concat(a.address,'@',d.domaine) AS mail from mailbox m join address a on m.address_id=a.id join domaines d on a.domain_id=d.id join membres mem on d.compte=mem.uid where delivery='dovecot'"
 
 while getopts "hl:u:p:d:cn" optname
 do
@@ -137,17 +137,17 @@ do
 done
 
 
-echo $query | mysql --defaults-file=/etc/alternc/my.cnf -N -B | while read path uid; do
+echo $query | mysql --defaults-file=/etc/alternc/my.cnf -N -B | while read path uid email; do
     if [ -d "$path" ] 
     then
 	echo "** Fixing $path ($uid)"
-
 	if [ $ACL -eq 1 ]; then
 		execute_cmd chown -R www-data.$uid $path
 		execute_cmd find $path -type d -exec chmod 2755 {} \\\;
 		execute_cmd setfacl -bknR -m d:u:$uid:rwx -m u:$uid:rwx -m d:o::--- -m o::---\
                     -m d:u:www-data:rwx -m u:www-data:rwx -m d:g:$uid:rwx -m g:$uid:rwx\
 		    -m d:mask:rwx -m mask:rwx "$path"
+
         else 
 		execute_cmd chown -R $uid.vmail $path
 		execute_cmd find $path -type d -exec chmod 0700 {} \\\;
@@ -155,4 +155,13 @@ echo $query | mysql --defaults-file=/etc/alternc/my.cnf -N -B | while read path 
     else
 	echo "** Skipping $path (does not exist)"
     fi
+
+    ipath="/var/mail/alternc_index/$email"
+    if [ -d "$ipath" ] 
+    then
+	echo "** Fixing Index path $ipath"
+		execute_cmd chown -R $uid.vmail $ipath
+		execute_cmd find $ipath -type d -exec chmod 0700 {} \\\;
+    fi
+
 done
