@@ -61,7 +61,7 @@ mysql_query "SELECT id, address_id, quote(replace(path,'!','\\!')) FROM mailbox 
     # Do the rm again in case of newly added file during delete. Should not be necessary but prevents any leftover
     test -d "${path//\'/}" && $ionice rm -rf "${path//\'/}"
     # If we have a dovecot INDEX folder, delete it too.
-    ipath=$(mysql_query "SELECT CONCAT(a.addresse,'@',d.domaine) FROM address a, domaines d WHERE d.id=a.domain_id AND a.id=${address_id}")
+    ipath=$(mysql_query "SELECT CONCAT(a.address,'@',d.domaine) FROM address a, domaines d WHERE d.id=a.domain_id AND a.id=${address_id}")
     if [ "$ipath" -a -d "/var/mail/alternc_index/$ipath" ] ; then
         $ionice rm -rf "/var/mail/alternc_index/$ipath" 
     fi
