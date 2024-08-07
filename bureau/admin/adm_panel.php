@@ -47,6 +47,7 @@ echo $msg->msg_html_all();
  <li class="lst"><a href="adm_defquotas.php"><?php __("Change the default quotas"); ?></a></li>
  <li class="lst"><a href="adm_authip_whitelist.php"><?php __("Manage IP whitelist"); ?></a></li>
  <li class="lst"><a href="adm_email.php"><?php __("Send an email to all members"); ?></a></li>
+ <li class="lst"><a href="adm_checkhttps.php.php"><?php __("Check HTTPs redirect for Vhosts"); ?></a></li>
 </ul>
 
 

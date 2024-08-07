@@ -1570,6 +1570,138 @@ class m_admin {
     }
 
 
+    /**
+     * Check that all vhost-type FQDN on the server have a HTTP to HTTPS redirect at their home.
+     * 
+     * Return an array of hashes, the list of hosted FQDN on this server: 
+     * uid, login, fqdn, status: 0= OK, 1= redirect elsewhere, 2= not redirecting to anything https 3= timeout or other error 4= denied (4xx) 5= errored (5xx)
+     * url (the redirected url)
+     * 
+     * @global    m_mysql $db
+     * @param     boolean     $force     Force the update of the cache 
+     * @return array $r[$i] / [fqdn][status][url]
+     */
+    function check_https($forcecheck = false) {
+        global $db;
+        $cachefile = "/tmp/alternc_https_check_cache";
+        $cachetime = 86400; // The dns cache file can be up to 1 Week old
+        if (!$forcecheck && file_exists($cachefile) && filemtime($cachefile) + $cachetime > time()) {
+            $checked = unserialize(file_get_contents($cachefile));
+        } else {
+            $checked = $this->do_check_https();
+            file_put_contents($cachefile, serialize($checked));
+        }
+
+        $query = "SELECT m.uid,m.login, concat(sub,if(sub!='','.',''),domaine) AS fqdn FROM sub_domaines d LEFT JOIN membres m ON m.uid=d.compte ";
+        $query .=" WHERE (d.type='vhost' or d.type like 'php%-fpm') ";
+        $db->query($query);
+        $c = array();
+        while ($db->next_record()) {
+            $tmp = $db->Record;
+            $tmp["status"] = $checked[$tmp["fqdn"]]["status"];
+            $tmp["url"] = $checked[$tmp["fqdn"]]["url"];
+            $c[] = $tmp;
+        }
+        return $c;
+    }
+
+    /** call the home of every locally-hosted domain and check that we have a redirect from http to https. */
+    function do_check_https() {
+        global $db;
+        $query = "SELECT concat(sub,if(sub!='','.',''),domaine) AS fqdn FROM sub_domaines ";
+        $query .=" WHERE (type='vhost' or type like 'php%-fpm') ";
+        $db->query($query);
+        $urls = array();
+        while ($db->next_record())  {
+            $urls[]="http://".$db->Record["fqdn"]."/";
+        }
+        
+        $c=[]; // we will fill this with all requested information.
+
+        // The code below is a variant of Benjamin's 'rolling_curl' function.
+        // launch up to MAX_SOCKETS HTTP get in parallel, with a 5 seconds timeout, 
+        // and each time one ends, launch one more.
+        $MAX_SOCKETS=20; // 20 get in parallel...
+        $rolling_window = min($MAX_SOCKETS,count($urls));
+    
+        $master = curl_multi_init();
+        $curl_arr = array();
+        $null=tmpfile();
+        // add additional curl options here
+        $options = array(CURLOPT_RETURNTRANSFER => 0,
+                         CURLOPT_FILE => $null,
+                         CURLOPT_FOLLOWLOCATION => false, // important 
+                         CURLOPT_CONNECTTIMEOUT => 2,
+                         CURLOPT_TIMEOUT => 5,
+                         CURLOPT_USERAGENT => "AlternC https checker",
+                         CURLOPT_MAXREDIRS => 0);
+        
+        // start the first batch of requests
+        for ($i = 0; $i < $rolling_window; $i++) {
+            $ch = curl_init();
+            $options[CURLOPT_URL] = $urls[$i];
+            curl_setopt_array($ch,$options);
+            curl_multi_add_handle($master, $ch);
+        }
+        
+        do {
+            while(($execrun = curl_multi_exec($master, $running)) == CURLM_CALL_MULTI_PERFORM);
+            if ($execrun != CURLM_OK)
+                break; // something went terribly wrong. We stop everything here
+            
+            // a request was just completed -- find out which one
+            while($done = curl_multi_info_read($master)) {
+                $info = curl_getinfo($done['handle']);
+                $fqdn=rtrim(preg_replace("#^http://#","",$info["url"]),"/");
+                $code=intval($info['http_code']/100);
+                switch ($code) {
+                case 2:
+                    $c[$fqdn]=["status" => 2, "url" => ""];
+                    break;
+                case 3:
+                    $should="https://".$fqdn."/";
+                    if (substr($info['redirect_url'],0,strlen($should))==$should) { // if the redirect url STARTS with https://fqdn/ we consider it OK
+                        $c[$fqdn]=["status" => 0, "url" => $info['redirect_url']];
+                    } else { 
+                        if (substr($info['redirect_url'],0,8)=="https://") {
+                            // it redirect to an httpS url, but elsewhere ? 
+                            $c[$fqdn]=["status" => 1, "url" => $info['redirect_url']];
+                        } else {
+                            // it redirect elsewhere but NOT to HTTPS 
+                            $c[$fqdn]=["status" => 2, "url" => $info['redirect_url']];
+                        }
+                    }
+                    break;
+                case 4:
+                case 5:
+                    $c[$fqdn]=["status" => $code, "url" => ""];
+                    break;
+                default:
+                    $c[$fqdn]=["status" => 3, "url" => ""];
+                }
+
+                // If there is more: start a new request
+                // (it's important to do this before removing the old one)
+                if ($i<count($urls)) {
+                    $ch = curl_init();
+                    $options[CURLOPT_URL] = $urls[$i++];  // increment i
+                    curl_setopt_array($ch,$options);
+                    curl_multi_add_handle($master, $ch);
+                }
+                // remove the curl handle that just completed
+                curl_multi_remove_handle($master, $done['handle']);
+            }
+        } while ($running);
+        
+        curl_multi_close($master);        
+        fclose($null);
+        return $c;
+    }
+
+
+
+
+
 } /* Class m_admin */
 
 
