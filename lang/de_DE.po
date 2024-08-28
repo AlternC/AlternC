@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: AlternC, hosting control panel\n"
 "Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
 "POT-Creation-Date: 2018-06-24 17:17+0200\n"
-"PO-Revision-Date: 2024-07-28 20:09+0000\n"
-"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
+"PO-Revision-Date: 2024-08-28 12:52+0000\n"
+"Last-Translator: Natalia N <natalian@inbox.ru>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/alternc/alternc/"
 "de/>\n"
 "Language: de_DE\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.7-dev\n"
+"X-Generator: Weblate 5.7.1-dev\n"
 
 #. Type: error
 #. Description
@@ -126,6 +126,12 @@ msgid ""
 "server that keep in sync with your alternc's server(s). . The default value "
 "should be good in most case."
 msgstr ""
+"Geben Sie den vollqualifizierten Namen Ihres primären DNS-Servers ein. Es "
+"kann dieser Server sein, da bind von AlternC installiert und konfiguriert "
+"wird. Wie auch immer, wenn Ihr Hosting-Service ziemlich groß ist, haben Sie "
+"möglicherweise einen externen primären Nameserver, der mit den Servern Ihres "
+"Alternc synchronisiert bleibt. . Der Standardwert sollte in den meisten "
+"Fällen gut sein."
 
 #. Type: string
 #. Description
@@ -142,6 +148,10 @@ msgid ""
 "you should have 2 separate DNS servers if you want to provide a high quality"
 " hosting service."
 msgstr ""
+"Geben Sie den vollqualifizierten Namen Ihres sekundären DNS-Servers ein. Es "
+"kann dieser Server sein, da bind von AlternC installiert und konfiguriert "
+"wird. Auf jeden Fall sollten Sie 2 separate DNS-Server haben, wenn Sie einen "
+"qualitativ hochwertigen Hosting-Service anbieten möchten."
 
 #. Type: string
 #. Description
@@ -214,6 +224,11 @@ msgid ""
 "recommended to use \"127.0.0.1\" instead of \"localhost\" if your postfix "
 "installation is configured in a chroot (which is the case, by default)."
 msgstr ""
+"Bitte geben Sie den vollqualifizierten Namen Ihres MySQL-Server-Hosts ein. "
+"Dieser Server MUSS in der Lage sein, über den Standardport (3306) auf den "
+"Remote-Server zuzugreifen. Es wird empfohlen, \"127.0.0.1\" anstelle von "
+"\"localhost\" zu verwenden, wenn Ihre Postfix-Installation in einer Chroot "
+"konfiguriert ist (was standardmäßig der Fall ist)."
 
 #. Type: string
 #. Description
@@ -270,6 +285,9 @@ msgid ""
 "The alternc sql user is responsible for granting access to user generated "
 "databases, that is why it needs root access on the mysql installation."
 msgstr ""
+"Der alternc sql Benutzer ist für die Gewährung des Zugriffs auf "
+"benutzergenerierte Datenbanken verantwortlich, daher benötigt er Root-"
+"Zugriff auf die mysql-Installation."
 
 #. Type: password
 #. Description
@@ -327,6 +345,10 @@ msgid ""
 "the hostname or IP the Apache server will appear as connecting from to the "
 "MySQL server."
 msgstr ""
+"AlternC und MySQL können auf unterschiedlichen Servern installiert werden. "
+"Damit die GRANT-Tabelle ordnungsgemäß erstellt und bearbeitet werden kann, "
+"muss dieser Parameter auf den Hostnamen oder die IP-Adresse gesetzt werden, "
+"von der aus der Apache-Server eine Verbindung zum MySQL-Server herstellt."
 
 #. Type: select
 #. Description
@@ -341,6 +363,9 @@ msgid ""
 "AlternC enables users to configure their own backups, on demand, with "
 "automatic rotation. This option determines how the backups are rotated."
 msgstr ""
+"AlternC ermöglicht es Benutzern, ihre eigenen Backups bei Bedarf mit "
+"automatischer Rotation zu konfigurieren. Diese Option legt fest, wie die "
+"Sicherungen rotiert werden."
 
 #. Type: select
 #. Description
@@ -349,6 +374,8 @@ msgid ""
 "rotate - backup.sql, backup.sql.0, backup.sql.1 date - backup.sql, "
 "backup.sql.20080709, backup.sql.20080708"
 msgstr ""
+"Drehen - backup.sql, backup.sql.0, backup.sql.1 Datum - backup.sql, "
+"backup.sql.20080709, backup.sql.20080708"
 
 #. Type: select
 #. Description
@@ -364,6 +391,9 @@ msgid ""
 " when doing backups. The default behavior is to skip those files and ignore "
 "it."
 msgstr ""
+"Die SQL-Sicherungen können vorhandene Dateien umbenennen oder überschreiben, "
+"von denen sie bei Sicherungen nichts wissen. Das Standardverhalten besteht "
+"darin, diese Dateien zu überspringen und zu ignorieren."
 
 #. Type: string
 #. Description
@@ -378,6 +408,9 @@ msgid ""
 "AlternC will default the A records for domains it hosts to this address. In "
 "other words, this is the address everyone can reach to server at."
 msgstr ""
+"AlternC wird die A-Einträge für Domains, die es hostet, standardmäßig auf "
+"diese Adresse setzen. Mit anderen Worten, dies ist die Adresse, unter der "
+"jeder den Server erreichen kann."
 
 #. Type: string
 #. Description
@@ -418,7 +451,7 @@ msgstr "AlternC wird den HOSTNAMEN als MX Eintrag für alle Domänen übernehmen
 #. Description
 #: ../alternc.templates:24001
 msgid "The default Backup MX to assign to new domains:"
-msgstr ""
+msgstr "Das standardmäßige Backup MX, das neuen Domains zugewiesen werden soll:"
 
 #. Type: string
 #. Description
@@ -427,6 +460,9 @@ msgid ""
 "AlternC will assign this hostname as the Backup MX record for all the "
 "domains it hosts. Don't set it if you don't know what it is about."
 msgstr ""
+"AlternC weist diesen Hostnamen als Backup-MX-Eintrag für alle Domains zu, "
+"die es hostet. Stellen Sie es nicht ein, wenn Sie nicht wissen, worum es "
+"geht."
 
 #. Type: string
 #. Description
@@ -1011,7 +1047,9 @@ msgstr "Erzeugen der Liste ist in Warteschlange"
 #: ../admin/mman_list.php:38
 msgid ""
 "No domain is installed on your account, you cannot create any mailing list!"
-msgstr "Keine Domäne ist auf Ihrem Konto eingerichtet, Sie können keine Mailingliste anlegen!"
+msgstr ""
+"In Ihrem Konto ist keine Domain installiert, Sie können keine Mailingliste "
+"erstellen!"
 
 #: ../admin/mman_list.php:68
 msgid "Create a list"
