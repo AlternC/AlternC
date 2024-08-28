@@ -75,7 +75,7 @@ class m_dom {
     /**
      * Constructeur
      */
-    function m_dom() {
+    function __construct() {
         global $L_FQDN, $domislocked;
         $this->tld_no_check_at_all = variable_get('tld_no_check_at_all', 0, 'Disable ALL check on the TLD (users will be able to add any domain)', array('desc' => 'Disabled', 'type' => 'boolean'));
         variable_get('mailname_bounce', $L_FQDN, 'FQDN of the mail server, used to create vhost virtual mail_adress.', array('desc' => 'FQDN', 'type' => 'string'));
@@ -745,7 +745,7 @@ class m_dom {
                 $dns = "0";
             }
             // mode 5 : force DNS to NO.
-            if ($tld[$v] == 5) {
+            if (isset($tld[$v]) && $tld[$v] == 5) {
                 $dns = 0;
             }
             // It must be a real domain (no subdomain)

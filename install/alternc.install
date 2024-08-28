@@ -678,7 +678,7 @@ grep -q "^127.0.0.1\$" /etc/opendkim/TrustedHosts || echo "127.0.0.1" >>/etc/ope
 grep -q "^localhost\$" /etc/opendkim/TrustedHosts || echo "localhost" >>/etc/opendkim/TrustedHosts
 grep -q "^$PUBLIC_IP\$" /etc/opendkim/TrustedHosts || echo "$PUBLIC_IP" >>/etc/opendkim/TrustedHosts
 
-if [ "$SYSTEMD" = "1" -a "$(lsb_release -s -c)" = "stretch" ] ; then
+if [[ "$SYSTEMD" = "1" && ! "$(lsb_release -s -c)" =~ ^(jessie|wheezy)$ ]] ; then
     /lib/opendkim/opendkim.service.generate
     # Without adding '-u opendkim' after the service file is generated, opendkim
     # will run as root, which we do not want.

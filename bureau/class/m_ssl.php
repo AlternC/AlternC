@@ -44,12 +44,15 @@ class m_ssl {
 
     const KEY_REPOSITORY = "/var/lib/alternc/ssl/private";
     const SPECIAL_CERTIFICATE_ID_PATH = "/var/lib/alternc/ssl/special_id.json";
+
+    public $last_certificate_id;
+    public $default_certificate_fqdn;
     
     // ----------------------------------------------------------------- 
     /**
      * Constructor
      */
-    function m_ssl() {
+    function __construct() {
         global $L_FQDN;
         $this->last_certificate_id=variable_get('last_certificate_id',0,'Latest certificate ID parsed by update_domains. Do not change this unless you know what you are doing');
         $this->default_certificate_fqdn=variable_get('default_certificate_fqdn',$L_FQDN,'FQDN of the certificate we will use as a default one before getting a proper one through any provider. If unsure, keep the default');

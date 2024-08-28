@@ -7,11 +7,7 @@
     Cette classe ce contente d'invoquer les fonctions d'exportation de configuration et de données d'un compte,
     presentes dans les classes concernées.
 */
-Class m_export {
-
-    function m_export() {
-        
-    }
+class m_export {
 
     function export_conf() {
         global $hooks;

@@ -271,8 +271,7 @@ function checkfqdn($fqdn) {
     } else {
         $ret = 4;
     }
-    reset($members);
-    while (list ($key, $val) = each($members)) {
+    foreach($members as $val) {
         if (strlen($val) > 63) {
             return 2;
         }
@@ -508,20 +507,6 @@ function format_date($format, $date) {
     // we want every number to be treated as a string.
     $format=str_replace('$d', '$s', $format);
     return sprintf($format, $d, $m, $y, $h, $i, $hh, $am);
-}
-
-
-/**
- * Strip slashes if needed : 
- * @param string $str
- * @return string
- */
-function ssla($str) {
-    if (get_magic_quotes_gpc()) {
-        return stripslashes($str);
-    } else {
-        return $str;
-    }
 }
 
 

@@ -41,9 +41,8 @@ if (!is_array($q) || empty($q) ) {
 echo "<table cellspacing=\"0\" cellpadding=\"4\" class='tlist'>";
 echo "<tr><th>"._("Quota")."</th><th>"._("Used")."</th><th>"._("Total")."</th><th>"._("Size on disk")."</th></tr>";
 $qlist=$quota->qlist();
-reset($qlist);
 $totalsize = 0;
-while (list($key,$val)=each($qlist)) {
+foreach($qlist as $key=>$val) {
   if ( !isset($q[$key]) || !$q[$key]["t"]) continue;
    echo "<tr class=\"lst\">";
    echo "<td>";

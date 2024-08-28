@@ -147,7 +147,7 @@ if ($errbrowsefold) {
     <table style="border: 0" cellspacing="2" cellpadding="0">
 
     <?php
-    while (list($key,$val)=each($ar)) {
+    foreach($ar as $key=>$val) {
       echo "<tr>\n";
       for ($i=0;$i<$val["level"];$i++)
         echo "<td width=\"16\"></td>";

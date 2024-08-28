@@ -53,8 +53,8 @@ $fields = array (
 
 ## does not intend to edit oversize files.
 $memory_limit=ini_get("memory_limit");
-if (preg_match("#([mk])#i", $memory_limit, $out))
-	$memory_limit=$memory_limit*1024*($out[1]=="M"?1024:1);
+if (preg_match("#(.*)([mk])#i", $memory_limit, $out))
+	$memory_limit=$out[1]*1024*($out[2]=="M"?1024:1);
 
 getFields($fields);
 
@@ -248,7 +248,6 @@ if (isset($formu) && $formu==2 && isset($actrename) && $actrename && count($d)) 
   echo "<input type=\"hidden\" name=\"formu\" value=\"4\" />\n";
   echo "<tr><th colspan=\"2\">"._("Rename")."</th></tr>";
   for ($i=0;$i<count($d);$i++) {
-    $d[$i]=ssla($d[$i]);
     echo "<tr><td><input type=\"hidden\" name=\"o[$i]\" value=\"".ehe($d[$i],false)."\" />".ehe($d[$i],false)."</td>";
     echo "<td><input type=\"text\" class=\"int\" name=\"d[$i]\" value=\"".ehe($d[$i],false)."\" /></td></tr>";
   }
@@ -273,7 +272,6 @@ if ($formu==2 && ! (empty($actperms)) && count($d)) {
   echo "</tr>";
 
   for ($i=0;$i<count($d);$i++) {
-    $d[$i]=ssla($d[$i]);
     $stats = stat($tmp_absdir . '/' . $d[$i]);
     $modes = $stats[2];
 

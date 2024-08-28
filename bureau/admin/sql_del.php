@@ -33,13 +33,12 @@ getFields($fields);
 
 // DO IT 
 if ($confirm=="y" ) {
-  reset($_POST);
-  while (list($key,$val)=each($_POST)) {
+  foreach($_POST as $key=>$val) {
     if (substr($key,0,4)=="del_") {
       // Effacement de la base $val
       $r=$mysql->del_db(substr($key,4));
       if ($r) {
-	$msg->raise("INFO", "mysql", _("The database '%s' has been successfully deleted"), $val);
+          $msg->raise("INFO", "mysql", _("The database '%s' has been successfully deleted"), $val);
       }
     }
   }
@@ -71,8 +70,7 @@ if (!$found) {
 <p>
 <input type="hidden" name="confirm" value="y" />
 <?php
-reset($_POST);
-while (list($key,$val)=each($_POST)) {
+foreach($_POST as $key=>$val) {
   if (substr($key,0,4)=="del_") {
       echo "<input type=\"hidden\" name=\"".ehe($key,false)."\" value=\"".ehe($val,false)."\" /><ul><li><b>".ehe($val,false)."</b></li></ul>\n";
   }

@@ -69,7 +69,7 @@ if (!isset($locales[$lang])) { // Requested language not found in locales
 }
 
 if (!isset($locales[$lang])) {
-    list($lang) = each($locales);
+    foreach($locales as $lang) break; // take the first lang
 }
 if (isset($setlang) && isset($lang)) {
     setcookie("lang", $lang);

@@ -64,9 +64,8 @@ if ($create) { ?>
 <table cellspacing="0" cellpadding="4">
     <tr><th colspan="2"><?php __("Action"); ?></th><th><?php __("Domain name"); ?></th><th><?php __("Allowed Users"); ?></th><th><?php __("View the statistics"); ?></th></tr>
 <?php
-reset($r);
 $col=1;
-while (list($key,$val)=each($r)) {
+foreach($r as $key=>$val) {
 	$col=3-$col;
 ?>
 	<tr class="lst<?php echo $col; ?>">

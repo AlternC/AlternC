@@ -39,9 +39,7 @@ if (!$uid) die('UID Error');
 
 $mem->su($uid);
 $qlist=$quota->qlist();
-reset($qlist);
-
-while (list($key,$val)=each($qlist)) {
+foreach($qlist as $key=>$val) {
   $var="q_".$key;
   $quota->setquota($key,$_REQUEST[$var]);
 }

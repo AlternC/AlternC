@@ -126,8 +126,7 @@ echo $msg->msg_html_all();
           <?php } 
             /* Enumeration des domaines : */
             $domain=$dom->enum_domains();
-            reset($domain);
-            while (list($key,$val)=each($domain)) { ?>
+            foreach($domain as $val) { ?>
                <option value="<?php echo $val; ?>" > <?php echo $val?> </option>
             <?php } ?>
         </select>

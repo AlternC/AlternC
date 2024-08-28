@@ -50,7 +50,7 @@ class m_piwik {
     /** 
      * Constructor
      */
-    function m_piwik() {
+    function __construct() {
         $this->piwik_server_uri=variable_get('piwik_server_uri','','Remote Piwik server uri');
         $this->piwik_admin_token=variable_get('piwik_admin_token','','Remote Piwik super-admin token');
         $this->alternc_users=array();

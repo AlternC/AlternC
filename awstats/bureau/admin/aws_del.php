@@ -25,9 +25,8 @@
 require_once("../class/config.php");
 
 // On parcours les POST_VARS et on repere les del_.
-reset($_POST);
 $found=false;
-while (list($key,$val)=each($_POST)) {
+foreach($_POST as $key=>$val) {
   if (substr($key,0,4)=="del_") {
     // Effacement du jeu de stats $val
     $r=$aws->delete_stats($val);

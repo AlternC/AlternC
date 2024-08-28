@@ -34,15 +34,16 @@ $dom=new m_dom();
 $dom->lock();
 
 $r=$dom->get_domain_all($domain);
-/*
-if (! empty($sub)) {
-   $sd=$dom->get_sub_domain_all($domain,$sub,$type,$value);
-}
-*/
-$sd=$dom->get_sub_domain_all($sub_domain_id);
 
-$type=$sd['type'];
-$sub=$sd['name'];
+if ($sub_domain_id) { // when we are *adding*, not *editing* a subdomain, this is false.
+    $sd=$dom->get_sub_domain_all($sub_domain_id);
+
+    $type=$sd['type'];
+    $sub=$sd['name'];
+} else {
+    $type=false;
+    $sub="";
+}
 
 $dom->unlock();
 

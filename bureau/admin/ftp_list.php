@@ -66,7 +66,7 @@ if ($noftp) {
 </thead>
 <?php
 reset($r);
-while (list($key,$val)=each($r)) { ?>
+foreach($r as $key=>$val) { ?>
 	<tr class="lst">
 		<td align="center"><input type="checkbox" class="inc" id="del_<?php ehe($val["id"]); ?>" name="del_<?php ehe($val["id"]); ?>" value="<?php ehe($val["id"]); ?>" /></td>
 <td><div class="ina edit"><a href="ftp_edit.php?id=<?php eue($val["id"]); ?>"><?php __("Edit"); ?></a></div></td>
