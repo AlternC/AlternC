@@ -134,6 +134,10 @@ ALTERNC_LOGS=""
 # called from the panel. To enable quota-over-NFS, put yes here
 NFS_QUOTA=no
 
+# Apache2 behavior
+APACHE_SSL_DISABLED=no
+APACHE_PORT_HTTP=80
+APACHE_PORT_HTTPS=443
 EOF
 
         chown root:alterncpanel $CONFIGFILE
@@ -173,6 +177,14 @@ EOF
 # the default is NO, since this dramatically block /usr/lib/alternc/quota* functions
 # called from the panel. To enable quota-over-NFS, put yes here
 NFS_QUOTA=no" >> $CONFIGFILE
+
+    # Add APACHE2 configuration:
+    grep -Eq "^ *APACHE_SSL_DISABLED=" $CONFIGFILE || echo "
+APACHE_SSL_DISABLED=no" >> $CONFIGFILE
+    grep -Eq "^ *APACHE_PORT_HTTP=" $CONFIGFILE || echo "
+APACHE_PORT_HTTP=80" >> $CONFIGFILE
+    grep -Eq "^ *APACHE_PORT_HTTPS=" $CONFIGFILE || echo "
+APACHE_PORT_HTTPS=443" >> $CONFIGFILE
 
     # Erase all apacheconf file
     # They will be regenerated without the bug by upgrade_check.sh below.
