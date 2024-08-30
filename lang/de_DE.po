@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: AlternC, hosting control panel\n"
 "Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
 "POT-Creation-Date: 2018-06-24 17:17+0200\n"
-"PO-Revision-Date: 2024-08-29 13:09+0000\n"
+"PO-Revision-Date: 2024-08-31 12:09+0000\n"
 "Last-Translator: Natalia N <natalian@inbox.ru>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/alternc/alternc/"
 "de/>\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.7.1-dev\n"
+"X-Generator: Weblate 5.8-dev\n"
 
 #. Type: error
 #. Description
@@ -5653,12 +5653,14 @@ msgstr "Dieses Zertifikat wird derzeit <b>NICHT freigegeben</b>"
 
 #: ../admin/ssl_view.php:201
 msgid "Click here to share this certificate"
-msgstr ""
+msgstr "Klicken Sie hier, um dieses Zertifikat zu teilen"
 
 #: ../admin/ssl_view.php:218
 msgid ""
 "Please confirm that you want to delete this certificate AND ITS PRIVATE KEY!"
 msgstr ""
+"Bitte bestätigen Sie, dass Sie dieses Zertifikat UND SEINEN PRIVATEN "
+"SCHLÜSSEL löschen möchten!"
 
 #: ../admin/stats_members.php:28
 msgid ""
@@ -5760,6 +5762,8 @@ msgid ""
 "SAFE MODE IS ENABLED for the web panel ! It's a bug in your php or apache "
 "configuration, please fix it !!"
 msgstr ""
+"Der abgesicherte Modus ist für das Webpanel aktiviert! Es ist ein Fehler in "
+"Ihrer PHP- oder Apache-Konfiguration, bitte beheben Sie ihn !!"
 
 #: ../class/functions.php:439
 msgid "Bytes"
@@ -5824,14 +5828,18 @@ msgstr "Wähle ein Verzeichnis"
 #: ../class/functions.php:1188
 msgid "The posted form token is incorrect. Maybe you need to allow cookies"
 msgstr ""
+"Das gepostete Formular-Token ist falsch. Möglicherweise müssen Sie Cookies "
+"zulassen"
 
 #: ../class/functions.php:1193
 msgid "Your cookie or token is invalid"
-msgstr ""
+msgstr "Ihr Cookie oder Token ist ungültig"
 
 #: ../class/functions.php:1198 ../class/functions.php:1202
 msgid "You can't post twice the same form, please retry."
 msgstr ""
+"Sie können nicht zweimal dasselbe Formular posten, bitte versuchen Sie es "
+"erneut."
 
 #: ../class/m_action.php:212
 msgid "Error setting actions"
@@ -5859,7 +5867,7 @@ msgstr "Primärer und Sekundärer DNS wurden in der WHOIS Datenbank geprüft"
 
 #: ../class/m_admin.php:60
 msgid "Domain must exist, but don't do any DNS check"
-msgstr ""
+msgstr "Die Domain muss vorhanden sein, aber keine DNS-Prüfung durchführen"
 
 #: ../class/m_admin.php:61
 msgid "Domain can be installed, no check at all"
@@ -5867,7 +5875,7 @@ msgstr "Domain kann Installiert werden, es gibt keine Prüfung"
 
 #: ../class/m_admin.php:62
 msgid "Domain can be installed, force NO DNS hosting"
-msgstr ""
+msgstr "Domain kann installiert werden, kein DNS-Hosting erzwingen"
 
 #: ../class/m_admin.php:82
 msgid "Administration"
@@ -5945,7 +5953,7 @@ msgstr "Fehlendes db_server Feld"
 
 #: ../class/m_admin.php:605 ../class/m_admin.php:610
 msgid "Please fill all mandatory fields"
-msgstr ""
+msgstr "Bitte füllen Sie alle Pflichtfelder aus"
 
 #: ../class/m_admin.php:615
 msgid "Please enter a valid email address"
@@ -5998,7 +6006,7 @@ msgstr "Dieses Konto ist kein Administrator Konto"
 #: ../class/m_admin.php:1190
 #, php-format
 msgid "NS for this domain are not %s and %s BUT %s"
-msgstr ""
+msgstr "NS für diese Domain sind nicht %s und %s SONDERN %s"
 
 #: ../class/m_admin.php:1206
 #, php-format
@@ -6007,16 +6015,16 @@ msgstr "MX ist nicht %s ABER %s"
 
 #: ../class/m_admin.php:1220
 msgid "Fail to get the DNS information. Try again."
-msgstr ""
+msgstr "Die DNS-Informationen können nicht abgerufen werden. Wiederholen."
 
 #: ../class/m_admin.php:1223
 #, php-format
 msgid "subdomain '%s' doesn't point to %s but to '%s'"
-msgstr ""
+msgstr "Subdomain '%s' zeigt nicht auf %s, sondern auf '%s'"
 
 #: ../class/m_admin.php:1232
 msgid "Domain doesn't exist anymore !"
-msgstr ""
+msgstr "Domain existiert nicht mehr !"
 
 #: ../class/m_admin.php:1257
 #, php-format
@@ -6057,6 +6065,8 @@ msgid ""
 "The password policy prevents you to use your login name inside your password"
 " or the other way around"
 msgstr ""
+"Die Passwortrichtlinie verhindert, dass Sie Ihren Anmeldenamen innerhalb "
+"Ihres Passworts verwenden oder umgekehrt"
 
 #: ../class/m_admin.php:1549
 msgid ""
@@ -6162,19 +6172,19 @@ msgstr "Ein Fehler beim Datei Upload."
 
 #: ../class/m_bro.php:673
 msgid "Uncompressing through TAR"
-msgstr ""
+msgstr "Dekomprimierung durch TAR"
 
 #: ../class/m_bro.php:678
 msgid "Uncompressing through UNZIP"
-msgstr ""
+msgstr "Dekomprimieren durch UNZIP"
 
 #: ../class/m_bro.php:683
 msgid "Uncompressing through GUNZIP"
-msgstr ""
+msgstr "Dekomprimierung durch GUNZIP"
 
 #: ../class/m_bro.php:688
 msgid "Uncompressing through bunzip2"
-msgstr ""
+msgstr "Dekomprimierung durch bunzip2"
 
 #: ../class/m_bro.php:698
 #, php-format
@@ -6323,6 +6333,8 @@ msgid ""
 "The name you entered is incorrect or not fully qualified (it must end with a"
 " DOT, like example.com<b>.</b>)"
 msgstr ""
+"Der von Ihnen eingegebene Name ist falsch oder nicht vollständig "
+"qualifiziert (er muss mit einem DOT enden, z<b>. B. example.com).</b>"
 
 #: ../class/m_dom.php:1332
 msgid "The TXT value you entered is incorrect"
@@ -6334,11 +6346,11 @@ msgstr "Ungültige Domain Auswahl, bitte prüfen."
 
 #: ../class/m_dom.php:1400
 msgid "Subdomain not found"
-msgstr ""
+msgstr "Subdomain nicht gefunden"
 
 #: ../class/m_dom.php:1414
 msgid "No certificate found for this provider and this subdomain"
-msgstr ""
+msgstr "Für diesen Provider und diese Subdomain wurde kein Zertifikat gefunden"
 
 #: ../class/m_dom.php:1454
 msgid ""
@@ -6355,6 +6367,8 @@ msgid ""
 "The DNS of this domain do not match the server's DNS. Please change your "
 "domain's DNS before you install it again"
 msgstr ""
+"Die DNS dieser Domain stimmen nicht mit dem DNS des Servers überein. Bitte "
+"ändern Sie das DNS Ihrer Domain, bevor Sie sie erneut installieren"
 
 #: ../class/m_dom.php:1607
 #, php-format
@@ -6379,7 +6393,7 @@ msgstr "Diese Domain ist nicht auf ihrem Konto Installiert"
 
 #: ../class/m_dom.php:1868
 msgid "The specified slave account already exists"
-msgstr ""
+msgstr "Das angegebene Slave-Konto existiert bereits"
 
 #: ../class/m_dom.php:1896
 msgid "--- Program error --- Lock already obtained!"
@@ -6509,6 +6523,8 @@ msgstr "Passwort kann nicht leer sein"
 #: ../class/m_ftp.php:411
 msgid "Your FTP account quota is over. You cannot create more FTP accounts"
 msgstr ""
+"Das Kontingent Ihres FTP-Kontos ist abgelaufen. Sie können keine weiteren "
+"FTP-Konten erstellen"
 
 #: ../class/m_hta.php:46
 msgid "Protected folders"
@@ -6522,7 +6538,7 @@ msgstr "Das Verzeichnis '%s' existiert nicht"
 
 #: ../class/m_hta.php:77
 msgid "Error creating .htaccess file: "
-msgstr ""
+msgstr "Fehler beim Erstellen der .htaccess-Datei: "
 
 #: ../class/m_hta.php:81
 msgid "Restricted area"
@@ -6530,7 +6546,7 @@ msgstr "Eingeschränkter Bereich"
 
 #: ../class/m_hta.php:87
 msgid "Error creating .htpasswd file: "
-msgstr ""
+msgstr "Fehler beim Erstellen der .htpasswd-Datei: "
 
 #: ../class/m_hta.php:110
 msgid "No protected folder"
@@ -6595,15 +6611,16 @@ msgstr "Passwort für das eMail-Konto"
 
 #: ../class/m_mail.php:314
 msgid "No email found for this query"
-msgstr ""
+msgstr "Für diese Abfrage wurde keine E-Mail-Adresse gefunden"
 
 #: ../class/m_mail.php:374
 msgid "You cannot create email addresses: your quota is over"
 msgstr ""
+"Sie können keine E-Mail-Adressen erstellen: Ihr Kontingent ist überschritten"
 
 #: ../class/m_mail.php:381
 msgid "This email address already exists in mailman"
-msgstr ""
+msgstr "Diese E-Mail-Adresse ist bereits in mailman vorhanden"
 
 #: ../class/m_mail.php:383
 msgid "This email address already exists"
@@ -6629,7 +6646,7 @@ msgstr "Diese eMail %s wurde schon zum Löschen markiert, ein direktes löschen 
 
 #: ../class/m_mail.php:559
 msgid "The email you entered does not exist"
-msgstr ""
+msgstr "Die von Ihnen eingegebene E-Mail-Adresse existiert nicht"
 
 #: ../class/m_mail.php:570
 #, php-format
@@ -6658,6 +6675,9 @@ msgid ""
 "There is forbidden characters in your email address. You can't make it a "
 "POP/IMAP account, you can only use it as redirection to other emails"
 msgstr ""
+"Ihre E-Mail-Adresse enthält unzulässige Zeichen. Sie können es nicht zu "
+"einem POP/IMAP-Konto machen, Sie können es nur als Umleitung zu anderen E-"
+"Mails verwenden"
 
 #: ../class/m_mail.php:706
 msgid ""
@@ -6672,10 +6692,14 @@ msgid ""
 "email address and check 'Yes' in POP/IMAP account, or set some recipients in"
 " the redirection field."
 msgstr ""
+"Warnung: Sie haben eine E-Mail erstellt, die kein Alias und kein POP/IMAP-"
+"Postfach ist. Das ist sicherlich NICHT das, was Sie tun wollen. Um dies zu "
+"beheben, bearbeiten Sie die E-Mail-Adresse und aktivieren Sie \"Ja\" im POP/"
+"IMAP-Konto oder legen Sie einige Empfänger im Umleitungsfeld fest."
 
 #: ../class/m_mail.php:896
 msgid "The slave MX account was not found"
-msgstr ""
+msgstr "Das Slave-MX-Konto wurde nicht gefunden"
 
 #: ../class/m_mail.php:945
 msgid "Problem: can't create default bounce mail"
@@ -6745,6 +6769,26 @@ msgid ""
 "\n"
 "Cordially.\n"
 msgstr ""
+"Hallo\n"
+"\n"
+"Sie haben die Änderung Ihres Passworts für Ihre\n"
+"Konto %s auf %s\n"
+"Hier sind Ihr Benutzername und Ihr Passwort für den Zugriff auf das Panel:\n"
+"\n"
+"--------------------------------------\n"
+"\n"
+"Benutzername : %s\n"
+"Kennwort : %s\n"
+"\n"
+"--------------------------------------\n"
+"\n"
+"Hinweis: Wenn Sie diese Änderung nicht angefordert haben, bedeutet dies, "
+"dass\n"
+"Jemand hat es an deiner Stelle getan. Sie können diese Meldung ignorieren.\n"
+"Wenn es erneut passiert, wenden Sie sich bitte an den Administrator Ihres "
+"Servers. \n"
+"\n"
+"Herzlich.\n"
 
 #: ../class/m_mem.php:509
 #, php-format
@@ -6768,6 +6812,28 @@ msgid ""
 "\n"
 "Cordially.\n"
 msgstr ""
+"Hallo\n"
+"\n"
+"Jemand (vielleicht Sie) hat eine Änderung der E-Mail-Adresse des Kontos "
+"angefordert\n"
+"%s auf %s\n"
+"Um Ihre Anfrage zu bestätigen, gehen Sie zu dieser URL:\n"
+"\n"
+"%s\n"
+"\n"
+"(Warnung: Wenn diese Adresse in 2 Zeilen angezeigt wird, vergessen Sie nicht,"
+"\n"
+"Nehmen Sie es auf einer Zeile).\n"
+"Das Panel fragt Sie nach dem Schlüssel, der bei der E-Mail-Adresse angegeben "
+"ist\n"
+"Es wurde eine Änderung beantragt.\n"
+"\n"
+"Wenn Sie nicht um diese Änderung gebeten haben, bedeutet dies, dass jemand\n"
+"Habe es an deiner Stelle getan. Sie können diese Meldung ignorieren. Wenn es "
+"passiert\n"
+"Wenden Sie sich auch hier an den Administrator Ihres Servers.\n"
+"\n"
+"Herzlich.\n"
 
 #: ../class/m_mem.php:551
 msgid "The information you entered is incorrect."
@@ -6978,7 +7044,7 @@ msgstr "quota_"
 
 #: ../class/m_quota.php:220
 msgid "Web disk space"
-msgstr ""
+msgstr "Festplattenspeicher im Internet"
 
 #: ../class/m_quota.php:262
 msgid "Error writing the quota entry!"
@@ -6986,7 +7052,7 @@ msgstr "Fehler beim schreiben eines leeren Zitates!"
 
 #: ../class/m_quota.php:343
 msgid "Type can only contains characters a-z and 0-9"
-msgstr ""
+msgstr "Typ darf nur die Zeichen a-z und 0-9 enthalten"
 
 #: ../class/m_quota.php:595
 msgid "B"
@@ -7003,109 +7069,133 @@ msgstr "KByte"
 #: ../class/m_ssl.php:99
 msgid "FATAL: no certificates in certificates table, even the SnakeOil one??"
 msgstr ""
+"FATAL: keine Zertifikate in der Zertifikatstabelle, auch nicht die SnakeOil-"
+"Tabelle??"
 
 #: ../class/m_ssl.php:132
 #, php-format
 msgid "Reloading domain %s as we have new certificate %s"
-msgstr ""
+msgstr "Domain %s wird neu geladen, da wir das neue Zertifikat %s haben"
 
 #: ../class/m_ssl.php:187
 msgid "Can't put file into /etc/ssl/certs/"
-msgstr ""
+msgstr "Datei kann nicht in /etc/ssl/certs/ abgelegt werden"
 
 #: ../class/m_ssl.php:194
 msgid "Can't put file into /etc/ssl/private/"
-msgstr ""
+msgstr "Datei kann nicht in /etc/ssl/private/ abgelegt werden"
 
 #: ../class/m_ssl.php:300
 msgid "No SSL certificates available"
-msgstr ""
+msgstr "Keine SSL-Zertifikate verfügbar"
 
 #: ../class/m_ssl.php:324
 msgid "Bad FQDN domain name"
-msgstr ""
+msgstr "Ungültiger FQDN-Domänenname"
 
 #: ../class/m_ssl.php:330
 msgid "Can't generate a private key (1)"
-msgstr ""
+msgstr "Privater Schlüssel kann nicht generiert werden (1)"
 
 #: ../class/m_ssl.php:335
 msgid "Can't generate a private key (2)"
-msgstr ""
+msgstr "Privater Schlüssel kann nicht generiert werden (2)"
 
 #: ../class/m_ssl.php:346
 msgid "Can't generate a CSR"
-msgstr ""
+msgstr "CSR kann nicht generiert werden"
 
 #: ../class/m_ssl.php:369
 msgid "Can't find this Certificate"
-msgstr ""
+msgstr "Dieses Zertifikat kann nicht gefunden werden"
 
 #: ../class/m_ssl.php:470
 msgid "Certificate already exists in database"
-msgstr ""
+msgstr "Das Zertifikat ist bereits in der Datenbank vorhanden"
 
 #: ../class/m_ssl.php:492
 msgid "Can't save the Key/Crt/Chain now. Please try later."
 msgstr ""
+"Der Schlüssel/Crt/Chain kann jetzt nicht gespeichert werden. Bitte versuchen "
+"Sie es später."
 
 #: ../class/m_ssl.php:532
 msgid "Can't save the Crt/Chain now. Please try later."
 msgstr ""
+"Der Crt/die Kette kann jetzt nicht gespeichert werden. Bitte versuchen Sie "
+"es später."
 
 #: ../class/m_ssl.php:733
 msgid ""
 "Can't find the private key in the certificate table, please check your form."
 msgstr ""
+"Wenn Sie den privaten Schlüssel in der Zertifikatstabelle nicht finden "
+"können, überprüfen Sie bitte Ihr Formular."
 
 #: ../class/m_ssl.php:742
 msgid ""
 "The certificate must begin by BEGIN CERTIFICATE and end by END CERTIFICATE "
 "lines. Please check you pasted it in PEM form."
 msgstr ""
+"Das Zertifikat muss mit den Zeilen BEGIN CERTIFICATE beginnen und mit den "
+"Zeilen END CERTIFICATE enden. Bitte überprüfen Sie, ob Sie es im PEM-Format "
+"eingefügt haben."
 
 #: ../class/m_ssl.php:747
 msgid ""
 "The chained certificate must begin by BEGIN CERTIFICATE and end by END "
 "CERTIFICATE lines. Please check you pasted it in PEM form."
 msgstr ""
+"Das verkettete Zertifikat muss mit den Zeilen BEGIN CERTIFICATE beginnen und "
+"mit den Zeilen END CERTIFICATE enden. Bitte überprüfen Sie, ob Sie es im PEM-"
+"Format eingefügt haben."
 
 #: ../class/m_ssl.php:753
 msgid ""
 "The private key must begin by BEGIN (RSA )PRIVATE KEY and end by END (RSA "
 ")PRIVATE KEY lines. Please check you pasted it in PEM form."
 msgstr ""
+"Der private Schlüssel muss mit den Zeilen BEGIN (RSA )PRIVATE KEY und end "
+"mit END (RSA )PRIVATE KEY beginnen. Bitte überprüfen Sie, ob Sie es im PEM-"
+"Format eingefügt haben."
 
 #: ../class/m_ssl.php:789
 #, php-format
 msgid "The %d-th certificate in the chain is invalid"
-msgstr ""
+msgstr "Das %d-te Zertifikat in der Kette ist ungültig"
 
 #: ../class/m_ssl.php:797
 msgid "The certificate is invalid."
-msgstr ""
+msgstr "Das Zertifikat ist ungültig."
 
 #: ../class/m_ssl.php:802
 msgid "The private key is invalid."
-msgstr ""
+msgstr "Das Zertifikat ist ungültig."
 
 #: ../class/m_ssl.php:807
 msgid "The private key is not the one signed inside the certificate."
 msgstr ""
+"Der private Schlüssel ist nicht derjenige, der im Zertifikat signiert ist."
 
 #: ../class/m_ssl.php:813
 msgid "Can't export your certificate as a string, please check its syntax."
 msgstr ""
+"Wenn Sie Ihr Zertifikat nicht als Zeichenfolge exportieren können, "
+"überprüfen Sie bitte die Syntax."
 
 #: ../class/m_ssl.php:818
 msgid ""
 "Can't export one of your chained certificates as a string, please check its "
 "syntax."
 msgstr ""
+"Wenn Sie eines Ihrer verketteten Zertifikate nicht als String exportieren "
+"können, überprüfen Sie bitte die Syntax."
 
 #: ../class/m_ssl.php:824
 msgid "Can't export your private key as a string, please check its syntax."
 msgstr ""
+"Sie können Ihren privaten Schlüssel nicht als String exportieren, bitte "
+"überprüfen Sie die Syntax."
 
 #: ../class/mime.php:115
 msgid "CSS Stylesheet"
