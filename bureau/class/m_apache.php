@@ -78,6 +78,8 @@ class m_apache {
         // Replace needed vars in template file
         $tpl=file_get_contents($template);
         $tpl = strtr($tpl, array(
+            "%%PORT_HTTP%%" => "80",
+            "%%PORT_HTTPS%%" => "443",
             "%%LOGIN%%" => $subdom['login'],
             "%%fqdn%%" => $subdom['fqdn'],
             "%%document_root%%" => getuserpath($subdom['login']) . $subdom['valeur'],
