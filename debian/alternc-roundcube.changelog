@@ -1,3 +1,8 @@
+alternc-roundcube (3.5.0) stretch buster bullseye bookworm; urgency=low
+
+  * alternc-roundcube lifetime is now diverging
+  * Provide compatibility to recent debian release
+
 alternc-roundcube (3.5.0~rc2) stretch buster; urgency=low
 
   * First official AlternC 3.5 provided by AlternC project
