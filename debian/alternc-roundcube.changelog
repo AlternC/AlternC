@@ -1,0 +1,6 @@
+alternc-roundcube (3.5.0~rc2) stretch buster; urgency=low
+
+  * First official AlternC 3.5 provided by AlternC project
+  * Backport evolve ported by Koubmbit
+
+ -- Camille Lafitte <alternc@webelys.com>  Tue, 9 Nov 2023 13:13:13 +0200
