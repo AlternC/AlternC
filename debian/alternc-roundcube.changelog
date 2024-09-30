@@ -1,3 +1,12 @@
+alternc-roundcube (3.5.1) stretch buster bullseye bookworm; urgency=low
+
+  * Pliugin can be installed until debian 12
+  * Take in consideration new patch to support recent debian release #
+
+close #573
+
+ -- Camille Lafitte <alternc@webelys.com>  Mon, 30 Sep 2024 17:13:13 +0200
+
 alternc-roundcube (3.5.0~rc2) stretch buster; urgency=low
 
   * First official AlternC 3.5 provided by AlternC project
