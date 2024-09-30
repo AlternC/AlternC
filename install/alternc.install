@@ -418,9 +418,11 @@ if [ -x /usr/sbin/apache2 ]; then
     then
 	a2enmod expires
     fi
-    if ! [ -L /etc/apache2/mods-enabled/ssl.load ]
+    if ! [ -L /etc/apache2/mods-enabled/ssl.load ] && [ "$APACHE_SSL_DISABLED" != "yes" ]
     then
 	a2enmod ssl
+    else
+	a2dismod ssl
     fi
 
     if [ ! -h /etc/apache2/conf-available/alternc-ssl.conf ] && [ -e /etc/apache2/conf-available/ ]; then
