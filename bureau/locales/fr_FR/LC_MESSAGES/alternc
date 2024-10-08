@@ -7054,5 +7054,54 @@ msgstr "Animation Flash"
 msgid "Real Media File"
 msgstr "Fichier Real Media"
 
+#: ../admin/adm_checkhttps.php:37 ../admin/adm_panel.php:50
+msgid "Check HTTPs redirect for Vhosts"
+msgstr "Vérification des redirections HTTPs"
+
+#: ../admin/adm_checkhttps.php:52
+msgid ""
+"Here is the list of the hosted virtual-hosts installed on this server. This "
+"page checks that all hosted virtual-hosts give a redirect to HTTPS (secured) "
+"when called using HTTP (unsecured)."
+msgstr "Voici la liste des hébergements web installés sur ce serveur. Cette page vérifie que tous ces hébergements redirigent bien le HTTP (non sûr) vers le HTTPS (sûr)"
+
+#: ../admin/adm_checkhttps.php:55
+msgid ""
+"This page is automatically cached for a day. If you want to update the "
+"checks, click "
+msgstr "Cette page est mise en cache pendant une journée. Si vous souhaitez la mettre à jour, cliquez "
+
+#: ../admin/adm_checkhttps.php:55
+msgid "Update cache information"
+msgstr "Pour mettre à jour les informations du cache"
+
+#: ../admin/adm_checkhttps.php:59
+msgid "Redirect status"
+msgstr "État de la redirection"
+
+#: ../admin/adm_checkhttps.php:59
+msgid "Redirect url"
+msgstr "URL de redirection"
+
+#: ../admin/adm_checkhttps.php:59
+msgid "Virtual Host"
+msgstr "Hébergement web"
+
+#: ../admin/adm_checkhttps.php:65
+msgid "Redirect to https elsewhere"
+msgstr "Redirige en HTTPS ailleurs"
+
+#: ../admin/adm_checkhttps.php:66
+msgid "Not redirecting to HTTPS"
+msgstr "ne redirige pas vers HTTPS"
+
+#: ../admin/adm_checkhttps.php:67
+msgid "Timeout"
+msgstr "Délai dépassé"
+
+#: ../admin/adm_checkhttps.php:69
+msgid "Errored"
+msgstr "En erreur"
+
 #~ msgid "Wich database server for this user ?"
 #~ msgstr "Which database server for this user ?"
