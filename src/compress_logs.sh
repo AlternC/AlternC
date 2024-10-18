@@ -1,7 +1,7 @@
 #! /bin/bash
 
-# How long do we wait before compressing the log ? Default: 2
-DAYS=2
+# How long do we wait before compressing the log? Default: 2
+LOGS_COMPRESS_DAYS=2
 
 for CONFIG_FILE in \
       /etc/alternc/local.sh \
@@ -19,5 +19,4 @@ stop_if_jobs_locked
 # ALTERNC_LOGS is from local.sh
 
 #Compress logs older than XX days
-nice -n 10 find "$ALTERNC_LOGS" -type f -name '*.log' -mtime +$DAYS -exec gzip '{}' \;
-
+nice -n 10 find "$ALTERNC_LOGS" -type f -name '*.log' -mtime +$LOGS_COMPRESS_DAYS -exec gzip '{}' \;
