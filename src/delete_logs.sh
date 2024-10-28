@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# How many day do we keep the logs?
-LOGS_DELETE_DAYS=366
-
 for CONFIG_FILE in \
       /etc/alternc/local.sh \
       /usr/lib/alternc/functions.sh
@@ -13,6 +10,9 @@ for CONFIG_FILE in \
     fi
     . "$CONFIG_FILE"
 done
+
+# How many day do we keep the logs?
+LOGS_DELETE_DAYS="${LOGS_DELETE_DAYS:-366}"
 
 stop_if_jobs_locked
 

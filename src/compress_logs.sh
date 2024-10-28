@@ -1,8 +1,5 @@
 #! /bin/bash
 
-# How long do we wait before compressing the log? Default: 2
-LOGS_COMPRESS_DAYS=2
-
 for CONFIG_FILE in \
       /etc/alternc/local.sh \
       /usr/lib/alternc/functions.sh
@@ -13,6 +10,9 @@ for CONFIG_FILE in \
     fi
     . "$CONFIG_FILE"
 done
+
+# How long do we wait before compressing the log? Default: 2
+LOGS_COMPRESS_DAYS="${LOGS_COMPRESS_DAYS:-2}"
 
 stop_if_jobs_locked
 
