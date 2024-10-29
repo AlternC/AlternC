@@ -134,6 +134,14 @@ ALTERNC_LOGS=""
 # called from the panel. To enable quota-over-NFS, put yes here
 NFS_QUOTA=no
 
+# How long do we wait before compressing the log
+# default is 2
+LOGS_COMPRESS_DAYS=2
+
+# How many day do we keep the logs?
+# defautl is 366 day
+LOGS_DELETE_DAYS=366
+
 EOF
 
         chown root:alterncpanel $CONFIGFILE
@@ -173,6 +181,18 @@ EOF
 # the default is NO, since this dramatically block /usr/lib/alternc/quota* functions
 # called from the panel. To enable quota-over-NFS, put yes here
 NFS_QUOTA=no" >> $CONFIGFILE
+
+    # Add LOGS_COMPRESS_DAYS
+    grep -Eq "^ *LOGS_COMPRESS_DAYS=" $CONFIGFILE || echo "
+# How long do we wait before compressing the log
+# default is 2
+LOGS_COMPRESS_DAYS=2" >> $CONFIGFILE
+
+    # Add LOGS_DELETE_DAYS
+    grep -Eq "^ *LOGS_DELETE_DAYS=" $CONFIGFILE || echo "
+# How many day do we keep the logs?
+# defautl is 366 day
+LOGS_DELETE_DAYS=366" >> $CONFIGFILE
 
     # Erase all apacheconf file
     # They will be regenerated without the bug by upgrade_check.sh below.
