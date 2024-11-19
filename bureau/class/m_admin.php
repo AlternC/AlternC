@@ -1527,7 +1527,7 @@ class m_admin {
             return false;
         }
 
-        if (!$pol["allowlogin"]) {
+        if (!$pol["allowlogin"] && !($canbeempty && empty($password))) {
             // We do misc check on password versus login : 
             $logins = preg_split("/[@_-]/", $login);
             $logins[] = $login;
