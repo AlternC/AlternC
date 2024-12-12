@@ -37,7 +37,10 @@ class m_apache {
     // Where do we store all Apache vhosts ?
     var $vhostroot="/var/lib/alternc/apache-vhost/";
 
-    // launched before any action by updatedomains 
+    var $port_http_default="80";
+    var $port_https_default="443";
+
+    // launched before any action by updatedomains
     function hook_updatedomains_web_pre() {
         $this->shouldreload=false;
     }
@@ -75,11 +78,16 @@ class m_apache {
         } else {
             $chainline="";
         }
+
+        //Retrieve APACHE port value
+        $port_http  = (!empty($GLOBALS['L_APACHE_PORT_HTTP']) && intval($GLOBALS['L_APACHE_PORT_HTTP']) > 0) ? intval($GLOBALS['L_APACHE_PORT_HTTP']) :  $this->port_http_default;
+        $port_https  = (!empty($GLOBALS['L_APACHE_PORT_HTTPS']) && intval($GLOBALS['L_APACHE_PORT_HTTPS']) > 0) ? intval($GLOBALS['L_APACHE_PORT_HTTPS']) : $this->port_https_default;
+
         // Replace needed vars in template file
         $tpl=file_get_contents($template);
         $tpl = strtr($tpl, array(
-            "%%PORT_HTTP%%" => "80",
-            "%%PORT_HTTPS%%" => "443",
+            "%%PORT_HTTP%%" => $port_http,
+            "%%PORT_HTTPS%%" => $port_https,
             "%%LOGIN%%" => $subdom['login'],
             "%%fqdn%%" => $subdom['fqdn'],
             "%%document_root%%" => getuserpath($subdom['login']) . $subdom['valeur'],
