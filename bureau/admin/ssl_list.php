@@ -84,8 +84,7 @@ if ($info) {
 <table class="tlist">
     <tr><th></th><th><?php __("Domain Name"); ?></th><th><?php __("Status"); ?></th><th><?php __("Validity period"); ?></th><th><?php __("Used by"); ?></th></tr>
     <?php
-    reset($r);
-    while (list($key, $val) = each($r)) {
+        foreach($r as $key=>$val) {
         ?>
         <tr class="lst">
             <td><div class="ina edit"><a href="ssl_view.php?id=<?php echo $val["id"] ?>"><?php __("Details"); ?></a></div></td>

@@ -30,12 +30,11 @@ $fields = array (
 getFields($fields);
 
 if (isset($confirm) && ($confirm=="y")) {
-  reset($_POST);
-  while (list($key,$val)=each($_POST)) {
+  foreach($_POST as $key=>$val) {
     if (substr($key,0,4)=="del_") {
       // Effacement de la base $val
       if($mysql->del_user($val)) {
-	$msg->raise("INFO", "mysql", _("The user '%s' has been successfully deleted"), $val);
+          $msg->raise("INFO", "mysql", _("The user '%s' has been successfully deleted"), $val);
       }
     }
   }
@@ -57,8 +56,7 @@ include_once("head.php");
 <input type="hidden" name="confirm" value="y" />
 <ul>
 <?php
-reset($_POST);
-while (list($key,$val)=each($_POST)) {
+foreach($_POST as $key=>$val) {
   if (substr($key,0,4)=="del_") {
       echo "<li><input type=\"hidden\" name=\"".ehe($key,false)."\" value=\"".ehe($val,false)."\" /><b>".ehe($val,false)."</b></li>\n";
   }

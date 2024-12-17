@@ -60,7 +60,7 @@ echo $msg->msg_html_all();
 $hl=$aws->host_list();
 reset($hl);
 $hatab=$aws->get_hostaliases($id);
-while (list($key,$val)=each($hl)) {
+foreach($hl as $key=>$val) {
   $ho=$val["hostname"];
   $ty=$val["desc"];
   echo "<input type=\"checkbox\" name=\"hostaliases[]\" id=\"ha_$ho\" value=\"$ho\"";

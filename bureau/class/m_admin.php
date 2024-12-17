@@ -286,8 +286,7 @@ class m_admin {
         $db->query("SELECT * FROM local WHERE uid= ?;", array($uid));
         if ($db->num_rows()) {
             $db->next_record();
-            reset($db->Record);
-            while (list($key, $val) = each($db->Record)) {
+            foreach($db->Record as $key => $val) {
                 $c[$key] = $val;
             }
         }
@@ -295,8 +294,7 @@ class m_admin {
         $db->query("SELECT count(*) as nbcreated FROM membres WHERE creator= ?;", array($uid));
         if ($db->num_rows()) {
             $db->next_record();
-            reset($db->Record);
-            while (list($key, $val) = each($db->Record)) {
+            foreach($db->Record as $key => $val) {
                 $c[$key] = $val;
             }
         }
@@ -643,10 +641,10 @@ class m_admin {
         // The returned value should provide additional information
         $before_add_hook_data = $hooks->invoke('hook_before_alternc_add_member', [$login]);
         foreach($before_add_hook_data as $create) {
-	    if($create !== null) {
-		$msg->raise("ERROR", "admin", _("The account '%s' cannot be created. %s"), [$login, $create]);
-		return false;
-	    }
+            if($create !== null) {
+                $msg->raise("ERROR", "admin", _("The account '%s' cannot be created. %s"), [$login, $create]);
+                return false;
+            }
         }
 
         $pass = password_hash($pass, PASSWORD_BCRYPT);

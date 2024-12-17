@@ -59,8 +59,7 @@ echo $msg->msg_html_all();
 <tr><th><?php __("Quota"); ?></th><th style="text-align: right"><?php __("Total"); ?></th><th><?php __("Used"); ?></th></tr>
 <?php
 $ql=$quota->qlist();
-reset($ql);
-while (list($key,$val)=each($ql)) {
+foreach($ql as $key=>$val) {
 	if (!isset($r[$key])) continue;
 	echo "<tr>";
 	echo "<td>";

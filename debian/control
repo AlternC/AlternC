@@ -17,16 +17,16 @@ Pre-depends: debconf (>= 0.5.00) | debconf-2.0
            , acl
 Depends: debianutils (>= 1.13.1)
        , apache2
-       , libapache2-mpm-itk
-       , libapache2-mod-php7.3 | libapache2-mod-php7.0 | libapache2-mod-php5
-       , php7.3-mysql | php7.0-mysql | php5-mysql
-       , php7.3-curl | php7.0-curl | php5-curl | php-curl
-       , php7.3-cli | php7.0-cli | php5-cli | php-cli
+       , apache2-mpm-itk | libapache2-mpm-itk
+       , libapache2-mod-php8.2 | libapache2-mod-php7.4 | libapache2-mod-php7.3 | libapache2-mod-php7.0 | libapache2-mod-php5
+       , php8.2-mysql | php7.4-mysql | php7.3-mysql | php7.0-mysql | php5-mysql
+       , php8.2-curl | php7.4-curl | php7.3-curl | php7.0-curl | php5-curl | php-curl
+       , php8.2-cli | php7.4-cli | php7.3-cli | php7.0-cli | php5-cli | php-cli
        , phpmyadmin
        , ssl-cert
        , libjs-prettify
        , libjs-jquery
-       , libjs-jquery-tablesorter       
+       , libjs-jquery-tablesorter
        , libjs-jquery-ui
        , libjs-jquery-ui-theme-redmond
        , postfix
@@ -54,7 +54,6 @@ Depends: debianutils (>= 1.13.1)
        , vlogger
        , mailutils | mailx
        , zip
-       , incron
        , cron
        , opendkim
        , opendkim-tools
@@ -90,6 +89,7 @@ Suggests: alternc-awstats
        , magpierss
        , ncompress
        , alternc-roundcube
+       , incron
 Description: Hosting software management suite for Debian
  AlternC is a mutualized hosting software manager for Linux.
  It allows you to manage your websites, domains, ftp, emails, aliases,
@@ -106,16 +106,16 @@ Architecture: all
 Pre-depends: debconf (>= 0.5.00) | debconf-2.0, acl
 Depends: debianutils (>= 1.13.1)
          , apache2
-         , libapache2-mpm-itk
-         , libapache2-mod-php7.3 | libapache2-mod-php7.0 | libapache2-mod-php5
-         , php7.3-mysql | php7.0-mysql | php5-mysql
-         , php7.3-curl | php7.0-curl | php5-curl | php-curl
-         , php7.3-cli | php7.0-cli | php5-cli | php-cli
+         , apache2-mpm-itk | libapache2-mpm-itk
+         , libapache2-mod-php8.2 | libapache2-mod-php7.4 | libapache2-mod-php7.3 | libapache2-mod-php7.0 | libapache2-mod-php5
+         , php8.2-mysql | php7.4-mysql | php7.3-mysql | php7.0-mysql | php5-mysql
+         , php8.2-curl | php7.4-curl | php7.3-curl | php7.0-curl | php5-curl | php-curl
+         , php8.2-cli | php7.4-cli | php7.3-cli | php7.0-cli | php5-cli | php-cli
          , phpmyadmin
          , ssl-cert
          , libjs-prettify
          , libjs-jquery
-         , libjs-jquery-tablesorter       
+         , libjs-jquery-tablesorter
          , libjs-jquery-ui
          , libjs-jquery-ui-theme-redmond
          , postfix
@@ -143,7 +143,6 @@ Depends: debianutils (>= 1.13.1)
          , dovecot-mysql
          , vlogger
          , mailutils | mailx
-         , incron
          , cron
          , opendkim
          , opendkim-tools
@@ -172,6 +171,7 @@ Suggests: alternc-awstats
          , zip
          , ncompress
          , bzip2
+         , incron
 Description: Hosting software management suite for Debian
  AlternC is a mutualized hosting software manager for Linux.
  It allows you to manage your websites, domains, ftp, emails, aliases,
@@ -186,32 +186,6 @@ Description: Hosting software management suite for Debian
  More information at https://alternc.com/
 Homepage: https://alternc.com/
 
-Package: alternc-roundcube
-Architecture: all
-Pre-depends: debconf (>= 0.5.00) | debconf-2.0
-Depends: debianutils (>= 1.13.1)
-       , alternc (>= 3.0~rc1)
-       , roundcube (>= 0.7.1)
-       , roundcube-mysql (>= 0.7.1)
-       , roundcube-plugins (>= 0.7.1)
-       , imagemagick
-       , ${misc:Depends}
-Conflicts: alternc (<< 1.1)
-Provides: alternc-webmail
-Suggests: 
-Description: Roundcube-Webmail plugin and configuration for AlternC
- AlternC is a mutualized hosting software manager for Linux.
- It allows you to manage your websites, domains, ftp, emails, aliases,
- web statistics, mailing-lists, jabber accounts, etc.
- .
- This extension to AlternC is installing and configuring properly the
- Roundcube Webmail. It also configure sieve to allow server-side
- filtering, the password changing through MySQL, and the automatic
- creation of proper profile with the right address and language.
- .
- More information at https://alternc.com/
-Homepage: https://alternc.com/
-
 Package: alternc-awstats
 Priority: optional
 Section: admin
@@ -219,7 +193,7 @@ Architecture: all
 Pre-depends: debconf
 Depends: alternc (>= 3.0~rc1)
        , awstats (>=6.1-1)
-       , php7.3-cli | php7.0-cli | php-cli
+       , php8.2-cli | php7.4-cli | php7.3-cli | php7.0-cli | php-cli
        , ${misc:Depends}
 Suggests: apachemerge
 Description: Awstats statistics module for AlternC

@@ -80,4 +80,5 @@ $config['plugins'] = array(
 );
 
 // skin name: folder from skins/
-$config['skin'] = 'larry';
+// Use default configuration from debian package
+//$config['skin'] = null;

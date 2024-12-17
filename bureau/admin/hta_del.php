@@ -23,10 +23,9 @@
  * @copyright AlternC-Team 2000-2017 https://alternc.com/ 
  */
 
- require_once("../class/config.php");
+require_once("../class/config.php");
 
-reset($_POST);
-while (list($key,$val)=each($_POST)) {
+foreach($_POST as $key=>$val) {
 	if (substr($key,0,4)=="del_") {
 		$return = $hta->DelDir($val);
 		if ($return) {

@@ -778,7 +778,11 @@ class m_mysql {
         $login = $db->f("name");
 
         // Ok, database exists and dbname is compliant. Let's proceed
-        $this->dbus->query("REVOKE ALL PRIVILEGES ON *.* FROM " . $db->quote($user) . "@" . $db->quote($this->dbus->Client) . ";");
+        try {
+            $this->dbus->query("REVOKE ALL PRIVILEGES ON *.* FROM " . $db->quote($user) . "@" . $db->quote($this->dbus->Client) . ";");
+        } catch (Exception $e) {
+        }
+        
         $this->dbus->query("DELETE FROM mysql.db WHERE User= ? AND Host= ? ;", array($user, $this->dbus->Client));
         $this->dbus->query("DELETE FROM mysql.user WHERE User= ? AND Host= ? ;", array($user, $this->dbus->Client));
         $this->dbus->query("FLUSH PRIVILEGES");
@@ -907,7 +911,10 @@ class m_mysql {
         $this->dbus->query("SELECT * FROM mysql.db WHERE User = ? AND Db = ?;", array($user, $dbname));
 
         if ($this->dbus->num_rows()) {
-            $this->dbus->query("REVOKE ALL PRIVILEGES ON `".$dbname."`.* FROM ".$this->dbus->quote($user)."@" . $this->dbus->quote($this->dbus->Client) . ";");
+            try {
+                $this->dbus->query("REVOKE ALL PRIVILEGES ON `".$dbname."`.* FROM ".$this->dbus->quote($user)."@" . $this->dbus->quote($this->dbus->Client) . ";");
+            } catch (Exception $e) {
+            }
         }
         if ($strrights) {
             $strrights = substr($strrights, 0, strlen($strrights) - 1);

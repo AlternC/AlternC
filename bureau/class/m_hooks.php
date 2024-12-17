@@ -60,7 +60,7 @@ class m_hooks {
         }
         foreach ($classes as $c) {
             global $$c;
-            if (method_exists($$c, $hname)) {
+            if (is_object($$c) && method_exists($$c, $hname)) {
                 //$val[$$c]=call_user_func_array(array($$c,$hname), $hparam);
                 $val[$c] = call_user_func_array(array($$c, $hname), $hparam);
             }

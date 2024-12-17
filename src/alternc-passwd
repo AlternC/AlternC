@@ -10,7 +10,7 @@ else
 fi
 
 # Check that the login exists : 
-MYSQL="mysql  --defaults-file=/etc/alternc/my.cnf --skip-column-name alternc -B -e "
+MYSQL="mysql  --defaults-file=/etc/alternc/my.cnf --skip-column-names alternc -B -e "
 
 USERID="`$MYSQL "SELECT uid FROM membres WHERE login='${LOGIN}'"`"
 

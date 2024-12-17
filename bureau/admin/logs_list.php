@@ -52,7 +52,7 @@ if(!$list || empty($list['dir'])){
   <tbody>
 <?php
 //listing of every logs of the current user.
-while (list($key,$val)=each($list)){
+foreach($list as $key=>$val) {
   foreach($val as $k => $v){
   ?>
   <tr class="lst">

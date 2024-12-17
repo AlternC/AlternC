@@ -70,7 +70,7 @@ class m_mail {
     /**
      * Constructeur
      */
-    function m_mail() {
+    function __construct() {
         global $L_FQDN;
         $this->srv_postfix = variable_get('fqdn_postfix', $L_FQDN, 'FQDN name for humans for smtp services. If you change it, launch reload-certs', array('desc' => 'Name', 'type' => 'string'));
         $this->srv_dovecot = variable_get('fqdn_dovecot', $L_FQDN, 'FQDN name for humans for pop/imap services. If you change it, launch reload-certs', array('desc' => 'Name', 'type' => 'string'));
@@ -807,7 +807,7 @@ ORDER BY
             $str.="  <domain>\n    <name>" . xml_entities($d["domain"]) . "</name>\n";
             $s = $this->enum_domain_mails($d["id"]);
             if (count($s)) {
-                while (list($key, $val) = each($s)) {
+                foreach($s as $key=>$val) {
                     $str.="    <address>\n";
                     $str.="      <name>" . xml_entities($val["address"]) . "</name>\n";
                     $str.="      <enabled>" . xml_entities($val["enabled"]) . "</enabled>\n";

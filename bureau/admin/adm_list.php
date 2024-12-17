@@ -178,7 +178,7 @@ if (!is_array($accountList) || empty($accountList)) {
             reset($accountList);
 
             $col = 1;
-            while (list($key, $val) = each($accountList)) {
+            foreach($accountList as $key=>$val) {
                 $col = 3 - $col;
                 ?>
                 <tr class="lst">
@@ -222,7 +222,7 @@ if (!is_array($accountList) || empty($accountList)) {
                     </td>
                 </tr>
                 <?php
-            } // while (list($key,$val)=each($accountList)) {  
+            } // foreach $accountList
             ?>
         </table>
         <br/>

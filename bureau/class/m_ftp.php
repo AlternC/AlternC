@@ -31,7 +31,7 @@ class m_ftp {
     /**
      * Constructor
      */
-    function m_ftp() {
+    function __construct() {
         global $L_FQDN;
         $this->srv_proftpd = variable_get('fqdn_proftpd', $L_FQDN, 'Human name for FTP server. If you change it, launch reload-certs', array('desc' => 'Name', 'type' => 'string'));
     }
@@ -249,8 +249,7 @@ class m_ftp {
      */
     function select_prefix_list($current) {
         $r = $this->prefix_list();
-        reset($r);
-        while (list($key, $val) = each($r)) {
+        foreach($r as $val) {
             if ($current == $val) {
                 $c = " selected=\"selected\"";
             } else {

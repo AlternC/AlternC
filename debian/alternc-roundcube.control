@@ -1,0 +1,37 @@
+Source: alternc-roundcube
+Section: admin
+Priority: optional
+Maintainer: Benjamin Sonntag <benjamin@sonntag.fr>
+Build-Depends-Indep: perl
+                   , help2man
+                   , findutils (>= 4.1.7)
+                   , gettext (>= 0.10.40-5)
+Build-Depends: debhelper (>= 9)
+             , po-debconf
+Standards-Version: 3.9.8
+
+Package: alternc-roundcube
+Architecture: all
+Pre-depends: debconf (>= 0.5.00) | debconf-2.0
+Depends: debianutils (>= 1.13.1)
+       , alternc (>= 3.0~rc1)
+       , roundcube (>= 0.7.1)
+       , roundcube-mysql (>= 0.7.1)
+       , roundcube-plugins (>= 0.7.1)
+       , imagemagick
+       , ${misc:Depends}
+Conflicts: alternc (<< 1.1)
+Provides: alternc-webmail
+Suggests: 
+Description: Roundcube-Webmail plugin and configuration for AlternC
+ AlternC is a mutualized hosting software manager for Linux.
+ It allows you to manage your websites, domains, ftp, emails, aliases,
+ web statistics, mailing-lists, jabber accounts, etc.
+ .
+ This extension to AlternC is installing and configuring properly the
+ Roundcube Webmail. It also configure sieve to allow server-side
+ filtering, the password changing through MySQL, and the automatic
+ creation of proper profile with the right address and language.
+ .
+ More information at https://alternc.com/
+Homepage: https://alternc.com/
