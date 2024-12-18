@@ -40,12 +40,12 @@ CREATE TABLE IF NOT EXISTS `certificates` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE `certificates`
-      DROP `shared`,
-      DROP `ssl_action`,
-      DROP `ssl_result`,
-      ADD `provider` VARCHAR(16) NOT NULL DEFAULT '',
-      ADD `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP;
-  
+      DROP IF EXISTS `IF EXISTSshared`,
+      DROP IF EXISTS `ssl_action`,
+      DROP IF EXISTS `ssl_result`,
+      ADD IF NOT EXISTS `provider` VARCHAR(16) NOT NULL DEFAULT '',
+      ADD IF NOT EXISTS `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP;
+
 ALTER TABLE `sub_domaines`
       ADD `certificate_id` INT UNSIGNED NOT NULL DEFAULT '0' AFTER `enable`,
       ADD `provider` VARCHAR(16) NOT NULL DEFAULT '' AFTER `certificate_id`,
