@@ -425,9 +425,12 @@ if [ -x /usr/sbin/apache2 ]; then
 	a2dismod ssl
     fi
 
-    if [ ! -h /etc/apache2/conf-available/alternc-ssl.conf ] && [ -e /etc/apache2/conf-available/ ]; then
+    if [ ! -h /etc/apache2/conf-available/alternc-ssl.conf ] && [ -e /etc/apache2/conf-available/ ] && [ "$APACHE_SSL_DISABLED" != "yes" ] ; then
         ln -sf /etc/alternc/apache2-ssl.conf /etc/apache2/conf-available/alternc-ssl.conf
         a2enconf alternc-ssl
+    else
+        a2disconf alternc-ssl
+        rm /etc/apache2/conf-available/alternc-ssl.conf
     fi
 
     if [ ! -h /etc/apache2/conf-available/alternc.conf ] && [ -e /etc/apache2/conf-available/ ]; then
