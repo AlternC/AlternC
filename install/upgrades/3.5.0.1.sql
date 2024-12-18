@@ -19,6 +19,26 @@ ALTER TABLE `ftpusers` MODIFY `encrypted_password` VARCHAR(255);
 -- upgrade to merge alternc-ssl into alternc + change the way we work on SSL
 DROP TABLE IF EXISTS `certif_alias`;
 
+
+-- Enable ssl anagment when alternc-ssl was not installed previously
+CREATE TABLE IF NOT EXISTS `certificates` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `uid` int(10) unsigned NOT NULL,
+  `status` tinyint(3) unsigned NOT NULL,
+  `fqdn` varchar(255) NOT NULL,
+  `altnames` text NOT NULL,
+  `validstart` datetime NOT NULL,
+  `validend` datetime NOT NULL,
+  `sslcsr` text NOT NULL,
+  `sslkey` text NOT NULL,
+  `sslcrt` text NOT NULL,
+  `sslchain` text NOT NULL,
+  `provider` VARCHAR(16) NOT NULL DEFAULT '',
+  `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `uid` (`uid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 ALTER TABLE `certificates`
       DROP `shared`,
       DROP `ssl_action`,
