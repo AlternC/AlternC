@@ -52,12 +52,12 @@ case "$1" in
        addgroup --gid 1998 vmail
     fi
     if ! getent passwd vmail; then
-       useradd -g vmail -u 1998 vmail -d "$VMAIL_HOME" -m 
-    fi 
+       useradd -g vmail -u 1998 vmail -d "$VMAIL_HOME" -m
+    fi
     test -d "$VMAIL_HOME" || mkdir -p "$VMAIL_HOME"
-    chown vmail:vmail "$VMAIL_HOME" 
+    chown vmail:vmail "$VMAIL_HOME"
     chown vmail:vmail "$VMAIL_HOME"/* 2>/dev/null || true # It may be empty
-    chmod 770 "$VMAIL_HOME" 
+    chmod 770 "$VMAIL_HOME"
     chmod 770 "$VMAIL_HOME"/* 2>/dev/null || true # It may be empty
 
     # build local.sh if it does not exist
@@ -142,6 +142,11 @@ LOGS_COMPRESS_DAYS=2
 # defautl is 366 day
 LOGS_DELETE_DAYS=366
 
+# Apache2 behavior
+APACHE_SSL_DISABLED=no
+APACHE_PORT_HTTP=80
+APACHE_PORT_HTTPS=443
+
 EOF
 
         chown root:alterncpanel $CONFIGFILE
@@ -157,15 +162,15 @@ EOF
     # SED_SCRIPT will be modified by update_var
     SED_SCRIPT=""
     update_var alternc/hostingname HOSTING
-    update_var alternc/desktopname FQDN 
+    update_var alternc/desktopname FQDN
     update_var alternc/public_ip PUBLIC_IP
     update_var alternc/internal_ip INTERNAL_IP
     update_var alternc/monitor_ip MONITOR_IP
     update_var alternc/ns1 NS1_HOSTNAME
     update_var alternc/ns2 NS2_HOSTNAME
-    update_var alternc/default_mx DEFAULT_MX 
+    update_var alternc/default_mx DEFAULT_MX
     update_var alternc/default_mx2 DEFAULT_SECONDARY_MX
-    update_var alternc/mysql/client MYSQL_CLIENT 
+    update_var alternc/mysql/client MYSQL_CLIENT
     update_var alternc/sql/backup_type SQLBACKUP_TYPE
     update_var alternc/sql/backup_overwrite SQLBACKUP_OVERWRITE
     update_var alternc/slaves ALTERNC_SLAVES
@@ -193,6 +198,14 @@ LOGS_COMPRESS_DAYS=2" >> $CONFIGFILE
 # How many day do we keep the logs?
 # defautl is 366 day
 LOGS_DELETE_DAYS=366" >> $CONFIGFILE
+
+    # Add APACHE2 configuration:
+    grep -Eq "^ *APACHE_SSL_DISABLED=" $CONFIGFILE || echo "
+APACHE_SSL_DISABLED=no" >> $CONFIGFILE
+    grep -Eq "^ *APACHE_PORT_HTTP=" $CONFIGFILE || echo "
+APACHE_PORT_HTTP=80" >> $CONFIGFILE
+    grep -Eq "^ *APACHE_PORT_HTTPS=" $CONFIGFILE || echo "
+APACHE_PORT_HTTPS=443" >> $CONFIGFILE
 
     # Erase all apacheconf file
     # They will be regenerated without the bug by upgrade_check.sh below.

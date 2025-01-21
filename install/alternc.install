@@ -116,7 +116,7 @@ TEMPLATE_DIR="/etc/alternc/templates"
 
 # Find needed configuration files (without the initial '/')
 # replace this one unconditionnally
-CONFIG_FILES="etc/alternc/bureau.conf etc/apache2/envvars etc/alternc/apache2.conf etc/alternc/phpmyadmin.inc.php"
+CONFIG_FILES="etc/alternc/bureau.conf etc/apache2/envvars etc/alternc/apache2.conf etc/alternc/phpmyadmin.inc.php etc/apache2/mods-available/ssl.conf etc/apache2/mods-available/alternc-ssl.conf"
 
 if [ -e /etc/bind/named.conf ]; then
     CONFIG_FILES="$CONFIG_FILES etc/bind/named.conf.options"
@@ -293,6 +293,8 @@ s\\%%ns2_ip%%\\$NS2_IP\\;
 s\\%%ALTERNC_HTML%%\\$ALTERNC_HTML\\;
 s\\%%ALTERNC_MAIL%%\\$ALTERNC_MAIL\\;
 s\\%%ALTERNC_LOGS%%\\$ALTERNC_LOGS\\;
+s\\%%APACHE_PORT_HTTP%%\\$APACHE_PORT_HTTP\\;
+s\\%%APACHE_PORT_HTTPS%%\\$APACHE_PORT_HTTPS\\;
 s|%%PHPMYADMIN_BLOWFISH%%|$PHPMYADMIN_BLOWFISH|;
 EOF
 MYSQL_PASS="$MYSQL_PASS_ORIG"
@@ -418,14 +420,17 @@ if [ -x /usr/sbin/apache2 ]; then
     then
 	a2enmod expires
     fi
-    if ! [ -L /etc/apache2/mods-enabled/ssl.load ]
+    if ! [ -L /etc/apache2/mods-enabled/ssl.load ] && [ "$APACHE_SSL_DISABLED" != "yes" ]
     then
 	a2enmod ssl
+    else
+	a2dismod ssl
     fi
 
-    if [ ! -h /etc/apache2/conf-available/alternc-ssl.conf ] && [ -e /etc/apache2/conf-available/ ]; then
-        ln -sf /etc/alternc/apache2-ssl.conf /etc/apache2/conf-available/alternc-ssl.conf
+    if [ ! -h /etc/apache2/conf-available/alternc-ssl.conf ] && [ -e /etc/apache2/conf-available/ ] && [ "$APACHE_SSL_DISABLED" != "yes" ] ; then
         a2enconf alternc-ssl
+    else
+        a2disconf alternc-ssl
     fi
 
     if [ ! -h /etc/apache2/conf-available/alternc.conf ] && [ -e /etc/apache2/conf-available/ ]; then
