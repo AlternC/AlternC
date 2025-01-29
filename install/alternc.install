@@ -270,6 +270,12 @@ MYSQL_MAIL_PASS_ORIG="$MYSQL_MAIL_PASS"
 MYSQL_MAIL_PASS=$(echo "$MYSQL_MAIL_PASS" | sed -e 's/[|&]/\\&/g')
 PHPMYADMIN_BLOWFISH_ORIG="$PHPMYADMIN_BLOWFISH_ORIG"
 PHPMYADMIN_BLOWFISH=$(echo "$PHPMYADMIN_BLOWFISH" | sed -e 's/[|&]/\\&/g')
+if [ "$PROFTPD_SFTP_ENABLED" != "on" ]; then
+    PROFTPD_SFTP_ENABLED="off"
+fi
+if [[ ! "$PROFTPD_SFTP_PORT" -gt 0 ]]; then
+    PROFTPD_SFTP_PORT="2222"
+fi
 cat > $SED_SCRIPT <<EOF
 s\\%%hosting%%\\$HOSTING\\;
 s\\%%fqdn%%\\$FQDN\\;
