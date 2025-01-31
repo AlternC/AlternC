@@ -177,6 +177,8 @@ EOF
     update_var alternc/alternc_html ALTERNC_HTML
     update_var alternc/alternc_mail ALTERNC_MAIL
     update_var alternc/alternc_logs ALTERNC_LOGS
+    update_var alternc/proftpd_sftp_enabled PROFTPD_SFTP_ENABLED
+    update_var alternc/proftpd_sftp_port  PROFTPD_SFTP_PORT
     sed -e "$SED_SCRIPT" < $CONFIGFILE > $CONFIGFILE.tmp
     mv -f $CONFIGFILE.tmp $CONFIGFILE
 
