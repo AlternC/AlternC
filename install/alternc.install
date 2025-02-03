@@ -129,7 +129,7 @@ if [ -d /etc/postfix ]; then
                   etc/opendkim.conf etc/default/opendkim"
 fi
 if [ -e /etc/proftpd/proftpd.conf ]; then
-    CONFIG_FILES="$CONFIG_FILES etc/proftpd/proftpd.conf etc/proftpd/welcome.msg etc/proftpd/modules.conf"
+    CONFIG_FILES="$CONFIG_FILES etc/proftpd/proftpd.conf etc/proftpd/welcome.msg etc/proftpd/modules.conf etc/proftpd/conf.d/sftp.conf"
 fi
 
 if [ -e /etc/default/saslauthd ]; then
@@ -270,6 +270,12 @@ MYSQL_MAIL_PASS_ORIG="$MYSQL_MAIL_PASS"
 MYSQL_MAIL_PASS=$(echo "$MYSQL_MAIL_PASS" | sed -e 's/[|&]/\\&/g')
 PHPMYADMIN_BLOWFISH_ORIG="$PHPMYADMIN_BLOWFISH_ORIG"
 PHPMYADMIN_BLOWFISH=$(echo "$PHPMYADMIN_BLOWFISH" | sed -e 's/[|&]/\\&/g')
+if [ "$PROFTPD_SFTP_ENABLED" != "on" ]; then
+    PROFTPD_SFTP_ENABLED="off"
+fi
+if [[ ! "$PROFTPD_SFTP_PORT" -gt 0 ]]; then
+    PROFTPD_SFTP_PORT="2222"
+fi
 cat > $SED_SCRIPT <<EOF
 s\\%%hosting%%\\$HOSTING\\;
 s\\%%fqdn%%\\$FQDN\\;
@@ -296,6 +302,8 @@ s\\%%ALTERNC_LOGS%%\\$ALTERNC_LOGS\\;
 s\\%%APACHE_PORT_HTTP%%\\$APACHE_PORT_HTTP\\;
 s\\%%APACHE_PORT_HTTPS%%\\$APACHE_PORT_HTTPS\\;
 s|%%PHPMYADMIN_BLOWFISH%%|$PHPMYADMIN_BLOWFISH|;
+s\\%%PROFTPD_SFTP_ENABLED%%\\$PROFTPD_SFTP_ENABLED\\;
+s\\%%PROFTPD_SFTP_PORT%%\\$PROFTPD_SFTP_PORT\\;
 EOF
 MYSQL_PASS="$MYSQL_PASS_ORIG"
 MYSQL_MAIL_PASS="$MYSQL_MAIL_PASS_ORIG"

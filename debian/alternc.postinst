@@ -177,6 +177,8 @@ EOF
     update_var alternc/alternc_html ALTERNC_HTML
     update_var alternc/alternc_mail ALTERNC_MAIL
     update_var alternc/alternc_logs ALTERNC_LOGS
+    update_var alternc/proftpd_sftp_enabled PROFTPD_SFTP_ENABLED
+    update_var alternc/proftpd_sftp_port  PROFTPD_SFTP_PORT
     sed -e "$SED_SCRIPT" < $CONFIGFILE > $CONFIGFILE.tmp
     mv -f $CONFIGFILE.tmp $CONFIGFILE
 
@@ -206,6 +208,12 @@ APACHE_SSL_DISABLED=no" >> $CONFIGFILE
 APACHE_PORT_HTTP=80" >> $CONFIGFILE
     grep -Eq "^ *APACHE_PORT_HTTPS=" $CONFIGFILE || echo "
 APACHE_PORT_HTTPS=443" >> $CONFIGFILE
+
+    # Add SFTP support
+    grep -Eq "^ *PROFTPD_SFTP_ENABLED=" $CONFIGFILE || echo "
+PROFTPD_SFTP_ENABLED=off" >> $CONFIGFILE
+    grep -Eq "^ *PROFTPD_SFTP_PORT=" $CONFIGFILE || echo "
+PROFTPD_SFTP_PORT=2222" >> $CONFIGFILE
 
     # Erase all apacheconf file
     # They will be regenerated without the bug by upgrade_check.sh below.

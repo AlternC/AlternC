@@ -273,3 +273,16 @@ _Description: This upgrade may incur data loss. Continue anyway?
  before upgrading to 3.5.
  .
  If you chose to not continue, this package installation will fail.
+
+Template: alternc/proftpd_sftp_enabled
+Type: select
+Choices: on, off
+_Description:
+ Enable SFTP support with Proftp ?
+
+Template: alternc/proftpd_sftp_port
+Type: string
+_Description:
+ If SFTP enabled, define port listenning to use
+ .
+ Numerical value only
