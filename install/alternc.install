@@ -418,6 +418,7 @@ if [ -x /usr/sbin/apache2 ]; then
     fi 
     if ! [ -L /etc/apache2/mods-enabled/php$php.load ]
     then
+        a2dismod php*
 	a2enmod php$php
     fi
     if ! [ -L /etc/apache2/mods-enabled/rewrite.load ]
