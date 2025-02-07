@@ -29,7 +29,8 @@ class m_bind {
     var $shouldreconfig;
     
     var $ZONE_TEMPLATE ="/etc/alternc/templates/bind/templates/zone.template";
-    var $NAMED_TEMPLATE ="/etc/alternc/templates/bind/templates/named.template";
+    var $NAMED_TEMPLATE = "/etc/alternc/templates/bind/templates/named.template";
+    var $NAMED_DNSSEC_TEMPLATE = "/etc/alternc/templates/bind/templates/named.dnssec.template";
     var $NAMED_CONF ="/var/lib/alternc/bind/automatic.conf";
     var $RNDC ="/usr/sbin/rndc";
 
@@ -73,7 +74,7 @@ class m_bind {
      * @NOTE launched as ROOT 
      */
     function hook_updatedomains_dns_add($dominfo) {
-        global $L_FQDN,$L_NS1_HOSTNAME,$L_NS2_HOSTNAME,$L_DEFAULT_MX,$L_DEFAULT_SECONDARY_MX,$L_PUBLIC_IP,$L_PUBLIC_IPV6;
+        global $L_FQDN,$L_NS1_HOSTNAME,$L_NS2_HOSTNAME,$L_DEFAULT_MX,$L_DEFAULT_SECONDARY_MX,$L_PUBLIC_IP,$L_PUBLIC_IPV6,$L_DNSSEC_ENABLED;
         global $hooks;
 
         $domain = $dominfo["domaine"];
@@ -134,11 +135,13 @@ class m_bind {
         $zone .= $more;
         file_put_contents($this->zone_file_directory."/".$domain,$zone);
 
+        $NAMED_TEMPLATE = ($L_DNSSEC_ENABLED != "on") ? $this->NAMED_TEMPLATE : $this->NAMED_DNSSEC_TEMPLATE;
+
         // add the line into bind9 conf:
         if (add_line_to_file(
             $this->NAMED_CONF,
             trim(strtr(
-                file_get_contents($this->NAMED_TEMPLATE),
+                file_get_contents($NAMED_TEMPLATE),
                 array(
                     "@@DOMAIN@@" => $domain,
                     "@@ZONE_FILE@@" => $this->zone_file_directory."/".$domain
@@ -161,11 +164,15 @@ class m_bind {
      * @NOTE launched as ROOT 
      */
     function hook_updatedomains_dns_del($dominfo) {
+        global $L_DNSSEC_ENABLED;
         $domain = $dominfo["domaine"];
+
+        $NAMED_TEMPLATE = ($L_DNSSEC_ENABLED != "on") ? $this->NAMED_TEMPLATE : $this->NAMED_DNSSEC_TEMPLATE;
+
         if (del_line_from_file(
             $this->NAMED_CONF,
             trim(strtr(
-                file_get_contents($this->NAMED_TEMPLATE),
+                file_get_contents($NAMED_TEMPLATE),
                 array(
                     "@@DOMAIN@@" => $domain,
                     "@@ZONE_FILE@@" => $this->zone_file_directory."/".$domain
