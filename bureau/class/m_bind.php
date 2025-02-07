@@ -165,25 +165,39 @@ class m_bind {
      */
     function hook_updatedomains_dns_del($dominfo) {
         global $L_DNSSEC_ENABLED;
+        $deleted = false;
         $domain = $dominfo["domaine"];
-
-        $NAMED_TEMPLATE = ($L_DNSSEC_ENABLED != "on") ? $this->NAMED_TEMPLATE : $this->NAMED_DNSSEC_TEMPLATE;
 
         if (del_line_from_file(
             $this->NAMED_CONF,
             trim(strtr(
-                file_get_contents($NAMED_TEMPLATE),
+                file_get_contents($this->NAMED_TEMPLATE),
                 array(
                     "@@DOMAIN@@" => $domain,
                     "@@ZONE_FILE@@" => $this->zone_file_directory."/".$domain
                 )
             )))
         ) {
-            $this->shouldreconfig=true;
-        } else {
-            return 0;
+            $deleted=true;
         }
-        @unlink($this->zone_file_directory."/".$domain);
+
+        if (del_line_from_file(
+            $this->NAMED_CONF,
+            trim(strtr(
+                file_get_contents($this->NAMED_DNSSEC_TEMPLATE),
+                array(
+                    "@@DOMAIN@@" => $domain,
+                    "@@ZONE_FILE@@" => $this->zone_file_directory."/".$domain
+                )
+            )))
+        ) {
+            $deleted=true;
+        }
+
+        if ($deleted) {
+            $this->shouldreconfig=true;
+            @unlink($this->zone_file_directory."/".$domain);
+        }
         return 0;
     }
 
