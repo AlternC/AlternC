@@ -215,6 +215,12 @@ PROFTPD_SFTP_ENABLED=off" >> $CONFIGFILE
     grep -Eq "^ *PROFTPD_SFTP_PORT=" $CONFIGFILE || echo "
 PROFTPD_SFTP_PORT=2222" >> $CONFIGFILE
 
+    # Enabled DNESEC
+    grep -Eq "^ *DNSSEC_ENABLED=" $CONFIGFILE || echo "
+#Enable DNSSEC
+#Require bind >= 9.16 (enable with caution could break with buster) 
+DNSSEC_ENABLED=off" >> $CONFIGFILE
+
     # Erase all apacheconf file
     # They will be regenerated without the bug by upgrade_check.sh below.
     if dpkg --compare-versions "$2" le "0.9.3.9-globenet14"; then
