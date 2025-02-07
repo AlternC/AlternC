@@ -20,14 +20,14 @@
 
 /**
  * Manages BIND 9+ zone management templates in AlternC 3.5+
- * 
+ *
  * @copyright AlternC-Team 2000-2018 https://alternc.com/
  */
 class m_bind {
 
     var $shouldreload;
     var $shouldreconfig;
-    
+
     var $ZONE_TEMPLATE ="/etc/alternc/templates/bind/templates/zone.template";
     var $NAMED_TEMPLATE = "/etc/alternc/templates/bind/templates/named.template";
     var $NAMED_DNSSEC_TEMPLATE = "/etc/alternc/templates/bind/templates/named.dnssec.template";
@@ -37,9 +37,9 @@ class m_bind {
     var $zone_file_directory = '/var/lib/alternc/bind/zones';
 
     // ------------------------------------------------------------
-    /** Hook launched before any action by updatedomains 
+    /** Hook launched before any action by updatedomains
      * initialize the reload/reconfig flags used by POST
-     * @NOTE launched as ROOT 
+     * @NOTE launched as ROOT
      */
     function hook_updatedomains_dns_pre() {
         $this->shouldreload=false;
@@ -50,9 +50,9 @@ class m_bind {
     // ------------------------------------------------------------
     /**
      * Hook launched for each ZONE for which we want a zone update (or create)
-     * update the zone, create it if necessary, 
+     * update the zone, create it if necessary,
      * and ask for reload or reconfig of bind9 depending on what happened
-     * @NOTE launched as ROOT 
+     * @NOTE launched as ROOT
      */
     function hook_updatedomains_dns_add($dominfo) {
         global $L_FQDN,$L_NS1_HOSTNAME,$L_NS2_HOSTNAME,$L_DEFAULT_MX,$L_DEFAULT_SECONDARY_MX,$L_PUBLIC_IP,$L_PUBLIC_IPV6,$L_DNSSEC_ENABLED;
@@ -146,25 +146,39 @@ class m_bind {
      */
     function hook_updatedomains_dns_del($dominfo) {
         global $L_DNSSEC_ENABLED;
+        $deleted = false;
         $domain = $dominfo["domaine"];
-
-        $NAMED_TEMPLATE = ($L_DNSSEC_ENABLED != "on") ? $this->NAMED_TEMPLATE : $this->NAMED_DNSSEC_TEMPLATE;
 
         if (del_line_from_file(
             $this->NAMED_CONF,
             trim(strtr(
-                file_get_contents($NAMED_TEMPLATE),
+                file_get_contents($this->NAMED_TEMPLATE),
                 array(
                     "@@DOMAIN@@" => $domain,
                     "@@ZONE_FILE@@" => $this->zone_file_directory."/".$domain
                 )
             )))
         ) {
-            $this->shouldreconfig=true;
-        } else {
-            return 0;
+            $deleted=true;
         }
-        @unlink($this->zone_file_directory."/".$domain);
+
+        if (del_line_from_file(
+            $this->NAMED_CONF,
+            trim(strtr(
+                file_get_contents($this->NAMED_DNSSEC_TEMPLATE),
+                array(
+                    "@@DOMAIN@@" => $domain,
+                    "@@ZONE_FILE@@" => $this->zone_file_directory."/".$domain
+                )
+            )))
+        ) {
+            $deleted=true;
+        }
+
+        if ($deleted) {
+            $this->shouldreconfig=true;
+            @unlink($this->zone_file_directory."/".$domain);
+        }
         return 0;
     }
 
@@ -198,12 +212,12 @@ class m_bind {
         }
     }
 
-    
+
     // ------------------------------------------------------------
-    /** 
-     * read a zone file for $domain, 
-     * @param $domain string the domain name 
-     * @return array with 3 informations: 
+    /**
+     * read a zone file for $domain,
+     * @param $domain string the domain name
+     * @return array with 3 informations:
      * is the domain locked? (boolean), what's the current serial (integer), the data after alternc conf (string of lines)
      */
     function read_zone($domain) {
@@ -284,6 +298,6 @@ class m_bind {
         return $t;
     }
 
-    
+
 } // m_bind
 
