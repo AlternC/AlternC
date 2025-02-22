@@ -346,7 +346,8 @@ class m_dom {
                             // Examples:
                             // agenda IN CNAME ghs.google.com.
                             // www 3600 IN CNAME @
-                            if (preg_match('/^(?P<sub>[\-\w\.@]*)\h*(?P<ttl>\d*)\h*IN\h+CNAME\h+(?P<target>[@\w+\.\-]+)/i', $zone, $ret)) {
+                            // foo CNAME bar.example.com.
+                            if (preg_match('/^(?P<sub>[\-\w\.@]*)\h*(?P<ttl>\d*)\h*(IN)?\h+CNAME\h+(?P<target>[@\w+\.\-]+)/i', $zone, $ret)) {
                                 if (substr($ret['sub'], -1) == '.') { // if ending by a "." it is allready a FQDN
                                     $url = "http://" . $ret['sub'];
                                 } else {
