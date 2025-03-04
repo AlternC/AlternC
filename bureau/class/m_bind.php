@@ -31,7 +31,8 @@ class m_bind {
     var $ZONE_TEMPLATE ="/etc/alternc/templates/bind/templates/zone.template";
     var $NAMED_TEMPLATE = "/etc/alternc/templates/bind/templates/named.template";
     var $NAMED_DNSSEC_TEMPLATE = "/etc/alternc/templates/bind/templates/named.dnssec.template";
-    var $NAMED_CONF ="/var/lib/alternc/bind/automatic.conf";
+    var $NAMED_CONF ="/var/lib/alternc/bind/automatic.simple.conf";
+    var $NAMED_DNSSEC_CONF ="/var/lib/alternc/bind/automatic.dnssec.conf";
     var $RNDC ="/usr/sbin/rndc";
 
     var $zone_file_directory = '/var/lib/alternc/bind/zones';
@@ -74,7 +75,7 @@ class m_bind {
      * @NOTE launched as ROOT 
      */
     function hook_updatedomains_dns_add($dominfo) {
-        global $L_FQDN,$L_NS1_HOSTNAME,$L_NS2_HOSTNAME,$L_DEFAULT_MX,$L_DEFAULT_SECONDARY_MX,$L_PUBLIC_IP,$L_PUBLIC_IPV6,$L_DNSSEC_ENABLED;
+        global $L_FQDN,$L_NS1_HOSTNAME,$L_NS2_HOSTNAME,$L_DEFAULT_MX,$L_DEFAULT_SECONDARY_MX,$L_PUBLIC_IP,$L_PUBLIC_IPV6;
         global $hooks;
 
         $domain = $dominfo["domaine"];
@@ -135,13 +136,20 @@ class m_bind {
         $zone .= $more;
         file_put_contents($this->zone_file_directory."/".$domain,$zone);
 
-        $NAMED_TEMPLATE = ($L_DNSSEC_ENABLED != "on") ? $this->NAMED_TEMPLATE : $this->NAMED_DNSSEC_TEMPLATE;
-
         // add the line into bind9 conf:
         if (add_line_to_file(
             $this->NAMED_CONF,
             trim(strtr(
-                file_get_contents($NAMED_TEMPLATE),
+                file_get_contents($this->NAMED_TEMPLATE),
+                array(
+                    "@@DOMAIN@@" => $domain,
+                    "@@ZONE_FILE@@" => $this->zone_file_directory."/".$domain
+                )
+            ))) &&
+            add_line_to_file(
+            $this->NAMED_DNSSEC_CONF,
+            trim(strtr(
+                file_get_contents($this->NAMED_DNSSEC_TEMPLATE),
                 array(
                     "@@DOMAIN@@" => $domain,
                     "@@ZONE_FILE@@" => $this->zone_file_directory."/".$domain
@@ -164,7 +172,6 @@ class m_bind {
      * @NOTE launched as ROOT 
      */
     function hook_updatedomains_dns_del($dominfo) {
-        global $L_DNSSEC_ENABLED;
         $deleted = false;
         $domain = $dominfo["domaine"];
 
@@ -182,7 +189,7 @@ class m_bind {
         }
 
         if (del_line_from_file(
-            $this->NAMED_CONF,
+            $this->NAMED_DNSSEC_CONF,
             trim(strtr(
                 file_get_contents($this->NAMED_DNSSEC_TEMPLATE),
                 array(
