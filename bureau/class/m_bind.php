@@ -172,6 +172,8 @@ class m_bind {
      * @NOTE launched as ROOT 
      */
     function hook_updatedomains_dns_del($dominfo) {
+        global $msg;
+
         $deleted = false;
         $domain = $dominfo["domaine"];
 
@@ -204,6 +206,12 @@ class m_bind {
         if ($deleted) {
             $this->shouldreconfig=true;
             @unlink($this->zone_file_directory."/".$domain);
+            exec($this->RNDC." delzone -clean ".$domain." 2>&1",$out,$ret);
+            if ($ret!=0) {
+                $msg->raise("ERROR","bind","Error while deleting zone, error code is $ret\n".implode("\n",$out));
+            } else {
+                $msg->raise("INFO","bind","Bind zone deletion done");
+            }
         }
         return 0;
     }
