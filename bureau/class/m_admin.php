@@ -1503,9 +1503,14 @@ class m_admin {
             $msg->raise("ALERT", "admin", _("Please enter a login"));
             return false;
         }
-        if (empty($password) && !$canbeempty) {
-            $msg->raise("ALERT", "admin", _("Please enter a password"));
-            return false;
+
+        if (empty($password)) {
+            if ($canbeempty) {
+                return true; // when empty password are allowed, no policy check then.
+            } else {
+                $msg->raise("ALERT", "admin", _("Please enter a password"));
+                return false;
+            }
         }
 
         $pol = $this->listPasswordPolicies();
