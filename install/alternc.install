@@ -703,6 +703,17 @@ fi
 # Add opendkim to service to restart
 SERVICES="$SERVICES opendkim bind9"
 
+## Load DNS config
+rm -f /var/lib/alternc/bind/automatic.conf
+touch /var/lib/alternc/bind/automatic.simple.conf
+touch /var/lib/alternc/bind/automatic.dnssec.conf
+
+if [[ "$DNSSEC_ENABLED" == "on" ]]; then
+    ln -s /var/lib/alternc/bind/automatic.dnssec.conf /var/lib/alternc/bind/automatic.conf
+else
+    ln -s /var/lib/alternc/bind/automatic.simple.conf /var/lib/alternc/bind/automatic.conf
+fi
+
 # hook 
 run-parts --arg=before-reload /usr/lib/alternc/install.d 
 

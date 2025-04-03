@@ -29,8 +29,10 @@ class m_bind {
     var $shouldreconfig;
     
     var $ZONE_TEMPLATE ="/etc/alternc/templates/bind/templates/zone.template";
-    var $NAMED_TEMPLATE ="/etc/alternc/templates/bind/templates/named.template";
-    var $NAMED_CONF ="/var/lib/alternc/bind/automatic.conf";
+    var $NAMED_TEMPLATE = "/etc/alternc/templates/bind/templates/named.template";
+    var $NAMED_DNSSEC_TEMPLATE = "/etc/alternc/templates/bind/templates/named.dnssec.template";
+    var $NAMED_CONF ="/var/lib/alternc/bind/automatic.simple.conf";
+    var $NAMED_DNSSEC_CONF ="/var/lib/alternc/bind/automatic.dnssec.conf";
     var $RNDC ="/usr/sbin/rndc";
 
     var $zone_file_directory = '/var/lib/alternc/bind/zones';
@@ -41,8 +43,27 @@ class m_bind {
      * @NOTE launched as ROOT 
      */
     function hook_updatedomains_dns_pre() {
+        global $msg;
+
         $this->shouldreload=false;
         $this->shouldreconfig=false;
+
+        //Prevent some race condition with dynamic zone (as dns-sec behavior)
+        $ret=0;
+        exec($this->RNDC." sync -clean 2>&1",$out,$ret);
+        if ($ret!=0) {
+            $msg->raise("ERROR","bind","Error while sync bind, error code is $ret\n".implode("\n",$out));
+        } else {
+            $msg->raise("INFO","bind","Bind sync done");
+        }
+
+        $ret=0;
+        exec($this->RNDC." freeze 2>&1",$out,$ret);
+        if ($ret!=0) {
+            $msg->raise("ERROR","bind","Error while freeze bind, error code is $ret\n".implode("\n",$out));
+        } else {
+            $msg->raise("INFO","bind","Bind freeze done");
+        }
     }
 
 
@@ -124,6 +145,15 @@ class m_bind {
                     "@@DOMAIN@@" => $domain,
                     "@@ZONE_FILE@@" => $this->zone_file_directory."/".$domain
                 )
+            ))) &&
+            add_line_to_file(
+            $this->NAMED_DNSSEC_CONF,
+            trim(strtr(
+                file_get_contents($this->NAMED_DNSSEC_TEMPLATE),
+                array(
+                    "@@DOMAIN@@" => $domain,
+                    "@@ZONE_FILE@@" => $this->zone_file_directory."/".$domain
+                )
             )))
         ) {
             $this->shouldreconfig=true;
@@ -142,7 +172,11 @@ class m_bind {
      * @NOTE launched as ROOT 
      */
     function hook_updatedomains_dns_del($dominfo) {
+        global $msg;
+
+        $deleted = false;
         $domain = $dominfo["domaine"];
+
         if (del_line_from_file(
             $this->NAMED_CONF,
             trim(strtr(
@@ -153,11 +187,32 @@ class m_bind {
                 )
             )))
         ) {
-            $this->shouldreconfig=true;
-        } else {
-            return 0;
+            $deleted=true;
         }
-        @unlink($this->zone_file_directory."/".$domain);
+
+        if (del_line_from_file(
+            $this->NAMED_DNSSEC_CONF,
+            trim(strtr(
+                file_get_contents($this->NAMED_DNSSEC_TEMPLATE),
+                array(
+                    "@@DOMAIN@@" => $domain,
+                    "@@ZONE_FILE@@" => $this->zone_file_directory."/".$domain
+                )
+            )))
+        ) {
+            $deleted=true;
+        }
+
+        if ($deleted) {
+            $this->shouldreconfig=true;
+            @unlink($this->zone_file_directory."/".$domain);
+            exec($this->RNDC." delzone -clean ".$domain." 2>&1",$out,$ret);
+            if ($ret!=0) {
+                $msg->raise("ERROR","bind","Error while deleting zone, error code is $ret\n".implode("\n",$out));
+            } else {
+                $msg->raise("INFO","bind","Bind zone deletion done");
+            }
+        }
         return 0;
     }
 
@@ -171,6 +226,15 @@ class m_bind {
      */ 
     function hook_updatedomains_dns_post() {
         global $msg;
+
+        $ret=0;
+        exec($this->RNDC." thaw 2>&1",$out,$ret);
+        if ($ret!=0) {
+            $msg->raise("ERROR","bind","Error while thawing bind, error code is $ret\n".implode("\n",$out));
+        } else {
+            $msg->raise("INFO","bind","Bind thaw done");
+        }
+
         if ($this->shouldreload) {
             $ret=0;
             exec($this->RNDC." reload 2>&1",$out,$ret);
