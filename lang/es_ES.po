@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: AlternC, hosting control panel\n"
 "Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
 "POT-Creation-Date: 2018-06-24 17:17+0200\n"
-"PO-Revision-Date: 2025-04-07 13:02+0000\n"
+"PO-Revision-Date: 2025-04-10 00:05+0000\n"
 "Last-Translator: Francisco Serrador <fserrador@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/alternc/alternc/"
 "es/>\n"
@@ -465,7 +465,9 @@ msgstr "El MX por omisión que se asigna a los nuevos dominios:"
 msgid ""
 "AlternC will assign this hostname as the MX record for all the domains it "
 "hosts. It is usually better be left alone."
-msgstr "AlternC va a asignar este nombre de dominio como registro MX para todos los dominios que hospeda. "
+msgstr ""
+"AlternC va a asignar este nombre de dominio como registro MX para todos los "
+"dominios que hospeda. Usualmente es mejor dejarlo solo."
 
 #. Type: string
 #. Description
@@ -704,11 +706,11 @@ msgid ""
 "test@example.org to coexist). Mailman 2.x, by default, doesn't support that "
 "functionality but Koumbit.org has developped patches to make it."
 msgstr ""
-"El módulo mailman para AlternC puede opcionalmente  modificar (patch) "
-"mailman para que sepa gestionar listas de mismo nombre en dominios "
-"diferentes (por ejemplo autorizar test@ejemplo.com et test@ejamplo.org). "
-"Mailman 2.x, por omisión, no sabe manejar esto, mais Koumbit.org desarrolló "
-"parches que lo permiten."
+"El módulo mailman para AlternC puede opcionalmente modificar (patch) mailman "
+"para que sepa gestionar listas de mismo nombre en dominios diferentes (por "
+"ejemplo autorizar test@ejemplo.com y test@ejemplo.org). Mailman 2.x, por "
+"omisión, no sabe manejar esto, pero Koumbit.org desarrolló parches que lo "
+"permiten."
 
 #. Type: boolean
 #. Description
@@ -746,17 +748,19 @@ msgstr "No puede crear más estadísticas, su cuota alcanzó su limite."
 
 #: ../admin/aws_add.php:38
 msgid "Edit Statistics"
-msgstr "Creación de estadísticas"
+msgstr "Editar estadísticas"
 
 #: ../admin/aws_add.php:38
 msgid "New Statistics"
-msgstr "Creación de estadísticas"
+msgstr "Nuevas estadísticas"
 
 #: ../admin/aws_add.php:41
 msgid ""
 "Awstats will analyze every logs availables for this domain (since its "
 "creation)."
-msgstr "Awstats analyzará todos los registros disponibles para este dominio  (desde su creación)"
+msgstr ""
+"Awstats analizará todas las bitácoras disponibles para este dominio (desde "
+"su creación)."
 
 #: ../admin/aws_add.php:51 ../admin/aws_list.php:65
 msgid "Domain name"
@@ -778,11 +782,11 @@ msgstr "Ningún/a usuarix está definido al momento. Deberías crear usuarixs co
 
 #: ../admin/aws_add.php:93
 msgid "Create those statistics"
-msgstr "Crear estas estadísticas"
+msgstr "Crea esas estadísticas"
 
 #: ../admin/aws_add.php:93
 msgid "Edit those statistics"
-msgstr "Crear estas estadísticas"
+msgstr "Crea esas estadísticas"
 
 #: ../admin/aws_add.php:94 ../admin/aws_pass.php:78 ../admin/aws_users.php:58
 msgid "Cancel"
@@ -791,7 +795,7 @@ msgstr "Cancelar"
 #: ../admin/aws_del.php:36
 #, php-format
 msgid "The statistics %s has been successfully deleted"
-msgstr "El juego de estadísticas ha sido creado"
+msgstr "Las estadísticas %s han sido eliminadas correctamente"
 
 #: ../admin/aws_del.php:42
 msgid "Please check the statistics set you want to delete"
@@ -815,7 +819,7 @@ msgstr "Ningún juego de estadísticas definido"
 
 #: ../admin/aws_list.php:36 ../class/m_aws.php:386
 msgid "Your stat quota is over..."
-msgstr "Has alcanzado tu cuita de estadísticas"
+msgstr "Su cuota de estadísticas está llena…"
 
 #: ../admin/aws_list.php:41
 msgid "Statistics List"
@@ -835,7 +839,7 @@ msgstr "Acción"
 
 #: ../admin/aws_list.php:65 ../admin/aws_list.php:77
 msgid "View the statistics"
-msgstr "Crear estas estadísticas"
+msgstr "Ver las estadísticas"
 
 #: ../admin/aws_list.php:74
 msgid "Edit"
@@ -872,7 +876,7 @@ msgstr "Nombre de usuario"
 
 #: ../admin/aws_pass.php:74
 msgid "New Password"
-msgstr "Nueva contraseña"
+msgstr "Crear Contraseña"
 
 #: ../admin/aws_pass.php:75 ../admin/aws_users.php:55
 msgid "Confirm password"
@@ -889,7 +893,7 @@ msgstr "El juego de estadísticas ha sido creado"
 #: ../admin/aws_userdel.php:34
 #, php-format
 msgid "The awstat account %s has been successfully deleted"
-msgstr "El juego de estadísticas ha sido creado"
+msgstr "La cuenta awstar %s ha sido borrada correctamente"
 
 #: ../admin/aws_users.php:29
 msgid "Awstats allowed user list"
@@ -925,7 +929,12 @@ msgid ""
 "Statistics are web pages generated daily based on the visits of the day "
 "before. Awstats is the soft used to produce those stats. The statistics are "
 "then protected by a login and a password."
-msgstr "El módulo stats permite a lxs usuarixs solicitar estadísticas de visita de sus sitios web. Las estadísticas son páginas web generadas automáticamente todas las mañanas en función de las visitas de la víspera. El software utilisado para esto es Awstats. Las estadísticas pueden ser leídas en varios idiomas. "
+msgstr ""
+"El módulo stats permite a cualquier usuario solicitar estadísticas de visita "
+"de sus sitios web. Las estadísticas son páginas web generadas "
+"automáticamente todas las mañanas en función de las visitas de la víspera. "
+"El software utilizado para esto es Awstats. Las estadísticas pueden ser "
+"leídas en varios idiomas."
 
 #: ../class/m_aws.php:161 ../class/m_aws.php:324 ../class/m_aws.php:720
 msgid "This statistic does not exist"
@@ -965,15 +974,15 @@ msgstr "El nombre de usuarix no existe"
 
 #: ../class/m_aws.php:532 ../class/m_aws.php:560 ../class/m_aws.php:587
 msgid "The requested statistic does not exist."
-msgstr "Las estadísticas solicitadas no existen"
+msgstr "Las estadísticas solicitadas no existen."
 
 #: ../class/m_aws.php:537
 msgid "This login is already allowed for this statistics."
-msgstr "Este nombre de usuarix ya está autorizado para estas estadísticas"
+msgstr "Este acceso ya está permitido para estas estadísticas."
 
 #: ../class/m_aws.php:592
 msgid "This login is already denied for this statistics."
-msgstr "Este nombre de usuarix ya está prohibido para estas estadísticas"
+msgstr "Este acceso ya está denegado para estas estadísticas."
 
 #: ../class/m_aws.php:655
 msgid "Awstats"
@@ -987,7 +996,8 @@ msgstr "Prefijo no autorizado."
 msgid ""
 "There are forbidden characters in the login (only A-Z 0-9 _ and - are "
 "allowed)"
-msgstr "Hay caracteres prohibidos en el nombre de usuario (sólo  A-Z 0-9 _ y - son permitidos)"
+msgstr ""
+"Hay caracteres prohibidos en el acceso (sólo son permitidos A-Z 0-9 _ y -)"
 
 #: ../class/m_aws.php:695
 msgid "Hostname is incorrect"
@@ -1000,7 +1010,7 @@ msgstr "Problema al crear la configuración"
 #: ../class/m_aws.php:770
 #, php-format
 msgid "Problem to edit file %s"
-msgstr "Problema al editar el archivo %s "
+msgstr "Problema para editar el archivo %s"
 
 #: ../admin/menu_mailman.php:33 ../admin/mman_add.php:35
 #: ../admin/mman_list.php:40 ../admin/mman_list.php:59
@@ -1032,7 +1042,7 @@ msgstr "Contraseña de la lista (confirmación)"
 
 #: ../admin/mman_add.php:60
 msgid "Create the list."
-msgstr "Crear la lista"
+msgstr "Crear el listado."
 
 #: ../admin/mman_del.php:49
 msgid "Deleting mailman lists"
@@ -1059,7 +1069,7 @@ msgstr "Advertencia: Borrando una lista mailman eliminará por completo todos lo
 
 #: ../admin/mman_doadd.php:38
 msgid "Invalid list name (only letters, digits and underscore)."
-msgstr "Nombre de lista inválido (sólo letras, dígitos y guión bajo)"
+msgstr "Nombre de listado no válido (sólo letras, dígitos y guión bajo)."
 
 #: ../admin/mman_doadd.php:48
 msgid "The mailing list has been successfully created."
@@ -1073,11 +1083,12 @@ msgstr "Se borró correctamente la lista %s."
 
 #: ../admin/mman_dopasswd.php:40
 msgid "The mailing list password will be changed in a few minutes."
-msgstr "La contraseña de la lista será cambiada en pocos minutos"
+msgstr ""
+"La contraseña de la lista de correo será cambiada en unos pocos minutos."
 
 #: ../admin/mman_dourl.php:38
 msgid "The mailing list management url has been successfully changed."
-msgstr "La dirección URL de gestión de la lista fue modificada con éxito. "
+msgstr "La dirección URL de gestión de la lista fue modificada correctamente."
 
 #: ../admin/mman_edit.php:50
 msgid "Editing mailman lists"
@@ -1147,7 +1158,7 @@ msgstr "Cambiando contraseña de la lista %s"
 
 #: ../admin/mman_passwd.php:54
 msgid "New list password"
-msgstr "Nueva contraseña"
+msgstr "Nuevo listado de contraseña"
 
 #: ../admin/mman_passwd.php:58
 msgid "Password confirmation"
@@ -1155,7 +1166,7 @@ msgstr "Confirmar contraseña"
 
 #: ../admin/mman_passwd.php:62
 msgid "Change the password."
-msgstr "Cambiar contraseña"
+msgstr "Cambia la contraseña."
 
 #: ../admin/mman_url.php:60
 msgid ""
@@ -1163,7 +1174,10 @@ msgid ""
 "list. If you want to change it, select another url in the list and submit "
 "this form. <br />If you don't know what you are doing, don't change anything"
 " here."
-msgstr "Esta es la actual dirección de administración de tu lista, y de las páginas públicas. Si quieres cambiarla, elije otra dirección en la lista a continuación y valida. <br />Si no sables de que se trata, no toques nada. "
+msgstr ""
+"Esta es la actual dirección de administración y de las páginas públicas de "
+"tu lista. Si quieres cambiarla, elije otra dirección en la lista a "
+"continuación y valida. <br />Si no sables de que se trata, no toques nada."
 
 #: ../admin/mman_url.php:66
 #, php-format
@@ -1191,7 +1205,7 @@ msgstr "Esta lista ya existe"
 #: ../class/m_mailman.php:527 ../class/m_mailman.php:552
 #: ../class/m_mailman.php:572
 msgid "This list does not exist"
-msgstr "La lista especificada no existe."
+msgstr "Este listado no existe"
 
 #: ../class/m_mailman.php:44
 msgid "A fatal error happened when creating the list"
@@ -1212,7 +1226,7 @@ msgstr "Un error fatal sucedió al obtener la URL de la lista"
 #: ../class/m_mailman.php:68 ../class/m_mailman.php:472
 #: ../class/m_mailman.php:503
 msgid "No list defined yet"
-msgstr "<ul> <li>Mailman es un manejador de listas de discusión/difusión muy potente. Dispone de una interfaz web de gestión de lista completa, accesible a través de los diferentes enlaces aquí arrba.</li><li>Mailman permite moderar una lista: para moderar los futuros suscriptores ir a \"Opciones de confidencialidad\"->\"Filtros remitente\" y luego elegir  \"Sí\" en \"¿Los envíos de nuevos suscriptores deben ser moderados por omisión?\". De hecho, mailman puede moderar CADA suscriptor de una lista.</li><li>Para moderar los NO-suscriptores de una lsita, ir a \"Opciones de confidencialidad\"->\"Filtros remitente\" y luego elegir entre  \"Aceptar En espera Rechazar Ignorar\" para \"Acción para los envíos de los no-suscriptores\"</li><li>Varias otras opciones pueden ser modificadas en mailman. Para cualquier información, presiona en el enlace \"Détalles de ...\" abajo de cada elemento configurable, o contacta el hospedaje.</li></ul>"
+msgstr "Ningún listado definido aún"
 
 #: ../class/m_mailman.php:173
 msgid ""
@@ -1235,15 +1249,15 @@ msgstr "La dirección de correo ingresada es sintáxicamente incorrecta"
 
 #: ../class/m_mailman.php:271
 msgid "The login (left part of the @) is mandatory"
-msgstr "El login (parte izquierda del @) es obligatoria."
+msgstr "El acceso (parte izquierda del @) es obligatorio."
 
 #: ../class/m_mailman.php:275
 msgid "The owner email and the password are mandatory"
-msgstr "La dirección de correo del dueño y la contraseña de la lista son obligaorios."
+msgstr "El correo del propietario y la contraseña son obligatorios"
 
 #: ../class/m_mailman.php:279
 msgid "This email is incorrect"
-msgstr "Esta dirección de correo no es correcta."
+msgstr "Esta dirección de correo no es correcta"
 
 #: ../class/m_mailman.php:283 ../class/m_mailman.php:531
 msgid "The passwords are differents, please try again"
@@ -1285,18 +1299,23 @@ msgstr "Tus nuevas contraseñas son diferentes. Prueba de nuevo."
 msgid ""
 "Your account has not been found, please try again later or ask an "
 "administrator."
-msgstr "No se encontró tu cuenta de correo. Prueba de nuevo luego, o pregúntale a un administrador. "
+msgstr ""
+"No se ha encontrado su cuenta, pruebe de nuevo luego o pregúntale a un "
+"administrador."
 
 #: ../../squirrelmail/alternc_changepass/change.php:75
 msgid "Your current password is incorrect, please try again."
-msgstr "Tu contraseña actual es incorrecta, prueba de nuevo. "
+msgstr "Su contraseña actual es incorrecta, pruebe de nuevo."
 
 #: ../../squirrelmail/alternc_changepass/change.php:88
 msgid ""
 "Your password has been successfully changed. Don't forget to change it in "
 "your mail software if you are using one (Outlook, Mozilla, Thunderbird, "
 "Eudora ...)"
-msgstr "Tu contraseña fue modificada con éxito. No olvides de modificarla también en tu software de gestión de correo (Thunderbird, Outlook, Eudora, ...) "
+msgstr ""
+"Su contraseña ha sido modificada correctamente. No olvide modificarla "
+"también en su software de gestión de correo (Thunderbird, Outlook, Eudora, "
+"...)"
 
 #: ../../squirrelmail/alternc_changepass/change.php:111
 msgid "Changing your mail password"
@@ -1324,7 +1343,7 @@ msgstr "Cambiar contraseña"
 
 #: ../../squirrelmail/alternc_changepass/setup.php:23
 msgid "Change the password of your email account."
-msgstr "Cambiar la contraseña de tu casilla de correo"
+msgstr "Cambiar la contraseña de su cuenta de correo."
 
 #: ../admin/about.php:32
 msgid "About AlternC"
@@ -1345,19 +1364,19 @@ msgstr "AlternC es un software de hospedaje automatizado. Contiene un panel de c
 
 #: ../admin/about.php:43
 msgid "Official website: "
-msgstr "Sitio oficial:"
+msgstr "Sitio oficial: "
 
 #: ../admin/about.php:44
 msgid "Developer website: "
-msgstr "Sitio de los desarrolladores:"
+msgstr "Sitio de desarrolladores: "
 
 #: ../admin/about.php:45
 msgid "Help: "
-msgstr "Ayuda:"
+msgstr "Ayuda: "
 
 #: ../admin/about.php:53
 msgid "You are currently using AlternC "
-msgstr "Estás utilizando AlternC"
+msgstr "Ahora estás utilizando AlternC "
 
 #: ../admin/adm_add.php:30 ../admin/adm_db_servers.php:31
 #: ../admin/adm_deactivate.php:32 ../admin/adm_deactivate.php:51
@@ -1452,7 +1471,7 @@ msgstr "Asociar este nuevo usuario al servidor de bases de datos:"
 
 #: ../admin/adm_add.php:105
 msgid "Warning: you can't change it after the creation of the user."
-msgstr "OjO: no podrás cambiarlo luego de la creación de la cuenta. "
+msgstr "Aviso: no podrá cambiarlo tras la creación del usuario."
 
 #: ../admin/adm_add.php:122
 #, php-format
@@ -1479,7 +1498,9 @@ msgstr "Control de acceso"
 #: ../admin/adm_authip_whitelist.php:62
 msgid ""
 "The IP and subnet you have here are allowed for ALL users and ALL usages"
-msgstr "La IP y el prefijo a continuación serán autorizados para TODAS las cuentas y TODAS las utilizaciones. "
+msgstr ""
+"La IP y la subred que tiene aquí está permitida para TODOS los usuarios y "
+"TODAS las utilizaciones"
 
 #: ../admin/adm_authip_whitelist.php:62
 msgid "Warning"
@@ -1579,7 +1600,9 @@ msgstr "Usuarios"
 
 #: ../admin/adm_db_servers.php:73
 msgid "To add a database server, do an INSERT into the db_servers table"
-msgstr "Para agregar un servidor de base de datos, realiza un INSERT en la tabla db_servers."
+msgstr ""
+"Para agregar un servidor de base de datos, realiza un INSERT en la tabla "
+"db_servers"
 
 #: ../admin/adm_db_servers.php:76
 msgid ""
@@ -1616,7 +1639,12 @@ msgid ""
 " as a serie of SQL request that you can run to restore the current "
 "configuration if you want. Click confirm if you are sure you want to "
 "deactivate all this user's domains."
-msgstr "Los dominios siguientes serán desactivados y redirigidos hacia la URL ingresada en el cuadro a continuación. Se mostrará un respaldo de tu configuración como una serie de solicitudes SQL que podrás volver a cargar para recuperar tu configuración actual. Confirma si estás seguro de desactivar todos los dominios de este usuario. "
+msgstr ""
+"Los dominios siguientes serán desactivados y redirigidos hacia la URL "
+"ingresada en el cuadro a continuación. Se mostrará un respaldo de tu "
+"configuración como una serie de solicitudes SQL que podrás volver a cargar "
+"para recuperar tu configuración actual. Confirma si estás seguro de "
+"desactivar todos los dominios de este usuario."
 
 #: ../admin/adm_deactivate.php:75
 msgid "Redirection URL:"
@@ -1624,11 +1652,11 @@ msgstr "Redirección hacía la URL:"
 
 #: ../admin/adm_deactivate.php:80
 msgid "Domains of user: "
-msgstr "Dominio del usuario:"
+msgstr "Dominios del usuario: "
 
 #: ../admin/adm_deactivate.php:83
 msgid "Missing redirect url."
-msgstr "Falta la URL de redirección"
+msgstr "Falta la URL de redirección."
 
 #: ../admin/adm_deactivate.php:102
 #, php-format
@@ -1655,7 +1683,9 @@ msgstr "Suprimir este tipo de cuenta"
 msgid ""
 "Here is the list of the quotas on the server for the new accounts. If you "
 "want to change them, enter new values"
-msgstr "He aquí la lista de cuotas por omisión en este servidor para las nuevas cuentas."
+msgstr ""
+"Aquí está el listado de las cuotas en el servidor para las cuentas nuevas. "
+"Si desea cambiarlas, introduzca valores nuevos"
 
 #: ../admin/adm_defquotas.php:85
 msgid "Synchronise user's quota (only to upper value)"
@@ -1750,7 +1780,7 @@ msgstr "Supresión de la cuota %s"
 
 #: ../admin/adm_dodefquotas.php:68
 msgid "WARNING: Confirm the deletion of the quota"
-msgstr "OjO: ¿Estás seguro que quieres suprimir este juego de cuotas?"
+msgstr "Aviso: Confirme el borrado de la cuota"
 
 #: ../admin/adm_dodefquotas.php:71
 msgid "Yes, delete this default quota"
@@ -1766,7 +1796,7 @@ msgstr "Cuotas por omisión modificadas con éxito"
 
 #: ../admin/adm_dodefquotas.php:92
 msgid "Default quotas could not be set."
-msgstr "No se pudieron modificar las cuotas por omisión"
+msgstr "No se pudieron modificar las cuotas por omisión."
 
 #: ../admin/adm_dodel.php:49
 #, php-format
