@@ -61,10 +61,6 @@ if (!empty($_SERVER['PHP_AUTH_USER']) && !empty($_SERVER['PHP_AUTH_PW'])) {
     $_REQUEST["password"] = $_SERVER['PHP_AUTH_PW'];
 }
 
-// proper srand (not using time(), which is what PHP does!)
-list($usec, $sec) = explode(" ", microtime());
-mt_srand($usec * 1000000);
-
 /* Server Domain Name */
 $host = getenv("HTTP_HOST");
 
