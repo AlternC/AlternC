@@ -703,6 +703,24 @@ fi
 # Add opendkim to service to restart
 SERVICES="$SERVICES opendkim bind9"
 
+## Load DNS config
+if [[ ! -L  /var/lib/alternc/bind/automatic.conf ]]; then
+    #In first case we consider file always created without dnssec support
+    #If feature was tested before, manual correction should be done
+    mv /var/lib/alternc/bind/automatic.conf /var/lib/alternc/bind/automatic.simple.conf
+else
+    rm /var/lib/alternc/bind/automatic.conf
+fi
+
+touch /var/lib/alternc/bind/automatic.simple.conf || true
+touch /var/lib/alternc/bind/automatic.dnssec.conf || true
+
+if [[ "$DNSSEC_ENABLED" == "on" ]]; then
+    ln -s /var/lib/alternc/bind/automatic.dnssec.conf /var/lib/alternc/bind/automatic.conf
+else
+    ln -s /var/lib/alternc/bind/automatic.simple.conf /var/lib/alternc/bind/automatic.conf
+fi
+
 # hook 
 run-parts --arg=before-reload /usr/lib/alternc/install.d 
 

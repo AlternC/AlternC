@@ -215,6 +215,12 @@ PROFTPD_SFTP_ENABLED=off" >> $CONFIGFILE
     grep -Eq "^ *PROFTPD_SFTP_PORT=" $CONFIGFILE || echo "
 PROFTPD_SFTP_PORT=2222" >> $CONFIGFILE
 
+    # Enabled DNESEC
+    grep -Eq "^ *DNSSEC_ENABLED=" $CONFIGFILE || echo "
+#Enable DNSSEC
+#Require bind >= 9.16 (enable with caution could break with buster) 
+DNSSEC_ENABLED=off" >> $CONFIGFILE
+
     # Erase all apacheconf file
     # They will be regenerated without the bug by upgrade_check.sh below.
     if dpkg --compare-versions "$2" le "0.9.3.9-globenet14"; then
@@ -293,6 +299,8 @@ PROFTPD_SFTP_PORT=2222" >> $CONFIGFILE
     touch           /var/lib/alternc/bind/automatic.conf /var/lib/alternc/bind/slaveip.conf
     chown root:bind /var/lib/alternc/bind/automatic.conf /var/lib/alternc/bind/slaveip.conf
     chmod 640       /var/lib/alternc/bind/automatic.conf /var/lib/alternc/bind/slaveip.conf
+    chown root:bind /var/lib/alternc/bind/zones/
+    chmod 775       /var/lib/alternc/bind/zones/
     mkdir -p /run/alternc && chown alterncpanel:alterncpanel /run/alternc
     # Bind Apparmor Override, required by default on >= Buster
     if [ -f '/etc/apparmor.d/usr.sbin.named' ] ; then
