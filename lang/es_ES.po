@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: AlternC, hosting control panel\n"
 "Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
 "POT-Creation-Date: 2018-06-24 17:17+0200\n"
-"PO-Revision-Date: 2025-04-10 00:05+0000\n"
+"PO-Revision-Date: 2025-04-17 15:01+0000\n"
 "Last-Translator: Francisco Serrador <fserrador@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/alternc/alternc/"
 "es/>\n"
@@ -27,7 +27,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n == 1) ? 0 : ((n != 0 && n % 1000000 == 0)"
 " ? 1 : 2);\n"
-"X-Generator: Weblate 5.11-dev\n"
+"X-Generator: Weblate 5.11.1-dev\n"
 
 #. Type: error
 #. Description
@@ -481,7 +481,10 @@ msgstr "El MX de respaldo (MX backup) que se asigna a los nuevos dominios:"
 msgid ""
 "AlternC will assign this hostname as the Backup MX record for all the "
 "domains it hosts. Don't set it if you don't know what it is about."
-msgstr "AlternC va a asignar este nombre de dominio como registro MX de respaldo para todos los dominios que hospeda. Si no sabes de qué se trata, deja este campo vacío. "
+msgstr ""
+"AlternC va a asignar este nombre de dominio como registro MX de respaldo "
+"para todos los dominios que hospeda. Si establecerlo si no conoce acerca de "
+"qué es."
 
 #. Type: string
 #. Description
