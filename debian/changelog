@@ -1,3 +1,13 @@
+alternc (3.5.1) buster bullseye bookworm; urgency=low
+
+  * Prevent a mysql connection error during upgrade process
+  * Remove specific override with alternc-roundcube
+  * alternc-roundcube
+    * can be installed until debian 12
+    * Take in consideration new patches to support recent debian release (#573)
+
+ -- Camille Lafitte <alternc@webelys.com>  Tue, 29 April 2025 10:47:00 +0200
+
 alternc (3.5.0) buster bullseye bookworm; urgency=low
 
   * Release stable version
