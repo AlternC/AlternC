@@ -21,16 +21,6 @@
 # ----------------------------------------------------------------------
 
 install:
-	# force local direcotories as building package is isolated
-	# need to create before all directories to allow install copy
-	mkdir -p $(DESTDIR)/etc/alternc/templates/apache2/
-	mkdir -p $(DESTDIR)/etc/alternc/templates/roundcube/plugins/managesieve/
-	mkdir -p $(DESTDIR)/etc/alternc/templates/roundcube/plugins/password/
-	mkdir -p $(DESTDIR)/usr/share/roundcube/skins/default/images/
-	mkdir -p $(DESTDIR)/usr/lib/alternc/install.d/
-	mkdir -p $(DESTDIR)/usr/share/alternc/panel/class/
-	mkdir -p $(DESTDIR)/DEBIAN/
-
 	# alternc-roundcube files install
 	install -m 644 templates/roundcube/*.inc.php $(DESTDIR)/etc/alternc/templates/roundcube/
 	install -m 644 templates/roundcube/plugins/password/config.inc.php $(DESTDIR)/etc/alternc/templates/roundcube/plugins/password/
