@@ -1,3 +1,12 @@
+alternc (3.5.2) buster bullseye bookworm; urgency=low
+
+  * fix : alternc-awstat can be install with alternc 3.5.x
+  * fix : don't overwrite default spf and dmarc values when yet set
+  * fix : prevent DKIM aud autodiscover duplicate insertion when partialy managed from a previous upgrade
+  * fix : prevent a full directory exploration when SFTP is enabled
+
+ -- Camille Lafitte <alternc@webelys.com>  Tue, 25 Jun 2025 13:28:00 +0200
+
 alternc (3.5.1) buster bullseye bookworm; urgency=low
 
   * Prevent a mysql connection error during upgrade process
