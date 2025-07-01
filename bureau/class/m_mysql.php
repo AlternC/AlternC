@@ -289,7 +289,15 @@ class m_mysql {
         }
 
         // Grant the special user every rights.
-        if ($this->dbus->exec("CREATE DATABASE $dbname;")) { // secured: dbname is checked against ^[0-9a-z]*$
+        $sql_resultat = false;
+        try {
+            $sql_resultat = $this->dbus->exec("CREATE DATABASE `$dbname`;");
+        } catch (Exception $e) {
+            $msg->log("mysql", "add_db", "Error: ".$dbn);
+            $msg->raise("ERROR", "mysql", $e->getMessage());
+            $sql_resultat = false;
+        }
+        if ($sql_resultat) { // secured: dbname is checked against ^[0-9a-z]*$
             $msg->log("mysql", "add_db", "Success: ".$dbn);
             // Ok, database does not exist, quota is ok and dbname is compliant. Let's proceed
             $db->query("INSERT INTO db (uid,login,pass,db,bck_mode) VALUES (?, ?, ?, ? ,0)", array($cuid, $myadm, $password, $dbname));
