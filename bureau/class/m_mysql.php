@@ -327,7 +327,7 @@ class m_mysql {
         // Ok, database exists and dbname is compliant. Let's proceed
         $db->query("DELETE FROM size_db WHERE db= ?;", array($dbname));
         $db->query("DELETE FROM db WHERE uid= ? AND db= ? ;", array($cuid, $dbname));
-        $this->dbus->query("DROP DATABASE $dbname;");
+        $this->dbus->query("DROP DATABASE `$dbname`;");
 
         $db_esc = str_replace('_', '\_', $dbname);
         $this->dbus->query("DELETE FROM mysql.db WHERE Db= ? ;",    array($db_esc));
@@ -553,7 +553,7 @@ class m_mysql {
      * @access private
      */
     function get_db_size($dbname) {
-        $this->dbus->query("SHOW TABLE STATUS FROM $dbname;");
+        $this->dbus->query("SHOW TABLE STATUS FROM `$dbname`;");
         $size = 0;
         while ($this->dbus->next_record()) {
             $size += $this->dbus->f('Data_length') + $this->dbus->f('Index_length');
