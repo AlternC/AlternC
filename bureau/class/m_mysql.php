@@ -267,7 +267,14 @@ class m_mysql {
                 $passwd_classcount = $c['mysql']['classcount'];
                 
                 $password_user = create_pass(10, $passwd_classcount);
-                if ($this->add_user($dbn, $password_user, $password_user)) {
+                $add_user_resultat = false;
+                try {
+                    $add_user_resultat = $this->add_user($dbn, $password_user, $password_user);
+                } catch (Exception $e) {
+                    $msg->raise("ERROR", "mysql", $e->getMessage());
+                    return false;
+                }
+                if ($add_user_resultat) {
                     $msg->raise("INFO", "mysql", "L'utilisateur '$dbname' a été créé et les droits sur cette base de données lui ont été attribué.");
                 } else {
                     $msg->raise("ALERT", "mysql", "L'utilisateur '$dbname' n'a pas pu être créé.<br>Allez à la page 'Utilisateurs Mysql' pour en créer manuellement.<br>Et n'oubliez pas de lui donner les droits sur la base de données.");
