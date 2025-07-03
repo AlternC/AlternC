@@ -38,7 +38,7 @@ function create_pass($length = 8){
   $i = 0;
   $password = "";
   while ($i <= $length) {
-    $password .= @$chars{mt_rand(0,strlen($chars))};
+    $password .= @$chars[mt_rand(0,strlen($chars))];
     $i++;
   }
   return $password;
@@ -83,7 +83,7 @@ foreach($membres as $uid => $data) {
     $db->query("INSERT INTO dbusers SET uid=$uid, name='".$uid."_myadm', password='$pass', enable='ADMIN';");
     if (is_array($db->last_error()))   echo implode("\n",$db->last_error());
   } else {
-    $pass=$ok["password"];
+    $pass=$db->f("password");
   }
   echo "Granting rights to user ".$uid."_myadm for login ".$membre." ... ";
   // Now granting him access to all user's databases
