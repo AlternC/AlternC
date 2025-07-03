@@ -147,6 +147,8 @@ function my_realpath($path) {
 }
 
 // Check if script isn't already running
+d('Check previous/existing execution '.ALTERNC_DO_ACTION_LOCK);
+
 if (file_exists(ALTERNC_DO_ACTION_LOCK) !== false){
     d("Lock file already exists. ");
     // Check if file is in process list
@@ -200,6 +202,8 @@ if (file_exists(ALTERNC_DO_ACTION_LOCK) !== false){
     exit(1);
   }
 }
+
+d("current pid $MY_PID locked by ".ALTERNC_DO_ACTION_LOCK);
 
 //We get the next action to do
 while ($rr=$action->get_action()){
