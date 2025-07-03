@@ -83,7 +83,7 @@ for($i=0;$i<count($rdb);$i++) {
 <p>&nbsp;</p>
 
 <?php if ($quota->cancreate("mysql")) {
-  $q=$quota->getquota("mysql");
+  $q=$quota->getquota("mysql",true);
   if($q['u'] == 0 ){
 ?>
 <p>  <span class="ina"><a href="sql_doadd.php"><?php __("Create a new MySQL database"); ?></a></span> </p>
