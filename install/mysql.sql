@@ -759,7 +759,7 @@ CREATE TABLE IF NOT EXISTS `actions` (
  begin timestamp,
  end timestamp,
  user varchar(255) default NULL,
- status int(8) unsigned default NULL,
+ status int(8) signed default NULL,
  PRIMARY KEY ( `id` )
 ) ENGINE=InnoDB COMMENT = 'generic actions';
 
