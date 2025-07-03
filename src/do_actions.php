@@ -74,8 +74,14 @@ $FIXPERM='/usr/lib/alternc/fixperms.sh';
  */
 function d($mess){
   global $debug;
-  if ($debug == 1)
-    echo "$mess\n";
+  if (!is_array($mess)) {
+    $mess = array($mess);
+  }
+  if ($debug == 1) {
+    foreach ($mess as $line ) {
+      echo "$line\n";
+    }
+  }
 }
 
 /**
@@ -93,6 +99,8 @@ function mail_it(){
   $msg = implode("\n", $errorsList);
   // Attempts to send email
   // @todo log if fails 
+  d('Error list :');
+  d($errorsList);
   mail("alterncpanel@$L_FQDN",'Script do_actions.php issues',"\n Errors reporting mail:\n\n$msg");
 }
 
