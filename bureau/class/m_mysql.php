@@ -267,7 +267,14 @@ class m_mysql {
                 $passwd_classcount = $c['mysql']['classcount'];
                 
                 $password_user = create_pass(10, $passwd_classcount);
-                if ($this->add_user($dbn, $password_user, $password_user)) {
+                $add_user_resultat = false;
+                try {
+                    $add_user_resultat = $this->add_user($dbn, $password_user, $password_user);
+                } catch (Exception $e) {
+                    $msg->raise("ERROR", "mysql", $e->getMessage());
+                    return false;
+                }
+                if ($add_user_resultat) {
                     $msg->raise("INFO", "mysql", "L'utilisateur '$dbname' a été créé et les droits sur cette base de données lui ont été attribué.");
                 } else {
                     $msg->raise("ALERT", "mysql", "L'utilisateur '$dbname' n'a pas pu être créé.<br>Allez à la page 'Utilisateurs Mysql' pour en créer manuellement.<br>Et n'oubliez pas de lui donner les droits sur la base de données.");
@@ -289,7 +296,15 @@ class m_mysql {
         }
 
         // Grant the special user every rights.
-        if ($this->dbus->exec("CREATE DATABASE $dbname;")) { // secured: dbname is checked against ^[0-9a-z]*$
+        $sql_resultat = false;
+        try {
+            $sql_resultat = $this->dbus->exec("CREATE DATABASE `$dbname`;");
+        } catch (Exception $e) {
+            $msg->log("mysql", "add_db", "Error: ".$dbn);
+            $msg->raise("ERROR", "mysql", $e->getMessage());
+            $sql_resultat = false;
+        }
+        if ($sql_resultat) { // secured: dbname is checked against ^[0-9a-z]*$
             $msg->log("mysql", "add_db", "Success: ".$dbn);
             // Ok, database does not exist, quota is ok and dbname is compliant. Let's proceed
             $db->query("INSERT INTO db (uid,login,pass,db,bck_mode) VALUES (?, ?, ?, ? ,0)", array($cuid, $myadm, $password, $dbname));
@@ -327,7 +342,7 @@ class m_mysql {
         // Ok, database exists and dbname is compliant. Let's proceed
         $db->query("DELETE FROM size_db WHERE db= ?;", array($dbname));
         $db->query("DELETE FROM db WHERE uid= ? AND db= ? ;", array($cuid, $dbname));
-        $this->dbus->query("DROP DATABASE $dbname;");
+        $this->dbus->query("DROP DATABASE `$dbname`;");
 
         $db_esc = str_replace('_', '\_', $dbname);
         $this->dbus->query("DELETE FROM mysql.db WHERE Db= ? ;",    array($db_esc));
@@ -553,7 +568,7 @@ class m_mysql {
      * @access private
      */
     function get_db_size($dbname) {
-        $this->dbus->query("SHOW TABLE STATUS FROM $dbname;");
+        $this->dbus->query("SHOW TABLE STATUS FROM `$dbname`;");
         $size = 0;
         while ($this->dbus->next_record()) {
             $size += $this->dbus->f('Data_length') + $this->dbus->f('Index_length');
