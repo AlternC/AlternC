@@ -1,0 +1,1 @@
+ALTER TABLE actions MODIFY COLUMN status int(8) signed default NULL;
