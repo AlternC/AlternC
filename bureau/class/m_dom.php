@@ -1938,9 +1938,9 @@ class m_dom {
         if (count($alldoms)) {
             $hooks->invoke("hook_updatedomains_dns_pre");
             foreach($alldoms as $id=>$onedom) {
-                $ret = $hooks->invoke("hook_updatedomains_dns_del",array($onedom));
-
-                if ($onedom["gesdns"]==1 && $onedom["dns_action"]!="DELETE") {
+                if ($onedom["gesdns"]==0 || $onedom["dns_action"]=="DELETE") {
+                    $ret = $hooks->invoke("hook_updatedomains_dns_del",array($onedom));
+                } else {
                     $ret = $hooks->invoke("hook_updatedomains_dns_add",array($onedom));
                 }
 
