@@ -1,3 +1,20 @@
+alternc (3.5.3) buster bullseye bookworm; urgency=medium
+
+  * fix : improve database creation (prevent conflit with keyword) #629
+  * enh : support correctly length database and username
+  * enh : refresh database account usage after any database change
+  * fix : improve php support #604
+  * fix : delete mailbox on account deletion #633
+  * fix : don't break do_action cron and catch error to debug mode #361
+  * breaking : don't lost any DNS override (serial, locked, manual row).
+
+With DNSEC support inital code required to clear any zone before any update. This behavior in no more required as listing zones is a symbolic link.
+We can have both inclusion listing without any conflict.
+A old code was forgotten and deleted all DNS data before to update them. Was a breaking behavior, we correct it with related revert.
+Locked zone , incremental serial and any override are now retablished.
+
+ -- Camille Lafitte <alternc@webelys.com>  Tue, 26 Aug 2025 10:02:00 +0200
+
 alternc (3.5.2) buster bullseye bookworm; urgency=low
 
   * fix : alternc-awstat can be install with alternc 3.5.x
