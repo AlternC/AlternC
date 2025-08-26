@@ -10,14 +10,18 @@ msgstr ""
 "Project-Id-Version: AlternC, hosting control panel\n"
 "Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
 "POT-Creation-Date: 2018-06-24 17:17+0200\n"
-"PO-Revision-Date: 2012-08-21 15:36+0000\n"
-"Last-Translator: Viktor Skachkov <awsswa59@gmail.com>, 2018\n"
-"Language-Team: Russian (http://app.transifex.com/octopuce/alternc/language/ru/)\n"
+"PO-Revision-Date: 2025-08-03 22:02+0000\n"
+"Last-Translator: Maksim_220 Кабанов <law820314@gmail.com>\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/alternc/alternc/"
+"ru/>\n"
+"Language: ru_RU\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ru\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || ("
+"n%100>=11 && n%100<=14)? 2 : 3);\n"
+"X-Generator: Weblate 5.13-dev\n"
 
 #. Type: error
 #. Description
@@ -652,7 +656,7 @@ msgstr ""
 
 #: ../admin/aws_add.php:38
 msgid "Edit Statistics"
-msgstr "Изменить Статистику "
+msgstr "Редактировать статистику"
 
 #: ../admin/aws_add.php:38
 msgid "New Statistics"
@@ -778,7 +782,7 @@ msgstr "Имя пользователя"
 
 #: ../admin/aws_pass.php:74
 msgid "New Password"
-msgstr "Новый пароль"
+msgstr "Новый Пароль"
 
 #: ../admin/aws_pass.php:75 ../admin/aws_users.php:55
 msgid "Confirm password"
@@ -883,7 +887,7 @@ msgstr ""
 
 #: ../class/m_aws.php:655
 msgid "Awstats"
-msgstr "Awstats"
+msgstr "Awstаts"
 
 #: ../class/m_aws.php:677
 msgid "prefix not allowed."
@@ -1230,7 +1234,7 @@ msgstr "Изменить Пароль"
 
 #: ../../squirrelmail/alternc_changepass/setup.php:23
 msgid "Change the password of your email account."
-msgstr "Сменить пароль от вашего почтового аккаунта"
+msgstr "Измените пароль к своей учетной записи эл. почты."
 
 #: ../admin/about.php:32
 msgid "About AlternC"
@@ -1251,15 +1255,15 @@ msgstr ""
 
 #: ../admin/about.php:43
 msgid "Official website: "
-msgstr "Официальный веб-сайт:"
+msgstr "Официальный сайт: "
 
 #: ../admin/about.php:44
 msgid "Developer website: "
-msgstr "Веб-сайт разработчиков:"
+msgstr "Сайт разработчика: "
 
 #: ../admin/about.php:45
 msgid "Help: "
-msgstr "Помощь:"
+msgstr "Помощь: "
 
 #: ../admin/about.php:53
 msgid "You are currently using AlternC "
@@ -1769,7 +1773,7 @@ msgstr "Заблокировать"
 
 #: ../admin/adm_doms.php:78
 msgid "Unlock"
-msgstr "Разблокировать."
+msgstr "Разблокировать"
 
 #: ../admin/adm_doms_def_type.php:38 ../admin/adm_panel.php:59
 msgid "Manage defaults domains type"
@@ -2955,7 +2959,7 @@ msgstr "Почтовый адрес (не обязательно)"
 
 #: ../admin/cron.php:103
 msgid "Apply the modifications"
-msgstr "Применить изменения"
+msgstr "Примените изменения"
 
 #: ../admin/dom_add.php:41
 msgid "Domain hosting"
@@ -4093,7 +4097,7 @@ msgstr ""
 
 #: ../admin/mail_list.php:118
 msgid "Pop/Imap"
-msgstr "Pop/Imap"
+msgstr "Поп/Имап"
 
 #: ../admin/mail_list.php:129
 msgid "Deleting..."
@@ -4103,7 +4107,9 @@ msgstr "Удаление..."
 msgid ""
 "This email will be deleted soon. You may still be able to undelete it by "
 "clicking here"
-msgstr "Это письмо будет удалено в ближайшее время. Вы все еще можете восстановить его, нажав здесь."
+msgstr ""
+"Это письмо будет удалено в ближайшее время. Вы все еще можете отменить "
+"удаление, нажав здесь"
 
 #: ../admin/mail_list.php:134
 msgid "Undelete"
@@ -4148,7 +4154,7 @@ msgstr ""
 #: ../admin/mail_list.php:257 ../admin/mail_list.php:268
 #: ../admin/mail_list.php:279
 msgid "Server name: "
-msgstr "Имя сервера:"
+msgstr "Имя сервера: "
 
 #: ../admin/mail_list.php:201 ../admin/mail_list.php:214
 #: ../admin/mail_list.php:227
@@ -4159,14 +4165,14 @@ msgstr ""
 #: ../admin/mail_list.php:201 ../admin/mail_list.php:214
 #: ../admin/mail_list.php:227
 msgid "Username: "
-msgstr "Имя пользователя:"
+msgstr "Имя пользователя: "
 
 #: ../admin/mail_list.php:202 ../admin/mail_list.php:215
 #: ../admin/mail_list.php:228 ../admin/mail_list.php:247
 #: ../admin/mail_list.php:258 ../admin/mail_list.php:269
 #: ../admin/mail_list.php:280
 msgid "Port: "
-msgstr "Порт:"
+msgstr "Порт: "
 
 #: ../admin/mail_list.php:203 ../admin/mail_list.php:216
 #: ../admin/mail_list.php:229 ../admin/mail_list.php:248
@@ -4180,7 +4186,7 @@ msgstr ""
 #: ../admin/mail_list.php:260 ../admin/mail_list.php:271
 #: ../admin/mail_list.php:282
 msgid "Authentication method: "
-msgstr "Метод аутентификации:"
+msgstr "Метод аутентификации: "
 
 #: ../admin/mail_list.php:204 ../admin/mail_list.php:249
 #: ../admin/mail_list.php:260 ../admin/mail_list.php:271
@@ -4314,7 +4320,7 @@ msgstr ""
 
 #: ../admin/main.php:33
 msgid "Last Login: "
-msgstr "Последний Вход:"
+msgstr "Последний Вход: "
 
 #: ../admin/main.php:38
 #, php-format
@@ -5955,7 +5961,7 @@ msgstr ""
 
 #: ../class/m_bro.php:634
 msgid "Undefined error "
-msgstr "Неизвестная ошибка"
+msgstr "Неопределенная ошибка "
 
 #: ../class/m_bro.php:637
 msgid "Error during the upload of the file: "
