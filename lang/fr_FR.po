@@ -26,8 +26,8 @@ msgstr ""
 "Project-Id-Version: AlternC, hosting control panel\n"
 "Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
 "POT-Creation-Date: 2018-06-24 17:17+0200\n"
-"PO-Revision-Date: 2024-02-01 18:01+0000\n"
-"Last-Translator: ButterflyOfFire <boffire@users.noreply.hosted.weblate.org>\n"
+"PO-Revision-Date: 2025-06-21 20:01+0000\n"
+"Last-Translator: Lumiraptor <hmtz@gmx.fr>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/alternc/alternc/"
 "fr/>\n"
 "Language: fr_FR\n"
@@ -36,7 +36,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % "
 "1000000 == 0 ? 1 : 2;\n"
-"X-Generator: Weblate 5.4-dev\n"
+"X-Generator: Weblate 5.13-dev\n"
 
 #. Type: error
 #. Description
@@ -167,7 +167,9 @@ msgstr "L'équipe d'AlternC fournit gratuitement le service de DNS à tout utili
 #. Description
 #: ../alternc.templates:7001
 msgid "Path where AlternC's users html files will be located:"
-msgstr "Répertoire dans lequel les fichiers HTML des utilisateurs d'AlternC seront stockés"
+msgstr ""
+"Répertoire dans lequel les fichiers HTML des utilisateurs d'AlternC seront "
+"stockés :"
 
 #. Type: string
 #. Description
@@ -187,7 +189,7 @@ msgstr "Ce répertoire contiendra les dossiers personnels de tous les comptes Al
 #. Description
 #: ../alternc.templates:8001
 msgid "Path where AlternC's users mails will be located:"
-msgstr "Répertoire dans lequel on stockera les mails des utilisateurs"
+msgstr "Répertoire dans lequel on stockera les mails des utilisateurs :"
 
 #. Type: string
 #. Description
@@ -201,7 +203,7 @@ msgstr "Merci d'entrer le nom du répertoire où vous souhaitez stocker les mail
 #. Description
 #: ../alternc.templates:9001
 msgid "Path where alternc's logs files will be located:"
-msgstr "Répertoire dans lequel les fichiers logs d'AlternC seront stockés"
+msgstr "Répertoire dans lequel les fichiers logs d'AlternC seront stockés :"
 
 #. Type: string
 #. Description
@@ -264,7 +266,7 @@ msgstr "AlternC va créer un compte administrateur sur le serveur mysql. Entrez 
 #. Description
 #: ../alternc.templates:13001
 msgid "Remote root mysql user account:"
-msgstr "Mot de passe du compte MySQL distant"
+msgstr "Mot de passe du compte MySQL distant :"
 
 #. Type: string
 #. Description
@@ -328,7 +330,7 @@ msgstr "Précisez le mot de passe du compte MySQL distant"
 #. Description
 #: ../alternc.templates:18001
 msgid "The server to GRANT permissions to:"
-msgstr "Le serveur SQL à qui autoriser les permissions:"
+msgstr "Le serveur SQL à qui autoriser les permissions :"
 
 #. Type: string
 #. Description
