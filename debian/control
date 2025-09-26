@@ -18,10 +18,10 @@ Pre-depends: debconf (>= 0.5.00) | debconf-2.0
 Depends: debianutils (>= 1.13.1)
        , apache2
        , apache2-mpm-itk | libapache2-mpm-itk
-       , libapache2-mod-php8.2 | libapache2-mod-php7.4 | libapache2-mod-php7.3 | libapache2-mod-php7.0 | libapache2-mod-php5
-       , php8.2-mysql | php7.4-mysql | php7.3-mysql | php7.0-mysql | php5-mysql
-       , php8.2-curl | php7.4-curl | php7.3-curl | php7.0-curl | php5-curl | php-curl
-       , php8.2-cli | php7.4-cli | php7.3-cli | php7.0-cli | php5-cli | php-cli
+       , libapache2-mod-php8.4 | libapache2-mod-php8.2 | libapache2-mod-php7.4 | libapache2-mod-php7.3 | libapache2-mod-php7.0 | libapache2-mod-php5
+       , php8.4-mysql | php8.2-mysql | php7.4-mysql | php7.3-mysql | php7.0-mysql | php5-mysql
+       , php8.4-curl | php8.2-curl | php7.4-curl | php7.3-curl | php7.0-curl | php5-curl | php-curl
+       , php8.4-cli | php8.2-cli | php7.4-cli | php7.3-cli | php7.0-cli | php5-cli | php-cli
        , phpmyadmin
        , ssl-cert
        , libjs-prettify
