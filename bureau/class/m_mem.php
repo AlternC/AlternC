@@ -121,6 +121,10 @@ class m_mem {
 
                 return false;
             }
+            if (!empty($db->f("oidc_user_id")) && variable_get("oidc_disable_local_login", false, "Should users be able to use local login when an OIDC account is linked?")) {
+                $msg->raise("ERROR", "mem", _("This account is linked to an OpenID Connect provider, local login is disabled."));
+                return false;
+            }
         }
         if (!$db->f("enabled")) {
             $msg->raise("ERROR", "mem", _("This account is locked, contact the administrator."));
