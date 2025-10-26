@@ -80,21 +80,47 @@ class m_mem {
      * @param $password string User Password.
      * @return boolean TRUE if the user has been successfully connected, or FALSE if an error occured.
      */
-    function login($username, $password, $restrictip = 0, $authip_token = false) {
+    function login($username, $password, $restrictip = 0, $authip_token = false, $oidc_token = null) {
         global $db, $msg, $cuid, $authip;
         $msg->log("mem", "login", $username);
 	if ($msg->has_msgs("ERROR")) return false;
+        $oidc_update_user_id = false;
+        if (!empty($oidc_token)) {
+            $db->query("select * from membres where oidc_user_id=?;", [$oidc_token->sub]);
+            if ($db->num_rows() == 0) {
+                $db->query(
+                    "select * from membres where mail=?;",
+                    [$oidc_token->email]
+                );
 
-        $db->query("select * from membres where login= ? ;", array($username));
-        if ($db->num_rows() == 0) {
-            $msg->raise("ERROR", "mem", _("User or password incorrect"));
-            return false;
-        }
-        $db->next_record();
-        if (!password_verify($password, $db->f('pass'))) {
-            $db->query("UPDATE membres SET lastfail=lastfail+1 WHERE uid= ? ;", array($db->f("uid")));
-            $msg->raise("ERROR", "mem", _("User or password incorrect"));
-            return false;
+                if ($db->num_rows() == 0) {
+                    error_log(print_r("No local user", true));
+
+                    $msg->raise("ERROR", "mem", _("No local user was found for this OIDC user"));
+                    return false;
+                }
+
+                $oidc_update_user_id = true;
+            }
+
+            $db->next_record();
+        } else {
+            $db->query("select * from membres where login= ? ;", [$username]);
+            if ($db->num_rows() == 0) {
+                $msg->raise("ERROR", "mem", _("User or password incorrect"));
+
+                return false;
+            }
+            $db->next_record();
+            if (! password_verify($password, $db->f('pass'))) {
+                $db->query(
+                    "UPDATE membres SET lastfail=lastfail+1 WHERE uid= ? ;",
+                    [$db->f("uid")]
+                );
+                $msg->raise("ERROR", "mem", _("User or password incorrect"));
+
+                return false;
+            }
         }
         if (!$db->f("enabled")) {
             $msg->raise("ERROR", "mem", _("This account is locked, contact the administrator."));
@@ -104,9 +130,15 @@ class m_mem {
         $cuid = $db->f("uid");
         // Transitional code to update md5 hashed passwords to those created
         // with password_hash().
-        if (strncmp($db->f('pass'), '$1$', 3) == 0) {
+        if (!empty($password) && strncmp($db->f('pass'), '$1$', 3) == 0) {
             $db->query("update membres set pass = ? where uid = ?",
                        array(password_hash($password, PASSWORD_BCRYPT), $cuid));
+        }
+        if ($oidc_update_user_id) {
+            $db->query(
+                "update membres set oidc_user_id = ? where uid = ?",
+                [$oidc_token->sub, $cuid]
+            );
         }
 
         if (panel_islocked() && $cuid != 2000) {
