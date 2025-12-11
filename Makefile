@@ -61,6 +61,8 @@ install-alternc: install-common
 	chown -R root:root $(DESTDIR)/usr/share/alternc/panel
 	chmod -R 644 $(DESTDIR)/usr/share/alternc/panel
 	chmod -R a+X $(DESTDIR)/usr/share/alternc/panel
+	install -m 0644 -g root -o root etc/alternc/apache-panel.d/alias_javascript.conf $(DESTDIR)/etc/alternc/apache-panel.d
+
 # Logs
 	test -d $(DESTDIR)/var/log/alternc || mkdir $(DESTDIR)/var/log/alternc
 	chown -R root:root $(DESTDIR)/var/log/alternc 
