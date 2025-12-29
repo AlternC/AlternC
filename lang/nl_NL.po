@@ -10,14 +10,16 @@ msgstr ""
 "Project-Id-Version: AlternC, hosting control panel\n"
 "Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
 "POT-Creation-Date: 2018-06-24 17:17+0200\n"
-"PO-Revision-Date: 2018-06-27 19:13+0000\n"
-"Last-Translator: Benjamin Sonntag <benjamin@sonntag.fr>\n"
-"Language-Team: Dutch (Netherlands) (http://www.transifex.com/octopuce/alternc/language/nl_NL/)\n"
+"PO-Revision-Date: 2025-12-29 17:09+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"Language-Team: Dutch <https://hosted.weblate.org/projects/alternc/alternc/"
+"nl/>\n"
+"Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: nl_NL\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.1\n"
 
 #. Type: error
 #. Description
@@ -31,7 +33,9 @@ msgstr "AlternC heeft ACL nodig op het bestandssyteem"
 msgid ""
 "AlternC can't work without ACL activated on its filesystem. ACL are "
 "currently not enabled."
-msgstr "AlternC kan niet werken zonder dat ACL aktief is on zijn bestandssysteem. ACL's zijn nu niet actief."
+msgstr ""
+"AlternC kan niet werken zonder dat ACL aktief is on zijn bestandssysteem. "
+"ACL's zijn nu niet actief."
 
 #. Type: error
 #. Description
@@ -39,7 +43,9 @@ msgstr "AlternC kan niet werken zonder dat ACL aktief is on zijn bestandssysteem
 msgid ""
 "Also, you need to activate group quota (grpquota) to be able to use disk "
 "quota (but that's not mandatory)."
-msgstr "U moet ook groepsquota (grpquota) aanschakelen om schijfquota te kunnen gebruiken (maar dit is niet verplicht)."
+msgstr ""
+"U moet ook groepsquota (grpquota) aanschakelen om schijfquota te kunnen "
+"gebruiken (maar dit is niet verplicht)."
 
 #. Type: error
 #. Description
@@ -59,14 +65,18 @@ msgstr "AlternC QUOTA's zijn niet aangeschakeld."
 #. Description
 #: ../alternc.templates:2001
 msgid "As a result, the QUOTA assigned to each user will be infinite."
-msgstr "Dit heeft tot gevolg dat aan iedere gebruiker een ongelimiteerde QUOTA toegewezen zal worden."
+msgstr ""
+"Dit heeft tot gevolg dat aan iedere gebruiker een ongelimiteerde QUOTA "
+"toegewezen zal worden."
 
 #. Type: note
 #. Description
 #: ../alternc.templates:2001
 msgid ""
 "To be able to use space quota in AlternC, enable grpquota in your partition."
-msgstr "Om schijfquota te kunnen gebruiken in AlternC moet U grpquota activeren in uw partitie."
+msgstr ""
+"Om schijfquota te kunnen gebruiken in AlternC moet U grpquota activeren in "
+"uw partitie."
 
 #. Type: string
 #. Description
@@ -81,7 +91,10 @@ msgid ""
 "Please enter the fully qualified name of your server. This will be the "
 "domain part of the url you will use to access the virtual managment desktop."
 " This (sub)domain MUST point to your server."
-msgstr "Gelieve de volledig gekwalificeerde naam van uw server in te voeren. Dit zal het domein gedeelte van de URL worden die U zal gebruiken om het virtuele beheersbureaublad te bereiken. Dit (sub)domein MOET naar uw server verwijzen."
+msgstr ""
+"Gelieve de volledig gekwalificeerde naam van uw server in te voeren. Dit zal "
+"het domein gedeelte van de URL worden die U zal gebruiken om het virtuele "
+"beheersbureaublad te bereiken. Dit (sub)domein MOET naar uw server verwijzen."
 
 #. Type: string
 #. Description
@@ -101,7 +114,9 @@ msgstr "Naam van uw hostingverlener:"
 msgid ""
 "Please enter the name of your hosting service. It may be your company's name"
 " or your personnal name or whatever you want to ..."
-msgstr "Vul de naam van uw hostingdienst. Het mag uw bedrijfsnaam of uw eigen naam of wat U ook maar wenst..."
+msgstr ""
+"Vul de naam van uw hostingdienst. Het mag uw bedrijfsnaam of uw eigen naam "
+"of wat U ook maar wenst..."
 
 #. Type: string
 #. Description
@@ -148,7 +163,8 @@ msgstr ""
 #. Description
 #: ../alternc.templates:7001
 msgid "Path where AlternC's users html files will be located:"
-msgstr "Pad waar de AlternC's gebruikers html bestanden zullen worden opgeslagen:"
+msgstr ""
+"Pad waar de AlternC's gebruikers html bestanden zullen worden opgeslagen:"
 
 #. Type: string
 #. Description
@@ -156,7 +172,9 @@ msgstr "Pad waar de AlternC's gebruikers html bestanden zullen worden opgeslagen
 msgid ""
 "Please enter the directory name where you want html user files to be put. "
 "The default value should be good in most cases."
-msgstr "Vul de foldernaam waar U uw gebruikers maildirs wilt opslaan. De standaardwaarde zou in de meeste gevallen goed moeten zijn."
+msgstr ""
+"Vul de foldernaam waar U uw gebruikers maildirs wilt opslaan. De "
+"standaardwaarde zou in de meeste gevallen goed moeten zijn."
 
 #. Type: string
 #. Description
@@ -190,7 +208,9 @@ msgstr "Pad waar de AlternC's log bestanden zullen worden opgeslagen:"
 msgid ""
 "Please enter the directory name where you want to put your log files. The "
 "default value should be good in most cases."
-msgstr "Vul de foldernaam waar U uw log bestanden wilt opslaan. De standaardwaarde zou in de meeste gevallen goed moeten zijn."
+msgstr ""
+"Vul de foldernaam waar U uw log bestanden wilt opslaan. De standaardwaarde "
+"zou in de meeste gevallen goed moeten zijn."
 
 #. Type: string
 #. Description
@@ -680,7 +700,9 @@ msgstr "Toegestane Gebruikers"
 msgid ""
 "No users currently defined, you must create login with the 'Manage allowed "
 "users' accounts' menu."
-msgstr "Nog geen gebruikers gedefinieerd, u moet de login naam aanmaken met het 'Beheer toegestane gebruikersaccounts' menu."
+msgstr ""
+"Nog geen gebruikers gedefinieerd, u moet de login naam aanmaken met het "
+"'Beheer toegestane gebruikersaccounts' menu."
 
 #: ../admin/aws_add.php:93
 msgid "Create those statistics"
@@ -831,7 +853,12 @@ msgid ""
 "Statistics are web pages generated daily based on the visits of the day "
 "before. Awstats is the soft used to produce those stats. The statistics are "
 "then protected by a login and a password."
-msgstr "De module 'stats' staat iedere gebruiker toe om statistieken over deze web site op te vragen.Statistieken zijn web pagina's die dagelijks gegenereerd worden over de bezoeken van de vorige dagAwstats is het programma dat deze statistieken produceert. De statistieken worden dan beschermd door een loginnaam en wachtwoord."
+msgstr ""
+"De module 'stats' staat iedere gebruiker toe om statistieken over deze web "
+"site op te vragen.Statistieken zijn web pagina's die dagelijks gegenereerd "
+"worden over de bezoeken van de vorige dagAwstats is het programma dat deze "
+"statistieken produceert. De statistieken worden dan beschermd door een "
+"loginnaam en wachtwoord."
 
 #: ../class/m_aws.php:161 ../class/m_aws.php:324 ../class/m_aws.php:720
 msgid "This statistic does not exist"
@@ -961,7 +988,10 @@ msgid ""
 "Warning: Deleting a mailman list will destroy all the subscribed users, "
 "preferences and archives it contains! You will <b>NOT</b> be able to get "
 "your data back!"
-msgstr "Waarschuwing: Verwijdering van een mailman lijst veroorzaakt de vernietigingvan all ingeschreven gebruikers, voorkeuren en archieven die het bevat! U kunt uw data <b>NIET</b> meer terugkrijgen!"
+msgstr ""
+"Waarschuwing: Verwijdering van een mailman lijst veroorzaakt de "
+"vernietigingvan all ingeschreven gebruikers, voorkeuren en archieven die het "
+"bevat! U kunt uw data <b>NIET</b> meer terugkrijgen!"
 
 #: ../admin/mman_doadd.php:38
 msgid "Invalid list name (only letters, digits and underscore)."
@@ -1004,7 +1034,8 @@ msgstr "Aanmaken van de lijst is in behandeling"
 #: ../admin/mman_list.php:38
 msgid ""
 "No domain is installed on your account, you cannot create any mailing list!"
-msgstr "Uw verzendlijst quota is bereikt, uw kunt niet meer verzendlijsten aanmaken"
+msgstr ""
+"Uw verzendlijst quota is bereikt, uw kunt niet meer verzendlijsten aanmaken"
 
 #: ../admin/mman_list.php:68
 msgid "Create a list"
@@ -1024,7 +1055,8 @@ msgstr "Kies"
 
 #: ../admin/mman_list.php:91
 msgid "List is pending deletion, you can't do anything on it"
-msgstr "Verwijdering van de lijst is in behandeling, u kunt de list niet veranderen"
+msgstr ""
+"Verwijdering van de lijst is in behandeling, u kunt de list niet veranderen"
 
 #: ../admin/mman_list.php:102
 msgid "List admin"
@@ -1069,7 +1101,11 @@ msgid ""
 "list. If you want to change it, select another url in the list and submit "
 "this form. <br />If you don't know what you are doing, don't change anything"
 " here."
-msgstr "Dit is het huidige url voor toegang tot beheer en openbare pagina'svoor deze lijst. Als u het wilt veranderen, kies een ander url in de lijst en verzend dit formulier. <br />Als u niet weet wat u aan het doen bent, verander hier niets"
+msgstr ""
+"Dit is het huidige url voor toegang tot beheer en openbare pagina'svoor deze "
+"lijst. Als u het wilt veranderen, kies een ander url in de lijst en verzend "
+"dit formulier. <br />Als u niet weet wat u aan het doen bent, verander hier "
+"niets"
 
 #: ../admin/mman_url.php:66
 #, php-format
@@ -1124,7 +1160,9 @@ msgstr "Nog geen lijst gedefiniëerd"
 msgid ""
 "Special mail address for Mailman mailing-lists. <a "
 "href='mman_list.php'>Click here to manage it.</a>"
-msgstr "Bijzonder email adres voor Mailman verzendlijsten. <ahref='mman_list.php'>Klik hier om het te beheren.</a>"
+msgstr ""
+"Bijzonder email adres voor Mailman verzendlijsten. <ahref='mman_list.php'>"
+"Klik hier om het te beheren.</a>"
 
 #: ../class/m_mailman.php:224
 #, php-format
@@ -1169,11 +1207,15 @@ msgstr "Een lijst met dezelfde naam betaat al op de server. Kies aub een andere"
 msgid ""
 "This email address (or one of the list-subscribe, list-unsubscribe etc.) are"
 " already used."
-msgstr "Dit email adres (of een van de lijst-inschrijven, lijst-opzeggen etc.) is al in gebruik."
+msgstr ""
+"Dit email adres (of een van de lijst-inschrijven, lijst-opzeggen etc.) is al "
+"in gebruik."
 
 #: ../class/m_mailman.php:366 ../class/m_mailman.php:414
 msgid "This list has pending action, you cannot delete it"
-msgstr "Akties voor deze lijst zijn in behandeling, u kunt de lijst nu niet verwijderen"
+msgstr ""
+"Akties voor deze lijst zijn in behandeling, u kunt de lijst nu niet "
+"verwijderen"
 
 #: ../class/m_mailman.php:586
 msgid "Mailing lists (mailman)"
@@ -1191,7 +1233,9 @@ msgstr "Uw nieuwe wachtwoorden zijn verschillend, probeer het opnieuw aub."
 msgid ""
 "Your account has not been found, please try again later or ask an "
 "administrator."
-msgstr "Uw account is niet gevonden, probeer het later nogmaals ofraadpleeg een beheerder."
+msgstr ""
+"Uw account is niet gevonden, probeer het later nogmaals ofraadpleeg een "
+"beheerder."
 
 #: ../../squirrelmail/alternc_changepass/change.php:75
 msgid "Your current password is incorrect, please try again."
@@ -1202,7 +1246,10 @@ msgid ""
 "Your password has been successfully changed. Don't forget to change it in "
 "your mail software if you are using one (Outlook, Mozilla, Thunderbird, "
 "Eudora ...)"
-msgstr "Uw wachtwoord is succesvol veranderd. Vergeet niet om het ook aan te passen in uw email programma - als u er een gebruikt - (outlook, Mozilla, Thunderbird, Eudora...)"
+msgstr ""
+"Uw wachtwoord is succesvol veranderd. Vergeet niet om het ook aan te passen "
+"in uw email programma - als u er een gebruikt - (outlook, Mozilla, "
+"Thunderbird, Eudora...)"
 
 #: ../../squirrelmail/alternc_changepass/change.php:111
 msgid "Changing your mail password"
@@ -1247,7 +1294,12 @@ msgid ""
 "<br/>It manages, among others, email, Web, Web statistics, and mailing list "
 "services. It is available in many languages. It is a free software "
 "distributed under GPL license."
-msgstr "AlternC is een groep van geautomatiseerde hosting programma's. Het heeft een beheersinterface gebaseerd op PHP en scripts die voor de server configuratie zorgdragen.<br/> Het beheert, onder andere, email, Web, Web statistieken, en verzendlijsten. Het is beschikbaar in vele talen. Het is 'free software', verspreidonder GPL licensie. "
+msgstr ""
+"AlternC is een groep van geautomatiseerde hosting programma's. Het heeft een "
+"beheersinterface gebaseerd op PHP en scripts die voor de server configuratie "
+"zorgdragen.<br/> Het beheert, onder andere, email, Web, Web statistieken, en "
+"verzendlijsten. Het is beschikbaar in vele talen. Het is 'free software', "
+"verspreidonder GPL licensie. "
 
 #: ../admin/about.php:43
 msgid "Official website: "
@@ -1385,7 +1437,9 @@ msgstr "Toegangsbeveiliging"
 #: ../admin/adm_authip_whitelist.php:62
 msgid ""
 "The IP and subnet you have here are allowed for ALL users and ALL usages"
-msgstr "Het IP en subnet dat u hier heeft, is toegankelijk voor ALLE gebruikers en ALLE soorten van gebruik"
+msgstr ""
+"Het IP en subnet dat u hier heeft, is toegankelijk voor ALLE gebruikers en "
+"ALLE soorten van gebruik"
 
 #: ../admin/adm_authip_whitelist.php:62
 msgid "Warning"
@@ -1407,7 +1461,9 @@ msgstr "Annuleer bewerken"
 msgid ""
 "Enter here the IP address you want. <br/> <i>IPv4, IPv6 and subnet "
 "allowed</i>"
-msgstr "Type hier het IP adres dat u wilt. <br/> <i>IPv4, IPv6 en subnet toegestaan</i>"
+msgstr ""
+"Type hier het IP adres dat u wilt. <br/> <i>IPv4, IPv6 en subnet toegestaan</"
+"i>"
 
 #: ../admin/adm_authip_whitelist.php:78
 msgid "Add a comment"
@@ -1520,7 +1576,12 @@ msgid ""
 " as a serie of SQL request that you can run to restore the current "
 "configuration if you want. Click confirm if you are sure you want to "
 "deactivate all this user's domains."
-msgstr "De volgende domeinen zullen gedeaktiveerd worden en omgeleid naar de URL, in te geven in de volgende box. Een backup van ded domein configuratie zal getoond worden als een serie SQL opdrachten die u kunt uitvoeren om de huidige configuratie weer terug te zetten als u dat wilt. Klik 'confirm' als u zeker weet dat u alle domeins van deze gebruiker wilt deaktiveren"
+msgstr ""
+"De volgende domeinen zullen gedeaktiveerd worden en omgeleid naar de URL, in "
+"te geven in de volgende box. Een backup van ded domein configuratie zal "
+"getoond worden als een serie SQL opdrachten die u kunt uitvoeren om de "
+"huidige configuratie weer terug te zetten als u dat wilt. Klik 'confirm' als "
+"u zeker weet dat u alle domeins van deze gebruiker wilt deaktiveren"
 
 #: ../admin/adm_deactivate.php:75
 msgid "Redirection URL:"
@@ -1537,7 +1598,9 @@ msgstr "Ontbrekende omleidings URL"
 #: ../admin/adm_deactivate.php:102
 #, php-format
 msgid "-- Redirecting all domains and subdomains of the user %s to %s\n"
-msgstr "--- Alle domeinen en subdomeinen van de gebruiker %s worden omgeleid naar %s\n"
+msgstr ""
+"--- Alle domeinen en subdomeinen van de gebruiker %s worden omgeleid naar "
+"%s\n"
 
 #: ../admin/adm_defquotas.php:41 ../admin/adm_panel.php:47
 msgid "Change the default quotas"
@@ -1559,7 +1622,9 @@ msgstr "Verwijder account type"
 msgid ""
 "Here is the list of the quotas on the server for the new accounts. If you "
 "want to change them, enter new values"
-msgstr "Hier is de lijst van quota's op de server voor de nieuwe accounts.Als u deze wilt veranderen, toets nieuwe waarden in"
+msgstr ""
+"Hier is de lijst van quota's op de server voor de nieuwe accounts.Als u deze "
+"wilt veranderen, toets nieuwe waarden in"
 
 #: ../admin/adm_defquotas.php:85
 msgid "Synchronise user's quota (only to upper value)"
@@ -1717,7 +1782,12 @@ msgid ""
 "domain if it does not exist or does not point to our server anymore. You can"
 " also set the 'Lock' flag on a domain so that the user will not be able to "
 "change any DNS parameter or delete this domain from his account."
-msgstr "Hier is de lijst van de domeinen, geïnstalleerd op de server. U kunt een domein verwijderen als het niet bestaat of niet meer verwijst naar onze server.U kunt ook de 'Lock'vlag zetten op een domein zodat de gebruiker geen DNS parameter meer kan veranderen of dit domein van zijn account kan verwijderen."
+msgstr ""
+"Hier is de lijst van de domeinen, geïnstalleerd op de server. U kunt een "
+"domein verwijderen als het niet bestaat of niet meer verwijst naar onze "
+"server.U kunt ook de 'Lock'vlag zetten op een domein zodat de gebruiker geen "
+"DNS parameter meer kan veranderen of dit domein van zijn account kan "
+"verwijderen."
 
 #: ../admin/adm_doms.php:57
 msgid ""
@@ -1725,7 +1795,12 @@ msgid ""
 "registry and has a proper NS,MX and IP depending on its configuration. It is"
 " red if we have serious doubts about its NS, MX or IP configuration. Contact"
 " the user of this domain or a system administrator."
-msgstr "De domein-kolom is groen als het domein bestaat in het wereldwijde register en een korrekt NS,MX of IP heeft, afhankelijk van zijn configuratie. Het is rood als we serieuse twijfels hebben betreffende zijn NS,MX of IP configuratie. Neem kontakt op met de gebruiker van dit domein of met een systeem administrateur"
+msgstr ""
+"De domein-kolom is groen als het domein bestaat in het wereldwijde register "
+"en een korrekt NS,MX of IP heeft, afhankelijk van zijn configuratie. Het is "
+"rood als we serieuse twijfels hebben betreffende zijn NS,MX of IP "
+"configuratie. Neem kontakt op met de gebruiker van dit domein of met een "
+"systeem administrateur"
 
 #: ../admin/adm_doms.php:60
 msgid ""
@@ -1779,13 +1854,16 @@ msgstr ""
 msgid ""
 "If you don't know what this page is about, don't touch anything, and read "
 "AlternC documentation about domain types"
-msgstr "Als u niet weet waar deze pagina over gaat, verander niets en lees de AlternC dokumentatie over domein types "
+msgstr ""
+"Als u niet weet waar deze pagina over gaat, verander niets en lees de "
+"AlternC dokumentatie over domein types "
 
 #: ../admin/adm_doms_def_type.php:41
 msgid ""
 "The Type column contains a type of available VirtualHost config on The "
 "server."
-msgstr "De Type kolom bevat een type van beschikbare VirtualHost config op De server."
+msgstr ""
+"De Type kolom bevat een type van beschikbare VirtualHost config op De server."
 
 #: ../admin/adm_doms_def_type.php:42
 msgid ""
@@ -1999,7 +2077,9 @@ msgstr "Dit account is een super-admin account"
 msgid ""
 "There is only one administrator account, you cannot turn this account back "
 "to normal"
-msgstr "Er is slechts één administrateur account, u kunt dit account niet een normaal account terug zetten"
+msgstr ""
+"Er is slechts één administrateur account, u kunt dit account niet een "
+"normaal account terug zetten"
 
 #: ../admin/adm_edit.php:158
 msgid "Turn this account back to normal"
@@ -2191,13 +2271,19 @@ msgid ""
 "can configure the alternc-secondarymx package on your secondary mx server "
 "and give him the login/pass that will grant him access to your server's mx-"
 "hosted domain list. "
-msgstr "Hier is de lijst van toegestane accounts voor secundair mx beheer. U kunt het pakket alternc-secundarymx configureren op uw secundaire mx server en hem het login/wachtwoord geven dat hem toegang zal verlenen tot uw servers mx-hosted domein lijst. "
+msgstr ""
+"Hier is de lijst van toegestane accounts voor secundair mx beheer. U kunt "
+"het pakket alternc-secundarymx configureren op uw secundaire mx server en "
+"hem het login/wachtwoord geven dat hem toegang zal verlenen tot uw servers "
+"mx-hosted domein lijst. "
 
 #: ../admin/adm_mxaccount.php:93
 msgid ""
 "If you want to allow a new server to access your mx-hosted domain list, give"
 " him an account."
-msgstr "Als u een nieuwe gebruiker toegang wilt geven tot uw mx-hosted domein lijst,  moet u hem een account geven"
+msgstr ""
+"Als u een nieuwe gebruiker toegang wilt geven tot uw mx-hosted domein "
+"lijst,  moet u hem een account geven"
 
 #: ../admin/adm_mxaccount.php:107 ../admin/adm_slavedns.php:168
 msgid "Add this account to the allowed list"
@@ -2286,7 +2372,8 @@ msgstr "Maximum wachtwoord lengte"
 
 #: ../admin/adm_passpolicy.php:101
 msgid "In how many classes of characters must be the password (at least):"
-msgstr "Hoeveel verschillende teken soorten moet het wachtwoord (minimaal) bevatten:"
+msgstr ""
+"Hoeveel verschillende teken soorten moet het wachtwoord (minimaal) bevatten:"
 
 #: ../admin/adm_passpolicy.php:108
 msgid "Do we allow the password to be like the login?"
@@ -2305,7 +2392,10 @@ msgid ""
 "The classes of characters are : <br />1. Low-case letters (a-z)<br />2. "
 "Upper-case letters (A-Z)<br />3. Figures (0-9)<br />4. Ascii symbols "
 "(!\"#$%&'()*+,-./:;<=>?@[\\]^_`)<br />5. Non-Ascii symbols (accents...)"
-msgstr "De soorten tekens zijn : <br />1. Kleine letters (a-z)<br />2. Hoofddletters (A-Z)<br />3. Cijfers (0-9)<br />4. Ascii symbolen (!\"#$%&'()*+,-./:;<=>?@[\\]^_`)<br />5. Non-Ascii symbolen (accenten...)"
+msgstr ""
+"De soorten tekens zijn : <br />1. Kleine letters (a-z)<br />2. Hoofddletters "
+"(A-Z)<br />3. Cijfers (0-9)<br />4. Ascii symbolen (!\"#$%&'()*+,-./:;<=>"
+"?@[\\]^_`)<br />5. Non-Ascii symbolen (accenten...)"
 
 #: ../admin/adm_passpolicy.php:131
 msgid ""
@@ -2315,7 +2405,13 @@ msgid ""
 "maximum password size, and how many classes of characters must appear in the"
 " password. You can also forbid (or not) to use the login or part of it as a "
 "password."
-msgstr "Hier is de lijst van de wachtwoord instellingen voor iedere plaats waar een wachtwoord nodig kan zijn voor AlternC's diensten. Voor ieder van deze wachtwoord soorten kunt u kiezen welke instellingen van toepassing zal zijn. Een instelling is een minimum en maximum lengte, en hoeveel soorten tekens het moet bevatten. U kunt eveneens verbieden (of niet) om de login als (onderdeel) van het wachtwoord te gebruiken. "
+msgstr ""
+"Hier is de lijst van de wachtwoord instellingen voor iedere plaats waar een "
+"wachtwoord nodig kan zijn voor AlternC's diensten. Voor ieder van deze "
+"wachtwoord soorten kunt u kiezen welke instellingen van toepassing zal zijn. "
+"Een instelling is een minimum en maximum lengte, en hoeveel soorten tekens "
+"het moet bevatten. U kunt eveneens verbieden (of niet) om de login als "
+"(onderdeel) van het wachtwoord te gebruiken. "
 
 #: ../admin/adm_passpolicy.php:135
 msgid "Password Kind"
@@ -2371,13 +2467,17 @@ msgstr "Bewerk de quota's"
 #: ../admin/adm_slavedns.php:63
 msgid ""
 "The requested ip address has been deleted. It will be denied in one hour."
-msgstr "Het gevraagde ip adres is verwijderd. Het zal over een uur geen toegang meer hebben."
+msgstr ""
+"Het gevraagde ip adres is verwijderd. Het zal over een uur geen toegang meer "
+"hebben."
 
 #: ../admin/adm_slavedns.php:69
 msgid ""
 "The requested ip address has been added to the list. It will be allowed in "
 "one hour."
-msgstr "Het gevraagde ip adres is aan de lijst toegevoegd. Het zal over een toegang verleend hebben."
+msgstr ""
+"Het gevraagde ip adres is aan de lijst toegevoegd. Het zal over een toegang "
+"verleend hebben."
 
 #: ../admin/adm_slavedns.php:80
 msgid "Manage allowed ip for slave zone transfers"
@@ -2390,7 +2490,13 @@ msgid ""
 "so that those slaves will be allowed to transfer the zone files. There is "
 "also some defaults ip from DNS checks made by some third-party technical "
 "offices such as afnic (for .fr domains)"
-msgstr "Hier is de lijst van de toegestane ip of ip klasse voor slave dns zone transfer  verzoeken (AXFR). U moet de ip adressen toevoegen van al de slave DNS die u heeft zodat het die slaves toegestaan is de zone bestanden te verplaatsen. Er zijn ook sommige standaard ip van DNS controles die door sommige third-party bureaus zoals afnic (voor .fr domeinen) worden uitgevoerd."
+msgstr ""
+"Hier is de lijst van de toegestane ip of ip klasse voor slave dns zone "
+"transfer  verzoeken (AXFR). U moet de ip adressen toevoegen van al de slave "
+"DNS die u heeft zodat het die slaves toegestaan is de zone bestanden te "
+"verplaatsen. Er zijn ook sommige standaard ip van DNS controles die door "
+"sommige third-party bureaus zoals afnic (voor .fr domeinen) worden "
+"uitgevoerd."
 
 #: ../admin/adm_slavedns.php:94 ../admin/adm_slavedns.php:114
 msgid "IP Address"
@@ -2400,7 +2506,9 @@ msgstr "IP adres"
 msgid ""
 "If you want to allow an ip address or class to connect to your dns server, "
 "enter it here. Choose 32 as a prefix for single ip address."
-msgstr "Als u een ip adres of klasse toegang wilt geven tot uw dns server, geef die dan hier in. Kies 32 als een voorvoegsel voor een enkel ip adres."
+msgstr ""
+"Als u een ip adres of klasse toegang wilt geven tot uw dns server, geef die "
+"dan hier in. Kies 32 als een voorvoegsel voor een enkel ip adres."
 
 #: ../admin/adm_slavedns.php:114
 msgid "Prefix"
@@ -2475,7 +2583,10 @@ msgstr "Het gevraagde TLD is verwijderd"
 msgid ""
 "Here is the list of the TLD allowed on this server. Each TLD can be allowed "
 "or denied after some checks (whois, ns, domain exists...)"
-msgstr "Hier is de lijst van toegestane TLD's op deze server. Iedere TLD kantoegelaten of geweigerd worden na enkele kontroles (whois, ns, domais exists...)"
+msgstr ""
+"Hier is de lijst van toegestane TLD's op deze server. Iedere TLD "
+"kantoegelaten of geweigerd worden na enkele kontroles (whois, ns, domais "
+"exists...)"
 
 #: ../admin/adm_tld.php:66 ../admin/adm_tld.php:88 ../admin/adm_tldadd.php:50
 #: ../admin/adm_tldadd.php:64
@@ -2500,13 +2611,17 @@ msgstr "Verwijder de gemerkte TLD"
 msgid ""
 "Enter the new TLD (without the first dot) and choose what check should be "
 "done."
-msgstr "Toets de nieuwe TLD in (zonder de eerste punt) en kies welke kontrolesuitgevoerd moeten worden."
+msgstr ""
+"Toets de nieuwe TLD in (zonder de eerste punt) en kies welke "
+"kontrolesuitgevoerd moeten worden."
 
 #: ../admin/adm_tldadd.php:53
 msgid ""
 "Warning : only some final tld are known in the whois function of AlternC, "
 "please check m_dom.php accordingly."
-msgstr "Waarschuwing : slechts enkele final TLD zijn bekend in de whois funktie van AlernC,kontroleer dit in m_dom.php."
+msgstr ""
+"Waarschuwing : slechts enkele final TLD zijn bekend in de whois funktie van "
+"AlernC,kontroleer dit in m_dom.php."
 
 #: ../admin/adm_tlddoadd.php:46
 msgid "The TLD has been successfully added"
@@ -2981,7 +3096,9 @@ msgstr "host mijn dns hier"
 msgid ""
 "Do you want to point this domain to another domain already installed in your"
 " account?"
-msgstr "Wilt u dat dit domein verwijst naar een ander domein dat al geïnstalleerdis op uw accoount?"
+msgstr ""
+"Wilt u dat dit domein verwijst naar een ander domein dat al geïnstalleerdis "
+"op uw accoount?"
 
 #: ../admin/dom_add.php:69
 msgid "No: This domain will have its own folder."
@@ -3000,7 +3117,10 @@ msgid ""
 "If you don't want to host in our server the DNS of your domain, don't check "
 "the box 'host my dns here'. If you don't know what it mean, leave it "
 "checked."
-msgstr "Als u de DNS van uw domein niet op onze server wilt installeren,verwijder het vinkje bij 'host my dns here'. Als u niet weet wat dit inhoudt,laat het staan"
+msgstr ""
+"Als u de DNS van uw domein niet op onze server wilt installeren,verwijder "
+"het vinkje bij 'host my dns here'. Als u niet weet wat dit inhoudt,laat het "
+"staan"
 
 #: ../admin/dom_add.php:92 ../admin/dom_doadd.php:58
 msgid "Whois result on the domain"
@@ -3276,7 +3396,9 @@ msgstr "Beheer de emailadressen van dit domein op de server?"
 msgid ""
 "Warning: If you set this to 'no', all your email accounts and aliases on "
 "this domain will be immediately deleted."
-msgstr "Waarschuwing: Als u dit op 'nee' zet, worden al uw emailadressenen aliassen direkt verwijderd."
+msgstr ""
+"Waarschuwing: Als u dit op 'nee' zet, worden al uw emailadressenen aliassen "
+"direkt verwijderd."
 
 #: ../admin/dom_edit.php:325
 msgid "Submit the changes"
@@ -3735,7 +3857,9 @@ msgstr ""
 msgid ""
 "To connect to the hosting control panel, enter your AlternC's login and "
 "password in the following form and click 'Enter'"
-msgstr "Om het Hosting Beheers Paneel te gebruiken, toets uw AlternC login en wachtwoord in in het volgende formulier en klik 'Enter'"
+msgstr ""
+"Om het Hosting Beheers Paneel te gebruiken, toets uw AlternC login en "
+"wachtwoord in in het volgende formulier en klik 'Enter'"
 
 #: ../admin/index.php:76
 msgid "You are attemping to connect without IP restriction."
@@ -3760,7 +3884,9 @@ msgstr ""
 #: ../admin/index.php:118
 msgid ""
 "To read your mail in a browser, click here to go to your server's Webmail"
-msgstr "Om uw mail in een broser te zien, klik hier om naar de servers webmail te gaan"
+msgstr ""
+"Om uw mail in een broser te zien, klik hier om naar de servers webmail te "
+"gaan"
 
 #: ../admin/index.php:133
 msgid "Need a login and a password"
@@ -3940,7 +4066,9 @@ msgstr "Verwijder niets en ga terug naar de email lijst"
 msgid ""
 "Warning: Deleting an email address will destroy all the messages it "
 "contains! You will <b>NOT</b> be able to get it back!"
-msgstr "Waarschuwing: Verwijdering van een email adres betekent dat al deemails erin ook vernietigd worden. U kunt ze <br>NIET</br> meer terug krijgen!"
+msgstr ""
+"Waarschuwing: Verwijdering van een email adres betekent dat al deemails erin "
+"ook vernietigd worden. U kunt ze <br>NIET</br> meer terug krijgen!"
 
 #: ../admin/mail_doedit.php:116
 msgid "Your email has been created successfully"
@@ -3964,7 +4092,10 @@ msgid ""
 "You can enable or disable this email anytime. This will bounce any mail "
 "received on this address, but will not delete the stored email, or the "
 "redirections or password."
-msgstr "Op ieder moment kunt deze email aktiveren of de-aktiveren. Dit zal iedereemail naar dit adres terugkaatsen, maar zal niet de opgeslagen email, de omleidingof wachtwoord verwijderen"
+msgstr ""
+"Op ieder moment kunt deze email aktiveren of de-aktiveren. Dit zal "
+"iedereemail naar dit adres terugkaatsen, maar zal niet de opgeslagen email, "
+"de omleidingof wachtwoord verwijderen"
 
 #: ../admin/mail_edit.php:80
 msgid "No (email disabled)"
@@ -3985,7 +4116,12 @@ msgid ""
 "use POP/IMAP, you can configure your email to be a redirection to other "
 "existing emails. The maximum size is in megabytes, use 0 to make it "
 "infinite."
-msgstr "POP/IMAP accounts ontvangen emails op de server. Om deze emails te lezenkunt u Webmail gebruiken of een mail client zoals Thunderbird. Als u geen POP/IMAP gebruikt, kunt u uw mail zo configureren dat zij omgeleid worden naar bestaandeemails. De maximum grootte is in megabytes, gebruik 0 om het onbeperkt te maken"
+msgstr ""
+"POP/IMAP accounts ontvangen emails op de server. Om deze emails te lezenkunt "
+"u Webmail gebruiken of een mail client zoals Thunderbird. Als u geen POP/"
+"IMAP gebruikt, kunt u uw mail zo configureren dat zij omgeleid worden naar "
+"bestaandeemails. De maximum grootte is in megabytes, gebruik 0 om het "
+"onbeperkt te maken"
 
 #: ../admin/mail_edit.php:89
 #, php-format
@@ -3996,7 +4132,9 @@ msgstr "Deze mailbox gebruikt op dit moment %1s / %2s"
 msgid ""
 "This mailbox is pending deletion. You can recover its mails by setting it to"
 " 'Yes' NOW!"
-msgstr "Deze mailbox is in afwachting van verwijdering. U kunt zijn emails terugkrijgendoor het NU! op 'Ja' te zetten"
+msgstr ""
+"Deze mailbox is in afwachting van verwijdering. U kunt zijn emails "
+"terugkrijgendoor het NU! op 'Ja' te zetten"
 
 #: ../admin/mail_edit.php:102
 msgid "Click here to edit the existing password"
@@ -4018,7 +4156,9 @@ msgstr "Maximum toegestane grootte van deze Mailbox"
 msgid ""
 "WARNING: turning POP/IMAP off will DELETE the stored messages in this email "
 "address."
-msgstr "WAARSCHUWING: POP/IMAP uitzetten VERWIJDERD de opgeslagen boodschappen van dit email adres"
+msgstr ""
+"WAARSCHUWING: POP/IMAP uitzetten VERWIJDERD de opgeslagen boodschappen van "
+"dit email adres"
 
 #: ../admin/mail_edit.php:112
 msgid "Is it a redirection to other email addresses?"
@@ -4028,7 +4168,9 @@ msgstr "Is dit een omleiding naar andere email adressen?"
 msgid ""
 "If you want to send emails received on this address to other addresses, even"
 " outside this server, enter those recipients here."
-msgstr "Als u emails, ontvangen op dit adres, wilt doorsturen naar andere adressen,zelfs buiten deze server, geef die ontvangers hier op."
+msgstr ""
+"Als u emails, ontvangen op dit adres, wilt doorsturen naar andere "
+"adressen,zelfs buiten deze server, geef die ontvangers hier op."
 
 #: ../admin/mail_edit.php:114
 msgid "one recipient per line"
@@ -4103,7 +4245,9 @@ msgstr "Bezig te verwijderen..."
 msgid ""
 "This email will be deleted soon. You may still be able to undelete it by "
 "clicking here"
-msgstr "Deze email zal weldra verwijderd worden. Misschien kunt u dit tenietdoen door hier te klikken"
+msgstr ""
+"Deze email zal weldra verwijderd worden. Misschien kunt u dit tenietdoen "
+"door hier te klikken"
 
 #: ../admin/mail_list.php:134
 msgid "Undelete"
@@ -4154,7 +4298,9 @@ msgstr "Server naam: "
 #: ../admin/mail_list.php:227
 msgid ""
 "The mail address you want to access <i>(example : myuser@example.tld)</i>"
-msgstr "Het email adres waar u toegang tot wilt hebben <i>(voorbeeld : myuser@exemple.tld)</i>"
+msgstr ""
+"Het email adres waar u toegang tot wilt hebben <i>(voorbeeld : "
+"myuser@exemple.tld)</i>"
 
 #: ../admin/mail_list.php:201 ../admin/mail_list.php:214
 #: ../admin/mail_list.php:227
@@ -4248,7 +4394,9 @@ msgstr "Beheer catch-all configuratie van %s"
 msgid ""
 "You can choose what to do with emails sent to unexisting address of this "
 "domain"
-msgstr "U kunt kiezen wat te doen met emails, gezonden naar een niet-bestaand adress op dit domein"
+msgstr ""
+"U kunt kiezen wat te doen met emails, gezonden naar een niet-bestaand adress "
+"op dit domein"
 
 #: ../admin/mail_manage_catchall.php:90
 msgid "No catch-all"
@@ -4266,7 +4414,9 @@ msgstr "Leid dit om naar hetzelfde adres op een ander domein"
 #, php-format
 msgid ""
 "Mails sent to john.doe@%s will be redirect to john.doe@anotherdomain.tld"
-msgstr "Mails gezonden naar john.doe@%s worden omgeleid naar john.doe@anotherdomain.tld"
+msgstr ""
+"Mails gezonden naar john.doe@%s worden omgeleid naar "
+"john.doe@anotherdomain.tld"
 
 #: ../admin/mail_manage_catchall.php:105
 msgid "Enter the 'target' domain"
@@ -4289,7 +4439,9 @@ msgstr "Leid om naar een specifiek email"
 msgid ""
 "Mails sent to an unexisting email on '@%s' will be redirect to "
 "user@example.tld."
-msgstr "Mails gestuurd naar een niet-bestaand emailadres op %s worden omgeleid naar user@exemple.tld."
+msgstr ""
+"Mails gestuurd naar een niet-bestaand emailadres op %s worden omgeleid naar "
+"user@exemple.tld."
 
 #: ../admin/mail_manage_catchall.php:123
 msgid "john.doe@example.tld"
@@ -4375,7 +4527,9 @@ msgstr "help_mem_chgmail %s"
 msgid ""
 "Enter the key you got when you requested the mailbox change, then click the "
 "OK button."
-msgstr "Voer de sleutel in die u gekregen heeft tijdens de aanvraag voor verandering van de mailbox, klik vervolgens op de OK knop"
+msgstr ""
+"Voer de sleutel in die u gekregen heeft tijdens de aanvraag voor verandering "
+"van de mailbox, klik vervolgens op de OK knop"
 
 #: ../admin/mem_cm.php:52
 msgid "Key"
@@ -4742,7 +4896,9 @@ msgstr "Status quota's"
 msgid ""
 "This page shows the space and service count of your AlternC server and each "
 "AlternC accounts."
-msgstr "Deze pagina toont de ruimte en 'service count' van uw AlternC server en ieder AlternC account"
+msgstr ""
+"Deze pagina toont de ruimte en 'service count' van uw AlternC server en "
+"ieder AlternC account"
 
 #: ../admin/quotas_users.php:53
 #, php-format
@@ -4980,7 +5136,9 @@ msgstr ""
 msgid ""
 "You changed the MySQL User base configuration. Please refer to your "
 "configuration"
-msgstr "U veranderde de MySQL gebruikers basis configuratie. Verifieer aub uw configuratie"
+msgstr ""
+"U veranderde de MySQL gebruikers basis configuratie. Verifieer aub uw "
+"configuratie"
 
 #: ../admin/sql_getparam.php:119
 msgid "Back to the MySQL database list"
@@ -5040,12 +5198,17 @@ msgid ""
 "Warning: Write the complete path and the filename. <br />For example if your"
 " backups are in the directory /Backups,<br />write /Backups/file.sql.gz "
 "(where file.sql.gz is the filename)."
-msgstr "Waarschuwing: Toets volledige pad en bestandsnaam in. <br />Als bv uw backups in de map /Backups zijn,<br />toets in /Backups/file.sql.gz (als file.sql.gz de bestandsnaam is "
+msgstr ""
+"Waarschuwing: Toets volledige pad en bestandsnaam in. <br />Als bv uw "
+"backups in de map /Backups zijn,<br />toets in /Backups/file.sql.gz (als "
+"file.sql.gz de bestandsnaam is "
 
 #: ../admin/sql_restore.php:59
 msgid ""
 "Please enter the path and the filename containing SQL data to be restored."
-msgstr "Toets het pad en naam in van het bestand dat de SQL data bevat dieu wilt terugzetten "
+msgstr ""
+"Toets het pad en naam in van het bestand dat de SQL data bevat dieu wilt "
+"terugzetten "
 
 #: ../admin/sql_restore.php:60
 msgid "Restore my database"
@@ -5061,7 +5224,9 @@ msgstr ""
 
 #: ../admin/sql_restore.php:75
 msgid "Note: If the filename ends with .gz, it will be uncompressed before."
-msgstr "Opmerking: als de bestandsnaam eindigt met .gz, zal het eerst gedecomprimeerd worden "
+msgstr ""
+"Opmerking: als de bestandsnaam eindigt met .gz, zal het eerst "
+"gedecomprimeerd worden "
 
 #: ../admin/sql_users_add.php:40 ../admin/sql_users_list.php:77
 msgid "Create a new MySQL user"
@@ -5465,7 +5630,10 @@ msgstr ""
 msgid ""
 "Image_Graph not installed. use 'aptitude install php-pear' then 'pear "
 "install --alldeps Image_Graph-devel' to see the graph."
-msgstr "Image_Graph niet geïnstalleerd. Geef volgende commando: 'aptitude install php-pear' en dan 'pear install --alldeps Image_Graph-devel' om de grafiek te zien."
+msgstr ""
+"Image_Graph niet geïnstalleerd. Geef volgende commando: 'aptitude install "
+"php-pear' en dan 'pear install --alldeps Image_Graph-devel' om de grafiek te "
+"zien."
 
 #: ../admin/stats_members.php:37
 msgid "Account creation per month"
@@ -5867,7 +6035,9 @@ msgstr ""
 msgid ""
 "Your password contains not enough different classes of character, between "
 "low-case, up-case, figures and special characters."
-msgstr "Uw wachtwoord bevat niet genoeg verschillende soorten tekens, kleine letters, hoofdletters, cijfers en speciale tekens."
+msgstr ""
+"Uw wachtwoord bevat niet genoeg verschillende soorten tekens, kleine "
+"letters, hoofdletters, cijfers en speciale tekens."
 
 #: ../class/m_authip.php:114 ../class/m_authip.php:133
 #: ../class/m_authip.php:153 ../class/m_authip.php:259
@@ -5947,7 +6117,8 @@ msgstr "Bestands- of mapnaam is niet korrekt"
 
 #: ../class/m_bro.php:432 ../class/m_bro.php:617
 msgid "Cannot create the requested file. Please check the permissions"
-msgstr "Kan het gevraagde bestand niet aanmaken. Controleer aub de bestandsrechten"
+msgstr ""
+"Kan het gevraagde bestand niet aanmaken. Controleer aub de bestandsrechten"
 
 #: ../class/m_bro.php:529 ../class/m_bro.php:727
 msgid "You cannot move or copy a file to the same folder"
@@ -5986,7 +6157,9 @@ msgstr "Bezig met uitpakken via bunzip2"
 msgid ""
 "I cannot find a way to extract the file %s, it is an unsupported compressed "
 "format"
-msgstr "I kan het bestand %s niet uitpakken, het is geen ondersteund compressie formaat"
+msgstr ""
+"I kan het bestand %s niet uitpakken, het is geen ondersteund compressie "
+"formaat"
 
 #: ../class/m_bro.php:816
 msgid "Cannot read the requested file. Please check the permissions"
@@ -6022,7 +6195,9 @@ msgstr "Email adres niet geldig"
 
 #: ../class/m_cron.php:152
 msgid "You quota of cron entries is over. You cannot create more cron entries"
-msgstr "U quota voor cron opdrachten is bereikt. U kunt niet meer cron opdrachten aanmaken"
+msgstr ""
+"U quota voor cron opdrachten is bereikt. U kunt niet meer cron opdrachten "
+"aanmaken"
 
 #: ../class/m_cron.php:161
 msgid "Identity problem"
@@ -6044,7 +6219,9 @@ msgstr "De naam MOET alleen maar letters en cijfers bevatten"
 msgid ""
 "The parameters for this subdomain and domain type are invalid. Please check "
 "for subdomain entries incompatibility"
-msgstr "De parameters voor dit subdomein en domein type zijn ongeldig.Kontroleer aub voor de onverenigbaarheid voor subdomeinen"
+msgstr ""
+"De parameters voor dit subdomein en domein type zijn ongeldig.Kontroleer aub "
+"voor de onverenigbaarheid voor subdomeinen"
 
 #: ../class/m_dom.php:698 ../class/m_dom.php:1170 ../class/m_dom.php:1232
 #: ../class/m_dom.php:1395 ../class/m_dom.php:1443 ../class/m_dom.php:1528
@@ -6061,12 +6238,15 @@ msgstr "De syntax van de domeinnaam is niet korrekt"
 msgid ""
 "The requested domain is forbidden in this server, please contact the "
 "administrator"
-msgstr "Het gevraagde domein is verboden in deze server, neem aub kontakt op met de administrateur"
+msgstr ""
+"Het gevraagde domein is verboden in deze server, neem aub kontakt op met de "
+"administrateur"
 
 #: ../class/m_dom.php:715
 msgid ""
 "This domain is the server's domain! You cannot host it on your account!"
-msgstr "Dit domein is het serverdomein! U kunt dit niet in uw account installeren!"
+msgstr ""
+"Dit domein is het serverdomein! U kunt dit niet in uw account installeren!"
 
 #: ../class/m_dom.php:720 ../class/m_dom.php:725
 msgid "The domain already exist"
@@ -6076,7 +6256,9 @@ msgstr "Het domein bestaat al"
 msgid ""
 "The last member of the domain name is incorrect or cannot be hosted in that "
 "server"
-msgstr "Het laatste deel van de domeinnaam is niet korrekt of kan niet in die server geïnstalleerd worden"
+msgstr ""
+"Het laatste deel van de domeinnaam is niet korrekt of kan niet in die server "
+"geïnstalleerd worden"
 
 #: ../class/m_dom.php:736 ../class/m_dom.php:740
 msgid "The domain cannot be found in the whois database"
@@ -6149,7 +6331,9 @@ msgstr ""
 msgid ""
 "There is some forbidden characters in the sub domain (only A-Z 0-9 and - are"
 " allowed)"
-msgstr "Er zijn niet toegestane tekens in het subdomein (alleen A-Z 0-9 en - zijn toegestaan"
+msgstr ""
+"Er zijn niet toegestane tekens in het subdomein (alleen A-Z 0-9 en - zijn "
+"toegestaan"
 
 #: ../class/m_dom.php:1493 ../class/m_dom.php:1504
 msgid "Cannot write to the destination folder"
@@ -6159,7 +6343,9 @@ msgstr "Kan niet schrijven in de doel map"
 msgid ""
 "The DNS of this domain do not match the server's DNS. Please change your "
 "domain's DNS before you install it again"
-msgstr "De DNS van dit domein komt niet overeen met de DNS van de server. Verander aub de DNS van het domein alvorens het weer te installeren"
+msgstr ""
+"De DNS van dit domein komt niet overeen met de DNS van de server. Verander "
+"aub de DNS van het domein alvorens het weer te installeren"
 
 #: ../class/m_dom.php:1607
 #, php-format
@@ -6430,7 +6616,9 @@ msgstr "De email %s bestaat niet, het kan niet verwijderd worden"
 #: ../class/m_mail.php:525
 #, php-format
 msgid "The email %s is already marked for deletion, it can't be deleted"
-msgstr "De email %s is al gemarkeerd voor verwijdering, het kan niet verwijderd worden"
+msgstr ""
+"De email %s is al gemarkeerd voor verwijdering, het kan niet verwijderd "
+"worden"
 
 #: ../class/m_mail.php:559
 msgid "The email you entered does not exist"
@@ -6451,24 +6639,34 @@ msgstr "De email %s is speciaal, verwijdering kan niet ongedaan gemaakt worden"
 msgid ""
 "Sorry, deletion of email %s is already in progress, or not marked for "
 "deletion, it can't be undeleted"
-msgstr "Sorry, verwijdering van email %s is al aan de gang, of het is niet aangemerkt voor verwijdering, verwijdering kan niet ongedaan gemaakt worden"
+msgstr ""
+"Sorry, verwijdering van email %s is al aan de gang, of het is niet "
+"aangemerkt voor verwijdering, verwijdering kan niet ongedaan gemaakt worden"
 
 #: ../class/m_mail.php:589
 #, php-format
 msgid "-- Program Error -- The email %s can't be undeleted"
-msgstr "-- Programma fout --- De verwijdering van email %s kan niet ongedaan gemaakt worden"
+msgstr ""
+"-- Programma fout --- De verwijdering van email %s kan niet ongedaan gemaakt "
+"worden"
 
 #: ../class/m_mail.php:687
 msgid ""
 "There is forbidden characters in your email address. You can't make it a "
 "POP/IMAP account, you can only use it as redirection to other emails"
-msgstr "Er zijn niet toegestane tekens in uw email adres. U kunt er geen POP/IMAP account voor aanmaken, u kunt het alleen gebruiken als een omleiding naar andere emails"
+msgstr ""
+"Er zijn niet toegestane tekens in uw email adres. U kunt er geen POP/IMAP "
+"account voor aanmaken, u kunt het alleen gebruiken als een omleiding naar "
+"andere emails"
 
 #: ../class/m_mail.php:706
 msgid ""
 "You set a quota smaller than the current mailbox size. Since it's not "
 "allowed, we set the quota to the current mailbox size"
-msgstr "U heeft een quota ingegeven dat kleiner is dan groote van de huidige mailbox. Aangezien dat niet toegestaan is, maken we de quota  gelijk aan de grootte van de huidige mailbox"
+msgstr ""
+"U heeft een quota ingegeven dat kleiner is dan groote van de huidige "
+"mailbox. Aangezien dat niet toegestaan is, maken we de quota  gelijk aan de "
+"grootte van de huidige mailbox"
 
 #: ../class/m_mail.php:726
 msgid ""
@@ -6498,7 +6696,9 @@ msgstr "Dit account is vergrendeld, contacteer de beheerder."
 #: ../class/m_mem.php:114 ../class/m_mem.php:298
 msgid ""
 "This website is currently under maintenance, login is currently disabled."
-msgstr "Deze website is op dit moment in onderhoud, het aanmelden is momenteel uitgeschakeld."
+msgstr ""
+"Deze website is op dit moment in onderhoud, het aanmelden is momenteel "
+"uitgeschakeld."
 
 #: ../class/m_mem.php:133
 msgid "Your IP isn't allowed to connect"
@@ -6598,7 +6798,9 @@ msgstr "Talen"
 msgid ""
 "There are no databases in db_servers for this user. Please contact your "
 "administrator."
-msgstr "Er zijn geen databases in db_servers voor deze gebruiker. Contacteer A.U.B. uw administrator."
+msgstr ""
+"Er zijn geen databases in db_servers voor deze gebruiker. Contacteer A.U.B. "
+"uw administrator."
 
 #: ../class/m_mysql.php:97
 msgid "MySQL"
@@ -6643,7 +6845,9 @@ msgstr "Database %s bestaat al"
 msgid ""
 "There is a problem with the special PhpMyAdmin user. Contact the "
 "administrator"
-msgstr "Er is een probleem met de speciale PhpMyAdmin gebruiker. Neem kontakt op met de administrateur"
+msgstr ""
+"Er is een probleem met de speciale PhpMyAdmin gebruiker. Neem kontakt op met "
+"de administrateur"
 
 #: ../class/m_mysql.php:300
 msgid "An error occured. The database could not be created"
