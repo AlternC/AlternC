@@ -11,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
 "POT-Creation-Date: 2018-06-24 17:17+0200\n"
 "PO-Revision-Date: 2025-12-29 17:09+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"Last-Translator: ButterflyOfFire <boffire@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Dutch <https://hosted.weblate.org/projects/alternc/alternc/"
 "nl/>\n"
 "Language: nl_NL\n"
@@ -100,7 +100,8 @@ msgstr ""
 #. Description
 #: ../alternc.templates:3001
 msgid "The default should be ok if your machine is correctly configured."
-msgstr "De standaardwaarde zou OK moeten zijn indien uw computer correct ingesteld is"
+msgstr ""
+"De standaardwaarde zou OK moeten zijn indien uw computer correct ingesteld is"
 
 #. Type: string
 #. Description
