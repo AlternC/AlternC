@@ -9,14 +9,17 @@ msgstr ""
 "Project-Id-Version: AlternC, hosting control panel\n"
 "Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
 "POT-Creation-Date: 2018-06-24 17:17+0200\n"
-"PO-Revision-Date: 2012-08-21 15:36+0000\n"
-"Last-Translator: Benjamin Sonntag <benjamin@alternc.org>, 2004\n"
-"Language-Team: Portuguese (Brazil) (http://app.transifex.com/octopuce/alternc/language/pt_BR/)\n"
+"PO-Revision-Date: 2025-12-29 17:06+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
+"alternc/alternc/pt_BR/>\n"
+"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: pt_BR\n"
-"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % "
+"1000000 == 0 ? 1 : 2;\n"
+"X-Generator: Weblate 5.15.1\n"
 
 #. Type: error
 #. Description
@@ -1162,13 +1165,17 @@ msgstr "Este domínio não  existe."
 msgid ""
 "A list with the same name already exist on the server. Please choose another"
 " name."
-msgstr "Uma lista com o mesmo nome já  existe no servidor. Por favor escolha um outro nome."
+msgstr ""
+"Uma lista com o mesmo nome já  existe no servidor. Por favor escolha um "
+"outro nome."
 
 #: ../class/m_mailman.php:327
 msgid ""
 "This email address (or one of the list-subscribe, list-unsubscribe etc.) are"
 " already used."
-msgstr "Este endereço de email (ou um da lista assinadas, lista não assinadas etc.) já  foi usado."
+msgstr ""
+"Este endereço de email (ou um da lista assinadas, lista não assinadas etc.) "
+"já  foi usado."
 
 #: ../class/m_mailman.php:366 ../class/m_mailman.php:414
 msgid "This list has pending action, you cannot delete it"
@@ -1998,7 +2005,9 @@ msgstr "Esta conta é uma conta super-administrador"
 msgid ""
 "There is only one administrator account, you cannot turn this account back "
 "to normal"
-msgstr "Você pode ter somente uma conta do administrador, você não pode voltar esta conta ao normal"
+msgstr ""
+"Você pode ter somente uma conta do administrador, você não pode voltar esta "
+"conta ao normal"
 
 #: ../admin/adm_edit.php:158
 msgid "Turn this account back to normal"
@@ -2474,7 +2483,9 @@ msgstr "O TLD pedido foi suprimido"
 msgid ""
 "Here is the list of the TLD allowed on this server. Each TLD can be allowed "
 "or denied after some checks (whois, ns, domain exists...)"
-msgstr "Aqui está a lista do TLD permitido neste servidor. Cada TLD pode ser permitido ou negado após algumas verifcações (whois, ns, domínio existir) "
+msgstr ""
+"Aqui está a lista do TLD permitido neste servidor. Cada TLD pode ser "
+"permitido ou negado após algumas verifcações (whois, ns, domínio existir) "
 
 #: ../admin/adm_tld.php:66 ../admin/adm_tld.php:88 ../admin/adm_tldadd.php:50
 #: ../admin/adm_tldadd.php:64
@@ -2499,7 +2510,9 @@ msgstr "Suprimir o TLD selecionado"
 msgid ""
 "Enter the new TLD (without the first dot) and choose what check should be "
 "done."
-msgstr "Entrar um novo TLD (sem o primeiro ponto) e escolher que verificação deve ser feita."
+msgstr ""
+"Entrar um novo TLD (sem o primeiro ponto) e escolher que verificação deve "
+"ser feita."
 
 #: ../admin/adm_tldadd.php:53
 msgid ""
@@ -2999,7 +3012,10 @@ msgid ""
 "If you don't want to host in our server the DNS of your domain, don't check "
 "the box 'host my dns here'. If you don't know what it mean, leave it "
 "checked."
-msgstr "Se você não quiser hospedar o DNS em nosso servidor, não seleciona a caixa 'hospedar meu DNS aqui'. Se você não sabe o que significa, deixá-lo selecionado."
+msgstr ""
+"Se você não quiser hospedar o DNS em nosso servidor, não seleciona a caixa "
+"'hospedar meu DNS aqui'. Se você não sabe o que significa, deixá-lo "
+"selecionado."
 
 #: ../admin/dom_add.php:92 ../admin/dom_doadd.php:58
 msgid "Whois result on the domain"
@@ -3309,7 +3325,10 @@ msgid ""
 "If you want to destroy the domain %s, click on the button below. Warning: "
 "this also deletes all FTP accounts, email, mailing lists associated with the"
 " domain and subdomains."
-msgstr "Se você quiser suprimir o domínio %s, clica a tecla abaixo.Aviso : isto suprimirá todo o ftp, correios, envi-listas ... associadas com estedomínio e os sécondarios domínios dele"
+msgstr ""
+"Se você quiser suprimir o domínio %s, clica a tecla abaixo.Aviso : isto "
+"suprimirá todo o ftp, correios, envi-listas ... associadas com estedomínio e "
+"os sécondarios domínios dele"
 
 #: ../admin/dom_edit.php:363
 #, php-format
@@ -5060,7 +5079,9 @@ msgstr ""
 
 #: ../admin/sql_restore.php:75
 msgid "Note: If the filename ends with .gz, it will be uncompressed before."
-msgstr "Nota: Se o nome de arquivo termina com .gz, primeiramente ele será de-compressado."
+msgstr ""
+"Nota: Se o nome de arquivo termina com .gz, primeiramente ele será de-"
+"compressado."
 
 #: ../admin/sql_users_add.php:40 ../admin/sql_users_list.php:77
 msgid "Create a new MySQL user"
