@@ -210,8 +210,8 @@ foreach($list_ip as $i) {
   <tr><th><?php __("IP or network. <i>IPv4, IPv6 and subnet allowed</i>"); ?></th><th><?php __("Name"); ?></th><th></th></tr>
 
   <tr class="lst2">
-    <td><input type="text" size="20" maxlength="39" name="ipsub" id="edit_ip" /></td>
     <td><input type="text" size="25" maxlength="200" name="infos" id="edit_infos" /></td>
+    <td><input type="text" size="20" maxlength="39" name="ipsub" id="edit_ip" /></td>
     <td><input type="submit" class="inb ok" value="<?php __("Save")?>" /></td>
   </tr>
   </table>
