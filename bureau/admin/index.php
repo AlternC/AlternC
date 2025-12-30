@@ -82,6 +82,9 @@ if ( empty($logo) ||  ! $logo ) {
                 <div><label for="password"><?php echo _("Password"); ?></label></td><td><input type="password" class="int" name="password" id="password" value="" maxlength="128" /></div>
                 <div class="submit"><input type="submit" class="inb" name="submit" onclick='return logmein();' value="<?php __("Enter"); ?>" /><input type="hidden" id="restrictip" name="restrictip" value="0" />
                 <input type="hidden" id="authip_token" name="authip_token" value="<?php ehe( (empty($authip_token)?'':$authip_token) ) ?>" /></div>
+                <?php if (variable_get('oidc_enabled', false, 'Enable OpenID Connect')) { ?>
+                    <a class="inb" href="oidc_start.php"><?php echo sprintf(_("Login with %s"), variable_get("oidc_name", "OpenID Connect", "The name of the OIDC provider shown on the login page")); ?></a>
+                <?php } ?>
             </div>
           </form>
 	</div>

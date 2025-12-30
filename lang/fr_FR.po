@@ -3770,6 +3770,10 @@ msgstr "Accès à AlternC"
 msgid "Enter"
 msgstr "Entrer"
 
+#: ../admin/index.php:86
+msgid "Login with %s"
+msgstr "Se connecter avec %s"
+
 #: ../admin/index.php:91
 msgid "You must accept the session cookie to log-in"
 msgstr "Vous devez accepter le cookie de session pour pouvoir vous connecter"
