@@ -62,22 +62,26 @@ if (!$db) {
 
 $hasdoneone=false;
 $r=$db->query("SELECT domaine FROM domaines where gesmx=1 AND gesdns=1;");
+$alldomains=[];
 while ($db->next_record()) {
-    $c=$db->Record;
-    if (!file_exists("/etc/opendkim/keys/".$c["domaine"]."/alternc.private") ||
-    !file_exists("/etc/opendkim/keys/".$c["domaine"]."/alternc.txt")) {
-        echo "Creating Opendkim key for domain ".$c["domaine"]."\n";
-        if (!is_dir("/etc/opendkim/keys/".$c["domaine"]."")) {
-            if (!mkdir("/etc/opendkim/keys/".$c["domaine"]."")) {
-                echo "Error creating the directory /etc/opendkim/keys/".$c["domaine"]." !\n";
+    $alldomains[]=$db->Record["domaine"];
+}
+
+foreach($alldomains as $domain) {
+    if (!file_exists("/etc/opendkim/keys/".$domain."/alternc.private") ||
+    !file_exists("/etc/opendkim/keys/".$domain."/alternc.txt")) {
+        echo "Creating Opendkim key for domain ".$domain."\n";
+        if (!is_dir("/etc/opendkim/keys/".$domain."")) {
+            if (!mkdir("/etc/opendkim/keys/".$domain."")) {
+                echo "Error creating the directory /etc/opendkim/keys/".$domain." !\n";
             } else {
-                echo "Created the directory /etc/opendkim/keys/".$c["domaine"]."\n";
+                echo "Created the directory /etc/opendkim/keys/".$domain."\n";
             }
         }
-        chdir("/etc/opendkim/keys/".$c["domaine"]."");
-        passthru("opendkim-genkey -r -d ".$c["domaine"]." -s alternc 2>&1");
+        chdir("/etc/opendkim/keys/".$domain."");
+        passthru("opendkim-genkey -r -d ".$domain." -s alternc 2>&1");
         passthru("chown opendkim:opendkim alternc.private 2>&1");
-        $db->query("UPDATE domaines SET dns_action='UPDATE' WHERE domaine='".$c["domaine"]."';");
+        $db->query("UPDATE domaines SET dns_action='UPDATE' WHERE domaine='".$domain."';");
         $hasdoneone=true;
     }
 }
