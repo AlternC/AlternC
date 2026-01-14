@@ -11,14 +11,17 @@ msgstr ""
 "Project-Id-Version: AlternC, hosting control panel\n"
 "Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
 "POT-Creation-Date: 2018-06-24 17:17+0200\n"
-"PO-Revision-Date: 2012-08-21 15:36+0000\n"
-"Last-Translator: JuliaR <giulia.r@azerttyu.net>, 2015\n"
-"Language-Team: Italian (Italy) (http://app.transifex.com/octopuce/alternc/language/it_IT/)\n"
+"PO-Revision-Date: 2025-12-29 17:10+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/alternc/alternc/"
+"it/>\n"
+"Language: it_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: it_IT\n"
-"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 "
+": 2;\n"
+"X-Generator: Weblate 5.15.1\n"
 
 #. Type: error
 #. Description
@@ -32,7 +35,9 @@ msgstr "AlternC necessita di una ACL sul file system"
 msgid ""
 "AlternC can't work without ACL activated on its filesystem. ACL are "
 "currently not enabled."
-msgstr "AlternC non può funzionare senza un'ACL attivata sul file system. L'ACL non è attualmente abilitata."
+msgstr ""
+"AlternC non può funzionare senza un'ACL attivata sul file system. L'ACL non "
+"è attualmente abilitata."
 
 #. Type: error
 #. Description
@@ -40,7 +45,9 @@ msgstr "AlternC non può funzionare senza un'ACL attivata sul file system. L'ACL
 msgid ""
 "Also, you need to activate group quota (grpquota) to be able to use disk "
 "quota (but that's not mandatory)."
-msgstr "Inoltre, serve attivare il gruppo quota (grpquota) per poter utilizzare il disco quota (ma non è obbligatorio)"
+msgstr ""
+"Inoltre, serve attivare il gruppo quota (grpquota) per poter utilizzare il "
+"disco quota (ma non è obbligatorio)"
 
 #. Type: error
 #. Description
@@ -67,7 +74,9 @@ msgstr "Di conseguenza, la QUOTA assegnata ad ogni utente sarà infinita."
 #: ../alternc.templates:2001
 msgid ""
 "To be able to use space quota in AlternC, enable grpquota in your partition."
-msgstr "Per poter utilizzare la quota di allocazione dati in AlternC, abilitate grpquota nella vostra partizione."
+msgstr ""
+"Per poter utilizzare la quota di allocazione dati in AlternC, abilitate "
+"grpquota nella vostra partizione."
 
 #. Type: string
 #. Description
@@ -82,13 +91,18 @@ msgid ""
 "Please enter the fully qualified name of your server. This will be the "
 "domain part of the url you will use to access the virtual managment desktop."
 " This (sub)domain MUST point to your server."
-msgstr "Inserite il nome completo del vostro server. Questo diverrà il dominio dell'url di accesso alla gestione virtuale del desktop. Questo (sotto)dominio DEVE indicare il vostro server."
+msgstr ""
+"Inserite il nome completo del vostro server. Questo diverrà il dominio "
+"dell'url di accesso alla gestione virtuale del desktop. Questo (sotto)"
+"dominio DEVE indicare il vostro server."
 
 #. Type: string
 #. Description
 #: ../alternc.templates:3001
 msgid "The default should be ok if your machine is correctly configured."
-msgstr "Le impostazioni predefinite dovrebbero essere ok se la macchina è correttamente configurata."
+msgstr ""
+"Le impostazioni predefinite dovrebbero essere ok se la macchina è "
+"correttamente configurata."
 
 #. Type: string
 #. Description
@@ -102,7 +116,9 @@ msgstr "Nome del servizio di hosting:"
 msgid ""
 "Please enter the name of your hosting service. It may be your company's name"
 " or your personnal name or whatever you want to ..."
-msgstr "Inserire il nome del servizio di hosting. Può essere il nome della vostra azienda, o il vostro nome proprio, o qualsiasi altro..."
+msgstr ""
+"Inserire il nome del servizio di hosting. Può essere il nome della vostra "
+"azienda, o il vostro nome proprio, o qualsiasi altro..."
 
 #. Type: string
 #. Description
@@ -119,7 +135,12 @@ msgid ""
 "your hosting service is quite big, you may have an external primary name "
 "server that keep in sync with your alternc's server(s). . The default value "
 "should be good in most case."
-msgstr "Inserite il nome completo del vostro server dns primario. Può essere questo server in quanto BIND viene installato e configurato da AlternC. Comunque, se il vostro servizio di hosting è molto grande, potreste avere un name server principale esterno che sia in sincrono con il/i vostro/i server AlternC. Il valore di base dovrebbe andare bene nella maggior parte dei casi."
+msgstr ""
+"Inserite il nome completo del vostro server dns primario. Può essere questo "
+"server in quanto BIND viene installato e configurato da AlternC. Comunque, "
+"se il vostro servizio di hosting è molto grande, potreste avere un name "
+"server principale esterno che sia in sincrono con il/i vostro/i server "
+"AlternC. Il valore di base dovrebbe andare bene nella maggior parte dei casi."
 
 #. Type: string
 #. Description
@@ -135,7 +156,11 @@ msgid ""
 "be this server since bind is installed and configured by AlternC. Anyway, "
 "you should have 2 separate DNS servers if you want to provide a high quality"
 " hosting service."
-msgstr "Inserite il nome completo del vostro server DNS secondario. Può essere questo server in quanto BIND viene installato e configurato da AlternC. Comunque, dovreste avere 2 server DNS separati se volete fornire un servizio di hosting di alta qualità."
+msgstr ""
+"Inserite il nome completo del vostro server DNS secondario. Può essere "
+"questo server in quanto BIND viene installato e configurato da AlternC. "
+"Comunque, dovreste avere 2 server DNS separati se volete fornire un servizio "
+"di hosting di alta qualità."
 
 #. Type: string
 #. Description
@@ -143,7 +168,9 @@ msgstr "Inserite il nome completo del vostro server DNS secondario. Può essere 
 msgid ""
 "AlternC's team is providing any user of AlternC with free DNS service. go to"
 " http://alternc.net/ to create an account and use it."
-msgstr "Il team di AlternC fornisce ad ogni utente un servizio DNS libero. Andate alla pagina http://alternc.net/ per reare un account e poterlo utilizzare."
+msgstr ""
+"Il team di AlternC fornisce ad ogni utente un servizio DNS libero. Andate "
+"alla pagina http://alternc.net/ per reare un account e poterlo utilizzare."
 
 #. Type: string
 #. Description
@@ -157,13 +184,16 @@ msgstr "Percorso di allocazione dei file html degli utenti AlternC:"
 msgid ""
 "Please enter the directory name where you want html user files to be put. "
 "The default value should be good in most cases."
-msgstr "Inserite il nome della directory dove volete che vengano messi i file html utente. Il valore di base dovrebbe andare bene nella maggior parte dei casi."
+msgstr ""
+"Inserite il nome della directory dove volete che vengano messi i file html "
+"utente. Il valore di base dovrebbe andare bene nella maggior parte dei casi."
 
 #. Type: string
 #. Description
 #: ../alternc.templates:7001
 msgid "This directory will contain every AlternC users personal directories."
-msgstr "Questa directory conterrà tutte le directory personali degli utenti AlternC."
+msgstr ""
+"Questa directory conterrà tutte le directory personali degli utenti AlternC."
 
 #. Type: string
 #. Description
@@ -177,7 +207,9 @@ msgstr "Percorso di allocazione delle emails degli utenti AlternC:"
 msgid ""
 "Please enter the directory name where you want to put your users maildirs. "
 "The default value should be good in most cases."
-msgstr "Inserite il nome della directory dove volete mettere le maildir utenti. Il valore di base dovrebbe andare bene nella maggior parte dei casi."
+msgstr ""
+"Inserite il nome della directory dove volete mettere le maildir utenti. Il "
+"valore di base dovrebbe andare bene nella maggior parte dei casi."
 
 #. Type: string
 #. Description
@@ -191,7 +223,9 @@ msgstr "Percorso di allocazione dei file log AlternC:"
 msgid ""
 "Please enter the directory name where you want to put your log files. The "
 "default value should be good in most cases."
-msgstr "Inserite il nome della directory dove volete mettere i file log. Il valore predefinito dovrebbe andare bene nella maggior parte dei casi."
+msgstr ""
+"Inserite il nome della directory dove volete mettere i file log. Il valore "
+"predefinito dovrebbe andare bene nella maggior parte dei casi."
 
 #. Type: string
 #. Description
@@ -207,7 +241,12 @@ msgid ""
 " MUST be able to access the remote server at standard port (3306). It is "
 "recommended to use \"127.0.0.1\" instead of \"localhost\" if your postfix "
 "installation is configured in a chroot (which is the case, by default)."
-msgstr "Inserite il nome completo del vostro server MySQL di hosting. Questo server DEVE essere in grado di avere accesso al server remoto dalla porta standard (3306). E' raccomandato l'utilizzo di \"127.0.0.1\" invece di \"localhost\" se il vostro postfix è configurato in un chroot (come è normalmente di default)."
+msgstr ""
+"Inserite il nome completo del vostro server MySQL di hosting. Questo server "
+"DEVE essere in grado di avere accesso al server remoto dalla porta standard "
+"(3306). E' raccomandato l'utilizzo di \"127.0.0.1\" invece di \"localhost\" "
+"se il vostro postfix è configurato in un chroot (come è normalmente di "
+"default)."
 
 #. Type: string
 #. Description
@@ -222,7 +261,10 @@ msgid ""
 "AlternC will create a mysql database to store it's system data. Please "
 "choose the name of this database here. The default value should be good in "
 "most case."
-msgstr "AlternC creerà un database MySQL per archiviare i dati di sistema. Scegliete qui il nome del database. Il valore predefinito dovrebbe andare bene nella maggior parte dei casi."
+msgstr ""
+"AlternC creerà un database MySQL per archiviare i dati di sistema. Scegliete "
+"qui il nome del database. Il valore predefinito dovrebbe andare bene nella "
+"maggior parte dei casi."
 
 #. Type: string
 #. Description
@@ -240,7 +282,9 @@ msgstr "Account MySQL di AlternC:"
 msgid ""
 "AlternC will create a mysql administrator account. Please choose it's "
 "username here. The default value should be good in most case."
-msgstr "AlternC creerà un account amministratore MySQL. Scegliete qui l'username. Il valore predefinito dovrebbe andare bene nella maggior parte dei casi."
+msgstr ""
+"AlternC creerà un account amministratore MySQL. Scegliete qui l'username. Il "
+"valore predefinito dovrebbe andare bene nella maggior parte dei casi."
 
 #. Type: string
 #. Description
@@ -255,7 +299,10 @@ msgid ""
 "Using a remote mysql installation requires root access to the remote "
 "database. A root user is required to create the alternc user with grant "
 "options."
-msgstr "Per usare un'installazione mysql remota è necessario l'accesso al database remoto. Un utente root è necessario per creare un utente AlternC con opzioni grant."
+msgstr ""
+"Per usare un'installazione mysql remota è necessario l'accesso al database "
+"remoto. Un utente root è necessario per creare un utente AlternC con opzioni "
+"grant."
 
 #. Type: string
 #. Description
@@ -263,7 +310,10 @@ msgstr "Per usare un'installazione mysql remota è necessario l'accesso al datab
 msgid ""
 "The alternc sql user is responsible for granting access to user generated "
 "databases, that is why it needs root access on the mysql installation."
-msgstr "L'user sql di AlternC è in grado di garantire l'accesso ai database generati dall'utente, motivo per il quale necessita un accesso amministratore all'installazione mysql."
+msgstr ""
+"L'user sql di AlternC è in grado di garantire l'accesso ai database generati "
+"dall'utente, motivo per il quale necessita un accesso amministratore "
+"all'installazione mysql."
 
 #. Type: password
 #. Description
@@ -282,7 +332,10 @@ msgid ""
 "AlternC requires an administrator account on the mysql server. It will be "
 "created automatically during the install process. Please choose a password "
 "for this account."
-msgstr "AlternC necessita di un account amministratore sul server MySQL. Questo verrà creato automaticamente durante l'installazione. Scegliete una password per questo account."
+msgstr ""
+"AlternC necessita di un account amministratore sul server MySQL. Questo "
+"verrà creato automaticamente durante l'installazione. Scegliete una password "
+"per questo account."
 
 #. Type: password
 #. Description
@@ -292,7 +345,9 @@ msgstr "AlternC necessita di un account amministratore sul server MySQL. Questo 
 msgid ""
 "Please choose a quite complex password since it will have full access to the"
 " system database! If you enter nothing, a random password will be created."
-msgstr "Scegliete una password complessa in quanto avrà accesso totale al database del sistema! Se non inserite nulla sarà generata una password casuale."
+msgstr ""
+"Scegliete una password complessa in quanto avrà accesso totale al database "
+"del sistema! Se non inserite nulla sarà generata una password casuale."
 
 #. Type: password
 #. Description
@@ -320,7 +375,9 @@ msgid ""
 "GRANT table properly created and manipulated, this parameter must be set to "
 "the hostname or IP the Apache server will appear as connecting from to the "
 "MySQL server."
-msgstr "AlternC e MySQL possono essere installati su server differenti. Per poter avere una tabella GRANT "
+msgstr ""
+"AlternC e MySQL possono essere installati su server differenti. Per poter "
+"avere una tabella GRANT "
 
 #. Type: select
 #. Description
@@ -334,7 +391,9 @@ msgstr "Il modo in cui la backup rotation è eseguita"
 msgid ""
 "AlternC enables users to configure their own backups, on demand, with "
 "automatic rotation. This option determines how the backups are rotated."
-msgstr "AlternC abilita gli utenti a configurare i loro backup, on demand, a cicli automatici. Questa opzione determina la rotazione dei backup."
+msgstr ""
+"AlternC abilita gli utenti a configurare i loro backup, on demand, a cicli "
+"automatici. Questa opzione determina la rotazione dei backup."
 
 #. Type: select
 #. Description
@@ -357,7 +416,9 @@ msgid ""
 "The SQL backups can rename or overwrite existing files it doesn't know about"
 " when doing backups. The default behavior is to skip those files and ignore "
 "it."
-msgstr "Il backup SQL può rinominare o riscrivere file esistenti che non riconosce durante i backup. Il comportamento di default è di ignorare questi file."
+msgstr ""
+"Il backup SQL può rinominare o riscrivere file esistenti che non riconosce "
+"durante i backup. Il comportamento di default è di ignorare questi file."
 
 #. Type: string
 #. Description
@@ -371,7 +432,10 @@ msgstr "IP primario di questo server:"
 msgid ""
 "AlternC will default the A records for domains it hosts to this address. In "
 "other words, this is the address everyone can reach to server at."
-msgstr "AlternC registrerà le opzioni di base per gli archivi A che ospita a questo indirizzo. In altre parole, questo è l'indirizzo che chiunque può raggiungere per fare dell'hosting."
+msgstr ""
+"AlternC registrerà le opzioni di base per gli archivi A che ospita a questo "
+"indirizzo. In altre parole, questo è l'indirizzo che chiunque può "
+"raggiungere per fare dell'hosting."
 
 #. Type: string
 #. Description
@@ -386,7 +450,10 @@ msgid ""
 "AlternC will configure Apache and other services to listen to this address. "
 "This is usually the same as the primary IP of the server, unless the server "
 "is sitting behind a NAT router."
-msgstr "AlternC configurerà Apache ed altri servizi per ascoltare questo indirizzo. Questo è normalmente lo stesso dell'IP primario del server, a meno che il server non sieda dietro un router NAT."
+msgstr ""
+"AlternC configurerà Apache ed altri servizi per ascoltare questo indirizzo. "
+"Questo è normalmente lo stesso dell'IP primario del server, a meno che il "
+"server non sieda dietro un router NAT."
 
 #. Type: string
 #. Description
@@ -406,7 +473,9 @@ msgstr "I parametri di default MX da assegnare a nuovi domini:"
 msgid ""
 "AlternC will assign this hostname as the MX record for all the domains it "
 "hosts. It is usually better be left alone."
-msgstr "AlternC attribuirà questo nome d'hosting come MX record per tutti i domini che ospita. Normalmente è meglio non toccare questo parametro."
+msgstr ""
+"AlternC attribuirà questo nome d'hosting come MX record per tutti i domini "
+"che ospita. Normalmente è meglio non toccare questo parametro."
 
 #. Type: string
 #. Description
@@ -420,7 +489,9 @@ msgstr "Il Backup MX di default da assegnare a nuovi domini:"
 msgid ""
 "AlternC will assign this hostname as the Backup MX record for all the "
 "domains it hosts. Don't set it if you don't know what it is about."
-msgstr "AltrernC assegnerà questo nome d'hosting come Backup MX record per tutti i domini che ospita. Non cambiare l'impostazione se non siete sicuri."
+msgstr ""
+"AltrernC assegnerà questo nome d'hosting come Backup MX record per tutti i "
+"domini che ospita. Non cambiare l'impostazione se non siete sicuri."
 
 #. Type: string
 #. Description
@@ -434,7 +505,9 @@ msgstr "Il percorso dove è installato AlternC:"
 msgid ""
 "Please enter the partition name where alternc is installed. This is used "
 "mainly for disk quotas."
-msgstr "Inserite il nome della partizione dove è installato AlternC. Verrà utilizzato soprattutto per le quote del disco."
+msgstr ""
+"Inserite il nome della partizione dove è installato AlternC. Verrà "
+"utilizzato soprattutto per le quote del disco."
 
 #. Type: string
 #. Description
@@ -454,7 +527,9 @@ msgstr "Il server di controllo:"
 msgid ""
 "The IP address (or ip/prefix) of the server(s) which must be authorized to  "
 "ping the server and access apache status pages. Completely optional."
-msgstr "L'indirizzo IP (o ip/prefix) del/dei server che devono essere autorizzati per fare un ping col server e avere accesso alle pagine di status di Apache."
+msgstr ""
+"L'indirizzo IP (o ip/prefix) del/dei server che devono essere autorizzati "
+"per fare un ping col server e avere accesso alle pagine di status di Apache."
 
 #. Type: boolean
 #. Description
@@ -478,7 +553,8 @@ msgstr "AlternC deve rimuovere i dati degli utenti?"
 #. Description
 #: ../alternc.templates:28001
 msgid "The files and apache redirections created by users will be trashed"
-msgstr "I file e le redirezioni Apache create dagli utenti verranno messi nel cestino"
+msgstr ""
+"I file e le redirezioni Apache create dagli utenti verranno messi nel cestino"
 
 #. Type: boolean
 #. Description
@@ -518,7 +594,12 @@ msgid ""
 "server (this server). When writing Apache configuration files, the master "
 "server will attempt to reload Apache on those remote servers. The alternc-"
 "slave package correctly configures those machines to allow login and reload."
-msgstr "Questo è una lista spazio-separata di servers che sono \"slave\" rispetto al master server (questo server). Scrivendo i file di configurazione di Apache, il master server cercherà di ricaricare Apache su questi server remoti. Il pacchetto alternc-slave configura correttamente queste macchine per consentire login e reload."
+msgstr ""
+"Questo è una lista spazio-separata di servers che sono \"slave\" rispetto al "
+"master server (questo server). Scrivendo i file di configurazione di Apache, "
+"il master server cercherà di ricaricare Apache su questi server remoti. Il "
+"pacchetto alternc-slave configura correttamente queste macchine per "
+"consentire login e reload."
 
 #. Type: boolean
 #. Description
@@ -533,7 +614,10 @@ msgid ""
 "A local MySQL connection was established on the server. Please tell if you "
 "want to use it. If not remote MySQL server connection parameters will be "
 "needed."
-msgstr "Una connessione MySQL locale è stata stabilita sul server. Confermate se volete usarla o meno. Se non volete farne uso, saranno necessari i parametri di connessione del server MySQL remoto."
+msgstr ""
+"Una connessione MySQL locale è stata stabilita sul server. Confermate se "
+"volete usarla o meno. Se non volete farne uso, saranno necessari i parametri "
+"di connessione del server MySQL remoto."
 
 #. Type: boolean
 #. Description
@@ -560,7 +644,9 @@ msgstr "Errore di connessione MySQL. Ritentare?"
 #: ../alternc.templates:34001
 msgid ""
 "Remote connection to the MySQL server failed. Please confirm to try again."
-msgstr "Connessione remota al server MySQL fallita. Confermate se effettuare un nuovo tentativo."
+msgstr ""
+"Connessione remota al server MySQL fallita. Confermate se effettuare un "
+"nuovo tentativo."
 
 #. Type: boolean
 #. Description
@@ -575,7 +661,10 @@ msgid ""
 "The IP address of the machine appears to be private, please confirm that "
 "this is an expected situation, since the server might not be reachable from "
 "outside your network."
-msgstr "L'indirizzo IP della macchina risulta essere privato. Confermate che si tratta di una situazione prevista, dato che il server potrebbe non essere raggiungibile dall'esterno della vostra rete."
+msgstr ""
+"L'indirizzo IP della macchina risulta essere privato. Confermate che si "
+"tratta di una situazione prevista, dato che il server potrebbe non essere "
+"raggiungibile dall'esterno della vostra rete."
 
 #. Type: error
 #. Description
@@ -603,7 +692,11 @@ msgid ""
 " to ask for statistics about his web site. Users can ask for a limited "
 "number of statistic set. Please specify the default quota they will have for"
 " this service."
-msgstr "State installando il pacchetto alternc-awstats. Questo pacchetto consente ad ogni utente di richiedere le statistiche pr il suo sito web. Gli utenti possono richiedere un numero limitato di set di statistiche. Specificate la quota di default per questo servizio."
+msgstr ""
+"State installando il pacchetto alternc-awstats. Questo pacchetto consente ad "
+"ogni utente di richiedere le statistiche pr il suo sito web. Gli utenti "
+"possono richiedere un numero limitato di set di statistiche. Specificate la "
+"quota di default per questo servizio."
 
 #. Type: boolean
 #. Description
@@ -619,7 +712,12 @@ msgid ""
 "same-name lists on different domains (ie. allow test@example.com and "
 "test@example.org to coexist). Mailman 2.x, by default, doesn't support that "
 "functionality but Koumbit.org has developped patches to make it."
-msgstr "Il plugin mailman di AlternC può installare una patch opzionale per poter supportare liste di indirizzi email con la stessa estensione su diversi domini (es. permette che test@esempio.com e test@esempio.org coesistano). Di default Mailman 2.x non supporta questa funzione, ma Koumbit.org ha sviluppato delle patch apposite."
+msgstr ""
+"Il plugin mailman di AlternC può installare una patch opzionale per poter "
+"supportare liste di indirizzi email con la stessa estensione su diversi "
+"domini (es. permette che test@esempio.com e test@esempio.org coesistano). Di "
+"default Mailman 2.x non supporta questa funzione, ma Koumbit.org ha "
+"sviluppato delle patch apposite."
 
 #. Type: boolean
 #. Description
@@ -628,7 +726,11 @@ msgid ""
 "The plugin only supports patching, no way to unpatch right now. Please "
 "understand that this process will modify core Mailman code and might break "
 "some functionality. It is running in production on Koumbit.org."
-msgstr "Il plugin funziona solo con le patch, non è più possibile eliminare le patch. Questo processo modificherà il core code di Mailman e potrebbe interromperne alcune delle funzionalità. E' prodotto da e disponibile su Koumbit.org."
+msgstr ""
+"Il plugin funziona solo con le patch, non è più possibile eliminare le "
+"patch. Questo processo modificherà il core code di Mailman e potrebbe "
+"interromperne alcune delle funzionalità. E' prodotto da e disponibile su "
+"Koumbit.org."
 
 #. Type: boolean
 #. Description
@@ -637,7 +739,10 @@ msgid ""
 "Also, note that everytime the mailman package is upgraded or reinstalled, "
 "the patches will need to be reapplied manually. This can be done by "
 "reconfiguring the alternc-mailman package.  ."
-msgstr "Inoltre, ogni volta che il pacchetto mailman verrà aggiornato o reinstallato, le patch dovranno venire riapplicate manualmente. Questo potrà essere fatto riconfigurando il pacchetto alternc-mailman."
+msgstr ""
+"Inoltre, ogni volta che il pacchetto mailman verrà aggiornato o "
+"reinstallato, le patch dovranno venire riapplicate manualmente. Questo potrà "
+"essere fatto riconfigurando il pacchetto alternc-mailman."
 
 #. Type: boolean
 #. Description
@@ -645,7 +750,9 @@ msgstr "Inoltre, ogni volta che il pacchetto mailman verrà aggiornato o reinsta
 msgid ""
 "The patches are in /usr/share/alternc-mailman/patches. More information "
 "about the patch at http://wiki.koumbit.net/VirtualMailman."
-msgstr "Le patch sono in /usr/share/alternc-mailman/patches. Maggiori informazioni sulle pacth all'indirizzo http://wiki.koumbit.net/VirtualMailman ."
+msgstr ""
+"Le patch sono in /usr/share/alternc-mailman/patches. Maggiori informazioni "
+"sulle pacth all'indirizzo http://wiki.koumbit.net/VirtualMailman ."
 
 #: ../admin/aws_add.php:33
 msgid "You cannot add any new statistics, your quota is over."
@@ -663,7 +770,9 @@ msgstr "Nuove Statistiche"
 msgid ""
 "Awstats will analyze every logs availables for this domain (since its "
 "creation)."
-msgstr "AWStats analizzerà ogni log disponibile per questo dominio (a partire dalla sua creazione)."
+msgstr ""
+"AWStats analizzerà ogni log disponibile per questo dominio (a partire dalla "
+"sua creazione)."
 
 #: ../admin/aws_add.php:51 ../admin/aws_list.php:65
 msgid "Domain name"
@@ -681,7 +790,9 @@ msgstr "Utenti autorizzati"
 msgid ""
 "No users currently defined, you must create login with the 'Manage allowed "
 "users' accounts' menu."
-msgstr "Nessun utente attualmente definito, è necessario creare il login con il menu 'Gestire gli utenti autorizzati'."
+msgstr ""
+"Nessun utente attualmente definito, è necessario creare il login con il menu "
+"'Gestire gli utenti autorizzati'."
 
 #: ../admin/aws_add.php:93
 msgid "Create those statistics"
@@ -832,7 +943,12 @@ msgid ""
 "Statistics are web pages generated daily based on the visits of the day "
 "before. Awstats is the soft used to produce those stats. The statistics are "
 "then protected by a login and a password."
-msgstr "Il modulo stats consente ad ogni utente di richiedere statistiche riguardanti questo sito. Le Statistiche sono pagine web generate quotidianamente sulla base delle visite del giorno precedente. AWStats è il software usato per creare quelle stats. L'accesso alle statistiche è protetto da un login."
+msgstr ""
+"Il modulo stats consente ad ogni utente di richiedere statistiche "
+"riguardanti questo sito. Le Statistiche sono pagine web generate "
+"quotidianamente sulla base delle visite del giorno precedente. AWStats è il "
+"software usato per creare quelle stats. L'accesso alle statistiche è "
+"protetto da un login."
 
 #: ../class/m_aws.php:161 ../class/m_aws.php:324 ../class/m_aws.php:720
 msgid "This statistic does not exist"
@@ -962,7 +1078,10 @@ msgid ""
 "Warning: Deleting a mailman list will destroy all the subscribed users, "
 "preferences and archives it contains! You will <b>NOT</b> be able to get "
 "your data back!"
-msgstr "Attenzione: cancellare una lista mailman eliminerà tutti gli utenti abbonati, le preferenze e gli archivi contenuti! <b>NON</b> sarà più possibile recuperare i dati!"
+msgstr ""
+"Attenzione: cancellare una lista mailman eliminerà tutti gli utenti "
+"abbonati, le preferenze e gli archivi contenuti! <b>NON</b> sarà più "
+"possibile recuperare i dati!"
 
 #: ../admin/mman_doadd.php:38
 msgid "Invalid list name (only letters, digits and underscore)."
@@ -1005,7 +1124,9 @@ msgstr "Creazione della lista in sospeso"
 #: ../admin/mman_list.php:38
 msgid ""
 "No domain is installed on your account, you cannot create any mailing list!"
-msgstr "Non c'è nessun dominio nel vostro account, non vi è quindi possibile creare alcuna mailing list!"
+msgstr ""
+"Non c'è nessun dominio nel vostro account, non vi è quindi possibile creare "
+"alcuna mailing list!"
 
 #: ../admin/mman_list.php:68
 msgid "Create a list"
@@ -1070,7 +1191,10 @@ msgid ""
 "list. If you want to change it, select another url in the list and submit "
 "this form. <br />If you don't know what you are doing, don't change anything"
 " here."
-msgstr "Questo è l'url attuale per accedere all'amministrazione ed alle pagine pubbliche della tua lista. Se vuoi modificarlo, seleziona un altro url dalla lista e invia questo modulo. <br />Se non sei sicuro, non modificare nulla."
+msgstr ""
+"Questo è l'url attuale per accedere all'amministrazione ed alle pagine "
+"pubbliche della tua lista. Se vuoi modificarlo, seleziona un altro url dalla "
+"lista e invia questo modulo. <br />Se non sei sicuro, non modificare nulla."
 
 #: ../admin/mman_url.php:66
 #, php-format
@@ -1110,11 +1234,14 @@ msgstr "Si è verificato un errore critico durante la cancellazione della lista"
 
 #: ../class/m_mailman.php:46
 msgid "A fatal error happened when changing the list password"
-msgstr "Si è verificato un errore critico durante la modifica della password della lista"
+msgstr ""
+"Si è verificato un errore critico durante la modifica della password della "
+"lista"
 
 #: ../class/m_mailman.php:47
 msgid "A fatal error happened when getting the list url"
-msgstr "Si è verificato un errore critico durante il caricamento dell'url della lista"
+msgstr ""
+"Si è verificato un errore critico durante il caricamento dell'url della lista"
 
 #: ../class/m_mailman.php:68 ../class/m_mailman.php:472
 #: ../class/m_mailman.php:503
@@ -1125,7 +1252,9 @@ msgstr "Nessuna lista è stata definita"
 msgid ""
 "Special mail address for Mailman mailing-lists. <a "
 "href='mman_list.php'>Click here to manage it.</a>"
-msgstr "Indirizzo di posta speciale per le mailing-lists di Mailman. <a href='mman_list.php'>Clicca qui per gestirlo</a>"
+msgstr ""
+"Indirizzo di posta speciale per le mailing-lists di Mailman. <a "
+"href='mman_list.php'>Clicca qui per gestirlo</a>"
 
 #: ../class/m_mailman.php:224
 #, php-format
@@ -1134,7 +1263,8 @@ msgstr "L'indirizzo mailman %s non esiste"
 
 #: ../class/m_mailman.php:249
 msgid "Your mailing-list quota is over, you cannot create more mailing-lists."
-msgstr "L'allocazione mailing-list è piena, non potete creare altre mailing-lists."
+msgstr ""
+"L'allocazione mailing-list è piena, non potete creare altre mailing-lists."
 
 #: ../class/m_mailman.php:256
 msgid "The email you entered is syntaxically incorrect"
@@ -1164,13 +1294,16 @@ msgstr "Questo dominio non esiste."
 msgid ""
 "A list with the same name already exist on the server. Please choose another"
 " name."
-msgstr "Esiste già una lista con questo nome sul server. Sceglierne uno diverso."
+msgstr ""
+"Esiste già una lista con questo nome sul server. Sceglierne uno diverso."
 
 #: ../class/m_mailman.php:327
 msgid ""
 "This email address (or one of the list-subscribe, list-unsubscribe etc.) are"
 " already used."
-msgstr "Questo indirzzo email (o uno di abbonati-alla-lista, cancellati-dalla-lista ecc) è già in uso."
+msgstr ""
+"Questo indirzzo email (o uno di abbonati-alla-lista, cancellati-dalla-lista "
+"ecc) è già in uso."
 
 #: ../class/m_mailman.php:366 ../class/m_mailman.php:414
 msgid "This list has pending action, you cannot delete it"
@@ -1192,7 +1325,9 @@ msgstr "Le nuove password inserite non corrispondono, riprovate."
 msgid ""
 "Your account has not been found, please try again later or ask an "
 "administrator."
-msgstr "Il tuo account non è stato trovato, riprova più tardi o contatta un amministratore."
+msgstr ""
+"Il tuo account non è stato trovato, riprova più tardi o contatta un "
+"amministratore."
 
 #: ../../squirrelmail/alternc_changepass/change.php:75
 msgid "Your current password is incorrect, please try again."
@@ -1203,7 +1338,10 @@ msgid ""
 "Your password has been successfully changed. Don't forget to change it in "
 "your mail software if you are using one (Outlook, Mozilla, Thunderbird, "
 "Eudora ...)"
-msgstr "La tua password è stata correttamente modificata. Non dimenticarti di cambiarla nel tuo software di posta, se ne utilizzi (Outlook, Mozilla, Thunderbird, Eudora...)"
+msgstr ""
+"La tua password è stata correttamente modificata. Non dimenticarti di "
+"cambiarla nel tuo software di posta, se ne utilizzi (Outlook, Mozilla, "
+"Thunderbird, Eudora...)"
 
 #: ../../squirrelmail/alternc_changepass/change.php:111
 msgid "Changing your mail password"
