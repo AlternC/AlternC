@@ -1,3 +1,18 @@
+alternc (3.5.4) buster bullseye bookworm; urgency=medium
+
+  * fix : prevent fatal error with PDO execution
+  * fix : require explicit php version to prevent any conflict with lasted and old version
+  * fix : generate all opendkim key #651
+  * fix : accept domains type with `-` in their name and prevent some error on update  #534
+  * enh : prevent an inversion input in ip management restrictions #538
+  * enh : support short CNAME importation #531
+  * i18n : Provide some/many translations from Weblate
+  * fix : restore JS with panel domain type #644
+  * enh : enable ipv6 with SFTP #647
+  * fix : provide a valid general postmaster to notify  #641
+
+ -- Camille Lafitte <alternc@webelys.com>  Wed, 14 Jan 2026 15:14:00 +0100
+
 alternc (3.5.3) buster bullseye bookworm; urgency=medium
 
   * fix : improve database creation (prevent conflit with keyword) #629
