@@ -3757,6 +3757,10 @@ msgstr ""
 msgid "Enter"
 msgstr ""
 
+#: ../admin/index.php:86
+msgid "Login with %s"
+msgstr ""
+
 #: ../admin/index.php:91
 msgid "You must accept the session cookie to log-in"
 msgstr ""
