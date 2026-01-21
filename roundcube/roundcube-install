@@ -22,6 +22,19 @@
 # Purpose of file: Install roundcube conf files.
 # ----------------------------------------------------------------------
 
+if [ "$#" -ne 2 ]; then
+    echo "roundcube-install can't be ran, missing some parameters"
+    exit 2
+fi
+
+if [ -f "$2" ]
+then
+    SED_SCRIPT="$2"
+else
+    echo "roundcube-install can't be ran, sed_script is not a file"
+    exit 2
+fi
+
 if [ "$1" = "templates" ]
 then
     echo "Installing Roundcube Templates ..."
@@ -29,9 +42,6 @@ then
     LOGIN="0000_roundcube"
     PASSWORD="`perl -e 'print map{("a".."z","A".."Z",0..9)[int(rand(62))]}(1..10)'`"
     DESKEY="`perl -e 'print map{("a".."z","A".."Z",0..9)[int(rand(62))]}(1..24)'`"
-    # "
-    # Add new variables to the sed script ...
-    SED_SCRIPT="/tmp/alternc-roundcube.sedscript"
     # cf alternc.install for more explanations on this horror : 
     eval `sed -n -e "/=/{s/ *= *\"\?/='/;s/\"\?\$/'/;s/host/MYSQL_HOST/;s/user/MYSQL_USER/;s/password/MYSQL_PASS/;s/database/MYSQL_DATABASE/;p}" /etc/alternc/my.cnf`
     . /etc/alternc/local.sh
