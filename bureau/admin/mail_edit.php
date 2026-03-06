@@ -34,6 +34,7 @@ $fields = array (
 	"enabled" => array("post","boolean",true),
 	"islocal" => array("post","boolean",true),
 	"recipients" => array("post","string",""),
+	"url" => array("post", "string", ""),
 );
 getFields($fields);
 
@@ -112,6 +113,10 @@ echo $msg->msg_html_all();
   <tr><th colspan="2"><b><?php __("Is it a redirection to other email addresses?"); ?></b></th></tr>
 
   <tr><td style="width: 50%; text-align: justify"><label for="recipients"><?php __("If you want to send emails received on this address to other addresses, even outside this server, enter those recipients here."); ?></label></td><td>(<?php __("one recipient per line"); ?>)<br /><textarea class="int" cols="32" rows="5" name="recipients" id="recipients"><?php echo $recipients; ?></textarea></td></tr>
+
+  <tr><th colspan="2"><b><?php __("Send messages to an external URL? (webhook)"); ?></b></th></tr>
+
+  <tr><td style="width: 50%; text-align: justify"><label for="url"><?php __("If you want to send emails received on this address to an external URL (webhook), enter the URL here."); ?></label></td><td><input type="url" class="int" name="url" id="url" value="<?=htmlspecialchars($url)?>" /></td></tr>
 <?php 
    
    $html=$hooks->invoke("hook_mail_edit_html",array($mail_id,$type));

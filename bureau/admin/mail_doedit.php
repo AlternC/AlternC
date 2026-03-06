@@ -34,6 +34,7 @@ $fields = array (
 		 "enabled" => array("post","boolean",true),
 		 "islocal" => array("post","boolean",true),
 		 "recipients" => array("post","string",""),
+		 "url" => array("post","string",""),
 		 );
 
 getFields($fields);
@@ -98,6 +99,16 @@ if (!$res=$mail->get_details($mail_id)) {
     exit();
   }
 
+  /*
+   * Set Webhook URL
+   */
+  $url = $url ?: null;
+
+  if (!$mail->set_webhook_url($mail_id, $url)) {
+    $msg->raise('ERROR', 'mail', _('The URL is invalid'));
+    include ("mail_edit.php");
+    exit();
+  }
 
   /* 
    * Other elements by hooks

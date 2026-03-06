@@ -547,6 +547,7 @@ ORDER BY
         } else {
             // If it's only aliases, delete it NOW.
             $db->query("DELETE FROM recipient WHERE address_id= ? ;", array($mail_id));
+            $db->query("DELETE FROM mail_webhooks WHERE address_id= ? ;", array($mail_id));
             $db->query("DELETE FROM mailbox WHERE address_id= ? ;", array($mail_id));
             $db->query("DELETE FROM address WHERE id= ? ;", array($mail_id));
         }
@@ -741,6 +742,33 @@ ORDER BY
         return true;
     }
 
+    /**
+     * Set webhook URL for an address
+     */
+    function set_webhook_url(int $mail_id, ?string $url): bool
+    {
+        global $db;
+
+        if ($db->is_it_my_mail($mail_id)) {
+            throw new \LogicException('The address does not exist or doesn\'t belong to this account');
+        }
+
+        if (null === $url) {
+            $db->query('DELETE FROM mail_webhooks WHERE address_id = ?;', [$mail_id]);
+            return true;
+        }
+
+        if (!filter_var($url, FILTER_VALIDATE_URL, FILTER_FLAG_PATH_REQUIRED)) {
+            return false;
+        }
+
+        if (!preg_match('!^https?://!', $url)) {
+            return false;
+        }
+
+        $db->query('REPLACE INTO mail_webhooks (address_id, url) VALUES(?, ?);', [$mail_id, $url]);
+        return $true;
+    }
 
     /** 
      * A wrapper used by mailman class to create it's needed addresses 
