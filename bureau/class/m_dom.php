@@ -1437,7 +1437,7 @@ class m_dom {
         $domaine = $this->get_domain_byid($dom_id);
         $d = $this->get_domain_all($domaine);
 
-        $j = $this->edit_domain($domaine, $d['dns'], $d['mail'], false, $ttl);
+        $j = $this->edit_domain($domaine, $d['dns'], $d['mail'], true, false, $ttl);
         $this->unlock();
         return $j;
     }
@@ -1449,15 +1449,17 @@ class m_dom {
      * @param string $dom Domaine du compte courant que l'on souhaite modifier
      * @param boolean $dns Vaut 1 ou 0 pour héberger ou pas le DNS du domaine
      * @param boolean $gesmx Héberge-t-on le emails du domaines sur ce serveur ?
+     * @param boolean $confirm_email_deletion doit-on supprimer les adresses mails/alias associées et le contenu?
      * @param boolean $force Faut-il passer les checks DNS ou MX ? (admin only)
      * @return boolean appelle $mail->add_dom ou $ma->del_dom si besoin, en
      *  fonction du champs MX. Retourne FALSE si une erreur s'est produite,
      *  TRUE sinon.
      *
      */
-    function edit_domain($dom, $dns, $gesmx, $force = false, $ttl = 3600) {
+    function edit_domain($dom, $dns, $gesmx, $confirm_email_deletion, $force = false, $ttl = 3600) {
         global $db, $msg, $hooks, $domislocked;
         $msg->log("dom", "edit_domain", $dom . "/" . $dns . "/" . $gesmx);
+        $msg->log("dom", "edit_domain", "confirm_email_deletion : " . $confirm_email_deletion);
         // Locked ?
         if (!$domislocked && !$force) {
             $msg->raise("ERROR", "dom", _("--- Program error --- No lock on the domains!"));
@@ -1521,8 +1523,16 @@ class m_dom {
             $hooks->invoke("hook_dom_add_mx_domain", array($r["id"]));
         }
 
-        if (!$gesmx && $r["mail"]) { // on a dissocié le MX : on détruit donc l'entree dans LDAP
+        if (!$gesmx && $r["mail"] && $confirm_email_deletion) {
             $hooks->invoke("hook_dom_del_mx_domain", array($r["id"]));
+            $msg->log("dom", "edit_domain", "Domain $dom : MX dissociated, deleting associated mail addresses and content");
+        }
+
+        if (!$gesmx && $r["mail"] && !$confirm_email_deletion) { 
+            // on a dissocié le MX : on détruit donc l'entree dans LDAP ([p] ?????)
+            // $Phooks->invoke("hook_dom_del_mx_domain", array($r["id"]));d
+            $gesmx = 0;
+            $msg->log("dom", "edit_domain", "Domain $dom : MX dissociated, but NOT deleting anything");
         }
 
         $db->query("UPDATE domaines SET gesdns= ?, gesmx= ?, zonettl= ? WHERE domaine= ?", array($dns, $gesmx, $ttl, $dom));

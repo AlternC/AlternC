@@ -30,7 +30,8 @@ $fields = array (
 	"domain"    => array ("request", "string", ""),
 	"dns"       => array ("post", "integer", 1),
 	"email"     => array ("post", "integer", 1),
-	"ttl"       => array ("post", "integer", 86400),
+    "ttl"       => array ("post", "integer", 86400),
+    "confirm_email_deletion" => array ("post", "integer", 0)
 );
 getFields($fields);
 
@@ -39,7 +40,7 @@ $dom->lock();
 $r = $dom->get_domain_all($domain);
 if ($r["dns"] == $dns && $r["mail"] == $email && $r["zonettl"] == $ttl) {
   $msg->raise("INFO", "dom", _("No change has been requested..."));
-} else if ($dom->edit_domain($domain,$dns,$email,0,$ttl)) {
+} else if ($dom->edit_domain($domain,$dns,$email,$confirm_email_deletion,0,$ttl)) {
   $msg->raise("INFO", "dom", _("The domain %s has been changed."),$domain);
   $t = time();
 // TODO: we assume the cron job is at every 5 minutes
