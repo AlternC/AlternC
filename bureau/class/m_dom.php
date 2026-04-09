@@ -75,7 +75,7 @@ class m_dom {
     /**
      * Constructeur
      */
-    function m_dom() {
+    function __construct() {
         global $L_FQDN, $domislocked;
         $this->tld_no_check_at_all = variable_get('tld_no_check_at_all', 0, 'Disable ALL check on the TLD (users will be able to add any domain)', array('desc' => 'Disabled', 'type' => 'boolean'));
         variable_get('mailname_bounce', $L_FQDN, 'FQDN of the mail server, used to create vhost virtual mail_adress.', array('desc' => 'FQDN', 'type' => 'string'));
@@ -346,7 +346,8 @@ class m_dom {
                             // Examples:
                             // agenda IN CNAME ghs.google.com.
                             // www 3600 IN CNAME @
-                            if (preg_match('/^(?P<sub>[\-\w\.@]*)\h*(?P<ttl>\d*)\h*IN\h+CNAME\h+(?P<target>[@\w+\.\-]+)/i', $zone, $ret)) {
+                            // foo CNAME bar.example.com.
+                            if (preg_match('/^(?P<sub>[\-\w\.@]*)\h*(?P<ttl>\d*)\h*(IN)?\h+CNAME\h+(?P<target>[@\w+\.\-]+)/i', $zone, $ret)) {
                                 if (substr($ret['sub'], -1) == '.') { // if ending by a "." it is allready a FQDN
                                     $url = "http://" . $ret['sub'];
                                 } else {
@@ -550,7 +551,7 @@ class m_dom {
     function domains_type_update($name, $description, $target, $entry, $compatibility, $enable, $only_dns, $need_dns, $advanced, $create_tmpdir, $create_targetdir,$has_https_option=0) {
         global $msg, $db;
         // The name MUST contain only letter and digits, it's an identifier after all ...
-        if (!preg_match("#^[a-z0-9]+$#", $name)) {
+        if (!preg_match("#^[a-z0-9-]+$#", $name)) {
             $msg->raise("ERROR", "dom", _("The name MUST contain only letter and digits"));
             return false;
         }
@@ -560,7 +561,7 @@ class m_dom {
         $has_https_option = intval($has_https_option);
         $create_tmpdir = intval($create_tmpdir);
         $create_targetdir = intval($create_targetdir);
-        $db->query("UPDATE domaines_type SET description= ?, target= ?, entry= ?, compatibility= ?, enable= e, need_dns= ?, only_dns= ?, advanced= ?,create_tmpdir= ?,create_targetdir= ?, has_https_option=? where name= ?;", array($description, $target, $entry, $compatibility, $enable, $need_dns, $only_dns, $advanced, $create_tmpdir, $create_targetdir, $has_https_option, $name));
+        $db->query("UPDATE domaines_type SET description= ?, target= ?, entry= ?, compatibility= ?, enable= ?, need_dns= ?, only_dns= ?, advanced= ?,create_tmpdir= ?,create_targetdir= ?, has_https_option=? where name= ?;", array($description, $target, $entry, $compatibility, $enable, $need_dns, $only_dns, $advanced, $create_tmpdir, $create_targetdir, $has_https_option, $name));
         return true;
     }
 
@@ -584,6 +585,7 @@ class m_dom {
 
         $db->query("update sub_domaines set enable= ? where id = ? ;", array($status, intval($sub_id)));
         $this->set_dns_action($jh['domain'], 'UPDATE');
+        $this->set_web_action($sub_id, 'UPDATE');
 
         return true;
     }
@@ -744,7 +746,7 @@ class m_dom {
                 $dns = "0";
             }
             // mode 5 : force DNS to NO.
-            if ($tld[$v] == 5) {
+            if (isset($tld[$v]) && $tld[$v] == 5) {
                 $dns = 0;
             }
             // It must be a real domain (no subdomain)
@@ -943,7 +945,7 @@ class m_dom {
             $out=array();
             exec("dig +short NS ".escapeshellarg($parent),$out);
             $loopmax--;
-        } while (!count($out) && $loopmax); // will stop when : we have no parent, or
+        } while (!count($out) && $loopmax && strpos($parent, '.'));
         if (!count($out)) {
             return false; // bad exit of the loop
         }
@@ -956,7 +958,23 @@ class m_dom {
         $ns=array();
         foreach($out as $line) {
             if (preg_match('#^'.str_replace(".","\\.",$domain).'\..*IN\s*NS\s*(.*)$#',$line,$mat)) {
-                $ns[]=trim($mat[1]);
+                $n = trim($mat[1]);
+                # If the nameserver ends with a '.', we want to remove it as callers of
+                # this function expect the fully qualified domain name without a trailing
+                # dot.
+                if (substr($n, -1) == '.') {
+                    $ns[] = substr($n, 0, strlen($n)-1);
+                }
+                else {
+                    # In the case where is no trailing dot, the normal procedure is to append
+                    # the domain name to finish qualifying the answer.
+                    # eg. If one searches for example.com and gets a result "ns", then
+                    # the fully qualified answer is 'ns.example.com'.
+                    #
+                    # I'm not sure in what case dig will return a non-fully qualified answer.
+                    #  - Kienan 2019-12-17
+                    $ns[] = $n . '.' . $domain;
+                }
             }
         }
         return $ns;
@@ -1419,7 +1437,7 @@ class m_dom {
         $domaine = $this->get_domain_byid($dom_id);
         $d = $this->get_domain_all($domaine);
 
-        $j = $this->edit_domain($domaine, $d['dns'], $d['mail'], false, $ttl);
+        $j = $this->edit_domain($domaine, $d['dns'], $d['mail'], true, false, $ttl);
         $this->unlock();
         return $j;
     }
@@ -1431,15 +1449,17 @@ class m_dom {
      * @param string $dom Domaine du compte courant que l'on souhaite modifier
      * @param boolean $dns Vaut 1 ou 0 pour héberger ou pas le DNS du domaine
      * @param boolean $gesmx Héberge-t-on le emails du domaines sur ce serveur ?
+     * @param boolean $confirm_email_deletion doit-on supprimer les adresses mails/alias associées et le contenu?
      * @param boolean $force Faut-il passer les checks DNS ou MX ? (admin only)
      * @return boolean appelle $mail->add_dom ou $ma->del_dom si besoin, en
      *  fonction du champs MX. Retourne FALSE si une erreur s'est produite,
      *  TRUE sinon.
      *
      */
-    function edit_domain($dom, $dns, $gesmx, $force = false, $ttl = 3600) {
+    function edit_domain($dom, $dns, $gesmx, $confirm_email_deletion, $force = false, $ttl = 3600) {
         global $db, $msg, $hooks, $domislocked;
         $msg->log("dom", "edit_domain", $dom . "/" . $dns . "/" . $gesmx);
+        $msg->log("dom", "edit_domain", "confirm_email_deletion : " . $confirm_email_deletion);
         // Locked ?
         if (!$domislocked && !$force) {
             $msg->raise("ERROR", "dom", _("--- Program error --- No lock on the domains!"));
@@ -1503,8 +1523,16 @@ class m_dom {
             $hooks->invoke("hook_dom_add_mx_domain", array($r["id"]));
         }
 
-        if (!$gesmx && $r["mail"]) { // on a dissocié le MX : on détruit donc l'entree dans LDAP
+        if (!$gesmx && $r["mail"] && $confirm_email_deletion) {
             $hooks->invoke("hook_dom_del_mx_domain", array($r["id"]));
+            $msg->log("dom", "edit_domain", "Domain $dom : MX dissociated, deleting associated mail addresses and content");
+        }
+
+        if (!$gesmx && $r["mail"] && !$confirm_email_deletion) { 
+            // on a dissocié le MX : on détruit donc l'entree dans LDAP ([p] ?????)
+            // $Phooks->invoke("hook_dom_del_mx_domain", array($r["id"]));d
+            $gesmx = 0;
+            $msg->log("dom", "edit_domain", "Domain $dom : MX dissociated, but NOT deleting anything");
         }
 
         $db->query("UPDATE domaines SET gesdns= ?, gesmx= ?, zonettl= ? WHERE domaine= ?", array($dns, $gesmx, $ttl, $dom));
@@ -1940,7 +1968,7 @@ class m_dom {
 
 
         // Search for things to do on SUB-DOMAINS:
-        $db->query("SELECT sd.*, dt.only_dns FROM domaines_type dt, sub_domaines sd WHERE dt.name=sd.type AND sd.web_action!='OK';");
+        $db->query("SELECT sd.*, dt.only_dns FROM domaines_type dt, sub_domaines sd WHERE dt.name=sd.type AND sd.web_action!='OK' ORDER BY sd.id;");
         $alldoms=array();
         $ignore=array();
         $delete=array();
@@ -1979,6 +2007,13 @@ class m_dom {
                 if ($subdom["web_action"]=="DELETE") {
                     $db->query("DELETE FROM sub_domaines WHERE id=?;",array($id));
                 } else {
+		    // Set sub-domain status
+                    if (strtoupper($subdom["enable"])=="DISABLE") {
+                        $db->query("UPDATE sub_domaines SET enable='DISABLED' WHERE id=?;",array($id));
+                    }
+                    else if (strtoupper($subdom["enable"])=="ENABLE") {
+                        $db->query("UPDATE sub_domaines SET enable='ENABLED' WHERE id=?;",array($id));
+                    }
                     // we keep the highest result returned by hooks...
                     rsort($ret,SORT_NUMERIC); $returncode=$ret[0];
                     $db->query("UPDATE sub_domaines SET web_result=?, web_action='OK' WHERE id=?;",array($returncode,$id));
@@ -1997,6 +2032,15 @@ class m_dom {
     function set_dns_action($domain, $dns_action) {
         global $db;
         $db->query("UPDATE domaines SET dns_action= ? WHERE domaine= ?; ", array($dns_action, $domain));
+        return true;
+    }
+
+    /**
+     * @param string $web_action
+     */
+    function set_web_action($sub_id, $dns_action) {
+        global $db;
+        $db->query("UPDATE sub_domaines SET web_action= ? WHERE id= ?; ", array($dns_action, $sub_id));
         return true;
     }
 
