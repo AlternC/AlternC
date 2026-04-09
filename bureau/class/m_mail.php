@@ -546,9 +546,9 @@ ORDER BY
             $db->query("UPDATE mailbox SET mail_action='DELETE' WHERE address_id= ?;", array($mail_id));
         } else {
             // If it's only aliases, delete it NOW.
-            $db->query("DELETE FROM address WHERE id= ? ;", array($mail_id));
-            $db->query("DELETE FROM mailbox WHERE address_id= ? ;", array($mail_id));
             $db->query("DELETE FROM recipient WHERE address_id= ? ;", array($mail_id));
+            $db->query("DELETE FROM mailbox WHERE address_id= ? ;", array($mail_id));
+            $db->query("DELETE FROM address WHERE id= ? ;", array($mail_id));
         }
         return true;
     }

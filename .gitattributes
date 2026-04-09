@@ -506,7 +506,6 @@ debian/rules -text
 etc/alternc-lxc/vms.json -text
 etc/alternc/alternc-sudoers -text
 etc/alternc/alternc.ini -text
-etc/alternc/apache2-ssl.conf -text
 etc/alternc/functions_hosting/hosting_massvhost.sh -text
 etc/alternc/templates/alternc/apache2.conf -text
 etc/alternc/templates/alternc/apache_logformat.conf -text

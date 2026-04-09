@@ -74,8 +74,14 @@ $FIXPERM='/usr/lib/alternc/fixperms.sh';
  */
 function d($mess){
   global $debug;
-  if ($debug == 1)
-    echo "$mess\n";
+  if (!is_array($mess)) {
+    $mess = array($mess);
+  }
+  if ($debug == 1) {
+    foreach ($mess as $line ) {
+      echo "$line\n";
+    }
+  }
 }
 
 /**
@@ -93,6 +99,8 @@ function mail_it(){
   $msg = implode("\n", $errorsList);
   // Attempts to send email
   // @todo log if fails 
+  d('Error list :');
+  d($errorsList);
   mail("alterncpanel@$L_FQDN",'Script do_actions.php issues',"\n Errors reporting mail:\n\n$msg");
 }
 
@@ -139,6 +147,8 @@ function my_realpath($path) {
 }
 
 // Check if script isn't already running
+d('Check previous/existing execution '.ALTERNC_DO_ACTION_LOCK);
+
 if (file_exists(ALTERNC_DO_ACTION_LOCK) !== false){
     d("Lock file already exists. ");
     // Check if file is in process list
@@ -192,6 +202,8 @@ if (file_exists(ALTERNC_DO_ACTION_LOCK) !== false){
     exit(1);
   }
 }
+
+d("current pid $MY_PID locked by ".ALTERNC_DO_ACTION_LOCK);
 
 //We get the next action to do
 while ($rr=$action->get_action()){

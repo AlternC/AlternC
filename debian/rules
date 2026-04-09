@@ -16,12 +16,6 @@ override_dh_install:
 	$(MAKE) install-slave DESTDIR=$(CURDIR)/debian/alternc-slave
 	$(MAKE) install-api DESTDIR=$(CURDIR)/debian/alternc-api
 
-execute_after_dh_gencontrol:
-	dpkg-gencontrol -cdebian/alternc-roundcube.control -palternc-roundcube -ldebian/alternc-roundcube.changelog -Tdebian/alternc-roundcube.substvars -Pdebian/alternc-roundcube
-
-execute_after_dh_builddeb:
-	dpkg-deb --build debian/alternc-roundcube ..
-
 %:
 	dh $@
 

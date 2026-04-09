@@ -12,6 +12,16 @@ while ($db->next_record()) {
     $add[$db->Record["domaine"]]=$db->Record["compte"];
 }
 foreach($add as $domain => $id) {
+    // Delete previous dkim key (prevent duplicate or truncated row)
+    $db->query("DELETE FROM sub_domaines
+        WHERE compte=? AND domaine=? AND sub='alternc._domainkey' AND type='dkim';",
+        array($id, $domain)
+    );
+    $db->query("DELETE FROM sub_domaines
+        WHERE compte=? AND domaine=? AND type='autodiscover';",
+        array($id, $domain)
+    );
+
     // Convert DKIM keys into SUB_DOMAINES table
     if (file_exists("/etc/opendkim/keys/".$domain."/alternc.txt")) {
         $dkim_key = $mail->dkim_get_entry($domain);

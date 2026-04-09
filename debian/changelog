@@ -1,3 +1,74 @@
+alternc (3.5.3) buster bullseye bookworm; urgency=medium
+
+  * fix : improve database creation (prevent conflit with keyword) #629
+  * enh : support correctly length database and username
+  * enh : refresh database account usage after any database change
+  * fix : improve php support #604
+  * fix : delete mailbox on account deletion #633
+  * fix : don't break do_action cron and catch error to debug mode #361
+  * breaking : don't lost any DNS override (serial, locked, manual row).
+
+With DNSEC support inital code required to clear any zone before any update. This behavior in no more required as listing zones is a symbolic link.
+We can have both inclusion listing without any conflict.
+A old code was forgotten and deleted all DNS data before to update them. Was a breaking behavior, we correct it with related revert.
+Locked zone , incremental serial and any override are now retablished.
+
+ -- Camille Lafitte <alternc@webelys.com>  Tue, 26 Aug 2025 10:02:00 +0200
+
+alternc (3.5.2) buster bullseye bookworm; urgency=low
+
+  * fix : alternc-awstat can be install with alternc 3.5.x
+  * fix : don't overwrite default spf and dmarc values when yet set
+  * fix : prevent DKIM aud autodiscover duplicate insertion when partialy managed from a previous upgrade
+  * fix : prevent a full directory exploration when SFTP is enabled
+
+ -- Camille Lafitte <alternc@webelys.com>  Tue, 25 Jun 2025 13:28:00 +0200
+
+alternc (3.5.1) buster bullseye bookworm; urgency=low
+
+  * Prevent a mysql connection error during upgrade process
+  * Remove specific override with alternc-roundcube
+  * alternc-roundcube
+    * can be installed until debian 12
+    * Take in consideration new patches to support recent debian release (#573)
+
+ -- Camille Lafitte <alternc@webelys.com>  Tue, 29 April 2025 10:47:00 +0200
+
+alternc (3.5.0) buster bullseye bookworm; urgency=low
+
+  * Release stable version
+  * enh : Support since buster until bookworm
+  * enh : Support php since 5.6 to 8.2
+  * enh : Support SFTP 
+  * enh : Support DNSSEC (advanced mode, only to sysadmin)
+  * fix : Certificates management is simplifier and reported to external module
+  * fix : Backpot Roundcube CVE 
+  * fix : Support Roundcube until bookworm
+  * enh : New panel webui Theme
+  * enh : support proxy frontal as nginx
+  * fix : better apache2 templating (ssl, proxyx feature)
+  * fix : some bugfixes related to mariadb suppport
+  * fix : dovecot support sha512 password hash
+  * fix : prevent some blocking state during alternc.install process
+  * enh : support dmarc, spf, dkimm by default
+  * enh : support apache 2.4
+  * enh : prefer vanilla javascript on webui
+  * enh : improve mail autodiscover feature
+  * enh : systemd support (partially and related with other package dependencies)
+  * enh : import fixperms script
+  * enh : improve CSRF check
+  * fix : prevent incrond oom
+  * fix : restore help website link
+  * enh : move to weblate service (in progress)
+  * fix : provide a better checkPolicy about password management
+
+External nice fork are merged in this release. Is no more required to use external repository as provided by koumbit, octopuce, webelys version. 
+More information at :
+* https://github.com/AlternC/AlternC/compare/b69ffcf53d51af957b1f1a43c6305266a255f9af...main
+* https://github.com/AlternC/AlternC/milestone/7
+
+ -- Camille Lafitte <alternc@webelys.com>  Wed, 16 April 2025 13:13:13 +0200
+
 alternc (3.5.0~rc3) buster bullseye bookworm; urgency=low
 
   * Support until debian 12
