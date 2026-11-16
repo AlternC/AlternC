@@ -450,7 +450,7 @@ fi
 
 # Manage sudoers.d include appearing in Squeeze:
 # if the "includedir" is not here, we add it ONLY IF visudo -c is happy.
-if ! grep -q "#includedir */etc/sudoers.d" /etc/sudoers ; then
+if ! grep -Eq "^@includedir /etc/sudoers.d" /etc/sudoers ; then
     if ! cat /etc/sudoers.d/* | visudo -c -f -  >/dev/null ; then
 	echo -e "\033[31m**********************************************"
 	echo "*                                            *"
@@ -464,7 +464,7 @@ if ! grep -q "#includedir */etc/sudoers.d" /etc/sudoers ; then
 	echo -e "\033[0m"
 	exit 1
     else 
-	echo "#includedir */etc/sudoers.d" >>/etc/sudoers
+	echo "@includedir /etc/sudoers.d" >> /etc/sudoers
     fi
 fi
 
