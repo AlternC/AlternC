@@ -651,6 +651,7 @@ from
   )
 where 
   `address`.`enabled` = 1
+  and `domaines`.`gesmx` = 1
 
 UNION
 
