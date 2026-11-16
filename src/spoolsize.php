@@ -3,7 +3,7 @@
 
 require_once("/usr/share/alternc/panel/class/config_nochk.php");
 
-global $db;
+global $db,$hooks;
 
 echo "\n---------------------------\n Generating size-cache for web accounts\n\n";
 exec("/usr/lib/alternc/quota_get_all", $list_quota_tmp);
@@ -48,25 +48,7 @@ foreach($allsrv as $c) {
   echo "\n";
 }
 
-echo "---------------------------\n Generating size-cache for mailman\n\n";
-if ($db->query("SELECT uid, name FROM mailman;")) {
-  $cc=array();
-  $d=array();
-  if($db->num_rows()){
-    while ($db->next_record()) {
-      $cc[]=array("uid" => $db->f("uid"), "name" => $db->f("name"));
-    }
-    foreach ($cc as $c){
-      echo $c["uid"]."/".$c["name"]; flush();
-      $size1=exec("sudo /usr/bin/du -s ".escapeshellarg("/var/lib/mailman/lists/".$c["name"]));
-      $size2=exec("sudo /usr/bin/du -s ".escapeshellarg("/var/lib/mailman/archives/private/".$c["name"]));
-      $size3=exec("sudo /usr/bin/du -s ".escapeshellarg("/var/lib/mailman/archives/private/".$c["name"].".mbox"));
-      $size=(intval($size1)+intval($size2)+intval($size3));
-      $db->query("REPLACE INTO size_mailman SET uid=?,list=?,size=?;",array($c["uid"],$c["name"],$size));
-      echo " done (".(round($size/1024, 1))." MB) \n"; flush();
-    }
-  }
-}
+$hooks->invoke("hook_spoolsize");
 
 
 ?>
