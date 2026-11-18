@@ -663,7 +663,7 @@ if [ "$HAS_ROOT" != "1" ]; then
     fi
 else
     ##UPDATE default db_server following /etc/alternc/my.cnf values
-    if [ "$MYSQL_HOST" == "localhost" ]; then
+    if [ "$MYSQL_HOST" == "localhost" ] || [ "$MYSQL_HOST" == "127.0.0.1" ]; then
         MYSQL_HOST_CLIENT="localhost"
     else
         MYSQL_HOST_CLIENT="%"
