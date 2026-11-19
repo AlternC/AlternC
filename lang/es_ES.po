@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: AlternC, hosting control panel\n"
 "Report-Msgid-Bugs-To: alternc@packages.debian.org\n"
 "POT-Creation-Date: 2018-06-24 17:17+0200\n"
-"PO-Revision-Date: 2025-12-11 13:38+0000\n"
+"PO-Revision-Date: 2025-12-29 17:06+0000\n"
 "Last-Translator: Francisco Serrador <fserrador@gmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/alternc/alternc/"
 "es/>\n"
@@ -27,7 +27,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n == 1) ? 0 : ((n != 0 && n % 1000000 == "
 "0) ? 1 : 2);\n"
-"X-Generator: Weblate 5.15-dev\n"
+"X-Generator: Weblate 5.15.1\n"
 
 #. Type: error
 #. Description
@@ -41,7 +41,9 @@ msgstr "AlternC requiere los ACL sobre el sistema de cuota de archivos"
 msgid ""
 "AlternC can't work without ACL activated on its filesystem. ACL are "
 "currently not enabled."
-msgstr "AlternC no puede funcionar correctamente sin los ACL activados sobre el sistema de archivos. Losw ACL no están actualmente activos."
+msgstr ""
+"AlternC no puede funcionar correctamente sin los ACL activados sobre el "
+"sistema de archivos. Losw ACL no están actualmente activos."
 
 #. Type: error
 #. Description
@@ -160,7 +162,11 @@ msgid ""
 "be this server since bind is installed and configured by AlternC. Anyway, "
 "you should have 2 separate DNS servers if you want to provide a high quality"
 " hosting service."
-msgstr "Entra el nombre de dominio de tu servidor de dns secundario. Este puede ser tu servidor, ya que bind está instalado y configurado en AlternC. No obstante, deberías tener 2 DNS separados e independientes si quieres proveer un hospedaje de calidad."
+msgstr ""
+"Entra el nombre de dominio de tu servidor de dns secundario. Este puede ser "
+"tu servidor, ya que bind está instalado y configurado en AlternC. No "
+"obstante, deberías tener 2 DNS separados e independientes si quieres proveer "
+"un hospedaje de calidad."
 
 #. Type: string
 #. Description
@@ -195,7 +201,8 @@ msgstr ""
 #. Description
 #: ../alternc.templates:7001
 msgid "This directory will contain every AlternC users personal directories."
-msgstr "Esta carpeta contendrá las carpetas personales de todas las cuentas AlternC."
+msgstr ""
+"Esta carpeta contendrá las carpetas personales de todas las cuentas AlternC."
 
 #. Type: string
 #. Description
@@ -348,7 +355,9 @@ msgstr ""
 msgid ""
 "Please choose a quite complex password since it will have full access to the"
 " system database! If you enter nothing, a random password will be created."
-msgstr "¡Favor elegir una contraseña compleja, dado que permite acceder a la base del sistema! Si no ingresas nadas, una contraseña aleatorioa será generada."
+msgstr ""
+"¡Favor elegir una contraseña compleja, dado que permite acceder a la base "
+"del sistema! Si no ingresas nadas, una contraseña aleatorioa será generada."
 
 #. Type: password
 #. Description
@@ -376,7 +385,11 @@ msgid ""
 "GRANT table properly created and manipulated, this parameter must be set to "
 "the hostname or IP the Apache server will appear as connecting from to the "
 "MySQL server."
-msgstr "Cuando AlternC y MySQL están instalados en servidores distintos, y para quer los GRANT ssobre las tables sean correctos, este parámetro es el nombre de dominio o la dirección IP desdfe la cual el servidor Apache será visto cuando se conecta al servidor MySQL."
+msgstr ""
+"Cuando AlternC y MySQL están instalados en servidores distintos, y para quer "
+"los GRANT ssobre las tables sean correctos, este parámetro es el nombre de "
+"dominio o la dirección IP desdfe la cual el servidor Apache será visto "
+"cuando se conecta al servidor MySQL."
 
 #. Type: select
 #. Description
@@ -390,7 +403,10 @@ msgstr "De qué manera se rotan los respaldos"
 msgid ""
 "AlternC enables users to configure their own backups, on demand, with "
 "automatic rotation. This option determines how the backups are rotated."
-msgstr "AlternC permite a los usuarios configurar sus propios respaldos, a demanda, con rotaciones automáticas. Esta opción détermina la manera de la cual se rotan dichos respaldos."
+msgstr ""
+"AlternC permite a los usuarios configurar sus propios respaldos, a demanda, "
+"con rotaciones automáticas. Esta opción détermina la manera de la cual se "
+"rotan dichos respaldos."
 
 #. Type: select
 #. Description
@@ -398,13 +414,17 @@ msgstr "AlternC permite a los usuarios configurar sus propios respaldos, a deman
 msgid ""
 "rotate - backup.sql, backup.sql.0, backup.sql.1 date - backup.sql, "
 "backup.sql.20080709, backup.sql.20080708"
-msgstr "rotación - backup.sql, backup.sql.0, backup.sql.1; fecha - backup.sql, backup.sql.20080709, backup.sql.20080708"
+msgstr ""
+"rotación - backup.sql, backup.sql.0, backup.sql.1; fecha - backup.sql, "
+"backup.sql.20080709, backup.sql.20080708"
 
 #. Type: select
 #. Description
 #: ../alternc.templates:20001
 msgid "Behavior of the backup script when it encounters a unmanaged file"
-msgstr "Comportamiento del script de respaldo cuando encuentra un archivo que no se maneja"
+msgstr ""
+"Comportamiento del script de respaldo cuando encuentra un archivo que no se "
+"maneja"
 
 #. Type: select
 #. Description
@@ -413,7 +433,10 @@ msgid ""
 "The SQL backups can rename or overwrite existing files it doesn't know about"
 " when doing backups. The default behavior is to skip those files and ignore "
 "it."
-msgstr "Los backups de SQL pueden renombrar o sobrescribir archivos ya existentes si no se sabe cuándo hacerlos. El procedimiento por defecto es omitir e ignorar estos archivos."
+msgstr ""
+"Los backups de SQL pueden renombrar o sobrescribir archivos ya existentes si "
+"no se sabe cuándo hacerlos. El procedimiento por defecto es omitir e ignorar "
+"estos archivos."
 
 #. Type: string
 #. Description
@@ -445,7 +468,10 @@ msgid ""
 "AlternC will configure Apache and other services to listen to this address. "
 "This is usually the same as the primary IP of the server, unless the server "
 "is sitting behind a NAT router."
-msgstr "AlternC va a configurar Apache y otros servicios para que escuchen en esta dirección. Normalemente, esta dirección el la misma que la dirección principal del servidor, salvo si éste está atrás de un enrutador NAT."
+msgstr ""
+"AlternC va a configurar Apache y otros servicios para que escuchen en esta "
+"dirección. Normalemente, esta dirección el la misma que la dirección "
+"principal del servidor, salvo si éste está atrás de un enrutador NAT."
 
 #. Type: string
 #. Description
@@ -498,7 +524,9 @@ msgstr "Carpeta de localización de AlternC:"
 msgid ""
 "Please enter the partition name where alternc is installed. This is used "
 "mainly for disk quotas."
-msgstr "Ingresa el camino de acceso a la carpeta en la que AlternC está instalado. Esto es necesario para la gestión de cuotas de espacio en disco."
+msgstr ""
+"Ingresa el camino de acceso a la carpeta en la que AlternC está instalado. "
+"Esto es necesario para la gestión de cuotas de espacio en disco."
 
 #. Type: string
 #. Description
@@ -735,7 +763,10 @@ msgid ""
 "Also, note that everytime the mailman package is upgraded or reinstalled, "
 "the patches will need to be reapplied manually. This can be done by "
 "reconfiguring the alternc-mailman package.  ."
-msgstr "Toma nota también que, cada vez que se actualice o reinstale el paquete Mailman, esta modificación debe volver a ser aplicada. Esto puede ser efectuado volviendo a configurar el paquete alternc-mailman."
+msgstr ""
+"Toma nota también que, cada vez que se actualice o reinstale el paquete "
+"Mailman, esta modificación debe volver a ser aplicada. Esto puede ser "
+"efectuado volviendo a configurar el paquete alternc-mailman."
 
 #. Type: boolean
 #. Description
@@ -743,7 +774,9 @@ msgstr "Toma nota también que, cada vez que se actualice o reinstale el paquete
 msgid ""
 "The patches are in /usr/share/alternc-mailman/patches. More information "
 "about the patch at http://wiki.koumbit.net/VirtualMailman."
-msgstr "Los patchs están en /usr/share/alternc-mailman/patches. Para mayor información sobre este patch visita http://wiki.koumbit.net/VirtualMailman."
+msgstr ""
+"Los patchs están en /usr/share/alternc-mailman/patches. Para mayor "
+"información sobre este patch visita http://wiki.koumbit.net/VirtualMailman."
 
 #: ../admin/aws_add.php:33
 msgid "You cannot add any new statistics, your quota is over."
@@ -781,7 +814,9 @@ msgstr "Usuarios permitidos"
 msgid ""
 "No users currently defined, you must create login with the 'Manage allowed "
 "users' accounts' menu."
-msgstr "Ningún/a usuarix está definido al momento. Deberías crear usuarixs con el menú 'Gestión de lxs usuarixs autorizadxs'."
+msgstr ""
+"Ningún/a usuarix está definido al momento. Deberías crear usuarixs con el "
+"menú 'Gestión de lxs usuarixs autorizadxs'."
 
 #: ../admin/aws_add.php:93
 msgid "Create those statistics"
@@ -850,7 +885,8 @@ msgstr "Modificar"
 
 #: ../admin/aws_list.php:81
 msgid "Are you sure you want to delete the selected statistics?"
-msgstr "¿Estás segurx de querer suprimir los juegos de estadísticas seleccionados?"
+msgstr ""
+"¿Estás segurx de querer suprimir los juegos de estadísticas seleccionados?"
 
 #: ../admin/aws_list.php:81
 msgid "Delete the checked Statistics"
@@ -1068,7 +1104,10 @@ msgid ""
 "Warning: Deleting a mailman list will destroy all the subscribed users, "
 "preferences and archives it contains! You will <b>NOT</b> be able to get "
 "your data back!"
-msgstr "Advertencia: Borrando una lista mailman eliminará por completo todos los datos que contiene y los usuarios suscritos a ella! <b>NO</b> podrá recuperar sus datos!"
+msgstr ""
+"Advertencia: Borrando una lista mailman eliminará por completo todos los "
+"datos que contiene y los usuarios suscritos a ella! <b>NO</b> podrá "
+"recuperar sus datos!"
 
 #: ../admin/mman_doadd.php:38
 msgid "Invalid list name (only letters, digits and underscore)."
@@ -1112,7 +1151,9 @@ msgstr "Creación de lista en curso"
 #: ../admin/mman_list.php:38
 msgid ""
 "No domain is installed on your account, you cannot create any mailing list!"
-msgstr "No hay dominios instalados en tu cuenta, ¡no puedes crear una lista de correo!"
+msgstr ""
+"No hay dominios instalados en tu cuenta, ¡no puedes crear una lista de "
+"correo!"
 
 #: ../admin/mman_list.php:68
 msgid "Create a list"
@@ -1235,7 +1276,9 @@ msgstr "Ningún listado definido aún"
 msgid ""
 "Special mail address for Mailman mailing-lists. <a "
 "href='mman_list.php'>Click here to manage it.</a>"
-msgstr "Direcciones email especiales para las listas Mailman <a href='mman_list.php'>Presiona aquí para gestionarlas</a>"
+msgstr ""
+"Direcciones email especiales para las listas Mailman <a href='mman_list.php'>"
+"Presiona aquí para gestionarlas</a>"
 
 #: ../class/m_mailman.php:224
 #, php-format
@@ -1280,7 +1323,9 @@ msgstr "Una lista con el mismo nombre ya existe. Elije otro nombre."
 msgid ""
 "This email address (or one of the list-subscribe, list-unsubscribe etc.) are"
 " already used."
-msgstr "Esta dirección de correo (o una de las direcciones de servicio lista-subscribe, lista-unsubscribe, etc.) ya está en uso."
+msgstr ""
+"Esta dirección de correo (o una de las direcciones de servicio lista-"
+"subscribe, lista-unsubscribe, etc.) ya está en uso."
 
 #: ../class/m_mailman.php:366 ../class/m_mailman.php:414
 msgid "This list has pending action, you cannot delete it"
@@ -1363,7 +1408,12 @@ msgid ""
 "<br/>It manages, among others, email, Web, Web statistics, and mailing list "
 "services. It is available in many languages. It is a free software "
 "distributed under GPL license."
-msgstr "AlternC es un software de hospedaje automatizado. Contiene un panel de control escrito en PHP, y scripts que manejan la configuración del servidor<br />Maneja, entre otros, los correos, sitios web, estadísticas web, y las lista de discusión y de difusión. Está disponible en varios idiomas. Es un software distribuido bajo licencia GPL."
+msgstr ""
+"AlternC es un software de hospedaje automatizado. Contiene un panel de "
+"control escrito en PHP, y scripts que manejan la configuración del "
+"servidor<br />Maneja, entre otros, los correos, sitios web, estadísticas "
+"web, y las lista de discusión y de difusión. Está disponible en varios "
+"idiomas. Es un software distribuido bajo licencia GPL."
 
 #: ../admin/about.php:43
 msgid "Official website: "
@@ -1525,7 +1575,9 @@ msgstr "Cancelar la modificación"
 msgid ""
 "Enter here the IP address you want. <br/> <i>IPv4, IPv6 and subnet "
 "allowed</i>"
-msgstr "Ingresa aquí la dirección IP que quieras. <br /><i>IPV4, IPV6 y prefijos son autorizados</i>"
+msgstr ""
+"Ingresa aquí la dirección IP que quieras. <br /><i>IPV4, IPV6 y prefijos son "
+"autorizados</i>"
 
 #: ../admin/adm_authip_whitelist.php:78
 msgid "Add a comment"
@@ -1846,7 +1898,11 @@ msgid ""
 "domain if it does not exist or does not point to our server anymore. You can"
 " also set the 'Lock' flag on a domain so that the user will not be able to "
 "change any DNS parameter or delete this domain from his account."
-msgstr "He aquí la lista de dominios instalados en este servidor. Puedes suprimir un dominio si ya no existe o si ya no apunta a este servidor. También puedes bloquear un dominio para que el usuario ya no pueda modificar sus parámetros DNS o borrarlo."
+msgstr ""
+"He aquí la lista de dominios instalados en este servidor. Puedes suprimir un "
+"dominio si ya no existe o si ya no apunta a este servidor. También puedes "
+"bloquear un dominio para que el usuario ya no pueda modificar sus parámetros "
+"DNS o borrarlo."
 
 #: ../admin/adm_doms.php:57
 msgid ""
@@ -1854,7 +1910,11 @@ msgid ""
 "registry and has a proper NS,MX and IP depending on its configuration. It is"
 " red if we have serious doubts about its NS, MX or IP configuration. Contact"
 " the user of this domain or a system administrator."
-msgstr "La columna OK del dominio es verde si el dominio consta en el registro mundial y tiene NS, MX e IP correctos según su configuración. Es roja si existen dudas sobre su configuración de NS, MX o IP. Contacte con el usuario de este dominio o con un administrador de sistemas."
+msgstr ""
+"La columna OK del dominio es verde si el dominio consta en el registro "
+"mundial y tiene NS, MX e IP correctos según su configuración. Es roja si "
+"existen dudas sobre su configuración de NS, MX o IP. Contacte con el usuario "
+"de este dominio o con un administrador de sistemas."
 
 #: ../admin/adm_doms.php:60
 msgid ""
@@ -1908,13 +1968,16 @@ msgstr "Administrar el tipo de dominios predeterminados"
 msgid ""
 "If you don't know what this page is about, don't touch anything, and read "
 "AlternC documentation about domain types"
-msgstr "Si no sabe qué está haciendo, por favor, lea se la documentación AlternC"
+msgstr ""
+"Si no sabe qué está haciendo, por favor, lea se la documentación AlternC"
 
 #: ../admin/adm_doms_def_type.php:41
 msgid ""
 "The Type column contains a type of available VirtualHost config on The "
 "server."
-msgstr "La columna Tipo almacena un tipo de configuración de VirtualHost disponible en el servidor."
+msgstr ""
+"La columna Tipo almacena un tipo de configuración de VirtualHost disponible "
+"en el servidor."
 
 #: ../admin/adm_doms_def_type.php:42
 msgid ""
@@ -2334,7 +2397,9 @@ msgstr ""
 msgid ""
 "If you want to allow a new server to access your mx-hosted domain list, give"
 " him an account."
-msgstr "Si quieres autorizar un nuevo servidor a sincronizar la lista de dominios cuyo mail se hospeda aquí, créale una cuenta."
+msgstr ""
+"Si quieres autorizar un nuevo servidor a sincronizar la lista de dominios "
+"cuyo mail se hospeda aquí, créale una cuenta."
 
 #: ../admin/adm_mxaccount.php:107 ../admin/adm_slavedns.php:168
 msgid "Add this account to the allowed list"
@@ -2383,7 +2448,9 @@ msgstr "Estadísticas de creación de cuentas"
 
 #: ../admin/adm_panel.php:88
 msgid "Click here to unlock the panel and allow user to login."
-msgstr "Haga click aquí para desbloquear el panel y permitir que el usuario se identifique."
+msgstr ""
+"Haga click aquí para desbloquear el panel y permitir que el usuario se "
+"identifique."
 
 #: ../admin/adm_panel.php:90
 msgid "Are you sure you want to kick everyone?"
@@ -2391,7 +2458,9 @@ msgstr "¿Está seguro de que desea patear a todo el mundo?"
 
 #: ../admin/adm_panel.php:90
 msgid "Click here to lock the panel and force logout of all the user."
-msgstr "Haga click aquí para bloquear el panel y obligar a todos los usuarios a cerrar la sesión."
+msgstr ""
+"Haga click aquí para bloquear el panel y obligar a todos los usuarios a "
+"cerrar la sesión."
 
 #: ../admin/adm_passpolicy.php:49
 msgid "Manage Password Policy"
@@ -2411,7 +2480,9 @@ msgstr "La normativa no se puede modificar, hubo un error"
 
 #: ../admin/adm_passpolicy.php:78
 msgid "Please choose which policy you want to apply to this password kind:"
-msgstr "Por favor, escoja qué tipo de política desea aplicar a este tipo de contraseña:"
+msgstr ""
+"Por favor, escoja qué tipo de política desea aplicar a este tipo de "
+"contraseña:"
 
 #: ../admin/adm_passpolicy.php:87
 msgid "Minimum Password Size:"
@@ -2424,8 +2495,8 @@ msgstr "Tamaño máximo:"
 #: ../admin/adm_passpolicy.php:101
 msgid "In how many classes of characters must be the password (at least):"
 msgstr ""
-"Cuántas clases de caracteres diferentes debe contener la contraseña "
-"(como mínimo):"
+"Cuántas clases de caracteres diferentes debe contener la contraseña (como "
+"mínimo):"
 
 #: ../admin/adm_passpolicy.php:108
 msgid "Do we allow the password to be like the login?"
@@ -2444,7 +2515,10 @@ msgid ""
 "The classes of characters are : <br />1. Low-case letters (a-z)<br />2. "
 "Upper-case letters (A-Z)<br />3. Figures (0-9)<br />4. Ascii symbols "
 "(!\"#$%&'()*+,-./:;<=>?@[\\]^_`)<br />5. Non-Ascii symbols (accents...)"
-msgstr "Las clases de caracteres son : <br />1. Letras minúsculas (a-z)<br />2. Letras mayúsculas (A-Z)<br />3. Números (0-9)<br />4. Símbolos Ascii (!\"#$%&'()*+,-./:;<=>?@[\\]^_`)<br />5. Símbolos no Ascii (acentos...)"
+msgstr ""
+"Las clases de caracteres son : <br />1. Letras minúsculas (a-z)<br />2. "
+"Letras mayúsculas (A-Z)<br />3. Números (0-9)<br />4. Símbolos Ascii "
+"(!\"#$%&'()*+,-./:;<=>?@[\\]^_`)<br />5. Símbolos no Ascii (acentos...)"
 
 #: ../admin/adm_passpolicy.php:131
 msgid ""
@@ -2454,7 +2528,12 @@ msgid ""
 "maximum password size, and how many classes of characters must appear in the"
 " password. You can also forbid (or not) to use the login or part of it as a "
 "password."
-msgstr "Aquí se muestra una lista de las políticas de contraseñas que pueden requerirse para cada servicio de AlternC. Puede elegir qué política se aplicará para cada tipo de contraseña. Una pólitica puede ser una longitud mínima y máxima, y cuántas clases de caracteres deben usarse. Además puede prohibir (o no) el uso del nombre usuario o parte de él en la contraseña."
+msgstr ""
+"Aquí se muestra una lista de las políticas de contraseñas que pueden "
+"requerirse para cada servicio de AlternC. Puede elegir qué política se "
+"aplicará para cada tipo de contraseña. Una pólitica puede ser una longitud "
+"mínima y máxima, y cuántas clases de caracteres deben usarse. Además puede "
+"prohibir (o no) el uso del nombre usuario o parte de él en la contraseña."
 
 #: ../admin/adm_passpolicy.php:135
 msgid "Password Kind"
@@ -2510,13 +2589,17 @@ msgstr "Modificar cuotas"
 #: ../admin/adm_slavedns.php:63
 msgid ""
 "The requested ip address has been deleted. It will be denied in one hour."
-msgstr "La dirección IP seleccionada fue borrada. El acceso será denegado en una hora, a más tardar."
+msgstr ""
+"La dirección IP seleccionada fue borrada. El acceso será denegado en una "
+"hora, a más tardar."
 
 #: ../admin/adm_slavedns.php:69
 msgid ""
 "The requested ip address has been added to the list. It will be allowed in "
 "one hour."
-msgstr "La dirección IP fue añadida. El acceso le será permitido en una hora a más tardar."
+msgstr ""
+"La dirección IP fue añadida. El acceso le será permitido en una hora a más "
+"tardar."
 
 #: ../admin/adm_slavedns.php:80
 msgid "Manage allowed ip for slave zone transfers"
@@ -2529,7 +2612,12 @@ msgid ""
 "so that those slaves will be allowed to transfer the zone files. There is "
 "also some defaults ip from DNS checks made by some third-party technical "
 "offices such as afnic (for .fr domains)"
-msgstr "He aquí la lista de IPs o clases de IPs autorizadas a efectuar transferencias de zonas (AXFR). Tienes que agregar aquí las direcciones IP de los DNS esclavos de manera a que puedan sincronizar sus zonas. También hay algunas IPs por omisión que corresponden a organismos técnicos oficiales (como las del afnic para los dominios .fr)"
+msgstr ""
+"He aquí la lista de IPs o clases de IPs autorizadas a efectuar "
+"transferencias de zonas (AXFR). Tienes que agregar aquí las direcciones IP "
+"de los DNS esclavos de manera a que puedan sincronizar sus zonas. También "
+"hay algunas IPs por omisión que corresponden a organismos técnicos oficiales "
+"(como las del afnic para los dominios .fr)"
 
 #: ../admin/adm_slavedns.php:94 ../admin/adm_slavedns.php:114
 msgid "IP Address"
@@ -2539,7 +2627,10 @@ msgstr "Dirección IP"
 msgid ""
 "If you want to allow an ip address or class to connect to your dns server, "
 "enter it here. Choose 32 as a prefix for single ip address."
-msgstr "Si quieres autorizar una dirección IP o una clase de direcciones IP a conectarse a tu servidor DNS, ingrésala aquí. Elige un prefijo de 32 si se trata de una sola dirección IP."
+msgstr ""
+"Si quieres autorizar una dirección IP o una clase de direcciones IP a "
+"conectarse a tu servidor DNS, ingrésala aquí. Elige un prefijo de 32 si se "
+"trata de una sola dirección IP."
 
 #: ../admin/adm_slavedns.php:114
 msgid "Prefix"
@@ -2551,7 +2642,8 @@ msgstr "Agregar esta IP o clase a la lista de los DNS esclavos"
 
 #: ../admin/adm_slavedns.php:129
 msgid "Manage allowed accounts for slave zone transfers"
-msgstr "Manejar las cuentas autorizadas para las transferencias de zonas DNS esclavos"
+msgstr ""
+"Manejar las cuentas autorizadas para las transferencias de zonas DNS esclavos"
 
 #: ../admin/adm_slavedns.php:137
 msgid ""
@@ -2568,7 +2660,9 @@ msgstr ""
 msgid ""
 "If you want to allow a new server to access your domain list, give him an "
 "account."
-msgstr "Si quieres autorizar un nuevo servidor a acceder la lista de tus dominios, créale una cuenta."
+msgstr ""
+"Si quieres autorizar un nuevo servidor a acceder la lista de tus dominios, "
+"créale una cuenta."
 
 #: ../admin/adm_slavedns.php:198
 msgid "Need open DNS Slave servers?"
@@ -2588,7 +2682,10 @@ msgid ""
 "<strong>Give access to the alternc.net servers.</strong> Follow the "
 "instructions on <a href='%s' target='blank'>this page</a>. They will help "
 "you to configure this page and configure your alternc.net account."
-msgstr "<strong>Acceso a los servidores de alternc.net.</strong> Siga las instrucciones de <a href='%s' target='blank'>esta página</a>. Le ayudará a configurar está página y configurar su cuenta de alternc.net."
+msgstr ""
+"<strong>Acceso a los servidores de alternc.net.</strong> Siga las "
+"instrucciones de <a href='%s' target='blank'>esta página</a>. Le ayudará a "
+"configurar está página y configurar su cuenta de alternc.net."
 
 #: ../admin/adm_slavedns.php:204
 #, php-format
@@ -2598,13 +2695,19 @@ msgid ""
 "use the DNS servers provided for free by the AlternC association and enter "
 "the required informations for each server you want to connect to the "
 "service."
-msgstr "<strong>Suscripción a alternc.net.</strong> Vaya a <a href='%s' target='_blank' class='btn btn-inline btn-link'>el sitio web de alternc.net</a> para usar los servidores DNS ofrecidos sin coste por la asociación AlternC e introduzca la información solicitada para cada servidor que desee conectar al servicio."
+msgstr ""
+"<strong>Suscripción a alternc.net.</strong> Vaya a <a href='%s' "
+"target='_blank' class='btn btn-inline btn-link'>el sitio web de alternc.net</"
+"a> para usar los servidores DNS ofrecidos sin coste por la asociación "
+"AlternC e introduzca la información solicitada para cada servidor que desee "
+"conectar al servicio."
 
 #: ../admin/adm_slavedns.php:207
 msgid ""
 "The alternc.net servers will take care of transfering and distributing to "
 "the world your domains zones."
-msgstr "Los servidores de alternc se encargarán de propagar sus zonas de dominio."
+msgstr ""
+"Los servidores de alternc se encargarán de propagar sus zonas de dominio."
 
 #: ../admin/adm_tld.php:44
 msgid "Some TLD cannot be deleted..."
@@ -2618,7 +2721,10 @@ msgstr "El TLD fue borrado"
 msgid ""
 "Here is the list of the TLD allowed on this server. Each TLD can be allowed "
 "or denied after some checks (whois, ns, domain exists...)"
-msgstr "Aquí esta la lista de los TLD autorizados en este servidor. Cada TLD puede ser autorizado o prohibido según ciertos criterios (whois, ns, dominio existe...)"
+msgstr ""
+"Aquí esta la lista de los TLD autorizados en este servidor. Cada TLD puede "
+"ser autorizado o prohibido según ciertos criterios (whois, ns, dominio "
+"existe...)"
 
 #: ../admin/adm_tld.php:66 ../admin/adm_tld.php:88 ../admin/adm_tldadd.php:50
 #: ../admin/adm_tldadd.php:64
@@ -2643,13 +2749,17 @@ msgstr "Suprimir los TLD marcados"
 msgid ""
 "Enter the new TLD (without the first dot) and choose what check should be "
 "done."
-msgstr "Ingresa el nuevo TLD (sin el punto inicial) y escoge que control se debeefectuar."
+msgstr ""
+"Ingresa el nuevo TLD (sin el punto inicial) y escoge que control se "
+"debeefectuar."
 
 #: ../admin/adm_tldadd.php:53
 msgid ""
 "Warning : only some final tld are known in the whois function of AlternC, "
 "please check m_dom.php accordingly."
-msgstr "ADVERTENCIA: sólo algunos TLD son conocidos en la función whois de AlternC, por favor, verifica el archivo m_dom.php."
+msgstr ""
+"ADVERTENCIA: sólo algunos TLD son conocidos en la función whois de AlternC, "
+"por favor, verifica el archivo m_dom.php."
 
 #: ../admin/adm_tlddoadd.php:46
 msgid "The TLD has been successfully added"
@@ -2669,7 +2779,9 @@ msgstr "Modificar este TLD"
 
 #: ../admin/adm_update_domains.php:37
 msgid "Missing INOTIFY_UPDATE_DOMAIN var in /etc/alternc/local.sh . Fix it!"
-msgstr "Falta la variable INOTIFY_UPDATE_DOMAIN en /etc/alternc/local.sh . ¡Corríjalo!"
+msgstr ""
+"Falta la variable INOTIFY_UPDATE_DOMAIN en /etc/alternc/local.sh . ¡"
+"Corríjalo!"
 
 #: ../admin/adm_variables.php:49
 msgid "Here are the internal AlternC variables that are currently being used."
@@ -3143,7 +3255,10 @@ msgid ""
 "If you don't want to host in our server the DNS of your domain, don't check "
 "the box 'host my dns here'. If you don't know what it mean, leave it "
 "checked."
-msgstr "Si no deseas que el DNS del dominio esté hospedado aquí, quita la selección 'Hospedar el DNS en el servidor'. Si no entiendes, deja la selección tal cual."
+msgstr ""
+"Si no deseas que el DNS del dominio esté hospedado aquí, quita la selección "
+"'Hospedar el DNS en el servidor'. Si no entiendes, deja la selección tal "
+"cual."
 
 #: ../admin/dom_add.php:92 ../admin/dom_doadd.php:58
 msgid "Whois result on the domain"
@@ -3186,7 +3301,8 @@ msgstr "ADVERTENCIA"
 
 #: ../admin/dom_dodel.php:66
 msgid "This will delete the related sub-domains too."
-msgstr "Esto va a suprimir todos los emails y los subdominios correspondientes.."
+msgstr ""
+"Esto va a suprimir todos los emails y los subdominios correspondientes.."
 
 #: ../admin/dom_dodel.php:72
 msgid "Yes, delete this domain name"
@@ -3418,13 +3534,17 @@ msgstr "segundos"
 
 #: ../admin/dom_edit.php:316
 msgid "Manage the Emails Addresses of this domain on the server?"
-msgstr "¿Administrar las cuentas de correo electrónico de este dominio en el servidor?"
+msgstr ""
+"¿Administrar las cuentas de correo electrónico de este dominio en el "
+"servidor?"
 
 #: ../admin/dom_edit.php:324
 msgid ""
 "Warning: If you set this to 'no', all your email accounts and aliases on "
 "this domain will be immediately deleted."
-msgstr "Advertencia: Si ajusta ésta opción al valor 'no', todas sus cuentas de correo en este dominio serán eliminadas de inmediato."
+msgstr ""
+"Advertencia: Si ajusta ésta opción al valor 'no', todas sus cuentas de "
+"correo en este dominio serán eliminadas de inmediato."
 
 #: ../admin/dom_edit.php:325
 msgid "Submit the changes"
@@ -3440,7 +3560,9 @@ msgstr ""
 msgid ""
 "Here is the actual DNS zone running on the AlternC server. If you just made "
 "some changes, you have to wait for it."
-msgstr "Esta es la zona DNS actual en el servidor AlternC. Si acaba de hacer algún cambio debe esperar."
+msgstr ""
+"Esta es la zona DNS actual en el servidor AlternC. Si acaba de hacer algún "
+"cambio debe esperar."
 
 #: ../admin/dom_edit.php:343
 msgid "Click here to view the dump"
@@ -3718,7 +3840,9 @@ msgstr "Información de configuración de FTP"
 msgid ""
 "Here are some configuration information you will need to configure your FTP "
 "application."
-msgstr "Aquí tiene información de la configuración que será necesaria para configurar su aplicación de FTP."
+msgstr ""
+"Aquí tiene información de la configuración que será necesaria para "
+"configurar su aplicación de FTP."
 
 #: ../admin/ftp_list.php:107
 msgid "Server:"
@@ -3754,7 +3878,9 @@ msgstr "La cuenta FTP está deshabilitada"
 msgid ""
 "Administrator session. you may <a href='adm_login.php'>return to your "
 "account</a> or <a href='adm_cancel.php'>cancel this feature</a>."
-msgstr "Sesión de administrador. Puede <a href='adm_login.php'>volver a su cuenta</a> o <a href='adm_cancel.php'>cancelar esta característica</a>."
+msgstr ""
+"Sesión de administrador. Puede <a href='adm_login.php'>volver a su cuenta</"
+"a> o <a href='adm_cancel.php'>cancelar esta característica</a>."
 
 #: ../admin/head.php:37
 msgid "You can also <a href='adm_update_domains.php'>apply changes</a>."
@@ -3771,7 +3897,9 @@ msgstr "Proteger una carpeta"
 #: ../admin/hta_add.php:41
 msgid ""
 "Enter the name of the folder you want to protect. It must already exists."
-msgstr "Introduzca el nombre del directorio que quiere proteger. El directorio debe existir."
+msgstr ""
+"Introduzca el nombre del directorio que quiere proteger. El directorio debe "
+"existir."
 
 #: ../admin/hta_add.php:59
 msgid "Can't have empty directory."
@@ -3872,7 +4000,10 @@ msgid ""
 "You can set passwords to protect some of your folders.<br/>This will create "
 ".htaccess and .htpasswd files that restrict access to these directory and to"
 " any sub-elements."
-msgstr "Puede asignar contraseñas para proteger algunos de sus directorios.<br/>Esto creará archivos .htaccess y .htpasswd para restringir el acceso a esos directorios y cualquier subelemento."
+msgstr ""
+"Puede asignar contraseñas para proteger algunos de sus directorios.<br/>Esto "
+"creará archivos .htaccess y .htpasswd para restringir el acceso a esos "
+"directorios y cualquier subelemento."
 
 #: ../admin/hta_list.php:70
 msgid "Edit login and passwords"
@@ -3903,7 +4034,9 @@ msgstr ""
 msgid ""
 "To connect to the hosting control panel, enter your AlternC's login and "
 "password in the following form and click 'Enter'"
-msgstr "Para conectarse al panel de control, escriba su usuario AlternC y clave enelsiguiente formulario y cliquear en 'Entrar'"
+msgstr ""
+"Para conectarse al panel de control, escriba su usuario AlternC y clave "
+"enelsiguiente formulario y cliquear en 'Entrar'"
 
 #: ../admin/index.php:76
 msgid "You are attemping to connect without IP restriction."
@@ -3928,7 +4061,9 @@ msgstr "Si quieres utilizar un idioma diferente, elígelo en el listado de abajo
 #: ../admin/index.php:118
 msgid ""
 "To read your mail in a browser, click here to go to your server's Webmail"
-msgstr "Para leer su correo en el navegador haga click para acceder a su servidor Webmail"
+msgstr ""
+"Para leer su correo en el navegador haga click para acceder a su servidor "
+"Webmail"
 
 #: ../admin/index.php:133
 msgid "Need a login and a password"
@@ -3947,7 +4082,11 @@ msgid ""
 "Here you can add rules to restrict access to AlternC's services, filtered by"
 " IP. First, add trusted IPs in the 'Known IP and networks' list. Then, add "
 "rules to grant access on services to the chosen IPs from this list."
-msgstr "Aquí puede agregar reglas de acceso a los servicios de AlternC, filtrando por IP. Primero, agregue direcciones IP de confianza en la lista 'Direcciones IP y redes conocidas'. Entonces, agregue reglas para garantizar el acceso a los servicios para la IP elegida de la lista."
+msgstr ""
+"Aquí puede agregar reglas de acceso a los servicios de AlternC, filtrando "
+"por IP. Primero, agregue direcciones IP de confianza en la lista "
+"'Direcciones IP y redes conocidas'. Entonces, agregue reglas para garantizar "
+"el acceso a los servicios para la IP elegida de la lista."
 
 #: ../admin/ip_main.php:85
 msgid "Enabled rules"
@@ -3973,7 +4112,9 @@ msgstr "Agregar nueva regla"
 msgid ""
 "You need to have some 'Known IP and networks' defined below to define a new "
 "rule."
-msgstr "Es necesario tener algunas 'Direcciones IP y redes conocidas' definidas para crear una nueva regla."
+msgstr ""
+"Es necesario tener algunas 'Direcciones IP y redes conocidas' definidas para "
+"crear una nueva regla."
 
 #: ../admin/ip_main.php:145
 msgid "Authorized IP address or network"
@@ -4111,7 +4252,9 @@ msgstr "No borrar nada, volver a la lista de direcciones de correo"
 msgid ""
 "Warning: Deleting an email address will destroy all the messages it "
 "contains! You will <b>NOT</b> be able to get it back!"
-msgstr "Advertencia: ¡Borrar una dirección de correo electrónico borrará todos los mensajes que contenga! <b>¡NO SERÁ POSIBLE</b> recuperarlos!"
+msgstr ""
+"Advertencia: ¡Borrar una dirección de correo electrónico borrará todos los "
+"mensajes que contenga! <b>¡NO SERÁ POSIBLE</b> recuperarlos!"
 
 #: ../admin/mail_doedit.php:116
 msgid "Your email has been created successfully"
@@ -4135,7 +4278,10 @@ msgid ""
 "You can enable or disable this email anytime. This will bounce any mail "
 "received on this address, but will not delete the stored email, or the "
 "redirections or password."
-msgstr "Puede activar o desactivar este email en cualquier momento. Esto hará que cualquier email recibido en esta cuenta sea devuelto, pero no borrará los correos guardados, o las redirecciones o contraseñas."
+msgstr ""
+"Puede activar o desactivar este email en cualquier momento. Esto hará que "
+"cualquier email recibido en esta cuenta sea devuelto, pero no borrará los "
+"correos guardados, o las redirecciones o contraseñas."
 
 #: ../admin/mail_edit.php:80
 msgid "No (email disabled)"
@@ -4156,7 +4302,11 @@ msgid ""
 "use POP/IMAP, you can configure your email to be a redirection to other "
 "existing emails. The maximum size is in megabytes, use 0 to make it "
 "infinite."
-msgstr "Las cuentas POP/IMAP reciben correos en el servidor. Para leerlos puede usar Webmail o un cliente de correo como Thunderbird. Si no usa POP/IMAP puede configurar su email para que se redirija a otra cuenta. El tamaño máximo está en megabytes, utilice 0 para hacerlo infinito."
+msgstr ""
+"Las cuentas POP/IMAP reciben correos en el servidor. Para leerlos puede usar "
+"Webmail o un cliente de correo como Thunderbird. Si no usa POP/IMAP puede "
+"configurar su email para que se redirija a otra cuenta. El tamaño máximo "
+"está en megabytes, utilice 0 para hacerlo infinito."
 
 #: ../admin/mail_edit.php:89
 #, php-format
@@ -4167,7 +4317,9 @@ msgstr "Este buzón actualmente tiene en uso %1$s / %2$s"
 msgid ""
 "This mailbox is pending deletion. You can recover its mails by setting it to"
 " 'Yes' NOW!"
-msgstr "Este buzón está pendiente de ser eliminado. ¡Puede recuperar sus correos modificándolo a 'Sí' AHORA!"
+msgstr ""
+"Este buzón está pendiente de ser eliminado. ¡Puede recuperar sus correos "
+"modificándolo a 'Sí' AHORA!"
 
 #: ../admin/mail_edit.php:102
 msgid "Click here to edit the existing password"
@@ -4189,7 +4341,9 @@ msgstr "Tamaño máximo permitivo para este buzón"
 msgid ""
 "WARNING: turning POP/IMAP off will DELETE the stored messages in this email "
 "address."
-msgstr "ADVERTENCIA: desactivar POP/IMAP hará que se BORREN los correos almacenados en esta dirección."
+msgstr ""
+"ADVERTENCIA: desactivar POP/IMAP hará que se BORREN los correos almacenados "
+"en esta dirección."
 
 #: ../admin/mail_edit.php:112
 msgid "Is it a redirection to other email addresses?"
@@ -4199,7 +4353,9 @@ msgstr "¿Existe una redirección a otras cuentas de correo?"
 msgid ""
 "If you want to send emails received on this address to other addresses, even"
 " outside this server, enter those recipients here."
-msgstr "Si desea enviar correos recibidos en esta cuenta a otras cuentas, incluso fuera del servidor, introduzca los destinatarios aquí."
+msgstr ""
+"Si desea enviar correos recibidos en esta cuenta a otras cuentas, incluso "
+"fuera del servidor, introduzca los destinatarios aquí."
 
 #: ../admin/mail_edit.php:114
 msgid "one recipient per line"
@@ -4274,7 +4430,8 @@ msgstr "Borrando..."
 msgid ""
 "This email will be deleted soon. You may still be able to undelete it by "
 "clicking here"
-msgstr "Este correo será borrado en breve. Puede recuperarlo haciendo click aquí"
+msgstr ""
+"Este correo será borrado en breve. Puede recuperarlo haciendo click aquí"
 
 #: ../admin/mail_list.php:134
 msgid "Undelete"
@@ -4296,7 +4453,9 @@ msgstr "Información de configuración de los correos"
 msgid ""
 "Here are some configuration information you will need to configure your mail"
 " application."
-msgstr "Aquí tiene información de configuración que puede necesitar para su aplicación de correo."
+msgstr ""
+"Aquí tiene información de configuración que puede necesitar para su "
+"aplicación de correo."
 
 #: ../admin/mail_list.php:188
 msgid "Outgoing mail (SMTP)"
@@ -4325,7 +4484,9 @@ msgstr "Nombre del servidor: "
 #: ../admin/mail_list.php:227
 msgid ""
 "The mail address you want to access <i>(example : myuser@example.tld)</i>"
-msgstr "La dirección de correo a la que quiere acceder <i>(ejemplo : miusuario@ejemplo.tld)</i>"
+msgstr ""
+"La dirección de correo a la que quiere acceder <i>(ejemplo : "
+"miusuario@ejemplo.tld)</i>"
 
 #: ../admin/mail_list.php:201 ../admin/mail_list.php:214
 #: ../admin/mail_list.php:227
@@ -4419,7 +4580,9 @@ msgstr "Gestionar la configuración catch-all de %s"
 msgid ""
 "You can choose what to do with emails sent to unexisting address of this "
 "domain"
-msgstr "Puede decidir qué hacer con los correos enviados a direcciones inexistentes en este dominio"
+msgstr ""
+"Puede decidir qué hacer con los correos enviados a direcciones inexistentes "
+"en este dominio"
 
 #: ../admin/mail_manage_catchall.php:90
 msgid "No catch-all"
@@ -4437,7 +4600,9 @@ msgstr "Redirigir la misma dirección a un dominio distinto"
 #, php-format
 msgid ""
 "Mails sent to john.doe@%s will be redirect to john.doe@anotherdomain.tld"
-msgstr "Los correos enviados a john.doe@%s serán redirigidos a john.doe@anotherdomain.tld"
+msgstr ""
+"Los correos enviados a john.doe@%s serán redirigidos a "
+"john.doe@anotherdomain.tld"
 
 #: ../admin/mail_manage_catchall.php:105
 msgid "Enter the 'target' domain"
@@ -4460,7 +4625,9 @@ msgstr "Redirigir a un correo específico"
 msgid ""
 "Mails sent to an unexisting email on '@%s' will be redirect to "
 "user@example.tld."
-msgstr "Los correos enviados a una dirección inexistente en '@%s' serán redirigidos a user@example.tld."
+msgstr ""
+"Los correos enviados a una dirección inexistente en '@%s' serán redirigidos "
+"a user@example.tld."
 
 #: ../admin/mail_manage_catchall.php:123
 msgid "john.doe@example.tld"
@@ -4543,13 +4710,18 @@ msgstr "Cambiar la dirección de correo de la cuenta"
 #: ../admin/mem_chgmail.php:48
 #, php-format
 msgid "help_mem_chgmail %s"
-msgstr "Se mandó un mensaje a la dirección email <big><code>%s</code></big> para confirmación.<br> Este mensaje contiene un enlace que podrás visitar para validar la modificación.<br> Ahí se te pedirá la siguiente clave: <br>"
+msgstr ""
+"Se mandó un mensaje a la dirección email <big><code>%s</code></big> para "
+"confirmación.<br> Este mensaje contiene un enlace que podrás visitar para "
+"validar la modificación.<br> Ahí se te pedirá la siguiente clave: <br>"
 
 #: ../admin/mem_cm.php:51
 msgid ""
 "Enter the key you got when you requested the mailbox change, then click the "
 "OK button."
-msgstr "Entra la clave que te fue enviada para confirmar el cambio de dirección de correo y presiona en OK."
+msgstr ""
+"Entra la clave que te fue enviada para confirmar el cambio de dirección de "
+"correo y presiona en OK."
 
 #: ../admin/mem_cm.php:52
 msgid "Key"
@@ -4598,7 +4770,10 @@ msgstr "No estás autorizado a cambiar tu contraseña"
 
 #: ../admin/mem_param.php:74
 msgid "help_chg_passwd"
-msgstr "Aquí puedes modificar la contraseña que te permite acceder a la interfaz. ¡No la pierdas!<br> Entra aquí la contraseña actual, y luego la nueva contraseña (dos veces, por seguridad), y presiona en 'Cambiar la contraseña''"
+msgstr ""
+"Aquí puedes modificar la contraseña que te permite acceder a la interfaz. ¡"
+"No la pierdas!<br> Entra aquí la contraseña actual, y luego la nueva "
+"contraseña (dos veces, por seguridad), y presiona en 'Cambiar la contraseña''"
 
 #: ../admin/mem_param.php:84
 msgid "Old password"
@@ -4681,7 +4856,9 @@ msgstr "Acerca de"
 msgid ""
 "There is currently no webmail configured. If you need one, contact your "
 "server administrator"
-msgstr "Actualmente no hay configuración de webmail. Si la necesita, contacte con el administrador de su servidor"
+msgstr ""
+"Actualmente no hay configuración de webmail. Si la necesita, contacte con el "
+"administrador de su servidor"
 
 #: ../admin/piwik_addaccount.php:32
 msgid "Max. 3 accounts"
@@ -4689,7 +4866,8 @@ msgstr "Máx. 3 cuentas"
 
 #: ../admin/piwik_addaccount.php:32 ../admin/piwik_userlist.php:63
 msgid "You cannot add any new Piwik account, your quota is over."
-msgstr "No es posible agregar una nueva cuenta Piwik, su cuota ha sido sobrepasada."
+msgstr ""
+"No es posible agregar una nueva cuenta Piwik, su cuota ha sido sobrepasada."
 
 #: ../admin/piwik_addaccount.php:42
 msgid "Successfully added piwik account"
@@ -4930,7 +5108,9 @@ msgstr "Estado de las cuotas"
 msgid ""
 "This page shows the space and service count of your AlternC server and each "
 "AlternC accounts."
-msgstr "Esta página muestra el número de servicio y espacio de su servidor AlternC y cada cuentas AlternC."
+msgstr ""
+"Esta página muestra el número de servicio y espacio de su servidor AlternC y "
+"cada cuentas AlternC."
 
 #: ../admin/quotas_users.php:53
 #, php-format
@@ -5172,7 +5352,9 @@ msgstr "Acceder a la interfaz PhpMyAdmin"
 msgid ""
 "You changed the MySQL User base configuration. Please refer to your "
 "configuration"
-msgstr "Ha modificado la configuración de usuario de MySQL. Por favor, consulte su configuración"
+msgstr ""
+"Ha modificado la configuración de usuario de MySQL. Por favor, consulte su "
+"configuración"
 
 #: ../admin/sql_getparam.php:119
 msgid "Back to the MySQL database list"
@@ -5232,12 +5414,17 @@ msgid ""
 "Warning: Write the complete path and the filename. <br />For example if your"
 " backups are in the directory /Backups,<br />write /Backups/file.sql.gz "
 "(where file.sql.gz is the filename)."
-msgstr "Advertencia: Introduzca la ruta completa al fichero y el nombre del mismo. <br /> Por ejemplo si sus copias de reserva están en /Backups, <br /> introduzca /Backups/archivo.sql.gz (donde archivo.sql.gz es el nombre del archivo)."
+msgstr ""
+"Advertencia: Introduzca la ruta completa al fichero y el nombre del mismo. "
+"<br /> Por ejemplo si sus copias de reserva están en /Backups, <br /> "
+"introduzca /Backups/archivo.sql.gz (donde archivo.sql.gz es el nombre del "
+"archivo)."
 
 #: ../admin/sql_restore.php:59
 msgid ""
 "Please enter the path and the filename containing SQL data to be restored."
-msgstr "Por favor indique la ruta y archivo de los datos SQL para restablecerlos."
+msgstr ""
+"Por favor indique la ruta y archivo de los datos SQL para restablecerlos."
 
 #: ../admin/sql_restore.php:60
 msgid "Restore my database"
@@ -5245,7 +5432,9 @@ msgstr "Restaurar mi base de datos"
 
 #: ../admin/sql_restore.php:61
 msgid "Tip: you can restore a file directly in the File Browser"
-msgstr "Consejo: es posible restablecer un archivo directamente en el navegador de archivos"
+msgstr ""
+"Consejo: es posible restablecer un archivo directamente en el navegador de "
+"archivos"
 
 #: ../admin/sql_restore.php:66
 msgid "Please the complete path of the filename"
@@ -5253,7 +5442,8 @@ msgstr "Por favor, la ruta completa del archivo"
 
 #: ../admin/sql_restore.php:75
 msgid "Note: If the filename ends with .gz, it will be uncompressed before."
-msgstr "Nota: Si el nombre del archivo termina por .gz, primero será descomprimido."
+msgstr ""
+"Nota: Si el nombre del archivo termina por .gz, primero será descomprimido."
 
 #: ../admin/sql_users_add.php:40 ../admin/sql_users_list.php:77
 msgid "Create a new MySQL user"
@@ -5357,9 +5547,9 @@ msgid ""
 "browser will not let you surf those domains properly<br>To fix this, buy a "
 "properly signed certificate"
 msgstr ""
-"Algunos de tus hosting están usando un certificado <b>autofirmado</b>. "
-"<br>Tu navegador no te dejará navegar correctamente por esos "
-"dominios<br>Para solucionarlo, compra un certificado firmado correctamente"
+"Algunos de tus hosting están usando un certificado <b>autofirmado</b>. <br>"
+"Tu navegador no te dejará navegar correctamente por esos dominios<br>Para "
+"solucionarlo, compra un certificado firmado correctamente"
 
 #: ../admin/ssl_list.php:71
 msgid "Your Certificates"
@@ -5531,8 +5721,8 @@ msgid ""
 "<code>intranet.www.example.com</code> !"
 msgstr ""
 "Por favor tenga en cuenta que un certificado SSL sólo es válido para un "
-"nombre de dominio completo. ¡Como resultado, un certificado para <code>www."
-"example.com</code> NO es válido para <code>intranet.example.com</code> o "
+"nombre de dominio completo. ¡Como resultado, un certificado para <code>"
+"www.example.com</code> NO es válido para <code>intranet.example.com</code> o "
 "<code>intranet.www.example.com</code> !"
 
 #: ../admin/ssl_new.php:131
@@ -5706,7 +5896,9 @@ msgstr ""
 msgid ""
 "Image_Graph not installed. use 'aptitude install php-pear' then 'pear "
 "install --alldeps Image_Graph-devel' to see the graph."
-msgstr "Image_Graph no está instalado. Use 'aptitude install php-pear' y después 'pear install --alldeps Image_Graph-devel' para ver el gráfico."
+msgstr ""
+"Image_Graph no está instalado. Use 'aptitude install php-pear' y después "
+"'pear install --alldeps Image_Graph-devel' para ver el gráfico."
 
 #: ../admin/stats_members.php:37
 msgid "Account creation per month"
@@ -5768,7 +5960,9 @@ msgstr "Arrancar/detener de manera remota una máquina virtual"
 msgid ""
 "You can script the launch the console access in command line by using this "
 "url:"
-msgstr "Puede usar un script para que se lance la consola de acceso en la línea de comando mediante esta url:"
+msgstr ""
+"Puede usar un script para que se lance la consola de acceso en la línea de "
+"comando mediante esta url:"
 
 #: ../admin/vm.php:114
 msgid "You can halt the vm by using:"
@@ -5777,13 +5971,16 @@ msgstr "Puede detener la máquina virtual mediante:"
 #: ../admin/vm.php:116
 msgid ""
 "And you can see existing vm information (if the vm is running) by using:"
-msgstr "Y puede consultar información de las máquinas virtuales existentes (si la máquina está arrancada) usando:"
+msgstr ""
+"Y puede consultar información de las máquinas virtuales existentes (si la "
+"máquina está arrancada) usando:"
 
 #: ../admin/vm.php:118
 msgid ""
 "Warning: if you do not use HTTPS, your password will be transfered without "
 "any protection"
-msgstr "Advertencia: si no usa HTTPS su contraseña será transmitida sin protección"
+msgstr ""
+"Advertencia: si no usa HTTPS su contraseña será transmitida sin protección"
 
 #: ../admin/vm.php:122
 msgid "To access a remote console with SSH, you can use Putty."
@@ -5795,7 +5992,9 @@ msgstr "Para enviar archivos puede utilizar Filezilla en modo SFTP."
 
 #: ../class/class_system_bind.php:520
 msgid "The zone file of this domain is locked. Contact your administrator."
-msgstr "El archivo de zona de este dominio está bloqueado. Contacte con su administrador."
+msgstr ""
+"El archivo de zona de este dominio está bloqueado. Contacte con su "
+"administrador."
 
 #: ../class/config.php:44
 msgid ""
@@ -5957,7 +6156,9 @@ msgstr "Aplicar cambios"
 msgid ""
 "Server configuration changes are applied every 5 minutes. Do you want to do "
 "it right now?"
-msgstr "Los cambios de configuración del servidor se aplican cada 5 minutos. ¿Desea hacerlos ahora mismo?"
+msgstr ""
+"Los cambios de configuración del servidor se aplican cada 5 minutos. ¿Desea "
+"hacerlos ahora mismo?"
 
 #: ../class/m_admin.php:216 ../class/m_admin.php:272 ../class/m_admin.php:347
 #: ../class/m_admin.php:429 ../class/m_admin.php:475 ../class/m_admin.php:512
@@ -6091,11 +6292,14 @@ msgstr "Porfavor escriba el usuario"
 
 #: ../class/m_admin.php:1499
 msgid "-- Program error -- The requested password policy does not exist!"
-msgstr "-- Error de programa -- ¡La política de contraseña solicitada no existe!"
+msgstr ""
+"-- Error de programa -- ¡La política de contraseña solicitada no existe!"
 
 #: ../class/m_admin.php:1507
 msgid "The password length is too short according to the password policy"
-msgstr "La longitud de la contraseña es demasiado corta según la política de contraseñas"
+msgstr ""
+"La longitud de la contraseña es demasiado corta según la política de "
+"contraseñas"
 
 #: ../class/m_admin.php:1512
 msgid "The password is too long according to the password policy"
@@ -6105,13 +6309,17 @@ msgstr "La contraseña es demasiado larga de según la política de contraseñas
 msgid ""
 "The password policy prevents you to use your login name inside your password"
 " or the other way around"
-msgstr "La política de contraseñas no permite que use su nombre de acceso como parte de su contraseña"
+msgstr ""
+"La política de contraseñas no permite que use su nombre de acceso como parte "
+"de su contraseña"
 
 #: ../class/m_admin.php:1549
 msgid ""
 "Your password contains not enough different classes of character, between "
 "low-case, up-case, figures and special characters."
-msgstr "Su contraseña no contiene suficientes caracteres diferentes, entre minúsculas, mayúsculas, números y caracteres especiales."
+msgstr ""
+"Su contraseña no contiene suficientes caracteres diferentes, entre "
+"minúsculas, mayúsculas, números y caracteres especiales."
 
 #: ../class/m_authip.php:114 ../class/m_authip.php:133
 #: ../class/m_authip.php:153 ../class/m_authip.php:259
@@ -6179,7 +6387,9 @@ msgstr "Este directorio no es legible."
 
 #: ../class/m_bro.php:400 ../class/m_bro.php:1202
 msgid "Cannot create the requested directory. Please check the permissions"
-msgstr "No ha sido posible crear el directorio solicitado. Por favor, revise los permisos"
+msgstr ""
+"No ha sido posible crear el directorio solicitado. Por favor, revise los "
+"permisos"
 
 #: ../class/m_bro.php:406 ../class/m_bro.php:427 ../class/m_bro.php:455
 #: ../class/m_bro.php:481 ../class/m_bro.php:515 ../class/m_bro.php:525
@@ -6191,7 +6401,9 @@ msgstr "El nombre de archivo o carpeta es incorrecto"
 
 #: ../class/m_bro.php:432 ../class/m_bro.php:617
 msgid "Cannot create the requested file. Please check the permissions"
-msgstr "No ha sido posible crear el archivo solicitado. Por favor, revise los permisos"
+msgstr ""
+"No ha sido posible crear el archivo solicitado. Por favor, revise los "
+"permisos"
 
 #: ../class/m_bro.php:529 ../class/m_bro.php:727
 msgid "You cannot move or copy a file to the same folder"
@@ -6230,11 +6442,15 @@ msgstr "Descomprimir con bunzip2"
 msgid ""
 "I cannot find a way to extract the file %s, it is an unsupported compressed "
 "format"
-msgstr "No ha sido posible extraer el archivo %s, es un archivo comprimido de formato no soportado"
+msgstr ""
+"No ha sido posible extraer el archivo %s, es un archivo comprimido de "
+"formato no soportado"
 
 #: ../class/m_bro.php:816
 msgid "Cannot read the requested file. Please check the permissions"
-msgstr "No ha sido posible leer el archivo seleccionado. Por favor, revise los permisos"
+msgstr ""
+"No ha sido posible leer el archivo seleccionado. Por favor, revise los "
+"permisos"
 
 #: ../class/m_bro.php:899
 msgid "File not in authorized directory"
@@ -6242,7 +6458,9 @@ msgstr "Archivo en un directorio no autorizado"
 
 #: ../class/m_bro.php:1022
 msgid "Cannot edit the requested file. Please check the permissions"
-msgstr "No ha sido posible editar el archivo seleccionado. Por favor, revise los permisos"
+msgstr ""
+"No ha sido posible editar el archivo seleccionado. Por favor, revise los "
+"permisos"
 
 #: ../class/m_cron.php:37
 msgid "Daily"
@@ -6266,7 +6484,9 @@ msgstr "La dirección de correo electrónico no es válida"
 
 #: ../class/m_cron.php:152
 msgid "You quota of cron entries is over. You cannot create more cron entries"
-msgstr "Su cuota de entradas de cron ha sido superada. No es posible crear más entradas de cron"
+msgstr ""
+"Su cuota de entradas de cron ha sido superada. No es posible crear más "
+"entradas de cron"
 
 #: ../class/m_cron.php:161
 msgid "Identity problem"
@@ -6288,7 +6508,9 @@ msgstr "El nombre DEBE incluir solo letras y números"
 msgid ""
 "The parameters for this subdomain and domain type are invalid. Please check "
 "for subdomain entries incompatibility"
-msgstr "Los parámetros de este subdominio y tipo de dominio no son válidos. Por favor, revise la incompatibilidad de entradas para subdominios"
+msgstr ""
+"Los parámetros de este subdominio y tipo de dominio no son válidos. Por "
+"favor, revise la incompatibilidad de entradas para subdominios"
 
 #: ../class/m_dom.php:698 ../class/m_dom.php:1170 ../class/m_dom.php:1232
 #: ../class/m_dom.php:1395 ../class/m_dom.php:1443 ../class/m_dom.php:1528
@@ -6312,7 +6534,9 @@ msgstr ""
 #: ../class/m_dom.php:715
 msgid ""
 "This domain is the server's domain! You cannot host it on your account!"
-msgstr "¡Este servidor es el servidor de dominio! ¡No es posible alojarlo en su cuenta!"
+msgstr ""
+"¡Este servidor es el servidor de dominio! ¡No es posible alojarlo en su "
+"cuenta!"
 
 #: ../class/m_dom.php:720 ../class/m_dom.php:725
 msgid "The domain already exist"
@@ -6322,7 +6546,9 @@ msgstr "El dominio ya existe"
 msgid ""
 "The last member of the domain name is incorrect or cannot be hosted in that "
 "server"
-msgstr "La última parte del dominio es inválida o no se puede hospedar en este servidor. Puedes contactar al administrador"
+msgstr ""
+"La última parte del dominio es inválida o no se puede hospedar en este "
+"servidor. Puedes contactar al administrador"
 
 #: ../class/m_dom.php:736 ../class/m_dom.php:740
 msgid "The domain cannot be found in the whois database"
@@ -6330,7 +6556,9 @@ msgstr "No es posible encontrar el dominio en la base de datos de whois"
 
 #: ../class/m_dom.php:764
 msgid "Your domain quota is over, you cannot create more domain names"
-msgstr "Su cuota de dominio ha sido sobrepasada, no puede crear más nombres de dominio"
+msgstr ""
+"Su cuota de dominio ha sido sobrepasada, no puede crear más nombres de "
+"dominio"
 
 #: ../class/m_dom.php:779
 msgid "An unexpected error occured when creating the domain"
@@ -6347,7 +6575,9 @@ msgstr "No es posible borrar el tipo por defecto"
 
 #: ../class/m_dom.php:1086
 msgid "The Whois database is unavailable, please try again later"
-msgstr "La base de datos de whois no se encuentra disponible, por favor, vuelva a intentarlo después"
+msgstr ""
+"La base de datos de whois no se encuentra disponible, por favor, vuelva a "
+"intentarlo después"
 
 #: ../class/m_dom.php:1093 ../class/m_dom.php:1586
 msgid "The domain cannot be found in the Whois database"
@@ -6374,8 +6604,8 @@ msgid ""
 "The name you entered is incorrect or not fully qualified (it must end with a"
 " DOT, like example.com<b>.</b>)"
 msgstr ""
-"El nombre introducido es incorrecto o no está completamente cualificado ("
-"debe terminar en DOT, como ejemplo.com<b>.</b>)"
+"El nombre introducido es incorrecto o no está completamente cualificado "
+"(debe terminar en DOT, como ejemplo.com<b>.</b>)"
 
 #: ../class/m_dom.php:1332
 msgid "The TXT value you entered is incorrect"
@@ -6398,7 +6628,8 @@ msgstr ""
 msgid ""
 "There is some forbidden characters in the sub domain (only A-Z 0-9 and - are"
 " allowed)"
-msgstr "Hay caracteres no permitidos en el subdominio (solo se permiten A-Z, 0-9 y -)"
+msgstr ""
+"Hay caracteres no permitidos en el subdominio (solo se permiten A-Z, 0-9 y -)"
 
 #: ../class/m_dom.php:1493 ../class/m_dom.php:1504
 msgid "Cannot write to the destination folder"
@@ -6408,7 +6639,9 @@ msgstr "No es posible escribir en el directorio de destino"
 msgid ""
 "The DNS of this domain do not match the server's DNS. Please change your "
 "domain's DNS before you install it again"
-msgstr "El DNS de este dominio no coincide con el DNS del servidor. Por favor, modifique el DNS de su dominio antes de volver a instalarlo"
+msgstr ""
+"El DNS de este dominio no coincide con el DNS del servidor. Por favor, "
+"modifique el DNS de su dominio antes de volver a instalarlo"
 
 #: ../class/m_dom.php:1607
 #, php-format
@@ -6685,7 +6918,8 @@ msgstr "El correo-e %s no existe, no puede ser borrado"
 #: ../class/m_mail.php:525
 #, php-format
 msgid "The email %s is already marked for deletion, it can't be deleted"
-msgstr "El email %s ya esta marcado para ser borrado, no puede ser deseleccionado"
+msgstr ""
+"El email %s ya esta marcado para ser borrado, no puede ser deseleccionado"
 
 #: ../class/m_mail.php:559
 msgid "The email you entered does not exist"
@@ -6706,7 +6940,9 @@ msgstr "El email %s es especial, no puede ser borrado"
 msgid ""
 "Sorry, deletion of email %s is already in progress, or not marked for "
 "deletion, it can't be undeleted"
-msgstr "Lo sentimos, eliminación de correo %s ya está en marcha, o no marcados para su eliminación, no puede desmarcarlos"
+msgstr ""
+"Lo sentimos, eliminación de correo %s ya está en marcha, o no marcados para "
+"su eliminación, no puede desmarcarlos"
 
 #: ../class/m_mail.php:589
 #, php-format
@@ -6717,13 +6953,18 @@ msgstr "--Error sistema-- El email %s no puede ser borrado"
 msgid ""
 "There is forbidden characters in your email address. You can't make it a "
 "POP/IMAP account, you can only use it as redirection to other emails"
-msgstr "Allí está prohibido caracteres en su dirección de correo electrónico. Usted no puede hacerlo una cuenta POP/IMAP, sólo se puede utilizar como redirección a otros correos electrónicos"
+msgstr ""
+"Allí está prohibido caracteres en su dirección de correo electrónico. Usted "
+"no puede hacerlo una cuenta POP/IMAP, sólo se puede utilizar como "
+"redirección a otros correos electrónicos"
 
 #: ../class/m_mail.php:706
 msgid ""
 "You set a quota smaller than the current mailbox size. Since it's not "
 "allowed, we set the quota to the current mailbox size"
-msgstr "Establecer una cuota más pequeña que el tamaño de buzón actual. Puesto que no está permitido, establecemos la cuota para el tamaño del buzón actual"
+msgstr ""
+"Establecer una cuota más pequeña que el tamaño de buzón actual. Puesto que "
+"no está permitido, establecemos la cuota para el tamaño del buzón actual"
 
 #: ../class/m_mail.php:726
 msgid ""
@@ -6947,7 +7188,9 @@ msgstr "Esta base de datos %s ya existe"
 msgid ""
 "There is a problem with the special PhpMyAdmin user. Contact the "
 "administrator"
-msgstr "Hay un problema con un usuario especial de PhpMyadmin. contacte con el administrador"
+msgstr ""
+"Hay un problema con un usuario especial de PhpMyadmin. contacte con el "
+"administrador"
 
 #: ../class/m_mysql.php:300
 msgid "An error occured. The database could not be created"
