@@ -322,11 +322,29 @@ if (!$r['noerase']) {
   </td>
   <td> 
      <input type="radio" id="yesemail" class="inc" name="email" value="1"<?php cbox($r["mail"]); ?> />&nbsp;<label for="yesemail"><?php __("Yes"); ?></label>
-     </td><td><input type="radio" id="noemail" class="inc" name="email" value="0"<?php cbox(!$r["mail"]); ?> />&nbsp;<label for="noemail"><?php __("No"); ?></label>
-  </td>
-</tr>
+     </td><td><input type="radio" id="noemail" class="inc" name="email" value="0"<?php cbox(!$r["mail"]); ?> />&nbsp;<label for="noemail"><?php __("No"); ?></label></tr>
 </table>
-<p class="alert alert-warning">    <?php __("Warning: If you set this to 'no', all your email accounts and aliases on this domain will be immediately deleted."); ?></p>
+
+<script type="text/javascript">
+$(function() {
+  function toggle_email_warning() {
+    if ( $('#noemail').is(':checked') ) {
+      $('#email_warning').show();
+    } else {      $('#email_warning').hide();
+    }
+  }
+  $('#yesemail, #noemail').change(toggle_email_warning);
+  toggle_email_warning();
+});
+</script>
+
+<div id="email_warning" style="display:none;">
+<p class="alert alert-warning" name="email_warning">    <?php __("Do you want to delete all emails accounts and the content? All datas will be deleted."); ?><br>
+
+<input type="checkbox" id="confirm_email_deletion" class="inc" name="confirm_email_deletion" value="1" />&nbsp;<label for="confirm_email_deletion"><?php __("Yes, I want to delete all email accounts and content"); ?>
+
+</label></p>
+</div>
 <input type="submit" class="inb ok" name="submit" value="<?php __("Submit the changes"); ?>" />
 	</form>
 
