@@ -1,0 +1,1 @@
+ALTER TABLE membres ADD oidc_user_id VARCHAR(255) NULL DEFAULT NULL;
