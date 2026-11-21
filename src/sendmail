@@ -8,16 +8,17 @@ $rt="";
 
 open(SM,"|/usr/sbin/sendmail -t -i -f '".@ARGV[0]."'");
 
-chomp($A=<STDIN>);
-while ($A ne "") {
-    print SM $A."\n";
-    if ($A=~/^From:(.*)/i) {
-	$fr=$1;
+while (defined(my $line = <STDIN>)) {
+    $line =~ s/\r?\n\z//;
+    last if $line eq "";
+
+    print SM $line."\n";
+    if ($line=~/^From:(.*)/i) {
+        $fr=$1;
     }
-    if ($A=~/^Reply-to:(.*)/i) {
+    if ($line=~/^Reply-to:(.*)/i) {
         $rt=$1;
     }
-   chomp($A=<STDIN>);
 }
 
 $home=quotemeta $ENV{'ALTERNC_HTML'};
