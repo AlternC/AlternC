@@ -902,6 +902,29 @@ class m_bro {
         return false;
     }
 
+    /**
+     *
+     * Return true if name is a valid filename following Debia/ext4/posix standard
+     *
+     * @param string $name
+     * @return boolean
+     */
+    function is_safefilename($name) {
+        if (!is_string($name) || strlen($name) < 1 || strlen($name) > 255) {
+            // 255 octets : NAME_MAX Debian/ext4
+            return false;
+        }
+        //Prevent some unicode character
+        if (preg_match("//u", $name) !== 1) {
+            return false;
+        }
+        //Prevent windows separator and some specials characters
+        if (preg_match("/[\x00\/\x01-\x1f\x7f\\\\]/", $name) === 1) {
+            return false;
+        }
+        //Don't escape from current path
+        return $name !== "." && $name !== "..";
+    }
 
     /**
      * Return a HTML snippet representing an extraction function only if the mimetype of $name is supported
