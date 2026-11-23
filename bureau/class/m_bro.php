@@ -454,7 +454,7 @@ class m_bro {
             return false;
         }
         for ($i = 0; $i < count($file_list); $i++) {
-            if (!strpos($file_list[$i], "/") && file_exists($absolute . "/" . $file_list[$i])) { // Character / forbidden in a FILE name
+            if ($this->is_safefilename($file_list[$i]) && file_exists($absolute . "/" . $file_list[$i])) { // Character / forbidden in a FILE name
                 $this->_delete($absolute . "/" . $file_list[$i]);
             }
         }
@@ -480,12 +480,12 @@ class m_bro {
         }
         $alea = "." . time() . mt_rand(1000, 9999);
         for ($i = 0; $i < count($old); $i++) {
-            if (!strpos($old[$i], "/") && !strpos($new[$i], "/")) { // caractre / interdit dans old ET dans new...
+            if ($this->is_safefilename($old[$i]) && $this->is_safefilename($new[$i])) { // caractre / interdit dans old ET dans new...
                 @rename($absolute . "/" . $old[$i], $absolute . "/" . $old[$i] . $alea);
             }
         }
         for ($i = 0; $i < count($old); $i++) {
-            if (!strpos($old[$i], "/") && !strpos($new[$i], "/")) { // caractre / interdit dans old ET dans new...
+            if ($this->is_safefilename($old[$i]) && $this->is_safefilename($new[$i])) { // caractre / interdit dans old ET dans new...
                 @rename($absolute . "/" . $old[$i] . $alea, $absolute . "/" . $new[$i]);
             }
         }
@@ -525,7 +525,7 @@ class m_bro {
             return false;
         }
         for ($i = 0; $i < count($d); $i++) {
-            if (!strpos($d[$i], "/") && file_exists($old . "/" . $d[$i]) && !file_exists($new . "/" . $d[$i])) {
+            if ($this->is_safefilename($d[$i]) && file_exists($old . "/" . $d[$i]) && !file_exists($new . "/" . $d[$i])) {
                 if (!rename($old . "/" . $d[$i], $new . "/" . $d[$i])) {
                     $msg->raise("ERROR", "bro", "error renaming $old/$d[$i] -> $new/$d[$i]");
                 }
@@ -558,7 +558,7 @@ class m_bro {
             if (!isset($perm[$i])) {
                $perm[$i]['w'] = False;
             }
-            if (!strpos($d[$i], "/")) { // caractre / interdit dans le nom du fichier
+            if ($this->is_safefilename($d[$i]) && file_exists($absolute . "/" . $d[$i])) { // caractre / interdit dans le nom du fichier
                 $m = fileperms($absolute . "/" . $d[$i]);
 
                 // pour l'instant on se limite a "write" pour owner, puisque c'est le seul
@@ -598,7 +598,7 @@ class m_bro {
             $msg->raise("ERROR", "bro", _("File or folder name is incorrect"));
             return false;
         }
-        if (!strpos($_FILES['userfile']['name'], "/")) {
+        if ($this->is_safefilename($_FILES['userfile']['name'])) {
             if ($_FILES['userfile']['error'] == UPLOAD_ERR_OK && is_uploaded_file($_FILES['userfile']['tmp_name'])) {
                 if (!file_exists($absolute . "/" . $_FILES['userfile']['name'])) {
                     @touch($absolute . "/" . $_FILES['userfile']['name']);
@@ -721,7 +721,7 @@ class m_bro {
             return false;
         }
         for ($i = 0; $i < count($d); $i++) {
-            if (!strpos($d[$i], "/") && file_exists($old . "/" . $d[$i]) && !file_exists($new . "/" . $d[$i])) {
+            if ($this->is_safefilename($d[$i]) && file_exists($old . "/" . $d[$i]) && !file_exists($new . "/" . $d[$i])) {
                 $this->CopyOneFile($old . "/" . $d[$i], $new);
             }
         }
@@ -799,7 +799,7 @@ class m_bro {
     function content($R, $file) {
         global $msg;
         $absolute = $this->convertabsolute($R, false);
-        if (!strpos($file, "/")) {
+        if ($this->is_safefilename($file)) {
             $absolute.="/" . $file;
             if (file_exists($absolute)) {
                 $std = str_replace("<", "&lt;", str_replace("&", "&amp;", file_get_contents($absolute)));
@@ -1003,7 +1003,7 @@ class m_bro {
     function content_send($R, $file) {
         global $msg;
         $absolute = $this->convertabsolute($R, false);
-        if (!strpos($file, "/")) {
+        if ($this->is_safefilename($file)) {
             $absolute.="/" . $file;
             if (file_exists($absolute)) {
                 readfile($absolute);
@@ -1030,7 +1030,7 @@ class m_bro {
     function save($file, $R, $texte) {
         global $msg;
         $absolute = $this->convertabsolute($R, false);
-        if (!strpos($file, "/")) {
+        if ($this->is_safefilename($file)) {
             $absolute.="/" . $file;
             if (file_exists($absolute)) {
                 if (!file_put_contents($absolute, $texte)) {
