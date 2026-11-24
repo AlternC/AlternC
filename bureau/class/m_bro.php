@@ -903,8 +903,10 @@ class m_bro {
     }
 
     /**
+     * Return true if name is a valid filename
      *
-     * Return true if name is a valid filename following Debia/ext4/posix standard
+     * Follow Debian/ext4/posix standard
+     * Prevent some troubles with null bytes, windows separator and somme unicode value
      *
      * @param string $name
      * @return boolean
